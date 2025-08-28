@@ -77,7 +77,7 @@ stats47/
 │   └── ...
 ├── src/
 │   ├── app/               # Next.js App Router
-│   │   ├── layout.tsx     # ルートレイアウト
+│   │   ├── layout.tsx     # ルートレイアウト（ヘッダー・フッター含む）
 │   │   ├── page.tsx       # ホームページ
 │   │   └── dashboard/     # ダッシュボード（カテゴリベース）
 │   │       ├── page.tsx   # カテゴリ一覧ページ
@@ -86,6 +86,8 @@ stats47/
 │   │       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
 │   │       │       └── page.tsx
 │   ├── components/         # Reactコンポーネント
+│   │   ├── Header.tsx     # ヘッダーナビゲーション
+│   │   ├── Footer.tsx     # フッター情報
 │   │   ├── EstatDataFetcher.tsx
 │   │   ├── RegionSelector.tsx
 │   │   └── StatisticsDisplay.tsx

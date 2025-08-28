@@ -9,10 +9,13 @@
 ```
 App (Next.js App Router)
 ├── Layout
-│   ├── Header
-│   └── Navigation
+│   ├── Header              # ヘッダーナビゲーション
+│   ├── Main Content       # メインコンテンツ
+│   └── Footer             # フッター情報
 ├── HomePage
-│   └── DashboardLink
+│   ├── Hero Section       # ヒーローセクション
+│   ├── Features Section   # 特徴セクション
+│   └── Categories Section # カテゴリセクション
 └── Dashboard (カテゴリベース)
     ├── DashboardPage (カテゴリ一覧)
     ├── CategoryPage (カテゴリ詳細)
@@ -157,7 +160,108 @@ useEffect(() => {
 - 地域選択とデータ取得
 - 詳細な統計データの表示
 
-### 4. RegionSelector
+### 4. Header
+
+#### 概要
+
+アプリケーション全体のヘッダーナビゲーションを提供するコンポーネント。
+
+#### 責任
+- ロゴ・ブランドの表示
+- メインナビゲーションの提供
+- モバイルメニューの管理
+- レスポンシブ対応
+
+#### 実装詳細
+
+```typescript
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  return (
+    <header className="bg-white shadow-sm border-b border-gray-200">
+      {/* ロゴ・ブランド */}
+      <div className="flex items-center">
+        <Link href="/" className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-blue-600 rounded-lg">
+            <span className="text-white text-xl font-bold">47</span>
+          </div>
+          <h1 className="text-xl font-bold text-gray-900">
+            地域統計ダッシュボード
+          </h1>
+        </Link>
+      </div>
+      
+      {/* ナビゲーション */}
+      <nav className="hidden md:flex items-center space-x-8">
+        <Link href="/">ホーム</Link>
+        <Link href="/dashboard">ダッシュボード</Link>
+        <Link href="/about">概要</Link>
+        <Link href="/contact">お問い合わせ</Link>
+      </nav>
+      
+      {/* モバイルメニュー */}
+      <div className="md:hidden">
+        <button onClick={toggleMenu}>☰</button>
+      </div>
+    </header>
+  );
+}
+```
+
+### 5. Footer
+
+#### 概要
+
+アプリケーション全体のフッター情報とリンクを提供するコンポーネント。
+
+#### 責任
+- ブランド情報の表示
+- クイックリンクの提供
+- 統計カテゴリへの直接リンク
+- 法的情報へのアクセス
+
+#### 実装詳細
+
+```typescript
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* ブランド・説明 */}
+        <div className="col-span-1 md:col-span-2">
+          <h3 className="text-xl font-bold">地域統計ダッシュボード</h3>
+          <p className="text-gray-300">
+            e-Stat APIを使用して日本の地域統計データを可視化
+          </p>
+        </div>
+        
+        {/* クイックリンク */}
+        <div>
+          <h4 className="text-lg font-semibold">クイックリンク</h4>
+          <ul className="space-y-2">
+            <li><Link href="/">ホーム</Link></li>
+            <li><Link href="/dashboard">ダッシュボード</Link></li>
+          </ul>
+        </div>
+        
+        {/* 統計カテゴリ */}
+        <div>
+          <h4 className="text-lg font-semibold">統計カテゴリ</h4>
+          <ul className="space-y-2">
+            <li><Link href="/dashboard/population">人口・世帯</Link></li>
+            <li><Link href="/dashboard/economy">企業・家計・経済</Link></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  );
+}
+```
+
+### 6. RegionSelector
 
 #### 概要
 
