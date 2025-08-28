@@ -24,6 +24,34 @@
 - **Git**: 最新版
 - **エディタ**: VS Code 推奨（設定ファイル付き）
 
+### Storybook設定
+
+#### Co-location構造
+各コンポーネントは、関連するファイルと共に同じディレクトリに配置されています：
+
+```
+src/components/
+├── Header.tsx              # メインコンポーネント
+├── Header.story.tsx        # Storybookストーリー
+├── Footer.tsx
+├── Footer.story.tsx
+└── ...
+```
+
+#### 使用方法
+```bash
+# Storybookを起動
+npm run storybook
+
+# ビルド版を作成
+npm run build-storybook
+```
+
+#### 設定ファイル
+- `.storybook/main.ts` - メイン設定
+- `.storybook/preview.ts` - プレビュー設定
+- `src/components/README.md` - コンポーネント構造の説明
+
 ### 1. リポジトリのクローン
 
 ```bash
