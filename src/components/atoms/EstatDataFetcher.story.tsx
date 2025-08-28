@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { EstatDataFetcher } from './EstatDataFetcher';
+import { EstatDataFetcher } from '../organisms/EstatDataFetcher';
 
 const meta: Meta<typeof EstatDataFetcher> = {
   title: 'Components/EstatDataFetcher',

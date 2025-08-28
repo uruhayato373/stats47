@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { StatisticsDisplay } from './StatisticsDisplay';
+import { StatisticsDisplay } from '../molecules/StatisticsDisplay';
 
 const meta: Meta<typeof StatisticsDisplay> = {
   title: 'Components/StatisticsDisplay',

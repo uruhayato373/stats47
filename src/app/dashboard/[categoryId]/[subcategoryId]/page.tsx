@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import categories from "@/config/categories.json";
-import { EstatDataFetcher } from "@/components/EstatDataFetcher";
-import { StatisticsDisplay } from "@/components/StatisticsDisplay";
-import { RegionSelector } from "@/components/RegionSelector";
+import { EstatDataFetcher } from "@/components/organisms/EstatDataFetcher";
+import { StatisticsDisplay } from "@/components/molecules/StatisticsDisplay";
+import { RegionSelector } from "@/components/atoms/RegionSelector";
 
 export default function SubcategoryPage() {
   const params = useParams();

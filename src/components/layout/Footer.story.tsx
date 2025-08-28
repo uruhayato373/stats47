@@ -1,18 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Footer } from './Footer';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Footer } from "../Footer";
 
 const meta: Meta<typeof Footer> = {
-  title: 'Components/Footer',
+  title: "Components/Footer",
   component: Footer,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
-        component: 'アプリケーション全体のフッター情報とリンクを提供するコンポーネント。ブランド情報、クイックリンク、統計カテゴリへの直接リンクを表示します。',
+        component:
+          "アプリケーション全体のフッター情報とリンクを提供するコンポーネント。ブランド情報、クイックリンク、統計カテゴリへの直接リンクを表示します。",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // 必要に応じてpropsの制御を追加
   },
@@ -29,7 +30,7 @@ export const Mobile: Story = {
   args: {},
   parameters: {
     viewport: {
-      defaultViewport: 'mobile',
+      defaultViewport: "mobile",
     },
   },
 };
@@ -38,7 +39,7 @@ export const Tablet: Story = {
   args: {},
   parameters: {
     viewport: {
-      defaultViewport: 'tablet',
+      defaultViewport: "tablet",
     },
   },
 };
@@ -47,7 +48,7 @@ export const Desktop: Story = {
   args: {},
   parameters: {
     viewport: {
-      defaultViewport: 'desktop',
+      defaultViewport: "desktop",
     },
   },
 };
