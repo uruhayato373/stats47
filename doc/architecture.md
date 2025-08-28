@@ -71,14 +71,18 @@ src/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx         # ルートレイアウト
 │   ├── page.tsx           # ホームページ
-│   └── dashboard/         # ダッシュボードページ
-│       └── page.tsx
+│   └── dashboard/         # ダッシュボード（カテゴリベース）
+│       ├── page.tsx       # カテゴリ一覧ページ
+│       ├── [categoryId]/  # カテゴリ詳細ページ
+│       │   ├── page.tsx
+│       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
+│       │       └── page.tsx
 ├── components/             # Reactコンポーネント
 │   ├── EstatDataFetcher.tsx
 │   ├── RegionSelector.tsx
 │   └── StatisticsDisplay.tsx
 ├── config/                 # 設定ファイル
-│   └── categories.json
+│   └── categories.json    # カテゴリ定義
 ├── types/                  # TypeScript型定義
 ├── utils/                  # ユーティリティ関数
 └── styles/                 # スタイルファイル
@@ -173,6 +177,14 @@ src/
 
 - **Analytics**: ページビュー・ユーザー行動の追跡
 - **A/B Testing**: 機能の効果測定
+
+## 更新履歴
+
+### 2024年8月28日 - カテゴリベースダッシュボード実装
+- **変更内容**: ダッシュボードをカテゴリベースの構造に変更
+- **影響範囲**: ルーティング構造、コンポーネント階層、ナビゲーション
+- **新機能**: カテゴリ一覧、カテゴリ詳細、サブカテゴリ詳細ページ
+- **技術的変更**: 動的ルーティング、パンくずリスト、検索機能
 
 ## 今後の拡張性
 

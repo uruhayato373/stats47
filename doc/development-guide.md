@@ -79,14 +79,18 @@ stats47/
 │   ├── app/               # Next.js App Router
 │   │   ├── layout.tsx     # ルートレイアウト
 │   │   ├── page.tsx       # ホームページ
-│   │   └── dashboard/     # ダッシュボードページ
-│   │       └── page.tsx
+│   │   └── dashboard/     # ダッシュボード（カテゴリベース）
+│   │       ├── page.tsx   # カテゴリ一覧ページ
+│   │       ├── [categoryId]/  # カテゴリ詳細ページ
+│   │       │   ├── page.tsx
+│   │       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
+│   │       │       └── page.tsx
 │   ├── components/         # Reactコンポーネント
 │   │   ├── EstatDataFetcher.tsx
 │   │   ├── RegionSelector.tsx
 │   │   └── StatisticsDisplay.tsx
 │   ├── config/             # 設定ファイル
-│   │   └── categories.json
+│   │   └── categories.json # カテゴリ定義
 │   ├── types/              # TypeScript型定義
 │   ├── utils/              # ユーティリティ関数
 │   └── styles/             # スタイルファイル

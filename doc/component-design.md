@@ -13,30 +13,36 @@ App (Next.js App Router)
 │   └── Navigation
 ├── HomePage
 │   └── DashboardLink
-└── DashboardPage
-    ├── RegionSelector
-    ├── EstatDataFetcher
-    └── StatisticsDisplay
-        ├── PopulationChart
-        ├── GdpChart
-        ├── UnemploymentChart
-        └── DemographicsChart
+└── Dashboard (カテゴリベース)
+    ├── DashboardPage (カテゴリ一覧)
+    ├── CategoryPage (カテゴリ詳細)
+    │   ├── RegionSelector
+    │   ├── EstatDataFetcher
+    │   └── StatisticsDisplay
+    └── SubcategoryPage (サブカテゴリ詳細)
+        ├── RegionSelector
+        ├── EstatDataFetcher
+        └── StatisticsDisplay
+            ├── PopulationChart
+            ├── GdpChart
+            ├── UnemploymentChart
+            └── DemographicsChart
 ```
 
 ## 主要コンポーネント
 
-### 1. DashboardPage
+### 1. DashboardPage (カテゴリ一覧)
 
 #### 概要
 
-ダッシュボードのメインコンテナコンポーネント。他のコンポーネントを統合し、全体の状態管理を行います。
+カテゴリ一覧を表示するダッシュボードのエントリーポイント。16の主要カテゴリをグリッド表示し、検索機能を提供します。
 
 #### 責任
 
-- 地域選択の状態管理
-- データ取得の状態管理
-- ローディング状態の管理
-- 子コンポーネント間のデータ受け渡し
+- カテゴリ一覧の表示と検索
+- カテゴリ別のナビゲーション
+- 統計情報の表示
+- 各カテゴリへのリンク提供
 
 #### 実装詳細
 
@@ -127,7 +133,31 @@ useEffect(() => {
 }, [selectedRegion]); // 必要な依存関係のみ
 ```
 
-### 2. RegionSelector
+### 2. CategoryPage (カテゴリ詳細)
+
+#### 概要
+
+選択されたカテゴリの詳細情報とサブカテゴリ一覧を表示し、統計データの可視化を行います。
+
+#### 責任
+- カテゴリ情報の表示
+- サブカテゴリ一覧の表示
+- 地域選択とデータ取得
+- 統計データの表示
+
+### 3. SubcategoryPage (サブカテゴリ詳細)
+
+#### 概要
+
+選択されたサブカテゴリの詳細な統計データを表示し、パンくずリストによるナビゲーションを提供します。
+
+#### 責任
+- サブカテゴリ情報の表示
+- パンくずリストによるナビゲーション
+- 地域選択とデータ取得
+- 詳細な統計データの表示
+
+### 4. RegionSelector
 
 #### 概要
 
