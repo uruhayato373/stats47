@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -12,6 +13,23 @@ export default function Home() {
           height={38}
           priority
         />
+
+        {/* 統計ダッシュボードへのリンク */}
+        <div className="text-center sm:text-left">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            地域統計ダッシュボード
+          </h2>
+          <p className="text-gray-600 mb-6">
+            e-Stat APIから取得した地域統計データを可視化します
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+          >
+            ダッシュボードを見る
+          </Link>
+        </div>
+
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
