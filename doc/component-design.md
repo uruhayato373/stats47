@@ -4,7 +4,7 @@
 
 地域統計ダッシュボードは、React 19 の最新機能を活用したコンポーネントベースのアーキテクチャを採用しています。各コンポーネントは単一責任の原則に従い、再利用可能で保守しやすい設計となっています。
 
-## コンポーネント階層
+## アトミックデザイン階層
 
 ```
 App (Next.js App Router)
@@ -19,18 +19,50 @@ App (Next.js App Router)
 └── Dashboard (カテゴリベース)
     ├── DashboardPage (カテゴリ一覧)
     ├── CategoryPage (カテゴリ詳細)
-    │   ├── RegionSelector
-    │   ├── EstatDataFetcher
-    │   └── StatisticsDisplay
+    │   ├── RegionSelector (atoms)
+    │   ├── EstatDataFetcher (organisms)
+    │   └── StatisticsDisplay (molecules)
     └── SubcategoryPage (サブカテゴリ詳細)
-        ├── RegionSelector
-        ├── EstatDataFetcher
-        └── StatisticsDisplay
+        ├── RegionSelector (atoms)
+        ├── EstatDataFetcher (organisms)
+        └── StatisticsDisplay (molecules)
             ├── PopulationChart
             ├── GdpChart
             ├── UnemploymentChart
             └── DemographicsChart
 ```
+
+## アトミックデザインの5階層
+
+### **1. Atoms（原子）**
+最小単位の再利用可能なUIコンポーネント
+- **RegionSelector**: 地域選択の基本コンポーネント
+- **Button**: ボタンの基本コンポーネント
+- **Input**: 入力フィールドの基本コンポーネント
+
+### **2. Molecules（分子）**
+Atomsを組み合わせた機能的なコンポーネント
+- **StatisticsDisplay**: 統計データの可視化
+- **SearchBar**: 検索機能（Input + Button）
+- **Card**: カード表示（Title + Content + Actions）
+
+### **3. Organisms（有機体）**
+Moleculesを組み合わせた複雑なコンポーネント
+- **EstatDataFetcher**: データ取得の複雑な機能
+- **HeaderNavigation**: ヘッダーナビゲーション全体
+- **DashboardWidget**: ダッシュボードウィジェット
+
+### **4. Templates（テンプレート）**
+ページレイアウトの構造定義
+- **DashboardLayout**: ダッシュボードのレイアウト
+- **FormLayout**: フォームページのレイアウト
+- **ListLayout**: リストページのレイアウト
+
+### **5. Pages（ページ）**
+特定のページの機能実装
+- **HomePage**: ホームページの実装
+- **DashboardPage**: ダッシュボードページの実装
+- **CategoryPage**: カテゴリ詳細ページの実装
 
 ## 主要コンポーネント
 

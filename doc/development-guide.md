@@ -113,12 +113,24 @@ stats47/
 │   │       │   ├── page.tsx
 │   │       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
 │   │       │       └── page.tsx
-│   ├── components/         # Reactコンポーネント
-│   │   ├── Header.tsx     # ヘッダーナビゲーション
-│   │   ├── Footer.tsx     # フッター情報
-│   │   ├── EstatDataFetcher.tsx
-│   │   ├── RegionSelector.tsx
-│   │   └── StatisticsDisplay.tsx
+│   ├── components/         # Reactコンポーネント（アトミックデザイン）
+│   │   ├── atoms/         # 最小単位のコンポーネント
+│   │   │   ├── RegionSelector.tsx
+│   │   │   └── ...
+│   │   ├── molecules/      # atomsを組み合わせたコンポーネント
+│   │   │   ├── StatisticsDisplay.tsx
+│   │   │   └── ...
+│   │   ├── organisms/      # moleculesを組み合わせた大きなコンポーネント
+│   │   │   ├── EstatDataFetcher.tsx
+│   │   │   └── ...
+│   │   ├── templates/      # ページレイアウトのテンプレート
+│   │   ├── pages/          # 特定のページ用のコンポーネント
+│   │   ├── layout/         # グローバルレイアウト
+│   │   │   ├── Header.tsx
+│   │   │   └── Footer.tsx
+│   │   ├── charts/         # チャート関連コンポーネント
+│   │   ├── maps/           # マップ関連コンポーネント
+│   │   └── ui/             # UI関連コンポーネント
 │   ├── config/             # 設定ファイル
 │   │   └── categories.json # カテゴリ定義
 │   ├── types/              # TypeScript型定義
