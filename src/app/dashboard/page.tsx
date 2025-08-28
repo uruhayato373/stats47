@@ -19,9 +19,7 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             地域統計ダッシュボード
           </h1>
-          <p className="text-gray-600">
-            カテゴリ別の統計データを閲覧できます
-          </p>
+          <p className="text-gray-600">カテゴリ別の統計データを閲覧できます</p>
         </div>
 
         {/* 検索バー */}
@@ -98,9 +96,7 @@ export default function DashboardPage() {
 
         {/* 統計情報 */}
         <div className="mt-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            統計情報
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">統計情報</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600">

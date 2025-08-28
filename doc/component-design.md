@@ -38,7 +38,7 @@ App (Next.js App Router)
 
 #### 概要
 
-カテゴリ一覧を表示するダッシュボードのエントリーポイント。16の主要カテゴリをグリッド表示し、検索機能を提供します。
+カテゴリ一覧を表示するダッシュボードのエントリーポイント。16 の主要カテゴリをグリッド表示し、検索機能を提供します。
 
 #### 責任
 
@@ -143,6 +143,7 @@ useEffect(() => {
 選択されたカテゴリの詳細情報とサブカテゴリ一覧を表示し、統計データの可視化を行います。
 
 #### 責任
+
 - カテゴリ情報の表示
 - サブカテゴリ一覧の表示
 - 地域選択とデータ取得
@@ -155,6 +156,7 @@ useEffect(() => {
 選択されたサブカテゴリの詳細な統計データを表示し、パンくずリストによるナビゲーションを提供します。
 
 #### 責任
+
 - サブカテゴリ情報の表示
 - パンくずリストによるナビゲーション
 - 地域選択とデータ取得
@@ -167,6 +169,7 @@ useEffect(() => {
 アプリケーション全体のヘッダーナビゲーションを提供するコンポーネント。
 
 #### 責任
+
 - ロゴ・ブランドの表示
 - メインナビゲーションの提供
 - モバイルメニューの管理
@@ -177,7 +180,7 @@ useEffect(() => {
 ```typescript
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       {/* ロゴ・ブランド */}
@@ -191,7 +194,7 @@ export function Header() {
           </h1>
         </Link>
       </div>
-      
+
       {/* ナビゲーション */}
       <nav className="hidden md:flex items-center space-x-8">
         <Link href="/">ホーム</Link>
@@ -199,7 +202,7 @@ export function Header() {
         <Link href="/about">概要</Link>
         <Link href="/contact">お問い合わせ</Link>
       </nav>
-      
+
       {/* モバイルメニュー */}
       <div className="md:hidden">
         <button onClick={toggleMenu}>☰</button>
@@ -216,6 +219,7 @@ export function Header() {
 アプリケーション全体のフッター情報とリンクを提供するコンポーネント。
 
 #### 責任
+
 - ブランド情報の表示
 - クイックリンクの提供
 - 統計カテゴリへの直接リンク
@@ -226,7 +230,7 @@ export function Header() {
 ```typescript
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -237,22 +241,30 @@ export function Footer() {
             e-Stat APIを使用して日本の地域統計データを可視化
           </p>
         </div>
-        
+
         {/* クイックリンク */}
         <div>
           <h4 className="text-lg font-semibold">クイックリンク</h4>
           <ul className="space-y-2">
-            <li><Link href="/">ホーム</Link></li>
-            <li><Link href="/dashboard">ダッシュボード</Link></li>
+            <li>
+              <Link href="/">ホーム</Link>
+            </li>
+            <li>
+              <Link href="/dashboard">ダッシュボード</Link>
+            </li>
           </ul>
         </div>
-        
+
         {/* 統計カテゴリ */}
         <div>
           <h4 className="text-lg font-semibold">統計カテゴリ</h4>
           <ul className="space-y-2">
-            <li><Link href="/dashboard/population">人口・世帯</Link></li>
-            <li><Link href="/dashboard/economy">企業・家計・経済</Link></li>
+            <li>
+              <Link href="/dashboard/population">人口・世帯</Link>
+            </li>
+            <li>
+              <Link href="/dashboard/economy">企業・家計・経済</Link>
+            </li>
           </ul>
         </div>
       </div>
