@@ -2,7 +2,7 @@
 
 ## 概要
 
-地域統計ダッシュボードは、React 19の最新機能を活用したコンポーネントベースのアーキテクチャを採用しています。各コンポーネントは単一責任の原則に従い、再利用可能で保守しやすい設計となっています。
+地域統計ダッシュボードは、React 19 の最新機能を活用したコンポーネントベースのアーキテクチャを採用しています。各コンポーネントは単一責任の原則に従い、再利用可能で保守しやすい設計となっています。
 
 ## コンポーネント階層
 
@@ -28,9 +28,11 @@ App (Next.js App Router)
 ### 1. DashboardPage
 
 #### 概要
+
 ダッシュボードのメインコンテナコンポーネント。他のコンポーネントを統合し、全体の状態管理を行います。
 
 #### 責任
+
 - 地域選択の状態管理
 - データ取得の状態管理
 - ローディング状態の管理
@@ -128,9 +130,11 @@ useEffect(() => {
 ### 2. RegionSelector
 
 #### 概要
+
 地域（都道府県）を選択するためのドロップダウンコンポーネント。
 
 #### 責任
+
 - 地域リストの表示
 - 地域選択の処理
 - 選択された地域の表示
@@ -208,10 +212,12 @@ export function RegionSelector({
 ### 3. EstatDataFetcher
 
 #### 概要
-e-Stat APIからデータを取得し、親コンポーネントに渡すコンポーネント。
+
+e-Stat API からデータを取得し、親コンポーネントに渡すコンポーネント。
 
 #### 責任
-- API呼び出しの実行
+
+- API 呼び出しの実行
 - エラーハンドリング
 - ローディング状態の管理
 - サンプルデータの提供
@@ -298,9 +304,7 @@ export function EstatDataFetcher({
       </h2>
 
       {/* APIキー警告 */}
-      {ESTAT_APP_ID === "your-app-id-here" && (
-        <ApiKeyWarning />
-      )}
+      {ESTAT_APP_ID === "your-app-id-here" && <ApiKeyWarning />}
 
       {/* エラー表示 */}
       {error && <ErrorMessage message={error} />}
@@ -336,7 +340,7 @@ class DataFetchErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Data fetch error:', error, errorInfo);
+    console.error("Data fetch error:", error, errorInfo);
   }
 
   render() {
@@ -352,9 +356,11 @@ class DataFetchErrorBoundary extends React.Component {
 ### 4. StatisticsDisplay
 
 #### 概要
+
 統計データをグラフやチャートで表示するコンポーネント。
 
 #### 責任
+
 - データの可視化
 - グラフのレンダリング
 - レスポンシブ対応
@@ -365,8 +371,19 @@ class DataFetchErrorBoundary extends React.Component {
 "use client";
 
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 
 interface StatisticsDisplayProps {
@@ -378,7 +395,7 @@ export function StatisticsDisplay({
   data,
   regionName,
 }: StatisticsDisplayProps) {
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (
     <div className="space-y-8">
@@ -401,7 +418,7 @@ export function StatisticsDisplay({
               dataKey="value"
               stroke="#8884d8"
               strokeWidth={2}
-              dot={{ fill: '#8884d8', strokeWidth: 2, r: 4 }}
+              dot={{ fill: "#8884d8", strokeWidth: 2, r: 4 }}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -417,9 +434,7 @@ export function StatisticsDisplay({
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />
             <YAxis />
-            <Tooltip
-              formatter={(value: number) => [value, "GDP指数"]}
-            />
+            <Tooltip formatter={(value: number) => [value, "GDP指数"]} />
             <Legend />
             <Bar dataKey="value" fill="#82ca9d" />
           </BarChart>
@@ -438,13 +453,18 @@ export function StatisticsDisplay({
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={({ age, percent }) => `${age} ${(percent * 100).toFixed(0)}%`}
+              label={({ age, percent }) =>
+                `${age} ${(percent * 100).toFixed(0)}%`
+              }
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
             >
               {data.demographics.map((entry: any, index: number) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
@@ -467,22 +487,24 @@ const useResponsiveChart = () => {
     const updateSize = () => {
       const width = window.innerWidth;
       let height = 300;
-      
-      if (width < 640) { // sm
+
+      if (width < 640) {
+        // sm
         height = 250;
-      } else if (width < 1024) { // lg
+      } else if (width < 1024) {
+        // lg
         height = 300;
       } else {
         height = 400;
       }
-      
+
       setChartSize({ width, height });
     };
 
     updateSize();
-    window.addEventListener('resize', updateSize);
-    
-    return () => window.removeEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
+
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
   return chartSize;
@@ -501,7 +523,7 @@ const useResponsiveChart = () => {
 
 ### 2. 再利用性
 
-共通のUIパターンを抽出し、再利用可能なコンポーネントを作成：
+共通の UI パターンを抽出し、再利用可能なコンポーネントを作成：
 
 ```typescript
 // 共通のカードコンポーネント
@@ -513,7 +535,9 @@ interface CardProps {
 
 export function Card({ title, children, className = "" }: CardProps) {
   return (
-    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}>
+    <div
+      className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}
+    >
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
       {children}
     </div>
@@ -522,15 +546,13 @@ export function Card({ title, children, className = "" }: CardProps) {
 
 // 使用例
 <Card title="人口推移">
-  <LineChart data={data.population}>
-    {/* チャート内容 */}
-  </LineChart>
-</Card>
+  <LineChart data={data.population}>{/* チャート内容 */}</LineChart>
+</Card>;
 ```
 
 ### 3. 型安全性
 
-TypeScriptを使用して、コンポーネントの型安全性を確保：
+TypeScript を使用して、コンポーネントの型安全性を確保：
 
 ```typescript
 // 共通の型定義
@@ -561,19 +583,21 @@ interface StatisticsData {
 #### React.memo
 
 ```typescript
-export const StatisticsDisplay = React.memo(({ data, regionName }: StatisticsDisplayProps) => {
-  // コンポーネントの実装
-});
+export const StatisticsDisplay = React.memo(
+  ({ data, regionName }: StatisticsDisplayProps) => {
+    // コンポーネントの実装
+  }
+);
 ```
 
 #### useMemo
 
 ```typescript
 const processedData = useMemo(() => {
-  return data.population.map(item => ({
+  return data.population.map((item) => ({
     ...item,
     value: item.value / 1000000, // 百万単位に変換
-    formattedValue: (item.value / 1000000).toFixed(1)
+    formattedValue: (item.value / 1000000).toFixed(1),
   }));
 }, [data.population]);
 ```
@@ -582,7 +606,7 @@ const processedData = useMemo(() => {
 
 ```typescript
 const handleChartClick = useCallback((data: any, index: number) => {
-  console.log('Chart clicked:', data, index);
+  console.log("Chart clicked:", data, index);
 }, []);
 ```
 
@@ -591,18 +615,18 @@ const handleChartClick = useCallback((data: any, index: number) => {
 ### 1. ユニットテスト
 
 ```typescript
-import { render, screen, fireEvent } from '@testing-library/react';
-import { RegionSelector } from './RegionSelector';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { RegionSelector } from "./RegionSelector";
 
-describe('RegionSelector', () => {
+describe("RegionSelector", () => {
   const mockRegions = [
-    { code: '13', name: '東京都' },
-    { code: '27', name: '大阪府' }
+    { code: "13", name: "東京都" },
+    { code: "27", name: "大阪府" },
   ];
-  
+
   const mockOnRegionChange = jest.fn();
 
-  test('renders region options correctly', () => {
+  test("renders region options correctly", () => {
     render(
       <RegionSelector
         regions={mockRegions}
@@ -611,11 +635,11 @@ describe('RegionSelector', () => {
       />
     );
 
-    expect(screen.getByText('東京都')).toBeInTheDocument();
-    expect(screen.getByText('大阪府')).toBeInTheDocument();
+    expect(screen.getByText("東京都")).toBeInTheDocument();
+    expect(screen.getByText("大阪府")).toBeInTheDocument();
   });
 
-  test('calls onRegionChange when selection changes', () => {
+  test("calls onRegionChange when selection changes", () => {
     render(
       <RegionSelector
         regions={mockRegions}
@@ -624,10 +648,10 @@ describe('RegionSelector', () => {
       />
     );
 
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: '27' } });
+    const select = screen.getByRole("combobox");
+    fireEvent.change(select, { target: { value: "27" } });
 
-    expect(mockOnRegionChange).toHaveBeenCalledWith('27');
+    expect(mockOnRegionChange).toHaveBeenCalledWith("27");
   });
 });
 ```
@@ -635,19 +659,19 @@ describe('RegionSelector', () => {
 ### 2. 統合テスト
 
 ```typescript
-describe('Dashboard Integration', () => {
-  test('region selection triggers data fetch', async () => {
+describe("Dashboard Integration", () => {
+  test("region selection triggers data fetch", async () => {
     render(<DashboardPage />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: '27' } });
-    
+
+    const select = screen.getByRole("combobox");
+    fireEvent.change(select, { target: { value: "27" } });
+
     // データ取得の開始を確認
-    expect(screen.getByText('データを取得中...')).toBeInTheDocument();
-    
+    expect(screen.getByText("データを取得中...")).toBeInTheDocument();
+
     // データ表示の完了を確認
     await waitFor(() => {
-      expect(screen.getByText('大阪府の人口推移')).toBeInTheDocument();
+      expect(screen.getByText("大阪府の人口推移")).toBeInTheDocument();
     });
   });
 });
@@ -656,20 +680,20 @@ describe('Dashboard Integration', () => {
 ### 3. スナップショットテスト
 
 ```typescript
-test('StatisticsDisplay matches snapshot', () => {
+test("StatisticsDisplay matches snapshot", () => {
   const mockData = createMockStatisticsData();
-  
+
   const { container } = render(
     <StatisticsDisplay data={mockData} regionName="東京都" />
   );
-  
+
   expect(container).toMatchSnapshot();
 });
 ```
 
 ## アクセシビリティ
 
-### 1. セマンティックHTML
+### 1. セマンティック HTML
 
 ```typescript
 // 適切な見出しレベルの使用
@@ -687,7 +711,7 @@ test('StatisticsDisplay matches snapshot', () => {
 ```typescript
 // フォーカス管理
 const handleKeyDown = (e: React.KeyboardEvent) => {
-  if (e.key === 'Enter' || e.key === ' ') {
+  if (e.key === "Enter" || e.key === " ") {
     e.preventDefault();
     onRegionChange(region.code);
   }
@@ -696,7 +720,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 // タブ順序の制御
 <div tabIndex={0} onKeyDown={handleKeyDown}>
   {/* コンテンツ */}
-</div>
+</div>;
 ```
 
 ### 3. スクリーンリーダー対応
@@ -729,7 +753,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 
 - **ズーム・パン**: グラフの詳細表示
 - **フィルタリング**: データの絞り込み
-- **エクスポート**: 画像・CSV出力
+- **エクスポート**: 画像・CSV 出力
 
 ### 3. パフォーマンス向上
 

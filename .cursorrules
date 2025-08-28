@@ -1,0 +1,92 @@
+# Cursor Rules for stats47 Project
+
+## プロジェクト概要
+このプロジェクトは、e-Stat APIを使用して日本の地域統計データを可視化するWebアプリケーションです。Next.js 15とReact 19を使用して構築されています。
+
+## ドキュメント確認ルール
+
+### 1. README.mdの確認
+- プロジェクトのルートREADME.mdを最初に確認する
+- プロジェクトの概要、技術スタック、主要機能を理解する
+- docディレクトリ内の各ドキュメントへのリンクを確認する
+
+### 2. docディレクトリの構造理解
+プロジェクトには以下の設計書が含まれています：
+- `doc/README.md` - プロジェクト概要とドキュメント構成
+- `doc/architecture.md` - システムアーキテクチャ
+- `doc/api-design.md` - API設計仕様
+- `doc/component-design.md` - コンポーネント設計
+- `doc/development-guide.md` - 開発者ガイド
+
+### 3. 開発前の確認事項
+新しい機能開発やバグ修正を行う前に：
+1. 関連するdocドキュメントを確認する
+2. 既存のアーキテクチャと設計方針を理解する
+3. コンポーネントの責任分担とデータフローを把握する
+
+### 4. コードレビューの基準
+- コンポーネント設計書に従った実装になっているか
+- API設計仕様に準拠しているか
+- 開発者ガイドのコーディング規約に従っているか
+
+### 5. ドキュメント更新のルール
+- コード変更時は関連するdocドキュメントも更新する
+- 新しい機能追加時は適切な設計書に記載を追加する
+- API仕様変更時はapi-design.mdを更新する
+
+### 6. Chat/Agentによるコード修正時のドキュメント更新ルール
+**コード修正後の必須作業**:
+1. **README.mdの確認・更新**
+   - 新機能追加時は主要機能セクションに追記
+   - 技術スタック変更時は技術スタックセクションを更新
+   - 環境変数追加時は環境変数セクションに追記
+
+2. **関連docドキュメントの確認・更新**
+   - `doc/architecture.md`: アーキテクチャ変更時
+   - `doc/api-design.md`: API仕様変更時
+   - `doc/component-design.md`: コンポーネント追加・変更時
+   - `doc/development-guide.md`: 開発手順変更時
+
+3. **更新内容の記録**
+   - 変更日時と変更内容をドキュメントに記載
+   - 変更理由と影響範囲を明記
+   - 既存の設計方針との整合性を確認
+
+4. **整合性チェック**
+   - コードとドキュメントの内容が一致しているか確認
+   - サンプルコードや設定例が最新か確認
+   - リンク切れや参照エラーがないか確認
+
+## 技術スタック
+- **フロントエンド**: Next.js 15, React 19, TypeScript
+- **スタイリング**: Tailwind CSS 4
+- **データ可視化**: Recharts, D3.js
+- **開発・ビルド**: Turbopack, ESLint
+
+## 主要コンポーネント
+- `DashboardPage` - メインコンテナ
+- `RegionSelector` - 地域選択
+- `EstatDataFetcher` - データ取得
+- `StatisticsDisplay` - 統計表示
+
+## データフロー
+1. ユーザーが地域を選択
+2. EstatDataFetcherでe-Stat API呼び出し
+3. 取得したデータをStatisticsDisplayで可視化
+
+## 注意事項
+- e-Stat APIキーが必要（.env.localで設定）
+- APIキーがない場合はサンプルデータを使用
+- React 19の最新機能（useCallback、useMemo等）を活用
+- 無限ループを防ぐためuseEffectの依存配列に注意
+
+## 開発環境
+- Node.js 18.x以上
+- npm 9.x以上
+- ポート3000で開発サーバー起動
+
+## 参考資料
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev/)
+- [e-Stat API](https://www.e-stat.go.jp/api/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)

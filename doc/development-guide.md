@@ -19,10 +19,10 @@
 
 ### 前提条件
 
-- **Node.js**: 18.x以上
-- **npm**: 9.x以上
+- **Node.js**: 18.x 以上
+- **npm**: 9.x 以上
 - **Git**: 最新版
-- **エディタ**: VS Code推奨（設定ファイル付き）
+- **エディタ**: VS Code 推奨（設定ファイル付き）
 
 ### 1. リポジトリのクローン
 
@@ -55,14 +55,14 @@ npm run dev
 
 ブラウザで `http://localhost:3000` にアクセスして動作確認。
 
-### 5. VS Code設定（推奨）
+### 5. VS Code 設定（推奨）
 
 プロジェクトには`.vscode/settings.json`が含まれており、以下の設定が自動で適用されます：
 
-- TypeScriptの自動インポート
-- Prettierの自動フォーマット
-- ESLintの自動修正
-- Tailwind CSSのIntelliSense
+- TypeScript の自動インポート
+- Prettier の自動フォーマット
+- ESLint の自動修正
+- Tailwind CSS の IntelliSense
 
 ## プロジェクト構造
 
@@ -121,9 +121,9 @@ type ChartData = Array<{
 
 // 列挙型名もPascalCase
 enum RegionCode {
-  Tokyo = '13',
-  Osaka = '27',
-  Aichi = '23'
+  Tokyo = "13",
+  Osaka = "27",
+  Aichi = "23",
 }
 ```
 
@@ -144,7 +144,7 @@ const formatNumber = (value: number): string => {
 async function fetchUserData(userId: string): Promise<UserData> {
   const response = await fetch(`/api/users/${userId}`);
   if (!response.ok) {
-    throw new Error('Failed to fetch user data');
+    throw new Error("Failed to fetch user data");
   }
   return response.json();
 }
@@ -164,11 +164,7 @@ export function UserProfile({ user, onEdit }: UserProfileProps) {
     <div className="user-profile">
       <h2>{user.name}</h2>
       <p>{user.email}</p>
-      {onEdit && (
-        <button onClick={() => onEdit(user)}>
-          編集
-        </button>
-      )}
+      {onEdit && <button onClick={() => onEdit(user)}>編集</button>}
     </div>
   );
 }
@@ -189,10 +185,13 @@ useEffect(() => {
 }, [userId]); // 依存関係のみ
 
 // useCallbackで関数をメモ化
-const handleUserEdit = useCallback((user: UserData) => {
-  setUser(user);
-  onEdit?.(user);
-}, [onEdit]);
+const handleUserEdit = useCallback(
+  (user: UserData) => {
+    setUser(user);
+    onEdit?.(user);
+  },
+  [onEdit]
+);
 
 // useMemoで計算結果をメモ化
 const averageAge = useMemo(() => {
@@ -211,7 +210,7 @@ const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 
 const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const { name, value } = event.target;
-  setFormData(prev => ({ ...prev, [name]: value }));
+  setFormData((prev) => ({ ...prev, [name]: value }));
 };
 
 // フォーム送信
@@ -228,7 +227,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
 ### CSS/Tailwind
 
-#### Tailwind CSSクラス
+#### Tailwind CSS クラス
 
 ```typescript
 // クラス名は論理的な順序で並べる
@@ -254,7 +253,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 </button>
 ```
 
-#### カスタムCSS
+#### カスタム CSS
 
 ```css
 /* カスタムCSSは最小限に抑える */
@@ -327,6 +326,7 @@ git push origin feature/add-new-chart
 ```
 
 **Type**
+
 - `feat`: 新機能
 - `fix`: バグ修正
 - `docs`: ドキュメント更新
@@ -336,6 +336,7 @@ git push origin feature/add-new-chart
 - `chore`: その他の変更
 
 **例**
+
 ```
 feat(dashboard): 地域比較機能を追加
 
@@ -384,43 +385,43 @@ src/
 ### 3. テスト例
 
 ```typescript
-import { render, screen, fireEvent } from '@testing-library/react';
-import { RegionSelector } from '../RegionSelector';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { RegionSelector } from "../RegionSelector";
 
-describe('RegionSelector', () => {
+describe("RegionSelector", () => {
   const defaultProps = {
     regions: [
-      { code: '13', name: '東京都' },
-      { code: '27', name: '大阪府' }
+      { code: "13", name: "東京都" },
+      { code: "27", name: "大阪府" },
     ],
-    selectedRegion: '13',
-    onRegionChange: jest.fn()
+    selectedRegion: "13",
+    onRegionChange: jest.fn(),
   };
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('renders all region options', () => {
+  test("renders all region options", () => {
     render(<RegionSelector {...defaultProps} />);
-    
-    expect(screen.getByText('東京都')).toBeInTheDocument();
-    expect(screen.getByText('大阪府')).toBeInTheDocument();
+
+    expect(screen.getByText("東京都")).toBeInTheDocument();
+    expect(screen.getByText("大阪府")).toBeInTheDocument();
   });
 
-  test('calls onRegionChange when selection changes', () => {
+  test("calls onRegionChange when selection changes", () => {
     render(<RegionSelector {...defaultProps} />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: '27' } });
-    
-    expect(defaultProps.onRegionChange).toHaveBeenCalledWith('27');
+
+    const select = screen.getByRole("combobox");
+    fireEvent.change(select, { target: { value: "27" } });
+
+    expect(defaultProps.onRegionChange).toHaveBeenCalledWith("27");
   });
 
-  test('displays selected region name', () => {
+  test("displays selected region name", () => {
     render(<RegionSelector {...defaultProps} />);
-    
-    expect(screen.getByText('選択中: 東京都')).toBeInTheDocument();
+
+    expect(screen.getByText("選択中: 東京都")).toBeInTheDocument();
   });
 });
 ```
@@ -441,19 +442,19 @@ describe('RegionSelector', () => {
 
 ```typescript
 // 開発時のみログ出力
-if (process.env.NODE_ENV === 'development') {
-  console.log('User data:', userData);
-  console.log('API response:', response);
+if (process.env.NODE_ENV === "development") {
+  console.log("User data:", userData);
+  console.log("API response:", response);
 }
 
 // エラーログ
-console.error('API call failed:', error);
-console.warn('Deprecated feature used');
+console.error("API call failed:", error);
+console.warn("Deprecated feature used");
 ```
 
 ### 2. VS Code デバッグ
 
-`.vscode/launch.json`を設定して、VS Codeからデバッグ可能：
+`.vscode/launch.json`を設定して、VS Code からデバッグ可能：
 
 ```json
 {
@@ -490,10 +491,10 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
-    
+    console.error("Error caught by boundary:", error, errorInfo);
+
     // エラー監視サービスに送信
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       logErrorToService(error, errorInfo);
     }
   }
@@ -504,9 +505,7 @@ class ErrorBoundary extends React.Component {
         <div className="error-boundary">
           <h2>エラーが発生しました</h2>
           <p>ページを再読み込みしてください</p>
-          <button onClick={() => window.location.reload()}>
-            再読み込み
-          </button>
+          <button onClick={() => window.location.reload()}>再読み込み</button>
         </div>
       );
     }
@@ -522,15 +521,15 @@ class ErrorBoundary extends React.Component {
 
 ```typescript
 // 動的インポート
-const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
+const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
   loading: () => <div>読み込み中...</div>,
-  ssr: false
+  ssr: false,
 });
 
 // 条件付きインポート
-const ChartComponent = dynamic(() => import('./ChartComponent'), {
+const ChartComponent = dynamic(() => import("./ChartComponent"), {
   loading: () => <Skeleton />,
-  ssr: false
+  ssr: false,
 });
 ```
 
@@ -545,9 +544,9 @@ export const ExpensiveChart = React.memo(({ data }: ChartProps) => {
 
 // useMemoで計算結果をメモ化
 const processedData = useMemo(() => {
-  return data.map(item => ({
+  return data.map((item) => ({
     ...item,
-    normalizedValue: item.value / maxValue
+    normalizedValue: item.value / maxValue,
   }));
 }, [data, maxValue]);
 
@@ -560,7 +559,7 @@ const handleDataUpdate = useCallback((newData: DataType) => {
 ### 3. 画像最適化
 
 ```typescript
-import Image from 'next/image';
+import Image from "next/image";
 
 // Next.jsの画像最適化を使用
 <Image
@@ -571,7 +570,7 @@ import Image from 'next/image';
   priority={false}
   placeholder="blur"
   blurDataURL="data:image/jpeg;base64,..."
-/>
+/>;
 ```
 
 ## トラブルシューティング
@@ -590,7 +589,7 @@ npm ls react
 npm ls next
 ```
 
-#### TypeScriptエラー
+#### TypeScript エラー
 
 ```bash
 # TypeScriptの型チェック
@@ -633,9 +632,9 @@ npm ls --depth=0
 // useEffectのクリーンアップ
 useEffect(() => {
   const controller = new AbortController();
-  
+
   fetchData(controller.signal);
-  
+
   return () => {
     controller.abort(); // リクエストをキャンセル
   };
@@ -647,19 +646,15 @@ useEffect(() => {
 #### React Profiler
 
 ```typescript
-import { Profiler } from 'react';
+import { Profiler } from "react";
 
-function onRenderCallback(
-  id: string,
-  phase: string,
-  actualDuration: number
-) {
+function onRenderCallback(id: string, phase: string, actualDuration: number) {
   console.log(`Component ${id} took ${actualDuration}ms to render`);
 }
 
 <Profiler id="Dashboard" onRender={onRenderCallback}>
   <Dashboard />
-</Profiler>
+</Profiler>;
 ```
 
 #### パフォーマンス測定
@@ -669,7 +664,7 @@ function onRenderCallback(
 const usePerformanceMonitor = (componentName: string) => {
   useEffect(() => {
     const start = performance.now();
-    
+
     return () => {
       const end = performance.now();
       console.log(`${componentName} render time: ${end - start}ms`);
@@ -704,8 +699,8 @@ const usePerformanceMonitor = (componentName: string) => {
 開発中に問題が発生した場合：
 
 1. **ドキュメント確認**: このガイドと関連ドキュメントを確認
-2. **GitHub Issues**: 既存のIssueを検索
+2. **GitHub Issues**: 既存の Issue を検索
 3. **チーム内相談**: チームメンバーに相談
-4. **外部リソース**: Stack Overflow、GitHub Discussions等を活用
+4. **外部リソース**: Stack Overflow、GitHub Discussions 等を活用
 
 プロジェクトの成功に向けて、積極的なコミュニケーションと継続的な改善を心がけましょう！

@@ -1,54 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-import { EstatDataFetcher } from "@/components/EstatDataFetcher";
-import { StatisticsDisplay } from "@/components/StatisticsDisplay";
-import { RegionSelector } from "@/components/RegionSelector";
+import { useState } from "react";
+import Link from "next/link";
+import categories from "@/config/categories.json";
 
 export default function DashboardPage() {
-  const [selectedRegion, setSelectedRegion] = useState("13"); // 東京都
-  const [statisticsData, setStatisticsData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const regions = [
-    { code: "13", name: "東京都" },
-    { code: "27", name: "大阪府" },
-    { code: "23", name: "愛知県" },
-    { code: "14", name: "神奈川県" },
-    { code: "11", name: "埼玉県" },
-    { code: "12", name: "千葉県" },
-    { code: "28", name: "兵庫県" },
-    { code: "15", name: "新潟県" },
-    { code: "16", name: "富山県" },
-    { code: "17", name: "石川県" },
-  ];
-
-  const handleRegionChange = useCallback((regionCode: string) => {
-    setSelectedRegion(regionCode);
-  }, []);
-
-  const handleDataUpdate = useCallback((data: any) => {
-    setStatisticsData(data);
-  }, []);
-
-  const handleLoadingChange = useCallback((loadingState: boolean) => {
-    setLoading(loadingState);
-  }, []);
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -59,52 +20,136 @@ export default function DashboardPage() {
             地域統計ダッシュボード
           </h1>
           <p className="text-gray-600">
-            e-Stat APIから取得した地域統計データを可視化します
+            カテゴリ別の統計データを閲覧できます
           </p>
         </div>
 
-        {/* 地域選択 */}
+        {/* 検索バー */}
         <div className="mb-6">
-          <RegionSelector
-            regions={regions}
-            selectedRegion={selectedRegion}
-            onRegionChange={handleRegionChange}
-          />
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="カテゴリを検索..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
 
-        {/* データ取得コンポーネント */}
-        <div className="mb-6">
-          <EstatDataFetcher
-            regionCode={selectedRegion}
-            onDataUpdate={handleDataUpdate}
-            onLoadingChange={handleLoadingChange}
-          />
+        {/* カテゴリグリッド */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredCategories.map((category) => (
+            <Link
+              key={category.id}
+              href={`/dashboard/${category.id}`}
+              className="group"
+            >
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                {/* アイコン */}
+                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gray-100 mb-4 group-hover:bg-blue-50 transition-colors">
+                  <span className="text-2xl text-gray-600 group-hover:text-blue-600">
+                    {getCategoryIcon(category.icon)}
+                  </span>
+                </div>
+
+                {/* カテゴリ名 */}
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  {category.name}
+                </h3>
+
+                {/* サブカテゴリ数 */}
+                {category.subcategories && (
+                  <p className="text-sm text-gray-500">
+                    {category.subcategories.length}個のサブカテゴリ
+                  </p>
+                )}
+
+                {/* カラーインジケーター */}
+                <div className="mt-4">
+                  <div
+                    className={`w-full h-2 rounded-full bg-${category.color}-200`}
+                  >
+                    <div
+                      className={`h-2 rounded-full bg-${category.color}-500 transition-all duration-300 group-hover:bg-${category.color}-600`}
+                      style={{ width: "100%" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        {/* 統計データ表示 */}
-        {loading && (
-          <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <p className="mt-2 text-gray-600">データを取得中...</p>
+        {/* 統計情報 */}
+        <div className="mt-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            統計情報
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600">
+                {categories.length}
+              </div>
+              <div className="text-sm text-gray-500">総カテゴリ数</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600">
+                {categories.reduce(
+                  (total, category) =>
+                    total + (category.subcategories?.length || 0),
+                  0
+                )}
+              </div>
+              <div className="text-sm text-gray-500">総サブカテゴリ数</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-600">
+                {categories.filter((category) => category.subcategories).length}
+              </div>
+              <div className="text-sm text-gray-500">サブカテゴリあり</div>
+            </div>
           </div>
-        )}
-
-        {statisticsData && !loading && (
-          <StatisticsDisplay
-            data={statisticsData}
-            regionName={regions.find((r) => r.code === selectedRegion)?.name}
-          />
-        )}
-
-        {/* データが取得できない場合のメッセージ */}
-        {!statisticsData && !loading && (
-          <div className="text-center py-8">
-            <p className="text-gray-600">
-              地域を選択してデータを取得してください
-            </p>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
+}
+
+// アイコン取得関数（FontAwesomeアイコンの代替）
+function getCategoryIcon(iconName: string): string {
+  const iconMap: { [key: string]: string } = {
+    FaMapMarkedAlt: "🗺️",
+    FaUsers: "👥",
+    FaChartLine: "📈",
+    FaLeaf: "🍃",
+    FaIndustry: "🏭",
+    FaStore: "🏪",
+    FaHome: "🏠",
+    FaWater: "💧",
+    FaPlane: "✈️",
+    FaGraduationCap: "🎓",
+    FaGavel: "⚖️",
+    FaShieldAlt: "🛡️",
+    FaHospital: "🏥",
+    FaGlobe: "🌍",
+    FaRoad: "🛣️",
+  };
+
+  return iconMap[iconName] || "📊";
 }

@@ -19,6 +19,8 @@ import {
 interface StatisticsDisplayProps {
   data: any;
   regionName?: string;
+  categoryName?: string;
+  subcategoryName?: string;
 }
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
@@ -26,6 +28,8 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 export function StatisticsDisplay({
   data,
   regionName,
+  categoryName,
+  subcategoryName,
 }: StatisticsDisplayProps) {
   if (!data) return null;
 
@@ -35,6 +39,16 @@ export function StatisticsDisplay({
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
           {regionName || "地域"}の統計情報
+          {categoryName && (
+            <span className="text-lg font-normal text-gray-600 ml-2">
+              - {categoryName}
+            </span>
+          )}
+          {subcategoryName && (
+            <span className="text-lg font-normal text-gray-600 ml-2">
+              - {subcategoryName}
+            </span>
+          )}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
