@@ -1,0 +1,172 @@
+# システムアーキテクチャ
+
+## 概要
+
+地域統計ダッシュボードは、Next.js 15のApp Routerを使用したフルスタックWebアプリケーションです。クライアントサイドレンダリング（CSR）とサーバーサイドレンダリング（SSR）を組み合わせて、高速でユーザーフレンドリーな体験を提供します。
+
+## アーキテクチャ図
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   クライアント    │    │   Next.js App   │    │   e-Stat API    │
+│   (ブラウザ)     │◄──►│     Router      │◄──►│   (外部API)     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                              │
+                              ▼
+                       ┌─────────────────┐
+                       │   React 19      │
+                       │   Components    │
+                       └─────────────────┘
+                              │
+                              ▼
+                       ┌─────────────────┐
+                       │   Recharts      │
+                       │   (グラフ表示)   │
+                       └─────────────────┘
+```
+
+## 技術スタック詳細
+
+### フロントエンドフレームワーク
+
+#### Next.js 15
+- **App Router**: ファイルベースのルーティング
+- **Turbopack**: 高速な開発ビルド
+- **TypeScript**: 型安全性の確保
+- **Tailwind CSS 4**: ユーティリティファーストCSS
+
+#### React 19
+- **Hooks**: useState, useEffect, useCallback
+- **Server Components**: パフォーマンス最適化
+- **Concurrent Features**: 非同期レンダリング
+
+### データ可視化
+
+#### Recharts
+- **LineChart**: 時系列データの表示
+- **BarChart**: カテゴリ別データの表示
+- **PieChart**: 比率データの表示
+- **ResponsiveContainer**: レスポンシブ対応
+
+#### D3.js
+- **データ操作**: 統計データの前処理
+- **カスタムチャート**: 特殊な可視化ニーズ
+
+### 状態管理
+
+#### React State
+- **Local State**: コンポーネント固有の状態
+- **Lifted State**: 親子間での状態共有
+- **Context API**: グローバル状態の管理
+
+## ディレクトリ構造
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # ルートレイアウト
+│   ├── page.tsx           # ホームページ
+│   └── dashboard/         # ダッシュボードページ
+│       └── page.tsx
+├── components/             # Reactコンポーネント
+│   ├── EstatDataFetcher.tsx
+│   ├── RegionSelector.tsx
+│   └── StatisticsDisplay.tsx
+├── config/                 # 設定ファイル
+│   └── categories.json
+├── types/                  # TypeScript型定義
+├── utils/                  # ユーティリティ関数
+└── styles/                 # スタイルファイル
+    └── globals.css
+```
+
+## データフロー
+
+### 1. ユーザーアクション
+1. ユーザーが地域を選択
+2. `RegionSelector`コンポーネントで状態更新
+3. `selectedRegion`の変更を検知
+
+### 2. データ取得
+1. `EstatDataFetcher`でe-Stat API呼び出し
+2. APIキーがない場合はサンプルデータ使用
+3. 取得したデータを親コンポーネントに渡す
+
+### 3. データ表示
+1. `StatisticsDisplay`でデータを受け取り
+2. Rechartsを使用してグラフ描画
+3. レスポンシブ対応で表示
+
+## パフォーマンス最適化
+
+### 1. コード分割
+- **Dynamic Imports**: 必要に応じてコンポーネント読み込み
+- **Route-based Splitting**: ページ別のバンドル分割
+
+### 2. レンダリング最適化
+- **useCallback**: 関数のメモ化
+- **useMemo**: 計算結果のメモ化
+- **React.memo**: コンポーネントのメモ化
+
+### 3. データ取得最適化
+- **useEffect**: 依存配列の最適化
+- **エラーハンドリング**: フォールバックデータの提供
+
+## セキュリティ
+
+### 1. 環境変数
+- **NEXT_PUBLIC_**: クライアントサイドで使用可能
+- **APIキー**: サーバーサイドでのみ使用
+
+### 2. 入力検証
+- **TypeScript**: 型安全性の確保
+- **Props Validation**: コンポーネントの入力検証
+
+### 3. API呼び出し
+- **CORS**: 適切なオリジン制御
+- **Rate Limiting**: API呼び出し制限の考慮
+
+## スケーラビリティ
+
+### 1. 水平スケーリング
+- **Stateless Design**: セッション状態の外部化
+- **CDN**: 静的アセットの配信最適化
+
+### 2. 垂直スケーリング
+- **Component Lazy Loading**: 必要に応じた読み込み
+- **Image Optimization**: Next.jsの画像最適化
+
+### 3. データスケーリング
+- **Pagination**: 大量データの分割表示
+- **Virtual Scrolling**: 長いリストの最適化
+
+## 監視・ログ
+
+### 1. パフォーマンス監視
+- **Core Web Vitals**: ユーザー体験の測定
+- **Bundle Analyzer**: バンドルサイズの分析
+
+### 2. エラー監視
+- **Error Boundaries**: Reactエラーの捕捉
+- **Console Logging**: 開発時のデバッグ情報
+
+### 3. ユーザー行動分析
+- **Analytics**: ページビュー・ユーザー行動の追跡
+- **A/B Testing**: 機能の効果測定
+
+## 今後の拡張性
+
+### 1. 機能拡張
+- **多言語対応**: i18nの実装
+- **テーマ切り替え**: ダークモード対応
+- **データエクスポート**: CSV/PDF出力
+
+### 2. 技術的拡張
+- **PWA**: プログレッシブWebアプリ化
+- **GraphQL**: 柔軟なデータ取得
+- **WebSocket**: リアルタイムデータ更新
+
+### 3. インフラ拡張
+- **Docker**: コンテナ化
+- **CI/CD**: 自動化パイプライン
+- **Monitoring**: 本格的な監視システム
