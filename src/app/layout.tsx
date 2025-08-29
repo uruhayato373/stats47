@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/organisms/Header/Header";
-import { Footer } from "@/components/organisms/Footer/Footer";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "地域統計ダッシュボード | e-Stat API による地域統計データ",
+  title: "CMS Dashboard",
   description:
-    "e-Stat APIを使用して日本の地域統計データを可視化するWebアプリケーションです。地域別の人口、GDP、失業率などの統計情報をグラフやチャートで表示します。",
-  keywords: "統計, 地域統計, e-Stat, ダッシュボード, 人口, GDP, 失業率, 日本",
-  authors: [{ name: "地域統計ダッシュボードチーム" }],
-  viewport: "width=device-width, initial-scale=1",
+    "A modern CMS dashboard for managing posts, members, and site content with ease.",
 };
 
 export default function RootLayout({
@@ -29,13 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="en" className="relative min-h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} font-sans overflow-hidden bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

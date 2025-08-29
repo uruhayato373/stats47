@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
+/* 基本変数の設定 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* Tailwind CSS v4のテーマ設定 */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,6 +14,19 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ライトモード時の変数設定 */
+.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* ダークモード時の変数設定 */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* システム設定による初期値 */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +34,243 @@
   }
 }
 
+/* 基本スタイル */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* レイアウトの重なり順序を調整 */
+header {
+  z-index: 60 !important;
+}
+
+#sidebar {
+  z-index: 50 !important;
+}
+
+main {
+  z-index: 10 !important;
+  position: relative;
+}
+
+/* ダークモードの強制適用 */
+.dark body {
+  background: #0a0a0a !important;
+  color: #ededed !important;
+}
+
+.light body {
+  background: #ffffff !important;
+  color: #171717 !important;
+}
+
+/* ダークモードのヘッダー */
+.dark header {
+  background-color: #171717 !important;
+}
+
+.light header {
+  background-color: #f4f4f5 !important;
+}
+
+/* サイドバーのスタイル */
+/* ライトモード */
+.light #sidebar {
+  background-color: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+.light #sidebar .border-gray-200 {
+  border-color: #e5e7eb !important;
+}
+
+.light #sidebar .bg-gray-100 {
+  background-color: #f9fafb !important;
+}
+
+.light #sidebar .bg-white {
+  background-color: #ffffff !important;
+}
+
+.light #sidebar .border-gray-200 {
+  border-color: #e5e7eb !important;
+}
+
+.light #sidebar .text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.light #sidebar .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+.light #sidebar .text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.light #sidebar .bg-gray-200 {
+  background-color: #e5e7eb !important;
+}
+
+.light #sidebar .hover\:bg-gray-200:hover {
+  background-color: #e5e7eb !important;
+}
+
+.light #sidebar .hover\:text-gray-800:hover {
+  color: #1f2937 !important;
+}
+
+.light #sidebar .focus\:bg-gray-200:focus {
+  background-color: #e5e7eb !important;
+}
+
+.light #sidebar .focus\:text-gray-800:focus {
+  color: #1f2937 !important;
+}
+
+/* ダークモード */
+.dark #sidebar {
+  background-color: #171717 !important;
+  border-color: #404040 !important;
+}
+
+.dark #sidebar .dark\:bg-neutral-900 {
+  background-color: #171717 !important;
+}
+
+.dark #sidebar .dark\:border-neutral-700 {
+  border-color: #404040 !important;
+}
+
+.dark #sidebar .dark\:bg-neutral-800 {
+  background-color: #262626 !important;
+}
+
+.dark #sidebar .dark\:text-neutral-300 {
+  color: #d4d4d4 !important;
+}
+
+.dark #sidebar .dark\:text-neutral-200 {
+  color: #e5e7eb !important;
+}
+
+.dark #sidebar .dark\:text-neutral-400 {
+  color: #a3a3a3 !important;
+}
+
+.dark #sidebar .dark\:hover\:bg-neutral-700:hover {
+  background-color: #404040 !important;
+}
+
+.dark #sidebar .dark\:hover\:text-neutral-300:hover {
+  color: #d4d4d4 !important;
+}
+
+.dark #sidebar .dark\:focus\:bg-neutral-700:focus {
+  background-color: #404040 !important;
+}
+
+.dark #sidebar .dark\:focus\:text-neutral-300:focus {
+  color: #d4d4d4 !important;
+}
+
+/* ダークモードのメインコンテンツ */
+.dark main {
+  background-color: #0a0a0a !important;
+}
+
+.light main {
+  background-color: #ffffff !important;
+}
+
+/* ダークモードのカード */
+.dark .bg-white {
+  background-color: #262626 !important;
+}
+
+.light .bg-white {
+  background-color: #ffffff !important;
+}
+
+/* ダークモードのボーダー */
+.dark .border-gray-200 {
+  border-color: #404040 !important;
+}
+
+.light .border-gray-200 {
+  border-color: #e5e7eb !important;
+}
+
+/* ダークモードのテキスト */
+.dark .text-gray-800 {
+  color: #e5e7eb !important;
+}
+
+.light .text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.dark .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+.light .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+/* サイドバーのナビゲーション要素 */
+.light #sidebar nav {
+  background-color: #f9fafb !important;
+}
+
+.dark #sidebar nav {
+  background-color: #171717 !important;
+}
+
+/* サイドバーのボタンとリンク */
+.light #sidebar button,
+.light #sidebar a {
+  color: #374151 !important;
+}
+
+.dark #sidebar button,
+.dark #sidebar a {
+  color: #d1d5db !important;
+}
+
+/* サイドバーのホバー効果 */
+.light #sidebar button:hover,
+.light #sidebar a:hover {
+  background-color: #f3f4f6 !important;
+  color: #1f2937 !important;
+}
+
+.dark #sidebar button:hover,
+.dark #sidebar a:hover {
+  background-color: #374151 !important;
+  color: #f9fafb !important;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1023px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+  
+  main {
+    padding-left: 0.75rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #sidebar {
+    transform: translateX(0);
+  }
+  
+  main {
+    padding-left: 15rem !important; /* 240px (w-60) */
+  }
 }
