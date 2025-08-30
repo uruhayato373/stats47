@@ -70,7 +70,16 @@ export class EstatMetadataService {
   }
 
   // 統計表一覧取得
-  async getSavedStatList(): Promise<any[]> {
+  async getSavedStatList(): Promise<
+    Array<{
+      stats_data_id: string;
+      stat_name: string;
+      title: string;
+      item_count: number;
+      first_created: string;
+      last_updated: string;
+    }>
+  > {
     return await this.dbService.getStatList();
   }
 
