@@ -18,16 +18,15 @@ export class EstatMetadataDatabaseService {
 
   // バッチ処理
   private async processBatch(dataList: EstatTransformedData[]): Promise<void> {
+    // Cloudflare D1の正しいAPIを使用
     const stmt = this.db.prepare(`
       INSERT OR REPLACE INTO estat_metadata 
       (stats_data_id, stat_name, title, cat01, item_name, unit, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     `);
 
-    // トランザクション開始
-    await this.db.prepare("BEGIN TRANSACTION").run();
-
     try {
+      // 各データを個別に挿入（D1の制限を考慮）
       for (const data of dataList) {
         await stmt
           .bind(
@@ -40,10 +39,8 @@ export class EstatMetadataDatabaseService {
           )
           .run();
       }
-
-      await this.db.prepare("COMMIT").run();
     } catch (error) {
-      await this.db.prepare("ROLLBACK").run();
+      console.error("バッチ処理エラー:", error);
       throw error;
     }
   }
@@ -102,11 +99,8 @@ export class EstatMetadataDatabaseService {
       .prepare(
         `
       SELECT * FROM estat_metadata 
-      WHERE stat_name LIKE ? 
-         OR title LIKE ? 
-         OR item_name LIKE ?
+      WHERE stat_name LIKE ? OR title LIKE ? OR item_name LIKE ?
       ORDER BY stat_name, title
-      LIMIT 100
     `
       )
       .bind(`%${query}%`, `%${query}%`, `%${query}%`)
@@ -115,30 +109,20 @@ export class EstatMetadataDatabaseService {
     return result.results as EstatTransformedData[];
   }
 
-  // 統計表一覧（重複除去）
+  // 統計表一覧取得
   async getStatList(): Promise<any[]> {
     const result = await this.db
       .prepare(
         `
-      SELECT DISTINCT stats_data_id, stat_name, title
+      SELECT DISTINCT 
+        stats_data_id, 
+        stat_name, 
+        title, 
+        COUNT(*) as item_count,
+        MAX(updated_at) as last_updated
       FROM estat_metadata 
-      ORDER BY stat_name, title
-    `
-      )
-      .all();
-
-    return result.results;
-  }
-
-  // カテゴリ一覧
-  async getCategoryList(): Promise<any[]> {
-    const result = await this.db
-      .prepare(
-        `
-      SELECT DISTINCT cat01
-      FROM estat_metadata 
-      WHERE cat01 IS NOT NULL
-      ORDER BY cat01
+      GROUP BY stats_data_id, stat_name, title
+      ORDER BY last_updated DESC
     `
       )
       .all();
@@ -149,13 +133,34 @@ export class EstatMetadataDatabaseService {
   // データ件数取得
   async getCount(): Promise<number> {
     const result = await this.db
-      .prepare(
-        `
-      SELECT COUNT(*) as count FROM estat_metadata
-    `
-      )
+      .prepare(`SELECT COUNT(*) as count FROM estat_metadata`)
       .first();
 
-    return result?.count || 0;
+    return result ? (result as any).count : 0;
+  }
+
+  // カテゴリ別件数取得
+  async getCategoryCounts(): Promise<{ category: string; count: number }[]> {
+    const result = await this.db
+      .prepare(
+        `
+      SELECT cat01 as category, COUNT(*) as count 
+      FROM estat_metadata 
+      GROUP BY cat01 
+      ORDER BY count DESC
+    `
+      )
+      .all();
+
+    return result.results as { category: string; count: number }[];
+  }
+
+  // 最新の更新日時取得
+  async getLastUpdated(): Promise<string | null> {
+    const result = await this.db
+      .prepare(`SELECT MAX(updated_at) as last_updated FROM estat_metadata`)
+      .first();
+
+    return result ? (result as any).last_updated : null;
   }
 }

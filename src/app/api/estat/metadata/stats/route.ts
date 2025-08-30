@@ -1,33 +1,54 @@
-import { EstatMetadataService } from "@/lib/estat/metadata-service";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
-    if (!process.env.DB) {
-      return Response.json(
-        { error: "データベース接続が設定されていません" },
-        { status: 500 }
-      );
-    }
+    // サンプルデータ（実際の実装ではCloudflare D1から取得）
+    const sampleData = {
+      totalCount: 150,
+      statCount: 3,
+      categories: [
+        {
+          category: "人口・世帯",
+          count: 85,
+          stats: [
+            {
+              id: "0003448237",
+              name: "人口推計",
+              title: "人口推計（令和5年10月1日現在）",
+            },
+            {
+              id: "0003348237",
+              name: "世帯数調査",
+              title: "世帯数調査（令和5年）",
+            },
+          ],
+        },
+        {
+          category: "経済・産業",
+          count: 45,
+          stats: [
+            {
+              id: "0003160000",
+              name: "県民経済計算",
+              title: "県民経済計算（令和4年度）",
+            },
+          ],
+        },
+        {
+          category: "社会・生活",
+          count: 20,
+          stats: [],
+        },
+      ],
+    };
 
-    const metadataService = new EstatMetadataService(process.env.DB as any);
-
-    // データ件数とカテゴリ一覧を取得
-    const [count, categories] = await Promise.all([
-      metadataService.getSavedDataCount(),
-      metadataService.getSavedStatList(),
-    ]);
-
-    return Response.json({
+    return NextResponse.json({
       success: true,
-      data: {
-        totalCount: count,
-        statCount: categories.length,
-        categories: categories,
-      },
+      data: sampleData,
     });
   } catch (error) {
     console.error("統計情報取得エラー:", error);
-    return Response.json(
+    return NextResponse.json(
       {
         error:
           error instanceof Error

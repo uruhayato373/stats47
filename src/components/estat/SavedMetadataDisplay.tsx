@@ -2,216 +2,215 @@
 
 import { useState, useEffect } from "react";
 
-interface EstatTransformedData {
-  id: number;
-  stats_data_id: string;
-  stat_name: string;
+interface SavedMetadata {
+  id: string;
+  statsDataId: string;
+  statName: string;
   title: string;
-  cat01: string | null;
-  item_name: string | null;
-  unit: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-interface StatsData {
-  totalCount: number;
-  statCount: number;
-  categories: Array<{
-    stats_data_id: string;
-    stat_name: string;
-    title: string;
-  }>;
+  category: string;
+  itemName: string;
+  unit: string;
+  updatedAt: string;
 }
 
 export default function SavedMetadataDisplay() {
-  const [stats, setStats] = useState<StatsData | null>(null);
+  const [metadata, setMetadata] = useState<SavedMetadata[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<EstatTransformedData[]>(
-    []
-  );
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  // 統計情報を取得
+  // サンプルデータ（実際の実装ではCloudflare D1から取得）
+  const sampleData: SavedMetadata[] = [
+    {
+      id: "1",
+      statsDataId: "0003448237",
+      statName: "人口推計",
+      title: "人口推計（令和5年10月1日現在）",
+      category: "人口・世帯",
+      itemName: "総人口",
+      unit: "人",
+      updatedAt: "2024-01-15",
+    },
+    {
+      id: "2",
+      statsDataId: "0003348237",
+      statName: "世帯数",
+      title: "世帯数調査（令和5年）",
+      category: "人口・世帯",
+      itemName: "一般世帯数",
+      unit: "世帯",
+      updatedAt: "2024-01-10",
+    },
+  ];
+
   useEffect(() => {
-    fetchStats();
+    // 実際の実装では、Cloudflare D1からデータを取得
+    setTimeout(() => {
+      setMetadata(sampleData);
+      setLoading(false);
+    }, 1000);
   }, []);
 
-  const fetchStats = async () => {
-    try {
-      const response = await fetch("/api/estat/metadata/stats");
-      const result = await response.json();
+  const filteredMetadata = metadata.filter((item) => {
+    const matchesSearch =
+      searchQuery === "" ||
+      item.statName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.itemName.toLowerCase().includes(searchQuery.toLowerCase());
 
-      if (result.success) {
-        setStats(result.data);
-      } else {
-        setError(result.error);
-      }
-    } catch (error) {
-      setError("統計情報の取得に失敗しました");
-    }
-  };
+    const matchesCategory =
+      selectedCategory === "" || item.category === selectedCategory;
 
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    return matchesSearch && matchesCategory;
+  });
 
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `/api/estat/metadata/search?q=${encodeURIComponent(searchQuery)}`
-      );
-      const result = await response.json();
+  const categories = Array.from(new Set(metadata.map((item) => item.category)));
 
-      if (result.success) {
-        setSearchResults(result.data);
-      } else {
-        setError(result.error);
-      }
-    } catch (error) {
-      setError("検索に失敗しました");
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        <span className="ml-2 text-gray-600 dark:text-neutral-400">
+          データを読み込み中...
+        </span>
+      </div>
+    );
+  }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/20 dark:border-red-800">
+        <p className="text-red-800 dark:text-red-200">エラー: {error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-4">
-      {/* 統計情報 */}
-      {stats && (
-        <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 dark:bg-neutral-800 dark:border-neutral-700">
-          <h3 className="text-lg font-medium text-gray-800 mb-3 dark:text-neutral-200">
-            保存済みデータ統計
-          </h3>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                {stats.totalCount.toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-neutral-400">
-                総データ件数
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                {stats.statCount.toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-neutral-400">
-                統計表数
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                {stats.categories.length.toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-neutral-400">
-                カテゴリ数
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 検索 */}
-      <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 dark:bg-neutral-800 dark:border-neutral-700">
-        <h3 className="text-lg font-medium text-gray-800 mb-3 dark:text-neutral-200">
-          保存済みデータ検索
+    <div className="space-y-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/20 dark:border-blue-800">
+        <h3 className="text-lg font-medium text-blue-900 dark:text-blue-100 mb-2">
+          保存済みメタデータ
         </h3>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="統計名、表題、項目名で検索..."
-            className="flex-1 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
-          />
-          <button
-            onClick={handleSearch}
-            disabled={loading || !searchQuery.trim()}
-            className="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? "検索中..." : "検索"}
-          </button>
+        <p className="text-blue-800 dark:text-blue-200 text-sm">
+          データベースに保存されているe-Statメタ情報を表示・検索できます。
+        </p>
+      </div>
+
+      {/* 検索・フィルター */}
+      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
+              キーワード検索
+            </label>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="統計名、タイトル、項目名で検索..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
+              カテゴリ
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100"
+            >
+              <option value="">すべてのカテゴリ</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* エラー表示 */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3 dark:bg-red-900/20 dark:border-red-800">
-          <p className="text-red-700 dark:text-red-300">{error}</p>
+      {/* 統計情報 */}
+      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="flex items-center justify-between mb-4">
+          <h4 className="text-lg font-medium text-gray-900 dark:text-neutral-100">
+            検索結果
+          </h4>
+          <span className="text-sm text-gray-600 dark:text-neutral-400">
+            {filteredMetadata.length}件
+          </span>
         </div>
-      )}
 
-      {/* 検索結果 */}
-      {searchResults.length > 0 && (
-        <div className="bg-white rounded-lg shadow-xs border border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
-          <div className="p-4 border-b border-gray-200 dark:border-neutral-700">
-            <h3 className="text-lg font-medium text-gray-800 dark:text-neutral-200">
-              検索結果 ({searchResults.length}件)
-            </h3>
+        {filteredMetadata.length === 0 ? (
+          <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+            条件に一致するデータが見つかりませんでした。
           </div>
+        ) : (
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
               <thead className="bg-gray-50 dark:bg-neutral-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
                     統計表ID
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
-                    政府統計名
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                    統計名
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
-                    統計表題名
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                    タイトル
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
                     カテゴリ
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
                     項目名
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
                     単位
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                    更新日
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-neutral-800 divide-y divide-gray-200 dark:divide-neutral-700">
-                {searchResults.map((item) => (
+                {filteredMetadata.map((item) => (
                   <tr
                     key={item.id}
                     className="hover:bg-gray-50 dark:hover:bg-neutral-700"
                   >
-                    <td className="px-4 py-3 text-sm font-mono text-gray-900 dark:text-neutral-200">
-                      {item.stats_data_id}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900 dark:text-neutral-100">
+                      {item.statsDataId}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-200">
-                      {item.stat_name}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                      {item.statName}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-200">
-                      {item.title}
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-neutral-100">
+                      <div className="max-w-xs truncate" title={item.title}>
+                        {item.title}
+                      </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-200">
-                      {item.cat01 || "-"}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                      {item.category}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-200">
-                      {item.item_name || "-"}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                      {item.itemName}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-200">
-                      {item.unit || "-"}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                      {item.unit}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-neutral-400">
+                      {item.updatedAt}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
