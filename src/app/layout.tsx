@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="relative min-h-full">
       <body
-        className={`${inter.variable} font-sans overflow-hidden bg-gray-100 dark:bg-neutral-900 antialiased`}
+        className={`${inter.variable} font-sans bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>

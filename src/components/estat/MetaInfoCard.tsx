@@ -155,7 +155,7 @@ export default function MetaInfoCard({
             {CLASS_INF.CLASS_OBJ.map((classObj, index) => (
               <div
                 key={index}
-                className="bg-gray-50 rounded-lg p-3 dark:bg-neutral-700"
+                className="bg-white border border-gray-200 rounded-lg p-3 dark:bg-neutral-700 dark:border-neutral-600"
               >
                 <h4 className="text-sm font-medium text-gray-700 mb-2 dark:text-neutral-400">
                   {classObj["@name"]}
@@ -167,14 +167,14 @@ export default function MetaInfoCard({
                       classObj.CLASS.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="bg-white rounded border border-gray-200 p-2 dark:bg-neutral-800 dark:border-neutral-600"
+                          className="bg-white border border-gray-200 rounded p-2 dark:bg-neutral-800 dark:border-neutral-600"
                         >
                           <div className="text-sm">
                             <span className="font-medium text-gray-800 dark:text-neutral-200">
                               {item["@name"]}
                             </span>
                             {item["@explanation"] && (
-                              <p className="text-gray-600 mt-1 text-xs dark:text-neutral-400">
+                              <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
                                 {item["@explanation"]}
                               </p>
                             )}
@@ -182,13 +182,13 @@ export default function MetaInfoCard({
                         </div>
                       ))
                     ) : (
-                      <div className="bg-white rounded border border-gray-200 p-2 dark:bg-neutral-800 dark:border-neutral-600">
+                      <div className="bg-white border border-gray-200 rounded p-2 dark:bg-neutral-800 dark:border-neutral-600">
                         <div className="text-sm">
                           <span className="font-medium text-gray-800 dark:text-neutral-200">
                             {classObj.CLASS["@name"]}
                           </span>
                           {classObj.CLASS["@explanation"] && (
-                            <p className="text-gray-600 mt-1 text-xs dark:text-neutral-400">
+                            <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
                               {classObj.CLASS["@explanation"]}
                             </p>
                           )}

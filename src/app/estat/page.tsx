@@ -45,7 +45,7 @@ export default function EstatMetaPage() {
       <Sidebar />
 
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
-        <div className="h-[calc(100dvh-62px)] lg:h-full overflow-hidden flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div>
               <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
@@ -115,7 +115,7 @@ export default function EstatMetaPage() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-neutral-900">
+          <div className="p-4 bg-white dark:bg-neutral-900">
             <div className="max-w-7xl mx-auto space-y-4">
               <StatsIdInput onSubmit={handleFetchMetaInfo} loading={loading} />
 
