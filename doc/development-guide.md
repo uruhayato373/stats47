@@ -8,12 +8,13 @@
 
 1. [開発環境のセットアップ](#開発環境のセットアップ)
 2. [プロジェクト構造](#プロジェクト構造)
-3. [コーディング規約](#コーディング規約)
-4. [開発ワークフロー](#開発ワークフロー)
-5. [テスト](#テスト)
-6. [デバッグ](#デバッグ)
-7. [パフォーマンス最適化](#パフォーマンス最適化)
-8. [トラブルシューティング](#トラブルシューティング)
+3. [e-Stat API 統合](#estat-api統合)
+4. [コーディング規約](#コーディング規約)
+5. [開発ワークフロー](#開発ワークフロー)
+6. [テスト](#テスト)
+7. [デバッグ](#デバッグ)
+8. [パフォーマンス最適化](#パフォーマンス最適化)
+9. [トラブルシューティング](#トラブルシューティング)
 
 ## 開発環境のセットアップ
 
@@ -23,34 +24,6 @@
 - **npm**: 9.x 以上
 - **Git**: 最新版
 - **エディタ**: VS Code 推奨（設定ファイル付き）
-
-### Storybook設定
-
-#### Co-location構造
-各コンポーネントは、関連するファイルと共に同じディレクトリに配置されています：
-
-```
-src/components/
-├── Header.tsx              # メインコンポーネント
-├── Header.story.tsx        # Storybookストーリー
-├── Footer.tsx
-├── Footer.story.tsx
-└── ...
-```
-
-#### 使用方法
-```bash
-# Storybookを起動
-npm run storybook
-
-# ビルド版を作成
-npm run build-storybook
-```
-
-#### 設定ファイル
-- `.storybook/main.ts` - メイン設定
-- `.storybook/preview.ts` - プレビュー設定
-- `src/components/README.md` - コンポーネント構造の説明
 
 ### 1. リポジトリのクローン
 
@@ -63,6 +36,9 @@ cd stats47
 
 ```bash
 npm install
+
+# e-Stat関連パッケージのインストール
+npm install @estat/types @estat/client @estat/utils
 ```
 
 ### 3. 環境変数の設定
@@ -71,8 +47,11 @@ npm install
 # .env.localファイルを作成
 cp .env.example .env.local
 
-# e-Stat APIキーを設定（オプション）
+# e-Stat APIキーを設定
 echo "NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id" >> .env.local
+
+# 認証関連の環境変数（オプション）
+echo "JWT_SECRET=your-super-secret-jwt-key-here" >> .env.local
 ```
 
 ### 4. 開発サーバーの起動
@@ -98,52 +77,311 @@ npm run dev
 stats47/
 ├── doc/                    # ドキュメント
 │   ├── README.md
-│   ├── architecture.md
-│   ├── api-design.md
-│   ├── component-design.md
-│   ├── development-guide.md
-│   └── ...
+│   ├── architecture.md     # システムアーキテクチャ
+│   ├── api-design.md       # API設計仕様
+│   ├── component-design.md # コンポーネント設計
+│   ├── development-guide.md # 開発者ガイド
+│   └── estat-integration.md # e-Stat統合ガイド
 ├── src/
-│   ├── app/               # Next.js App Router
-│   │   ├── layout.tsx     # ルートレイアウト（ヘッダー・フッター含む）
-│   │   ├── page.tsx       # ホームページ
-│   │   └── dashboard/     # ダッシュボード（カテゴリベース）
-│   │       ├── page.tsx   # カテゴリ一覧ページ
-│   │       ├── [categoryId]/  # カテゴリ詳細ページ
-│   │       │   ├── page.tsx
-│   │       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
-│   │       │       └── page.tsx
-│   ├── components/         # Reactコンポーネント（アトミックデザイン）
-│   │   ├── atoms/         # 最小単位のコンポーネント
-│   │   │   ├── RegionSelector.tsx
-│   │   │   └── ...
-│   │   ├── molecules/      # atomsを組み合わせたコンポーネント
-│   │   │   ├── StatisticsDisplay.tsx
-│   │   │   └── ...
-│   │   ├── organisms/      # moleculesを組み合わせた大きなコンポーネント
-│   │   │   ├── EstatDataFetcher.tsx
-│   │   │   └── ...
-│   │   ├── templates/      # ページレイアウトのテンプレート
-│   │   ├── pages/          # 特定のページ用のコンポーネント
-│   │   ├── layout/         # グローバルレイアウト
-│   │   │   ├── Header.tsx
-│   │   │   └── Footer.tsx
-│   │   ├── charts/         # チャート関連コンポーネント
-│   │   ├── maps/           # マップ関連コンポーネント
-│   │   └── ui/             # UI関連コンポーネント
-│   ├── config/             # 設定ファイル
-│   │   └── categories.json # カテゴリ定義
+│   ├── app/                # Next.js App Router
+│   ├── components/         # Reactコンポーネント
 │   ├── types/              # TypeScript型定義
-│   ├── utils/              # ユーティリティ関数
-│   └── styles/             # スタイルファイル
-│       └── globals.css
-├── public/                 # 静的ファイル
-├── package.json            # 依存関係
-├── tsconfig.json           # TypeScript設定
-├── next.config.ts          # Next.js設定
-├── tailwind.config.js      # Tailwind CSS設定
-└── .gitignore              # Git除外設定
+│   │   └── estat/         # e-Stat API型定義
+│   ├── lib/                # ユーティリティ関数
+│   │   └── estat/         # e-Stat関連ユーティリティ
+│   └── contexts/           # React Context
+├── data/                   # データファイル
+└── public/                 # 静的ファイル
 ```
+
+## e-Stat API 統合
+
+### @estat/パッケージの概要
+
+このプロジェクトでは、e-Stat API の型安全性と開発体験を向上させるために`@estat/`パッケージを使用しています。
+
+#### 利用可能なパッケージ
+
+- **@estat/types**: e-Stat API の完全な型定義
+- **@estat/client**: e-Stat API クライアントライブラリ
+- **@estat/utils**: データ処理と変換ユーティリティ
+
+### 基本的な使用方法
+
+#### 1. 型定義のインポート
+
+```typescript
+import {
+  EstatResponse,
+  EstatParameter,
+  EstatCatalogResponse,
+} from "@estat/types";
+```
+
+#### 2. API クライアントの初期化
+
+```typescript
+import { EstatClient } from "@estat/client";
+
+const estatClient = new EstatClient({
+  appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
+});
+```
+
+#### 3. 統計データの取得
+
+```typescript
+const fetchStatisticalData = async (statsDataId: string) => {
+  try {
+    const response = await estatClient.getStatsData({
+      statsDataId,
+      metaGetFlg: "Y",
+      cntGetFlg: "N",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("e-Stat API呼び出しエラー:", error);
+    throw error;
+  }
+};
+```
+
+### 型安全なデータ処理
+
+#### レスポンス処理の例
+
+```typescript
+import { EstatResponse } from "@estat/types";
+
+const processEstatResponse = (response: EstatResponse) => {
+  try {
+    // 型安全なデータアクセス
+    const statisticalData = response.GET_STATS_DATA.STATISTICAL_DATA;
+    const dataInf = statisticalData.DATA_INF;
+
+    if (dataInf && Array.isArray(dataInf)) {
+      return dataInf.map((item) => ({
+        value: item.VALUE,
+        area: item.AREA,
+        time: item.TIME,
+        category: item.CAT01,
+      }));
+    }
+
+    return [];
+  } catch (error) {
+    console.error("e-Statレスポンス処理エラー:", error);
+    return [];
+  }
+};
+```
+
+### エラーハンドリング
+
+#### 型安全なエラー処理
+
+```typescript
+import { EstatError, EstatErrorCode } from "@estat/types";
+
+const handleEstatError = (error: unknown) => {
+  if (error instanceof EstatError) {
+    switch (error.code) {
+      case EstatErrorCode.INVALID_APP_ID:
+        return "アプリケーションIDが無効です";
+      case EstatErrorCode.INVALID_STATS_DATA_ID:
+        return "統計データIDが無効です";
+      case EstatErrorCode.API_LIMIT_EXCEEDED:
+        return "API利用制限に達しました";
+      default:
+        return `e-Stat APIエラー: ${error.message}`;
+    }
+  }
+
+  return "予期しないエラーが発生しました";
+};
+```
+
+### データ変換ユーティリティ
+
+#### 地域コードの変換
+
+```typescript
+import { convertAreaCode, getAreaName } from "@estat/utils";
+
+const getRegionInfo = (areaCode: string) => {
+  const areaName = getAreaName(areaCode);
+  const convertedCode = convertAreaCode(areaCode);
+
+  return {
+    code: convertedCode,
+    name: areaName,
+    originalCode: areaCode,
+  };
+};
+```
+
+### 実装例
+
+#### EstatDataFetcher コンポーネント
+
+```typescript
+import React, { useEffect, useState } from "react";
+import { EstatClient } from "@estat/client";
+import { EstatResponse, EstatParameter } from "@estat/types";
+
+interface EstatDataFetcherProps {
+  regionCode: string;
+  onDataUpdate: (data: any) => void;
+  onLoadingChange: (loading: boolean) => void;
+  children: (
+    data: any,
+    loading: boolean,
+    error: string | null
+  ) => React.ReactNode;
+}
+
+export const EstatDataFetcher: React.FC<EstatDataFetcherProps> = ({
+  regionCode,
+  onDataUpdate,
+  onLoadingChange,
+  children,
+}) => {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!regionCode) return;
+
+      setLoading(true);
+      setError(null);
+      onLoadingChange(true);
+
+      try {
+        const estatClient = new EstatClient({
+          appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
+        });
+
+        const parameter: EstatParameter = {
+          appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
+          lang: "J",
+          statsDataId: "0003109941", // 人口統計の例
+          metaGetFlg: "Y",
+          cntGetFlg: "N",
+          startPosition: 1,
+          limit: 100,
+        };
+
+        const response: EstatResponse = await estatClient.getStatsData(
+          parameter
+        );
+
+        // 型安全なデータ処理
+        const processedData = processEstatResponse(response, regionCode);
+
+        setData(processedData);
+        onDataUpdate(processedData);
+      } catch (err) {
+        const errorMessage = handleEstatError(err);
+        setError(errorMessage);
+        console.error("e-Statデータ取得エラー:", err);
+      } finally {
+        setLoading(false);
+        onLoadingChange(false);
+      }
+    };
+
+    fetchData();
+  }, [regionCode, onDataUpdate, onLoadingChange]);
+
+  return <>{children(data, loading, error)}</>;
+};
+```
+
+### ベストプラクティス
+
+#### 1. 型安全性の確保
+
+- 常に`@estat/types`から型をインポート
+- 型ガードを使用してランタイムエラーを防止
+- 適切なエラーハンドリングを実装
+
+#### 2. パフォーマンスの最適化
+
+- 必要最小限のデータのみを取得
+- キャッシュ戦略の実装
+- 非同期処理の適切な管理
+
+#### 3. エラーハンドリング
+
+- ユーザーフレンドリーなエラーメッセージ
+- ログ出力によるデバッグ支援
+- フォールバックデータの提供
+
+#### 4. セキュリティ
+
+- API キーの適切な管理
+- 環境変数での機密情報保護
+- 入力値の検証とサニタイゼーション
+
+### トラブルシューティング
+
+#### よくある問題と解決方法
+
+##### 1. 型定義が見つからない
+
+```bash
+# パッケージの再インストール
+npm install @estat/types @estat/client @estat/utils
+
+# TypeScriptの再起動
+# VS Codeの場合: Cmd+Shift+P → "TypeScript: Restart TS Server"
+```
+
+##### 2. API 呼び出しエラー
+
+- API キーが正しく設定されているか確認
+- ネットワーク接続を確認
+- e-Stat API の利用制限を確認
+
+##### 3. データが取得できない
+
+- 統計データ ID が正しいか確認
+- パラメータの設定を確認
+- API レスポンスの構造を確認
+
+### Storybook 設定
+
+#### Co-location 構造
+
+各コンポーネントは、関連するファイルと共に同じディレクトリに配置されています：
+
+```
+src/components/
+├── Header.tsx              # メインコンポーネント
+├── Header.story.tsx        # Storybookストーリー
+├── Footer.tsx
+├── Footer.story.tsx
+└── ...
+```
+
+#### 使用方法
+
+```bash
+# Storybookを起動
+npm run storybook
+
+# ビルド版を作成
+npm run build-storybook
+```
+
+#### 設定ファイル
+
+- `.storybook/main.ts` - メイン設定
+- `.storybook/preview.ts` - プレビュー設定
+- `src/components/README.md` - コンポーネント構造の説明
 
 ## コーディング規約
 
@@ -151,366 +389,317 @@ stats47/
 
 #### 型定義
 
+- 明示的な型注釈を使用
+- インターフェースは`I`プレフィックスなし
+- 型エイリアスは適切に使用
+
 ```typescript
-// インターフェース名はPascalCase
-interface UserData {
-  id: string;
+// 良い例
+interface User {
+  id: number;
   name: string;
   email: string;
 }
 
-// 型エイリアス名もPascalCase
-type ChartData = Array<{
-  year: string;
-  value: number;
-}>;
+type UserStatus = "active" | "inactive" | "pending";
 
-// 列挙型名もPascalCase
-enum RegionCode {
-  Tokyo = "13",
-  Osaka = "27",
-  Aichi = "23",
+// 悪い例
+interface IUser {
+  id: any;
+  name: string;
+  email: string;
 }
 ```
 
 #### 関数定義
 
-```typescript
-// 関数名はcamelCase
-function calculateAverage(values: number[]): number {
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
-}
+- アロー関数を使用
+- 戻り値の型を明示
+- パラメータの型を明示
 
-// アロー関数もcamelCase
-const formatNumber = (value: number): string => {
-  return value.toLocaleString();
+```typescript
+// 良い例
+const getUserById = async (id: number): Promise<User | null> => {
+  try {
+    const response = await fetch(`/api/users/${id}`);
+    return response.ok ? await response.json() : null;
+  } catch (error) {
+    console.error("ユーザー取得エラー:", error);
+    return null;
+  }
 };
 
-// 非同期関数はasync/awaitを使用
-async function fetchUserData(userId: string): Promise<UserData> {
-  const response = await fetch(`/api/users/${userId}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
-  }
-  return response.json();
-}
-```
-
-#### コンポーネント
-
-```typescript
-// コンポーネント名はPascalCase
-interface UserProfileProps {
-  user: UserData;
-  onEdit?: (user: UserData) => void;
-}
-
-export function UserProfile({ user, onEdit }: UserProfileProps) {
-  return (
-    <div className="user-profile">
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
-      {onEdit && <button onClick={() => onEdit(user)}>編集</button>}
-    </div>
-  );
+// 悪い例
+function getUserById(id) {
+  return fetch(`/api/users/${id}`)
+    .then((response) => response.json())
+    .catch((error) => console.error(error));
 }
 ```
 
 ### React
 
-#### Hooks
+#### コンポーネント定義
+
+- 関数コンポーネントを使用
+- Props の型を明示
+- 適切なメモ化を使用
 
 ```typescript
-// useStateは適切な初期値と型を指定
-const [user, setUser] = useState<UserData | null>(null);
-const [loading, setLoading] = useState<boolean>(false);
+// 良い例
+interface UserCardProps {
+  user: User;
+  onEdit: (user: User) => void;
+  onDelete: (userId: number) => void;
+}
 
-// useEffectは依存配列を適切に設定
-useEffect(() => {
-  fetchUserData(userId).then(setUser);
-}, [userId]); // 依存関係のみ
+export const UserCard: React.FC<UserCardProps> = React.memo(
+  ({ user, onEdit, onDelete }) => {
+    const handleEdit = useCallback(() => {
+      onEdit(user);
+    }, [user, onEdit]);
 
-// useCallbackで関数をメモ化
-const handleUserEdit = useCallback(
-  (user: UserData) => {
-    setUser(user);
-    onEdit?.(user);
-  },
-  [onEdit]
+    const handleDelete = useCallback(() => {
+      onDelete(user.id);
+    }, [user.id, onDelete]);
+
+    return (
+      <div className="user-card">
+        <h3>{user.name}</h3>
+        <p>{user.email}</p>
+        <div className="actions">
+          <button onClick={handleEdit}>編集</button>
+          <button onClick={handleDelete}>削除</button>
+        </div>
+      </div>
+    );
+  }
 );
 
-// useMemoで計算結果をメモ化
-const averageAge = useMemo(() => {
-  return users.reduce((sum, user) => sum + user.age, 0) / users.length;
-}, [users]);
+UserCard.displayName = "UserCard";
 ```
 
-#### イベントハンドリング
+#### Hooks
+
+- カスタムフックを作成してロジックを分離
+- 依存配列を適切に設定
+- 無限ループを防ぐ
 
 ```typescript
-// イベントハンドラー名はhandleで始める
-const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault();
-  // 処理
+// 良い例
+const useUser = (userId: number) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        const userData = await getUserById(userId);
+        setUser(userData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "不明なエラー");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchUser();
+    }
+  }, [userId]);
+
+  return { user, loading, error };
 };
 
-const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = event.target;
-  setFormData((prev) => ({ ...prev, [name]: value }));
-};
+// 悪い例
+const useUser = (userId: number) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-// フォーム送信
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  try {
-    await submitForm(formData);
-    setSuccess(true);
-  } catch (error) {
-    setError(error.message);
-  }
+  useEffect(() => {
+    getUserById(userId).then(setUser);
+    setLoading(false);
+  }); // 依存配列なし → 無限ループ
+
+  return { user, loading };
 };
 ```
 
 ### CSS/Tailwind
 
-#### Tailwind CSS クラス
+#### クラス名の管理
+
+- 意味のあるクラス名を使用
+- カスタムクラスは適切に定義
+- レスポンシブ対応を考慮
 
 ```typescript
-// クラス名は論理的な順序で並べる
-<div className="
-  flex items-center justify-between
-  p-4 m-2
-  bg-white border border-gray-200 rounded-lg shadow-sm
-  hover:shadow-md transition-shadow
-">
-  {/* コンテンツ */}
+// 良い例
+<div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+    タイトル
+  </h2>
+  <p className="text-gray-600 dark:text-gray-300">
+    コンテンツ
+  </p>
 </div>
 
-// 長いクラス名は複数行に分割
-<button className="
-  inline-flex items-center px-4 py-2
-  border border-transparent text-sm font-medium rounded-md
-  text-white bg-blue-600 hover:bg-blue-700
-  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-  disabled:opacity-50 disabled:cursor-not-allowed
-  transition-colors
-">
-  ボタン
-</button>
+// 悪い例
+<div className="bg-white rounded p-6 shadow border">
+  <h2 className="text-xl font-semibold mb-4">タイトル</h2>
+  <p>コンテンツ</p>
+</div>
 ```
 
 #### カスタム CSS
 
+- グローバルスタイルは最小限に
+- コンポーネント固有のスタイルは適切に分離
+- CSS 変数を活用
+
 ```css
-/* カスタムCSSは最小限に抑える */
-.custom-chart {
-  @apply relative w-full h-64;
+/* globals.css */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --success-color: #10b981;
+  --error-color: #ef4444;
 }
 
-.custom-chart .recharts-cartesian-grid-horizontal line {
-  @apply stroke-gray-200;
-}
-
-.custom-chart .recharts-cartesian-grid-vertical line {
-  @apply stroke-gray-200;
+/* コンポーネント固有のスタイル */
+.user-card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply p-6 hover:shadow-md transition-shadow duration-200;
 }
 ```
 
 ## 開発ワークフロー
 
-### 1. ブランチ戦略
+### 1. 機能開発
+
+#### ブランチ戦略
 
 ```bash
-# メインブランチ
-main          # 本番環境
-develop       # 開発環境
+# 開発ブランチの作成
+git checkout -b feature/new-feature
 
-# 機能ブランチ
-feature/add-new-chart      # 新機能開発
-bugfix/fix-api-error       # バグ修正
-hotfix/critical-security   # 緊急修正
-```
-
-### 2. 開発フロー
-
-```bash
-# 1. 最新のdevelopブランチを取得
-git checkout develop
-git pull origin develop
-
-# 2. 機能ブランチを作成
-git checkout -b feature/add-new-chart
-
-# 3. 開発・テスト
+# 開発・テスト
 npm run dev
 npm run test
-npm run lint
 
-# 4. コミット
+# コミット
 git add .
-git commit -m "feat: 新しいチャートタイプを追加
+git commit -m "feat: 新機能の追加"
 
-- 散布図コンポーネントを実装
-- データフィルタリング機能を追加
-- レスポンシブ対応を改善"
-
-# 5. プッシュ
-git push origin feature/add-new-chart
-
-# 6. プルリクエスト作成
-# GitHubでプルリクエストを作成し、レビューを依頼
+# プッシュ
+git push origin feature/new-feature
 ```
 
-### 3. コミットメッセージ規約
+#### コミットメッセージ
 
-```
-<type>(<scope>): <subject>
+- **feat**: 新機能
+- **fix**: バグ修正
+- **docs**: ドキュメント更新
+- **style**: コードスタイル修正
+- **refactor**: リファクタリング
+- **test**: テスト追加・修正
+- **chore**: その他の変更
 
-<body>
+### 2. コードレビュー
 
-<footer>
-```
+#### レビューポイント
 
-**Type**
+- 型安全性の確保
+- パフォーマンスの考慮
+- セキュリティの確認
+- テストカバレッジ
+- ドキュメントの更新
 
-- `feat`: 新機能
-- `fix`: バグ修正
-- `docs`: ドキュメント更新
-- `style`: コードスタイル修正
-- `refactor`: リファクタリング
-- `test`: テスト追加・修正
-- `chore`: その他の変更
+#### レビュープロセス
 
-**例**
+1. プルリクエストの作成
+2. 自動テストの実行
+3. コードレビューの実施
+4. 修正・改善の実施
+5. 承認・マージ
 
-```
-feat(dashboard): 地域比較機能を追加
+### 3. テスト
 
-- 複数地域の同時表示機能
-- 比較チャートの実装
-- 地域選択UIの改善
+#### テストの種類
 
-Closes #123
-```
+- **Unit Tests**: 個別コンポーネント・関数のテスト
+- **Integration Tests**: コンポーネント間の連携テスト
+- **E2E Tests**: エンドツーエンドの動作テスト
 
-## テスト
-
-### 1. テスト実行
+#### テスト実行
 
 ```bash
-# 全テスト実行
-npm run test
+# 全テストの実行
+npm test
 
-# ウォッチモード
-npm run test:watch
+# 特定のテストファイルの実行
+npm test -- --testPathPattern=UserCard
 
-# カバレッジ付きテスト
+# カバレッジレポートの生成
 npm run test:coverage
 
-# 特定のテストファイル
-npm test -- --testPathPattern=RegionSelector
-
-# 特定のテスト
-npm test -- --testNamePattern="should render region options"
-```
-
-### 2. テストファイル命名
-
-```
-src/
-├── components/
-│   ├── RegionSelector.tsx
-│   └── __tests__/
-│       └── RegionSelector.test.tsx
-├── utils/
-│   ├── dataProcessor.ts
-│   └── __tests__/
-│       └── dataProcessor.test.ts
-```
-
-### 3. テスト例
-
-```typescript
-import { render, screen, fireEvent } from "@testing-library/react";
-import { RegionSelector } from "../RegionSelector";
-
-describe("RegionSelector", () => {
-  const defaultProps = {
-    regions: [
-      { code: "13", name: "東京都" },
-      { code: "27", name: "大阪府" },
-    ],
-    selectedRegion: "13",
-    onRegionChange: jest.fn(),
-  };
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test("renders all region options", () => {
-    render(<RegionSelector {...defaultProps} />);
-
-    expect(screen.getByText("東京都")).toBeInTheDocument();
-    expect(screen.getByText("大阪府")).toBeInTheDocument();
-  });
-
-  test("calls onRegionChange when selection changes", () => {
-    render(<RegionSelector {...defaultProps} />);
-
-    const select = screen.getByRole("combobox");
-    fireEvent.change(select, { target: { value: "27" } });
-
-    expect(defaultProps.onRegionChange).toHaveBeenCalledWith("27");
-  });
-
-  test("displays selected region name", () => {
-    render(<RegionSelector {...defaultProps} />);
-
-    expect(screen.getByText("選択中: 東京都")).toBeInTheDocument();
-  });
-});
+# ウォッチモードでの実行
+npm test -- --watch
 ```
 
 ## デバッグ
 
 ### 1. ブラウザ開発者ツール
 
-#### React Developer Tools
-
-```bash
-# Chrome拡張機能をインストール
-# React Developer Tools
-# Redux DevTools（状態管理使用時）
-```
-
-#### Console Logging
+#### Console
 
 ```typescript
-// 開発時のみログ出力
-if (process.env.NODE_ENV === "development") {
-  console.log("User data:", userData);
-  console.log("API response:", response);
-}
+// デバッグ情報の出力
+console.log("ユーザーデータ:", user);
+console.table(users);
 
-// エラーログ
-console.error("API call failed:", error);
-console.warn("Deprecated feature used");
+// エラーの詳細表示
+console.error("API呼び出しエラー:", error);
+console.trace("スタックトレース");
+
+// パフォーマンス測定
+console.time("データ取得");
+const data = await fetchData();
+console.timeEnd("データ取得");
 ```
+
+#### Network
+
+- API 呼び出しの確認
+- レスポンスの内容確認
+- エラーステータスの確認
+
+#### React DevTools
+
+- コンポーネントの状態確認
+- Props の値確認
+- レンダリングの最適化
 
 ### 2. VS Code デバッグ
 
-`.vscode/launch.json`を設定して、VS Code からデバッグ可能：
+#### 設定
 
 ```json
+// .vscode/launch.json
 {
   "version": "0.2.0",
   "configurations": [
     {
       "name": "Next.js: debug server-side",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "npm run dev"
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "args": ["dev"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
     },
     {
       "name": "Next.js: debug client-side",
@@ -522,138 +711,182 @@ console.warn("Deprecated feature used");
 }
 ```
 
-### 3. エラーハンドリング
+#### 使用方法
+
+1. ブレークポイントの設定
+2. デバッグの開始
+3. ステップ実行
+4. 変数の値確認
+
+### 3. ログ出力
+
+#### 構造化ログ
 
 ```typescript
-// エラー境界の実装
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+const logger = {
+  info: (message: string, data?: any) => {
+    console.log(`[INFO] ${message}`, data);
+  },
+  error: (message: string, error?: any) => {
+    console.error(`[ERROR] ${message}`, error);
+  },
+  warn: (message: string, data?: any) => {
+    console.warn(`[WARN] ${message}`, data);
+  },
+};
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error("Error caught by boundary:", error, errorInfo);
-
-    // エラー監視サービスに送信
-    if (process.env.NODE_ENV === "production") {
-      logErrorToService(error, errorInfo);
-    }
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="error-boundary">
-          <h2>エラーが発生しました</h2>
-          <p>ページを再読み込みしてください</p>
-          <button onClick={() => window.location.reload()}>再読み込み</button>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
+// 使用例
+logger.info("ユーザーログイン", { userId: 123, timestamp: new Date() });
+logger.error("API呼び出し失敗", error);
 ```
 
 ## パフォーマンス最適化
 
-### 1. コード分割
+### 1. React 最適化
+
+#### メモ化
+
+```typescript
+// コンポーネントのメモ化
+export const ExpensiveComponent = React.memo(({ data, onUpdate }) => {
+  // 重い処理
+  const processedData = useMemo(() => {
+    return processLargeDataset(data);
+  }, [data]);
+
+  const handleUpdate = useCallback(
+    (newData) => {
+      onUpdate(newData);
+    },
+    [onUpdate]
+  );
+
+  return <div>{/* コンポーネントの内容 */}</div>;
+});
+
+// 値のメモ化
+const expensiveValue = useMemo(() => {
+  return calculateExpensiveValue(data);
+}, [data]);
+
+// 関数のメモ化
+const handleClick = useCallback(() => {
+  performAction(data);
+}, [data]);
+```
+
+#### 遅延読み込み
 
 ```typescript
 // 動的インポート
-const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
-  loading: () => <div>読み込み中...</div>,
-  ssr: false,
-});
+const LazyComponent = lazy(() => import("./LazyComponent"));
 
-// 条件付きインポート
-const ChartComponent = dynamic(() => import("./ChartComponent"), {
-  loading: () => <Skeleton />,
-  ssr: false,
-});
+// 使用例
+function App() {
+  return (
+    <Suspense fallback={<div>読み込み中...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
 ```
 
-### 2. メモ化
+### 2. データ取得最適化
+
+#### キャッシュ戦略
 
 ```typescript
-// React.memoでコンポーネントをメモ化
-export const ExpensiveChart = React.memo(({ data }: ChartProps) => {
-  // 重い計算処理
-  return <Chart data={data} />;
-});
+const useCachedData = (key: string, fetcher: () => Promise<any>) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-// useMemoで計算結果をメモ化
-const processedData = useMemo(() => {
-  return data.map((item) => ({
-    ...item,
-    normalizedValue: item.value / maxValue,
-  }));
-}, [data, maxValue]);
+  useEffect(() => {
+    const cached = sessionStorage.getItem(key);
+    if (cached) {
+      setData(JSON.parse(cached));
+      setLoading(false);
+      return;
+    }
 
-// useCallbackで関数をメモ化
-const handleDataUpdate = useCallback((newData: DataType) => {
-  setData(newData);
-}, []);
+    fetcher().then((result) => {
+      setData(result);
+      sessionStorage.setItem(key, JSON.stringify(result));
+      setLoading(false);
+    });
+  }, [key, fetcher]);
+
+  return { data, loading };
+};
+```
+
+#### 並行処理
+
+```typescript
+const fetchAllData = async () => {
+  const [users, posts, comments] = await Promise.all([
+    fetchUsers(),
+    fetchPosts(),
+    fetchComments(),
+  ]);
+
+  return { users, posts, comments };
+};
 ```
 
 ### 3. 画像最適化
 
+#### Next.js Image
+
 ```typescript
 import Image from "next/image";
 
-// Next.jsの画像最適化を使用
-<Image
-  src="/chart-icon.png"
-  alt="チャートアイコン"
-  width={64}
-  height={64}
-  priority={false}
-  placeholder="blur"
-  blurDataURL="data:image/jpeg;base64,..."
-/>;
+export const OptimizedImage = ({ src, alt, width, height }) => {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+    />
+  );
+};
 ```
 
 ## トラブルシューティング
 
 ### 1. よくある問題
 
-#### 依存関係の競合
-
-```bash
-# node_modulesを削除して再インストール
-rm -rf node_modules package-lock.json
-npm install
-
-# 特定のパッケージのバージョン確認
-npm ls react
-npm ls next
-```
-
 #### TypeScript エラー
 
 ```bash
-# TypeScriptの型チェック
-npx tsc --noEmit
-
-# 設定ファイルの確認
-cat tsconfig.json
-
 # 型定義の更新
-npm install --save-dev @types/react @types/node
+npm install @types/node@latest
+
+# TypeScriptの再起動
+# VS Code: Cmd+Shift+P → "TypeScript: Restart TS Server"
 ```
 
 #### ビルドエラー
 
 ```bash
-# キャッシュをクリア
-rm -rf .next
-npm run build
+# 依存関係のクリーンアップ
+rm -rf node_modules package-lock.json
+npm install
+
+# キャッシュのクリア
+npm run build -- --no-cache
+```
+
+#### 開発サーバーの問題
+
+```bash
+# ポートの確認
+lsof -i :3000
+
+# プロセスの強制終了
+kill -9 <PID>
 
 # 開発サーバーの再起動
 npm run dev
@@ -661,92 +894,64 @@ npm run dev
 
 ### 2. パフォーマンス問題
 
-#### バンドルサイズの確認
-
-```bash
-# バンドルアナライザー
-npm run build
-npx @next/bundle-analyzer .next/static/chunks
-
-# 依存関係の確認
-npm ls --depth=0
-```
-
-#### メモリリークの確認
+#### メモリリーク
 
 ```typescript
-// useEffectのクリーンアップ
+// クリーンアップ関数の実装
 useEffect(() => {
-  const controller = new AbortController();
-
-  fetchData(controller.signal);
+  const subscription = subscribe();
 
   return () => {
-    controller.abort(); // リクエストをキャンセル
+    subscription.unsubscribe();
   };
 }, []);
 ```
 
-### 3. デバッグツール
-
-#### React Profiler
+#### 無限ループ
 
 ```typescript
-import { Profiler } from "react";
+// 依存配列の適切な設定
+useEffect(() => {
+  fetchData();
+}, [dataId]); // 必要な依存関係のみ
 
-function onRenderCallback(id: string, phase: string, actualDuration: number) {
-  console.log(`Component ${id} took ${actualDuration}ms to render`);
-}
-
-<Profiler id="Dashboard" onRender={onRenderCallback}>
-  <Dashboard />
-</Profiler>;
+// 関数のメモ化
+const fetchData = useCallback(() => {
+  // データ取得処理
+}, [dataId]);
 ```
 
-#### パフォーマンス測定
+### 3. ネットワーク問題
+
+#### API 呼び出しエラー
 
 ```typescript
-// カスタムフックでパフォーマンス測定
-const usePerformanceMonitor = (componentName: string) => {
-  useEffect(() => {
-    const start = performance.now();
-
-    return () => {
-      const end = performance.now();
-      console.log(`${componentName} render time: ${end - start}ms`);
-    };
-  });
+// リトライ機能の実装
+const fetchWithRetry = async (url: string, retries = 3) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) return response;
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
+    }
+  }
 };
 ```
 
 ## 参考資料
 
-### 公式ドキュメント
-
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [e-Stat API Documentation](https://www.e-stat.go.jp/api/)
+- [@estat/パッケージドキュメント](https://github.com/estat-org/estat-packages)
 
-### 開発ツール
+## 更新履歴
 
-- [VS Code](https://code.visualstudio.com/)
-- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
-- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
-
-### コミュニティ
-
-- [Next.js GitHub](https://github.com/vercel/next.js)
-- [React GitHub](https://github.com/facebook/react)
-- [TypeScript GitHub](https://github.com/microsoft/TypeScript)
-
-## サポート
-
-開発中に問題が発生した場合：
-
-1. **ドキュメント確認**: このガイドと関連ドキュメントを確認
-2. **GitHub Issues**: 既存の Issue を検索
-3. **チーム内相談**: チームメンバーに相談
-4. **外部リソース**: Stack Overflow、GitHub Discussions 等を活用
-
-プロジェクトの成功に向けて、積極的なコミュニケーションと継続的な改善を心がけましょう！
+- **2024-01-XX**: 初版作成
+- **2024-01-XX**: e-Stat API 統合の追加
+- **2024-01-XX**: @estat/パッケージ統合の追加
+- **2024-01-XX**: 開発者ガイドの拡充

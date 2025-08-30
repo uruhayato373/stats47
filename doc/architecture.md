@@ -2,7 +2,7 @@
 
 ## 概要
 
-地域統計ダッシュボードは、Next.js 15 の App Router を使用したフルスタック Web アプリケーションです。クライアントサイドレンダリング（CSR）とサーバーサイドレンダリング（SSR）を組み合わせて、高速でユーザーフレンドリーな体験を提供します。
+地域統計ダッシュボードは、Next.js 15 の App Router を使用したフルスタック Web アプリケーションです。クライアントサイドレンダリング（CSR）とサーバーサイドレンダリング（SSR）を組み合わせて、高速でユーザーフレンドリーな体験を提供します。e-Stat API との統合には、型安全性と開発体験を向上させる`@estat/`パッケージを使用しています。
 
 ## アーキテクチャ図
 
@@ -19,9 +19,15 @@
                        └─────────────────┘
                               │
                               ▼
+                       ┌─────────────────┐    ┌─────────────────┐
+                       │   @estat/       │    │   Recharts      │
+                       │   Packages      │    │   (グラフ表示)   │
+                       └─────────────────┘    └─────────────────┘
+                              │
+                              ▼
                        ┌─────────────────┐
-                       │   Recharts      │
-                       │   (グラフ表示)   │
+                       │   TypeScript    │
+                       │   Type Safety   │
                        └─────────────────┘
 ```
 
@@ -41,6 +47,21 @@
 - **Hooks**: useState, useEffect, useCallback
 - **Server Components**: パフォーマンス最適化
 - **Concurrent Features**: 非同期レンダリング
+
+### e-Stat API 統合
+
+#### @estat/パッケージ
+
+- **@estat/types**: e-Stat API の完全な型定義
+- **@estat/client**: e-Stat API クライアントライブラリ
+- **@estat/utils**: データ処理と変換ユーティリティ
+
+#### 型安全性の特徴
+
+- **完全な API 対応**: e-Stat API の全エンドポイントに対応
+- **自動型推論**: TypeScript による厳密な型チェック
+- **開発体験向上**: IntelliSense とエラー検出
+- **保守性**: 最新の API 仕様への自動対応
 
 ### データ可視化
 
@@ -98,139 +119,198 @@ src/
 ├── config/                 # 設定ファイル
 │   └── categories.json    # カテゴリ定義
 ├── types/                  # TypeScript型定義
-├── utils/                  # ユーティリティ関数
-└── styles/                 # スタイルファイル
-    └── globals.css
+│   └── estat/             # e-Stat API型定義（@estat/パッケージ使用）
+│       ├── index.ts       # 型定義のエクスポート
+│       ├── raw-response.ts # 生APIレスポンス型
+│       ├── processed.ts   # 処理済みデータ型
+│       ├── parameters.ts  # APIパラメータ型
+│       └── errors.ts      # エラー型定義
+├── contexts/               # React Context
+│   ├── AuthContext.tsx    # 認証状態管理
+│   └── ThemeContext.tsx   # テーマ状態管理
+├── worker/                 # Cloudflare Worker
+│   └── index.ts           # D1データベース操作API
+└── lib/                    # ユーティリティ関数
+    └── estat/             # e-Stat関連ユーティリティ
+        ├── client.ts      # APIクライアント設定
+        ├── transformers.ts # データ変換関数
+        └── validators.ts  # データ検証関数
 ```
 
-## データフロー
+## e-Stat API 統合アーキテクチャ
 
-### 1. ユーザーアクション
+### データフロー
 
-1. ユーザーが地域を選択
-2. `RegionSelector`コンポーネントで状態更新
-3. `selectedRegion`の変更を検知
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  ユーザー    │───►│ コンポーネント │───►│ @estat/     │───►│  e-Stat    │
+│  インターフェース│    │             │    │ クライアント │    │    API     │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+                           │                   │
+                           ▼                   ▼
+                    ┌─────────────┐    ┌─────────────┐
+                    │  型安全な    │    │  生API      │
+                    │  データ処理  │    │  レスポンス  │
+                    └─────────────┘    └─────────────┘
+                           │
+                           ▼
+                    ┌─────────────┐
+                    │  可視化     │
+                    │  コンポーネント │
+                    └─────────────┘
+```
 
-### 2. データ取得
+### 型定義の階層
 
-1. `EstatDataFetcher`で e-Stat API 呼び出し
-2. API キーがない場合はサンプルデータ使用
-3. 取得したデータを親コンポーネントに渡す
+```
+@estat/types
+├── EstatResponse          # 基本APIレスポンス型
+├── EstatParameter         # APIパラメータ型
+├── EstatCatalogResponse   # カタログ情報レスポンス型
+├── EstatListResponse      # リスト情報レスポンス型
+├── EstatMetaResponse      # メタデータレスポンス型
+└── EstatError            # エラー型定義
 
-### 3. データ表示
+src/types/estat/
+├── index.ts              # 型定義のエクスポート
+├── raw-response.ts       # 生APIレスポンス型（@estat/typesから拡張）
+├── processed.ts          # 処理済みデータ型
+├── parameters.ts         # APIパラメータ型（@estat/typesから拡張）
+├── errors.ts             # エラー型定義（@estat/typesから拡張）
+└── map-data.ts           # マップデータ型
+```
 
-1. `StatisticsDisplay`でデータを受け取り
-2. Recharts を使用してグラフ描画
-3. レスポンシブ対応で表示
+### API クライアントの実装
 
-## パフォーマンス最適化
+```typescript
+// src/lib/estat/client.ts
+import { EstatClient } from "@estat/client";
+import { EstatParameter, EstatResponse } from "@estat/types";
 
-### 1. コード分割
+export class EstatApiClient {
+  private client: EstatClient;
 
-- **Dynamic Imports**: 必要に応じてコンポーネント読み込み
-- **Route-based Splitting**: ページ別のバンドル分割
+  constructor() {
+    this.client = new EstatClient({
+      appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
+    });
+  }
 
-### 2. レンダリング最適化
+  async getStatisticalData(parameter: EstatParameter): Promise<EstatResponse> {
+    try {
+      return await this.client.getStatsData(parameter);
+    } catch (error) {
+      throw new EstatApiError("統計データの取得に失敗しました", error);
+    }
+  }
 
-- **useCallback**: 関数のメモ化
-- **useMemo**: 計算結果のメモ化
-- **React.memo**: コンポーネントのメモ化
+  async getCatalogInfo(statsDataId: string): Promise<EstatCatalogResponse> {
+    try {
+      return await this.client.getStatsDataCatalog({
+        statsDataId,
+        lang: "J",
+      });
+    } catch (error) {
+      throw new EstatApiError("カタログ情報の取得に失敗しました", error);
+    }
+  }
+}
+```
 
-### 3. データ取得最適化
+## 認証・セキュリティ
 
-- **useEffect**: 依存配列の最適化
-- **エラーハンドリング**: フォールバックデータの提供
+### JWT 認証
 
-## セキュリティ
+- **トークンベース認証**: セッション管理
+- **bcrypt**: パスワードハッシュ化（salt rounds: 12）
+- **自動ログアウト**: 7 日間の有効期限
 
-### 1. 環境変数
+#### Cloudflare D1
 
-- **NEXT*PUBLIC***: クライアントサイドで使用可能
-- **API キー**: サーバーサイドでのみ使用
+- **SQLite ベース**: エッジデータベース
+- **ユーザー管理**: アカウント情報の保存
+- **セッション管理**: アクティブセッションの追跡
 
-### 2. 入力検証
+### セキュリティ設計
 
-- **TypeScript**: 型安全性の確保
-- **Props Validation**: コンポーネントの入力検証
+#### API 保護
 
-### 3. API 呼び出し
+- **認証ガード**: 保護されたページへのアクセス制御
+- **JWT 検証**: トークンの有効性確認
+- **CORS 設定**: 適切なオリジン制御
 
-- **CORS**: 適切なオリジン制御
-- **Rate Limiting**: API 呼び出し制限の考慮
+#### データ保護
 
-## スケーラビリティ
+- **プリペアドステートメント**: SQL インジェクション対策
+- **入力バリデーション**: フロントエンド・バックエンド両方
+- **HTTPS 通信**: 本番環境での暗号化通信
 
-### 1. 水平スケーリング
+## パフォーマンス・スケーラビリティ
 
-- **Stateless Design**: セッション状態の外部化
-- **CDN**: 静的アセットの配信最適化
+### フロントエンド最適化
 
-### 2. 垂直スケーリング
+- **コード分割**: 動的インポートによる遅延読み込み
+- **画像最適化**: Next.js Image コンポーネント
+- **キャッシュ戦略**: 静的データの効率的な提供
 
-- **Component Lazy Loading**: 必要に応じた読み込み
-- **Image Optimization**: Next.js の画像最適化
+### バックエンド最適化
 
-### 3. データスケーリング
+- **Cloudflare Workers**: エッジでの高速処理
+- **D1 データベース**: エッジでのデータアクセス
+- **非同期処理**: 並行処理による応答時間短縮
 
-- **Pagination**: 大量データの分割表示
-- **Virtual Scrolling**: 長いリストの最適化
+### スケーラビリティ
+
+- **Cloudflare Workers**: 自動的なスケーリング
+- **D1 データベース**: グローバル分散
+- **CDN**: 静的アセットの高速配信
+
+## 開発・デプロイ
+
+### 開発環境
+
+- **TypeScript**: 型安全性と開発体験の向上
+- **ESLint**: コード品質の維持
+- **Tailwind CSS**: 効率的なスタイリング
+
+### ビルド・デプロイ
+
+- **Next.js**: 最適化されたビルド
+- **Cloudflare Pages**: エッジでのデプロイ
+- **環境変数**: 適切な設定管理
 
 ## 監視・ログ
 
-### 1. パフォーマンス監視
+### フロントエンド監視
 
 - **Core Web Vitals**: ユーザー体験の測定
-- **Bundle Analyzer**: バンドルサイズの分析
+- **エラー追跡**: クラッシュレポートの収集
+- **パフォーマンス測定**: 読み込み時間の監視
 
-### 2. エラー監視
+### バックエンド監視
 
-- **Error Boundaries**: React エラーの捕捉
-- **Console Logging**: 開発時のデバッグ情報
+- **API 応答時間**: バックエンド処理の監視
+- **エラー率**: システムの健全性確認
+- **リソース使用量**: メモリ・CPU 使用率の監視
 
-### 3. ユーザー行動分析
+## 今後の拡張予定
 
-- **Analytics**: ページビュー・ユーザー行動の追跡
-- **A/B Testing**: 機能の効果測定
+### 機能拡張
+
+- **ソーシャルログイン**: 利便性の向上
+- **権限管理**: ロールベースアクセス制御
+- **API 制限**: レート制限の実装
+
+### 技術的拡張
+
+- **GraphQL**: 効率的なデータ取得
+- **WebSocket**: リアルタイムデータ更新
+- **PWA**: オフライン対応とネイティブアプリ体験
 
 ## 更新履歴
 
-### 2024 年 8 月 28 日 - アトミックデザイン構造の実装
-
-- **変更内容**: コンポーネント構造をアトミックデザインの5階層に最適化
-- **影響範囲**: コンポーネント階層、ファイル構造、インポートパス
-- **新機能**: atoms、molecules、organisms、templates、pages階層
-- **技術的変更**: アトミックデザイン原則、コンポーネント分類、再利用性向上
-
-### 2024 年 8 月 28 日 - ヘッダー・フッターレイアウト実装
-
-- **変更内容**: ヘッダーとフッターコンポーネントを追加し、レイアウトを最適化
-- **影響範囲**: レイアウト構造、ナビゲーション、UI/UX
-- **新機能**: ヘッダーナビゲーション、フッター情報、モバイルメニュー
-- **技術的変更**: レスポンシブデザイン、アクセシビリティ、SEO 対応
-
-### 2024 年 8 月 28 日 - カテゴリベースダッシュボード実装
-
-- **変更内容**: ダッシュボードをカテゴリベースの構造に変更
-- **影響範囲**: ルーティング構造、コンポーネント階層、ナビゲーション
-- **新機能**: カテゴリ一覧、カテゴリ詳細、サブカテゴリ詳細ページ
-- **技術的変更**: 動的ルーティング、パンくずリスト、検索機能
-
-## 今後の拡張性
-
-### 1. 機能拡張
-
-- **多言語対応**: i18n の実装
-- **テーマ切り替え**: ダークモード対応
-- **データエクスポート**: CSV/PDF 出力
-
-### 2. 技術的拡張
-
-- **PWA**: プログレッシブ Web アプリ化
-- **GraphQL**: 柔軟なデータ取得
-- **WebSocket**: リアルタイムデータ更新
-
-### 3. インフラ拡張
-
-- **Docker**: コンテナ化
-- **CI/CD**: 自動化パイプライン
-- **Monitoring**: 本格的な監視システム
+- **2024-01-XX**: 初版作成
+- **2024-01-XX**: e-Stat API 統合の追加
+- **2024-01-XX**: @estat/パッケージ統合の追加
+- **2024-01-XX**: 認証機能の実装
+- **2024-01-XX**: アーキテクチャ図の更新
