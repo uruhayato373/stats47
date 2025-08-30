@@ -1,91 +1,39 @@
-# 地域統計ダッシュボード プロジェクト
+# プロジェクトドキュメント
 
-## 概要
-
-このプロジェクトは、e-Stat API を使用して日本の地域統計データを可視化する Web アプリケーションです。Next.js 15 と React 19 を使用して構築されており、地域別の人口、GDP、失業率などの統計情報をグラフやチャートで表示します。
-
-## プロジェクト情報
-
-- **プロジェクト名**: stats47
-- **フレームワーク**: Next.js 15.5.2
-- **React バージョン**: 19.1.0
-- **言語**: TypeScript
-- **スタイリング**: Tailwind CSS
-- **グラフライブラリ**: Recharts
-- **API**: e-Stat API
+このディレクトリには、stats47 プロジェクトの設計書と開発者向けドキュメントが含まれています。
 
 ## ドキュメント構成
 
-```
-doc/
-├── README.md                    # このファイル（プロジェクト概要）
-├── architecture.md              # システムアーキテクチャ
-├── api-design.md                # API設計仕様
-├── component-design.md          # コンポーネント設計
-├── database-design.md           # データ設計
-├── deployment.md                # デプロイメント手順
-├── development-guide.md         # 開発者ガイド
-└── user-manual.md               # ユーザーマニュアル
-```
+### 📋 設計書
 
-## 主要機能
+- **[アーキテクチャ設計書](architecture.md)** - システム全体のアーキテクチャと技術構成
+- **[API 設計書](api-design.md)** - API エンドポイントとデータフローの設計
+- **[コンポーネント設計書](component-design.md)** - React コンポーネントの設計原則と構造
+- **[配色システム設計書](color-system.md)** - UI/UX の配色システムとデザインガイドライン
 
-- **地域選択**: 都道府県別のデータ表示
-- **統計可視化**: 人口推移、GDP 指数、失業率のグラフ表示
-- **データ取得**: e-Stat API からの自動データ取得
-- **レスポンシブデザイン**: モバイル・デスクトップ対応
-- **サンプルデータ**: API キーがない場合のフォールバック機能
+### 🛠️ 開発者向け
 
-## 技術スタック
+- **[開発者ガイド](development-guide.md)** - 開発環境のセットアップと開発手順
+- **[e-Stat API 統合ガイド](estat-integration.md)** - e-Stat API の統合方法と使用方法
 
-### フロントエンド
+## ドキュメントの更新ルール
 
-- Next.js 15 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS 4
+1. **コード変更時**: 関連するドキュメントも必ず更新する
+2. **新機能追加時**: 適切な設計書に記載を追加する
+3. **API 仕様変更時**: `api-design.md`を更新する
+4. **コンポーネント追加・変更時**: `component-design.md`を更新する
+5. **配色・UI 変更時**: `color-system.md`を更新する
 
-### データ可視化
+## ドキュメントの書き方
 
-- Recharts
-- D3.js
+- Markdown 形式で記述
+- コード例は適切なシンタックスハイライトを使用
+- 図表は必要に応じて Mermaid や PlantUML を使用
+- 更新履歴を記録する
 
-### 開発・ビルド
+## 参考資料
 
-- Turbopack
-- ESLint
-- PostCSS
-
-## 開発環境
-
-- **Node.js**: 18.x 以上
-- **npm**: 9.x 以上
-- **ポート**: 3000 (デフォルト)
-
-## クイックスタート
-
-```bash
-# 依存関係のインストール
-npm install
-
-# 開発サーバーの起動
-npm run dev
-
-# ビルド
-npm run build
-
-# 本番サーバーの起動
-npm start
-```
-
-## ライセンス
-
-このプロジェクトは MIT ライセンスの下で公開されています。
-
-## 貢献
-
-プロジェクトへの貢献を歓迎します。Issue や Pull Request をお気軽にお送りください。
-
-## 連絡先
-
-プロジェクトに関する質問や提案がある場合は、GitHub の Issue を作成してください。
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [e-Stat API Documentation](https://www.e-stat.go.jp/api/)

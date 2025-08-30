@@ -53,7 +53,7 @@ export default function Sidebar() {
             <li>
               <a
                 className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:bg-gray-200 light:text-gray-800 light:hover:bg-gray-200 light:focus:bg-gray-200"
-                href="#"
+                href="/"
               >
                 <svg
                   className="size-3.5"
@@ -212,6 +212,39 @@ export default function Sidebar() {
                 <span className="ms-auto inline-block py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-500 light:bg-green-100 light:text-green-800">
                   102
                 </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
+          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+            e-STAT API
+          </span>
+          <ul className="flex flex-col gap-y-1">
+            <li>
+              <a
+                className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:text-gray-500 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800"
+                href="/estat"
+              >
+                <svg
+                  className="size-3.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14,2 14,8 20,8" />
+                  <path d="m15 15-3-3 3-3" />
+                  <path d="M4 12h10" />
+                </svg>
+                メタ情報
               </a>
             </li>
           </ul>

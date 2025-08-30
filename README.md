@@ -333,6 +333,7 @@ npm run lint     # ESLint実行
 - [アーキテクチャ](./doc/architecture.md) - システム設計とアーキテクチャ
 - [コンポーネント設計](./doc/component-design.md) - React コンポーネントの設計原則
 - [API 設計](./doc/api-design.md) - バックエンド API 仕様
+- [配色システム設計](./doc/color-system.md) - UI/UX の配色システムとデザインガイドライン
 - [開発者ガイド](./doc/development-guide.md) - 開発環境と手順
 - [e-Stat 統合ガイド](./doc/estat-integration.md) - e-Stat API 統合の詳細
 
