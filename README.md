@@ -1,334 +1,71 @@
-# 地域統計ダッシュボード (Stats47)
+# stats47 - 日本の地域統計データ可視化システム
 
-日本の地域統計データを可視化する Web アプリケーションです。e-Stat API を使用して都道府県別の統計データを取得し、インタラクティブなグラフとチャートで表示します。
+e-Stat API を使用して日本の地域統計データを可視化する Web アプリケーションです。Next.js 15 と React 19 を使用して構築されています。
 
-## 主要機能
+## 🚀 主要機能
 
-- 🗾 **地域選択**: 都道府県別の統計データ表示
-- 📊 **データ可視化**: 人口推移、GDP 指数、失業率などをグラフで表示
-- 🌍 **レスポンシブデザイン**: モバイル・タブレット・デスクトップ対応
-- 🔄 **リアルタイムデータ**: e-Stat API から最新データを取得
-- 🔓 **基本機能**: ログインなしでもダッシュボードの基本機能を利用可能
-- 🔐 **プレミアム機能**: ログインで CSV ダウンロード、高度なチャート等を利用
-- 🎨 **テーマ切り替え**: ライト・ダークモード対応
-- 🚀 **エッジコンピューティング**: Cloudflare Workers で高速な API 処理
+- **地域統計データの可視化**: e-Stat API から取得したデータをグラフやチャートで表示
+- **地域選択**: 都道府県・市区町村レベルの詳細な地域選択
+- **カテゴリ別データ表示**: 人口、経済、社会などの分野別統計情報
+- **ダークモード対応**: 自動システム設定検出と手動切り替え
+- **認証システム**: Cloudflare D1 を使用したユーザー管理
+- **メタ情報管理**: e-Stat API データの効率的な保存・検索
 
-## 技術スタック
+## 🛠️ 技術スタック
 
-### フロントエンド
+- **フロントエンド**: Next.js 15, React 19, TypeScript
+- **スタイリング**: Tailwind CSS 4
+- **データ可視化**: Recharts, D3.js
+- **データベース**: Cloudflare D1 (SQLite)
+- **認証**: JWT, bcryptjs
+- **API**: e-Stat API 統合 (`@estat/` パッケージ)
+- **開発・ビルド**: Turbopack, ESLint
 
-- **Next.js 15.5.2** - React フレームワーク (App Router 使用)
-- **React 19.1.0** - UI ライブラリ
-- **TypeScript** - 型安全な開発
-- **Tailwind CSS 4** - ユーティリティファースト CSS
-
-### バックエンド・API
-
-- **Next.js API Routes** - サーバーサイド API
-- **bcryptjs** - パスワードハッシュ化
-- **jsonwebtoken** - JWT 認証
-- **e-Stat API** - 政府統計データ取得
-
-### データベース・インフラ
-
-- **Cloudflare D1** - SQLite ベースのエッジデータベース
-- **Cloudflare Workers** - エッジサーバーレス実行環境
-
-### 型定義・ライブラリ
-
-- **@estat/types** - e-Stat API の型定義パッケージ
-- **@estat/client** - e-Stat API クライアントライブラリ
-- **@estat/utils** - e-Stat データ処理ユーティリティ
-
-## プロジェクト構成
+## 📦 プロジェクト構成
 
 ```
 stats47/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── api/               # API Routes
-│   │   │   ├── auth/         # 認証関連API
-│   │   │   │   ├── login/    # ログインAPI
-│   │   │   │   ├── logout/   # ログアウトAPI
-│   │   │   │   ├── register/ # ユーザー登録API
-│   │   │   │   └── me/       # ユーザー情報取得API
-│   │   │   └── data/         # データ関連API
-│   │   │       └── export/   # データエクスポートAPI
-│   │   │           └── csv/  # CSVダウンロードAPI
-│   │   ├── auth/             # 認証ページ
-│   │   │   ├── login/        # ログインページ
-│   │   │   └── register/     # 登録ページ
-│   │   ├── dashboard/        # ダッシュボード（認証不要）
-│   │   ├── layout.tsx        # ルートレイアウト
-│   │   └── page.tsx          # ホームページ
-│   ├── components/            # Reactコンポーネント
-│   │   ├── auth/             # 認証関連コンポーネント
-│   │   │   ├── LoginForm.tsx # ログインフォーム
-│   │   │   ├── RegisterForm.tsx # 登録フォーム
-│   │   │   ├── AuthGuard.tsx # 認証ガード
-│   │   │   └── UserMenu.tsx  # ユーザーメニュー
-│   │   ├── dashboard/        # ダッシュボード関連
-│   │   │   ├── PublicDashboard/      # 認証不要な基本ダッシュボード
-│   │   │   ├── AuthRequiredFeatures/ # 認証が必要な高度な機能
-│   │   │   │   ├── CSVDownloadButton.tsx # CSVダウンロードボタン
-│   │   │   │   └── AuthRequiredFeatures.tsx # プレミアム機能一覧
-│   │   │   └── DataVisualization/    # データ可視化
-│   │   ├── atoms/            # アトムコンポーネント
-│   │   │   └── RegionSelector/ # 地域選択
-│   │   ├── molecules/        # モレキュールコンポーネント
-│   │   │   └── StatisticsDisplay/ # 統計表示
-│   │   ├── organisms/        # オーガニズムコンポーネント
-│   │   │   └── EstatDataFetcher/ # e-Statデータ取得
-│   │   └── layout/           # レイアウト関連
-│   │       └── Header/       # ヘッダー
-│   ├── contexts/             # React Context
-│   │   ├── AuthContext.tsx   # 認証状態管理
-│   │   └── ThemeContext.tsx  # テーマ状態管理
-│   ├── types/                # 型定義
-│   │   └── estat/           # e-Stat API型定義（@estat/パッケージ使用）
-│   └── worker/               # Cloudflare Worker
-│       └── index.ts          # D1データベース操作API
-├── doc/                      # プロジェクトドキュメント
-├── data/                     # データファイル
-├── schema.sql               # データベーススキーマ
-├── wrangler.toml           # Cloudflare Workers設定
-└── env.example             # 環境変数サンプル
+├── README.md                 # このファイル
+├── .cursorrules             # Cursor AI のルール設定
+├── database/                # データベース管理
+│   ├── README.md           # データベース管理の基本
+│   ├── RULES.md            # データベース管理ルール
+│   ├── DEVELOPER_GUIDE.md  # 開発者向けガイドライン
+│   ├── manage.sh           # データベース管理スクリプト
+│   ├── schemas/            # スキーマ定義
+│   ├── migrations/         # マイグレーションファイル
+│   └── backups/            # バックアップファイル
+├── src/                     # ソースコード
+│   ├── app/                # Next.js App Router
+│   ├── components/         # React コンポーネント
+│   ├── contexts/           # React Context
+│   ├── lib/                # ユーティリティライブラリ
+│   ├── services/           # API サービス
+│   └── types/              # TypeScript 型定義
+├── doc/                     # プロジェクトドキュメント
+├── public/                  # 静的ファイル
+└── package.json             # 依存関係とスクリプト
 ```
 
-## 機能レベル
+## 🗄️ データベース管理
 
-### 🟢 基本機能（認証不要）
+データベース操作を行う前に、必ず以下のドキュメントを読んでください：
 
-- **統計データの閲覧**: 地域別の基本統計情報
-- **グラフ・チャート表示**: 基本的なデータ可視化
-- **地域選択**: 都道府県別のデータ表示
-- **レスポンシブ対応**: モバイル・デスクトップ対応
-- **ダークモード**: テーマ切り替え
+- **[データベース管理ルール](./database/RULES.md)** - 必須ルールとガイドライン
+- **[開発者向けガイド](./database/DEVELOPER_GUIDE.md)** - 実践的な操作方法
+- **[基本使用方法](./database/README.md)** - 基本的な使用方法
 
-### 🔒 プレミアム機能（認証必要）
-
-- **CSV データダウンロード**: 統計データの CSV 形式エクスポート
-- **高度なチャート**: 3D チャート、インタラクティブグラフ
-- **データエクスポート**: PDF、Excel 形式でのエクスポート
-- **カスタムレポート**: 独自の分析レポート作成
-- **API アクセス**: プログラムによるデータ取得
-- **優先サポート**: 専任サポートチーム
-
-## セットアップ
-
-### 必要な環境
-
-- **Node.js 18+**
-- **npm 9+**
-- **Cloudflare アカウント** (D1 データベース使用時)
-
-### インストールと起動
+### クイックスタート
 
 ```bash
-# リポジトリのクローン
-git clone <repository-url>
-cd stats47
+# データベース初期化
+./database/manage.sh init
 
-# 依存関係のインストール
-npm install
-
-# e-Stat関連パッケージのインストール
-npm install @estat/types @estat/client @estat/utils
-
-# 環境変数の設定
-cp env.example .env.local
-# .env.localファイルを編集して必要な値を設定
-
-# 開発サーバーの起動
-npm run dev
+# 状態確認
+./database/manage.sh status
 ```
 
-開発サーバーが起動したら、[http://localhost:3000](http://localhost:3000) でアプリケーションにアクセスできます。
-
-### e-Stat API 設定
-
-```bash
-# e-Stat APIキーの取得
-# https://www.e-stat.go.jp/api/ でアプリケーションIDを取得
-
-# 環境変数の設定
-echo "NEXT_PUBLIC_ESTAT_APP_ID=your-estat-api-app-id" >> .env.local
-```
-
-### Cloudflare D1 データベースの設定
-
-1. **Cloudflare アカウントの作成**
-
-   - [Cloudflare](https://cloudflare.com)でアカウントを作成
-
-2. **D1 データベースの作成**
-
-   ```bash
-   # Wrangler CLIのインストール
-   npm install -g wrangler
-
-   # Cloudflareにログイン
-   wrangler login
-
-   # D1 データベースの作成
-   wrangler d1 create stats47-auth-db
-
-   # データベースIDを取得してwrangler.tomlに設定
-   ```
-
-3. **データベーススキーマの適用**
-
-   ```bash
-   # スキーマの適用
-   wrangler d1 execute stats47-auth-db --file=./schema.sql
-   ```
-
-4. **環境変数の設定**
-   ```env
-   CLOUDFLARE_API_TOKEN=your-cloudflare-api-token
-   CLOUDFLARE_ACCOUNT_ID=your-cloudflare-account-id
-   CLOUDFLARE_D1_DATABASE_ID=your-d1-database-id
-   JWT_SECRET=your-super-secret-jwt-key-here
-   ```
-
-### 本番ビルド
-
-```bash
-# 本番用ビルド
-npm run build
-
-# 本番サーバーの起動
-npm start
-```
-
-## 環境変数の設定
-
-### 認証関連
-
-```env
-# JWT認証用のシークレットキー
-JWT_SECRET=your-super-secret-jwt-key-here
-
-# Cloudflare D1 データベース設定
-CLOUDFLARE_API_TOKEN=your-cloudflare-api-token
-CLOUDFLARE_ACCOUNT_ID=your-cloudflare-account-id
-CLOUDFLARE_D1_DATABASE_ID=your-d1-database-id
-```
-
-### e-Stat API
-
-```env
-# e-Stat API設定
-NEXT_PUBLIC_ESTAT_APP_ID=your-estat-api-app-id
-```
-
-## e-Stat API 統合
-
-### 型定義の利用
-
-このプロジェクトでは、e-Stat API の型安全性を確保するために`@estat/`パッケージを使用しています：
-
-```typescript
-import { EstatResponse, EstatParameter } from "@estat/types";
-
-// e-Stat APIレスポンスの型安全な処理
-const handleEstatResponse = (response: EstatResponse) => {
-  // 型安全なデータアクセス
-  const data = response.GET_STATS_DATA.STATISTICAL_DATA.DATA_INF;
-  // ...
-};
-```
-
-### 利用可能なパッケージ
-
-- **@estat/types**: e-Stat API の完全な型定義
-- **@estat/client**: e-Stat API クライアントライブラリ
-- **@estat/utils**: データ処理と変換ユーティリティ
-
-### 型定義の特徴
-
-- **完全な API 対応**: e-Stat API の全エンドポイントに対応
-- **型安全性**: TypeScript による厳密な型チェック
-- **自動更新**: 最新の API 仕様に対応
-- **開発体験**: IntelliSense とエラー検出の向上
-
-## 認証機能
-
-### ユーザー登録
-
-- メールアドレス、ユーザー名、パスワードでアカウント作成
-- パスワードは bcrypt でハッシュ化して保存
-- 重複チェック（メールアドレス・ユーザー名）
-
-### ログイン・ログアウト
-
-- JWT トークンによる認証
-- セッション管理（Cloudflare D1）
-- 自動ログアウト（トークン期限切れ）
-
-### 認証ガード
-
-- 保護されたページへのアクセス制御
-- 未認証ユーザーの自動リダイレクト
-- ローディング状態の管理
-
-## CSV ダウンロード機能
-
-### 使用方法
-
-1. **ログイン**: アカウントにログイン
-2. **データ選択**: ダウンロードしたいデータを選択
-3. **CSV ダウンロード**: CSV ダウンロードボタンをクリック
-4. **ファイル保存**: ブラウザで CSV ファイルが自動ダウンロード
-
-### 対応データ形式
-
-- 地域統計データ
-- 人口・経済指標
-- カスタムデータセット
-- テーブル形式のデータ
-
-### セキュリティ
-
-- JWT トークンによる認証
-- ユーザー別のアクセス制御
-- 不正アクセスの防止
-
-## 開発
-
-### コマンド
-
-```bash
-npm run dev      # 開発サーバー起動
-npm run build    # 本番ビルド
-npm start        # 本番サーバー起動
-npm run lint     # ESLint実行
-```
-
-### アーキテクチャ
-
-このプロジェクトは以下の設計原則に従って構築されています：
-
-- **コンポーネントベース設計**: 再利用可能な React コンポーネント
-- **関心の分離**: ビジネスロジックとプレゼンテーション層の分離
-- **型安全性**: TypeScript による厳密な型チェック
-- **レスポンシブデザイン**: モバイルファーストアプローチ
-- **エッジファースト**: Cloudflare Workers による高速な API 処理
-- **セキュリティ**: JWT 認証とパスワードハッシュ化
-- **段階的機能提供**: 基本機能は無料、高度な機能は認証必要
-- **e-Stat 統合**: @estat/パッケージによる型安全な API 統合
-
-詳細は[doc/architecture.md](./doc/architecture.md)を参照してください。
-
-## セキュリティ
-
-- **パスワードハッシュ化**: bcrypt（salt rounds: 12）
-- **JWT 認証**: 7 日間の有効期限
-- **CORS 設定**: 適切なオリジン制御
-- **SQL インジェクション対策**: プリペアドステートメント使用
-- **API 保護**: 認証が必要な機能の適切な制御
-
-## ドキュメント
+## 📚 ドキュメント
 
 - [アーキテクチャ](./doc/architecture.md) - システム設計とアーキテクチャ
 - [コンポーネント設計](./doc/component-design.md) - React コンポーネントの設計原則
@@ -337,18 +74,150 @@ npm run lint     # ESLint実行
 - [開発者ガイド](./doc/development-guide.md) - 開発環境と手順
 - [e-Stat 統合ガイド](./doc/estat-integration.md) - e-Stat API 統合の詳細
 
-## 貢献
+## 🚀 セットアップ
+
+### 前提条件
+
+- Node.js 18.x 以上
+- npm 9.x 以上
+- Cloudflare アカウント（D1 データベース用）
+
+### インストール
+
+1. **リポジトリのクローン**
+
+   ```bash
+   git clone <repository-url>
+   cd stats47
+   ```
+
+2. **依存関係のインストール**
+
+   ```bash
+   npm install
+   ```
+
+3. **環境変数の設定**
+
+   ```bash
+   cp env.example .env.local
+   # .env.localファイルを編集して必要な値を設定
+   ```
+
+4. **e-Stat API 統合パッケージのインストール**
+
+   ```bash
+   npm install @estat/types @estat/client @estat/utils
+   ```
+
+5. **データベースの初期化**
+
+   ```bash
+   ./database/manage.sh init
+   ```
+
+6. **開発サーバーの起動**
+   ```bash
+   npm run dev
+   ```
+
+## 🔑 環境変数
+
+以下の環境変数を `.env.local` に設定してください：
+
+```bash
+# e-Stat API
+NEXT_PUBLIC_ESTAT_APP_ID=your_estat_app_id
+
+# JWT認証
+JWT_SECRET=your_jwt_secret
+
+# Cloudflare設定
+CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+CLOUDFLARE_D1_DATABASE_ID=your_d1_database_id
+
+# Google Analytics
+NEXT_PUBLIC_GA_MEASUREMENT_ID=your_ga_measurement_id
+```
+
+## 📊 e-Stat API 統合
+
+このプロジェクトでは、e-Stat API の型安全性と使いやすさを向上させるために、以下のパッケージを使用しています：
+
+### 利用可能なパッケージ
+
+- **`@estat/types`**: e-Stat API の型定義
+- **`@estat/client`**: API クライアントとデータ取得
+- **`@estat/utils`**: データ変換とユーティリティ
+
+### 主要機能
+
+- **型安全な API 呼び出し**: TypeScript による完全な型サポート
+- **効率的なデータ処理**: 自動データ変換と正規化
+- **エラーハンドリング**: 構造化されたエラー処理
+- **パフォーマンス最適化**: キャッシュとバッチ処理
+
+## 🧪 テスト
+
+```bash
+# ユニットテストの実行
+npm test
+
+# テストカバレッジの確認
+npm run test:coverage
+```
+
+## 📦 ビルド
+
+```bash
+# 本番ビルド
+npm run build
+
+# 静的エクスポート
+npm run export
+```
+
+## 🚀 デプロイ
+
+### Cloudflare Pages
+
+1. **Cloudflare Pages でプロジェクトを作成**
+2. **ビルド設定**
+   - ビルドコマンド: `npm run build`
+   - 出力ディレクトリ: `out`
+3. **環境変数の設定**
+4. **デプロイ**
+
+### その他のプラットフォーム
+
+- **Vercel**: `npm run build` でビルド
+- **Netlify**: `npm run build` でビルド
+- **自前サーバー**: `npm run export` で静的ファイルを生成
+
+## 🤝 コントリビューション
 
 1. このリポジトリをフォーク
-2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-feature`)
-3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
+2. 機能ブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
 4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. プルリクエストを作成
 
-## ライセンス
+## 📄 ライセンス
 
 このプロジェクトは MIT ライセンスの下で公開されています。
 
-## お問い合わせ
+## 📞 サポート
 
-プロジェクトに関する質問や提案がある場合は、GitHub の Issue を作成してください。
+問題が発生した場合や質問がある場合は、以下を確認してください：
+
+1. **[データベース管理ガイド](./database/DEVELOPER_GUIDE.md)** - トラブルシューティング
+2. **[e-Stat 統合ガイド](./doc/estat-integration.md)** - API 関連の問題
+3. **[開発者ガイド](./doc/development-guide.md)** - 開発環境の問題
+
+## 🔄 更新履歴
+
+- **2024-12-19**: データベース管理システムの実装
+- **2024-12-19**: e-Stat API 統合の実装
+- **2024-12-19**: 認証システムの実装
+- **2024-12-19**: ダークモード機能の実装

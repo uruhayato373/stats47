@@ -5,6 +5,8 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import StatsIdInput from "@/components/estat/StatsIdInput";
 import MetaInfoCard from "@/components/estat/MetaInfoCard";
+import MetadataSaver from "@/components/estat/MetadataSaver";
+import SavedMetadataDisplay from "@/components/estat/SavedMetadataDisplay";
 import { estatAPI } from "@/services/estat-api";
 import { EstatMetaInfoResponse } from "@/types/estat";
 
@@ -13,6 +15,9 @@ export default function EstatMetaPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentStatsId, setCurrentStatsId] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"fetch" | "save" | "saved">(
+    "fetch"
+  );
 
   const handleFetchMetaInfo = async (statsDataId: string) => {
     setLoading(true);
@@ -39,6 +44,12 @@ export default function EstatMetaPage() {
     }
   };
 
+  const tabs = [
+    { id: "fetch", label: "メタ情報取得", icon: "📊" },
+    { id: "save", label: "メタ情報保存", icon: "💾" },
+    { id: "saved", label: "保存済みデータ", icon: "🗄️" },
+  ] as const;
+
   return (
     <>
       <Header />
@@ -49,7 +60,7 @@ export default function EstatMetaPage() {
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div>
               <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
-                e-STAT メタ情報
+                e-STAT メタ情報管理
               </h1>
               {currentStatsId && (
                 <p className="text-sm text-gray-600 dark:text-neutral-400 mt-1">
@@ -115,15 +126,48 @@ export default function EstatMetaPage() {
             </div>
           </div>
 
+          {/* タブナビゲーション */}
+          <div className="border-b border-gray-200 dark:border-neutral-700">
+            <nav className="flex space-x-8 px-4">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`py-3 px-1 border-b-2 font-medium text-sm ${
+                    activeTab === tab.id
+                      ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
+                  }`}
+                >
+                  <span className="mr-2">{tab.icon}</span>
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
           <div className="p-4 bg-white dark:bg-neutral-900">
             <div className="max-w-7xl mx-auto space-y-4">
-              <StatsIdInput onSubmit={handleFetchMetaInfo} loading={loading} />
+              {/* メタ情報取得タブ */}
+              {activeTab === "fetch" && (
+                <>
+                  <StatsIdInput
+                    onSubmit={handleFetchMetaInfo}
+                    loading={loading}
+                  />
+                  <MetaInfoCard
+                    metaInfo={metaInfo}
+                    loading={loading}
+                    error={error}
+                  />
+                </>
+              )}
 
-              <MetaInfoCard
-                metaInfo={metaInfo}
-                loading={loading}
-                error={error}
-              />
+              {/* メタ情報保存タブ */}
+              {activeTab === "save" && <MetadataSaver />}
+
+              {/* 保存済みデータタブ */}
+              {activeTab === "saved" && <SavedMetadataDisplay />}
             </div>
           </div>
         </div>
