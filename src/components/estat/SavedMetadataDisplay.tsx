@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useStyles } from "@/hooks/useStyles";
 
 interface SavedMetadata {
   id: string;
@@ -20,6 +21,8 @@ export default function SavedMetadataDisplay() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const styles = useStyles();
+
   // サンプルデータ（実際の実装ではCloudflare D1から取得）
   const sampleData: SavedMetadata[] = [
     {
@@ -35,7 +38,7 @@ export default function SavedMetadataDisplay() {
     {
       id: "2",
       statsDataId: "0003348237",
-      statName: "世帯数",
+      statName: "世帯数調査",
       title: "世帯数調査（令和5年）",
       category: "人口・世帯",
       itemName: "一般世帯数",
@@ -80,46 +83,40 @@ export default function SavedMetadataDisplay() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/20 dark:border-red-800">
-        <p className="text-red-800 dark:text-red-200">エラー: {error}</p>
+      <div className={styles.message.error}>
+        <p className={styles.text.body}>エラー: {error}</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/20 dark:border-blue-800">
-        <h3 className="text-lg font-medium text-blue-900 dark:text-blue-100 mb-2">
-          保存済みメタデータ
-        </h3>
-        <p className="text-blue-800 dark:text-blue-200 text-sm">
+    <div className={styles.layout.section}>
+      <div className={styles.header.primary}>
+        <h3 className={styles.heading.lg}>保存済みメタデータ</h3>
+        <p className={styles.text.secondary}>
           データベースに保存されているe-Statメタ情報を表示・検索できます。
         </p>
       </div>
 
       {/* 検索・フィルター */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className={styles.card.base}>
+        <div className={styles.layout.grid}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
-              キーワード検索
-            </label>
+            <label className={styles.label.base}>キーワード検索</label>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="統計名、タイトル、項目名で検索..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100"
+              className={styles.input.base}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
-              カテゴリ
-            </label>
+            <label className={styles.label.base}>カテゴリ</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100"
+              className={styles.input.base}
             >
               <option value="">すべてのカテゴリ</option>
               {categories.map((category) => (
@@ -133,14 +130,10 @@ export default function SavedMetadataDisplay() {
       </div>
 
       {/* 統計情報 */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+      <div className={styles.card.base}>
         <div className="flex items-center justify-between mb-4">
-          <h4 className="text-lg font-medium text-gray-900 dark:text-neutral-100">
-            検索結果
-          </h4>
-          <span className="text-sm text-gray-600 dark:text-neutral-400">
-            {filteredMetadata.length}件
-          </span>
+          <h4 className={styles.heading.lg}>検索結果</h4>
+          <span className={styles.text.muted}>{filteredMetadata.length}件</span>
         </div>
 
         {filteredMetadata.length === 0 ? (

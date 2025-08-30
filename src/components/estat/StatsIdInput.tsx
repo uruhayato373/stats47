@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SAMPLE_STATS_DATA_IDS } from "@/lib/constants";
+import { useStyles } from "@/hooks/useStyles";
 
 interface StatsIdInputProps {
   onSubmit: (statsDataId: string) => void;
@@ -10,6 +11,7 @@ interface StatsIdInputProps {
 
 export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
   const [statsDataId, setStatsDataId] = useState<string>("");
+  const styles = useStyles();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,33 +26,28 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 dark:bg-neutral-800 dark:border-neutral-700">
-      <h2 className="text-base font-medium text-gray-800 mb-3 dark:text-neutral-200">
-        統計表IDを入力
-      </h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className={styles.card.compact}>
+      <h2 className={styles.heading.md}>統計表IDを入力</h2>
+
+      <form onSubmit={handleSubmit} className={styles.layout.row}>
         <div>
-          <label
-            htmlFor="statsDataId"
-            className="block text-sm font-medium text-gray-700 mb-2 dark:text-neutral-300"
-          >
+          <label htmlFor="statsDataId" className={styles.label.base}>
             統計表ID
           </label>
-          <div className="flex gap-2">
+          <div className={styles.layout.flex}>
             <input
               type="text"
               id="statsDataId"
               value={statsDataId}
               onChange={(e) => setStatsDataId(e.target.value)}
               placeholder="例: 0003448237"
-              className="flex-1 px-3 py-2 border border-gray-200 rounded-lg shadow-xs placeholder-gray-500 bg-white text-gray-800 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100 dark:placeholder-neutral-400"
+              className={styles.input.base}
               disabled={loading}
             />
             <button
               type="submit"
               disabled={loading || !statsDataId.trim()}
-              className="px-3 py-2 bg-indigo-500 text-white text-sm font-medium rounded-lg hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-indigo-500 dark:hover:bg-indigo-600"
+              className={styles.button.small}
             >
               {loading ? (
                 <div className="flex items-center">
@@ -85,9 +82,7 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
       </form>
 
       <div className="mt-4">
-        <h3 className="text-sm font-medium text-gray-700 mb-2 dark:text-neutral-300">
-          サンプル統計表
-        </h3>
+        <h3 className={styles.heading.sm}>サンプル統計表</h3>
         <div className="space-y-1">
           {Object.entries(SAMPLE_STATS_DATA_IDS).map(([key, value]) => (
             <button

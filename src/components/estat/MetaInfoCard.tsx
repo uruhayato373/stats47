@@ -1,6 +1,7 @@
 "use client";
 
 import { EstatMetaInfoResponse } from "@/types/estat";
+import { useStyles } from "@/hooks/useStyles";
 
 interface MetaInfoCardProps {
   metaInfo: EstatMetaInfoResponse | null;
@@ -13,9 +14,11 @@ export default function MetaInfoCard({
   loading,
   error,
 }: MetaInfoCardProps) {
+  const styles = useStyles();
+
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 dark:bg-neutral-800 dark:border-neutral-700">
+      <div className={styles.card.compact}>
         <div className="animate-pulse">
           <div className="h-4 bg-gray-300 rounded w-1/4 mb-3"></div>
           <div className="space-y-2">
@@ -30,7 +33,7 @@ export default function MetaInfoCard({
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-3 dark:bg-red-900/20 dark:border-red-800">
+      <div className={styles.message.error}>
         <div className="flex items-center">
           <svg
             className="w-4 h-4 text-red-600 mr-2"
@@ -54,10 +57,8 @@ export default function MetaInfoCard({
 
   if (!metaInfo) {
     return (
-      <div className="bg-white border border-gray-200 rounded-lg p-4 text-center dark:bg-neutral-800 dark:border-neutral-700">
-        <p className="text-gray-600 dark:text-neutral-400">
-          メタ情報がありません
-        </p>
+      <div className={styles.card.compact}>
+        <p className={styles.text.muted}>メタ情報がありません</p>
       </div>
     );
   }
@@ -66,74 +67,46 @@ export default function MetaInfoCard({
   const { TABLE_INF, CLASS_INF } = GET_META_INFO.METADATA_INF;
 
   return (
-    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 dark:bg-neutral-800 dark:border-neutral-700">
+    <div className={styles.card.compact}>
       <div className="mb-4">
-        <h2 className="text-lg font-medium text-gray-800 mb-3 dark:text-neutral-200">
-          統計表基本情報
-        </h2>
+        <h2 className={styles.heading.md}>統計表基本情報</h2>
 
         <div className="grid gap-3 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              統計表題名
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.TITLE.$}
-            </p>
+            <h3 className={styles.heading.sm}>統計表題名</h3>
+            <p className={styles.text.body}>{TABLE_INF.TITLE}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              政府統計名
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.STAT_NAME.$}
-            </p>
+            <h3 className={styles.heading.sm}>政府統計名</h3>
+            <p className={styles.text.body}>{TABLE_INF.STAT_NAME}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              作成機関
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.GOV_ORG.$}
-            </p>
+            <h3 className={styles.heading.sm}>作成機関</h3>
+            <p className={styles.text.body}>{TABLE_INF.GOV_ORG}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              調査年月
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.SURVEY_DATE}
-            </p>
+            <h3 className={styles.heading.sm}>調査年月</h3>
+            <p className={styles.text.body}>{TABLE_INF.SURVEY_DATE}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              公開日
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.OPEN_DATE}
-            </p>
+            <h3 className={styles.heading.sm}>公開日</h3>
+            <p className={styles.text.body}>{TABLE_INF.OPEN_DATE}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              更新日
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
-              {TABLE_INF.UPDATED_DATE}
-            </p>
+            <h3 className={styles.heading.sm}>更新日</h3>
+            <p className={styles.text.body}>{TABLE_INF.UPDATED_DATE}</p>
           </div>
         </div>
 
         {TABLE_INF.TITLE_SPEC && (
           <div className="mt-3">
-            <h3 className="text-sm font-medium text-gray-600 mb-1 dark:text-neutral-400">
-              表題詳細
-            </h3>
-            <p className="text-gray-800 dark:text-neutral-200">
+            <h3 className={styles.heading.sm}>表題詳細</h3>
+            <p className={styles.text.body}>
               {TABLE_INF.TITLE_SPEC.TABLE_NAME}
             </p>
             {TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION && (
@@ -147,9 +120,7 @@ export default function MetaInfoCard({
 
       {CLASS_INF && CLASS_INF.CLASS_OBJ && CLASS_INF.CLASS_OBJ.length > 0 && (
         <div>
-          <h3 className="text-base font-medium text-gray-800 mb-3 dark:text-neutral-200">
-            分類情報
-          </h3>
+          <h3 className={styles.heading.md}>分類情報</h3>
 
           <div className="space-y-3">
             {CLASS_INF.CLASS_OBJ.map((classObj, index) => (

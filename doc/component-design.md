@@ -4,6 +4,157 @@
 
 地域統計ダッシュボードは、React 19 の最新機能を活用したコンポーネントベースのアーキテクチャを採用しています。各コンポーネントは単一責任の原則に従い、再利用可能で保守しやすい設計となっています。
 
+## スタイル管理
+
+### アプローチ
+
+プロジェクトでは、**カスタムフック `useStyles`** を使用したスタイル管理を採用しています。これにより、以下の利点を実現しています：
+
+- **型安全性**: TypeScript でのスタイル管理
+- **一貫性**: プロジェクト全体での統一されたデザイン
+- **保守性**: スタイルの変更が一箇所で可能
+- **再利用性**: 共通のスタイルパターンを簡単に適用
+
+### 使用方法
+
+#### 1. 基本的な使用方法
+
+```typescript
+import { useStyles } from "@/hooks/useStyles";
+
+export default function MyComponent() {
+  const styles = useStyles();
+
+  return (
+    <div className={styles.card.base}>
+      <h2 className={styles.heading.lg}>タイトル</h2>
+      <p className={styles.text.body}>コンテンツ</p>
+      <button className={styles.button.primary}>ボタン</button>
+    </div>
+  );
+}
+```
+
+#### 2. 利用可能なスタイル
+
+```typescript
+const styles = useStyles();
+
+// レイアウト
+styles.layout.section; // space-y-6
+styles.layout.row; // space-y-4
+styles.layout.grid; // grid grid-cols-1 md:grid-cols-2 gap-4
+styles.layout.flex; // flex items-center gap-2
+
+// カード
+styles.card.base; // 基本カード（padding: 6）
+styles.card.compact; // コンパクトカード（padding: 4）
+
+// ボタン
+styles.button.primary; // プライマリボタン（インディゴ）
+styles.button.secondary; // セカンダリボタン（グレー）
+styles.button.small; // 小さいボタン
+
+// 入力フィールド
+styles.input.base; // 基本入力フィールド
+styles.input.disabled; // 無効状態
+
+// メッセージ
+styles.message.success; // 成功メッセージ（エメラルド）
+styles.message.error; // エラーメッセージ（レッド）
+styles.message.info; // 情報メッセージ（ブルー）
+styles.message.warning; // 警告メッセージ（イエロー）
+
+// ヘッダー
+styles.header.primary; // プライマリヘッダー（インディゴ）
+styles.header.secondary; // セカンダリヘッダー（グレー）
+
+// ラベル
+styles.label.base; // 基本ラベル
+styles.label.required; // 必須ラベル（*付き）
+
+// 見出し
+styles.heading.lg; // 大見出し（text-lg）
+styles.heading.md; // 中見出し（text-base）
+styles.heading.sm; // 小見出し（text-sm）
+
+// テキスト
+styles.text.primary; // プライマリテキスト（インディゴ）
+styles.text.secondary; // セカンダリテキスト
+styles.text.body; // 本文テキスト
+styles.text.muted; // 無効テキスト
+```
+
+#### 3. スタイルの拡張
+
+新しいスタイルを追加する場合は、`src/hooks/useStyles.ts`を編集します：
+
+```typescript
+export const useStyles = () => {
+  const styles = {
+    // 既存のスタイル...
+
+    // 新しいスタイル
+    newComponent: {
+      base: "bg-blue-100 border border-blue-300 rounded-lg p-4",
+      variant: "bg-blue-200 border-blue-400",
+    },
+  };
+
+  return styles;
+};
+```
+
+### デザインシステム
+
+#### カラーパレット
+
+- **プライマリ**: インディゴ系（#4F46E5）
+- **セカンダリ**: グレー系（#6B7280）
+- **成功**: エメラルド系（#10B981）
+- **エラー**: レッド系（#EF4444）
+- **警告**: イエロー系（#F59E0B）
+- **情報**: ブルー系（#3B82F6）
+
+#### スペーシング
+
+- **section**: `space-y-6` (24px)
+- **row**: `space-y-4` (16px)
+- **compact**: `space-y-2` (8px)
+
+#### タイポグラフィ
+
+- **heading-lg**: `text-lg font-medium` (18px)
+- **heading-md**: `text-base font-medium` (16px)
+- **heading-sm**: `text-sm font-medium` (14px)
+- **body**: `text-sm` (14px)
+
+### ベストプラクティス
+
+1. **一貫性の維持**: 既存のスタイルパターンを優先して使用
+2. **セマンティックな命名**: 用途に応じた適切なスタイル名
+3. **レスポンシブ対応**: モバイルファーストの設計
+4. **アクセシビリティ**: 十分なコントラストとフォーカス状態
+5. **ダークモード対応**: ライト/ダーク両方のテーマに対応
+
+### トラブルシューティング
+
+#### よくある問題
+
+1. **スタイルが適用されない**
+
+   - `useStyles()`の呼び出しを確認
+   - インポートパスが正しいか確認
+
+2. **型エラーが発生する**
+
+   - `useStyles.ts`の型定義を確認
+   - 存在しないスタイル名を使用していないか確認
+
+3. **スタイルの競合**
+   - Tailwind CSS の優先度を確認
+   - カスタムスタイルの順序を確認
+
 ## アトミックデザイン階層
 
 ```
@@ -32,34 +183,44 @@ App (Next.js App Router)
             └── DemographicsChart
 ```
 
-## アトミックデザインの5階層
+## アトミックデザインの 5 階層
 
 ### **1. Atoms（原子）**
-最小単位の再利用可能なUIコンポーネント
+
+最小単位の再利用可能な UI コンポーネント
+
 - **RegionSelector**: 地域選択の基本コンポーネント
 - **Button**: ボタンの基本コンポーネント
 - **Input**: 入力フィールドの基本コンポーネント
 
 ### **2. Molecules（分子）**
-Atomsを組み合わせた機能的なコンポーネント
+
+Atoms を組み合わせた機能的なコンポーネント
+
 - **StatisticsDisplay**: 統計データの可視化
 - **SearchBar**: 検索機能（Input + Button）
 - **Card**: カード表示（Title + Content + Actions）
 
 ### **3. Organisms（有機体）**
-Moleculesを組み合わせた複雑なコンポーネント
+
+Molecules を組み合わせた複雑なコンポーネント
+
 - **EstatDataFetcher**: データ取得の複雑な機能
 - **HeaderNavigation**: ヘッダーナビゲーション全体
 - **DashboardWidget**: ダッシュボードウィジェット
 
 ### **4. Templates（テンプレート）**
+
 ページレイアウトの構造定義
+
 - **DashboardLayout**: ダッシュボードのレイアウト
 - **FormLayout**: フォームページのレイアウト
 - **ListLayout**: リストページのレイアウト
 
 ### **5. Pages（ページ）**
+
 特定のページの機能実装
+
 - **HomePage**: ホームページの実装
 - **DashboardPage**: ダッシュボードページの実装
 - **CategoryPage**: カテゴリ詳細ページの実装
@@ -732,209 +893,6 @@ export function Card({ title, children, className = "" }: CardProps) {
 
 TypeScript を使用して、コンポーネントの型安全性を確保：
 
-```typescript
-// 共通の型定義
-interface ChartData {
-  year: string;
-  value: number;
-}
-
-interface RegionData {
-  code: string;
-  name: string;
-}
-
-interface StatisticsData {
-  population: ChartData[];
-  gdp: ChartData[];
-  unemployment: ChartData[];
-  demographics: Array<{ age: string; value: number }>;
-  regionCode: string;
-  regionName: string;
-  lastUpdated: string;
-  source: string;
-}
 ```
 
-### 4. パフォーマンス最適化
-
-#### React.memo
-
-```typescript
-export const StatisticsDisplay = React.memo(
-  ({ data, regionName }: StatisticsDisplayProps) => {
-    // コンポーネントの実装
-  }
-);
 ```
-
-#### useMemo
-
-```typescript
-const processedData = useMemo(() => {
-  return data.population.map((item) => ({
-    ...item,
-    value: item.value / 1000000, // 百万単位に変換
-    formattedValue: (item.value / 1000000).toFixed(1),
-  }));
-}, [data.population]);
-```
-
-#### useCallback
-
-```typescript
-const handleChartClick = useCallback((data: any, index: number) => {
-  console.log("Chart clicked:", data, index);
-}, []);
-```
-
-## テスト戦略
-
-### 1. ユニットテスト
-
-```typescript
-import { render, screen, fireEvent } from "@testing-library/react";
-import { RegionSelector } from "./RegionSelector";
-
-describe("RegionSelector", () => {
-  const mockRegions = [
-    { code: "13", name: "東京都" },
-    { code: "27", name: "大阪府" },
-  ];
-
-  const mockOnRegionChange = jest.fn();
-
-  test("renders region options correctly", () => {
-    render(
-      <RegionSelector
-        regions={mockRegions}
-        selectedRegion="13"
-        onRegionChange={mockOnRegionChange}
-      />
-    );
-
-    expect(screen.getByText("東京都")).toBeInTheDocument();
-    expect(screen.getByText("大阪府")).toBeInTheDocument();
-  });
-
-  test("calls onRegionChange when selection changes", () => {
-    render(
-      <RegionSelector
-        regions={mockRegions}
-        selectedRegion="13"
-        onRegionChange={mockOnRegionChange}
-      />
-    );
-
-    const select = screen.getByRole("combobox");
-    fireEvent.change(select, { target: { value: "27" } });
-
-    expect(mockOnRegionChange).toHaveBeenCalledWith("27");
-  });
-});
-```
-
-### 2. 統合テスト
-
-```typescript
-describe("Dashboard Integration", () => {
-  test("region selection triggers data fetch", async () => {
-    render(<DashboardPage />);
-
-    const select = screen.getByRole("combobox");
-    fireEvent.change(select, { target: { value: "27" } });
-
-    // データ取得の開始を確認
-    expect(screen.getByText("データを取得中...")).toBeInTheDocument();
-
-    // データ表示の完了を確認
-    await waitFor(() => {
-      expect(screen.getByText("大阪府の人口推移")).toBeInTheDocument();
-    });
-  });
-});
-```
-
-### 3. スナップショットテスト
-
-```typescript
-test("StatisticsDisplay matches snapshot", () => {
-  const mockData = createMockStatisticsData();
-
-  const { container } = render(
-    <StatisticsDisplay data={mockData} regionName="東京都" />
-  );
-
-  expect(container).toMatchSnapshot();
-});
-```
-
-## アクセシビリティ
-
-### 1. セマンティック HTML
-
-```typescript
-// 適切な見出しレベルの使用
-<h1>地域統計ダッシュボード</h1>
-<h2>地域選択</h2>
-<h3>人口推移</h3>
-
-// ラベルの関連付け
-<label htmlFor="region-select">都道府県:</label>
-<select id="region-select" ...>
-```
-
-### 2. キーボードナビゲーション
-
-```typescript
-// フォーカス管理
-const handleKeyDown = (e: React.KeyboardEvent) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    onRegionChange(region.code);
-  }
-};
-
-// タブ順序の制御
-<div tabIndex={0} onKeyDown={handleKeyDown}>
-  {/* コンテンツ */}
-</div>;
-```
-
-### 3. スクリーンリーダー対応
-
-```typescript
-// ARIA属性の追加
-<div
-  role="region"
-  aria-label="統計データ表示"
-  aria-live="polite"
->
-  {/* 統計データ */}
-</div>
-
-// ローディング状態の通知
-<div aria-live="polite" aria-busy="true">
-  データを取得中...
-</div>
-```
-
-## 今後の拡張
-
-### 1. 新しいチャートタイプ
-
-- **散布図**: 相関関係の表示
-- **ヒートマップ**: 地域別比較
-- **時系列**: リアルタイムデータ
-
-### 2. インタラクティブ機能
-
-- **ズーム・パン**: グラフの詳細表示
-- **フィルタリング**: データの絞り込み
-- **エクスポート**: 画像・CSV 出力
-
-### 3. パフォーマンス向上
-
-- **仮想化**: 大量データの表示
-- **遅延読み込み**: 必要に応じたデータ取得
-- **キャッシュ**: データの永続化
