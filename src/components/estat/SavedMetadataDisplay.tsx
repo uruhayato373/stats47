@@ -23,36 +23,11 @@ export default function SavedMetadataDisplay() {
 
   const styles = useStyles();
 
-  // サンプルデータ（実際の実装ではCloudflare D1から取得）
-  const sampleData: SavedMetadata[] = [
-    {
-      id: "1",
-      statsDataId: "0003448237",
-      statName: "人口推計",
-      title: "人口推計（令和5年10月1日現在）",
-      category: "人口・世帯",
-      itemName: "総人口",
-      unit: "人",
-      updatedAt: "2024-01-15",
-    },
-    {
-      id: "2",
-      statsDataId: "0003348237",
-      statName: "世帯数調査",
-      title: "世帯数調査（令和5年）",
-      category: "人口・世帯",
-      itemName: "一般世帯数",
-      unit: "世帯",
-      updatedAt: "2024-01-10",
-    },
-  ];
-
   useEffect(() => {
     // 実際の実装では、Cloudflare D1からデータを取得
-    setTimeout(() => {
-      setMetadata(sampleData);
-      setLoading(false);
-    }, 1000);
+    // 現在は空の配列で初期化
+    setMetadata([]);
+    setLoading(false);
   }, []);
 
   const filteredMetadata = metadata.filter((item) => {
@@ -138,7 +113,9 @@ export default function SavedMetadataDisplay() {
 
         {filteredMetadata.length === 0 ? (
           <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
-            条件に一致するデータが見つかりませんでした。
+            保存されたデータがありません。
+            <br />
+            メタ情報保存タブでデータを保存してください。
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -157,7 +134,7 @@ export default function SavedMetadataDisplay() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
                     カテゴリ
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     項目名
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">

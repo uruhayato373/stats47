@@ -27,7 +27,7 @@ export const useStyles = () => {
     // メッセージ
     message: {
       success:
-        "bg-emerald-50 border border-emerald-200 rounded-lg p-4 dark:bg-emerald-900/30 dark:border-emerald-700",
+        "bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/30 dark:border-blue-700",
       error:
         "bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/30 dark:border-red-700",
       info: "bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/30 dark:border-blue-700",

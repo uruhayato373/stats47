@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { estatAPI } from "@/services/estat-api";
 import { useStyles } from "@/hooks/useStyles";
+import Message from "@/components/common/Message";
 
 export default function MetadataSaver() {
   const [statsDataId, setStatsDataId] = useState<string>("");
@@ -64,17 +65,8 @@ export default function MetadataSaver() {
       </div>
 
       {/* メッセージ表示 */}
-      {message && (
-        <div className={styles.message.success}>
-          <p className={styles.text.body}>{message}</p>
-        </div>
-      )}
-
-      {error && (
-        <div className={styles.message.error}>
-          <p className={styles.text.body}>{error}</p>
-        </div>
-      )}
+      {message && <Message type="success" message={message} />}
+      {error && <Message type="error" message={error} />}
     </div>
   );
 }
