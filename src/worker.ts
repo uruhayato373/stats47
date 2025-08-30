@@ -10,12 +10,8 @@ export interface Env {
   ESTAT_API_KEY?: string;
 }
 
-export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext
-  ): Promise<Response> {
+const worker = {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     // e-Statメタ情報関連のAPI
@@ -27,6 +23,8 @@ export default {
     return new Response("Not Found", { status: 404 });
   },
 };
+
+export default worker;
 
 async function handleEstatMetadata(
   request: Request,
