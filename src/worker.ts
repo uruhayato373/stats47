@@ -1,7 +1,10 @@
+/// <reference types="@cloudflare/workers-types" />
+
 import { EstatMetadataService } from "./lib/estat/metadata-service";
 
 export interface Env {
-  DB: D1Database;
+  AUTH_DB: D1Database;
+  ESTAT_DB: D1Database;
   // 環境変数の型定義
   NODE_ENV?: string;
   ESTAT_API_KEY?: string;
@@ -51,7 +54,7 @@ async function handleEstatMetadata(
 }
 
 async function handleStats(request: Request, env: Env): Promise<Response> {
-  const metadataService = new EstatMetadataService(env.DB);
+  const metadataService = new EstatMetadataService(env.ESTAT_DB);
 
   try {
     const [count, categories] = await Promise.all([
@@ -88,7 +91,7 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
 
   try {
     const { statsDataId, batchMode, startId, endId } = await request.json();
-    const metadataService = new EstatMetadataService(env.DB);
+    const metadataService = new EstatMetadataService(env.ESTAT_DB);
 
     if (batchMode && startId && endId) {
       await metadataService.fetchAndSaveMetadataRange(startId, endId);
@@ -132,7 +135,7 @@ async function handleSearch(request: Request, env: Env): Promise<Response> {
   const statsDataId = url.searchParams.get("statsDataId") || "";
 
   try {
-    const metadataService = new EstatMetadataService(env.DB);
+    const metadataService = new EstatMetadataService(env.ESTAT_DB);
     let results;
 
     if (statsDataId) {

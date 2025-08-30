@@ -24,15 +24,24 @@ export const useStyles = () => {
         "bg-white border border-gray-200 rounded-lg p-4 dark:bg-neutral-800 dark:border-neutral-700",
     },
 
-    // メッセージ
+    // メッセージ - 一般的なcalloutスタイルに準拠
     message: {
       success:
-        "bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/30 dark:border-blue-700",
+        "bg-green-50 border border-green-200 rounded-lg p-4 dark:bg-green-900/30 dark:border-green-700",
       error:
         "bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/30 dark:border-red-700",
       info: "bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/30 dark:border-blue-700",
       warning:
-        "bg-yellow-50 border border-yellow-200 rounded-lg p-4 dark:bg-yellow-900/30 dark:border-yellow-700",
+        "bg-amber-50 border border-amber-200 rounded-lg p-4 dark:bg-amber-900/30 dark:border-amber-700",
+    },
+
+    // メッセージテキスト色 - 一般的なcalloutスタイルに準拠
+    messageText: {
+      success: "text-green-800 dark:text-green-200",
+      error: "text-red-800 dark:text-red-200",
+      info: "text-blue-800 dark:text-blue-200",
+      warning: "text-amber-800 dark:text-amber-200",
+      default: "text-gray-800 dark:text-gray-200",
     },
 
     // ヘッダー

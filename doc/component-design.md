@@ -59,11 +59,17 @@ styles.button.small; // 小さいボタン
 styles.input.base; // 基本入力フィールド
 styles.input.disabled; // 無効状態
 
-// メッセージ
-styles.message.success; // 成功メッセージ（エメラルド）
-styles.message.error; // エラーメッセージ（レッド）
-styles.message.info; // 情報メッセージ（ブルー）
-styles.message.warning; // 警告メッセージ（イエロー）
+// メッセージ - 一般的なcalloutスタイルに準拠
+styles.message.success; // 成功メッセージ（緑系）
+styles.message.error; // エラーメッセージ（赤系）
+styles.message.info; // 情報メッセージ（青系）
+styles.message.warning; // 警告メッセージ（琥珀系）
+
+// メッセージテキスト色 - 一般的なcalloutスタイルに準拠
+styles.messageText.success; // 成功メッセージテキスト（緑系）
+styles.messageText.error; // エラーメッセージテキスト（赤系）
+styles.messageText.info; // 情報メッセージテキスト（青系）
+styles.messageText.warning; // 警告メッセージテキスト（琥珀系）
 
 // ヘッダー
 styles.header.primary; // プライマリヘッダー（インディゴ）
@@ -105,794 +111,229 @@ export const useStyles = () => {
 };
 ```
 
-### デザインシステム
+### 4. 配色システム
 
-#### カラーパレット
+#### メッセージタイプ別の配色
 
-- **プライマリ**: インディゴ系（#4F46E5）
-- **セカンダリ**: グレー系（#6B7280）
-- **成功**: エメラルド系（#10B981）
-- **エラー**: レッド系（#EF4444）
-- **警告**: イエロー系（#F59E0B）
-- **情報**: ブルー系（#3B82F6）
+- **Success（成功）**: 緑系（`bg-green-50`, `text-green-800`）
+- **Error（エラー）**: 赤系（`bg-red-50`, `text-red-800`）
+- **Info（情報）**: 青系（`bg-blue-50`, `text-blue-800`）
+- **Warning（警告）**: 琥珀系（`bg-amber-50`, `text-amber-800`）
 
-#### スペーシング
+#### ダークモード対応
 
-- **section**: `space-y-6` (24px)
-- **row**: `space-y-4` (16px)
-- **compact**: `space-y-2` (8px)
+すべてのスタイルはダークモードに対応しており、`dark:`プレフィックスを使用して適切な色を設定しています。
 
-#### タイポグラフィ
+## 共通コンポーネント
 
-- **heading-lg**: `text-lg font-medium` (18px)
-- **heading-md**: `text-base font-medium` (16px)
-- **heading-sm**: `text-sm font-medium` (14px)
-- **body**: `text-sm` (14px)
+### Message コンポーネント
 
-### ベストプラクティス
+#### 概要
 
-1. **一貫性の維持**: 既存のスタイルパターンを優先して使用
-2. **セマンティックな命名**: 用途に応じた適切なスタイル名
-3. **レスポンシブ対応**: モバイルファーストの設計
-4. **アクセシビリティ**: 十分なコントラストとフォーカス状態
-5. **ダークモード対応**: ライト/ダーク両方のテーマに対応
+メッセージ表示用の共通コンポーネントで、成功、エラー、情報、警告の 4 種類のメッセージタイプに対応しています。
 
-### トラブルシューティング
+#### 特徴
 
-#### よくある問題
+- **4 種類のメッセージタイプ**: success, error, info, warning
+- **一般的な callout スタイル**: 標準的な UI パターンに準拠
+- **ダークモード対応**: ライト/ダーク両方のテーマで最適化
+- **カスタマイズ可能**: 追加の CSS クラス名を指定可能
+
+#### 使用方法
+
+```tsx
+import Message from "@/components/common/Message";
+
+// 成功メッセージ
+<Message type="success" message="保存が完了しました" />
+
+// エラーメッセージ
+<Message type="error" message="エラーが発生しました" />
+
+// カスタムクラス付き
+<Message type="info" message="情報メッセージ" className="mt-4 shadow-lg" />
+```
+
+#### 実装場所
+
+- **コンポーネント**: `src/components/common/Message.tsx`
+- **ストーリー**: `src/components/common/Message.stories.tsx`
+- **スタイル**: `src/hooks/useStyles.ts`の`message`と`messageText`セクション
+
+## コンポーネント開発環境
+
+### Storybook 統合
+
+#### 概要
+
+コンポーネントの開発・テスト・ドキュメント化のために Storybook 9.1.3 を統合しています。
+
+#### 設定
+
+- **メイン設定**: `.storybook/main.ts`
+- **プレビュー設定**: `.storybook/preview.tsx`
+- **スタイル**: `.storybook/storybook.css`
+- **Tailwind CSS 対応**: プロジェクトのスタイルが正しく適用
+
+#### 使用方法
+
+```bash
+# Storybook起動
+npm run storybook
+
+# ブラウザで http://localhost:6006 にアクセス
+```
+
+#### 利用可能なアドオン
+
+- **@storybook/addon-a11y**: アクセシビリティチェック
+- **@storybook/addon-vitest**: テスト実行
+- **@storybook/addon-docs**: 自動ドキュメント生成
+
+## D1 統合
+
+### データ保存戦略
+
+#### 開発環境
+
+- **保存先**: Cloudflare D1（本番環境と同じ）
+- **利点**:
+  - 本番環境との一貫性
+  - ローカル PC の負荷軽減
+  - 実際の API 制限の確認
+- **処理方式**: チャンク分割処理（50 件ずつ）
+- **待機時間**: チャンク間で 200ms（API 制限対策）
+
+#### 本番環境
+
+- **保存先**: Cloudflare D1
+- **利点**:
+  - スケーラビリティ
+  - グローバル配信
+  - 高可用性
+- **処理方式**: チャンク分割処理（50 件ずつ）
+- **待機時間**: チャンク間で 200ms（API 制限対策）
+
+### チャンク処理の詳細
+
+```typescript
+// チャンクサイズ: 50件（Cloudflare D1の制限に最適化）
+const CHUNK_SIZE = 50;
+
+// チャンク分割
+const chunks = [];
+for (let i = 0; i < data.length; i += CHUNK_SIZE) {
+  chunks.push(data.slice(i, i + CHUNK_SIZE));
+}
+
+// チャンクごとの処理
+for (const [chunkIndex, chunk] of chunks.entries()) {
+  // チャンク内で並列処理
+  const chunkPromises = chunk.map(async (item) => {
+    // 個別データの処理
+  });
+
+  // チャンク内の処理完了を待機
+  const chunkResults = await Promise.all(chunkPromises);
+
+  // 次のチャンクまで待機（API制限対策）
+  if (chunkIndex < chunks.length - 1) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+}
+```
+
+## データ統合
+
+### e-Stat API 統合
+
+#### 概要
+
+e-Stat API からメタデータを取得し、Cloudflare D1 データベースに保存する機能を実装しています。
+
+#### データフロー
+
+1. **ユーザー入力** → 統計表 ID を入力
+2. **API 呼び出し** → `/api/estat/metadata/save`に POST
+3. **データ取得** → e-Stat API からメタデータを取得
+4. **データ変換** → CSV 形式に変換
+5. **D1 保存** → Cloudflare D1 に保存
+6. **結果表示** → Message コンポーネントで成功/エラー表示
+
+#### 実装場所
+
+- **API ルート**: `src/app/api/estat/metadata/save/route.ts`
+- **フロントエンド**: `src/components/estat/MetadataSaver.tsx`
+- **データ変換**: `src/lib/estat/data-transformer.ts`
+- **データベース操作**: `src/lib/estat/metadata-database.ts`
+
+### Cloudflare D1 統合
+
+#### データベース設定
+
+- **データベース名**: `estat-db`
+- **バインディング**: `ESTAT_DB`
+- **スキーマ**: `database/schemas/main.sql`
+
+#### セットアップ
+
+```bash
+# D1データベースの作成
+npx wrangler d1 create estat-db
+
+# ローカル開発用のD1インスタンスを起動
+npx wrangler d1 execute estat-db --local --file=./database/schemas/main.sql
+```
+
+## ベストプラクティス
+
+### スタイル管理
+
+1. **useStyles フックの使用**: インラインスタイルは避ける
+2. **一貫性の維持**: 既存のスタイルパターンを再利用
+3. **ダークモード対応**: すべてのスタイルでダークモードを考慮
+4. **レスポンシブデザイン**: モバイルファーストのアプローチ
+
+### コンポーネント設計
+
+1. **単一責任の原則**: 各コンポーネントは一つの責任を持つ
+2. **再利用性**: 共通の UI パターンは共通コンポーネントとして実装
+3. **型安全性**: TypeScript の型定義を活用
+4. **エラーハンドリング**: 適切なエラー状態とユーザーフィードバック
+
+### テスト・開発
+
+1. **Storybook での開発**: コンポーネントの独立した開発・テスト
+2. **アクセシビリティ**: a11y アドオンを使用したチェック
+3. **パフォーマンス**: 不要な再レンダリングを避ける
+4. **ドキュメント**: コンポーネントの使用方法を明確化
+
+## トラブルシューティング
+
+### よくある問題
 
 1. **スタイルが適用されない**
 
-   - `useStyles()`の呼び出しを確認
-   - インポートパスが正しいか確認
+   - `useStyles`フックが正しくインポートされているか確認
+   - Tailwind CSS の設定を確認
 
-2. **型エラーが発生する**
+2. **Storybook でスタイルが表示されない**
 
-   - `useStyles.ts`の型定義を確認
-   - 存在しないスタイル名を使用していないか確認
+   - `.storybook/storybook.css`の設定を確認
+   - `tailwind.config.ts`に Storybook パスが含まれているか確認
 
-3. **スタイルの競合**
-   - Tailwind CSS の優先度を確認
-   - カスタムスタイルの順序を確認
+3. **D1 データベース接続エラー**
 
-## アトミックデザイン階層
+   - `wrangler.toml`の設定を確認
+   - ローカル D1 インスタンスが起動しているか確認
 
-```
-App (Next.js App Router)
-├── Layout
-│   ├── Header              # ヘッダーナビゲーション
-│   ├── Main Content       # メインコンテンツ
-│   └── Footer             # フッター情報
-├── HomePage
-│   ├── Hero Section       # ヒーローセクション
-│   ├── Features Section   # 特徴セクション
-│   └── Categories Section # カテゴリセクション
-└── Dashboard (カテゴリベース)
-    ├── DashboardPage (カテゴリ一覧)
-    ├── CategoryPage (カテゴリ詳細)
-    │   ├── RegionSelector (atoms)
-    │   ├── EstatDataFetcher (organisms)
-    │   └── StatisticsDisplay (molecules)
-    └── SubcategoryPage (サブカテゴリ詳細)
-        ├── RegionSelector (atoms)
-        ├── EstatDataFetcher (organisms)
-        └── StatisticsDisplay (molecules)
-            ├── PopulationChart
-            ├── GdpChart
-            ├── UnemploymentChart
-            └── DemographicsChart
-```
+4. **e-Stat API エラー**
+   - API キーが正しく設定されているか確認
+   - 統計表 ID が正しいか確認
 
-## アトミックデザインの 5 階層
+### デバッグ方法
 
-### **1. Atoms（原子）**
-
-最小単位の再利用可能な UI コンポーネント
-
-- **RegionSelector**: 地域選択の基本コンポーネント
-- **Button**: ボタンの基本コンポーネント
-- **Input**: 入力フィールドの基本コンポーネント
-
-### **2. Molecules（分子）**
-
-Atoms を組み合わせた機能的なコンポーネント
-
-- **StatisticsDisplay**: 統計データの可視化
-- **SearchBar**: 検索機能（Input + Button）
-- **Card**: カード表示（Title + Content + Actions）
-
-### **3. Organisms（有機体）**
-
-Molecules を組み合わせた複雑なコンポーネント
-
-- **EstatDataFetcher**: データ取得の複雑な機能
-- **HeaderNavigation**: ヘッダーナビゲーション全体
-- **DashboardWidget**: ダッシュボードウィジェット
-
-### **4. Templates（テンプレート）**
-
-ページレイアウトの構造定義
-
-- **DashboardLayout**: ダッシュボードのレイアウト
-- **FormLayout**: フォームページのレイアウト
-- **ListLayout**: リストページのレイアウト
-
-### **5. Pages（ページ）**
-
-特定のページの機能実装
-
-- **HomePage**: ホームページの実装
-- **DashboardPage**: ダッシュボードページの実装
-- **CategoryPage**: カテゴリ詳細ページの実装
-
-## 主要コンポーネント
-
-### 1. DashboardPage (カテゴリ一覧)
-
-#### 概要
-
-カテゴリ一覧を表示するダッシュボードのエントリーポイント。16 の主要カテゴリをグリッド表示し、検索機能を提供します。
-
-#### 責任
-
-- カテゴリ一覧の表示と検索
-- カテゴリ別のナビゲーション
-- 統計情報の表示
-- 各カテゴリへのリンク提供
-
-#### 実装詳細
-
-```typescript
-"use client";
-
-import { useState, useEffect, useCallback } from "react";
-import { EstatDataFetcher } from "@/components/EstatDataFetcher";
-import { StatisticsDisplay } from "@/components/StatisticsDisplay";
-import { RegionSelector } from "@/components/RegionSelector";
-
-export default function DashboardPage() {
-  const [selectedRegion, setSelectedRegion] = useState("13"); // 東京都
-  const [statisticsData, setStatisticsData] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const regions = [
-    { code: "13", name: "東京都" },
-    { code: "27", name: "大阪府" },
-    { code: "23", name: "愛知県" },
-    // ... 他の地域
-  ];
-
-  const handleRegionChange = useCallback((regionCode: string) => {
-    setSelectedRegion(regionCode);
-  }, []);
-
-  const handleDataUpdate = useCallback((data: any) => {
-    setStatisticsData(data);
-  }, []);
-
-  const handleLoadingChange = useCallback((loadingState: boolean) => {
-    setLoading(loadingState);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* ヘッダー */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            地域統計ダッシュボード
-          </h1>
-          <p className="text-gray-600">
-            e-Stat APIから取得した地域統計データを可視化します
-          </p>
-        </div>
-
-        {/* 地域選択 */}
-        <RegionSelector
-          regions={regions}
-          selectedRegion={selectedRegion}
-          onRegionChange={handleRegionChange}
-        />
-
-        {/* データ取得 */}
-        <EstatDataFetcher
-          regionCode={selectedRegion}
-          onDataUpdate={handleDataUpdate}
-          onLoadingChange={handleLoadingChange}
-        />
-
-        {/* 統計データ表示 */}
-        {loading && <LoadingSpinner />}
-        {statisticsData && !loading && (
-          <StatisticsDisplay
-            data={statisticsData}
-            regionName={regions.find((r) => r.code === selectedRegion)?.name}
-          />
-        )}
-      </div>
-    </div>
-  );
-}
-```
-
-#### パフォーマンス最適化
-
-```typescript
-// useCallbackで関数をメモ化
-const handleRegionChange = useCallback((regionCode: string) => {
-  setSelectedRegion(regionCode);
-}, []);
-
-// 依存配列の最適化
-useEffect(() => {
-  // 地域変更時の処理
-}, [selectedRegion]); // 必要な依存関係のみ
-```
-
-### 2. CategoryPage (カテゴリ詳細)
-
-#### 概要
-
-選択されたカテゴリの詳細情報とサブカテゴリ一覧を表示し、統計データの可視化を行います。
-
-#### 責任
-
-- カテゴリ情報の表示
-- サブカテゴリ一覧の表示
-- 地域選択とデータ取得
-- 統計データの表示
-
-### 3. SubcategoryPage (サブカテゴリ詳細)
-
-#### 概要
-
-選択されたサブカテゴリの詳細な統計データを表示し、パンくずリストによるナビゲーションを提供します。
-
-#### 責任
-
-- サブカテゴリ情報の表示
-- パンくずリストによるナビゲーション
-- 地域選択とデータ取得
-- 詳細な統計データの表示
-
-### 4. Header
-
-#### 概要
-
-アプリケーション全体のヘッダーナビゲーションを提供するコンポーネント。
-
-#### 責任
-
-- ロゴ・ブランドの表示
-- メインナビゲーションの提供
-- モバイルメニューの管理
-- レスポンシブ対応
-
-#### 実装詳細
-
-```typescript
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      {/* ロゴ・ブランド */}
-      <div className="flex items-center">
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-blue-600 rounded-lg">
-            <span className="text-white text-xl font-bold">47</span>
-          </div>
-          <h1 className="text-xl font-bold text-gray-900">
-            地域統計ダッシュボード
-          </h1>
-        </Link>
-      </div>
-
-      {/* ナビゲーション */}
-      <nav className="hidden md:flex items-center space-x-8">
-        <Link href="/">ホーム</Link>
-        <Link href="/dashboard">ダッシュボード</Link>
-        <Link href="/about">概要</Link>
-        <Link href="/contact">お問い合わせ</Link>
-      </nav>
-
-      {/* モバイルメニュー */}
-      <div className="md:hidden">
-        <button onClick={toggleMenu}>☰</button>
-      </div>
-    </header>
-  );
-}
-```
-
-### 5. Footer
-
-#### 概要
-
-アプリケーション全体のフッター情報とリンクを提供するコンポーネント。
-
-#### 責任
-
-- ブランド情報の表示
-- クイックリンクの提供
-- 統計カテゴリへの直接リンク
-- 法的情報へのアクセス
-
-#### 実装詳細
-
-```typescript
-export function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-gray-900 text-white">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* ブランド・説明 */}
-        <div className="col-span-1 md:col-span-2">
-          <h3 className="text-xl font-bold">地域統計ダッシュボード</h3>
-          <p className="text-gray-300">
-            e-Stat APIを使用して日本の地域統計データを可視化
-          </p>
-        </div>
-
-        {/* クイックリンク */}
-        <div>
-          <h4 className="text-lg font-semibold">クイックリンク</h4>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/">ホーム</Link>
-            </li>
-            <li>
-              <Link href="/dashboard">ダッシュボード</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* 統計カテゴリ */}
-        <div>
-          <h4 className="text-lg font-semibold">統計カテゴリ</h4>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/dashboard/population">人口・世帯</Link>
-            </li>
-            <li>
-              <Link href="/dashboard/economy">企業・家計・経済</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  );
-}
-```
-
-### 6. RegionSelector
-
-#### 概要
-
-地域（都道府県）を選択するためのドロップダウンコンポーネント。
-
-#### 責任
-
-- 地域リストの表示
-- 地域選択の処理
-- 選択された地域の表示
-
-#### 実装詳細
-
-```typescript
-"use client";
-
-interface Region {
-  code: string;
-  name: string;
-}
-
-interface RegionSelectorProps {
-  regions: Region[];
-  selectedRegion: string;
-  onRegionChange: (regionCode: string) => void;
-}
-
-export function RegionSelector({
-  regions,
-  selectedRegion,
-  onRegionChange,
-}: RegionSelectorProps) {
-  return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">地域選択</h2>
-      <div className="flex items-center space-x-4">
-        <label
-          htmlFor="region-select"
-          className="text-sm font-medium text-gray-700"
-        >
-          都道府県:
-        </label>
-        <select
-          id="region-select"
-          value={selectedRegion}
-          onChange={(e) => onRegionChange(e.target.value)}
-          className="block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-        >
-          {regions.map((region) => (
-            <option key={region.code} value={region.code}>
-              {region.name}
-            </option>
-          ))}
-        </select>
-        <div className="text-sm text-gray-500">
-          選択中: {regions.find((r) => r.code === selectedRegion)?.name}
-        </div>
-      </div>
-    </div>
-  );
-}
-```
-
-#### アクセシビリティ
-
-```typescript
-// ラベルとセレクトボックスの関連付け
-<label htmlFor="region-select">都道府県:</label>
-<select id="region-select" ...>
-
-// キーボードナビゲーション対応
-<select
-  onKeyDown={(e) => {
-    if (e.key === 'Enter') {
-      // Enterキーでの選択処理
-    }
-  }}
-  ...
->
-```
-
-### 3. EstatDataFetcher
-
-#### 概要
-
-e-Stat API からデータを取得し、親コンポーネントに渡すコンポーネント。
-
-#### 責任
-
-- API 呼び出しの実行
-- エラーハンドリング
-- ローディング状態の管理
-- サンプルデータの提供
-
-#### 実装詳細
-
-```typescript
-"use client";
-
-import { useEffect, useState } from "react";
-
-interface EstatDataFetcherProps {
-  regionCode: string;
-  onDataUpdate: (data: any) => void;
-  onLoadingChange: (loading: boolean) => void;
-}
-
-const ESTAT_API_BASE_URL = "https://api.e-stat.go.jp/rest/3.0/app/json";
-const ESTAT_APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID || "your-app-id-here";
-
-export function EstatDataFetcher({
-  regionCode,
-  onDataUpdate,
-  onLoadingChange,
-}: EstatDataFetcherProps) {
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      onLoadingChange(true);
-      setError(null);
-
-      try {
-        if (ESTAT_APP_ID !== "your-app-id-here") {
-          // 実際のe-Stat APIを使用
-          const response = await fetch(
-            `${ESTAT_API_BASE_URL}/getStatsData?appId=${ESTAT_APP_ID}&statsDataId=0003109941&metaGetFlg=Y&cntGetFlg=N`
-          );
-
-          if (!response.ok) {
-            throw new Error("APIリクエストに失敗しました");
-          }
-
-          const data = await response.json();
-          onDataUpdate(data);
-        } else {
-          // サンプルデータを使用
-          const adjustedData = {
-            ...SAMPLE_DATA,
-            regionCode,
-            regionName: getRegionName(regionCode),
-            lastUpdated: new Date().toISOString(),
-            source: "サンプルデータ（e-Stat APIキーが必要）",
-          };
-
-          onDataUpdate(adjustedData);
-        }
-      } catch (err) {
-        console.error("データ取得エラー:", err);
-        setError("データの取得に失敗しました");
-
-        // エラー時もサンプルデータを表示
-        const fallbackData = {
-          ...SAMPLE_DATA,
-          regionCode,
-          regionName: getRegionName(regionCode),
-          lastUpdated: new Date().toISOString(),
-          source: "サンプルデータ（エラー時のフォールバック）",
-        };
-
-        onDataUpdate(fallbackData);
-      } finally {
-        onLoadingChange(false);
-      }
-    };
-
-    fetchData();
-  }, [regionCode]); // 依存配列の最適化
-
-  return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">
-        データ取得状況
-      </h2>
-
-      {/* APIキー警告 */}
-      {ESTAT_APP_ID === "your-app-id-here" && <ApiKeyWarning />}
-
-      {/* エラー表示 */}
-      {error && <ErrorMessage message={error} />}
-
-      {/* データソース情報 */}
-      <div className="text-sm text-gray-600">
-        <p>地域コード: {regionCode}</p>
-        <p>地域名: {getRegionName(regionCode)}</p>
-        <p>
-          データソース:{" "}
-          {ESTAT_APP_ID === "your-app-id-here"
-            ? "サンプルデータ"
-            : "e-Stat API"}
-        </p>
-      </div>
-    </div>
-  );
-}
-```
-
-#### エラーハンドリング
-
-```typescript
-// エラー境界の実装
-class DataFetchErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error("Data fetch error:", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <ErrorFallback />;
-    }
-
-    return this.props.children;
-  }
-}
-```
-
-### 4. StatisticsDisplay
-
-#### 概要
-
-統計データをグラフやチャートで表示するコンポーネント。
-
-#### 責任
-
-- データの可視化
-- グラフのレンダリング
-- レスポンシブ対応
-
-#### 実装詳細
-
-```typescript
-"use client";
-
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-
-interface StatisticsDisplayProps {
-  data: any;
-  regionName?: string;
-}
-
-export function StatisticsDisplay({
-  data,
-  regionName,
-}: StatisticsDisplayProps) {
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-  return (
-    <div className="space-y-8">
-      {/* 人口推移 */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          {regionName}の人口推移
-        </h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data.population}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="year" />
-            <YAxis />
-            <Tooltip
-              formatter={(value: number) => [value.toLocaleString(), "人口"]}
-            />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke="#8884d8"
-              strokeWidth={2}
-              dot={{ fill: "#8884d8", strokeWidth: 2, r: 4 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* GDP指数 */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          {regionName}のGDP指数推移
-        </h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data.gdp}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="year" />
-            <YAxis />
-            <Tooltip formatter={(value: number) => [value, "GDP指数"]} />
-            <Legend />
-            <Bar dataKey="value" fill="#82ca9d" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* 年齢構成 */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          {regionName}の年齢構成
-        </h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              data={data.demographics}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={({ age, percent }) =>
-                `${age} ${(percent * 100).toFixed(0)}%`
-              }
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {data.demographics.map((entry: any, index: number) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-  );
-}
-```
-
-#### レスポンシブ対応
-
-```typescript
-// 画面サイズに応じたグラフサイズ調整
-const useResponsiveChart = () => {
-  const [chartSize, setChartSize] = useState({ width: 0, height: 300 });
-
-  useEffect(() => {
-    const updateSize = () => {
-      const width = window.innerWidth;
-      let height = 300;
-
-      if (width < 640) {
-        // sm
-        height = 250;
-      } else if (width < 1024) {
-        // lg
-        height = 300;
-      } else {
-        height = 400;
-      }
-
-      setChartSize({ width, height });
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  return chartSize;
-};
-```
-
-## コンポーネント設計原則
-
-### 1. 単一責任の原則
-
-各コンポーネントは一つの明確な責任を持ちます：
-
-- **RegionSelector**: 地域選択のみ
-- **EstatDataFetcher**: データ取得のみ
-- **StatisticsDisplay**: データ表示のみ
-
-### 2. 再利用性
-
-共通の UI パターンを抽出し、再利用可能なコンポーネントを作成：
-
-```typescript
-// 共通のカードコンポーネント
-interface CardProps {
-  title: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function Card({ title, children, className = "" }: CardProps) {
-  return (
-    <div
-      className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}
-    >
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      {children}
-    </div>
-  );
-}
-
-// 使用例
-<Card title="人口推移">
-  <LineChart data={data.population}>{/* チャート内容 */}</LineChart>
-</Card>;
-```
-
-### 3. 型安全性
-
-TypeScript を使用して、コンポーネントの型安全性を確保：
-
-```
-
-```
+1. **ブラウザの開発者ツール**: CSS と JavaScript のエラーを確認
+2. **Storybook のコンソール**: コンポーネントのエラーを確認
+3. **API レスポンス**: ネットワークタブで API 呼び出しを確認
+4. **D1 ログ**: ローカル D1 インスタンスのログを確認

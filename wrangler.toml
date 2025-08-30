@@ -1,29 +1,19 @@
 name = "stats47"
 main = "src/worker.ts"
-compatibility_date = "2024-12-19"
+compatibility_date = "2024-01-15"
 
-# ローカル開発環境での設定
-[env.local]
-name = "stats47-local"
-
-# グローバル変数の設定
-[env.local.vars]
-NODE_ENV = "development"
-ESTAT_API_KEY = "59eb12e8a25751dfc27f2e48fcdfa8600b86655e"
-
-# D1データベース設定
-[[env.local.d1_databases]]
-binding = "DB"
-database_name = "stats47-auth-db"
-database_id = "3ee6e5a1-97ed-4ab0-a776-199881f86a7d"
-
+# 統合データベース
 [[d1_databases]]
-binding = "DB"
-database_name = "stats47-auth-db"
-database_id = "3ee6e5a1-97ed-4ab0-a776-199881f86a7d"
+binding = "STATS47_DB"
+database_name = "stats47"
+database_id = "e6533698-d05a-475b-9f39-5558703feef7"
 
-[env.production]
-name = "stats47-prod"
+[env.local]
+NODE_ENV = "development"
+ESTAT_API_KEY = "your_estat_api_key_here"
 
-[env.staging]
-name = "stats47-staging"
+# ローカル開発用D1設定
+[[env.local.d1_databases]]
+binding = "STATS47_DB"
+database_name = "stats47"
+database_id = "e6533698-d05a-475b-9f39-5558703feef7"

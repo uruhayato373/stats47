@@ -9,6 +9,32 @@ interface MetaInfoCardProps {
   error?: string | null;
 }
 
+// 安全にレンダリングするためのヘルパー関数
+function safeRender(value: any): string {
+  if (value === null || value === undefined) {
+    return "";
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  if (typeof value === "number") {
+    return value.toString();
+  }
+  if (typeof value === "object") {
+    // オブジェクトの場合は、$プロパティがあればそれを表示
+    if (value.$ && typeof value.$ === "string") {
+      return value.$;
+    }
+    // @noプロパティがあればそれを表示
+    if (value["@no"] && typeof value["@no"] === "string") {
+      return value["@no"];
+    }
+    // その他の場合は、JSON.stringifyで表示
+    return JSON.stringify(value);
+  }
+  return String(value);
+}
+
 export default function MetaInfoCard({
   metaInfo,
   loading,
@@ -74,32 +100,40 @@ export default function MetaInfoCard({
         <div className="grid gap-3 md:grid-cols-2">
           <div>
             <h3 className={styles.heading.sm}>統計表題名</h3>
-            <p className={styles.text.body}>{TABLE_INF.TITLE}</p>
+            <p className={styles.text.body}>{safeRender(TABLE_INF.TITLE)}</p>
           </div>
 
           <div>
             <h3 className={styles.heading.sm}>政府統計名</h3>
-            <p className={styles.text.body}>{TABLE_INF.STAT_NAME}</p>
+            <p className={styles.text.body}>
+              {safeRender(TABLE_INF.STAT_NAME)}
+            </p>
           </div>
 
           <div>
             <h3 className={styles.heading.sm}>作成機関</h3>
-            <p className={styles.text.body}>{TABLE_INF.GOV_ORG}</p>
+            <p className={styles.text.body}>{safeRender(TABLE_INF.GOV_ORG)}</p>
           </div>
 
           <div>
             <h3 className={styles.heading.sm}>調査年月</h3>
-            <p className={styles.text.body}>{TABLE_INF.SURVEY_DATE}</p>
+            <p className={styles.text.body}>
+              {safeRender(TABLE_INF.SURVEY_DATE)}
+            </p>
           </div>
 
           <div>
             <h3 className={styles.heading.sm}>公開日</h3>
-            <p className={styles.text.body}>{TABLE_INF.OPEN_DATE}</p>
+            <p className={styles.text.body}>
+              {safeRender(TABLE_INF.OPEN_DATE)}
+            </p>
           </div>
 
           <div>
             <h3 className={styles.heading.sm}>更新日</h3>
-            <p className={styles.text.body}>{TABLE_INF.UPDATED_DATE}</p>
+            <p className={styles.text.body}>
+              {safeRender(TABLE_INF.UPDATED_DATE)}
+            </p>
           </div>
         </div>
 
@@ -107,11 +141,11 @@ export default function MetaInfoCard({
           <div className="mt-3">
             <h3 className={styles.heading.sm}>表題詳細</h3>
             <p className={styles.text.body}>
-              {TABLE_INF.TITLE_SPEC.TABLE_NAME}
+              {safeRender(TABLE_INF.TITLE_SPEC.TABLE_NAME)}
             </p>
             {TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION && (
               <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                {TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION}
+                {safeRender(TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION)}
               </p>
             )}
           </div>
@@ -129,7 +163,7 @@ export default function MetaInfoCard({
                 className="bg-white border border-gray-200 rounded-lg p-3 dark:bg-neutral-700 dark:border-neutral-600"
               >
                 <h4 className="text-sm font-medium text-gray-700 mb-2 dark:text-neutral-400">
-                  {classObj["@name"]}
+                  {safeRender(classObj["@name"])}
                 </h4>
 
                 {classObj.CLASS && (
@@ -142,11 +176,11 @@ export default function MetaInfoCard({
                         >
                           <div className="text-sm">
                             <span className="font-medium text-gray-800 dark:text-neutral-200">
-                              {item["@name"]}
+                              {safeRender(item["@name"])}
                             </span>
                             {item["@explanation"] && (
                               <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                                {item["@explanation"]}
+                                {safeRender(item["@explanation"])}
                               </p>
                             )}
                           </div>
@@ -156,11 +190,11 @@ export default function MetaInfoCard({
                       <div className="bg-white border border-gray-200 rounded p-2 dark:bg-neutral-800 dark:border-neutral-600">
                         <div className="text-sm">
                           <span className="font-medium text-gray-800 dark:text-neutral-200">
-                            {classObj.CLASS["@name"]}
+                            {safeRender(classObj.CLASS["@name"])}
                           </span>
                           {classObj.CLASS["@explanation"] && (
                             <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                              {classObj.CLASS["@explanation"]}
+                              {safeRender(classObj.CLASS["@explanation"])}
                             </p>
                           )}
                         </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { SAMPLE_STATS_DATA_IDS } from "@/lib/constants";
 import { useStyles } from "@/hooks/useStyles";
 
 interface StatsIdInputProps {
@@ -18,11 +17,6 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
     if (statsDataId.trim()) {
       onSubmit(statsDataId.trim());
     }
-  };
-
-  const handleSampleSelect = (sampleId: string) => {
-    setStatsDataId(sampleId);
-    onSubmit(sampleId);
   };
 
   return (
@@ -81,29 +75,6 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
         </div>
       </form>
 
-      <div className="mt-4">
-        <h3 className={styles.heading.sm}>サンプル統計表</h3>
-        <div className="space-y-1">
-          {Object.entries(SAMPLE_STATS_DATA_IDS).map(([key, value]) => (
-            <button
-              key={key}
-              onClick={() => handleSampleSelect(value)}
-              disabled={loading}
-              className="w-full text-left px-3 py-2 text-sm bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-gray-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-600 dark:text-neutral-300"
-            >
-              <span className="font-medium">
-                {key === "POPULATION" && "人口推計"}
-                {key === "HOUSEHOLD" && "世帯数"}
-                {key === "ECONOMY" && "県民経済計算"}
-              </span>
-              <span className="text-gray-600 ml-2 dark:text-neutral-400">
-                ({value})
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
       <div className="mt-4 p-3 bg-white border border-gray-200 rounded-lg dark:bg-neutral-700 dark:border-neutral-600">
         <div className="flex items-start">
           <svg
@@ -119,21 +90,6 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <div className="text-sm text-gray-700 dark:text-neutral-300">
-            <p className="font-medium mb-1">統計表IDについて</p>
-            <p>
-              e-STAT APIで利用可能な統計表のIDです。
-              <a
-                href="https://www.e-stat.go.jp/api/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-indigo-600 hover:text-indigo-700 underline dark:text-indigo-400 dark:hover:text-indigo-300"
-              >
-                公式サイト
-              </a>
-              で詳細を確認できます。
-            </p>
-          </div>
         </div>
       </div>
     </div>
