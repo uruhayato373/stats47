@@ -27,9 +27,9 @@ export default function EstatDataDisplay({
   loading,
   error,
 }: EstatDataDisplayProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "raw" | "table">(
-    "overview"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "overview" | "categories" | "areas" | "years" | "values" | "raw"
+  >("overview");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(["basic"])
   );
@@ -213,7 +213,222 @@ export default function EstatDataDisplay({
     );
   };
 
-  const renderTable = () => {
+  const renderCategoriesTable = () => {
+    if (!data) return null;
+
+    const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
+    const values = statisticalData.DATA_INF.VALUE;
+
+    if (!values || (Array.isArray(values) && values.length === 0)) {
+      return (
+        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+          カテゴリ情報がありません
+        </div>
+      );
+    }
+
+    const valuesArray = Array.isArray(values) ? values : [values];
+
+    return (
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+          <thead className="bg-gray-50 dark:bg-neutral-700">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                インデックス
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ01
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ02
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ03
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ04
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ05
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
+            {valuesArray
+              .slice(0, 100)
+              .map((item: EstatValue, index: number) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat01"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat02"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat03"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat04"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat05"] || "-"}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+
+        {valuesArray.length > 100 && (
+          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
+            <p className="text-sm text-gray-500 dark:text-neutral-400">
+              最初の100件を表示中 (全{valuesArray.length}件)
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderAreasTable = () => {
+    if (!data) return null;
+
+    const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
+    const values = statisticalData.DATA_INF.VALUE;
+
+    if (!values || (Array.isArray(values) && values.length === 0)) {
+      return (
+        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+          地域情報がありません
+        </div>
+      );
+    }
+
+    const valuesArray = Array.isArray(values) ? values : [values];
+
+    return (
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+          <thead className="bg-gray-50 dark:bg-neutral-700">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                インデックス
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                地域コード
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                地域名
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
+            {valuesArray
+              .slice(0, 100)
+              .map((item: EstatValue, index: number) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@area"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {/* 地域名は別途取得が必要 */}
+                    {item["@area"] || "-"}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+
+        {valuesArray.length > 100 && (
+          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
+            <p className="text-sm text-gray-500 dark:text-neutral-400">
+              最初の100件を表示中 (全{valuesArray.length}件)
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderYearsTable = () => {
+    if (!data) return null;
+
+    const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
+    const values = statisticalData.DATA_INF.VALUE;
+
+    if (!values || (Array.isArray(values) && values.length === 0)) {
+      return (
+        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+          年度情報がありません
+        </div>
+      );
+    }
+
+    const valuesArray = Array.isArray(values) ? values : [values];
+
+    return (
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+          <thead className="bg-gray-50 dark:bg-neutral-700">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                インデックス
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                年度
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                説明
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
+            {valuesArray
+              .slice(0, 100)
+              .map((item: EstatValue, index: number) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@time"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {/* 年度の説明は別途取得が必要 */}
+                    {item["@time"] || "-"}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+
+        {valuesArray.length > 100 && (
+          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
+            <p className="text-sm text-gray-500 dark:text-neutral-400">
+              最初の100件を表示中 (全{valuesArray.length}件)
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderValuesTable = () => {
     if (!data) return null;
 
     const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
@@ -238,6 +453,15 @@ export default function EstatDataDisplay({
                 インデックス
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                カテゴリ
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                地域
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
+                年度
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
                 値
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
@@ -257,6 +481,20 @@ export default function EstatDataDisplay({
                     {index + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@cat01"] ||
+                      item["@cat02"] ||
+                      item["@cat03"] ||
+                      item["@cat04"] ||
+                      item["@cat05"] ||
+                      "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@area"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item["@time"] || "-"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
                     {item.$ || String(item)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
@@ -372,7 +610,10 @@ export default function EstatDataDisplay({
         <nav className="flex space-x-6 px-4">
           {[
             { id: "overview" as const, label: "概要", icon: Info },
-            { id: "table" as const, label: "テーブル", icon: BarChart3 },
+            { id: "categories" as const, label: "カテゴリ", icon: BarChart3 },
+            { id: "areas" as const, label: "地域", icon: BarChart3 },
+            { id: "years" as const, label: "年度", icon: BarChart3 },
+            { id: "values" as const, label: "値", icon: BarChart3 },
             { id: "raw" as const, label: "Raw JSON", icon: Database },
           ].map((tab) => (
             <button
@@ -394,7 +635,10 @@ export default function EstatDataDisplay({
       {/* タブコンテンツ */}
       <div className="p-4">
         {activeTab === "overview" && renderOverview()}
-        {activeTab === "table" && renderTable()}
+        {activeTab === "categories" && renderCategoriesTable()}
+        {activeTab === "areas" && renderAreasTable()}
+        {activeTab === "years" && renderYearsTable()}
+        {activeTab === "values" && renderValuesTable()}
         {activeTab === "raw" && renderRawData()}
       </div>
     </div>
