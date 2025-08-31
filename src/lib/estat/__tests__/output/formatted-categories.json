@@ -1,0 +1,12 @@
+[
+  {
+    "categoryId": "cat01",
+    "categoryName": "Ａ　人口・世帯",
+    "code": "A1101",
+    "name": "総人口",
+    "originalName": "A1101_総人口",
+    "level": 1,
+    "unit": "人",
+    "parentCode": null
+  }
+]

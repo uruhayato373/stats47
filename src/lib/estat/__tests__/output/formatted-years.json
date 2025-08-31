@@ -1,0 +1,402 @@
+[
+  {
+    "code": "1975100000",
+    "name": "1975年度",
+    "displayName": "1975年度",
+    "year": 1975,
+    "period": null,
+    "sortOrder": 197500
+  },
+  {
+    "code": "1976100000",
+    "name": "1976年度",
+    "displayName": "1976年度",
+    "year": 1976,
+    "period": null,
+    "sortOrder": 197600
+  },
+  {
+    "code": "1977100000",
+    "name": "1977年度",
+    "displayName": "1977年度",
+    "year": 1977,
+    "period": null,
+    "sortOrder": 197700
+  },
+  {
+    "code": "1978100000",
+    "name": "1978年度",
+    "displayName": "1978年度",
+    "year": 1978,
+    "period": null,
+    "sortOrder": 197800
+  },
+  {
+    "code": "1979100000",
+    "name": "1979年度",
+    "displayName": "1979年度",
+    "year": 1979,
+    "period": null,
+    "sortOrder": 197900
+  },
+  {
+    "code": "1980100000",
+    "name": "1980年度",
+    "displayName": "1980年度",
+    "year": 1980,
+    "period": null,
+    "sortOrder": 198000
+  },
+  {
+    "code": "1981100000",
+    "name": "1981年度",
+    "displayName": "1981年度",
+    "year": 1981,
+    "period": null,
+    "sortOrder": 198100
+  },
+  {
+    "code": "1982100000",
+    "name": "1982年度",
+    "displayName": "1982年度",
+    "year": 1982,
+    "period": null,
+    "sortOrder": 198200
+  },
+  {
+    "code": "1983100000",
+    "name": "1983年度",
+    "displayName": "1983年度",
+    "year": 1983,
+    "period": null,
+    "sortOrder": 198300
+  },
+  {
+    "code": "1984100000",
+    "name": "1984年度",
+    "displayName": "1984年度",
+    "year": 1984,
+    "period": null,
+    "sortOrder": 198400
+  },
+  {
+    "code": "1985100000",
+    "name": "1985年度",
+    "displayName": "1985年度",
+    "year": 1985,
+    "period": null,
+    "sortOrder": 198500
+  },
+  {
+    "code": "1986100000",
+    "name": "1986年度",
+    "displayName": "1986年度",
+    "year": 1986,
+    "period": null,
+    "sortOrder": 198600
+  },
+  {
+    "code": "1987100000",
+    "name": "1987年度",
+    "displayName": "1987年度",
+    "year": 1987,
+    "period": null,
+    "sortOrder": 198700
+  },
+  {
+    "code": "1988100000",
+    "name": "1988年度",
+    "displayName": "1988年度",
+    "year": 1988,
+    "period": null,
+    "sortOrder": 198800
+  },
+  {
+    "code": "1989100000",
+    "name": "1989年度",
+    "displayName": "1989年度",
+    "year": 1989,
+    "period": null,
+    "sortOrder": 198900
+  },
+  {
+    "code": "1990100000",
+    "name": "1990年度",
+    "displayName": "1990年度",
+    "year": 1990,
+    "period": null,
+    "sortOrder": 199000
+  },
+  {
+    "code": "1991100000",
+    "name": "1991年度",
+    "displayName": "1991年度",
+    "year": 1991,
+    "period": null,
+    "sortOrder": 199100
+  },
+  {
+    "code": "1992100000",
+    "name": "1992年度",
+    "displayName": "1992年度",
+    "year": 1992,
+    "period": null,
+    "sortOrder": 199200
+  },
+  {
+    "code": "1993100000",
+    "name": "1993年度",
+    "displayName": "1993年度",
+    "year": 1993,
+    "period": null,
+    "sortOrder": 199300
+  },
+  {
+    "code": "1994100000",
+    "name": "1994年度",
+    "displayName": "1994年度",
+    "year": 1994,
+    "period": null,
+    "sortOrder": 199400
+  },
+  {
+    "code": "1995100000",
+    "name": "1995年度",
+    "displayName": "1995年度",
+    "year": 1995,
+    "period": null,
+    "sortOrder": 199500
+  },
+  {
+    "code": "1996100000",
+    "name": "1996年度",
+    "displayName": "1996年度",
+    "year": 1996,
+    "period": null,
+    "sortOrder": 199600
+  },
+  {
+    "code": "1997100000",
+    "name": "1997年度",
+    "displayName": "1997年度",
+    "year": 1997,
+    "period": null,
+    "sortOrder": 199700
+  },
+  {
+    "code": "1998100000",
+    "name": "1998年度",
+    "displayName": "1998年度",
+    "year": 1998,
+    "period": null,
+    "sortOrder": 199800
+  },
+  {
+    "code": "1999100000",
+    "name": "1999年度",
+    "displayName": "1999年度",
+    "year": 1999,
+    "period": null,
+    "sortOrder": 199900
+  },
+  {
+    "code": "2000100000",
+    "name": "2000年度",
+    "displayName": "2000年度",
+    "year": 2000,
+    "period": null,
+    "sortOrder": 200000
+  },
+  {
+    "code": "2001100000",
+    "name": "2001年度",
+    "displayName": "2001年度",
+    "year": 2001,
+    "period": null,
+    "sortOrder": 200100
+  },
+  {
+    "code": "2002100000",
+    "name": "2002年度",
+    "displayName": "2002年度",
+    "year": 2002,
+    "period": null,
+    "sortOrder": 200200
+  },
+  {
+    "code": "2003100000",
+    "name": "2003年度",
+    "displayName": "2003年度",
+    "year": 2003,
+    "period": null,
+    "sortOrder": 200300
+  },
+  {
+    "code": "2004100000",
+    "name": "2004年度",
+    "displayName": "2004年度",
+    "year": 2004,
+    "period": null,
+    "sortOrder": 200400
+  },
+  {
+    "code": "2005100000",
+    "name": "2005年度",
+    "displayName": "2005年度",
+    "year": 2005,
+    "period": null,
+    "sortOrder": 200500
+  },
+  {
+    "code": "2006100000",
+    "name": "2006年度",
+    "displayName": "2006年度",
+    "year": 2006,
+    "period": null,
+    "sortOrder": 200600
+  },
+  {
+    "code": "2007100000",
+    "name": "2007年度",
+    "displayName": "2007年度",
+    "year": 2007,
+    "period": null,
+    "sortOrder": 200700
+  },
+  {
+    "code": "2008100000",
+    "name": "2008年度",
+    "displayName": "2008年度",
+    "year": 2008,
+    "period": null,
+    "sortOrder": 200800
+  },
+  {
+    "code": "2009100000",
+    "name": "2009年度",
+    "displayName": "2009年度",
+    "year": 2009,
+    "period": null,
+    "sortOrder": 200900
+  },
+  {
+    "code": "2010100000",
+    "name": "2010年度",
+    "displayName": "2010年度",
+    "year": 2010,
+    "period": null,
+    "sortOrder": 201000
+  },
+  {
+    "code": "2011100000",
+    "name": "2011年度",
+    "displayName": "2011年度",
+    "year": 2011,
+    "period": null,
+    "sortOrder": 201100
+  },
+  {
+    "code": "2012100000",
+    "name": "2012年度",
+    "displayName": "2012年度",
+    "year": 2012,
+    "period": null,
+    "sortOrder": 201200
+  },
+  {
+    "code": "2013100000",
+    "name": "2013年度",
+    "displayName": "2013年度",
+    "year": 2013,
+    "period": null,
+    "sortOrder": 201300
+  },
+  {
+    "code": "2014100000",
+    "name": "2014年度",
+    "displayName": "2014年度",
+    "year": 2014,
+    "period": null,
+    "sortOrder": 201400
+  },
+  {
+    "code": "2015100000",
+    "name": "2015年度",
+    "displayName": "2015年度",
+    "year": 2015,
+    "period": null,
+    "sortOrder": 201500
+  },
+  {
+    "code": "2016100000",
+    "name": "2016年度",
+    "displayName": "2016年度",
+    "year": 2016,
+    "period": null,
+    "sortOrder": 201600
+  },
+  {
+    "code": "2017100000",
+    "name": "2017年度",
+    "displayName": "2017年度",
+    "year": 2017,
+    "period": null,
+    "sortOrder": 201700
+  },
+  {
+    "code": "2018100000",
+    "name": "2018年度",
+    "displayName": "2018年度",
+    "year": 2018,
+    "period": null,
+    "sortOrder": 201800
+  },
+  {
+    "code": "2019100000",
+    "name": "2019年度",
+    "displayName": "2019年度",
+    "year": 2019,
+    "period": null,
+    "sortOrder": 201900
+  },
+  {
+    "code": "2020100000",
+    "name": "2020年度",
+    "displayName": "2020年度",
+    "year": 2020,
+    "period": null,
+    "sortOrder": 202000
+  },
+  {
+    "code": "2021100000",
+    "name": "2021年度",
+    "displayName": "2021年度",
+    "year": 2021,
+    "period": null,
+    "sortOrder": 202100
+  },
+  {
+    "code": "2022100000",
+    "name": "2022年度",
+    "displayName": "2022年度",
+    "year": 2022,
+    "period": null,
+    "sortOrder": 202200
+  },
+  {
+    "code": "2023100000",
+    "name": "2023年度",
+    "displayName": "2023年度",
+    "year": 2023,
+    "period": null,
+    "sortOrder": 202300
+  },
+  {
+    "code": "2024100000",
+    "name": "2024年度",
+    "displayName": "2024年度",
+    "year": 2024,
+    "period": null,
+    "sortOrder": 202400
+  }
+]

@@ -1,0 +1,434 @@
+[
+  {
+    "code": "00000",
+    "name": "全国",
+    "displayName": "全国",
+    "level": 1,
+    "parentCode": null,
+    "areaType": "country",
+    "sortOrder": 0
+  },
+  {
+    "code": "01000",
+    "name": "北海道",
+    "displayName": "北海道",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 201000
+  },
+  {
+    "code": "02000",
+    "name": "青森県",
+    "displayName": "青森県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 202000
+  },
+  {
+    "code": "03000",
+    "name": "岩手県",
+    "displayName": "岩手県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 203000
+  },
+  {
+    "code": "04000",
+    "name": "宮城県",
+    "displayName": "宮城県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 204000
+  },
+  {
+    "code": "05000",
+    "name": "秋田県",
+    "displayName": "秋田県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 205000
+  },
+  {
+    "code": "06000",
+    "name": "山形県",
+    "displayName": "山形県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 206000
+  },
+  {
+    "code": "07000",
+    "name": "福島県",
+    "displayName": "福島県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 207000
+  },
+  {
+    "code": "08000",
+    "name": "茨城県",
+    "displayName": "茨城県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 208000
+  },
+  {
+    "code": "09000",
+    "name": "栃木県",
+    "displayName": "栃木県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 209000
+  },
+  {
+    "code": "10000",
+    "name": "群馬県",
+    "displayName": "群馬県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 210000
+  },
+  {
+    "code": "11000",
+    "name": "埼玉県",
+    "displayName": "埼玉県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 211000
+  },
+  {
+    "code": "12000",
+    "name": "千葉県",
+    "displayName": "千葉県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 212000
+  },
+  {
+    "code": "13000",
+    "name": "東京都",
+    "displayName": "東京都",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 213000
+  },
+  {
+    "code": "14000",
+    "name": "神奈川県",
+    "displayName": "神奈川県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 214000
+  },
+  {
+    "code": "15000",
+    "name": "新潟県",
+    "displayName": "新潟県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 215000
+  },
+  {
+    "code": "16000",
+    "name": "富山県",
+    "displayName": "富山県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 216000
+  },
+  {
+    "code": "17000",
+    "name": "石川県",
+    "displayName": "石川県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 217000
+  },
+  {
+    "code": "18000",
+    "name": "福井県",
+    "displayName": "福井県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 218000
+  },
+  {
+    "code": "19000",
+    "name": "山梨県",
+    "displayName": "山梨県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 219000
+  },
+  {
+    "code": "20000",
+    "name": "長野県",
+    "displayName": "長野県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 220000
+  },
+  {
+    "code": "21000",
+    "name": "岐阜県",
+    "displayName": "岐阜県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 221000
+  },
+  {
+    "code": "22000",
+    "name": "静岡県",
+    "displayName": "静岡県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 222000
+  },
+  {
+    "code": "23000",
+    "name": "愛知県",
+    "displayName": "愛知県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 223000
+  },
+  {
+    "code": "24000",
+    "name": "三重県",
+    "displayName": "三重県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 224000
+  },
+  {
+    "code": "25000",
+    "name": "滋賀県",
+    "displayName": "滋賀県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 225000
+  },
+  {
+    "code": "26000",
+    "name": "京都府",
+    "displayName": "京都府",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 226000
+  },
+  {
+    "code": "27000",
+    "name": "大阪府",
+    "displayName": "大阪府",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 227000
+  },
+  {
+    "code": "28000",
+    "name": "兵庫県",
+    "displayName": "兵庫県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 228000
+  },
+  {
+    "code": "29000",
+    "name": "奈良県",
+    "displayName": "奈良県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 229000
+  },
+  {
+    "code": "30000",
+    "name": "和歌山県",
+    "displayName": "和歌山県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 230000
+  },
+  {
+    "code": "31000",
+    "name": "鳥取県",
+    "displayName": "鳥取県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 231000
+  },
+  {
+    "code": "32000",
+    "name": "島根県",
+    "displayName": "島根県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 232000
+  },
+  {
+    "code": "33000",
+    "name": "岡山県",
+    "displayName": "岡山県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 233000
+  },
+  {
+    "code": "34000",
+    "name": "広島県",
+    "displayName": "広島県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 234000
+  },
+  {
+    "code": "35000",
+    "name": "山口県",
+    "displayName": "山口県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 235000
+  },
+  {
+    "code": "36000",
+    "name": "徳島県",
+    "displayName": "徳島県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 236000
+  },
+  {
+    "code": "37000",
+    "name": "香川県",
+    "displayName": "香川県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 237000
+  },
+  {
+    "code": "38000",
+    "name": "愛媛県",
+    "displayName": "愛媛県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 238000
+  },
+  {
+    "code": "39000",
+    "name": "高知県",
+    "displayName": "高知県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 239000
+  },
+  {
+    "code": "40000",
+    "name": "福岡県",
+    "displayName": "福岡県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 240000
+  },
+  {
+    "code": "41000",
+    "name": "佐賀県",
+    "displayName": "佐賀県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 241000
+  },
+  {
+    "code": "42000",
+    "name": "長崎県",
+    "displayName": "長崎県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 242000
+  },
+  {
+    "code": "43000",
+    "name": "熊本県",
+    "displayName": "熊本県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 243000
+  },
+  {
+    "code": "44000",
+    "name": "大分県",
+    "displayName": "大分県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 244000
+  },
+  {
+    "code": "45000",
+    "name": "宮崎県",
+    "displayName": "宮崎県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 245000
+  },
+  {
+    "code": "46000",
+    "name": "鹿児島県",
+    "displayName": "鹿児島県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 246000
+  },
+  {
+    "code": "47000",
+    "name": "沖縄県",
+    "displayName": "沖縄県",
+    "level": 2,
+    "parentCode": null,
+    "areaType": "city",
+    "sortOrder": 247000
+  }
+]

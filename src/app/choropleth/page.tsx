@@ -3,6 +3,7 @@ import { ChoroplethMap } from "@/components/estat/ChoroplethMap";
 import { EstatMapDataService } from "@/lib/estat/map-data-service";
 import { YearSelector } from "@/components/estat/YearSelector";
 import { EstatDataTable } from "@/components/estat/EstatDataTable";
+import EstatMetadataDisplay from "@/components/estat/EstatMetadataDisplay";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 
@@ -116,7 +117,7 @@ export default async function ChoroplethPage({
       <Sidebar />
 
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
-        <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+        <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700 max-w-full overflow-hidden">
           {/* ヘッダーセクション */}
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div>
@@ -145,140 +146,154 @@ export default async function ChoroplethPage({
 
           {/* コンテンツエリア */}
           <div className="p-4 bg-white dark:bg-neutral-900">
-            <div className="max-w-7xl mx-auto space-y-6">
-              {/* 年度選択コンポーネント */}
-              {availableYears && availableYears.length > 0 && (
-                <div className="mb-6">
-                  <YearSelector
-                    years={availableYears}
-                    currentYear={selectedYear}
+            <div className="flex flex-col lg:flex-row gap-6 max-w-full">
+              {/* メインコンテンツ */}
+              <div className="flex-1 space-y-6 min-w-0">
+                {/* 年度選択コンポーネント */}
+                {availableYears && availableYears.length > 0 && (
+                  <div className="mb-6">
+                    <YearSelector
+                      years={availableYears}
+                      currentYear={selectedYear}
+                    />
+                  </div>
+                )}
+
+                {/* コロプレス地図 */}
+                <div className="bg-white rounded-lg shadow-lg p-6 mb-8 dark:bg-neutral-800 overflow-hidden">
+                  <div className="w-full overflow-x-auto">
+                    <ChoroplethMap
+                      dataset={dataset}
+                      width={800}
+                      height={600}
+                      className="w-full max-w-full"
+                    />
+                  </div>
+                </div>
+
+                {/* データテーブル */}
+                <div className="overflow-hidden">
+                  <EstatDataTable
+                    dataPoints={dataset.dataPoints}
+                    title={`${dataset.statName} - 都道府県別データ`}
+                    className="mb-8"
                   />
                 </div>
-              )}
 
-              {/* コロプレス地図 */}
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8 dark:bg-neutral-800">
-                <ChoroplethMap
-                  dataset={dataset}
-                  width={1000}
-                  height={700}
-                  className="w-full"
-                />
-              </div>
-
-              {/* データテーブル */}
-              <EstatDataTable
-                dataPoints={dataset.dataPoints}
-                title={`${dataset.statName} - 都道府県別データ`}
-                className="mb-8"
-              />
-
-              {/* フィルター情報 */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {dataset.categories.length > 0 && (
-                  <div className="bg-gray-50 rounded-lg p-4 dark:bg-neutral-700">
-                    <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-3">
-                      利用可能なカテゴリ
-                    </h3>
-                    <div className="space-y-2">
-                      {dataset.categories.slice(0, 5).map((category, index) => (
-                        <div
-                          key={`${category.code}-${index}`}
-                          className="flex justify-between text-sm"
-                        >
-                          <span className="text-gray-700 dark:text-neutral-300">
-                            {category.name}
-                          </span>
-                          <span className="text-gray-500 dark:text-neutral-400">
-                            {category.count}件
-                          </span>
-                        </div>
-                      ))}
-                      {dataset.categories.length > 5 && (
-                        <div className="text-sm text-gray-500 dark:text-neutral-400">
-                          他 {dataset.categories.length - 5} カテゴリ
-                        </div>
-                      )}
+                {/* フィルター情報 */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {dataset.categories.length > 0 && (
+                    <div className="bg-gray-50 rounded-lg p-4 dark:bg-neutral-700">
+                      <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-3">
+                        利用可能なカテゴリ
+                      </h3>
+                      <div className="space-y-2">
+                        {dataset.categories
+                          .slice(0, 5)
+                          .map((category, index) => (
+                            <div
+                              key={`${category.code}-${index}`}
+                              className="flex justify-between text-sm"
+                            >
+                              <span className="text-gray-700 dark:text-neutral-300">
+                                {category.name}
+                              </span>
+                              <span className="text-gray-500 dark:text-neutral-400">
+                                {category.count}件
+                              </span>
+                            </div>
+                          ))}
+                        {dataset.categories.length > 5 && (
+                          <div className="text-sm text-gray-500 dark:text-neutral-400">
+                            他 {dataset.categories.length - 5} カテゴリ
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {dataset.years.length > 0 && (
-                  <div className="bg-gray-50 rounded-lg p-4 dark:bg-neutral-700">
-                    <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-3">
-                      利用可能な年度
-                    </h3>
-                    <div className="space-y-2">
-                      {dataset.years.slice(0, 5).map((year, index) => (
-                        <div
-                          key={`${year.code}-${index}`}
-                          className="flex justify-between text-sm"
-                        >
-                          <span className="text-gray-700 dark:text-neutral-300">
-                            {year.displayName}
-                          </span>
-                          <span className="text-gray-500 dark:text-neutral-400">
-                            {year.count}件
-                          </span>
-                        </div>
-                      ))}
-                      {dataset.years.length > 5 && (
-                        <div className="text-sm text-gray-500 dark:text-neutral-400">
-                          他 {dataset.years.length - 5} 年度
-                        </div>
-                      )}
+                  {dataset.years.length > 0 && (
+                    <div className="bg-gray-50 rounded-lg p-4 dark:bg-neutral-700">
+                      <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-3">
+                        利用可能な年度
+                      </h3>
+                      <div className="space-y-2">
+                        {dataset.years.slice(0, 5).map((year, index) => (
+                          <div
+                            key={`${year.code}-${index}`}
+                            className="flex justify-between text-sm"
+                          >
+                            <span className="text-gray-700 dark:text-neutral-300">
+                              {year.displayName}
+                            </span>
+                            <span className="text-gray-500 dark:text-neutral-400">
+                              {year.count}件
+                            </span>
+                          </div>
+                        ))}
+                        {dataset.years.length > 5 && (
+                          <div className="text-sm text-gray-500 dark:text-neutral-400">
+                            他 {dataset.years.length - 5} 年度
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* 使用方法 */}
-              <div className="mt-8 bg-gray-50 rounded-lg p-6 dark:bg-neutral-700">
-                <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-4">
-                  使用方法
-                </h3>
-                <div className="space-y-3 text-sm text-gray-700 dark:text-neutral-300">
-                  <div>
-                    <strong>URLパラメータでフィルタリング:</strong>
-                    <ul className="mt-1 ml-4 space-y-1">
-                      <li>
-                        •{" "}
-                        <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
-                          ?statsDataId=統計表ID
-                        </code>{" "}
-                        - 表示する統計表を指定
-                      </li>
-                      <li>
-                        •{" "}
-                        <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
-                          ?category=カテゴリコード
-                        </code>{" "}
-                        - 特定カテゴリのみ表示
-                      </li>
-                      <li>
-                        •{" "}
-                        <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
-                          ?year=年度コード
-                        </code>{" "}
-                        - 特定年度のみ表示
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>例:</strong>
-                    <code className="block mt-1 p-2 bg-gray-200 rounded text-xs dark:bg-neutral-600">
-                      /choropleth?statsDataId=0000010101&category=A1101&year=2023000000
-                    </code>
-                  </div>
-                  <div className="mt-3 text-sm text-gray-600 dark:text-neutral-400">
-                    <strong>デフォルト値:</strong>
-                    <ul className="mt-1 ml-4 space-y-1">
-                      <li>• statsDataId: 0000010101（人口推計）</li>
-                      <li>• category: A1101（総人口）</li>
-                      <li>• year: 最新年度を自動選択</li>
-                    </ul>
+                {/* 使用方法 */}
+                <div className="mt-8 bg-gray-50 rounded-lg p-6 dark:bg-neutral-700">
+                  <h3 className="font-medium text-gray-900 dark:text-neutral-100 mb-4">
+                    使用方法
+                  </h3>
+                  <div className="space-y-3 text-sm text-gray-700 dark:text-neutral-300">
+                    <div>
+                      <strong>URLパラメータでフィルタリング:</strong>
+                      <ul className="mt-1 ml-4 space-y-1">
+                        <li>
+                          •{" "}
+                          <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
+                            ?statsDataId=統計表ID
+                          </code>{" "}
+                          - 表示する統計表を指定
+                        </li>
+                        <li>
+                          •{" "}
+                          <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
+                            ?category=カテゴリコード
+                          </code>{" "}
+                          - 特定カテゴリのみ表示
+                        </li>
+                        <li>
+                          •{" "}
+                          <code className="bg-gray-200 px-1 rounded dark:bg-neutral-600">
+                            ?year=年度コード
+                          </code>{" "}
+                          - 特定年度のみ表示
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>例:</strong>
+                      <code className="block mt-1 p-2 bg-gray-200 rounded text-xs dark:bg-neutral-600">
+                        /choropleth?statsDataId=0000010101&category=A1101&year=2023000000
+                      </code>
+                    </div>
+                    <div className="mt-3 text-sm text-gray-600 dark:text-neutral-400">
+                      <strong>デフォルト値:</strong>
+                      <ul className="mt-1 ml-4 space-y-1">
+                        <li>• statsDataId: 0000010101（人口推計）</li>
+                        <li>• category: A1101（総人口）</li>
+                        <li>• year: 最新年度を自動選択</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              {/* 右側サイドバー - e-STATメタデータ */}
+              <div className="lg:w-80 flex-shrink-0 min-w-0">
+                <EstatMetadataDisplay />
               </div>
             </div>
           </div>
