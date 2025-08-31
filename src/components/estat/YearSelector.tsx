@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface YearOption {
   code: string;
@@ -19,20 +19,20 @@ interface YearSelectorProps {
 export const YearSelector: React.FC<YearSelectorProps> = ({
   years,
   currentYear,
-  className = ''
+  className = "",
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const handleYearChange = (yearCode: string) => {
     const params = new URLSearchParams(searchParams);
-    
+
     if (yearCode) {
-      params.set('year', yearCode);
+      params.set("year", yearCode);
     } else {
-      params.delete('year');
+      params.delete("year");
     }
-    
+
     router.push(`/choropleth?${params.toString()}`);
   };
 
@@ -44,33 +44,40 @@ export const YearSelector: React.FC<YearSelectorProps> = ({
   const sortedYears = [...years].sort((a, b) => b.year - a.year);
 
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 p-4 ${className}`}>
+    <div
+      className={`bg-white rounded-lg border border-gray-200 p-4 ${className}`}
+    >
       <div className="flex items-center gap-4">
-        <label htmlFor="year-select" className="font-medium text-gray-900 whitespace-nowrap">
+        <label
+          htmlFor="year-select"
+          className="font-medium text-gray-900 whitespace-nowrap"
+        >
           表示年度:
         </label>
         <select
           id="year-select"
-          value={currentYear || ''}
+          value={currentYear || ""}
           onChange={(e) => handleYearChange(e.target.value)}
           className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
         >
           <option value="">すべての年度</option>
           {sortedYears.map((year) => (
             <option key={year.code} value={year.code}>
-              {year.displayName} ({year.count}件)
+              {year.displayName} (47都道府県)
             </option>
           ))}
         </select>
       </div>
-      
+
       {currentYear && (
         <div className="mt-2 flex items-center gap-2">
           <span className="text-sm text-gray-600">
-            選択中: {sortedYears.find(y => y.code === currentYear)?.displayName || currentYear}
+            選択中:{" "}
+            {sortedYears.find((y) => y.code === currentYear)?.displayName ||
+              currentYear}
           </span>
           <button
-            onClick={() => handleYearChange('')}
+            onClick={() => handleYearChange("")}
             className="text-sm text-blue-600 hover:text-blue-800 underline"
           >
             すべての年度を表示
