@@ -6,7 +6,7 @@
 set -e
 
 # 設定
-DATABASE_NAME="estat-db"
+DATABASE_NAME="stats47"
 SCHEMA_FILE="./database/schemas/main.sql"
 LOCAL_DB_PATH="./database/local"
 

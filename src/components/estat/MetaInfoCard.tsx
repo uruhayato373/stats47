@@ -10,7 +10,7 @@ interface MetaInfoCardProps {
 }
 
 // 安全にレンダリングするためのヘルパー関数
-function safeRender(value: any): string {
+function safeRender(value: unknown): string {
   if (value === null || value === undefined) {
     return "";
   }
@@ -20,14 +20,15 @@ function safeRender(value: any): string {
   if (typeof value === "number") {
     return value.toString();
   }
-  if (typeof value === "object") {
+  if (typeof value === "object" && value !== null) {
+    const obj = value as Record<string, unknown>;
     // オブジェクトの場合は、$プロパティがあればそれを表示
-    if (value.$ && typeof value.$ === "string") {
-      return value.$;
+    if ("$" in obj && typeof obj.$ === "string") {
+      return obj.$;
     }
     // @noプロパティがあればそれを表示
-    if (value["@no"] && typeof value["@no"] === "string") {
-      return value["@no"];
+    if ("@no" in obj && typeof obj["@no"] === "string") {
+      return obj["@no"];
     }
     // その他の場合は、JSON.stringifyで表示
     return JSON.stringify(value);

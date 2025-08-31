@@ -57,19 +57,17 @@ export class EstatDataTransformer {
           : [classObj.CLASS];
 
         classes.forEach((classItem, classIndex) => {
-          // cat01の値を正しく設定
+          // cat01とitem_nameの値を設定
           let cat01Value: string | null = null;
           let itemNameValue: string | null = null;
 
           // CLASS_OBJの@idが"cat01"の場合のみcat01に設定
           if (classObj["@id"] === "cat01") {
-            cat01Value = classItem["@name"] || null;
-            itemNameValue = classItem["@name"] || null;
-            console.log(`✅ cat01分類: ${cat01Value}`);
-          } else {
-            // cat01以外の分類はitem_nameに設定
-            itemNameValue = classItem["@name"] || null;
-            console.log(`📝 その他分類 (${classObj["@id"]}): ${itemNameValue}`);
+            cat01Value = classItem["@code"] || null; // @codeをcat01に設定
+            itemNameValue = classItem["@name"] || null; // @nameをitem_nameに設定
+            console.log(
+              `✅ cat01分類: code=${cat01Value}, name=${itemNameValue}`
+            );
           }
 
           const transformedItem: EstatTransformedData = {
@@ -77,7 +75,7 @@ export class EstatDataTransformer {
             stat_name: TABLE_INF.STAT_NAME.$,
             title: TABLE_INF.TITLE.$,
             cat01: cat01Value,
-            item_name: itemNameValue,
+            item_name: itemNameValue, // 実際の値またはnull
             unit: classItem["@unit"] || null,
           };
 

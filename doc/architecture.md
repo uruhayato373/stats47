@@ -31,6 +31,31 @@
                        └─────────────────┘
 ```
 
+## データベースアーキテクチャ
+
+### Cloudflare D1 データベース
+
+#### 統合データベース設計
+
+- **データベース名**: `stats47`
+- **統合スキーマ**: `database/schemas/main.sql`
+- **テーブル構成**:
+  - `users`: ユーザー認証・管理
+  - `estat_metadata`: e-Stat メタデータ
+  - `estat_data_history`: データ変更履歴
+
+#### 環境別設定
+
+- **ローカル開発**: `.wrangler/state/v3/d1/` 内のローカルインスタンス
+- **本番環境**: Cloudflare D1 のリモートインスタンス
+- **バインディング**: `STATS47_DB` (wrangler.toml)
+
+#### スキーマ管理
+
+- **統合スキーマ**: 認証、メタデータ、履歴管理を一元化
+- **自動適用**: `./database/manage.sh schema` でローカル環境に適用
+- **本番適用**: `npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql`
+
 ## 技術スタック詳細
 
 ### フロントエンドフレームワーク

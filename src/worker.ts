@@ -4,7 +4,7 @@ import { EstatMetadataService } from "./lib/estat/metadata-service";
 
 export interface Env {
   AUTH_DB: D1Database;
-  ESTAT_DB: D1Database;
+  STATS47_DB: D1Database;
   // 環境変数の型定義
   NODE_ENV?: string;
   ESTAT_API_KEY?: string;
@@ -52,7 +52,7 @@ async function handleEstatMetadata(
 }
 
 async function handleStats(request: Request, env: Env): Promise<Response> {
-  const metadataService = new EstatMetadataService(env.ESTAT_DB);
+  const metadataService = new EstatMetadataService(env.STATS47_DB);
 
   try {
     const [count, categories] = await Promise.all([
@@ -88,8 +88,14 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
   }
 
   try {
-    const { statsDataId, batchMode, startId, endId } = await request.json();
-    const metadataService = new EstatMetadataService(env.ESTAT_DB);
+    const { statsDataId, batchMode, startId, endId } =
+      (await request.json()) as {
+        statsDataId?: string | string[];
+        batchMode?: boolean;
+        startId?: string;
+        endId?: string;
+      };
+    const metadataService = new EstatMetadataService(env.STATS47_DB);
 
     if (batchMode && startId && endId) {
       await metadataService.fetchAndSaveMetadataRange(startId, endId);
@@ -133,7 +139,7 @@ async function handleSearch(request: Request, env: Env): Promise<Response> {
   const statsDataId = url.searchParams.get("statsDataId") || "";
 
   try {
-    const metadataService = new EstatMetadataService(env.ESTAT_DB);
+    const metadataService = new EstatMetadataService(env.STATS47_DB);
     let results;
 
     if (statsDataId) {

@@ -54,7 +54,20 @@ echo "NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id" >> .env.local
 echo "JWT_SECRET=your-super-secret-jwt-key-here" >> .env.local
 ```
 
-### 4. 開発サーバーの起動
+### 4. データベースのセットアップ
+
+```bash
+# データベース管理スクリプトに実行権限を付与
+chmod +x database/manage.sh
+
+# ローカル環境にスキーマを適用
+./database/manage.sh schema
+
+# または、手動でスキーマを適用
+npx wrangler d1 execute stats47 --local --file=./database/schemas/main.sql
+```
+
+### 5. 開発サーバーの起動
 
 ```bash
 npm run dev
