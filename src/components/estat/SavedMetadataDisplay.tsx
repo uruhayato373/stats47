@@ -4,54 +4,67 @@ import { useState, useEffect } from "react";
 import { useStyles } from "@/hooks/useStyles";
 
 interface SavedMetadata {
-  id: string;
-  statsDataId: string;
-  statName: string;
+  stats_data_id: string;
+  stat_name: string;
   title: string;
-  category: string;
-  itemName: string;
-  unit: string;
-  updatedAt: string;
+  category_count: number;
 }
 
 export default function SavedMetadataDisplay() {
   const [metadata, setMetadata] = useState<SavedMetadata[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   const styles = useStyles();
 
   useEffect(() => {
-    // 実際の実装では、Cloudflare D1からデータを取得
-    // 現在は空の配列で初期化
-    setMetadata([]);
-    setLoading(false);
+    fetchSavedMetadata();
   }, []);
 
-  const filteredMetadata = metadata.filter((item) => {
-    const matchesSearch =
-      searchQuery === "" ||
-      item.statName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.itemName.toLowerCase().includes(searchQuery.toLowerCase());
+  const fetchSavedMetadata = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-    const matchesCategory =
-      selectedCategory === "" || item.category === selectedCategory;
+      // Cloudflare D1からデータを取得
+      const response = await fetch("/api/estat/metadata/stats", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    return matchesSearch && matchesCategory;
-  });
+      if (!response.ok) {
+        throw new Error(`データの取得に失敗しました: ${response.status}`);
+      }
 
-  const categories = Array.from(new Set(metadata.map((item) => item.category)));
+      const data = await response.json();
+
+      // データが配列であることを確認
+      if (Array.isArray(data)) {
+        setMetadata(data);
+      } else if (data && typeof data === "object" && "error" in data) {
+        throw new Error(String(data.error));
+      } else {
+        console.warn("予期しないデータ形式:", data);
+        setMetadata([]);
+      }
+    } catch (err) {
+      console.error("データ取得エラー:", err);
+      setError(
+        err instanceof Error ? err.message : "データの取得に失敗しました"
+      );
+      setMetadata([]); // エラー時は空配列を設定
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-        <span className="ml-2 text-gray-600 dark:text-neutral-400">
-          データを読み込み中...
-        </span>
+        <span className="ml-2 text-gray-600">データを読み込み中...</span>
       </div>
     );
   }
@@ -60,119 +73,82 @@ export default function SavedMetadataDisplay() {
     return (
       <div className={styles.message.error}>
         <p className={styles.text.body}>エラー: {error}</p>
+        <button
+          onClick={fetchSavedMetadata}
+          className="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+        >
+          再試行
+        </button>
       </div>
     );
   }
 
   return (
     <div className={styles.layout.section}>
-      <div className={styles.header.primary}>
-        <h3 className={styles.heading.lg}>保存済みメタデータ</h3>
-        <p className={styles.text.secondary}>
-          データベースに保存されているe-Statメタ情報を表示・検索できます。
-        </p>
-      </div>
-
-      {/* 検索・フィルター */}
-      <div className={styles.card.base}>
-        <div className={styles.layout.grid}>
-          <div>
-            <label className={styles.label.base}>キーワード検索</label>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="統計名、タイトル、項目名で検索..."
-              className={styles.input.base}
-            />
-          </div>
-          <div>
-            <label className={styles.label.base}>カテゴリ</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className={styles.input.base}
-            >
-              <option value="">すべてのカテゴリ</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* 統計情報 */}
+      {/* ヘッダー */}
       <div className={styles.card.base}>
         <div className="flex items-center justify-between mb-4">
-          <h4 className={styles.heading.lg}>検索結果</h4>
-          <span className={styles.text.muted}>{filteredMetadata.length}件</span>
+          <h4 className="text-lg font-semibold text-gray-900">
+            保存済みデータ一覧
+          </h4>
+          <button
+            onClick={fetchSavedMetadata}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+          >
+            更新
+          </button>
         </div>
+        <div className="text-sm text-gray-800 font-medium">
+          {metadata.length}件のデータ
+        </div>
+      </div>
 
-        {filteredMetadata.length === 0 ? (
-          <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+      {/* データテーブル */}
+      <div className={styles.card.base}>
+        {metadata.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
             保存されたデータがありません。
             <br />
             メタ情報保存タブでデータを保存してください。
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-              <thead className="bg-gray-50 dark:bg-neutral-700">
+            <table className="min-w-full border border-gray-200 rounded-lg">
+              <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
                     統計表ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
                     統計名
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700">
                     タイトル
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
-                    カテゴリ
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    項目名
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
-                    単位
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
-                    更新日
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700">
+                    カテゴリ数
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-neutral-800 divide-y divide-gray-200 dark:divide-neutral-700">
-                {filteredMetadata.map((item) => (
+              <tbody className="divide-y divide-gray-200">
+                {metadata.map((item, index) => (
                   <tr
-                    key={item.id}
-                    className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                    key={`${item.stats_data_id}-${index}`}
+                    className="hover:bg-gray-50"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900 dark:text-neutral-100">
-                      {item.statsDataId}
+                    <td className="px-4 py-3 text-sm font-mono text-gray-900 border-r border-gray-200">
+                      {item.stats_data_id}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                      {item.statName}
+                    <td className="px-4 py-3 text-sm text-gray-900 border-r border-gray-200">
+                      {item.stat_name}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-neutral-100">
-                      <div className="max-w-xs truncate" title={item.title}>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      <div className="max-w-md truncate" title={item.title}>
                         {item.title}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                      {item.category}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                      {item.itemName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                      {item.unit}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-neutral-400">
-                      {item.updatedAt}
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {item.category_count}
                     </td>
                   </tr>
                 ))}
