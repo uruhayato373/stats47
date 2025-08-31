@@ -663,6 +663,68 @@ npm run test:coverage
 npm test -- --watch
 ```
 
+#### データ変換ロジックのテスト
+
+e-Stat API のデータ変換ロジックをテストする場合：
+
+```bash
+# データ変換ロジックのテスト実行
+npm test -- src/lib/estat/__tests__/data-transformer.test.ts
+
+# 特定のテストケースの実行
+npm test -- src/lib/estat/__tests__/data-transformer.test.ts --testNamePattern="item_nameからcat01の文字列を正しく除外する"
+```
+
+##### テストの内容
+
+データ変換ロジックのテストでは、以下の項目を検証します：
+
+1. **基本情報の行の生成**: 統計表の基本情報が正しく設定される
+2. **item_name の抽出**: `cat01`コードが`item_name`から正しく除外される
+3. **データ形式の検証**: 変換後のデータが期待される形式である
+4. **件数の確認**: 基本情報行 + データ行の合計件数が正しい
+
+##### テストデータの構造
+
+```typescript
+// テスト用のサンプルデータ
+const createSampleMetadata = (): EstatMetaInfoResponse => ({
+  GET_META_INFO: {
+    // ... メタデータの構造
+    CLASS_INF: {
+      CLASS_OBJ: [
+        {
+          "@id": "cat01",
+          "@name": "分類1",
+          CLASS: [
+            {
+              "@code": "A1101",
+              "@name": "A1101_総人口", // 変換前
+              "@unit": "人",
+            },
+          ],
+        },
+      ],
+    },
+  },
+});
+
+// 期待される変換結果
+expect(dataRows[0].item_name).toBe("総人口"); // 変換後
+```
+
+##### テストの実行結果
+
+```bash
+✓ EstatDataTransformer > transformToCSVFormat > 基本情報の行が正しく設定される
+✓ EstatDataTransformer > transformToCSVFormat > item_nameからcat01の文字列を正しく除外する
+✓ EstatDataTransformer > transformToCSVFormat > cat01の値が正しく設定される
+✓ EstatDataTransformer > transformToCSVFormat > 基本情報が正しく設定される
+✓ EstatDataTransformer > transformToCSVFormat > 単位が正しく設定される
+✓ EstatDataTransformer > transformToCSVFormat > データの件数が正しい
+✓ EstatDataTransformer > extractItemName (private method test) > 基本的なパターンを正しく処理する
+```
+
 ## デバッグ
 
 ### 1. ブラウザ開発者ツール
@@ -861,7 +923,7 @@ export const OptimizedImage = ({ src, alt, width, height }) => {
       width={width}
       height={height}
       placeholder="blur"
-      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxAAPwCdABmX/9k="
     />
   );
 };

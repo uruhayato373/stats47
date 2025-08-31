@@ -1,10 +1,10 @@
-import { EstatTransformedData } from "./data-transformer";
+import { EstatMetaCategoryData } from "@/types/estat";
 
 export class EstatMetadataDatabaseService {
   constructor(private db: D1Database) {}
 
   // 変換されたデータを一括保存
-  async saveTransformedData(dataList: EstatTransformedData[]): Promise<void> {
+  async saveTransformedData(dataList: EstatMetaCategoryData[]): Promise<void> {
     if (dataList.length === 0) return;
 
     // バッチ処理（D1の制限を考慮）
@@ -17,7 +17,7 @@ export class EstatMetadataDatabaseService {
   }
 
   // バッチ処理
-  private async processBatch(dataList: EstatTransformedData[]): Promise<void> {
+  private async processBatch(dataList: EstatMetaCategoryData[]): Promise<void> {
     // Cloudflare D1の正しいAPIを使用
     const stmt = this.db.prepare(`
       INSERT OR REPLACE INTO estat_metadata 
@@ -46,7 +46,7 @@ export class EstatMetadataDatabaseService {
   }
 
   // 統計表IDで検索
-  async findByStatsId(statsDataId: string): Promise<EstatTransformedData[]> {
+  async findByStatsId(statsDataId: string): Promise<EstatMetaCategoryData[]> {
     const result = await this.db
       .prepare(
         `
@@ -58,11 +58,11 @@ export class EstatMetadataDatabaseService {
       .bind(statsDataId)
       .all();
 
-    return result.results as EstatTransformedData[];
+    return result.results as EstatMetaCategoryData[];
   }
 
   // 統計名で検索
-  async findByStatName(statName: string): Promise<EstatTransformedData[]> {
+  async findByStatName(statName: string): Promise<EstatMetaCategoryData[]> {
     const result = await this.db
       .prepare(
         `
@@ -74,11 +74,11 @@ export class EstatMetadataDatabaseService {
       .bind(`%${statName}%`)
       .all();
 
-    return result.results as EstatTransformedData[];
+    return result.results as EstatMetaCategoryData[];
   }
 
   // カテゴリで検索
-  async findByCategory(category: string): Promise<EstatTransformedData[]> {
+  async findByCategory(category: string): Promise<EstatMetaCategoryData[]> {
     const result = await this.db
       .prepare(
         `
@@ -90,11 +90,11 @@ export class EstatMetadataDatabaseService {
       .bind(category)
       .all();
 
-    return result.results as EstatTransformedData[];
+    return result.results as EstatMetaCategoryData[];
   }
 
   // 全文検索
-  async search(query: string): Promise<EstatTransformedData[]> {
+  async search(query: string): Promise<EstatMetaCategoryData[]> {
     const result = await this.db
       .prepare(
         `
@@ -106,7 +106,7 @@ export class EstatMetadataDatabaseService {
       .bind(`%${query}%`, `%${query}%`, `%${query}%`)
       .all();
 
-    return result.results as EstatTransformedData[];
+    return result.results as EstatMetaCategoryData[];
   }
 
   // 統計表一覧取得

@@ -1,7 +1,7 @@
-import { EstatTransformedData } from "../../data-transformer";
+import { EstatMetaCategoryData } from "../../types/estat";
 
 // 0000010101のデータ変換後の期待結果
-export const expectedTransformedData: EstatTransformedData[] = [
+export const expectedTransformedData: EstatMetaCategoryData[] = [
   {
     stats_data_id: "0000010101",
     stat_name: "社会・人口統計体系",

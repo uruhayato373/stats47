@@ -400,3 +400,7 @@ npm install @estat/types @estat/client @estat/utils
 - **2024-01-XX**: 初版作成
 - **2024-01-XX**: @estat/パッケージ統合の追加
 - **2024-01-XX**: 実装例とベストプラクティスの追加
+- **2024-01-XX**: データ変換ロジックの詳細説明を追加
+  - EstatDataTransformer クラスの説明
+  - item_name 抽出ロジックの詳細
+  - データ変換例と使用例の追加

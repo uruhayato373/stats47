@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { EstatDataTransformer } from "@/lib/estat/data-transformer";
+import { EstatMetaCategoryData } from "@/types/estat";
 import { estatAPI } from "@/services/estat-api";
-import {
-  EstatDataTransformer,
-  EstatTransformedData,
-} from "@/lib/estat/data-transformer";
 
 // Cloudflare D1に保存する関数（開発・本番環境共通）
-async function saveToCloudflareD1(data: EstatTransformedData[]) {
+async function saveToCloudflareD1(data: EstatMetaCategoryData[]) {
   try {
     console.log("Cloudflare D1に保存するデータ:", data);
 
@@ -19,6 +17,34 @@ async function saveToCloudflareD1(data: EstatTransformedData[]) {
       throw new Error(
         "Cloudflare D1設定が不完全です。環境変数を確認してください。"
       );
+    }
+
+    // 重複を防ぐため、既存データを削除
+    const statsDataId = data[0]?.stats_data_id;
+    if (statsDataId) {
+      console.log(`既存データの削除中: stats_data_id = ${statsDataId}`);
+
+      const deleteSql = `DELETE FROM estat_metadata WHERE stats_data_id = ?`;
+      const deleteResponse = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sql: deleteSql,
+            params: [statsDataId],
+          }),
+        }
+      );
+
+      if (!deleteResponse.ok) {
+        console.warn("既存データの削除に失敗しましたが、処理を続行します");
+      } else {
+        console.log("既存データの削除完了");
+      }
     }
 
     // データを小さなチャンクに分割（API制限対策）
@@ -58,8 +84,9 @@ async function saveToCloudflareD1(data: EstatTransformedData[]) {
       const chunkPromises = chunk.map(async (item) => {
         try {
           // パラメータ化クエリを使用してSQLインジェクションを防ぐ
+          // INSERT OR IGNOREを使用して重複を防ぐ
           const sql = `
-            INSERT INTO estat_metadata 
+            INSERT OR IGNORE INTO estat_metadata 
             (stats_data_id, stat_name, title, cat01, item_name, unit, updated_at, created_at)
             VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
           `;
@@ -182,6 +209,7 @@ Cloudflare D1保存完了
 - チャンクサイズ: ${CHUNK_SIZE}件
 - エラー数: ${errorCount}件
 - 処理停止: ${errorCount >= MAX_ERRORS ? "はい" : "いいえ"}
+- 重複防止: 既存データ削除 + INSERT OR IGNORE
     `);
 
     return allResults;

@@ -3,15 +3,17 @@
 import { useState } from "react";
 import { useStyles } from "@/hooks/useStyles";
 import Message from "@/components/common/Message";
+import { EstatMetaCategoryData } from "@/types/estat";
 
 interface SaveResult {
   success: boolean;
   message: string;
-  data: any[];
+  data: EstatMetaCategoryData[];
   savedCount: number;
   totalCount: number;
   environment: string;
-  result: any[];
+  result: EstatMetaCategoryData[];
+  error?: string;
 }
 
 export default function MetadataSaver() {

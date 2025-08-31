@@ -1,4 +1,5 @@
-import { EstatDataTransformer, EstatTransformedData } from "./data-transformer";
+import { EstatDataTransformer } from "./data-transformer";
+import { EstatMetaCategoryData } from "@/types/estat";
 import { EstatMetadataDatabaseService } from "./metadata-database";
 import { estatAPI } from "@/services/estat-api";
 
@@ -65,7 +66,7 @@ export class EstatMetadataService {
   }
 
   // 保存済みデータの検索
-  async searchSavedMetadata(query: string): Promise<EstatTransformedData[]> {
+  async searchSavedMetadata(query: string): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.search(query);
   }
 
@@ -91,14 +92,14 @@ export class EstatMetadataService {
   // 統計表IDで保存済みデータを取得
   async getSavedMetadataByStatsId(
     statsDataId: string
-  ): Promise<EstatTransformedData[]> {
+  ): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.findByStatsId(statsDataId);
   }
 
   // カテゴリで保存済みデータを取得
   async getSavedMetadataByCategory(
     category: string
-  ): Promise<EstatTransformedData[]> {
+  ): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.findByCategory(category);
   }
 }
