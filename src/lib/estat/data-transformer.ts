@@ -77,29 +77,13 @@ export class EstatDataTransformer {
           let cat01Value: string | null = null;
           let itemNameValue: string | null = null;
 
-          // カテゴリIDに基づいて適切な値を設定
-          if (classObj["@id"] === "cat01") {
-            cat01Value = classItem["@code"] || null;
-            const rawItemName = classItem["@name"] || null;
+          // すべてのカテゴリで統一的に処理
+          cat01Value = classItem["@code"] || null;
+          itemNameValue = classItem["@name"] || null;
 
-            // item_nameからcat01の文字列を除外
-            if (cat01Value && rawItemName) {
-              itemNameValue = this.extractItemName(rawItemName, cat01Value);
-            } else {
-              itemNameValue = rawItemName;
-            }
-
-            console.log(
-              `✅ cat01分類: code=${cat01Value}, original_name=${rawItemName}, extracted_name=${itemNameValue}`
-            );
-          } else {
-            // cat01以外のカテゴリも処理
-            cat01Value = classItem["@code"] || null;
-            itemNameValue = classItem["@name"] || null;
-            console.log(
-              `✅ ${classObj["@id"]}分類: code=${cat01Value}, name=${itemNameValue}`
-            );
-          }
+          console.log(
+            `✅ ${classObj["@id"]}分類: code=${cat01Value}, name=${itemNameValue}`
+          );
 
           const transformedItem: EstatTransformedData = {
             stats_data_id: statsDataId,
