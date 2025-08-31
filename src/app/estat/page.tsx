@@ -1,23 +1,59 @@
 "use client";
 
 import { useState } from "react";
+import {
+  Database,
+  Save,
+  Archive,
+  RefreshCw,
+  ExternalLink,
+  BarChart3,
+} from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import StatsIdInput from "@/components/estat/StatsIdInput";
+import MetaInfoFetcher from "@/components/estat/MetaInfoFetcher";
 import MetaInfoCard from "@/components/estat/MetaInfoCard";
 import MetadataSaver from "@/components/estat/MetadataSaver";
 import SavedMetadataDisplay from "@/components/estat/SavedMetadataDisplay";
 import { estatAPI } from "@/services/estat-api";
 import { EstatMetaInfoResponse } from "@/types/estat";
 
+type TabId = "fetch" | "save" | "saved";
+
+interface Tab {
+  id: TabId;
+  label: string;
+  icon: React.ReactNode;
+  description: string;
+}
+
 export default function EstatMetaPage() {
   const [metaInfo, setMetaInfo] = useState<EstatMetaInfoResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentStatsId, setCurrentStatsId] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"fetch" | "save" | "saved">(
-    "fetch"
-  );
+  const [activeTab, setActiveTab] = useState<TabId>("fetch");
+
+  const tabs: Tab[] = [
+    {
+      id: "fetch",
+      label: "メタ情報取得",
+      icon: <Database className="w-4 h-4" />,
+      description: "e-Stat APIからメタ情報を取得・表示",
+    },
+    {
+      id: "save",
+      label: "メタ情報保存",
+      icon: <Save className="w-4 h-4" />,
+      description: "取得したメタ情報をデータベースに保存",
+    },
+    {
+      id: "saved",
+      label: "保存済みデータ",
+      icon: <Archive className="w-4 h-4" />,
+      description: "保存済みのメタ情報を閲覧・管理",
+    },
+  ];
 
   const handleFetchMetaInfo = async (statsDataId: string) => {
     setLoading(true);
@@ -44,11 +80,27 @@ export default function EstatMetaPage() {
     }
   };
 
-  const tabs = [
-    { id: "fetch", label: "メタ情報取得", icon: "📊" },
-    { id: "save", label: "メタ情報保存", icon: "💾" },
-    { id: "saved", label: "保存済みデータ", icon: "🗄️" },
-  ] as const;
+  const handleTabChange = (tabId: TabId) => {
+    setActiveTab(tabId);
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "fetch":
+        return (
+          <>
+            <MetaInfoFetcher onSubmit={handleFetchMetaInfo} loading={loading} />
+            <MetaInfoCard metaInfo={metaInfo} loading={loading} error={error} />
+          </>
+        );
+      case "save":
+        return <MetadataSaver />;
+      case "saved":
+        return <SavedMetadataDisplay />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -57,70 +109,38 @@ export default function EstatMetaPage() {
 
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
         <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+          {/* ヘッダーセクション */}
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div>
-              <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
+              <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
+                <BarChart3 className="w-6 h-6 text-indigo-600" />
                 e-STAT メタ情報管理
               </h1>
-              {currentStatsId && (
-                <p className="text-sm text-gray-600 dark:text-neutral-400 mt-1">
-                  統計表ID:{" "}
-                  <span className="font-mono bg-white border border-gray-200 text-gray-800 px-2 py-1 rounded dark:bg-neutral-700 dark:text-neutral-300">
-                    {currentStatsId}
-                  </span>
-                </p>
-              )}
             </div>
+
+            {/* アクションボタン */}
             <div className="flex items-center gap-x-2">
               {currentStatsId && (
                 <button
                   type="button"
                   onClick={handleRefresh}
                   disabled={loading}
-                  className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                  className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
                 >
-                  <svg
-                    className="size-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9 0 0 1 6.74 2.74L21 8" />
-                    <path d="M21 3v5h-5" />
-                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9 0 0 1-6.74-2.74L3 16" />
-                    <path d="M8 16H3v5" />
-                  </svg>
-                  更新
+                  <RefreshCw
+                    className={`w-3 h-3 ${loading ? "animate-spin" : ""}`}
+                  />
+                  {loading ? "更新中..." : "更新"}
                 </button>
               )}
+
               <a
                 href="https://www.e-stat.go.jp/api/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-600"
+                className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-600 transition-colors"
               >
-                <svg
-                  className="size-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15,3 21,3 21,9" />
-                  <line x1="10" x2="21" y1="14" y2="3" />
-                </svg>
+                <ExternalLink className="w-3 h-3" />
                 e-STAT API
               </a>
             </div>
@@ -128,46 +148,29 @@ export default function EstatMetaPage() {
 
           {/* タブナビゲーション */}
           <div className="border-b border-gray-200 dark:border-neutral-700">
-            <nav className="flex space-x-8 px-4">
+            <nav className="flex space-x-6 px-4">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`py-3 px-1 border-b-2 font-medium text-sm ${
+                  onClick={() => handleTabChange(tab.id)}
+                  className={`py-2 px-1 border-b-2 font-medium text-xs transition-all duration-200 flex items-center gap-1.5 ${
                     activeTab === tab.id
                       ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                       : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
                   }`}
+                  title={tab.description}
                 >
-                  <span className="mr-2">{tab.icon}</span>
+                  {tab.icon}
                   {tab.label}
                 </button>
               ))}
             </nav>
           </div>
 
+          {/* タブコンテンツ */}
           <div className="p-4 bg-white dark:bg-neutral-900">
             <div className="max-w-7xl mx-auto space-y-4">
-              {/* メタ情報取得タブ */}
-              {activeTab === "fetch" && (
-                <>
-                  <StatsIdInput
-                    onSubmit={handleFetchMetaInfo}
-                    loading={loading}
-                  />
-                  <MetaInfoCard
-                    metaInfo={metaInfo}
-                    loading={loading}
-                    error={error}
-                  />
-                </>
-              )}
-
-              {/* メタ情報保存タブ */}
-              {activeTab === "save" && <MetadataSaver />}
-
-              {/* 保存済みデータタブ */}
-              {activeTab === "saved" && <SavedMetadataDisplay />}
+              {renderTabContent()}
             </div>
           </div>
         </div>

@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useStyles } from "@/hooks/useStyles";
 
-interface StatsIdInputProps {
+interface MetaInfoFetcherProps {
   onSubmit: (statsDataId: string) => void;
   loading?: boolean;
 }
 
-export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
+export default function MetaInfoFetcher({
+  onSubmit,
+  loading,
+}: MetaInfoFetcherProps) {
   const [statsDataId, setStatsDataId] = useState<string>("");
   const styles = useStyles();
 
@@ -74,24 +77,6 @@ export default function StatsIdInput({ onSubmit, loading }: StatsIdInputProps) {
           </div>
         </div>
       </form>
-
-      <div className="mt-4 p-3 bg-white border border-gray-200 rounded-lg dark:bg-neutral-700 dark:border-neutral-600">
-        <div className="flex items-start">
-          <svg
-            className="w-4 h-4 text-gray-600 mt-0.5 mr-2 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </div>
-      </div>
     </div>
   );
 }
