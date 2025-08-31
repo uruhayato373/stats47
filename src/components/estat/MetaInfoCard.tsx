@@ -1,5 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Database,
+  ChevronLeft,
+  ChevronFirst,
+  ChevronLast,
+} from "lucide-react";
 import { EstatMetaInfoResponse } from "@/types/estat";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -34,6 +43,179 @@ function safeRender(value: unknown): string {
     return JSON.stringify(value);
   }
   return String(value);
+}
+
+// ページネーション付きテーブルコンポーネント
+function PaginatedTable({
+  data,
+  itemsPerPage = 15,
+}: {
+  data: Array<{
+    "@code": string;
+    "@name": string;
+    "@unit"?: string;
+    "@explanation"?: string;
+  }>;
+  itemsPerPage?: number;
+}) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+  };
+
+  if (data.length === 0) return null;
+
+  return (
+    <div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-200 rounded-lg">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
+                コード
+              </th>
+              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
+                項目名
+              </th>
+              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700">
+                単位
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {currentData.map((item, index) => (
+              <tr key={startIndex + index} className="hover:bg-gray-50">
+                <td className="px-3 py-2 text-xs font-mono text-gray-700 border-r border-gray-200">
+                  {safeRender(item["@code"])}
+                </td>
+                <td className="px-3 py-2 text-xs text-gray-800 border-r border-gray-200">
+                  {safeRender(item["@name"])}
+                </td>
+                <td className="px-3 py-2 text-xs text-gray-600">
+                  {item["@unit"] ? safeRender(item["@unit"]) : "-"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-3 px-2">
+          <div className="text-xs text-gray-600">
+            {startIndex + 1}-{Math.min(endIndex, data.length)} / {data.length}件
+          </div>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => goToPage(1)}
+              disabled={currentPage === 1}
+              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronFirst className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="text-xs text-gray-600 px-2">
+              {currentPage} / {totalPages}
+            </span>
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => goToPage(totalPages)}
+              disabled={currentPage === totalPages}
+              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLast className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 分類情報のアコーディオンコンポーネント
+function ClassificationAccordion({
+  classObj,
+  index,
+}: {
+  classObj: {
+    "@id": string;
+    "@name": string;
+    CLASS?:
+      | Array<{
+          "@code": string;
+          "@name": string;
+          "@unit"?: string;
+          "@explanation"?: string;
+        }>
+      | {
+          "@code": string;
+          "@name": string;
+          "@unit"?: string;
+          "@explanation"?: string;
+        };
+  };
+  index: number;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const itemCount = Array.isArray(classObj.CLASS)
+    ? classObj.CLASS.length
+    : classObj.CLASS
+    ? 1
+    : 0;
+
+  const tableData = Array.isArray(classObj.CLASS)
+    ? classObj.CLASS
+    : classObj.CLASS
+    ? [classObj.CLASS]
+    : [];
+
+  return (
+    <div className="border border-gray-200 rounded-lg">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-3 py-2 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Database className="w-4 h-4 text-gray-500" />
+          <span className="font-medium text-gray-700">
+            {safeRender(classObj["@name"])}
+          </span>
+          <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+            {itemCount}件
+          </span>
+        </div>
+        {isOpen ? (
+          <ChevronDown className="w-4 h-4 text-gray-500" />
+        ) : (
+          <ChevronRight className="w-4 h-4 text-gray-500" />
+        )}
+      </button>
+
+      {isOpen && (
+        <div className="px-3 pb-3 border-t border-gray-200">
+          <PaginatedTable data={tableData} itemsPerPage={15} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function MetaInfoCard({
@@ -75,9 +257,9 @@ export default function MetaInfoCard({
               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <h3 className="text-red-800 font-medium dark:text-red-400">エラー</h3>
+          <h3 className="text-red-800 font-medium">エラー</h3>
         </div>
-        <p className="text-red-700 mt-1 dark:text-red-300">{error}</p>
+        <p className="text-red-700 mt-1">{error}</p>
       </div>
     );
   }
@@ -95,119 +277,84 @@ export default function MetaInfoCard({
 
   return (
     <div className={styles.card.compact}>
-      <div className="mb-4">
-        <h2 className={styles.heading.md}>統計表基本情報</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 統計表基本情報 */}
+        <div>
+          <h2 className={styles.heading.md}>統計表基本情報</h2>
 
-        <div className="grid gap-3 md:grid-cols-2">
-          <div>
-            <h3 className={styles.heading.sm}>統計表題名</h3>
-            <p className={styles.text.body}>{safeRender(TABLE_INF.TITLE)}</p>
-          </div>
-
-          <div>
-            <h3 className={styles.heading.sm}>政府統計名</h3>
-            <p className={styles.text.body}>
-              {safeRender(TABLE_INF.STAT_NAME)}
-            </p>
-          </div>
-
-          <div>
-            <h3 className={styles.heading.sm}>作成機関</h3>
-            <p className={styles.text.body}>{safeRender(TABLE_INF.GOV_ORG)}</p>
-          </div>
-
-          <div>
-            <h3 className={styles.heading.sm}>調査年月</h3>
-            <p className={styles.text.body}>
-              {safeRender(TABLE_INF.SURVEY_DATE)}
-            </p>
-          </div>
-
-          <div>
-            <h3 className={styles.heading.sm}>公開日</h3>
-            <p className={styles.text.body}>
-              {safeRender(TABLE_INF.OPEN_DATE)}
-            </p>
-          </div>
-
-          <div>
-            <h3 className={styles.heading.sm}>更新日</h3>
-            <p className={styles.text.body}>
-              {safeRender(TABLE_INF.UPDATED_DATE)}
-            </p>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border border-gray-200 rounded-lg">
+              <tbody className="divide-y divide-gray-200">
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200 w-1/3">
+                    統計表題名
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.TITLE)}
+                  </td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
+                    政府統計名
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.STAT_NAME)}
+                  </td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
+                    作成機関
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.GOV_ORG)}
+                  </td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
+                    調査年月
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.SURVEY_DATE)}
+                  </td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
+                    公開日
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.OPEN_DATE)}
+                  </td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
+                    更新日
+                  </td>
+                  <td className="px-3 py-2 text-sm text-gray-800">
+                    {safeRender(TABLE_INF.UPDATED_DATE)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {TABLE_INF.TITLE_SPEC && (
-          <div className="mt-3">
-            <h3 className={styles.heading.sm}>表題詳細</h3>
-            <p className={styles.text.body}>
-              {safeRender(TABLE_INF.TITLE_SPEC.TABLE_NAME)}
-            </p>
-            {TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION && (
-              <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                {safeRender(TABLE_INF.TITLE_SPEC.TABLE_EXPLANATION)}
-              </p>
-            )}
+        {/* 分類情報 */}
+        {CLASS_INF && CLASS_INF.CLASS_OBJ && CLASS_INF.CLASS_OBJ.length > 0 && (
+          <div>
+            <h2 className={styles.heading.md}>分類情報</h2>
+
+            <div className="space-y-2">
+              {CLASS_INF.CLASS_OBJ.map((classObj, index) => (
+                <ClassificationAccordion
+                  key={index}
+                  classObj={classObj}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
-
-      {CLASS_INF && CLASS_INF.CLASS_OBJ && CLASS_INF.CLASS_OBJ.length > 0 && (
-        <div>
-          <h3 className={styles.heading.md}>分類情報</h3>
-
-          <div className="space-y-3">
-            {CLASS_INF.CLASS_OBJ.map((classObj, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-lg p-3 dark:bg-neutral-700 dark:border-neutral-600"
-              >
-                <h4 className="text-sm font-medium text-gray-700 mb-2 dark:text-neutral-400">
-                  {safeRender(classObj["@name"])}
-                </h4>
-
-                {classObj.CLASS && (
-                  <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                    {Array.isArray(classObj.CLASS) ? (
-                      classObj.CLASS.map((item, itemIndex) => (
-                        <div
-                          key={itemIndex}
-                          className="bg-white border border-gray-200 rounded p-2 dark:bg-neutral-800 dark:border-neutral-600"
-                        >
-                          <div className="text-sm">
-                            <span className="font-medium text-gray-800 dark:text-neutral-200">
-                              {safeRender(item["@name"])}
-                            </span>
-                            {item["@explanation"] && (
-                              <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                                {safeRender(item["@explanation"])}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="bg-white border border-gray-200 rounded p-2 dark:bg-neutral-800 dark:border-neutral-600">
-                        <div className="text-sm">
-                          <span className="font-medium text-gray-800 dark:text-neutral-200">
-                            {safeRender(classObj.CLASS["@name"])}
-                          </span>
-                          {classObj.CLASS["@explanation"] && (
-                            <p className="text-sm text-gray-600 mt-1 dark:text-neutral-400">
-                              {safeRender(classObj.CLASS["@explanation"])}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
