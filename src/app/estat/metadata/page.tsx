@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Database,
   Save,
+  Archive,
   RefreshCw,
   ExternalLink,
   BarChart3,
@@ -13,10 +14,11 @@ import Sidebar from "@/components/layout/Sidebar";
 import MetaInfoFetcher from "@/components/estat/MetaInfoFetcher";
 import MetaInfoCard from "@/components/estat/MetaInfoCard";
 import MetadataSaver from "@/components/estat/MetadataSaver";
+import SavedMetadataDisplay from "@/components/estat/SavedMetadataDisplay";
 import { estatAPI } from "@/services/estat-api";
 import { EstatMetaInfoResponse } from "@/types/estat";
 
-type TabId = "fetch" | "save";
+type TabId = "fetch" | "save" | "saved";
 
 interface Tab {
   id: TabId;
@@ -44,6 +46,12 @@ export default function EstatMetadataPage() {
       label: "メタ情報保存",
       icon: <Save className="w-4 h-4" />,
       description: "取得したメタ情報をデータベースに保存",
+    },
+    {
+      id: "saved",
+      label: "保存済データ確認",
+      icon: <Archive className="w-4 h-4" />,
+      description: "保存済みのメタ情報を閲覧・管理",
     },
   ];
 
@@ -87,6 +95,8 @@ export default function EstatMetadataPage() {
         );
       case "save":
         return <MetadataSaver />;
+      case "saved":
+        return <SavedMetadataDisplay />;
       default:
         return null;
     }
