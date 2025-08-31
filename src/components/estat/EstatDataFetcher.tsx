@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Search, RotateCcw, Info } from "lucide-react";
+import { Search, RotateCcw } from "lucide-react";
 import { GetStatsDataParams } from "@/types/estat";
+import InputField from "@/components/common/InputField";
 
 interface EstatDataFetcherProps {
   onSubmit: (params: GetStatsDataParams) => void;
@@ -21,7 +22,7 @@ export default function EstatDataFetcher({
   loading,
 }: EstatDataFetcherProps) {
   const [formData, setFormData] = useState<FormData>({
-    statsDataId: "0003412312",
+    statsDataId: "00000010101",
     cdCat01: "",
     cdArea: "",
     cdTime: "",
@@ -51,36 +52,12 @@ export default function EstatDataFetcher({
 
   const handleReset = () => {
     setFormData({
-      statsDataId: "0003412312",
+      statsDataId: "0000010101",
       cdCat01: "",
       cdArea: "",
       cdTime: "",
     });
   };
-
-  const renderInputField = (
-    name: keyof FormData,
-    label: string,
-    placeholder?: string,
-    description?: string
-  ) => (
-    <div>
-      <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
-        {label}
-        {description && (
-          <span className="ml-1 text-xs text-gray-500">({description})</span>
-        )}
-      </label>
-      <input
-        type="text"
-        name={name}
-        value={formData[name]}
-        onChange={handleInputChange}
-        className="py-2 px-3 block w-full border border-gray-200 rounded-lg text-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-        placeholder={placeholder}
-      />
-    </div>
-  );
 
   return (
     <div className="space-y-4">
@@ -96,31 +73,40 @@ export default function EstatDataFetcher({
         </div>
 
         <form onSubmit={handleSubmit} className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {renderInputField(
-              "statsDataId",
-              "統計表ID *",
-              "例: 0003412312",
-              "必須項目"
-            )}
-            {renderInputField(
-              "cdCat01",
-              "分類01",
-              "カンマ区切り",
-              "例: A1101,A1102"
-            )}
-            {renderInputField(
-              "cdArea",
-              "地域",
-              "カンマ区切り",
-              "例: 13100,13101"
-            )}
-            {renderInputField(
-              "cdTime",
-              "時間軸",
-              "カンマ区切り",
-              "例: 2020,2021"
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <InputField
+              name="statsDataId"
+              label="統計表ID *"
+              placeholder="例: 0003412312"
+              description="必須項目"
+              value={formData.statsDataId}
+              onChange={handleInputChange}
+              required
+            />
+            <InputField
+              name="cdCat01"
+              label="分類01"
+              placeholder="カンマ区切り"
+              description="例: A1101,A1102"
+              value={formData.cdCat01}
+              onChange={handleInputChange}
+            />
+            <InputField
+              name="cdArea"
+              label="地域"
+              placeholder="カンマ区切り"
+              description="例: 13100,13101"
+              value={formData.cdArea}
+              onChange={handleInputChange}
+            />
+            <InputField
+              name="cdTime"
+              label="時間軸"
+              placeholder="カンマ区切り"
+              description="例: 2020,2021"
+              value={formData.cdTime}
+              onChange={handleInputChange}
+            />
           </div>
 
           {/* ボタン */}
@@ -145,47 +131,6 @@ export default function EstatDataFetcher({
             </button>
           </div>
         </form>
-      </div>
-
-      {/* ヘルプ情報 */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-900/10 dark:border-blue-800">
-        <div className="flex items-start gap-3">
-          <Info className="w-5 h-5 text-blue-500 mt-0.5" />
-          <div>
-            <h3 className="font-medium text-blue-800 dark:text-blue-200 text-sm">
-              パラメータについて
-            </h3>
-            <div className="text-sm text-blue-700 dark:text-blue-300 mt-1 space-y-1">
-              <p>
-                • <strong>統計表ID</strong>: 取得したい統計表の識別子（必須）
-              </p>
-              <p>
-                • <strong>分類01</strong>:
-                特定の分類項目のみを取得したい場合に指定（カンマ区切り）
-              </p>
-              <p>
-                • <strong>地域</strong>:
-                特定の地域のみを取得したい場合に指定（カンマ区切り）
-              </p>
-              <p>
-                • <strong>時間軸</strong>:
-                特定の期間のデータのみを取得したい場合に指定（カンマ区切り）
-              </p>
-              <p>
-                詳細は{" "}
-                <a
-                  href="https://www.e-stat.go.jp/api/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
-                >
-                  e-STAT API マニュアル
-                </a>{" "}
-                を参照してください。
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

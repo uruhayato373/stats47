@@ -1,54 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import {
-  BarChart3,
-  Search,
-  Download,
-  RefreshCw,
-  Eye,
-  Database,
-  ExternalLink,
-} from "lucide-react";
+import { RefreshCw, Database, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import EstatDataFetcher from "@/components/estat/EstatDataFetcher";
 import EstatDataDisplay from "@/components/estat/EstatDataDisplay";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/types/estat";
 
 export default function EstatDataPage() {
-  const [apiResponse, setApiResponse] = useState<any>(null);
+  const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentParams, setCurrentParams] = useState<any>(null);
+  const [currentParams, setCurrentParams] = useState<GetStatsDataParams | null>(
+    null
+  );
 
-  const handleFetchData = async (params: any) => {
+  const handleFetchData = async (params: GetStatsDataParams) => {
     setLoading(true);
     setError(null);
     setCurrentParams(params);
 
     try {
       const queryParams = new URLSearchParams();
-      
+
       Object.entries(params).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== '') {
+        if (value !== null && value !== undefined && value !== "") {
           queryParams.append(key, String(value));
         }
       });
 
       const response = await fetch(`/api/estat/data?${queryParams.toString()}`);
-      
+
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = (await response.json()) as { error?: string };
         throw new Error(errorData.error || `HTTP ${response.status}`);
       }
-      
-      const data = await response.json();
+
+      const data = (await response.json()) as EstatStatsDataResponse;
       setApiResponse(data);
     } catch (err) {
       console.error("Data fetch error:", err);
-      setError(
-        err instanceof Error ? err.message : "データ取得に失敗しました"
-      );
+      setError(err instanceof Error ? err.message : "データ取得に失敗しました");
       setApiResponse(null);
     } finally {
       setLoading(false);
@@ -113,12 +108,12 @@ export default function EstatDataPage() {
             <div className="max-w-7xl mx-auto space-y-6">
               {/* データ取得フォーム */}
               <EstatDataFetcher onSubmit={handleFetchData} loading={loading} />
-              
+
               {/* データ表示エリア */}
-              <EstatDataDisplay 
-                data={apiResponse} 
-                loading={loading} 
-                error={error} 
+              <EstatDataDisplay
+                data={apiResponse}
+                loading={loading}
+                error={error}
               />
             </div>
           </div>

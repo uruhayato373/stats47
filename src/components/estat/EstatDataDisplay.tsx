@@ -14,9 +14,10 @@ import {
   Database,
   Clock,
 } from "lucide-react";
+import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
 
 interface EstatDataDisplayProps {
-  data: any;
+  data: EstatStatsDataResponse | null;
   loading: boolean;
   error: string | null;
 }
@@ -26,8 +27,12 @@ export default function EstatDataDisplay({
   loading,
   error,
 }: EstatDataDisplayProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "raw" | "table">("overview");
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(["basic"]));
+  const [activeTab, setActiveTab] = useState<"overview" | "raw" | "table">(
+    "overview"
+  );
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(
+    new Set(["basic"])
+  );
 
   const toggleSection = (section: string) => {
     const newExpanded = new Set(expandedSections);
@@ -45,7 +50,7 @@ export default function EstatDataDisplay({
 
   const downloadAsJson = () => {
     if (!data) return;
-    
+
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
@@ -84,17 +89,21 @@ export default function EstatDataDisplay({
               <ChevronRight className="w-4 h-4" />
             )}
           </button>
-          
+
           {expandedSections.has("basic") && (
             <div className="px-4 pb-3 border-t border-gray-200 dark:border-neutral-700">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">ステータス</dt>
+                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                    ステータス
+                  </dt>
                   <dd className="mt-1 flex items-center gap-2">
                     {result?.STATUS === 0 ? (
                       <>
                         <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-green-600 dark:text-green-400">成功</span>
+                        <span className="text-sm text-green-600 dark:text-green-400">
+                          成功
+                        </span>
                       </>
                     ) : (
                       <>
@@ -106,25 +115,31 @@ export default function EstatDataDisplay({
                     )}
                   </dd>
                 </div>
-                
+
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">統計表ID</dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100 font-mono">
+                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                    統計表ID
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-100 dark:text-neutral-100 font-mono">
                     {parameter?.STATS_DATA_ID}
                   </dd>
                 </div>
-                
+
                 {statisticalData?.TABLE_INF && (
                   <>
                     <div>
-                      <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">統計表名</dt>
+                      <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                        統計表名
+                      </dt>
                       <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
                         {statisticalData.TABLE_INF.STAT_NAME?.["$"]}
                       </dd>
                     </div>
-                    
+
                     <div>
-                      <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">表題</dt>
+                      <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                        表題
+                      </dt>
                       <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
                         {statisticalData.TABLE_INF.TITLE?.["$"]}
                       </dd>
@@ -153,26 +168,37 @@ export default function EstatDataDisplay({
                 <ChevronRight className="w-4 h-4" />
               )}
             </button>
-            
+
             {expandedSections.has("data") && (
               <div className="px-4 pb-3 border-t border-gray-200 dark:border-neutral-700">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
                   <div>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">データ件数</dt>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      データ件数
+                    </dt>
                     <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-neutral-100">
-                      {statisticalData.DATA_INF?.DATA_COUNT || 0} 件
+                      {Array.isArray(statisticalData.DATA_INF?.VALUE)
+                        ? statisticalData.DATA_INF.VALUE.length
+                        : statisticalData.DATA_INF?.VALUE
+                        ? 1
+                        : 0}{" "}
+                      件
                     </dd>
                   </div>
-                  
+
                   <div>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">分類項目数</dt>
+                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">
+                      分類項目数
+                    </dt>
                     <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-neutral-100">
                       {statisticalData.CLASS_INF?.CLASS_OBJ?.length || 0} 項目
                     </dd>
                   </div>
-                  
+
                   <div>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">更新日時</dt>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      更新日時
+                    </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100 flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {result?.DATE || "不明"}
@@ -188,7 +214,12 @@ export default function EstatDataDisplay({
   };
 
   const renderTable = () => {
-    if (!data?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.DATA_COUNT) {
+    if (!data) return null;
+
+    const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
+    const values = statisticalData.DATA_INF.VALUE;
+
+    if (!values || (Array.isArray(values) && values.length === 0)) {
       return (
         <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
           表形式で表示できるデータがありません
@@ -196,18 +227,17 @@ export default function EstatDataDisplay({
       );
     }
 
-    const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
-    const values = statisticalData.DATA_INF.VALUE || [];
-    
+    const valuesArray = Array.isArray(values) ? values : [values];
+
     return (
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
           <thead className="bg-gray-50 dark:bg-neutral-700">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
                 インデックス
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
                 値
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
@@ -216,26 +246,31 @@ export default function EstatDataDisplay({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
-            {values.slice(0, 100).map((item: any, index: number) => (
-              <tr key={index} className="hover:bg-gray-50 dark:hover:bg-neutral-700">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                  {index + 1}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                  {item.$ || item}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
-                  {item["@unit"] || "-"}
-                </td>
-              </tr>
-            ))}
+            {valuesArray
+              .slice(0, 100)
+              .map((item: EstatValue, index: number) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                    {item.$ || String(item)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
+                    {item["@unit"] || "-"}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
-        
-        {values.length > 100 && (
+
+        {valuesArray.length > 100 && (
           <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
             <p className="text-sm text-gray-500 dark:text-neutral-400">
-              最初の100件を表示中 (全{values.length}件)
+              最初の100件を表示中 (全{valuesArray.length}件)
             </p>
           </div>
         )}
@@ -255,7 +290,7 @@ export default function EstatDataDisplay({
             コピー
           </button>
         </div>
-        
+
         <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
           <pre className="text-sm text-gray-100">
             {JSON.stringify(data, null, 2)}
@@ -322,7 +357,7 @@ export default function EstatDataDisplay({
           <Eye className="w-5 h-5 text-green-500" />
           APIレスポンス
         </h2>
-        
+
         <button
           onClick={downloadAsJson}
           className="py-1.5 px-3 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"

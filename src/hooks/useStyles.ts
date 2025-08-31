@@ -54,9 +54,9 @@ export const useStyles = () => {
 
     // ラベル
     label: {
-      base: "block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2",
+      base: "block text-sm font-medium text-gray-900 dark:text-neutral-300 mb-2",
       required:
-        "block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2 after:content-['*'] after:ml-0.5 after:text-red-500",
+        "block text-sm font-medium text-gray-900 dark:text-neutral-300 mb-2 after:content-['*'] after:ml-0.5 after:text-red-500",
     },
 
     // 見出し
