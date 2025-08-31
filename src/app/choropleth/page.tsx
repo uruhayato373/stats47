@@ -1,6 +1,6 @@
 import React from "react";
 import { ChoroplethMap } from "@/components/estat/ChoroplethMap";
-import { EstatMapDataService } from "@/lib/estat/map-data-service";
+import { EstatDataProcessor } from "@/lib/estat/EstatDataProcessor";
 import { YearSelector } from "@/components/estat/YearSelector";
 import { EstatDataTable } from "@/components/estat/EstatDataTable";
 import EstatMetadataDisplay from "@/components/estat/EstatMetadataDisplay";
@@ -33,11 +33,17 @@ export default async function ChoroplethPage({
 
   try {
     // まず利用可能な年度情報を取得
-    const initialDataset = await EstatMapDataService.fetchMapData(statsDataId, {
+    const initialDataset = await EstatDataProcessor.getStatsData(statsDataId, {
       categoryFilter: params.category || defaultCategory,
     });
 
-    availableYears = initialDataset.years;
+    // 年度情報をYearSelectorが期待する形式に変換
+    availableYears = initialDataset.years.map((year) => ({
+      code: year.code,
+      year: year.year || 0,
+      displayName: year.displayName,
+      count: 47, // 都道府県数は固定
+    }));
 
     // 最新年度をデフォルトに設定（パラメータで指定されていない場合）
     if (!params.year && availableYears.length > 0) {
@@ -47,10 +53,34 @@ export default async function ChoroplethPage({
     }
 
     // 選択された年度のデータを取得
-    dataset = await EstatMapDataService.fetchMapData(statsDataId, {
+    const rawDataset = await EstatDataProcessor.getStatsData(statsDataId, {
       categoryFilter: params.category || defaultCategory,
       yearFilter: selectedYear,
     });
+
+    // ChoroplethMapが期待する形式に変換
+    dataset = {
+      statName: rawDataset.tableInfo.statName,
+      dataPoints: rawDataset.values.map((value) => ({
+        prefectureCode: value.areaCode || "",
+        prefectureName: value.areaInfo?.displayName || value.areaCode || "",
+        value: value.numericValue || 0,
+        displayValue: value.displayValue,
+        unit: value.unit,
+      })),
+      categories: rawDataset.categories.map((category) => ({
+        code: category.code,
+        name: category.name,
+        count: rawDataset.values.filter((v) => v.areaCode).length,
+      })),
+      years: rawDataset.years.map((year) => ({
+        code: year.code,
+        year: year.year || 0,
+        displayName: year.displayName,
+        count: rawDataset.values.filter((v) => v.yearInfo?.code === year.code)
+          .length,
+      })),
+    };
   } catch (err) {
     error = err instanceof Error ? err.message : "不明なエラーが発生しました";
     console.error("Failed to fetch map data:", err);

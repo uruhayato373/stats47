@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatDataTransformer } from "@/lib/estat/data-transformer";
-import { EstatMetaCategoryData } from "@/types/estat";
+import { EstatDataProcessor } from "@/lib/estat/EstatDataProcessor";
+import { EstatMetaCategoryData } from "@/types/estat/formatted";
 import { estatAPI } from "@/services/estat-api";
 
 // Cloudflare D1に保存する関数（開発・本番環境共通）
@@ -238,7 +238,10 @@ export async function POST(request: NextRequest) {
     console.log("取得したメタ情報:", metaInfo);
 
     // 取得したデータをD1用の形式に変換
-    const transformedData = EstatDataTransformer.transformToCSVFormat(metaInfo);
+    const transformedData = EstatDataProcessor.transformToCSVFormat(
+      metaInfo as unknown as Record<string, unknown>,
+      statsDataId
+    );
     console.log("変換されたデータ:", transformedData);
 
     // 開発・本番環境共通でCloudflare D1に保存

@@ -1,17 +1,17 @@
 // Raw API Response Types
-export * from './raw-response';
-export * from './meta-response';
-export * from './list-response';
-export * from './catalog-response';
+export * from "./raw-response";
+export * from "./meta-response";
+export * from "./list-response";
+export * from "./catalog-response";
 
 // API Parameters
-export * from './parameters';
+export * from "./parameters";
 
 // Processed Data Types
-export * from './processed';
+export * from "./processed";
 
-// Map Data Types
-export * from './map-data';
+// Formatted Data Types
+export * from "./formatted";
 
 // Error Types
-export * from './errors';
+export * from "./errors";

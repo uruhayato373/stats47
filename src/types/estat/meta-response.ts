@@ -18,16 +18,3 @@ export interface EstatMetaInfoResponse {
     };
   };
 }
-
-/**
- * e-Statメタデータから抽出されたカテゴリ情報の型
- * データベース保存用の構造化データ
- */
-export interface EstatMetaCategoryData {
-  stats_data_id: string;
-  stat_name: string;
-  title: string;
-  cat01: string | null;
-  item_name: string | null;
-  unit: string | null;
-}

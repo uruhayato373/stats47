@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { EstatMetadataService } from "./lib/estat/metadata-service";
+import { EstatMetadataManager } from "./lib/estat/EstatMetadataManager";
 
 export interface Env {
   AUTH_DB: D1Database;
@@ -52,20 +52,21 @@ async function handleEstatMetadata(
 }
 
 async function handleStats(request: Request, env: Env): Promise<Response> {
-  const metadataService = new EstatMetadataService(env.STATS47_DB);
+  const metadataManager = new EstatMetadataManager(env.STATS47_DB);
 
   try {
-    const [count, categories] = await Promise.all([
-      metadataService.getSavedDataCount(),
-      metadataService.getSavedStatList(),
+    const [summary, statsList] = await Promise.all([
+      metadataManager.getMetadataSummary(),
+      metadataManager.getStatsList({ limit: 100 }),
     ]);
 
     return Response.json({
       success: true,
       data: {
-        totalCount: count,
-        statCount: categories.length,
-        categories: categories,
+        totalCount: summary.totalEntries,
+        statCount: summary.uniqueStats,
+        categories: summary.categories,
+        statsList: statsList,
       },
     });
   } catch (error) {
@@ -95,25 +96,30 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
         startId?: string;
         endId?: string;
       };
-    const metadataService = new EstatMetadataService(env.STATS47_DB);
+    const metadataManager = new EstatMetadataManager(env.STATS47_DB);
 
     if (batchMode && startId && endId) {
-      await metadataService.fetchAndSaveMetadataRange(startId, endId);
+      const result = await metadataManager.processMetadataRange(startId, endId);
       return Response.json({
         success: true,
         message: `${startId}から${endId}までの統計表IDを処理しました`,
+        details: result,
       });
     } else if (Array.isArray(statsDataId)) {
-      await metadataService.fetchAndSaveMultipleMetadata(statsDataId);
+      const result = await metadataManager.processBulkMetadata(statsDataId);
       return Response.json({
         success: true,
         message: `${statsDataId.length}件の統計表IDを処理しました`,
+        details: result,
       });
     } else if (statsDataId) {
-      await metadataService.fetchAndSaveMetadata(statsDataId);
+      const result = await metadataManager.processAndSaveMetadata(statsDataId);
       return Response.json({
-        success: true,
-        message: `${statsDataId}のメタ情報を保存しました`,
+        success: result.success,
+        message: result.success
+          ? `${statsDataId}のメタ情報を保存しました`
+          : `${statsDataId}のメタ情報保存に失敗しました`,
+        details: result,
       });
     } else {
       return Response.json({ error: "統計表IDが必要です" }, { status: 400 });
@@ -137,19 +143,42 @@ async function handleSearch(request: Request, env: Env): Promise<Response> {
   const query = url.searchParams.get("q") || "";
   const category = url.searchParams.get("category") || "";
   const statsDataId = url.searchParams.get("statsDataId") || "";
+  const limitParam = url.searchParams.get("limit");
+  const offsetParam = url.searchParams.get("offset");
+  
+  const limit = limitParam ? parseInt(limitParam) : 100;
+  const offset = offsetParam ? parseInt(offsetParam) : 0;
 
   try {
-    const metadataService = new EstatMetadataService(env.STATS47_DB);
+    const metadataManager = new EstatMetadataManager(env.STATS47_DB);
     let results;
 
     if (statsDataId) {
-      results = await metadataService.getSavedMetadataByStatsId(statsDataId);
+      results = await metadataManager.searchMetadata(statsDataId, {
+        searchType: "stats_id",
+        limit,
+        offset,
+      });
     } else if (category) {
-      results = await metadataService.getSavedMetadataByCategory(category);
+      results = await metadataManager.searchMetadata(category, {
+        searchType: "category",
+        limit,
+        offset,
+      });
     } else if (query) {
-      results = await metadataService.searchSavedMetadata(query);
+      results = await metadataManager.searchMetadata(query, {
+        searchType: "full",
+        limit,
+        offset,
+      });
     } else {
-      results = await metadataService.getSavedStatList();
+      const statsList = await metadataManager.getStatsList({ limit, offset });
+      results = {
+        entries: statsList,
+        totalCount: statsList.length,
+        searchQuery: "",
+        executedAt: new Date().toISOString(),
+      };
     }
 
     return Response.json({ success: true, data: results });
