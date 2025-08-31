@@ -10,6 +10,22 @@ export interface EstatTransformedData {
 }
 
 export class EstatDataTransformer {
+  // item_nameからcat01の文字列を除外するヘルパー関数
+  private static extractItemName(itemName: string, cat01Code: string): string {
+    if (!itemName || !cat01Code) {
+      return itemName || "";
+    }
+
+    // cat01コード + "_" で始まる場合、その部分を除外
+    const prefix = `${cat01Code}_`;
+    if (itemName.startsWith(prefix)) {
+      return itemName.substring(prefix.length);
+    }
+
+    // パターンが一致しない場合は元の文字列を返す
+    return itemName;
+  }
+
   // e-Stat APIレスポンスをCSV形式に変換
   static transformToCSVFormat(
     metadata: EstatMetaInfoResponse
@@ -26,7 +42,7 @@ export class EstatDataTransformer {
 
     const transformedData: EstatTransformedData[] = [];
 
-    // 基本情報を抽出
+    // 基本情報の行を最初に追加
     const baseData: EstatTransformedData = {
       stats_data_id: statsDataId,
       stat_name: TABLE_INF.STAT_NAME.$,
@@ -35,15 +51,15 @@ export class EstatDataTransformer {
       item_name: null,
       unit: null,
     };
+    transformedData.push(baseData);
 
     // 分類情報がない場合は基本情報のみ
     if (!CLASS_INF?.CLASS_OBJ || CLASS_INF.CLASS_OBJ.length === 0) {
       console.log("⚠️ 分類情報なし - 基本情報のみ");
-      transformedData.push(baseData);
       return transformedData;
     }
 
-    // 分類情報を処理
+    // 全カテゴリを処理
     CLASS_INF.CLASS_OBJ.forEach((classObj, classObjIndex) => {
       console.log(`📊 分類オブジェクト ${classObjIndex + 1}:`, {
         id: classObj["@id"],
@@ -57,16 +73,31 @@ export class EstatDataTransformer {
           : [classObj.CLASS];
 
         classes.forEach((classItem, classIndex) => {
-          // cat01とitem_nameの値を設定
+          // カテゴリコードとアイテム名の値を設定
           let cat01Value: string | null = null;
           let itemNameValue: string | null = null;
 
-          // CLASS_OBJの@idが"cat01"の場合のみcat01に設定
+          // カテゴリIDに基づいて適切な値を設定
           if (classObj["@id"] === "cat01") {
-            cat01Value = classItem["@code"] || null; // @codeをcat01に設定
-            itemNameValue = classItem["@name"] || null; // @nameをitem_nameに設定
+            cat01Value = classItem["@code"] || null;
+            const rawItemName = classItem["@name"] || null;
+
+            // item_nameからcat01の文字列を除外
+            if (cat01Value && rawItemName) {
+              itemNameValue = this.extractItemName(rawItemName, cat01Value);
+            } else {
+              itemNameValue = rawItemName;
+            }
+
             console.log(
-              `✅ cat01分類: code=${cat01Value}, name=${itemNameValue}`
+              `✅ cat01分類: code=${cat01Value}, original_name=${rawItemName}, extracted_name=${itemNameValue}`
+            );
+          } else {
+            // cat01以外のカテゴリも処理
+            cat01Value = classItem["@code"] || null;
+            itemNameValue = classItem["@name"] || null;
+            console.log(
+              `✅ ${classObj["@id"]}分類: code=${cat01Value}, name=${itemNameValue}`
             );
           }
 
@@ -75,7 +106,7 @@ export class EstatDataTransformer {
             stat_name: TABLE_INF.STAT_NAME.$,
             title: TABLE_INF.TITLE.$,
             cat01: cat01Value,
-            item_name: itemNameValue, // 実際の値またはnull
+            item_name: itemNameValue,
             unit: classItem["@unit"] || null,
           };
 
@@ -89,12 +120,6 @@ export class EstatDataTransformer {
         });
       }
     });
-
-    // データが空の場合は基本情報のみ
-    if (transformedData.length === 0) {
-      console.log("⚠️ 変換結果が空 - 基本情報のみ");
-      transformedData.push(baseData);
-    }
 
     console.log(`🎯 変換完了: ${transformedData.length}件のデータ`);
 
