@@ -94,7 +94,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
                 <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
                   統計表ID
                 </dt>
-                <dd className="mt-1 text-sm text-gray-100 dark:text-neutral-100 font-mono">
+                <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100 font-mono">
                   {parameter?.STATS_DATA_ID}
                 </dd>
               </div>
