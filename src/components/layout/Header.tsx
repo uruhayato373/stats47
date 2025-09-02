@@ -1,9 +1,9 @@
 "use client";
 
-import { useTheme } from "../../contexts/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function Header() {
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { theme, mounted, toggleTheme } = useTheme();
 
   const handleThemeToggle = () => {
     if (process.env.NODE_ENV === "development") {

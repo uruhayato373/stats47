@@ -19,7 +19,11 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
     {
       key: "area_name",
       label: "地域名",
-      render: (item) => item["@area"] || "-",
+      render: (item) => (
+        <span className="text-gray-700 dark:text-neutral-300">
+          {item["@area"] || "-"}
+        </span>
+      ),
     },
   ];
 

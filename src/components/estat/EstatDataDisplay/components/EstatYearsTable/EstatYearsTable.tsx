@@ -19,7 +19,11 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
     {
       key: "time_desc",
       label: "説明",
-      render: (item) => item["@time"] || "-",
+      render: (item) => (
+        <span className="text-gray-700 dark:text-neutral-300">
+          {item["@time"] || "-"}
+        </span>
+      ),
     },
   ];
 

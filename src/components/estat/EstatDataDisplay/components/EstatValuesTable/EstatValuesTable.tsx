@@ -18,13 +18,16 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     {
       key: "category",
       label: "カテゴリ",
-      render: (item) =>
-        item["@cat01"] ||
-        item["@cat02"] ||
-        item["@cat03"] ||
-        item["@cat04"] ||
-        item["@cat05"] ||
-        "-",
+      render: (item) => (
+        <span className="text-gray-700 dark:text-neutral-300">
+          {item["@cat01"] ||
+            item["@cat02"] ||
+            item["@cat03"] ||
+            item["@cat04"] ||
+            item["@cat05"] ||
+            "-"}
+        </span>
+      ),
     },
     { key: "@area", label: "地域" },
     { key: "@time", label: "年度" },
@@ -32,7 +35,9 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
       key: "value",
       label: "値",
       render: (item) => (
-        <span className="font-medium">{item.$ || String(item)}</span>
+        <span className="text-gray-700 dark:text-neutral-300 font-medium">
+          {item.$ || String(item)}
+        </span>
       ),
     },
     {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../contexts/ThemeContext";
+import { JotaiProvider } from "@/providers/JotaiProvider";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <JotaiProvider>{children}</JotaiProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
