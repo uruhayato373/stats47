@@ -418,12 +418,28 @@ export default function EstatDataDisplay({
       </div>
 
       {/* タブコンテンツ */}
-      <div className="p-4">
+      <div className={activeTab === "overview" || activeTab === "raw" ? "p-4" : ""}>
         {activeTab === "overview" && renderOverview()}
-        {activeTab === "categories" && renderCategoriesTable()}
-        {activeTab === "areas" && renderAreasTable()}
-        {activeTab === "years" && renderYearsTable()}
-        {activeTab === "values" && renderValuesTable()}
+        {activeTab === "categories" && (
+          <div className="p-4">
+            {renderCategoriesTable()}
+          </div>
+        )}
+        {activeTab === "areas" && (
+          <div className="p-4">
+            {renderAreasTable()}
+          </div>
+        )}
+        {activeTab === "years" && (
+          <div className="p-4">
+            {renderYearsTable()}
+          </div>
+        )}
+        {activeTab === "values" && (
+          <div className="p-4">
+            {renderValuesTable()}
+          </div>
+        )}
         {activeTab === "raw" && renderRawData()}
       </div>
     </div>

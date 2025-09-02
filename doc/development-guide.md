@@ -367,17 +367,38 @@ npm install @estat/types @estat/client @estat/utils
 
 ### Storybook 設定
 
+#### インポートパッケージ
+
+このプロジェクトは Next.js with Vite を使用しているため、Storybook のインポートは以下のパッケージを使用してください：
+
+```typescript
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+```
+
+**注意**: 以下のパッケージは使用しないでください：
+
+- `@storybook/react` - 直接的なレンダラーパッケージ
+- `@storybook/nextjs` - 標準の Next.js 用（Vite 非対応）
+- `@storybook/experimental-nextjs-vite` - 実験的パッケージ
+
 #### Co-location 構造
 
 各コンポーネントは、関連するファイルと共に同じディレクトリに配置されています：
 
 ```
-src/components/
-├── Header.tsx              # メインコンポーネント
-├── Header.story.tsx        # Storybookストーリー
-├── Footer.tsx
-├── Footer.story.tsx
-└── ...
+src/components/common/
+├── DataTable/
+│   ├── index.ts              # エクスポート管理
+│   ├── DataTable.tsx         # メインコンポーネント
+│   └── DataTable.stories.tsx # Storybookストーリー
+├── Message/
+│   ├── index.ts
+│   ├── Message.tsx
+│   └── Message.stories.tsx
+└── InputField/
+    ├── index.ts
+    ├── InputField.tsx
+    └── InputField.stories.tsx
 ```
 
 #### 使用方法
@@ -389,6 +410,47 @@ npm run storybook
 # ビルド版を作成
 npm run build-storybook
 ```
+
+#### ストーリー作成のベストプラクティス
+
+1. **型安全性の確保**:
+
+   ```typescript
+   // サンプルデータの型定義
+   interface SampleData {
+     id: number;
+     name: string;
+     // ...
+   }
+
+   // カラム定義
+   const columns: TableColumn<SampleData>[] = [
+     // ...
+   ];
+   ```
+
+2. **複数のストーリー作成**:
+
+   - `Default`: 基本的な使用例
+   - `Empty`: 空のデータ状態
+   - `WithMaxRows`: 行数制限あり
+   - `CustomRendering`: カスタムレンダリング例
+
+3. **ドキュメント化**:
+   ```typescript
+   const meta: Meta<typeof Component> = {
+     title: "Common/ComponentName",
+     component: Component,
+     parameters: {
+       docs: {
+         description: {
+           component: "コンポーネントの説明",
+         },
+       },
+     },
+     tags: ["autodocs"],
+   };
+   ```
 
 #### 設定ファイル
 
