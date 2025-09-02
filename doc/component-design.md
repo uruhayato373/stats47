@@ -242,6 +242,115 @@ npm run storybook
 - **@storybook/addon-vitest**: テスト実行
 - **@storybook/addon-docs**: 自動ドキュメント生成
 
+### EstatDataDisplay コンポーネント群
+
+#### 概要
+
+e-Stat API のレスポンスデータを表示するためのコンポーネント群です。各コンポーネントは個別のディレクトリに分離され、Storybook とテストファイルが含まれています。
+
+#### コンポーネント構成
+
+```
+src/components/estat/EstatDataDisplay/
+├── EstatDataDisplay.tsx        # メインコンポーネント
+├── EstatDataDisplay.stories.tsx
+├── EstatDataDisplay.test.tsx
+├── index.ts                    # エクスポート管理
+└── components/                 # サブコンポーネント群
+    ├── EstatOverview/          # 概要表示
+    │   ├── EstatOverview.tsx
+    │   ├── EstatOverview.stories.tsx
+    │   ├── EstatOverview.test.tsx
+    │   └── index.ts
+    ├── EstatCategoriesTable/   # カテゴリテーブル
+    │   ├── EstatCategoriesTable.tsx
+    │   ├── EstatCategoriesTable.stories.tsx
+    │   ├── EstatCategoriesTable.test.tsx
+    │   └── index.ts
+    ├── EstatAreasTable/        # 地域テーブル
+    │   ├── EstatAreasTable.tsx
+    │   ├── EstatAreasTable.stories.tsx
+    │   ├── EstatAreasTable.test.tsx
+    │   └── index.ts
+    ├── EstatYearsTable/        # 年度テーブル
+    │   ├── EstatYearsTable.tsx
+    │   ├── EstatYearsTable.stories.tsx
+    │   ├── EstatYearsTable.test.tsx
+    │   └── index.ts
+    ├── EstatValuesTable/       # 値テーブル
+    │   ├── EstatValuesTable.tsx
+    │   ├── EstatValuesTable.stories.tsx
+    │   ├── EstatValuesTable.test.tsx
+    │   └── index.ts
+    └── EstatRawData/           # Raw JSON表示
+        ├── EstatRawData.tsx
+        ├── EstatRawData.stories.tsx
+        ├── EstatRawData.test.tsx
+        └── index.ts
+```
+
+#### 各コンポーネントの役割
+
+1. **EstatDataDisplay**: メインコンポーネント
+
+   - タブ形式で各データ表示コンポーネントを統合
+   - ローディング、エラー、データなし状態の処理
+   - JSON ダウンロード機能
+
+2. **EstatOverview**: 概要表示
+
+   - 基本情報とデータ詳細を折りたたみ可能なセクションで表示
+   - ステータス、統計表 ID、統計表名、表題の表示
+   - データ件数、分類項目数、更新日時の表示
+
+3. **EstatCategoriesTable**: カテゴリテーブル
+
+   - カテゴリ 01 から 05 までの分類コードを表形式で表示
+   - DataTable コンポーネントを使用
+
+4. **EstatAreasTable**: 地域テーブル
+
+   - 地域コードと地域名を表形式で表示
+   - DataTable コンポーネントを使用
+
+5. **EstatYearsTable**: 年度テーブル
+
+   - 年度コードと説明を表形式で表示
+   - DataTable コンポーネントを使用
+
+6. **EstatValuesTable**: 値テーブル
+
+   - カテゴリ、地域、年度、値、単位を表形式で表示
+   - カスタムレンダリング機能付き
+   - DataTable コンポーネントを使用
+
+7. **EstatRawData**: Raw JSON 表示
+   - JSON データを整形して表示
+   - コピーボタンでクリップボードにコピー可能
+
+#### 開発・テスト
+
+各コンポーネントには以下のファイルが含まれています：
+
+- **コンポーネントファイル**: メインの実装
+- **Storybook ファイル**: コンポーネントの開発・テスト用ストーリー
+- **テストファイル**: ユニットテスト
+- **index.ts**: エクスポート管理
+
+#### 使用方法
+
+```tsx
+import { EstatDataDisplay } from "@/components/estat/EstatDataDisplay";
+
+// メインコンポーネントの使用
+<EstatDataDisplay data={apiResponse} loading={loading} error={error} />;
+
+// 個別コンポーネントの使用
+import { EstatOverview } from "@/components/estat/EstatDataDisplay";
+
+<EstatOverview data={apiResponse} />;
+```
+
 ## D1 統合
 
 ### データ保存戦略

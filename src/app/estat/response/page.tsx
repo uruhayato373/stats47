@@ -5,7 +5,7 @@ import { RefreshCw, Database, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import EstatDataFetcher from "@/components/estat/EstatDataFetcher";
-import EstatDataDisplay from "@/components/estat/EstatDataDisplay";
+import { EstatDataDisplay } from "@/components/estat/EstatDataDisplay";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/types/estat";
 
 export default function EstatDataPage() {

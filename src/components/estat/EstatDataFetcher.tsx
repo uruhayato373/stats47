@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import { GetStatsDataParams } from "@/types/estat";
-import InputField from "@/components/common/InputField";
+import InputField from "../common/InputField";
 
 interface EstatDataFetcherProps {
   onSubmit: (params: GetStatsDataParams) => void;
@@ -22,8 +22,8 @@ export default function EstatDataFetcher({
   loading,
 }: EstatDataFetcherProps) {
   const [formData, setFormData] = useState<FormData>({
-    statsDataId: "00000010101",
-    cdCat01: "",
+    statsDataId: "0000010101",
+    cdCat01: "A1101",
     cdArea: "",
     cdTime: "",
   });
