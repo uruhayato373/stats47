@@ -15,6 +15,7 @@ import {
   Clock,
 } from "lucide-react";
 import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
+import DataTable, { TableColumn } from "@/components/common/DataTable";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
@@ -47,6 +48,7 @@ export default function EstatDataDisplay({
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
   };
+
 
   const downloadAsJson = () => {
     if (!data) return;
@@ -218,82 +220,17 @@ export default function EstatDataDisplay({
 
     const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
     const values = statisticalData.DATA_INF.VALUE;
+    const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
 
-    if (!values || (Array.isArray(values) && values.length === 0)) {
-      return (
-        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
-          カテゴリ情報がありません
-        </div>
-      );
-    }
+    const columns: TableColumn<EstatValue>[] = [
+      { key: "@cat01", label: "カテゴリ01" },
+      { key: "@cat02", label: "カテゴリ02" },
+      { key: "@cat03", label: "カテゴリ03" },
+      { key: "@cat04", label: "カテゴリ04" },
+      { key: "@cat05", label: "カテゴリ05" },
+    ];
 
-    const valuesArray = Array.isArray(values) ? values : [values];
-
-    return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-          <thead className="bg-gray-50 dark:bg-neutral-700">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                インデックス
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ01
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ02
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ03
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ04
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ05
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
-            {valuesArray
-              .slice(0, 100)
-              .map((item: EstatValue, index: number) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                    {index + 1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat01"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat02"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat03"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat04"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat05"] || "-"}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
-        {valuesArray.length > 100 && (
-          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
-            <p className="text-sm text-gray-500 dark:text-neutral-400">
-              最初の100件を表示中 (全{valuesArray.length}件)
-            </p>
-          </div>
-        )}
-      </div>
-    );
+    return <DataTable data={valuesArray} columns={columns} emptyMessage="カテゴリ情報がありません" />;
   };
 
   const renderAreasTable = () => {
@@ -301,65 +238,18 @@ export default function EstatDataDisplay({
 
     const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
     const values = statisticalData.DATA_INF.VALUE;
+    const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
 
-    if (!values || (Array.isArray(values) && values.length === 0)) {
-      return (
-        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
-          地域情報がありません
-        </div>
-      );
-    }
+    const columns: TableColumn<EstatValue>[] = [
+      { key: "@area", label: "地域コード" },
+      { 
+        key: "area_name", 
+        label: "地域名", 
+        render: (item) => item["@area"] || "-"
+      },
+    ];
 
-    const valuesArray = Array.isArray(values) ? values : [values];
-
-    return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-          <thead className="bg-gray-50 dark:bg-neutral-700">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                インデックス
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                地域コード
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                地域名
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
-            {valuesArray
-              .slice(0, 100)
-              .map((item: EstatValue, index: number) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                    {index + 1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@area"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {/* 地域名は別途取得が必要 */}
-                    {item["@area"] || "-"}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
-        {valuesArray.length > 100 && (
-          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
-            <p className="text-sm text-gray-500 dark:text-neutral-400">
-              最初の100件を表示中 (全{valuesArray.length}件)
-            </p>
-          </div>
-        )}
-      </div>
-    );
+    return <DataTable data={valuesArray} columns={columns} emptyMessage="地域情報がありません" />;
   };
 
   const renderYearsTable = () => {
@@ -367,65 +257,18 @@ export default function EstatDataDisplay({
 
     const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
     const values = statisticalData.DATA_INF.VALUE;
+    const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
 
-    if (!values || (Array.isArray(values) && values.length === 0)) {
-      return (
-        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
-          年度情報がありません
-        </div>
-      );
-    }
+    const columns: TableColumn<EstatValue>[] = [
+      { key: "@time", label: "年度" },
+      { 
+        key: "time_desc", 
+        label: "説明", 
+        render: (item) => item["@time"] || "-"
+      },
+    ];
 
-    const valuesArray = Array.isArray(values) ? values : [values];
-
-    return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-          <thead className="bg-gray-50 dark:bg-neutral-700">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                インデックス
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                年度
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                説明
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
-            {valuesArray
-              .slice(0, 100)
-              .map((item: EstatValue, index: number) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                    {index + 1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@time"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {/* 年度の説明は別途取得が必要 */}
-                    {item["@time"] || "-"}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
-        {valuesArray.length > 100 && (
-          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
-            <p className="text-sm text-gray-500 dark:text-neutral-400">
-              最初の100件を表示中 (全{valuesArray.length}件)
-            </p>
-          </div>
-        )}
-      </div>
-    );
+    return <DataTable data={valuesArray} columns={columns} emptyMessage="年度情報がありません" />;
   };
 
   const renderValuesTable = () => {
@@ -433,87 +276,29 @@ export default function EstatDataDisplay({
 
     const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
     const values = statisticalData.DATA_INF.VALUE;
+    const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
 
-    if (!values || (Array.isArray(values) && values.length === 0)) {
-      return (
-        <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
-          表形式で表示できるデータがありません
-        </div>
-      );
-    }
+    const columns: TableColumn<EstatValue>[] = [
+      { 
+        key: "category", 
+        label: "カテゴリ",
+        render: (item) => item["@cat01"] || item["@cat02"] || item["@cat03"] || item["@cat04"] || item["@cat05"] || "-"
+      },
+      { key: "@area", label: "地域" },
+      { key: "@time", label: "年度" },
+      { 
+        key: "value", 
+        label: "値",
+        render: (item) => <span className="font-medium">{item.$ || String(item)}</span>
+      },
+      { 
+        key: "@unit", 
+        label: "単位",
+        render: (item) => <span className="text-gray-500 dark:text-neutral-400">{item["@unit"] || "-"}</span>
+      },
+    ];
 
-    const valuesArray = Array.isArray(values) ? values : [values];
-
-    return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-          <thead className="bg-gray-50 dark:bg-neutral-700">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                インデックス
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                カテゴリ
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                地域
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                年度
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 uppercase tracking-wider">
-                値
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-300 uppercase tracking-wider">
-                単位
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
-            {valuesArray
-              .slice(0, 100)
-              .map((item: EstatValue, index: number) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-50 dark:hover:bg-neutral-700"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                    {index + 1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@cat01"] ||
-                      item["@cat02"] ||
-                      item["@cat03"] ||
-                      item["@cat04"] ||
-                      item["@cat05"] ||
-                      "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@area"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                    {item["@time"] || "-"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
-                    {item.$ || String(item)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
-                    {item["@unit"] || "-"}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
-        {valuesArray.length > 100 && (
-          <div className="px-6 py-3 bg-gray-50 dark:bg-neutral-700 text-center">
-            <p className="text-sm text-gray-500 dark:text-neutral-400">
-              最初の100件を表示中 (全{valuesArray.length}件)
-            </p>
-          </div>
-        )}
-      </div>
-    );
+    return <DataTable data={valuesArray} columns={columns} emptyMessage="表形式で表示できるデータがありません" />;
   };
 
   const renderRawData = () => {
