@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import { GetStatsDataParams } from "@/types/estat";
-import InputField from "../common/InputField";
+import InputField from "../../common/InputField";
 
 interface EstatDataFetcherProps {
   onSubmit: (params: GetStatsDataParams) => void;
