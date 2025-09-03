@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
-/* 基本変数の設定 */
+/* より明示的なテーマ設定 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+html.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+html.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 /* Tailwind CSS v4のテーマ設定 */
@@ -14,27 +24,22 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* ライトモード時の変数設定 */
-.light {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 重要度を上げて確実に適用 */
+html.light body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ダークモード時の変数設定 */
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+html.dark body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* システム設定による初期値 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* 基本スタイル */
+/* フォールバック用 */
 body {
   background: var(--background);
   color: var(--foreground);

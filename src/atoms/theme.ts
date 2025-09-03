@@ -14,7 +14,7 @@ export const themeAtom = atomWithStorage<Theme>("theme", "light", undefined, {
 export const mountedAtom = atom(false);
 
 // システムのpreferred color schemeを取得するatom
-export const systemThemeAtom = atom<Theme>((get) => {
+export const systemThemeAtom = atom<Theme>(() => {
   if (typeof window === "undefined") return "light";
   
   return window.matchMedia("(prefers-color-scheme: dark)").matches 

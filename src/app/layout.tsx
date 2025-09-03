@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { JotaiProvider } from "@/providers/JotaiProvider";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import ThemeInitializer from "@/components/ThemeInitializer";
+// import { ThemeProvider } from "@/contexts/ThemeContext"; // 無効化: Jotai版テーマシステムに統一
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,9 +26,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
-        <ThemeProvider>
-          <JotaiProvider>{children}</JotaiProvider>
-        </ThemeProvider>
+        <JotaiProvider>
+          <ThemeInitializer />
+          {children}
+        </JotaiProvider>
       </body>
     </html>
   );

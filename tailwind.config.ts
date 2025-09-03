@@ -8,7 +8,7 @@ const config: Config = {
     "./.storybook/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class", // クラスベースのダークモード
+  darkMode: ["class", "html.dark"], // より具体的な指定
   theme: {
     extend: {
       colors: {
