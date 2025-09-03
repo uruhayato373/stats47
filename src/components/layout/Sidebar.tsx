@@ -1,10 +1,133 @@
 "use client";
 
+import { useMemo } from "react";
+import Link from "next/link";
 import { useStyles } from "@/hooks/useStyles";
 
 export default function Sidebar() {
   const styles = useStyles();
-  
+
+  // ナビゲーションアイテムをメモ化
+  const navigationItems = useMemo(
+    () => ({
+      home: [
+        {
+          href: "/",
+          label: "Dashboard",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="7" height="9" x="3" y="3" rx="1" />
+              <rect width="7" height="5" x="14" y="3" rx="1" />
+              <rect width="7" height="9" x="14" y="12" rx="1" />
+              <rect width="7" height="5" x="3" y="16" rx="1" />
+            </svg>
+          ),
+          isActive: true,
+        },
+        {
+          href: "/choropleth",
+          label: "コロプレス地図",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
+            </svg>
+          ),
+          isActive: false,
+        },
+      ],
+      estat: [
+        {
+          href: "/estat/metadata",
+          label: "メタ情報",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14,2 14,8 20,8" />
+              <path d="m15 15-3-3 3-3" />
+              <path d="M4 12h10" />
+            </svg>
+          ),
+          isActive: false,
+        },
+        {
+          href: "/estat/response",
+          label: "レスポンス情報",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          ),
+          isActive: false,
+        },
+      ],
+    }),
+    []
+  );
+
+  // セクションのスタイルをメモ化
+  const sectionStyles = useMemo(
+    () => ({
+      container:
+        "pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200",
+      title: `block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`,
+      list: "flex flex-col gap-y-1",
+      link: {
+        active:
+          "w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:bg-gray-200 light:text-gray-800 light:hover:bg-gray-200 light:focus:bg-gray-200",
+        inactive:
+          "w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:text-gray-500 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800",
+      },
+    }),
+    [styles.text.primary]
+  );
+
   return (
     <div
       id="sidebar"
@@ -49,63 +172,31 @@ export default function Sidebar() {
           </svg>
         </button>
 
-        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
-            Home
-          </span>
-          <ul className="flex flex-col gap-y-1">
-            <li>
-              <a
-                className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:bg-gray-200 light:text-gray-800 light:hover:bg-gray-200 light:focus:bg-gray-200"
-                href="/"
-              >
-                <svg
-                  className="size-3.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>Home</span>
+          <ul className={sectionStyles.list}>
+            {navigationItems.home.map((item) => (
+              <li key={item.href}>
+                <Link
+                  className={
+                    item.isActive
+                      ? sectionStyles.link.active
+                      : sectionStyles.link.inactive
+                  }
+                  href={item.href}
                 >
-                  <rect width="7" height="9" x="3" y="3" rx="1" />
-                  <rect width="7" height="5" x="14" y="3" rx="1" />
-                  <rect width="7" height="9" x="14" y="12" rx="1" />
-                  <rect width="7" height="5" x="3" y="16" rx="1" />
-                </svg>
-                <span className={styles.text.secondary}>Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a
-                className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:text-gray-500 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800"
-                href="/choropleth"
-              >
-                <svg
-                  className="size-3.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
-                </svg>
-                <span className={styles.text.secondary}>コロプレス地図</span>
-              </a>
-            </li>
+                  {item.icon}
+                  <span className={styles.text.secondary}>{item.label}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
+          <span
+            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
+          >
             Pages
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -161,7 +252,9 @@ export default function Sidebar() {
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
+          <span
+            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
+          >
             Posts
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -243,66 +336,31 @@ export default function Sidebar() {
           </ul>
         </div>
 
-        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
-            e-STAT API
-          </span>
-          <ul className="flex flex-col gap-y-1">
-            <li>
-              <a
-                className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:text-gray-500 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800"
-                href="/estat/metadata"
-              >
-                <svg
-                  className="size-3.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>e-STAT API</span>
+          <ul className={sectionStyles.list}>
+            {navigationItems.estat.map((item) => (
+              <li key={item.href}>
+                <Link
+                  className={
+                    item.isActive
+                      ? sectionStyles.link.active
+                      : sectionStyles.link.inactive
+                  }
+                  href={item.href}
                 >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14,2 14,8 20,8" />
-                  <path d="m15 15-3-3 3-3" />
-                  <path d="M4 12h10" />
-                </svg>
-                <span className={styles.text.secondary}>メタ情報</span>
-              </a>
-            </li>
-            <li>
-              <a
-                className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:text-gray-500 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800"
-                href="/estat/response"
-              >
-                <svg
-                  className="size-3.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-                <span className={styles.text.secondary}>レスポンス情報</span>
-              </a>
-            </li>
+                  {item.icon}
+                  <span className={styles.text.secondary}>{item.label}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
+          <span
+            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
+          >
             Others
           </span>
           <ul className="flex flex-col gap-y-1">
