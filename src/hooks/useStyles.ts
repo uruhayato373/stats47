@@ -66,12 +66,22 @@ export const useStyles = () => {
       sm: "text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2",
     },
 
-    // テキスト
+    // テキスト色の統一定義
     text: {
-      primary: "text-indigo-900 dark:text-indigo-100",
-      secondary: "text-indigo-800 dark:text-indigo-200",
-      body: "text-gray-700 dark:text-neutral-300",
-      muted: "text-gray-500 dark:text-neutral-400",
+      // 基本テキスト階層
+      primary: "text-gray-800 dark:text-gray-50",      // 見出し、重要なテキスト
+      secondary: "text-gray-700 dark:text-gray-200",   // 本文テキスト
+      tertiary: "text-gray-500 dark:text-gray-300",    // 補助テキスト、説明文
+      muted: "text-gray-400 dark:text-gray-400",       // 非活性、ヒント文字
+      
+      // 特殊用途
+      brand: "text-indigo-600 dark:text-indigo-400",   // ブランドカラー
+      success: "text-green-600 dark:text-green-400",   // 成功状態
+      warning: "text-amber-600 dark:text-amber-400",   // 警告状態
+      error: "text-red-600 dark:text-red-400",         // エラー状態
+      
+      // 後方互換性（段階的に廃止予定）
+      body: "text-gray-700 dark:text-gray-200",        // → secondary に移行
     },
 
     // レイアウト

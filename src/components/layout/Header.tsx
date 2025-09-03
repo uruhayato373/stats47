@@ -1,9 +1,11 @@
 "use client";
 
 import { useTheme } from "@/hooks/useTheme";
+import { useStyles } from "@/hooks/useStyles";
 
 export default function Header() {
   const { theme, mounted, toggleTheme } = useTheme();
+  const styles = useStyles();
 
   const handleThemeToggle = () => {
     if (process.env.NODE_ENV === "development") {
@@ -41,11 +43,11 @@ export default function Header() {
                       <polyline points="9,22 9,12 15,12 15,22" />
                     </svg>
                   </div>
-                  CMS
+                  <span className={styles.text.primary}>CMS</span>
                 </a>
               </li>
               <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
-                <span className="text-gray-400 dark:text-neutral-500">
+                <span className={styles.text.muted}>
                   Dashboard
                 </span>
               </li>
@@ -95,7 +97,7 @@ export default function Header() {
             <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
               <a
                 href="#"
-                className="flex items-center gap-x-1.5 text-gray-500 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+                className={`flex items-center gap-x-1.5 ${styles.text.tertiary} hover:${styles.text.primary.replace('text-', 'text-')} focus:outline-hidden focus:${styles.text.primary.replace('text-', 'text-')}`}
               >
                 <div className="bg-indigo-700 size-8 rounded-md flex items-center justify-center">
                   <svg
@@ -118,7 +120,7 @@ export default function Header() {
               </a>
             </li>
             <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
-              <span className="text-gray-400 dark:text-neutral-500">
+              <span className={styles.text.muted}>
                 Dashboard
               </span>
             </li>

@@ -11,14 +11,12 @@ import {
   Clock,
 } from "lucide-react";
 import { EstatStatsDataResponse } from "@/types/estat";
-import { useTheme } from "@/contexts/ThemeContext";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatOverview({ data }: EstatOverviewProps) {
-  const { theme } = useTheme();
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(["basic"])
   );
@@ -42,13 +40,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
   return (
     <div className="space-y-4">
       {/* 基本情報 */}
-      <div
-        className={`border rounded-lg p-6 ${
-          theme === "dark"
-            ? "bg-neutral-800 border-neutral-700"
-            : "bg-white border-gray-200"
-        }`}
-      >
+      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
         <button
           onClick={() => toggleSection("basic")}
           className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-neutral-700"
@@ -127,13 +119,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
 
       {/* データ詳細 */}
       {statisticalData && (
-        <div
-          className={`border rounded-lg p-6 ${
-            theme === "dark"
-              ? "bg-neutral-800 border-neutral-700"
-              : "bg-white border-gray-200"
-          }`}
-        >
+        <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
           <button
             onClick={() => toggleSection("data")}
             className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-neutral-700"

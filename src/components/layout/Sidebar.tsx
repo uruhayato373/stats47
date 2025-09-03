@@ -1,6 +1,10 @@
 "use client";
 
+import { useStyles } from "@/hooks/useStyles";
+
 export default function Sidebar() {
+  const styles = useStyles();
+  
   return (
     <div
       id="sidebar"
@@ -28,7 +32,7 @@ export default function Sidebar() {
             <circle cx="19" cy="12" r="1" />
             <circle cx="5" cy="12" r="1" />
           </svg>
-          Quick actions
+          <span className={styles.text.secondary}>Quick actions</span>
           <svg
             className="ms-auto size-2.5"
             xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +50,7 @@ export default function Sidebar() {
         </button>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
             Home
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -72,7 +76,7 @@ export default function Sidebar() {
                   <rect width="7" height="9" x="14" y="12" rx="1" />
                   <rect width="7" height="5" x="3" y="16" rx="1" />
                 </svg>
-                Dashboard
+                <span className={styles.text.secondary}>Dashboard</span>
               </a>
             </li>
             <li>
@@ -94,14 +98,14 @@ export default function Sidebar() {
                 >
                   <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
                 </svg>
-                コロプレス地図
+                <span className={styles.text.secondary}>コロプレス地図</span>
               </a>
             </li>
           </ul>
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
             Pages
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -125,7 +129,7 @@ export default function Sidebar() {
                   <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
                   <circle cx="12" cy="13" r="3" />
                 </svg>
-                Posts
+                <span className={styles.text.secondary}>Posts</span>
               </a>
             </li>
             <li>
@@ -150,14 +154,14 @@ export default function Sidebar() {
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                Members
+                <span className={styles.text.secondary}>Members</span>
               </a>
             </li>
           </ul>
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
             Posts
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -181,7 +185,7 @@ export default function Sidebar() {
                   <path d="M5 12h14" />
                   <path d="M12 5v14" />
                 </svg>
-                Create Post
+                <span className={styles.text.secondary}>Create Post</span>
               </a>
             </li>
             <li>
@@ -204,7 +208,7 @@ export default function Sidebar() {
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14,2 14,8 20,8" />
                 </svg>
-                Draft
+                <span className={styles.text.secondary}>Draft</span>
                 <span className="ms-auto inline-block py-0.5 px-1.5 rounded-full text-xs font-medium bg-gray-800 text-white dark:bg-neutral-200 dark:text-neutral-800 light:bg-gray-800 light:text-white">
                   23
                 </span>
@@ -230,7 +234,7 @@ export default function Sidebar() {
                   <polyline points="16 18 22 12 16 6" />
                   <polyline points="8 6 2 12 8 18" />
                 </svg>
-                Published
+                <span className={styles.text.secondary}>Published</span>
                 <span className="ms-auto inline-block py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-500 light:bg-green-100 light:text-green-800">
                   102
                 </span>
@@ -240,7 +244,7 @@ export default function Sidebar() {
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
             e-STAT API
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -266,7 +270,7 @@ export default function Sidebar() {
                   <path d="m15 15-3-3 3-3" />
                   <path d="M4 12h10" />
                 </svg>
-                メタ情報
+                <span className={styles.text.secondary}>メタ情報</span>
               </a>
             </li>
             <li>
@@ -291,14 +295,14 @@ export default function Sidebar() {
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                レスポンス情報
+                <span className={styles.text.secondary}>レスポンス情報</span>
               </a>
             </li>
           </ul>
         </div>
 
         <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span className="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-200 light:text-gray-800">
+          <span className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}>
             Others
           </span>
           <ul className="flex flex-col gap-y-1">
@@ -321,7 +325,7 @@ export default function Sidebar() {
                 >
                   <path d="M12 2v20m8-10H4" />
                 </svg>
-                What&apos;s new?
+                <span className={styles.text.secondary}>What&apos;s new?</span>
                 <span className="ms-auto inline-block size-2 bg-indigo-500 rounded-full"></span>
               </a>
             </li>
@@ -346,7 +350,7 @@ export default function Sidebar() {
                   <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                   <path d="M12 17h.01" />
                 </svg>
-                Help & support
+                <span className={styles.text.secondary}>Help & support</span>
               </a>
             </li>
             <li>
@@ -368,7 +372,7 @@ export default function Sidebar() {
                 >
                   <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                 </svg>
-                Knowledge Base
+                <span className={styles.text.secondary}>Knowledge Base</span>
               </a>
             </li>
           </ul>

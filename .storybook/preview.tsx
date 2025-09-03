@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/nextjs-vite";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "../src/contexts/ThemeContext";
 import "./storybook.css";
 
 const preview: Preview = {
@@ -26,12 +27,47 @@ const preview: Preview = {
 
   // グローバルデコレーターを追加
   decorators: [
-    (Story) => (
-      <div className="p-4">
-        <Story />
-      </div>
-    ),
+    (Story, context) => {
+      const [theme, setTheme] = useState<'light' | 'dark'>('light');
+      
+      // Storybookのダークモード設定を監視
+      useEffect(() => {
+        const isDark = context.globals?.darkMode === 'dark' || 
+                      document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'dark' : 'light');
+      }, [context.globals]);
+      
+      // テーマクラスをbodyに適用
+      useEffect(() => {
+        document.body.className = theme;
+        document.documentElement.className = theme;
+      }, [theme]);
+      
+      return (
+        <ThemeProvider>
+          <div className={`p-4 ${theme === 'dark' ? 'dark' : ''}`}>
+            <Story />
+          </div>
+        </ThemeProvider>
+      );
+    },
   ],
+  
+  globalTypes: {
+    darkMode: {
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', icon: 'circlehollow', title: 'Light' },
+          { value: 'dark', icon: 'circle', title: 'Dark' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
 };
 
 export default preview;

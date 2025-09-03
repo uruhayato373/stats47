@@ -2,12 +2,14 @@
 
 import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
+import { useStyles } from "@/hooks/useStyles";
 
 interface EstatAreasTableProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatAreasTable({ data }: EstatAreasTableProps) {
+  const styles = useStyles();
   if (!data) return null;
 
   const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
@@ -20,7 +22,7 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
       key: "area_name",
       label: "地域名",
       render: (item) => (
-        <span className="text-gray-700 dark:text-neutral-300">
+        <span className={styles.text.primary}>
           {item["@area"] || "-"}
         </span>
       ),

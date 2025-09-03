@@ -2,15 +2,12 @@
 
 import { Copy } from "lucide-react";
 import { EstatStatsDataResponse } from "@/types/estat";
-import { useTheme } from "@/contexts/ThemeContext";
 
 interface EstatRawDataProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatRawData({ data }: EstatRawDataProps) {
-  const { theme } = useTheme();
-
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
   };
@@ -20,11 +17,7 @@ export default function EstatRawData({ data }: EstatRawDataProps) {
       <div className="flex justify-end">
         <button
           onClick={() => copyToClipboard(JSON.stringify(data, null, 2))}
-          className={`px-4 py-2 text-white rounded-lg focus:ring-2 focus:ring-offset-2 text-xs ${
-            theme === "dark"
-              ? "bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-400 focus:ring-offset-neutral-800"
-              : "bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-500 focus:ring-offset-white"
-          }`}
+          className="px-4 py-2 bg-neutral-600 text-white rounded-lg hover:bg-neutral-700 focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 dark:bg-neutral-600 dark:hover:bg-neutral-700 dark:focus:ring-neutral-400 dark:focus:ring-offset-neutral-800 text-xs"
         >
           <Copy className="w-3 h-3" />
           コピー

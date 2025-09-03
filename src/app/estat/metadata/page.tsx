@@ -9,6 +9,7 @@ import {
   ExternalLink,
   BarChart3,
 } from "lucide-react";
+import { useStyles } from "@/hooks/useStyles";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MetaInfoFetcher from "@/components/estat/MetaInfoFetcher";
@@ -28,6 +29,7 @@ interface Tab {
 }
 
 export default function EstatMetadataPage() {
+  const styles = useStyles();
   const [metaInfo, setMetaInfo] = useState<EstatMetaInfoResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -112,7 +114,7 @@ export default function EstatMetadataPage() {
           {/* ヘッダーセクション */}
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div>
-              <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
+              <h1 className={`font-medium text-lg ${styles.text.primary} flex items-center gap-2`}>
                 <BarChart3 className="w-6 h-6 text-indigo-600" />
                 e-STAT メタ情報管理
               </h1>
@@ -156,7 +158,7 @@ export default function EstatMetadataPage() {
                   className={`py-2 px-1 border-b-2 font-medium text-xs transition-all duration-200 flex items-center gap-1.5 ${
                     activeTab === tab.id
                       ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      : `border-transparent ${styles.text.secondary} hover:${styles.text.primary} hover:border-gray-300`
                   }`}
                   title={tab.description}
                 >

@@ -2,12 +2,14 @@
 
 import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
+import { useStyles } from "@/hooks/useStyles";
 
 interface EstatValuesTableProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
+  const styles = useStyles();
   if (!data) return null;
 
   const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
@@ -19,7 +21,7 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
       key: "category",
       label: "カテゴリ",
       render: (item) => (
-        <span className="text-gray-700 dark:text-neutral-300">
+        <span className={styles.text.primary}>
           {item["@cat01"] ||
             item["@cat02"] ||
             item["@cat03"] ||
@@ -35,7 +37,7 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
       key: "value",
       label: "値",
       render: (item) => (
-        <span className="text-gray-700 dark:text-neutral-300 font-medium">
+        <span className={`${styles.text.primary} font-medium`}>
           {item.$ || String(item)}
         </span>
       ),
@@ -44,7 +46,7 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
       key: "@unit",
       label: "単位",
       render: (item) => (
-        <span className="text-gray-500 dark:text-neutral-400">
+        <span className={styles.text.secondary}>
           {item["@unit"] || "-"}
         </span>
       ),

@@ -10,11 +10,14 @@
 - **[API 設計書](api-design.md)** - API エンドポイントとデータフローの設計
 - **[コンポーネント設計書](component-design.md)** - React コンポーネントの設計原則と構造
 - **[配色システム設計書](color-system.md)** - UI/UX の配色システムとデザインガイドライン
+- **[フォント色統一システム](design-system.md)** - 統一されたフォント色階層の仕様書
 
 ### 🛠️ 開発者向け
 
 - **[開発者ガイド](development-guide.md)** - 開発環境のセットアップと開発手順
 - **[e-Stat API 統合ガイド](estat-integration.md)** - e-Stat API の統合方法と使用方法
+- **[フォント色統一ガイド](font-color-unification-guide.md)** - 統一フォント色システムの使用方法
+- **[アクセシビリティガイド](accessibility.md)** - WCAG 2.1準拠のアクセシビリティ要件
 
 ## ドキュメントの更新ルール
 
@@ -23,6 +26,7 @@
 3. **API 仕様変更時**: `api-design.md`を更新する
 4. **コンポーネント追加・変更時**: `component-design.md`を更新する
 5. **配色・UI 変更時**: `color-system.md`を更新する
+6. **フォント色変更時**: `design-system.md`と`font-color-unification-guide.md`を更新する
 
 ## ドキュメントの書き方
 

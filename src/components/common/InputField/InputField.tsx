@@ -44,7 +44,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
         >
           {label}
           {description && (
-            <span className="ml-1 text-xs text-gray-500">({description})</span>
+            <span className={`ml-1 text-xs ${styles.text.muted}`}>({description})</span>
           )}
         </label>
         <input
@@ -66,7 +66,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           }`}
         />
         {error && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>
+          <p className={`mt-1 text-sm ${styles.text.error}`}>{error}</p>
         )}
       </div>
     );

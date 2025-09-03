@@ -1,10 +1,15 @@
+"use client";
+
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
 import MetricsCard from "../components/dashboard/MetricsCard";
 import TopPosts from "../components/dashboard/TopPosts";
 import TopAuthors from "../components/dashboard/TopAuthors";
+import { useStyles } from "../hooks/useStyles";
 
 export default function Dashboard() {
+  const styles = useStyles();
+  
   return (
     <>
       <Header />
@@ -14,7 +19,7 @@ export default function Dashboard() {
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
         <div className="h-[calc(100dvh-62px)] lg:h-full overflow-hidden flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
-            <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
+            <h1 className={`font-medium text-lg ${styles.text.primary}`}>
               Dashboard
             </h1>
             <div className="flex items-center gap-x-2">
@@ -39,7 +44,7 @@ export default function Dashboard() {
                   <path d="M21 12a9 9 0 0 1-9 9 9.75 9 0 0 1-6.74-2.74L3 16" />
                   <path d="M8 16H3v5" />
                 </svg>
-                Refresh
+                <span className={styles.text.secondary}>Refresh</span>
               </button>
               <button
                 type="button"
@@ -60,7 +65,7 @@ export default function Dashboard() {
                   <path d="M5 12h14" />
                   <path d="M12 5v14" />
                 </svg>
-                Add
+                <span className={styles.text.secondary}>Add</span>
               </button>
             </div>
           </div>
