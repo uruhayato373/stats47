@@ -191,16 +191,14 @@ export default function Sidebar() {
           </ul>
         </div>
 
-        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span
-            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
-          >
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>
             Pages
           </span>
-          <ul className="flex flex-col gap-y-1">
+          <ul className={sectionStyles.list}>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -223,7 +221,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -249,16 +247,14 @@ export default function Sidebar() {
           </ul>
         </div>
 
-        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span
-            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
-          >
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>
             Posts
           </span>
-          <ul className="flex flex-col gap-y-1">
+          <ul className={sectionStyles.list}>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -281,7 +277,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -307,7 +303,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -355,16 +351,14 @@ export default function Sidebar() {
           </ul>
         </div>
 
-        <div className="pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200">
-          <span
-            className={`block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`}
-          >
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>
             Others
           </span>
-          <ul className="flex flex-col gap-y-1">
+          <ul className={sectionStyles.list}>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -387,7 +381,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg
@@ -411,7 +405,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
-                className={`w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`}
+                className={sectionStyles.link.inactive}
                 href="#"
               >
                 <svg

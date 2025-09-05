@@ -24,7 +24,7 @@ export default function Header() {
               <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
                 <a
                   href="#"
-                  className="flex items-center gap-x-1.5 text-gray-500 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+                  className={`flex items-center gap-x-1.5 ${styles.text.tertiary} hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:hover:text-neutral-200 dark:focus:text-neutral-200`}
                 >
                   <div className="bg-indigo-700 size-8 rounded-md flex items-center justify-center">
                     <svg
@@ -57,7 +57,7 @@ export default function Header() {
             <button
               type="button"
               disabled
-              className="size-8 flex items-center justify-center text-gray-400 rounded-lg border border-gray-200 bg-gray-100 cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-600"
+              className={`size-8 flex items-center justify-center ${styles.text.muted} rounded-lg border border-gray-200 bg-gray-100 cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-600`}
               aria-label="Theme loading"
             >
               <svg
@@ -132,7 +132,7 @@ export default function Header() {
           <button
             type="button"
             onClick={handleThemeToggle}
-            className="size-8 flex items-center justify-center text-gray-500 rounded-lg border border-gray-200 bg-white hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+            className={`size-8 flex items-center justify-center ${styles.text.tertiary} rounded-lg border border-gray-200 bg-white hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors`}
             aria-label="Toggle theme"
             title={`Current theme: ${theme}. Click to switch to ${
               theme === "light" ? "dark" : "light"

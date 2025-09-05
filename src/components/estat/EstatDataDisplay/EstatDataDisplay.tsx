@@ -85,11 +85,11 @@ export default function EstatDataDisplay({
     return (
       <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
         <div className="p-8 text-center">
-          <Database className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <Database className="w-12 h-12 text-gray-500 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
             データ取得前
           </h3>
-          <p className="text-gray-500 dark:text-neutral-400">
+          <p className="text-gray-600 dark:text-neutral-400">
             上のフォームからパラメータを入力してデータを取得してください
           </p>
         </div>
@@ -132,7 +132,7 @@ export default function EstatDataDisplay({
               className={`py-2 px-1 border-b-2 font-medium text-sm transition-all duration-200 flex items-center gap-1.5 ${
                 activeTab === tab.id
                   ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
+                  : "border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
               }`}
             >
               <tab.icon className="w-4 h-4" />

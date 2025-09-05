@@ -71,8 +71,8 @@ export const useStyles = () => {
       // 基本テキスト階層
       primary: "text-gray-800 dark:text-gray-50", // 見出し、重要なテキスト
       secondary: "text-gray-700 dark:text-gray-200", // 本文テキスト
-      tertiary: "text-gray-500 dark:text-gray-300", // 補助テキスト、説明文
-      muted: "text-gray-400 dark:text-gray-400", // 非活性、ヒント文字
+      tertiary: "text-gray-600 dark:text-gray-300", // 補助テキスト、説明文
+      muted: "text-gray-500 dark:text-gray-400", // 非活性、ヒント文字
 
       // 特殊用途
       brand: "text-indigo-600 dark:text-indigo-400", // ブランドカラー

@@ -1,6 +1,10 @@
 'use client';
 
+import { useStyles } from "@/hooks/useStyles";
+
 export default function TopAuthors() {
+  const styles = useStyles();
+
   const authors = [
     {
       id: 1,
@@ -33,7 +37,7 @@ export default function TopAuthors() {
       <div className="p-4 pb-0">
         <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700">
           <h2 className="font-medium text-sm text-gray-800 dark:text-neutral-200">Top authors</h2>
-          <button className="text-xs text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200">
+          <button className={`text-xs ${styles.text.tertiary} hover:text-gray-800 dark:hover:text-neutral-200`}>
             View all
           </button>
         </div>
@@ -50,12 +54,12 @@ export default function TopAuthors() {
                 <span className="font-medium text-sm text-gray-800 dark:text-neutral-200">
                   {author.name}
                 </span>
-                <span className="text-xs text-gray-500 dark:text-neutral-400">
+                <span className={`text-xs ${styles.text.tertiary}`}>
                   {author.posts} posts
                 </span>
               </div>
               <div className="mt-1 flex justify-between items-center">
-                <span className="text-xs text-gray-500 dark:text-neutral-400">
+                <span className={`text-xs ${styles.text.tertiary}`}>
                   {author.views} views
                 </span>
                 <span className="text-xs text-green-600 dark:text-green-500">
@@ -76,7 +80,7 @@ export default function TopAuthors() {
       <div className="p-4 pt-0">
         <div className="pt-2 border-t border-dashed border-gray-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-600 dark:text-neutral-400">
+            <span className={`text-xs ${styles.text.tertiary}`}>
               Content quality score
             </span>
             <span className="text-sm font-medium text-gray-800 dark:text-neutral-200">

@@ -102,7 +102,7 @@ export default function SavedMetadataDisplay() {
       {/* データテーブル */}
       <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
         {metadata.length === 0 ? (
-          <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+          <div className="text-center py-8 text-gray-600 dark:text-neutral-400">
             保存されたデータがありません。
             <br />
             メタ情報保存タブでデータを保存してください。

@@ -133,7 +133,7 @@ export default function MetadataSaver() {
                 ></div>
               </div>
             )}
-            <div className="text-xs text-gray-500 dark:text-neutral-500">
+            <div className="text-xs text-gray-600 dark:text-neutral-500">
               💡 大量データの場合は処理に時間がかかります。Cloudflare
               D1のAPI制限に配慮して、データを小さなチャンクに分けて処理しています。
             </div>

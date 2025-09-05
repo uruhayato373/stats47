@@ -1,6 +1,10 @@
 'use client';
 
+import { useStyles } from "@/hooks/useStyles";
+
 export default function MetricsCard() {
+  const styles = useStyles();
+
   return (
     <div className="p-4 flex flex-col bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
       <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700">
@@ -37,7 +41,7 @@ export default function MetricsCard() {
       </div>
 
       <div className="mt-4 h-64 bg-gray-100 rounded-lg flex items-center justify-center dark:bg-neutral-700">
-        <span className="text-gray-500 dark:text-neutral-400">Chart Placeholder</span>
+        <span className={styles.text.muted}>Chart Placeholder</span>
       </div>
     </div>
   );

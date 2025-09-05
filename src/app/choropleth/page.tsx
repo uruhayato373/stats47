@@ -167,7 +167,7 @@ export default async function ChoroplethPage({
                 </svg>
                 e-STAT コロプレス地図
               </h1>
-              <p className="text-sm text-gray-500 dark:text-neutral-400 mt-1">
+              <p className="text-sm text-gray-600 dark:text-neutral-400 mt-1">
                 e-Stat
                 APIから取得した統計データを都道府県別にコロプレス地図で可視化します
               </p>
@@ -228,13 +228,13 @@ export default async function ChoroplethPage({
                               <span className="text-gray-700 dark:text-neutral-300">
                                 {category.name}
                               </span>
-                              <span className="text-gray-500 dark:text-neutral-400">
+                              <span className="text-gray-600 dark:text-neutral-400">
                                 {category.count}件
                               </span>
                             </div>
                           ))}
                         {dataset.categories.length > 5 && (
-                          <div className="text-sm text-gray-500 dark:text-neutral-400">
+                          <div className="text-sm text-gray-600 dark:text-neutral-400">
                             他 {dataset.categories.length - 5} カテゴリ
                           </div>
                         )}
@@ -256,13 +256,13 @@ export default async function ChoroplethPage({
                             <span className="text-gray-700 dark:text-neutral-300">
                               {year.displayName}
                             </span>
-                            <span className="text-gray-500 dark:text-neutral-400">
+                            <span className="text-gray-600 dark:text-neutral-400">
                               {year.count}件
                             </span>
                           </div>
                         ))}
                         {dataset.years.length > 5 && (
-                          <div className="text-sm text-gray-500 dark:text-neutral-400">
+                          <div className="text-sm text-gray-600 dark:text-neutral-400">
                             他 {dataset.years.length - 5} 年度
                           </div>
                         )}

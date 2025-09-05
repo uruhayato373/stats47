@@ -17,7 +17,7 @@ export default function MetadataActions({
     <div className="flex items-center gap-2">
       <button
         onClick={onRefresh}
-        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
+        className="p-2 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
         title="更新"
       >
         <RefreshCw className="w-4 h-4" />

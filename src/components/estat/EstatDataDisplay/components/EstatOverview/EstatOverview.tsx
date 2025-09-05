@@ -153,7 +153,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
                 </div>
 
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">
+                  <dt className="text-sm font-medium text-gray-600 dark:text-neutral-400">
                     分類項目数
                   </dt>
                   <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-neutral-100">

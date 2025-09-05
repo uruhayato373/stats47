@@ -114,14 +114,14 @@ function PaginatedTable({
             <button
               onClick={() => goToPage(1)}
               disabled={currentPage === 1}
-              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 text-gray-600 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronFirst className="w-4 h-4" />
             </button>
             <button
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 text-gray-600 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -131,14 +131,14 @@ function PaginatedTable({
             <button
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 text-gray-600 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => goToPage(totalPages)}
               disabled={currentPage === totalPages}
-              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 text-gray-600 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLast className="w-4 h-4" />
             </button>
@@ -194,18 +194,18 @@ function ClassificationAccordion({
         className="w-full px-3 py-2 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
       >
         <div className="flex items-center gap-2">
-          <Database className="w-4 h-4 text-gray-500" />
+          <Database className="w-4 h-4 text-gray-600" />
           <span className="font-medium text-gray-700">
             {safeRender(classObj["@name"])}
           </span>
-          <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+          <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
             {itemCount}件
           </span>
         </div>
         {isOpen ? (
-          <ChevronDown className="w-4 h-4 text-gray-500" />
+          <ChevronDown className="w-4 h-4 text-gray-600" />
         ) : (
-          <ChevronRight className="w-4 h-4 text-gray-500" />
+          <ChevronRight className="w-4 h-4 text-gray-600" />
         )}
       </button>
 

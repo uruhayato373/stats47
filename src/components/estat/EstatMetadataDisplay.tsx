@@ -219,14 +219,14 @@ export default function EstatMetadataDisplay() {
           <div className="flex items-center gap-2">
             <button
               onClick={fetchEstatMetadata}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
+              className="p-2 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
               title="更新"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
             <button
               onClick={downloadCSV}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
+              className="p-2 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
               title="CSVダウンロード"
             >
               <Download className="w-4 h-4" />
@@ -241,7 +241,7 @@ export default function EstatMetadataDisplay() {
       {/* データ表示 */}
       <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
         {metadata.length === 0 ? (
-          <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+          <div className="text-center py-8 text-gray-600 dark:text-neutral-400">
             保存されたメタデータがありません。
             <br />
             メタ情報保存タブでデータを保存してください。
@@ -269,7 +269,7 @@ export default function EstatMetadataDisplay() {
                           <span className="text-sm font-medium text-gray-900 truncate">
                             {item.stat_name}
                           </span>
-                          <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                          <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
                             {item.category_count}件
                           </span>
                         </div>
@@ -277,7 +277,7 @@ export default function EstatMetadataDisplay() {
                           {item.stats_data_id}
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-400">
+                      <div className="flex items-center gap-2 text-gray-500">
                         <Calendar className="w-3 h-3" />
                         <span className="text-xs">
                           {formatDate(item.updated_at)}
@@ -295,7 +295,7 @@ export default function EstatMetadataDisplay() {
                     <div className="px-4 pb-4 border-t border-gray-200">
                       <div className="pt-3 space-y-3">
                         <div>
-                          <span className="text-xs font-medium text-gray-500">
+                          <span className="text-xs font-medium text-gray-600">
                             タイトル:
                           </span>
                           <p className="text-sm text-gray-900 mt-1">
@@ -304,13 +304,13 @@ export default function EstatMetadataDisplay() {
                         </div>
                         <div className="grid grid-cols-2 gap-4 text-xs">
                           <div>
-                            <span className="text-gray-500">作成日時:</span>
+                            <span className="text-gray-600">作成日時:</span>
                             <p className="text-gray-900 mt-1">
                               {formatDate(item.created_at)}
                             </p>
                           </div>
                           <div>
-                            <span className="text-gray-500">更新日時:</span>
+                            <span className="text-gray-600">更新日時:</span>
                             <p className="text-gray-900 mt-1">
                               {formatDate(item.updated_at)}
                             </p>
@@ -334,7 +334,7 @@ export default function EstatMetadataDisplay() {
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     前へ
                   </button>
@@ -343,7 +343,7 @@ export default function EstatMetadataDisplay() {
                       setCurrentPage(Math.min(totalPages, currentPage + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     次へ
                   </button>

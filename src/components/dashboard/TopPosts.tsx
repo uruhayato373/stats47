@@ -1,6 +1,10 @@
 'use client';
 
+import { useStyles } from "@/hooks/useStyles";
+
 export default function TopPosts() {
+  const styles = useStyles();
+
   const posts = [
     {
       id: 1,
@@ -54,12 +58,12 @@ export default function TopPosts() {
               <h3 className="font-medium text-sm text-gray-800 line-clamp-2 dark:text-neutral-200">
                 {post.title}
               </h3>
-              <div className="mt-1 flex items-center gap-2 text-xs text-gray-500 dark:text-neutral-400">
+              <div className={`mt-1 flex items-center gap-2 text-xs ${styles.text.tertiary}`}>
                 <span>{post.author}</span>
                 <span>•</span>
                 <span>{post.date}</span>
               </div>
-              <div className="mt-2 flex items-center gap-4 text-xs text-gray-500 dark:text-neutral-400">
+              <div className={`mt-2 flex items-center gap-4 text-xs ${styles.text.tertiary}`}>
                 <span className="flex items-center gap-1">
                   <svg className="size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
