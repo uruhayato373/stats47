@@ -116,14 +116,14 @@ export default function Sidebar() {
     () => ({
       container:
         "pt-3 mt-3 flex flex-col border-t border-gray-200 dark:border-neutral-700 light:border-gray-200",
-      title: `block ps-2.5 mb-2 font-medium text-xs uppercase ${styles.text.primary}`,
-      list: `flex flex-col gap-y-1 ${styles.text.primary}`,
+      title: `block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-600 dark:text-neutral-400 light:text-gray-600`,
+      list: `flex flex-col gap-y-1`,
       link: {
-        active: `w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.primary} bg-gray-200 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:bg-gray-200 light:hover:bg-gray-200 light:focus:bg-gray-200`,
-        inactive: `w-full flex items-center gap-x-2 py-2 px-2.5 text-sm ${styles.text.secondary} rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300 light:hover:bg-gray-200 light:hover:text-gray-800 light:focus:bg-gray-200 light:focus:text-gray-800`,
+        active: `w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-900 bg-gray-200 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:text-gray-900 light:bg-gray-200 light:hover:bg-gray-200 light:focus:bg-gray-200`,
+        inactive: `w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200 hover:text-gray-900 focus:outline-hidden focus:bg-gray-200 focus:text-gray-900 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus:bg-neutral-700 dark:focus:text-white light:text-gray-700 light:hover:bg-gray-200 light:hover:text-gray-900 light:focus:bg-gray-200 light:focus:text-gray-900`,
       },
     }),
-    [styles.text.primary, styles.text.secondary]
+    []
   );
 
   return (
@@ -135,7 +135,7 @@ export default function Sidebar() {
       <nav className="p-3 size-full flex flex-col overflow-y-auto">
         <button
           type="button"
-          className="p-1.5 ps-2.5 w-full inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-white border border-gray-200 text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 light:bg-white light:border-gray-200 light:text-gray-800 light:hover:bg-gray-50 light:focus:bg-gray-50"
+          className="p-1.5 ps-2.5 w-full inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-white border border-gray-200 text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
         >
           <svg
             className="size-3.5"
@@ -184,7 +184,7 @@ export default function Sidebar() {
                   href={item.href}
                 >
                   {item.icon}
-                  <span className={styles.text.secondary}>{item.label}</span>
+                  <span>{item.label}</span>
                 </Link>
               </li>
             ))}
@@ -192,15 +192,10 @@ export default function Sidebar() {
         </div>
 
         <div className={sectionStyles.container}>
-          <span className={sectionStyles.title}>
-            Pages
-          </span>
+          <span className={sectionStyles.title}>Pages</span>
           <ul className={sectionStyles.list}>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -216,14 +211,11 @@ export default function Sidebar() {
                   <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
                   <circle cx="12" cy="13" r="3" />
                 </svg>
-                <span className={styles.text.secondary}>Posts</span>
+                <span>Posts</span>
               </a>
             </li>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -241,22 +233,17 @@ export default function Sidebar() {
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                <span className={styles.text.secondary}>Members</span>
+                <span>Members</span>
               </a>
             </li>
           </ul>
         </div>
 
         <div className={sectionStyles.container}>
-          <span className={sectionStyles.title}>
-            Posts
-          </span>
+          <span className={sectionStyles.title}>Posts</span>
           <ul className={sectionStyles.list}>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -272,14 +259,11 @@ export default function Sidebar() {
                   <path d="M5 12h14" />
                   <path d="M12 5v14" />
                 </svg>
-                <span className={styles.text.secondary}>Create Post</span>
+                <span>Create Post</span>
               </a>
             </li>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -295,17 +279,14 @@ export default function Sidebar() {
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14,2 14,8 20,8" />
                 </svg>
-                <span className={styles.text.secondary}>Draft</span>
+                <span>Draft</span>
                 <span className="ms-auto inline-block py-0.5 px-1.5 rounded-full text-xs font-medium bg-gray-800 text-white dark:bg-neutral-200 dark:text-neutral-800 light:bg-gray-800 light:text-white">
                   23
                 </span>
               </a>
             </li>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -321,7 +302,7 @@ export default function Sidebar() {
                   <polyline points="16 18 22 12 16 6" />
                   <polyline points="8 6 2 12 8 18" />
                 </svg>
-                <span className={styles.text.secondary}>Published</span>
+                <span>Published</span>
                 <span className="ms-auto inline-block py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-500 light:bg-green-100 light:text-green-800">
                   102
                 </span>
@@ -344,7 +325,7 @@ export default function Sidebar() {
                   href={item.href}
                 >
                   {item.icon}
-                  <span className={styles.text.secondary}>{item.label}</span>
+                  <span>{item.label}</span>
                 </Link>
               </li>
             ))}
@@ -352,15 +333,10 @@ export default function Sidebar() {
         </div>
 
         <div className={sectionStyles.container}>
-          <span className={sectionStyles.title}>
-            Others
-          </span>
+          <span className={sectionStyles.title}>Others</span>
           <ul className={sectionStyles.list}>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -375,15 +351,12 @@ export default function Sidebar() {
                 >
                   <path d="M12 2v20m8-10H4" />
                 </svg>
-                <span className={styles.text.secondary}>What&apos;s new?</span>
+                <span>What&apos;s new?</span>
                 <span className="ms-auto inline-block size-2 bg-indigo-500 rounded-full"></span>
               </a>
             </li>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -400,14 +373,11 @@ export default function Sidebar() {
                   <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                   <path d="M12 17h.01" />
                 </svg>
-                <span className={styles.text.secondary}>Help & support</span>
+                <span>Help & support</span>
               </a>
             </li>
             <li>
-              <a
-                className={sectionStyles.link.inactive}
-                href="#"
-              >
+              <a className={sectionStyles.link.inactive} href="#">
                 <svg
                   className="size-3.5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -422,7 +392,7 @@ export default function Sidebar() {
                 >
                   <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                 </svg>
-                <span className={styles.text.secondary}>Knowledge Base</span>
+                <span>Knowledge Base</span>
               </a>
             </li>
           </ul>
