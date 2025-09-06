@@ -68,10 +68,10 @@ export const useStyles = () => {
 
     // テキスト色の統一定義
     text: {
-      // 基本テキスト階層
-      primary: "text-gray-800 dark:text-gray-50", // 見出し、重要なテキスト
-      secondary: "text-gray-700 dark:text-gray-200", // 本文テキスト
-      tertiary: "text-gray-600 dark:text-gray-300", // 補助テキスト、説明文
+      // 基本テキスト階層（可読性改善版）
+      primary: "text-gray-900 dark:text-gray-50", // 見出し、最重要テキスト
+      secondary: "text-gray-800 dark:text-gray-200", // 本文テキスト（可読性向上）
+      tertiary: "text-gray-700 dark:text-gray-300", // 補助テキスト、説明文
       muted: "text-gray-500 dark:text-gray-400", // 非活性、ヒント文字
 
       // 特殊用途

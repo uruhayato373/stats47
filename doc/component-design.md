@@ -6,6 +6,123 @@
 
 ## コンポーネント一覧
 
+### e-Stat コンポーネント構造
+
+e-Stat 関連のコンポーネントは、機能別に以下の 3 つのディレクトリに整理されています：
+
+```
+src/components/estat/
+├── metadata/                    # メタデータ関連コンポーネント
+│   ├── EstatMetadataPageHeader.tsx
+│   ├── EstatMetadataTabNavigation.tsx
+│   ├── EstatMetadataTabContent.tsx
+│   ├── EstatMetadataDisplay.tsx
+│   ├── SavedMetadataDisplay.tsx
+│   ├── MetadataSaver.tsx
+│   ├── MetadataActions.tsx
+│   ├── MetaInfoCard.tsx
+│   ├── MetaInfoFetcher.tsx
+│   └── index.ts
+├── data/                       # データ表示関連コンポーネント
+│   ├── EstatDataDisplay/
+│   ├── EstatDataFetcher/
+│   ├── EstatDataTable.tsx
+│   └── index.ts
+├── visualization/              # 可視化関連コンポーネント
+│   ├── ChoroplethMap.tsx
+│   ├── YearSelector.tsx
+│   └── index.ts
+└── index.ts                    # 全体のエクスポート管理
+```
+
+### EstatMetadataPage コンポーネント群
+
+e-Stat メタ情報管理ページのコンポーネント群。元の単一ファイル（183 行）を以下の 4 つのコンポーネントに分割して、保守性と再利用性を向上させました。
+
+#### 1. EstatMetadataPageHeader
+
+ページヘッダー部分を担当するコンポーネント。
+
+**責任**:
+
+- ページタイトルの表示
+- アクションボタン（更新、e-STAT API リンク）の表示
+- ローディング状態の管理
+
+**Props**:
+
+```typescript
+interface EstatMetadataPageHeaderProps {
+  loading: boolean;
+  currentStatsId: string;
+  onRefresh: () => void;
+}
+```
+
+#### 2. EstatMetadataTabNavigation
+
+タブナビゲーション部分を担当するコンポーネント。
+
+**責任**:
+
+- タブの定義と表示
+- アクティブタブの管理
+- タブ切り替えの処理
+
+**Props**:
+
+```typescript
+interface EstatMetadataTabNavigationProps {
+  activeTab: TabId;
+  onTabChange: (tabId: TabId) => void;
+}
+```
+
+**タブ定義**:
+
+- `fetch`: メタ情報取得
+- `save`: メタ情報保存
+- `saved`: 保存済データ確認
+
+#### 3. EstatMetadataTabContent
+
+タブコンテンツのレンダリング部分を担当するコンポーネント。
+
+**責任**:
+
+- 各タブのコンテンツレンダリング
+- タブ別のロジック管理
+
+**Props**:
+
+```typescript
+interface EstatMetadataTabContentProps {
+  activeTab: TabId;
+  metaInfo: EstatMetaInfoResponse | null;
+  loading: boolean;
+  error: string | null;
+  onFetchMetaInfo: (statsDataId: string) => void;
+}
+```
+
+#### 4. EstatMetadataPage（リファクタリング後）
+
+メインページコンポーネント。分割されたコンポーネントを統合。
+
+**責任**:
+
+- 状態管理（metaInfo, loading, error, currentStatsId, activeTab）
+- イベントハンドリング（handleFetchMetaInfo, handleRefresh, handleTabChange）
+- 分割されたコンポーネントの統合
+
+**メリット**:
+
+- **単一責任の原則**: 各コンポーネントが明確な責任を持つ
+- **再利用性**: 各コンポーネントを他のページでも使用可能
+- **保守性**: 変更時の影響範囲が限定的
+- **テスタビリティ**: 各コンポーネントを個別にテスト可能
+- **可読性**: コードの意図が明確
+
 ### SavedMetadataDisplay
 
 保存された e-STAT メタデータを表示するコンポーネント。

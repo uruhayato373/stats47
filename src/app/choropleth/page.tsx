@@ -1,9 +1,9 @@
 import React from "react";
-import { ChoroplethMap } from "@/components/estat/ChoroplethMap";
+import { ChoroplethMap } from "@/components/estat/visualization";
 import { EstatDataProcessor } from "@/lib/estat/EstatDataProcessor";
-import { YearSelector } from "@/components/estat/YearSelector";
-import { EstatDataTable } from "@/components/estat/EstatDataTable";
-import EstatMetadataDisplay from "@/components/estat/EstatMetadataDisplay";
+import { YearSelector } from "@/components/estat/visualization";
+import { EstatDataTable } from "@/components/estat/data";
+import { EstatMetadataDisplay } from "@/components/estat/metadata";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 
