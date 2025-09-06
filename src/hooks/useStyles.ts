@@ -3,7 +3,7 @@ export const useStyles = () => {
   const styles = {
     // Input フィールド
     input: {
-      base: "w-full px-3 py-2 border border-gray-200 rounded-lg shadow-xs placeholder-gray-500 bg-white text-gray-800 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-100 dark:placeholder-neutral-400",
+      base: "w-full px-3 py-2 border border-gray-200 rounded-lg shadow-xs placeholder-gray-600 bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50 dark:placeholder-neutral-400",
       disabled: "opacity-50 cursor-not-allowed",
     },
 
@@ -54,9 +54,9 @@ export const useStyles = () => {
 
     // ラベル
     label: {
-      base: "block text-sm font-medium text-gray-900 dark:text-neutral-300 mb-2",
+      base: "block text-sm font-medium text-gray-900 dark:text-neutral-100 mb-2",
       required:
-        "block text-sm font-medium text-gray-900 dark:text-neutral-300 mb-2 after:content-['*'] after:ml-0.5 after:text-red-500",
+        "block text-sm font-medium text-gray-900 dark:text-neutral-100 mb-2 after:content-['*'] after:ml-0.5 after:text-red-500",
     },
 
     // 見出し

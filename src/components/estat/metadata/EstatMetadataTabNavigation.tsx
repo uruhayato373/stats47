@@ -53,8 +53,8 @@ export default function EstatMetadataTabNavigation({
             onClick={() => onTabChange(tab.id)}
             className={`py-2 px-1 border-b-2 font-medium text-xs transition-all duration-200 flex items-center gap-1.5 ${
               activeTab === tab.id
-                ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                : `border-transparent text-gray-700 dark:text-gray-300 hover:${styles.text.primary} hover:border-gray-300`
+                ? `border-indigo-500 ${styles.text.brand}`
+                : `border-transparent ${styles.text.secondary} hover:${styles.text.primary} hover:border-gray-300`
             }`}
             title={tab.description}
           >

@@ -39,9 +39,9 @@ export default function YourComponent() {
 
 | 階層 | クラス | 用途 | ライトモード | ダークモード |
 |------|-------|------|--------------|--------------|
-| Primary | `styles.text.primary` | 見出し、重要なテキスト | `#1f2937` | `#f9fafb` |
-| Secondary | `styles.text.secondary` | 本文テキスト | `#374151` | `#e5e7eb` |
-| Tertiary | `styles.text.tertiary` | 補助テキスト、説明文 | `#6b7280` | `#d1d5db` |
+| Primary | `styles.text.primary` | 見出し、最重要テキスト | `#111827` | `#f9fafb` |
+| Secondary | `styles.text.secondary` | 本文テキスト | `#1f2937` | `#e5e7eb` |
+| Tertiary | `styles.text.tertiary` | 補助テキスト、説明文 | `#374151` | `#d1d5db` |
 | Muted | `styles.text.muted` | 非活性、ヒント文字 | `#9ca3af` | `#9ca3af` |
 
 ### 特殊用途
