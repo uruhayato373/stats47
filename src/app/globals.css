@@ -210,8 +210,16 @@ main {
 }
 
 /* ダークモードのテキスト */
+.dark .text-gray-900 {
+  color: #f9fafb !important;
+}
+
 .dark .text-gray-800 {
   color: #e5e7eb !important;
+}
+
+.light .text-gray-900 {
+  color: #111827 !important;
 }
 
 .light .text-gray-800 {

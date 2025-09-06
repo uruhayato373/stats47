@@ -20,7 +20,7 @@ export default function EstatMetadataPageHeader({
     <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
       <div>
         <h1
-          className={`font-medium text-lg ${styles.text.primary} flex items-center gap-2`}
+          className="font-medium text-lg text-gray-900 dark:text-gray-100 flex items-center gap-2"
         >
           <BarChart3 className="w-6 h-6 text-indigo-600" />
           e-STAT メタ情報管理

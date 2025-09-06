@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useStyles } from "@/hooks/useStyles";
 import MetadataActions from "./MetadataActions";
 
 interface SavedMetadata {
@@ -14,6 +15,7 @@ export default function SavedMetadataDisplay() {
   const [metadata, setMetadata] = useState<SavedMetadata[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
+  const styles = useStyles();
 
   useEffect(() => {
     fetchSavedMetadata();
@@ -60,10 +62,10 @@ export default function SavedMetadataDisplay() {
 
   if (loading) {
     return (
-      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+      <div className={styles.card.base}>
         <div className="flex items-center justify-center py-12">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-          <span className="ml-2 text-gray-600 dark:text-neutral-400">
+          <span className={`ml-2 ${styles.text.tertiary}`}>
             データを読み込み中...
           </span>
         </div>
@@ -73,8 +75,8 @@ export default function SavedMetadataDisplay() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/30 dark:border-red-700">
-        <p className="text-red-800 dark:text-red-200">エラー: {error}</p>
+      <div className={styles.message.error}>
+        <p className={styles.messageText.error}>エラー: {error}</p>
         <MetadataActions
           onRefresh={fetchSavedMetadata}
           onRetry={fetchSavedMetadata}
@@ -85,24 +87,22 @@ export default function SavedMetadataDisplay() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className={styles.layout.section}>
       {/* ヘッダー */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+      <div className={styles.card.base}>
         <div className="flex items-center justify-between mb-4">
-          <h4 className="text-lg font-semibold text-gray-900 dark:text-neutral-100">
-            保存済みデータ一覧
-          </h4>
+          <h4 className={styles.heading.lg}>保存済みデータ一覧</h4>
           <MetadataActions onRefresh={fetchSavedMetadata} />
         </div>
-        <div className="text-sm text-gray-800 dark:text-neutral-200 font-medium">
+        <div className={`text-sm ${styles.text.secondary} font-medium`}>
           {metadata.length}件のデータ
         </div>
       </div>
 
       {/* データテーブル */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 dark:bg-neutral-800 dark:border-neutral-700">
+      <div className={styles.card.base}>
         {metadata.length === 0 ? (
-          <div className="text-center py-8 text-gray-600 dark:text-neutral-400">
+          <div className={`text-center py-8 ${styles.text.muted}`}>
             保存されたデータがありません。
             <br />
             メタ情報保存タブでデータを保存してください。
@@ -112,16 +112,24 @@ export default function SavedMetadataDisplay() {
             <table className="min-w-full border border-gray-200 rounded-lg dark:border-neutral-600">
               <thead className="bg-gray-50 dark:bg-neutral-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 border-r border-gray-200 dark:border-neutral-600">
+                  <th
+                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary} border-r border-gray-200 dark:border-neutral-600`}
+                  >
                     統計表ID
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300 border-r border-gray-200 dark:border-neutral-600">
+                  <th
+                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary} border-r border-gray-200 dark:border-neutral-600`}
+                  >
                     統計名
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300">
+                  <th
+                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary}`}
+                  >
                     タイトル
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 dark:text-neutral-300">
+                  <th
+                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary}`}
+                  >
                     カテゴリ数
                   </th>
                 </tr>
@@ -132,18 +140,22 @@ export default function SavedMetadataDisplay() {
                     key={`${item.stats_data_id}-${index}`}
                     className="hover:bg-gray-50 dark:hover:bg-neutral-700"
                   >
-                    <td className="px-4 py-3 text-sm font-mono text-gray-900 dark:text-neutral-100 border-r border-gray-200 dark:border-neutral-600">
+                    <td
+                      className={`px-4 py-3 text-sm font-mono ${styles.text.primary} border-r border-gray-200 dark:border-neutral-600`}
+                    >
                       {item.stats_data_id}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-100 border-r border-gray-200 dark:border-neutral-600">
+                    <td
+                      className={`px-4 py-3 text-sm ${styles.text.primary} border-r border-gray-200 dark:border-neutral-600`}
+                    >
                       {item.stat_name}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-100">
+                    <td className={`px-4 py-3 text-sm ${styles.text.primary}`}>
                       <div className="max-w-md truncate" title={item.title}>
                         {item.title}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-neutral-100">
+                    <td className={`px-4 py-3 text-sm ${styles.text.primary}`}>
                       {item.category_count}
                     </td>
                   </tr>
