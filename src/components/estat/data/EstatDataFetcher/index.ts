@@ -1,1 +1,1 @@
-export { default } from "./EstatDataFetcher";
+export { default as EstatDataFetcher } from "./EstatDataFetcher";
