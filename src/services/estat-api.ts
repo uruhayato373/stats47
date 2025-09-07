@@ -1,4 +1,4 @@
-import { 
+import {
   EstatMetaInfoResponse,
   EstatStatsDataResponse,
   EstatStatsListResponse,
@@ -6,9 +6,9 @@ import {
   GetStatsDataParams,
   GetStatsListParams,
   EstatAPIError,
-  APIResponseError 
-} from '@/types/estat';
-import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from '@/lib/constants';
+  APIResponseError,
+} from "@/types/estat";
+import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "@/lib/constants";
 
 /**
  * e-STAT APIクライアント
@@ -25,22 +25,25 @@ export class EstatAPIClient {
   /**
    * APIリクエストの共通処理
    */
-  private async request<T>(endpoint: string, params: Record<string, any>): Promise<T> {
+  private async request<T>(
+    endpoint: string,
+    params: Record<string, any>
+  ): Promise<T> {
     try {
       const searchParams = new URLSearchParams({
         appId: this.appId,
         lang: ESTAT_API.DEFAULT_LANG,
         dataFormat: ESTAT_API.DATA_FORMAT,
-        ...params
+        ...params,
       });
 
       const url = `${this.baseUrl}${endpoint}?${searchParams.toString()}`;
-      console.log('API Request URL:', url);
+      console.log("API Request URL:", url);
 
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Accept': 'application/json',
+          Accept: "application/json",
         },
       });
 
@@ -52,16 +55,20 @@ export class EstatAPIClient {
       }
 
       const data = await response.json();
-      
+      console.log("Raw e-Stat API response:", JSON.stringify(data, null, 2));
+
       // e-STAT APIのエラーチェック
       const result = this.extractResult(data);
+      console.log("Extracted result:", result);
+
       if (result && result.STATUS !== 0) {
+        console.error("e-Stat API error status:", result.STATUS, result);
         throw EstatAPIError.fromErrorCode(result.STATUS, result);
       }
 
       return data;
     } catch (error) {
-      console.error('e-STAT API Error:', error);
+      console.error("e-STAT API Error:", error);
       throw error;
     }
   }
@@ -80,7 +87,9 @@ export class EstatAPIClient {
   /**
    * メタ情報を取得
    */
-  async getMetaInfo(params: Omit<GetMetaInfoParams, 'appId'>): Promise<EstatMetaInfoResponse> {
+  async getMetaInfo(
+    params: Omit<GetMetaInfoParams, "appId">
+  ): Promise<EstatMetaInfoResponse> {
     return this.request<EstatMetaInfoResponse>(
       ESTAT_ENDPOINTS.GET_META_INFO,
       params
@@ -90,7 +99,9 @@ export class EstatAPIClient {
   /**
    * 統計データを取得
    */
-  async getStatsData(params: Omit<GetStatsDataParams, 'appId'>): Promise<EstatStatsDataResponse> {
+  async getStatsData(
+    params: Omit<GetStatsDataParams, "appId">
+  ): Promise<EstatStatsDataResponse> {
     return this.request<EstatStatsDataResponse>(
       ESTAT_ENDPOINTS.GET_STATS_DATA,
       params
@@ -100,7 +111,9 @@ export class EstatAPIClient {
   /**
    * 統計表リストを取得
    */
-  async getStatsList(params: Omit<GetStatsListParams, 'appId'>): Promise<EstatStatsListResponse> {
+  async getStatsList(
+    params: Omit<GetStatsListParams, "appId">
+  ): Promise<EstatStatsListResponse> {
     return this.request<EstatStatsListResponse>(
       ESTAT_ENDPOINTS.GET_STATS_LIST,
       params

@@ -35,11 +35,38 @@ export default function EstatDataPage() {
       const response = await fetch(`/api/estat/data?${queryParams.toString()}`);
 
       if (!response.ok) {
-        const errorData = (await response.json()) as { error?: string };
-        throw new Error(errorData.error || `HTTP ${response.status}`);
+        let errorMessage = `HTTP ${response.status}`;
+        try {
+          const errorData = (await response.json()) as { error?: string };
+          errorMessage = errorData.error || errorMessage;
+        } catch (jsonError) {
+          console.error("Error parsing error response:", jsonError);
+          const textResponse = await response.text();
+          console.error("Raw error response:", textResponse);
+          errorMessage = `HTTP ${response.status}: ${textResponse.substring(
+            0,
+            100
+          )}`;
+        }
+        throw new Error(errorMessage);
       }
 
-      const data = (await response.json()) as EstatStatsDataResponse;
+      let data: EstatStatsDataResponse;
+      try {
+        const responseText = await response.text();
+        console.log("Raw API response:", responseText.substring(0, 200));
+        data = JSON.parse(responseText) as EstatStatsDataResponse;
+      } catch (jsonError) {
+        console.error("JSON parse error:", jsonError);
+        const responseText = await response.text();
+        console.error("Raw response that failed to parse:", responseText);
+        throw new Error(
+          `Invalid JSON response: ${
+            jsonError instanceof Error ? jsonError.message : "Unknown error"
+          }`
+        );
+      }
+
       setApiResponse(data);
     } catch (err) {
       console.error("Data fetch error:", err);
