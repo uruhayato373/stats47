@@ -22,7 +22,10 @@ export class EstatDataFormatter {
     const tables =
       response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF?.TABLE_INF || [];
 
-    return tables.map((table) => ({
+    // 配列でない場合は配列に変換
+    const tableArray = Array.isArray(tables) ? tables : [tables];
+
+    return tableArray.map((table) => ({
       id: table["@id"],
       statName: table.STAT_NAME?.$?.trim() || "",
       title: table.TITLE?.$?.trim() || "",
@@ -94,9 +97,8 @@ export class EstatDataFormatter {
       : [areaClass.CLASS];
 
     return classes.map((cls: any) => ({
-      code: cls["@code"]?.trim() || "",
-      name: cls["@name"]?.trim() || "",
-      displayName: this.cleanString(cls["@name"] || ""),
+      areaCode: cls["@code"]?.trim() || "",
+      areaName: this.cleanString(cls["@name"] || ""),
       level: cls["@level"] || "1",
       parentCode: cls["@parentCode"]?.trim(),
     }));
@@ -122,11 +124,10 @@ export class EstatDataFormatter {
 
       classes.forEach((cls: any) => {
         categories.push({
-          code: cls["@code"]?.trim() || "",
-          name: cls["@name"]?.trim() || "",
+          categoryCode: cls["@code"]?.trim() || "",
+          categoryName: cls["@name"]?.trim() || "",
           displayName: this.cleanString(cls["@name"] || ""),
-          level: cls["@level"] || "1",
-          unit: cls["@unit"]?.trim(),
+          unit: cls["@unit"]?.trim() || null,
         });
       });
     });
@@ -152,11 +153,8 @@ export class EstatDataFormatter {
       const name = cls["@name"]?.trim() || "";
 
       return {
-        code,
-        year: this.extractYear(code, name),
-        displayName: this.cleanString(name),
-        fromDate: cls["@from"]?.trim(),
-        toDate: cls["@to"]?.trim(),
+        timeCode: code,
+        timeName: this.cleanString(name),
       };
     });
   }
@@ -206,7 +204,7 @@ export class EstatDataFormatter {
 
       // 年情報
       const yearInfo = timeCode
-        ? years.find((y) => y.code === timeCode)
+        ? years.find((y) => y.timeCode === timeCode)
         : undefined;
 
       // 単位の取得（最初に見つかったカテゴリの単位を使用）
@@ -230,9 +228,8 @@ export class EstatDataFormatter {
         categories: categoryInfo,
         yearInfo: yearInfo
           ? {
-              code: yearInfo.code,
-              year: yearInfo.year,
-              displayName: yearInfo.displayName,
+              timeCode: yearInfo.timeCode,
+              timeName: yearInfo.timeName,
             }
           : undefined,
       };
@@ -247,14 +244,6 @@ export class EstatDataFormatter {
       .replace(/\s+/g, " ")
       .replace(/[　\s]+/g, " ")
       .trim();
-  }
-
-  /**
-   * 年を抽出
-   */
-  private static extractYear(code: string, name: string): number {
-    const yearMatch = (code + name).match(/(\d{4})/);
-    return yearMatch ? parseInt(yearMatch[1]) : 0;
   }
 
   /**

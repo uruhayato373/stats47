@@ -14,9 +14,8 @@ export interface EstatMetaCategoryData {
  * 整形された地域情報
  */
 export interface FormattedArea {
-  code: string;
-  name: string;
-  displayName: string;
+  areaCode: string;
+  areaName: string;
   level: string;
   parentCode?: string;
 }
@@ -25,22 +24,18 @@ export interface FormattedArea {
  * 整形されたカテゴリ情報
  */
 export interface FormattedCategory {
-  code: string;
-  name: string;
+  categoryCode: string;
+  categoryName: string;
   displayName: string;
-  level: string;
-  unit?: string;
+  unit: string | null;
 }
 
 /**
  * 整形された年情報
  */
 export interface FormattedYear {
-  code: string;
-  year: number;
-  displayName: string;
-  fromDate?: string;
-  toDate?: string;
+  timeCode: string;
+  timeName: string;
 }
 
 /**
@@ -58,9 +53,8 @@ export interface FormattedValue {
   };
   categories: Record<string, { code: string; name: string }>;
   yearInfo?: {
-    code: string;
-    year?: number;
-    displayName: string;
+    timeCode: string;
+    timeName: string;
   };
 }
 

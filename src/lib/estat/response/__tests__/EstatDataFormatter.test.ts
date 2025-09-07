@@ -345,6 +345,231 @@ describe("EstatDataFormatter テスト", () => {
                       "@name": "青森県",
                       "@level": "2",
                     },
+                    {
+                      "@code": "03000",
+                      "@name": "岩手県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "04000",
+                      "@name": "宮城県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "05000",
+                      "@name": "秋田県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "06000",
+                      "@name": "山形県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "07000",
+                      "@name": "福島県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "08000",
+                      "@name": "茨城県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "09000",
+                      "@name": "栃木県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "10000",
+                      "@name": "群馬県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "11000",
+                      "@name": "埼玉県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "12000",
+                      "@name": "千葉県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "13000",
+                      "@name": "東京都",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "14000",
+                      "@name": "神奈川県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "15000",
+                      "@name": "新潟県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "16000",
+                      "@name": "富山県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "17000",
+                      "@name": "石川県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "18000",
+                      "@name": "福井県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "19000",
+                      "@name": "山梨県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "20000",
+                      "@name": "長野県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "21000",
+                      "@name": "岐阜県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "22000",
+                      "@name": "静岡県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "23000",
+                      "@name": "愛知県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "24000",
+                      "@name": "三重県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "25000",
+                      "@name": "滋賀県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "26000",
+                      "@name": "京都府",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "27000",
+                      "@name": "大阪府",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "28000",
+                      "@name": "兵庫県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "29000",
+                      "@name": "奈良県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "30000",
+                      "@name": "和歌山県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "31000",
+                      "@name": "鳥取県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "32000",
+                      "@name": "島根県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "33000",
+                      "@name": "岡山県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "34000",
+                      "@name": "広島県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "35000",
+                      "@name": "山口県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "36000",
+                      "@name": "徳島県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "37000",
+                      "@name": "香川県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "38000",
+                      "@name": "愛媛県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "39000",
+                      "@name": "高知県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "40000",
+                      "@name": "福岡県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "41000",
+                      "@name": "佐賀県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "42000",
+                      "@name": "長崎県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "43000",
+                      "@name": "熊本県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "44000",
+                      "@name": "大分県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "45000",
+                      "@name": "宮崎県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "46000",
+                      "@name": "鹿児島県",
+                      "@level": "2",
+                    },
+                    {
+                      "@code": "47000",
+                      "@name": "沖縄県",
+                      "@level": "2",
+                    },
                   ],
                 },
                 {
@@ -410,9 +635,8 @@ describe("EstatDataFormatter テスト", () => {
 
       // 地域情報をCSVに保存（全データ）
       const areasCsv = formattedData.areas.map((area) => ({
-        code: area.code,
-        name: area.name,
-        displayName: area.displayName,
+        areaCode: area.areaCode,
+        areaName: area.areaName,
         level: area.level,
         parentCode: area.parentCode || "",
       }));
@@ -421,10 +645,9 @@ describe("EstatDataFormatter テスト", () => {
 
       // カテゴリ情報をCSVに保存（全データ）
       const categoriesCsv = formattedData.categories.map((category) => ({
-        code: category.code,
-        name: category.name,
+        categoryCode: category.categoryCode,
+        categoryName: category.categoryName,
         displayName: category.displayName,
-        level: category.level,
         unit: category.unit || "",
       }));
       const categoriesPath = saveToCSV(categoriesCsv, "categories.csv");
@@ -432,11 +655,8 @@ describe("EstatDataFormatter テスト", () => {
 
       // 年度情報をCSVに保存（全データ）
       const yearsCsv = formattedData.years.map((year) => ({
-        code: year.code,
-        year: year.year,
-        displayName: year.displayName,
-        fromDate: year.fromDate || "",
-        toDate: year.toDate || "",
+        timeCode: year.timeCode,
+        timeName: year.timeName,
       }));
       const yearsPath = saveToCSV(yearsCsv, "years.csv");
       expect(yearsPath).toBeDefined();
@@ -449,9 +669,8 @@ describe("EstatDataFormatter テスト", () => {
         unit: value.unit || "",
         areaCode: value.areaCode || "",
         areaName: value.areaInfo?.displayName || "",
-        yearCode: value.yearInfo?.code || "",
-        year: value.yearInfo?.year || "",
-        yearName: value.yearInfo?.displayName || "",
+        yearCode: value.yearInfo?.timeCode || "",
+        yearName: value.yearInfo?.timeName || "",
         categories: JSON.stringify(value.categories),
       }));
       const valuesPath = saveToCSV(valuesCsv, "values.csv");
@@ -468,6 +687,91 @@ describe("EstatDataFormatter テスト", () => {
       console.log(`- 年度情報: ${yearsPath} (${formattedData.years.length}件)`);
       console.log(
         `- 値データ: ${valuesPath} (${valuesCsv.length}件/全${formattedData.values.length}件)`
+      );
+    });
+
+    it("実際のデータで全ての年次をCSVに保存する", async () => {
+      // 実際のデータを使用
+      const actualEstatData = require("./input/0000010101.json");
+
+      // デバッグ: データ構造を確認
+      console.log("actualEstatData keys:", Object.keys(actualEstatData));
+      console.log(
+        "GET_META_INFO:",
+        actualEstatData.GET_META_INFO ? "exists" : "undefined"
+      );
+      console.log(
+        "CLASS_INF:",
+        actualEstatData.GET_META_INFO?.CLASS_INF ? "exists" : "undefined"
+      );
+
+      const mockStatsDataResponse = {
+        GET_STATS_DATA: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: "正常に終了しました。",
+            DATE: "2025-08-14T09:27:36.165+09:00",
+          },
+          PARAMETER: {
+            LANG: "J" as const,
+            STATS_DATA_ID: "0000010101",
+            DATA_FORMAT: "J" as const,
+            METAGET_FLG: "Y" as const,
+            CNT_GET_FLG: "N" as const,
+            EXPLANATION_GET_FLG: "N" as const,
+            ANNOTATION_GET_FLG: "N" as const,
+            REPLACE_SP_CHARS: "0" as const,
+          },
+          STATISTICAL_DATA: {
+            RESULT_INF: {
+              TOTAL_NUMBER: 546720,
+              FROM_NUMBER: 1,
+              TO_NUMBER: 546720,
+            },
+            TABLE_INF: {
+              "@id": "0000010101",
+              TITLE: { $: "Ａ　人口・世帯" },
+              STAT_NAME: { $: "社会・人口統計体系" },
+              GOV_ORG: { $: "総務省" },
+              STATISTICS_NAME: "都道府県データ 基礎データ",
+              TOTAL_NUMBER: "546720",
+              FROM_NUMBER: "1",
+              TO_NUMBER: "546720",
+              SMALL_AREA: "0" as const,
+              STATISTICS_NAME_SPEC: {
+                TABULATION_CATEGORY: "都道府県データ",
+                TABULATION_SUB_CATEGORY1: "基礎データ",
+              },
+            },
+            CLASS_INF: {
+              CLASS_OBJ: actualEstatData.GET_META_INFO.CLASS_INF.CLASS_OBJ,
+            },
+            DATA_INF: {
+              NOTE: [],
+              VALUE: [],
+            },
+          },
+        },
+      };
+
+      const formattedData = EstatDataFormatter.formatStatsData(
+        mockStatsDataResponse
+      );
+
+      // 年度情報をCSVに保存（全データ）
+      const yearsCsv = formattedData.years.map((year) => ({
+        timeCode: year.timeCode,
+        timeName: year.timeName,
+      }));
+      const yearsPath = saveToCSV(yearsCsv, "years-full.csv");
+      expect(yearsPath).toBeDefined();
+
+      // 年度数が50年分（1975-2024）であることを確認
+      expect(formattedData.years).toHaveLength(50);
+      expect(yearsCsv).toHaveLength(50);
+
+      console.log(
+        `実際のデータの年度情報: ${yearsPath} (${formattedData.years.length}件)`
       );
     });
   });
