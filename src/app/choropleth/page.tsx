@@ -1,6 +1,6 @@
 import React from "react";
 import { ChoroplethMap } from "@/components/estat/visualization";
-import { EstatDataProcessor } from "@/lib/estat/EstatDataProcessor";
+import { EstatDataFetcher, EstatDataFormatter } from "@/lib/estat/response";
 import { YearSelector } from "@/components/estat/visualization";
 import { EstatDataTable } from "@/components/estat/data";
 import { EstatMetadataDisplay } from "@/components/estat/metadata";
@@ -33,9 +33,10 @@ export default async function ChoroplethPage({
 
   try {
     // まず利用可能な年度情報を取得
-    const initialDataset = await EstatDataProcessor.getStatsData(statsDataId, {
+    const response = await EstatDataFetcher.getStatsData(statsDataId, {
       categoryFilter: params.category || defaultCategory,
     });
+    const initialDataset = EstatDataFormatter.formatStatsData(response);
 
     // 年度情報をYearSelectorが期待する形式に変換
     availableYears = initialDataset.years.map((year) => ({

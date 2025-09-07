@@ -1,5 +1,6 @@
-import { EstatDataTransformer, EstatTransformedData } from "./data-transformer";
-import { EstatMetadataDatabaseService } from "./metadata-database";
+import { EstatCSVTransformer } from "../response/EstatCSVTransformer";
+import { EstatMetaCategoryData } from "@/types/estat";
+import { EstatMetadataDatabaseService } from "./EstatMetadataManager";
 import { estatAPI } from "@/services/estat-api";
 
 export class EstatMetadataService {
@@ -16,8 +17,10 @@ export class EstatMetadataService {
       const metadata = await estatAPI.getMetaInfo({ statsDataId });
 
       // 2. CSV形式に変換
-      const transformedData =
-        EstatDataTransformer.transformToCSVFormat(metadata);
+      const transformedData = EstatCSVTransformer.transformToCSVFormat(
+        metadata,
+        statsDataId
+      );
 
       // 3. データベースに保存
       await this.dbService.saveTransformedData(transformedData);
@@ -65,7 +68,7 @@ export class EstatMetadataService {
   }
 
   // 保存済みデータの検索
-  async searchSavedMetadata(query: string): Promise<EstatTransformedData[]> {
+  async searchSavedMetadata(query: string): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.search(query);
   }
 
@@ -91,14 +94,14 @@ export class EstatMetadataService {
   // 統計表IDで保存済みデータを取得
   async getSavedMetadataByStatsId(
     statsDataId: string
-  ): Promise<EstatTransformedData[]> {
+  ): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.findByStatsId(statsDataId);
   }
 
   // カテゴリで保存済みデータを取得
   async getSavedMetadataByCategory(
     category: string
-  ): Promise<EstatTransformedData[]> {
+  ): Promise<EstatMetaCategoryData[]> {
     return await this.dbService.findByCategory(category);
   }
 }

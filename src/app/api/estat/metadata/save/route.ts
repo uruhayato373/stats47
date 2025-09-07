@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatDataProcessor } from "@/lib/estat/EstatDataProcessor";
+import { EstatCSVTransformer } from "@/lib/estat/response";
 import { EstatMetaCategoryData } from "@/types/estat/formatted";
 import { estatAPI } from "@/services/estat-api";
 
@@ -238,7 +238,7 @@ export async function POST(request: NextRequest) {
     console.log("取得したメタ情報:", metaInfo);
 
     // 取得したデータをD1用の形式に変換
-    const transformedData = EstatDataProcessor.transformToCSVFormat(
+    const transformedData = EstatCSVTransformer.transformToCSVFormat(
       metaInfo as unknown as Record<string, unknown>,
       statsDataId
     );

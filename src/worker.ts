@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { EstatMetadataManager } from "./lib/estat/EstatMetadataManager";
+import { EstatMetadataManager } from "./lib/estat/metadata";
 
 export interface Env {
   AUTH_DB: D1Database;
@@ -145,7 +145,7 @@ async function handleSearch(request: Request, env: Env): Promise<Response> {
   const statsDataId = url.searchParams.get("statsDataId") || "";
   const limitParam = url.searchParams.get("limit");
   const offsetParam = url.searchParams.get("offset");
-  
+
   const limit = limitParam ? parseInt(limitParam) : 100;
   const offset = offsetParam ? parseInt(offsetParam) : 0;
 
