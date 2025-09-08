@@ -35,21 +35,21 @@ export default function DataTable<T = Record<string, unknown>>({
   const displayData = data.slice(0, maxRows);
 
   return (
-    <div className={`relative flex flex-col w-full h-full overflow-scroll shadow-md rounded-xl bg-clip-border ${styles.card.base} ${styles.text.secondary}`}>
-      <table className="w-full text-left table-auto min-w-max">
+    <div className={`${styles.table.container} ${styles.card.base} ${styles.text.secondary}`}>
+      <table className={styles.table.table}>
         <thead>
           <tr>
-            <th className="p-4 border-b border-gray-200 bg-gray-50 dark:border-neutral-600 dark:bg-neutral-700">
-              <p className={`block font-sans text-sm antialiased font-normal leading-none opacity-70 ${styles.text.tertiary}`}>
+            <th className={styles.table.headerCell}>
+              <p className={`${styles.table.headerText} ${styles.text.tertiary}`}>
                 インデックス
               </p>
             </th>
             {columns.map((column) => (
               <th
                 key={column.key}
-                className="p-4 border-b border-gray-200 bg-gray-50 dark:border-neutral-600 dark:bg-neutral-700"
+                className={styles.table.headerCell}
               >
-                <p className={`block font-sans text-sm antialiased font-normal leading-none opacity-70 ${styles.text.tertiary}`}>
+                <p className={`${styles.table.headerText} ${styles.text.tertiary}`}>
                   {column.label}
                 </p>
               </th>
@@ -60,26 +60,26 @@ export default function DataTable<T = Record<string, unknown>>({
           {displayData.map((item, index) => (
             <tr key={index}>
               <td
-                className={`p-4 ${
+                className={
                   index !== displayData.length - 1
-                    ? "border-b border-gray-200 dark:border-neutral-600"
-                    : ""
-                }`}
+                    ? styles.table.bodyCellWithBorder
+                    : styles.table.bodyCell
+                }
               >
-                <p className={`block font-sans text-sm antialiased font-normal leading-normal ${styles.text.primary}`}>
+                <p className={`${styles.table.bodyText} ${styles.text.primary}`}>
                   {index + 1}
                 </p>
               </td>
               {columns.map((column) => (
                 <td
                   key={column.key}
-                  className={`p-4 ${
+                  className={
                     index !== displayData.length - 1
-                      ? "border-b border-gray-200 dark:border-neutral-600"
-                      : ""
-                  }`}
+                      ? styles.table.bodyCellWithBorder
+                      : styles.table.bodyCell
+                  }
                 >
-                  <div className={`block font-sans text-sm antialiased font-normal leading-normal ${styles.text.secondary}`}>
+                  <div className={`${styles.table.bodyText} ${styles.text.secondary}`}>
                     {column.render
                       ? column.render(item, index)
                       : String(
@@ -94,8 +94,8 @@ export default function DataTable<T = Record<string, unknown>>({
       </table>
 
       {data.length > maxRows && (
-        <div className="px-6 py-3 text-center border-t rounded-b-xl bg-gray-50 border-gray-200 dark:bg-neutral-700 dark:border-neutral-600">
-          <p className={`block font-sans text-sm antialiased font-normal leading-normal opacity-70 ${styles.text.muted}`}>
+        <div className={styles.table.footer}>
+          <p className={`${styles.table.footerText} ${styles.text.muted}`}>
             最初の{maxRows}件を表示中 (全{data.length}件)
           </p>
         </div>

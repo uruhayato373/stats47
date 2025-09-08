@@ -84,6 +84,19 @@ export const useStyles = () => {
       body: "text-gray-700 dark:text-gray-200", // → secondary に移行
     },
 
+    // テーブル
+    table: {
+      container: "relative flex flex-col w-full h-full overflow-scroll shadow-md rounded-xl bg-clip-border",
+      table: "w-full text-left table-auto min-w-max",
+      headerCell: "p-4 border-b border-gray-200 bg-gray-100 dark:border-neutral-600 dark:bg-neutral-700",
+      headerText: "block font-sans text-sm antialiased font-normal leading-none opacity-70",
+      bodyCell: "p-4",
+      bodyCellWithBorder: "p-4 border-b border-gray-200 dark:border-neutral-600",
+      bodyText: "block font-sans text-sm antialiased font-normal leading-normal",
+      footer: "px-6 py-3 text-center border-t rounded-b-xl bg-gray-100 border-gray-200 dark:bg-neutral-700 dark:border-neutral-600",
+      footerText: "block font-sans text-sm antialiased font-normal leading-normal opacity-70",
+    },
+
     // レイアウト
     layout: {
       section: "space-y-6",
