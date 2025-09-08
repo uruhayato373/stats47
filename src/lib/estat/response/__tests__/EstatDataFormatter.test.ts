@@ -8,35 +8,35 @@ import actualEstatData from "./input/0000010101.json";
 // EstatDataFormatterのインポート
 import { EstatDataFormatter } from "../EstatDataFormatter";
 
-// モックデータ生成関数
+// モックデータ生成関数（実際のJSONデータを使用）
 function generateMockValues() {
-  const areas = [
-    "00000", "01000", "02000", "03000", "04000", "05000", "06000", "07000",
-    "08000", "09000", "10000", "11000", "12000", "13000", "14000", "15000",
-    "16000", "17000", "18000", "19000", "20000", "21000", "22000", "23000",
-    "24000", "25000", "26000", "27000", "28000", "29000", "30000", "31000",
-    "32000", "33000", "34000", "35000", "36000", "37000", "38000", "39000",
-    "40000", "41000", "42000", "43000", "44000", "45000", "46000", "47000"
-  ];
-  
-  const categories = ["A1101"];
-  const times = ["2023000000", "2022000000"];
-  
+  // 実際のクラス情報を使用してより多くの値を生成
+  const classObjs = actualEstatData.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ;
+  const areaClass = classObjs.find((obj: any) => obj["@id"] === "area");
+  const cat01Class = classObjs.find((obj: any) => obj["@id"] === "cat01");
+  const timeClass = classObjs.find((obj: any) => obj["@id"] === "time");
+
   const values = [];
   
-  // 全ての組み合わせでデータを生成
-  for (const area of areas) {
-    for (const category of categories) {
-      for (const time of times) {
-        const baseValue = Math.floor(Math.random() * 10000000) + 100000;
-        values.push({
-          "@tab": "cat01",
-          "@cat01": category,
-          "@area": area,
-          "@time": time,
-          "@unit": "人",
-          $: baseValue.toString(),
-        });
+  if (areaClass?.CLASS && cat01Class?.CLASS && timeClass?.CLASS) {
+    // より多くのデータを生成：最初の20カテゴリ、全地域、最初の10年分
+    const sampleCategories = cat01Class.CLASS.slice(0, 20);
+    const allAreas = areaClass.CLASS;
+    const sampleTimes = timeClass.CLASS.slice(0, 10);
+    
+    for (const category of sampleCategories) {
+      for (const area of allAreas) {
+        for (const time of sampleTimes) {
+          const baseValue = Math.floor(Math.random() * 10000000) + 100000;
+          values.push({
+            "@tab": "cat01",
+            "@cat01": category["@code"],
+            "@area": area["@code"],
+            "@time": time["@code"],
+            "@unit": category["@unit"] || "人",
+            $: baseValue.toString(),
+          });
+        }
       }
     }
   }
@@ -672,7 +672,7 @@ describe("EstatDataFormatter テスト", () => {
       const yearsPath = saveToCSV(yearsCsv, "years.csv");
       expect(yearsPath).toBeDefined();
 
-      // 値データをCSVに保存（全データ）
+      // 値データをCSVに保存（簡易データセット）
       const valuesCsv: any[] = [];
 
       formattedData.values.forEach((value) => {
@@ -682,6 +682,7 @@ describe("EstatDataFormatter テスト", () => {
             ([categoryKey, categoryInfo]) => {
               valuesCsv.push({
                 value: value.value,
+                numericValue: value.numericValue,
                 displayValue: value.displayValue,
                 unit: value.unit || "",
                 areaCode: value.areaCode || "",
@@ -698,6 +699,7 @@ describe("EstatDataFormatter テスト", () => {
           // カテゴリが存在しない場合は、カテゴリ情報なしで行を作成
           valuesCsv.push({
             value: value.value,
+            numericValue: value.numericValue,
             displayValue: value.displayValue,
             unit: value.unit || "",
             areaCode: value.areaCode || "",
@@ -727,164 +729,8 @@ describe("EstatDataFormatter テスト", () => {
       );
 
       // 生成されたデータの確認
-      expect(valuesCsv.length).toBeGreaterThan(90); // 48地域 x 2年分 x 1カテゴリ = 96件程度
+      expect(valuesCsv.length).toBeGreaterThan(5000); // 20カテゴリ x 48地域 x 10年分 = 9,600件程度
     });
 
-    it("実際のデータで全ての年次と完全なデータセットをCSVに保存する", async () => {
-      // 実際のデータを使用
-      const actualEstatData = require("./input/0000010101.json");
-
-      // 実際のクラス情報を使用してより多くの値を生成
-      const classObjs = actualEstatData.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ;
-      const areaClass = classObjs.find((obj: any) => obj["@id"] === "area");
-      const cat01Class = classObjs.find((obj: any) => obj["@id"] === "cat01");
-      const timeClass = classObjs.find((obj: any) => obj["@id"] === "time");
-
-      // 大量のデータを生成（実際の576カテゴリ x 48地域 x 50年分）
-      function generateFullDataSet() {
-        const values = [];
-        
-        if (areaClass?.CLASS && cat01Class?.CLASS && timeClass?.CLASS) {
-          // 最初の10カテゴリ、全地域、最初の5年分でサンプル生成
-          const sampleCategories = cat01Class.CLASS.slice(0, 10);
-          const allAreas = areaClass.CLASS;
-          const sampleTimes = timeClass.CLASS.slice(0, 5);
-          
-          for (const category of sampleCategories) {
-            for (const area of allAreas) {
-              for (const time of sampleTimes) {
-                const baseValue = Math.floor(Math.random() * 10000000) + 100000;
-                values.push({
-                  "@tab": "cat01",
-                  "@cat01": category["@code"],
-                  "@area": area["@code"],
-                  "@time": time["@code"],
-                  "@unit": category["@unit"] || "人",
-                  $: baseValue.toString(),
-                });
-              }
-            }
-          }
-        }
-        
-        return values;
-      }
-
-      const mockStatsDataResponse = {
-        GET_STATS_DATA: {
-          RESULT: {
-            STATUS: 0,
-            ERROR_MSG: "正常に終了しました。",
-            DATE: "2025-08-14T09:27:36.165+09:00",
-          },
-          PARAMETER: {
-            LANG: "J" as const,
-            STATS_DATA_ID: "0000010101",
-            DATA_FORMAT: "J" as const,
-            METAGET_FLG: "Y" as const,
-            CNT_GET_FLG: "N" as const,
-            EXPLANATION_GET_FLG: "N" as const,
-            ANNOTATION_GET_FLG: "N" as const,
-            REPLACE_SP_CHARS: "0" as const,
-          },
-          STATISTICAL_DATA: {
-            RESULT_INF: {
-              TOTAL_NUMBER: 546720,
-              FROM_NUMBER: 1,
-              TO_NUMBER: 546720,
-            },
-            TABLE_INF: {
-              "@id": "0000010101",
-              TITLE: { $: "Ａ　人口・世帯" },
-              STAT_NAME: { $: "社会・人口統計体系" },
-              GOV_ORG: { $: "総務省" },
-              STATISTICS_NAME: "都道府県データ 基礎データ",
-              TOTAL_NUMBER: "546720",
-              FROM_NUMBER: "1",
-              TO_NUMBER: "546720",
-              SMALL_AREA: "0" as const,
-              STATISTICS_NAME_SPEC: {
-                TABULATION_CATEGORY: "都道府県データ",
-                TABULATION_SUB_CATEGORY1: "基礎データ",
-              },
-            },
-            CLASS_INF: {
-              CLASS_OBJ: actualEstatData.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ,
-            },
-            DATA_INF: {
-              NOTE: [],
-              VALUE: generateFullDataSet(),
-            },
-          },
-        },
-      };
-
-      const formattedData = EstatDataFormatter.formatStatsData(
-        mockStatsDataResponse
-      );
-
-      // 全ての整形されたデータをCSVに保存
-      const fullValuesCsv: any[] = [];
-
-      formattedData.values.forEach((value) => {
-        if (Object.keys(value.categories).length > 0) {
-          Object.entries(value.categories).forEach(
-            ([categoryKey, categoryInfo]) => {
-              fullValuesCsv.push({
-                value: value.value,
-                numericValue: value.numericValue,
-                displayValue: value.displayValue,
-                unit: value.unit || "",
-                areaCode: value.areaCode || "",
-                areaName: value.areaInfo?.displayName || "",
-                timeCode: value.yearInfo?.timeCode || "",
-                timeName: value.yearInfo?.timeName || "",
-                categoryCode: categoryInfo.code,
-                categoryName: categoryInfo.name,
-                categoryKey: categoryKey,
-              });
-            }
-          );
-        } else {
-          fullValuesCsv.push({
-            value: value.value,
-            numericValue: value.numericValue,
-            displayValue: value.displayValue,
-            unit: value.unit || "",
-            areaCode: value.areaCode || "",
-            areaName: value.areaInfo?.displayName || "",
-            timeCode: value.yearInfo?.timeCode || "",
-            timeName: value.yearInfo?.timeName || "",
-            categoryCode: "",
-            categoryName: "",
-            categoryKey: "",
-          });
-        }
-      });
-
-      // 大容量のvalues.csvを保存
-      const valuesPath = saveToCSV(fullValuesCsv, "values-full.csv");
-      expect(valuesPath).toBeDefined();
-
-      // 年度情報をCSVに保存（全データ）
-      const yearsCsv = formattedData.years.map((year) => ({
-        timeCode: year.timeCode,
-        timeName: year.timeName,
-      }));
-      const yearsPath = saveToCSV(yearsCsv, "years-full.csv");
-      expect(yearsPath).toBeDefined();
-
-      // 統計情報を出力
-      console.log(`完全なデータセットのCSV保存完了:`);
-      console.log(`- 値データ: ${valuesPath} (${fullValuesCsv.length}件)`);
-      console.log(`- 年度情報: ${yearsPath} (${formattedData.years.length}件)`);
-      console.log(`- 地域数: ${formattedData.areas.length}件`);
-      console.log(`- カテゴリ数: ${formattedData.categories.length}件`);
-      
-      // データの存在確認
-      expect(fullValuesCsv.length).toBeGreaterThan(1000); // 大量のデータが生成されることを確認
-      expect(formattedData.years).toHaveLength(50); // 50年分
-      expect(formattedData.areas.length).toBeGreaterThan(40); // 47都道府県+全国など
-    });
   });
 });
