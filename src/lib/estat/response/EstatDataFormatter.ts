@@ -1,4 +1,9 @@
-import { EstatStatsDataResponse, EstatStatsListResponse } from "@/types/estat";
+import {
+  EstatStatsDataResponse,
+  EstatStatsListResponse,
+  EstatStatisticalData,
+  EstatValue,
+} from "@/types/estat";
 import {
   FormattedArea,
   FormattedCategory,
@@ -30,10 +35,10 @@ export class EstatDataFormatter {
       statName: table.STAT_NAME?.$?.trim() || "",
       title: table.TITLE?.$?.trim() || "",
       govOrg: table.GOV_ORG?.$?.trim() || "",
-      statisticsName: table.STATISTICS_NAME?.$?.trim() || "",
+      statisticsName: table.STATISTICS_NAME?.trim() || "",
       surveyDate: table.SURVEY_DATE || "",
       updatedDate: table.UPDATED_DATE || "",
-      description: table.DESCRIPTION?.$?.trim(),
+      description: undefined,
     }));
   }
 
@@ -86,9 +91,9 @@ export class EstatDataFormatter {
   /**
    * 地域情報を整形
    */
-  private static formatAreas(data: any): FormattedArea[] {
+  private static formatAreas(data: EstatStatisticalData): FormattedArea[] {
     const classObjList = data.CLASS_INF?.CLASS_OBJ || [];
-    const areaClass = classObjList.find((cls: any) => cls["@id"] === "area");
+    const areaClass = classObjList.find((cls) => cls["@id"] === "area");
 
     if (!areaClass?.CLASS) return [];
 
@@ -96,7 +101,7 @@ export class EstatDataFormatter {
       ? areaClass.CLASS
       : [areaClass.CLASS];
 
-    return classes.map((cls: any) => ({
+    return classes.map((cls) => ({
       areaCode: cls["@code"]?.trim() || "",
       areaName: this.cleanString(cls["@name"] || ""),
       level: cls["@level"] || "1",
@@ -107,22 +112,24 @@ export class EstatDataFormatter {
   /**
    * カテゴリ情報を整形
    */
-  private static formatCategories(data: any): FormattedCategory[] {
+  private static formatCategories(
+    data: EstatStatisticalData
+  ): FormattedCategory[] {
     const classObjList = data.CLASS_INF?.CLASS_OBJ || [];
     const categoryClasses = classObjList.filter(
-      (cls: any) => cls["@id"] && cls["@id"].startsWith("cat")
+      (cls) => cls["@id"] && cls["@id"].startsWith("cat")
     );
 
     const categories: FormattedCategory[] = [];
 
-    categoryClasses.forEach((catClass: any) => {
+    categoryClasses.forEach((catClass) => {
       if (!catClass.CLASS) return;
 
       const classes = Array.isArray(catClass.CLASS)
         ? catClass.CLASS
         : [catClass.CLASS];
 
-      classes.forEach((cls: any) => {
+      classes.forEach((cls) => {
         categories.push({
           categoryCode: cls["@code"]?.trim() || "",
           categoryName: cls["@name"]?.trim() || "",
@@ -138,9 +145,9 @@ export class EstatDataFormatter {
   /**
    * 年情報を整形
    */
-  private static formatYears(data: any): FormattedYear[] {
+  private static formatYears(data: EstatStatisticalData): FormattedYear[] {
     const classObjList = data.CLASS_INF?.CLASS_OBJ || [];
-    const timeClass = classObjList.find((cls: any) => cls["@id"] === "time");
+    const timeClass = classObjList.find((cls) => cls["@id"] === "time");
 
     if (!timeClass?.CLASS) return [];
 
@@ -148,7 +155,7 @@ export class EstatDataFormatter {
       ? timeClass.CLASS
       : [timeClass.CLASS];
 
-    return classes.map((cls: any) => {
+    return classes.map((cls) => {
       const code = cls["@code"]?.trim() || "";
       const name = cls["@name"]?.trim() || "";
 
@@ -163,7 +170,7 @@ export class EstatDataFormatter {
    * 値情報を整形
    */
   private static formatValues(
-    data: any,
+    data: EstatStatisticalData,
     areas: FormattedArea[],
     categories: FormattedCategory[],
     years: FormattedYear[]
@@ -171,7 +178,7 @@ export class EstatDataFormatter {
     const values = data.DATA_INF?.VALUE || [];
     const valueArray = Array.isArray(values) ? values : [values];
 
-    return valueArray.map((val: any) => {
+    return valueArray.map((val) => {
       const rawValue = val.$?.trim() || "";
       const numericValue = this.parseNumericValue(rawValue);
 
@@ -179,24 +186,26 @@ export class EstatDataFormatter {
       const areaCode = val["@area"]?.trim();
       const categoryAttrs = Object.keys(val).filter((key) =>
         key.startsWith("@cat")
-      );
+      ) as Array<keyof EstatValue>;
       const timeCode = val["@time"]?.trim();
 
       // 地域情報
       const areaInfo = areaCode
-        ? areas.find((a) => a.code === areaCode)
+        ? areas.find((a) => a.areaCode === areaCode)
         : undefined;
 
       // カテゴリ情報
       const categoryInfo: Record<string, { code: string; name: string }> = {};
       categoryAttrs.forEach((attr) => {
-        const categoryCode = val[attr]?.trim();
+        const categoryCode = (val[attr] as string)?.trim();
         if (categoryCode) {
-          const category = categories.find((c) => c.code === categoryCode);
+          const category = categories.find(
+            (c) => c.categoryCode === categoryCode
+          );
           if (category) {
             categoryInfo[attr.replace("@", "")] = {
-              code: category.code,
-              name: category.name,
+              code: category.categoryCode,
+              name: category.categoryName,
             };
           }
         }
@@ -209,8 +218,9 @@ export class EstatDataFormatter {
 
       // 単位の取得（最初に見つかったカテゴリの単位を使用）
       const unit = Object.values(categoryInfo)[0]
-        ? categories.find((c) => c.code === Object.values(categoryInfo)[0].code)
-            ?.unit || null
+        ? categories.find(
+            (c) => c.categoryCode === Object.values(categoryInfo)[0].code
+          )?.unit || null
         : null;
 
       return {
@@ -221,8 +231,8 @@ export class EstatDataFormatter {
         areaCode,
         areaInfo: areaInfo
           ? {
-              code: areaInfo.code,
-              displayName: areaInfo.displayName,
+              code: areaInfo.areaCode,
+              displayName: areaInfo.areaName,
             }
           : undefined,
         categories: categoryInfo,
