@@ -200,6 +200,15 @@ main {
   background-color: #ffffff !important;
 }
 
+/* グレー背景の設定 */
+.dark .bg-gray-100 {
+  background-color: #404040 !important;
+}
+
+.light .bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
 
 /* ダークモードのボーダー */
 .dark .border-gray-200 {

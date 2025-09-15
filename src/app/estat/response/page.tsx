@@ -32,7 +32,17 @@ export default function EstatDataPage() {
         }
       });
 
-      const response = await fetch(`/api/estat/data?${queryParams.toString()}`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30秒でタイムアウト
+
+      const response = await fetch(`/api/estat/data?${queryParams.toString()}`, {
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         let errorMessage = `HTTP ${response.status}`;
@@ -70,7 +80,11 @@ export default function EstatDataPage() {
       setApiResponse(data);
     } catch (err) {
       console.error("Data fetch error:", err);
-      setError(err instanceof Error ? err.message : "データ取得に失敗しました");
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        setError("リクエストがタイムアウトしました。e-STAT APIが応答していない可能性があります。");
+      } else {
+        setError(err instanceof Error ? err.message : "データ取得に失敗しました");
+      }
       setApiResponse(null);
     } finally {
       setLoading(false);

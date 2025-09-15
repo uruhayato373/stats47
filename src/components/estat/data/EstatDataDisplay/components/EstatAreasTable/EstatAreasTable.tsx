@@ -1,6 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/types/estat";
+import { FormattedArea } from "@/types/estat/formatted";
+import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -12,26 +14,43 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
-  const values = statisticalData.DATA_INF.VALUE;
-  const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
+  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const areas = formattedData.areas;
 
-  const columns: TableColumn<EstatValue>[] = [
-    { key: "@area", label: "地域コード" },
+  const columns: TableColumn<FormattedArea>[] = [
     {
-      key: "area_name",
+      key: "areaName",
       label: "地域名",
       render: (item) => (
-        <span className={styles.text.primary}>
-          {item["@area"] || "-"}
-        </span>
+        <span className={styles.text.primary}>{item.areaName || "-"}</span>
+      ),
+    },
+    {
+      key: "areaCode",
+      label: "地域コード",
+      render: (item) => (
+        <span className={styles.text.secondary}>{item.areaCode || "-"}</span>
+      ),
+    },
+    {
+      key: "level",
+      label: "レベル",
+      render: (item) => (
+        <span className={styles.text.secondary}>{item.level || "-"}</span>
+      ),
+    },
+    {
+      key: "parentCode",
+      label: "親コード",
+      render: (item) => (
+        <span className={styles.text.secondary}>{item.parentCode || "-"}</span>
       ),
     },
   ];
 
   return (
     <DataTable
-      data={valuesArray}
+      data={areas}
       columns={columns}
       emptyMessage="地域情報がありません"
     />

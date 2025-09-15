@@ -40,12 +40,18 @@ export class EstatAPIClient {
       const url = `${this.baseUrl}${endpoint}?${searchParams.toString()}`;
       console.log("API Request URL:", url);
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 25000); // 25秒でタイムアウト
+
       const response = await fetch(url, {
         method: "GET",
         headers: {
           Accept: "application/json",
         },
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new APIResponseError(
@@ -69,6 +75,9 @@ export class EstatAPIClient {
       return data;
     } catch (error) {
       console.error("e-STAT API Error:", error);
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        throw new Error("e-STAT APIへのリクエストがタイムアウトしました");
+      }
       throw error;
     }
   }
