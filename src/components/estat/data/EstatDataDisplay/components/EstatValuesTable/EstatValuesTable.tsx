@@ -18,19 +18,23 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   const values = formattedData.values;
 
   const columns: TableColumn<FormattedValue>[] = [
-    { key: "value", label: "value" },
-    { key: "numericValue", label: "numericValue" },
-    { key: "displayValue", label: "displayValue" },
-    { key: "unit", label: "unit" },
-    { key: "areaCode", label: "areaCode" },
+    { key: "value", label: "value", filterable: true, filterType: "text" },
+    { key: "numericValue", label: "numericValue", filterable: true, filterType: "text" },
+    { key: "displayValue", label: "displayValue", filterable: true, filterType: "text" },
+    { key: "unit", label: "unit", filterable: true, filterType: "select" },
+    { key: "areaCode", label: "areaCode", filterable: true, filterType: "select" },
     {
       key: "areaName",
       label: "areaName",
+      filterable: true,
+      filterType: "select",
       render: (item) => item.areaInfo?.displayName || "-"
     },
     {
       key: "timeName",
       label: "timeName",
+      filterable: true,
+      filterType: "select",
       render: (item) => item.yearInfo?.timeName || "-"
     },
   ];

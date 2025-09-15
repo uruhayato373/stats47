@@ -3,7 +3,38 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { feature } from "topojson-client";
-import { MapDataPoint, MapDataset } from "@/lib/estat/map-data-service";
+// 型定義をローカルで定義
+interface MapDataPoint {
+  prefectureCode: string;
+  prefectureName: string;
+  value: number;
+  displayValue: string;
+  unit: string | null;
+}
+
+interface MapDataset {
+  title?: string;
+  statName: string;
+  dataPoints: MapDataPoint[];
+  summary?: {
+    totalCount: number;
+    validCount: number;
+    min: number | null;
+    max: number | null;
+    average: number | null;
+  };
+  categories?: Array<{
+    code: string;
+    name: string;
+    count: number;
+  }>;
+  years?: Array<{
+    code: string;
+    year: number;
+    displayName: string;
+    count: number;
+  }>;
+}
 
 interface ChoroplethMapProps {
   dataset: MapDataset;
@@ -153,28 +184,28 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
       {/* データセット情報 */}
       <div className="mt-4 p-4 bg-gray-50 rounded">
-        <h3 className="font-medium text-gray-900 mb-2">{dataset.title}</h3>
+        <h3 className="font-medium text-gray-900 mb-2">{dataset.title || dataset.statName}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
           <div>
             <span className="font-medium">データ数:</span>{" "}
-            {dataset.summary.validCount}/{dataset.summary.totalCount}
+            {dataset.summary?.validCount || 0}/{dataset.summary?.totalCount || 0}
           </div>
-          {dataset.summary.min !== null && (
+          {dataset.summary?.min !== null && dataset.summary?.min !== undefined && (
             <div>
               <span className="font-medium">最小値:</span>{" "}
               {dataset.summary.min.toLocaleString()}
             </div>
           )}
-          {dataset.summary.max !== null && (
+          {dataset.summary?.max !== null && dataset.summary?.max !== undefined && (
             <div>
               <span className="font-medium">最大値:</span>{" "}
               {dataset.summary.max.toLocaleString()}
             </div>
           )}
-          {dataset.summary.mean !== null && (
+          {dataset.summary?.average !== null && dataset.summary?.average !== undefined && (
             <div>
               <span className="font-medium">平均値:</span>{" "}
-              {dataset.summary.mean.toLocaleString(undefined, {
+              {dataset.summary.average.toLocaleString(undefined, {
                 maximumFractionDigits: 1,
               })}
             </div>
