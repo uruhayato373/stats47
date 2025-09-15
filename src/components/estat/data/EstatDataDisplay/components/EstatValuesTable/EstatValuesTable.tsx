@@ -1,6 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/types/estat";
+import { FormattedValue } from "@/types/estat/formatted";
+import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -12,50 +14,30 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
-  const values = statisticalData.DATA_INF.VALUE;
-  const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
+  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const values = formattedData.values;
 
-  const columns: TableColumn<EstatValue>[] = [
+  const columns: TableColumn<FormattedValue>[] = [
+    { key: "value", label: "value" },
+    { key: "numericValue", label: "numericValue" },
+    { key: "displayValue", label: "displayValue" },
+    { key: "unit", label: "unit" },
+    { key: "areaCode", label: "areaCode" },
     {
-      key: "category",
-      label: "カテゴリ",
-      render: (item) => (
-        <span className={styles.text.primary}>
-          {item["@cat01"] ||
-            item["@cat02"] ||
-            item["@cat03"] ||
-            item["@cat04"] ||
-            item["@cat05"] ||
-            "-"}
-        </span>
-      ),
-    },
-    { key: "@area", label: "地域" },
-    { key: "@time", label: "年度" },
-    {
-      key: "value",
-      label: "値",
-      render: (item) => (
-        <span className={`${styles.text.primary} font-medium`}>
-          {item.$ || String(item)}
-        </span>
-      ),
+      key: "areaName",
+      label: "areaName",
+      render: (item) => item.areaInfo?.displayName || "-"
     },
     {
-      key: "@unit",
-      label: "単位",
-      render: (item) => (
-        <span className={styles.text.secondary}>
-          {item["@unit"] || "-"}
-        </span>
-      ),
+      key: "timeName",
+      label: "timeName",
+      render: (item) => item.yearInfo?.timeName || "-"
     },
   ];
 
   return (
     <DataTable
-      data={valuesArray}
+      data={values}
       columns={columns}
       emptyMessage="表形式で表示できるデータがありません"
     />

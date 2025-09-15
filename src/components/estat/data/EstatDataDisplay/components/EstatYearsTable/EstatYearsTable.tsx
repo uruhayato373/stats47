@@ -1,6 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse, EstatValue } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/types/estat";
+import { FormattedYear } from "@/types/estat/formatted";
+import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -12,26 +14,29 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
-  const values = statisticalData.DATA_INF.VALUE;
-  const valuesArray = Array.isArray(values) ? values : values ? [values] : [];
+  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const years = formattedData.years;
 
-  const columns: TableColumn<EstatValue>[] = [
-    { key: "@time", label: "年度" },
+  const columns: TableColumn<FormattedYear>[] = [
     {
-      key: "time_desc",
-      label: "説明",
+      key: "timeCode",
+      label: "時間コード",
       render: (item) => (
-        <span className={styles.text.primary}>
-          {item["@time"] || "-"}
-        </span>
+        <span className={styles.text.secondary}>{item.timeCode || "-"}</span>
+      ),
+    },
+    {
+      key: "timeName",
+      label: "時間名",
+      render: (item) => (
+        <span className={styles.text.primary}>{item.timeName || "-"}</span>
       ),
     },
   ];
 
   return (
     <DataTable
-      data={valuesArray}
+      data={years}
       columns={columns}
       emptyMessage="年度情報がありません"
     />
