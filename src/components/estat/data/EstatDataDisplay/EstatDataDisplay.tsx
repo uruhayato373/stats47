@@ -8,8 +8,10 @@ import {
   Info,
   BarChart3,
   Database,
+  Map,
 } from "lucide-react";
 import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatMapView } from "@/components/estat/visualization";
 import EstatOverview from "./components/EstatOverview";
 import EstatCategoriesTable from "./components/EstatCategoriesTable";
 import EstatAreasTable from "./components/EstatAreasTable";
@@ -29,7 +31,7 @@ export default function EstatDataDisplay({
   error,
 }: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<
-    "overview" | "categories" | "areas" | "years" | "values" | "raw"
+    "overview" | "categories" | "areas" | "years" | "values" | "map" | "raw"
   >("overview");
 
   const downloadAsJson = () => {
@@ -124,6 +126,7 @@ export default function EstatDataDisplay({
             { id: "areas" as const, label: "地域", icon: BarChart3 },
             { id: "years" as const, label: "年度", icon: BarChart3 },
             { id: "values" as const, label: "値", icon: BarChart3 },
+            { id: "map" as const, label: "地図", icon: Map },
             { id: "raw" as const, label: "Raw JSON", icon: Database },
           ].map((tab) => (
             <button
@@ -144,7 +147,7 @@ export default function EstatDataDisplay({
 
       {/* タブコンテンツ */}
       <div
-        className={activeTab === "overview" || activeTab === "raw" ? "p-4" : ""}
+        className={activeTab === "overview" || activeTab === "raw" || activeTab === "map" ? "p-4" : ""}
       >
         {activeTab === "overview" && <EstatOverview data={data} />}
         {activeTab === "categories" && (
@@ -167,6 +170,7 @@ export default function EstatDataDisplay({
             <EstatValuesTable data={data} />
           </div>
         )}
+        {activeTab === "map" && <EstatMapView data={data} />}
         {activeTab === "raw" && <EstatRawData data={data} />}
       </div>
     </div>
