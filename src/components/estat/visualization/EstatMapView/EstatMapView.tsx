@@ -2,29 +2,45 @@
 
 import React from "react";
 import { ChoroplethMap } from "@/components/estat/visualization";
+import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
+import { EstatStatsDataResponse } from "@/types/estat";
 
-interface ChoroplethDisplayProps {
-  dataset: {
-    title: string;
-    statName: string;
-    dataPoints: Array<{
-      prefectureCode: string;
-      prefectureName: string;
-      value: number;
-      displayValue: string;
-      unit: string | null;
-    }>;
-    summary: {
-      totalCount: number;
-      validCount: number;
-      min: number | null;
-      max: number | null;
-      average: number | null;
-    };
-  };
+interface EstatMapViewProps {
+  data: EstatStatsDataResponse;
 }
 
-export default function ChoroplethDisplay({ dataset }: ChoroplethDisplayProps) {
+export default function EstatMapView({ data }: EstatMapViewProps) {
+  if (!data) return null;
+
+  // EstatDataFormatterで変換
+  const formattedData = EstatDataFormatter.formatStatsData(data);
+
+  // ChoroplethMapが期待する形式に変換
+  const dataPoints = formattedData.values.map((value) => ({
+    prefectureCode: value.areaCode || "",
+    prefectureName: value.areaInfo?.displayName || value.areaCode || "",
+    value: value.numericValue || 0,
+    displayValue: value.displayValue,
+    unit: value.unit,
+  }));
+
+  // 統計情報を計算
+  const validDataPoints = dataPoints.filter(dp => dp.value !== 0 && dp.value !== null);
+  const values = validDataPoints.map(dp => dp.value);
+
+  const dataset = {
+    title: formattedData.tableInfo.title || formattedData.tableInfo.statName,
+    statName: formattedData.tableInfo.statName,
+    dataPoints,
+    summary: {
+      totalCount: dataPoints.length,
+      validCount: validDataPoints.length,
+      min: values.length > 0 ? Math.min(...values) : null,
+      max: values.length > 0 ? Math.max(...values) : null,
+      average: values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : null,
+    },
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800 overflow-hidden">
       <div className="mb-4">

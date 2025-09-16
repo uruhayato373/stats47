@@ -33,7 +33,12 @@ export const YearSelector: React.FC<YearSelectorProps> = ({
       params.delete("year");
     }
 
-    router.push(`/choropleth?${params.toString()}`);
+    // 現在のmodeパラメータを保持（デフォルトはmap）
+    if (!params.has("mode")) {
+      params.set("mode", "map");
+    }
+
+    router.push(`/estat/response?${params.toString()}`);
   };
 
   if (years.length === 0) {

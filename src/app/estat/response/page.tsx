@@ -1,22 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RefreshCw, Database, ExternalLink } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import { EstatDataFetcher } from "@/components/estat/data";
-import { EstatDataDisplay } from "@/components/estat/data";
+import { EstatDataFetcher, EstatDataDisplay, EstatModeSelector } from "@/components/estat/data";
+import { EstatMapView } from "@/components/estat/visualization";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/types/estat";
+import type { DisplayMode } from "@/components/estat/data";
 
 export default function EstatDataPage() {
-  const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
-    null
-  );
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentParams, setCurrentParams] = useState<GetStatsDataParams | null>(
-    null
-  );
+  const [currentParams, setCurrentParams] = useState<GetStatsDataParams | null>(null);
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('table');
+
+  // URLパラメータからモードを読み取り
+  useEffect(() => {
+    const mode = searchParams.get('mode') as DisplayMode;
+    if (mode === 'map' || mode === 'table') {
+      setDisplayMode(mode);
+    }
+  }, [searchParams]);
+
+  // モード変更時にURLを更新
+  const handleModeChange = (mode: DisplayMode) => {
+    setDisplayMode(mode);
+    const params = new URLSearchParams(searchParams.toString());
+    if (mode === 'table') {
+      params.delete('mode');
+    } else {
+      params.set('mode', mode);
+    }
+
+    const newUrl = params.toString()
+      ? `/estat/response?${params.toString()}`
+      : '/estat/response';
+
+    router.push(newUrl, { scroll: false });
+  };
 
   const handleFetchData = async (params: GetStatsDataParams) => {
     setLoading(true);
@@ -150,12 +177,51 @@ export default function EstatDataPage() {
               {/* データ取得フォーム */}
               <EstatDataFetcher onSubmit={handleFetchData} loading={loading} />
 
+              {/* 表示モード選択（データがある場合のみ表示） */}
+              {apiResponse && (
+                <EstatModeSelector
+                  currentMode={displayMode}
+                  onModeChange={handleModeChange}
+                />
+              )}
+
               {/* データ表示エリア */}
-              <EstatDataDisplay
-                data={apiResponse}
-                loading={loading}
-                error={error}
-              />
+              {displayMode === 'table' && (
+                <EstatDataDisplay
+                  data={apiResponse}
+                  loading={loading}
+                  error={error}
+                />
+              )}
+
+              {/* 地図表示エリア */}
+              {displayMode === 'map' && apiResponse && (
+                <EstatMapView data={apiResponse} />
+              )}
+
+              {/* エラー表示（地図モードでも表示） */}
+              {displayMode === 'map' && error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 dark:bg-red-900/20 dark:border-red-700">
+                  <h2 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
+                    データの取得に失敗しました
+                  </h2>
+                  <p className="text-red-700 dark:text-red-300">{error}</p>
+                </div>
+              )}
+
+              {/* ローディング表示（地図モードでも表示） */}
+              {displayMode === 'map' && loading && (
+                <div className="bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800">
+                  <div className="flex items-center justify-center h-64">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                      <p className="text-gray-600 dark:text-neutral-400">
+                        データを取得中...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

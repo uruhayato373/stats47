@@ -174,19 +174,36 @@ src/
 ## 移行スケジュール (短縮版)
 
 ### Day 1-2: 統合実装
-- [ ] ModeSelector UI作成
-- [ ] estat/responseにモード切り替え機能追加
-- [ ] ChoroplethDisplayコンポーネント移行
+- [x] ModeSelector UI作成
+- [x] estat/responseにモード切り替え機能追加
+- [x] ChoroplethDisplayコンポーネント移行
 
 ### Day 3: 削除・リダイレクト
-- [ ] choroplethページ・コンポーネント削除
-- [ ] middleware でリダイレクト設定
-- [ ] ナビゲーション更新
+- [x] choroplethページ・コンポーネント削除
+- [x] middleware でリダイレクト設定
+- [x] ナビゲーション更新
 
 ### Day 4: 検証・完了
-- [ ] 動作確認・テスト
-- [ ] ドキュメント最終更新
-- [ ] 完了報告
+- [x] 動作確認・テスト
+- [x] ドキュメント最終更新
+- [x] 完了報告
+
+## 実装完了
+
+**統合作業が完了しました！** 以下の成果を達成：
+
+### ✅ 完了した作業
+1. **EstatModeSelector**: テーブル/地図表示の切り替えUI
+2. **EstatMapView**: コロプレス地図表示コンポーネント（choroplethから移行）
+3. **estat/response統合**: 単一ページでのモード切り替え実装
+4. **choroplethページ削除**: `/src/app/choropleth/` と `/src/components/choropleth/` を完全削除
+5. **リダイレクト設定**: `/choropleth` → `/estat/response?mode=map` (301リダイレクト)
+6. **ナビゲーション更新**: SidebarとYearSelectorのリンク修正
+
+### 🎯 新しいURL構造
+- **テーブル表示**: `/estat/response` (デフォルト)
+- **地図表示**: `/estat/response?mode=map`
+- **旧URL**: `/choropleth` → 自動的に `/estat/response?mode=map` へリダイレクト
 
 ## 期待効果
 

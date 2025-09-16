@@ -36,7 +36,7 @@ export default function Sidebar() {
           isActive: true,
         },
         {
-          href: "/choropleth",
+          href: "/estat/response?mode=map",
           label: "コロプレス地図",
           icon: (
             <svg
