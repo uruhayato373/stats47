@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import {
-  Eye,
-  Download,
   AlertTriangle,
   Info,
   BarChart3,
@@ -34,21 +32,6 @@ export default function EstatDataDisplay({
     "overview" | "categories" | "areas" | "years" | "values" | "map" | "raw"
   >("overview");
 
-  const downloadAsJson = () => {
-    if (!data) return;
-
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `estat-data-${Date.now()}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   if (loading) {
     return (
@@ -101,22 +84,6 @@ export default function EstatDataDisplay({
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
-      {/* ヘッダー */}
-      <div className="py-3 px-4 border-b border-gray-200 dark:border-neutral-700 flex justify-between items-center">
-        <h2 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
-          <Eye className="w-5 h-5 text-green-500" />
-          APIレスポンス
-        </h2>
-
-        <button
-          onClick={downloadAsJson}
-          className="py-1.5 px-3 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-        >
-          <Download className="w-3 h-3" />
-          JSONダウンロード
-        </button>
-      </div>
-
       {/* タブナビゲーション */}
       <div className="border-b border-gray-200 dark:border-neutral-700">
         <nav className="flex space-x-6 px-4">
