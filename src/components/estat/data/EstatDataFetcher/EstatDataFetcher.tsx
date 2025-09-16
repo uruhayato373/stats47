@@ -65,12 +65,12 @@ export default function EstatDataFetcher({
     <div className="space-y-4">
       {/* <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700"> */}
       <div className="py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
-        <h2
+        <h4
           className={`font-medium text-lg ${styles.text.primary} flex items-center gap-2`}
         >
           <Search className="w-5 h-5 text-indigo-600" />
           <span className={styles.text.primary}>データ取得パラメータ</span>
-        </h2>
+        </h4>
       </div>
 
       <form onSubmit={handleSubmit} className="p-4">

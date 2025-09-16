@@ -1,13 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  AlertTriangle,
-  Info,
-  BarChart3,
-  Database,
-  Map,
-} from "lucide-react";
+import { AlertTriangle, Info, BarChart3, Database, Map } from "lucide-react";
 import { EstatStatsDataResponse } from "@/types/estat";
 import { EstatMapView } from "@/components/estat/visualization";
 import EstatOverview from "./components/EstatOverview";
@@ -31,7 +25,6 @@ export default function EstatDataDisplay({
   const [activeTab, setActiveTab] = useState<
     "overview" | "categories" | "areas" | "years" | "values" | "map" | "raw"
   >("overview");
-
 
   if (loading) {
     return (
@@ -83,7 +76,7 @@ export default function EstatDataDisplay({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
+    <div>
       {/* タブナビゲーション */}
       <div className="border-b border-gray-200 dark:border-neutral-700">
         <nav className="flex space-x-6 px-4">
@@ -114,7 +107,11 @@ export default function EstatDataDisplay({
 
       {/* タブコンテンツ */}
       <div
-        className={activeTab === "overview" || activeTab === "raw" || activeTab === "map" ? "p-4" : ""}
+        className={
+          activeTab === "overview" || activeTab === "raw" || activeTab === "map"
+            ? "p-4"
+            : ""
+        }
       >
         {activeTab === "overview" && <EstatOverview data={data} />}
         {activeTab === "categories" && (
