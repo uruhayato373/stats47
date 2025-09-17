@@ -3,6 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { feature } from "topojson-client";
+import { JapanPrefectureTopoJSON } from "@/types/topojson";
+import { FormattedValue } from "@/types/estat/formatted";
+
 // 型定義をローカルで定義
 interface MapDataPoint {
   prefectureCode: string;
@@ -12,66 +15,17 @@ interface MapDataPoint {
   unit: string | null;
 }
 
-interface MapDataset {
-  title?: string;
-  statName: string;
-  dataPoints: MapDataPoint[];
-  summary?: {
-    totalCount: number;
-    validCount: number;
-    min: number | null;
-    max: number | null;
-    average: number | null;
-  };
-  categories?: Array<{
-    code: string;
-    name: string;
-    count: number;
-  }>;
-  years?: Array<{
-    code: string;
-    year: number;
-    displayName: string;
-    count: number;
-  }>;
-}
-
 interface ChoroplethMapProps {
-  dataset: MapDataset;
+  data: FormattedValue[];
   width?: number;
   height?: number;
   className?: string;
 }
 
-interface TopoJSONData {
-  type: "Topology";
-  objects: {
-    [key: string]: {
-      type: "GeometryCollection";
-      geometries: Array<{
-        type: "Polygon" | "MultiPolygon";
-        properties: {
-          [key: string]: any;
-          nam?: string; // 都道府県名
-          nam_ja?: string; // 都道府県名（日本語）
-          code?: string; // 都道府県コード
-          name?: string; // 代替名称フィールド
-          name_ja?: string; // 代替日本語名称フィールド
-          pref?: string; // 代替コードフィールド
-          pref_code?: string; // 代替コードフィールド
-        };
-      }>;
-    };
-  };
-  arcs: number[][][];
-  transform?: {
-    scale: [number, number];
-    translate: [number, number];
-  };
-}
+// TopoJSONData型はJapanPrefectureTopoJSON型を使用
 
 export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
-  dataset,
+  data,
   width = 800,
   height = 600,
   className = "",
@@ -86,8 +40,10 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     y: number;
   } | null>(null);
 
+  console.log("data", data);
+
   useEffect(() => {
-    if (!svgRef.current || !dataset) return;
+    if (!svgRef.current || !data) return;
 
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove(); // 既存の要素をクリア
@@ -98,7 +54,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
       try {
         // TopoJSONデータを読み込み
-        const topojsonData = await d3.json<TopoJSONData>(
+        const topojsonData = await d3.json<JapanPrefectureTopoJSON>(
           "https://geoshape.ex.nii.ac.jp/city/topojson/20230101/jp_pref.l.topojson"
         );
 
@@ -106,14 +62,22 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
           throw new Error("地図データの読み込みに失敗しました");
         }
 
-        // データマップを作成
+        // FormattedValueからMapDataPointに変換
         const dataMap = new Map<string, MapDataPoint>();
-        dataset.dataPoints.forEach((point) => {
-          dataMap.set(point.prefectureCode, point);
+        data.forEach((formattedValue) => {
+          if (formattedValue.areaCode && formattedValue.numericValue !== null) {
+            dataMap.set(formattedValue.areaCode, {
+              prefectureCode: formattedValue.areaCode,
+              prefectureName: formattedValue.areaName || "不明",
+              value: formattedValue.numericValue,
+              displayValue: formattedValue.displayValue,
+              unit: formattedValue.unit,
+            });
+          }
         });
 
         // カラースケールを設定
-        const colorScale = createColorScale(dataset);
+        const colorScale = createColorScale(data);
 
         // 地図を描画
         drawMap(
@@ -127,7 +91,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
         );
 
         // 凡例を描画
-        drawLegend(svg, colorScale, dataset, width, height);
+        drawLegend(svg, colorScale, data, width, height);
 
         setIsLoading(false);
       } catch (err) {
@@ -140,7 +104,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     };
 
     loadMapData();
-  }, [dataset, width, height]);
+  }, [data, width, height]);
 
   return (
     <div className={`relative ${className}`}>
@@ -181,45 +145,14 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
           <div>{hoveredData.value}</div>
         </div>
       )}
-
-      {/* データセット情報 */}
-      <div className="mt-4 p-4 bg-gray-50 rounded">
-        <h3 className="font-medium text-gray-900 mb-2">{dataset.title || dataset.statName}</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
-          <div>
-            <span className="font-medium">データ数:</span>{" "}
-            {dataset.summary?.validCount || 0}/{dataset.summary?.totalCount || 0}
-          </div>
-          {dataset.summary?.min !== null && dataset.summary?.min !== undefined && (
-            <div>
-              <span className="font-medium">最小値:</span>{" "}
-              {dataset.summary.min.toLocaleString()}
-            </div>
-          )}
-          {dataset.summary?.max !== null && dataset.summary?.max !== undefined && (
-            <div>
-              <span className="font-medium">最大値:</span>{" "}
-              {dataset.summary.max.toLocaleString()}
-            </div>
-          )}
-          {dataset.summary?.average !== null && dataset.summary?.average !== undefined && (
-            <div>
-              <span className="font-medium">平均値:</span>{" "}
-              {dataset.summary.average.toLocaleString(undefined, {
-                maximumFractionDigits: 1,
-              })}
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 };
 
 // カラースケールを作成
-function createColorScale(dataset: MapDataset): d3.ScaleSequential<string> {
-  const validValues = dataset.dataPoints
-    .map((d) => d.value)
+function createColorScale(data: FormattedValue[]): d3.ScaleSequential<string> {
+  const validValues = data
+    .map((d) => d.numericValue)
     .filter((v): v is number => v !== null);
 
   if (validValues.length === 0) {
@@ -234,7 +167,7 @@ function createColorScale(dataset: MapDataset): d3.ScaleSequential<string> {
 // 地図を描画
 function drawMap(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
-  topojsonData: TopoJSONData,
+  topojsonData: JapanPrefectureTopoJSON,
   dataMap: Map<string, MapDataPoint>,
   colorScale: d3.ScaleSequential<string>,
   width: number,
@@ -256,8 +189,8 @@ function drawMap(
 
   // 適切なオブジェクトキーを見つける
   let geoObject;
-  if (topojsonData.objects.jp_pref) {
-    geoObject = topojsonData.objects.jp_pref;
+  if (topojsonData.objects.pref) {
+    geoObject = topojsonData.objects.pref;
   } else if (objectKeys.length > 0) {
     // 最初のオブジェクトを使用
     geoObject = topojsonData.objects[objectKeys[0]];
@@ -292,8 +225,7 @@ function drawMap(
     .attr("stroke", "#fff")
     .attr("stroke-width", 0.5)
     .attr("fill", (d) => {
-      const prefCode =
-        d.properties?.code || d.properties?.pref || d.properties?.pref_code;
+      const prefCode = d.properties?.N03_007; // 都道府県コード（2桁）
       if (!prefCode) return "#e5e5e5";
 
       const dataPoint = dataMap.get(prefCode);
@@ -305,14 +237,8 @@ function drawMap(
     })
     .style("cursor", "pointer")
     .on("mouseover", function (event, d) {
-      // 複数の可能性のあるプロパティ名をチェック
-      const prefCode =
-        d.properties?.code || d.properties?.pref || d.properties?.pref_code;
-      const prefName =
-        d.properties?.nam_ja ||
-        d.properties?.name_ja ||
-        d.properties?.nam ||
-        d.properties?.name;
+      const prefCode = d.properties?.N03_007; // 都道府県コード（2桁）
+      const prefName = d.properties?.N03_001; // 都道府県名
 
       console.log("Prefecture properties:", d.properties); // デバッグ用
 
@@ -341,16 +267,32 @@ function drawMap(
       // ハイライト効果
       d3.select(this).attr("stroke-width", 2).attr("stroke", "#333");
     })
-    .on("mousemove", function (event) {
-      setHoveredData((prev) =>
-        prev
-          ? {
-              ...prev,
-              x: event.pageX,
-              y: event.pageY,
-            }
-          : null
-      );
+    .on("mousemove", function (event, d) {
+      const prefCode =
+        d.properties?.N03_007 || d.properties?.code || d.properties?.pref_code;
+      const prefName =
+        d.properties?.N03_001 ||
+        d.properties?.nam ||
+        d.properties?.name ||
+        d.properties?.name_ja;
+      const dataPoint = dataMap.get(prefCode || "");
+
+      if (dataPoint) {
+        setHoveredData({
+          prefecture: dataPoint.prefectureName,
+          value: dataPoint.displayValue,
+          x: event.pageX,
+          y: event.pageY,
+        });
+      } else {
+        const fallbackName = prefName || `地域${prefCode || "不明"}`;
+        setHoveredData({
+          prefecture: fallbackName,
+          value: "データなし",
+          x: event.pageX,
+          y: event.pageY,
+        });
+      }
     })
     .on("mouseout", function () {
       setHoveredData(null);
@@ -364,11 +306,18 @@ function drawMap(
 function drawLegend(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
   colorScale: d3.ScaleSequential<string>,
-  dataset: MapDataset,
+  data: FormattedValue[],
   width: number,
   height: number
 ) {
-  if (dataset.summary.min === null || dataset.summary.max === null) return;
+  const validValues = data
+    .map((d) => d.numericValue)
+    .filter((v): v is number => v !== null);
+
+  if (validValues.length === 0) return;
+
+  const min = Math.min(...validValues);
+  const max = Math.max(...validValues);
 
   const legendWidth = 200;
   const legendHeight = 20;
@@ -393,8 +342,7 @@ function drawLegend(
   const steps = 10;
   for (let i = 0; i <= steps; i++) {
     const ratio = i / steps;
-    const value =
-      dataset.summary.min + ratio * (dataset.summary.max - dataset.summary.min);
+    const value = min + ratio * (max - min);
     gradient
       .append("stop")
       .attr("offset", `${ratio * 100}%`)
@@ -417,7 +365,7 @@ function drawLegend(
     .attr("text-anchor", "start")
     .attr("font-size", "12px")
     .attr("fill", "#666")
-    .text(dataset.summary.min.toLocaleString());
+    .text(min.toLocaleString());
 
   legend
     .append("text")
@@ -426,5 +374,5 @@ function drawLegend(
     .attr("text-anchor", "end")
     .attr("font-size", "12px")
     .attr("fill", "#666")
-    .text(dataset.summary.max.toLocaleString());
+    .text(max.toLocaleString());
 }

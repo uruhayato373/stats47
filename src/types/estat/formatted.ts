@@ -46,16 +46,12 @@ export interface FormattedValue {
   numericValue: number | null;
   displayValue: string;
   unit: string | null;
-  areaCode?: string;
-  areaInfo?: {
-    code: string;
-    displayName: string;
-  };
-  categories: Record<string, { code: string; name: string }>;
-  yearInfo?: {
-    timeCode: string;
-    timeName: string;
-  };
+  areaCode: string;
+  areaName: string;
+  categoryCode: string;
+  categoryName: string;
+  timeCode: string;
+  timeName: string;
 }
 
 /**

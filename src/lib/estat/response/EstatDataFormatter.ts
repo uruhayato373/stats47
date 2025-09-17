@@ -183,45 +183,33 @@ export class EstatDataFormatter {
       const numericValue = this.parseNumericValue(rawValue);
 
       // 値の属性から関連情報を取得
-      const areaCode = val["@area"]?.trim();
+      const areaCode = val["@area"]?.trim() || "";
       const categoryAttrs = Object.keys(val).filter((key) =>
         key.startsWith("@cat")
       ) as Array<keyof EstatValue>;
-      const timeCode = val["@time"]?.trim();
+      const timeCode = val["@time"]?.trim() || "";
 
       // 地域情報
       const areaInfo = areaCode
         ? areas.find((a) => a.areaCode === areaCode)
         : undefined;
 
-      // カテゴリ情報
-      const categoryInfo: Record<string, { code: string; name: string }> = {};
-      categoryAttrs.forEach((attr) => {
-        const categoryCode = (val[attr] as string)?.trim();
-        if (categoryCode) {
-          const category = categories.find(
-            (c) => c.categoryCode === categoryCode
-          );
-          if (category) {
-            categoryInfo[attr.replace("@", "")] = {
-              code: category.categoryCode,
-              name: category.categoryName,
-            };
-          }
-        }
-      });
+      // カテゴリ情報（最初のカテゴリを使用）
+      const firstCategoryAttr = categoryAttrs[0];
+      const firstCategoryCode = firstCategoryAttr
+        ? (val[firstCategoryAttr] as string)?.trim()
+        : "";
+      const firstCategory = firstCategoryCode
+        ? categories.find((c) => c.categoryCode === firstCategoryCode)
+        : undefined;
 
       // 年情報
       const yearInfo = timeCode
         ? years.find((y) => y.timeCode === timeCode)
         : undefined;
 
-      // 単位の取得（最初に見つかったカテゴリの単位を使用）
-      const unit = Object.values(categoryInfo)[0]
-        ? categories.find(
-            (c) => c.categoryCode === Object.values(categoryInfo)[0].code
-          )?.unit || null
-        : null;
+      // 単位の取得（最初のカテゴリの単位を使用）
+      const unit = firstCategory?.unit || null;
 
       return {
         value: rawValue,
@@ -229,19 +217,11 @@ export class EstatDataFormatter {
         displayValue: this.formatDisplayValue(numericValue, rawValue, unit),
         unit,
         areaCode,
-        areaInfo: areaInfo
-          ? {
-              code: areaInfo.areaCode,
-              displayName: areaInfo.areaName,
-            }
-          : undefined,
-        categories: categoryInfo,
-        yearInfo: yearInfo
-          ? {
-              timeCode: yearInfo.timeCode,
-              timeName: yearInfo.timeName,
-            }
-          : undefined,
+        areaName: areaInfo?.areaName || "",
+        categoryCode: firstCategoryCode,
+        categoryName: firstCategory?.categoryName || "",
+        timeCode,
+        timeName: yearInfo?.timeName || "",
       };
     });
   }

@@ -11,19 +11,26 @@ import { EstatDataFormatter } from "../EstatDataFormatter";
 // モックデータ生成関数（実際のJSONデータを使用）
 function generateMockValues() {
   // 実際のクラス情報を使用してより多くの値を生成
-  const classObjs = actualEstatData.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ;
+  const classObjs =
+    actualEstatData.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ;
   const areaClass = classObjs.find((obj: any) => obj["@id"] === "area");
   const cat01Class = classObjs.find((obj: any) => obj["@id"] === "cat01");
   const timeClass = classObjs.find((obj: any) => obj["@id"] === "time");
 
   const values = [];
-  
+
   if (areaClass?.CLASS && cat01Class?.CLASS && timeClass?.CLASS) {
     // より多くのデータを生成：最初の20カテゴリ、全地域、最初の10年分
-    const sampleCategories = cat01Class.CLASS.slice(0, 20);
-    const allAreas = areaClass.CLASS;
-    const sampleTimes = timeClass.CLASS.slice(0, 10);
-    
+    const sampleCategories = Array.isArray(cat01Class.CLASS)
+      ? cat01Class.CLASS.slice(0, 20)
+      : [cat01Class.CLASS];
+    const allAreas = Array.isArray(areaClass.CLASS)
+      ? areaClass.CLASS
+      : [areaClass.CLASS];
+    const sampleTimes = Array.isArray(timeClass.CLASS)
+      ? timeClass.CLASS.slice(0, 10)
+      : [timeClass.CLASS];
+
     for (const category of sampleCategories) {
       for (const area of allAreas) {
         for (const time of sampleTimes) {
@@ -33,14 +40,14 @@ function generateMockValues() {
             "@cat01": category["@code"],
             "@area": area["@code"],
             "@time": time["@code"],
-            "@unit": category["@unit"] || "人",
+            "@unit": (category as any)["@unit"] || "人",
             $: baseValue.toString(),
           });
         }
       }
     }
   }
-  
+
   return values;
 }
 
@@ -672,46 +679,19 @@ describe("EstatDataFormatter テスト", () => {
       const yearsPath = saveToCSV(yearsCsv, "years.csv");
       expect(yearsPath).toBeDefined();
 
-      // 値データをCSVに保存（簡易データセット）
-      const valuesCsv: any[] = [];
-
-      formattedData.values.forEach((value) => {
-        // カテゴリが存在する場合は、各カテゴリごとに行を作成
-        if (Object.keys(value.categories).length > 0) {
-          Object.entries(value.categories).forEach(
-            ([categoryKey, categoryInfo]) => {
-              valuesCsv.push({
-                value: value.value,
-                numericValue: value.numericValue,
-                displayValue: value.displayValue,
-                unit: value.unit || "",
-                areaCode: value.areaCode || "",
-                areaName: value.areaInfo?.displayName || "",
-                timeCode: value.yearInfo?.timeCode || "",
-                timeName: value.yearInfo?.timeName || "",
-                categoryCode: categoryInfo.code,
-                categoryName: categoryInfo.name,
-                categoryKey: categoryKey,
-              });
-            }
-          );
-        } else {
-          // カテゴリが存在しない場合は、カテゴリ情報なしで行を作成
-          valuesCsv.push({
-            value: value.value,
-            numericValue: value.numericValue,
-            displayValue: value.displayValue,
-            unit: value.unit || "",
-            areaCode: value.areaCode || "",
-            areaName: value.areaInfo?.displayName || "",
-            timeCode: value.yearInfo?.timeCode || "",
-            timeName: value.yearInfo?.timeName || "",
-            categoryCode: "",
-            categoryName: "",
-            categoryKey: "",
-          });
-        }
-      });
+      // 値データをCSVに保存（新しいFormattedValue構造に合わせて）
+      const valuesCsv = formattedData.values.map((value) => ({
+        value: value.value,
+        numericValue: value.numericValue,
+        displayValue: value.displayValue,
+        unit: value.unit || "",
+        areaCode: value.areaCode,
+        areaName: value.areaName,
+        categoryCode: value.categoryCode,
+        categoryName: value.categoryName,
+        timeCode: value.timeCode,
+        timeName: value.timeName,
+      }));
       const valuesPath = saveToCSV(valuesCsv, "values.csv");
       expect(valuesPath).toBeDefined();
 
@@ -730,7 +710,23 @@ describe("EstatDataFormatter テスト", () => {
 
       // 生成されたデータの確認
       expect(valuesCsv.length).toBeGreaterThan(5000); // 20カテゴリ x 48地域 x 10年分 = 9,600件程度
-    });
 
+      // 新しいFormattedValue構造の確認
+      if (valuesCsv.length > 0) {
+        const firstValue = valuesCsv[0];
+        expect(firstValue).toHaveProperty("areaCode");
+        expect(firstValue).toHaveProperty("areaName");
+        expect(firstValue).toHaveProperty("categoryCode");
+        expect(firstValue).toHaveProperty("categoryName");
+        expect(firstValue).toHaveProperty("timeCode");
+        expect(firstValue).toHaveProperty("timeName");
+        expect(firstValue.areaCode).toBeDefined();
+        expect(firstValue.areaName).toBeDefined();
+        expect(firstValue.categoryCode).toBeDefined();
+        expect(firstValue.categoryName).toBeDefined();
+        expect(firstValue.timeCode).toBeDefined();
+        expect(firstValue.timeName).toBeDefined();
+      }
+    });
   });
 });
