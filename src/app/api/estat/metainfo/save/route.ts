@@ -1,45 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
+import { EstatMetaInfoService } from "@/lib/estat/metainfo/EstatMetaInfoService";
+import { createD1Database } from "@/lib/d1-client";
 
 export async function POST(request: NextRequest) {
   try {
-    const { statsDataId } = await request.json() as { statsDataId?: string };
+    const { statsDataId, batchMode, startId, endId } = await request.json() as {
+      statsDataId?: string | string[];
+      batchMode?: boolean;
+      startId?: string;
+      endId?: string;
+    };
 
-    if (!statsDataId) {
+    if (!statsDataId && !batchMode) {
       return NextResponse.json(
         { error: "統計表IDが必要です" },
         { status: 400 }
       );
     }
 
-    // 開発環境ではローカルのCloudflare Workerエンドポイントを呼び出す
-    // http://localhost:8787 はCloudflare Workersのローカル開発サーバー
-    const workerResponse = await fetch('http://localhost:8787/api/estat/metainfo/save', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ statsDataId }),
-    });
+    // Cloudflare D1データベースに直接接続
+    const db = await createD1Database() as any;
+    const metaInfoService = new EstatMetaInfoService(db);
 
-    if (!workerResponse.ok) {
-      // Cloudflare Workerが起動していない場合は、モックデータで動作確認
-      console.warn('Cloudflare Worker not available, using mock data');
+    let result;
 
-      const mockResult = {
+    if (batchMode && startId && endId) {
+      result = await metaInfoService.processMetaInfoRange(startId, endId);
+      return NextResponse.json({
         success: true,
-        message: `統計表ID ${statsDataId} のモックデータを保存しました（Cloudflare Worker未起動のため）`,
-        details: {
-          statsDataId,
-          timestamp: new Date().toISOString(),
-          environment: 'development-mock'
-        }
-      };
-
-      return NextResponse.json(mockResult);
+        message: `${startId}から${endId}までの統計表IDを処理しました`,
+        details: result,
+      });
+    } else if (Array.isArray(statsDataId)) {
+      result = await metaInfoService.processBulkMetaInfo(statsDataId);
+      return NextResponse.json({
+        success: true,
+        message: `${statsDataId.length}件の統計表IDを処理しました`,
+        details: result,
+      });
+    } else if (statsDataId) {
+      result = await metaInfoService.processAndSaveMetaInfo(statsDataId);
+      return NextResponse.json({
+        success: result.success,
+        message: result.success
+          ? `${statsDataId}のメタ情報を保存しました`
+          : `${statsDataId}のメタ情報保存に失敗しました`,
+        details: result,
+      });
+    } else {
+      return NextResponse.json({ error: "統計表IDが必要です" }, { status: 400 });
     }
-
-    const result = await workerResponse.json();
-    return NextResponse.json(result);
 
   } catch (error) {
     console.error("メタ情報保存エラー:", error);

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { EstatMetaInfoService } from "@/lib/estat/metainfo/EstatMetaInfoService";
+import { createD1Database } from "@/lib/d1-client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -6,61 +8,47 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get("q") || "";
     const category = searchParams.get("category") || "";
     const statsDataId = searchParams.get("statsDataId") || "";
+    const limitParam = searchParams.get("limit");
+    const offsetParam = searchParams.get("offset");
 
-    // サンプルデータ（実際の実装ではCloudflare D1から取得）
-    const sampleData = [
-      {
-        id: "1",
-        statsDataId: "0003448237",
-        statName: "人口推計",
-        title: "人口推計（令和5年10月1日現在）",
-        category: "人口・世帯",
-        itemName: "総人口",
-        unit: "人",
-        updatedAt: "2024-01-15",
-      },
-      {
-        id: "2",
-        statsDataId: "0003348237",
-        statName: "世帯数調査",
-        title: "世帯数調査（令和5年）",
-        category: "人口・世帯",
-        itemName: "一般世帯数",
-        unit: "世帯",
-        updatedAt: "2024-01-10",
-      },
-      {
-        id: "3",
-        statsDataId: "0003160000",
-        statName: "県民経済計算",
-        title: "県民経済計算（令和4年度）",
-        category: "経済・産業",
-        itemName: "県内総生産",
-        unit: "百万円",
-        updatedAt: "2024-01-05",
-      },
-    ];
+    const limit = limitParam ? parseInt(limitParam) : 100;
+    const offset = offsetParam ? parseInt(offsetParam) : 0;
 
-    let results = sampleData;
+    // Cloudflare D1データベースに直接接続
+    const db = await createD1Database() as any;
+    const metaInfoService = new EstatMetaInfoService(db);
 
-    // フィルタリング（実際の実装ではCloudflare D1でクエリ実行）
+    let results;
+
     if (statsDataId) {
-      results = results.filter((item) => item.statsDataId === statsDataId);
+      results = await metaInfoService.searchMetaInfo(statsDataId, {
+        searchType: "stats_id",
+        limit,
+        offset,
+      });
     } else if (category) {
-      results = results.filter((item) => item.category === category);
+      results = await metaInfoService.searchMetaInfo(category, {
+        searchType: "category",
+        limit,
+        offset,
+      });
     } else if (query) {
-      results = results.filter(
-        (item) =>
-          item.statName.toLowerCase().includes(query.toLowerCase()) ||
-          item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.itemName.toLowerCase().includes(query.toLowerCase())
-      );
+      results = await metaInfoService.searchMetaInfo(query, {
+        searchType: "full",
+        limit,
+        offset,
+      });
+    } else {
+      const statsList = await metaInfoService.getStatsList({ limit, offset });
+      results = {
+        entries: statsList,
+        totalCount: statsList.length,
+        searchQuery: "",
+        executedAt: new Date().toISOString(),
+      };
     }
 
-    return NextResponse.json({
-      success: true,
-      data: results,
-    });
+    return NextResponse.json({ success: true, data: results });
   } catch (error) {
     console.error("検索エラー:", error);
     return NextResponse.json(

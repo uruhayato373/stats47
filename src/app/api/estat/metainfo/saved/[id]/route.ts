@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createD1Database } from "@/lib/d1-client";
 
 export async function DELETE(
   request: NextRequest,
@@ -14,16 +15,23 @@ export async function DELETE(
       );
     }
 
-    // Cloudflare D1データベースからの削除（今後実装）
-    // 現在はモックレスポンスを返す
-    const mockResult = {
+    // Cloudflare D1データベースに直接接続
+    const db = await createD1Database() as any;
+
+    // 指定されたstats_data_idのデータをすべて削除
+    const deleteResult = await db
+      .prepare("DELETE FROM estat_metainfo WHERE stats_data_id = ?")
+      .bind(id)
+      .run();
+
+    const result = {
       success: true,
       message: `メタ情報 (ID: ${id}) を削除しました`,
       deletedId: id,
       timestamp: new Date().toISOString(),
     };
 
-    return NextResponse.json(mockResult);
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Delete saved metadata error:", error);
     return NextResponse.json(
@@ -50,23 +58,40 @@ export async function GET(
       );
     }
 
-    // Cloudflare D1データベースからの取得（今後実装）
-    // 現在はモックデータを返す
-    const mockItem = {
-      id,
-      statsDataId: "0003348423",
-      title: "令和2年国勢調査 人口等基本集計",
-      statName: "国勢調査",
-      govOrg: "総務省",
-      surveyDate: "2020-10-01",
-      savedAt: "2024-01-15T10:30:00Z",
-      rawData: JSON.stringify({
-        // 実際の保存されたメタ情報データがここに入る
-        mockData: true,
-      }),
+    // Cloudflare D1データベースに直接接続
+    const db = await createD1Database() as any;
+
+    // 指定されたstats_data_idのデータを取得
+    const result = await db
+      .prepare(`
+        SELECT DISTINCT stats_data_id, stat_name, title,
+               COUNT(*) as item_count, MAX(updated_at) as last_updated
+        FROM estat_metainfo
+        WHERE stats_data_id = ?
+        GROUP BY stats_data_id, stat_name, title
+      `)
+      .bind(id)
+      .first();
+
+    if (!result) {
+      return NextResponse.json(
+        { error: "指定されたIDのデータが見つかりません" },
+        { status: 404 }
+      );
+    }
+
+    const item = {
+      id: result.stats_data_id,
+      statsDataId: result.stats_data_id,
+      title: result.title,
+      statName: result.stat_name,
+      govOrg: "統計庁",
+      surveyDate: result.last_updated,
+      savedAt: result.last_updated,
+      itemCount: result.item_count,
     };
 
-    return NextResponse.json(mockItem);
+    return NextResponse.json(item);
   } catch (error) {
     console.error("Get saved metadata error:", error);
     return NextResponse.json(
