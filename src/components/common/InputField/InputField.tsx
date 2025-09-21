@@ -14,6 +14,8 @@ interface InputFieldProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: string;
   className?: string;
+  inlineLabel?: boolean; // ラベルをフィールド内に表示するかどうか
+  width?: string; // 横幅を指定（例: "w-64", "w-full", "max-w-xs"など）
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
@@ -31,6 +33,8 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       onBlur,
       error,
       className = "",
+      inlineLabel = false,
+      width,
     },
     ref
   ) => {
@@ -38,15 +42,19 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
 
     return (
       <div className={className}>
-        <label
-          htmlFor={name}
-          className={required ? styles.label.required : styles.label.base}
-        >
-          {label}
-          {description && (
-            <span className={`ml-1 text-xs ${styles.text.muted}`}>({description})</span>
-          )}
-        </label>
+        {!inlineLabel && (
+          <label
+            htmlFor={name}
+            className={required ? styles.label.required : styles.label.base}
+          >
+            {label}
+            {description && (
+              <span className={`ml-1 text-xs ${styles.text.muted}`}>
+                ({description})
+              </span>
+            )}
+          </label>
+        )}
         <input
           ref={ref}
           id={name}
@@ -55,7 +63,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           value={value || ""}
           onChange={onChange}
           onBlur={onBlur}
-          placeholder={placeholder}
+          placeholder={inlineLabel ? label : placeholder}
           disabled={disabled}
           className={`${styles.input.base} ${
             disabled ? styles.input.disabled : ""
@@ -63,7 +71,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
             error
               ? "border-red-500 focus:border-red-500 focus:ring-red-500"
               : ""
-          }`}
+          } ${width || ""}`}
         />
         {error && (
           <p className={`mt-1 text-sm ${styles.text.error}`}>{error}</p>

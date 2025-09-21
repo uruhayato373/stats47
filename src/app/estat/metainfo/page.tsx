@@ -5,8 +5,8 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
   EstatMetainfoPageHeader,
-  MetaInfoFetcher,
-  MetaInfoDisplay,
+  EstatMetaInfoFetcher,
+  EstatMetaInfoDisplay,
 } from "@/components/estat/metainfo";
 import { EstatMetainfoSidebar } from "@/components/estat/metainfo";
 import { estatAPI } from "@/services/estat-api";
@@ -65,13 +65,13 @@ export default function EstatMetadataPage() {
             {/* メインコンテンツ */}
             <div className="p-4 md:p-6 space-y-6">
               {/* メタ情報取得フォーム */}
-              <MetaInfoFetcher
+              <EstatMetaInfoFetcher
                 onSubmit={handleFetchMetaInfo}
                 loading={loading}
               />
 
               {/* メタ情報表示 */}
-              <MetaInfoDisplay
+              <EstatMetaInfoDisplay
                 metaInfo={metaInfo}
                 loading={loading}
                 error={error}

@@ -16,7 +16,7 @@ interface SaveResult {
   error?: string;
 }
 
-export default function MetainfoSaver() {
+export default function EstatMetainfoSaver() {
   const [statsDataId, setStatsDataId] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string>("");

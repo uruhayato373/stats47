@@ -14,7 +14,7 @@ import {
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
 
-interface MetaInfoDisplayProps {
+interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
   loading?: boolean;
   error?: string | null;
@@ -257,11 +257,11 @@ function ClassificationTabs({
   );
 }
 
-export default function MetaInfoDisplay({
+export default function EstatMetaInfoDisplay({
   metaInfo,
   loading,
   error,
-}: MetaInfoDisplayProps) {
+}: EstatMetaInfoDisplayProps) {
   const styles = useStyles();
   const [saving, setSaving] = useState(false);
   const [saveResult, setSaveResult] = useState<{
