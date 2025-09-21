@@ -24,7 +24,7 @@ export default function MetaInfoFetcher({
   };
 
   return (
-    <div className={styles.card.base}>
+    <div className="space-y-4">
       <h3 className={styles.heading.md}>メタ情報取得</h3>
       <form onSubmit={handleSubmit} className={styles.layout.row}>
         <div className="flex flex-col sm:flex-row gap-4">

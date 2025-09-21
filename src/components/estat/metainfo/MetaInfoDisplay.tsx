@@ -2,15 +2,14 @@
 
 import React, { useState } from "react";
 import {
-  ChevronDown,
   ChevronRight,
-  Database,
   ChevronLeft,
   ChevronFirst,
   ChevronLast,
   Save,
   CheckCircle,
   AlertCircle,
+  Download,
 } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
@@ -159,12 +158,12 @@ function PaginatedTable({
   );
 }
 
-// 分類情報のアコーディオンコンポーネント
-function ClassificationAccordion({
-  classObj,
+// タブ付き分類情報コンポーネント
+function ClassificationTabs({
+  classObjs,
   metaInfoId,
 }: {
-  classObj: {
+  classObjs: Array<{
     "@id": string;
     "@name": string;
     CLASS?:
@@ -180,59 +179,80 @@ function ClassificationAccordion({
           "@unit"?: string;
           "@explanation"?: string;
         };
-  };
+  }>;
   metaInfoId?: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
-  // metaInfoIdが変更されたときにアコーディオンを閉じる
+  // metaInfoIdが変更されたときにタブをリセット
   React.useEffect(() => {
-    setIsOpen(false);
+    setActiveTab(0);
   }, [metaInfoId]);
 
-  const itemCount = Array.isArray(classObj.CLASS)
-    ? classObj.CLASS.length
-    : classObj.CLASS
-    ? 1
-    : 0;
+  if (!classObjs || classObjs.length === 0) return null;
 
-  const tableData = Array.isArray(classObj.CLASS)
-    ? classObj.CLASS
-    : classObj.CLASS
-    ? [classObj.CLASS]
-    : [];
+  // タブのラベルを決定（@idに基づいて分類）
+  const getTabLabel = (classObj: {
+    "@id": string;
+    "@name": string;
+    CLASS?: unknown;
+  }) => {
+    const id = classObj["@id"];
+    if (id === "cat01") return "カテゴリ";
+    if (id === "area") return "地域";
+    if (id === "time") return "調査年";
+    return safeRender(classObj["@name"]);
+  };
+
+  // 各タブのデータを準備
+  const tabs = classObjs.map((classObj) => {
+    const tableData = Array.isArray(classObj.CLASS)
+      ? classObj.CLASS
+      : classObj.CLASS
+      ? [classObj.CLASS]
+      : [];
+
+    return {
+      label: getTabLabel(classObj),
+      data: tableData,
+      count: tableData.length,
+    };
+  });
 
   return (
-    <div className="border border-gray-200 rounded-lg">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-3 py-2 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-      >
-        <div className="flex items-center gap-2">
-          <Database className="w-4 h-4 text-gray-600" />
-          <span className="font-medium text-gray-700">
-            {safeRender(classObj["@name"])}
-          </span>
-          <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
-            {itemCount}件
-          </span>
-        </div>
-        {isOpen ? (
-          <ChevronDown className="w-4 h-4 text-gray-600" />
-        ) : (
-          <ChevronRight className="w-4 h-4 text-gray-600" />
-        )}
-      </button>
+    <div className="space-y-4">
+      {/* タブナビゲーション */}
+      <div className="border-b border-gray-200">
+        <nav className="-mb-px flex space-x-8">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(index)}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === index
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              {tab.label}
+              <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                {tab.count}件
+              </span>
+            </button>
+          ))}
+        </nav>
+      </div>
 
-      {isOpen && (
-        <div className="px-3 pb-3 border-t border-gray-200">
+      {/* アクティブなタブのコンテンツ */}
+      <div className="min-h-[200px]">
+        {tabs[activeTab] && (
           <PaginatedTable
-            data={tableData}
+            data={tabs[activeTab].data}
             itemsPerPage={15}
             metaInfoId={metaInfoId}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
@@ -248,6 +268,7 @@ export default function MetaInfoDisplay({
     success: boolean;
     message: string;
   } | null>(null);
+  const [downloading, setDownloading] = useState(false);
 
   const handleSave = async () => {
     if (!metaInfo) return;
@@ -289,6 +310,55 @@ export default function MetaInfoDisplay({
       });
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!metaInfo) return;
+
+    setDownloading(true);
+
+    try {
+      // 統計表IDを抽出
+      const statsDataId =
+        metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
+
+      if (!statsDataId) {
+        throw new Error("統計表IDが見つかりません");
+      }
+
+      // ファイル名を生成（統計表ID + 日時）
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const fileName = `estat-metainfo-${statsDataId}-${timestamp}.json`;
+
+      // JSONデータを準備
+      const jsonData = {
+        statsDataId,
+        downloadedAt: new Date().toISOString(),
+        metaInfo: metaInfo,
+      };
+
+      // Blobを作成してダウンロード
+      const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+        type: "application/json",
+      });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download error:", err);
+      alert(
+        "ダウンロードに失敗しました: " +
+          (err instanceof Error ? err.message : "Unknown error")
+      );
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -356,14 +426,27 @@ export default function MetaInfoDisplay({
           </div>
 
           <div className="flex flex-col gap-2">
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-            >
-              <Save className={`w-4 h-4 ${saving ? "animate-pulse" : ""}`} />
-              {saving ? "保存中..." : "データベースに保存"}
-            </button>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              >
+                <Save className={`w-4 h-4 ${saving ? "animate-pulse" : ""}`} />
+                {saving ? "保存中..." : "データベースに保存"}
+              </button>
+
+              <button
+                onClick={handleDownload}
+                disabled={downloading}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              >
+                <Download
+                  className={`w-4 h-4 ${downloading ? "animate-pulse" : ""}`}
+                />
+                {downloading ? "ダウンロード中..." : "JSONダウンロード"}
+              </button>
+            </div>
 
             {saveResult && (
               <div
@@ -451,15 +534,10 @@ export default function MetaInfoDisplay({
           <div>
             <h3 className={styles.heading.md}>分類情報</h3>
 
-            <div className="space-y-2">
-              {CLASS_INF.CLASS_OBJ.map((classObj, index) => (
-                <ClassificationAccordion
-                  key={`${metaInfoId}-${index}`}
-                  classObj={classObj}
-                  metaInfoId={metaInfoId}
-                />
-              ))}
-            </div>
+            <ClassificationTabs
+              classObjs={CLASS_INF.CLASS_OBJ}
+              metaInfoId={metaInfoId}
+            />
           </div>
         )}
       </div>
