@@ -10,7 +10,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-interface SavedMetadataItem {
+interface SavedEstatMetainfoItem {
   id: string;
   statsDataId: string;
   title: string;
@@ -20,26 +20,26 @@ interface SavedMetadataItem {
   savedAt: string;
 }
 
-interface SavedMetadataItemProps {
-  item: SavedMetadataItem;
-  onView: (item: SavedMetadataItem) => void;
+interface SavedEstatMetainfoItemProps {
+  item: SavedEstatMetainfoItem;
+  onView: (item: SavedEstatMetainfoItem) => void;
   onDelete: (id: string) => void;
 }
 
-interface SavedMetadataListProps {
-  data: SavedMetadataItem[];
+interface SavedEstatMetainfoListProps {
+  data: SavedEstatMetainfoItem[];
   loading: boolean;
   currentPage: number;
   totalPages: number;
   startIndex: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
-  onView: (item: SavedMetadataItem) => void;
+  onView: (item: SavedEstatMetainfoItem) => void;
   onDelete: (id: string) => void;
 }
 
 // 個別のメタデータアイテムコンポーネント
-function SavedMetadataItem({ item, onView, onDelete }: SavedMetadataItemProps) {
+function SavedEstatMetainfoItem({ item, onView, onDelete }: SavedEstatMetainfoItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const formatDate = (dateString: string) => {
@@ -151,7 +151,7 @@ function SavedMetadataItem({ item, onView, onDelete }: SavedMetadataItemProps) {
   );
 }
 
-export default function SavedMetadataList({
+export default function SavedEstatMetainfoList({
   data,
   loading,
   currentPage,
@@ -161,7 +161,7 @@ export default function SavedMetadataList({
   onPageChange,
   onView,
   onDelete,
-}: SavedMetadataListProps) {
+}: SavedEstatMetainfoListProps) {
   if (loading) {
     return (
       <div className="p-4 text-center">
@@ -223,7 +223,7 @@ export default function SavedMetadataList({
       <div className="flex-1 overflow-y-auto p-4">
         <div className="space-y-3">
           {data.map((item) => (
-            <SavedMetadataItem
+            <SavedEstatMetainfoItem
               key={item.id}
               item={item}
               onView={onView}

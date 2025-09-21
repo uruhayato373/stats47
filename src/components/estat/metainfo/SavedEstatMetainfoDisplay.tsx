@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useStyles } from "@/hooks/useStyles";
-import MetadataActions from "./MetadataActions";
+import EstatMetainfoActions from "./EstatMetainfoActions";
 
 interface SavedMetainfo {
   stats_data_id: string;
@@ -11,7 +11,7 @@ interface SavedMetainfo {
   category_count: number;
 }
 
-export default function SavedMetainfoDisplay() {
+export default function SavedEstatMetainfoDisplay() {
   const [metadata, setMetadata] = useState<SavedMetainfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
@@ -77,7 +77,7 @@ export default function SavedMetainfoDisplay() {
     return (
       <div className={styles.message.error}>
         <p className={styles.messageText.error}>エラー: {error}</p>
-        <MetadataActions
+        <EstatMetainfoActions
           onRefresh={fetchSavedMetadata}
           onRetry={fetchSavedMetadata}
           hasError={true}
@@ -92,7 +92,7 @@ export default function SavedMetainfoDisplay() {
       <div className={styles.card.base}>
         <div className="flex items-center justify-between mb-4">
           <h4 className={styles.heading.lg}>保存済みデータ一覧</h4>
-          <MetadataActions onRefresh={fetchSavedMetadata} />
+          <EstatMetainfoActions onRefresh={fetchSavedMetadata} />
         </div>
         <div className={`text-sm ${styles.text.secondary} font-medium`}>
           {metadata.length}件のデータ

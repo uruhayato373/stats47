@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
-import SavedMetadataList from "./SavedMetadataList";
+import SavedEstatMetainfoList from "./SavedEstatMetainfoList";
 
 interface SavedMetadataItem {
   id: string;
@@ -102,7 +102,7 @@ export default function EstatMetainfoSidebar({
       </div>
 
       {/* データリスト */}
-      <SavedMetadataList
+      <SavedEstatMetainfoList
         data={currentData}
         loading={loading}
         currentPage={currentPage}

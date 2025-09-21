@@ -2,17 +2,17 @@
 
 import { RefreshCw } from "lucide-react";
 
-interface MetadataActionsProps {
+interface EstatMetainfoActionsProps {
   onRefresh: () => void;
   onRetry?: () => void;
   hasError?: boolean;
 }
 
-export default function MetadataActions({
+export default function EstatMetainfoActions({
   onRefresh,
   onRetry,
   hasError = false,
-}: MetadataActionsProps) {
+}: EstatMetainfoActionsProps) {
   return (
     <div className="flex items-center gap-2">
       <button
