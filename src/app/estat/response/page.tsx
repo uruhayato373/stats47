@@ -9,7 +9,7 @@ import {
   EstatDataFetcher,
   EstatDataDisplay,
 } from "@/components/estat/data";
-import { EstatStatsDataResponse, GetStatsDataParams } from "@/types/estat";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat/types";
 
 export default function EstatDataPage() {
   const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(

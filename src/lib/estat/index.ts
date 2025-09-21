@@ -3,7 +3,10 @@ export {
   EstatDataFetcher,
   EstatDataFormatter,
   EstatCSVTransformer,
-} from "./response";
+} from "./statsdata";
 
 // Metadata Management
-export { EstatMetadataManager, EstatMetadataService } from "./metadata";
+export { EstatMetaInfoService, EstatMetadataService } from "./metainfo";
+
+// Type Definitions
+export * from "./types";

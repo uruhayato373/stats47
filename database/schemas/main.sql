@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- e-Stat メタデータテーブル
 -- e-Stat APIから取得したメタデータを保存
-CREATE TABLE IF NOT EXISTS estat_metadata (
+CREATE TABLE IF NOT EXISTS estat_metainfo (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   stats_data_id TEXT NOT NULL,           -- 統計表ID
   stat_name TEXT NOT NULL,               -- 統計名
@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS estat_data_history (
 -- インデックスの作成（検索パフォーマンス向上）
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_stats_data_id ON estat_metadata(stats_data_id);
-CREATE INDEX IF NOT EXISTS idx_stat_name ON estat_metadata(stat_name);
-CREATE INDEX IF NOT EXISTS idx_cat01 ON estat_metadata(cat01);
-CREATE INDEX IF NOT EXISTS idx_updated_at ON estat_metadata(updated_at);
+CREATE INDEX IF NOT EXISTS idx_stats_data_id ON estat_metainfo(stats_data_id);
+CREATE INDEX IF NOT EXISTS idx_stat_name ON estat_metainfo(stat_name);
+CREATE INDEX IF NOT EXISTS idx_cat01 ON estat_metainfo(cat01);
+CREATE INDEX IF NOT EXISTS idx_updated_at ON estat_metainfo(updated_at);
 CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
 CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 
@@ -57,7 +57,7 @@ CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 -- ('test_user', 'test@stats47.local', 'dummy_hash_for_development');
 
 -- e-Statメタデータサンプル（必要に応じて手動で挿入）
--- INSERT OR IGNORE INTO estat_metadata (stats_data_id, stat_name, title, cat01, item_name, unit) VALUES
+-- INSERT OR IGNORE INTO estat_metainfo (stats_data_id, stat_name, title, cat01, item_name, unit) VALUES
 -- ('0003448237', '人口推計', '人口推計（2020年）', '総人口', '総人口', '人'),
 -- ('0003448237', '人口推計', '人口推計（2020年）', '男性人口', '男性人口', '人'),
 -- ('0003448237', '人口推計', '人口推計（2020年）', '女性人口', '女性人口', '人'),
@@ -68,14 +68,14 @@ CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 -- ('0000010101', '社会・人口統計体系', 'Ａ　人口・世帯', 'A140402', '0～3歳人口（女）', '人');
 
 -- テーブル情報の確認用ビュー
-CREATE VIEW IF NOT EXISTS v_estat_metadata_summary AS
+CREATE VIEW IF NOT EXISTS v_estat_metainfo_summary AS
 SELECT 
   stats_data_id,
   stat_name,
   title,
   COUNT(*) as item_count,
   MAX(updated_at) as last_updated
-FROM estat_metadata 
+FROM estat_metainfo 
 GROUP BY stats_data_id, stat_name, title
 ORDER BY last_updated DESC;
 
@@ -85,7 +85,7 @@ SELECT
   cat01 as category,
   COUNT(*) as count,
   COUNT(DISTINCT stats_data_id) as unique_stats_count
-FROM estat_metadata 
+FROM estat_metainfo 
 WHERE cat01 IS NOT NULL
 GROUP BY cat01 
 ORDER BY count DESC;
@@ -99,7 +99,7 @@ SELECT
   COUNT(*) as item_count,
   MIN(created_at) as first_created,
   MAX(updated_at) as last_updated
-FROM estat_metadata
+FROM estat_metainfo
 GROUP BY stats_data_id, stat_name, title;
 
 -- ユーザーアクティビティビュー

@@ -10,7 +10,7 @@ import {
   BarChart3,
   Clock,
 } from "lucide-react";
-import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;

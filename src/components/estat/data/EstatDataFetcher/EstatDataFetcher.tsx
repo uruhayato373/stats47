@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
-import { GetStatsDataParams } from "@/types/estat";
+import { GetStatsDataParams } from "@/lib/estat/types";
 import InputField from "@/components/common/InputField";
 import { useStyles } from "@/hooks/useStyles";
 

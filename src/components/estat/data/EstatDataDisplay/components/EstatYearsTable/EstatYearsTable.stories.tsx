@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import EstatYearsTable from "./EstatYearsTable";
-import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 // サンプルデータの作成
 const createSampleData = (): EstatStatsDataResponse => ({

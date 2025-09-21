@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import EstatDataDisplay from "./EstatDataDisplay";
-import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 // サンプルデータの作成（実際のe-Stat APIレスポンス形式に基づく）
 const createSampleData = (): EstatStatsDataResponse => ({

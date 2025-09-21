@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import EstatValuesTable from "./EstatValuesTable";
-import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 // サンプルデータの作成
 const createSampleData = (): EstatStatsDataResponse => ({

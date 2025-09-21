@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatStatsListManager } from "@/lib/estat-stats-list-manager";
-import { StatsListParams } from "@/types/estat";
+import { StatsListParams } from "@/lib/estat/types";
 
 export async function GET(request: NextRequest) {
   try {

@@ -4,8 +4,8 @@ import React, { useState, useMemo } from "react";
 import { ChoroplethMap } from "@/components/estat/visualization";
 import EstatDataSummary from "../EstatDataSummary";
 import { SimpleYearSelector } from "@/components/estat/visualization";
-import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
-import { EstatStatsDataResponse, FormattedEstatData } from "@/types/estat";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
 
 interface EstatMapViewProps {
   data: EstatStatsDataResponse;

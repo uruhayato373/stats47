@@ -59,7 +59,7 @@ export default function Sidebar() {
       ],
       estat: [
         {
-          href: "/estat/metadata",
+          href: "/estat/metainfo",
           label: "メタ情報",
           icon: (
             <svg

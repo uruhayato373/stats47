@@ -1,8 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { FormattedArea } from "@/types/estat/formatted";
-import { EstatDataFormatter } from "@/lib/estat/response/EstatDataFormatter";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 

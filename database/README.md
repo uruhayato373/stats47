@@ -27,10 +27,10 @@ npx wrangler deploy
 
 ## データベーススキーマ
 
-### estat_metadata テーブル
+### estat_metainfo テーブル
 
 ```sql
-CREATE TABLE IF NOT EXISTS estat_metadata (
+CREATE TABLE IF NOT EXISTS estat_metainfo (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   stats_data_id TEXT NOT NULL,
   stat_name TEXT NOT NULL,
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS estat_metadata (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_stats_data_id ON estat_metadata(stats_data_id);
-CREATE INDEX idx_stat_name ON estat_metadata(stat_name);
-CREATE INDEX idx_cat01 ON estat_metadata(cat01);
+CREATE INDEX idx_stats_data_id ON estat_metainfo(stats_data_id);
+CREATE INDEX idx_stat_name ON estat_metainfo(stat_name);
+CREATE INDEX idx_cat01 ON estat_metainfo(cat01);
 ```
 
 ## 使用方法

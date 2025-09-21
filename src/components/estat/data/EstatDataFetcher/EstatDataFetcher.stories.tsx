@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "@storybook/test";
 import EstatDataFetcher from "./EstatDataFetcher";
-import { GetStatsDataParams } from "@/types/estat";
+import { GetStatsDataParams } from "@/lib/estat/types";
 
 const meta: Meta<typeof EstatDataFetcher> = {
   title: "Estat/EstatDataFetcher",

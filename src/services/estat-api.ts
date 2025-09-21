@@ -7,7 +7,7 @@ import {
   GetStatsListParams,
   EstatAPIError,
   APIResponseError,
-} from "@/types/estat";
+} from "@/lib/estat/types";
 import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "@/lib/constants";
 
 /**
@@ -75,7 +75,7 @@ export class EstatAPIClient {
       return data;
     } catch (error) {
       console.error("e-STAT API Error:", error);
-      if (error instanceof DOMException && error.name === 'AbortError') {
+      if (error instanceof DOMException && error.name === "AbortError") {
         throw new Error("e-STAT APIへのリクエストがタイムアウトしました");
       }
       throw error;

@@ -41,7 +41,7 @@
 - **統合スキーマ**: `database/schemas/main.sql`
 - **テーブル構成**:
   - `users`: ユーザー認証・管理
-  - `estat_metadata`: e-Stat メタデータ
+  - `estat_metainfo`: e-Stat メタデータ
   - `estat_data_history`: データ変更履歴
 
 #### 環境別設定

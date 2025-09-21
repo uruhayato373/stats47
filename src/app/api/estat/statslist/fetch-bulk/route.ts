@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatStatsListManager, BulkFetchResult } from "@/lib/estat-stats-list-manager";
-import { StatsListParams } from "@/types/estat";
+import { StatsListParams } from "@/lib/estat/types";
 
 export async function POST(request: NextRequest) {
   try {
