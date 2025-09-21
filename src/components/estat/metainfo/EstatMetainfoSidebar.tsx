@@ -79,7 +79,7 @@ export default function EstatMetainfoSidebar({
 
   return (
     <div
-      className={`w-full xl:w-80 bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700 flex flex-col ${className}`}
+      className={`w-full xl:w-80 bg-white dark:bg-neutral-800 flex flex-col ${className}`}
       style={{ minHeight: "400px" }}
     >
       {/* ヘッダー */}
