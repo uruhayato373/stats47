@@ -200,6 +200,26 @@ main {
   background-color: #ffffff !important;
 }
 
+/* JSON表示エリアの明示的な背景設定 */
+.light .bg-white {
+  background-color: #ffffff !important;
+}
+
+.dark .bg-white {
+  background-color: #262626 !important;
+}
+
+/* JSON表示エリア専用のスタイル */
+.light .json-display {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+.dark .json-display {
+  background-color: #171717 !important;
+  color: #f9fafb !important;
+}
+
 /* グレー背景の設定 */
 .dark .bg-gray-100 {
   background-color: #404040 !important;
