@@ -8,7 +8,7 @@ export interface TransformedMetadataEntry {
   stat_name: string;
   title: string;
   cat01: string;
-  item_name: string;
+  item_name: string | null;
   unit: string | null;
 }
 

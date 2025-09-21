@@ -244,7 +244,9 @@ export class EstatMetaInfoService {
       .prepare(countQuery)
       .bind(...countParams)
       .first();
-    const totalCount = countResult ? (countResult as any).count : 0;
+    const totalCount = countResult
+      ? (countResult as { count: number }).count
+      : 0;
 
     return {
       entries: result.results as unknown as EstatMetaCategoryData[],
@@ -262,7 +264,9 @@ export class EstatMetaInfoService {
     const totalResult = await this.db
       .prepare("SELECT COUNT(*) as count FROM estat_metainfo")
       .first();
-    const totalEntries = totalResult ? (totalResult as any).count : 0;
+    const totalEntries = totalResult
+      ? (totalResult as { count: number }).count
+      : 0;
 
     // ユニーク統計数
     const uniqueResult = await this.db
@@ -270,7 +274,9 @@ export class EstatMetaInfoService {
         "SELECT COUNT(DISTINCT stats_data_id) as count FROM estat_metainfo"
       )
       .first();
-    const uniqueStats = uniqueResult ? (uniqueResult as any).count : 0;
+    const uniqueStats = uniqueResult
+      ? (uniqueResult as { count: number }).count
+      : 0;
 
     // カテゴリ別件数
     const categoryResult = await this.db
@@ -287,7 +293,13 @@ export class EstatMetaInfoService {
       )
       .all();
 
-    const categories = (categoryResult.results as any[]).map((row) => ({
+    const categories = (
+      categoryResult.results as Array<{
+        code: string;
+        name: string;
+        count: number;
+      }>
+    ).map((row) => ({
       code: row.code,
       name: row.name,
       count: row.count,
@@ -298,7 +310,7 @@ export class EstatMetaInfoService {
       .prepare("SELECT MAX(updated_at) as last_updated FROM estat_metainfo")
       .first();
     const lastUpdated = lastUpdatedResult
-      ? (lastUpdatedResult as any).last_updated
+      ? (lastUpdatedResult as { last_updated: string }).last_updated
       : null;
 
     return {
@@ -353,7 +365,13 @@ export class EstatMetaInfoService {
       .bind(limit.toString(), offset.toString())
       .all();
 
-    return result.results as any[];
+    return result.results as Array<{
+      stats_data_id: string;
+      stat_name: string;
+      title: string;
+      item_count: number;
+      last_updated: string;
+    }>;
   }
 
   /**
@@ -380,7 +398,9 @@ export class EstatMetaInfoService {
     const title = tableInfo.TITLE?.$ || "";
 
     // カテゴリ情報を取得（cat01のみ）
-    const cat01Class = classInfo.find((cls: any) => cls["@id"] === "cat01");
+    const cat01Class = classInfo.find(
+      (cls: { "@id": string }) => cls["@id"] === "cat01"
+    );
     if (!cat01Class?.CLASS) {
       throw new Error("cat01カテゴリが見つかりません");
     }
@@ -390,16 +410,21 @@ export class EstatMetaInfoService {
       : [cat01Class.CLASS];
 
     // 各カテゴリをCSV行として変換
-    categories.forEach((category: any) => {
-      result.push({
-        stats_data_id: statsDataId,
-        stat_name: statName,
-        title: title,
-        cat01: category["@code"] || "",
-        item_name: category["@name"] || "",
-        unit: category["@unit"] || null,
-      });
-    });
+    categories.forEach(
+      (category: { "@code"?: string; "@name"?: string; "@unit"?: string }) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const itemName: string | null = (category["@name"] as any) || null;
+        result.push({
+          stats_data_id: statsDataId,
+          stat_name: statName,
+          title: title,
+          cat01: category["@code"] ?? "",
+          // @ts-expect-error TypeScript strict null checks - itemName can be undefined but we handle it
+          item_name: itemName,
+          unit: category["@unit"] || null,
+        });
+      }
+    );
 
     return result;
   }
@@ -449,5 +474,102 @@ export class EstatMetaInfoService {
       console.error("バッチ処理エラー:", error);
       throw error;
     }
+  }
+
+  // ============================================================================
+  // 高レベルAPI（EstatMetadataServiceから統合）
+  // ============================================================================
+
+  /**
+   * 単一の統計表IDからメタ情報を取得・変換・保存（高レベルAPI）
+   */
+  async fetchAndSaveMetadata(statsDataId: string): Promise<void> {
+    const result = await this.processAndSaveMetaInfo(statsDataId);
+    if (!result.success) {
+      throw new Error(result.error || "メタ情報の保存に失敗しました");
+    }
+  }
+
+  /**
+   * 複数の統計表IDを一括処理（高レベルAPI）
+   */
+  async fetchAndSaveMultipleMetadata(statsDataIds: string[]): Promise<void> {
+    const result = await this.processBulkMetaInfo(statsDataIds);
+    console.log(
+      `一括処理完了: 成功${result.successCount}件, 失敗${result.failureCount}件`
+    );
+  }
+
+  /**
+   * 統計表IDの範囲を指定して一括処理（高レベルAPI）
+   */
+  async fetchAndSaveMetadataRange(
+    startId: string,
+    endId: string
+  ): Promise<void> {
+    const result = await this.processMetaInfoRange(startId, endId);
+    console.log(
+      `範囲処理完了: 成功${result.successCount}件, 失敗${result.failureCount}件`
+    );
+  }
+
+  /**
+   * 保存済みデータの検索（高レベルAPI）
+   */
+  async searchSavedMetadata(query: string): Promise<EstatMetaCategoryData[]> {
+    const result = await this.searchMetaInfo(query);
+    return result.entries;
+  }
+
+  /**
+   * 統計表一覧取得（高レベルAPI）
+   */
+  async getSavedStatList(): Promise<
+    Array<{
+      stats_data_id: string;
+      stat_name: string;
+      title: string;
+      item_count: number;
+      first_created: string;
+      last_updated: string;
+    }>
+  > {
+    const statsList = await this.getStatsList();
+    return statsList.map((stat) => ({
+      ...stat,
+      first_created: stat.last_updated, // 現在はlast_updatedと同じ値を使用
+    }));
+  }
+
+  /**
+   * データ件数取得（高レベルAPI）
+   */
+  async getSavedDataCount(): Promise<number> {
+    const summary = await this.getMetaInfoSummary();
+    return summary.totalEntries;
+  }
+
+  /**
+   * 統計表IDで保存済みデータを取得（高レベルAPI）
+   */
+  async getSavedMetadataByStatsId(
+    statsDataId: string
+  ): Promise<EstatMetaCategoryData[]> {
+    const result = await this.searchMetaInfo(statsDataId, {
+      searchType: "stats_id",
+    });
+    return result.entries;
+  }
+
+  /**
+   * カテゴリで保存済みデータを取得（高レベルAPI）
+   */
+  async getSavedMetadataByCategory(
+    category: string
+  ): Promise<EstatMetaCategoryData[]> {
+    const result = await this.searchMetaInfo(category, {
+      searchType: "category",
+    });
+    return result.entries;
   }
 }

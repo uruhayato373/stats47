@@ -8,7 +8,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import {
   EstatDataFetcher,
   EstatDataDisplay,
-} from "@/components/estat/data";
+} from "@/components/estat/statsdata";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat/types";
 
 export default function EstatDataPage() {

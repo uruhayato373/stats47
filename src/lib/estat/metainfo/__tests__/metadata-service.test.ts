@@ -1,17 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // モックの作成
-vi.mock("../metadata-database");
 vi.mock("@/services/estat-api");
-vi.mock("../data-transformer");
 
 // モックされたクラスとインスタンス
-const mockEstatMetadataDatabaseService = vi.fn();
 const mockEstatAPI = {
   getMetaInfo: vi.fn(),
-};
-const mockEstatDataTransformer = {
-  transformToCSVFormat: vi.fn(),
 };
 
 // モックされたD1Database
@@ -21,54 +15,24 @@ const mockD1Database = {
   batch: vi.fn(),
 } as any;
 
-// モックされたEstatMetadataDatabaseServiceインスタンス
-const mockDbServiceInstance = {
-  saveTransformedData: vi.fn(),
-  search: vi.fn(),
-  getStatList: vi.fn(),
-  getCount: vi.fn(),
-  findByStatsId: vi.fn(),
-  findByCategory: vi.fn(),
-  db: mockD1Database,
-  processBatch: vi.fn(),
-  findByStatName: vi.fn(),
-  getCategoryCounts: vi.fn(),
-  getLastUpdated: vi.fn(),
-} as any;
-
-describe("EstatMetadataService", () => {
+describe("EstatMetaInfoService", () => {
   let service: any;
-  let EstatMetadataService: any;
+  let EstatMetaInfoService: any;
 
   beforeEach(async () => {
     // モックのリセット
     vi.clearAllMocks();
 
     // 動的インポートでクラスを取得
-    const metadataModule = await import("../metadata-service");
-    EstatMetadataService = metadataModule.EstatMetadataService;
-
-    // モックされたクラスのコンストラクタを設定
-    mockEstatMetadataDatabaseService.mockImplementation(
-      () => mockDbServiceInstance
-    );
+    const metadataModule = await import("../EstatMetaInfoService");
+    EstatMetaInfoService = metadataModule.EstatMetaInfoService;
 
     // モジュールのモック設定
-    const { EstatMetadataDatabaseService } = await import(
-      "../metadata-database"
-    );
     const { estatAPI } = await import("@/services/estat-api");
-    const { EstatDataTransformer } = await import("../data-transformer");
-
-    vi.mocked(EstatMetadataDatabaseService).mockImplementation(
-      () => mockDbServiceInstance
-    );
     vi.mocked(estatAPI).getMetaInfo = mockEstatAPI.getMetaInfo;
-    vi.mocked(EstatDataTransformer).transformToCSVFormat =
-      mockEstatDataTransformer.transformToCSVFormat;
 
     // サービスのインスタンス化
-    service = new EstatMetadataService(mockD1Database);
+    service = new EstatMetaInfoService(mockD1Database);
   });
 
   afterEach(() => {
@@ -76,12 +40,12 @@ describe("EstatMetadataService", () => {
   });
 
   describe("基本的なテスト", () => {
-    it("EstatMetadataServiceクラスが存在する", () => {
-      expect(EstatMetadataService).toBeDefined();
-      expect(typeof EstatMetadataService).toBe("function");
+    it("EstatMetaInfoServiceクラスが存在する", () => {
+      expect(EstatMetaInfoService).toBeDefined();
+      expect(typeof EstatMetaInfoService).toBe("function");
     });
 
-    it("EstatMetadataServiceのインスタンスが作成できる", () => {
+    it("EstatMetaInfoServiceのインスタンスが作成できる", () => {
       expect(service).toBeDefined();
       expect(typeof service).toBe("object");
     });
@@ -103,6 +67,7 @@ describe("EstatMetadataService", () => {
           PARAMETER: { STATS_DATA_ID: statsDataId },
           METADATA_INF: {
             TABLE_INF: {
+              "@id": statsDataId,
               STAT_NAME: { $: "社会・人口統計体系" },
               TITLE: { $: "Ａ　人口・世帯" },
             },
@@ -110,7 +75,9 @@ describe("EstatMetadataService", () => {
               CLASS_OBJ: [
                 {
                   "@id": "cat01",
-                  CLASS: [{ "@name": "A140401", "@unit": "人" }],
+                  CLASS: [
+                    { "@code": "A140401", "@name": "A140401", "@unit": "人" },
+                  ],
                 },
               ],
             },
@@ -118,35 +85,22 @@ describe("EstatMetadataService", () => {
         },
       };
 
-      const mockTransformedData = [
-        {
-          stats_data_id: statsDataId,
-          stat_name: "社会・人口統計体系",
-          title: "Ａ　人口・世帯",
-          cat01: "A140401",
-          item_name: "A140401",
-          unit: "人",
-        },
-      ];
-
       // モックの戻り値を設定
       mockEstatAPI.getMetaInfo.mockResolvedValue(mockMetadata);
-      mockEstatDataTransformer.transformToCSVFormat.mockReturnValue(
-        mockTransformedData
-      );
-      mockDbServiceInstance.saveTransformedData.mockResolvedValue(undefined);
+
+      // データベースのモック設定
+      const mockStmt = {
+        bind: vi.fn().mockReturnThis(),
+        run: vi.fn().mockResolvedValue({}),
+      };
+      mockD1Database.prepare.mockReturnValue(mockStmt);
 
       // テスト実行
       await service.fetchAndSaveMetadata(statsDataId);
 
       // 検証
       expect(mockEstatAPI.getMetaInfo).toHaveBeenCalledWith({ statsDataId });
-      expect(
-        mockEstatDataTransformer.transformToCSVFormat
-      ).toHaveBeenCalledWith(mockMetadata);
-      expect(mockDbServiceInstance.saveTransformedData).toHaveBeenCalledWith(
-        mockTransformedData
-      );
+      expect(mockD1Database.prepare).toHaveBeenCalled();
     });
 
     it("APIエラーが発生した場合、エラーを投げる", async () => {
@@ -160,10 +114,6 @@ describe("EstatMetadataService", () => {
         errorMessage
       );
       expect(mockEstatAPI.getMetaInfo).toHaveBeenCalledWith({ statsDataId });
-      expect(
-        mockEstatDataTransformer.transformToCSVFormat
-      ).not.toHaveBeenCalled();
-      expect(mockDbServiceInstance.saveTransformedData).not.toHaveBeenCalled();
     });
   });
 
@@ -174,11 +124,17 @@ describe("EstatMetadataService", () => {
         { stats_data_id: "0000010101", stat_name: "人口統計" },
       ];
 
-      mockDbServiceInstance.search.mockResolvedValue(mockResults);
+      // データベースのモック設定
+      const mockStmt = {
+        bind: vi.fn().mockReturnThis(),
+        all: vi.fn().mockResolvedValue({ results: mockResults }),
+        first: vi.fn().mockResolvedValue({ count: 1 }),
+      };
+      mockD1Database.prepare.mockReturnValue(mockStmt);
 
       const results = await service.searchSavedMetadata(query);
 
-      expect(mockDbServiceInstance.search).toHaveBeenCalledWith(query);
+      expect(mockD1Database.prepare).toHaveBeenCalled();
       expect(results).toEqual(mockResults);
     });
 
@@ -188,22 +144,31 @@ describe("EstatMetadataService", () => {
         { stats_data_id: "0000010102", stat_name: "経済統計" },
       ];
 
-      mockDbServiceInstance.getStatList.mockResolvedValue(mockStatList);
+      // データベースのモック設定
+      const mockStmt = {
+        bind: vi.fn().mockReturnThis(),
+        all: vi.fn().mockResolvedValue({ results: mockStatList }),
+      };
+      mockD1Database.prepare.mockReturnValue(mockStmt);
 
       const results = await service.getSavedStatList();
 
-      expect(mockDbServiceInstance.getStatList).toHaveBeenCalled();
+      expect(mockD1Database.prepare).toHaveBeenCalled();
       expect(results).toEqual(mockStatList);
     });
 
     it("getSavedDataCountが正しく動作する", async () => {
       const mockCount = 150;
 
-      mockDbServiceInstance.getCount.mockResolvedValue(mockCount);
+      // データベースのモック設定
+      const mockStmt = {
+        first: vi.fn().mockResolvedValue({ count: mockCount }),
+      };
+      mockD1Database.prepare.mockReturnValue(mockStmt);
 
       const count = await service.getSavedDataCount();
 
-      expect(mockDbServiceInstance.getCount).toHaveBeenCalled();
+      expect(mockD1Database.prepare).toHaveBeenCalled();
       expect(count).toBe(mockCount);
     });
   });
