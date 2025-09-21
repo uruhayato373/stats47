@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Save, AlertCircle, Code, Database, CheckCircle } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
@@ -52,6 +52,12 @@ export default function EstatMetaInfoDisplay({
     message: string;
   } | null>(null);
   const [activeMainTab, setActiveMainTab] = useState(0);
+
+  // メタ情報が変更されたらタブをリセット
+  useEffect(() => {
+    setActiveMainTab(0);
+    setSaveResult(null);
+  }, [metaInfo]);
 
   const handleSave = async () => {
     if (!metaInfo) return;

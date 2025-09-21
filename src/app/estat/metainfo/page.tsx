@@ -72,6 +72,7 @@ export default function EstatMetadataPage() {
 
               {/* メタ情報表示 */}
               <EstatMetaInfoDisplay
+                key={metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"}
                 metaInfo={metaInfo}
                 loading={loading}
                 error={error}

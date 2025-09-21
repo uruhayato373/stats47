@@ -8,11 +8,13 @@ import InputField from "@/components/common/InputField";
 interface EstatMetaInfoFetcherProps {
   onSubmit: (statsDataId: string) => void;
   loading?: boolean;
+  clearOnSuccess?: boolean;
 }
 
 export default function EstatMetaInfoFetcher({
   onSubmit,
   loading,
+  clearOnSuccess = true,
 }: EstatMetaInfoFetcherProps) {
   const [statsDataId, setStatsDataId] = useState<string>("");
   const styles = useStyles();
@@ -21,6 +23,10 @@ export default function EstatMetaInfoFetcher({
     e.preventDefault();
     if (statsDataId.trim()) {
       onSubmit(statsDataId.trim());
+      // フォーム送信後に入力フィールドをクリア（オプション）
+      if (clearOnSuccess) {
+        setStatsDataId("");
+      }
     }
   };
 
