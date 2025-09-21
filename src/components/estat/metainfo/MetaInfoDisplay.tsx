@@ -15,7 +15,7 @@ import {
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
 
-interface MetaInfoCardProps {
+interface MetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
   loading?: boolean;
   error?: string | null;
@@ -162,7 +162,6 @@ function PaginatedTable({
 // 分類情報のアコーディオンコンポーネント
 function ClassificationAccordion({
   classObj,
-  index,
   metaInfoId,
 }: {
   classObj: {
@@ -182,7 +181,6 @@ function ClassificationAccordion({
           "@explanation"?: string;
         };
   };
-  index: number;
   metaInfoId?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -239,11 +237,11 @@ function ClassificationAccordion({
   );
 }
 
-export default function MetaInfoCard({
+export default function MetaInfoDisplay({
   metaInfo,
   loading,
   error,
-}: MetaInfoCardProps) {
+}: MetaInfoDisplayProps) {
   const styles = useStyles();
   const [saving, setSaving] = useState(false);
   const [saveResult, setSaveResult] = useState<{
@@ -278,7 +276,7 @@ export default function MetaInfoCard({
         throw new Error(`HTTP ${response.status}: ${await response.text()}`);
       }
 
-      const result = await response.json();
+      const result = (await response.json()) as { message?: string };
       setSaveResult({
         success: true,
         message: result.message || "メタ情報を正常に保存しました",
@@ -296,7 +294,7 @@ export default function MetaInfoCard({
 
   if (loading) {
     return (
-      <div className={styles.card.compact}>
+      <div className="space-y-4">
         <div className="animate-pulse">
           <div className="h-4 bg-gray-300 rounded w-1/4 mb-3"></div>
           <div className="space-y-2">
@@ -334,11 +332,7 @@ export default function MetaInfoCard({
   }
 
   if (!metaInfo) {
-    return (
-      <div className={styles.card.compact}>
-        <p className={styles.text.muted}>メタ情報がありません</p>
-      </div>
-    );
+    return null;
   }
 
   const { GET_META_INFO } = metaInfo;
@@ -348,10 +342,10 @@ export default function MetaInfoCard({
   const metaInfoId = TABLE_INF?.["@id"];
 
   return (
-    <div className={styles.card.compact}>
+    <div className="space-y-6">
       {/* 保存ボタンとステータス */}
       {metaInfo && (
-        <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border-b border-gray-200 pb-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border-b border-gray-200 pb-4">
           <div className="flex-1">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-neutral-100">
               メタ情報詳細
@@ -462,7 +456,6 @@ export default function MetaInfoCard({
                 <ClassificationAccordion
                   key={`${metaInfoId}-${index}`}
                   classObj={classObj}
-                  index={index}
                   metaInfoId={metaInfoId}
                 />
               ))}

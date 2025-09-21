@@ -39,11 +39,11 @@ export default function MetaInfoFetcher({
               required
             />
           </div>
-          <div className="flex items-end">
+          <div className="flex-shrink-0">
             <button
               type="submit"
               disabled={loading || !statsDataId.trim()}
-              className={`${styles.button.small} min-w-[100px] h-10`}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 min-w-[100px] h-10"
             >
               {loading ? (
                 <div className="flex items-center justify-center">

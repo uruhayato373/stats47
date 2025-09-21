@@ -6,7 +6,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import {
   EstatMetainfoPageHeader,
   MetaInfoFetcher,
-  MetaInfoCard,
+  MetaInfoDisplay,
 } from "@/components/estat/metainfo";
 import { EstatMetainfoSidebar } from "@/components/estat/metainfo";
 import { estatAPI } from "@/services/estat-api";
@@ -70,8 +70,8 @@ export default function EstatMetadataPage() {
                 loading={loading}
               />
 
-              {/* メタ情報表示カード */}
-              <MetaInfoCard
+              {/* メタ情報表示 */}
+              <MetaInfoDisplay
                 metaInfo={metaInfo}
                 loading={loading}
                 error={error}
