@@ -235,9 +235,6 @@ function ClassificationTabs({
               }`}
             >
               {tab.label}
-              <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                {tab.count}件
-              </span>
             </button>
           ))}
         </nav>
@@ -468,79 +465,75 @@ export default function EstatMetaInfoDisplay({
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 統計表基本情報 */}
-        <div>
-          <h3 className={styles.heading.md}>統計表基本情報</h3>
-
-          <div className="overflow-x-auto">
-            <table className="min-w-full border border-gray-200 rounded-lg">
-              <tbody className="divide-y divide-gray-200">
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200 w-1/3">
-                    統計表題名
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.TITLE)}
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
-                    政府統計名
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.STAT_NAME)}
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
-                    作成機関
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.GOV_ORG)}
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
-                    調査年月
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.SURVEY_DATE)}
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
-                    公開日
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.OPEN_DATE)}
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-50 border-r border-gray-200">
-                    更新日
-                  </td>
-                  <td className="px-3 py-2 text-sm text-gray-800">
-                    {safeRender(TABLE_INF.UPDATED_DATE)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      {/* 統計表基本情報 - コンパクトなテキスト表示 */}
+      <div className="mb-6">
+        <h3 className={styles.heading.md}>統計表基本情報</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div className="space-y-2">
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                統計表題名:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.TITLE)}
+              </div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                政府統計名:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.STAT_NAME)}
+              </div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                作成機関:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.GOV_ORG)}
+              </div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                調査年月:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.SURVEY_DATE)}
+              </div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                公開日:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.OPEN_DATE)}
+              </div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                更新日:
+              </span>
+              <div className="text-gray-800 dark:text-neutral-100 mt-1">
+                {safeRender(TABLE_INF.UPDATED_DATE)}
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* 分類情報 */}
-        {CLASS_INF && CLASS_INF.CLASS_OBJ && CLASS_INF.CLASS_OBJ.length > 0 && (
-          <div>
-            <h3 className={styles.heading.md}>分類情報</h3>
-
-            <ClassificationTabs
-              classObjs={CLASS_INF.CLASS_OBJ}
-              metaInfoId={metaInfoId}
-            />
-          </div>
-        )}
       </div>
+
+      {/* 分類情報 */}
+      {CLASS_INF && CLASS_INF.CLASS_OBJ && CLASS_INF.CLASS_OBJ.length > 0 && (
+        <div>
+          <h3 className={styles.heading.md}>分類情報</h3>
+          <ClassificationTabs
+            classObjs={CLASS_INF.CLASS_OBJ}
+            metaInfoId={metaInfoId}
+          />
+        </div>
+      )}
     </div>
   );
 }
