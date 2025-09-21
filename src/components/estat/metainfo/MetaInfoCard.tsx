@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   ChevronDown,
   ChevronRight,
@@ -52,6 +52,7 @@ function safeRender(value: unknown): string {
 function PaginatedTable({
   data,
   itemsPerPage = 15,
+  metaInfoId,
 }: {
   data: Array<{
     "@code": string;
@@ -60,8 +61,14 @@ function PaginatedTable({
     "@explanation"?: string;
   }>;
   itemsPerPage?: number;
+  metaInfoId?: string;
 }) {
   const [currentPage, setCurrentPage] = useState(1);
+
+  // metaInfoIdが変更されたときにページを1にリセット
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [metaInfoId]);
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -156,6 +163,7 @@ function PaginatedTable({
 function ClassificationAccordion({
   classObj,
   index,
+  metaInfoId,
 }: {
   classObj: {
     "@id": string;
@@ -175,8 +183,14 @@ function ClassificationAccordion({
         };
   };
   index: number;
+  metaInfoId?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // metaInfoIdが変更されたときにアコーディオンを閉じる
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [metaInfoId]);
 
   const itemCount = Array.isArray(classObj.CLASS)
     ? classObj.CLASS.length
@@ -214,7 +228,11 @@ function ClassificationAccordion({
 
       {isOpen && (
         <div className="px-3 pb-3 border-t border-gray-200">
-          <PaginatedTable data={tableData} itemsPerPage={15} />
+          <PaginatedTable
+            data={tableData}
+            itemsPerPage={15}
+            metaInfoId={metaInfoId}
+          />
         </div>
       )}
     </div>
@@ -241,16 +259,17 @@ export default function MetaInfoCard({
 
     try {
       // 統計表IDを抽出
-      const statsDataId = metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
+      const statsDataId =
+        metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
 
       if (!statsDataId) {
-        throw new Error('統計表IDが見つかりません');
+        throw new Error("統計表IDが見つかりません");
       }
 
-      const response = await fetch('/api/estat/metainfo/save', {
-        method: 'POST',
+      const response = await fetch("/api/estat/metainfo/save", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ statsDataId }),
       });
@@ -262,13 +281,13 @@ export default function MetaInfoCard({
       const result = await response.json();
       setSaveResult({
         success: true,
-        message: result.message || 'メタ情報を正常に保存しました',
+        message: result.message || "メタ情報を正常に保存しました",
       });
     } catch (err) {
-      console.error('Save error:', err);
+      console.error("Save error:", err);
       setSaveResult({
         success: false,
-        message: err instanceof Error ? err.message : '保存に失敗しました',
+        message: err instanceof Error ? err.message : "保存に失敗しました",
       });
     } finally {
       setSaving(false);
@@ -325,6 +344,9 @@ export default function MetaInfoCard({
   const { GET_META_INFO } = metaInfo;
   const { TABLE_INF, CLASS_INF } = GET_META_INFO.METADATA_INF;
 
+  // メタ情報の一意IDを生成（統計表IDを使用）
+  const metaInfoId = TABLE_INF?.["@id"];
+
   return (
     <div className={styles.card.compact}>
       {/* 保存ボタンとステータス */}
@@ -345,16 +367,18 @@ export default function MetaInfoCard({
               disabled={saving}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
-              <Save className={`w-4 h-4 ${saving ? 'animate-pulse' : ''}`} />
-              {saving ? '保存中...' : 'データベースに保存'}
+              <Save className={`w-4 h-4 ${saving ? "animate-pulse" : ""}`} />
+              {saving ? "保存中..." : "データベースに保存"}
             </button>
 
             {saveResult && (
-              <div className={`flex items-center gap-2 text-sm px-3 py-2 rounded ${
-                saveResult.success
-                  ? 'bg-green-50 text-green-800 border border-green-200'
-                  : 'bg-red-50 text-red-800 border border-red-200'
-              }`}>
+              <div
+                className={`flex items-center gap-2 text-sm px-3 py-2 rounded ${
+                  saveResult.success
+                    ? "bg-green-50 text-green-800 border border-green-200"
+                    : "bg-red-50 text-red-800 border border-red-200"
+                }`}
+              >
                 {saveResult.success ? (
                   <CheckCircle className="w-4 h-4" />
                 ) : (
@@ -436,9 +460,10 @@ export default function MetaInfoCard({
             <div className="space-y-2">
               {CLASS_INF.CLASS_OBJ.map((classObj, index) => (
                 <ClassificationAccordion
-                  key={index}
+                  key={`${metaInfoId}-${index}`}
                   classObj={classObj}
                   index={index}
+                  metaInfoId={metaInfoId}
                 />
               ))}
             </div>
