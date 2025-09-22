@@ -191,22 +191,15 @@ main {
   background-color: #ffffff !important;
 }
 
-/* ダークモードのカード */
-.dark .bg-white {
+/* ダークモードのカード - より具体的なセレクタを使用 */
+.dark main .bg-white,
+.dark .card.bg-white {
   background-color: #262626 !important;
 }
 
-.light .bg-white {
+.light main .bg-white,
+.light .card.bg-white {
   background-color: #ffffff !important;
-}
-
-/* JSON表示エリアの明示的な背景設定 */
-.light .bg-white {
-  background-color: #ffffff !important;
-}
-
-.dark .bg-white {
-  background-color: #262626 !important;
 }
 
 /* JSON表示エリア専用のスタイル */

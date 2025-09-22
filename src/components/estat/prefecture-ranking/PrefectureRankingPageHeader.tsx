@@ -14,7 +14,7 @@ export default function PrefectureRankingPageHeader({
   onRefresh,
 }: PrefectureRankingPageHeaderProps) {
   return (
-    <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+    <div className="bg-white dark:bg-neutral-800 ">
       <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2">
         <div>
           <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
