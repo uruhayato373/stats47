@@ -23,12 +23,6 @@ export default function EstatMetainfoSidebar({
 }: EstatMetainfoSidebarProps) {
   const [savedData, setSavedData] = useState<SavedMetadataItem[]>([]);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(savedData.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentData = savedData.slice(startIndex, startIndex + itemsPerPage);
 
   const fetchSavedData = async () => {
     setLoading(true);
@@ -73,10 +67,6 @@ export default function EstatMetainfoSidebar({
     console.log("View metadata:", item);
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   return (
     <div
       className={`w-full xl:w-80 bg-white dark:bg-neutral-800 flex flex-col ${className}`}
@@ -103,13 +93,8 @@ export default function EstatMetainfoSidebar({
 
       {/* データリスト */}
       <SavedEstatMetainfoList
-        data={currentData}
+        data={savedData}
         loading={loading}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        startIndex={startIndex}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
         onView={handleView}
         onDelete={handleDelete}
       />

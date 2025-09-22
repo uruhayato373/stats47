@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { FormattedYear } from "@/types/estat/formatted";
+import { FormattedYear } from "@/lib/estat/types/formatted";
 
 interface YearOption {
   code: string;
@@ -9,17 +9,19 @@ interface YearOption {
   displayName: string;
 }
 
-interface SimpleYearSelectorProps {
+interface TimeSelectorProps {
   years: FormattedYear[];
   selectedYear: string;
   onYearChange: (year: string) => void;
+  className?: string;
 }
 
-export default function SimpleYearSelector({
+export default function TimeSelector({
   years,
   selectedYear,
   onYearChange,
-}: SimpleYearSelectorProps) {
+  className = "",
+}: TimeSelectorProps) {
   const availableYears = useMemo(() => {
     return years
       .map((year) => ({
@@ -35,7 +37,9 @@ export default function SimpleYearSelector({
   }
 
   return (
-    <div className="mt-4 bg-gray-50 dark:bg-neutral-700 p-4 rounded border border-gray-200 dark:border-neutral-600">
+    <div
+      className={`bg-gray-50 dark:bg-neutral-700 p-4 rounded border border-gray-200 dark:border-neutral-600 ${className}`}
+    >
       <div className="flex items-center gap-4">
         <label
           htmlFor="year-select"
@@ -60,5 +64,4 @@ export default function SimpleYearSelector({
   );
 }
 
-export type { YearOption };
-export { SimpleYearSelector };
+export type { YearOption, TimeSelectorProps };

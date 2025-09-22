@@ -1,14 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Eye,
-  Trash2,
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Eye, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 
 interface SavedEstatMetainfoItem {
   id: string;
@@ -29,11 +22,6 @@ interface SavedEstatMetainfoItemProps {
 interface SavedEstatMetainfoListProps {
   data: SavedEstatMetainfoItem[];
   loading: boolean;
-  currentPage: number;
-  totalPages: number;
-  startIndex: number;
-  itemsPerPage: number;
-  onPageChange: (page: number) => void;
   onView: (item: SavedEstatMetainfoItem) => void;
   onDelete: (id: string) => void;
 }
@@ -55,30 +43,16 @@ function SavedEstatMetainfoItem({
   };
 
   return (
-    <div className="py-3 border-b border-gray-100 dark:border-neutral-700 last:border-b-0">
+    <div className="py-3 border-b border-gray-200 dark:border-neutral-600 last:border-b-0">
       {/* メイン情報行 */}
       <div className="flex items-center justify-between">
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 ml-4">
           <span className="text-xs font-mono text-gray-500 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-700 px-2 py-1 rounded">
             {item.statsDataId}
           </span>
         </div>
 
         <div className="flex items-center gap-1 ml-4">
-          <button
-            onClick={() => onView(item)}
-            className="p-1.5 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors dark:text-neutral-400 dark:hover:text-indigo-400 dark:hover:bg-indigo-900/20"
-            title="詳細表示"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => onDelete(item.id)}
-            className="p-1.5 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors dark:text-neutral-400 dark:hover:text-red-400 dark:hover:bg-red-900/20"
-            title="削除"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
@@ -95,7 +69,27 @@ function SavedEstatMetainfoItem({
 
       {/* 展開された詳細情報 */}
       {isExpanded && (
-        <div className="mt-3 pt-3 border-t border-gray-100 dark:border-neutral-700">
+        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-neutral-600">
+          {/* アクションボタン */}
+          <div className="flex items-center gap-2 mb-3">
+            <button
+              onClick={() => onView(item)}
+              className="px-3 py-1.5 text-sm text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 rounded transition-colors dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-900/20"
+              title="詳細表示"
+            >
+              <Eye className="w-4 h-4 inline mr-1" />
+              詳細表示
+            </button>
+            <button
+              onClick={() => onDelete(item.id)}
+              className="px-3 py-1.5 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20"
+              title="削除"
+            >
+              <Trash2 className="w-4 h-4 inline mr-1" />
+              削除
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 gap-2 text-xs">
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
@@ -147,11 +141,6 @@ function SavedEstatMetainfoItem({
 export default function SavedEstatMetainfoList({
   data,
   loading,
-  currentPage,
-  totalPages,
-  startIndex,
-  itemsPerPage,
-  onPageChange,
   onView,
   onDelete,
 }: SavedEstatMetainfoListProps) {
@@ -210,12 +199,17 @@ export default function SavedEstatMetainfoList({
     );
   }
 
+  // statsDataIdの昇順でソート
+  const sortedData = [...data].sort((a, b) =>
+    a.statsDataId.localeCompare(b.statsDataId)
+  );
+
   return (
     <>
       {/* データリスト */}
       <div className="flex-1 overflow-y-auto">
-        <div className="divide-y divide-gray-100 dark:divide-neutral-700">
-          {data.map((item) => (
+        <div className="divide-y divide-gray-200 dark:divide-neutral-600">
+          {sortedData.map((item) => (
             <SavedEstatMetainfoItem
               key={item.id}
               item={item}
@@ -225,42 +219,6 @@ export default function SavedEstatMetainfoList({
           ))}
         </div>
       </div>
-
-      {/* ページネーション */}
-      {totalPages > 1 && (
-        <div className="p-4 border-t border-gray-200 dark:border-neutral-700">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-600 dark:text-neutral-400">
-              {startIndex + 1}-
-              {Math.min(startIndex + itemsPerPage, data.length)} / {data.length}
-            </span>
-
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="p-1 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-
-              <span className="text-xs text-gray-600 dark:text-neutral-400 px-2">
-                {currentPage} / {totalPages}
-              </span>
-
-              <button
-                onClick={() =>
-                  onPageChange(Math.min(totalPages, currentPage + 1))
-                }
-                disabled={currentPage === totalPages}
-                className="p-1 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

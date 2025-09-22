@@ -277,59 +277,59 @@ export default function EstatMetaInfoDisplay({
             {/* 統計表基本情報 - コンパクトなテキスト表示 */}
             <div>
               <h3 className={styles.heading.md}>統計表基本情報</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div className="space-y-2">
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      統計表題名:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.TITLE)}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      政府統計名:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.STAT_NAME)}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      作成機関:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.GOV_ORG)}
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      調査年月:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.SURVEY_DATE)}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      公開日:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.OPEN_DATE)}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700 dark:text-neutral-300">
-                      更新日:
-                    </span>
-                    <div className="text-gray-800 dark:text-neutral-100 mt-1">
-                      {safeRender(TABLE_INF.UPDATED_DATE)}
-                    </div>
-                  </div>
-                </div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                  <tbody className="bg-white dark:bg-neutral-800 divide-y divide-gray-200 dark:divide-neutral-700">
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        統計表題名
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.TITLE)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        政府統計名
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.STAT_NAME)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        作成機関
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.GOV_ORG)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        調査年月
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.SURVEY_DATE)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        公開日
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.OPEN_DATE)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
+                        更新日
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
+                        {safeRender(TABLE_INF.UPDATED_DATE)}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
