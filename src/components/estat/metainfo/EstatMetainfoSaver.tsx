@@ -60,19 +60,11 @@ export default function EstatMetainfoSaver() {
         setMessage(result.message);
         setStatsDataId("");
         setProgress(null);
-
-        // 保存されたデータの詳細をログに出力（開発用）
-        if (result.data) {
-          console.log("保存されたデータ:", result.data);
-          console.log("保存環境:", result.environment);
-          console.log("保存結果:", result.result);
-        }
       } else {
         throw new Error(result.error || "保存に失敗しました");
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "保存に失敗しました");
-      console.error("保存エラー:", err);
       setProgress(null);
     } finally {
       setLoading(false);

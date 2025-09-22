@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { feature } from "topojson-client";
 import { JapanPrefectureTopoJSON } from "@/types/topojson";
-import { FormattedValue } from "@/types/estat/formatted";
+import { FormattedValue } from "@/lib/estat/types";
 
 // 型定義をローカルで定義
 interface MapDataPoint {
@@ -39,8 +39,6 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     x: number;
     y: number;
   } | null>(null);
-
-  console.log("data", data);
 
   useEffect(() => {
     if (!svgRef.current || !data) return;
@@ -176,16 +174,12 @@ function drawMap(
     data: { prefecture: string; value: string; x: number; y: number } | null
   ) => void
 ) {
-  // TopoJSONデータの構造をチェック
-  console.log("TopoJSON data structure:", topojsonData);
-
   if (!topojsonData || !topojsonData.objects) {
     throw new Error("Invalid TopoJSON data structure");
   }
 
   // TopoJSONオブジェクトのキーを確認
   const objectKeys = Object.keys(topojsonData.objects);
-  console.log("Available TopoJSON objects:", objectKeys);
 
   // 適切なオブジェクトキーを見つける
   let geoObject;
@@ -194,7 +188,6 @@ function drawMap(
   } else if (objectKeys.length > 0) {
     // 最初のオブジェクトを使用
     geoObject = topojsonData.objects[objectKeys[0]];
-    console.log(`Using object: ${objectKeys[0]}`);
   } else {
     throw new Error("No geographic objects found in TopoJSON data");
   }
@@ -239,8 +232,6 @@ function drawMap(
     .on("mouseover", function (event, d) {
       const prefCode = d.properties?.N03_007; // 都道府県コード（2桁）
       const prefName = d.properties?.N03_001; // 都道府県名
-
-      console.log("Prefecture properties:", d.properties); // デバッグ用
 
       if (prefCode && prefName) {
         const dataPoint = dataMap.get(prefCode);

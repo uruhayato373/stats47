@@ -2,7 +2,7 @@
 
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { FormattedYear } from "@/types/estat/formatted";
-import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -14,7 +14,7 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const formattedData = EstatStatsDataService.formatStatsData(data);
   const years = formattedData.years;
 
   const columns: TableColumn<FormattedYear>[] = [

@@ -101,15 +101,10 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    console.log("API Request params:", params);
-
     // e-Stat APIから統計データを取得
     const data = await estatAPI.getStatsData(
       params as Omit<GetStatsDataParams, "appId">
     );
-
-    console.log("e-Stat API response type:", typeof data);
-    console.log("e-Stat API response keys:", data ? Object.keys(data) : "null");
 
     return NextResponse.json(data);
   } catch (error) {

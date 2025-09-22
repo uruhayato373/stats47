@@ -16,9 +16,9 @@ export const mountedAtom = atom(false);
 // システムのpreferred color schemeを取得するatom
 export const systemThemeAtom = atom<Theme>(() => {
   if (typeof window === "undefined") return "light";
-  
-  return window.matchMedia("(prefers-color-scheme: dark)").matches 
-    ? "dark" 
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
     : "light";
 });
 
@@ -27,14 +27,14 @@ export const effectiveThemeAtom = atom(
   (get) => {
     const savedTheme = get(themeAtom);
     const systemTheme = get(systemThemeAtom);
-    
+
     // localStorageに値がない場合はシステム設定を使用
     return savedTheme || systemTheme;
   },
   (get, set, newTheme: Theme) => {
     // テーマをlocalStorageに保存
     set(themeAtom, newTheme);
-    
+
     // DOMに適用
     applyThemeToDOM(newTheme);
   }
@@ -44,12 +44,8 @@ export const effectiveThemeAtom = atom(
 export const toggleThemeAtom = atom(null, (get, set) => {
   const currentTheme = get(effectiveThemeAtom);
   const newTheme: Theme = currentTheme === "light" ? "dark" : "light";
-  
+
   set(effectiveThemeAtom, newTheme);
-  
-  if (process.env.NODE_ENV === "development") {
-    console.log("Theme toggled from", currentTheme, "to", newTheme);
-  }
 });
 
 // DOMにテーマを適用する関数
@@ -68,62 +64,41 @@ function applyThemeToDOM(theme: Theme) {
     root.classList.add(theme);
     body.classList.add(theme);
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("Theme applied to DOM:", theme);
-      console.log("HTML classes:", root.classList.toString());
-      
-      // 実際のスタイルを確認
-      const computedStyle = window.getComputedStyle(body);
-      console.log("Body background color:", computedStyle.backgroundColor);
-    }
-
     // テーマ適用の確認（念のため）
     setTimeout(() => {
       const currentClasses = root.classList.toString();
       if (!currentClasses.includes(theme)) {
-        console.warn("Theme class not properly applied, retrying...");
         applyThemeToDOM(theme);
       }
     }, 100);
-  } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("Failed to apply theme:", error);
-    }
+  } catch {
+    // エラーが発生した場合は静かに処理
   }
 }
 
 // 初期化用のatom
 export const initThemeAtom = atom(null, (get, set) => {
   if (typeof window === "undefined") return;
-  
+
   try {
     // システム設定を取得
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
     const systemTheme: Theme = systemPrefersDark ? "dark" : "light";
-    
+
     // localStorageから取得（atomWithStorageが自動で行う）
     const savedTheme = get(themeAtom);
-    
+
     // 初期テーマを決定
     const initialTheme = savedTheme || systemTheme;
-    
+
     // DOMに適用
     applyThemeToDOM(initialTheme);
-    
+
     // マウント完了
     set(mountedAtom, true);
-    
-    if (process.env.NODE_ENV === "development") {
-      console.log("Theme initialized:", {
-        system: systemTheme,
-        saved: savedTheme,
-        effective: initialTheme
-      });
-    }
-  } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("Failed to initialize theme:", error);
-    }
+  } catch {
     set(mountedAtom, true); // エラーでもマウント完了とする
   }
 });

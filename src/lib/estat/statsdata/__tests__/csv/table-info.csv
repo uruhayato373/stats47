@@ -1,2 +1,2 @@
-id,title,statName,govOrg,statisticsName,totalNumber,fromNumber,toNumber
-0000010101,Ａ　人口・世帯,社会・人口統計体系,総務省,都道府県データ 基礎データ,0,0,0
+id,title,statName,govOrg,totalNumber
+0000010101,人口推計,人口推計,総務省,9600

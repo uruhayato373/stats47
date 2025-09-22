@@ -8,9 +8,6 @@ export default function Header() {
   const styles = useStyles();
 
   const handleThemeToggle = () => {
-    if (process.env.NODE_ENV === "development") {
-      console.log("Theme toggle button clicked, current theme:", theme);
-    }
     toggleTheme();
   };
 
@@ -47,9 +44,7 @@ export default function Header() {
                 </a>
               </li>
               <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
-                <span className={styles.text.muted}>
-                  Dashboard
-                </span>
+                <span className={styles.text.muted}>Dashboard</span>
               </li>
             </ul>
           </div>
@@ -97,7 +92,15 @@ export default function Header() {
             <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
               <a
                 href="#"
-                className={`flex items-center gap-x-1.5 ${styles.text.tertiary} hover:${styles.text.primary.replace('text-', 'text-')} focus:outline-hidden focus:${styles.text.primary.replace('text-', 'text-')}`}
+                className={`flex items-center gap-x-1.5 ${
+                  styles.text.tertiary
+                } hover:${styles.text.primary.replace(
+                  "text-",
+                  "text-"
+                )} focus:outline-hidden focus:${styles.text.primary.replace(
+                  "text-",
+                  "text-"
+                )}`}
               >
                 <div className="bg-indigo-700 size-8 rounded-md flex items-center justify-center">
                   <svg
@@ -120,9 +123,7 @@ export default function Header() {
               </a>
             </li>
             <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
-              <span className={styles.text.muted}>
-                Dashboard
-              </span>
+              <span className={styles.text.muted}>Dashboard</span>
             </li>
           </ul>
         </div>

@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 
 type Theme = "light" | "dark";
 
@@ -25,7 +31,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mounted, setMounted] = useState(false);
 
   // テーマをDOMに適用する関数
-  const applyTheme = (newTheme: Theme) => {
+  const applyTheme = useCallback((newTheme: Theme) => {
     if (typeof window === "undefined") return;
 
     try {
@@ -45,32 +51,17 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       // localStorageに保存
       localStorage.setItem("theme", newTheme);
 
-      // デバッグ情報
-      if (process.env.NODE_ENV === "development") {
-        console.log("Theme applied to DOM:", newTheme);
-        console.log("HTML classes:", root.classList.toString());
-        console.log("Body classes:", body.classList.toString());
-
-        // 実際のスタイルを確認
-        const computedStyle = window.getComputedStyle(body);
-        console.log("Body background color:", computedStyle.backgroundColor);
-        console.log("Body color:", computedStyle.color);
-      }
-
       // テーマ適用の確認
       setTimeout(() => {
         const currentClasses = root.classList.toString();
         if (!currentClasses.includes(newTheme)) {
-          console.warn("Theme class not properly applied, retrying...");
           applyTheme(newTheme);
         }
       }, 100);
-    } catch (error) {
-      if (process.env.NODE_ENV === "development") {
-        console.warn("Failed to apply theme:", error);
-      }
+    } catch {
+      // エラーが発生した場合は静かに処理
     }
-  };
+  }, []);
 
   useEffect(() => {
     // クライアントサイドでのみ実行
@@ -93,37 +84,24 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
         // 初期テーマをDOMに適用
         applyTheme(initialTheme);
-
-        if (process.env.NODE_ENV === "development") {
-          console.log("Initial theme set to:", initialTheme);
-        }
-      } catch (error) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn("Failed to initialize theme:", error);
-        }
+      } catch {
+        // エラーが発生した場合は静かに処理
       } finally {
         setMounted(true);
       }
     }
-  }, []);
+  }, [applyTheme]);
 
   useEffect(() => {
     if (!mounted || typeof window === "undefined") return;
 
     // テーマが変更されたらDOMに適用
     applyTheme(theme);
-
-    if (process.env.NODE_ENV === "development") {
-      console.log("Theme state changed to:", theme);
-    }
-  }, [theme, mounted]);
+  }, [theme, mounted, applyTheme]);
 
   const toggleTheme = () => {
     setTheme((prev) => {
       const newTheme = prev === "light" ? "dark" : "light";
-      if (process.env.NODE_ENV === "development") {
-        console.log("Toggling theme from", prev, "to", newTheme);
-      }
       return newTheme;
     });
   };

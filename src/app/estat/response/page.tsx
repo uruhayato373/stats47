@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RefreshCw, Database, ExternalLink } from "lucide-react";
-import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
@@ -55,10 +54,8 @@ export default function EstatDataPage() {
         try {
           const errorData = (await response.json()) as { error?: string };
           errorMessage = errorData.error || errorMessage;
-        } catch (jsonError) {
-          console.error("Error parsing error response:", jsonError);
+        } catch {
           const textResponse = await response.text();
-          console.error("Raw error response:", textResponse);
           errorMessage = `HTTP ${response.status}: ${textResponse.substring(
             0,
             100
@@ -70,12 +67,8 @@ export default function EstatDataPage() {
       let data: EstatStatsDataResponse;
       try {
         const responseText = await response.text();
-        console.log("Raw API response:", responseText.substring(0, 200));
         data = JSON.parse(responseText) as EstatStatsDataResponse;
       } catch (jsonError) {
-        console.error("JSON parse error:", jsonError);
-        const responseText = await response.text();
-        console.error("Raw response that failed to parse:", responseText);
         throw new Error(
           `Invalid JSON response: ${
             jsonError instanceof Error ? jsonError.message : "Unknown error"
@@ -85,7 +78,6 @@ export default function EstatDataPage() {
 
       setApiResponse(data);
     } catch (err) {
-      console.error("Data fetch error:", err);
       if (err instanceof DOMException && err.name === "AbortError") {
         setError(
           "リクエストがタイムアウトしました。e-STAT APIが応答していない可能性があります。"

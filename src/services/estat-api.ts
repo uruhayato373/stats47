@@ -27,7 +27,7 @@ export class EstatAPIClient {
    */
   private async request<T>(
     endpoint: string,
-    params: Record<string, any>
+    params: Record<string, unknown>
   ): Promise<T> {
     try {
       const searchParams = new URLSearchParams({
@@ -38,7 +38,6 @@ export class EstatAPIClient {
       });
 
       const url = `${this.baseUrl}${endpoint}?${searchParams.toString()}`;
-      console.log("API Request URL:", url);
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 25000); // 25秒でタイムアウト
@@ -61,20 +60,19 @@ export class EstatAPIClient {
       }
 
       const data = await response.json();
-      console.log("Raw e-Stat API response:", JSON.stringify(data, null, 2));
 
       // e-STAT APIのエラーチェック
       const result = this.extractResult(data);
-      console.log("Extracted result:", result);
 
-      if (result && result.STATUS !== 0) {
-        console.error("e-Stat API error status:", result.STATUS, result);
-        throw EstatAPIError.fromErrorCode(result.STATUS, result);
+      if (result && typeof result === "object" && result !== null) {
+        const resultObj = result as Record<string, unknown>;
+        if (typeof resultObj.STATUS === "number" && resultObj.STATUS !== 0) {
+          throw EstatAPIError.fromErrorCode(resultObj.STATUS, result);
+        }
       }
 
-      return data;
+      return data as T;
     } catch (error) {
-      console.error("e-STAT API Error:", error);
       if (error instanceof DOMException && error.name === "AbortError") {
         throw new Error("e-STAT APIへのリクエストがタイムアウトしました");
       }
@@ -85,11 +83,26 @@ export class EstatAPIClient {
   /**
    * レスポンスからRESULT情報を抽出
    */
-  private extractResult(data: any): any {
-    if (data.GET_STATS_DATA?.RESULT) return data.GET_STATS_DATA.RESULT;
-    if (data.GET_META_INFO?.RESULT) return data.GET_META_INFO.RESULT;
-    if (data.GET_STATS_LIST?.RESULT) return data.GET_STATS_LIST.RESULT;
-    if (data.GET_DATA_CATALOG?.RESULT) return data.GET_DATA_CATALOG.RESULT;
+  private extractResult(data: unknown): unknown {
+    if (typeof data === "object" && data !== null) {
+      const obj = data as Record<string, unknown>;
+      if (obj.GET_STATS_DATA && typeof obj.GET_STATS_DATA === "object") {
+        const statsData = obj.GET_STATS_DATA as Record<string, unknown>;
+        return statsData.RESULT;
+      }
+      if (obj.GET_META_INFO && typeof obj.GET_META_INFO === "object") {
+        const metaInfo = obj.GET_META_INFO as Record<string, unknown>;
+        return metaInfo.RESULT;
+      }
+      if (obj.GET_STATS_LIST && typeof obj.GET_STATS_LIST === "object") {
+        const statsList = obj.GET_STATS_LIST as Record<string, unknown>;
+        return statsList.RESULT;
+      }
+      if (obj.GET_DATA_CATALOG && typeof obj.GET_DATA_CATALOG === "object") {
+        const dataCatalog = obj.GET_DATA_CATALOG as Record<string, unknown>;
+        return dataCatalog.RESULT;
+      }
+    }
     return null;
   }
 

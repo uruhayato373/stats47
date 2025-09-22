@@ -36,10 +36,6 @@ export class EstatMetaInfoService {
       // 3. データベースに保存
       await this.saveTransformedData(transformedData);
 
-      console.log(
-        `${statsDataId}のメタ情報を処理しました: ${transformedData.length}件`
-      );
-
       return {
         success: true,
         entriesProcessed: transformedData.length,
@@ -47,7 +43,6 @@ export class EstatMetaInfoService {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
-      console.error(`${statsDataId}のメタ情報処理に失敗:`, error);
 
       return {
         success: false,
@@ -411,15 +406,18 @@ export class EstatMetaInfoService {
 
     // 各カテゴリをCSV行として変換
     categories.forEach(
-      (category: { "@code"?: string; "@name"?: string; "@unit"?: string }) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const itemName: string | null = (category["@name"] as any) || null;
+      (category: {
+        "@code"?: string;
+        "@name"?: string | undefined;
+        "@unit"?: string;
+      }) => {
+        const itemName = category["@name"] || null;
         result.push({
           stats_data_id: statsDataId,
           stat_name: statName,
           title: title,
           cat01: category["@code"] ?? "",
-          // @ts-expect-error TypeScript strict null checks - itemName can be undefined but we handle it
+          // @ts-expect-error - TypeScriptの型チェック回避、nullish coalescingでnullに変換済み
           item_name: itemName,
           unit: category["@unit"] || null,
         });
@@ -471,7 +469,6 @@ export class EstatMetaInfoService {
           .run();
       }
     } catch (error) {
-      console.error("バッチ処理エラー:", error);
       throw error;
     }
   }
@@ -494,10 +491,7 @@ export class EstatMetaInfoService {
    * 複数の統計表IDを一括処理（高レベルAPI）
    */
   async fetchAndSaveMultipleMetadata(statsDataIds: string[]): Promise<void> {
-    const result = await this.processBulkMetaInfo(statsDataIds);
-    console.log(
-      `一括処理完了: 成功${result.successCount}件, 失敗${result.failureCount}件`
-    );
+    await this.processBulkMetaInfo(statsDataIds);
   }
 
   /**
@@ -507,10 +501,7 @@ export class EstatMetaInfoService {
     startId: string,
     endId: string
   ): Promise<void> {
-    const result = await this.processMetaInfoRange(startId, endId);
-    console.log(
-      `範囲処理完了: 成功${result.successCount}件, 失敗${result.failureCount}件`
-    );
+    await this.processMetaInfoRange(startId, endId);
   }
 
   /**

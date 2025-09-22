@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { ChoroplethMap } from "@/components/estat/visualization";
 import EstatDataSummary from "../EstatDataSummary";
 import { SimpleYearSelector } from "@/components/estat/visualization";
-import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
 
 interface EstatMapViewProps {
@@ -15,7 +15,7 @@ export default function EstatMapView({ data }: EstatMapViewProps) {
   // EstatDataFormatterで変換
   const formattedData: FormattedEstatData | null = useMemo(() => {
     if (!data) return null;
-    return EstatDataFormatter.formatStatsData(data);
+    return EstatStatsDataService.formatStatsData(data);
   }, [data]);
 
   // 選択中の年次を管理
