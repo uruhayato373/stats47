@@ -35,27 +35,6 @@ export default function Sidebar() {
           ),
           isActive: true,
         },
-        {
-          href: "/estat/response?mode=map",
-          label: "コロプレス地図",
-          icon: (
-            <svg
-              className="size-3.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
-            </svg>
-          ),
-          isActive: false,
-        },
       ],
       estat: [
         {
@@ -126,6 +105,27 @@ export default function Sidebar() {
               <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
               <path d="M3 16h3a2 2 0 0 1 2 2v3" />
               <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
+            </svg>
+          ),
+          isActive: false,
+        },
+        {
+          href: "/estat/prefecture-ranking",
+          label: "都道府県ランキング",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
             </svg>
           ),
           isActive: false,
