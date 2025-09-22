@@ -6,7 +6,6 @@ import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { EstatMapView } from "@/components/estat/visualization";
 import EstatOverview from "./components/EstatOverview";
 import EstatCategoriesTable from "./components/EstatCategoriesTable";
-import EstatAreasTable from "./components/EstatAreasTable";
 import EstatYearsTable from "./components/EstatYearsTable";
 import EstatValuesTable from "./components/EstatValuesTable";
 import EstatRawData from "./components/EstatRawData";
@@ -23,7 +22,7 @@ export default function EstatDataDisplay({
   error,
 }: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<
-    "overview" | "categories" | "areas" | "years" | "values" | "map" | "raw"
+    "overview" | "categories" | "years" | "values" | "map" | "raw"
   >("overview");
 
   if (loading) {
@@ -83,7 +82,6 @@ export default function EstatDataDisplay({
           {[
             { id: "overview" as const, label: "概要", icon: Info },
             { id: "categories" as const, label: "カテゴリ", icon: BarChart3 },
-            { id: "areas" as const, label: "地域", icon: BarChart3 },
             { id: "years" as const, label: "年度", icon: BarChart3 },
             { id: "values" as const, label: "値", icon: BarChart3 },
             { id: "map" as const, label: "地図", icon: Map },
@@ -117,11 +115,6 @@ export default function EstatDataDisplay({
         {activeTab === "categories" && (
           <div className="p-4">
             <EstatCategoriesTable data={data} />
-          </div>
-        )}
-        {activeTab === "areas" && (
-          <div className="p-4">
-            <EstatAreasTable data={data} />
           </div>
         )}
         {activeTab === "years" && (
