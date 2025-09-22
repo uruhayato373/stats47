@@ -229,6 +229,41 @@ main {
   background-color: #f3f4f6 !important;
 }
 
+/* テーブルヘッダー用のグレー背景設定 */
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important;
+}
+
+.light .bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+/* テーブルヘッダー用のグレー800背景設定 */
+.dark .bg-gray-800 {
+  background-color: #1f2937 !important;
+}
+
+.light .bg-gray-800 {
+  background-color: #1f2937 !important;
+}
+
+/* テーブルヘッダー用のテキスト色設定 */
+.dark .text-gray-700 {
+  color: #d1d5db !important;
+}
+
+.light .text-gray-700 {
+  color: #374151 !important;
+}
+
+.dark .text-gray-200 {
+  color: #e5e7eb !important;
+}
+
+.light .text-gray-200 {
+  color: #e5e7eb !important;
+}
+
 
 /* ダークモードのボーダー */
 .dark .border-gray-200 {
@@ -237,6 +272,24 @@ main {
 
 .light .border-gray-200 {
   border-color: #e5e7eb !important;
+}
+
+/* テーブル用のより薄い枠線設定 */
+.dark .border-gray-700 {
+  border-color: #374151 !important;
+}
+
+.light .border-gray-700 {
+  border-color: #d1d5db !important;
+}
+
+/* テーブル用のgray-500枠線設定 */
+.dark .border-gray-500 {
+  border-color: #6b7280 !important;
+}
+
+.light .border-gray-500 {
+  border-color: #6b7280 !important;
 }
 
 /* ダークモードのテキスト */

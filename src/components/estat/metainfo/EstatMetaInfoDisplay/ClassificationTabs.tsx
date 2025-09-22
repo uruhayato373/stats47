@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import PaginatedTable from "./PaginatedTable";
 
 // 安全にレンダリングするためのヘルパー関数
@@ -55,74 +56,24 @@ export default function ClassificationTabs({
   classObjs,
   metaInfoId,
 }: ClassificationTabsProps) {
-  const [activeTab, setActiveTab] = useState(0);
-
-  // metaInfoIdが変更されたときにタブをリセット
-  React.useEffect(() => {
-    setActiveTab(0);
-  }, [metaInfoId]);
-
   if (!classObjs || classObjs.length === 0) return null;
 
-  // タブのラベルを決定（@idに基づいて分類）
-  const getTabLabel = (classObj: {
-    "@id": string;
-    "@name": string;
-    CLASS?: unknown;
-  }) => {
-    const id = classObj["@id"];
-    if (id === "cat01") return "カテゴリ";
-    if (id === "area") return "地域";
-    if (id === "time") return "調査年";
-    return safeRender(classObj["@name"]);
+  // カテゴリデータのみを取得
+  const categoryData = classObjs.find(obj => obj["@id"] === "cat01");
+
+  const getCategoryTableData = (classObj: typeof categoryData) => {
+    if (!classObj || !classObj.CLASS) return [];
+    return Array.isArray(classObj.CLASS) ? classObj.CLASS : [classObj.CLASS];
   };
 
-  // 各タブのデータを準備
-  const tabs = classObjs.map((classObj) => {
-    const tableData = Array.isArray(classObj.CLASS)
-      ? classObj.CLASS
-      : classObj.CLASS
-      ? [classObj.CLASS]
-      : [];
-
-    return {
-      label: getTabLabel(classObj),
-      data: tableData,
-      count: tableData.length,
-    };
-  });
+  // カテゴリデータがない場合は何も表示しない
+  if (!categoryData) return null;
 
   return (
-    <div className="space-y-4">
-      {/* タブナビゲーション */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
-          {tabs.map((tab, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === index
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* アクティブなタブのコンテンツ */}
-      <div className="min-h-[200px]">
-        {tabs[activeTab] && (
-          <PaginatedTable
-            data={tabs[activeTab].data}
-            itemsPerPage={15}
-            metaInfoId={metaInfoId}
-          />
-        )}
-      </div>
-    </div>
+    <PaginatedTable
+      data={getCategoryTableData(categoryData)}
+      itemsPerPage={15}
+      metaInfoId={metaInfoId}
+    />
   );
 }

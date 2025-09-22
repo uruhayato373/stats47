@@ -6,6 +6,7 @@ import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
 import ClassificationTabs from "./ClassificationTabs";
 import JsonDisplay from "./JsonDisplay";
+import AreaTimeSelectors from "./AreaTimeSelectors";
 
 interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
@@ -196,6 +197,22 @@ export default function EstatMetaInfoDisplay({
   // メタ情報の一意IDを生成（統計表IDを使用）
   const metaInfoId = TABLE_INF?.["@id"];
 
+  // 統計表基本情報のテーブルデータを準備
+  const tableData = [
+    {
+      label: "統計表題名",
+      value: safeRender(TABLE_INF.TITLE),
+    },
+    {
+      label: "政府統計名",
+      value: safeRender(TABLE_INF.STAT_NAME),
+    },
+    {
+      label: "作成機関",
+      value: safeRender(TABLE_INF.GOV_ORG),
+    },
+  ];
+
   return (
     <div className="space-y-6">
       {/* 保存ボタンとステータス */}
@@ -274,71 +291,51 @@ export default function EstatMetaInfoDisplay({
       <div className="mt-6">
         {activeMainTab === 0 && (
           <div className="space-y-6">
-            {/* 統計表基本情報 - コンパクトなテキスト表示 */}
-            <div>
-              <h3 className={styles.heading.md}>統計表基本情報</h3>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tbody className="bg-white dark:bg-neutral-800 divide-y divide-gray-200 dark:divide-neutral-700">
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        統計表題名
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.TITLE)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        政府統計名
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.STAT_NAME)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        作成機関
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.GOV_ORG)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        調査年月
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.SURVEY_DATE)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        公開日
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.OPEN_DATE)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-neutral-200 bg-gray-50 dark:bg-neutral-700 w-32">
-                        更新日
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-800 dark:text-neutral-100">
-                        {safeRender(TABLE_INF.UPDATED_DATE)}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+            {/* 基本情報と地域・年次セレクターを横並びに配置 */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* 統計表基本情報 */}
+              <div className="lg:col-span-2">
+                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
+                  <div className="space-y-0">
+                    {tableData.map((item, index) => (
+                      <div
+                        key={index}
+                        className={`px-4 py-3 ${
+                          index !== tableData.length - 1
+                            ? "border-b border-gray-200 dark:border-neutral-600"
+                            : ""
+                        }`}
+                      >
+                        <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          {item.label}
+                        </div>
+                        <div className="text-base text-gray-900 dark:text-gray-100">
+                          {item.value || "-"}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              {/* 地域・年次セレクター */}
+              {CLASS_INF &&
+                CLASS_INF.CLASS_OBJ &&
+                CLASS_INF.CLASS_OBJ.length > 0 && (
+                  <div className="lg:col-span-1">
+                    <AreaTimeSelectors
+                      classObjs={CLASS_INF.CLASS_OBJ}
+                      metaInfoId={metaInfoId}
+                    />
+                  </div>
+                )}
             </div>
 
-            {/* 分類情報 */}
+            {/* カテゴリ情報 */}
             {CLASS_INF &&
               CLASS_INF.CLASS_OBJ &&
               CLASS_INF.CLASS_OBJ.length > 0 && (
                 <div>
-                  <h3 className={styles.heading.md}>分類情報</h3>
                   <ClassificationTabs
                     classObjs={CLASS_INF.CLASS_OBJ}
                     metaInfoId={metaInfoId}
