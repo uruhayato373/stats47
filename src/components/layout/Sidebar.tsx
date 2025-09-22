@@ -83,8 +83,8 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat/response",
-          label: "レスポンス情報",
+          href: "/estat/statsdata",
+          label: "統計データ",
           icon: (
             <svg
               className="size-3.5"
