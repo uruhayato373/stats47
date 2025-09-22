@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
   PrefectureRankingForm,
-  PrefectureRankingDisplay,
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/estat/prefecture-ranking";
@@ -19,13 +18,15 @@ interface PrefectureRankingParams {
 }
 
 interface SavedMetadataItem {
-  id: string;
-  statsDataId: string;
+  id: number;
+  stats_data_id: string;
+  stat_name: string;
   title: string;
-  statName: string;
-  govOrg: string;
-  surveyDate: string;
-  savedAt: string;
+  cat01?: string;
+  item_name?: string;
+  unit?: string;
+  updated_at: string;
+  created_at: string;
 }
 
 export default function PrefectureRankingPage() {
@@ -122,7 +123,7 @@ export default function PrefectureRankingPage() {
     setSelectedMetadata(item);
     // 選択されたデータで新しい検索を実行
     const params: PrefectureRankingParams = {
-      statsDataId: item.statsDataId,
+      statsDataId: item.stats_data_id,
       // D1データベースには詳細なフィルター情報がないため、統計表IDのみで検索
     };
     handleFetchData(params);
@@ -155,12 +156,6 @@ export default function PrefectureRankingPage() {
                 loading={loading}
               />
 
-              {/* データ表示エリア */}
-              <PrefectureRankingDisplay
-                data={apiResponse}
-                loading={loading}
-                error={error}
-              />
             </div>
           </div>
 
