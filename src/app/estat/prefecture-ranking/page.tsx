@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { RefreshCw, Map, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
@@ -19,24 +18,14 @@ interface PrefectureRankingParams {
   timeCode?: string;
 }
 
-interface SavedRankingDataItem {
+interface SavedMetadataItem {
   id: string;
   statsDataId: string;
   title: string;
   statName: string;
   govOrg: string;
-  categoryCode?: string;
-  categoryName?: string;
-  areaCode?: string;
-  areaName?: string;
-  timeCode?: string;
-  timeName?: string;
+  surveyDate: string;
   savedAt: string;
-  rankingData?: {
-    highest: { prefecture: string; value: string };
-    lowest: { prefecture: string; value: string };
-    average: string;
-  };
 }
 
 export default function PrefectureRankingPage() {
@@ -45,12 +34,10 @@ export default function PrefectureRankingPage() {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentParams, setCurrentParams] = useState<PrefectureRankingParams | null>(
-    null
-  );
-  const [selectedRankingData, setSelectedRankingData] = useState<SavedRankingDataItem | null>(
-    null
-  );
+  const [currentParams, setCurrentParams] =
+    useState<PrefectureRankingParams | null>(null);
+  const [selectedMetadata, setSelectedMetadata] =
+    useState<SavedMetadataItem | null>(null);
 
   const handleFetchData = async (params: PrefectureRankingParams) => {
     setLoading(true);
@@ -131,14 +118,12 @@ export default function PrefectureRankingPage() {
     }
   };
 
-  const handleDataSelect = (item: SavedRankingDataItem) => {
-    setSelectedRankingData(item);
+  const handleDataSelect = (item: SavedMetadataItem) => {
+    setSelectedMetadata(item);
     // 選択されたデータで新しい検索を実行
     const params: PrefectureRankingParams = {
       statsDataId: item.statsDataId,
-      categoryCode: item.categoryCode,
-      areaCode: item.areaCode,
-      timeCode: item.timeCode,
+      // D1データベースには詳細なフィルター情報がないため、統計表IDのみで検索
     };
     handleFetchData(params);
   };
@@ -165,7 +150,10 @@ export default function PrefectureRankingPage() {
             {/* メインコンテンツ */}
             <div className="p-4 md:p-6 space-y-6">
               {/* データ取得フォーム */}
-              <PrefectureRankingForm onSubmit={handleFetchData} loading={loading} />
+              <PrefectureRankingForm
+                onSubmit={handleFetchData}
+                loading={loading}
+              />
 
               {/* データ表示エリア */}
               <PrefectureRankingDisplay
