@@ -31,19 +31,24 @@ export default function PrefectureRankingSidebar({
   const [savedData, setSavedData] = useState<SavedMetadataItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedStatsId, setSelectedStatsId] = useState<string>("");
+  const [itemNames, setItemNames] = useState<string[]>([]);
+  const [itemNamesLoading, setItemNamesLoading] = useState(false);
 
   const fetchSavedData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/estat/metainfo/saved");
+      // 新しい効率的なAPIエンドポイントを使用
+      const response = await fetch("/api/estat/metainfo/stats-list?limit=100");
       if (response.ok) {
         const data = (await response.json()) as { items?: SavedMetadataItem[] };
+        console.log("Fetched stats list:", data.items); // デバッグ用ログ
         setSavedData(data.items || []);
       } else {
+        console.error("Failed to fetch stats list: HTTP", response.status);
         setSavedData([]);
       }
     } catch (error) {
-      console.error("Failed to fetch saved data:", error);
+      console.error("Failed to fetch stats list:", error);
       setSavedData([]);
     } finally {
       setLoading(false);
@@ -53,6 +58,29 @@ export default function PrefectureRankingSidebar({
   useEffect(() => {
     fetchSavedData();
   }, []);
+
+  const fetchItemNames = async (statsDataId: string) => {
+    setItemNamesLoading(true);
+    try {
+      const response = await fetch(`/api/estat/metainfo/items?statsDataId=${statsDataId}`);
+      if (response.ok) {
+        const data = await response.json() as { itemNames?: string[] };
+        console.log("Fetched item names:", data.itemNames); // デバッグ用ログ
+        setItemNames(data.itemNames || []);
+      } else {
+        // エラーレスポンスの詳細を取得
+        const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+        console.error("Failed to fetch item names: HTTP", response.status);
+        console.error("Error details:", errorData);
+        setItemNames([]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch item names:", error);
+      setItemNames([]);
+    } finally {
+      setItemNamesLoading(false);
+    }
+  };
 
 
   const handleStatsIdChange = (statsDataId: string) => {
@@ -65,6 +93,10 @@ export default function PrefectureRankingSidebar({
       if (selectedItem && onDataSelect) {
         onDataSelect(selectedItem);
       }
+      // 項目名リストを取得
+      fetchItemNames(statsDataId);
+    } else {
+      setItemNames([]);
     }
   };
 
@@ -104,11 +136,11 @@ export default function PrefectureRankingSidebar({
         >
           <option value="">統計表を選択してください</option>
           {savedData
-            .filter((item) => item.stats_data_id) // undefined/nullの項目を除外
-            .sort((a, b) => a.stats_data_id.localeCompare(b.stats_data_id))
+            .filter((item) => item.stats_data_id && item.stats_data_id.trim() !== '') // 空文字もチェック
+            .sort((a, b) => (a.stats_data_id || '').localeCompare(b.stats_data_id || ''))
             .map((item) => (
               <option key={item.id} value={item.stats_data_id}>
-                {item.stats_data_id} - {item.title}
+                {item.stats_data_id} - {item.title || '(タイトルなし)'}
               </option>
             ))}
         </select>
@@ -146,6 +178,45 @@ export default function PrefectureRankingSidebar({
               );
             })()}
           </div>
+        </div>
+      )}
+
+      {/* 項目名リストセクション */}
+      {selectedStatsId && (
+        <div className="border-b border-gray-200 dark:border-neutral-700 p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Info className="w-4 h-4 text-blue-500" />
+            <span className="font-medium text-gray-800 dark:text-neutral-200">項目名一覧</span>
+            {itemNamesLoading && (
+              <RefreshCw className="w-4 h-4 animate-spin text-blue-500" />
+            )}
+          </div>
+
+          {itemNamesLoading ? (
+            <div className="text-xs text-gray-500 dark:text-neutral-400 text-center py-2">
+              読み込み中...
+            </div>
+          ) : itemNames.length > 0 ? (
+            <div className="space-y-1 max-h-48 overflow-y-auto">
+              {itemNames.map((itemName, index) => (
+                <div
+                  key={index}
+                  className="p-2 bg-gray-50 rounded text-xs dark:bg-neutral-700"
+                >
+                  <div className="text-gray-900 dark:text-neutral-100">
+                    {itemName}
+                  </div>
+                </div>
+              ))}
+              <div className="text-xs text-gray-500 dark:text-neutral-400 text-center pt-2">
+                合計 {itemNames.length} 項目
+              </div>
+            </div>
+          ) : (
+            <div className="text-xs text-gray-500 dark:text-neutral-400 text-center py-4">
+              項目名が見つかりません
+            </div>
+          )}
         </div>
       )}
     </div>

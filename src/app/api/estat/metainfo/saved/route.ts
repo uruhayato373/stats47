@@ -9,56 +9,33 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
     const search = searchParams.get('search') || '';
 
-    // Cloudflare D1データベースに直接接続
-    const db = await createD1Database() as any;
-    const metaInfoService = new EstatMetaInfoService(db);
+    console.log("=== SAVED METADATA API (LEGACY) ===");
+    console.log("Note: Consider using /api/estat/metainfo/stats-list for better performance");
 
-    const offset = (page - 1) * limit;
-
-    let results;
+    // 新しい効率的なAPIエンドポイントにリダイレクト
+    const newApiUrl = new URL('/api/estat/metainfo/stats-list', request.url);
+    newApiUrl.searchParams.set('page', page.toString());
+    newApiUrl.searchParams.set('limit', limit.toString());
     if (search) {
-      results = await metaInfoService.searchMetaInfo(search, {
-        searchType: "full",
-        limit,
-        offset,
-      });
-    } else {
-      const statsList = await metaInfoService.getStatsList({
-        limit,
-        offset,
-        orderBy: "last_updated"
-      });
-      results = {
-        entries: statsList,
-        totalCount: statsList.length,
-      };
+      newApiUrl.searchParams.set('search', search);
     }
 
-    const items = results.entries.map((item: any) => ({
-      id: item.stats_data_id,
-      statsDataId: item.stats_data_id,
-      title: item.title,
-      statName: item.stat_name,
-      govOrg: "統計庁", // D1データベースにgovOrgがない場合のデフォルト値
-      surveyDate: item.last_updated,
-      savedAt: item.last_updated,
-    }));
+    console.log("Redirecting to:", newApiUrl.pathname + newApiUrl.search);
 
-    const response = {
-      items,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil((results.totalCount || items.length) / limit),
-        totalItems: results.totalCount || items.length,
-        itemsPerPage: limit,
-      },
+    // 内部的に新しいAPIを呼び出し
+    const response = await fetch(newApiUrl.toString());
+    const data = await response.json();
+
+    // レスポンス形式を既存のクライアントに合わせて調整
+    return NextResponse.json({
+      ...data,
       meta: {
-        executedAt: new Date().toISOString(),
-        searchQuery: search,
-      },
-    };
+        ...data.meta,
+        legacyEndpoint: true,
+        redirectedFrom: "/api/estat/metainfo/saved",
+      }
+    });
 
-    return NextResponse.json(response);
   } catch (error) {
     console.error("Saved metadata fetch error:", error);
     return NextResponse.json(

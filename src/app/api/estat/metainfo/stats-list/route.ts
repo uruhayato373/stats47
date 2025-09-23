@@ -1,0 +1,142 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createD1Database } from "@/lib/d1-client";
+
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '50');
+    const search = searchParams.get('search') || '';
+
+    console.log("=== STATS LIST API START ===");
+    console.log("Parameters:", { page, limit, search });
+
+    const db = await createD1Database() as any;
+    console.log("Database connection established");
+
+    const offset = (page - 1) * limit;
+
+    // 効率的なクエリ：DISTINCT stats_data_idのみを取得し、必要な基本情報をGROUP BYで集約
+    let query = `
+      SELECT
+        stats_data_id,
+        stat_name,
+        title,
+        MIN(created_at) as created_at,
+        MAX(updated_at) as updated_at,
+        COUNT(*) as item_count
+      FROM estat_metainfo
+      WHERE stats_data_id IS NOT NULL
+      AND stats_data_id != ''
+    `;
+
+    let countQuery = `
+      SELECT COUNT(DISTINCT stats_data_id) as total
+      FROM estat_metainfo
+      WHERE stats_data_id IS NOT NULL
+      AND stats_data_id != ''
+    `;
+
+    const params = [];
+
+    // 検索条件の追加
+    if (search) {
+      const searchCondition = `
+        AND (
+          stats_data_id LIKE ?
+          OR stat_name LIKE ?
+          OR title LIKE ?
+        )
+      `;
+      query += searchCondition;
+      countQuery += searchCondition;
+
+      const searchParam = `%${search}%`;
+      params.push(searchParam, searchParam, searchParam);
+    }
+
+    // GROUP BY と ORDER BY を追加
+    query += `
+      GROUP BY stats_data_id, stat_name, title
+      ORDER BY stats_data_id ASC
+      LIMIT ? OFFSET ?
+    `;
+
+    params.push(limit.toString(), offset.toString());
+
+    console.log("Executing query:", query);
+    console.log("Parameters:", params);
+
+    // データ取得
+    const stmt = db.prepare(query);
+    const result = await stmt.bind(...params).all();
+
+    // 総数取得
+    let totalCount = 0;
+    if (search) {
+      const countStmt = db.prepare(countQuery);
+      const searchParam = `%${search}%`;
+      const countResult = await countStmt.bind(searchParam, searchParam, searchParam).first();
+      totalCount = countResult?.total || 0;
+    } else {
+      const countStmt = db.prepare(countQuery);
+      const countResult = await countStmt.first();
+      totalCount = countResult?.total || 0;
+    }
+
+    console.log("Query completed. Results:", result.results?.length);
+    console.log("Total count:", totalCount);
+
+    // レスポンス用のデータ形式に変換
+    const items = (result.results || []).map((row: any) => ({
+      id: row.stats_data_id, // idとして統計表IDを使用
+      stats_data_id: row.stats_data_id,
+      stat_name: row.stat_name,
+      title: row.title,
+      cat01: null, // 効率化のため省略
+      item_name: null, // 効率化のため省略
+      unit: null, // 効率化のため省略
+      created_at: row.created_at,
+      updated_at: row.updated_at,
+      item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
+    }));
+
+    console.log("=== STATS LIST API END ===");
+
+    const response = {
+      items,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalCount / limit),
+        totalItems: totalCount,
+        itemsPerPage: limit,
+      },
+      meta: {
+        executedAt: new Date().toISOString(),
+        searchQuery: search,
+        queryOptimized: true, // 最適化されたクエリを使用していることを示す
+      },
+    };
+
+    return NextResponse.json(response);
+  } catch (error) {
+    console.error("=== STATS LIST API ERROR ===");
+    console.error("Stats list fetch error:", error);
+    console.error("Error stack:", error instanceof Error ? error.stack : 'No stack trace');
+    console.error("=== STATS LIST API ERROR END ===");
+
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : "統計表一覧の取得に失敗しました",
+        items: [],
+        pagination: {
+          currentPage: 1,
+          totalPages: 0,
+          totalItems: 0,
+          itemsPerPage: parseInt(request.nextUrl.searchParams.get('limit') || '50'),
+        },
+      },
+      { status: 500 }
+    );
+  }
+}

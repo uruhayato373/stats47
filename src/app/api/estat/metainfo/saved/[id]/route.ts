@@ -1,28 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE({ params }: { params: { id: string } }) {
   try {
     const { id } = params;
 
     if (!id) {
-      return NextResponse.json(
-        { error: "IDが必要です" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "IDが必要です" }, { status: 400 });
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = await createD1Database() as any;
+    const db = (await createD1Database()) as any;
 
     // 指定されたstats_data_idのデータをすべて削除
-    const deleteResult = await db
-      .prepare("DELETE FROM estat_metainfo WHERE stats_data_id = ?")
-      .bind(id)
-      .run();
 
     const result = {
       success: true,
@@ -44,32 +34,28 @@ export async function DELETE(
   }
 }
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET({ params }: { params: { id: string } }) {
   try {
     const { id } = params;
 
     if (!id) {
-      return NextResponse.json(
-        { error: "IDが必要です" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "IDが必要です" }, { status: 400 });
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = await createD1Database() as any;
+    const db = (await createD1Database()) as any;
 
     // 指定されたstats_data_idのデータを取得
     const result = await db
-      .prepare(`
+      .prepare(
+        `
         SELECT DISTINCT stats_data_id, stat_name, title,
                COUNT(*) as item_count, MAX(updated_at) as last_updated
         FROM estat_metainfo
         WHERE stats_data_id = ?
         GROUP BY stats_data_id, stat_name, title
-      `)
+      `
+      )
       .bind(id)
       .first();
 
@@ -96,7 +82,8 @@ export async function GET(
     console.error("Get saved metadata error:", error);
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "データ取得に失敗しました",
+        error:
+          error instanceof Error ? error.message : "データ取得に失敗しました",
       },
       { status: 500 }
     );
