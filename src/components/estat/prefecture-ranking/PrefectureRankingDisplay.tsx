@@ -7,6 +7,7 @@ import { ChoroplethMap } from "@/components/estat/visualization";
 import { TimeSelector } from "@/components/common/TimeSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
+import ColorSchemeSelector, { MapVisualizationOptions } from "@/components/common/ColorSchemeSelector";
 
 interface PrefectureRankingParams {
   statsDataId: string;
@@ -36,6 +37,12 @@ export default function PrefectureRankingDisplay({
 
   // 選択中の年次を管理
   const [selectedYear, setSelectedYear] = useState<string>("");
+
+  // 地図可視化オプションを管理
+  const [mapOptions, setMapOptions] = useState<MapVisualizationOptions>({
+    colorScheme: 'interpolateBlues',
+    divergingMidpoint: 'zero'
+  });
 
   // formattedDataが変更されたときに最初の年度を選択
   useEffect(() => {
@@ -160,6 +167,13 @@ export default function PrefectureRankingDisplay({
             className="mb-4"
           />
 
+          {/* カラースキーマセレクター */}
+          <ColorSchemeSelector
+            options={mapOptions}
+            onOptionsChange={setMapOptions}
+            className="mb-4"
+          />
+
           {/* データサマリー */}
           <EstatDataSummary
             totalCount={summary.totalCount}
@@ -178,6 +192,7 @@ export default function PrefectureRankingDisplay({
             width={800}
             height={600}
             className="w-full max-w-full"
+            options={mapOptions}
           />
         </div>
       </div>

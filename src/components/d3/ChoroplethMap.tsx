@@ -13,6 +13,11 @@ import {
 } from "geojson";
 import { FormattedValue } from "@/lib/estat/types";
 
+export interface MapVisualizationOptions {
+  colorScheme: string;
+  divergingMidpoint: "zero" | "mean" | "median" | number;
+}
+
 // 都道府県マッピング（1から47まで）
 const PREFECTURE_MAP: { [key: string]: string } = {
   "01": "北海道",
@@ -74,13 +79,20 @@ interface ChoroplethMapProps {
   width?: number;
   height?: number;
   className?: string;
+  options?: MapVisualizationOptions;
 }
+
+const defaultOptions: MapVisualizationOptions = {
+  colorScheme: "interpolateBlues",
+  divergingMidpoint: "zero",
+};
 
 export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   data,
   width = 800,
   height = 600,
   className = "",
+  options = defaultOptions,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -174,10 +186,57 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
         }
 
         const [minValue, maxValue] = d3.extent(validValues) as [number, number];
-        const colorScale = d3
-          .scaleSequential()
-          .domain([minValue, maxValue])
-          .interpolator(d3.interpolateBlues);
+
+        // カラースキーマタイプを判定
+        const isDivergingScheme =
+          options.colorScheme.includes("RdBu") ||
+          options.colorScheme.includes("RdYlBu") ||
+          options.colorScheme.includes("RdYlGn") ||
+          options.colorScheme.includes("Spectral") ||
+          options.colorScheme.includes("BrBG") ||
+          options.colorScheme.includes("PiYG") ||
+          options.colorScheme.includes("PRGn") ||
+          options.colorScheme.includes("RdGy");
+
+        let colorScale: any;
+
+        if (isDivergingScheme) {
+          // ダイバージングスケールの中央値を計算
+          let midpoint: number;
+          switch (options.divergingMidpoint) {
+            case "zero":
+              midpoint = 0;
+              break;
+            case "mean":
+              midpoint =
+                validValues.reduce((a, b) => a + b, 0) / validValues.length;
+              break;
+            case "median":
+              const sorted = [...validValues].sort((a, b) => a - b);
+              midpoint = sorted[Math.floor(sorted.length / 2)];
+              break;
+            default:
+              midpoint =
+                typeof options.divergingMidpoint === "number"
+                  ? options.divergingMidpoint
+                  : 0;
+          }
+
+          colorScale = d3
+            .scaleDiverging()
+            .domain([minValue, midpoint, maxValue])
+            .interpolator(
+              (d3 as any)[options.colorScheme] || d3.interpolateBlues
+            );
+        } else {
+          // シーケンシャルスケール
+          colorScale = d3
+            .scaleSequential()
+            .domain([minValue, maxValue])
+            .interpolator(
+              (d3 as any)[options.colorScheme] || d3.interpolateBlues
+            );
+        }
 
         // 都道府県を描画
         svg
@@ -229,27 +288,35 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             const value = dataPoint?.displayValue || "データなし";
             const unit = dataPoint?.unit ? ` ${dataPoint.unit}` : "";
 
-            const tooltipData = {
-              prefecture: prefName,
-              value: `${value}${unit}`,
-              x: event.pageX,
-              y: event.pageY,
-            };
-            tooltipRef.current = tooltipData;
-            setHoveredData(tooltipData);
+            // SVGコンテナの位置を取得
+            const svgRect = svgRef.current?.getBoundingClientRect();
+            if (svgRect) {
+              const tooltipData = {
+                prefecture: prefName,
+                value: `${value}`,
+                x: event.clientX - svgRect.left,
+                y: event.clientY - svgRect.top,
+              };
+              tooltipRef.current = tooltipData;
+              setHoveredData(tooltipData);
+            }
 
             // ハイライト効果
             d3.select(this).attr("stroke-width", 2).attr("stroke", "#333");
           })
           .on("mousemove", function (event) {
             if (tooltipRef.current) {
-              const tooltipData = {
-                ...tooltipRef.current,
-                x: event.pageX,
-                y: event.pageY,
-              };
-              tooltipRef.current = tooltipData;
-              setHoveredData(tooltipData);
+              // SVGコンテナの位置を取得
+              const svgRect = svgRef.current?.getBoundingClientRect();
+              if (svgRect) {
+                const tooltipData = {
+                  ...tooltipRef.current,
+                  x: event.clientX - svgRect.left,
+                  y: event.clientY - svgRect.top,
+                };
+                tooltipRef.current = tooltipData;
+                setHoveredData(tooltipData);
+              }
             }
           })
           .on("mouseout", function () {
@@ -273,7 +340,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     };
 
     loadMapData();
-  }, [data, width, height]); // hoveredDataを依存配列から削除
+  }, [data, width, height, options]); // optionsを依存配列に追加
 
   return (
     <div className={`relative ${className}`}>
@@ -304,10 +371,12 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
       {hoveredData && (
         <div
-          className="absolute pointer-events-none bg-black text-white text-xs px-2 py-1 rounded shadow-lg z-10"
+          className="absolute pointer-events-none bg-black text-white text-xs px-2 py-1 rounded shadow-lg z-10 whitespace-nowrap"
           style={{
-            left: hoveredData.x + 10,
-            top: hoveredData.y - 10,
+            left: Math.min(hoveredData.x + 10, width - 120), // コンテナ幅を考慮
+            top: Math.max(hoveredData.y - 40, 10), // 上端を考慮
+            transform:
+              hoveredData.x > width - 120 ? "translateX(-100%)" : "none", // 右端で反転
           }}
         >
           <div className="font-medium">{hoveredData.prefecture}</div>
