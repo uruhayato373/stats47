@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { AlertTriangle, Map, Database } from "lucide-react";
 import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/estat/visualization";
@@ -26,24 +26,43 @@ export default function PrefectureRankingDisplay({
   }, [data]);
 
   // 選択中の年次を管理
-  const [selectedYear, setSelectedYear] = useState<string>(() => {
-    if (!formattedData || formattedData.years.length === 0) return "";
-    const sortedYears = [...formattedData.years].sort(
-      (a, b) => parseInt(b.timeCode) - parseInt(a.timeCode)
-    );
-    return sortedYears[0].timeCode;
-  });
+  const [selectedYear, setSelectedYear] = useState<string>("");
+
+  // formattedDataが変更されたときに最初の年度を選択
+  useEffect(() => {
+    if (formattedData && formattedData.years.length > 0) {
+      const sortedYears = [...formattedData.years].sort(
+        (a, b) => parseInt(b.timeCode) - parseInt(a.timeCode)
+      );
+      setSelectedYear(sortedYears[0].timeCode);
+    } else {
+      setSelectedYear("");
+    }
+  }, [formattedData]);
 
   // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外）
   const filteredData = useMemo(() => {
     if (!formattedData || !selectedYear) return formattedData?.values || [];
 
-    return formattedData.values.filter(
+    // デバッグ: データの構造を確認
+    const yearData = formattedData.values.filter(
+      (value) => value.timeCode === selectedYear
+    );
+    console.log("Year data count:", yearData.length);
+    console.log("Sample year data:", yearData.slice(0, 3));
+
+    const areaCodes = [...new Set(yearData.map((v) => v.areaCode))];
+    console.log("Area codes in year data:", areaCodes.slice(0, 10));
+
+    const filtered = formattedData.values.filter(
       (value) => value.timeCode === selectedYear && value.areaCode !== "00000"
     );
-  }, [formattedData, selectedYear]);
 
-  console.log(filteredData);
+    console.log("Filtered count:", filtered.length);
+    console.log("Sample filtered data:", filtered.slice(0, 3));
+
+    return filtered;
+  }, [formattedData, selectedYear]);
 
   // 統計情報を計算
   const validDataPoints = filteredData.filter(

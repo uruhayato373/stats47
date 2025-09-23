@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import InputField from "@/components/common/InputField";
 import { useStyles } from "@/hooks/useStyles";
@@ -8,6 +8,7 @@ import { useStyles } from "@/hooks/useStyles";
 interface PrefectureRankingParams {
   statsDataId: string;
   categoryCode?: string;
+  timeCode?: string;
 }
 
 interface PrefectureRankingFormProps {
@@ -18,6 +19,7 @@ interface PrefectureRankingFormProps {
 type FormData = {
   statsDataId: string;
   categoryCode: string;
+  timeCode: string;
 };
 
 export default function PrefectureRankingForm({
@@ -28,7 +30,10 @@ export default function PrefectureRankingForm({
   const [formData, setFormData] = useState<FormData>({
     statsDataId: "",
     categoryCode: "",
+    timeCode: "",
   });
+
+  // 年度管理は親コンポーネントで行う
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,12 +43,15 @@ export default function PrefectureRankingForm({
     }));
   };
 
+  // 年度変更は親コンポーネントで管理
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params: PrefectureRankingParams = {
       statsDataId: formData.statsDataId,
       ...(formData.categoryCode && { categoryCode: formData.categoryCode }),
+      ...(formData.timeCode && { timeCode: formData.timeCode }),
     };
 
     onSubmit(params);
@@ -53,6 +61,7 @@ export default function PrefectureRankingForm({
     setFormData({
       statsDataId: "",
       categoryCode: "",
+      timeCode: "",
     });
   };
 
@@ -68,48 +77,61 @@ export default function PrefectureRankingForm({
       </div>
 
       <form onSubmit={handleSubmit} className="p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <InputField
-            name="statsDataId"
-            label="統計表ID *"
-            placeholder="例: 0003448368"
-            description="必須項目"
-            value={formData.statsDataId}
-            onChange={handleInputChange}
-            required
-          />
-          <InputField
-            name="categoryCode"
-            label="カテゴリコード"
-            placeholder="例: 01"
-            description="例: 01,02"
-            value={formData.categoryCode}
-            onChange={handleInputChange}
-          />
-        </div>
+        <div className="space-y-4">
+          {/* 入力フィールド */}
+          <div className="flex items-end gap-4">
+            <div className="flex-1">
+              <InputField
+                name="statsDataId"
+                label="統計表ID *"
+                placeholder="例: 0003448368"
+                description="必須項目"
+                value={formData.statsDataId}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <InputField
+                name="categoryCode"
+                label="カテゴリコード"
+                placeholder="例: 01"
+                description="例: 01,02"
+                value={formData.categoryCode}
+                onChange={handleInputChange}
+              />
+            </div>
 
-        {/* ボタン */}
-        <div className="flex gap-2 pt-6">
-          <button
-            type="submit"
-            disabled={loading || !formData.statsDataId}
-            className="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Search className="w-4 h-4" />
-            <span className={styles.text.secondary}>
-              {loading ? "取得中..." : "データ取得・地図表示"}
-            </span>
-          </button>
+            {/* ボタン */}
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                disabled={loading || !formData.statsDataId}
+                className="relative group p-2 rounded-lg border border-transparent bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                title={loading ? "取得中..." : "データ取得・地図表示"}
+              >
+                <Search className="w-5 h-5" />
+                {/* ツールチップ */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  {loading ? "取得中..." : "データ取得・地図表示"}
+                </div>
+              </button>
 
-          <button
-            type="button"
-            onClick={handleReset}
-            disabled={loading}
-            className="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span className={styles.text.secondary}>リセット</span>
-          </button>
+              <button
+                type="button"
+                onClick={handleReset}
+                disabled={loading}
+                className="relative group p-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+                title="リセット"
+              >
+                <RotateCcw className="w-5 h-5" />
+                {/* ツールチップ */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  リセット
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

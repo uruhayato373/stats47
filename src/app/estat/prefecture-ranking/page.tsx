@@ -14,6 +14,7 @@ import { EstatStatsDataResponse } from "@/lib/estat/types";
 interface PrefectureRankingParams {
   statsDataId: string;
   categoryCode?: string;
+  timeCode?: string;
 }
 
 interface SavedMetadataItem {
@@ -38,6 +39,7 @@ export default function PrefectureRankingPage() {
     useState<PrefectureRankingParams | null>(null);
   const [selectedMetadata, setSelectedMetadata] =
     useState<SavedMetadataItem | null>(null);
+  // 年度管理はPrefectureRankingDisplayで行う
 
   const handleFetchData = async (params: PrefectureRankingParams) => {
     setLoading(true);
@@ -120,7 +122,7 @@ export default function PrefectureRankingPage() {
 
   const handleDataSelect = (item: SavedMetadataItem) => {
     setSelectedMetadata(item);
-    // 選択されたデータで新しい検索を実行
+    // 選択されたデータで新しい検索を実行（年度情報はhandleFetchDataで取得）
     const params: PrefectureRankingParams = {
       statsDataId: item.stats_data_id,
       // D1データベースには詳細なフィルター情報がないため、統計表IDのみで検索
