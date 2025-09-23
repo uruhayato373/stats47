@@ -40,39 +40,45 @@ export default function PrefectureRankingDisplay({
     }
   }, [formattedData]);
 
-  // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外）
+  // 選択された年次でデータをフィルタリング（都道府県データのみ）
   const filteredData = useMemo(() => {
     if (!formattedData || !selectedYear) return formattedData?.values || [];
 
-    // デバッグ: データの構造を確認
-    const yearData = formattedData.values.filter(
-      (value) => value.timeCode === selectedYear
-    );
-    console.log("Year data count:", yearData.length);
-    console.log("Sample year data:", yearData.slice(0, 3));
-
-    const areaCodes = [...new Set(yearData.map((v) => v.areaCode))];
-    console.log("Area codes in year data:", areaCodes.slice(0, 10));
-
-    const filtered = formattedData.values.filter(
-      (value) => value.timeCode === selectedYear && value.areaCode !== "00000"
+    // 都道府県コード（01-47）のみを対象とする
+    const prefectureCodes = Array.from({ length: 47 }, (_, i) =>
+      String(i + 1).padStart(2, "0")
     );
 
-    console.log("Filtered count:", filtered.length);
-    console.log("Sample filtered data:", filtered.slice(0, 3));
+    const filtered = formattedData.values.filter((value) => {
+      return (
+        value.timeCode === selectedYear &&
+        prefectureCodes.includes(value.areaCode) &&
+        value.numericValue !== null &&
+        value.numericValue !== 0
+      );
+    });
+
+    // デバッグ情報
+    console.log("Selected year:", selectedYear);
+    console.log(
+      "Total values for year:",
+      formattedData.values.filter((v) => v.timeCode === selectedYear).length
+    );
+    console.log("Prefecture filtered count:", filtered.length);
+    console.log(
+      "Area codes in filtered data:",
+      [...new Set(filtered.map((v) => v.areaCode))].sort()
+    );
 
     return filtered;
   }, [formattedData, selectedYear]);
 
-  // 統計情報を計算
-  const validDataPoints = filteredData.filter(
-    (value) => value.numericValue !== null && value.numericValue !== 0
-  );
-  const values = validDataPoints.map((value) => value.numericValue!);
+  // 統計情報を計算（フィルタリングで既に有効なデータのみを取得）
+  const values = filteredData.map((value) => value.numericValue!);
 
   const summary = {
     totalCount: filteredData.length,
-    validCount: validDataPoints.length,
+    validCount: filteredData.length, // フィルタリングで既に有効なデータのみ
     min: values.length > 0 ? Math.min(...values) : null,
     max: values.length > 0 ? Math.max(...values) : null,
     average:
