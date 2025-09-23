@@ -7,7 +7,10 @@ import { ChoroplethMap } from "@/components/estat/visualization";
 import { TimeSelector } from "@/components/common/TimeSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
-import ColorSchemeSelector, { MapVisualizationOptions } from "@/components/common/ColorSchemeSelector";
+import ColorSchemeSelector, {
+  MapVisualizationOptions,
+} from "@/components/common/ColorSchemeSelector";
+import PrefectureDataTable from "./PrefectureDataTable";
 
 interface PrefectureRankingParams {
   statsDataId: string;
@@ -33,15 +36,14 @@ export default function PrefectureRankingDisplay({
     if (!data) return null;
     return EstatStatsDataService.formatStatsData(data);
   }, [data]);
-  console.log("formattedData", formattedData);
 
   // 選択中の年次を管理
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   // 地図可視化オプションを管理
   const [mapOptions, setMapOptions] = useState<MapVisualizationOptions>({
-    colorScheme: 'interpolateBlues',
-    divergingMidpoint: 'zero'
+    colorScheme: "interpolateBlues",
+    divergingMidpoint: "zero",
   });
 
   // formattedDataが変更されたときに最初の年度を選択
@@ -55,8 +57,6 @@ export default function PrefectureRankingDisplay({
       setSelectedYear("");
     }
   }, [formattedData]);
-
-  console.log("selectedYear", selectedYear);
 
   // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外、カテゴリコードでもフィルタリング）
   const filteredData = useMemo(() => {
@@ -79,8 +79,6 @@ export default function PrefectureRankingDisplay({
       return basicFilter;
     });
   }, [formattedData, selectedYear, params]);
-  console.log("filteredData", filteredData);
-  console.log("params", params);
 
   // 統計情報を計算（EstatMapViewと同様の計算方法）
   const validDataPoints = filteredData.filter(
@@ -148,14 +146,6 @@ export default function PrefectureRankingDisplay({
 
   return (
     <div className="space-y-6">
-      {/* ヘッダー */}
-      <div className="py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
-        <h2 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
-          <Map className="w-5 h-5 text-indigo-600" />
-          都道府県ランキング・地図表示
-        </h2>
-      </div>
-
       {/* 年次セレクターとデータサマリー */}
       <div className="p-4">
         <div className="mb-4">
@@ -185,8 +175,7 @@ export default function PrefectureRankingDisplay({
         </div>
 
         {/* コロプレス地図 */}
-
-        <div className="w-full h-full overflow-x-auto">
+        <div className="w-full h-full overflow-x-auto mb-6">
           <ChoroplethMap
             data={filteredData}
             width={800}
@@ -195,6 +184,12 @@ export default function PrefectureRankingDisplay({
             options={mapOptions}
           />
         </div>
+
+        {/* データテーブル */}
+        <PrefectureDataTable
+          data={filteredData}
+          className="mt-6"
+        />
       </div>
     </div>
   );
