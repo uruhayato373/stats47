@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { AlertTriangle, Map, Database } from "lucide-react";
+import { AlertTriangle, Map, Database, Save, Check } from "lucide-react";
 import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/estat/visualization";
 import { TimeSelector } from "@/components/common/TimeSelector";
@@ -53,6 +53,8 @@ export default function PrefectureRankingDisplay({
   // 可視化設定を管理
   const [visualizationSettings, setVisualizationSettings] = useState<VisualizationSettings | null>(null);
   const [settingsLoading, setSettingsLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   // formattedDataが変更されたときに最初の年度を選択
   useEffect(() => {
@@ -96,6 +98,53 @@ export default function PrefectureRankingDisplay({
 
     loadSettings();
   }, [params?.statsDataId, params?.categoryCode]);
+
+  // 設定保存機能
+  const saveSettings = async () => {
+    if (!params?.statsDataId || !params?.categoryCode) {
+      alert("統計表IDとカテゴリコードが必要です");
+      return;
+    }
+
+    setSaveLoading(true);
+    setSaveSuccess(false);
+
+    try {
+      const settingsToSave: Partial<VisualizationSettings> = {
+        stats_data_id: params.statsDataId,
+        cat01: params.categoryCode,
+        map_color_scheme: mapOptions.colorScheme,
+        map_diverging_midpoint: mapOptions.divergingMidpoint,
+        ranking_direction: visualizationSettings?.ranking_direction || "desc",
+        conversion_factor: visualizationSettings?.conversion_factor || 1,
+        decimal_places: visualizationSettings?.decimal_places || 0,
+      };
+
+      const result = await VisualizationSettingsService.saveSettings(settingsToSave);
+
+      if (result.success) {
+        setSaveSuccess(true);
+        // 成功表示を3秒後に非表示
+        setTimeout(() => setSaveSuccess(false), 3000);
+
+        // 設定を再読み込み
+        const response = await VisualizationSettingsService.fetchSettings(
+          params.statsDataId,
+          params.categoryCode
+        );
+        if (response.success) {
+          setVisualizationSettings(response.settings);
+        }
+      } else {
+        alert(`設定の保存に失敗しました: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Failed to save settings:", error);
+      alert("設定の保存に失敗しました");
+    } finally {
+      setSaveLoading(false);
+    }
+  };
 
   // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外、カテゴリコードでもフィルタリング）
   // 単位変換も適用
@@ -213,12 +262,46 @@ export default function PrefectureRankingDisplay({
             className="mb-4"
           />
 
-          {/* カラースキーマセレクター */}
-          <ColorSchemeSelector
-            options={mapOptions}
-            onOptionsChange={setMapOptions}
-            className="mb-4"
-          />
+          {/* カラースキーマセレクターと保存ボタン */}
+          <div className="flex items-end gap-4 mb-4">
+            <div className="flex-1">
+              <ColorSchemeSelector
+                options={mapOptions}
+                onOptionsChange={setMapOptions}
+              />
+            </div>
+            <div className="flex-shrink-0">
+              <button
+                onClick={saveSettings}
+                disabled={saveLoading || !params?.statsDataId || !params?.categoryCode}
+                className={`
+                  flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors
+                  ${saveSuccess
+                    ? 'bg-green-600 text-white'
+                    : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                  }
+                  disabled:bg-gray-400 disabled:cursor-not-allowed
+                `}
+              >
+                {saveLoading ? (
+                  <>
+                    <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full"></div>
+                    保存中...
+                  </>
+                ) : saveSuccess ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    保存完了
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4" />
+                    設定を保存
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
 
           {/* データサマリー */}
           <EstatDataSummary
