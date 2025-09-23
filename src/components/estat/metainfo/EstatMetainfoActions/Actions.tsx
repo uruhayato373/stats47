@@ -1,18 +1,13 @@
 "use client";
 
 import { RefreshCw } from "lucide-react";
+import { ActionsProps } from "./types";
 
-interface EstatMetainfoActionsProps {
-  onRefresh: () => void;
-  onRetry?: () => void;
-  hasError?: boolean;
-}
-
-export default function EstatMetainfoActions({
+export default function Actions({
   onRefresh,
   onRetry,
   hasError = false,
-}: EstatMetainfoActionsProps) {
+}: ActionsProps) {
   return (
     <div className="flex items-center gap-2">
       <button
