@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
   PrefectureRankingForm,
+  PrefectureRankingDisplay,
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/estat/prefecture-ranking";
@@ -13,8 +14,6 @@ import { EstatStatsDataResponse } from "@/lib/estat/types";
 interface PrefectureRankingParams {
   statsDataId: string;
   categoryCode?: string;
-  areaCode?: string;
-  timeCode?: string;
 }
 
 interface SavedMetadataItem {
@@ -145,9 +144,9 @@ export default function PrefectureRankingPage() {
         </div>
 
         {/* メインコンテンツとサイドバーを横並び */}
-        <div className="flex flex-col lg:flex-row min-h-full">
+        <div className="flex flex-col lg:flex-row gap-4 min-h-full">
           {/* メイン作業エリア */}
-          <div className="flex-1 bg-white dark:bg-neutral-800">
+          <div className="flex-1 bg-white dark:bg-neutral-800 rounded-lg shadow-sm">
             {/* メインコンテンツ */}
             <div className="p-4 md:p-6 space-y-6">
               {/* データ取得フォーム */}
@@ -156,18 +155,23 @@ export default function PrefectureRankingPage() {
                 loading={loading}
               />
 
+              {/* データ表示エリア */}
+              <PrefectureRankingDisplay
+                data={apiResponse}
+                loading={loading}
+                error={error}
+              />
             </div>
           </div>
 
-          {/* 縦線 */}
-          <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-
           {/* 保存済みデータサイドバー - 右側に固定表示 */}
           <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">
-            <PrefectureRankingSidebar
-              className="h-full"
-              onDataSelect={handleDataSelect}
-            />
+            <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm h-full">
+              <PrefectureRankingSidebar
+                className="h-full"
+                onDataSelect={handleDataSelect}
+              />
+            </div>
           </div>
         </div>
       </main>

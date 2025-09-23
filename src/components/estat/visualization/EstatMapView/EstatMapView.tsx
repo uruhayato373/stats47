@@ -56,7 +56,7 @@ export default function EstatMapView({ data }: EstatMapViewProps) {
   if (!formattedData) return null;
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800 overflow-hidden">
+    <div className="w-full h-full">
       <div className="mb-4">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-neutral-100">
           {formattedData.tableInfo.title || formattedData.tableInfo.statName}
