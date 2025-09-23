@@ -8,22 +8,31 @@ import { TimeSelector } from "@/components/common/TimeSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
+
 interface PrefectureRankingDisplayProps {
   data: EstatStatsDataResponse | null;
   loading: boolean;
   error: string | null;
+  params: PrefectureRankingParams | null;
 }
 
 export default function PrefectureRankingDisplay({
   data,
   loading,
   error,
+  params,
 }: PrefectureRankingDisplayProps) {
   // EstatDataFormatterで変換
   const formattedData: FormattedEstatData | null = useMemo(() => {
     if (!data) return null;
     return EstatStatsDataService.formatStatsData(data);
   }, [data]);
+  console.log("formattedData", formattedData);
 
   // 選択中の年次を管理
   const [selectedYear, setSelectedYear] = useState<string>("");
@@ -40,45 +49,38 @@ export default function PrefectureRankingDisplay({
     }
   }, [formattedData]);
 
-  // 選択された年次でデータをフィルタリング（都道府県データのみ）
+  console.log("selectedYear", selectedYear);
+
+  // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外、カテゴリコードでもフィルタリング）
   const filteredData = useMemo(() => {
     if (!formattedData || !selectedYear) return formattedData?.values || [];
 
-    // 都道府県コード（01-47）のみを対象とする
-    const prefectureCodes = Array.from({ length: 47 }, (_, i) =>
-      String(i + 1).padStart(2, "0")
-    );
+    return formattedData.values.filter((value) => {
+      // 基本的なフィルタリング：年度と全国データの除外
+      const basicFilter = value.timeCode === selectedYear && value.areaCode !== "00000";
 
-    const filtered = formattedData.values.filter((value) => {
-      return (
-        value.timeCode === selectedYear &&
-        prefectureCodes.includes(value.areaCode) &&
-        value.numericValue !== null &&
-        value.numericValue !== 0
-      );
+      // カテゴリコードでのフィルタリング
+      if (params?.categoryCode) {
+        // カンマ区切りの場合は分割して処理
+        const categoryCodes = params.categoryCode.split(',').map(code => code.trim());
+        return basicFilter && categoryCodes.includes(value.categoryCode);
+      }
+
+      return basicFilter;
     });
+  }, [formattedData, selectedYear, params]);
+  console.log("filteredData", filteredData);
+  console.log("params", params);
 
-    // デバッグ情報
-    console.log("Selected year:", selectedYear);
-    console.log(
-      "Total values for year:",
-      formattedData.values.filter((v) => v.timeCode === selectedYear).length
-    );
-    console.log("Prefecture filtered count:", filtered.length);
-    console.log(
-      "Area codes in filtered data:",
-      [...new Set(filtered.map((v) => v.areaCode))].sort()
-    );
-
-    return filtered;
-  }, [formattedData, selectedYear]);
-
-  // 統計情報を計算（フィルタリングで既に有効なデータのみを取得）
-  const values = filteredData.map((value) => value.numericValue!);
+  // 統計情報を計算（EstatMapViewと同様の計算方法）
+  const validDataPoints = filteredData.filter(
+    (value) => value.numericValue !== null && value.numericValue !== 0
+  );
+  const values = validDataPoints.map((value) => value.numericValue!);
 
   const summary = {
     totalCount: filteredData.length,
-    validCount: filteredData.length, // フィルタリングで既に有効なデータのみ
+    validCount: validDataPoints.length,
     min: values.length > 0 ? Math.min(...values) : null,
     max: values.length > 0 ? Math.max(...values) : null,
     average:

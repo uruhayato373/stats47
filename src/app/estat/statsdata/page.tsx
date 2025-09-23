@@ -1,5 +1,17 @@
 "use client";
 
+/**
+ * @fileoverview e-STAT APIを使用して統計データを取得・表示するページコンポーネント
+ *
+ * このページは以下の主要な機能を提供します：
+ * - e-STAT APIからの統計データ取得
+ * - 取得したデータの表示
+ * - エラーハンドリングとローディング状態の管理
+ * - データ更新機能
+ *
+ * @module EstatDataPage
+ */
+
 import { useState } from "react";
 import { RefreshCw, Database, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
@@ -10,16 +22,47 @@ import {
 } from "@/components/estat/statsdata";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat/types";
 
+/**
+ * e-STAT APIを使用して統計データを取得・表示するメインページコンポーネント
+ *
+ * @returns {JSX.Element} レンダリングされたページコンポーネント
+ */
 export default function EstatDataPage() {
+  /**
+   * APIからの応答データを保持するstate
+   * @type {[EstatStatsDataResponse | null, React.Dispatch<React.SetStateAction<EstatStatsDataResponse | null>>]}
+   */
   const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
     null
   );
+
+  /**
+   * データ取得中のローディング状態を管理するstate
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   */
   const [loading, setLoading] = useState(false);
+
+  /**
+   * エラーメッセージを管理するstate
+   * @type {[string | null, React.Dispatch<React.SetStateAction<string | null>>]}
+   */
   const [error, setError] = useState<string | null>(null);
+
+  /**
+   * 現在のAPIリクエストパラメータを保持するstate
+   * @type {[GetStatsDataParams | null, React.Dispatch<React.SetStateAction<GetStatsDataParams | null>>]}
+   */
   const [currentParams, setCurrentParams] = useState<GetStatsDataParams | null>(
     null
   );
 
+  /**
+   * e-STAT APIから統計データを取得する関数
+   *
+   * @param {GetStatsDataParams} params - APIリクエストのパラメータ
+   * @returns {Promise<void>} データ取得処理の完了を示すPromise
+   * @throws {Error} APIリクエストが失敗した場合のエラー
+   */
   const handleFetchData = async (params: GetStatsDataParams) => {
     setLoading(true);
     setError(null);
@@ -93,6 +136,11 @@ export default function EstatDataPage() {
     }
   };
 
+  /**
+   * 現在のパラメータを使用してデータを再取得する関数
+   *
+   * @returns {void}
+   */
   const handleRefresh = () => {
     if (currentParams) {
       handleFetchData(currentParams);

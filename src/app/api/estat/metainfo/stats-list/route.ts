@@ -4,14 +4,14 @@ import { createD1Database } from "@/lib/d1-client";
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '50');
-    const search = searchParams.get('search') || '';
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "50");
+    const search = searchParams.get("search") || "";
 
     console.log("=== STATS LIST API START ===");
     console.log("Parameters:", { page, limit, search });
 
-    const db = await createD1Database() as any;
+    const db = await createD1Database();
     console.log("Database connection established");
 
     const offset = (page - 1) * limit;
@@ -76,30 +76,41 @@ export async function GET(request: NextRequest) {
     if (search) {
       const countStmt = db.prepare(countQuery);
       const searchParam = `%${search}%`;
-      const countResult = await countStmt.bind(searchParam, searchParam, searchParam).first();
-      totalCount = countResult?.total || 0;
+      const countResult = await countStmt
+        .bind(searchParam, searchParam, searchParam)
+        .all();
+      totalCount = countResult.results?.[0]?.total || 0;
     } else {
       const countStmt = db.prepare(countQuery);
-      const countResult = await countStmt.first();
-      totalCount = countResult?.total || 0;
+      const countResult = await countStmt.all();
+      totalCount = countResult.results?.[0]?.total || 0;
     }
 
     console.log("Query completed. Results:", result.results?.length);
     console.log("Total count:", totalCount);
 
     // レスポンス用のデータ形式に変換
-    const items = (result.results || []).map((row: any) => ({
-      id: row.stats_data_id, // idとして統計表IDを使用
-      stats_data_id: row.stats_data_id,
-      stat_name: row.stat_name,
-      title: row.title,
-      cat01: null, // 効率化のため省略
-      item_name: null, // 効率化のため省略
-      unit: null, // 効率化のため省略
-      created_at: row.created_at,
-      updated_at: row.updated_at,
-      item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
-    }));
+    const items = (result.results || []).map(
+      (row: {
+        stats_data_id: string;
+        stat_name: string;
+        title: string;
+        created_at: string;
+        updated_at: string;
+        item_count: number;
+      }) => ({
+        id: row.stats_data_id, // idとして統計表IDを使用
+        stats_data_id: row.stats_data_id,
+        stat_name: row.stat_name,
+        title: row.title,
+        cat01: null, // 効率化のため省略
+        item_name: null, // 効率化のため省略
+        unit: null, // 効率化のため省略
+        created_at: row.created_at,
+        updated_at: row.updated_at,
+        item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
+      })
+    );
 
     console.log("=== STATS LIST API END ===");
 
@@ -122,18 +133,26 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("=== STATS LIST API ERROR ===");
     console.error("Stats list fetch error:", error);
-    console.error("Error stack:", error instanceof Error ? error.stack : 'No stack trace');
+    console.error(
+      "Error stack:",
+      error instanceof Error ? error.stack : "No stack trace"
+    );
     console.error("=== STATS LIST API ERROR END ===");
 
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "統計表一覧の取得に失敗しました",
+        error:
+          error instanceof Error
+            ? error.message
+            : "統計表一覧の取得に失敗しました",
         items: [],
         pagination: {
           currentPage: 1,
           totalPages: 0,
           totalItems: 0,
-          itemsPerPage: parseInt(request.nextUrl.searchParams.get('limit') || '50'),
+          itemsPerPage: parseInt(
+            request.nextUrl.searchParams.get("limit") || "50"
+          ),
         },
       },
       { status: 500 }

@@ -162,6 +162,7 @@ export default function PrefectureRankingPage() {
                 data={apiResponse}
                 loading={loading}
                 error={error}
+                params={currentParams}
               />
             </div>
           </div>
