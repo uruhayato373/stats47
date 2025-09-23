@@ -1,20 +1,15 @@
 "use client";
 
 import { RefreshCw, Map, ExternalLink } from "lucide-react";
+import { HeaderProps } from "./types";
 
-interface PrefectureRankingPageHeaderProps {
-  loading: boolean;
-  currentStatsId: string;
-  onRefresh: () => void;
-}
-
-export default function PrefectureRankingPageHeader({
+export default function Header({
   loading,
   currentStatsId,
   onRefresh,
-}: PrefectureRankingPageHeaderProps) {
+}: HeaderProps) {
   return (
-    <div className="bg-white dark:bg-neutral-800 ">
+    <div className="bg-white dark:bg-neutral-800">
       <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2">
         <div>
           <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
