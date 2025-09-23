@@ -57,12 +57,15 @@ export default function PrefectureRankingDisplay({
 
     return formattedData.values.filter((value) => {
       // 基本的なフィルタリング：年度と全国データの除外
-      const basicFilter = value.timeCode === selectedYear && value.areaCode !== "00000";
+      const basicFilter =
+        value.timeCode === selectedYear && value.areaCode !== "00000";
 
       // カテゴリコードでのフィルタリング
       if (params?.categoryCode) {
         // カンマ区切りの場合は分割して処理
-        const categoryCodes = params.categoryCode.split(',').map(code => code.trim());
+        const categoryCodes = params.categoryCode
+          .split(",")
+          .map((code) => code.trim());
         return basicFilter && categoryCodes.includes(value.categoryCode);
       }
 
@@ -168,15 +171,14 @@ export default function PrefectureRankingDisplay({
         </div>
 
         {/* コロプレス地図 */}
-        <div className="h-96 bg-gray-50 rounded-lg border border-gray-200 dark:bg-neutral-700 dark:border-neutral-600 p-4">
-          <div className="w-full h-full overflow-x-auto">
-            <ChoroplethMap
-              data={filteredData}
-              width={800}
-              height={600}
-              className="w-full max-w-full"
-            />
-          </div>
+
+        <div className="w-full h-full overflow-x-auto">
+          <ChoroplethMap
+            data={filteredData}
+            width={800}
+            height={600}
+            className="w-full max-w-full"
+          />
         </div>
       </div>
     </div>

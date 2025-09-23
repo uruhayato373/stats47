@@ -5,21 +5,63 @@ import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { feature } from "topojson-client";
 import { Topology } from "topojson-specification";
-import { Feature, FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
+import {
+  Feature,
+  FeatureCollection,
+  Geometry,
+  GeoJsonProperties,
+} from "geojson";
 import { FormattedValue } from "@/lib/estat/types";
 
 // 都道府県マッピング（1から47まで）
 const PREFECTURE_MAP: { [key: string]: string } = {
-  "01": "北海道", "02": "青森県", "03": "岩手県", "04": "宮城県", "05": "秋田県",
-  "06": "山形県", "07": "福島県", "08": "茨城県", "09": "栃木県", "10": "群馬県",
-  "11": "埼玉県", "12": "千葉県", "13": "東京都", "14": "神奈川県", "15": "新潟県",
-  "16": "富山県", "17": "石川県", "18": "福井県", "19": "山梨県", "20": "長野県",
-  "21": "岐阜県", "22": "静岡県", "23": "愛知県", "24": "三重県", "25": "滋賀県",
-  "26": "京都府", "27": "大阪府", "28": "兵庫県", "29": "奈良県", "30": "和歌山県",
-  "31": "鳥取県", "32": "島根県", "33": "岡山県", "34": "広島県", "35": "山口県",
-  "36": "徳島県", "37": "香川県", "38": "愛媛県", "39": "高知県", "40": "福岡県",
-  "41": "佐賀県", "42": "長崎県", "43": "熊本県", "44": "大分県", "45": "宮崎県",
-  "46": "鹿児島県", "47": "沖縄県"
+  "01": "北海道",
+  "02": "青森県",
+  "03": "岩手県",
+  "04": "宮城県",
+  "05": "秋田県",
+  "06": "山形県",
+  "07": "福島県",
+  "08": "茨城県",
+  "09": "栃木県",
+  "10": "群馬県",
+  "11": "埼玉県",
+  "12": "千葉県",
+  "13": "東京都",
+  "14": "神奈川県",
+  "15": "新潟県",
+  "16": "富山県",
+  "17": "石川県",
+  "18": "福井県",
+  "19": "山梨県",
+  "20": "長野県",
+  "21": "岐阜県",
+  "22": "静岡県",
+  "23": "愛知県",
+  "24": "三重県",
+  "25": "滋賀県",
+  "26": "京都府",
+  "27": "大阪府",
+  "28": "兵庫県",
+  "29": "奈良県",
+  "30": "和歌山県",
+  "31": "鳥取県",
+  "32": "島根県",
+  "33": "岡山県",
+  "34": "広島県",
+  "35": "山口県",
+  "36": "徳島県",
+  "37": "香川県",
+  "38": "愛媛県",
+  "39": "高知県",
+  "40": "福岡県",
+  "41": "佐賀県",
+  "42": "長崎県",
+  "43": "熊本県",
+  "44": "大分県",
+  "45": "宮崎県",
+  "46": "鹿児島県",
+  "47": "沖縄県",
 };
 
 // 数値フォーマット用ヘルパー関数
@@ -44,6 +86,14 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hoveredData, setHoveredData] = useState<{
+    prefecture: string;
+    value: string;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  // ツールチップの位置更新を最適化するための参照
+  const tooltipRef = useRef<{
     prefecture: string;
     value: string;
     x: number;
@@ -116,8 +166,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
         // カラースケールを生成
         const validValues = data
-          .filter(d => d.areaCode !== "00000" && d.numericValue !== null)
-          .map(d => d.numericValue!);
+          .filter((d) => d.areaCode !== "00000" && d.numericValue !== null)
+          .map((d) => d.numericValue!);
 
         if (validValues.length === 0) {
           throw new Error("有効なデータがありません");
@@ -146,8 +196,9 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             if (!dataPoint) {
               const prefName = PREFECTURE_MAP[prefCode];
               if (prefName) {
-                dataPoint = prefectureData.get(prefName) ||
-                           prefectureData.get(prefName.replace(/[都道府県]$/, ""));
+                dataPoint =
+                  prefectureData.get(prefName) ||
+                  prefectureData.get(prefName.replace(/[都道府県]$/, ""));
               }
             }
 
@@ -169,34 +220,40 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             let dataPoint = prefectureData.get(prefCode);
             if (!dataPoint) {
               if (prefName !== "不明") {
-                dataPoint = prefectureData.get(prefName) ||
-                           prefectureData.get(prefName.replace(/[都道府県]$/, ""));
+                dataPoint =
+                  prefectureData.get(prefName) ||
+                  prefectureData.get(prefName.replace(/[都道府県]$/, ""));
               }
             }
 
             const value = dataPoint?.displayValue || "データなし";
             const unit = dataPoint?.unit ? ` ${dataPoint.unit}` : "";
 
-            setHoveredData({
+            const tooltipData = {
               prefecture: prefName,
               value: `${value}${unit}`,
               x: event.pageX,
               y: event.pageY,
-            });
+            };
+            tooltipRef.current = tooltipData;
+            setHoveredData(tooltipData);
 
             // ハイライト効果
             d3.select(this).attr("stroke-width", 2).attr("stroke", "#333");
           })
           .on("mousemove", function (event) {
-            if (hoveredData) {
-              setHoveredData({
-                ...hoveredData,
+            if (tooltipRef.current) {
+              const tooltipData = {
+                ...tooltipRef.current,
                 x: event.pageX,
                 y: event.pageY,
-              });
+              };
+              tooltipRef.current = tooltipData;
+              setHoveredData(tooltipData);
             }
           })
           .on("mouseout", function () {
+            tooltipRef.current = null;
             setHoveredData(null);
             // ハイライト解除
             d3.select(this).attr("stroke-width", 0.5).attr("stroke", "#fff");
@@ -216,7 +273,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     };
 
     loadMapData();
-  }, [data, width, height, hoveredData]);
+  }, [data, width, height]); // hoveredDataを依存配列から削除
 
   return (
     <div className={`relative ${className}`}>
@@ -261,11 +318,9 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   );
 };
 
-
-
 // 凡例を描画
 function drawLegend(
-  svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+  svg: d3.Selection<SVGSVGElement | null, unknown, null, undefined>,
   colorScale: d3.ScaleSequential<string>,
   validValues: number[],
   width: number,
