@@ -3,7 +3,7 @@ export interface VisualizationSettings {
   stats_data_id: string;
   cat01: string;
   map_color_scheme: string;
-  map_diverging_midpoint: string;
+  map_diverging_midpoint: "zero" | "mean" | "median" | number;
   ranking_direction: "asc" | "desc";
   conversion_factor: number;
   decimal_places: number;
@@ -102,10 +102,7 @@ export class VisualizationSettingsService {
     return Number(converted.toFixed(decimalPlaces));
   }
 
-  static formatValue(
-    value: number,
-    settings: VisualizationSettings
-  ): string {
+  static formatValue(value: number, settings: VisualizationSettings): string {
     const converted = this.applyConversion(
       value,
       settings.conversion_factor,

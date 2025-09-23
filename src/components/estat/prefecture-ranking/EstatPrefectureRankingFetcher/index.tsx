@@ -1,39 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import InputField from "@/components/common/InputField";
 import { useStyles } from "@/hooks/useStyles";
+import {
+  EstatPrefectureRankingFetcherProps,
+  PrefectureRankingParams,
+  FormData,
+} from "./types";
 
-interface PrefectureRankingParams {
-  statsDataId: string;
-  categoryCode?: string;
-  timeCode?: string;
-}
-
-interface PrefectureRankingFormProps {
-  onSubmit: (params: PrefectureRankingParams) => void;
-  loading: boolean;
-}
-
-type FormData = {
-  statsDataId: string;
-  categoryCode: string;
-  timeCode: string;
-};
-
-export default function PrefectureRankingForm({
+export default function EstatPrefectureRankingFetcher({
   onSubmit,
   loading,
-}: PrefectureRankingFormProps) {
+}: EstatPrefectureRankingFetcherProps) {
   const styles = useStyles();
   const [formData, setFormData] = useState<FormData>({
     statsDataId: "",
     categoryCode: "",
     timeCode: "",
   });
-
-  // 年度管理は親コンポーネントで行う
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -42,8 +28,6 @@ export default function PrefectureRankingForm({
       [name]: value,
     }));
   };
-
-  // 年度変更は親コンポーネントで管理
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

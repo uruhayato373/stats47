@@ -1,8 +1,16 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { AlertTriangle, Map, Database, Save, Check } from "lucide-react";
-import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
+import {
+  AlertTriangle,
+  Database,
+  Save,
+  Check,
+  Settings,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
+import { FormattedEstatData } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/estat/visualization";
 import { TimeSelector } from "@/components/common/TimeSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
@@ -10,31 +18,20 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import ColorSchemeSelector, {
   MapVisualizationOptions,
 } from "@/components/common/ColorSchemeSelector";
-import PrefectureDataTable from "./PrefectureDataTable";
+import PrefectureDataTable from "../PrefectureDataTable";
 import {
   VisualizationSettings,
-  VisualizationSettingsService
+  VisualizationSettingsService,
 } from "@/lib/ranking/visualization-settings";
+import VisualizationSettingsPanel from "../VisualizationSettingsPanel";
+import { EstatPrefectureRankingDisplayProps } from "./types";
 
-interface PrefectureRankingParams {
-  statsDataId: string;
-  categoryCode?: string;
-  timeCode?: string;
-}
-
-interface PrefectureRankingDisplayProps {
-  data: EstatStatsDataResponse | null;
-  loading: boolean;
-  error: string | null;
-  params: PrefectureRankingParams | null;
-}
-
-export default function PrefectureRankingDisplay({
+export default function EstatPrefectureRankingDisplay({
   data,
   loading,
   error,
   params,
-}: PrefectureRankingDisplayProps) {
+}: EstatPrefectureRankingDisplayProps) {
   // EstatDataFormatterで変換
   const formattedData: FormattedEstatData | null = useMemo(() => {
     if (!data) return null;
@@ -47,14 +44,20 @@ export default function PrefectureRankingDisplay({
   // 地図可視化オプションを管理
   const [mapOptions, setMapOptions] = useState<MapVisualizationOptions>({
     colorScheme: "interpolateBlues",
-    divergingMidpoint: "zero",
+    divergingMidpoint: "zero" as const,
   });
 
   // 可視化設定を管理
-  const [visualizationSettings, setVisualizationSettings] = useState<VisualizationSettings | null>(null);
-  const [settingsLoading, setSettingsLoading] = useState(false);
+  const [visualizationSettings, setVisualizationSettings] =
+    useState<VisualizationSettings | null>(null);
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  // 編集可能な設定フィールドを管理
+  const [editableSettings, setEditableSettings] = useState<
+    Partial<VisualizationSettings>
+  >({});
+  const [showSettingsPanel, setShowSettingsPanel] = useState(false);
 
   // formattedDataが変更されたときに最初の年度を選択
   useEffect(() => {
@@ -73,7 +76,6 @@ export default function PrefectureRankingDisplay({
     const loadSettings = async () => {
       if (!params?.statsDataId || !params?.categoryCode) return;
 
-      setSettingsLoading(true);
       try {
         const response = await VisualizationSettingsService.fetchSettings(
           params.statsDataId,
@@ -82,17 +84,28 @@ export default function PrefectureRankingDisplay({
 
         if (response.success) {
           setVisualizationSettings(response.settings);
+          setEditableSettings(response.settings);
 
           // 地図オプションを設定に基づいて更新
           setMapOptions({
             colorScheme: response.settings.map_color_scheme,
-            divergingMidpoint: response.settings.map_diverging_midpoint,
+            divergingMidpoint: response.settings.map_diverging_midpoint as
+              | "zero"
+              | "mean"
+              | "median"
+              | number,
           });
+        } else {
+          // デフォルト値を設定
+          const defaultSettings =
+            VisualizationSettingsService.getDefaultSettings(
+              params.statsDataId,
+              params.categoryCode
+            );
+          setEditableSettings(defaultSettings);
         }
       } catch (error) {
         console.error("Failed to load visualization settings:", error);
-      } finally {
-        setSettingsLoading(false);
       }
     };
 
@@ -111,16 +124,20 @@ export default function PrefectureRankingDisplay({
 
     try {
       const settingsToSave: Partial<VisualizationSettings> = {
+        ...editableSettings,
         stats_data_id: params.statsDataId,
         cat01: params.categoryCode,
         map_color_scheme: mapOptions.colorScheme,
-        map_diverging_midpoint: mapOptions.divergingMidpoint,
-        ranking_direction: visualizationSettings?.ranking_direction || "desc",
-        conversion_factor: visualizationSettings?.conversion_factor || 1,
-        decimal_places: visualizationSettings?.decimal_places || 0,
+        map_diverging_midpoint: mapOptions.divergingMidpoint as
+          | "zero"
+          | "mean"
+          | "median"
+          | number,
       };
 
-      const result = await VisualizationSettingsService.saveSettings(settingsToSave);
+      const result = await VisualizationSettingsService.saveSettings(
+        settingsToSave
+      );
 
       if (result.success) {
         setSaveSuccess(true);
@@ -134,6 +151,7 @@ export default function PrefectureRankingDisplay({
         );
         if (response.success) {
           setVisualizationSettings(response.settings);
+          setEditableSettings(response.settings);
         }
       } else {
         alert(`設定の保存に失敗しました: ${result.error}`);
@@ -169,21 +187,32 @@ export default function PrefectureRankingDisplay({
     });
 
     // 単位変換を適用
-    if (visualizationSettings) {
+    const settings =
+      editableSettings.conversion_factor !== undefined
+        ? editableSettings
+        : visualizationSettings;
+
+    if (settings) {
       return filtered.map((value) => ({
         ...value,
         numericValue: value.numericValue
           ? VisualizationSettingsService.applyConversion(
               value.numericValue,
-              visualizationSettings.conversion_factor,
-              visualizationSettings.decimal_places
+              settings.conversion_factor || 1,
+              settings.decimal_places || 0
             )
           : value.numericValue,
       }));
     }
 
     return filtered;
-  }, [formattedData, selectedYear, params, visualizationSettings]);
+  }, [
+    formattedData,
+    selectedYear,
+    params,
+    visualizationSettings,
+    editableSettings,
+  ]);
 
   // 統計情報を計算（EstatMapViewと同様の計算方法）
   const validDataPoints = filteredData.filter(
@@ -201,6 +230,7 @@ export default function PrefectureRankingDisplay({
         ? values.reduce((a, b) => a + b, 0) / values.length
         : null,
   };
+
   if (loading) {
     return (
       <div className="p-8 text-center">
@@ -262,7 +292,7 @@ export default function PrefectureRankingDisplay({
             className="mb-4"
           />
 
-          {/* カラースキーマセレクターと保存ボタン */}
+          {/* カラースキーマセレクターと設定ボタン */}
           <div className="flex items-end gap-4 mb-4">
             <div className="flex-1">
               <ColorSchemeSelector
@@ -270,15 +300,30 @@ export default function PrefectureRankingDisplay({
                 onOptionsChange={setMapOptions}
               />
             </div>
-            <div className="flex-shrink-0">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowSettingsPanel(!showSettingsPanel)}
+                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+              >
+                <Settings className="w-4 h-4" />
+                詳細設定
+                {showSettingsPanel ? (
+                  <ChevronDown className="w-4 h-4" />
+                ) : (
+                  <ChevronRight className="w-4 h-4" />
+                )}
+              </button>
               <button
                 onClick={saveSettings}
-                disabled={saveLoading || !params?.statsDataId || !params?.categoryCode}
+                disabled={
+                  saveLoading || !params?.statsDataId || !params?.categoryCode
+                }
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors
-                  ${saveSuccess
-                    ? 'bg-green-600 text-white'
-                    : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                  ${
+                    saveSuccess
+                      ? "bg-green-600 text-white"
+                      : "bg-indigo-600 hover:bg-indigo-700 text-white"
                   }
                   disabled:bg-gray-400 disabled:cursor-not-allowed
                 `}
@@ -302,6 +347,16 @@ export default function PrefectureRankingDisplay({
               </button>
             </div>
           </div>
+
+          {/* 詳細設定パネル */}
+          {showSettingsPanel && (
+            <VisualizationSettingsPanel
+              editableSettings={editableSettings}
+              visualizationSettings={visualizationSettings}
+              params={params}
+              onSettingsChange={setEditableSettings}
+            />
+          )}
 
           {/* データサマリー */}
           <EstatDataSummary
@@ -328,7 +383,11 @@ export default function PrefectureRankingDisplay({
         <PrefectureDataTable
           data={filteredData}
           className="mt-6"
-          rankingDirection={visualizationSettings?.ranking_direction || "desc"}
+          rankingDirection={
+            editableSettings.ranking_direction ||
+            visualizationSettings?.ranking_direction ||
+            "desc"
+          }
         />
       </div>
     </div>
