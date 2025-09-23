@@ -11,6 +11,10 @@ import ColorSchemeSelector, {
   MapVisualizationOptions,
 } from "@/components/common/ColorSchemeSelector";
 import PrefectureDataTable from "./PrefectureDataTable";
+import {
+  VisualizationSettings,
+  VisualizationSettingsService
+} from "@/lib/ranking/visualization-settings";
 
 interface PrefectureRankingParams {
   statsDataId: string;
@@ -46,6 +50,10 @@ export default function PrefectureRankingDisplay({
     divergingMidpoint: "zero",
   });
 
+  // 可視化設定を管理
+  const [visualizationSettings, setVisualizationSettings] = useState<VisualizationSettings | null>(null);
+  const [settingsLoading, setSettingsLoading] = useState(false);
+
   // formattedDataが変更されたときに最初の年度を選択
   useEffect(() => {
     if (formattedData && formattedData.years.length > 0) {
@@ -58,11 +66,43 @@ export default function PrefectureRankingDisplay({
     }
   }, [formattedData]);
 
+  // データベースから可視化設定を読み込み
+  useEffect(() => {
+    const loadSettings = async () => {
+      if (!params?.statsDataId || !params?.categoryCode) return;
+
+      setSettingsLoading(true);
+      try {
+        const response = await VisualizationSettingsService.fetchSettings(
+          params.statsDataId,
+          params.categoryCode
+        );
+
+        if (response.success) {
+          setVisualizationSettings(response.settings);
+
+          // 地図オプションを設定に基づいて更新
+          setMapOptions({
+            colorScheme: response.settings.map_color_scheme,
+            divergingMidpoint: response.settings.map_diverging_midpoint,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to load visualization settings:", error);
+      } finally {
+        setSettingsLoading(false);
+      }
+    };
+
+    loadSettings();
+  }, [params?.statsDataId, params?.categoryCode]);
+
   // 選択された年次でデータをフィルタリング（全国データareaCode=00000を除外、カテゴリコードでもフィルタリング）
+  // 単位変換も適用
   const filteredData = useMemo(() => {
     if (!formattedData || !selectedYear) return formattedData?.values || [];
 
-    return formattedData.values.filter((value) => {
+    const filtered = formattedData.values.filter((value) => {
       // 基本的なフィルタリング：年度と全国データの除外
       const basicFilter =
         value.timeCode === selectedYear && value.areaCode !== "00000";
@@ -78,7 +118,23 @@ export default function PrefectureRankingDisplay({
 
       return basicFilter;
     });
-  }, [formattedData, selectedYear, params]);
+
+    // 単位変換を適用
+    if (visualizationSettings) {
+      return filtered.map((value) => ({
+        ...value,
+        numericValue: value.numericValue
+          ? VisualizationSettingsService.applyConversion(
+              value.numericValue,
+              visualizationSettings.conversion_factor,
+              visualizationSettings.decimal_places
+            )
+          : value.numericValue,
+      }));
+    }
+
+    return filtered;
+  }, [formattedData, selectedYear, params, visualizationSettings]);
 
   // 統計情報を計算（EstatMapViewと同様の計算方法）
   const validDataPoints = filteredData.filter(
@@ -189,6 +245,7 @@ export default function PrefectureRankingDisplay({
         <PrefectureDataTable
           data={filteredData}
           className="mt-6"
+          rankingDirection={visualizationSettings?.ranking_direction || "desc"}
         />
       </div>
     </div>

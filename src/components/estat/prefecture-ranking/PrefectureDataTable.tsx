@@ -7,6 +7,7 @@ import { FormattedValue } from "@/lib/estat/types";
 interface PrefectureDataTableProps {
   data: FormattedValue[];
   className?: string;
+  rankingDirection?: "asc" | "desc";
 }
 
 type SortField = 'rank' | 'prefecture' | 'value';
@@ -15,6 +16,7 @@ type SortDirection = 'asc' | 'desc';
 export default function PrefectureDataTable({
   data,
   className = "",
+  rankingDirection = "desc",
 }: PrefectureDataTableProps) {
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -23,10 +25,13 @@ export default function PrefectureDataTable({
   const sortedData = useMemo(() => {
     if (!data || data.length === 0) return [];
 
-    // 有効なデータのみを抽出してランキング用にソート（値の降順）
+    // 有効なデータのみを抽出してランキング用にソート（方向に応じて）
     const validData = data.filter(item => item.numericValue !== null && item.numericValue !== 0);
     const rankedData = [...validData]
-      .sort((a, b) => (b.numericValue || 0) - (a.numericValue || 0))
+      .sort((a, b) => {
+        const diff = (a.numericValue || 0) - (b.numericValue || 0);
+        return rankingDirection === "asc" ? diff : -diff;
+      })
       .map((item, index) => ({
         ...item,
         rank: index + 1
@@ -50,7 +55,7 @@ export default function PrefectureDataTable({
 
       return sortDirection === 'asc' ? compareValue : -compareValue;
     });
-  }, [data, sortField, sortDirection]);
+  }, [data, sortField, sortDirection, rankingDirection]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
