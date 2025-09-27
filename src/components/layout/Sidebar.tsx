@@ -1,11 +1,25 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useStyles } from "@/hooks/useStyles";
+import { CHOROPLETH_CATEGORIES } from "@/lib/choropleth/categories";
+import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 export default function Sidebar() {
   const styles = useStyles();
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+
+  const toggleCategoryExpansion = (categoryId: string) => {
+    const newExpanded = new Set(expandedCategories);
+    if (newExpanded.has(categoryId)) {
+      newExpanded.delete(categoryId);
+    } else {
+      newExpanded.add(categoryId);
+    }
+    setExpandedCategories(newExpanded);
+  };
 
   // ナビゲーションアイテムをメモ化
   const navigationItems = useMemo(
@@ -126,6 +140,30 @@ export default function Sidebar() {
               strokeLinejoin="round"
             >
               <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
+            </svg>
+          ),
+          isActive: false,
+        },
+        {
+          href: "/choropleth",
+          label: "コロプレス地図",
+          icon: (
+            <svg
+              className="size-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
+              <circle cx="12" cy="12" r="3" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
             </svg>
           ),
           isActive: false,
@@ -353,6 +391,54 @@ export default function Sidebar() {
                 </Link>
               </li>
             ))}
+          </ul>
+        </div>
+
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>コロプレス地図</span>
+          <ul className={sectionStyles.list}>
+            {CHOROPLETH_CATEGORIES.map((category) => {
+              const isExpanded = expandedCategories.has(category.id);
+
+              return (
+                <li key={category.id}>
+                  {/* カテゴリ項目 */}
+                  <button
+                    onClick={() => toggleCategoryExpansion(category.id)}
+                    className="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200 hover:text-gray-900 focus:outline-hidden focus:bg-gray-200 focus:text-gray-900 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus:bg-neutral-700 dark:focus:text-white light:text-gray-700 light:hover:bg-gray-200 light:hover:text-gray-900 light:focus:bg-gray-200 light:focus:text-gray-900"
+                  >
+                    {/* 展開/折りたたみアイコン */}
+                    {isExpanded ? (
+                      <ChevronDown className="size-3.5 text-gray-500" />
+                    ) : (
+                      <ChevronRight className="size-3.5 text-gray-500" />
+                    )}
+
+                    {/* カテゴリアイコン */}
+                    <CategoryIcon iconName={category.icon} className="size-3.5" />
+
+                    {/* カテゴリ名 */}
+                    <span className="flex-1 text-left">{category.name}</span>
+                  </button>
+
+                  {/* サブカテゴリリスト */}
+                  {isExpanded && (
+                    <ul className="ml-6 mt-1 space-y-1">
+                      {category.subcategories.map((subcategory) => (
+                        <li key={subcategory.id}>
+                          <Link
+                            href={`/${category.id}/${subcategory.id}`}
+                            className="w-full flex items-center py-1.5 px-2 text-xs text-gray-600 rounded hover:bg-gray-100 hover:text-gray-900 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white light:text-gray-600 light:hover:bg-gray-100 light:hover:text-gray-900"
+                          >
+                            <span>{subcategory.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 

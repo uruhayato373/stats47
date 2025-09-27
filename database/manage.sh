@@ -9,6 +9,7 @@ set -e
 DATABASE_NAME="stats47"
 MAIN_SCHEMA_FILE="./database/schemas/main.sql"
 RANKING_SCHEMA_FILE="./database/schemas/ranking_visualizations.sql"
+CHOROPLETH_SCHEMA_FILE="./database/schemas/choropleth_simple.sql"
 
 # 色付きのログ出力
 log_info() {
@@ -30,19 +31,21 @@ show_help() {
     echo "使用方法: $0 <コマンド>"
     echo ""
     echo "コマンド:"
-    echo "  init        - データベースの初期化（メイン + ランキング設定）"
+    echo "  init        - データベースの初期化（メイン + ランキング設定 + コロプレス）"
     echo "  create      - データベースの作成"
     echo "  schema      - メインスキーマの適用"
     echo "  ranking     - ランキング可視化設定スキーマの適用"
+    echo "  choropleth  - コロプレス地図機能スキーマの適用（簡素版）"
     echo "  status      - データベースの状態確認"
     echo "  help        - このヘルプを表示"
     echo ""
     echo "例:"
-    echo "  $0 init      # データベースの初期化"
-    echo "  $0 create    # データベースの作成のみ"
-    echo "  $0 schema    # メインスキーマの適用"
-    echo "  $0 ranking   # ランキング設定スキーマの適用"
-    echo "  $0 status    # データベースの状態確認"
+    echo "  $0 init              # データベースの初期化"
+    echo "  $0 create            # データベースの作成のみ"
+    echo "  $0 schema            # メインスキーマの適用"
+    echo "  $0 ranking           # ランキング設定スキーマの適用"
+    echo "  $0 choropleth        # コロプレス地図スキーマの適用（簡素版）"
+    echo "  $0 status            # データベースの状態確認"
 }
 
 # データベースの作成
@@ -93,6 +96,20 @@ apply_ranking_schema() {
     npx wrangler d1 execute $DATABASE_NAME --file="$RANKING_SCHEMA_FILE"
 
     log_info "ランキング可視化設定スキーマが適用されました。"
+}
+
+# コロプレス地図スキーマの適用（簡素版）
+apply_choropleth_schema() {
+    log_info "コロプレス地図スキーマ（簡素版）を適用中..."
+
+    if [ ! -f "$CHOROPLETH_SCHEMA_FILE" ]; then
+        log_error "コロプレス地図スキーマファイルが見つかりません: $CHOROPLETH_SCHEMA_FILE"
+        exit 1
+    fi
+
+    npx wrangler d1 execute $DATABASE_NAME --file="$CHOROPLETH_SCHEMA_FILE"
+
+    log_info "コロプレス地図スキーマ（簡素版）が適用されました。"
 }
 
 
@@ -150,7 +167,10 @@ init_database() {
     # ランキングスキーマの適用
     apply_ranking_schema
 
-    log_info "データベースの初期化が完了しました。"
+    # コロプレス地図スキーマの適用
+    apply_choropleth_schema
+
+    log_info "データベースの初期化が完了しました（メイン + ランキング + コロプレス簡素版）。"
     log_info "wrangler.toml の database_id を更新してください。"
 }
 
@@ -167,6 +187,9 @@ case "${1:-help}" in
         ;;
     "ranking")
         apply_ranking_schema
+        ;;
+    "choropleth")
+        apply_choropleth_schema
         ;;
     "status")
         check_status

@@ -18,7 +18,7 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import ColorSchemeSelector, {
   MapVisualizationOptions,
 } from "@/components/common/ColorSchemeSelector";
-import PrefectureDataTable from "../PrefectureDataTable";
+import { PrefectureDataTable } from "@/components/choropleth/PrefectureDataTable";
 import {
   VisualizationSettings,
   VisualizationSettingsService,
