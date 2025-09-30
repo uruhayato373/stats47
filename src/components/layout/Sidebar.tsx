@@ -1,25 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useStyles } from "@/hooks/useStyles";
-import { CHOROPLETH_CATEGORIES } from "@/lib/choropleth/categories";
 import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import categoriesData from "@/config/categories.json";
 
 export default function Sidebar() {
   const styles = useStyles();
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
-
-  const toggleCategoryExpansion = (categoryId: string) => {
-    const newExpanded = new Set(expandedCategories);
-    if (newExpanded.has(categoryId)) {
-      newExpanded.delete(categoryId);
-    } else {
-      newExpanded.add(categoryId);
-    }
-    setExpandedCategories(newExpanded);
-  };
+  const pathname = usePathname();
 
   // ナビゲーションアイテムをメモ化
   const navigationItems = useMemo(
@@ -394,6 +384,30 @@ export default function Sidebar() {
           </ul>
         </div>
 
+        <div className={sectionStyles.container}>
+          <span className={sectionStyles.title}>統計カテゴリー</span>
+          <ul className={sectionStyles.list}>
+            {categoriesData.map((category) => {
+              const isActive = pathname === `/${category.id}` || pathname?.startsWith(`/${category.id}/`);
+
+              return (
+                <li key={category.id}>
+                  <Link
+                    className={
+                      isActive
+                        ? sectionStyles.link.active
+                        : sectionStyles.link.inactive
+                    }
+                    href={`/${category.id}`}
+                  >
+                    <CategoryIcon iconName={category.icon} className="size-3.5" />
+                    <span>{category.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         <div className={sectionStyles.container}>
           <span className={sectionStyles.title}>Others</span>
