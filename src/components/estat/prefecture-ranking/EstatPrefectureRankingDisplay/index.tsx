@@ -18,7 +18,7 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import ColorSchemeSelector, {
   MapVisualizationOptions,
 } from "@/components/common/ColorSchemeSelector";
-import { PrefectureDataTable } from "@/components/choropleth/PrefectureDataTable";
+import EstatPrefectureDataTable from "@/components/estat/prefecture-ranking/EstatPrefectureDataTable";
 import {
   VisualizationSettings,
   VisualizationSettingsService,
@@ -380,7 +380,7 @@ export default function EstatPrefectureRankingDisplay({
         </div>
 
         {/* データテーブル */}
-        <PrefectureDataTable
+        <EstatPrefectureDataTable
           data={filteredData}
           className="mt-6"
           rankingDirection={

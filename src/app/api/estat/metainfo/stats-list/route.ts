@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
       totalCount = countResult.results?.[0]?.total || 0;
     } else {
       const countStmt = db.prepare(countQuery);
-      const countResult = await countStmt.all();
+      const countResult = await countStmt.bind().all();
       totalCount = countResult.results?.[0]?.total || 0;
     }
 

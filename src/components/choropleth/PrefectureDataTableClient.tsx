@@ -34,10 +34,10 @@ export const PrefectureDataTableClient: React.FC<PrefectureDataTableClientProps>
           comparison = (a.rank || 0) - (b.rank || 0);
           break;
         case 'name':
-          comparison = a.name.localeCompare(b.name);
+          comparison = a.areaName.localeCompare(b.areaName);
           break;
         case 'value':
-          comparison = a.value - b.value;
+          comparison = (a.numericValue || 0) - (b.numericValue || 0);
           break;
       }
 
@@ -143,7 +143,7 @@ export const PrefectureDataTableClient: React.FC<PrefectureDataTableClientProps>
             <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
               {sortedData.map((item, index) => (
                 <tr
-                  key={item.code}
+                  key={item.areaCode}
                   className="hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
                 >
                   <td className="px-3 py-2 whitespace-nowrap">
@@ -153,12 +153,12 @@ export const PrefectureDataTableClient: React.FC<PrefectureDataTableClientProps>
                   </td>
                   <td className="px-3 py-2 whitespace-nowrap">
                     <span className="text-sm text-gray-900 dark:text-neutral-100">
-                      {item.name}
+                      {item.areaName}
                     </span>
                   </td>
                   <td className="px-3 py-2 whitespace-nowrap text-right">
                     <span className={`text-sm text-gray-900 dark:text-neutral-100 ${getValueStyle(item.rank || index + 1)}`}>
-                      {formatValue(item.value, subcategory)}
+                      {formatValue(item.numericValue, subcategory)}
                     </span>
                   </td>
                 </tr>
@@ -183,7 +183,12 @@ export const PrefectureDataTableClient: React.FC<PrefectureDataTableClientProps>
 };
 
 // 値のフォーマット関数
-function formatValue(value: number, subcategory: SubcategoryData): string {
+function formatValue(value: number | null, subcategory: SubcategoryData): string {
+  // null または undefined の場合
+  if (value === null || value === undefined) {
+    return '-';
+  }
+
   const { dataType, unit } = subcategory;
 
   if (dataType === 'percentage') {

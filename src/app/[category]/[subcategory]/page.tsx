@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getSubcategoryById } from '@/lib/choropleth/categories';
 import { EstatStatsDataService } from '@/lib/estat/statsdata';
 import { transformEstatToFormattedValues, transformToChoroplethData, generateSampleData } from '@/lib/choropleth/data-transformer';
-import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
+import { getSubcategoryComponent } from '@/components/subcategories';
 
 interface PageProps {
   params: {
@@ -47,6 +47,7 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
     try {
       // e-stat APIからデータを取得
       const estatData = await EstatStatsDataService.getStatsDataRaw(subcategory.statsDataId, {
+        categoryFilter: subcategory.categoryCode,
         yearFilter: year,
         limit: 100000,
       });
@@ -76,8 +77,11 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
     }
   }
 
+  // サブカテゴリーIDに対応するコンポーネントを取得
+  const SubcategoryComponent = getSubcategoryComponent(subcategoryId);
+
   return (
-    <SubcategoryPageClient
+    <SubcategoryComponent
       category={category}
       subcategory={subcategory}
       choroplethData={choroplethData}

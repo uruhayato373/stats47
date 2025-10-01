@@ -22,6 +22,7 @@ export interface SubcategoryData {
   tableName: string;
   displayOrder: number;
   colorScheme?: string;
+  categoryCode?: string;
   lastUpdated?: string;
   availableYears?: string[];
 }

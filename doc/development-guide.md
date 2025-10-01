@@ -9,12 +9,13 @@
 1. [開発環境のセットアップ](#開発環境のセットアップ)
 2. [プロジェクト構造](#プロジェクト構造)
 3. [e-Stat API 統合](#estat-api統合)
-4. [コーディング規約](#コーディング規約)
-5. [開発ワークフロー](#開発ワークフロー)
-6. [テスト](#テスト)
-7. [デバッグ](#デバッグ)
+4. [データベース開発](#データベース開発)
+5. [コーディング規約](#コーディング規約)
+6. [開発ワークフロー](#開発ワークフロー)
+7. [テスト・デバッグ](#テストデバッグ)
 8. [パフォーマンス最適化](#パフォーマンス最適化)
-9. [トラブルシューティング](#トラブルシューティング)
+9. [デプロイ](#デプロイ)
+10. [トラブルシューティング](#トラブルシューティング)
 
 ## 開発環境のセットアップ
 
@@ -109,15 +110,39 @@ stats47/
 
 ## e-Stat API 統合
 
-### @estat/パッケージの概要
+### 概要
 
-このプロジェクトでは、e-Stat API の型安全性と開発体験を向上させるために`@estat/`パッケージを使用しています。
+e-Stat API は、日本の政府統計データにアクセスするための公式 API です。このプロジェクトでは、型安全性と開発体験を向上させるために`@estat/`パッケージを使用しています。
+
+### @estat/パッケージの概要
 
 #### 利用可能なパッケージ
 
 - **@estat/types**: e-Stat API の完全な型定義
 - **@estat/client**: e-Stat API クライアントライブラリ
 - **@estat/utils**: データ処理と変換ユーティリティ
+
+#### インストール
+
+```bash
+npm install @estat/types @estat/client @estat/utils
+```
+
+### 環境変数の設定
+
+#### 必要な環境変数
+
+```env
+# e-Stat API設定
+NEXT_PUBLIC_ESTAT_APP_ID=your-estat-api-app-id
+```
+
+#### e-Stat API キーの取得
+
+1. [e-Stat API](https://www.e-stat.go.jp/api/)にアクセス
+2. アカウントを作成またはログイン
+3. アプリケーション ID を申請
+4. 承認後に API キーを取得
 
 ### 基本的な使用方法
 
@@ -128,6 +153,7 @@ import {
   EstatResponse,
   EstatParameter,
   EstatCatalogResponse,
+  EstatListResponse,
 } from "@estat/types";
 ```
 
@@ -155,6 +181,44 @@ const fetchStatisticalData = async (statsDataId: string) => {
     return response;
   } catch (error) {
     console.error("e-Stat API呼び出しエラー:", error);
+    throw error;
+  }
+};
+```
+
+#### 4. カタログ情報の取得
+
+```typescript
+// 統計データのカタログ情報を取得
+const fetchCatalogInfo = async (statsDataId: string) => {
+  try {
+    const response = await estatClient.getStatsDataCatalog({
+      statsDataId,
+      lang: "J",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("カタログ情報取得エラー:", error);
+    throw error;
+  }
+};
+```
+
+#### 5. メタデータの取得
+
+```typescript
+// 統計データのメタデータを取得
+const fetchMetaData = async (statsDataId: string) => {
+  try {
+    const response = await estatClient.getStatsDataMeta({
+      statsDataId,
+      lang: "J",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("メタデータ取得エラー:", error);
     throw error;
   }
 };
@@ -190,6 +254,67 @@ const processEstatResponse = (response: EstatResponse) => {
 };
 ```
 
+#### パラメータの型安全な設定
+
+```typescript
+import { EstatParameter } from "@estat/types";
+
+const createEstatParameter = (): EstatParameter => ({
+  appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
+  lang: "J",
+  statsDataId: "0003109941",
+  metaGetFlg: "Y",
+  cntGetFlg: "N",
+  startPosition: 1,
+  limit: 100,
+  searchWord: "",
+  searchOption: 1,
+  tabIndex: 1,
+  categoryTabIndex: 1,
+  dataType: 1,
+  dataFormat: "json",
+});
+```
+
+### データ変換ユーティリティ
+
+#### データの変換と整形
+
+```typescript
+import {
+  transformEstatData,
+  formatEstatValue,
+  parseEstatTime,
+} from "@estat/utils";
+
+// e-Statデータの変換
+const processEstatData = (rawData: any[]) => {
+  return rawData.map((item) => ({
+    ...item,
+    value: formatEstatValue(item.VALUE),
+    time: parseEstatTime(item.TIME),
+    area: transformEstatData(item.AREA),
+  }));
+};
+```
+
+#### 地域コードの変換
+
+```typescript
+import { convertAreaCode, getAreaName } from "@estat/utils";
+
+const getRegionInfo = (areaCode: string) => {
+  const areaName = getAreaName(areaCode);
+  const convertedCode = convertAreaCode(areaCode);
+
+  return {
+    code: convertedCode,
+    name: areaName,
+    originalCode: areaCode,
+  };
+};
+```
+
 ### エラーハンドリング
 
 #### 型安全なエラー処理
@@ -212,25 +337,6 @@ const handleEstatError = (error: unknown) => {
   }
 
   return "予期しないエラーが発生しました";
-};
-```
-
-### データ変換ユーティリティ
-
-#### 地域コードの変換
-
-```typescript
-import { convertAreaCode, getAreaName } from "@estat/utils";
-
-const getRegionInfo = (areaCode: string) => {
-  const areaName = getAreaName(areaCode);
-  const convertedCode = convertAreaCode(areaCode);
-
-  return {
-    code: convertedCode,
-    name: areaName,
-    originalCode: areaCode,
-  };
 };
 ```
 
@@ -311,6 +417,34 @@ export const EstatDataFetcher: React.FC<EstatDataFetcherProps> = ({
 
   return <>{children(data, loading, error)}</>;
 };
+
+// レスポンス処理関数
+const processEstatResponse = (response: EstatResponse, regionCode: string) => {
+  try {
+    const statisticalData = response.GET_STATS_DATA.STATISTICAL_DATA;
+    const dataInf = statisticalData.DATA_INF;
+
+    if (!dataInf || !Array.isArray(dataInf)) {
+      return null;
+    }
+
+    // 指定された地域のデータをフィルタリング
+    const regionData = dataInf.filter(
+      (item) => item.AREA && item.AREA.includes(regionCode)
+    );
+
+    return regionData.map((item) => ({
+      value: item.VALUE,
+      area: item.AREA,
+      time: item.TIME,
+      category: item.CAT01,
+      unit: item.UNIT,
+    }));
+  } catch (error) {
+    console.error("レスポンス処理エラー:", error);
+    return null;
+  }
+};
 ```
 
 ### ベストプラクティス
@@ -338,32 +472,6 @@ export const EstatDataFetcher: React.FC<EstatDataFetcherProps> = ({
 - API キーの適切な管理
 - 環境変数での機密情報保護
 - 入力値の検証とサニタイゼーション
-
-### トラブルシューティング
-
-#### よくある問題と解決方法
-
-##### 1. 型定義が見つからない
-
-```bash
-# パッケージの再インストール
-npm install @estat/types @estat/client @estat/utils
-
-# TypeScriptの再起動
-# VS Codeの場合: Cmd+Shift+P → "TypeScript: Restart TS Server"
-```
-
-##### 2. API 呼び出しエラー
-
-- API キーが正しく設定されているか確認
-- ネットワーク接続を確認
-- e-Stat API の利用制限を確認
-
-##### 3. データが取得できない
-
-- 統計データ ID が正しいか確認
-- パラメータの設定を確認
-- API レスポンスの構造を確認
 
 ### Storybook 設定
 
@@ -701,7 +809,81 @@ git push origin feature/new-feature
 4. 修正・改善の実施
 5. 承認・マージ
 
-### 3. テスト
+## データベース開発
+
+### データベース構造
+
+このプロジェクトでは、Cloudflare D1（SQLite ベース）をデータベースとして使用しています。
+
+### データベース管理
+
+#### スキーマの適用
+
+```bash
+# ローカル環境にスキーマを適用
+./database/manage.sh schema
+
+# または、手動でスキーマを適用
+npx wrangler d1 execute stats47 --local --file=./database/schemas/main.sql
+```
+
+#### データの挿入
+
+```bash
+# サンプルデータの挿入
+npx wrangler d1 execute stats47 --local --file=./database/seeds/sample-data.sql
+```
+
+#### データベースのクエリ実行
+
+```bash
+# ローカルデータベースへのクエリ
+npx wrangler d1 execute stats47 --local --command="SELECT * FROM users"
+
+# 本番データベースへのクエリ
+npx wrangler d1 execute stats47 --command="SELECT * FROM users"
+```
+
+### データベース設計のベストプラクティス
+
+#### 1. スキーマ設計
+
+- 適切な正規化を行う
+- インデックスを適切に設定
+- 外部キー制約を活用
+
+```sql
+CREATE TABLE regions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_regions_code ON regions(code);
+```
+
+#### 2. データ型の選択
+
+- SQLite でサポートされる型を使用
+- NULL 制約を適切に設定
+- デフォルト値を定義
+
+#### 3. トランザクション管理
+
+```typescript
+// トランザクションの実装例
+const updateUserData = async (db: D1Database, userId: number, data: any) => {
+  const stmt = db.prepare(
+    "UPDATE users SET name = ?, email = ? WHERE id = ?"
+  );
+  await stmt.bind(data.name, data.email, userId).run();
+};
+```
+
+## テスト・デバッグ
+
+### テスト
 
 #### テストの種類
 
@@ -787,7 +969,7 @@ expect(dataRows[0].item_name).toBe("総人口"); // 変換後
 ✓ EstatDataTransformer > extractItemName (private method test) > 基本的なパターンを正しく処理する
 ```
 
-## デバッグ
+### デバッグ
 
 ### 1. ブラウザ開発者ツール
 
@@ -875,6 +1057,100 @@ const logger = {
 // 使用例
 logger.info("ユーザーログイン", { userId: 123, timestamp: new Date() });
 logger.error("API呼び出し失敗", error);
+```
+
+## デプロイ
+
+### Cloudflare Pages へのデプロイ
+
+このプロジェクトは Cloudflare Pages にデプロイされます。
+
+#### 自動デプロイ
+
+```bash
+# mainブランチへのプッシュで自動デプロイ
+git push origin main
+```
+
+#### 手動デプロイ
+
+```bash
+# ビルドの実行
+npm run build
+
+# Cloudflare Pagesにデプロイ
+npx wrangler pages deploy .next
+```
+
+### デプロイ前のチェックリスト
+
+#### 1. 環境変数の確認
+
+```bash
+# 本番環境の環境変数を設定
+# Cloudflare Pages ダッシュボードで設定
+NEXT_PUBLIC_ESTAT_APP_ID=your-production-api-key
+```
+
+#### 2. ビルドの動作確認
+
+```bash
+# ローカルでビルドを実行
+npm run build
+
+# ビルド結果を確認
+npm run start
+```
+
+#### 3. テストの実行
+
+```bash
+# 全テストの実行
+npm test
+
+# カバレッジの確認
+npm run test:coverage
+```
+
+#### 4. 型チェック
+
+```bash
+# TypeScriptの型チェック
+npx tsc --noEmit
+```
+
+### デプロイ後の確認
+
+#### 1. 動作確認
+
+- 本番環境での動作確認
+- API 呼び出しの動作確認
+- データ表示の確認
+
+#### 2. パフォーマンスチェック
+
+- ページロード速度の確認
+- Lighthouse スコアの確認
+- Core Web Vitals の確認
+
+#### 3. エラーモニタリング
+
+- エラーログの確認
+- API エラーの監視
+- ユーザーフィードバックの確認
+
+### ロールバック手順
+
+問題が発生した場合のロールバック：
+
+```bash
+# 前のバージョンにロールバック
+git revert HEAD
+git push origin main
+
+# または、特定のコミットに戻す
+git reset --hard <commit-hash>
+git push --force origin main
 ```
 
 ## パフォーマンス最適化
@@ -1077,18 +1353,67 @@ const fetchWithRetry = async (url: string, retries = 3) => {
 };
 ```
 
+## トラブルシューティング（e-Stat API 関連）
+
+### よくある問題と解決方法
+
+#### 1. 型定義が見つからない
+
+```bash
+# パッケージの再インストール
+npm install @estat/types @estat/client @estat/utils
+
+# TypeScriptの再起動
+# VS Codeの場合: Cmd+Shift+P → "TypeScript: Restart TS Server"
+```
+
+#### 2. API 呼び出しエラー
+
+- API キーが正しく設定されているか確認
+- ネットワーク接続を確認
+- e-Stat API の利用制限を確認
+
+#### 3. データが取得できない
+
+- 統計データ ID が正しいか確認
+- パラメータの設定を確認
+- API レスポンスの構造を確認
+
+#### 4. データ変換エラー
+
+- レスポンスの構造を確認
+- 型定義と実際のデータ構造が一致しているか確認
+- エラーログを確認して原因を特定
+
 ## 参考資料
+
+### 公式ドキュメント
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [e-Stat API Documentation](https://www.e-stat.go.jp/api/)
+
+### e-Stat API 関連
+
+- [e-Stat API 公式ドキュメント](https://www.e-stat.go.jp/api/)
 - [@estat/パッケージドキュメント](https://github.com/estat-org/estat-packages)
+
+### Cloudflare 関連
+
+- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
+- [Cloudflare D1 Documentation](https://developers.cloudflare.com/d1/)
+- [Wrangler CLI Documentation](https://developers.cloudflare.com/workers/wrangler/)
+
+### プロジェクト内ドキュメント
+
+- [アーキテクチャ設計](/doc/architecture.md)
+- [API 設計](/doc/api-design.md)
+- [コンポーネント設計](/doc/component-design.md)
 
 ## 更新履歴
 
-- **2024-01-XX**: 初版作成
-- **2024-01-XX**: e-Stat API 統合の追加
+- **2025-10-01**: estat-integration.md の内容を統合、データベース開発セクション追加、デプロイセクション追加
 - **2024-01-XX**: @estat/パッケージ統合の追加
-- **2024-01-XX**: 開発者ガイドの拡充
+- **2024-01-XX**: e-Stat API 統合の追加
+- **2024-01-XX**: 初版作成

@@ -19,10 +19,11 @@ export const CHOROPLETH_CATEGORIES: CategoryData[] = [
         description: '都道府県別の総面積',
         unit: 'km²',
         dataType: 'numerical',
-        statsDataId: '0000010101',
+        statsDataId: '0000010201',
         tableName: '国勢調査',
         displayOrder: 1,
         colorScheme: 'interpolateGreens',
+        categoryCode: 'A01201',
       },
       {
         id: 'weather-climate',

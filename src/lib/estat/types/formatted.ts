@@ -52,6 +52,7 @@ export interface FormattedValue {
   categoryName: string;
   timeCode: string;
   timeName: string;
+  rank?: number;
 }
 
 /**

@@ -66,8 +66,15 @@ export class EstatAPIClient {
 
       if (result && typeof result === "object" && result !== null) {
         const resultObj = result as Record<string, unknown>;
-        if (typeof resultObj.STATUS === "number" && resultObj.STATUS !== 0) {
-          throw EstatAPIError.fromErrorCode(resultObj.STATUS, result);
+        if (typeof resultObj.STATUS === "number") {
+          // STATUS=1は警告（データは取得できている）なのでログのみ
+          if (resultObj.STATUS === 1) {
+            console.warn('e-STAT API warning (STATUS=1):', resultObj.ERROR_MSG || '一部にエラーがあります');
+          }
+          // STATUS>=100は実際のエラー
+          else if (resultObj.STATUS >= 100) {
+            throw EstatAPIError.fromErrorCode(resultObj.STATUS, result);
+          }
         }
       }
 

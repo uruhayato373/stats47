@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
-import { ChoroplethDisplayData, SubcategoryData } from '@/types/choropleth';
+import React, { useState } from 'react';
+import { ChoroplethDisplayData, SubcategoryData, ChoroplethDataPoint } from '@/types/choropleth';
+import { JapanMap } from './JapanMap';
 
 interface ChoroplethDataDisplayClientProps {
   data: ChoroplethDisplayData | null;
@@ -16,6 +17,8 @@ export const ChoroplethDataDisplayClient: React.FC<ChoroplethDataDisplayClientPr
   year,
   className = ''
 }) => {
+  const [selectedPrefecture, setSelectedPrefecture] = useState<ChoroplethDataPoint | null>(null);
+
   // データが存在しない場合の表示
   if (!data) {
     return (
@@ -74,21 +77,16 @@ export const ChoroplethDataDisplayClient: React.FC<ChoroplethDataDisplayClientPr
           </div>
         </div>
 
-        {/* 地図表示（プレースホルダー） */}
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-              </svg>
-            </div>
-            <p className="text-gray-600 dark:text-neutral-400 text-sm">
-              日本地図コンポーネント
-            </p>
-            <p className="text-gray-500 dark:text-neutral-500 text-xs mt-1">
-              {data.dataPoints.length}件のデータ
-            </p>
-          </div>
+        {/* 地図表示 */}
+        <div className="w-full h-full">
+          <JapanMap
+            data={data.data}
+            colorScheme={subcategory.colorScheme || 'interpolateBlues'}
+            onPrefectureClick={(pref) => setSelectedPrefecture(pref)}
+            onPrefectureHover={(pref) => {
+              // ホバー時の処理（オプション）
+            }}
+          />
         </div>
       </div>
     </div>
