@@ -95,13 +95,16 @@ export function transformEstatToFormattedValues(
         const numericValue = parseFloat(value);
         if (!isNaN(numericValue)) {
           const formattedValue: FormattedValue = {
-            areaCode: areaCode,
-            areaName: areaName,
+            value: value,
             numericValue: numericValue,
             displayValue: formatValue(numericValue, subcategory),
             unit: subcategory.unit,
+            areaCode: areaCode,
+            areaName: areaName,
+            categoryCode: subcategory.categoryCode || '',
             categoryName: subcategory.name,
-            year: year,
+            timeCode: timeCode || '',
+            timeName: timeTable.get(timeCode) || year,
           };
 
           result.push(formattedValue);
@@ -248,14 +251,18 @@ export function generateSampleData(
           break;
       }
 
+      const roundedValue = Math.round(baseValue);
       sampleData.push({
+        value: roundedValue.toString(),
+        numericValue: roundedValue,
+        displayValue: formatValue(roundedValue, subcategory),
+        unit: subcategory.unit,
         areaCode: `${prefCode}000`,
         areaName: prefName,
-        numericValue: Math.round(baseValue),
-        displayValue: formatValue(baseValue, subcategory),
-        unit: subcategory.unit,
+        categoryCode: subcategory.categoryCode || '',
         categoryName: subcategory.name,
-        year: year,
+        timeCode: year,
+        timeName: `${year}年`,
       });
     }
   }

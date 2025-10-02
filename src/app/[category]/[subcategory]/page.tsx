@@ -46,25 +46,44 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
   } else {
     try {
       // e-stat APIからデータを取得
+      console.log(`[${subcategoryId}] Fetching data:`, {
+        statsDataId: subcategory.statsDataId,
+        categoryCode: subcategory.categoryCode,
+        year,
+      });
+
       const estatData = await EstatStatsDataService.getStatsDataRaw(subcategory.statsDataId, {
         categoryFilter: subcategory.categoryCode,
         yearFilter: year,
         limit: 100000,
       });
 
+      console.log(`[${subcategoryId}] API Response received:`, {
+        hasData: !!estatData,
+        dataPath: !!estatData?.GET_STATS_DATA?.STATISTICAL_DATA,
+      });
+
       // データを変換
       formattedValues = transformEstatToFormattedValues(estatData, subcategory, year);
 
+      console.log(`[${subcategoryId}] Transformed values count:`, formattedValues.length);
+
       if (formattedValues.length === 0) {
         // データが取得できない場合はサンプルデータを使用
+        console.log(`[${subcategoryId}] No data found, using sample data`);
         formattedValues = generateSampleData(subcategory, year);
         isSample = true;
         error = 'APIからデータを取得できないためサンプルデータを使用';
       } else {
         isSample = false;
+        console.log(`[${subcategoryId}] Data sample:`, formattedValues.slice(0, 2));
       }
 
       choroplethData = transformToChoroplethData(formattedValues, subcategory, year);
+      console.log(`[${subcategoryId}] Choropleth data created:`, {
+        dataPoints: choroplethData.data.length,
+        hasData: !!choroplethData,
+      });
 
     } catch (estatError) {
       console.error('e-stat API error:', estatError);
