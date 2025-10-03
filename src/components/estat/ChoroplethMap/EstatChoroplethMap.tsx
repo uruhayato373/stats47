@@ -66,21 +66,70 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
   const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [availableYears, setAvailableYears] = useState<string[]>([]);
+  const [selectedYear, setSelectedYear] = useState<string>("");
+
+  // 利用可能な年度を取得
+  useEffect(() => {
+    const fetchAvailableYears = async () => {
+      try {
+        console.log('[EstatChoroplethMap] Fetching available years...');
+
+        // データを取得（年度フィルタなし、少量のデータのみ）
+        const data = await EstatStatsDataService.getAndFormatStatsData(
+          params.statsDataId,
+          {
+            categoryFilter: params.cdCat01,
+            limit: 100,
+          }
+        );
+
+        // 年度一覧を抽出
+        const years = data.years
+          .map((y) => y.timeCode)
+          .filter((code) => code && code.length >= 4)
+          .sort((a, b) => b.localeCompare(a)); // 降順ソート（最新が先頭）
+
+        console.log('[EstatChoroplethMap] Available years:', years);
+
+        setAvailableYears(years);
+
+        // cdTimeが指定されている場合はそれを使用、なければ最新の年度を選択
+        const initialYear = params.cdTime || years[0] || '';
+        setSelectedYear(initialYear);
+      } catch (error) {
+        console.error('[EstatChoroplethMap] Failed to fetch years:', error);
+        // エラー時はフォールバック
+        const fallbackYears = Array.from(
+          { length: 5 },
+          (_, i) => String(new Date().getFullYear() - i) + '000000'
+        );
+        setAvailableYears(fallbackYears);
+        setSelectedYear(params.cdTime || fallbackYears[0]);
+      }
+    };
+
+    fetchAvailableYears();
+  }, [params.statsDataId, params.cdCat01, params.cdTime]);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedYear) {
+        return; // 年度が選択されるまで待つ
+      }
+
       setLoading(true);
       setError(null);
 
       try {
-        console.log('[EstatChoroplethMap] Fetching data with params:', params);
+        console.log('[EstatChoroplethMap] Fetching data with params:', { ...params, cdTime: selectedYear });
 
         // e-stat APIからデータを取得
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
           {
             categoryFilter: params.cdCat01,
-            yearFilter: params.cdTime,
+            yearFilter: selectedYear,
             limit: params.limit || 100000,
           }
         );
@@ -122,7 +171,7 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
     fetchData();
     // onDataLoaded と onError を依存配列から除外（無限ループ防止）
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.statsDataId, params.cdCat01, params.cdTime, params.limit]);
+  }, [params.statsDataId, params.cdCat01, selectedYear, params.limit]);
 
   // ローディング状態
   if (loading) {
@@ -195,9 +244,44 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
     );
   }
 
+  // 年度変更ハンドラー
+  const handleYearChange = (year: string) => {
+    setSelectedYear(year);
+  };
+
   // 地図表示
   return (
     <div className={className}>
+      {/* 年度選択UI */}
+      <div className="mb-4 flex items-center justify-end gap-2">
+        <label
+          htmlFor="year-select"
+          className="text-sm text-gray-600 dark:text-neutral-400"
+        >
+          年度:
+        </label>
+        <select
+          id="year-select"
+          value={selectedYear}
+          onChange={(e) => handleYearChange(e.target.value)}
+          className="px-3 py-1.5 text-sm border border-gray-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-800 text-gray-900 dark:text-white"
+          disabled={loading || availableYears.length === 0}
+        >
+          {availableYears.length === 0 && (
+            <option value="">年度を読み込み中...</option>
+          )}
+          {availableYears.map((yearCode) => {
+            // タイムコードを年に変換（例: 2020000000 -> 2020）
+            const displayYear = yearCode.substring(0, 4);
+            return (
+              <option key={yearCode} value={yearCode}>
+                {displayYear}年
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
       <ChoroplethMap
         data={formattedValues}
         width={width}
