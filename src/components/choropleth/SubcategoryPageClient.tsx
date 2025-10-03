@@ -1,36 +1,41 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CategoryIcon } from './CategoryIcon';
 import { ChoroplethDataDisplayClient } from './ChoroplethDataDisplayClient';
 import { PrefectureDataTableClient } from './PrefectureDataTableClient';
 import Header from '@/components/layout/Header';
 import Sidebar from '@/components/layout/Sidebar';
-import { CategoryData, SubcategoryData, ChoroplethDisplayData, FormattedValue } from '@/types/choropleth';
+import { useSubcategoryData } from '@/hooks/useSubcategoryData';
+import { CategoryData, SubcategoryData } from '@/types/choropleth';
 
 interface SubcategoryPageClientProps {
   category: CategoryData;
   subcategory: SubcategoryData;
-  choroplethData: ChoroplethDisplayData | null;
-  formattedValues: FormattedValue[] | null;
   currentYear: string;
-  isSample: boolean;
-  error: string | null;
 }
 
 export const SubcategoryPageClient: React.FC<SubcategoryPageClientProps> = ({
   category,
   subcategory,
-  choroplethData,
-  formattedValues,
   currentYear,
-  isSample,
-  error,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedYear, setSelectedYear] = useState(currentYear);
+
+  // データ取得
+  const {
+    choroplethData,
+    formattedValues,
+    loading,
+    error,
+    isSample,
+  } = useSubcategoryData({
+    subcategory,
+    year: selectedYear,
+  });
 
   // 年度変更時のURLパラメータ更新
   const handleYearChange = (year: string) => {
@@ -125,8 +130,15 @@ export const SubcategoryPageClient: React.FC<SubcategoryPageClientProps> = ({
             </div>
           </div>
 
+          {/* ローディング表示 */}
+          {loading && (
+            <div className="mx-4 mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+              <p className="text-sm text-blue-800 dark:text-blue-200">データを読み込み中...</p>
+            </div>
+          )}
+
           {/* エラー表示 */}
-          {error && (
+          {error && !loading && (
             <div className="mx-4 mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
               <p className="text-sm text-yellow-800 dark:text-yellow-200">{error}</p>
             </div>
@@ -143,6 +155,7 @@ export const SubcategoryPageClient: React.FC<SubcategoryPageClientProps> = ({
                 <div className="h-full">
                   <ChoroplethDataDisplayClient
                     data={choroplethData}
+                    formattedValues={formattedValues}
                     subcategory={subcategory}
                     year={selectedYear}
                   />

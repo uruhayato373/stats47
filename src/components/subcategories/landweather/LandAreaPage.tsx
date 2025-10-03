@@ -5,30 +5,35 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { SubcategoryLayout } from '../SubcategoryLayout';
 import { ChoroplethDataDisplayClient } from '@/components/choropleth/ChoroplethDataDisplayClient';
 import { PrefectureDataTableClient } from '@/components/choropleth/PrefectureDataTableClient';
-import { CategoryData, SubcategoryData, ChoroplethDisplayData } from '@/types/choropleth';
+import { useSubcategoryData } from '@/hooks/useSubcategoryData';
+import { CategoryData, SubcategoryData } from '@/types/choropleth';
 
 interface LandAreaPageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
-  choroplethData: ChoroplethDisplayData | null;
-  formattedValues: any[] | null;
   currentYear: string;
-  isSample: boolean;
-  error: string | null;
 }
 
 export const LandAreaPage: React.FC<LandAreaPageProps> = ({
   category,
   subcategory,
-  choroplethData,
-  formattedValues,
   currentYear,
-  isSample,
-  error,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedYear, setSelectedYear] = useState(currentYear);
+
+  // データ取得
+  const {
+    choroplethData,
+    formattedValues,
+    loading,
+    error,
+    isSample,
+  } = useSubcategoryData({
+    subcategory,
+    year: selectedYear,
+  });
 
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
@@ -92,8 +97,15 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
         </div>
       </div>
 
+      {/* ローディング表示 */}
+      {loading && (
+        <div className="mx-4 mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <p className="text-sm text-blue-800 dark:text-blue-200">データを読み込み中...</p>
+        </div>
+      )}
+
       {/* エラー表示 */}
-      {error && (
+      {error && !loading && (
         <div className="mx-4 mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
           <p className="text-sm text-yellow-800 dark:text-yellow-200">{error}</p>
         </div>
@@ -110,6 +122,7 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
             <div className="h-full">
               <ChoroplethDataDisplayClient
                 data={choroplethData}
+                formattedValues={formattedValues}
                 subcategory={subcategory}
                 year={selectedYear}
               />

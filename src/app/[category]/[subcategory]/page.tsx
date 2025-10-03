@@ -1,23 +1,22 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { getSubcategoryById } from '@/lib/choropleth/categories';
-import { EstatStatsDataService } from '@/lib/estat/statsdata';
-import { transformEstatToFormattedValues, transformToChoroplethData, generateSampleData } from '@/lib/choropleth/data-transformer';
 import { getSubcategoryComponent } from '@/components/subcategories';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     category: string;
     subcategory: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     year?: string;
-  };
+  }>;
 }
 
 export default async function SubcategoryPage({ params, searchParams }: PageProps) {
-  const { category: categoryId, subcategory: subcategoryId } = params;
-  const year = searchParams.year || new Date().getFullYear().toString();
+  const { category: categoryId, subcategory: subcategoryId } = await params;
+  const { year } = await searchParams;
+  const currentYear = year || new Date().getFullYear().toString();
 
   // カテゴリとサブカテゴリの存在確認
   const subcategoryData = getSubcategoryById(subcategoryId);
@@ -29,73 +28,6 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
 
   const { category, subcategory } = subcategoryData;
 
-  // サーバーサイドでデータ取得
-  let choroplethData = null;
-  let formattedValues = null;
-  let isSample = false;
-  let error = null;
-
-  // 環境変数でサンプルデータ使用を制御
-  const useSampleData = process.env.FORCE_SAMPLE_DATA === 'true';
-
-  if (useSampleData) {
-    // サンプルデータを生成
-    formattedValues = generateSampleData(subcategory, year);
-    choroplethData = transformToChoroplethData(formattedValues, subcategory, year);
-    error = '設定によりサンプルデータを使用';
-  } else {
-    try {
-      // e-stat APIからデータを取得
-      console.log(`[${subcategoryId}] Fetching data:`, {
-        statsDataId: subcategory.statsDataId,
-        categoryCode: subcategory.categoryCode,
-        year,
-      });
-
-      const estatData = await EstatStatsDataService.getStatsDataRaw(subcategory.statsDataId, {
-        categoryFilter: subcategory.categoryCode,
-        yearFilter: year,
-        limit: 100000,
-      });
-
-      console.log(`[${subcategoryId}] API Response received:`, {
-        hasData: !!estatData,
-        dataPath: !!estatData?.GET_STATS_DATA?.STATISTICAL_DATA,
-      });
-
-      // データを変換
-      formattedValues = transformEstatToFormattedValues(estatData, subcategory, year);
-
-      console.log(`[${subcategoryId}] Transformed values count:`, formattedValues.length);
-
-      if (formattedValues.length === 0) {
-        // データが取得できない場合はサンプルデータを使用
-        console.log(`[${subcategoryId}] No data found, using sample data`);
-        formattedValues = generateSampleData(subcategory, year);
-        isSample = true;
-        error = 'APIからデータを取得できないためサンプルデータを使用';
-      } else {
-        isSample = false;
-        console.log(`[${subcategoryId}] Data sample:`, formattedValues.slice(0, 2));
-      }
-
-      choroplethData = transformToChoroplethData(formattedValues, subcategory, year);
-      console.log(`[${subcategoryId}] Choropleth data created:`, {
-        dataPoints: choroplethData.data.length,
-        hasData: !!choroplethData,
-      });
-
-    } catch (estatError) {
-      console.error('e-stat API error:', estatError);
-
-      // e-stat APIエラーの場合はサンプルデータを使用
-      formattedValues = generateSampleData(subcategory, year);
-      choroplethData = transformToChoroplethData(formattedValues, subcategory, year);
-      isSample = true;
-      error = 'e-stat APIエラーのためサンプルデータを使用';
-    }
-  }
-
   // サブカテゴリーIDに対応するコンポーネントを取得
   const SubcategoryComponent = getSubcategoryComponent(subcategoryId);
 
@@ -103,11 +35,7 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
     <SubcategoryComponent
       category={category}
       subcategory={subcategory}
-      choroplethData={choroplethData}
-      formattedValues={formattedValues}
-      currentYear={year}
-      isSample={isSample}
-      error={error}
+      currentYear={currentYear}
     />
   );
 }
