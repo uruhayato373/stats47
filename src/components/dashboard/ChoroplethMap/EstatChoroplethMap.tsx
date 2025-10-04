@@ -64,35 +64,25 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
   onError,
 }) => {
   const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
-  const [allValues, setAllValues] = useState<FormattedValue[]>([]); // 全年度のデータを保持
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [availableYears, setAvailableYears] = useState<string[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("");
 
-  // データを取得（年度フィルタなし）
+  // ステップ1: 年度一覧を取得
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
+    const fetchAvailableYears = async () => {
       try {
-        console.log('[EstatChoroplethMap] Fetching data with params:', params);
+        console.log('[EstatChoroplethMap] Step 1: Fetching available years...');
 
-        // e-stat APIからデータを取得（年度フィルタなし）
+        // 少量のデータを取得して年度一覧を取得
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
           {
             categoryFilter: params.cdCat01,
-            // yearFilterは指定しない - APIから全年度のデータを取得
-            limit: params.limit || 100000,
+            limit: 100, // 少量のみ
           }
         );
-
-        console.log('[EstatChoroplethMap] Data fetched:', {
-          totalValues: response.values.length,
-          validValues: response.metadata.validValues,
-        });
 
         // 年度一覧を抽出
         const years = response.years
@@ -103,12 +93,68 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
         console.log('[EstatChoroplethMap] Available years:', years);
         setAvailableYears(years);
 
-        // 全データを保存
-        setAllValues(response.values);
-
         // 最新年度を選択（または指定された年度）
         const targetYear = params.cdTime || years[0] || '';
         setSelectedYear(targetYear);
+      } catch (err) {
+        console.error('[EstatChoroplethMap] Error fetching years:', err);
+        const errorMessage = err instanceof Error ? err.message : '年度一覧の取得に失敗しました';
+        setError(errorMessage);
+
+        if (onError && err instanceof Error) {
+          onError(err);
+        }
+      }
+    };
+
+    fetchAvailableYears();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.statsDataId, params.cdCat01, params.cdTime]);
+
+  // ステップ2: 選択年度のデータを取得
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!selectedYear) {
+        return; // 年度が選択されるまで待つ
+      }
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        console.log('[EstatChoroplethMap] Step 2: Fetching data for year:', selectedYear);
+
+        // 選択年度のデータを取得
+        const response = await EstatStatsDataService.getAndFormatStatsData(
+          params.statsDataId,
+          {
+            categoryFilter: params.cdCat01,
+            yearFilter: selectedYear, // 年度フィルタを指定
+            limit: params.limit || 100000,
+          }
+        );
+
+        console.log('[EstatChoroplethMap] Data fetched:', {
+          totalValues: response.values.length,
+          validValues: response.metadata.validValues,
+        });
+
+        // 都道府県データのみをフィルタリング（全国データを除外）
+        const prefectureValues = response.values.filter(
+          (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
+        );
+
+        console.log('[EstatChoroplethMap] Prefecture values:', prefectureValues.length);
+
+        if (prefectureValues.length === 0) {
+          throw new Error('都道府県データが見つかりませんでした');
+        }
+
+        setFormattedValues(prefectureValues);
+
+        if (onDataLoaded) {
+          onDataLoaded(prefectureValues);
+        }
       } catch (err) {
         console.error('[EstatChoroplethMap] Error fetching data:', err);
         const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
@@ -123,40 +169,8 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
     };
 
     fetchData();
-    // onDataLoaded と onError を依存配列から除外（無限ループ防止）
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.statsDataId, params.cdCat01, params.cdTime, params.limit]);
-
-  // 選択年度が変更されたらデータをフィルタリング
-  useEffect(() => {
-    if (!selectedYear || allValues.length === 0) {
-      return;
-    }
-
-    // 選択年度のデータのみをフィルタリング
-    const filteredByYear = allValues.filter(
-      (v) => v.timeCode === selectedYear
-    );
-
-    console.log('[EstatChoroplethMap] Filtering by year:', {
-      selectedYear,
-      totalValues: allValues.length,
-      filteredCount: filteredByYear.length,
-    });
-
-    // 都道府県データのみをフィルタリング（全国データを除外）
-    const prefectureValues = filteredByYear.filter(
-      (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
-    );
-
-    console.log('[EstatChoroplethMap] Prefecture values:', prefectureValues.length);
-
-    setFormattedValues(prefectureValues);
-
-    if (onDataLoaded && prefectureValues.length > 0) {
-      onDataLoaded(prefectureValues);
-    }
-  }, [selectedYear, allValues, onDataLoaded]);
+  }, [selectedYear, params.statsDataId, params.cdCat01, params.limit]);
 
   // ローディング状態
   if (loading) {
