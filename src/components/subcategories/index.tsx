@@ -1,6 +1,6 @@
 // カテゴリー別にインポート
 import { LandAreaPage } from './landweather';
-import { BasicPopulationPage, BasicPopulationAreaPage } from './population';
+import { BasicPopulationPage, BasicPopulationAreaPage, MarriagePage } from './population';
 import { WagesWorkingConditionsPage } from './laborwage';
 import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
 
@@ -11,6 +11,7 @@ export const subcategoryComponentMap: Record<string, React.ComponentType<any>> =
 
   // 人口・世帯
   'basic-population': BasicPopulationPage,
+  'marriage': MarriagePage,
 
   // 労働・賃金
   'wages-working-conditions': WagesWorkingConditionsPage,
