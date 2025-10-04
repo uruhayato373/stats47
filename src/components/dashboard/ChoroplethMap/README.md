@@ -13,7 +13,7 @@ e-stat APIから直接データを取得してコロプレス地図を表示す�
 ## 基本的な使用方法
 
 ```tsx
-import { EstatChoroplethMap } from '@/components/estat/ChoroplethMap';
+import { EstatChoroplethMap } from '@/components/dashboard/ChoroplethMap';
 
 function MyComponent() {
   return (

@@ -7,11 +7,11 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataServi
 import { GetStatsDataParams } from "@/lib/estat/types/parameters";
 import { RefreshCw, AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
-export interface EstatStatCardProps {
+export interface StatisticsMetricCardProps {
   /**
    * e-stat API パラメータ
    */
-  params: Omit<GetStatsDataParams, 'appId'>;
+  params: Omit<GetStatsDataParams, "appId">;
 
   /**
    * 都道府県コード（指定しない場合は全国データ "00000" を使用）
@@ -50,9 +50,9 @@ export interface EstatStatCardProps {
 }
 
 /**
- * e-stat APIからデータを取得して最新値とスパークラインを表示するカードコンポーネント
+ * 統計データの最新値とトレンドを表示するメトリックカードコンポーネント
  */
-export const EstatStatCard: React.FC<EstatStatCardProps> = ({
+export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
   params,
   areaCode = "00000",
   title,
@@ -62,7 +62,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
   onDataLoaded,
   onError,
 }) => {
-  const [timeSeriesData, setTimeSeriesData] = useState<SparklineDataPoint[]>([]);
+  const [timeSeriesData, setTimeSeriesData] = useState<SparklineDataPoint[]>(
+    []
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -72,7 +74,10 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
       setError(null);
 
       try {
-        console.log('[EstatStatCard] Fetching data with params:', params);
+        console.log(
+          "[StatisticsMetricCard] Fetching data with params:",
+          params
+        );
 
         // e-stat APIからデータを取得
         const response = await EstatStatsDataService.getAndFormatStatsData(
@@ -89,7 +94,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
         );
 
         if (filteredValues.length === 0) {
-          throw new Error(`指定された地域（${areaCode}）のデータが見つかりませんでした`);
+          throw new Error(
+            `指定された地域（${areaCode}）のデータが見つかりませんでした`
+          );
         }
 
         // 時系列データに変換
@@ -100,7 +107,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
           }
         });
 
-        const timeSeries: SparklineDataPoint[] = Array.from(dataByYear.entries())
+        const timeSeries: SparklineDataPoint[] = Array.from(
+          dataByYear.entries()
+        )
           .map(([year, value]) => ({
             year,
             value,
@@ -113,8 +122,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
           onDataLoaded(timeSeries);
         }
       } catch (err) {
-        console.error('[EstatStatCard] Error fetching data:', err);
-        const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
+        console.error("[StatisticsMetricCard] Error fetching data:", err);
+        const errorMessage =
+          err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
 
         if (onError && err instanceof Error) {
@@ -132,7 +142,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
   // ローディング状態
   if (loading) {
     return (
-      <div className={`bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}>
+      <div
+        className={`bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}
+      >
         <div className="flex items-center justify-center h-32">
           <RefreshCw className="w-6 h-6 text-indigo-600 animate-spin" />
         </div>
@@ -143,7 +155,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
   // エラー状態
   if (error) {
     return (
-      <div className={`bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800 p-6 ${className}`}>
+      <div
+        className={`bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800 p-6 ${className}`}
+      >
         <div className="flex items-center gap-2">
           <AlertCircle className="w-5 h-5 text-red-500" />
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
@@ -155,21 +169,29 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
   // データがない場合
   if (timeSeriesData.length === 0) {
     return (
-      <div className={`bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}>
-        <p className="text-sm text-gray-600 dark:text-neutral-400">データがありません</p>
+      <div
+        className={`bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}
+      >
+        <p className="text-sm text-gray-600 dark:text-neutral-400">
+          データがありません
+        </p>
       </div>
     );
   }
 
   // 最新値と前回値を取得
   const latestData = timeSeriesData[timeSeriesData.length - 1];
-  const previousData = timeSeriesData.length > 1 ? timeSeriesData[timeSeriesData.length - 2] : null;
+  const previousData =
+    timeSeriesData.length > 1
+      ? timeSeriesData[timeSeriesData.length - 2]
+      : null;
 
   // 変化率を計算
   const change = previousData ? latestData.value - previousData.value : 0;
-  const changePercent = previousData && previousData.value !== 0
-    ? ((change / previousData.value) * 100)
-    : 0;
+  const changePercent =
+    previousData && previousData.value !== 0
+      ? (change / previousData.value) * 100
+      : 0;
 
   const isPositive = change >= 0;
 
@@ -186,7 +208,9 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
   };
 
   return (
-    <div className={`bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}>
+    <div
+      className={`bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-6 ${className}`}
+    >
       {/* タイトル */}
       {title && (
         <div className="mb-4">
@@ -217,8 +241,13 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
             ) : (
               <TrendingDown className="w-4 h-4 text-red-500" />
             )}
-            <span className={`text-sm font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
-              {isPositive ? '+' : ''}{changePercent.toFixed(1)}%
+            <span
+              className={`text-sm font-medium ${
+                isPositive ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {isPositive ? "+" : ""}
+              {changePercent.toFixed(1)}%
             </span>
             <span className="text-xs text-gray-500 dark:text-neutral-500 ml-1">
               前回比
@@ -241,7 +270,8 @@ export const EstatStatCard: React.FC<EstatStatCardProps> = ({
 
       {/* 期間表示 */}
       <div className="mt-2 text-xs text-gray-500 dark:text-neutral-500">
-        {timeSeriesData[0]?.year.substring(0, 4)}年 - {latestData.year.substring(0, 4)}年
+        {timeSeriesData[0]?.year.substring(0, 4)}年 -{" "}
+        {latestData.year.substring(0, 4)}年
       </div>
     </div>
   );

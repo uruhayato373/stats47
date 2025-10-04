@@ -2,13 +2,15 @@
 
 import React, { useState, useCallback } from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
-import { EstatChoroplethMap } from "@/components/estat/ChoroplethMap";
-import { EstatLineChart } from "@/components/estat/LineChart";
-import { EstatStatCard } from "@/components/estat/StatCard";
+import { EstatChoroplethMap } from "@/components/dashboard/ChoroplethMap";
+import { EstatLineChart } from "@/components/dashboard/LineChart";
+
 import { PrefectureDataTableClient } from "@/components/choropleth/PrefectureDataTableClient";
 import { StatisticsSummary } from "@/components/common/DataTable";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 
 interface BasicPopulationPageProps {
   category: CategoryData;
@@ -19,13 +21,15 @@ interface BasicPopulationPageProps {
 export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
   category,
   subcategory,
-  currentYear,
 }) => {
   const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
 
   // 統計表IDとカテゴリコード
   const statsDataId = "0000010101";
-  const cdCat01 = "A1101"; // 総人口
+  const cdCat01 = {
+    totalPopulation: "A1101", // 総人口
+    dayNightRatio: "A6108", // 昼夜間人口比率
+  };
 
   // データ読み込み完了時のコールバック（メモ化して無限ループ防止）
   const handleDataLoaded = useCallback((values: FormattedValue[]) => {
@@ -43,35 +47,28 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
       {/* 統計カード */}
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <EstatStatCard
+          {/* 総人口 */}
+          <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01,
+              cdCat01: cdCat01.totalPopulation,
             }}
             areaCode="00000"
             title="全国総人口"
             unit="人"
             color="#4f46e5"
           />
-          <EstatStatCard
+
+          {/* 昼夜間人口比率 */}
+          <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01,
+              cdCat01: cdCat01.dayNightRatio,
             }}
-            areaCode="13000"
-            title="東京都"
-            unit="人"
-            color="#ec4899"
-          />
-          <EstatStatCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01,
-            }}
-            areaCode="27000"
-            title="大阪府"
-            unit="人"
-            color="#f59e0b"
+            areaCode="00000"
+            title="全国昼夜間人口比率"
+            unit="%"
+            color="#10b981"
           />
         </div>
         <StatisticsSummary data={formattedValues} unit={subcategory.unit} />
@@ -85,7 +82,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
             <EstatChoroplethMap
               params={{
                 statsDataId: statsDataId,
-                cdCat01: cdCat01,
+                cdCat01: cdCat01.totalPopulation,
               }}
               options={{
                 colorScheme: subcategory.colorScheme || "interpolateBlues",
@@ -108,7 +105,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
             <EstatLineChart
               params={{
                 statsDataId: statsDataId,
-                cdCat01: cdCat01,
+                cdCat01: cdCat01.totalPopulation,
                 limit: 100000,
               }}
               areaCode="00000"
@@ -134,6 +131,18 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* 人口ピラミッド */}
+      <div className="px-4 pb-4">
+        <EstatPopulationPyramid
+          params={{
+            statsDataId: statsDataId,
+          }}
+          areaCode="00000"
+          title="全国人口ピラミッド"
+          height={500}
+        />
       </div>
     </SubcategoryLayout>
   );
