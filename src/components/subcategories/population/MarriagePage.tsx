@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
-import { EstatChoroplethMap } from "@/components/dashboard/ChoroplethMap";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { StatisticsSummary } from "@/components/common/DataTable";
-import { FormattedValue } from "@/lib/estat/types/formatted";
+import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface MarriagePageProps {
@@ -18,25 +16,12 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
   category,
   subcategory,
 }) => {
-  const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
-
   // 統計表IDとカテゴリコード
   const statsDataId = "0000010101";
   const cdCat01 = {
     marriages: "A9101", // 婚姻件数
     divorces: "A9201", // 離婚件数
   };
-
-  // データ読み込み完了時のコールバック（メモ化して無限ループ防止）
-  const handleDataLoaded = useCallback((values: FormattedValue[]) => {
-    console.log("[MarriagePage] Data loaded:", values.length);
-    setFormattedValues(values);
-  }, []);
-
-  // エラーコールバック（メモ化して無限ループ防止）
-  const handleError = useCallback((error: Error) => {
-    console.error("[MarriagePage] Map error:", error);
-  }, []);
 
   return (
     <SubcategoryLayout category={category} subcategory={subcategory}>
@@ -67,31 +52,22 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
             color="#f97316"
           />
         </div>
-        <StatisticsSummary data={formattedValues} unit={subcategory.unit} />
       </div>
 
-      {/* メインコンテンツ：3カラムレイアウト */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden p-4 gap-4">
-        {/* 地図表示エリア */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="h-full">
-            <EstatChoroplethMap
-              params={{
-                statsDataId: statsDataId,
-                cdCat01: cdCat01.marriages,
-              }}
-              options={{
-                colorScheme: subcategory.colorScheme || "interpolatePurples",
-                divergingMidpoint: "zero",
-              }}
-              width={800}
-              height={600}
-              onDataLoaded={handleDataLoaded}
-              onError={handleError}
-            />
-          </div>
-        </div>
-      </div>
+      {/* コロプレス地図とデータテーブル */}
+      <EstatRanking
+        params={{
+          statsDataId: statsDataId,
+          cdCat01: cdCat01.marriages,
+        }}
+        subcategory={subcategory}
+        options={{
+          colorScheme: subcategory.colorScheme || "interpolatePurples",
+          divergingMidpoint: "zero",
+        }}
+        mapWidth={800}
+        mapHeight={600}
+      />
     </SubcategoryLayout>
   );
 };

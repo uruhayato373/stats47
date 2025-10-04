@@ -64,72 +64,27 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
   onError,
 }) => {
   const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
+  const [allValues, setAllValues] = useState<FormattedValue[]>([]); // 全年度のデータを保持
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [availableYears, setAvailableYears] = useState<string[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("");
 
-  // 利用可能な年度を取得
-  useEffect(() => {
-    const fetchAvailableYears = async () => {
-      try {
-        console.log('[EstatChoroplethMap] Fetching available years...');
-
-        // データを取得（年度フィルタなし、少量のデータのみ）
-        const data = await EstatStatsDataService.getAndFormatStatsData(
-          params.statsDataId,
-          {
-            categoryFilter: params.cdCat01,
-            limit: 100,
-          }
-        );
-
-        // 年度一覧を抽出
-        const years = data.years
-          .map((y) => y.timeCode)
-          .filter((code) => code && code.length >= 4)
-          .sort((a, b) => b.localeCompare(a)); // 降順ソート（最新が先頭）
-
-        console.log('[EstatChoroplethMap] Available years:', years);
-
-        setAvailableYears(years);
-
-        // cdTimeが指定されている場合はそれを使用、なければ最新の年度を選択
-        const initialYear = params.cdTime || years[0] || '';
-        setSelectedYear(initialYear);
-      } catch (error) {
-        console.error('[EstatChoroplethMap] Failed to fetch years:', error);
-        // エラー時はフォールバック
-        const fallbackYears = Array.from(
-          { length: 5 },
-          (_, i) => String(new Date().getFullYear() - i) + '000000'
-        );
-        setAvailableYears(fallbackYears);
-        setSelectedYear(params.cdTime || fallbackYears[0]);
-      }
-    };
-
-    fetchAvailableYears();
-  }, [params.statsDataId, params.cdCat01, params.cdTime]);
-
+  // データを取得（年度フィルタなし）
   useEffect(() => {
     const fetchData = async () => {
-      if (!selectedYear) {
-        return; // 年度が選択されるまで待つ
-      }
-
       setLoading(true);
       setError(null);
 
       try {
-        console.log('[EstatChoroplethMap] Fetching data with params:', { ...params, cdTime: selectedYear });
+        console.log('[EstatChoroplethMap] Fetching data with params:', params);
 
-        // e-stat APIからデータを取得
+        // e-stat APIからデータを取得（年度フィルタなし）
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
           {
             categoryFilter: params.cdCat01,
-            yearFilter: selectedYear,
+            // yearFilterは指定しない - APIから全年度のデータを取得
             limit: params.limit || 100000,
           }
         );
@@ -139,22 +94,21 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
           validValues: response.metadata.validValues,
         });
 
-        // 都道府県データのみをフィルタリング（全国データを除外）
-        const prefectureValues = response.values.filter(
-          (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
-        );
+        // 年度一覧を抽出
+        const years = response.years
+          .map((y) => y.timeCode)
+          .filter((code) => code && code.length >= 4)
+          .sort((a, b) => b.localeCompare(a)); // 降順ソート（最新が先頭）
 
-        console.log('[EstatChoroplethMap] Prefecture values:', prefectureValues.length);
+        console.log('[EstatChoroplethMap] Available years:', years);
+        setAvailableYears(years);
 
-        if (prefectureValues.length === 0) {
-          throw new Error('都道府県データが見つかりませんでした');
-        }
+        // 全データを保存
+        setAllValues(response.values);
 
-        setFormattedValues(prefectureValues);
-
-        if (onDataLoaded) {
-          onDataLoaded(prefectureValues);
-        }
+        // 最新年度を選択（または指定された年度）
+        const targetYear = params.cdTime || years[0] || '';
+        setSelectedYear(targetYear);
       } catch (err) {
         console.error('[EstatChoroplethMap] Error fetching data:', err);
         const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
@@ -171,7 +125,38 @@ export const EstatChoroplethMap: React.FC<EstatChoroplethMapProps> = ({
     fetchData();
     // onDataLoaded と onError を依存配列から除外（無限ループ防止）
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.statsDataId, params.cdCat01, selectedYear, params.limit]);
+  }, [params.statsDataId, params.cdCat01, params.cdTime, params.limit]);
+
+  // 選択年度が変更されたらデータをフィルタリング
+  useEffect(() => {
+    if (!selectedYear || allValues.length === 0) {
+      return;
+    }
+
+    // 選択年度のデータのみをフィルタリング
+    const filteredByYear = allValues.filter(
+      (v) => v.timeCode === selectedYear
+    );
+
+    console.log('[EstatChoroplethMap] Filtering by year:', {
+      selectedYear,
+      totalValues: allValues.length,
+      filteredCount: filteredByYear.length,
+    });
+
+    // 都道府県データのみをフィルタリング（全国データを除外）
+    const prefectureValues = filteredByYear.filter(
+      (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
+    );
+
+    console.log('[EstatChoroplethMap] Prefecture values:', prefectureValues.length);
+
+    setFormattedValues(prefectureValues);
+
+    if (onDataLoaded && prefectureValues.length > 0) {
+      onDataLoaded(prefectureValues);
+    }
+  }, [selectedYear, allValues, onDataLoaded]);
 
   // ローディング状態
   if (loading) {

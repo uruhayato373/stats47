@@ -8,7 +8,7 @@ import { FormattedValue } from "@/lib/estat/types/formatted";
 import { SubcategoryData } from "@/types/choropleth";
 import { GetStatsDataParams } from "@/lib/estat/types/parameters";
 
-export interface EstatMapWithTableProps {
+export interface EstatRankingProps {
   /**
    * e-stat API パラメータ
    */
@@ -56,7 +56,7 @@ export interface EstatMapWithTableProps {
 /**
  * コロプレス地図、統計サマリー、都道府県別データテーブルを一つにまとめたコンポーネント
  */
-export const EstatMapWithTable: React.FC<EstatMapWithTableProps> = ({
+export const EstatRanking: React.FC<EstatRankingProps> = ({
   params,
   subcategory,
   options,
@@ -71,7 +71,7 @@ export const EstatMapWithTable: React.FC<EstatMapWithTableProps> = ({
   // データ読み込み完了時のコールバック（メモ化して無限ループ防止）
   const handleDataLoaded = useCallback(
     (values: FormattedValue[]) => {
-      console.log("[EstatMapWithTable] Data loaded:", values.length);
+      console.log("[EstatRanking] Data loaded:", values.length);
       setFormattedValues(values);
 
       if (onDataLoaded) {
@@ -84,7 +84,7 @@ export const EstatMapWithTable: React.FC<EstatMapWithTableProps> = ({
   // エラーコールバック（メモ化して無限ループ防止）
   const handleError = useCallback(
     (error: Error) => {
-      console.error("[EstatMapWithTable] Error:", error);
+      console.error("[EstatRanking] Error:", error);
 
       if (onError) {
         onError(error);

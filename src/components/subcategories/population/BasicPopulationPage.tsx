@@ -4,7 +4,7 @@ import React from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
 import { EstatLineChart } from "@/components/dashboard/LineChart";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
-import { EstatMapWithTable } from "@/components/dashboard/MapWithTable";
+import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
@@ -94,7 +94,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
       </div>
 
       {/* コロプレス地図とデータテーブル */}
-      <EstatMapWithTable
+      <EstatRanking
         params={{
           statsDataId: statsDataId,
           cdCat01: cdCat01.totalPopulation,

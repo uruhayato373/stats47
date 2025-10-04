@@ -1,2 +1,2 @@
-export { EstatMapWithTable } from "./EstatMapWithTable";
-export type { EstatMapWithTableProps } from "./EstatMapWithTable";
+export { EstatRanking } from "./EstatRanking";
+export type { EstatRankingProps } from "./EstatRanking";
