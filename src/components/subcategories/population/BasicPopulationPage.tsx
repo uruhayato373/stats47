@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
 import { EstatChoroplethMap } from "@/components/dashboard/ChoroplethMap";
 import { EstatLineChart } from "@/components/dashboard/LineChart";
-
+import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 import { PrefectureDataTableClient } from "@/components/choropleth/PrefectureDataTableClient";
 import { StatisticsSummary } from "@/components/common/DataTable";
 import { FormattedValue } from "@/lib/estat/types/formatted";
@@ -29,6 +29,8 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
   const cdCat01 = {
     totalPopulation: "A1101", // 総人口
     dayNightRatio: "A6108", // 昼夜間人口比率
+    malePopulation: "A110101", // 総人口（男）
+    femalePopulation: "A110102", // 総人口（女）
   };
 
   // データ読み込み完了時のコールバック（メモ化して無限ループ防止）
@@ -69,6 +71,19 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
             title="全国昼夜間人口比率"
             unit="%"
             color="#10b981"
+          />
+
+          {/* 男女人口比率 */}
+          <EstatGenderDonutChart
+            params={{
+              statsDataId: statsDataId,
+            }}
+            maleCategoryCode={cdCat01.malePopulation}
+            femaleCategoryCode={cdCat01.femalePopulation}
+            areaCode="00000"
+            title="男女人口比率"
+            width={300}
+            height={300}
           />
         </div>
         <StatisticsSummary data={formattedValues} unit={subcategory.unit} />

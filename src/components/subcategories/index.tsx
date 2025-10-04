@@ -1,6 +1,6 @@
 // カテゴリー別にインポート
 import { LandAreaPage } from './landweather';
-import { BasicPopulationPage } from './population';
+import { BasicPopulationPage, BasicPopulationAreaPage } from './population';
 import { WagesWorkingConditionsPage } from './laborwage';
 import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
 
@@ -18,12 +18,28 @@ export const subcategoryComponentMap: Record<string, React.ComponentType<any>> =
   // 他のサブカテゴリーはデフォルトコンポーネントを使用
 };
 
+// 都道府県別ページのコンポーネントマッピング
+export const areaPageComponentMap: Record<string, React.ComponentType<any>> = {
+  // 人口・世帯
+  'basic-population': BasicPopulationAreaPage,
+
+  // 他のサブカテゴリーはデフォルトコンポーネントを使用
+};
+
 /**
  * サブカテゴリーIDに対応するコンポーネントを取得
  * マッピングが存在しない場合はデフォルトコンポーネントを返す
  */
 export const getSubcategoryComponent = (subcategoryId: string): React.ComponentType<any> => {
   return subcategoryComponentMap[subcategoryId] || SubcategoryPageClient;
+};
+
+/**
+ * サブカテゴリーIDに対応する都道府県別ページコンポーネントを取得
+ * マッピングが存在しない場合はデフォルトコンポーネントを返す
+ */
+export const getAreaPageComponent = (subcategoryId: string): React.ComponentType<any> => {
+  return areaPageComponentMap[subcategoryId] || SubcategoryPageClient;
 };
 
 // 共通コンポーネント
