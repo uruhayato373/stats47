@@ -8,22 +8,26 @@
       {
         "id": "land-area",
         "name": "土地面積",
-        "href": "/land-area"
+        "href": "/land-area",
+        "component": "LandAreaPage"
       },
       {
         "id": "land-use",
         "name": "土地利用",
-        "href": "/land-use"
+        "href": "/land-use",
+        "component": "LandUsePage"
       },
       {
         "id": "natural-environment",
         "name": "自然環境",
-        "href": "/natural-environment"
+        "href": "/natural-environment",
+        "component": "NaturalEnvironmentPage"
       },
       {
         "id": "weather-climate",
         "name": "気象・気候",
-        "href": "/weather-climate"
+        "href": "/weather-climate",
+        "component": "WeatherClimatePage"
       }
     ]
   },

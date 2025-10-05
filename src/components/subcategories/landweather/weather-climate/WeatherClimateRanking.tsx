@@ -2,25 +2,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { SubcategoryData } from "@/types/choropleth";
 
-interface WeatherClimatePageProps {
-  category: CategoryData;
+interface WeatherClimateRankingProps {
   subcategory: SubcategoryData;
-  currentYear: string;
 }
 
-export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
-  category,
+export const WeatherClimateRanking: React.FC<WeatherClimateRankingProps> = ({
   subcategory,
 }) => {
-  const statsDataId = "0000020204";
+  const statsDataId = "0000010102";
   const cdCat01 = {
-    meanTemp: "E5101", // 年平均気温
-    precipitation: "E5104", // 年降水量
+    meanTemp: "B4101",
+    maxTemp: "B4102",
+    minTemp: "B4103",
+    precipitation: "B4109",
   };
 
   const [activeTab, setActiveTab] = useState("meanTemp");
@@ -31,6 +28,16 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
       unit: "°C",
       name: "年平均気温",
     },
+    maxTemp: {
+      cdCat01: cdCat01.maxTemp,
+      unit: "°C",
+      name: "最高気温",
+    },
+    minTemp: {
+      cdCat01: cdCat01.minTemp,
+      unit: "°C",
+      name: "最低気温",
+    },
     precipitation: {
       cdCat01: cdCat01.precipitation,
       unit: "mm",
@@ -38,34 +45,10 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
     },
   };
 
-  const activeRanking =
-    activeTab === "meanTemp" ? rankings.meanTemp : rankings.precipitation;
+  const activeRanking = rankings[activeTab as keyof typeof rankings];
 
   return (
-    <SubcategoryLayout category={category} subcategory={subcategory}>
-      <div className="px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <StatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.meanTemp,
-            }}
-            areaCode="01100" // Sapporo
-            title="札幌市の年平均気温"
-            unit="°C"
-          />
-          <StatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.precipitation,
-            }}
-            areaCode="01100" // Sapporo
-            title="札幌市の年降水量"
-            unit="mm"
-          />
-        </div>
-      </div>
-
+    <>
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
@@ -78,6 +61,26 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
               }`}
             >
               年平均気温
+            </button>
+            <button
+              onClick={() => setActiveTab("maxTemp")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "maxTemp"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              最高気温
+            </button>
+            <button
+              onClick={() => setActiveTab("minTemp")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "minTemp"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              最低気温
             </button>
             <button
               onClick={() => setActiveTab("precipitation")}
@@ -104,6 +107,6 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
           name: activeRanking.name,
         }}
       />
-    </SubcategoryLayout>
+    </>
   );
 };
