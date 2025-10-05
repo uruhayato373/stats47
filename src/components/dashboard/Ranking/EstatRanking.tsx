@@ -83,23 +83,10 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
       try {
         console.log("[EstatRanking] Step 1: Fetching available years...");
 
-        // 全国データ(cdArea=00000)のみを取得して年度一覧を取得
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const years = await EstatStatsDataService.getAvailableYears(
           params.statsDataId,
-          {
-            categoryFilter: params.cdCat01,
-            areaFilter: '00000',
-          }
+          params.cdCat01
         );
-
-        // 実際にデータが存在する年度一覧をvaluesから抽出
-        const years = Array.from(
-          new Set(
-            response.values
-              .filter((v) => v.timeCode && v.timeCode.length >= 4)
-              .map((v) => v.timeCode)
-          )
-        ).sort((a, b) => b.localeCompare(a));
 
         console.log("[EstatRanking] Available years:", years);
         setAvailableYears(years);
@@ -139,33 +126,17 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
           selectedYear
         );
 
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const prefectureValues = await EstatStatsDataService.getPrefectureDataByYear(
           params.statsDataId,
-          {
-            categoryFilter: params.cdCat01,
-            yearFilter: selectedYear,
-            limit: params.limit || 100000,
-          }
-        );
-
-        console.log("[EstatRanking] Data fetched:", {
-          totalValues: response.values.length,
-          validValues: response.metadata.validValues,
-        });
-
-        // 都道府県データのみをフィルタリング
-        const prefectureValues = response.values.filter(
-          (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
+          params.cdCat01,
+          selectedYear,
+          params.limit || 100000
         );
 
         console.log(
           "[EstatRanking] Prefecture values:",
           prefectureValues.length
         );
-
-        if (prefectureValues.length === 0) {
-          throw new Error("都道府県データが見つかりませんでした");
-        }
 
         setFormattedValues(prefectureValues);
 

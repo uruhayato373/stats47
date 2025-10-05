@@ -196,6 +196,77 @@ export class EstatStatsDataService {
   }
 
   /**
+   * 利用可能な年度一覧を取得
+   * 全国データから実際にデータが存在する年度を抽出
+   */
+  static async getAvailableYears(
+    statsDataId: string,
+    categoryCode: string
+  ): Promise<string[]> {
+    try {
+      const response = await this.getAndFormatStatsData(statsDataId, {
+        categoryFilter: categoryCode,
+        areaFilter: '00000',
+      });
+
+      // 実際にデータが存在する年度一覧をvaluesから抽出
+      const years = Array.from(
+        new Set(
+          response.values
+            .filter((v) => v.timeCode && v.timeCode.length >= 4)
+            .map((v) => v.timeCode)
+        )
+      ).sort((a, b) => b.localeCompare(a));
+
+      return years;
+    } catch (error) {
+      console.error("Failed to get available years:", error);
+      throw new Error(
+        `年度一覧の取得に失敗しました: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+    }
+  }
+
+  /**
+   * 都道府県データを年度別に取得
+   * 全国データ(areaCode=00000)を除外した都道府県データのみを返す
+   */
+  static async getPrefectureDataByYear(
+    statsDataId: string,
+    categoryCode: string,
+    yearCode: string,
+    limit: number = 100000
+  ): Promise<FormattedValue[]> {
+    try {
+      const response = await this.getAndFormatStatsData(statsDataId, {
+        categoryFilter: categoryCode,
+        yearFilter: yearCode,
+        limit,
+      });
+
+      // 都道府県データのみをフィルタリング
+      const prefectureValues = response.values.filter(
+        (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
+      );
+
+      if (prefectureValues.length === 0) {
+        throw new Error("都道府県データが見つかりませんでした");
+      }
+
+      return prefectureValues;
+    } catch (error) {
+      console.error("Failed to get prefecture data:", error);
+      throw new Error(
+        `都道府県データの取得に失敗しました: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+    }
+  }
+
+  /**
    * 地域情報を整形
    */
   private static formatAreas(data: EstatStatisticalData): FormattedArea[] {
