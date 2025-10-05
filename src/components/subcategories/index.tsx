@@ -150,6 +150,7 @@ export const getAreaPageComponent = (subcategoryId: string): React.ComponentType
 
 // 共通コンポーネント
 export { SubcategoryLayout } from './SubcategoryLayout';
+export { PrefectureSelector } from './PrefectureSelector';
 
 // カテゴリー別エクスポート
 export * from './landweather';

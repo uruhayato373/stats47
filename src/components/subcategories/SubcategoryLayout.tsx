@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import Sidebar from '@/components/layout/Sidebar';
 import { CategoryIcon } from '@/components/choropleth/CategoryIcon';
 import { SubcategoryNavigation } from './SubcategoryNavigation';
+import { PrefectureSelector } from './PrefectureSelector';
 import { CategoryData, SubcategoryData } from '@/types/choropleth';
 
 interface SubcategoryLayoutProps {
@@ -47,6 +48,11 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
                   {subcategory.name}
                 </h1>
               </div>
+            </div>
+
+            {/* 都道府県セレクター */}
+            <div className="flex-shrink-0">
+              <PrefectureSelector category={category} subcategory={subcategory} />
             </div>
           </div>
 

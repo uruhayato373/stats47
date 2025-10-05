@@ -13,3 +13,6 @@ export * from "./subcategory";
 
 // コロプレス地図関連の型
 export * from "./choropleth";
+
+// 都道府県関連の型
+export * from "./prefecture";

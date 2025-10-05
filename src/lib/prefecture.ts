@@ -1,4 +1,4 @@
-import { Prefecture } from "@/types/content";
+import { Prefecture } from "@/types/prefecture";
 
 export const prefList: Prefecture[] = [
   { prefCode: "01000", prefName: "北海道" },
