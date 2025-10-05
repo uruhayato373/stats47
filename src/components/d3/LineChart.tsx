@@ -10,8 +10,18 @@ export interface TimeSeriesDataPoint {
   label?: string;
 }
 
+export interface MultiSeriesConfig {
+  key: string;
+  color: string;
+}
+
+export interface MultiSeriesDataPoint {
+  year: string;
+  [key: string]: string | number;
+}
+
 export interface LineChartProps {
-  data: TimeSeriesDataPoint[];
+  data: TimeSeriesDataPoint[] | MultiSeriesDataPoint[];
   width?: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
@@ -19,6 +29,7 @@ export interface LineChartProps {
   yLabel?: string;
   title?: string;
   colorScheme?: string;
+  multiSeries?: MultiSeriesConfig[];
 }
 
 export const LineChart: React.FC<LineChartProps> = ({
@@ -30,6 +41,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   yLabel = "値",
   title,
   colorScheme = "#4f46e5",
+  multiSeries,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -63,9 +75,30 @@ export const LineChart: React.FC<LineChartProps> = ({
       .range([0, innerWidth])
       .padding(0.5);
 
+    // Y軸のドメインを計算（マルチシリーズの場合はすべての値を考慮）
+    let yMax = 0;
+    let yMin = 0;
+    if (multiSeries) {
+      const allValues: number[] = [];
+      (data as MultiSeriesDataPoint[]).forEach((d) => {
+        multiSeries.forEach((series) => {
+          const value = d[series.key];
+          if (typeof value === "number") {
+            allValues.push(value);
+          }
+        });
+      });
+      yMax = d3.max(allValues) || 0;
+      yMin = d3.min(allValues) || 0;
+    } else {
+      const singleData = data as TimeSeriesDataPoint[];
+      yMax = d3.max(singleData, (d) => d.value) || 0;
+      yMin = d3.min(singleData, (d) => d.value) || 0;
+    }
+
     const yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.value) || 0])
+      .domain([Math.min(0, yMin), yMax])
       .nice()
       .range([innerHeight, 0]);
 
@@ -106,73 +139,158 @@ export const LineChart: React.FC<LineChartProps> = ({
           .tickFormat(() => "")
       );
 
-    // ラインジェネレーターを作成
-    const line = d3
-      .line<TimeSeriesDataPoint>()
-      .x((d) => xScale(d.year) || 0)
-      .y((d) => yScale(d.value))
-      .curve(d3.curveMonotoneX);
+    // マルチシリーズの場合
+    if (multiSeries) {
+      const multiData = data as MultiSeriesDataPoint[];
 
-    // パスを描画
-    g.append("path")
-      .datum(data)
-      .attr("class", "line")
-      .attr("fill", "none")
-      .attr("stroke", colorScheme)
-      .attr("stroke-width", 2.5)
-      .attr("d", line);
+      multiSeries.forEach((series) => {
+        // 各シリーズのラインを描画
+        const line = d3
+          .line<MultiSeriesDataPoint>()
+          .defined((d) => typeof d[series.key] === "number")
+          .x((d) => xScale(d.year) || 0)
+          .y((d) => yScale(d[series.key] as number))
+          .curve(d3.curveMonotoneX);
 
-    // データポイントを描画
-    g.selectAll(".dot")
-      .data(data)
-      .enter()
-      .append("circle")
-      .attr("class", "dot")
-      .attr("cx", (d) => xScale(d.year) || 0)
-      .attr("cy", (d) => yScale(d.value))
-      .attr("r", 4)
-      .attr("fill", colorScheme)
-      .attr("stroke", "white")
-      .attr("stroke-width", 2)
-      .style("cursor", "pointer")
-      .on("mouseenter", function (event, d) {
-        // ツールチップを表示
-        d3.select(this).attr("r", 6);
+        g.append("path")
+          .datum(multiData)
+          .attr("class", `line-${series.key}`)
+          .attr("fill", "none")
+          .attr("stroke", series.color)
+          .attr("stroke-width", 2.5)
+          .attr("d", line);
 
-        const tooltip = g
-          .append("g")
-          .attr("class", "tooltip")
-          .attr("transform", `translate(${xScale(d.year)},${yScale(d.value)})`);
+        // 各シリーズのデータポイントを描画
+        g.selectAll(`.dot-${series.key}`)
+          .data(multiData.filter((d) => typeof d[series.key] === "number"))
+          .enter()
+          .append("circle")
+          .attr("class", `dot-${series.key}`)
+          .attr("cx", (d) => xScale(d.year) || 0)
+          .attr("cy", (d) => yScale(d[series.key] as number))
+          .attr("r", 4)
+          .attr("fill", series.color)
+          .attr("stroke", "white")
+          .attr("stroke-width", 2)
+          .style("cursor", "pointer")
+          .on("mouseenter", function (event, d) {
+            d3.select(this).attr("r", 6);
 
-        tooltip
-          .append("rect")
-          .attr("x", 10)
-          .attr("y", -30)
-          .attr("width", 120)
-          .attr("height", 50)
-          .attr("fill", "white")
-          .attr("stroke", "#ccc")
-          .attr("rx", 4);
+            const tooltip = g
+              .append("g")
+              .attr("class", "tooltip")
+              .attr(
+                "transform",
+                `translate(${xScale(d.year)},${yScale(d[series.key] as number)})`
+              );
 
-        tooltip
-          .append("text")
-          .attr("x", 20)
-          .attr("y", -10)
-          .text(`${d.year.substring(0, 4)}年`)
-          .style("font-size", "12px")
-          .style("font-weight", "bold");
+            const value = d[series.key] as number;
+            tooltip
+              .append("rect")
+              .attr("x", 10)
+              .attr("y", -30)
+              .attr("width", 150)
+              .attr("height", 60)
+              .attr("fill", "white")
+              .attr("stroke", "#ccc")
+              .attr("rx", 4);
 
-        tooltip
-          .append("text")
-          .attr("x", 20)
-          .attr("y", 10)
-          .text(`${d.value.toLocaleString()}`)
-          .style("font-size", "12px");
-      })
-      .on("mouseleave", function () {
-        d3.select(this).attr("r", 4);
-        g.selectAll(".tooltip").remove();
+            tooltip
+              .append("text")
+              .attr("x", 20)
+              .attr("y", -10)
+              .text(`${d.year.substring(0, 4)}年`)
+              .style("font-size", "12px")
+              .style("font-weight", "bold");
+
+            tooltip
+              .append("text")
+              .attr("x", 20)
+              .attr("y", 10)
+              .text(series.key)
+              .style("font-size", "11px")
+              .style("fill", series.color);
+
+            tooltip
+              .append("text")
+              .attr("x", 20)
+              .attr("y", 30)
+              .text(`${value.toLocaleString()}`)
+              .style("font-size", "12px");
+          })
+          .on("mouseleave", function () {
+            d3.select(this).attr("r", 4);
+            g.selectAll(".tooltip").remove();
+          });
       });
+    } else {
+      // シングルシリーズの場合（既存のコード）
+      const singleData = data as TimeSeriesDataPoint[];
+
+      const line = d3
+        .line<TimeSeriesDataPoint>()
+        .x((d) => xScale(d.year) || 0)
+        .y((d) => yScale(d.value))
+        .curve(d3.curveMonotoneX);
+
+      g.append("path")
+        .datum(singleData)
+        .attr("class", "line")
+        .attr("fill", "none")
+        .attr("stroke", colorScheme)
+        .attr("stroke-width", 2.5)
+        .attr("d", line);
+
+      g.selectAll(".dot")
+        .data(singleData)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("cx", (d) => xScale(d.year) || 0)
+        .attr("cy", (d) => yScale(d.value))
+        .attr("r", 4)
+        .attr("fill", colorScheme)
+        .attr("stroke", "white")
+        .attr("stroke-width", 2)
+        .style("cursor", "pointer")
+        .on("mouseenter", function (event, d) {
+          d3.select(this).attr("r", 6);
+
+          const tooltip = g
+            .append("g")
+            .attr("class", "tooltip")
+            .attr("transform", `translate(${xScale(d.year)},${yScale(d.value)})`);
+
+          tooltip
+            .append("rect")
+            .attr("x", 10)
+            .attr("y", -30)
+            .attr("width", 120)
+            .attr("height", 50)
+            .attr("fill", "white")
+            .attr("stroke", "#ccc")
+            .attr("rx", 4);
+
+          tooltip
+            .append("text")
+            .attr("x", 20)
+            .attr("y", -10)
+            .text(`${d.year.substring(0, 4)}年`)
+            .style("font-size", "12px")
+            .style("font-weight", "bold");
+
+          tooltip
+            .append("text")
+            .attr("x", 20)
+            .attr("y", 10)
+            .text(`${d.value.toLocaleString()}`)
+            .style("font-size", "12px");
+        })
+        .on("mouseleave", function () {
+          d3.select(this).attr("r", 4);
+          g.selectAll(".tooltip").remove();
+        });
+    }
 
     // X軸ラベル
     g.append("text")
@@ -207,7 +325,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         .style("font-size", "16px")
         .style("font-weight", "bold");
     }
-  }, [data, width, height, margin, xLabel, yLabel, title, colorScheme]);
+  }, [data, width, height, margin, xLabel, yLabel, title, colorScheme, multiSeries]);
 
   return (
     <div className="w-full">

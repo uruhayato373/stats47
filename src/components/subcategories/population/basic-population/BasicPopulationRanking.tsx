@@ -89,6 +89,7 @@ export const BasicPopulationRanking: React.FC<BasicPopulationRankingProps> = ({
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
           colorScheme: subcategory.colorScheme || "interpolateBlues",
           divergingMidpoint: "zero",

@@ -1,0 +1,154 @@
+import { Prefecture } from "@/types/content";
+
+export const prefList: Prefecture[] = [
+  { prefCode: "01000", prefName: "北海道" },
+  { prefCode: "02000", prefName: "青森県" },
+  { prefCode: "03000", prefName: "岩手県" },
+  { prefCode: "04000", prefName: "宮城県" },
+  { prefCode: "05000", prefName: "秋田県" },
+  { prefCode: "06000", prefName: "山形県" },
+  { prefCode: "07000", prefName: "福島県" },
+  { prefCode: "08000", prefName: "茨城県" },
+  { prefCode: "09000", prefName: "栃木県" },
+  { prefCode: "10000", prefName: "群馬県" },
+  { prefCode: "11000", prefName: "埼玉県" },
+  { prefCode: "12000", prefName: "千葉県" },
+  { prefCode: "13000", prefName: "東京都" },
+  { prefCode: "14000", prefName: "神奈川県" },
+  { prefCode: "15000", prefName: "新潟県" },
+  { prefCode: "16000", prefName: "富山県" },
+  { prefCode: "17000", prefName: "石川県" },
+  { prefCode: "18000", prefName: "福井県" },
+  { prefCode: "19000", prefName: "山梨県" },
+  { prefCode: "20000", prefName: "長野県" },
+  { prefCode: "21000", prefName: "岐阜県" },
+  { prefCode: "22000", prefName: "静岡県" },
+  { prefCode: "23000", prefName: "愛知県" },
+  { prefCode: "24000", prefName: "三重県" },
+  { prefCode: "25000", prefName: "滋賀県" },
+  { prefCode: "26000", prefName: "京都府" },
+  { prefCode: "27000", prefName: "大阪府" },
+  { prefCode: "28000", prefName: "兵庫県" },
+  { prefCode: "29000", prefName: "奈良県" },
+  { prefCode: "30000", prefName: "和歌山県" },
+  { prefCode: "31000", prefName: "鳥取県" },
+  { prefCode: "32000", prefName: "島根県" },
+  { prefCode: "33000", prefName: "岡山県" },
+  { prefCode: "34000", prefName: "広島県" },
+  { prefCode: "35000", prefName: "山口県" },
+  { prefCode: "36000", prefName: "徳島県" },
+  { prefCode: "37000", prefName: "香川県" },
+  { prefCode: "38000", prefName: "愛媛県" },
+  { prefCode: "39000", prefName: "高知県" },
+  { prefCode: "40000", prefName: "福岡県" },
+  { prefCode: "41000", prefName: "佐賀県" },
+  { prefCode: "42000", prefName: "長崎県" },
+  { prefCode: "43000", prefName: "熊本県" },
+  { prefCode: "44000", prefName: "大分県" },
+  { prefCode: "45000", prefName: "宮崎県" },
+  { prefCode: "46000", prefName: "鹿児島県" },
+  { prefCode: "47000", prefName: "沖縄県" },
+];
+
+// 都道府県コードと名前のマッピング
+export const PREFECTURE_MAP: Record<string, string> = Object.fromEntries(
+  prefList.map((pref) => [pref.prefCode.substring(0, 2), pref.prefName])
+);
+
+// 都道府県名と都道府県コードのマッピング（逆引き用）
+export const PREFECTURE_NAME_TO_CODE: Record<string, string> =
+  Object.fromEntries(
+    prefList.map((pref) => [pref.prefName, pref.prefCode.substring(0, 2)])
+  );
+
+// 地域定義
+export const REGIONS = {
+  "hokkaido-tohoku": {
+    name: "北海道・東北地方",
+    prefectures: [
+      "北海道",
+      "青森県",
+      "岩手県",
+      "宮城県",
+      "秋田県",
+      "山形県",
+      "福島県",
+    ],
+  },
+  "kanto-chubu": {
+    name: "関東・中部地方",
+    prefectures: [
+      "茨城県",
+      "栃木県",
+      "群馬県",
+      "埼玉県",
+      "千葉県",
+      "東京都",
+      "神奈川県",
+      "新潟県",
+      "富山県",
+      "石川県",
+      "福井県",
+      "山梨県",
+      "長野県",
+      "岐阜県",
+      "静岡県",
+      "愛知県",
+    ],
+  },
+  kinki: {
+    name: "近畿地方",
+    prefectures: [
+      "三重県",
+      "滋賀県",
+      "京都府",
+      "大阪府",
+      "兵庫県",
+      "奈良県",
+      "和歌山県",
+    ],
+  },
+  "chugoku-shikoku": {
+    name: "中国・四国地方",
+    prefectures: [
+      "鳥取県",
+      "島根県",
+      "岡山県",
+      "広島県",
+      "山口県",
+      "徳島県",
+      "香川県",
+      "愛媛県",
+      "高知県",
+    ],
+  },
+  "kyushu-okinawa": {
+    name: "九州・沖縄地方",
+    prefectures: [
+      "福岡県",
+      "佐賀県",
+      "長崎県",
+      "熊本県",
+      "大分県",
+      "宮崎県",
+      "鹿児島県",
+      "沖縄県",
+    ],
+  },
+};
+
+// 5桁の都道府県コードから都道府県名を取得する関数
+export function getPrefectureNameFromCode(code: string): string {
+  if (!code || code.length < 2) {
+    return "不明な地域";
+  }
+
+  // 全国の場合
+  if (code === "00000") {
+    return "日本";
+  }
+
+  // 最初の2桁を取得して都道府県コードとして使用
+  const prefCode = code.substring(0, 2);
+  return PREFECTURE_MAP[prefCode] || "不明な地域";
+}

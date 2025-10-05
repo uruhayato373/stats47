@@ -5,15 +5,9 @@ import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout"
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { EstatMultiLineChart } from "@/components/dashboard/MultiLineChart";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { SubcategoryPageProps } from "@/types/subcategory";
 
-interface PopulationMovementPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-  currentYear: string;
-}
-
-export const PopulationMovementPage: React.FC<PopulationMovementPageProps> = ({
+export const PopulationMovementPage: React.FC<SubcategoryPageProps> = ({
   category,
   subcategory,
 }) => {
@@ -124,7 +118,12 @@ export const PopulationMovementPage: React.FC<PopulationMovementPageProps> = ({
           statsDataId: statsDataId,
           cdCat01: cdCat01.socialIncrease,
         }}
-        subcategory={subcategory}
+        subcategory={{
+          ...subcategory,
+          unit: "人",
+          name: "社会増減数",
+        }}
+        title="社会増減数ランキング"
         options={{
           colorScheme: subcategory.colorScheme || "interpolateRdYlBu",
           divergingMidpoint: "zero",

@@ -22,6 +22,11 @@ export interface EstatRankingProps {
   subcategory: SubcategoryData;
 
   /**
+   * セクションのタイトル（オプショナル）
+   */
+  title?: string;
+
+  /**
    * 地図の可視化オプション
    */
   options?: {
@@ -62,6 +67,7 @@ export interface EstatRankingProps {
 export const EstatRanking: React.FC<EstatRankingProps> = ({
   params,
   subcategory,
+  title,
   options,
   mapWidth = 800,
   mapHeight = 600,
@@ -210,33 +216,40 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
 
   return (
     <div className={className}>
-      {/* 年度選択UI */}
-      <div className="px-4 mb-4 flex items-center justify-end gap-2">
-        <label
-          htmlFor="year-select"
-          className="text-sm text-gray-600 dark:text-neutral-400"
-        >
-          年度:
-        </label>
-        <select
-          id="year-select"
-          value={selectedYear}
-          onChange={(e) => handleYearChange(e.target.value)}
-          className="px-3 py-1.5 text-sm border border-gray-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-800 text-gray-900 dark:text-white"
-          disabled={loading || availableYears.length === 0}
-        >
-          {availableYears.length === 0 && (
-            <option value="">年度を読み込み中...</option>
-          )}
-          {availableYears.map((yearCode) => {
-            const displayYear = yearCode.substring(0, 4);
-            return (
-              <option key={yearCode} value={yearCode}>
-                {displayYear}年
-              </option>
-            );
-          })}
-        </select>
+      {/* タイトルと年度選択UI */}
+      <div className="px-4 mb-4 flex items-center justify-between gap-4">
+        {title && (
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            {title}
+          </h2>
+        )}
+        <div className={`flex items-center gap-2 ${title ? '' : 'ml-auto'}`}>
+          <label
+            htmlFor="year-select"
+            className="text-sm text-gray-600 dark:text-neutral-400"
+          >
+            年度:
+          </label>
+          <select
+            id="year-select"
+            value={selectedYear}
+            onChange={(e) => handleYearChange(e.target.value)}
+            className="px-3 py-1.5 text-sm border border-gray-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-800 text-gray-900 dark:text-white"
+            disabled={loading || availableYears.length === 0}
+          >
+            {availableYears.length === 0 && (
+              <option value="">年度を読み込み中...</option>
+            )}
+            {availableYears.map((yearCode) => {
+              const displayYear = yearCode.substring(0, 4);
+              return (
+                <option key={yearCode} value={yearCode}>
+                  {displayYear}年
+                </option>
+              );
+            })}
+          </select>
+        </div>
       </div>
 
       {/* 地図とデータテーブル */}

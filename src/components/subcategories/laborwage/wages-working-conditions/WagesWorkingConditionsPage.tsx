@@ -1,18 +1,12 @@
 'use client';
 
 import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
 import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
 import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
 import { EstatRanking } from '@/components/dashboard/Ranking';
+import { SubcategoryPageProps } from '@/types/subcategory';
 
-interface WagesWorkingConditionsPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-  currentYear: string;
-}
-
-export const WagesWorkingConditionsPage: React.FC<WagesWorkingConditionsPageProps> = ({
+export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
   category,
   subcategory,
 }) => {

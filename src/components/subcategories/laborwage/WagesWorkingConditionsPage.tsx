@@ -1,14 +1,8 @@
 'use client';
 
 import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
 import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-
-interface WagesWorkingConditionsPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-  currentYear: string;
-}
+import { SubcategoryPageProps } from '@/types/subcategory';
 
 /**
  * 賃金・労働条件サブカテゴリページ
@@ -18,7 +12,7 @@ interface WagesWorkingConditionsPageProps {
  * - 統計カード、グラフ、ランキング等のコンポーネントを配置
  * - BasicPopulationPage.tsx を参考にしてください
  */
-export const WagesWorkingConditionsPage: React.FC<WagesWorkingConditionsPageProps> = ({
+export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
   category,
   subcategory,
   currentYear,

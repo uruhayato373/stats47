@@ -1,3 +1,6 @@
+import React from 'react';
+import { SubcategoryPageProps } from '@/types/subcategory';
+
 // カテゴリー別にインポート
 import { LandAreaPage, LandUsePage, NaturalEnvironmentPage, WeatherClimatePage } from './landweather';
 import { BasicPopulationPage, BasicPopulationAreaPage, MarriagePage, HouseholdsPage, PopulationMovementPage, BirthDeathPage, PopulationCompositionPage } from './population';
@@ -106,7 +109,7 @@ export const areaPageComponentMap: Record<string, React.ComponentType<any>> = {
 };
 
 // デフォルトのプレースホルダーコンポーネント
-const DefaultSubcategoryPage: React.ComponentType<any> = ({ category, subcategory }) => {
+const DefaultSubcategoryPage: React.FC<SubcategoryPageProps> = ({ category, subcategory }) => {
   const { SubcategoryLayout } = require('./SubcategoryLayout');
   return (
     <SubcategoryLayout category={category} subcategory={subcategory}>
