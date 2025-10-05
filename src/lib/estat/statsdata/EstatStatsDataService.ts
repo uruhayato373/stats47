@@ -26,6 +26,7 @@ export class EstatStatsDataService {
     options: {
       categoryFilter?: string;
       yearFilter?: string;
+      areaFilter?: string;
       limit?: number;
     } = {}
   ): Promise<FormattedEstatData> {
@@ -41,6 +42,7 @@ export class EstatStatsDataService {
     options: {
       categoryFilter?: string;
       yearFilter?: string;
+      areaFilter?: string;
       limit?: number;
     } = {}
   ): Promise<EstatStatsDataResponse> {
@@ -56,6 +58,7 @@ export class EstatStatsDataService {
         limit: options.limit || 10000,
         ...(options.categoryFilter && { cdCat01: options.categoryFilter }),
         ...(options.yearFilter && { cdTime: options.yearFilter }),
+        ...(options.areaFilter && { cdArea: options.areaFilter }),
       });
 
       return response;

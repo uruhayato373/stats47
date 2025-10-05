@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
-import { EstatChoroplethMap } from "@/components/dashboard/ChoroplethMap";
 import { EstatLineChart } from "@/components/dashboard/LineChart";
 import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";

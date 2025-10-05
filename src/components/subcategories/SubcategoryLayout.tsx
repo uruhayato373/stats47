@@ -4,17 +4,12 @@ import React from 'react';
 import Header from '@/components/layout/Header';
 import Sidebar from '@/components/layout/Sidebar';
 import { CategoryIcon } from '@/components/choropleth/CategoryIcon';
+import { SubcategoryNavigation } from './SubcategoryNavigation';
+import { CategoryData, SubcategoryData } from '@/types/choropleth';
 
 interface SubcategoryLayoutProps {
-  category: {
-    id: string;
-    name: string;
-    icon: string;
-  };
-  subcategory: {
-    id: string;
-    name: string;
-  };
+  category: CategoryData;
+  subcategory: SubcategoryData;
   children: React.ReactNode;
 }
 
@@ -54,6 +49,9 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
               </div>
             </div>
           </div>
+
+          {/* サブカテゴリナビゲーション */}
+          <SubcategoryNavigation category={category} currentSubcategory={subcategory} />
 
           {/* メインコンテンツ */}
           <div className="flex-1 overflow-hidden">
