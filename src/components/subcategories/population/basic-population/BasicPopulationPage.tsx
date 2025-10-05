@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { SubcategoryLayout } from "../SubcategoryLayout";
+
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 
 interface BasicPopulationPageProps {
   category: CategoryData;

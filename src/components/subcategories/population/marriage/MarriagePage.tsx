@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { SubcategoryLayout } from "../SubcategoryLayout";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";

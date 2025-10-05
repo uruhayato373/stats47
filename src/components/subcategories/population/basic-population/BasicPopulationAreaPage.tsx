@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { SubcategoryLayout } from "../SubcategoryLayout";
+
 import { EstatLineChart } from "@/components/dashboard/LineChart";
 import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 
 interface BasicPopulationAreaPageProps {
   category: CategoryData;
