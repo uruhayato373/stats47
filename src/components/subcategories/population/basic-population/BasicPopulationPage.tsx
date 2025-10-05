@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
-import { EstatRanking } from "@/components/dashboard/Ranking";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { EstatGenderDonutChart } from '@/components/dashboard/GenderDonutChart';
+import { CategoryData, SubcategoryData } from '@/types/choropleth';
+import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
+import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
+import { BasicPopulationRanking } from './BasicPopulationRanking';
 
 interface BasicPopulationPageProps {
   category: CategoryData;
@@ -19,12 +19,12 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
   subcategory,
 }) => {
   // 統計表IDとカテゴリコード
-  const statsDataId = "0000010101";
+  const statsDataId = '0000010101';
   const cdCat01 = {
-    totalPopulation: "A1101", // 総人口
-    dayNightRatio: "A6108", // 昼夜間人口比率
-    malePopulation: "A110101", // 総人口（男）
-    femalePopulation: "A110102", // 総人口（女）
+    totalPopulation: 'A1101', // 総人口
+    dayNightRatio: 'A6108', // 昼夜間人口比率
+    malePopulation: 'A110101', // 総人口（男）
+    femalePopulation: 'A110102', // 総人口（女）
   };
 
   return (
@@ -93,19 +93,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
       </div> */}
 
       {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.totalPopulation,
-        }}
-        subcategory={subcategory}
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      <BasicPopulationRanking subcategory={subcategory} />
 
       {/* 人口ピラミッド */}
       {/* <div className="px-4 pb-4">

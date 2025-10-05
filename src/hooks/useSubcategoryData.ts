@@ -64,7 +64,7 @@ export function useSubcategoryData({
       }
 
       console.log(`[${subcategory.id}] Data fetched successfully:`, {
-        dataPoints: response.data.data.length,
+        dataPoints: response.data.data?.length ?? 0,
         isSample: response.isSample,
       });
     } catch (err) {
