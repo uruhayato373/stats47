@@ -7,19 +7,19 @@ import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCar
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
-interface LandAreaPageProps {
+interface NaturalEnvironmentPageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
   currentYear: string;
 }
 
-export const LandAreaPage: React.FC<LandAreaPageProps> = ({
+export const NaturalEnvironmentPage: React.FC<NaturalEnvironmentPageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = "0000010102";
+  const statsDataId = "0000020201";
   const cdCat01 = {
-    totalArea: "B1101", // 総面積
+    forest: "D3104", // 森林面積
   };
 
   return (
@@ -29,10 +29,10 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.totalArea,
+              cdCat01: cdCat01.forest,
             }}
             areaCode="00000"
-            title="全国総面積"
+            title="全国森林面積"
             unit="km²"
           />
         </div>
@@ -40,7 +40,7 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
       <EstatRanking
         params={{
           statsDataId: statsDataId,
-          cdCat01: cdCat01.totalArea,
+          cdCat01: cdCat01.forest,
         }}
         subcategory={subcategory}
       />

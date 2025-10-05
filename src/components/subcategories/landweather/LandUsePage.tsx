@@ -7,32 +7,42 @@ import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCar
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
-interface LandAreaPageProps {
+interface LandUsePageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
   currentYear: string;
 }
 
-export const LandAreaPage: React.FC<LandAreaPageProps> = ({
+export const LandUsePage: React.FC<LandUsePageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = "0000010102";
+  const statsDataId = "0000020201";
   const cdCat01 = {
-    totalArea: "B1101", // 総面積
+    residential: "D3102", // 宅地面積
+    farmland: "D3103", // 田畑面積
   };
 
   return (
     <SubcategoryLayout category={category} subcategory={subcategory}>
       <div className="px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.totalArea,
+              cdCat01: cdCat01.residential,
             }}
             areaCode="00000"
-            title="全国総面積"
+            title="全国宅地面積"
+            unit="km²"
+          />
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.farmland,
+            }}
+            areaCode="00000"
+            title="全国田畑面積"
             unit="km²"
           />
         </div>
@@ -40,7 +50,7 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
       <EstatRanking
         params={{
           statsDataId: statsDataId,
-          cdCat01: cdCat01.totalArea,
+          cdCat01: cdCat01.residential,
         }}
         subcategory={subcategory}
       />

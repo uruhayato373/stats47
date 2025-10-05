@@ -1,5 +1,5 @@
 // カテゴリー別にインポート
-import { LandAreaPage } from './landweather';
+import { LandAreaPage, LandUsePage, NaturalEnvironmentPage, WeatherClimatePage } from './landweather';
 import { BasicPopulationPage, BasicPopulationAreaPage, MarriagePage, HouseholdsPage, PopulationMovementPage, BirthDeathPage } from './population';
 import { WagesWorkingConditionsPage } from './laborwage';
 import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
@@ -8,6 +8,9 @@ import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageCl
 export const subcategoryComponentMap: Record<string, React.ComponentType<any>> = {
   // 国土・気象
   'land-area': LandAreaPage,
+  'land-use': LandUsePage,
+  'natural-environment': NaturalEnvironmentPage,
+  'weather-climate': WeatherClimatePage,
 
   // 人口・世帯
   'basic-population': BasicPopulationPage,
