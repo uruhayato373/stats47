@@ -107,6 +107,8 @@ stats47/
 │   ├── category-page-design.md  # カテゴリーページ設計書
 │   ├── subcategory-page-component-design.md  # サブカテゴリー設計書
 │   └── [その他の設計書]
+├── docs/                    # 管理ガイド
+│   └── SUBCATEGORY_PAGES.md  # サブカテゴリページ管理ガイド
 ├── public/                  # 静的ファイル
 └── package.json             # 依存関係とスクリプト
 ```
@@ -144,7 +146,8 @@ npm run dev
 - [コンポーネント設計](./doc/component-design.md) - React コンポーネントの設計原則
 - [API 設計](./doc/api-design.md) - バックエンド API 仕様
 
-### ガイド
+### 管理ガイド
+- [サブカテゴリページ管理ガイド](./docs/SUBCATEGORY_PAGES.md) - カテゴリ管理とページコンポーネントの構成・追加手順
 - [開発者ガイド](./doc/development-guide.md) - 開発環境のセットアップと開発手順
 - [e-Stat 統合ガイド](./doc/estat-integration.md) - e-Stat API 統合の詳細
 - [配色システム](./doc/color-system.md) - UI/UX の配色システムとデザインガイドライン

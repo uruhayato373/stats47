@@ -29,7 +29,7 @@ export default async function SubcategoryPage({ params, searchParams }: PageProp
   const { category, subcategory } = subcategoryData;
 
   // サブカテゴリーIDに対応するコンポーネントを取得
-  const SubcategoryComponent = getSubcategoryComponent(subcategoryId);
+  const SubcategoryComponent = getSubcategoryComponent(subcategoryId, categoryId);
 
   return (
     <SubcategoryComponent

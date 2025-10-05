@@ -1,0 +1,1 @@
+export { ForeignersPage } from './foreigners';

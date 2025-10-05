@@ -391,7 +391,15 @@
     "id": "international",
     "name": "国際",
     "icon": "FaGlobe",
-    "color": "blue"
+    "color": "blue",
+    "subcategories": [
+      {
+        "id": "foreigners",
+        "name": "外国人",
+        "href": "/foreigners",
+        "component": "ForeignersPage"
+      }
+    ]
   },
   {
     "id": "infrastructure",

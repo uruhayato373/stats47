@@ -13,6 +13,7 @@ import { EducationSportsCardPage } from './educationsports';
 import { FiscalIndicatorsPage, StaffAssemblyElectionPage, TaxRevenuePage, InvestmentPage, RevenuePage, ExpenditurePage } from './administrativefinancial';
 import { FireEmergencyPage, FireInsurancePage, PoliceCrimePage, PollutionEnvironmentPage } from './safetyenvironment';
 import { SocialSecurityCardPage, DeathStatisticsPage } from './socialsecurity';
+import { ForeignersPage } from './international';
 import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
 
 // サブカテゴリーIDとコンポーネントのマッピング
@@ -91,6 +92,9 @@ export const subcategoryComponentMap: Record<string, React.ComponentType<any>> =
   'socialsecurity-card': SocialSecurityCardPage,
   'death-statistics': DeathStatisticsPage,
 
+  // 国際
+  'foreigners': ForeignersPage,
+
   // 他のサブカテゴリーはデフォルトコンポーネントを使用
 };
 
@@ -138,3 +142,4 @@ export * from './educationsports';
 export * from './administrativefinancial';
 export * from './safetyenvironment';
 export * from './socialsecurity';
+export * from './international';
