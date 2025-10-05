@@ -126,12 +126,13 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
           selectedYear
         );
 
-        const prefectureValues = await EstatStatsDataService.getPrefectureDataByYear(
-          params.statsDataId,
-          params.cdCat01,
-          selectedYear,
-          params.limit || 100000
-        );
+        const prefectureValues =
+          await EstatStatsDataService.getPrefectureDataByYear(
+            params.statsDataId,
+            params.cdCat01,
+            selectedYear,
+            params.limit || 100000
+          );
 
         console.log(
           "[EstatRanking] Prefecture values:",
@@ -209,11 +210,6 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
 
   return (
     <div className={className}>
-      {/* 統計サマリー */}
-      <div className="px-4 mb-4">
-        <StatisticsSummary data={formattedValues} unit={subcategory.unit} />
-      </div>
-
       {/* 年度選択UI */}
       <div className="px-4 mb-4 flex items-center justify-end gap-2">
         <label
@@ -246,8 +242,9 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
       {/* 地図とデータテーブル */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden px-4 gap-4">
         {/* 地図表示エリア */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="h-full">
+        <div className="flex-1 flex flex-col overflow-hidden gap-4">
+          {/* 地図 */}
+          <div>
             <ChoroplethMap
               data={formattedValues}
               options={{
@@ -261,21 +258,19 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
               height={mapHeight}
             />
           </div>
+
+          {/* 統計サマリー */}
+          <div>
+            <StatisticsSummary data={formattedValues} unit={subcategory.unit} />
+          </div>
         </div>
 
         {/* データテーブルエリア */}
         <div className="flex-shrink-0">
-          <div className="lg:w-80 h-full lg:border-s border-gray-200 dark:border-neutral-700 lg:ps-4">
-            <div className="bg-gray-50 dark:bg-neutral-900 rounded-lg p-4 h-full">
-              <h2 className="text-md font-semibold text-gray-900 dark:text-white mb-4">
-                都道府県別データ
-              </h2>
-              <PrefectureDataTableClient
-                data={formattedValues}
-                subcategory={subcategory}
-              />
-            </div>
-          </div>
+          <PrefectureDataTableClient
+            data={formattedValues}
+            subcategory={subcategory}
+          />
         </div>
       </div>
     </div>

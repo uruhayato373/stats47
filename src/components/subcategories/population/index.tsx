@@ -1,9 +1,8 @@
-export { BasicPopulationPage } from './BasicPopulationPage';
-export { BasicPopulationAreaPage } from './BasicPopulationAreaPage';
-export { MarriagePage } from './MarriagePage';
-export { HouseholdsPage } from './HouseholdsPage';
-export { PopulationMovementPage } from './PopulationMovementPage';
-export { BirthDeathPage } from './BirthDeathPage';
+export { BasicPopulationPage, BasicPopulationAreaPage } from './basic-population';
+export { BirthDeathPage } from './birth-death';
+export { HouseholdsPage } from './households';
+export { MarriagePage } from './marriage';
+export { PopulationMovementPage } from './population-movement';
 
 // 他のサブカテゴリーコンポーネントをここに追加
 // export { PopulationCompositionPage } from './PopulationCompositionPage';

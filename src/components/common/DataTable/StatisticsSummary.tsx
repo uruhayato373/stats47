@@ -23,7 +23,7 @@ interface SummaryData {
 export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
   data,
   unit,
-  showTotal = true,
+  showTotal = false,
   showAverage = true,
   showMax = true,
   showMin = true,
@@ -97,13 +97,15 @@ export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
           <div className="text-xs text-gray-600 dark:text-neutral-400 mb-1">
             {card.label}
           </div>
-          <div className="text-xl font-bold text-gray-900 dark:text-white">
-            {card.key === 'average'
-              ? card.value.toLocaleString(undefined, { maximumFractionDigits: 0 })
-              : card.value.toLocaleString()}
-          </div>
-          <div className="text-xs text-gray-500 dark:text-neutral-500 mt-1">
-            {unit}
+          <div className="flex items-baseline gap-2">
+            <span className="text-xl font-bold text-gray-900 dark:text-white">
+              {card.key === 'average'
+                ? card.value.toLocaleString(undefined, { maximumFractionDigits: 0 })
+                : card.value.toLocaleString()}
+            </span>
+            <span className="text-sm text-gray-500 dark:text-neutral-500">
+              {unit}
+            </span>
           </div>
         </div>
       ))}

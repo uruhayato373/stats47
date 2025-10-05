@@ -199,10 +199,12 @@ export default function SavedEstatMetainfoList({
     );
   }
 
-  // statsDataIdの昇順でソート
-  const sortedData = [...data].sort((a, b) =>
-    a.statsDataId.localeCompare(b.statsDataId)
-  );
+  // statsDataIdの昇順でソート（undefinedを考慮）
+  const sortedData = [...data].sort((a, b) => {
+    const aId = a.statsDataId || '';
+    const bId = b.statsDataId || '';
+    return aId.localeCompare(bId);
+  });
 
   return (
     <>

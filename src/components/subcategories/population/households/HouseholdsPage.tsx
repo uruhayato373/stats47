@@ -4,7 +4,6 @@ import React from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { EstatMultiLineChart } from "@/components/dashboard/MultiLineChart";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface HouseholdsPageProps {
@@ -85,33 +84,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
         </div>
       </div>
 
-      {/* 面積・居住環境の推移 */}
-      <div className="px-4 pb-4">
-        <EstatMultiLineChart
-          params={{
-            statsDataId: statsDataId,
-            limit: 100000,
-          }}
-          series={[
-            {
-              categoryCode: cdCat01.floorAreaPerHousehold,
-              label: "1世帯当たり延べ面積",
-              color: "#10b981",
-            },
-            {
-              categoryCode: cdCat01.floorAreaPerPerson,
-              label: "1人当たり延べ面積",
-              color: "#3b82f6",
-            },
-          ]}
-          areaCode="00000"
-          width={800}
-          height={400}
-          yLabel="㎡"
-          title="面積・居住環境の推移（全国）"
-        />
-      </div>
-
       {/* コロプレス地図とデータテーブル */}
       <EstatRanking
         params={{
@@ -126,38 +98,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
         mapWidth={800}
         mapHeight={600}
       />
-
-      {/* 高齢世帯・特定世帯の推移 */}
-      <div className="px-4 pb-4">
-        <EstatMultiLineChart
-          params={{
-            statsDataId: statsDataId,
-            limit: 100000,
-          }}
-          series={[
-            {
-              categoryCode: cdCat01.elderlySingleHouseholds,
-              label: "高齢単身世帯（65歳以上）",
-              color: "#ef4444",
-            },
-            {
-              categoryCode: cdCat01.elderlyCoupleHouseholds,
-              label: "高齢夫婦世帯",
-              color: "#f59e0b",
-            },
-            {
-              categoryCode: cdCat01.singleMotherHouseholds,
-              label: "母子世帯",
-              color: "#ec4899",
-            },
-          ]}
-          areaCode="00000"
-          width={800}
-          height={400}
-          yLabel="世帯"
-          title="高齢世帯・特定世帯の推移（全国）"
-        />
-      </div>
     </SubcategoryLayout>
   );
 };

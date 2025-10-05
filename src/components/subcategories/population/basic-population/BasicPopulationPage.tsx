@@ -2,11 +2,9 @@
 
 import React from "react";
 import { SubcategoryLayout } from "../SubcategoryLayout";
-import { EstatLineChart } from "@/components/dashboard/LineChart";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 import { EstatRanking } from "@/components/dashboard/Ranking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
-import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 
 interface BasicPopulationPageProps {
@@ -73,7 +71,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
       </div>
 
       {/* 折れ線グラフエリア */}
-      <div className="px-4 pb-4">
+      {/* <div className="px-4 pb-4">
         <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             全国の推移
@@ -91,7 +89,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
             title={`${subcategory.name}の推移（全国）`}
           />
         </div>
-      </div>
+      </div> */}
 
       {/* コロプレス地図とデータテーブル */}
       <EstatRanking
@@ -109,7 +107,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
       />
 
       {/* 人口ピラミッド */}
-      <div className="px-4 pb-4">
+      {/* <div className="px-4 pb-4">
         <EstatPopulationPyramid
           params={{
             statsDataId: statsDataId,
@@ -118,7 +116,7 @@ export const BasicPopulationPage: React.FC<BasicPopulationPageProps> = ({
           title="全国人口ピラミッド"
           height={500}
         />
-      </div>
+      </div> */}
     </SubcategoryLayout>
   );
 };

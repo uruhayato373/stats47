@@ -104,10 +104,11 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
       try {
         console.log("[EstatMultiLineChart] Fetching data with params:", params);
 
-        // e-stat APIからデータを取得
+        // e-stat APIからデータを取得（指定地域のデータのみ）
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
           {
+            areaFilter: areaCode,
             limit: params.limit || 100000,
           }
         );

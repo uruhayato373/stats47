@@ -1,0 +1,1 @@
+export { BirthDeathPage } from './BirthDeathPage';

@@ -1,0 +1,1 @@
+export { MarriagePage } from './MarriagePage';
