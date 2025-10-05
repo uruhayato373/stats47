@@ -1,0 +1,1 @@
+export { EducationSportsCardPage } from './card';

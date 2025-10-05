@@ -1,0 +1,1 @@
+export { FireEmergencyPage } from './FireEmergencyPage';

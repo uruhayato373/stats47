@@ -1,0 +1,1 @@
+export { WasteManagementPage } from './WasteManagementPage';

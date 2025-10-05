@@ -1,0 +1,1 @@
+export { CommercialFacilitiesPage } from './CommercialFacilitiesPage';

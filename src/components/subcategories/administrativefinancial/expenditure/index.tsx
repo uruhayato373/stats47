@@ -1,0 +1,1 @@
+export { ExpenditurePage } from './ExpenditurePage';

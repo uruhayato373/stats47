@@ -1,1 +1,1 @@
-export * from './NaturalEnvironmentPage';
+export { NaturalEnvironmentPage } from './NaturalEnvironmentPage';

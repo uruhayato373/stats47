@@ -1,0 +1,1 @@
+export { LaborForceStructurePage } from './LaborForceStructurePage';

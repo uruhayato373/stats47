@@ -1,4 +1,4 @@
-export * from "./land-area";
-export * from "./land-use";
-export * from "./natural-environment";
-export * from "./weather-climate";
+export { LandAreaPage } from './land-area';
+export { LandUsePage } from './land-use';
+export { NaturalEnvironmentPage } from './natural-environment';
+export { WeatherClimatePage } from './weather-climate';

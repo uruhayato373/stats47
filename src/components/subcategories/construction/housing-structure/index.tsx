@@ -1,0 +1,1 @@
+export { HousingStructurePage } from './HousingStructurePage';

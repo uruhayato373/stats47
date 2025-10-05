@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
-import { estatApi } from "@/services/estat-api";
+import { estatAPI } from "@/services/estat-api";
 import { StackedBarChart } from "@/components/d3/StackedBarChart";
 import { GetStatsDataResponse } from "@/types/estat";
 
@@ -40,7 +40,7 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res: GetStatsDataResponse = await estatApi.getStatsData({
+        const res: GetStatsDataResponse = await estatAPI.getStatsData({
           statsDataId: params.statsDataId,
           cdCat01: params.cdCat01.join(","),
           limit: 10000, // get more data points

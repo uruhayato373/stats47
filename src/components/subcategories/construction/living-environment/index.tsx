@@ -1,0 +1,1 @@
+export { LivingEnvironmentPage } from './LivingEnvironmentPage';

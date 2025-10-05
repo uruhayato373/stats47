@@ -1,0 +1,1 @@
+export { WagesWorkingConditionsPage } from './WagesWorkingConditionsPage';

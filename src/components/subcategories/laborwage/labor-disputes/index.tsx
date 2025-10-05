@@ -1,0 +1,1 @@
+export { LaborDisputesPage } from './LaborDisputesPage';

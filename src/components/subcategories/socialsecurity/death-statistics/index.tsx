@@ -1,0 +1,1 @@
+export { DeathStatisticsPage } from './DeathStatisticsPage';

@@ -1,0 +1,72 @@
+'use client';
+
+import React from 'react';
+import { CategoryData, SubcategoryData } from '@/types/choropleth';
+import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
+import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
+import { EstatRanking } from '@/components/dashboard/Ranking';
+
+interface AgriculturalHouseholdPageProps {
+  category: CategoryData;
+  subcategory: SubcategoryData;
+  currentYear: string;
+}
+
+export const AgriculturalHouseholdPage: React.FC<AgriculturalHouseholdPageProps> = ({
+  category,
+  subcategory,
+}) => {
+  const statsDataId = '0000010103';
+  const statsDataIdRatio = '0000010103';
+  const cdCat01 = {
+    C3101: 'C3101',
+    C3102: 'C3102',
+  };
+
+  return (
+    <SubcategoryLayout category={category} subcategory={subcategory}>
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.C3101,
+            }}
+            areaCode="00000"
+            title="全国農業産出額"
+            unit="百万円"
+            color="#4f46e5"
+          />
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.C3102,
+            }}
+            areaCode="00000"
+            title="全国農家数"
+            unit="戸"
+            color="#10b981"
+          />
+        </div>
+      </div>
+
+      <EstatRanking
+        params={{
+          statsDataId: statsDataId,
+          cdCat01: cdCat01.C3101,
+        }}
+        subcategory={{
+          ...subcategory,
+          unit: '百万円',
+          name: '農業産出額',
+        }}
+        options={{
+          colorScheme: subcategory.colorScheme || 'interpolateBlues',
+          divergingMidpoint: 'zero',
+        }}
+        mapWidth={800}
+        mapHeight={600}
+      />
+    </SubcategoryLayout>
+  );
+};

@@ -1,4 +1,6 @@
-export { WagesWorkingConditionsPage } from './WagesWorkingConditionsPage';
-
-// 他のサブカテゴリーコンポーネントをここに追加
-// export { LaborForceStructurePage } from './LaborForceStructurePage';
+export { WagesWorkingConditionsPage } from './wages-working-conditions';
+export { LaborForceStructurePage } from './labor-force-structure';
+export { LaborDisputesPage } from './labor-disputes';
+export { JobSeekingPlacementPage } from './job-seeking-placement';
+export { IndustryOccupationPage } from './industry-occupation';
+export { EmploymentTypePage } from './employment-type';

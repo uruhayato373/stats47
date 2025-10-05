@@ -1,1 +1,1 @@
-export * from './LandAreaPage';
+export { LandAreaPage } from './LandAreaPage';

@@ -1,0 +1,1 @@
+export { TourismAccommodationPage } from './TourismAccommodationPage';

@@ -1,2 +1,1 @@
-export * from './WeatherClimatePage';
-export * from './WeatherClimateRanking';
+export { WeatherClimatePage } from './WeatherClimatePage';

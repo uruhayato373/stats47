@@ -1,0 +1,1 @@
+export { FireInsurancePage } from './FireInsurancePage';

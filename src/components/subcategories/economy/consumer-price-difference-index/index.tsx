@@ -1,0 +1,1 @@
+export { ConsumerPriceDifferenceIndexPage } from './ConsumerPriceDifferenceIndexPage';

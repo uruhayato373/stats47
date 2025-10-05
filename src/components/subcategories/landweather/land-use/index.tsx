@@ -1,1 +1,1 @@
-export * from './LandUsePage';
+export { LandUsePage } from './LandUsePage';
