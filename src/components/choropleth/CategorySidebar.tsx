@@ -158,9 +158,11 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
                           <div className="font-medium">
                             {subcategory.name}
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-neutral-500 mt-0.5">
-                            単位: {subcategory.unit}
-                          </div>
+                          {subcategory.unit && (
+                            <div className="text-xs text-gray-500 dark:text-neutral-500 mt-0.5">
+                              単位: {subcategory.unit}
+                            </div>
+                          )}
                         </button>
                       );
                     })}

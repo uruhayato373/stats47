@@ -14,7 +14,6 @@ import { FiscalIndicatorsPage, StaffAssemblyElectionPage, TaxRevenuePage, Invest
 import { FireEmergencyPage, FireInsurancePage, PoliceCrimePage, PollutionEnvironmentPage } from './safetyenvironment';
 import { SocialSecurityCardPage, DeathStatisticsPage } from './socialsecurity';
 import { ForeignersPage } from './international';
-import { SubcategoryPageClient } from '@/components/choropleth/SubcategoryPageClient';
 
 // サブカテゴリーIDとコンポーネントのマッピング
 export const subcategoryComponentMap: Record<string, React.ComponentType<any>> = {
@@ -106,6 +105,28 @@ export const areaPageComponentMap: Record<string, React.ComponentType<any>> = {
   // 他のサブカテゴリーはデフォルトコンポーネントを使用
 };
 
+// デフォルトのプレースホルダーコンポーネント
+const DefaultSubcategoryPage: React.ComponentType<any> = ({ category, subcategory }) => {
+  const { SubcategoryLayout } = require('./SubcategoryLayout');
+  return (
+    <SubcategoryLayout category={category} subcategory={subcategory}>
+      <div className="flex-1 flex items-center justify-center p-8">
+        <div className="text-center max-w-md">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            {subcategory.name}
+          </h2>
+          <p className="text-gray-600 dark:text-neutral-400 mb-4">
+            このページは現在開発中です。
+          </p>
+          <p className="text-sm text-gray-500 dark:text-neutral-500">
+            実装方法については BasicPopulationPage.tsx を参考にしてください。
+          </p>
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
+
 /**
  * サブカテゴリーIDに対応するコンポーネントを取得
  * マッピングが存在しない場合はデフォルトコンポーネントを返す
@@ -113,7 +134,7 @@ export const areaPageComponentMap: Record<string, React.ComponentType<any>> = {
 export const getSubcategoryComponent = (subcategoryId: string, categoryId?: string): React.ComponentType<any> => {
   // カテゴリーIDとサブカテゴリーIDの組み合わせを試す（'card'の重複対策）
   const compositeKey = categoryId ? `${categoryId}-${subcategoryId}` : subcategoryId;
-  return subcategoryComponentMap[compositeKey] || subcategoryComponentMap[subcategoryId] || SubcategoryPageClient;
+  return subcategoryComponentMap[compositeKey] || subcategoryComponentMap[subcategoryId] || DefaultSubcategoryPage;
 };
 
 /**
@@ -121,7 +142,7 @@ export const getSubcategoryComponent = (subcategoryId: string, categoryId?: stri
  * マッピングが存在しない場合はデフォルトコンポーネントを返す
  */
 export const getAreaPageComponent = (subcategoryId: string): React.ComponentType<any> => {
-  return areaPageComponentMap[subcategoryId] || SubcategoryPageClient;
+  return areaPageComponentMap[subcategoryId] || DefaultSubcategoryPage;
 };
 
 // 共通コンポーネント

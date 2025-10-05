@@ -62,7 +62,7 @@ export const ChoroplethDataDisplayClient: React.FC<
               {subcategory.name}
             </div>
             <div className="text-xs text-gray-600 dark:text-neutral-400">
-              {year}年 | 単位: {subcategory.unit}
+              {year}年{subcategory.unit ? ` | 単位: ${subcategory.unit}` : ''}
             </div>
           </div>
         </div>

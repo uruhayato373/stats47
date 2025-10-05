@@ -214,11 +214,11 @@ function formatValue(
     return `${value.toFixed(1)}%`;
   }
 
-  if (unit.includes("円")) {
+  if (unit?.includes("円")) {
     return value.toLocaleString("ja-JP");
   }
 
-  if (unit.includes("人") || unit.includes("世帯") || unit.includes("件")) {
+  if (unit?.includes("人") || unit?.includes("世帯") || unit?.includes("件")) {
     return value.toLocaleString("ja-JP");
   }
 

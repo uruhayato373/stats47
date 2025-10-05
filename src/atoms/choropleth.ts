@@ -4,7 +4,7 @@
 
 import { atom } from 'jotai';
 import { CategoryData, SubcategoryData, ChoroplethDisplayData, MapVisualizationSettings } from '@/types/choropleth';
-import { getSortedCategories } from '@/lib/choropleth/categories';
+import { getSortedCategories } from '@/lib/choropleth/category-helpers';
 
 // 基本状態アトム
 export const selectedCategoryAtom = atom<string | null>(null);

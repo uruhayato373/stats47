@@ -15,12 +15,12 @@ export interface SubcategoryData {
   id: string;
   categoryId: string;
   name: string;
-  description: string;
-  unit: string;
-  dataType: 'numerical' | 'percentage' | 'rate';
-  statsDataId: string;
-  tableName: string;
-  displayOrder: number;
+  description?: string;
+  unit?: string;
+  dataType?: 'numerical' | 'percentage' | 'rate';
+  statsDataId?: string;
+  tableName?: string;
+  displayOrder?: number;
   colorScheme?: string;
   categoryCode?: string;
   lastUpdated?: string;

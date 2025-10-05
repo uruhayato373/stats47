@@ -261,7 +261,7 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
 
           {/* 統計サマリー */}
           <div>
-            <StatisticsSummary data={formattedValues} unit={subcategory.unit} />
+            <StatisticsSummary data={formattedValues} unit={subcategory.unit || ''} />
           </div>
         </div>
 
