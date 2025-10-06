@@ -47,15 +47,16 @@
 
 #### 環境別設定
 
-- **ローカル開発**: `.wrangler/state/v3/d1/` 内のローカルインスタンス
-- **本番環境**: Cloudflare D1 のリモートインスタンス
+- **開発・本番共通**: Cloudflare D1 のリモートインスタンス
 - **バインディング**: `STATS47_DB` (wrangler.toml)
+
+`wrangler.toml` の設定により、ローカル開発環境 (`wrangler dev`) でも、本番環境と同じリモートの D1 データベースに接続します。これにより、開発と本番の環境差異を最小限に抑えています。
 
 #### スキーマ管理
 
 - **統合スキーマ**: 認証、メタデータ、履歴管理を一元化
-- **自動適用**: `./database/manage.sh schema` でローカル環境に適用
-- **本番適用**: `npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql`
+- **適用コマンド**: `npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql`
+- **簡易適用スクリプト**: `./database/manage.sh schema` を使用しても、内部的に `wrangler` コマンドが実行され、リモートデータベースにスキーマが適用されます。
 
 ### 地図可視化設定データベース設計
 
@@ -185,52 +186,32 @@ LEFT JOIN estat_metainfo m ON rv.stats_data_id = m.stats_data_id AND rv.cat01 = 
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # ルートレイアウト（ヘッダー・フッター含む）
+├── app/                    # Next.js App Router。ルーティングとページの定義
+│   ├── layout.tsx         # ルートレイアウト
 │   ├── page.tsx           # ホームページ
-│   └── dashboard/         # ダッシュボード（カテゴリベース）
-│       ├── page.tsx       # カテゴリ一覧ページ
-│       ├── [categoryId]/  # カテゴリ詳細ページ
-│       │   ├── page.tsx
-│       │   └── [subcategoryId]/  # サブカテゴリ詳細ページ
-│       │       └── page.tsx
-├── components/             # Reactコンポーネント（アトミックデザイン）
-│   ├── atoms/             # 最小単位のコンポーネント
-│   │   ├── RegionSelector.tsx
-│   │   └── ...
-│   ├── molecules/          # atomsを組み合わせたコンポーネント
-│   │   ├── StatisticsDisplay.tsx
-│   │   └── ...
-│   ├── organisms/          # moleculesを組み合わせた大きなコンポーネント
-│   │   ├── EstatDataFetcher.tsx
-│   │   └── ...
-│   ├── templates/          # ページレイアウトのテンプレート
-│   ├── pages/              # 特定のページ用のコンポーネント
-│   ├── layout/             # グローバルレイアウト
-│   │   ├── Header.tsx
-│   │   └── Footer.tsx
-│   ├── charts/             # チャート関連コンポーネント
-│   ├── maps/               # マップ関連コンポーネント
-│   └── ui/                 # UI関連コンポーネント
-├── config/                 # 設定ファイル
-│   └── categories.json    # カテゴリ定義
-├── types/                  # TypeScript型定義
-│   └── estat/             # e-Stat API型定義（@estat/パッケージ使用）
-│       ├── index.ts       # 型定義のエクスポート
-│       ├── raw-response.ts # 生APIレスポンス型
-│       ├── processed.ts   # 処理済みデータ型
-│       ├── parameters.ts  # APIパラメータ型
-│       └── errors.ts      # エラー型定義
+│   ├── [category]/        # カテゴリページ（動的ルーティング）
+│   ├── choropleth/        # コロプレスマップ表示ページ
+│   └── estat/             # e-Stat関連の各機能ページ
+├── components/             # Reactコンポーネント
+│   ├── choropleth/        # コロプレスマップ関連コンポーネント
+│   ├── common/            # 共通UIコンポーネント (ボタン、テーブル等)
+│   ├── d3/                # D3.jsを利用したチャートコンポーネント
+│   ├── dashboard/         # ダッシュボード関連コンポーネント
+│   ├── estat/             # e-Statデータ表示関連コンポーネント
+│   ├── layout/            # ヘッダーやサイドバーなどのレイアウトコンポーネント
+│   └── subcategories/     # サブカテゴリ関連コンポーネント
+├── atoms/                  # Jotaiのatom定義
+├── config/                 # 設定ファイル (例: カテゴリ定義)
+│   └── categories.json
 ├── contexts/               # React Context
-│   ├── AuthContext.tsx    # 認証状態管理
 │   └── ThemeContext.tsx   # テーマ状態管理
-├── worker/                 # Cloudflare Worker
-│   └── index.ts           # D1データベース操作API
-└── lib/                    # ユーティリティ関数
-    └── estat/             # e-Stat関連ユーティリティ
-        ├── client.ts      # APIクライアント設定
-        ├── transformers.ts # データ変換関数
-        └── validators.ts  # データ検証関数
+├── hooks/                  # カスタムフック
+├── lib/                    # ユーティリティ関数、クライアントライブラリ
+├── providers/              # アプリケーション全体で利用するプロバイダー
+├── services/               # 外部APIとの通信サービス
+├── types/                  # TypeScriptの型定義
+├── middleware.ts           # Next.jsのミドルウェア
+└── worker.ts               # Cloudflare Workerのエントリーポイント
 ```
 
 ## e-Stat API 統合アーキテクチャ
@@ -259,87 +240,92 @@ src/
 ### 型定義の階層
 
 ```
-@estat/types
-├── EstatResponse          # 基本APIレスポンス型
-├── EstatParameter         # APIパラメータ型
-├── EstatCatalogResponse   # カタログ情報レスポンス型
-├── EstatListResponse      # リスト情報レスポンス型
-├── EstatMetaResponse      # メタデータレスポンス型
-└── EstatError            # エラー型定義
+@/lib/estat/types
+├── EstatMetaInfoResponse
+├── EstatStatsDataResponse
+├── EstatStatsListResponse
+├── GetMetaInfoParams
+├── GetStatsDataParams
+├── GetStatsListParams
+└── EstatAPIError
 
-src/types/estat/
-├── index.ts              # 型定義のエクスポート
-├── raw-response.ts       # 生APIレスポンス型（@estat/typesから拡張）
-├── processed.ts          # 処理済みデータ型
-├── parameters.ts         # APIパラメータ型（@estat/typesから拡張）
-├── errors.ts             # エラー型定義（@estat/typesから拡張）
-└── map-data.ts           # マップデータ型
+src/types/
+├── choropleth.ts
+├── index.ts
+├── prefecture.ts
+├── subcategory.ts
+└── topojson.ts
 ```
 
 ### API クライアントの実装
 
+APIクライアントは `src/services/estat-api.ts` に実装されています。
+
 ```typescript
-// src/lib/estat/client.ts
-import { EstatClient } from "@estat/client";
-import { EstatParameter, EstatResponse } from "@estat/types";
+// src/services/estat-api.ts
+import {
+  EstatMetaInfoResponse,
+  EstatStatsDataResponse,
+  GetMetaInfoParams,
+  GetStatsDataParams,
+} from "@/lib/estat/types";
+import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "@/lib/constants";
 
-export class EstatApiClient {
-  private client: EstatClient;
+export class EstatAPIClient {
+  private baseUrl: string;
+  private appId: string;
 
-  constructor() {
-    this.client = new EstatClient({
-      appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
-    });
+  constructor(appId: string = ESTAT_APP_ID) {
+    this.baseUrl = ESTAT_API.BASE_URL;
+    this.appId = appId;
   }
 
-  async getStatisticalData(parameter: EstatParameter): Promise<EstatResponse> {
-    try {
-      return await this.client.getStatsData(parameter);
-    } catch (error) {
-      throw new EstatApiError("統計データの取得に失敗しました", error);
-    }
+  private async request<T>(
+    endpoint: string,
+    params: Record<string, unknown>
+  ): Promise<T> {
+    // ... (リクエスト共通処理)
   }
 
-  async getCatalogInfo(statsDataId: string): Promise<EstatCatalogResponse> {
-    try {
-      return await this.client.getStatsDataCatalog({
-        statsDataId,
-        lang: "J",
-      });
-    } catch (error) {
-      throw new EstatApiError("カタログ情報の取得に失敗しました", error);
-    }
+  async getMetaInfo(
+    params: Omit<GetMetaInfoParams, "appId">
+  ): Promise<EstatMetaInfoResponse> {
+    return this.request<EstatMetaInfoResponse>(
+      ESTAT_ENDPOINTS.GET_META_INFO,
+      params
+    );
+  }
+
+  async getStatsData(
+    params: Omit<GetStatsDataParams, "appId">
+  ): Promise<EstatStatsDataResponse> {
+    return this.request<EstatStatsDataResponse>(
+      ESTAT_ENDPOINTS.GET_STATS_DATA,
+      params
+    );
   }
 }
+
+export const estatAPI = new EstatAPIClient();
 ```
 
 ## 認証・セキュリティ
 
-### JWT 認証
+### Cloudflare D1
 
-- **トークンベース認証**: セッション管理
-- **bcrypt**: パスワードハッシュ化（salt rounds: 12）
-- **自動ログアウト**: 7 日間の有効期限
-
-#### Cloudflare D1
-
-- **SQLite ベース**: エッジデータベース
-- **ユーザー管理**: アカウント情報の保存
-- **セッション管理**: アクティブセッションの追跡
+- **SQLite ベース**: エッジで動作するデータベースとして、アプリケーションのデータを保存します。
 
 ### セキュリティ設計
 
 #### API 保護
 
-- **認証ガード**: 保護されたページへのアクセス制御
-- **JWT 検証**: トークンの有効性確認
-- **CORS 設定**: 適切なオリジン制御
+- **CORS 設定**: 適切なオリジンからのリクエストのみを許可するように設定されています。
 
 #### データ保護
 
-- **プリペアドステートメント**: SQL インジェクション対策
-- **入力バリデーション**: フロントエンド・バックエンド両方
-- **HTTPS 通信**: 本番環境での暗号化通信
+- **プリペアドステートメント**: Cloudflare D1へのクエリは、SQLインジェクションを防ぐためにプリペアドステートメントを利用することが推奨されます。
+- **入力バリデーション**: フロントエンドとバックエンドの両方で、予期せぬ入力からシステムを保護するためのバリデーションが実装されています。
+- **HTTPS 通信**: 本番環境では、通信はすべてHTTPSで暗号化され、データの盗聴や改ざんを防ぎます。
 
 ## パフォーマンス・スケーラビリティ
 

@@ -9,25 +9,29 @@
         "id": "land-area",
         "name": "土地面積",
         "href": "/land-area",
-        "component": "LandAreaPage"
+        "component": "LandAreaPage",
+        "areaComponent": "LandAreaAreaPage"
       },
       {
         "id": "land-use",
         "name": "土地利用",
         "href": "/land-use",
-        "component": "LandUsePage"
+        "component": "LandUsePage",
+        "areaComponent": "LandUseAreaPage"
       },
       {
         "id": "natural-environment",
         "name": "自然環境",
         "component": "NaturalEnvironmentPage",
-        "href": "/natural-environment"
+        "href": "/natural-environment",
+        "areaComponent": "NaturalEnvironmentAreaPage"
       },
       {
         "id": "weather-climate",
         "name": "気象・気候",
         "href": "/weather-climate",
-        "component": "WeatherClimatePage"
+        "component": "WeatherClimatePage",
+        "areaComponent": "WeatherClimateAreaPage"
       }
     ]
   },
@@ -41,37 +45,43 @@
         "id": "basic-population",
         "name": "総人口",
         "href": "/basic-population",
-        "component": "BasicPopulationPage"
+        "component": "BasicPopulationPage",
+        "areaComponent": "BasicPopulationAreaPage"
       },
       {
         "id": "population-movement",
         "name": "人口移動",
         "href": "/population-movement",
-        "component": "PopulationMovementPage"
+        "component": "PopulationMovementPage",
+        "areaComponent": "PopulationMovementAreaPage"
       },
       {
         "id": "population-composition",
         "name": "人口構成",
         "href": "/population-composition",
-        "component": "PopulationCompositionPage"
+        "component": "PopulationCompositionPage",
+        "areaComponent": "PopulationCompositionAreaPage"
       },
       {
         "id": "marriage",
         "name": "婚姻・家族",
         "href": "/marriage",
-        "component": "MarriagePage"
+        "component": "MarriagePage",
+        "areaComponent": "MarriageAreaPage"
       },
       {
         "id": "households",
         "name": "世帯",
         "href": "/households",
-        "component": "HouseholdsPage"
+        "component": "HouseholdsPage",
+        "areaComponent": "HouseholdsAreaPage"
       },
       {
         "id": "birth-death",
         "name": "出生・死亡",
         "href": "/birth-death",
-        "component": "BirthDeathPage"
+        "component": "BirthDeathPage",
+        "areaComponent": "BirthDeathAreaPage"
       }
     ]
   },
@@ -85,37 +95,43 @@
         "id": "wages-working-conditions",
         "name": "賃金・労働条件",
         "href": "/wages-working-conditions",
-        "component": "WagesWorkingConditionsPage"
+        "component": "WagesWorkingConditionsPage",
+        "areaComponent": "WagesWorkingConditionsAreaPage"
       },
       {
         "id": "labor-force-structure",
         "name": "労働力構造",
         "href": "/labor-force-structure",
-        "component": "LaborForceStructurePage"
+        "component": "LaborForceStructurePage",
+        "areaComponent": "LaborForceStructureAreaPage"
       },
       {
         "id": "labor-disputes",
         "name": "労働争議",
         "href": "/labor-disputes",
-        "component": "LaborDisputesPage"
+        "component": "LaborDisputesPage",
+        "areaComponent": "LaborDisputesAreaPage"
       },
       {
         "id": "job-seeking-placement",
         "name": "求職・求人",
         "href": "/job-seeking-placement",
-        "component": "JobSeekingPlacementPage"
+        "component": "JobSeekingPlacementPage",
+        "areaComponent": "JobSeekingPlacementAreaPage"
       },
       {
         "id": "industry-occupation",
         "name": "産業・職業別",
         "href": "/industry-occupation",
-        "component": "IndustryOccupationPage"
+        "component": "IndustryOccupationPage",
+        "areaComponent": "IndustryOccupationAreaPage"
       },
       {
         "id": "employment-type",
         "name": "雇用形態",
         "href": "/employment-type",
-        "component": "EmploymentTypePage"
+        "component": "EmploymentTypePage",
+        "areaComponent": "EmploymentTypeAreaPage"
       }
     ]
   },
@@ -129,7 +145,8 @@
         "id": "agricultural-household",
         "name": "農業世帯",
         "href": "/agricultural-household",
-        "component": "AgriculturalHouseholdPage"
+        "component": "AgriculturalHouseholdPage",
+        "areaComponent": "AgriculturalHouseholdAreaPage"
       }
     ]
   },
@@ -143,7 +160,8 @@
         "id": "manufacturing",
         "name": "製造業",
         "href": "/manufacturing",
-        "component": "ManufacturingPage"
+        "component": "ManufacturingPage",
+        "areaComponent": "ManufacturingAreaPage"
       }
     ]
   },
@@ -157,13 +175,15 @@
         "id": "commerce-service-industry",
         "name": "商業・サービス産業",
         "href": "/commerce-service-industry",
-        "component": "CommerceServiceIndustryPage"
+        "component": "CommerceServiceIndustryPage",
+        "areaComponent": "CommerceServiceIndustryAreaPage"
       },
       {
         "id": "commercial-facilities",
         "name": "商業施設",
         "href": "/commercial-facilities",
-        "component": "CommercialFacilitiesPage"
+        "component": "CommercialFacilitiesPage",
+        "areaComponent": "CommercialFacilitiesAreaPage"
       }
     ]
   },
@@ -177,19 +197,22 @@
         "id": "worker-household-income",
         "name": "労働者世帯収入",
         "href": "/worker-household-income",
-        "component": "WorkerHouseholdIncomePage"
+        "component": "WorkerHouseholdIncomePage",
+        "areaComponent": "WorkerHouseholdIncomeAreaPage"
       },
       {
         "id": "gross-product-economic-indicators",
         "name": "総生産・経済指標",
         "href": "/gross-product-economic-indicators",
-        "component": "GrossProductEconomicIndicatorsPage"
+        "component": "GrossProductEconomicIndicatorsPage",
+        "areaComponent": "GrossProductEconomicIndicatorsAreaPage"
       },
       {
         "id": "consumer-price-difference-index",
         "name": "消費者物価地域差指数",
         "href": "/consumer-price-difference-index",
-        "component": "ConsumerPriceDifferenceIndexPage"
+        "component": "ConsumerPriceDifferenceIndexPage",
+        "areaComponent": "ConsumerPriceDifferenceIndexAreaPage"
       }
     ]
   },
@@ -203,31 +226,36 @@
         "id": "living-environment",
         "name": "生活環境",
         "href": "/living-environment",
-        "component": "LivingEnvironmentPage"
+        "component": "LivingEnvironmentPage",
+        "areaComponent": "LivingEnvironmentAreaPage"
       },
       {
         "id": "housing-ownership",
         "name": "住宅所有",
         "href": "/housing-ownership",
-        "component": "HousingOwnershipPage"
+        "component": "HousingOwnershipPage",
+        "areaComponent": "HousingOwnershipAreaPage"
       },
       {
         "id": "housing-structure",
         "name": "住宅構造",
         "href": "/housing-structure",
-        "component": "HousingStructurePage"
+        "component": "HousingStructurePage",
+        "areaComponent": "HousingStructureAreaPage"
       },
       {
         "id": "housing-facilities",
         "name": "住宅設備",
         "href": "/housing-facilities",
-        "component": "HousingFacilitiesPage"
+        "component": "HousingFacilitiesPage",
+        "areaComponent": "HousingFacilitiesAreaPage"
       },
       {
         "id": "construction-manufacturing",
         "name": "建設・製造",
         "href": "/construction-manufacturing",
-        "component": "ConstructionManufacturingPage"
+        "component": "ConstructionManufacturingPage",
+        "areaComponent": "ConstructionManufacturingAreaPage"
       }
     ]
   },
@@ -241,25 +269,29 @@
         "id": "water-supply-sewerage",
         "name": "上水道・下水道",
         "href": "/water-supply-sewerage",
-        "component": "WaterSupplySeweragePage"
+        "component": "WaterSupplySeweragePage",
+        "areaComponent": "WaterSupplySewerageAreaPage"
       },
       {
         "id": "waste-management",
         "name": "廃棄物処理",
         "href": "/waste-management",
-        "component": "WasteManagementPage"
+        "component": "WasteManagementPage",
+        "areaComponent": "WasteManagementAreaPage"
       },
       {
         "id": "industrial-water",
         "name": "工業用水",
         "href": "/industrial-water",
-        "component": "IndustrialWaterPage"
+        "component": "IndustrialWaterPage",
+        "areaComponent": "IndustrialWaterAreaPage"
       },
       {
         "id": "infrastructure-energy",
         "name": "インフラ・エネルギー",
         "href": "/infrastructure-energy",
-        "component": "InfrastructureEnergyPage"
+        "component": "InfrastructureEnergyPage",
+        "areaComponent": "InfrastructureEnergyAreaPage"
       }
     ]
   },
@@ -273,7 +305,8 @@
         "id": "tourism-accommodation",
         "name": "観光・宿泊",
         "href": "/tourism-accommodation",
-        "component": "TourismAccommodationPage"
+        "component": "TourismAccommodationPage",
+        "areaComponent": "TourismAccommodationAreaPage"
       }
     ]
   },
@@ -287,7 +320,8 @@
         "id": "card",
         "name": "教育・スポーツ指標",
         "href": "/card",
-        "component": "EducationSportsCardPage"
+        "component": "EducationSportsCardPage",
+        "areaComponent": "EducationSportsCardAreaPage"
       }
     ]
   },
@@ -301,37 +335,43 @@
         "id": "fiscal-indicators",
         "name": "財政指標",
         "href": "/fiscal-indicators",
-        "component": "FiscalIndicatorsPage"
+        "component": "FiscalIndicatorsPage",
+        "areaComponent": "FiscalIndicatorsAreaPage"
       },
       {
         "id": "staff-assembly-election",
         "name": "職員・議会・選挙",
         "href": "/staff-assembly-election",
-        "component": "StaffAssemblyElectionPage"
+        "component": "StaffAssemblyElectionPage",
+        "areaComponent": "StaffAssemblyElectionAreaPage"
       },
       {
         "id": "tax-revenue",
         "name": "税収",
         "href": "/tax-revenue",
-        "component": "TaxRevenuePage"
+        "component": "TaxRevenuePage",
+        "areaComponent": "TaxRevenueAreaPage"
       },
       {
         "id": "investment",
         "name": "投資",
         "href": "/investment",
-        "component": "InvestmentPage"
+        "component": "InvestmentPage",
+        "areaComponent": "InvestmentAreaPage"
       },
       {
         "id": "revenue",
         "name": "歳入",
         "href": "/revenue",
-        "component": "RevenuePage"
+        "component": "RevenuePage",
+        "areaComponent": "RevenueAreaPage"
       },
       {
         "id": "expenditure",
         "name": "歳出",
         "href": "/expenditure",
-        "component": "ExpenditurePage"
+        "component": "ExpenditurePage",
+        "areaComponent": "ExpenditureAreaPage"
       }
     ]
   },
@@ -345,25 +385,29 @@
         "id": "fire-emergency",
         "name": "消防・緊急事態",
         "href": "/fire-emergency",
-        "component": "FireEmergencyPage"
+        "component": "FireEmergencyPage",
+        "areaComponent": "FireEmergencyAreaPage"
       },
       {
         "id": "fire-insurance",
         "name": "火災保険",
         "href": "/fire-insurance",
-        "component": "FireInsurancePage"
+        "component": "FireInsurancePage",
+        "areaComponent": "FireInsuranceAreaPage"
       },
       {
         "id": "police-crime",
         "name": "警察・犯罪",
         "href": "/police-crime",
-        "component": "PoliceCrimePage"
+        "component": "PoliceCrimePage",
+        "areaComponent": "PoliceCrimeAreaPage"
       },
       {
         "id": "pollution-environment",
         "name": "公害・環境",
         "href": "/pollution-environment",
-        "component": "PollutionEnvironmentPage"
+        "component": "PollutionEnvironmentPage",
+        "areaComponent": "PollutionEnvironmentAreaPage"
       }
     ]
   },
@@ -377,13 +421,15 @@
         "id": "card",
         "name": "社会保障指標",
         "href": "/card",
-        "component": "SocialSecurityCardPage"
+        "component": "SocialSecurityCardPage",
+        "areaComponent": "SocialSecurityCardAreaPage"
       },
       {
         "id": "death-statistics",
         "name": "死亡統計",
         "href": "/death-statistics",
-        "component": "DeathStatisticsPage"
+        "component": "DeathStatisticsPage",
+        "areaComponent": "DeathStatisticsAreaPage"
       }
     ]
   },
@@ -397,7 +443,8 @@
         "id": "foreigners",
         "name": "外国人",
         "href": "/foreigners",
-        "component": "ForeignersPage"
+        "component": "ForeignersPage",
+        "areaComponent": "ForeignersAreaPage"
       }
     ]
   },

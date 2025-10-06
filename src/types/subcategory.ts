@@ -2,7 +2,29 @@
  * サブカテゴリページコンポーネントの共通型定義
  */
 
-import { CategoryData, SubcategoryData } from './choropleth';
+import { CategoryData, SubcategoryData } from "./choropleth";
+
+/**
+ * サブカテゴリーの設定情報
+ */
+export interface SubcategoryConfig {
+  id: string;
+  name: string;
+  href: string;
+  component: string;
+  areaComponent?: string;
+}
+
+/**
+ * カテゴリーの設定情報
+ */
+export interface CategoryConfig {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
+  subcategories: SubcategoryConfig[];
+}
 
 /**
  * 標準的なサブカテゴリページのProps
