@@ -17,7 +17,7 @@ export interface SubcategoryData {
   name: string;
   description?: string;
   unit?: string;
-  dataType?: 'numerical' | 'percentage' | 'rate';
+  dataType?: "numerical" | "percentage" | "rate";
   statsDataId?: string;
   tableName?: string;
   displayOrder?: number;
@@ -25,6 +25,8 @@ export interface SubcategoryData {
   categoryCode?: string;
   lastUpdated?: string;
   availableYears?: string[];
+  component?: string;
+  areaComponent?: string;
 }
 
 export interface ChoroplethDataPoint {
@@ -48,7 +50,7 @@ export interface ChoroplethDisplayData {
 
 export interface MapVisualizationSettings {
   colorScheme: string;
-  divergingMidpoint: 'zero' | 'mean' | 'median' | number;
+  divergingMidpoint: "zero" | "mean" | "median" | number;
   showLegend: boolean;
   showTooltip: boolean;
 }
