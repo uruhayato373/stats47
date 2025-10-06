@@ -1,20 +1,19 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
-import { SubcategoryPageProps } from '@/types/subcategory';
+import React from "react";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { EstatRanking } from "@/components/dashboard/Ranking";
+import { SubcategoryPageProps } from "@/types/subcategory";
 
 export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = '0000010103';
-  const statsDataIdRatio = '0000010103';
+  const statsDataId = "0000010103";
   const cdCat01 = {
-    C1202: 'C1202',
-    C122201: 'C122201',
+    C1202: "C1202",
+    C122201: "C122201",
   };
 
   return (
@@ -51,12 +50,12 @@ export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
         }}
         subcategory={{
           ...subcategory,
-          unit: '百万円',
-          name: '賃金・俸給',
+          unit: "百万円",
+          name: "賃金・俸給",
         }}
         options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
+          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
