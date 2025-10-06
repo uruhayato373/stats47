@@ -3,7 +3,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { HouseholdsRanking } from "./HouseholdsRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface HouseholdsPageProps {
@@ -85,19 +85,7 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
       </div>
 
       {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.totalHouseholds,
-        }}
-        subcategory={subcategory}
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateViridis",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      <HouseholdsRanking subcategory={subcategory} />
     </SubcategoryLayout>
   );
 };

@@ -60,7 +60,12 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
           statsDataId: statsDataId,
           cdCat01: cdCat01.marriages,
         }}
-        subcategory={subcategory}
+        subcategory={{
+          ...subcategory,
+          unit: "組",
+          name: "婚姻件数",
+        }}
+        title="婚姻件数ランキング"
         options={{
           colorScheme: subcategory.colorScheme || "interpolatePurples",
           divergingMidpoint: "zero",
