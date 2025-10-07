@@ -5,7 +5,6 @@ import React, { useState, useCallback } from "react";
 import { EstatLineChart } from "@/components/dashboard/LineChart";
 import { EstatPopulationPyramid } from "@/components/dashboard/PopulationPyramid";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { TimeSeriesDataPoint } from "@/components/d3/LineChart";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryAreaPageProps } from "@/types/subcategory";
 
@@ -24,15 +23,14 @@ export const BasicPopulationAreaPage: React.FC<SubcategoryAreaPageProps> = ({
   };
 
   // データ読み込み完了時のコールバック（メモ化して無限ループ防止）
-  const handleDataLoaded = useCallback((data: TimeSeriesDataPoint[]) => {
-    console.log("[BasicPopulationAreaPage] Data loaded:", data.length);
+  const handleDataLoaded = useCallback(() => {
     // TimeSeriesDataPointからFormattedValueに変換する必要がある場合はここで処理
     // 現在は地域名の取得のみなので、areaNameは別途設定
   }, []);
 
   // エラーコールバック（メモ化して無限ループ防止）
-  const handleError = useCallback((error: Error) => {
-    console.error("[BasicPopulationAreaPage] Error:", error);
+  const handleError = useCallback(() => {
+    // エラーハンドリング（必要に応じて実装）
   }, []);
 
   return (

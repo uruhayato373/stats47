@@ -40,8 +40,6 @@ const componentMap: Record<string, any> = {
   ...SafetyEnvironment,
   ...SocialSecurity,
   ...International,
-  // 明示的にPopulationMovementAreaPageを追加
-  PopulationMovementAreaPage: Population.PopulationMovementPage,
 };
 
 // デフォルトのプレースホルダーコンポーネント
