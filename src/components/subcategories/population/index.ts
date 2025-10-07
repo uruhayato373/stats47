@@ -5,4 +5,3 @@ export { PopulationMovementAreaPage } from "./population-movement/PopulationMove
 export { MarriagePage } from "./marriage/MarriagePage";
 export { HouseholdsPage } from "./households/HouseholdsPage";
 export { BirthDeathPage } from "./birth-death/BirthDeathPage";
-export { PopulationCompositionPage } from "./population-composition/PopulationCompositionPage";

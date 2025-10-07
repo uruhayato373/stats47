@@ -12,7 +12,7 @@ export const PopulationMovementAreaPage: React.FC<SubcategoryAreaPageProps> = ({
   subcategory,
   areaCode,
 }) => {
-  const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
+  const [, setFormattedValues] = useState<FormattedValue[]>([]);
   const [areaName, setAreaName] = useState<string>("");
 
   // 統計表IDとカテゴリコード

@@ -24,10 +24,7 @@ import * as SocialSecurity from "./socialsecurity";
 import * as International from "./international";
 
 // すべてのコンポーネントをマッピング
-const componentMap: Record<
-  string,
-  React.ComponentType<SubcategoryPageProps | SubcategoryAreaPageProps>
-> = {
+const componentMap: Record<string, any> = {
   ...LandWeather,
   ...Population,
   ...LaborWage,
@@ -43,6 +40,8 @@ const componentMap: Record<
   ...SafetyEnvironment,
   ...SocialSecurity,
   ...International,
+  // 明示的にPopulationMovementAreaPageを追加
+  PopulationMovementAreaPage: Population.PopulationMovementPage,
 };
 
 // デフォルトのプレースホルダーコンポーネント
@@ -104,9 +103,28 @@ export const getAreaPageComponent = (
   subcategoryId: string
 ): React.ComponentType<SubcategoryAreaPageProps> => {
   const subcategory = getSubcategoryInfo(subcategoryId);
-  if (!subcategory?.areaComponent) return DefaultSubcategoryPage;
+  console.log("[getAreaPageComponent] subcategoryId:", subcategoryId);
+  console.log("[getAreaPageComponent] subcategory:", subcategory);
+  console.log(
+    "[getAreaPageComponent] areaComponent:",
+    subcategory?.areaComponent
+  );
 
-  return componentMap[subcategory.areaComponent] || DefaultSubcategoryPage;
+  if (!subcategory?.areaComponent) {
+    console.log(
+      "[getAreaPageComponent] No areaComponent found, returning DefaultSubcategoryPage"
+    );
+    return DefaultSubcategoryPage;
+  }
+
+  const component = componentMap[subcategory.areaComponent];
+  console.log("[getAreaPageComponent] component from map:", component);
+  console.log(
+    "[getAreaPageComponent] componentMap keys:",
+    Object.keys(componentMap)
+  );
+
+  return component || DefaultSubcategoryPage;
 };
 
 // 共通コンポーネント
