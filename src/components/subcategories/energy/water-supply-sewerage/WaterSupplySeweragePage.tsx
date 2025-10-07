@@ -34,7 +34,6 @@ export const WaterSupplySeweragePage: React.FC<WaterSupplySeweragePageProps> = (
             }}
             areaCode="00000"
             title="全国上水道年間給水量"
-            unit="千m³"
             color="#4f46e5"
           />
         </div>

@@ -33,7 +33,6 @@ export const IndustryOccupationPage: React.FC<IndustryOccupationPageProps> = ({
             }}
             areaCode="00000"
             title="全国製造業就業者数"
-            unit="人"
             color="#4f46e5"
           />
         </div>

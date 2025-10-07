@@ -34,7 +34,6 @@ export const GrossProductEconomicIndicatorsPage: React.FC<GrossProductEconomicIn
             }}
             areaCode="00000"
             title="全国県内総生産額"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const GrossProductEconomicIndicatorsPage: React.FC<GrossProductEconomicIn
             }}
             areaCode="00000"
             title="全国1人当たり県民所得"
-            unit="千円"
             color="#10b981"
           />
         </div>

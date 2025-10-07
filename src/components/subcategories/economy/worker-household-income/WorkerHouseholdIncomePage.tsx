@@ -34,7 +34,6 @@ export const WorkerHouseholdIncomePage: React.FC<WorkerHouseholdIncomePageProps>
             }}
             areaCode="00000"
             title="全国実収入"
-            unit="円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const WorkerHouseholdIncomePage: React.FC<WorkerHouseholdIncomePageProps>
             }}
             areaCode="00000"
             title="全国可処分所得"
-            unit="円"
             color="#10b981"
           />
         </div>

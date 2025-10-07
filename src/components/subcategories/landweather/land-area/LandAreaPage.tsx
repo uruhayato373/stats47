@@ -34,7 +34,6 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
             }}
             areaCode="00000"
             title="全国総面積"
-            unit="ha"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
             }}
             areaCode="00000"
             title="全国可住地面積"
-            unit="ha"
             color="#10b981"
           />
         </div>

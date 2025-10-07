@@ -33,7 +33,6 @@ export const WasteManagementPage: React.FC<WasteManagementPageProps> = ({
             }}
             areaCode="00000"
             title="全国廃棄物処理業GDP"
-            unit="百万円"
             color="#4f46e5"
           />
         </div>

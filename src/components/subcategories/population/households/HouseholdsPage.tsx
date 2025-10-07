@@ -42,7 +42,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
             }}
             areaCode="00000"
             title="全国総世帯数"
-            unit="世帯"
             color="#8b5cf6"
           />
 
@@ -54,7 +53,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
             }}
             areaCode="00000"
             title="全国普通世帯数"
-            unit="世帯"
             color="#3b82f6"
           />
 
@@ -66,7 +64,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
             }}
             areaCode="00000"
             title="1世帯当たり延べ面積"
-            unit="㎡"
             color="#10b981"
           />
 
@@ -78,7 +75,6 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
             }}
             areaCode="00000"
             title="65歳以上世帯員世帯"
-            unit="世帯"
             color="#f59e0b"
           />
         </div>

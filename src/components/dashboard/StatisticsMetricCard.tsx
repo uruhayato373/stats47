@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -22,11 +21,6 @@ export interface StatisticsMetricCardProps {
    * タイトル
    */
   title?: string;
-
-  /**
-   * 単位
-   */
-  unit?: string;
 
   /**
    * 色スキーム
@@ -56,7 +50,6 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
   params,
   areaCode = "00000",
   title,
-  unit = "",
   color = "#4f46e5",
   className = "",
   onDataLoaded,
@@ -65,6 +58,7 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
   const [timeSeriesData, setTimeSeriesData] = useState<SparklineDataPoint[]>(
     []
   );
+  const [unit, setUnit] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -97,6 +91,12 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
           throw new Error(
             `指定された地域（${areaCode}）のデータが見つかりませんでした`
           );
+        }
+
+        // unit情報を取得（最初のデータから）
+        const firstValue = filteredValues[0];
+        if (firstValue.unit) {
+          setUnit(firstValue.unit);
         }
 
         // 時系列データに変換

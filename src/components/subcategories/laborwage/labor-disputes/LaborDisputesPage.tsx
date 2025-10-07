@@ -33,7 +33,6 @@ export const LaborDisputesPage: React.FC<LaborDisputesPageProps> = ({
             }}
             areaCode="00000"
             title="全国労働力人口"
-            unit="人"
             color="#4f46e5"
           />
         </div>

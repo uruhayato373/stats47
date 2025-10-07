@@ -34,7 +34,6 @@ export const EmploymentTypePage: React.FC<EmploymentTypePageProps> = ({
             }}
             areaCode="00000"
             title="全国正規職員数"
-            unit="人"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const EmploymentTypePage: React.FC<EmploymentTypePageProps> = ({
             }}
             areaCode="00000"
             title="全国非正規職員数"
-            unit="人"
             color="#10b981"
           />
         </div>

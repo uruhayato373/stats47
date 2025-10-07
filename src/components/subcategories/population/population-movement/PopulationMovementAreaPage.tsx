@@ -65,7 +65,6 @@ export const PopulationMovementAreaPage: React.FC<SubcategoryAreaPageProps> = ({
             }}
             areaCode={areaCode}
             title={`${areaName}転入者数`}
-            unit="人"
             color="#3b82f6"
           />
 
@@ -77,7 +76,6 @@ export const PopulationMovementAreaPage: React.FC<SubcategoryAreaPageProps> = ({
             }}
             areaCode={areaCode}
             title={`${areaName}転出者数`}
-            unit="人"
             color="#ef4444"
           />
 
@@ -89,7 +87,6 @@ export const PopulationMovementAreaPage: React.FC<SubcategoryAreaPageProps> = ({
             }}
             areaCode={areaCode}
             title={`${areaName}社会増減数`}
-            unit="人"
             color="#10b981"
           />
 
@@ -101,7 +98,6 @@ export const PopulationMovementAreaPage: React.FC<SubcategoryAreaPageProps> = ({
             }}
             areaCode={areaCode}
             title={`${areaName}昼夜間人口比率`}
-            unit="%"
             color="#f59e0b"
           />
         </div>

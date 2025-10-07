@@ -34,7 +34,6 @@ export const EducationSportsCardPage: React.FC<EducationSportsCardPageProps> = (
             }}
             areaCode="00000"
             title="全国小学校数"
-            unit="校"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const EducationSportsCardPage: React.FC<EducationSportsCardPageProps> = (
             }}
             areaCode="00000"
             title="全国小学校学級数"
-            unit="学級"
             color="#10b981"
           />
         </div>

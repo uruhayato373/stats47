@@ -41,7 +41,6 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
             }}
             areaCode="00000"
             title="全国出生数"
-            unit="人"
             color="#10b981"
           />
 
@@ -53,7 +52,6 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
             }}
             areaCode="00000"
             title="全国死亡数"
-            unit="人"
             color="#ef4444"
           />
 
@@ -65,7 +63,6 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
             }}
             areaCode="00000"
             title="全国自然増減数"
-            unit="人"
             color="#3b82f6"
           />
 
@@ -77,7 +74,6 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
             }}
             areaCode="00000"
             title="全国合計特殊出生率"
-            unit=""
             color="#f59e0b"
           />
         </div>

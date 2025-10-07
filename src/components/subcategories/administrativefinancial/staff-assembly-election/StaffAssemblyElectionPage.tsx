@@ -34,7 +34,6 @@ export const StaffAssemblyElectionPage: React.FC<StaffAssemblyElectionPageProps>
             }}
             areaCode="00000"
             title="全国一般行政部門職員数"
-            unit="人"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const StaffAssemblyElectionPage: React.FC<StaffAssemblyElectionPageProps>
             }}
             areaCode="00000"
             title="全国都道府県議会議員数"
-            unit="人"
             color="#10b981"
           />
         </div>

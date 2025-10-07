@@ -34,7 +34,6 @@ export const CommercialFacilitiesPage: React.FC<CommercialFacilitiesPageProps> =
             }}
             areaCode="00000"
             title="全国小売業事業所数"
-            unit="所"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const CommercialFacilitiesPage: React.FC<CommercialFacilitiesPageProps> =
             }}
             areaCode="00000"
             title="全国小売業従業者数"
-            unit="人"
             color="#10b981"
           />
         </div>

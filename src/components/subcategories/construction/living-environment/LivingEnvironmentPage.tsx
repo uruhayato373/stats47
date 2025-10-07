@@ -34,7 +34,6 @@ export const LivingEnvironmentPage: React.FC<LivingEnvironmentPageProps> = ({
             }}
             areaCode="00000"
             title="全国上水道給水人口"
-            unit="人"
             color="#4f46e5"
           />
         </div>

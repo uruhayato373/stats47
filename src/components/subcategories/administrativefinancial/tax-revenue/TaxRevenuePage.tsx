@@ -34,7 +34,6 @@ export const TaxRevenuePage: React.FC<TaxRevenuePageProps> = ({
             }}
             areaCode="00000"
             title="全国住民税"
-            unit="千円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const TaxRevenuePage: React.FC<TaxRevenuePageProps> = ({
             }}
             areaCode="00000"
             title="全国固定資産税"
-            unit="千円"
             color="#10b981"
           />
         </div>

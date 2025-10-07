@@ -34,7 +34,6 @@ export const HousingOwnershipPage: React.FC<HousingOwnershipPageProps> = ({
             }}
             areaCode="00000"
             title="全国持ち家数"
-            unit="戸"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const HousingOwnershipPage: React.FC<HousingOwnershipPageProps> = ({
             }}
             areaCode="00000"
             title="全国借家数"
-            unit="戸"
             color="#10b981"
           />
         </div>

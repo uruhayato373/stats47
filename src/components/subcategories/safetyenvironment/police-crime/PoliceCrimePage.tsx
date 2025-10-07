@@ -34,7 +34,6 @@ export const PoliceCrimePage: React.FC<PoliceCrimePageProps> = ({
             }}
             areaCode="00000"
             title="全国交通事故発生件数"
-            unit="件"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const PoliceCrimePage: React.FC<PoliceCrimePageProps> = ({
             }}
             areaCode="00000"
             title="全国交通事故死傷者数"
-            unit="人"
             color="#10b981"
           />
         </div>

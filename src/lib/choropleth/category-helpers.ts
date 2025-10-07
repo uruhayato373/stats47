@@ -24,47 +24,83 @@ interface CategoryJsonItem {
 const categories = categoriesData as CategoryJsonItem[];
 
 /**
- * JSONデータをCategoryData型に変換
+ * JSONデータをCategoryData型に変換するヘルパー関数
+ *
+ * @param {CategoryJsonItem} category - 変換するカテゴリJSONデータ
+ * @param {number} displayOrder - 表示順序
+ * @returns {CategoryData} 変換されたCategoryData
  */
-function transformToCategories(): CategoryData[] {
-  return categories.map((cat, index) => ({
-    id: cat.id,
-    name: cat.name,
+function transformCategory(
+  category: CategoryJsonItem,
+  displayOrder: number
+): CategoryData {
+  return {
+    id: category.id,
+    name: category.name,
     description: "",
-    icon: cat.icon,
-    displayOrder: index + 1,
-    subcategories: (cat.subcategories || []).map((sub, subIndex) => ({
+    icon: category.icon,
+    displayOrder,
+    subcategories: (category.subcategories || []).map((sub, subIndex) => ({
       id: sub.id,
-      categoryId: cat.id,
+      categoryId: category.id,
       name: sub.name,
       displayOrder: subIndex + 1,
       component: sub.component,
       areaComponent: sub.areaComponent,
     })),
-  }));
+  };
 }
 
 /**
  * カテゴリIDからカテゴリデータを取得
+ *
+ * @param {string} categoryId - カテゴリID
+ * @returns {CategoryData | undefined} カテゴリデータ（見つからない場合はundefined）
+ *
+ * @example
+ * const category = getCategoryById("population");
+ * if (category) {
+ *   console.log(category.name); // "人口・世帯"
+ * }
  */
 export function getCategoryById(categoryId: string): CategoryData | undefined {
-  const transformedCategories = transformToCategories();
-  return transformedCategories.find((cat) => cat.id === categoryId);
+  const category = categories.find((cat) => cat.id === categoryId);
+  if (!category) return undefined;
+
+  const displayOrder = categories.indexOf(category) + 1;
+  return transformCategory(category, displayOrder);
 }
 
 /**
  * サブカテゴリIDからサブカテゴリデータを取得
+ *
+ * @param {string} subcategoryId - サブカテゴリID
+ * @returns {{category: CategoryData; subcategory: SubcategoryData} | undefined} カテゴリとサブカテゴリデータ（見つからない場合はundefined）
+ *
+ * @example
+ * const data = getSubcategoryById("households");
+ * if (data) {
+ *   console.log(data.category.name); // "人口・世帯"
+ *   console.log(data.subcategory.name); // "世帯"
+ * }
  */
 export function getSubcategoryById(
   subcategoryId: string
 ): { category: CategoryData; subcategory: SubcategoryData } | undefined {
-  const transformedCategories = transformToCategories();
-  for (const category of transformedCategories) {
-    const subcategory = category.subcategories.find(
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i];
+    const subcategory = category.subcategories?.find(
       (sub) => sub.id === subcategoryId
     );
     if (subcategory) {
-      return { category, subcategory };
+      const transformedCategory = transformCategory(category, i + 1);
+      const transformedSubcategory = transformedCategory.subcategories.find(
+        (sub) => sub.id === subcategoryId
+      )!;
+      return {
+        category: transformedCategory,
+        subcategory: transformedSubcategory,
+      };
     }
   }
   return undefined;
@@ -72,10 +108,17 @@ export function getSubcategoryById(
 
 /**
  * カテゴリの表示順でソートされたカテゴリ一覧を取得
+ *
+ * @returns {CategoryData[]} 表示順でソートされたカテゴリ一覧
+ *
+ * @example
+ * const sortedCategories = getSortedCategories();
+ * sortedCategories.forEach(category => {
+ *   console.log(`${category.displayOrder}. ${category.name}`);
+ * });
  */
 export function getSortedCategories(): CategoryData[] {
-  const transformedCategories = transformToCategories();
-  return [...transformedCategories].sort(
-    (a, b) => a.displayOrder - b.displayOrder
+  return categories.map((category, index) =>
+    transformCategory(category, index + 1)
   );
 }

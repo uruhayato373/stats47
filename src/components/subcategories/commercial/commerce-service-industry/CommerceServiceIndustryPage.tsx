@@ -34,7 +34,6 @@ export const CommerceServiceIndustryPage: React.FC<CommerceServiceIndustryPagePr
             }}
             areaCode="00000"
             title="全国卸売・小売業GDP"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const CommerceServiceIndustryPage: React.FC<CommerceServiceIndustryPagePr
             }}
             areaCode="00000"
             title="全国卸売・小売業事業所数"
-            unit="所"
             color="#10b981"
           />
         </div>

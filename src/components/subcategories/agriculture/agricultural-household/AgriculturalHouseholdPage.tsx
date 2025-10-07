@@ -34,7 +34,6 @@ export const AgriculturalHouseholdPage: React.FC<AgriculturalHouseholdPageProps>
             }}
             areaCode="00000"
             title="全国農業産出額"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const AgriculturalHouseholdPage: React.FC<AgriculturalHouseholdPageProps>
             }}
             areaCode="00000"
             title="全国農家数"
-            unit="戸"
             color="#10b981"
           />
         </div>

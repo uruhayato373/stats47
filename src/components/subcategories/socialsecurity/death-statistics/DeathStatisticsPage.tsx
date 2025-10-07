@@ -34,7 +34,6 @@ export const DeathStatisticsPage: React.FC<DeathStatisticsPageProps> = ({
             }}
             areaCode="00000"
             title="全国生活保護被保護実人員"
-            unit="人"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const DeathStatisticsPage: React.FC<DeathStatisticsPageProps> = ({
             }}
             areaCode="00000"
             title="全国身体障害者手帳交付数"
-            unit="人"
             color="#10b981"
           />
         </div>

@@ -33,7 +33,6 @@ export const IndustrialWaterPage: React.FC<IndustrialWaterPageProps> = ({
             }}
             areaCode="00000"
             title="全国都市ガスメーター取付数"
-            unit="個"
             color="#4f46e5"
           />
         </div>

@@ -54,7 +54,6 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
             }}
             areaCode="00000"
             title="全国年平均気温"
-            unit="℃"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -64,7 +63,6 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
             }}
             areaCode="00000"
             title="全国年間降水量"
-            unit="mm"
             color="#10b981"
           />
         </div>

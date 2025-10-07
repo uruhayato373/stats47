@@ -34,7 +34,6 @@ export const LandUsePage: React.FC<LandUsePageProps> = ({
             }}
             areaCode="00000"
             title="全国評価総地積"
-            unit="m²"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const LandUsePage: React.FC<LandUsePageProps> = ({
             }}
             areaCode="00000"
             title="全国宅地面積"
-            unit="m²"
             color="#10b981"
           />
         </div>

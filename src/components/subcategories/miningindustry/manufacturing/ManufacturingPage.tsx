@@ -34,7 +34,6 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({
             }}
             areaCode="00000"
             title="全国製造業付加価値額"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({
             }}
             areaCode="00000"
             title="全国製造業事業所数"
-            unit="事業所"
             color="#10b981"
           />
         </div>

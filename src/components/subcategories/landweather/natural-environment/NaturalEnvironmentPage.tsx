@@ -35,7 +35,6 @@ export const NaturalEnvironmentPage: React.FC<NaturalEnvironmentPageProps> = ({
             }}
             areaCode="00000"
             title="全国森林面積"
-            unit="ha"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -45,7 +44,6 @@ export const NaturalEnvironmentPage: React.FC<NaturalEnvironmentPageProps> = ({
             }}
             areaCode="00000"
             title="全国森林面積割合"
-            unit="%"
             color="#10b981"
           />
         </div>

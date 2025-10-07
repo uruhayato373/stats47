@@ -32,12 +32,13 @@ export interface CategoryConfig {
 export interface SubcategoryPageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
-  currentYear: string;
 }
 
 /**
  * 都道府県別ページのProps（areaCodeが追加される）
  */
-export interface SubcategoryAreaPageProps extends SubcategoryPageProps {
+export interface SubcategoryAreaPageProps {
+  category: CategoryData;
+  subcategory: SubcategoryData;
   areaCode: string;
 }

@@ -32,9 +32,7 @@ export const BasicPopulationPage: React.FC<SubcategoryPageProps> = ({
               statsDataId: statsDataId,
               cdCat01: cdCat01.totalPopulation,
             }}
-            areaCode="00000"
             title="全国総人口"
-            unit="人"
             color="#4f46e5"
           />
 
@@ -44,9 +42,7 @@ export const BasicPopulationPage: React.FC<SubcategoryPageProps> = ({
               statsDataId: statsDataId,
               cdCat01: cdCat01.dayNightRatio,
             }}
-            areaCode="00000"
             title="全国昼夜間人口比率"
-            unit="%"
             color="#10b981"
           />
 
@@ -57,7 +53,6 @@ export const BasicPopulationPage: React.FC<SubcategoryPageProps> = ({
             }}
             maleCategoryCode={cdCat01.malePopulation}
             femaleCategoryCode={cdCat01.femalePopulation}
-            areaCode="00000"
             title="男女人口比率"
             width={300}
             height={300}

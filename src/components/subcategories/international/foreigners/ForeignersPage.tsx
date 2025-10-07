@@ -79,7 +79,6 @@ export const ForeignersPage: React.FC<ForeignersPageProps> = ({
             }}
             areaCode="00000"
             title="全国外国人人口"
-            unit="人"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -89,7 +88,6 @@ export const ForeignersPage: React.FC<ForeignersPageProps> = ({
             }}
             areaCode="00000"
             title="全国中国人人口"
-            unit="人"
             color="#10b981"
           />
           <EstatGenderDonutChart

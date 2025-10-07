@@ -34,7 +34,6 @@ export const SocialSecurityCardPage: React.FC<SocialSecurityCardPageProps> = ({
             }}
             areaCode="00000"
             title="全国男性平均余命"
-            unit="年"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const SocialSecurityCardPage: React.FC<SocialSecurityCardPageProps> = ({
             }}
             areaCode="00000"
             title="全国女性平均余命"
-            unit="年"
             color="#10b981"
           />
         </div>

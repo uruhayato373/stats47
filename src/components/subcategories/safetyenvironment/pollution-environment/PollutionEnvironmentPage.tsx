@@ -33,7 +33,6 @@ export const PollutionEnvironmentPage: React.FC<PollutionEnvironmentPageProps> =
             }}
             areaCode="00000"
             title="全国温室効果ガス排出量"
-            unit="tCO2"
             color="#4f46e5"
           />
         </div>

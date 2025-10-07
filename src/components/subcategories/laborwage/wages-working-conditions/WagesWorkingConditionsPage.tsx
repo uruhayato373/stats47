@@ -27,7 +27,6 @@ export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
             }}
             areaCode="00000"
             title="全国雇用者報酬"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -37,7 +36,6 @@ export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
             }}
             areaCode="00000"
             title="全国賃金・俸給"
-            unit="百万円"
             color="#10b981"
           />
         </div>

@@ -34,7 +34,6 @@ export const ConstructionManufacturingPage: React.FC<ConstructionManufacturingPa
             }}
             areaCode="00000"
             title="全国建設業GDP"
-            unit="百万円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const ConstructionManufacturingPage: React.FC<ConstructionManufacturingPa
             }}
             areaCode="00000"
             title="全国建設業事業所数"
-            unit="所"
             color="#10b981"
           />
         </div>

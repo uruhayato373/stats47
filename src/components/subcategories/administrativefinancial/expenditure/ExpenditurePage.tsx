@@ -34,7 +34,6 @@ export const ExpenditurePage: React.FC<ExpenditurePageProps> = ({
             }}
             areaCode="00000"
             title="全国歳出決算総額"
-            unit="千円"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const ExpenditurePage: React.FC<ExpenditurePageProps> = ({
             }}
             areaCode="00000"
             title="全国民生費"
-            unit="千円"
             color="#10b981"
           />
         </div>

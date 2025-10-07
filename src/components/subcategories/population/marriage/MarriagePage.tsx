@@ -36,7 +36,6 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
             }}
             areaCode="00000"
             title="全国婚姻件数"
-            unit="組"
             color="#9333ea"
           />
 
@@ -48,7 +47,6 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
             }}
             areaCode="00000"
             title="全国離婚件数"
-            unit="組"
             color="#f97316"
           />
         </div>

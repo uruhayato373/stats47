@@ -34,7 +34,6 @@ export const FiscalIndicatorsPage: React.FC<FiscalIndicatorsPageProps> = ({
             }}
             areaCode="00000"
             title="全国財政力指数"
-            unit="-"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const FiscalIndicatorsPage: React.FC<FiscalIndicatorsPageProps> = ({
             }}
             areaCode="00000"
             title="全国経常収支比率"
-            unit="%"
             color="#10b981"
           />
         </div>

@@ -33,7 +33,6 @@ export const ConsumerPriceDifferenceIndexPage: React.FC<ConsumerPriceDifferenceI
             }}
             areaCode="00000"
             title="全国消費者物価指数"
-            unit="-"
             color="#4f46e5"
           />
         </div>

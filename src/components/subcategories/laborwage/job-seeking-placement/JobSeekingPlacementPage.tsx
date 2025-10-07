@@ -33,7 +33,6 @@ export const JobSeekingPlacementPage: React.FC<JobSeekingPlacementPageProps> = (
             }}
             areaCode="00000"
             title="全国完全失業者数"
-            unit="人"
             color="#4f46e5"
           />
         </div>

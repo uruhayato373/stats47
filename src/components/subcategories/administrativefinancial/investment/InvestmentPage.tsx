@@ -33,7 +33,6 @@ export const InvestmentPage: React.FC<InvestmentPageProps> = ({
             }}
             areaCode="00000"
             title="全国住民税"
-            unit="千円"
             color="#4f46e5"
           />
         </div>

@@ -34,7 +34,6 @@ export const TourismAccommodationPage: React.FC<TourismAccommodationPageProps> =
             }}
             areaCode="00000"
             title="全国延べ宿泊者数"
-            unit="人泊"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const TourismAccommodationPage: React.FC<TourismAccommodationPageProps> =
             }}
             areaCode="00000"
             title="全国外国人延べ宿泊者数"
-            unit="人泊"
             color="#10b981"
           />
         </div>

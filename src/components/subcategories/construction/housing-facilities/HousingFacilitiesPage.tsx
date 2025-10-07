@@ -33,7 +33,6 @@ export const HousingFacilitiesPage: React.FC<HousingFacilitiesPageProps> = ({
             }}
             areaCode="00000"
             title="全国一戸建住宅数"
-            unit="戸"
             color="#4f46e5"
           />
         </div>

@@ -34,7 +34,6 @@ export const FireEmergencyPage: React.FC<FireEmergencyPageProps> = ({
             }}
             areaCode="00000"
             title="全国消防本部・署数"
-            unit="署"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const FireEmergencyPage: React.FC<FireEmergencyPageProps> = ({
             }}
             areaCode="00000"
             title="全国救急出動件数"
-            unit="件"
             color="#10b981"
           />
         </div>

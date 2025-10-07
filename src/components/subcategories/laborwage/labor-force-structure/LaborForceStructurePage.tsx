@@ -34,7 +34,6 @@ export const LaborForceStructurePage: React.FC<LaborForceStructurePageProps> = (
             }}
             areaCode="00000"
             title="全国労働力人口"
-            unit="人"
             color="#4f46e5"
           />
           <StatisticsMetricCard
@@ -44,7 +43,6 @@ export const LaborForceStructurePage: React.FC<LaborForceStructurePageProps> = (
             }}
             areaCode="00000"
             title="全国就業者数"
-            unit="人"
             color="#10b981"
           />
         </div>
