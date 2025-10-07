@@ -81,27 +81,25 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
   const [availableYears, setAvailableYears] = useState<string[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("");
 
-  console.log("[EstatRanking] Params:", params);
-
   // ステップ1: 年度一覧を取得
   useEffect(() => {
     const fetchAvailableYears = async () => {
       try {
-        console.log("[EstatRanking] Step 1: Fetching available years...");
+        if (!params.cdCat01) {
+          throw new Error("カテゴリコードが指定されていません");
+        }
 
         const years = await EstatStatsDataService.getAvailableYears(
           params.statsDataId,
           params.cdCat01
         );
 
-        console.log("[EstatRanking] Available years:", years);
         setAvailableYears(years);
 
         // 最新年度を選択（または指定された年度）
         const targetYear = params.cdTime || years[0] || "";
         setSelectedYear(targetYear);
       } catch (err) {
-        console.error("[EstatRanking] Error fetching years:", err);
         const errorMessage =
           err instanceof Error ? err.message : "年度一覧の取得に失敗しました";
         setError(errorMessage);
@@ -127,10 +125,9 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
       setError(null);
 
       try {
-        console.log(
-          "[EstatRanking] Step 2: Fetching data for year:",
-          selectedYear
-        );
+        if (!params.cdCat01) {
+          throw new Error("カテゴリコードが指定されていません");
+        }
 
         const prefectureValues =
           await EstatStatsDataService.getPrefectureDataByYear(
@@ -140,18 +137,12 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
             params.limit || 100000
           );
 
-        console.log(
-          "[EstatRanking] Prefecture values:",
-          prefectureValues.length
-        );
-
         setFormattedValues(prefectureValues);
 
         if (onDataLoaded) {
           onDataLoaded(prefectureValues);
         }
       } catch (err) {
-        console.error("[EstatRanking] Error fetching data:", err);
         const errorMessage =
           err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
@@ -223,7 +214,7 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
             {title}
           </h2>
         )}
-        <div className={`flex items-center gap-2 ${title ? '' : 'ml-auto'}`}>
+        <div className={`flex items-center gap-2 ${title ? "" : "ml-auto"}`}>
           <label
             htmlFor="year-select"
             className="text-sm text-gray-600 dark:text-neutral-400"
@@ -274,7 +265,10 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
 
           {/* 統計サマリー */}
           <div>
-            <StatisticsSummary data={formattedValues} unit={subcategory.unit || ''} />
+            <StatisticsSummary
+              data={formattedValues}
+              unit={subcategory.unit || ""}
+            />
           </div>
         </div>
 

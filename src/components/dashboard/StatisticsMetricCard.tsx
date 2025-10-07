@@ -68,11 +68,6 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
       setError(null);
 
       try {
-        console.log(
-          "[StatisticsMetricCard] Fetching data with params:",
-          params
-        );
-
         // e-stat APIからデータを取得
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
@@ -122,7 +117,6 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
           onDataLoaded(timeSeries);
         }
       } catch (err) {
-        console.error("[StatisticsMetricCard] Error fetching data:", err);
         const errorMessage =
           err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);

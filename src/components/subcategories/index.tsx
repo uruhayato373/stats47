@@ -103,26 +103,12 @@ export const getAreaPageComponent = (
   subcategoryId: string
 ): React.ComponentType<SubcategoryAreaPageProps> => {
   const subcategory = getSubcategoryInfo(subcategoryId);
-  console.log("[getAreaPageComponent] subcategoryId:", subcategoryId);
-  console.log("[getAreaPageComponent] subcategory:", subcategory);
-  console.log(
-    "[getAreaPageComponent] areaComponent:",
-    subcategory?.areaComponent
-  );
 
   if (!subcategory?.areaComponent) {
-    console.log(
-      "[getAreaPageComponent] No areaComponent found, returning DefaultSubcategoryPage"
-    );
     return DefaultSubcategoryPage;
   }
 
   const component = componentMap[subcategory.areaComponent];
-  console.log("[getAreaPageComponent] component from map:", component);
-  console.log(
-    "[getAreaPageComponent] componentMap keys:",
-    Object.keys(componentMap)
-  );
 
   return component || DefaultSubcategoryPage;
 };

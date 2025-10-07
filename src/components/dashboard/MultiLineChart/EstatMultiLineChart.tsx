@@ -102,8 +102,6 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
       setError(null);
 
       try {
-        console.log("[EstatMultiLineChart] Fetching data with params:", params);
-
         // e-stat APIからデータを取得（指定地域のデータのみ）
         const response = await EstatStatsDataService.getAndFormatStatsData(
           params.statsDataId,
@@ -113,17 +111,15 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
           }
         );
 
-        console.log("[EstatMultiLineChart] Data fetched:", {
-          totalValues: response.values.length,
-        });
-
         // 指定されたエリアコードのデータをフィルタリング
         const filteredValues = response.values.filter(
           (v) => v.areaCode === areaCode && v.numericValue !== null
         );
 
         if (filteredValues.length === 0) {
-          throw new Error(`指定された地域（${areaCode}）のデータが見つかりませんでした`);
+          throw new Error(
+            `指定された地域（${areaCode}）のデータが見つかりませんでした`
+          );
         }
 
         // 年度ごとにデータをグループ化
@@ -150,15 +146,12 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
           a.year.localeCompare(b.year)
         );
 
-        console.log("[EstatMultiLineChart] Multi series data:", multiSeriesData.length);
-
         setChartData(multiSeriesData);
 
         if (onDataLoaded) {
           onDataLoaded(multiSeriesData);
         }
       } catch (err) {
-        console.error("[EstatMultiLineChart] Error fetching data:", err);
         const errorMessage =
           err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
@@ -210,7 +203,9 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
             <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
               データの取得に失敗しました
             </h3>
-            <p className="text-red-600 dark:text-red-400 mb-4 text-sm">{error}</p>
+            <p className="text-red-600 dark:text-red-400 mb-4 text-sm">
+              {error}
+            </p>
             <div className="text-xs text-gray-600 dark:text-neutral-400 mt-4">
               <p>統計表ID: {params.statsDataId}</p>
               <p>地域コード: {areaCode}</p>
