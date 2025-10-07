@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { MarriageRanking } from "./MarriageRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface MarriagePageProps {
@@ -52,25 +50,10 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
         </div>
       </div>
 
-      {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.marriages,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: "組",
-          name: "婚姻件数",
-        }}
-        title="婚姻件数ランキング"
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolatePurples",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキング */}
+      <div className="px-4 pb-4">
+        <MarriageRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };

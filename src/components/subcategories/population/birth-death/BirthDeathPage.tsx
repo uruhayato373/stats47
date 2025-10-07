@@ -3,7 +3,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { BirthDeathRanking } from "./BirthDeathRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface BirthDeathPageProps {
@@ -79,20 +79,10 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
         </div>
       </div>
 
-      {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.naturalIncreaseRate,
-        }}
-        subcategory={subcategory}
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateRdYlGn",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキング */}
+      <div className="px-4 pb-4">
+        <BirthDeathRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };
