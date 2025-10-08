@@ -5,6 +5,7 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { EstatStackedBarChart } from "@/components/dashboard/StackedBarChart";
+import { PopulationCompositionRanking } from "./PopulationCompositionRanking";
 
 interface PopulationCompositionPageProps {
   category: CategoryData;
@@ -29,6 +30,14 @@ export const PopulationCompositionPage: React.FC<
           title="年齢3区分別人口の推移"
           yLabel="人口（人）"
         />
+      </div>
+
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <PopulationCompositionRanking subcategory={subcategory} />
       </div>
     </SubcategoryLayout>
   );

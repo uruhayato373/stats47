@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { LaborForceStructureRanking } from "./LaborForceStructureRanking";
 
 interface LaborForceStructurePageProps {
   category: CategoryData;
@@ -12,15 +12,13 @@ interface LaborForceStructurePageProps {
   currentYear: string;
 }
 
-export const LaborForceStructurePage: React.FC<LaborForceStructurePageProps> = ({
-  category,
-  subcategory,
-}) => {
-  const statsDataId = '0000010106';
-  const statsDataIdRatio = '0000010106';
+export const LaborForceStructurePage: React.FC<
+  LaborForceStructurePageProps
+> = ({ category, subcategory }) => {
+  const statsDataId = "0000010106";
   const cdCat01 = {
-    F1101: 'F1101',
-    F1102: 'F1102',
+    F1101: "F1101",
+    F1102: "F1102",
   };
 
   return (
@@ -48,23 +46,13 @@ export const LaborForceStructurePage: React.FC<LaborForceStructurePageProps> = (
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.F1102,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '就業者数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <LaborForceStructureRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };
