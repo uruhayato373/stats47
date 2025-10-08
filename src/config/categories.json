@@ -317,11 +317,39 @@
     "color": "yellow",
     "subcategories": [
       {
-        "id": "card",
-        "name": "教育・スポーツ指標",
-        "href": "/card",
-        "component": "EducationSportsCardPage",
-        "areaComponent": "EducationSportsCardAreaPage"
+        "id": "kindergarten",
+        "name": "幼稚園",
+        "href": "/kindergarten",
+        "component": "KindergartenPage",
+        "areaComponent": "KindergartenAreaPage"
+      },
+      {
+        "id": "elementary-school",
+        "name": "小学校",
+        "href": "/elementary-school",
+        "component": "ElementarySchoolPage",
+        "areaComponent": "ElementarySchoolAreaPage"
+      },
+      {
+        "id": "junior-high-school",
+        "name": "中学校",
+        "href": "/junior-high-school",
+        "component": "JuniorHighSchoolPage",
+        "areaComponent": "JuniorHighSchoolAreaPage"
+      },
+      {
+        "id": "high-school",
+        "name": "高等学校",
+        "href": "/high-school",
+        "component": "HighSchoolPage",
+        "areaComponent": "HighSchoolAreaPage"
+      },
+      {
+        "id": "college-university",
+        "name": "短大・大学",
+        "href": "/college-university",
+        "component": "CollegeUniversityPage",
+        "areaComponent": "CollegeUniversityAreaPage"
       }
     ]
   },
