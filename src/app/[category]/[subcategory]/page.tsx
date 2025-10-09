@@ -11,14 +11,14 @@ interface PageProps {
 }
 
 /**
- * サブカテゴリページ - ダッシュボードにリダイレクト
+ * サブカテゴリページ - ランキングにリダイレクト
  *
  * 旧URL構造: /[category]/[subcategory]
- * 新URL構造: /[category]/[subcategory]/dashboard
+ * 新URL構造: /[category]/[subcategory]/ranking
  *
  * @param {PageProps} props - ページのProps
  */
 export default async function SubcategoryPage({ params }: PageProps) {
   const { category, subcategory } = await params;
-  redirect(`/${category}/${subcategory}/dashboard`);
+  redirect(`/${category}/${subcategory}/ranking`);
 }

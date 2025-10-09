@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
 import { SubcategoryNavigation } from "./SubcategoryNavigation";
-import { SubcategoryViewNavigation } from "./SubcategoryViewNavigation";
+import { ViewSwitchButtons } from "./ViewSwitchButtons";
 import { PrefectureSelector } from "./PrefectureSelector";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
@@ -58,29 +58,29 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
               </div>
             </div>
 
-            {/* 都道府県セレクター（ダッシュボードの場合のみ） */}
-            {viewType === "dashboard" && (
-              <div className="flex-shrink-0">
+            {/* 右側コントロール */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              {/* ビュー切り替えボタン */}
+              <ViewSwitchButtons
+                category={category}
+                subcategory={subcategory}
+                currentView={viewType}
+                areaCode={areaCode}
+              />
+              {/* 都道府県セレクター（ダッシュボードの場合のみ） */}
+              {viewType === "dashboard" && (
                 <PrefectureSelector
                   category={category}
                   subcategory={subcategory}
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* サブカテゴリナビゲーション */}
           <SubcategoryNavigation
             category={category}
             currentSubcategory={subcategory}
-          />
-
-          {/* ダッシュボード/ランキング切り替えタブ */}
-          <SubcategoryViewNavigation
-            category={category}
-            subcategory={subcategory}
-            currentView={viewType}
-            areaCode={areaCode}
           />
 
           {/* メインコンテンツ */}

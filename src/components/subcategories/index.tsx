@@ -172,7 +172,7 @@ export const getAreaPageComponent = (
 
 // 共通コンポーネント
 export { SubcategoryLayout } from "./SubcategoryLayout";
-export { SubcategoryViewNavigation } from "./SubcategoryViewNavigation";
+export { ViewSwitchButtons } from "./ViewSwitchButtons";
 export { PrefectureSelector } from "./PrefectureSelector";
 
 // カテゴリー別エクスポート
