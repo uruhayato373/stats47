@@ -2,102 +2,78 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
-interface IndustrialStructureRankingProps {
-  subcategory: SubcategoryData;
-}
-
-type RankingTab =
-  | "primaryIndustryRatio"
-  | "secondaryIndustryRatio"
-  | "tertiaryIndustryRatio"
-  | "secondaryTertiaryIndustryRatio";
+type RankingTab = "primaryIndustry" | "secondaryIndustry" | "tertiaryIndustry";
 
 export const IndustrialStructureRanking: React.FC<
-  IndustrialStructureRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>(
-    "primaryIndustryRatio"
-  );
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("primaryIndustry");
 
   const rankings = {
-    primaryIndustryRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F01201",
-      unit: "％",
-      name: "第1次産業就業者比率",
+    primaryIndustry: {
+      statsDataId: "0000010131",
+      cdCat01: "DD1101",
+      unit: "人",
+      name: "第1次産業",
     },
-    secondaryIndustryRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F01202",
-      unit: "％",
-      name: "第2次産業就業者比率",
+    secondaryIndustry: {
+      statsDataId: "0000010131",
+      cdCat01: "DD1102",
+      unit: "人",
+      name: "第2次産業",
     },
-    tertiaryIndustryRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F01203",
-      unit: "％",
-      name: "第3次産業就業者比率",
-    },
-    secondaryTertiaryIndustryRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F01204",
-      unit: "％",
-      name: "第2次産業及び第3次産業就業者比率（対就業者）",
+    tertiaryIndustry: {
+      statsDataId: "0000010131",
+      cdCat01: "DD1103",
+      unit: "人",
+      name: "第3次産業",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("primaryIndustryRatio")}
+              onClick={() => setActiveTab("primaryIndustry")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "primaryIndustryRatio"
+                activeTab === "primaryIndustry"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              第1次産業比率
+              第1次産業
             </button>
             <button
-              onClick={() => setActiveTab("secondaryIndustryRatio")}
+              onClick={() => setActiveTab("secondaryIndustry")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "secondaryIndustryRatio"
+                activeTab === "secondaryIndustry"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              第2次産業比率
+              第2次産業
             </button>
             <button
-              onClick={() => setActiveTab("tertiaryIndustryRatio")}
+              onClick={() => setActiveTab("tertiaryIndustry")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "tertiaryIndustryRatio"
+                activeTab === "tertiaryIndustry"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              第3次産業比率
-            </button>
-            <button
-              onClick={() => setActiveTab("secondaryTertiaryIndustryRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "secondaryTertiaryIndustryRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              第2次・第3次産業比率
+              第3次産業
             </button>
           </nav>
         </div>
@@ -114,13 +90,14 @@ export const IndustrialStructureRanking: React.FC<
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          colorScheme: subcategory.colorScheme || "interpolateYlOrRd",
           divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

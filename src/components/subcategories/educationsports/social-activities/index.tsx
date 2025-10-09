@@ -1,3 +1,3 @@
 export { SocialActivitiesPage } from "./SocialActivitiesPage";
-export { SocialActivitiesAreaPage } from "./SocialActivitiesAreaPage";
+export { SocialActivitiesDashboard } from "./SocialActivitiesDashboard";
 export { SocialActivitiesRanking } from "./SocialActivitiesRanking";

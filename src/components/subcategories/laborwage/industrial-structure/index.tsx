@@ -1,3 +1,3 @@
 export { IndustrialStructurePage } from "./IndustrialStructurePage";
-export { IndustrialStructureAreaPage } from "./IndustrialStructureAreaPage";
+export { IndustrialStructureDashboard } from "./IndustrialStructureDashboard";
 export { IndustrialStructureRanking } from "./IndustrialStructureRanking";

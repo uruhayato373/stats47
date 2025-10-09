@@ -2,118 +2,68 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
-interface CommutingEmploymentRankingProps {
-  subcategory: SubcategoryData;
-}
-
-type RankingTab =
-  | "inPrefectureEmployedRatio"
-  | "migrantWorkerRatio"
-  | "commuterToOtherMunicipalitiesRatio"
-  | "commuterFromOtherMunicipalitiesRatio"
-  | "employmentRate"
-  | "employedOutsidePrefectureRatio";
+type RankingTab = "commuters" | "commutingTime" | "employmentRate";
 
 export const CommutingEmploymentRanking: React.FC<
-  CommutingEmploymentRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>(
-    "inPrefectureEmployedRatio"
-  );
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("commuters");
 
   const rankings = {
-    inPrefectureEmployedRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F02501",
-      unit: "％",
-      name: "県内就業者比率",
+    commuters: {
+      statsDataId: "0000010132",
+      cdCat01: "EE1101",
+      unit: "人",
+      name: "通勤者数",
     },
-    migrantWorkerRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F0260101",
-      unit: "％",
-      name: "出稼者比率（販売農家）",
-    },
-    commuterToOtherMunicipalitiesRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F02701",
-      unit: "％",
-      name: "他市区町村への通勤者比率",
-    },
-    commuterFromOtherMunicipalitiesRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F02702",
-      unit: "％",
-      name: "他市区町村からの通勤者比率",
+    commutingTime: {
+      statsDataId: "0000010132",
+      cdCat01: "EE1102",
+      unit: "分",
+      name: "通勤時間",
     },
     employmentRate: {
-      statsDataId: "0000010206",
-      cdCat01: "#F03101",
-      unit: "％",
+      statsDataId: "0000010132",
+      cdCat01: "EE1103",
+      unit: "%",
       name: "就職率",
-    },
-    employedOutsidePrefectureRatio: {
-      statsDataId: "0000010206",
-      cdCat01: "#F0310201",
-      unit: "％",
-      name: "県外就職者比率",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("inPrefectureEmployedRatio")}
+              onClick={() => setActiveTab("commuters")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "inPrefectureEmployedRatio"
+                activeTab === "commuters"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              県内就業者比率
+              通勤者数
             </button>
             <button
-              onClick={() => setActiveTab("migrantWorkerRatio")}
+              onClick={() => setActiveTab("commutingTime")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "migrantWorkerRatio"
+                activeTab === "commutingTime"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              出稼者比率
-            </button>
-            <button
-              onClick={() => setActiveTab("commuterToOtherMunicipalitiesRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "commuterToOtherMunicipalitiesRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              他市区町村への通勤
-            </button>
-            <button
-              onClick={() =>
-                setActiveTab("commuterFromOtherMunicipalitiesRatio")
-              }
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "commuterFromOtherMunicipalitiesRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              他市区町村からの通勤
+              通勤時間
             </button>
             <button
               onClick={() => setActiveTab("employmentRate")}
@@ -124,16 +74,6 @@ export const CommutingEmploymentRanking: React.FC<
               }`}
             >
               就職率
-            </button>
-            <button
-              onClick={() => setActiveTab("employedOutsidePrefectureRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "employedOutsidePrefectureRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              県外就職者比率
             </button>
           </nav>
         </div>
@@ -150,13 +90,14 @@ export const CommutingEmploymentRanking: React.FC<
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          colorScheme: subcategory.colorScheme || "interpolateYlOrRd",
           divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

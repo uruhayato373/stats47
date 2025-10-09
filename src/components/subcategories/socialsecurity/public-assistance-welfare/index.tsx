@@ -1,3 +1,3 @@
 export { PublicAssistanceWelfarePage } from "./PublicAssistanceWelfarePage";
-export { PublicAssistanceWelfareAreaPage } from "./PublicAssistanceWelfareAreaPage";
+export { PublicAssistanceWelfareDashboard } from "./PublicAssistanceWelfareDashboard";
 export { PublicAssistanceWelfareRanking } from "./PublicAssistanceWelfareRanking";

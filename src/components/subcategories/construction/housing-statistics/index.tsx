@@ -1,3 +1,3 @@
 export { HousingStatisticsPage } from "./HousingStatisticsPage";
-export { HousingStatisticsAreaPage } from "./HousingStatisticsAreaPage";
+export { HousingStatisticsDashboard } from "./HousingStatisticsDashboard";
 export { HousingStatisticsRanking } from "./HousingStatisticsRanking";

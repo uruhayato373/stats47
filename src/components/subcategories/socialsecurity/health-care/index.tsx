@@ -1,3 +1,3 @@
 export { HealthCarePage } from "./HealthCarePage";
-export { HealthCareAreaPage } from "./HealthCareAreaPage";
+export { HealthCareDashboard } from "./HealthCareDashboard";
 export { HealthCareRanking } from "./HealthCareRanking";
