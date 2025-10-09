@@ -1080,6 +1080,80 @@ interface ViewSwitchButtonsProps {
 }
 ```
 
+### ランキングコンポーネント
+
+#### 概要
+
+ランキング表示専用のコンポーネント群で、都道府県別の統計データランキングを表示する機能を提供します。
+
+#### ディレクトリ構造
+
+```
+src/components/ranking/
+├── EstatRanking/
+│   ├── EstatRanking.tsx        # メインランキングコンポーネント
+│   └── index.ts                # エクスポート管理
+└── index.ts                    # ルートエクスポート
+```
+
+#### EstatRanking コンポーネント
+
+**責任**
+
+- e-Stat API からの都道府県別データ取得
+- コロプレス地図での可視化
+- 統計サマリーの表示
+- 都道府県別データテーブルの表示
+- 年度選択機能
+
+**特徴**
+
+- **データ取得**: 年度一覧の取得と選択年度のデータ取得を自動化
+- **可視化**: コロプレス地図とデータテーブルの組み合わせ表示
+- **エラーハンドリング**: ローディング状態とエラー状態の適切な表示
+- **カスタマイズ**: 色スキーム、地図サイズ、タイトルなどの設定可能
+
+**Props**
+
+```typescript
+interface EstatRankingProps {
+  params: Omit<GetStatsDataParams, "appId">;
+  subcategory: SubcategoryData;
+  title?: string;
+  options?: {
+    colorScheme?: string;
+    divergingMidpoint?: "zero" | "mean" | "median" | number;
+  };
+  mapWidth?: number;
+  mapHeight?: number;
+  className?: string;
+  onDataLoaded?: (values: FormattedValue[]) => void;
+  onError?: (error: Error) => void;
+}
+```
+
+**使用方法**
+
+```typescript
+import { EstatRanking } from "@/components/ranking";
+
+<EstatRanking
+  params={{
+    statsDataId: "0000010101",
+    cdCat01: "001",
+    cdTime: "2023000000",
+  }}
+  subcategory={subcategoryData}
+  title="都道府県別ランキング"
+  options={{
+    colorScheme: "interpolateBlues",
+    divergingMidpoint: "zero",
+  }}
+  mapWidth={800}
+  mapHeight={600}
+/>;
+```
+
 ## 5. スタイル管理
 
 ### アプローチ

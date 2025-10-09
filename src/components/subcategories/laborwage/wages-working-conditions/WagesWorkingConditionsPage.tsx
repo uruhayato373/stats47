@@ -3,7 +3,7 @@
 import React from "react";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { EstatRanking } from "@/components/ranking";
 import { SubcategoryPageProps } from "@/types/subcategory";
 
 export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({

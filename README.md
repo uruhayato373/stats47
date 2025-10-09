@@ -320,7 +320,7 @@ export default function MyComponent() {
 サブカテゴリーページでは、`EstatRanking`コンポーネントを使用してデータを表示します。このコンポーネントは、コロプレス地図、統計サマリー、都道府県別データテーブルを一体化した標準コンポーネントです。
 
 ```tsx
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { EstatRanking } from "@/components/ranking";
 
 export const MySubcategoryPage = ({ category, subcategory }) => {
   const statsDataId = "0000010101";

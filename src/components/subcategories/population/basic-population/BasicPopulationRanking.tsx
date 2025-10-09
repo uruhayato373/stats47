@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { EstatRanking } from "@/components/ranking";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/subcategory";
 

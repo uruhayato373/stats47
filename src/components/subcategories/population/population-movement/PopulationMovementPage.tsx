@@ -3,7 +3,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatRanking } from "@/components/dashboard/Ranking";
+import { EstatRanking } from "@/components/ranking";
 import { EstatMultiLineChart } from "@/components/dashboard/MultiLineChart";
 import { SubcategoryPageProps } from "@/types/subcategory";
 
