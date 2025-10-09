@@ -2,117 +2,81 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface ChildcareEarlyEducationRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab =
-  | "nurseryCount"
-  | "certifiedChildcareCount"
-  | "nurseryPerCapita"
-  | "certifiedChildcarePerCapita"
-  | "publicNurseryRatio";
+  | "childcareFacilities"
+  | "childcareCapacity"
+  | "enrollmentRate";
 
 export const ChildcareEarlyEducationRanking: React.FC<
-  ChildcareEarlyEducationRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>("nurseryCount");
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("childcareFacilities");
 
   const rankings = {
-    nurseryCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E5101",
-      unit: "所",
-      name: "保育所等数",
+    childcareFacilities: {
+      statsDataId: "0000010128",
+      cdCat01: "AA1101",
+      unit: "箇所",
+      name: "保育施設数",
     },
-    certifiedChildcareCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E5201",
-      unit: "園",
-      name: "認定こども園数",
+    childcareCapacity: {
+      statsDataId: "0000010128",
+      cdCat01: "AA1102",
+      unit: "人",
+      name: "保育定員",
     },
-    nurseryPerCapita: {
-      statsDataId: "0000010205",
-      cdCat01: "#E0110105",
-      unit: "所",
-      name: "保育所等数（0～5歳人口10万人当たり）",
-    },
-    certifiedChildcarePerCapita: {
-      statsDataId: "0000010205",
-      cdCat01: "#E0110106",
-      unit: "園",
-      name: "認定こども園数（0～5歳人口10万人当たり）",
-    },
-    publicNurseryRatio: {
-      statsDataId: "0000010205",
-      cdCat01: "#E01305",
-      unit: "％",
-      name: "公営保育所等割合",
+    enrollmentRate: {
+      statsDataId: "0000010128",
+      cdCat01: "AA1103",
+      unit: "%",
+      name: "入園率",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("nurseryCount")}
+              onClick={() => setActiveTab("childcareFacilities")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "nurseryCount"
+                activeTab === "childcareFacilities"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              保育所等数
+              保育施設数
             </button>
             <button
-              onClick={() => setActiveTab("certifiedChildcareCount")}
+              onClick={() => setActiveTab("childcareCapacity")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "certifiedChildcareCount"
+                activeTab === "childcareCapacity"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              認定こども園数
+              保育定員
             </button>
             <button
-              onClick={() => setActiveTab("nurseryPerCapita")}
+              onClick={() => setActiveTab("enrollmentRate")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "nurseryPerCapita"
+                activeTab === "enrollmentRate"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              保育所等（人口当たり）
-            </button>
-            <button
-              onClick={() => setActiveTab("certifiedChildcarePerCapita")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "certifiedChildcarePerCapita"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              認定こども園（人口当たり）
-            </button>
-            <button
-              onClick={() => setActiveTab("publicNurseryRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "publicNurseryRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              公営割合
+              入園率
             </button>
           </nav>
         </div>
@@ -129,13 +93,14 @@ export const ChildcareEarlyEducationRanking: React.FC<
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          colorScheme: subcategory.colorScheme || "interpolatePurples",
           divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

@@ -1,1 +1,5 @@
-export { TourismAccommodationPage } from './tourism-accommodation';
+export {
+  TourismAccommodationPage,
+  TourismAccommodationDashboard,
+  TourismAccommodationRanking,
+} from "./tourism-accommodation";

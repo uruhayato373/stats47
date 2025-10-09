@@ -1,12 +1,28 @@
 export {
   BasicPopulationPage,
   BasicPopulationAreaPage,
+  BasicPopulationDashboard,
+  BasicPopulationRanking,
 } from "./basic-population";
-export { BirthDeathPage } from "./birth-death";
-export { HouseholdsPage } from "./households";
-export { MarriagePage } from "./marriage";
+export {
+  BirthDeathPage,
+  BirthDeathDashboard,
+  BirthDeathRanking,
+} from "./birth-death";
+export {
+  HouseholdsPage,
+  HouseholdsDashboard,
+  HouseholdsRanking,
+} from "./households";
+export { MarriagePage, MarriageDashboard, MarriageRanking } from "./marriage";
 export {
   PopulationMovementPage,
   PopulationMovementAreaPage,
+  PopulationMovementDashboard,
+  PopulationMovementRanking,
 } from "./population-movement";
-export { PopulationCompositionPage } from "./population-composition";
+export {
+  PopulationCompositionPage,
+  PopulationCompositionDashboard,
+  PopulationCompositionRanking,
+} from "./population-composition";

@@ -2,11 +2,8 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface WeatherClimateRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab =
   | "avgTemperature"
@@ -19,7 +16,8 @@ type RankingTab =
   | "sunshineDuration"
   | "precipitation";
 
-export const WeatherClimateRanking: React.FC<WeatherClimateRankingProps> = ({
+export const WeatherClimateRanking: React.FC<SubcategoryRankingPageProps> = ({
+  category,
   subcategory,
 }) => {
   const [activeTab, setActiveTab] = useState<RankingTab>("avgTemperature");
@@ -84,7 +82,11 @@ export const WeatherClimateRanking: React.FC<WeatherClimateRankingProps> = ({
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -205,6 +207,6 @@ export const WeatherClimateRanking: React.FC<WeatherClimateRankingProps> = ({
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

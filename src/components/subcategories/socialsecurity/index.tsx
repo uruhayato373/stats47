@@ -1,4 +1,20 @@
-export { SocialSecurityCardPage } from "./card";
-export { DeathStatisticsPage } from "./death-statistics";
-export * from "./public-assistance-welfare";
-export * from "./health-care";
+export {
+  SocialSecurityCardPage,
+  SocialSecurityCardDashboard,
+  SocialSecurityCardRanking,
+} from "./card";
+export {
+  DeathStatisticsPage,
+  DeathStatisticsDashboard,
+  DeathStatisticsRanking,
+} from "./death-statistics";
+export {
+  PublicAssistanceWelfarePage,
+  PublicAssistanceWelfareDashboard,
+  PublicAssistanceWelfareRanking,
+} from "./public-assistance-welfare";
+export {
+  HealthCarePage,
+  HealthCareDashboard,
+  HealthCareRanking,
+} from "./health-care";

@@ -1,3 +1,3 @@
 export { WelfareFacilitiesPage } from "./WelfareFacilitiesPage";
-export { WelfareFacilitiesAreaPage } from "./WelfareFacilitiesAreaPage";
+export { WelfareFacilitiesDashboard } from "./WelfareFacilitiesDashboard";
 export { WelfareFacilitiesRanking } from "./WelfareFacilitiesRanking";

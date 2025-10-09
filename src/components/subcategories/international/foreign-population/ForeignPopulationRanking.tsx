@@ -2,102 +2,81 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface ForeignPopulationRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab =
-  | "totalForeignPopulation"
-  | "koreanForeignPopulation"
-  | "chineseForeignPopulation"
-  | "americanForeignPopulation";
+  | "foreignResidents"
+  | "naturalizations"
+  | "internationalStudents";
 
 export const ForeignPopulationRanking: React.FC<
-  ForeignPopulationRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>(
-    "totalForeignPopulation"
-  );
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("foreignResidents");
 
   const rankings = {
-    totalForeignPopulation: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01601",
+    foreignResidents: {
+      statsDataId: "0000010115",
+      cdCat01: "N1101",
       unit: "人",
-      name: "外国人人口（人口10万人当たり）",
+      name: "外国人住民数",
     },
-    koreanForeignPopulation: {
-      statsDataId: "0000010201",
-      cdCat01: "#A0160101",
+    naturalizations: {
+      statsDataId: "0000010115",
+      cdCat01: "N1102",
       unit: "人",
-      name: "韓国・朝鮮系外国人人口（人口10万人当たり）",
+      name: "帰化者数",
     },
-    chineseForeignPopulation: {
-      statsDataId: "0000010201",
-      cdCat01: "#A0160102",
+    internationalStudents: {
+      statsDataId: "0000010115",
+      cdCat01: "N1103",
       unit: "人",
-      name: "中国系外国人人口（人口10万人当たり）",
-    },
-    americanForeignPopulation: {
-      statsDataId: "0000010201",
-      cdCat01: "#A0160103",
-      unit: "人",
-      name: "アメリカ系外国人人口（人口10万人当たり）",
+      name: "留学生数",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("totalForeignPopulation")}
+              onClick={() => setActiveTab("foreignResidents")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "totalForeignPopulation"
+                activeTab === "foreignResidents"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              外国人人口総数
+              外国人住民数
             </button>
             <button
-              onClick={() => setActiveTab("koreanForeignPopulation")}
+              onClick={() => setActiveTab("naturalizations")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "koreanForeignPopulation"
+                activeTab === "naturalizations"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              韓国・朝鮮系
+              帰化者数
             </button>
             <button
-              onClick={() => setActiveTab("chineseForeignPopulation")}
+              onClick={() => setActiveTab("internationalStudents")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "chineseForeignPopulation"
+                activeTab === "internationalStudents"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              中国系
-            </button>
-            <button
-              onClick={() => setActiveTab("americanForeignPopulation")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "americanForeignPopulation"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              アメリカ系
+              留学生数
             </button>
           </nav>
         </div>
@@ -114,6 +93,7 @@ export const ForeignPopulationRanking: React.FC<
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
           colorScheme: subcategory.colorScheme || "interpolateBlues",
           divergingMidpoint: "zero",
@@ -121,6 +101,6 @@ export const ForeignPopulationRanking: React.FC<
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

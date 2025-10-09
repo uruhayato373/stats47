@@ -2,68 +2,76 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface NaturalEnvironmentRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab =
-  | "forestArea"
-  | "forestAreaRatio"
-  | "natureParkAreaRatio"
-  | "woodlandArea"
-  | "nonForestGrasslandArea"
-  | "naturalEnvironmentConservationArea";
+  | "nationalParks"
+  | "quasiNationalParks"
+  | "prefecturalParks"
+  | "naturalMonuments"
+  | "nationalParksArea"
+  | "quasiNationalParksArea"
+  | "prefecturalParksArea";
 
 export const NaturalEnvironmentRanking: React.FC<
-  NaturalEnvironmentRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>("forestArea");
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("nationalParks");
 
   const rankings = {
-    forestArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1105",
+    nationalParks: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01301",
+      unit: "箇所",
+      name: "国立公園",
+    },
+    quasiNationalParks: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01302",
+      unit: "箇所",
+      name: "国定公園",
+    },
+    prefecturalParks: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01303",
+      unit: "箇所",
+      name: "都道府県立自然公園",
+    },
+    naturalMonuments: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01304",
+      unit: "箇所",
+      name: "天然記念物",
+    },
+    nationalParksArea: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01305",
       unit: "ha",
-      name: "林野面積",
+      name: "国立公園面積",
     },
-    woodlandArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1106",
+    quasiNationalParksArea: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01306",
       unit: "ha",
-      name: "森林面積",
+      name: "国定公園面積",
     },
-    nonForestGrasslandArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1107",
+    prefecturalParksArea: {
+      statsDataId: "0000010201",
+      cdCat01: "#A01307",
       unit: "ha",
-      name: "森林以外の草生地面積",
-    },
-    naturalEnvironmentConservationArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1108",
-      unit: "ha",
-      name: "自然環境保全地域面積",
-    },
-    forestAreaRatio: {
-      statsDataId: "0000010202",
-      cdCat01: "#B01202",
-      unit: "%",
-      name: "森林面積割合",
-    },
-    natureParkAreaRatio: {
-      statsDataId: "0000010202",
-      cdCat01: "#B01204",
-      unit: "%",
-      name: "自然公園面積割合",
+      name: "都道府県立自然公園面積",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -72,64 +80,74 @@ export const NaturalEnvironmentRanking: React.FC<
             aria-label="Tabs"
           >
             <button
-              onClick={() => setActiveTab("forestArea")}
+              onClick={() => setActiveTab("nationalParks")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "forestArea"
+                activeTab === "nationalParks"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              林野面積
+              国立公園
             </button>
             <button
-              onClick={() => setActiveTab("woodlandArea")}
+              onClick={() => setActiveTab("quasiNationalParks")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "woodlandArea"
+                activeTab === "quasiNationalParks"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              森林面積
+              国定公園
             </button>
             <button
-              onClick={() => setActiveTab("nonForestGrasslandArea")}
+              onClick={() => setActiveTab("prefecturalParks")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "nonForestGrasslandArea"
+                activeTab === "prefecturalParks"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              草生地面積
+              都道府県立自然公園
             </button>
             <button
-              onClick={() => setActiveTab("naturalEnvironmentConservationArea")}
+              onClick={() => setActiveTab("naturalMonuments")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "naturalEnvironmentConservationArea"
+                activeTab === "naturalMonuments"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              保全地域面積
+              天然記念物
             </button>
             <button
-              onClick={() => setActiveTab("forestAreaRatio")}
+              onClick={() => setActiveTab("nationalParksArea")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "forestAreaRatio"
+                activeTab === "nationalParksArea"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              森林面積割合
+              国立公園面積
             </button>
             <button
-              onClick={() => setActiveTab("natureParkAreaRatio")}
+              onClick={() => setActiveTab("quasiNationalParksArea")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "natureParkAreaRatio"
+                activeTab === "quasiNationalParksArea"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              自然公園面積割合
+              国定公園面積
+            </button>
+            <button
+              onClick={() => setActiveTab("prefecturalParksArea")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "prefecturalParksArea"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              都道府県立自然公園面積
             </button>
           </nav>
         </div>
@@ -154,6 +172,6 @@ export const NaturalEnvironmentRanking: React.FC<
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

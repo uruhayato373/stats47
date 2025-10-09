@@ -2,66 +2,79 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
-interface BusinessScaleRankingProps {
-  subcategory: SubcategoryData;
-}
+type RankingTab = "largeEnterprises" | "mediumEnterprises" | "smallEnterprises";
 
-type RankingTab = "establishmentRatio1to4" | "establishmentRatio5to9";
-
-export const BusinessScaleRanking: React.FC<BusinessScaleRankingProps> = ({
+export const BusinessScaleRanking: React.FC<SubcategoryRankingPageProps> = ({
+  category,
   subcategory,
 }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>(
-    "establishmentRatio1to4"
-  );
+  const [activeTab, setActiveTab] = useState<RankingTab>("largeEnterprises");
 
   const rankings = {
-    establishmentRatio1to4: {
-      statsDataId: "0000010203",
-      cdCat01: "#C02206",
-      unit: "％",
-      name: "従業者1～4人の事業所割合（民営）",
+    largeEnterprises: {
+      statsDataId: "0000010120",
+      cdCat01: "S1101",
+      unit: "社",
+      name: "大企業数",
     },
-    establishmentRatio5to9: {
-      statsDataId: "0000010203",
-      cdCat01: "#C02207",
-      unit: "％",
-      name: "従業者5～9人の事業所割合（民営）",
+    mediumEnterprises: {
+      statsDataId: "0000010120",
+      cdCat01: "S1102",
+      unit: "社",
+      name: "中企業数",
+    },
+    smallEnterprises: {
+      statsDataId: "0000010120",
+      cdCat01: "S1103",
+      unit: "社",
+      name: "小企業数",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("establishmentRatio1to4")}
+              onClick={() => setActiveTab("largeEnterprises")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "establishmentRatio1to4"
+                activeTab === "largeEnterprises"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              従業者1～4人
+              大企業数
             </button>
             <button
-              onClick={() => setActiveTab("establishmentRatio5to9")}
+              onClick={() => setActiveTab("mediumEnterprises")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "establishmentRatio5to9"
+                activeTab === "mediumEnterprises"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              従業者5～9人
+              中企業数
+            </button>
+            <button
+              onClick={() => setActiveTab("smallEnterprises")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "smallEnterprises"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              小企業数
             </button>
           </nav>
         </div>
@@ -78,6 +91,7 @@ export const BusinessScaleRanking: React.FC<BusinessScaleRankingProps> = ({
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
           colorScheme: subcategory.colorScheme || "interpolateBlues",
           divergingMidpoint: "zero",
@@ -85,6 +99,6 @@ export const BusinessScaleRanking: React.FC<BusinessScaleRankingProps> = ({
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

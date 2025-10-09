@@ -2,62 +2,54 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
-interface KindergartenRankingProps {
-  subcategory: SubcategoryData;
-}
+type RankingTab = "kindergartens" | "children" | "teachers";
 
-type RankingTab =
-  | "kindergartenCount"
-  | "enrollmentCount"
-  | "perCapitaCount"
-  | "publicRatio";
-
-export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
+export const KindergartenRanking: React.FC<SubcategoryRankingPageProps> = ({
+  category,
   subcategory,
 }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>("kindergartenCount");
+  const [activeTab, setActiveTab] = useState<RankingTab>("kindergartens");
 
   const rankings = {
-    kindergartenCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E1101",
+    kindergartens: {
+      statsDataId: "0000010111",
+      cdCat01: "J1101",
       unit: "園",
       name: "幼稚園数",
     },
-    enrollmentCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E1201",
+    children: {
+      statsDataId: "0000010111",
+      cdCat01: "J1102",
       unit: "人",
-      name: "幼稚園在園者数",
+      name: "園児数",
     },
-    perCapitaCount: {
-      statsDataId: "0000010205",
-      cdCat01: "#E0110104",
-      unit: "園",
-      name: "幼稚園数（3～5歳人口10万人当たり）",
-    },
-    publicRatio: {
-      statsDataId: "0000010205",
-      cdCat01: "#E01304",
-      unit: "％",
-      name: "公立幼稚園割合",
+    teachers: {
+      statsDataId: "0000010111",
+      cdCat01: "J1103",
+      unit: "人",
+      name: "教職員数",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("kindergartenCount")}
+              onClick={() => setActiveTab("kindergartens")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "kindergartenCount"
+                activeTab === "kindergartens"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
@@ -65,34 +57,24 @@ export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
               幼稚園数
             </button>
             <button
-              onClick={() => setActiveTab("enrollmentCount")}
+              onClick={() => setActiveTab("children")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "enrollmentCount"
+                activeTab === "children"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              在園者数
+              園児数
             </button>
             <button
-              onClick={() => setActiveTab("perCapitaCount")}
+              onClick={() => setActiveTab("teachers")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "perCapitaCount"
+                activeTab === "teachers"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              人口当たり数
-            </button>
-            <button
-              onClick={() => setActiveTab("publicRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "publicRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              公立割合
+              教職員数
             </button>
           </nav>
         </div>
@@ -111,12 +93,12 @@ export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
         }}
         title={`${activeRanking.name}ランキング`}
         options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          colorScheme: subcategory.colorScheme || "interpolateYellows",
           divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

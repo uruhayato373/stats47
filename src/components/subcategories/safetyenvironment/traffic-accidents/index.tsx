@@ -1,3 +1,3 @@
 export { TrafficAccidentsPage } from "./TrafficAccidentsPage";
-export { TrafficAccidentsAreaPage } from "./TrafficAccidentsAreaPage";
+export { TrafficAccidentsDashboard } from "./TrafficAccidentsDashboard";
 export { TrafficAccidentsRanking } from "./TrafficAccidentsRanking";

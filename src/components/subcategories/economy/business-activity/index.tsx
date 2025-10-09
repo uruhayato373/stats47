@@ -1,3 +1,3 @@
 export { BusinessActivityPage } from "./BusinessActivityPage";
-export { BusinessActivityAreaPage } from "./BusinessActivityAreaPage";
+export { BusinessActivityDashboard } from "./BusinessActivityDashboard";
 export { BusinessActivityRanking } from "./BusinessActivityRanking";

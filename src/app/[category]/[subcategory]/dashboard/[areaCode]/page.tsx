@@ -1,13 +1,10 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { getAreaPageComponent } from "@/components/subcategories";
+import { getDashboardComponent } from "@/components/subcategories";
 
 /**
- * 都道府県別ページのProps型定義
- *
- * @interface PageProps
- * @property {Promise<{category: string; subcategory: string; areaCode: string}>} params - 動的ルートパラメータ
+ * ダッシュボードページのProps型定義
  */
 interface PageProps {
   params: Promise<{
@@ -18,40 +15,41 @@ interface PageProps {
 }
 
 /**
- * 都道府県別統計データ表示ページ
+ * ダッシュボード統計データ表示ページ
  *
  * このページは、特定のカテゴリとサブカテゴリの統計データを
- * 指定された都道府県（areaCode）について表示します。
+ * 全国（areaCode="00000"）または都道府県別で表示します。
  *
- * ルート構造: /[category]/[subcategory]/[areaCode]
- * 例: /population/households/13000 (東京都の世帯統計)
+ * ルート構造: /[category]/[subcategory]/dashboard/[areaCode]
+ * 例: /population/basic-population/dashboard/00000 (全国の総人口ダッシュボード)
+ * 例: /population/basic-population/dashboard/13000 (東京都の総人口ダッシュボード)
  *
  * @param {PageProps} props - ページのProps
  * @param {Promise<{category: string; subcategory: string; areaCode: string}>} props.params - 動的ルートパラメータ
  *   - category: カテゴリID (例: "population", "laborwage")
- *   - subcategory: サブカテゴリID (例: "households", "marriage")
- *   - areaCode: 都道府県コード (例: "13000"=東京都, "27000"=大阪府)
+ *   - subcategory: サブカテゴリID (例: "basic-population", "households")
+ *   - areaCode: 地域コード (例: "00000"=全国, "13000"=東京都)
  *
- * @returns {Promise<JSX.Element>} 都道府県別統計データ表示コンポーネント
+ * @returns {Promise<JSX.Element>} ダッシュボード統計データ表示コンポーネント
  *
  * @throws {notFound} カテゴリまたはサブカテゴリが存在しない場合
  *
  * @example
- * // 東京都の世帯統計を表示
- * <AreaPage
- *   params={{category: "population", subcategory: "households", areaCode: "13000"}}
+ * // 全国の総人口ダッシュボードを表示
+ * <DashboardPage
+ *   params={{category: "population", subcategory: "basic-population", areaCode: "00000"}}
  * />
  *
  * @example
- * // 大阪府の婚姻統計を表示
- * <AreaPage
- *   params={{category: "population", subcategory: "marriage", areaCode: "27000"}}
+ * // 東京都の総人口ダッシュボードを表示
+ * <DashboardPage
+ *   params={{category: "population", subcategory: "basic-population", areaCode: "13000"}}
  * />
  *
- * @since 1.0.0
- * @version 1.0.0
+ * @since 2.0.0
+ * @version 2.0.0
  */
-export default async function AreaPage({ params }: PageProps) {
+export default async function DashboardPage({ params }: PageProps) {
   // 動的ルートパラメータを取得
   const {
     category: categoryId,
@@ -72,13 +70,13 @@ export default async function AreaPage({ params }: PageProps) {
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
   const { category, subcategory } = subcategoryData;
 
-  // 都道府県別ページコンポーネントを動的に取得
+  // ダッシュボードコンポーネントを動的に取得
   // categories.jsonの設定に基づいて適切なコンポーネントを選択
-  const AreaPageComponent = getAreaPageComponent(subcategoryId);
+  const DashboardComponent = getDashboardComponent(subcategoryId, categoryId);
 
-  // 都道府県別統計データ表示コンポーネントをレンダリング
+  // ダッシュボード統計データ表示コンポーネントをレンダリング
   return (
-    <AreaPageComponent
+    <DashboardComponent
       category={category}
       subcategory={subcategory}
       areaCode={areaCode}

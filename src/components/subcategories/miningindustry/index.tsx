@@ -1,1 +1,5 @@
-export { ManufacturingPage } from './manufacturing';
+export {
+  ManufacturingPage,
+  ManufacturingDashboard,
+  ManufacturingRanking,
+} from "./manufacturing";

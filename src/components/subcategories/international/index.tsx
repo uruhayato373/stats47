@@ -1,1 +1,5 @@
-export * from "./foreign-population";
+export {
+  ForeignPopulationPage,
+  ForeignPopulationDashboard,
+  ForeignPopulationRanking,
+} from "./foreign-population";

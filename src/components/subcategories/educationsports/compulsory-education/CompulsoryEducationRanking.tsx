@@ -2,102 +2,78 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
-interface CompulsoryEducationRankingProps {
-  subcategory: SubcategoryData;
-}
-
-type RankingTab =
-  | "compulsoryEducationCount"
-  | "secondaryEducationCount"
-  | "compulsoryEducationPerCapita"
-  | "secondaryEducationPerCapita";
+type RankingTab = "elementarySchools" | "juniorHighSchools" | "students";
 
 export const CompulsoryEducationRanking: React.FC<
-  CompulsoryEducationRankingProps
-> = ({ subcategory }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>(
-    "compulsoryEducationCount"
-  );
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
+  const [activeTab, setActiveTab] = useState<RankingTab>("elementarySchools");
 
   const rankings = {
-    compulsoryEducationCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E6101",
+    elementarySchools: {
+      statsDataId: "0000010129",
+      cdCat01: "BB1101",
       unit: "校",
-      name: "義務教育学校数",
+      name: "小学校数",
     },
-    secondaryEducationCount: {
-      statsDataId: "0000010105",
-      cdCat01: "E7101",
+    juniorHighSchools: {
+      statsDataId: "0000010129",
+      cdCat01: "BB1102",
       unit: "校",
-      name: "中等教育学校数",
+      name: "中学校数",
     },
-    compulsoryEducationPerCapita: {
-      statsDataId: "0000010205",
-      cdCat01: "#E0110107",
-      unit: "校",
-      name: "義務教育学校数（6～14歳人口10万人当たり）",
-    },
-    secondaryEducationPerCapita: {
-      statsDataId: "0000010205",
-      cdCat01: "#E0110108",
-      unit: "校",
-      name: "中等教育学校数（12～17歳人口10万人当たり）",
+    students: {
+      statsDataId: "0000010129",
+      cdCat01: "BB1103",
+      unit: "人",
+      name: "生徒数",
     },
   };
 
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             <button
-              onClick={() => setActiveTab("compulsoryEducationCount")}
+              onClick={() => setActiveTab("elementarySchools")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "compulsoryEducationCount"
+                activeTab === "elementarySchools"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              義務教育学校数
+              小学校数
             </button>
             <button
-              onClick={() => setActiveTab("secondaryEducationCount")}
+              onClick={() => setActiveTab("juniorHighSchools")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "secondaryEducationCount"
+                activeTab === "juniorHighSchools"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              中等教育学校数
+              中学校数
             </button>
             <button
-              onClick={() => setActiveTab("compulsoryEducationPerCapita")}
+              onClick={() => setActiveTab("students")}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "compulsoryEducationPerCapita"
+                activeTab === "students"
                   ? "border-indigo-500 text-indigo-600"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              義務教育学校（人口当たり）
-            </button>
-            <button
-              onClick={() => setActiveTab("secondaryEducationPerCapita")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "secondaryEducationPerCapita"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              中等教育学校（人口当たり）
+              生徒数
             </button>
           </nav>
         </div>
@@ -114,13 +90,14 @@ export const CompulsoryEducationRanking: React.FC<
           unit: activeRanking.unit,
           name: activeRanking.name,
         }}
+        title={`${activeRanking.name}ランキング`}
         options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
+          colorScheme: subcategory.colorScheme || "interpolatePurples",
           divergingMidpoint: "zero",
         }}
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

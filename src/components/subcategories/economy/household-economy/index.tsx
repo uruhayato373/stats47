@@ -1,3 +1,3 @@
 export { HouseholdEconomyPage } from "./HouseholdEconomyPage";
-export { HouseholdEconomyAreaPage } from "./HouseholdEconomyAreaPage";
+export { HouseholdEconomyDashboard } from "./HouseholdEconomyDashboard";
 export { HouseholdEconomyRanking } from "./HouseholdEconomyRanking";

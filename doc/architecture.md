@@ -104,8 +104,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_ranking_viz_composite ON ranking_visualiza
 
 **設計方針**:
 
-- **専用テーブル方式**: estat_metainfoと分離し、設定項目の拡張が容易
-- **単位変換機能**: conversion_factorとdecimal_placesで柔軟な単位変換に対応
+- **専用テーブル方式**: estat_metainfo と分離し、設定項目の拡張が容易
+- **単位変換機能**: conversion_factor と decimal_places で柔軟な単位変換に対応
 - **デフォルト値**: 設定が存在しない場合も適切なデフォルト値で動作
 
 **単位変換例**:
@@ -190,6 +190,12 @@ src/
 │   ├── layout.tsx         # ルートレイアウト
 │   ├── page.tsx           # ホームページ
 │   ├── [category]/        # カテゴリページ（動的ルーティング）
+│   │   └── [subcategory]/ # サブカテゴリページ
+│   │       ├── page.tsx   # → dashboard にリダイレクト
+│   │       ├── dashboard/ # ダッシュボードページ
+│   │       │   ├── page.tsx # → dashboard/00000 にリダイレクト
+│   │       │   └── [areaCode]/page.tsx # ダッシュボード（全国・都道府県）
+│   │       └── ranking/page.tsx # ランキングページ
 │   ├── choropleth/        # コロプレスマップ表示ページ
 │   └── estat/             # e-Stat関連の各機能ページ
 ├── components/             # Reactコンポーネント
@@ -259,7 +265,7 @@ src/types/
 
 ### API クライアントの実装
 
-APIクライアントは `src/services/estat-api.ts` に実装されています。
+API クライアントは `src/services/estat-api.ts` に実装されています。
 
 ```typescript
 // src/services/estat-api.ts
@@ -323,9 +329,9 @@ export const estatAPI = new EstatAPIClient();
 
 #### データ保護
 
-- **プリペアドステートメント**: Cloudflare D1へのクエリは、SQLインジェクションを防ぐためにプリペアドステートメントを利用することが推奨されます。
+- **プリペアドステートメント**: Cloudflare D1 へのクエリは、SQL インジェクションを防ぐためにプリペアドステートメントを利用することが推奨されます。
 - **入力バリデーション**: フロントエンドとバックエンドの両方で、予期せぬ入力からシステムを保護するためのバリデーションが実装されています。
-- **HTTPS 通信**: 本番環境では、通信はすべてHTTPSで暗号化され、データの盗聴や改ざんを防ぎます。
+- **HTTPS 通信**: 本番環境では、通信はすべて HTTPS で暗号化され、データの盗聴や改ざんを防ぎます。
 
 ## パフォーマンス・スケーラビリティ
 
@@ -491,17 +497,17 @@ GET /api/rankings/search?q={query}&category={category}&dataType={type}
 
 ```typescript
 // 設定取得
-GET /api/visualizations/{id}/settings
-GET /api/visualizations/templates
-GET /api/visualizations/templates/{type}
+GET / api / visualizations / { id } / settings;
+GET / api / visualizations / templates;
+GET / api / visualizations / templates / { type };
 
 // 設定保存（管理者用）
-POST /api/visualizations
-PUT /api/visualizations/{id}
-DELETE /api/visualizations/{id}
+POST / api / visualizations;
+PUT / api / visualizations / { id };
+DELETE / api / visualizations / { id };
 
 // アクセス統計更新
-POST /api/visualizations/{id}/view
+POST / api / visualizations / { id } / view;
 ```
 
 #### データ取得 API
@@ -545,7 +551,7 @@ function processApiData(apiResponse: any): NormalizedData {
 interface RankingSettings {
   mapColorScheme: string;
   mapDivergingMidpoint: string;
-  rankingDirection: 'asc' | 'desc';
+  rankingDirection: "asc" | "desc";
   conversionFactor: number;
   decimalPlaces: number;
 }
@@ -561,11 +567,11 @@ function convertAndFormatValue(
 
 // 使用例
 const settings: RankingSettings = {
-  mapColorScheme: 'interpolateBlues',
-  mapDivergingMidpoint: 'zero',
-  rankingDirection: 'desc',
-  conversionFactor: 0.01,  // 百万円 → 億円
-  decimalPlaces: 1
+  mapColorScheme: "interpolateBlues",
+  mapDivergingMidpoint: "zero",
+  rankingDirection: "desc",
+  conversionFactor: 0.01, // 百万円 → 億円
+  decimalPlaces: 1,
 };
 
 const rawGdp = 5420000; // 5,420,000百万円

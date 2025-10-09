@@ -1,3 +1,3 @@
 export { BusinessScalePage } from "./BusinessScalePage";
-export { BusinessScaleAreaPage } from "./BusinessScaleAreaPage";
+export { BusinessScaleDashboard } from "./BusinessScaleDashboard";
 export { BusinessScaleRanking } from "./BusinessScaleRanking";

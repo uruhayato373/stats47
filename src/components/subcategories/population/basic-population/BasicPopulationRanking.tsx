@@ -2,15 +2,13 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface BasicPopulationRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab = "totalPopulation" | "populationDensity" | "didAreaRatio";
 
-export const BasicPopulationRanking: React.FC<BasicPopulationRankingProps> = ({
+export const BasicPopulationRanking: React.FC<SubcategoryRankingPageProps> = ({
+  category,
   subcategory,
 }) => {
   const [activeTab, setActiveTab] = useState<RankingTab>("totalPopulation");
@@ -39,7 +37,11 @@ export const BasicPopulationRanking: React.FC<BasicPopulationRankingProps> = ({
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -97,6 +99,6 @@ export const BasicPopulationRanking: React.FC<BasicPopulationRankingProps> = ({
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

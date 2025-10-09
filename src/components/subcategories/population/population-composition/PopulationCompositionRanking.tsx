@@ -2,11 +2,8 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/dashboard/Ranking";
-import { SubcategoryData } from "@/types/choropleth";
-
-interface PopulationCompositionRankingProps {
-  subcategory: SubcategoryData;
-}
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryRankingPageProps } from "@/types/subcategory";
 
 type RankingTab =
   | "youngPopulation"
@@ -15,8 +12,8 @@ type RankingTab =
   | "sexRatio";
 
 export const PopulationCompositionRanking: React.FC<
-  PopulationCompositionRankingProps
-> = ({ subcategory }) => {
+  SubcategoryRankingPageProps
+> = ({ category, subcategory }) => {
   const [activeTab, setActiveTab] = useState<RankingTab>("youngPopulation");
 
   const rankings = {
@@ -49,7 +46,11 @@ export const PopulationCompositionRanking: React.FC<
   const activeRanking = rankings[activeTab];
 
   return (
-    <>
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="ranking"
+    >
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -117,6 +118,6 @@ export const PopulationCompositionRanking: React.FC<
         mapWidth={800}
         mapHeight={600}
       />
-    </>
+    </SubcategoryLayout>
   );
 };

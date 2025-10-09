@@ -1,3 +1,3 @@
 export { CompulsoryEducationPage } from "./CompulsoryEducationPage";
-export { CompulsoryEducationAreaPage } from "./CompulsoryEducationAreaPage";
+export { CompulsoryEducationDashboard } from "./CompulsoryEducationDashboard";
 export { CompulsoryEducationRanking } from "./CompulsoryEducationRanking";

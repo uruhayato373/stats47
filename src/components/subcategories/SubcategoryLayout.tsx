@@ -1,23 +1,28 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Header from '@/components/layout/Header';
-import Sidebar from '@/components/layout/Sidebar';
-import { CategoryIcon } from '@/components/choropleth/CategoryIcon';
-import { SubcategoryNavigation } from './SubcategoryNavigation';
-import { PrefectureSelector } from './PrefectureSelector';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
+import React from "react";
+import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
+import { SubcategoryNavigation } from "./SubcategoryNavigation";
+import { SubcategoryViewNavigation } from "./SubcategoryViewNavigation";
+import { PrefectureSelector } from "./PrefectureSelector";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface SubcategoryLayoutProps {
   category: CategoryData;
   subcategory: SubcategoryData;
   children: React.ReactNode;
+  viewType?: "dashboard" | "ranking"; // 追加
+  areaCode?: string; // 追加（dashboardの場合のみ）
 }
 
 export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
   category,
   subcategory,
   children,
+  viewType = "dashboard",
+  areaCode,
 }) => {
   return (
     <>
@@ -32,7 +37,10 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
             <div className="flex items-center gap-4">
               {/* カテゴリアイコン */}
               <div className="flex-shrink-0">
-                <CategoryIcon iconName={category.icon} className="w-6 h-6 text-indigo-600" />
+                <CategoryIcon
+                  iconName={category.icon}
+                  className="w-6 h-6 text-indigo-600"
+                />
               </div>
 
               <div>
@@ -50,19 +58,33 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
               </div>
             </div>
 
-            {/* 都道府県セレクター */}
-            <div className="flex-shrink-0">
-              <PrefectureSelector category={category} subcategory={subcategory} />
-            </div>
+            {/* 都道府県セレクター（ダッシュボードの場合のみ） */}
+            {viewType === "dashboard" && (
+              <div className="flex-shrink-0">
+                <PrefectureSelector
+                  category={category}
+                  subcategory={subcategory}
+                />
+              </div>
+            )}
           </div>
 
           {/* サブカテゴリナビゲーション */}
-          <SubcategoryNavigation category={category} currentSubcategory={subcategory} />
+          <SubcategoryNavigation
+            category={category}
+            currentSubcategory={subcategory}
+          />
+
+          {/* ダッシュボード/ランキング切り替えタブ */}
+          <SubcategoryViewNavigation
+            category={category}
+            subcategory={subcategory}
+            currentView={viewType}
+            areaCode={areaCode}
+          />
 
           {/* メインコンテンツ */}
-          <div className="flex-1 overflow-hidden">
-            {children}
-          </div>
+          <div className="flex-1 overflow-hidden">{children}</div>
         </div>
       </main>
     </>

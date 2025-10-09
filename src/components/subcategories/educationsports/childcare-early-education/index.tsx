@@ -1,3 +1,3 @@
 export { ChildcareEarlyEducationPage } from "./ChildcareEarlyEducationPage";
-export { ChildcareEarlyEducationAreaPage } from "./ChildcareEarlyEducationAreaPage";
+export { ChildcareEarlyEducationDashboard } from "./ChildcareEarlyEducationDashboard";
 export { ChildcareEarlyEducationRanking } from "./ChildcareEarlyEducationRanking";

@@ -2,6 +2,8 @@ import React from "react";
 import {
   SubcategoryPageProps,
   SubcategoryAreaPageProps,
+  SubcategoryDashboardPageProps,
+  SubcategoryRankingPageProps,
   CategoryConfig,
 } from "@/types/subcategory";
 import categories from "@/config/categories.json";
@@ -45,20 +47,43 @@ const componentMap: Record<string, any> = {
 };
 
 // デフォルトのプレースホルダーコンポーネント
-const DefaultSubcategoryPage: React.FC<
-  SubcategoryPageProps | SubcategoryAreaPageProps
-> = ({ category, subcategory }) => {
+const DefaultDashboardPage: React.FC<SubcategoryDashboardPageProps> = ({
+  category,
+  subcategory,
+  areaCode,
+}) => {
   return (
     <div className="flex-1 flex items-center justify-center p-8">
       <div className="text-center max-w-md">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          {subcategory.name}
+          {subcategory.name} ダッシュボード
         </h2>
         <p className="text-gray-600 dark:text-neutral-400 mb-4">
           このページは現在開発中です。
         </p>
         <p className="text-sm text-gray-500 dark:text-neutral-500">
-          実装方法については BasicPopulationPage.tsx を参考にしてください。
+          実装方法については BasicPopulationDashboard.tsx を参考にしてください。
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const DefaultRankingPage: React.FC<SubcategoryRankingPageProps> = ({
+  category,
+  subcategory,
+}) => {
+  return (
+    <div className="flex-1 flex items-center justify-center p-8">
+      <div className="text-center max-w-md">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          {subcategory.name} ランキング
+        </h2>
+        <p className="text-gray-600 dark:text-neutral-400 mb-4">
+          このページは現在開発中です。
+        </p>
+        <p className="text-sm text-gray-500 dark:text-neutral-500">
+          実装方法については BasicPopulationRanking.tsx を参考にしてください。
         </p>
       </div>
     </div>
@@ -82,39 +107,72 @@ const getSubcategoryInfo = (subcategoryId: string, categoryId?: string) => {
 };
 
 /**
- * サブカテゴリーIDに対応するコンポーネントを取得
- * マッピングが存在しない場合はデフォルトコンポーネントを返す
+ * ダッシュボードコンポーネントを取得
+ */
+export const getDashboardComponent = (
+  subcategoryId: string,
+  categoryId?: string
+): React.ComponentType<SubcategoryDashboardPageProps> => {
+  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
+
+  if (!subcategory?.dashboardComponent) {
+    return DefaultDashboardPage;
+  }
+
+  return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
+};
+
+/**
+ * ランキングコンポーネントを取得
+ */
+export const getRankingComponent = (
+  subcategoryId: string,
+  categoryId?: string
+): React.ComponentType<SubcategoryRankingPageProps> => {
+  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
+
+  if (!subcategory?.rankingComponent) {
+    return DefaultRankingPage;
+  }
+
+  return componentMap[subcategory.rankingComponent] || DefaultRankingPage;
+};
+
+/**
+ * サブカテゴリーIDに対応するコンポーネントを取得（後方互換性のため維持）
+ * @deprecated getDashboardComponent を使用してください
  */
 export const getSubcategoryComponent = (
   subcategoryId: string,
   categoryId?: string
 ): React.ComponentType<SubcategoryPageProps> => {
   const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
-  if (!subcategory?.component) return DefaultSubcategoryPage;
+  if (!subcategory?.dashboardComponent) return DefaultDashboardPage;
 
-  return componentMap[subcategory.component] || DefaultSubcategoryPage;
+  return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
 };
 
 /**
- * サブカテゴリーIDに対応する都道府県別ページコンポーネントを取得
- * マッピングが存在しない場合はデフォルトコンポーネントを返す
+ * サブカテゴリーIDに対応する都道府県別ページコンポーネントを取得（後方互換性のため維持）
+ * @deprecated getDashboardComponent を使用してください
  */
 export const getAreaPageComponent = (
   subcategoryId: string
 ): React.ComponentType<SubcategoryAreaPageProps> => {
   const subcategory = getSubcategoryInfo(subcategoryId);
 
-  if (!subcategory?.areaComponent) {
-    return DefaultSubcategoryPage;
+  if (!subcategory?.dashboardComponent) {
+    return DefaultDashboardPage;
   }
 
-  const component = componentMap[subcategory.areaComponent];
+  const component = componentMap[subcategory.dashboardComponent];
 
-  return component || DefaultSubcategoryPage;
+  return component || DefaultDashboardPage;
 };
 
 // 共通コンポーネント
 export { SubcategoryLayout } from "./SubcategoryLayout";
+export { SubcategoryViewNavigation } from "./SubcategoryViewNavigation";
 export { PrefectureSelector } from "./PrefectureSelector";
 
 // カテゴリー別エクスポート
