@@ -12,7 +12,9 @@ type RankingTab =
   | "schoolCount"
   | "studentCount"
   | "perCapitaCount"
-  | "perAreaCount";
+  | "perAreaCount"
+  | "gymInstallationRate"
+  | "poolInstallationRate";
 
 export const ElementarySchoolRanking: React.FC<
   ElementarySchoolRankingProps
@@ -43,6 +45,18 @@ export const ElementarySchoolRanking: React.FC<
       cdCat01: "#E0110201",
       unit: "校",
       name: "小学校数（可住地面積100km2当たり）",
+    },
+    gymInstallationRate: {
+      statsDataId: "0000010205",
+      cdCat01: "#E02601",
+      unit: "％",
+      name: "公立小学校屋内運動場設置率",
+    },
+    poolInstallationRate: {
+      statsDataId: "0000010205",
+      cdCat01: "#E02701",
+      unit: "％",
+      name: "公立小学校プール設置率",
     },
   };
 
@@ -93,6 +107,26 @@ export const ElementarySchoolRanking: React.FC<
               }`}
             >
               面積当たり数
+            </button>
+            <button
+              onClick={() => setActiveTab("gymInstallationRate")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "gymInstallationRate"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              体育館設置率
+            </button>
+            <button
+              onClick={() => setActiveTab("poolInstallationRate")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "poolInstallationRate"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              プール設置率
             </button>
           </nav>
         </div>

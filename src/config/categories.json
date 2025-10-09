@@ -106,6 +106,20 @@
         "areaComponent": "LaborForceStructureAreaPage"
       },
       {
+        "id": "industrial-structure",
+        "name": "産業構造",
+        "href": "/industrial-structure",
+        "component": "IndustrialStructurePage",
+        "areaComponent": "IndustrialStructureAreaPage"
+      },
+      {
+        "id": "commuting-employment",
+        "name": "通勤・就職",
+        "href": "/commuting-employment",
+        "component": "CommutingEmploymentPage",
+        "areaComponent": "CommutingEmploymentAreaPage"
+      },
+      {
         "id": "labor-disputes",
         "name": "労働争議",
         "href": "/labor-disputes",
@@ -201,6 +215,27 @@
         "areaComponent": "WorkerHouseholdIncomeAreaPage"
       },
       {
+        "id": "household-economy",
+        "name": "家計",
+        "href": "/household-economy",
+        "component": "HouseholdEconomyPage",
+        "areaComponent": "HouseholdEconomyAreaPage"
+      },
+      {
+        "id": "business-scale",
+        "name": "企業規模",
+        "href": "/business-scale",
+        "component": "BusinessScalePage",
+        "areaComponent": "BusinessScaleAreaPage"
+      },
+      {
+        "id": "business-activity",
+        "name": "企業活動",
+        "href": "/business-activity",
+        "component": "BusinessActivityPage",
+        "areaComponent": "BusinessActivityAreaPage"
+      },
+      {
         "id": "gross-product-economic-indicators",
         "name": "総生産・経済指標",
         "href": "/gross-product-economic-indicators",
@@ -256,6 +291,20 @@
         "href": "/construction-manufacturing",
         "component": "ConstructionManufacturingPage",
         "areaComponent": "ConstructionManufacturingAreaPage"
+      },
+      {
+        "id": "welfare-facilities",
+        "name": "福祉施設",
+        "href": "/welfare-facilities",
+        "component": "WelfareFacilitiesPage",
+        "areaComponent": "WelfareFacilitiesAreaPage"
+      },
+      {
+        "id": "housing-statistics",
+        "name": "住宅統計",
+        "href": "/housing-statistics",
+        "component": "HousingStatisticsPage",
+        "areaComponent": "HousingStatisticsAreaPage"
       }
     ]
   },
@@ -350,6 +399,41 @@
         "href": "/college-university",
         "component": "CollegeUniversityPage",
         "areaComponent": "CollegeUniversityAreaPage"
+      },
+      {
+        "id": "cultural-facilities",
+        "name": "文化施設",
+        "href": "/cultural-facilities",
+        "component": "CulturalFacilitiesPage",
+        "areaComponent": "CulturalFacilitiesAreaPage"
+      },
+      {
+        "id": "sports-facilities",
+        "name": "スポーツ施設",
+        "href": "/sports-facilities",
+        "component": "SportsFacilitiesPage",
+        "areaComponent": "SportsFacilitiesAreaPage"
+      },
+      {
+        "id": "social-activities",
+        "name": "社会活動",
+        "href": "/social-activities",
+        "component": "SocialActivitiesPage",
+        "areaComponent": "SocialActivitiesAreaPage"
+      },
+      {
+        "id": "childcare-early-education",
+        "name": "保育・幼児教育",
+        "href": "/childcare-early-education",
+        "component": "ChildcareEarlyEducationPage",
+        "areaComponent": "ChildcareEarlyEducationAreaPage"
+      },
+      {
+        "id": "compulsory-education",
+        "name": "義務教育",
+        "href": "/compulsory-education",
+        "component": "CompulsoryEducationPage",
+        "areaComponent": "CompulsoryEducationAreaPage"
       }
     ]
   },
@@ -431,6 +515,13 @@
         "areaComponent": "PoliceCrimeAreaPage"
       },
       {
+        "id": "traffic-accidents",
+        "name": "交通事故",
+        "href": "/traffic-accidents",
+        "component": "TrafficAccidentsPage",
+        "areaComponent": "TrafficAccidentsAreaPage"
+      },
+      {
         "id": "pollution-environment",
         "name": "公害・環境",
         "href": "/pollution-environment",
@@ -458,6 +549,20 @@
         "href": "/death-statistics",
         "component": "DeathStatisticsPage",
         "areaComponent": "DeathStatisticsAreaPage"
+      },
+      {
+        "id": "public-assistance-welfare",
+        "name": "生活保護・福祉",
+        "href": "/public-assistance-welfare",
+        "component": "PublicAssistanceWelfarePage",
+        "areaComponent": "PublicAssistanceWelfareAreaPage"
+      },
+      {
+        "id": "health-care",
+        "name": "健康・保健",
+        "href": "/health-care",
+        "component": "HealthCarePage",
+        "areaComponent": "HealthCareAreaPage"
       }
     ]
   },
@@ -468,11 +573,11 @@
     "color": "blue",
     "subcategories": [
       {
-        "id": "foreigners",
-        "name": "外国人",
-        "href": "/foreigners",
-        "component": "ForeignersPage",
-        "areaComponent": "ForeignersAreaPage"
+        "id": "foreign-population",
+        "name": "外国人人口",
+        "href": "/foreign-population",
+        "component": "ForeignPopulationPage",
+        "areaComponent": "ForeignPopulationAreaPage"
       }
     ]
   },
@@ -480,6 +585,15 @@
     "id": "infrastructure",
     "name": "社会基盤施設",
     "icon": "FaRoad",
-    "color": "gray"
+    "color": "gray",
+    "subcategories": [
+      {
+        "id": "roads",
+        "name": "道路",
+        "href": "/roads",
+        "component": "RoadsPage",
+        "areaComponent": "RoadsAreaPage"
+      }
+    ]
   }
 ]

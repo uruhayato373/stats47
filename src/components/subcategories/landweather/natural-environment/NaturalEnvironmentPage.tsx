@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { NaturalEnvironmentRanking } from "./NaturalEnvironmentRanking";
 
 interface NaturalEnvironmentPageProps {
   category: CategoryData;
@@ -16,11 +16,11 @@ export const NaturalEnvironmentPage: React.FC<NaturalEnvironmentPageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = '0000010102';
-  const statsDataIdRatio = '0000010202';
+  const statsDataId = "0000010102";
+  const statsDataIdRatio = "0000010202";
   const cdCat01 = {
-    forestArea: 'B1106', // 森林面積
-    forestRatio: '#B01202', // 森林面積割合
+    forestArea: "B1106", // 森林面積
+    forestRatio: "#B01202", // 森林面積割合
   };
 
   return (
@@ -49,24 +49,13 @@ export const NaturalEnvironmentPage: React.FC<NaturalEnvironmentPageProps> = ({
         </div>
       </div>
 
-      {/* ランキング */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataIdRatio,
-          cdCat01: cdCat01.forestRatio,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '%',
-          name: '森林面積割合',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateGreens',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <NaturalEnvironmentRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };

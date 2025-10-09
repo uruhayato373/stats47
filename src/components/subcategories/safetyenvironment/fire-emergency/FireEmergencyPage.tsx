@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { FireEmergencyRanking } from "./FireEmergencyRanking";
 
 interface FireEmergencyPageProps {
   category: CategoryData;
@@ -16,11 +16,10 @@ export const FireEmergencyPage: React.FC<FireEmergencyPageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = '0000010111';
-  const statsDataIdRatio = '0000010111';
+  const statsDataId = "0000010111";
   const cdCat01 = {
-    K1101: 'K1101',
-    K1210: 'K1210',
+    K1101: "K1101",
+    K1210: "K1210",
   };
 
   return (
@@ -48,23 +47,13 @@ export const FireEmergencyPage: React.FC<FireEmergencyPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.K1210,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '件',
-          name: '救急出動件数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <FireEmergencyRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };

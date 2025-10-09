@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { AgriculturalHouseholdRanking } from "./AgriculturalHouseholdRanking";
 
 interface AgriculturalHouseholdPageProps {
   category: CategoryData;
@@ -12,15 +12,13 @@ interface AgriculturalHouseholdPageProps {
   currentYear: string;
 }
 
-export const AgriculturalHouseholdPage: React.FC<AgriculturalHouseholdPageProps> = ({
-  category,
-  subcategory,
-}) => {
-  const statsDataId = '0000010103';
-  const statsDataIdRatio = '0000010103';
+export const AgriculturalHouseholdPage: React.FC<
+  AgriculturalHouseholdPageProps
+> = ({ category, subcategory }) => {
+  const statsDataId = "0000010103";
   const cdCat01 = {
-    C3101: 'C3101',
-    C3102: 'C3102',
+    C3101: "C3101",
+    C3102: "C3102",
   };
 
   return (
@@ -48,23 +46,13 @@ export const AgriculturalHouseholdPage: React.FC<AgriculturalHouseholdPageProps>
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C3101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '百万円',
-          name: '農業産出額',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <AgriculturalHouseholdRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };

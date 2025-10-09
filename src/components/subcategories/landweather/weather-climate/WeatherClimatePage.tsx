@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { WeatherClimateRanking } from "./WeatherClimateRanking";
 
 interface WeatherClimatePageProps {
   category: CategoryData;
@@ -12,36 +12,15 @@ interface WeatherClimatePageProps {
   currentYear: string;
 }
 
-type RankingTab = 'temperature' | 'precipitation';
-
 export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
   category,
   subcategory,
 }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>('temperature');
-
-  const statsDataId = '0000010102';
+  const statsDataId = "0000010202";
   const cdCat01 = {
-    avgTemperature: 'B4101',
-    precipitation: 'B4109',
+    avgTemperature: "#B02101",
+    precipitation: "#B02402",
   };
-
-  const rankings = {
-    temperature: {
-      statsDataId: statsDataId,
-      cdCat01: cdCat01.avgTemperature,
-      unit: '℃',
-      name: '年平均気温',
-    },
-    precipitation: {
-      statsDataId: statsDataId,
-      cdCat01: cdCat01.precipitation,
-      unit: 'mm',
-      name: '年間降水量',
-    },
-  };
-
-  const activeRanking = rankings[activeTab];
 
   return (
     <SubcategoryLayout category={category} subcategory={subcategory}>
@@ -68,42 +47,13 @@ export const WeatherClimatePage: React.FC<WeatherClimatePageProps> = ({
         </div>
       </div>
 
-      <div className="px-4">
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-            <button
-              onClick={() => setActiveTab('temperature')}
-              className="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
-            >
-              年平均気温
-            </button>
-            <button
-              onClick={() => setActiveTab('precipitation')}
-              className="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
-            >
-              年間降水量
-            </button>
-          </nav>
-        </div>
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <WeatherClimateRanking subcategory={subcategory} />
       </div>
-
-      <EstatRanking
-        params={{
-          statsDataId: activeRanking.statsDataId,
-          cdCat01: activeRanking.cdCat01,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: activeRanking.unit,
-          name: activeRanking.name,
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateRdYlBu',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
     </SubcategoryLayout>
   );
 };

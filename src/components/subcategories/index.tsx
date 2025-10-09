@@ -22,6 +22,7 @@ import * as AdministrativeFinancial from "./administrativefinancial";
 import * as SafetyEnvironment from "./safetyenvironment";
 import * as SocialSecurity from "./socialsecurity";
 import * as International from "./international";
+import * as Infrastructure from "./infrastructure";
 
 // すべてのコンポーネントをマッピング
 const componentMap: Record<string, any> = {
@@ -40,6 +41,7 @@ const componentMap: Record<string, any> = {
   ...SafetyEnvironment,
   ...SocialSecurity,
   ...International,
+  ...Infrastructure,
 };
 
 // デフォルトのプレースホルダーコンポーネント
@@ -131,3 +133,4 @@ export * from "./administrativefinancial";
 export * from "./safetyenvironment";
 export * from "./socialsecurity";
 export * from "./international";
+export * from "./infrastructure";

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
-import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/dashboard/Ranking';
+import React from "react";
+import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { LandAreaRanking } from "./LandAreaRanking";
 
 interface LandAreaPageProps {
   category: CategoryData;
@@ -16,10 +16,10 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
   category,
   subcategory,
 }) => {
-  const statsDataId = '0000010102';
+  const statsDataId = "0000010102";
   const cdCat01 = {
-    totalArea: 'B1101', // 総面積
-    habitableArea: 'B1103', // 可住地面積
+    totalArea: "B1101", // 総面積
+    habitableArea: "B1103", // 可住地面積
   };
 
   return (
@@ -48,24 +48,13 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
         </div>
       </div>
 
-      {/* ランキング */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.habitableArea,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: 'ha',
-          name: '可住地面積',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateGreens',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      {/* ランキングセクション */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+          ランキング
+        </h2>
+        <LandAreaRanking subcategory={subcategory} />
+      </div>
     </SubcategoryLayout>
   );
 };

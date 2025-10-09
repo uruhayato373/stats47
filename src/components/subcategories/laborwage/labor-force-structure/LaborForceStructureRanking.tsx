@@ -12,7 +12,12 @@ type RankingTab =
   | "employedPeople"
   | "unemploymentRate"
   | "unemploymentRateMale"
-  | "unemploymentRateFemale";
+  | "unemploymentRateFemale"
+  | "laborForceRatioMale"
+  | "laborForceRatioFemale"
+  | "employedRatio"
+  | "employeeRatio"
+  | "dualIncomeHouseholdRatio";
 
 export const LaborForceStructureRanking: React.FC<
   LaborForceStructureRankingProps
@@ -43,6 +48,36 @@ export const LaborForceStructureRanking: React.FC<
       cdCat01: "#F0130102",
       unit: "%",
       name: "完全失業率（女）",
+    },
+    laborForceRatioMale: {
+      statsDataId: "0000010206",
+      cdCat01: "#F0110101",
+      unit: "％",
+      name: "労働力人口比率（男）",
+    },
+    laborForceRatioFemale: {
+      statsDataId: "0000010206",
+      cdCat01: "#F0110102",
+      unit: "％",
+      name: "労働力人口比率（女）",
+    },
+    employedRatio: {
+      statsDataId: "0000010206",
+      cdCat01: "#F01102",
+      unit: "％",
+      name: "就業者比率",
+    },
+    employeeRatio: {
+      statsDataId: "0000010206",
+      cdCat01: "#F02301",
+      unit: "％",
+      name: "雇用者比率",
+    },
+    dualIncomeHouseholdRatio: {
+      statsDataId: "0000010206",
+      cdCat01: "#F01503",
+      unit: "％",
+      name: "共働き世帯割合",
     },
   };
 
@@ -93,6 +128,56 @@ export const LaborForceStructureRanking: React.FC<
               }`}
             >
               完全失業率（女）
+            </button>
+            <button
+              onClick={() => setActiveTab("laborForceRatioMale")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "laborForceRatioMale"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              労働力人口比率（男）
+            </button>
+            <button
+              onClick={() => setActiveTab("laborForceRatioFemale")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "laborForceRatioFemale"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              労働力人口比率（女）
+            </button>
+            <button
+              onClick={() => setActiveTab("employedRatio")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "employedRatio"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              就業者比率
+            </button>
+            <button
+              onClick={() => setActiveTab("employeeRatio")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "employeeRatio"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              雇用者比率
+            </button>
+            <button
+              onClick={() => setActiveTab("dualIncomeHouseholdRatio")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "dualIncomeHouseholdRatio"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              共働き世帯割合
             </button>
           </nav>
         </div>

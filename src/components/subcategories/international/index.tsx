@@ -1,1 +1,1 @@
-export { ForeignersPage } from './foreigners';
+export * from "./foreign-population";

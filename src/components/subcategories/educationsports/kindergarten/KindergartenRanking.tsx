@@ -8,7 +8,11 @@ interface KindergartenRankingProps {
   subcategory: SubcategoryData;
 }
 
-type RankingTab = "kindergartenCount" | "enrollmentCount" | "perCapitaCount";
+type RankingTab =
+  | "kindergartenCount"
+  | "enrollmentCount"
+  | "perCapitaCount"
+  | "publicRatio";
 
 export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
   subcategory,
@@ -33,6 +37,12 @@ export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
       cdCat01: "#E0110104",
       unit: "園",
       name: "幼稚園数（3～5歳人口10万人当たり）",
+    },
+    publicRatio: {
+      statsDataId: "0000010205",
+      cdCat01: "#E01304",
+      unit: "％",
+      name: "公立幼稚園割合",
     },
   };
 
@@ -73,6 +83,16 @@ export const KindergartenRanking: React.FC<KindergartenRankingProps> = ({
               }`}
             >
               人口当たり数
+            </button>
+            <button
+              onClick={() => setActiveTab("publicRatio")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "publicRatio"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              公立割合
             </button>
           </nav>
         </div>

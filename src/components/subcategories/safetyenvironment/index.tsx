@@ -1,4 +1,5 @@
-export { FireEmergencyPage } from './fire-emergency';
-export { FireInsurancePage } from './fire-insurance';
-export { PoliceCrimePage } from './police-crime';
-export { PollutionEnvironmentPage } from './pollution-environment';
+export * from "./traffic-accidents";
+export * from "./fire-emergency";
+export * from "./fire-insurance";
+export * from "./police-crime";
+export * from "./pollution-environment";

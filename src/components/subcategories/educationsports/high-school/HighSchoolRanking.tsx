@@ -13,7 +13,8 @@ type RankingTab =
   | "studentCount"
   | "perCapitaCount"
   | "perAreaCount"
-  | "publicRatio";
+  | "publicRatio"
+  | "poolInstallationRate";
 
 export const HighSchoolRanking: React.FC<HighSchoolRankingProps> = ({
   subcategory,
@@ -50,6 +51,12 @@ export const HighSchoolRanking: React.FC<HighSchoolRankingProps> = ({
       cdCat01: "#E01303",
       unit: "%",
       name: "公立高等学校割合",
+    },
+    poolInstallationRate: {
+      statsDataId: "0000010205",
+      cdCat01: "#E02703",
+      unit: "％",
+      name: "公立高等学校プール設置率",
     },
   };
 
@@ -110,6 +117,16 @@ export const HighSchoolRanking: React.FC<HighSchoolRankingProps> = ({
               }`}
             >
               公立割合
+            </button>
+            <button
+              onClick={() => setActiveTab("poolInstallationRate")}
+              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "poolInstallationRate"
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              プール設置率
             </button>
           </nav>
         </div>
