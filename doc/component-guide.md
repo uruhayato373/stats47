@@ -966,7 +966,6 @@ src/
 │   └── choropleth/
 │       ├── CategorySidebar.tsx      # カテゴリ選択
 │       ├── YearSelector.tsx         # 年度選択
-│       ├── JapanMap.tsx             # 地図表示コンポーネント
 │       └── PrefectureDataTable.tsx  # データテーブル
 ├── lib/
 │   └── choropleth/
