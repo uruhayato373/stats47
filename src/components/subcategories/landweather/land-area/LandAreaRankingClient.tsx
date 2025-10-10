@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { EstatRanking } from "@/components/ranking";
-import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { SubcategoryRankingPageProps } from "@/types/subcategory";
+import { SubcategoryData } from "@/types/choropleth";
 
 type RankingTab =
   | "totalAreaExcluding"
@@ -14,65 +13,27 @@ type RankingTab =
   | "areaRatio"
   | "habitableAreaRatio";
 
-export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = ({
-  category,
+interface RankingData {
+  statsDataId: string;
+  cdCat01: string;
+  unit: string;
+  name: string;
+}
+
+interface LandAreaRankingClientProps {
+  rankings: Record<RankingTab, RankingData>;
+  subcategory: SubcategoryData;
+}
+
+export const LandAreaRankingClient: React.FC<LandAreaRankingClientProps> = ({
+  rankings,
   subcategory,
 }) => {
   const [activeTab, setActiveTab] = useState<RankingTab>("totalAreaExcluding");
-
-  const rankings = {
-    totalAreaExcluding: {
-      statsDataId: "0000010102",
-      cdCat01: "B1101",
-      unit: "ha",
-      name: "総面積（北方地域及び竹島を除く）",
-    },
-    totalAreaIncluding: {
-      statsDataId: "0000010102",
-      cdCat01: "B1102",
-      unit: "ha",
-      name: "総面積（北方地域及び竹島を含む）",
-    },
-    habitableArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1103",
-      unit: "ha",
-      name: "可住地面積",
-    },
-    majorLakeArea: {
-      statsDataId: "0000010102",
-      cdCat01: "B1104",
-      unit: "ha",
-      name: "主要湖沼面積",
-    },
-    totalAreaIncludingRatio: {
-      statsDataId: "0000010202",
-      cdCat01: "#B011001",
-      unit: "100km²",
-      name: "総面積（北方地域及び竹島を含む）",
-    },
-    areaRatio: {
-      statsDataId: "0000010202",
-      cdCat01: "#B01101",
-      unit: "%",
-      name: "面積割合（全国面積に占める割合）",
-    },
-    habitableAreaRatio: {
-      statsDataId: "0000010202",
-      cdCat01: "#B01301",
-      unit: "%",
-      name: "可住地面積割合",
-    },
-  };
-
   const activeRanking = rankings[activeTab];
 
   return (
-    <SubcategoryLayout
-      category={category}
-      subcategory={subcategory}
-      viewType="ranking"
-    >
+    <>
       {/* タブ */}
       <div className="px-4">
         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -173,6 +134,6 @@ export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = ({
         mapWidth={800}
         mapHeight={600}
       />
-    </SubcategoryLayout>
+    </>
   );
 };
