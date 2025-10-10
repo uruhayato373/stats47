@@ -32,108 +32,65 @@ export const LandAreaRankingClient: React.FC<LandAreaRankingClientProps> = ({
   const [activeTab, setActiveTab] = useState<RankingTab>("totalAreaExcluding");
   const activeRanking = rankings[activeTab];
 
+  const tabOptions = [
+    { key: "totalAreaExcluding" as RankingTab, label: "総面積（除く）" },
+    { key: "totalAreaIncluding" as RankingTab, label: "総面積（含む）" },
+    { key: "habitableArea" as RankingTab, label: "可住地面積" },
+    { key: "majorLakeArea" as RankingTab, label: "主要湖沼面積" },
+    { key: "totalAreaIncludingRatio" as RankingTab, label: "総面積（100km²）" },
+    { key: "areaRatio" as RankingTab, label: "面積割合" },
+    { key: "habitableAreaRatio" as RankingTab, label: "可住地面積割合" },
+  ];
+
   return (
-    <>
-      {/* タブ */}
-      <div className="px-4">
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav
-            className="-mb-px flex space-x-8 overflow-x-auto"
-            aria-label="Tabs"
-          >
-            <button
-              onClick={() => setActiveTab("totalAreaExcluding")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "totalAreaExcluding"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              総面積（除く）
-            </button>
-            <button
-              onClick={() => setActiveTab("totalAreaIncluding")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "totalAreaIncluding"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              総面積（含む）
-            </button>
-            <button
-              onClick={() => setActiveTab("habitableArea")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "habitableArea"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              可住地面積
-            </button>
-            <button
-              onClick={() => setActiveTab("majorLakeArea")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "majorLakeArea"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              主要湖沼面積
-            </button>
-            <button
-              onClick={() => setActiveTab("totalAreaIncludingRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "totalAreaIncludingRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              総面積（100km²）
-            </button>
-            <button
-              onClick={() => setActiveTab("areaRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "areaRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              面積割合
-            </button>
-            <button
-              onClick={() => setActiveTab("habitableAreaRatio")}
-              className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === "habitableAreaRatio"
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-              }`}
-            >
-              可住地面積割合
-            </button>
-          </nav>
-        </div>
+    <div className="flex flex-col lg:flex-row">
+      {/* メインコンテンツ */}
+      <div className="flex-1">
+        <EstatRanking
+          params={{
+            statsDataId: activeRanking.statsDataId,
+            cdCat01: activeRanking.cdCat01,
+          }}
+          subcategory={{
+            ...subcategory,
+            unit: activeRanking.unit,
+            name: activeRanking.name,
+          }}
+          title={`${activeRanking.name}ランキング`}
+          options={{
+            colorScheme: subcategory.colorScheme || "interpolateGreens",
+            divergingMidpoint: "zero",
+          }}
+          mapWidth={800}
+          mapHeight={600}
+        />
       </div>
 
-      {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: activeRanking.statsDataId,
-          cdCat01: activeRanking.cdCat01,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: activeRanking.unit,
-          name: activeRanking.name,
-        }}
-        title={`${activeRanking.name}ランキング`}
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateGreens",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
-    </>
+      {/* 右側のリスト */}
+      <div className="lg:w-60 flex-shrink-0">
+        <div className="lg:border-l border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 p-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              統計項目
+            </h3>
+            <nav className="space-y-2" aria-label="統計項目">
+              {tabOptions.map((option) => (
+                <button
+                  key={option.key}
+                  onClick={() => setActiveTab(option.key)}
+                  className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    activeTab === option.key
+                      ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
+                      : "text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
