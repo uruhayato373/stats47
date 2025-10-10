@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
@@ -18,7 +16,10 @@ export const SubcategoryNavigation: React.FC<SubcategoryNavigationProps> = ({
 }) => {
   return (
     <div className="border-b border-gray-200 dark:border-neutral-700">
-      <nav className="-mb-px flex space-x-8 overflow-x-auto px-4" aria-label="サブカテゴリ">
+      <nav
+        className="-mb-px flex space-x-8 overflow-x-auto px-4"
+        aria-label="サブカテゴリ"
+      >
         {category.subcategories
           .sort((a, b) => a.displayOrder - b.displayOrder)
           .map((subcategory) => {
