@@ -21,7 +21,7 @@ export const SubcategoryNavigation: React.FC<SubcategoryNavigationProps> = ({
         aria-label="サブカテゴリ"
       >
         {category.subcategories
-          .sort((a, b) => a.displayOrder - b.displayOrder)
+          .sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0))
           .map((subcategory) => {
             const isActive = subcategory.id === currentSubcategory.id;
             const href = `/${category.id}/${subcategory.id}`;
