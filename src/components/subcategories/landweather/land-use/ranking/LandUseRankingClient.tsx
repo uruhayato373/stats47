@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { EstatRanking } from "@/components/ranking";
 import { SubcategoryData } from "@/types/choropleth";
 
@@ -24,14 +26,19 @@ interface RankingData {
 interface LandUseRankingClientProps {
   rankings: Record<RankingTab, RankingData>;
   subcategory: SubcategoryData;
+  activeRankingId: RankingTab;
 }
 
 export const LandUseRankingClient: React.FC<LandUseRankingClientProps> = ({
   rankings,
   subcategory,
+  activeRankingId,
 }) => {
-  const [activeTab, setActiveTab] = useState<RankingTab>("agriculturalLand");
-  const activeRanking = rankings[activeTab];
+  const params = useParams();
+  const categoryId = params.category as string;
+  const subcategoryId = params.subcategory as string;
+
+  const activeRanking = rankings[activeRankingId];
 
   const tabOptions = [
     { key: "agriculturalLand" as RankingTab, label: "農用地" },
@@ -76,19 +83,24 @@ export const LandUseRankingClient: React.FC<LandUseRankingClientProps> = ({
               統計項目
             </h3>
             <nav className="space-y-2" aria-label="統計項目">
-              {tabOptions.map((option) => (
-                <button
-                  key={option.key}
-                  onClick={() => setActiveTab(option.key)}
-                  className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    activeTab === option.key
-                      ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
-                      : "text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
-                  }`}
-                >
-                  {option.label}
-                </button>
-              ))}
+              {tabOptions.map((option) => {
+                const href = `/${categoryId}/${subcategoryId}/ranking/${option.key}`;
+                const isActive = activeRankingId === option.key;
+
+                return (
+                  <Link
+                    key={option.key}
+                    href={href}
+                    className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
+                        : "text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+                    }`}
+                  >
+                    {option.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </div>

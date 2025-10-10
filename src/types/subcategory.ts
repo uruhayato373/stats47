@@ -42,6 +42,7 @@ export interface SubcategoryDashboardPageProps {
 export interface SubcategoryRankingPageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
+  rankingId?: string; // 統計項目ID（オプション）
 }
 
 /**

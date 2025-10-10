@@ -26,6 +26,7 @@ interface RankingData {
 export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = ({
   category,
   subcategory,
+  rankingId,
 }) => {
   // サーバーサイドでランキングデータを準備
   const rankings: Record<RankingTab, RankingData> = {
@@ -73,13 +74,27 @@ export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = ({
     },
   };
 
+  // rankingIdのバリデーション
+  const validRankingIds = Object.keys(rankings) as RankingTab[];
+  const defaultRankingId: RankingTab = "totalAreaExcluding";
+
+  // rankingIdが指定されていない場合、または無効な場合はデフォルトを使用
+  const activeRankingId =
+    rankingId && validRankingIds.includes(rankingId as RankingTab)
+      ? (rankingId as RankingTab)
+      : defaultRankingId;
+
   return (
     <SubcategoryLayout
       category={category}
       subcategory={subcategory}
       viewType="ranking"
     >
-      <LandAreaRankingClient rankings={rankings} subcategory={subcategory} />
+      <LandAreaRankingClient
+        rankings={rankings}
+        subcategory={subcategory}
+        activeRankingId={activeRankingId}
+      />
     </SubcategoryLayout>
   );
 };

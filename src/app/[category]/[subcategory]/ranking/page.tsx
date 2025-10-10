@@ -1,5 +1,5 @@
 import React from "react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
 import { getRankingComponent } from "@/components/subcategories";
 
@@ -23,6 +23,8 @@ interface PageProps {
  * 例: /population/basic-population/ranking (総人口の都道府県ランキング)
  * 例: /laborwage/wages-working-conditions/ranking (賃金の都道府県ランキング)
  *
+ * land-areaとland-useの場合は最初の統計項目にリダイレクトします。
+ *
  * @param {PageProps} props - ページのProps
  * @param {Promise<{category: string; subcategory: string}>} props.params - 動的ルートパラメータ
  *   - category: カテゴリID (例: "population", "laborwage")
@@ -45,7 +47,7 @@ interface PageProps {
  * />
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version 2.1.0
  */
 export default async function RankingPage({ params }: PageProps) {
   // 動的ルートパラメータを取得
@@ -59,6 +61,15 @@ export default async function RankingPage({ params }: PageProps) {
   // サブカテゴリが存在しない、または指定されたカテゴリに属していない場合は404を返す
   if (!subcategoryData || subcategoryData.category.id !== categoryId) {
     notFound();
+  }
+
+  // land-areaとland-useの場合は最初の統計項目にリダイレクト
+  if (subcategoryId === "land-area") {
+    redirect(`/${categoryId}/${subcategoryId}/ranking/total-area-excluding`);
+  }
+
+  if (subcategoryId === "land-use") {
+    redirect(`/${categoryId}/${subcategoryId}/ranking/agricultural-land`);
   }
 
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
