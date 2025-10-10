@@ -4,22 +4,22 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { LandUseRanking } from "./LandUseRanking";
+import { LandAreaRanking } from "../ranking/LandAreaRanking";
 
-interface LandUsePageProps {
+interface LandAreaPageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
   currentYear: string;
 }
 
-export const LandUsePage: React.FC<LandUsePageProps> = ({
+export const LandAreaPage: React.FC<LandAreaPageProps> = ({
   category,
   subcategory,
 }) => {
   const statsDataId = "0000010102";
   const cdCat01 = {
-    totalLandArea: "B1201", // 評価総地積（課税対象土地）
-    residentialLand: "B120103", // 評価総地積（宅地）
+    totalArea: "B1101", // 総面積
+    habitableArea: "B1103", // 可住地面積
   };
 
   return (
@@ -30,19 +30,19 @@ export const LandUsePage: React.FC<LandUsePageProps> = ({
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.totalLandArea,
+              cdCat01: cdCat01.totalArea,
             }}
             areaCode="00000"
-            title="全国評価総地積"
+            title="全国総面積"
             color="#4f46e5"
           />
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.residentialLand,
+              cdCat01: cdCat01.habitableArea,
             }}
             areaCode="00000"
-            title="全国宅地面積"
+            title="全国可住地面積"
             color="#10b981"
           />
         </div>
@@ -53,7 +53,7 @@ export const LandUsePage: React.FC<LandUsePageProps> = ({
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <LandUseRanking subcategory={subcategory} />
+        <LandAreaRanking subcategory={subcategory} />
       </div>
     </SubcategoryLayout>
   );

@@ -4,22 +4,22 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { LandAreaRanking } from "./LandAreaRanking";
+import { LandUseRanking } from "../ranking/LandUseRanking";
 
-interface LandAreaPageProps {
+interface LandUsePageProps {
   category: CategoryData;
   subcategory: SubcategoryData;
   currentYear: string;
 }
 
-export const LandAreaPage: React.FC<LandAreaPageProps> = ({
+export const LandUsePage: React.FC<LandUsePageProps> = ({
   category,
   subcategory,
 }) => {
   const statsDataId = "0000010102";
   const cdCat01 = {
-    totalArea: "B1101", // 総面積
-    habitableArea: "B1103", // 可住地面積
+    totalLandArea: "B1201", // 評価総地積（課税対象土地）
+    residentialLand: "B120103", // 評価総地積（宅地）
   };
 
   return (
@@ -30,19 +30,19 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.totalArea,
+              cdCat01: cdCat01.totalLandArea,
             }}
             areaCode="00000"
-            title="全国総面積"
+            title="全国評価総地積"
             color="#4f46e5"
           />
           <StatisticsMetricCard
             params={{
               statsDataId: statsDataId,
-              cdCat01: cdCat01.habitableArea,
+              cdCat01: cdCat01.residentialLand,
             }}
             areaCode="00000"
-            title="全国可住地面積"
+            title="全国宅地面積"
             color="#10b981"
           />
         </div>
@@ -53,7 +53,7 @@ export const LandAreaPage: React.FC<LandAreaPageProps> = ({
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <LandAreaRanking subcategory={subcategory} />
+        <LandUseRanking subcategory={subcategory} />
       </div>
     </SubcategoryLayout>
   );

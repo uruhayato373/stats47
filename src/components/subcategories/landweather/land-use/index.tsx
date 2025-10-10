@@ -1,3 +1,2 @@
-export { LandUsePage } from "./LandUsePage";
-export { LandUseDashboard } from "./LandUseDashboard";
-export { LandUseRanking } from "./LandUseRanking";
+export { LandUsePage, LandUseDashboard } from "./dashboard";
+export { LandUseRanking } from "./ranking";
