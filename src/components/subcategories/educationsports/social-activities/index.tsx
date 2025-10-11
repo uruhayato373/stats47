@@ -1,2 +1,4 @@
 export { SocialActivitiesPage } from "./SocialActivitiesPage";
-export { SocialActivitiesDashboard } from "./SocialActivitiesDashboard";
+export { SocialActivitiesAreaPage } from "./SocialActivitiesAreaPage";
+export { SocialActivitiesNationalDashboard } from "./SocialActivitiesNationalDashboard";
+export { SocialActivitiesPrefectureDashboard } from "./SocialActivitiesPrefectureDashboard";

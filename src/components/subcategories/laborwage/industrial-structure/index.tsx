@@ -1,2 +1,3 @@
 export { IndustrialStructurePage } from "./IndustrialStructurePage";
-export { IndustrialStructureDashboard } from "./IndustrialStructureDashboard";
+export { IndustrialStructureNationalDashboard } from "./IndustrialStructureNationalDashboard";
+export { IndustrialStructurePrefectureDashboard } from "./IndustrialStructurePrefectureDashboard";

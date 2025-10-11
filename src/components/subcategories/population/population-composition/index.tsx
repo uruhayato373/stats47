@@ -1,2 +1,3 @@
 export { PopulationCompositionPage } from "./PopulationCompositionPage";
-export { PopulationCompositionDashboard } from "./PopulationCompositionDashboard";
+export { PopulationCompositionNationalDashboard } from "./PopulationCompositionNationalDashboard";
+export { PopulationCompositionPrefectureDashboard } from "./PopulationCompositionPrefectureDashboard";

@@ -1,2 +1,3 @@
 export { CommercialFacilitiesPage } from "./CommercialFacilitiesPage";
-export { CommercialFacilitiesDashboard } from "./CommercialFacilitiesDashboard";
+export { CommercialFacilitiesNationalDashboard } from "./CommercialFacilitiesNationalDashboard";
+export { CommercialFacilitiesPrefectureDashboard } from "./CommercialFacilitiesPrefectureDashboard";

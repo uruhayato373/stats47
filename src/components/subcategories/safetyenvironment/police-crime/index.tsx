@@ -1,2 +1,3 @@
 export { PoliceCrimePage } from "./PoliceCrimePage";
-export { PoliceCrimeDashboard } from "./PoliceCrimeDashboard";
+export { PoliceCrimeNationalDashboard } from "./PoliceCrimeNationalDashboard";
+export { PoliceCrimePrefectureDashboard } from "./PoliceCrimePrefectureDashboard";

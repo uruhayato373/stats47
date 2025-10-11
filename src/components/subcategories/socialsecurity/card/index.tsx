@@ -1,2 +1,3 @@
 export { SocialSecurityCardPage } from "./SocialSecurityCardPage";
-export { SocialSecurityCardDashboard } from "./SocialSecurityCardDashboard";
+export { SocialSecurityCardNationalDashboard } from "./SocialSecurityCardNationalDashboard";
+export { SocialSecurityCardPrefectureDashboard } from "./SocialSecurityCardPrefectureDashboard";

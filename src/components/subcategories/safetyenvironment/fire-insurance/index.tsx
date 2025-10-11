@@ -1,2 +1,3 @@
 export { FireInsurancePage } from "./FireInsurancePage";
-export { FireInsuranceDashboard } from "./FireInsuranceDashboard";
+export { FireInsuranceNationalDashboard } from "./FireInsuranceNationalDashboard";
+export { FireInsurancePrefectureDashboard } from "./FireInsurancePrefectureDashboard";

@@ -1,2 +1,3 @@
 export { InfrastructureEnergyPage } from "./InfrastructureEnergyPage";
-export { InfrastructureEnergyDashboard } from "./InfrastructureEnergyDashboard";
+export { InfrastructureEnergyNationalDashboard } from "./InfrastructureEnergyNationalDashboard";
+export { InfrastructureEnergyPrefectureDashboard } from "./InfrastructureEnergyPrefectureDashboard";

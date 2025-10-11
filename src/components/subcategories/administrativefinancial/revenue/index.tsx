@@ -1,2 +1,3 @@
 export { RevenuePage } from "./RevenuePage";
-export { RevenueDashboard } from "./RevenueDashboard";
+export { RevenueNationalDashboard } from "./RevenueNationalDashboard";
+export { RevenuePrefectureDashboard } from "./RevenuePrefectureDashboard";

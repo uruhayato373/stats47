@@ -1,2 +1,4 @@
 export { PublicAssistanceWelfarePage } from "./PublicAssistanceWelfarePage";
-export { PublicAssistanceWelfareDashboard } from "./PublicAssistanceWelfareDashboard";
+export { PublicAssistanceWelfareAreaPage } from "./PublicAssistanceWelfareAreaPage";
+export { PublicAssistanceWelfareNationalDashboard } from "./PublicAssistanceWelfareNationalDashboard";
+export { PublicAssistanceWelfarePrefectureDashboard } from "./PublicAssistanceWelfarePrefectureDashboard";

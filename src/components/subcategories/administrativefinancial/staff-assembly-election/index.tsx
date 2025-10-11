@@ -1,2 +1,3 @@
 export { StaffAssemblyElectionPage } from "./StaffAssemblyElectionPage";
-export { StaffAssemblyElectionDashboard } from "./StaffAssemblyElectionDashboard";
+export { StaffAssemblyElectionNationalDashboard } from "./StaffAssemblyElectionNationalDashboard";
+export { StaffAssemblyElectionPrefectureDashboard } from "./StaffAssemblyElectionPrefectureDashboard";

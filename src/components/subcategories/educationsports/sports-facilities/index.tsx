@@ -1,2 +1,3 @@
 export { SportsFacilitiesPage } from "./SportsFacilitiesPage";
-export { SportsFacilitiesDashboard } from "./SportsFacilitiesDashboard";
+export { SportsFacilitiesNationalDashboard } from "./SportsFacilitiesNationalDashboard";
+export { SportsFacilitiesPrefectureDashboard } from "./SportsFacilitiesPrefectureDashboard";

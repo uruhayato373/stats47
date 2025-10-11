@@ -1,2 +1,3 @@
 export { ExpenditurePage } from "./ExpenditurePage";
-export { ExpenditureDashboard } from "./ExpenditureDashboard";
+export { ExpenditureNationalDashboard } from "./ExpenditureNationalDashboard";
+export { ExpenditurePrefectureDashboard } from "./ExpenditurePrefectureDashboard";

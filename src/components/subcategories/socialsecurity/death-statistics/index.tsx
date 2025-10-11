@@ -1,2 +1,3 @@
 export { DeathStatisticsPage } from "./DeathStatisticsPage";
-export { DeathStatisticsDashboard } from "./DeathStatisticsDashboard";
+export { DeathStatisticsNationalDashboard } from "./DeathStatisticsNationalDashboard";
+export { DeathStatisticsPrefectureDashboard } from "./DeathStatisticsPrefectureDashboard";

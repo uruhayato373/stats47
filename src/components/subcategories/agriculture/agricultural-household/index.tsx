@@ -1,2 +1,3 @@
 export { AgriculturalHouseholdPage } from "./AgriculturalHouseholdPage";
-export { AgriculturalHouseholdDashboard } from "./AgriculturalHouseholdDashboard";
+export { AgriculturalHouseholdNationalDashboard } from "./AgriculturalHouseholdNationalDashboard";
+export { AgriculturalHouseholdPrefectureDashboard } from "./AgriculturalHouseholdPrefectureDashboard";

@@ -1,2 +1,4 @@
 export { CompulsoryEducationPage } from "./CompulsoryEducationPage";
-export { CompulsoryEducationDashboard } from "./CompulsoryEducationDashboard";
+export { CompulsoryEducationAreaPage } from "./CompulsoryEducationAreaPage";
+export { CompulsoryEducationNationalDashboard } from "./CompulsoryEducationNationalDashboard";
+export { CompulsoryEducationPrefectureDashboard } from "./CompulsoryEducationPrefectureDashboard";

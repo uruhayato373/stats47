@@ -1,2 +1,3 @@
 export { MarriagePage } from "./MarriagePage";
-export { MarriageDashboard } from "./MarriageDashboard";
+export { MarriageNationalDashboard } from "./MarriageNationalDashboard";
+export { MarriagePrefectureDashboard } from "./MarriagePrefectureDashboard";

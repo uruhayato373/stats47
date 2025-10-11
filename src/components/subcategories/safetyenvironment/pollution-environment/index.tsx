@@ -1,2 +1,3 @@
 export { PollutionEnvironmentPage } from "./PollutionEnvironmentPage";
-export { PollutionEnvironmentDashboard } from "./PollutionEnvironmentDashboard";
+export { PollutionEnvironmentNationalDashboard } from "./PollutionEnvironmentNationalDashboard";
+export { PollutionEnvironmentPrefectureDashboard } from "./PollutionEnvironmentPrefectureDashboard";

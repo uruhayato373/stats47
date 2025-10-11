@@ -1,2 +1,3 @@
 export { HouseholdsPage } from "./HouseholdsPage";
-export { HouseholdsDashboard } from "./HouseholdsDashboard";
+export { HouseholdsNationalDashboard } from "./HouseholdsNationalDashboard";
+export { HouseholdsPrefectureDashboard } from "./HouseholdsPrefectureDashboard";

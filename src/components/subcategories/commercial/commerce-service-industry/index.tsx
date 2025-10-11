@@ -1,2 +1,3 @@
 export { CommerceServiceIndustryPage } from "./CommerceServiceIndustryPage";
-export { CommerceServiceIndustryDashboard } from "./CommerceServiceIndustryDashboard";
+export { CommerceServiceIndustryNationalDashboard } from "./CommerceServiceIndustryNationalDashboard";
+export { CommerceServiceIndustryPrefectureDashboard } from "./CommerceServiceIndustryPrefectureDashboard";

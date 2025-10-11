@@ -1,2 +1,4 @@
 export { HouseholdEconomyPage } from "./HouseholdEconomyPage";
-export { HouseholdEconomyDashboard } from "./HouseholdEconomyDashboard";
+export { HouseholdEconomyAreaPage } from "./HouseholdEconomyAreaPage";
+export { HouseholdEconomyNationalDashboard } from "./HouseholdEconomyNationalDashboard";
+export { HouseholdEconomyPrefectureDashboard } from "./HouseholdEconomyPrefectureDashboard";

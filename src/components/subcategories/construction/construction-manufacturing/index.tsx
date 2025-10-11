@@ -1,2 +1,3 @@
 export { ConstructionManufacturingPage } from "./ConstructionManufacturingPage";
-export { ConstructionManufacturingDashboard } from "./ConstructionManufacturingDashboard";
+export { ConstructionManufacturingNationalDashboard } from "./ConstructionManufacturingNationalDashboard";
+export { ConstructionManufacturingPrefectureDashboard } from "./ConstructionManufacturingPrefectureDashboard";

@@ -1,2 +1,3 @@
 export { KindergartenPage } from "./KindergartenPage";
-export { KindergartenDashboard } from "./KindergartenDashboard";
+export { KindergartenNationalDashboard } from "./KindergartenNationalDashboard";
+export { KindergartenPrefectureDashboard } from "./KindergartenPrefectureDashboard";

@@ -1,2 +1,3 @@
 export { LivingEnvironmentPage } from "./LivingEnvironmentPage";
-export { LivingEnvironmentDashboard } from "./LivingEnvironmentDashboard";
+export { LivingEnvironmentNationalDashboard } from "./LivingEnvironmentNationalDashboard";
+export { LivingEnvironmentPrefectureDashboard } from "./LivingEnvironmentPrefectureDashboard";

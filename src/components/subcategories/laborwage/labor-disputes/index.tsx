@@ -1,2 +1,3 @@
 export { LaborDisputesPage } from "./LaborDisputesPage";
-export { LaborDisputesDashboard } from "./LaborDisputesDashboard";
+export { LaborDisputesNationalDashboard } from "./LaborDisputesNationalDashboard";
+export { LaborDisputesPrefectureDashboard } from "./LaborDisputesPrefectureDashboard";

@@ -1,2 +1,3 @@
 export { FiscalIndicatorsPage } from "./FiscalIndicatorsPage";
-export { FiscalIndicatorsDashboard } from "./FiscalIndicatorsDashboard";
+export { FiscalIndicatorsNationalDashboard } from "./FiscalIndicatorsNationalDashboard";
+export { FiscalIndicatorsPrefectureDashboard } from "./FiscalIndicatorsPrefectureDashboard";

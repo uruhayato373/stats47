@@ -1,2 +1,3 @@
 export { WasteManagementPage } from "./WasteManagementPage";
-export { WasteManagementDashboard } from "./WasteManagementDashboard";
+export { WasteManagementNationalDashboard } from "./WasteManagementNationalDashboard";
+export { WasteManagementPrefectureDashboard } from "./WasteManagementPrefectureDashboard";

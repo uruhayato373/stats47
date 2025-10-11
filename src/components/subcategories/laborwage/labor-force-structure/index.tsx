@@ -1,2 +1,3 @@
 export { LaborForceStructurePage } from "./LaborForceStructurePage";
-export { LaborForceStructureDashboard } from "./LaborForceStructureDashboard";
+export { LaborForceStructureNationalDashboard } from "./LaborForceStructureNationalDashboard";
+export { LaborForceStructurePrefectureDashboard } from "./LaborForceStructurePrefectureDashboard";

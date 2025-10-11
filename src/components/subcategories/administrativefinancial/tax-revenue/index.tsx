@@ -1,2 +1,3 @@
 export { TaxRevenuePage } from "./TaxRevenuePage";
-export { TaxRevenueDashboard } from "./TaxRevenueDashboard";
+export { TaxRevenueNationalDashboard } from "./TaxRevenueNationalDashboard";
+export { TaxRevenuePrefectureDashboard } from "./TaxRevenuePrefectureDashboard";

@@ -1,2 +1,3 @@
 export { HousingOwnershipPage } from "./HousingOwnershipPage";
-export { HousingOwnershipDashboard } from "./HousingOwnershipDashboard";
+export { HousingOwnershipNationalDashboard } from "./HousingOwnershipNationalDashboard";
+export { HousingOwnershipPrefectureDashboard } from "./HousingOwnershipPrefectureDashboard";

@@ -1,2 +1,3 @@
 export { CollegeUniversityPage } from "./CollegeUniversityPage";
-export { CollegeUniversityDashboard } from "./CollegeUniversityDashboard";
+export { CollegeUniversityNationalDashboard } from "./CollegeUniversityNationalDashboard";
+export { CollegeUniversityPrefectureDashboard } from "./CollegeUniversityPrefectureDashboard";

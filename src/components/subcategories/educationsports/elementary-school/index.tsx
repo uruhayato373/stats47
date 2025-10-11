@@ -1,2 +1,3 @@
 export { ElementarySchoolPage } from "./ElementarySchoolPage";
-export { ElementarySchoolDashboard } from "./ElementarySchoolDashboard";
+export { ElementarySchoolNationalDashboard } from "./ElementarySchoolNationalDashboard";
+export { ElementarySchoolPrefectureDashboard } from "./ElementarySchoolPrefectureDashboard";

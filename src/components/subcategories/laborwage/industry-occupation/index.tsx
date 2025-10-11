@@ -1,2 +1,3 @@
 export { IndustryOccupationPage } from "./IndustryOccupationPage";
-export { IndustryOccupationDashboard } from "./IndustryOccupationDashboard";
+export { IndustryOccupationNationalDashboard } from "./IndustryOccupationNationalDashboard";
+export { IndustryOccupationPrefectureDashboard } from "./IndustryOccupationPrefectureDashboard";

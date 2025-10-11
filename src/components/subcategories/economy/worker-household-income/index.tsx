@@ -1,2 +1,3 @@
 export { WorkerHouseholdIncomePage } from "./WorkerHouseholdIncomePage";
-export { WorkerHouseholdIncomeDashboard } from "./WorkerHouseholdIncomeDashboard";
+export { WorkerHouseholdIncomeNationalDashboard } from "./WorkerHouseholdIncomeNationalDashboard";
+export { WorkerHouseholdIncomePrefectureDashboard } from "./WorkerHouseholdIncomePrefectureDashboard";

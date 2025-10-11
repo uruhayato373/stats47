@@ -1,2 +1,3 @@
 export { ConsumerPriceDifferenceIndexPage } from "./ConsumerPriceDifferenceIndexPage";
-export { ConsumerPriceDifferenceIndexDashboard } from "./ConsumerPriceDifferenceIndexDashboard";
+export { ConsumerPriceDifferenceIndexNationalDashboard } from "./ConsumerPriceDifferenceIndexNationalDashboard";
+export { ConsumerPriceDifferenceIndexPrefectureDashboard } from "./ConsumerPriceDifferenceIndexPrefectureDashboard";

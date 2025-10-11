@@ -1,2 +1,4 @@
 export { HealthCarePage } from "./HealthCarePage";
-export { HealthCareDashboard } from "./HealthCareDashboard";
+export { HealthCareAreaPage } from "./HealthCareAreaPage";
+export { HealthCareNationalDashboard } from "./HealthCareNationalDashboard";
+export { HealthCarePrefectureDashboard } from "./HealthCarePrefectureDashboard";

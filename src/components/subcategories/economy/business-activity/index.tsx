@@ -1,2 +1,4 @@
 export { BusinessActivityPage } from "./BusinessActivityPage";
-export { BusinessActivityDashboard } from "./BusinessActivityDashboard";
+export { BusinessActivityAreaPage } from "./BusinessActivityAreaPage";
+export { BusinessActivityNationalDashboard } from "./BusinessActivityNationalDashboard";
+export { BusinessActivityPrefectureDashboard } from "./BusinessActivityPrefectureDashboard";

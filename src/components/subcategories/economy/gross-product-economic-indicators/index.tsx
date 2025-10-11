@@ -1,2 +1,3 @@
 export { GrossProductEconomicIndicatorsPage } from "./GrossProductEconomicIndicatorsPage";
-export { GrossProductEconomicIndicatorsDashboard } from "./GrossProductEconomicIndicatorsDashboard";
+export { GrossProductEconomicIndicatorsNationalDashboard } from "./GrossProductEconomicIndicatorsNationalDashboard";
+export { GrossProductEconomicIndicatorsPrefectureDashboard } from "./GrossProductEconomicIndicatorsPrefectureDashboard";

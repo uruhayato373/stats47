@@ -1,2 +1,3 @@
 export { RoadsPage } from "./RoadsPage";
-export { RoadsDashboard } from "./RoadsDashboard";
+export { RoadsNationalDashboard } from "./RoadsNationalDashboard";
+export { RoadsPrefectureDashboard } from "./RoadsPrefectureDashboard";

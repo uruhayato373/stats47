@@ -1,2 +1,3 @@
 export { ManufacturingPage } from "./ManufacturingPage";
-export { ManufacturingDashboard } from "./ManufacturingDashboard";
+export { ManufacturingNationalDashboard } from "./ManufacturingNationalDashboard";
+export { ManufacturingPrefectureDashboard } from "./ManufacturingPrefectureDashboard";

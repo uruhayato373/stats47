@@ -1,2 +1,4 @@
 export { ChildcareEarlyEducationPage } from "./ChildcareEarlyEducationPage";
-export { ChildcareEarlyEducationDashboard } from "./ChildcareEarlyEducationDashboard";
+export { ChildcareEarlyEducationAreaPage } from "./ChildcareEarlyEducationAreaPage";
+export { ChildcareEarlyEducationNationalDashboard } from "./ChildcareEarlyEducationNationalDashboard";
+export { ChildcareEarlyEducationPrefectureDashboard } from "./ChildcareEarlyEducationPrefectureDashboard";

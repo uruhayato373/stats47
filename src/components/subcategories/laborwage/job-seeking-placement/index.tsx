@@ -1,2 +1,3 @@
 export { JobSeekingPlacementPage } from "./JobSeekingPlacementPage";
-export { JobSeekingPlacementDashboard } from "./JobSeekingPlacementDashboard";
+export { JobSeekingPlacementNationalDashboard } from "./JobSeekingPlacementNationalDashboard";
+export { JobSeekingPlacementPrefectureDashboard } from "./JobSeekingPlacementPrefectureDashboard";

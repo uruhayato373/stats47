@@ -1,2 +1,3 @@
 export { CommutingEmploymentPage } from "./CommutingEmploymentPage";
-export { CommutingEmploymentDashboard } from "./CommutingEmploymentDashboard";
+export { CommutingEmploymentNationalDashboard } from "./CommutingEmploymentNationalDashboard";
+export { CommutingEmploymentPrefectureDashboard } from "./CommutingEmploymentPrefectureDashboard";

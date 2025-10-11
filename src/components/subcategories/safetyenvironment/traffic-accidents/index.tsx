@@ -1,2 +1,4 @@
 export { TrafficAccidentsPage } from "./TrafficAccidentsPage";
-export { TrafficAccidentsDashboard } from "./TrafficAccidentsDashboard";
+export { TrafficAccidentsAreaPage } from "./TrafficAccidentsAreaPage";
+export { TrafficAccidentsNationalDashboard } from "./TrafficAccidentsNationalDashboard";
+export { TrafficAccidentsPrefectureDashboard } from "./TrafficAccidentsPrefectureDashboard";

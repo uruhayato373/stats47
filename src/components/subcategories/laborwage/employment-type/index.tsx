@@ -1,2 +1,3 @@
 export { EmploymentTypePage } from "./EmploymentTypePage";
-export { EmploymentTypeDashboard } from "./EmploymentTypeDashboard";
+export { EmploymentTypeNationalDashboard } from "./EmploymentTypeNationalDashboard";
+export { EmploymentTypePrefectureDashboard } from "./EmploymentTypePrefectureDashboard";

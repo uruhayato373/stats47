@@ -1,2 +1,3 @@
 export { WaterSupplySeweragePage } from "./WaterSupplySeweragePage";
-export { WaterSupplySewerageDashboard } from "./WaterSupplySewerageDashboard";
+export { WaterSupplySewerageNationalDashboard } from "./WaterSupplySewerageNationalDashboard";
+export { WaterSupplySeweragePrefectureDashboard } from "./WaterSupplySeweragePrefectureDashboard";

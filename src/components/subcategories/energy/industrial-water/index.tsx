@@ -1,2 +1,3 @@
 export { IndustrialWaterPage } from "./IndustrialWaterPage";
-export { IndustrialWaterDashboard } from "./IndustrialWaterDashboard";
+export { IndustrialWaterNationalDashboard } from "./IndustrialWaterNationalDashboard";
+export { IndustrialWaterPrefectureDashboard } from "./IndustrialWaterPrefectureDashboard";

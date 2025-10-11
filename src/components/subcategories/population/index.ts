@@ -2,15 +2,26 @@ export {
   BasicPopulationNationalDashboard,
   BasicPopulationPrefectureDashboard,
 } from "./basic-population";
-export { BirthDeathPage, BirthDeathDashboard } from "./birth-death";
-export { HouseholdsPage, HouseholdsDashboard } from "./households";
-export { MarriagePage, MarriageDashboard } from "./marriage";
+export {
+  BirthDeathNationalDashboard,
+  BirthDeathPrefectureDashboard,
+} from "./birth-death";
+export {
+  HouseholdsNationalDashboard,
+  HouseholdsPrefectureDashboard,
+} from "./households";
+export {
+  MarriageNationalDashboard,
+  MarriagePrefectureDashboard,
+} from "./marriage";
 export {
   PopulationMovementPage,
   PopulationMovementAreaPage,
-  PopulationMovementDashboard,
+  PopulationMovementNationalDashboard,
+  PopulationMovementPrefectureDashboard,
 } from "./population-movement";
 export {
   PopulationCompositionPage,
-  PopulationCompositionDashboard,
+  PopulationCompositionNationalDashboard,
+  PopulationCompositionPrefectureDashboard,
 } from "./population-composition";

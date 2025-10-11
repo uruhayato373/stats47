@@ -1,2 +1,3 @@
 export { TourismAccommodationPage } from "./TourismAccommodationPage";
-export { TourismAccommodationDashboard } from "./TourismAccommodationDashboard";
+export { TourismAccommodationNationalDashboard } from "./TourismAccommodationNationalDashboard";
+export { TourismAccommodationPrefectureDashboard } from "./TourismAccommodationPrefectureDashboard";

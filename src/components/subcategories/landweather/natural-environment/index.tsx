@@ -1,2 +1,3 @@
 export { NaturalEnvironmentPage } from "./NaturalEnvironmentPage";
-export { NaturalEnvironmentDashboard } from "./NaturalEnvironmentDashboard";
+export { NaturalEnvironmentNationalDashboard } from "./NaturalEnvironmentNationalDashboard";
+export { NaturalEnvironmentPrefectureDashboard } from "./NaturalEnvironmentPrefectureDashboard";

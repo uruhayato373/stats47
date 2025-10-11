@@ -1,2 +1,3 @@
 export { CulturalFacilitiesPage } from "./CulturalFacilitiesPage";
-export { CulturalFacilitiesDashboard } from "./CulturalFacilitiesDashboard";
+export { CulturalFacilitiesNationalDashboard } from "./CulturalFacilitiesNationalDashboard";
+export { CulturalFacilitiesPrefectureDashboard } from "./CulturalFacilitiesPrefectureDashboard";

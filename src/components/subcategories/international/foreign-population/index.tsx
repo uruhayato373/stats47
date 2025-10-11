@@ -1,2 +1,3 @@
 export { ForeignPopulationPage } from "./ForeignPopulationPage";
-export { ForeignPopulationDashboard } from "./ForeignPopulationDashboard";
+export { ForeignPopulationNationalDashboard } from "./ForeignPopulationNationalDashboard";
+export { ForeignPopulationPrefectureDashboard } from "./ForeignPopulationPrefectureDashboard";

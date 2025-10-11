@@ -1,2 +1,3 @@
 export { WagesWorkingConditionsPage } from "./WagesWorkingConditionsPage";
-export { WagesWorkingConditionsDashboard } from "./WagesWorkingConditionsDashboard";
+export { WagesWorkingConditionsNationalDashboard } from "./WagesWorkingConditionsNationalDashboard";
+export { WagesWorkingConditionsPrefectureDashboard } from "./WagesWorkingConditionsPrefectureDashboard";
