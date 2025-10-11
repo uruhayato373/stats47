@@ -53,6 +53,12 @@ export const EstatRankingServer: React.FC<EstatRankingServerProps> = async (
     );
   } catch (error) {
     console.error("サーバー側データ取得エラー:", error);
+    console.error("エラー詳細:", {
+      statsDataId: params.statsDataId,
+      cdCat01: params.cdCat01,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     // エラー時はクライアント側でデータ取得にフォールバック
     return <EstatRankingClient {...props} />;
   }

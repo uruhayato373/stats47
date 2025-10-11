@@ -65,6 +65,8 @@ export default async function RankingPage({ params }: PageProps) {
 
   // 全サブカテゴリでデフォルトランキングキーにリダイレクト
   // データベースからデフォルトランキングキーを取得
+  let defaultRankingKey: string | null = null;
+
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const url = `${baseUrl}/api/ranking-items/${encodeURIComponent(
@@ -80,18 +82,18 @@ export default async function RankingPage({ params }: PageProps) {
 
     if (response.ok) {
       const config = await response.json();
-      const defaultRankingKey = config.subcategory.defaultRankingKey;
-      if (defaultRankingKey) {
-        redirect(
-          `/${categoryId}/${subcategoryId}/ranking/${defaultRankingKey}`
-        );
-      }
+      defaultRankingKey = config.subcategory.defaultRankingKey;
     }
   } catch (error) {
     console.warn(
       `デフォルトランキングキーの取得に失敗しました (${subcategoryId}):`,
       error
     );
+  }
+
+  // redirect()はエラーをthrowするため、try-catchの外で実行
+  if (defaultRankingKey) {
+    redirect(`/${categoryId}/${subcategoryId}/ranking/${defaultRankingKey}`);
   }
 
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
