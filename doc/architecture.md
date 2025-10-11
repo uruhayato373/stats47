@@ -713,6 +713,124 @@ function sanitizeApiResponse(data: any): any {
 }
 ```
 
+## ダッシュボードコンポーネントアーキテクチャ
+
+### 概要
+
+stats47プロジェクトでは、全67個のダッシュボードコンポーネントに「複数コンポーネント + コンポーネント解決」パターンを適用した新しいアーキテクチャを採用しています。このアーキテクチャにより、全国用と都道府県用のダッシュボードを明確に分離し、それぞれに最適化されたUI/UXを提供できます。
+
+### アーキテクチャ図
+
+```
+┌─────────────────────────┐
+│ /[category]/[subcategory]│
+│ /dashboard/[areaCode]   │
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│ getDashboardComponentByArea │
+│ - areaCode判定          │
+│ - categories.jsonから解決 │
+└───────┬─────────────────┘
+        │
+        ├─ areaCode=00000 ─► NationalDashboard
+        │                    - 全国統計概要
+        │                    - 政策動向分析
+        │                    - 全国トレンド
+        │
+        └─ areaCode≠00000 ─► PrefectureDashboard
+                             - 都道府県詳細
+                             - 全国比較
+                             - 周辺地域比較
+```
+
+### コンポーネント解決システム
+
+```typescript
+// src/components/subcategories/index.tsx
+export const getDashboardComponentByArea = (
+  subcategoryId: string,
+  areaCode: string,
+  categoryId?: string
+): React.ComponentType<SubcategoryDashboardPageProps> => {
+  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
+
+  if (!subcategory) {
+    return DefaultDashboardPage;
+  }
+
+  const isNational = areaCode === "00000";
+
+  // 新しいアーキテクチャ: 地域別コンポーネント
+  if (isNational && subcategory.nationalDashboardComponent) {
+    return (
+      componentMap[subcategory.nationalDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  if (!isNational && subcategory.prefectureDashboardComponent) {
+    return (
+      componentMap[subcategory.prefectureDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  // フォールバック: 従来の単一コンポーネント
+  if (subcategory.dashboardComponent) {
+    return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
+  }
+
+  return DefaultDashboardPage;
+};
+```
+
+### 設定ファイル構造
+
+```json
+{
+  "id": "basic-population",
+  "name": "基本人口",
+  "href": "/basic-population",
+  "dashboardComponent": "BasicPopulationNationalDashboard",
+  "nationalDashboardComponent": "BasicPopulationNationalDashboard",
+  "prefectureDashboardComponent": "BasicPopulationPrefectureDashboard",
+  "displayOrder": 1
+}
+```
+
+### 設計原則
+
+#### 単一責任の原則
+各ダッシュボードコンポーネントは、特定の地域レベル（全国または都道府県）に特化した責任を持ちます。
+
+#### 明確な分離
+全国用と都道府県用のコンポーネントは完全に分離され、それぞれ独立して開発・保守できます。
+
+#### 動的解決
+`areaCode`パラメータに基づいて、実行時に適切なコンポーネントが動的に選択されます。
+
+#### 後方互換性
+既存の単一コンポーネントアーキテクチャとの互換性を維持し、段階的な移行を可能にします。
+
+### メリット
+
+- **明確な分離**: 全国用と都道府県用で異なるUI/UXを提供
+- **保守性**: 各コンポーネントが単一責任を持つ
+- **拡張性**: 新しい地域レベル（市区町村等）の追加が容易
+- **型安全性**: TypeScriptによる厳密な型チェック
+- **パフォーマンス**: 必要なコンポーネントのみをロード
+
+### 移行実績
+
+- **移行コンポーネント数**: 67個
+- **新規作成ファイル数**: 134個（67 × 2）
+- **削除ファイル数**: 67個
+- **更新ファイル数**: 201個
+
+詳細な実装ガイドラインについては、[dashboard-architecture.md](./dashboard-architecture.md)を参照してください。
+
 ## 今後の拡張予定
 
 ### 機能拡張

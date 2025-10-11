@@ -968,6 +968,278 @@ SELECT * FROM ranking_items WHERE subcategory_id = 'land-area' AND is_active = 1
 4. **テスト**: 本番環境での変更前にテスト環境で検証
 5. **ドキュメント**: 設定変更時はドキュメントを更新
 
+## 新しいダッシュボードコンポーネントの作成
+
+### 概要
+
+全67個のダッシュボードコンポーネントは、全国用と都道府県用に分離された新しいアーキテクチャを採用しています。このセクションでは、新しいサブカテゴリーのダッシュボードコンポーネントを作成する手順を説明します。
+
+### 1. コンポーネントファイルの作成
+
+新しいサブカテゴリー用に以下の2つのファイルを作成します：
+
+```
+src/components/subcategories/[category]/[subcategory]/
+├── [Name]NationalDashboard.tsx      # 全国用ダッシュボード
+├── [Name]PrefectureDashboard.tsx    # 都道府県用ダッシュボード
+└── index.tsx                        # エクスポート
+```
+
+### 2. National Dashboard の実装
+
+全国用ダッシュボードは以下の特徴を持ちます：
+
+- 全国レベルの統計概要
+- 全国的な政策動向
+- 都道府県間の比較分析
+- 全国レベルの詳細分析
+
+#### 実装例
+
+```tsx
+// src/components/subcategories/population/basic-population/BasicPopulationNationalDashboard.tsx
+"use client";
+
+import React from "react";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+
+export const BasicPopulationNationalDashboard: React.FC<
+  SubcategoryDashboardPageProps
+> = ({ category, subcategory, areaCode }) => {
+  const statsDataId = "0000010101";
+  const cdCat01 = {
+    totalPopulation: "A1101", // 総人口
+    malePopulation: "A1102",  // 男性人口
+    femalePopulation: "A1103", // 女性人口
+  };
+
+  return (
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="dashboard"
+      areaCode={areaCode}
+    >
+      {/* 全国専用の統計カード */}
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.totalPopulation,
+            }}
+            areaCode={areaCode}
+            title="全国総人口"
+            color="#3b82f6"
+          />
+          {/* 他の統計カード */}
+        </div>
+      </div>
+
+      {/* 全国専用の分析セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国人口動態分析
+          </h2>
+          {/* 全国レベルの詳細分析 */}
+        </div>
+      </div>
+
+      {/* 全国政策動向セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国政策動向
+          </h2>
+          {/* 全国的な政策動向の分析 */}
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
+```
+
+### 3. Prefecture Dashboard の実装
+
+都道府県用ダッシュボードは以下の特徴を持ちます：
+
+- 都道府県固有の詳細データ
+- 全国平均との比較
+- 周辺都道府県との比較
+- 都道府県固有の分析
+
+#### 実装例
+
+```tsx
+// src/components/subcategories/population/basic-population/BasicPopulationPrefectureDashboard.tsx
+"use client";
+
+import React from "react";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+
+export const BasicPopulationPrefectureDashboard: React.FC<
+  SubcategoryDashboardPageProps
+> = ({ category, subcategory, areaCode }) => {
+  const statsDataId = "0000010101";
+  const cdCat01 = {
+    totalPopulation: "A1101", // 総人口
+    malePopulation: "A1102",  // 男性人口
+    femalePopulation: "A1103", // 女性人口
+  };
+
+  return (
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="dashboard"
+      areaCode={areaCode}
+    >
+      {/* 都道府県専用の統計カード */}
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.totalPopulation,
+            }}
+            areaCode={areaCode}
+            title="総人口"
+            color="#3b82f6"
+          />
+          {/* 他の統計カード */}
+        </div>
+      </div>
+
+      {/* 都道府県詳細セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            都道府県詳細
+          </h2>
+          {/* 都道府県固有の詳細分析 */}
+        </div>
+      </div>
+
+      {/* 全国との比較セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国との比較
+          </h2>
+          {/* 全国平均との比較グラフ */}
+        </div>
+      </div>
+
+      {/* 周辺都道府県との比較セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            周辺都道府県との比較
+          </h2>
+          {/* 周辺地域との比較分析 */}
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
+```
+
+### 4. エクスポートの設定
+
+#### 4.1 サブカテゴリーレベルのindex.tsx
+
+```tsx
+// src/components/subcategories/population/basic-population/index.tsx
+export { BasicPopulationPage } from "./BasicPopulationPage";
+export { BasicPopulationNationalDashboard } from "./BasicPopulationNationalDashboard";
+export { BasicPopulationPrefectureDashboard } from "./BasicPopulationPrefectureDashboard";
+```
+
+#### 4.2 カテゴリーレベルのindex.tsx
+
+```tsx
+// src/components/subcategories/population/index.ts
+export {
+  BasicPopulationPage,
+  BasicPopulationNationalDashboard,
+  BasicPopulationPrefectureDashboard,
+} from "./basic-population";
+// 他のサブカテゴリーも同様に追加
+```
+
+#### 4.3 全体のindex.tsx
+
+```tsx
+// src/components/subcategories/index.tsx
+export {
+  BasicPopulationNationalDashboard,
+  BasicPopulationPrefectureDashboard,
+} from "./population";
+// 他のカテゴリーも同様に追加
+```
+
+### 5. categories.jsonの更新
+
+```json
+{
+  "id": "basic-population",
+  "name": "基本人口",
+  "href": "/basic-population",
+  "dashboardComponent": "BasicPopulationNationalDashboard",
+  "nationalDashboardComponent": "BasicPopulationNationalDashboard",
+  "prefectureDashboardComponent": "BasicPopulationPrefectureDashboard",
+  "displayOrder": 1
+}
+```
+
+### 6. コンポーネント解決システム
+
+`getDashboardComponentByArea`関数が自動的に適切なコンポーネントを選択します：
+
+- `areaCode === "00000"` → NationalDashboard
+- `areaCode !== "00000"` → PrefectureDashboard
+
+### 7. チェックリスト
+
+- [ ] NationalDashboard作成
+- [ ] PrefectureDashboard作成
+- [ ] index.tsx更新（3箇所）
+- [ ] categories.json更新
+- [ ] 全国表示テスト（/dashboard/00000）
+- [ ] 都道府県表示テスト（/dashboard/13000）
+- [ ] リンターエラーなし
+
+### 8. 命名規則
+
+- **NationalDashboard**: `[Name]NationalDashboard.tsx`
+- **PrefectureDashboard**: `[Name]PrefectureDashboard.tsx`
+- **コンポーネント名**: `[Name]NationalDashboard`, `[Name]PrefectureDashboard`
+
+### 9. ベストプラクティス
+
+#### 9.1 コンポーネント設計
+
+- 単一責任の原則に従う
+- 全国用と都道府県用で明確に分離
+- 共通部分は`SubcategoryLayout`に委譲
+
+#### 9.2 データ処理
+
+- 統計データIDとカテゴリコードを適切に設定
+- エラーハンドリングを実装
+- ローディング状態を考慮
+
+#### 9.3 スタイリング
+
+- Tailwind CSSクラスを使用
+- レスポンシブデザインを考慮
+- ダークモード対応
+
 ## データベース開発
 
 ### データベース構造

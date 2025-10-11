@@ -295,6 +295,235 @@ interface SubcategoryLayoutProps {
 - 都道府県セレクター（ダッシュボード表示時のみ）
 - ビュー切り替えボタン（ダッシュボード/ランキング）
 
+### 2.3 ダッシュボードページ
+
+#### 概要
+
+ダッシュボードページは、全国用と都道府県用に分離された新しいアーキテクチャを採用しています。各サブカテゴリーは2つの専用コンポーネントを持ち、`areaCode`に基づいて動的に選択されます。
+
+#### アーキテクチャパターン
+
+**複数コンポーネント + コンポーネント解決**
+
+- **NationalDashboard**: 全国専用ダッシュボード（`areaCode === "00000"`）
+- **PrefectureDashboard**: 都道府県専用ダッシュボード（`areaCode !== "00000"`）
+
+#### コンポーネント解決システム
+
+```typescript
+// src/components/subcategories/index.tsx
+export const getDashboardComponentByArea = (
+  subcategoryId: string,
+  areaCode: string,
+  categoryId?: string
+): React.ComponentType<SubcategoryDashboardPageProps> => {
+  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
+
+  if (!subcategory) {
+    return DefaultDashboardPage;
+  }
+
+  const isNational = areaCode === "00000";
+
+  // 新しいアーキテクチャ: 地域別コンポーネント
+  if (isNational && subcategory.nationalDashboardComponent) {
+    return (
+      componentMap[subcategory.nationalDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  if (!isNational && subcategory.prefectureDashboardComponent) {
+    return (
+      componentMap[subcategory.prefectureDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  // フォールバック: 従来の単一コンポーネント
+  if (subcategory.dashboardComponent) {
+    return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
+  }
+
+  return DefaultDashboardPage;
+};
+```
+
+#### 命名規則
+
+- **NationalDashboard**: `[Name]NationalDashboard.tsx`
+- **PrefectureDashboard**: `[Name]PrefectureDashboard.tsx`
+- **コンポーネント名**: `[Name]NationalDashboard`, `[Name]PrefectureDashboard`
+
+#### 実装例
+
+**全国用ダッシュボード**
+
+```tsx
+// src/components/subcategories/population/basic-population/BasicPopulationNationalDashboard.tsx
+"use client";
+
+import React from "react";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+
+export const BasicPopulationNationalDashboard: React.FC<
+  SubcategoryDashboardPageProps
+> = ({ category, subcategory, areaCode }) => {
+  const statsDataId = "0000010101";
+  const cdCat01 = {
+    totalPopulation: "A1101", // 総人口
+    malePopulation: "A1102",  // 男性人口
+    femalePopulation: "A1103", // 女性人口
+  };
+
+  return (
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="dashboard"
+      areaCode={areaCode}
+    >
+      {/* 全国専用の統計カード */}
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.totalPopulation,
+            }}
+            areaCode={areaCode}
+            title="全国総人口"
+            color="#3b82f6"
+          />
+          {/* 他の統計カード */}
+        </div>
+      </div>
+
+      {/* 全国専用の分析セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国人口動態分析
+          </h2>
+          {/* 全国レベルの詳細分析 */}
+        </div>
+      </div>
+
+      {/* 全国政策動向セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国政策動向
+          </h2>
+          {/* 全国的な政策動向の分析 */}
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
+```
+
+**都道府県用ダッシュボード**
+
+```tsx
+// src/components/subcategories/population/basic-population/BasicPopulationPrefectureDashboard.tsx
+"use client";
+
+import React from "react";
+import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
+import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+
+export const BasicPopulationPrefectureDashboard: React.FC<
+  SubcategoryDashboardPageProps
+> = ({ category, subcategory, areaCode }) => {
+  const statsDataId = "0000010101";
+  const cdCat01 = {
+    totalPopulation: "A1101", // 総人口
+    malePopulation: "A1102",  // 男性人口
+    femalePopulation: "A1103", // 女性人口
+  };
+
+  return (
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="dashboard"
+      areaCode={areaCode}
+    >
+      {/* 都道府県専用の統計カード */}
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <StatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.totalPopulation,
+            }}
+            areaCode={areaCode}
+            title="総人口"
+            color="#3b82f6"
+          />
+          {/* 他の統計カード */}
+        </div>
+      </div>
+
+      {/* 都道府県詳細セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            都道府県詳細
+          </h2>
+          {/* 都道府県固有の詳細分析 */}
+        </div>
+      </div>
+
+      {/* 全国との比較セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国との比較
+          </h2>
+          {/* 全国平均との比較グラフ */}
+        </div>
+      </div>
+
+      {/* 周辺都道府県との比較セクション */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            周辺都道府県との比較
+          </h2>
+          {/* 周辺地域との比較分析 */}
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
+```
+
+#### 設定ファイル（categories.json）
+
+```json
+{
+  "id": "basic-population",
+  "name": "基本人口",
+  "href": "/basic-population",
+  "dashboardComponent": "BasicPopulationNationalDashboard",
+  "nationalDashboardComponent": "BasicPopulationNationalDashboard",
+  "prefectureDashboardComponent": "BasicPopulationPrefectureDashboard",
+  "displayOrder": 1
+}
+```
+
+#### メリット
+
+- **明確な分離**: 全国用と都道府県用で異なるUI/UXを提供
+- **保守性**: 各コンポーネントが単一責任を持つ
+- **拡張性**: 新しい地域レベル（市区町村等）の追加が容易
+- **型安全性**: TypeScriptによる厳密な型チェック
+
 **サブカテゴリー専用コンポーネント**
 
 各サブカテゴリーに特化したページコンポーネント。
