@@ -65,6 +65,12 @@ export class EstatStatsDataService {
       return response;
     } catch (error) {
       console.error("Failed to fetch stats data:", error);
+      console.error("Error details:", {
+        statsDataId,
+        options,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       throw new Error(
         `統計データの取得に失敗しました: ${
           error instanceof Error ? error.message : "Unknown error"
@@ -235,6 +241,12 @@ export class EstatStatsDataService {
       return years;
     } catch (error) {
       console.error("Failed to get available years:", error);
+      console.error("Error details:", {
+        statsDataId,
+        categoryCode,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       throw new Error(
         `年度一覧の取得に失敗しました: ${
           error instanceof Error ? error.message : "Unknown error"

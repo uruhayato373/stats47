@@ -7,7 +7,7 @@ export enum EstatErrorCode {
   OK = 0,
   OK_WITH_WARNING = 1,
   NO_DATA = 2,
-  
+
   // パラメータエラー（100番台）
   INVALID_APP_ID = 100,
   INVALID_LANG = 101,
@@ -32,9 +32,12 @@ export enum EstatErrorCode {
   INVALID_SECTION_HEADER_FLG = 150,
   INVALID_CALLBACK = 160,
   INVALID_UPDATED_DATE = 170,
-  
+
   // システムエラー（200番台）
   SYSTEM_ERROR = 999,
+
+  // その他のエラー（300番台）
+  UNKNOWN_ERROR = 300,
 }
 
 /**
@@ -48,45 +51,63 @@ export class EstatAPIError extends Error {
     public details?: any
   ) {
     super(message);
-    this.name = 'EstatAPIError';
+    this.name = "EstatAPIError";
   }
-  
+
   /**
    * エラーコードからエラーメッセージを生成
    */
   static fromErrorCode(code: EstatErrorCode, details?: any): EstatAPIError {
     const messages: Record<EstatErrorCode, string> = {
-      [EstatErrorCode.OK]: '正常に終了しました。',
-      [EstatErrorCode.OK_WITH_WARNING]: '正常に終了しましたが、一部にエラーがあります。',
-      [EstatErrorCode.NO_DATA]: 'データが存在しません。',
-      [EstatErrorCode.INVALID_APP_ID]: 'アプリケーションIDが指定されていません。',
-      [EstatErrorCode.INVALID_LANG]: 'パラメータ lang が不正です。',
-      [EstatErrorCode.INVALID_SEARCH_KIND]: 'パラメータ searchKind が不正です。',
-      [EstatErrorCode.INVALID_SURVEY_YEARS]: 'パラメータ surveyYears が不正です。',
-      [EstatErrorCode.INVALID_OPEN_YEARS]: 'パラメータ openYears が不正です。',
-      [EstatErrorCode.INVALID_STATS_FIELD]: 'パラメータ statsField が不正です。',
-      [EstatErrorCode.INVALID_STATS_CODE]: 'パラメータ statsCode が不正です。',
-      [EstatErrorCode.INVALID_SEARCH_WORD]: 'パラメータ searchWord が不正です。',
-      [EstatErrorCode.INVALID_DATA_FORMAT]: 'パラメータ dataFormat が不正です。',
-      [EstatErrorCode.INVALID_STATS_DATA_ID]: 'パラメータ statsDataId が不正です。',
-      [EstatErrorCode.INVALID_NARROWING_COND]: '絞り込み条件が不正です。',
-      [EstatErrorCode.INVALID_LEVEL_OR_CODE]: '階層レベル、コードの指定が不正です。',
-      [EstatErrorCode.INVALID_COMBINATION]: '統計データの取得条件の組み合わせが不正です。',
-      [EstatErrorCode.INVALID_START_POSITION]: 'パラメータ startPosition が不正です。',
-      [EstatErrorCode.INVALID_LIMIT]: 'パラメータ limit が不正です。',
-      [EstatErrorCode.INVALID_META_GET_FLG]: 'パラメータ metaGetFlg が不正です。',
-      [EstatErrorCode.INVALID_CNT_GET_FLG]: 'パラメータ cntGetFlg が不正です。',
-      [EstatErrorCode.INVALID_EXPLANATION_GET_FLG]: 'パラメータ explanationGetFlg が不正です。',
-      [EstatErrorCode.INVALID_ANNOTATION_GET_FLG]: 'パラメータ annotationGetFlg が不正です。',
-      [EstatErrorCode.INVALID_REPLACE_SP_CHARS]: 'パラメータ replaceSpChars が不正です。',
-      [EstatErrorCode.INVALID_SECTION_HEADER_FLG]: 'パラメータ sectionHeaderFlg が不正です。',
-      [EstatErrorCode.INVALID_CALLBACK]: 'パラメータ callback が不正です。',
-      [EstatErrorCode.INVALID_UPDATED_DATE]: 'パラメータ updatedDate が不正です。',
-      [EstatErrorCode.SYSTEM_ERROR]: 'システムエラーが発生しました。',
+      [EstatErrorCode.OK]: "正常に終了しました。",
+      [EstatErrorCode.OK_WITH_WARNING]:
+        "正常に終了しましたが、一部にエラーがあります。",
+      [EstatErrorCode.NO_DATA]: "データが存在しません。",
+      [EstatErrorCode.INVALID_APP_ID]:
+        "アプリケーションIDが指定されていません。",
+      [EstatErrorCode.INVALID_LANG]: "パラメータ lang が不正です。",
+      [EstatErrorCode.INVALID_SEARCH_KIND]:
+        "パラメータ searchKind が不正です。",
+      [EstatErrorCode.INVALID_SURVEY_YEARS]:
+        "パラメータ surveyYears が不正です。",
+      [EstatErrorCode.INVALID_OPEN_YEARS]: "パラメータ openYears が不正です。",
+      [EstatErrorCode.INVALID_STATS_FIELD]:
+        "パラメータ statsField が不正です。",
+      [EstatErrorCode.INVALID_STATS_CODE]: "パラメータ statsCode が不正です。",
+      [EstatErrorCode.INVALID_SEARCH_WORD]:
+        "パラメータ searchWord が不正です。",
+      [EstatErrorCode.INVALID_DATA_FORMAT]:
+        "パラメータ dataFormat が不正です。",
+      [EstatErrorCode.INVALID_STATS_DATA_ID]:
+        "パラメータ statsDataId が不正です。",
+      [EstatErrorCode.INVALID_NARROWING_COND]: "絞り込み条件が不正です。",
+      [EstatErrorCode.INVALID_LEVEL_OR_CODE]:
+        "階層レベル、コードの指定が不正です。",
+      [EstatErrorCode.INVALID_COMBINATION]:
+        "統計データの取得条件の組み合わせが不正です。",
+      [EstatErrorCode.INVALID_START_POSITION]:
+        "パラメータ startPosition が不正です。",
+      [EstatErrorCode.INVALID_LIMIT]: "パラメータ limit が不正です。",
+      [EstatErrorCode.INVALID_META_GET_FLG]:
+        "パラメータ metaGetFlg が不正です。",
+      [EstatErrorCode.INVALID_CNT_GET_FLG]: "パラメータ cntGetFlg が不正です。",
+      [EstatErrorCode.INVALID_EXPLANATION_GET_FLG]:
+        "パラメータ explanationGetFlg が不正です。",
+      [EstatErrorCode.INVALID_ANNOTATION_GET_FLG]:
+        "パラメータ annotationGetFlg が不正です。",
+      [EstatErrorCode.INVALID_REPLACE_SP_CHARS]:
+        "パラメータ replaceSpChars が不正です。",
+      [EstatErrorCode.INVALID_SECTION_HEADER_FLG]:
+        "パラメータ sectionHeaderFlg が不正です。",
+      [EstatErrorCode.INVALID_CALLBACK]: "パラメータ callback が不正です。",
+      [EstatErrorCode.INVALID_UPDATED_DATE]:
+        "パラメータ updatedDate が不正です。",
+      [EstatErrorCode.SYSTEM_ERROR]: "システムエラーが発生しました。",
+      [EstatErrorCode.UNKNOWN_ERROR]: "不明なエラーが発生しました。",
     };
-    
+
     return new EstatAPIError(
-      messages[code] || 'Unknown error',
+      messages[code] || "Unknown error",
       code,
       code,
       details
@@ -98,13 +119,9 @@ export class EstatAPIError extends Error {
  * データ変換エラー
  */
 export class TransformError extends Error {
-  constructor(
-    message: string,
-    public field?: string,
-    public value?: any
-  ) {
+  constructor(message: string, public field?: string, public value?: any) {
     super(message);
-    this.name = 'TransformError';
+    this.name = "TransformError";
   }
 }
 
@@ -118,7 +135,7 @@ export class APIResponseError extends Error {
     public response?: any
   ) {
     super(message);
-    this.name = 'APIResponseError';
+    this.name = "APIResponseError";
   }
 }
 
@@ -126,12 +143,9 @@ export class APIResponseError extends Error {
  * 設定エラー
  */
 export class ConfigurationError extends Error {
-  constructor(
-    message: string,
-    public configKey?: string
-  ) {
+  constructor(message: string, public configKey?: string) {
     super(message);
-    this.name = 'ConfigurationError';
+    this.name = "ConfigurationError";
   }
 }
 
@@ -139,12 +153,8 @@ export class ConfigurationError extends Error {
  * 検証エラー
  */
 export class ValidationError extends Error {
-  constructor(
-    message: string,
-    public field?: string,
-    public value?: any
-  ) {
+  constructor(message: string, public field?: string, public value?: any) {
     super(message);
-    this.name = 'ValidationError';
+    this.name = "ValidationError";
   }
 }

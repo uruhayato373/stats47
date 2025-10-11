@@ -124,8 +124,12 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
           throw new Error("カテゴリコードが指定されていません");
         }
 
+        const searchParams = new URLSearchParams({
+          statsDataId: params.statsDataId,
+          cdCat01: params.cdCat01 || "",
+        });
         const response = await fetch(
-          `/api/estat/ranking/years?statsDataId=${params.statsDataId}&cdCat01=${params.cdCat01}`
+          `/api/estat/ranking/years?${searchParams.toString()}`
         );
 
         if (!response.ok) {
@@ -178,10 +182,14 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
           throw new Error("カテゴリコードが指定されていません");
         }
 
+        const searchParams = new URLSearchParams({
+          statsDataId: params.statsDataId,
+          cdCat01: params.cdCat01 || "",
+          yearCode: selectedYear,
+          limit: String(params.limit || 100000),
+        });
         const response = await fetch(
-          `/api/estat/ranking/data?statsDataId=${params.statsDataId}&cdCat01=${
-            params.cdCat01
-          }&yearCode=${selectedYear}&limit=${params.limit || 100000}`
+          `/api/estat/ranking/data?${searchParams.toString()}`
         );
 
         if (!response.ok) {
