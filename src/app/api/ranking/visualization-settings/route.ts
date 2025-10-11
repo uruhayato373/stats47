@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database() as any;
+    const db = await createD1Database();
 
     // 指定されたstatsDataIdとcat01の設定を取得
     const settings = await db
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database() as any;
+    const db = await createD1Database();
 
     // INSERT OR REPLACE で設定を保存/更新
     const result = await db

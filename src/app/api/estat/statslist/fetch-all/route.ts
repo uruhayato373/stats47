@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListManager, BulkFetchResult } from "@/lib/estat-stats-list-manager";
-import { StatsListParams } from "@/lib/estat/types";
+import { EstatStatsListManager, BulkFetchResult, StatsListParams } from "@/lib/estat-stats-list-manager";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = await request.json() as { params: Partial<StatsListParams> };
     const { params: baseParams } = body;
 
     // 必須パラメータチェック
@@ -17,7 +16,6 @@ export async function POST(request: NextRequest) {
     const params: Partial<StatsListParams> = {
       appId,
       lang: baseParams.lang || 'J',
-      collectArea: baseParams.collectArea || '1',
       limit: parseInt(baseParams.limit) || 1000,
     };
 

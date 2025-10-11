@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ error: "IDが必要です" }, { status: 400 });
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = (await createD1Database()) as any;
+    const db = await createD1Database();
 
     // 指定されたstats_data_idのデータをすべて削除
 
@@ -34,16 +37,19 @@ export async function DELETE({ params }: { params: { id: string } }) {
   }
 }
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ error: "IDが必要です" }, { status: 400 });
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = (await createD1Database()) as any;
+    const db = await createD1Database();
 
     // 指定されたstats_data_idのデータを取得
     const result = await db

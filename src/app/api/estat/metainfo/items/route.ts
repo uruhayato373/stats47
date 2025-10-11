@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
 
     // 結果から項目名の配列を抽出
     const itemNames =
-      result.results?.map((row: { item_name: string }) => row.item_name) || [];
+      (result.results as Array<{ item_name: string }> | undefined)?.map((row) => row.item_name) || [];
 
     // レスポンスオブジェクトを構築
     const response = {

@@ -64,7 +64,7 @@ export async function GET(
         throw new Error("データベースクエリに失敗しました");
       }
 
-      const rows = result.results as any[];
+      const rows = result.results as Array<Record<string, unknown>>;
 
       if (rows.length === 0) {
         return NextResponse.json(

@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
 
     // 結果から年度の配列を抽出
     const years =
-      result.results?.map((row: { timeCode: string; timeName: string }) => ({
+      (result.results as Array<{ timeCode: string; timeName: string }> | undefined)?.map((row) => ({
         timeCode: row.timeCode,
         timeName: row.timeName,
       })) || [];

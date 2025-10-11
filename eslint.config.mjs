@@ -24,6 +24,21 @@ const eslintConfig = [
     ],
   },
   {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-empty-object-type": "warn",
+      "react/no-unescaped-entities": "warn",
+      "storybook/no-renderer-packages": "warn",
+    },
+  },
+  {
+    files: ["**/*.stories.ts", "**/*.stories.tsx"],
+    rules: {
+      "storybook/no-renderer-packages": "off",
+    },
+  },
+  {
     files: ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",

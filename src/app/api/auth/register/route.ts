@@ -5,7 +5,8 @@ import { createD1Database } from "@/lib/d1-client";
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, email, password } = await request.json();
+    const body = await request.json() as { username?: string; email?: string; password?: string };
+    const { username, email, password } = body;
 
     // バリデーション
     if (!username || !email || !password) {

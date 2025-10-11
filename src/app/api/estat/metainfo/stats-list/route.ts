@@ -79,26 +79,27 @@ export async function GET(request: NextRequest) {
       const countResult = await countStmt
         .bind(searchParam, searchParam, searchParam)
         .all();
-      totalCount = countResult.results?.[0]?.total || 0;
+      const countData = countResult.results?.[0] as { total: number } | undefined;
+      totalCount = countData?.total || 0;
     } else {
       const countStmt = db.prepare(countQuery);
       const countResult = await countStmt.bind().all();
-      totalCount = countResult.results?.[0]?.total || 0;
+      const countData = countResult.results?.[0] as { total: number } | undefined;
+      totalCount = countData?.total || 0;
     }
 
     console.log("Query completed. Results:", result.results?.length);
     console.log("Total count:", totalCount);
 
     // レスポンス用のデータ形式に変換
-    const items = (result.results || []).map(
-      (row: {
-        stats_data_id: string;
-        stat_name: string;
-        title: string;
-        created_at: string;
-        updated_at: string;
-        item_count: number;
-      }) => ({
+    const items = ((result.results || []) as Array<{
+      stats_data_id: string;
+      stat_name: string;
+      title: string;
+      created_at: string;
+      updated_at: string;
+      item_count: number;
+    }>).map((row) => ({
         id: row.stats_data_id, // idとして統計表IDを使用
         stats_data_id: row.stats_data_id,
         stat_name: row.stat_name,

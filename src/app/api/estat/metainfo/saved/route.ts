@@ -24,13 +24,13 @@ export async function GET(request: NextRequest) {
 
     // 内部的に新しいAPIを呼び出し
     const response = await fetch(newApiUrl.toString());
-    const data = await response.json();
+    const data = await response.json() as Record<string, unknown>;
 
     // レスポンス形式を既存のクライアントに合わせて調整
     return NextResponse.json({
       ...data,
       meta: {
-        ...data.meta,
+        ...(typeof data.meta === 'object' && data.meta !== null ? data.meta as Record<string, unknown> : {}),
         legacyEndpoint: true,
         redirectedFrom: "/api/estat/metainfo/saved",
       }

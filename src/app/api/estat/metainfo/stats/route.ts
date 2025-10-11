@@ -5,8 +5,8 @@ import { createD1Database } from "@/lib/d1-client";
 export async function GET(request: NextRequest) {
   try {
     // Cloudflare D1データベースに直接接続
-    const db = await createD1Database() as any;
-    const metaInfoService = new EstatMetaInfoService(db);
+    const db = await createD1Database();
+    const metaInfoService = new EstatMetaInfoService(db as unknown as D1Database);
 
     // 統計データ一覧を取得
     const statsList = await metaInfoService.getStatsList({ limit: 100 });

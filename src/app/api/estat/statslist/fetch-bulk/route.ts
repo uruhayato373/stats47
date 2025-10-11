@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListManager, BulkFetchResult } from "@/lib/estat-stats-list-manager";
-import { StatsListParams } from "@/lib/estat/types";
+import { EstatStatsListManager, BulkFetchResult, StatsListParams } from "@/lib/estat-stats-list-manager";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = await request.json() as { paramsList: Array<Partial<StatsListParams>>; options?: Record<string, unknown> };
     const { paramsList, options = {} } = body;
 
     if (!Array.isArray(paramsList) || paramsList.length === 0) {
@@ -23,8 +22,7 @@ export async function POST(request: NextRequest) {
     // 各パラメータにappIdを追加
     const enrichedParamsList = paramsList.map((params: Partial<StatsListParams>) => ({
       appId,
-      lang: options.lang || 'J',
-      collectArea: options.collectArea || '1',
+      lang: (options.lang as string) || 'J',
       ...params,
     }));
 
@@ -41,7 +39,7 @@ export async function POST(request: NextRequest) {
       successCount: Math.max(0, paramsList.length - 1),
       failureCount: Math.min(1, paramsList.length),
       totalRecords: paramsList.length * 850, // 平均850件と仮定
-      results: paramsList.map((params: any, index: number) => {
+      results: paramsList.map((params: Partial<StatsListParams>, index: number) => {
         const isLast = index === paramsList.length - 1;
         return {
           params,
