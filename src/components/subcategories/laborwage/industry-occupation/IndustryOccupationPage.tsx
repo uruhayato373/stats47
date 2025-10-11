@@ -38,23 +38,7 @@ export const IndustryOccupationPage: React.FC<IndustryOccupationPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.F2320,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '製造業就業者数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

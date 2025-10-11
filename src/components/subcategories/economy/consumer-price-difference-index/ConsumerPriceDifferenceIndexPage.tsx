@@ -38,23 +38,7 @@ export const ConsumerPriceDifferenceIndexPage: React.FC<ConsumerPriceDifferenceI
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C5106,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '-',
-          name: '消費者物価指数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

@@ -38,23 +38,7 @@ export const IndustrialWaterPage: React.FC<IndustrialWaterPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.H5201,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '個',
-          name: '都市ガスメーター取付数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

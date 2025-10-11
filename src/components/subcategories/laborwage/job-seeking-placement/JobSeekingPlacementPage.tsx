@@ -38,23 +38,7 @@ export const JobSeekingPlacementPage: React.FC<JobSeekingPlacementPageProps> = (
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.F1107,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '完全失業者数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

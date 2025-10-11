@@ -41,23 +41,7 @@ export const WagesWorkingConditionsPage: React.FC<SubcategoryPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C122201,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: "百万円",
-          name: "賃金・俸給",
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateBlues",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

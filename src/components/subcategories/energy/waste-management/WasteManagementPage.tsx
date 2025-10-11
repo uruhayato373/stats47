@@ -38,23 +38,7 @@ export const WasteManagementPage: React.FC<WasteManagementPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C112208,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '百万円',
-          name: '廃棄物処理業GDP',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

@@ -48,23 +48,7 @@ export const ExpenditurePage: React.FC<ExpenditurePageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.D310303,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '千円',
-          name: '民生費',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

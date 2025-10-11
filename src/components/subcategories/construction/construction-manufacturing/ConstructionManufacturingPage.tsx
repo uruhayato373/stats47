@@ -48,23 +48,7 @@ export const ConstructionManufacturingPage: React.FC<ConstructionManufacturingPa
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C112207,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '百万円',
-          name: '建設業GDP',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

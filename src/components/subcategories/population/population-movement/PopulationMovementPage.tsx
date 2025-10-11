@@ -109,24 +109,7 @@ export const PopulationMovementPage: React.FC<SubcategoryPageProps> = ({
       </div>
 
       {/* コロプレス地図とデータテーブル */}
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.socialIncrease,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: "人",
-          name: "社会増減数",
-        }}
-        title="社会増減数ランキング"
-        options={{
-          colorScheme: subcategory.colorScheme || "interpolateRdYlBu",
-          divergingMidpoint: "zero",
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
 
       {/* 昼間人口と流入出人口の推移 */}
       <div className="px-4 pb-4">

@@ -48,23 +48,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C3402,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '百万円',
-          name: '製造業付加価値額',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

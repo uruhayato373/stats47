@@ -38,23 +38,7 @@ export const InfrastructureEnergyPage: React.FC<InfrastructureEnergyPageProps> =
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.K6107,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: 'tCO2',
-          name: '温室効果ガス排出量',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

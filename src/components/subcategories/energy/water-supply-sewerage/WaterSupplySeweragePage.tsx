@@ -39,23 +39,7 @@ export const WaterSupplySeweragePage: React.FC<WaterSupplySeweragePageProps> = (
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataIdRatio,
-          cdCat01: cdCat01.ratio_H0530401,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '%',
-          name: '下水道普及率',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

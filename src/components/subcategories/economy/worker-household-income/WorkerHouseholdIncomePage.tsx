@@ -48,23 +48,7 @@ export const WorkerHouseholdIncomePage: React.FC<WorkerHouseholdIncomePageProps>
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.L3130,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '円',
-          name: '可処分所得',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

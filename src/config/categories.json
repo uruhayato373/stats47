@@ -10,7 +10,6 @@
         "name": "土地面積",
         "href": "/land-area",
         "dashboardComponent": "LandAreaDashboard",
-        "rankingComponent": "LandAreaRanking",
         "displayOrder": 1
       },
       {
@@ -18,7 +17,6 @@
         "name": "土地利用",
         "href": "/land-use",
         "dashboardComponent": "LandUseDashboard",
-        "rankingComponent": "LandUseRanking",
         "displayOrder": 2
       },
       {
@@ -26,7 +24,6 @@
         "name": "自然環境",
         "href": "/natural-environment",
         "dashboardComponent": "NaturalEnvironmentDashboard",
-        "rankingComponent": "NaturalEnvironmentRanking",
         "displayOrder": 3
       },
       {
@@ -34,7 +31,6 @@
         "name": "気象・気候",
         "href": "/weather-climate",
         "dashboardComponent": "WeatherClimateDashboard",
-        "rankingComponent": "WeatherClimateRanking",
         "displayOrder": 4
       }
     ]
@@ -50,7 +46,6 @@
         "name": "総人口",
         "href": "/basic-population",
         "dashboardComponent": "BasicPopulationDashboard",
-        "rankingComponent": "BasicPopulationRanking",
         "displayOrder": 1
       },
       {
@@ -58,7 +53,6 @@
         "name": "人口移動",
         "href": "/population-movement",
         "dashboardComponent": "PopulationMovementDashboard",
-        "rankingComponent": "PopulationMovementRanking",
         "displayOrder": 2
       },
       {
@@ -66,7 +60,6 @@
         "name": "人口構成",
         "href": "/population-composition",
         "dashboardComponent": "PopulationCompositionDashboard",
-        "rankingComponent": "PopulationCompositionRanking",
         "displayOrder": 3
       },
       {
@@ -74,7 +67,6 @@
         "name": "婚姻・家族",
         "href": "/marriage",
         "dashboardComponent": "MarriageDashboard",
-        "rankingComponent": "MarriageRanking",
         "displayOrder": 4
       },
       {
@@ -82,7 +74,6 @@
         "name": "世帯",
         "href": "/households",
         "dashboardComponent": "HouseholdsDashboard",
-        "rankingComponent": "HouseholdsRanking",
         "displayOrder": 5
       },
       {
@@ -90,7 +81,6 @@
         "name": "出生・死亡",
         "href": "/birth-death",
         "dashboardComponent": "BirthDeathDashboard",
-        "rankingComponent": "BirthDeathRanking",
         "displayOrder": 6
       }
     ]
@@ -106,7 +96,6 @@
         "name": "賃金・労働条件",
         "href": "/wages-working-conditions",
         "dashboardComponent": "WagesWorkingConditionsDashboard",
-        "rankingComponent": "WagesWorkingConditionsRanking",
         "displayOrder": 1
       },
       {
@@ -114,7 +103,6 @@
         "name": "労働力構造",
         "href": "/labor-force-structure",
         "dashboardComponent": "LaborForceStructureDashboard",
-        "rankingComponent": "LaborForceStructureRanking",
         "displayOrder": 2
       },
       {
@@ -122,7 +110,6 @@
         "name": "産業構造",
         "href": "/industrial-structure",
         "dashboardComponent": "IndustrialStructureDashboard",
-        "rankingComponent": "IndustrialStructureRanking",
         "displayOrder": 3
       },
       {
@@ -130,7 +117,6 @@
         "name": "通勤・就職",
         "href": "/commuting-employment",
         "dashboardComponent": "CommutingEmploymentDashboard",
-        "rankingComponent": "CommutingEmploymentRanking",
         "displayOrder": 4
       },
       {
@@ -138,7 +124,6 @@
         "name": "労働争議",
         "href": "/labor-disputes",
         "dashboardComponent": "LaborDisputesDashboard",
-        "rankingComponent": "LaborDisputesRanking",
         "displayOrder": 5
       },
       {
@@ -146,7 +131,6 @@
         "name": "求職・求人",
         "href": "/job-seeking-placement",
         "dashboardComponent": "JobSeekingPlacementDashboard",
-        "rankingComponent": "JobSeekingPlacementRanking",
         "displayOrder": 6
       },
       {
@@ -154,7 +138,6 @@
         "name": "産業・職業別",
         "href": "/industry-occupation",
         "dashboardComponent": "IndustryOccupationDashboard",
-        "rankingComponent": "IndustryOccupationRanking",
         "displayOrder": 7
       },
       {
@@ -162,7 +145,6 @@
         "name": "雇用形態",
         "href": "/employment-type",
         "dashboardComponent": "EmploymentTypeDashboard",
-        "rankingComponent": "EmploymentTypeRanking",
         "displayOrder": 8
       }
     ]
@@ -178,7 +160,6 @@
         "name": "農業世帯",
         "href": "/agricultural-household",
         "dashboardComponent": "AgriculturalHouseholdDashboard",
-        "rankingComponent": "AgriculturalHouseholdRanking",
         "displayOrder": 1
       }
     ]
@@ -194,7 +175,6 @@
         "name": "製造業",
         "href": "/manufacturing",
         "dashboardComponent": "ManufacturingDashboard",
-        "rankingComponent": "ManufacturingRanking",
         "displayOrder": 1
       }
     ]
@@ -210,7 +190,6 @@
         "name": "商業・サービス産業",
         "href": "/commerce-service-industry",
         "dashboardComponent": "CommerceServiceIndustryDashboard",
-        "rankingComponent": "CommerceServiceIndustryRanking",
         "displayOrder": 1
       },
       {
@@ -218,7 +197,6 @@
         "name": "商業施設",
         "href": "/commercial-facilities",
         "dashboardComponent": "CommercialFacilitiesDashboard",
-        "rankingComponent": "CommercialFacilitiesRanking",
         "displayOrder": 2
       }
     ]
@@ -234,7 +212,6 @@
         "name": "労働者世帯収入",
         "href": "/worker-household-income",
         "dashboardComponent": "WorkerHouseholdIncomeDashboard",
-        "rankingComponent": "WorkerHouseholdIncomeRanking",
         "displayOrder": 1
       },
       {
@@ -242,7 +219,6 @@
         "name": "家計",
         "href": "/household-economy",
         "dashboardComponent": "HouseholdEconomyDashboard",
-        "rankingComponent": "HouseholdEconomyRanking",
         "displayOrder": 2
       },
       {
@@ -250,7 +226,6 @@
         "name": "企業規模",
         "href": "/business-scale",
         "dashboardComponent": "BusinessScaleDashboard",
-        "rankingComponent": "BusinessScaleRanking",
         "displayOrder": 3
       },
       {
@@ -258,7 +233,6 @@
         "name": "企業活動",
         "href": "/business-activity",
         "dashboardComponent": "BusinessActivityDashboard",
-        "rankingComponent": "BusinessActivityRanking",
         "displayOrder": 4
       },
       {
@@ -266,7 +240,6 @@
         "name": "総生産・経済指標",
         "href": "/gross-product-economic-indicators",
         "dashboardComponent": "GrossProductEconomicIndicatorsDashboard",
-        "rankingComponent": "GrossProductEconomicIndicatorsRanking",
         "displayOrder": 5
       },
       {
@@ -274,7 +247,6 @@
         "name": "消費者物価地域差指数",
         "href": "/consumer-price-difference-index",
         "dashboardComponent": "ConsumerPriceDifferenceIndexDashboard",
-        "rankingComponent": "ConsumerPriceDifferenceIndexRanking",
         "displayOrder": 6
       }
     ]
@@ -290,7 +262,6 @@
         "name": "生活環境",
         "href": "/living-environment",
         "dashboardComponent": "LivingEnvironmentDashboard",
-        "rankingComponent": "LivingEnvironmentRanking",
         "displayOrder": 1
       },
       {
@@ -298,7 +269,6 @@
         "name": "住宅所有",
         "href": "/housing-ownership",
         "dashboardComponent": "HousingOwnershipDashboard",
-        "rankingComponent": "HousingOwnershipRanking",
         "displayOrder": 2
       },
       {
@@ -306,7 +276,6 @@
         "name": "住宅構造",
         "href": "/housing-structure",
         "dashboardComponent": "HousingStructureDashboard",
-        "rankingComponent": "HousingStructureRanking",
         "displayOrder": 3
       },
       {
@@ -314,7 +283,6 @@
         "name": "住宅設備",
         "href": "/housing-facilities",
         "dashboardComponent": "HousingFacilitiesDashboard",
-        "rankingComponent": "HousingFacilitiesRanking",
         "displayOrder": 4
       },
       {
@@ -322,7 +290,6 @@
         "name": "建設・製造",
         "href": "/construction-manufacturing",
         "dashboardComponent": "ConstructionManufacturingDashboard",
-        "rankingComponent": "ConstructionManufacturingRanking",
         "displayOrder": 5
       },
       {
@@ -330,7 +297,6 @@
         "name": "福祉施設",
         "href": "/welfare-facilities",
         "dashboardComponent": "WelfareFacilitiesDashboard",
-        "rankingComponent": "WelfareFacilitiesRanking",
         "displayOrder": 6
       },
       {
@@ -338,7 +304,6 @@
         "name": "住宅統計",
         "href": "/housing-statistics",
         "dashboardComponent": "HousingStatisticsDashboard",
-        "rankingComponent": "HousingStatisticsRanking",
         "displayOrder": 7
       }
     ]
@@ -354,7 +319,6 @@
         "name": "上水道・下水道",
         "href": "/water-supply-sewerage",
         "dashboardComponent": "WaterSupplySewerageDashboard",
-        "rankingComponent": "WaterSupplySewerageRanking",
         "displayOrder": 1
       },
       {
@@ -362,7 +326,6 @@
         "name": "廃棄物処理",
         "href": "/waste-management",
         "dashboardComponent": "WasteManagementDashboard",
-        "rankingComponent": "WasteManagementRanking",
         "displayOrder": 2
       },
       {
@@ -370,7 +333,6 @@
         "name": "工業用水",
         "href": "/industrial-water",
         "dashboardComponent": "IndustrialWaterDashboard",
-        "rankingComponent": "IndustrialWaterRanking",
         "displayOrder": 3
       },
       {
@@ -378,7 +340,6 @@
         "name": "インフラ・エネルギー",
         "href": "/infrastructure-energy",
         "dashboardComponent": "InfrastructureEnergyDashboard",
-        "rankingComponent": "InfrastructureEnergyRanking",
         "displayOrder": 4
       }
     ]
@@ -394,7 +355,6 @@
         "name": "観光・宿泊",
         "href": "/tourism-accommodation",
         "dashboardComponent": "TourismAccommodationDashboard",
-        "rankingComponent": "TourismAccommodationRanking",
         "displayOrder": 1
       }
     ]
@@ -410,7 +370,6 @@
         "name": "幼稚園",
         "href": "/kindergarten",
         "dashboardComponent": "KindergartenDashboard",
-        "rankingComponent": "KindergartenRanking",
         "displayOrder": 1
       },
       {
@@ -418,7 +377,6 @@
         "name": "小学校",
         "href": "/elementary-school",
         "dashboardComponent": "ElementarySchoolDashboard",
-        "rankingComponent": "ElementarySchoolRanking",
         "displayOrder": 2
       },
       {
@@ -426,7 +384,6 @@
         "name": "中学校",
         "href": "/junior-high-school",
         "dashboardComponent": "JuniorHighSchoolDashboard",
-        "rankingComponent": "JuniorHighSchoolRanking",
         "displayOrder": 3
       },
       {
@@ -434,7 +391,6 @@
         "name": "高等学校",
         "href": "/high-school",
         "dashboardComponent": "HighSchoolDashboard",
-        "rankingComponent": "HighSchoolRanking",
         "displayOrder": 4
       },
       {
@@ -442,7 +398,6 @@
         "name": "短大・大学",
         "href": "/college-university",
         "dashboardComponent": "CollegeUniversityDashboard",
-        "rankingComponent": "CollegeUniversityRanking",
         "displayOrder": 5
       },
       {
@@ -450,7 +405,6 @@
         "name": "文化施設",
         "href": "/cultural-facilities",
         "dashboardComponent": "CulturalFacilitiesDashboard",
-        "rankingComponent": "CulturalFacilitiesRanking",
         "displayOrder": 6
       },
       {
@@ -458,7 +412,6 @@
         "name": "スポーツ施設",
         "href": "/sports-facilities",
         "dashboardComponent": "SportsFacilitiesDashboard",
-        "rankingComponent": "SportsFacilitiesRanking",
         "displayOrder": 7
       },
       {
@@ -466,7 +419,6 @@
         "name": "社会活動",
         "href": "/social-activities",
         "dashboardComponent": "SocialActivitiesDashboard",
-        "rankingComponent": "SocialActivitiesRanking",
         "displayOrder": 8
       },
       {
@@ -474,7 +426,6 @@
         "name": "保育・幼児教育",
         "href": "/childcare-early-education",
         "dashboardComponent": "ChildcareEarlyEducationDashboard",
-        "rankingComponent": "ChildcareEarlyEducationRanking",
         "displayOrder": 9
       },
       {
@@ -482,7 +433,6 @@
         "name": "義務教育",
         "href": "/compulsory-education",
         "dashboardComponent": "CompulsoryEducationDashboard",
-        "rankingComponent": "CompulsoryEducationRanking",
         "displayOrder": 10
       }
     ]
@@ -498,7 +448,6 @@
         "name": "財政指標",
         "href": "/fiscal-indicators",
         "dashboardComponent": "FiscalIndicatorsDashboard",
-        "rankingComponent": "FiscalIndicatorsRanking",
         "displayOrder": 1
       },
       {
@@ -506,7 +455,6 @@
         "name": "職員・議会・選挙",
         "href": "/staff-assembly-election",
         "dashboardComponent": "StaffAssemblyElectionDashboard",
-        "rankingComponent": "StaffAssemblyElectionRanking",
         "displayOrder": 2
       },
       {
@@ -514,7 +462,6 @@
         "name": "税収",
         "href": "/tax-revenue",
         "dashboardComponent": "TaxRevenueDashboard",
-        "rankingComponent": "TaxRevenueRanking",
         "displayOrder": 3
       },
       {
@@ -522,7 +469,6 @@
         "name": "投資",
         "href": "/investment",
         "dashboardComponent": "InvestmentDashboard",
-        "rankingComponent": "InvestmentRanking",
         "displayOrder": 4
       },
       {
@@ -530,7 +476,6 @@
         "name": "歳入",
         "href": "/revenue",
         "dashboardComponent": "RevenueDashboard",
-        "rankingComponent": "RevenueRanking",
         "displayOrder": 5
       },
       {
@@ -538,7 +483,6 @@
         "name": "歳出",
         "href": "/expenditure",
         "dashboardComponent": "ExpenditureDashboard",
-        "rankingComponent": "ExpenditureRanking",
         "displayOrder": 6
       }
     ]
@@ -554,7 +498,6 @@
         "name": "消防・緊急事態",
         "href": "/fire-emergency",
         "dashboardComponent": "FireEmergencyDashboard",
-        "rankingComponent": "FireEmergencyRanking",
         "displayOrder": 1
       },
       {
@@ -562,7 +505,6 @@
         "name": "火災保険",
         "href": "/fire-insurance",
         "dashboardComponent": "FireInsuranceDashboard",
-        "rankingComponent": "FireInsuranceRanking",
         "displayOrder": 2
       },
       {
@@ -570,7 +512,6 @@
         "name": "警察・犯罪",
         "href": "/police-crime",
         "dashboardComponent": "PoliceCrimeDashboard",
-        "rankingComponent": "PoliceCrimeRanking",
         "displayOrder": 3
       },
       {
@@ -578,7 +519,6 @@
         "name": "交通事故",
         "href": "/traffic-accidents",
         "dashboardComponent": "TrafficAccidentsDashboard",
-        "rankingComponent": "TrafficAccidentsRanking",
         "displayOrder": 4
       },
       {
@@ -586,7 +526,6 @@
         "name": "公害・環境",
         "href": "/pollution-environment",
         "dashboardComponent": "PollutionEnvironmentDashboard",
-        "rankingComponent": "PollutionEnvironmentRanking",
         "displayOrder": 5
       }
     ]
@@ -602,7 +541,6 @@
         "name": "社会保障指標",
         "href": "/card",
         "dashboardComponent": "SocialSecurityCardDashboard",
-        "rankingComponent": "SocialSecurityCardRanking",
         "displayOrder": 1
       },
       {
@@ -610,7 +548,6 @@
         "name": "死亡統計",
         "href": "/death-statistics",
         "dashboardComponent": "DeathStatisticsDashboard",
-        "rankingComponent": "DeathStatisticsRanking",
         "displayOrder": 2
       },
       {
@@ -618,7 +555,6 @@
         "name": "生活保護・福祉",
         "href": "/public-assistance-welfare",
         "dashboardComponent": "PublicAssistanceWelfareDashboard",
-        "rankingComponent": "PublicAssistanceWelfareRanking",
         "displayOrder": 3
       },
       {
@@ -626,7 +562,6 @@
         "name": "健康・保健",
         "href": "/health-care",
         "dashboardComponent": "HealthCareDashboard",
-        "rankingComponent": "HealthCareRanking",
         "displayOrder": 4
       }
     ]
@@ -642,7 +577,6 @@
         "name": "外国人人口",
         "href": "/foreign-population",
         "dashboardComponent": "ForeignPopulationDashboard",
-        "rankingComponent": "ForeignPopulationRanking",
         "displayOrder": 1
       }
     ]
@@ -658,7 +592,6 @@
         "name": "道路",
         "href": "/roads",
         "dashboardComponent": "RoadsDashboard",
-        "rankingComponent": "RoadsRanking",
         "displayOrder": 1
       }
     ]

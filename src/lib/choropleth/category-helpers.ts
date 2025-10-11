@@ -16,8 +16,8 @@ interface CategoryJsonItem {
     id: string;
     name: string;
     href: string;
-    component: string;
-    areaComponent?: string;
+    dashboardComponent: string;
+    displayOrder: number;
   }>;
 }
 
@@ -40,13 +40,13 @@ function transformCategory(
     description: "",
     icon: category.icon,
     displayOrder,
-    subcategories: (category.subcategories || []).map((sub, subIndex) => ({
+    subcategories: (category.subcategories || []).map((sub) => ({
       id: sub.id,
       categoryId: category.id,
       name: sub.name,
-      displayOrder: subIndex + 1,
-      component: sub.component,
-      areaComponent: sub.areaComponent,
+      displayOrder: sub.displayOrder,
+      component: sub.dashboardComponent,
+      areaComponent: undefined,
     })),
   };
 }

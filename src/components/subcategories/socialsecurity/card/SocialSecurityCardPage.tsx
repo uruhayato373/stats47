@@ -48,23 +48,7 @@ export const SocialSecurityCardPage: React.FC<SocialSecurityCardPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.I1101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '年',
-          name: '男性平均余命',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

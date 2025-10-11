@@ -1,7 +1,6 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { MarriageRanking } from "./MarriageRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface MarriagePageProps {
@@ -52,7 +51,7 @@ export const MarriagePage: React.FC<MarriagePageProps> = ({
 
       {/* ランキング */}
       <div className="px-4 pb-4">
-        <MarriageRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

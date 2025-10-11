@@ -48,23 +48,7 @@ export const CommercialFacilitiesPage: React.FC<CommercialFacilitiesPageProps> =
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C210715,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '所',
-          name: '小売業事業所数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

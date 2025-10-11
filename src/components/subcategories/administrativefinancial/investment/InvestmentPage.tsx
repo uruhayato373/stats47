@@ -38,23 +38,7 @@ export const InvestmentPage: React.FC<InvestmentPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.D4201,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '千円',
-          name: '住民税',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

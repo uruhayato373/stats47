@@ -38,23 +38,7 @@ export const LaborDisputesPage: React.FC<LaborDisputesPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.F1101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '労働力人口',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

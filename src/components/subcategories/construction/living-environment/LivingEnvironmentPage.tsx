@@ -39,23 +39,7 @@ export const LivingEnvironmentPage: React.FC<LivingEnvironmentPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataIdRatio,
-          cdCat01: cdCat01.ratio_H0520101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '%',
-          name: '上水道給水人口比率',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

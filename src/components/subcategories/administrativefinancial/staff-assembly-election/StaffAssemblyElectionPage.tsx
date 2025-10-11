@@ -48,23 +48,7 @@ export const StaffAssemblyElectionPage: React.FC<StaffAssemblyElectionPageProps>
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.D1201,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '一般行政部門職員数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

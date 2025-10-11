@@ -63,13 +63,35 @@ export default async function RankingPage({ params }: PageProps) {
     notFound();
   }
 
-  // land-areaとland-useの場合は最初の統計項目にリダイレクト
-  if (subcategoryId === "land-area") {
-    redirect(`/${categoryId}/${subcategoryId}/ranking/total-area-excluding`);
-  }
+  // 全サブカテゴリでデフォルトランキングキーにリダイレクト
+  // データベースからデフォルトランキングキーを取得
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/api/ranking-items/${encodeURIComponent(
+      subcategoryId
+    )}`;
 
-  if (subcategoryId === "land-use") {
-    redirect(`/${categoryId}/${subcategoryId}/ranking/agricultural-land`);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const config = await response.json();
+      const defaultRankingKey = config.subcategory.defaultRankingKey;
+      if (defaultRankingKey) {
+        redirect(
+          `/${categoryId}/${subcategoryId}/ranking/${defaultRankingKey}`
+        );
+      }
+    }
+  } catch (error) {
+    console.warn(
+      `デフォルトランキングキーの取得に失敗しました (${subcategoryId}):`,
+      error
+    );
   }
 
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得

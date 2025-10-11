@@ -4,7 +4,6 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { WelfareFacilitiesRanking } from "./WelfareFacilitiesRanking";
 
 interface WelfareFacilitiesPageProps {
   category: CategoryData;
@@ -72,7 +71,7 @@ export const WelfareFacilitiesPage: React.FC<WelfareFacilitiesPageProps> = ({
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <WelfareFacilitiesRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

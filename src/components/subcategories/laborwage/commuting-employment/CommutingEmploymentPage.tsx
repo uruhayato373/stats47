@@ -4,7 +4,6 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { CommutingEmploymentRanking } from "./CommutingEmploymentRanking";
 
 interface CommutingEmploymentPageProps {
   category: CategoryData;
@@ -91,7 +90,7 @@ export const CommutingEmploymentPage: React.FC<
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <CommutingEmploymentRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

@@ -48,23 +48,7 @@ export const CommerceServiceIndustryPage: React.FC<CommerceServiceIndustryPagePr
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.C112209,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '百万円',
-          name: '卸売・小売業GDP',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

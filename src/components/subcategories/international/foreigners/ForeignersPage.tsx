@@ -141,23 +141,7 @@ export const ForeignersPage: React.FC<ForeignersPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: activeRanking.statsDataId,
-          cdCat01: activeRanking.cdCat01,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: activeRanking.unit,
-          name: activeRanking.name,
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

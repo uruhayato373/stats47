@@ -5,7 +5,6 @@ import React from "react";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { BasicPopulationRanking } from "./BasicPopulationRanking";
 import { SubcategoryPageProps } from "@/types/subcategory";
 
 export const BasicPopulationPage: React.FC<SubcategoryPageProps> = ({
@@ -82,7 +81,7 @@ export const BasicPopulationPage: React.FC<SubcategoryPageProps> = ({
       </div> */}
 
       {/* コロプレス地図とデータテーブル */}
-      <BasicPopulationRanking subcategory={subcategory} />
+      
 
       {/* 人口ピラミッド */}
       {/* <div className="px-4 pb-4">

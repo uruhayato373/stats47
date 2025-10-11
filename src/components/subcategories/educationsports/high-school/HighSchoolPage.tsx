@@ -4,7 +4,6 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { HighSchoolRanking } from "./HighSchoolRanking";
 
 interface HighSchoolPageProps {
   category: CategoryData;
@@ -52,7 +51,7 @@ export const HighSchoolPage: React.FC<HighSchoolPageProps> = ({
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <HighSchoolRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

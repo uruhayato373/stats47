@@ -4,7 +4,6 @@ import React from "react";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { IndustrialStructureRanking } from "./IndustrialStructureRanking";
 
 interface IndustrialStructurePageProps {
   category: CategoryData;
@@ -71,7 +70,7 @@ export const IndustrialStructurePage: React.FC<
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           ランキング
         </h2>
-        <IndustrialStructureRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

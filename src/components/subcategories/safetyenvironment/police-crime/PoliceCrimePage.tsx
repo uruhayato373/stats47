@@ -48,23 +48,7 @@ export const PoliceCrimePage: React.FC<PoliceCrimePageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.K3101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '件',
-          name: '交通事故発生件数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

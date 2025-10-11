@@ -3,7 +3,6 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { HouseholdsRanking } from "./HouseholdsRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface HouseholdsPageProps {
@@ -81,7 +80,7 @@ export const HouseholdsPage: React.FC<HouseholdsPageProps> = ({
       </div>
 
       {/* コロプレス地図とデータテーブル */}
-      <HouseholdsRanking subcategory={subcategory} />
+      
     </SubcategoryLayout>
   );
 };

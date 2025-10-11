@@ -48,23 +48,7 @@ export const DeathStatisticsPage: React.FC<DeathStatisticsPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.J1105,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人',
-          name: '生活保護被保護実人員',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

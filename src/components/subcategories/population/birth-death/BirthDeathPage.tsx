@@ -3,7 +3,6 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { BirthDeathRanking } from "./BirthDeathRanking";
 import { CategoryData, SubcategoryData } from "@/types/choropleth";
 
 interface BirthDeathPageProps {
@@ -81,7 +80,7 @@ export const BirthDeathPage: React.FC<BirthDeathPageProps> = ({
 
       {/* ランキング */}
       <div className="px-4 pb-4">
-        <BirthDeathRanking subcategory={subcategory} />
+        
       </div>
     </SubcategoryLayout>
   );

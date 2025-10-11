@@ -48,23 +48,7 @@ export const FireInsurancePage: React.FC<FireInsurancePageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.K2101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '件',
-          name: '出火件数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

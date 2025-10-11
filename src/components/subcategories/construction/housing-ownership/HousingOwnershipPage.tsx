@@ -48,23 +48,7 @@ export const HousingOwnershipPage: React.FC<HousingOwnershipPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.H1310,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '戸',
-          name: '持ち家数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

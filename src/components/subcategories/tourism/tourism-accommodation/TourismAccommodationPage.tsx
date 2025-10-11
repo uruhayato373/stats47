@@ -48,23 +48,7 @@ export const TourismAccommodationPage: React.FC<TourismAccommodationPageProps> =
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.G7102,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '人泊',
-          name: '外国人延べ宿泊者数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };

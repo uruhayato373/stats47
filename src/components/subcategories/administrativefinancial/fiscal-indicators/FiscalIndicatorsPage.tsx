@@ -48,23 +48,7 @@ export const FiscalIndicatorsPage: React.FC<FiscalIndicatorsPageProps> = ({
         </div>
       </div>
 
-      <EstatRanking
-        params={{
-          statsDataId: statsDataId,
-          cdCat01: cdCat01.D2101,
-        }}
-        subcategory={{
-          ...subcategory,
-          unit: '-',
-          name: '財政力指数',
-        }}
-        options={{
-          colorScheme: subcategory.colorScheme || 'interpolateBlues',
-          divergingMidpoint: 'zero',
-        }}
-        mapWidth={800}
-        mapHeight={600}
-      />
+      
     </SubcategoryLayout>
   );
 };
