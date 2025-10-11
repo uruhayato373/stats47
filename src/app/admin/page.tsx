@@ -22,32 +22,14 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // 管理者権限チェック
-  if (!session?.user || session.user.role !== "admin") {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            アクセス拒否
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            このページにアクセスするには管理者権限が必要です。
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-          >
-            ホームに戻る
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    // 管理者権限チェック後にのみ実行
+    if (session?.user && session.user.role === "admin") {
+      fetchUsers();
+    } else if (session?.user && session.user.role !== "admin") {
+      setIsLoading(false);
+    }
+  }, [session]);
 
   const fetchUsers = async () => {
     try {
@@ -84,6 +66,29 @@ export default function AdminPage() {
       setError(err instanceof Error ? err.message : "エラーが発生しました");
     }
   };
+
+  // 管理者権限チェック
+  if (!session?.user || session.user.role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            アクセス拒否
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            このページにアクセスするには管理者権限が必要です。
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+          >
+            ホームに戻る
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (

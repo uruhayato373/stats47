@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "./PasswordInput";
 
@@ -170,19 +171,19 @@ export function RegisterForm() {
           htmlFor="terms"
           className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
         >
-          <a
+          <Link
             href="/terms"
             className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
           >
             利用規約
-          </a>
+          </Link>
           と
-          <a
+          <Link
             href="/privacy"
             className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
           >
             プライバシーポリシー
-          </a>
+          </Link>
           に同意します
         </label>
       </div>

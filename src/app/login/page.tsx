@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
@@ -20,12 +21,12 @@ export default function LoginPage() {
 
         <div className="text-center text-sm text-gray-600 dark:text-gray-400">
           <p>アカウントをお持ちでないですか？</p>
-          <a
+          <Link
             href="/register"
             className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
           >
             新規登録
-          </a>
+          </Link>
         </div>
 
         <div className="text-center text-sm text-gray-600 dark:text-gray-400">

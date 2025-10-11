@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
       (key) => {
         const value = searchParams.get(key);
         if (value && value.trim()) {
-          (params as any)[key] = value.trim();
+          (params as Record<string, string>)[key] = value.trim();
         }
       }
     );
@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
       if (value && value.trim()) {
         const numValue = parseInt(value.trim());
         if (!isNaN(numValue)) {
-          (params as any)[key] = numValue;
+          (params as Record<string, number>)[key] = numValue;
         }
       }
     });

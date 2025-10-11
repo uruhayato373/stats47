@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "./PasswordInput";
@@ -105,12 +106,12 @@ export function LoginForm() {
         </div>
 
         <div className="text-sm">
-          <a
+          <Link
             href="/forgot-password"
             className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
           >
             パスワードを忘れた？
-          </a>
+          </Link>
         </div>
       </div>
 

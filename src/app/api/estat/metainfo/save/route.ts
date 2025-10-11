@@ -4,12 +4,13 @@ import { createD1Database } from "@/lib/d1-client";
 
 export async function POST(request: NextRequest) {
   try {
-    const { statsDataId, batchMode, startId, endId } = await request.json() as {
-      statsDataId?: string | string[];
-      batchMode?: boolean;
-      startId?: string;
-      endId?: string;
-    };
+    const { statsDataId, batchMode, startId, endId } =
+      (await request.json()) as {
+        statsDataId?: string | string[];
+        batchMode?: boolean;
+        startId?: string;
+        endId?: string;
+      };
 
     if (!statsDataId && !batchMode) {
       return NextResponse.json(
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = await createD1Database() as any;
+    const db = await createD1Database();
     const metaInfoService = new EstatMetaInfoService(db);
 
     let result;
@@ -48,15 +49,20 @@ export async function POST(request: NextRequest) {
         details: result,
       });
     } else {
-      return NextResponse.json({ error: "統計表IDが必要です" }, { status: 400 });
+      return NextResponse.json(
+        { error: "統計表IDが必要です" },
+        { status: 400 }
+      );
     }
-
   } catch (error) {
     console.error("メタ情報保存エラー:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "メタ情報の保存に失敗しました",
+        error:
+          error instanceof Error
+            ? error.message
+            : "メタ情報の保存に失敗しました",
       },
       { status: 500 }
     );

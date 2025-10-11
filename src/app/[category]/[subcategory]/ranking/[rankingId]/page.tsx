@@ -64,7 +64,7 @@ export default async function RankingItemPage({ params }: PageProps) {
   const { category, subcategory } = subcategoryData;
 
   // 管理者権限チェック（一時的に無効化）
-  let isAdmin = true; // テスト用に管理者として設定
+  const isAdmin = true; // テスト用に管理者として設定
 
   // 汎用ランキングコンポーネントをレンダリング
   // rankingIdをpropsとして渡す
