@@ -37,9 +37,30 @@ export async function getRankingConfig(
   subcategoryId: string
 ): Promise<RankingConfigResponse | null> {
   try {
-    // ランキングAPIが一時的に無効化されているため、nullを返す
-    console.warn(`ランキングAPIが無効化されています: ${subcategoryId}`);
-    return null;
+    // APIエンドポイントを呼び出してデータベースから取得
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/api/ranking-items/subcategory/${encodeURIComponent(
+      subcategoryId
+    )}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // キャッシュを活用
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) {
+      console.warn(
+        `ランキング設定APIエラー (${subcategoryId}): ${response.status}`
+      );
+      return null;
+    }
+
+    const config = await response.json();
+    return config;
   } catch (error) {
     console.error(
       `ランキング設定の取得に失敗しました (${subcategoryId}):`,
