@@ -9,15 +9,6 @@ import {
   FALLBACK_CONFIGS,
 } from "@/lib/ranking/get-ranking-items";
 
-type RankingTab =
-  | "totalAreaExcluding"
-  | "totalAreaIncluding"
-  | "habitableArea"
-  | "majorLakeArea"
-  | "totalAreaIncludingRatio"
-  | "areaRatio"
-  | "habitableAreaRatio";
-
 interface RankingData {
   statsDataId: string;
   cdCat01: string;
@@ -26,41 +17,36 @@ interface RankingData {
 }
 
 /**
- * 土地面積ランキング表示コンポーネント（サーバーコンポーネント）
- * データベースからランキング設定を取得し、RankingClientコンポーネントに渡す
+ * 汎用ランキング表示コンポーネント（サーバーコンポーネント）
+ * サブカテゴリIDに基づいてデータベースからランキング設定を取得し、RankingClientコンポーネントに渡す
  */
-export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = async ({
+export const GenericRanking: React.FC<SubcategoryRankingPageProps> = async ({
   category,
   subcategory,
   rankingId,
 }) => {
-  // データベースからランキング設定を取得
-  const config = await getRankingConfig("land-area");
+  // サブカテゴリIDからランキング設定を取得
+  const config = await getRankingConfig(subcategory.id);
 
   // フォールバック処理（DB接続失敗時）
-  const rankingConfig = config || FALLBACK_CONFIGS["land-area"];
+  const rankingConfig = config || FALLBACK_CONFIGS[subcategory.id];
 
   // ランキングデータを構築
-  const rankings: Record<RankingTab, RankingData> = convertToRankingData(
+  const rankings: Record<string, RankingData> = convertToRankingData(
     rankingConfig.rankingItems
-  ) as Record<RankingTab, RankingData>;
+  );
 
   // tabOptionsをデータベースから取得
-  const tabOptions = convertToTabOptions(rankingConfig.rankingItems) as Array<{
-    key: RankingTab;
-    label: string;
-  }>;
+  const tabOptions = convertToTabOptions(rankingConfig.rankingItems);
 
   // rankingIdのバリデーション
-  const validRankingIds = Object.keys(rankings) as RankingTab[];
-  const defaultRankingId: RankingTab =
-    (rankingConfig.subcategory.defaultRankingKey as RankingTab) ||
-    "totalAreaExcluding";
+  const validRankingIds = Object.keys(rankings);
+  const defaultRankingId = rankingConfig.subcategory.defaultRankingKey;
 
   // rankingIdが指定されていない場合、または無効な場合はデフォルトを使用
   const activeRankingId =
-    rankingId && validRankingIds.includes(rankingId as RankingTab)
-      ? (rankingId as RankingTab)
+    rankingId && validRankingIds.includes(rankingId)
+      ? rankingId
       : defaultRankingId;
 
   return (
@@ -78,3 +64,4 @@ export const LandAreaRanking: React.FC<SubcategoryRankingPageProps> = async ({
     </SubcategoryLayout>
   );
 };
+

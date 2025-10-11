@@ -1,1 +1,0 @@
-export { LandUseRanking } from "./LandUseRanking";

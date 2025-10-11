@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound, redirect } from "next/navigation";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { getRankingComponent } from "@/components/subcategories";
+import { GenericRanking } from "@/components/ranking/GenericRanking";
 
 /**
  * ランキングページのProps型定義
@@ -75,10 +75,6 @@ export default async function RankingPage({ params }: PageProps) {
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
   const { category, subcategory } = subcategoryData;
 
-  // ランキングコンポーネントを動的に取得
-  // categories.jsonの設定に基づいて適切なコンポーネントを選択
-  const RankingComponent = getRankingComponent(subcategoryId, categoryId);
-
-  // ランキング統計データ表示コンポーネントをレンダリング
-  return <RankingComponent category={category} subcategory={subcategory} />;
+  // 汎用ランキングコンポーネントをレンダリング
+  return <GenericRanking category={category} subcategory={subcategory} />;
 }

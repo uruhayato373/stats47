@@ -36,20 +36,22 @@ export async function getRankingConfig(
   subcategoryId: string
 ): Promise<RankingConfigResponse | null> {
   try {
-    const response = await fetch(
-      `/api/ranking-items/${encodeURIComponent(subcategoryId)}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // サーバーサイドでのfetchの場合は絶対URLが必要
-        ...(typeof window === "undefined" && {
-          // サーバーサイドでの実行時は絶対URLを使用
-          url: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
-        }),
-      }
-    );
+    // サーバーサイドとクライアントサイドでURLを適切に構築
+    const baseUrl =
+      typeof window === "undefined"
+        ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        : "";
+
+    const url = `${baseUrl}/api/ranking-items/${encodeURIComponent(
+      subcategoryId
+    )}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       if (response.status === 404) {

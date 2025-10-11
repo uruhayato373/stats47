@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getD1Client } from "@/lib/d1-client";
+import { createD1Database } from "@/lib/d1-client";
 
 /**
  * ランキング項目取得API
@@ -21,7 +21,7 @@ export async function GET(
       );
     }
 
-    const db = getD1Client();
+    const db = await createD1Database();
 
     // サブカテゴリ設定とランキング項目を取得
     const query = `
@@ -46,6 +46,12 @@ export async function GET(
     `;
 
     const result = await db.prepare(query).bind(subcategoryId).all();
+
+    console.log("Database query result:", {
+      success: result.success,
+      resultsCount: result.results?.length || 0,
+      subcategoryId,
+    });
 
     if (!result.success) {
       console.error("Database query failed:", result.error);
@@ -99,8 +105,18 @@ export async function GET(
     });
   } catch (error) {
     console.error("API Error:", error);
+
+    // より詳細なエラー情報をログに出力
+    if (error instanceof Error) {
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+    }
+
     return NextResponse.json(
-      { error: "サーバーエラーが発生しました" },
+      {
+        error: "サーバーエラーが発生しました",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     );
   }
