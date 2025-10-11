@@ -1,7 +1,13 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/subcategory";
-import { LandUseRankingClient } from "./LandUseRankingClient";
+import { RankingClient } from "@/components/ranking/RankingClient";
+import {
+  getRankingConfig,
+  convertToRankingData,
+  convertToTabOptions,
+  FALLBACK_CONFIGS,
+} from "@/lib/ranking/get-ranking-items";
 
 type RankingTab =
   | "agriculturalLand"
@@ -22,68 +28,35 @@ interface RankingData {
 
 /**
  * 土地利用ランキング表示コンポーネント（サーバーコンポーネント）
- * ランキングデータを準備し、クライアントコンポーネントに渡す
+ * データベースからランキング設定を取得し、RankingClientコンポーネントに渡す
  */
-export const LandUseRanking: React.FC<SubcategoryRankingPageProps> = ({
+export const LandUseRanking: React.FC<SubcategoryRankingPageProps> = async ({
   category,
   subcategory,
   rankingId,
 }) => {
-  // サーバーサイドでランキングデータを準備
-  const rankings: Record<RankingTab, RankingData> = {
-    agriculturalLand: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01201",
-      unit: "ha",
-      name: "農用地",
-    },
-    forestLand: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01202",
-      unit: "ha",
-      name: "森林",
-    },
-    residentialLand: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01203",
-      unit: "ha",
-      name: "宅地",
-    },
-    commercialLand: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01204",
-      unit: "ha",
-      name: "商業地",
-    },
-    industrialLand: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01205",
-      unit: "ha",
-      name: "工業地",
-    },
-    agriculturalLandRatio: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01206",
-      unit: "%",
-      name: "農用地割合",
-    },
-    forestLandRatio: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01207",
-      unit: "%",
-      name: "森林割合",
-    },
-    residentialLandRatio: {
-      statsDataId: "0000010201",
-      cdCat01: "#A01208",
-      unit: "%",
-      name: "宅地割合",
-    },
-  };
+  // データベースからランキング設定を取得
+  const config = await getRankingConfig("land-use");
+
+  // フォールバック処理（DB接続失敗時）
+  const rankingConfig = config || FALLBACK_CONFIGS["land-use"];
+
+  // ランキングデータを構築
+  const rankings: Record<RankingTab, RankingData> = convertToRankingData(
+    rankingConfig.rankingItems
+  ) as Record<RankingTab, RankingData>;
+
+  // tabOptionsをデータベースから取得
+  const tabOptions = convertToTabOptions(rankingConfig.rankingItems) as Array<{
+    key: RankingTab;
+    label: string;
+  }>;
 
   // rankingIdのバリデーション
   const validRankingIds = Object.keys(rankings) as RankingTab[];
-  const defaultRankingId: RankingTab = "agriculturalLand";
+  const defaultRankingId: RankingTab =
+    (rankingConfig.subcategory.defaultRankingKey as RankingTab) ||
+    "agriculturalLand";
 
   // rankingIdが指定されていない場合、または無効な場合はデフォルトを使用
   const activeRankingId =
@@ -97,10 +70,11 @@ export const LandUseRanking: React.FC<SubcategoryRankingPageProps> = ({
       subcategory={subcategory}
       viewType="ranking"
     >
-      <LandUseRankingClient
+      <RankingClient
         rankings={rankings}
         subcategory={subcategory}
         activeRankingId={activeRankingId}
+        tabOptions={tabOptions}
       />
     </SubcategoryLayout>
   );

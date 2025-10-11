@@ -58,6 +58,71 @@
 - **適用コマンド**: `npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql`
 - **簡易適用スクリプト**: `./database/manage.sh schema` を使用しても、内部的に `wrangler` コマンドが実行され、リモートデータベースにスキーマが適用されます。
 
+### ランキング設定データベース設計
+
+#### ランキング設定管理テーブル
+
+ランキングページの統計項目とその設定を動的に管理するテーブル群です。
+
+**テーブル構成**:
+
+1. **subcategory_configs**: サブカテゴリの基本設定
+2. **ranking_items**: 各統計項目の詳細設定
+
+**テーブル構造**:
+
+```sql
+-- サブカテゴリ設定テーブル
+CREATE TABLE subcategory_configs (
+  id TEXT PRIMARY KEY,              -- 'land-area', 'land-use'
+  category_id TEXT NOT NULL,        -- 'landweather'
+  name TEXT NOT NULL,               -- '土地面積', '土地利用'
+  description TEXT,
+  default_ranking_key TEXT,         -- デフォルトの統計項目
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ランキング項目テーブル
+CREATE TABLE ranking_items (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  subcategory_id TEXT NOT NULL,     -- 'land-area', 'land-use'
+  ranking_key TEXT NOT NULL,        -- 'totalAreaExcluding'など
+  label TEXT NOT NULL,              -- '総面積（除く）'
+  stats_data_id TEXT NOT NULL,      -- '0000010102'
+  cd_cat01 TEXT NOT NULL,           -- 'B1101'
+  unit TEXT NOT NULL,               -- 'ha'
+  name TEXT NOT NULL,               -- '総面積（北方地域及び竹島を除く）'
+  display_order INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(subcategory_id, ranking_key)
+);
+```
+
+**データフロー**:
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  ランキングページ  │    │  API エンドポイント │    │  D1 データベース  │
+│  (Server Comp)  │◄──►│ /api/ranking-   │◄──►│ ranking_items   │
+│                 │    │ items/[id]      │    │ subcategory_    │
+└─────────────────┘    └─────────────────┘    │ configs         │
+                              │                └─────────────────┘
+                              ▼
+                       ┌─────────────────┐
+                       │  フォールバック   │
+                       │  FALLBACK_CONFIGS│
+                       └─────────────────┘
+```
+
+**キャッシュ戦略**:
+
+- **API レスポンス**: 5 分間キャッシュ
+- **Stale-while-revalidate**: 6 分間
+- **フォールバック**: データベース接続失敗時
+
 ### 地図可視化設定データベース設計
 
 #### ranking_visualizations テーブル
