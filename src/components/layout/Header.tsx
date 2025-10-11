@@ -3,13 +3,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
-import { useAuth } from "@/contexts/AuthContext";
+import { useSession, signOut } from "next-auth/react";
 import { User, LogOut, LogIn, ChevronDown } from "lucide-react";
 
 export default function Header() {
-  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const isAuthenticated = status === "authenticated";
+  const user = session?.user;
+  const isAdmin = user?.role === "admin";
 
   // ドロップダウンの外側クリックで閉じる
   useEffect(() => {
@@ -27,6 +31,12 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
+    setIsDropdownOpen(false);
+  };
+
   return (
     <header className="fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-60 w-full bg-zinc-100 text-sm py-2.5 dark:bg-neutral-900">
       <nav className="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
@@ -73,7 +83,7 @@ export default function Header() {
               >
                 <User className="size-4 text-gray-600 dark:text-gray-400" />
                 <span className="hidden sm:inline text-gray-600 dark:text-gray-400">
-                  {user?.username}
+                  {user?.username || user?.name}
                 </span>
                 <ChevronDown className="size-3 text-gray-500 dark:text-gray-500" />
               </button>
@@ -82,7 +92,10 @@ export default function Header() {
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
                   <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {user?.username}
+                      {user?.username || user?.name}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {user?.email}
                     </p>
                     {isAdmin && (
                       <p className="text-xs text-indigo-600 dark:text-indigo-400">
@@ -90,16 +103,31 @@ export default function Header() {
                       </p>
                     )}
                   </div>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setIsDropdownOpen(false);
-                    }}
-                    className="w-full flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    <LogOut className="size-4" />
-                    <span>ログアウト</span>
-                  </button>
+                  <div className="py-1">
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      プロフィール
+                    </Link>
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        管理画面
+                      </Link>
+                    )}
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <LogOut className="size-4" />
+                      <span>ログアウト</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

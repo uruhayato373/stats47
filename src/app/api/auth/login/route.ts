@@ -13,7 +13,10 @@ const TOKEN_CONFIG = {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      username: string;
+      password: string;
+    };
     const { username, password } = body;
 
     // バリデーション
