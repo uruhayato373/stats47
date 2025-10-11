@@ -4,6 +4,7 @@
  */
 
 export interface RankingItem {
+  id: number;
   rankingKey: string;
   label: string;
   statsDataId: string;
@@ -36,33 +37,9 @@ export async function getRankingConfig(
   subcategoryId: string
 ): Promise<RankingConfigResponse | null> {
   try {
-    // サーバーサイドとクライアントサイドでURLを適切に構築
-    const baseUrl =
-      typeof window === "undefined"
-        ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        : "";
-
-    const url = `${baseUrl}/api/ranking-items/${encodeURIComponent(
-      subcategoryId
-    )}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        console.warn(`サブカテゴリ '${subcategoryId}' が見つかりません`);
-        return null;
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data: RankingConfigResponse = await response.json();
-    return data;
+    // ランキングAPIが一時的に無効化されているため、nullを返す
+    console.warn(`ランキングAPIが無効化されています: ${subcategoryId}`);
+    return null;
   } catch (error) {
     console.error(
       `ランキング設定の取得に失敗しました (${subcategoryId}):`,

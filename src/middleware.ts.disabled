@@ -27,25 +27,17 @@ export async function middleware(request: NextRequest) {
   const payload = await verifyToken(token);
   if (!payload) {
     if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        { error: "トークンが無効です" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "トークンが無効です" }, { status: 401 });
     }
     const response = NextResponse.redirect(new URL("/login", request.url));
     response.cookies.delete("auth_token");
     return response;
   }
 
-  const isAdminOnly = ADMIN_ONLY_PATHS.some((path) =>
-    pathname.startsWith(path)
-  );
+  const isAdminOnly = ADMIN_ONLY_PATHS.some((path) => pathname.startsWith(path));
   if (isAdminOnly && payload.role !== "admin") {
     if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        { error: "管理者権限が必要です" },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: "管理者権限が必要です" }, { status: 403 });
     }
     return NextResponse.redirect(new URL("/unauthorized", request.url));
   }

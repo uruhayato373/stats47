@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Header() {
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   return (
     <header className="fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-60 w-full bg-zinc-100 text-sm py-2.5 dark:bg-neutral-900">
       <nav className="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
@@ -43,14 +48,29 @@ export default function Header() {
         <div className="ms-auto flex items-center gap-x-2">
           <ThemeToggleButton />
 
-          <div className="relative">
-            <button
-              type="button"
-              className="size-8 flex items-center justify-center bg-gray-200 text-gray-700 text-sm rounded-full hover:bg-gray-300 focus:outline-hidden focus:bg-gray-300 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+          {isAuthenticated ? (
+            <>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {user?.username}
+                {isAdmin && (
+                  <span className="ml-2 text-indigo-600">(管理者)</span>
+                )}
+              </span>
+              <button
+                onClick={logout}
+                className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md"
+              >
+                ログアウト
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="px-4 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
             >
-              A
-            </button>
-          </div>
+              ログイン
+            </Link>
+          )}
         </div>
       </nav>
     </header>

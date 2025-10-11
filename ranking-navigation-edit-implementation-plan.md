@@ -1593,3 +1593,1311 @@ const debouncedReorder = useMemo(
 - [React Hook Form](https://react-hook-form.com/)
 - [dnd-kit Documentation](https://docs.dndkit.com/)
 - [Zod Validation](https://zod.dev/)
+
+---
+---
+---
+
+# 認証システム実装方針
+
+## 概要
+
+管理者権限を持つユーザーのみがランキング項目の編集機能にアクセスできるよう、ログイン機能と認証システムを実装します。
+
+---
+
+## 既存のデータベース構成
+
+### usersテーブル（既存）
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  is_active BOOLEAN DEFAULT 1,
+  last_login DATETIME,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**問題点**: 管理者権限を識別するカラムが存在しない
+
+---
+
+## データベーススキーマの更新
+
+### 1. usersテーブルにroleカラムを追加
+
+```sql
+-- database/schemas/auth_migration.sql
+
+-- roleカラムを追加
+ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user';
+
+-- 既存のusersにインデックスを追加
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+
+-- デフォルト管理者ユーザーを作成（開発用）
+-- パスワード: admin123 (bcryptでハッシュ化)
+INSERT OR IGNORE INTO users (username, email, password_hash, role, is_active)
+VALUES (
+  'admin',
+  'admin@stats47.local',
+  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', -- admin123
+  'admin',
+  1
+);
+
+-- 通常ユーザーサンプル（開発用）
+INSERT OR IGNORE INTO users (username, email, password_hash, role, is_active)
+VALUES (
+  'user',
+  'user@stats47.local',
+  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', -- admin123
+  'user',
+  1
+);
+```
+
+### 2. セッションテーブルを作成
+
+```sql
+-- セッション管理用テーブル
+CREATE TABLE IF NOT EXISTS sessions (
+  id TEXT PRIMARY KEY, -- セッションID（UUID）
+  user_id INTEGER NOT NULL,
+  token TEXT UNIQUE NOT NULL, -- JWTトークン
+  expires_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token);
+CREATE INDEX IF NOT EXISTS idx_sessions_expires_at ON sessions(expires_at);
+```
+
+---
+
+## 認証フロー設計
+
+### 1. ログインフロー
+
+```
+┌─────────┐
+│ ユーザー │
+└────┬────┘
+     │
+     │ 1. ユーザー名/パスワード送信
+     ▼
+┌──────────────────┐
+│ POST /api/auth/  │
+│      login       │
+└────┬─────────────┘
+     │
+     │ 2. ユーザー検証
+     ▼
+┌──────────────────┐
+│  D1 Database     │
+│  (users table)   │
+└────┬─────────────┘
+     │
+     │ 3. パスワード照合（bcrypt）
+     ▼
+┌──────────────────┐
+│  認証成功？      │
+└────┬─────────────┘
+     │ Yes
+     │ 4. JWTトークン生成
+     ▼
+┌──────────────────┐
+│  httpOnly Cookie │
+│  にトークン保存  │
+└────┬─────────────┘
+     │
+     │ 5. セッション情報保存
+     ▼
+┌──────────────────┐
+│  D1 Database     │
+│(sessions table)  │
+└────┬─────────────┘
+     │
+     │ 6. ユーザー情報返却
+     ▼
+┌─────────┐
+│ ユーザー │
+│ (ログイン成功)│
+└─────────┘
+```
+
+### 2. 認証チェックフロー
+
+```
+┌─────────┐
+│ ユーザー │
+└────┬────┘
+     │
+     │ 1. 保護されたAPIにアクセス
+     ▼
+┌──────────────────┐
+│  Middleware      │
+│  (認証チェック)  │
+└────┬─────────────┘
+     │
+     │ 2. Cookieからトークン取得
+     ▼
+┌──────────────────┐
+│  JWTトークン検証 │
+└────┬─────────────┘
+     │
+     │ 3. トークン有効？
+     ▼
+┌──────────────────┐
+│  セッション確認  │
+│  (D1 Database)   │
+└────┬─────────────┘
+     │
+     │ 4. 管理者権限確認
+     ▼
+┌──────────────────┐
+│  role === 'admin'│
+│     ？           │
+└────┬─────────────┘
+     │ Yes
+     │ 5. APIアクセス許可
+     ▼
+┌──────────────────┐
+│  API処理実行     │
+└──────────────────┘
+```
+
+---
+
+## セッション管理（JWT）
+
+### JWT構成
+
+```typescript
+// JWTペイロード
+interface JWTPayload {
+  userId: number;
+  username: string;
+  email: string;
+  role: 'admin' | 'user';
+  sessionId: string;
+  iat: number; // 発行時刻
+  exp: number; // 有効期限
+}
+```
+
+### トークン設定
+
+```typescript
+const TOKEN_CONFIG = {
+  SECRET: process.env.JWT_SECRET!, // 環境変数から取得
+  EXPIRES_IN: '7d', // 7日間有効
+  COOKIE_NAME: 'auth_token',
+  COOKIE_OPTIONS: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax' as const,
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7日間
+    path: '/',
+  },
+};
+```
+
+---
+
+## API実装
+
+### 1. ログインAPI: POST /api/auth/login
+
+```typescript
+// src/app/api/auth/login/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { createD1Database } from '@/lib/d1-client';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
+
+const TOKEN_CONFIG = {
+  SECRET: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
+  EXPIRES_IN: '7d',
+  COOKIE_NAME: 'auth_token',
+};
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { username, password } = body;
+
+    // バリデーション
+    if (!username || !password) {
+      return NextResponse.json(
+        { error: 'ユーザー名とパスワードは必須です' },
+        { status: 400 }
+      );
+    }
+
+    const db = await createD1Database();
+
+    // ユーザー検索
+    const user = await db
+      .prepare('SELECT * FROM users WHERE username = ? AND is_active = 1')
+      .bind(username)
+      .first();
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'ユーザー名またはパスワードが正しくありません' },
+        { status: 401 }
+      );
+    }
+
+    // パスワード検証
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password_hash as string
+    );
+
+    if (!isPasswordValid) {
+      return NextResponse.json(
+        { error: 'ユーザー名またはパスワードが正しくありません' },
+        { status: 401 }
+      );
+    }
+
+    // セッションID生成
+    const sessionId = uuidv4();
+
+    // JWTトークン生成
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role || 'user',
+        sessionId,
+      },
+      TOKEN_CONFIG.SECRET,
+      { expiresIn: TOKEN_CONFIG.EXPIRES_IN }
+    );
+
+    // セッションをデータベースに保存
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 7); // 7日後
+
+    await db
+      .prepare(
+        'INSERT INTO sessions (id, user_id, token, expires_at) VALUES (?, ?, ?, ?)'
+      )
+      .bind(sessionId, user.id, token, expiresAt.toISOString())
+      .run();
+
+    // last_loginを更新
+    await db
+      .prepare('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?')
+      .bind(user.id)
+      .run();
+
+    // レスポンスの作成
+    const response = NextResponse.json({
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role || 'user',
+      },
+    });
+
+    // httpOnly Cookieにトークンを設定
+    response.cookies.set(TOKEN_CONFIG.COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60, // 7日間（秒）
+      path: '/',
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Login error:', error);
+    return NextResponse.json(
+      { error: 'ログインに失敗しました' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+### 2. ログアウトAPI: POST /api/auth/logout
+
+```typescript
+// src/app/api/auth/logout/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { createD1Database } from '@/lib/d1-client';
+import { verifyToken } from '@/lib/auth/jwt';
+
+export async function POST(request: NextRequest) {
+  try {
+    const token = request.cookies.get('auth_token')?.value;
+
+    if (token) {
+      // トークンを検証してセッションIDを取得
+      const payload = await verifyToken(token);
+
+      if (payload?.sessionId) {
+        const db = await createD1Database();
+
+        // セッションを削除
+        await db
+          .prepare('DELETE FROM sessions WHERE id = ?')
+          .bind(payload.sessionId)
+          .run();
+      }
+    }
+
+    // Cookieを削除
+    const response = NextResponse.json({
+      success: true,
+      message: 'ログアウトしました',
+    });
+
+    response.cookies.delete('auth_token');
+
+    return response;
+  } catch (error) {
+    console.error('Logout error:', error);
+    return NextResponse.json(
+      { error: 'ログアウトに失敗しました' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+### 3. 現在のユーザー取得API: GET /api/auth/me
+
+```typescript
+// src/app/api/auth/me/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from '@/lib/auth/jwt';
+import { createD1Database } from '@/lib/d1-client';
+
+export async function GET(request: NextRequest) {
+  try {
+    const token = request.cookies.get('auth_token')?.value;
+
+    if (!token) {
+      return NextResponse.json(
+        { error: '認証されていません' },
+        { status: 401 }
+      );
+    }
+
+    // トークン検証
+    const payload = await verifyToken(token);
+
+    if (!payload) {
+      return NextResponse.json(
+        { error: 'トークンが無効です' },
+        { status: 401 }
+      );
+    }
+
+    const db = await createD1Database();
+
+    // セッションが有効か確認
+    const session = await db
+      .prepare('SELECT * FROM sessions WHERE id = ? AND expires_at > CURRENT_TIMESTAMP')
+      .bind(payload.sessionId)
+      .first();
+
+    if (!session) {
+      return NextResponse.json(
+        { error: 'セッションが無効です' },
+        { status: 401 }
+      );
+    }
+
+    // ユーザー情報を取得
+    const user = await db
+      .prepare('SELECT id, username, email, role, last_login FROM users WHERE id = ?')
+      .bind(payload.userId)
+      .first();
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'ユーザーが見つかりません' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role || 'user',
+        lastLogin: user.last_login,
+      },
+    });
+  } catch (error) {
+    console.error('Get user error:', error);
+    return NextResponse.json(
+      { error: 'ユーザー情報の取得に失敗しました' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+---
+
+## JWT認証ユーティリティ
+
+```typescript
+// src/lib/auth/jwt.ts
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+
+export interface JWTPayload {
+  userId: number;
+  username: string;
+  email: string;
+  role: 'admin' | 'user';
+  sessionId: string;
+  iat?: number;
+  exp?: number;
+}
+
+export function generateToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+}
+
+export async function verifyToken(token: string): Promise<JWTPayload | null> {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+    return decoded;
+  } catch (error) {
+    console.error('Token verification error:', error);
+    return null;
+  }
+}
+
+export function decodeToken(token: string): JWTPayload | null {
+  try {
+    return jwt.decode(token) as JWTPayload;
+  } catch (error) {
+    console.error('Token decode error:', error);
+    return null;
+  }
+}
+```
+
+---
+
+## ミドルウェア実装
+
+### 1. 認証ミドルウェア
+
+```typescript
+// src/middleware.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from '@/lib/auth/jwt';
+
+// 保護されたルートのパスパターン
+const PROTECTED_PATHS = [
+  '/api/ranking-items',
+  '/api/auth/me',
+  '/admin',
+];
+
+// 管理者のみアクセス可能なパス
+const ADMIN_ONLY_PATHS = [
+  '/api/ranking-items',
+  '/admin',
+];
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // 保護されたパスかチェック
+  const isProtected = PROTECTED_PATHS.some((path) => pathname.startsWith(path));
+
+  if (!isProtected) {
+    return NextResponse.next();
+  }
+
+  // トークンを取得
+  const token = request.cookies.get('auth_token')?.value;
+
+  if (!token) {
+    // ログインページにリダイレクト（APIの場合は401を返す）
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json(
+        { error: '認証が必要です' },
+        { status: 401 }
+      );
+    }
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // トークン検証
+  const payload = await verifyToken(token);
+
+  if (!payload) {
+    // トークンが無効
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json(
+        { error: 'トークンが無効です' },
+        { status: 401 }
+      );
+    }
+
+    // Cookieを削除してログインページへ
+    const response = NextResponse.redirect(new URL('/login', request.url));
+    response.cookies.delete('auth_token');
+    return response;
+  }
+
+  // 管理者のみアクセス可能なパスの場合
+  const isAdminOnly = ADMIN_ONLY_PATHS.some((path) => pathname.startsWith(path));
+
+  if (isAdminOnly && payload.role !== 'admin') {
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json(
+        { error: '管理者権限が必要です' },
+        { status: 403 }
+      );
+    }
+    return NextResponse.redirect(new URL('/unauthorized', request.url));
+  }
+
+  // リクエストヘッダーにユーザー情報を追加
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-user-id', payload.userId.toString());
+  requestHeaders.set('x-user-role', payload.role);
+  requestHeaders.set('x-user-username', payload.username);
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+}
+
+export const config = {
+  matcher: [
+    '/api/ranking-items/:path*',
+    '/api/auth/me',
+    '/admin/:path*',
+  ],
+};
+```
+
+### 2. API認証ヘルパー
+
+```typescript
+// src/lib/auth/api-auth.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from './jwt';
+import { createD1Database } from '@/lib/d1-client';
+
+export async function requireAuth(request: NextRequest) {
+  const token = request.cookies.get('auth_token')?.value;
+
+  if (!token) {
+    return {
+      error: NextResponse.json(
+        { error: '認証が必要です' },
+        { status: 401 }
+      ),
+      user: null,
+    };
+  }
+
+  const payload = await verifyToken(token);
+
+  if (!payload) {
+    return {
+      error: NextResponse.json(
+        { error: 'トークンが無効です' },
+        { status: 401 }
+      ),
+      user: null,
+    };
+  }
+
+  return {
+    error: null,
+    user: payload,
+  };
+}
+
+export async function requireAdmin(request: NextRequest) {
+  const { error, user } = await requireAuth(request);
+
+  if (error) {
+    return { error, user: null };
+  }
+
+  if (user!.role !== 'admin') {
+    return {
+      error: NextResponse.json(
+        { error: '管理者権限が必要です' },
+        { status: 403 }
+      ),
+      user: null,
+    };
+  }
+
+  return { error: null, user };
+}
+```
+
+### 3. API実装例（認証付き）
+
+```typescript
+// src/app/api/ranking-items/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { createD1Database } from '@/lib/d1-client';
+import { requireAdmin } from '@/lib/auth/api-auth';
+
+export async function POST(request: NextRequest) {
+  // 管理者認証チェック
+  const { error, user } = await requireAdmin(request);
+  if (error) return error;
+
+  try {
+    const body = await request.json();
+    // ... ランキング項目の作成処理
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('API Error:', error);
+    return NextResponse.json(
+      { error: 'サーバーエラーが発生しました' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+---
+
+## フロントエンド実装
+
+### 1. ログイン画面
+
+```tsx
+// src/app/login/page.tsx
+'use client';
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'ログインに失敗しました');
+      }
+
+      // ログイン成功 - トップページにリダイレクト
+      router.push('/');
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'ログインに失敗しました');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+        <div>
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white">
+            ログイン
+          </h2>
+          <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
+            stats47 管理画面
+          </p>
+        </div>
+
+        {error && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-red-700 text-sm">{error}</p>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              ユーザー名
+            </label>
+            <input
+              id="username"
+              type="text"
+              required
+              value={formData.username}
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+              className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="admin"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              パスワード
+            </label>
+            <input
+              id="password"
+              type="password"
+              required
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+          >
+            {isLoading ? 'ログイン中...' : 'ログイン'}
+          </button>
+        </form>
+
+        <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+          <p>開発用アカウント:</p>
+          <p>ユーザー名: admin / パスワード: admin123</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### 2. 認証コンテキスト
+
+```tsx
+// src/contexts/AuthContext.tsx
+'use client';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+interface User {
+  id: number;
+  username: string;
+  email: string;
+  role: 'admin' | 'user';
+  lastLogin?: string;
+}
+
+interface AuthContextType {
+  user: User | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  refreshUser: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch('/api/auth/me');
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Failed to fetch user:', error);
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const login = async (username: string, password: string) => {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.error || 'ログインに失敗しました');
+    }
+
+    const data = await response.json();
+    setUser(data.user);
+  };
+
+  const logout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    setUser(null);
+    router.push('/login');
+    router.refresh();
+  };
+
+  const refreshUser = async () => {
+    await fetchUser();
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoading,
+        isAuthenticated: !!user,
+        isAdmin: user?.role === 'admin',
+        login,
+        logout,
+        refreshUser,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
+```
+
+### 3. RankingNavigationEditableの統合
+
+```tsx
+// src/components/ranking/RankingClient/RankingNavigationEditable.tsx
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+import { RankingOption } from './types';
+import { RankingItem } from '@/lib/ranking/get-ranking-items';
+import { useRankingItemsEditor } from '@/hooks/useRankingItemsEditor';
+import { Modal } from '@/components/common/Modal/Modal';
+import { RankingItemForm } from './RankingItemForm';
+
+export interface RankingNavigationEditableProps<T extends string> {
+  categoryId: string;
+  subcategoryId: string;
+  activeRankingId: T;
+  tabOptions: RankingOption<T>[];
+  rankingItems: RankingItem[];
+  title?: string;
+  onUpdate?: () => void;
+}
+
+export const RankingNavigationEditable = React.memo(
+  function RankingNavigationEditable<T extends string>({
+    categoryId,
+    subcategoryId,
+    activeRankingId,
+    tabOptions,
+    rankingItems,
+    title = '統計項目',
+    onUpdate,
+  }: RankingNavigationEditableProps<T>) {
+    const { isAdmin } = useAuth(); // 認証コンテキストから管理者権限を取得
+    const {
+      isEditMode,
+      setIsEditMode,
+      isLoading,
+      error,
+      updateRankingItem,
+      createRankingItem,
+      deleteRankingItem,
+    } = useRankingItemsEditor(subcategoryId);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingItem, setEditingItem] = useState<RankingItem | undefined>();
+
+    // ... 以降のコードは同じ
+
+    return (
+      <div className="lg:w-60 flex-shrink-0">
+        <div className="lg:border-l border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {title}
+                {isEditMode && <span className="text-sm ml-2">(編集モード)</span>}
+              </h3>
+              {isAdmin && ( {/* 管理者のみ表示 */}
+                <button
+                  onClick={() => setIsEditMode(!isEditMode)}
+                  className="text-sm text-indigo-600 hover:text-indigo-700"
+                >
+                  {isEditMode ? '完了' : '編集'}
+                </button>
+              )}
+            </div>
+
+            {/* 以降のコードは同じ */}
+          </div>
+        </div>
+
+        {/* モーダルは変更なし */}
+      </div>
+    );
+  }
+);
+```
+
+### 4. ヘッダーにログイン/ログアウトボタンを追加
+
+```tsx
+// src/components/layout/Header.tsx
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+
+export function Header() {
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+
+  return (
+    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="text-xl font-bold">
+            stats47
+          </Link>
+
+          <div className="flex items-center gap-4">
+            {isAuthenticated ? (
+              <>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {user?.username}
+                  {isAdmin && <span className="ml-2 text-indigo-600">(管理者)</span>}
+                </span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md"
+                >
+                  ログアウト
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="px-4 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
+              >
+                ログイン
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+```
+
+---
+
+## 実装手順
+
+### Phase 1: データベース準備（1日）
+
+#### ステップ1: データベースマイグレーション
+
+```bash
+# マイグレーションファイルを作成
+touch database/schemas/auth_migration.sql
+```
+
+```sql
+-- database/schemas/auth_migration.sql
+
+-- 1. roleカラムを追加
+ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user';
+
+-- 2. インデックスを追加
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+
+-- 3. セッションテーブルを作成
+CREATE TABLE IF NOT EXISTS sessions (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  token TEXT UNIQUE NOT NULL,
+  expires_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token);
+CREATE INDEX IF NOT EXISTS idx_sessions_expires_at ON sessions(expires_at);
+
+-- 4. デフォルト管理者ユーザーを作成
+INSERT OR IGNORE INTO users (username, email, password_hash, role, is_active)
+VALUES (
+  'admin',
+  'admin@stats47.local',
+  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+  'admin',
+  1
+);
+```
+
+#### ステップ2: マイグレーション実行
+
+```bash
+# D1データベースにマイグレーションを実行
+npx wrangler d1 execute stats47-db --file=database/schemas/auth_migration.sql --local
+```
+
+### Phase 2: バックエンド実装（2-3日）
+
+#### ステップ1: 依存パッケージのインストール
+
+```bash
+npm install jsonwebtoken bcryptjs uuid
+npm install --save-dev @types/jsonwebtoken @types/bcryptjs @types/uuid
+```
+
+#### ステップ2: 環境変数の設定
+
+```.env
+# .env.local
+JWT_SECRET=your-super-secret-key-change-this-in-production-min-32-chars
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
+
+#### ステップ3: 認証ユーティリティの実装
+
+1. `src/lib/auth/jwt.ts` - JWT生成・検証
+2. `src/lib/auth/api-auth.ts` - API認証ヘルパー
+
+#### ステップ4: 認証API実装
+
+1. `src/app/api/auth/login/route.ts` - ログインAPI
+2. `src/app/api/auth/logout/route.ts` - ログアウトAPI
+3. `src/app/api/auth/me/route.ts` - ユーザー情報取得API
+
+#### ステップ5: ミドルウェア実装
+
+1. `src/middleware.ts` - 認証チェックミドルウェア
+
+#### ステップ6: 既存APIに認証を追加
+
+各ランキング編集APIに `requireAdmin` を追加
+
+### Phase 3: フロントエンド実装（2-3日）
+
+#### ステップ1: 認証コンテキストの実装
+
+1. `src/contexts/AuthContext.tsx` - 認証状態管理
+
+#### ステップ2: ログイン画面の実装
+
+1. `src/app/login/page.tsx` - ログインフォーム
+
+#### ステップ3: ヘッダーコンポーネントの更新
+
+1. `src/components/layout/Header.tsx` - ログイン/ログアウトボタン
+
+#### ステップ4: RankingNavigationEditableの更新
+
+1. 管理者のみ編集ボタンを表示
+
+#### ステップ5: ルートレイアウトでAuthProviderを使用
+
+```tsx
+// src/app/layout.tsx
+import { AuthProvider } from '@/contexts/AuthContext';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ja">
+      <body>
+        <AuthProvider>
+          <Header />
+          {children}
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### Phase 4: テスト（1-2日）
+
+#### テスト項目
+
+1. **ログイン機能**
+   - 正しい認証情報でログイン成功
+   - 間違った認証情報でログイン失敗
+   - トークンがCookieに正しく保存される
+
+2. **ログアウト機能**
+   - ログアウト後にトークンが削除される
+   - セッションが削除される
+
+3. **認証チェック**
+   - 未認証でAPI保護されたルートにアクセスできない
+   - 認証済みでアクセスできる
+
+4. **権限チェック**
+   - 管理者のみ編集機能が表示される
+   - 一般ユーザーには編集機能が表示されない
+   - 一般ユーザーが編集APIを呼ぶと403エラー
+
+---
+
+## セキュリティ考慮事項
+
+### 1. パスワードのハッシュ化
+- bcryptでハッシュ化（saltラウンド: 10）
+- 平文パスワードは保存しない
+
+### 2. JWTトークンの保護
+- httpOnly Cookieで保存
+- secure フラグ（本番環境のみ）
+- sameSite: 'lax' でCSRF対策
+
+### 3. トークンの有効期限
+- デフォルト: 7日間
+- セッションテーブルで管理
+
+### 4. HTTPS必須
+- 本番環境では必ずHTTPSを使用
+- secure Cookieを有効化
+
+### 5. レート制限
+- ログインAPIにレート制限を実装（推奨）
+
+---
+
+## 環境変数
+
+```.env
+# JWT Secret（最低32文字）
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production-must-be-at-least-32-characters
+
+# ベースURL
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# D1データベース
+# wranglerで管理
+```
+
+---
+
+## 実装優先度まとめ
+
+### Phase 1: 必須機能（1週間）
+1. ✅ データベースマイグレーション（roleカラム追加、sessionsテーブル作成）
+2. ✅ ログインAPI実装
+3. ✅ 認証ミドルウェア実装
+4. ✅ ログイン画面実装
+5. ✅ AuthContextと管理者権限チェック
+
+### Phase 2: 重要機能（3-4日）
+6. ✅ ログアウト機能
+7. ✅ ユーザー情報取得API
+8. ✅ 既存APIへの認証追加
+9. ✅ ヘッダーコンポーネント更新
+
+### Phase 3: 追加機能（オプション）
+10. ⭕ パスワードリセット機能
+11. ⭕ ユーザー管理画面
+12. ⭕ 2要素認証（2FA）
+13. ⭕ セッション管理（複数デバイス）
+
+---
+
+## まとめ
+
+### 期待される効果
+- ✅ 管理者のみがランキング項目を編集可能
+- ✅ セキュアな認証システム
+- ✅ セッション管理による安全なログイン状態維持
+- ✅ 不正アクセスの防止
+
+### 実装後の動作フロー
+
+1. ユーザーがログインページでユーザー名/パスワードを入力
+2. 認証成功後、JWTトークンがhttpOnly Cookieに保存
+3. トップページにリダイレクト
+4. 管理者ユーザーのみ「編集」ボタンが表示される
+5. 編集機能使用時、ミドルウェアで管理者権限をチェック
+6. 権限がない場合は403エラー
+
+### 参考資料
+
+- [Next.js Authentication](https://nextjs.org/docs/app/building-your-application/authentication)
+- [JWT Documentation](https://jwt.io/)
+- [bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
+- [Cloudflare D1](https://developers.cloudflare.com/d1/)

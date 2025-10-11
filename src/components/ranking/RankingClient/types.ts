@@ -26,4 +26,6 @@ export interface RankingClientProps<T extends string> {
   subcategory: SubcategoryData;
   activeRankingId: T;
   tabOptions: RankingOption<T>[];
+  rankingItems?: any[]; // RankingItem[] - 編集用
+  isAdmin?: boolean; // 管理者権限
 }

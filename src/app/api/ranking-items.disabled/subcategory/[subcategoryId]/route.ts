@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
 import { FALLBACK_CONFIGS } from "@/lib/ranking/fallback-configs";
 
@@ -35,6 +36,7 @@ export async function GET(
           sc.name as subcategory_name,
           sc.description,
           sc.default_ranking_key,
+          ri.id,
           ri.ranking_key,
           ri.label,
           ri.stats_data_id,
@@ -83,6 +85,7 @@ export async function GET(
       const rankingItems = rows
         .filter((row) => row.ranking_key) // ランキング項目がある行のみ
         .map((row) => ({
+          id: row.id,
           rankingKey: row.ranking_key,
           label: row.label,
           statsDataId: row.stats_data_id,

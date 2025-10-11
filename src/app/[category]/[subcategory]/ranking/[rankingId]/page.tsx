@@ -1,5 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
+// import { cookies } from "next/headers";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
 import { GenericRanking } from "@/components/ranking/GenericRanking";
 
@@ -62,6 +63,9 @@ export default async function RankingItemPage({ params }: PageProps) {
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
   const { category, subcategory } = subcategoryData;
 
+  // 管理者権限チェック（一時的に無効化）
+  let isAdmin = true; // テスト用に管理者として設定
+
   // 汎用ランキングコンポーネントをレンダリング
   // rankingIdをpropsとして渡す
   return (
@@ -69,6 +73,7 @@ export default async function RankingItemPage({ params }: PageProps) {
       category={category}
       subcategory={subcategory}
       rankingId={rankingId}
+      isAdmin={isAdmin}
     />
   );
 }
