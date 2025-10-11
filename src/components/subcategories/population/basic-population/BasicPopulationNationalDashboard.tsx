@@ -7,7 +7,7 @@ import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCar
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/subcategory";
 
-export const BasicPopulationDashboard: React.FC<
+export const BasicPopulationNationalDashboard: React.FC<
   SubcategoryDashboardPageProps
 > = ({ category, subcategory, areaCode }) => {
   // 統計表IDとカテゴリコード
@@ -18,8 +18,6 @@ export const BasicPopulationDashboard: React.FC<
     malePopulation: "A110101", // 総人口（男）
     femalePopulation: "A110102", // 総人口（女）
   };
-
-  const isNational = areaCode === "00000";
 
   return (
     <SubcategoryLayout
@@ -38,7 +36,7 @@ export const BasicPopulationDashboard: React.FC<
               cdCat01: cdCat01.totalPopulation,
             }}
             areaCode={areaCode}
-            title={isNational ? "全国総人口" : "総人口"}
+            title="全国総人口"
             color="#4f46e5"
           />
 
@@ -49,7 +47,7 @@ export const BasicPopulationDashboard: React.FC<
               cdCat01: cdCat01.dayNightRatio,
             }}
             areaCode={areaCode}
-            title={isNational ? "全国昼夜間人口比率" : "昼夜間人口比率"}
+            title="全国昼夜間人口比率"
             color="#10b981"
           />
 
@@ -68,35 +66,43 @@ export const BasicPopulationDashboard: React.FC<
         </div>
       </div>
 
-      {/* 折れ線グラフエリア（全国の場合のみ） */}
-      {isNational && (
-        <div className="px-4 pb-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              全国の推移
-            </h2>
-            {/* EstatLineChart コンポーネントをここに追加 */}
-            <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-              折れ線グラフコンポーネント（実装予定）
-            </div>
+      {/* 全国の推移グラフ */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国の推移
+          </h2>
+          {/* EstatLineChart コンポーネントをここに追加 */}
+          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
+            折れ線グラフコンポーネント（実装予定）
           </div>
         </div>
-      )}
+      </div>
 
-      {/* 人口ピラミッド（全国の場合のみ） */}
-      {isNational && (
-        <div className="px-4 pb-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              全国人口ピラミッド
-            </h2>
-            {/* EstatPopulationPyramid コンポーネントをここに追加 */}
-            <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-              人口ピラミッドコンポーネント（実装予定）
-            </div>
+      {/* 全国人口ピラミッド */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国人口ピラミッド
+          </h2>
+          {/* EstatPopulationPyramid コンポーネントをここに追加 */}
+          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
+            人口ピラミッドコンポーネント（実装予定）
           </div>
         </div>
-      )}
+      </div>
+
+      {/* 全国の詳細分析 */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国の詳細分析
+          </h2>
+          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
+            全国の詳細分析コンポーネント（実装予定）
+          </div>
+        </div>
+      </div>
     </SubcategoryLayout>
   );
 };

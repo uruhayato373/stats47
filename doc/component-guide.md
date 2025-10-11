@@ -484,7 +484,7 @@ export const PopulationCompositionPage: React.FC<SubcategoryPageProps> = ({
 
 ```tsx
 // src/components/subcategories/population/index.tsx
-export { BasicPopulationPage } from "./BasicPopulationPage";
+export { BasicPopulationDashboard } from "./basic-population";
 export { PopulationCompositionPage } from "./PopulationCompositionPage"; // この行を追加
 ```
 

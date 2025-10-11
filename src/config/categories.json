@@ -45,7 +45,9 @@
         "id": "basic-population",
         "name": "総人口",
         "href": "/basic-population",
-        "dashboardComponent": "BasicPopulationDashboard",
+        "dashboardComponent": "BasicPopulationNationalDashboard",
+        "nationalDashboardComponent": "BasicPopulationNationalDashboard",
+        "prefectureDashboardComponent": "BasicPopulationPrefectureDashboard",
         "displayOrder": 1
       },
       {

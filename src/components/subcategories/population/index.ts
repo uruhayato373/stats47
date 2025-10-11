@@ -1,7 +1,6 @@
 export {
-  BasicPopulationPage,
-  BasicPopulationAreaPage,
-  BasicPopulationDashboard,
+  BasicPopulationNationalDashboard,
+  BasicPopulationPrefectureDashboard,
 } from "./basic-population";
 export { BirthDeathPage, BirthDeathDashboard } from "./birth-death";
 export { HouseholdsPage, HouseholdsDashboard } from "./households";

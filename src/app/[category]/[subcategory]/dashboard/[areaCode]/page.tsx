@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { getDashboardComponent } from "@/components/subcategories";
+import { getDashboardComponentByArea } from "@/components/subcategories";
 
 /**
  * ダッシュボードページのProps型定義
@@ -72,7 +72,11 @@ export default async function DashboardPage({ params }: PageProps) {
 
   // ダッシュボードコンポーネントを動的に取得
   // categories.jsonの設定に基づいて適切なコンポーネントを選択
-  const DashboardComponent = getDashboardComponent(subcategoryId, categoryId);
+  const DashboardComponent = getDashboardComponentByArea(
+    subcategoryId,
+    areaCode,
+    categoryId
+  );
 
   // ダッシュボード統計データ表示コンポーネントをレンダリング
   return (

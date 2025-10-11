@@ -12,6 +12,8 @@ export interface SubcategoryConfig {
   name: string;
   href: string;
   dashboardComponent: string; // 必須
+  nationalDashboardComponent?: string; // 新規: 全国用コンポーネント
+  prefectureDashboardComponent?: string; // 新規: 都道府県用コンポーネント
   rankingComponent: string; // 必須
   displayOrder: number;
 }

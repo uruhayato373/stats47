@@ -107,6 +107,45 @@ const getSubcategoryInfo = (subcategoryId: string, categoryId?: string) => {
 };
 
 /**
+ * areaCodeに基づいてダッシュボードコンポーネントを取得
+ */
+export const getDashboardComponentByArea = (
+  subcategoryId: string,
+  areaCode: string,
+  categoryId?: string
+): React.ComponentType<SubcategoryDashboardPageProps> => {
+  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
+
+  if (!subcategory) {
+    return DefaultDashboardPage;
+  }
+
+  const isNational = areaCode === "00000";
+
+  // 新しいアーキテクチャ: 地域別コンポーネント
+  if (isNational && subcategory.nationalDashboardComponent) {
+    return (
+      componentMap[subcategory.nationalDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  if (!isNational && subcategory.prefectureDashboardComponent) {
+    return (
+      componentMap[subcategory.prefectureDashboardComponent] ||
+      DefaultDashboardPage
+    );
+  }
+
+  // フォールバック: 従来の単一コンポーネント
+  if (subcategory.dashboardComponent) {
+    return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
+  }
+
+  return DefaultDashboardPage;
+};
+
+/**
  * ダッシュボードコンポーネントを取得
  */
 export const getDashboardComponent = (

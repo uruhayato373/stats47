@@ -120,7 +120,7 @@ export const PopulationCompositionPage: React.FC<
 
 ```tsx
 // src/components/subcategories/population/index.tsx
-export { BasicPopulationPage } from "./BasicPopulationPage";
+export { BasicPopulationDashboard } from "./basic-population";
 export { PopulationCompositionPage } from "./PopulationCompositionPage"; // 追加
 ```
 
@@ -151,7 +151,7 @@ export const subcategoryComponentMap: Record<
 - 左側: コロプレス地図
 - 右側: データテーブル
 
-### パターン 2: サマリーカード + 2 カラム（BasicPopulationPage）
+### パターン 2: サマリーカード + 2 カラム（BasicPopulationDashboard）
 
 - 上部: 統計サマリーカード（合計、平均、最大、最小）
 - 下部: 2 カラムレイアウト（地図 + テーブル）
