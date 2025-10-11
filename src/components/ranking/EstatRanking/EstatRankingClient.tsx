@@ -58,6 +58,21 @@ export interface EstatRankingProps {
    * エラー発生時のコールバック
    */
   onError?: (error: Error) => void;
+
+  /**
+   * サーバー側で取得した初期データ（オプショナル）
+   */
+  initialData?: FormattedValue[];
+
+  /**
+   * サーバー側で取得した年度一覧（オプショナル）
+   */
+  initialYears?: string[];
+
+  /**
+   * サーバー側で決定した初期年度（オプショナル）
+   */
+  initialSelectedYear?: string;
 }
 
 /**
@@ -74,15 +89,35 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   className = "",
   onDataLoaded,
   onError,
+  initialData,
+  initialYears,
+  initialSelectedYear,
 }) => {
-  const [formattedValues, setFormattedValues] = useState<FormattedValue[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [formattedValues, setFormattedValues] = useState<FormattedValue[]>(
+    initialData || []
+  );
+  const [loading, setLoading] = useState<boolean>(!initialData);
   const [error, setError] = useState<string | null>(null);
-  const [availableYears, setAvailableYears] = useState<string[]>([]);
-  const [selectedYear, setSelectedYear] = useState<string>("");
+  const [availableYears, setAvailableYears] = useState<string[]>(
+    initialYears || []
+  );
+  const [selectedYear, setSelectedYear] = useState<string>(
+    initialSelectedYear || ""
+  );
 
-  // ステップ1: 年度一覧を取得
+  // 初期データがある場合のコールバック実行
   useEffect(() => {
+    if (initialData && initialData.length > 0 && onDataLoaded) {
+      onDataLoaded(initialData);
+    }
+  }, [initialData, onDataLoaded]);
+
+  // ステップ1: 年度一覧を取得（初期データがない場合のみ）
+  useEffect(() => {
+    if (initialYears && initialYears.length > 0) {
+      return; // 初期データがある場合はスキップ
+    }
+
     const fetchAvailableYears = async () => {
       try {
         if (!params.cdCat01) {
@@ -118,10 +153,18 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
 
     fetchAvailableYears();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.statsDataId, params.cdCat01, params.cdTime]);
+  }, [params.statsDataId, params.cdCat01, params.cdTime, initialYears]);
 
-  // ステップ2: 選択年度のデータを取得
+  // ステップ2: 選択年度のデータを取得（初期データがない場合のみ）
   useEffect(() => {
+    if (
+      initialData &&
+      initialData.length > 0 &&
+      selectedYear === initialSelectedYear
+    ) {
+      return; // 初期データがある場合はスキップ
+    }
+
     const fetchData = async () => {
       if (!selectedYear) {
         return;
@@ -168,7 +211,14 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedYear, params.statsDataId, params.cdCat01, params.limit]);
+  }, [
+    selectedYear,
+    params.statsDataId,
+    params.cdCat01,
+    params.limit,
+    initialData,
+    initialSelectedYear,
+  ]);
 
   // 年度変更ハンドラー
   const handleYearChange = useCallback((year: string) => {
