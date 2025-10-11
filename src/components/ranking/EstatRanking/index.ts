@@ -1,2 +1,3 @@
-export { EstatRanking } from "./EstatRanking";
-export type { EstatRankingProps } from "./EstatRanking";
+export { EstatRankingServer } from "./EstatRankingServer";
+export { EstatRankingClient } from "./EstatRankingClient";
+export type { EstatRankingProps } from "./EstatRankingClient";

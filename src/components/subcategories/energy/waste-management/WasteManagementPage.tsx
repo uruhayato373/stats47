@@ -4,7 +4,7 @@ import React from 'react';
 import { CategoryData, SubcategoryData } from '@/types/choropleth';
 import { StatisticsMetricCard } from '@/components/dashboard/StatisticsMetricCard';
 import { SubcategoryLayout } from '@/components/subcategories/SubcategoryLayout';
-import { EstatRanking } from '@/components/ranking';
+import { EstatRankingServer } from '@/components/ranking';
 
 interface WasteManagementPageProps {
   category: CategoryData;

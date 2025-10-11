@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { EstatRanking } from "@/components/ranking";
+import { EstatRankingClient } from "@/components/ranking";
 import { RankingClientProps } from "./types";
 
 /**
@@ -32,7 +32,7 @@ export function RankingClient<T extends string>({
     <div className="flex flex-col lg:flex-row gap-6">
       {/* メインコンテンツ */}
       <div className="flex-1">
-        <EstatRanking
+        <EstatRankingClient
           params={{
             statsDataId: activeRanking.statsDataId,
             cdCat01: activeRanking.cdCat01,

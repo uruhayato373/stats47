@@ -7,7 +7,7 @@ import { StatisticsSummary } from "@/components/common/DataTable";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 import { SubcategoryData } from "@/types/choropleth";
 import { GetStatsDataParams } from "@/lib/estat/types/parameters";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+// EstatStatsDataService のインポートを削除（API Route経由でデータ取得）
 import { RefreshCw, AlertCircle } from "lucide-react";
 
 export interface EstatRankingProps {
@@ -61,10 +61,10 @@ export interface EstatRankingProps {
 }
 
 /**
- * コロプレス地図、統計サマリー、都道府県別データテーブルを一つにまとめたコンポーネント
- * データ取得を担当し、表示コンポーネントにデータを渡す
+ * コロプレス地図、統計サマリー、都道府県別データテーブルを一つにまとめたクライアントコンポーネント
+ * API Route経由でデータ取得を行い、表示コンポーネントにデータを渡す
  */
-export const EstatRanking: React.FC<EstatRankingProps> = ({
+export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   params,
   subcategory,
   title,
@@ -89,10 +89,16 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
           throw new Error("カテゴリコードが指定されていません");
         }
 
-        const years = await EstatStatsDataService.getAvailableYears(
-          params.statsDataId,
-          params.cdCat01
+        const response = await fetch(
+          `/api/estat/ranking/years?statsDataId=${params.statsDataId}&cdCat01=${params.cdCat01}`
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = (await response.json()) as { years: string[] };
+        const years = result.years || [];
 
         setAvailableYears(years);
 
@@ -129,13 +135,18 @@ export const EstatRanking: React.FC<EstatRankingProps> = ({
           throw new Error("カテゴリコードが指定されていません");
         }
 
-        const prefectureValues =
-          await EstatStatsDataService.getPrefectureDataByYear(
-            params.statsDataId,
-            params.cdCat01,
-            selectedYear,
-            params.limit || 100000
-          );
+        const response = await fetch(
+          `/api/estat/ranking/data?statsDataId=${params.statsDataId}&cdCat01=${
+            params.cdCat01
+          }&yearCode=${selectedYear}&limit=${params.limit || 100000}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = (await response.json()) as { data: FormattedValue[] };
+        const prefectureValues = result.data || [];
 
         setFormattedValues(prefectureValues);
 
