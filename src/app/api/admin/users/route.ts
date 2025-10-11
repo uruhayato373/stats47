@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const db = await createD1Database();
 
     // ユーザー一覧を取得
-    const users = await db
+    const users = (await db
       .prepare(
         `
         SELECT 
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
         ORDER BY created_at DESC
       `
       )
-      .all();
+      .all()) as { results: any[] };
 
     return NextResponse.json({ users: users.results }, { status: 200 });
   } catch (error) {

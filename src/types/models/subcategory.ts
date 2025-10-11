@@ -2,7 +2,7 @@
  * サブカテゴリページコンポーネントの共通型定義
  */
 
-import { CategoryData, SubcategoryData } from "./choropleth";
+import { CategoryData, SubcategoryData } from "../visualization/choropleth";
 
 /**
  * サブカテゴリーの設定情報

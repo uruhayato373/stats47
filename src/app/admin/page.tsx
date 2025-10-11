@@ -37,7 +37,7 @@ export default function AdminPage() {
       if (!response.ok) {
         throw new Error("ユーザー一覧の取得に失敗しました");
       }
-      const data = await response.json();
+      const data = (await response.json()) as { users: User[] };
       setUsers(data.users);
     } catch (err) {
       setError(err instanceof Error ? err.message : "エラーが発生しました");

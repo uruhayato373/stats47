@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { RankingOption } from "./types";
+import { RankingOption } from "./RankingClient.types";
 import { RankingItem } from "@/lib/ranking/get-ranking-items";
 import { useRankingItemsEditor } from "@/hooks/useRankingItemsEditor";
 import { Modal } from "@/components/common/Modal/Modal";

@@ -21,7 +21,10 @@ export async function PATCH(
       );
     }
 
-    const { is_active, role } = await request.json();
+    const { is_active, role } = (await request.json()) as {
+      is_active?: boolean;
+      role?: string;
+    };
 
     const db = await createD1Database();
 

@@ -81,7 +81,9 @@ export default async function RankingPage({ params }: PageProps) {
     });
 
     if (response.ok) {
-      const config = await response.json();
+      const config = (await response.json()) as {
+        subcategory: { defaultRankingKey: string };
+      };
       defaultRankingKey = config.subcategory.defaultRankingKey;
     }
   } catch (error) {

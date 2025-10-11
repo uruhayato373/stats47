@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { RankingOption } from "./types";
+import { RankingOption } from "./RankingClient.types";
 
 export interface RankingNavigationProps<T extends string> {
   categoryId: string;

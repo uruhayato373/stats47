@@ -1,18 +1,29 @@
 /**
- * 型定義のエクスポート
+ * Stats47 プロジェクトの型定義
+ *
+ * @remarks
+ * このファイルはプロジェクト全体で使用される型定義を集約してエクスポートします。
+ * 型定義は以下のカテゴリに分類されています：
+ *
+ * - **Common**: 共通型定義（primitives, utility, pagination）
+ * - **Models**: ドメインモデル（user, prefecture, subcategory, ranking）
+ * - **Visualization**: 可視化関連の型（choropleth, topojson）
+ * - **External**: 外部ライブラリの型拡張（next-auth）
+ *
+ * @example
+ * ```typescript
+ * import { User, Prefecture, ApiResponse } from '@/types';
+ * ```
  */
 
-// e-Stat関連の型
-export * from "./estat";
+// Common Types
+export * from "./common";
 
-// TopoJSON関連の型
-export * from "./topojson";
+// Model Types
+export * from "./models";
 
-// サブカテゴリページ関連の型
-export * from "./subcategory";
+// Visualization Types
+export * from "./visualization";
 
-// コロプレス地図関連の型
-export * from "./choropleth";
-
-// 都道府県関連の型
-export * from "./prefecture";
+// External Types
+export * from "./external";
