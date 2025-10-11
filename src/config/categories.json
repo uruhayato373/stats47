@@ -2,7 +2,7 @@
   {
     "id": "landweather",
     "name": "国土・気象",
-    "icon": "FaMapMarkedAlt",
+    "icon": "MapPin",
     "color": "teal",
     "subcategories": [
       {
@@ -46,7 +46,7 @@
   {
     "id": "population",
     "name": "人口・世帯",
-    "icon": "FaUsers",
+    "icon": "Users",
     "color": "blue",
     "subcategories": [
       {
@@ -108,7 +108,7 @@
   {
     "id": "laborwage",
     "name": "労働・賃金",
-    "icon": "FaChartLine",
+    "icon": "TrendingUp",
     "color": "yellow",
     "subcategories": [
       {
@@ -188,7 +188,7 @@
   {
     "id": "agriculture",
     "name": "農林水産業",
-    "icon": "FaLeaf",
+    "icon": "Sprout",
     "color": "green",
     "subcategories": [
       {
@@ -205,7 +205,7 @@
   {
     "id": "miningindustry",
     "name": "鉱工業",
-    "icon": "FaIndustry",
+    "icon": "Factory",
     "color": "gray",
     "subcategories": [
       {
@@ -222,7 +222,7 @@
   {
     "id": "commercial",
     "name": "商業・サービス業",
-    "icon": "FaStore",
+    "icon": "Store",
     "color": "purple",
     "subcategories": [
       {
@@ -248,7 +248,7 @@
   {
     "id": "economy",
     "name": "企業・家計・経済",
-    "icon": "FaChartLine",
+    "icon": "PieChart",
     "color": "blue",
     "subcategories": [
       {
@@ -310,7 +310,7 @@
   {
     "id": "construction",
     "name": "住宅・土地・建設",
-    "icon": "FaHome",
+    "icon": "Home",
     "color": "orange",
     "subcategories": [
       {
@@ -381,7 +381,7 @@
   {
     "id": "energy",
     "name": "エネルギー・水",
-    "icon": "FaWater",
+    "icon": "Droplets",
     "color": "teal",
     "subcategories": [
       {
@@ -425,7 +425,7 @@
   {
     "id": "tourism",
     "name": "運輸・観光",
-    "icon": "FaPlane",
+    "icon": "Plane",
     "color": "indigo",
     "subcategories": [
       {
@@ -442,7 +442,7 @@
   {
     "id": "educationsports",
     "name": "教育・文化・スポーツ",
-    "icon": "FaGraduationCap",
+    "icon": "GraduationCap",
     "color": "yellow",
     "subcategories": [
       {
@@ -540,7 +540,7 @@
   {
     "id": "administrativefinancial",
     "name": "行財政",
-    "icon": "FaGavel",
+    "icon": "Building2",
     "color": "gray",
     "subcategories": [
       {
@@ -602,7 +602,7 @@
   {
     "id": "safetyenvironment",
     "name": "司法・安全・環境",
-    "icon": "FaShieldAlt",
+    "icon": "ShieldCheck",
     "color": "red",
     "subcategories": [
       {
@@ -655,7 +655,7 @@
   {
     "id": "socialsecurity",
     "name": "社会保障・衛生",
-    "icon": "FaHospital",
+    "icon": "Hospital",
     "color": "pink",
     "subcategories": [
       {
@@ -699,7 +699,7 @@
   {
     "id": "international",
     "name": "国際",
-    "icon": "FaGlobe",
+    "icon": "Globe",
     "color": "blue",
     "subcategories": [
       {
@@ -716,7 +716,7 @@
   {
     "id": "infrastructure",
     "name": "社会基盤施設",
-    "icon": "FaRoad",
+    "icon": "Construction",
     "color": "gray",
     "subcategories": [
       {

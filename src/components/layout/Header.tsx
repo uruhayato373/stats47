@@ -34,13 +34,10 @@ export default function Header() {
                     <polyline points="9,22 9,12 15,12 15,22" />
                   </svg>
                 </div>
-                <span className="text-gray-900 dark:text-white">CMS</span>
+                <span className="text-gray-900 dark:text-white">
+                  統計で見る都道府県
+                </span>
               </a>
-            </li>
-            <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
-              <span className="text-gray-500 dark:text-neutral-400">
-                Dashboard
-              </span>
             </li>
           </ul>
         </div>
