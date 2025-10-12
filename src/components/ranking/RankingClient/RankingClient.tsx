@@ -21,7 +21,6 @@ import { RankingNavigationEditable } from "./RankingNavigationEditable";
 export function RankingClient<T extends string>({
   subcategory,
   activeRankingId,
-  tabOptions,
   rankingItems,
 }: RankingClientProps<T>) {
   const params = useParams();
@@ -33,7 +32,7 @@ export function RankingClient<T extends string>({
   const rankings: Record<string, RankingData> = {};
   if (rankingItems) {
     rankingItems.forEach((item) => {
-      rankings[item.rankingKey] = {
+      rankings[item.ranking_key] = {
         statsDataId: item.statsDataId,
         cdCat01: item.cdCat01,
         unit: item.unit,
@@ -41,6 +40,16 @@ export function RankingClient<T extends string>({
       };
     });
   }
+
+  // rankingItemsからタブオプションを動的に構築
+  const tabOptions =
+    rankingItems
+      ?.filter((item) => item.isActive)
+      .sort((a, b) => a.displayOrder - b.displayOrder)
+      .map((item) => ({
+        key: item.ranking_key,
+        label: item.label,
+      })) || [];
 
   const activeRanking = rankings[activeRankingId];
 

@@ -2,10 +2,7 @@ import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
 import { RankingClient } from "@/components/ranking/RankingClient";
-import {
-  fetchRankingItemsBySubcategory,
-  mapRankingItemsToTabOptions,
-} from "@/lib/ranking/ranking-items";
+import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";
 
 /**
  * サブカテゴリランキングページコンポーネント（サーバーコンポーネント）
@@ -15,9 +12,9 @@ export const SubcategoryRankingPage: React.FC<
   SubcategoryRankingPageProps
 > = async ({ category, subcategory, rankingId }) => {
   // サブカテゴリIDからランキング設定を取得
-  const config = await fetchRankingItemsBySubcategory(subcategory.id);
+  const rankingConfig = await fetchRankingItemsBySubcategory(subcategory.id);
 
-  if (!config) {
+  if (!rankingConfig) {
     return (
       <SubcategoryLayout
         category={category}
@@ -38,12 +35,12 @@ export const SubcategoryRankingPage: React.FC<
     );
   }
 
-  // tabOptionsをデータベースから取得
-  const tabOptions = mapRankingItemsToTabOptions(config.rankingItems);
-
   // rankingIdのバリデーション
-  const validRankingIds = config.rankingItems.map((item) => item.rankingKey);
-  const defaultRankingId = config.subcategory?.defaultRankingKey || "default";
+  const validRankingIds = rankingConfig.rankingItems.map(
+    (item) => item.ranking_key
+  );
+  const defaultRankingId =
+    rankingConfig.subcategory?.defaultRankingKey || "default";
 
   // rankingIdが指定されていない場合、または無効な場合はデフォルトを使用
   const activeRankingId =
@@ -60,8 +57,7 @@ export const SubcategoryRankingPage: React.FC<
       <RankingClient
         subcategory={subcategory}
         activeRankingId={activeRankingId}
-        tabOptions={tabOptions}
-        rankingItems={config.rankingItems}
+        rankingItems={rankingConfig.rankingItems}
       />
     </SubcategoryLayout>
   );

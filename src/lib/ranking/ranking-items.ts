@@ -6,7 +6,7 @@
 export interface RankingItem {
   id: number;
   subcategoryId: string;
-  rankingKey: string;
+  ranking_key: string;
   label: string;
   statsDataId: string;
   cdCat01: string;
@@ -70,21 +70,4 @@ export async function fetchRankingItemsBySubcategory(
     );
     return null;
   }
-}
-
-/**
- * ランキング項目をタブオプション形式にマッピング
- * @param rankingItems - ランキング項目配列
- * @returns Array<{key: string, label: string}>
- */
-export function mapRankingItemsToTabOptions(
-  rankingItems: RankingItem[]
-): Array<{ key: string; label: string }> {
-  return rankingItems
-    .filter((item) => item.isActive)
-    .sort((a, b) => a.displayOrder - b.displayOrder)
-    .map((item) => ({
-      key: item.rankingKey,
-      label: item.label,
-    }));
 }

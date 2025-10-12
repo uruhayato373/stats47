@@ -12,7 +12,7 @@ export interface RankingItem {
   subcategoryId: string;
 
   /** ランキングキー（一意識別子） */
-  rankingKey: string;
+  ranking_key: string;
 
   /** 表示ラベル */
   label: string;
@@ -90,6 +90,5 @@ export interface RankingOption<T extends string> {
 export interface RankingClientProps<T extends string> {
   subcategory: SubcategoryData;
   activeRankingId: T;
-  tabOptions: RankingOption<T>[];
   rankingItems?: RankingItem[]; // 編集用
 }
