@@ -6,7 +6,11 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "./PasswordInput";
 
-export function LoginForm() {
+interface LoginFormProps {
+  onSuccess?: () => void;
+}
+
+export function LoginForm({ onSuccess }: LoginFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +33,7 @@ export function LoginForm() {
         setError("メールアドレスまたはパスワードが正しくありません");
       } else {
         // ログイン成功
+        onSuccess?.(); // モーダルを閉じる
         router.push("/");
         router.refresh();
       }

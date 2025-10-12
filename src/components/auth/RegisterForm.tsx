@@ -5,7 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "./PasswordInput";
 
-export function RegisterForm() {
+interface RegisterFormProps {
+  onSuccess?: () => void;
+  onSwitchToLogin?: () => void;
+}
+
+export function RegisterForm({
+  onSuccess,
+  onSwitchToLogin,
+}: RegisterFormProps) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
@@ -53,8 +61,8 @@ export function RegisterForm() {
         return;
       }
 
-      // 登録成功 -> ログインページにリダイレクト
-      router.push("/login?registered=true");
+      // 登録成功 -> ログインタブに切り替え
+      onSuccess?.();
     } catch (err) {
       setError("登録中にエラーが発生しました");
     } finally {

@@ -28,10 +28,11 @@ export default auth((req) => {
 
   // 未認証ユーザーを保護されたパスから除外
   if (isProtectedPath && !isLoggedIn) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
-    console.log("🔐 Redirecting to login:", loginUrl.toString());
-    return Response.redirect(loginUrl);
+    const homeUrl = new URL("/", req.url);
+    homeUrl.searchParams.set("auth", "true");
+    homeUrl.searchParams.set("callbackUrl", pathname);
+    console.log("🔐 Redirecting to home with auth modal:", homeUrl.toString());
+    return Response.redirect(homeUrl);
   }
 
   // 非管理者を管理者専用パスから除外

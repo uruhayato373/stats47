@@ -5,10 +5,12 @@ import Link from "next/link";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import { useSession, signOut } from "next-auth/react";
 import { User, LogOut, LogIn, ChevronDown } from "lucide-react";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 export default function Header() {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isAuthenticated = status === "authenticated";
@@ -30,6 +32,18 @@ export default function Header() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  // URLパラメータでモーダルを自動表示
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("auth") === "true") {
+      setIsAuthModalOpen(true);
+      // URLからパラメータを削除（ブラウザ履歴を汚さないため）
+      const url = new URL(window.location.href);
+      url.searchParams.delete("auth");
+      window.history.replaceState({}, "", url.toString());
+    }
   }, []);
 
   const handleLogout = async () => {
@@ -132,16 +146,22 @@ export default function Header() {
               )}
             </div>
           ) : (
-            <Link
-              href="/login"
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
               className="flex items-center justify-center p-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
               title="ログイン"
             >
               <LogIn className="size-4" />
-            </Link>
+            </button>
           )}
         </div>
       </nav>
+
+      {/* 認証モーダル */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </header>
   );
 }
