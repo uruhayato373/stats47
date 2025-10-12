@@ -1,6 +1,7 @@
 /**
  * ランキング項目データ取得関数
  * データベースからランキング設定を取得し、型安全な形式で返す
+ * （可視化設定も含む）
  */
 
 import { RankingItem } from "@/types/models/ranking";
@@ -15,10 +16,12 @@ export interface SubcategoryConfig {
 
 export interface RankingConfigResponse {
   subcategory: SubcategoryConfig;
-  rankingItems: RankingItem[];
+  rankingItems: RankingItem[]; // 可視化設定も含む
 }
+
 /**
  * サブカテゴリのランキング項目をデータベースから取得
+ * （可視化設定も含む）
  * @param subcategoryId - サブカテゴリID（例: 'land-area', 'land-use'）
  * @returns Promise<RankingConfigResponse | null>
  */
@@ -62,5 +65,48 @@ export async function fetchRankingItemsBySubcategory(
       error
     );
     return null;
+  }
+}
+
+/**
+ * 可視化設定を更新
+ * @param itemId - ランキング項目のID
+ * @param settings - 更新する可視化設定
+ * @returns Promise<{ success: boolean; error?: string }>
+ */
+export async function updateVisualizationSettings(
+  itemId: number,
+  settings: {
+    mapColorScheme?: string;
+    mapDivergingMidpoint?: string;
+    rankingDirection?: "asc" | "desc";
+    conversionFactor?: number;
+    decimalPlaces?: number;
+  }
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/api/ranking-items/${itemId}/visualization`;
+
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(settings),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      return { success: false, error: error.error || "Update failed" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("可視化設定の更新に失敗しました:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }

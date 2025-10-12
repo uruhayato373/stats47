@@ -81,6 +81,9 @@ export function RankingClient<T extends string>({
       })) || [];
 
   const activeRanking = rankings[activeRankingKey];
+  
+  // アクティブなランキングアイテムから可視化設定を取得
+  const activeRankingItem = rankingItems?.find(item => item.rankingKey === activeRankingKey);
 
   // ランキングデータが存在しない場合のフォールバック
   if (!activeRanking) {
@@ -133,8 +136,11 @@ export function RankingClient<T extends string>({
           }}
           title={`${activeRanking.name}ランキング`}
           options={{
-            colorScheme: subcategory.colorScheme || "interpolateGreens",
-            divergingMidpoint: "zero",
+            colorScheme: activeRankingItem?.mapColorScheme || subcategory.colorScheme || "interpolateGreens",
+            divergingMidpoint: activeRankingItem?.mapDivergingMidpoint || "zero",
+            conversionFactor: activeRankingItem?.conversionFactor || 1,
+            decimalPlaces: activeRankingItem?.decimalPlaces || 0,
+            rankingDirection: activeRankingItem?.rankingDirection || "desc",
           }}
           mapWidth={800}
           mapHeight={600}

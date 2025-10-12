@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
+import { convertRankingItemFromDB, RankingItemDB } from "@/types/models/ranking";
 
 /**
  * ランキング項目取得API
  * GET /api/ranking-items/[subcategoryId]
  *
- * 指定されたサブカテゴリのランキング項目を取得する
+ * 指定されたサブカテゴリのランキング項目を取得する（可視化設定も含む）
  * データベース接続に失敗した場合はフォールバック設定を使用
  */
 export async function GET(
@@ -26,7 +27,7 @@ export async function GET(
     try {
       const db = await createD1Database();
 
-      // サブカテゴリ設定とランキング項目を取得
+      // サブカテゴリ設定とランキング項目を取得（可視化設定も含む）
       const query = `
         SELECT 
           sc.id as subcategory_id,
@@ -42,7 +43,14 @@ export async function GET(
           ri.unit,
           ri.name as ranking_name,
           ri.display_order,
-          ri.is_active
+          ri.is_active,
+          ri.map_color_scheme,
+          ri.map_diverging_midpoint,
+          ri.ranking_direction,
+          ri.conversion_factor,
+          ri.decimal_places,
+          ri.created_at,
+          ri.updated_at
         FROM subcategory_configs sc
         LEFT JOIN ranking_items ri ON sc.id = ri.subcategory_id AND ri.is_active = 1
         WHERE sc.id = ?
@@ -82,20 +90,7 @@ export async function GET(
 
       const rankingItems = rows
         .filter((row) => row.ranking_key) // ランキング項目がある行のみ
-        .map((row) => ({
-          id: row.id,
-          subcategoryId: subcategoryId,
-          rankingKey: row.ranking_key,
-          label: row.label,
-          statsDataId: row.stats_data_id,
-          cdCat01: row.cd_cat01,
-          unit: row.unit,
-          name: row.ranking_name,
-          displayOrder: row.display_order,
-          isActive: Boolean(row.is_active),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        }));
+        .map((row) => convertRankingItemFromDB(row as RankingItemDB));
 
       const response = {
         subcategory: subcategoryConfig,
