@@ -84,7 +84,8 @@ export async function GET(
         .filter((row) => row.ranking_key) // ランキング項目がある行のみ
         .map((row) => ({
           id: row.id,
-          rankingKey: row.ranking_key,
+          subcategoryId: subcategoryId,
+          ranking_key: row.ranking_key,
           label: row.label,
           statsDataId: row.stats_data_id,
           cdCat01: row.cd_cat01,
@@ -92,6 +93,8 @@ export async function GET(
           name: row.ranking_name,
           displayOrder: row.display_order,
           isActive: Boolean(row.is_active),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         }));
 
       const response = {

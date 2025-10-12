@@ -20,11 +20,20 @@ import { RankingNavigationEditable } from "./RankingNavigationEditable";
  */
 export function RankingClient<T extends string>({
   subcategory,
-  activeRankingId,
+  activeRankingKey,
   rankingItems,
 }: RankingClientProps<T>) {
   const params = useParams();
-  const { isAdmin } = useAuth();
+
+  // 認証情報を安全に取得（AuthProviderが利用できない場合はデフォルト値を使用）
+  let isAdmin = false;
+  try {
+    const auth = useAuth();
+    isAdmin = auth.isAdmin;
+  } catch (error) {
+    console.warn("AuthProvider not available, using default isAdmin=false");
+  }
+
   const categoryId = params.category as string;
   const subcategoryId = params.subcategory as string;
 
@@ -51,7 +60,7 @@ export function RankingClient<T extends string>({
         label: item.label,
       })) || [];
 
-  const activeRanking = rankings[activeRankingId];
+  const activeRanking = rankings[activeRankingKey];
 
   // ランキングデータが存在しない場合のフォールバック
   if (!activeRanking) {
@@ -73,9 +82,9 @@ export function RankingClient<T extends string>({
               利用可能なランキング項目
             </h3>
             <div className="space-y-2">
-              {tabOptions.map((option) => (
+              {tabOptions.map((option, index) => (
                 <div
-                  key={option.key}
+                  key={`${option.key}-${index}`}
                   className="p-2 bg-gray-50 dark:bg-gray-700 rounded"
                 >
                   {option.label}
@@ -117,7 +126,7 @@ export function RankingClient<T extends string>({
         <RankingNavigationEditable
           categoryId={categoryId}
           subcategoryId={subcategoryId}
-          activeRankingId={activeRankingId}
+          activeRankingId={activeRankingKey}
           tabOptions={tabOptions}
           rankingItems={rankingItems}
           editable={true}
@@ -126,7 +135,7 @@ export function RankingClient<T extends string>({
         <RankingNavigation
           categoryId={categoryId}
           subcategoryId={subcategoryId}
-          activeRankingId={activeRankingId}
+          activeRankingId={activeRankingKey}
           tabOptions={tabOptions}
         />
       )}

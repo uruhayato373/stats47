@@ -11,7 +11,7 @@ interface PageProps {
   params: Promise<{
     category: string;
     subcategory: string;
-    rankingId: string;
+    rankingKey: string;
   }>;
 }
 
@@ -21,7 +21,7 @@ interface PageProps {
  * このページは、特定のカテゴリ、サブカテゴリ、統計項目の統計データを
  * 都道府県別ランキングとして表示します。
  *
- * ルート構造: /[category]/[subcategory]/ranking/[rankingId]
+ * ルート構造: /[category]/[subcategory]/ranking/[rankingKey]
  * 例: /landweather/land-area/ranking/total-area-excluding
  * 例: /landweather/land-use/ranking/agricultural-land
  *
@@ -29,7 +29,7 @@ interface PageProps {
  * @param props.params - 動的ルートパラメータ
  *   - category: カテゴリID (例: "landweather")
  *   - subcategory: サブカテゴリID (例: "land-area", "land-use")
- *   - rankingId: 統計項目ID (例: "total-area-excluding", "agricultural-land")
+ *   - rankingKey: 統計項目キー (例: "total-area-excluding", "agricultural-land")
  *
  * @returns ランキング統計データ表示コンポーネント
  *
@@ -38,7 +38,7 @@ interface PageProps {
  * @example
  * // 土地面積（除く）の都道府県ランキングを表示
  * <RankingItemPage
- *   params={{category: "landweather", subcategory: "land-area", rankingId: "total-area-excluding"}}
+ *   params={{category: "landweather", subcategory: "land-area", rankingKey: "total-area-excluding"}}
  * />
  *
  * @since 2.1.0
@@ -49,7 +49,7 @@ export default async function RankingItemPage({ params }: PageProps) {
   const {
     category: categoryId,
     subcategory: subcategoryId,
-    rankingId,
+    rankingKey,
   } = await params;
 
   // カテゴリとサブカテゴリの存在確認
@@ -64,12 +64,12 @@ export default async function RankingItemPage({ params }: PageProps) {
   const { category, subcategory } = subcategoryData;
 
   // サブカテゴリランキングページコンポーネントをレンダリング
-  // rankingIdをpropsとして渡す
+  // rankingKeyをpropsとして渡す
   return (
     <SubcategoryRankingPage
       category={category}
       subcategory={subcategory}
-      rankingId={rankingId}
+      rankingKey={rankingKey}
     />
   );
 }

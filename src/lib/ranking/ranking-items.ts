@@ -45,6 +45,9 @@ export async function fetchRankingItemsBySubcategory(
       subcategoryId
     )}`;
 
+    console.log(`Fetching ranking items for subcategory: ${subcategoryId}`);
+    console.log(`API URL: ${url}`);
+
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -54,6 +57,8 @@ export async function fetchRankingItemsBySubcategory(
       next: { revalidate: 300 },
     });
 
+    console.log(`Response status: ${response.status}`);
+
     if (!response.ok) {
       console.warn(
         `ランキング設定APIエラー (${subcategoryId}): ${response.status}`
@@ -62,6 +67,7 @@ export async function fetchRankingItemsBySubcategory(
     }
 
     const config = (await response.json()) as RankingConfigResponse;
+    console.log(`Fetched config:`, config);
     return config;
   } catch (error) {
     console.error(

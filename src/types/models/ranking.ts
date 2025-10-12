@@ -89,6 +89,6 @@ export interface RankingOption<T extends string> {
  */
 export interface RankingClientProps<T extends string> {
   subcategory: SubcategoryData;
-  activeRankingId: T;
+  activeRankingKey: T;
   rankingItems?: RankingItem[]; // 編集用
 }
