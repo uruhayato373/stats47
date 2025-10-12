@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
 import SavedEstatMetainfoList from "./SavedMetainfoList";
 
-interface SavedMetadataItem {
-  id: string;
-  stats_data_id: string;
-  title: string;
-  stat_name: string;
-  created_at: string;
-  updated_at: string;
-  item_count: number;
-}
+import { SavedEstatMetainfoItem } from "@/types/models";
 
 interface EstatMetainfoSidebarProps {
   className?: string;
@@ -21,7 +13,7 @@ interface EstatMetainfoSidebarProps {
 export default function EstatMetainfoSidebar({
   className = "",
 }: EstatMetainfoSidebarProps) {
-  const [savedData, setSavedData] = useState<SavedMetadataItem[]>([]);
+  const [savedData, setSavedData] = useState<SavedEstatMetainfoItem[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchSavedData = async () => {
@@ -29,7 +21,9 @@ export default function EstatMetainfoSidebar({
     try {
       const response = await fetch("/api/estat/metainfo/saved");
       if (response.ok) {
-        const data = (await response.json()) as { items?: SavedMetadataItem[] };
+        const data = (await response.json()) as {
+          items?: SavedEstatMetainfoItem[];
+        };
         setSavedData(data.items || []);
       } else {
         setSavedData([]);
@@ -62,7 +56,7 @@ export default function EstatMetainfoSidebar({
     }
   };
 
-  const handleView = (item: SavedMetadataItem) => {
+  const handleView = (item: SavedEstatMetainfoItem) => {
     // メタ情報の詳細を表示する機能（今後実装）
     console.log("View metadata:", item);
   };

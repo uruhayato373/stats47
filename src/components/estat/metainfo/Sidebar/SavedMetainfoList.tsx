@@ -3,15 +3,7 @@
 import { useState } from "react";
 import { Eye, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 
-interface SavedEstatMetainfoItem {
-  id: string;
-  stats_data_id: string;
-  title: string;
-  stat_name: string;
-  created_at: string;
-  updated_at: string;
-  item_count: number;
-}
+import { SavedEstatMetainfoItem } from "@/types/models";
 
 interface SavedEstatMetainfoItemProps {
   item: SavedEstatMetainfoItem;
