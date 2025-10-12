@@ -37,11 +37,15 @@ export default function EstatMetaInfoDisplay({
   const handleSave = async () => {
     if (!metaInfo) return;
 
+    console.log("🔵 保存開始");
     setSaving(true);
     setSaveResult(null);
 
+    // タイムアウト設定（60秒）
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
+
     try {
-      // 統計表IDを抽出
       const statsDataId =
         metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
 
@@ -49,30 +53,52 @@ export default function EstatMetaInfoDisplay({
         throw new Error("統計表IDが見つかりません");
       }
 
+      console.log("🔵 API呼び出し開始:", statsDataId);
+
       const response = await fetch("/api/estat/metainfo/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ statsDataId }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+      console.log("🔵 API応答受信:", response.status);
+
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+        const errorText = await response.text();
+        console.error("❌ APIエラー:", errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
       const result = (await response.json()) as { message?: string };
+      console.log("✅ 保存成功:", result);
+
       setSaveResult({
         success: true,
         message: result.message || "メタ情報を正常に保存しました",
       });
     } catch (err) {
-      console.error("Save error:", err);
+      clearTimeout(timeoutId);
+      console.error("❌ 保存エラー:", err);
+
+      let errorMessage = "保存に失敗しました";
+      if (err instanceof Error) {
+        if (err.name === "AbortError") {
+          errorMessage = "保存処理がタイムアウトしました（60秒）";
+        } else {
+          errorMessage = err.message;
+        }
+      }
+
       setSaveResult({
         success: false,
-        message: err instanceof Error ? err.message : "保存に失敗しました",
+        message: errorMessage,
       });
     } finally {
+      console.log("🔵 保存処理終了");
       setSaving(false);
     }
   };
