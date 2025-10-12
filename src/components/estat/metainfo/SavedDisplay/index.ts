@@ -1,1 +1,2 @@
-export { default as SavedMetainfoDisplay } from "./SavedMetainfoDisplay";
+export { default as SavedMetaInfoDisplay } from "./SavedMetaInfoDisplay";
+export * from "./hooks";

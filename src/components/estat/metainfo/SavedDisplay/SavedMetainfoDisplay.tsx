@@ -1,64 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useStyles } from "@/hooks/useStyles";
-import EstatMetainfoActions from "../Actions";
+import EstatMetaInfoActions from "../Actions";
+import { useSavedMetaInfo } from "./hooks";
 
-interface SavedMetainfo {
-  stats_data_id: string;
-  stat_name: string;
-  title: string;
-  category_count: number;
-}
-
-export default function SavedEstatMetainfoDisplay() {
-  const [metadata, setMetadata] = useState<SavedMetainfo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
+export default function SavedEstatMetaInfoDisplay() {
   const styles = useStyles();
-
-  useEffect(() => {
-    fetchSavedMetadata();
-  }, []);
-
-  const fetchSavedMetadata = async () => {
-    try {
-      setLoading(true);
-      setError("");
-
-      // Cloudflare D1からデータを取得
-      const response = await fetch("/api/estat/metainfo/stats", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`データの取得に失敗しました: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // データが配列であることを確認
-      if (Array.isArray(data)) {
-        setMetadata(data);
-      } else if (data && typeof data === "object" && "error" in data) {
-        throw new Error(String(data.error));
-      } else {
-        console.warn("予期しないデータ形式:", data);
-        setMetadata([]);
-      }
-    } catch (err) {
-      console.error("データ取得エラー:", err);
-      setError(
-        err instanceof Error ? err.message : "データの取得に失敗しました"
-      );
-      setMetadata([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    data: metadata,
+    loading,
+    error,
+    fetchData,
+    deleteItem,
+  } = useSavedMetaInfo();
 
   if (loading) {
     return (
@@ -77,9 +31,9 @@ export default function SavedEstatMetainfoDisplay() {
     return (
       <div className={styles.message.error}>
         <p className={styles.messageText.error}>エラー: {error}</p>
-        <EstatMetainfoActions
-          onRefresh={fetchSavedMetadata}
-          onRetry={fetchSavedMetadata}
+        <EstatMetaInfoActions
+          onRefresh={fetchData}
+          onRetry={fetchData}
           hasError={true}
         />
       </div>
@@ -92,7 +46,7 @@ export default function SavedEstatMetainfoDisplay() {
       <div className={styles.card.base}>
         <div className="flex items-center justify-between mb-4">
           <h4 className={styles.heading.lg}>保存済みデータ一覧</h4>
-          <EstatMetainfoActions onRefresh={fetchSavedMetadata} />
+          <EstatMetaInfoActions onRefresh={fetchData} />
         </div>
         <div className={`text-sm ${styles.text.secondary} font-medium`}>
           {metadata.length}件のデータ
@@ -102,61 +56,70 @@ export default function SavedEstatMetainfoDisplay() {
       {/* データテーブル */}
       <div className={styles.card.base}>
         {metadata.length === 0 ? (
-          <div className={`text-center py-8 ${styles.text.muted}`}>
-            保存されたデータがありません。
-            <br />
-            メタ情報保存タブでデータを保存してください。
+          <div className="text-center py-8">
+            <div className="text-gray-400 dark:text-neutral-500 mb-2">
+              <svg
+                className="w-12 h-12 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <p className={`${styles.text.secondary}`}>
+              保存済みデータがありません
+            </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full border border-gray-200 rounded-lg dark:border-neutral-600">
-              <thead className="bg-gray-50 dark:bg-neutral-700">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+              <thead className="bg-gray-50 dark:bg-neutral-800">
                 <tr>
-                  <th
-                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary} border-r border-gray-200 dark:border-neutral-600`}
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
                     統計表ID
                   </th>
-                  <th
-                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary} border-r border-gray-200 dark:border-neutral-600`}
-                  >
-                    統計名
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                    政府統計名
                   </th>
-                  <th
-                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary}`}
-                  >
-                    タイトル
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                    統計表題名
                   </th>
-                  <th
-                    className={`px-4 py-3 text-left text-xs font-medium ${styles.text.tertiary}`}
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
                     カテゴリ数
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+                    アクション
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-neutral-600">
+              <tbody className="bg-white dark:bg-neutral-900 divide-y divide-gray-200 dark:divide-neutral-700">
                 {metadata.map((item, index) => (
-                  <tr
-                    key={`${item.stats_data_id}-${index}`}
-                    className="hover:bg-gray-50 dark:hover:bg-neutral-700"
-                  >
-                    <td
-                      className={`px-4 py-3 text-sm font-mono ${styles.text.primary} border-r border-gray-200 dark:border-neutral-600`}
-                    >
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900 dark:text-neutral-100">
                       {item.stats_data_id}
                     </td>
-                    <td
-                      className={`px-4 py-3 text-sm ${styles.text.primary} border-r border-gray-200 dark:border-neutral-600`}
-                    >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
                       {item.stat_name}
                     </td>
-                    <td className={`px-4 py-3 text-sm ${styles.text.primary}`}>
-                      <div className="max-w-md truncate" title={item.title}>
-                        {item.title}
-                      </div>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                      {item.title}
                     </td>
-                    <td className={`px-4 py-3 text-sm ${styles.text.primary}`}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
                       {item.category_count}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <button
+                        onClick={() => deleteItem(item.stats_data_id)}
+                        className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                      >
+                        削除
+                      </button>
                     </td>
                   </tr>
                 ))}

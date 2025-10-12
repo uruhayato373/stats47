@@ -1,2 +1,3 @@
-export { default as EstatMetainfoSidebar } from "./MetainfoSidebar";
-export { default as SavedEstatMetainfoList } from "./SavedMetainfoList";
+export { default as EstatMetaInfoSidebar } from "./MetaInfoSidebar";
+export { default as SavedEstatMetaInfoList } from "./SavedMetaInfoList";
+export * from "./components";

@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
-import SavedEstatMetainfoList from "./SavedMetainfoList";
+import SavedEstatMetaInfoList from "./SavedMetaInfoList";
 
 import type { SavedEstatMetainfoItem } from "@/types/models";
 
-interface EstatMetainfoSidebarProps {
+interface EstatMetaInfoSidebarProps {
   className?: string;
 }
 
-export default function EstatMetainfoSidebar({
+export default function EstatMetaInfoSidebar({
   className = "",
-}: EstatMetainfoSidebarProps) {
+}: EstatMetaInfoSidebarProps) {
   const [savedData, setSavedData] = useState<SavedEstatMetainfoItem[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -86,7 +86,7 @@ export default function EstatMetainfoSidebar({
       </div>
 
       {/* データリスト */}
-      <SavedEstatMetainfoList
+      <SavedEstatMetaInfoList
         data={savedData}
         loading={loading}
         onView={handleView}

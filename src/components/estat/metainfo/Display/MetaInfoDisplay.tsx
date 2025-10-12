@@ -8,6 +8,7 @@ import ClassificationTabs from "./components/ClassificationTabs";
 import JsonDisplay from "./components/JsonDisplay";
 import AreaTimeSelectors from "./components/AreaTimeSelectors";
 import MetaInfoHeader from "./components/MetaInfoHeader";
+import { useMetaInfoSave, useMetaInfoDownload } from "./hooks";
 
 interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
@@ -21,142 +22,24 @@ export default function EstatMetaInfoDisplay({
   error,
 }: EstatMetaInfoDisplayProps) {
   const styles = useStyles();
-  const [saving, setSaving] = useState(false);
-  const [saveResult, setSaveResult] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
   const [activeMainTab, setActiveMainTab] = useState(0);
+  const { save, saving, saveResult } = useMetaInfoSave();
+  const { download } = useMetaInfoDownload();
 
   // メタ情報が変更されたらタブをリセット
   useEffect(() => {
     setActiveMainTab(0);
-    setSaveResult(null);
   }, [metaInfo]);
 
-  const handleSave = async () => {
-    if (!metaInfo) return;
-
-    console.log("🔵 保存開始");
-    setSaving(true);
-    setSaveResult(null);
-
-    // タイムアウト設定（120秒に延長）
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
-      console.log("⏰ タイムアウト発生（120秒）");
-      controller.abort();
-    }, 120000);
-
-    try {
-      const statsDataId =
-        metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
-
-      if (!statsDataId) {
-        throw new Error("統計表IDが見つかりません");
-      }
-
-      console.log("🔵 API呼び出し開始:", statsDataId);
-
-      const response = await fetch("/api/estat/metainfo/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ statsDataId }),
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-      console.log("🔵 API応答受信:", response.status);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("❌ APIエラー:", errorText);
-        throw new Error(`HTTP ${response.status}: ${errorText}`);
-      }
-
-      const result = (await response.json()) as { message?: string };
-      console.log("✅ 保存成功:", result);
-
-      setSaveResult({
-        success: true,
-        message:
-          result.message ||
-          "メタ情報を正常に保存しました。画面を更新しています...",
-      });
-
-      // 保存成功後、2秒後にページをリロードして最新データを表示
-      setTimeout(() => {
-        console.log("🔄 ページをリロードして最新データを表示");
-        window.location.reload();
-      }, 2000);
-    } catch (err) {
-      clearTimeout(timeoutId);
-      console.error("❌ 保存エラー:", err);
-
-      let errorMessage = "保存に失敗しました";
-      if (err instanceof Error) {
-        if (err.name === "AbortError") {
-          errorMessage =
-            "保存処理がタイムアウトしました（120秒）。APIサーバーが応答していない可能性があります。";
-        } else {
-          errorMessage = err.message;
-        }
-      }
-
-      setSaveResult({
-        success: false,
-        message: errorMessage,
-      });
-    } finally {
-      console.log("🔵 保存処理終了");
-      setSaving(false);
+  const handleSave = () => {
+    if (metaInfo) {
+      save(metaInfo);
     }
   };
 
-  const handleDownload = async () => {
-    if (!metaInfo) return;
-
-    try {
-      // 統計表IDを抽出
-      const statsDataId =
-        metaInfo.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"];
-
-      if (!statsDataId) {
-        throw new Error("統計表IDが見つかりません");
-      }
-
-      // ファイル名を生成（統計表ID + 日時）
-      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const fileName = `estat-metainfo-${statsDataId}-${timestamp}.json`;
-
-      // JSONデータを準備
-      const jsonData = {
-        statsDataId,
-        downloadedAt: new Date().toISOString(),
-        metaInfo: metaInfo,
-      };
-
-      // Blobを作成してダウンロード
-      const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
-        type: "application/json",
-      });
-
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Download error:", err);
-      alert(
-        "ダウンロードに失敗しました: " +
-          (err instanceof Error ? err.message : "Unknown error")
-      );
+  const handleDownload = () => {
+    if (metaInfo) {
+      download(metaInfo);
     }
   };
 
@@ -206,22 +89,19 @@ export default function EstatMetaInfoDisplay({
   const { GET_META_INFO } = metaInfo;
   const { TABLE_INF, CLASS_INF } = GET_META_INFO.METADATA_INF;
 
-  // メタ情報の一意IDを生成（統計表IDを使用）
   const metaInfoId = TABLE_INF?.["@id"];
 
   return (
     <div className="space-y-6">
       {/* ヘッダー部分 */}
-      {metaInfo && (
-        <MetaInfoHeader
-          metaInfo={metaInfo}
-          onSave={handleSave}
-          saving={saving}
-          saveResult={saveResult}
-        />
-      )}
+      <MetaInfoHeader
+        metaInfo={metaInfo}
+        onSave={handleSave}
+        saving={saving}
+        saveResult={saveResult}
+      />
 
-      {/* メインタブナビゲーション */}
+      {/* タブナビゲーション */}
       <div className="border-b border-gray-200 dark:border-neutral-700">
         <nav className="-mb-px flex space-x-8">
           <button
@@ -253,19 +133,19 @@ export default function EstatMetaInfoDisplay({
       <div className="mt-6">
         {activeMainTab === 0 && (
           <div className="space-y-6">
-            {/* 地域・年次セレクター */}
-            {CLASS_INF &&
-              CLASS_INF.CLASS_OBJ &&
-              CLASS_INF.CLASS_OBJ.length > 0 && (
-                <div className="lg:col-span-1">
-                  <AreaTimeSelectors
-                    classObjs={CLASS_INF.CLASS_OBJ}
-                    metaInfoId={metaInfoId}
-                  />
-                </div>
-              )}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {CLASS_INF &&
+                CLASS_INF.CLASS_OBJ &&
+                CLASS_INF.CLASS_OBJ.length > 0 && (
+                  <div className="lg:col-span-1">
+                    <AreaTimeSelectors
+                      classObjs={CLASS_INF.CLASS_OBJ}
+                      metaInfoId={metaInfoId}
+                    />
+                  </div>
+                )}
+            </div>
 
-            {/* カテゴリ情報 */}
             {CLASS_INF &&
               CLASS_INF.CLASS_OBJ &&
               CLASS_INF.CLASS_OBJ.length > 0 && (

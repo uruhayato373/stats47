@@ -4,11 +4,11 @@ import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
-  EstatMetainfoPageHeader,
+  EstatMetaInfoPageHeader,
   EstatMetaInfoFetcher,
   EstatMetaInfoDisplay,
 } from "@/components/estat/metainfo";
-import { EstatMetainfoSidebar } from "@/components/estat/metainfo";
+import { EstatMetaInfoSidebar } from "@/components/estat/metainfo";
 import { estatAPI } from "@/services/estat-api";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 
@@ -51,7 +51,7 @@ export default function EstatMetadataPage() {
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
         {/* ヘッダーセクション - 横幅いっぱい */}
         <div className="mb-4">
-          <EstatMetainfoPageHeader
+          <EstatMetaInfoPageHeader
             loading={loading}
             currentStatsId={currentStatsId}
             onRefresh={handleRefresh}
@@ -72,7 +72,10 @@ export default function EstatMetadataPage() {
 
               {/* メタ情報表示 */}
               <EstatMetaInfoDisplay
-                key={metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"}
+                key={
+                  metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] ||
+                  "empty"
+                }
                 metaInfo={metaInfo}
                 loading={loading}
                 error={error}
@@ -85,7 +88,7 @@ export default function EstatMetadataPage() {
 
           {/* 保存済みデータサイドバー - 右側に固定表示 */}
           <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">
-            <EstatMetainfoSidebar className="h-full" />
+            <EstatMetaInfoSidebar className="h-full" />
           </div>
         </div>
       </main>

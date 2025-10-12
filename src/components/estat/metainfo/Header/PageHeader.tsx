@@ -3,17 +3,17 @@
 import { RefreshCw, ExternalLink, BarChart3 } from "lucide-react";
 import { useStyles } from "@/hooks/useStyles";
 
-interface EstatMetainfoPageHeaderProps {
+interface EstatMetaInfoPageHeaderProps {
   loading: boolean;
   currentStatsId: string;
   onRefresh: () => void;
 }
 
-export default function EstatMetainfoPageHeader({
+export default function EstatMetaInfoPageHeader({
   loading,
   currentStatsId,
   onRefresh,
-}: EstatMetainfoPageHeaderProps) {
+}: EstatMetaInfoPageHeaderProps) {
   const styles = useStyles();
 
   return (
