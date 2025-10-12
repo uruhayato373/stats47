@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
-import { FormattedArea } from "@/types/estat/formatted";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;
@@ -226,7 +225,8 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
                 </div>
                 {areas.length > 50 && (
                   <div className="mt-3 text-sm text-gray-500 dark:text-neutral-400 text-center">
-                    {areas.length - 50}件の地域が他にもあります。詳細は「値」タブで確認できます。
+                    {areas.length - 50}
+                    件の地域が他にもあります。詳細は「値」タブで確認できます。
                   </div>
                 )}
               </div>

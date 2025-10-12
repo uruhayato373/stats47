@@ -1,5 +1,6 @@
 import { Search, BarChart3, Download, Layers } from "lucide-react";
-import { TabId } from "./types";
+
+export type TabId = "search" | "summary" | "fetch" | "bulk";
 
 interface EstatStatsListTabNavigationProps {
   activeTab: TabId;

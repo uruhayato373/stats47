@@ -1,1 +1,0 @@
-export type TabId = 'search' | 'summary' | 'fetch' | 'bulk';

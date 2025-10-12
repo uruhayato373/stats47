@@ -1,4 +1,4 @@
-import { TabId } from "./types";
+import { TabId } from "./EstatStatsListTabNavigation";
 import { StatsListSearchResult } from "@/lib/estat-stats-list-manager";
 import StatsListSearchTab from "./tabs/StatsListSearchTab";
 import StatsListSummaryTab from "./tabs/StatsListSummaryTab";
@@ -44,9 +44,7 @@ export default function EstatStatsListTabContent({
 
   return (
     <div className="p-6 bg-white dark:bg-neutral-900">
-      <div className="max-w-7xl mx-auto">
-        {renderTabContent()}
-      </div>
+      <div className="max-w-7xl mx-auto">{renderTabContent()}</div>
     </div>
   );
 }

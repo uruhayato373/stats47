@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { FormattedEstatData } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/estat/visualization";
-import { TimeSelector } from "@/components/common/TimeSelector";
+import YearSelector from "@/components/common/YearSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import ColorSchemeSelector, {
@@ -24,7 +24,7 @@ import {
   VisualizationSettingsService,
 } from "@/lib/ranking/visualization-settings";
 import VisualizationSettingsPanel from "../VisualizationSettingsPanel";
-import { EstatPrefectureRankingDisplayProps } from "./types";
+import { EstatPrefectureRankingDisplayProps } from "./EstatPrefectureRankingDisplay.types";
 
 export default function EstatPrefectureRankingDisplay({
   data,
@@ -285,7 +285,7 @@ export default function EstatPrefectureRankingDisplay({
       <div className="p-4">
         <div className="mb-4">
           {/* 年次セレクター */}
-          <TimeSelector
+          <YearSelector
             years={formattedData?.years || []}
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}

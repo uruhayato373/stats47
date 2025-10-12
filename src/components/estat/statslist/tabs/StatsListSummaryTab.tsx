@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BarChart3, Database, Calendar, Building2, RefreshCw } from "lucide-react";
+import { BarChart3, Database, Calendar, RefreshCw } from "lucide-react";
 import { StatsListSummary } from "@/lib/estat-stats-list-manager";
 
 export default function StatsListSummaryTab() {
@@ -12,17 +12,19 @@ export default function StatsListSummaryTab() {
     setError(null);
 
     try {
-      const response = await fetch('/api/estat/statslist/summary');
+      const response = await fetch("/api/estat/statslist/summary");
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${await response.text()}`);
       }
 
-      const data = await response.json() as StatsListSummary;
+      const data = (await response.json()) as StatsListSummary;
       setSummary(data);
     } catch (err) {
       console.error("Summary fetch error:", err);
-      setError(err instanceof Error ? err.message : "サマリー取得に失敗しました");
+      setError(
+        err instanceof Error ? err.message : "サマリー取得に失敗しました"
+      );
     } finally {
       setLoading(false);
     }
@@ -36,7 +38,9 @@ export default function StatsListSummaryTab() {
     return (
       <div className="flex justify-center items-center py-12">
         <RefreshCw className="w-8 h-8 animate-spin text-indigo-600" />
-        <span className="ml-2 text-gray-600 dark:text-neutral-400">読み込み中...</span>
+        <span className="ml-2 text-gray-600 dark:text-neutral-400">
+          読み込み中...
+        </span>
       </div>
     );
   }
@@ -61,7 +65,9 @@ export default function StatsListSummaryTab() {
     return (
       <div className="text-center py-12">
         <Database className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <p className="text-gray-600 dark:text-neutral-400">データがありません</p>
+        <p className="text-gray-600 dark:text-neutral-400">
+          データがありません
+        </p>
         <button
           onClick={fetchSummary}
           className="mt-2 text-sm text-indigo-600 hover:text-indigo-800 underline"
@@ -127,7 +133,10 @@ export default function StatsListSummaryTab() {
           </h3>
           <div className="space-y-3">
             {summary.categories.map((category, index) => (
-              <div key={category.code} className="flex justify-between items-center">
+              <div
+                key={category.code}
+                className="flex justify-between items-center"
+              >
                 <div className="flex-1">
                   <div className="text-sm font-medium text-gray-900 dark:text-neutral-100">
                     {category.name}
@@ -144,7 +153,13 @@ export default function StatsListSummaryTab() {
                     <div
                       className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
                       style={{
-                        width: `${(category.count / Math.max(...summary.categories.map(c => c.count))) * 100}%`
+                        width: `${
+                          (category.count /
+                            Math.max(
+                              ...summary.categories.map((c) => c.count)
+                            )) *
+                          100
+                        }%`,
                       }}
                     />
                   </div>
@@ -178,7 +193,13 @@ export default function StatsListSummaryTab() {
                     <div
                       className="bg-green-600 h-2 rounded-full transition-all duration-300"
                       style={{
-                        width: `${(org.count / Math.max(...summary.governmentOrgs.map(o => o.count))) * 100}%`
+                        width: `${
+                          (org.count /
+                            Math.max(
+                              ...summary.governmentOrgs.map((o) => o.count)
+                            )) *
+                          100
+                        }%`,
                       }}
                     />
                   </div>
@@ -205,7 +226,9 @@ export default function StatsListSummaryTab() {
           disabled={loading}
           className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          <RefreshCw className={`w-4 h-4 inline mr-2 ${loading ? 'animate-spin' : ''}`} />
+          <RefreshCw
+            className={`w-4 h-4 inline mr-2 ${loading ? "animate-spin" : ""}`}
+          />
           サマリーを更新
         </button>
       </div>

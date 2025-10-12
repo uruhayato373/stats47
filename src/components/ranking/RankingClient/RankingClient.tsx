@@ -3,7 +3,7 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { EstatRankingClient } from "@/components/ranking";
-import { RankingClientProps } from "./RankingClient.types";
+import { RankingClientProps } from "@/types/models/ranking";
 import { RankingNavigation } from "./RankingNavigation";
 import { RankingNavigationEditable } from "./RankingNavigationEditable";
 

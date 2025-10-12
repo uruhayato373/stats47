@@ -15,11 +15,16 @@ export default function StatsListFetchTab() {
     startPosition: "1",
   });
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<{
+    success: boolean;
+    recordsProcessed: number;
+    totalAvailable: number;
+    error?: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (key: string, value: string) => {
-    setParams(prev => ({ ...prev, [key]: value }));
+    setParams((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleFetch = async () => {
@@ -35,12 +40,14 @@ export default function StatsListFetchTab() {
         }
       });
 
-      const response = await fetch(`/api/estat/statslist/fetch?${queryParams.toString()}`);
+      const response = await fetch(
+        `/api/estat/statslist/fetch?${queryParams.toString()}`
+      );
 
       if (!response.ok) {
         let errorMessage = `HTTP ${response.status}`;
         try {
-          const errorData = await response.json();
+          const errorData = (await response.json()) as { error?: string };
           errorMessage = errorData.error || errorMessage;
         } catch {
           errorMessage = `HTTP ${response.status}: ${await response.text()}`;
@@ -48,7 +55,12 @@ export default function StatsListFetchTab() {
         throw new Error(errorMessage);
       }
 
-      const data = await response.json();
+      const data = (await response.json()) as {
+        success: boolean;
+        recordsProcessed: number;
+        totalAvailable: number;
+        error?: string;
+      };
       setResult(data);
     } catch (err) {
       console.error("Fetch error:", err);
@@ -74,7 +86,7 @@ export default function StatsListFetchTab() {
             </label>
             <select
               value={params.lang}
-              onChange={(e) => handleInputChange('lang', e.target.value)}
+              onChange={(e) => handleInputChange("lang", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             >
               <option value="J">日本語</option>
@@ -89,7 +101,7 @@ export default function StatsListFetchTab() {
             <input
               type="text"
               value={params.statsField}
-              onChange={(e) => handleInputChange('statsField', e.target.value)}
+              onChange={(e) => handleInputChange("statsField", e.target.value)}
               placeholder="例: 02 (人口・世帯)"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             />
@@ -102,7 +114,7 @@ export default function StatsListFetchTab() {
             <input
               type="text"
               value={params.statsCode}
-              onChange={(e) => handleInputChange('statsCode', e.target.value)}
+              onChange={(e) => handleInputChange("statsCode", e.target.value)}
               placeholder="例: 00200521"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             />
@@ -115,7 +127,7 @@ export default function StatsListFetchTab() {
             <input
               type="text"
               value={params.surveyYears}
-              onChange={(e) => handleInputChange('surveyYears', e.target.value)}
+              onChange={(e) => handleInputChange("surveyYears", e.target.value)}
               placeholder="例: 202301-202312"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             />
@@ -128,7 +140,7 @@ export default function StatsListFetchTab() {
             <input
               type="text"
               value={params.openYears}
-              onChange={(e) => handleInputChange('openYears', e.target.value)}
+              onChange={(e) => handleInputChange("openYears", e.target.value)}
               placeholder="例: 202301-202312"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             />
@@ -141,7 +153,7 @@ export default function StatsListFetchTab() {
             <input
               type="text"
               value={params.searchWord}
-              onChange={(e) => handleInputChange('searchWord', e.target.value)}
+              onChange={(e) => handleInputChange("searchWord", e.target.value)}
               placeholder="例: 人口"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             />
@@ -153,7 +165,7 @@ export default function StatsListFetchTab() {
             </label>
             <select
               value={params.searchKind}
-              onChange={(e) => handleInputChange('searchKind', e.target.value)}
+              onChange={(e) => handleInputChange("searchKind", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             >
               <option value="1">AND検索</option>
@@ -167,7 +179,7 @@ export default function StatsListFetchTab() {
             </label>
             <select
               value={params.collectArea}
-              onChange={(e) => handleInputChange('collectArea', e.target.value)}
+              onChange={(e) => handleInputChange("collectArea", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             >
               <option value="1">全国</option>
@@ -182,7 +194,7 @@ export default function StatsListFetchTab() {
             </label>
             <select
               value={params.limit}
-              onChange={(e) => handleInputChange('limit', e.target.value)}
+              onChange={(e) => handleInputChange("limit", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
             >
               <option value="10">10件</option>
@@ -199,8 +211,8 @@ export default function StatsListFetchTab() {
             disabled={loading}
             className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
-            <Download className={`w-4 h-4 ${loading ? 'animate-pulse' : ''}`} />
-            {loading ? '取得中...' : '統計表リストを取得'}
+            <Download className={`w-4 h-4 ${loading ? "animate-pulse" : ""}`} />
+            {loading ? "取得中..." : "統計表リストを取得"}
           </button>
         </div>
       </div>
@@ -221,19 +233,23 @@ export default function StatsListFetchTab() {
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="flex items-center gap-2 text-green-800">
               <CheckCircle className="w-5 h-5" />
-              <strong>取得完了:</strong> {result.recordsProcessed}件のデータを処理しました
-              (全{result.totalAvailable}件中)
+              <strong>取得完了:</strong> {result.recordsProcessed}
+              件のデータを処理しました (全{result.totalAvailable}件中)
             </div>
           </div>
 
           {/* 詳細情報 */}
           <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg p-4">
-            <h4 className="font-medium text-gray-900 dark:text-neutral-100 mb-2">処理結果詳細</h4>
+            <h4 className="font-medium text-gray-900 dark:text-neutral-100 mb-2">
+              処理結果詳細
+            </h4>
             <div className="text-sm space-y-1">
               <div>処理件数: {result.recordsProcessed.toLocaleString()}件</div>
               <div>総件数: {result.totalAvailable.toLocaleString()}件</div>
-              <div>成功: {result.success ? 'はい' : 'いいえ'}</div>
-              {result.error && <div className="text-red-600">エラー: {result.error}</div>}
+              <div>成功: {result.success ? "はい" : "いいえ"}</div>
+              {result.error && (
+                <div className="text-red-600">エラー: {result.error}</div>
+              )}
             </div>
           </div>
         </div>

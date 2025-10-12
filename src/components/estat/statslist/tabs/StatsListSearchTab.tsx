@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Search, Filter, ChevronDown, Calendar, Building2, Tag } from "lucide-react";
+import {
+  Search,
+  Filter,
+  ChevronDown,
+  Calendar,
+  Building2,
+  Tag,
+} from "lucide-react";
 import { StatsListSearchResult } from "@/lib/estat-stats-list-manager";
 
 interface StatsListSearchTabProps {
@@ -16,7 +23,9 @@ export default function StatsListSearchTab({
   onSearch,
 }: StatsListSearchTabProps) {
   const [query, setQuery] = useState("");
-  const [searchType, setSearchType] = useState<'full' | 'stat_name' | 'title' | 'gov_org' | 'category'>('full');
+  const [searchType, setSearchType] = useState<
+    "full" | "stat_name" | "title" | "gov_org" | "category"
+  >("full");
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     surveyYears: "",
@@ -40,7 +49,7 @@ export default function StatsListSearchTab({
   };
 
   const handleFilterChange = (key: string, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -50,7 +59,10 @@ export default function StatsListSearchTab({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
-              <label htmlFor="search-query" className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
+              <label
+                htmlFor="search-query"
+                className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2"
+              >
                 検索キーワード
               </label>
               <div className="relative">
@@ -68,7 +80,10 @@ export default function StatsListSearchTab({
             </div>
 
             <div className="lg:w-48">
-              <label htmlFor="search-type" className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
+              <label
+                htmlFor="search-type"
+                className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2"
+              >
                 検索対象
               </label>
               <select
@@ -105,7 +120,11 @@ export default function StatsListSearchTab({
           >
             <Filter className="w-4 h-4" />
             詳細フィルタ
-            <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+            <ChevronDown
+              className={`w-4 h-4 transition-transform ${
+                showFilters ? "rotate-180" : ""
+              }`}
+            />
           </button>
 
           {/* 詳細フィルタ */}
@@ -119,7 +138,9 @@ export default function StatsListSearchTab({
                 <input
                   type="text"
                   value={filters.surveyYears}
-                  onChange={(e) => handleFilterChange('surveyYears', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("surveyYears", e.target.value)
+                  }
                   placeholder="2023"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                   disabled={loading}
@@ -134,7 +155,9 @@ export default function StatsListSearchTab({
                 <input
                   type="text"
                   value={filters.statsField}
-                  onChange={(e) => handleFilterChange('statsField', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("statsField", e.target.value)
+                  }
                   placeholder="分野コード"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                   disabled={loading}
@@ -149,7 +172,9 @@ export default function StatsListSearchTab({
                 <input
                   type="text"
                   value={filters.statsCode}
-                  onChange={(e) => handleFilterChange('statsCode', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("statsCode", e.target.value)
+                  }
                   placeholder="統計コード"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                   disabled={loading}
@@ -163,7 +188,9 @@ export default function StatsListSearchTab({
                 <input
                   type="text"
                   value={filters.collectArea}
-                  onChange={(e) => handleFilterChange('collectArea', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("collectArea", e.target.value)
+                  }
                   placeholder="地域コード"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                   disabled={loading}
@@ -189,10 +216,10 @@ export default function StatsListSearchTab({
           {/* 結果サマリー */}
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100">
-              検索結果 ({data.totalCount.toLocaleString()}件)
+              検索結果 ({data.totalAvailable.toLocaleString()}件)
             </h3>
             <div className="text-sm text-gray-500 dark:text-neutral-400">
-              検索実行: {new Date(data.executedAt).toLocaleString()}
+              検索実行: {new Date().toLocaleString()}
             </div>
           </div>
 
@@ -217,41 +244,36 @@ export default function StatsListSearchTab({
                   </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-neutral-800 divide-y divide-gray-200 dark:divide-neutral-700">
-                  {data.entries.map((entry) => (
-                    <tr key={entry.stat_id} className="hover:bg-gray-50 dark:hover:bg-neutral-700">
+                  {data.data?.map((entry) => (
+                    <tr
+                      key={entry.statsDataId}
+                      className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+                    >
                       <td className="px-6 py-4">
                         <div className="space-y-1">
                           <div className="text-sm font-medium text-gray-900 dark:text-neutral-100">
                             {entry.title}
                           </div>
                           <div className="text-sm text-gray-500 dark:text-neutral-400">
-                            {entry.stat_name}
+                            {entry.statName}
                           </div>
                           <div className="text-xs text-gray-400 dark:text-neutral-500">
-                            ID: {entry.stat_id} | コード: {entry.stat_code}
+                            ID: {entry.statsDataId}
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-900 dark:text-neutral-100">
-                          {entry.gov_org_name}
-                        </div>
-                        <div className="text-xs text-gray-500 dark:text-neutral-400">
-                          {entry.gov_org_code}
+                          {entry.govOrg}
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-900 dark:text-neutral-100">
-                          {entry.main_category_name}
+                          -
                         </div>
-                        {entry.sub_category_name && (
-                          <div className="text-xs text-gray-500 dark:text-neutral-400">
-                            {entry.sub_category_name}
-                          </div>
-                        )}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900 dark:text-neutral-100">
-                        {entry.survey_date}
+                        {entry.surveyDate}
                       </td>
                     </tr>
                   ))}
@@ -261,7 +283,7 @@ export default function StatsListSearchTab({
           </div>
 
           {/* ページネーション（今後実装） */}
-          {data.totalCount > data.entries.length && (
+          {data.totalAvailable > (data.data?.length || 0) && (
             <div className="flex justify-center">
               <div className="text-sm text-gray-500 dark:text-neutral-400">
                 ページネーション機能は今後実装予定です

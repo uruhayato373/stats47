@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { RankingOption } from "./RankingClient.types";
-import { RankingItem } from "@/lib/ranking/get-ranking-items";
+import { RankingOption, RankingItem } from "@/types/models/ranking";
 import { useRankingItemsEditor } from "@/hooks/useRankingItemsEditor";
 import { Modal } from "@/components/common/Modal/Modal";
 import { RankingItemForm } from "./RankingItemForm";
@@ -64,7 +63,7 @@ export const RankingNavigationEditable = React.memo(
 
     const handleFormSubmit = async (data: Partial<RankingItem>) => {
       try {
-        if (editingItem) {
+        if (editingItem?.id) {
           await updateRankingItem(editingItem.id, data);
         } else {
           await createRankingItem(data as Omit<RankingItem, "id">);
@@ -81,8 +80,10 @@ export const RankingNavigationEditable = React.memo(
       if (!confirm(`「${item.label}」を削除しますか？`)) return;
 
       try {
-        await deleteRankingItem(item.id);
-        onUpdate?.();
+        if (item.id) {
+          await deleteRankingItem(item.id);
+          onUpdate?.();
+        }
       } catch (error) {
         console.error("Delete error:", error);
       }
@@ -92,10 +93,12 @@ export const RankingNavigationEditable = React.memo(
       setCurrentRankingItems(reorderedItems); // Optimistic update
       try {
         await reorderRankingItems(
-          reorderedItems.map((item) => ({
-            id: item.id,
-            displayOrder: item.displayOrder,
-          }))
+          reorderedItems
+            .filter((item) => item.id !== undefined)
+            .map((item) => ({
+              id: item.id!,
+              displayOrder: item.displayOrder,
+            }))
         );
         onUpdate?.();
       } catch (error) {

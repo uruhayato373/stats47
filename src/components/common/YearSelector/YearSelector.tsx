@@ -9,19 +9,19 @@ interface YearOption {
   displayName: string;
 }
 
-interface TimeSelectorProps {
+interface YearSelectorProps {
   years: FormattedYear[];
   selectedYear: string;
   onYearChange: (year: string) => void;
   className?: string;
 }
 
-export default function TimeSelector({
+export default function YearSelector({
   years,
   selectedYear,
   onYearChange,
   className = "",
-}: TimeSelectorProps) {
+}: YearSelectorProps) {
   const availableYears = useMemo(() => {
     return years
       .map((year) => ({
@@ -64,4 +64,4 @@ export default function TimeSelector({
   );
 }
 
-export type { YearOption, TimeSelectorProps };
+export type { YearOption, YearSelectorProps };

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { RankingItem } from "@/lib/ranking/get-ranking-items";
+import { RankingItem } from "@/types/models/ranking";
 
 interface RankingItemFormProps {
   item?: RankingItem; // undefined = 新規作成モード

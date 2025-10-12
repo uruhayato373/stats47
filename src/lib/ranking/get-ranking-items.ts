@@ -5,6 +5,7 @@
 
 export interface RankingItem {
   id: number;
+  subcategoryId: string;
   rankingKey: string;
   label: string;
   statsDataId: string;
@@ -13,6 +14,8 @@ export interface RankingItem {
   name: string;
   displayOrder: number;
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface SubcategoryConfig {

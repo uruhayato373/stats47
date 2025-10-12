@@ -1,5 +1,6 @@
 import { StatsDataId, CategoryCode } from "../common/primitives";
 import { PrefectureCode } from "./prefecture";
+import { SubcategoryData } from "../visualization/choropleth";
 
 /**
  * ランキング項目の基本情報
@@ -74,4 +75,24 @@ export interface RankingResult {
 
   /** 順位 */
   rank: number;
+}
+
+/**
+ * ランキングオプション（タブ項目）の構造
+ */
+export interface RankingOption<T extends string> {
+  key: T;
+  label: string;
+}
+
+/**
+ * RankingClientコンポーネントのProps
+ */
+export interface RankingClientProps<T extends string> {
+  rankings: Record<T, RankingData>;
+  subcategory: SubcategoryData;
+  activeRankingId: T;
+  tabOptions: RankingOption<T>[];
+  rankingItems?: RankingItem[]; // 編集用
+  isAdmin?: boolean; // 管理者権限
 }

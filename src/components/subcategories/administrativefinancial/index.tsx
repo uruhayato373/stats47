@@ -1,10 +1,8 @@
 export {
-  ExpenditurePage,
   ExpenditureNationalDashboard,
   ExpenditurePrefectureDashboard,
 } from "./expenditure";
 export {
-  FiscalIndicatorsPage,
   FiscalIndicatorsNationalDashboard,
   FiscalIndicatorsPrefectureDashboard,
 } from "./fiscal-indicators";

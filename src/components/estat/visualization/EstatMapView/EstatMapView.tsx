@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { ChoroplethMap } from "@/components/estat/visualization";
 import EstatDataSummary from "../EstatDataSummary";
-import { TimeSelector } from "@/components/common/TimeSelector";
+import YearSelector from "@/components/common/YearSelector";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import { EstatStatsDataResponse, FormattedEstatData } from "@/lib/estat/types";
 
@@ -63,7 +63,7 @@ export default function EstatMapView({ data }: EstatMapViewProps) {
         </h2>
 
         {/* 年次セレクター */}
-        <TimeSelector
+        <YearSelector
           years={formattedData?.years || []}
           selectedYear={selectedYear}
           onYearChange={setSelectedYear}

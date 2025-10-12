@@ -4,11 +4,23 @@ import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import InputField from "@/components/common/InputField";
 import { useStyles } from "@/hooks/useStyles";
-import {
-  EstatPrefectureRankingFetcherProps,
-  PrefectureRankingParams,
-  FormData,
-} from "./types";
+
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
+
+interface EstatPrefectureRankingFetcherProps {
+  onSubmit: (params: PrefectureRankingParams) => void;
+  loading: boolean;
+}
+
+type FormData = {
+  statsDataId: string;
+  categoryCode: string;
+  timeCode: string;
+};
 
 export default function EstatPrefectureRankingFetcher({
   onSubmit,

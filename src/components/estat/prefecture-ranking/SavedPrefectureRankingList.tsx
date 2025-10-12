@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, Trash2, ChevronDown, ChevronUp, Map } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Map } from "lucide-react";
 
 interface SavedMetadataItem {
   id: string;
@@ -183,7 +183,9 @@ export default function SavedPrefectureRankingList({
           <Map className="w-12 h-12" />
         </div>
         <p className="text-sm">保存済みデータがありません</p>
-        <p className="text-xs mt-1">メタ情報ページでデータを保存すると、ここに表示されます</p>
+        <p className="text-xs mt-1">
+          メタ情報ページでデータを保存すると、ここに表示されます
+        </p>
       </div>
     );
   }

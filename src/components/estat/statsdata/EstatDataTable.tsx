@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { MapDataPoint } from "@/lib/estat/map-data-service";
+import { FormattedValue } from "@/lib/estat/types";
 import { ChevronDown, ChevronUp, Download, Search } from "lucide-react";
 
 interface EstatDataTableProps {
-  dataPoints: MapDataPoint[];
+  dataPoints: FormattedValue[];
   title?: string;
   className?: string;
 }
@@ -26,8 +26,8 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
   // 検索フィルタリング
   const filteredData = dataPoints.filter(
     (point) =>
-      point.prefectureName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      point.prefectureCode.includes(searchQuery)
+      point.areaName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      point.areaCode.includes(searchQuery)
   );
 
   // ソート処理
@@ -36,11 +36,11 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
     let bValue: string | number;
 
     if (sortField === "prefectureName") {
-      aValue = a.prefectureName;
-      bValue = b.prefectureName;
+      aValue = a.areaName;
+      bValue = b.areaName;
     } else {
-      aValue = a.value ?? 0;
-      bValue = b.value ?? 0;
+      aValue = a.numericValue ?? 0;
+      bValue = b.numericValue ?? 0;
     }
 
     if (sortDirection === "asc") {
@@ -74,9 +74,9 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
       headers.join(","),
       ...dataPoints.map((point) =>
         [
-          point.prefectureCode,
-          point.prefectureName,
-          point.value ?? "",
+          point.areaCode,
+          point.areaName,
+          point.numericValue ?? "",
           point.unit ?? "",
         ].join(",")
       ),
@@ -95,8 +95,8 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
 
   // 統計情報
   const validValues = dataPoints
-    .filter((point) => point.value !== null)
-    .map((point) => point.value!);
+    .filter((point) => point.numericValue !== null)
+    .map((point) => point.numericValue!);
   const stats = {
     total: dataPoints.length,
     valid: validValues.length,
@@ -238,7 +238,7 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
           <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
             {currentData.map((point, index) => (
               <tr
-                key={point.prefectureCode}
+                key={point.areaCode}
                 className="hover:bg-gray-50 dark:hover:bg-neutral-700"
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-neutral-100">
@@ -246,14 +246,14 @@ export const EstatDataTable: React.FC<EstatDataTableProps> = ({
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
                   <div>
-                    <div className="font-medium">{point.prefectureName}</div>
+                    <div className="font-medium">{point.areaName}</div>
                     <div className="text-gray-600 dark:text-neutral-400 text-xs">
-                      {point.prefectureCode}
+                      {point.areaCode}
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                  {point.value !== null ? (
+                  {point.numericValue !== null ? (
                     <span className="font-mono">{point.displayValue}</span>
                   ) : (
                     <span className="text-gray-500 dark:text-neutral-500">

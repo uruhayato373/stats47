@@ -1,17 +1,15 @@
 "use client";
 
 import { EstatStatsDataResponse } from "@/lib/estat/types";
-import { FormattedValue } from "@/types/estat/formatted";
+import { FormattedValue } from "@/lib/estat/types";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
-import { useStyles } from "@/hooks/useStyles";
 
 interface EstatValuesTableProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
-  const styles = useStyles();
   if (!data) return null;
 
   const formattedData = EstatStatsDataService.formatStatsData(data);
@@ -43,14 +41,14 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
       label: "areaName",
       filterable: true,
       filterType: "select",
-      render: (item) => item.areaInfo?.displayName || "-",
+      render: (item) => item.areaName || "-",
     },
     {
       key: "timeName",
       label: "timeName",
       filterable: true,
       filterType: "select",
-      render: (item) => item.yearInfo?.timeName || "-",
+      render: (item) => item.timeName || "-",
     },
   ];
 

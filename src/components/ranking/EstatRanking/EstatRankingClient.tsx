@@ -5,7 +5,7 @@ import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { PrefectureDataTableClient } from "@/components/choropleth/PrefectureDataTableClient";
 import { StatisticsSummary } from "@/components/common/DataTable";
 import { FormattedValue } from "@/lib/estat/types/formatted";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryData } from "@/types/visualization/choropleth";
 import { GetStatsDataParams } from "@/lib/estat/types/parameters";
 // EstatStatsDataService のインポートを削除（API Route経由でデータ取得）
 import { RefreshCw, AlertCircle } from "lucide-react";

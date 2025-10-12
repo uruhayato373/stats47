@@ -5,5 +5,5 @@ export type {
   RankingData,
   RankingOption,
   RankingClientProps,
-} from "./RankingClient.types";
+} from "@/types/models/ranking";
 export type { RankingNavigationProps } from "./RankingNavigation";

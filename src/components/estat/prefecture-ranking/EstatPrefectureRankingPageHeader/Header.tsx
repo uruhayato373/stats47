@@ -1,7 +1,12 @@
 "use client";
 
 import { RefreshCw, Map, ExternalLink } from "lucide-react";
-import { HeaderProps } from "./types";
+
+interface HeaderProps {
+  loading: boolean;
+  currentStatsId: string;
+  onRefresh: () => void;
+}
 
 export default function Header({
   loading,

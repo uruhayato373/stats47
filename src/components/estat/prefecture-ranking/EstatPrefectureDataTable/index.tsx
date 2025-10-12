@@ -11,7 +11,7 @@ import {
   EstatPrefectureDataTableProps,
   SortField,
   SortDirection,
-} from "./types";
+} from "./EstatPrefectureDataTable.types";
 
 export default function EstatPrefectureDataTable({
   data,

@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { RankingItem } from "@/lib/ranking/get-ranking-items";
+import { RankingItem } from "@/types/models/ranking";
 
 interface DraggableItemProps {
   item: RankingItem;
@@ -34,7 +34,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   isLoading,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: item.id });
+    useSortable({ id: item.id! });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -120,7 +120,9 @@ export const DraggableRankingList: React.FC<DraggableRankingListProps> = ({
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={items.map((item) => item.id)}
+        items={items
+          .filter((item) => item.id !== undefined)
+          .map((item) => item.id!)}
         strategy={verticalListSortingStrategy}
       >
         <div className="space-y-2">

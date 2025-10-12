@@ -1,11 +1,10 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { estatAPI } from "@/services/estat-api";
 import { StackedBarChart } from "@/components/d3/StackedBarChart";
-import { GetStatsDataResponse } from "@/types/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 interface EstatParams {
   statsDataId: string;
@@ -40,7 +39,7 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res: GetStatsDataResponse = await estatAPI.getStatsData({
+        const res: EstatStatsDataResponse = await estatAPI.getStatsData({
           statsDataId: params.statsDataId,
           cdCat01: params.cdCat01.join(","),
           limit: 10000, // get more data points
@@ -56,18 +55,32 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
           throw new Error("Required CLASS_OBJ not found");
         }
 
-        const timeMap = new Map(timeObj.CLASS.map((c) => [c["@code"], c["@name"]]));
-        const cat01Map = new Map(cat01Obj.CLASS.map((c) => [c["@code"], c["@name"]]));
+        if (!Array.isArray(timeObj.CLASS) || !Array.isArray(cat01Obj.CLASS)) {
+          throw new Error("CLASS must be an array");
+        }
 
-        const keyNames = params.cdCat01.map((code) => cat01Map.get(code)!).filter(Boolean);
+        const timeMap = new Map(
+          timeObj.CLASS.map((c) => [c["@code"], c["@name"]])
+        );
+        const cat01Map = new Map(
+          cat01Obj.CLASS.map((c) => [c["@code"], c["@name"]])
+        );
+
+        const keyNames = params.cdCat01
+          .map((code) => cat01Map.get(code)!)
+          .filter(Boolean);
         setKeys(keyNames);
+
+        if (!Array.isArray(VALUE)) {
+          throw new Error("VALUE must be an array");
+        }
 
         const transformed = VALUE.reduce<Record<string, TransformedData>>(
           (acc, item) => {
             const timeCode = item["@time"];
-            const time = timeMap.get(timeCode);
+            const time = timeCode ? timeMap.get(timeCode) : undefined;
             const cat01Code = item["@cat01"];
-            const cat01Name = cat01Map.get(cat01Code);
+            const cat01Name = cat01Code ? cat01Map.get(cat01Code) : undefined;
             const value = Number(item.$);
 
             if (time && cat01Name) {
@@ -80,10 +93,11 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
           },
           {}
         );
-        
-        const chartData = Object.values(transformed).sort((a, b) => d3.ascending(a.time, b.time));
-        setData(chartData);
 
+        const chartData = Object.values(transformed).sort((a, b) =>
+          d3.ascending(a.time, b.time)
+        );
+        setData(chartData);
       } catch (error) {
         console.error("Failed to fetch data for StackedBarChart", error);
       } finally {
@@ -94,7 +108,10 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
     fetchData();
   }, [params]);
 
-  const colors = d3.scaleOrdinal<string>().domain(keys).range(d3.schemeCategory10);
+  const colors = d3
+    .scaleOrdinal<string>()
+    .domain(keys)
+    .range(d3.schemeCategory10);
 
   if (loading) {
     return <div>Loading chart...</div>;
@@ -105,7 +122,14 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
       <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
         {title}
       </h2>
-      <StackedBarChart data={data} keys={keys} colors={colors} width={width} height={height} yLabel={yLabel} />
+      <StackedBarChart
+        data={data}
+        keys={keys}
+        colors={colors}
+        width={width}
+        height={height}
+        yLabel={yLabel}
+      />
     </div>
   );
 };

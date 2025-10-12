@@ -1,4 +1,17 @@
-import { VisualizationSettingsPanelProps } from "./types";
+import { VisualizationSettings } from "@/lib/ranking/visualization-settings";
+
+interface VisualizationSettingsPanelProps {
+  editableSettings: Partial<VisualizationSettings>;
+  visualizationSettings: VisualizationSettings | null;
+  params: PrefectureRankingParams | null;
+  onSettingsChange: (settings: Partial<VisualizationSettings>) => void;
+}
+
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
 
 export default function VisualizationSettingsPanel({
   editableSettings,

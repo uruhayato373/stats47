@@ -1,7 +1,7 @@
 "use client";
 
 import { EstatStatsDataResponse } from "@/lib/estat/types";
-import { FormattedYear } from "@/types/estat/formatted";
+import { FormattedYear } from "@/lib/estat/types";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
