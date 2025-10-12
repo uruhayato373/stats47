@@ -1,8 +1,5 @@
 // Data Processing
-export {
-  EstatStatsDataService,
-  EstatStatsListService,
-} from "./statsdata";
+export { EstatStatsDataService } from "./statsdata";
 
 // Metadata Management
 export { EstatMetaInfoService } from "./metainfo";

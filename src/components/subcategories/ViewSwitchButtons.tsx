@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
+import {
+  CategoryData,
+  SubcategoryData,
+} from "@/types/visualization/choropleth";
 
 interface ViewSwitchButtonsProps {
   category: CategoryData;

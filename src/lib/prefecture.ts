@@ -1,4 +1,7 @@
-import { Prefecture } from "@/types/prefecture";
+interface Prefecture {
+  prefCode: string;
+  prefName: string;
+}
 
 export const prefList: Prefecture[] = [
   { prefCode: "01000", prefName: "北海道" },

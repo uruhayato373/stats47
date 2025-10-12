@@ -13,7 +13,7 @@ export class EstatStatsListService {
   static async getAndFormatStatsList(
     options: {
       searchWord?: string;
-      searchKind?: string;
+      searchKind?: "1" | "2" | "3";
       startPosition?: number;
       limit?: number;
     } = {}
@@ -28,14 +28,14 @@ export class EstatStatsListService {
   static async getStatsListRaw(
     options: {
       searchWord?: string;
-      searchKind?: string;
+      searchKind?: "1" | "2" | "3";
       startPosition?: number;
       limit?: number;
     } = {}
   ): Promise<EstatStatsListResponse> {
     try {
       const response = await estatAPI.getStatsList({
-        searchKind: "1",
+        searchKind: "1" as "1" | "2" | "3",
         startPosition: 1,
         limit: 20,
         ...options,

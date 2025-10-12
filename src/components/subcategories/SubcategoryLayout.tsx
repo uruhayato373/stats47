@@ -5,24 +5,10 @@ import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
 import { SubcategoryNavigation } from "./SubcategoryNavigation";
 import { ViewSwitchButtons } from "./ViewSwitchButtons";
 import { PrefectureSelector } from "./PrefectureSelector";
-
-interface CategoryData {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  displayOrder: number;
-  subcategories: SubcategoryData[];
-}
-
-interface SubcategoryData {
-  id: string;
-  categoryId: string;
-  name: string;
-  displayOrder?: number;
-  component?: string;
-  areaComponent?: string;
-}
+import {
+  CategoryData,
+  SubcategoryData,
+} from "@/types/visualization/choropleth";
 
 interface SubcategoryLayoutProps {
   category: CategoryData;
