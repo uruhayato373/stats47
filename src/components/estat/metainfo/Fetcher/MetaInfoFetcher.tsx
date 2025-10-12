@@ -14,7 +14,7 @@ interface EstatMetaInfoFetcherProps {
 export default function EstatMetaInfoFetcher({
   onSubmit,
   loading,
-  clearOnSuccess = true,
+  clearOnSuccess = false,
 }: EstatMetaInfoFetcherProps) {
   const [statsDataId, setStatsDataId] = useState<string>("");
   const styles = useStyles();

@@ -3,33 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import PaginatedTable from "./PaginatedTable";
-
-// 安全にレンダリングするためのヘルパー関数
-function safeRender(value: unknown): string {
-  if (value === null || value === undefined) {
-    return "";
-  }
-  if (typeof value === "string") {
-    return value;
-  }
-  if (typeof value === "number") {
-    return value.toString();
-  }
-  if (typeof value === "object" && value !== null) {
-    const obj = value as Record<string, unknown>;
-    // オブジェクトの場合は、$プロパティがあればそれを表示
-    if ("$" in obj && typeof obj.$ === "string") {
-      return obj.$;
-    }
-    // @noプロパティがあればそれを表示
-    if ("@no" in obj && typeof obj["@no"] === "string") {
-      return obj["@no"];
-    }
-    // その他の場合は、JSON.stringifyで表示
-    return JSON.stringify(value);
-  }
-  return String(value);
-}
+import { safeRender } from "../utils/helpers";
 
 interface ClassificationTabsProps {
   classObjs: Array<{
@@ -59,7 +33,7 @@ export default function ClassificationTabs({
   if (!classObjs || classObjs.length === 0) return null;
 
   // カテゴリデータのみを取得
-  const categoryData = classObjs.find(obj => obj["@id"] === "cat01");
+  const categoryData = classObjs.find((obj) => obj["@id"] === "cat01");
 
   const getCategoryTableData = (classObj: typeof categoryData) => {
     if (!classObj || !classObj.CLASS) return [];

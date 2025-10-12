@@ -1,44 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Save, AlertCircle, Code, Database, CheckCircle } from "lucide-react";
+import { Code, Database } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
-import ClassificationTabs from "./ClassificationTabs";
-import JsonDisplay from "./JsonDisplay";
-import AreaTimeSelectors from "./AreaTimeSelectors";
+import ClassificationTabs from "./components/ClassificationTabs";
+import JsonDisplay from "./components/JsonDisplay";
+import AreaTimeSelectors from "./components/AreaTimeSelectors";
+import MetaInfoHeader from "./components/MetaInfoHeader";
 
 interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
   loading?: boolean;
   error?: string | null;
-}
-
-// 安全にレンダリングするためのヘルパー関数
-function safeRender(value: unknown): string {
-  if (value === null || value === undefined) {
-    return "";
-  }
-  if (typeof value === "string") {
-    return value;
-  }
-  if (typeof value === "number") {
-    return value.toString();
-  }
-  if (typeof value === "object" && value !== null) {
-    const obj = value as Record<string, unknown>;
-    // オブジェクトの場合は、$プロパティがあればそれを表示
-    if ("$" in obj && typeof obj.$ === "string") {
-      return obj.$;
-    }
-    // @noプロパティがあればそれを表示
-    if ("@no" in obj && typeof obj["@no"] === "string") {
-      return obj["@no"];
-    }
-    // その他の場合は、JSON.stringifyで表示
-    return JSON.stringify(value);
-  }
-  return String(value);
 }
 
 export default function EstatMetaInfoDisplay({
@@ -197,66 +171,16 @@ export default function EstatMetaInfoDisplay({
   // メタ情報の一意IDを生成（統計表IDを使用）
   const metaInfoId = TABLE_INF?.["@id"];
 
-  // 統計表基本情報のテーブルデータを準備
-  const tableData = [
-    {
-      label: "統計表題名",
-      value: safeRender(TABLE_INF.TITLE),
-    },
-    {
-      label: "政府統計名",
-      value: safeRender(TABLE_INF.STAT_NAME),
-    },
-    {
-      label: "作成機関",
-      value: safeRender(TABLE_INF.GOV_ORG),
-    },
-  ];
-
   return (
     <div className="space-y-6">
-      {/* 保存ボタンとステータス */}
+      {/* ヘッダー部分 */}
       {metaInfo && (
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border-b border-gray-200 pb-4">
-          <div className="flex-1">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-neutral-100">
-              メタ情報詳細
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-neutral-400">
-              データを確認後、データベースに保存できます
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col sm:flex-row gap-2">
-              <button
-                onClick={handleSave}
-                disabled={saving}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-              >
-                <Save className={`w-4 h-4 ${saving ? "animate-pulse" : ""}`} />
-                {saving ? "保存中..." : "データベースに保存"}
-              </button>
-            </div>
-
-            {saveResult && (
-              <div
-                className={`flex items-center gap-2 text-sm px-3 py-2 rounded ${
-                  saveResult.success
-                    ? "bg-green-50 text-green-800 border border-green-200"
-                    : "bg-red-50 text-red-800 border border-red-200"
-                }`}
-              >
-                {saveResult.success ? (
-                  <CheckCircle className="w-4 h-4" />
-                ) : (
-                  <AlertCircle className="w-4 h-4" />
-                )}
-                {saveResult.message}
-              </div>
-            )}
-          </div>
-        </div>
+        <MetaInfoHeader
+          metaInfo={metaInfo}
+          onSave={handleSave}
+          saving={saving}
+          saveResult={saveResult}
+        />
       )}
 
       {/* メインタブナビゲーション */}
@@ -291,45 +215,17 @@ export default function EstatMetaInfoDisplay({
       <div className="mt-6">
         {activeMainTab === 0 && (
           <div className="space-y-6">
-            {/* 基本情報と地域・年次セレクターを横並びに配置 */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* 統計表基本情報 */}
-              <div className="lg:col-span-2">
-                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
-                  <div className="space-y-0">
-                    {tableData.map((item, index) => (
-                      <div
-                        key={index}
-                        className={`px-4 py-3 ${
-                          index !== tableData.length - 1
-                            ? "border-b border-gray-200 dark:border-neutral-600"
-                            : ""
-                        }`}
-                      >
-                        <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {item.label}
-                        </div>
-                        <div className="text-base text-gray-900 dark:text-gray-100">
-                          {item.value || "-"}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+            {/* 地域・年次セレクター */}
+            {CLASS_INF &&
+              CLASS_INF.CLASS_OBJ &&
+              CLASS_INF.CLASS_OBJ.length > 0 && (
+                <div className="lg:col-span-1">
+                  <AreaTimeSelectors
+                    classObjs={CLASS_INF.CLASS_OBJ}
+                    metaInfoId={metaInfoId}
+                  />
                 </div>
-              </div>
-
-              {/* 地域・年次セレクター */}
-              {CLASS_INF &&
-                CLASS_INF.CLASS_OBJ &&
-                CLASS_INF.CLASS_OBJ.length > 0 && (
-                  <div className="lg:col-span-1">
-                    <AreaTimeSelectors
-                      classObjs={CLASS_INF.CLASS_OBJ}
-                      metaInfoId={metaInfoId}
-                    />
-                  </div>
-                )}
-            </div>
+              )}
 
             {/* カテゴリ情報 */}
             {CLASS_INF &&
