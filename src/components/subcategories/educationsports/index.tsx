@@ -1,6 +1,5 @@
 export {
   ChildcareEarlyEducationPage,
-  ChildcareEarlyEducationAreaPage,
   ChildcareEarlyEducationNationalDashboard,
   ChildcareEarlyEducationPrefectureDashboard,
 } from "./childcare-early-education";
