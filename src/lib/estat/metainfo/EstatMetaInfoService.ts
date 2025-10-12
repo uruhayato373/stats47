@@ -349,8 +349,6 @@ export class EstatMetaInfoService {
    */
   async getStatsList(
     options: {
-      limit?: number;
-      offset?: number;
       orderBy?: "last_updated" | "stat_name" | "item_count";
     } = {}
   ): Promise<
@@ -362,7 +360,7 @@ export class EstatMetaInfoService {
       last_updated: string;
     }>
   > {
-    const { limit = 50, offset = 0, orderBy = "last_updated" } = options;
+    const { orderBy = "last_updated" } = options;
 
     const orderClause = {
       last_updated: "ORDER BY last_updated DESC",
@@ -371,21 +369,7 @@ export class EstatMetaInfoService {
     }[orderBy];
 
     const result = await this.db
-      .prepare(
-        `
-        SELECT DISTINCT
-          stats_data_id,
-          stat_name,
-          title,
-          COUNT(*) as item_count,
-          MAX(updated_at) as last_updated
-        FROM estat_metainfo
-        GROUP BY stats_data_id, stat_name, title
-        ${orderClause}
-        LIMIT ? OFFSET ?
-      `
-      )
-      .bind(limit.toString(), offset.toString())
+      .prepare(`SELECT * FROM v_estat_metainfo_summary ${orderClause}`)
       .all();
 
     return result.results as Array<{

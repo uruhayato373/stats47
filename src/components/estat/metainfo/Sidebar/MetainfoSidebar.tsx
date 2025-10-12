@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
 import SavedEstatMetaInfoList from "./SavedMetaInfoList";
-
+import { useMetadataList } from "../hooks/useMetadataList";
 import type { SavedEstatMetainfoItem } from "@/types/models";
 
 interface EstatMetaInfoSidebarProps {
@@ -13,51 +12,9 @@ interface EstatMetaInfoSidebarProps {
 export default function EstatMetaInfoSidebar({
   className = "",
 }: EstatMetaInfoSidebarProps) {
-  const [savedData, setSavedData] = useState<SavedEstatMetainfoItem[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchSavedData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("/api/estat/metainfo/saved");
-      if (response.ok) {
-        const data = (await response.json()) as {
-          items?: SavedEstatMetainfoItem[];
-        };
-        setSavedData(data.items || []);
-      } else {
-        setSavedData([]);
-      }
-    } catch (error) {
-      console.error("Failed to fetch saved data:", error);
-      setSavedData([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSavedData();
-  }, []);
-
-  const handleDelete = async (id: string) => {
-    if (!confirm("このメタ情報を削除しますか？")) return;
-
-    try {
-      const response = await fetch(`/api/estat/metainfo/saved/${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        setSavedData((prev) => prev.filter((item) => item.id !== id));
-      }
-    } catch (error) {
-      console.error("Failed to delete item:", error);
-    }
-  };
+  const { data, loading, fetchData, deleteItem } = useMetadataList();
 
   const handleView = (item: SavedEstatMetainfoItem) => {
-    // メタ情報の詳細を表示する機能（今後実装）
     console.log("View metadata:", item);
   };
 
@@ -76,7 +33,7 @@ export default function EstatMetaInfoSidebar({
         </div>
 
         <button
-          onClick={fetchSavedData}
+          onClick={fetchData}
           disabled={loading}
           className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
           title="更新"
@@ -87,10 +44,10 @@ export default function EstatMetaInfoSidebar({
 
       {/* データリスト */}
       <SavedEstatMetaInfoList
-        data={savedData}
+        data={data}
         loading={loading}
         onView={handleView}
-        onDelete={handleDelete}
+        onDelete={deleteItem}
       />
     </div>
   );
