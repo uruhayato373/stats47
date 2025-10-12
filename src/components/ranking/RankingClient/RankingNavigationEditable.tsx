@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { Pencil, Check } from "lucide-react";
 import { RankingOption, RankingItem } from "@/types/models/ranking";
 import { useRankingItemsEditor } from "@/hooks/useRankingItemsEditor";
 import { Modal } from "@/components/common/Modal/Modal";
@@ -122,9 +123,15 @@ export const RankingNavigationEditable = React.memo(
               {editable && (
                 <button
                   onClick={() => setIsEditMode(!isEditMode)}
-                  className="text-sm text-indigo-600 hover:text-indigo-700"
+                  className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                  title={isEditMode ? "編集を完了" : "編集モード"}
+                  aria-label={isEditMode ? "編集を完了" : "編集モード"}
                 >
-                  {isEditMode ? "完了" : "編集"}
+                  {isEditMode ? (
+                    <Check className="w-4 h-4" />
+                  ) : (
+                    <Pencil className="w-4 h-4" />
+                  )}
                 </button>
               )}
             </div>
