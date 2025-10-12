@@ -15,13 +15,10 @@ export {
   MarriagePrefectureDashboard,
 } from "./marriage";
 export {
-  PopulationMovementPage,
-  PopulationMovementAreaPage,
   PopulationMovementNationalDashboard,
   PopulationMovementPrefectureDashboard,
 } from "./population-movement";
 export {
-  PopulationCompositionPage,
   PopulationCompositionNationalDashboard,
   PopulationCompositionPrefectureDashboard,
 } from "./population-composition";

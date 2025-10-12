@@ -1,5 +1,1 @@
-export {
-  RoadsPage,
-  RoadsNationalDashboard,
-  RoadsPrefectureDashboard,
-} from "./roads";
+export { RoadsNationalDashboard, RoadsPrefectureDashboard } from "./roads";

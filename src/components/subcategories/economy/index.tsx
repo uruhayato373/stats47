@@ -3,8 +3,6 @@ export {
   BusinessActivityPrefectureDashboard,
 } from "./business-activity";
 export {
-  BusinessScalePage,
-  BusinessScaleAreaPage,
   BusinessScaleNationalDashboard,
   BusinessScalePrefectureDashboard,
 } from "./business-scale";
