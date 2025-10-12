@@ -3,10 +3,8 @@
 import { useMemo } from "react";
 import { FormattedEstatData } from "@/lib/estat/types";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
-import {
-  VisualizationSettings,
-  VisualizationSettingsService,
-} from "@/lib/ranking/visualization-settings";
+import { VisualizationSettings } from "@/lib/prefecture-ranking/visualization-settings";
+import { PrefectureRankingSettingsService } from "@/lib/prefecture-ranking/settings-service";
 
 interface UsePrefectureRankingDataOptions {
   data: any;
@@ -50,7 +48,7 @@ export function usePrefectureRankingData({
       return filtered.map((value) => ({
         ...value,
         numericValue: value.numericValue
-          ? VisualizationSettingsService.applyConversion(
+          ? PrefectureRankingSettingsService.applyConversion(
               value.numericValue,
               settings.conversion_factor || 1,
               settings.decimal_places || 0

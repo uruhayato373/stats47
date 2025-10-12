@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { VisualizationSettings } from "@/lib/prefecture-ranking/visualization-settings";
 import {
-  VisualizationSettings,
-  VisualizationSettingsService,
-} from "@/lib/ranking/visualization-settings";
+  fetchVisualizationSettingsByStats,
+  saveVisualizationSettingsForStats,
+} from "@/lib/prefecture-ranking/visualization-settings";
 
 interface UseVisualizationSettingsOptions {
   statsDataId?: string;
@@ -30,21 +31,25 @@ export function useVisualizationSettings({
 
       setLoading(true);
       try {
-        const response = await VisualizationSettingsService.fetchSettings(
+        const response = await fetchVisualizationSettingsByStats(
           statsDataId,
           categoryCode
         );
 
         if (response.success) {
-          setSettings(response.settings);
-          setEditableSettings(response.settings);
+          setSettings(response.visualizationSettings);
+          setEditableSettings(response.visualizationSettings);
         } else {
           // デフォルト値を設定
-          const defaultSettings =
-            VisualizationSettingsService.getDefaultSettings(
-              statsDataId,
-              categoryCode
-            );
+          const defaultSettings = {
+            stats_data_id: statsDataId,
+            cat01: categoryCode,
+            map_color_scheme: "interpolateBlues",
+            map_diverging_midpoint: "zero",
+            ranking_direction: "desc",
+            conversion_factor: 1,
+            decimal_places: 0,
+          };
           setEditableSettings(defaultSettings);
         }
       } catch (error) {
@@ -69,7 +74,9 @@ export function useVisualizationSettings({
     setSaveSuccess(false);
 
     try {
-      const result = await VisualizationSettingsService.saveSettings(
+      const result = await saveVisualizationSettingsForStats(
+        statsDataId,
+        categoryCode,
         settingsToSave
       );
 
@@ -78,13 +85,13 @@ export function useVisualizationSettings({
         setTimeout(() => setSaveSuccess(false), 3000);
 
         // 設定を再読み込み
-        const response = await VisualizationSettingsService.fetchSettings(
+        const response = await fetchVisualizationSettingsByStats(
           statsDataId,
           categoryCode
         );
         if (response.success) {
-          setSettings(response.settings);
-          setEditableSettings(response.settings);
+          setSettings(response.visualizationSettings);
+          setEditableSettings(response.visualizationSettings);
         }
 
         return { success: true };
