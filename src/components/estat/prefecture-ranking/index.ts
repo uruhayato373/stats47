@@ -1,5 +1,7 @@
-export { default as PrefectureRankingForm } from "./EstatPrefectureRankingFetcher";
-export { default as PrefectureRankingDisplay } from "./EstatPrefectureRankingDisplay";
-export { default as PrefectureRankingSidebar } from "./PrefectureRankingSidebar";
-export { default as PrefectureRankingPageHeader } from "./EstatPrefectureRankingPageHeader";
-export { default as PrefectureDataTable } from "./EstatPrefectureDataTable";
+export { default as PrefectureRankingForm } from "./Fetcher";
+export { default as PrefectureRankingDisplay } from "./Display";
+export { default as PrefectureRankingSidebar } from "./Sidebar";
+export { default as PrefectureRankingPageHeader } from "./Header";
+export { default as PrefectureDataTable } from "./DataTable";
+export { default as SavedPrefectureRankingList } from "./SavedList";
+export { default as VisualizationSettingsPanel } from "./SettingsPanel";

@@ -1,23 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { TrendingUp, RefreshCw, Info } from "lucide-react";
 import {
-  TrendingUp,
-  RefreshCw,
-  Info,
-} from "lucide-react";
-
-interface SavedMetadataItem {
-  id: number;
-  stats_data_id: string;
-  stat_name: string;
-  title: string;
-  cat01?: string;
-  item_name?: string;
-  unit?: string;
-  updated_at: string;
-  created_at: string;
-}
+  useSavedMetadata,
+  useItemNames,
+  type SavedMetadataItem,
+} from "./hooks";
 
 interface PrefectureRankingSidebarProps {
   className?: string;
@@ -28,75 +17,27 @@ export default function PrefectureRankingSidebar({
   className = "",
   onDataSelect,
 }: PrefectureRankingSidebarProps) {
-  const [savedData, setSavedData] = useState<SavedMetadataItem[]>([]);
-  const [loading, setLoading] = useState(false);
   const [selectedStatsId, setSelectedStatsId] = useState<string>("");
-  const [itemNames, setItemNames] = useState<string[]>([]);
-  const [itemNamesLoading, setItemNamesLoading] = useState(false);
-
-  const fetchSavedData = async () => {
-    setLoading(true);
-    try {
-      // 新しい効率的なAPIエンドポイントを使用
-      const response = await fetch("/api/estat/metainfo/stats-list?limit=100");
-      if (response.ok) {
-        const data = (await response.json()) as { items?: SavedMetadataItem[] };
-        console.log("Fetched stats list:", data.items); // デバッグ用ログ
-        setSavedData(data.items || []);
-      } else {
-        console.error("Failed to fetch stats list: HTTP", response.status);
-        setSavedData([]);
-      }
-    } catch (error) {
-      console.error("Failed to fetch stats list:", error);
-      setSavedData([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSavedData();
-  }, []);
-
-  const fetchItemNames = async (statsDataId: string) => {
-    setItemNamesLoading(true);
-    try {
-      const response = await fetch(`/api/estat/metainfo/items?statsDataId=${statsDataId}`);
-      if (response.ok) {
-        const data = await response.json() as { itemNames?: string[] };
-        console.log("Fetched item names:", data.itemNames); // デバッグ用ログ
-        setItemNames(data.itemNames || []);
-      } else {
-        // エラーレスポンスの詳細を取得
-        const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
-        console.error("Failed to fetch item names: HTTP", response.status);
-        console.error("Error details:", errorData);
-        setItemNames([]);
-      }
-    } catch (error) {
-      console.error("Failed to fetch item names:", error);
-      setItemNames([]);
-    } finally {
-      setItemNamesLoading(false);
-    }
-  };
-
+  const { data: savedData, loading, refetch } = useSavedMetadata();
+  const {
+    itemNames,
+    loading: itemNamesLoading,
+    fetchItemNames,
+    reset,
+  } = useItemNames();
 
   const handleStatsIdChange = (statsDataId: string) => {
     setSelectedStatsId(statsDataId);
     if (statsDataId) {
-      // 選択されたデータで親コンポーネントに通知
       const selectedItem = savedData.find(
         (item) => item.stats_data_id === statsDataId
       );
       if (selectedItem && onDataSelect) {
         onDataSelect(selectedItem);
       }
-      // 項目名リストを取得
       fetchItemNames(statsDataId);
     } else {
-      setItemNames([]);
+      reset();
     }
   };
 
@@ -115,7 +56,7 @@ export default function PrefectureRankingSidebar({
         </div>
 
         <button
-          onClick={fetchSavedData}
+          onClick={refetch}
           disabled={loading}
           className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
           title="更新"
@@ -136,11 +77,15 @@ export default function PrefectureRankingSidebar({
         >
           <option value="">統計表を選択してください</option>
           {savedData
-            .filter((item) => item.stats_data_id && item.stats_data_id.trim() !== '') // 空文字もチェック
-            .sort((a, b) => (a.stats_data_id || '').localeCompare(b.stats_data_id || ''))
+            .filter(
+              (item) => item.stats_data_id && item.stats_data_id.trim() !== ""
+            )
+            .sort((a, b) =>
+              (a.stats_data_id || "").localeCompare(b.stats_data_id || "")
+            )
             .map((item) => (
               <option key={item.id} value={item.stats_data_id}>
-                {item.stats_data_id} - {item.title || '(タイトルなし)'}
+                {item.stats_data_id} - {item.title || "(タイトルなし)"}
               </option>
             ))}
         </select>
@@ -155,7 +100,9 @@ export default function PrefectureRankingSidebar({
               <span className="font-medium">選択中の統計表</span>
             </div>
             {(() => {
-              const selectedItem = savedData.find(item => item.stats_data_id === selectedStatsId);
+              const selectedItem = savedData.find(
+                (item) => item.stats_data_id === selectedStatsId
+              );
               return selectedItem ? (
                 <div className="space-y-2 text-xs">
                   <div className="bg-gray-50 dark:bg-neutral-700 p-2 rounded">
@@ -165,9 +112,15 @@ export default function PrefectureRankingSidebar({
                     <div className="space-y-1 text-gray-600 dark:text-neutral-400">
                       <div>統計表ID: {selectedItem.stats_data_id}</div>
                       <div>統計名: {selectedItem.stat_name}</div>
-                      {selectedItem.cat01 && <div>カテゴリ: {selectedItem.cat01}</div>}
-                      {selectedItem.item_name && <div>項目名: {selectedItem.item_name}</div>}
-                      {selectedItem.unit && <div>単位: {selectedItem.unit}</div>}
+                      {selectedItem.cat01 && (
+                        <div>カテゴリ: {selectedItem.cat01}</div>
+                      )}
+                      {selectedItem.item_name && (
+                        <div>項目名: {selectedItem.item_name}</div>
+                      )}
+                      {selectedItem.unit && (
+                        <div>単位: {selectedItem.unit}</div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -186,7 +139,9 @@ export default function PrefectureRankingSidebar({
         <div className="border-b border-gray-200 dark:border-neutral-700 p-4">
           <div className="flex items-center gap-2 mb-3">
             <Info className="w-4 h-4 text-blue-500" />
-            <span className="font-medium text-gray-800 dark:text-neutral-200">項目名一覧</span>
+            <span className="font-medium text-gray-800 dark:text-neutral-200">
+              項目名一覧
+            </span>
             {itemNamesLoading && (
               <RefreshCw className="w-4 h-4 animate-spin text-blue-500" />
             )}

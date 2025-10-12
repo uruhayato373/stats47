@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
     console.log("=== STATS LIST API START ===");
     console.log("Parameters:", { page, limit, search });
 
+    // 常にリモートD1を使用
     const db = await createD1Database();
     console.log("Database connection established");
 
@@ -79,12 +80,16 @@ export async function GET(request: NextRequest) {
       const countResult = await countStmt
         .bind(searchParam, searchParam, searchParam)
         .all();
-      const countData = countResult.results?.[0] as { total: number } | undefined;
+      const countData = countResult.results?.[0] as
+        | { total: number }
+        | undefined;
       totalCount = countData?.total || 0;
     } else {
       const countStmt = db.prepare(countQuery);
       const countResult = await countStmt.bind().all();
-      const countData = countResult.results?.[0] as { total: number } | undefined;
+      const countData = countResult.results?.[0] as
+        | { total: number }
+        | undefined;
       totalCount = countData?.total || 0;
     }
 
@@ -92,26 +97,27 @@ export async function GET(request: NextRequest) {
     console.log("Total count:", totalCount);
 
     // レスポンス用のデータ形式に変換
-    const items = ((result.results || []) as Array<{
-      stats_data_id: string;
-      stat_name: string;
-      title: string;
-      created_at: string;
-      updated_at: string;
-      item_count: number;
-    }>).map((row) => ({
-        id: row.stats_data_id, // idとして統計表IDを使用
-        stats_data_id: row.stats_data_id,
-        stat_name: row.stat_name,
-        title: row.title,
-        cat01: null, // 効率化のため省略
-        item_name: null, // 効率化のため省略
-        unit: null, // 効率化のため省略
-        created_at: row.created_at,
-        updated_at: row.updated_at,
-        item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
-      })
-    );
+    const items = (
+      (result.results || []) as Array<{
+        stats_data_id: string;
+        stat_name: string;
+        title: string;
+        created_at: string;
+        updated_at: string;
+        item_count: number;
+      }>
+    ).map((row) => ({
+      id: row.stats_data_id, // idとして統計表IDを使用
+      stats_data_id: row.stats_data_id,
+      stat_name: row.stat_name,
+      title: row.title,
+      cat01: null, // 効率化のため省略
+      item_name: null, // 効率化のため省略
+      unit: null, // 効率化のため省略
+      created_at: row.created_at,
+      updated_at: row.updated_at,
+      item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
+    }));
 
     console.log("=== STATS LIST API END ===");
 
