@@ -1,11 +1,8 @@
 // メタデータ関連コンポーネントのエクスポート
-export { default as EstatMetainfoPageHeader } from "./EstatMetainfoPageHeader";
-export { default as SavedEstatMetainfoDisplay } from "./SavedEstatMetainfoDisplay";
-export {
-  EstatMetainfoSidebar,
-  SavedEstatMetainfoList,
-} from "./EstatMetainfoSidebar";
-export { default as EstatMetainfoSaver } from "./EstatMetainfoSaver";
-export { default as EstatMetainfoActions } from "./EstatMetainfoActions";
-export { EstatMetaInfoDisplay } from "./EstatMetaInfoDisplay";
-export { default as EstatMetaInfoFetcher } from "./EstatMetaInfoFetcher";
+export { PageHeader as EstatMetainfoPageHeader } from "./Header";
+export { SavedMetainfoDisplay as SavedEstatMetainfoDisplay } from "./SavedDisplay";
+export { EstatMetainfoSidebar, SavedEstatMetainfoList } from "./Sidebar";
+export { MetainfoSaver as EstatMetainfoSaver } from "./Saver";
+export { default as EstatMetainfoActions } from "./Actions";
+export { EstatMetaInfoDisplay } from "./Display";
+export { MetaInfoFetcher as EstatMetaInfoFetcher } from "./Fetcher";

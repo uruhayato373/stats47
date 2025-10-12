@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useStyles } from "@/hooks/useStyles";
-import EstatMetainfoActions from "./EstatMetainfoActions";
+import EstatMetainfoActions from "../Actions";
 
 interface SavedMetainfo {
   stats_data_id: string;

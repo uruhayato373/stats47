@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
-import SavedEstatMetainfoList from "./SavedEstatMetainfoList";
+import SavedEstatMetainfoList from "./SavedMetainfoList";
 
 interface SavedMetadataItem {
   id: string;
