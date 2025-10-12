@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
+import { useSession } from "next-auth/react";
 import { EstatRankingClient } from "@/components/ranking";
 import { RankingClientProps, RankingData } from "@/types/models/ranking";
 import { RankingNavigation } from "./RankingNavigation";
@@ -24,10 +24,14 @@ export function RankingClient<T extends string>({
   rankingItems,
 }: RankingClientProps<T>) {
   const params = useParams();
-  const auth = useAuth();
+  const { data: session, status } = useSession();
+
+  const isLoading = status === "loading";
+  const isAuthenticated = status === "authenticated";
+  const isAdmin = session?.user?.role === "admin";
 
   // ローディング中はローディング表示
-  if (auth.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="text-center">
@@ -40,15 +44,13 @@ export function RankingClient<T extends string>({
     );
   }
 
-  const isAdmin = auth.isAdmin;
-
   // デバッグログ（開発環境のみ）
   if (process.env.NODE_ENV === "development") {
     console.log("🔍 RankingClient Auth:", {
-      isAdmin: auth.isAdmin,
-      role: auth.user?.role,
-      isAuthenticated: auth.isAuthenticated,
-      username: auth.user?.username,
+      isAdmin,
+      role: session?.user?.role,
+      isAuthenticated,
+      username: session?.user?.username,
     });
   }
 

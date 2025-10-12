@@ -1,12 +1,17 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
-import { requireAdmin } from "@/lib/auth/api-auth";
+import { auth } from "@/lib/auth/auth";
 
 export async function PATCH(request: NextRequest) {
   // 管理者認証チェック
-  const { error } = await requireAdmin(request);
-  if (error) return error;
+  const session = await auth();
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { error: "管理者権限が必要です" },
+      { status: 403 }
+    );
+  }
 
   try {
     const body = (await request.json()) as {

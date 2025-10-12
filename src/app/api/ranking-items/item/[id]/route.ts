@@ -1,15 +1,20 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
-import { requireAdmin } from "@/lib/auth/api-auth";
+import { auth } from "@/lib/auth/auth";
 
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   // 管理者認証チェック
-  const { error } = await requireAdmin(request);
-  if (error) return error;
+  const session = await auth();
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { error: "管理者権限が必要です" },
+      { status: 403 }
+    );
+  }
 
   try {
     const { id } = await params;
@@ -74,8 +79,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   // 管理者認証チェック
-  const { error, user } = await requireAdmin(request);
-  if (error) return error;
+  const session = await auth();
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { error: "管理者権限が必要です" },
+      { status: 403 }
+    );
+  }
 
   try {
     const { id } = await params;
