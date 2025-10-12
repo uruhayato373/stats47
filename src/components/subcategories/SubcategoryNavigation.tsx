@@ -1,6 +1,23 @@
 import React from "react";
 import Link from "next/link";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
+
+interface CategoryData {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  displayOrder: number;
+  subcategories: SubcategoryData[];
+}
+
+interface SubcategoryData {
+  id: string;
+  categoryId: string;
+  name: string;
+  displayOrder?: number;
+  component?: string;
+  areaComponent?: string;
+}
 
 interface SubcategoryNavigationProps {
   category: CategoryData;

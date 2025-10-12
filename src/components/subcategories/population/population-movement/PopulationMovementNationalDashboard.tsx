@@ -3,7 +3,6 @@
 import React from "react";
 
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatMultiLineChart } from "@/components/dashboard/MultiLineChart";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/subcategory";
 
@@ -76,27 +75,6 @@ export const PopulationMovementNationalDashboard: React.FC<
             areaCode={areaCode}
             title="全国昼夜間人口比率"
             color="#f59e0b"
-          />
-        </div>
-      </div>
-
-      {/* 全国人口移動の推移 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国人口移動の推移
-          </h2>
-          <EstatMultiLineChart
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: [cdCat01.moversIn, cdCat01.moversOut],
-            }}
-            areaCode={areaCode}
-            width={800}
-            height={400}
-            yLabel="人"
-            title="転入・転出者数の推移"
-            labels={["転入者数", "転出者数"]}
           />
         </div>
       </div>

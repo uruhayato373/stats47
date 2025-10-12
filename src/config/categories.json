@@ -710,6 +710,15 @@
         "nationalDashboardComponent": "ForeignPopulationNationalDashboard",
         "prefectureDashboardComponent": "ForeignPopulationPrefectureDashboard",
         "displayOrder": 1
+      },
+      {
+        "id": "foreigners",
+        "name": "外国人統計",
+        "href": "/foreigners",
+        "dashboardComponent": "ForeignersNationalDashboard",
+        "nationalDashboardComponent": "ForeignersNationalDashboard",
+        "prefectureDashboardComponent": "ForeignersPrefectureDashboard",
+        "displayOrder": 2
       }
     ]
   },

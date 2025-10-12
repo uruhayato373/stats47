@@ -230,9 +230,9 @@ export class EstatRelationalCacheService {
         .first();
 
       return {
-        totalRecords: totalRecordsResult?.count || 0,
-        totalCategories: totalCategoriesResult?.count || 0,
-        totalTimePeriods: totalTimePeriodsResult?.count || 0,
+        totalRecords: (totalRecordsResult?.count as number) || 0,
+        totalCategories: (totalCategoriesResult?.count as number) || 0,
+        totalTimePeriods: (totalTimePeriodsResult?.count as number) || 0,
       };
     } catch (error) {
       console.error("キャッシュ統計取得エラー:", error);

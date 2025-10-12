@@ -1,4 +1,4 @@
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify } from "jose";
 
 /**
  * JWT ペイロードの型定義
@@ -14,7 +14,7 @@ export interface JWTPayload {
   email: string;
 
   /** ユーザーの役割 */
-  role: 'admin' | 'user';
+  role: "admin" | "user";
 
   /** セッションID */
   sessionId: string;
@@ -32,7 +32,9 @@ export interface JWTPayload {
  * @returns シークレットキー（UInt8Array）
  */
 function getJwtSecret(): Uint8Array {
-  const secret = process.env.JWT_SECRET || 'your-super-secret-jwt-key-minimum-32-characters-long';
+  const secret =
+    process.env.JWT_SECRET ||
+    "your-super-secret-jwt-key-minimum-32-characters-long";
   return new TextEncoder().encode(secret);
 }
 
@@ -54,15 +56,15 @@ function getJwtSecret(): Uint8Array {
  * ```
  */
 export async function generateToken(
-  payload: Omit<JWTPayload, 'iat' | 'exp'>
+  payload: Omit<JWTPayload, "iat" | "exp">
 ): Promise<string> {
   const secret = getJwtSecret();
 
   // 7日間の有効期限
-  const expirationTime = '7d';
+  const expirationTime = "7d";
 
   const token = await new SignJWT(payload as Record<string, unknown>)
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(expirationTime)
     .sign(secret);
@@ -92,10 +94,10 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
 
     const { payload } = await jwtVerify(token, secret);
 
-    return payload as JWTPayload;
+    return payload as unknown as JWTPayload;
   } catch (error) {
     // トークンが無効、または有効期限切れ
-    console.error('JWT verification error:', error);
+    console.error("JWT verification error:", error);
     return null;
   }
 }
@@ -109,7 +111,7 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
 export function getTokenExpiration(token: string): number | null {
   try {
     // Base64デコードしてペイロードを取得（検証なし）
-    const parts = token.split('.');
+    const parts = token.split(".");
     if (parts.length !== 3) {
       return null;
     }

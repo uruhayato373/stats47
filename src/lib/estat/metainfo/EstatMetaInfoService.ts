@@ -388,7 +388,7 @@ export class EstatMetaInfoService {
     }
 
     const result: TransformedMetadataEntry[] = [];
-    const statsDataId = tableInfo["@id"];
+    const statsDataId = tableInfo["@id"] || "";
     const statName = tableInfo.STAT_NAME?.$ || "";
     const title = tableInfo.TITLE?.$ || "";
 
@@ -417,7 +417,6 @@ export class EstatMetaInfoService {
           stat_name: statName,
           title: title,
           cat01: category["@code"] ?? "",
-          // @ts-expect-error - TypeScriptの型チェック回避、nullish coalescingでnullに変換済み
           item_name: itemName,
           unit: category["@unit"] || null,
         });

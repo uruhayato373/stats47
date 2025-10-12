@@ -1,5 +1,2 @@
-export {
-  LandUsePage,
-  LandUseNationalDashboard,
-  LandUsePrefectureDashboard,
-} from "./dashboard";
+export { LandUseNationalDashboard } from "./LandUseNationalDashboard";
+export { LandUsePrefectureDashboard } from "./LandUsePrefectureDashboard";

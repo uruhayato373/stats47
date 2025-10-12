@@ -25,7 +25,6 @@ export const PopulationCompositionNationalDashboard: React.FC<
             statsDataId: statsDataId,
             cdCat01: ageCompositionCodes,
           }}
-          areaCode={areaCode}
           title="全国年齢3区分別人口の推移"
           yLabel="人口（人）"
           width={800}

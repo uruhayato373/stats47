@@ -13,6 +13,7 @@ interface EstatParams {
 
 interface EstatStackedBarChartProps {
   params: EstatParams;
+  areaCode?: string;
   title: string;
   yLabel?: string;
   width?: number;
@@ -26,6 +27,7 @@ interface TransformedData {
 
 export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
   params,
+  areaCode,
   title,
   yLabel,
   width = 800,
@@ -42,6 +44,7 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
         const res: EstatStatsDataResponse = await estatAPI.getStatsData({
           statsDataId: params.statsDataId,
           cdCat01: params.cdCat01.join(","),
+          cdArea: areaCode,
           limit: 10000, // get more data points
         });
 
@@ -106,7 +109,7 @@ export const EstatStackedBarChart: React.FC<EstatStackedBarChartProps> = ({
     };
 
     fetchData();
-  }, [params]);
+  }, [params, areaCode]);
 
   const colors = d3
     .scaleOrdinal<string>()

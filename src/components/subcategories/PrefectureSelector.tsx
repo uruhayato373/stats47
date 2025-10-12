@@ -3,7 +3,24 @@
 import React from "react";
 import { useRouter, useParams } from "next/navigation";
 import { prefList } from "@/lib/prefecture";
-import { CategoryData, SubcategoryData } from "@/types/choropleth";
+
+interface CategoryData {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  displayOrder: number;
+  subcategories: SubcategoryData[];
+}
+
+interface SubcategoryData {
+  id: string;
+  categoryId: string;
+  name: string;
+  displayOrder?: number;
+  component?: string;
+  areaComponent?: string;
+}
 
 interface PrefectureSelectorProps {
   category: CategoryData;

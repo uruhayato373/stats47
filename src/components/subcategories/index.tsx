@@ -48,9 +48,7 @@ const componentMap: Record<string, any> = {
 
 // デフォルトのプレースホルダーコンポーネント
 const DefaultDashboardPage: React.FC<SubcategoryDashboardPageProps> = ({
-  category,
   subcategory,
-  areaCode,
 }) => {
   return (
     <div className="flex-1 flex items-center justify-center p-8">
@@ -70,7 +68,6 @@ const DefaultDashboardPage: React.FC<SubcategoryDashboardPageProps> = ({
 };
 
 const DefaultRankingPage: React.FC<SubcategoryRankingPageProps> = ({
-  category,
   subcategory,
 }) => {
   return (
@@ -186,9 +183,11 @@ export const getSubcategoryComponent = (
   categoryId?: string
 ): React.ComponentType<SubcategoryPageProps> => {
   const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
-  if (!subcategory?.dashboardComponent) return DefaultDashboardPage;
+  if (!subcategory?.dashboardComponent)
+    return DefaultDashboardPage as React.ComponentType<SubcategoryPageProps>;
 
-  return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
+  return (componentMap[subcategory.dashboardComponent] ||
+    DefaultDashboardPage) as React.ComponentType<SubcategoryPageProps>;
 };
 
 /**
@@ -201,12 +200,13 @@ export const getAreaPageComponent = (
   const subcategory = getSubcategoryInfo(subcategoryId);
 
   if (!subcategory?.dashboardComponent) {
-    return DefaultDashboardPage;
+    return DefaultDashboardPage as React.ComponentType<SubcategoryAreaPageProps>;
   }
 
   const component = componentMap[subcategory.dashboardComponent];
 
-  return component || DefaultDashboardPage;
+  return (component ||
+    DefaultDashboardPage) as React.ComponentType<SubcategoryAreaPageProps>;
 };
 
 // 共通コンポーネント

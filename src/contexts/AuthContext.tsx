@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await fetch("/api/auth/me");
 
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json()) as { user: User };
         setUser(data.user);
       } else {
         setUser(null);
@@ -58,11 +58,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     if (!response.ok) {
-      const data = await response.json();
+      const data = (await response.json()) as { error?: string };
       throw new Error(data.error || "ログインに失敗しました");
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { user: User };
     setUser(data.user);
   };
 

@@ -1,1 +1,2 @@
-export { ForeignersPage } from './ForeignersPage';
+export { ForeignersNationalDashboard } from "./ForeignersNationalDashboard";
+export { ForeignersPrefectureDashboard } from "./ForeignersPrefectureDashboard";

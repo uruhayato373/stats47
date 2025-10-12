@@ -18,11 +18,11 @@ export function useRankingItemsEditor(subcategoryId: string) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = (await response.json()) as { error?: string };
         throw new Error(errorData.error || "更新に失敗しました");
       }
 
-      return await response.json();
+      return (await response.json()) as RankingItem;
     } catch (err) {
       setError(err instanceof Error ? err.message : "更新に失敗しました");
       throw err;
@@ -43,11 +43,11 @@ export function useRankingItemsEditor(subcategoryId: string) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = (await response.json()) as { error?: string };
         throw new Error(errorData.error || "作成に失敗しました");
       }
 
-      return await response.json();
+      return (await response.json()) as RankingItem;
     } catch (err) {
       setError(err instanceof Error ? err.message : "作成に失敗しました");
       throw err;
@@ -66,11 +66,11 @@ export function useRankingItemsEditor(subcategoryId: string) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = (await response.json()) as { error?: string };
         throw new Error(errorData.error || "削除に失敗しました");
       }
 
-      return await response.json();
+      return (await response.json()) as { success: boolean };
     } catch (err) {
       setError(err instanceof Error ? err.message : "削除に失敗しました");
       throw err;
@@ -93,11 +93,11 @@ export function useRankingItemsEditor(subcategoryId: string) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = (await response.json()) as { error?: string };
         throw new Error(errorData.error || "並び替えに失敗しました");
       }
 
-      return await response.json();
+      return (await response.json()) as { success: boolean };
     } catch (err) {
       setError(err instanceof Error ? err.message : "並び替えに失敗しました");
       throw err;
