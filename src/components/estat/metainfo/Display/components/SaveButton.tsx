@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Save, AlertCircle, CheckCircle } from "lucide-react";
+import { Save, AlertCircle, CheckCircle, RefreshCw } from "lucide-react";
 
 interface SaveButtonProps {
   onSave: () => void;
@@ -32,18 +32,30 @@ export default function SaveButton({
 
       {saveResult && (
         <div
-          className={`flex items-center gap-2 text-sm px-3 py-2 rounded ${
+          className={`flex items-center justify-between text-sm px-3 py-2 rounded ${
             saveResult.success
               ? "bg-green-50 text-green-800 border border-green-200"
               : "bg-red-50 text-red-800 border border-red-200"
           }`}
         >
-          {saveResult.success ? (
-            <CheckCircle className="w-4 h-4" />
-          ) : (
-            <AlertCircle className="w-4 h-4" />
+          <div className="flex items-center gap-2">
+            {saveResult.success ? (
+              <CheckCircle className="w-4 h-4" />
+            ) : (
+              <AlertCircle className="w-4 h-4" />
+            )}
+            {saveResult.message}
+          </div>
+          {saveResult.success && (
+            <button
+              onClick={() => window.location.reload()}
+              className="flex items-center gap-1 px-2 py-1 text-xs bg-green-100 hover:bg-green-200 text-green-800 rounded transition-colors"
+              title="手動で画面を更新"
+            >
+              <RefreshCw className="w-3 h-3" />
+              更新
+            </button>
           )}
-          {saveResult.message}
         </div>
       )}
     </div>

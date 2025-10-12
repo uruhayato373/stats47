@@ -1,7 +1,12 @@
 "use client";
 
 import { RefreshCw } from "lucide-react";
-import { ActionsProps } from "./types";
+
+interface ActionsProps {
+  onRefresh: () => void;
+  onRetry?: () => void;
+  hasError?: boolean;
+}
 
 export default function Actions({
   onRefresh,

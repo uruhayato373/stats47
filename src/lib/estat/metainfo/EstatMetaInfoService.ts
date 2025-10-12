@@ -567,6 +567,9 @@ export class EstatMetaInfoService {
       VALUES ${values}
     `;
 
+    console.log("🔵 Service: SQL Length:", query.length);
+    console.log("🔵 Service: SQL Preview:", query.substring(0, 200) + "...");
+
     try {
       await this.db.prepare(query).run();
     } catch (error) {

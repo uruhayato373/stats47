@@ -81,8 +81,16 @@ export default function EstatMetaInfoDisplay({
 
       setSaveResult({
         success: true,
-        message: result.message || "メタ情報を正常に保存しました",
+        message:
+          result.message ||
+          "メタ情報を正常に保存しました。画面を更新しています...",
       });
+
+      // 保存成功後、2秒後にページをリロードして最新データを表示
+      setTimeout(() => {
+        console.log("🔄 ページをリロードして最新データを表示");
+        window.location.reload();
+      }, 2000);
     } catch (err) {
       clearTimeout(timeoutId);
       console.error("❌ 保存エラー:", err);

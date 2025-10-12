@@ -117,28 +117,48 @@ export const createD1Database = async () => {
           throw new Error("raw() is not implemented for REST API client");
         },
         run: async () => {
+          console.log("🔵 D1 Client: run() メソッド呼び出し");
+          console.log("🔵 D1 Client: SQL:", sql.substring(0, 100) + "...");
+          console.log("🔵 D1 Client: Params length:", params.length);
+
           return executeWithRetry(async () => {
-            const response = await fetch(
-              `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`,
-              {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${apiToken}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ sql, params }),
-              }
+            const apiUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`;
+            console.log("🔵 D1 Client: API URL:", apiUrl);
+
+            const requestBody = { sql, params };
+            console.log(
+              "🔵 D1 Client: Request body size:",
+              JSON.stringify(requestBody).length
             );
+
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${apiToken}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            });
+
+            console.log("🔵 D1 Client: Response status:", response.status);
 
             if (!response.ok) {
               const errorText = await response.text();
+              console.error("❌ D1 Client: API Error:", errorText);
               throw new Error(
                 `D1 API Error: ${response.status} - ${errorText}`
               );
             }
 
             const result = (await response.json()) as D1ApiResponse;
+            console.log("🔵 D1 Client: API Response:", {
+              success: result.success,
+              resultCount: result.result?.length,
+              errors: result.errors,
+            });
+
             if (!result.success) {
+              console.error("❌ D1 Client: Query failed:", result.errors);
               throw new Error(
                 `D1 Query failed: ${
                   result.errors?.[0]?.message || "Unknown error"
@@ -146,6 +166,7 @@ export const createD1Database = async () => {
               );
             }
 
+            console.log("✅ D1 Client: Query successful");
             return {
               success: true,
               meta: { duration: result.result?.[0]?.meta?.duration || 1 },

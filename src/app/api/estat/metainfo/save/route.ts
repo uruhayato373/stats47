@@ -4,6 +4,11 @@ import { createD1Database } from "@/lib/d1-client";
 
 export async function POST(request: NextRequest) {
   console.log("🔵 API: メタ情報保存開始");
+  console.log("🔵 API: 環境変数確認:", {
+    hasAccountId: !!process.env.CLOUDFLARE_ACCOUNT_ID,
+    hasApiToken: !!process.env.CLOUDFLARE_API_TOKEN,
+    hasDatabaseId: !!process.env.CLOUDFLARE_D1_DATABASE_ID,
+  });
 
   try {
     const { statsDataId, batchMode, startId, endId } =
