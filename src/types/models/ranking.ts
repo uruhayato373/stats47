@@ -12,7 +12,7 @@ export interface RankingItem {
   subcategoryId: string;
 
   /** ランキングキー（一意識別子） */
-  ranking_key: string;
+  rankingKey: string;
 
   /** 表示ラベル */
   label: string;

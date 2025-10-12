@@ -37,7 +37,7 @@ export const SubcategoryRankingPage: React.FC<
 
   // rankingKeyのバリデーション
   const validRankingKeys = rankingConfig.rankingItems.map(
-    (item) => item.ranking_key
+    (item) => item.rankingKey
   );
   const defaultRankingKey =
     rankingConfig.subcategory?.defaultRankingKey || "default";

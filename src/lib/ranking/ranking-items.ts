@@ -3,20 +3,7 @@
  * データベースからランキング設定を取得し、型安全な形式で返す
  */
 
-export interface RankingItem {
-  id: number;
-  subcategoryId: string;
-  ranking_key: string;
-  label: string;
-  statsDataId: string;
-  cdCat01: string;
-  unit: string;
-  name: string;
-  displayOrder: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import { RankingItem } from "@/types/models/ranking";
 
 export interface SubcategoryConfig {
   id: string;

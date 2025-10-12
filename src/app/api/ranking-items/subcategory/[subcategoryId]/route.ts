@@ -85,7 +85,7 @@ export async function GET(
         .map((row) => ({
           id: row.id,
           subcategoryId: subcategoryId,
-          ranking_key: row.ranking_key,
+          rankingKey: row.ranking_key,
           label: row.label,
           statsDataId: row.stats_data_id,
           cdCat01: row.cd_cat01,
