@@ -22,6 +22,40 @@ export interface BulkFetchResult {
   error?: string;
 }
 
+export interface StatsListSummary {
+  totalTables: number;
+  uniqueStats: number;
+  categories: Array<{
+    code: string;
+    name: string;
+    count: number;
+  }>;
+  governmentOrgs: Array<{
+    code: string;
+    name: string;
+    count: number;
+  }>;
+  dateRange: {
+    earliest: string;
+    latest: string;
+  };
+  lastUpdated: string;
+}
+
+export interface StatsListSearchResult {
+  success: boolean;
+  recordsProcessed: number;
+  totalAvailable: number;
+  message: string;
+  data?: Array<{
+    statsDataId: string;
+    title: string;
+    statName: string;
+    govOrg: string;
+    surveyDate: string;
+  }>;
+}
+
 export class EstatStatsListManager {
   constructor() {
     throw new Error("EstatStatsListManager is not implemented yet");

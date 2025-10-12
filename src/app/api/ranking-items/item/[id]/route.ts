@@ -8,12 +8,16 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   // 管理者認証チェック
-  const { error, user } = await requireAdmin(request);
+  const { error } = await requireAdmin(request);
   if (error) return error;
 
   try {
     const { id } = await params;
-    const body = await request.json();
+    const body = (await request.json()) as {
+      label: string;
+      displayOrder: number;
+      isActive?: boolean;
+    };
 
     const { label, displayOrder, isActive } = body;
 

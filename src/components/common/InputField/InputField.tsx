@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { useStyles } from "@/hooks/useStyles";
 
-interface InputFieldProps {
+export interface InputFieldProps {
   name: string;
   label: string;
   placeholder?: string;

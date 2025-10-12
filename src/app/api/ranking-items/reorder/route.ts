@@ -5,11 +5,17 @@ import { requireAdmin } from "@/lib/auth/api-auth";
 
 export async function PATCH(request: NextRequest) {
   // 管理者認証チェック
-  const { error, user } = await requireAdmin(request);
+  const { error } = await requireAdmin(request);
   if (error) return error;
 
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      subcategoryId: string;
+      reorderedItems: Array<{
+        id: string;
+        displayOrder: number;
+      }>;
+    };
     const { subcategoryId, reorderedItems } = body;
 
     if (!subcategoryId || !Array.isArray(reorderedItems)) {

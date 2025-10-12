@@ -10,7 +10,11 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
     }
 
-    const { name, username, email } = await request.json();
+    const { name, username, email } = (await request.json()) as {
+      name: string;
+      username: string;
+      email: string;
+    };
 
     // バリデーション
     if (!name || !username || !email) {

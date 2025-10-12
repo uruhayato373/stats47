@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
-import { SubcategoryData } from "@/types/choropleth";
+import { SubcategoryData } from "@/types/visualization/choropleth";
 import { FormattedValue } from "@/lib/estat/types";
 
 type SortField = "rank" | "name" | "value";

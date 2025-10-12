@@ -5,11 +5,21 @@ import { requireAdmin } from "@/lib/auth/api-auth";
 
 export async function POST(request: NextRequest) {
   // 管理者認証チェック
-  const { error, user } = await requireAdmin(request);
+  const { error } = await requireAdmin(request);
   if (error) return error;
 
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      subcategoryId: string;
+      rankingKey: string;
+      label: string;
+      statsDataId: string;
+      cdCat01: string;
+      unit: string;
+      name: string;
+      displayOrder?: number;
+      isActive?: boolean;
+    };
 
     const {
       subcategoryId,
@@ -82,13 +92,6 @@ export async function POST(request: NextRequest) {
       .run();
 
     if (!result.success) {
-      // 一意制約違反のチェック
-      if (result.error?.includes("UNIQUE")) {
-        return NextResponse.json(
-          { error: "同じランキングキーが既に存在します" },
-          { status: 409 }
-        );
-      }
       throw new Error("作成に失敗しました");
     }
 

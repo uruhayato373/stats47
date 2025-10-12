@@ -46,7 +46,7 @@ export function RegisterForm() {
         }),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
         setError(data.error || "登録に失敗しました");

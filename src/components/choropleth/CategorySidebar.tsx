@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useAtom } from 'jotai';
-import { ChevronDown, ChevronRight, BarChart3 } from 'lucide-react';
-import { CategoryIcon } from './CategoryIcon';
+import React, { useState } from "react";
+import { useAtom } from "jotai";
+import { ChevronDown, ChevronRight, BarChart3 } from "lucide-react";
+import { CategoryIcon } from "./CategoryIcon";
 import {
   selectedCategoryAtom,
   selectedSubcategoryAtom,
@@ -11,17 +11,20 @@ import {
   setSubcategoryAtom,
   categoriesAtom,
   selectedCategoryDataAtom,
-  selectedSubcategoryDataAtom
-} from '@/atoms/choropleth';
-import { CategoryData, SubcategoryData } from '@/types/choropleth';
-import { useStyles } from '@/hooks/useStyles';
+  selectedSubcategoryDataAtom,
+} from "@/atoms/choropleth";
+import {
+  CategoryData,
+  SubcategoryData,
+} from "@/types/visualization/choropleth";
+import { useStyles } from "@/hooks/useStyles";
 
 interface CategorySidebarProps {
   className?: string;
 }
 
 export const CategorySidebar: React.FC<CategorySidebarProps> = ({
-  className = ""
+  className = "",
 }) => {
   const styles = useStyles();
   const [categories] = useAtom(categoriesAtom);
@@ -32,7 +35,9 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
   const [, setCategory] = useAtom(setCategoryAtom);
   const [, setSubcategory] = useAtom(setSubcategoryAtom);
 
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
+    new Set()
+  );
 
   const toggleCategoryExpansion = (categoryId: string) => {
     const newExpanded = new Set(expandedCategories);
@@ -101,9 +106,10 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
                     hover:bg-gray-50 dark:hover:bg-neutral-700
-                    ${isSelected
-                      ? 'bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700'
-                      : 'border border-transparent'
+                    ${
+                      isSelected
+                        ? "bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700"
+                        : "border border-transparent"
                     }
                   `}
                 >
@@ -118,16 +124,21 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
 
                   {/* カテゴリアイコン */}
                   <div className="flex-shrink-0">
-                    <CategoryIcon iconName={category.icon} className="w-5 h-5 text-indigo-600" />
+                    <CategoryIcon
+                      iconName={category.icon}
+                      className="w-5 h-5 text-indigo-600"
+                    />
                   </div>
 
                   {/* カテゴリ名 */}
                   <div className="flex-1 text-left">
-                    <div className={`font-medium text-sm ${
-                      isSelected
-                        ? 'text-indigo-900 dark:text-indigo-100'
-                        : 'text-gray-900 dark:text-neutral-100'
-                    }`}>
+                    <div
+                      className={`font-medium text-sm ${
+                        isSelected
+                          ? "text-indigo-900 dark:text-indigo-100"
+                          : "text-gray-900 dark:text-neutral-100"
+                      }`}
+                    >
                       {category.name}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-neutral-500 mt-0.5">
@@ -140,7 +151,8 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
                 {isExpanded && (
                   <div className="ml-6 mt-1 space-y-1">
                     {category.subcategories.map((subcategory) => {
-                      const isSubSelected = selectedSubcategoryId === subcategory.id;
+                      const isSubSelected =
+                        selectedSubcategoryId === subcategory.id;
 
                       return (
                         <button
@@ -149,15 +161,14 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
                           className={`
                             w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-200
                             hover:bg-gray-50 dark:hover:bg-neutral-700
-                            ${isSubSelected
-                              ? 'bg-indigo-100 dark:bg-indigo-800/40 text-indigo-900 dark:text-indigo-100 border-l-2 border-indigo-500'
-                              : 'text-gray-700 dark:text-neutral-300 border-l-2 border-transparent'
+                            ${
+                              isSubSelected
+                                ? "bg-indigo-100 dark:bg-indigo-800/40 text-indigo-900 dark:text-indigo-100 border-l-2 border-indigo-500"
+                                : "text-gray-700 dark:text-neutral-300 border-l-2 border-transparent"
                             }
                           `}
                         >
-                          <div className="font-medium">
-                            {subcategory.name}
-                          </div>
+                          <div className="font-medium">{subcategory.name}</div>
                           {subcategory.unit && (
                             <div className="text-xs text-gray-500 dark:text-neutral-500 mt-0.5">
                               単位: {subcategory.unit}
@@ -179,14 +190,21 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
         <div className="p-4 border-t border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-800">
           <div className="text-xs space-y-1">
             <div>
-              <span className="text-gray-600 dark:text-neutral-400">データ種別:</span>
+              <span className="text-gray-600 dark:text-neutral-400">
+                データ種別:
+              </span>
               <span className="ml-1 text-gray-900 dark:text-neutral-100">
-                {selectedSubcategory.dataType === 'numerical' ? '数値' :
-                 selectedSubcategory.dataType === 'percentage' ? '割合' : '率'}
+                {selectedSubcategory.dataType === "numerical"
+                  ? "数値"
+                  : selectedSubcategory.dataType === "percentage"
+                  ? "割合"
+                  : "率"}
               </span>
             </div>
             <div>
-              <span className="text-gray-600 dark:text-neutral-400">統計表ID:</span>
+              <span className="text-gray-600 dark:text-neutral-400">
+                統計表ID:
+              </span>
               <span className="ml-1 font-mono text-xs text-gray-900 dark:text-neutral-100">
                 {selectedSubcategory.statsDataId}
               </span>

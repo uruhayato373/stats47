@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListManager, BulkFetchResult, StatsListParams } from "@/lib/estat-stats-list-manager";
+import {
+  BulkFetchResult,
+  StatsListParams,
+} from "@/lib/estat-stats-list-manager";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json() as { params: Partial<StatsListParams> };
+    const body = (await request.json()) as { params: Partial<StatsListParams> };
     const { params: baseParams } = body;
 
     // 必須パラメータチェック
@@ -15,15 +18,11 @@ export async function POST(request: NextRequest) {
     // パラメータの設定
     const params: Partial<StatsListParams> = {
       appId,
-      lang: baseParams.lang || 'J',
-      limit: parseInt(baseParams.limit) || 1000,
+      lang: baseParams.lang || "J",
+      limit: parseInt(String(baseParams.limit || "1000")) || 1000,
     };
 
     // オプションの設定
-    const options = {
-      limit: parseInt(baseParams.limit) || 100000,
-      delayMs: parseInt(baseParams.delayMs) || 1000,
-    };
 
     // Cloudflare D1データベースの取得（今後実装）
     // 現在はモックレスポンスを返す
@@ -47,7 +46,12 @@ export async function POST(request: NextRequest) {
         { params, success: true, recordCount: 1000 },
         { params, success: true, recordCount: 1000 },
         { params, success: true, recordCount: 456 },
-        { params, success: false, recordCount: 0, error: "API制限に達しました" },
+        {
+          params,
+          success: false,
+          recordCount: 0,
+          error: "API制限に達しました",
+        },
       ],
     };
 
@@ -61,7 +65,8 @@ export async function POST(request: NextRequest) {
         failureCount: 1,
         totalRecords: 0,
         results: [],
-        error: error instanceof Error ? error.message : "全件取得に失敗しました"
+        error:
+          error instanceof Error ? error.message : "全件取得に失敗しました",
       },
       { status: 500 }
     );

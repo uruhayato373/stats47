@@ -1,7 +1,7 @@
 import React from "react";
 import { useStyles } from "@/hooks/useStyles";
 
-interface MessageProps {
+export interface MessageProps {
   type: "success" | "error" | "info" | "warning";
   message: string;
   className?: string;

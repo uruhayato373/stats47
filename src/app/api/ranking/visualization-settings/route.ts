@@ -18,7 +18,8 @@ export async function GET(request: NextRequest) {
 
     // 指定されたstatsDataIdとcat01の設定を取得
     const settings = await db
-      .prepare(`
+      .prepare(
+        `
         SELECT
           id,
           stats_data_id,
@@ -32,7 +33,8 @@ export async function GET(request: NextRequest) {
           updated_at
         FROM ranking_visualizations
         WHERE stats_data_id = ? AND cat01 = ?
-      `)
+      `
+      )
       .bind(statsDataId, cat01)
       .first();
 
@@ -63,7 +65,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Failed to fetch visualization settings",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch visualization settings",
       },
       { status: 500 }
     );
@@ -72,7 +77,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      stats_data_id: string;
+      cat01: string;
+      map_color_scheme?: string;
+      map_diverging_midpoint?: string;
+      ranking_direction?: string;
+      conversion_factor?: number;
+      decimal_places?: number;
+    };
     const {
       stats_data_id,
       cat01,
@@ -94,7 +107,8 @@ export async function POST(request: NextRequest) {
 
     // INSERT OR REPLACE で設定を保存/更新
     const result = await db
-      .prepare(`
+      .prepare(
+        `
         INSERT OR REPLACE INTO ranking_visualizations (
           stats_data_id,
           cat01,
@@ -105,7 +119,8 @@ export async function POST(request: NextRequest) {
           decimal_places,
           updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-      `)
+      `
+      )
       .bind(
         stats_data_id,
         cat01,
@@ -120,14 +135,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: "Visualization settings saved successfully",
-      id: result.meta.last_row_id,
     });
   } catch (error) {
     console.error("Visualization settings save error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Failed to save visualization settings",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to save visualization settings",
       },
       { status: 500 }
     );

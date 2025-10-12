@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListManager, StatsListSummary } from "@/lib/estat-stats-list-manager";
+import { NextResponse } from "next/server";
+import { StatsListSummary } from "@/lib/estat-stats-list-manager";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Cloudflare D1データベースの取得（今後実装）
     // 現在はモックデータを返す
@@ -43,7 +43,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Summary error:", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "サマリー取得に失敗しました" },
+      {
+        error:
+          error instanceof Error ? error.message : "サマリー取得に失敗しました",
+      },
       { status: 500 }
     );
   }

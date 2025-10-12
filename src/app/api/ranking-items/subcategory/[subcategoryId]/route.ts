@@ -1,4 +1,3 @@
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
 import { FALLBACK_CONFIGS } from "@/lib/ranking/fallback-configs";
@@ -11,7 +10,7 @@ import { FALLBACK_CONFIGS } from "@/lib/ranking/fallback-configs";
  * データベース接続に失敗した場合はフォールバック設定を使用
  */
 export async function GET(
-  request: NextRequest,
+  request: Request,
   { params }: { params: Promise<{ subcategoryId: string }> }
 ) {
   try {
@@ -60,7 +59,7 @@ export async function GET(
       });
 
       if (!result.success) {
-        console.error("Database query failed:", result.error);
+        console.error("Database query failed");
         throw new Error("データベースクエリに失敗しました");
       }
 

@@ -49,7 +49,7 @@ export default function ProfileEditPage() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
         setError(data.error || "更新に失敗しました");

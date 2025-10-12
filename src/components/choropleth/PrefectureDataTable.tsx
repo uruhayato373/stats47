@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
-import { TrendingUp, TrendingDown, ArrowUpDown, Download } from 'lucide-react';
-import { ChoroplethDataPoint } from '@/types/choropleth';
-import { useStyles } from '@/hooks/useStyles';
+import React, { useState, useMemo } from "react";
+import { TrendingUp, TrendingDown, ArrowUpDown, Download } from "lucide-react";
+import { ChoroplethDataPoint } from "@/types/visualization/choropleth";
+import { useStyles } from "@/hooks/useStyles";
 
 interface PrefectureDataTableProps {
   data: ChoroplethDataPoint[];
   unit: string;
-  dataType: 'numerical' | 'percentage' | 'rate';
+  dataType: "numerical" | "percentage" | "rate";
   className?: string;
   onDownload?: () => void;
 }
 
-type SortField = 'rank' | 'name' | 'value';
-type SortOrder = 'asc' | 'desc';
+type SortField = "rank" | "name" | "value";
+type SortOrder = "asc" | "desc";
 
 export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
   data,
@@ -24,8 +24,8 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
   onDownload,
 }) => {
   const styles = useStyles();
-  const [sortField, setSortField] = useState<SortField>('rank');
-  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [sortField, setSortField] = useState<SortField>("rank");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 
   // ソート処理
   const sortedData = useMemo(() => {
@@ -36,28 +36,28 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
       let comparison = 0;
 
       switch (sortField) {
-        case 'rank':
+        case "rank":
           comparison = a.rank - b.rank;
           break;
-        case 'name':
-          comparison = a.prefectureName.localeCompare(b.prefectureName, 'ja');
+        case "name":
+          comparison = a.prefectureName.localeCompare(b.prefectureName, "ja");
           break;
-        case 'value':
+        case "value":
           comparison = a.value - b.value;
           break;
       }
 
-      return sortOrder === 'asc' ? comparison : -comparison;
+      return sortOrder === "asc" ? comparison : -comparison;
     });
   }, [data, sortField, sortOrder]);
 
   // ソート変更ハンドラー
   const handleSort = (field: SortField) => {
     if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortOrder(field === 'value' ? 'desc' : 'asc'); // 値の場合は降順をデフォルト
+      setSortOrder(field === "value" ? "desc" : "asc"); // 値の場合は降順をデフォルト
     }
   };
 
@@ -66,25 +66,27 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
     if (sortField !== field) {
       return <ArrowUpDown className="w-4 h-4 text-gray-400" />;
     }
-    return sortOrder === 'asc'
-      ? <TrendingUp className="w-4 h-4 text-indigo-600" />
-      : <TrendingDown className="w-4 h-4 text-indigo-600" />;
+    return sortOrder === "asc" ? (
+      <TrendingUp className="w-4 h-4 text-indigo-600" />
+    ) : (
+      <TrendingDown className="w-4 h-4 text-indigo-600" />
+    );
   };
 
   // 順位の色分け
   const getRankColor = (rank: number) => {
-    if (rank === 1) return 'text-yellow-600 font-bold';
-    if (rank === 2) return 'text-gray-500 font-bold';
-    if (rank === 3) return 'text-orange-600 font-bold';
-    if (rank <= 5) return 'text-indigo-600 font-medium';
-    return 'text-gray-900 dark:text-neutral-100';
+    if (rank === 1) return "text-yellow-600 font-bold";
+    if (rank === 2) return "text-gray-500 font-bold";
+    if (rank === 3) return "text-orange-600 font-bold";
+    if (rank <= 5) return "text-indigo-600 font-medium";
+    return "text-gray-900 dark:text-neutral-100";
   };
 
   // 値の強調表示
   const getValueStyle = (rank: number) => {
-    if (rank <= 3) return 'font-bold';
-    if (rank <= 5) return 'font-medium';
-    return '';
+    if (rank <= 3) return "font-bold";
+    if (rank <= 5) return "font-medium";
+    return "";
   };
 
   if (!data || !Array.isArray(data) || data.length === 0) {
@@ -132,29 +134,28 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
             <tr>
               <th
                 className="px-4 py-3 text-left font-medium text-gray-900 dark:text-neutral-100 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors"
-                onClick={() => handleSort('rank')}
+                onClick={() => handleSort("rank")}
               >
                 <div className="flex items-center gap-2">
                   順位
-                  {getSortIcon('rank')}
+                  {getSortIcon("rank")}
                 </div>
               </th>
               <th
                 className="px-4 py-3 text-left font-medium text-gray-900 dark:text-neutral-100 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors"
-                onClick={() => handleSort('name')}
+                onClick={() => handleSort("name")}
               >
                 <div className="flex items-center gap-2">
                   都道府県
-                  {getSortIcon('name')}
+                  {getSortIcon("name")}
                 </div>
               </th>
               <th
                 className="px-4 py-3 text-right font-medium text-gray-900 dark:text-neutral-100 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors"
-                onClick={() => handleSort('value')}
+                onClick={() => handleSort("value")}
               >
                 <div className="flex items-center justify-end gap-2">
-                  値
-                  {getSortIcon('value')}
+                  値{getSortIcon("value")}
                 </div>
               </th>
               <th className="px-4 py-3 text-left font-medium text-gray-900 dark:text-neutral-100">
@@ -170,10 +171,14 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
               >
                 {/* 順位 */}
                 <td className="px-4 py-3">
-                  <div className={`flex items-center gap-2 ${getRankColor(item.rank)}`}>
+                  <div
+                    className={`flex items-center gap-2 ${getRankColor(
+                      item.rank
+                    )}`}
+                  >
                     {item.rank <= 3 && (
                       <span className="text-lg">
-                        {item.rank === 1 ? '🥇' : item.rank === 2 ? '🥈' : '🥉'}
+                        {item.rank === 1 ? "🥇" : item.rank === 2 ? "🥈" : "🥉"}
                       </span>
                     )}
                     <span className={getRankColor(item.rank)}>
@@ -194,10 +199,14 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
 
                 {/* 値 */}
                 <td className="px-4 py-3 text-right">
-                  <div className={`font-mono text-gray-900 dark:text-neutral-100 ${getValueStyle(item.rank)}`}>
+                  <div
+                    className={`font-mono text-gray-900 dark:text-neutral-100 ${getValueStyle(
+                      item.rank
+                    )}`}
+                  >
                     {item.displayValue}
                   </div>
-                  {dataType === 'numerical' && (
+                  {dataType === "numerical" && (
                     <div className="text-xs text-gray-500 dark:text-neutral-500">
                       {item.value.toLocaleString()}
                     </div>
@@ -221,28 +230,38 @@ export const PrefectureDataTable: React.FC<PrefectureDataTableProps> = ({
             <div className="text-lg font-bold text-gray-900 dark:text-neutral-100">
               {data.length}
             </div>
-            <div className="text-xs text-gray-600 dark:text-neutral-400">総数</div>
+            <div className="text-xs text-gray-600 dark:text-neutral-400">
+              総数
+            </div>
           </div>
           <div>
             <div className="text-lg font-bold text-indigo-600">
-              {data[0]?.displayValue || '-'}
+              {data[0]?.displayValue || "-"}
             </div>
-            <div className="text-xs text-gray-600 dark:text-neutral-400">最高値</div>
+            <div className="text-xs text-gray-600 dark:text-neutral-400">
+              最高値
+            </div>
           </div>
           <div>
             <div className="text-lg font-bold text-orange-600">
-              {data[data.length - 1]?.displayValue || '-'}
+              {data[data.length - 1]?.displayValue || "-"}
             </div>
-            <div className="text-xs text-gray-600 dark:text-neutral-400">最低値</div>
+            <div className="text-xs text-gray-600 dark:text-neutral-400">
+              最低値
+            </div>
           </div>
           <div>
             <div className="text-lg font-bold text-gray-600">
               {data.length > 0
-                ? Math.round(data.reduce((sum, item) => sum + item.value, 0) / data.length).toLocaleString()
-                : '-'
-              }
+                ? Math.round(
+                    data.reduce((sum, item) => sum + item.value, 0) /
+                      data.length
+                  ).toLocaleString()
+                : "-"}
             </div>
-            <div className="text-xs text-gray-600 dark:text-neutral-400">平均値</div>
+            <div className="text-xs text-gray-600 dark:text-neutral-400">
+              平均値
+            </div>
           </div>
         </div>
       </div>

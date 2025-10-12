@@ -2,9 +2,14 @@
  * コロプレス地図表示機能用のJotaiアトム定義
  */
 
-import { atom } from 'jotai';
-import { CategoryData, SubcategoryData, ChoroplethDisplayData, MapVisualizationSettings } from '@/types/choropleth';
-import { getSortedCategories } from '@/lib/choropleth/category-helpers';
+import { atom } from "jotai";
+import {
+  CategoryData,
+  SubcategoryData,
+  ChoroplethDisplayData,
+  MapVisualizationSettings,
+} from "@/types/visualization/choropleth";
+import { getSortedCategories } from "@/lib/choropleth/category-helpers";
 
 // 基本状態アトム
 export const selectedCategoryAtom = atom<string | null>(null);
@@ -21,8 +26,8 @@ export const choroplethDataAtom = atom<ChoroplethDisplayData | null>(null);
 
 // 地図表示設定アトム
 export const mapVisualizationSettingsAtom = atom<MapVisualizationSettings>({
-  colorScheme: 'interpolateBlues',
-  divergingMidpoint: 'zero',
+  colorScheme: "interpolateBlues",
+  divergingMidpoint: "zero",
   showLegend: true,
   showTooltip: true,
 });
@@ -32,7 +37,7 @@ export const selectedCategoryDataAtom = atom<CategoryData | null>((get) => {
   const categories = get(categoriesAtom);
   const selectedCategoryId = get(selectedCategoryAtom);
   if (!selectedCategoryId) return null;
-  return categories.find(cat => cat.id === selectedCategoryId) || null;
+  return categories.find((cat) => cat.id === selectedCategoryId) || null;
 });
 
 export const availableSubcategoriesAtom = atom<SubcategoryData[]>((get) => {
@@ -40,12 +45,16 @@ export const availableSubcategoriesAtom = atom<SubcategoryData[]>((get) => {
   return selectedCategory?.subcategories || [];
 });
 
-export const selectedSubcategoryDataAtom = atom<SubcategoryData | null>((get) => {
-  const subcategories = get(availableSubcategoriesAtom);
-  const selectedSubcategoryId = get(selectedSubcategoryAtom);
-  if (!selectedSubcategoryId) return null;
-  return subcategories.find(sub => sub.id === selectedSubcategoryId) || null;
-});
+export const selectedSubcategoryDataAtom = atom<SubcategoryData | null>(
+  (get) => {
+    const subcategories = get(availableSubcategoriesAtom);
+    const selectedSubcategoryId = get(selectedSubcategoryAtom);
+    if (!selectedSubcategoryId) return null;
+    return (
+      subcategories.find((sub) => sub.id === selectedSubcategoryId) || null
+    );
+  }
+);
 
 export const availableYearsAtom = atom<string[]>((get) => {
   const subcategory = get(selectedSubcategoryDataAtom);
@@ -79,23 +88,17 @@ export const setSubcategoryAtom = atom(
   }
 );
 
-export const setYearAtom = atom(
-  null,
-  (get, set, year: string | null) => {
-    set(selectedYearAtom, year);
-    set(choroplethDataAtom, null);
-    set(errorAtom, null);
-  }
-);
+export const setYearAtom = atom(null, (get, set, year: string | null) => {
+  set(selectedYearAtom, year);
+  set(choroplethDataAtom, null);
+  set(errorAtom, null);
+});
 
-export const resetSelectionAtom = atom(
-  null,
-  (get, set) => {
-    set(selectedCategoryAtom, null);
-    set(selectedSubcategoryAtom, null);
-    set(selectedYearAtom, null);
-    set(choroplethDataAtom, null);
-    set(errorAtom, null);
-    set(loadingAtom, false);
-  }
-);
+export const resetSelectionAtom = atom(null, (get, set) => {
+  set(selectedCategoryAtom, null);
+  set(selectedSubcategoryAtom, null);
+  set(selectedYearAtom, null);
+  set(choroplethDataAtom, null);
+  set(errorAtom, null);
+  set(loadingAtom, false);
+});

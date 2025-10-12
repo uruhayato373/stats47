@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   ChoroplethDisplayData,
   SubcategoryData,
-  ChoroplethDataPoint,
-} from "@/types/choropleth";
+} from "@/types/visualization/choropleth";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 
@@ -20,9 +19,6 @@ interface ChoroplethDataDisplayClientProps {
 export const ChoroplethDataDisplayClient: React.FC<
   ChoroplethDataDisplayClientProps
 > = ({ data, formattedValues, subcategory, year, className = "" }) => {
-  const [selectedPrefecture, setSelectedPrefecture] =
-    useState<ChoroplethDataPoint | null>(null);
-
   // データが存在しない場合の表示
   if (!data) {
     return (
@@ -62,7 +58,7 @@ export const ChoroplethDataDisplayClient: React.FC<
               {subcategory.name}
             </div>
             <div className="text-xs text-gray-600 dark:text-neutral-400">
-              {year}年{subcategory.unit ? ` | 単位: ${subcategory.unit}` : ''}
+              {year}年{subcategory.unit ? ` | 単位: ${subcategory.unit}` : ""}
             </div>
           </div>
         </div>

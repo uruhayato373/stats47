@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListManager } from "@/lib/estat-stats-list-manager";
-import { StatsListParams } from "@/lib/estat/types";
+import { StatsListParams } from "@/lib/estat-stats-list-manager";
 
 export async function GET(request: NextRequest) {
   try {
@@ -17,34 +16,31 @@ export async function GET(request: NextRequest) {
     params.appId = appId;
 
     // オプションパラメータ
-    const lang = searchParams.get('lang');
-    if (lang) params.lang = lang as 'J' | 'E';
+    const lang = searchParams.get("lang");
+    if (lang) params.lang = lang as "J" | "E";
 
-    const statsField = searchParams.get('statsField');
-    if (statsField) params.statsField = statsField;
+    const field = searchParams.get("field");
+    if (field) params.field = field;
 
-    const statsCode = searchParams.get('statsCode');
+    const statsCode = searchParams.get("statsCode");
     if (statsCode) params.statsCode = statsCode;
 
-    const surveyYears = searchParams.get('surveyYears');
+    const surveyYears = searchParams.get("surveyYears");
     if (surveyYears) params.surveyYears = surveyYears;
 
-    const openYears = searchParams.get('openYears');
+    const openYears = searchParams.get("openYears");
     if (openYears) params.openYears = openYears;
 
-    const searchWord = searchParams.get('searchWord');
+    const searchWord = searchParams.get("searchWord");
     if (searchWord) params.searchWord = searchWord;
 
-    const searchKind = searchParams.get('searchKind');
-    if (searchKind) params.searchKind = searchKind as '1' | '2';
+    const searchKind = searchParams.get("searchKind");
+    if (searchKind) params.searchKind = searchKind as "1" | "2";
 
-    const collectArea = searchParams.get('collectArea');
-    if (collectArea) params.collectArea = collectArea as '1' | '2' | '3';
-
-    const limit = searchParams.get('limit');
+    const limit = searchParams.get("limit");
     if (limit) params.limit = parseInt(limit);
 
-    const startPosition = searchParams.get('startPosition');
+    const startPosition = searchParams.get("startPosition");
     if (startPosition) params.startPosition = parseInt(startPosition);
 
     // Cloudflare D1データベースの取得（今後実装）
@@ -64,7 +60,8 @@ export async function GET(request: NextRequest) {
         success: false,
         recordsProcessed: 0,
         totalAvailable: 0,
-        error: error instanceof Error ? error.message : "データ取得に失敗しました"
+        error:
+          error instanceof Error ? error.message : "データ取得に失敗しました",
       },
       { status: 500 }
     );

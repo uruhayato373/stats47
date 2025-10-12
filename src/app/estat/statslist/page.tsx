@@ -12,20 +12,24 @@ import {
 import { StatsListSearchResult } from "@/lib/estat-stats-list-manager";
 
 export default function EstatStatsListPage() {
-  const [statsListData, setStatsListData] = useState<StatsListSearchResult | null>(null);
+  const [statsListData, setStatsListData] =
+    useState<StatsListSearchResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentQuery, setCurrentQuery] = useState<string>("");
   const [activeTab, setActiveTab] = useState<TabId>("search");
 
-  const handleSearchStatsList = async (query: string, filters?: any) => {
+  const handleSearchStatsList = async (
+    query: string,
+    filters?: Record<string, unknown>
+  ) => {
     setLoading(true);
     setError(null);
     setCurrentQuery(query);
 
     try {
       const queryParams = new URLSearchParams();
-      queryParams.append('query', query);
+      queryParams.append("query", query);
 
       if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
@@ -35,12 +39,14 @@ export default function EstatStatsListPage() {
         });
       }
 
-      const response = await fetch(`/api/estat/statslist/search?${queryParams.toString()}`);
+      const response = await fetch(
+        `/api/estat/statslist/search?${queryParams.toString()}`
+      );
 
       if (!response.ok) {
         let errorMessage = `HTTP ${response.status}`;
         try {
-          const errorData = await response.json() as { error?: string };
+          const errorData = (await response.json()) as { error?: string };
           errorMessage = errorData.error || errorMessage;
         } catch {
           errorMessage = `HTTP ${response.status}: ${await response.text()}`;
@@ -48,7 +54,7 @@ export default function EstatStatsListPage() {
         throw new Error(errorMessage);
       }
 
-      const data = await response.json() as StatsListSearchResult;
+      const data = (await response.json()) as StatsListSearchResult;
       setStatsListData(data);
     } catch (err) {
       console.error("Stats list search error:", err);
