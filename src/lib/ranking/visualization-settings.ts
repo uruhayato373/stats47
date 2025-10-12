@@ -32,7 +32,7 @@ export class VisualizationSettingsService {
       });
 
       const response = await fetch(`${this.API_BASE}?${params}`);
-      const data = await response.json();
+      const data = (await response.json()) as VisualizationSettingsResponse;
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to fetch visualization settings");
@@ -62,7 +62,11 @@ export class VisualizationSettingsService {
         body: JSON.stringify(settings),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as {
+        success: boolean;
+        message?: string;
+        error?: string;
+      };
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to save visualization settings");
