@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RankingItem } from "@/lib/ranking/ranking-items";
+import { RankingItem } from "@/types/models/ranking";
 
 export function useRankingItemsEditor(subcategoryId: string) {
   const [isEditMode, setIsEditMode] = useState(false);
