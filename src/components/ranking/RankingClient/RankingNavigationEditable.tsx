@@ -2,12 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Pencil, Check } from "lucide-react";
+import { Pencil, Check, Trash2, Edit } from "lucide-react";
 import { RankingOption, RankingItem } from "@/types/models/ranking";
 import { useRankingItemsEditor } from "@/hooks/useRankingItemsEditor";
 import { Modal } from "@/components/common/Modal/Modal";
 import { RankingItemForm } from "./RankingItemForm";
-import { DraggableRankingList } from "./DraggableRankingList";
 
 export interface RankingNavigationEditableProps<T extends string> {
   categoryId: string;
@@ -39,7 +38,6 @@ export const RankingNavigationEditable = React.memo(
       updateRankingItem,
       createRankingItem,
       deleteRankingItem,
-      reorderRankingItems,
     } = useRankingItemsEditor(subcategoryId);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,25 +88,6 @@ export const RankingNavigationEditable = React.memo(
       }
     };
 
-    const handleReorder = async (reorderedItems: RankingItem[]) => {
-      setCurrentRankingItems(reorderedItems); // Optimistic update
-      try {
-        await reorderRankingItems(
-          reorderedItems
-            .filter((item) => item.id !== undefined)
-            .map((item) => ({
-              id: item.id!,
-              displayOrder: item.displayOrder,
-            }))
-        );
-        onUpdate?.();
-      } catch (error) {
-        console.error("Reorder error:", error);
-        // Revert if API call fails
-        setCurrentRankingItems(rankingItems);
-      }
-    };
-
     return (
       <div className="lg:w-60 flex-shrink-0">
         <div className="lg:border-l border-gray-200 dark:border-gray-700">
@@ -143,47 +122,57 @@ export const RankingNavigationEditable = React.memo(
             )}
 
             <nav className="space-y-2" aria-label="統計項目">
-              {isEditMode ? (
-                // 編集モード
-                <>
-                  <DraggableRankingList
-                    items={currentRankingItems.filter((item) => item.isActive)}
-                    onReorder={handleReorder}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    isLoading={isLoading}
-                  />
-                  <button
-                    onClick={handleAdd}
-                    className="w-full p-2 border-2 border-dashed border-gray-300 rounded-md text-gray-600 hover:border-gray-400 hover:text-gray-700"
-                    disabled={isLoading}
-                  >
-                    + 新規追加
-                  </button>
-                </>
-              ) : (
-                // 通常モード
-                <>
-                  {tabOptions.map((option) => {
-                    const href = `/${categoryId}/${subcategoryId}/ranking/${option.key}`;
-                    const isActive = activeRankingId === option.key;
+              {tabOptions.map((option) => {
+                const href = `/${categoryId}/${subcategoryId}/ranking/${option.key}`;
+                const isActive = activeRankingId === option.key;
+                const item = currentRankingItems.find(
+                  (i) => i.rankingKey === option.key
+                );
 
-                    return (
-                      <Link
-                        key={option.key}
-                        href={href}
-                        className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                          isActive
-                            ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
-                            : "text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
-                        }`}
-                        aria-current={isActive ? "page" : undefined}
-                      >
-                        {option.label}
-                      </Link>
-                    );
-                  })}
-                </>
+                return (
+                  <div key={option.key} className="relative group">
+                    <Link
+                      href={href}
+                      className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        isActive
+                          ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
+                          : "text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+                      } ${isEditMode ? "pr-16" : ""}`}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {option.label}
+                    </Link>
+                    {isEditMode && item && (
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                        <button
+                          onClick={() => handleEdit(item)}
+                          className="p-1 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded transition-colors"
+                          title="編集"
+                          disabled={isLoading}
+                        >
+                          <Edit className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item)}
+                          className="p-1 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors"
+                          title="削除"
+                          disabled={isLoading}
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {isEditMode && (
+                <button
+                  onClick={handleAdd}
+                  className="w-full p-2 border-2 border-dashed border-gray-300 rounded-md text-gray-600 hover:border-gray-400 hover:text-gray-700 dark:border-gray-600 dark:text-gray-400 dark:hover:border-gray-500 text-sm"
+                  disabled={isLoading}
+                >
+                  + 新規追加
+                </button>
               )}
             </nav>
           </div>

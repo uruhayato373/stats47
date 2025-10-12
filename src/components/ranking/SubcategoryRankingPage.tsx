@@ -1,7 +1,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
-import { RankingClient } from "@/components/ranking/RankingClient";
+import { RankingClientWrapper } from "@/components/ranking/RankingClientWrapper";
 import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";
 
 /**
@@ -54,7 +54,7 @@ export const SubcategoryRankingPage: React.FC<
       subcategory={subcategory}
       viewType="ranking"
     >
-      <RankingClient
+      <RankingClientWrapper
         subcategory={subcategory}
         activeRankingKey={activeRankingKey}
         rankingItems={rankingConfig.rankingItems}
