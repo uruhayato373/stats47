@@ -41,9 +41,12 @@ export default function EstatMetaInfoDisplay({
     setSaving(true);
     setSaveResult(null);
 
-    // タイムアウト設定（60秒）
+    // タイムアウト設定（120秒に延長）
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 60000);
+    const timeoutId = setTimeout(() => {
+      console.log("⏰ タイムアウト発生（120秒）");
+      controller.abort();
+    }, 120000);
 
     try {
       const statsDataId =
@@ -87,7 +90,8 @@ export default function EstatMetaInfoDisplay({
       let errorMessage = "保存に失敗しました";
       if (err instanceof Error) {
         if (err.name === "AbortError") {
-          errorMessage = "保存処理がタイムアウトしました（60秒）";
+          errorMessage =
+            "保存処理がタイムアウトしました（120秒）。APIサーバーが応答していない可能性があります。";
         } else {
           errorMessage = err.message;
         }
