@@ -1,2 +1,2 @@
-export { useSavedMetadata, type SavedMetadataItem } from "./useSavedMetadata";
+export { useSavedMetadata } from "./useSavedMetadata";
 export { useItemNames } from "./useItemNames";

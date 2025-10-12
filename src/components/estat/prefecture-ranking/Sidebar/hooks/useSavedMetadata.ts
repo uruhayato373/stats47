@@ -1,21 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { SavedMetadataItem } from "@/types/models";
 
-export interface SavedMetadataItem {
-  id: number;
-  stats_data_id: string;
-  stat_name: string;
-  title: string;
-  cat01?: string;
-  item_name?: string;
-  unit?: string;
-  updated_at: string;
-  created_at: string;
-}
-
-export function useSavedMetadata() {
-  const [data, setData] = useState<SavedMetadataItem[]>([]);
+export function useSavedMetadata(initialData?: SavedMetadataItem[]) {
+  const [data, setData] = useState<SavedMetadataItem[]>(initialData || []);
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
@@ -38,8 +27,11 @@ export function useSavedMetadata() {
   };
 
   useEffect(() => {
+    if (initialData && initialData.length > 0) {
+      return; // 初期データがある場合はfetchしない
+    }
     fetchData();
-  }, []);
+  }, [initialData]);
 
   return {
     data,

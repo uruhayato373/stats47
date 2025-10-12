@@ -19,3 +19,15 @@ export interface EstatMetainfoItem {
   updated_at: string;
   item_count: number;
 }
+
+export interface SavedMetadataItem {
+  id?: number;
+  stats_data_id: string;
+  stat_name: string;
+  title: string;
+  cat01?: string;
+  item_name?: string;
+  unit?: string;
+  updated_at: string;
+  created_at: string;
+}

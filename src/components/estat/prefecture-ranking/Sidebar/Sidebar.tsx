@@ -2,23 +2,22 @@
 
 import { useState } from "react";
 import { TrendingUp, RefreshCw, Info } from "lucide-react";
-import {
-  useSavedMetadata,
-  useItemNames,
-  type SavedMetadataItem,
-} from "./hooks";
+import { useSavedMetadata, useItemNames } from "./hooks";
+import { SavedMetadataItem } from "@/types/models";
 
 interface PrefectureRankingSidebarProps {
   className?: string;
   onDataSelect?: (item: SavedMetadataItem) => void;
+  initialData?: SavedMetadataItem[];
 }
 
 export default function PrefectureRankingSidebar({
   className = "",
   onDataSelect,
+  initialData,
 }: PrefectureRankingSidebarProps) {
   const [selectedStatsId, setSelectedStatsId] = useState<string>("");
-  const { data: savedData, loading, refetch } = useSavedMetadata();
+  const { data: savedData, loading, refetch } = useSavedMetadata(initialData);
   const {
     itemNames,
     loading: itemNamesLoading,
@@ -84,7 +83,7 @@ export default function PrefectureRankingSidebar({
               (a.stats_data_id || "").localeCompare(b.stats_data_id || "")
             )
             .map((item) => (
-              <option key={item.id} value={item.stats_data_id}>
+              <option key={item.stats_data_id} value={item.stats_data_id}>
                 {item.stats_data_id} - {item.title || "(タイトルなし)"}
               </option>
             ))}

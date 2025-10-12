@@ -6,3 +6,9 @@ export interface Prefecture {
   prefCode: string;
   prefName: string;
 }
+
+export interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
