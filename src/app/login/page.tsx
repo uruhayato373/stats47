@@ -28,11 +28,6 @@ export default function LoginPage() {
             新規登録
           </Link>
         </div>
-
-        <div className="text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>開発用アカウント:</p>
-          <p>メール: admin@stats47.local / パスワード: admin123</p>
-        </div>
       </div>
     </div>
   );
