@@ -93,5 +93,4 @@ export interface RankingClientProps<T extends string> {
   activeRankingId: T;
   tabOptions: RankingOption<T>[];
   rankingItems?: RankingItem[]; // 編集用
-  isAdmin?: boolean; // 管理者権限
 }

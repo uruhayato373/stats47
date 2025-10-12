@@ -1,6 +1,14 @@
-import Link from 'next/link';
-import { AlertTriangle } from 'lucide-react';
+import Link from "next/link";
+import { AlertTriangle } from "lucide-react";
 
+/**
+ * 404 Not Found ページ
+ *
+ * このページは、指定されたカテゴリまたはサブカテゴリが存在しない場合に表示されます。
+ * ユーザーフレンドリーなエラーメッセージとホームページへのリンクを提供します。
+ *
+ * @returns 404エラーページコンポーネント
+ */
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 flex items-center justify-center">

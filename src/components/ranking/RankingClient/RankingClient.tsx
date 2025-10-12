@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 import { EstatRankingClient } from "@/components/ranking";
 import { RankingClientProps } from "@/types/models/ranking";
 import { RankingNavigation } from "./RankingNavigation";
@@ -23,9 +24,9 @@ export function RankingClient<T extends string>({
   activeRankingId,
   tabOptions,
   rankingItems,
-  isAdmin = false,
 }: RankingClientProps<T>) {
   const params = useParams();
+  const { isAdmin } = useAuth();
   const categoryId = params.category as string;
   const subcategoryId = params.subcategory as string;
 

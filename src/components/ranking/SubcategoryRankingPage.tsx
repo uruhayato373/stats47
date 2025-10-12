@@ -15,20 +15,16 @@ interface RankingData {
   name: string;
 }
 
-interface GenericRankingProps extends SubcategoryRankingPageProps {
-  isAdmin?: boolean;
-}
+interface SubcategoryRankingPageComponentProps
+  extends SubcategoryRankingPageProps {}
 
 /**
- * 汎用ランキング表示コンポーネント（サーバーコンポーネント）
+ * サブカテゴリランキングページコンポーネント（サーバーコンポーネント）
  * サブカテゴリIDに基づいてデータベースからランキング設定を取得し、RankingClientコンポーネントに渡す
  */
-export const GenericRanking: React.FC<GenericRankingProps> = async ({
-  category,
-  subcategory,
-  rankingId,
-  isAdmin = false,
-}) => {
+export const SubcategoryRankingPage: React.FC<
+  SubcategoryRankingPageComponentProps
+> = async ({ category, subcategory, rankingId }) => {
   // サブカテゴリIDからランキング設定を取得
   const config = await getRankingConfig(subcategory.id);
 
@@ -83,7 +79,6 @@ export const GenericRanking: React.FC<GenericRankingProps> = async ({
         activeRankingId={activeRankingId}
         tabOptions={tabOptions}
         rankingItems={config.rankingItems}
-        isAdmin={isAdmin}
       />
     </SubcategoryLayout>
   );

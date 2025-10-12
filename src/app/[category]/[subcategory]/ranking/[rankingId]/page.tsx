@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 // import { cookies } from "next/headers";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { GenericRanking } from "@/components/ranking/GenericRanking";
+import { SubcategoryRankingPage } from "@/components/ranking/SubcategoryRankingPage";
 
 /**
  * ランキング統計項目ページのProps型定義
@@ -25,13 +25,13 @@ interface PageProps {
  * 例: /landweather/land-area/ranking/total-area-excluding
  * 例: /landweather/land-use/ranking/agricultural-land
  *
- * @param {PageProps} props - ページのProps
- * @param {Promise<{category: string; subcategory: string; rankingId: string}>} props.params - 動的ルートパラメータ
+ * @param props - ページのProps
+ * @param props.params - 動的ルートパラメータ
  *   - category: カテゴリID (例: "landweather")
  *   - subcategory: サブカテゴリID (例: "land-area", "land-use")
  *   - rankingId: 統計項目ID (例: "total-area-excluding", "agricultural-land")
  *
- * @returns {Promise<JSX.Element>} ランキング統計データ表示コンポーネント
+ * @returns ランキング統計データ表示コンポーネント
  *
  * @throws {notFound} カテゴリ、サブカテゴリ、または統計項目が存在しない場合
  *
@@ -63,17 +63,13 @@ export default async function RankingItemPage({ params }: PageProps) {
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
   const { category, subcategory } = subcategoryData;
 
-  // 管理者権限チェック（一時的に無効化）
-  const isAdmin = true; // テスト用に管理者として設定
-
-  // 汎用ランキングコンポーネントをレンダリング
+  // サブカテゴリランキングページコンポーネントをレンダリング
   // rankingIdをpropsとして渡す
   return (
-    <GenericRanking
+    <SubcategoryRankingPage
       category={category}
       subcategory={subcategory}
       rankingId={rankingId}
-      isAdmin={isAdmin}
     />
   );
 }

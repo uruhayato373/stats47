@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound, redirect } from "next/navigation";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { GenericRanking } from "@/components/ranking/GenericRanking";
+import { SubcategoryRankingPage } from "@/components/ranking/SubcategoryRankingPage";
 
 /**
  * ランキングページのProps型定義
@@ -23,14 +23,14 @@ interface PageProps {
  * 例: /population/basic-population/ranking (総人口の都道府県ランキング)
  * 例: /laborwage/wages-working-conditions/ranking (賃金の都道府県ランキング)
  *
- * land-areaとland-useの場合は最初の統計項目にリダイレクトします。
+ * デフォルトランキングキーが設定されている場合は、そのランキング項目にリダイレクトします。
  *
- * @param {PageProps} props - ページのProps
- * @param {Promise<{category: string; subcategory: string}>} props.params - 動的ルートパラメータ
+ * @param props - ページのProps
+ * @param props.params - 動的ルートパラメータ
  *   - category: カテゴリID (例: "population", "laborwage")
  *   - subcategory: サブカテゴリID (例: "basic-population", "wages-working-conditions")
  *
- * @returns {Promise<JSX.Element>} ランキング統計データ表示コンポーネント
+ * @returns ランキング統計データ表示コンポーネント
  *
  * @throws {notFound} カテゴリまたはサブカテゴリが存在しない場合
  *
@@ -101,6 +101,8 @@ export default async function RankingPage({ params }: PageProps) {
   // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
   const { category, subcategory } = subcategoryData;
 
-  // 汎用ランキングコンポーネントをレンダリング
-  return <GenericRanking category={category} subcategory={subcategory} />;
+  // サブカテゴリランキングページコンポーネントをレンダリング
+  return (
+    <SubcategoryRankingPage category={category} subcategory={subcategory} />
+  );
 }

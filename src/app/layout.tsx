@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { JotaiProvider } from "@/providers/JotaiProvider";
 import { SessionProvider } from "next-auth/react";
+import { AuthProvider } from "@/contexts/AuthContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import Header from "@/components/layout/Header";
 // import { ThemeProvider } from "@/contexts/ThemeContext"; // 無効化: Jotai版テーマシステムに統一
@@ -30,9 +31,11 @@ export default function RootLayout({
       >
         <JotaiProvider>
           <SessionProvider>
-            <ThemeInitializer />
-            <Header />
-            {children}
+            <AuthProvider>
+              <ThemeInitializer />
+              <Header />
+              {children}
+            </AuthProvider>
           </SessionProvider>
         </JotaiProvider>
       </body>

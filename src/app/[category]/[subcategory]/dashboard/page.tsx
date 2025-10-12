@@ -13,10 +13,13 @@ interface PageProps {
 /**
  * ダッシュボードページ - 全国ダッシュボードにリダイレクト
  *
- * URL構造: /[category]/[subcategory]/dashboard
- * リダイレクト先: /[category]/[subcategory]/dashboard/00000 (全国)
+ * このページは、サブカテゴリのダッシュボードURLにアクセスされた際に、
+ * 全国（areaCode: 00000）のダッシュボードページにリダイレクトします。
  *
- * @param {PageProps} props - ページのProps
+ * URL構造: /[category]/[subcategory]/dashboard
+ * リダイレクト先: /[category]/[subcategory]/dashboard/00000
+ *
+ * @param props - ページのProps
  */
 export default async function DashboardPage({ params }: PageProps) {
   const { category, subcategory } = await params;

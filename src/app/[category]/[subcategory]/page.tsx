@@ -13,10 +13,13 @@ interface PageProps {
 /**
  * サブカテゴリページ - ランキングにリダイレクト
  *
- * 旧URL構造: /[category]/[subcategory]
- * 新URL構造: /[category]/[subcategory]/ranking
+ * このページは、サブカテゴリのルートURLにアクセスされた際に、
+ * デフォルトのランキングページにリダイレクトします。
  *
- * @param {PageProps} props - ページのProps
+ * URL構造: /[category]/[subcategory]
+ * リダイレクト先: /[category]/[subcategory]/ranking
+ *
+ * @param props - ページのProps
  */
 export default async function SubcategoryPage({ params }: PageProps) {
   const { category, subcategory } = await params;
