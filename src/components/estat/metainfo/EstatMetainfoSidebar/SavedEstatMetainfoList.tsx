@@ -5,12 +5,12 @@ import { Eye, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 
 interface SavedEstatMetainfoItem {
   id: string;
-  statsDataId: string;
+  stats_data_id: string;
   title: string;
-  statName: string;
-  govOrg: string;
-  surveyDate: string;
-  savedAt: string;
+  stat_name: string;
+  created_at: string;
+  updated_at: string;
+  item_count: number;
 }
 
 interface SavedEstatMetainfoItemProps {
@@ -48,7 +48,7 @@ function SavedEstatMetainfoItem({
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0 ml-4">
           <span className="text-xs font-mono text-gray-500 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-700 px-2 py-1 rounded">
-            {item.statsDataId}
+            {item.stats_data_id}
           </span>
         </div>
 
@@ -96,7 +96,7 @@ function SavedEstatMetainfoItem({
                 政府統計名:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {item.statName}
+                {item.stat_name}
               </span>
             </div>
             <div className="flex">
@@ -109,26 +109,26 @@ function SavedEstatMetainfoItem({
             </div>
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
-                作成機関:
+                更新日時:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {item.govOrg}
+                {formatDate(item.updated_at)}
               </span>
             </div>
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
-                調査年月:
+                作成日時:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {item.surveyDate}
+                {formatDate(item.created_at)}
               </span>
             </div>
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
-                保存日時:
+                項目数:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {formatDate(item.savedAt)}
+                {item.item_count}件
               </span>
             </div>
           </div>
@@ -199,10 +199,10 @@ export default function SavedEstatMetainfoList({
     );
   }
 
-  // statsDataIdの昇順でソート（undefinedを考慮）
+  // stats_data_idの昇順でソート（undefinedを考慮）
   const sortedData = [...data].sort((a, b) => {
-    const aId = a.statsDataId || '';
-    const bId = b.statsDataId || '';
+    const aId = a.stats_data_id || "";
+    const bId = b.stats_data_id || "";
     return aId.localeCompare(bId);
   });
 

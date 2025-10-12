@@ -76,13 +76,16 @@ export class EstatAPIClient {
           }
           // STATUS>=100は実際のエラー
           else if (resultObj.STATUS >= 100) {
-            console.error("e-STAT API error details:", {
+            const errorDetails = {
               STATUS: resultObj.STATUS,
               ERROR_MSG: resultObj.ERROR_MSG,
               URL: url,
               fullResponse: result,
-            });
-            throw EstatAPIError.fromErrorCode(resultObj.STATUS, result);
+            };
+            console.error("e-STAT API error details:", errorDetails);
+            console.error("Raw resultObj:", resultObj);
+            console.error("Raw response data:", data);
+            throw EstatAPIError.fromErrorCode(resultObj.STATUS, errorDetails);
           }
         }
       }

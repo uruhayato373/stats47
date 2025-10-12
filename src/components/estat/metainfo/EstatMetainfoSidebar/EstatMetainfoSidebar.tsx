@@ -6,12 +6,12 @@ import SavedEstatMetainfoList from "./SavedEstatMetainfoList";
 
 interface SavedMetadataItem {
   id: string;
-  statsDataId: string;
+  stats_data_id: string;
   title: string;
-  statName: string;
-  govOrg: string;
-  surveyDate: string;
-  savedAt: string;
+  stat_name: string;
+  created_at: string;
+  updated_at: string;
+  item_count: number;
 }
 
 interface EstatMetainfoSidebarProps {

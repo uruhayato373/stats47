@@ -52,6 +52,16 @@ export class EstatAPIError extends Error {
   ) {
     super(message);
     this.name = "EstatAPIError";
+
+    // detailsが存在する場合は、メッセージに追加情報を含める
+    if (details && typeof details === "object") {
+      if (details.ERROR_MSG) {
+        this.message = `${message} (${details.ERROR_MSG})`;
+      }
+      if (details.URL) {
+        this.message += ` [URL: ${details.URL}]`;
+      }
+    }
   }
 
   /**
