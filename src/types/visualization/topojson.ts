@@ -125,7 +125,7 @@ export const PREFECTURE_CODES = {
 } as const;
 
 // 都道府県コードの型
-export type PrefectureCode = keyof typeof PREFECTURE_CODES;
+export type PrefectureCodeLiteral = keyof typeof PREFECTURE_CODES;
 
 // 都道府県名の型
-export type PrefectureName = (typeof PREFECTURE_CODES)[PrefectureCode];
+export type PrefectureName = (typeof PREFECTURE_CODES)[PrefectureCodeLiteral];

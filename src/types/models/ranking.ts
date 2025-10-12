@@ -1,5 +1,4 @@
 import { StatsDataId, CategoryCode } from "../common/primitives";
-import { PrefectureCode } from "./prefecture";
 import { SubcategoryData } from "../visualization/choropleth";
 
 /**
@@ -65,7 +64,7 @@ export interface RankingData {
  */
 export interface RankingResult {
   /** 都道府県コード */
-  prefectureCode: PrefectureCode;
+  prefectureCode: string;
 
   /** 都道府県名 */
   prefectureName: string;
