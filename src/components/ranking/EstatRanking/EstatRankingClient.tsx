@@ -98,6 +98,12 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   );
   const [loading, setLoading] = useState<boolean>(!initialData);
   const [error, setError] = useState<string | null>(null);
+  const [errorDetails, setErrorDetails] = useState<{
+    statsDataId?: string;
+    cdCat01?: string;
+    message?: string;
+    code?: number;
+  } | null>(null);
   const [availableYears, setAvailableYears] = useState<string[]>(
     initialYears || []
   );
@@ -136,7 +142,21 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result = (await response.json()) as { years: string[] };
+        const result = (await response.json()) as {
+          years?: string[];
+          error?: string;
+          details?: {
+            statsDataId?: string;
+            cdCat01?: string;
+            message?: string;
+            code?: number;
+          };
+        };
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
         const years = result.years || [];
 
         setAvailableYears(years);
@@ -148,6 +168,36 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
         const errorMessage =
           err instanceof Error ? err.message : "年度一覧の取得に失敗しました";
         setError(errorMessage);
+        setLoading(false); // ローディングを停止
+
+        // APIレスポンスから詳細情報を取得
+        let errorDetails: any = {
+          statsDataId: params.statsDataId,
+          cdCat01: params.cdCat01,
+          message: errorMessage,
+        };
+
+        // HTTPエラーの場合はレスポンスから詳細を取得
+        if (err instanceof Error && err.message.includes("HTTP error")) {
+          try {
+            const response = await fetch(
+              `/api/estat/ranking/years?${new URLSearchParams({
+                statsDataId: params.statsDataId,
+                cdCat01: params.cdCat01 || "",
+              }).toString()}`
+            );
+            if (!response.ok) {
+              const errorResult = await response.json();
+              if (errorResult.details) {
+                errorDetails = { ...errorDetails, ...errorResult.details };
+              }
+            }
+          } catch {
+            // 詳細取得に失敗した場合はデフォルトの詳細を使用
+          }
+        }
+
+        setErrorDetails(errorDetails);
 
         if (onError && err instanceof Error) {
           onError(err);
@@ -208,6 +258,11 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
         const errorMessage =
           err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
+        setErrorDetails({
+          statsDataId: params.statsDataId,
+          cdCat01: params.cdCat01,
+          message: errorMessage,
+        });
 
         if (onError && err instanceof Error) {
           onError(err);
@@ -256,18 +311,31 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   if (error) {
     return (
       <div className={`relative ${className}`}>
-        <div
-          className="flex items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800"
-          style={{ height: "600px" }}
-        >
-          <div className="text-center p-8">
-            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
-              データの取得に失敗しました
-            </h3>
-            <p className="text-red-600 dark:text-red-400 mb-4 text-sm">
-              {error}
-            </p>
+        <div className="mx-4 mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0">
+              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
+                データ取得エラー
+              </h3>
+              <div className="mt-2 text-sm text-red-700 dark:text-red-300">
+                <p className="mb-2">{error}</p>
+                {errorDetails && (
+                  <div className="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-red-200 dark:border-red-700">
+                    <p className="font-medium mb-2">リクエストパラメータ:</p>
+                    <ul className="space-y-1 text-xs font-mono">
+                      <li>statsDataId: {errorDetails.statsDataId}</li>
+                      <li>cdCat01: {errorDetails.cdCat01}</li>
+                      {errorDetails.code && (
+                        <li>エラーコード: {errorDetails.code}</li>
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

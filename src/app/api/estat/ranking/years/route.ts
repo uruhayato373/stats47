@@ -22,7 +22,15 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("年度一覧取得エラー:", error);
     return NextResponse.json(
-      { error: "年度一覧の取得に失敗しました" },
+      {
+        error: "年度一覧の取得に失敗しました",
+        details: {
+          statsDataId,
+          cdCat01,
+          message: error instanceof Error ? error.message : String(error),
+          code: (error as any)?.code,
+        },
+      },
       { status: 500 }
     );
   }
