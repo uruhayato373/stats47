@@ -4,5 +4,4 @@
 
 export * from "./user";
 export * from "./prefecture";
-export * from "./category";
 export * from "./ranking";

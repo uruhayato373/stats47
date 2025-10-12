@@ -5,7 +5,7 @@ import React from "react";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
 export const BasicPopulationPrefectureDashboard: React.FC<
   SubcategoryDashboardPageProps

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { createD1Database } from "@/lib/d1-client";
-import { FALLBACK_CONFIGS } from "@/lib/ranking/fallback-configs";
 
 /**
  * ランキング項目取得API
@@ -107,31 +106,14 @@ export async function GET(
         },
       });
     } catch (dbError) {
-      console.warn(
-        "データベース接続に失敗、フォールバック設定を使用:",
-        dbError
-      );
-
-      // フォールバック設定を使用
-      const fallbackConfig = FALLBACK_CONFIGS[subcategoryId];
-
-      if (!fallbackConfig) {
-        return NextResponse.json(
-          { error: "指定されたサブカテゴリが見つかりません" },
-          { status: 404 }
-        );
-      }
-
-      console.log("フォールバック設定を使用:", {
-        subcategoryId,
-        rankingItemsCount: fallbackConfig.rankingItems.length,
-      });
-
-      return NextResponse.json(fallbackConfig, {
-        headers: {
-          "Cache-Control": "public, max-age=60, stale-while-revalidate=120",
+      console.error("データベース接続エラー:", dbError);
+      return NextResponse.json(
+        {
+          error: "データベースに接続できません",
+          details: dbError instanceof Error ? dbError.message : "Unknown error",
         },
-      });
+        { status: 503 }
+      );
     }
   } catch (error) {
     console.error("API Error:", error);

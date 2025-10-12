@@ -5,3 +5,4 @@
 export * from "./primitives";
 export * from "./utility";
 export * from "./pagination";
+export * from "./subcategory";

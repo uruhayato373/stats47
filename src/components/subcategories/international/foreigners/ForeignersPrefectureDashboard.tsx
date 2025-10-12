@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 

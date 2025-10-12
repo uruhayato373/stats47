@@ -4,7 +4,7 @@ import React from "react";
 
 import { EstatStackedBarChart } from "@/components/dashboard/StackedBarChart";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
 export const PopulationCompositionNationalDashboard: React.FC<
   SubcategoryDashboardPageProps

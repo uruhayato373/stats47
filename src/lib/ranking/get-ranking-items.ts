@@ -62,7 +62,7 @@ export async function getRankingConfig(
       return null;
     }
 
-    const config = await response.json();
+    const config = (await response.json()) as RankingConfigResponse;
     return config;
   } catch (error) {
     console.error(
@@ -117,6 +117,3 @@ export function convertToTabOptions(
       label: item.label,
     }));
 }
-
-// フォールバック設定を別ファイルからインポート
-export { FALLBACK_CONFIGS } from "./fallback-configs";

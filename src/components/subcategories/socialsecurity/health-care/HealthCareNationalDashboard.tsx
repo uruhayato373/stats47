@@ -4,7 +4,7 @@ import React from "react";
 
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
-import { SubcategoryDashboardPageProps } from "@/types/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
 export const HealthCareNationalDashboard: React.FC<
   SubcategoryDashboardPageProps

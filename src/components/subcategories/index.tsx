@@ -5,7 +5,7 @@ import {
   SubcategoryDashboardPageProps,
   SubcategoryRankingPageProps,
   CategoryConfig,
-} from "@/types/subcategory";
+} from "@/types/common/subcategory";
 import categories from "@/config/categories.json";
 
 // カテゴリー別にインポート
@@ -156,22 +156,6 @@ export const getDashboardComponent = (
   }
 
   return componentMap[subcategory.dashboardComponent] || DefaultDashboardPage;
-};
-
-/**
- * ランキングコンポーネントを取得
- */
-export const getRankingComponent = (
-  subcategoryId: string,
-  categoryId?: string
-): React.ComponentType<SubcategoryRankingPageProps> => {
-  const subcategory = getSubcategoryInfo(subcategoryId, categoryId);
-
-  if (!subcategory?.rankingComponent) {
-    return DefaultRankingPage;
-  }
-
-  return componentMap[subcategory.rankingComponent] || DefaultRankingPage;
 };
 
 /**

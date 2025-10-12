@@ -5,21 +5,20 @@
 import { CategoryData, SubcategoryData } from "../visualization/choropleth";
 
 /**
- * サブカテゴリーの設定情報
+ * サブカテゴリーの設定情報（categories.json構造）
  */
 export interface SubcategoryConfig {
   id: string;
   name: string;
   href: string;
   dashboardComponent: string; // 必須
-  nationalDashboardComponent?: string; // 新規: 全国用コンポーネント
-  prefectureDashboardComponent?: string; // 新規: 都道府県用コンポーネント
-  rankingComponent: string; // 必須
+  nationalDashboardComponent?: string; // 全国用コンポーネント
+  prefectureDashboardComponent?: string; // 都道府県用コンポーネント
   displayOrder: number;
 }
 
 /**
- * カテゴリーの設定情報
+ * カテゴリーの設定情報（categories.json構造）
  */
 export interface CategoryConfig {
   id: string;
