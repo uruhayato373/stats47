@@ -8,12 +8,8 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "50");
     const search = searchParams.get("search") || "";
 
-    console.log("=== STATS LIST API START ===");
-    console.log("Parameters:", { page, limit, search });
-
     // 常にリモートD1を使用
     const db = await createD1Database();
-    console.log("Database connection established");
 
     const offset = (page - 1) * limit;
 
@@ -65,9 +61,6 @@ export async function GET(request: NextRequest) {
 
     params.push(limit.toString(), offset.toString());
 
-    console.log("Executing query:", query);
-    console.log("Parameters:", params);
-
     // データ取得
     const stmt = db.prepare(query);
     const result = await stmt.bind(...params).all();
@@ -93,9 +86,6 @@ export async function GET(request: NextRequest) {
       totalCount = countData?.total || 0;
     }
 
-    console.log("Query completed. Results:", result.results?.length);
-    console.log("Total count:", totalCount);
-
     // レスポンス用のデータ形式に変換
     const items = (
       (result.results || []) as Array<{
@@ -118,8 +108,6 @@ export async function GET(request: NextRequest) {
       updated_at: row.updated_at,
       item_count: row.item_count, // 追加情報：その統計表に含まれる項目数
     }));
-
-    console.log("=== STATS LIST API END ===");
 
     const response = {
       items,
