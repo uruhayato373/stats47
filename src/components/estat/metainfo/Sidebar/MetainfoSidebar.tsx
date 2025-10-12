@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Archive, RefreshCw } from "lucide-react";
 import SavedEstatMetainfoList from "./SavedMetainfoList";
 
-import { SavedEstatMetainfoItem } from "@/types/models";
+import type { SavedEstatMetainfoItem } from "@/types/models";
 
 interface EstatMetainfoSidebarProps {
   className?: string;

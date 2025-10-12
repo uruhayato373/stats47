@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Eye, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 
-import { SavedEstatMetainfoItem } from "@/types/models";
+import type { SavedEstatMetainfoItem } from "@/types/models";
 
 interface SavedEstatMetainfoItemProps {
   item: SavedEstatMetainfoItem;
@@ -82,7 +82,7 @@ function SavedEstatMetainfoItem({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 gap-2 text-xs">
+          <div className="grid grid-cols-1 gap-2 text-xs ml-4">
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
                 政府統計名:
