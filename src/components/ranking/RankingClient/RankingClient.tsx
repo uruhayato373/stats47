@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { EstatRankingClient } from "@/components/ranking";
-import { RankingClientProps } from "@/types/models/ranking";
+import { RankingClientProps, RankingData } from "@/types/models/ranking";
 import { RankingNavigation } from "./RankingNavigation";
 import { RankingNavigationEditable } from "./RankingNavigationEditable";
 
@@ -19,7 +19,6 @@ import { RankingNavigationEditable } from "./RankingNavigationEditable";
  * @returns JSX.Element
  */
 export function RankingClient<T extends string>({
-  rankings,
   subcategory,
   activeRankingId,
   tabOptions,
@@ -29,6 +28,19 @@ export function RankingClient<T extends string>({
   const { isAdmin } = useAuth();
   const categoryId = params.category as string;
   const subcategoryId = params.subcategory as string;
+
+  // rankingItemsからランキングデータを動的に構築
+  const rankings: Record<string, RankingData> = {};
+  if (rankingItems) {
+    rankingItems.forEach((item) => {
+      rankings[item.rankingKey] = {
+        statsDataId: item.statsDataId,
+        cdCat01: item.cdCat01,
+        unit: item.unit,
+        name: item.name,
+      };
+    });
+  }
 
   const activeRanking = rankings[activeRankingId];
 

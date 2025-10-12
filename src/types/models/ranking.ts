@@ -88,7 +88,6 @@ export interface RankingOption<T extends string> {
  * RankingClientコンポーネントのProps
  */
 export interface RankingClientProps<T extends string> {
-  rankings: Record<T, RankingData>;
   subcategory: SubcategoryData;
   activeRankingId: T;
   tabOptions: RankingOption<T>[];

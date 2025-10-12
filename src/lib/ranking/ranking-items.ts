@@ -30,13 +30,12 @@ export interface RankingConfigResponse {
   subcategory: SubcategoryConfig;
   rankingItems: RankingItem[];
 }
-
 /**
- * サブカテゴリのランキング設定を取得
+ * サブカテゴリのランキング項目をデータベースから取得
  * @param subcategoryId - サブカテゴリID（例: 'land-area', 'land-use'）
  * @returns Promise<RankingConfigResponse | null>
  */
-export async function getRankingConfig(
+export async function fetchRankingItemsBySubcategory(
   subcategoryId: string
 ): Promise<RankingConfigResponse | null> {
   try {
@@ -74,39 +73,11 @@ export async function getRankingConfig(
 }
 
 /**
- * ランキング項目をランキングデータ形式に変換
- * @param rankingItems - ランキング項目配列
- * @returns Record<string, RankingData>
- */
-export function convertToRankingData(
-  rankingItems: RankingItem[]
-): Record<
-  string,
-  { statsDataId: string; cdCat01: string; unit: string; name: string }
-> {
-  const rankingData: Record<
-    string,
-    { statsDataId: string; cdCat01: string; unit: string; name: string }
-  > = {};
-
-  rankingItems.forEach((item) => {
-    rankingData[item.rankingKey] = {
-      statsDataId: item.statsDataId,
-      cdCat01: item.cdCat01,
-      unit: item.unit,
-      name: item.name,
-    };
-  });
-
-  return rankingData;
-}
-
-/**
- * ランキング項目をタブオプション形式に変換
+ * ランキング項目をタブオプション形式にマッピング
  * @param rankingItems - ランキング項目配列
  * @returns Array<{key: string, label: string}>
  */
-export function convertToTabOptions(
+export function mapRankingItemsToTabOptions(
   rankingItems: RankingItem[]
 ): Array<{ key: string; label: string }> {
   return rankingItems
