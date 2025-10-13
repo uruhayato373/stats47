@@ -1,2 +1,2 @@
-export { default } from "./YearSelector";
-export type { YearOption, YearSelectorProps } from "./YearSelector";
+export { YearSelector } from "./YearSelector";
+export type { YearSelectorProps } from "./YearSelector";

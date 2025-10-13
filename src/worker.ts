@@ -33,12 +33,8 @@ async function handleEstatMetainfo(
   const url = new URL(request.url);
 
   try {
-    if (url.pathname === "/api/estat/metainfo/stats") {
-      return handleStats(request, env);
-    } else if (url.pathname === "/api/estat/metainfo/save") {
+    if (url.pathname === "/api/estat/metainfo/save") {
       return handleSave(request, env);
-    } else if (url.pathname === "/api/estat/metainfo/search") {
-      return handleSearch(request, env);
     }
 
     return new Response("Not Found", { status: 404 });
@@ -48,38 +44,6 @@ async function handleEstatMetainfo(
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
-  }
-}
-
-async function handleStats(request: Request, env: Env): Promise<Response> {
-  const metaInfoService = new EstatMetaInfoService(env.STATS47_DB);
-
-  try {
-    const [summary, statsList] = await Promise.all([
-      metaInfoService.getMetaInfoSummary(),
-      metaInfoService.getStatsList({ limit: 100 }),
-    ]);
-
-    return Response.json({
-      success: true,
-      data: {
-        totalCount: summary.totalEntries,
-        statCount: summary.uniqueStats,
-        categories: summary.categories,
-        statsList: statsList,
-      },
-    });
-  } catch (error) {
-    console.error("統計情報取得エラー:", error);
-    return Response.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "統計情報の取得に失敗しました",
-      },
-      { status: 500 }
-    );
   }
 }
 
@@ -138,55 +102,5 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
   }
 }
 
-async function handleSearch(request: Request, env: Env): Promise<Response> {
-  const url = new URL(request.url);
-  const query = url.searchParams.get("q") || "";
-  const category = url.searchParams.get("category") || "";
-  const statsDataId = url.searchParams.get("statsDataId") || "";
-  const limitParam = url.searchParams.get("limit");
-  const offsetParam = url.searchParams.get("offset");
-
-  const limit = limitParam ? parseInt(limitParam) : 100;
-  const offset = offsetParam ? parseInt(offsetParam) : 0;
-
-  try {
-    const metaInfoService = new EstatMetaInfoService(env.STATS47_DB);
-    let results;
-
-    if (statsDataId) {
-      results = await metaInfoService.searchMetaInfo(statsDataId, {
-        searchType: "stats_id",
-        limit,
-        offset,
-      });
-    } else if (category) {
-      results = await metaInfoService.searchMetaInfo(category, {
-        searchType: "category",
-        limit,
-        offset,
-      });
-    } else if (query) {
-      results = await metaInfoService.searchMetaInfo(query, {
-        searchType: "full",
-        limit,
-        offset,
-      });
-    } else {
-      const statsList = await metaInfoService.getStatsList({ limit, offset });
-      results = {
-        entries: statsList,
-        totalCount: statsList.length,
-        searchQuery: "",
-        executedAt: new Date().toISOString(),
-      };
-    }
-
-    return Response.json({ success: true, data: results });
-  } catch (error) {
-    console.error("検索エラー:", error);
-    return Response.json(
-      { error: error instanceof Error ? error.message : "検索に失敗しました" },
-      { status: 500 }
-    );
-  }
 }
+

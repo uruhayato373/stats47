@@ -7,7 +7,7 @@ import {
 } from "@/hooks/ranking/useRankingData";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "../ui/StatisticsSummary";
-import { YearSelector } from "../ui/YearSelector";
+import { YearSelector } from "@/components/common";
 import { RankingHeader } from "../ui/RankingHeader";
 import { LoadingView } from "../ui/LoadingView";
 import { ErrorView } from "../ui/ErrorView";

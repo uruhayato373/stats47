@@ -12,7 +12,7 @@ export function useMetadataList() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("/api/estat/metainfo/stats");
+      const response = await fetch("/api/estat/metainfo/stats-list?limit=100");
       if (!response.ok) {
         throw new Error(`データの取得に失敗しました: ${response.status}`);
       }
@@ -38,12 +38,10 @@ export function useMetadataList() {
     if (!confirm("このメタ情報を削除しますか？")) return;
 
     try {
-      const response = await fetch(`/api/estat/metainfo/saved/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        setData((prev) => prev.filter((item) => item.stats_data_id !== id));
-      }
+      // 削除機能は現在実装されていません
+      // 必要に応じて stats-list エンドポイント経由で実装予定
+      console.warn("削除機能は現在利用できません");
+      setError("削除機能は現在利用できません");
     } catch (err) {
       console.error("削除エラー:", err);
       setError(err instanceof Error ? err.message : "削除に失敗しました");

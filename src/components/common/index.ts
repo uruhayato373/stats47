@@ -16,5 +16,5 @@ export { default as Message } from "./Message";
 export { Modal } from "./Modal";
 
 // YearSelector
-export { default as YearSelector } from "./YearSelector";
-export type { YearOption, YearSelectorProps } from "./YearSelector";
+export { YearSelector } from "./YearSelector";
+export type { YearSelectorProps } from "./YearSelector";

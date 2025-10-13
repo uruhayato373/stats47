@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
-import { YearSelector } from "@/components/ranking/ui/YearSelector";
+import { YearSelector } from "@/components/common";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
@@ -105,7 +105,7 @@ export const EstatRankingDataContainer: React.FC<
       });
 
       // FormattedValue[]に変換（RankingValue[]に変換する前の段階）
-      return filteredValues.map((value) => ({
+      const mappedValues = filteredValues.map((value) => ({
         value: value.value,
         numericValue: value.numericValue,
         displayValue: value.displayValue,
@@ -118,6 +118,28 @@ export const EstatRankingDataContainer: React.FC<
         timeName: value.timeName,
         rank: 0, // ランクは後で計算
       }));
+
+      // 重複を除去（areaCodeでユニークにする）
+      const uniqueValues = mappedValues.reduce((acc, current) => {
+        const existingIndex = acc.findIndex(
+          (item) => item.areaCode === current.areaCode
+        );
+        if (existingIndex === -1) {
+          acc.push(current);
+        } else {
+          // より新しいデータ（数値が大きい）を優先
+          if (
+            current.numericValue &&
+            acc[existingIndex].numericValue &&
+            current.numericValue > acc[existingIndex].numericValue
+          ) {
+            acc[existingIndex] = current;
+          }
+        }
+        return acc;
+      }, [] as typeof mappedValues);
+
+      return uniqueValues;
     } catch {
       return [];
     }
