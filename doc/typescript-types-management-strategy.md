@@ -79,7 +79,7 @@ src/lib/estat/types/
 
 // コンポーネント固有の型定義
 src/components/ranking/RankingClient/types.ts
-src/components/estat/ranking-settings/EstatPrefectureRankingDisplay/types.ts
+src/components/estat/ranking-settings/Display/types.ts
 ```
 
 ---
@@ -113,7 +113,7 @@ src/components/estat/ranking-settings/EstatPrefectureRankingDisplay/types.ts
 ```typescript
 // 統一されていない命名
 RankingClientProps; // コンポーネント名 + Props
-EstatPrefectureRankingDisplayProps; // 長すぎる
+DisplayProps; // シンプルで分かりやすい
 DataTableProps; // 一貫性はあるが...
 ```
 
@@ -425,14 +425,9 @@ src/
     │
     └── estat/                      # e-Stat コンポーネント
         └── ranking-settings/
-            ├── EstatPrefectureRankingDisplay/
-            │   ├── EstatPrefectureRankingDisplay.tsx
-            │   ├── EstatPrefectureRankingDisplay.types.ts
-            │   └── index.ts
-            │
-            └── EstatPrefectureDataTable/
-                ├── EstatPrefectureDataTable.tsx
-                ├── EstatPrefectureDataTable.types.ts
+            └── Display/
+                ├── Display.tsx
+                ├── Display.types.ts
                 └── index.ts
 ```
 
@@ -495,7 +490,7 @@ src/
 // コンポーネント名 + .types.ts
 RankingClient.types.ts;
 DataTable.types.ts;
-EstatPrefectureRankingDisplay.types.ts;
+Display.types.ts;
 ```
 
 ---

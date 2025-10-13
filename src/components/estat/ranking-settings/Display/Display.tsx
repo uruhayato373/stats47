@@ -4,14 +4,14 @@ import { useState } from "react";
 import { AlertTriangle, Database } from "lucide-react";
 import ColorSchemeSelector from "@/components/common/ColorSchemeSelector";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
-import { EstatPrefectureRankingDisplayProps } from "./types";
+import { DisplayProps } from "./types";
 
 export default function Display({
   data,
   loading,
   error,
   params,
-}: EstatPrefectureRankingDisplayProps) {
+}: DisplayProps) {
   const [mapOptions, setMapOptions] = useState({
     colorScheme: "interpolateBlues",
     divergingMidpoint: "zero" as "zero" | "mean" | "median" | number,

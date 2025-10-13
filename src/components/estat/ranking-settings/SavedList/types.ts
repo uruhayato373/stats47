@@ -1,12 +1,4 @@
-export interface SavedMetadataItem {
-  id: string;
-  statsDataId: string;
-  title: string;
-  statName: string;
-  govOrg: string;
-  surveyDate: string;
-  savedAt: string;
-}
+import { SavedMetadataItem } from "@/types/models";
 
 export interface SavedListProps {
   data: SavedMetadataItem[];

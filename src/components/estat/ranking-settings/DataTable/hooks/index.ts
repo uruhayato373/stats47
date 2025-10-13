@@ -1,1 +1,0 @@
-export { useTableSort } from "./useTableSort";

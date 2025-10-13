@@ -1,12 +1,7 @@
 import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { PrefectureRankingParams } from "@/types/models";
 
-export interface PrefectureRankingParams {
-  statsDataId: string;
-  categoryCode?: string;
-  timeCode?: string;
-}
-
-export interface EstatPrefectureRankingDisplayProps {
+export interface DisplayProps {
   data: EstatStatsDataResponse | null;
   loading: boolean;
   error: string | null;
