@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   unit TEXT,                             -- 単位
   ranking_key TEXT,                      -- ランキングキー（ランキングアイテムとして使用されている場合）
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 更新日時
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP   -- 作成日時
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP, -- 作成日時
+  UNIQUE(stats_data_id, cat01)           -- 重複防止のためのUNIQUE制約
 );
 
 -- 統計データの履歴管理テーブル

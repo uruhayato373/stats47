@@ -587,9 +587,17 @@ export class EstatMetaInfoService {
     );
 
     const query = `
-      INSERT OR REPLACE INTO estat_metainfo
+      INSERT INTO estat_metainfo
       (stats_data_id, stat_name, title, cat01, item_name, unit, ranking_key, updated_at)
       VALUES ${values.join(",")}
+      ON CONFLICT(stats_data_id, cat01)
+      DO UPDATE SET
+        stat_name = excluded.stat_name,
+        title = excluded.title,
+        item_name = excluded.item_name,
+        unit = excluded.unit,
+        ranking_key = excluded.ranking_key,
+        updated_at = CURRENT_TIMESTAMP
     `;
 
     console.log("🔵 Service: SQL Length:", query.length);
