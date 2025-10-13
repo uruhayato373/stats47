@@ -1,4 +1,46 @@
 /**
+ * ランキング値の基本情報
+ * データベースのranking_valuesテーブルに対応
+ */
+export interface RankingValue {
+  /** ランキング値のID */
+  id: number;
+
+  /** ランキングキー（一意識別子） */
+  rankingKey: string;
+
+  /** 地域コード */
+  areaCode: string;
+
+  /** 地域名（オプショナル） */
+  areaName?: string;
+
+  /** 時系列コード */
+  timeCode: string;
+
+  /** 時系列名（オプショナル） */
+  timeName?: string;
+
+  /** 値（文字列） */
+  value: string;
+
+  /** 数値（オプショナル） */
+  numericValue?: number;
+
+  /** 表示用値（オプショナル） */
+  displayValue?: string;
+
+  /** ランク（オプショナル） */
+  rank?: number;
+
+  /** 作成日時 */
+  createdAt: string;
+
+  /** 更新日時 */
+  updatedAt: string;
+}
+
+/**
  * ランキング項目の基本情報
  * データベースのranking_itemsテーブルに対応
  */
@@ -58,6 +100,25 @@ export interface RankingOption<T extends string> {
 }
 
 /**
+ * データベースのランキング値型（スネークケース）
+ * 実際のranking_valuesテーブル構造と完全に一致
+ */
+export interface RankingValueDB {
+  id: number;
+  ranking_key: string;
+  area_code: string;
+  area_name?: string;
+  time_code: string;
+  time_name?: string;
+  value: string;
+  numeric_value?: number;
+  display_value?: string;
+  rank?: number;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
  * データベースのランキング項目型（スネークケース）
  * 実際のranking_itemsテーブル構造と完全に一致
  */
@@ -77,30 +138,4 @@ export interface RankingItemDB {
   is_active: boolean;
   created_at: string;
   updated_at: string;
-}
-
-/**
- * データベース型からアプリケーション型への変換ヘルパー関数
- */
-export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
-  return {
-    id: dbItem.id,
-    rankingKey: dbItem.ranking_key,
-    label: dbItem.label,
-    name: dbItem.name,
-    description: dbItem.description,
-    unit: dbItem.unit,
-    dataSourceId: dbItem.data_source_id,
-    mapColorScheme: dbItem.map_color_scheme,
-    mapDivergingMidpoint: dbItem.map_diverging_midpoint as
-      | "zero"
-      | "mean"
-      | "median",
-    rankingDirection: dbItem.ranking_direction as "asc" | "desc",
-    conversionFactor: dbItem.conversion_factor,
-    decimalPlaces: dbItem.decimal_places,
-    isActive: dbItem.is_active,
-    createdAt: dbItem.created_at,
-    updatedAt: dbItem.updated_at,
-  };
 }

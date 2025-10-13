@@ -10,11 +10,9 @@
 
 import { createLocalD1Database } from "@/lib/local-d1-client";
 import { QUERIES } from "./ranking-queries";
-import {
-  RankingItem,
-  convertRankingItemFromDB,
-  RankingItemDB,
-} from "@/types/models/ranking";
+import { RankingItem, RankingItemDB } from "@/types/models/ranking";
+import { convertRankingItemFromDB } from "./ranking-converters";
+import { getSubcategoryConfig } from "@/lib/choropleth/category-helpers";
 
 export interface SubcategoryConfig {
   id: string;
@@ -43,6 +41,12 @@ export class RankingRepository {
     subcategoryId: string
   ): Promise<RankingConfigResponse | null> {
     try {
+      // categories.jsonからサブカテゴリ設定を取得
+      const subcategoryConfig = getSubcategoryConfig(subcategoryId);
+      if (!subcategoryConfig) {
+        return null;
+      }
+
       const result = await this.db
         .prepare(QUERIES.getRankingItemsBySubcategory)
         .bind(subcategoryId)
@@ -58,13 +62,19 @@ export class RankingRepository {
         return null;
       }
 
-      // サブカテゴリ設定を取得
-      const subcategoryConfig: SubcategoryConfig = {
-        id: rows[0].subcategory_id as string,
-        categoryId: rows[0].category_id as string,
-        name: rows[0].subcategory_name as string,
-        description: rows[0].description as string | undefined,
-        defaultRankingKey: rows[0].default_ranking_key as string,
+      // デフォルトランキングキーを取得（is_default = 1の項目）
+      const defaultItem = rows.find((row) => row.is_default === 1);
+      const defaultRankingKey =
+        (defaultItem?.ranking_key as string) ||
+        (rows[0]?.ranking_key as string);
+
+      // サブカテゴリ設定を構築
+      const config: SubcategoryConfig = {
+        id: subcategoryConfig.id,
+        categoryId: subcategoryConfig.categoryId,
+        name: subcategoryConfig.name,
+        description: subcategoryConfig.description,
+        defaultRankingKey: defaultRankingKey,
       };
 
       // ランキング項目を取得（ランキング項目がある行のみ）
@@ -88,7 +98,7 @@ export class RankingRepository {
         });
 
       return {
-        subcategory: subcategoryConfig,
+        subcategory: config,
         rankingItems,
       };
     } catch (error) {

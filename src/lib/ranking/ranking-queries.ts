@@ -10,22 +10,19 @@
 
 export const QUERIES = {
   /**
-   * サブカテゴリのランキング項目を取得（新スキーマ対応）
-   * サブカテゴリ設定とランキング項目を結合して取得（可視化設定も含む）
+   * サブカテゴリのランキング項目を取得（subcategory_configs削除対応）
+   * subcategory_ranking_itemsとranking_itemsを結合して取得（可視化設定も含む）
    */
   getRankingItemsBySubcategory: `
     SELECT 
-      sc.id as subcategory_id,
-      sc.category_id,
-      sc.name as subcategory_name,
-      sc.description,
-      sc.default_ranking_key,
+      sri.subcategory_id,
+      sri.display_order,
+      sri.is_default,
       ri.id,
       ri.ranking_key,
       ri.label,
       ri.unit,
       ri.name as ranking_name,
-      sri.display_order,
       ri.is_active,
       ri.map_color_scheme,
       ri.map_diverging_midpoint,
@@ -36,11 +33,10 @@ export const QUERIES = {
       ri.updated_at,
       -- e-Stat固有情報を取得
       dsm.metadata as metadata_json
-    FROM subcategory_configs sc
-    LEFT JOIN subcategory_ranking_items sri ON sc.id = sri.subcategory_id
-    LEFT JOIN ranking_items ri ON sri.ranking_item_id = ri.id AND ri.is_active = 1
+    FROM subcategory_ranking_items sri
+    JOIN ranking_items ri ON sri.ranking_item_id = ri.id AND ri.is_active = 1
     LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
-    WHERE sc.id = ?
+    WHERE sri.subcategory_id = ?
     ORDER BY sri.display_order
   `,
 

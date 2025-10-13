@@ -24,6 +24,14 @@ interface SubcategoryData {
   areaComponent?: string;
 }
 
+// SubcategoryConfigインターフェースの追加
+export interface SubcategoryConfigFromJson {
+  id: string;
+  categoryId: string;
+  name: string;
+  description?: string;
+}
+
 interface CategoryJsonItem {
   id: string;
   name: string;
@@ -138,4 +146,31 @@ export function getSortedCategories(): CategoryData[] {
   return categories.map((category, index) =>
     transformCategory(category, index + 1)
   );
+}
+
+/**
+ * サブカテゴリ設定を取得する関数
+ * categories.jsonからサブカテゴリの基本情報を取得
+ *
+ * @param {string} subcategoryId - サブカテゴリID
+ * @returns {SubcategoryConfigFromJson | null} サブカテゴリ設定（見つからない場合はnull）
+ *
+ * @example
+ * const config = getSubcategoryConfig("land-area");
+ * if (config) {
+ *   console.log(config.name); // "土地面積"
+ * }
+ */
+export function getSubcategoryConfig(
+  subcategoryId: string
+): SubcategoryConfigFromJson | null {
+  const data = getSubcategoryById(subcategoryId);
+  if (!data) return null;
+
+  return {
+    id: data.subcategory.id,
+    categoryId: data.category.id,
+    name: data.subcategory.name,
+    description: undefined,
+  };
 }
