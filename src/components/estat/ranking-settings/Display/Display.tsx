@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { AlertTriangle, Database } from "lucide-react";
 import { EstatRankingDataContainer } from "@/components/estat/ranking-settings/containers";
 import { useEstatStatsData } from "@/hooks/ranking/useEstatStatsData";
+import { useRankingKey } from "@/hooks/estat";
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { DisplayProps } from "./types";
 
@@ -13,25 +13,15 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
   const { data, error, isLoading } = useEstatStatsData(params);
 
   // ===== Step 1.5: ranking_key を取得 =====
-  const [rankingKey, setRankingKey] = useState<string | null>(null);
+  // useSWR を使ったカスタムフックで ranking_key を取得（自動キャッシュ・再検証）
+  const { rankingKey } = useRankingKey(
+    params?.statsDataId,
+    params?.categoryCode
+  );
+  console.log("rankingKey", rankingKey);
 
-  // ranking_key を取得
-  useEffect(() => {
-    if (params?.statsDataId && params?.categoryCode) {
-      fetch(
-        `/api/estat/metainfo/ranking-key?statsDataId=${params.statsDataId}&categoryCode=${params.categoryCode}`
-      )
-        .then((res) => res.json())
-        .then((data: unknown) => {
-          const response = data as { ranking_key: string | null };
-          setRankingKey(response.ranking_key);
-        })
-        .catch((err) => console.error("ranking_key 取得エラー:", err));
-    }
-  }, [params?.statsDataId, params?.categoryCode]);
-
-  // パラメータがnullの場合はデータ取得前状態を表示
-  if (!params) {
+  // パラメータがnullまたはデータなしの場合はデータ取得前状態を表示
+  if (!params || !data) {
     return (
       <div className="p-8 text-center">
         <Database className="w-12 h-12 text-gray-500 mx-auto mb-4" />
@@ -73,24 +63,6 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
             </p>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  // データなし状態
-  if (!data) {
-    return (
-      <div className="p-8 text-center">
-        <Database className="w-12 h-12 text-gray-500 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
-          データ取得前
-        </h3>
-        <p className="text-gray-600 dark:text-neutral-400">
-          上のフォームから統計表IDを入力してデータを取得してください
-        </p>
-        <p className="text-sm text-gray-500 dark:text-neutral-500 mt-2">
-          取得したデータの地図表示とランキングが表示されます
-        </p>
       </div>
     );
   }
