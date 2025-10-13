@@ -4,14 +4,14 @@
  * ランキング設定ページ - メインコンテナ
  *
  * データ取得フロー:
- * Fetcher → handleFetchData → currentParams更新 → useEstatData発火
+ * Fetcher → handleFetchData → currentParams更新 → Display.tsx内のuseEstatData発火
  * → /api/estat/data呼び出し → e-Stat API → データ表示
  *
  * 役割:
  * - Fetcherコンポーネントからのパラメータを受け取り
- * - useSWRによる自動データ取得を管理
- * - 取得したデータをDisplayコンポーネントに渡す
+ * - パラメータをDisplayコンポーネントに渡す
  * - ランキング設定の保存処理を管理
+ * - データ取得はDisplay.tsx内で実行
  */
 
 import { useState } from "react";
@@ -24,7 +24,6 @@ import {
   PrefectureRankingPageHeader,
 } from "@/components/estat/ranking-settings";
 import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
-import { useEstatData } from "@/hooks/ranking/useEstatData";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: SavedMetadataItem[];
@@ -37,16 +36,13 @@ export default function RankingSettingsPage({
   const [currentParams, setCurrentParams] =
     useState<PrefectureRankingParams | null>(null);
 
-  // useSWRによる自動データ取得 - currentParamsが変更されると自動的にAPI呼び出し
-  const { data, error, isLoading, refetch } = useEstatData(currentParams);
-
   /**
    * Fetcherからのパラメータ受け取り処理
    * FetcherコンポーネントのonSubmitコールバックとして呼び出される
-   * currentParamsを更新することでuseEstatDataフックが自動的にデータ取得を開始
+   * currentParamsを更新することでDisplay.tsx内のuseEstatDataフックが自動的にデータ取得を開始
    */
   const handleFetchData = (params: PrefectureRankingParams) => {
-    setCurrentParams(params); // パラメータ更新でuseSWRが発火
+    setCurrentParams(params); // パラメータ更新でDisplay.tsx内のuseEstatDataが発火
   };
 
   /**
@@ -55,7 +51,8 @@ export default function RankingSettingsPage({
    */
   const handleRefresh = () => {
     if (currentParams) {
-      refetch(); // useSWRのmutate関数を呼び出し
+      // パラメータを再設定することでDisplay.tsx内のuseEstatDataが再実行される
+      setCurrentParams({ ...currentParams });
     }
   };
 
@@ -107,7 +104,6 @@ export default function RankingSettingsPage({
         {/* ヘッダーセクション - 横幅いっぱい */}
         <div>
           <PrefectureRankingPageHeader
-            loading={isLoading}
             currentStatsId={currentParams?.statsDataId || ""}
             onRefresh={handleRefresh}
           />
@@ -122,14 +118,11 @@ export default function RankingSettingsPage({
               {/* データ取得フォーム */}
               <PrefectureRankingForm
                 onSubmit={handleFetchData}
-                loading={isLoading}
+                loading={false}
               />
 
               {/* データ表示エリア */}
               <PrefectureRankingDisplay
-                data={data}
-                loading={isLoading}
-                error={error}
                 params={currentParams}
                 onSettingsChange={handleSaveSettings}
               />

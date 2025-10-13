@@ -3,16 +3,11 @@
 import { RefreshCw, Map, ExternalLink } from "lucide-react";
 
 interface HeaderProps {
-  loading: boolean;
   currentStatsId: string;
   onRefresh: () => void;
 }
 
-export default function Header({
-  loading,
-  currentStatsId,
-  onRefresh,
-}: HeaderProps) {
+export default function Header({ currentStatsId, onRefresh }: HeaderProps) {
   return (
     <div className="bg-white dark:bg-neutral-800 border-b border-gray-200 dark:border-neutral-700">
       <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2">
@@ -29,13 +24,10 @@ export default function Header({
             <button
               type="button"
               onClick={onRefresh}
-              disabled={loading}
-              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
             >
-              <RefreshCw
-                className={`w-3 h-3 ${loading ? "animate-spin" : ""}`}
-              />
-              {loading ? "更新中..." : "更新"}
+              <RefreshCw className="w-3 h-3" />
+              更新
             </button>
           )}
 

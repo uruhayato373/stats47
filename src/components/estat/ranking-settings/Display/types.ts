@@ -1,12 +1,12 @@
-import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { PrefectureRankingParams } from "@/types/models";
-import { RankingItemSettingsData } from "@/components/ranking-settings";
 
 export interface DisplayProps {
-  data: EstatStatsDataResponse | null;
-  loading: boolean;
-  error: string | null;
   params: PrefectureRankingParams | null;
-  settings?: RankingItemSettingsData;
-  onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>;
+  onSettingsChange?: (settings: {
+    map_color_scheme?: string;
+    map_diverging_midpoint?: string;
+    ranking_direction?: string;
+    conversion_factor?: number;
+    decimal_places?: number;
+  }) => Promise<void>;
 }

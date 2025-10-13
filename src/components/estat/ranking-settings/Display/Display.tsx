@@ -3,15 +3,12 @@
 import { AlertTriangle, Database, BarChart3 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
+import { useEstatData } from "@/hooks/ranking/useEstatData";
 import { DisplayProps } from "./types";
 
-export default function Display({
-  data,
-  loading,
-  error,
-  params,
-  onSettingsChange,
-}: DisplayProps) {
+export default function Display({ params, onSettingsChange }: DisplayProps) {
+  // データ取得をここで行う
+  const { data, error, isLoading } = useEstatData(params);
   const [rankingKey, setRankingKey] = useState<string | null>(null);
   const [rankingKeyLoading, setRankingKeyLoading] = useState(false);
 
@@ -39,7 +36,7 @@ export default function Display({
     }
   }, [params?.statsDataId, params?.categoryCode]);
   // ローディング状態
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="p-8 text-center">
         <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>
