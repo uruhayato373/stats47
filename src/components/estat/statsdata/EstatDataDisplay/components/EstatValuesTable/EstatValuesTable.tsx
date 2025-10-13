@@ -2,7 +2,7 @@
 
 import { EstatStatsDataResponse } from "@/types/models/estat";
 import { FormattedValue } from "@/types/models/estat";
-import { EstatStatsDataService } from "@/lib/estat/statsdata";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 
 interface EstatValuesTableProps {
@@ -12,7 +12,7 @@ interface EstatValuesTableProps {
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   if (!data) return null;
 
-  const formattedData = EstatStatsDataService.formatStatsData(data);
+  const formattedData = EstatDataFormatter.formatStatsData(data);
   const values = formattedData.values;
 
   const columns: TableColumn<FormattedValue>[] = [

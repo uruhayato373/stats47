@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  MapPin,
+  MapPin as MapPinIcon,
   Users,
   Briefcase,
   Wheat,
@@ -29,7 +29,7 @@ interface CategoryIconProps {
 }
 
 const iconMap = {
-  MapPin: MapPin,
+  MapPin: MapPinIcon,
   Users: Users,
   Briefcase: Briefcase,
   Wheat: Wheat,
@@ -59,8 +59,14 @@ export const CategoryIcon: React.FC<CategoryIconProps> = ({
   const IconComponent = iconMap[iconName as keyof typeof iconMap];
 
   if (!IconComponent) {
-    // フォールバック用のアイコン
-    return <MapPin className={className} />;
+    // フォールバック用のアイコン（MapPinIconが確実に存在することを保証）
+    console.warn(`Icon "${iconName}" not found, using MapPinIcon as fallback`);
+    // MapPinIconが確実に存在することを保証
+    if (typeof MapPinIcon === "undefined") {
+      console.error("MapPinIcon is not defined!");
+      return <div className={className}>?</div>;
+    }
+    return <MapPinIcon className={className} />;
   }
 
   return <IconComponent className={className} />;
