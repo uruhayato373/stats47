@@ -14,7 +14,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "migrate:ranking-keys": "tsx scripts/migrate-ranking-keys.ts",
+    "migrate:ranking-keys:remote": "tsx scripts/migrate-ranking-keys-remote.ts"
   },
   "dependencies": {
     "@auth/d1-adapter": "^1.11.0",
@@ -59,6 +61,7 @@
     "@vitest/browser": "^3.2.4",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
+    "dotenv": "^17.2.3",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "eslint-plugin-storybook": "^9.1.3",
