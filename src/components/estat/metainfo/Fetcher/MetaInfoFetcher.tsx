@@ -31,17 +31,19 @@ export default function EstatMetaInfoFetcher({
   };
 
   return (
-    <div className="space-y-4">
-      {/* ヘッダー */}
-      <div className="flex items-center gap-2">
-        <Search className="w-5 h-5 text-indigo-600" />
-        <h3 className="font-medium text-gray-900 dark:text-neutral-100">
-          メタ情報取得
-        </h3>
-      </div>
+    <form onSubmit={handleSubmit} className={styles.layout.row}>
+      {/* ヘッダーとInputFieldを1行に */}
+      <div className="flex flex-col md:flex-row md:items-center gap-4">
+        {/* 左側: アイコン + タイトル */}
+        <div className="flex items-center gap-2 md:flex-shrink-0">
+          <Search className="w-5 h-5 text-indigo-600" />
+          <h3 className="font-medium text-gray-900 dark:text-neutral-100">
+            メタ情報取得
+          </h3>
+        </div>
 
-      <form onSubmit={handleSubmit} className={styles.layout.row}>
-        <div className="flex flex-col sm:flex-row gap-4 items-start">
+        {/* 右側: InputField + ボタン */}
+        <div className="flex flex-row gap-4 items-end flex-1">
           <InputField
             name="statsDataId"
             label="例：0000010101"
@@ -93,7 +95,7 @@ export default function EstatMetaInfoFetcher({
             )}
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }

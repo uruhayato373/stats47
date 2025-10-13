@@ -41,36 +41,23 @@ export default function MetaInfoHeader({
   ];
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border-b border-gray-200 pb-4">
+    <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between border-b border-gray-200 pb-4">
+      {/* 統計情報を横一列に小さく表示 */}
       <div className="flex-1">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-neutral-100">
-          メタ情報詳細
-        </h2>
-        <p className="text-sm text-gray-600 dark:text-neutral-400">
-          データを確認後、データベースに保存できます
-        </p>
-
-        {/* 基本情報テーブル */}
-        <div className="mt-4 bg-white border border-gray-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
-          <div className="space-y-0">
-            {tableData.map((item, index) => (
-              <div
-                key={index}
-                className={`px-4 py-3 ${
-                  index !== tableData.length - 1
-                    ? "border-b border-gray-200 dark:border-neutral-600"
-                    : ""
-                }`}
-              >
-                <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {item.label}
-                </div>
-                <div className="text-base text-gray-900 dark:text-gray-100">
-                  {item.value || "-"}
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          {tableData.map((item, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-3"
+            >
+              <div className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                {item.label}
               </div>
-            ))}
-          </div>
+              <div className="text-sm text-gray-900 dark:text-gray-100 truncate">
+                {item.value || "-"}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
