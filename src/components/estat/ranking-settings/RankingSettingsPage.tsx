@@ -25,7 +25,6 @@ import {
 } from "@/components/estat/ranking-settings";
 import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
 import { useEstatData } from "@/hooks/ranking/useEstatData";
-import { RankingItemSettingsData } from "@/components/ranking-settings";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: SavedMetadataItem[];
@@ -37,15 +36,6 @@ export default function RankingSettingsPage({
   // 現在の検索パラメータ - Fetcherから受け取ったパラメータを保存
   const [currentParams, setCurrentParams] =
     useState<PrefectureRankingParams | null>(null);
-
-  // ランキング設定状態 - 地図の色やランキング方向などの設定
-  const [settings, setSettings] = useState<RankingItemSettingsData>({
-    map_color_scheme: "interpolateBlues", // デフォルト色スキーム
-    map_diverging_midpoint: "zero", // 発散色の中点
-    ranking_direction: "desc", // 降順ランキング
-    conversion_factor: 1, // 単位変換係数
-    decimal_places: 0, // 小数点以下桁数
-  });
 
   // useSWRによる自動データ取得 - currentParamsが変更されると自動的にAPI呼び出し
   const { data, error, isLoading, refetch } = useEstatData(currentParams);
@@ -84,35 +74,24 @@ export default function RankingSettingsPage({
   /**
    * ランキング設定保存処理
    * Displayコンポーネントから設定変更時に呼び出される
-   * データベースにランキング設定を保存
+   * 現在は設定をコンソールに出力（将来的にestat_metainfoテーブルに保存予定）
    */
-  const handleSaveSettings = async (newSettings: RankingItemSettingsData) => {
+  const handleSaveSettings = async (newSettings: {
+    map_color_scheme?: string;
+    map_diverging_midpoint?: string;
+    ranking_direction?: string;
+    conversion_factor?: number;
+    decimal_places?: number;
+  }) => {
     if (!currentParams) return;
 
     try {
-      // /api/ranking-items/manual エンドポイントにPOSTリクエスト
-      const response = await fetch("/api/ranking-items/manual", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          statsDataId: currentParams.statsDataId,
-          cdCat01: currentParams.categoryCode || "",
-          ...newSettings,
-          visualizationSettings: {
-            map_color_scheme: newSettings.map_color_scheme,
-            map_diverging_midpoint: newSettings.map_diverging_midpoint,
-            ranking_direction: newSettings.ranking_direction,
-            conversion_factor: newSettings.conversion_factor,
-            decimal_places: newSettings.decimal_places,
-          },
-        }),
+      // 設定をコンソールに出力（将来的にestat_metainfoテーブルに保存予定）
+      console.log("Settings saved:", {
+        statsDataId: currentParams.statsDataId,
+        categoryCode: currentParams.categoryCode,
+        settings: newSettings,
       });
-
-      if (!response.ok) {
-        throw new Error("設定の保存に失敗しました");
-      }
-
-      setSettings(newSettings); // ローカル状態を更新
     } catch (error) {
       console.error("Error saving settings:", error);
       throw error;
@@ -152,7 +131,6 @@ export default function RankingSettingsPage({
                 loading={isLoading}
                 error={error}
                 params={currentParams}
-                settings={settings}
                 onSettingsChange={handleSaveSettings}
               />
             </div>
