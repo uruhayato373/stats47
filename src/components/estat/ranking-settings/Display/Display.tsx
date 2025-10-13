@@ -10,7 +10,6 @@ export default function Display({
   loading,
   error,
   params,
-  settings,
   onSettingsChange,
 }: DisplayProps) {
   const [rankingKey, setRankingKey] = useState<string | null>(null);
@@ -24,8 +23,9 @@ export default function Display({
         `/api/estat/metainfo/ranking-key?statsDataId=${params.statsDataId}&cat01=${params.categoryCode}`
       )
         .then((res) => res.json())
-        .then((data) => {
-          setRankingKey(data.rankingKey);
+        .then((data: unknown) => {
+          const response = data as { rankingKey?: string };
+          setRankingKey(response.rankingKey || null);
         })
         .catch((error) => {
           console.error("Failed to fetch ranking_key:", error);
@@ -143,28 +143,32 @@ export default function Display({
       )}
 
       {/* RankingDataContainer（データ表示） */}
-      {params && (
+      {params && rankingKeyLoading && (
+        <div className="p-8 text-center">
+          <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>
+          <p className="mt-4 text-gray-600 dark:text-neutral-400">
+            ランキングキーを検索中...
+          </p>
+        </div>
+      )}
+
+      {params && !rankingKeyLoading && !rankingKey && (
+        <div className="p-6 text-center">
+          <p className="text-gray-600 dark:text-neutral-400">
+            このデータにはランキングキーが設定されていません
+          </p>
+        </div>
+      )}
+
+      {params && rankingKey && (
         <RankingDataContainer
-          statsDataId={params.statsDataId}
-          cdCat01={params.categoryCode || ""}
+          rankingKey={rankingKey}
           subcategory={{
-            id: params.statsDataId,
+            id: rankingKey,
             categoryId: "prefecture-ranking",
             name: "都道府県ランキング",
             unit: "",
           }}
-          visualizationOptions={
-            settings
-              ? {
-                  colorScheme: settings.map_color_scheme,
-                  divergingMidpoint: settings.map_diverging_midpoint as
-                    | "zero"
-                    | "mean"
-                    | "median"
-                    | number,
-                }
-              : undefined
-          }
           onSettingsChange={onSettingsChange}
         />
       )}
