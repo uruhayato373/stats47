@@ -8,7 +8,17 @@ import { FormattedValue } from "@/lib/estat/types/formatted";
 import { SubcategoryData } from "@/types/visualization/choropleth";
 import { GetStatsDataParams } from "@/lib/estat/types/parameters";
 // EstatStatsDataService のインポートを削除（API Route経由でデータ取得）
-import { RefreshCw, AlertCircle } from "lucide-react";
+import {
+  RefreshCw,
+  AlertCircle,
+  Settings,
+  Save,
+  Check,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
+import VisualizationSettingsPanel from "@/components/estat/prefecture-ranking/SettingsPanel";
+import { useVisualizationSettings } from "@/components/estat/prefecture-ranking/Display/hooks/useVisualizationSettings";
 
 export interface EstatRankingProps {
   /**
@@ -73,6 +83,16 @@ export interface EstatRankingProps {
    * サーバー側で決定した初期年度（オプショナル）
    */
   initialSelectedYear?: string;
+
+  /**
+   * 詳細設定パネルを表示するかどうか
+   */
+  showVisualizationSettings?: boolean;
+
+  /**
+   * 設定保存時のコールバック
+   */
+  onSaveSettings?: (settings: any) => Promise<void>;
 }
 
 /**
@@ -92,6 +112,8 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   initialData,
   initialYears,
   initialSelectedYear,
+  showVisualizationSettings = false,
+  onSaveSettings,
 }) => {
   const [formattedValues, setFormattedValues] = useState<FormattedValue[]>(
     initialData || []
@@ -110,6 +132,20 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
   const [selectedYear, setSelectedYear] = useState<string>(
     initialSelectedYear || ""
   );
+  const [showSettingsPanel, setShowSettingsPanel] = useState(false);
+
+  // 詳細設定フック（showVisualizationSettingsがtrueの場合のみ使用）
+  const {
+    settings,
+    editableSettings,
+    setEditableSettings,
+    saving,
+    saveSuccess,
+    saveSettings: saveVisualizationSettings,
+  } = useVisualizationSettings({
+    statsDataId: showVisualizationSettings ? params.statsDataId : undefined,
+    categoryCode: showVisualizationSettings ? params.cdCat01 : undefined,
+  });
 
   // 初期データがある場合のコールバック実行
   useEffect(() => {
@@ -288,6 +324,26 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
     setSelectedYear(year);
   }, []);
 
+  // 設定保存ハンドラー
+  const handleSaveSettings = useCallback(async () => {
+    if (!showVisualizationSettings || !onSaveSettings) return;
+
+    const settingsToSave = {
+      ...editableSettings,
+      stats_data_id: params.statsDataId,
+      cat01: params.cdCat01,
+    };
+
+    await saveVisualizationSettings(settingsToSave);
+    await onSaveSettings(settingsToSave);
+  }, [
+    showVisualizationSettings,
+    onSaveSettings,
+    editableSettings,
+    params,
+    saveVisualizationSettings,
+  ]);
+
   // ローディング状態
   if (loading) {
     return (
@@ -377,8 +433,73 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
               );
             })}
           </select>
+
+          {/* 詳細設定ボタン */}
+          {showVisualizationSettings && (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowSettingsPanel(!showSettingsPanel)}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-gray-600 hover:bg-gray-700 text-white rounded-md transition-colors"
+              >
+                <Settings className="w-4 h-4" />
+                詳細設定
+                {showSettingsPanel ? (
+                  <ChevronDown className="w-4 h-4" />
+                ) : (
+                  <ChevronRight className="w-4 h-4" />
+                )}
+              </button>
+              {onSaveSettings && (
+                <button
+                  onClick={handleSaveSettings}
+                  disabled={saving || !params.statsDataId || !params.cdCat01}
+                  className={`
+                    flex items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors rounded-md
+                    ${
+                      saveSuccess
+                        ? "bg-green-600 text-white"
+                        : "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    }
+                    disabled:bg-gray-400 disabled:cursor-not-allowed
+                  `}
+                >
+                  {saving ? (
+                    <>
+                      <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full"></div>
+                      保存中...
+                    </>
+                  ) : saveSuccess ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      保存完了
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      設定を保存
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      {/* 詳細設定パネル */}
+      {showVisualizationSettings && showSettingsPanel && (
+        <div className="px-4 mb-4">
+          <VisualizationSettingsPanel
+            editableSettings={editableSettings}
+            visualizationSettings={settings}
+            params={{
+              statsDataId: params.statsDataId,
+              categoryCode: params.cdCat01,
+            }}
+            onSettingsChange={setEditableSettings}
+          />
+        </div>
+      )}
 
       {/* 地図とデータテーブル */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden px-4 gap-4">

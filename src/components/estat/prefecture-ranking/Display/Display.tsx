@@ -1,28 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import {
-  AlertTriangle,
-  Database,
-  Save,
-  Check,
-  Settings,
-  ChevronDown,
-  ChevronRight,
-} from "lucide-react";
-import { ChoroplethMap } from "@/components/estat/visualization";
-import YearSelector from "@/components/common/YearSelector";
-import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
+import { AlertTriangle, Database } from "lucide-react";
 import ColorSchemeSelector from "@/components/common/ColorSchemeSelector";
-import EstatPrefectureDataTable from "@/components/estat/prefecture-ranking/DataTable";
-import VisualizationSettingsPanel from "../SettingsPanel";
+import { EstatRankingClient } from "@/components/ranking/EstatRanking/EstatRankingClient";
 import { EstatPrefectureRankingDisplayProps } from "./types";
-import {
-  useVisualizationSettings,
-  usePrefectureRankingData,
-  useMapOptions,
-  useYearSelection,
-} from "./hooks";
 
 export default function Display({
   data,
@@ -30,56 +12,10 @@ export default function Display({
   error,
   params,
 }: EstatPrefectureRankingDisplayProps) {
-  const [showSettingsPanel, setShowSettingsPanel] = useState(false);
-
-  // カスタムフックでロジック分離
-  const {
-    settings,
-    editableSettings,
-    setEditableSettings,
-    saving,
-    saveSuccess,
-    saveSettings,
-  } = useVisualizationSettings({
-    statsDataId: params?.statsDataId,
-    categoryCode: params?.categoryCode,
+  const [mapOptions, setMapOptions] = useState({
+    colorScheme: "interpolateBlues",
+    divergingMidpoint: "zero" as const,
   });
-
-  const { mapOptions, setMapOptions } = useMapOptions({
-    initialColorScheme: settings?.map_color_scheme,
-    initialDivergingMidpoint: settings?.map_diverging_midpoint,
-  });
-
-  const { formattedData, filteredData, summary } = usePrefectureRankingData({
-    data,
-    selectedYear: "",
-    categoryCode: params?.categoryCode,
-    settings: editableSettings,
-  });
-
-  const { selectedYear, setSelectedYear } = useYearSelection({
-    years: formattedData?.years || [],
-  });
-
-  // selectedYearが更新されたときにfilteredDataを再計算
-  const { filteredData: finalFilteredData } = usePrefectureRankingData({
-    data,
-    selectedYear,
-    categoryCode: params?.categoryCode,
-    settings: editableSettings,
-  });
-
-  const handleSaveSettings = async () => {
-    const settingsToSave = {
-      ...editableSettings,
-      stats_data_id: params?.statsDataId,
-      cat01: params?.categoryCode,
-      map_color_scheme: mapOptions.colorScheme,
-      map_diverging_midpoint: mapOptions.divergingMidpoint,
-    };
-
-    await saveSettings(settingsToSave);
-  };
 
   // ローディング状態
   if (loading) {
@@ -130,106 +66,35 @@ export default function Display({
     );
   }
 
-  if (!formattedData) return null;
-
   return (
     <div className="space-y-6">
       <div className="p-4">
-        {/* 年次セレクター */}
-        <YearSelector
-          years={formattedData.years}
-          selectedYear={selectedYear}
-          onYearChange={setSelectedYear}
+        {/* カラースキーマセレクター */}
+        <ColorSchemeSelector
+          options={mapOptions}
+          onOptionsChange={setMapOptions}
           className="mb-4"
         />
 
-        {/* カラースキーマと設定ボタン */}
-        <div className="flex items-end gap-4 mb-4">
-          <div className="flex-1">
-            <ColorSchemeSelector
-              options={mapOptions}
-              onOptionsChange={setMapOptions}
-            />
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowSettingsPanel(!showSettingsPanel)}
-              className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-gray-600 hover:bg-gray-700 text-white transition-colors"
-            >
-              <Settings className="w-4 h-4" />
-              詳細設定
-              {showSettingsPanel ? (
-                <ChevronDown className="w-4 h-4" />
-              ) : (
-                <ChevronRight className="w-4 h-4" />
-              )}
-            </button>
-            <button
-              onClick={handleSaveSettings}
-              disabled={saving || !params?.statsDataId || !params?.categoryCode}
-              className={`
-                flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors
-                ${
-                  saveSuccess
-                    ? "bg-green-600 text-white"
-                    : "bg-indigo-600 hover:bg-indigo-700 text-white"
-                }
-                disabled:bg-gray-400 disabled:cursor-not-allowed
-              `}
-            >
-              {saving ? (
-                <>
-                  <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full"></div>
-                  保存中...
-                </>
-              ) : saveSuccess ? (
-                <>
-                  <Check className="w-4 h-4" />
-                  保存完了
-                </>
-              ) : (
-                <>
-                  <Save className="w-4 h-4" />
-                  設定を保存
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* 詳細設定パネル */}
-        {showSettingsPanel && (
-          <VisualizationSettingsPanel
-            editableSettings={editableSettings}
-            visualizationSettings={settings}
-            params={params}
-            onSettingsChange={setEditableSettings}
-          />
-        )}
-
-        {/* データサマリー */}
-        <EstatDataSummary {...summary} />
-
-        {/* 地図 */}
-        <div className="w-full h-full overflow-x-auto mb-6">
-          <ChoroplethMap
-            data={finalFilteredData}
-            width={800}
-            height={600}
-            className="w-full max-w-full"
-            options={mapOptions}
-          />
-        </div>
-
-        {/* テーブル */}
-        <EstatPrefectureDataTable
-          data={finalFilteredData}
-          className="mt-6"
-          rankingDirection={
-            editableSettings.ranking_direction ||
-            settings?.ranking_direction ||
-            "desc"
-          }
+        {/* EstatRankingClient（拡張版） */}
+        <EstatRankingClient
+          params={{
+            statsDataId: params.statsDataId,
+            cdCat01: params.categoryCode,
+          }}
+          subcategory={{
+            id: params.statsDataId,
+            name: "都道府県ランキング",
+            unit: "",
+          }}
+          options={mapOptions}
+          mapWidth={800}
+          mapHeight={600}
+          showVisualizationSettings={true}
+          onSaveSettings={async (settings) => {
+            // 設定保存のロジック（必要に応じて実装）
+            console.log("Settings saved:", settings);
+          }}
         />
       </div>
     </div>
