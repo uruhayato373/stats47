@@ -396,14 +396,14 @@ export class EstatMetaInfoService {
     const { orderBy = "last_updated" } = options;
 
     const orderClause = {
-      last_updated: "ORDER BY updated_at DESC",
-      stat_name: "ORDER BY stat_name ASC",
-      item_count: "ORDER BY item_count DESC",
+      last_updated: "updated_at DESC",
+      stat_name: "stat_name ASC",
+      item_count: "item_count DESC",
     }[orderBy];
 
     const result = await this.db
       .prepare(
-        `SELECT stats_data_id, stat_name, title, item_count, updated_at as last_updated FROM estat_metainfo_unique ${orderClause}`
+        `SELECT stats_data_id, stat_name, title, item_count, updated_at as last_updated FROM estat_metainfo_unique ORDER BY ${orderClause}`
       )
       .all();
 

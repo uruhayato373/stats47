@@ -13,13 +13,13 @@ import { estatAPI } from "@/services/estat-api";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { SavedEstatMetainfoItem } from "@/types/models/estat";
 
-interface EstatMetainfoPageClientProps {
+interface EstatMetainfoPageProps {
   initialSavedMetadata?: SavedEstatMetainfoItem[];
 }
 
-export default function EstatMetainfoPageClient({
+export default function EstatMetainfoPage({
   initialSavedMetadata = [],
-}: EstatMetainfoPageClientProps) {
+}: EstatMetainfoPageProps) {
   const [metaInfo, setMetaInfo] = useState<EstatMetaInfoResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

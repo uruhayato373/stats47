@@ -4,7 +4,7 @@ export { EstatMetaInfoSidebar, SavedEstatMetaInfoList } from "./Sidebar";
 export { default as EstatMetaInfoActions } from "./Actions";
 export { EstatMetaInfoDisplay } from "./Display";
 export { MetaInfoFetcher as EstatMetaInfoFetcher } from "./Fetcher";
-export { default as EstatMetainfoPageClient } from "./EstatMetainfoPageClient";
+export { default as EstatMetainfoPage } from "./EstatMetainfoPage";
 
 // フックとユーティリティのエクスポート
 export * from "./Display/hooks";
