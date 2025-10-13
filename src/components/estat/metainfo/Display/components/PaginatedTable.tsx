@@ -44,12 +44,14 @@ interface PaginatedTableProps {
   }>;
   itemsPerPage?: number;
   metaInfoId?: string;
+  showUnit?: boolean;
 }
 
 export default function PaginatedTable({
   data,
   itemsPerPage = 15,
   metaInfoId,
+  showUnit = true,
 }: PaginatedTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -78,12 +80,14 @@ export default function PaginatedTable({
               <th className="px-3 py-2 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
                 コード
               </th>
-              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700 border-r border-gray-200">
+              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700">
                 項目名
               </th>
-              <th className="px-3 py-2 text-left text-xs font-medium text-gray-700">
-                単位
-              </th>
+              {showUnit && (
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-700">
+                  単位
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -92,12 +96,14 @@ export default function PaginatedTable({
                 <td className="px-3 py-2 text-xs font-mono text-gray-700 border-r border-gray-200">
                   {safeRender(item["@code"])}
                 </td>
-                <td className="px-3 py-2 text-xs text-gray-800 border-r border-gray-200">
+                <td className="px-3 py-2 text-xs text-gray-800">
                   {safeRender(item["@name"])}
                 </td>
-                <td className="px-3 py-2 text-xs text-gray-600">
-                  {item["@unit"] ? safeRender(item["@unit"]) : "-"}
-                </td>
+                {showUnit && (
+                  <td className="px-3 py-2 text-xs text-gray-600">
+                    {item["@unit"] ? safeRender(item["@unit"]) : "-"}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

@@ -4,10 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Code, Database } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
-import ClassificationTabs from "./components/ClassificationTabs";
 import JsonDisplay from "./components/JsonDisplay";
-import AreaTimeSelectors from "./components/AreaTimeSelectors";
 import MetaInfoHeader from "./components/MetaInfoHeader";
+import UnifiedClassificationTabs from "./components/UnifiedClassificationTabs";
 import { useMetaInfoSave, useMetaInfoDownload } from "./hooks";
 
 interface EstatMetaInfoDisplayProps {
@@ -133,28 +132,13 @@ export default function EstatMetaInfoDisplay({
       <div className="mt-6">
         {activeMainTab === 0 && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {CLASS_INF &&
-                CLASS_INF.CLASS_OBJ &&
-                CLASS_INF.CLASS_OBJ.length > 0 && (
-                  <div className="lg:col-span-1">
-                    <AreaTimeSelectors
-                      classObjs={CLASS_INF.CLASS_OBJ}
-                      metaInfoId={metaInfoId}
-                    />
-                  </div>
-                )}
-            </div>
-
             {CLASS_INF &&
               CLASS_INF.CLASS_OBJ &&
               CLASS_INF.CLASS_OBJ.length > 0 && (
-                <div>
-                  <ClassificationTabs
-                    classObjs={CLASS_INF.CLASS_OBJ}
-                    metaInfoId={metaInfoId}
-                  />
-                </div>
+                <UnifiedClassificationTabs
+                  classObjs={CLASS_INF.CLASS_OBJ}
+                  metaInfoId={metaInfoId}
+                />
               )}
           </div>
         )}
