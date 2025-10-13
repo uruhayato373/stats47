@@ -10,7 +10,7 @@ export function useSavedMetadata(initialData?: SavedMetadataItem[]) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/estat/metainfo/stats-list?limit=100");
+      const response = await fetch("/api/estat/metainfo/saved?limit=100");
       if (response.ok) {
         const result = await response.json();
         setData(result.items || []);
