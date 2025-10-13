@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
@@ -55,6 +55,23 @@ export default function EstatMetainfoPage({
       handleFetchMetaInfo(item.stats_data_id);
     }
   };
+
+  useEffect(() => {
+    // 初回マウント時に最初のアイテムを自動読み込み
+    if (initialSavedMetadata && initialSavedMetadata.length > 0) {
+      // stats_data_idでソートして最初のアイテムを取得
+      const sortedData = [...initialSavedMetadata].sort((a, b) => {
+        const aId = a.stats_data_id || "";
+        const bId = b.stats_data_id || "";
+        return aId.localeCompare(bId);
+      });
+
+      const firstItem = sortedData[0];
+      if (firstItem.stats_data_id) {
+        handleFetchMetaInfo(firstItem.stats_data_id);
+      }
+    }
+  }, []); // 空の依存配列で初回のみ実行
 
   return (
     <>
