@@ -1,4 +1,4 @@
-import { fetchEstatMetainfoUnique } from "@/lib/d1-client";
+import { fetchEstatMetainfoUnique } from "@/lib/db";
 import RankingSettingsPage from "@/components/estat/ranking-settings/RankingSettingsPage";
 import { SavedMetadataItem } from "@/types/models";
 

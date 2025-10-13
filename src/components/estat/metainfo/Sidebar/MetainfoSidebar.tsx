@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { Archive, RefreshCw } from "lucide-react";
 import { SavedEstatMetaInfoListItem, Pagination } from "./components";
-import { useMetadataList } from "../hooks/useMetadataList";
-import type { SavedEstatMetainfoItem } from "@/types/models";
+import { useMetadataList } from "@/hooks/estat";
+import type { EstatMetaCategoryData } from "@/lib/estat/types";
 
 interface EstatMetaInfoSidebarProps {
   className?: string;
-  initialData?: SavedEstatMetainfoItem[];
-  onView?: (item: SavedEstatMetainfoItem) => void;
+  initialData?: EstatMetaCategoryData[];
+  onView?: (item: EstatMetaCategoryData) => void;
 }
 
 export default function EstatMetaInfoSidebar({
@@ -21,7 +21,7 @@ export default function EstatMetaInfoSidebar({
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const handleView = (item: SavedEstatMetainfoItem) => {
+  const handleView = (item: EstatMetaCategoryData) => {
     if (onView) {
       onView(item);
     }

@@ -101,6 +101,3 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
     );
   }
 }
-
-}
-

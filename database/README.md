@@ -49,17 +49,29 @@ CREATE INDEX idx_cat01 ON estat_metainfo(cat01);
 
 ## 使用方法
 
-### 1. メタデータの保存
+### 1. データベースクライアントの使用
 
-統計表 ID を入力して「保存」ボタンをクリックすると、以下の処理が実行されます：
+```typescript
+import { createD1Database } from "@/lib/db";
 
-1. e-Stat API からメタデータを取得
-2. データを変換（CSV 形式に変換）
-3. D1 データベースに保存
+// 環境に応じて自動的に適切なクライアントが選択される
+const db = await createD1Database();
 
-### 2. 保存されたデータの確認
+// クエリの実行
+const result = await db.prepare("SELECT * FROM estat_metainfo").all();
+```
 
-「保存されたデータ」タブで、D1 に保存されたデータを確認できます。
+### 2. 個別クライアントの使用
+
+```typescript
+import { createRemoteD1Database, createLocalD1Database } from "@/lib/db";
+
+// 強制的にリモートD1を使用
+const remoteDb = await createRemoteD1Database();
+
+// 強制的にローカルD1を使用
+const localDb = await createLocalD1Database();
+```
 
 ## トラブルシューティング
 

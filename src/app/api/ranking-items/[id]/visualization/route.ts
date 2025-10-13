@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createD1Database } from "@/lib/d1-client";
+import { createD1Database } from "@/lib/db";
 
 interface VisualizationUpdateRequest {
   mapColorScheme?: string;
@@ -22,15 +22,12 @@ export async function PATCH(
   try {
     const { id } = await params;
     const itemId = parseInt(id);
-    
+
     if (isNaN(itemId)) {
-      return NextResponse.json(
-        { error: "Invalid item ID" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid item ID" }, { status: 400 });
     }
 
-    const body = await request.json() as VisualizationUpdateRequest;
+    const body = (await request.json()) as VisualizationUpdateRequest;
     const db = await createD1Database();
 
     // 更新クエリを動的に構築
@@ -75,7 +72,10 @@ export async function PATCH(
       WHERE id = ?
     `;
 
-    const result = await db.prepare(query).bind(...values).run();
+    const result = await db
+      .prepare(query)
+      .bind(...values)
+      .run();
 
     if (!result.success) {
       return NextResponse.json(

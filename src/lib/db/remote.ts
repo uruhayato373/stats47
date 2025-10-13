@@ -18,7 +18,7 @@ interface D1ApiResponse {
  * Cloudflare D1データベースクライアントを作成する
  * @throws {Error} 環境変数が不足している場合やAPI接続に失敗した場合
  */
-export const createD1Database = async () => {
+export const createRemoteD1Database = async () => {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
   const databaseId = process.env.CLOUDFLARE_D1_DATABASE_ID;
@@ -254,46 +254,3 @@ export const createD1Database = async () => {
     },
   };
 };
-
-/**
- * estat_metainfo_unique ビューからデータを取得
- * @param options - クエリオプション
- * @param options.limit - 取得する最大レコード数（デフォルト: 50）
- * @param options.orderBy - ソート順（デフォルト: "updated_at DESC"）
- * @param options.useRemote - リモートD1を使用するか（デフォルト: false）
- * @returns SavedEstatMetainfoItem[] - エラー時は空配列
- */
-export async function fetchEstatMetainfoUnique(options?: {
-  limit?: number;
-  orderBy?: string;
-  useRemote?: boolean;
-}): Promise<any[]> {
-  const {
-    limit = 50,
-    orderBy = "updated_at DESC",
-    useRemote = false,
-  } = options || {};
-
-  try {
-    // 環境に応じて適切なデータベースクライアントを使用
-    let db;
-    if (useRemote || process.env.NODE_ENV === "production") {
-      // リモートD1を使用
-      db = await createD1Database();
-    } else {
-      // ローカルD1を使用
-      const { createLocalD1Database } = await import("@/lib/local-d1-client");
-      db = await createLocalD1Database();
-    }
-
-    const result = await db
-      .prepare(
-        `SELECT * FROM estat_metainfo_unique ORDER BY ${orderBy} LIMIT ${limit}`
-      )
-      .all();
-    return result.results;
-  } catch (error) {
-    console.error("Failed to fetch estat metainfo:", error);
-    return [];
-  }
-}

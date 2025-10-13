@@ -4,7 +4,7 @@
  * 目的: ranking_key ベースのデータ取得・保存
  */
 
-import { createLocalD1Database } from "@/lib/local-d1-client";
+import { createLocalD1Database } from "@/lib/db";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 
 export interface RankingDataQuery {

@@ -18,8 +18,9 @@ export function useMetadataList() {
       }
       const responseData = await response.json();
 
-      if (Array.isArray(responseData)) {
-        setData(responseData);
+      // stats-list APIは { items: [...], pagination: {...}, meta: {...} } 形式で返す
+      if (responseData && Array.isArray(responseData.items)) {
+        setData(responseData.items);
       } else {
         throw new Error("予期しないデータ形式");
       }

@@ -1,5 +1,5 @@
 import { EstatMetainfoPage } from "@/components/estat/metainfo";
-import { fetchEstatMetainfoUnique } from "@/lib/d1-client";
+import { fetchEstatMetainfoUnique } from "@/lib/db";
 import { SavedEstatMetainfoItem } from "@/lib/estat/types";
 
 export default async function EstatMetadataPage() {

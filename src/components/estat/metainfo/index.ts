@@ -7,5 +7,4 @@ export { default as EstatMetainfoPage } from "./EstatMetainfoPage";
 
 // フックとユーティリティのエクスポート
 export * from "./Display/hooks";
-export * from "./hooks";
 export * from "./Sidebar/components";

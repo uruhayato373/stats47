@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createD1Database } from "@/lib/d1-client";
+import { createD1Database } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
   try {

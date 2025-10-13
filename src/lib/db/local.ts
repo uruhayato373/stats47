@@ -74,5 +74,5 @@ export const createLocalD1Database = async () => {
   }
 
   // 本番環境では既存のREST APIクライアントを使用
-  return await import("./d1-client").then((m) => m.createD1Database());
+  return await import("./remote").then((m) => m.createRemoteD1Database());
 };

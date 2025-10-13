@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatMetaInfoService } from "@/lib/estat/metainfo/EstatMetaInfoService";
-import { createD1Database } from "@/lib/d1-client";
+import { createD1Database } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   console.log("🔵 API: メタ情報保存開始");

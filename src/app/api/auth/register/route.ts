@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
-import { createD1Database } from "@/lib/d1-client";
+import { createD1Database } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json() as { username?: string; email?: string; password?: string };
+    const body = (await request.json()) as {
+      username?: string;
+      email?: string;
+      password?: string;
+    };
     const { username, email, password } = body;
 
     // バリデーション
