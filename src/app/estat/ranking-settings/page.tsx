@@ -1,5 +1,5 @@
 import { createD1Database } from "@/lib/d1-client";
-import PrefectureRankingPage from "@/components/estat/prefecture-ranking/PrefectureRankingPage";
+import RankingSettingsPage from "@/components/estat/ranking-settings/RankingSettingsPage";
 import { SavedMetadataItem } from "@/types/models";
 
 export default async function Page() {
@@ -21,7 +21,7 @@ export default async function Page() {
     .all();
 
   return (
-    <PrefectureRankingPage
+    <RankingSettingsPage
       initialSavedMetadata={result.results as unknown as SavedMetadataItem[]}
     />
   );

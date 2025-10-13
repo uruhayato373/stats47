@@ -5,4 +5,4 @@ export { default as PrefectureRankingPageHeader } from "./Header";
 export { default as PrefectureDataTable } from "./DataTable";
 export { default as SavedPrefectureRankingList } from "./SavedList";
 export { default as VisualizationSettingsPanel } from "./SettingsPanel";
-export { default as PrefectureRankingPage } from "./PrefectureRankingPage";
+export { default as RankingSettingsPage } from "./RankingSettingsPage";

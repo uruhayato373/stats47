@@ -154,8 +154,8 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat/prefecture-ranking",
-          label: "都道府県ランキング",
+          href: "/estat/ranking-settings",
+          label: "ランキング設定",
           icon: (
             <svg
               className="size-3.5"

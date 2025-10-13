@@ -19,10 +19,10 @@ export default function Header({
         <div>
           <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
             <Map className="w-6 h-6 text-indigo-600" />
-            都道府県ランキング・コロプレス地図
+            ランキング設定
           </h1>
           <p className="text-sm text-gray-600 dark:text-neutral-400 mt-1">
-            e-STAT統計データを都道府県別に地図上で可視化し、ランキング形式で表示
+            e-STAT統計データのランキング設定を管理
           </p>
         </div>
 

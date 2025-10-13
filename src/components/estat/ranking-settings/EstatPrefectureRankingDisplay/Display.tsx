@@ -14,7 +14,7 @@ import { ChoroplethMap } from "@/components/estat/visualization";
 import YearSelector from "@/components/common/YearSelector";
 import EstatDataSummary from "@/components/estat/visualization/EstatDataSummary";
 import ColorSchemeSelector from "@/components/common/ColorSchemeSelector";
-import EstatPrefectureDataTable from "@/components/estat/prefecture-ranking/EstatPrefectureDataTable";
+import EstatPrefectureDataTable from "@/components/estat/ranking-settings/EstatPrefectureDataTable";
 import VisualizationSettingsPanel from "../VisualizationSettingsPanel";
 import { EstatPrefectureRankingDisplayProps } from "./EstatPrefectureRankingDisplay.types";
 import {

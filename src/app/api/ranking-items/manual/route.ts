@@ -20,7 +20,7 @@ interface ManualRankingItemRequest {
  * 手動入力用のランキングアイテムを作成するAPI
  * POST /api/ranking-items/manual
  *
- * Prefecture Rankingページで手動入力されたstatsDataId+categoryCodeの組み合わせ用に
+ * Ranking Settingsページで手動入力されたstatsDataId+categoryCodeの組み合わせ用に
  * ranking_itemsテーブルに新しいレコードを作成する
  */
 export async function POST(request: NextRequest) {

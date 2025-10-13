@@ -19,7 +19,7 @@
 
 ### プロジェクトの型定義の現状
 
-**統計データ（2025年10月時点）：**
+**統計データ（2025 年 10 月時点）：**
 
 ```
 📊 型定義の分布状況
@@ -33,17 +33,20 @@
 ### 型定義の配置場所
 
 1. **グローバル型定義ディレクトリ**
+
    - `/src/types/` - プロジェクト全体で使用される型
    - `/src/types/index.ts` - 型定義の集約エクスポート
 
 2. **ドメイン固有の型定義**
-   - `/src/lib/estat/types/` - e-Stat API 関連の型（14ファイル）
+
+   - `/src/lib/estat/types/` - e-Stat API 関連の型（14 ファイル）
    - `/src/lib/auth/` - 認証関連の型
    - `/src/lib/ranking/` - ランキング関連の型
 
 3. **コンポーネント固有の型定義**
+
    - `/src/components/ranking/RankingClient/types.ts`
-   - `/src/components/estat/prefecture-ranking/*/types.ts`
+   - `/src/components/estat/ranking-settings/*/types.ts`
    - `/src/components/common/*/index.ts`（インライン型定義）
 
 4. **宣言ファイル**
@@ -76,7 +79,7 @@ src/lib/estat/types/
 
 // コンポーネント固有の型定義
 src/components/ranking/RankingClient/types.ts
-src/components/estat/prefecture-ranking/EstatPrefectureRankingDisplay/types.ts
+src/components/estat/ranking-settings/EstatPrefectureRankingDisplay/types.ts
 ```
 
 ---
@@ -86,11 +89,13 @@ src/components/estat/prefecture-ranking/EstatPrefectureRankingDisplay/types.ts
 ### 1. 型定義の場所が分散している
 
 **問題：**
+
 - グローバル型、ドメイン型、コンポーネント型が混在
 - どこに型定義を配置すべきか不明確
 - 同じような型が複数の場所に重複して定義されている可能性
 
 **影響：**
+
 - 型定義の検索に時間がかかる
 - 型の再利用が困難
 - メンテナンスコストが高い
@@ -98,21 +103,24 @@ src/components/estat/prefecture-ranking/EstatPrefectureRankingDisplay/types.ts
 ### 2. 命名規則の不統一
 
 **問題：**
+
 - `types.ts` と `types/index.ts` が混在
 - インターフェース名の命名パターンが統一されていない
 - Props の型定義の命名に一貫性がない
 
 **例：**
+
 ```typescript
 // 統一されていない命名
-RankingClientProps          // コンポーネント名 + Props
-EstatPrefectureRankingDisplayProps  // 長すぎる
-DataTableProps              // 一貫性はあるが...
+RankingClientProps; // コンポーネント名 + Props
+EstatPrefectureRankingDisplayProps; // 長すぎる
+DataTableProps; // 一貫性はあるが...
 ```
 
 ### 3. 型のスコープが不明確
 
 **問題：**
+
 - どの型がグローバルで、どの型がローカルなのか不明確
 - ファイル名から型の用途が分かりにくい
 - 型定義の依存関係が複雑
@@ -120,6 +128,7 @@ DataTableProps              // 一貫性はあるが...
 ### 4. ドキュメンテーション不足
 
 **問題：**
+
 - 型定義にコメントが少ない
 - 型の用途や使用例が不明確
 - JSDoc コメントが統一されていない
@@ -127,31 +136,35 @@ DataTableProps              // 一貫性はあるが...
 ### 5. 型定義のエクスポート方法が統一されていない
 
 **問題：**
+
 - 名前付きエクスポート、デフォルトエクスポート、re-export が混在
 - `index.ts` からの re-export が不完全
 - 型のインポートパスが長くなりがち
 
 **例：**
+
 ```typescript
 // 長いインポートパス
-import { RankingData } from '@/components/ranking/RankingClient/types';
-import { EstatMetaInfo } from '@/lib/estat/types/metainfo';
+import { RankingData } from "@/components/ranking/RankingClient/types";
+import { EstatMetaInfo } from "@/lib/estat/types/metainfo";
 
 // 理想的には...
-import { RankingData, EstatMetaInfo } from '@/types';
+import { RankingData, EstatMetaInfo } from "@/types";
 ```
 
 ---
 
 ## 型定義管理の基本原則
 
-### 原則1: 単一責任の原則（SRP）
+### 原則 1: 単一責任の原則（SRP）
 
 **定義：**
-- 1つの型定義ファイルは1つの関心事のみを扱う
+
+- 1 つの型定義ファイルは 1 つの関心事のみを扱う
 - ファイル名から型の用途が明確に分かる
 
 **例：**
+
 ```typescript
 // Good: 関心事が明確
 types/
@@ -167,13 +180,15 @@ types/
 └── common.ts         // あらゆる型が詰め込まれている
 ```
 
-### 原則2: DRY（Don't Repeat Yourself）
+### 原則 2: DRY（Don't Repeat Yourself）
 
 **定義：**
+
 - 同じ型定義を複数の場所に書かない
 - 共通の型は適切な場所で定義し、再利用する
 
 **例：**
+
 ```typescript
 // Bad: 型の重複
 // components/A/types.ts
@@ -196,16 +211,18 @@ export interface User {
 }
 
 // components/A/ComponentA.tsx
-import { User } from '@/types/models';
+import { User } from "@/types/models";
 ```
 
-### 原則3: 関心の分離（Separation of Concerns）
+### 原則 3: 関心の分離（Separation of Concerns）
 
 **定義：**
+
 - グローバル型、ドメイン型、コンポーネント型を明確に分離
 - 型のスコープを適切に設定
 
 **レイヤー構造：**
+
 ```
 Layer 1: Global Types (プロジェクト全体で使用)
   ↓
@@ -214,14 +231,16 @@ Layer 2: Domain Types (特定のドメインで使用)
 Layer 3: Component Types (特定のコンポーネントで使用)
 ```
 
-### 原則4: 明示的な依存関係
+### 原則 4: 明示的な依存関係
 
 **定義：**
+
 - 型の依存関係を明示的にする
 - 循環参照を避ける
 - インポートパスは短く、分かりやすく
 
 **例：**
+
 ```typescript
 // Good: 明示的な依存関係
 // types/models/user.ts
@@ -231,7 +250,7 @@ export interface User {
 }
 
 // types/api/user-api.ts
-import { User } from '@/types/models/user';
+import { User } from "@/types/models/user";
 
 export interface UserApiResponse {
   user: User;
@@ -240,26 +259,28 @@ export interface UserApiResponse {
 
 // Bad: 循環参照
 // types/a.ts
-import { TypeB } from './b';
+import { TypeB } from "./b";
 export interface TypeA {
   b: TypeB;
 }
 
 // types/b.ts
-import { TypeA } from './a';
+import { TypeA } from "./a";
 export interface TypeB {
   a: TypeA;
 }
 ```
 
-### 原則5: ドキュメント化
+### 原則 5: ドキュメント化
 
 **定義：**
+
 - すべての型定義に JSDoc コメントを追加
 - 型の用途、使用例、注意点を明記
 
 **例：**
-```typescript
+
+````typescript
 /**
  * ユーザー情報を表す型
  *
@@ -288,12 +309,12 @@ export interface User {
   email: string;
 
   /** ユーザーの役割（admin または user） */
-  role: 'admin' | 'user';
+  role: "admin" | "user";
 
   /** プロフィール画像のURL（オプション） */
   image?: string;
 }
-```
+````
 
 ---
 
@@ -403,7 +424,7 @@ src/
     │       └── index.ts
     │
     └── estat/                      # e-Stat コンポーネント
-        └── prefecture-ranking/
+        └── ranking-settings/
             ├── EstatPrefectureRankingDisplay/
             │   ├── EstatPrefectureRankingDisplay.tsx
             │   ├── EstatPrefectureRankingDisplay.types.ts
@@ -420,31 +441,37 @@ src/
 #### 1. `/src/types/` - グローバル型定義
 
 **役割：**
+
 - プロジェクト全体で使用される共通の型定義
 - 複数のドメインやコンポーネントで共有される型
 
 **配置すべき型：**
+
 - ドメインモデル（User, Prefecture, Ranking など）
 - 共通の API 型（Request, Response, Error）
 - 共通のコンポーネント Props 型
 - ユーティリティ型
 
 **配置すべきでない型：**
+
 - 特定のドメインにのみ使用される型
 - 特定のコンポーネントにのみ使用される型
 
 #### 2. `/src/domains/*/types/` - ドメイン固有の型定義
 
 **役割：**
+
 - 特定のドメインに関連する型定義
 - ドメインロジックに密接に関連する型
 
 **配置すべき型：**
+
 - ドメイン固有の API レスポンス型
 - ドメイン固有のパラメータ型
 - ドメイン固有のビジネスロジック型
 
 **例：**
+
 - e-Stat ドメイン: API レスポンス、パラメータ、処理済みデータ
 - ランキングドメイン: ランキング項目、可視化設定
 - 認証ドメイン: セッション、JWT、OAuth
@@ -452,20 +479,23 @@ src/
 #### 3. `/src/components/*/types.ts` - コンポーネント固有の型定義
 
 **役割：**
+
 - 特定のコンポーネントでのみ使用される型定義
 - コンポーネントの Props、State、内部型
 
 **配置すべき型：**
+
 - コンポーネントの Props 型
 - コンポーネントの内部 State 型
 - コンポーネント固有のイベントハンドラー型
 
 **命名規則：**
+
 ```typescript
 // コンポーネント名 + .types.ts
-RankingClient.types.ts
-DataTable.types.ts
-EstatPrefectureRankingDisplay.types.ts
+RankingClient.types.ts;
+DataTable.types.ts;
+EstatPrefectureRankingDisplay.types.ts;
 ```
 
 ---
@@ -523,25 +553,25 @@ components/common/DataTable/
 
 ```typescript
 // Pascal Case
-export interface User { }
-export interface Prefecture { }
-export interface RankingItem { }
+export interface User {}
+export interface Prefecture {}
+export interface RankingItem {}
 
 // Props の命名
-export interface RankingClientProps { }
-export interface DataTableProps { }
+export interface RankingClientProps {}
+export interface DataTableProps {}
 
 // State の命名
-export interface RankingClientState { }
-export interface DataTableState { }
+export interface RankingClientState {}
+export interface DataTableState {}
 
 // API レスポンスの命名
-export interface UserApiResponse { }
-export interface RankingListResponse { }
+export interface UserApiResponse {}
+export interface RankingListResponse {}
 
 // API リクエストの命名
-export interface UserApiRequest { }
-export interface RankingFetchParams { }
+export interface UserApiRequest {}
+export interface RankingFetchParams {}
 ```
 
 #### 型エイリアスの命名
@@ -552,8 +582,8 @@ export type UserId = string;
 export type PrefectureCode = string;
 
 // Union 型
-export type UserRole = 'admin' | 'user';
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+export type UserRole = "admin" | "user";
+export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 // 関数型
 export type EventHandler = (event: Event) => void;
@@ -604,9 +634,10 @@ export interface RankingClientComponentProps {
 
 ```typescript
 // HTML 要素の Props を拡張
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg";
 }
 
 // 他のコンポーネントの Props を拡張
@@ -620,11 +651,11 @@ export interface IconButtonProps extends ButtonProps {
 ```typescript
 // 必須の Props は先に
 export interface DataTableProps<TItem> {
-  data: TItem[];          // 必須
-  columns: Column[];      // 必須
-  onRowClick?: (item: TItem) => void;  // 省略可能
-  loading?: boolean;      // 省略可能
-  emptyMessage?: string;  // 省略可能
+  data: TItem[]; // 必須
+  columns: Column[]; // 必須
+  onRowClick?: (item: TItem) => void; // 省略可能
+  loading?: boolean; // 省略可能
+  emptyMessage?: string; // 省略可能
 }
 ```
 
@@ -650,7 +681,7 @@ export interface User {
 
 #### 詳細な JSDoc（推奨）
 
-```typescript
+````typescript
 /**
  * ランキングクライアントコンポーネントの Props
  *
@@ -716,11 +747,11 @@ export interface RankingClientProps<T extends string> {
    */
   isAdmin?: boolean;
 }
-```
+````
 
 #### エラー型の JSDoc
 
-```typescript
+````typescript
 /**
  * API エラーを表すクラス
  *
@@ -749,12 +780,12 @@ export class ApiError extends Error {
 
   constructor(message: string, statusCode: number, details?: unknown) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
     this.statusCode = statusCode;
     this.details = details;
   }
 }
-```
+````
 
 ### 5. ユーティリティ型のパターン
 
@@ -842,10 +873,10 @@ export type Paginated<TItem> = {
  * 読み込み状態を表す型
  */
 export type LoadingState<TData, TError = Error> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: TData }
-  | { status: 'error'; error: TError };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: TData }
+  | { status: "error"; error: TError };
 
 /**
  * フォームフィールドの型
@@ -861,7 +892,9 @@ export type FormField<TValue> = {
  * イベントハンドラーの型
  */
 export type EventHandler<TEvent = Event> = (event: TEvent) => void;
-export type AsyncEventHandler<TEvent = Event> = (event: TEvent) => Promise<void>;
+export type AsyncEventHandler<TEvent = Event> = (
+  event: TEvent
+) => Promise<void>;
 ```
 
 ---
@@ -907,18 +940,20 @@ export type AsyncEventHandler<TEvent = Event> = (event: TEvent) => Promise<void>
 #### Rule 1: グローバル型定義（`/src/types/`）
 
 **配置条件：**
-- ✅ 3つ以上のドメインまたはコンポーネントで使用される
+
+- ✅ 3 つ以上のドメインまたはコンポーネントで使用される
 - ✅ プロジェクト全体で共通の概念を表す
 - ✅ 外部ライブラリの型拡張
 
 **配置例：**
+
 ```typescript
 // types/models/user.ts
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'user';
+  role: "admin" | "user";
 }
 
 // types/models/prefecture.ts
@@ -936,7 +971,7 @@ export interface ApiResponse<T> {
 }
 
 // types/external/next-auth.d.ts
-declare module 'next-auth' {
+declare module "next-auth" {
   interface Session {
     user: User;
   }
@@ -946,11 +981,13 @@ declare module 'next-auth' {
 #### Rule 2: ドメイン固有の型定義（`/src/domains/*/types/`）
 
 **配置条件：**
+
 - ✅ 特定のドメインでのみ使用される
 - ✅ ドメインロジックに密接に関連する
 - ✅ 他のドメインからは参照されない
 
 **配置例：**
+
 ```typescript
 // domains/estat/types/raw-response.ts
 export interface EstatRawResponse {
@@ -972,7 +1009,7 @@ export interface EstatApiParameters {
 // domains/ranking/types/visualization.ts
 export interface VisualizationSettings {
   colorScheme: string;
-  legendPosition: 'top' | 'bottom' | 'left' | 'right';
+  legendPosition: "top" | "bottom" | "left" | "right";
   showLabels: boolean;
 }
 ```
@@ -980,11 +1017,13 @@ export interface VisualizationSettings {
 #### Rule 3: コンポーネント固有の型定義（`/src/components/*/Component.types.ts`）
 
 **配置条件：**
+
 - ✅ 特定のコンポーネントでのみ使用される
 - ✅ コンポーネントの Props、State、内部ロジックに関連する
 - ✅ 他のコンポーネントからは参照されない
 
 **配置例：**
+
 ```typescript
 // components/ranking/RankingClient/RankingClient.types.ts
 export interface RankingClientProps<T extends string> {
@@ -1010,7 +1049,7 @@ export interface DataTableColumn<TItem> {
 
 ### 配置の判断例
 
-#### 例1: User 型
+#### 例 1: User 型
 
 ```typescript
 // ❓ User 型はどこに配置すべきか？
@@ -1027,7 +1066,7 @@ export interface DataTableColumn<TItem> {
 // 配置: /src/types/models/user.ts
 ```
 
-#### 例2: EstatRawResponse 型
+#### 例 2: EstatRawResponse 型
 
 ```typescript
 // ❓ EstatRawResponse 型はどこに配置すべきか？
@@ -1042,7 +1081,7 @@ export interface DataTableColumn<TItem> {
 // 配置: /src/domains/estat/types/raw-response.ts
 ```
 
-#### 例3: RankingClientProps 型
+#### 例 3: RankingClientProps 型
 
 ```typescript
 // ❓ RankingClientProps 型はどこに配置すべきか？
@@ -1060,7 +1099,7 @@ export interface DataTableColumn<TItem> {
 
 ## 具体的な実装例
 
-### 例1: グローバル型定義の実装
+### 例 1: グローバル型定義の実装
 
 #### ファイル構成
 
@@ -1123,7 +1162,7 @@ export type Email = string;
 
 `src/types/common/utility.ts`
 
-```typescript
+````typescript
 /**
  * プロジェクト全体で使用されるユーティリティ型
  */
@@ -1211,10 +1250,10 @@ export interface Paginated<TItem> {
  * ```
  */
 export type LoadingState<TData, TError = Error> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: TData }
-  | { status: 'error'; error: TError };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: TData }
+  | { status: "error"; error: TError };
 
 /**
  * 非同期操作の結果を表す型
@@ -1222,7 +1261,7 @@ export type LoadingState<TData, TError = Error> =
 export type AsyncResult<TData, TError = Error> =
   | { success: true; data: TData }
   | { success: false; error: TError };
-```
+````
 
 `src/types/common/pagination.ts`
 
@@ -1245,7 +1284,7 @@ export interface PaginationParams {
   sortBy?: string;
 
   /** ソート順序 */
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 }
 
 /**
@@ -1285,13 +1324,13 @@ export interface PaginatedResponse<TItem> {
 
 `src/types/models/user.ts`
 
-```typescript
-import { Email, UserId, Timestamp } from '../common/primitives';
+````typescript
+import { Email, UserId, Timestamp } from "../common/primitives";
 
 /**
  * ユーザーの役割
  */
-export type UserRole = 'admin' | 'user';
+export type UserRole = "admin" | "user";
 
 /**
  * ユーザー情報を表すインターフェース
@@ -1372,26 +1411,27 @@ export interface UserUpdateInput {
 /**
  * セッション内のユーザー情報
  */
-export interface SessionUser extends Pick<User, 'id' | 'name' | 'email' | 'role' | 'image'> {}
-```
+export interface SessionUser
+  extends Pick<User, "id" | "name" | "email" | "role" | "image"> {}
+````
 
 `src/types/models/prefecture.ts`
 
-```typescript
-import { PrefectureCode } from '../common/primitives';
+````typescript
+import { PrefectureCode } from "../common/primitives";
 
 /**
  * 地域区分
  */
 export type Region =
-  | '北海道'
-  | '東北'
-  | '関東'
-  | '中部'
-  | '近畿'
-  | '中国'
-  | '四国'
-  | '九州・沖縄';
+  | "北海道"
+  | "東北"
+  | "関東"
+  | "中部"
+  | "近畿"
+  | "中国"
+  | "四国"
+  | "九州・沖縄";
 
 /**
  * 都道府県情報を表すインターフェース
@@ -1434,12 +1474,16 @@ export interface PrefectureData extends Prefecture {
   /** 順位 */
   rank?: number;
 }
-```
+````
 
 `src/types/models/ranking.ts`
 
 ```typescript
-import { PrefectureCode, StatsDataId, CategoryCode } from '../common/primitives';
+import {
+  PrefectureCode,
+  StatsDataId,
+  CategoryCode,
+} from "../common/primitives";
 
 /**
  * ランキング項目の基本情報
@@ -1561,7 +1605,7 @@ export type ApiResponse<TData> = SuccessResponse<TData> | ErrorResponse;
 
 `src/types/api/error.ts`
 
-```typescript
+````typescript
 /**
  * API エラーのクラス
  *
@@ -1581,7 +1625,7 @@ export class ApiError extends Error {
 
   constructor(message: string, statusCode: number, details?: unknown) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
     this.statusCode = statusCode;
     this.details = details;
 
@@ -1594,9 +1638,9 @@ export class ApiError extends Error {
  * 認証エラー
  */
 export class AuthenticationError extends ApiError {
-  constructor(message: string = '認証が必要です') {
+  constructor(message: string = "認証が必要です") {
     super(message, 401);
-    this.name = 'AuthenticationError';
+    this.name = "AuthenticationError";
     Object.setPrototypeOf(this, AuthenticationError.prototype);
   }
 }
@@ -1605,9 +1649,9 @@ export class AuthenticationError extends ApiError {
  * 認可エラー
  */
 export class AuthorizationError extends ApiError {
-  constructor(message: string = '権限がありません') {
+  constructor(message: string = "権限がありません") {
     super(message, 403);
-    this.name = 'AuthorizationError';
+    this.name = "AuthorizationError";
     Object.setPrototypeOf(this, AuthorizationError.prototype);
   }
 }
@@ -1616,9 +1660,9 @@ export class AuthorizationError extends ApiError {
  * データが見つからないエラー
  */
 export class NotFoundError extends ApiError {
-  constructor(message: string = 'データが見つかりません') {
+  constructor(message: string = "データが見つかりません") {
     super(message, 404);
-    this.name = 'NotFoundError';
+    this.name = "NotFoundError";
     Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 }
@@ -1629,15 +1673,15 @@ export class NotFoundError extends ApiError {
 export class ValidationError extends ApiError {
   constructor(message: string, details?: unknown) {
     super(message, 400, details);
-    this.name = 'ValidationError';
+    this.name = "ValidationError";
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
 }
-```
+````
 
 `src/types/index.ts` - 集約エクスポート
 
-```typescript
+````typescript
 /**
  * Stats47 プロジェクトの型定義
  *
@@ -1659,36 +1703,36 @@ export class ValidationError extends ApiError {
  */
 
 // Common Types
-export * from './common/primitives';
-export * from './common/utility';
-export * from './common/pagination';
+export * from "./common/primitives";
+export * from "./common/utility";
+export * from "./common/pagination";
 
 // Model Types
-export * from './models/user';
-export * from './models/prefecture';
-export * from './models/ranking';
+export * from "./models/user";
+export * from "./models/prefecture";
+export * from "./models/ranking";
 
 // API Types
-export * from './api/request';
-export * from './api/response';
-export * from './api/error';
+export * from "./api/request";
+export * from "./api/response";
+export * from "./api/error";
 
 // Component Types
-export * from './components/layout';
-export * from './components/form';
-export * from './components/data-display';
+export * from "./components/layout";
+export * from "./components/form";
+export * from "./components/data-display";
 
 // Visualization Types
-export * from './visualization/choropleth';
-export * from './visualization/chart';
-export * from './visualization/map';
+export * from "./visualization/choropleth";
+export * from "./visualization/chart";
+export * from "./visualization/map";
 
 // Database Types
-export * from './database/schema';
-export * from './database/query';
-```
+export * from "./database/schema";
+export * from "./database/query";
+````
 
-### 例2: ドメイン固有の型定義の実装
+### 例 2: ドメイン固有の型定義の実装
 
 #### ファイル構成
 
@@ -1714,8 +1758,8 @@ src/domains/estat/
 
 `src/domains/estat/types/parameters.ts`
 
-```typescript
-import { StatsDataId, CategoryCode, PrefectureCode, Year } from '@/types';
+````typescript
+import { StatsDataId, CategoryCode, PrefectureCode, Year } from "@/types";
 
 /**
  * e-Stat API のリクエストパラメータ
@@ -1748,13 +1792,13 @@ export interface EstatApiParameters {
   limit?: number;
 
   /** メタ情報の有無 */
-  metaGetFlg?: 'Y' | 'N';
+  metaGetFlg?: "Y" | "N";
 
   /** データ取得フラグ */
-  cntGetFlg?: 'Y' | 'N';
+  cntGetFlg?: "Y" | "N";
 
   /** セクション指定 */
-  sectionHeaderFlg?: '1' | '2';
+  sectionHeaderFlg?: "1" | "2";
 }
 
 /**
@@ -1808,12 +1852,12 @@ export class EstatApiParametersBuilder {
 
   build(): EstatApiParameters {
     if (!this.params.statsDataId) {
-      throw new Error('statsDataId is required');
+      throw new Error("statsDataId is required");
     }
     return this.params as EstatApiParameters;
   }
 }
-```
+````
 
 `src/domains/estat/types/raw-response.ts`
 
@@ -1891,10 +1935,10 @@ export interface EstatValue {
  */
 export interface EstatClassObj {
   /** クラスID */
-  '@id': string;
+  "@id": string;
 
   /** クラス名 */
-  '@name': string;
+  "@name": string;
 
   /** クラス */
   CLASS: EstatClass[];
@@ -1905,16 +1949,16 @@ export interface EstatClassObj {
  */
 export interface EstatClass {
   /** コード */
-  '@code': string;
+  "@code": string;
 
   /** 名称 */
-  '@name': string;
+  "@name": string;
 
   /** レベル */
-  '@level'?: string;
+  "@level"?: string;
 
   /** 単位 */
-  '@unit'?: string;
+  "@unit"?: string;
 }
 
 /**
@@ -1945,25 +1989,25 @@ export interface EstatRawResponse {
  */
 
 // Raw API Response Types
-export * from './raw-response';
-export * from './meta-response';
-export * from './list-response';
-export * from './catalog-response';
+export * from "./raw-response";
+export * from "./meta-response";
+export * from "./list-response";
+export * from "./catalog-response";
 
 // API Parameters
-export * from './parameters';
+export * from "./parameters";
 
 // Processed Data Types
-export * from './processed';
+export * from "./processed";
 
 // Formatted Data Types
-export * from './formatted';
+export * from "./formatted";
 
 // MetaInfo Types
-export * from './metainfo';
+export * from "./metainfo";
 ```
 
-### 例3: コンポーネント固有の型定義の実装
+### 例 3: コンポーネント固有の型定義の実装
 
 #### ファイル構成
 
@@ -1979,9 +2023,9 @@ src/components/ranking/RankingClient/
 
 `src/components/ranking/RankingClient/RankingClient.types.ts`
 
-```typescript
-import { SubcategoryData } from '@/types';
-import { RankingData, RankingItem } from '@/types/models/ranking';
+````typescript
+import { SubcategoryData } from "@/types";
+import { RankingData, RankingItem } from "@/types/models/ranking";
 
 /**
  * ランキングオプション（タブ項目）の構造
@@ -2079,23 +2123,23 @@ export interface RankingClientProps<T extends string> {
    */
   isAdmin?: boolean;
 }
-```
+````
 
 `src/components/ranking/RankingClient/index.ts`
 
 ```typescript
-export { RankingClient } from './RankingClient';
-export { RankingNavigation } from './RankingNavigation';
-export type { RankingClientProps, RankingOption } from './RankingClient.types';
+export { RankingClient } from "./RankingClient";
+export { RankingNavigation } from "./RankingNavigation";
+export type { RankingClientProps, RankingOption } from "./RankingClient.types";
 ```
 
 ---
 
 ## マイグレーション計画
 
-### フェーズ1: 準備（1日）
+### フェーズ 1: 準備（1 日）
 
-#### ステップ1: 現状の型定義を調査
+#### ステップ 1: 現状の型定義を調査
 
 ```bash
 # 型定義ファイルの一覧を取得
@@ -2105,7 +2149,7 @@ find src -name "types.ts" -o -name "*.types.ts" -o -path "*/types/*" > type-file
 grep -r "import.*from.*types" src/ > type-imports.txt
 ```
 
-#### ステップ2: 新しいディレクトリ構造を作成
+#### ステップ 2: 新しいディレクトリ構造を作成
 
 ```bash
 # グローバル型定義ディレクトリ
@@ -2115,17 +2159,18 @@ mkdir -p src/types/{common,models,api,components,visualization,database,external
 mkdir -p src/domains/{estat,ranking,auth}/types
 ```
 
-#### ステップ3: マイグレーション計画書の作成
+#### ステップ 3: マイグレーション計画書の作成
 
 `docs/type-migration-plan.md` を作成し、以下を記載：
+
 - 移行対象のファイル一覧
 - 移行先のディレクトリ
 - 依存関係のマッピング
 - 移行スケジュール
 
-### フェーズ2: グローバル型定義の移行（2〜3日）
+### フェーズ 2: グローバル型定義の移行（2〜3 日）
 
-#### ステップ1: 共通型定義の作成
+#### ステップ 1: 共通型定義の作成
 
 ```bash
 # 共通型定義を作成
@@ -2141,7 +2186,7 @@ export type StatsDataId = string;
 // ...
 ```
 
-#### ステップ2: モデル型定義の移行
+#### ステップ 2: モデル型定義の移行
 
 ```bash
 # 既存の型定義を新しい場所にコピー
@@ -2153,24 +2198,24 @@ cp src/types/prefecture.ts src/types/models/prefecture.ts
 
 ```typescript
 // src/types/models/index.ts
-export * from './user';
-export * from './prefecture';
-export * from './ranking';
+export * from "./user";
+export * from "./prefecture";
+export * from "./ranking";
 ```
 
-#### ステップ3: 集約エクスポートファイルの作成
+#### ステップ 3: 集約エクスポートファイルの作成
 
 ```typescript
 // src/types/index.ts
-export * from './common';
-export * from './models';
-export * from './api';
+export * from "./common";
+export * from "./models";
+export * from "./api";
 // ...
 ```
 
-### フェーズ3: ドメイン型定義の移行（2〜3日）
+### フェーズ 3: ドメイン型定義の移行（2〜3 日）
 
-#### ステップ1: e-Stat 型定義の移行
+#### ステップ 1: e-Stat 型定義の移行
 
 ```bash
 # 既存のディレクトリを移動
@@ -2180,28 +2225,28 @@ mv src/lib/estat/types src/domains/estat/types
 cp -r src/lib/estat/types src/domains/estat/types
 ```
 
-#### ステップ2: インポートパスの更新
+#### ステップ 2: インポートパスの更新
 
 ```typescript
 // Before
-import { EstatRawResponse } from '@/lib/estat/types/raw-response';
+import { EstatRawResponse } from "@/lib/estat/types/raw-response";
 
 // After
-import { EstatRawResponse } from '@/domains/estat/types';
+import { EstatRawResponse } from "@/domains/estat/types";
 ```
 
-#### ステップ3: 集約エクスポートの作成
+#### ステップ 3: 集約エクスポートの作成
 
 ```typescript
 // src/domains/estat/types/index.ts
-export * from './raw-response';
-export * from './meta-response';
+export * from "./raw-response";
+export * from "./meta-response";
 // ...
 ```
 
-### フェーズ4: コンポーネント型定義の整理（2〜3日）
+### フェーズ 4: コンポーネント型定義の整理（2〜3 日）
 
-#### ステップ1: コンポーネント型定義のリネーム
+#### ステップ 1: コンポーネント型定義のリネーム
 
 ```bash
 # types.ts を Component.types.ts にリネーム
@@ -2209,27 +2254,27 @@ mv src/components/ranking/RankingClient/types.ts \
    src/components/ranking/RankingClient/RankingClient.types.ts
 ```
 
-#### ステップ2: インポートパスの更新
+#### ステップ 2: インポートパスの更新
 
 ```typescript
 // Before
-import { RankingClientProps } from './types';
+import { RankingClientProps } from "./types";
 
 // After
-import { RankingClientProps } from './RankingClient.types';
+import { RankingClientProps } from "./RankingClient.types";
 ```
 
-#### ステップ3: re-export の追加
+#### ステップ 3: re-export の追加
 
 ```typescript
 // src/components/ranking/RankingClient/index.ts
-export { RankingClient } from './RankingClient';
-export type { RankingClientProps } from './RankingClient.types';
+export { RankingClient } from "./RankingClient";
+export type { RankingClientProps } from "./RankingClient.types";
 ```
 
-### フェーズ5: インポートパスの一括置換（1日）
+### フェーズ 5: インポートパスの一括置換（1 日）
 
-#### ステップ1: 検索と置換のスクリプト作成
+#### ステップ 1: 検索と置換のスクリプト作成
 
 ```bash
 # scripts/migrate-imports.sh
@@ -2244,7 +2289,7 @@ find src -name "*.ts" -o -name "*.tsx" | xargs sed -i '' \
   's|@/lib/estat/types|@/domains/estat/types|g'
 ```
 
-#### ステップ2: TypeScript コンパイラで確認
+#### ステップ 2: TypeScript コンパイラで確認
 
 ```bash
 # 型エラーがないか確認
@@ -2253,7 +2298,7 @@ npx tsc --noEmit
 # エラーがある場合は修正
 ```
 
-#### ステップ3: テストの実行
+#### ステップ 3: テストの実行
 
 ```bash
 # すべてのテストを実行
@@ -2262,9 +2307,9 @@ npm test
 # テストが失敗した場合は修正
 ```
 
-### フェーズ6: 古いファイルの削除（1日）
+### フェーズ 6: 古いファイルの削除（1 日）
 
-#### ステップ1: 古いファイルのバックアップ
+#### ステップ 1: 古いファイルのバックアップ
 
 ```bash
 # バックアップディレクトリを作成
@@ -2275,7 +2320,7 @@ cp -r src/types backup/old-types/
 cp -r src/lib/estat/types backup/old-types/estat
 ```
 
-#### ステップ2: 古いファイルの削除
+#### ステップ 2: 古いファイルの削除
 
 ```bash
 # 古い型定義ファイルを削除
@@ -2283,7 +2328,7 @@ rm src/types/prefecture.ts
 rm -rf src/lib/estat/types
 ```
 
-#### ステップ3: 最終確認
+#### ステップ 3: 最終確認
 
 ```bash
 # 型エラーがないか確認
@@ -2296,9 +2341,9 @@ npm test
 npm run build
 ```
 
-### フェーズ7: ドキュメント化（1日）
+### フェーズ 7: ドキュメント化（1 日）
 
-#### ステップ1: 型定義のドキュメント作成
+#### ステップ 1: 型定義のドキュメント作成
 
 `docs/types-documentation.md` を作成：
 
@@ -2318,7 +2363,7 @@ npm run build
 ...
 ```
 
-#### ステップ2: README の更新
+#### ステップ 2: README の更新
 
 ```markdown
 # Stats47
@@ -2397,9 +2442,10 @@ npx depcheck
 
 ## よくある問題と解決策
 
-### 問題1: 循環参照エラー
+### 問題 1: 循環参照エラー
 
 **症状：**
+
 ```
 ReferenceError: Cannot access 'TypeA' before initialization
 ```
@@ -2408,16 +2454,17 @@ ReferenceError: Cannot access 'TypeA' before initialization
 型定義ファイルが相互に参照している（循環参照）
 
 **解決策：**
+
 ```typescript
 // Bad: 循環参照
 // types/a.ts
-import { TypeB } from './b';
+import { TypeB } from "./b";
 export interface TypeA {
   b: TypeB;
 }
 
 // types/b.ts
-import { TypeA } from './a';
+import { TypeA } from "./a";
 export interface TypeB {
   a: TypeA;
 }
@@ -2429,26 +2476,28 @@ export interface BaseType {
 }
 
 // types/a.ts
-import { BaseType } from './common';
+import { BaseType } from "./common";
 export interface TypeA extends BaseType {
   name: string;
 }
 
 // types/b.ts
-import { BaseType } from './common';
+import { BaseType } from "./common";
 export interface TypeB extends BaseType {
   title: string;
 }
 ```
 
-### 問題2: インポートパスが長い
+### 問題 2: インポートパスが長い
 
 **症状：**
+
 ```typescript
-import { RankingData } from '../../../../../types/models/ranking';
+import { RankingData } from "../../../../../types/models/ranking";
 ```
 
 **解決策：**
+
 ```typescript
 // tsconfig.json に path alias を設定
 {
@@ -2466,12 +2515,13 @@ import { RankingData } from '../../../../../types/models/ranking';
 import { RankingData } from '@/types/models/ranking';
 ```
 
-### 問題3: 型定義が重複している
+### 問題 3: 型定義が重複している
 
 **症状：**
 同じような型定義が複数の場所に存在する
 
 **解決策：**
+
 ```typescript
 // Before: 型の重複
 // components/A/types.ts
@@ -2494,44 +2544,49 @@ export interface User {
 }
 
 // components/A/ComponentA.tsx
-import { User } from '@/types/models/user';
+import { User } from "@/types/models/user";
 
 // components/B/ComponentB.tsx
-import { User } from '@/types/models/user';
+import { User } from "@/types/models/user";
 ```
 
-### 問題4: 型定義が見つからない
+### 問題 4: 型定義が見つからない
 
 **症状：**
+
 ```
 Cannot find module '@/types/models/user' or its corresponding type declarations.
 ```
 
-**解決策1: index.ts からの re-export を確認**
+**解決策 1: index.ts からの re-export を確認**
+
 ```typescript
 // types/models/index.ts
-export * from './user';  // これがないと見つからない
+export * from "./user"; // これがないと見つからない
 ```
 
-**解決策2: tsconfig.json の paths を確認**
+**解決策 2: tsconfig.json の paths を確認**
+
 ```json
 {
   "compilerOptions": {
     "paths": {
-      "@/types/*": ["./src/types/*"]  // これが正しく設定されているか確認
+      "@/types/*": ["./src/types/*"] // これが正しく設定されているか確認
     }
   }
 }
 ```
 
-### 問題5: ジェネリック型の型推論が効かない
+### 問題 5: ジェネリック型の型推論が効かない
 
 **症状：**
+
 ```typescript
-const data: ApiResponse = fetchData();  // エラー: ジェネリック型引数が必要
+const data: ApiResponse = fetchData(); // エラー: ジェネリック型引数が必要
 ```
 
 **解決策：**
+
 ```typescript
 // Bad: ジェネリック型引数が省略できない
 export interface ApiResponse<T> {
@@ -2544,24 +2599,28 @@ export interface ApiResponse<T = unknown> {
 }
 
 // 使用例
-const data: ApiResponse = fetchData();  // OK: T は unknown になる
-const userData: ApiResponse<User> = fetchUserData();  // OK: T は User になる
+const data: ApiResponse = fetchData(); // OK: T は unknown になる
+const userData: ApiResponse<User> = fetchUserData(); // OK: T は User になる
 ```
 
-### 問題6: Union 型の型ガード
+### 問題 6: Union 型の型ガード
 
 **症状：**
+
 ```typescript
-type Result = { success: true; data: string } | { success: false; error: string };
+type Result =
+  | { success: true; data: string }
+  | { success: false; error: string };
 
 function handleResult(result: Result) {
   if (result.success) {
-    console.log(result.data);  // エラー: data が存在しない可能性がある
+    console.log(result.data); // エラー: data が存在しない可能性がある
   }
 }
 ```
 
 **解決策：**
+
 ```typescript
 // 型ガード関数を使用
 function isSuccess(result: Result): result is { success: true; data: string } {
@@ -2570,9 +2629,9 @@ function isSuccess(result: Result): result is { success: true; data: string } {
 
 function handleResult(result: Result) {
   if (isSuccess(result)) {
-    console.log(result.data);  // OK: result は { success: true; data: string } に絞り込まれる
+    console.log(result.data); // OK: result は { success: true; data: string } に絞り込まれる
   } else {
-    console.log(result.error);  // OK: result は { success: false; error: string } に絞り込まれる
+    console.log(result.error); // OK: result は { success: false; error: string } に絞り込まれる
   }
 }
 ```
@@ -2584,20 +2643,24 @@ function handleResult(result: Result) {
 ### 型定義管理のベストプラクティス
 
 1. **明確な配置ルール**
+
    - グローバル型、ドメイン型、コンポーネント型を明確に分離
    - 型のスコープに応じて適切な場所に配置
 
 2. **統一された命名規則**
+
    - ファイル名: 小文字、ハイフン区切り
    - 型名: Pascal Case
    - Props 型: `ComponentNameProps`
 
 3. **充実したドキュメンテーション**
+
    - すべての型に JSDoc コメントを追加
    - 使用例を記載
    - 依存関係を明示
 
 4. **再利用性の向上**
+
    - DRY 原則に従う
    - 共通の型は適切な場所で定義
    - index.ts で re-export
@@ -2610,16 +2673,19 @@ function handleResult(result: Result) {
 ### 次のステップ
 
 1. **現状の型定義を調査する**
+
    - 型定義ファイルの一覧を作成
    - 使用状況を分析
    - 問題点を洗い出す
 
 2. **マイグレーション計画を立てる**
+
    - 移行対象のファイルを特定
    - 移行スケジュールを決定
    - リスクを評価
 
 3. **段階的に移行する**
+
    - フェーズごとに移行
    - 各フェーズで動作確認
    - ドキュメントを更新

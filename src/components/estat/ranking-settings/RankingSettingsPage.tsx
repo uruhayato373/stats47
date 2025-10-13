@@ -8,17 +8,17 @@ import {
   PrefectureRankingDisplay,
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
-} from "@/components/estat/prefecture-ranking";
+} from "@/components/estat/ranking-settings";
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
 
-interface PrefectureRankingPageProps {
+interface RankingSettingsPageProps {
   initialSavedMetadata: SavedMetadataItem[];
 }
 
-export default function PrefectureRankingPage({
+export default function RankingSettingsPage({
   initialSavedMetadata,
-}: PrefectureRankingPageProps) {
+}: RankingSettingsPageProps) {
   const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
     null
   );
