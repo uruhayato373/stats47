@@ -5,6 +5,7 @@
  */
 
 import { RankingItem } from "@/types/models/ranking";
+import { getBaseUrl } from "@/lib/config";
 
 export interface SubcategoryConfig {
   id: string;
@@ -30,7 +31,7 @@ export async function fetchRankingItemsBySubcategory(
 ): Promise<RankingConfigResponse | null> {
   try {
     // APIエンドポイントを呼び出してデータベースから取得
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = getBaseUrl();
     const url = `${baseUrl}/api/ranking-items/subcategory/${encodeURIComponent(
       subcategoryId
     )}`;
@@ -85,7 +86,7 @@ export async function updateVisualizationSettings(
   }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = getBaseUrl();
     const url = `${baseUrl}/api/ranking-items/${itemId}/visualization`;
 
     const response = await fetch(url, {
@@ -97,8 +98,8 @@ export async function updateVisualizationSettings(
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      return { success: false, error: error.error || "Update failed" };
+      const errorData = (await response.json()) as { error?: string };
+      return { success: false, error: errorData.error || "Update failed" };
     }
 
     return { success: true };

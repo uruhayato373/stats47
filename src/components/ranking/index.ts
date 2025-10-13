@@ -16,8 +16,7 @@ export { RankingNavigationEditable } from "./RankingClient/RankingNavigationEdit
 export { RankingItemForm } from "./RankingClient/RankingItemForm";
 export { DraggableRankingList } from "./RankingClient/DraggableRankingList";
 
-// ページコンポーネント
-export { SubcategoryRankingPage } from "./SubcategoryRankingPage";
+// ページコンポーネントは subcategories に移動
 
 // 型定義
 export type {

@@ -9,7 +9,6 @@ import { LoadingView } from "../ui/LoadingView";
 import { RankingNavigation } from "../RankingClient/RankingNavigation";
 import { RankingNavigationEditable } from "../RankingClient/RankingNavigationEditable";
 import { RankingClientProps, RankingData } from "@/types/models/ranking";
-import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 
 /**
  * ランキング表示のメインコンテナ
@@ -61,11 +60,6 @@ export function RankingContainer<T extends string>({
 
   const activeRanking = rankings[activeRankingKey];
 
-  // アクティブなランキングアイテムから可視化設定を取得
-  const activeRankingItem = rankingItems?.find(
-    (item) => item.rankingKey === activeRankingKey
-  );
-
   // ランキングデータが存在しない場合のフォールバック
   if (!activeRanking) {
     return (
@@ -101,18 +95,6 @@ export function RankingContainer<T extends string>({
     );
   }
 
-  // 可視化オプションを構築
-  const visualizationOptions: RankingVisualizationOptions = {
-    colorScheme:
-      activeRankingItem?.mapColorScheme ||
-      subcategory.colorScheme ||
-      "interpolateGreens",
-    divergingMidpoint: activeRankingItem?.mapDivergingMidpoint || "zero",
-    conversionFactor: activeRankingItem?.conversionFactor || 1,
-    decimalPlaces: activeRankingItem?.decimalPlaces || 0,
-    rankingDirection: activeRankingItem?.rankingDirection || "desc",
-  };
-
   return (
     <RankingLayout
       main={
@@ -124,7 +106,6 @@ export function RankingContainer<T extends string>({
             unit: activeRanking.unit,
             name: activeRanking.name,
           }}
-          visualizationOptions={visualizationOptions}
         />
       }
       navigation={

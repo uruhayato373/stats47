@@ -7,6 +7,7 @@ compatibility_date = "2024-01-15"
 binding = "STATS47_DB"
 database_name = "stats47"
 database_id = "e6533698-d05a-475b-9f39-5558703feef7"
+migrations_dir = "database/migrations"
 
 [env.local]
 NODE_ENV = "development"
@@ -17,3 +18,4 @@ ESTAT_API_KEY = "your_estat_api_key_here"
 binding = "STATS47_DB"
 database_name = "stats47"
 database_id = "e6533698-d05a-475b-9f39-5558703feef7"
+migrations_dir = "database/migrations"

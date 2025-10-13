@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 // import { cookies } from "next/headers";
 import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
-import { SubcategoryRankingPage } from "@/components/ranking/SubcategoryRankingPage";
+import { SubcategoryRankingPage } from "@/components/subcategories/SubcategoryRankingPage";
 
 /**
  * ランキング統計項目ページのProps型定義

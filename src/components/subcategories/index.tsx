@@ -195,6 +195,7 @@ export const getAreaPageComponent = (
 
 // 共通コンポーネント
 export { SubcategoryLayout } from "./SubcategoryLayout";
+export { SubcategoryRankingPage } from "./SubcategoryRankingPage";
 export { ViewSwitchButtons } from "./ViewSwitchButtons";
 export { PrefectureSelector } from "./PrefectureSelector";
 

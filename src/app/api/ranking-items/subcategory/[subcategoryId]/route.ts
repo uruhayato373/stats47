@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { createD1Database } from "@/lib/d1-client";
-import { convertRankingItemFromDB, RankingItemDB } from "@/types/models/ranking";
+import { createRankingRepository } from "@/lib/ranking/ranking-repository";
 
 /**
  * ランキング項目取得API
- * GET /api/ranking-items/[subcategoryId]
+ * GET /api/ranking-items/subcategory/[subcategoryId]
  *
  * 指定されたサブカテゴリのランキング項目を取得する（可視化設定も含む）
  * データベース接続に失敗した場合はフォールバック設定を使用
@@ -25,80 +24,26 @@ export async function GET(
 
     // データベース接続を試行
     try {
-      const db = await createD1Database();
-
-      // サブカテゴリ設定とランキング項目を取得（可視化設定も含む）
-      const query = `
-        SELECT 
-          sc.id as subcategory_id,
-          sc.category_id,
-          sc.name as subcategory_name,
-          sc.description,
-          sc.default_ranking_key,
-          ri.id,
-          ri.ranking_key,
-          ri.label,
-          ri.stats_data_id,
-          ri.cd_cat01,
-          ri.unit,
-          ri.name as ranking_name,
-          ri.display_order,
-          ri.is_active,
-          ri.map_color_scheme,
-          ri.map_diverging_midpoint,
-          ri.ranking_direction,
-          ri.conversion_factor,
-          ri.decimal_places,
-          ri.created_at,
-          ri.updated_at
-        FROM subcategory_configs sc
-        LEFT JOIN ranking_items ri ON sc.id = ri.subcategory_id AND ri.is_active = 1
-        WHERE sc.id = ?
-        ORDER BY ri.display_order
-      `;
-
-      const result = await db.prepare(query).bind(subcategoryId).all();
+      const repository = await createRankingRepository();
+      const config = await repository.getRankingItemsBySubcategory(
+        subcategoryId
+      );
 
       console.log("Database query result:", {
-        success: result.success,
-        resultsCount: result.results?.length || 0,
+        success: !!config,
+        resultsCount: config?.rankingItems.length || 0,
         subcategoryId,
       });
 
-      if (!result.success) {
-        console.error("Database query failed");
-        throw new Error("データベースクエリに失敗しました");
-      }
-
-      const rows = result.results as Array<Record<string, unknown>>;
-
-      if (rows.length === 0) {
+      if (!config) {
         return NextResponse.json(
           { error: "指定されたサブカテゴリが見つかりません" },
           { status: 404 }
         );
       }
 
-      // データを整形
-      const subcategoryConfig = {
-        id: rows[0].subcategory_id,
-        categoryId: rows[0].category_id,
-        name: rows[0].subcategory_name,
-        description: rows[0].subcategory_description,
-        defaultRankingKey: rows[0].default_ranking_key,
-      };
-
-      const rankingItems = rows
-        .filter((row) => row.ranking_key) // ランキング項目がある行のみ
-        .map((row) => convertRankingItemFromDB(row as RankingItemDB));
-
-      const response = {
-        subcategory: subcategoryConfig,
-        rankingItems,
-      };
-
       // キャッシュヘッダーを設定（5分間キャッシュ）
-      return NextResponse.json(response, {
+      return NextResponse.json(config, {
         headers: {
           "Cache-Control": "public, max-age=300, stale-while-revalidate=600",
         },
