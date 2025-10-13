@@ -17,7 +17,6 @@ import InputField from "@/components/common/InputField";
 interface PrefectureRankingParams {
   statsDataId: string;
   categoryCode?: string;
-  timeCode?: string;
 }
 
 interface EstatPrefectureRankingFetcherProps {
@@ -25,21 +24,14 @@ interface EstatPrefectureRankingFetcherProps {
   loading: boolean;
 }
 
-type FormData = {
-  statsDataId: string;
-  categoryCode: string;
-  timeCode: string;
-};
-
 export default function EstatPrefectureRankingFetcher({
   onSubmit,
   loading,
 }: EstatPrefectureRankingFetcherProps) {
   // フォーム状態管理 - 統計表IDとカテゴリの初期値を設定
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<PrefectureRankingParams>({
     statsDataId: "0000010101", // デフォルト統計表ID（国勢調査）
     categoryCode: "A1101", // デフォルトカテゴリ（総人口）
-    timeCode: "", // 時間軸は空で開始
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,21 +45,13 @@ export default function EstatPrefectureRankingFetcher({
   /**
    * フォーム送信処理 - データ取得の開始点
    * 1. フォームのデフォルト送信を防止
-   * 2. 入力値をパラメータオブジェクトに変換
-   * 3. 親コンポーネントのonSubmitコールバックを呼び出し
+   * 2. 親コンポーネントのonSubmitコールバックを呼び出し
    */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // フォームのデフォルト送信を防止
 
-    // 入力値をPrefectureRankingParams形式に変換
-    const params: PrefectureRankingParams = {
-      statsDataId: formData.statsDataId,
-      ...(formData.categoryCode && { categoryCode: formData.categoryCode }),
-      ...(formData.timeCode && { timeCode: formData.timeCode }),
-    };
-
     // 親コンポーネント(RankingSettingsPage)のhandleFetchDataを呼び出し
-    onSubmit(params);
+    onSubmit(formData);
   };
 
   /**
@@ -77,7 +61,6 @@ export default function EstatPrefectureRankingFetcher({
     setFormData({
       statsDataId: "0000010101",
       categoryCode: "A1101",
-      timeCode: "",
     });
   };
 
