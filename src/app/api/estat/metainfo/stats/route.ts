@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoService } from "@/lib/estat/metainfo/EstatMetaInfoService";
-import { createD1Database } from "@/lib/d1-client";
+import { createLocalD1Database } from "@/lib/local-d1-client";
 
 export async function GET(request: NextRequest) {
   try {
-    // Cloudflare D1データベースに直接接続
-    const db = await createD1Database();
-    const metaInfoService = new EstatMetaInfoService(
-      db as unknown as D1Database
-    );
+    // ローカルD1データベースに接続
+    const db = await createLocalD1Database();
 
-    // 統計データ一覧を取得
-    const statsList = await metaInfoService.getStatsList();
+    // 直接SQLクエリで統計データ一覧を取得
+    const result = await db
+      .prepare(
+        "SELECT stats_data_id, stat_name, title, item_count, updated_at as last_updated FROM estat_metainfo_unique ORDER BY updated_at DESC LIMIT 50"
+      )
+      .all();
 
-    return NextResponse.json(statsList);
+    return NextResponse.json(result.results);
   } catch (error) {
     console.error("統計情報取得エラー:", error);
     return NextResponse.json(

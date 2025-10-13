@@ -208,7 +208,7 @@ export class EstatMetaInfoService {
     switch (searchType) {
       case "stat_name":
         sqlQuery = `
-          SELECT * FROM estat_metainfo
+          SELECT *, ranking_key FROM estat_metainfo
           WHERE stat_name LIKE ?
           ORDER BY stat_name, title
           LIMIT ? OFFSET ?
@@ -218,7 +218,7 @@ export class EstatMetaInfoService {
 
       case "category":
         sqlQuery = `
-          SELECT * FROM estat_metainfo
+          SELECT *, ranking_key FROM estat_metainfo
           WHERE cat01 = ?
           ORDER BY stat_name, title
           LIMIT ? OFFSET ?
@@ -228,7 +228,7 @@ export class EstatMetaInfoService {
 
       case "stats_id":
         sqlQuery = `
-          SELECT * FROM estat_metainfo
+          SELECT *, ranking_key FROM estat_metainfo
           WHERE stats_data_id = ?
           ORDER BY cat01, item_name
           LIMIT ? OFFSET ?
@@ -238,7 +238,7 @@ export class EstatMetaInfoService {
 
       default: // full
         sqlQuery = `
-          SELECT * FROM estat_metainfo
+          SELECT *, ranking_key FROM estat_metainfo
           WHERE stat_name LIKE ? OR title LIKE ? OR item_name LIKE ?
           ORDER BY stat_name, title
           LIMIT ? OFFSET ?
@@ -345,6 +345,39 @@ export class EstatMetaInfoService {
   }
 
   /**
+   * stats_data_idとcat01からranking_keyを検索
+   */
+  async findRankingKey(
+    statsDataId: string,
+    cat01: string
+  ): Promise<string | null> {
+    try {
+      const result = await this.db
+        .prepare(
+          `
+        SELECT ri.ranking_key
+        FROM ranking_items ri
+        JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id
+        WHERE dsm.data_source_id = 'estat'
+          AND json_extract(dsm.metadata, '$.stats_data_id') = ?
+          AND json_extract(dsm.metadata, '$.cd_cat01') = ?
+        LIMIT 1
+      `
+        )
+        .bind(statsDataId, cat01)
+        .first();
+
+      return result?.ranking_key || null;
+    } catch (error) {
+      console.warn(
+        `Failed to find ranking_key for ${statsDataId}/${cat01}:`,
+        error
+      );
+      return null;
+    }
+  }
+
+  /**
    * 統計データ一覧を取得
    */
   async getStatsList(
@@ -363,13 +396,15 @@ export class EstatMetaInfoService {
     const { orderBy = "last_updated" } = options;
 
     const orderClause = {
-      last_updated: "ORDER BY last_updated DESC",
+      last_updated: "ORDER BY updated_at DESC",
       stat_name: "ORDER BY stat_name ASC",
       item_count: "ORDER BY item_count DESC",
     }[orderBy];
 
     const result = await this.db
-      .prepare(`SELECT * FROM v_estat_metainfo_summary ${orderClause}`)
+      .prepare(
+        `SELECT stats_data_id, stat_name, title, item_count, updated_at as last_updated FROM estat_metainfo_unique ${orderClause}`
+      )
       .all();
 
     return result.results as Array<{
@@ -530,25 +565,31 @@ export class EstatMetaInfoService {
       return `'${str.replace(/'/g, "''")}'`;
     };
 
-    // バルクINSERT用のVALUES句を生成
-    const values = dataList
-      .map(
-        (data) => `(
+    // バルクINSERT用のVALUES句を生成（ranking_keyを含む）
+    const values = await Promise.all(
+      dataList.map(async (data) => {
+        // ranking_keyを検索
+        const rankingKey = data.cat01
+          ? await this.findRankingKey(data.stats_data_id, data.cat01)
+          : null;
+
+        return `(
         ${escape(data.stats_data_id)},
         ${escape(data.stat_name)},
         ${escape(data.title)},
         ${escape(data.cat01)},
         ${escape(data.item_name)},
         ${escape(data.unit)},
+        ${escape(rankingKey)},
         CURRENT_TIMESTAMP
-      )`
-      )
-      .join(",");
+      )`;
+      })
+    );
 
     const query = `
       INSERT OR REPLACE INTO estat_metainfo
-      (stats_data_id, stat_name, title, cat01, item_name, unit, updated_at)
-      VALUES ${values}
+      (stats_data_id, stat_name, title, cat01, item_name, unit, ranking_key, updated_at)
+      VALUES ${values.join(",")}
     `;
 
     console.log("🔵 Service: SQL Length:", query.length);

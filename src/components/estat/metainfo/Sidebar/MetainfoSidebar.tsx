@@ -7,16 +7,21 @@ import type { SavedEstatMetainfoItem } from "@/types/models";
 
 interface EstatMetaInfoSidebarProps {
   className?: string;
+  initialData?: SavedEstatMetainfoItem[];
 }
 
 export default function EstatMetaInfoSidebar({
   className = "",
+  initialData = [],
 }: EstatMetaInfoSidebarProps) {
   const { data, loading, fetchData, deleteItem } = useMetadataList();
 
   const handleView = (item: SavedEstatMetainfoItem) => {
     console.log("View metadata:", item);
   };
+
+  // 初期データがある場合はそれを使用、ない場合はフックから取得したデータを使用
+  const displayData = initialData.length > 0 ? initialData : data;
 
   return (
     <div
@@ -44,7 +49,7 @@ export default function EstatMetaInfoSidebar({
 
       {/* データリスト */}
       <SavedEstatMetaInfoList
-        data={data}
+        data={displayData}
         loading={loading}
         onView={handleView}
         onDelete={deleteItem}

@@ -1,5 +1,19 @@
 "use client";
 
+/**
+ * ランキング設定ページ - メインコンテナ
+ *
+ * データ取得フロー:
+ * Fetcher → handleFetchData → currentParams更新 → useEstatData発火
+ * → /api/estat/data呼び出し → e-Stat API → データ表示
+ *
+ * 役割:
+ * - Fetcherコンポーネントからのパラメータを受け取り
+ * - useSWRによる自動データ取得を管理
+ * - 取得したデータをDisplayコンポーネントに渡す
+ * - ランキング設定の保存処理を管理
+ */
+
 import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
@@ -20,43 +34,63 @@ interface RankingSettingsPageProps {
 export default function RankingSettingsPage({
   initialSavedMetadata,
 }: RankingSettingsPageProps) {
+  // 現在の検索パラメータ - Fetcherから受け取ったパラメータを保存
   const [currentParams, setCurrentParams] =
     useState<PrefectureRankingParams | null>(null);
 
-  // 設定状態を管理
+  // ランキング設定状態 - 地図の色やランキング方向などの設定
   const [settings, setSettings] = useState<RankingItemSettingsData>({
-    map_color_scheme: "interpolateBlues",
-    map_diverging_midpoint: "zero",
-    ranking_direction: "desc",
-    conversion_factor: 1,
-    decimal_places: 0,
+    map_color_scheme: "interpolateBlues", // デフォルト色スキーム
+    map_diverging_midpoint: "zero", // 発散色の中点
+    ranking_direction: "desc", // 降順ランキング
+    conversion_factor: 1, // 単位変換係数
+    decimal_places: 0, // 小数点以下桁数
   });
 
-  // useSWRでデータ取得（自動キャッシング、リトライ）
+  // useSWRによる自動データ取得 - currentParamsが変更されると自動的にAPI呼び出し
   const { data, error, isLoading, refetch } = useEstatData(currentParams);
 
+  /**
+   * Fetcherからのパラメータ受け取り処理
+   * FetcherコンポーネントのonSubmitコールバックとして呼び出される
+   * currentParamsを更新することでuseEstatDataフックが自動的にデータ取得を開始
+   */
   const handleFetchData = (params: PrefectureRankingParams) => {
-    setCurrentParams(params);
+    setCurrentParams(params); // パラメータ更新でuseSWRが発火
   };
 
+  /**
+   * データ再取得処理
+   * 現在のパラメータでデータを手動で再取得
+   */
   const handleRefresh = () => {
     if (currentParams) {
-      refetch();
+      refetch(); // useSWRのmutate関数を呼び出し
     }
   };
 
+  /**
+   * 保存済みデータ選択処理
+   * サイドバーから保存済みメタデータを選択した際に呼び出される
+   */
   const handleDataSelect = (item: SavedMetadataItem) => {
     // 選択されたデータで新しい検索を実行
     const params: PrefectureRankingParams = {
       statsDataId: item.stats_data_id,
     };
-    setCurrentParams(params);
+    setCurrentParams(params); // パラメータ更新でデータ取得開始
   };
 
+  /**
+   * ランキング設定保存処理
+   * Displayコンポーネントから設定変更時に呼び出される
+   * データベースにランキング設定を保存
+   */
   const handleSaveSettings = async (newSettings: RankingItemSettingsData) => {
     if (!currentParams) return;
 
     try {
+      // /api/ranking-items/manual エンドポイントにPOSTリクエスト
       const response = await fetch("/api/ranking-items/manual", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,7 +112,7 @@ export default function RankingSettingsPage({
         throw new Error("設定の保存に失敗しました");
       }
 
-      setSettings(newSettings);
+      setSettings(newSettings); // ローカル状態を更新
     } catch (error) {
       console.error("Error saving settings:", error);
       throw error;

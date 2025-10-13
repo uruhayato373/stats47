@@ -1,9 +1,18 @@
 "use client";
 
+/**
+ * ランキング設定ページ - データ取得フォーム
+ *
+ * データ取得の流れ:
+ * 1. ユーザーが統計表IDとカテゴリを入力
+ * 2. フォーム送信でパラメータオブジェクトを作成
+ * 3. 親コンポーネント(RankingSettingsPage)のonSubmitコールバックを呼び出し
+ * 4. 親コンポーネントでuseEstatDataフックがデータ取得を開始
+ */
+
 import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
 import InputField from "@/components/common/InputField";
-import { useStyles } from "@/hooks/useStyles";
 
 interface PrefectureRankingParams {
   statsDataId: string;
@@ -26,11 +35,11 @@ export default function EstatPrefectureRankingFetcher({
   onSubmit,
   loading,
 }: EstatPrefectureRankingFetcherProps) {
-  const styles = useStyles();
+  // フォーム状態管理 - 統計表IDとカテゴリの初期値を設定
   const [formData, setFormData] = useState<FormData>({
-    statsDataId: "0000010101",
-    categoryCode: "A1101",
-    timeCode: "",
+    statsDataId: "0000010101", // デフォルト統計表ID（国勢調査）
+    categoryCode: "A1101", // デフォルトカテゴリ（総人口）
+    timeCode: "", // 時間軸は空で開始
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,18 +50,29 @@ export default function EstatPrefectureRankingFetcher({
     }));
   };
 
+  /**
+   * フォーム送信処理 - データ取得の開始点
+   * 1. フォームのデフォルト送信を防止
+   * 2. 入力値をパラメータオブジェクトに変換
+   * 3. 親コンポーネントのonSubmitコールバックを呼び出し
+   */
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // フォームのデフォルト送信を防止
 
+    // 入力値をPrefectureRankingParams形式に変換
     const params: PrefectureRankingParams = {
       statsDataId: formData.statsDataId,
       ...(formData.categoryCode && { categoryCode: formData.categoryCode }),
       ...(formData.timeCode && { timeCode: formData.timeCode }),
     };
 
+    // 親コンポーネント(RankingSettingsPage)のhandleFetchDataを呼び出し
     onSubmit(params);
   };
 
+  /**
+   * フォームリセット処理 - 初期値に戻す
+   */
   const handleReset = () => {
     setFormData({
       statsDataId: "0000010101",
@@ -63,10 +83,12 @@ export default function EstatPrefectureRankingFetcher({
 
   return (
     <div className="space-y-4">
+      {/* データ取得フォーム - 統計表IDとカテゴリの入力 */}
       <form onSubmit={handleSubmit} className="p-4">
         <div className="space-y-4">
           {/* 入力フィールドとボタンを横一列に配置 */}
           <div className="flex items-end gap-4">
+            {/* 統計表ID入力フィールド - 必須項目 */}
             <div className="w-32">
               <InputField
                 name="statsDataId"
@@ -78,6 +100,7 @@ export default function EstatPrefectureRankingFetcher({
               />
             </div>
 
+            {/* カテゴリ入力フィールド - オプション項目 */}
             <div className="w-32">
               <InputField
                 name="categoryCode"
@@ -88,8 +111,9 @@ export default function EstatPrefectureRankingFetcher({
               />
             </div>
 
-            {/* ボタン */}
+            {/* アクションボタン群 */}
             <div className="flex gap-2">
+              {/* データ取得ボタン - フォーム送信をトリガー */}
               <button
                 type="submit"
                 disabled={loading || !formData.statsDataId}
@@ -103,6 +127,7 @@ export default function EstatPrefectureRankingFetcher({
                 </div>
               </button>
 
+              {/* リセットボタン - フォームを初期値に戻す */}
               <button
                 type="button"
                 onClick={handleReset}

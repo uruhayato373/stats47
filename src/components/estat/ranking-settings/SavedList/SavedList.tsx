@@ -1,7 +1,8 @@
 "use client";
 
 import { Map } from "lucide-react";
-import { SavedListItem, type SavedMetadataItem } from "./components";
+import { SavedListItem } from "./components";
+import { SavedMetadataItem } from "@/types/models";
 
 interface SavedListProps {
   data: SavedMetadataItem[];
@@ -62,9 +63,9 @@ export default function SavedList({
     );
   }
 
-  // statsDataIdの昇順でソート
+  // stats_data_idの昇順でソート
   const sortedData = [...data].sort((a, b) =>
-    a.statsDataId.localeCompare(b.statsDataId)
+    a.stats_data_id.localeCompare(b.stats_data_id)
   );
 
   return (

@@ -114,6 +114,16 @@ export function SavedEstatMetaInfoListItem({
                 {item.item_count}件
               </span>
             </div>
+            {item.ranking_key && (
+              <div className="flex">
+                <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
+                  ランキング:
+                </span>
+                <span className="text-indigo-600 dark:text-indigo-400 font-mono text-xs bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded">
+                  {item.ranking_key}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       )}

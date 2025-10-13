@@ -1,6 +1,7 @@
 "use client";
 
-import { AlertTriangle, Database } from "lucide-react";
+import { AlertTriangle, Database, BarChart3 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
 import { DisplayProps } from "./types";
 
@@ -12,6 +13,31 @@ export default function Display({
   settings,
   onSettingsChange,
 }: DisplayProps) {
+  const [rankingKey, setRankingKey] = useState<string | null>(null);
+  const [rankingKeyLoading, setRankingKeyLoading] = useState(false);
+
+  // paramsが変更されたときにranking_keyを検索
+  useEffect(() => {
+    if (params?.statsDataId && params?.categoryCode) {
+      setRankingKeyLoading(true);
+      fetch(
+        `/api/estat/metainfo/ranking-key?statsDataId=${params.statsDataId}&cat01=${params.categoryCode}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setRankingKey(data.rankingKey);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch ranking_key:", error);
+          setRankingKey(null);
+        })
+        .finally(() => {
+          setRankingKeyLoading(false);
+        });
+    } else {
+      setRankingKey(null);
+    }
+  }, [params?.statsDataId, params?.categoryCode]);
   // ローディング状態
   if (loading) {
     return (
@@ -63,6 +89,59 @@ export default function Display({
 
   return (
     <div className="space-y-6">
+      {/* ランキングキー情報表示 */}
+      {params && (
+        <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <BarChart3 className="w-5 h-5 text-indigo-600" />
+            <h3 className="font-medium text-gray-900 dark:text-neutral-100">
+              ランキング情報
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                統計表ID:
+              </span>
+              <span className="ml-2 font-mono text-gray-600 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-700 px-2 py-1 rounded">
+                {params.statsDataId}
+              </span>
+            </div>
+
+            {params.categoryCode && (
+              <div>
+                <span className="font-medium text-gray-700 dark:text-neutral-300">
+                  カテゴリ:
+                </span>
+                <span className="ml-2 font-mono text-gray-600 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-700 px-2 py-1 rounded">
+                  {params.categoryCode}
+                </span>
+              </div>
+            )}
+
+            <div className="md:col-span-2">
+              <span className="font-medium text-gray-700 dark:text-neutral-300">
+                ランキングキー:
+              </span>
+              {rankingKeyLoading ? (
+                <span className="ml-2 text-gray-500 dark:text-neutral-500">
+                  検索中...
+                </span>
+              ) : rankingKey ? (
+                <span className="ml-2 text-indigo-600 dark:text-indigo-400 font-mono text-sm bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded">
+                  {rankingKey}
+                </span>
+              ) : (
+                <span className="ml-2 text-gray-500 dark:text-neutral-500">
+                  未設定
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* RankingDataContainer（データ表示） */}
       {params && (
         <RankingDataContainer

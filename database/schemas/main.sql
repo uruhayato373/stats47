@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   cat01 TEXT,                            -- カテゴリ1
   item_name TEXT,                        -- 項目名
   unit TEXT,                             -- 単位
+  ranking_key TEXT,                      -- ランキングキー（ランキングアイテムとして使用されている場合）
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 更新日時
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP   -- 作成日時
 );
@@ -47,6 +48,7 @@ CREATE INDEX IF NOT EXISTS idx_stats_data_id ON estat_metainfo(stats_data_id);
 CREATE INDEX IF NOT EXISTS idx_stat_name ON estat_metainfo(stat_name);
 CREATE INDEX IF NOT EXISTS idx_cat01 ON estat_metainfo(cat01);
 CREATE INDEX IF NOT EXISTS idx_updated_at ON estat_metainfo(updated_at);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_ranking_key ON estat_metainfo(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
 CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 

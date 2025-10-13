@@ -2,16 +2,7 @@
 
 import { useState } from "react";
 import { Trash2, ChevronDown, ChevronUp, Map } from "lucide-react";
-
-export interface SavedMetadataItem {
-  id: string;
-  statsDataId: string;
-  title: string;
-  statName: string;
-  govOrg: string;
-  surveyDate: string;
-  savedAt: string;
-}
+import { SavedMetadataItem } from "@/types/models";
 
 interface SavedListItemProps {
   item: SavedMetadataItem;
@@ -40,7 +31,7 @@ export default function SavedListItem({
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0 ml-4">
           <span className="text-xs font-mono text-gray-500 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-700 px-2 py-1 rounded">
-            {item.statsDataId}
+            {item.stats_data_id}
           </span>
         </div>
 
@@ -73,7 +64,7 @@ export default function SavedListItem({
               ランキング表示
             </button>
             <button
-              onClick={() => onDelete(item.id)}
+              onClick={() => onDelete(item.id?.toString() || "")}
               className="px-3 py-1.5 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20"
               title="削除"
             >
@@ -88,7 +79,7 @@ export default function SavedListItem({
                 政府統計名:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {item.statName}
+                {item.stat_name}
               </span>
             </div>
             <div className="flex">
@@ -99,28 +90,52 @@ export default function SavedListItem({
                 {item.title}
               </span>
             </div>
-            <div className="flex">
-              <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
-                作成機関:
-              </span>
-              <span className="text-gray-600 dark:text-neutral-400">
-                {item.govOrg}
-              </span>
-            </div>
-            <div className="flex">
-              <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
-                調査年月:
-              </span>
-              <span className="text-gray-600 dark:text-neutral-400">
-                {item.surveyDate}
-              </span>
-            </div>
+            {item.cat01 && (
+              <div className="flex">
+                <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
+                  カテゴリ:
+                </span>
+                <span className="text-gray-600 dark:text-neutral-400">
+                  {item.cat01}
+                </span>
+              </div>
+            )}
+            {item.item_name && (
+              <div className="flex">
+                <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
+                  項目名:
+                </span>
+                <span className="text-gray-600 dark:text-neutral-400">
+                  {item.item_name}
+                </span>
+              </div>
+            )}
+            {item.unit && (
+              <div className="flex">
+                <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
+                  単位:
+                </span>
+                <span className="text-gray-600 dark:text-neutral-400">
+                  {item.unit}
+                </span>
+              </div>
+            )}
+            {item.ranking_key && (
+              <div className="flex">
+                <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
+                  ランキング:
+                </span>
+                <span className="text-indigo-600 dark:text-indigo-400 font-mono text-xs bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded">
+                  {item.ranking_key}
+                </span>
+              </div>
+            )}
             <div className="flex">
               <span className="font-medium text-gray-700 dark:text-neutral-300 w-20 flex-shrink-0">
                 保存日時:
               </span>
               <span className="text-gray-600 dark:text-neutral-400">
-                {formatDate(item.savedAt)}
+                {formatDate(item.created_at)}
               </span>
             </div>
           </div>

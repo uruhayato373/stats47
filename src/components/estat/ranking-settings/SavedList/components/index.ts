@@ -1,4 +1,1 @@
-export {
-  default as SavedListItem,
-  type SavedMetadataItem,
-} from "./SavedListItem";
+export { default as SavedListItem } from "./SavedListItem";
