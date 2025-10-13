@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle, Database } from "lucide-react";
 import ColorSchemeSelector from "@/components/common/ColorSchemeSelector";
-import { EstatRankingClient } from "@/components/ranking/EstatRanking/EstatRankingClient";
+import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
 import { EstatPrefectureRankingDisplayProps } from "./types";
 
 export default function Display({
@@ -14,7 +14,7 @@ export default function Display({
 }: EstatPrefectureRankingDisplayProps) {
   const [mapOptions, setMapOptions] = useState({
     colorScheme: "interpolateBlues",
-    divergingMidpoint: "zero" as const,
+    divergingMidpoint: "zero" as "zero" | "mean" | "median" | number,
   });
 
   // ローディング状態
@@ -72,30 +72,24 @@ export default function Display({
         {/* カラースキーマセレクター */}
         <ColorSchemeSelector
           options={mapOptions}
-          onOptionsChange={setMapOptions}
+          onOptionsChange={(options) => setMapOptions(options)}
           className="mb-4"
         />
 
-        {/* EstatRankingClient（拡張版） */}
-        <EstatRankingClient
-          params={{
-            statsDataId: params.statsDataId,
-            cdCat01: params.categoryCode,
-          }}
-          subcategory={{
-            id: params.statsDataId,
-            name: "都道府県ランキング",
-            unit: "",
-          }}
-          options={mapOptions}
-          mapWidth={800}
-          mapHeight={600}
-          showVisualizationSettings={true}
-          onSaveSettings={async (settings) => {
-            // 設定保存のロジック（必要に応じて実装）
-            console.log("Settings saved:", settings);
-          }}
-        />
+        {/* RankingDataContainer（拡張版） */}
+        {params && (
+          <RankingDataContainer
+            statsDataId={params.statsDataId}
+            cdCat01={params.categoryCode || ""}
+            subcategory={{
+              id: params.statsDataId,
+              categoryId: "prefecture-ranking",
+              name: "都道府県ランキング",
+              unit: "",
+            }}
+            visualizationOptions={mapOptions}
+          />
+        )}
       </div>
     </div>
   );
