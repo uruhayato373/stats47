@@ -28,8 +28,8 @@ export default function EstatPrefectureRankingFetcher({
 }: EstatPrefectureRankingFetcherProps) {
   const styles = useStyles();
   const [formData, setFormData] = useState<FormData>({
-    statsDataId: "",
-    categoryCode: "",
+    statsDataId: "0000010101",
+    categoryCode: "A1101",
     timeCode: "",
   });
 
@@ -55,44 +55,34 @@ export default function EstatPrefectureRankingFetcher({
 
   const handleReset = () => {
     setFormData({
-      statsDataId: "",
-      categoryCode: "",
+      statsDataId: "0000010101",
+      categoryCode: "A1101",
       timeCode: "",
     });
   };
 
   return (
     <div className="space-y-4">
-      <div className="py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
-        <h4
-          className={`font-medium text-lg ${styles.text.primary} flex items-center gap-2`}
-        >
-          <Search className="w-5 h-5 text-indigo-600" />
-          <span className={styles.text.primary}>都道府県ランキング設定</span>
-        </h4>
-      </div>
-
       <form onSubmit={handleSubmit} className="p-4">
         <div className="space-y-4">
-          {/* 入力フィールド */}
+          {/* 入力フィールドとボタンを横一列に配置 */}
           <div className="flex items-end gap-4">
-            <div className="flex-1">
+            <div className="w-32">
               <InputField
                 name="statsDataId"
-                label="統計表ID *"
-                placeholder="例: 0003448368"
-                description="必須項目"
+                label="統計表ID"
+                placeholder="0000010101"
                 value={formData.statsDataId}
                 onChange={handleInputChange}
                 required
               />
             </div>
-            <div className="flex-1">
+
+            <div className="w-32">
               <InputField
                 name="categoryCode"
-                label="カテゴリコード"
-                placeholder="例: 01"
-                description="例: 01,02"
+                label="カテゴリ"
+                placeholder="A1101"
                 value={formData.categoryCode}
                 onChange={handleInputChange}
               />

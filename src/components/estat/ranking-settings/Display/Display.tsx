@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { AlertTriangle, Database } from "lucide-react";
-import ColorSchemeSelector from "@/components/common/ColorSchemeSelector";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
+import {
+  RankingItemSettings,
+  RankingItemSettingsData,
+} from "@/components/ranking-settings";
 import { DisplayProps } from "./types";
 
 export default function Display({
@@ -12,10 +15,45 @@ export default function Display({
   error,
   params,
 }: DisplayProps) {
-  const [mapOptions, setMapOptions] = useState({
-    colorScheme: "interpolateBlues",
-    divergingMidpoint: "zero" as "zero" | "mean" | "median" | number,
+  const [settings, setSettings] = useState<RankingItemSettingsData>({
+    map_color_scheme: "interpolateBlues",
+    map_diverging_midpoint: "zero",
+    ranking_direction: "desc",
+    conversion_factor: 1,
+    decimal_places: 0,
   });
+
+  const handleSaveSettings = async (newSettings: RankingItemSettingsData) => {
+    if (!params) return;
+
+    try {
+      const response = await fetch("/api/ranking-items/manual", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          statsDataId: params.statsDataId,
+          cdCat01: params.categoryCode || "",
+          ...newSettings,
+          visualizationSettings: {
+            map_color_scheme: newSettings.map_color_scheme,
+            map_diverging_midpoint: newSettings.map_diverging_midpoint,
+            ranking_direction: newSettings.ranking_direction,
+            conversion_factor: newSettings.conversion_factor,
+            decimal_places: newSettings.decimal_places,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("設定の保存に失敗しました");
+      }
+
+      setSettings(newSettings);
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      throw error;
+    }
+  };
 
   // ローディング状態
   if (loading) {
@@ -68,29 +106,35 @@ export default function Display({
 
   return (
     <div className="space-y-6">
-      <div className="p-4">
-        {/* カラースキーマセレクター */}
-        <ColorSchemeSelector
-          options={mapOptions}
-          onOptionsChange={(options) => setMapOptions(options)}
-          className="mb-4"
-        />
+      {/* ランキング項目設定 */}
+      <RankingItemSettings
+        statsDataId={params?.statsDataId}
+        cdCat01={params?.categoryCode}
+        initialSettings={settings}
+        onSave={handleSaveSettings}
+      />
 
-        {/* RankingDataContainer（拡張版） */}
-        {params && (
-          <RankingDataContainer
-            statsDataId={params.statsDataId}
-            cdCat01={params.categoryCode || ""}
-            subcategory={{
-              id: params.statsDataId,
-              categoryId: "prefecture-ranking",
-              name: "都道府県ランキング",
-              unit: "",
-            }}
-            visualizationOptions={mapOptions}
-          />
-        )}
-      </div>
+      {/* RankingDataContainer（データ表示） */}
+      {params && (
+        <RankingDataContainer
+          statsDataId={params.statsDataId}
+          cdCat01={params.categoryCode || ""}
+          subcategory={{
+            id: params.statsDataId,
+            categoryId: "prefecture-ranking",
+            name: "都道府県ランキング",
+            unit: "",
+          }}
+          visualizationOptions={{
+            colorScheme: settings.map_color_scheme,
+            divergingMidpoint: settings.map_diverging_midpoint as
+              | "zero"
+              | "mean"
+              | "median"
+              | number,
+          }}
+        />
+      )}
     </div>
   );
 }

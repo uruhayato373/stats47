@@ -14,16 +14,13 @@ export default function Header({
   onRefresh,
 }: HeaderProps) {
   return (
-    <div className="bg-white dark:bg-neutral-800">
+    <div className="bg-white dark:bg-neutral-800 border-b border-gray-200 dark:border-neutral-700">
       <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2">
         <div>
           <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
             <Map className="w-6 h-6 text-indigo-600" />
             ランキング設定
           </h1>
-          <p className="text-sm text-gray-600 dark:text-neutral-400 mt-1">
-            e-STAT統計データのランキング設定を管理
-          </p>
         </div>
 
         {/* アクションボタン */}

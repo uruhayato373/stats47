@@ -61,9 +61,9 @@ export default function RankingSettingsPage({
         {/* メインコンテンツとサイドバーを横並び */}
         <div className="flex flex-col lg:flex-row gap-4 min-h-full">
           {/* メイン作業エリア */}
-          <div className="flex-1 bg-white dark:bg-neutral-800 rounded-lg shadow-sm">
+          <div className="flex-1 bg-white dark:bg-neutral-800 ">
             {/* メインコンテンツ */}
-            <div className="p-4 md:p-6 space-y-6">
+            <div className="p-2 md:p-4 space-y-6">
               {/* データ取得フォーム */}
               <PrefectureRankingForm
                 onSubmit={handleFetchData}
