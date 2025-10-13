@@ -3,7 +3,7 @@
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { FormattedCategory } from "@/lib/estat/types";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
 
 interface EstatCategoriesTableProps {
   data: EstatStatsDataResponse;
@@ -15,7 +15,7 @@ export default function EstatCategoriesTable({
   if (!data) return null;
 
   // FormattedCategoryデータを取得
-  const formattedData = EstatStatsDataService.formatStatsData(data);
+  const formattedData = EstatDataFormatter.formatStatsData(data);
   const categories = formattedData.categories;
 
   const columns: TableColumn<FormattedCategory>[] = [

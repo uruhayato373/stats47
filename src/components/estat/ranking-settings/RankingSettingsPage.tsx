@@ -4,7 +4,7 @@
  * ランキング設定ページ - メインコンテナ
  *
  * データ取得フロー:
- * Fetcher → handleFetchData → currentParams更新 → Display.tsx内のuseEstatData発火
+ * Fetcher → handleFetchData → currentParams更新 → Display.tsx内のuseEstatStatsData発火
  * → /api/estat/data呼び出し → e-Stat API → データ表示
  *
  * 役割:
@@ -23,7 +23,8 @@ import {
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/estat/ranking-settings";
-import { PrefectureRankingParams, EstatMetaCategoryData } from "@/types/models";
+import { PrefectureRankingParams } from "@/types/models";
+import { EstatMetaCategoryData } from "@/lib/estat/types";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: EstatMetaCategoryData[];
@@ -43,10 +44,10 @@ export default function RankingSettingsPage({
   /**
    * Fetcherからのパラメータ受け取り処理
    * FetcherコンポーネントのonSubmitコールバックとして呼び出される
-   * currentParamsを更新することでDisplay.tsx内のuseEstatDataフックが自動的にデータ取得を開始
+   * currentParamsを更新することでDisplay.tsx内のuseEstatStatsDataフックが自動的にデータ取得を開始
    */
   const handleFetchData = (params: PrefectureRankingParams) => {
-    setCurrentParams(params); // パラメータ更新でDisplay.tsx内のuseEstatDataが発火
+    setCurrentParams(params); // パラメータ更新でDisplay.tsx内のuseEstatStatsDataが発火
   };
 
   /**
@@ -55,7 +56,7 @@ export default function RankingSettingsPage({
    */
   const handleRefresh = () => {
     if (currentParams) {
-      // パラメータを再設定することでDisplay.tsx内のuseEstatDataが再実行される
+      // パラメータを再設定することでDisplay.tsx内のuseEstatStatsDataが再実行される
       setCurrentParams({ ...currentParams });
     }
   };
@@ -70,33 +71,6 @@ export default function RankingSettingsPage({
       statsDataId: item.stats_data_id,
     };
     setCurrentParams(params); // パラメータ更新でデータ取得開始
-  };
-
-  /**
-   * ランキング設定保存処理
-   * Displayコンポーネントから設定変更時に呼び出される
-   * 現在は設定をコンソールに出力（将来的にestat_metainfoテーブルに保存予定）
-   */
-  const handleSaveSettings = async (newSettings: {
-    map_color_scheme?: string;
-    map_diverging_midpoint?: string;
-    ranking_direction?: string;
-    conversion_factor?: number;
-    decimal_places?: number;
-  }) => {
-    if (!currentParams) return;
-
-    try {
-      // 設定をコンソールに出力（将来的にestat_metainfoテーブルに保存予定）
-      console.log("Settings saved:", {
-        statsDataId: currentParams.statsDataId,
-        categoryCode: currentParams.categoryCode,
-        settings: newSettings,
-      });
-    } catch (error) {
-      console.error("Error saving settings:", error);
-      throw error;
-    }
   };
 
   return (
@@ -126,10 +100,7 @@ export default function RankingSettingsPage({
               />
 
               {/* データ表示エリア */}
-              <PrefectureRankingDisplay
-                params={currentParams}
-                onSettingsChange={handleSaveSettings}
-              />
+              <PrefectureRankingDisplay params={currentParams} />
             </div>
           </div>
 

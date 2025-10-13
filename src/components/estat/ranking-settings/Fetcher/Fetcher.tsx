@@ -7,7 +7,7 @@
  * 1. ユーザーが統計表IDとカテゴリを入力
  * 2. フォーム送信でパラメータオブジェクトを作成
  * 3. 親コンポーネント(RankingSettingsPage)のonSubmitコールバックを呼び出し
- * 4. 親コンポーネントでuseEstatDataフックがデータ取得を開始
+ * 4. 親コンポーネントでuseEstatStatsDataフックがデータ取得を開始
  */
 
 import { useState } from "react";

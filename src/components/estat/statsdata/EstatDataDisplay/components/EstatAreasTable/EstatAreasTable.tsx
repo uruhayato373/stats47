@@ -2,7 +2,7 @@
 
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { FormattedArea } from "@/lib/estat/types";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -14,7 +14,7 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const formattedData = EstatStatsDataService.formatStatsData(data);
+  const formattedData = EstatDataFormatter.formatStatsData(data);
   const areas = formattedData.areas;
 
   const columns: TableColumn<FormattedArea>[] = [

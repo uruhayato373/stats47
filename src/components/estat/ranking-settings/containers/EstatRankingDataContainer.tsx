@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 import { YearSelector } from "@/components/ranking/ui/YearSelector";
@@ -14,7 +14,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
 
 /**
  * EstatRankingDataContainerのプロパティ
@@ -57,9 +57,9 @@ export const EstatRankingDataContainer: React.FC<
   // CLASS_OBJ_TIME.CLASSから年度情報を取得し、降順でソート
   const availableYears = useMemo(() => {
     try {
-      const formattedData = EstatStatsDataService.formatStatsData(rawData);
+      const formattedData = EstatDataFormatter.formatStatsData(rawData);
       const years = formattedData.years.map(
-        (year: { name: string }) => year.name
+        (year: FormattedYear) => year.timeName
       );
 
       // 年度名から4桁の年度を抽出
@@ -103,8 +103,8 @@ export const EstatRankingDataContainer: React.FC<
     if (!selectedYear) return [];
 
     try {
-      // EstatStatsDataServiceを使用してデータを変換
-      const formattedEstatData = EstatStatsDataService.formatStatsData(rawData);
+      // EstatDataFormatterを使用してデータを変換
+      const formattedEstatData = EstatDataFormatter.formatStatsData(rawData);
 
       // 選択された年度のデータのみをフィルタリング
       const filteredValues = formattedEstatData.values.filter((value) => {

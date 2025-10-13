@@ -2,28 +2,14 @@
 
 import { AlertTriangle, Database } from "lucide-react";
 import { EstatRankingDataContainer } from "@/components/estat/ranking-settings/containers";
-import { useEstatData } from "@/hooks/ranking/useEstatData";
+import { useEstatStatsData } from "@/hooks/ranking/useEstatStatsData";
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { DisplayProps } from "./types";
 
 export default function Display({ params, onSettingsChange }: DisplayProps) {
-  // ===== データフロー概要 =====
-  // 1. useEstatData()でe-Stat APIから生データ(EstatStatsDataResponse)を取得
-  // 2. EstatRankingDataContainerに生データを渡して表示
-  // 3. データ保存は手動で実行（自動保存は削除）
-
   // ===== Step 1: e-Stat APIからデータ取得 =====
-  // useEstatData()フックを使用してe-Stat APIから統計データを取得
-  const { data, error, isLoading } = useEstatData(params);
-
-  // デバッグ情報を追加
-  console.log("Display.tsx - Debug Info:", {
-    params,
-    isLoading,
-    error,
-    hasData: !!data,
-    dataKeys: data ? Object.keys(data) : null,
-  });
+  // useEstatStatsData()フックを使用してe-Stat APIから統計データを取得
+  const { data, error, isLoading } = useEstatStatsData(params);
 
   // パラメータがnullの場合はデータ取得前状態を表示
   if (!params) {
@@ -94,36 +80,13 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
     <div className="space-y-6">
       {/* ===== Step 2: EstatRankingDataContainerでデータ表示 ===== */}
       {/* e-Stat生データをEstatRankingDataContainerに渡して地図・テーブル・統計を表示 */}
-      {params && data && params.categoryCode && (
+      {data && params?.categoryCode && (
         <EstatRankingDataContainer
           rawData={data as EstatStatsDataResponse}
           statsDataId={params.statsDataId}
           categoryCode={params.categoryCode}
           onSettingsChange={onSettingsChange}
         />
-      )}
-
-      {/* デバッグ情報: 条件分岐の確認 */}
-      {!params && (
-        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-          <p className="text-yellow-800 dark:text-yellow-200">
-            Debug: params is null
-          </p>
-        </div>
-      )}
-      {!data && (
-        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-          <p className="text-yellow-800 dark:text-yellow-200">
-            Debug: data is null
-          </p>
-        </div>
-      )}
-      {params && !params.categoryCode && (
-        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-          <p className="text-yellow-800 dark:text-yellow-200">
-            Debug: categoryCode is missing
-          </p>
-        </div>
       )}
     </div>
   );

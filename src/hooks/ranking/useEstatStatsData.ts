@@ -1,5 +1,5 @@
 /**
- * e-Statデータ取得カスタムフック
+ * e-Stat統計データ取得カスタムフック
  *
  * useSWRを使用した自動データ取得:
  * - 自動キャッシング（1分間）
@@ -36,7 +36,7 @@ function buildQueryString(params: PrefectureRankingParams): string {
 }
 
 /**
- * e-Stat APIからデータを取得するカスタムフック（useSWR使用）
+ * e-Stat APIから統計データを取得するカスタムフック（useSWR使用）
  *
  * パラメータが変更されると自動的にAPI呼び出しを実行
  * キャッシング、リトライ、エラーハンドリングを自動化
@@ -44,12 +44,12 @@ function buildQueryString(params: PrefectureRankingParams): string {
  * @param params - e-Stat APIリクエストパラメータ
  * @returns データ、エラー、ローディング状態、再取得関数
  */
-export function useEstatData(params: PrefectureRankingParams | null) {
+export function useEstatStatsData(params: PrefectureRankingParams | null) {
   // SWRキー生成 - パラメータがnullの場合はデータ取得を無効化
   const key = params ? `/api/estat/data?${buildQueryString(params)}` : null;
 
   // デバッグ情報を追加
-  console.log("useEstatData - Debug Info:", {
+  console.log("useEstatStatsData - Debug Info:", {
     params,
     key,
     queryString: params ? buildQueryString(params) : null,
@@ -72,12 +72,12 @@ export function useEstatData(params: PrefectureRankingParams | null) {
         return true;
       },
       onSuccess: (data) => {
-        console.log("useEstatData - Success:", {
+        console.log("useEstatStatsData - Success:", {
           dataKeys: data ? Object.keys(data) : null,
         });
       },
       onError: (error) => {
-        console.log("useEstatData - Error:", error);
+        console.log("useEstatStatsData - Error:", error);
       },
     }
   );
