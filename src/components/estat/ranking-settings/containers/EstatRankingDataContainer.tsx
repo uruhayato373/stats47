@@ -14,7 +14,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
 
 /**
  * EstatRankingDataContainerのプロパティ
@@ -41,14 +41,6 @@ interface EstatRankingDataContainerProps {
 export const EstatRankingDataContainer: React.FC<
   EstatRankingDataContainerProps
 > = ({ rawData, statsDataId, categoryCode, onSettingsChange }) => {
-  // デバッグ情報を追加
-  console.log("EstatRankingDataContainer - Debug Info:", {
-    rawDataKeys: rawData ? Object.keys(rawData) : null,
-    statsDataId,
-    categoryCode,
-    hasRawData: !!rawData,
-  });
-
   // ===== 状態管理 =====
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -57,7 +49,7 @@ export const EstatRankingDataContainer: React.FC<
   // CLASS_OBJ_TIME.CLASSから年度情報を取得し、降順でソート
   const availableYears = useMemo(() => {
     try {
-      const formattedData = EstatDataFormatter.formatStatsData(rawData);
+      const formattedData = EstatStatsDataService.formatStatsData(rawData);
       const years = formattedData.years.map(
         (year: FormattedYear) => year.timeName
       );
@@ -74,13 +66,8 @@ export const EstatRankingDataContainer: React.FC<
       const sortedYears = [...new Set(extractedYears)].sort(
         (a, b) => parseInt(b) - parseInt(a)
       );
-      console.log("EstatRankingDataContainer - Available Years:", sortedYears);
       return sortedYears;
-    } catch (error) {
-      console.error(
-        "EstatRankingDataContainer - Error extracting years:",
-        error
-      );
+    } catch {
       return [];
     }
   }, [rawData]);
@@ -103,8 +90,8 @@ export const EstatRankingDataContainer: React.FC<
     if (!selectedYear) return [];
 
     try {
-      // EstatDataFormatterを使用してデータを変換
-      const formattedEstatData = EstatDataFormatter.formatStatsData(rawData);
+      // EstatStatsDataServiceを使用してデータを変換
+      const formattedEstatData = EstatStatsDataService.formatStatsData(rawData);
 
       // 選択された年度のデータのみをフィルタリング
       const filteredValues = formattedEstatData.values.filter((value) => {
@@ -126,11 +113,7 @@ export const EstatRankingDataContainer: React.FC<
         timeName: value.timeName,
         rank: 0, // ランクは後で計算
       }));
-    } catch (error) {
-      console.error(
-        "EstatRankingDataContainer - Error formatting data:",
-        error
-      );
+    } catch {
       return [];
     }
   }, [rawData, selectedYear]);
@@ -158,9 +141,6 @@ export const EstatRankingDataContainer: React.FC<
   // ===== ローディング状態 =====
   // 年度データが抽出できない場合のローディング表示
   if (availableYears.length === 0) {
-    console.log(
-      "EstatRankingDataContainer - No years found, showing loading..."
-    );
     return (
       <div className="p-8 text-center">
         <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>

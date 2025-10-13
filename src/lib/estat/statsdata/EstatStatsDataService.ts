@@ -12,7 +12,6 @@ import {
   FormattedEstatData,
 } from "@/lib/estat/types/formatted";
 import { EstatMetaCategoryData } from "@/lib/estat/types";
-import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
 
 /**
  * e-STAT統計データサービスクラス
@@ -205,25 +204,13 @@ export class EstatStatsDataService {
   }
 
   /**
-   * 利用可能な年度一覧を取得（リレーショナルキャッシュ対応）
+   * 利用可能な年度一覧を取得
    */
   static async getAvailableYears(
     statsDataId: string,
     categoryCode: string
   ): Promise<string[]> {
     try {
-      // 1. リレーショナルキャッシュから年度一覧を取得
-      const cachedYears = await EstatRelationalCacheService.getAvailableYears(
-        statsDataId,
-        categoryCode
-      );
-
-      if (cachedYears && cachedYears.length > 0) {
-        console.log(`年度一覧キャッシュヒット: ${statsDataId}_${categoryCode}`);
-        return cachedYears;
-      }
-
-      // 2. キャッシュミス: APIから取得
       console.log(`年度一覧API取得: ${statsDataId}_${categoryCode}`);
       const response = await this.getAndFormatStatsData(statsDataId, {
         categoryFilter: categoryCode,
@@ -256,7 +243,7 @@ export class EstatStatsDataService {
   }
 
   /**
-   * 都道府県データを年度別に取得（リレーショナルキャッシュ対応）
+   * 都道府県データを年度別に取得
    * 全国データ(areaCode=00000)を除外した都道府県データのみを返す
    */
   static async getPrefectureDataByYear(
@@ -266,21 +253,6 @@ export class EstatStatsDataService {
     limit: number = 100000
   ): Promise<FormattedValue[]> {
     try {
-      // 1. リレーショナルキャッシュからデータを取得
-      const cachedData = await EstatRelationalCacheService.getRankingData(
-        statsDataId,
-        categoryCode,
-        yearCode
-      );
-
-      if (cachedData && cachedData.length > 0) {
-        console.log(
-          `都道府県データキャッシュヒット: ${statsDataId}_${categoryCode}_${yearCode}`
-        );
-        return cachedData;
-      }
-
-      // 2. キャッシュミス: APIから取得
       console.log(
         `都道府県データAPI取得: ${statsDataId}_${categoryCode}_${yearCode}`
       );
@@ -297,21 +269,6 @@ export class EstatStatsDataService {
 
       if (prefectureValues.length === 0) {
         throw new Error("都道府県データが見つかりませんでした");
-      }
-
-      // 3. 取得したデータをキャッシュに保存（同期）
-      try {
-        await EstatRelationalCacheService.saveRankingData(
-          statsDataId,
-          categoryCode,
-          yearCode,
-          prefectureValues
-        );
-        console.log(
-          `キャッシュ保存完了: ${statsDataId}_${categoryCode}_${yearCode}`
-        );
-      } catch (error) {
-        console.warn("キャッシュ保存に失敗:", error);
       }
 
       return prefectureValues;
