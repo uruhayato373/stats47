@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { estatAPI } from "@/services/estat-api";
 import { StackedBarChart } from "@/components/d3/StackedBarChart";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/types/models/estat";
 
 interface EstatParams {
   statsDataId: string;

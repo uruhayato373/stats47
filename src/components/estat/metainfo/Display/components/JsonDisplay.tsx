@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Download, CheckCircle } from "lucide-react";
-import { EstatMetaInfoResponse } from "@/lib/estat/types";
+import { EstatMetaInfoResponse } from "@/types/models/estat";
 
 interface JsonDisplayProps {
   data: EstatMetaInfoResponse;

@@ -8,7 +8,7 @@
  */
 
 import { createD1Database } from "@/lib/d1-client";
-import { FormattedValue } from "@/lib/estat/types/formatted";
+import { FormattedValue } from "@/types/models/estat/formatted";
 
 export class EstatRelationalCacheService {
   /**

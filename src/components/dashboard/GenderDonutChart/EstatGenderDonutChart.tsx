@@ -5,7 +5,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import { RefreshCw, AlertCircle } from "lucide-react";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { GetStatsDataParams } from "@/types/models/estat/parameters";
 
 export interface EstatGenderDonutChartProps {
   /**

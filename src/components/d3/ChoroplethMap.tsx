@@ -11,7 +11,7 @@ import {
   Geometry,
   GeoJsonProperties,
 } from "geojson";
-import { FormattedValue } from "@/lib/estat/types";
+import { FormattedValue } from "@/types/models/estat";
 import { PREFECTURE_MAP } from "@/lib/prefecture";
 
 export interface MapVisualizationOptions {

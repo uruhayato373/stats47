@@ -10,7 +10,7 @@ import {
 } from "@/components/estat/metainfo";
 import { EstatMetaInfoSidebar } from "@/components/estat/metainfo";
 import { estatAPI } from "@/services/estat-api";
-import { EstatMetaInfoResponse } from "@/lib/estat/types";
+import { EstatMetaInfoResponse } from "@/types/models/estat";
 import { SavedEstatMetainfoItem } from "@/types/models/estat";
 
 interface EstatMetainfoPageProps {

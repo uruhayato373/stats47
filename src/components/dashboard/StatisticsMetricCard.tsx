@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Sparkline, SparklineDataPoint } from "@/components/d3/Sparkline";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { GetStatsDataParams } from "@/types/models/estat/parameters";
 import { RefreshCw, AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
 export interface StatisticsMetricCardProps {

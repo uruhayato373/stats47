@@ -4,7 +4,7 @@
  * TODO: Implement actual StatsListManager functionality
  */
 
-import { GetStatsListParams } from "@/lib/estat/types";
+import { GetStatsListParams } from "@/types/models/estat";
 
 export type StatsListParams = GetStatsListParams;
 

@@ -23,7 +23,7 @@ import {
   GetStatsListParams,
   EstatAPIError,
   APIResponseError,
-} from "@/lib/estat/types";
+} from "@/types/models/estat";
 import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "@/lib/constants";
 
 /**

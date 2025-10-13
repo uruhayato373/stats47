@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/types/models/estat";
 
 export async function POST(request: NextRequest) {
   try {

@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
 import { SubcategoryData } from "@/types/visualization/choropleth";
-import { FormattedValue } from "@/lib/estat/types";
+import { FormattedValue } from "@/types/models/estat";
 
 type SortField = "rank" | "name" | "value";
 type SortOrder = "asc" | "desc";

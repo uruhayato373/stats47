@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { FormattedValue } from '@/lib/estat/types/formatted';
+import { FormattedValue } from '@/types/models/estat/formatted';
 
 export interface StatisticsSummaryProps {
   data: FormattedValue[] | null;

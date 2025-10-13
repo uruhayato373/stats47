@@ -4,7 +4,7 @@ import { AlertTriangle, Database, BarChart3 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
 import { useEstatData } from "@/hooks/ranking/useEstatData";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/types/models/estat";
 import { DisplayProps } from "./types";
 
 export default function Display({ params, onSettingsChange }: DisplayProps) {

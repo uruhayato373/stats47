@@ -2,7 +2,7 @@
  * e-stat APIレスポンスからコロプレス地図表示用データへの変換処理
  */
 
-import { EstatStatsDataResponse, FormattedValue } from "@/lib/estat/types";
+import { EstatStatsDataResponse, FormattedValue } from "@/types/models/estat";
 
 interface SubcategoryData {
   id: string;

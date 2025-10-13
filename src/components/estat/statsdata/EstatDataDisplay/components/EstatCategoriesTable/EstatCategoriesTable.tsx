@@ -1,7 +1,7 @@
 "use client";
 
-import { EstatStatsDataResponse } from "@/lib/estat/types";
-import { FormattedCategory } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/types/models/estat";
+import { FormattedCategory } from "@/types/models/estat";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { EstatStatsDataService } from "@/lib/estat/statsdata";
 

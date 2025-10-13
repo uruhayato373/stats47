@@ -3,15 +3,15 @@ import {
   EstatStatsDataResponse,
   EstatStatisticalData,
   EstatValue,
-} from "../types";
+} from "@/types/models/estat";
 import {
   FormattedArea,
   FormattedCategory,
   FormattedYear,
   FormattedValue,
   FormattedEstatData,
-} from "../types";
-import { EstatMetaCategoryData } from "@/lib/estat/types";
+} from "@/types/models/estat/formatted";
+import { EstatMetaCategoryData } from "@/types/models/estat";
 import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
 
 /**
