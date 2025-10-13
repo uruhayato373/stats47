@@ -173,14 +173,12 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
             <div>
               <StatisticsSummary
                 data={data.map((item) => ({
-                  id: 0, // 仮のID
                   rankingKey: "", // ランキングキー
                   areaCode: item.areaCode,
                   areaName: item.areaName,
                   timeCode: item.timeCode,
                   timeName: item.timeName,
-                  value: item.value,
-                  numericValue: item.numericValue ?? undefined,
+                  value: item.value ?? 0, // valueをそのまま使用
                   unit: item.unit ?? undefined,
                   rank: item.rank,
                 }))}

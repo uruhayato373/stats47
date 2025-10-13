@@ -42,9 +42,7 @@ export interface FormattedYear {
  * 整形された値情報
  */
 export interface FormattedValue {
-  value: string;
-  numericValue: number | null;
-  displayValue: string;
+  value: number;
   unit: string | null;
   areaCode: string;
   areaName: string;

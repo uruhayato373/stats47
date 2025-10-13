@@ -106,7 +106,7 @@ export class EstatStatsDataService {
     const values = this.formatValues(data, areas, categories, years);
 
     // メタデータ計算
-    const validValues = values.filter((v) => v.numericValue !== null).length;
+    const validValues = values.filter((v) => v.value !== null).length;
     const metadata = {
       processedAt: new Date().toISOString(),
       totalRecords: values.length,
@@ -264,7 +264,7 @@ export class EstatStatsDataService {
 
       // 都道府県データのみをフィルタリング
       const prefectureValues = response.values.filter(
-        (v) => v.areaCode && v.areaCode !== "00000" && v.numericValue !== null
+        (v) => v.areaCode && v.areaCode !== "00000" && v.value !== null
       );
 
       if (prefectureValues.length === 0) {
@@ -406,9 +406,7 @@ export class EstatStatsDataService {
       const unit = firstCategory?.unit || null;
 
       return {
-        value: rawValue,
-        numericValue,
-        displayValue: this.formatDisplayValue(numericValue, rawValue, unit),
+        value: numericValue || 0,
         unit,
         areaCode,
         areaName: areaInfo?.areaName || "",
@@ -442,22 +440,6 @@ export class EstatStatsDataService {
     const parsed = parseFloat(cleanValue);
 
     return isNaN(parsed) ? null : parsed;
-  }
-
-  /**
-   * 表示用の値をフォーマット
-   */
-  private static formatDisplayValue(
-    numericValue: number | null,
-    originalValue: string,
-    unit: string | null
-  ): string {
-    if (numericValue === null) {
-      return originalValue || "-";
-    }
-
-    const formatted = numericValue.toLocaleString("ja-JP");
-    return unit ? `${formatted}${unit}` : formatted;
   }
 
   /**

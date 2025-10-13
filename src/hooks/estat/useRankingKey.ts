@@ -17,7 +17,9 @@ export function useRankingKey(statsDataId?: string, categoryCode?: string) {
   );
 
   return {
-    rankingKey: data?.ranking_key || null,
+    // ranking_item が存在する場合は ranking_item.ranking_key を使用
+    // 存在しない場合は data.ranking_key を使用
+    rankingKey: data?.ranking_item?.ranking_key || data?.ranking_key || null,
     rankingItem: data?.ranking_item || null,
     isLoading,
     error,

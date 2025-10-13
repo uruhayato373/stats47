@@ -2,14 +2,14 @@
  * ランキング値の表示用ヘルパー関数
  */
 export function formatRankingValueDisplay(
-  numericValue: number | undefined,
+  value: number | undefined,
   unit: string | undefined
 ): string {
-  if (numericValue === undefined || numericValue === null) {
+  if (value === undefined || value === null) {
     return "データなし";
   }
 
-  const formattedValue = numericValue.toLocaleString();
+  const formattedValue = value.toLocaleString();
   return unit ? `${formattedValue} ${unit}` : formattedValue;
 }
 
@@ -18,12 +18,6 @@ export function formatRankingValueDisplay(
  * データベースのranking_valuesテーブルに対応
  */
 export interface RankingValue {
-  /**
-   * ランキング値の一意なID
-   * データベースの主キー
-   */
-  id: number;
-
   /**
    * ランキングキー（一意識別子）
    * ranking_itemsテーブルのranking_keyと関連付けられる
@@ -55,16 +49,10 @@ export interface RankingValue {
   timeName?: string;
 
   /**
-   * 値（文字列）
-   * e-Stat APIから取得した生の値
-   */
-  value: string;
-
-  /**
-   * 数値（オプショナル）
+   * 値（数値）
    * 計算やソート用に変換された数値
    */
-  numericValue?: number;
+  value: number;
 
   /**
    * 単位（オプショナル）
@@ -77,20 +65,6 @@ export interface RankingValue {
    * 都道府県間での順位
    */
   rank?: number;
-
-  /**
-   * 作成日時（オプショナル）
-   * レコードが作成された日時（ISO 8601形式）
-   * データベースから取得時のみ設定される
-   */
-  createdAt?: string;
-
-  /**
-   * 更新日時（オプショナル）
-   * レコードが最後に更新された日時（ISO 8601形式）
-   * データベースから取得時のみ設定される
-   */
-  updatedAt?: string;
 }
 
 /**
@@ -98,12 +72,6 @@ export interface RankingValue {
  * データベースのranking_itemsテーブルに対応
  */
 export interface RankingItem {
-  /**
-   * ランキング項目の一意なID
-   * データベースの主キー
-   */
-  id: number;
-
   /**
    * ランキングキー（一意識別子）
    * estat_metainfoテーブルのranking_keyと関連付けられる
@@ -175,20 +143,6 @@ export interface RankingItem {
    * このランキング項目が有効かどうか
    */
   isActive: boolean;
-
-  /**
-   * 作成日時（オプショナル）
-   * レコードが作成された日時（ISO 8601形式）
-   * データベースから取得時のみ設定される
-   */
-  createdAt?: string;
-
-  /**
-   * 更新日時（オプショナル）
-   * レコードが最後に更新された日時（ISO 8601形式）
-   * データベースから取得時のみ設定される
-   */
-  updatedAt?: string;
 }
 
 /**
@@ -252,22 +206,16 @@ export interface RankingValueDB {
   time_name?: string;
 
   /**
-   * 値（文字列）
-   * e-Stat APIから取得した生の値
-   */
-  value: string;
-
-  /**
-   * 数値（オプショナル）
+   * 値（数値）
    * 計算やソート用に変換された数値
    */
-  numeric_value?: number;
+  value: number;
 
   /**
-   * 表示用値（オプショナル）
-   * ユーザーに表示するための整形された値
+   * 単位（オプショナル）
+   * データの単位（例: "人", "千円", "%"）
    */
-  display_value?: string;
+  unit?: string;
 
   /**
    * ランク（オプショナル）

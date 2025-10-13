@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
-import { YearSelector } from "@/components/common";
+import { EstatYearSelector } from "@/components/estat/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { RankingItem } from "@/types/models/ranking";
 
 /**
  * EstatRankingDataContainerのプロパティ
@@ -22,22 +23,7 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataServi
 interface EstatRankingDataContainerProps {
   rawData: EstatStatsDataResponse; // e-Stat生データ
   rankingKey?: string | null; // ランキングキー（オプショナル）
-  rankingItem?: {
-    id: number;
-    name: string;
-    description: string;
-    unit: string;
-    label: string;
-    data_source_id: string;
-    map_color_scheme: string;
-    map_diverging_midpoint: string;
-    ranking_direction: string;
-    conversion_factor: number;
-    decimal_places: number;
-    is_active: boolean;
-    created_at: string;
-    updated_at: string;
-  } | null; // ranking_items の設定（オプショナル）
+  rankingItem?: RankingItem[] | null; // ranking_items の設定（オプショナル）
   statsDataId: string; // 統計表ID
   categoryCode: string; // カテゴリコード
   onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>; // 設定変更コールバック
@@ -71,30 +57,14 @@ export const EstatRankingDataContainer: React.FC<
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // ===== データ変換 =====
-  // Step 1: e-Stat APIレスポンスから利用可能な年度を抽出
-  // CLASS_OBJ_TIME.CLASSから年度情報を取得し、降順でソート
-  const availableYears = useMemo(() => {
+  // Step 1: e-Stat APIレスポンスをフォーマット
+  // EstatStatsDataService を使用してデータを変換
+  const formattedEstatData = useMemo(() => {
     try {
-      const formattedData = EstatStatsDataService.formatStatsData(rawData);
-      const years = formattedData.years.map(
-        (year: FormattedYear) => year.timeName
-      );
-
-      // 年度名から4桁の年度を抽出
-      const extractedYears: string[] = [];
-      years.forEach((yearName: string) => {
-        const yearMatch = yearName.match(/(\d{4})/);
-        if (yearMatch) {
-          extractedYears.push(yearMatch[1]);
-        }
-      });
-
-      const sortedYears = [...new Set(extractedYears)].sort(
-        (a, b) => parseInt(b) - parseInt(a)
-      );
-      return sortedYears;
-    } catch {
-      return [];
+      return EstatStatsDataService.formatStatsData(rawData);
+    } catch (error) {
+      console.error("データフォーマットエラー:", error);
+      return { years: [], values: [], areas: [], categories: [] };
     }
   }, [rawData]);
 
@@ -105,10 +75,15 @@ export const EstatRankingDataContainer: React.FC<
   // Step 3: 年度が取得できたら最初の年度を自動選択
   // 最新年度をデフォルト選択として設定
   useEffect(() => {
-    if (availableYears.length > 0 && !selectedYear) {
-      setSelectedYear(availableYears[0]);
+    if (formattedEstatData.years.length > 0 && !selectedYear) {
+      // FormattedYear から年度を抽出
+      const firstYear =
+        formattedEstatData.years[0].timeName.match(/(\d{4})/)?.[1];
+      if (firstYear) {
+        setSelectedYear(firstYear);
+      }
     }
-  }, [availableYears, selectedYear]);
+  }, [formattedEstatData.years, selectedYear]);
 
   // Step 4: 選択された年度のデータをFormattedValue[]に変換
   // transformEstatToFormattedValues()を使用してe-Stat生データを都道府県別データに変換
@@ -116,9 +91,6 @@ export const EstatRankingDataContainer: React.FC<
     if (!selectedYear) return [];
 
     try {
-      // EstatStatsDataServiceを使用してデータを変換
-      const formattedEstatData = EstatStatsDataService.formatStatsData(rawData);
-
       // 選択された年度のデータのみをフィルタリング
       const filteredValues = formattedEstatData.values.filter((value) => {
         // 年度フィルタ + 全国データ(00000)を除外 + 数値データのみ
@@ -126,15 +98,13 @@ export const EstatRankingDataContainer: React.FC<
           value.timeName &&
           value.timeName.includes(selectedYear) &&
           value.areaCode !== "00000" &&
-          value.numericValue !== null
+          value.value !== null
         );
       });
 
       // FormattedValue[]に変換（RankingValue[]に変換する前の段階）
       const mappedValues = filteredValues.map((value) => ({
-        value: value.value,
-        numericValue: value.numericValue,
-        displayValue: value.displayValue,
+        value: value.value || 0, // valueをそのまま使用
         unit: value.unit,
         areaCode: value.areaCode,
         areaName: value.areaName,
@@ -155,9 +125,9 @@ export const EstatRankingDataContainer: React.FC<
         } else {
           // より新しいデータ（数値が大きい）を優先
           if (
-            current.numericValue &&
-            acc[existingIndex].numericValue &&
-            current.numericValue > acc[existingIndex].numericValue
+            current.value &&
+            acc[existingIndex].value &&
+            current.value > acc[existingIndex].value
           ) {
             acc[existingIndex] = current;
           }
@@ -169,7 +139,7 @@ export const EstatRankingDataContainer: React.FC<
     } catch {
       return [];
     }
-  }, [rawData, selectedYear]);
+  }, [formattedEstatData.values, selectedYear]);
 
   // ===== サブカテゴリ情報の構築 =====
   // 表示コンポーネント用のサブカテゴリ情報
@@ -193,7 +163,7 @@ export const EstatRankingDataContainer: React.FC<
 
   // ===== ローディング状態 =====
   // 年度データが抽出できない場合のローディング表示
-  if (availableYears.length === 0) {
+  if (formattedEstatData.years.length === 0) {
     return (
       <div className="p-8 text-center">
         <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>
@@ -214,8 +184,8 @@ export const EstatRankingDataContainer: React.FC<
       <RankingHeader
         title={`${subcategory.name}ランキング`}
         yearSelector={
-          <YearSelector
-            years={availableYears}
+          <EstatYearSelector
+            years={formattedEstatData.years}
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
@@ -258,14 +228,12 @@ export const EstatRankingDataContainer: React.FC<
             <div>
               <StatisticsSummary
                 data={formattedData.map((item) => ({
-                  id: 0, // 仮のID
                   rankingKey: statsDataId,
                   areaCode: item.areaCode,
                   areaName: item.areaName,
                   timeCode: item.timeCode,
                   timeName: item.timeName,
-                  value: item.value,
-                  numericValue: item.numericValue ?? undefined,
+                  value: item.value ?? 0,
                   unit: item.unit ?? undefined,
                   rank: item.rank,
                 }))}

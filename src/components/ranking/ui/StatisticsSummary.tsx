@@ -37,7 +37,7 @@ export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
     }
 
     const values = data
-      .map((v) => v.numericValue)
+      .map((v) => v.value)
       .filter((v): v is number => v !== null && v !== undefined && !isNaN(v));
 
     if (values.length === 0) {

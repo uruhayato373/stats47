@@ -103,7 +103,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
         // データの結合 - 全国データ（areaCode=00000）を除外
         const prefectureData = new Map<string, FormattedValue>();
         data.forEach((d) => {
-          if (d.areaCode && d.areaCode !== "00000" && d.numericValue !== null) {
+          if (d.areaCode && d.areaCode !== "00000" && d.value !== null) {
             // areaCodeを2桁に正規化（先頭の0を削除してから2桁にパディング）
             const prefCode = d.areaCode.replace(/^0+/, "").padStart(2, "0");
             prefectureData.set(prefCode, d);
@@ -129,8 +129,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
         // カラースケールを生成
         const validValues = data
-          .filter((d) => d.areaCode !== "00000" && d.numericValue !== null)
-          .map((d) => d.numericValue!);
+          .filter((d) => d.areaCode !== "00000" && d.value !== null)
+          .map((d) => d.value!);
 
         if (validValues.length === 0) {
           throw new Error("有効なデータがありません");
@@ -212,8 +212,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
               }
             }
 
-            if (dataPoint && dataPoint.numericValue !== null) {
-              return colorScale(dataPoint.numericValue);
+            if (dataPoint && dataPoint.value !== null) {
+              return colorScale(dataPoint.value);
             }
             return "#e5e5e5"; // データがない場合は灰色
           })
@@ -237,7 +237,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             }
 
             const value = formatRankingValueDisplay(
-              dataPoint?.numericValue ?? undefined,
+              dataPoint?.value ?? undefined,
               dataPoint?.unit ?? undefined
             );
 

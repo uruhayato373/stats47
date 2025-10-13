@@ -36,7 +36,7 @@ export const PrefectureDataTableClient: React.FC<
           comparison = a.areaName.localeCompare(b.areaName);
           break;
         case "value":
-          comparison = (a.numericValue || 0) - (b.numericValue || 0);
+          comparison = (a.value || 0) - (b.value || 0);
           break;
       }
 
@@ -170,7 +170,7 @@ export const PrefectureDataTableClient: React.FC<
                         item.rank || index + 1
                       )}`}
                     >
-                      {formatValue(item.numericValue, subcategory)}
+                      {formatValue(item.value, subcategory)}
                     </span>
                   </td>
                 </tr>
@@ -184,14 +184,6 @@ export const PrefectureDataTableClient: React.FC<
       <div className="px-4 py-3 bg-gray-50 dark:bg-neutral-700 rounded-b-lg">
         <div className="flex justify-between items-center text-xs text-gray-500 dark:text-neutral-400">
           <span>単位: {subcategory.unit}</span>
-          <span>
-            データ種別:{" "}
-            {subcategory.dataType === "numerical"
-              ? "数値"
-              : subcategory.dataType === "percentage"
-              ? "割合"
-              : "率"}
-          </span>
         </div>
       </div>
     </div>
