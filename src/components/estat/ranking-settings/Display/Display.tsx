@@ -12,13 +12,14 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
   // useEstatStatsData()フックを使用してe-Stat APIから統計データを取得
   const { data, error, isLoading } = useEstatStatsData(params);
 
-  // ===== Step 1.5: ranking_key を取得 =====
-  // useSWR を使ったカスタムフックで ranking_key を取得（自動キャッシュ・再検証）
-  const { rankingKey } = useRankingKey(
+  // ===== Step 1.5: ranking_key と ranking_items 設定を取得 =====
+  // useSWR を使ったカスタムフックで ranking_key と ranking_items 設定を取得（自動キャッシュ・再検証）
+  const { rankingKey, rankingItem } = useRankingKey(
     params?.statsDataId,
     params?.categoryCode
   );
   console.log("rankingKey", rankingKey);
+  console.log("rankingItem", rankingItem);
 
   // パラメータがnullまたはデータなしの場合はデータ取得前状態を表示
   if (!params || !data) {
@@ -77,6 +78,7 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
           statsDataId={params.statsDataId}
           categoryCode={params.categoryCode}
           rankingKey={rankingKey} // ranking_key を渡す
+          rankingItem={rankingItem} // ranking_items 設定を渡す
           onSettingsChange={onSettingsChange}
         />
       )}
