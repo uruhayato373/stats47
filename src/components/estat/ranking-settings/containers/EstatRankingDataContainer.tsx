@@ -95,8 +95,13 @@ export const EstatRankingDataContainer: React.FC<
 
       // 選択された年度のデータのみをフィルタリング
       const filteredValues = formattedEstatData.values.filter((value) => {
-        // 年度名に選択された年度が含まれているかチェック
-        return value.timeName && value.timeName.includes(selectedYear);
+        // 年度フィルタ + 全国データ(00000)を除外 + 数値データのみ
+        return (
+          value.timeName &&
+          value.timeName.includes(selectedYear) &&
+          value.areaCode !== "00000" &&
+          value.numericValue !== null
+        );
       });
 
       // FormattedValue[]に変換（RankingValue[]に変換する前の段階）
