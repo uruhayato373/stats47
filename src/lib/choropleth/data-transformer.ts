@@ -17,25 +17,6 @@ interface SubcategoryData {
   dataType?: "percentage" | "rate" | "numerical";
 }
 
-interface ChoroplethDataPoint {
-  prefectureCode: string;
-  prefectureName: string;
-  value: number;
-  displayValue: string;
-  rank: number;
-}
-
-interface ChoroplethDisplayData {
-  subcategory: SubcategoryData;
-  year: string;
-  data: ChoroplethDataPoint[];
-  lastUpdated: string;
-  source: string;
-  total?: number;
-  average: number;
-  median: number;
-}
-
 /**
  * 都道府県コードマッピング
  */
@@ -231,49 +212,28 @@ export function transformEstatToFormattedValues(
 }
 
 /**
- * FormattedValue配列からChoroplethDataPointに変換
+ * e-Stat APIレスポンスから利用可能な年度リストを抽出
  */
-export function transformToChoroplethData(
-  formattedValues: FormattedValue[],
-  subcategory: SubcategoryData,
-  year: string
-): ChoroplethDisplayData {
-  // データをソートしてランキングを計算
-  const sortedData = [...formattedValues]
-    .filter((item) => item.numericValue !== null)
-    .sort((a, b) => (b.numericValue || 0) - (a.numericValue || 0));
+export function extractAvailableYears(
+  estatResponse: EstatStatsDataResponse
+): string[] {
+  const years: string[] = [];
 
-  // ランキング付きデータポイントを作成
-  const dataPoints: ChoroplethDataPoint[] = sortedData.map((item, index) => ({
-    prefectureCode: normalizePrefectureCode(item.areaCode),
-    prefectureName: item.areaName,
-    value: item.numericValue || 0,
-    displayValue: item.displayValue,
-    rank: index + 1,
-  }));
+  const classTables =
+    estatResponse.GET_STATS_DATA.STATISTICAL_DATA.CLASS_INF?.CLASS_OBJ || {};
 
-  // 統計値を計算
-  const values = dataPoints.map((d) => d.value);
-  const total = values.reduce((sum, val) => sum + val, 0);
-  const average = values.length > 0 ? total / values.length : 0;
-  const sortedValues = [...values].sort((a, b) => a - b);
-  const median =
-    sortedValues.length > 0
-      ? sortedValues[Math.floor(sortedValues.length / 2)]
-      : 0;
+  if ((classTables as any).CLASS_OBJ_TIME?.CLASS) {
+    (classTables as any).CLASS_OBJ_TIME.CLASS.forEach((cls: any) => {
+      if (cls["@name"]) {
+        const yearMatch = cls["@name"].match(/(\d{4})/);
+        if (yearMatch) {
+          years.push(yearMatch[1]);
+        }
+      }
+    });
+  }
 
-  return {
-    subcategory,
-    year,
-    data: dataPoints,
-    lastUpdated: new Date().toISOString(),
-    source: `e-stat API${
-      subcategory.statsDataId ? ` (統計表ID: ${subcategory.statsDataId})` : ""
-    }`,
-    total: subcategory.dataType === "numerical" ? total : undefined,
-    average,
-    median,
-  };
+  return [...new Set(years)].sort((a, b) => parseInt(b) - parseInt(a));
 }
 
 /**
@@ -307,38 +267,6 @@ function normalizePrefectureCode(areaCode: string): string {
 
   // その他の場合は後ろ2桁を取得
   return areaCode.slice(-2).padStart(2, "0");
-}
-
-/**
- * 年度リストを取得（e-stat APIレスポンスから）
- */
-export function extractAvailableYears(
-  estatResponse: EstatStatsDataResponse
-): string[] {
-  const years = new Set<string>();
-
-  if (!estatResponse.GET_STATS_DATA?.STATISTICAL_DATA?.CLASS_INF?.CLASS_OBJ) {
-    return [];
-  }
-
-  const classTables =
-    estatResponse.GET_STATS_DATA.STATISTICAL_DATA.CLASS_INF.CLASS_OBJ;
-
-  // 時間分類から年度を抽出
-  if ((classTables as any).CLASS_OBJ_TIME?.CLASS) {
-    (classTables as any).CLASS_OBJ_TIME.CLASS.forEach((cls: any) => {
-      if (cls["@name"]) {
-        // 年度パターンをマッチング（例: "2023年", "令和5年", "2023"など）
-        const yearMatch = cls["@name"].match(/(\d{4})/);
-        if (yearMatch) {
-          years.add(yearMatch[1]);
-        }
-      }
-    });
-  }
-
-  // 年度を降順でソート
-  return Array.from(years).sort((a, b) => parseInt(b) - parseInt(a));
 }
 
 /**

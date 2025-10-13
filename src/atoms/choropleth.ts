@@ -6,7 +6,6 @@ import { atom } from "jotai";
 import {
   CategoryData,
   SubcategoryData,
-  ChoroplethDisplayData,
   MapVisualizationSettings,
 } from "@/types/visualization/choropleth";
 import { getSortedCategories } from "@/lib/choropleth/category-helpers";
@@ -20,9 +19,6 @@ export const errorAtom = atom<string | null>(null);
 
 // カテゴリデータアトム
 export const categoriesAtom = atom<CategoryData[]>(getSortedCategories());
-
-// 表示データアトム
-export const choroplethDataAtom = atom<ChoroplethDisplayData | null>(null);
 
 // 地図表示設定アトム
 export const mapVisualizationSettingsAtom = atom<MapVisualizationSettings>({
@@ -72,7 +68,6 @@ export const setCategoryAtom = atom(
     // カテゴリが変更されたらサブカテゴリと年度をリセット
     set(selectedSubcategoryAtom, null);
     set(selectedYearAtom, null);
-    set(choroplethDataAtom, null);
     set(errorAtom, null);
   }
 );
@@ -83,14 +78,12 @@ export const setSubcategoryAtom = atom(
     set(selectedSubcategoryAtom, subcategoryId);
     // サブカテゴリが変更されたら年度をリセット
     set(selectedYearAtom, null);
-    set(choroplethDataAtom, null);
     set(errorAtom, null);
   }
 );
 
 export const setYearAtom = atom(null, (get, set, year: string | null) => {
   set(selectedYearAtom, year);
-  set(choroplethDataAtom, null);
   set(errorAtom, null);
 });
 
@@ -98,7 +91,6 @@ export const resetSelectionAtom = atom(null, (get, set) => {
   set(selectedCategoryAtom, null);
   set(selectedSubcategoryAtom, null);
   set(selectedYearAtom, null);
-  set(choroplethDataAtom, null);
   set(errorAtom, null);
   set(loadingAtom, false);
 });

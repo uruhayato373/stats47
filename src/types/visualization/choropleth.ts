@@ -29,25 +29,6 @@ export interface SubcategoryData {
   areaComponent?: string;
 }
 
-export interface ChoroplethDataPoint {
-  prefectureCode: string;
-  prefectureName: string;
-  value: number;
-  displayValue: string;
-  rank: number;
-}
-
-export interface ChoroplethDisplayData {
-  subcategory: SubcategoryData;
-  year: string;
-  data: ChoroplethDataPoint[];
-  lastUpdated: string;
-  source: string;
-  total?: number;
-  average?: number;
-  median?: number;
-}
-
 export interface MapVisualizationSettings {
   colorScheme: string;
   divergingMidpoint: "zero" | "mean" | "median" | number;

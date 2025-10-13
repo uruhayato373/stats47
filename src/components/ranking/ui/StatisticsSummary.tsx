@@ -1,15 +1,16 @@
 "use client";
 
-import React from 'react';
-import { FormattedValue } from '@/types/models/estat/formatted';
+import React from "react";
+import { RankingValue } from "@/types/models/ranking";
 
 export interface StatisticsSummaryProps {
-  data: FormattedValue[] | null;
-  unit: string;
-  showTotal?: boolean;
-  showAverage?: boolean;
-  showMax?: boolean;
-  showMin?: boolean;
+  data: RankingValue[] | null;
+  showStats?: {
+    total?: boolean;
+    average?: boolean;
+    max?: boolean;
+    min?: boolean;
+  };
   className?: string;
 }
 
@@ -22,12 +23,13 @@ interface SummaryData {
 
 export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
   data,
-  unit,
-  showTotal = false,
-  showAverage = true,
-  showMax = true,
-  showMin = true,
-  className = '',
+  showStats = {
+    total: false,
+    average: true,
+    max: true,
+    min: true,
+  },
+  className = "",
 }) => {
   const calculateSummary = (): SummaryData => {
     if (!data || data.length === 0) {
@@ -36,7 +38,7 @@ export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
 
     const values = data
       .map((v) => v.numericValue)
-      .filter((v): v is number => v !== null && !isNaN(v));
+      .filter((v): v is number => v !== null && v !== undefined && !isNaN(v));
 
     if (values.length === 0) {
       return { total: 0, average: 0, max: 0, min: 0 };
@@ -51,41 +53,43 @@ export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
   };
 
   const summary = calculateSummary();
+  const unit = data && data.length > 0 ? data[0].unit || "" : "";
 
   const cards = [
     {
-      key: 'total',
-      label: '合計',
+      key: "total",
+      label: "合計",
       value: summary.total,
-      show: showTotal,
+      show: showStats.total,
     },
     {
-      key: 'average',
-      label: '平均',
+      key: "average",
+      label: "平均",
       value: summary.average,
-      show: showAverage,
+      show: showStats.average,
     },
     {
-      key: 'max',
-      label: '最大',
+      key: "max",
+      label: "最大",
       value: summary.max,
-      show: showMax,
+      show: showStats.max,
     },
     {
-      key: 'min',
-      label: '最小',
+      key: "min",
+      label: "最小",
       value: summary.min,
-      show: showMin,
+      show: showStats.min,
     },
   ].filter((card) => card.show);
 
   // Tailwind CSS のグリッドクラスを動的に選択
-  const gridColsClass = {
-    1: 'md:grid-cols-1',
-    2: 'md:grid-cols-2',
-    3: 'md:grid-cols-3',
-    4: 'md:grid-cols-4',
-  }[cards.length] || 'md:grid-cols-4';
+  const gridColsClass =
+    {
+      1: "md:grid-cols-1",
+      2: "md:grid-cols-2",
+      3: "md:grid-cols-3",
+      4: "md:grid-cols-4",
+    }[cards.length] || "md:grid-cols-4";
 
   return (
     <div className={`grid grid-cols-1 ${gridColsClass} gap-4 ${className}`}>
@@ -99,8 +103,10 @@ export const StatisticsSummary: React.FC<StatisticsSummaryProps> = ({
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-xl font-bold text-gray-900 dark:text-white">
-              {card.key === 'average'
-                ? card.value.toLocaleString(undefined, { maximumFractionDigits: 0 })
+              {card.key === "average"
+                ? card.value.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })
                 : card.value.toLocaleString()}
             </span>
             <span className="text-sm text-gray-500 dark:text-neutral-500">

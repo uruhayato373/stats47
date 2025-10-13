@@ -12,6 +12,7 @@ import {
   GeoJsonProperties,
 } from "geojson";
 import { FormattedValue } from "@/types/models/estat";
+import { formatRankingValueDisplay } from "@/types/models/ranking";
 import { PREFECTURE_MAP } from "@/lib/prefecture";
 
 export interface MapVisualizationOptions {
@@ -235,8 +236,10 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
               }
             }
 
-            const value = dataPoint?.displayValue || "データなし";
-            const unit = dataPoint?.unit ? ` ${dataPoint.unit}` : "";
+            const value = formatRankingValueDisplay(
+              dataPoint?.numericValue ?? undefined,
+              dataPoint?.unit ?? undefined
+            );
 
             // SVGコンテナの位置を取得
             const svgRect = svgRef.current?.getBoundingClientRect();

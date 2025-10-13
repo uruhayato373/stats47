@@ -171,7 +171,20 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
           {/* 統計サマリー */}
           {data.length > 0 && (
             <div>
-              <StatisticsSummary data={data} unit={data[0].unit || ""} />
+              <StatisticsSummary
+                data={data.map((item) => ({
+                  id: 0, // 仮のID
+                  rankingKey: "", // ランキングキー
+                  areaCode: item.areaCode,
+                  areaName: item.areaName,
+                  timeCode: item.timeCode,
+                  timeName: item.timeName,
+                  value: item.value,
+                  numericValue: item.numericValue ?? undefined,
+                  unit: item.unit ?? undefined,
+                  rank: item.rank,
+                }))}
+              />
             </div>
           )}
         </div>
@@ -190,8 +203,6 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
           size="lg"
         >
           <RankingItemSettings
-            statsDataId={rankingConfig?.rankingItems[0]?.statsDataId || ""}
-            cdCat01={rankingConfig?.rankingItems[0]?.cdCat01 || ""}
             onSave={async (settings) => {
               // 設定保存後にモーダルを閉じる
               await onSettingsChange(settings);
