@@ -4,7 +4,6 @@ import { SavedEstatMetainfoItem } from "@/types/models/estat";
 
 export default async function EstatMetadataPage() {
   const initialSavedMetadata = await fetchEstatMetainfoUnique({
-    limit: 50,
     useRemote: true, // 開発環境でもリモートD1のデータを表示
   });
 

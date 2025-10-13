@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { TrendingUp, RefreshCw, Info } from "lucide-react";
-import { useSavedMetadata, useItemNames } from "./hooks";
+import { useSavedMetadata, useItemNames } from "@/hooks/ranking";
 import { SavedMetadataItem } from "@/types/models";
 
 interface PrefectureRankingSidebarProps {
