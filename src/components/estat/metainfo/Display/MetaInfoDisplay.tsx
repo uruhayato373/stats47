@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Code, Database } from "lucide-react";
+import { Code, Tag } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { useStyles } from "@/hooks/useStyles";
 import JsonDisplay from "./components/JsonDisplay";
@@ -15,19 +15,21 @@ interface EstatMetaInfoDisplayProps {
   error?: string | null;
 }
 
+type TabType = "category" | "json";
+
 export default function EstatMetaInfoDisplay({
   metaInfo,
   loading,
   error,
 }: EstatMetaInfoDisplayProps) {
   const styles = useStyles();
-  const [activeMainTab, setActiveMainTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<TabType>("category");
   const { save, saving, saveResult } = useMetaInfoSave();
   const { download } = useMetaInfoDownload();
 
   // メタ情報が変更されたらタブをリセット
   useEffect(() => {
-    setActiveMainTab(0);
+    setActiveTab("category");
   }, [metaInfo]);
 
   const handleSave = () => {
@@ -90,6 +92,28 @@ export default function EstatMetaInfoDisplay({
 
   const metaInfoId = TABLE_INF?.["@id"];
 
+  // タブの設定
+  const getTabCount = (tabId: string) => {
+    const classObj = CLASS_INF?.CLASS_OBJ?.find((obj) => obj["@id"] === tabId);
+    if (!classObj?.CLASS) return 0;
+    return Array.isArray(classObj.CLASS) ? classObj.CLASS.length : 1;
+  };
+
+  const tabs = [
+    {
+      id: "category" as TabType,
+      label: "カテゴリ",
+      icon: Tag,
+      count: getTabCount("cat01"),
+    },
+    {
+      id: "json" as TabType,
+      label: "JSON レスポンス",
+      icon: Code,
+      count: 0,
+    },
+  ].filter((tab) => tab.count > 0 || tab.id === "json");
+
   return (
     <div className="space-y-6">
       {/* ヘッダー部分 */}
@@ -103,47 +127,44 @@ export default function EstatMetaInfoDisplay({
       {/* タブナビゲーション */}
       <div className="border-b border-gray-200 dark:border-neutral-700">
         <nav className="-mb-px flex space-x-8">
-          <button
-            onClick={() => setActiveMainTab(0)}
-            className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-              activeMainTab === 0
-                ? "border-indigo-500 text-indigo-600"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-            }`}
-          >
-            <Database className="w-4 h-4" />
-            基本情報・分類
-          </button>
-          <button
-            onClick={() => setActiveMainTab(1)}
-            className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-              activeMainTab === 1
-                ? "border-indigo-500 text-indigo-600"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-            }`}
-          >
-            <Code className="w-4 h-4" />
-            JSON レスポンス
-          </button>
+          {tabs.map((tab) => {
+            const IconComponent = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
+                  activeTab === tab.id
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+              >
+                <IconComponent className="w-4 h-4" />
+                {tab.label}
+                {tab.count > 0 && (
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                    {tab.count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </nav>
       </div>
 
       {/* タブコンテンツ */}
       <div className="mt-6">
-        {activeMainTab === 0 && (
-          <div className="space-y-6">
-            {CLASS_INF &&
-              CLASS_INF.CLASS_OBJ &&
-              CLASS_INF.CLASS_OBJ.length > 0 && (
-                <UnifiedClassificationTabs
-                  classObjs={CLASS_INF.CLASS_OBJ}
-                  metaInfoId={metaInfoId}
-                />
-              )}
-          </div>
-        )}
+        {activeTab === "category" &&
+          CLASS_INF &&
+          CLASS_INF.CLASS_OBJ &&
+          CLASS_INF.CLASS_OBJ.length > 0 && (
+            <UnifiedClassificationTabs
+              classObjs={CLASS_INF.CLASS_OBJ}
+              metaInfoId={metaInfoId}
+            />
+          )}
 
-        {activeMainTab === 1 && (
+        {activeTab === "json" && (
           <JsonDisplay data={metaInfo} onDownload={handleDownload} />
         )}
       </div>
