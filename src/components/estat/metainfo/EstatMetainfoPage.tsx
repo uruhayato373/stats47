@@ -57,7 +57,7 @@ export default function EstatMetainfoPage({
 
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
         {/* ヘッダーセクション - 横幅いっぱい */}
-        <div className="mb-4">
+        <div>
           <EstatMetaInfoPageHeader
             loading={loading}
             currentStatsId={currentStatsId}
