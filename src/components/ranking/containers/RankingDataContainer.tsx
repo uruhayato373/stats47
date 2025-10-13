@@ -13,6 +13,12 @@ import { ErrorView } from "../ui/ErrorView";
 import { PrefectureDataTableClient } from "@/components/choropleth/PrefectureDataTableClient";
 import { SubcategoryData } from "@/types/visualization/choropleth";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
+import { Modal } from "@/components/common/Modal/Modal";
+import {
+  RankingItemSettings,
+  RankingItemSettingsData,
+} from "@/components/ranking-settings";
+import { Settings } from "lucide-react";
 
 interface RankingDataContainerProps {
   statsDataId: string;
@@ -20,6 +26,7 @@ interface RankingDataContainerProps {
   subcategory: SubcategoryData;
   visualizationOptions?: RankingVisualizationOptions;
   initialYear?: string;
+  onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>;
 }
 
 /**
@@ -32,7 +39,11 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
   subcategory,
   visualizationOptions,
   initialYear,
+  onSettingsChange,
 }) => {
+  // モーダルの開閉状態
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
   // 年度一覧を取得（自動キャッシング）
   const {
     years,
@@ -93,6 +104,17 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
             onYearChange={setSelectedYear}
           />
         }
+        actions={
+          onSettingsChange && (
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-none focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors flex items-center gap-1.5"
+            >
+              <Settings className="w-4 h-4" />
+              詳細設定
+            </button>
+          )
+        }
       />
 
       {/* メインコンテンツ */}
@@ -109,6 +131,24 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
           <PrefectureDataTableClient data={data} subcategory={subcategory} />
         </div>
       </div>
+
+      {/* 設定モーダル */}
+      {onSettingsChange && (
+        <Modal
+          isOpen={isSettingsOpen}
+          onClose={() => setIsSettingsOpen(false)}
+          size="lg"
+        >
+          <RankingItemSettings
+            statsDataId={statsDataId}
+            cdCat01={cdCat01}
+            onSave={async (settings) => {
+              await onSettingsChange(settings);
+              setIsSettingsOpen(false);
+            }}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

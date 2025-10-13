@@ -11,6 +11,7 @@ import {
 } from "@/components/estat/ranking-settings";
 import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
 import { useEstatData } from "@/hooks/ranking/useEstatData";
+import { RankingItemSettingsData } from "@/components/ranking-settings";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: SavedMetadataItem[];
@@ -21,6 +22,15 @@ export default function RankingSettingsPage({
 }: RankingSettingsPageProps) {
   const [currentParams, setCurrentParams] =
     useState<PrefectureRankingParams | null>(null);
+
+  // 設定状態を管理
+  const [settings, setSettings] = useState<RankingItemSettingsData>({
+    map_color_scheme: "interpolateBlues",
+    map_diverging_midpoint: "zero",
+    ranking_direction: "desc",
+    conversion_factor: 1,
+    decimal_places: 0,
+  });
 
   // useSWRでデータ取得（自動キャッシング、リトライ）
   const { data, error, isLoading, refetch } = useEstatData(currentParams);
@@ -41,6 +51,38 @@ export default function RankingSettingsPage({
       statsDataId: item.stats_data_id,
     };
     setCurrentParams(params);
+  };
+
+  const handleSaveSettings = async (newSettings: RankingItemSettingsData) => {
+    if (!currentParams) return;
+
+    try {
+      const response = await fetch("/api/ranking-items/manual", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          statsDataId: currentParams.statsDataId,
+          cdCat01: currentParams.categoryCode || "",
+          ...newSettings,
+          visualizationSettings: {
+            map_color_scheme: newSettings.map_color_scheme,
+            map_diverging_midpoint: newSettings.map_diverging_midpoint,
+            ranking_direction: newSettings.ranking_direction,
+            conversion_factor: newSettings.conversion_factor,
+            decimal_places: newSettings.decimal_places,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("設定の保存に失敗しました");
+      }
+
+      setSettings(newSettings);
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      throw error;
+    }
   };
 
   return (
@@ -76,6 +118,8 @@ export default function RankingSettingsPage({
                 loading={isLoading}
                 error={error}
                 params={currentParams}
+                settings={settings}
+                onSettingsChange={handleSaveSettings}
               />
             </div>
           </div>
