@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useAtom } from "jotai";
 import { ChevronDown, ChevronRight, BarChart3 } from "lucide-react";
-import { CategoryIcon } from "./CategoryIcon";
+import { CategoryIcon } from "@/components/common/CategoryIcon";
 import {
   selectedCategoryAtom,
   selectedSubcategoryAtom,

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import { CategoryIcon } from "@/components/choropleth/CategoryIcon";
+import { CategoryIcon } from "@/components/common/CategoryIcon";
 import { SubcategoryNavigation } from "./SubcategoryNavigation";
 import { ViewSwitchButtons } from "./ViewSwitchButtons";
 import { PrefectureSelector } from "./PrefectureSelector";

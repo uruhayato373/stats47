@@ -5,51 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStyles } from "@/hooks/useStyles";
 import categoriesData from "@/config/categories.json";
-import {
-  MapPin,
-  Users,
-  TrendingUp,
-  Sprout,
-  Factory,
-  Store,
-  PieChart,
-  Home,
-  Droplets,
-  Plane,
-  GraduationCap,
-  Building2,
-  ShieldCheck,
-  Hospital,
-  Globe,
-  Construction,
-} from "lucide-react";
+import { CategoryIcon } from "@/components/common/CategoryIcon";
 
 export default function Sidebar() {
   const styles = useStyles();
   const pathname = usePathname();
-
-  // アイコン名からコンポーネントへのマッピング
-  const ICON_MAP: Record<
-    string,
-    React.ComponentType<{ className?: string }>
-  > = {
-    MapPin,
-    Users,
-    TrendingUp,
-    Sprout,
-    Factory,
-    Store,
-    PieChart,
-    Home,
-    Droplets,
-    Plane,
-    GraduationCap,
-    Building2,
-    ShieldCheck,
-    Hospital,
-    Globe,
-    Construction,
-  };
 
   // ナビゲーションアイテムをメモ化
   const navigationItems = useMemo(
@@ -288,8 +248,6 @@ export default function Sidebar() {
                 pathname === `/${category.id}` ||
                 pathname?.startsWith(`/${category.id}/`);
 
-              const IconComponent = ICON_MAP[category.icon];
-
               return (
                 <li key={category.id}>
                   <Link
@@ -300,7 +258,10 @@ export default function Sidebar() {
                     }
                     href={`/${category.id}`}
                   >
-                    {IconComponent && <IconComponent className="size-3.5" />}
+                    <CategoryIcon
+                      iconName={category.icon}
+                      className="size-3.5"
+                    />
                     <span>{category.name}</span>
                   </Link>
                 </li>

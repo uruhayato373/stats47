@@ -3,5 +3,5 @@
  */
 
 export { CategorySidebar } from "./CategorySidebar";
-export { YearSelector } from "./YearSelector";
+export { CategoryPageClient } from "./CategoryPageClient";
 export { ChoroplethDataDisplayClient } from "./ChoroplethDataDisplayClient";
