@@ -22,7 +22,7 @@ import {
   usePrefectureRankingData,
   useMapOptions,
   useYearSelection,
-} from "./hooks";
+} from "@/hooks/estat";
 
 export default function Display({
   data,

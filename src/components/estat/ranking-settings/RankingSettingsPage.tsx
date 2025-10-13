@@ -9,8 +9,8 @@ import {
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/estat/ranking-settings";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
+import { useEstatData } from "@/hooks/ranking/useEstatData";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: SavedMetadataItem[];
@@ -19,104 +19,28 @@ interface RankingSettingsPageProps {
 export default function RankingSettingsPage({
   initialSavedMetadata,
 }: RankingSettingsPageProps) {
-  const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
-    null
-  );
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [currentParams, setCurrentParams] =
     useState<PrefectureRankingParams | null>(null);
-  const [selectedMetadata, setSelectedMetadata] =
-    useState<SavedMetadataItem | null>(null);
-  // 年度管理はPrefectureRankingDisplayで行う
 
-  const handleFetchData = async (params: PrefectureRankingParams) => {
-    setLoading(true);
-    setError(null);
+  // useSWRでデータ取得（自動キャッシング、リトライ）
+  const { data, error, isLoading, refetch } = useEstatData(currentParams);
+
+  const handleFetchData = (params: PrefectureRankingParams) => {
     setCurrentParams(params);
-
-    try {
-      const queryParams = new URLSearchParams();
-
-      Object.entries(params).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== "") {
-          queryParams.append(key, String(value));
-        }
-      });
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30秒でタイムアウト
-
-      const response = await fetch(
-        `/api/estat/data?${queryParams.toString()}`,
-        {
-          signal: controller.signal,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        let errorMessage = `HTTP ${response.status}`;
-        try {
-          const errorData = (await response.json()) as { error?: string };
-          errorMessage = errorData.error || errorMessage;
-        } catch {
-          const textResponse = await response.text();
-          errorMessage = `HTTP ${response.status}: ${textResponse.substring(
-            0,
-            100
-          )}`;
-        }
-        throw new Error(errorMessage);
-      }
-
-      let data: EstatStatsDataResponse;
-      try {
-        const responseText = await response.text();
-        data = JSON.parse(responseText) as EstatStatsDataResponse;
-      } catch (jsonError) {
-        throw new Error(
-          `Invalid JSON response: ${
-            jsonError instanceof Error ? jsonError.message : "Unknown error"
-          }`
-        );
-      }
-
-      setApiResponse(data);
-    } catch (err) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        setError(
-          "リクエストがタイムアウトしました。e-STAT APIが応答していない可能性があります。"
-        );
-      } else {
-        setError(
-          err instanceof Error ? err.message : "データ取得に失敗しました"
-        );
-      }
-      setApiResponse(null);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const handleRefresh = () => {
     if (currentParams) {
-      handleFetchData(currentParams);
+      refetch();
     }
   };
 
   const handleDataSelect = (item: SavedMetadataItem) => {
-    setSelectedMetadata(item);
-    // 選択されたデータで新しい検索を実行（年度情報はhandleFetchDataで取得）
+    // 選択されたデータで新しい検索を実行
     const params: PrefectureRankingParams = {
       statsDataId: item.stats_data_id,
-      // D1データベースには詳細なフィルター情報がないため、統計表IDのみで検索
     };
-    handleFetchData(params);
+    setCurrentParams(params);
   };
 
   return (
@@ -128,7 +52,7 @@ export default function RankingSettingsPage({
         {/* ヘッダーセクション - 横幅いっぱい */}
         <div className="mb-4">
           <PrefectureRankingPageHeader
-            loading={loading}
+            loading={isLoading}
             currentStatsId={currentParams?.statsDataId || ""}
             onRefresh={handleRefresh}
           />
@@ -143,13 +67,13 @@ export default function RankingSettingsPage({
               {/* データ取得フォーム */}
               <PrefectureRankingForm
                 onSubmit={handleFetchData}
-                loading={loading}
+                loading={isLoading}
               />
 
               {/* データ表示エリア */}
               <PrefectureRankingDisplay
-                data={apiResponse}
-                loading={loading}
+                data={data}
+                loading={isLoading}
                 error={error}
                 params={currentParams}
               />
