@@ -17,8 +17,4 @@ export { DraggableRankingList } from "./RankingClient/DraggableRankingList";
 // ページコンポーネントは subcategories に移動
 
 // 型定義
-export type {
-  RankingData,
-  RankingOption,
-  RankingClientProps,
-} from "@/types/models/ranking";
+export type { RankingOption } from "@/types/models/ranking";
