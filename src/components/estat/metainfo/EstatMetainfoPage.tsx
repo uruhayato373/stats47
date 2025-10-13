@@ -50,6 +50,12 @@ export default function EstatMetainfoPage({
     }
   };
 
+  const handleSidebarItemView = (item: SavedEstatMetainfoItem) => {
+    if (item.stats_data_id) {
+      handleFetchMetaInfo(item.stats_data_id);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -98,6 +104,7 @@ export default function EstatMetainfoPage({
             <EstatMetaInfoSidebar
               className="h-full"
               initialData={initialSavedMetadata}
+              onView={handleSidebarItemView}
             />
           </div>
         </div>

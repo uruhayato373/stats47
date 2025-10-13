@@ -9,18 +9,22 @@ import type { SavedEstatMetainfoItem } from "@/types/models";
 interface EstatMetaInfoSidebarProps {
   className?: string;
   initialData?: SavedEstatMetainfoItem[];
+  onView?: (item: SavedEstatMetainfoItem) => void;
 }
 
 export default function EstatMetaInfoSidebar({
   className = "",
   initialData = [],
+  onView,
 }: EstatMetaInfoSidebarProps) {
   const { data, loading, fetchData } = useMetadataList();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const handleView = (item: SavedEstatMetainfoItem) => {
-    console.log("View metadata:", item);
+    if (onView) {
+      onView(item);
+    }
   };
 
   const handlePageChange = (page: number) => {
