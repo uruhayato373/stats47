@@ -8,7 +8,7 @@
  * - テスト容易性の向上
  */
 
-import { createD1Database } from "@/lib/d1-client";
+import { createLocalD1Database } from "@/lib/local-d1-client";
 import { QUERIES } from "./ranking-queries";
 import {
   RankingItem,
@@ -70,7 +70,22 @@ export class RankingRepository {
       // ランキング項目を取得（ランキング項目がある行のみ）
       const rankingItems = rows
         .filter((row) => row.ranking_key)
-        .map((row) => convertRankingItemFromDB(row as RankingItemDB));
+        .map((row) => {
+          const dbItem = row as RankingItemDB & { metadata_json?: string };
+
+          // JSONメタデータをパースしてstats_data_idとcd_cat01を抽出
+          if (dbItem.metadata_json) {
+            try {
+              const metadata = JSON.parse(dbItem.metadata_json);
+              dbItem.stats_data_id = metadata.stats_data_id;
+              dbItem.cd_cat01 = metadata.cd_cat01;
+            } catch (error) {
+              console.warn("Failed to parse metadata JSON:", error);
+            }
+          }
+
+          return convertRankingItemFromDB(dbItem);
+        });
 
       return {
         subcategory: subcategoryConfig,
@@ -139,53 +154,6 @@ export class RankingRepository {
   }
 
   /**
-   * ランキング項目を作成
-   */
-  async createRankingItem(item: {
-    subcategoryId: string;
-    rankingKey: string;
-    label: string;
-    statsDataId: string;
-    cdCat01: string;
-    unit: string;
-    name: string;
-    displayOrder: number;
-    isActive: boolean;
-    mapColorScheme: string;
-    mapDivergingMidpoint: string;
-    rankingDirection: "asc" | "desc";
-    conversionFactor: number;
-    decimalPlaces: number;
-  }): Promise<number | null> {
-    try {
-      const result = await this.db
-        .prepare(QUERIES.createRankingItem)
-        .bind(
-          item.subcategoryId,
-          item.rankingKey,
-          item.label,
-          item.statsDataId,
-          item.cdCat01,
-          item.unit,
-          item.name,
-          item.displayOrder,
-          item.isActive ? 1 : 0,
-          item.mapColorScheme,
-          item.mapDivergingMidpoint,
-          item.rankingDirection,
-          item.conversionFactor,
-          item.decimalPlaces
-        )
-        .run();
-
-      return result.success ? (result.meta.last_row_id as number) : null;
-    } catch (error) {
-      console.error("Failed to create ranking item:", error);
-      throw error;
-    }
-  }
-
-  /**
    * ランキング項目を削除（論理削除）
    */
   async deleteRankingItem(id: number): Promise<boolean> {
@@ -227,6 +195,6 @@ export class RankingRepository {
  * ランキングリポジトリのインスタンスを作成
  */
 export async function createRankingRepository(): Promise<RankingRepository> {
-  const db = await createD1Database();
+  const db = await createLocalD1Database();
   return new RankingRepository(db);
 }

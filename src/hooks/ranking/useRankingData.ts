@@ -3,14 +3,11 @@ import { fetcher } from "@/lib/swr/fetcher";
 import { FormattedValue } from "@/lib/estat/types/formatted";
 
 /**
- * 年度一覧を取得するカスタムフック（useSWR使用）
+ * 年度一覧を取得するカスタムフック（新API対応）
  * 自動キャッシング、リトライ、エラーハンドリング
  */
-export function useRankingYears(statsDataId?: string, cdCat01?: string) {
-  const key =
-    statsDataId && cdCat01
-      ? `/api/estat/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}`
-      : null;
+export function useRankingYears(rankingKey?: string) {
+  const key = rankingKey ? `/api/ranking/years?rankingKey=${rankingKey}` : null;
 
   const { data, error, isLoading } = useSWR<{ years: string[] }>(key, fetcher, {
     revalidateOnFocus: false, // 年度はあまり変わらないので再検証しない
@@ -26,18 +23,13 @@ export function useRankingYears(statsDataId?: string, cdCat01?: string) {
 }
 
 /**
- * ランキングデータを取得するカスタムフック（useSWR使用）
+ * ランキングデータを取得するカスタムフック（新API対応）
  * 自動キャッシング、リトライ、Focus時の再検証
  */
-export function useRankingData(
-  statsDataId?: string,
-  cdCat01?: string,
-  yearCode?: string,
-  limit: number = 100000
-) {
+export function useRankingData(rankingKey?: string, timeCode?: string) {
   const key =
-    statsDataId && cdCat01 && yearCode
-      ? `/api/estat/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}&limit=${limit}`
+    rankingKey && timeCode
+      ? `/api/ranking/data?rankingKey=${rankingKey}&timeCode=${timeCode}`
       : null;
 
   const { data, error, isLoading, mutate } = useSWR<{ data: FormattedValue[] }>(

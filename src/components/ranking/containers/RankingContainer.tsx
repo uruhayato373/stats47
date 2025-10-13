@@ -40,8 +40,7 @@ export function RankingContainer<T extends string>({
   if (rankingItems) {
     rankingItems.forEach((item) => {
       rankings[item.rankingKey] = {
-        statsDataId: item.statsDataId,
-        cdCat01: item.cdCat01,
+        rankingKey: item.rankingKey,
         unit: item.unit,
         name: item.name,
       };
@@ -99,8 +98,7 @@ export function RankingContainer<T extends string>({
     <RankingLayout
       main={
         <RankingDataContainer
-          statsDataId={activeRanking.statsDataId}
-          cdCat01={activeRanking.cdCat01}
+          rankingKey={activeRanking.rankingKey}
           subcategory={{
             ...subcategory,
             unit: activeRanking.unit,

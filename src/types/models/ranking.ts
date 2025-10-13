@@ -17,11 +17,11 @@ export interface RankingItem {
   /** 表示ラベル */
   label: string;
 
-  /** 統計データID */
-  statsDataId: StatsDataId;
+  /** 統計データID（オプショナル、新スキーマではdata_source_metadataに移動） */
+  statsDataId?: StatsDataId;
 
-  /** カテゴリコード */
-  cdCat01: CategoryCode;
+  /** カテゴリコード（オプショナル、新スキーマではdata_source_metadataに移動） */
+  cdCat01?: CategoryCode;
 
   /** 単位 */
   unit: string;
@@ -58,14 +58,11 @@ export interface RankingItem {
 }
 
 /**
- * ランキングデータ
+ * ランキングデータ（新スキーマ対応）
  */
 export interface RankingData {
-  /** 統計データID */
-  statsDataId: StatsDataId;
-
-  /** カテゴリコード */
-  cdCat01: CategoryCode;
+  /** ランキングキー */
+  rankingKey: string;
 
   /** 単位 */
   unit: string;
@@ -107,8 +104,8 @@ export interface RankingItemDB {
   subcategory_id: string;
   ranking_key: string;
   label: string;
-  stats_data_id: string;
-  cd_cat01: string;
+  stats_data_id?: string;
+  cd_cat01?: string;
   unit: string;
   name: string;
   display_order: number;
@@ -143,7 +140,10 @@ export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
 
     // 可視化設定
     mapColorScheme: dbItem.map_color_scheme,
-    mapDivergingMidpoint: dbItem.map_diverging_midpoint as "zero" | "mean" | "median",
+    mapDivergingMidpoint: dbItem.map_diverging_midpoint as
+      | "zero"
+      | "mean"
+      | "median",
     rankingDirection: dbItem.ranking_direction as "asc" | "desc",
     conversionFactor: dbItem.conversion_factor,
     decimalPlaces: dbItem.decimal_places,

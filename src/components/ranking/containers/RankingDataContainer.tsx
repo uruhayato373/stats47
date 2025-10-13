@@ -27,8 +27,7 @@ import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
  * ランキングデータコンテナのプロパティ
  */
 interface RankingDataContainerProps {
-  statsDataId: string; // e-Stat統計表ID（例: "0000010101"）
-  cdCat01: string; // カテゴリコード（例: "A1101"）
+  rankingKey: string; // ランキングキー（例: "totalAreaExcluding"）
   subcategory: SubcategoryData; // サブカテゴリ情報
   initialYear?: string; // 初期選択年度
   onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>; // 設定変更コールバック
@@ -39,8 +38,7 @@ interface RankingDataContainerProps {
  * useSWRによる効率的なデータフェッチとキャッシング
  */
 export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
-  statsDataId,
-  cdCat01,
+  rankingKey,
   subcategory,
   initialYear,
   onSettingsChange,
@@ -79,13 +77,13 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
       : undefined;
 
   // ===== データ取得（useSWR使用） =====
-  // 1. 年度一覧を取得（API: /api/estat/ranking/years）
-  // データソース: estat_ranking_valuesテーブル（キャッシュ） → e-Stat API（フォールバック）
+  // 1. 年度一覧を取得（新API: /api/ranking/years）
+  // データソース: ranking_valuesテーブル（汎用キャッシュ）
   const {
     years,
     isLoading: yearsLoading,
     error: yearsError,
-  } = useRankingYears(statsDataId, cdCat01);
+  } = useRankingYears(rankingKey);
 
   // 2. 選択された年度の状態管理
   const [selectedYear, setSelectedYear] = useState(initialYear || "");
@@ -97,14 +95,14 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
     }
   }, [years, selectedYear]);
 
-  // 4. ランキングデータを取得（API: /api/estat/ranking/data）
-  // データソース: estat_ranking_valuesテーブル（キャッシュ） → e-Stat API（フォールバック）
+  // 4. ランキングデータを取得（新API: /api/ranking/data）
+  // データソース: ranking_valuesテーブル（汎用キャッシュ）
   const {
     data,
     isLoading: dataLoading,
     error: dataError,
     refetch,
-  } = useRankingData(statsDataId, cdCat01, selectedYear);
+  } = useRankingData(rankingKey, selectedYear);
 
   // ===== ローディング・エラー状態の統合 =====
   const loading = yearsLoading || dataLoading || rankingConfigLoading;
@@ -121,8 +119,7 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
       <ErrorView
         error={error}
         details={{
-          statsDataId,
-          cdCat01,
+          rankingKey,
           yearCode: selectedYear,
         }}
         onRetry={refetch} // リトライ機能付き
