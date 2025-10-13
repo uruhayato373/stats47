@@ -4,6 +4,7 @@ import { AlertTriangle, Database, BarChart3 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
 import { useEstatData } from "@/hooks/ranking/useEstatData";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { DisplayProps } from "./types";
 
 export default function Display({ params, onSettingsChange }: DisplayProps) {
@@ -35,6 +36,54 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
       setRankingKey(null);
     }
   }, [params?.statsDataId, params?.categoryCode]);
+
+  // データ取得成功時に自動保存
+  useEffect(() => {
+    if (data && params?.statsDataId && params?.categoryCode && rankingKey) {
+      saveToDatabase(
+        data as EstatStatsDataResponse,
+        params.statsDataId,
+        params.categoryCode
+      );
+    }
+  }, [data, params, rankingKey]);
+
+  const saveToDatabase = async (
+    rawData: EstatStatsDataResponse,
+    statsDataId: string,
+    categoryCode: string
+  ) => {
+    try {
+      const response = await fetch("/api/estat/ranking-values/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          statsDataId,
+          categoryCode,
+          timeCode: "latest", // サーバーサイドでtimeCodeを決定
+          rawData, // 生データを送信してサーバーサイドで変換
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("保存失敗:", await response.text());
+      } else {
+        const result = (await response.json()) as {
+          savedCount: number;
+          timeCode: string;
+        };
+        console.log("データ保存成功:", {
+          statsDataId,
+          categoryCode,
+          savedCount: result.savedCount,
+          timeCode: result.timeCode,
+        });
+      }
+    } catch (error) {
+      console.error("保存エラー:", error);
+    }
+  };
+
   // ローディング状態
   if (isLoading) {
     return (

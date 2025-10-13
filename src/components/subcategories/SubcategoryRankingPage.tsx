@@ -1,7 +1,9 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
-import { RankingContainer } from "@/components/ranking/containers/RankingContainer";
+import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
+import { RankingLayout } from "@/components/ranking/ui/RankingLayout";
+import { RankingNavigation } from "@/components/ranking/RankingClient/RankingNavigation";
 import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";
 
 /**
@@ -54,10 +56,22 @@ export const SubcategoryRankingPage: React.FC<
       subcategory={subcategory}
       viewType="ranking"
     >
-      <RankingContainer
-        subcategory={subcategory}
-        activeRankingKey={activeRankingKey}
-        rankingItems={rankingConfig.rankingItems}
+      <RankingLayout
+        main={<RankingDataContainer rankingConfig={rankingConfig} />}
+        navigation={
+          <RankingNavigation
+            categoryId={category.id}
+            subcategoryId={subcategory.id}
+            activeRankingId={activeRankingKey}
+            tabOptions={rankingConfig.rankingItems
+              .filter((item) => item.isActive)
+              .sort((a, b) => a.displayOrder - b.displayOrder)
+              .map((item) => ({
+                key: item.rankingKey,
+                label: item.label,
+              }))}
+          />
+        }
       />
     </SubcategoryLayout>
   );

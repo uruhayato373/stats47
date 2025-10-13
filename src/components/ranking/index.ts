@@ -1,10 +1,8 @@
 // 新しいコンテナコンポーネント
-export { RankingContainer } from "./containers/RankingContainer";
 export { RankingDataContainer } from "./containers/RankingDataContainer";
 
 // UIコンポーネント
 export { YearSelector } from "./ui/YearSelector";
-export { RankingVisualization } from "./ui/RankingVisualization";
 export { RankingHeader } from "./ui/RankingHeader";
 export { RankingLayout } from "./ui/RankingLayout";
 export { LoadingView } from "./ui/LoadingView";

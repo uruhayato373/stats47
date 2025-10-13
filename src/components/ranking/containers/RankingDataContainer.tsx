@@ -1,18 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import useSWR from "swr";
 import {
   useRankingYears,
   useRankingData,
 } from "@/hooks/ranking/useRankingData";
-import { RankingVisualization } from "../ui/RankingVisualization";
+import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
+import { StatisticsSummary } from "../ui/StatisticsSummary";
 import { YearSelector } from "../ui/YearSelector";
 import { RankingHeader } from "../ui/RankingHeader";
 import { LoadingView } from "../ui/LoadingView";
 import { ErrorView } from "../ui/ErrorView";
-import { PrefectureDataTableClient } from "@/components/choropleth/PrefectureDataTableClient";
-import { SubcategoryData } from "@/types/visualization/choropleth";
+import { PrefectureDataTableClient } from "../ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {
@@ -20,15 +19,13 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import { fetcher } from "@/lib/swr/fetcher";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
 
 /**
  * ランキングデータコンテナのプロパティ
  */
 interface RankingDataContainerProps {
-  rankingKey: string; // ランキングキー（例: "totalAreaExcluding"）
-  subcategory: SubcategoryData; // サブカテゴリ情報
+  rankingConfig: RankingConfigResponse; // ランキング設定（サーバーサイドで取得済み）
   initialYear?: string; // 初期選択年度
   onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>; // 設定変更コールバック
 }
@@ -38,8 +35,7 @@ interface RankingDataContainerProps {
  * useSWRによる効率的なデータフェッチとキャッシング
  */
 export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
-  rankingKey,
-  subcategory,
+  rankingConfig,
   initialYear,
   onSettingsChange,
 }) => {
@@ -47,16 +43,18 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
   // 詳細設定モーダルの開閉状態
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  // ===== ranking_itemsデータ取得（useSWR使用） =====
-  // サブカテゴリのランキング設定を取得（可視化オプション含む）
-  const {
-    data: rankingConfig,
-    isLoading: rankingConfigLoading,
-    error: rankingConfigError,
-  } = useSWR<RankingConfigResponse>(
-    `/api/ranking-items/subcategory/${subcategory.id}`,
-    fetcher
-  );
+  // ===== ranking_itemsデータはpropsから受け取る =====
+  // サーバーサイドで取得済みのrankingConfigを使用
+
+  // rankingConfigから必要な情報を抽出
+  const activeRankingItem = rankingConfig.rankingItems[0];
+  const rankingKey = activeRankingItem?.rankingKey || "default";
+  const subcategory = {
+    ...rankingConfig.subcategory,
+    unit: activeRankingItem?.unit || "",
+    name: activeRankingItem?.name || rankingConfig.subcategory?.name || "",
+    colorScheme: "interpolateBlues", // デフォルトのカラースキーム
+  };
 
   // ranking_itemsから可視化オプションを構築
   const visualizationOptions: RankingVisualizationOptions | undefined =
@@ -105,8 +103,8 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
   } = useRankingData(rankingKey, selectedYear);
 
   // ===== ローディング・エラー状態の統合 =====
-  const loading = yearsLoading || dataLoading || rankingConfigLoading;
-  const error = yearsError || dataError || rankingConfigError;
+  const loading = yearsLoading || dataLoading;
+  const error = yearsError || dataError;
 
   // ===== ローディング状態の表示 =====
   if (loading) {
@@ -119,7 +117,6 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
       <ErrorView
         error={error}
         details={{
-          rankingKey,
           yearCode: selectedYear,
         }}
         onRetry={refetch} // リトライ機能付き
@@ -157,7 +154,27 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
       {/* メインコンテンツ: 地図・統計 + データテーブル */}
       <div className="flex flex-col lg:flex-row gap-4">
         {/* 左側: 地図と統計サマリーの可視化 */}
-        <RankingVisualization data={data} options={visualizationOptions} />
+        <div className="flex-1 flex flex-col overflow-hidden gap-4">
+          {/* 地図 */}
+          <div>
+            <ChoroplethMap
+              data={data}
+              options={{
+                colorScheme:
+                  visualizationOptions?.colorScheme || "interpolateBlues",
+                divergingMidpoint:
+                  visualizationOptions?.divergingMidpoint || "zero",
+              }}
+            />
+          </div>
+
+          {/* 統計サマリー */}
+          {data.length > 0 && (
+            <div>
+              <StatisticsSummary data={data} unit={data[0].unit || ""} />
+            </div>
+          )}
+        </div>
 
         {/* 右側: 都道府県データテーブル */}
         <div className="flex-shrink-0">
@@ -173,8 +190,8 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
           size="lg"
         >
           <RankingItemSettings
-            statsDataId={statsDataId}
-            cdCat01={cdCat01}
+            statsDataId={rankingConfig?.rankingItems[0]?.statsDataId || ""}
+            cdCat01={rankingConfig?.rankingItems[0]?.cdCat01 || ""}
             onSave={async (settings) => {
               // 設定保存後にモーダルを閉じる
               await onSettingsChange(settings);

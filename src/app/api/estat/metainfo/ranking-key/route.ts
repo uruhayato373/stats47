@@ -20,12 +20,11 @@ export async function GET(request: NextRequest) {
     const result = await db
       .prepare(
         `
-      SELECT ri.ranking_key
-      FROM ranking_items ri
-      JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id
-      WHERE dsm.data_source_id = 'estat'
-        AND json_extract(dsm.metadata, '$.stats_data_id') = ?
-        AND json_extract(dsm.metadata, '$.cd_cat01') = ?
+      SELECT ranking_key
+      FROM estat_metainfo
+      WHERE stats_data_id = ?
+        AND cat01 = ?
+        AND ranking_key IS NOT NULL
       LIMIT 1
     `
       )
@@ -33,6 +32,11 @@ export async function GET(request: NextRequest) {
       .first();
 
     const rankingKey = result?.ranking_key || null;
+
+    // デバッグログ
+    console.log(
+      `ranking-key API: statsDataId=${statsDataId}, cat01=${cat01}, rankingKey=${rankingKey}`
+    );
 
     return NextResponse.json({ rankingKey });
   } catch (error) {
