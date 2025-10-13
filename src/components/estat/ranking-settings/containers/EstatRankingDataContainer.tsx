@@ -21,7 +21,7 @@ import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataServi
  */
 interface EstatRankingDataContainerProps {
   rawData: EstatStatsDataResponse; // e-Stat生データ
-  rankingKey?: string; // ランキングキー（オプショナル）
+  rankingKey?: string | null; // ランキングキー（オプショナル）
   statsDataId: string; // 統計表ID
   categoryCode: string; // カテゴリコード
   onSettingsChange?: (settings: RankingItemSettingsData) => Promise<void>; // 設定変更コールバック
@@ -40,7 +40,9 @@ interface EstatRankingDataContainerProps {
  */
 export const EstatRankingDataContainer: React.FC<
   EstatRankingDataContainerProps
-> = ({ rawData, statsDataId, categoryCode, onSettingsChange }) => {
+> = ({ rawData, rankingKey, statsDataId, categoryCode, onSettingsChange }) => {
+  // rankingKey が利用可能な場合の処理（将来の拡張用）
+  console.log("EstatRankingDataContainer - rankingKey:", rankingKey);
   // ===== 状態管理 =====
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 

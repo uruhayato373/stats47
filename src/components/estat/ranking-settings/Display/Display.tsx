@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { AlertTriangle, Database } from "lucide-react";
 import { EstatRankingDataContainer } from "@/components/estat/ranking-settings/containers";
 import { useEstatStatsData } from "@/hooks/ranking/useEstatStatsData";
@@ -10,6 +11,24 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
   // ===== Step 1: e-Stat APIからデータ取得 =====
   // useEstatStatsData()フックを使用してe-Stat APIから統計データを取得
   const { data, error, isLoading } = useEstatStatsData(params);
+
+  // ===== Step 1.5: ranking_key を取得 =====
+  const [rankingKey, setRankingKey] = useState<string | null>(null);
+
+  // ranking_key を取得
+  useEffect(() => {
+    if (params?.statsDataId && params?.categoryCode) {
+      fetch(
+        `/api/estat/metainfo/ranking-key?statsDataId=${params.statsDataId}&categoryCode=${params.categoryCode}`
+      )
+        .then((res) => res.json())
+        .then((data: unknown) => {
+          const response = data as { ranking_key: string | null };
+          setRankingKey(response.ranking_key);
+        })
+        .catch((err) => console.error("ranking_key 取得エラー:", err));
+    }
+  }, [params?.statsDataId, params?.categoryCode]);
 
   // パラメータがnullの場合はデータ取得前状態を表示
   if (!params) {
@@ -85,6 +104,7 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
           rawData={data as EstatStatsDataResponse}
           statsDataId={params.statsDataId}
           categoryCode={params.categoryCode}
+          rankingKey={rankingKey} // ranking_key を渡す
           onSettingsChange={onSettingsChange}
         />
       )}
