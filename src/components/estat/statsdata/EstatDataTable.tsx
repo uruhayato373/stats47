@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FormattedValue } from "@/types/models/estat";
+import { FormattedValue } from "@/lib/estat/types";
 import { ChevronDown, ChevronUp, Download, Search } from "lucide-react";
 
 interface EstatDataTableProps {

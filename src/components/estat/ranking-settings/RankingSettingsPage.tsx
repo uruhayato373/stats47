@@ -23,18 +23,22 @@ import {
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/estat/ranking-settings";
-import { PrefectureRankingParams, SavedMetadataItem } from "@/types/models";
+import { PrefectureRankingParams, EstatMetaCategoryData } from "@/types/models";
 
 interface RankingSettingsPageProps {
-  initialSavedMetadata: SavedMetadataItem[];
+  initialSavedMetadata: EstatMetaCategoryData[];
 }
 
 export default function RankingSettingsPage({
   initialSavedMetadata,
 }: RankingSettingsPageProps) {
   // 現在の検索パラメータ - Fetcherから受け取ったパラメータを保存
+  // デフォルト値を設定して初期状態でもデータ取得を開始
   const [currentParams, setCurrentParams] =
-    useState<PrefectureRankingParams | null>(null);
+    useState<PrefectureRankingParams | null>({
+      statsDataId: "0000010101", // デフォルト統計表ID（国勢調査）
+      categoryCode: "A1101", // デフォルトカテゴリ（総人口）
+    });
 
   /**
    * Fetcherからのパラメータ受け取り処理
@@ -60,7 +64,7 @@ export default function RankingSettingsPage({
    * 保存済みデータ選択処理
    * サイドバーから保存済みメタデータを選択した際に呼び出される
    */
-  const handleDataSelect = (item: SavedMetadataItem) => {
+  const handleDataSelect = (item: EstatMetaCategoryData) => {
     // 選択されたデータで新しい検索を実行
     const params: PrefectureRankingParams = {
       statsDataId: item.stats_data_id,

@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/types/models/estat/parameters";
+import { GetStatsDataParams } from "@/lib/estat/types/parameters";
 import { RefreshCw, AlertCircle } from "lucide-react";
 
 export interface EstatLineChartProps {

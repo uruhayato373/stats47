@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AlertTriangle, Info, BarChart3, Database } from "lucide-react";
-import { EstatStatsDataResponse } from "@/types/models/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import EstatOverview from "./components/EstatOverview";
 import EstatCategoriesTable from "./components/EstatCategoriesTable";
 import EstatYearsTable from "./components/EstatYearsTable";

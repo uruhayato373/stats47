@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { EstatMetaInfoResponse } from "@/types/models/estat";
+import { EstatMetaInfoResponse } from "@/lib/estat/types";
 import { safeRender } from "../utils/helpers";
 import SaveButton from "./SaveButton";
 

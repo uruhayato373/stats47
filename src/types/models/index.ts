@@ -5,4 +5,3 @@
 export * from "./user";
 export * from "./prefecture";
 export * from "./ranking";
-export * from "./estat";

@@ -81,7 +81,7 @@ CREATE INDEX idx_cat01 ON estat_metainfo(cat01);
 
 ## 開発者向け情報
 
-- **データ変換**: `src/lib/estat/data-transformer.ts`
+- **データ変換**: `src/lib/estat/statsdata/EstatStatsDataService.ts`
 - **データベース操作**: `src/lib/estat/metadata-database.ts`
 - **API 呼び出し**: `src/services/estat-api.ts`
 - **保存処理**: `src/app/api/estat/metadata/save/route.ts`

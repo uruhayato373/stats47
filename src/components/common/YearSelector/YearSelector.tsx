@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { FormattedYear } from "@/types/models/estat/formatted";
+import { FormattedYear } from "@/lib/estat/types/formatted";
 
 interface YearOption {
   code: string;

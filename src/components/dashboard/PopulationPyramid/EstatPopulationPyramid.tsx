@@ -5,8 +5,8 @@ import * as d3 from "d3";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { RefreshCw, AlertCircle, Play, Pause, Download, Save } from "lucide-react";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/types/models/estat/parameters";
-import { FormattedValue } from "@/types/models/estat/formatted";
+import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { FormattedValue } from "@/lib/estat/types/formatted";
 
 export interface EstatPopulationPyramidProps {
   /**

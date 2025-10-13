@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FormattedEstatData } from "@/types/models/estat";
+import { FormattedEstatData } from "@/lib/estat/types";
 
 interface UseYearSelectionOptions {
   years: FormattedEstatData["years"];

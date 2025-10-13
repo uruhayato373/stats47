@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse } from "@/types/models/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 import { YearSelector } from "@/components/ranking/ui/YearSelector";
@@ -14,10 +14,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import {
-  transformEstatToFormattedValues,
-  extractAvailableYears,
-} from "@/lib/choropleth/data-transformer";
+import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
 
 /**
  * EstatRankingDataContainerのプロパティ
@@ -44,6 +41,14 @@ interface EstatRankingDataContainerProps {
 export const EstatRankingDataContainer: React.FC<
   EstatRankingDataContainerProps
 > = ({ rawData, statsDataId, categoryCode, onSettingsChange }) => {
+  // デバッグ情報を追加
+  console.log("EstatRankingDataContainer - Debug Info:", {
+    rawDataKeys: rawData ? Object.keys(rawData) : null,
+    statsDataId,
+    categoryCode,
+    hasRawData: !!rawData,
+  });
+
   // ===== 状態管理 =====
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -51,7 +56,33 @@ export const EstatRankingDataContainer: React.FC<
   // Step 1: e-Stat APIレスポンスから利用可能な年度を抽出
   // CLASS_OBJ_TIME.CLASSから年度情報を取得し、降順でソート
   const availableYears = useMemo(() => {
-    return extractAvailableYears(rawData);
+    try {
+      const formattedData = EstatStatsDataService.formatStatsData(rawData);
+      const years = formattedData.years.map(
+        (year: { name: string }) => year.name
+      );
+
+      // 年度名から4桁の年度を抽出
+      const extractedYears: string[] = [];
+      years.forEach((yearName: string) => {
+        const yearMatch = yearName.match(/(\d{4})/);
+        if (yearMatch) {
+          extractedYears.push(yearMatch[1]);
+        }
+      });
+
+      const sortedYears = [...new Set(extractedYears)].sort(
+        (a, b) => parseInt(b) - parseInt(a)
+      );
+      console.log("EstatRankingDataContainer - Available Years:", sortedYears);
+      return sortedYears;
+    } catch (error) {
+      console.error(
+        "EstatRankingDataContainer - Error extracting years:",
+        error
+      );
+      return [];
+    }
   }, [rawData]);
 
   // Step 2: 年度選択の状態管理
@@ -71,22 +102,38 @@ export const EstatRankingDataContainer: React.FC<
   const formattedData = useMemo(() => {
     if (!selectedYear) return [];
 
-    // サブカテゴリ情報を構築（データ変換に必要）
-    const subcategory = {
-      id: statsDataId,
-      categoryId: "prefecture-ranking",
-      name: "都道府県ランキング",
-      displayOrder: 0,
-      component: "EstatRankingDataContainer",
-      unit: "",
-      categoryCode: categoryCode,
-      statsDataId: statsDataId,
-      dataType: "numerical" as const,
-    };
+    try {
+      // EstatStatsDataServiceを使用してデータを変換
+      const formattedEstatData = EstatStatsDataService.formatStatsData(rawData);
 
-    // e-Stat生データをFormattedValue[]に変換（年度でフィルタリング）
-    return transformEstatToFormattedValues(rawData, subcategory, selectedYear);
-  }, [rawData, selectedYear, categoryCode, statsDataId]);
+      // 選択された年度のデータのみをフィルタリング
+      const filteredValues = formattedEstatData.values.filter((value) => {
+        // 年度名に選択された年度が含まれているかチェック
+        return value.timeName && value.timeName.includes(selectedYear);
+      });
+
+      // FormattedValue[]に変換（RankingValue[]に変換する前の段階）
+      return filteredValues.map((value) => ({
+        value: value.value,
+        numericValue: value.numericValue,
+        displayValue: value.displayValue,
+        unit: value.unit,
+        areaCode: value.areaCode,
+        areaName: value.areaName,
+        categoryCode: value.categoryCode,
+        categoryName: value.categoryName,
+        timeCode: value.timeCode,
+        timeName: value.timeName,
+        rank: 0, // ランクは後で計算
+      }));
+    } catch (error) {
+      console.error(
+        "EstatRankingDataContainer - Error formatting data:",
+        error
+      );
+      return [];
+    }
+  }, [rawData, selectedYear]);
 
   // ===== サブカテゴリ情報の構築 =====
   // 表示コンポーネント用のサブカテゴリ情報
@@ -111,11 +158,17 @@ export const EstatRankingDataContainer: React.FC<
   // ===== ローディング状態 =====
   // 年度データが抽出できない場合のローディング表示
   if (availableYears.length === 0) {
+    console.log(
+      "EstatRankingDataContainer - No years found, showing loading..."
+    );
     return (
       <div className="p-8 text-center">
         <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>
         <p className="mt-4 text-gray-600 dark:text-neutral-400">
           データを処理中...
+        </p>
+        <p className="mt-2 text-sm text-gray-500 dark:text-neutral-500">
+          年度データの抽出に時間がかかっています
         </p>
       </div>
     );

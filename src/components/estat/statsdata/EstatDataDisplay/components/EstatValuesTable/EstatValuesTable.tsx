@@ -1,8 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse } from "@/types/models/estat";
-import { FormattedValue } from "@/types/models/estat";
-import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { FormattedValue } from "@/lib/estat/types";
+import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 
 interface EstatValuesTableProps {
@@ -12,7 +12,7 @@ interface EstatValuesTableProps {
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   if (!data) return null;
 
-  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const formattedData = EstatStatsDataService.formatStatsData(data);
   const values = formattedData.values;
 
   const columns: TableColumn<FormattedValue>[] = [

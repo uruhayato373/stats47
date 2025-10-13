@@ -972,11 +972,11 @@ SELECT * FROM ranking_items WHERE subcategory_id = 'land-area' AND is_active = 1
 
 ### 概要
 
-全67個のダッシュボードコンポーネントは、全国用と都道府県用に分離された新しいアーキテクチャを採用しています。このセクションでは、新しいサブカテゴリーのダッシュボードコンポーネントを作成する手順を説明します。
+全 67 個のダッシュボードコンポーネントは、全国用と都道府県用に分離された新しいアーキテクチャを採用しています。このセクションでは、新しいサブカテゴリーのダッシュボードコンポーネントを作成する手順を説明します。
 
 ### 1. コンポーネントファイルの作成
 
-新しいサブカテゴリー用に以下の2つのファイルを作成します：
+新しいサブカテゴリー用に以下の 2 つのファイルを作成します：
 
 ```
 src/components/subcategories/[category]/[subcategory]/
@@ -1011,7 +1011,7 @@ export const BasicPopulationNationalDashboard: React.FC<
   const statsDataId = "0000010101";
   const cdCat01 = {
     totalPopulation: "A1101", // 総人口
-    malePopulation: "A1102",  // 男性人口
+    malePopulation: "A1102", // 男性人口
     femalePopulation: "A1103", // 女性人口
   };
 
@@ -1088,7 +1088,7 @@ export const BasicPopulationPrefectureDashboard: React.FC<
   const statsDataId = "0000010101";
   const cdCat01 = {
     totalPopulation: "A1101", // 総人口
-    malePopulation: "A1102",  // 男性人口
+    malePopulation: "A1102", // 男性人口
     femalePopulation: "A1103", // 女性人口
   };
 
@@ -1151,7 +1151,7 @@ export const BasicPopulationPrefectureDashboard: React.FC<
 
 ### 4. エクスポートの設定
 
-#### 4.1 サブカテゴリーレベルのindex.tsx
+#### 4.1 サブカテゴリーレベルの index.tsx
 
 ```tsx
 // src/components/subcategories/population/basic-population/index.tsx
@@ -1160,7 +1160,7 @@ export { BasicPopulationNationalDashboard } from "./BasicPopulationNationalDashb
 export { BasicPopulationPrefectureDashboard } from "./BasicPopulationPrefectureDashboard";
 ```
 
-#### 4.2 カテゴリーレベルのindex.tsx
+#### 4.2 カテゴリーレベルの index.tsx
 
 ```tsx
 // src/components/subcategories/population/index.ts
@@ -1172,7 +1172,7 @@ export {
 // 他のサブカテゴリーも同様に追加
 ```
 
-#### 4.3 全体のindex.tsx
+#### 4.3 全体の index.tsx
 
 ```tsx
 // src/components/subcategories/index.tsx
@@ -1183,7 +1183,7 @@ export {
 // 他のカテゴリーも同様に追加
 ```
 
-### 5. categories.jsonの更新
+### 5. categories.json の更新
 
 ```json
 {
@@ -1206,10 +1206,10 @@ export {
 
 ### 7. チェックリスト
 
-- [ ] NationalDashboard作成
-- [ ] PrefectureDashboard作成
-- [ ] index.tsx更新（3箇所）
-- [ ] categories.json更新
+- [ ] NationalDashboard 作成
+- [ ] PrefectureDashboard 作成
+- [ ] index.tsx 更新（3 箇所）
+- [ ] categories.json 更新
 - [ ] 全国表示テスト（/dashboard/00000）
 - [ ] 都道府県表示テスト（/dashboard/13000）
 - [ ] リンターエラーなし
@@ -1230,13 +1230,13 @@ export {
 
 #### 9.2 データ処理
 
-- 統計データIDとカテゴリコードを適切に設定
+- 統計データ ID とカテゴリコードを適切に設定
 - エラーハンドリングを実装
 - ローディング状態を考慮
 
 #### 9.3 スタイリング
 
-- Tailwind CSSクラスを使用
+- Tailwind CSS クラスを使用
 - レスポンシブデザインを考慮
 - ダークモード対応
 
@@ -1342,10 +1342,10 @@ e-Stat API のデータ変換ロジックをテストする場合：
 
 ```bash
 # データ変換ロジックのテスト実行
-npm test -- src/lib/estat/__tests__/data-transformer.test.ts
+npm test -- src/lib/estat/__tests__/EstatStatsDataService.test.ts
 
 # 特定のテストケースの実行
-npm test -- src/lib/estat/__tests__/data-transformer.test.ts --testNamePattern="item_nameからcat01の文字列を正しく除外する"
+npm test -- src/lib/estat/__tests__/EstatStatsDataService.test.ts --testNamePattern="item_nameからcat01の文字列を正しく除外する"
 ```
 
 ##### テストの内容

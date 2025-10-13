@@ -3,7 +3,7 @@
 import { AlertTriangle, Database } from "lucide-react";
 import { EstatRankingDataContainer } from "@/components/estat/ranking-settings/containers";
 import { useEstatData } from "@/hooks/ranking/useEstatData";
-import { EstatStatsDataResponse } from "@/types/models/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { DisplayProps } from "./types";
 
 export default function Display({ params, onSettingsChange }: DisplayProps) {
@@ -16,7 +16,32 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
   // useEstatData()フックを使用してe-Stat APIから統計データを取得
   const { data, error, isLoading } = useEstatData(params);
 
-  // ローディング状態
+  // デバッグ情報を追加
+  console.log("Display.tsx - Debug Info:", {
+    params,
+    isLoading,
+    error,
+    hasData: !!data,
+    dataKeys: data ? Object.keys(data) : null,
+  });
+
+  // パラメータがnullの場合はデータ取得前状態を表示
+  if (!params) {
+    return (
+      <div className="p-8 text-center">
+        <Database className="w-12 h-12 text-gray-500 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
+          データ取得前
+        </h3>
+        <p className="text-gray-600 dark:text-neutral-400">
+          上のフォームから統計表IDを入力してデータを取得してください
+        </p>
+        <p className="text-sm text-gray-500 dark:text-neutral-500 mt-2">
+          取得したデータの地図表示とランキングが表示されます
+        </p>
+      </div>
+    );
+  }
   if (isLoading) {
     return (
       <div className="p-8 text-center">
@@ -76,6 +101,29 @@ export default function Display({ params, onSettingsChange }: DisplayProps) {
           categoryCode={params.categoryCode}
           onSettingsChange={onSettingsChange}
         />
+      )}
+
+      {/* デバッグ情報: 条件分岐の確認 */}
+      {!params && (
+        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+          <p className="text-yellow-800 dark:text-yellow-200">
+            Debug: params is null
+          </p>
+        </div>
+      )}
+      {!data && (
+        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+          <p className="text-yellow-800 dark:text-yellow-200">
+            Debug: data is null
+          </p>
+        </div>
+      )}
+      {params && !params.categoryCode && (
+        <div className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+          <p className="text-yellow-800 dark:text-yellow-200">
+            Debug: categoryCode is missing
+          </p>
+        </div>
       )}
     </div>
   );

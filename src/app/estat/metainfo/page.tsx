@@ -1,6 +1,6 @@
 import { EstatMetainfoPage } from "@/components/estat/metainfo";
 import { fetchEstatMetainfoUnique } from "@/lib/d1-client";
-import { SavedEstatMetainfoItem } from "@/types/models/estat";
+import { SavedEstatMetainfoItem } from "@/lib/estat/types";
 
 export default async function EstatMetadataPage() {
   const initialSavedMetadata = await fetchEstatMetainfoUnique({

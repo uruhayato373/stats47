@@ -27,8 +27,16 @@ export interface FetchError extends Error {
  * @throws FetchError - HTTPエラーまたはレスポンス解析エラー
  */
 export async function fetcher<T>(url: string): Promise<T> {
+  console.log("fetcher - Starting request:", url);
+
   // 1. fetch APIでHTTPリクエスト実行
   const response = await fetch(url);
+
+  console.log(
+    "fetcher - Response status:",
+    response.status,
+    response.statusText
+  );
 
   // 2. レスポンスステータスチェック
   if (!response.ok) {
@@ -44,9 +52,14 @@ export async function fetcher<T>(url: string): Promise<T> {
     }
 
     error.status = response.status; // HTTPステータスコードを保存
+    console.log("fetcher - Error:", error);
     throw error; // FetchErrorをthrow
   }
 
   // 4. 成功時はJSONデータを返却
-  return response.json();
+  const data = await response.json();
+  console.log("fetcher - Success:", {
+    dataKeys: data ? Object.keys(data) : null,
+  });
+  return data;
 }

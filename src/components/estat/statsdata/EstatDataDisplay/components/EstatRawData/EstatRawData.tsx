@@ -1,7 +1,7 @@
 "use client";
 
 import { Copy, Download } from "lucide-react";
-import { EstatStatsDataResponse } from "@/types/models/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 
 interface EstatRawDataProps {
   data: EstatStatsDataResponse;

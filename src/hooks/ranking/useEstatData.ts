@@ -13,7 +13,7 @@
 
 import useSWR from "swr";
 import { fetcher } from "@/lib/swr/fetcher";
-import { EstatStatsDataResponse } from "@/types/models/estat";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { PrefectureRankingParams } from "@/types/models";
 
 /**
@@ -48,6 +48,13 @@ export function useEstatData(params: PrefectureRankingParams | null) {
   // SWRキー生成 - パラメータがnullの場合はデータ取得を無効化
   const key = params ? `/api/estat/data?${buildQueryString(params)}` : null;
 
+  // デバッグ情報を追加
+  console.log("useEstatData - Debug Info:", {
+    params,
+    key,
+    queryString: params ? buildQueryString(params) : null,
+  });
+
   const { data, error, isLoading, mutate } = useSWR<EstatStatsDataResponse>(
     key,
     fetcher,
@@ -63,6 +70,14 @@ export function useEstatData(params: PrefectureRankingParams | null) {
           return false;
         }
         return true;
+      },
+      onSuccess: (data) => {
+        console.log("useEstatData - Success:", {
+          dataKeys: data ? Object.keys(data) : null,
+        });
+      },
+      onError: (error) => {
+        console.log("useEstatData - Error:", error);
       },
     }
   );

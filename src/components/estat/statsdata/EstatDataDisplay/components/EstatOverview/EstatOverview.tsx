@@ -11,8 +11,8 @@ import {
   Clock,
   MapPin,
 } from "lucide-react";
-import { EstatStatsDataResponse } from "@/types/models/estat";
-import { EstatDataFormatter } from "@/lib/estat/statsdata/EstatDataFormatter";
+import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;
@@ -40,7 +40,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
   const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
 
   // 地域データを取得
-  const formattedData = EstatDataFormatter.formatStatsData(data);
+  const formattedData = EstatStatsDataService.formatStatsData(data);
   const areas = formattedData.areas;
 
   return (

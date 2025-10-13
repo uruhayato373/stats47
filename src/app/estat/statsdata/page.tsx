@@ -20,7 +20,7 @@ import {
   EstatDataFetcher,
   EstatDataDisplay,
 } from "@/components/estat/statsdata";
-import { EstatStatsDataResponse, GetStatsDataParams } from "@/types/models/estat";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat/types";
 
 /**
  * e-STAT APIを使用して統計データを取得・表示するメインページコンポーネント
