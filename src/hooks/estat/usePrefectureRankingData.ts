@@ -34,13 +34,17 @@ export function usePrefectureRankingData({
 
     const filtered = formattedData.values.filter((value) => {
       const basicFilter =
-        value.timeCode === selectedYear && value.areaCode !== "00000";
+        value.dimensions.time.code === selectedYear &&
+        value.dimensions.area.code !== "00000";
 
       if (categoryCode) {
         const categoryCodes = categoryCode
           .split(",")
           .map((code) => code.trim());
-        return basicFilter && categoryCodes.includes(value.categoryCode);
+        return (
+          basicFilter &&
+          categoryCodes.includes(value.dimensions.cat01?.code || "")
+        );
       }
 
       return basicFilter;

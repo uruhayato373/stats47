@@ -22,6 +22,8 @@ export class EstatDataFilter {
    * @returns 都道府県データのみの配列（全国データを除外）
    */
   static getPrefectureValues(values: FormattedValue[]): FormattedValue[] {
-    return values.filter((v) => v.areaCode && v.areaCode !== "00000");
+    return values.filter(
+      (v) => v.dimensions.area.code && v.dimensions.area.code !== "00000"
+    );
   }
 }

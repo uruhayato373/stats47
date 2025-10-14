@@ -5,14 +5,7 @@
  * 共通型は common.ts からインポート。
  */
 
-import {
-  EstatResult,
-  EstatTextNode,
-  EstatTableInfo,
-  EstatClassInfo,
-  EstatClassObject,
-  EstatClass,
-} from "./common";
+import { EstatResult, EstatTableInfo, EstatClassInfo } from "./common";
 
 /**
  * e-STAT API getStatsData のレスポンス型
@@ -334,16 +327,101 @@ export interface FormattedYear {
 /**
  * 整形された値情報
  */
+/**
+ * 整形済み統計値
+ *
+ * 全ての分類軸をdimensionsで統一的に管理。
+ * 後方互換性は考慮せず、クリーンな設計を優先。
+ *
+ * @example
+ * ```typescript
+ * const value: FormattedValue = {
+ *   value: 14047594,
+ *   unit: "人",
+ *   dimensions: {
+ *     area: { code: "13000", name: "東京都", level: "2" },
+ *     time: { code: "2020", name: "2020年" },
+ *     cat01: { code: "001", name: "総人口", unit: "人" }
+ *   }
+ * };
+ * ```
+ */
 export interface FormattedValue {
-  value: number;
+  // 数値データ
+  value: number | null; // null = 特殊文字（***, -, X, …）
   unit: string | null;
-  areaCode: string;
-  areaName: string;
-  categoryCode: string;
-  categoryName: string;
-  timeCode: string;
-  timeName: string;
+
+  // 全次元を統一的に管理
+  dimensions: {
+    // 必須次元
+    area: {
+      code: string;
+      name: string;
+      level?: string; // 階層レベル（"1", "2", "3"）
+      parentCode?: string; // 親コード
+    };
+    time: {
+      code: string;
+      name: string;
+    };
+
+    // オプション次元（統計表により異なる）
+    tab?: {
+      code: string;
+      name: string;
+      unit?: string;
+    };
+    cat01?: { code: string; name: string; unit?: string };
+    cat02?: { code: string; name: string; unit?: string };
+    cat03?: { code: string; name: string; unit?: string };
+    cat04?: { code: string; name: string; unit?: string };
+    cat05?: { code: string; name: string; unit?: string };
+    cat06?: { code: string; name: string; unit?: string };
+    cat07?: { code: string; name: string; unit?: string };
+    cat08?: { code: string; name: string; unit?: string };
+    cat09?: { code: string; name: string; unit?: string };
+    cat10?: { code: string; name: string; unit?: string };
+    cat11?: { code: string; name: string; unit?: string };
+    cat12?: { code: string; name: string; unit?: string };
+    cat13?: { code: string; name: string; unit?: string };
+    cat14?: { code: string; name: string; unit?: string };
+    cat15?: { code: string; name: string; unit?: string };
+  };
+
+  // ランキング用（オプション）
   rank?: number;
+}
+
+/**
+ * e-Stat値のパーサー
+ *
+ * 特殊文字（***, -, X, …）をnullに変換し、
+ * 有効な数値のみを返す。
+ *
+ * @param raw - 生の値文字列
+ * @returns 数値またはnull（特殊文字の場合）
+ *
+ * @example
+ * ```typescript
+ * parseEstatValue("1234.5")  // → 1234.5
+ * parseEstatValue("***")     // → null
+ * parseEstatValue("-")       // → null
+ * parseEstatValue("X")       // → null
+ * parseEstatValue("")        // → null
+ * ```
+ */
+export function parseEstatValue(raw: string): number | null {
+  if (!raw || raw.trim() === "") {
+    return null;
+  }
+
+  const specialChars = ["***", "-", "X", "…"];
+  if (specialChars.includes(raw.trim())) {
+    return null;
+  }
+
+  const num = parseFloat(raw);
+  return isNaN(num) ? null : num;
 }
 
 /**

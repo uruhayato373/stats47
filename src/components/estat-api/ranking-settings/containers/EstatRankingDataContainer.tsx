@@ -97,9 +97,9 @@ export const EstatRankingDataContainer: React.FC<
       const filteredValues = formattedEstatData.values.filter((value) => {
         // 年度フィルタ + 全国データ(00000)を除外 + 数値データのみ
         return (
-          value.timeName &&
-          value.timeName.includes(selectedYear) &&
-          value.areaCode !== "00000" &&
+          value.dimensions.time.name &&
+          value.dimensions.time.name.includes(selectedYear) &&
+          value.dimensions.area.code !== "00000" &&
           value.value !== null
         );
       });
@@ -108,12 +108,12 @@ export const EstatRankingDataContainer: React.FC<
       const mappedValues = filteredValues.map((value) => ({
         value: value.value || 0, // valueをそのまま使用
         unit: value.unit,
-        areaCode: value.areaCode,
-        areaName: value.areaName,
-        categoryCode: value.categoryCode,
-        categoryName: value.categoryName,
-        timeCode: value.timeCode,
-        timeName: value.timeName,
+        areaCode: value.dimensions.area.code,
+        areaName: value.dimensions.area.name,
+        categoryCode: value.dimensions.cat01?.code || "",
+        categoryName: value.dimensions.cat01?.name || "",
+        timeCode: value.dimensions.time.code,
+        timeName: value.dimensions.time.name,
         rank: 0, // ランクは後で計算
       }));
 

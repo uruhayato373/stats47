@@ -103,16 +103,25 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
         // データの結合 - 全国データ（areaCode=00000）を除外
         const prefectureData = new Map<string, FormattedValue>();
         data.forEach((d) => {
-          if (d.areaCode && d.areaCode !== "00000" && d.value !== null) {
+          if (
+            d.dimensions.area.code &&
+            d.dimensions.area.code !== "00000" &&
+            d.value !== null
+          ) {
             // areaCodeを2桁に正規化（先頭の0を削除してから2桁にパディング）
-            const prefCode = d.areaCode.replace(/^0+/, "").padStart(2, "0");
+            const prefCode = d.dimensions.area.code
+              .replace(/^0+/, "")
+              .padStart(2, "0");
             prefectureData.set(prefCode, d);
 
             // 地域名でもマッピング
-            if (d.areaName) {
-              prefectureData.set(d.areaName, d);
+            if (d.dimensions.area.name) {
+              prefectureData.set(d.dimensions.area.name, d);
               // 都道府県を除いた名前でもマッピング
-              const normalizedName = d.areaName.replace(/[都道府県]$/, "");
+              const normalizedName = d.dimensions.area.name.replace(
+                /[都道府県]$/,
+                ""
+              );
               prefectureData.set(normalizedName, d);
             }
           }
@@ -129,7 +138,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
         // カラースケールを生成
         const validValues = data
-          .filter((d) => d.areaCode !== "00000" && d.value !== null)
+          .filter((d) => d.dimensions.area.code !== "00000" && d.value !== null)
           .map((d) => d.value!);
 
         if (validValues.length === 0) {
