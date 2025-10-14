@@ -189,7 +189,7 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
 
         {/* 右側: 都道府県データテーブル */}
         <div className="flex-shrink-0">
-          <PrefectureDataTableClient data={data} subcategory={subcategory} />
+          <PrefectureDataTableClient data={data} />
         </div>
       </div>
 

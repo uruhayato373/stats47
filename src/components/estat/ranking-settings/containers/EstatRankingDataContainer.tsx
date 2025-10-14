@@ -252,10 +252,7 @@ export const EstatRankingDataContainer: React.FC<
         {/* Step 5c: データテーブル表示 */}
         {/* FormattedValue[]をテーブル形式で表示（ランキング順） */}
         <div className="flex-shrink-0">
-          <PrefectureDataTableClient
-            data={formattedData}
-            subcategory={subcategory}
-          />
+          <PrefectureDataTableClient data={formattedData} />
         </div>
       </div>
 
