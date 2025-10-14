@@ -14,7 +14,7 @@ import {
   SelectOption,
   ParsedMetaInfo,
   PrefectureMap,
-} from "../types/metainfo";
+} from "../types/meta-info";
 
 export class EstatMetaInfoFormatter {
   /**

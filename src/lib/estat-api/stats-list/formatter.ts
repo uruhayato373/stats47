@@ -4,7 +4,7 @@
  */
 
 import { EstatStatsListResponse, EstatTableListItem } from "../types";
-import { StatsListSearchResult, FormattedTableInfo } from "../types/statslist";
+import { StatsListSearchResult, FormattedTableInfo } from "../types/stats-list";
 
 /**
  * e-Stat統計表リストフォーマッター

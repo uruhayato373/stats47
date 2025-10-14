@@ -5,7 +5,7 @@
 
 import { estatAPI } from "../client";
 import { EstatStatsListResponse, GetStatsListParams } from "../types";
-import { StatsListSearchOptions, PagingOptions } from "../types/statslist";
+import { StatsListSearchOptions, PagingOptions } from "../types/stats-list";
 
 /**
  * e-Stat統計表リスト取得クラス

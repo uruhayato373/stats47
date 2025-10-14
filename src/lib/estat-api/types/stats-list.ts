@@ -2,7 +2,7 @@
  * e-Stat統計表リスト共通型定義
  */
 
-import { EstatResult, EstatTextNode } from "./statsdata";
+import { EstatResult, EstatTextNode } from "./common";
 
 /**
  * getStatsList APIパラメータ

@@ -1,4 +1,4 @@
-import { EstatResult, EstatTextNode } from "./statsdata";
+import { EstatResult, EstatTextNode } from "./common";
 
 /**
  * getDataCatalog APIパラメータ

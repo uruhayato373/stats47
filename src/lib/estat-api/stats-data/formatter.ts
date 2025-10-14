@@ -8,7 +8,7 @@ import {
   FormattedTableInfo,
   FormattedMetadata,
   DataNote,
-} from "../types/statsdata";
+} from "../types/stats-data";
 
 /**
  * e-STAT統計データフォーマッター

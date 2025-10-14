@@ -1,6 +1,31 @@
 /**
+ * e-STAT API Stats Data 型定義
+ *
+ * 統計データ取得API（getStatsData）に関連する全ての型定義。
+ * 共通型は common.ts からインポート。
+ */
+
+import {
+  EstatResult,
+  EstatTextNode,
+  EstatTableInfo,
+  EstatClassInfo,
+  EstatClassObject,
+  EstatClass,
+} from "./common";
+
+/**
  * e-STAT API getStatsData のレスポンス型
+ *
+ * 統計データ取得APIの完全なレスポンス構造を定義。
+ * 生のAPIレスポンスから整形されたデータへの変換の起点となる。
+ *
  * @see https://www.e-stat.go.jp/api/api-info/e-stat-manual3-0#api_4
+ * @example
+ * ```typescript
+ * const response: EstatStatsDataResponse = await estatAPI.getStatsData(params);
+ * const formattedData = EstatStatsDataFormatter.formatStatsData(response);
+ * ```
  */
 export interface EstatStatsDataResponse {
   GET_STATS_DATA: {
@@ -11,16 +36,21 @@ export interface EstatStatsDataResponse {
 }
 
 /**
- * 処理結果情報
- */
-export interface EstatResult {
-  STATUS: number; // 0: 正常終了, 100以上: エラー
-  ERROR_MSG: string; // エラーメッセージ（正常時は "正常に終了しました。"）
-  DATE: string; // 処理日時 (YYYY-MM-DDTHH:MM:SS.sss+09:00)
-}
-
-/**
- * getStatsData リクエストパラメータ情報
+ * e-STAT API getStatsData リクエストパラメータ情報
+ *
+ * 統計データ取得時にAPIに送信されたパラメータの詳細。
+ * レスポンス内に含まれるため、どの条件でデータを取得したかが分かる。
+ *
+ * @example
+ * ```typescript
+ * const params: EstatStatsDataParameter = {
+ *   LANG: "J",
+ *   STATS_DATA_ID: "0000010101",
+ *   DATA_FORMAT: "J",
+ *   METAGET_FLG: "Y",
+ *   CNT_GET_FLG: "N"
+ * };
+ * ```
  */
 export interface EstatStatsDataParameter {
   LANG: "J" | "E"; // 言語
@@ -40,7 +70,18 @@ export interface EstatStatsDataParameter {
 }
 
 /**
- * 統計データ本体
+ * e-STAT API統計データ本体
+ *
+ * 統計データの核心部分。メタ情報、分類情報、実際のデータ値を含む。
+ * この構造から整形されたデータ（FormattedEstatData）が生成される。
+ *
+ * @example
+ * ```typescript
+ * const statisticalData: EstatStatisticalData = response.GET_STATS_DATA.STATISTICAL_DATA;
+ * const tableInfo = statisticalData.TABLE_INF; // 統計表情報
+ * const classInfo = statisticalData.CLASS_INF; // 分類情報
+ * const dataInfo = statisticalData.DATA_INF;   // データ値
+ * ```
  */
 export interface EstatStatisticalData {
   RESULT_INF: EstatResultInfo;
@@ -51,7 +92,17 @@ export interface EstatStatisticalData {
 }
 
 /**
- * データ件数情報
+ * e-STAT APIデータ件数情報
+ *
+ * 取得したデータの件数と位置情報。
+ * ページネーションやデータの完全性確認に使用される。
+ *
+ * @example
+ * ```typescript
+ * const resultInfo: EstatResultInfo = statisticalData.RESULT_INF;
+ * console.log(`総件数: ${resultInfo.TOTAL_NUMBER}`);
+ * console.log(`取得範囲: ${resultInfo.FROM_NUMBER}-${resultInfo.TO_NUMBER}`);
+ * ```
  */
 export interface EstatResultInfo {
   TOTAL_NUMBER: number; // 総データ件数
@@ -61,104 +112,17 @@ export interface EstatResultInfo {
 }
 
 /**
- * 統計表情報（生データ）
- */
-export interface EstatTableInfo {
-  "@id"?: string; // 統計表ID
-  TITLE: EstatTextNode; // 統計表題名
-  STAT_NAME: EstatTextNode; // 政府統計名
-  GOV_ORG: EstatTextNode; // 作成機関名
-  STATISTICS_NAME: string; // 提供統計名及び提供分類名
-  TITLE_SPEC?: {
-    // 表題仕様
-    TABLE_CATEGORY?: string; // 表分類
-    TABLE_NAME: string; // 表題
-    TABLE_EXPLANATION?: string; // 表の説明
-  };
-  CYCLE: string; // 提供周期
-  SURVEY_DATE: string; // 調査年月
-  OPEN_DATE: string; // 公開日
-  SMALL_AREA: "0" | "1" | "2"; // 小地域属性（0:該当なし、1:町丁・字等、2:市区町村）
-  COLLECT_AREA: string; // 集計地域区分
-  MAIN_CATEGORY: EstatTextNode; // 分野（大分類）
-  SUB_CATEGORY: EstatTextNode; // 分野（小分類）
-  OVERALL_TOTAL_NUMBER: number; // 総件数
-  UPDATED_DATE: string; // 更新日
-  TOTAL_NUMBER?: string; // 総データ件数
-  FROM_NUMBER?: string; // データ開始位置
-  TO_NUMBER?: string; // データ終了位置
-  STATISTICS_NAME_SPEC: {
-    TABULATION_CATEGORY: string; // 集計区分
-    TABULATION_SUB_CATEGORY1?: string; // 集計区分1
-    TABULATION_SUB_CATEGORY2?: string; // 集計区分2
-    TABULATION_SUB_CATEGORY3?: string; // 集計区分3
-    TABULATION_SUB_CATEGORY4?: string; // 集計区分4
-    TABULATION_SUB_CATEGORY5?: string; // 集計区分5
-  };
-}
-
-/**
- * テキストノード型
- */
-export interface EstatTextNode {
-  $: string;
-  "@no"?: string; // 番号属性（GOV_ORG等で使用）
-}
-
-/**
- * 分類情報
- */
-export interface EstatClassInfo {
-  CLASS_OBJ: EstatClassObject[];
-}
-
-/**
- * 分類オブジェクト（メタ情報）
- */
-export interface EstatClassObject {
-  "@id":
-    | "tab"
-    | "cat01"
-    | "cat02"
-    | "cat03"
-    | "cat04"
-    | "cat05"
-    | "cat06"
-    | "cat07"
-    | "cat08"
-    | "cat09"
-    | "cat10"
-    | "cat11"
-    | "cat12"
-    | "cat13"
-    | "cat14"
-    | "cat15"
-    | "area"
-    | "time"; // 分類ID
-  "@name": string; // 分類名
-  "@description"?: string; // 説明
-  CLASS?: EstatClass | EstatClass[]; // 分類項目（単一または配列）
-  META_INFO?: {
-    // メタ情報（METAGET_FLG=Y時）
-    NEED: "true" | "false"; // 必須有無
-    POSITION: string; // 位置
-  };
-}
-
-/**
- * 分類項目
- */
-export interface EstatClass {
-  "@code": string; // 項目コード
-  "@name": string; // 項目名
-  "@level": string; // 階層レベル
-  "@unit"?: string; // 単位
-  "@parentCode"?: string; // 親コード（階層構造の場合）
-  "@explanation"?: string; // 説明
-}
-
-/**
- * データ情報
+ * e-STAT APIデータ情報
+ *
+ * 実際の統計データ値と注釈情報を含む。
+ * データ値は各次元の組み合わせに対応する数値または特殊文字。
+ *
+ * @example
+ * ```typescript
+ * const dataInfo: EstatDataInfo = statisticalData.DATA_INF;
+ * const values = Array.isArray(dataInfo.VALUE) ? dataInfo.VALUE : [dataInfo.VALUE];
+ * const notes = dataInfo.NOTE ? (Array.isArray(dataInfo.NOTE) ? dataInfo.NOTE : [dataInfo.NOTE]) : [];
+ * ```
  */
 export interface EstatDataInfo {
   NOTE?: EstatNote | EstatNote[]; // 注釈（単一または配列）
@@ -166,7 +130,18 @@ export interface EstatDataInfo {
 }
 
 /**
- * 注釈情報
+ * e-STAT API注釈情報
+ *
+ * データ値に付随する注釈記号とその説明。
+ * 特殊な値（***, -, X等）の意味を説明する。
+ *
+ * @example
+ * ```typescript
+ * const note: EstatNote = {
+ *   "@char": "***",
+ *   $: "調査対象外"
+ * };
+ * ```
  */
 export interface EstatNote {
   "@char": string; // 注釈記号
@@ -174,7 +149,22 @@ export interface EstatNote {
 }
 
 /**
- * データ値
+ * e-STAT APIデータ値
+ *
+ * 統計データの個別の値。各次元の組み合わせに対応する。
+ * 表章項目は必須、その他の次元は統計表の構造に依存。
+ *
+ * @example
+ * ```typescript
+ * const value: EstatValue = {
+ *   "@tab": "A1101",
+ *   "@cat01": "A110101",
+ *   "@area": "13",
+ *   "@time": "2020",
+ *   "@unit": "人",
+ *   $: "14047594"
+ * };
+ * ```
  */
 export interface EstatValue {
   "@tab": string; // 表章項目コード（必須）
@@ -200,7 +190,18 @@ export interface EstatValue {
 }
 
 /**
- * 解説情報
+ * e-STAT API解説情報
+ *
+ * 統計表の項目や概念の詳細な説明。
+ * EXPLANATION_GET_FLG=Yの場合のみ取得される。
+ *
+ * @example
+ * ```typescript
+ * const explanation: EstatExplanation = statisticalData.EXPLANATION;
+ * explanation.EXPLANATION_INF.forEach(exp => {
+ *   console.log(`${exp.ITEM}: ${exp.EXPLANATION}`);
+ * });
+ * ```
  */
 export interface EstatExplanation {
   EXPLANATION_INF: Array<{
@@ -211,7 +212,21 @@ export interface EstatExplanation {
 }
 
 /**
- * getStatsData APIパラメータ
+ * e-STAT API getStatsData パラメータ
+ *
+ * 統計データ取得時に指定するパラメータ。
+ * 絞り込み条件、取得範囲、出力オプションを含む。
+ *
+ * @example
+ * ```typescript
+ * const params: GetStatsDataParams = {
+ *   appId: "your-app-id",
+ *   statsDataId: "0000010101",
+ *   cdCat01: "A1101",
+ *   metaGetFlg: "Y",
+ *   cntGetFlg: "N"
+ * };
+ * ```
  */
 export interface GetStatsDataParams {
   // 必須パラメータ

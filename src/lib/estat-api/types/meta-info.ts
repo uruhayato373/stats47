@@ -1,5 +1,5 @@
 import { EstatMetaCategoryData } from "./index";
-import { EstatResult, EstatTableInfo, EstatClassInfo } from "./statsdata";
+import { EstatResult, EstatTableInfo, EstatClassInfo } from "./common";
 
 /**
  * getMetaInfo APIパラメータ

@@ -14,4 +14,4 @@ export type {
   StatsListSearchResult,
   FormattedTableInfo,
   PagingOptions,
-} from "../types/statslist";
+} from "../types/stats-list";
