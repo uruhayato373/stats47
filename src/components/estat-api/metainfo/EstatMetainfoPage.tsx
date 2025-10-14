@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Header from "@/components/layout/Header";
-import Sidebar from "@/components/layout/Sidebar";
 import {
   EstatMetaInfoPageHeader,
   EstatMetaInfoFetcher,
@@ -76,58 +74,53 @@ export default function EstatMetainfoPage({
   }, []); // 空の依存配列で初回のみ実行
 
   return (
-    <>
-      <Header />
-      <Sidebar />
+    <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
+      {/* ヘッダーセクション - 横幅いっぱい */}
+      <div>
+        <EstatMetaInfoPageHeader
+          loading={loading}
+          currentStatsId={currentStatsId}
+          onRefresh={handleRefresh}
+        />
+      </div>
 
-      <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
-        {/* ヘッダーセクション - 横幅いっぱい */}
-        <div>
-          <EstatMetaInfoPageHeader
-            loading={loading}
-            currentStatsId={currentStatsId}
-            onRefresh={handleRefresh}
-          />
-        </div>
+      {/* メインコンテンツとサイドバーを横並び */}
+      <div className="flex flex-col lg:flex-row min-h-full">
+        {/* メイン作業エリア */}
+        <div className="flex-1 bg-white dark:bg-neutral-800">
+          {/* メインコンテンツ */}
+          <div className="p-4 md:p-6 space-y-6">
+            {/* メタ情報取得フォーム */}
+            <EstatMetaInfoFetcher
+              onSubmit={handleFetchMetaInfo}
+              loading={loading}
+            />
 
-        {/* メインコンテンツとサイドバーを横並び */}
-        <div className="flex flex-col lg:flex-row min-h-full">
-          {/* メイン作業エリア */}
-          <div className="flex-1 bg-white dark:bg-neutral-800">
-            {/* メインコンテンツ */}
-            <div className="p-4 md:p-6 space-y-6">
-              {/* メタ情報取得フォーム */}
-              <EstatMetaInfoFetcher
-                onSubmit={handleFetchMetaInfo}
-                loading={loading}
-              />
-
-              {/* メタ情報表示 */}
-              <EstatMetaInfoDisplay
-                key={
-                  metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] ||
-                  "empty"
-                }
-                metaInfo={metaInfo}
-                loading={loading}
-                error={error}
-              />
-            </div>
-          </div>
-
-          {/* 縦線 */}
-          <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-
-          {/* 保存済みデータサイドバー - 右側に固定表示 */}
-          <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">
-            <EstatMetaInfoSidebar
-              className="h-full"
-              initialData={initialSavedMetadata}
-              onView={handleSidebarItemView}
+            {/* メタ情報表示 */}
+            <EstatMetaInfoDisplay
+              key={
+                metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] ||
+                "empty"
+              }
+              metaInfo={metaInfo}
+              loading={loading}
+              error={error}
             />
           </div>
         </div>
-      </main>
-    </>
+
+        {/* 縦線 */}
+        <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
+
+        {/* 保存済みデータサイドバー - 右側に固定表示 */}
+        <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">
+          <EstatMetaInfoSidebar
+            className="h-full"
+            initialData={initialSavedMetadata}
+            onView={handleSidebarItemView}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
