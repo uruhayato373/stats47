@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
-import { EstatYearSelector } from "@/components/estat/EstatYearSelector";
+import { EstatYearSelector } from "@/components/estat-api/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";

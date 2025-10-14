@@ -1,5 +1,5 @@
 import { fetchEstatMetainfoUnique } from "@/lib/db";
-import RankingSettingsPage from "@/components/estat/ranking-settings/RankingSettingsPage";
+import RankingSettingsPage from "@/components/estat-api/ranking-settings/RankingSettingsPage";
 import { SavedMetadataItem } from "@/types/models";
 
 export default async function Page() {
