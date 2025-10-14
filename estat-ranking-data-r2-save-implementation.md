@@ -1,6 +1,7 @@
 # EstatRankingDataContainer R2保存機能実装ガイド
 
 **作成日**: 2025-10-13
+**最終更新**: 2025-10-13 (v1.1 - FormattedValue型定義の簡素化対応)
 **対象コンポーネント**: `src/components/estat/ranking-settings/containers/EstatRankingDataContainer.tsx`
 **目的**: `formattedData`をR2ストレージにJSON形式で年度ごとに保存する機能の追加
 
@@ -27,31 +28,35 @@
 - **ファイルパス**: `estat_cache/{statsDataId}/{categoryCode}/{timeCode}.json`
 - **トリガー**: ユーザーが「R2に保存」ボタンをクリックした時
 
-### 1.2 データ構造
+### 1.2 データ構造（v1.1更新）
 
 #### FormattedValue型（保存対象）
 
 ```typescript
-interface FormattedValue {
-  value: string;
-  numericValue: number | null;
-  displayValue: string;
-  unit: string | null;
-  areaCode: string;
-  areaName: string;
-  categoryCode: string;
-  categoryName: string;
-  timeCode: string;
-  timeName: string;
-  rank?: number;
+// src/lib/estat/types/formatted.ts
+export interface FormattedValue {
+  value: number;                // 数値データ（簡素化）
+  unit: string | null;          // 単位
+  areaCode: string;             // 地域コード
+  areaName: string;             // 地域名
+  categoryCode: string;         // カテゴリコード
+  categoryName: string;         // カテゴリ名
+  timeCode: string;             // 時系列コード
+  timeName: string;             // 時系列名
+  rank?: number;                // ランク（オプショナル）
 }
 ```
+
+**変更点（v1.1）**:
+- ✅ `value`が`string`から`number`に変更
+- ✅ `numericValue`フィールドが削除（valueに統合）
+- ✅ `displayValue`フィールドが削除（表示時にフォーマット）
 
 #### R2保存形式
 
 ```json
 {
-  "version": "1.0",
+  "version": "1.1",
   "stats_data_id": "0003448738",
   "category_code": "A1101",
   "category_name": "総人口",
@@ -64,15 +69,23 @@ interface FormattedValue {
     {
       "area_code": "01",
       "area_name": "北海道",
-      "value": "5224614",
-      "numeric_value": 5224614,
-      "display_value": "5,224,614",
+      "value": 5224614,
       "rank": 8
+    },
+    {
+      "area_code": "13",
+      "area_name": "東京都",
+      "value": 14047594,
+      "rank": 1
     }
-    // ... 残り46都道府県
+    // ... 残り45都道府県
   ]
 }
 ```
+
+**変更点（v1.1）**:
+- ✅ `numeric_value`フィールドが削除（valueに統合）
+- ✅ `display_value`フィールドが削除
 
 ### 1.3 ファイル構成
 
@@ -153,20 +166,6 @@ interface FormattedValue {
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 2.2 読み取りフロー（将来実装）
-
-```
-EstatRankingDataContainer
-  ↓
-GET /api/estat/cache/get?statsDataId=...&categoryCode=...&timeCode=...
-  ↓
-EstatR2CacheService.getRankingData()
-  ↓
-R2から取得
-  ↓
-FormattedValue[]として返却
-```
-
 ---
 
 ## 3. 実装ステップ
@@ -209,6 +208,7 @@ npx wrangler r2 bucket create stats47-cache-local
 ```typescript
 /**
  * R2に保存されるe-Statキャッシュデータの型定義
+ * FormattedValue v1.1対応版
  */
 
 /**
@@ -217,9 +217,7 @@ npx wrangler r2 bucket create stats47-cache-local
 export interface EstatCacheValueR2 {
   area_code: string;
   area_name: string;
-  value: string;
-  numeric_value: number | null;
-  display_value: string;
+  value: number;      // v1.1: 直接数値を保存
   rank?: number;
 }
 
@@ -252,9 +250,7 @@ export interface SaveEstatCacheRequest {
   values: Array<{
     areaCode: string;
     areaName: string;
-    value: string;
-    numericValue: number | null;
-    displayValue: string;
+    value: number;    // v1.1: 直接数値を受け取る
     rank?: number;
   }>;
 }
@@ -282,6 +278,7 @@ export interface SaveEstatCacheResponse {
 /**
  * e-StatデータR2キャッシュサービス
  * e-Stat APIから取得したデータをR2でキャッシュ管理
+ * FormattedValue v1.1対応版
  */
 
 import { FormattedValue } from "@/lib/estat/types";
@@ -315,10 +312,10 @@ export class EstatR2CacheService {
       throw new Error("保存するデータがありません");
     }
 
-    // ランキング順位を計算（numeric_valueの降順）
+    // ランキング順位を計算（valueの降順）
     const sortedData = [...data].sort((a, b) => {
-      const aValue = a.numericValue ?? 0;
-      const bValue = b.numericValue ?? 0;
+      const aValue = a.value ?? 0;
+      const bValue = b.value ?? 0;
       return bValue - aValue; // 降順ソート
     });
 
@@ -330,7 +327,7 @@ export class EstatR2CacheService {
 
     // R2保存用データ構造に変換
     const r2Data: EstatCacheDataR2 = {
-      version: "1.0",
+      version: "1.1",
       stats_data_id: statsDataId,
       category_code: categoryCode,
       category_name: categoryName,
@@ -343,9 +340,7 @@ export class EstatR2CacheService {
         (record): EstatCacheValueR2 => ({
           area_code: record.areaCode,
           area_name: record.areaName,
-          value: record.value,
-          numeric_value: record.numericValue,
-          display_value: record.displayValue,
+          value: record.value,        // v1.1: 直接数値を保存
           rank: record.rank,
         })
       ),
@@ -413,9 +408,7 @@ export class EstatR2CacheService {
       // FormattedValue[]に変換
       const formattedValues: FormattedValue[] = cacheData.values.map(
         (v) => ({
-          value: v.value,
-          numericValue: v.numeric_value,
-          displayValue: v.display_value,
+          value: v.value,                    // v1.1: 直接数値を使用
           unit: cacheData.unit,
           areaCode: v.area_code,
           areaName: v.area_name,
@@ -532,6 +525,7 @@ import {
 /**
  * e-StatランキングデータをR2に保存するAPIエンドポイント
  * POST /api/estat/cache/save
+ * FormattedValue v1.1対応版
  */
 export async function POST(
   request: NextRequest
@@ -565,9 +559,7 @@ export async function POST(
 
     // FormattedValue[]に変換
     const formattedValues: FormattedValue[] = body.values.map((v) => ({
-      value: v.value,
-      numericValue: v.numericValue,
-      displayValue: v.displayValue,
+      value: v.value,              // v1.1: 直接数値を使用
       unit: body.unit,
       areaCode: v.areaCode,
       areaName: v.areaName,
@@ -631,7 +623,7 @@ export async function POST(
 #### 5.1 必要なインポートを追加
 
 ```typescript
-// 既存のインポートの下に追加
+// 既存のインポートの下に追加（16行目付近）
 import { Save, Check, AlertCircle } from "lucide-react"; // Settings の下に追加
 import { SaveEstatCacheRequest } from "@/types/models/r2/estat-cache";
 ```
@@ -680,9 +672,7 @@ const handleSaveToR2 = async () => {
       values: formattedData.map((v) => ({
         areaCode: v.areaCode,
         areaName: v.areaName,
-        value: v.value,
-        numericValue: v.numericValue,
-        displayValue: v.displayValue,
+        value: v.value,        // v1.1: 直接数値を送信
         rank: v.rank,
       })),
     };
@@ -728,7 +718,7 @@ const handleSaveToR2 = async () => {
 #### 5.4 UIボタンを追加
 
 ```typescript
-// RankingHeaderのactionsプロップを更新（209-220行目付近）
+// RankingHeaderのactionsプロップを更新（209行目付近）
 actions={
   <div className="flex gap-2">
     {/* R2保存ボタン */}
@@ -810,16 +800,18 @@ actions={
 
 ### 4.1 完全なコード差分
 
-#### EstatRankingDataContainer.tsx（更新箇所）
+#### EstatRankingDataContainer.tsx（更新箇所のみ）
 
 ```diff
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
+-import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
++import { EstatStatsDataResponse } from "@/lib/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
-import { YearSelector } from "@/components/common";
+-import { YearSelector } from "@/components/common";
++import { EstatYearSelector } from "@/components/estat/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
@@ -887,8 +879,6 @@ export const EstatRankingDataContainer: React.FC<
 +          areaCode: v.areaCode,
 +          areaName: v.areaName,
 +          value: v.value,
-+          numericValue: v.numericValue,
-+          displayValue: v.displayValue,
 +          rank: v.rank,
 +        })),
 +      };
@@ -936,8 +926,10 @@ export const EstatRankingDataContainer: React.FC<
       <RankingHeader
         title={`${subcategory.name}ランキング`}
         yearSelector={
-          <YearSelector
-            years={availableYears}
+-          <YearSelector
+-            years={availableYears}
++          <EstatYearSelector
++            years={formattedEstatData.years}
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
@@ -1070,144 +1062,41 @@ npx wrangler r2 object get stats47-cache-local/estat_cache/0003448738/A1101/2023
 npx wrangler r2 object get stats47-cache-local/estat_cache/{statsDataId}/{categoryCode}/{timeCode}.json
 
 # 期待される内容:
-# - version: "1.0"
+# - version: "1.1"
 # - total_count: 47 (都道府県数)
 # - values配列に47件のデータ
+# - valueが数値型
 # - rank が1から47まで正しく設定されている
 ```
 
-#### 自動テスト（オプション）
+#### JSONスキーマ検証
 
-**ファイル**: `src/lib/estat/cache/__tests__/EstatR2CacheService.test.ts` (新規作成)
-
-```typescript
-import { describe, it, expect, beforeEach } from "vitest";
-import { EstatR2CacheService } from "../EstatR2CacheService";
-import { FormattedValue } from "@/lib/estat/types";
-
-describe("EstatR2CacheService", () => {
-  const mockEnv = {
-    R2_BUCKET: {
-      put: vi.fn(),
-      get: vi.fn(),
-      list: vi.fn(),
-      delete: vi.fn(),
-    } as unknown as R2Bucket,
-  };
-
-  const mockData: FormattedValue[] = [
+```json
+{
+  "version": "1.1",
+  "stats_data_id": "0003448738",
+  "category_code": "A1101",
+  "category_name": "総人口",
+  "time_code": "2023100000",
+  "time_name": "2023年",
+  "unit": "人",
+  "saved_at": "2025-10-13T12:34:56.789Z",
+  "total_count": 47,
+  "values": [
     {
-      value: "14047594",
-      numericValue: 14047594,
-      displayValue: "14,047,594",
-      unit: "人",
-      areaCode: "13",
-      areaName: "東京都",
-      categoryCode: "A1101",
-      categoryName: "総人口",
-      timeCode: "2023100000",
-      timeName: "2023年",
-    },
-    {
-      value: "5224614",
-      numericValue: 5224614,
-      displayValue: "5,224,614",
-      unit: "人",
-      areaCode: "01",
-      areaName: "北海道",
-      categoryCode: "A1101",
-      categoryName: "総人口",
-      timeCode: "2023100000",
-      timeName: "2023年",
-    },
-  ];
-
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  describe("saveRankingData", () => {
-    it("should save data to R2 with correct structure", async () => {
-      await EstatR2CacheService.saveRankingData(
-        mockEnv,
-        "0003448738",
-        "A1101",
-        "総人口",
-        "2023100000",
-        "2023年",
-        mockData
-      );
-
-      expect(mockEnv.R2_BUCKET.put).toHaveBeenCalledWith(
-        "estat_cache/0003448738/A1101/2023100000.json",
-        expect.any(Uint8Array),
-        expect.objectContaining({
-          httpMetadata: {
-            contentType: "application/json",
-          },
-        })
-      );
-    });
-
-    it("should calculate ranks correctly", async () => {
-      const result = await EstatR2CacheService.saveRankingData(
-        mockEnv,
-        "0003448738",
-        "A1101",
-        "総人口",
-        "2023100000",
-        "2023年",
-        mockData
-      );
-
-      expect(result.count).toBe(2);
-      // 東京都が1位、北海道が2位になることを期待
-    });
-
-    it("should throw error if data is empty", async () => {
-      await expect(
-        EstatR2CacheService.saveRankingData(
-          mockEnv,
-          "0003448738",
-          "A1101",
-          "総人口",
-          "2023100000",
-          "2023年",
-          []
-        )
-      ).rejects.toThrow("保存するデータがありません");
-    });
-  });
-});
+      "area_code": "13",
+      "area_name": "東京都",
+      "value": 14047594,
+      "rank": 1
+    }
+  ]
+}
 ```
 
-```bash
-# テスト実行
-npm test -- src/lib/estat/cache/__tests__/EstatR2CacheService.test.ts
-```
-
-### 5.3 本番環境での動作確認
-
-#### デプロイ
-
-```bash
-# 本番環境用バケット作成
-npx wrangler r2 bucket create stats47-cache
-
-# デプロイ
-npm run deploy
-```
-
-#### 確認
-
-1. 本番環境のURLにアクセス
-2. ランキングデータを取得して保存
-3. R2バケットに正しく保存されていることを確認
-
-```bash
-# 本番環境のR2確認
-npx wrangler r2 object list stats47-cache --prefix="estat_cache/"
-```
+**確認項目**:
+- ✅ `value`が数値型（文字列ではない）
+- ✅ `numeric_value`と`display_value`フィールドが存在しない
+- ✅ `rank`が正しく計算されている（降順）
 
 ---
 
@@ -1233,50 +1122,37 @@ npx wrangler r2 bucket list
 cat wrangler.toml | grep -A 3 "r2_buckets"
 ```
 
-### 問題2: 保存に失敗する
-
-**エラーメッセージ**:
-```
-データの保存に失敗しました
-```
-
-**デバッグ手順**:
-
-1. **コンソールログを確認**
-```typescript
-// EstatR2CacheService.ts に追加
-console.log("保存データ:", r2Data);
-console.log("キー:", key);
-console.log("サイズ:", jsonBuffer.byteLength);
-```
-
-2. **ネットワークタブを確認**
-- ブラウザの開発者ツール > Network タブ
-- `/api/estat/cache/save` リクエストのステータスとレスポンスを確認
-
-3. **APIログを確認**
-```bash
-# Cloudflare Workersのログ確認
-npx wrangler tail
-```
-
-### 問題3: データが重複して保存される
+### 問題2: 型エラー「value is string but should be number」
 
 **原因**:
-- 同じ年度を複数回保存している
-
-**確認方法**:
-```bash
-# R2内のオブジェクト一覧
-npx wrangler r2 object list stats47-cache-local --prefix="estat_cache/0003448738/A1101/"
-
-# 出力例:
-# estat_cache/0003448738/A1101/2023100000.json
-# estat_cache/0003448738/A1101/2022100000.json
-```
+古いFormattedValue定義を使用している
 
 **解決方法**:
-R2は同じキーで上書き保存されるため、問題なし。重複チェックは不要。
+```typescript
+// src/lib/estat/types/formatted.ts を確認
+export interface FormattedValue {
+  value: number;  // ← string ではなく number であることを確認
+  // ...
+}
+```
+
+### 問題3: 保存されたJSONでvalueが文字列になっている
+
+**原因**:
+データマッピング時に`String()`で変換している
+
+**解決方法**:
+```typescript
+// ❌ 間違い
+values: formattedData.map(v => ({
+  value: String(v.value),  // 文字列に変換している
+}))
+
+// ✅ 正しい
+values: formattedData.map(v => ({
+  value: v.value,  // 数値のまま
+}))
+```
 
 ### 問題4: TypeScriptエラーが出る
 
@@ -1294,30 +1170,6 @@ ls -la src/types/models/r2/
 Cmd+Shift+P > "TypeScript: Restart TS Server"
 ```
 
-### 問題5: 本番環境で動作しない
-
-**確認項目**:
-
-1. **環境変数の確認**
-```bash
-npx wrangler secret list
-```
-
-2. **デプロイ確認**
-```bash
-npx wrangler deployments list
-```
-
-3. **R2バケットの確認**
-```bash
-npx wrangler r2 bucket list
-```
-
-4. **ログ確認**
-```bash
-npx wrangler tail --format=pretty
-```
-
 ---
 
 ## 7. まとめ
@@ -1331,6 +1183,7 @@ npx wrangler tail --format=pretty
 - [ ] APIエンドポイント作成（`src/app/api/estat/cache/save/route.ts`）
 - [ ] フロントエンド更新（`EstatRankingDataContainer.tsx`）
 - [ ] ローカル環境でテスト
+- [ ] 保存されたJSONの検証（`value`が数値型であることを確認）
 - [ ] 本番環境にデプロイ
 - [ ] 本番環境でテスト
 
@@ -1346,6 +1199,20 @@ npx wrangler tail --format=pretty
 | テスト | 30分 |
 | **合計** | **約2時間** |
 
+### v1.1での主要変更点
+
+1. **FormattedValue構造の簡素化**
+   - `value: number` に統一
+   - `numericValue`, `displayValue` フィールド削除
+
+2. **R2保存形式の簡素化**
+   - `value: number` のみ保存
+   - `numeric_value`, `display_value` フィールド削除
+
+3. **コード量の削減**
+   - 変換ロジックが簡潔に
+   - 保守性の向上
+
 ### 次のステップ（オプション）
 
 1. **R2からの読み取り機能追加**
@@ -1360,11 +1227,12 @@ npx wrangler tail --format=pretty
 3. **自動キャッシュ更新**
    - Cron Triggerで定期的にデータを更新
 
-4. **R2移行完了**
+4. **R2完全移行**
    - 「ランキング値R2移行計画書」（`doc/ranking-values-r2-migration-plan.md`）に従って完全移行
 
 ---
 
-**文書バージョン**: 1.0
+**文書バージョン**: 1.1
 **最終更新日**: 2025-10-13
+**変更内容**: FormattedValue v1.1（値の簡素化）対応
 **作成者**: Claude Code
