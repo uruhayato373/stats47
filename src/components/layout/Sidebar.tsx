@@ -42,7 +42,7 @@ export default function Sidebar() {
       ],
       estat: [
         {
-          href: "/estat/metainfo",
+          href: "/estat-api/metainfo",
           label: "メタ情報",
           icon: (
             <svg
@@ -66,7 +66,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat/statsdata",
+          href: "/estat-api/statsdata",
           label: "統計データ",
           icon: (
             <svg
@@ -90,7 +90,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat/statslist",
+          href: "/estat-api/statslist",
           label: "統計表リスト",
           icon: (
             <svg
@@ -114,7 +114,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat/ranking-settings",
+          href: "/estat-api/ranking-settings",
           label: "ランキング設定",
           icon: (
             <svg

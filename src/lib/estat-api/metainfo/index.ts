@@ -4,7 +4,10 @@
  */
 
 // 型定義
-export type { BatchProcessResult, BatchProcessOptions } from "./types";
+export type {
+  BatchProcessResult,
+  BatchProcessOptions,
+} from "./batch-processor";
 
 // クラス
 export { EstatIdUtils } from "./id-utils";

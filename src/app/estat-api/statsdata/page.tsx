@@ -15,9 +15,9 @@ import { estatAPI } from "@/lib/estat-api";
  *
  * 初期表示用として statsDataId=0000010101, cdCat01=A1101 のデータを取得します。
  *
- * @returns {JSX.Element} レンダリングされたページコンポーネント
+ * @returns {Promise<React.ReactElement>} レンダリングされたページコンポーネント
  */
-export default async function EstatDataPage() {
+export default async function Page(): Promise<React.ReactElement> {
   // 初期表示用のデータを取得
   let initialData = null;
 
