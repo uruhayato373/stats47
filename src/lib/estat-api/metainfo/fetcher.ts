@@ -3,8 +3,8 @@
  * 責務: API通信とエラーハンドリング
  */
 
-import { estatAPI } from "../../client";
-import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../../types";
+import { estatAPI } from "../client";
+import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../types";
 import { EstatMetaInfoFormatter } from "./formatter";
 
 export class EstatMetaInfoFetcher {

@@ -5,8 +5,9 @@ export * from "./constants";
 export { estatAPI, EstatAPIClient } from "./client";
 
 // SRP-compliant formatters
-export * from "./formatters/metainfo";
-export * from "./formatters/statsdata";
+export * from "./metainfo";
+export * from "./statsdata";
+export * from "./statslist";
 
 // Types
 export * from "./types";

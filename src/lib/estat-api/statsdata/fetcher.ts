@@ -1,6 +1,6 @@
-import { estatAPI } from "../../client";
-import { EstatStatsDataResponse } from "../../types";
-import { FormattedEstatData } from "../../types/formatted";
+import { estatAPI } from "../client";
+import { EstatStatsDataResponse } from "../types";
+import { FormattedEstatData } from "../types/formatted";
 import { FetchOptions } from "./types";
 import { EstatStatsDataFormatter } from "./formatter";
 

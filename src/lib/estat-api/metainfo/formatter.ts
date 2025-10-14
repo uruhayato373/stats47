@@ -3,7 +3,7 @@
  * 責務: データ構造の変換のみを担当（純粋関数）
  */
 
-import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../../types";
+import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../types";
 
 export class EstatMetaInfoFormatter {
   /**

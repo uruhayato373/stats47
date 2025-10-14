@@ -1,11 +1,11 @@
-import { EstatStatsDataResponse, EstatValue } from "../../types";
+import { EstatStatsDataResponse, EstatValue } from "../types";
 import {
   FormattedArea,
   FormattedCategory,
   FormattedYear,
   FormattedValue,
   FormattedEstatData,
-} from "../../types/formatted";
+} from "../types/formatted";
 
 /**
  * e-STAT統計データフォーマッター
