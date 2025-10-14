@@ -1,6 +1,15 @@
 import { EstatResult, EstatTextNode } from "./statsdata";
 
 /**
+ * getDataCatalog APIパラメータ
+ */
+export interface GetDataCatalogParams {
+  appId: string; // アプリケーションID
+  statsDataId: string; // 統計表ID
+  lang?: "J" | "E"; // 言語（デフォルト:J）
+}
+
+/**
  * getDataCatalog APIのレスポンス型
  * 統計表ファイル（Excel、CSV、PDF）の取得
  */

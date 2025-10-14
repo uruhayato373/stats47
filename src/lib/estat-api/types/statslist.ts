@@ -136,7 +136,7 @@ export interface StatsListSearchOptions {
  */
 export interface StatsListSearchResult {
   totalCount: number;
-  tables: FormattedTableInfo[];
+  tables: StatsListTableInfo[];
   pagination: {
     fromNumber: number;
     toNumber: number;
@@ -145,9 +145,9 @@ export interface StatsListSearchResult {
 }
 
 /**
- * 整形された統計表情報
+ * 統計表リスト用のテーブル情報
  */
-export interface FormattedTableInfo {
+export interface StatsListTableInfo {
   id: string;
   statName: string;
   govOrg: string;
