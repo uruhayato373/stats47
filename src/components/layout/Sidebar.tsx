@@ -42,7 +42,7 @@ export default function Sidebar() {
       ],
       estat: [
         {
-          href: "/estat-api/metainfo",
+          href: "/estat-api/meta-info",
           label: "メタ情報",
           icon: (
             <svg
@@ -66,7 +66,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat-api/statsdata",
+          href: "/estat-api/stats-data",
           label: "統計データ",
           icon: (
             <svg
@@ -90,7 +90,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat-api/statslist",
+          href: "/estat-api/stats-list",
           label: "統計表リスト",
           icon: (
             <svg

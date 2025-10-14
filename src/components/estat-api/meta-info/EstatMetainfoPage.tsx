@@ -5,8 +5,8 @@ import {
   EstatMetaInfoPageHeader,
   EstatMetaInfoFetcher,
   EstatMetaInfoDisplay,
-} from "@/components/estat-api/metainfo";
-import { EstatMetaInfoSidebar } from "@/components/estat-api/metainfo";
+} from "@/components/estat-api/meta-info";
+import { EstatMetaInfoSidebar } from "@/components/estat-api/meta-info";
 import {
   estatAPI,
   EstatMetaInfoResponse,

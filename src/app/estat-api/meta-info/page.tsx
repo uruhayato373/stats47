@@ -1,4 +1,4 @@
-import { EstatMetainfoPage } from "@/components/estat-api/metainfo";
+import { EstatMetainfoPage } from "@/components/estat-api/meta-info";
 import { fetchEstatMetainfoUnique } from "@/lib/db";
 import { SavedEstatMetainfoItem } from "@/lib/estat-api";
 

@@ -12,7 +12,7 @@ import {
   StatsListSearch,
   StatsListResults,
   StatsListPagination,
-} from "@/components/estat-api/statslist";
+} from "@/components/estat-api/stats-list";
 
 export default function EstatAPIStatsListPage() {
   const [searchResult, setSearchResult] =

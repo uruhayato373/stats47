@@ -7,7 +7,7 @@
  * @module EstatDataPage
  */
 
-import { EstatAPIStatsDataPage } from "@/components/estat-api/statsdata";
+import { EstatAPIStatsDataPage } from "@/components/estat-api/stats-data";
 import { estatAPI } from "@/lib/estat-api";
 
 /**
