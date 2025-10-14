@@ -3,7 +3,7 @@
   "generatedAt": "2025-01-15T10:30:00Z",
   "datasets": [
     {
-      "id": "0000010101",
+      "statsDataId": "0000010101",
       "title": "Ａ　人口・世帯",
       "statName": "社会・人口統計体系",
       "govOrg": "総務省",
@@ -12,19 +12,23 @@
       "schemaVersion": "1.0.0",
       "files": {
         "metainfo": "data/mock/metainfo/prefecture/0000010101.json",
-        "statsdata": "data/mock/statsdata/prefecture/0000010101.json"
+        "statsdata": {
+          "A1101": "data/mock/statsdata/prefecture/0000010101_A1101.json"
+        }
       },
       "metadata": {
         "recordCount": 2400,
         "size": {
-          "metainfo": "15KB",
-          "statsdata": "850KB"
+          "metainfo": "135KB",
+          "statsdata": {
+            "A1101": "496KB"
+          }
         }
       },
       "tags": ["人口", "都道府県", "時系列"]
     },
     {
-      "id": "0000010102",
+      "statsDataId": "0000020201",
       "title": "Ｂ　自然環境",
       "statName": "社会・人口統計体系",
       "govOrg": "総務省",
@@ -32,14 +36,18 @@
       "dataVersion": "2025-06-30",
       "schemaVersion": "1.0.0",
       "files": {
-        "metainfo": "data/mock/metainfo/municipality/0000010102.json",
-        "statsdata": "data/mock/statsdata/municipality/0000010102.json"
+        "metainfo": "data/mock/metainfo/municipality/0000020201.json",
+        "statsdata": {
+          "A1101": "data/mock/statsdata/municipality/0000020201_A1101.json"
+        }
       },
       "metadata": {
         "recordCount": 1200,
         "size": {
-          "metainfo": "20KB",
-          "statsdata": "400KB"
+          "metainfo": "407KB",
+          "statsdata": {
+            "A1101": "3.7MB"
+          }
         }
       },
       "tags": ["環境", "市区町村"]
