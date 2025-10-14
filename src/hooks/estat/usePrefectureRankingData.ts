@@ -1,7 +1,11 @@
 "use client";
 
 import { useMemo } from "react";
-import { FormattedEstatData, EstatStatsDataFormatter } from "@/lib/estat-api";
+import {
+  FormattedEstatData,
+  EstatStatsDataFormatter,
+  EstatDataFilter,
+} from "@/lib/estat-api";
 import { VisualizationSettings } from "@/lib/prefecture-ranking/visualization-settings";
 import { PrefectureRankingSettingsService } from "@/lib/prefecture-ranking/settings-service";
 

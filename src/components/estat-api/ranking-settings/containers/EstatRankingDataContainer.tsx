@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse } from "@/lib/estat-api";
+import {
+  EstatStatsDataResponse,
+  EstatStatsDataFormatter,
+} from "@/lib/estat-api";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 import { EstatYearSelector } from "@/components/estat-api/EstatYearSelector";
@@ -14,7 +17,6 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
 import { RankingItem } from "@/types/models/ranking";
 
 /**

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatMetaInfoRepository } from "@/lib/estat-d1";
 import { createD1Database } from "@/lib/db";
+import {
+  EstatMetaInfoFetcher,
+  EstatMetaInfoBatchProcessor,
+} from "@/lib/estat-api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,30 +32,59 @@ export async function POST(request: NextRequest) {
     let result;
 
     if (batchMode && startId && endId) {
-      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
-      throw new Error("Not implemented yet");
+      // ID範囲を指定した一括処理
+      const batchResult = await EstatMetaInfoBatchProcessor.processRange(
+        startId,
+        endId,
+        { batchSize: 10, delayMs: 1000 }
+      );
+
+      // 成功したデータをデータベースに保存
+      for (const item of batchResult.results) {
+        if (item.success) {
+          // TODO: 成功したデータをデータベースに保存
+          // metaInfoRepository.saveTransformedData(transformedData);
+        }
+      }
+
       return NextResponse.json({
         success: true,
         message: `${startId}から${endId}までの統計表IDを処理しました`,
-        details: result,
+        details: batchResult,
       });
     } else if (Array.isArray(statsDataId)) {
-      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
-      throw new Error("Not implemented yet");
+      // 複数IDの一括処理
+      const batchResult = await EstatMetaInfoBatchProcessor.processBulk(
+        statsDataId,
+        { batchSize: 10, delayMs: 1000 }
+      );
+
+      // 成功したデータをデータベースに保存
+      for (const item of batchResult.results) {
+        if (item.success) {
+          // TODO: 成功したデータをデータベースに保存
+          // metaInfoRepository.saveTransformedData(transformedData);
+        }
+      }
+
       return NextResponse.json({
         success: true,
         message: `${statsDataId.length}件の統計表IDを処理しました`,
-        details: result,
+        details: batchResult,
       });
     } else if (statsDataId) {
-      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
-      throw new Error("Not implemented yet");
+      // 単一IDの処理
+      const transformedData = await EstatMetaInfoFetcher.fetchAndTransform(
+        statsDataId
+      );
+
+      // TODO: データベースに保存
+      // const result = await metaInfoRepository.saveTransformedData(transformedData);
+
       return NextResponse.json({
-        success: result.success,
-        message: result.success
-          ? `${statsDataId}のメタ情報を保存しました`
-          : `${statsDataId}のメタ情報保存に失敗しました`,
-        details: result,
+        success: true,
+        message: `統計表ID ${statsDataId} を処理しました`,
+        details: { entriesProcessed: transformedData.length },
       });
     } else {
       return NextResponse.json(

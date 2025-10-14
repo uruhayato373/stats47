@@ -1,7 +1,10 @@
 "use client";
 
-import { EstatStatsDataResponse, FormattedValue } from "@/lib/estat-api";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
+import {
+  EstatStatsDataResponse,
+  FormattedValue,
+  EstatStatsDataFormatter,
+} from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 
 interface EstatValuesTableProps {

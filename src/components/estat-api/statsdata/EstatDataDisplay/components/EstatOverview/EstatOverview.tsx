@@ -11,8 +11,10 @@ import {
   Clock,
   MapPin,
 } from "lucide-react";
-import { EstatStatsDataResponse } from "@/lib/estat-api";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
+import {
+  EstatStatsDataResponse,
+  EstatStatsDataFormatter,
+} from "@/lib/estat-api";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;

@@ -3,8 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
-import { GetStatsDataParams } from "@/lib/estat-api";
+import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
 
 export interface EstatLineChartProps {

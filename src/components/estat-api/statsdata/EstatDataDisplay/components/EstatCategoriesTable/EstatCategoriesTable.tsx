@@ -1,8 +1,11 @@
 "use client";
 
-import { EstatStatsDataResponse, FormattedCategory } from "@/lib/estat-api";
+import {
+  EstatStatsDataResponse,
+  FormattedCategory,
+  EstatStatsDataFormatter,
+} from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
 
 interface EstatCategoriesTableProps {
   data: EstatStatsDataResponse;
