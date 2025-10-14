@@ -24,7 +24,7 @@ import {
   PrefectureRankingPageHeader,
 } from "@/components/estat-api/ranking-settings";
 import { PrefectureRankingParams } from "@/types/models";
-import { EstatMetaCategoryData } from "@/lib/estat/types";
+import { EstatMetaCategoryData } from "@/lib/estat-api";
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: EstatMetaCategoryData[];

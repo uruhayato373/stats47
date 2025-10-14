@@ -5,7 +5,7 @@
  */
 
 import { createLocalD1Database } from "@/lib/db";
-import { FormattedValue } from "@/lib/estat/types/formatted";
+import { FormattedValue } from "@/lib/estat-api";
 
 export interface RankingDataQuery {
   rankingKey: string;

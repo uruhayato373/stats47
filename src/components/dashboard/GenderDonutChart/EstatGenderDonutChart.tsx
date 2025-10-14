@@ -4,8 +4,7 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import { RefreshCw, AlertCircle } from "lucide-react";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 
 export interface EstatGenderDonutChartProps {
   /**
@@ -94,10 +93,13 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
       setError(null);
 
       try {
-        console.log("[EstatGenderDonutChart] Fetching data with params:", params);
+        console.log(
+          "[EstatGenderDonutChart] Fetching data with params:",
+          params
+        );
 
         // e-stat APIからデータを取得
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
           params.statsDataId,
           {
             limit: params.limit || 100000,
@@ -114,7 +116,9 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
         );
 
         if (filteredValues.length === 0) {
-          throw new Error(`指定された地域（${areaCode}）のデータが見つかりませんでした`);
+          throw new Error(
+            `指定された地域（${areaCode}）のデータが見つかりませんでした`
+          );
         }
 
         // 最新年度を取得
@@ -125,10 +129,16 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
         console.log("[EstatGenderDonutChart] Latest year:", latestYear);
 
         // 最新年度の男性・女性データを取得
-        const latestData = filteredValues.filter((v) => v.timeCode === latestYear);
+        const latestData = filteredValues.filter(
+          (v) => v.timeCode === latestYear
+        );
 
-        const maleData = latestData.find((v) => v.categoryCode === maleCategoryCode);
-        const femaleData = latestData.find((v) => v.categoryCode === femaleCategoryCode);
+        const maleData = latestData.find(
+          (v) => v.categoryCode === maleCategoryCode
+        );
+        const femaleData = latestData.find(
+          (v) => v.categoryCode === femaleCategoryCode
+        );
 
         if (!maleData || !femaleData) {
           throw new Error("男性または女性のデータが見つかりませんでした");
@@ -159,7 +169,13 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.statsDataId, params.limit, areaCode, maleCategoryCode, femaleCategoryCode]);
+  }, [
+    params.statsDataId,
+    params.limit,
+    areaCode,
+    maleCategoryCode,
+    femaleCategoryCode,
+  ]);
 
   // チャートデータ
   const chartData: GenderData[] = useMemo(() => {
@@ -171,7 +187,12 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
 
   // D3.jsでチャートを描画
   useEffect(() => {
-    if (!chartRef.current || loading || error || (maleValue === 0 && femaleValue === 0)) {
+    if (
+      !chartRef.current ||
+      loading ||
+      error ||
+      (maleValue === 0 && femaleValue === 0)
+    ) {
       return;
     }
 
@@ -251,9 +272,7 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
           }
         };
 
-        tooltip
-          .style("opacity", 1)
-          .html(`
+        tooltip.style("opacity", 1).html(`
             <div><strong>${d.data.label}</strong></div>
             <div>${formatValue(d.data.value)}</div>
             <div>${percentage}%</div>
@@ -351,7 +370,9 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
             <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
               データの取得に失敗しました
             </h3>
-            <p className="text-red-600 dark:text-red-400 mb-4 text-sm">{error}</p>
+            <p className="text-red-600 dark:text-red-400 mb-4 text-sm">
+              {error}
+            </p>
             <div className="text-xs text-gray-600 dark:text-neutral-400 mt-4">
               <p>統計表ID: {params.statsDataId}</p>
               <p>地域コード: {areaCode}</p>

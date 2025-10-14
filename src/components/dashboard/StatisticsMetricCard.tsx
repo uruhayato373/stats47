@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { Sparkline, SparklineDataPoint } from "@/components/d3/Sparkline";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
+import { GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
 export interface StatisticsMetricCardProps {
@@ -69,7 +69,7 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
 
       try {
         // e-stat APIからデータを取得
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
           params.statsDataId,
           {
             categoryFilter: params.cdCat01,

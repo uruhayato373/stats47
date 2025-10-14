@@ -1,22 +1,40 @@
 /**
  * @fileoverview e-STAT API統計データページのサーバーコンポーネント
  *
- * このページはサーバーサイドで必要な初期データを取得し、
+ * このページはサーバーサイドで初期表示用のデータを取得し、
  * クライアント側のEstatAPIStatsDataPageコンポーネントをレンダリングします。
  *
  * @module EstatDataPage
  */
 
 import { EstatAPIStatsDataPage } from "@/components/estat-api/statsdata";
+import { estatAPI } from "@/lib/estat-api";
 
 /**
  * e-STAT API統計データページのサーバーコンポーネント
  *
+ * 初期表示用として statsDataId=0000010101, cdCat01=A1101 のデータを取得します。
+ *
  * @returns {JSX.Element} レンダリングされたページコンポーネント
  */
-export default function EstatDataPage() {
-  // サーバーサイドで必要な初期データを取得する場合はここで実装
-  // 例: デフォルトの統計表ID、カテゴリ情報等
+export default async function EstatDataPage() {
+  // 初期表示用のデータを取得
+  let initialData = null;
 
-  return <EstatAPIStatsDataPage />;
+  try {
+    initialData = await estatAPI.getStatsData({
+      statsDataId: "0000010101",
+      cdCat01: "A1101",
+      metaGetFlg: "Y",
+      cntGetFlg: "N",
+      explanationGetFlg: "N",
+      annotationGetFlg: "N",
+      replaceSpChars: "0",
+    });
+  } catch (error) {
+    console.error("初期データ取得エラー:", error);
+    // エラーが発生してもページは表示する（initialData = null）
+  }
+
+  return <EstatAPIStatsDataPage initialData={initialData} />;
 }

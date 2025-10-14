@@ -3,8 +3,8 @@
 
 import React, { useEffect, useState } from "react";
 import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
+import { GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
 
 export interface EstatLineChartProps {
@@ -12,7 +12,7 @@ export interface EstatLineChartProps {
    * e-stat API パラメータ
    * statsDataId は必須
    */
-  params: Omit<GetStatsDataParams, 'appId'>;
+  params: Omit<GetStatsDataParams, "appId">;
 
   /**
    * 都道府県コード（指定しない場合は全国データ "00000" を使用）
@@ -81,7 +81,9 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
   onDataLoaded,
   onError,
 }) => {
-  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataPoint[]>([]);
+  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataPoint[]>(
+    []
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -91,10 +93,10 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
       setError(null);
 
       try {
-        console.log('[EstatLineChart] Fetching data with params:', params);
+        console.log("[EstatLineChart] Fetching data with params:", params);
 
         // e-stat APIからデータを取得（年度フィルタなしで全期間のデータを取得）
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
           params.statsDataId,
           {
             categoryFilter: params.cdCat01,
@@ -102,7 +104,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
           }
         );
 
-        console.log('[EstatLineChart] Data fetched:', {
+        console.log("[EstatLineChart] Data fetched:", {
           totalValues: response.values.length,
           years: response.years.length,
         });
@@ -112,10 +114,17 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
           (v) => v.areaCode === areaCode && v.numericValue !== null
         );
 
-        console.log('[EstatLineChart] Filtered values for area', areaCode, ':', filteredValues.length);
+        console.log(
+          "[EstatLineChart] Filtered values for area",
+          areaCode,
+          ":",
+          filteredValues.length
+        );
 
         if (filteredValues.length === 0) {
-          throw new Error(`指定された地域（${areaCode}）のデータが見つかりませんでした`);
+          throw new Error(
+            `指定された地域（${areaCode}）のデータが見つかりませんでした`
+          );
         }
 
         // 時系列データに変換（年度ごとにグループ化）
@@ -127,14 +136,16 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
         });
 
         // TimeSeriesDataPoint形式に変換してソート
-        const timeSeries: TimeSeriesDataPoint[] = Array.from(dataByYear.entries())
+        const timeSeries: TimeSeriesDataPoint[] = Array.from(
+          dataByYear.entries()
+        )
           .map(([year, value]) => ({
             year,
             value,
           }))
           .sort((a, b) => a.year.localeCompare(b.year));
 
-        console.log('[EstatLineChart] Time series data:', timeSeries.length);
+        console.log("[EstatLineChart] Time series data:", timeSeries.length);
 
         setTimeSeriesData(timeSeries);
 
@@ -142,8 +153,9 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
           onDataLoaded(timeSeries);
         }
       } catch (err) {
-        console.error('[EstatLineChart] Error fetching data:', err);
-        const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
+        console.error("[EstatLineChart] Error fetching data:", err);
+        const errorMessage =
+          err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
 
         if (onError && err instanceof Error) {
@@ -165,7 +177,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700"
-          style={{ width: width || '100%', height: height || '400px' }}
+          style={{ width: width || "100%", height: height || "400px" }}
         >
           <div className="text-center">
             <RefreshCw className="w-8 h-8 text-indigo-600 mx-auto mb-4 animate-spin" />
@@ -187,7 +199,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800"
-          style={{ width: width || '100%', height: height || '400px' }}
+          style={{ width: width || "100%", height: height || "400px" }}
         >
           <div className="text-center p-8">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
@@ -214,7 +226,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700"
-          style={{ width: width || '100%', height: height || '400px' }}
+          style={{ width: width || "100%", height: height || "400px" }}
         >
           <div className="text-center p-8">
             <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />

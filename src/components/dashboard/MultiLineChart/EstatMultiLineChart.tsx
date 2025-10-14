@@ -3,8 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { LineChart } from "@/components/d3/LineChart";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
+import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
 
 export interface SeriesConfig {
@@ -103,7 +102,7 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
 
       try {
         // e-stat APIからデータを取得（指定地域のデータのみ）
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
           params.statsDataId,
           {
             areaFilter: areaCode,

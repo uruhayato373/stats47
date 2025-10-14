@@ -13,7 +13,7 @@
 
 import useSWR from "swr";
 import { fetcher } from "@/lib/swr/fetcher";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/lib/estat-api";
 import { PrefectureRankingParams } from "@/types/models";
 
 /**

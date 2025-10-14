@@ -3,17 +3,26 @@
 
 import * as d3 from "d3";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { RefreshCw, AlertCircle, Play, Pause, Download, Save } from "lucide-react";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { GetStatsDataParams } from "@/lib/estat/types/parameters";
-import { FormattedValue } from "@/lib/estat/types/formatted";
+import {
+  RefreshCw,
+  AlertCircle,
+  Play,
+  Pause,
+  Download,
+  Save,
+} from "lucide-react";
+import {
+  EstatStatsDataFormatter,
+  GetStatsDataParams,
+  FormattedValue,
+} from "@/lib/estat-api";
 
 export interface EstatPopulationPyramidProps {
   /**
    * e-stat API パラメータ
    * statsDataId は必須
    */
-  params: Omit<GetStatsDataParams, 'appId'>;
+  params: Omit<GetStatsDataParams, "appId">;
 
   /**
    * 都道府県コード（指定しない場合は全国データ "00000" を使用）
@@ -87,17 +96,20 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       setError(null);
 
       try {
-        console.log('[EstatPopulationPyramid] Fetching data with params:', params);
+        console.log(
+          "[EstatPopulationPyramid] Fetching data with params:",
+          params
+        );
 
         // e-stat APIからデータを取得
-        const response = await EstatStatsDataService.getAndFormatStatsData(
+        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
           params.statsDataId,
           {
             limit: params.limit || 100000,
           }
         );
 
-        console.log('[EstatPopulationPyramid] Data fetched:', {
+        console.log("[EstatPopulationPyramid] Data fetched:", {
           totalValues: response.values.length,
         });
 
@@ -106,10 +118,17 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
           (v) => v.areaCode === areaCode && v.numericValue !== null
         );
 
-        console.log('[EstatPopulationPyramid] Filtered values for area', areaCode, ':', filteredValues.length);
+        console.log(
+          "[EstatPopulationPyramid] Filtered values for area",
+          areaCode,
+          ":",
+          filteredValues.length
+        );
 
         if (filteredValues.length === 0) {
-          throw new Error(`指定された地域（${areaCode}）のデータが見つかりませんでした`);
+          throw new Error(
+            `指定された地域（${areaCode}）のデータが見つかりませんでした`
+          );
         }
 
         setData(filteredValues);
@@ -118,8 +137,9 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
           onDataLoaded(filteredValues);
         }
       } catch (err) {
-        console.error('[EstatPopulationPyramid] Error fetching data:', err);
-        const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
+        console.error("[EstatPopulationPyramid] Error fetching data:", err);
+        const errorMessage =
+          err instanceof Error ? err.message : "データの取得に失敗しました";
         setError(errorMessage);
 
         if (onError && err instanceof Error) {
@@ -378,7 +398,10 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
     // チャートの設定
     const margin = { top: 20, right: 80, bottom: 60, left: 80 };
     const chartContainerWidth = chartRef.current.clientWidth;
-    const width = Math.max(chartContainerWidth - margin.left - margin.right, 200);
+    const width = Math.max(
+      chartContainerWidth - margin.left - margin.right,
+      200
+    );
     const height = containerHeight - margin.top - margin.bottom;
 
     // 最大値を計算
@@ -470,9 +493,7 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       .attr("rx", 2)
       .on("mouseover", function (event, d) {
         d3.select(this).attr("opacity", 0.8);
-        tooltip
-          .style("opacity", 1)
-          .html(`
+        tooltip.style("opacity", 1).html(`
             <div><strong>${d.age}</strong></div>
             <div>男性: ${formatValue(d.male)}</div>
           `);
@@ -502,9 +523,7 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       .attr("rx", 2)
       .on("mouseover", function (event, d) {
         d3.select(this).attr("opacity", 0.8);
-        tooltip
-          .style("opacity", 1)
-          .html(`
+        tooltip.style("opacity", 1).html(`
             <div><strong>${d.age}</strong></div>
             <div>女性: ${formatValue(d.female)}</div>
           `);
@@ -644,7 +663,10 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700"
-          style={{ width: containerWidth || '100%', height: containerHeight || '400px' }}
+          style={{
+            width: containerWidth || "100%",
+            height: containerHeight || "400px",
+          }}
         >
           <div className="text-center">
             <RefreshCw className="w-8 h-8 text-indigo-600 mx-auto mb-4 animate-spin" />
@@ -666,7 +688,10 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800"
-          style={{ width: containerWidth || '100%', height: containerHeight || '400px' }}
+          style={{
+            width: containerWidth || "100%",
+            height: containerHeight || "400px",
+          }}
         >
           <div className="text-center p-8">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
@@ -692,7 +717,10 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
       <div className={`relative ${className}`}>
         <div
           className="flex items-center justify-center bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700"
-          style={{ width: containerWidth || '100%', height: containerHeight || '400px' }}
+          style={{
+            width: containerWidth || "100%",
+            height: containerHeight || "400px",
+          }}
         >
           <div className="text-center p-8">
             <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -710,7 +738,9 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
 
   // グラフ表示
   return (
-    <div className={`p-4 bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-200 rounded-xl border border-gray-200 dark:border-gray-700 ${className}`}>
+    <div
+      className={`p-4 bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-200 rounded-xl border border-gray-200 dark:border-gray-700 ${className}`}
+    >
       <div className="flex flex-row items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 mb-4">
         <h3 className="text-xl my-0 font-semibold text-gray-900 dark:text-white">
           {title}
@@ -761,7 +791,9 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
                 <div
                   className="absolute top-6 px-2 py-1 bg-gray-800 text-white text-xs rounded pointer-events-none whitespace-nowrap"
                   style={{
-                    left: `calc(${(selectedYearIndex / (availableYears.length - 1)) * 100}% - 20px)`,
+                    left: `calc(${
+                      (selectedYearIndex / (availableYears.length - 1)) * 100
+                    }% - 20px)`,
                     transform: "translateX(-50%)",
                   }}
                 >

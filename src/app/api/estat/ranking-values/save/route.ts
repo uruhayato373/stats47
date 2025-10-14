@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+// TODO: 実装が必要 - 新しい構造に合わせて修正
+// import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
+// import { EstatStatsDataFormatter } from "@/lib/estat-api";
+// import { EstatStatsDataResponse } from "@/lib/estat-api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,25 +16,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // EstatStatsDataResponseをFormattedEstatDataに変換
-    const formattedData = EstatStatsDataService.formatStatsData(
-      rawData as EstatStatsDataResponse
-    );
-
-    // timeCodeを取得（最初の年次を使用）
-    const actualTimeCode =
-      formattedData.years.length > 0
-        ? formattedData.years[0].timeCode
-        : timeCode || "latest";
-
-    // FormattedValue[]を抽出
-    const values = formattedData.values;
-
-    await EstatRelationalCacheService.saveRankingData(
-      statsDataId,
-      categoryCode,
-      actualTimeCode,
-      values
+    // TODO: 実装が必要 - 新しい構造に合わせて修正
+    throw new Error(
+      "Not implemented yet - needs refactoring for new structure"
     );
 
     return NextResponse.json({

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Archive, RefreshCw } from "lucide-react";
 import { SavedEstatMetaInfoListItem, Pagination } from "./components";
 import { useMetadataList } from "@/hooks/estat";
-import type { EstatMetaCategoryData } from "@/lib/estat/types";
+import type { EstatMetaCategoryData } from "@/lib/estat-api";
 
 interface EstatMetaInfoSidebarProps {
   className?: string;

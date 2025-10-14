@@ -4,7 +4,7 @@ import { AlertTriangle, Database } from "lucide-react";
 import { EstatRankingDataContainer } from "@/components/estat-api/ranking-settings/containers";
 import { useEstatStatsData } from "@/hooks/ranking/useEstatStatsData";
 import { useRankingKey } from "@/hooks/estat";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/lib/estat-api";
 import { DisplayProps } from "./types";
 
 export default function Display({ params, onSettingsChange }: DisplayProps) {

@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
-import { FormattedValue } from "@/lib/estat/types";
+import { FormattedValue } from "@/lib/estat-api";
 
 /**
  * ソート可能なフィールドの型定義

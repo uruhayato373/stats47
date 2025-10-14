@@ -23,8 +23,8 @@ import {
   GetStatsListParams,
   EstatAPIError,
   APIResponseError,
-} from "@/lib/estat/types";
-import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "@/lib/constants";
+} from "./types";
+import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "./constants";
 
 /**
  * e-STAT APIクライアントクラス

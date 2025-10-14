@@ -1,3 +1,13 @@
+/**
+ * e-Stat API関連の定数定義
+ *
+ * このファイルには以下の定数が含まれます：
+ * - API設定（ベースURL、バージョン、データフォーマット等）
+ * - APIエンドポイント
+ * - アプリケーションID
+ * - サンプル統計表ID
+ */
+
 // e-STAT API設定
 export const ESTAT_API = {
   BASE_URL: "https://api.e-stat.go.jp/rest/3.0",

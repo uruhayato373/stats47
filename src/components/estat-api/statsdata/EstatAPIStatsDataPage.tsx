@@ -20,20 +20,33 @@ import {
   EstatDataFetcher,
   EstatDataDisplay,
 } from "@/components/estat-api/statsdata";
-import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat/types";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
+
+/**
+ * EstatAPIStatsDataPage コンポーネントの Props
+ */
+interface EstatAPIStatsDataPageProps {
+  /**
+   * サーバーサイドで取得した初期データ
+   */
+  initialData?: EstatStatsDataResponse | null;
+}
 
 /**
  * e-STAT APIを使用して統計データを取得・表示するメインページコンポーネント
  *
+ * @param {EstatAPIStatsDataPageProps} props - コンポーネントのプロパティ
  * @returns {JSX.Element} レンダリングされたページコンポーネント
  */
-export default function EstatAPIStatsDataPage() {
+export default function EstatAPIStatsDataPage({
+  initialData = null,
+}: EstatAPIStatsDataPageProps) {
   /**
    * APIからの応答データを保持するstate
    * @type {[EstatStatsDataResponse | null, React.Dispatch<React.SetStateAction<EstatStatsDataResponse | null>>]}
    */
   const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
-    null
+    initialData // 初期データをstateの初期値として設定
   );
 
   /**

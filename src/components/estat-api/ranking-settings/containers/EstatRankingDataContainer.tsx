@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { EstatStatsDataResponse } from "@/lib/estat/types";
+import { EstatStatsDataResponse } from "@/lib/estat-api";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 import { EstatYearSelector } from "@/components/estat-api/EstatYearSelector";
@@ -14,7 +14,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking-settings";
 import { Settings } from "lucide-react";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
 import { RankingItem } from "@/types/models/ranking";
 
 /**
@@ -61,7 +61,7 @@ export const EstatRankingDataContainer: React.FC<
   // EstatStatsDataService を使用してデータを変換
   const formattedEstatData = useMemo(() => {
     try {
-      return EstatStatsDataService.formatStatsData(rawData);
+      return EstatStatsDataFormatter.formatStatsData(rawData);
     } catch (error) {
       console.error("データフォーマットエラー:", error);
       return { years: [], values: [], areas: [], categories: [] };

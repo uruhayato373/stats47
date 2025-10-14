@@ -1,8 +1,7 @@
 "use client";
 
-import { EstatStatsDataResponse } from "@/lib/estat/types";
-import { FormattedYear } from "@/lib/estat/types";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat-api";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
 import { useStyles } from "@/hooks/useStyles";
 
@@ -14,7 +13,7 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
   const styles = useStyles();
   if (!data) return null;
 
-  const formattedData = EstatStatsDataService.formatStatsData(data);
+  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const years = formattedData.years;
 
   const columns: TableColumn<FormattedYear>[] = [

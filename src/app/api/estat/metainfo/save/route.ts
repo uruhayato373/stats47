@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoService } from "@/lib/estat/metainfo/EstatMetaInfoService";
+import { EstatMetaInfoRepository } from "@/lib/estat-d1";
 import { createD1Database } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
@@ -21,28 +21,31 @@ export async function POST(request: NextRequest) {
 
     // Cloudflare D1データベースに直接接続
     const db = await createD1Database();
-    const metaInfoService = new EstatMetaInfoService(
+    const metaInfoRepository = new EstatMetaInfoRepository(
       db as unknown as D1Database
     );
 
     let result;
 
     if (batchMode && startId && endId) {
-      result = await metaInfoService.processMetaInfoRange(startId, endId);
+      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
+      throw new Error("Not implemented yet");
       return NextResponse.json({
         success: true,
         message: `${startId}から${endId}までの統計表IDを処理しました`,
         details: result,
       });
     } else if (Array.isArray(statsDataId)) {
-      result = await metaInfoService.processBulkMetaInfo(statsDataId);
+      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
+      throw new Error("Not implemented yet");
       return NextResponse.json({
         success: true,
         message: `${statsDataId.length}件の統計表IDを処理しました`,
         details: result,
       });
     } else if (statsDataId) {
-      result = await metaInfoService.processAndSaveMetaInfo(statsDataId);
+      // TODO: 実装が必要 - EstatMetaInfoFormatter + EstatMetaInfoRepository の組み合わせ
+      throw new Error("Not implemented yet");
       return NextResponse.json({
         success: result.success,
         message: result.success

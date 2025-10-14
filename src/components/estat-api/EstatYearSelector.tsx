@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { FormattedYear } from "@/lib/estat/types";
+import { FormattedYear } from "@/lib/estat-api";
 import { YearSelector } from "@/components/common";
 
 /**

@@ -9,9 +9,11 @@ import {
   EstatMetaInfoDisplay,
 } from "@/components/estat-api/metainfo";
 import { EstatMetaInfoSidebar } from "@/components/estat-api/metainfo";
-import { estatAPI } from "@/services/estat-api";
-import { EstatMetaInfoResponse } from "@/lib/estat/types";
-import { SavedEstatMetainfoItem } from "@/lib/estat/types";
+import {
+  estatAPI,
+  EstatMetaInfoResponse,
+  SavedEstatMetainfoItem,
+} from "@/lib/estat-api";
 
 interface EstatMetainfoPageProps {
   initialSavedMetadata?: SavedEstatMetainfoItem[];

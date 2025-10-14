@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Code, Tag } from "lucide-react";
-import { EstatMetaInfoResponse } from "@/lib/estat/types";
+import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { useStyles } from "@/hooks/useStyles";
 import JsonDisplay from "./components/JsonDisplay";
 import MetaInfoHeader from "./components/MetaInfoHeader";

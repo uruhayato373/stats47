@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { FormattedEstatData } from "@/lib/estat/types";
-import { EstatStatsDataService } from "@/lib/estat/statsdata";
+import { FormattedEstatData, EstatStatsDataFormatter } from "@/lib/estat-api";
 import { VisualizationSettings } from "@/lib/prefecture-ranking/visualization-settings";
 import { PrefectureRankingSettingsService } from "@/lib/prefecture-ranking/settings-service";
 
@@ -22,7 +21,7 @@ export function usePrefectureRankingData({
   // データの整形
   const formattedData = useMemo(() => {
     if (!data) return null;
-    return EstatStatsDataService.formatStatsData(data);
+    return EstatStatsDataFormatter.formatStatsData(data);
   }, [data]);
 
   // データのフィルタリングと変換

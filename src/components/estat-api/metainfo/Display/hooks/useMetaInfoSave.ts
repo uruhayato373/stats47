@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { EstatMetaInfoResponse } from "@/lib/estat/types";
+import { EstatMetaInfoResponse } from "@/lib/estat-api";
 
 interface UseMetaInfoSaveOptions {
   timeout?: number;

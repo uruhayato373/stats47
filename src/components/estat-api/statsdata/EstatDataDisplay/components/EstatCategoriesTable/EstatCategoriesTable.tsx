@@ -1,9 +1,8 @@
 "use client";
 
-import { EstatStatsDataResponse } from "@/lib/estat/types";
-import { FormattedCategory } from "@/lib/estat/types";
+import { EstatStatsDataResponse, FormattedCategory } from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/common/DataTable";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
 
 interface EstatCategoriesTableProps {
   data: EstatStatsDataResponse;
@@ -15,7 +14,7 @@ export default function EstatCategoriesTable({
   if (!data) return null;
 
   // FormattedCategoryデータを取得
-  const formattedData = EstatStatsDataService.formatStatsData(data);
+  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const categories = formattedData.categories;
 
   const columns: TableColumn<FormattedCategory>[] = [
