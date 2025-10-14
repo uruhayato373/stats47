@@ -11,7 +11,7 @@ export * from "./parameters";
 export * from "./processed";
 
 // Formatted Data Types
-export * from "./formatted";
+export * from "./statsdata";
 
 // Error Types
 export * from "./errors";

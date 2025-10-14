@@ -99,14 +99,14 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
                 </dd>
               </div>
 
-              {statisticalData?.TABLE_INF && (
+              {formattedData?.tableInfo && (
                 <>
                   <div>
                     <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
                       統計表名
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                      {statisticalData.TABLE_INF.STAT_NAME?.["$"]}
+                      {formattedData.tableInfo.statName}
                     </dd>
                   </div>
 
@@ -115,7 +115,56 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
                       表題
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                      {statisticalData.TABLE_INF.TITLE?.["$"]}
+                      {formattedData.tableInfo.title}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      作成機関
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
+                      {formattedData.tableInfo.govOrg}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      提供周期
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
+                      {formattedData.tableInfo.characteristics.cycle}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      最終更新
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
+                      {formattedData.tableInfo.dates.updatedDate}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
+                      データ品質
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
+                      <span
+                        className={`px-2 py-1 rounded text-xs ${
+                          (formattedData.metadata.quality?.completenessScore ||
+                            0) >= 90
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                            : (formattedData.metadata.quality
+                                ?.completenessScore || 0) >= 70
+                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                            : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                        }`}
+                      >
+                        {formattedData.metadata.quality?.completenessScore || 0}
+                        % 完全性
+                      </span>
                     </dd>
                   </div>
                 </>

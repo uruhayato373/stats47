@@ -1,4 +1,4 @@
-import { FormattedEstatData } from "../types/formatted";
+import { FormattedEstatData } from "../types/statsdata";
 
 /**
  * e-STAT CSV変換クラス
