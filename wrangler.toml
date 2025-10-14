@@ -2,6 +2,30 @@ name = "stats47"
 main = "src/worker.ts"
 compatibility_date = "2024-01-15"
 
+# ビルド設定
+[build]
+command = "npm run build"
+cwd = "."
+
+# デプロイ除外設定
+[build.upload]
+exclude = [
+  "data/mock/**/*.json",  # モックデータJSONファイルを除外
+  "data/mock/metainfo/**",
+  "data/mock/statsdata/**",
+  "data/mock/statslist/**",
+  "docs/**",              # ドキュメントも除外（必要に応じて）
+  "scripts/**",           # スクリプトファイルも除外
+  "tests/**",             # テストファイルも除外
+]
+
+# ただし、fixturesとcatalogは含める（小さいため）
+include = [
+  "data/mock/fixtures/**",
+  "data/mock/catalog.json",
+  "data/mock/README.md"
+]
+
 # 統合データベース
 [[d1_databases]]
 binding = "STATS47_DB"

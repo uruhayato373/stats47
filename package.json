@@ -16,7 +16,11 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "migrate:ranking-keys": "tsx scripts/migrate-ranking-keys.ts",
-    "migrate:ranking-keys:remote": "tsx scripts/migrate-ranking-keys-remote.ts"
+    "migrate:ranking-keys:remote": "tsx scripts/migrate-ranking-keys-remote.ts",
+    "pre-deploy-check": "bash scripts/pre-deploy-check.sh",
+    "mock:download": "tsx scripts/download-mock-data.ts",
+    "mock:validate": "tsx scripts/validate-mock-data.ts",
+    "mock:size-check": "du -sh data/mock/ && find data/mock -name '*.json' | wc -l"
   },
   "dependencies": {
     "@auth/d1-adapter": "^1.11.0",

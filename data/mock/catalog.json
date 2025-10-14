@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-01-15T10:30:00Z",
+  "datasets": [
+    {
+      "id": "0000010101",
+      "title": "Ａ　人口・世帯",
+      "statName": "社会・人口統計体系",
+      "govOrg": "総務省",
+      "areaLevel": "prefecture",
+      "dataVersion": "2025-06-30",
+      "schemaVersion": "1.0.0",
+      "files": {
+        "metainfo": "data/mock/metainfo/prefecture/0000010101.json",
+        "statsdata": "data/mock/statsdata/prefecture/0000010101.json"
+      },
+      "metadata": {
+        "recordCount": 2400,
+        "size": {
+          "metainfo": "15KB",
+          "statsdata": "850KB"
+        }
+      },
+      "tags": ["人口", "都道府県", "時系列"]
+    },
+    {
+      "id": "0000010102",
+      "title": "Ｂ　自然環境",
+      "statName": "社会・人口統計体系",
+      "govOrg": "総務省",
+      "areaLevel": "municipality",
+      "dataVersion": "2025-06-30",
+      "schemaVersion": "1.0.0",
+      "files": {
+        "metainfo": "data/mock/metainfo/municipality/0000010102.json",
+        "statsdata": "data/mock/statsdata/municipality/0000010102.json"
+      },
+      "metadata": {
+        "recordCount": 1200,
+        "size": {
+          "metainfo": "20KB",
+          "statsdata": "400KB"
+        }
+      },
+      "tags": ["環境", "市区町村"]
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "minimal",
+      "description": "最小限のデータ（1地域、1年度、1カテゴリ）",
+      "useCase": "単体テスト、最小構成の確認"
+    },
+    {
+      "name": "small",
+      "description": "小データ（5地域、3年度、3カテゴリ）",
+      "useCase": "コンポーネントテスト、基本的な機能テスト"
+    },
+    {
+      "name": "medium",
+      "description": "中データ（47都道府県、10年度、10カテゴリ）",
+      "useCase": "統合テスト、パフォーマンステスト"
+    }
+  ]
+}
