@@ -8,76 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "62042762194a4188",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_概要/01_概要.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01_概要"
-            }
-          },
-          {
-            "id": "533ac922cda5c16f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "04_仕様/instagram.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "instagram"
-            }
-          },
-          {
-            "id": "4da6af924aad0065",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "04_仕様/画像生成.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "画像生成"
-            }
-          },
-          {
-            "id": "dcfb83136d49ca55",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "05_リファクタリング/performance_improvement_report.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "performance_improvement_report"
-            }
-          },
-          {
-            "id": "7851c11c60e3ece0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "05_リファクタリング/ranking-navigation-edit-implementation-plan.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ranking-navigation-edit-implementation-plan"
-            }
-          },
-          {
             "id": "fd47fa4de3c41297",
             "type": "leaf",
             "state": {
@@ -92,7 +22,35 @@
             }
           },
           {
-            "id": "a1f2b1cf55b0117d",
+            "id": "61f8b29c1d5bc193",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_要件定義/01_プロジェクト要件.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_プロジェクト要件"
+            }
+          },
+          {
+            "id": "addeb28934f165b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_開発/02_コンポーネントガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_コンポーネントガイド"
+            }
+          },
+          {
+            "id": "e9b13cf95a24742d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -106,21 +64,20 @@
             }
           },
           {
-            "id": "29b1c98882f137f3",
+            "id": "05f9f8b2f20329cf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_概要/03_ロードマップ.md",
+                "file": "03_要件定義/04_ターゲットペルソナ.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03_ロードマップ"
+              "title": "04_ターゲットペルソナ"
             }
           }
-        ],
-        "currentTab": 6
+        ]
       }
     ],
     "direction": "vertical"
@@ -266,13 +223,17 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "a1f2b1cf55b0117d",
+  "active": "fd47fa4de3c41297",
   "lastOpenFiles": [
-    "04_仕様/API設計.md",
-    "01_概要/01_概要.md",
     "01_概要/02_アーキテクチャ.md",
-    "01_概要/03_ロードマップ.md",
+    "02_開発/02_コンポーネントガイド.md",
+    "03_要件定義/01_プロジェクト要件.md",
+    "04_仕様/eStatAPI.md",
+    "01_概要/01_概要.md",
+    "03_要件定義/04_ターゲットペルソナ.md",
     "08_ビジネス計画/01_マネタイズ戦略.md",
+    "04_仕様/API設計.md",
+    "01_概要/03_ロードマップ.md",
     "08_ビジネス計画",
     "08_繝薙ず繝阪せ險育判",
     "04_仕様/サイトマップ.md",
@@ -290,16 +251,12 @@
     "04_仕様/instagram.md",
     "03_要件定義/03_非機能要件.md",
     "03_要件定義/02_機能要件.md",
-    "03_要件定義/01_プロジェクト要件.md",
     "03_要件定義",
     "03_隕∽ｻｶ螳夂ｾｩ",
     "09_コンテンツ計画/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
     "09_コンテンツ計画/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
     "09_コンテンツ計画/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
     "09_コンテンツ計画/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
-    "09_コンテンツ計画/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
-    "09_コンテンツ計画/03_ブログ記事/ブログ記事改善案.md",
-    "09_コンテンツ計画/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
     "09_コンテンツ計画/03_ブログ記事",
     "09_コンテンツ計画/02_ダッシュボード",
     "09_コンテンツ計画/01_ランキング記事",
