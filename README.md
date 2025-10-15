@@ -256,14 +256,11 @@ cp env.production.example .env.production
 # e-Stat API設定
 ESTAT_API_KEY=your-dev-api-key
 
-# Cloudflare設定
-CLOUDFLARE_D1_DATABASE_ID=dev-db-id
-CLOUDFLARE_ACCOUNT_ID=your-account-id
-CLOUDFLARE_API_TOKEN=your-dev-api-token
-
 # 環境設定
 NEXT_PUBLIC_ENV=development
 NEXT_PUBLIC_USE_MOCK=false
+
+# 注意：開発環境ではローカルD1を使用するため、Cloudflare設定は不要
 ```
 
 #### モック環境

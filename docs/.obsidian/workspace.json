@@ -22,6 +22,20 @@
             }
           },
           {
+            "id": "4674f940f705f39f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_開発/10_開発環境設定ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "10_開発環境設定ガイド"
+            }
+          },
+          {
             "id": "61f8b29c1d5bc193",
             "type": "leaf",
             "state": {
@@ -77,7 +91,8 @@
               "title": "04_ターゲットペルソナ"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -223,13 +238,13 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "fd47fa4de3c41297",
+  "active": "4674f940f705f39f",
   "lastOpenFiles": [
+    "01_概要/01_概要.md",
     "01_概要/02_アーキテクチャ.md",
     "02_開発/02_コンポーネントガイド.md",
     "03_要件定義/01_プロジェクト要件.md",
     "04_仕様/eStatAPI.md",
-    "01_概要/01_概要.md",
     "03_要件定義/04_ターゲットペルソナ.md",
     "08_ビジネス計画/01_マネタイズ戦略.md",
     "04_仕様/API設計.md",
