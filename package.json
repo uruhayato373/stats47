@@ -23,6 +23,7 @@
     "test:coverage": "vitest run --coverage",
     "debug:formatter": "tsx src/lib/estat-api/stats-data/__debug__/formatter-debug.ts",
     "debug:helpers": "tsx src/lib/estat-api/stats-data/__debug__/helpers-debug.ts",
+    "debug:meta-info": "tsx src/lib/estat-api/meta-info/__debug__/formatter-debug.ts",
     "migrate:ranking-keys": "tsx scripts/migrate-ranking-keys.ts",
     "migrate:ranking-keys:remote": "tsx scripts/migrate-ranking-keys-remote.ts",
     "pre-deploy-check": "bash scripts/pre-deploy-check.sh",
