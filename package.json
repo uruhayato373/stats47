@@ -28,7 +28,12 @@
     "pre-deploy-check": "bash scripts/pre-deploy-check.sh",
     "mock:download": "tsx scripts/download-mock-data.ts",
     "mock:validate": "tsx scripts/validate-mock-data.ts",
-    "mock:size-check": "du -sh data/mock/ && find data/mock -name '*.json' | wc -l"
+    "mock:size-check": "du -sh data/mock/ && find data/mock -name '*.json' | wc -l",
+    "db:dump:local": "npx wrangler d1 execute stats47 --local --command '.dump' > database/backups/local_dump.sql",
+    "db:dump:staging": "npx wrangler d1 execute stats47 --env staging --command '.dump' > database/backups/staging_dump.sql",
+    "db:migrations:local": "npx wrangler d1 migrations apply stats47 --local",
+    "db:migrations:staging": "npx wrangler d1 migrations apply stats47 --env staging",
+    "db:migrations:production": "npx wrangler d1 migrations apply stats47 --env production"
   },
   "dependencies": {
     "@auth/d1-adapter": "^1.11.0",

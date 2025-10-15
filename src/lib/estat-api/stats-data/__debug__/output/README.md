@@ -11,19 +11,36 @@
   - 完全な`FormattedEstatData`オブジェクト
   - ファイルサイズが大きいため、詳細確認用
 
-- **`formatter-summary.json`** - フォーマッターのサマリー版
-  - 実行時刻、処理時間
-  - テーブル情報（基本情報、コード、日付、特性）
-  - メタデータ（統計、範囲、品質）
-  - サンプル値（最初の5件）
-  - 統計情報（総件数、有効値、NULL値、完全性スコア）
-  - 注記情報
+### 個別JSONファイル（FormattedEstatDataの各プロパティ）
 
-- **`formatter-stats.json`** - フォーマッターの統計情報
-  - パフォーマンス情報（処理時間、メモリ使用量）
-  - データ品質指標
-  - 次元別統計（地域、カテゴリ、年度）
-  - テーブル情報の詳細
+- **`tableInfo.json`** - 統計表情報
+  - ID、タイトル、政府統計名、作成機関
+  - 統計コード、機関コード
+  - 日付情報、データ特性、分類情報
+
+- **`areas.json`** - 地域情報配列
+  - 地域コード、地域名、レベル
+  - 親地域コード、単位
+
+- **`categories.json`** - カテゴリ情報配列
+  - カテゴリコード、カテゴリ名
+  - 表示名、単位
+
+- **`years.json`** - 年度情報配列
+  - 年度コード、年度名
+
+- **`values.json`** - 統計値配列（大容量）
+  - 全2,400件の統計値データ
+  - 値、単位、全次元情報（area, time, tab, cat01-15）
+
+- **`metadata.json`** - メタデータ
+  - 処理時刻、データソース
+  - 統計情報（総レコード数、有効値、NULL値）
+  - 範囲情報（年度、地域、カテゴリ）
+  - 品質情報（完全性スコア）
+
+- **`notes.json`** - 注記情報
+  - 特殊文字とその説明
 
 ### ヘルパー関数関連
 
@@ -52,11 +69,14 @@ npm run debug:helpers
 # 出力ファイル一覧
 ls -la src/lib/estat-api/stats-data/__debug__/output/
 
-# サマリー版の確認（軽量）
-cat src/lib/estat-api/stats-data/__debug__/output/formatter-summary.json | jq
+# 統計表情報の確認（軽量）
+cat src/lib/estat-api/stats-data/__debug__/output/tableInfo.json | jq
 
-# 統計情報の確認
-cat src/lib/estat-api/stats-data/__debug__/output/formatter-stats.json | jq '.dataQuality'
+# メタデータの確認
+cat src/lib/estat-api/stats-data/__debug__/output/metadata.json | jq '.dataQuality'
+
+# 特定の統計値の確認（最初の5件）
+cat src/lib/estat-api/stats-data/__debug__/output/values.json | jq '.[0:5]'
 ```
 
 ## 注意事項
@@ -76,6 +96,6 @@ cat src/lib/estat-api/stats-data/__debug__/output/formatter-stats.json | jq '.da
 
 ### ファイルサイズが大きい場合
 
-- `formatter-full.json`は完全なデータを含むため、ファイルサイズが大きくなります
-- 必要に応じて`formatter-summary.json`を使用してください
+- `formatter-full.json`と`values.json`は完全なデータを含むため、ファイルサイズが大きくなります
+- 軽量な確認には`tableInfo.json`や`metadata.json`を使用してください
 - 不要なファイルは定期的に削除してください

@@ -45,3 +45,7 @@ storybook-static
 
 # Debug output files
 **/__debug__/output/**/*.json
+
+# Database backups
+database/backups/*.sql
+database/backups/*.json

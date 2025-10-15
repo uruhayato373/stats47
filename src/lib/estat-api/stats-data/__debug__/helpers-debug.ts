@@ -22,7 +22,6 @@ import {
   sortByValueDesc,
   sortByValueAsc,
 } from '../helpers';
-import type { FormattedValue } from '../../types/stats-data';
 
 // 出力ディレクトリの確保
 const outputDir = join(__dirname, 'output');
@@ -239,15 +238,15 @@ console.log('='.repeat(50));
 
 Object.entries(debugResults.results).forEach(([functionName, result]) => {
   console.log(`\n🔧 ${functionName}:`);
-  if (result.input) {
-    console.log(`  📥 入力: ${JSON.stringify(result.input, null, 2).replace(/\n/g, '\n     ')}`);
+  if ((result as any).input) {
+    console.log(`  📥 入力: ${JSON.stringify((result as any).input, null, 2).replace(/\n/g, '\n     ')}`);
   }
-  if (result.output) {
-    if (typeof result.output === 'object' && result.output.count !== undefined) {
-      console.log(`  📤 出力件数: ${result.output.count}`);
+  if ((result as any).output) {
+    if (typeof (result as any).output === 'object' && (result as any).output.count !== undefined) {
+      console.log(`  📤 出力件数: ${(result as any).output.count}`);
     }
-    if (result.output.sample) {
-      console.log(`  📤 サンプル: ${JSON.stringify(result.output.sample, null, 2).replace(/\n/g, '\n     ')}`);
+    if ((result as any).output.sample) {
+      console.log(`  📤 サンプル: ${JSON.stringify((result as any).output.sample, null, 2).replace(/\n/g, '\n     ')}`);
     }
   }
 });
