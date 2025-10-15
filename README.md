@@ -131,6 +131,20 @@ stats47/
 └── package.json             # 依存関係とスクリプト
 ```
 
+## 🌍 環境別データ取得
+
+このプロジェクトは 4 つの環境をサポートしています:
+
+| 環境            | データソース             | 用途                      |
+| --------------- | ------------------------ | ------------------------- |
+| **mock**        | JSON ファイル            | オフライン開発、Storybook |
+| **development** | ローカル D1 (SQLite)     | ローカル開発              |
+| **staging**     | リモート D1 (Cloudflare) | 本番前テスト              |
+| **production**  | リモート D1 (Cloudflare) | 本番運用                  |
+
+環境は `NEXT_PUBLIC_ENV` 環境変数で自動判定されます。
+詳細は [開発環境設定ガイド](./docs/02_開発/10_開発環境設定ガイド.md) を参照してください。
+
 ## 🗄️ データベース管理
 
 データベース操作を行う前に、必ず以下のドキュメントを読んでください：
@@ -199,7 +213,7 @@ npm run dev
    ```bash
    npm install
    ```
-   
+
    > 環境変数管理のため`cross-env`が自動的にインストールされます。
 
 3. **環境変数の設定**
@@ -207,10 +221,10 @@ npm run dev
    ```bash
    # 開発環境用
    cp env.development.example .env.development
-   
+
    # モック環境用（デザイン検証）
    cp env.mock.example .env.mock
-   
+
    # 各ファイルを編集して必要な値を設定
    ```
 
@@ -254,6 +268,7 @@ cp env.production.example .env.production
 各環境で必要な環境変数は以下の通りです：
 
 #### 開発環境
+
 ```bash
 # e-Stat API設定
 ESTAT_API_KEY=your-dev-api-key
@@ -266,6 +281,7 @@ NEXT_PUBLIC_USE_MOCK=false
 ```
 
 #### モック環境
+
 ```bash
 # 環境設定
 NEXT_PUBLIC_ENV=mock
@@ -299,7 +315,7 @@ npm run dev:staging
 npm run dev:production
 ```
 
-> **Note**: `cross-env`パッケージにより、Windows/macOS/Linux全てで同じコマンドが動作します。
+> **Note**: `cross-env`パッケージにより、Windows/macOS/Linux 全てで同じコマンドが動作します。
 
 ## データ保存
 

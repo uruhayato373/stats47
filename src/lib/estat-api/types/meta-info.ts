@@ -42,6 +42,23 @@ export interface TransformedMetadataEntry {
 }
 
 /**
+ * データベースに保存されたe-Statメタ情報アイテム
+ * estat_metainfoテーブルに対応
+ */
+export interface SavedEstatMetainfoItem {
+  id: number;
+  stats_data_id: string;
+  stat_name: string;
+  title: string;
+  cat01: string | null;
+  item_name: string | null;
+  unit: string | null;
+  ranking_key: string | null;
+  updated_at: string;
+  created_at: string;
+}
+
+/**
  * メタデータサマリー情報
  */
 export interface MetadataSummary {
