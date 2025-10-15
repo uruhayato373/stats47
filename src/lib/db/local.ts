@@ -4,7 +4,7 @@
  */
 export const createLocalD1Database = async () => {
   // 開発環境ではローカルD1を使用
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NEXT_PUBLIC_ENV === "development") {
     // ローカルD1のパスを取得
     const localD1Path =
       process.env.LOCAL_D1_PATH ||

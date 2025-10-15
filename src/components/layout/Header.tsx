@@ -3,19 +3,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
-import { useSession, signOut } from "next-auth/react";
+// import { useSession, signOut } from "next-auth/react"; // 無効化: Auth.js機能を一時的に無効化
 import { User, LogOut, LogIn, ChevronDown } from "lucide-react";
 import { AuthModal } from "@/components/auth/AuthModal";
 
 export default function Header() {
-  const { data: session, status } = useSession();
+  // 認証機能を一時的に無効化
+  const status = "unauthenticated";
+  const session = null;
+  const isAuthenticated = false;
+  const user = null;
+  const isAdmin = false;
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const isAuthenticated = status === "authenticated";
-  const user = session?.user;
-  const isAdmin = user?.role === "admin";
 
   // ドロップダウンの外側クリックで閉じる
   useEffect(() => {
@@ -46,8 +48,13 @@ export default function Header() {
     }
   }, []);
 
+  // signOut関数のモック（使用されている箇所でエラーを防ぐため）
+  const signOut = async () => {
+    console.log("認証機能は無効化されています");
+  };
+
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/" });
+    await signOut();
     setIsDropdownOpen(false);
   };
 
