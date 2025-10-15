@@ -14,7 +14,7 @@ export function StatsListSearch({
 }: StatsListSearchProps) {
   const [searchWord, setSearchWord] = useState("");
   const [statsCode, setStatsCode] = useState("");
-  const [fieldCode, setFieldCode] = useState("");
+  const [statsField, setStatsField] = useState("");
   const [collectArea, setCollectArea] = useState<"1" | "2" | "3" | "">("");
   const [surveyYears, setSurveyYears] = useState("");
   const [limit, setLimit] = useState(100);
@@ -25,7 +25,7 @@ export function StatsListSearch({
     const options: StatsListSearchOptions = {
       ...(searchWord && { searchWord }),
       ...(statsCode && { statsCode }),
-      ...(fieldCode && { fieldCode }),
+      ...(statsField && { statsField }),
       ...(collectArea && { collectArea }),
       ...(surveyYears && { surveyYears }),
       limit,
@@ -37,7 +37,7 @@ export function StatsListSearch({
   const handleReset = () => {
     setSearchWord("");
     setStatsCode("");
-    setFieldCode("");
+    setStatsField("");
     setCollectArea("");
     setSurveyYears("");
     setLimit(100);
@@ -88,15 +88,15 @@ export function StatsListSearch({
           {/* 分野コード */}
           <div>
             <label
-              htmlFor="fieldCode"
+              htmlFor="statsField"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               分野コード
             </label>
             <select
-              id="fieldCode"
-              value={fieldCode}
-              onChange={(e) => setFieldCode(e.target.value)}
+              id="statsField"
+              value={statsField}
+              onChange={(e) => setStatsField(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">選択してください</option>

@@ -4,7 +4,7 @@
  */
 
 import { EstatStatsListResponse, EstatTableListItem } from "../types";
-import { StatsListSearchResult, FormattedTableInfo } from "../types/stats-list";
+import { StatsListSearchResult, StatsListTableInfo } from "../types/stats-list";
 
 /**
  * e-Stat統計表リストフォーマッター
@@ -66,7 +66,7 @@ export class EstatStatsListFormatter {
    * @param tableInfo - 統計表情報
    * @returns 整形された統計表情報
    */
-  static formatTableInfo(tableInfo: EstatTableListItem): FormattedTableInfo {
+  static formatTableInfo(tableInfo: EstatTableListItem): StatsListTableInfo {
     return {
       id: tableInfo["@id"],
       statName: tableInfo.STAT_NAME?.$ || "",
@@ -81,13 +81,13 @@ export class EstatStatsListFormatter {
       updatedDate: tableInfo.UPDATED_DATE,
       mainCategory: tableInfo.MAIN_CATEGORY
         ? {
-            code: tableInfo.MAIN_CATEGORY["@code"] || "",
+            code: (tableInfo.MAIN_CATEGORY as any)["@code"] || "",
             name: tableInfo.MAIN_CATEGORY.$ || "",
           }
         : undefined,
       subCategory: tableInfo.SUB_CATEGORY
         ? {
-            code: tableInfo.SUB_CATEGORY["@code"] || "",
+            code: (tableInfo.SUB_CATEGORY as any)["@code"] || "",
             name: tableInfo.SUB_CATEGORY.$ || "",
           }
         : undefined,
@@ -122,8 +122,8 @@ export class EstatStatsListFormatter {
    * @returns 分野別にグループ化された統計表
    */
   static groupByField(
-    tables: FormattedTableInfo[]
-  ): Record<string, FormattedTableInfo[]> {
+    tables: StatsListTableInfo[]
+  ): Record<string, StatsListTableInfo[]> {
     return tables.reduce((acc, table) => {
       const fieldCode = table.mainCategory?.code || "99"; // 未分類は99
       const fieldName = table.mainCategory?.name || "その他";
@@ -135,7 +135,7 @@ export class EstatStatsListFormatter {
       acc[key].push(table);
 
       return acc;
-    }, {} as Record<string, FormattedTableInfo[]>);
+    }, {} as Record<string, StatsListTableInfo[]>);
   }
 
   /**
@@ -145,8 +145,8 @@ export class EstatStatsListFormatter {
    * @returns 年次別にグループ化された統計表
    */
   static groupByYear(
-    tables: FormattedTableInfo[]
-  ): Record<string, FormattedTableInfo[]> {
+    tables: StatsListTableInfo[]
+  ): Record<string, StatsListTableInfo[]> {
     return tables.reduce((acc, table) => {
       const year = table.surveyDate ? table.surveyDate.substring(0, 4) : "不明";
 
@@ -156,6 +156,6 @@ export class EstatStatsListFormatter {
       acc[year].push(table);
 
       return acc;
-    }, {} as Record<string, FormattedTableInfo[]>);
+    }, {} as Record<string, StatsListTableInfo[]>);
   }
 }

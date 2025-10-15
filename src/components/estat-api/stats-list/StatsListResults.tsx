@@ -1,12 +1,12 @@
 "use client";
 
-import { FormattedTableInfo } from "@/lib/estat-api";
+import { StatsListTableInfo } from "@/lib/estat-api";
 
 interface StatsListResultsProps {
-  tables: FormattedTableInfo[];
+  tables: StatsListTableInfo[];
   totalCount: number;
   isLoading?: boolean;
-  onTableSelect?: (table: FormattedTableInfo) => void;
+  onTableSelect?: (table: StatsListTableInfo) => void;
 }
 
 export function StatsListResults({

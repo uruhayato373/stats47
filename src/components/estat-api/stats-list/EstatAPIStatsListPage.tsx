@@ -6,7 +6,7 @@ import {
   EstatStatsListFormatter,
   StatsListSearchOptions,
   StatsListSearchResult,
-  FormattedTableInfo,
+  StatsListTableInfo,
 } from "@/lib/estat-api";
 import {
   StatsListSearch,
@@ -19,7 +19,7 @@ export default function EstatAPIStatsListPage() {
     useState<StatsListSearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedTable, setSelectedTable] = useState<FormattedTableInfo | null>(
+  const [selectedTable, setSelectedTable] = useState<StatsListTableInfo | null>(
     null
   );
 
@@ -42,9 +42,9 @@ export default function EstatAPIStatsListPage() {
           options.statsCode,
           options
         );
-      } else if (options.fieldCode) {
+      } else if (options.statsField) {
         response = await EstatStatsListFetcher.searchByField(
-          options.fieldCode,
+          options.statsField,
           options
         );
       } else {
@@ -70,7 +70,7 @@ export default function EstatAPIStatsListPage() {
     }
   };
 
-  const handleTableSelect = (table: FormattedTableInfo) => {
+  const handleTableSelect = (table: StatsListTableInfo) => {
     setSelectedTable(table);
     console.log("📋 Page: 統計表選択", table);
   };

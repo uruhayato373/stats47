@@ -3,7 +3,11 @@
  */
 
 // Fetcher
-export { EstatStatsListFetcher } from "./fetcher";
+export {
+  EstatStatsListFetcher,
+  EstatErrorType,
+  EstatStatsListError,
+} from "./fetcher";
 
 // Formatter
 export { EstatStatsListFormatter } from "./formatter";
@@ -12,6 +16,7 @@ export { EstatStatsListFormatter } from "./formatter";
 export type {
   StatsListSearchOptions,
   StatsListSearchResult,
-  FormattedTableInfo,
+  StatsListTableInfo,
   PagingOptions,
+  StatsFieldCode,
 } from "../types/stats-list";

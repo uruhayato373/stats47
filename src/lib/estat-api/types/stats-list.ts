@@ -5,34 +5,53 @@
 import { EstatResult, EstatTextNode } from "./common";
 
 /**
+ * 統計分野コード
+ */
+export type StatsFieldCode =
+  | "01" // 国土・気象
+  | "02" // 人口・世帯
+  | "03" // 労働・賃金
+  | "04" // 事業所
+  | "05" // 農林水産業
+  | "06" // 鉱工業
+  | "07" // 商業・サービス業
+  | "08" // 企業・家計・経済
+  | "09" // 住宅・土地・建設
+  | "10" // エネルギー・水
+  | "11" // 運輸・観光
+  | "12" // 情報通信・科学技術
+  | "13" // 教育・文化・スポーツ・生活
+  | "14" // 行財政
+  | "15" // 司法・安全・環境
+  | "16" // 社会保障・衛生
+  | "17"; // 国際
+
+/**
  * getStatsList APIパラメータ
  */
 export interface GetStatsListParams {
   appId: string; // アプリケーションID
 
-  // 検索条件
-  searchKind?: "1" | "2" | "3"; // 検索種別（1:政府統計名、2:統計表題、3:項目名）
-  surveyYears?: string; // 調査年月（YYYY、YYYYMM、YYYY-YYYY）
-  openYears?: string; // 公開年月（YYYY、YYYYMM、YYYY-YYYY）
-  updatedDate?: string; // 更新日付（YYYY-MM-DD、YYYY-MM-DD-YYYY-MM-DD）
-  statsCode?: string; // 政府統計コード
-  searchWord?: string; // キーワード
-  statsName?: string; // 政府統計名
-  govOrg?: string; // 作成機関
-  statsNameList?: string; // 提供統計名
-  title?: string; // 統計表題
-  explanation?: string; // 統計表の説明
-  field?: string; // 分野
-  layout?: string; // 統計大分類
-  toukei?: string; // 統計小分類
+  // 検索条件パラメータ
+  searchKind?: "1" | "2"; // 1: AND検索, 2: OR検索
+  surveyYears?: string; // YYYYMM形式、範囲指定可能
+  openYears?: string; // YYYYMM形式、範囲指定可能
+  statsField?: string; // 統計分野（2桁コード）※fieldから変更
+  statsCode?: string; // 政府統計コード（8桁または5桁）
+  searchWord?: string; // 検索キーワード（スペース区切りで複数指定可）
 
-  // ページング
-  startPosition?: number; // データ開始位置（デフォルト:1）
-  limit?: number; // データ取得件数（デフォルト:100）
+  // フィルタリングパラメータ
+  collectArea?: "1" | "2" | "3"; // 1: 全国, 2: 都道府県, 3: 市区町村
+  explanationGetFlg?: "Y" | "N"; // 解説情報取得有無
+  statsNameList?: "Y" | "N"; // 統計名リスト表示
+
+  // ページング・取得件数制御
+  startPosition?: number; // 取得開始位置（デフォルト: 1）
+  limit?: number; // 取得件数（デフォルト: 100、最大: 10000）
+  updatedDate?: string; // 更新日付（YYYY-MM-DD形式）
 
   // 出力オプション
-  lang?: "J" | "E"; // 言語（デフォルト:J）
-  replaceSpChars?: "0" | "1" | "2"; // 特殊文字置換
+  lang?: "J" | "E"; // 言語設定
 }
 
 /**
@@ -49,6 +68,7 @@ export interface EstatStatsListResponse {
         // LIMIT指定時
         FROM_NUMBER: number;
         TO_NUMBER: number;
+        NEXT_KEY?: number; // 追加: 次ページの開始位置
       };
       LIST_INF?: {
         // 統計表リスト（0件の場合は存在しない）
@@ -123,10 +143,11 @@ export interface EstatTableListItem {
 export interface StatsListSearchOptions {
   searchWord?: string;
   statsCode?: string;
-  fieldCode?: string;
+  statsField?: string; // fieldCodeから変更
   collectArea?: "1" | "2" | "3";
   surveyYears?: string;
   openYears?: string;
+  updatedDate?: string; // 追加
   limit?: number;
   startPosition?: number;
 }
