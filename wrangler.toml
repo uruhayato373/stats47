@@ -58,7 +58,7 @@ NODE_ENV = "production"
 [[env.staging.d1_databases]]
 binding = "STATS47_DB"
 database_name = "stats47_staging"
-database_id = "${STAGING_D1_DATABASE_ID}"
+database_id = "39f18714-83bf-423c-9956-dcc9e466affb"
 migrations_dir = "database/migrations"
 
 # 本番環境

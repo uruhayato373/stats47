@@ -15,6 +15,11 @@
 
 ```
 data/mock/
+├── database/                    # データベースモックデータ（NEW!）
+│   ├── ranking_items.json       # ランキングアイテム（10件）
+│   ├── ranking_values.json      # ランキング値（50件）
+│   ├── estat_metainfo.json      # e-Stat統計メタ情報（50件）
+│   └── README.md                # データベースモック詳細
 ├── metainfo/                    # メタ情報モックデータ
 │   ├── prefecture/              # 都道府県メタ情報
 │   └── municipality/            # 市区町村メタ情報
@@ -28,6 +33,26 @@ data/mock/
 │   └── medium/                  # 中データ
 └── catalog.json                 # データカタログ
 ```
+
+## データの種類
+
+### 1. データベースモックデータ (`database/`)
+
+**用途**: mock 環境（`NEXT_PUBLIC_USE_MOCK=true`）でデータベース接続なしで開発
+
+- `ranking_items.json` - ランキングアイテム（10 件）
+- `ranking_values.json` - ランキング値（50 件）
+- `estat_metainfo.json` - e-Stat 統計メタ情報（50 件）
+
+詳細は [`database/README.md`](./database/README.md) を参照してください。
+
+### 2. e-Stat API モックデータ (`metainfo/`, `statsdata/`, `statslist/`)
+
+**用途**: e-Stat API 接続なしで開発・テスト
+
+- `metainfo/` - メタ情報 API のレスポンス
+- `statsdata/` - 統計データ API のレスポンス
+- `statslist/` - 統計表リスト API のレスポンス
 
 ## データの取得方法
 
