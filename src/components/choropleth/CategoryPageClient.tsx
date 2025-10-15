@@ -2,8 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
-import Sidebar from "@/components/layout/Sidebar";
 import { CategoryIcon } from "@/components/common/CategoryIcon";
 
 interface SubcategoryItem {
@@ -96,9 +94,6 @@ export const CategoryPageClient: React.FC<CategoryPageClientProps> = ({
 
   return (
     <>
-      <Header />
-      <Sidebar />
-
       {/* メインコンテンツエリア */}
       <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
         <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
