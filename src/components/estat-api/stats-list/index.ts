@@ -5,4 +5,7 @@
 export { StatsListSearch } from "./StatsListSearch";
 export { StatsListResults } from "./StatsListResults";
 export { StatsListPagination } from "./StatsListPagination";
-export { default as EstatAPIStatsListPage } from "./EstatAPIStatsListPage";
+export { EstatAPIStatsListPage } from "./EstatAPIStatsListPage";
+export { AdvancedStatsListSearch } from "./AdvancedStatsListSearch";
+export { StatsTableDetailModal } from "./StatsTableDetailModal";
+export { StatsFieldNavigation } from "./StatsFieldNavigation";

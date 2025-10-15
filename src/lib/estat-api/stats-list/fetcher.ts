@@ -5,7 +5,11 @@
 
 import { estatAPI } from "../client";
 import { EstatStatsListResponse, GetStatsListParams } from "../types";
-import { StatsListSearchOptions, PagingOptions } from "../types/stats-list";
+import {
+  StatsListSearchOptions,
+  PagingOptions,
+  AdvancedStatsListSearchOptions,
+} from "../types/stats-list";
 
 /**
  * e-Stat APIエラーの種類
@@ -48,13 +52,20 @@ export class EstatStatsListFetcher {
   ): Promise<EstatStatsListResponse> {
     try {
       console.log("🔵 Fetcher: 統計表リスト取得開始");
+      console.log("🔵 Fetcher: リクエストパラメータ:", params);
       const startTime = Date.now();
 
       const response = await estatAPI.getStatsList(params);
 
+      console.log("🔵 Fetcher: APIレスポンス受信:", response);
+
       // ステータスチェック
       const status = response.GET_STATS_LIST.RESULT.STATUS;
       const errorMsg = response.GET_STATS_LIST.RESULT.ERROR_MSG;
+
+      console.log(
+        `🔵 Fetcher: ステータス: ${status}, エラーメッセージ: ${errorMsg}`
+      );
 
       if (status !== 0) {
         // エラーメッセージから種類を判定
@@ -146,14 +157,17 @@ export class EstatStatsListFetcher {
   ): Promise<EstatStatsListResponse> {
     const params: Omit<GetStatsListParams, "appId"> = {
       searchWord: keyword,
-      searchKind: "1", // AND検索
+      // searchKindを省略して全フィールドで検索（政府統計名、統計表題、項目名など）
       limit: options.limit || 100,
       startPosition: options.startPosition || 1,
-      ...(options.collectArea && { collectArea: options.collectArea }),
+      // collectAreaは一時的に無効化（結果が0件になるため）
+      // ...(options.collectArea &&
+      //   options.collectArea !== "" && { collectArea: options.collectArea }),
       ...(options.surveyYears && { surveyYears: options.surveyYears }),
       ...(options.openYears && { openYears: options.openYears }),
     };
 
+    console.log("🔵 Fetcher: searchByKeyword パラメータ:", params);
     return this.fetchStatsList(params);
   }
 
@@ -223,6 +237,82 @@ export class EstatStatsListFetcher {
       ...(options.openYears && { openYears: options.openYears }),
     };
 
+    return this.fetchStatsList(params);
+  }
+
+  /**
+   * 高度な検索（複数条件組み合わせ）
+   *
+   * @param options - 高度な検索オプション
+   * @returns 統計表リストレスポンス
+   */
+  static async advancedSearch(
+    options: AdvancedStatsListSearchOptions
+  ): Promise<EstatStatsListResponse> {
+    const params: Omit<GetStatsListParams, "appId"> = {
+      ...(options.searchWord && { searchWord: options.searchWord }),
+      ...(options.searchKind && { searchKind: options.searchKind }),
+      ...(options.statsField && { statsField: options.statsField }),
+      ...(options.statsCode && { statsCode: options.statsCode }),
+      ...(options.surveyYears && { surveyYears: options.surveyYears }),
+      ...(options.openYears && { openYears: options.openYears }),
+      ...(options.updatedDate && { updatedDate: options.updatedDate }),
+      ...(options.includeExplanation && { explanationGetFlg: "Y" }),
+      ...(options.collectArea && { collectArea: options.collectArea }),
+      limit: options.limit || 100,
+      startPosition: options.startPosition || 1,
+    };
+
+    console.log("🔵 Fetcher: advancedSearch パラメータ:", params);
+    return this.fetchStatsList(params);
+  }
+
+  /**
+   * 統計名リストのみを取得
+   *
+   * @param options - 検索オプション
+   * @returns 統計表リストレスポンス
+   */
+  static async fetchStatsNameList(
+    options: StatsListSearchOptions = {}
+  ): Promise<EstatStatsListResponse> {
+    const params: Omit<GetStatsListParams, "appId"> = {
+      statsNameList: "Y",
+      limit: options.limit || 1000,
+      startPosition: options.startPosition || 1,
+      ...(options.statsField && { statsField: options.statsField }),
+      ...(options.statsCode && { statsCode: options.statsCode }),
+      ...(options.surveyYears && { surveyYears: options.surveyYears }),
+      ...(options.openYears && { openYears: options.openYears }),
+    };
+
+    console.log("🔵 Fetcher: fetchStatsNameList パラメータ:", params);
+    return this.fetchStatsList(params);
+  }
+
+  /**
+   * 更新された統計を取得
+   *
+   * @param since - 更新日（YYYY-MM-DD）
+   * @param options - 検索オプション
+   * @returns 統計表リストレスポンス
+   */
+  static async fetchUpdatedStats(
+    since: string,
+    options: StatsListSearchOptions = {}
+  ): Promise<EstatStatsListResponse> {
+    const params: Omit<GetStatsListParams, "appId"> = {
+      updatedDate: since,
+      limit: options.limit || 100,
+      startPosition: options.startPosition || 1,
+      ...(options.statsField && { statsField: options.statsField }),
+      ...(options.statsCode && { statsCode: options.statsCode }),
+      ...(options.collectArea && { collectArea: options.collectArea }),
+      ...(options.surveyYears && { surveyYears: options.surveyYears }),
+      ...(options.openYears && { openYears: options.openYears }),
+    };
+
+    console.log("🔵 Fetcher: fetchUpdatedStats パラメータ:", params);
     return this.fetchStatsList(params);
   }
 

@@ -7,3 +7,4 @@ export { usePrefectureRankingData } from "./usePrefectureRankingData";
 export { useYearSelection } from "./useYearSelection";
 export { useMetadataList } from "./useMetadataList";
 export { useRankingKey } from "./useRankingKey";
+export { useStatsListSearch } from "./useStatsListSearch";

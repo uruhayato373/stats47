@@ -1,122 +1,196 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   EstatStatsListFetcher,
   EstatStatsListFormatter,
+} from "@/lib/estat-api";
+import {
   StatsListSearchOptions,
   StatsListSearchResult,
   StatsListTableInfo,
-} from "@/lib/estat-api";
-import {
-  StatsListSearch,
-  StatsListResults,
-  StatsListPagination,
-} from "@/components/estat-api/stats-list";
+  DetailedStatsListTableInfo,
+  AdvancedStatsListSearchOptions,
+  StatsFieldCode,
+} from "@/lib/estat-api/types/stats-list";
+import { StatsListSearch } from "./StatsListSearch";
+import { AdvancedStatsListSearch } from "./AdvancedStatsListSearch";
+import { StatsListResults } from "./StatsListResults";
+import { StatsTableDetailModal } from "./StatsTableDetailModal";
+import { StatsFieldNavigation } from "./StatsFieldNavigation";
+import { useStatsListSearch } from "@/hooks/estat/useStatsListSearch";
 
-export default function EstatAPIStatsListPage() {
-  const [searchResult, setSearchResult] =
-    useState<StatsListSearchResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedTable, setSelectedTable] = useState<StatsListTableInfo | null>(
-    null
+interface EstatAPIStatsListPageProps {
+  initialData?: StatsListSearchResult;
+}
+
+type SearchMode = "simple" | "advanced";
+type ViewMode = "list" | "grid";
+
+export function EstatAPIStatsListPage({
+  initialData,
+}: EstatAPIStatsListPageProps) {
+  const [searchMode, setSearchMode] = useState<SearchMode>("simple");
+  const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const [selectedTable, setSelectedTable] =
+    useState<DetailedStatsListTableInfo | null>(null);
+  const [selectedField, setSelectedField] = useState<
+    StatsFieldCode | undefined
+  >(undefined);
+  const [showFieldNavigation, setShowFieldNavigation] = useState(false);
+
+  const {
+    searchResult,
+    isLoading,
+    error,
+    searchHistory,
+    favorites,
+    search,
+    sort,
+    filter,
+    toggleFavorite,
+  } = useStatsListSearch();
+
+  const handleSimpleSearch = useCallback(
+    async (options: StatsListSearchOptions) => {
+      console.log("🔵 Page: シンプル検索開始", options);
+      await search(options as AdvancedStatsListSearchOptions);
+    },
+    [search]
   );
 
-  const handleSearch = async (options: StatsListSearchOptions) => {
-    setIsLoading(true);
-    setError(null);
-    setSearchResult(null);
+  const handleAdvancedSearch = useCallback(
+    async (options: AdvancedStatsListSearchOptions) => {
+      console.log("🔵 Page: 高度検索開始", options);
+      await search(options);
+    },
+    [search]
+  );
 
-    try {
-      console.log("🔵 Page: 検索開始", options);
-
-      let response;
-      if (options.searchWord) {
-        response = await EstatStatsListFetcher.searchByKeyword(
-          options.searchWord,
-          options
-        );
-      } else if (options.statsCode) {
-        response = await EstatStatsListFetcher.searchByStatsCode(
-          options.statsCode,
-          options
-        );
-      } else if (options.statsField) {
-        response = await EstatStatsListFetcher.searchByField(
-          options.statsField,
-          options
-        );
-      } else {
-        // デフォルト検索（全件取得）
-        response = await EstatStatsListFetcher.fetchStatsList({
-          limit: options.limit || 100,
-          startPosition: options.startPosition || 1,
-        });
-      }
-
-      const formattedResult =
-        EstatStatsListFormatter.formatStatsListData(response);
-      setSearchResult(formattedResult);
-
-      console.log("✅ Page: 検索完了", formattedResult);
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "検索に失敗しました";
-      setError(errorMessage);
-      console.error("❌ Page: 検索エラー", err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleTableSelect = (table: StatsListTableInfo) => {
-    setSelectedTable(table);
-    console.log("📋 Page: 統計表選択", table);
-  };
-
-  const handleNextPage = () => {
-    if (!searchResult?.pagination.nextKey) return;
-
-    // 次のページの検索を実行
-    const currentOptions = {
-      limit: searchResult.tables.length,
-      startPosition: searchResult.pagination.nextKey,
+  const handleTableSelect = useCallback((table: StatsListTableInfo) => {
+    console.log("🔵 Page: テーブル選択", table);
+    // 詳細情報を取得してモーダル表示
+    const detailedTable: DetailedStatsListTableInfo = {
+      ...table,
+      collectArea: undefined,
+      description: undefined,
+      statisticsNameSpec: undefined,
     };
+    setSelectedTable(detailedTable);
+  }, []);
 
-    handleSearch(currentOptions);
-  };
+  const handleFieldSelect = useCallback(
+    (fieldCode: StatsFieldCode) => {
+      console.log("🔵 Page: 分野選択", fieldCode);
+      setSelectedField(fieldCode);
+      setShowFieldNavigation(false);
 
-  const handlePreviousPage = () => {
-    if (!searchResult) return;
+      // 選択した分野で検索
+      search({
+        statsField: fieldCode,
+        limit: 100,
+      });
+    },
+    [search]
+  );
 
-    // 前のページの検索を実行
-    const currentOptions = {
-      limit: searchResult.tables.length,
-      startPosition: Math.max(
-        1,
-        searchResult.pagination.fromNumber - searchResult.tables.length
-      ),
-    };
+  const handleSort = useCallback(
+    (
+      sortBy: "surveyDate" | "openDate" | "updatedDate" | "statName",
+      order: "asc" | "desc"
+    ) => {
+      console.log("🔵 Page: ソート", { sortBy, order });
+      sort(sortBy, order);
+    },
+    [sort]
+  );
 
-    handleSearch(currentOptions);
-  };
+  const handleFilter = useCallback(
+    (filters: any) => {
+      console.log("🔵 Page: フィルタ", filters);
+      filter(filters);
+    },
+    [filter]
+  );
+
+  const handleToggleFavorite = useCallback(
+    (table: StatsListTableInfo) => {
+      console.log("🔵 Page: お気に入り切り替え", table);
+      toggleFavorite(table);
+    },
+    [toggleFavorite]
+  );
 
   return (
-    <div className="bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* ヘッダー */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            e-Stat 統計表検索
-          </h1>
-          <p className="text-gray-600">
-            e-Stat APIを使用して統計表を検索し、統計表IDを取得できます。
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">統計表一覧</h1>
+              <p className="mt-2 text-gray-600">
+                e-Stat APIから統計表の一覧を検索・閲覧できます
+              </p>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setShowFieldNavigation(!showFieldNavigation)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                分野別検索
+              </button>
+
+              <div className="flex border border-gray-300 rounded-md">
+                <button
+                  onClick={() => setSearchMode("simple")}
+                  className={`px-4 py-2 text-sm ${
+                    searchMode === "simple"
+                      ? "bg-blue-500 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  シンプル検索
+                </button>
+                <button
+                  onClick={() => setSearchMode("advanced")}
+                  className={`px-4 py-2 text-sm ${
+                    searchMode === "advanced"
+                      ? "bg-blue-500 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  高度検索
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* 分野別ナビゲーション */}
+        {showFieldNavigation && (
+          <div className="mb-6">
+            <StatsFieldNavigation
+              onSelectField={handleFieldSelect}
+              selectedField={selectedField}
+            />
+          </div>
+        )}
 
         <div className="space-y-6">
           {/* 検索フォーム */}
-          <StatsListSearch onSearch={handleSearch} isLoading={isLoading} />
+          {searchMode === "simple" ? (
+            <StatsListSearch
+              onSearch={handleSimpleSearch}
+              isLoading={isLoading}
+            />
+          ) : (
+            <AdvancedStatsListSearch
+              onSearch={handleAdvancedSearch}
+              isLoading={isLoading}
+            />
+          )}
 
           {/* エラー表示 */}
           {error && (
@@ -126,7 +200,9 @@ export default function EstatAPIStatsListPage() {
                   <h3 className="text-sm font-medium text-red-800">
                     エラーが発生しました
                   </h3>
-                  <div className="mt-2 text-sm text-red-700">{error}</div>
+                  <div className="mt-2 text-sm text-red-700">
+                    <p>{error}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,65 +210,72 @@ export default function EstatAPIStatsListPage() {
 
           {/* 検索結果 */}
           {searchResult && (
-            <>
-              <StatsListResults
-                tables={searchResult.tables}
-                totalCount={searchResult.totalCount}
-                isLoading={isLoading}
-                onTableSelect={handleTableSelect}
-              />
-
-              <StatsListPagination
-                fromNumber={searchResult.pagination.fromNumber}
-                toNumber={searchResult.pagination.toNumber}
-                totalCount={searchResult.totalCount}
-                nextKey={searchResult.pagination.nextKey}
-                onNext={handleNextPage}
-                onPrevious={handlePreviousPage}
-                isLoading={isLoading}
-              />
-            </>
+            <StatsListResults
+              tables={searchResult.tables}
+              totalCount={searchResult.totalCount}
+              isLoading={isLoading}
+              onTableSelect={handleTableSelect}
+              onToggleFavorite={handleToggleFavorite}
+              favorites={favorites}
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
+              onSort={handleSort}
+              onFilter={handleFilter}
+              sortBy="surveyDate"
+              sortOrder="desc"
+            />
           )}
 
-          {/* 選択された統計表の詳細 */}
-          {selectedTable && (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-bold mb-4">選択された統計表</h3>
-              <div className="space-y-2 text-sm">
-                <div>
-                  <strong>統計表ID:</strong> {selectedTable.id}
-                </div>
-                <div>
-                  <strong>タイトル:</strong> {selectedTable.title}
-                </div>
-                <div>
-                  <strong>政府統計名:</strong> {selectedTable.statName}
-                </div>
-                <div>
-                  <strong>作成機関:</strong> {selectedTable.govOrg}
-                </div>
-                <div>
-                  <strong>提供統計名:</strong> {selectedTable.statisticsName}
-                </div>
-                {selectedTable.mainCategory && (
-                  <div>
-                    <strong>分野:</strong> {selectedTable.mainCategory.name}
+          {/* 検索履歴 */}
+          {searchHistory.length > 0 && (
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                検索履歴
+              </h3>
+              <div className="space-y-2">
+                {searchHistory.slice(0, 5).map((history, index) => (
+                  <div key={index} className="text-sm text-gray-600">
+                    {history.searchWord && `キーワード: ${history.searchWord}`}
+                    {history.statsField && ` | 分野: ${history.statsField}`}
+                    {history.collectArea && ` | 地域: ${history.collectArea}`}
                   </div>
-                )}
-                {selectedTable.surveyDate && (
-                  <div>
-                    <strong>調査年月:</strong> {selectedTable.surveyDate}
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* お気に入り */}
+          {favorites.length > 0 && (
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                お気に入り ({favorites.length}件)
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {favorites.slice(0, 6).map((table) => (
+                  <div
+                    key={table.id}
+                    className="p-4 border border-gray-200 rounded-lg hover:shadow-md cursor-pointer"
+                    onClick={() => handleTableSelect(table)}
+                  >
+                    <h4 className="font-medium text-gray-900 truncate">
+                      {table.title}
+                    </h4>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {table.statName}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">{table.govOrg}</p>
                   </div>
-                )}
-                {selectedTable.openDate && (
-                  <div>
-                    <strong>公開日:</strong> {selectedTable.openDate}
-                  </div>
-                )}
+                ))}
               </div>
             </div>
           )}
         </div>
+
+        {/* テーブル詳細モーダル */}
+        <StatsTableDetailModal
+          table={selectedTable}
+          onClose={() => setSelectedTable(null)}
+        />
       </div>
     </div>
   );

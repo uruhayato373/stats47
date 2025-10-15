@@ -27,6 +27,29 @@ export type StatsFieldCode =
   | "17"; // 国際
 
 /**
+ * 統計分野コード情報マップ
+ */
+export const STATS_FIELDS = {
+  "01": { name: "国土・気象", icon: "🌍" },
+  "02": { name: "人口・世帯", icon: "👥" },
+  "03": { name: "労働・賃金", icon: "💼" },
+  "04": { name: "事業所", icon: "🏢" },
+  "05": { name: "農林水産業", icon: "🌾" },
+  "06": { name: "鉱工業", icon: "🏭" },
+  "07": { name: "商業・サービス業", icon: "🛍️" },
+  "08": { name: "企業・家計・経済", icon: "💰" },
+  "09": { name: "住宅・土地・建設", icon: "🏠" },
+  "10": { name: "エネルギー・水", icon: "⚡" },
+  "11": { name: "運輸・観光", icon: "🚗" },
+  "12": { name: "情報通信・科学技術", icon: "💻" },
+  "13": { name: "教育・文化・スポーツ・生活", icon: "🎓" },
+  "14": { name: "行財政", icon: "🏛️" },
+  "15": { name: "司法・安全・環境", icon: "⚖️" },
+  "16": { name: "社会保障・衛生", icon: "🏥" },
+  "17": { name: "国際", icon: "🌐" },
+} as const;
+
+/**
  * getStatsList APIパラメータ
  */
 export interface GetStatsListParams {
@@ -188,6 +211,45 @@ export interface StatsListTableInfo {
     code: string;
     name: string;
   };
+}
+
+/**
+ * 詳細な統計表情報（解説情報を含む）
+ */
+export interface DetailedStatsListTableInfo extends StatsListTableInfo {
+  collectArea?: "1" | "2" | "3"; // 集計地域区分
+  description?: string; // 解説（explanationGetFlg=Y時）
+  statisticsNameSpec?: {
+    // 統計名称詳細
+    tabulationCategory: string;
+    tabulationSubCategory1?: string;
+    tabulationSubCategory2?: string;
+    tabulationSubCategory3?: string;
+    tabulationSubCategory4?: string;
+    tabulationSubCategory5?: string;
+  };
+}
+
+/**
+ * 高度な統計表検索オプション
+ */
+export interface AdvancedStatsListSearchOptions extends StatsListSearchOptions {
+  // 検索種別
+  searchKind?: "1" | "2"; // AND/OR検索
+
+  // 解説情報
+  includeExplanation?: boolean; // 解説情報を含めるか
+
+  // フィルタリング
+  cycleFilter?: string[]; // 周期フィルタ（年次、月次など）
+  dateRangeFilter?: {
+    from?: string;
+    to?: string;
+  };
+
+  // ソート
+  sortBy?: "surveyDate" | "openDate" | "updatedDate" | "statName";
+  sortOrder?: "asc" | "desc";
 }
 
 /**

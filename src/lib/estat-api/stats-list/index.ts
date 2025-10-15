@@ -19,4 +19,9 @@ export type {
   StatsListTableInfo,
   PagingOptions,
   StatsFieldCode,
+  AdvancedStatsListSearchOptions,
+  DetailedStatsListTableInfo,
 } from "../types/stats-list";
+
+// Utils
+export * from "./utils";
