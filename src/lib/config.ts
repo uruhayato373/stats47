@@ -1,61 +1,60 @@
 /**
- * 環境変数管理ヘルパー
- * 本番環境での設定ミスを防止し、開発効率を維持する
+ * 環境変数の一元管理と型安全なアクセスを提供する設定ファイル
  */
 
-export class ConfigError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "ConfigError";
-  }
-}
+export const config = {
+  env: process.env.NEXT_PUBLIC_ENV || 'development',
+  useMock: process.env.NEXT_PUBLIC_USE_MOCK === 'true',
+  
+  estat: {
+    baseUrl: process.env.ESTAT_API_BASE_URL || 'https://api.e-stat.go.jp/rest/3.0/app',
+    apiKey: process.env.ESTAT_API_KEY,
+  },
+  
+  cloudflare: {
+    d1: process.env.CLOUDFLARE_D1_DATABASE_ID,
+    r2: process.env.CLOUDFLARE_R2_BUCKET,
+    accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
+    apiToken: process.env.CLOUDFLARE_API_TOKEN,
+  },
+  
+  mock: {
+    dataPath: process.env.MOCK_DATA_PATH || 'data/mock',
+  },
+} as const;
+
+export type Config = typeof config;
 
 /**
- * ベースURLを取得する
- * 本番環境では環境変数必須、開発環境ではデフォルト値を提供
+ * 環境判定ヘルパー関数
  */
-export function getBaseUrl(): string {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  // 本番環境では環境変数必須
-  if (process.env.NODE_ENV === "production" && !baseUrl) {
-    throw new ConfigError(
-      "NEXT_PUBLIC_BASE_URL environment variable is required in production."
-    );
-  }
-
-  // 開発環境で未設定の場合は警告
-  if (!baseUrl) {
-    console.warn(
-      "⚠️  NEXT_PUBLIC_BASE_URL is not set. Using default: http://localhost:3000"
-    );
-    return "http://localhost:3000";
-  }
-
-  // URL形式の検証
-  try {
-    new URL(baseUrl);
-  } catch {
-    throw new ConfigError(
-      `NEXT_PUBLIC_BASE_URL is not a valid URL: ${baseUrl}`
-    );
-  }
-
-  return baseUrl;
-}
+export const isDevelopment = () => config.env === 'development';
+export const isMock = () => config.env === 'mock';
+export const isStaging = () => config.env === 'staging';
+export const isProduction = () => config.env === 'production';
 
 /**
- * 設定を検証する
- * 本番環境ではエラーを投げ、開発環境では警告のみ
+ * 環境に応じたログレベル
  */
-export function validateConfig(): void {
-  try {
-    getBaseUrl();
-    console.log("✅ Configuration validated successfully");
-  } catch (error) {
-    console.error("❌ Configuration validation failed:", error);
-    if (process.env.NODE_ENV === "production") {
-      throw error;
-    }
+export const getLogLevel = () => {
+  if (isProduction()) return 'error';
+  if (isStaging()) return 'warn';
+  return 'debug';
+};
+
+/**
+ * 環境に応じたAPI設定
+ */
+export const getApiConfig = () => {
+  if (config.useMock) {
+    return {
+      baseUrl: config.mock.dataPath,
+      timeout: 0,
+    };
   }
-}
+  
+  return {
+    baseUrl: config.estat.baseUrl,
+    timeout: 30000,
+  };
+};

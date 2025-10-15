@@ -50,3 +50,23 @@ binding = "STATS47_DB"
 database_name = "stats47"
 database_id = "e6533698-d05a-475b-9f39-5558703feef7"
 migrations_dir = "database/migrations"
+
+# ステージング環境
+[env.staging]
+NODE_ENV = "production"
+
+[[env.staging.d1_databases]]
+binding = "STATS47_DB"
+database_name = "stats47_staging"
+database_id = "${STAGING_D1_DATABASE_ID}"
+migrations_dir = "database/migrations"
+
+# 本番環境
+[env.production]
+NODE_ENV = "production"
+
+[[env.production.d1_databases]]
+binding = "STATS47_DB"
+database_name = "stats47_production"
+database_id = "${PROD_D1_DATABASE_ID}"
+migrations_dir = "database/migrations"

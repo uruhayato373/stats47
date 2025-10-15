@@ -203,8 +203,13 @@ npm run dev
 3. **環境変数の設定**
 
    ```bash
-   cp env.example .env.local
-   # .env.localファイルを編集して必要な値を設定
+   # 開発環境用
+   cp env.development.example .env.development
+   
+   # モック環境用（デザイン検証）
+   cp env.mock.example .env.mock
+   
+   # 各ファイルを編集して必要な値を設定
    ```
 
 4. **データベースの初期化**
@@ -224,18 +229,48 @@ npm run dev
 
 ## 環境設定
 
-### 必須環境変数
+### 環境別設定ファイル
 
-開発環境でも Cloudflare D1 を使用するため、以下の環境変数が必要です：
+プロジェクトでは複数の環境をサポートしています：
 
 ```bash
-# .env.local ファイルを作成
-cp env.example .env.local
+# 開発環境（API接続あり）
+cp env.development.example .env.development
 
-# 以下の値を設定
-CLOUDFLARE_API_TOKEN=your_api_token_here
-CLOUDFLARE_ACCOUNT_ID=your_account_id_here
-CLOUDFLARE_D1_DATABASE_ID=your_database_id_here
+# モック環境（API非接続、デザイン検証用）
+cp env.mock.example .env.mock
+
+# ステージング環境
+cp env.staging.example .env.staging
+
+# 本番環境
+cp env.production.example .env.production
+```
+
+### 必須環境変数
+
+各環境で必要な環境変数は以下の通りです：
+
+#### 開発環境
+```bash
+# e-Stat API設定
+ESTAT_API_KEY=your-dev-api-key
+
+# Cloudflare設定
+CLOUDFLARE_D1_DATABASE_ID=dev-db-id
+CLOUDFLARE_ACCOUNT_ID=your-account-id
+CLOUDFLARE_API_TOKEN=your-dev-api-token
+
+# 環境設定
+NEXT_PUBLIC_ENV=development
+NEXT_PUBLIC_USE_MOCK=false
+```
+
+#### モック環境
+```bash
+# 環境設定
+NEXT_PUBLIC_ENV=mock
+NEXT_PUBLIC_USE_MOCK=true
 ```
 
 ### Cloudflare D1 設定の取得方法
@@ -243,6 +278,16 @@ CLOUDFLARE_D1_DATABASE_ID=your_database_id_here
 1. **API Token**: [Cloudflare Dashboard](https://dash.cloudflare.com/profile/api-tokens) で作成
 2. **Account ID**: [Cloudflare Dashboard](https://dash.cloudflare.com/) の右サイドバーに表示
 3. **Database ID**: `npx wrangler d1 list` で確認
+
+### 環境切り替え
+
+```bash
+# 開発環境で起動
+npm run dev --env-file=.env.development
+
+# モック環境で起動（デザイン検証用）
+npm run dev --env-file=.env.mock
+```
 
 ## データ保存
 
