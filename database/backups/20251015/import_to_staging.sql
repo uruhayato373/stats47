@@ -1,5 +1,5 @@
 -- 本番DBからステージングDBへのデータコピー
--- 生成日時: 2025-10-15T10:37:01.495Z
+-- 生成日時: 2025-10-15T11:55:15.477Z
 
 -- Import data to ranking_items
 DELETE FROM ranking_items;

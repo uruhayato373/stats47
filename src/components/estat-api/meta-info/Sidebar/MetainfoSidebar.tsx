@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Archive, RefreshCw } from "lucide-react";
+import { Archive } from "lucide-react";
 import { SavedEstatMetaInfoListItem, Pagination } from "./components";
-import { useMetadataList } from "@/hooks/estat";
-import type { EstatMetaCategoryData } from "@/lib/estat-api";
+import type { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
 
 interface EstatMetaInfoSidebarProps {
   className?: string;
-  initialData?: EstatMetaCategoryData[];
-  onView?: (item: EstatMetaCategoryData) => void;
+  initialData?: SavedEstatMetainfoItem[];
+  onView?: (item: SavedEstatMetainfoItem) => void;
 }
 
 export default function EstatMetaInfoSidebar({
@@ -17,11 +16,10 @@ export default function EstatMetaInfoSidebar({
   initialData = [],
   onView,
 }: EstatMetaInfoSidebarProps) {
-  const { data, loading, fetchData } = useMetadataList();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const handleView = (item: EstatMetaCategoryData) => {
+  const handleView = (item: SavedEstatMetainfoItem) => {
     if (onView) {
       onView(item);
     }
@@ -31,11 +29,11 @@ export default function EstatMetaInfoSidebar({
     setCurrentPage(page);
   };
 
-  // 初期データがある場合はそれを使用、ない場合はフックから取得したデータを使用
-  const displayData = initialData.length > 0 ? initialData : data;
+  // 初期データを直接使用
+  const displayData = initialData;
 
-  // ローディング状態の表示
-  if (loading) {
+  // ローディング状態の表示（データが空の場合）
+  if (displayData.length === 0) {
     return (
       <div
         className={`w-full xl:w-80 bg-white dark:bg-neutral-800 flex flex-col ${className}`}
@@ -49,23 +47,14 @@ export default function EstatMetaInfoSidebar({
               保存済みデータ
             </h3>
           </div>
-
-          <button
-            onClick={fetchData}
-            disabled={loading}
-            className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
-            title="更新"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-          </button>
         </div>
 
-        {/* ローディング表示 */}
+        {/* データなし表示 */}
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto mb-2"></div>
+            <Archive className="w-12 h-12 text-gray-300 dark:text-neutral-600 mx-auto mb-3" />
             <p className="text-sm text-gray-500 dark:text-neutral-400">
-              読み込み中...
+              保存済みデータがありません
             </p>
           </div>
         </div>
@@ -88,15 +77,6 @@ export default function EstatMetaInfoSidebar({
               保存済みデータ
             </h3>
           </div>
-
-          <button
-            onClick={fetchData}
-            disabled={loading}
-            className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
-            title="更新"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-          </button>
         </div>
 
         {/* 空状態表示 */}
@@ -157,15 +137,6 @@ export default function EstatMetaInfoSidebar({
             保存済みデータ
           </h3>
         </div>
-
-        <button
-          onClick={fetchData}
-          disabled={loading}
-          className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-700"
-          title="更新"
-        >
-          <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-        </button>
       </div>
 
       {/* データリスト */}

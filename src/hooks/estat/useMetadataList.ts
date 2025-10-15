@@ -12,7 +12,7 @@ export function useMetadataList() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("/api/estat/metainfo/saved?limit=100");
+      const response = await fetch("/api/estat/meta-info/saved?limit=100");
       if (!response.ok) {
         throw new Error(`データの取得に失敗しました: ${response.status}`);
       }
