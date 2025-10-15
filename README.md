@@ -199,6 +199,8 @@ npm run dev
    ```bash
    npm install
    ```
+   
+   > 環境変数管理のため`cross-env`が自動的にインストールされます。
 
 3. **環境変数の設定**
 
@@ -268,6 +270,9 @@ NEXT_PUBLIC_USE_MOCK=false
 # 環境設定
 NEXT_PUBLIC_ENV=mock
 NEXT_PUBLIC_USE_MOCK=true
+
+# 注意：mock環境ではデータベース接続は不要です。
+# すべてのデータはローカルのJSONファイルから読み込まれます。
 ```
 
 ### Cloudflare D1 設定の取得方法
@@ -278,13 +283,23 @@ NEXT_PUBLIC_USE_MOCK=true
 
 ### 環境切り替え
 
+本プロジェクトでは`cross-env`を使用して環境変数を設定しています。
+
 ```bash
-# 開発環境で起動
-npm run dev --env-file=.env.development
+# 開発環境で起動（API接続あり）
+npm run dev:api
 
 # モック環境で起動（デザイン検証用）
-npm run dev --env-file=.env.mock
+npm run dev:mock
+
+# ステージング環境で起動
+npm run dev:staging
+
+# 本番環境で起動
+npm run dev:production
 ```
+
+> **Note**: `cross-env`パッケージにより、Windows/macOS/Linux全てで同じコマンドが動作します。
 
 ## データ保存
 
