@@ -1,0 +1,172 @@
+{
+  "executedAt": "2025-10-14T22:07:56.129Z",
+  "processingTime": "10.20ms",
+  "tableInfo": {
+    "id": "0000010101",
+    "title": "Ａ　人口・世帯",
+    "statName": "社会・人口統計体系",
+    "govOrg": "総務省",
+    "statCode": "00200502",
+    "govOrgCode": "00200",
+    "dates": {
+      "surveyDate": 0,
+      "openDate": "2025-06-30",
+      "updatedDate": "2025-06-30"
+    },
+    "characteristics": {
+      "cycle": "年度次",
+      "smallArea": 0,
+      "collectArea": "全国"
+    }
+  },
+  "metadata": {
+    "stats": {
+      "totalRecords": 2400,
+      "validValues": 2400,
+      "nullValues": 0,
+      "nullPercentage": 0
+    },
+    "range": {
+      "years": {
+        "min": "1975100000",
+        "max": "2024100000",
+        "count": 50
+      },
+      "areas": {
+        "count": 48,
+        "prefectureCount": 2350,
+        "hasNational": true
+      },
+      "categories": {
+        "count": 4800
+      }
+    },
+    "quality": {
+      "completenessScore": 100,
+      "lastVerified": "2025-10-14T22:07:56.124Z"
+    }
+  },
+  "sampleValues": [
+    {
+      "value": 111939643,
+      "unit": "人",
+      "area": {
+        "code": "00000",
+        "name": "全国",
+        "level": "1"
+      },
+      "time": {
+        "code": "1975100000",
+        "name": "1975年度",
+        "level": "1"
+      },
+      "cat01": {
+        "code": "A1101",
+        "name": "A1101_総人口",
+        "level": "1",
+        "unit": "人"
+      }
+    },
+    {
+      "value": 113094000,
+      "unit": "人",
+      "area": {
+        "code": "00000",
+        "name": "全国",
+        "level": "1"
+      },
+      "time": {
+        "code": "1976100000",
+        "name": "1976年度",
+        "level": "1"
+      },
+      "cat01": {
+        "code": "A1101",
+        "name": "A1101_総人口",
+        "level": "1",
+        "unit": "人"
+      }
+    },
+    {
+      "value": 114165000,
+      "unit": "人",
+      "area": {
+        "code": "00000",
+        "name": "全国",
+        "level": "1"
+      },
+      "time": {
+        "code": "1977100000",
+        "name": "1977年度",
+        "level": "1"
+      },
+      "cat01": {
+        "code": "A1101",
+        "name": "A1101_総人口",
+        "level": "1",
+        "unit": "人"
+      }
+    },
+    {
+      "value": 115190000,
+      "unit": "人",
+      "area": {
+        "code": "00000",
+        "name": "全国",
+        "level": "1"
+      },
+      "time": {
+        "code": "1978100000",
+        "name": "1978年度",
+        "level": "1"
+      },
+      "cat01": {
+        "code": "A1101",
+        "name": "A1101_総人口",
+        "level": "1",
+        "unit": "人"
+      }
+    },
+    {
+      "value": 116155000,
+      "unit": "人",
+      "area": {
+        "code": "00000",
+        "name": "全国",
+        "level": "1"
+      },
+      "time": {
+        "code": "1979100000",
+        "name": "1979年度",
+        "level": "1"
+      },
+      "cat01": {
+        "code": "A1101",
+        "name": "A1101_総人口",
+        "level": "1",
+        "unit": "人"
+      }
+    }
+  ],
+  "statistics": {
+    "totalValues": 2400,
+    "validValues": 2400,
+    "nullValues": 0,
+    "completenessScore": 100,
+    "processingSpeed": "235,322件/秒"
+  },
+  "notes": [
+    {
+      "char": "***",
+      "description": "調査又は集計していないもの"
+    },
+    {
+      "char": "-",
+      "description": "データが得られないもの"
+    },
+    {
+      "char": "X",
+      "description": "数値が秘匿されているもの"
+    }
+  ]
+}
