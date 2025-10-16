@@ -8,89 +8,16 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e9b13cf95a24742d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "05_資料/instagram.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "instagram"
-            }
-          },
-          {
-            "id": "c49becbf247d64e2",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "05_資料/design.png"
-              },
-              "icon": "lucide-image",
-              "title": "design"
-            }
-          },
-          {
-            "id": "e2c977e6467be7d3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_機能別/comments/コメント機能.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "コメント機能"
-            }
-          },
-          {
-            "id": "0dd35edbd92a960a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_ドメイン/auth/仕様/認証システム.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "認証システム"
-            }
-          },
-          {
-            "id": "4553f3e937b7784b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト全体/02_プロジェクト要件.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02_プロジェクト要件"
-            }
-          },
-          {
             "id": "05f9f8b2f20329cf",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_要件定義/04_ターゲットペルソナ.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "04_ターゲットペルソナ"
+              "title": "新規タブ"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -236,53 +163,53 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "4553f3e937b7784b",
+  "active": "05f9f8b2f20329cf",
   "lastOpenFiles": [
-    "02_ドメイン/auth/仕様/認証システム.md",
-    "00_プロジェクト全体/08_参考リンク.md",
-    "00_プロジェクト全体/07_マネタイズ戦略.md",
-    "00_プロジェクト全体/06_ロードマップ.md",
-    "00_プロジェクト全体/05_アーキテクチャ.md",
-    "00_プロジェクト全体/04_非機能要件.md",
-    "00_プロジェクト全体/03_機能要件.md",
-    "00_プロジェクト全体/02_プロジェクト要件.md",
-    "03_機能別/comments/コメント機能.md",
+    "00_project_overview/08_reference_links.md",
+    "00_project_overview/07_monetization_strategy.md",
+    "00_project_overview/06_roadmap.md",
+    "00_project_overview/05_architecture.md",
+    "00_project_overview/04_non_functional_requirements.md",
+    "00_project_overview/03_functional_requirements.md",
+    "00_project_overview/02_プロジェクト要件.md",
+    "00_project_overview/02_project_requirements.md",
+    "00_project_overview/01_overview.md",
+    "05_resources/都道府県ごとの物価分析.png",
+    "05_resources/就職率.png",
+    "05_resources/都道府県別産業割合.png",
+    "05_resources/ランキング画像サンプル_02.png",
+    "05_resources/転入転出.png",
+    "05_resources/design.png",
+    "05_resources/ランキング画像サンプル_01.png",
+    "05_resources/instagram.md",
+    "05_resources/x.md",
+    "05_resources",
+    "04_content_planning/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
+    "04_content_planning/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
+    "04_content_planning/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
+    "04_content_planning/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
+    "04_content_planning/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
+    "04_content_planning/03_ブログ記事/ブログ記事改善案.md",
+    "04_content_planning/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
+    "04_content_planning/02_ダッシュボード/02_人口・世帯.md",
+    "04_content_planning/03_ブログ記事/よまれる記事.md",
+    "04_content_planning/03_ブログ記事/「データで読み解く日本の交通安全 〜減少傾向にある交通事故と新たな課題〜」.md",
+    "04_content_planning/02_ダッシュボード/01_国土・気象.md",
+    "04_content_planning/03_ブログ記事",
+    "04_content_planning/02_ダッシュボード",
+    "04_content_planning/01_ランキング記事",
+    "04_content_planning",
+    "03_features/comments/コメント機能.md",
+    "03_features/related-articles",
+    "03_features/sns",
+    "03_features/image-generation",
+    "03_features/comments",
+    "03_features",
+    "02_domain/estat-api/仕様/types.md",
+    "02_domain/estat-api/仕様/testing-strategy.md",
+    "02_domain/estat-api/仕様/stats-list-service.md",
     "05_資料/design.png",
-    "05_資料/instagram.md",
-    "INDEX.md",
-    "02_ドメイン/estat-api/仕様/types.md",
-    "02_ドメイン/estat-api/仕様/testing-strategy.md",
-    "02_ドメイン/estat-api/仕様/stats-list-service.md",
-    "02_ドメイン/estat-api/仕様/stats-data-service.md",
-    "02_ドメイン/estat-api/仕様/README.md",
-    "02_ドメイン/estat-api/仕様/overview.md",
-    "02_ドメイン/estat-api/仕様/metainfo-service.md",
-    "02_ドメイン/estat-api/仕様/examples.md",
-    "02_ドメイン/estat-api/仕様/e-Stat API GET_STATS_LIST 完全ガイド.md",
-    "02_ドメイン/estat-api/仕様/e-Stat API GET_STATS_DATA 完全ガイド.md",
-    "02_ドメイン/estat-api/仕様/e-Stat API GET_META_INFO 完全ガイド.md",
-    "02_ドメイン/estat-api/仕様/e-Stat API GET_DATA_CATALOG 完全ガイド.md",
-    "04_コンテンツ計画/03_ブログ記事/よまれる記事.md",
-    "02_ドメイン/estat-api/リファクタリング/estat-ranking-data-r2-save-implementation.md",
-    "04_コンテンツ計画/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
     "05_資料/都道府県別産業割合.png",
-    "05_資料/都道府県ごとの物価分析.png",
-    "05_資料/転入転出.png",
-    "05_資料/就職率.png",
-    "05_資料/ランキング画像サンプル_02.png",
-    "05_資料/ランキング画像サンプル_01.png",
-    "04_コンテンツ計画/03_ブログ記事",
-    "04_コンテンツ計画/02_ダッシュボード",
-    "04_コンテンツ計画/01_ランキング記事",
-    "03_機能別/image-generation",
-    "03_機能別/related-articles",
-    "03_機能別/comments",
-    "03_機能別/sns",
-    "02_ドメイン/dashboard/リファクタリング",
-    "02_ドメイン/dashboard/仕様",
-    "02_ドメイン/dashboard",
-    "old/10_資料/都道府県別産業割合.png",
-    "old/10_資料/転入転出.png",
-    "old/10_資料/都道府県ごとの物価分析.png"
+    "05_資料/都道府県ごとの物価分析.png"
   ]
 }
