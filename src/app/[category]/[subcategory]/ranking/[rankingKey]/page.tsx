@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 // import { cookies } from "next/headers";
-import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
+import { getSubcategoryById } from "@/lib/category";
 import { SubcategoryRankingPage } from "@/components/subcategories/SubcategoryRankingPage";
 
 /**

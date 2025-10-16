@@ -8,7 +8,8 @@ import {
   SubcategoryData,
   MapVisualizationSettings,
 } from "@/types/visualization/choropleth";
-import { getSortedCategories } from "@/lib/choropleth/category-helpers";
+import { getAllCategories } from "@/lib/category";
+import type { Category } from "@/lib/category";
 
 // 基本状態アトム
 export const selectedCategoryAtom = atom<string | null>(null);
@@ -18,7 +19,25 @@ export const loadingAtom = atom<boolean>(false);
 export const errorAtom = atom<string | null>(null);
 
 // カテゴリデータアトム
-export const categoriesAtom = atom<CategoryData[]>(getSortedCategories());
+// CategoryServiceの戻り値をCategoryData型に変換
+const convertToCategoryData = (category: Category): CategoryData => ({
+  id: category.id,
+  name: category.name,
+  description: category.description || "",
+  icon: category.icon || "",
+  subcategories: (category.subcategories || []).map((sub) => ({
+    id: sub.id,
+    categoryId: sub.categoryId,
+    name: sub.name,
+    displayOrder: sub.displayOrder,
+    component: sub.dashboardComponent,
+  })),
+  displayOrder: category.displayOrder || 0,
+});
+
+export const categoriesAtom = atom<CategoryData[]>(
+  getAllCategories().map(convertToCategoryData)
+);
 
 // 地図表示設定アトム
 export const mapVisualizationSettingsAtom = atom<MapVisualizationSettings>({
