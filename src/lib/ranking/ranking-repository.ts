@@ -8,7 +8,7 @@
  * - テスト容易性の向上
  */
 
-import { createLocalD1Database } from "@/lib/db";
+import { createLocalD1Database } from "@/lib/database";
 import { QUERIES } from "./ranking-queries";
 import { RankingItem, RankingItemDB } from "@/types/models/ranking";
 import { convertRankingItemFromDB } from "./ranking-converters";

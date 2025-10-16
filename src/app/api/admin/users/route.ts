@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth/auth";
-import { createD1Database } from "@/lib/db";
+import { createD1Database } from "@/lib/database";
 
 export async function GET(request: NextRequest) {
   try {

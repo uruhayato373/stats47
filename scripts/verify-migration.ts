@@ -4,7 +4,7 @@
  * 目的: データ移行の整合性を検証
  */
 
-import { createD1Database } from "../src/lib/db";
+import { createD1Database } from "../src/lib/database";
 
 interface VerificationResult {
   tableName: string;

@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { createLocalD1Database } from "../src/lib/db";
+import { createLocalD1Database } from "../src/lib/database";
 
 interface MappingRow {
   stats_data_id: string;

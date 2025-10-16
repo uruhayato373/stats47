@@ -6,7 +6,6 @@ import { JotaiProvider } from "@/providers/JotaiProvider";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-// import { ThemeProvider } from "@/contexts/ThemeContext"; // 無効化: Jotai版テーマシステムに統一
 
 const inter = Inter({
   subsets: ["latin"],

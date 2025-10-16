@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { createD1Database } from "../src/lib/db";
+import { createD1Database } from "../src/lib/database";
 
 // .env.localファイルを手動で読み込み
 function loadEnvFile() {

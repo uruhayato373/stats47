@@ -92,7 +92,7 @@ export default function EstatAPIStatsDataPage({
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30秒でタイムアウト
 
       const response = await fetch(
-        `/api/estat-api/data?${queryParams.toString()}`,
+        `/api/estat-api/stats-data?${queryParams.toString()}`,
         {
           signal: controller.signal,
           headers: {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EstatMetaInfoRepository } from "@/lib/estat-d1";
-import { createD1Database } from "@/lib/db";
+import { createD1Database } from "@/lib/database";
 import {
   EstatMetaInfoFetcher,
   EstatMetaInfoBatchProcessor,

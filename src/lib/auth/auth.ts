@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { createD1Database } from "@/lib/db";
+import { createD1Database } from "@/lib/database";
 
 export const authConfig: NextAuthConfig = {
   providers: [

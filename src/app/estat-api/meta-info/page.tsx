@@ -1,5 +1,5 @@
 import { EstatMetainfoPage } from "@/components/estat-api/meta-info";
-import { fetchEstatMetainfoUnique } from "@/lib/db";
+import { fetchEstatMetainfoUnique } from "@/lib/database";
 import { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
 
 /**
@@ -12,7 +12,7 @@ import { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
  * - production: リモートD1 (stats47)
  */
 export default async function EstatMetadataPage() {
-  // 環境判定は lib/db/index.ts で自動的に行われる
+  // 環境判定は lib/database/index.ts で自動的に行われる
   const initialSavedMetadata = await fetchEstatMetainfoUnique({
     limit: 50,
     orderBy: "updated_at DESC",
