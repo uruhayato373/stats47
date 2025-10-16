@@ -12,7 +12,7 @@ import { createLocalD1Database } from "@/lib/db";
 import { QUERIES } from "./ranking-queries";
 import { RankingItem, RankingItemDB } from "@/types/models/ranking";
 import { convertRankingItemFromDB } from "./ranking-converters";
-import { getSubcategoryConfig } from "@/lib/choropleth/category-helpers";
+import { CategoryService } from "@/lib/category";
 
 export interface SubcategoryConfig {
   id: string;
@@ -42,10 +42,17 @@ export class RankingRepository {
   ): Promise<RankingConfigResponse | null> {
     try {
       // categories.jsonからサブカテゴリ設定を取得
-      const subcategoryConfig = getSubcategoryConfig(subcategoryId);
-      if (!subcategoryConfig) {
+      const subcategory = CategoryService.getSubcategoryById(subcategoryId);
+      if (!subcategory) {
         return null;
       }
+
+      const subcategoryConfig: SubcategoryConfig = {
+        id: subcategory.id,
+        categoryId: subcategory.categoryId,
+        name: subcategory.name,
+        defaultRankingKey: subcategory.statsDataId || "",
+      };
 
       const result = await this.db
         .prepare(QUERIES.getRankingItemsBySubcategory)

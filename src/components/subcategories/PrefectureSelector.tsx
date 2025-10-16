@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter, useParams } from "next/navigation";
-import { prefList } from "@/lib/prefecture";
+import { PrefectureService } from "@/lib/area";
 import {
   CategoryData,
   SubcategoryData,
@@ -47,7 +47,7 @@ export const PrefectureSelector: React.FC<PrefectureSelectorProps> = ({
         className="py-1.5 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
       >
         <option value="00000">全国</option>
-        {prefList.map((pref) => (
+        {PrefectureService.getAllPrefectures().map((pref) => (
           <option key={pref.prefCode} value={pref.prefCode}>
             {pref.prefName}
           </option>

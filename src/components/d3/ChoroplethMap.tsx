@@ -13,7 +13,7 @@ import {
 } from "geojson";
 import { FormattedValue } from "@/lib/estat-api";
 import { formatRankingValueDisplay } from "@/types/models/ranking";
-import { PREFECTURE_MAP } from "@/lib/prefecture";
+import { PrefectureService } from "@/lib/area";
 
 export interface MapVisualizationOptions {
   colorScheme: string;
@@ -213,7 +213,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             // データを検索
             let dataPoint = prefectureData.get(prefCode);
             if (!dataPoint) {
-              const prefName = PREFECTURE_MAP[prefCode];
+              const prefName =
+                PrefectureService.getPrefectureNameFromCode(prefCode);
               if (prefName) {
                 dataPoint =
                   prefectureData.get(prefName) ||
@@ -233,7 +234,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             const feature = d as Feature<Geometry, GeoJsonProperties>;
             const index = japan.features.indexOf(feature);
             const prefCode = String(index + 1).padStart(2, "0");
-            const prefName = PREFECTURE_MAP[prefCode] || "不明";
+            const prefName =
+              PrefectureService.getPrefectureNameFromCode(prefCode) || "不明";
 
             // データを検索
             let dataPoint = prefectureData.get(prefCode);

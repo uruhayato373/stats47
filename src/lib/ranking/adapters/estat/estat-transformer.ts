@@ -5,7 +5,11 @@
 
 import type { FormattedEstatData } from "@/lib/estat-api/types";
 import type { RankingDataPoint, TargetAreaLevel } from "@/types/ranking";
-import { getAreaType, getParentPrefectureCode, createAreaFilter } from "../../utils/area-code-utils";
+import {
+  getAreaType,
+  getParentPrefectureCode,
+  createAreaFilter,
+} from "@/lib/area";
 
 /**
  * e-Statデータ変換クラス
@@ -21,15 +25,19 @@ export class EstatTransformer {
     parentCode?: string
   ): RankingDataPoint[] {
     console.log(`🔵 Transformer: 変換開始 (level: ${level})`);
-    
+
     // 1. レベルでフィルタリング
-    const filteredValues = this.filterByLevel(estatData.values, level, parentCode);
-    
+    const filteredValues = this.filterByLevel(
+      estatData.values,
+      level,
+      parentCode
+    );
+
     // 2. RankingDataPointに変換
     const dataPoints = filteredValues.map((value) => {
       const areaCode = value.dimensions.area.code;
       const areaType = getAreaType(areaCode);
-      
+
       return {
         areaCode,
         areaName: value.dimensions.area.name,
@@ -50,11 +58,11 @@ export class EstatTransformer {
         dataQuality: this.assessDataQuality(value),
       };
     });
-    
+
     console.log(`✅ Transformer: 変換完了 (${dataPoints.length}件)`);
     return dataPoints;
   }
-  
+
   /**
    * レベルでフィルタリング
    */
@@ -64,13 +72,13 @@ export class EstatTransformer {
     parentCode?: string
   ): any[] {
     const filter = createAreaFilter(level, parentCode);
-    
+
     return values.filter((value) => {
       const areaCode = value.dimensions.area.code;
       return filter(areaCode);
     });
   }
-  
+
   /**
    * データ品質を評価
    */
@@ -78,7 +86,7 @@ export class EstatTransformer {
     const reliability = this.determineReliability(value);
     const isEstimated = this.isEstimatedValue(value);
     const isInterpolated = this.isInterpolatedValue(value);
-    
+
     return {
       reliability,
       isEstimated,
@@ -86,7 +94,7 @@ export class EstatTransformer {
       notes: this.generateQualityNotes(value),
     };
   }
-  
+
   /**
    * 信頼性を判定
    */
@@ -95,16 +103,16 @@ export class EstatTransformer {
     if (typeof value.value !== "number" || isNaN(value.value)) {
       return "low";
     }
-    
+
     // 値が0の場合は中程度の信頼性（データが存在しない可能性）
     if (value.value === 0) {
       return "medium";
     }
-    
+
     // その他の場合は高信頼性
     return "high";
   }
-  
+
   /**
    * 推定値かどうかを判定
    */
@@ -113,7 +121,7 @@ export class EstatTransformer {
     // 実装は省略（実際のe-Statデータ構造に依存）
     return false;
   }
-  
+
   /**
    * 補間値かどうかを判定
    */
@@ -122,21 +130,21 @@ export class EstatTransformer {
     // 実装は省略（実際のe-Statデータ構造に依存）
     return false;
   }
-  
+
   /**
    * 品質に関する注釈を生成
    */
   private generateQualityNotes(value: any): string | undefined {
     const notes: string[] = [];
-    
+
     if (typeof value.value !== "number" || isNaN(value.value)) {
       notes.push("数値データが無効");
     }
-    
+
     if (value.value === 0) {
       notes.push("値が0（データなしの可能性）");
     }
-    
+
     return notes.length > 0 ? notes.join(", ") : undefined;
   }
 }

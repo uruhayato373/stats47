@@ -69,9 +69,17 @@ tags:
 - [README.md](./02_domain/blog/README.md) - ブログドメイン概要
 - [specifications/](./02_domain/blog/specifications/) - ブログ機能仕様
 
+#### 地域ドメイン (area)
+
+- [overview.md](./02_domain/area/overview.md) - 地域ドメイン概要
+- [specifications/](./02_domain/area/specifications/) - 地域管理仕様
+- [implementation/](./02_domain/area/implementation/) - 地域管理実装ガイド
+- [refactoring/](./02_domain/area/refactoring/) - 地域管理リファクタリング
+- [testing/](./02_domain/area/testing/) - 地域管理テスト
+
 #### カテゴリ管理ドメイン (category)
 
-- [README.md](./02_domain/category/README.md) - カテゴリ管理ドメイン概要
+- [overview.md](./02_domain/category/overview.md) - カテゴリ管理ドメイン概要
 - [specifications/](./02_domain/category/specifications/) - カテゴリ管理仕様
 - [implementation/](./02_domain/category/implementation/) - カテゴリ管理実装ガイド
 
