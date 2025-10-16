@@ -191,6 +191,8 @@ npm run dev
 ### リファクタリング計画
 
 - [データフェッチリファクタリング計画](./docs/02_domain/architecture/data-fetching-refactoring-plan.md) - 既存コードのリファクタリング計画と実装手順
+- [プロバイダーアーキテクチャ設計書](./docs/02_domain/architecture/providers-architecture.md) - プロバイダーコンポーネントの設計と実装
+- [プロバイダーリファクタリング実施報告](./docs/02_domain/architecture/providers-refactoring-report.md) - プロバイダーリファクタリングの実施内容と成果
 
 ### その他
 

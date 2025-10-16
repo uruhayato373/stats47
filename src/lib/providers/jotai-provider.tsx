@@ -1,31 +1,22 @@
 "use client";
 
 import { Provider } from "jotai";
-import { useHydrateAtoms } from "jotai/utils";
-import { useEffect } from "react";
-import { useAtom, useSetAtom } from "jotai";
-import { initThemeAtom, mountedAtom } from "@/atoms/theme";
 import { SWRConfig } from "swr";
 import { fetcher } from "@/lib/swr/fetcher";
+import { ThemeProvider } from "./theme-provider";
 
 interface JotaiProviderProps {
   children: React.ReactNode;
 }
 
-// テーマ初期化コンポーネント
-function ThemeInitializer() {
-  const initTheme = useSetAtom(initThemeAtom);
-  const [mounted] = useAtom(mountedAtom);
-
-  useEffect(() => {
-    if (!mounted) {
-      initTheme();
-    }
-  }, [initTheme, mounted]);
-
-  return null;
-}
-
+/**
+ * Jotai状態管理プロバイダー
+ *
+ * アプリケーション全体にJotaiの状態管理を提供します。
+ * - Jotai Provider: 状態管理の基盤
+ * - SWR設定: データフェッチの設定
+ * - テーマ初期化: テーマの初期化処理
+ */
 export function JotaiProvider({ children }: JotaiProviderProps) {
   return (
     <Provider>
@@ -45,8 +36,7 @@ export function JotaiProvider({ children }: JotaiProviderProps) {
           },
         }}
       >
-        <ThemeInitializer />
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </SWRConfig>
     </Provider>
   );
