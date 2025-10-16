@@ -18,6 +18,7 @@ import {
   RankingItemSettings,
   RankingItemSettingsData,
 } from "@/components/ranking/ui";
+import { ExportButton } from "@/components/export/ExportButton";
 import { Settings } from "lucide-react";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
 
@@ -157,6 +158,19 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
         <div className="flex-1 flex flex-col overflow-hidden gap-4">
           {/* 地図 */}
           <div>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                都道府県ランキング地図
+              </h3>
+              <ExportButton
+                data={data}
+                dataType="ranking"
+                metadata={{
+                  year: selectedYear,
+                  areaName: rankingConfig.title,
+                }}
+              />
+            </div>
             <ChoroplethMap
               data={data}
               options={{

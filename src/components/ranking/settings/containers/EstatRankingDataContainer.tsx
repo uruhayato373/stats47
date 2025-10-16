@@ -17,6 +17,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking/ui";
 import { Settings } from "lucide-react";
+import { ExportButton } from "@/components/export/ExportButton";
 import { RankingItem } from "@/types/models/ranking";
 
 /**
@@ -213,6 +214,19 @@ export const EstatRankingDataContainer: React.FC<
           {/* Step 5a: コロプレス地図表示 */}
           {/* FormattedValue[]をChoroplethMapに渡して地図を描画 */}
           <div>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                e-Stat データランキング地図
+              </h3>
+              <ExportButton
+                data={formattedData}
+                dataType="estat-ranking"
+                metadata={{
+                  year: selectedYear,
+                  areaName: rankingItem.title,
+                }}
+              />
+            </div>
             <ChoroplethMap
               data={formattedData}
               options={{

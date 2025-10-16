@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
+import { ExportButton } from "@/components/export/ExportButton";
 
 export interface EstatLineChartProps {
   /**
@@ -244,6 +245,16 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
   // グラフ表示
   return (
     <div className={className}>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          {title || "時系列データ"}
+        </h2>
+        <ExportButton
+          data={timeSeriesData}
+          dataType="time-series"
+          metadata={{ areaName: areaCode }}
+        />
+      </div>
       <LineChart
         data={timeSeriesData}
         width={width}

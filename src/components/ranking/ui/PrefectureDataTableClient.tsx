@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
 import { FormattedValue } from "@/lib/estat-api";
+import { ExportButton } from "@/components/export/ExportButton";
 
 /**
  * ソート可能なフィールドの型定義
@@ -159,8 +160,15 @@ export const PrefectureDataTableClient: React.FC<
             <TrendingUp className="w-5 h-5 text-indigo-600" />
             都道府県別データ
           </h3>
-          <div className="text-xs text-gray-500 dark:text-neutral-400">
-            {sortedData.length}件
+          <div className="flex items-center gap-2">
+            <div className="text-xs text-gray-500 dark:text-neutral-400">
+              {sortedData.length}件
+            </div>
+            <ExportButton
+              data={sortedData}
+              dataType="prefecture-ranking"
+              metadata={{ year: "2023" }}
+            />
           </div>
         </div>
       </div>
