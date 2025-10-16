@@ -1156,7 +1156,7 @@ if (env.USE_R2_STORAGE === "true") {
 ## 関連ドキュメント
 
 - [統一ランキングシステム設計書](../仕様/unified-ranking-design.md)
-- [R2ハイブリッドアーキテクチャ設計書](../仕様/r2-hybrid-architecture.md)
+- [R2ハイブリッドアーキテクチャ設計書](r2-hybrid-architecture.md)
 
 ---
 

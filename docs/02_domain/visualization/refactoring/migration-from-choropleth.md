@@ -223,10 +223,10 @@ src/lib/visualization/
 
 ## 関連ドキュメント
 
-- [可視化ドメイン概要](../仕様/overview.md)
-- [ライブラリ選択ガイド](../仕様/library-selection-guide.md)
-- [D3.js実装ガイド](../仕様/d3js-implementation-guide.md)
-- [Recharts実装ガイド](../仕様/recharts-implementation-guide.md)
+- [可視化ドメイン概要](02_domain/visualization/specifications/overview.md)
+- [ライブラリ選択ガイド](library-selection-guide.md)
+- [D3.js実装ガイド](d3js-implementation-guide.md)
+- [Recharts実装ガイド](recharts-implementation-guide.md)
 - [既存のD3.jsコロプレスガイド](../../../01_development_guide/07_d3js_choropleth_guide.md)
 
 ---

@@ -222,8 +222,8 @@ const bars = svg.selectAll('.bar')
 
 ## 関連ドキュメント
 
-- [D3.js実装ガイド](./d3js-implementation-guide.md)
-- [Recharts実装ガイド](./recharts-implementation-guide.md)
+- [D3.js実装ガイド](d3js-implementation-guide.md)
+- [Recharts実装ガイド](recharts-implementation-guide.md)
 - [チャートタイプ別仕様](./chart-types/)
 
 ---

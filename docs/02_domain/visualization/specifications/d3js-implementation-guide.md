@@ -465,9 +465,9 @@ export function MemoryMonitoredChart({ data }: { data: ChartData[] }) {
 
 ## 関連ドキュメント
 
-- [ライブラリ選択ガイド](./library-selection-guide.md)
-- [コロプレスマップ仕様](./chart-types/choropleth-map.md)
-- [アクセシビリティガイド](./accessibility.md)
+- [ライブラリ選択ガイド](library-selection-guide.md)
+- [コロプレスマップ仕様](choropleth-map.md)
+- [アクセシビリティガイド](accessibility.md)
 
 ---
 
