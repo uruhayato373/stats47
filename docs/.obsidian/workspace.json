@@ -11,13 +11,60 @@
             "id": "05f9f8b2f20329cf",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "00_project_overview/04_non_functional_requirements.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新規タブ"
+              "title": "04_non_functional_requirements"
+            }
+          },
+          {
+            "id": "0e89488f21c14889",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_project_overview/01_overview.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_overview"
+            }
+          },
+          {
+            "id": "3842a5e21ccf75e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_project_overview/03_functional_requirements.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03_functional_requirements"
+            }
+          },
+          {
+            "id": "131583e139658c2c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_project_overview/02_project_requirements.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_project_requirements"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -163,8 +210,12 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "05f9f8b2f20329cf",
+  "active": "131583e139658c2c",
   "lastOpenFiles": [
+    "00_project_overview/03_functional_requirements.md",
+    "00_project_overview/01_overview.md",
+    "00_project_overview/02_project_requirements.md",
+    "00_project_overview/04_non_functional_requirements.md",
     "01_development_guide/13_large_scale_implementation.md",
     "01_development_guide/11_engagement_features.md",
     "01_development_guide/10_performance_optimization.md",
@@ -181,11 +232,7 @@
     "00_project_overview/07_monetization_strategy.md",
     "00_project_overview/06_roadmap.md",
     "00_project_overview/05_architecture.md",
-    "00_project_overview/04_non_functional_requirements.md",
-    "00_project_overview/03_functional_requirements.md",
     "00_project_overview/02_プロジェクト要件.md",
-    "00_project_overview/02_project_requirements.md",
-    "00_project_overview/01_overview.md",
     "05_resources/都道府県ごとの物価分析.png",
     "05_resources/就職率.png",
     "05_resources/都道府県別産業割合.png",
