@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "fd47fa4de3c41297",
+            "id": "61f8b29c1d5bc193",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_概要/01_概要.md",
+                "file": "old/01_概要/01_概要.md",
                 "mode": "source",
                 "source": false
               },
@@ -22,17 +22,101 @@
             }
           },
           {
-            "id": "61f8b29c1d5bc193",
+            "id": "01e976783d9b9fd1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_要件定義/01_プロジェクト要件.md",
+                "file": "old/01_概要/02_アーキテクチャ.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_アーキテクチャ"
+            }
+          },
+          {
+            "id": "4abc774098ba5291",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/02_開発/01_コーディング規約.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_コーディング規約"
+            }
+          },
+          {
+            "id": "cf220800ff7977c4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/03_要件定義/01_プロジェクト要件.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "01_プロジェクト要件"
+            }
+          },
+          {
+            "id": "e650b5766564c798",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/02_開発/09_エンゲージメント機能ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "09_エンゲージメント機能ガイド"
+            }
+          },
+          {
+            "id": "2bdc7dd6ab3c35fb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/02_開発/11_大規模プロジェクト実装ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "11_大規模プロジェクト実装ガイド"
+            }
+          },
+          {
+            "id": "6d5193d761a82945",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/02_開発/08_パフォーマンス最適化ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "08_パフォーマンス最適化ガイド"
+            }
+          },
+          {
+            "id": "084d7e84c38c7350",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "old/02_開発/07_環境変数設定ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "07_環境変数設定ガイド"
             }
           },
           {
@@ -77,7 +161,8 @@
               "title": "04_ターゲットペルソナ"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -223,43 +308,50 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "fd47fa4de3c41297",
+  "active": "2bdc7dd6ab3c35fb",
   "lastOpenFiles": [
-    "02_開発/10_開発環境設定ガイド.md",
-    "05_リファクタリング/data-format-improvement.md",
-    "01_概要/01_概要.md",
-    "01_概要/02_アーキテクチャ.md",
-    "02_開発/02_コンポーネントガイド.md",
-    "03_要件定義/01_プロジェクト要件.md",
-    "04_仕様/eStatAPI.md",
-    "03_要件定義/04_ターゲットペルソナ.md",
-    "08_ビジネス計画/01_マネタイズ戦略.md",
-    "04_仕様/API設計.md",
-    "01_概要/03_ロードマップ.md",
-    "08_ビジネス計画",
-    "08_繝薙ず繝阪せ險育判",
-    "04_仕様/サイトマップ.md",
-    "04_仕様/レスポンシブデザイン.md",
-    "04_仕様/関連記事.md",
-    "04_仕様/コメント機能.md",
-    "04_仕様/型定義.md.tmp.28944.1760421500018",
-    "INDEX.md",
-    "INDEX.md.tmp.28944.1760421158639",
-    "02_開発/09_エンゲージメント機能ガイド.md",
-    "02_開発/08_パフォーマンス最適化ガイド.md",
-    "05_リファクタリング/ranking-navigation-edit-implementation-plan.md",
-    "05_リファクタリング/performance_improvement_report.md",
-    "04_仕様/画像生成.md",
-    "04_仕様/instagram.md",
-    "03_要件定義/03_非機能要件.md",
-    "03_要件定義/02_機能要件.md",
-    "03_要件定義",
-    "03_隕∽ｻｶ螳夂ｾｩ",
-    "09_コンテンツ計画/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
-    "09_コンテンツ計画/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
-    "09_コンテンツ計画/03_ブログ記事",
-    "09_コンテンツ計画/02_ダッシュボード",
-    "09_コンテンツ計画/01_ランキング記事",
-    "09_コンテンツ計画"
+    "99_inbox/メモ.md",
+    "99_inbox/useswr-refactoring-analysis.md",
+    "99_inbox/ranking-values-r2-migration-plan.md",
+    "99_inbox/ranking-components-refactoring.md",
+    "99_inbox/estat-metainfo-duplicate-issue.md",
+    "99_inbox/editable-navigation-not-showing-issue.md",
+    "99_inbox/database-refactoring-plan.md",
+    "99_inbox/database-environment-setup.md",
+    "99_inbox/database-documentation.md",
+    "99_inbox/data-caching-strategy.md",
+    "99_inbox/authentication-system-audit.md",
+    "99_inbox/authentication-analysis-and-improvement.md",
+    "99_inbox/404-error-analysis.md",
+    "04_コンテンツ計画/03_ブログ記事",
+    "04_コンテンツ計画/02_ダッシュボード",
+    "04_コンテンツ計画/01_ランキング記事",
+    "03_機能別/image-generation",
+    "old/02_開発/09_エンゲージメント機能ガイド.md",
+    "old/02_開発/07_環境変数設定ガイド.md",
+    "old/02_開発/08_パフォーマンス最適化ガイド.md",
+    "old/03_要件定義/01_プロジェクト要件.md",
+    "old/02_開発/01_コーディング規約.md",
+    "old/01_概要/02_アーキテクチャ.md",
+    "old/01_概要/01_概要.md",
+    "03_機能別/related-articles",
+    "03_機能別/comments",
+    "03_機能別/sns",
+    "02_ドメイン/dashboard/リファクタリング",
+    "02_ドメイン/dashboard/仕様",
+    "02_ドメイン/dashboard",
+    "old/INDEX.md",
+    "05_リファクタリング/無題のファイル.md",
+    "old/estat/types.md",
+    "old/estat/testing-strategy.md",
+    "old/estat/stats-list-service.md",
+    "old/estat/README.md",
+    "old/10_資料/都道府県別産業割合.png",
+    "old/10_資料/転入転出.png",
+    "old/10_資料/都道府県ごとの物価分析.png",
+    "old/10_資料/ランキング画像サンプル_01.png",
+    "old/10_資料/ランキング画像サンプル_02.png",
+    "old/10_資料/就職率.png",
+    "old/10_資料/design.png"
   ]
 }
