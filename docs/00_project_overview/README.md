@@ -22,6 +22,7 @@ stats47 プロジェクトの全体像と基本情報をまとめたドキュメ
 - [project_requirements.md](./project_requirements.md) - プロジェクト要件
 - [architecture.md](./architecture.md) - システムアーキテクチャ
 - [roadmap.md](./roadmap.md) - プロジェクトロードマップ
+- [implementation-priority-guide.md](./implementation-priority-guide.md) - 機能実装優先順位ガイド
 
 ### 要件定義
 

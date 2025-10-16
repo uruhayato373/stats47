@@ -172,6 +172,7 @@
   },
   "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
+    "00_project_overview/implementation-priority-guide.md",
     "02_domain/architecture/providers-refactoring-report.md",
     "02_domain/architecture/providers-architecture.md",
     "02_domain/architecture/data-fetching-refactoring-plan.md",
@@ -203,7 +204,6 @@
     "00_project_overview/overview.md",
     "01_development_guide/README.md",
     "01_development_guide/large_scale_implementation.md",
-    "01_development_guide/documentation_management.md",
     "02_domain/dashboard/components",
     "02_domain/dashboard/implementation",
     "02_domain/estat-api/specifications/services",
