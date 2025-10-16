@@ -36,21 +36,35 @@
             }
           },
           {
-            "id": "e723807b612730db",
+            "id": "a8f78a02243478b6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_development_guide/07_d3js_choropleth_guide.md",
+                "file": "02_domain/ranking/specifications/adapter-layer-design.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "07_d3js_choropleth_guide"
+              "title": "adapter-layer-design"
+            }
+          },
+          {
+            "id": "f4dff7b0442c829a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_domain/ranking/specifications/r2-hybrid-architecture.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "r2-hybrid-architecture"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -123,6 +137,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "02_domain/ranking/specifications/r2-hybrid-architecture.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +147,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "バックリンク"
+              "title": "r2-hybrid-architectureへのバックリンク"
             }
           },
           {
@@ -169,15 +184,17 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "02_domain/ranking/specifications/r2-hybrid-architecture.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "アウトライン"
+              "title": "r2-hybrid-architectureのアウトライン"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -196,20 +213,37 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "860eb1f2bf495c69",
+  "active": "f4dff7b0442c829a",
   "lastOpenFiles": [
-    "02_domain/blog/仕様/seo-strategy.md",
-    "02_domain/blog/仕様/frontmatter-schema.md",
+    "02_domain/ranking/specifications/adapter-layer-design.md",
     "00_project_overview/03_functional_requirements.md",
-    "00_project_overview/02_project_requirements.md",
-    "02_domain/ranking/仕様/r2-hybrid-architecture.md",
+    "02_domain/estat-api/specifications/02-type-system.md",
+    "02_domain/estat-api/testing/testing-strategy.md",
+    "02_domain/estat-api/implementation/examples.md",
+    "02_domain/estat-api/specifications/services/stats-list-service.md",
+    "02_domain/estat-api/specifications/services/stats-data-service.md",
+    "02_domain/estat-api/specifications/services/metainfo-service.md",
+    "02_domain/estat-api/specifications/apis/get-data-catalog.md",
+    "02_domain/estat-api/specifications/apis/get-stats-list.md",
+    "02_domain/estat-api/specifications/apis/get-stats-data.md",
+    "02_domain/estat-api/specifications/apis/get-meta-info.md",
+    "02_domain/estat-api/specifications/services",
+    "02_domain/estat-api/specifications/apis",
+    "02_domain/estat-api/specifications/API.md",
+    "02_domain/estat-api/specifications/API GET_META_INFO.md",
+    "02_domain/estat-api/specifications/GET_STATS_LIST.md",
+    "02_domain/estat-api/specifications/API GET_STATS_DATA.md",
+    "02_domain/estat-api/specifications/GET_DATA_CATALOG.md",
+    "02_domain/auth/specifications/認証システム.md",
+    "02_domain/auth/specifications/authentication-system.md",
     "01_development_guide/07_d3js_choropleth_guide.md",
-    "02_domain/blog/仕様/component-integration.md",
-    "02_domain/ranking/仕様/adapter-layer-design.md",
-    "02_domain/blog/仕様/content-structure.md",
-    "02_domain/blog/仕様/mdx-architecture.md",
-    "02_domain/blog/仕様/overview.md",
-    "02_domain/blog/仕様",
+    "02_domain/visualization/螳溯｣・d3js/choropleth-implementation.md",
+    "02_domain/blog/specifications/seo-strategy.md",
+    "02_domain/blog/specifications/frontmatter-schema.md",
+    "00_project_overview/02_project_requirements.md",
+    "02_domain/ranking/specifications/r2-hybrid-architecture.md",
+    "02_domain/blog/specifications/component-integration.md",
+    "02_domain/blog/specifications",
     "02_domain/blog/莉墓ｧ・docs/02_domain/blog/螳溯｣・docs/02_domain/blog/繝ｪ繝輔ぃ繧ｯ繧ｿ繝ｪ繝ｳ繧ｰ",
     "02_domain/blog/莉墓ｧ・docs/02_domain/blog/螳溯｣・docs/02_domain/blog",
     "02_domain/blog/莉墓ｧ・docs/02_domain/blog/螳溯｣・docs/02_domain",
@@ -217,23 +251,6 @@
     "02_domain/blog/莉墓ｧ・docs/02_domain/blog",
     "02_domain/blog/莉墓ｧ・docs/02_domain",
     "02_domain/blog/莉墓ｧ・docs",
-    "02_domain/blog",
-    "02_domain/docs/02_domain/blog/莉墓ｧ・docs/02_domain/blog/螳溯｣・docs/02_domain/blog/繝ｪ繝輔ぃ繧ｯ繧ｿ繝ｪ繝ｳ繧ｰ",
-    "02_domain/visualization/リファクタリング/migration-from-choropleth.md",
-    "02_domain/visualization/実装/recharts/common-patterns.md",
-    "02_domain/visualization/実装/d3js/choropleth-implementation.md",
-    "02_domain/visualization/仕様/accessibility.md",
-    "02_domain/visualization/仕様/chart-types/heatmap.md",
-    "02_domain/visualization/仕様/chart-types/scatter-plot.md",
-    "02_domain/visualization/仕様/chart-types/line-chart.md",
-    "01_development_guide/01_coding_standards.md",
-    "02_domain/visualization/仕様/chart-types/bar-chart.md",
-    "02_domain/visualization/仕様/chart-types/choropleth-map.md",
-    "02_domain/visualization/仕様/recharts-implementation-guide.md",
-    "02_domain/visualization/仕様/d3js-implementation-guide.md",
-    "02_domain/visualization/仕様/library-selection-guide.md",
-    "02_domain/visualization/仕様/overview.md",
-    "02_domain/ranking/実装/r2-hybrid-implementation-plan.md",
     "05_resources/都道府県ごとの物価分析.png",
     "05_resources/就職率.png",
     "05_resources/都道府県別産業割合.png",

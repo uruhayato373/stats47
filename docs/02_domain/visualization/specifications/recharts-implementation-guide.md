@@ -646,9 +646,9 @@ describe("BarChart Snapshot", () => {
 
 ## 関連ドキュメント
 
-- [ライブラリ選択ガイド](./library-selection-guide.md)
-- [棒グラフ仕様](./chart-types/bar-chart.md)
-- [折れ線グラフ仕様](./chart-types/line-chart.md)
+- [ライブラリ選択ガイド](library-selection-guide.md)
+- [棒グラフ仕様](bar-chart.md)
+- [折れ線グラフ仕様](line-chart.md)
 
 ---
 

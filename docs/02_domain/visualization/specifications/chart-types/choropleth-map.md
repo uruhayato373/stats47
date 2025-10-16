@@ -414,8 +414,8 @@ describe("ChoroplethMap Visual Regression", () => {
 
 ## 関連ドキュメント
 
-- [D3.js実装ガイド](../d3js-implementation-guide.md)
-- [アクセシビリティガイド](../accessibility.md)
+- [D3.js実装ガイド](d3js-implementation-guide.md)
+- [アクセシビリティガイド](accessibility.md)
 - [既存のD3.jsコロプレスガイド](../../../01_development_guide/07_d3js_choropleth_guide.md)
 
 ---

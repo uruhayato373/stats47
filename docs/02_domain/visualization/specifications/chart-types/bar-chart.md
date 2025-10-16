@@ -505,9 +505,9 @@ describe("BarChart Performance", () => {
 
 ## 関連ドキュメント
 
-- [ライブラリ選択ガイド](../library-selection-guide.md)
-- [Recharts実装ガイド](../recharts-implementation-guide.md)
-- [D3.js実装ガイド](../d3js-implementation-guide.md)
+- [ライブラリ選択ガイド](library-selection-guide.md)
+- [Recharts実装ガイド](recharts-implementation-guide.md)
+- [D3.js実装ガイド](d3js-implementation-guide.md)
 
 ---
 

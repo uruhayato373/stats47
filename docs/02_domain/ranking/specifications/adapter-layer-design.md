@@ -944,8 +944,8 @@ describe("EstatRankingAdapter Integration", () => {
 
 ## 関連ドキュメント
 
-- [R2ハイブリッドアーキテクチャ設計書](./r2-hybrid-architecture.md)
-- [実装計画書](../実装/r2-hybrid-implementation-plan.md)
+- [R2ハイブリッドアーキテクチャ設計書](r2-hybrid-architecture.md)
+- [実装計画書](r2-hybrid-implementation-plan.md)
 
 ---
 
