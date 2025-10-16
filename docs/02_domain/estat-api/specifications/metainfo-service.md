@@ -707,7 +707,7 @@ CREATE INDEX idx_estat_metainfo_ranking_key ON estat_metainfo(ranking_key);
 
 ## 関連ドキュメント
 
-- [型定義: EstatMetaCategoryData](./types.md#estatmetacategorydata)
-- [型定義: MetadataSummary](./types.md#metadatasummary)
-- [使用例](./examples.md#estatmetainfoservice)
-- [ライブラリ概要](./overview.md)
+- [型定義: EstatMetaCategoryData](types.md#estatmetacategorydata)
+- [型定義: MetadataSummary](types.md#metadatasummary)
+- [使用例](examples.md#estatmetainfoservice)
+- [ライブラリ概要](02_domain/estat-api/specifications/overview.md)

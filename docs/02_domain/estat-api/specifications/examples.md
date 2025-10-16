@@ -794,8 +794,8 @@ export default {
 
 ## 関連ドキュメント
 
-- [ライブラリ概要](./overview.md)
-- [EstatStatsDataService](./stats-data-service.md)
-- [EstatStatsListService](./stats-list-service.md)
-- [EstatMetaInfoService](./metainfo-service.md)
-- [型定義](./types.md)
+- [ライブラリ概要](02_domain/estat-api/specifications/overview.md)
+- [EstatStatsDataService](stats-data-service.md)
+- [EstatStatsListService](stats-list-service.md)
+- [EstatMetaInfoService](metainfo-service.md)
+- [型定義](types.md)

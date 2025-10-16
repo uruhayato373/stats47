@@ -40,33 +40,33 @@ src/lib/estat/
 
 ## ドキュメント目次
 
-1. [**ライブラリ概要**](./overview.md)
+1. [**ライブラリ概要**](02_domain/estat-api/specifications/overview.md)
    - ライブラリの目的と機能
    - アーキテクチャの説明
    - 主要な概念
 
-2. [**EstatStatsDataService**](./stats-data-service.md)
+2. [**EstatStatsDataService**](stats-data-service.md)
    - 統計データの取得
    - データの整形
    - フィルタリング機能
    - CSV変換
 
-3. [**EstatStatsListService**](./stats-list-service.md)
+3. [**EstatStatsListService**](stats-list-service.md)
    - 統計リストの取得
    - リストの整形
 
-4. [**EstatMetaInfoService**](./metainfo-service.md)
+4. [**EstatMetaInfoService**](metainfo-service.md)
    - メタ情報の取得と保存
    - 一括処理機能
    - 検索機能
    - サマリー情報の取得
 
-5. [**型定義**](./types.md)
+5. [**型定義**](types.md)
    - APIパラメータ型
    - レスポンス型
    - 整形済みデータ型
 
-6. [**使用例**](./examples.md)
+6. [**使用例**](examples.md)
    - 基本的な使い方
    - 実践的なユースケース
 

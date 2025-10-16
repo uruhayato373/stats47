@@ -1209,7 +1209,7 @@ VALUES (
 
 - [統一ランキングシステム設計書](./unified-ranking-design.md)
 - [ランキングデータR2移行計画書](../../../99_inbox/ranking-values-r2-migration-plan.md)
-- [e-Stat R2保存実装ガイド](../../estat-api/リファクタリング/estat-ranking-data-r2-save-implementation.md)
+- [e-Stat R2保存実装ガイド](estat-ranking-data-r2-save-implementation.md)
 - [アダプターレイヤー設計書](./adapter-layer-design.md)
 
 ---

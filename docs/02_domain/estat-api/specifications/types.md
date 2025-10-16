@@ -596,8 +596,8 @@ const prefectures = data.areas.filter(isPrefecture);
 
 ## 関連ドキュメント
 
-- [EstatStatsDataService](./stats-data-service.md)
-- [EstatStatsListService](./stats-list-service.md)
-- [EstatMetaInfoService](./metainfo-service.md)
-- [使用例](./examples.md)
-- [ライブラリ概要](./overview.md)
+- [EstatStatsDataService](stats-data-service.md)
+- [EstatStatsListService](stats-list-service.md)
+- [EstatMetaInfoService](metainfo-service.md)
+- [使用例](examples.md)
+- [ライブラリ概要](02_domain/estat-api/specifications/overview.md)

@@ -481,7 +481,7 @@ async function fetchWithDelay(
 
 ## 関連ドキュメント
 
-- [型定義: FormattedStatListItem](./types.md#formattedstatlistitem)
-- [EstatStatsDataService](./stats-data-service.md)
-- [使用例](./examples.md#estatstatslistservice)
-- [ライブラリ概要](./overview.md)
+- [型定義: FormattedStatListItem](types.md#formattedstatlistitem)
+- [EstatStatsDataService](stats-data-service.md)
+- [使用例](examples.md#estatstatslistservice)
+- [ライブラリ概要](02_domain/estat-api/specifications/overview.md)

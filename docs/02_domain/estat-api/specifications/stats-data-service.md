@@ -456,7 +456,7 @@ try {
 
 ## 関連ドキュメント
 
-- [型定義: FormattedEstatData](./types.md#formattedestatdata)
-- [型定義: FormattedValue](./types.md#formattedvalue)
-- [使用例](./examples.md#estatstatsdataservice)
-- [ライブラリ概要](./overview.md)
+- [型定義: FormattedEstatData](types.md#formattedestatdata)
+- [型定義: FormattedValue](types.md#formattedvalue)
+- [使用例](examples.md#estatstatsdataservice)
+- [ライブラリ概要](02_domain/estat-api/specifications/overview.md)
