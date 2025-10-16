@@ -90,28 +90,23 @@ interface Prefecture {
 
 ### municipalities.json
 
-e-Stat API metainfo の area 構造をそのまま保持する形式：
+e-Stat API metainfo の area 構造をそのまま保持する配列形式：
 
 ```json
-{
-  "version": "2024.03.31",
-  "source": "e-Stat 0000020201",
-  "extractedAt": "2025-01-16T20:37:00.000Z",
-  "municipalities": [
-    {
-      "@code": "01101",
-      "@name": "北海道 札幌市 中央区",
-      "@level": "3",
-      "@parentCode": "01100"
-    },
-    {
-      "@code": "01202",
-      "@name": "北海道 函館市",
-      "@level": "2",
-      "@parentCode": "01000"
-    }
-  ]
-}
+[
+  {
+    "@code": "01101",
+    "@name": "北海道 札幌市 中央区",
+    "@level": "3",
+    "@parentCode": "01100"
+  },
+  {
+    "@code": "01202",
+    "@name": "北海道 函館市",
+    "@level": "2",
+    "@parentCode": "01000"
+  }
+]
 ```
 
 ### Municipality インターフェース
@@ -466,7 +461,7 @@ interface AreaValidationResult {
 
 ### e-Stat 互換性
 
-municipalities.json は e-Stat API metainfo の area 構造をそのまま保持しており、以下の利点があります：
+municipalities.json は e-Stat API metainfo の area 構造を配列として保持しており、以下の利点があります：
 
 1. **データ整合性**: e-Stat API との完全互換
 2. **メンテナンス性**: 再抽出時の変換ロジック不要

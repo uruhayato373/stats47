@@ -30,7 +30,7 @@ export async function fetchRankingItemsBySubcategory(
 ): Promise<RankingConfigResponse | null> {
   try {
     // APIエンドポイントを呼び出してデータベースから取得
-    const url = `/api/ranking-items/subcategory/${encodeURIComponent(
+    const url = `/api/rankings/items/subcategory/${encodeURIComponent(
       subcategoryId
     )}`;
 

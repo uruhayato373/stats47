@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:api": "cross-env NODE_ENV=development next dev --turbopack",
-    "dev:mock": "cross-env NODE_ENV=development NEXT_PUBLIC_USE_MOCK=true next dev --turbopack",
+    "dev:mock": "cross-env NODE_ENV=development NEXT_PUBLIC_ENV=mock next dev --turbopack",
     "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=staging next dev --turbopack",
     "dev:production": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=production next dev --turbopack",
     "build": "next build",

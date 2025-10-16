@@ -75,7 +75,7 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
       : undefined;
 
   // ===== データ取得（useSWR使用） =====
-  // 1. 年度一覧を取得（新API: /api/ranking/years）
+  // 1. 年度一覧を取得（新API: /api/rankings/data/years）
   // データソース: ranking_valuesテーブル（汎用キャッシュ）
   const {
     years,
@@ -93,7 +93,7 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
     }
   }, [years, selectedYear]);
 
-  // 4. ランキングデータを取得（新API: /api/ranking/data）
+  // 4. ランキングデータを取得（新API: /api/rankings/data）
   // データソース: ranking_valuesテーブル（汎用キャッシュ）
   const {
     data,

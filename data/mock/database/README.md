@@ -12,7 +12,7 @@
 
 ## 🎯 使用目的
 
-**mock 環境**（`NEXT_PUBLIC_USE_MOCK=true`）では、これらの JSON ファイルを使用して：
+**mock 環境**（`NEXT_PUBLIC_ENV=mock`）では、これらの JSON ファイルを使用して：
 
 - データベース接続なしで開発・デザイン検証
 - Storybook でのコンポーネント開発
@@ -117,7 +117,7 @@ import estatMetainfo from "@/data/mock/database/estat_metainfo.json";
 
 // mock環境でのデータ取得
 export async function getRankingItems() {
-  if (process.env.NEXT_PUBLIC_USE_MOCK === "true") {
+  if (process.env.NEXT_PUBLIC_ENV === "mock") {
     return rankingItems.results;
   }
 

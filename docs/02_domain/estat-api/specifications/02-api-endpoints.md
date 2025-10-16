@@ -2,7 +2,7 @@
 
 ## 概要
 
-e-Stat APIドメインで提供されるAPIエンドポイントの一覧と基本的な使用方法について説明します。
+e-Stat API ドメインで提供される API エンドポイントの一覧と基本的な使用方法について説明します。
 
 ## 基本情報
 
@@ -30,6 +30,7 @@ NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id
 **用途**: 統計表の一覧情報を取得
 
 **パラメータ**:
+
 - `appId`: アプリケーション ID（必須）
 - `lang`: 言語設定（J: 日本語、E: 英語）
 - `surveyYears`: 調査年月
@@ -49,6 +50,7 @@ NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id
 **用途**: 統計表のメタ情報（分類情報、地域情報、時間軸情報など）を取得
 
 **パラメータ**:
+
 - `appId`: アプリケーション ID（必須）
 - `statsDataId`: 統計データ ID（必須）
 - `metaGetFlg`: メタデータ取得フラグ（Y/N）
@@ -63,11 +65,12 @@ NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id
 **用途**: 統計表の実際のデータを取得
 
 **パラメータ**:
+
 - `appId`: アプリケーション ID（必須）
 - `statsDataId`: 統計データ ID（必須）
 - `metaGetFlg`: メタデータ取得フラグ（Y/N）
 - `cntGetFlg`: 件数取得フラグ（Y/N）
-- `cdCat01-15`: カテゴリコード（最大15種類）
+- `cdCat01-15`: カテゴリコード（最大 15 種類）
 - `cdArea`: 地域コード
 - `cdTime`: 時間軸コード
 - `startPosition`: 開始位置
@@ -82,6 +85,7 @@ NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id
 **用途**: データカタログ情報を取得
 
 **パラメータ**:
+
 - `appId`: アプリケーション ID（必須）
 - `lang`: 言語設定
 - `statsField`: 統計分野
@@ -89,7 +93,7 @@ NEXT_PUBLIC_ESTAT_APP_ID=your-actual-app-id
 
 **詳細**: [get-data-catalog.md](apis/get-data-catalog.md)
 
-## 内部APIエンドポイント
+## 内部 API エンドポイント
 
 ### 統計データ関連
 
@@ -100,6 +104,7 @@ GET /api/stats/data
 ```
 
 **パラメータ**:
+
 - `statsDataId`: 統計データ ID（必須）
 - `categoryFilter`: カテゴリフィルタ
 - `yearFilter`: 年度フィルタ
@@ -107,6 +112,7 @@ GET /api/stats/data
 - `limit`: 取得件数
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -126,9 +132,11 @@ GET /api/stats/years
 ```
 
 **パラメータ**:
+
 - `statsDataId`: 統計データ ID（必須）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -143,11 +151,13 @@ GET /api/stats/prefectures
 ```
 
 **パラメータ**:
+
 - `statsDataId`: 統計データ ID（必須）
 - `yearFilter`: 年度フィルタ
 - `categoryFilter`: カテゴリフィルタ
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -171,11 +181,13 @@ GET /api/stats/list
 ```
 
 **パラメータ**:
+
 - `searchWord`: 検索キーワード
 - `limit`: 取得件数
 - `startPosition`: 開始位置
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -197,9 +209,11 @@ GET /api/metainfo
 ```
 
 **パラメータ**:
+
 - `statsDataId`: 統計データ ID（必須）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -218,6 +232,7 @@ POST /api/metainfo/save
 ```
 
 **リクエストボディ**:
+
 ```json
 {
   "statsDataId": "0000010101"
@@ -225,6 +240,7 @@ POST /api/metainfo/save
 ```
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -240,10 +256,12 @@ GET /api/metainfo/search
 ```
 
 **パラメータ**:
+
 - `query`: 検索クエリ
 - `statsDataId`: 統計データ ID（オプション）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -265,16 +283,18 @@ GET /api/metainfo/search
 #### ランキングデータ取得
 
 ```http
-GET /api/ranking/data
+GET /api/rankings/data
 ```
 
 **パラメータ**:
+
 - `rankingKey`: ランキングキー（必須）
 - `timeCode`: 時間コード（必須）
 - `level`: 地域レベル（prefecture/municipality）
 - `parentCode`: 親地域コード（オプション）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -318,30 +338,30 @@ GET /api/ranking/data
 
 ### エラーコード一覧
 
-| コード | 説明 |
-|--------|------|
-| `INVALID_STATS_DATA_ID` | 統計データIDが無効 |
-| `INVALID_AREA_CODE` | 地域コードが無効 |
-| `INVALID_CATEGORY_CODE` | カテゴリコードが無効 |
-| `API_RATE_LIMIT_EXCEEDED` | APIレート制限超過 |
-| `API_CONNECTION_ERROR` | API接続エラー |
-| `DATA_NOT_FOUND` | データが見つからない |
-| `DATABASE_ERROR` | データベースエラー |
-| `VALIDATION_ERROR` | バリデーションエラー |
+| コード                    | 説明                 |
+| ------------------------- | -------------------- |
+| `INVALID_STATS_DATA_ID`   | 統計データ ID が無効 |
+| `INVALID_AREA_CODE`       | 地域コードが無効     |
+| `INVALID_CATEGORY_CODE`   | カテゴリコードが無効 |
+| `API_RATE_LIMIT_EXCEEDED` | API レート制限超過   |
+| `API_CONNECTION_ERROR`    | API 接続エラー       |
+| `DATA_NOT_FOUND`          | データが見つからない |
+| `DATABASE_ERROR`          | データベースエラー   |
+| `VALIDATION_ERROR`        | バリデーションエラー |
 
 ## レート制限
 
 ### e-Stat API 制限
 
-- **1日あたり**: 1,000回
-- **1時間あたり**: 100回（推奨）
-- **同時接続**: 5接続まで
+- **1 日あたり**: 1,000 回
+- **1 時間あたり**: 100 回（推奨）
+- **同時接続**: 5 接続まで
 
-### 内部API制限
+### 内部 API 制限
 
-- **統計データ取得**: 1分あたり60回
-- **メタ情報取得**: 1分あたり30回
-- **ランキングデータ取得**: 1分あたり120回
+- **統計データ取得**: 1 分あたり 60 回
+- **メタ情報取得**: 1 分あたり 30 回
+- **ランキングデータ取得**: 1 分あたり 120 回
 
 ### レート制限エラー
 
@@ -362,9 +382,9 @@ GET /api/ranking/data
 
 ## 認証・認可
 
-### APIキー認証
+### API キー認証
 
-すべてのAPIリクエストには有効なAPIキーが必要です。
+すべての API リクエストには有効な API キーが必要です。
 
 ```http
 Authorization: Bearer your-api-key
@@ -427,13 +447,15 @@ ESTAT_APP_ID=your-prod-app-id
 
 ```typescript
 // 統計データを取得
-const response = await fetch('/api/stats/data?statsDataId=0000010101&categoryFilter=A1101&yearFilter=2023')
-const data = await response.json()
+const response = await fetch(
+  "/api/stats/data?statsDataId=0000010101&categoryFilter=A1101&yearFilter=2023"
+);
+const data = await response.json();
 
 if (data.success) {
-  console.log('取得したデータ:', data.data.values)
+  console.log("取得したデータ:", data.data.values);
 } else {
-  console.error('エラー:', data.error.message)
+  console.error("エラー:", data.error.message);
 }
 ```
 
@@ -441,29 +463,31 @@ if (data.success) {
 
 ```typescript
 // メタ情報を保存
-const response = await fetch('/api/metainfo/save', {
-  method: 'POST',
+const response = await fetch("/api/metainfo/save", {
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    statsDataId: '0000010101'
-  })
-})
+    statsDataId: "0000010101",
+  }),
+});
 
-const result = await response.json()
-console.log('保存件数:', result.savedCount)
+const result = await response.json();
+console.log("保存件数:", result.savedCount);
 ```
 
 ### ランキングデータの取得
 
 ```typescript
 // ランキングデータを取得
-const response = await fetch('/api/ranking/data?rankingKey=population-total&timeCode=2023&level=prefecture')
-const data = await response.json()
+const response = await fetch(
+  "/api/rankings/data?rankingKey=population-total&timeCode=2023&level=prefecture"
+);
+const data = await response.json();
 
 if (data.success) {
-  console.log('ランキングデータ:', data.data.values)
+  console.log("ランキングデータ:", data.data.values);
 }
 ```
 
@@ -471,7 +495,7 @@ if (data.success) {
 
 - [アーキテクチャ設計](01-architecture.md)
 - [型システム](02-type-system.md)
-- [API仕様詳細](apis/)
+- [API 仕様詳細](apis/)
 - [サービス仕様](services/)
 - [実装ガイド](../implementation/)
 - [テスト戦略](../testing/)

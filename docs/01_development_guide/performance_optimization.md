@@ -103,7 +103,6 @@ ESTAT_API_KEY=your-dev-api-key
 
 # 環境設定
 NEXT_PUBLIC_ENV=development
-NEXT_PUBLIC_USE_MOCK=false
 NODE_ENV=development
 
 # モックデータ設定
@@ -117,7 +116,6 @@ MOCK_DATA_PATH=data/mock
 ```bash
 # 環境設定
 NEXT_PUBLIC_ENV=mock
-NEXT_PUBLIC_USE_MOCK=true
 NODE_ENV=development
 
 # モックデータ設定
@@ -142,7 +140,6 @@ CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
 
 # 環境設定
 NEXT_PUBLIC_ENV=staging
-NEXT_PUBLIC_USE_MOCK=false
 NODE_ENV=production
 ```
 
@@ -161,7 +158,6 @@ CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
 
 # 環境設定
 NEXT_PUBLIC_ENV=production
-NEXT_PUBLIC_USE_MOCK=false
 NODE_ENV=production
 ```
 
@@ -174,7 +170,6 @@ NODE_ENV=production
 ```typescript
 export const config = {
   env: process.env.NEXT_PUBLIC_ENV || "development",
-  useMock: process.env.NEXT_PUBLIC_USE_MOCK === "true",
 
   estat: {
     baseUrl:
@@ -708,7 +703,7 @@ data/mock/
 └── README.md                    # モックデータ管理ガイド
 ```
 
-`NEXT_PUBLIC_USE_MOCK=true` の場合のみ利用。  
+`NEXT_PUBLIC_ENV=mock` の場合のみ利用。  
 Storybook やデザイン検証でも共通使用可能。
 
 > **用語の統一**: 本ドキュメントでは「モックデータ」と「スタブデータ」は同じ意味で使用しています。

@@ -1,10 +1,10 @@
-# API設計ドキュメント
+# API 設計ドキュメント
 
 ## 概要
 
-stats47プロジェクトのAPI設計について説明します。e-Stat API連携、内部APIエンドポイント、データ変換・処理、パフォーマンス最適化、セキュリティについて詳述します。
+stats47 プロジェクトの API 設計について説明します。e-Stat API 連携、内部 API エンドポイント、データ変換・処理、パフォーマンス最適化、セキュリティについて詳述します。
 
-## e-Stat API統合
+## e-Stat API 統合
 
 ### 基本情報
 
@@ -92,56 +92,56 @@ class RateLimiter {
 }
 ```
 
-## 内部APIエンドポイント
+## 内部 API エンドポイント
 
-### ランキング取得API
+### ランキング取得 API
 
 ```typescript
 // カテゴリ一覧取得
-GET /api/rankings/categories
-GET /api/rankings/categories/{mainCategory}
+GET /api/rankingss/categories
+GET /api/rankingss/categories/{mainCategory}
 
 // ランキング一覧取得
-GET /api/rankings?category={category}&limit={limit}&offset={offset}
-GET /api/rankings/featured
-GET /api/rankings/popular
+GET /api/rankingss?category={category}&limit={limit}&offset={offset}
+GET /api/rankingss/featured
+GET /api/rankingss/popular
 
 // 特定ランキング取得
-GET /api/rankings/{id}
-GET /api/rankings/{id}/data
+GET /api/rankingss/{id}
+GET /api/rankingss/{id}/data
 
 // 検索
-GET /api/rankings/search?q={query}&category={category}&dataType={type}
+GET /api/rankingss/search?q={query}&category={category}&dataType={type}
 ```
 
-### 可視化設定API
+### 可視化設定 API
 
 ```typescript
 // 設定取得
-GET /api/visualizations/{id}/settings
-GET /api/visualizations/templates
-GET /api/visualizations/templates/{type}
+GET / api / visualizations / { id } / settings;
+GET / api / visualizations / templates;
+GET / api / visualizations / templates / { type };
 
 // 設定保存（管理者用）
-POST /api/visualizations
-PUT /api/visualizations/{id}
-DELETE /api/visualizations/{id}
+POST / api / visualizations;
+PUT / api / visualizations / { id };
+DELETE / api / visualizations / { id };
 
 // アクセス統計更新
-POST /api/visualizations/{id}/view
+POST / api / visualizations / { id } / view;
 ```
 
-### データ取得API
+### データ取得 API
 
 ```typescript
 // ランキングデータ取得
-GET /api/rankings/{id}/data?year={year}&format={format}
+GET /api/rankingss/{id}/data?year={year}&format={format}
 
 // 比較データ取得
-GET /api/rankings/compare?ids={id1,id2,id3}&year={year}
+GET /api/rankingss/compare?ids={id1,id2,id3}&year={year}
 
 // 時系列データ取得
-GET /api/rankings/{id}/timeseries?startYear={start}&endYear={end}
+GET /api/rankingss/{id}/timeseries?startYear={start}&endYear={end}
 ```
 
 ## データ変換・処理
@@ -236,7 +236,7 @@ async function batchFetchData(regionCodes: string[]): Promise<RegionData[]> {
 }
 ```
 
-## APIセキュリティ
+## API セキュリティ
 
 ### API キーの保護
 
@@ -249,7 +249,16 @@ async function batchFetchData(regionCodes: string[]): Promise<RegionData[]> {
 ```typescript
 function validateRegionCode(code: string): boolean {
   const validCodes = [
-    "11", "12", "13", "14", "15", "16", "17", "23", "27", "28",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "23",
+    "27",
+    "28",
   ];
   return validCodes.includes(code);
 }
@@ -426,19 +435,22 @@ export const estatAPI = new EstatAPIClient();
 ## 関連ドキュメント
 
 ### システム設計
+
 - [システムアーキテクチャ](../01_概要/02_アーキテクチャ.md) - システム全体の設計
 - [データベース設計](./データベース設計.md) - データベーススキーマの詳細
 
 ### 開発ガイド
+
 - [コーディング規約](../02_開発/01_コーディング規約.md) - 開発標準
 - [コンポーネントガイド](../02_開発/02_コンポーネントガイド.md) - コンポーネント設計
 
 ### 要件定義
+
 - [機能要件定義](../03_要件定義/02_機能要件.md) - 実装する機能の詳細
 - [非機能要件定義](../03_要件定義/03_非機能要件.md) - パフォーマンス、セキュリティ要件
 
 ---
 
-**作成日**: 2024年10月14日  
-**最終更新日**: 2024年10月14日  
+**作成日**: 2024 年 10 月 14 日  
+**最終更新日**: 2024 年 10 月 14 日  
 **バージョン**: 1.0

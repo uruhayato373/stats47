@@ -38,7 +38,7 @@ data/mock/
 
 ### 1. データベースモックデータ (`database/`)
 
-**用途**: mock 環境（`NEXT_PUBLIC_USE_MOCK=true`）でデータベース接続なしで開発
+**用途**: mock 環境（`NEXT_PUBLIC_ENV=mock`）でデータベース接続なしで開発
 
 - `ranking_items.json` - ランキングアイテム（10 件）
 - `ranking_values.json` - ランキング値（50 件）

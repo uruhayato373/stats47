@@ -275,7 +275,6 @@ ESTAT_API_KEY=your-dev-api-key
 
 # 環境設定
 NEXT_PUBLIC_ENV=development
-NEXT_PUBLIC_USE_MOCK=false
 
 # 注意：開発環境ではローカルD1を使用するため、Cloudflare設定は不要
 ```
@@ -285,7 +284,6 @@ NEXT_PUBLIC_USE_MOCK=false
 ```bash
 # 環境設定
 NEXT_PUBLIC_ENV=mock
-NEXT_PUBLIC_USE_MOCK=true
 
 # 注意：mock環境ではデータベース接続は不要です。
 # すべてのデータはローカルのJSONファイルから読み込まれます。
