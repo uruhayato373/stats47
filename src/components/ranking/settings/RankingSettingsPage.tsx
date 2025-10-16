@@ -20,7 +20,7 @@ import {
   PrefectureRankingDisplay,
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
-} from "@/components/estat-api/ranking-settings";
+} from "@/components/ranking/settings";
 import { PrefectureRankingParams } from "@/types/models";
 import { EstatMetaCategoryData } from "@/lib/estat-api";
 

@@ -18,7 +18,7 @@ import { AdvancedStatsListSearch } from "./AdvancedStatsListSearch";
 import { StatsListResults } from "./StatsListResults";
 import { StatsTableDetailModal } from "./StatsTableDetailModal";
 import { StatsFieldNavigation } from "./StatsFieldNavigation";
-import { useStatsListSearch } from "@/hooks/estat/useStatsListSearch";
+import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
 
 interface EstatAPIStatsListPageProps {
   initialData?: StatsListSearchResult;

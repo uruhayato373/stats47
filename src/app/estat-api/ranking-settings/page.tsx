@@ -1,5 +1,5 @@
 import { fetchEstatMetainfoUnique } from "@/lib/database";
-import RankingSettingsPage from "@/components/estat-api/ranking-settings/RankingSettingsPage";
+import RankingSettingsPage from "@/components/ranking/settings/RankingSettingsPage";
 
 export default async function Page() {
   const initialSavedMetadata = await fetchEstatMetainfoUnique({

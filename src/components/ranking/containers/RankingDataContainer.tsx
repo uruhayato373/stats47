@@ -17,7 +17,7 @@ import { Modal } from "@/components/common/Modal/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,
-} from "@/components/ranking-settings";
+} from "@/components/ranking/ui";
 import { Settings } from "lucide-react";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
 

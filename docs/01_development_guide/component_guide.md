@@ -108,7 +108,7 @@ const colorClassMap: Record<string, ColorClasses> = {
 
 ```typescript
 // src/app/[category]/page.tsx
-import { CategoryPageClient } from "@/components/choropleth/CategoryPageClient";
+import { CategoryPageClient } from "@/components/category";
 import categoriesData from "@/config/categories.json";
 
 export default async function CategoryPage({ params }: PageProps) {
@@ -128,7 +128,7 @@ export default async function CategoryPage({ params }: PageProps) {
 **クライアントコンポーネント**
 
 ```typescript
-// src/components/choropleth/CategoryPageClient.tsx
+// src/components/category/CategoryPageClient.tsx
 "use client";
 
 export const CategoryPageClient: React.FC<CategoryPageClientProps> = ({

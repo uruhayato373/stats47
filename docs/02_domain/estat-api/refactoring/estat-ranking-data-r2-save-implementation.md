@@ -7,12 +7,12 @@ tags:
   - refactoring
 ---
 
-# EstatRankingDataContainer R2保存機能実装ガイド
+# EstatRankingDataContainer R2 保存機能実装ガイド
 
 **作成日**: 2025-10-13
-**最終更新**: 2025-10-13 (v1.1 - FormattedValue型定義の簡素化対応)
+**最終更新**: 2025-10-13 (v1.1 - FormattedValue 型定義の簡素化対応)
 **対象コンポーネント**: `src/components/estat/ranking-settings/containers/EstatRankingDataContainer.tsx`
-**目的**: `formattedData`をR2ストレージにJSON形式で年度ごとに保存する機能の追加
+**目的**: `formattedData`を R2 ストレージに JSON 形式で年度ごとに保存する機能の追加
 
 ---
 
@@ -33,35 +33,36 @@ tags:
 
 - **保存対象**: `formattedData` (FormattedValue[])
 - **保存先**: Cloudflare R2 オブジェクトストレージ
-- **保存形式**: JSON形式
+- **保存形式**: JSON 形式
 - **ファイルパス**: `estat_cache/{statsDataId}/{categoryCode}/{timeCode}.json`
-- **トリガー**: ユーザーが「R2に保存」ボタンをクリックした時
+- **トリガー**: ユーザーが「R2 に保存」ボタンをクリックした時
 
-### 1.2 データ構造（v1.1更新）
+### 1.2 データ構造（v1.1 更新）
 
-#### FormattedValue型（保存対象）
+#### FormattedValue 型（保存対象）
 
 ```typescript
 // src/lib/estat/types/formatted.ts
 export interface FormattedValue {
-  value: number;                // 数値データ（簡素化）
-  unit: string | null;          // 単位
-  areaCode: string;             // 地域コード
-  areaName: string;             // 地域名
-  categoryCode: string;         // カテゴリコード
-  categoryName: string;         // カテゴリ名
-  timeCode: string;             // 時系列コード
-  timeName: string;             // 時系列名
-  rank?: number;                // ランク（オプショナル）
+  value: number; // 数値データ（簡素化）
+  unit: string | null; // 単位
+  areaCode: string; // 地域コード
+  areaName: string; // 地域名
+  categoryCode: string; // カテゴリコード
+  categoryName: string; // カテゴリ名
+  timeCode: string; // 時系列コード
+  timeName: string; // 時系列名
+  rank?: number; // ランク（オプショナル）
 }
 ```
 
 **変更点（v1.1）**:
+
 - ✅ `value`が`string`から`number`に変更
-- ✅ `numericValue`フィールドが削除（valueに統合）
+- ✅ `numericValue`フィールドが削除（value に統合）
 - ✅ `displayValue`フィールドが削除（表示時にフォーマット）
 
-#### R2保存形式
+#### R2 保存形式
 
 ```json
 {
@@ -93,7 +94,8 @@ export interface FormattedValue {
 ```
 
 **変更点（v1.1）**:
-- ✅ `numeric_value`フィールドが削除（valueに統合）
+
+- ✅ `numeric_value`フィールドが削除（value に統合）
 - ✅ `display_value`フィールドが削除
 
 ### 1.3 ファイル構成
@@ -179,7 +181,7 @@ export interface FormattedValue {
 
 ## 3. 実装ステップ
 
-### ステップ1: R2バケット設定（5分）
+### ステップ 1: R2 バケット設定（5 分）
 
 **ファイル**: `wrangler.toml`
 
@@ -199,6 +201,7 @@ bucket_name = "stats47-cache-local"
 ```
 
 **バケット作成コマンド**:
+
 ```bash
 # 本番環境用バケット作成
 npx wrangler r2 bucket create stats47-cache
@@ -210,7 +213,7 @@ npx wrangler r2 bucket create stats47-cache-preview
 npx wrangler r2 bucket create stats47-cache-local
 ```
 
-### ステップ2: 型定義の作成（10分）
+### ステップ 2: 型定義の作成（10 分）
 
 **ファイル**: `src/types/models/r2/estat-cache.ts` (新規作成)
 
@@ -226,7 +229,7 @@ npx wrangler r2 bucket create stats47-cache-local
 export interface EstatCacheValueR2 {
   area_code: string;
   area_name: string;
-  value: number;      // v1.1: 直接数値を保存
+  value: number; // v1.1: 直接数値を保存
   rank?: number;
 }
 
@@ -259,7 +262,7 @@ export interface SaveEstatCacheRequest {
   values: Array<{
     areaCode: string;
     areaName: string;
-    value: number;    // v1.1: 直接数値を受け取る
+    value: number; // v1.1: 直接数値を受け取る
     rank?: number;
   }>;
 }
@@ -279,7 +282,7 @@ export interface SaveEstatCacheResponse {
 }
 ```
 
-### ステップ3: R2キャッシュサービスの作成（30分）
+### ステップ 3: R2 キャッシュサービスの作成（30 分）
 
 **ファイル**: `src/lib/estat/cache/EstatR2CacheService.ts` (新規作成)
 
@@ -349,7 +352,7 @@ export class EstatR2CacheService {
         (record): EstatCacheValueR2 => ({
           area_code: record.areaCode,
           area_name: record.areaName,
-          value: record.value,        // v1.1: 直接数値を保存
+          value: record.value, // v1.1: 直接数値を保存
           rank: record.rank,
         })
       ),
@@ -415,23 +418,19 @@ export class EstatR2CacheService {
       const cacheData: EstatCacheDataR2 = JSON.parse(jsonText);
 
       // FormattedValue[]に変換
-      const formattedValues: FormattedValue[] = cacheData.values.map(
-        (v) => ({
-          value: v.value,                    // v1.1: 直接数値を使用
-          unit: cacheData.unit,
-          areaCode: v.area_code,
-          areaName: v.area_name,
-          categoryCode: cacheData.category_code,
-          categoryName: cacheData.category_name,
-          timeCode: cacheData.time_code,
-          timeName: cacheData.time_name,
-          rank: v.rank,
-        })
-      );
+      const formattedValues: FormattedValue[] = cacheData.values.map((v) => ({
+        value: v.value, // v1.1: 直接数値を使用
+        unit: cacheData.unit,
+        areaCode: v.area_code,
+        areaName: v.area_name,
+        categoryCode: cacheData.category_code,
+        categoryName: cacheData.category_name,
+        timeCode: cacheData.time_code,
+        timeName: cacheData.time_name,
+        rank: v.rank,
+      }));
 
-      console.log(
-        `R2キャッシュヒット: ${key} (${formattedValues.length}件)`
-      );
+      console.log(`R2キャッシュヒット: ${key} (${formattedValues.length}件)`);
 
       return formattedValues;
     } catch (error) {
@@ -518,7 +517,7 @@ export class EstatR2CacheService {
 export { EstatR2CacheService } from "./EstatR2CacheService";
 ```
 
-### ステップ4: APIエンドポイントの作成（20分）
+### ステップ 4: API エンドポイントの作成（20 分）
 
 **ファイル**: `src/app/api/estat-api/cache/save/route.ts` (新規作成)
 
@@ -568,7 +567,7 @@ export async function POST(
 
     // FormattedValue[]に変換
     const formattedValues: FormattedValue[] = body.values.map((v) => ({
-      value: v.value,              // v1.1: 直接数値を使用
+      value: v.value, // v1.1: 直接数値を使用
       unit: body.unit,
       areaCode: v.areaCode,
       areaName: v.areaName,
@@ -607,7 +606,9 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      message: `データを保存しました（${result.count}件、${Math.round(result.size / 1024)}KB）`,
+      message: `データを保存しました（${result.count}件、${Math.round(
+        result.size / 1024
+      )}KB）`,
       data: result,
     });
   } catch (error) {
@@ -625,7 +626,7 @@ export async function POST(
 }
 ```
 
-### ステップ5: フロントエンドの更新（30分）
+### ステップ 5: フロントエンドの更新（30 分）
 
 **ファイル**: `src/components/estat/ranking-settings/containers/EstatRankingDataContainer.tsx`
 
@@ -648,7 +649,7 @@ const [saveStatus, setSaveStatus] = useState<{
 }>({ type: null, message: "" });
 ```
 
-#### 5.3 R2保存関数を追加
+#### 5.3 R2 保存関数を追加
 
 ```typescript
 // useMemoの後、return文の前に追加（160行目付近）
@@ -681,7 +682,7 @@ const handleSaveToR2 = async () => {
       values: formattedData.map((v) => ({
         areaCode: v.areaCode,
         areaName: v.areaName,
-        value: v.value,        // v1.1: 直接数値を送信
+        value: v.value, // v1.1: 直接数値を送信
         rank: v.rank,
       })),
     };
@@ -724,7 +725,7 @@ const handleSaveToR2 = async () => {
 };
 ```
 
-#### 5.4 UIボタンを追加
+#### 5.4 UI ボタンを追加
 
 ```typescript
 // RankingHeaderのactionsプロップを更新（209行目付近）
@@ -773,34 +774,38 @@ actions={
 
 ```typescript
 // RankingHeaderの直後に追加（221行目付近）
-{/* 保存ステータスメッセージ */}
-{saveStatus.type && (
-  <div
-    className={`mb-4 p-4 rounded-lg flex items-start gap-3 ${
-      saveStatus.type === "success"
-        ? "bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300"
-        : "bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
-    }`}
-  >
-    {saveStatus.type === "success" ? (
-      <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-    ) : (
-      <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-    )}
-    <div className="flex-1">
-      <p className="font-medium">
-        {saveStatus.type === "success" ? "保存成功" : "保存失敗"}
-      </p>
-      <p className="text-sm mt-1">{saveStatus.message}</p>
-    </div>
-    <button
-      onClick={() => setSaveStatus({ type: null, message: "" })}
-      className="text-current opacity-60 hover:opacity-100"
+{
+  /* 保存ステータスメッセージ */
+}
+{
+  saveStatus.type && (
+    <div
+      className={`mb-4 p-4 rounded-lg flex items-start gap-3 ${
+        saveStatus.type === "success"
+          ? "bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300"
+          : "bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
+      }`}
     >
-      ×
-    </button>
-  </div>
-)}
+      {saveStatus.type === "success" ? (
+        <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
+      ) : (
+        <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+      )}
+      <div className="flex-1">
+        <p className="font-medium">
+          {saveStatus.type === "success" ? "保存成功" : "保存失敗"}
+        </p>
+        <p className="text-sm mt-1">{saveStatus.message}</p>
+      </div>
+      <button
+        onClick={() => setSaveStatus({ type: null, message: "" })}
+        className="text-current opacity-60 hover:opacity-100"
+      >
+        ×
+      </button>
+    </div>
+  );
+}
 ```
 
 ---
@@ -828,7 +833,7 @@ import { Modal } from "@/components/common/Modal/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,
-} from "@/components/ranking-settings";
+} from "@/components/ranking/ui";
 -import { Settings } from "lucide-react";
 +import { Settings, Save, Check, AlertCircle } from "lucide-react";
 import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
@@ -1032,27 +1037,27 @@ export * from "./estat-cache";
 
 ### 5.1 ローカル開発環境での動作確認
 
-#### ステップ1: R2バケットの作成
+#### ステップ 1: R2 バケットの作成
 
 ```bash
 # ローカル用バケット作成
 npx wrangler r2 bucket create stats47-cache-local
 ```
 
-#### ステップ2: 開発サーバー起動
+#### ステップ 2: 開発サーバー起動
 
 ```bash
 npm run dev
 ```
 
-#### ステップ3: ページアクセス
+#### ステップ 3: ページアクセス
 
 1. ブラウザで`http://localhost:3000/ranking-settings`にアクセス
-2. e-Stat統計表IDとカテゴリコードを入力してデータ取得
-3. データが表示されたら「R2に保存」ボタンをクリック
+2. e-Stat 統計表 ID とカテゴリコードを入力してデータ取得
+3. データが表示されたら「R2 に保存」ボタンをクリック
 4. 保存成功メッセージが表示されることを確認
 
-#### ステップ4: R2の確認
+#### ステップ 4: R2 の確認
 
 ```bash
 # 保存されたファイルの確認
@@ -1078,7 +1083,7 @@ npx wrangler r2 object get stats47-cache-local/estat_cache/{statsDataId}/{catego
 # - rank が1から47まで正しく設定されている
 ```
 
-#### JSONスキーマ検証
+#### JSON スキーマ検証
 
 ```json
 {
@@ -1103,6 +1108,7 @@ npx wrangler r2 object get stats47-cache-local/estat_cache/{statsDataId}/{catego
 ```
 
 **確認項目**:
+
 - ✅ `value`が数値型（文字列ではない）
 - ✅ `numeric_value`と`display_value`フィールドが存在しない
 - ✅ `rank`が正しく計算されている（降順）
@@ -1111,18 +1117,21 @@ npx wrangler r2 object get stats47-cache-local/estat_cache/{statsDataId}/{catego
 
 ## 6. トラブルシューティング
 
-### 問題1: R2バケットが見つからない
+### 問題 1: R2 バケットが見つからない
 
 **エラーメッセージ**:
+
 ```
 環境変数R2_BUCKETが見つかりません
 ```
 
 **原因**:
-- `wrangler.toml`にR2バケット設定が追加されていない
+
+- `wrangler.toml`に R2 バケット設定が追加されていない
 - バケット名が間違っている
 
 **解決方法**:
+
 ```bash
 # バケットの存在確認
 npx wrangler r2 bucket list
@@ -1131,46 +1140,50 @@ npx wrangler r2 bucket list
 cat wrangler.toml | grep -A 3 "r2_buckets"
 ```
 
-### 問題2: 型エラー「value is string but should be number」
+### 問題 2: 型エラー「value is string but should be number」
 
 **原因**:
-古いFormattedValue定義を使用している
+古い FormattedValue 定義を使用している
 
 **解決方法**:
+
 ```typescript
 // src/lib/estat/types/formatted.ts を確認
 export interface FormattedValue {
-  value: number;  // ← string ではなく number であることを確認
+  value: number; // ← string ではなく number であることを確認
   // ...
 }
 ```
 
-### 問題3: 保存されたJSONでvalueが文字列になっている
+### 問題 3: 保存された JSON で value が文字列になっている
 
 **原因**:
 データマッピング時に`String()`で変換している
 
 **解決方法**:
+
 ```typescript
 // ❌ 間違い
-values: formattedData.map(v => ({
-  value: String(v.value),  // 文字列に変換している
-}))
+values: formattedData.map((v) => ({
+  value: String(v.value), // 文字列に変換している
+}));
 
 // ✅ 正しい
-values: formattedData.map(v => ({
-  value: v.value,  // 数値のまま
-}))
+values: formattedData.map((v) => ({
+  value: v.value, // 数値のまま
+}));
 ```
 
-### 問題4: TypeScriptエラーが出る
+### 問題 4: TypeScript エラーが出る
 
 **エラー例**:
+
 ```
 Cannot find module '@/types/models/r2/estat-cache'
 ```
 
 **解決方法**:
+
 ```bash
 # 型定義ファイルの確認
 ls -la src/types/models/r2/
@@ -1185,36 +1198,38 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 
 ### 実装チェックリスト
 
-- [ ] R2バケット作成（`stats47-cache`, `stats47-cache-preview`, `stats47-cache-local`）
-- [ ] `wrangler.toml`にR2設定追加
+- [ ] R2 バケット作成（`stats47-cache`, `stats47-cache-preview`, `stats47-cache-local`）
+- [ ] `wrangler.toml`に R2 設定追加
 - [ ] 型定義ファイル作成（`src/types/models/r2/estat-cache.ts`）
-- [ ] R2サービスクラス作成（`src/lib/estat/cache/EstatR2CacheService.ts`）
-- [ ] APIエンドポイント作成（`src/app/api/estat-api/cache/save/route.ts`）
+- [ ] R2 サービスクラス作成（`src/lib/estat/cache/EstatR2CacheService.ts`）
+- [ ] API エンドポイント作成（`src/app/api/estat-api/cache/save/route.ts`）
 - [ ] フロントエンド更新（`EstatRankingDataContainer.tsx`）
 - [ ] ローカル環境でテスト
-- [ ] 保存されたJSONの検証（`value`が数値型であることを確認）
+- [ ] 保存された JSON の検証（`value`が数値型であることを確認）
 - [ ] 本番環境にデプロイ
 - [ ] 本番環境でテスト
 
 ### 推定作業時間
 
-| タスク | 時間 |
-|--------|------|
-| R2バケット設定 | 5分 |
-| 型定義作成 | 10分 |
-| R2サービス作成 | 30分 |
-| APIエンドポイント作成 | 20分 |
-| フロントエンド更新 | 30分 |
-| テスト | 30分 |
-| **合計** | **約2時間** |
+| タスク                 | 時間          |
+| ---------------------- | ------------- |
+| R2 バケット設定        | 5 分          |
+| 型定義作成             | 10 分         |
+| R2 サービス作成        | 30 分         |
+| API エンドポイント作成 | 20 分         |
+| フロントエンド更新     | 30 分         |
+| テスト                 | 30 分         |
+| **合計**               | **約 2 時間** |
 
-### v1.1での主要変更点
+### v1.1 での主要変更点
 
-1. **FormattedValue構造の簡素化**
+1. **FormattedValue 構造の簡素化**
+
    - `value: number` に統一
    - `numericValue`, `displayValue` フィールド削除
 
-2. **R2保存形式の簡素化**
+2. **R2 保存形式の簡素化**
+
    - `value: number` のみ保存
    - `numeric_value`, `display_value` フィールド削除
 
@@ -1224,20 +1239,23 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 
 ### 次のステップ（オプション）
 
-1. **R2からの読み取り機能追加**
+1. **R2 からの読み取り機能追加**
+
    - `GET /api/estat-api/cache/get` エンドポイント
-   - キャッシュヒット時はR2から取得、ミス時はe-Stat APIから取得
+   - キャッシュヒット時は R2 から取得、ミス時は e-Stat API から取得
 
 2. **キャッシュ管理画面**
+
    - 保存済みデータ一覧表示
    - 削除機能
    - 更新日時表示
 
 3. **自動キャッシュ更新**
-   - Cron Triggerで定期的にデータを更新
 
-4. **R2完全移行**
-   - 「ランキング値R2移行計画書」（`doc/ranking-values-r2-migration-plan.md`）に従って完全移行
+   - Cron Trigger で定期的にデータを更新
+
+4. **R2 完全移行**
+   - 「ランキング値 R2 移行計画書」（`doc/ranking-values-r2-migration-plan.md`）に従って完全移行
 
 ---
 

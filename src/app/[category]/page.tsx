@@ -1,7 +1,7 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
-import { CategoryPageClient } from '@/components/choropleth/CategoryPageClient';
-import categoriesData from '@/config/categories.json';
+import React from "react";
+import { notFound } from "next/navigation";
+import { CategoryPageClient } from "@/components/category";
+import categoriesData from "@/config/categories.json";
 
 interface PageProps {
   params: Promise<{

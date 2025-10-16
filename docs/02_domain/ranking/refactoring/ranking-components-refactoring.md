@@ -978,7 +978,7 @@ const { data, isLoading, error } = useRankingData(
 
 ✅ **Phase 5: 認証ロジックの分離**
 
-- `src/hooks/useAuth.ts` - 認証ロジックのカスタムフック作成
+- `src/hooks/auth/useAuth.ts` - 認証ロジックのカスタムフック作成
 
 ✅ **Phase 6: 不要ファイルの削除**
 

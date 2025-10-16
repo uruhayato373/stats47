@@ -4,7 +4,9 @@
       "Bash(dir:*)",
       "Bash(tree:*)",
       "Bash(mkdir:*)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:datahelpdesk.worldbank.org)",
+      "WebFetch(domain:data.oecd.org)"
     ],
     "deny": [],
     "ask": []
