@@ -134,7 +134,7 @@ export interface FormattedValue {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 2. APIリクエスト                                              │
-│    POST /api/estat/cache/save                                │
+│    POST /api/estat-api/cache/save                                │
 │    {                                                          │
 │      statsDataId, categoryCode, timeCode,                    │
 │      values: formattedData                                   │
@@ -144,7 +144,7 @@ export interface FormattedValue {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 3. APIルートハンドラー                                        │
-│    src/app/api/estat/cache/save/route.ts                     │
+│    src/app/api/estat-api/cache/save/route.ts                     │
 │    - リクエストバリデーション                                │
 │    - データ整形                                               │
 └────────────────┬─────────────────────────────────────────────┘
@@ -511,7 +511,7 @@ export { EstatR2CacheService } from "./EstatR2CacheService";
 
 ### ステップ4: APIエンドポイントの作成（20分）
 
-**ファイル**: `src/app/api/estat/cache/save/route.ts` (新規作成)
+**ファイル**: `src/app/api/estat-api/cache/save/route.ts` (新規作成)
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
@@ -524,7 +524,7 @@ import {
 
 /**
  * e-StatランキングデータをR2に保存するAPIエンドポイント
- * POST /api/estat/cache/save
+ * POST /api/estat-api/cache/save
  * FormattedValue v1.1対応版
  */
 export async function POST(
@@ -677,7 +677,7 @@ const handleSaveToR2 = async () => {
       })),
     };
 
-    const response = await fetch("/api/estat/cache/save", {
+    const response = await fetch("/api/estat-api/cache/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -883,7 +883,7 @@ export const EstatRankingDataContainer: React.FC<
 +        })),
 +      };
 +
-+      const response = await fetch("/api/estat/cache/save", {
++      const response = await fetch("/api/estat-api/cache/save", {
 +        method: "POST",
 +        headers: {
 +          "Content-Type": "application/json",
@@ -1180,7 +1180,7 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 - [ ] `wrangler.toml`にR2設定追加
 - [ ] 型定義ファイル作成（`src/types/models/r2/estat-cache.ts`）
 - [ ] R2サービスクラス作成（`src/lib/estat/cache/EstatR2CacheService.ts`）
-- [ ] APIエンドポイント作成（`src/app/api/estat/cache/save/route.ts`）
+- [ ] APIエンドポイント作成（`src/app/api/estat-api/cache/save/route.ts`）
 - [ ] フロントエンド更新（`EstatRankingDataContainer.tsx`）
 - [ ] ローカル環境でテスト
 - [ ] 保存されたJSONの検証（`value`が数値型であることを確認）
@@ -1216,7 +1216,7 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 ### 次のステップ（オプション）
 
 1. **R2からの読み取り機能追加**
-   - `GET /api/estat/cache/get` エンドポイント
+   - `GET /api/estat-api/cache/get` エンドポイント
    - キャッシュヒット時はR2から取得、ミス時はe-Stat APIから取得
 
 2. **キャッシュ管理画面**

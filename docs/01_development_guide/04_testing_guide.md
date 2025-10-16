@@ -761,7 +761,7 @@ import { test, expect } from "@playwright/test";
 
 test("ranking flow with mock data", async ({ page }) => {
   // モックデータを有効化
-  await page.route("**/api/estat/**", async (route) => {
+  await page.route("**/api/estat-api/**", async (route) => {
     const url = route.request().url();
     if (url.includes("metainfo")) {
       await route.fulfill({

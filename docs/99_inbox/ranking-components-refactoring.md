@@ -365,7 +365,7 @@ import { fetcher } from "@/lib/swr/fetcher";
 export function useRankingYears(statsDataId?: string, cdCat01?: string) {
   const key =
     statsDataId && cdCat01
-      ? `/api/estat/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}`
+      ? `/api/estat-api/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}`
       : null;
 
   const { data, error, isLoading } = useSWR<{ years: string[] }>(key, fetcher, {
@@ -393,7 +393,7 @@ export function useRankingData(
 ) {
   const key =
     statsDataId && cdCat01 && yearCode
-      ? `/api/estat/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}&limit=${limit}`
+      ? `/api/estat-api/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}&limit=${limit}`
       : null;
 
   const { data, error, isLoading, mutate } = useSWR<{ data: FormattedValue[] }>(

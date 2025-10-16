@@ -863,7 +863,7 @@ export class RankingCacheService {
 
 **既存APIの修正**:
 ```typescript
-// app/api/estat/ranking/data/route.ts
+// app/api/estat-api/ranking/data/route.ts
 
 // ❌ 変更前
 export async function GET(request: Request) {
@@ -1115,8 +1115,8 @@ DROP TABLE ranking_values;
 
 | エンドポイント | 変更内容 | 後方互換性 |
 |---|---|---|
-| `/api/estat/ranking/data` | アダプター経由で新テーブル使用 | ✅ 維持（非推奨） |
-| `/api/estat/ranking/years` | アダプター経由で新テーブル使用 | ✅ 維持（非推奨） |
+| `/api/estat-api/ranking/data` | アダプター経由で新テーブル使用 | ✅ 維持（非推奨） |
+| `/api/estat-api/ranking/years` | アダプター経由で新テーブル使用 | ✅ 維持（非推奨） |
 | `/api/ranking/data` | 新規作成（ranking_key ベース） | - |
 | `/api/ranking/years` | 新規作成（ranking_key ベース） | - |
 | `/api/ranking-items/*` | ranking_items_new を参照 | ⚠️ 要修正 |
@@ -1275,7 +1275,7 @@ describe("ランキングAPI", () => {
   describe("後方互換性", () => {
     it("旧API（statsDataId+cdCat01）が正常に動作する", async () => {
       const response = await fetch(
-        "/api/estat/ranking/data?statsDataId=0000010102&categoryCode=B1101&timeCode=2020000000"
+        "/api/estat-api/ranking/data?statsDataId=0000010102&categoryCode=B1101&timeCode=2020000000"
       );
       expect(response.status).toBe(200);
       const data = await response.json();
@@ -1295,7 +1295,7 @@ describe("ランキングAPI", () => {
 
     it("旧APIと新APIの結果が一致する", async () => {
       const oldResponse = await fetch(
-        "/api/estat/ranking/data?statsDataId=0000010102&categoryCode=B1101&timeCode=2020000000"
+        "/api/estat-api/ranking/data?statsDataId=0000010102&categoryCode=B1101&timeCode=2020000000"
       );
       const newResponse = await fetch(
         "/api/ranking/data?rankingKey=totalAreaExcluding&timeCode=2020000000"

@@ -197,7 +197,7 @@ export const config = {
 export type Config = typeof config;
 ```
 
-### `/src/lib/api/estat.ts`
+### `/src/lib/api/estat-api.ts`
 
 ```typescript
 import { config } from "@/lib/config";

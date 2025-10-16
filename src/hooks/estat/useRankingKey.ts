@@ -11,7 +11,7 @@ import { fetcher } from "@/lib/swr/fetcher";
 export function useRankingKey(statsDataId?: string, categoryCode?: string) {
   const { data, error, isLoading } = useSWR(
     statsDataId && categoryCode
-      ? `/api/estat/metainfo/ranking-key?statsDataId=${statsDataId}&categoryCode=${categoryCode}`
+      ? `/api/estat-api/meta-info/ranking-key?statsDataId=${statsDataId}&categoryCode=${categoryCode}`
       : null,
     fetcher
   );

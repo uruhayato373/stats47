@@ -8,7 +8,7 @@
  * - ネットワーク再接続時の再取得
  *
  * データ取得フロー:
- * パラメータ変更 → SWRキー生成 → /api/estat/data呼び出し → e-Stat API → データ返却
+ * パラメータ変更 → SWRキー生成 → /api/estat-api/data呼び出し → e-Stat API → データ返却
  */
 
 import useSWR from "swr";
@@ -46,7 +46,7 @@ function buildQueryString(params: PrefectureRankingParams): string {
  */
 export function useEstatStatsData(params: PrefectureRankingParams | null) {
   // SWRキー生成 - パラメータがnullの場合はデータ取得を無効化
-  const key = params ? `/api/estat/data?${buildQueryString(params)}` : null;
+  const key = params ? `/api/estat-api/data?${buildQueryString(params)}` : null;
 
   // デバッグ情報を追加
   console.log("useEstatStatsData - Debug Info:", {

@@ -5,7 +5,7 @@
  *
  * データ取得フロー:
  * Fetcher → handleFetchData → currentParams更新 → Display.tsx内のuseEstatStatsData発火
- * → /api/estat/data呼び出し → e-Stat API → データ表示
+ * → /api/estat-api/data呼び出し → e-Stat API → データ表示
  *
  * 役割:
  * - Fetcherコンポーネントからのパラメータを受け取り

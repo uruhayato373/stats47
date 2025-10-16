@@ -40,7 +40,7 @@ useEffect(() => {
   const fetchAvailableYears = async () => {
     try {
       // fetch処理
-      const response = await fetch(`/api/estat/ranking/years?...`);
+      const response = await fetch(`/api/estat-api/ranking/years?...`);
       // エラーハンドリング
       if (!response.ok) throw new Error(...);
       // データセット
@@ -141,7 +141,7 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
 
     const fetchAvailableYears = async () => {
       try {
-        const response = await fetch(`/api/estat/ranking/years?...`);
+        const response = await fetch(`/api/estat-api/ranking/years?...`);
         if (!response.ok) throw new Error(...);
         const result = await response.json();
         setAvailableYears(result.years);
@@ -164,7 +164,7 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
       setError(null);
 
       try {
-        const response = await fetch(`/api/estat/ranking/data?...`);
+        const response = await fetch(`/api/estat-api/ranking/data?...`);
         const result = await response.json();
         setFormattedValues(result.data);
       } catch (err) {
@@ -190,7 +190,7 @@ export const EstatRankingClient: React.FC<EstatRankingProps> = ({
 // カスタムフック（再利用可能）
 function useRankingYears(statsDataId: string, cdCat01: string) {
   const { data, error, isLoading } = useSWR(
-    statsDataId && cdCat01 ? `/api/estat/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}` : null,
+    statsDataId && cdCat01 ? `/api/estat-api/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}` : null,
     fetcher,
     {
       revalidateOnFocus: false,
@@ -208,7 +208,7 @@ function useRankingYears(statsDataId: string, cdCat01: string) {
 function useRankingData(statsDataId: string, cdCat01: string, yearCode: string) {
   const { data, error, isLoading, mutate } = useSWR(
     statsDataId && cdCat01 && yearCode
-      ? `/api/estat/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}`
+      ? `/api/estat-api/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}`
       : null,
     fetcher,
     {
@@ -485,7 +485,7 @@ import { FormattedValue } from '@/lib/estat/types/formatted';
  */
 export function useRankingYears(statsDataId?: string, cdCat01?: string) {
   const key = statsDataId && cdCat01
-    ? `/api/estat/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}`
+    ? `/api/estat-api/ranking/years?statsDataId=${statsDataId}&cdCat01=${cdCat01}`
     : null;
 
   const { data, error, isLoading } = useSWR<{ years: string[] }>(
@@ -515,7 +515,7 @@ export function useRankingData(
   limit: number = 100000
 ) {
   const key = statsDataId && cdCat01 && yearCode
-    ? `/api/estat/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}&limit=${limit}`
+    ? `/api/estat-api/ranking/data?statsDataId=${statsDataId}&cdCat01=${cdCat01}&yearCode=${yearCode}&limit=${limit}`
     : null;
 
   const { data, error, isLoading, mutate } = useSWR<{ data: FormattedValue[] }>(

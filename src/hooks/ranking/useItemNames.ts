@@ -11,7 +11,7 @@ export function useItemNames() {
     try {
       // stats-listエンドポイントを使用して統計表の詳細情報を取得
       const response = await fetch(
-        `/api/estat/metainfo/saved?search=${statsDataId}&limit=1`
+        `/api/estat-api/meta-info/saved?search=${statsDataId}&limit=1`
       );
       if (response.ok) {
         const data = await response.json();

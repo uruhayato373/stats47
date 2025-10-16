@@ -43,7 +43,7 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
 
       console.log("🔵 API呼び出し開始:", statsDataId);
 
-      const response = await fetch("/api/estat/metainfo/save", {
+      const response = await fetch("/api/estat-api/meta-info/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
