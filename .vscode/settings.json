@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
     "administrativefinancial",
+    "AUTOINCREMENT",
     "Choropleth",
+    "chugoku",
     "educationsports",
     "Estat",
     "kanto",
+    "kinki",
     "laborwage",
     "landweather",
     "METAGET",
@@ -15,7 +18,9 @@
     "Sparkline",
     "statsdata",
     "statslist",
+    "tohoku",
     "Topo",
-    "topojson"
+    "topojson",
+    "turbopack"
   ]
 }
