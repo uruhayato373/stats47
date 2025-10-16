@@ -1,3 +1,12 @@
+---
+title: ダッシュボードドメイン概要
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - specifications
+---
+
 # ダッシュボードドメイン概要
 
 ## 目的

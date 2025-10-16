@@ -1,3 +1,12 @@
+---
+title: EstatStatsListService
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # EstatStatsListService
 
 ## 概要

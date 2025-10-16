@@ -1,3 +1,11 @@
+---
+title: e-Stat API テストガイド
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - development-guide
+---
+
 # e-Stat API テストガイド
 
 ## 概要

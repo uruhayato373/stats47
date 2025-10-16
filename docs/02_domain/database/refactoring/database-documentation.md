@@ -1,3 +1,12 @@
+---
+title: stats47 データベース 完全ガイド
+created: 2025-10-13
+updated: 2025-10-16
+tags:
+  - domain/database
+  - refactoring
+---
+
 # stats47 データベース 完全ガイド
 
 ## 目次

@@ -1,3 +1,12 @@
+---
+title: e-Stat API 開始ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - implementation
+---
+
 # e-Stat API 開始ガイド
 
 ## 概要

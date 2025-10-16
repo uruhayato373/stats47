@@ -1,3 +1,12 @@
+---
+title: コンテンツ構造定義
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/blog
+  - specifications
+---
+
 # コンテンツ構造定義
 
 ## 概要

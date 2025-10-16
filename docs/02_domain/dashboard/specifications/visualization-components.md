@@ -1,3 +1,12 @@
+---
+title: 可視化コンポーネント仕様
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - specifications
+---
+
 # 可視化コンポーネント仕様
 
 ## 概要

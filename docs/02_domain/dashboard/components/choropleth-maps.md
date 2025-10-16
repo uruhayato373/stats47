@@ -1,3 +1,12 @@
+---
+title: コロプレス地図コンポーネント
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - components
+---
+
 # コロプレス地図コンポーネント
 
 ## 概要

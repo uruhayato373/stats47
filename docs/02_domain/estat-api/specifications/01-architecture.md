@@ -1,3 +1,12 @@
+---
+title: e-Stat API アーキテクチャ設計
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # e-Stat API アーキテクチャ設計
 
 ## 概要

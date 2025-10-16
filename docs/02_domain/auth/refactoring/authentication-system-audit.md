@@ -1,3 +1,12 @@
+---
+title: Stats47 認証システム監査レポート
+created: 2025-10-12
+updated: 2025-10-16
+tags:
+  - domain/auth
+  - refactoring
+---
+
 # Stats47 認証システム監査レポート
 
 **調査日:** 2025-10-12

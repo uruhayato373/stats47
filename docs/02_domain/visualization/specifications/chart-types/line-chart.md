@@ -1,3 +1,12 @@
+---
+title: 折れ線グラフ仕様
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - specifications
+---
+
 # 折れ線グラフ仕様
 
 **作成日**: 2025-10-16  

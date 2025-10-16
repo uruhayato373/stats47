@@ -1,3 +1,12 @@
+---
+title: Recharts共通実装パターン
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - implementation
+---
+
 # Recharts共通実装パターン
 
 **作成日**: 2025-10-16  

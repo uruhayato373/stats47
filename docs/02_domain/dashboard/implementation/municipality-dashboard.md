@@ -1,3 +1,12 @@
+---
+title: 市区町村ダッシュボード実装ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - implementation
+---
+
 # 市区町村ダッシュボード実装ガイド
 
 ## 概要

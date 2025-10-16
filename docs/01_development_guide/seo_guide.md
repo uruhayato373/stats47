@@ -1,3 +1,11 @@
+---
+title: SEO最適化ガイド
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - development-guide
+---
+
 # SEO最適化ガイド
 
 ## 概要

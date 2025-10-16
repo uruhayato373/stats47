@@ -1,3 +1,12 @@
+---
+title: コンポーネント統合仕様
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/blog
+  - specifications
+---
+
 # コンポーネント統合仕様
 
 ## 概要

@@ -1,3 +1,12 @@
+---
+title: データベーススキーマ リファクタリング計画
+created: 2025-10-13
+updated: 2025-10-16
+tags:
+  - domain/database
+  - refactoring
+---
+
 # データベーススキーマ リファクタリング計画
 
 ## 概要

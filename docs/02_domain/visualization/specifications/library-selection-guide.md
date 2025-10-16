@@ -1,3 +1,12 @@
+---
+title: ライブラリ選択ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - specifications
+---
+
 # ライブラリ選択ガイド
 
 **作成日**: 2025-10-16  

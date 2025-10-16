@@ -1,3 +1,12 @@
+---
+title: ページ構造とルーティング
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - specifications
+---
+
 # ページ構造とルーティング
 
 ## 概要

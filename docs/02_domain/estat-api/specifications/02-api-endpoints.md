@@ -1,3 +1,12 @@
+---
+title: e-Stat API エンドポイント一覧
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # e-Stat API エンドポイント一覧
 
 ## 概要

@@ -1,3 +1,12 @@
+---
+title: データ取得実装ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - implementation
+---
+
 # データ取得実装ガイド
 
 ## 概要

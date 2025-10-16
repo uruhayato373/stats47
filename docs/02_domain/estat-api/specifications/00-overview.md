@@ -1,3 +1,12 @@
+---
+title: e-Stat API ドメイン概要
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # e-Stat API ドメイン概要
 
 ## 目的

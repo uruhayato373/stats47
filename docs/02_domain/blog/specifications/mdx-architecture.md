@@ -1,3 +1,12 @@
+---
+title: MDXアーキテクチャ設計
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/blog
+  - specifications
+---
+
 # MDXアーキテクチャ設計
 
 ## 概要

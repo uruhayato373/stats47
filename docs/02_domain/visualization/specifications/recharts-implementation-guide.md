@@ -1,3 +1,12 @@
+---
+title: Recharts実装ガイドライン
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - specifications
+---
+
 # Recharts実装ガイドライン
 
 **作成日**: 2025-10-16  

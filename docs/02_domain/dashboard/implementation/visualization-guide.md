@@ -1,3 +1,12 @@
+---
+title: 可視化実装ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - implementation
+---
+
 # 可視化実装ガイド
 
 ## 概要

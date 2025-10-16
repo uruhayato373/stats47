@@ -1,3 +1,12 @@
+---
+title: カテゴリ管理ドメイン概要
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/category
+  - specifications
+---
+
 # カテゴリ管理ドメイン概要
 
 ## ドメインの目的

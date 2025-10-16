@@ -1,3 +1,12 @@
+---
+title: ランキングアダプターレイヤー設計書
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/ranking
+  - specifications
+---
+
 # ランキングアダプターレイヤー設計書
 
 **作成日**: 2025-10-16  

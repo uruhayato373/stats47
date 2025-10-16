@@ -1,3 +1,12 @@
+---
+title: API統合ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - implementation
+---
+
 # API統合ガイド
 
 ## 概要

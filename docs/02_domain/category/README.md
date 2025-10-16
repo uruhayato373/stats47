@@ -1,3 +1,12 @@
+---
+title: カテゴリ管理ドメイン
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/category
+  - README.md
+---
+
 # カテゴリ管理ドメイン
 
 ## 概要

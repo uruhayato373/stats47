@@ -1,3 +1,12 @@
+---
+title: ダッシュボードアーキテクチャ設計
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - specifications
+---
+
 # ダッシュボードアーキテクチャ設計
 
 ## 概要

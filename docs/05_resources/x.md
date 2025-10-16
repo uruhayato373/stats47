@@ -1,3 +1,11 @@
+---
+title: x
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - resources
+---
+
 
 **Xで縦長画像が有利な理由：**
 

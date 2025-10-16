@@ -1,3 +1,12 @@
+---
+title: 認証機能の現状分析と改善提案
+created: 2025-10-13
+updated: 2025-10-16
+tags:
+  - domain/auth
+  - refactoring
+---
+
 # 認証機能の現状分析と改善提案
 
 ## 概要

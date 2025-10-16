@@ -1,3 +1,12 @@
+---
+title: e-Stat API ライブラリ テスト戦略
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - testing
+---
+
 # e-Stat API ライブラリ テスト戦略
 
 ## 概要

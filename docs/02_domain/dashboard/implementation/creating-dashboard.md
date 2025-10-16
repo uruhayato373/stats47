@@ -1,3 +1,12 @@
+---
+title: ダッシュボード作成ガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - implementation
+---
+
 # ダッシュボード作成ガイド
 
 ## 概要

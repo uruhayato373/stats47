@@ -1,3 +1,12 @@
+---
+title: 比較グラフコンポーネント
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/dashboard
+  - components
+---
+
 # 比較グラフコンポーネント
 
 ## 概要

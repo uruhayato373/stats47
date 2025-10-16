@@ -1,3 +1,11 @@
+---
+title: デザインガイド
+created: 2025-10-02
+updated: 2025-10-16
+tags:
+  - development-guide
+---
+
 # デザインガイド
 
 ## 1. 概要

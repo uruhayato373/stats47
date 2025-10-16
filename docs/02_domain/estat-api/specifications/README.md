@@ -1,3 +1,12 @@
+---
+title: e-STAT ライブラリドキュメント
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # e-STAT ライブラリドキュメント
 
 ## 概要

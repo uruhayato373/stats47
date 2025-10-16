@@ -1,3 +1,12 @@
+---
+title: Stats47 認証システム実装ガイド
+created: 2025-10-12
+updated: 2025-10-16
+tags:
+  - domain/auth
+  - specifications
+---
+
 # Stats47 認証システム実装ガイド
 
 ## 目次

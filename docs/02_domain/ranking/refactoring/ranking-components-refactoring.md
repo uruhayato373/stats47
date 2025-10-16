@@ -1,3 +1,12 @@
+---
+title: Ranking コンポーネントのリファクタリング提案
+created: 2025-10-13
+updated: 2025-10-16
+tags:
+  - domain/ranking
+  - refactoring
+---
+
 # Ranking コンポーネントのリファクタリング提案
 
 ## 概要

@@ -1,3 +1,12 @@
+---
+title: カテゴリ管理ドメイン - はじめに
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/category
+  - implementation
+---
+
 # カテゴリ管理ドメイン - はじめに
 
 ## 概要

@@ -1,3 +1,12 @@
+---
+title: 可視化ドメイン概要
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - specifications
+---
+
 # 可視化ドメイン概要
 
 **作成日**: 2025-10-16  

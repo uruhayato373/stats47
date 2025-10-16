@@ -1,3 +1,12 @@
+---
+title: ヒートマップ仕様
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/visualization
+  - specifications
+---
+
 # ヒートマップ仕様
 
 **作成日**: 2025-10-16  

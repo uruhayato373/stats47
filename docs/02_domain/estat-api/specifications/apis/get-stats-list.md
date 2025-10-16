@@ -1,3 +1,12 @@
+---
+title: e-Stat API `GET_STATS_LIST` 完全ガイド
+created: 2025-10-14
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - specifications
+---
+
 # e-Stat API `GET_STATS_LIST` 完全ガイド
 
 ## 1. GET_STATS_LIST とは
