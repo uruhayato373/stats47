@@ -8,48 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "61f8b29c1d5bc193",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/01_概要/01_概要.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01_概要"
-            }
-          },
-          {
-            "id": "01e976783d9b9fd1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/01_概要/02_アーキテクチャ.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02_アーキテクチャ"
-            }
-          },
-          {
-            "id": "4abc774098ba5291",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/02_開発/01_コーディング規約.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01_コーディング規約"
-            }
-          },
-          {
             "id": "cf220800ff7977c4",
             "type": "leaf",
             "state": {
@@ -61,62 +19,6 @@
               },
               "icon": "lucide-file",
               "title": "01_プロジェクト要件"
-            }
-          },
-          {
-            "id": "e650b5766564c798",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/02_開発/09_エンゲージメント機能ガイド.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "09_エンゲージメント機能ガイド"
-            }
-          },
-          {
-            "id": "2bdc7dd6ab3c35fb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/02_開発/11_大規模プロジェクト実装ガイド.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "11_大規模プロジェクト実装ガイド"
-            }
-          },
-          {
-            "id": "6d5193d761a82945",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/02_開発/08_パフォーマンス最適化ガイド.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "08_パフォーマンス最適化ガイド"
-            }
-          },
-          {
-            "id": "084d7e84c38c7350",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "old/02_開発/07_環境変数設定ガイド.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "07_環境変数設定ガイド"
             }
           },
           {
@@ -161,8 +63,7 @@
               "title": "04_ターゲットペルソナ"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -308,8 +209,27 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "2bdc7dd6ab3c35fb",
+  "active": "cf220800ff7977c4",
   "lastOpenFiles": [
+    "old/02_開発/11_大規模プロジェクト実装ガイド.md",
+    "01_開発ガイド/README.md",
+    "01_開発ガイド/11_大規模プロジェクト実装ガイド.md",
+    "01_開発ガイド/10_開発環境設定ガイド.md",
+    "01_開発ガイド/09_エンゲージメント機能ガイド.md",
+    "01_開発ガイド/08_パフォーマンス最適化ガイド.md",
+    "01_開発ガイド/07_環境変数設定ガイド.md",
+    "01_開発ガイド/06_デプロイメントガイド.md",
+    "01_開発ガイド/06_D3jsコロプレス地図ガイド.md",
+    "01_開発ガイド/05_Storybookガイド.md",
+    "01_開発ガイド/05_SEOガイド.md",
+    "01_開発ガイド/04_テストガイド.md",
+    "01_開発ガイド/03_スタイリングガイド.md",
+    "01_開発ガイド/02_コンポーネントガイド.md",
+    "01_開発ガイド/01_コーディング規約.md",
+    "00_プロジェクト全体/10_参考リンク.md",
+    "00_プロジェクト全体/03_ロードマップ.md",
+    "00_プロジェクト全体/02_アーキテクチャ.md",
+    "00_プロジェクト全体/01_概要.md",
     "99_inbox/メモ.md",
     "99_inbox/useswr-refactoring-analysis.md",
     "99_inbox/ranking-values-r2-migration-plan.md",
@@ -317,35 +237,16 @@
     "99_inbox/estat-metainfo-duplicate-issue.md",
     "99_inbox/editable-navigation-not-showing-issue.md",
     "99_inbox/database-refactoring-plan.md",
-    "99_inbox/database-environment-setup.md",
-    "99_inbox/database-documentation.md",
-    "99_inbox/data-caching-strategy.md",
-    "99_inbox/authentication-system-audit.md",
-    "99_inbox/authentication-analysis-and-improvement.md",
-    "99_inbox/404-error-analysis.md",
     "04_コンテンツ計画/03_ブログ記事",
     "04_コンテンツ計画/02_ダッシュボード",
     "04_コンテンツ計画/01_ランキング記事",
     "03_機能別/image-generation",
-    "old/02_開発/09_エンゲージメント機能ガイド.md",
-    "old/02_開発/07_環境変数設定ガイド.md",
-    "old/02_開発/08_パフォーマンス最適化ガイド.md",
-    "old/03_要件定義/01_プロジェクト要件.md",
-    "old/02_開発/01_コーディング規約.md",
-    "old/01_概要/02_アーキテクチャ.md",
-    "old/01_概要/01_概要.md",
     "03_機能別/related-articles",
     "03_機能別/comments",
     "03_機能別/sns",
     "02_ドメイン/dashboard/リファクタリング",
     "02_ドメイン/dashboard/仕様",
     "02_ドメイン/dashboard",
-    "old/INDEX.md",
-    "05_リファクタリング/無題のファイル.md",
-    "old/estat/types.md",
-    "old/estat/testing-strategy.md",
-    "old/estat/stats-list-service.md",
-    "old/estat/README.md",
     "old/10_資料/都道府県別産業割合.png",
     "old/10_資料/転入転出.png",
     "old/10_資料/都道府県ごとの物価分析.png",
