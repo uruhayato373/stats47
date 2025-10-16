@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoRepository } from "@/lib/estat-d1";
+import { EstatMetaInfoRepository } from "@/lib/estat-api/meta-info/repositories";
 import { createD1Database } from "@/lib/database";
 import {
   EstatMetaInfoFetcher,

@@ -6,8 +6,8 @@ import {
   EstatStatsDataFormatter,
   EstatDataFilter,
 } from "@/lib/estat-api";
-import { VisualizationSettings } from "@/lib/prefecture-ranking/visualization-settings";
-import { PrefectureRankingSettingsService } from "@/lib/prefecture-ranking/settings-service";
+import { VisualizationSettings } from "@/lib/ranking/visualization-settings";
+import { PrefectureRankingSettingsService } from "@/lib/ranking/settings-service";
 
 interface UsePrefectureRankingDataOptions {
   data: any;

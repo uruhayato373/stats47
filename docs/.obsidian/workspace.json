@@ -172,6 +172,8 @@
   },
   "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
+    "02_domain/architecture/data-fetching-refactoring-plan.md",
+    "01_development_guide/data-fetching-strategy.md",
     "02_domain/architecture/technical-specifications.md",
     "02_domain/architecture/refactoring-roadmap.md",
     "02_domain/architecture/state-management-consolidation.md",
@@ -202,8 +204,6 @@
     "01_development_guide/documentation_management.md",
     "01_development_guide/engagement_features.md",
     "01_development_guide/performance_optimization.md",
-    "01_development_guide/environment_variables.md",
-    "01_development_guide/deployment_guide.md",
     "02_domain/dashboard/components",
     "02_domain/dashboard/implementation",
     "02_domain/estat-api/specifications/services",

@@ -1,8 +1,8 @@
 /**
  * Visualization Settings
- * Prefecture Ranking設定サービスへのエイリアス
+ * ランキング設定サービス
  */
 
-export type { VisualizationSettings } from "../prefecture-ranking/settings-service";
+export type { VisualizationSettings } from "./settings-service";
 
-export { PrefectureRankingSettingsService as VisualizationSettingsService } from "../prefecture-ranking/settings-service";
+export { PrefectureRankingSettingsService as VisualizationSettingsService } from "./settings-service";

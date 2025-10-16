@@ -182,10 +182,15 @@ npm run dev
 ### 管理ガイド
 
 - [開発ガイド](./docs/02_開発/README.md) - 開発ガイドラインとベストプラクティス
+- [データフェッチ戦略](./docs/01_development_guide/data-fetching-strategy.md) - useSWR を中心としたデータフェッチの標準化
 - [Storybook ガイド](./docs/02_開発/05_Storybookガイド.md) - Storybook 開発ガイドとベストプラクティス
 - [開発者ガイド](./doc/development-guide.md) - 開発環境のセットアップと開発手順
 - [e-Stat 統合ガイド](./doc/estat-integration.md) - e-Stat API 統合の詳細
 - [配色システム](./doc/color-system.md) - UI/UX の配色システムとデザインガイドライン
+
+### リファクタリング計画
+
+- [データフェッチリファクタリング計画](./docs/02_domain/architecture/data-fetching-refactoring-plan.md) - 既存コードのリファクタリング計画と実装手順
 
 ### その他
 

@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { EstatMetaInfoRepository } from "./lib/estat-d1";
+import { EstatMetaInfoRepository } from "./lib/estat-api/meta-info/repositories";
 
 export interface Env {
   AUTH_DB: D1Database;
