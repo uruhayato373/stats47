@@ -58,4 +58,34 @@ export class PrefectureRankingSettingsService {
       decimal_places: 0,
     };
   }
+
+  /**
+   * 設定を保存（APIエンドポイントへのリクエスト）
+   */
+  static async saveSettings(
+    settings: Partial<VisualizationSettings>
+  ): Promise<{ success: boolean; id?: number; error?: string }> {
+    try {
+      const response = await fetch("/api/visualization-settings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(settings),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return { success: true, id: result.id };
+    } catch (error) {
+      console.error("Failed to save settings:", error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
+    }
+  }
 }

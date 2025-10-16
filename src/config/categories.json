@@ -2,28 +2,36 @@
   {
     "id": "tech",
     "name": "テクノロジー",
+    "icon": "computer",
+    "color": "blue",
     "subcategories": [
       {
         "id": "programming",
-        "name": "プログラミング"
+        "name": "プログラミング",
+        "href": "/programming"
       },
       {
         "id": "gadgets",
-        "name": "ガジェット"
+        "name": "ガジェット",
+        "href": "/gadgets"
       }
     ]
   },
   {
     "id": "lifestyle",
     "name": "ライフスタイル",
+    "icon": "heart",
+    "color": "green",
     "subcategories": [
       {
         "id": "travel",
-        "name": "旅行"
+        "name": "旅行",
+        "href": "/travel"
       },
       {
         "id": "food",
-        "name": "グルメ"
+        "name": "グルメ",
+        "href": "/food"
       }
     ]
   }

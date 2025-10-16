@@ -195,6 +195,13 @@ npm run dev
 - [プロバイダーアーキテクチャ設計書](./docs/02_domain/architecture/providers-architecture.md) - プロバイダーコンポーネントの設計と実装
 - [プロバイダーリファクタリング実施報告](./docs/02_domain/architecture/providers-refactoring-report.md) - プロバイダーリファクタリングの実施内容と成果
 
+### 地図可視化・地理データ
+
+- [Geoshape データソース仕様書](./docs/02_domain/visualization/specifications/geoshape-data-source.md) - Geoshape データセットの統合仕様
+- [TopoJSON/GeoJSON アダプター実装仕様](./docs/02_domain/visualization/implementation/topojson-geojson-adapter.md) - TopoJSON から GeoJSON への変換実装
+- [行政区域データ管理仕様](./docs/02_domain/area/specifications/administrative-boundary-data.md) - 行政区域データの管理方針と実装
+- [Leaflet 統合実装ガイド](./docs/02_domain/visualization/implementation/leaflet-integration-guide.md) - Leaflet 地図ライブラリの統合実装
+
 ### その他
 
 - [ドキュメント目次](./doc/README.md) - 全ドキュメントの一覧

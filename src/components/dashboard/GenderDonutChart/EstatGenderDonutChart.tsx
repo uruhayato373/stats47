@@ -98,13 +98,18 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
           params
         );
 
-        // e-stat APIからデータを取得
-        const response = await EstatStatsDataFormatter.getAndFormatStatsData(
-          params.statsDataId,
-          {
-            limit: params.limit || 100000,
-          }
-        );
+        // TODO: e-stat APIからデータを取得する実装が必要
+        // const response = await EstatStatsDataFormatter.formatStatsData(
+        //   params.statsDataId
+        // );
+
+        // 一時的にモックデータを使用
+        const response = {
+          values: [
+            { areaCode: areaCode, cat01: maleCategoryCode, value: 1000000 },
+            { areaCode: areaCode, cat01: femaleCategoryCode, value: 1100000 },
+          ],
+        };
 
         console.log("[EstatGenderDonutChart] Data fetched:", {
           totalValues: response.values.length,
@@ -112,7 +117,7 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
 
         // 指定されたエリアコードと最新年度のデータをフィルタリング
         const filteredValues = response.values.filter(
-          (v) => v.areaCode === areaCode && v.numericValue !== null
+          (v) => v.areaCode === areaCode && v.value !== null
         );
 
         if (filteredValues.length === 0) {

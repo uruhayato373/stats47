@@ -1,5 +1,5 @@
 export { CategoryIcon } from "./CategoryIcon";
-export { ColorSchemeSelector } from "./ColorSchemeSelector";
+export { default as ColorSchemeSelector } from "./ColorSchemeSelector";
 export { ThemeToggleButton } from "./ThemeToggleButton";
 
 // DataTable

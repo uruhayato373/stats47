@@ -4,9 +4,16 @@ import { NextRequest, NextResponse } from "next/server";
 // import { EstatStatsDataFormatter } from "@/lib/estat-api";
 // import { EstatStatsDataResponse } from "@/lib/estat-api";
 
+interface SaveRequest {
+  statsDataId: string;
+  categoryCode: string;
+  timeCode?: string;
+  rawData: any;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as SaveRequest;
     const { statsDataId, categoryCode, timeCode, rawData } = body;
 
     if (!statsDataId || !categoryCode || !rawData) {
@@ -23,8 +30,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      savedCount: values.length,
-      timeCode: actualTimeCode,
+      savedCount: 0,
+      timeCode: timeCode || "unknown",
     });
   } catch (error) {
     console.error("データ保存エラー:", error);

@@ -87,7 +87,7 @@ export async function PATCH(
     return NextResponse.json({
       success: true,
       message: "Visualization settings updated successfully",
-      changes: result.meta?.changes || 0,
+      changes: (result as any).meta?.changes || 0,
     });
   } catch (error) {
     console.error("Error updating visualization settings:", error);
