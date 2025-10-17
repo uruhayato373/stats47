@@ -5,4 +5,3 @@ export { default as JsonDisplay } from "./components/JsonDisplay";
 export { default as UnifiedClassificationTabs } from "./components/UnifiedClassificationTabs";
 export { default as MetaInfoHeader } from "./components/MetaInfoHeader";
 export { default as SaveButton } from "./components/SaveButton";
-export * from "./hooks";

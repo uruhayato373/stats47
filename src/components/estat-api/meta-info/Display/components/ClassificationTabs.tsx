@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import PaginatedTable from "./PaginatedTable";
-import { safeRender } from "../utils/helpers";
+import { safeRender } from "@/lib/estat-api/meta-info";
 
 interface ClassificationTabsProps {
   classObjs: Array<{

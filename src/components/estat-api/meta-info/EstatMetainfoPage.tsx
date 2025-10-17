@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import {
-  EstatMetaInfoPageHeader,
   EstatMetaInfoFetcher,
   EstatMetaInfoDisplay,
 } from "@/components/estat-api/meta-info";
+import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
 import { EstatMetaInfoSidebar } from "@/components/estat-api/meta-info";
 import {
   estatAPI,

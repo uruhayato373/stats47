@@ -7,7 +7,10 @@ import { useStyles } from "@/hooks/useStyles";
 import JsonDisplay from "./components/JsonDisplay";
 import MetaInfoHeader from "./components/MetaInfoHeader";
 import UnifiedClassificationTabs from "./components/UnifiedClassificationTabs";
-import { useMetaInfoSave, useMetaInfoDownload } from "./hooks";
+import {
+  useMetaInfoSave,
+  useMetaInfoDownload,
+} from "@/hooks/estat-api/meta-info";
 
 interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;

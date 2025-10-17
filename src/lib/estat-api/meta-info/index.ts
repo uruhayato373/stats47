@@ -14,3 +14,6 @@ export { EstatIdUtils } from "./id-utils";
 export { EstatMetaInfoFormatter } from "./formatter";
 export { EstatMetaInfoFetcher } from "./fetcher";
 export { EstatMetaInfoBatchProcessor } from "./batch-processor";
+
+// ユーティリティ関数
+export * from "./utils";

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
-import { safeRender } from "../utils/helpers";
+import { safeRender } from "@/lib/estat-api/meta-info";
 import SaveButton from "./SaveButton";
 
 interface MetaInfoHeaderProps {

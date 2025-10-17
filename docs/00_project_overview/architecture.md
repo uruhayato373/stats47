@@ -291,6 +291,7 @@ src/
 - `organisms/auth/LoginForm`: 認証フォーム + バリデーション（認証ロジック）
 - `organisms/area/RegionSelector`: 地域選択 + 階層表示（地域データの管理）
 - `organisms/estat-api/EstatDataTable`: データテーブル + フィルター（e-Stat データの処理）
+- `organisms/estat-api/EstatMetaInfoPageHeader`: e-Stat メタ情報ページ専用ヘッダー
 - `organisms/ranking/RankingTable`: ランキング表示 + ソート（ランキングロジック）
 - `organisms/visualization/ChoroplethMap`: 地図 + 凡例（地理データの可視化）
 - `organisms/dashboard/Dashboard`: 統計カード + チャート（ダッシュボードロジック）
@@ -329,6 +330,31 @@ src/
 - `HomePage`: ホームテンプレート + 統計データ
 - `DashboardPage`: ダッシュボードテンプレート + 地域データ
 - `RankingPage`: ランキングテンプレート + ランキングデータ
+
+### ページ固有コンポーネントの配置ルール
+
+ページ専用のヘッダーやコンテナなど、特定のページでのみ使用されるコンポーネントであっても、
+**ドメイン知識とビジネスロジックを持つ場合は Organism**として配置します。
+
+**正しい配置**:
+
+- `organisms/estat-api/EstatMetaInfoPageHeader/` - e-Stat メタ情報ページのヘッダー
+- `organisms/ranking/RankingSettingsHeader/` - ランキング設定ページのヘッダー
+
+**誤った配置**:
+
+- `estat-api/meta-info/Header/` - 機能ディレクトリ内の Header（アトミック階層が不明確）
+- `pages/*/Header/` - ページディレクトリ内のコンポーネント（再利用性の欠如）
+
+**判断基準**:
+
+1. **ドメイン知識を持つか** - 特定のビジネス領域の知識を含む
+2. **ビジネスロジックを含むか** - データの処理や状態管理を行う
+3. **複数の Molecule を組み合わせているか** - 複雑な UI 構造を持つ
+4. **ページの主要セクションを構成するか** - ページの重要な部分を担当する
+
+これらの条件を満たす場合は、たとえ特定のページでのみ使用されるコンポーネントであっても、
+アトミックデザインの Organism レイヤーに配置し、適切な命名規則に従います。
 
 ## e-Stat API 統合アーキテクチャ
 
