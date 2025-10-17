@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
-import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
+import { EstatGenderDonutChart } from "@/components/organisms/estat-api/EstatGenderDonutChart";
 
 type RankingTab = "total" | "china" | "korea" | "philippines" | "brazil";
 
