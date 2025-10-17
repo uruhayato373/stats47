@@ -1,11 +1,7 @@
-"use client";
+import React from "react";
+import { PaginatedTable } from "@/components/molecules/PaginatedTable";
 
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import PaginatedTable from "./PaginatedTable";
-import { safeRender } from "@/lib/estat-api/meta-info";
-
-interface ClassificationTabsProps {
+interface EstatUnifiedClassificationTabsProps {
   classObjs: Array<{
     "@id": string;
     "@name": string;
@@ -26,28 +22,29 @@ interface ClassificationTabsProps {
   metaInfoId?: string;
 }
 
-export default function ClassificationTabs({
+export default function EstatUnifiedClassificationTabs({
   classObjs,
   metaInfoId,
-}: ClassificationTabsProps) {
+}: EstatUnifiedClassificationTabsProps) {
   if (!classObjs || classObjs.length === 0) return null;
 
-  // カテゴリデータのみを取得
   const categoryData = classObjs.find((obj) => obj["@id"] === "cat01");
 
-  const getCategoryTableData = (classObj: typeof categoryData) => {
+  const getTableData = (classObj: typeof categoryData) => {
     if (!classObj || !classObj.CLASS) return [];
     return Array.isArray(classObj.CLASS) ? classObj.CLASS : [classObj.CLASS];
   };
 
-  // カテゴリデータがない場合は何も表示しない
   if (!categoryData) return null;
 
   return (
-    <PaginatedTable
-      data={getCategoryTableData(categoryData)}
-      itemsPerPage={15}
-      metaInfoId={metaInfoId}
-    />
+    <div className="border-t border-b border-gray-50 dark:border-neutral-800">
+      <PaginatedTable
+        data={getTableData(categoryData)}
+        itemsPerPage={10}
+        metaInfoId={metaInfoId}
+        showUnit={true}
+      />
+    </div>
   );
 }

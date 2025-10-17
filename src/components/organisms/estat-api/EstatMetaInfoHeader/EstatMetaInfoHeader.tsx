@@ -3,9 +3,9 @@
 import React from "react";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { safeRender } from "@/lib/estat-api/meta-info";
-import SaveButton from "./SaveButton";
+import { SaveButton } from "@/components/atoms/SaveButton";
 
-interface MetaInfoHeaderProps {
+interface EstatMetaInfoHeaderProps {
   metaInfo: EstatMetaInfoResponse;
   onSave: () => void;
   saving: boolean;
@@ -15,12 +15,12 @@ interface MetaInfoHeaderProps {
   } | null;
 }
 
-export default function MetaInfoHeader({
+export default function EstatMetaInfoHeader({
   metaInfo,
   onSave,
   saving,
   saveResult,
-}: MetaInfoHeaderProps) {
+}: EstatMetaInfoHeaderProps) {
   const { GET_META_INFO } = metaInfo;
   const { TABLE_INF } = GET_META_INFO.METADATA_INF;
 

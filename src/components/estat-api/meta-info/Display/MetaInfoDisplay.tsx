@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Code, Tag } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { useStyles } from "@/hooks/useStyles";
-import JsonDisplay from "./components/JsonDisplay";
-import MetaInfoHeader from "./components/MetaInfoHeader";
-import UnifiedClassificationTabs from "./components/UnifiedClassificationTabs";
+import { JsonDisplay } from "@/components/molecules/JsonDisplay";
+import { EstatMetaInfoHeader } from "@/components/organisms/estat-api/EstatMetaInfoHeader";
+import { EstatUnifiedClassificationTabs } from "@/components/organisms/estat-api/EstatUnifiedClassificationTabs";
 import {
   useMetaInfoSave,
   useMetaInfoDownload,
@@ -120,7 +120,7 @@ export default function EstatMetaInfoDisplay({
   return (
     <div className="space-y-6">
       {/* ヘッダー部分 */}
-      <MetaInfoHeader
+      <EstatMetaInfoHeader
         metaInfo={metaInfo}
         onSave={handleSave}
         saving={saving}
@@ -161,7 +161,7 @@ export default function EstatMetaInfoDisplay({
           CLASS_INF &&
           CLASS_INF.CLASS_OBJ &&
           CLASS_INF.CLASS_OBJ.length > 0 && (
-            <UnifiedClassificationTabs
+            <EstatUnifiedClassificationTabs
               classObjs={CLASS_INF.CLASS_OBJ}
               metaInfoId={metaInfoId}
             />
