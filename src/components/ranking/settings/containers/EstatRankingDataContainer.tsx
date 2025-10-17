@@ -7,7 +7,7 @@ import {
 } from "@/lib/estat-api";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
-import { EstatYearSelector } from "@/components/estat-api/EstatYearSelector";
+import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";

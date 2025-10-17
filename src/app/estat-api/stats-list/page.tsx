@@ -1,4 +1,4 @@
-import { EstatAPIStatsListPage } from "@/components/estat-api/stats-list";
+import { EstatAPIStatsListPage } from "@/components/pages/EstatAPIStatsListPage";
 
 export default function StatsListPage() {
   return <EstatAPIStatsListPage />;

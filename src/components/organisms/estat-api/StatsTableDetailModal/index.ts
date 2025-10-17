@@ -1,0 +1,1 @@
+export { StatsTableDetailModal } from "./StatsTableDetailModal";

@@ -13,11 +13,11 @@ import {
   AdvancedStatsListSearchOptions,
   StatsFieldCode,
 } from "@/lib/estat-api/types/stats-list";
-import { StatsListSearch } from "./StatsListSearch";
-import { AdvancedStatsListSearch } from "./AdvancedStatsListSearch";
-import { StatsListResults } from "./StatsListResults";
-import { StatsTableDetailModal } from "./StatsTableDetailModal";
-import { StatsFieldNavigation } from "./StatsFieldNavigation";
+import { StatsListSearch } from "@/components/molecules/StatsListSearch";
+import { AdvancedStatsListSearch } from "@/components/molecules/AdvancedStatsListSearch";
+import { StatsListResults } from "@/components/organisms/estat-api/StatsListResults";
+import { StatsTableDetailModal } from "@/components/organisms/estat-api/StatsTableDetailModal";
+import { StatsFieldNavigation } from "@/components/organisms/estat-api/StatsFieldNavigation";
 import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
 
 interface EstatAPIStatsListPageProps {
@@ -172,7 +172,7 @@ export function EstatAPIStatsListPage({
         {showFieldNavigation && (
           <div className="mb-6">
             <StatsFieldNavigation
-              onSelectField={handleFieldSelect}
+              onFieldSelect={handleFieldSelect}
               selectedField={selectedField}
             />
           </div>
