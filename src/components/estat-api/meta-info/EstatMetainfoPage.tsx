@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { EstatMetaInfoFetcher } from "@/components/molecules/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/templates/EstatMetaInfoDisplay";
 import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
-import { EstatMetaInfoSidebar } from "@/components/estat-api/meta-info";
+import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/EstatMetaInfoSidebar";
 import {
   estatAPI,
   EstatMetaInfoResponse,
