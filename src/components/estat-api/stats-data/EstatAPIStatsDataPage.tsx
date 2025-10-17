@@ -14,7 +14,7 @@
 
 import { useState } from "react";
 import { RefreshCw, Database, ExternalLink } from "lucide-react";
-import { EstatDataFetcher } from "@/components/estat-api/stats-data";
+import { EstatDataFetcher } from "@/components/molecules/EstatDataFetcher";
 import { EstatDataDisplay } from "@/components/templates/EstatDataDisplay";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
 
