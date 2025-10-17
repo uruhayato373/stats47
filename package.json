@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "echo 'Please use dev:api or dev:mock instead of dev' && exit 1",
     "dev:api": "cross-env NODE_ENV=development next dev --turbopack",
     "dev:mock": "cross-env NODE_ENV=development NEXT_PUBLIC_ENV=mock next dev --turbopack",
     "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=staging next dev --turbopack",

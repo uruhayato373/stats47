@@ -24,31 +24,36 @@ tags:
 **D3.js** (推奨)
 
 **理由**:
-- GeoJSONデータの処理に最適
+
+- GeoJSON データの処理に最適
 - 地図投影の柔軟な制御
 - 複雑なインタラクション実装が容易
-- SVGベースで高品質な描画
+- SVG ベースで高品質な描画
 
 ## 主要機能
 
 ### 1. 地域レベル表示
-- **都道府県レベル**: 47都道府県の表示
-- **市区町村レベル**: 約1,700市区町村の表示
+
+- **都道府県レベル**: 47 都道府県の表示
+- **市区町村レベル**: 約 1,700 市区町村の表示
 - **レベル切り替え**: 動的な表示レベルの変更
 
 ### 2. インタラクション
+
 - **ズーム・パン**: マウスホイール・ドラッグ操作
 - **ホバー効果**: マウスオーバー時の詳細表示
 - **クリック操作**: 地域選択・詳細ページ遷移
 - **タッチ操作**: モバイルデバイス対応
 
 ### 3. データ表示
+
 - **色分け表示**: データ値に応じた色の濃淡
 - **凡例表示**: 色と値の対応関係
 - **ツールチップ**: 詳細情報のポップアップ表示
 - **ラベル表示**: 地域名・値の表示
 
 ### 4. カスタマイズ
+
 - **カラースキーム**: 複数の色パレット選択
 - **分岐点設定**: 色の分岐点（ゼロ、平均、中央値）
 - **表示オプション**: 境界線、ラベル、凡例の表示制御
@@ -59,34 +64,34 @@ tags:
 
 ```typescript
 interface ChoroplethData {
-  areaCode: string;        // 地域コード（都道府県: 2桁、市区町村: 5桁）
-  areaName: string;        // 地域名
-  value: number;           // データ値
-  rank?: number;           // ランキング順位
-  percentile?: number;     // パーセンタイル
+  areaCode: string; // 地域コード（都道府県: 2桁、市区町村: 5桁）
+  areaName: string; // 地域名
+  value: number; // データ値
+  rank?: number; // ランキング順位
+  percentile?: number; // パーセンタイル
   parentAreaCode?: string; // 親地域コード（市区町村の場合）
   parentAreaName?: string; // 親地域名
 }
 
 interface ChoroplethConfig {
-  level: 'prefecture' | 'municipality';
-  colorScheme: string;     // カラースキーム名
-  divergingMidpoint: 'zero' | 'mean' | 'median' | number;
-  showLabels: boolean;     // ラベル表示フラグ
-  showLegend: boolean;     // 凡例表示フラグ
+  level: "prefecture" | "municipality";
+  colorScheme: string; // カラースキーム名
+  divergingMidpoint: "zero" | "mean" | "median" | number;
+  showLabels: boolean; // ラベル表示フラグ
+  showLegend: boolean; // 凡例表示フラグ
   showBoundaries: boolean; // 境界線表示フラグ
 }
 ```
 
-### GeoJSONデータ
+### GeoJSON データ
 
 ```typescript
 interface GeoJSONFeature {
   type: "Feature";
   properties: {
-    code: string;          // 地域コード
-    name: string;          // 地域名
-    [key: string]: any;    // その他の属性
+    code: string; // 地域コード
+    name: string; // 地域名
+    [key: string]: any; // その他の属性
   };
   geometry: {
     type: "Polygon" | "MultiPolygon";
@@ -124,7 +129,7 @@ export function ChoroplethMap({
   height = 600,
   onAreaClick,
   onAreaHover,
-  className
+  className,
 }: ChoroplethMapProps) {
   // 実装
 }
@@ -134,28 +139,20 @@ export function ChoroplethMap({
 
 ```typescript
 // 凡例コンポーネント
-export function ChoroplethLegend({ 
-  scale, 
-  title, 
-  className 
-}: LegendProps) {
+export function ChoroplethLegend({ scale, title, className }: LegendProps) {
   // 実装
 }
 
 // ツールチップコンポーネント
-export function ChoroplethTooltip({ 
-  data, 
-  position, 
-  visible 
-}: TooltipProps) {
+export function ChoroplethTooltip({ data, position, visible }: TooltipProps) {
   // 実装
 }
 
 // ズームコントロール
-export function ZoomControls({ 
-  onZoomIn, 
-  onZoomOut, 
-  onReset 
+export function ZoomControls({
+  onZoomIn,
+  onZoomOut,
+  onReset,
 }: ZoomControlsProps) {
   // 実装
 }
@@ -169,13 +166,14 @@ export function ZoomControls({
 // src/lib/visualization/d3js/choropleth/projection.ts
 
 export function createProjection(
-  width: number, 
-  height: number, 
-  level: 'prefecture' | 'municipality'
+  width: number,
+  height: number,
+  level: "prefecture" | "municipality"
 ): d3.GeoProjection {
-  const projection = d3.geoMercator()
+  const projection = d3
+    .geoMercator()
     .center([138, 38]) // 日本の中心
-    .scale(level === 'prefecture' ? 1000 : 2000)
+    .scale(level === "prefecture" ? 1000 : 2000)
     .translate([width / 2, height / 2]);
 
   return projection;
@@ -190,19 +188,19 @@ export function createProjection(
 export function createColorScale(
   data: ChoroplethData[],
   colorScheme: string,
-  divergingMidpoint: 'zero' | 'mean' | 'median' | number
+  divergingMidpoint: "zero" | "mean" | "median" | number
 ): d3.ScaleSequential<string> {
-  const values = data.map(d => d.value);
+  const values = data.map((d) => d.value);
   const min = d3.min(values) || 0;
   const max = d3.max(values) || 0;
-  
+
   let domain: [number, number];
-  if (divergingMidpoint === 'zero') {
+  if (divergingMidpoint === "zero") {
     domain = [0, max];
-  } else if (divergingMidpoint === 'mean') {
+  } else if (divergingMidpoint === "mean") {
     const mean = d3.mean(values) || 0;
     domain = [min, mean, max];
-  } else if (divergingMidpoint === 'median') {
+  } else if (divergingMidpoint === "median") {
     const median = d3.median(values) || 0;
     domain = [min, median, max];
   } else {
@@ -210,10 +208,8 @@ export function createColorScale(
   }
 
   const interpolator = getColorInterpolator(colorScheme);
-  
-  return d3.scaleSequential()
-    .domain(domain)
-    .interpolator(interpolator);
+
+  return d3.scaleSequential().domain(domain).interpolator(interpolator);
 }
 ```
 
@@ -229,25 +225,26 @@ export function setupInteractions(
   onAreaHover?: (area: ChoroplethData | null) => void
 ) {
   // ズーム・パン設定
-  const zoom = d3.zoom<SVGSVGElement, unknown>()
+  const zoom = d3
+    .zoom<SVGSVGElement, unknown>()
     .scaleExtent([0.5, 5])
     .on("zoom", (event) => {
-      svg.selectAll("path")
-        .attr("transform", event.transform);
+      svg.selectAll("path").attr("transform", event.transform);
     });
 
   svg.call(zoom);
 
   // 地域クリック・ホバー処理
-  svg.selectAll("path")
+  svg
+    .selectAll("path")
     .on("click", (event, d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
       if (areaData) {
         onAreaClick?.(areaData);
       }
     })
     .on("mouseover", (event, d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
       if (areaData) {
         onAreaHover?.(areaData);
       }
@@ -266,11 +263,11 @@ export function setupInteractions(
 // 大量データの処理
 export function optimizeChoroplethData(
   data: ChoroplethData[],
-  level: 'prefecture' | 'municipality'
+  level: "prefecture" | "municipality"
 ): ChoroplethData[] {
   // 表示レベルに応じたフィルタリング
-  const filteredData = data.filter(item => {
-    if (level === 'prefecture') {
+  const filteredData = data.filter((item) => {
+    if (level === "prefecture") {
       return item.areaCode.length === 2;
     } else {
       return item.areaCode.length === 5;
@@ -278,9 +275,9 @@ export function optimizeChoroplethData(
   });
 
   // 値の正規化
-  return filteredData.map(item => ({
+  return filteredData.map((item) => ({
     ...item,
-    normalizedValue: normalizeValue(item.value, filteredData)
+    normalizedValue: normalizeValue(item.value, filteredData),
   }));
 }
 ```
@@ -294,13 +291,11 @@ export function useVirtualizedChoropleth(
   containerSize: { width: number; height: number }
 ) {
   const [visibleData, setVisibleData] = useState<ChoroplethData[]>([]);
-  
+
   useEffect(() => {
     // 表示範囲内のデータのみを計算
     const bounds = calculateVisibleBounds(containerSize);
-    const filtered = data.filter(item => 
-      isInBounds(item, bounds)
-    );
+    const filtered = data.filter((item) => isInBounds(item, bounds));
     setVisibleData(filtered);
   }, [data, containerSize]);
 
@@ -332,7 +327,7 @@ export function setupKeyboardNavigation(
         onAreaClick?.(selectedArea);
         break;
     }
-    
+
     updateSelection(selectedIndex);
   });
 }
@@ -346,16 +341,16 @@ export function setupScreenReaderSupport(
   data: ChoroplethData[]
 ) {
   // ARIA属性の設定
-  svg.attr("role", "img")
-     .attr("aria-label", "都道府県別データマップ");
+  svg.attr("role", "img").attr("aria-label", "都道府県別データマップ");
 
   // 各地域にARIA属性を追加
-  svg.selectAll("path")
+  svg
+    .selectAll("path")
     .attr("role", "button")
     .attr("tabindex", 0)
     .attr("aria-label", (d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
-      return areaData 
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
+      return areaData
         ? `${areaData.areaName}: ${areaData.value}`
         : d.properties.name;
     });
@@ -372,12 +367,12 @@ export function setupScreenReaderSupport(
 describe("ChoroplethMap", () => {
   const mockData: ChoroplethData[] = [
     { areaCode: "01", areaName: "北海道", value: 100 },
-    { areaCode: "13", areaName: "東京都", value: 200 }
+    { areaCode: "13", areaName: "東京都", value: 200 },
   ];
 
   it("renders map with data", () => {
     render(<ChoroplethMap data={mockData} config={defaultConfig} />);
-    
+
     const svg = screen.getByRole("img");
     expect(svg).toBeInTheDocument();
   });
@@ -385,17 +380,17 @@ describe("ChoroplethMap", () => {
   it("handles area click events", () => {
     const onAreaClick = jest.fn();
     render(
-      <ChoroplethMap 
-        data={mockData} 
+      <ChoroplethMap
+        data={mockData}
         config={defaultConfig}
         onAreaClick={onAreaClick}
       />
     );
-    
+
     // クリックイベントのテスト
     const paths = screen.getAllByRole("button");
     fireEvent.click(paths[0]);
-    
+
     expect(onAreaClick).toHaveBeenCalledWith(mockData[0]);
   });
 });
@@ -409,7 +404,7 @@ describe("ChoroplethMap Visual Regression", () => {
     const { container } = render(
       <ChoroplethMap data={mockData} config={defaultConfig} />
     );
-    
+
     expect(container.firstChild).toMatchSnapshot();
   });
 });
@@ -419,15 +414,16 @@ describe("ChoroplethMap Visual Regression", () => {
 
 - `src/components/charts/d3js/ChoroplethMap.tsx`
 - `src/lib/visualization/d3js/choropleth/`
-- `src/data/geojson/` (GeoJSONデータ)
+- `src/data/geojson/` (GeoJSON データ)
 
 ## 関連ドキュメント
 
-- [D3.js実装ガイド](d3js-implementation-guide.md)
+- [D3.js 実装ガイド](d3js-implementation-guide.md)
 - [アクセシビリティガイド](accessibility.md)
-- [既存のD3.jsコロプレスガイド](../../../01_development_guide/07_d3js_choropleth_guide.md)
+- [既存の D3.js コロプレスガイド](../../implementation/d3js/d3js_choropleth_guide.md)
 
 ---
 
 **更新履歴**:
+
 - 2025-10-16: 初版作成

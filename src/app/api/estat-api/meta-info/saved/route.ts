@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "50");
     const search = searchParams.get("search") || "";
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
     const offset = (page - 1) * limit;
 
     // 効率的なクエリ：DISTINCT stats_data_idのみを取得し、必要な基本情報をGROUP BYで集約

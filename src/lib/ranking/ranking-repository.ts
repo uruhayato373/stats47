@@ -8,7 +8,9 @@
  * - テスト容易性の向上
  */
 
-import { createLocalD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
+import { mockDataProvider } from "@/lib/database/mock";
+import { getEnvironmentConfig } from "@/lib/env";
 import { QUERIES } from "./ranking-queries";
 import { RankingItem, RankingItemDB } from "@/types/models/ranking";
 import { convertRankingItemFromDB } from "./ranking-converters";
@@ -32,6 +34,104 @@ export class RankingRepository {
 
   constructor(db: D1Database) {
     this.db = db;
+  }
+
+  /**
+   * 環境に応じた適切なリポジトリインスタンスを作成
+   * ファクトリーメソッド
+   */
+  static async create(): Promise<RankingRepository> {
+    const config = getEnvironmentConfig();
+
+    if (config.isMock) {
+      console.log(`[${config.environment}] Creating RankingRepository with mock provider`);
+      return new RankingRepository(mockDataProvider as any);
+    }
+
+    console.log(`[${config.environment}] Creating RankingRepository with database provider`);
+    const db = await getDataProvider();
+    return new RankingRepository(db);
+  }
+
+  /**
+   * ranking_itemsテーブルからデータを取得
+   * database/index.ts の fetchRankingItems() を置き換え
+   */
+  async fetchRankingItems(options?: {
+    limit?: number;
+  }): Promise<any[]> {
+    const config = getEnvironmentConfig();
+    const { limit = 10 } = options || {};
+
+    try {
+      // Mock環境
+      if (config.isMock) {
+        console.log(
+          `[${config.environment}] Fetching ranking items from mock data...`
+        );
+        return await mockDataProvider.fetchRankingItems(options);
+      }
+
+      // Development/Staging/Production環境
+      console.log(
+        `[${config.environment}] Fetching ranking items from database...`
+      );
+      const result = await this.db
+        .prepare(`SELECT * FROM ranking_items LIMIT ${limit}`)
+        .all();
+
+      return result.results;
+    } catch (error) {
+      console.error("Failed to fetch ranking items:", error);
+      return [];
+    }
+  }
+
+  /**
+   * ranking_valuesテーブルからデータを取得
+   * database/index.ts の fetchRankingValues() を置き換え
+   */
+  async fetchRankingValues(options?: {
+    limit?: number;
+    rankingKey?: string;
+  }): Promise<any[]> {
+    const config = getEnvironmentConfig();
+    const { limit = 50, rankingKey } = options || {};
+
+    try {
+      // Mock環境
+      if (config.isMock) {
+        console.log(
+          `[${config.environment}] Fetching ranking values from mock data...`
+        );
+        return await mockDataProvider.fetchRankingValues(options);
+      }
+
+      // Development/Staging/Production環境
+      console.log(
+        `[${config.environment}] Fetching ranking values from database...`
+      );
+
+      let query = `SELECT * FROM ranking_values`;
+      const params: any[] = [];
+
+      if (rankingKey) {
+        query += ` WHERE ranking_key = ?`;
+        params.push(rankingKey);
+      }
+
+      query += ` LIMIT ${limit}`;
+
+      const result = await this.db
+        .prepare(query)
+        .bind(...params)
+        .all();
+
+      return result.results;
+    } catch (error) {
+      console.error("Failed to fetch ranking values:", error);
+      return [];
+    }
   }
 
   /**
@@ -210,8 +310,8 @@ export class RankingRepository {
 
 /**
  * ランキングリポジトリのインスタンスを作成
+ * @deprecated 新しいコードでは RankingRepository.create() を使用してください
  */
 export async function createRankingRepository(): Promise<RankingRepository> {
-  const db = await createLocalD1Database();
-  return new RankingRepository(db);
+  return await RankingRepository.create();
 }

@@ -52,11 +52,11 @@ tags:
 - [testing_guide.md](./01_development_guide/testing_guide.md) - テストガイド
 - [seo_guide.md](./01_development_guide/seo_guide.md) - SEO ガイド
 - [storybook_guide.md](./01_development_guide/storybook_guide.md) - Storybook ガイド
-- [d3js_choropleth_guide.md](./01_development_guide/d3js_choropleth_guide.md) - D3.js コロプレス地図ガイド
+- [d3js_choropleth_guide.md](./02_domain/visualization/implementation/d3js/d3js_choropleth_guide.md) - D3.js コロプレス地図ガイド
 - [deployment_guide.md](./01_development_guide/deployment_guide.md) - デプロイメントガイド
 - [environment_variables.md](./01_development_guide/environment_variables.md) - 環境変数設定ガイド
 - [performance_optimization.md](./01_development_guide/performance_optimization.md) - パフォーマンス最適化ガイド
-- [engagement_features.md](./01_development_guide/engagement_features.md) - エンゲージメント機能ガイド
+- [engagement-features-guide.md](./02_domain/blog/features/engagement-features-guide.md) - エンゲージメント機能ガイド
 - [documentation_management.md](./01_development_guide/documentation_management.md) - ドキュメント管理ルール
 - [large_scale_implementation.md](./01_development_guide/large_scale_implementation.md) - 大規模プロジェクト実装ガイド
 - [data-fetching-strategy.md](./01_development_guide/data-fetching-strategy.md) - データフェッチング戦略
@@ -137,6 +137,16 @@ tags:
 データベース設計と管理
 
 - [specifications/](./02_domain/database/specifications/) - データベース仕様
+  - [database-design.md](./02_domain/database/specifications/database-design.md) - データベース設計書
+  - [schema-reference.md](./02_domain/database/specifications/schema-reference.md) - スキーマリファレンス
+  - [migration-guide.md](./02_domain/database/specifications/migration-guide.md) - マイグレーションガイド
+- [implementation/](./02_domain/database/implementation/) - データベース実装
+  - [development-setup.md](./02_domain/database/implementation/development-setup.md) - 開発環境セットアップ
+  - [query-patterns.md](./02_domain/database/implementation/query-patterns.md) - クエリパターン集
+  - [best-practices.md](./02_domain/database/implementation/best-practices.md) - ベストプラクティス
+- [operations/](./02_domain/database/operations/) - データベース運用
+  - [backup-restore.md](./02_domain/database/operations/backup-restore.md) - バックアップ・リストアガイド
+  - [troubleshooting.md](./02_domain/database/operations/troubleshooting.md) - トラブルシューティングガイド
 - [refactoring/](./02_domain/database/refactoring/) - データベースリファクタリング
 
 #### e-Stat API ドメイン (estat-api)
@@ -176,7 +186,7 @@ tags:
 
 機能別ドキュメント
 
-- [comments/](./03_features/comments/) - コメント機能
+- [comments-guide.md](./02_domain/blog/features/comments-guide.md) - コメント機能
 - [image-generation/](./03_features/image-generation/) - 画像生成機能
 - [related-articles/](./03_features/related-articles/) - 関連記事機能
 - [sns/](./03_features/sns/) - SNS 連携機能

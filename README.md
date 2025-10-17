@@ -165,8 +165,11 @@ npx wrangler d1 execute stats47 --local --file=./database/schemas/main.sql
 # リモート環境へのスキーマ適用
 npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql
 
-# 開発サーバー起動
-npm run dev
+# 開発サーバー起動（API接続あり）
+npm run dev:api
+
+# または、モックデータを使用した開発環境
+npm run dev:mock
 ```
 
 ## 📚 ドキュメント
@@ -254,8 +257,13 @@ npm run dev
    ```
 
 5. **開発サーバーの起動**
+
    ```bash
-   npm run dev
+   # API接続ありの開発環境
+   npm run dev:api
+
+   # モックデータを使用した開発環境（デザイン検証用）
+   npm run dev:mock
    ```
 
 ## 環境設定

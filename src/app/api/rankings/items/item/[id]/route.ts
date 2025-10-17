@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 import { auth } from "@/lib/auth/auth";
 
 export async function PUT(
@@ -34,7 +34,7 @@ export async function PUT(
       );
     }
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     const query = `
       UPDATE ranking_items
@@ -89,7 +89,7 @@ export async function DELETE(
 
   try {
     const { id } = await params;
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // ソフトデリート
     const query = `

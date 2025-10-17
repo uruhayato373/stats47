@@ -72,21 +72,38 @@ CREATE TABLE users (
 
 #### estat_metainfo テーブル
 
-e-Stat API から取得したメタ情報を保存するテーブルです。
+e-Stat API から取得した統計表のメタ情報を保存するテーブルです。
 
 ```sql
 CREATE TABLE estat_metainfo (
-  id TEXT PRIMARY KEY,
-  stats_data_id TEXT NOT NULL,
-  cat01 TEXT NOT NULL,
-  stat_name TEXT NOT NULL,
-  title TEXT NOT NULL,
-  unit TEXT,
-  item_name TEXT,
+  stats_data_id TEXT PRIMARY KEY,        -- 統計表ID（主キー）
+  stat_name TEXT NOT NULL,               -- 統計調査名
+  title TEXT NOT NULL,                   -- 統計表タイトル
+  gov_org TEXT,                          -- 提供機関
+  cycle TEXT,                            -- 調査周期
+  survey_date TEXT,                      -- 調査年月
+  description TEXT,                      -- 説明
+  last_fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+**設計方針**:
+
+- 統計表レベル（`stats_data_id`）での管理
+- 1 つの統計表 = 1 レコード
+- 項目レベル（`cat01`）の情報は保持しない
+- ランキング機能とは完全分離
+
+**フィールド説明**:
+
+- `stats_data_id`: 統計表 ID（主キー）
+- `stat_name`: 統計調査名（例: "人口推計"）
+- `title`: 統計表タイトル（例: "人口推計（2020 年）"）
+- `gov_org`: 提供機関（例: "総務省統計局"）
+- `cycle`: 調査周期（例: "年次"）
+- `survey_date`: 調査年月（例: "2020-10"）
 
 #### estat_data_history テーブル
 
@@ -208,9 +225,8 @@ ORDER BY sc.id, ri.display_order;
 CREATE TABLE IF NOT EXISTS ranking_visualizations (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-  -- データ識別（複合キー）
+  -- データ識別
   stats_data_id TEXT NOT NULL,         -- 統計表ID
-  cat01 TEXT NOT NULL,                 -- カテゴリコード（estat_metainfoのcat01と対応）
 
   -- 地図可視化設定
   map_color_scheme TEXT DEFAULT 'interpolateBlues',
@@ -251,7 +267,7 @@ SELECT
   m.unit as original_unit,
   m.item_name
 FROM ranking_visualizations rv
-LEFT JOIN estat_metainfo m ON rv.stats_data_id = m.stats_data_id AND rv.cat01 = m.cat01;
+LEFT JOIN estat_metainfo m ON rv.stats_data_id = m.stats_data_id;
 ```
 
 #### 設計方針
@@ -299,8 +315,10 @@ LEFT JOIN estat_metainfo m ON rv.stats_data_id = m.stats_data_id AND rv.cat01 = 
 CREATE INDEX idx_users_email ON users(email);
 
 -- e-Statメタデータ
-CREATE INDEX idx_estat_metainfo_stats_id ON estat_metainfo(stats_data_id);
-CREATE INDEX idx_estat_metainfo_cat01 ON estat_metainfo(cat01);
+CREATE INDEX idx_estat_metainfo_stat_name ON estat_metainfo(stat_name);
+CREATE INDEX idx_estat_metainfo_title ON estat_metainfo(title);
+CREATE INDEX idx_estat_metainfo_gov_org ON estat_metainfo(gov_org);
+CREATE INDEX idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
 
 -- ランキング設定
 CREATE INDEX idx_ranking_items_subcategory ON ranking_items(subcategory_id);
@@ -308,8 +326,6 @@ CREATE INDEX idx_ranking_items_active ON ranking_items(is_active);
 
 -- 地図可視化設定
 CREATE INDEX idx_ranking_viz_stats_id ON ranking_visualizations(stats_data_id);
-CREATE INDEX idx_ranking_viz_cat01 ON ranking_visualizations(cat01);
-CREATE UNIQUE INDEX idx_ranking_viz_composite ON ranking_visualizations(stats_data_id, cat01);
 ```
 
 ### パフォーマンス考慮事項

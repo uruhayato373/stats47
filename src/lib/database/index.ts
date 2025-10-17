@@ -41,138 +41,56 @@ export const getDataProvider = async () => {
 // 後方互換性のため個別エクスポートも提供
 export { createRemoteD1Database, createLocalD1Database, mockDataProvider };
 
+// ========================================
+// 以下の関数は非推奨です
+// ========================================
+
 /**
- * estat_metainfo_unique ビューからデータを取得
- * 環境に応じて自動的にデータソースを切り替え
- * @param options - クエリオプション
- * @param options.limit - 取得する最大レコード数（デフォルト: 50）
- * @param options.orderBy - ソート順（デフォルト: "updated_at DESC"）
- * @param options.useRemote - リモートD1を使用するか（デフォルト: false、非推奨）
- * @returns SavedEstatMetainfoItem[] - エラー時は空配列
+ * @deprecated EstatMetaInfoRepository.create().getMetaInfoUnique() を使用してください
  */
 export async function fetchEstatMetainfoUnique(options?: {
   limit?: number;
   orderBy?: string;
-  useRemote?: boolean;
 }): Promise<any[]> {
-  const config = getEnvironmentConfig();
-
-  try {
-    // Mock環境
-    if (config.isMock) {
-      console.log(
-        `[${config.environment}] Fetching estat metainfo from mock data...`
-      );
-      return await mockDataProvider.fetchEstatMetainfoUnique(options);
-    }
-
-    // Development/Staging/Production環境
-    console.log(
-      `[${config.environment}] Fetching estat metainfo from database...`
-    );
-    const db = await getDataProvider();
-    const { limit = 50, orderBy = "updated_at DESC" } = options || {};
-
-    const result = await db
-      .prepare(
-        `SELECT * FROM estat_metainfo_unique ORDER BY ${orderBy} LIMIT ${limit}`
-      )
-      .all();
-
-    return result.results;
-  } catch (error) {
-    console.error("Failed to fetch estat metainfo:", error);
-    return [];
-  }
+  console.warn(
+    "fetchEstatMetainfoUnique is deprecated. Use EstatMetaInfoRepository.create().getStatsList() instead."
+  );
+  const { EstatMetaInfoRepository } = await import(
+    "@/lib/database/estat/repositories"
+  );
+  const repository = await EstatMetaInfoRepository.create();
+  return await repository.getStatsList(options);
 }
 
 /**
- * ranking_itemsテーブルからデータを取得
- * 環境に応じて自動的にデータソースを切り替え
- * @param options - クエリオプション
- * @param options.limit - 取得する最大レコード数（デフォルト: 10）
- * @returns RankingItem[] - エラー時は空配列
+ * @deprecated RankingRepository.create().fetchRankingItems() を使用してください
  */
 export async function fetchRankingItems(options?: {
   limit?: number;
 }): Promise<any[]> {
-  const config = getEnvironmentConfig();
-
-  try {
-    // Mock環境
-    if (config.isMock) {
-      console.log(
-        `[${config.environment}] Fetching ranking items from mock data...`
-      );
-      return await mockDataProvider.fetchRankingItems(options);
-    }
-
-    // Development/Staging/Production環境
-    console.log(
-      `[${config.environment}] Fetching ranking items from database...`
-    );
-    const db = await getDataProvider();
-    const { limit = 10 } = options || {};
-
-    const result = await db
-      .prepare(`SELECT * FROM ranking_items LIMIT ${limit}`)
-      .all();
-
-    return result.results;
-  } catch (error) {
-    console.error("Failed to fetch ranking items:", error);
-    return [];
-  }
+  console.warn(
+    "fetchRankingItems is deprecated. Use RankingRepository.create().fetchRankingItems() instead."
+  );
+  const { RankingRepository } = await import(
+    "@/lib/ranking/ranking-repository"
+  );
+  const repository = await RankingRepository.create();
+  return await repository.fetchRankingItems(options);
 }
 
 /**
- * ranking_valuesテーブルからデータを取得
- * 環境に応じて自動的にデータソースを切り替え
- * @param options - クエリオプション
- * @param options.limit - 取得する最大レコード数（デフォルト: 50）
- * @param options.rankingKey - 特定のランキングキーでフィルタリング
- * @returns RankingValue[] - エラー時は空配列
+ * @deprecated RankingRepository.create().fetchRankingValues() を使用してください
  */
 export async function fetchRankingValues(options?: {
   limit?: number;
   rankingKey?: string;
 }): Promise<any[]> {
-  const config = getEnvironmentConfig();
-
-  try {
-    // Mock環境
-    if (config.isMock) {
-      console.log(
-        `[${config.environment}] Fetching ranking values from mock data...`
-      );
-      return await mockDataProvider.fetchRankingValues(options);
-    }
-
-    // Development/Staging/Production環境
-    console.log(
-      `[${config.environment}] Fetching ranking values from database...`
-    );
-    const db = await getDataProvider();
-    const { limit = 50, rankingKey } = options || {};
-
-    let query = `SELECT * FROM ranking_values`;
-    const params: any[] = [];
-
-    if (rankingKey) {
-      query += ` WHERE ranking_key = ?`;
-      params.push(rankingKey);
-    }
-
-    query += ` LIMIT ${limit}`;
-
-    const result = await db
-      .prepare(query)
-      .bind(...params)
-      .all();
-
-    return result.results;
-  } catch (error) {
-    console.error("Failed to fetch ranking values:", error);
-    return [];
-  }
+  console.warn(
+    "fetchRankingValues is deprecated. Use RankingRepository.create().fetchRankingValues() instead."
+  );
+  const { RankingRepository } = await import(
+    "@/lib/ranking/ranking-repository"
+  );
+  const repository = await RankingRepository.create();
+  return await repository.fetchRankingValues(options);
 }

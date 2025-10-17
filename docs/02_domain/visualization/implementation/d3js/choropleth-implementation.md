@@ -7,23 +7,23 @@ tags:
   - implementation
 ---
 
-# D3.jsコロプレスマップ実装ガイド
+# D3.js コロプレスマップ実装ガイド
 
 **作成日**: 2025-10-16  
 **バージョン**: 1.0  
-**対象**: D3.jsを使用したコロプレスマップの実装
+**対象**: D3.js を使用したコロプレスマップの実装
 
 ---
 
 ## 概要
 
-このドキュメントは、D3.jsを使用してコロプレスマップを実装するための詳細なガイドです。既存の開発ガイド（`docs/01_development_guide/07_d3js_choropleth_guide.md`）を参照し、新しいvisualizationドメインに統合します。
+このドキュメントは、D3.js を使用してコロプレスマップを実装するための詳細なガイドです。既存の開発ガイド（`docs/01_development_guide/07_d3js_choropleth_guide.md`）を参照し、新しい visualization ドメインに統合します。
 
 ## 関連ドキュメント
 
-- [既存のD3.jsコロプレスガイド](../../../01_development_guide/07_d3js_choropleth_guide.md)
+- [既存の D3.js コロプレスガイド](./d3js_choropleth_guide.md)
 - [コロプレスマップ仕様](../仕様/chart-types/choropleth-map.md)
-- [D3.js実装ガイド](../仕様/d3js-implementation-guide.md)
+- [D3.js 実装ガイド](../仕様/d3js-implementation-guide.md)
 
 ## 実装アーキテクチャ
 
@@ -51,13 +51,13 @@ src/lib/visualization/d3js/choropleth/
 ```typescript
 // src/components/charts/d3js/ChoroplethMap.tsx
 
-import React, { useEffect, useRef, useMemo } from 'react';
-import * as d3 from 'd3';
-import { ChoroplethData, ChoroplethConfig } from '@/types/visualization';
-import { createProjection } from '@/lib/visualization/d3js/choropleth/projection';
-import { createColorScale } from '@/lib/visualization/d3js/choropleth/color-scale';
-import { setupInteractions } from '@/lib/visualization/d3js/choropleth/interactions';
-import { setupAccessibility } from '@/lib/visualization/d3js/choropleth/accessibility';
+import React, { useEffect, useRef, useMemo } from "react";
+import * as d3 from "d3";
+import { ChoroplethData, ChoroplethConfig } from "@/types/visualization";
+import { createProjection } from "@/lib/visualization/d3js/choropleth/projection";
+import { createColorScale } from "@/lib/visualization/d3js/choropleth/color-scale";
+import { setupInteractions } from "@/lib/visualization/d3js/choropleth/interactions";
+import { setupAccessibility } from "@/lib/visualization/d3js/choropleth/accessibility";
 
 interface ChoroplethMapProps {
   data: ChoroplethData[];
@@ -78,15 +78,15 @@ export function ChoroplethMap({
   height = 600,
   onAreaClick,
   onAreaHover,
-  className
+  className,
 }: ChoroplethMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // データの最適化
   const optimizedData = useMemo(() => {
-    return data.filter(item => {
-      if (config.level === 'prefecture') {
+    return data.filter((item) => {
+      if (config.level === "prefecture") {
         return item.areaCode.length === 2;
       } else {
         return item.areaCode.length === 5;
@@ -101,45 +101,50 @@ export function ChoroplethMap({
 
   // カラースケールの設定
   const colorScale = useMemo(() => {
-    return createColorScale(optimizedData, config.colorScheme, config.divergingMidpoint);
+    return createColorScale(
+      optimizedData,
+      config.colorScheme,
+      config.divergingMidpoint
+    );
   }, [optimizedData, config.colorScheme, config.divergingMidpoint]);
 
   useEffect(() => {
     if (!svgRef.current || !geoJsonData) return;
 
     const svg = d3.select(svgRef.current);
-    
+
     // 既存の要素をクリア
     svg.selectAll("*").remove();
-    
+
     // パス生成器
     const path = d3.geoPath().projection(projection);
-    
+
     // 地図を描画
-    svg.selectAll("path")
+    svg
+      .selectAll("path")
       .data(geoJsonData.features)
       .enter()
       .append("path")
       .attr("d", path)
-      .attr("fill", d => {
-        const areaData = optimizedData.find(item => 
-          item.areaCode === d.properties.code
+      .attr("fill", (d) => {
+        const areaData = optimizedData.find(
+          (item) => item.areaCode === d.properties.code
         );
         return areaData ? colorScale(areaData.value) : "#f0f0f0";
       })
       .attr("stroke", "#fff")
       .attr("stroke-width", 1)
       .on("click", (event, d) => {
-        const areaData = optimizedData.find(item => 
-          item.areaCode === d.properties.code
+        const areaData = optimizedData.find(
+          (item) => item.areaCode === d.properties.code
         );
         if (areaData) {
           onAreaClick?.(areaData);
         }
       })
       .on("mouseover", (event, d) => {
-        const areaData = optimizedData.find(item => 
-          item.areaCode === d.properties.code
+        const areaData = optimizedData.find(
+          (item) => item.areaCode === d.properties.code
         );
         if (areaData) {
           onAreaHover?.(areaData);
@@ -151,23 +156,32 @@ export function ChoroplethMap({
 
     // インタラクション設定
     setupInteractions(svg, optimizedData, onAreaClick, onAreaHover);
-    
+
     // アクセシビリティ設定
     setupAccessibility(svg, optimizedData);
 
     return () => {
       svg.selectAll("*").remove();
     };
-  }, [geoJsonData, optimizedData, projection, colorScale, onAreaClick, onAreaHover]);
+  }, [
+    geoJsonData,
+    optimizedData,
+    projection,
+    colorScale,
+    onAreaClick,
+    onAreaHover,
+  ]);
 
   return (
-    <div ref={containerRef} className={`choropleth-map ${className || ''}`}>
+    <div ref={containerRef} className={`choropleth-map ${className || ""}`}>
       <svg
         ref={svgRef}
         width={width}
         height={height}
         role="img"
-        aria-label={`${config.level === 'prefecture' ? '都道府県' : '市区町村'}別データマップ`}
+        aria-label={`${
+          config.level === "prefecture" ? "都道府県" : "市区町村"
+        }別データマップ`}
       />
     </div>
   );
@@ -179,16 +193,17 @@ export function ChoroplethMap({
 ```typescript
 // src/lib/visualization/d3js/choropleth/projection.ts
 
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 export function createProjection(
   width: number,
   height: number,
-  level: 'prefecture' | 'municipality'
+  level: "prefecture" | "municipality"
 ): d3.GeoProjection {
-  const projection = d3.geoMercator()
+  const projection = d3
+    .geoMercator()
     .center([138, 38]) // 日本の中心
-    .scale(level === 'prefecture' ? 1000 : 2000)
+    .scale(level === "prefecture" ? 1000 : 2000)
     .translate([width / 2, height / 2]);
 
   return projection;
@@ -199,7 +214,8 @@ export function createAlternativeProjection(
   height: number
 ): d3.GeoProjection {
   // 代替投影法（必要に応じて）
-  return d3.geoAlbers()
+  return d3
+    .geoAlbers()
     .center([138, 38])
     .parallels([30, 46])
     .scale(1000)
@@ -212,25 +228,25 @@ export function createAlternativeProjection(
 ```typescript
 // src/lib/visualization/d3js/choropleth/color-scale.ts
 
-import * as d3 from 'd3';
-import { ChoroplethData } from '@/types/visualization';
+import * as d3 from "d3";
+import { ChoroplethData } from "@/types/visualization";
 
 export function createColorScale(
   data: ChoroplethData[],
   colorScheme: string,
-  divergingMidpoint: 'zero' | 'mean' | 'median' | number
+  divergingMidpoint: "zero" | "mean" | "median" | number
 ): d3.ScaleSequential<string> {
-  const values = data.map(d => d.value);
+  const values = data.map((d) => d.value);
   const min = d3.min(values) || 0;
   const max = d3.max(values) || 0;
-  
+
   let domain: [number, number];
-  if (divergingMidpoint === 'zero') {
+  if (divergingMidpoint === "zero") {
     domain = [0, max];
-  } else if (divergingMidpoint === 'mean') {
+  } else if (divergingMidpoint === "mean") {
     const mean = d3.mean(values) || 0;
     domain = [min, mean, max];
-  } else if (divergingMidpoint === 'median') {
+  } else if (divergingMidpoint === "median") {
     const median = d3.median(values) || 0;
     domain = [min, median, max];
   } else {
@@ -238,24 +254,22 @@ export function createColorScale(
   }
 
   const interpolator = getColorInterpolator(colorScheme);
-  
-  return d3.scaleSequential()
-    .domain(domain)
-    .interpolator(interpolator);
+
+  return d3.scaleSequential().domain(domain).interpolator(interpolator);
 }
 
 function getColorInterpolator(scheme: string): (t: number) => string {
   const schemes: Record<string, (t: number) => string> = {
-    'blues': d3.interpolateBlues,
-    'reds': d3.interpolateReds,
-    'greens': d3.interpolateGreens,
-    'viridis': d3.interpolateViridis,
-    'plasma': d3.interpolatePlasma,
-    'inferno': d3.interpolateInferno,
-    'magma': d3.interpolateMagma,
-    'turbo': d3.interpolateTurbo
+    blues: d3.interpolateBlues,
+    reds: d3.interpolateReds,
+    greens: d3.interpolateGreens,
+    viridis: d3.interpolateViridis,
+    plasma: d3.interpolatePlasma,
+    inferno: d3.interpolateInferno,
+    magma: d3.interpolateMagma,
+    turbo: d3.interpolateTurbo,
   };
-  
+
   return schemes[scheme] || d3.interpolateBlues;
 }
 ```
@@ -265,8 +279,8 @@ function getColorInterpolator(scheme: string): (t: number) => string {
 ```typescript
 // src/lib/visualization/d3js/choropleth/interactions.ts
 
-import * as d3 from 'd3';
-import { ChoroplethData } from '@/types/visualization';
+import * as d3 from "d3";
+import { ChoroplethData } from "@/types/visualization";
 
 export function setupInteractions(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
@@ -275,25 +289,26 @@ export function setupInteractions(
   onAreaHover?: (area: ChoroplethData | null) => void
 ) {
   // ズーム・パン設定
-  const zoom = d3.zoom<SVGSVGElement, unknown>()
+  const zoom = d3
+    .zoom<SVGSVGElement, unknown>()
     .scaleExtent([0.5, 5])
     .on("zoom", (event) => {
-      svg.selectAll("path")
-        .attr("transform", event.transform);
+      svg.selectAll("path").attr("transform", event.transform);
     });
 
   svg.call(zoom);
 
   // 地域クリック・ホバー処理
-  svg.selectAll("path")
+  svg
+    .selectAll("path")
     .on("click", (event, d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
       if (areaData) {
         onAreaClick?.(areaData);
       }
     })
     .on("mouseover", (event, d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
       if (areaData) {
         onAreaHover?.(areaData);
       }
@@ -309,24 +324,24 @@ export function setupInteractions(
 ```typescript
 // src/lib/visualization/d3js/choropleth/accessibility.ts
 
-import * as d3 from 'd3';
-import { ChoroplethData } from '@/types/visualization';
+import * as d3 from "d3";
+import { ChoroplethData } from "@/types/visualization";
 
 export function setupAccessibility(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
   data: ChoroplethData[]
 ) {
   // ARIA属性の設定
-  svg.attr("role", "img")
-     .attr("aria-label", "都道府県別データマップ");
+  svg.attr("role", "img").attr("aria-label", "都道府県別データマップ");
 
   // 各地域にARIA属性を追加
-  svg.selectAll("path")
+  svg
+    .selectAll("path")
     .attr("role", "button")
     .attr("tabindex", 0)
     .attr("aria-label", (d) => {
-      const areaData = data.find(item => item.areaCode === d.properties.code);
-      return areaData 
+      const areaData = data.find((item) => item.areaCode === d.properties.code);
+      return areaData
         ? `${areaData.areaName}: ${areaData.value}`
         : d.properties.name;
     });
@@ -354,7 +369,7 @@ function setupKeyboardNavigation(
         // クリック処理を実行
         break;
     }
-    
+
     updateSelection(selectedIndex);
   });
 }
@@ -374,11 +389,11 @@ function updateSelection(index: number) {
 
 export function optimizeChoroplethData(
   data: ChoroplethData[],
-  level: 'prefecture' | 'municipality'
+  level: "prefecture" | "municipality"
 ): ChoroplethData[] {
   // 表示レベルに応じたフィルタリング
-  const filteredData = data.filter(item => {
-    if (level === 'prefecture') {
+  const filteredData = data.filter((item) => {
+    if (level === "prefecture") {
       return item.areaCode.length === 2;
     } else {
       return item.areaCode.length === 5;
@@ -386,14 +401,14 @@ export function optimizeChoroplethData(
   });
 
   // 値の正規化
-  return filteredData.map(item => ({
+  return filteredData.map((item) => ({
     ...item,
-    normalizedValue: normalizeValue(item.value, filteredData)
+    normalizedValue: normalizeValue(item.value, filteredData),
   }));
 }
 
 function normalizeValue(value: number, data: ChoroplethData[]): number {
-  const values = data.map(d => d.value);
+  const values = data.map((d) => d.value);
   const min = Math.min(...values);
   const max = Math.max(...values);
   return (value - min) / (max - min);
@@ -404,28 +419,33 @@ function normalizeValue(value: number, data: ChoroplethData[]): number {
 
 ```typescript
 // メモ化による最適化
-export const OptimizedChoroplethMap = memo(function ChoroplethMap({ 
-  data, 
-  config, 
-  geoJsonData 
+export const OptimizedChoroplethMap = memo(function ChoroplethMap({
+  data,
+  config,
+  geoJsonData,
 }: ChoroplethMapProps) {
-  const processedData = useMemo(() => 
-    optimizeChoroplethData(data, config.level), 
+  const processedData = useMemo(
+    () => optimizeChoroplethData(data, config.level),
     [data, config.level]
   );
 
-  const projection = useMemo(() => 
-    createProjection(width, height, config.level), 
+  const projection = useMemo(
+    () => createProjection(width, height, config.level),
     [width, height, config.level]
   );
 
-  const colorScale = useMemo(() => 
-    createColorScale(processedData, config.colorScheme, config.divergingMidpoint), 
+  const colorScale = useMemo(
+    () =>
+      createColorScale(
+        processedData,
+        config.colorScheme,
+        config.divergingMidpoint
+      ),
     [processedData, config.colorScheme, config.divergingMidpoint]
   );
 
   return (
-    <ChoroplethMap 
+    <ChoroplethMap
       data={processedData}
       projection={projection}
       colorScale={colorScale}
@@ -449,7 +469,7 @@ import { ChoroplethMap } from "../ChoroplethMap";
 describe("ChoroplethMap", () => {
   const mockData: ChoroplethData[] = [
     { areaCode: "01", areaName: "北海道", value: 100 },
-    { areaCode: "13", areaName: "東京都", value: 200 }
+    { areaCode: "13", areaName: "東京都", value: 200 },
   ];
 
   const mockGeoJson = {
@@ -458,20 +478,20 @@ describe("ChoroplethMap", () => {
       {
         type: "Feature",
         properties: { code: "01", name: "北海道" },
-        geometry: { type: "Polygon", coordinates: [] }
-      }
-    ]
+        geometry: { type: "Polygon", coordinates: [] },
+      },
+    ],
   };
 
   it("renders map with data", () => {
     render(
-      <ChoroplethMap 
-        data={mockData} 
+      <ChoroplethMap
+        data={mockData}
         config={defaultConfig}
         geoJsonData={mockGeoJson}
       />
     );
-    
+
     const svg = screen.getByRole("img");
     expect(svg).toBeInTheDocument();
   });
@@ -479,17 +499,17 @@ describe("ChoroplethMap", () => {
   it("handles area click events", () => {
     const onAreaClick = jest.fn();
     render(
-      <ChoroplethMap 
-        data={mockData} 
+      <ChoroplethMap
+        data={mockData}
         config={defaultConfig}
         geoJsonData={mockGeoJson}
         onAreaClick={onAreaClick}
       />
     );
-    
+
     const paths = screen.getAllByRole("button");
     fireEvent.click(paths[0]);
-    
+
     expect(onAreaClick).toHaveBeenCalledWith(mockData[0]);
   });
 });
@@ -501,13 +521,13 @@ describe("ChoroplethMap", () => {
 describe("ChoroplethMap Visual Regression", () => {
   it("matches snapshot", () => {
     const { container } = render(
-      <ChoroplethMap 
-        data={mockData} 
+      <ChoroplethMap
+        data={mockData}
         config={defaultConfig}
         geoJsonData={mockGeoJson}
       />
     );
-    
+
     expect(container.firstChild).toMatchSnapshot();
   });
 });
@@ -515,12 +535,13 @@ describe("ChoroplethMap Visual Regression", () => {
 
 ## 関連ドキュメント
 
-- [既存のD3.jsコロプレスガイド](../../../01_development_guide/07_d3js_choropleth_guide.md)
+- [既存の D3.js コロプレスガイド](./d3js_choropleth_guide.md)
 - [コロプレスマップ仕様](../仕様/chart-types/choropleth-map.md)
-- [D3.js実装ガイド](../仕様/d3js-implementation-guide.md)
+- [D3.js 実装ガイド](../仕様/d3js-implementation-guide.md)
 - [アクセシビリティガイド](../仕様/accessibility.md)
 
 ---
 
 **更新履歴**:
+
 - 2025-10-16: 初版作成

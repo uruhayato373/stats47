@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 
 interface VisualizationUpdateRequest {
   mapColorScheme?: string;
@@ -28,7 +28,7 @@ export async function PATCH(
     }
 
     const body = (await request.json()) as VisualizationUpdateRequest;
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // 更新クエリを動的に構築
     const updates: string[] = [];

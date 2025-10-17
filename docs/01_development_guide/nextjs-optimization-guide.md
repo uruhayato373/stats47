@@ -1,0 +1,496 @@
+---
+title: Next.js 15 最適化ガイド
+created: 2025-01-15
+updated: 2025-01-15
+tags:
+  - nextjs
+  - optimization
+  - performance
+  - ssg
+  - isr
+---
+
+# Next.js 15 最適化ガイド
+
+## 概要
+
+Next.js 15 と Tailwind CSS を利用したアプリケーションで、高速なページ読み込みを実現するための最適化方法を紹介します。特に、Next.js の ISR（Incremental Static Regeneration）と SSG（Static Site Generation）を活用した実装方法に焦点を当てます。
+
+## 1. SSG（Static Site Generation）の活用
+
+SSG は、ビルド時に HTML を生成して静的ファイルとして配信する方法です。ブログ記事のように頻繁に更新されないコンテンツに最適です。
+
+### App Router での実装方法
+
+```typescript
+// app/blog/[slug]/page.tsx
+import { getBlogPost, getAllBlogPosts } from "@/lib/api";
+
+// 静的に生成するパスを指定
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+// 静的ページの生成
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await getBlogPost(params.slug);
+
+  return (
+    <article className="prose lg:prose-xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold">{post.title}</h1>
+      <div className="mt-4 text-gray-600">
+        {new Date(post.date).toLocaleDateString()}
+      </div>
+      <div
+        className="mt-8"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+    </article>
+  );
+}
+
+// メタデータの生成
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await getBlogPost(params.slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
+}
+```
+
+## 2. ISR（Incremental Static Regeneration）の活用
+
+ISR は、静的生成したページを一定期間ごとに再生成する方法です。データが更新されても、すぐに反映させることができます。
+
+### App Router での実装方法
+
+```typescript
+// app/blog/[slug]/page.tsx
+import { getBlogPost, getAllBlogPosts } from '@/lib/api';
+
+// 動的レンダリング（ISR）の設定
+export const revalidate = 3600; // 1時間ごとに再生成
+
+// 静的に生成するパスを指定
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+// 記事ページの生成
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await getBlogPost(params.slug);
+
+  return (
+    // コンポーネントの内容
+  );
+}
+```
+
+### オンデマンド ISR（手動再生成）の実装
+
+特定のイベント（記事の更新など）が発生した時に、ページを手動で再生成する方法も実装できます。
+
+```typescript
+// app/api/revalidate/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+
+export async function POST(request: NextRequest) {
+  const { path, secret } = await request.json();
+
+  // シークレットキーの検証（環境変数から取得）
+  if (secret !== process.env.REVALIDATION_SECRET) {
+    return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
+  }
+
+  try {
+    // 指定されたパスを再生成
+    revalidatePath(path);
+    return NextResponse.json({
+      revalidated: true,
+      message: `Path ${path} revalidated`,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error revalidating" },
+      { status: 500 }
+    );
+  }
+}
+```
+
+CMS 側でウェブフックを設定し、記事が更新された時にこの API を呼び出すようにします。
+
+## 3. 最適化された Dynamic Routing
+
+App Router では、`generateStaticParams`を使って動的ルートを最適化できます。
+
+```typescript
+// app/blog/page/[page]/page.tsx
+import { getAllBlogPosts } from "@/lib/api";
+import BlogList from "@/components/BlogList";
+import Pagination from "@/components/Pagination";
+
+// 1時間ごとに再生成
+export const revalidate = 3600;
+
+// 静的に生成するページ番号のパスを指定
+export async function generateStaticParams() {
+  const totalPosts = await getAllBlogPosts();
+  const postsPerPage = 10;
+  const totalPages = Math.ceil(totalPosts.length / postsPerPage);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+}
+
+// ページネーションされたブログリストの生成
+export default async function BlogListPage({
+  params,
+}: {
+  params: { page: string };
+}) {
+  const currentPage = Number(params.page) || 1;
+  const postsPerPage = 10;
+
+  const allPosts = await getAllBlogPosts();
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const posts = allPosts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(allPosts.length / postsPerPage);
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">ブログ記事一覧</h1>
+      <BlogList posts={posts} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
+    </div>
+  );
+}
+```
+
+## 4. Route Segment の最適化
+
+App Router では、ローディング状態やエラー処理を個別のファイルで実装できます。
+
+```typescript
+// app/blog/[slug]/loading.tsx
+export default function Loading() {
+  return (
+    <div className="animate-pulse max-w-3xl mx-auto px-4 py-8">
+      <div className="h-8 bg-gray-200 rounded w-3/4 mb-8"></div>
+      <div className="h-4 bg-gray-200 rounded w-1/4 mb-8"></div>
+      <div className="space-y-4">
+        <div className="h-4 bg-gray-200 rounded"></div>
+        <div className="h-4 bg-gray-200 rounded"></div>
+        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+      </div>
+    </div>
+  );
+}
+
+// app/blog/[slug]/error.tsx
+("use client");
+
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-8 text-center">
+      <h2 className="text-2xl font-bold mb-4">エラーが発生しました</h2>
+      <button
+        onClick={() => reset()}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        再試行
+      </button>
+    </div>
+  );
+}
+```
+
+## 5. 画像最適化
+
+Next.js の組み込み`Image`コンポーネントを使用して画像を最適化します。
+
+```typescript
+// app/blog/[slug]/page.tsx
+import Image from "next/image";
+import { getBlogPost } from "@/lib/api";
+
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await getBlogPost(params.slug);
+
+  return (
+    <article className="prose lg:prose-xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold">{post.title}</h1>
+
+      {post.coverImage && (
+        <div className="relative w-full h-64 md:h-96 my-8">
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            sizes="(min-width: 768px) 100vw, 50vw"
+            className="object-cover rounded"
+            priority={true}
+          />
+        </div>
+      )}
+
+      <div className="mt-4 text-gray-600">
+        {new Date(post.date).toLocaleDateString()}
+      </div>
+      <div
+        className="mt-8"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+    </article>
+  );
+}
+```
+
+## 6. Suspense を使ったコンポーネントのロード最適化
+
+ページの一部だけを非同期で読み込むことで、ユーザーの体験を向上させます。
+
+```tsx
+// app/page.tsx
+import { Suspense } from "react";
+import FeaturedPosts from "@/components/FeaturedPosts";
+import RecentComments from "@/components/RecentComments";
+import PopularTags from "@/components/PopularTags";
+
+export default function Home() {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-8">ブログホーム</h1>
+
+      {/* 注目記事 - 優先的に表示 */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-4">注目記事</h2>
+        <Suspense
+          fallback={
+            <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+          }
+        >
+          <FeaturedPosts />
+        </Suspense>
+      </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* メインコンテンツ */}
+        <div className="md:col-span-2">{/* 他のコンテンツ */}</div>
+
+        {/* サイドバー */}
+        <aside>
+          <h2 className="text-xl font-bold mb-4">最近のコメント</h2>
+          <Suspense
+            fallback={
+              <div className="animate-pulse h-32 bg-gray-200 rounded"></div>
+            }
+          >
+            <RecentComments />
+          </Suspense>
+
+          <h2 className="text-xl font-bold mb-4 mt-8">人気タグ</h2>
+          <Suspense
+            fallback={
+              <div className="animate-pulse h-32 bg-gray-200 rounded"></div>
+            }
+          >
+            <PopularTags />
+          </Suspense>
+        </aside>
+      </div>
+    </div>
+  );
+}
+```
+
+## 7. ルートレイアウトの最適化
+
+共通レイアウトを最適化して、ページ読み込みを高速化します。
+
+```tsx
+// app/layout.tsx
+import { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+// フォントの最適化
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | My Blog",
+    default: "My Blog",
+  },
+  description: "A blog built with Next.js and TailwindCSS",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ja" className={inter.className}>
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+## 8. Tailwind CSS の最適化
+
+Tailwind CSS は、プロダクションビルド時に使用していないクラスを自動的に削除して CSS ファイルサイズを最小化します。さらに最適化するために：
+
+```js
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [
+    require("@tailwindcss/typography"), // ブログコンテンツの表示を改善
+  ],
+};
+```
+
+## 9. キャッシュとデータ取得の最適化
+
+Next.js 15 のキャッシュメカニズムを活用して、データ取得を最適化します。
+
+```typescript
+// lib/api.ts
+import "server-only";
+
+// キャッシュされたデータ取得
+export async function getAllBlogPosts() {
+  // revalidateで指定した期間、キャッシュが有効
+  const res = await fetch("https://api.example.com/posts", {
+    next: { revalidate: 3600 }, // 1時間キャッシュ
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch posts");
+  }
+
+  return res.json();
+}
+
+// 特定の記事データ取得
+export async function getBlogPost(slug: string) {
+  const res = await fetch(`https://api.example.com/posts/${slug}`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch post");
+  }
+
+  return res.json();
+}
+```
+
+## 10. パフォーマンス監視とアナリティクス
+
+実際のパフォーマンスを監視するために、Next.js の組み込み分析ツールを活用します。
+
+```typescript
+// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // 分析情報を有効化
+  experimental: {
+    instrumentationHook: true,
+  },
+};
+
+module.exports = nextConfig;
+```
+
+そして、`instrumentation.ts`ファイルを作成して、パフォーマンス測定を実装します。
+
+```typescript
+// instrumentation.ts
+export function register() {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    require("./monitoring/server").setup();
+  } else {
+    require("./monitoring/client").setup();
+  }
+}
+```
+
+## 11. デプロイとホスティングの最適化
+
+Vercel などのプラットフォームを活用して、最適なホスティング環境を構築します。Vercel は、Next.js の ISR と SSG を完全にサポートしており、エッジネットワークでコンテンツを配信します。
+
+## まとめ
+
+Next.js 15 と Tailwind CSS を使ったアプリケーションで高速なページ読み込みを実現するには：
+
+1. **SSG を基本とする**: 頻繁に更新されないコンテンツは SSG で生成
+2. **ISR を活用**: 定期的な更新が必要なコンテンツには ISR を使用
+3. **オンデマンド再生成**: 記事更新時にはオンデマンドでページを再生成
+4. **最適なルーティング**: `generateStaticParams`を使って動的ルートを最適化
+5. **画像の最適化**: Next.js の`Image`コンポーネントを使用
+6. **コンポーネントの分割**: `Suspense`を使って非同期にコンポーネントを読み込み
+7. **フォントの最適化**: Next.js の組み込みフォント最適化を活用
+8. **Tailwind の Purge**: 使用していないクラスを削除
+9. **効率的なデータ取得**: キャッシュメカニズムを活用
+10. **パフォーマンス監視**: 実際のパフォーマンスを監視
+
+これらの最適化を実装することで、Next.js 15 と Tailwind CSS を使ったアプリケーションで高速なページ読み込みを実現できます。
+
+## 関連ドキュメント
+
+- [パフォーマンス最適化ガイド](./performance_optimization.md)
+- [デプロイメントガイド](./deployment_guide.md)
+- [Next.js Documentation](https://nextjs.org/docs)

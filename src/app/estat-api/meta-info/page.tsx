@@ -1,6 +1,6 @@
 import { EstatMetainfoPage } from "@/components/pages/EstatMetainfoPage";
-import { fetchEstatMetainfoUnique } from "@/lib/database";
-import { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
+import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
+import { EstatMetaInfo } from "@/lib/database/estat/types";
 
 /**
  * e-Statメタ情報ページ
@@ -12,15 +12,17 @@ import { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
  * - production: リモートD1 (stats47)
  */
 export default async function EstatMetadataPage() {
-  // 環境判定は lib/database/index.ts で自動的に行われる
-  const initialSavedMetadata = await fetchEstatMetainfoUnique({
+  // 環境判定は EstatMetaInfoRepository で自動的に行われる
+  const repository = await EstatMetaInfoRepository.create();
+  const initialSavedMetadata = await repository.getStatsList({
     limit: 50,
-    orderBy: "updated_at DESC",
+    orderBy: "updated_at",
+    orderDirection: "DESC",
   });
 
   return (
     <EstatMetainfoPage
-      initialSavedMetadata={initialSavedMetadata as SavedEstatMetainfoItem[]}
+      initialSavedMetadata={initialSavedMetadata as EstatMetaInfo[]}
     />
   );
 }

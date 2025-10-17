@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 import { auth } from "@/lib/auth/auth";
 
 export async function PATCH(request: NextRequest) {
@@ -30,7 +30,7 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // トランザクションで一括更新
     const updatePromises = reorderedItems.map((item) => {

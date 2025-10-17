@@ -114,7 +114,7 @@ export default function Sidebar() {
           isActive: false,
         },
         {
-          href: "/estat-api/ranking-settings",
+          href: "/ranking/settings",
           label: "ランキング設定",
           icon: (
             <svg

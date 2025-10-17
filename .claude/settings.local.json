@@ -6,7 +6,10 @@
       "Bash(mkdir:*)",
       "WebSearch",
       "WebFetch(domain:datahelpdesk.worldbank.org)",
-      "WebFetch(domain:data.oecd.org)"
+      "WebFetch(domain:data.oecd.org)",
+      "Bash(npx tsc --noEmit --skipLibCheck)",
+      "Bash(npx eslint src/lib/database/index.ts src/lib/estat-api/meta-info/repositories/metainfo-repository.ts src/lib/ranking/ranking-repository.ts src/app/ranking/settings/page.tsx src/app/estat-api/meta-info/page.tsx --max-warnings=0)",
+      "Bash(npm run build)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth/auth";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 
 export async function PATCH(
   request: NextRequest,
@@ -26,7 +26,7 @@ export async function PATCH(
       role?: string;
     };
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // 自分自身のアカウントを無効化しようとしている場合は拒否
     if (id === session.user.id && is_active === false) {

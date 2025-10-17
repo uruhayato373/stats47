@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth/auth";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 
 export async function GET(request: NextRequest) {
   try {
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // ユーザー一覧を取得
     const users = await db

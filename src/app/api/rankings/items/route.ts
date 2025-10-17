@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 import { auth } from "@/lib/auth/auth";
 
 export async function POST(request: NextRequest) {
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     const query = `
       INSERT INTO ranking_items (

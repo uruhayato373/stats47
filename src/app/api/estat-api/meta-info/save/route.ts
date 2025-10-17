@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoRepository } from "@/lib/estat-api/meta-info/repositories";
-import { createD1Database } from "@/lib/database";
+import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
+import { getDataProvider } from "@/lib/database";
 import {
   EstatMetaInfoFetcher,
   EstatMetaInfoBatchProcessor,
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Cloudflare D1データベースに直接接続
-    const db = await createD1Database();
+    const db = await getDataProvider();
     const metaInfoRepository = new EstatMetaInfoRepository(
       db as unknown as D1Database
     );

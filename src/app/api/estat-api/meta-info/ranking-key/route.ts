@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createD1Database } from "@/lib/database";
+import { getDataProvider } from "@/lib/database";
 import { RankingItemDB } from "@/types/models/ranking";
 
 /**
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
     }
 
     // ===== 2. データベース接続 =====
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // ===== 3. estat_ranking_config ビューからデータ取得 =====
     // このビューは estat_metainfo と ranking_items を LEFT JOIN したもの
