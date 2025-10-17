@@ -3,15 +3,15 @@
 import { Eye } from "lucide-react";
 import type { SavedEstatMetainfoItem } from "@/types/models";
 
-interface SavedEstatMetaInfoListItemProps {
+interface SavedMetaInfoListItemProps {
   item: SavedEstatMetainfoItem;
   onView: (item: SavedEstatMetainfoItem) => void;
 }
 
-export function SavedEstatMetaInfoListItem({
+export function SavedMetaInfoListItem({
   item,
   onView,
-}: SavedEstatMetaInfoListItemProps) {
+}: SavedMetaInfoListItemProps) {
   return (
     <div className="py-3 border-b border-dotted border-gray-200 dark:border-neutral-600 last:border-b-0">
       <div className="flex items-start justify-between gap-2">

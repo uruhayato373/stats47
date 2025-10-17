@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Archive } from "lucide-react";
-import { SavedEstatMetaInfoListItem, Pagination } from "./components";
+import { SavedMetaInfoListItem } from "@/components/molecules/SavedMetaInfoListItem";
+import { Pagination } from "@/components/molecules/Pagination";
 import type { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
 
 interface EstatMetaInfoSidebarProps {
@@ -143,7 +144,7 @@ export default function EstatMetaInfoSidebar({
       <div className="flex-1 overflow-y-auto">
         <div className="divide-y divide-gray-200 dark:divide-neutral-600">
           {paginatedData.map((item) => (
-            <SavedEstatMetaInfoListItem
+            <SavedMetaInfoListItem
               key={item.id}
               item={item}
               onView={handleView}
