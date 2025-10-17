@@ -1,7 +1,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
-import { RankingDataContainer } from "@/components/ranking/containers/RankingDataContainer";
+import { RankingDataContainer } from "@/components/organisms/ranking/RankingDataContainer";
 import { RankingLayout } from "@/components/ranking/ui/RankingLayout";
 import { RankingNavigation } from "@/components/ranking/RankingClient/RankingNavigation";
 import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";

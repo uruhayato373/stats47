@@ -1,5 +1,5 @@
 // 新しいコンテナコンポーネント
-export { RankingDataContainer } from "./containers/RankingDataContainer";
+export { RankingDataContainer } from "./organisms/ranking/RankingDataContainer";
 
 // UIコンポーネント
 export { RankingHeader } from "./ui/RankingHeader";

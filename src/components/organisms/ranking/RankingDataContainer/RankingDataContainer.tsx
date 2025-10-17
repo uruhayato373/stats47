@@ -6,12 +6,12 @@ import {
   useRankingData,
 } from "@/hooks/ranking/useRankingData";
 import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
-import { StatisticsSummary } from "../ui/StatisticsSummary";
+import { StatisticsSummary } from "../../ranking/ui/StatisticsSummary";
 import { YearSelector } from "@/components/common";
-import { RankingHeader } from "../ui/RankingHeader";
-import { LoadingView } from "../ui/LoadingView";
-import { ErrorView } from "../ui/ErrorView";
-import { PrefectureDataTableClient } from "../ui/PrefectureDataTableClient";
+import { RankingHeader } from "../../ranking/ui/RankingHeader";
+import { LoadingView } from "../../ranking/ui/LoadingView";
+import { ErrorView } from "../../ranking/ui/ErrorView";
+import { PrefectureDataTableClient } from "../../ranking/ui/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {
