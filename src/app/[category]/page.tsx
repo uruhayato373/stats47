@@ -1,6 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { CategoryPageClient } from "@/components/category";
+import { CategoryPageClient } from "@/components/organisms/category/CategoryPageClient";
 import categoriesData from "@/config/categories.json";
 
 interface PageProps {

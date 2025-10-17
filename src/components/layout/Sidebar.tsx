@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStyles } from "@/hooks/useStyles";
 import categoriesData from "@/config/categories.json";
-import { CategoryIcon } from "@/components/common/CategoryIcon";
+import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 export default function Sidebar() {
   const styles = useStyles();

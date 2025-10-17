@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Modal } from "@/components/common/Modal/Modal";
+import { Modal } from "@/components/atoms/Modal";
 import { LoginForm } from "@/components/molecules/LoginForm";
 import { RegisterForm } from "@/components/molecules/RegisterForm";
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { CategoryIcon } from "@/components/common/CategoryIcon";
+import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 interface SubcategoryItem {
   id: string;

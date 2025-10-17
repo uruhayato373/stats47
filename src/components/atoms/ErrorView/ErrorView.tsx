@@ -31,14 +31,14 @@ export const ErrorView: React.FC<ErrorViewProps> = ({
           </p>
 
           {details && (
-            <div className="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-red-200 dark:border-red-700">
-              <p className="font-medium text-sm mb-2">リクエストパラメータ:</p>
-              <ul className="space-y-1 text-xs font-mono text-gray-700 dark:text-gray-300">
+            <div className="mt-3 text-xs text-red-600 dark:text-red-400">
+              <p>詳細情報:</p>
+              <ul className="mt-1 space-y-1">
                 {details.statsDataId && (
-                  <li>statsDataId: {details.statsDataId}</li>
+                  <li>統計表ID: {details.statsDataId}</li>
                 )}
-                {details.cdCat01 && <li>cdCat01: {details.cdCat01}</li>}
-                {details.yearCode && <li>yearCode: {details.yearCode}</li>}
+                {details.cdCat01 && <li>カテゴリ: {details.cdCat01}</li>}
+                {details.yearCode && <li>年度: {details.yearCode}</li>}
               </ul>
             </div>
           )}
@@ -46,9 +46,9 @@ export const ErrorView: React.FC<ErrorViewProps> = ({
           {onRetry && (
             <button
               onClick={onRetry}
-              className="mt-3 flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors"
+              className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-red-700 bg-red-100 border border-red-300 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:text-red-300 dark:bg-red-900/30 dark:border-red-700 dark:hover:bg-red-900/50"
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className="w-3 h-3" />
               再試行
             </button>
           )}

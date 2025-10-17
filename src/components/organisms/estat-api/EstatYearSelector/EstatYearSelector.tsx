@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { FormattedYear } from "@/lib/estat-api";
-import { YearSelector } from "@/components/common";
+import { YearSelector } from "@/components/molecules/YearSelector";
 
 /**
  * e-Stat API用の年度選択コンポーネント

@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoryIcon } from "@/components/common/CategoryIcon";
+import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 import { SubcategoryNavigation } from "./SubcategoryNavigation";
 import { ViewSwitchButtons } from "./ViewSwitchButtons";
 import { PrefectureSelector } from "./PrefectureSelector";

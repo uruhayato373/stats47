@@ -6,10 +6,10 @@ import {
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
-import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
+import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSummary";
 import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSelector";
-import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
-import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
+import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
+import { PrefectureDataTableClient } from "@/components/molecules/ranking/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useStyles } from "@/hooks/useStyles";
 import { Search } from "lucide-react";
-import InputField from "@/components/common/InputField";
+import { InputField } from "@/components/atoms/InputField";
 
 interface EstatMetaInfoFetcherProps {
   onSubmit: (statsDataId: string) => void;

@@ -5,7 +5,7 @@ import {
   FormattedValue,
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import DataTable, { TableColumn } from "@/components/common/DataTable";
+import DataTable, { TableColumn } from "@/components/molecules/DataTable";
 
 interface EstatValuesTableProps {
   data: EstatStatsDataResponse;
