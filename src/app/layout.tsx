@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { JotaiProvider } from "@/lib/providers";
 // import { SessionProvider } from "next-auth/react"; // 無効化: Auth.js機能を一時的に無効化
-import Header from "@/components/layout/Header";
-import Sidebar from "@/components/layout/Sidebar";
+import { Header } from "@/components/organisms/layout/Header";
+import { Sidebar } from "@/components/organisms/layout/Sidebar";
 
 const inter = Inter({
   subsets: ["latin"],
