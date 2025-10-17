@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  EstatMetaInfoFetcher,
-  EstatMetaInfoDisplay,
-} from "@/components/estat-api/meta-info";
+import { EstatMetaInfoFetcher } from "@/components/estat-api/meta-info";
+import { EstatMetaInfoDisplay } from "@/components/templates/EstatMetaInfoDisplay";
 import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
 import { EstatMetaInfoSidebar } from "@/components/estat-api/meta-info";
 import {
