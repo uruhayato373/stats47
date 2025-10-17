@@ -1,0 +1,91 @@
+"use client";
+
+import React from "react";
+
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
+import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
+import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
+
+export const ConstructionManufacturingNationalDashboard: React.FC<
+  SubcategoryDashboardPageProps
+> = ({ category, subcategory, areaCode }) => {
+  const statsDataId = "0000010140";
+  const cdCat01 = {
+    constructionValue: "MM1101", // 建設投資額
+    manufacturingValue: "MM1102", // 製造業生産額
+    employment: "MM1103", // 従業者数
+  };
+
+  return (
+    <SubcategoryLayout
+      category={category}
+      subcategory={subcategory}
+      viewType="dashboard"
+      areaCode={areaCode}
+    >
+      {/* 統計カード */}
+      <div className="px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          {/* 建設投資額 */}
+          <EstatStatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.constructionValue,
+            }}
+            areaCode={areaCode}
+            title="全国建設投資額"
+            color="#f97316"
+          />
+
+          {/* 製造業生産額 */}
+          <EstatStatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.manufacturingValue,
+            }}
+            areaCode={areaCode}
+            title="全国製造業生産額"
+            color="#ea580c"
+          />
+
+          {/* 従業者数 */}
+          <EstatStatisticsMetricCard
+            params={{
+              statsDataId: statsDataId,
+              cdCat01: cdCat01.employment,
+            }}
+            areaCode={areaCode}
+            title="全国従業者数"
+            color="#c2410c"
+          />
+        </div>
+      </div>
+
+      {/* 全国建設・製造の詳細分析 */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国建設・製造の詳細分析
+          </h2>
+          {/* 建設・製造の詳細分析コンポーネントをここに追加 */}
+          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
+            建設・製造詳細分析コンポーネント（実装予定）
+          </div>
+        </div>
+      </div>
+
+      {/* 全国建設業動向 */}
+      <div className="px-4 pb-4">
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            全国建設業動向
+          </h2>
+          {/* 建設業動向コンポーネントをここに追加 */}
+          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
+            建設業動向コンポーネント（実装予定）
+          </div>
+        </div>
+      </div>
+    </SubcategoryLayout>
+  );
+};
