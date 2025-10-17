@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { PasswordInput } from "./PasswordInput";
+import { PasswordInput } from "@/components/atoms/PasswordInput";
 
 interface LoginFormProps {
   onSuccess?: () => void;

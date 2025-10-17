@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
 import { FormattedValue } from "@/lib/estat-api";
-import { ExportButton } from "@/components/export/ExportButton";
+import { ExportButton } from "@/components/atoms/ExportButton";
 
 /**
  * ソート可能なフィールドの型定義

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
-import { ExportButton } from "@/components/export/ExportButton";
+import { ExportButton } from "@/components/atoms/ExportButton";
 
 export interface EstatLineChartProps {
   /**

@@ -17,7 +17,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/ranking/ui";
 import { Settings } from "lucide-react";
-import { ExportButton } from "@/components/export/ExportButton";
+import { ExportButton } from "@/components/atoms/ExportButton";
 import { RankingItem } from "@/types/models/ranking";
 
 /**

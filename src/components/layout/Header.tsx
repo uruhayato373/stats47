@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 // import { useSession, signOut } from "next-auth/react"; // 無効化: Auth.js機能を一時的に無効化
 import { User, LogOut, LogIn, ChevronDown } from "lucide-react";
-import { AuthModal } from "@/components/auth/AuthModal";
+import { AuthModal } from "@/components/organisms/auth/AuthModal";
 
 export default function Header() {
   // 認証機能を一時的に無効化

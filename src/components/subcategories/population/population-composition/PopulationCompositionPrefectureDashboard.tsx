@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { EstatStackedBarChart } from "@/components/dashboard/StackedBarChart";
+import { EstatStackedBarChart } from "@/components/organisms/estat-api/EstatStackedBarChart";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
