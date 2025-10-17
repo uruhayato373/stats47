@@ -58,7 +58,7 @@ import {
   effectiveThemeAtom,
   mountedAtom,
   toggleThemeAtom,
-} from "@/atoms/theme";
+} from "@/store/theme";
 
 export function useTheme() {
   const [theme] = useAtom(effectiveThemeAtom);

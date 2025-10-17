@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import { initThemeAtom, mountedAtom } from "@/atoms/theme";
+import { initThemeAtom, mountedAtom } from "@/store/theme";
 
 /**
  * テーマ初期化プロバイダー
