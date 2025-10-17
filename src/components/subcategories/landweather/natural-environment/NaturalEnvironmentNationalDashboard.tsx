@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -28,7 +28,7 @@ export const NaturalEnvironmentNationalDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {/* 国立公園 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.nationalParks,
@@ -39,7 +39,7 @@ export const NaturalEnvironmentNationalDashboard: React.FC<
           />
 
           {/* 国定公園 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.quasiNationalParks,
@@ -50,7 +50,7 @@ export const NaturalEnvironmentNationalDashboard: React.FC<
           />
 
           {/* 都道府県立自然公園 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.prefecturalParks,
@@ -61,7 +61,7 @@ export const NaturalEnvironmentNationalDashboard: React.FC<
           />
 
           {/* 天然記念物 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.naturalMonuments,

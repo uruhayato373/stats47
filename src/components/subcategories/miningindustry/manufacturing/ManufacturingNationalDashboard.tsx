@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -26,7 +26,7 @@ export const ManufacturingNationalDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* 製造業付加価値額 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.valueAdded,
@@ -37,7 +37,7 @@ export const ManufacturingNationalDashboard: React.FC<
           />
 
           {/* 製造業事業所数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.establishments,

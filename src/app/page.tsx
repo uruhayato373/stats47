@@ -1,8 +1,8 @@
 "use client";
 
-import MetricsCard from "../components/dashboard/MetricsCard";
-import TopPosts from "../components/dashboard/TopPosts";
-import TopAuthors from "../components/dashboard/TopAuthors";
+import { MetricsCard } from "../components/atoms/MetricsCard";
+import { TopPosts } from "../components/molecules/TopPosts";
+import { TopAuthors } from "../components/molecules/TopAuthors";
 import { useStyles } from "../hooks/useStyles";
 
 export default function Dashboard() {

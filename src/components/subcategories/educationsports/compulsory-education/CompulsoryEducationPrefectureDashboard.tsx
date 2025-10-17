@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -27,7 +27,7 @@ export const CompulsoryEducationPrefectureDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           {/* 小学校数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.elementarySchools,
@@ -38,7 +38,7 @@ export const CompulsoryEducationPrefectureDashboard: React.FC<
           />
 
           {/* 中学校数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.juniorHighSchools,
@@ -49,7 +49,7 @@ export const CompulsoryEducationPrefectureDashboard: React.FC<
           />
 
           {/* 生徒数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.students,

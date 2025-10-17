@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -27,7 +27,7 @@ export const PublicAssistanceWelfarePrefectureDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           {/* 生活保護受給者数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.recipients,
@@ -38,7 +38,7 @@ export const PublicAssistanceWelfarePrefectureDashboard: React.FC<
           />
 
           {/* 生活保護世帯数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.households,
@@ -49,7 +49,7 @@ export const PublicAssistanceWelfarePrefectureDashboard: React.FC<
           />
 
           {/* 福祉施設数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.welfareFacilities,

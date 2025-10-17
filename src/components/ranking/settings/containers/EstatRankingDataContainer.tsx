@@ -5,7 +5,7 @@ import {
   EstatStatsDataResponse,
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
+import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";

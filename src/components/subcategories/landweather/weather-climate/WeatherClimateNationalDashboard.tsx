@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -29,7 +29,7 @@ export const WeatherClimateNationalDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {/* 年平均気温 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.avgTemperature,
@@ -40,7 +40,7 @@ export const WeatherClimateNationalDashboard: React.FC<
           />
 
           {/* 年間降水量 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.precipitation,
@@ -51,7 +51,7 @@ export const WeatherClimateNationalDashboard: React.FC<
           />
 
           {/* 年平均相対湿度 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.humidity,
@@ -62,7 +62,7 @@ export const WeatherClimateNationalDashboard: React.FC<
           />
 
           {/* 日照時間 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.sunshineDuration,

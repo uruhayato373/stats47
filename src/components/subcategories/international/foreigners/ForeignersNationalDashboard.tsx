@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 
 type RankingTab = "total" | "china" | "korea" | "philippines" | "brazil";
@@ -63,7 +63,7 @@ export const ForeignersNationalDashboard: React.FC<
     <div className="flex-1">
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.totalForeigners,
@@ -72,7 +72,7 @@ export const ForeignersNationalDashboard: React.FC<
             title="全国外国人人口"
             color="#4f46e5"
           />
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.china,

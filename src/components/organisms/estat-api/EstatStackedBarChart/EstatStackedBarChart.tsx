@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { estatAPI, EstatStatsDataResponse } from "@/lib/estat-api";
-import { StackedBarChart } from "@/components/d3/StackedBarChart";
+import { StackedBarChart } from "@/components/molecules/StackedBarChart";
 
 interface EstatParams {
   statsDataId: string;

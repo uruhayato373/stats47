@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -64,11 +63,14 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(null, "s"));
 
-    svg.append("g").call(xAxis).selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+    svg
+      .append("g")
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-65)");
 
     svg.append("g").call(yAxis);
 
@@ -112,14 +114,14 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       .text((d) => d);
 
     // Y-axis label
-    svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0)
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text(yLabel);
-
+    svg
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("x", 0 - height / 2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text(yLabel);
   }, [data, keys, colors, width, height, margin, yLabel]);
 
   return <svg ref={svgRef} width={width} height={height} />;

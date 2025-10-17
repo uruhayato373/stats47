@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -29,7 +29,7 @@ export const LandUsePrefectureDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
           {/* 農用地 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.agriculturalLand,
@@ -40,7 +40,7 @@ export const LandUsePrefectureDashboard: React.FC<
           />
 
           {/* 森林 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.forestLand,
@@ -51,7 +51,7 @@ export const LandUsePrefectureDashboard: React.FC<
           />
 
           {/* 宅地 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.residentialLand,
@@ -62,7 +62,7 @@ export const LandUsePrefectureDashboard: React.FC<
           />
 
           {/* 商業地 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.commercialLand,
@@ -73,7 +73,7 @@ export const LandUsePrefectureDashboard: React.FC<
           />
 
           {/* 工業地 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.industrialLand,

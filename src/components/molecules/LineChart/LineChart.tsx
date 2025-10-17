@@ -181,7 +181,9 @@ export const LineChart: React.FC<LineChartProps> = ({
               .attr("class", "tooltip")
               .attr(
                 "transform",
-                `translate(${xScale(d.year)},${yScale(d[series.key] as number)})`
+                `translate(${xScale(d.year)},${yScale(
+                  d[series.key] as number
+                )})`
               );
 
             const value = d[series.key] as number;
@@ -259,7 +261,10 @@ export const LineChart: React.FC<LineChartProps> = ({
           const tooltip = g
             .append("g")
             .attr("class", "tooltip")
-            .attr("transform", `translate(${xScale(d.year)},${yScale(d.value)})`);
+            .attr(
+              "transform",
+              `translate(${xScale(d.year)},${yScale(d.value)})`
+            );
 
           tooltip
             .append("rect")
@@ -325,7 +330,17 @@ export const LineChart: React.FC<LineChartProps> = ({
         .style("font-size", "16px")
         .style("font-weight", "bold");
     }
-  }, [data, width, height, margin, xLabel, yLabel, title, colorScheme, multiSeries]);
+  }, [
+    data,
+    width,
+    height,
+    margin,
+    xLabel,
+    yLabel,
+    title,
+    colorScheme,
+    multiSeries,
+  ]);
 
   return (
     <div className="w-full">

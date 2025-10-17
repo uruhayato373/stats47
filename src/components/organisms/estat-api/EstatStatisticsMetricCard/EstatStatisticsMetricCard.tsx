@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Sparkline, SparklineDataPoint } from "@/components/d3/Sparkline";
+import { Sparkline, SparklineDataPoint } from "@/components/atoms/Sparkline";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
-export interface StatisticsMetricCardProps {
+export interface EstatStatisticsMetricCardProps {
   /**
    * e-stat API パラメータ
    */
@@ -45,7 +45,9 @@ export interface StatisticsMetricCardProps {
 /**
  * 統計データの最新値とトレンドを表示するメトリックカードコンポーネント
  */
-export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
+export const EstatStatisticsMetricCard: React.FC<
+  EstatStatisticsMetricCardProps
+> = ({
   params,
   areaCode = "00000",
   title,

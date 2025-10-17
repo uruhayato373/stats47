@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -34,7 +34,7 @@ export const PopulationMovementNationalDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {/* 転入者数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.moversIn,
@@ -45,7 +45,7 @@ export const PopulationMovementNationalDashboard: React.FC<
           />
 
           {/* 転出者数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.moversOut,
@@ -56,7 +56,7 @@ export const PopulationMovementNationalDashboard: React.FC<
           />
 
           {/* 社会増減数 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.socialIncrease,
@@ -67,7 +67,7 @@ export const PopulationMovementNationalDashboard: React.FC<
           />
 
           {/* 昼夜間人口比率 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.dayTimePopulationRatio,
@@ -88,7 +88,7 @@ export const PopulationMovementNationalDashboard: React.FC<
               流入人口
             </h3>
             <div className="grid grid-cols-1 gap-4">
-              <StatisticsMetricCard
+              <EstatStatisticsMetricCard
                 params={{
                   statsDataId: statsDataId,
                   cdCat01: cdCat01.inflowPopulationInPref,
@@ -97,7 +97,7 @@ export const PopulationMovementNationalDashboard: React.FC<
                 title="県内他市区町村"
                 color="#3b82f6"
               />
-              <StatisticsMetricCard
+              <EstatStatisticsMetricCard
                 params={{
                   statsDataId: statsDataId,
                   cdCat01: cdCat01.inflowPopulationOtherPref,
@@ -115,7 +115,7 @@ export const PopulationMovementNationalDashboard: React.FC<
               流出人口
             </h3>
             <div className="grid grid-cols-1 gap-4">
-              <StatisticsMetricCard
+              <EstatStatisticsMetricCard
                 params={{
                   statsDataId: statsDataId,
                   cdCat01: cdCat01.outflowPopulationInPref,
@@ -124,7 +124,7 @@ export const PopulationMovementNationalDashboard: React.FC<
                 title="県内他市区町村"
                 color="#ef4444"
               />
-              <StatisticsMetricCard
+              <EstatStatisticsMetricCard
                 params={{
                   statsDataId: statsDataId,
                   cdCat01: cdCat01.outflowPopulationOtherPref,

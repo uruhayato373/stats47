@@ -3,7 +3,7 @@
 import React from "react";
 
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
-import { StatisticsMetricCard } from "@/components/dashboard/StatisticsMetricCard";
+import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/subcategories/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
 
@@ -30,7 +30,7 @@ export const BasicPopulationNationalDashboard: React.FC<
       <div className="px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           {/* 総人口 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.totalPopulation,
@@ -41,7 +41,7 @@ export const BasicPopulationNationalDashboard: React.FC<
           />
 
           {/* 昼夜間人口比率 */}
-          <StatisticsMetricCard
+          <EstatStatisticsMetricCard
             params={{
               statsDataId: statsDataId,
               cdCat01: cdCat01.dayNightRatio,

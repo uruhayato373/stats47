@@ -5,7 +5,7 @@ import {
   useRankingYears,
   useRankingData,
 } from "@/hooks/ranking/useRankingData";
-import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
+import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
 import { StatisticsSummary } from "../ui/StatisticsSummary";
 import { YearSelector } from "@/components/common";
 import { RankingHeader } from "../ui/RankingHeader";
