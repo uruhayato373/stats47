@@ -214,6 +214,8 @@
   },
   "active": "1b2c24de311d3577",
   "lastOpenFiles": [
+    "02_domain/estat-api/refactoring/subdomain-organization-analysis.md",
+    "02_domain/estat-api/refactoring/estatmetainfofetcher-component-placement-analysis.md",
     "99_inbox/tabnavigation-rendering-test-analysis.md",
     "02_domain/visualization/implementation/page-level-loading-strategy.md",
     "02_domain/database/operations/troubleshooting.md",
@@ -241,8 +243,6 @@
     "01_development_guide/environment_variables.md",
     "01_development_guide/large_scale_implementation.md",
     "00_project_overview/reference_links.md",
-    "01_development_guide/d3js_choropleth_guide.md",
-    "02_domain/visualization/implementation/d3js/d3js_choropleth_guide.md",
     "02_domain/export/implementation",
     "02_domain/export/specifications",
     "02_domain/export",

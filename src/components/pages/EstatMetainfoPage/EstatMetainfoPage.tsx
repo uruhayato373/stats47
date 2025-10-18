@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EstatMetaInfoFetcher } from "@/components/molecules/EstatMetaInfoFetcher";
+import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/templates/EstatMetaInfoDisplay";
 import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/EstatMetaInfoSidebar";
