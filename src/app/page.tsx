@@ -3,16 +3,13 @@
 import { MetricsCard } from "../components/atoms/MetricsCard";
 import { TopPosts } from "../components/molecules/TopPosts";
 import { TopAuthors } from "../components/molecules/TopAuthors";
-import { useStyles } from "../hooks/useStyles";
 
 export default function Dashboard() {
-  const styles = useStyles();
-
   return (
     <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
       <div className="h-[calc(100dvh-62px)] lg:h-full overflow-hidden flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
         <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
-          <h1 className={`font-medium text-lg ${styles.text.primary}`}>
+          <h1 className="font-medium text-lg text-gray-900 dark:text-neutral-100">
             Dashboard
           </h1>
           <div className="flex items-center gap-x-2">
@@ -37,7 +34,9 @@ export default function Dashboard() {
                 <path d="M21 12a9 9 0 0 1-9 9 9.75 9 0 0 1-6.74-2.74L3 16" />
                 <path d="M8 16H3v5" />
               </svg>
-              <span className={styles.text.secondary}>Refresh</span>
+              <span className="text-gray-600 dark:text-neutral-300">
+                Refresh
+              </span>
             </button>
             <button
               type="button"
@@ -58,7 +57,7 @@ export default function Dashboard() {
                 <path d="M5 12h14" />
                 <path d="M12 5v14" />
               </svg>
-              <span className={styles.text.secondary}>Add</span>
+              <span className="text-gray-600 dark:text-neutral-300">Add</span>
             </button>
           </div>
         </div>

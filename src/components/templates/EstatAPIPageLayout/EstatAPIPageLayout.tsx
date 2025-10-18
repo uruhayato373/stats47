@@ -3,6 +3,9 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
 
+/**
+ * EstatAPIPageLayoutProps - e-Stat API ページレイアウトのプロパティ
+ */
 export interface EstatAPIPageLayoutProps {
   /** ページタイトル */
   title: string;
@@ -18,6 +21,33 @@ export interface EstatAPIPageLayoutProps {
   useCard?: boolean;
 }
 
+/**
+ * EstatAPIPageLayout - e-Stat API ページ用の共通レイアウトテンプレート
+ *
+ * 機能:
+ * - e-Stat API 関連ページの統一されたレイアウトを提供
+ * - ヘッダー、メインコンテンツ、サイドバーの配置を管理
+ * - カードラッパーの有無を選択可能
+ * - レスポンシブデザイン対応
+ *
+ * レイアウト構成:
+ * - ヘッダー: タイトル + アイコン + アクションボタン + e-STAT API リンク
+ * - メインコンテンツ: サイドバー有無に応じたレイアウト調整
+ * - サイドバー: オプション、デスクトップでのみ表示
+ *
+ * 使用例:
+ * ```tsx
+ * <EstatAPIPageLayout
+ *   title="メタ情報"
+ *   icon={Database}
+ *   actions={<RefreshButton />}
+ *   sidebar={<MetaInfoSidebar />}
+ *   useCard={true}
+ * >
+ *   <MetaInfoContent />
+ * </EstatAPIPageLayout>
+ * ```
+ */
 export function EstatAPIPageLayout({
   title,
   icon: Icon,
@@ -26,10 +56,12 @@ export function EstatAPIPageLayout({
   children,
   useCard = true,
 }: EstatAPIPageLayoutProps) {
+  // ===== レイアウトコンテンツの構築 =====
   const content = (
     <>
       {/* ヘッダーセクション */}
       <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
+        {/* タイトルエリア */}
         <div>
           <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
             <Icon className="w-6 h-6 text-indigo-600" />
@@ -37,11 +69,12 @@ export function EstatAPIPageLayout({
           </h1>
         </div>
 
-        {/* アクションボタン */}
+        {/* アクションボタンエリア */}
         <div className="flex items-center gap-x-2">
+          {/* カスタムアクションボタン（リフレッシュボタンなど） */}
           {actions}
 
-          {/* e-STAT API リンク */}
+          {/* e-STAT API 公式リンク */}
           <a
             href="https://www.e-stat.go.jp/api/"
             target="_blank"
@@ -56,16 +89,19 @@ export function EstatAPIPageLayout({
 
       {/* メインコンテンツエリア */}
       {sidebar ? (
-        // サイドバーありレイアウト
+        // サイドバーありレイアウト（レスポンシブ対応）
         <div className="flex flex-col lg:flex-row min-h-full">
+          {/* メインコンテンツ */}
           <div className="flex-1 bg-white dark:bg-neutral-800">
             <div className="p-4 md:p-6 space-y-6">{children}</div>
           </div>
+          {/* サイドバー区切り線（デスクトップのみ） */}
           <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
+          {/* サイドバーコンテンツ */}
           <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">{sidebar}</div>
         </div>
       ) : (
-        // サイドバーなしレイアウト
+        // サイドバーなしレイアウト（全幅使用）
         <div className="p-4 bg-white dark:bg-neutral-900">
           <div className="max-w-7xl mx-auto space-y-6">{children}</div>
         </div>
@@ -73,7 +109,9 @@ export function EstatAPIPageLayout({
     </>
   );
 
+  // ===== レンダリング =====
   if (useCard) {
+    // カードラッパーあり（デフォルト）
     return (
       <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
         <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
@@ -83,6 +121,7 @@ export function EstatAPIPageLayout({
     );
   }
 
+  // カードラッパーなし（フルスクリーン表示）
   return (
     <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
       {content}

@@ -18,7 +18,7 @@ export interface InputFieldProps {
   size?: "sm" | "md" | "lg"; // サイズバリエーション
 }
 
-const rInputField = forwardRef<HTMLInputElement, InputFieldProps>(
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   (
     {
       name,

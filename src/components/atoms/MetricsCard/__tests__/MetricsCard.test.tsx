@@ -25,23 +25,7 @@ import MetricsCard from "../MetricsCard";
  */
 
 // ===== モック設定 =====
-
-/**
- * useStylesフックのモック
- *
- * このモックは、useStylesフックの戻り値をシミュレートします。
- * 実際のスタイル定義に基づいて、テスト用のスタイルを提供します。
- */
-const mockStyles = {
-  text: {
-    muted: "text-gray-500 dark:text-gray-400",
-  },
-};
-
-// useStylesフックをモック
-vi.mock("@/hooks/useStyles", () => ({
-  useStyles: () => mockStyles,
-}));
+// useStyles は削除されたため、モックは不要
 
 // ===== テストセットアップ =====
 
