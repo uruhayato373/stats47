@@ -5,8 +5,13 @@ import { Code, Tag } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { useStyles } from "@/hooks/useStyles";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
-import { EstatMetaInfoHeader } from "@/components/organisms/estat-api/EstatMetaInfoHeader";
 import { EstatUnifiedClassificationTabs } from "@/components/organisms/estat-api/EstatUnifiedClassificationTabs";
+import { SaveButton } from "@/components/atoms/SaveButton";
+import {
+  TabNavigation,
+  type TabItem,
+} from "@/components/molecules/TabNavigation";
+import { safeRender } from "@/lib/estat-api/meta-info";
 import {
   useMetaInfoSave,
   useMetaInfoDownload,
@@ -102,15 +107,15 @@ export default function EstatMetaInfoDisplay({
     return Array.isArray(classObj.CLASS) ? classObj.CLASS.length : 1;
   };
 
-  const tabs = [
+  const tabs: TabItem[] = [
     {
-      id: "category" as TabType,
+      id: "category",
       label: "カテゴリ",
       icon: Tag,
       count: getTabCount("cat01"),
     },
     {
-      id: "json" as TabType,
+      id: "json",
       label: "JSON レスポンス",
       icon: Code,
       count: 0,
@@ -119,41 +124,59 @@ export default function EstatMetaInfoDisplay({
 
   return (
     <div className="space-y-6">
-      {/* ヘッダー部分 */}
-      <EstatMetaInfoHeader
-        metaInfo={metaInfo}
-        onSave={handleSave}
-        saving={saving}
-        saveResult={saveResult}
-      />
+      {/* ヘッダー部分 - 統計表基本情報と保存ボタン */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between border-b border-gray-200 pb-4">
+        {/* 統計情報を横一列に小さく表示 */}
+        <div className="flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            {[
+              {
+                label: "統計表題名",
+                value: safeRender(
+                  metaInfo.GET_META_INFO.METADATA_INF.TABLE_INF.TITLE
+                ),
+              },
+              {
+                label: "政府統計名",
+                value: safeRender(
+                  metaInfo.GET_META_INFO.METADATA_INF.TABLE_INF.STAT_NAME
+                ),
+              },
+              {
+                label: "作成機関",
+                value: safeRender(
+                  metaInfo.GET_META_INFO.METADATA_INF.TABLE_INF.GOV_ORG
+                ),
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-3"
+              >
+                <div className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  {item.label}
+                </div>
+                <div className="text-sm text-gray-900 dark:text-gray-100 truncate">
+                  {item.value || "-"}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <SaveButton
+          onSave={handleSave}
+          saving={saving}
+          saveResult={saveResult}
+        />
+      </div>
 
       {/* タブナビゲーション */}
-      <div className="border-b border-gray-200 dark:border-neutral-700">
-        <nav className="-mb-px flex space-x-8">
-          {tabs.map((tab) => {
-            const IconComponent = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-                  activeTab === tab.id
-                    ? "border-indigo-500 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                <IconComponent className="w-4 h-4" />
-                {tab.label}
-                {tab.count > 0 && (
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                    {tab.count}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+      <TabNavigation
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={(tabId) => setActiveTab(tabId as TabType)}
+      />
 
       {/* タブコンテンツ */}
       <div className="mt-6">

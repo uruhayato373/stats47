@@ -8,6 +8,10 @@ import { EstatCategoriesTable } from "@/components/molecules/EstatCategoriesTabl
 import { EstatYearsTable } from "@/components/molecules/EstatYearsTable";
 import { EstatValuesTable } from "@/components/molecules/EstatValuesTable";
 import { EstatRawData } from "@/components/molecules/EstatRawData";
+import {
+  TabNavigation,
+  type TabItem,
+} from "@/components/molecules/TabNavigation";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
@@ -73,33 +77,26 @@ export default function EstatDataDisplay({
     );
   }
 
+  const tabs: TabItem[] = [
+    { id: "overview", label: "概要", icon: Info },
+    { id: "categories", label: "カテゴリ", icon: BarChart3 },
+    { id: "years", label: "年度", icon: BarChart3 },
+    { id: "values", label: "値", icon: BarChart3 },
+    { id: "raw", label: "Raw JSON", icon: Database },
+  ];
+
   return (
     <div>
       {/* タブナビゲーション */}
-      <div className="border-b border-gray-200 dark:border-neutral-700">
-        <nav className="flex space-x-6 px-4">
-          {[
-            { id: "overview" as const, label: "概要", icon: Info },
-            { id: "categories" as const, label: "カテゴリ", icon: BarChart3 },
-            { id: "years" as const, label: "年度", icon: BarChart3 },
-            { id: "values" as const, label: "値", icon: BarChart3 },
-            { id: "raw" as const, label: "Raw JSON", icon: Database },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm transition-all duration-200 flex items-center gap-1.5 ${
-                activeTab === tab.id
-                  ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                  : "border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
-              }`}
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
+      <TabNavigation
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        spacing="space-x-6"
+        iconSize="w-4 h-4"
+        showCount={false}
+        className="px-4"
+      />
 
       {/* タブコンテンツ */}
       <div
