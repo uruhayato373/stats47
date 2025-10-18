@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { Code, Tag } from "lucide-react";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
-import { useStyles } from "@/hooks/useStyles";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 import { EstatUnifiedClassificationTabs } from "@/components/organisms/estat-api/EstatUnifiedClassificationTabs";
 import { SaveButton } from "@/components/atoms/SaveButton";
@@ -30,7 +29,6 @@ export default function EstatMetaInfoDisplay({
   loading,
   error,
 }: EstatMetaInfoDisplayProps) {
-  const styles = useStyles();
   const [activeTab, setActiveTab] = useState<TabType>("category");
   const { save, saving, saveResult } = useMetaInfoSave();
   const { download } = useMetaInfoDownload();
@@ -69,7 +67,7 @@ export default function EstatMetaInfoDisplay({
 
   if (error) {
     return (
-      <div className={styles.message.error}>
+      <div className="p-4 border rounded-lg bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
         <div className="flex items-center">
           <svg
             className="w-4 h-4 text-red-600 mr-2"

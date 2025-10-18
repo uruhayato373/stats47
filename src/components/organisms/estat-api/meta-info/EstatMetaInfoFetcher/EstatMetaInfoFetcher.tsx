@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
-import { useStyles } from "@/hooks/useStyles";
 import { Search, Loader2 } from "lucide-react";
 import { InputField } from "@/components/atoms/InputField";
 
@@ -49,9 +48,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
 
   /** 入力中の統計表ID */
   const [statsDataId, setStatsDataId] = useState<string>("");
-
-  /** スタイルフック（テーマ対応） */
-  const styles = useStyles();
 
   // ===== イベントハンドラー =====
 
@@ -108,7 +104,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   // ===== レンダリング =====
 
   return (
-    <form onSubmit={handleSubmit} className={styles.layout.row}>
+    <form onSubmit={handleSubmit} className="w-full">
       {/* メインレイアウト: レスポンシブ対応（モバイル: 縦並び、デスクトップ: 横並び） */}
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         {/* 左側セクション: アイコン + タイトル */}

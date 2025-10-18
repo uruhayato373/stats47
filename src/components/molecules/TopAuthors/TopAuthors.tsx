@@ -1,10 +1,6 @@
 "use client";
 
-import { useStyles } from "@/hooks/useStyles";
-
 export default function TopAuthors() {
-  const styles = useStyles();
-
   const authors = [
     {
       id: 1,

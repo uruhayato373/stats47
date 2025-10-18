@@ -3,12 +3,10 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useStyles } from "@/hooks/useStyles";
 import categoriesData from "@/config/categories.json";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 export default function Sidebar() {
-  const styles = useStyles();
   const pathname = usePathname();
 
   // ナビゲーションアイテムをメモ化
@@ -181,7 +179,9 @@ export default function Sidebar() {
             <circle cx="19" cy="12" r="1" />
             <circle cx="5" cy="12" r="1" />
           </svg>
-          <span className={styles.text.secondary}>Quick actions</span>
+          <span className="text-gray-500 dark:text-neutral-400">
+            Quick actions
+          </span>
           <svg
             className="ms-auto size-2.5"
             xmlns="http://www.w3.org/2000/svg"

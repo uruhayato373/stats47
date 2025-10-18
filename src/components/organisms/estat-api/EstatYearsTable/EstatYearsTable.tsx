@@ -6,14 +6,12 @@ import {
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/molecules/DataTable";
-import { useStyles } from "@/hooks/useStyles";
 
 interface EstatYearsTableProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatYearsTable({ data }: EstatYearsTableProps) {
-  const styles = useStyles();
   if (!data) return null;
 
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
@@ -24,14 +22,18 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
       key: "timeCode",
       label: "時間コード",
       render: (item) => (
-        <span className={styles.text.secondary}>{item.timeCode || "-"}</span>
+        <span className="text-gray-600 dark:text-neutral-300">
+          {item.timeCode || "-"}
+        </span>
       ),
     },
     {
       key: "timeName",
       label: "時間名",
       render: (item) => (
-        <span className={styles.text.primary}>{item.timeName || "-"}</span>
+        <span className="text-gray-900 dark:text-neutral-100">
+          {item.timeName || "-"}
+        </span>
       ),
     },
   ];

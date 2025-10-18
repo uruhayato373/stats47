@@ -6,14 +6,12 @@ import {
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 import DataTable, { TableColumn } from "@/components/molecules/DataTable";
-import { useStyles } from "@/hooks/useStyles";
 
 interface EstatAreasTableProps {
   data: EstatStatsDataResponse;
 }
 
 export default function EstatAreasTable({ data }: EstatAreasTableProps) {
-  const styles = useStyles();
   if (!data) return null;
 
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
@@ -24,28 +22,36 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
       key: "areaName",
       label: "地域名",
       render: (item) => (
-        <span className={styles.text.primary}>{item.areaName || "-"}</span>
+        <span className="text-gray-900 dark:text-neutral-100">
+          {item.areaName || "-"}
+        </span>
       ),
     },
     {
       key: "areaCode",
       label: "地域コード",
       render: (item) => (
-        <span className={styles.text.secondary}>{item.areaCode || "-"}</span>
+        <span className="text-gray-600 dark:text-neutral-300">
+          {item.areaCode || "-"}
+        </span>
       ),
     },
     {
       key: "level",
       label: "レベル",
       render: (item) => (
-        <span className={styles.text.secondary}>{item.level || "-"}</span>
+        <span className="text-gray-600 dark:text-neutral-300">
+          {item.level || "-"}
+        </span>
       ),
     },
     {
       key: "parentCode",
       label: "親コード",
       render: (item) => (
-        <span className={styles.text.secondary}>{item.parentCode || "-"}</span>
+        <span className="text-gray-600 dark:text-neutral-300">
+          {item.parentCode || "-"}
+        </span>
       ),
     },
   ];
