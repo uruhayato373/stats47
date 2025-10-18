@@ -172,6 +172,7 @@
   "active": "1b2c24de311d3577",
   "lastOpenFiles": [
     "99_inbox/themetogglebutton-background-issue-analysis.md",
+    "02_domain/architecture/theme-fouc-resolution.md",
     "99_inbox/画像生成.md",
     "99_inbox/レスポンシブデザイン.md",
     "99_inbox/メモ.md",
@@ -213,7 +214,6 @@
     "02_domain/visualization/specifications/chart-types/choropleth-map.md",
     "02_domain/visualization/specifications/chart-types/bar-chart.md",
     "02_domain/visualization/implementation/recharts/common-patterns.md",
-    "02_domain/estat-api/specifications/services/stats-list-service.md",
     "10_資料/都道府県別産業割合.png",
     "10_資料/都道府県ごとの物価分析.png",
     "10_資料/転入転出.png"
