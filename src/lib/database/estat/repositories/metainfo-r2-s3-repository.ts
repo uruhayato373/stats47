@@ -5,7 +5,7 @@
 
 import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 import { MetaInfoCacheDataR2 } from "@/lib/database/estat/types";
-import { R2S3Client, getR2S3Config } from "@/lib/r2/s3-client";
+import { R2S3Client, getR2S3Config } from "@/lib/database/storage/s3-client";
 
 /**
  * e-StatメタインフォメーションR2 S3互換APIリポジトリ

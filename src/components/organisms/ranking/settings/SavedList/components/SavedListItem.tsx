@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Trash2, ChevronDown, ChevronUp, Map } from "lucide-react";
-import { SavedMetadataItem } from "@/types/models";
+import { SavedMetadataItem } from "@/lib/estat-api/types/meta-info";
 
 interface SavedListItemProps {
   item: SavedMetadataItem;

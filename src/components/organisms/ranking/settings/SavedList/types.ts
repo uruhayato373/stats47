@@ -1,4 +1,4 @@
-import { SavedMetadataItem } from "@/types/models";
+import { SavedMetadataItem } from "@/lib/estat-api/types/meta-info";
 
 export interface SavedListProps {
   data: SavedMetadataItem[];

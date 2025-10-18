@@ -41,6 +41,9 @@ export const getDataProvider = async () => {
 // 後方互換性のため個別エクスポートも提供
 export { createRemoteD1Database, createLocalD1Database, mockDataProvider };
 
+// ストレージサブドメイン
+export * from "./storage";
+
 // ========================================
 // 以下の関数は非推奨です
 // ========================================

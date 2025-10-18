@@ -2,7 +2,7 @@
 
 import { Map } from "lucide-react";
 import { SavedListItem } from "./components";
-import { SavedMetadataItem } from "@/types/models";
+import { SavedMetadataItem } from "@/lib/estat-api/types/meta-info";
 
 interface SavedListProps {
   data: SavedMetadataItem[];

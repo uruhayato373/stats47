@@ -59,6 +59,19 @@ export interface SavedEstatMetainfoItem {
 }
 
 /**
+ * 保存されたメタデータアイテム
+ * ランキング設定で使用される保存済みデータ
+ */
+export interface SavedMetadataItem {
+  id: number;
+  stats_data_id: string;
+  title: string;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
  * メタデータサマリー情報
  */
 export interface MetadataSummary {
