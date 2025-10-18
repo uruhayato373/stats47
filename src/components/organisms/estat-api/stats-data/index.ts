@@ -1,0 +1,7 @@
+/**
+ * e-Stat API stats-data サブドメインのコンポーネント
+ * 統計データの取得・表示に関するコンポーネントを提供
+ */
+
+export { default as EstatDataFetcher } from "./EstatDataFetcher";
+export { EstatDataDisplay } from "./EstatDataDisplay";
