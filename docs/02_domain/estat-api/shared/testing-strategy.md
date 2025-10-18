@@ -924,3 +924,12 @@ it("有効なデータオブジェクトを返す", () => {
 5. **低**: 型定義（TypeScript で保証）
 
 この戦略に従うことで、信頼性の高い保守しやすいテストスイートが構築できます。
+
+## 関連ドキュメント
+
+- [統合テスト](integration-testing.md)
+- [モック作成ガイド](mocking-guide.md)
+- [テストデータ管理](test-data.md)
+- [meta-info 単体テスト](../meta-info/testing/unit-testing.md)
+- [stats-data 単体テスト](../stats-data/testing/unit-testing.md)
+- [stats-list 単体テスト](../stats-list/testing/unit-testing.md)
