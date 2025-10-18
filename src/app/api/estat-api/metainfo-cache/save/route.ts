@@ -29,11 +29,39 @@ export async function POST(
       );
     }
 
-    // 環境変数からR2バケットを取得
+    // mock環境ではR2保存をスキップ
+    if (process.env.NEXT_PUBLIC_ENV === "mock") {
+      return NextResponse.json({
+        success: true,
+        message: "mock環境ではR2保存を無効化しています",
+        data: {
+          key: `estat_metainfo/${body.statsDataId}/meta.json`,
+          size: 0,
+          statsDataId: body.statsDataId,
+        },
+      });
+    }
+
+    // development/staging/production環境ではR2に保存
+    // wrangler.tomlで定義されたMETAINFO_BUCKETバインディングを使用
     // @ts-expect-error - Cloudflare環境でのみ利用可能
     const env = process.env as unknown as { METAINFO_BUCKET: R2Bucket };
 
     if (!env.METAINFO_BUCKET) {
+      // ローカル開発環境でR2バケットがない場合
+      if (process.env.NODE_ENV === "development") {
+        return NextResponse.json({
+          success: true,
+          message:
+            "ローカル開発環境ではR2保存をスキップしました（Cloudflare環境で実際に保存されます）",
+          data: {
+            key: `estat_metainfo/${body.statsDataId}/meta.json`,
+            size: 0,
+            statsDataId: body.statsDataId,
+          },
+        });
+      }
+
       return NextResponse.json(
         {
           success: false,

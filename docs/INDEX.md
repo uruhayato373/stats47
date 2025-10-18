@@ -27,7 +27,6 @@ tags:
 プロジェクトの全体像と基本情報
 
 - [overview.md](./00_project_overview/overview.md) - プロジェクト概要
-- [README.md](./00_project_overview/README.md) - プロジェクト概要マップ
 - [project_requirements.md](./00_project_overview/project_requirements.md) - プロジェクト要件
 - [functional_requirements.md](./00_project_overview/functional_requirements.md) - 機能要件
 - [non_functional_requirements.md](./00_project_overview/non_functional_requirements.md) - 非機能要件
@@ -38,6 +37,7 @@ tags:
 - [implementation-priority-guide.md](./00_project_overview/implementation-priority-guide.md) - 実装優先度ガイド
 - [development-sequence-best-practices.md](./00_project_overview/development-sequence-best-practices.md) - 開発順序ベストプラクティスガイド
 - [comprehensive-data-integration-design.md](./00_project_overview/comprehensive-data-integration-design.md) - 統合データプラットフォーム包括的設計書
+- [comprehensive-design-specification.md](./00_project_overview/comprehensive-design-specification.md) - 都道府県ランキング可視化アプリケーション設計仕様書
 - [japan-statistics-api-integration-plan.md](./00_project_overview/japan-statistics-api-integration-plan.md) - 日本統計 API 統合計画
 - [world-statistics-integration-plan.md](./00_project_overview/world-statistics-integration-plan.md) - 世界統計統合計画
 - [reference_links.md](./00_project_overview/reference_links.md) - 参考リンク集
@@ -56,6 +56,8 @@ tags:
 - [deployment_guide.md](./01_development_guide/deployment_guide.md) - デプロイメントガイド
 - [environment_variables.md](./01_development_guide/environment_variables.md) - 環境変数設定ガイド
 - [performance_optimization.md](./01_development_guide/performance_optimization.md) - パフォーマンス最適化ガイド
+- [responsive-design-guide.md](./01_development_guide/responsive-design-guide.md) - レスポンシブデザイン実装ガイド
+- [tabnavigation-testing-analysis.md](./01_development_guide/tabnavigation-testing-analysis.md) - TabNavigation テスト分析
 - [engagement-features-guide.md](./02_domain/blog/features/engagement-features-guide.md) - エンゲージメント機能ガイド
 - [documentation_management.md](./01_development_guide/documentation_management.md) - ドキュメント管理ルール
 - [large_scale_implementation.md](./01_development_guide/large_scale_implementation.md) - 大規模プロジェクト実装ガイド
@@ -75,6 +77,8 @@ tags:
 - [refactoring-roadmap.md](./02_domain/architecture/refactoring-roadmap.md) - リファクタリングロードマップ
 - [state-management-consolidation.md](./02_domain/architecture/state-management-consolidation.md) - 状態管理統合
 - [technical-specifications.md](./02_domain/architecture/technical-specifications.md) - 技術仕様書
+- [theme-fouc-resolution.md](./02_domain/architecture/theme-fouc-resolution.md) - テーマ FOUC 問題解決
+- [useswr-refactoring-analysis.md](./02_domain/architecture/useswr-refactoring-analysis.md) - useSWR リファクタリング分析
 
 #### 認証ドメイン (auth)
 
@@ -206,16 +210,8 @@ tags:
 - [design.png](./05_resources/design.png) - デザイン素材
 - [instagram.md](./05_resources/instagram.md) - Instagram 関連リソース
 - [x.md](./05_resources/x.md) - X (Twitter)関連リソース
+- [sns-image-sizes.md](./05_resources/sns-image-sizes.md) - SNS 画像サイズ一覧
 - [ランキング画像サンプル](./05_resources/) - ランキング画像サンプル
-
-### 99_inbox
-
-一時的なドキュメント・メモ
-
-- [useswr-refactoring-analysis.md](./99_inbox/useswr-refactoring-analysis.md) - useSWR リファクタリング分析
-- [メモ.md](./99_inbox/メモ.md) - 開発メモ
-- [レスポンシブデザイン.md](./99_inbox/レスポンシブデザイン.md) - レスポンシブデザインメモ
-- [画像生成.md](./99_inbox/画像生成.md) - 画像生成メモ
 
 ## 🎯 ドキュメントの使い方
 
@@ -262,6 +258,7 @@ tags:
 
 ### 更新履歴
 
+- 2025-10-18: ドキュメント整理完了、99_inbox 廃止、重複ドキュメント統合、適切な場所への移動
 - 2025-10-17: ドキュメント構造大幅更新、architecture・export ドメイン追加、包括的設計書追加
 - 2024-10-14: ドメイン駆動設計に基づく構成に更新、カテゴリ管理ドメイン追加
 - 2024-10-14: INDEX.md 作成
@@ -269,4 +266,4 @@ tags:
 ---
 
 **プロジェクト**: 統計で見る都道府県 (stats47)  
-**最終更新**: 2025 年 10 月 17 日
+**最終更新**: 2025 年 10 月 18 日
