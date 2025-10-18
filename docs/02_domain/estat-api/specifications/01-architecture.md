@@ -718,9 +718,9 @@ class ConfigManager {
 
 ## 関連ドキュメント
 
-- [API エンドポイント一覧](02-api-endpoints.md)
-- [型システム](02-type-system.md)
-- [API 仕様](apis/)
-- [サービス仕様](services/)
-- [実装ガイド](../implementation/)
-- [テスト戦略](../testing/)
+- [API エンドポイント一覧](02-api-endpoints.md) - エンドポイント仕様とパラメータ
+- [型システム](02-type-system.md) - 型定義の詳細
+- [API 仕様詳細](apis/) - 各エンドポイントの詳細仕様
+- [サービス仕様](services/) - サービスクラスの実装詳細
+- [実装ガイド](../implementation/) - 開発ガイドライン
+- [テスト戦略](../testing/) - テスト方針と実装
