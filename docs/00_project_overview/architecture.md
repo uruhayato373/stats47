@@ -360,183 +360,141 @@ src/
 
 ### 概要
 
-stats47 プロジェクトでは、TypeScript の型定義を3層アーキテクチャで管理し、コードの保守性と型安全性を向上させています。
+stats47 プロジェクトでは、ドメイン駆動設計（DDD）の原則に基づいて型定義を管理し、コードの保守性と型安全性を向上させています。
 
 ### 設計原則
 
-#### ドメイン駆動設計（DDD）による型の配置
+#### コロケーション原則による型の配置
 
-型定義は「ドメインロジックと共に配置する」（Co-location with Domain Logic）原則に従い、以下のように階層化されています：
+型定義は「ドメインロジックと共に配置する」（Co-location with Domain Logic）原則に従い、以下のように配置されています：
 
-1. **共有型（Shared Types）**: 複数のドメインで共有される汎用的な型
-2. **ドメイン型（Domain Types）**: 特定のドメインに特化した型
-3. **コンポーネント型（Component Types）**: 特定のコンポーネントでのみ使用される型
+1. **共有型（Shared Types）**: 真に複数のドメインで共有される汎用的な型のみ
+2. **ドメイン型（Domain Types）**: 特定のドメインに特化した型（各ドメイン内で管理）
+3. **外部型拡張（External Type Extensions）**: 外部ライブラリの型拡張
 
-### 3層アーキテクチャ
+### 推奨ディレクトリ構造
 
 ```
 src/
-├── types/                      # Layer 1: 共有型（Shared Types）
+├── types/                      # 共有型（真に共有される汎用型のみ）
 │   ├── shared/                 # 複数ドメインで共有される汎用型
-│   │   ├── index.ts           # 統合エクスポート
-│   │   ├── pagination.ts       # ページネーション型
-│   │   ├── table.ts           # テーブル型
-│   │   ├── primitives.ts      # プリミティブ型拡張
-│   │   ├── subcategory.ts     # サブカテゴリ型
-│   │   └── utility.ts         # ユーティリティ型
-│   ├── models/                 # ドメインモデル（レガシー）
-│   ├── visualization/          # 可視化型（レガシー）
-│   └── index.ts               # 統合エクスポート
+│   │   ├── primitives.ts      # ID, Timestamp, Status等の基本型
+│   │   ├── pagination.ts      # Page, Sort, Filter等のUI共通型
+│   │   ├── table.ts           # 汎用テーブル型
+│   │   └── utility.ts         # 型ユーティリティ
+│   ├── external/              # 外部ライブラリの型拡張
+│   │   └── next-auth.d.ts
+│   └── index.ts               # 再エクスポート
 │
-├── lib/                        # Layer 2: ドメイン型（Domain Types）
-│   ├── ranking/               # ランキングドメイン
-│   │   ├── types/            # ランキング型定義
-│   │   │   ├── index.ts      # 統合エクスポート
-│   │   │   ├── item.ts       # ランキング項目・値の型
-│   │   │   ├── unified.ts    # 統一ランキングデータ型
-│   │   │   └── visualization.ts # ランキング可視化オプション型
-│   │   ├── ranking-repository.ts
-│   │   └── ranking-converters.ts
-│   │
-│   ├── database/              # データベースドメイン
-│   │   └── estat/            # e-Stat データベース
-│   │       ├── types/        # e-Stat データベース型定義
-│   │       │   ├── index.ts  # 統合エクスポート
-│   │       │   ├── metainfo.ts # メタ情報型
-│   │       │   └── r2-cache.ts # R2キャッシュ型
-│   │       ├── repositories/ # リポジトリ層
-│   │       └── services/     # サービス層
-│   │
-│   └── area/                  # 地域ドメイン
-│       ├── types/            # 地域型定義
-│       └── area-repository.ts
-│
-└── components/                 # Layer 3: コンポーネント型（Component Types）
-    └── organisms/
-        └── ranking/
-            └── RankingTable/
-                └── types.ts   # コンポーネント固有の型
+└── lib/                        # ドメイン固有の型（各ドメイン内で管理）
+    ├── area/
+    │   └── types/             # Prefecture, Municipality, Region
+    ├── auth/
+    │   └── types/             # User, Session, AuthConfig
+    ├── category/
+    │   └── types/             # Category, Subcategory
+    ├── estat-api/
+    │   └── types/             # EstatMetaInfo, StatsData, StatsListItem
+    ├── ranking/
+    │   └── types/             # RankingItem, RankingConfig, RankingValue
+    ├── database/
+    │   └── estat/
+    │       └── types/         # SavedMetadata, CacheData
+    └── visualization/
+        └── types/             # ChoroplethConfig, ChartConfig
 ```
 
 ### 型定義の配置ルール
 
-#### Layer 1: 共有型（src/types/shared/）
+#### 共有型（src/types/shared/）
 
-複数のドメインで使用される汎用的な型を配置します。
+真に複数のドメインで使用される汎用的な型のみを配置します。
 
 **配置基準**:
-- 3つ以上のドメインで使用される型
-- ビジネスロジックに依存しない汎用型
+
+- 3 つ以上のドメインで使用される型
+- 特定のドメインに依存しない汎用型
 - プリミティブ型の拡張
 
 **例**:
+
 ```typescript
+// src/types/shared/primitives.ts
+export type ID = string;
+export type Timestamp = string;
+export type Status = "active" | "inactive" | "pending";
+
 // src/types/shared/pagination.ts
-export interface PaginationParams {
+export interface Page<T> {
+  items: T[];
+  total: number;
   page: number;
   limit: number;
-  offset: number;
-}
-
-// src/types/shared/table.ts
-export interface TableColumn<T> {
-  key: keyof T;
-  label: string;
-  sortable?: boolean;
 }
 ```
 
 **インポート**:
+
 ```typescript
-import { PaginationParams, TableColumn } from '@/types/shared';
+import { ID, Timestamp, Page } from "@/types/shared";
 // または
-import { PaginationParams } from '@/types'; // src/types/index.ts経由
+import { ID, Timestamp } from "@/types"; // src/types/index.ts経由
 ```
 
-#### Layer 2: ドメイン型（src/lib/*/types/）
+#### ドメイン型（lib/domain/types/）
 
-特定のドメインに関連する型を、そのドメインのロジックと共に配置します。
+各ドメイン固有の型を、そのドメインのロジックと共に配置します。
 
 **配置基準**:
+
 - 特定のドメインでのみ使用される型
 - ドメインロジックに密接に関連する型
-- リポジトリ、サービス層で使用される型
+- ビジネス概念を表現する型
 
 **例**:
+
 ```typescript
-// src/lib/ranking/types/item.ts
+// lib/estat-api/types/meta-info.ts
+export interface EstatMetaInfo {
+  statsDataId: string;
+  title: string;
+  organization: string;
+  surveyDate: string;
+}
+
+// lib/ranking/types/item.ts
 export interface RankingItem {
   id: string;
-  subcategoryId: string;
-  areaCode: string;
+  name: string;
   value: number;
   rank: number;
 }
-
-// src/lib/database/estat/types/metainfo.ts
-export interface EstatMetaInfo {
-  stats_data_id: string;
-  stat_name: string;
-  title: string;
-  area_type: AreaType;
-}
 ```
 
 **インポート**:
+
 ```typescript
-import { RankingItem } from '@/lib/ranking/types';
-import { EstatMetaInfo } from '@/lib/database/estat/types';
+import { EstatMetaInfo } from "@/lib/estat-api/types";
+import { RankingItem } from "@/lib/ranking/types";
 ```
 
-#### Layer 3: コンポーネント型（src/components/*/types.ts）
+#### 外部型拡張（src/types/external/）
 
-特定のコンポーネントでのみ使用される型を配置します。
-
-**配置基準**:
-- 単一コンポーネント内でのみ使用される型
-- プロパティ型（Props）
-- ローカルステート型
+外部ライブラリの型を拡張する型を配置します。
 
 **例**:
+
 ```typescript
-// src/components/organisms/ranking/RankingTable/types.ts
-export interface RankingTableProps {
-  data: RankingItem[];
-  loading: boolean;
-  onSort: (column: string) => void;
+// src/types/external/next-auth.d.ts
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+    };
+  }
 }
-
-export interface RankingTableState {
-  sortColumn: string;
-  sortDirection: 'asc' | 'desc';
-}
-```
-
-**インポート**:
-```typescript
-import { RankingTableProps } from './types';
-```
-
-### 型のエクスポート戦略
-
-各ドメインの型は`index.ts`で統合してエクスポートします。
-
-**例**:
-```typescript
-// src/lib/ranking/types/index.ts
-/**
- * ランキング型定義
- * Domain-driven Designに従い、ランキングドメインの型をここに集約
- */
-
-// ランキング項目とランキング値の型定義
-export * from "./item";
-
-// 統一ランキングデータの型定義（アダプターレイヤー用）
-export * from "./unified";
-
-// ランキング可視化オプションの型定義
-export * from "./visualization";
 ```
 
 ### 型定義のベストプラクティス
@@ -545,8 +503,8 @@ export * from "./visualization";
 
 ```typescript
 // ✅ 良い例: 明確で説明的な名前
-export interface RankingItem { ... }
 export interface EstatMetaInfo { ... }
+export interface RankingItem { ... }
 export type AreaType = 'prefecture' | 'municipality';
 
 // ❌ 悪い例: 曖昧で短すぎる名前
@@ -592,7 +550,7 @@ export interface RankingItemDB {
 
 #### 4. 型のドキュメント
 
-```typescript
+````typescript
 // ✅ 良い例: JSDocでドキュメント化
 /**
  * ランキングアイテム
@@ -620,7 +578,7 @@ export interface RankingItem {
   value: number;
   rank: number;
 }
-```
+````
 
 ### 型定義の移行履歴
 
@@ -642,6 +600,7 @@ src/types/
 ```
 
 **問題点**:
+
 - 型定義がドメインロジックから分離されている
 - 同じドメインの型が複数の場所に散在
 - インポートパスが複雑で保守が困難
@@ -662,6 +621,7 @@ src/
 ```
 
 **改善点**:
+
 - ドメインロジックと型定義が同じ場所に配置
 - 型のインポートパスが明確で一貫性がある
 - ドメインごとに型が整理され保守性が向上

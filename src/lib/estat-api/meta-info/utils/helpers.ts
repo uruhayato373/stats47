@@ -33,7 +33,15 @@ type EstatApiObject = {
  * safeRender関数で処理可能な値の型を定義。
  * 基本的な型とe-Stat APIオブジェクトを含む。
  */
-type RenderableValue = string | number | null | undefined | EstatApiObject;
+type RenderableValue =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | EstatApiObject
+  | unknown[]
+  | Function;
 
 /**
  * 安全にレンダリングするためのヘルパー関数

@@ -1,6 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import { EstatMetaInfoRepository } from "./lib/database/estat/repositories";
+import { EstatMetaInfoCacheService } from "./lib/database/estat/services";
 
 export interface Env {
   AUTH_DB: D1Database;
@@ -61,6 +62,7 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
         endId?: string;
       };
     const metaInfoRepository = new EstatMetaInfoRepository(env.STATS47_DB);
+    const metaInfoService = new EstatMetaInfoCacheService(metaInfoRepository);
 
     if (batchMode && startId && endId) {
       const result = await metaInfoService.processMetaInfoRange(startId, endId);
