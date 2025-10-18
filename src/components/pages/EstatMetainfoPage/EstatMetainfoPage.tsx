@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { RefreshCw, BarChart3, Save, Check, AlertCircle } from "lucide-react";
 import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
@@ -76,13 +76,16 @@ export default function EstatMetainfoPage({
     message: string;
   }>({ type: null, message: "" });
 
+  /** 初回実行フラグ（不要な再実行を防ぐ） */
+  const hasInitializedRef = useRef(false);
+
   // ===== イベントハンドラー =====
 
   /**
-   * e-Stat APIからメタ情報を取得する
+   * e-Stat APIからメタ情報を取得する（メモ化）
    * @param statsDataId - 取得対象の統計表ID
    */
-  const handleFetchMetaInfo = async (statsDataId: string) => {
+  const handleFetchMetaInfo = useCallback(async (statsDataId: string) => {
     setLoading(true);
     setError(null);
     setCurrentStatsId(statsDataId);
@@ -101,31 +104,34 @@ export default function EstatMetainfoPage({
     } finally {
       setLoading(false);
     }
-  };
+  }, []); // 依存配列は空（estatAPIは外部ライブラリなので安定）
 
   /**
-   * 現在の統計表のメタ情報を再取得する（リフレッシュ）
+   * 現在の統計表のメタ情報を再取得する（リフレッシュ）（メモ化）
    */
-  const handleRefresh = () => {
+  const handleRefresh = useCallback(() => {
     if (currentStatsId) {
       handleFetchMetaInfo(currentStatsId);
     }
-  };
+  }, [currentStatsId, handleFetchMetaInfo]);
 
   /**
-   * サイドバーの統計表アイテムがクリックされた時の処理
+   * サイドバーの統計表アイテムがクリックされた時の処理（メモ化）
    * @param item - クリックされた統計表のメタデータ
    */
-  const handleSidebarItemView = (item: EstatMetaInfo) => {
-    if (item.stats_data_id) {
-      handleFetchMetaInfo(item.stats_data_id);
-    }
-  };
+  const handleSidebarItemView = useCallback(
+    (item: EstatMetaInfo) => {
+      if (item.stats_data_id) {
+        handleFetchMetaInfo(item.stats_data_id);
+      }
+    },
+    [handleFetchMetaInfo]
+  );
 
   /**
-   * メタ情報をR2に保存する
+   * メタ情報をR2に保存する（メモ化）
    */
-  const handleSaveToR2 = async () => {
+  const handleSaveToR2 = useCallback(async () => {
     if (!metaInfo || !currentStatsId) {
       setSaveStatus({
         type: "error",
@@ -163,32 +169,40 @@ export default function EstatMetainfoPage({
     } finally {
       setIsSaving(false);
     }
-  };
+  }, [metaInfo, currentStatsId]);
 
   // ===== 副作用（useEffect） =====
 
   /**
-   * 初回マウント時の自動読み込み処理
+   * 初回マウント時の自動読み込み処理（最適化版）
    * 保存済み統計表一覧がある場合、最初のアイテムを自動的に読み込む
+   * 初回のみ実行し、不要な再実行を防ぐ
    */
   useEffect(() => {
-    // 保存済み統計表一覧が存在する場合のみ実行
-    if (savedStatsList && savedStatsList.length > 0) {
-      // stats_data_idでソートして最初のアイテムを取得
-      // これにより一貫した順序で最初のアイテムが選択される
-      const sortedData = [...savedStatsList].sort((a, b) => {
-        const aId = a.stats_data_id || "";
-        const bId = b.stats_data_id || "";
-        return aId.localeCompare(bId);
-      });
-
-      const firstItem = sortedData[0];
-      if (firstItem.stats_data_id) {
-        // 最初の統計表のメタ情報を自動取得
-        handleFetchMetaInfo(firstItem.stats_data_id);
-      }
+    // 初回のみ実行し、同じデータの場合はスキップ
+    if (
+      hasInitializedRef.current ||
+      !savedStatsList ||
+      savedStatsList.length === 0
+    ) {
+      return;
     }
-  }, [savedStatsList]); // savedStatsList の変更を監視
+
+    // stats_data_idでソートして最初のアイテムを取得
+    // これにより一貫した順序で最初のアイテムが選択される
+    const sortedData = [...savedStatsList].sort((a, b) => {
+      const aId = a.stats_data_id || "";
+      const bId = b.stats_data_id || "";
+      return aId.localeCompare(bId);
+    });
+
+    const firstItem = sortedData[0];
+    if (firstItem.stats_data_id) {
+      // 最初の統計表のメタ情報を自動取得
+      handleFetchMetaInfo(firstItem.stats_data_id);
+      hasInitializedRef.current = true;
+    }
+  }, [savedStatsList, handleFetchMetaInfo]); // 依存配列にhandleFetchMetaInfoを追加
 
   // ===== レンダリング =====
 
