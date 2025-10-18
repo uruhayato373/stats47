@@ -9,7 +9,9 @@
       "WebFetch(domain:data.oecd.org)",
       "Bash(npx tsc --noEmit --skipLibCheck)",
       "Bash(npx eslint src/lib/database/index.ts src/lib/estat-api/meta-info/repositories/metainfo-repository.ts src/lib/ranking/ranking-repository.ts src/app/ranking/settings/page.tsx src/app/estat-api/meta-info/page.tsx --max-warnings=0)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(npm test -- TabNavigation.test.tsx)",
+      "Bash(npm test -- TabNavigation.rendering.test.tsx)"
     ],
     "deny": [],
     "ask": []
