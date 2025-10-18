@@ -1,4 +1,8 @@
-import { PrefectureRankingParams } from "@/types/models";
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
 
 export interface DisplayProps {
   params: PrefectureRankingParams | null;

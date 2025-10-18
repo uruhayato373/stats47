@@ -3,7 +3,6 @@
  */
 
 export * from "./user";
-export * from "./prefecture";
 export * from "./ranking";
 
 // e-Stat メタデータ関連の型定義

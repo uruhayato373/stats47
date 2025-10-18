@@ -14,7 +14,12 @@
 import useSWR from "swr";
 import { fetcher } from "@/lib/swr/fetcher";
 import { EstatStatsDataResponse } from "@/lib/estat-api";
-import { PrefectureRankingParams } from "@/types/models";
+
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
 
 /**
  * クエリパラメータを構築するヘルパー関数

@@ -21,8 +21,13 @@ import {
   PrefectureRankingSidebar,
   PrefectureRankingPageHeader,
 } from "@/components/ranking/settings";
-import { PrefectureRankingParams } from "@/types/models";
 import { EstatMetaCategoryData } from "@/lib/estat-api";
+
+interface PrefectureRankingParams {
+  statsDataId: string;
+  categoryCode?: string;
+  timeCode?: string;
+}
 
 interface RankingSettingsPageProps {
   initialSavedMetadata: EstatMetaCategoryData[];
