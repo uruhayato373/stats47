@@ -9,6 +9,7 @@ export { EstatDataDisplay } from "./EstatDataDisplay";
 
 // 表示用コンポーネント
 export { EstatOverview } from "./EstatOverview";
+export { EstatAreasTable } from "./EstatAreasTable";
 export { EstatCategoriesTable } from "./EstatCategoriesTable";
 export { EstatYearsTable } from "./EstatYearsTable";
 export { EstatValuesTable } from "./EstatValuesTable";
