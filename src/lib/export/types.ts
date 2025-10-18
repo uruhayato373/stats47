@@ -98,7 +98,7 @@ export interface ExportProgress {
 
 // 型の再エクスポート（循環参照回避）
 import type { FormattedValue } from "@/lib/estat-api";
-import type { TimeSeriesDataPoint } from "@/components/molecules/D3LineChart";
+import type { TimeSeriesDataPoint } from "@/components/organisms/visualization/D3LineChart";
 
 // MultiSeriesDataPoint と RankingData の型定義（必要に応じて追加）
 export interface MultiSeriesDataPoint {

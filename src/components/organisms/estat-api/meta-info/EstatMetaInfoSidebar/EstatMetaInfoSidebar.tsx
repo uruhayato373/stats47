@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Archive } from "lucide-react";
-import { SavedMetaInfoListItem } from "@/components/molecules/SavedMetaInfoListItem";
+import { SavedMetaInfoListItem } from "@/components/organisms/estat-api/meta-info/SavedMetaInfoListItem";
 import { Pagination } from "@/components/molecules/Pagination";
 import type { EstatMetaInfo } from "@/lib/database/estat/types";
 

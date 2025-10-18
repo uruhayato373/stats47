@@ -1,6 +1,6 @@
 import React from "react";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
-import { SubcategoryNavigation } from "@/components/molecules/SubcategoryNavigation";
+import { SubcategoryNavigation } from "@/components/organisms/category/SubcategoryNavigation";
 import { ViewSwitchButtons } from "@/components/molecules/ViewSwitchButtons";
 import { PrefectureSelector } from "@/components/organisms/area/PrefectureSelector";
 import {

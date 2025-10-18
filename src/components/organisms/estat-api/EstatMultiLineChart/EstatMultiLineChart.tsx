@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { D3LineChart } from "@/components/molecules/D3LineChart";
+import { D3LineChart } from "@/components/organisms/visualization/D3LineChart";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
 
