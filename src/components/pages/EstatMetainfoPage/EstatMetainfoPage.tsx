@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect } from "react";
 import { RefreshCw, BarChart3, Save, Check, AlertCircle } from "lucide-react";
 import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
-import { estatAPI, EstatMetaInfoResponse } from "@/lib/estat-api";
-import { EstatMetaInfoCacheService } from "@/lib/database/estat/services";
+import {
+  useEstatMetaInfo,
+  saveMetaInfoToR2,
+} from "@/hooks/estat-api/useEstatMetaInfo";
 
 /**
  * 地域タイプの定義（クライアントサイド用）
@@ -57,15 +59,6 @@ export default function EstatMetainfoPage({
 }: EstatMetainfoPageProps) {
   // ===== 状態管理 =====
 
-  /** 現在表示中のe-Stat APIメタ情報レスポンス */
-  const [metaInfo, setMetaInfo] = useState<EstatMetaInfoResponse | null>(null);
-
-  /** API通信中のローディング状態 */
-  const [loading, setLoading] = useState(false);
-
-  /** エラーメッセージ（API通信失敗時など） */
-  const [error, setError] = useState<string | null>(null);
-
   /** 現在選択中の統計表ID */
   const [currentStatsId, setCurrentStatsId] = useState<string>("");
 
@@ -76,62 +69,44 @@ export default function EstatMetainfoPage({
     message: string;
   }>({ type: null, message: "" });
 
-  /** 初回実行フラグ（不要な再実行を防ぐ） */
-  const hasInitializedRef = useRef(false);
+  // ===== useSWRでメタ情報を取得 =====
+  const { metaInfo, error, isLoading, refetch } = useEstatMetaInfo(
+    currentStatsId || null
+  );
 
   // ===== イベントハンドラー =====
 
   /**
-   * e-Stat APIからメタ情報を取得する（メモ化）
+   * 統計表IDを変更してメタ情報を取得する
    * @param statsDataId - 取得対象の統計表ID
    */
-  const handleFetchMetaInfo = useCallback(async (statsDataId: string) => {
-    setLoading(true);
-    setError(null);
+  const handleFetchMetaInfo = (statsDataId: string) => {
     setCurrentStatsId(statsDataId);
-
-    try {
-      // e-Stat APIを呼び出してメタ情報を取得
-      const response = await estatAPI.getMetaInfo({ statsDataId });
-      setMetaInfo(response);
-    } catch (err) {
-      console.error("Meta info fetch error:", err);
-      // エラー状態を設定（ユーザーに表示）
-      setError(
-        err instanceof Error ? err.message : "不明なエラーが発生しました"
-      );
-      setMetaInfo(null);
-    } finally {
-      setLoading(false);
-    }
-  }, []); // 依存配列は空（estatAPIは外部ライブラリなので安定）
+  };
 
   /**
-   * 現在の統計表のメタ情報を再取得する（リフレッシュ）（メモ化）
+   * 現在の統計表のメタ情報を再取得する（リフレッシュ）
    */
-  const handleRefresh = useCallback(() => {
+  const handleRefresh = () => {
     if (currentStatsId) {
-      handleFetchMetaInfo(currentStatsId);
+      refetch();
     }
-  }, [currentStatsId, handleFetchMetaInfo]);
+  };
 
   /**
-   * サイドバーの統計表アイテムがクリックされた時の処理（メモ化）
+   * サイドバーの統計表アイテムがクリックされた時の処理
    * @param item - クリックされた統計表のメタデータ
    */
-  const handleSidebarItemView = useCallback(
-    (item: EstatMetaInfo) => {
-      if (item.stats_data_id) {
-        handleFetchMetaInfo(item.stats_data_id);
-      }
-    },
-    [handleFetchMetaInfo]
-  );
+  const handleSidebarItemView = (item: EstatMetaInfo) => {
+    if (item.stats_data_id) {
+      handleFetchMetaInfo(item.stats_data_id);
+    }
+  };
 
   /**
-   * メタ情報をR2に保存する（メモ化）
+   * メタ情報をR2に保存する
    */
-  const handleSaveToR2 = useCallback(async () => {
+  const handleSaveToR2 = async () => {
     if (!metaInfo || !currentStatsId) {
       setSaveStatus({
         type: "error",
@@ -144,10 +119,7 @@ export default function EstatMetainfoPage({
     setSaveStatus({ type: null, message: "" });
 
     try {
-      const result = await EstatMetaInfoCacheService.saveToR2(
-        currentStatsId,
-        metaInfo
-      );
+      const result = await saveMetaInfoToR2(currentStatsId, metaInfo);
 
       setSaveStatus({
         type: "success",
@@ -169,40 +141,22 @@ export default function EstatMetainfoPage({
     } finally {
       setIsSaving(false);
     }
-  }, [metaInfo, currentStatsId]);
+  };
 
   // ===== 副作用（useEffect） =====
 
   /**
-   * 初回マウント時の自動読み込み処理（最適化版）
+   * 初回マウント時の自動読み込み処理
    * 保存済み統計表一覧がある場合、最初のアイテムを自動的に読み込む
-   * 初回のみ実行し、不要な再実行を防ぐ
    */
   useEffect(() => {
-    // 初回のみ実行し、同じデータの場合はスキップ
-    if (
-      hasInitializedRef.current ||
-      !savedStatsList ||
-      savedStatsList.length === 0
-    ) {
-      return;
+    if (savedStatsList.length > 0 && !currentStatsId) {
+      const sortedData = [...savedStatsList].sort((a, b) =>
+        a.stats_data_id.localeCompare(b.stats_data_id)
+      );
+      setCurrentStatsId(sortedData[0].stats_data_id);
     }
-
-    // stats_data_idでソートして最初のアイテムを取得
-    // これにより一貫した順序で最初のアイテムが選択される
-    const sortedData = [...savedStatsList].sort((a, b) => {
-      const aId = a.stats_data_id || "";
-      const bId = b.stats_data_id || "";
-      return aId.localeCompare(bId);
-    });
-
-    const firstItem = sortedData[0];
-    if (firstItem.stats_data_id) {
-      // 最初の統計表のメタ情報を自動取得
-      handleFetchMetaInfo(firstItem.stats_data_id);
-      hasInitializedRef.current = true;
-    }
-  }, [savedStatsList, handleFetchMetaInfo]); // 依存配列にhandleFetchMetaInfoを追加
+  }, [savedStatsList, currentStatsId]);
 
   // ===== レンダリング =====
 
@@ -216,18 +170,18 @@ export default function EstatMetainfoPage({
             <button
               type="button"
               onClick={handleRefresh}
-              disabled={loading}
+              disabled={isLoading}
               className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
             >
               <RefreshCw
-                className={`w-3 h-3 ${loading ? "animate-spin" : ""}`}
+                className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`}
               />
-              {loading ? "更新中..." : "更新"}
+              {isLoading ? "更新中..." : "更新"}
             </button>
             <button
               type="button"
               onClick={handleSaveToR2}
-              disabled={loading || isSaving || !metaInfo}
+              disabled={isLoading || isSaving || !metaInfo}
               className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-blue-200 bg-blue-500 text-white shadow-xs hover:bg-blue-600 focus:outline-hidden focus:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isSaving ? (
@@ -271,7 +225,10 @@ export default function EstatMetainfoPage({
       )}
 
       {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
-      <EstatMetaInfoFetcher onSubmit={handleFetchMetaInfo} loading={loading} />
+      <EstatMetaInfoFetcher
+        onSubmit={handleFetchMetaInfo}
+        loading={isLoading}
+      />
 
       {/* メタ情報表示エリア - APIレスポンスの詳細表示 */}
       <EstatMetaInfoDisplay
@@ -280,7 +237,7 @@ export default function EstatMetainfoPage({
           metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"
         }
         metaInfo={metaInfo}
-        loading={loading}
+        loading={isLoading}
         error={error}
       />
     </EstatAPIPageLayout>
