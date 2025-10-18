@@ -17,8 +17,6 @@ export interface EstatAPIPageLayoutProps {
   sidebar?: React.ReactNode;
   /** メインコンテンツ */
   children: React.ReactNode;
-  /** カードラッパーを使用するか（デフォルト: true） */
-  useCard?: boolean;
 }
 
 /**
@@ -27,7 +25,7 @@ export interface EstatAPIPageLayoutProps {
  * 機能:
  * - e-Stat API 関連ページの統一されたレイアウトを提供
  * - ヘッダー、メインコンテンツ、サイドバーの配置を管理
- * - カードラッパーの有無を選択可能
+ * - フラットデザインでシームレスな表示
  * - レスポンシブデザイン対応
  *
  * レイアウト構成:
@@ -42,7 +40,6 @@ export interface EstatAPIPageLayoutProps {
  *   icon={Database}
  *   actions={<RefreshButton />}
  *   sidebar={<MetaInfoSidebar />}
- *   useCard={true}
  * >
  *   <MetaInfoContent />
  * </EstatAPIPageLayout>
@@ -54,7 +51,6 @@ export function EstatAPIPageLayout({
   actions,
   sidebar,
   children,
-  useCard = true,
 }: EstatAPIPageLayoutProps) {
   // ===== レイアウトコンテンツの構築 =====
   const content = (
@@ -110,21 +106,6 @@ export function EstatAPIPageLayout({
   );
 
   // ===== レンダリング =====
-  if (useCard) {
-    // カードラッパーあり（デフォルト）
-    return (
-      <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
-        <div className="bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
-          {content}
-        </div>
-      </div>
-    );
-  }
-
-  // カードラッパーなし（フルスクリーン表示）
-  return (
-    <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
-      {content}
-    </div>
-  );
+  // フラットデザイン: 余白とカードスタイルを削除
+  return <div className="transition-all duration-300 min-h-screen">{content}</div>;
 }
