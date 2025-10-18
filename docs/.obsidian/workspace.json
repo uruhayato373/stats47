@@ -284,6 +284,8 @@
   },
   "active": "9b2af85ff4719092",
   "lastOpenFiles": [
+    "02_domain/estat-api/overview.md",
+    "02_domain/estat-api/implementation/estat-metainfo-r2-save-implementation.md",
     "02_domain/estat-api/specifications/01-architecture.md",
     "02_domain/estat-api/refactoring/estat-ranking-data-r2-save-implementation.md",
     "02_domain/estat-api/implementation/getting-started.md",
@@ -317,8 +319,6 @@
     "04_content_planning/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
     "04_content_planning/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
     "04_content_planning/03_ブログ記事/ブログ記事改善案.md",
-    "04_content_planning/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
-    "04_content_planning/03_ブログ記事/よまれる記事.md",
     "04_content_planning/03_ブログ記事",
     "04_content_planning/02_ダッシュボード",
     "04_content_planning/01_ランキング記事",

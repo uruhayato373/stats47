@@ -882,6 +882,186 @@ const cache = new MetaInfoCache();
 const metaInfo = await cache.getMetaInfo("0003412313");
 ```
 
+### 8.1 R2ストレージによる永続的キャッシュ
+
+メタ情報はCloudflare R2に保存することで、サーバー再起動後も永続化できます。
+
+#### R2キャッシュのメリット
+
+- **永続性**: サーバー再起動後もデータが保持される
+- **共有**: 複数のWorkerインスタンス間でキャッシュを共有
+- **コスト効率**: 頻繁にアクセスされるメタ情報のAPI呼び出しを削減
+- **高速**: R2からの読み取りはe-Stat APIより高速
+
+#### R2保存実装
+
+```typescript
+import { EstatMetaInfoR2Service } from "@/lib/estat-api/meta-info/EstatMetaInfoR2Service";
+import { EstatMetaInfoResponse } from "@/lib/estat-api";
+
+/**
+ * e-StatメタインフォメーションをR2に保存
+ */
+async function saveMetaInfoToR2(
+  env: { METAINFO_BUCKET: R2Bucket },
+  statsDataId: string,
+  metaInfo: EstatMetaInfoResponse
+): Promise<void> {
+  const result = await EstatMetaInfoR2Service.saveMetaInfo(
+    env,
+    statsDataId,
+    metaInfo
+  );
+
+  console.log(`R2保存完了: ${result.key} (${result.size}バイト)`);
+}
+```
+
+#### R2からの取得実装
+
+```typescript
+/**
+ * R2からメタ情報を取得（キャッシュヒット時）
+ * キャッシュミス時はe-Stat APIから取得
+ */
+async function getMetaInfoWithR2Cache(
+  env: { METAINFO_BUCKET: R2Bucket },
+  statsDataId: string
+): Promise<EstatMetaInfoResponse> {
+  // R2キャッシュを確認
+  const cached = await EstatMetaInfoR2Service.getMetaInfo(env, statsDataId);
+
+  if (cached) {
+    console.log(`R2キャッシュヒット: ${statsDataId}`);
+    return cached;
+  }
+
+  // キャッシュミス: e-Stat APIから取得
+  console.log(`R2キャッシュミス: ${statsDataId} - API呼び出し`);
+  const metaInfo = await getMetaInfo({
+    appId: "YOUR_APP_ID",
+    statsDataId,
+  });
+
+  // R2に保存（次回のキャッシュヒット用）
+  await EstatMetaInfoR2Service.saveMetaInfo(env, statsDataId, metaInfo);
+
+  return metaInfo;
+}
+```
+
+#### R2キャッシュ管理
+
+```typescript
+/**
+ * 保存済みメタ情報一覧の取得
+ */
+async function listCachedMetaInfo(
+  env: { METAINFO_BUCKET: R2Bucket }
+): Promise<string[]> {
+  return await EstatMetaInfoR2Service.listAllCaches(env);
+}
+
+/**
+ * 特定のメタ情報キャッシュを削除
+ */
+async function deleteCachedMetaInfo(
+  env: { METAINFO_BUCKET: R2Bucket },
+  statsDataId: string
+): Promise<void> {
+  await EstatMetaInfoR2Service.deleteCache(env, statsDataId);
+  console.log(`キャッシュ削除完了: ${statsDataId}`);
+}
+```
+
+#### R2保存データ構造
+
+```json
+{
+  "version": "1.0",
+  "stats_data_id": "0003412313",
+  "saved_at": "2025-10-18T12:00:00Z",
+  "meta_info_response": {
+    "GET_META_INFO": {
+      // ... 完全なe-Stat APIレスポンス
+    }
+  },
+  "summary": {
+    "table_title": "都道府県，男女別人口",
+    "stat_name": "国勢調査",
+    "organization": "総務省",
+    "survey_date": "202010",
+    "updated_date": "2023-12-01"
+  }
+}
+```
+
+#### R2キー設計
+
+```
+estat_metainfo/{statsDataId}/meta.json
+
+例:
+estat_metainfo/0003412313/meta.json
+estat_metainfo/0003448738/meta.json
+```
+
+#### キャッシュ戦略の選択
+
+| 方法              | 用途                         | TTL   | 永続性 |
+| ----------------- | ---------------------------- | ----- | ------ |
+| メモリキャッシュ  | 同一リクエスト内の再利用     | 短期  | なし   |
+| R2キャッシュ      | 複数リクエスト・Worker間共有 | 長期  | あり   |
+| D1データベース    | 検索・フィルタが必要な場合   | 永続  | あり   |
+
+**推奨**: R2キャッシュとメモリキャッシュの組み合わせ
+
+```typescript
+class HybridMetaInfoCache {
+  private memoryCache = new MetaInfoCache();
+
+  async getMetaInfo(
+    env: { METAINFO_BUCKET: R2Bucket },
+    statsDataId: string
+  ): Promise<EstatMetaInfoResponse> {
+    // 1. メモリキャッシュを確認
+    const memCached = this.memoryCache.cache.get(statsDataId);
+    if (memCached && Date.now() - memCached.timestamp < 3600000) {
+      // 1時間
+      return memCached.data;
+    }
+
+    // 2. R2キャッシュを確認
+    const r2Cached = await EstatMetaInfoR2Service.getMetaInfo(env, statsDataId);
+    if (r2Cached) {
+      // メモリキャッシュにも保存
+      this.memoryCache.cache.set(statsDataId, {
+        data: r2Cached as GetMetaInfoResponse,
+        timestamp: Date.now(),
+      });
+      return r2Cached;
+    }
+
+    // 3. e-Stat APIから取得
+    const metaInfo = await getMetaInfo({
+      appId: "YOUR_APP_ID",
+      statsDataId,
+    });
+
+    // 両方のキャッシュに保存
+    this.memoryCache.cache.set(statsDataId, {
+      data: metaInfo,
+      timestamp: Date.now(),
+    });
+    await EstatMetaInfoR2Service.saveMetaInfo(env, statsDataId, metaInfo);
+
+    return metaInfo;
+  }
+}
+```
+
+詳細な実装ガイドについては、[EstatMetainfoPage R2保存機能実装ガイド](../implementation/estat-metainfo-r2-save-implementation.md)を参照してください。
+
 ## 9. ベストプラクティス
 
 ### ✅ 推奨事項

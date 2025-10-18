@@ -102,6 +102,63 @@ export default function EstatMetainfoPage({
     }
   };
 
+  /**
+   * メタ情報をR2に保存する
+   */
+  const handleSaveToR2 = async () => {
+    if (!metaInfo || !currentStatsId) {
+      setSaveStatus({
+        type: "error",
+        message: "保存するメタ情報がありません",
+      });
+      return;
+    }
+
+    setIsSaving(true);
+    setSaveStatus({ type: null, message: "" });
+
+    try {
+      const requestBody: SaveMetaInfoCacheRequest = {
+        statsDataId: currentStatsId,
+        metaInfoResponse: metaInfo,
+      };
+
+      const response = await fetch("/api/estat-api/metainfo-cache/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSaveStatus({
+          type: "success",
+          message: result.message,
+        });
+        // 3秒後にステータスメッセージを消す
+        setTimeout(() => {
+          setSaveStatus({ type: null, message: "" });
+        }, 3000);
+      } else {
+        setSaveStatus({
+          type: "error",
+          message: result.message || "保存に失敗しました",
+        });
+      }
+    } catch (error) {
+      console.error("R2保存エラー:", error);
+      setSaveStatus({
+        type: "error",
+        message: "保存中にエラーが発生しました",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   // ===== 副作用（useEffect） =====
 
   /**
@@ -135,15 +192,32 @@ export default function EstatMetainfoPage({
       icon={BarChart3}
       actions={
         currentStatsId && (
-          <button
-            type="button"
-            onClick={handleRefresh}
-            disabled={loading}
-            className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
-          >
-            <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
-            {loading ? "更新中..." : "更新"}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleRefresh}
+              disabled={loading}
+              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+            >
+              <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
+              {loading ? "更新中..." : "更新"}
+            </button>
+            <button
+              type="button"
+              onClick={handleSaveToR2}
+              disabled={loading || isSaving || !metaInfo}
+              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-blue-200 bg-blue-500 text-white shadow-xs hover:bg-blue-600 focus:outline-hidden focus:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {isSaving ? (
+                <RefreshCw className="w-3 h-3 animate-spin" />
+              ) : saveStatus.type === "success" ? (
+                <Check className="w-3 h-3" />
+              ) : (
+                <Save className="w-3 h-3" />
+              )}
+              {isSaving ? "保存中..." : "R2に保存"}
+            </button>
+          </div>
         )
       }
       sidebar={
@@ -154,6 +228,26 @@ export default function EstatMetainfoPage({
         />
       }
     >
+      {/* ステータスメッセージ表示 */}
+      {saveStatus.type && (
+        <div
+          className={`mb-4 p-3 rounded-lg border ${
+            saveStatus.type === "success"
+              ? "bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300"
+              : "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {saveStatus.type === "success" ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <AlertCircle className="w-4 h-4" />
+            )}
+            <span className="text-sm font-medium">{saveStatus.message}</span>
+          </div>
+        </div>
+      )}
+
       {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
       <EstatMetaInfoFetcher onSubmit={handleFetchMetaInfo} loading={loading} />
 
