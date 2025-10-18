@@ -12,7 +12,7 @@ import { RankingHeader } from "../../ranking/ui/RankingHeader";
 import { LoadingView } from "../../ranking/ui/LoadingView";
 import { ErrorView } from "../../ranking/ui/ErrorView";
 import { PrefectureDataTableClient } from "../../ranking/ui/PrefectureDataTableClient";
-import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
+import { RankingVisualizationOptions } from "@/lib/ranking/types";
 import { Modal } from "@/components/atoms/Modal";
 import {
   RankingItemSettings,

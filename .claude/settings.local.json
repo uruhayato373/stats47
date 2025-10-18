@@ -32,7 +32,15 @@
       "Bash(npx eslint src/lib/database/estat/repositories/metainfo-r2-repository.ts src/app/api/estat-api/metainfo-cache/save/route.ts --max-warnings=0)",
       "Bash(for file in /Users/minamidaisuke/stats47/docs/02_domain/estat-api/meta-info/overview.md /Users/minamidaisuke/stats47/docs/02_domain/estat-api/meta-info/specifications/api.md)",
       "Bash(do sed -i '' 's/EstatMetaInfoR2Service/EstatMetaInfoR2Repository/g' \"$file\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(cp /Users/minamidaisuke/stats47/src/types/models/ranking.ts /Users/minamidaisuke/stats47/src/lib/ranking/types/item.ts)",
+      "Bash(cp /Users/minamidaisuke/stats47/src/types/ranking/unified.ts /Users/minamidaisuke/stats47/src/lib/ranking/types/unified.ts)",
+      "Bash(cp /Users/minamidaisuke/stats47/src/types/visualization/ranking-options.ts /Users/minamidaisuke/stats47/src/lib/ranking/types/visualization.ts)",
+      "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/models/ranking' {} ;)",
+      "Bash(for file in /Users/minamidaisuke/stats47/src/app/api/estat-api/meta-info/ranking-key/route.ts /Users/minamidaisuke/stats47/src/components/molecules/ranking/StatisticsSummary/StatisticsSummary.tsx /Users/minamidaisuke/stats47/src/components/organisms/visualization/ChoroplethMap/ChoroplethMap.tsx /Users/minamidaisuke/stats47/src/components/organisms/ranking/settings/containers/EstatRankingDataContainer.tsx /Users/minamidaisuke/stats47/src/components/organisms/ranking/RankingNavigation/RankingNavigation.tsx /Users/minamidaisuke/stats47/src/hooks/useRankingItemsEditor.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-repository.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-items.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-converters.ts)",
+      "Bash(do sed -i '' 's|@/types/models/ranking|@/lib/ranking/types|g' \"$file\")",
+      "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/ranking/unified' {} ;)",
+      "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/models/r2/estat-metainfo-cache' {} ;)"
     ],
     "deny": [],
     "ask": []

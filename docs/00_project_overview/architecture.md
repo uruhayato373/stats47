@@ -356,6 +356,321 @@ src/
 これらの条件を満たす場合は、たとえ特定のページでのみ使用されるコンポーネントであっても、
 アトミックデザインの Organism レイヤーに配置し、適切な命名規則に従います。
 
+## 型定義アーキテクチャ
+
+### 概要
+
+stats47 プロジェクトでは、TypeScript の型定義を3層アーキテクチャで管理し、コードの保守性と型安全性を向上させています。
+
+### 設計原則
+
+#### ドメイン駆動設計（DDD）による型の配置
+
+型定義は「ドメインロジックと共に配置する」（Co-location with Domain Logic）原則に従い、以下のように階層化されています：
+
+1. **共有型（Shared Types）**: 複数のドメインで共有される汎用的な型
+2. **ドメイン型（Domain Types）**: 特定のドメインに特化した型
+3. **コンポーネント型（Component Types）**: 特定のコンポーネントでのみ使用される型
+
+### 3層アーキテクチャ
+
+```
+src/
+├── types/                      # Layer 1: 共有型（Shared Types）
+│   ├── shared/                 # 複数ドメインで共有される汎用型
+│   │   ├── index.ts           # 統合エクスポート
+│   │   ├── pagination.ts       # ページネーション型
+│   │   ├── table.ts           # テーブル型
+│   │   ├── primitives.ts      # プリミティブ型拡張
+│   │   ├── subcategory.ts     # サブカテゴリ型
+│   │   └── utility.ts         # ユーティリティ型
+│   ├── models/                 # ドメインモデル（レガシー）
+│   ├── visualization/          # 可視化型（レガシー）
+│   └── index.ts               # 統合エクスポート
+│
+├── lib/                        # Layer 2: ドメイン型（Domain Types）
+│   ├── ranking/               # ランキングドメイン
+│   │   ├── types/            # ランキング型定義
+│   │   │   ├── index.ts      # 統合エクスポート
+│   │   │   ├── item.ts       # ランキング項目・値の型
+│   │   │   ├── unified.ts    # 統一ランキングデータ型
+│   │   │   └── visualization.ts # ランキング可視化オプション型
+│   │   ├── ranking-repository.ts
+│   │   └── ranking-converters.ts
+│   │
+│   ├── database/              # データベースドメイン
+│   │   └── estat/            # e-Stat データベース
+│   │       ├── types/        # e-Stat データベース型定義
+│   │       │   ├── index.ts  # 統合エクスポート
+│   │       │   ├── metainfo.ts # メタ情報型
+│   │       │   └── r2-cache.ts # R2キャッシュ型
+│   │       ├── repositories/ # リポジトリ層
+│   │       └── services/     # サービス層
+│   │
+│   └── area/                  # 地域ドメイン
+│       ├── types/            # 地域型定義
+│       └── area-repository.ts
+│
+└── components/                 # Layer 3: コンポーネント型（Component Types）
+    └── organisms/
+        └── ranking/
+            └── RankingTable/
+                └── types.ts   # コンポーネント固有の型
+```
+
+### 型定義の配置ルール
+
+#### Layer 1: 共有型（src/types/shared/）
+
+複数のドメインで使用される汎用的な型を配置します。
+
+**配置基準**:
+- 3つ以上のドメインで使用される型
+- ビジネスロジックに依存しない汎用型
+- プリミティブ型の拡張
+
+**例**:
+```typescript
+// src/types/shared/pagination.ts
+export interface PaginationParams {
+  page: number;
+  limit: number;
+  offset: number;
+}
+
+// src/types/shared/table.ts
+export interface TableColumn<T> {
+  key: keyof T;
+  label: string;
+  sortable?: boolean;
+}
+```
+
+**インポート**:
+```typescript
+import { PaginationParams, TableColumn } from '@/types/shared';
+// または
+import { PaginationParams } from '@/types'; // src/types/index.ts経由
+```
+
+#### Layer 2: ドメイン型（src/lib/*/types/）
+
+特定のドメインに関連する型を、そのドメインのロジックと共に配置します。
+
+**配置基準**:
+- 特定のドメインでのみ使用される型
+- ドメインロジックに密接に関連する型
+- リポジトリ、サービス層で使用される型
+
+**例**:
+```typescript
+// src/lib/ranking/types/item.ts
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+}
+
+// src/lib/database/estat/types/metainfo.ts
+export interface EstatMetaInfo {
+  stats_data_id: string;
+  stat_name: string;
+  title: string;
+  area_type: AreaType;
+}
+```
+
+**インポート**:
+```typescript
+import { RankingItem } from '@/lib/ranking/types';
+import { EstatMetaInfo } from '@/lib/database/estat/types';
+```
+
+#### Layer 3: コンポーネント型（src/components/*/types.ts）
+
+特定のコンポーネントでのみ使用される型を配置します。
+
+**配置基準**:
+- 単一コンポーネント内でのみ使用される型
+- プロパティ型（Props）
+- ローカルステート型
+
+**例**:
+```typescript
+// src/components/organisms/ranking/RankingTable/types.ts
+export interface RankingTableProps {
+  data: RankingItem[];
+  loading: boolean;
+  onSort: (column: string) => void;
+}
+
+export interface RankingTableState {
+  sortColumn: string;
+  sortDirection: 'asc' | 'desc';
+}
+```
+
+**インポート**:
+```typescript
+import { RankingTableProps } from './types';
+```
+
+### 型のエクスポート戦略
+
+各ドメインの型は`index.ts`で統合してエクスポートします。
+
+**例**:
+```typescript
+// src/lib/ranking/types/index.ts
+/**
+ * ランキング型定義
+ * Domain-driven Designに従い、ランキングドメインの型をここに集約
+ */
+
+// ランキング項目とランキング値の型定義
+export * from "./item";
+
+// 統一ランキングデータの型定義（アダプターレイヤー用）
+export * from "./unified";
+
+// ランキング可視化オプションの型定義
+export * from "./visualization";
+```
+
+### 型定義のベストプラクティス
+
+#### 1. 型の命名規則
+
+```typescript
+// ✅ 良い例: 明確で説明的な名前
+export interface RankingItem { ... }
+export interface EstatMetaInfo { ... }
+export type AreaType = 'prefecture' | 'municipality';
+
+// ❌ 悪い例: 曖昧で短すぎる名前
+export interface Item { ... }
+export interface Meta { ... }
+export type AT = 'p' | 'm';
+```
+
+#### 2. 型の分割
+
+```typescript
+// ✅ 良い例: 関連する型をファイルごとにグループ化
+// src/lib/ranking/types/item.ts
+export interface RankingItem { ... }
+export interface RankingValue { ... }
+export interface RankingOption<T> { ... }
+
+// ❌ 悪い例: すべての型を1つのファイルに
+// src/lib/ranking/types/index.ts
+export interface RankingItem { ... }
+export interface EstatMetaInfo { ... } // 異なるドメイン
+export interface PaginationParams { ... } // 共有型
+```
+
+#### 3. 型の再利用
+
+```typescript
+// ✅ 良い例: 既存の型を拡張
+export interface RankingItemDB extends RankingItem {
+  created_at: string;
+  updated_at: string;
+}
+
+// ❌ 悪い例: 重複した型定義
+export interface RankingItemDB {
+  id: string;
+  subcategoryId: string;
+  // ... すべてのフィールドを再定義
+  created_at: string;
+  updated_at: string;
+}
+```
+
+#### 4. 型のドキュメント
+
+```typescript
+// ✅ 良い例: JSDocでドキュメント化
+/**
+ * ランキングアイテム
+ *
+ * @remarks
+ * サブカテゴリーごとのランキングデータを表します。
+ * データベースから取得した生データと、
+ * 表示用にフォーマットされたデータの両方を含みます。
+ *
+ * @example
+ * ```typescript
+ * const item: RankingItem = {
+ *   id: "tokyo-population-2023",
+ *   subcategoryId: "basic-population",
+ *   areaCode: "13000",
+ *   value: 14000000,
+ *   rank: 1
+ * };
+ * ```
+ */
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+}
+```
+
+### 型定義の移行履歴
+
+#### 移行前の構造（レガシー）
+
+```
+src/types/
+├── models/
+│   ├── ranking.ts              # ランキング型
+│   └── r2/
+│       └── estat-metainfo-cache.ts # R2キャッシュ型
+├── ranking/
+│   └── unified.ts              # 統一ランキングデータ型
+├── visualization/
+│   └── ranking-options.ts      # ランキング可視化オプション型
+└── common/                     # 共通型
+    ├── pagination.ts
+    └── table.ts
+```
+
+**問題点**:
+- 型定義がドメインロジックから分離されている
+- 同じドメインの型が複数の場所に散在
+- インポートパスが複雑で保守が困難
+
+#### 移行後の構造（現在）
+
+```
+src/
+├── types/shared/               # 共有型（統合）
+│   ├── pagination.ts
+│   └── table.ts
+├── lib/ranking/types/          # ランキングドメイン型
+│   ├── item.ts                # 旧: models/ranking.ts
+│   ├── unified.ts             # 旧: ranking/unified.ts
+│   └── visualization.ts       # 旧: visualization/ranking-options.ts
+└── lib/database/estat/types/   # e-Statデータベース型
+    └── r2-cache.ts            # 旧: models/r2/estat-metainfo-cache.ts
+```
+
+**改善点**:
+- ドメインロジックと型定義が同じ場所に配置
+- 型のインポートパスが明確で一貫性がある
+- ドメインごとに型が整理され保守性が向上
+
+### 関連ドキュメント
+
+- [型定義ガイド](../01_development_guide/type-definitions-guide.md) - 型定義の詳細ガイド
+- [コーディング規約](../02_開発/01_コーディング規約.md) - TypeScript コーディング規約
+
 ## e-Stat API 統合アーキテクチャ
 
 ### データフロー概要（拡張版）

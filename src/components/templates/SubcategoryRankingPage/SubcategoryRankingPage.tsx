@@ -1,6 +1,6 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
-import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
+import { SubcategoryRankingPageProps } from "@/types/shared/subcategory";
 import { RankingDataContainer } from "@/components/organisms/ranking/RankingDataContainer";
 import { RankingLayout } from "@/components/ranking/ui/RankingLayout";
 import { RankingNavigation } from "@/components/organisms/ranking/RankingNavigation";

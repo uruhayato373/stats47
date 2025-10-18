@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
 import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { EstatGenderDonutChart } from "@/components/dashboard/GenderDonutChart";
 

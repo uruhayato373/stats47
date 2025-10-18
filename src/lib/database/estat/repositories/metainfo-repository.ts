@@ -1,7 +1,7 @@
 import { getDataProvider } from "@/lib/database";
 import { getEnvironmentConfig } from "@/lib/env";
 import { mockDataProvider, MockDataProvider } from "@/lib/database/mock";
-import type { AreaType } from "@/types/ranking/unified";
+import type { AreaType } from "@/lib/ranking/types";
 import type {
   EstatMetaInfo,
   SaveEstatMetaInfoInput,

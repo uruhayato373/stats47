@@ -10,7 +10,7 @@ import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSumm
 import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSelector";
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/organisms/ranking/PrefectureDataTableClient";
-import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
+import { RankingVisualizationOptions } from "@/lib/ranking/types";
 import { Modal } from "@/components/common/Modal/Modal";
 import {
   RankingItemSettings,
@@ -18,7 +18,7 @@ import {
 } from "@/components/organisms/ranking/RankingItemSettings";
 import { Settings } from "lucide-react";
 import { ExportButton } from "@/components/atoms/ExportButton";
-import { RankingItem } from "@/types/models/ranking";
+import { RankingItem } from "@/lib/ranking/types";
 
 /**
  * EstatRankingDataContainerのプロパティ

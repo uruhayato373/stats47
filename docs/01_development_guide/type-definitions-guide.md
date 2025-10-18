@@ -1,0 +1,729 @@
+---
+title: 型定義ガイド
+created: 2025-01-19
+updated: 2025-01-19
+tags:
+  - stats47
+  - TypeScript
+  - 型定義
+  - アーキテクチャ
+  - ベストプラクティス
+---
+
+# 型定義ガイド
+
+## 概要
+
+このガイドでは、stats47プロジェクトにおけるTypeScript型定義の構成、命名規則、ベストプラクティスについて説明します。
+
+## 型定義アーキテクチャ
+
+### 3層アーキテクチャ
+
+stats47プロジェクトでは、型定義を以下の3層に分けて管理しています：
+
+#### Layer 1: 共有型（Shared Types）
+
+**場所**: `src/types/shared/`
+
+**目的**: 複数のドメインで共有される汎用的な型定義
+
+**配置基準**:
+- 3つ以上のドメインで使用される型
+- ビジネスロジックに依存しない汎用型
+- プリミティブ型の拡張
+
+**ファイル構成**:
+```
+src/types/shared/
+├── index.ts           # 統合エクスポート
+├── pagination.ts      # ページネーション型
+├── table.ts          # テーブル型
+├── primitives.ts     # プリミティブ型拡張
+├── subcategory.ts    # サブカテゴリ型
+└── utility.ts        # ユーティリティ型
+```
+
+**例**:
+```typescript
+// src/types/shared/pagination.ts
+export interface PaginationParams {
+  page: number;
+  limit: number;
+  offset: number;
+}
+
+export interface PaginationResponse<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
+  hasMore: boolean;
+}
+```
+
+**インポート方法**:
+```typescript
+import { PaginationParams, PaginationResponse } from '@/types/shared';
+// または
+import { PaginationParams } from '@/types';
+```
+
+#### Layer 2: ドメイン型（Domain Types）
+
+**場所**: `src/lib/*/types/`
+
+**目的**: 特定のドメインに関連する型定義をドメインロジックと共に配置
+
+**配置基準**:
+- 特定のドメインでのみ使用される型
+- ドメインロジックに密接に関連する型
+- リポジトリ、サービス層で使用される型
+
+**ファイル構成例（ランキングドメイン）**:
+```
+src/lib/ranking/
+├── types/
+│   ├── index.ts          # 統合エクスポート
+│   ├── item.ts           # ランキング項目・値の型
+│   ├── unified.ts        # 統一ランキングデータ型
+│   └── visualization.ts  # ランキング可視化オプション型
+├── ranking-repository.ts
+├── ranking-converters.ts
+└── ranking-items.ts
+```
+
+**例**:
+```typescript
+// src/lib/ranking/types/item.ts
+/**
+ * ランキングアイテム
+ *
+ * @remarks
+ * サブカテゴリーごとのランキングデータを表します。
+ */
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+  year: number;
+}
+
+/**
+ * ランキング値（数値型）
+ */
+export interface RankingValue {
+  value: number;
+  unit?: string;
+  displayValue?: string;
+}
+```
+
+**インポート方法**:
+```typescript
+import { RankingItem, RankingValue } from '@/lib/ranking/types';
+```
+
+#### Layer 3: コンポーネント型（Component Types）
+
+**場所**: `src/components/*/types.ts`
+
+**目的**: 特定のコンポーネントでのみ使用される型定義
+
+**配置基準**:
+- 単一コンポーネント内でのみ使用される型
+- プロパティ型（Props）
+- ローカルステート型
+- コンポーネント固有のイベント型
+
+**例**:
+```typescript
+// src/components/organisms/ranking/RankingTable/types.ts
+import { RankingItem } from '@/lib/ranking/types';
+
+export interface RankingTableProps {
+  data: RankingItem[];
+  loading: boolean;
+  error?: string;
+  onSort: (column: keyof RankingItem, direction: 'asc' | 'desc') => void;
+  onRowClick?: (item: RankingItem) => void;
+}
+
+export interface RankingTableState {
+  sortColumn: keyof RankingItem;
+  sortDirection: 'asc' | 'desc';
+  selectedRowId: string | null;
+}
+```
+
+**インポート方法**:
+```typescript
+// 同じディレクトリ内でのインポート
+import { RankingTableProps, RankingTableState } from './types';
+```
+
+## 型定義のベストプラクティス
+
+### 1. 命名規則
+
+#### インターフェース名
+
+```typescript
+// ✅ 良い例: 明確で説明的な名前
+export interface RankingItem { ... }
+export interface EstatMetaInfo { ... }
+export interface UserProfile { ... }
+
+// ❌ 悪い例: 曖昧で短すぎる名前
+export interface Item { ... }
+export interface Meta { ... }
+export interface User { ... }
+```
+
+#### 型エイリアス名
+
+```typescript
+// ✅ 良い例: 明確な型名
+export type AreaType = 'national' | 'prefecture' | 'municipality';
+export type SortDirection = 'asc' | 'desc';
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+
+// ❌ 悪い例: 曖昧な型名
+export type AT = 'n' | 'p' | 'm';
+export type Dir = 'a' | 'd';
+export type Method = 'G' | 'P';
+```
+
+#### ジェネリック型パラメータ名
+
+```typescript
+// ✅ 良い例: 意味のある型パラメータ名
+export interface ApiResponse<TData, TError = Error> {
+  data: TData | null;
+  error: TError | null;
+}
+
+export interface Repository<TEntity, TId = string> {
+  findById(id: TId): Promise<TEntity | null>;
+  save(entity: TEntity): Promise<TEntity>;
+}
+
+// ❌ 悪い例: 単一文字のみの型パラメータ名（意味が不明確）
+export interface ApiResponse<T, E = Error> {
+  data: T | null;
+  error: E | null;
+}
+```
+
+### 2. 型の分割
+
+#### 関連する型をグループ化
+
+```typescript
+// ✅ 良い例: 関連する型を同じファイルにグループ化
+// src/lib/ranking/types/item.ts
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+}
+
+export interface RankingItemDB extends RankingItem {
+  created_at: string;
+  updated_at: string;
+}
+
+export interface RankingValue {
+  value: number;
+  unit?: string;
+  displayValue?: string;
+}
+
+export interface RankingOption<T> {
+  value: T;
+  label: string;
+  disabled?: boolean;
+}
+```
+
+#### ドメインごとに型を分離
+
+```typescript
+// ❌ 悪い例: すべての型を1つのファイルに
+// src/types/index.ts
+export interface RankingItem { ... }       // ランキングドメイン
+export interface EstatMetaInfo { ... }    // e-Statドメイン
+export interface Prefecture { ... }       // 地域ドメイン
+export interface PaginationParams { ... } // 共有型
+
+// ✅ 良い例: ドメインごとに分離
+// src/lib/ranking/types/index.ts
+export interface RankingItem { ... }
+
+// src/lib/database/estat/types/index.ts
+export interface EstatMetaInfo { ... }
+
+// src/lib/area/types/index.ts
+export interface Prefecture { ... }
+
+// src/types/shared/pagination.ts
+export interface PaginationParams { ... }
+```
+
+### 3. 型の再利用
+
+#### 既存の型を拡張
+
+```typescript
+// ✅ 良い例: 既存の型を拡張
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+}
+
+export interface RankingItemDB extends RankingItem {
+  created_at: string;
+  updated_at: string;
+}
+
+export interface RankingItemWithMetadata extends RankingItem {
+  areaName: string;
+  subcategoryName: string;
+  categoryName: string;
+}
+
+// ❌ 悪い例: すべてのフィールドを再定義
+export interface RankingItemDB {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+  created_at: string;
+  updated_at: string;
+}
+```
+
+#### Pick, Omit, Partialの活用
+
+```typescript
+// ✅ 良い例: ユーティリティ型の活用
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'user';
+  createdAt: string;
+}
+
+// パスワードを除外した公開用ユーザー型
+export type PublicUser = Omit<User, 'password'>;
+
+// ユーザー作成時の入力型（IDとcreatedAtは不要）
+export type CreateUserInput = Omit<User, 'id' | 'createdAt'>;
+
+// ユーザー更新時の入力型（すべてのフィールドがオプショナル）
+export type UpdateUserInput = Partial<Omit<User, 'id' | 'createdAt'>>;
+
+// 特定のフィールドのみを抽出
+export type UserCredentials = Pick<User, 'email' | 'password'>;
+```
+
+### 4. 型のドキュメント
+
+#### JSDocで型をドキュメント化
+
+```typescript
+// ✅ 良い例: 詳細なJSDocコメント
+/**
+ * ランキングアイテム
+ *
+ * @remarks
+ * サブカテゴリーごとのランキングデータを表します。
+ * データベースから取得した生データと、
+ * 表示用にフォーマットされたデータの両方を含みます。
+ *
+ * @example
+ * ```typescript
+ * const item: RankingItem = {
+ *   id: "tokyo-population-2023",
+ *   subcategoryId: "basic-population",
+ *   areaCode: "13000",
+ *   value: 14000000,
+ *   rank: 1,
+ *   year: 2023
+ * };
+ * ```
+ */
+export interface RankingItem {
+  /** 一意識別子（形式: {areaCode}-{subcategoryId}-{year}） */
+  id: string;
+
+  /** サブカテゴリーID */
+  subcategoryId: string;
+
+  /** 地域コード（全国: 00000、都道府県: 13000など） */
+  areaCode: string;
+
+  /** ランキング値 */
+  value: number;
+
+  /** ランキング順位（1始まり） */
+  rank: number;
+
+  /** 年度 */
+  year: number;
+}
+
+// ❌ 悪い例: コメントなし
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+  year: number;
+}
+```
+
+### 5. 型ガードの活用
+
+```typescript
+// ✅ 良い例: 型ガードで型安全性を向上
+export interface RankingItem {
+  id: string;
+  value: number;
+  rank: number;
+}
+
+export interface RankingError {
+  message: string;
+  code: string;
+}
+
+// 型ガード関数
+export function isRankingItem(data: unknown): data is RankingItem {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'id' in data &&
+    'value' in data &&
+    'rank' in data &&
+    typeof data.id === 'string' &&
+    typeof data.value === 'number' &&
+    typeof data.rank === 'number'
+  );
+}
+
+export function isRankingError(data: unknown): data is RankingError {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'message' in data &&
+    'code' in data &&
+    typeof data.message === 'string' &&
+    typeof data.code === 'string'
+  );
+}
+
+// 使用例
+async function fetchRankingData(id: string): Promise<RankingItem> {
+  const response = await fetch(`/api/ranking/${id}`);
+  const data = await response.json();
+
+  if (!isRankingItem(data)) {
+    throw new Error('Invalid ranking data format');
+  }
+
+  return data; // TypeScriptはここでdataがRankingItem型であることを認識
+}
+```
+
+### 6. ユニオン型と判別ユニオン
+
+```typescript
+// ✅ 良い例: 判別ユニオンで型安全な状態管理
+export type ApiState<TData, TError = Error> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: TData }
+  | { status: 'error'; error: TError };
+
+// 使用例
+function RankingDisplay({ state }: { state: ApiState<RankingItem[]> }) {
+  // TypeScriptは各caseブランチで正確な型を認識
+  switch (state.status) {
+    case 'idle':
+      return <div>データを読み込んでいません</div>;
+    case 'loading':
+      return <div>読み込み中...</div>;
+    case 'success':
+      // state.dataにアクセス可能
+      return <RankingList data={state.data} />;
+    case 'error':
+      // state.errorにアクセス可能
+      return <div>エラー: {state.error.message}</div>;
+  }
+}
+```
+
+## ドメイン別型定義ガイド
+
+### ランキングドメイン
+
+**場所**: `src/lib/ranking/types/`
+
+**主要な型**:
+
+```typescript
+// src/lib/ranking/types/item.ts
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+  year: number;
+}
+
+export interface RankingValue {
+  value: number;
+  unit?: string;
+  displayValue?: string;
+}
+
+// src/lib/ranking/types/unified.ts
+export interface UnifiedRankingData {
+  items: RankingItem[];
+  metadata: RankingMetadata;
+  statistics: RankingStatistics;
+}
+
+// src/lib/ranking/types/visualization.ts
+export interface RankingVisualizationOptions {
+  showMap: boolean;
+  showChart: boolean;
+  chartType: 'bar' | 'line' | 'pie';
+  colorScheme: string;
+}
+```
+
+**インポート例**:
+```typescript
+import { RankingItem, UnifiedRankingData, RankingVisualizationOptions } from '@/lib/ranking/types';
+```
+
+### e-Stat データベースドメイン
+
+**場所**: `src/lib/database/estat/types/`
+
+**主要な型**:
+
+```typescript
+// src/lib/database/estat/types/metainfo.ts
+export interface EstatMetaInfo {
+  stats_data_id: string;
+  stat_name: string;
+  title: string;
+  area_type: AreaType;
+  cycle?: string;
+  survey_date?: string;
+}
+
+// src/lib/database/estat/types/r2-cache.ts
+export interface MetaInfoCacheDataR2 {
+  statsDataId: string;
+  data: EstatMetaInfoResponse;
+  cachedAt: string;
+}
+```
+
+**インポート例**:
+```typescript
+import { EstatMetaInfo, MetaInfoCacheDataR2 } from '@/lib/database/estat/types';
+```
+
+### 地域ドメイン
+
+**場所**: `src/lib/area/types/`
+
+**主要な型**:
+
+```typescript
+// src/lib/area/types/index.ts
+export type AreaType = 'national' | 'prefecture' | 'municipality';
+
+export interface Prefecture {
+  code: string;
+  name: string;
+  nameEn: string;
+  region: string;
+}
+
+export interface Municipality {
+  code: string;
+  name: string;
+  prefectureCode: string;
+  type: 'city' | 'town' | 'village';
+}
+```
+
+**インポート例**:
+```typescript
+import { AreaType, Prefecture, Municipality } from '@/lib/area/types';
+```
+
+## よくある質問
+
+### Q1: 型定義をどこに配置すべきか迷った場合は？
+
+**A**: 以下のフローチャートに従って判断してください：
+
+1. **3つ以上のドメインで使用される？**
+   - はい → `src/types/shared/` に配置
+   - いいえ → 次へ
+
+2. **特定のコンポーネントでのみ使用される？**
+   - はい → `src/components/*/types.ts` に配置
+   - いいえ → 次へ
+
+3. **特定のドメインで使用される？**
+   - はい → `src/lib/DOMAIN/types/` に配置
+
+### Q2: 既存のコードで古い型定義パスを使っている場合は？
+
+**A**: 以下の手順で段階的に移行してください：
+
+1. 新しい場所に型定義をコピー
+2. 新しい場所から型をエクスポート
+3. インポートパスを一括置換（sedコマンドまたはエディタの一括置換機能を使用）
+4. 型チェックを実行（`npx tsc --noEmit --skipLibCheck`）
+5. 古い型定義ファイルを削除
+
+### Q3: 型の命名で接頭辞（I, T）は使うべき？
+
+**A**: stats47プロジェクトでは接頭辞を使用しません：
+
+```typescript
+// ❌ 避けるべき: 接頭辞の使用
+export interface IRankingItem { ... }
+export type TAreaType = 'national' | 'prefecture';
+
+// ✅ 推奨: 接頭辞なし
+export interface RankingItem { ... }
+export type AreaType = 'national' | 'prefecture';
+```
+
+### Q4: enumとユニオン型、どちらを使うべき？
+
+**A**: stats47プロジェクトではユニオン型を推奨します：
+
+```typescript
+// ❌ 避けるべき: enum
+export enum AreaType {
+  National = 'national',
+  Prefecture = 'prefecture',
+  Municipality = 'municipality'
+}
+
+// ✅ 推奨: ユニオン型
+export type AreaType = 'national' | 'prefecture' | 'municipality';
+
+// より堅牢な定義
+export const AREA_TYPES = ['national', 'prefecture', 'municipality'] as const;
+export type AreaType = typeof AREA_TYPES[number];
+```
+
+**理由**:
+- ユニオン型の方がTypeScriptの型システムと統合しやすい
+- enumはJavaScriptにコンパイルされる際に余分なコードが生成される
+- ユニオン型の方が型の絞り込みが容易
+
+### Q5: 型のバージョン管理はどうすべき？
+
+**A**: 型定義に破壊的変更を加える場合は、以下のアプローチを検討してください：
+
+```typescript
+// V1: 既存の型
+export interface RankingItemV1 {
+  id: string;
+  value: number;
+}
+
+// V2: 新しいフィールドを追加
+export interface RankingItemV2 extends RankingItemV1 {
+  rank: number;
+  year: number;
+}
+
+// 現在使用中のバージョンをエイリアス
+export type RankingItem = RankingItemV2;
+
+// 型ガードで異なるバージョンを判別
+export function isRankingItemV2(item: RankingItemV1 | RankingItemV2): item is RankingItemV2 {
+  return 'rank' in item && 'year' in item;
+}
+```
+
+## トラブルシューティング
+
+### 型エラー: "Cannot find module '@/lib/ranking/types'"
+
+**原因**: TypeScriptが新しいインポートパスを認識できていない
+
+**解決方法**:
+1. `tsconfig.json`の`paths`設定を確認
+2. エディタを再起動
+3. TypeScriptサーバーを再起動
+
+### 型エラー: "Property 'xxx' does not exist on type 'YYY'"
+
+**原因**: 型定義と実際のデータ構造が一致していない
+
+**解決方法**:
+1. 型定義を確認し、フィールド名が正しいか確認
+2. オプショナルフィールド（`?`）が適切に使用されているか確認
+3. 型ガードを使用してランタイムでデータ構造を検証
+
+### インポートパスが長すぎる
+
+**解決方法**: `tsconfig.json`の`paths`設定を使用して短縮パスを定義
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/lib/ranking/types": ["./src/lib/ranking/types"],
+      "@/lib/database/estat/types": ["./src/lib/database/estat/types"],
+      "@/types": ["./src/types"],
+      "@/types/shared": ["./src/types/shared"]
+    }
+  }
+}
+```
+
+## まとめ
+
+stats47プロジェクトの型定義は、以下の原則に従って構成されています：
+
+1. **3層アーキテクチャ**: 共有型、ドメイン型、コンポーネント型を明確に分離
+2. **Co-location**: ドメインロジックと型定義を同じ場所に配置
+3. **型安全性**: TypeScriptの型システムを最大限活用
+4. **保守性**: 明確な命名規則と適切なドキュメント
+5. **再利用性**: 型の拡張とユーティリティ型の活用
+
+これらの原則に従うことで、型安全で保守性の高いコードベースを維持できます。
+
+## 関連ドキュメント
+
+- [システムアーキテクチャ](../00_project_overview/architecture.md#型定義アーキテクチャ) - 型定義アーキテクチャの概要
+- [コーディング規約](./coding-standards.md) - TypeScriptコーディング規約
+- [開発ガイド](./development-guide.md) - 開発の基本ガイド

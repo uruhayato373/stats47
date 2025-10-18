@@ -2,7 +2,7 @@ import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 import {
   SaveMetaInfoCacheRequest,
   SaveMetaInfoCacheResponse,
-} from "@/types/models/r2/estat-metainfo-cache";
+} from "@/lib/database/estat/types";
 
 export class EstatMetaInfoCacheService {
   /**

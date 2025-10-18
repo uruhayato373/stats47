@@ -5,19 +5,18 @@
  * このファイルはプロジェクト全体で使用される型定義を集約してエクスポートします。
  * 型定義は以下のカテゴリに分類されています：
  *
- * - **Common**: 共通型定義（primitives, utility, pagination）
- * - **Models**: ドメインモデル（user, prefecture, subcategory, ranking）
- * - **Visualization**: 可視化関連の型（choropleth, topojson）
- * - **External**: 外部ライブラリの型拡張（next-auth）
+ * - Shared: 共有型定義（primitives, utility, pagination, table）
+ * - Models: ドメインモデル（user, prefecture, subcategory）
+ * - Visualization: 可視化関連の型（choropleth, topojson）
+ * - External: 外部ライブラリの型拡張（next-auth）
  *
- * @example
- * ```typescript
- * import { User, Prefecture, ApiResponse } from '@/types';
- * ```
+ * ドメイン固有の型は各ドメインディレクトリから直接インポートしてください：
+ * - ランキング型: @/lib/ranking/types
+ * - データベース型: @/lib/database/DOMAIN/types
  */
 
-// Common Types
-export * from "./common";
+// Shared Types - 複数ドメインで共有される汎用型
+export * from "./shared";
 
 // Model Types
 export * from "./models";

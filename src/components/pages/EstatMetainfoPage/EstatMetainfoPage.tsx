@@ -1,20 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { RefreshCw, BarChart3, Save, Check, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { RefreshCw, BarChart3, Check, AlertCircle } from "lucide-react";
 import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
-import {
-  useEstatMetaInfo,
-  saveMetaInfoToR2,
-} from "@/hooks/estat-api/useEstatMetaInfo";
-
-/**
- * 地域タイプの定義（クライアントサイド用）
- */
-type AreaType = "country" | "prefecture" | "municipality";
+import { useEstatMetaInfo } from "@/hooks/estat-api/useEstatMetaInfo";
+import { AreaType } from "@/lib/area/types";
 
 /**
  * e-Statメタ情報の型定義（クライアントサイド用）
@@ -62,16 +55,33 @@ export default function EstatMetainfoPage({
   /** 現在選択中の統計表ID */
   const [currentStatsId, setCurrentStatsId] = useState<string>("");
 
-  /** R2保存状態管理 */
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<{
+  /** 自動保存ステータス管理 */
+  const [autoSaveStatus, setAutoSaveStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
 
-  // ===== useSWRでメタ情報を取得 =====
+  // ===== useSWRでメタ情報を取得（自動保存有効） =====
   const { metaInfo, error, isLoading, refetch } = useEstatMetaInfo(
-    currentStatsId || null
+    currentStatsId || null,
+    {
+      autoSave: true,
+      onSaveSuccess: (message) => {
+        setAutoSaveStatus({ type: "success", message });
+        setTimeout(() => {
+          setAutoSaveStatus({ type: null, message: "" });
+        }, 3000);
+      },
+      onSaveError: (error) => {
+        setAutoSaveStatus({
+          type: "error",
+          message: error,
+        });
+        setTimeout(() => {
+          setAutoSaveStatus({ type: null, message: "" });
+        }, 5000);
+      },
+    }
   );
 
   // ===== イベントハンドラー =====
@@ -103,60 +113,8 @@ export default function EstatMetainfoPage({
     }
   };
 
-  /**
-   * メタ情報をR2に保存する
-   */
-  const handleSaveToR2 = async () => {
-    if (!metaInfo || !currentStatsId) {
-      setSaveStatus({
-        type: "error",
-        message: "保存するメタ情報がありません",
-      });
-      return;
-    }
-
-    setIsSaving(true);
-    setSaveStatus({ type: null, message: "" });
-
-    try {
-      const result = await saveMetaInfoToR2(currentStatsId, metaInfo);
-
-      setSaveStatus({
-        type: "success",
-        message: result.message || "保存が完了しました",
-      });
-
-      setTimeout(() => {
-        setSaveStatus({ type: null, message: "" });
-      }, 3000);
-    } catch (error) {
-      console.error("R2保存エラー:", error);
-      setSaveStatus({
-        type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "保存中にエラーが発生しました",
-      });
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
   // ===== 副作用（useEffect） =====
-
-  /**
-   * 初回マウント時の自動読み込み処理
-   * 保存済み統計表一覧がある場合、最初のアイテムを自動的に読み込む
-   */
-  useEffect(() => {
-    if (savedStatsList.length > 0 && !currentStatsId) {
-      const sortedData = [...savedStatsList].sort((a, b) =>
-        a.stats_data_id.localeCompare(b.stats_data_id)
-      );
-      setCurrentStatsId(sortedData[0].stats_data_id);
-    }
-  }, [savedStatsList, currentStatsId]);
+  // 初期自動読み込みは削除 - ユーザーが明示的に選択した時のみ取得
 
   // ===== レンダリング =====
 
@@ -166,34 +124,17 @@ export default function EstatMetainfoPage({
       icon={BarChart3}
       actions={
         currentStatsId && (
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handleRefresh}
-              disabled={isLoading}
-              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
-            >
-              <RefreshCw
-                className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`}
-              />
-              {isLoading ? "更新中..." : "更新"}
-            </button>
-            <button
-              type="button"
-              onClick={handleSaveToR2}
-              disabled={isLoading || isSaving || !metaInfo}
-              className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-blue-200 bg-blue-500 text-white shadow-xs hover:bg-blue-600 focus:outline-hidden focus:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isSaving ? (
-                <RefreshCw className="w-3 h-3 animate-spin" />
-              ) : saveStatus.type === "success" ? (
-                <Check className="w-3 h-3" />
-              ) : (
-                <Save className="w-3 h-3" />
-              )}
-              {isSaving ? "保存中..." : "R2に保存"}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={handleRefresh}
+            disabled={isLoading}
+            className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+          >
+            <RefreshCw
+              className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`}
+            />
+            {isLoading ? "更新中..." : "更新"}
+          </button>
         )
       }
       sidebar={
@@ -204,22 +145,24 @@ export default function EstatMetainfoPage({
         />
       }
     >
-      {/* ステータスメッセージ表示 */}
-      {saveStatus.type && (
+      {/* 自動保存ステータス表示 */}
+      {autoSaveStatus.type && (
         <div
           className={`mb-4 p-3 rounded-lg border ${
-            saveStatus.type === "success"
-              ? "bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300"
-              : "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
+            autoSaveStatus.type === "success"
+              ? "bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-300"
+              : "bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-300"
           }`}
         >
           <div className="flex items-center gap-2">
-            {saveStatus.type === "success" ? (
+            {autoSaveStatus.type === "success" ? (
               <Check className="w-4 h-4" />
             ) : (
               <AlertCircle className="w-4 h-4" />
             )}
-            <span className="text-sm font-medium">{saveStatus.message}</span>
+            <span className="text-sm font-medium">
+              {autoSaveStatus.message}
+            </span>
           </div>
         </div>
       )}
@@ -231,15 +174,21 @@ export default function EstatMetainfoPage({
       />
 
       {/* メタ情報表示エリア - APIレスポンスの詳細表示 */}
-      <EstatMetaInfoDisplay
-        key={
-          // 統計表IDをキーとして使用（同じIDの場合は再レンダリングを防ぐ）
-          metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"
-        }
-        metaInfo={metaInfo}
-        loading={isLoading}
-        error={error}
-      />
+      {currentStatsId ? (
+        <EstatMetaInfoDisplay
+          key={
+            // 統計表IDをキーとして使用（同じIDの場合は再レンダリングを防ぐ）
+            metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"
+          }
+          metaInfo={metaInfo}
+          loading={isLoading}
+          error={error}
+        />
+      ) : (
+        <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+          <p>統計表IDを入力してメタ情報を取得してください</p>
+        </div>
+      )}
     </EstatAPIPageLayout>
   );
 }

@@ -12,7 +12,7 @@ import {
   RankingItemDB,
   RankingValue,
   RankingValueDB,
-} from "@/types/models/ranking";
+} from "@/lib/ranking/types";
 
 /**
  * データベース型からアプリケーション型への変換ヘルパー関数（ランキング項目）

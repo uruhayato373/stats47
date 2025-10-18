@@ -4,7 +4,7 @@
  */
 
 import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
-import { MetaInfoCacheDataR2 } from "@/types/models/r2/estat-metainfo-cache";
+import { MetaInfoCacheDataR2 } from "@/lib/database/estat/types";
 import { R2S3Client, getR2S3Config } from "@/lib/r2/s3-client";
 
 /**

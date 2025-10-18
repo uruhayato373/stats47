@@ -3,6 +3,23 @@ import { fetcher } from "@/lib/swr/fetcher";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 
 /**
+ * APIレスポンスの型定義
+ */
+interface ApiResponse {
+  success: boolean;
+  data: EstatMetaInfoResponse;
+}
+
+/**
+ * useEstatMetaInfoのオプション
+ */
+interface UseEstatMetaInfoOptions {
+  autoSave?: boolean; // 自動保存を有効にするか
+  onSaveSuccess?: (message: string) => void; // 保存成功時のコールバック
+  onSaveError?: (error: string) => void; // 保存失敗時のコールバック
+}
+
+/**
  * useEstatMetaInfoの戻り値の型定義
  */
 interface UseEstatMetaInfoReturn {
@@ -20,14 +37,19 @@ interface UseEstatMetaInfoReturn {
  * - 重複リクエスト排除
  * - エラーリトライ（3回）
  * - ローディング状態管理
+ * - 自動R2保存（オプション）
  *
  * @param statsDataId - 統計表ID（nullの場合はリクエストを無効化）
+ * @param options - オプション設定
  * @returns メタ情報、エラー、ローディング状態、再取得関数
  */
 export function useEstatMetaInfo(
-  statsDataId: string | null
+  statsDataId: string | null,
+  options?: UseEstatMetaInfoOptions
 ): UseEstatMetaInfoReturn {
-  const { data, error, isLoading, mutate } = useSWR(
+  const { autoSave = false, onSaveSuccess, onSaveError } = options || {};
+
+  const { data, error, isLoading, mutate } = useSWR<ApiResponse>(
     statsDataId ? `/api/estat-api/meta-info/${statsDataId}` : null,
     fetcher,
     {
@@ -43,11 +65,25 @@ export function useEstatMetaInfo(
         }
         return true;
       },
-      onSuccess: (data) => {
+      onSuccess: async (data) => {
         console.log("useEstatMetaInfo - Success:", {
           statsDataId,
           dataKeys: data ? Object.keys(data) : null,
         });
+
+        // 自動保存が有効な場合
+        if (autoSave && data?.success && data.data && statsDataId) {
+          try {
+            const result = await saveMetaInfoToR2(statsDataId, data.data);
+            console.log("自動R2保存成功:", result);
+            onSaveSuccess?.(result.message || "自動保存が完了しました");
+          } catch (error) {
+            console.error("自動R2保存エラー:", error);
+            onSaveError?.(
+              error instanceof Error ? error.message : "自動保存に失敗しました"
+            );
+          }
+        }
       },
       onError: (error) => {
         console.log("useEstatMetaInfo - Error:", {
@@ -59,7 +95,7 @@ export function useEstatMetaInfo(
   );
 
   return {
-    metaInfo: data?.data || null,
+    metaInfo: data?.success ? data.data : null,
     error: error ? "メタ情報の取得に失敗しました" : null,
     isLoading,
     refetch: mutate,
@@ -86,7 +122,10 @@ export async function saveMetaInfoToR2(
     }),
   });
 
-  const result = await response.json();
+  const result = (await response.json()) as {
+    success: boolean;
+    message: string;
+  };
 
   if (!result.success) {
     throw new Error(result.message || "保存に失敗しました");

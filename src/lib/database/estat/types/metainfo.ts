@@ -3,7 +3,7 @@
  * 統計表レベル（stats_data_id）での管理に特化
  */
 
-import type { AreaType } from "@/types/ranking/unified";
+import type { AreaType } from "@/lib/area/types";
 
 export interface EstatMetaInfo {
   stats_data_id: string;

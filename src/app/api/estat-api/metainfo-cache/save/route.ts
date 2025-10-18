@@ -5,7 +5,7 @@ import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import {
   SaveMetaInfoCacheRequest,
   SaveMetaInfoCacheResponse,
-} from "@/types/models/r2/estat-metainfo-cache";
+} from "@/lib/database/estat/types";
 
 /**
  * e-StatメタインフォメーションをR2に保存するAPIエンドポイント

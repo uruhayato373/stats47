@@ -4,7 +4,7 @@ import React from "react";
 
 import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
-import { SubcategoryDashboardPageProps } from "@/types/common/subcategory";
+import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
 
 export const FiscalIndicatorsPrefectureDashboard: React.FC<
   SubcategoryDashboardPageProps
