@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/EstatMetaInfoFetcher";
-import { EstatMetaInfoDisplay } from "@/components/templates/EstatMetaInfoDisplay";
-import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
-import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/EstatMetaInfoSidebar";
+import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
+import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
+import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoPageHeader";
+import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { estatAPI, EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfo } from "@/lib/database/estat/types";
 

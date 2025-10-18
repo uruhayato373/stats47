@@ -3,22 +3,25 @@
 import React from "react";
 import { useRouter, useParams } from "next/navigation";
 import { PrefectureService } from "@/lib/area";
-import {
-  CategoryData,
-  SubcategoryData,
-} from "@/types/visualization/choropleth";
 
-interface PrefectureSelectorProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-}
-
-export const PrefectureSelector: React.FC<PrefectureSelectorProps> = ({
-  category,
-  subcategory,
-}) => {
+/**
+ * 都道府県選択コンポーネント
+ *
+ * 機能:
+ * - 都道府県の選択UI提供
+ * - 選択時にダッシュボードページへ遷移
+ * - URLパラメータから現在の選択を取得
+ *
+ * URL構造: /[category]/[subcategory]/dashboard/[areaCode]
+ * 例: /population/basic-population/dashboard/13000
+ */
+export const PrefectureSelector: React.FC = () => {
   const router = useRouter();
   const params = useParams();
+
+  // URLパラメータから取得
+  const category = params.category as string;
+  const subcategory = params.subcategory as string;
   const currentAreaCode = params.areaCode as string | undefined;
 
   const handlePrefectureChange = (
@@ -26,10 +29,8 @@ export const PrefectureSelector: React.FC<PrefectureSelectorProps> = ({
   ) => {
     const selectedAreaCode = event.target.value;
 
-    // 新しいURL構造: /dashboard/[areaCode]
-    router.push(
-      `/${category.id}/${subcategory.id}/dashboard/${selectedAreaCode}`
-    );
+    // ダッシュボードページへ遷移
+    router.push(`/${category}/${subcategory}/dashboard/${selectedAreaCode}`);
   };
 
   return (
