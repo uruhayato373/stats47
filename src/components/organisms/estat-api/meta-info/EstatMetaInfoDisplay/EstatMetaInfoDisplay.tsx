@@ -16,40 +16,98 @@ import {
   useMetaInfoDownload,
 } from "@/hooks/estat-api/meta-info";
 
+/**
+ * EstatMetaInfoDisplayProps - e-Statメタ情報表示コンポーネントのプロパティ
+ */
 interface EstatMetaInfoDisplayProps {
+  /** e-Statメタ情報レスポンスデータ */
   metaInfo: EstatMetaInfoResponse | null;
+  /** ローディング状態 */
   loading?: boolean;
+  /** エラーメッセージ */
   error?: string | null;
 }
 
+/**
+ * TabType - タブの種類
+ */
 type TabType = "category" | "json";
 
+/**
+ * EstatMetaInfoDisplay - e-Statメタ情報表示コンポーネント
+ *
+ * 機能:
+ * - e-Statメタ情報の表示と管理
+ * - 統計表基本情報の表示（タイトル、政府統計名、作成機関）
+ * - カテゴリ分類とJSONレスポンスのタブ表示
+ * - メタ情報の保存とダウンロード機能
+ * - ローディング状態とエラーハンドリング
+ *
+ * レイアウト構成:
+ * - ヘッダー: 統計表基本情報 + 保存ボタン
+ * - タブナビゲーション: カテゴリ分類 / JSONレスポンス
+ * - コンテンツエリア: タブに応じた内容表示
+ *
+ * 使用例:
+ * ```tsx
+ * <EstatMetaInfoDisplay
+ *   metaInfo={metaInfoData}
+ *   loading={isLoading}
+ *   error={errorMessage}
+ * />
+ * ```
+ */
 export default function EstatMetaInfoDisplay({
   metaInfo,
   loading,
   error,
 }: EstatMetaInfoDisplayProps) {
+  // ===== 状態管理 =====
+  /** アクティブなタブ */
   const [activeTab, setActiveTab] = useState<TabType>("category");
+
+  // ===== カスタムフック =====
+  /** メタ情報保存機能 */
   const { save, saving, saveResult } = useMetaInfoSave();
+  /** メタ情報ダウンロード機能 */
   const { download } = useMetaInfoDownload();
 
-  // メタ情報が変更されたらタブをリセット
+  // ===== エフェクト =====
+  /**
+   * メタ情報が変更されたらタブをリセット
+   * 新しいメタ情報が読み込まれた際に、デフォルトのカテゴリタブに戻す
+   */
   useEffect(() => {
     setActiveTab("category");
   }, [metaInfo]);
 
+  // ===== イベントハンドラー =====
+  /**
+   * メタ情報保存ハンドラー
+   * 現在のメタ情報を保存する
+   */
   const handleSave = () => {
     if (metaInfo) {
       save(metaInfo);
     }
   };
 
+  /**
+   * メタ情報ダウンロードハンドラー
+   * 現在のメタ情報をJSONファイルとしてダウンロードする
+   */
   const handleDownload = () => {
     if (metaInfo) {
       download(metaInfo);
     }
   };
 
+  // ===== レンダリング条件分岐 =====
+
+  /**
+   * ローディング状態の表示
+   * スケルトンローダーでコンテンツの読み込み中を表現
+   */
   if (loading) {
     return (
       <div className="space-y-4">
@@ -65,6 +123,10 @@ export default function EstatMetaInfoDisplay({
     );
   }
 
+  /**
+   * エラー状態の表示
+   * エラーメッセージを赤色のアラートボックスで表示
+   */
   if (error) {
     return (
       <div className="p-4 border rounded-lg bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
@@ -89,22 +151,39 @@ export default function EstatMetaInfoDisplay({
     );
   }
 
+  /**
+   * メタ情報が存在しない場合
+   * 何も表示しない（nullを返す）
+   */
   if (!metaInfo) {
     return null;
   }
 
+  // ===== データ抽出 =====
+  /** e-Statメタ情報のメインデータ */
   const { GET_META_INFO } = metaInfo;
+  /** 統計表情報と分類情報 */
   const { TABLE_INF, CLASS_INF } = GET_META_INFO.METADATA_INF;
-
+  /** メタ情報ID（統計表ID） */
   const metaInfoId = TABLE_INF?.["@id"];
 
-  // タブの設定
+  // ===== タブ設定 =====
+  /**
+   * 指定されたタブIDのカテゴリ数を取得
+   * @param tabId - タブID（例: "cat01"）
+   * @returns カテゴリ数
+   */
   const getTabCount = (tabId: string) => {
     const classObj = CLASS_INF?.CLASS_OBJ?.find((obj) => obj["@id"] === tabId);
     if (!classObj?.CLASS) return 0;
     return Array.isArray(classObj.CLASS) ? classObj.CLASS.length : 1;
   };
 
+  /**
+   * タブ設定配列
+   * カテゴリタブは分類データが存在する場合のみ表示
+   * JSONタブは常に表示
+   */
   const tabs: TabItem[] = [
     {
       id: "category",
@@ -120,11 +199,13 @@ export default function EstatMetaInfoDisplay({
     },
   ].filter((tab) => tab.count > 0 || tab.id === "json");
 
+  // ===== メインコンテンツのレンダリング =====
   return (
     <div className="space-y-6">
-      {/* ヘッダー部分 - 統計表基本情報と保存ボタン */}
+      {/* ===== ヘッダーセクション ===== */}
+      {/* 統計表基本情報と保存ボタンを表示 */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between border-b border-gray-200 pb-4">
-        {/* 統計情報を横一列に小さく表示 */}
+        {/* 統計情報をグリッドレイアウトで表示 */}
         <div className="flex-1">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             {[
@@ -162,6 +243,7 @@ export default function EstatMetaInfoDisplay({
           </div>
         </div>
 
+        {/* 保存ボタン */}
         <SaveButton
           onSave={handleSave}
           saving={saving}
@@ -169,15 +251,17 @@ export default function EstatMetaInfoDisplay({
         />
       </div>
 
-      {/* タブナビゲーション */}
+      {/* ===== タブナビゲーション ===== */}
+      {/* カテゴリ分類とJSONレスポンスのタブ切り替え */}
       <TabNavigation
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={(tabId) => setActiveTab(tabId as TabType)}
       />
 
-      {/* タブコンテンツ */}
+      {/* ===== タブコンテンツエリア ===== */}
       <div className="mt-6">
+        {/* カテゴリ分類タブのコンテンツ */}
         {activeTab === "category" &&
           CLASS_INF &&
           CLASS_INF.CLASS_OBJ &&
@@ -188,6 +272,7 @@ export default function EstatMetaInfoDisplay({
             />
           )}
 
+        {/* JSONレスポンスタブのコンテンツ */}
         {activeTab === "json" && (
           <JsonDisplay data={metaInfo} onDownload={handleDownload} />
         )}
