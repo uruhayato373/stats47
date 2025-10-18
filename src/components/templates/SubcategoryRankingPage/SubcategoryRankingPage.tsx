@@ -3,7 +3,7 @@ import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
 import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
 import { RankingDataContainer } from "@/components/organisms/ranking/RankingDataContainer";
 import { RankingLayout } from "@/components/ranking/ui/RankingLayout";
-import { RankingNavigation } from "@/components/molecules/ranking/RankingNavigation";
+import { RankingNavigation } from "@/components/organisms/ranking/RankingNavigation";
 import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";
 
 /**
