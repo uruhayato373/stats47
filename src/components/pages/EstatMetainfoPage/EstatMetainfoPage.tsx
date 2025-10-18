@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { RefreshCw, BarChart3 } from "lucide-react";
+import { RefreshCw, BarChart3, Save, Check, AlertCircle } from "lucide-react";
 import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { estatAPI, EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfo } from "@/lib/database/estat/types";
+import { SaveMetaInfoCacheRequest } from "@/types/models/r2/estat-metainfo-cache";
 
 /**
  * EstatMetainfoPageProps - e-Statメタ情報ページのプロパティ
@@ -47,6 +48,13 @@ export default function EstatMetainfoPage({
 
   /** 現在選択中の統計表ID */
   const [currentStatsId, setCurrentStatsId] = useState<string>("");
+
+  /** R2保存状態管理 */
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   // ===== イベントハンドラー =====
 
