@@ -26,7 +26,8 @@
       "Bash(mv src/components/molecules/EstatYearsTable/* src/components/organisms/estat-api/EstatYearsTable/)",
       "Bash(rmdir src/components/molecules/EstatYearsTable)",
       "Bash(npx eslint src/components/organisms/estat-api/EstatMetaInfoFetcher/ src/components/organisms/estat-api/EstatDataFetcher/ src/components/organisms/estat-api/EstatAreasTable/ src/components/organisms/estat-api/EstatCategoriesTable/ src/components/organisms/estat-api/EstatValuesTable/ src/components/organisms/estat-api/EstatYearsTable/ src/components/organisms/estat-api/EstatRawData/ src/components/pages/EstatMetainfoPage/ src/components/pages/EstatAPIStatsDataPage/ src/components/templates/EstatDataDisplay/ --max-warnings=0)",
-      "Bash(xargs -I {} basename {})"
+      "Bash(xargs -I {} basename {})",
+      "Bash(pkill -f \"npm run dev\")"
     ],
     "deny": [],
     "ask": []
