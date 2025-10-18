@@ -185,33 +185,28 @@ export default function EstatMetaInfoDisplay({
       id: "table",
       label: "統計表情報",
       icon: FileText,
-      count: 1,
     },
     {
       id: "categories",
       label: "分類",
       icon: Tag,
-      count: parsedData.dimensions.categories.length,
     },
     {
       id: "areas",
       label: "地域",
       icon: MapPin,
-      count: parsedData.dimensions.areas.length,
     },
     {
       id: "time",
       label: "時間軸",
       icon: Calendar,
-      count: parsedData.dimensions.timeAxis.availableYears.length,
     },
     {
       id: "json",
       label: "JSON レスポンス",
       icon: Code,
-      count: 0,
     },
-  ].filter((tab) => tab.count > 0 || tab.id === "json");
+  ];
 
   // ===== メインコンテンツのレンダリング =====
   return (

@@ -35,9 +35,7 @@ export default function TopAuthors() {
           <h2 className="font-medium text-sm text-gray-800 dark:text-neutral-200">
             Top authors
           </h2>
-          <button
-            className={`text-xs ${styles.text.tertiary} hover:text-gray-800 dark:hover:text-neutral-200`}
-          >
+          <button className="text-xs text-gray-500 dark:text-neutral-400 hover:text-gray-800 dark:hover:text-neutral-200">
             View all
           </button>
         </div>

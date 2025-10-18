@@ -13,8 +13,6 @@ export interface TabItem {
   label: string;
   /** タブのアイコンコンポーネント */
   icon: LucideIcon;
-  /** タブのカウント（オプション） */
-  count?: number;
   /** タブが無効かどうか（オプション） */
   disabled?: boolean;
 }
@@ -35,8 +33,6 @@ export interface TabNavigationProps {
   spacing?: "space-x-6" | "space-x-8" | "space-x-4";
   /** アイコンのサイズ（デフォルト: w-4 h-4） */
   iconSize?: "w-3 h-3" | "w-4 h-4" | "w-5 h-5";
-  /** カウントバッジの表示（デフォルト: true） */
-  showCount?: boolean;
 }
 
 /**
@@ -49,8 +45,6 @@ interface TabButtonProps {
   isActive: boolean;
   /** アイコンのサイズ */
   iconSize: string;
-  /** カウントバッジの表示 */
-  showCount: boolean;
   /** クリック時のコールバック */
   onTabClick: (tabId: string) => void;
 }
@@ -62,13 +56,11 @@ interface TabButtonProps {
  * - 個別タブの表示とクリック処理
  * - アクティブ状態の視覚的フィードバック
  * - 無効状態のサポート
- * - カウントバッジの表示
  */
 const TabButton = memo(function TabButton({
   tab,
   isActive,
   iconSize,
-  showCount,
   onTabClick,
 }: TabButtonProps) {
   const IconComponent = tab.icon;
@@ -93,11 +85,6 @@ const TabButton = memo(function TabButton({
     >
       <IconComponent className={iconSize} />
       {tab.label}
-      {showCount && tab.count !== undefined && tab.count > 0 && (
-        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full dark:bg-neutral-700 dark:text-neutral-300">
-          {tab.count}
-        </span>
-      )}
     </button>
   );
 });
@@ -107,7 +94,7 @@ const TabButton = memo(function TabButton({
  *
  * 機能:
  * - 一貫したタブUIの提供
- * - アイコンとカウントバッジのサポート
+ * - アイコンのサポート
  * - アクティブ状態の管理
  * - カスタマイズ可能なスタイル
  * - パフォーマンス最適化（React.memo, useCallback）
@@ -116,7 +103,7 @@ const TabButton = memo(function TabButton({
  * ```tsx
  * <TabNavigation
  *   tabs={[
- *     { id: "overview", label: "概要", icon: Info, count: 5 },
+ *     { id: "overview", label: "概要", icon: Info },
  *     { id: "data", label: "データ", icon: Database }
  *   ]}
  *   activeTab={activeTab}
@@ -131,7 +118,6 @@ function TabNavigation({
   className = "",
   spacing = "space-x-8",
   iconSize = "w-4 h-4",
-  showCount = true,
 }: TabNavigationProps) {
   /**
    * タブクリック時のハンドラー（useCallbackでメモ化）
@@ -154,7 +140,6 @@ function TabNavigation({
             tab={tab}
             isActive={activeTab === tab.id}
             iconSize={iconSize}
-            showCount={showCount}
             onTabClick={handleTabClick}
           />
         ))}
