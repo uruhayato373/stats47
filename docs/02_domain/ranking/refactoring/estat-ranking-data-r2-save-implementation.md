@@ -3,16 +3,17 @@ title: EstatRankingDataContainer R2保存機能実装ガイド
 created: 2025-10-14
 updated: 2025-10-16
 tags:
-  - domain/estat-api
+  - domain/ranking
   - refactoring
 ---
 
-# EstatRankingDataContainer R2 保存機能実装ガイド
+# ランキングデータ R2 保存機能実装ガイド
 
 **作成日**: 2025-10-13
 **最終更新**: 2025-10-13 (v1.1 - FormattedValue 型定義の簡素化対応)
-**対象コンポーネント**: `src/components/estat/ranking-settings/containers/EstatRankingDataContainer.tsx`
-**目的**: `formattedData`を R2 ストレージに JSON 形式で年度ごとに保存する機能の追加
+**対象コンポーネント**: `src/components/organisms/ranking/settings/containers/EstatRankingDataContainer.tsx`
+**目的**: ランキングデータを R2 ストレージに JSON 形式で年度ごとに保存する機能の追加
+**ドメイン**: ranking（ランキングデータの永続化・キャッシュ管理）
 
 ---
 
@@ -104,28 +105,37 @@ export interface FormattedValue {
 プロジェクトルート/
 ├── src/
 │   ├── components/
-│   │   └── estat/
-│   │       └── ranking-settings/
-│   │           └── containers/
-│   │               └── EstatRankingDataContainer.tsx  # 更新対象
+│   │   └── organisms/
+│   │       └── ranking/
+│   │           └── settings/
+│   │               └── containers/
+│   │                   └── EstatRankingDataContainer.tsx  # 更新対象
 │   ├── app/
 │   │   └── api/
-│   │       └── estat/
+│   │       └── ranking/
 │   │           └── cache/
-│   │               └── save/
-│   │                   └── route.ts                  # 新規作成（APIエンドポイント）
+│   │               ├── save/
+│   │               │   └── route.ts                  # 新規作成（APIエンドポイント）
+│   │               ├── get/
+│   │               │   └── route.ts                  # 新規作成（取得エンドポイント）
+│   │               └── delete/
+│   │                   └── route.ts                  # 新規作成（削除エンドポイント）
 │   ├── lib/
-│   │   └── estat/
+│   │   └── ranking/
 │   │       └── cache/
-│   │           ├── EstatR2CacheService.ts             # 新規作成（R2操作）
+│   │           ├── EstatRankingR2Service.ts           # 新規作成（R2操作）
+│   │           ├── RankingCacheService.ts             # 既存（拡張）
 │   │           └── index.ts                           # 新規作成（エクスポート）
 │   └── types/
 │       └── models/
 │           └── r2/
-│               └── estat-cache.ts                     # 新規作成（型定義）
+│               └── estat-ranking-cache.ts             # 新規作成（型定義）
 ├── wrangler.toml                                      # 更新（R2バケット設定）
-└── doc/
-    └── estat-ranking-data-r2-save-implementation.md   # このファイル
+└── docs/
+    └── 02_domain/
+        └── ranking/
+            └── refactoring/
+                └── estat-ranking-data-r2-save-implementation.md   # このファイル
 ```
 
 ---
@@ -145,7 +155,7 @@ export interface FormattedValue {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 2. APIリクエスト                                              │
-│    POST /api/estat-api/cache/save                                │
+│    POST /api/ranking/cache/save                                  │
 │    {                                                          │
 │      statsDataId, categoryCode, timeCode,                    │
 │      values: formattedData                                   │
@@ -155,7 +165,7 @@ export interface FormattedValue {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 3. APIルートハンドラー                                        │
-│    src/app/api/estat-api/cache/save/route.ts                     │
+│    src/app/api/ranking/cache/save/route.ts                       │
 │    - リクエストバリデーション                                │
 │    - データ整形                                               │
 └────────────────┬─────────────────────────────────────────────┘
@@ -163,7 +173,7 @@ export interface FormattedValue {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 4. R2キャッシュサービス                                       │
-│    EstatR2CacheService.saveRankingData()                     │
+│    EstatRankingR2Service.saveRankingData()                   │
 │    - ランク計算                                               │
 │    - JSON生成                                                 │
 │    - R2保存                                                   │
@@ -284,24 +294,24 @@ export interface SaveEstatCacheResponse {
 
 ### ステップ 3: R2 キャッシュサービスの作成（30 分）
 
-**ファイル**: `src/lib/estat/cache/EstatR2CacheService.ts` (新規作成)
+**ファイル**: `src/lib/ranking/cache/EstatRankingR2Service.ts` (新規作成)
 
 ```typescript
 /**
- * e-StatデータR2キャッシュサービス
- * e-Stat APIから取得したデータをR2でキャッシュ管理
+ * ランキングデータR2キャッシュサービス
+ * ランキングデータをR2でキャッシュ管理
  * FormattedValue v1.1対応版
  */
 
-import { FormattedValue } from "@/lib/estat/types";
+import { FormattedValue } from "@/lib/estat-api/types";
 import {
-  EstatCacheDataR2,
-  EstatCacheValueR2,
-} from "@/types/models/r2/estat-cache";
+  EstatRankingCacheDataR2,
+  EstatRankingCacheValueR2,
+} from "@/types/models/r2/estat-ranking-cache";
 
-export class EstatR2CacheService {
+export class EstatRankingR2Service {
   /**
-   * e-Statランキングデータを保存
+   * ランキングデータを保存
    *
    * @param env - Cloudflare環境変数（R2バケット含む）
    * @param statsDataId - 統計表ID
@@ -338,7 +348,7 @@ export class EstatR2CacheService {
     }));
 
     // R2保存用データ構造に変換
-    const r2Data: EstatCacheDataR2 = {
+    const r2Data: EstatRankingCacheDataR2 = {
       version: "1.1",
       stats_data_id: statsDataId,
       category_code: categoryCode,
@@ -349,7 +359,7 @@ export class EstatR2CacheService {
       saved_at: new Date().toISOString(),
       total_count: rankedData.length,
       values: rankedData.map(
-        (record): EstatCacheValueR2 => ({
+        (record): EstatRankingCacheValueR2 => ({
           area_code: record.areaCode,
           area_name: record.areaName,
           value: record.value, // v1.1: 直接数値を保存
@@ -511,28 +521,29 @@ export class EstatR2CacheService {
 }
 ```
 
-**ファイル**: `src/lib/estat/cache/index.ts` (新規作成)
+**ファイル**: `src/lib/ranking/cache/index.ts` (新規作成)
 
 ```typescript
-export { EstatR2CacheService } from "./EstatR2CacheService";
+export { EstatRankingR2Service } from "./EstatRankingR2Service";
+export { RankingCacheService } from "../RankingCacheService";
 ```
 
 ### ステップ 4: API エンドポイントの作成（20 分）
 
-**ファイル**: `src/app/api/estat-api/cache/save/route.ts` (新規作成)
+**ファイル**: `src/app/api/ranking/cache/save/route.ts` (新規作成)
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatR2CacheService } from "@/lib/estat/cache";
-import { FormattedValue } from "@/lib/estat/types";
+import { EstatRankingR2Service } from "@/lib/ranking/cache";
+import { FormattedValue } from "@/lib/estat-api/types";
 import {
   SaveEstatCacheRequest,
   SaveEstatCacheResponse,
-} from "@/types/models/r2/estat-cache";
+} from "@/types/models/r2/estat-ranking-cache";
 
 /**
- * e-StatランキングデータをR2に保存するAPIエンドポイント
- * POST /api/estat-api/cache/save
+ * ランキングデータをR2に保存するAPIエンドポイント
+ * POST /api/ranking/cache/save
  * FormattedValue v1.1対応版
  */
 export async function POST(
@@ -594,7 +605,7 @@ export async function POST(
     }
 
     // R2に保存
-    const result = await EstatR2CacheService.saveRankingData(
+    const result = await EstatRankingR2Service.saveRankingData(
       env,
       body.statsDataId,
       body.categoryCode,
@@ -897,7 +908,7 @@ export const EstatRankingDataContainer: React.FC<
 +        })),
 +      };
 +
-+      const response = await fetch("/api/estat-api/cache/save", {
++      const response = await fetch("/api/ranking/cache/save", {
 +        method: "POST",
 +        headers: {
 +          "Content-Type": "application/json",

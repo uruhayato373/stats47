@@ -100,7 +100,7 @@ export interface EstatMetaInfoResponse {
 │   ├── lib/
 │   │   └── estat-api/
 │   │       └── meta-info/
-│   │           └── EstatMetaInfoR2Service.ts          # 新規作成（R2操作）
+│   │           └── EstatMetaInfoR2Repository.ts          # 新規作成（R2操作）
 │   └── types/
 │       └── models/
 │           └── r2/
@@ -148,7 +148,7 @@ export interface EstatMetaInfoResponse {
                  ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ 4. R2キャッシュサービス                                       │
-│    EstatMetaInfoR2Service.saveMetaInfo()                     │
+│    EstatMetaInfoR2Repository.saveMetaInfo()                     │
 │    - サマリー情報抽出                                         │
 │    - JSON生成                                                 │
 │    - R2保存                                                   │
@@ -245,7 +245,7 @@ export interface SaveMetaInfoCacheResponse {
 
 ### ステップ 3: R2 キャッシュサービスの作成（30 分）
 
-**ファイル**: `src/lib/estat-api/meta-info/EstatMetaInfoR2Service.ts` (新規作成)
+**ファイル**: `src/lib/database/estat/repositories/metainfo-r2-repository.ts` (新規作成)
 
 ```typescript
 /**
@@ -256,7 +256,7 @@ export interface SaveMetaInfoCacheResponse {
 import { EstatMetaInfoResponse } from "../types";
 import { MetaInfoCacheDataR2 } from "@/types/models/r2/estat-metainfo-cache";
 
-export class EstatMetaInfoR2Service {
+export class EstatMetaInfoR2Repository {
   /**
    * e-Statメタ情報を保存
    *
@@ -422,7 +422,7 @@ export class EstatMetaInfoR2Service {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoR2Service } from "@/lib/estat-api/meta-info/EstatMetaInfoR2Service";
+import { EstatMetaInfoR2Repository } from "@/lib/database/estat/repositories";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import {
   SaveMetaInfoCacheRequest,
@@ -468,7 +468,7 @@ export async function POST(
     }
 
     // R2に保存
-    const result = await EstatMetaInfoR2Service.saveMetaInfo(
+    const result = await EstatMetaInfoR2Repository.saveMetaInfo(
       env,
       body.statsDataId,
       body.metaInfoResponse as EstatMetaInfoResponse
@@ -717,7 +717,7 @@ export async function POST(request: NextRequest) {
     }
 
     // R2保存処理
-    const result = await EstatMetaInfoR2Service.saveMetaInfo(/*...*/);
+    const result = await EstatMetaInfoR2Repository.saveMetaInfo(/*...*/);
 
     return NextResponse.json({ success: true, data: result });
   } catch (error) {
@@ -881,7 +881,7 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 - [x] R2バケット作成（`stats47-metainfo`, `stats47-metainfo-preview`）
 - [x] `wrangler.toml`にMETAINFO_BUCKET設定追加
 - [x] 型定義ファイル作成（`src/types/models/r2/estat-metainfo-cache.ts`）
-- [x] R2サービスクラス作成（`src/lib/estat-api/meta-info/EstatMetaInfoR2Service.ts`）
+- [x] R2サービスクラス作成（`src/lib/database/estat/repositories/metainfo-r2-repository.ts`）
 - [x] APIエンドポイント作成（`src/app/api/estat-api/metainfo-cache/save/route.ts`）
 - [x] フロントエンド更新（`EstatMetainfoPage.tsx`）
 - [ ] ローカル環境でテスト

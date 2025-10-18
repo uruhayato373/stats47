@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoR2Service } from "@/lib/estat-api/meta-info/EstatMetaInfoR2Service";
+import { EstatMetaInfoR2Repository } from "@/lib/database/estat/repositories";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import {
   SaveMetaInfoCacheRequest,
@@ -45,7 +45,7 @@ export async function POST(
     }
 
     // R2に保存
-    const result = await EstatMetaInfoR2Service.saveMetaInfo(
+    const result = await EstatMetaInfoR2Repository.save(
       env,
       body.statsDataId,
       body.metaInfoResponse as EstatMetaInfoResponse

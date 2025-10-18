@@ -1,12 +1,24 @@
 /**
- * e-StatメタインフォメーションR2キャッシュサービス
+ * e-StatメタインフォメーションR2リポジトリ
  * e-Stat APIから取得したメタ情報をR2でキャッシュ管理
+ *
+ * データ永続化層：Repository Pattern
  */
 
-import { EstatMetaInfoResponse } from "../types";
+import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 import { MetaInfoCacheDataR2 } from "@/types/models/r2/estat-metainfo-cache";
 
-export class EstatMetaInfoR2Service {
+/**
+ * R2環境インターフェース
+ */
+export interface EstatMetaInfoR2Env {
+  METAINFO_BUCKET: R2Bucket;
+}
+
+/**
+ * e-StatメタインフォメーションR2リポジトリ
+ */
+export class EstatMetaInfoR2Repository {
   /**
    * e-Statメタ情報を保存
    *
@@ -14,8 +26,8 @@ export class EstatMetaInfoR2Service {
    * @param statsDataId - 統計表ID
    * @param metaInfo - EstatMetaInfoResponse形式のデータ
    */
-  static async saveMetaInfo(
-    env: { METAINFO_BUCKET: R2Bucket },
+  static async save(
+    env: EstatMetaInfoR2Env,
     statsDataId: string,
     metaInfo: EstatMetaInfoResponse
   ): Promise<{ key: string; size: number }> {
@@ -78,8 +90,8 @@ export class EstatMetaInfoR2Service {
    * @param statsDataId - 統計表ID
    * @returns EstatMetaInfoResponse | null
    */
-  static async getMetaInfo(
-    env: { METAINFO_BUCKET: R2Bucket },
+  static async findByStatsId(
+    env: EstatMetaInfoR2Env,
     statsDataId: string
   ): Promise<EstatMetaInfoResponse | null> {
     try {
@@ -115,8 +127,8 @@ export class EstatMetaInfoR2Service {
    * @param env - Cloudflare環境変数（R2バケット含む）
    * @param statsDataId - 統計表ID
    */
-  static async deleteCache(
-    env: { METAINFO_BUCKET: R2Bucket },
+  static async delete(
+    env: EstatMetaInfoR2Env,
     statsDataId: string
   ): Promise<void> {
     try {
@@ -140,9 +152,7 @@ export class EstatMetaInfoR2Service {
    * @param env - Cloudflare環境変数（R2バケット含む）
    * @returns statsDataId の配列
    */
-  static async listAllCaches(
-    env: { METAINFO_BUCKET: R2Bucket }
-  ): Promise<string[]> {
+  static async listAll(env: EstatMetaInfoR2Env): Promise<string[]> {
     try {
       const prefix = `estat_metainfo/`;
       const list = await env.METAINFO_BUCKET.list({ prefix });
@@ -162,5 +172,55 @@ export class EstatMetaInfoR2Service {
       }
       return [];
     }
+  }
+
+  /**
+   * @deprecated Use save() instead
+   */
+  static async saveMetaInfo(
+    env: EstatMetaInfoR2Env,
+    statsDataId: string,
+    metaInfo: EstatMetaInfoResponse
+  ): Promise<{ key: string; size: number }> {
+    console.warn(
+      "saveMetaInfo() is deprecated. Use save() instead for consistency with Repository pattern."
+    );
+    return this.save(env, statsDataId, metaInfo);
+  }
+
+  /**
+   * @deprecated Use findByStatsId() instead
+   */
+  static async getMetaInfo(
+    env: EstatMetaInfoR2Env,
+    statsDataId: string
+  ): Promise<EstatMetaInfoResponse | null> {
+    console.warn(
+      "getMetaInfo() is deprecated. Use findByStatsId() instead for consistency with Repository pattern."
+    );
+    return this.findByStatsId(env, statsDataId);
+  }
+
+  /**
+   * @deprecated Use delete() instead
+   */
+  static async deleteCache(
+    env: EstatMetaInfoR2Env,
+    statsDataId: string
+  ): Promise<void> {
+    console.warn(
+      "deleteCache() is deprecated. Use delete() instead for consistency with Repository pattern."
+    );
+    return this.delete(env, statsDataId);
+  }
+
+  /**
+   * @deprecated Use listAll() instead
+   */
+  static async listAllCaches(env: EstatMetaInfoR2Env): Promise<string[]> {
+    console.warn(
+      "listAllCaches() is deprecated. Use listAll() instead for consistency with Repository pattern."
+    );
+    return this.listAll(env);
   }
 }

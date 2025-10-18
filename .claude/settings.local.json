@@ -27,7 +27,12 @@
       "Bash(rmdir src/components/molecules/EstatYearsTable)",
       "Bash(npx eslint src/components/organisms/estat-api/EstatMetaInfoFetcher/ src/components/organisms/estat-api/EstatDataFetcher/ src/components/organisms/estat-api/EstatAreasTable/ src/components/organisms/estat-api/EstatCategoriesTable/ src/components/organisms/estat-api/EstatValuesTable/ src/components/organisms/estat-api/EstatYearsTable/ src/components/organisms/estat-api/EstatRawData/ src/components/pages/EstatMetainfoPage/ src/components/pages/EstatAPIStatsDataPage/ src/components/templates/EstatDataDisplay/ --max-warnings=0)",
       "Bash(xargs -I {} basename {})",
-      "Bash(pkill -f \"npm run dev\")"
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(npx tsc --noEmit --skipLibCheck src/lib/database/estat/repositories/metainfo-r2-repository.ts src/app/api/estat-api/metainfo-cache/save/route.ts)",
+      "Bash(npx eslint src/lib/database/estat/repositories/metainfo-r2-repository.ts src/app/api/estat-api/metainfo-cache/save/route.ts --max-warnings=0)",
+      "Bash(for file in /Users/minamidaisuke/stats47/docs/02_domain/estat-api/meta-info/overview.md /Users/minamidaisuke/stats47/docs/02_domain/estat-api/meta-info/specifications/api.md)",
+      "Bash(do sed -i '' 's/EstatMetaInfoR2Service/EstatMetaInfoR2Repository/g' \"$file\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

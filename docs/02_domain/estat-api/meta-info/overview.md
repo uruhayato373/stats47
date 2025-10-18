@@ -44,7 +44,7 @@ src/lib/estat-api/meta-info/
 ├── formatter.ts                # データ変換処理
 ├── batch-processor.ts          # バッチ処理
 ├── id-utils.ts                 # ID操作ユーティリティ
-├── EstatMetaInfoR2Service.ts   # R2ストレージ連携
+├── EstatMetaInfoR2Repository.ts   # R2ストレージ連携
 └── utils/
     ├── helpers.ts              # ヘルパー関数
     └── index.ts

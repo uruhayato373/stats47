@@ -896,7 +896,7 @@ const metaInfo = await cache.getMetaInfo("0003412313");
 #### R2保存実装
 
 ```typescript
-import { EstatMetaInfoR2Service } from "@/lib/estat-api/meta-info/EstatMetaInfoR2Service";
+import { EstatMetaInfoR2Repository } from "@/lib/database/estat/repositories";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 
 /**
@@ -907,7 +907,7 @@ async function saveMetaInfoToR2(
   statsDataId: string,
   metaInfo: EstatMetaInfoResponse
 ): Promise<void> {
-  const result = await EstatMetaInfoR2Service.saveMetaInfo(
+  const result = await EstatMetaInfoR2Repository.saveMetaInfo(
     env,
     statsDataId,
     metaInfo
@@ -929,7 +929,7 @@ async function getMetaInfoWithR2Cache(
   statsDataId: string
 ): Promise<EstatMetaInfoResponse> {
   // R2キャッシュを確認
-  const cached = await EstatMetaInfoR2Service.getMetaInfo(env, statsDataId);
+  const cached = await EstatMetaInfoR2Repository.getMetaInfo(env, statsDataId);
 
   if (cached) {
     console.log(`R2キャッシュヒット: ${statsDataId}`);
@@ -944,7 +944,7 @@ async function getMetaInfoWithR2Cache(
   });
 
   // R2に保存（次回のキャッシュヒット用）
-  await EstatMetaInfoR2Service.saveMetaInfo(env, statsDataId, metaInfo);
+  await EstatMetaInfoR2Repository.saveMetaInfo(env, statsDataId, metaInfo);
 
   return metaInfo;
 }
@@ -959,7 +959,7 @@ async function getMetaInfoWithR2Cache(
 async function listCachedMetaInfo(
   env: { METAINFO_BUCKET: R2Bucket }
 ): Promise<string[]> {
-  return await EstatMetaInfoR2Service.listAllCaches(env);
+  return await EstatMetaInfoR2Repository.listAllCaches(env);
 }
 
 /**
@@ -969,7 +969,7 @@ async function deleteCachedMetaInfo(
   env: { METAINFO_BUCKET: R2Bucket },
   statsDataId: string
 ): Promise<void> {
-  await EstatMetaInfoR2Service.deleteCache(env, statsDataId);
+  await EstatMetaInfoR2Repository.deleteCache(env, statsDataId);
   console.log(`キャッシュ削除完了: ${statsDataId}`);
 }
 ```
@@ -1032,7 +1032,7 @@ class HybridMetaInfoCache {
     }
 
     // 2. R2キャッシュを確認
-    const r2Cached = await EstatMetaInfoR2Service.getMetaInfo(env, statsDataId);
+    const r2Cached = await EstatMetaInfoR2Repository.getMetaInfo(env, statsDataId);
     if (r2Cached) {
       // メモリキャッシュにも保存
       this.memoryCache.cache.set(statsDataId, {
@@ -1053,7 +1053,7 @@ class HybridMetaInfoCache {
       data: metaInfo,
       timestamp: Date.now(),
     });
-    await EstatMetaInfoR2Service.saveMetaInfo(env, statsDataId, metaInfo);
+    await EstatMetaInfoR2Repository.saveMetaInfo(env, statsDataId, metaInfo);
 
     return metaInfo;
   }
