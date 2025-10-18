@@ -17,6 +17,13 @@ exclude = [
   "docs/**",              # ドキュメントも除外（必要に応じて）
   "scripts/**",           # スクリプトファイルも除外
   "tests/**",             # テストファイルも除外
+  "**/__tests__/**",      # 全ての__tests__ディレクトリを除外
+  "**/*.test.ts",         # 全てのテストファイルを除外
+  "**/*.test.tsx",        # 全てのテストファイルを除外
+  "**/*.spec.ts",         # スペックファイルを除外
+  "**/*.spec.tsx",        # スペックファイルを除外
+  "vitest.config.ts",     # vitestの設定ファイルを除外
+  "**/__debug__/**",      # デバッグスクリプトと出力ファイルを除外
 ]
 
 # ただし、fixturesとcatalogは含める（小さいため）
@@ -33,6 +40,12 @@ database_name = "stats47"
 database_id = "e6533698-d05a-475b-9f39-5558703feef7"
 migrations_dir = "database/migrations"
 
+# R2ストレージ（GeoShapeデータ用）
+[[r2_buckets]]
+binding = "GEOSHAPE_BUCKET"
+bucket_name = "stats47-geoshape"
+preview_bucket_name = "stats47-geoshape-preview"
+
 [env.local]
 NODE_ENV = "development"
 ESTAT_API_KEY = "your_estat_api_key_here"
@@ -42,4 +55,24 @@ ESTAT_API_KEY = "your_estat_api_key_here"
 binding = "STATS47_DB"
 database_name = "stats47"
 database_id = "e6533698-d05a-475b-9f39-5558703feef7"
+migrations_dir = "database/migrations"
+
+# ステージング環境
+[env.staging]
+NODE_ENV = "production"
+
+[[env.staging.d1_databases]]
+binding = "STATS47_DB"
+database_name = "stats47_staging"
+database_id = "39f18714-83bf-423c-9956-dcc9e466affb"
+migrations_dir = "database/migrations"
+
+# 本番環境
+[env.production]
+NODE_ENV = "production"
+
+[[env.production.d1_databases]]
+binding = "STATS47_DB"
+database_name = "stats47_production"
+database_id = "${PROD_D1_DATABASE_ID}"
 migrations_dir = "database/migrations"

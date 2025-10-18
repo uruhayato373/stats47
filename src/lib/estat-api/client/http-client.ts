@@ -30,9 +30,13 @@ export class EstatHTTPClient {
     params: Record<string, unknown>
   ): Promise<T> {
     const url = this.buildURL(endpoint, params);
+    console.log("🌐 HTTP Client: リクエストURL:", url);
     const response = await this.fetchWithTimeout(url);
+    console.log("🌐 HTTP Client: レスポンスステータス:", response.status);
     await this.checkResponseStatus(response);
-    return await response.json();
+    const data = await response.json();
+    console.log("🌐 HTTP Client: レスポンスデータ:", data);
+    return data;
   }
 
   /**

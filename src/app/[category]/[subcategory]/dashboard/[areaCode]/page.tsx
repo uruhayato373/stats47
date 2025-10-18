@@ -1,6 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getSubcategoryById } from "@/lib/choropleth/category-helpers";
+import { getSubcategoryById } from "@/lib/category";
 import { getDashboardComponentByArea } from "@/components/subcategories";
 
 /**

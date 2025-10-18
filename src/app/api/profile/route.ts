@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth/auth";
-import { createD1Database } from "@/lib/db";
+import { getDataProvider } from "@/lib/database";
 
 export async function PATCH(request: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const db = await createD1Database();
+    const db = await getDataProvider();
 
     // ユーザーネームとメールアドレスの重複チェック（自分以外）
     const existingUser = await db

@@ -16,19 +16,19 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- e-Stat メタデータテーブル
--- e-Stat APIから取得したメタデータを保存
+-- e-Stat APIから取得した統計表メタデータを保存
 CREATE TABLE IF NOT EXISTS estat_metainfo (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  stats_data_id TEXT NOT NULL,           -- 統計表ID
-  stat_name TEXT NOT NULL,               -- 統計名
-  title TEXT NOT NULL,                   -- タイトル
-  cat01 TEXT,                            -- カテゴリ1
-  item_name TEXT,                        -- 項目名
-  unit TEXT,                             -- 単位
-  ranking_key TEXT,                      -- ランキングキー（ランキングアイテムとして使用されている場合）
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 更新日時
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP, -- 作成日時
-  UNIQUE(stats_data_id, cat01)           -- 重複防止のためのUNIQUE制約
+  stats_data_id TEXT PRIMARY KEY,        -- 統計表ID（主キー）
+  stat_name TEXT NOT NULL,               -- 統計調査名
+  title TEXT NOT NULL,                   -- 統計表タイトル
+  area_type TEXT NOT NULL DEFAULT 'country', -- 地域レベル（country/prefecture/municipality）
+  cycle TEXT,                            -- 調査周期
+  survey_date TEXT,                      -- 調査年月
+  description TEXT,                      -- 説明
+  last_fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CHECK (area_type IN ('country', 'prefecture', 'municipality'))
 );
 
 -- 統計データの履歴管理テーブル
@@ -45,11 +45,10 @@ CREATE TABLE IF NOT EXISTS estat_data_history (
 -- インデックスの作成（検索パフォーマンス向上）
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_stats_data_id ON estat_metainfo(stats_data_id);
-CREATE INDEX IF NOT EXISTS idx_stat_name ON estat_metainfo(stat_name);
-CREATE INDEX IF NOT EXISTS idx_cat01 ON estat_metainfo(cat01);
-CREATE INDEX IF NOT EXISTS idx_updated_at ON estat_metainfo(updated_at);
-CREATE INDEX IF NOT EXISTS idx_estat_metainfo_ranking_key ON estat_metainfo(ranking_key);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_stat_name ON estat_metainfo(stat_name);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_title ON estat_metainfo(title);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_area_type ON estat_metainfo(area_type);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
 CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
 CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 
@@ -60,50 +59,19 @@ CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 -- ('test_user', 'test@stats47.local', 'dummy_hash_for_development');
 
 -- e-Statメタデータサンプル（必要に応じて手動で挿入）
--- INSERT OR IGNORE INTO estat_metainfo (stats_data_id, stat_name, title, cat01, item_name, unit) VALUES
--- ('0003448237', '人口推計', '人口推計（2020年）', '総人口', '総人口', '人'),
--- ('0003448237', '人口推計', '人口推計（2020年）', '男性人口', '男性人口', '人'),
--- ('0003448237', '人口推計', '人口推計（2020年）', '女性人口', '女性人口', '人'),
--- ('0003448238', '世帯数調査', '世帯数調査（2020年）', '総世帯数', '総世帯数', '世帯'),
--- ('0003448238', '世帯数調査', '世帯数調査（2020年）', '単身世帯', '単身世帯', '世帯'),
--- ('0003448238', '世帯数調査', '世帯数調査（2020年）', '核家族世帯', '核家族世帯', '世帯'),
--- ('0000010101', '社会・人口統計体系', 'Ａ　人口・世帯', 'A140401', '0～3歳人口（男）', '人'),
--- ('0000010101', '社会・人口統計体系', 'Ａ　人口・世帯', 'A140402', '0～3歳人口（女）', '人');
+-- INSERT OR IGNORE INTO estat_metainfo (stats_data_id, stat_name, title, gov_org, cycle, survey_date, description) VALUES
+-- ('0003448237', '人口推計', '人口推計（2020年）', '総務省統計局', '年次', '2020-10', '人口推計の結果'),
+-- ('0003448238', '世帯数調査', '世帯数調査（2020年）', '総務省統計局', '年次', '2020-10', '世帯数の調査結果'),
+-- ('0000010101', '社会・人口統計体系', 'Ａ　人口・世帯', '総務省統計局', '年次', '2020-10', '社会・人口統計体系のデータ');
 
--- テーブル情報の確認用ビュー
+-- 統計表サマリービュー
 CREATE VIEW IF NOT EXISTS v_estat_metainfo_summary AS
 SELECT 
-  stats_data_id,
-  stat_name,
-  title,
-  COUNT(*) as item_count,
-  MAX(updated_at) as last_updated
-FROM estat_metainfo 
-GROUP BY stats_data_id, stat_name, title
-ORDER BY last_updated DESC;
-
--- カテゴリ別統計情報のビュー
-CREATE VIEW IF NOT EXISTS v_category_summary AS
-SELECT 
-  cat01 as category,
+  area_type,
   COUNT(*) as count,
-  COUNT(DISTINCT stats_data_id) as unique_stats_count
-FROM estat_metainfo 
-WHERE cat01 IS NOT NULL
-GROUP BY cat01 
-ORDER BY count DESC;
-
--- 統合サマリービュー
-CREATE VIEW IF NOT EXISTS v_estat_summary AS
-SELECT 
-  stats_data_id,
-  stat_name,
-  title,
-  COUNT(*) as item_count,
-  MIN(created_at) as first_created,
   MAX(updated_at) as last_updated
 FROM estat_metainfo
-GROUP BY stats_data_id, stat_name, title;
+GROUP BY area_type;
 
 -- ユーザーアクティビティビュー
 CREATE VIEW IF NOT EXISTS v_user_activity AS

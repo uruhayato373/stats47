@@ -1,7 +1,11 @@
 "use client";
 
 import { useAtom, useSetAtom } from "jotai";
-import { effectiveThemeAtom, mountedAtom, toggleThemeAtom } from "@/atoms/theme";
+import {
+  effectiveThemeAtom,
+  mountedAtom,
+  toggleThemeAtom,
+} from "@/store/theme";
 
 export function useTheme() {
   const [theme] = useAtom(effectiveThemeAtom);

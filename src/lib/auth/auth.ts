@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { createD1Database } from "@/lib/db";
+import { getDataProvider } from "@/lib/database";
 
 export const authConfig: NextAuthConfig = {
   providers: [
@@ -19,7 +19,7 @@ export const authConfig: NextAuthConfig = {
         }
 
         try {
-          const db = await createD1Database();
+          const db = await getDataProvider();
 
           // ユーザーを検索
           const user = await db

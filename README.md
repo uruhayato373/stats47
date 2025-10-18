@@ -131,6 +131,20 @@ stats47/
 └── package.json             # 依存関係とスクリプト
 ```
 
+## 🌍 環境別データ取得
+
+このプロジェクトは 4 つの環境をサポートしています:
+
+| 環境            | データソース             | 用途                      |
+| --------------- | ------------------------ | ------------------------- |
+| **mock**        | JSON ファイル            | オフライン開発、Storybook |
+| **development** | ローカル D1 (SQLite)     | ローカル開発              |
+| **staging**     | リモート D1 (Cloudflare) | 本番前テスト              |
+| **production**  | リモート D1 (Cloudflare) | 本番運用                  |
+
+環境は `NEXT_PUBLIC_ENV` 環境変数で自動判定されます。
+詳細は [開発環境設定ガイド](./docs/02_開発/10_開発環境設定ガイド.md) を参照してください。
+
 ## 🗄️ データベース管理
 
 データベース操作を行う前に、必ず以下のドキュメントを読んでください：
@@ -151,8 +165,11 @@ npx wrangler d1 execute stats47 --local --file=./database/schemas/main.sql
 # リモート環境へのスキーマ適用
 npx wrangler d1 execute stats47 --remote --file=./database/schemas/main.sql
 
-# 開発サーバー起動
-npm run dev
+# 開発サーバー起動（API接続あり）
+npm run dev:api
+
+# または、モックデータを使用した開発環境
+npm run dev:mock
 ```
 
 ## 📚 ドキュメント
@@ -168,10 +185,25 @@ npm run dev
 ### 管理ガイド
 
 - [開発ガイド](./docs/02_開発/README.md) - 開発ガイドラインとベストプラクティス
+- [機能実装優先順位ガイド](./docs/00_project_overview/implementation-priority-guide.md) - 機能実装の優先順位とベストプラクティス
+- [データフェッチ戦略](./docs/01_development_guide/data-fetching-strategy.md) - useSWR を中心としたデータフェッチの標準化
 - [Storybook ガイド](./docs/02_開発/05_Storybookガイド.md) - Storybook 開発ガイドとベストプラクティス
 - [開発者ガイド](./doc/development-guide.md) - 開発環境のセットアップと開発手順
 - [e-Stat 統合ガイド](./doc/estat-integration.md) - e-Stat API 統合の詳細
 - [配色システム](./doc/color-system.md) - UI/UX の配色システムとデザインガイドライン
+
+### リファクタリング計画
+
+- [データフェッチリファクタリング計画](./docs/02_domain/architecture/data-fetching-refactoring-plan.md) - 既存コードのリファクタリング計画と実装手順
+- [プロバイダーアーキテクチャ設計書](./docs/02_domain/architecture/providers-architecture.md) - プロバイダーコンポーネントの設計と実装
+- [プロバイダーリファクタリング実施報告](./docs/02_domain/architecture/providers-refactoring-report.md) - プロバイダーリファクタリングの実施内容と成果
+
+### 地図可視化・地理データ
+
+- [Geoshape データソース仕様書](./docs/02_domain/visualization/specifications/geoshape-data-source.md) - Geoshape データセットの統合仕様
+- [TopoJSON/GeoJSON アダプター実装仕様](./docs/02_domain/visualization/implementation/topojson-geojson-adapter.md) - TopoJSON から GeoJSON への変換実装
+- [行政区域データ管理仕様](./docs/02_domain/area/specifications/administrative-boundary-data.md) - 行政区域データの管理方針と実装
+- [Leaflet 統合実装ガイド](./docs/02_domain/visualization/implementation/leaflet-integration-guide.md) - Leaflet 地図ライブラリの統合実装
 
 ### その他
 
@@ -200,11 +232,18 @@ npm run dev
    npm install
    ```
 
+   > 環境変数管理のため`cross-env`が自動的にインストールされます。
+
 3. **環境変数の設定**
 
    ```bash
-   cp env.example .env.local
-   # .env.localファイルを編集して必要な値を設定
+   # 開発環境用
+   cp env.development.example .env.development
+
+   # モック環境用（デザイン検証）
+   cp env.mock.example .env.mock
+
+   # 各ファイルを編集して必要な値を設定
    ```
 
 4. **データベースの初期化**
@@ -218,24 +257,59 @@ npm run dev
    ```
 
 5. **開発サーバーの起動**
+
    ```bash
-   npm run dev
+   # API接続ありの開発環境
+   npm run dev:api
+
+   # モックデータを使用した開発環境（デザイン検証用）
+   npm run dev:mock
    ```
 
 ## 環境設定
 
-### 必須環境変数
+### 環境別設定ファイル
 
-開発環境でも Cloudflare D1 を使用するため、以下の環境変数が必要です：
+プロジェクトでは複数の環境をサポートしています：
 
 ```bash
-# .env.local ファイルを作成
-cp env.example .env.local
+# 開発環境（API接続あり）
+cp env.development.example .env.development
 
-# 以下の値を設定
-CLOUDFLARE_API_TOKEN=your_api_token_here
-CLOUDFLARE_ACCOUNT_ID=your_account_id_here
-CLOUDFLARE_D1_DATABASE_ID=your_database_id_here
+# モック環境（API非接続、デザイン検証用）
+cp env.mock.example .env.mock
+
+# ステージング環境
+cp env.staging.example .env.staging
+
+# 本番環境
+cp env.production.example .env.production
+```
+
+### 必須環境変数
+
+各環境で必要な環境変数は以下の通りです：
+
+#### 開発環境
+
+```bash
+# e-Stat API設定
+ESTAT_API_KEY=your-dev-api-key
+
+# 環境設定
+NEXT_PUBLIC_ENV=development
+
+# 注意：開発環境ではローカルD1を使用するため、Cloudflare設定は不要
+```
+
+#### モック環境
+
+```bash
+# 環境設定
+NEXT_PUBLIC_ENV=mock
+
+# 注意：mock環境ではデータベース接続は不要です。
+# すべてのデータはローカルのJSONファイルから読み込まれます。
 ```
 
 ### Cloudflare D1 設定の取得方法
@@ -243,6 +317,26 @@ CLOUDFLARE_D1_DATABASE_ID=your_database_id_here
 1. **API Token**: [Cloudflare Dashboard](https://dash.cloudflare.com/profile/api-tokens) で作成
 2. **Account ID**: [Cloudflare Dashboard](https://dash.cloudflare.com/) の右サイドバーに表示
 3. **Database ID**: `npx wrangler d1 list` で確認
+
+### 環境切り替え
+
+本プロジェクトでは`cross-env`を使用して環境変数を設定しています。
+
+```bash
+# 開発環境で起動（API接続あり）
+npm run dev:api
+
+# モック環境で起動（デザイン検証用）
+npm run dev:mock
+
+# ステージング環境で起動
+npm run dev:staging
+
+# 本番環境で起動
+npm run dev:production
+```
+
+> **Note**: `cross-env`パッケージにより、Windows/macOS/Linux 全てで同じコマンドが動作します。
 
 ## データ保存
 

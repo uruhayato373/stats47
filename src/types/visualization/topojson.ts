@@ -3,7 +3,7 @@
  * 日本の都道府県境界データ（jp_pref.l.topojson）用の型定義
  */
 
-import { PREFECTURE_MAP } from "@/lib/prefecture";
+import { PrefectureService } from "@/lib/area";
 
 // 基本の座標型
 export type Coordinate = [number, number];
@@ -75,8 +75,8 @@ export interface PrefectureData {
   geometry: MultiPolygonGeometry;
 }
 
-// 都道府県コードの型（lib/prefectureから参照）
-export type PrefectureCodeLiteral = keyof typeof PREFECTURE_MAP;
+// 都道府県コードの型（Areaドメインから参照）
+export type PrefectureCodeLiteral = string;
 
 // 都道府県名の型
-export type PrefectureName = (typeof PREFECTURE_MAP)[PrefectureCodeLiteral];
+export type PrefectureName = string;

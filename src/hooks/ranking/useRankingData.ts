@@ -7,7 +7,9 @@ import { FormattedValue } from "@/lib/estat-api";
  * 自動キャッシング、リトライ、エラーハンドリング
  */
 export function useRankingYears(rankingKey?: string) {
-  const key = rankingKey ? `/api/ranking/years?rankingKey=${rankingKey}` : null;
+  const key = rankingKey
+    ? `/api/rankings/data/years?rankingKey=${rankingKey}`
+    : null;
 
   const { data, error, isLoading } = useSWR<{ years: string[] }>(key, fetcher, {
     revalidateOnFocus: false, // 年度はあまり変わらないので再検証しない
@@ -29,7 +31,7 @@ export function useRankingYears(rankingKey?: string) {
 export function useRankingData(rankingKey?: string, timeCode?: string) {
   const key =
     rankingKey && timeCode
-      ? `/api/ranking/data?rankingKey=${rankingKey}&timeCode=${timeCode}`
+      ? `/api/rankings/data?rankingKey=${rankingKey}&timeCode=${timeCode}`
       : null;
 
   const { data, error, isLoading, mutate } = useSWR<{ data: FormattedValue[] }>(

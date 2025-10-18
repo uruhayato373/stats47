@@ -11,7 +11,7 @@ export function useRankingItemsEditor(subcategoryId: string) {
     setError(null);
 
     try {
-      const response = await fetch(`/api/ranking-items/item/${id}`, {
+      const response = await fetch(`/api/rankings/items/item/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -36,7 +36,7 @@ export function useRankingItemsEditor(subcategoryId: string) {
     setError(null);
 
     try {
-      const response = await fetch("/api/ranking-items", {
+      const response = await fetch("/api/rankings/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, subcategoryId }),
@@ -61,7 +61,7 @@ export function useRankingItemsEditor(subcategoryId: string) {
     setError(null);
 
     try {
-      const response = await fetch(`/api/ranking-items/item/${id}`, {
+      const response = await fetch(`/api/rankings/items/item/${id}`, {
         method: "DELETE",
       });
 
@@ -86,7 +86,7 @@ export function useRankingItemsEditor(subcategoryId: string) {
     setError(null);
 
     try {
-      const response = await fetch("/api/ranking-items/reorder", {
+      const response = await fetch("/api/rankings/items/reorder", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subcategoryId, reorderedItems }),

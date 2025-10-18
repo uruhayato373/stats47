@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { JotaiProvider } from "@/providers/JotaiProvider";
-import { SessionProvider } from "next-auth/react";
-import ThemeInitializer from "@/components/ThemeInitializer";
-import Header from "@/components/layout/Header";
-import Sidebar from "@/components/layout/Sidebar";
-// import { ThemeProvider } from "@/contexts/ThemeContext"; // 無効化: Jotai版テーマシステムに統一
+import { JotaiProvider } from "@/lib/providers";
+// import { SessionProvider } from "next-auth/react"; // 無効化: Auth.js機能を一時的に無効化
+import { Header } from "@/components/organisms/layout/Header";
+import { Sidebar } from "@/components/organisms/layout/Sidebar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,12 +28,9 @@ export default function RootLayout({
         className={`${inter.variable} font-sans bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
         <JotaiProvider>
-          <SessionProvider>
-            <ThemeInitializer />
-            <Header />
-            <Sidebar />
-            <main className="lg:ps-60 pt-16">{children}</main>
-          </SessionProvider>
+          <Header />
+          <Sidebar />
+          <main className="lg:ps-60 pt-16">{children}</main>
         </JotaiProvider>
       </body>
     </html>

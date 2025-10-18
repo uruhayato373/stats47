@@ -5,7 +5,6 @@
  */
 
 import { RankingItem } from "@/types/models/ranking";
-import { getBaseUrl } from "@/lib/config";
 
 export interface SubcategoryConfig {
   id: string;
@@ -31,8 +30,7 @@ export async function fetchRankingItemsBySubcategory(
 ): Promise<RankingConfigResponse | null> {
   try {
     // APIエンドポイントを呼び出してデータベースから取得
-    const baseUrl = getBaseUrl();
-    const url = `${baseUrl}/api/ranking-items/subcategory/${encodeURIComponent(
+    const url = `/api/rankings/items/subcategory/${encodeURIComponent(
       subcategoryId
     )}`;
 
@@ -86,8 +84,7 @@ export async function updateVisualizationSettings(
   }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const baseUrl = getBaseUrl();
-    const url = `${baseUrl}/api/ranking-items/${itemId}/visualization`;
+    const url = `/api/ranking-items/${itemId}/visualization`;
 
     const response = await fetch(url, {
       method: "PATCH",

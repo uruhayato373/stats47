@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { EstatMetaInfoRepository } from "./lib/estat-d1";
+import { EstatMetaInfoRepository } from "./lib/database/estat/repositories";
 
 export interface Env {
   AUTH_DB: D1Database;
@@ -15,7 +15,7 @@ const worker = {
     const url = new URL(request.url);
 
     // e-Statメタ情報関連のAPI
-    if (url.pathname.startsWith("/api/estat/metainfo")) {
+    if (url.pathname.startsWith("/api/estat-api/meta-info")) {
       return handleEstatMetainfo(request, env);
     }
 
@@ -33,7 +33,7 @@ async function handleEstatMetainfo(
   const url = new URL(request.url);
 
   try {
-    if (url.pathname === "/api/estat/metainfo/save") {
+    if (url.pathname === "/api/estat-api/meta-info/save") {
       return handleSave(request, env);
     }
 

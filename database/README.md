@@ -2,27 +2,69 @@
 
 このプロジェクトでは、e-Stat のメタデータを保存するために Cloudflare D1 を使用しています。
 
-## セットアップ
+## 環境別データベース構成
 
-### 1. ローカル開発環境
+| 環境            | データベース名    | データベース ID                        | 接続方法                          |
+| --------------- | ----------------- | -------------------------------------- | --------------------------------- |
+| **Development** | `stats47`         | `e6533698-d05a-475b-9f39-5558703feef7` | `--local`（ローカル SQLite）      |
+| **Staging**     | `stats47_staging` | `39f18714-83bf-423c-9956-dcc9e466affb` | `--env staging --remote` **必須** |
+| **Production**  | `stats47`         | `e6533698-d05a-475b-9f39-5558703feef7` | `--remote` **必須**               |
+
+⚠️ **重要**: Staging/Production 環境では必ず`--remote`フラグを使用してください。
+
+## クイックリファレンス
+
+### Development 環境（ローカル D1）
 
 ```bash
-# D1データベースの作成
-npx wrangler d1 create estat-db
+# スキーマ適用
+npx wrangler d1 execute stats47 --local --file=./database/schemas/main.sql
 
-# ローカル開発用のD1インスタンスを起動
-npx wrangler d1 execute estat-db --local --file=./database/schemas/main.sql
+# テーブル一覧確認
+npx wrangler d1 execute stats47 --local --command "SELECT name FROM sqlite_master WHERE type='table';"
+
+# データ確認
+npx wrangler d1 execute stats47 --local --command "SELECT * FROM users LIMIT 5;"
+
+# マイグレーション適用
+npx wrangler d1 migrations apply stats47 --local
 
 # 開発サーバー起動
 npm run dev
 ```
 
-### 2. 本番環境
+### Staging 環境（リモート D1）
 
 ```bash
-# 本番環境にデプロイ
-npx wrangler d1 execute estat-db --file=./database/schemas/main.sql
-npx wrangler deploy
+# ⚠️ 必ず --remote フラグを使用
+
+# テーブル一覧確認
+npx wrangler d1 execute stats47_staging --env staging --remote --command "SELECT name FROM sqlite_master WHERE type='table';"
+
+# データ確認
+npx wrangler d1 execute stats47_staging --env staging --remote --command "SELECT * FROM users LIMIT 5;"
+
+# マイグレーション適用
+npx wrangler d1 migrations apply stats47_staging --env staging --remote
+
+# 本番データのコピー
+node scripts/import-to-staging.js
+```
+
+### Production 環境（リモート D1）
+
+```bash
+# ⚠️ 必ず --remote フラグを使用
+# ⚠️ 本番環境では慎重に操作してください
+
+# テーブル一覧確認
+npx wrangler d1 execute stats47 --remote --command "SELECT name FROM sqlite_master WHERE type='table';"
+
+# データ確認（読み取りのみ）
+npx wrangler d1 execute stats47 --remote --command "SELECT * FROM users LIMIT 5;"
+
+# マイグレーション適用（注意して実行）
+npx wrangler d1 migrations apply stats47 --remote
 ```
 
 ## データベーススキーマ
