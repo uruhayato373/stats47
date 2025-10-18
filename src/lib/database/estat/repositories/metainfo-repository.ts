@@ -1,6 +1,7 @@
 import { getDataProvider } from "@/lib/database";
 import { getEnvironmentConfig } from "@/lib/env";
 import { mockDataProvider, MockDataProvider } from "@/lib/database/mock";
+import type { AreaType } from "@/types/ranking/unified";
 import type {
   EstatMetaInfo,
   SaveEstatMetaInfoInput,
@@ -19,6 +20,29 @@ export class EstatMetaInfoRepository {
 
   constructor(db: D1Database | MockDataProvider) {
     this.db = db;
+  }
+
+  /**
+   * e-Statメタデータからarea_typeを判定する
+   * @param metaInfo - e-Stat APIのメタ情報レスポンス
+   * @returns 地域タイプ
+   */
+  private determineAreaType(metaInfo: any): AreaType {
+    const tableInf = metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF;
+    const tabulationCategory =
+      tableInf?.STATISTICS_NAME_SPEC?.TABULATION_CATEGORY;
+
+    if (!tabulationCategory) {
+      return "country";
+    }
+
+    if (tabulationCategory.includes("市区町村")) {
+      return "municipality";
+    }
+    if (tabulationCategory.includes("都道府県")) {
+      return "prefecture";
+    }
+    return "country";
   }
 
   /**
@@ -59,12 +83,12 @@ export class EstatMetaInfoRepository {
       .prepare(
         `
       INSERT INTO estat_metainfo 
-      (stats_data_id, stat_name, title, gov_org, cycle, survey_date, description, last_fetched_at)
+      (stats_data_id, stat_name, title, area_type, cycle, survey_date, description, last_fetched_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
       ON CONFLICT(stats_data_id) DO UPDATE SET
         stat_name = excluded.stat_name,
         title = excluded.title,
-        gov_org = excluded.gov_org,
+        area_type = excluded.area_type,
         cycle = excluded.cycle,
         survey_date = excluded.survey_date,
         description = excluded.description,
@@ -76,7 +100,7 @@ export class EstatMetaInfoRepository {
         data.stats_data_id,
         data.stat_name,
         data.title,
-        data.gov_org || null,
+        data.area_type,
         data.cycle || null,
         data.survey_date || null,
         data.description || null
@@ -149,12 +173,12 @@ export class EstatMetaInfoRepository {
         .prepare(
           `
         INSERT INTO estat_metainfo 
-        (stats_data_id, stat_name, title, gov_org, cycle, survey_date, description, last_fetched_at)
+        (stats_data_id, stat_name, title, area_type, cycle, survey_date, description, last_fetched_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
         ON CONFLICT(stats_data_id) DO UPDATE SET
           stat_name = excluded.stat_name,
           title = excluded.title,
-          gov_org = excluded.gov_org,
+          area_type = excluded.area_type,
           cycle = excluded.cycle,
           survey_date = excluded.survey_date,
           description = excluded.description,
@@ -166,7 +190,7 @@ export class EstatMetaInfoRepository {
           data.stats_data_id,
           data.stat_name,
           data.title,
-          data.gov_org || null,
+          data.area_type,
           data.cycle || null,
           data.survey_date || null,
           data.description || null
@@ -437,6 +461,42 @@ export class EstatMetaInfoRepository {
       .run();
 
     return (result as any).changes > 0;
+  }
+
+  /**
+   * area_typeで絞り込んで統計表一覧を取得
+   */
+  async getStatsListByAreaType(
+    areaType: AreaType,
+    options?: { limit?: number; offset?: number }
+  ): Promise<EstatMetaInfo[]> {
+    const { limit = 50, offset = 0 } = options || {};
+
+    // MockDataProviderの場合は簡易フィルタリング
+    if ("fetchEstatMetainfoUnique" in this.db) {
+      const data = await (this.db as any).fetchEstatMetainfoUnique({
+        limit: limit + offset,
+        orderBy: "updated_at DESC",
+      });
+
+      // area_typeでフィルタリング
+      const filtered = data.filter((item: any) => item.area_type === areaType);
+      return filtered.slice(offset, offset + limit) as EstatMetaInfo[];
+    }
+
+    const result = await this.db
+      .prepare(
+        `
+      SELECT * FROM estat_metainfo
+      WHERE area_type = ?
+      ORDER BY updated_at DESC
+      LIMIT ? OFFSET ?
+    `
+      )
+      .bind(areaType, limit, offset)
+      .all();
+
+    return result.results as EstatMetaInfo[];
   }
 
   /**

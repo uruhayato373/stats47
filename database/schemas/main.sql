@@ -21,13 +21,14 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   stats_data_id TEXT PRIMARY KEY,        -- 統計表ID（主キー）
   stat_name TEXT NOT NULL,               -- 統計調査名
   title TEXT NOT NULL,                   -- 統計表タイトル
-  gov_org TEXT,                          -- 提供機関
+  area_type TEXT NOT NULL DEFAULT 'country', -- 地域レベル（country/prefecture/municipality）
   cycle TEXT,                            -- 調査周期
   survey_date TEXT,                      -- 調査年月
   description TEXT,                      -- 説明
   last_fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CHECK (area_type IN ('country', 'prefecture', 'municipality'))
 );
 
 -- 統計データの履歴管理テーブル
@@ -46,7 +47,7 @@ CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_stat_name ON estat_metainfo(stat_name);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_title ON estat_metainfo(title);
-CREATE INDEX IF NOT EXISTS idx_estat_metainfo_gov_org ON estat_metainfo(gov_org);
+CREATE INDEX IF NOT EXISTS idx_estat_metainfo_area_type ON estat_metainfo(area_type);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
 CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
 CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
@@ -66,17 +67,11 @@ CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 -- 統計表サマリービュー
 CREATE VIEW IF NOT EXISTS v_estat_metainfo_summary AS
 SELECT 
-  stats_data_id,
-  stat_name,
-  title,
-  gov_org,
-  cycle,
-  survey_date,
-  last_fetched_at,
-  created_at,
-  updated_at
-FROM estat_metainfo 
-ORDER BY updated_at DESC;
+  area_type,
+  COUNT(*) as count,
+  MAX(updated_at) as last_updated
+FROM estat_metainfo
+GROUP BY area_type;
 
 -- ユーザーアクティビティビュー
 CREATE VIEW IF NOT EXISTS v_user_activity AS

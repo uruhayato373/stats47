@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Archive } from "lucide-react";
 import { SavedMetaInfoListItem } from "@/components/molecules/SavedMetaInfoListItem";
 import { Pagination } from "@/components/molecules/Pagination";
-import type { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
+import type { EstatMetaInfo } from "@/lib/database/estat/types";
 
 interface EstatMetaInfoSidebarProps {
   className?: string;
-  initialData?: SavedEstatMetainfoItem[];
-  onView?: (item: SavedEstatMetainfoItem) => void;
+  initialData?: EstatMetaInfo[];
+  onView?: (item: EstatMetaInfo) => void;
 }
 
 export default function EstatMetaInfoSidebar({
@@ -20,7 +20,7 @@ export default function EstatMetaInfoSidebar({
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const handleView = (item: SavedEstatMetainfoItem) => {
+  const handleView = (item: EstatMetaInfo) => {
     if (onView) {
       onView(item);
     }
@@ -145,7 +145,7 @@ export default function EstatMetaInfoSidebar({
         <div className="divide-y divide-gray-200 dark:divide-neutral-600">
           {paginatedData.map((item) => (
             <SavedMetaInfoListItem
-              key={item.id}
+              key={item.stats_data_id}
               item={item}
               onView={handleView}
             />

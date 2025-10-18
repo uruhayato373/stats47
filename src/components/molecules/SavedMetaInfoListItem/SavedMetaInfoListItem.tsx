@@ -1,11 +1,11 @@
 "use client";
 
 import { Eye } from "lucide-react";
-import type { SavedEstatMetainfoItem } from "@/types/models";
+import type { EstatMetaInfo } from "@/lib/database/estat/types";
 
 interface SavedMetaInfoListItemProps {
-  item: SavedEstatMetainfoItem;
-  onView: (item: SavedEstatMetainfoItem) => void;
+  item: EstatMetaInfo;
+  onView: (item: EstatMetaInfo) => void;
 }
 
 export function SavedMetaInfoListItem({
@@ -25,20 +25,18 @@ export function SavedMetaInfoListItem({
           <div className="text-xs text-gray-700 dark:text-neutral-300 mt-1">
             {item.stat_name}＞{item.title}
           </div>
-          {/* ranking_key (optional) */}
-          {item.ranking_key && (
-            <div className="mt-1">
-              <span className="text-indigo-600 dark:text-indigo-400 font-mono text-xs bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded">
-                {item.ranking_key}
-              </span>
-            </div>
-          )}
+          {/* area_type */}
+          <div className="mt-1">
+            <span className="text-blue-600 dark:text-blue-400 font-mono text-xs bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
+              {item.area_type}
+            </span>
+          </div>
         </div>
 
-        {/* 中央: 項目数 */}
+        {/* 中央: 更新日時 */}
         <div className="flex items-center">
           <span className="text-xs text-gray-500 dark:text-neutral-400">
-            {item.item_count}件
+            {new Date(item.updated_at).toLocaleDateString()}
           </span>
         </div>
 

@@ -214,6 +214,7 @@
   },
   "active": "1b2c24de311d3577",
   "lastOpenFiles": [
+    "02_domain/visualization/implementation/page-level-loading-strategy.md",
     "02_domain/database/operations/troubleshooting.md",
     "02_domain/database/operations/backup-restore.md",
     "02_domain/database/implementation/best-practices.md",
@@ -242,7 +243,6 @@
     "01_development_guide/d3js_choropleth_guide.md",
     "02_domain/visualization/implementation/d3js/d3js_choropleth_guide.md",
     "00_project_overview/world-statistics-integration-plan.md",
-    "00_project_overview/world-statistics-api-integration-plan.md",
     "02_domain/export/implementation",
     "02_domain/export/specifications",
     "02_domain/export",

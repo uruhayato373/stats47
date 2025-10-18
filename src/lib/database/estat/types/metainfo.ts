@@ -3,11 +3,13 @@
  * 統計表レベル（stats_data_id）での管理に特化
  */
 
+import type { AreaType } from "@/types/ranking/unified";
+
 export interface EstatMetaInfo {
   stats_data_id: string;
   stat_name: string;
   title: string;
-  gov_org?: string;
+  area_type: AreaType; // 'country' | 'prefecture' | 'municipality'
   cycle?: string;
   survey_date?: string;
   description?: string;
@@ -20,7 +22,7 @@ export interface SaveEstatMetaInfoInput {
   stats_data_id: string;
   stat_name: string;
   title: string;
-  gov_org?: string;
+  area_type: AreaType;
   cycle?: string;
   survey_date?: string;
   description?: string;
