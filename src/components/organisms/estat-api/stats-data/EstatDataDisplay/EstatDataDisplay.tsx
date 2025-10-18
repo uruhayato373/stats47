@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { AlertTriangle, Info, BarChart3, Database } from "lucide-react";
 import { EstatStatsDataResponse } from "@/lib/estat-api";
-import { EstatOverview } from "@/components/organisms/estat-api/EstatOverview";
-import { EstatCategoriesTable } from "@/components/organisms/estat-api/EstatCategoriesTable";
-import { EstatYearsTable } from "@/components/organisms/estat-api/EstatYearsTable";
-import { EstatValuesTable } from "@/components/organisms/estat-api/EstatValuesTable";
-import { EstatRawData } from "@/components/organisms/estat-api/EstatRawData";
+import { EstatOverview } from "../EstatOverview";
+import { EstatCategoriesTable } from "../EstatCategoriesTable";
+import { EstatYearsTable } from "../EstatYearsTable";
+import { EstatValuesTable } from "../EstatValuesTable";
+import { EstatRawData } from "../EstatRawData";
 import {
   TabNavigation,
   type TabItem,
