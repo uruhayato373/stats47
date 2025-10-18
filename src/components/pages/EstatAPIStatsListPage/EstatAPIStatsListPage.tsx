@@ -14,7 +14,7 @@ import {
   StatsFieldCode,
 } from "@/lib/estat-api/types/stats-list";
 import { StatsListSearch } from "@/components/molecules/StatsListSearch";
-import { AdvancedStatsListSearch } from "@/components/molecules/AdvancedStatsListSearch";
+import { AdvancedStatsListSearch } from "@/components/organisms/estat-api/AdvancedStatsListSearch";
 import { StatsListResults } from "@/components/organisms/estat-api/StatsListResults";
 import { StatsTableDetailModal } from "@/components/organisms/estat-api/StatsTableDetailModal";
 import { StatsFieldNavigation } from "@/components/organisms/estat-api/StatsFieldNavigation";
