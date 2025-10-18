@@ -22,76 +22,6 @@
             }
           },
           {
-            "id": "8fff44de0128fb6d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_domain/estat-api/implementation/api-integration.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "api-integration"
-            }
-          },
-          {
-            "id": "7bd5bf6de623d1f8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_domain/estat-api/implementation/best-practices.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "best-practices"
-            }
-          },
-          {
-            "id": "e8ff2cd03fdf065f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_domain/estat-api/implementation/data-fetching.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "data-fetching"
-            }
-          },
-          {
-            "id": "802781219912bb96",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_domain/estat-api/implementation/examples.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "examples"
-            }
-          },
-          {
-            "id": "02605808c7b5da38",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_domain/estat-api/implementation/getting-started.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "getting-started"
-            }
-          },
-          {
             "id": "99b4b34c0815de3d",
             "type": "leaf",
             "state": {
@@ -106,7 +36,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -256,6 +186,13 @@
   },
   "active": "99b4b34c0815de3d",
   "lastOpenFiles": [
+    "02_domain/estat-api/meta-info/implementation/r2-save.md",
+    "02_domain/estat-api/shared/implementation/getting-started.md",
+    "02_domain/estat-api/shared/implementation/examples.md",
+    "02_domain/estat-api/shared/implementation/data-fetching.md",
+    "02_domain/estat-api/shared/implementation/best-practices.md",
+    "02_domain/estat-api/shared/implementation/api-integration.md",
+    "02_domain/estat-api/shared/implementation",
     "02_domain/estat-api/shared/test-data.md",
     "02_domain/estat-api/shared/mocking-guide.md",
     "02_domain/estat-api/shared/integration-testing.md",
@@ -276,12 +213,6 @@
     "02_domain/estat-api/stats-data/overview.md",
     "02_domain/estat-api/stats-data/specifications/service.md",
     "02_domain/estat-api/stats-data/specifications/api.md",
-    "02_domain/estat-api/meta-info/implementation/batch-processor.md",
-    "02_domain/estat-api/meta-info/implementation/formatter.md",
-    "02_domain/estat-api/meta-info/implementation/fetcher.md",
-    "02_domain/estat-api/meta-info/overview.md",
-    "02_domain/estat-api/meta-info/specifications/service.md",
-    "02_domain/estat-api/meta-info/specifications/api.md",
     "02_domain/estat-api/shared",
     "02_domain/estat-api/stats-list/testing",
     "02_domain/estat-api/stats-list/specifications",
@@ -291,7 +222,6 @@
     "02_domain/estat-api/stats-data/testing",
     "02_domain/estat-api/stats-data/specifications",
     "02_domain/estat-api/stats-data/implementation",
-    "02_domain/estat-api/stats-data/examples",
     "05_resources/都道府県別産業割合.png",
     "05_resources/都道府県ごとの物価分析.png",
     "05_resources/転入転出.png",

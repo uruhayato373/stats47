@@ -7,43 +7,47 @@ tags:
   - implementation
 ---
 
-# API統合ガイド
+# API 統合ガイド
 
 ## 概要
 
-e-Stat APIをNext.jsアプリケーションに統合する方法について説明します。API Routes、クライアントサイドでの使用、認証、エラーハンドリングについて詳述します。
+e-Stat API を Next.js アプリケーションに統合する方法について説明します。API Routes、クライアントサイドでの使用、認証、エラーハンドリングについて詳述します。
 
 ## Next.js API Routes での統合
 
-### 1. 統計データ取得API
+### 1. 統計データ取得 API
 
 `src/app/api/stats/data/route.ts`
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
-import { EstatStatsDataService } from '@/lib/estat';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import { EstatStatsDataService } from "@/lib/estat";
+import { z } from "zod";
 
 // リクエストスキーマ
 const GetStatsDataSchema = z.object({
-  statsDataId: z.string().regex(/^\d{10}$/, '統計表IDは10桁の数字である必要があります'),
+  statsDataId: z
+    .string()
+    .regex(/^\d{10}$/, "統計表IDは10桁の数字である必要があります"),
   categoryFilter: z.string().optional(),
   yearFilter: z.string().optional(),
   areaFilter: z.string().optional(),
-  limit: z.number().min(1).max(10000).optional().default(10000)
+  limit: z.number().min(1).max(10000).optional().default(10000),
 });
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     // パラメータの検証
     const params = GetStatsDataSchema.parse({
-      statsDataId: searchParams.get('statsDataId'),
-      categoryFilter: searchParams.get('categoryFilter'),
-      yearFilter: searchParams.get('yearFilter'),
-      areaFilter: searchParams.get('areaFilter'),
-      limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined
+      statsDataId: searchParams.get("statsDataId"),
+      categoryFilter: searchParams.get("categoryFilter"),
+      yearFilter: searchParams.get("yearFilter"),
+      areaFilter: searchParams.get("areaFilter"),
+      limit: searchParams.get("limit")
+        ? parseInt(searchParams.get("limit")!)
+        : undefined,
     });
 
     // 統計データを取得
@@ -53,7 +57,7 @@ export async function GET(request: NextRequest) {
         categoryFilter: params.categoryFilter,
         yearFilter: params.yearFilter,
         areaFilter: params.areaFilter,
-        limit: params.limit
+        limit: params.limit,
       }
     );
 
@@ -62,123 +66,136 @@ export async function GET(request: NextRequest) {
       data,
       metadata: {
         timestamp: new Date().toISOString(),
-        statsDataId: params.statsDataId
-      }
+        statsDataId: params.statsDataId,
+      },
     });
-
   } catch (error) {
-    console.error('統計データ取得エラー:', error);
-    
+    console.error("統計データ取得エラー:", error);
+
     if (error instanceof z.ZodError) {
-      return NextResponse.json({
-        success: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: 'パラメータが無効です',
-          details: error.errors
-        }
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: "VALIDATION_ERROR",
+            message: "パラメータが無効です",
+            details: error.errors,
+          },
+        },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'INTERNAL_ERROR',
-        message: 'サーバー内部エラーが発生しました'
-      }
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "INTERNAL_ERROR",
+          message: "サーバー内部エラーが発生しました",
+        },
+      },
+      { status: 500 }
+    );
   }
 }
 ```
 
-### 2. 統計リスト検索API
+### 2. 統計リスト検索 API
 
 `src/app/api/stats/list/route.ts`
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
-import { EstatStatsListService } from '@/lib/estat';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import { EstatStatsListService } from "@/lib/estat";
+import { z } from "zod";
 
 const GetStatsListSchema = z.object({
   searchWord: z.string().min(1).max(100),
   limit: z.number().min(1).max(100).optional().default(20),
-  startPosition: z.number().min(1).optional().default(1)
+  startPosition: z.number().min(1).optional().default(1),
 });
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     const params = GetStatsListSchema.parse({
-      searchWord: searchParams.get('searchWord'),
-      limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined,
-      startPosition: searchParams.get('startPosition') ? parseInt(searchParams.get('startPosition')!) : undefined
+      searchWord: searchParams.get("searchWord"),
+      limit: searchParams.get("limit")
+        ? parseInt(searchParams.get("limit")!)
+        : undefined,
+      startPosition: searchParams.get("startPosition")
+        ? parseInt(searchParams.get("startPosition")!)
+        : undefined,
     });
 
     const result = await EstatStatsListService.getAndFormatStatsList(params);
 
     return NextResponse.json({
       success: true,
-      data: result
+      data: result,
     });
-
   } catch (error) {
-    console.error('統計リスト取得エラー:', error);
-    
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'INTERNAL_ERROR',
-        message: 'サーバー内部エラーが発生しました'
-      }
-    }, { status: 500 });
+    console.error("統計リスト取得エラー:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "INTERNAL_ERROR",
+          message: "サーバー内部エラーが発生しました",
+        },
+      },
+      { status: 500 }
+    );
   }
 }
 ```
 
-### 3. メタ情報取得API
+### 3. メタ情報取得 API
 
 `src/app/api/metainfo/route.ts`
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
-import { EstatMetaInfoService } from '@/lib/estat';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import { EstatMetaInfoService } from "@/lib/estat";
+import { z } from "zod";
 
 const GetMetaInfoSchema = z.object({
-  statsDataId: z.string().regex(/^\d{10}$/)
+  statsDataId: z.string().regex(/^\d{10}$/),
 });
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     const params = GetMetaInfoSchema.parse({
-      statsDataId: searchParams.get('statsDataId')
+      statsDataId: searchParams.get("statsDataId"),
     });
 
     // D1Databaseのインスタンスを取得（Cloudflare Workers環境）
     const db = getD1Database();
     const metaService = new EstatMetaInfoService(db);
-    
+
     const metaInfo = await metaService.getMetaInfo(params.statsDataId);
 
     return NextResponse.json({
       success: true,
-      data: metaInfo
+      data: metaInfo,
     });
-
   } catch (error) {
-    console.error('メタ情報取得エラー:', error);
-    
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'INTERNAL_ERROR',
-        message: 'サーバー内部エラーが発生しました'
-      }
-    }, { status: 500 });
+    console.error("メタ情報取得エラー:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "INTERNAL_ERROR",
+          message: "サーバー内部エラーが発生しました",
+        },
+      },
+      { status: 500 }
+    );
   }
 }
 ```
@@ -190,7 +207,7 @@ export async function GET(request: NextRequest) {
 `src/hooks/useStatsData.ts`
 
 ```typescript
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface UseStatsDataOptions {
   statsDataId: string;
@@ -215,17 +232,19 @@ export function useStatsData(options: UseStatsDataOptions): UseStatsDataResult {
 
   const fetchData = async () => {
     if (!options.enabled) return;
-    
+
     setLoading(true);
     setError(null);
 
     try {
       const params = new URLSearchParams({
         statsDataId: options.statsDataId,
-        ...(options.categoryFilter && { categoryFilter: options.categoryFilter }),
+        ...(options.categoryFilter && {
+          categoryFilter: options.categoryFilter,
+        }),
         ...(options.yearFilter && { yearFilter: options.yearFilter }),
         ...(options.areaFilter && { areaFilter: options.areaFilter }),
-        ...(options.limit && { limit: options.limit.toString() })
+        ...(options.limit && { limit: options.limit.toString() }),
       });
 
       const response = await fetch(`/api/stats/data?${params}`);
@@ -237,7 +256,7 @@ export function useStatsData(options: UseStatsDataOptions): UseStatsDataResult {
         setError(result.error.message);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'データ取得に失敗しました');
+      setError(err instanceof Error ? err.message : "データ取得に失敗しました");
     } finally {
       setLoading(false);
     }
@@ -245,13 +264,20 @@ export function useStatsData(options: UseStatsDataOptions): UseStatsDataResult {
 
   useEffect(() => {
     fetchData();
-  }, [options.statsDataId, options.categoryFilter, options.yearFilter, options.areaFilter, options.limit, options.enabled]);
+  }, [
+    options.statsDataId,
+    options.categoryFilter,
+    options.yearFilter,
+    options.areaFilter,
+    options.limit,
+    options.enabled,
+  ]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData,
   };
 }
 ```
@@ -261,10 +287,10 @@ export function useStatsData(options: UseStatsDataOptions): UseStatsDataResult {
 `src/components/StatsDataDisplay.tsx`
 
 ```typescript
-'use client';
+"use client";
 
-import { useStatsData } from '@/hooks/useStatsData';
-import { useState } from 'react';
+import { useStatsData } from "@/hooks/useStatsData";
+import { useState } from "react";
 
 interface StatsDataDisplayProps {
   statsDataId: string;
@@ -272,21 +298,21 @@ interface StatsDataDisplayProps {
 
 export function StatsDataDisplay({ statsDataId }: StatsDataDisplayProps) {
   const [filters, setFilters] = useState({
-    categoryFilter: '',
-    yearFilter: '',
-    areaFilter: ''
+    categoryFilter: "",
+    yearFilter: "",
+    areaFilter: "",
   });
 
   const { data, loading, error, refetch } = useStatsData({
     statsDataId,
     ...filters,
-    enabled: true
+    enabled: true,
   });
 
   const handleFilterChange = (key: string, value: string) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -314,19 +340,19 @@ export function StatsDataDisplay({ statsDataId }: StatsDataDisplayProps) {
           type="text"
           placeholder="カテゴリフィルタ"
           value={filters.categoryFilter}
-          onChange={(e) => handleFilterChange('categoryFilter', e.target.value)}
+          onChange={(e) => handleFilterChange("categoryFilter", e.target.value)}
         />
         <input
           type="text"
           placeholder="年度フィルタ"
           value={filters.yearFilter}
-          onChange={(e) => handleFilterChange('yearFilter', e.target.value)}
+          onChange={(e) => handleFilterChange("yearFilter", e.target.value)}
         />
         <input
           type="text"
           placeholder="地域フィルタ"
           value={filters.areaFilter}
-          onChange={(e) => handleFilterChange('areaFilter', e.target.value)}
+          onChange={(e) => handleFilterChange("areaFilter", e.target.value)}
         />
       </div>
 
@@ -362,7 +388,7 @@ export function StatsDataDisplay({ statsDataId }: StatsDataDisplayProps) {
 
 ## 認証とセキュリティ
 
-### 1. APIキーの管理
+### 1. API キーの管理
 
 `src/lib/auth/api-key.ts`
 
@@ -383,12 +409,12 @@ export class ApiKeyManager {
   getApiKey(): string {
     if (!this.apiKey) {
       this.apiKey = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-      
+
       if (!this.apiKey) {
-        throw new Error('ESTAT_APP_ID is not configured');
+        throw new Error("ESTAT_APP_ID is not configured");
       }
     }
-    
+
     return this.apiKey;
   }
 
@@ -409,7 +435,8 @@ interface RateLimitConfig {
 }
 
 class RateLimiter {
-  private requests: Map<string, { count: number; resetTime: number }> = new Map();
+  private requests: Map<string, { count: number; resetTime: number }> =
+    new Map();
   private config: RateLimitConfig;
 
   constructor(config: RateLimitConfig) {
@@ -423,7 +450,7 @@ class RateLimiter {
     if (!current || now > current.resetTime) {
       this.requests.set(identifier, {
         count: 1,
-        resetTime: now + this.config.windowMs
+        resetTime: now + this.config.windowMs,
       });
       return true;
     }
@@ -439,10 +466,10 @@ class RateLimiter {
   getRemainingRequests(identifier: string): number {
     const current = this.requests.get(identifier);
     if (!current) return this.config.maxRequests;
-    
+
     const now = Date.now();
     if (now > current.resetTime) return this.config.maxRequests;
-    
+
     return Math.max(0, this.config.maxRequests - current.count);
   }
 }
@@ -450,34 +477,38 @@ class RateLimiter {
 // グローバルレート制限インスタンス
 export const rateLimiter = new RateLimiter({
   windowMs: 60 * 1000, // 1分
-  maxRequests: 60 // 1分間に60リクエスト
+  maxRequests: 60, // 1分間に60リクエスト
 });
 ```
 
 ### 3. API Routes でのレート制限適用
 
 ```typescript
-import { rateLimiter } from '@/lib/rate-limit';
-import { NextRequest, NextResponse } from 'next/server';
+import { rateLimiter } from "@/lib/rate-limit";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   // クライアントIPを取得
-  const clientIP = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
-  
+  const clientIP =
+    request.ip || request.headers.get("x-forwarded-for") || "unknown";
+
   // レート制限チェック
   const allowed = await rateLimiter.checkLimit(clientIP);
   if (!allowed) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'RATE_LIMIT_EXCEEDED',
-        message: 'レート制限に達しました',
-        details: {
-          remaining: rateLimiter.getRemainingRequests(clientIP),
-          resetTime: new Date(Date.now() + 60 * 1000).toISOString()
-        }
-      }
-    }, { status: 429 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "RATE_LIMIT_EXCEEDED",
+          message: "レート制限に達しました",
+          details: {
+            remaining: rateLimiter.getRemainingRequests(clientIP),
+            resetTime: new Date(Date.now() + 60 * 1000).toISOString(),
+          },
+        },
+      },
+      { status: 429 }
+    );
   }
 
   // 通常の処理を続行
@@ -500,27 +531,27 @@ export class ApiError extends Error {
     public details?: any
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
 export class ValidationError extends ApiError {
   constructor(message: string, details?: any) {
-    super('VALIDATION_ERROR', message, 400, details);
+    super("VALIDATION_ERROR", message, 400, details);
   }
 }
 
 export class EstatApiError extends ApiError {
   constructor(message: string, public statsDataId?: string) {
-    super('ESTAT_API_ERROR', message, 502);
+    super("ESTAT_API_ERROR", message, 502);
   }
 }
 
 export class RateLimitError extends ApiError {
   constructor(remaining: number, resetTime: number) {
-    super('RATE_LIMIT_EXCEEDED', 'レート制限に達しました', 429, {
+    super("RATE_LIMIT_EXCEEDED", "レート制限に達しました", 429, {
       remaining,
-      resetTime: new Date(resetTime).toISOString()
+      resetTime: new Date(resetTime).toISOString(),
     });
   }
 }
@@ -531,66 +562,86 @@ export class RateLimitError extends ApiError {
 `src/lib/errors/error-handler.ts`
 
 ```typescript
-import { NextResponse } from 'next/server';
-import { ApiError, ValidationError, EstatApiError, RateLimitError } from './api-error';
+import { NextResponse } from "next/server";
+import {
+  ApiError,
+  ValidationError,
+  EstatApiError,
+  RateLimitError,
+} from "./api-error";
 
 export function handleApiError(error: unknown): NextResponse {
-  console.error('API Error:', error);
+  console.error("API Error:", error);
 
   if (error instanceof ValidationError) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: error.code,
-        message: error.message,
-        details: error.details
-      }
-    }, { status: error.statusCode });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+        },
+      },
+      { status: error.statusCode }
+    );
   }
 
   if (error instanceof EstatApiError) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: error.code,
-        message: error.message,
-        details: {
-          statsDataId: error.statsDataId
-        }
-      }
-    }, { status: error.statusCode });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: error.code,
+          message: error.message,
+          details: {
+            statsDataId: error.statsDataId,
+          },
+        },
+      },
+      { status: error.statusCode }
+    );
   }
 
   if (error instanceof RateLimitError) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: error.code,
-        message: error.message,
-        details: error.details
-      }
-    }, { status: error.statusCode });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+        },
+      },
+      { status: error.statusCode }
+    );
   }
 
   if (error instanceof ApiError) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: error.code,
-        message: error.message,
-        details: error.details
-      }
-    }, { status: error.statusCode });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+        },
+      },
+      { status: error.statusCode }
+    );
   }
 
   // 予期しないエラー
-  return NextResponse.json({
-    success: false,
-    error: {
-      code: 'INTERNAL_ERROR',
-      message: 'サーバー内部エラーが発生しました'
-    }
-  }, { status: 500 });
+  return NextResponse.json(
+    {
+      success: false,
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "サーバー内部エラーが発生しました",
+      },
+    },
+    { status: 500 }
+  );
 }
 ```
 
@@ -599,37 +650,37 @@ export function handleApiError(error: unknown): NextResponse {
 ### 1. レスポンスキャッシュ
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const statsDataId = searchParams.get('statsDataId');
-  
+  const statsDataId = searchParams.get("statsDataId");
+
   // キャッシュキーを生成
   const cacheKey = `stats-data-${statsDataId}`;
-  
+
   // キャッシュをチェック（Cloudflare KVやRedisなど）
   const cached = await getCachedData(cacheKey);
   if (cached) {
     return NextResponse.json(cached, {
       headers: {
-        'Cache-Control': 'public, max-age=3600', // 1時間キャッシュ
-        'X-Cache': 'HIT'
-      }
+        "Cache-Control": "public, max-age=3600", // 1時間キャッシュ
+        "X-Cache": "HIT",
+      },
     });
   }
 
   // データを取得
   const data = await EstatStatsDataService.getAndFormatStatsData(statsDataId!);
-  
+
   // キャッシュに保存
   await setCachedData(cacheKey, data, 3600);
 
   return NextResponse.json(data, {
     headers: {
-      'Cache-Control': 'public, max-age=3600',
-      'X-Cache': 'MISS'
-    }
+      "Cache-Control": "public, max-age=3600",
+      "X-Cache": "MISS",
+    },
   });
 }
 ```
@@ -639,32 +690,35 @@ export async function GET(request: NextRequest) {
 ```typescript
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const statsDataIds = searchParams.getAll('statsDataId');
+  const statsDataIds = searchParams.getAll("statsDataId");
 
   if (statsDataIds.length === 0) {
-    return NextResponse.json({
-      success: false,
-      error: { code: 'MISSING_PARAMETER', message: 'statsDataId is required' }
-    }, { status: 400 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "MISSING_PARAMETER",
+          message: "statsDataId is required",
+        },
+      },
+      { status: 400 }
+    );
   }
 
   try {
     // 並列で複数の統計データを取得
     const results = await Promise.allSettled(
-      statsDataIds.map(id => 
-        EstatStatsDataService.getAndFormatStatsData(id)
-      )
+      statsDataIds.map((id) => EstatStatsDataService.getAndFormatStatsData(id))
     );
 
     const data = results.map((result, index) => ({
       statsDataId: statsDataIds[index],
-      success: result.status === 'fulfilled',
-      data: result.status === 'fulfilled' ? result.value : null,
-      error: result.status === 'rejected' ? result.reason.message : null
+      success: result.status === "fulfilled",
+      data: result.status === "fulfilled" ? result.value : null,
+      error: result.status === "rejected" ? result.reason.message : null,
     }));
 
     return NextResponse.json({ success: true, data });
-
   } catch (error) {
     return handleApiError(error);
   }
@@ -678,29 +732,33 @@ export async function GET(request: NextRequest) {
 `src/app/api/stats/data/__tests__/route.test.ts`
 
 ```typescript
-import { GET } from '../route';
-import { EstatStatsDataService } from '@/lib/estat';
+import { GET } from "../route";
+import { EstatStatsDataService } from "@/lib/estat";
 
 // モック
-jest.mock('@/lib/estat');
-const mockEstatStatsDataService = EstatStatsDataService as jest.Mocked<typeof EstatStatsDataService>;
+jest.mock("@/lib/estat");
+const mockEstatStatsDataService = EstatStatsDataService as jest.Mocked<
+  typeof EstatStatsDataService
+>;
 
-describe('/api/stats/data', () => {
+describe("/api/stats/data", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('正常に統計データを取得できる', async () => {
+  it("正常に統計データを取得できる", async () => {
     const mockData = {
-      values: [{ areaCode: '13000', areaName: '東京都', value: 14000000 }],
+      values: [{ areaCode: "13000", areaName: "東京都", value: 14000000 }],
       areas: [],
       categories: [],
-      years: []
+      years: [],
     };
 
     mockEstatStatsDataService.getAndFormatStatsData.mockResolvedValue(mockData);
 
-    const request = new Request('http://localhost/api/stats/data?statsDataId=0000010101');
+    const request = new Request(
+      "http://localhost/api/stats/data?statsDataId=0000010101"
+    );
     const response = await GET(request);
     const data = await response.json();
 
@@ -709,14 +767,16 @@ describe('/api/stats/data', () => {
     expect(data.data).toEqual(mockData);
   });
 
-  it('無効な統計表IDでエラーを返す', async () => {
-    const request = new Request('http://localhost/api/stats/data?statsDataId=invalid');
+  it("無効な統計表IDでエラーを返す", async () => {
+    const request = new Request(
+      "http://localhost/api/stats/data?statsDataId=invalid"
+    );
     const response = await GET(request);
     const data = await response.json();
 
     expect(response.status).toBe(400);
     expect(data.success).toBe(false);
-    expect(data.error.code).toBe('VALIDATION_ERROR');
+    expect(data.error.code).toBe("VALIDATION_ERROR");
   });
 });
 ```
@@ -724,6 +784,7 @@ describe('/api/stats/data', () => {
 ## 関連ドキュメント
 
 - [データ取得実装](data-fetching.md)
-- [データ整形実装](data-formatting.md)
-- [エラーハンドリング実装](error-handling.md)
+- [エラーハンドリング](../error-handling.md)
 - [ベストプラクティス](best-practices.md)
+- [使用例](examples.md)
+- [開始ガイド](getting-started.md)
