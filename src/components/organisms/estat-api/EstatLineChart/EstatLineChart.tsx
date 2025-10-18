@@ -2,7 +2,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LineChart, TimeSeriesDataPoint } from "@/components/d3/LineChart";
+import {
+  D3LineChart,
+  TimeSeriesDataPoint,
+} from "@/components/molecules/D3LineChart";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
 import { RefreshCw, AlertCircle } from "lucide-react";
 import { ExportButton } from "@/components/atoms/ExportButton";
@@ -255,7 +258,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
           metadata={{ areaName: areaCode }}
         />
       </div>
-      <LineChart
+      <D3LineChart
         data={timeSeriesData}
         width={width}
         height={height}
