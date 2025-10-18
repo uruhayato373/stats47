@@ -7,8 +7,28 @@ import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { estatAPI, EstatMetaInfoResponse } from "@/lib/estat-api";
-import { EstatMetaInfo } from "@/lib/database/estat/types";
-import { SaveMetaInfoCacheRequest } from "@/types/models/r2/estat-metainfo-cache";
+import { EstatMetaInfoCacheService } from "@/lib/database/estat/services";
+
+/**
+ * 地域タイプの定義（クライアントサイド用）
+ */
+type AreaType = "country" | "prefecture" | "municipality";
+
+/**
+ * e-Statメタ情報の型定義（クライアントサイド用）
+ */
+interface EstatMetaInfo {
+  stats_data_id: string;
+  stat_name: string;
+  title: string;
+  area_type: AreaType;
+  cycle?: string;
+  survey_date?: string;
+  description?: string;
+  last_fetched_at: string;
+  created_at: string;
+  updated_at: string;
+}
 
 /**
  * EstatMetainfoPageProps - e-Statメタ情報ページのプロパティ
@@ -118,41 +138,27 @@ export default function EstatMetainfoPage({
     setSaveStatus({ type: null, message: "" });
 
     try {
-      const requestBody: SaveMetaInfoCacheRequest = {
-        statsDataId: currentStatsId,
-        metaInfoResponse: metaInfo,
-      };
+      const result = await EstatMetaInfoCacheService.saveToR2(
+        currentStatsId,
+        metaInfo
+      );
 
-      const response = await fetch("/api/estat-api/metainfo-cache/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
+      setSaveStatus({
+        type: "success",
+        message: result.message || "保存が完了しました",
       });
 
-      const result = await response.json();
-
-      if (result.success) {
-        setSaveStatus({
-          type: "success",
-          message: result.message,
-        });
-        // 3秒後にステータスメッセージを消す
-        setTimeout(() => {
-          setSaveStatus({ type: null, message: "" });
-        }, 3000);
-      } else {
-        setSaveStatus({
-          type: "error",
-          message: result.message || "保存に失敗しました",
-        });
-      }
+      setTimeout(() => {
+        setSaveStatus({ type: null, message: "" });
+      }, 3000);
     } catch (error) {
       console.error("R2保存エラー:", error);
       setSaveStatus({
         type: "error",
-        message: "保存中にエラーが発生しました",
+        message:
+          error instanceof Error
+            ? error.message
+            : "保存中にエラーが発生しました",
       });
     } finally {
       setIsSaving(false);
@@ -199,7 +205,9 @@ export default function EstatMetainfoPage({
               disabled={loading}
               className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
             >
-              <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
+              <RefreshCw
+                className={`w-3 h-3 ${loading ? "animate-spin" : ""}`}
+              />
               {loading ? "更新中..." : "更新"}
             </button>
             <button
