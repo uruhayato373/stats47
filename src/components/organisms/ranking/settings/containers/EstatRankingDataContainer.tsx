@@ -9,13 +9,13 @@ import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMa
 import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSummary";
 import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSelector";
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
-import { PrefectureDataTableClient } from "@/components/molecules/ranking/PrefectureDataTableClient";
+import { PrefectureDataTableClient } from "@/components/organisms/ranking/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,
-} from "@/components/ranking/ui";
+} from "@/components/organisms/ranking/RankingItemSettings";
 import { Settings } from "lucide-react";
 import { ExportButton } from "@/components/atoms/ExportButton";
 import { RankingItem } from "@/types/models/ranking";

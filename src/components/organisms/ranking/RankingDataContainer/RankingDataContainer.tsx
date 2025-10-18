@@ -17,7 +17,7 @@ import { Modal } from "@/components/atoms/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,
-} from "@/components/ranking/ui";
+} from "@/components/organisms/ranking/RankingItemSettings";
 import { ExportButton } from "@/components/atoms/ExportButton";
 import { Settings } from "lucide-react";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";

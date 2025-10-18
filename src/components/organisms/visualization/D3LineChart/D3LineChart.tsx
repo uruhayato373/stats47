@@ -20,7 +20,7 @@ export interface MultiSeriesDataPoint {
   [key: string]: string | number;
 }
 
-export interface LineChartProps {
+export interface D3LineChartProps {
   data: TimeSeriesDataPoint[] | MultiSeriesDataPoint[];
   width?: number;
   height?: number;
@@ -32,7 +32,7 @@ export interface LineChartProps {
   multiSeries?: MultiSeriesConfig[];
 }
 
-export const LineChart: React.FC<LineChartProps> = ({
+export const D3LineChart: React.FC<D3LineChartProps> = ({
   data,
   width = 800,
   height = 400,

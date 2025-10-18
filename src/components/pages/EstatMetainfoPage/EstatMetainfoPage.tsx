@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/EstatMetaInfoFetcher";
-import { EstatMetaInfoDisplay } from "@/components/templates/EstatMetaInfoDisplay";
-import { EstatMetaInfoPageHeader } from "@/components/organisms/estat-api/EstatMetaInfoPageHeader";
-import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/EstatMetaInfoSidebar";
+import { RefreshCw, BarChart3 } from "lucide-react";
+import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
+import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
+import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
+import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { estatAPI, EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfo } from "@/lib/database/estat/types";
 
@@ -116,58 +117,48 @@ export default function EstatMetainfoPage({
         handleFetchMetaInfo(firstItem.stats_data_id);
       }
     }
-  }, []); // 空の依存配列で初回マウント時のみ実行
+  }, [savedStatsList]); // savedStatsList の変更を監視
 
   // ===== レンダリング =====
 
   return (
-    <div className="transition-all duration-300 px-3 pb-3 min-h-screen">
-      {/* ヘッダーセクション - 全幅表示 */}
-      <div>
-        <EstatMetaInfoPageHeader
-          loading={loading}
-          currentStatsId={currentStatsId}
-          onRefresh={handleRefresh}
+    <EstatAPIPageLayout
+      title="e-STAT メタ情報管理"
+      icon={BarChart3}
+      actions={
+        currentStatsId && (
+          <button
+            type="button"
+            onClick={handleRefresh}
+            disabled={loading}
+            className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 transition-colors"
+          >
+            <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
+            {loading ? "更新中..." : "更新"}
+          </button>
+        )
+      }
+      sidebar={
+        <EstatMetaInfoSidebar
+          className="h-full"
+          initialData={savedStatsList}
+          onView={handleSidebarItemView}
         />
-      </div>
+      }
+    >
+      {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
+      <EstatMetaInfoFetcher onSubmit={handleFetchMetaInfo} loading={loading} />
 
-      {/* メインコンテンツとサイドバーを横並びレイアウト */}
-      <div className="flex flex-col lg:flex-row min-h-full">
-        {/* メイン作業エリア - 左側（可変幅） */}
-        <div className="flex-1 bg-white dark:bg-neutral-800">
-          <div className="p-4 md:p-6 space-y-6">
-            {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
-            <EstatMetaInfoFetcher
-              onSubmit={handleFetchMetaInfo}
-              loading={loading}
-            />
-
-            {/* メタ情報表示エリア - APIレスポンスの詳細表示 */}
-            <EstatMetaInfoDisplay
-              key={
-                // 統計表IDをキーとして使用（同じIDの場合は再レンダリングを防ぐ）
-                metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] ||
-                "empty"
-              }
-              metaInfo={metaInfo}
-              loading={loading}
-              error={error}
-            />
-          </div>
-        </div>
-
-        {/* 区切り線 - デスクトップ表示時のみ */}
-        <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-
-        {/* 保存済みデータサイドバー - 右側（固定幅） */}
-        <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">
-          <EstatMetaInfoSidebar
-            className="h-full"
-            initialData={savedStatsList}
-            onView={handleSidebarItemView}
-          />
-        </div>
-      </div>
-    </div>
+      {/* メタ情報表示エリア - APIレスポンスの詳細表示 */}
+      <EstatMetaInfoDisplay
+        key={
+          // 統計表IDをキーとして使用（同じIDの場合は再レンダリングを防ぐ）
+          metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"
+        }
+        metaInfo={metaInfo}
+        loading={loading}
+        error={error}
+      />
+    </EstatAPIPageLayout>
   );
 }

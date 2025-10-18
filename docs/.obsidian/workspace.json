@@ -8,63 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "eb0280c82c106835",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_development_guide/deployment_guide.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "deployment_guide"
-            }
-          },
-          {
-            "id": "f98fab6543d4c123",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_development_guide/data-fetching-strategy.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "data-fetching-strategy"
-            }
-          },
-          {
-            "id": "4faa4294089ffb3e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_development_guide/component_guide.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "component_guide"
-            }
-          },
-          {
             "id": "1b2c24de311d3577",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_development_guide/documentation_management.md",
+                "file": "00_project_overview/architecture.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "documentation_management"
+              "title": "architecture"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -184,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_development_guide/documentation_management.md",
+                "file": "00_project_overview/architecture.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "documentation_managementのアウトライン"
+              "title": "architectureのアウトライン"
             }
           }
         ],
@@ -214,51 +171,51 @@
   },
   "active": "1b2c24de311d3577",
   "lastOpenFiles": [
-    "02_domain/estat-api/refactoring/subdomain-organization-analysis.md",
-    "02_domain/estat-api/refactoring/estatmetainfofetcher-component-placement-analysis.md",
+    "99_inbox/themetogglebutton-background-issue-analysis.md",
+    "02_domain/architecture/theme-fouc-resolution.md",
+    "99_inbox/画像生成.md",
+    "99_inbox/レスポンシブデザイン.md",
+    "99_inbox/メモ.md",
+    "99_inbox/useswr-refactoring-analysis.md",
     "99_inbox/tabnavigation-rendering-test-analysis.md",
-    "02_domain/visualization/implementation/page-level-loading-strategy.md",
-    "02_domain/database/operations/troubleshooting.md",
-    "02_domain/database/operations/backup-restore.md",
-    "02_domain/database/implementation/best-practices.md",
-    "02_domain/database/implementation/query-patterns.md",
-    "02_domain/database/specifications/migration-guide.md",
-    "02_domain/database/specifications/schema-reference.md",
-    "02_domain/database/implementation/development-setup.md",
-    "02_domain/database/operations",
-    "02_domain/database/implementation",
-    "02_domain/database/specifications/database-design.md",
-    "02_domain/blog/features/comments-guide.md",
-    "01_development_guide/engagement_features.md",
-    "02_domain/blog/features/engagement-features-guide.md",
-    "02_domain/blog/features",
-    "01_development_guide/documentation_management.md",
-    "01_development_guide/component_guide.md",
-    "01_development_guide/data-fetching-strategy.md",
-    "01_development_guide/deployment_guide.md",
-    "01_development_guide/nextjs-optimization-guide.md",
-    "02_domain/ranking/implementation/ranking-configuration-guide.md",
-    "01_development_guide/coding_standards.md",
-    "01_development_guide/performance_optimization.md",
-    "01_development_guide/environment_variables.md",
-    "01_development_guide/large_scale_implementation.md",
-    "00_project_overview/reference_links.md",
-    "02_domain/export/implementation",
-    "02_domain/export/specifications",
-    "02_domain/export",
-    "00_project_overview/japan-statistics-api-integration-plan.md.tmp.30336.1760650634494",
-    "00_project_overview/japan-statistics-api-integration-plan.md.tmp.30336.1760650626442",
-    "02_domain/visualization/patterns",
-    "02_domain/architecture",
-    "05_resources/都道府県ごとの物価分析.png",
-    "05_resources/就職率.png",
+    "99_inbox",
     "05_resources/都道府県別産業割合.png",
-    "05_resources/ランキング画像サンプル_02.png",
+    "05_resources/都道府県ごとの物価分析.png",
     "05_resources/転入転出.png",
-    "05_resources/design.png",
+    "05_resources/就職率.png",
+    "05_resources/ランキング画像サンプル_02.png",
     "05_resources/ランキング画像サンプル_01.png",
-    "05_資料/design.png",
-    "05_資料/都道府県別産業割合.png",
-    "05_資料/都道府県ごとの物価分析.png"
+    "05_resources/x.md",
+    "05_resources/instagram.md",
+    "05_resources/design.png",
+    "05_resources",
+    "04_content_planning/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
+    "04_content_planning/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
+    "04_content_planning/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
+    "04_content_planning/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
+    "04_content_planning/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
+    "04_content_planning/03_ブログ記事/ブログ記事改善案.md",
+    "04_content_planning/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
+    "04_content_planning/03_ブログ記事/よまれる記事.md",
+    "04_content_planning/03_ブログ記事/「データで読み解く日本の交通安全 〜減少傾向にある交通事故と新たな課題〜」.md",
+    "04_content_planning/02_ダッシュボード/02_人口・世帯.md",
+    "04_content_planning/02_ダッシュボード/01_国土・気象.md",
+    "04_content_planning/03_ブログ記事",
+    "04_content_planning/02_ダッシュボード",
+    "04_content_planning/01_ランキング記事",
+    "04_content_planning",
+    "03_features/sns",
+    "03_features/related-articles",
+    "03_features/image-generation",
+    "03_features",
+    "02_domain/visualization/specifications/chart-types/scatter-plot.md",
+    "02_domain/visualization/specifications/chart-types/line-chart.md",
+    "02_domain/visualization/specifications/chart-types/heatmap.md",
+    "02_domain/visualization/specifications/chart-types/choropleth-map.md",
+    "02_domain/visualization/specifications/chart-types/bar-chart.md",
+    "02_domain/visualization/implementation/recharts/common-patterns.md",
+    "10_資料/都道府県別産業割合.png",
+    "10_資料/都道府県ごとの物価分析.png",
+    "10_資料/転入転出.png"
   ]
 }

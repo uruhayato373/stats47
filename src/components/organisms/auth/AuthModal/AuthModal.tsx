@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Modal } from "@/components/atoms/Modal";
-import { LoginForm } from "@/components/molecules/LoginForm";
-import { RegisterForm } from "@/components/molecules/RegisterForm";
+import { LoginForm } from "@/components/organisms/auth/LoginForm";
+import { RegisterForm } from "@/components/organisms/auth/RegisterForm";
 
 interface AuthModalProps {
   isOpen: boolean;

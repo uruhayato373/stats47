@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* より明示的なテーマ設定 */
+/* ===== CSS変数の定義 ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -16,7 +16,7 @@ html.dark {
   --foreground: #ededed;
 }
 
-/* Tailwind CSS v4のテーマ設定 */
+/* ===== Tailwind CSS v4のテーマ設定 ===== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -24,333 +24,299 @@ html.dark {
   --font-mono: var(--font-geist-mono);
 }
 
-/* 重要度を上げて確実に適用 */
-html.light body {
-  background: var(--background) !important;
-  color: var(--foreground) !important;
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-html.dark body {
-  background: var(--background) !important;
-  color: var(--foreground) !important;
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* フォールバック用 */
+/* ===== ベーススタイル ===== */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* レイアウトの重なり順序を調整 */
+/* ===== レイアウトの重なり順序 ===== */
 header {
-  z-index: 60 !important;
+  z-index: 60;
 }
 
 #sidebar {
-  z-index: 50 !important;
+  z-index: 50;
 }
 
 main {
-  z-index: 10 !important;
+  z-index: 10;
   position: relative;
 }
 
-/* ダークモードの強制適用 */
-.dark body {
-  background: #0a0a0a !important;
-  color: #ededed !important;
+/* ===== ヘッダーのスタイル ===== */
+html.light header {
+  background-color: #f4f4f5;
 }
 
-.light body {
-  background: #ffffff !important;
-  color: #171717 !important;
+html.dark header {
+  background-color: #171717;
 }
 
-/* ダークモードのヘッダー */
-.dark header {
-  background-color: #171717 !important;
-}
-
-.light header {
-  background-color: #f4f4f5 !important;
-}
-
-/* サイドバーのスタイル */
-/* ライトモード */
-.light #sidebar {
-  background-color: #f9fafb !important;
-  border-color: #e5e7eb !important;
-}
-
-.light #sidebar .border-gray-200 {
-  border-color: #e5e7eb !important;
-}
-
-.light #sidebar .bg-gray-100 {
-  background-color: #f9fafb !important;
-}
-
-.light #sidebar .bg-white {
+/* ヘッダー内のボタン背景 */
+html.light header .bg-white {
   background-color: #ffffff !important;
 }
 
-.light #sidebar .border-gray-200 {
-  border-color: #e5e7eb !important;
+html.dark header .bg-white {
+  background-color: #262626 !important;
 }
 
-.light #sidebar .text-gray-800 {
-  color: #1f2937 !important;
+/* ===== サイドバーのスタイル ===== */
+/* ライトモード */
+html.light #sidebar {
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
 }
 
-.light #sidebar .text-gray-500 {
-  color: #6b7280 !important;
+html.light #sidebar .border-gray-200 {
+  border-color: #e5e7eb;
 }
 
-.light #sidebar .text-gray-800 {
-  color: #1f2937 !important;
+html.light #sidebar .bg-gray-100 {
+  background-color: #f9fafb;
 }
 
-.light #sidebar .bg-gray-200 {
-  background-color: #e5e7eb !important;
+html.light #sidebar .bg-white {
+  background-color: #ffffff;
 }
 
-.light #sidebar .hover\:bg-gray-200:hover {
-  background-color: #e5e7eb !important;
+html.light #sidebar .text-gray-800 {
+  color: #1f2937;
 }
 
-.light #sidebar .hover\:text-gray-800:hover {
-  color: #1f2937 !important;
+html.light #sidebar .text-gray-500 {
+  color: #6b7280;
 }
 
-.light #sidebar .focus\:bg-gray-200:focus {
-  background-color: #e5e7eb !important;
+html.light #sidebar .bg-gray-200 {
+  background-color: #e5e7eb;
 }
 
-.light #sidebar .focus\:text-gray-800:focus {
-  color: #1f2937 !important;
+html.light #sidebar .hover\:bg-gray-200:hover {
+  background-color: #e5e7eb;
+}
+
+html.light #sidebar .hover\:text-gray-800:hover {
+  color: #1f2937;
+}
+
+html.light #sidebar .focus\:bg-gray-200:focus {
+  background-color: #e5e7eb;
+}
+
+html.light #sidebar .focus\:text-gray-800:focus {
+  color: #1f2937;
+}
+
+html.light #sidebar nav {
+  background-color: #f9fafb;
+}
+
+html.light #sidebar button,
+html.light #sidebar a {
+  color: #374151;
+}
+
+html.light #sidebar button:hover,
+html.light #sidebar a:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
 }
 
 /* ダークモード */
-.dark #sidebar {
-  background-color: #171717 !important;
-  border-color: #404040 !important;
+html.dark #sidebar {
+  background-color: #171717;
+  border-color: #404040;
 }
 
-.dark #sidebar .dark\:bg-neutral-900 {
-  background-color: #171717 !important;
+html.dark #sidebar .dark\:bg-neutral-900 {
+  background-color: #171717;
 }
 
-.dark #sidebar .dark\:border-neutral-700 {
-  border-color: #404040 !important;
+html.dark #sidebar .dark\:border-neutral-700 {
+  border-color: #404040;
 }
 
-.dark #sidebar .dark\:bg-neutral-800 {
-  background-color: #262626 !important;
+html.dark #sidebar .dark\:bg-neutral-800 {
+  background-color: #262626;
 }
 
-.dark #sidebar .dark\:text-neutral-300 {
-  color: #d4d4d4 !important;
+html.dark #sidebar .dark\:text-neutral-300 {
+  color: #d4d4d4;
 }
 
-.dark #sidebar .dark\:text-neutral-200 {
-  color: #e5e7eb !important;
+html.dark #sidebar .dark\:text-neutral-200 {
+  color: #e5e7eb;
 }
 
-.dark #sidebar .dark\:text-neutral-400 {
-  color: #a3a3a3 !important;
+html.dark #sidebar .dark\:text-neutral-400 {
+  color: #a3a3a3;
 }
 
-.dark #sidebar .dark\:hover\:bg-neutral-700:hover {
-  background-color: #404040 !important;
+html.dark #sidebar .dark\:hover\:bg-neutral-700:hover {
+  background-color: #404040;
 }
 
-.dark #sidebar .dark\:hover\:text-neutral-300:hover {
-  color: #d4d4d4 !important;
+html.dark #sidebar .dark\:hover\:text-neutral-300:hover {
+  color: #d4d4d4;
 }
 
-.dark #sidebar .dark\:focus\:bg-neutral-700:focus {
-  background-color: #404040 !important;
+html.dark #sidebar .dark\:focus\:bg-neutral-700:focus {
+  background-color: #404040;
 }
 
-.dark #sidebar .dark\:focus\:text-neutral-300:focus {
-  color: #d4d4d4 !important;
+html.dark #sidebar .dark\:focus\:text-neutral-300:focus {
+  color: #d4d4d4;
 }
 
-/* ダークモードのメインコンテンツ */
-.dark main {
-  background-color: #0a0a0a !important;
+html.dark #sidebar nav {
+  background-color: #171717;
 }
 
-.light main {
-  background-color: #ffffff !important;
+html.dark #sidebar button,
+html.dark #sidebar a {
+  color: #d1d5db;
 }
 
-/* ダークモードのカード - より具体的なセレクタを使用 */
-.dark main .bg-white,
-.dark .card.bg-white {
-  background-color: #262626 !important;
+html.dark #sidebar button:hover,
+html.dark #sidebar a:hover {
+  background-color: #374151;
+  color: #f9fafb;
 }
 
-.light main .bg-white,
-.light .card.bg-white {
-  background-color: #ffffff !important;
+/* ===== メインコンテンツ ===== */
+html.light main {
+  background-color: #ffffff;
 }
 
-/* JSON表示エリア専用のスタイル */
-.light .json-display {
-  background-color: #ffffff !important;
-  color: #111827 !important;
+html.dark main {
+  background-color: #0a0a0a;
 }
 
-.dark .json-display {
-  background-color: #171717 !important;
-  color: #f9fafb !important;
+/* ===== カードスタイル ===== */
+html.dark main .bg-white,
+html.dark .card.bg-white {
+  background-color: #262626;
 }
 
-/* グレー背景の設定 */
-.dark .bg-gray-100 {
-  background-color: #404040 !important;
+html.light main .bg-white,
+html.light .card.bg-white {
+  background-color: #ffffff;
 }
 
-.light .bg-gray-100 {
-  background-color: #f3f4f6 !important;
+/* ===== JSON表示エリア ===== */
+html.light .json-display {
+  background-color: #ffffff;
+  color: #111827;
 }
 
-/* テーブルヘッダー用のグレー背景設定 */
-.dark .bg-gray-50 {
-  background-color: #1f2937 !important;
+html.dark .json-display {
+  background-color: #171717;
+  color: #f9fafb;
 }
 
-.light .bg-gray-50 {
-  background-color: #f9fafb !important;
+/* ===== 背景色設定 ===== */
+html.dark .bg-gray-100 {
+  background-color: #404040;
 }
 
-/* テーブルヘッダー用のグレー800背景設定 */
-.dark .bg-gray-800 {
-  background-color: #1f2937 !important;
+html.light .bg-gray-100 {
+  background-color: #f3f4f6;
 }
 
-.light .bg-gray-800 {
-  background-color: #1f2937 !important;
+html.dark .bg-gray-50 {
+  background-color: #1f2937;
 }
 
-/* テーブルヘッダー用のテキスト色設定 */
-.dark .text-gray-700 {
-  color: #d1d5db !important;
+html.light .bg-gray-50 {
+  background-color: #f9fafb;
 }
 
-.light .text-gray-700 {
-  color: #374151 !important;
+html.dark .bg-gray-800 {
+  background-color: #1f2937;
 }
 
-.dark .text-gray-200 {
-  color: #e5e7eb !important;
+html.light .bg-gray-800 {
+  background-color: #1f2937;
 }
 
-.light .text-gray-200 {
-  color: #e5e7eb !important;
+/* ===== ボーダー色設定 ===== */
+html.dark .border-gray-200 {
+  border-color: #404040;
 }
 
-
-/* ダークモードのボーダー */
-.dark .border-gray-200 {
-  border-color: #404040 !important;
+html.light .border-gray-200 {
+  border-color: #e5e7eb;
 }
 
-.light .border-gray-200 {
-  border-color: #e5e7eb !important;
+html.dark .border-gray-700 {
+  border-color: #374151;
 }
 
-/* テーブル用のより薄い枠線設定 */
-.dark .border-gray-700 {
-  border-color: #374151 !important;
+html.light .border-gray-700 {
+  border-color: #d1d5db;
 }
 
-.light .border-gray-700 {
-  border-color: #d1d5db !important;
+html.dark .border-gray-500 {
+  border-color: #6b7280;
 }
 
-/* テーブル用のgray-500枠線設定 */
-.dark .border-gray-500 {
-  border-color: #6b7280 !important;
+html.light .border-gray-500 {
+  border-color: #6b7280;
 }
 
-.light .border-gray-500 {
-  border-color: #6b7280 !important;
+/* ===== テキスト色設定 ===== */
+html.dark .text-gray-900 {
+  color: #f9fafb;
 }
 
-/* ダークモードのテキスト */
-.dark .text-gray-900 {
-  color: #f9fafb !important;
+html.light .text-gray-900 {
+  color: #111827;
 }
 
-.dark .text-gray-800 {
-  color: #e5e7eb !important;
+html.dark .text-gray-800 {
+  color: #e5e7eb;
 }
 
-.light .text-gray-900 {
-  color: #111827 !important;
+html.light .text-gray-800 {
+  color: #1f2937;
 }
 
-.light .text-gray-800 {
-  color: #1f2937 !important;
+html.dark .text-gray-700 {
+  color: #d1d5db;
 }
 
-.dark .text-gray-400 {
-  color: #9ca3af !important;
+html.light .text-gray-700 {
+  color: #374151;
 }
 
-.light .text-gray-400 {
-  color: #9ca3af !important;
+html.dark .text-gray-400 {
+  color: #9ca3af;
 }
 
-/* サイドバーのナビゲーション要素 */
-.light #sidebar nav {
-  background-color: #f9fafb !important;
+html.light .text-gray-400 {
+  color: #9ca3af;
 }
 
-.dark #sidebar nav {
-  background-color: #171717 !important;
+html.dark .text-gray-200 {
+  color: #e5e7eb;
 }
 
-/* サイドバーのボタンとリンク */
-.light #sidebar button,
-.light #sidebar a {
-  color: #374151 !important;
+html.light .text-gray-200 {
+  color: #e5e7eb;
 }
 
-.dark #sidebar button,
-.dark #sidebar a {
-  color: #d1d5db !important;
-}
-
-/* サイドバーのホバー効果 */
-.light #sidebar button:hover,
-.light #sidebar a:hover {
-  background-color: #f3f4f6 !important;
-  color: #1f2937 !important;
-}
-
-.dark #sidebar button:hover,
-.dark #sidebar a:hover {
-  background-color: #374151 !important;
-  color: #f9fafb !important;
-}
-
-/* レスポンシブ対応 */
+/* ===== レスポンシブ対応 ===== */
 @media (max-width: 1023px) {
   #sidebar {
     transform: translateX(-100%);
   }
-  
+
   main {
-    padding-left: 0.75rem !important;
+    padding-left: 0.75rem;
   }
 }
 
@@ -358,8 +324,8 @@ main {
   #sidebar {
     transform: translateX(0);
   }
-  
+
   main {
-    padding-left: 15rem !important; /* 240px (w-60) */
+    padding-left: 15rem; /* 240px (w-60) */
   }
 }

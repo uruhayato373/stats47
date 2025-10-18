@@ -1,8 +1,8 @@
 import React from "react";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
-import { SubcategoryNavigation } from "@/components/molecules/SubcategoryNavigation";
+import { SubcategoryNavigation } from "@/components/organisms/category/SubcategoryNavigation";
 import { ViewSwitchButtons } from "@/components/molecules/ViewSwitchButtons";
-import { PrefectureSelector } from "@/components/molecules/PrefectureSelector";
+import { PrefectureSelector } from "@/components/organisms/area/PrefectureSelector";
 import {
   CategoryData,
   SubcategoryData,
@@ -64,12 +64,7 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
                 areaCode={areaCode}
               />
               {/* 都道府県セレクター（ダッシュボードの場合のみ） */}
-              {viewType === "dashboard" && (
-                <PrefectureSelector
-                  category={category}
-                  subcategory={subcategory}
-                />
-              )}
+              {viewType === "dashboard" && <PrefectureSelector />}
             </div>
           </div>
 

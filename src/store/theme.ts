@@ -81,17 +81,11 @@ export const initThemeAtom = atom(null, (get, set) => {
   if (typeof window === "undefined") return;
 
   try {
-    // システム設定を取得
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    const systemTheme: Theme = systemPrefersDark ? "dark" : "light";
-
     // localStorageから取得（atomWithStorageが自動で行う）
     const savedTheme = get(themeAtom);
 
-    // 初期テーマを決定
-    const initialTheme = savedTheme || systemTheme;
+    // 初期テーマを決定（デフォルトは light）
+    const initialTheme = savedTheme || "light";
 
     // DOMに適用
     applyThemeToDOM(initialTheme);

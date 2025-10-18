@@ -19,7 +19,7 @@ interface EstatDataDisplayProps {
   error: string | null;
 }
 
-export default function EstatDataDisplay({
+export function EstatDataDisplay({
   data,
   loading,
   error,

@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { getSubcategoryById } from "@/lib/category";
-import { getDashboardComponentByArea } from "@/components/subcategories";
+// import { getDashboardComponentByArea } from "@/components/subcategories";
 
 /**
  * ダッシュボードページのProps型定義
@@ -72,18 +72,19 @@ export default async function DashboardPage({ params }: PageProps) {
 
   // ダッシュボードコンポーネントを動的に取得
   // categories.jsonの設定に基づいて適切なコンポーネントを選択
-  const DashboardComponent = getDashboardComponentByArea(
-    subcategoryId,
-    areaCode,
-    categoryId
-  );
+  // const DashboardComponent = getDashboardComponentByArea(
+  //   subcategoryId,
+  //   areaCode,
+  //   categoryId
+  // );
 
-  // ダッシュボード統計データ表示コンポーネントをレンダリング
+  // 一時的にプレースホルダーを表示
   return (
-    <DashboardComponent
-      category={category}
-      subcategory={subcategory}
-      areaCode={areaCode}
-    />
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">ダッシュボード</h1>
+      <p>カテゴリ: {categoryId}</p>
+      <p>サブカテゴリ: {subcategoryId}</p>
+      <p>地域コード: {areaCode}</p>
+    </div>
   );
 }
