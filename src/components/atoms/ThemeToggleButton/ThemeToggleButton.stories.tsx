@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import React from "react";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 
 const meta: Meta<typeof ThemeToggleButton> = {
@@ -9,7 +10,7 @@ const meta: Meta<typeof ThemeToggleButton> = {
     docs: {
       description: {
         component:
-          "ライトテーマとダークテーマを切り替えるためのボタンコンポーネント。テーマの状態に応じて適切なアイコンを表示し、ユーザーが直感的にテーマを切り替えられるようにします。",
+          "ライトテーマとダークテーマを切り替えるためのボタンコンポーネント。lucide-react のアイコンを使用し、テーマの状態に応じて適切なアイコンを表示します。",
       },
     },
   },
