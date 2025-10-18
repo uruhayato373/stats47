@@ -70,13 +70,24 @@ export class EstatMetaInfoR2S3Repository {
     // S3クライアントを取得
     const client = this.getClient();
 
+    // メタデータの値をサニタイズ（S3互換APIの制限に対応）
+    const sanitizeMetadata = (value: string): string => {
+      return value
+        .replace(/[^\x20-\x7E]/g, "") // 非ASCII文字を削除
+        .replace(/[\r\n\t]/g, " ") // 改行・タブをスペースに変換
+        .trim()
+        .substring(0, 1024); // 長さ制限
+    };
+
     // R2に保存
     await client.putObject(key, jsonBuffer, {
       contentType: "application/json",
       metadata: {
         "stats-data-id": statsDataId,
         "saved-at": r2Data.saved_at,
-        "table-title": r2Data.summary.table_title,
+        "table-title": sanitizeMetadata(r2Data.summary.table_title),
+        "stat-name": sanitizeMetadata(r2Data.summary.stat_name),
+        organization: sanitizeMetadata(r2Data.summary.organization),
       },
     });
 

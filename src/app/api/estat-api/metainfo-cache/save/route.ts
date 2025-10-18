@@ -7,6 +7,14 @@ import {
   SaveMetaInfoCacheResponse,
 } from "@/lib/database/estat/types";
 
+// Cloudflare R2 Bucket型定義
+type R2Bucket = {
+  put: (key: string, value: any, options?: any) => Promise<any>;
+  get: (key: string, options?: any) => Promise<any>;
+  delete: (key: string) => Promise<any>;
+  list: (options?: any) => Promise<any>;
+};
+
 /**
  * e-StatメタインフォメーションをR2に保存するAPIエンドポイント
  * POST /api/estat-api/metainfo-cache/save
@@ -29,6 +37,9 @@ export async function POST(
         { status: 400 }
       );
     }
+
+    // 環境変数の取得
+    const env = process.env as unknown as { METAINFO_BUCKET: R2Bucket };
 
     // デバッグ用ログ
     console.log("R2保存デバッグ情報:", {
@@ -55,7 +66,6 @@ export async function POST(
     // development/staging/production環境ではR2に保存
     // wrangler.tomlで定義されたMETAINFO_BUCKETバインディングを使用
     // @ts-expect-error - Cloudflare環境でのみ利用可能
-    const env = process.env as unknown as { METAINFO_BUCKET: R2Bucket };
 
     if (!env.METAINFO_BUCKET) {
       // ローカル開発環境でR2バケットがない場合、S3互換APIを試す

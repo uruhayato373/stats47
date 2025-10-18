@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { RefreshCw, BarChart3, Check, AlertCircle } from "lucide-react";
+import { RefreshCw, BarChart3 } from "lucide-react";
 import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { useEstatMetaInfo } from "@/hooks/estat-api/useEstatMetaInfo";
 import { AreaType } from "@/lib/area/types";
+import { Alert } from "@/components/atoms/Alert";
 
 /**
  * e-Statメタ情報の型定義（クライアントサイド用）
@@ -147,24 +148,12 @@ export default function EstatMetainfoPage({
     >
       {/* 自動保存ステータス表示 */}
       {autoSaveStatus.type && (
-        <div
-          className={`mb-4 p-3 rounded-lg border ${
-            autoSaveStatus.type === "success"
-              ? "bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-300"
-              : "bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-300"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {autoSaveStatus.type === "success" ? (
-              <Check className="w-4 h-4" />
-            ) : (
-              <AlertCircle className="w-4 h-4" />
-            )}
-            <span className="text-sm font-medium">
-              {autoSaveStatus.message}
-            </span>
-          </div>
-        </div>
+        <Alert
+          type={autoSaveStatus.type === "success" ? "success" : "warning"}
+          message={autoSaveStatus.message}
+          showIcon={true}
+          className="mb-4"
+        />
       )}
 
       {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}

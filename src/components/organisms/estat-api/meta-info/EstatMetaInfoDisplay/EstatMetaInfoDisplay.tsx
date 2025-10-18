@@ -6,6 +6,7 @@ import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 import { SaveButton } from "@/components/atoms/SaveButton";
+import { Alert } from "@/components/atoms/Alert";
 import {
   TabNavigation,
   type TabItem,
@@ -140,30 +141,10 @@ export default function EstatMetaInfoDisplay({
 
   /**
    * エラー状態の表示
-   * エラーメッセージを赤色のアラートボックスで表示
+   * エラーメッセージをAlertコンポーネントで表示
    */
   if (error) {
-    return (
-      <div className="p-4 border rounded-lg bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
-        <div className="flex items-center">
-          <svg
-            className="w-4 h-4 text-red-600 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <h3 className="text-red-800 font-medium">エラー</h3>
-        </div>
-        <p className="text-red-700 mt-1">{error}</p>
-      </div>
-    );
+    return <Alert type="error" message={error} showIcon={true} />;
   }
 
   /**
