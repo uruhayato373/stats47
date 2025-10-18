@@ -6,6 +6,7 @@
 import { estatAPI } from "../client";
 import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../types";
 import { EstatMetaInfoFormatter } from "./formatter";
+import { EstatMetaInfoFetchError } from "../errors";
 
 export class EstatMetaInfoFetcher {
   /**
@@ -19,19 +20,15 @@ export class EstatMetaInfoFetcher {
     statsDataId: string
   ): Promise<EstatMetaInfoResponse> {
     try {
-      console.log(`🔵 Fetcher: メタ情報取得開始 - ${statsDataId}`);
-      const startTime = Date.now();
-
       const response = await estatAPI.getMetaInfo({ statsDataId });
-
-      console.log(`✅ Fetcher: メタ情報取得完了 (${Date.now() - startTime}ms)`);
       return response;
     } catch (error) {
-      console.error("❌ Fetcher: メタ情報取得失敗:", error);
-      throw new Error(
+      throw new EstatMetaInfoFetchError(
         `メタ情報の取得に失敗しました: ${
           error instanceof Error ? error.message : "Unknown error"
-        }`
+        }`,
+        statsDataId,
+        error
       );
     }
   }
@@ -46,6 +43,16 @@ export class EstatMetaInfoFetcher {
     statsDataId: string
   ): Promise<TransformedMetadataEntry[]> {
     const response = await this.fetchMetaInfo(statsDataId);
-    return EstatMetaInfoFormatter.transformToCSVFormat(response);
+    return EstatMetaInfoFormatter.extractCategories(response).map(
+      (category) => ({
+        stats_data_id: statsDataId,
+        stat_name:
+          response.GET_META_INFO.METADATA_INF.TABLE_INF.STAT_NAME?.$ || "",
+        title: response.GET_META_INFO.METADATA_INF.TABLE_INF.TITLE?.$ || "",
+        cat01: category.id,
+        item_name: category.name,
+        unit: null,
+      })
+    );
   }
 }

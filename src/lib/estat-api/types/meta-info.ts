@@ -143,6 +143,7 @@ export interface PrefectureInfo {
  */
 export interface TimeAxisInfo {
   availableYears: string[];
+  formattedYears: string[];
   minYear: string;
   maxYear: string;
 }
@@ -154,6 +155,43 @@ export interface TimeAxisInfo {
 export interface SelectOption {
   value: string;
   label: string;
+}
+
+/**
+ * e-Stat API CLASS_OBJ の型定義（common.tsのEstatClassObjectのエイリアス）
+ * GET_META_INFO完全ガイド 4.3 CLASS_INF に基づく
+ */
+export type ClassObject = import("./common").EstatClassObject;
+
+/**
+ * e-Stat API CLASS の型定義（common.tsのEstatClassのエイリアス）
+ * GET_META_INFO完全ガイド 4.3 CLASS_INF に基づく
+ */
+export type ClassItem = import("./common").EstatClass;
+
+/**
+ * stats-data互換の選択肢型（フラット構造）
+ * stats-dataのFormattedValue.dimensionsと同じ構造
+ */
+export interface DimensionSelectOptions {
+  area: SelectOption[];
+  time: SelectOption[];
+  tab?: SelectOption[];
+  cat01?: SelectOption[];
+  cat02?: SelectOption[];
+  cat03?: SelectOption[];
+  cat04?: SelectOption[];
+  cat05?: SelectOption[];
+  cat06?: SelectOption[];
+  cat07?: SelectOption[];
+  cat08?: SelectOption[];
+  cat09?: SelectOption[];
+  cat10?: SelectOption[];
+  cat11?: SelectOption[];
+  cat12?: SelectOption[];
+  cat13?: SelectOption[];
+  cat14?: SelectOption[];
+  cat15?: SelectOption[];
 }
 
 /**
