@@ -171,6 +171,7 @@
   },
   "active": "1b2c24de311d3577",
   "lastOpenFiles": [
+    "02_domain/estat-api/meta-info/implementation/r2-s3-setup-guide.md",
     "02_domain/estat-api/meta-info/implementation/public-development-url-setup.md",
     "02_domain/estat-api/meta-info/implementation/custom-domain-setup.md",
     "02_domain/estat-api/meta-info/implementation/r2-deployment-guide.md",
@@ -198,7 +199,6 @@
     "02_domain/estat-api/meta-info/testing/unit-testing.md",
     "02_domain/estat-api/shared/testing-strategy.md",
     "02_domain/estat-api/shared/best-practices.md",
-    "02_domain/estat-api/shared/error-handling.md",
     "02_domain/estat-api/shared",
     "02_domain/estat-api/stats-list/testing",
     "02_domain/estat-api/stats-list/specifications",
