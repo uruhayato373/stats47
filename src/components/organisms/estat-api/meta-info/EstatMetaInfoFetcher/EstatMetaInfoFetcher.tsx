@@ -15,8 +15,6 @@ interface EstatMetaInfoFetcherProps {
   loading?: boolean;
   /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
   clearOnSuccess?: boolean;
-  /** コンポーネントのサイズ（デフォルト: "default"） */
-  size?: "compact" | "default" | "large";
 }
 
 /**
@@ -46,7 +44,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   onSubmit,
   loading,
   clearOnSuccess = false,
-  size = "default",
 }: EstatMetaInfoFetcherProps) {
   // ===== 状態管理 =====
 
@@ -105,31 +102,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   const canSubmit =
     statsDataId.trim() && isValidStatsDataId(statsDataId) && !loading;
 
-  /**
-   * サイズに応じたスタイルクラスを取得
-   */
-  const getSizeClasses = () => {
-    switch (size) {
-      case "compact":
-        return {
-          inputSize: "sm" as const,
-          buttonSize: "sm" as const,
-        };
-      case "large":
-        return {
-          inputSize: "lg" as const,
-          buttonSize: "lg" as const,
-        };
-      default:
-        return {
-          inputSize: "md" as const,
-          buttonSize: "md" as const,
-        };
-    }
-  };
-
-  const sizeClasses = getSizeClasses();
-
   // ===== レンダリング =====
 
   return (
@@ -141,7 +113,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           {/* 検索アイコン（視覚的なヒント） */}
           <Search className="w-5 h-5 text-indigo-600" />
           {/* セクションタイトル */}
-          <h3 className="font-medium text-gray-900 dark:text-neutral-100">
+          <h3 className="text-sm font-medium text-gray-900 dark:text-neutral-100">
             メタ情報取得
           </h3>
         </div>
@@ -173,7 +145,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
             disabled={!canSubmit}
             loading={loading}
             loadingText="取得中..."
-            size={sizeClasses.buttonSize}
+            size="sm"
             variant="primary"
           >
             取得

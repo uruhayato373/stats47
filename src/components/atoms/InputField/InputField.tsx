@@ -16,6 +16,7 @@ export interface InputFieldProps {
   inlineLabel?: boolean; // ラベルをフィールド内に表示するかどうか
   width?: string; // 横幅を指定（例: "w-64", "w-full", "max-w-xs"など）
   size?: "sm" | "md" | "lg"; // サイズバリエーション
+  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"; // 角丸の設定
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
@@ -35,26 +36,51 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       className = "",
       inlineLabel = false,
       width,
-      size = "md",
+      size = "sm",
+      rounded = "sm",
     },
     ref
   ) => {
+    // 角丸クラスを取得
+    const getRoundedClass = (rounded: string) => {
+      switch (rounded) {
+        case "none":
+          return "rounded-none";
+        case "sm":
+          return "rounded-sm";
+        case "md":
+          return "rounded-md";
+        case "lg":
+          return "rounded-lg";
+        case "xl":
+          return "rounded-xl";
+        case "2xl":
+          return "rounded-2xl";
+        case "3xl":
+          return "rounded-3xl";
+        case "full":
+          return "rounded-full";
+        default:
+          return "rounded-lg";
+      }
+    };
+
     // サイズに応じたクラスを取得
     const getSizeClasses = (size: "sm" | "md" | "lg") => {
       switch (size) {
         case "sm":
-          return "px-2 py-1 text-sm";
+          return "px-2 py-1 h-7 text-sm";
         case "lg":
-          return "px-4 py-3 text-base";
+          return "px-4 py-3 h-12 text-base";
         case "md":
         default:
-          return "px-3 py-2 text-base";
+          return "px-3 py-2 h-8 text-base";
       }
     };
 
     // ベースクラス
     const baseInputClasses =
-      "w-full border border-gray-200 rounded-lg shadow-xs placeholder-gray-600 bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50 dark:placeholder-neutral-400";
+      "w-full border border-gray-200 shadow-xs placeholder-gray-600 bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50 dark:placeholder-neutral-400";
     const disabledClasses = "opacity-50 cursor-not-allowed";
     const errorClasses =
       "border-red-500 focus:border-red-500 focus:ring-red-500";
@@ -94,9 +120,11 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           onBlur={onBlur}
           placeholder={inlineLabel ? label : placeholder}
           disabled={disabled}
-          className={`${baseInputClasses} ${getSizeClasses(size)} ${
-            disabled ? disabledClasses : ""
-          } ${error ? errorClasses : ""} ${width || ""}`}
+          className={`${baseInputClasses} ${getSizeClasses(
+            size
+          )} ${getRoundedClass(rounded)} ${disabled ? disabledClasses : ""} ${
+            error ? errorClasses : ""
+          } ${width || ""}`}
         />
         {error && <p className={`mt-1 text-sm ${errorTextClasses}`}>{error}</p>}
       </div>

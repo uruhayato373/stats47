@@ -26,6 +26,8 @@ export interface LoadingButtonProps {
   iconSize?: "sm" | "md" | "lg";
   /** ボタンの幅 */
   width?: "auto" | "full";
+  /** 角丸の設定 */
+  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
 }
 
 const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
@@ -43,9 +45,34 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
       icon: Icon,
       iconSize,
       width = "auto",
+      rounded = "sm",
     },
     ref
   ) => {
+    // 角丸クラスを取得
+    const getRoundedClass = (rounded: string) => {
+      switch (rounded) {
+        case "none":
+          return "rounded-none";
+        case "sm":
+          return "rounded-sm";
+        case "md":
+          return "rounded-md";
+        case "lg":
+          return "rounded-lg";
+        case "xl":
+          return "rounded-xl";
+        case "2xl":
+          return "rounded-2xl";
+        case "3xl":
+          return "rounded-3xl";
+        case "full":
+          return "rounded-full";
+        default:
+          return "rounded-lg";
+      }
+    };
+
     // サイズに応じたクラスを取得
     const getSizeClasses = (size: "sm" | "md" | "lg") => {
       switch (size) {
@@ -113,7 +140,7 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
     };
 
     const baseClasses =
-      "rounded-lg focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center whitespace-nowrap";
+      "focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center whitespace-nowrap";
     const sizeClasses = getSizeClasses(size);
     const variantClasses = getVariantClasses(variant);
     const iconSizeClasses = getIconSizeClasses(iconSize);
@@ -127,7 +154,9 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
         type={type}
         onClick={onClick}
         disabled={isDisabled}
-        className={`${baseClasses} ${sizeClasses} ${variantClasses} ${widthClasses} ${className}`}
+        className={`${baseClasses} ${sizeClasses} ${variantClasses} ${widthClasses} ${getRoundedClass(
+          rounded
+        )} ${className}`}
       >
         {loading ? (
           <div className="flex items-center gap-1.5">
