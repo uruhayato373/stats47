@@ -8,7 +8,8 @@ import {
   DetailedStatsListTableInfo,
   StatsFieldCode,
 } from "@/lib/estat-api/types/stats-list";
-import { StatsListSearchTabs } from "@/components/organisms/estat-api/stats-list/StatsListSearchTabs";
+import { StatsFieldSidebar } from "@/components/organisms/estat-api/stats-list/StatsFieldSidebar";
+import { StatsListSearch } from "@/components/organisms/estat-api/stats-list/StatsListSearch";
 import { StatsListResults } from "@/components/organisms/estat-api/stats-list/StatsListResults";
 import { StatsTableDetailModal } from "@/components/organisms/estat-api/stats-list/StatsTableDetailModal";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
@@ -130,14 +131,22 @@ export function EstatAPIStatsListPage() {
   // ===== レンダリング =====
 
   return (
-    <EstatAPIPageLayout title="e-Stat 統計表一覧" icon={List}>
-      {/* 統合検索タブ */}
-      <StatsListSearchTabs
-        onSimpleSearch={handleSimpleSearch}
-        onFieldSelect={handleFieldSelect}
-        selectedField={selectedField}
+    <EstatAPIPageLayout
+      title="e-Stat 統計表一覧"
+      icon={List}
+      sidebar={
+        <StatsFieldSidebar
+          onFieldSelect={handleFieldSelect}
+          selectedField={selectedField}
+          className="h-full"
+        />
+      }
+    >
+      {/* シンプル検索フォーム */}
+      <StatsListSearch
+        onSearch={handleSimpleSearch}
         isLoading={isLoading}
-        defaultTab="field"
+        selectedField={selectedField}
       />
 
       {/* エラー表示 */}

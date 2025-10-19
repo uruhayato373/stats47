@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { StatsListSearchOptions } from "@/lib/estat-api";
+import { useState, useEffect } from "react";
+import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
+import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;
   isLoading?: boolean;
+  selectedField?: StatsFieldCode;
 }
 
 export function StatsListSearch({
   onSearch,
   isLoading = false,
+  selectedField,
 }: StatsListSearchProps) {
   const [searchWord, setSearchWord] = useState("");
   const [statsCode, setStatsCode] = useState("");
@@ -18,6 +21,13 @@ export function StatsListSearch({
   const [collectArea, setCollectArea] = useState<"1" | "2" | "3" | "">("");
   const [surveyYears, setSurveyYears] = useState("");
   const [limit, setLimit] = useState(100);
+
+  // サイドバーで選択された分野を反映
+  useEffect(() => {
+    if (selectedField) {
+      setStatsField(selectedField);
+    }
+  }, [selectedField]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,9 +53,22 @@ export function StatsListSearch({
     setLimit(100);
   };
 
+  // 選択された分野の名前を取得
+  const selectedFieldName = selectedField
+    ? STATS_FIELDS[selectedField]?.name
+    : null;
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">統計表検索</h2>
+      <div className="mb-4">
+        <h2 className="text-xl font-bold mb-2">統計表検索</h2>
+        {selectedFieldName && (
+          <div className="text-sm text-indigo-600 bg-indigo-50 px-3 py-2 rounded-md">
+            選択中の分野:{" "}
+            <span className="font-medium">{selectedFieldName}</span>
+          </div>
+        )}
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

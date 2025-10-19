@@ -8,11 +8,8 @@ export { StatsListResults } from "./StatsListResults";
 // 統計表詳細モーダル
 export { StatsTableDetailModal } from "./StatsTableDetailModal";
 
-// 統計分野ナビゲーション
-export { StatsFieldNavigation } from "./StatsFieldNavigation";
-
-// 検索タブコンポーネント
-export { StatsListSearchTabs } from "./StatsListSearchTabs";
+// 統計分野サイドバー
+export { StatsFieldSidebar } from "./StatsFieldSidebar";
 
 // 統計表検索コンポーネント
 export { StatsListSearch } from "./StatsListSearch";
