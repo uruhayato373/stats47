@@ -1,17 +1,14 @@
 /**
  * 統計分野ナビゲーションコンポーネント
- * 17分野のビジュアルナビゲーション、各分野の統計数表示、アイコン付きカード表示
+ * 責務: 17分野の選択UI表示のみ
  */
 
 "use client";
 
-import { useState, useEffect } from "react";
 import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
-import {
-  EstatStatsListFetcher,
-  EstatStatsListError,
-  EstatErrorType,
-} from "@/lib/estat-api/stats-list";
+import { useFieldStats } from "@/hooks/estat-api/useFieldStats";
+import { FieldStatsDisplay } from "@/components/molecules/estat-api/FieldStatsDisplay";
+import { FieldDescription } from "@/components/molecules/estat-api/FieldDescription";
 
 interface StatsFieldNavigationProps {
   onFieldSelect: (fieldCode: StatsFieldCode) => void;
@@ -19,88 +16,15 @@ interface StatsFieldNavigationProps {
   showStatsCount?: boolean;
 }
 
-interface FieldStats {
-  fieldCode: StatsFieldCode;
-  count: number;
-  isLoading: boolean;
-}
-
 export function StatsFieldNavigation({
   onFieldSelect,
   selectedField,
   showStatsCount = true,
 }: StatsFieldNavigationProps) {
-  const [fieldStats, setFieldStats] = useState<FieldStats[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // 各分野の統計数を取得
-  useEffect(() => {
-    if (!showStatsCount) return;
-
-    const fetchFieldStats = async () => {
-      setIsLoading(true);
-      const stats: FieldStats[] = [];
-
-      try {
-        // 各分野の統計数を並列で取得
-        const promises = Object.keys(STATS_FIELDS).map(async (fieldCode) => {
-          try {
-            const response = await EstatStatsListFetcher.searchByField(
-              fieldCode,
-              { limit: 1 }
-            );
-            return {
-              fieldCode: fieldCode as StatsFieldCode,
-              count: response.GET_STATS_LIST.DATALIST_INF.NUMBER || 0,
-              isLoading: false,
-            };
-          } catch (error) {
-            // NO_DATA_FOUNDエラーの場合は正常なケースとして扱う
-            if (
-              error instanceof EstatStatsListError &&
-              error.type === EstatErrorType.NO_DATA_FOUND
-            ) {
-              console.log(`分野 ${fieldCode}: データなし（正常）`);
-              return {
-                fieldCode: fieldCode as StatsFieldCode,
-                count: 0,
-                isLoading: false,
-              };
-            }
-
-            console.error(`分野 ${fieldCode} の統計数取得エラー:`, error);
-            return {
-              fieldCode: fieldCode as StatsFieldCode,
-              count: 0,
-              isLoading: false,
-            };
-          }
-        });
-
-        const results = await Promise.all(promises);
-        setFieldStats(results);
-      } catch (error) {
-        console.error("分野統計数取得エラー:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchFieldStats();
-  }, [showStatsCount]);
-
-  const getFieldStats = (fieldCode: StatsFieldCode) => {
-    return fieldStats.find((stat) => stat.fieldCode === fieldCode);
-  };
-
-  const formatCount = (count: number) => {
-    if (count >= 10000) {
-      return `${Math.floor(count / 1000)}k+`;
-    } else if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}k`;
-    }
-    return count.toString();
-  };
+  // 統計数取得フック
+  const { fieldStats, isLoading, getFieldStats, formatCount } = useFieldStats({
+    showStatsCount,
+  });
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -124,7 +48,6 @@ export function StatsFieldNavigation({
         {Object.entries(STATS_FIELDS).map(([fieldCode, field]) => {
           const stats = getFieldStats(fieldCode as StatsFieldCode);
           const isSelected = selectedField === fieldCode;
-          const count = stats?.count || 0;
 
           return (
             <button
@@ -145,27 +68,12 @@ export function StatsFieldNavigation({
                   <div className="text-xs text-gray-500">
                     コード: {fieldCode}
                   </div>
-                  {showStatsCount && stats && (
-                    <div className="mt-2">
-                      <div className="text-xs text-gray-600">
-                        統計表数:
-                        <span
-                          className={`ml-1 font-medium ${
-                            count > 0 ? "text-green-600" : "text-gray-400"
-                          }`}
-                        >
-                          {formatCount(count)}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                  {showStatsCount && !stats && !isLoading && (
-                    <div className="mt-2">
-                      <div className="text-xs text-gray-400">
-                        統計数: 取得中...
-                      </div>
-                    </div>
-                  )}
+                  <FieldStatsDisplay
+                    stats={stats}
+                    isLoading={isLoading}
+                    showStatsCount={showStatsCount}
+                    formatCount={formatCount}
+                  />
                 </div>
                 {isSelected && (
                   <div className="flex-shrink-0">
@@ -204,26 +112,7 @@ export function StatsFieldNavigation({
       )}
 
       {/* 分野説明 */}
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-        <h3 className="text-sm font-medium text-gray-700 mb-2">分野の説明</h3>
-        <div className="text-xs text-gray-600 space-y-1">
-          <p>
-            • <strong>国土・気象:</strong> 地理、気象、災害に関する統計
-          </p>
-          <p>
-            • <strong>人口・世帯:</strong> 人口動態、世帯構成に関する統計
-          </p>
-          <p>
-            • <strong>労働・賃金:</strong> 就業状況、賃金水準に関する統計
-          </p>
-          <p>
-            • <strong>企業・家計・経済:</strong> 経済活動、企業活動に関する統計
-          </p>
-          <p>
-            • <strong>社会保障・衛生:</strong> 医療、福祉、健康に関する統計
-          </p>
-        </div>
-      </div>
+      <FieldDescription />
     </div>
   );
 }
