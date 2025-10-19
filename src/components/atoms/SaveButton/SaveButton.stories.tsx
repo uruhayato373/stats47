@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 import SaveButton from "./SaveButton";
 
@@ -52,7 +52,7 @@ export const Success: Story = {
     saving: false,
     saveResult: {
       success: true,
-      message: "データが正常に保存されました",
+      message: "メタ情報を正常に保存しました。画面を更新しています...",
     },
   },
 };
@@ -87,7 +87,7 @@ export const Interactive: Story = {
       setSaveResult({
         success,
         message: success
-          ? "データが正常に保存されました"
+          ? "メタ情報を正常に保存しました。画面を更新しています..."
           : "保存に失敗しました。もう一度お試しください。",
       });
 
@@ -119,7 +119,8 @@ export const LongMessage: Story = {
     saving: false,
     saveResult: {
       success: true,
-      message: "大量のデータが正常に保存されました。処理時間は約30秒でした。",
+      message:
+        "大量のメタ情報が正常に保存されました。処理時間は約30秒でした。画面を更新しています...",
     },
   },
 };
@@ -140,7 +141,7 @@ export const SuccessWithUpdate: Story = {
     saving: false,
     saveResult: {
       success: true,
-      message: "設定が更新されました",
+      message: "メタ情報設定が更新されました。画面を更新しています...",
     },
   },
   parameters: {
@@ -180,7 +181,7 @@ export const DifferentStates: Story = {
           saving={false}
           saveResult={{
             success: true,
-            message: "保存完了",
+            message: "メタ情報保存完了。画面を更新しています...",
           }}
         />
       </div>
@@ -227,7 +228,8 @@ export const InForm: Story = {
 
       setSaveResult({
         success: true,
-        message: "フォームデータが保存されました",
+        message:
+          "メタ情報フォームデータが保存されました。画面を更新しています...",
       });
 
       setSaving(false);

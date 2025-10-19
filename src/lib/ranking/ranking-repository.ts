@@ -12,7 +12,7 @@ import { getDataProvider } from "@/lib/database";
 import { mockDataProvider } from "@/lib/database/mock";
 import { getEnvironmentConfig } from "@/lib/env";
 import { QUERIES } from "./ranking-queries";
-import { RankingItem, RankingItemDB } from "@/types/models/ranking";
+import { RankingItem, RankingItemDB } from "@/lib/ranking/types";
 import { convertRankingItemFromDB } from "./ranking-converters";
 import { CategoryService } from "@/lib/category";
 

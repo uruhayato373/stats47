@@ -5,6 +5,8 @@
 
 import { EstatMetaInfoFetcher } from "./fetcher";
 import { EstatIdUtils } from "./id-utils";
+import { ESTAT_API_CONFIG } from "../config";
+import { EstatBatchProcessError } from "../errors";
 
 /**
  * バッチ処理結果の型定義
@@ -25,8 +27,8 @@ export interface BatchProcessResult {
  * バッチ処理オプション
  */
 export interface BatchProcessOptions {
-  batchSize?: number; // バッチサイズ（デフォルト: 10）
-  delayMs?: number; // バッチ間の待機時間（デフォルト: 1000ms）
+  batchSize?: number; // バッチサイズ（デフォルト: ESTAT_API_CONFIG.BATCH_SIZE）
+  delayMs?: number; // バッチ間の待機時間（デフォルト: ESTAT_API_CONFIG.BATCH_DELAY_MS）
   onProgress?: (processed: number, total: number) => void; // 進捗コールバック
 }
 
@@ -42,14 +44,20 @@ export class EstatMetaInfoBatchProcessor {
     statsDataIds: string[],
     options: BatchProcessOptions = {}
   ): Promise<BatchProcessResult> {
-    const { batchSize = 10, delayMs = 1000, onProgress } = options;
-    const results = [];
+    const {
+      batchSize = ESTAT_API_CONFIG.BATCH_SIZE,
+      delayMs = ESTAT_API_CONFIG.BATCH_DELAY_MS,
+      onProgress,
+    } = options;
+
+    const results: Array<{
+      statsDataId: string;
+      success: boolean;
+      entriesProcessed: number;
+      error?: string;
+    }> = [];
     let successCount = 0;
     let failureCount = 0;
-
-    console.log(
-      `🔵 BatchProcessor: バッチ処理開始 - 総数: ${statsDataIds.length}`
-    );
 
     // バッチ処理
     for (let i = 0; i < statsDataIds.length; i += batchSize) {
@@ -57,20 +65,25 @@ export class EstatMetaInfoBatchProcessor {
       const batchNum = Math.floor(i / batchSize) + 1;
       const totalBatches = Math.ceil(statsDataIds.length / batchSize);
 
-      console.log(
-        `🔵 BatchProcessor: バッチ ${batchNum}/${totalBatches} 処理中 (${batch.length}件)`
-      );
-
       const batchResults = await Promise.allSettled(
         batch.map(async (id) => {
-          const transformedData = await EstatMetaInfoFetcher.fetchAndTransform(
-            id
-          );
-          return {
-            statsDataId: id,
-            success: true,
-            entriesProcessed: transformedData.length,
-          };
+          try {
+            const transformedData =
+              await EstatMetaInfoFetcher.fetchAndTransform(id);
+            return {
+              statsDataId: id,
+              success: true,
+              entriesProcessed: transformedData.length,
+            };
+          } catch (error) {
+            return {
+              statsDataId: id,
+              success: false,
+              entriesProcessed: 0,
+              error:
+                error instanceof Error ? error.message : "Processing failed",
+            };
+          }
         })
       );
 
@@ -84,6 +97,7 @@ export class EstatMetaInfoBatchProcessor {
             failureCount++;
           }
         } else {
+          // この分岐は不要になる（try-catchで全てハンドリング）
           results.push({
             statsDataId: "unknown",
             success: false,
@@ -101,14 +115,9 @@ export class EstatMetaInfoBatchProcessor {
 
       // 次のバッチの前に待機（API制限対応）
       if (i + batchSize < statsDataIds.length && delayMs > 0) {
-        console.log(`⏳ BatchProcessor: ${delayMs}ms 待機中...`);
         await new Promise((resolve) => setTimeout(resolve, delayMs));
       }
     }
-
-    console.log(
-      `✅ BatchProcessor: バッチ処理完了 - 成功: ${successCount}, 失敗: ${failureCount}`
-    );
 
     return {
       totalProcessed: statsDataIds.length,
@@ -132,11 +141,6 @@ export class EstatMetaInfoBatchProcessor {
     options?: BatchProcessOptions
   ): Promise<BatchProcessResult> {
     const statsDataIds = EstatIdUtils.generateIdRange(startId, endId);
-
-    console.log(
-      `🔵 BatchProcessor: 範囲処理 - ${startId} 〜 ${endId} (${statsDataIds.length}件)`
-    );
-
     return this.processBulk(statsDataIds, options);
   }
 }

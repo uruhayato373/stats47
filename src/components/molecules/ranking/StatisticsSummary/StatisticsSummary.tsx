@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { RankingValue } from "@/types/models/ranking";
+import { RankingValue } from "@/lib/ranking/types";
 
 export interface StatisticsSummaryProps {
   data: RankingValue[] | null;

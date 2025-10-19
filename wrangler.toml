@@ -46,6 +46,12 @@ binding = "GEOSHAPE_BUCKET"
 bucket_name = "stats47-geoshape"
 preview_bucket_name = "stats47-geoshape-preview"
 
+# R2ストレージ（e-Statメタ情報キャッシュ用）
+[[r2_buckets]]
+binding = "METAINFO_BUCKET"
+bucket_name = "stats47"
+preview_bucket_name = "stats47-development"
+
 [env.local]
 NODE_ENV = "development"
 ESTAT_API_KEY = "your_estat_api_key_here"
@@ -66,6 +72,14 @@ binding = "STATS47_DB"
 database_name = "stats47_staging"
 database_id = "39f18714-83bf-423c-9956-dcc9e466affb"
 migrations_dir = "database/migrations"
+
+[[env.staging.r2_buckets]]
+binding = "METAINFO_BUCKET"
+bucket_name = "stats47-staging"
+
+[[env.staging.r2_buckets]]
+binding = "GEOSHAPE_BUCKET"
+bucket_name = "stats47-geoshape-staging"
 
 # 本番環境
 [env.production]

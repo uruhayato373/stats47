@@ -22,6 +22,8 @@ export type {
 export { CategoryService } from "./category-service";
 
 // 便利な関数のエクスポート（後方互換性のため）
+import { CategoryService } from "./category-service";
+
 export const getCategoryById =
   CategoryService.getCategoryById.bind(CategoryService);
 export const getSubcategoryById =
@@ -46,3 +48,10 @@ export const existsCategory =
   CategoryService.existsCategory.bind(CategoryService);
 export const existsSubcategory =
   CategoryService.existsSubcategory.bind(CategoryService);
+
+// ナビゲーション用関数のエクスポート
+export {
+  getNavigationCategories,
+  getCategoriesForSidebar,
+  type SidebarCategoryItem,
+} from "./navigation";

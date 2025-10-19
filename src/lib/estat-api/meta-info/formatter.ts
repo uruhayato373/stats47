@@ -14,7 +14,11 @@ import {
   SelectOption,
   ParsedMetaInfo,
   PrefectureMap,
+  ClassObject,
+  ClassItem,
+  DimensionSelectOptions,
 } from "../types/meta-info";
+import { ESTAT_API_CONFIG } from "../config";
 
 export class EstatMetaInfoFormatter {
   /**
@@ -52,12 +56,12 @@ export class EstatMetaInfoFormatter {
       smallArea: tableInf.SMALL_AREA || "",
       collectArea: tableInf.COLLECT_AREA || "",
       mainCategory: {
-        code: (tableInf.MAIN_CATEGORY as any)?.["@code"] || "",
+        code: tableInf.MAIN_CATEGORY?.["@no"] || "",
         name: tableInf.MAIN_CATEGORY?.$ || "",
       },
       subCategory: tableInf.SUB_CATEGORY
         ? {
-            code: (tableInf.SUB_CATEGORY as any)["@code"] || "",
+            code: tableInf.SUB_CATEGORY["@no"] || "",
             name: tableInf.SUB_CATEGORY.$ || "",
           }
         : undefined,
@@ -140,15 +144,17 @@ export class EstatMetaInfoFormatter {
     }
 
     const classItems = Array.isArray(areaClass.CLASS)
-      ? areaClass.CLASS
-      : [areaClass.CLASS];
-    const prefectures = classItems.filter((item: any) => {
+      ? areaClass.CLASS.filter((item): item is ClassItem => item !== undefined)
+      : areaClass.CLASS
+      ? [areaClass.CLASS]
+      : [];
+    const prefectures = classItems.filter((item: ClassItem) => {
       const code = item["@code"];
       return code.length === 5 && code.endsWith("000") && code !== "00000";
     });
 
     return new Map(
-      prefectures.map((item: any) => [item["@code"], item["@name"]])
+      prefectures.map((item: ClassItem) => [item["@code"], item["@name"]])
     );
   }
 
@@ -174,8 +180,14 @@ export class EstatMetaInfoFormatter {
       return [];
     }
 
+    if (!areaClass.CLASS) {
+      return [];
+    }
+
     return Array.isArray(areaClass.CLASS)
-      ? areaClass.CLASS.map((item: any) => ({
+      ? areaClass.CLASS.filter(
+          (item): item is ClassItem => item !== undefined
+        ).map((item: ClassItem) => ({
           code: item["@code"],
           name: item["@name"],
           level: parseInt(item["@level"] || "1"),
@@ -212,95 +224,155 @@ export class EstatMetaInfoFormatter {
     if (!timeClass) {
       return {
         availableYears: [],
+        formattedYears: [],
         minYear: "",
         maxYear: "",
       };
     }
 
-    const years = Array.isArray(timeClass.CLASS)
-      ? timeClass.CLASS.map((item: any) => item["@code"]).sort()
-      : [timeClass.CLASS["@code"]];
+    if (!timeClass.CLASS) {
+      return {
+        availableYears: [],
+        formattedYears: [],
+        minYear: "",
+        maxYear: "",
+      };
+    }
+
+    const classItems = Array.isArray(timeClass.CLASS)
+      ? timeClass.CLASS.filter((item): item is ClassItem => item !== undefined)
+      : [timeClass.CLASS];
+
+    const years = classItems.map((item: ClassItem) => item["@code"]).sort();
+    const formattedYears = classItems
+      .map((item: ClassItem) => item["@name"])
+      .sort();
 
     return {
       availableYears: years,
+      formattedYears: formattedYears,
       minYear: years[0] || "",
       maxYear: years[years.length - 1] || "",
     };
   }
 
   /**
-   * UI用の選択肢を生成
+   * UI用の選択肢を生成（stats-data互換のdimensions概念）
    *
    * @param metaInfo - e-Stat APIのメタ情報レスポンス
-   * @returns UI用の選択肢データ
+   * @returns UI用の選択肢データ（stats-dataのFormattedValue.dimensionsと同じ構造）
    *
    * @see GET_META_INFO完全ガイド 7.2 UI コンポーネント用の選択肢生成
+   * @see stats-data FormattedValue.dimensions との設計統一
    *
    * @example
    * ```typescript
    * const options = EstatMetaInfoFormatter.generateSelectOptions(metaInfo);
+   *
+   * // 全次元を取得（stats-dataと同じ構造）
+   * console.log(options.area);     // 都道府県の選択肢
+   * console.log(options.time);     // 年次の選択肢
+   * console.log(options.cat01);    // 分類1の選択肢
+   * console.log(options.cat02);    // 分類2の選択肢（存在する場合）
+   *
    * // React コンポーネントで使用
-   * <select>
-   *   {options.prefectures.map(opt => (
-   *     <option key={opt.value} value={opt.value}>{opt.label}</option>
-   *   ))}
-   * </select>
+   * {options.area.map(opt => (
+   *   <option key={opt.value} value={opt.value}>{opt.label}</option>
+   * ))}
    * ```
    */
-  static generateSelectOptions(metaInfo: EstatMetaInfoResponse): {
-    prefectures: SelectOption[];
-    categories: SelectOption[];
-    years: SelectOption[];
-  } {
+  static generateSelectOptions(
+    metaInfo: EstatMetaInfoResponse
+  ): DimensionSelectOptions {
     const classObjs =
       metaInfo.GET_META_INFO?.METADATA_INF?.CLASS_INF?.CLASS_OBJ;
     if (!classObjs) {
-      return { prefectures: [], categories: [], years: [] };
+      return { area: [], time: [] };
     }
 
-    // 都道府県の選択肢
-    const areaClass = classObjs.find((obj: any) => obj["@id"] === "area");
-    const prefectures: SelectOption[] =
-      areaClass && areaClass.CLASS
-        ? (Array.isArray(areaClass.CLASS) ? areaClass.CLASS : [areaClass.CLASS])
-            .filter((item: any) => {
-              const code = item["@code"];
-              return (
-                code.length === 5 && code.endsWith("000") && code !== "00000"
-              );
-            })
-            .map((item: any) => ({
-              value: item["@code"],
-              label: item["@name"],
-            }))
-        : [];
+    // stats-dataと同じ次元IDを動的生成
+    const dimensionIds = [
+      "area",
+      "time",
+      "tab",
+      ...Array.from(
+        { length: 15 },
+        (_, i) => `cat${String(i + 1).padStart(2, "0")}`
+      ),
+    ];
 
-    // 分類の選択肢（cat01のみ）
-    const cat01Class = classObjs.find((obj: any) => obj["@id"] === "cat01");
-    const categories: SelectOption[] =
-      cat01Class && cat01Class.CLASS
-        ? (Array.isArray(cat01Class.CLASS)
-            ? cat01Class.CLASS
-            : [cat01Class.CLASS]
-          ).map((item: any) => ({
-            value: item["@code"],
-            label: item["@name"],
-          }))
-        : [];
+    // 結果オブジェクトを初期化
+    const result: DimensionSelectOptions = { area: [], time: [] };
 
-    // 年次の選択肢
-    const timeClass = classObjs.find((obj: any) => obj["@id"] === "time");
-    const years: SelectOption[] =
-      timeClass && timeClass.CLASS
-        ? (Array.isArray(timeClass.CLASS) ? timeClass.CLASS : [timeClass.CLASS])
-            .map((item: any) => ({
-              value: item["@code"],
-              label: item["@name"],
-            }))
-            .sort((a, b) => b.value.localeCompare(a.value)) // 降順
-        : [];
+    // 全次元を処理
+    for (const dimId of dimensionIds) {
+      const dimClass = classObjs.find((obj) => obj["@id"] === dimId);
+      if (!dimClass?.CLASS) continue;
 
-    return { prefectures, categories, years };
+      const options = this.convertToSelectOptions(dimClass);
+
+      // 次元に応じて適切な場所に格納
+      if (dimId === "area") {
+        result.area = this.filterPrefectures(options);
+      } else if (dimId === "time") {
+        result.time = this.sortByDescending(options);
+      } else if (dimId === "tab") {
+        result.tab = options;
+      } else if (dimId.startsWith("cat")) {
+        // cat01-cat15を動的に設定
+        (result as unknown as Record<string, SelectOption[]>)[dimId] = options;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * ClassObjectをSelectOption配列に変換
+   *
+   * @param classObj - CLASS_OBJ
+   * @returns SelectOption配列
+   */
+  private static convertToSelectOptions(classObj: ClassObject): SelectOption[] {
+    if (!classObj.CLASS) {
+      return [];
+    }
+
+    const classItems = Array.isArray(classObj.CLASS)
+      ? classObj.CLASS.filter((item): item is ClassItem => item !== undefined)
+      : [classObj.CLASS];
+
+    return classItems.map((item: ClassItem) => ({
+      value: item["@code"],
+      label: item["@name"],
+    }));
+  }
+
+  /**
+   * 都道府県のみをフィルタリング
+   *
+   * @param options - 全地域の選択肢
+   * @returns 都道府県の選択肢
+   */
+  private static filterPrefectures(options: SelectOption[]): SelectOption[] {
+    return options.filter((opt) => {
+      const code = opt.value;
+      return (
+        code.length === ESTAT_API_CONFIG.PREFECTURE_CODE_LENGTH &&
+        code.endsWith(ESTAT_API_CONFIG.PREFECTURE_CODE_SUFFIX) &&
+        code !== ESTAT_API_CONFIG.EXCLUDE_NATIONAL_CODE
+      );
+    });
+  }
+
+  /**
+   * 選択肢を降順でソート
+   *
+   * @param options - 選択肢配列
+   * @returns ソート済み選択肢配列
+   */
+  private static sortByDescending(options: SelectOption[]): SelectOption[] {
+    return options.sort((a, b) => b.value.localeCompare(a.value));
   }
 
   /**
@@ -346,9 +418,9 @@ export class EstatMetaInfoFormatter {
   private static findClassObj(
     metaInfo: EstatMetaInfoResponse,
     id: string
-  ): any | undefined {
+  ): ClassObject | undefined {
     const classObjs =
       metaInfo.GET_META_INFO?.METADATA_INF?.CLASS_INF?.CLASS_OBJ;
-    return classObjs?.find((obj: any) => obj["@id"] === id);
+    return classObjs?.find((obj) => obj["@id"] === id);
   }
 }

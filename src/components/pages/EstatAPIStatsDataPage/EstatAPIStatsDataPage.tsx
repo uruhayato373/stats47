@@ -1,10 +1,10 @@
 "use client";
 
 /**
- * @fileoverview e-STAT APIを使用して統計データを取得・表示するページコンポーネント
+ * @fileoverview e-STAT APIを使用して統計データを取得・表示するページコンポーネント（useSWR最適化版）
  *
  * このページは以下の主要な機能を提供します：
- * - e-STAT APIからの統計データ取得
+ * - e-STAT APIからの統計データ取得（useSWRで最適化）
  * - 取得したデータの表示
  * - エラーハンドリングとローディング状態の管理
  * - データ更新機能
@@ -14,10 +14,13 @@
 
 import { useState } from "react";
 import { RefreshCw, Database } from "lucide-react";
-import { EstatDataFetcher } from "@/components/organisms/estat-api/EstatDataFetcher";
-import { EstatDataDisplay } from "@/components/organisms/estat-api/EstatDataDisplay";
+import {
+  EstatDataFetcher,
+  EstatDataDisplay,
+} from "@/components/organisms/estat-api/stats-data";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
+import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
 
 /**
  * EstatAPIStatsDataPage コンポーネントの Props
@@ -30,34 +33,14 @@ interface EstatAPIStatsDataPageProps {
 }
 
 /**
- * e-STAT APIを使用して統計データを取得・表示するメインページコンポーネント
+ * e-STAT APIを使用して統計データを取得・表示するメインページコンポーネント（useSWR最適化版）
  *
  * @param {EstatAPIStatsDataPageProps} props - コンポーネントのプロパティ
  * @returns {JSX.Element} レンダリングされたページコンポーネント
  */
 export default function EstatAPIStatsDataPage({
-  initialData = null,
+  initialData: _initialData = null,
 }: EstatAPIStatsDataPageProps) {
-  /**
-   * APIからの応答データを保持するstate
-   * @type {[EstatStatsDataResponse | null, React.Dispatch<React.SetStateAction<EstatStatsDataResponse | null>>]}
-   */
-  const [apiResponse, setApiResponse] = useState<EstatStatsDataResponse | null>(
-    initialData // 初期データをstateの初期値として設定
-  );
-
-  /**
-   * データ取得中のローディング状態を管理するstate
-   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
-   */
-  const [loading, setLoading] = useState(false);
-
-  /**
-   * エラーメッセージを管理するstate
-   * @type {[string | null, React.Dispatch<React.SetStateAction<string | null>>]}
-   */
-  const [error, setError] = useState<string | null>(null);
-
   /**
    * 現在のAPIリクエストパラメータを保持するstate
    * @type {[GetStatsDataParams | null, React.Dispatch<React.SetStateAction<GetStatsDataParams | null>>]}
@@ -66,95 +49,30 @@ export default function EstatAPIStatsDataPage({
     null
   );
 
+  // useSWRでデータ取得を管理
+  const {
+    data: apiResponse,
+    error,
+    isLoading: loading,
+    refetch,
+  } = useEstatStatsData(currentParams);
+
   /**
-   * e-STAT APIから統計データを取得する関数
+   * e-STAT APIから統計データを取得する関数（useSWRに移譲）
    *
    * @param {GetStatsDataParams} params - APIリクエストのパラメータ
-   * @returns {Promise<void>} データ取得処理の完了を示すPromise
-   * @throws {Error} APIリクエストが失敗した場合のエラー
    */
-  const handleFetchData = async (params: GetStatsDataParams) => {
-    setLoading(true);
-    setError(null);
+  const handleFetchData = (params: GetStatsDataParams) => {
+    console.log("🔵 Page: データ取得開始", params);
     setCurrentParams(params);
-
-    try {
-      const queryParams = new URLSearchParams();
-
-      Object.entries(params).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== "") {
-          queryParams.append(key, String(value));
-        }
-      });
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30秒でタイムアウト
-
-      const response = await fetch(
-        `/api/estat-api/stats-data?${queryParams.toString()}`,
-        {
-          signal: controller.signal,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        let errorMessage = `HTTP ${response.status}`;
-        try {
-          const errorData = (await response.json()) as { error?: string };
-          errorMessage = errorData.error || errorMessage;
-        } catch {
-          const textResponse = await response.text();
-          errorMessage = `HTTP ${response.status}: ${textResponse.substring(
-            0,
-            100
-          )}`;
-        }
-        throw new Error(errorMessage);
-      }
-
-      let data: EstatStatsDataResponse;
-      try {
-        const responseText = await response.text();
-        data = JSON.parse(responseText) as EstatStatsDataResponse;
-      } catch (jsonError) {
-        throw new Error(
-          `Invalid JSON response: ${
-            jsonError instanceof Error ? jsonError.message : "Unknown error"
-          }`
-        );
-      }
-
-      setApiResponse(data);
-    } catch (err) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        setError(
-          "リクエストがタイムアウトしました。e-STAT APIが応答していない可能性があります。"
-        );
-      } else {
-        setError(
-          err instanceof Error ? err.message : "データ取得に失敗しました"
-        );
-      }
-      setApiResponse(null);
-    } finally {
-      setLoading(false);
-    }
   };
 
   /**
-   * 現在のパラメータを使用してデータを再取得する関数
-   *
-   * @returns {void}
+   * 現在のパラメータを使用してデータを再取得する関数（useSWRのrefetchを使用）
    */
   const handleRefresh = () => {
-    if (currentParams) {
-      handleFetchData(currentParams);
-    }
+    console.log("🔵 Page: データ再取得開始");
+    refetch();
   };
 
   return (

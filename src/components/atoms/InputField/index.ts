@@ -1,2 +1,2 @@
-export { default as InputField } from "./InputField";
-export type { InputFieldProps } from "./InputField";
+export { InputField, type InputFieldProps } from "./InputField";
+export { default } from "./InputField";

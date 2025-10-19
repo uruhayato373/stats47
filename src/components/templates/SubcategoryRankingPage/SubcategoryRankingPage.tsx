@@ -1,8 +1,7 @@
 import React from "react";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
-import { SubcategoryRankingPageProps } from "@/types/common/subcategory";
+import { SubcategoryRankingPageProps } from "@/types/shared/subcategory";
 import { RankingDataContainer } from "@/components/organisms/ranking/RankingDataContainer";
-import { RankingLayout } from "@/components/ranking/ui/RankingLayout";
 import { RankingNavigation } from "@/components/organisms/ranking/RankingNavigation";
 import { fetchRankingItemsBySubcategory } from "@/lib/ranking/ranking-items";
 
@@ -56,23 +55,26 @@ export const SubcategoryRankingPage: React.FC<
       subcategory={subcategory}
       viewType="ranking"
     >
-      <RankingLayout
-        main={<RankingDataContainer rankingConfig={rankingConfig} />}
-        navigation={
-          <RankingNavigation
-            categoryId={category.id}
-            subcategoryId={subcategory.id}
-            activeRankingId={activeRankingKey}
-            tabOptions={rankingConfig.rankingItems
-              .filter((item) => item.isActive)
-              .sort((a, b) => a.displayOrder - b.displayOrder)
-              .map((item) => ({
-                key: item.rankingKey,
-                label: item.label,
-              }))}
-          />
-        }
-      />
+      <div className="flex flex-col h-full">
+        {/* ランキングナビゲーション */}
+        <RankingNavigation
+          categoryId={category.id}
+          subcategoryId={subcategory.id}
+          activeRankingId={activeRankingKey}
+          tabOptions={rankingConfig.rankingItems
+            .filter((item) => item.isActive)
+            .sort((a, b) => a.displayOrder - b.displayOrder)
+            .map((item) => ({
+              key: item.rankingKey,
+              label: item.label,
+            }))}
+        />
+
+        {/* メインコンテンツ */}
+        <div className="flex-1 overflow-hidden">
+          <RankingDataContainer rankingConfig={rankingConfig} />
+        </div>
+      </div>
     </SubcategoryLayout>
   );
 };

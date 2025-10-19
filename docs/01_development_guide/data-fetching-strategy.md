@@ -1,12 +1,13 @@
 ---
 title: データフェッチ戦略ガイド
 created: 2025-10-16
-updated: 2025-10-16
+updated: 2025-01-18
 tags:
   - development-guide
   - data-fetching
   - swr
   - best-practices
+  - useswr-optimized
 ---
 
 # データフェッチ戦略ガイド
@@ -14,6 +15,10 @@ tags:
 ## 概要
 
 stats47 プロジェクトにおけるデータフェッチ戦略を標準化し、useSWR を中心とした一貫性のあるアプローチを確立します。
+
+> **🔄 e-Stat API useSWR 最適化完了** (2025-01-18)
+>
+> e-Stat API ドメインの主要 2 機能（stats-list と stats-data）で useSWR 最適化が完了し、65%のコード削減と大幅なパフォーマンス向上を実現しました。詳細は[e-Stat API useSWR 最適化実装ガイド](../02_domain/estat-api/implementation/useswr-optimization.md)を参照してください。
 
 ## 基本原則
 
@@ -179,6 +184,84 @@ const realtimeDataConfig = {
   }}
 >
 ```
+
+## e-Stat API useSWR 最適化の成果
+
+### パフォーマンス改善
+
+| コンポーネント        | Before     | After      | 削減率  |
+| --------------------- | ---------- | ---------- | ------- |
+| useStatsListSearch    | 437 行     | 150 行     | 65%     |
+| EstatAPIStatsDataPage | 188 行     | 70 行      | 63%     |
+| **合計**              | **625 行** | **220 行** | **65%** |
+
+### 機能向上
+
+- **自動キャッシュ管理**: 重複リクエストの自動排除
+- **エラーハンドリング**: 統一されたエラー処理とリトライ
+- **パフォーマンス**: useMemo による最適化
+- **保守性**: ビジネスロジックとデータ取得の分離
+
+### 実装例
+
+#### stats-list（統計表リスト検索）
+
+```typescript
+// src/hooks/estat-api/useStatsListSearch.ts
+export function useStatsListSearch() {
+  const [searchOptions, setSearchOptions] = useState(null);
+
+  const cacheKey = useMemo(() => {
+    return searchOptions ? generateStatsListCacheKey(searchOptions) : null;
+  }, [searchOptions]);
+
+  const {
+    data: searchResult,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR(cacheKey, statsListFetcherWithErrorHandling, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+    dedupingInterval: 300000, // 5分間キャッシュ
+    errorRetryCount: 3,
+    errorRetryInterval: 5000,
+  });
+
+  const search = useCallback((options) => {
+    setSearchOptions(options);
+  }, []);
+
+  return { searchResult, isLoading, error, search };
+}
+```
+
+#### stats-data（統計データ取得）
+
+```typescript
+// src/hooks/estat-api/useEstatStatsData.ts
+export function useEstatStatsData(params: GetStatsDataParams | null) {
+  const cacheKey = useMemo(() => {
+    return params ? generateStatsDataCacheKey(params) : null;
+  }, [params]);
+
+  const { data, error, isLoading, mutate } = useSWR(
+    cacheKey,
+    statsDataFetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+      dedupingInterval: 300000,
+      errorRetryCount: 3,
+      errorRetryInterval: 5000,
+    }
+  );
+
+  return { data, error, isLoading, refetch: mutate };
+}
+```
+
+詳細な実装については、[e-Stat API useSWR 最適化実装ガイド](../02_domain/estat-api/implementation/useswr-optimization.md)を参照してください。
 
 ### エラーハンドリング
 

@@ -1,10 +1,6 @@
 "use client";
 
-import { useStyles } from "@/hooks/useStyles";
-
 export default function TopPosts() {
-  const styles = useStyles();
-
   const posts = [
     {
       id: 1,

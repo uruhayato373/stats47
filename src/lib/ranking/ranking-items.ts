@@ -4,7 +4,7 @@
  * （可視化設定も含む）
  */
 
-import { RankingItem } from "@/types/models/ranking";
+import { RankingItem } from "@/lib/ranking/types";
 
 export interface SubcategoryConfig {
   id: string;

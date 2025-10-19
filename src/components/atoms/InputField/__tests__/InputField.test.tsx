@@ -27,8 +27,8 @@ import type { InputFieldProps } from "../InputField";
 /**
  * モックスタイルオブジェクト
  *
- * このデータは、useStylesフックが返すスタイルオブジェクトを模擬しています。
- * 実際のテストでは、このモックデータを使用してスタイリングロジックを検証します。
+ * このデータは、以前のuseStylesフックが返していたスタイルオブジェクトを模擬しています。
+ * 現在はuseStylesが削除され、直接Tailwindクラスを使用するようになりました。
  *
  * データ構造:
  * - label: ラベルのスタイル（base, required）

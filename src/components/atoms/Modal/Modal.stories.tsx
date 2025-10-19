@@ -224,7 +224,7 @@ export const Error: Story = {
   ),
 };
 
-export const Info: Story = {
+export const InfoModal: Story = {
   render: () => (
     <ModalWrapper>
       <div className="text-center">

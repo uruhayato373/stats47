@@ -1,0 +1,775 @@
+---
+title: meta-info 単体テストガイド
+created: 2025-10-16
+updated: 2025-10-16
+tags:
+  - domain/estat-api
+  - subdomain/meta-info
+  - testing
+---
+
+# meta-info 単体テストガイド
+
+## 概要
+
+meta-info サブドメインの単体テストの実装方法について説明します。EstatMetaInfoFetcher、EstatMetaInfoFormatter、EstatMetaInfoBatchProcessor のテスト方法を詳述します。
+
+## テスト環境のセットアップ
+
+### 1. 必要な依存関係
+
+```bash
+npm install --save-dev vitest @vitest/ui
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev msw
+```
+
+### 2. Vitest 設定
+
+`vitest.config.ts`
+
+```typescript
+import { defineConfig } from "vitest/config";
+import path from "path";
+
+export default defineConfig({
+  test: {
+    environment: "node",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
+```
+
+### 3. テストセットアップ
+
+`src/test/setup.ts`
+
+```typescript
+// 環境変数の設定
+process.env.NEXT_PUBLIC_ESTAT_APP_ID = "test-app-id";
+
+// コンソールログの抑制（テスト時）
+const originalConsoleError = console.error;
+console.error = (...args: any[]) => {
+  if (args[0]?.includes?.("Warning:")) {
+    return;
+  }
+  originalConsoleError(...args);
+};
+```
+
+## EstatMetaInfoFetcher のテスト
+
+### 1. 基本テスト
+
+`src/lib/estat-api/meta-info/__tests__/fetcher.test.ts`
+
+```typescript
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { EstatMetaInfoFetcher } from "../fetcher";
+import { EstatMetaInfoFetchError } from "../../errors";
+
+// モック
+vi.mock("../../config", () => ({
+  ESTAT_API_CONFIG: {
+    baseUrl: "https://api.e-stat.go.jp/rest/3.0/app/json",
+    appId: "test-app-id",
+    timeout: 30000,
+    retryAttempts: 3,
+    retryDelay: 1000,
+  },
+}));
+
+describe("EstatMetaInfoFetcher", () => {
+  let fetcher: EstatMetaInfoFetcher;
+
+  beforeEach(() => {
+    fetcher = new EstatMetaInfoFetcher();
+    vi.clearAllMocks();
+  });
+
+  describe("fetchMetaInfo", () => {
+    it("正常にメタ情報を取得できる", async () => {
+      const mockResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: {
+            CLASS_INF: {
+              CLASS_OBJ: [
+                {
+                  "@id": "cat01",
+                  "@name": "分類",
+                  CLASS: [
+                    {
+                      "@code": "A1101",
+                      "@name": "総人口",
+                      "@level": "1",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      };
+
+      // fetch をモック
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const result = await fetcher.fetchMetaInfo("0000010101");
+
+      expect(result).toEqual(mockResponse);
+      expect(global.fetch).toHaveBeenCalledWith(
+        "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=test-app-id&statsDataId=0000010101&metaGetFlg=Y&cntGetFlg=N"
+      );
+    });
+
+    it("APIエラー時に適切なエラーを投げる", async () => {
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: false,
+        status: 400,
+        statusText: "Bad Request",
+      });
+
+      await expect(fetcher.fetchMetaInfo("0000010101")).rejects.toThrow(
+        EstatMetaInfoFetchError
+      );
+    });
+
+    it("ネットワークエラー時に適切なエラーを投げる", async () => {
+      global.fetch = vi.fn().mockRejectedValue(new Error("Network Error"));
+
+      await expect(fetcher.fetchMetaInfo("0000010101")).rejects.toThrow(
+        EstatMetaInfoFetchError
+      );
+    });
+
+    it("タイムアウト時に適切なエラーを投げる", async () => {
+      global.fetch = vi
+        .fn()
+        .mockImplementation(
+          () => new Promise((resolve) => setTimeout(resolve, 35000))
+        );
+
+      await expect(fetcher.fetchMetaInfo("0000010101")).rejects.toThrow(
+        EstatMetaInfoFetchError
+      );
+    });
+  });
+
+  describe("fetchAndTransform", () => {
+    it("メタ情報を取得・変換できる", async () => {
+      const mockResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: {
+            CLASS_INF: {
+              CLASS_OBJ: [
+                {
+                  "@id": "cat01",
+                  "@name": "分類",
+                  CLASS: [
+                    {
+                      "@code": "A1101",
+                      "@name": "総人口",
+                      "@level": "1",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      };
+
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const result = await fetcher.fetchAndTransform("0000010101");
+
+      expect(result).toHaveProperty("categories");
+      expect(result).toHaveProperty("areas");
+      expect(result).toHaveProperty("timeAxis");
+      expect(result.categories.cat01).toHaveLength(1);
+      expect(result.categories.cat01[0]).toMatchObject({
+        code: "A1101",
+        name: "総人口",
+      });
+    });
+  });
+});
+```
+
+## EstatMetaInfoFormatter のテスト
+
+### 1. 基本テスト
+
+`src/lib/estat-api/meta-info/__tests__/formatter.test.ts`
+
+```typescript
+import { describe, it, expect } from "vitest";
+import { EstatMetaInfoFormatter } from "../formatter";
+import { EstatMetaInfoResponse } from "../../types/meta-info";
+
+describe("EstatMetaInfoFormatter", () => {
+  describe("parseCompleteMetaInfo", () => {
+    it("完全なメタ情報を正しく解析できる", () => {
+      const mockResponse: EstatMetaInfoResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: {
+            CLASS_INF: {
+              CLASS_OBJ: [
+                {
+                  "@id": "cat01",
+                  "@name": "分類",
+                  CLASS: [
+                    {
+                      "@code": "A1101",
+                      "@name": "総人口",
+                      "@level": "1",
+                    },
+                    {
+                      "@code": "A1102",
+                      "@name": "男性人口",
+                      "@level": "1",
+                    },
+                  ],
+                },
+                {
+                  "@id": "area",
+                  "@name": "地域",
+                  CLASS: [
+                    {
+                      "@code": "13000",
+                      "@name": "東京都",
+                      "@level": "1",
+                    },
+                    {
+                      "@code": "27000",
+                      "@name": "大阪府",
+                      "@level": "1",
+                    },
+                  ],
+                },
+                {
+                  "@id": "time",
+                  "@name": "時間",
+                  CLASS: [
+                    {
+                      "@code": "2020",
+                      "@name": "2020年",
+                    },
+                    {
+                      "@code": "2021",
+                      "@name": "2021年",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      };
+
+      const result = EstatMetaInfoFormatter.parseCompleteMetaInfo(mockResponse);
+
+      expect(result).toHaveProperty("categories");
+      expect(result).toHaveProperty("areas");
+      expect(result).toHaveProperty("timeAxis");
+      expect(result.categories.cat01).toHaveLength(2);
+      expect(result.areas.area).toHaveLength(2);
+      expect(result.timeAxis.formattedYears).toEqual(["2020", "2021"]);
+    });
+
+    it("空のデータを正しく処理できる", () => {
+      const mockResponse: EstatMetaInfoResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: { CLASS_INF: { CLASS_OBJ: [] } },
+        },
+      };
+
+      const result = EstatMetaInfoFormatter.parseCompleteMetaInfo(mockResponse);
+
+      expect(result.categories).toEqual({});
+      expect(result.areas).toEqual({});
+      expect(result.timeAxis.formattedYears).toEqual([]);
+    });
+  });
+
+  describe("generateSelectOptions", () => {
+    it("選択肢を正しく生成できる", () => {
+      const mockData = {
+        categories: {
+          cat01: [
+            { code: "A1101", name: "総人口" },
+            { code: "A1102", name: "男性人口" },
+          ],
+        },
+        areas: {
+          area: [
+            { code: "13000", name: "東京都" },
+            { code: "27000", name: "大阪府" },
+          ],
+        },
+        timeAxis: {
+          formattedYears: ["2020", "2021"],
+        },
+      };
+
+      const result = EstatMetaInfoFormatter.generateSelectOptions(mockData);
+
+      expect(result.categories.cat01).toHaveLength(2);
+      expect(result.areas.area).toHaveLength(2);
+      expect(result.timeAxis.time).toHaveLength(2);
+      expect(result.categories.cat01[0]).toMatchObject({
+        value: "A1101",
+        label: "総人口",
+      });
+    });
+
+    it("複数の分類を正しく処理できる", () => {
+      const mockData = {
+        categories: {
+          cat01: [{ code: "A1101", name: "総人口" }],
+          cat02: [{ code: "A1102", name: "男性人口" }],
+        },
+        areas: { area: [] },
+        timeAxis: { formattedYears: [] },
+      };
+
+      const result = EstatMetaInfoFormatter.generateSelectOptions(mockData);
+
+      expect(result.categories.cat01).toHaveLength(1);
+      expect(result.categories.cat02).toHaveLength(1);
+    });
+  });
+
+  describe("extractTimeAxis", () => {
+    it("時間軸情報を正しく抽出できる", () => {
+      const mockData = {
+        categories: {},
+        areas: {},
+        timeAxis: {
+          formattedYears: ["2020", "2021", "2022"],
+        },
+      };
+
+      const result = EstatMetaInfoFormatter.extractTimeAxis(mockData);
+
+      expect(result.formattedYears).toEqual(["2020", "2021", "2022"]);
+      expect(result.timeAxis).toHaveLength(3);
+      expect(result.timeAxis[0]).toMatchObject({
+        code: "2020",
+        name: "2020年",
+      });
+    });
+
+    it("年度を正しくソートできる", () => {
+      const mockData = {
+        categories: {},
+        areas: {},
+        timeAxis: {
+          formattedYears: ["2022", "2020", "2021"],
+        },
+      };
+
+      const result = EstatMetaInfoFormatter.extractTimeAxis(mockData);
+
+      expect(result.formattedYears).toEqual(["2020", "2021", "2022"]);
+    });
+  });
+});
+```
+
+## EstatMetaInfoBatchProcessor のテスト
+
+### 1. 基本テスト
+
+`src/lib/estat-api/meta-info/__tests__/batch-processor.test.ts`
+
+```typescript
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { EstatMetaInfoBatchProcessor } from "../batch-processor";
+import { EstatMetaInfoFetchError } from "../../errors";
+
+// モック
+vi.mock("../../config", () => ({
+  ESTAT_API_CONFIG: {
+    baseUrl: "https://api.e-stat.go.jp/rest/3.0/app/json",
+    appId: "test-app-id",
+    timeout: 30000,
+    retryAttempts: 3,
+    retryDelay: 1000,
+    batchSize: 5,
+    delayBetweenBatches: 1000,
+  },
+}));
+
+describe("EstatMetaInfoBatchProcessor", () => {
+  let processor: EstatMetaInfoBatchProcessor;
+
+  beforeEach(() => {
+    processor = new EstatMetaInfoBatchProcessor();
+    vi.clearAllMocks();
+  });
+
+  describe("processBulk", () => {
+    it("複数のIDを正しく処理できる", async () => {
+      const mockResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: { CLASS_INF: { CLASS_OBJ: [] } },
+        },
+      };
+
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const ids = ["0000010101", "0000010102", "0000010103"];
+      const result = await processor.processBulk(ids);
+
+      expect(result.success).toBe(true);
+      expect(result.processedCount).toBe(3);
+      expect(result.results).toHaveLength(3);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it("エラーが発生したIDを正しく記録できる", async () => {
+      global.fetch = vi
+        .fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              GET_META_INFO: {
+                RESULT: {
+                  STATUS: 0,
+                  ERROR_MSG: null,
+                  DATE: "2024-01-01T00:00:00+09:00",
+                },
+                METADATA_INF: { CLASS_INF: { CLASS_OBJ: [] } },
+              },
+            }),
+        })
+        .mockRejectedValueOnce(new Error("Network Error"));
+
+      const ids = ["0000010101", "0000010102"];
+      const result = await processor.processBulk(ids);
+
+      expect(result.success).toBe(false);
+      expect(result.processedCount).toBe(1);
+      expect(result.results).toHaveLength(1);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0].statsDataId).toBe("0000010102");
+    });
+
+    it("レート制限を正しく処理できる", async () => {
+      const mockResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: { CLASS_INF: { CLASS_OBJ: [] } },
+        },
+      };
+
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const ids = Array.from({ length: 10 }, (_, i) => `000001010${i + 1}`);
+      const result = await processor.processBulk(ids);
+
+      expect(result.success).toBe(true);
+      expect(result.processedCount).toBe(10);
+      expect(global.fetch).toHaveBeenCalledTimes(10);
+    });
+  });
+
+  describe("processRange", () => {
+    it("範囲指定で正しく処理できる", async () => {
+      const mockResponse = {
+        GET_META_INFO: {
+          RESULT: {
+            STATUS: 0,
+            ERROR_MSG: null,
+            DATE: "2024-01-01T00:00:00+09:00",
+          },
+          METADATA_INF: { CLASS_INF: { CLASS_OBJ: [] } },
+        },
+      };
+
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const result = await processor.processRange("0000010101", "0000010103");
+
+      expect(result.success).toBe(true);
+      expect(result.processedCount).toBe(3);
+      expect(result.results).toHaveLength(3);
+    });
+
+    it("無効な範囲でエラーを投げる", async () => {
+      await expect(
+        processor.processRange("0000010103", "0000010101")
+      ).rejects.toThrow("Invalid range");
+    });
+  });
+});
+```
+
+## ユーティリティ関数のテスト
+
+### 1. ID 検証関数のテスト
+
+`src/lib/estat-api/meta-info/__tests__/id-utils.test.ts`
+
+```typescript
+import { describe, it, expect } from "vitest";
+import { isValidId, validateIdFormat, normalizeId } from "../id-utils";
+import { EstatIdValidationError } from "../../errors";
+
+describe("ID Utils", () => {
+  describe("isValidId", () => {
+    it("有効なIDを正しく検証できる", () => {
+      expect(isValidId("0000010101")).toBe(true);
+      expect(isValidId("1234567890")).toBe(true);
+    });
+
+    it("無効なIDを正しく検証できる", () => {
+      expect(isValidId("123")).toBe(false);
+      expect(isValidId("abc")).toBe(false);
+      expect(isValidId("")).toBe(false);
+      expect(isValidId("12345678901")).toBe(false);
+    });
+  });
+
+  describe("validateIdFormat", () => {
+    it("有効なIDでエラーを投げない", () => {
+      expect(() => validateIdFormat("0000010101")).not.toThrow();
+    });
+
+    it("無効なIDでエラーを投げる", () => {
+      expect(() => validateIdFormat("123")).toThrow(EstatIdValidationError);
+      expect(() => validateIdFormat("abc")).toThrow(EstatIdValidationError);
+    });
+  });
+
+  describe("normalizeId", () => {
+    it("IDを正しく正規化できる", () => {
+      expect(normalizeId("0000010101")).toBe("0000010101");
+      expect(normalizeId("10010101")).toBe("0000010101");
+    });
+
+    it("無効なIDでエラーを投げる", () => {
+      expect(() => normalizeId("123")).toThrow(EstatIdValidationError);
+    });
+  });
+});
+```
+
+### 2. ヘルパー関数のテスト
+
+`src/lib/estat-api/meta-info/__tests__/helpers.test.ts`
+
+```typescript
+import { describe, it, expect } from "vitest";
+import { safeRender } from "../utils/helpers";
+
+describe("Helpers", () => {
+  describe("safeRender", () => {
+    it("文字列を正しくレンダリングできる", () => {
+      expect(safeRender("test")).toBe("test");
+    });
+
+    it("数値を正しくレンダリングできる", () => {
+      expect(safeRender(123)).toBe("123");
+    });
+
+    it("nullを正しくレンダリングできる", () => {
+      expect(safeRender(null)).toBe("N/A");
+    });
+
+    it("undefinedを正しくレンダリングできる", () => {
+      expect(safeRender(undefined)).toBe("N/A");
+    });
+
+    it("オブジェクトを正しくレンダリングできる", () => {
+      expect(safeRender({ name: "test" })).toBe('{"name":"test"}');
+    });
+
+    it("カスタムオプションで正しくレンダリングできる", () => {
+      expect(safeRender(null, { nullValue: "No Data" })).toBe("No Data");
+    });
+  });
+});
+```
+
+## テストデータの管理
+
+### 1. テストデータファクトリ
+
+`src/lib/estat-api/meta-info/__tests__/fixtures/index.ts`
+
+```typescript
+export const mockEstatMetaInfoResponse = {
+  GET_META_INFO: {
+    RESULT: {
+      STATUS: 0,
+      ERROR_MSG: null,
+      DATE: "2024-01-01T00:00:00+09:00",
+    },
+    METADATA_INF: {
+      CLASS_INF: {
+        CLASS_OBJ: [
+          {
+            "@id": "cat01",
+            "@name": "分類",
+            CLASS: [
+              {
+                "@code": "A1101",
+                "@name": "総人口",
+                "@level": "1",
+              },
+              {
+                "@code": "A1102",
+                "@name": "男性人口",
+                "@level": "1",
+              },
+            ],
+          },
+          {
+            "@id": "area",
+            "@name": "地域",
+            CLASS: [
+              {
+                "@code": "13000",
+                "@name": "東京都",
+                "@level": "1",
+              },
+              {
+                "@code": "27000",
+                "@name": "大阪府",
+                "@level": "1",
+              },
+            ],
+          },
+          {
+            "@id": "time",
+            "@name": "時間",
+            CLASS: [
+              {
+                "@code": "2020",
+                "@name": "2020年",
+              },
+              {
+                "@code": "2021",
+                "@name": "2021年",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+};
+
+export const mockFormattedMetaInfo = {
+  categories: {
+    cat01: [
+      { code: "A1101", name: "総人口" },
+      { code: "A1102", name: "男性人口" },
+    ],
+  },
+  areas: {
+    area: [
+      { code: "13000", name: "東京都" },
+      { code: "27000", name: "大阪府" },
+    ],
+  },
+  timeAxis: {
+    formattedYears: ["2020", "2021"],
+    timeAxis: [
+      { code: "2020", name: "2020年" },
+      { code: "2021", name: "2021年" },
+    ],
+  },
+};
+```
+
+## テスト実行
+
+### 1. テストコマンド
+
+```bash
+# 全テスト実行
+npm test
+
+# 特定のファイルのテスト
+npm test meta-info
+
+# カバレッジ付きテスト
+npm run test:coverage
+
+# ウォッチモード
+npm run test:watch
+```
+
+### 2. テスト結果の確認
+
+```bash
+# カバレッジレポートの確認
+npm run test:coverage
+
+# テスト結果の詳細表示
+npm test -- --reporter=verbose
+```
+
+## 関連ドキュメント
+
+- [テスト戦略](../../shared/testing-strategy.md)
+- [統合テスト](../../shared/integration-testing.md)
+- [モック作成ガイド](../../shared/mocking-guide.md)
+- [テストデータ管理](../../shared/test-data.md)
+- [meta-info 概要](../overview.md)
+- [meta-info 実装ガイド](../implementation/)

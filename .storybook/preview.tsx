@@ -38,16 +38,27 @@ const preview: Preview = {
         setTheme(isDark ? "dark" : "light");
       }, [context.globals]);
 
-      // テーマクラスをbodyに適用
+      // テーマクラスを適用
       useEffect(() => {
-        document.body.className = theme;
-        document.documentElement.className = theme;
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        // Storybook用に背景色をリセット
+        document.body.style.backgroundColor = "transparent";
       }, [theme]);
 
       return (
         <Provider>
-          <div className={`p-4 ${theme === "dark" ? "dark" : ""}`}>
-            <Story />
+          <div
+            className={`min-h-screen ${
+              theme === "dark" ? "dark bg-neutral-900" : "bg-white"
+            }`}
+          >
+            <div className="p-4">
+              <Story />
+            </div>
           </div>
         </Provider>
       );

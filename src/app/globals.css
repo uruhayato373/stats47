@@ -55,14 +55,14 @@ html.dark header {
   background-color: #171717;
 }
 
-/* ヘッダー内のボタン背景 */
-html.light header .bg-white {
-  background-color: #ffffff !important;
+/* ヘッダー内のボタン背景 - Tailwindの@applyを使用して詳細度を統一 */
+/* header .bg-white {
+  @apply bg-white;
 }
 
 html.dark header .bg-white {
-  background-color: #262626 !important;
-}
+  @apply dark:bg-neutral-800;
+} */
 
 /* ===== サイドバーのスタイル ===== */
 /* ライトモード */

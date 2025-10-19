@@ -46,10 +46,7 @@ const mockStyles = {
   },
 };
 
-// useStylesフックをモック
-vi.mock("@/hooks/useStyles", () => ({
-  useStyles: () => mockStyles,
-}));
+// useStyles は削除されたため、モックは不要
 
 // ===== テストデータ =====
 

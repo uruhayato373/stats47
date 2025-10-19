@@ -26,8 +26,8 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
   return (
     <>
       {/* メインコンテンツエリア */}
-      <main className="lg:ps-60 transition-all duration-300 pt-13 px-3 pb-3 min-h-screen">
-        <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700">
+      <main className="lg:ps-60 transition-all duration-300 pt-13 min-h-screen">
+        <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-white dark:bg-neutral-800">
           {/* ページヘッダー */}
           <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
             <div className="flex items-center gap-4">

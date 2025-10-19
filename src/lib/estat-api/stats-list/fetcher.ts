@@ -5,11 +5,7 @@
 
 import { estatAPI } from "../client";
 import { EstatStatsListResponse, GetStatsListParams } from "../types";
-import {
-  StatsListSearchOptions,
-  PagingOptions,
-  AdvancedStatsListSearchOptions,
-} from "../types/stats-list";
+import { StatsListSearchOptions, PagingOptions } from "../types/stats-list";
 
 /**
  * e-Stat APIエラーの種類
@@ -74,7 +70,13 @@ export class EstatStatsListFetcher {
             EstatErrorType.INVALID_APP_ID,
             errorMsg
           );
-        } else if (errorMsg.includes("該当するデータが存在しません")) {
+        } else if (
+          errorMsg.includes("該当するデータが存在しません") ||
+          errorMsg.includes("該当データはありませんでした") ||
+          errorMsg.includes(
+            "正常に終了しましたが、該当データはありませんでした"
+          )
+        ) {
           throw new EstatStatsListError(EstatErrorType.NO_DATA_FOUND, errorMsg);
         } else if (errorMsg.includes("パラメータが不正")) {
           throw new EstatStatsListError(
@@ -214,6 +216,11 @@ export class EstatStatsListFetcher {
       ...(options.openYears && { openYears: options.openYears }),
     };
 
+    console.log("🔵 Fetcher: searchByField パラメータ", {
+      fieldCode,
+      options,
+      params,
+    });
     return this.fetchStatsList(params);
   }
 
@@ -237,33 +244,6 @@ export class EstatStatsListFetcher {
       ...(options.openYears && { openYears: options.openYears }),
     };
 
-    return this.fetchStatsList(params);
-  }
-
-  /**
-   * 高度な検索（複数条件組み合わせ）
-   *
-   * @param options - 高度な検索オプション
-   * @returns 統計表リストレスポンス
-   */
-  static async advancedSearch(
-    options: AdvancedStatsListSearchOptions
-  ): Promise<EstatStatsListResponse> {
-    const params: Omit<GetStatsListParams, "appId"> = {
-      ...(options.searchWord && { searchWord: options.searchWord }),
-      ...(options.searchKind && { searchKind: options.searchKind }),
-      ...(options.statsField && { statsField: options.statsField }),
-      ...(options.statsCode && { statsCode: options.statsCode }),
-      ...(options.surveyYears && { surveyYears: options.surveyYears }),
-      ...(options.openYears && { openYears: options.openYears }),
-      ...(options.updatedDate && { updatedDate: options.updatedDate }),
-      ...(options.includeExplanation && { explanationGetFlg: "Y" }),
-      ...(options.collectArea && { collectArea: options.collectArea }),
-      limit: options.limit || 100,
-      startPosition: options.startPosition || 1,
-    };
-
-    console.log("🔵 Fetcher: advancedSearch パラメータ:", params);
     return this.fetchStatsList(params);
   }
 

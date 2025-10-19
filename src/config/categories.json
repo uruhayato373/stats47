@@ -2,7 +2,7 @@
   {
     "id": "tech",
     "name": "テクノロジー",
-    "icon": "computer",
+    "icon": "Computer",
     "color": "blue",
     "subcategories": [
       {
@@ -20,7 +20,7 @@
   {
     "id": "lifestyle",
     "name": "ライフスタイル",
-    "icon": "heart",
+    "icon": "Heart",
     "color": "green",
     "subcategories": [
       {

@@ -6,13 +6,13 @@ import {
   useRankingData,
 } from "@/hooks/ranking/useRankingData";
 import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
-import { StatisticsSummary } from "../../ranking/ui/StatisticsSummary";
+import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSummary";
 import { YearSelector } from "@/components/molecules/YearSelector";
-import { RankingHeader } from "../../ranking/ui/RankingHeader";
-import { LoadingView } from "../../ranking/ui/LoadingView";
-import { ErrorView } from "../../ranking/ui/ErrorView";
-import { PrefectureDataTableClient } from "../../ranking/ui/PrefectureDataTableClient";
-import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
+import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
+import { LoadingView } from "@/components/atoms/LoadingView";
+import { ErrorView } from "@/components/atoms/ErrorView";
+import { PrefectureDataTableClient } from "@/components/organisms/ranking/PrefectureDataTableClient";
+import { RankingVisualizationOptions } from "@/lib/ranking/types";
 import { Modal } from "@/components/atoms/Modal";
 import {
   RankingItemSettings,

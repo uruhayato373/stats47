@@ -1,1 +1,0 @@
-export { EstatDataDisplay } from "./EstatDataDisplay";

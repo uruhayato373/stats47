@@ -3,13 +3,14 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useStyles } from "@/hooks/useStyles";
-import categoriesData from "@/config/categories.json";
+import { getCategoriesForSidebar } from "@/lib/category";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 export default function Sidebar() {
-  const styles = useStyles();
   const pathname = usePathname();
+
+  // カテゴリデータをメモ化
+  const categories = useMemo(() => getCategoriesForSidebar(), []);
 
   // ナビゲーションアイテムをメモ化
   const navigationItems = useMemo(
@@ -113,27 +114,6 @@ export default function Sidebar() {
           ),
           isActive: false,
         },
-        {
-          href: "/ranking/settings",
-          label: "ランキング設定",
-          icon: (
-            <svg
-              className="size-3.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 3v18l7-3 4 6 4-6 3 3V3l-7 3-4-6-4 6z" />
-            </svg>
-          ),
-          isActive: false,
-        },
       ],
     }),
     []
@@ -181,7 +161,9 @@ export default function Sidebar() {
             <circle cx="19" cy="12" r="1" />
             <circle cx="5" cy="12" r="1" />
           </svg>
-          <span className={styles.text.secondary}>Quick actions</span>
+          <span className="text-gray-500 dark:text-neutral-400">
+            Quick actions
+          </span>
           <svg
             className="ms-auto size-2.5"
             xmlns="http://www.w3.org/2000/svg"
@@ -243,10 +225,10 @@ export default function Sidebar() {
         <div className={sectionStyles.container}>
           <span className={sectionStyles.title}>統計カテゴリー</span>
           <ul className={sectionStyles.list}>
-            {categoriesData.map((category) => {
+            {categories.map((category) => {
               const isActive =
-                pathname === `/${category.id}` ||
-                pathname?.startsWith(`/${category.id}/`);
+                pathname === category.href ||
+                pathname?.startsWith(`${category.href}/`);
 
               return (
                 <li key={category.id}>
@@ -256,7 +238,7 @@ export default function Sidebar() {
                         ? sectionStyles.link.active
                         : sectionStyles.link.inactive
                     }
-                    href={`/${category.id}`}
+                    href={category.href}
                   >
                     <CategoryIcon
                       iconName={category.icon}

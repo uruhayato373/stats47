@@ -12,7 +12,7 @@ import {
   GeoJsonProperties,
 } from "geojson";
 import { FormattedValue } from "@/lib/estat-api";
-import { formatRankingValueDisplay } from "@/types/models/ranking";
+import { formatRankingValueDisplay } from "@/lib/ranking/types";
 import { PrefectureService } from "@/lib/area";
 
 export interface MapVisualizationOptions {

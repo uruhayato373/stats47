@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 // import { cookies } from "next/headers";
 import { getSubcategoryById } from "@/lib/category";
-import { SubcategoryRankingPage } from "@/components/subcategories/SubcategoryRankingPage";
+import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
 
 /**
  * ランキング統計項目ページのProps型定義
@@ -65,9 +65,16 @@ export default async function RankingItemPage({ params }: PageProps) {
 
   // サブカテゴリランキングページコンポーネントをレンダリング
   // rankingKeyをpropsとして渡す
+  // CategoryDataとの型互換性のため必須フィールドにデフォルト値を設定
   return (
     <SubcategoryRankingPage
-      category={category}
+      category={{
+        ...category,
+        description: category.description || "",
+        icon: category.icon || "",
+        displayOrder: category.displayOrder || 0,
+        subcategories: category.subcategories || [],
+      }}
       subcategory={subcategory}
       rankingKey={rankingKey}
     />

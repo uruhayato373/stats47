@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "echo 'Please use dev:api or dev:mock instead of dev' && exit 1",
-    "dev:api": "cross-env NODE_ENV=development next dev --turbopack",
+    "dev:api": "cross-env NODE_ENV=development next dev",
     "dev:mock": "cross-env NODE_ENV=development NEXT_PUBLIC_ENV=mock next dev --turbopack",
     "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=staging next dev --turbopack",
     "dev:production": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=production next dev --turbopack",
@@ -25,6 +25,7 @@
     "debug:helpers": "tsx src/lib/estat-api/stats-data/__debug__/helpers-debug.ts",
     "debug:meta-info": "tsx src/lib/estat-api/meta-info/__debug__/formatter-debug.ts",
     "pre-deploy-check": "bash scripts/pre-deploy-check.sh",
+    "deploy:dev": "bash scripts/deploy-dev.sh",
     "mock:download": "tsx scripts/download-mock-data.ts",
     "mock:validate": "tsx scripts/validate-mock-data.ts",
     "mock:size-check": "du -sh data/mock/ && find data/mock -name '*.json' | wc -l",
@@ -36,6 +37,7 @@
   },
   "dependencies": {
     "@auth/d1-adapter": "^1.11.0",
+    "@aws-sdk/client-s3": "^3.913.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",

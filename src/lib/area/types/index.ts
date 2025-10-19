@@ -7,12 +7,12 @@
 /**
  * 地域タイプ
  */
-export type AreaType = "country" | "region" | "prefecture" | "municipality";
+export type AreaType = "country" | "prefecture" | "municipality";
 
 /**
  * 地域階層レベル
  */
-export type AreaLevel = "national" | "regional" | "prefectural" | "municipal";
+export type AreaLevel = "national" | "prefectural" | "municipal";
 
 /**
  * 市区町村タイプ
@@ -27,7 +27,7 @@ export interface Prefecture {
   prefCode: string;
   /** 都道府県名 */
   prefName: string;
-  /** 地域ブロックキー */
+  /** 地域ブロックキー（都道府県サービス用） */
   regionKey?: string;
 }
 
@@ -52,7 +52,8 @@ export interface Municipality {
 }
 
 /**
- * 地域ブロック情報
+ * 地域ブロック情報（都道府県サービス用）
+ * 注意: e-Stat APIでは使用されない
  */
 export interface Region {
   /** 地域キー */
@@ -141,7 +142,7 @@ export interface AreaSearchResult {
 export interface PrefectureSearchOptions {
   /** 検索クエリ */
   query: string;
-  /** 地域ブロックキーフィルター */
+  /** 地域ブロックキーフィルター（都道府県サービス用） */
   regionKey?: string;
   /** 大文字小文字を区別しない */
   caseInsensitive?: boolean;

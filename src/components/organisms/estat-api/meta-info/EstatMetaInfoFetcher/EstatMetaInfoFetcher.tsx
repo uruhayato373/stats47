@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
-import { useStyles } from "@/hooks/useStyles";
-import { Search, Loader2 } from "lucide-react";
+import { Search } from "lucide-react";
 import { InputField } from "@/components/atoms/InputField";
+import LoadingButton from "@/components/atoms/LoadingButton/LoadingButton";
 
 /**
  * EstatMetaInfoFetcherProps - e-Statメタ情報取得フォームのプロパティ
@@ -49,9 +49,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
 
   /** 入力中の統計表ID */
   const [statsDataId, setStatsDataId] = useState<string>("");
-
-  /** スタイルフック（テーマ対応） */
-  const styles = useStyles();
 
   // ===== イベントハンドラー =====
 
@@ -108,7 +105,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   // ===== レンダリング =====
 
   return (
-    <form onSubmit={handleSubmit} className={styles.layout.row}>
+    <form onSubmit={handleSubmit} className="w-full">
       {/* メインレイアウト: レスポンシブ対応（モバイル: 縦並び、デスクトップ: 横並び） */}
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         {/* 左側セクション: アイコン + タイトル */}
@@ -116,7 +113,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           {/* 検索アイコン（視覚的なヒント） */}
           <Search className="w-5 h-5 text-indigo-600" />
           {/* セクションタイトル */}
-          <h3 className="font-medium text-gray-900 dark:text-neutral-100">
+          <h3 className="text-sm font-medium text-gray-900 dark:text-neutral-100">
             メタ情報取得
           </h3>
         </div>
@@ -134,6 +131,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
             required
             inlineLabel
             width="max-w-xs"
+            size="sm"
             error={
               statsDataId.trim() && !isValidStatsDataId(statsDataId)
                 ? "10桁の数字を入力してください"
@@ -142,20 +140,16 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           />
 
           {/* 送信ボタン */}
-          <button
+          <LoadingButton
             type="submit"
             disabled={!canSubmit}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 h-10 whitespace-nowrap"
+            loading={loading}
+            loadingText="取得中..."
+            size="sm"
+            variant="primary"
           >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="animate-spin h-4 w-4" />
-                取得中...
-              </div>
-            ) : (
-              "取得"
-            )}
-          </button>
+            取得
+          </LoadingButton>
         </div>
       </div>
     </form>

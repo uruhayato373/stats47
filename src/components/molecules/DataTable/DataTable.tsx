@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useStyles } from "@/hooks/useStyles";
 
 export interface TableColumn<T = Record<string, unknown>> {
   key: string;
   label: string;
   render?: (item: T, index: number) => string | React.ReactNode;
   filterable?: boolean;
-  filterType?: 'select' | 'text';
+  filterType?: "select" | "text";
 }
 
 export interface DataTableProps<T = Record<string, unknown>> {
@@ -24,8 +23,6 @@ export default function DataTable<T = Record<string, unknown>>({
   emptyMessage,
   maxRows = 100,
 }: DataTableProps<T>) {
-  const styles = useStyles();
-
   // フィルター状態
   const [filters, setFilters] = useState<Record<string, string>>({});
 
@@ -35,14 +32,14 @@ export default function DataTable<T = Record<string, unknown>>({
       return Object.entries(filters).every(([key, filterValue]) => {
         if (!filterValue) return true;
 
-        const column = columns.find(col => col.key === key);
+        const column = columns.find((col) => col.key === key);
         if (!column) return true;
 
         // 値を取得
         let value: string;
         if (column.render) {
           const rendered = column.render(item, 0);
-          value = typeof rendered === 'string' ? rendered : String(rendered);
+          value = typeof rendered === "string" ? rendered : String(rendered);
         } else {
           value = String((item as Record<string, unknown>)[key] || "");
         }
@@ -54,32 +51,34 @@ export default function DataTable<T = Record<string, unknown>>({
 
   // ユニークな値を取得（セレクトフィルター用）
   const getUniqueValues = (columnKey: string) => {
-    const column = columns.find(col => col.key === columnKey);
+    const column = columns.find((col) => col.key === columnKey);
     if (!column) return [];
 
     const values = data.map((item) => {
       if (column.render) {
         const rendered = column.render(item, 0);
-        return typeof rendered === 'string' ? rendered : String(rendered);
+        return typeof rendered === "string" ? rendered : String(rendered);
       } else {
         return String((item as Record<string, unknown>)[columnKey] || "");
       }
     });
 
-    return Array.from(new Set(values)).filter(v => v && v !== "-").sort();
+    return Array.from(new Set(values))
+      .filter((v) => v && v !== "-")
+      .sort();
   };
 
   // フィルター更新
   const updateFilter = (key: string, value: string) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
   if (!data || data.length === 0) {
     return (
-      <div className={`text-center py-8 ${styles.text.muted}`}>
+      <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
         {emptyMessage}
       </div>
     );
@@ -88,30 +87,30 @@ export default function DataTable<T = Record<string, unknown>>({
   const displayData = filteredData.slice(0, maxRows);
 
   return (
-    <div className={`${styles.table.container} ${styles.card.base} ${styles.text.secondary}`}>
-      <table className={styles.table.table}>
-        <thead>
+    <div className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+        <thead className="bg-gray-50 dark:bg-neutral-900">
           <tr>
-            <th className={styles.table.headerCell}>
-              <p className={`${styles.table.headerText} ${styles.text.tertiary}`}>
-                インデックス
-              </p>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider">
+              インデックス
             </th>
             {columns.map((column) => (
               <th
                 key={column.key}
-                className={styles.table.headerCell}
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wider"
               >
                 <div className="space-y-2">
-                  <p className={`${styles.table.headerText} ${styles.text.tertiary}`}>
+                  <p className="text-xs font-medium text-gray-500 dark:text-neutral-400">
                     {column.label}
                   </p>
                   {column.filterable && (
                     <div className="w-full">
-                      {column.filterType === 'select' ? (
+                      {column.filterType === "select" ? (
                         <select
-                          value={filters[column.key] || ''}
-                          onChange={(e) => updateFilter(column.key, e.target.value)}
+                          value={filters[column.key] || ""}
+                          onChange={(e) =>
+                            updateFilter(column.key, e.target.value)
+                          }
                           className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
                         >
                           <option value="">すべて</option>
@@ -124,8 +123,10 @@ export default function DataTable<T = Record<string, unknown>>({
                       ) : (
                         <input
                           type="text"
-                          value={filters[column.key] || ''}
-                          onChange={(e) => updateFilter(column.key, e.target.value)}
+                          value={filters[column.key] || ""}
+                          onChange={(e) =>
+                            updateFilter(column.key, e.target.value)
+                          }
                           placeholder="フィルター..."
                           className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
                         />
@@ -137,30 +138,21 @@ export default function DataTable<T = Record<string, unknown>>({
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
           {displayData.map((item, index) => (
-            <tr key={index}>
-              <td
-                className={
-                  index !== displayData.length - 1
-                    ? styles.table.bodyCellWithBorder
-                    : styles.table.bodyCell
-                }
-              >
-                <p className={`${styles.table.bodyText} ${styles.text.primary}`}>
-                  {index + 1}
-                </p>
+            <tr
+              key={index}
+              className="hover:bg-gray-50 dark:hover:bg-neutral-700"
+            >
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-200">
+                {index + 1}
               </td>
               {columns.map((column) => (
                 <td
                   key={column.key}
-                  className={
-                    index !== displayData.length - 1
-                      ? styles.table.bodyCellWithBorder
-                      : styles.table.bodyCell
-                  }
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-200"
                 >
-                  <div className={`${styles.table.bodyText} ${styles.text.secondary}`}>
+                  <div>
                     {column.render
                       ? column.render(item, index)
                       : String(
@@ -174,13 +166,13 @@ export default function DataTable<T = Record<string, unknown>>({
         </tbody>
       </table>
 
-      {(filteredData.length > maxRows || Object.keys(filters).some(key => filters[key])) && (
-        <div className={styles.table.footer}>
-          <p className={`${styles.table.footerText} ${styles.text.muted}`}>
+      {(filteredData.length > maxRows ||
+        Object.keys(filters).some((key) => filters[key])) && (
+        <div className="px-6 py-3 bg-gray-50 border-t border-gray-200 dark:bg-neutral-900 dark:border-neutral-700">
+          <p className="text-xs text-gray-500 dark:text-neutral-400">
             {filteredData.length > maxRows
               ? `最初の${maxRows}件を表示中 (フィルター結果: ${filteredData.length}件 / 全${data.length}件)`
-              : `フィルター結果: ${filteredData.length}件 / 全${data.length}件`
-            }
+              : `フィルター結果: ${filteredData.length}件 / 全${data.length}件`}
           </p>
         </div>
       )}

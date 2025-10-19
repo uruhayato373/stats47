@@ -2,6 +2,8 @@
  * e-STAT統計表IDユーティリティ
  * 責務: ID関連の汎用的な操作
  */
+
+import { EstatIdValidationError } from "../errors";
 export class EstatIdUtils {
   /**
    * ID範囲から配列を生成
@@ -52,11 +54,61 @@ export class EstatIdUtils {
   /**
    * IDの妥当性を検証
    *
+   * e-Stat統計表IDの形式:
+   * - 10桁の数字
+   * - 先頭は0でも可
+   * - 有効な範囲: 0000000001 ~ 9999999999
+   *
    * @param id - 統計表ID
    * @returns 妥当な場合true
    */
   static isValidId(id: string): boolean {
-    return /^\d{10}$/.test(id);
+    // 基本的な形式チェック
+    if (!/^\d{10}$/.test(id)) {
+      return false;
+    }
+
+    // 数値範囲チェック
+    const num = parseInt(id, 10);
+    if (num < 1 || num > 9999999999) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * IDの形式を検証（より詳細なエラー情報を返す）
+   *
+   * @param id - 統計表ID
+   * @returns 検証結果とエラーメッセージ
+   */
+  static validateIdFormat(id: string): { valid: boolean; error?: string } {
+    if (typeof id !== "string") {
+      return { valid: false, error: "IDは文字列である必要があります" };
+    }
+
+    if (id.length !== 10) {
+      return {
+        valid: false,
+        error: `IDは10桁である必要があります（現在: ${id.length}桁）`,
+      };
+    }
+
+    if (!/^\d+$/.test(id)) {
+      return { valid: false, error: "IDは数字のみで構成される必要があります" };
+    }
+
+    const num = parseInt(id, 10);
+    if (num < 1) {
+      return { valid: false, error: "IDは1以上である必要があります" };
+    }
+
+    if (num > 9999999999) {
+      return { valid: false, error: "IDは9999999999以下である必要があります" };
+    }
+
+    return { valid: true };
   }
 
   /**
@@ -64,13 +116,19 @@ export class EstatIdUtils {
    *
    * @param id - 統計表ID
    * @returns 正規化されたID
-   * @throws {Error} IDが無効な場合
+   * @throws {EstatIdValidationError} IDが無効な場合
    */
   static normalizeId(id: string): string {
-    const num = parseInt(id);
-    if (isNaN(num)) {
-      throw new Error(`無効なID: ${id}`);
+    const validation = this.validateIdFormat(id);
+    if (!validation.valid) {
+      throw new EstatIdValidationError(
+        validation.error || `無効なID: ${id}`,
+        id,
+        "normalizeId"
+      );
     }
+
+    const num = parseInt(id, 10);
     return this.formatId(num);
   }
 }

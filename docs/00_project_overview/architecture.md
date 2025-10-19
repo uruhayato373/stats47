@@ -356,6 +356,281 @@ src/
 これらの条件を満たす場合は、たとえ特定のページでのみ使用されるコンポーネントであっても、
 アトミックデザインの Organism レイヤーに配置し、適切な命名規則に従います。
 
+## 型定義アーキテクチャ
+
+### 概要
+
+stats47 プロジェクトでは、ドメイン駆動設計（DDD）の原則に基づいて型定義を管理し、コードの保守性と型安全性を向上させています。
+
+### 設計原則
+
+#### コロケーション原則による型の配置
+
+型定義は「ドメインロジックと共に配置する」（Co-location with Domain Logic）原則に従い、以下のように配置されています：
+
+1. **共有型（Shared Types）**: 真に複数のドメインで共有される汎用的な型のみ
+2. **ドメイン型（Domain Types）**: 特定のドメインに特化した型（各ドメイン内で管理）
+3. **外部型拡張（External Type Extensions）**: 外部ライブラリの型拡張
+
+### 推奨ディレクトリ構造
+
+```
+src/
+├── types/                      # 共有型（真に共有される汎用型のみ）
+│   ├── shared/                 # 複数ドメインで共有される汎用型
+│   │   ├── primitives.ts      # ID, Timestamp, Status等の基本型
+│   │   ├── pagination.ts      # Page, Sort, Filter等のUI共通型
+│   │   ├── table.ts           # 汎用テーブル型
+│   │   └── utility.ts         # 型ユーティリティ
+│   ├── external/              # 外部ライブラリの型拡張
+│   │   └── next-auth.d.ts
+│   └── index.ts               # 再エクスポート
+│
+└── lib/                        # ドメイン固有の型（各ドメイン内で管理）
+    ├── area/
+    │   └── types/             # Prefecture, Municipality, Region
+    ├── auth/
+    │   └── types/             # User, Session, AuthConfig
+    ├── category/
+    │   └── types/             # Category, Subcategory
+    ├── estat-api/
+    │   └── types/             # EstatMetaInfo, StatsData, StatsListItem
+    ├── ranking/
+    │   └── types/             # RankingItem, RankingConfig, RankingValue
+    ├── database/
+    │   └── estat/
+    │       └── types/         # SavedMetadata, CacheData
+    └── visualization/
+        └── types/             # ChoroplethConfig, ChartConfig
+```
+
+### 型定義の配置ルール
+
+#### 共有型（src/types/shared/）
+
+真に複数のドメインで使用される汎用的な型のみを配置します。
+
+**配置基準**:
+
+- 3 つ以上のドメインで使用される型
+- 特定のドメインに依存しない汎用型
+- プリミティブ型の拡張
+
+**例**:
+
+```typescript
+// src/types/shared/primitives.ts
+export type ID = string;
+export type Timestamp = string;
+export type Status = "active" | "inactive" | "pending";
+
+// src/types/shared/pagination.ts
+export interface Page<T> {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+}
+```
+
+**インポート**:
+
+```typescript
+import { ID, Timestamp, Page } from "@/types/shared";
+// または
+import { ID, Timestamp } from "@/types"; // src/types/index.ts経由
+```
+
+#### ドメイン型（lib/domain/types/）
+
+各ドメイン固有の型を、そのドメインのロジックと共に配置します。
+
+**配置基準**:
+
+- 特定のドメインでのみ使用される型
+- ドメインロジックに密接に関連する型
+- ビジネス概念を表現する型
+
+**例**:
+
+```typescript
+// lib/estat-api/types/meta-info.ts
+export interface EstatMetaInfo {
+  statsDataId: string;
+  title: string;
+  organization: string;
+  surveyDate: string;
+}
+
+// lib/ranking/types/item.ts
+export interface RankingItem {
+  id: string;
+  name: string;
+  value: number;
+  rank: number;
+}
+```
+
+**インポート**:
+
+```typescript
+import { EstatMetaInfo } from "@/lib/estat-api/types";
+import { RankingItem } from "@/lib/ranking/types";
+```
+
+#### 外部型拡張（src/types/external/）
+
+外部ライブラリの型を拡張する型を配置します。
+
+**例**:
+
+```typescript
+// src/types/external/next-auth.d.ts
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+    };
+  }
+}
+```
+
+### 型定義のベストプラクティス
+
+#### 1. 型の命名規則
+
+```typescript
+// ✅ 良い例: 明確で説明的な名前
+export interface EstatMetaInfo { ... }
+export interface RankingItem { ... }
+export type AreaType = 'prefecture' | 'municipality';
+
+// ❌ 悪い例: 曖昧で短すぎる名前
+export interface Item { ... }
+export interface Meta { ... }
+export type AT = 'p' | 'm';
+```
+
+#### 2. 型の分割
+
+```typescript
+// ✅ 良い例: 関連する型をファイルごとにグループ化
+// src/lib/ranking/types/item.ts
+export interface RankingItem { ... }
+export interface RankingValue { ... }
+export interface RankingOption<T> { ... }
+
+// ❌ 悪い例: すべての型を1つのファイルに
+// src/lib/ranking/types/index.ts
+export interface RankingItem { ... }
+export interface EstatMetaInfo { ... } // 異なるドメイン
+export interface PaginationParams { ... } // 共有型
+```
+
+#### 3. 型の再利用
+
+```typescript
+// ✅ 良い例: 既存の型を拡張
+export interface RankingItemDB extends RankingItem {
+  created_at: string;
+  updated_at: string;
+}
+
+// ❌ 悪い例: 重複した型定義
+export interface RankingItemDB {
+  id: string;
+  subcategoryId: string;
+  // ... すべてのフィールドを再定義
+  created_at: string;
+  updated_at: string;
+}
+```
+
+#### 4. 型のドキュメント
+
+````typescript
+// ✅ 良い例: JSDocでドキュメント化
+/**
+ * ランキングアイテム
+ *
+ * @remarks
+ * サブカテゴリーごとのランキングデータを表します。
+ * データベースから取得した生データと、
+ * 表示用にフォーマットされたデータの両方を含みます。
+ *
+ * @example
+ * ```typescript
+ * const item: RankingItem = {
+ *   id: "tokyo-population-2023",
+ *   subcategoryId: "basic-population",
+ *   areaCode: "13000",
+ *   value: 14000000,
+ *   rank: 1
+ * };
+ * ```
+ */
+export interface RankingItem {
+  id: string;
+  subcategoryId: string;
+  areaCode: string;
+  value: number;
+  rank: number;
+}
+````
+
+### 型定義の移行履歴
+
+#### 移行前の構造（レガシー）
+
+```
+src/types/
+├── models/
+│   ├── ranking.ts              # ランキング型
+│   └── r2/
+│       └── estat-metainfo-cache.ts # R2キャッシュ型
+├── ranking/
+│   └── unified.ts              # 統一ランキングデータ型
+├── visualization/
+│   └── ranking-options.ts      # ランキング可視化オプション型
+└── common/                     # 共通型
+    ├── pagination.ts
+    └── table.ts
+```
+
+**問題点**:
+
+- 型定義がドメインロジックから分離されている
+- 同じドメインの型が複数の場所に散在
+- インポートパスが複雑で保守が困難
+
+#### 移行後の構造（現在）
+
+```
+src/
+├── types/shared/               # 共有型（統合）
+│   ├── pagination.ts
+│   └── table.ts
+├── lib/ranking/types/          # ランキングドメイン型
+│   ├── item.ts                # 旧: models/ranking.ts
+│   ├── unified.ts             # 旧: ranking/unified.ts
+│   └── visualization.ts       # 旧: visualization/ranking-options.ts
+└── lib/database/estat/types/   # e-Statデータベース型
+    └── r2-cache.ts            # 旧: models/r2/estat-metainfo-cache.ts
+```
+
+**改善点**:
+
+- ドメインロジックと型定義が同じ場所に配置
+- 型のインポートパスが明確で一貫性がある
+- ドメインごとに型が整理され保守性が向上
+
+### 関連ドキュメント
+
+- [型定義ガイド](../01_development_guide/type-definitions-guide.md) - 型定義の詳細ガイド
+- [コーディング規約](../02_開発/01_コーディング規約.md) - TypeScript コーディング規約
+
 ## e-Stat API 統合アーキテクチャ
 
 ### データフロー概要（拡張版）
@@ -1371,6 +1646,74 @@ const SearchableDataTable = ({ data }) => {
   );
 };
 ```
+
+#### 5. 責務の分離とドメインサービスの活用
+
+コンポーネントの責務を明確に分離し、ドメインサービスを活用してデータ管理を統一する。
+
+```typescript
+// ❌ 悪い例: コンポーネント内でデータ管理
+const Sidebar = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // 直接JSONファイルを読み込み
+    import("@/config/categories.json").then((data) => {
+      setCategories(data.default);
+    });
+  }, []);
+
+  // UI表示とデータ管理が混在
+  return (
+    <nav>
+      {categories.map((category) => (
+        <Link key={category.id} href={`/${category.id}`}>
+          {category.name}
+        </Link>
+      ))}
+    </nav>
+  );
+};
+
+// ✅ 良い例: 責務を分離
+// lib/category/navigation.ts（ナビゲーション変換）
+export function getCategoriesForSidebar(): SidebarCategoryItem[] {
+  const categories = CategoryService.getAllCategories({
+    field: "displayOrder",
+    order: "asc",
+  });
+
+  return categories.map((category) => ({
+    id: category.id,
+    name: category.name,
+    icon: category.icon,
+    color: category.color,
+    href: `/${category.id}`,
+  }));
+}
+
+// components/Sidebar/Sidebar.tsx（純粋なUI表示）
+const Sidebar = () => {
+  const categories = useMemo(() => getCategoriesForSidebar(), []);
+
+  return (
+    <nav>
+      {categories.map((category) => (
+        <Link key={category.id} href={category.href}>
+          <CategoryIcon iconName={category.icon} />
+          {category.name}
+        </Link>
+      ))}
+    </nav>
+  );
+};
+```
+
+**責務の分離:**
+
+- **データ管理**: `CategoryService`が担当
+- **ナビゲーション変換**: `navigation.ts`が担当
+- **UI 表示**: `Sidebar.tsx`が担当
 
 ### テスト戦略
 
