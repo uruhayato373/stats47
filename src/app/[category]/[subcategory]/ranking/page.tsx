@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound, redirect } from "next/navigation";
 import { getSubcategoryById } from "@/lib/category";
-import { SubcategoryRankingPage } from "@/components/subcategories/SubcategoryRankingPage";
+import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
 
 /**
  * ランキングページのProps型定義
