@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import InputField from "./InputField";
 
 const meta: Meta<typeof InputField> = {
-  title: "Common/InputField",
+  title: "Atoms/InputField",
   component: InputField,
   parameters: {
     layout: "padded",

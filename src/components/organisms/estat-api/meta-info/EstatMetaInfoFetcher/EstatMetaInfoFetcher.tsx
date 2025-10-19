@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
-import { Search, Loader2 } from "lucide-react";
+import { Search } from "lucide-react";
 import { InputField } from "@/components/atoms/InputField";
+import LoadingButton from "@/components/atoms/LoadingButton/LoadingButton";
 
 /**
  * EstatMetaInfoFetcherProps - e-Statメタ情報取得フォームのプロパティ
@@ -111,24 +112,18 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
     switch (size) {
       case "compact":
         return {
-          button: "px-2 py-1 h-7 text-xs",
-          icon: "h-3 w-3",
-          gap: "gap-1",
-          inputHeight: "h-7",
+          inputSize: "sm" as const,
+          buttonSize: "sm" as const,
         };
       case "large":
         return {
-          button: "px-6 py-3 h-12 text-base",
-          icon: "h-5 w-5",
-          gap: "gap-3",
-          inputHeight: "h-12",
+          inputSize: "lg" as const,
+          buttonSize: "lg" as const,
         };
       default:
         return {
-          button: "px-3 py-1.5 h-8 text-sm",
-          icon: "h-3 w-3",
-          gap: "gap-1.5",
-          inputHeight: "h-8",
+          inputSize: "md" as const,
+          buttonSize: "md" as const,
         };
     }
   };
@@ -164,6 +159,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
             required
             inlineLabel
             width="max-w-xs"
+            size="sm"
             error={
               statsDataId.trim() && !isValidStatsDataId(statsDataId)
                 ? "10桁の数字を入力してください"
@@ -172,20 +168,16 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           />
 
           {/* 送信ボタン */}
-          <button
+          <LoadingButton
             type="submit"
             disabled={!canSubmit}
-            className={`${sizeClasses.button} bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center whitespace-nowrap`}
+            loading={loading}
+            loadingText="取得中..."
+            size={sizeClasses.buttonSize}
+            variant="primary"
           >
-            {loading ? (
-              <div className={`flex items-center ${sizeClasses.gap}`}>
-                <Loader2 className={`animate-spin ${sizeClasses.icon}`} />
-                取得中...
-              </div>
-            ) : (
-              "取得"
-            )}
-          </button>
+            取得
+          </LoadingButton>
         </div>
       </div>
     </form>

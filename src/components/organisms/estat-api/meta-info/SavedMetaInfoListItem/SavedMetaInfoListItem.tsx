@@ -54,3 +54,5 @@ export function SavedMetaInfoListItem({
     </div>
   );
 }
+
+export default SavedMetaInfoListItem;
