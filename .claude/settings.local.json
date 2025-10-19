@@ -40,7 +40,9 @@
       "Bash(for file in /Users/minamidaisuke/stats47/src/app/api/estat-api/meta-info/ranking-key/route.ts /Users/minamidaisuke/stats47/src/components/molecules/ranking/StatisticsSummary/StatisticsSummary.tsx /Users/minamidaisuke/stats47/src/components/organisms/visualization/ChoroplethMap/ChoroplethMap.tsx /Users/minamidaisuke/stats47/src/components/organisms/ranking/settings/containers/EstatRankingDataContainer.tsx /Users/minamidaisuke/stats47/src/components/organisms/ranking/RankingNavigation/RankingNavigation.tsx /Users/minamidaisuke/stats47/src/hooks/useRankingItemsEditor.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-repository.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-items.ts /Users/minamidaisuke/stats47/src/lib/ranking/ranking-converters.ts)",
       "Bash(do sed -i '' 's|@/types/models/ranking|@/lib/ranking/types|g' \"$file\")",
       "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/ranking/unified' {} ;)",
-      "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/models/r2/estat-metainfo-cache' {} ;)"
+      "Bash(find /Users/minamidaisuke/stats47/src -type f ( -name \"*.ts\" -o -name \"*.tsx\" ) -exec grep -l 'from [\"\"'''']@/types/models/r2/estat-metainfo-cache' {} ;)",
+      "Bash(curl -s \"https://www.e-stat.go.jp/api/sample/testform2/getStatsList.html\")",
+      "Bash(curl -s \"https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=59eb12e8a25751dfc27f2e48fcdfa8600b86655e&statsField=10&limit=1\")"
     ],
     "deny": [],
     "ask": []

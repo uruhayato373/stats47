@@ -11,7 +11,7 @@ import { EstatYearSelector } from "@/components/organisms/estat-api/EstatYearSel
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
 import { PrefectureDataTableClient } from "@/components/organisms/ranking/PrefectureDataTableClient";
 import { RankingVisualizationOptions } from "@/lib/ranking/types";
-import { Modal } from "@/components/common/Modal/Modal";
+import { Modal } from "@/components/atoms/Modal/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,

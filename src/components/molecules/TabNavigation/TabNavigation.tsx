@@ -148,4 +148,5 @@ function TabNavigation({
   );
 }
 
+export { TabNavigation };
 export default memo(TabNavigation);

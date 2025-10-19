@@ -7,10 +7,10 @@ import { estatAPI } from "@/lib/estat-api";
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { statsDataId: string } }
+  { params }: { params: Promise<{ statsDataId: string }> }
 ) {
   try {
-    const { statsDataId } = params;
+    const { statsDataId } = await params;
 
     // バリデーション
     if (!statsDataId) {

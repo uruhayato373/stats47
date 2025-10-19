@@ -86,8 +86,67 @@ export function useStatsListSearch() {
       try {
         console.log("🔵 Hook: 検索開始", options);
 
-        // 高度な検索を実行
-        const response = await EstatStatsListFetcher.advancedSearch(options);
+        // 検索オプションに基づいて適切なメソッドを選択
+        let response;
+
+        if (options.searchWord) {
+          // キーワード検索
+          response = await EstatStatsListFetcher.searchByKeyword(
+            options.searchWord,
+            {
+              limit: options.limit || 100,
+              ...(options.statsField && { statsField: options.statsField }),
+              ...(options.collectArea && { collectArea: options.collectArea }),
+              ...(options.surveyYears && { surveyYears: options.surveyYears }),
+            }
+          );
+        } else if (options.statsCode) {
+          // 政府統計コード検索
+          response = await EstatStatsListFetcher.searchByStatsCode(
+            options.statsCode,
+            {
+              limit: options.limit || 100,
+              ...(options.statsField && { statsField: options.statsField }),
+              ...(options.collectArea && { collectArea: options.collectArea }),
+              ...(options.surveyYears && { surveyYears: options.surveyYears }),
+            }
+          );
+        } else if (options.statsField) {
+          // 分野別検索
+          console.log("🔵 Hook: 分野別検索実行", {
+            statsField: options.statsField,
+            options: {
+              limit: options.limit || 100,
+              ...(options.collectArea && { collectArea: options.collectArea }),
+              ...(options.surveyYears && { surveyYears: options.surveyYears }),
+            },
+          });
+          response = await EstatStatsListFetcher.searchByField(
+            options.statsField,
+            {
+              limit: options.limit || 100,
+              ...(options.collectArea && { collectArea: options.collectArea }),
+              ...(options.surveyYears && { surveyYears: options.surveyYears }),
+            }
+          );
+          console.log("🔵 Hook: 分野別検索結果", response);
+        } else if (options.collectArea) {
+          // 集計地域区分検索
+          response = await EstatStatsListFetcher.searchByCollectArea(
+            options.collectArea,
+            {
+              limit: options.limit || 100,
+              ...(options.statsField && { statsField: options.statsField }),
+              ...(options.surveyYears && { surveyYears: options.surveyYears }),
+            }
+          );
+        } else {
+          // デフォルト検索（全件取得）
+          response = await EstatStatsListFetcher.fetchStatsList({
+            limit: options.limit || 100,
+            ...(options.surveyYears && { surveyYears: options.surveyYears }),
+          });
+        }
 
         // 結果をフォーマット
         const formattedResult =

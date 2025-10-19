@@ -102,7 +102,17 @@ export default async function RankingPage({ params }: PageProps) {
   const { category, subcategory } = subcategoryData;
 
   // サブカテゴリランキングページコンポーネントをレンダリング
+  // CategoryDataとの型互換性のため必須フィールドにデフォルト値を設定
   return (
-    <SubcategoryRankingPage category={category} subcategory={subcategory} />
+    <SubcategoryRankingPage
+      category={{
+        ...category,
+        description: category.description || "",
+        icon: category.icon || "",
+        displayOrder: category.displayOrder || 0,
+        subcategories: category.subcategories || [],
+      }}
+      subcategory={subcategory}
+    />
   );
 }

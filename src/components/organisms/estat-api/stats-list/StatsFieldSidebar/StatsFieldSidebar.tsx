@@ -50,10 +50,15 @@ export function StatsFieldSidebar({
   // ===== カスタムフック =====
 
   /** 統計数取得フック - データ取得とフォーマット機能を委譲 */
+  console.log("🔵 Component: StatsFieldSidebar レンダリング開始");
   const { fieldStats, isLoading, getFieldStats, formatCount } =
     useEstatAPIFieldStats({
       showStatsCount: true,
     });
+  console.log("🔵 Component: StatsFieldSidebar フック結果", {
+    fieldStats,
+    isLoading,
+  });
 
   // ===== レンダリング =====
 

@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
 import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
 import { InputField } from "@/components/atoms/InputField";
-import Select from "@/components/atoms/Select/Select";
-import Button from "@/components/atoms/Button";
-import LoadingButton from "@/components/atoms/LoadingButton";
+import { Select } from "@/components/atoms/Select";
+import { Button } from "@/components/atoms/Button";
+import { LoadingButton } from "@/components/atoms/LoadingButton";
 import {
   STATS_FIELD_OPTIONS,
   COLLECT_AREA_OPTIONS,
@@ -50,6 +50,7 @@ export function StatsListSearch({
       limit,
     };
 
+    console.log("🔵 Component: 検索オプション", options);
     onSearch(options);
   };
 

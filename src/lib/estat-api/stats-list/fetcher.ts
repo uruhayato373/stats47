@@ -216,6 +216,11 @@ export class EstatStatsListFetcher {
       ...(options.openYears && { openYears: options.openYears }),
     };
 
+    console.log("🔵 Fetcher: searchByField パラメータ", {
+      fieldCode,
+      options,
+      params,
+    });
     return this.fetchStatsList(params);
   }
 

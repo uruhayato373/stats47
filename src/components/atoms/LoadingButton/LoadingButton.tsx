@@ -59,4 +59,5 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
 
 LoadingButton.displayName = "LoadingButton";
 
+export { LoadingButton };
 export default LoadingButton;

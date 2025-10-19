@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertTriangle, Database } from "lucide-react";
-import { EstatRankingDataContainer } from "@/components/ranking/settings/containers";
+import { EstatRankingDataContainer } from "@/components/organisms/ranking/settings/containers";
 import { useEstatStatsData } from "@/hooks/ranking/useEstatStatsData";
 import { useRankingKey } from "@/hooks/estat-api";
 import { EstatStatsDataResponse } from "@/lib/estat-api";

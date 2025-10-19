@@ -1,2 +1,6 @@
-export { default as TabNavigation } from "./TabNavigation";
-export type { TabItem, TabNavigationProps } from "./TabNavigation";
+export {
+  TabNavigation,
+  type TabItem,
+  type TabNavigationProps,
+} from "./TabNavigation";
+export { default } from "./TabNavigation";

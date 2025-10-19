@@ -21,6 +21,7 @@ import {
   Droplets,
   ShieldCheck,
   Hospital,
+  Computer,
 } from "lucide-react";
 
 interface CategoryIconProps {
@@ -50,6 +51,7 @@ const iconMap = {
   Droplets: Droplets,
   ShieldCheck: ShieldCheck,
   Hospital: Hospital,
+  Computer: Computer,
 };
 
 export const CategoryIcon: React.FC<CategoryIconProps> = ({

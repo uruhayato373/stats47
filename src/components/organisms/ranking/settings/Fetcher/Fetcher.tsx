@@ -12,7 +12,7 @@
 
 import { useState } from "react";
 import { Search, RotateCcw } from "lucide-react";
-import InputField from "@/components/common/InputField";
+import InputField from "@/components/atoms/InputField";
 
 interface PrefectureRankingParams {
   statsDataId: string;

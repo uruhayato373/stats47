@@ -22,6 +22,8 @@ export type {
 export { CategoryService } from "./category-service";
 
 // 便利な関数のエクスポート（後方互換性のため）
+import { CategoryService } from "./category-service";
+
 export const getCategoryById =
   CategoryService.getCategoryById.bind(CategoryService);
 export const getSubcategoryById =

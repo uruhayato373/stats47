@@ -36,6 +36,7 @@ export interface UseFieldStatsReturn {
 export function useEstatAPIFieldStats({
   showStatsCount = true,
 }: UseFieldStatsOptions = {}): UseFieldStatsReturn {
+  console.log("🔵 Hook: useEstatAPIFieldStats 初期化", { showStatsCount });
   const [fieldStats, setFieldStats] = useState<FieldStats[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +44,10 @@ export function useEstatAPIFieldStats({
   useEffect(() => {
     if (!showStatsCount) return;
 
+    console.log("🔵 Hook: useEstatAPIFieldStats 開始");
+
     const fetchFieldStats = async () => {
+      console.log("🔵 Hook: fetchFieldStats 開始");
       setIsLoading(true);
 
       try {
@@ -60,11 +64,14 @@ export function useEstatAPIFieldStats({
               isLoading: false,
             };
           } catch (error) {
+            console.log(`🔵 Hook: 分野 ${fieldCode} のエラー詳細:`, error);
+
             // NO_DATA_FOUNDエラーの場合は正常なケースとして扱う
             if (
               error instanceof EstatStatsListError &&
               error.type === EstatErrorType.NO_DATA_FOUND
             ) {
+              console.log(`✅ Hook: 分野 ${fieldCode} はデータなし（正常）`);
               return {
                 fieldCode: fieldCode as StatsFieldCode,
                 count: 0,
@@ -75,10 +82,17 @@ export function useEstatAPIFieldStats({
             // エラーメッセージでNO_DATA_FOUNDを判定（フォールバック）
             if (error && typeof error === "object" && "message" in error) {
               const errorMessage = (error as any).message;
+              console.log(`🔵 Hook: エラーメッセージ: ${errorMessage}`);
               if (
                 errorMessage &&
-                errorMessage.includes("該当データはありませんでした")
+                (errorMessage.includes("該当データはありませんでした") ||
+                  errorMessage.includes(
+                    "正常に終了しましたが、該当データはありませんでした"
+                  ))
               ) {
+                console.log(
+                  `✅ Hook: 分野 ${fieldCode} はデータなし（メッセージ判定）`
+                );
                 return {
                   fieldCode: fieldCode as StatsFieldCode,
                   count: 0,
@@ -87,7 +101,10 @@ export function useEstatAPIFieldStats({
               }
             }
 
-            console.error(`分野 ${fieldCode} の統計数取得エラー:`, error);
+            console.error(
+              `❌ Hook: 分野 ${fieldCode} の統計数取得エラー:`,
+              error
+            );
             return {
               fieldCode: fieldCode as StatsFieldCode,
               count: 0,
@@ -97,9 +114,10 @@ export function useEstatAPIFieldStats({
         });
 
         const results = await Promise.all(promises);
+        console.log("✅ Hook: fetchFieldStats 完了", results);
         setFieldStats(results);
       } catch (error) {
-        console.error("分野統計数取得エラー:", error);
+        console.error("❌ Hook: 分野統計数取得エラー:", error);
       } finally {
         setIsLoading(false);
       }
