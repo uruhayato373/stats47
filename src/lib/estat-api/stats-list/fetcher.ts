@@ -74,7 +74,13 @@ export class EstatStatsListFetcher {
             EstatErrorType.INVALID_APP_ID,
             errorMsg
           );
-        } else if (errorMsg.includes("該当するデータが存在しません")) {
+        } else if (
+          errorMsg.includes("該当するデータが存在しません") ||
+          errorMsg.includes("該当データはありませんでした") ||
+          errorMsg.includes(
+            "正常に終了しましたが、該当データはありませんでした"
+          )
+        ) {
           throw new EstatStatsListError(EstatErrorType.NO_DATA_FOUND, errorMsg);
         } else if (errorMsg.includes("パラメータが不正")) {
           throw new EstatStatsListError(

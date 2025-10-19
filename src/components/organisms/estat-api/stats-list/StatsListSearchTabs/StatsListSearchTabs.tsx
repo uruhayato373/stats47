@@ -29,7 +29,7 @@ interface StatsListSearchTabsProps {
   selectedField?: StatsFieldCode;
   /** ローディング状態 */
   isLoading?: boolean;
-  /** デフォルトのタブ（デフォルト: "simple"） */
+  /** デフォルトのタブ（デフォルト: "field"） */
   defaultTab?: "field" | "simple" | "advanced";
 }
 
@@ -54,7 +54,7 @@ export default function StatsListSearchTabs({
   onFieldSelect,
   selectedField,
   isLoading = false,
-  defaultTab = "simple",
+  defaultTab = "field",
 }: StatsListSearchTabsProps) {
   // ===== 状態管理 =====
 

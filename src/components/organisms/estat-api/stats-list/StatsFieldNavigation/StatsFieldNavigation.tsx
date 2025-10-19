@@ -7,7 +7,11 @@
 
 import { useState, useEffect } from "react";
 import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
-import { EstatStatsListFetcher } from "@/lib/estat-api/stats-list";
+import {
+  EstatStatsListFetcher,
+  EstatStatsListError,
+  EstatErrorType,
+} from "@/lib/estat-api/stats-list";
 
 interface StatsFieldNavigationProps {
   onFieldSelect: (fieldCode: StatsFieldCode) => void;
@@ -51,6 +55,19 @@ export function StatsFieldNavigation({
               isLoading: false,
             };
           } catch (error) {
+            // NO_DATA_FOUNDエラーの場合は正常なケースとして扱う
+            if (
+              error instanceof EstatStatsListError &&
+              error.type === EstatErrorType.NO_DATA_FOUND
+            ) {
+              console.log(`分野 ${fieldCode}: データなし（正常）`);
+              return {
+                fieldCode: fieldCode as StatsFieldCode,
+                count: 0,
+                isLoading: false,
+              };
+            }
+
             console.error(`分野 ${fieldCode} の統計数取得エラー:`, error);
             return {
               fieldCode: fieldCode as StatsFieldCode,

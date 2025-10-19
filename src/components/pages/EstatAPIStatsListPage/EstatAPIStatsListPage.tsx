@@ -152,7 +152,7 @@ export function EstatAPIStatsListPage() {
           onFieldSelect={handleFieldSelect}
           selectedField={selectedField}
           isLoading={isLoading}
-          defaultTab="simple"
+          defaultTab="field"
         />
 
         {/* エラー表示 */}

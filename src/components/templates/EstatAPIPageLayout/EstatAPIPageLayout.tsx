@@ -107,5 +107,7 @@ export function EstatAPIPageLayout({
 
   // ===== レンダリング =====
   // フラットデザイン: 余白とカードスタイルを削除
-  return <div className="transition-all duration-300 min-h-screen">{content}</div>;
+  return (
+    <div className="transition-all duration-300 min-h-screen">{content}</div>
+  );
 }
