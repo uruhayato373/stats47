@@ -51,7 +51,7 @@ export default function Alert({
   const getAlertClasses = (type: AlertProps["type"]) => {
     switch (type) {
       case "success":
-        return "bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300";
+        return "bg-green-50 text-green-800 border border-green-200 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200";
       case "error":
         return "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300";
       case "info":

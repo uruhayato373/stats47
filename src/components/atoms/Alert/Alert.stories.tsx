@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Alert } from "./Alert";
+import Alert from "./Alert";
 import { Heart, Star } from "lucide-react";
 
 const meta: Meta<typeof Alert> = {
