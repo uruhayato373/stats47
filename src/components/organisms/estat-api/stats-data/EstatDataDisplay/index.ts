@@ -1,1 +1,1 @@
-export { EstatDataDisplay } from "./EstatDataDisplay";
+export { default as EstatDataDisplay } from "./EstatDataDisplay";

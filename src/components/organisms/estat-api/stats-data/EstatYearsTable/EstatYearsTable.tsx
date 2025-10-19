@@ -5,7 +5,7 @@ import {
   FormattedYear,
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import DataTable, { TableColumn } from "@/components/molecules/DataTable";
+import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
 
 interface EstatYearsTableProps {
   data: EstatStatsDataResponse;

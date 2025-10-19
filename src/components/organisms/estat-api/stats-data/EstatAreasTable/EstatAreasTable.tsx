@@ -5,7 +5,7 @@ import {
   FormattedArea,
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import DataTable, { TableColumn } from "@/components/molecules/DataTable";
+import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
 
 interface EstatAreasTableProps {
   data: EstatStatsDataResponse;

@@ -8,8 +8,7 @@ import { EstatCategoriesTable } from "../EstatCategoriesTable";
 import { EstatYearsTable } from "../EstatYearsTable";
 import { EstatValuesTable } from "../EstatValuesTable";
 import { EstatRawData } from "../EstatRawData";
-import {
-  TabNavigation,
+import TabNavigation, {
   type TabItem,
 } from "@/components/molecules/TabNavigation";
 
@@ -19,11 +18,7 @@ interface EstatDataDisplayProps {
   error: string | null;
 }
 
-export function EstatDataDisplay({
-  data,
-  loading,
-  error,
-}: EstatDataDisplayProps) {
+function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<
     "overview" | "categories" | "years" | "values" | "raw"
   >("overview");
@@ -123,3 +118,5 @@ export function EstatDataDisplay({
     </div>
   );
 }
+
+export default EstatDataDisplay;

@@ -5,7 +5,7 @@
 
 // メインコンポーネント
 export { default as EstatDataFetcher } from "./EstatDataFetcher";
-export { EstatDataDisplay } from "./EstatDataDisplay";
+export { default as EstatDataDisplay } from "./EstatDataDisplay";
 
 // 表示用コンポーネント
 export { EstatOverview } from "./EstatOverview";
