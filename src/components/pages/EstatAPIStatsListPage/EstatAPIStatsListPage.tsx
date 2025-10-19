@@ -16,11 +16,6 @@ import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
 
 /**
- * 表示モードの型定義
- */
-type ViewMode = "list" | "grid";
-
-/**
  * e-Stat統計表一覧ページコンポーネント
  *
  * 機能:
@@ -35,9 +30,6 @@ type ViewMode = "list" | "grid";
  */
 export function EstatAPIStatsListPage() {
   // ===== 状態管理 =====
-
-  /** 表示モード（リスト/グリッド） */
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
 
   /** 選択された統計表の詳細情報（モーダル表示用） */
   const [selectedTable, setSelectedTable] =
@@ -55,12 +47,9 @@ export function EstatAPIStatsListPage() {
     searchResult, // 検索結果
     isLoading, // ローディング状態
     error, // エラー情報
-    searchHistory, // 検索履歴
-    favorites, // お気に入り一覧
     search, // 検索実行メソッド
     sort, // ソートメソッド
     filter, // フィルタメソッド
-    toggleFavorite, // お気に入り切り替えメソッド
   } = useStatsListSearch();
 
   // ===== イベントハンドラー =====
@@ -144,29 +133,17 @@ export function EstatAPIStatsListPage() {
    * @param filters - フィルタ条件
    */
   const handleFilter = useCallback(
-    (filters: any) => {
+    (filters: Record<string, unknown>) => {
       console.log("🔵 Page: フィルタ", filters);
       filter(filters);
     },
     [filter]
   );
 
-  /**
-   * お気に入りの切り替え処理
-   * @param table - 対象の統計表情報
-   */
-  const handleToggleFavorite = useCallback(
-    (table: StatsListTableInfo) => {
-      console.log("🔵 Page: お気に入り切り替え", table);
-      toggleFavorite(table);
-    },
-    [toggleFavorite]
-  );
-
   // ===== レンダリング =====
 
   return (
-    <EstatAPIPageLayout title="e-Stat 統計表一覧" icon={List} useCard={false}>
+    <EstatAPIPageLayout title="e-Stat 統計表一覧" icon={List}>
       <div className="space-y-6">
         {/* 統合検索タブ */}
         <StatsListSearchTabs
@@ -201,63 +178,18 @@ export function EstatAPIStatsListPage() {
             totalCount={searchResult.totalCount}
             isLoading={isLoading}
             onTableSelect={handleTableSelect}
-            onToggleFavorite={handleToggleFavorite}
-            favorites={favorites}
-            viewMode={viewMode}
-            onViewModeChange={setViewMode}
             onSort={handleSort}
             onFilter={handleFilter}
             sortBy="surveyDate"
             sortOrder="desc"
           />
         )}
-
-        {/* 検索履歴表示 */}
-        {searchHistory.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              検索履歴
-            </h3>
-            <div className="space-y-2">
-              {searchHistory.slice(0, 5).map((history, index) => (
-                <div key={index} className="text-sm text-gray-600">
-                  {history.searchWord && `キーワード: ${history.searchWord}`}
-                  {history.statsField && ` | 分野: ${history.statsField}`}
-                  {history.collectArea && ` | 地域: ${history.collectArea}`}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* お気に入り表示 */}
-        {favorites.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              お気に入り ({favorites.length}件)
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {favorites.slice(0, 6).map((table) => (
-                <div
-                  key={table.id}
-                  className="p-4 border border-gray-200 rounded-lg hover:shadow-md cursor-pointer"
-                  onClick={() => handleTableSelect(table)}
-                >
-                  <h4 className="font-medium text-gray-900 truncate">
-                    {table.title}
-                  </h4>
-                  <p className="text-sm text-gray-600 mt-1">{table.statName}</p>
-                  <p className="text-xs text-gray-500 mt-1">{table.govOrg}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* 統計表詳細モーダル */}
       <StatsTableDetailModal
         table={selectedTable}
+        isOpen={selectedTable !== null}
         onClose={() => setSelectedTable(null)}
       />
     </EstatAPIPageLayout>
