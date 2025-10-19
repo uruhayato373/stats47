@@ -27,6 +27,11 @@ const meta: Meta<typeof EstatMetaInfoFetcher> = {
       control: "boolean",
       description: "送信成功後に入力フィールドをクリアするかどうか",
     },
+    size: {
+      control: "select",
+      options: ["compact", "default", "large"],
+      description: "コンポーネントのサイズ",
+    },
   },
   tags: ["autodocs"],
 };
@@ -49,7 +54,8 @@ export const Loading: Story = {
   parameters: {
     docs: {
       description: {
-        story: "ローディング状態の表示。API通信中にボタンが無効化され、ローディングアイコンが表示されます。",
+        story:
+          "ローディング状態の表示。API通信中にボタンが無効化され、ローディングアイコンが表示されます。",
       },
     },
   },
@@ -64,6 +70,36 @@ export const WithClearOnSuccess: Story = {
     docs: {
       description: {
         story: "送信成功後に入力フィールドがクリアされる設定。",
+      },
+    },
+  },
+};
+
+export const Compact: Story = {
+  args: {
+    loading: false,
+    clearOnSuccess: false,
+    size: "compact",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "コンパクトサイズ。高さを低くしたバージョンです。",
+      },
+    },
+  },
+};
+
+export const Large: Story = {
+  args: {
+    loading: false,
+    clearOnSuccess: false,
+    size: "large",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "ラージサイズ。より大きく表示されたバージョンです。",
       },
     },
   },
@@ -115,7 +151,8 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: "インタラクティブな例です。統計表IDを入力して送信ボタンをクリックして動作を確認できます。",
+        story:
+          "インタラクティブな例です。統計表IDを入力して送信ボタンをクリックして動作を確認できます。",
       },
     },
   },
@@ -153,7 +190,8 @@ export const ValidationExample: Story = {
   parameters: {
     docs: {
       description: {
-        story: "バリデーション機能の例。10桁の数字のみが有効な統計表IDとして受け入れられます。",
+        story:
+          "バリデーション機能の例。10桁の数字のみが有効な統計表IDとして受け入れられます。",
       },
     },
   },
@@ -194,7 +232,8 @@ export const InCard: Story = {
   parameters: {
     docs: {
       description: {
-        story: "カード内での使用例。実際のページレイアウトでの表示イメージです。",
+        story:
+          "カード内での使用例。実際のページレイアウトでの表示イメージです。",
       },
     },
   },
@@ -225,6 +264,55 @@ export const MobileLayout: Story = {
     docs: {
       description: {
         story: "モバイルレイアウトでの表示例。狭い画面でも適切に表示されます。",
+      },
+    },
+  },
+};
+
+export const SizeComparison: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-sm font-medium mb-4 text-gray-900 dark:text-gray-100">
+          コンパクトサイズ
+        </h3>
+        <EstatMetaInfoFetcher
+          onSubmit={() => console.log("送信")}
+          loading={false}
+          clearOnSuccess={false}
+          size="compact"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-sm font-medium mb-4 text-gray-900 dark:text-gray-100">
+          デフォルトサイズ
+        </h3>
+        <EstatMetaInfoFetcher
+          onSubmit={() => console.log("送信")}
+          loading={false}
+          clearOnSuccess={false}
+          size="default"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-sm font-medium mb-4 text-gray-900 dark:text-gray-100">
+          ラージサイズ
+        </h3>
+        <EstatMetaInfoFetcher
+          onSubmit={() => console.log("送信")}
+          loading={false}
+          clearOnSuccess={false}
+          size="large"
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "サイズ比較。コンパクト、デフォルト、ラージの3つのサイズを比較できます。",
       },
     },
   },
@@ -273,7 +361,8 @@ export const DifferentStates: Story = {
   parameters: {
     docs: {
       description: {
-        story: "異なる状態での表示例。初期状態、ローディング状態、バリデーションエラー状態を確認できます。",
+        story:
+          "異なる状態での表示例。初期状態、ローディング状態、バリデーションエラー状態を確認できます。",
       },
     },
   },

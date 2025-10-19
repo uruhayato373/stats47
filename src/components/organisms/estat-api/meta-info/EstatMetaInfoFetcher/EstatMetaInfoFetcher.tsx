@@ -14,6 +14,8 @@ interface EstatMetaInfoFetcherProps {
   loading?: boolean;
   /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
   clearOnSuccess?: boolean;
+  /** コンポーネントのサイズ（デフォルト: "default"） */
+  size?: "compact" | "default" | "large";
 }
 
 /**
@@ -43,6 +45,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   onSubmit,
   loading,
   clearOnSuccess = false,
+  size = "default",
 }: EstatMetaInfoFetcherProps) {
   // ===== 状態管理 =====
 
@@ -101,6 +104,37 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   const canSubmit =
     statsDataId.trim() && isValidStatsDataId(statsDataId) && !loading;
 
+  /**
+   * サイズに応じたスタイルクラスを取得
+   */
+  const getSizeClasses = () => {
+    switch (size) {
+      case "compact":
+        return {
+          button: "px-2 py-1 h-7 text-xs",
+          icon: "h-3 w-3",
+          gap: "gap-1",
+          inputHeight: "h-7",
+        };
+      case "large":
+        return {
+          button: "px-6 py-3 h-12 text-base",
+          icon: "h-5 w-5",
+          gap: "gap-3",
+          inputHeight: "h-12",
+        };
+      default:
+        return {
+          button: "px-3 py-1.5 h-8 text-sm",
+          icon: "h-3 w-3",
+          gap: "gap-1.5",
+          inputHeight: "h-8",
+        };
+    }
+  };
+
+  const sizeClasses = getSizeClasses();
+
   // ===== レンダリング =====
 
   return (
@@ -141,11 +175,11 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           <button
             type="submit"
             disabled={!canSubmit}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 h-10 whitespace-nowrap"
+            className={`${sizeClasses.button} bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center whitespace-nowrap`}
           >
             {loading ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="animate-spin h-4 w-4" />
+              <div className={`flex items-center ${sizeClasses.gap}`}>
+                <Loader2 className={`animate-spin ${sizeClasses.icon}`} />
                 取得中...
               </div>
             ) : (
