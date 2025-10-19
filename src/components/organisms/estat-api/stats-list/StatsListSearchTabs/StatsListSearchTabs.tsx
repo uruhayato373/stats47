@@ -6,7 +6,7 @@ import {
   TabNavigation,
   type TabItem,
 } from "@/components/molecules/TabNavigation";
-import { StatsListSearch } from "@/components/molecules/StatsListSearch";
+import { StatsListSearch } from "../StatsListSearch";
 import { StatsFieldNavigation } from "../StatsFieldNavigation/StatsFieldNavigation";
 import {
   StatsListSearchOptions,
@@ -90,16 +90,13 @@ export default function StatsListSearchTabs({
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={handleTabChange}
-        className="px-6 pt-4"
+        className="px-6 pt-"
       />
 
       {/* タブコンテンツ */}
       <div className="p-6">
         {activeTab === "field" && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              統計分野別検索
-            </h3>
             <StatsFieldNavigation
               onFieldSelect={onFieldSelect}
               selectedField={selectedField}
@@ -109,9 +106,6 @@ export default function StatsListSearchTabs({
 
         {activeTab === "simple" && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              シンプル検索
-            </h3>
             <StatsListSearch onSearch={onSimpleSearch} isLoading={isLoading} />
           </div>
         )}

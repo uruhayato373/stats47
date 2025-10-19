@@ -1,5 +1,5 @@
 /**
- * 統計分野の統計数取得カスタムフック
+ * e-Stat API統計分野の統計数取得カスタムフック
  * 責務: 各分野の統計数の取得・管理のみ
  */
 
@@ -29,11 +29,11 @@ export interface UseFieldStatsReturn {
 }
 
 /**
- * 統計分野の統計数取得フック
+ * e-Stat API統計分野の統計数取得フック
  * @param options - オプション
  * @returns 統計数データとヘルパー関数
  */
-export function useFieldStats({
+export function useEstatAPIFieldStats({
   showStatsCount = true,
 }: UseFieldStatsOptions = {}): UseFieldStatsReturn {
   const [fieldStats, setFieldStats] = useState<FieldStats[]>([]);

@@ -3,7 +3,7 @@
  * 責務: 統計数の表示・フォーマットのみ
  */
 
-import { FieldStats } from "@/hooks/estat-api/useFieldStats";
+import { FieldStats } from "@/hooks/estat-api/useEstatAPIFieldStats";
 
 interface FieldStatsDisplayProps {
   stats: FieldStats | undefined;

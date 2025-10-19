@@ -13,3 +13,6 @@ export { StatsFieldNavigation } from "./StatsFieldNavigation";
 
 // 検索タブコンポーネント
 export { StatsListSearchTabs } from "./StatsListSearchTabs";
+
+// 統計表検索コンポーネント
+export { StatsListSearch } from "./StatsListSearch";
