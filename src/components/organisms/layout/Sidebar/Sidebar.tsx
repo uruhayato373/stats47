@@ -3,11 +3,14 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import categoriesData from "@/config/categories.json";
+import { getCategoriesForSidebar } from "@/lib/category";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 export default function Sidebar() {
   const pathname = usePathname();
+
+  // カテゴリデータをメモ化
+  const categories = useMemo(() => getCategoriesForSidebar(), []);
 
   // ナビゲーションアイテムをメモ化
   const navigationItems = useMemo(
@@ -222,10 +225,10 @@ export default function Sidebar() {
         <div className={sectionStyles.container}>
           <span className={sectionStyles.title}>統計カテゴリー</span>
           <ul className={sectionStyles.list}>
-            {categoriesData.map((category) => {
+            {categories.map((category) => {
               const isActive =
-                pathname === `/${category.id}` ||
-                pathname?.startsWith(`/${category.id}/`);
+                pathname === category.href ||
+                pathname?.startsWith(`${category.href}/`);
 
               return (
                 <li key={category.id}>
@@ -235,7 +238,7 @@ export default function Sidebar() {
                         ? sectionStyles.link.active
                         : sectionStyles.link.inactive
                     }
-                    href={`/${category.id}`}
+                    href={category.href}
                   >
                     <CategoryIcon
                       iconName={category.icon}

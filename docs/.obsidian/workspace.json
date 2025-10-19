@@ -284,6 +284,8 @@
   },
   "active": "be4c8c285d972583",
   "lastOpenFiles": [
+    "02_domain/category/implementation/navigation.md",
+    "02_domain/components/sidebar-refactoring.md",
     "02_domain/estat-api/implementation/useswr-optimization.md",
     "02_domain/estat-api/implementation",
     "issues/estat-search-parameter-investigation.md",
@@ -315,8 +317,6 @@
     "01_development_guide/type-definitions-guide.md",
     "02_domain/estat-api/meta-info/implementation/r2-s3-setup-guide.md",
     "02_domain/estat-api/meta-info/implementation/public-development-url-setup.md",
-    "00_project_overview/comprehensive-design-specification.md",
-    "05_resources/sns-image-sizes.md",
     "02_domain/estat-api/shared/implementation",
     "02_domain/estat-api/shared",
     "02_domain/estat-api/stats-list/testing",

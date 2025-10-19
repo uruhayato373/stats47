@@ -48,3 +48,10 @@ export const existsCategory =
   CategoryService.existsCategory.bind(CategoryService);
 export const existsSubcategory =
   CategoryService.existsSubcategory.bind(CategoryService);
+
+// ナビゲーション用関数のエクスポート
+export {
+  getNavigationCategories,
+  getCategoriesForSidebar,
+  type SidebarCategoryItem,
+} from "./navigation";

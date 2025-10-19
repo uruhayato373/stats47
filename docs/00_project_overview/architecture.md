@@ -1647,6 +1647,74 @@ const SearchableDataTable = ({ data }) => {
 };
 ```
 
+#### 5. 責務の分離とドメインサービスの活用
+
+コンポーネントの責務を明確に分離し、ドメインサービスを活用してデータ管理を統一する。
+
+```typescript
+// ❌ 悪い例: コンポーネント内でデータ管理
+const Sidebar = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // 直接JSONファイルを読み込み
+    import("@/config/categories.json").then((data) => {
+      setCategories(data.default);
+    });
+  }, []);
+
+  // UI表示とデータ管理が混在
+  return (
+    <nav>
+      {categories.map((category) => (
+        <Link key={category.id} href={`/${category.id}`}>
+          {category.name}
+        </Link>
+      ))}
+    </nav>
+  );
+};
+
+// ✅ 良い例: 責務を分離
+// lib/category/navigation.ts（ナビゲーション変換）
+export function getCategoriesForSidebar(): SidebarCategoryItem[] {
+  const categories = CategoryService.getAllCategories({
+    field: "displayOrder",
+    order: "asc",
+  });
+
+  return categories.map((category) => ({
+    id: category.id,
+    name: category.name,
+    icon: category.icon,
+    color: category.color,
+    href: `/${category.id}`,
+  }));
+}
+
+// components/Sidebar/Sidebar.tsx（純粋なUI表示）
+const Sidebar = () => {
+  const categories = useMemo(() => getCategoriesForSidebar(), []);
+
+  return (
+    <nav>
+      {categories.map((category) => (
+        <Link key={category.id} href={category.href}>
+          <CategoryIcon iconName={category.icon} />
+          {category.name}
+        </Link>
+      ))}
+    </nav>
+  );
+};
+```
+
+**責務の分離:**
+
+- **データ管理**: `CategoryService`が担当
+- **ナビゲーション変換**: `navigation.ts`が担当
+- **UI 表示**: `Sidebar.tsx`が担当
+
 ### テスト戦略
 
 #### 1. ユニットテスト

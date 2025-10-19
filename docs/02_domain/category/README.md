@@ -24,6 +24,7 @@ tags:
 ### 🚀 実装ガイド (implementation/)
 
 - [はじめに](./implementation/getting-started.md) - 基本的な使用方法とセットアップ
+- [ナビゲーション機能](./implementation/navigation.md) - ナビゲーション用の便利関数
 - [ベストプラクティス](./implementation/best-practices.md) - 推奨される実装パターン
 - [使用例](./implementation/examples.md) - 具体的な実装例
 
@@ -65,7 +66,19 @@ const filtered = CategoryService.getAllCategories({
 });
 ```
 
-### 3. バリデーション
+### 3. ナビゲーション機能
+
+```typescript
+import { getCategoriesForSidebar } from "@/lib/category";
+
+// サイドバー用のカテゴリデータを取得
+const categories = getCategoriesForSidebar();
+
+// ナビゲーション表示用のカテゴリ一覧を取得
+const navigationCategories = getNavigationCategories();
+```
+
+### 4. バリデーション
 
 ```typescript
 // カテゴリIDのバリデーション
@@ -82,6 +95,13 @@ if (!validation.isValid) {
 - カテゴリ・サブカテゴリの取得
 - ID による検索
 - 階層構造の管理
+
+### 🧭 ナビゲーション機能
+
+- サイドバー用データの取得
+- ナビゲーション表示用データの取得
+- 表示順序でのソート
+- サブカテゴリ情報の変換
 
 ### 🔍 検索・フィルタリング
 

@@ -1,7 +1,7 @@
 ---
 title: ドキュメントインデックス
 created: 2024-10-14
-updated: 2025-10-17
+updated: 2025-01-17
 tags:
   - stats47
   - index
@@ -123,6 +123,13 @@ tags:
 - [specifications/api-specification.md](./02_domain/category/specifications/api-specification.md) - カテゴリ API 仕様
 - [specifications/data-structure.md](./02_domain/category/specifications/data-structure.md) - カテゴリデータ構造
 - [implementation/getting-started.md](./02_domain/category/implementation/getting-started.md) - カテゴリ管理実装ガイド
+- [implementation/navigation.md](./02_domain/category/implementation/navigation.md) - ナビゲーション機能
+
+#### コンポーネントドメイン (components)
+
+UI コンポーネントの設計と実装
+
+- [sidebar-refactoring.md](./02_domain/components/sidebar-refactoring.md) - Sidebar CategoryService 統合リファクタリング
 
 #### ダッシュボードドメイン (dashboard)
 
