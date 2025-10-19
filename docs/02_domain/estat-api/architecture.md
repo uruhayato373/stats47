@@ -21,9 +21,8 @@ e-Stat API ドメインのアーキテクチャ設計について説明します
 ┌─────────────────────────────────────┐
 │   Application Layer                 │
 │   (API Routes, Handlers)            │
-│   - /api/stats/*                    │
-│   - /api/rankings/*                  │
-│   - /api/metainfo/*                 │
+│   - /api/estat-api/stats-data       │
+│   - /api/estat-api/meta-info/*      │
 └───────────┬─────────────────────────┘
             │
 ┌───────────▼─────────────────────────┐
@@ -31,7 +30,6 @@ e-Stat API ドメインのアーキテクチャ設計について説明します
 │   - EstatStatsDataService           │
 │   - EstatStatsListService           │
 │   - EstatMetaInfoService            │
-│   - RankingDataService              │
 └───────────┬─────────────────────────┘
             │
 ┌───────────▼─────────────────────────┐
@@ -55,6 +53,11 @@ e-Stat API ドメインのアーキテクチャ設計について説明します
 
 - **責務**: HTTP リクエストの受信とレスポンスの生成
 - **コンポーネント**: Next.js API Routes
+- **主要エンドポイント**:
+  - `/api/estat-api/stats-data` - 統計データ取得
+  - `/api/estat-api/meta-info/[statsDataId]` - メタ情報取得
+  - `/api/estat-api/meta-info/save` - メタ情報保存
+  - `/api/estat-api/meta-info/saved` - 保存済みメタ情報取得
 - **特徴**:
   - リクエストバリデーション
   - 認証・認可
@@ -132,29 +135,6 @@ graph TD
     B --> M[HTTP Response]
 ```
 
-### 3. ランキングデータ取得フロー（R2 ハイブリッド）
-
-```mermaid
-graph TD
-    A[Client Request] --> B[API Route]
-    B --> C[RankingDataService]
-    C --> D{R2 Cache Check}
-    D -->|Hit| E[Cached Data]
-    D -->|Miss| F[EstatStatsDataService]
-    F --> G[EstatApiClient]
-    G --> H[e-Stat API]
-    H --> I[Raw Data]
-    I --> G
-    G --> F
-    F --> J[Data Formatter]
-    J --> K[Unified Format]
-    K --> C
-    C --> L[Save to R2]
-    L --> E
-    E --> B
-    B --> M[HTTP Response]
-```
-
 ## サービスクラス設計
 
 ### EstatStatsDataService
@@ -199,73 +179,15 @@ class EstatMetaInfoService {
 
   // パブリックメソッド
   async processAndSaveMetaInfo(statsDataId: string): Promise<ProcessResult>;
-
   async getSavedMetadataByStatsId(
     statsDataId: string
   ): Promise<SavedMetadata[]>;
-
   async searchMetadata(query: SearchQuery): Promise<SearchResult[]>;
-
   async getMetadataSummary(statsDataId: string): Promise<MetadataSummary>;
-
-  // プライベートメソッド
-  private async transformToCSVFormat(
-    rawMetaInfo: RawMetaInfo
-  ): Promise<CSVFormatData[]>;
-
-  private async saveTransformedData(
-    data: CSVFormatData[],
-    statsDataId: string
-  ): Promise<void>;
-
-  private async processBatch(
-    batch: CSVFormatData[],
-    statsDataId: string
-  ): Promise<void>;
-
-  private async findRankingKey(
-    statsDataId: string,
-    cat01: string
-  ): Promise<string | null>;
 }
 ```
 
-### RankingDataService
-
-```typescript
-class RankingDataService {
-  constructor(private db: D1Database, private r2Service: R2Service) {}
-
-  // パブリックメソッド
-  async getRankingData(
-    rankingKey: string,
-    timeCode: string,
-    level: TargetAreaLevel,
-    parentCode?: string
-  ): Promise<UnifiedRankingData | null>;
-
-  async saveRankingData(
-    data: UnifiedRankingData,
-    level: TargetAreaLevel,
-    parentCode?: string
-  ): Promise<void>;
-
-  // プライベートメソッド
-  private async getCachedData(
-    rankingKey: string,
-    timeCode: string,
-    level: TargetAreaLevel,
-    parentCode?: string
-  ): Promise<UnifiedRankingData | null>;
-
-  private async fetchFromAdapter(
-    rankingKey: string,
-    timeCode: string,
-    level: TargetAreaLevel,
-    parentCode?: string
-  ): Promise<UnifiedRankingData>;
-}
-```
+> **詳細な実装**: データベース操作の詳細は[データベース仕様書](./database-specification.md)を参照してください。
 
 ## 依存関係
 
@@ -281,12 +203,6 @@ EstatMetaInfoService
 ├── @/services/estat-api (EstatApiClient)
 ├── @/lib/estat/types (型定義)
 └── D1Database (Cloudflare D1)
-
-RankingDataService
-├── EstatStatsDataService
-├── R2Service
-├── D1Database
-└── @/lib/estat/types (型定義)
 ```
 
 ### 外部依存関係
@@ -302,11 +218,6 @@ Cloudflare D1 Database
 ├── テーブル: estat_metainfo
 ├── 用途: メタ情報の永続化
 └── 特徴: サーバーレスSQL
-
-Cloudflare R2 Storage
-├── バケット: ranking-data
-├── 用途: ランキングデータのキャッシュ
-└── 特徴: オブジェクトストレージ
 ```
 
 ## 設計パターン
@@ -324,20 +235,11 @@ interface MetadataRepository {
 
 class D1MetadataRepository implements MetadataRepository {
   constructor(private db: D1Database) {}
-
-  async save(metadata: Metadata[]): Promise<void> {
-    // D1Database実装
-  }
-
-  async findByStatsId(statsDataId: string): Promise<Metadata[]> {
-    // D1Database実装
-  }
-
-  async search(query: SearchQuery): Promise<Metadata[]> {
-    // D1Database実装
-  }
+  // 実装はデータベース仕様書を参照
 }
 ```
+
+> **詳細な実装**: Repository Pattern の詳細は[データベース仕様書](./database-specification.md)を参照してください。
 
 ### 2. Adapter Pattern
 
@@ -446,16 +348,6 @@ class ErrorHandler {
       };
     }
 
-    if (error instanceof DatabaseError) {
-      return {
-        level: ErrorLevel.CRITICAL,
-        code: "DATABASE_ERROR",
-        message: "Database operation failed",
-        details: { context, originalError: error.message },
-        timestamp: new Date(),
-      };
-    }
-
     return {
       level: ErrorLevel.ERROR,
       code: "UNKNOWN_ERROR",
@@ -466,6 +358,8 @@ class ErrorHandler {
   }
 }
 ```
+
+> **データベースエラーハンドリング**: データベース関連のエラーハンドリングは[データベース仕様書](./database-specification.md)を参照してください。
 
 ## パフォーマンス最適化
 
@@ -718,6 +612,7 @@ class ConfigManager {
 
 ## 関連ドキュメント
 
+- [e-Stat API データベース仕様](./database-specification.md) - データベース設計と実装詳細
 - [API エンドポイント一覧](02-api-endpoints.md) - エンドポイント仕様とパラメータ
 - [型システム](02-type-system.md) - 型定義の詳細
 - [API 仕様詳細](apis/) - 各エンドポイントの詳細仕様
