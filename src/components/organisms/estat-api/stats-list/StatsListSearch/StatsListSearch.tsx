@@ -3,6 +3,13 @@
 import { useState, useEffect } from "react";
 import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
 import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
+import { InputField } from "@/components/atoms/InputField";
+import Select from "@/components/atoms/Select/Select";
+import {
+  STATS_FIELD_OPTIONS,
+  COLLECT_AREA_OPTIONS,
+  LIMIT_OPTIONS,
+} from "@/lib/estat-api/constants/search-options";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;
@@ -59,7 +66,7 @@ export function StatsListSearch({
     : null;
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div>
       <div className="mb-4">
         <h2 className="text-xl font-bold mb-2">統計表検索</h2>
         {selectedFieldName && (
@@ -73,137 +80,78 @@ export function StatsListSearch({
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* キーワード検索 */}
-          <div>
-            <label
-              htmlFor="searchWord"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              キーワード
-            </label>
-            <input
-              type="text"
-              id="searchWord"
-              value={searchWord}
-              onChange={(e) => setSearchWord(e.target.value)}
-              placeholder="例: 人口、就業構造"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          <InputField
+            name="searchWord"
+            label="キーワード"
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+            placeholder="例: 人口、就業構造"
+            size="md"
+            rounded="md"
+          />
 
           {/* 政府統計コード */}
-          <div>
-            <label
-              htmlFor="statsCode"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              政府統計コード
-            </label>
-            <input
-              type="text"
-              id="statsCode"
-              value={statsCode}
-              onChange={(e) => setStatsCode(e.target.value)}
-              placeholder="例: 00200522"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          <InputField
+            name="statsCode"
+            label="政府統計コード"
+            value={statsCode}
+            onChange={(e) => setStatsCode(e.target.value)}
+            placeholder="例: 00200522"
+            size="md"
+            rounded="md"
+          />
 
           {/* 分野コード */}
-          <div>
-            <label
-              htmlFor="statsField"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              分野コード
-            </label>
-            <select
-              id="statsField"
-              value={statsField}
-              onChange={(e) => setStatsField(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">選択してください</option>
-              <option value="01">国土・気象</option>
-              <option value="02">人口・世帯</option>
-              <option value="03">労働・賃金</option>
-              <option value="04">事業所</option>
-              <option value="05">農林水産業</option>
-              <option value="06">鉱工業</option>
-              <option value="07">商業・サービス業</option>
-              <option value="08">企業・家計・経済</option>
-              <option value="09">住宅・土地・建設</option>
-              <option value="10">エネルギー・水</option>
-              <option value="11">運輸・観光</option>
-              <option value="12">情報通信・科学技術</option>
-              <option value="13">教育・文化・スポーツ・生活</option>
-              <option value="14">行財政</option>
-              <option value="15">司法・安全・環境</option>
-              <option value="16">社会保障・衛生</option>
-              <option value="17">国際</option>
-            </select>
-          </div>
+          <Select
+            name="statsField"
+            label="分野コード"
+            options={STATS_FIELD_OPTIONS}
+            value={statsField}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setStatsField(e.target.value)
+            }
+            size="md"
+            rounded="md"
+          />
 
           {/* 集計地域区分 */}
-          <div>
-            <label
-              htmlFor="collectArea"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              集計地域区分
-            </label>
-            <select
-              id="collectArea"
-              value={collectArea}
-              onChange={(e) =>
-                setCollectArea(e.target.value as "1" | "2" | "3" | "")
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">すべて</option>
-              <option value="1">全国</option>
-              <option value="2">都道府県</option>
-              <option value="3">市区町村</option>
-            </select>
-          </div>
+          <Select
+            name="collectArea"
+            label="集計地域区分"
+            options={COLLECT_AREA_OPTIONS}
+            value={collectArea}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setCollectArea(e.target.value as "1" | "2" | "3" | "")
+            }
+            size="md"
+            rounded="md"
+          />
 
           {/* 調査年月 */}
-          <div>
-            <label
-              htmlFor="surveyYears"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              調査年月
-            </label>
-            <input
-              type="text"
-              id="surveyYears"
-              value={surveyYears}
-              onChange={(e) => setSurveyYears(e.target.value)}
-              placeholder="例: 202001-202312"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          <InputField
+            name="surveyYears"
+            label="調査年月"
+            value={surveyYears}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSurveyYears(e.target.value)
+            }
+            placeholder="例: 202001-202312"
+            size="md"
+            rounded="md"
+          />
 
           {/* 取得件数 */}
-          <div>
-            <label
-              htmlFor="limit"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              取得件数
-            </label>
-            <select
-              id="limit"
-              value={limit}
-              onChange={(e) => setLimit(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value={50}>50件</option>
-              <option value={100}>100件</option>
-              <option value={500}>500件</option>
-              <option value={1000}>1000件</option>
-            </select>
-          </div>
+          <Select
+            name="limit"
+            label="取得件数"
+            options={LIMIT_OPTIONS}
+            value={limit.toString()}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setLimit(Number(e.target.value))
+            }
+            size="md"
+            rounded="md"
+          />
         </div>
 
         {/* ボタン */}

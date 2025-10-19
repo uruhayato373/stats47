@@ -43,8 +43,6 @@ export function useEstatAPIFieldStats({
   useEffect(() => {
     if (!showStatsCount) return;
 
-    console.log("useEstatAPIFieldStats - 統計数取得開始");
-
     const fetchFieldStats = async () => {
       setIsLoading(true);
 
@@ -62,26 +60,11 @@ export function useEstatAPIFieldStats({
               isLoading: false,
             };
           } catch (error) {
-            console.log(`分野 ${fieldCode} のエラー詳細:`, error);
-            console.log(`エラータイプ:`, typeof error);
-            console.log(
-              `EstatStatsListErrorのインスタンスか:`,
-              error instanceof EstatStatsListError
-            );
-
-            // エラーのプロパティを確認
-            if (error && typeof error === "object") {
-              console.log(`エラーのプロパティ:`, Object.keys(error));
-              console.log(`エラーのtypeプロパティ:`, (error as any).type);
-              console.log(`エラーのmessageプロパティ:`, (error as any).message);
-            }
-
             // NO_DATA_FOUNDエラーの場合は正常なケースとして扱う
             if (
               error instanceof EstatStatsListError &&
               error.type === EstatErrorType.NO_DATA_FOUND
             ) {
-              console.log(`分野 ${fieldCode}: データなし（正常）`);
               return {
                 fieldCode: fieldCode as StatsFieldCode,
                 count: 0,
@@ -96,7 +79,6 @@ export function useEstatAPIFieldStats({
                 errorMessage &&
                 errorMessage.includes("該当データはありませんでした")
               ) {
-                console.log(`分野 ${fieldCode}: データなし（メッセージ判定）`);
                 return {
                   fieldCode: fieldCode as StatsFieldCode,
                   count: 0,
@@ -115,7 +97,6 @@ export function useEstatAPIFieldStats({
         });
 
         const results = await Promise.all(promises);
-        console.log("useEstatAPIFieldStats - 取得結果:", results);
         setFieldStats(results);
       } catch (error) {
         console.error("分野統計数取得エラー:", error);

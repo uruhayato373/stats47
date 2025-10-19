@@ -55,10 +55,6 @@ export function StatsFieldSidebar({
       showStatsCount: true,
     });
 
-  // デバッグ用ログ
-  console.log("StatsFieldSidebar - fieldStats:", fieldStats);
-  console.log("StatsFieldSidebar - isLoading:", isLoading);
-
   // ===== レンダリング =====
 
   return (
