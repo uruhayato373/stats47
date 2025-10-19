@@ -13,7 +13,7 @@ import {
 import {
   StatsListSearchResult,
   StatsListTableInfo,
-  AdvancedStatsListSearchOptions,
+  StatsListSearchOptions,
 } from "@/lib/estat-api/types/stats-list";
 
 /**
@@ -21,7 +21,7 @@ import {
  */
 interface SearchHistoryItem {
   id: string;
-  options: AdvancedStatsListSearchOptions;
+  options: StatsListSearchOptions;
   timestamp: number;
   resultCount: number;
 }
@@ -77,7 +77,7 @@ export function useStatsListSearch() {
    * 検索実行
    */
   const search = useCallback(
-    async (options: AdvancedStatsListSearchOptions) => {
+    async (options: StatsListSearchOptions) => {
       setIsLoading(true);
       setError(null);
       setSearchResult(null);
@@ -296,7 +296,7 @@ export function useStatsListSearch() {
    * 統計名リスト取得
    */
   const fetchStatsNameList = useCallback(
-    async (options: AdvancedStatsListSearchOptions = {}) => {
+    async (options: StatsListSearchOptions = {}) => {
       setIsLoading(true);
       setError(null);
 
@@ -324,7 +324,7 @@ export function useStatsListSearch() {
    * 更新された統計取得
    */
   const fetchUpdatedStats = useCallback(
-    async (since: string, options: AdvancedStatsListSearchOptions = {}) => {
+    async (since: string, options: StatsListSearchOptions = {}) => {
       setIsLoading(true);
       setError(null);
 

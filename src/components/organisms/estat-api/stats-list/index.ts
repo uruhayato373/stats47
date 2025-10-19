@@ -2,9 +2,6 @@
  * e-Stat統計表リスト関連コンポーネントのエクスポート
  */
 
-// 高度な検索コンポーネント
-export { AdvancedStatsListSearch } from "./AdvancedStatsListSearch";
-
 // 検索結果表示コンポーネント
 export { StatsListResults } from "./StatsListResults";
 

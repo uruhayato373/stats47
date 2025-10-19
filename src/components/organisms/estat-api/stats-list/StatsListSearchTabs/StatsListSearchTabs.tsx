@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Filter, Search, SlidersHorizontal } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import {
   TabNavigation,
   type TabItem,
 } from "@/components/molecules/TabNavigation";
 import { StatsListSearch } from "@/components/molecules/StatsListSearch";
-import { AdvancedStatsListSearch } from "../AdvancedStatsListSearch";
-import { StatsFieldNavigation } from "../StatsFieldNavigation";
+import { StatsFieldNavigation } from "../StatsFieldNavigation/StatsFieldNavigation";
 import {
   StatsListSearchOptions,
-  AdvancedStatsListSearchOptions,
   StatsFieldCode,
 } from "@/lib/estat-api/types/stats-list";
 
@@ -21,8 +19,6 @@ import {
 interface StatsListSearchTabsProps {
   /** シンプル検索の実行コールバック */
   onSimpleSearch: (options: StatsListSearchOptions) => void;
-  /** 高度検索の実行コールバック */
-  onAdvancedSearch: (options: AdvancedStatsListSearchOptions) => void;
   /** 統計分野選択のコールバック */
   onFieldSelect: (fieldCode: StatsFieldCode) => void;
   /** 選択された統計分野コード */
@@ -30,19 +26,18 @@ interface StatsListSearchTabsProps {
   /** ローディング状態 */
   isLoading?: boolean;
   /** デフォルトのタブ（デフォルト: "field"） */
-  defaultTab?: "field" | "simple" | "advanced";
+  defaultTab?: "field" | "simple";
 }
 
 /**
  * StatsListSearchTabs - 統計表検索タブコンポーネント
  *
  * 機能:
- * - 3つの検索モード（分野別、シンプル、高度）をタブで切り替え
+ * - 2つの検索モード（分野別、シンプル）をタブで切り替え
  * - 各タブに応じた適切な検索フォームを表示
  * - タブナビゲーションによる直感的な操作
  *
  * @param onSimpleSearch - シンプル検索の実行コールバック
- * @param onAdvancedSearch - 高度検索の実行コールバック
  * @param onFieldSelect - 統計分野選択のコールバック
  * @param selectedField - 選択された統計分野コード
  * @param isLoading - ローディング状態
@@ -50,7 +45,6 @@ interface StatsListSearchTabsProps {
  */
 export default function StatsListSearchTabs({
   onSimpleSearch,
-  onAdvancedSearch,
   onFieldSelect,
   selectedField,
   isLoading = false,
@@ -74,11 +68,6 @@ export default function StatsListSearchTabs({
       id: "simple",
       label: "シンプル",
       icon: Search,
-    },
-    {
-      id: "advanced",
-      label: "高度検索",
-      icon: SlidersHorizontal,
     },
   ];
 
@@ -124,18 +113,6 @@ export default function StatsListSearchTabs({
               シンプル検索
             </h3>
             <StatsListSearch onSearch={onSimpleSearch} isLoading={isLoading} />
-          </div>
-        )}
-
-        {activeTab === "advanced" && (
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              高度検索
-            </h3>
-            <AdvancedStatsListSearch
-              onSearch={onAdvancedSearch}
-              isLoading={isLoading}
-            />
           </div>
         )}
       </div>
