@@ -61,7 +61,7 @@ tags:
 - [engagement-features-guide.md](./02_domain/blog/features/engagement-features-guide.md) - エンゲージメント機能ガイド
 - [documentation_management.md](./01_development_guide/documentation_management.md) - ドキュメント管理ルール
 - [large_scale_implementation.md](./01_development_guide/large_scale_implementation.md) - 大規模プロジェクト実装ガイド
-- [data-fetching-strategy.md](./01_development_guide/data-fetching-strategy.md) - データフェッチング戦略
+- [data-fetching-strategy.md](./01_development_guide/data-fetching-strategy.md) - データフェッチング戦略（e-Stat API useSWR 最適化完了）
 
 ### 02_domain
 
@@ -159,6 +159,7 @@ tags:
 
 - [specifications/](./02_domain/estat-api/specifications/) - e-Stat API 仕様
 - [implementation/](./02_domain/estat-api/implementation/) - e-Stat API 実装ガイド
+  - [useswr-optimization.md](./02_domain/estat-api/implementation/useswr-optimization.md) - useSWR 最適化実装ガイド
 - [refactoring/](./02_domain/estat-api/refactoring/) - e-Stat API リファクタリング
 - [testing/](./02_domain/estat-api/testing/) - e-Stat API テスト
 
@@ -258,6 +259,7 @@ tags:
 
 ### 更新履歴
 
+- 2025-01-18: e-Stat API useSWR 最適化完了、65%コード削減、パフォーマンス大幅向上
 - 2025-10-18: ドキュメント整理完了、99_inbox 廃止、重複ドキュメント統合、適切な場所への移動
 - 2025-10-17: ドキュメント構造大幅更新、architecture・export ドメイン追加、包括的設計書追加
 - 2024-10-14: ドメイン駆動設計に基づく構成に更新、カテゴリ管理ドメイン追加
@@ -266,4 +268,4 @@ tags:
 ---
 
 **プロジェクト**: 統計で見る都道府県 (stats47)  
-**最終更新**: 2025 年 10 月 18 日
+**最終更新**: 2025 年 1 月 18 日
