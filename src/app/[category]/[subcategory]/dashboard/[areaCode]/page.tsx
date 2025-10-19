@@ -1,7 +1,5 @@
 import React from "react";
-import { notFound } from "next/navigation";
-import { getSubcategoryById } from "@/lib/category";
-// import { getDashboardComponentByArea } from "@/components/subcategories";
+import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
 
 /**
  * ダッシュボードページのProps型定義
@@ -57,18 +55,8 @@ export default async function DashboardPage({ params }: PageProps) {
     areaCode,
   } = await params;
 
-  // カテゴリとサブカテゴリの存在確認
-  // 指定されたサブカテゴリIDが存在するかチェック
-  const subcategoryData = getSubcategoryById(subcategoryId);
-
-  // カテゴリIDとサブカテゴリIDの整合性チェック
-  // サブカテゴリが存在しない、または指定されたカテゴリに属していない場合は404を返す
-  if (!subcategoryData || subcategoryData.category.id !== categoryId) {
-    notFound();
-  }
-
-  // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
-  const { category, subcategory } = subcategoryData;
+  // サブカテゴリのバリデーション（無効な場合は404エラーを発生）
+  validateSubcategoryOrThrow(categoryId, subcategoryId);
 
   // ダッシュボードコンポーネントを動的に取得
   // categories.jsonの設定に基づいて適切なコンポーネントを選択

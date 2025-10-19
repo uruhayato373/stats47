@@ -1,0 +1,1 @@
+export { CategoryPageHeader } from "./CategoryPageHeader";

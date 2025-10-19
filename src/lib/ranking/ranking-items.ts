@@ -30,7 +30,8 @@ export async function fetchRankingItemsBySubcategory(
 ): Promise<RankingConfigResponse | null> {
   try {
     // APIエンドポイントを呼び出してデータベースから取得
-    const url = `/api/rankings/items/subcategory/${encodeURIComponent(
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/api/rankings/items/subcategory/${encodeURIComponent(
       subcategoryId
     )}`;
 
@@ -84,7 +85,8 @@ export async function updateVisualizationSettings(
   }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const url = `/api/ranking-items/${itemId}/visualization`;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/api/ranking-items/${itemId}/visualization`;
 
     const response = await fetch(url, {
       method: "PATCH",

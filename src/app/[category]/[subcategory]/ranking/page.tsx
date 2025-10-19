@@ -1,6 +1,7 @@
 import React from "react";
-import { notFound, redirect } from "next/navigation";
-import { getSubcategoryById } from "@/lib/category";
+import { redirect } from "next/navigation";
+import { RankingService } from "@/lib/ranking/ranking-service";
+import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
 import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
 
 /**
@@ -53,66 +54,31 @@ export default async function RankingPage({ params }: PageProps) {
   // 動的ルートパラメータを取得
   const { category: categoryId, subcategory: subcategoryId } = await params;
 
-  // カテゴリとサブカテゴリの存在確認
-  // 指定されたサブカテゴリIDが存在するかチェック
-  const subcategoryData = getSubcategoryById(subcategoryId);
+  // サブカテゴリのバリデーション（無効な場合は404エラーを発生）
+  const subcategoryData = validateSubcategoryOrThrow(categoryId, subcategoryId);
 
-  // カテゴリIDとサブカテゴリIDの整合性チェック
-  // サブカテゴリが存在しない、または指定されたカテゴリに属していない場合は404を返す
-  if (!subcategoryData || subcategoryData.category.id !== categoryId) {
-    notFound();
-  }
+  // デフォルトランキングキーを取得
+  const defaultRankingKey = await RankingService.getDefaultRankingKey(
+    subcategoryId
+  );
 
-  // 全サブカテゴリでデフォルトランキングキーにリダイレクト
-  // データベースからデフォルトランキングキーを取得
-  let defaultRankingKey: string | null = null;
-
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const url = `${baseUrl}/api/ranking-items/${encodeURIComponent(
-      subcategoryId
-    )}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      const config = (await response.json()) as {
-        subcategory: { defaultRankingKey: string };
-      };
-      defaultRankingKey = config.subcategory.defaultRankingKey;
-    }
-  } catch (error) {
-    console.warn(
-      `デフォルトランキングキーの取得に失敗しました (${subcategoryId}):`,
-      error
-    );
-  }
-
-  // redirect()はエラーをthrowするため、try-catchの外で実行
+  // デフォルトランキングキーが存在する場合はリダイレクト
   if (defaultRankingKey) {
     redirect(`/${categoryId}/${subcategoryId}/ranking/${defaultRankingKey}`);
   }
-
-  // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
-  const { category, subcategory } = subcategoryData;
 
   // サブカテゴリランキングページコンポーネントをレンダリング
   // CategoryDataとの型互換性のため必須フィールドにデフォルト値を設定
   return (
     <SubcategoryRankingPage
       category={{
-        ...category,
-        description: category.description || "",
-        icon: category.icon || "",
-        displayOrder: category.displayOrder || 0,
-        subcategories: category.subcategories || [],
+        ...subcategoryData.category,
+        description: subcategoryData.category.description || "",
+        icon: subcategoryData.category.icon || "",
+        displayOrder: subcategoryData.category.displayOrder || 0,
+        subcategories: (subcategoryData.category.subcategories || []) as any,
       }}
-      subcategory={subcategory}
+      subcategory={subcategoryData.subcategory as any}
     />
   );
 }

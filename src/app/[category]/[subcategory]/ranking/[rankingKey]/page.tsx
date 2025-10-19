@@ -1,7 +1,6 @@
 import React from "react";
-import { notFound } from "next/navigation";
-// import { cookies } from "next/headers";
-import { getSubcategoryById } from "@/lib/category";
+import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
+import { normalizeCategoryData } from "@/lib/category/category-normalizer";
 import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
 
 /**
@@ -52,30 +51,20 @@ export default async function RankingItemPage({ params }: PageProps) {
     rankingKey,
   } = await params;
 
-  // カテゴリとサブカテゴリの存在確認
-  const subcategoryData = getSubcategoryById(subcategoryId);
+  // サブカテゴリのバリデーション（無効な場合は404エラーを発生）
+  const subcategoryData = validateSubcategoryOrThrow(categoryId, subcategoryId);
 
-  // カテゴリIDとサブカテゴリIDの整合性チェック
-  if (!subcategoryData || subcategoryData.category.id !== categoryId) {
-    notFound();
-  }
-
-  // サブカテゴリデータからカテゴリとサブカテゴリ情報を取得
-  const { category, subcategory } = subcategoryData;
+  // カテゴリデータを正規化
+  const normalizedCategory = normalizeCategoryData(
+    subcategoryData.category as any
+  );
 
   // サブカテゴリランキングページコンポーネントをレンダリング
   // rankingKeyをpropsとして渡す
-  // CategoryDataとの型互換性のため必須フィールドにデフォルト値を設定
   return (
     <SubcategoryRankingPage
-      category={{
-        ...category,
-        description: category.description || "",
-        icon: category.icon || "",
-        displayOrder: category.displayOrder || 0,
-        subcategories: category.subcategories || [],
-      }}
-      subcategory={subcategory}
+      category={normalizedCategory as any}
+      subcategory={subcategoryData.subcategory as any}
       rankingKey={rankingKey}
     />
   );

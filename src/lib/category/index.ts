@@ -55,3 +55,25 @@ export {
   getCategoriesForSidebar,
   type SidebarCategoryItem,
 } from "./navigation";
+
+// カラーマッピングのエクスポート
+export {
+  categoryColorMap,
+  getCategoryColorClasses,
+  type CategoryColorClasses,
+} from "./color-mapping";
+
+// データ正規化のエクスポート
+export {
+  normalizeCategoryData,
+  normalizeCategoriesData,
+  validateCategoryData,
+  type NormalizedCategory,
+} from "./category-normalizer";
+
+// サブカテゴリバリデーションのエクスポート
+export {
+  validateSubcategory,
+  validateSubcategoryOrThrow,
+  type SubcategoryValidationResult,
+} from "./subcategory-validator";
