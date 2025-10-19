@@ -25,19 +25,6 @@ export function SavedMetaInfoListItem({
           <div className="text-xs text-gray-700 dark:text-neutral-300 mt-1">
             {item.stat_name}＞{item.title}
           </div>
-          {/* area_type */}
-          <div className="mt-1">
-            <span className="text-blue-600 dark:text-blue-400 font-mono text-xs bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
-              {item.area_type}
-            </span>
-          </div>
-        </div>
-
-        {/* 中央: 更新日時 */}
-        <div className="flex items-center">
-          <span className="text-xs text-gray-500 dark:text-neutral-400">
-            {new Date(item.updated_at).toLocaleDateString()}
-          </span>
         </div>
 
         {/* 右側: 詳細ボタン */}
