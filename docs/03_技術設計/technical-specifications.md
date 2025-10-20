@@ -10,27 +10,6 @@ tags:
 
 # 技術仕様書
 
-## 概要
-
-stats47 プロジェクトの技術アーキテクチャ、設計原則、実装ガイドラインを定義します。
-
-## アーキテクチャ概要
-
-### システム構成
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend       │    │   External      │
-│   (Next.js 15)  │◄──►│   (API Routes)  │◄──►│   (e-Stat API)  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐
-│   State Mgmt    │    │   Database      │
-│   (Jotai)       │    │   (Cloudflare)  │
-└─────────────────┘    └─────────────────┘
-```
 
 ### 技術スタック
 
@@ -157,26 +136,6 @@ export const customAtom = atomWithStorage("custom-key", defaultValue, {
 
 ### RESTful API 原則
 
-#### エンドポイント設計
-
-```
-# ランキング関連
-GET    /api/rankings/items                    # ランキング項目一覧
-POST   /api/rankings/items                    # ランキング項目作成
-GET    /api/rankings/items/{id}               # ランキング項目詳細
-PUT    /api/rankings/items/{id}               # ランキング項目更新
-DELETE /api/rankings/items/{id}               # ランキング項目削除
-PATCH  /api/rankings/items/reorder            # ランキング項目並び替え
-
-GET    /api/rankings/data                     # ランキングデータ取得
-GET    /api/rankings/data/years               # 年度一覧取得
-POST   /api/rankings/data/save                # ランキングデータ保存
-
-# e-Stat API 関連
-GET    /api/estat-api/stats-data              # 統計データ取得
-GET    /api/estat-api/meta-info               # メタ情報取得
-POST   /api/estat-api/meta-info/save          # メタ情報保存
-```
 
 #### レスポンス形式
 
@@ -232,74 +191,9 @@ const ERROR_CODES = {
 
 ### Cloudflare D1 (SQLite) スキーマ
 
-#### 主要テーブル
-
-```sql
--- ランキング項目設定
-CREATE TABLE ranking_items (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  subcategory_id TEXT NOT NULL,
-  ranking_key TEXT UNIQUE NOT NULL,
-  title TEXT NOT NULL,
-  description TEXT,
-  display_order INTEGER NOT NULL,
-  visualization_type TEXT NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- ランキング値データ
-CREATE TABLE ranking_values (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ranking_key TEXT NOT NULL,
-  area_code TEXT NOT NULL,
-  area_name TEXT NOT NULL,
-  value REAL,
-  time_code TEXT NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(ranking_key, area_code, time_code)
-);
-
--- e-Stat メタ情報
-CREATE TABLE estat_metainfo (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  table_id TEXT UNIQUE NOT NULL,
-  title TEXT NOT NULL,
-  description TEXT,
-  source TEXT,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-#### インデックス設計
-
-```sql
--- パフォーマンス最適化
-CREATE INDEX idx_ranking_values_key_time ON ranking_values(ranking_key, time_code);
-CREATE INDEX idx_ranking_values_area ON ranking_values(area_code);
-CREATE INDEX idx_ranking_items_subcategory ON ranking_items(subcategory_id);
-CREATE INDEX idx_estat_metainfo_table_id ON estat_metainfo(table_id);
-```
 
 ### Cloudflare R2 ストレージ
 
-#### データ分離戦略
-
-```
-r2://stats47-data/
-├── ranking-data/
-│   ├── {ranking_key}/
-│   │   ├── {time_code}.json
-│   │   └── metadata.json
-│   └── cache/
-│       └── {hash}.json
-├── estat-data/
-│   ├── raw/
-│   └── processed/
-└── visualizations/
-    └── {ranking_key}/
-        └── {time_code}.png
-```
 
 ## セキュリティ設計
 
@@ -378,83 +272,6 @@ const result = stmt.all(rankingKey, timeCode);
 
 ## パフォーマンス設計
 
-### フロントエンド最適化
-
-#### コード分割
-
-```typescript
-// 動的インポート
-const ChoroplethMap = dynamic(() => import("@/components/d3/ChoroplethMap"), {
-  loading: () => <div>Loading map...</div>,
-  ssr: false,
-});
-
-// 遅延読み込み
-const LazyComponent = lazy(() => import("./LazyComponent"));
-```
-
-#### メモ化
-
-```typescript
-// React.memo による再レンダリング防止
-const ExpensiveComponent = React.memo(({ data }) => {
-  return <div>{/* 重い処理 */}</div>;
-});
-
-// useMemo による計算結果のキャッシュ
-const expensiveValue = useMemo(() => {
-  return heavyCalculation(data);
-}, [data]);
-
-// useCallback による関数のメモ化
-const handleClick = useCallback(() => {
-  // 処理
-}, [dependency]);
-```
-
-### バックエンド最適化
-
-#### キャッシュ戦略
-
-```typescript
-// SWR によるクライアントサイドキャッシュ
-const { data, error } = useSWR(
-  `/api/rankings/data?rankingKey=${key}&timeCode=${time}`,
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    dedupingInterval: 60000, // 1分
-  }
-);
-
-// サーバーサイドキャッシュ
-const cache = new Map();
-const getCachedData = (key: string) => {
-  if (cache.has(key)) {
-    return cache.get(key);
-  }
-  const data = fetchData(key);
-  cache.set(key, data);
-  return data;
-};
-```
-
-#### データベース最適化
-
-```sql
--- 適切なインデックス
-CREATE INDEX idx_ranking_values_composite
-ON ranking_values(ranking_key, time_code, area_code);
-
--- クエリ最適化
-EXPLAIN QUERY PLAN
-SELECT area_name, value
-FROM ranking_values
-WHERE ranking_key = ? AND time_code = ?
-ORDER BY value DESC
-LIMIT 10;
-```
 
 ## 監視・ログ設計
 
@@ -543,59 +360,3 @@ jobs:
           projectName: stats47
 ```
 
-## 品質保証
-
-### テスト戦略
-
-```typescript
-// 単体テスト
-describe("ThemeAtom", () => {
-  it("should toggle theme", () => {
-    const store = createStore();
-    store.set(themeAtom, "light");
-    store.set(toggleThemeAtom, null);
-    expect(store.get(themeAtom)).toBe("dark");
-  });
-});
-
-// 統合テスト
-describe("Ranking API", () => {
-  it("should return ranking data", async () => {
-    const response = await request(app)
-      .get("/api/rankings/data")
-      .query({ rankingKey: "test", timeCode: "2023" });
-
-    expect(response.status).toBe(200);
-    expect(response.body.success).toBe(true);
-  });
-});
-```
-
-### コード品質
-
-```typescript
-// ESLint 設定
-module.exports = {
-  extends: ["next/core-web-vitals", "@typescript-eslint/recommended"],
-  rules: {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/explicit-function-return-type": "warn",
-  },
-};
-
-// Prettier 設定
-module.exports = {
-  semi: true,
-  trailingComma: "es5",
-  singleQuote: false,
-  printWidth: 80,
-  tabWidth: 2,
-};
-```
-
----
-
-**最終更新**: 2025-10-16  
-**バージョン**: 1.0.0  
-**承認者**: 開発チーム  
-**ステータス**: 承認済み
