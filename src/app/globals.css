@@ -28,7 +28,14 @@ html.dark {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 
+    var(--font-geist-sans), 
+    'Hiragino Sans', 
+    'Hiragino Kaku Gothic ProN', 
+    'Yu Gothic', 
+    'YuGothic', 
+    'Meiryo', 
+    sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -65,248 +72,44 @@ html.dark header .bg-white {
 } */
 
 /* ===== サイドバーのスタイル ===== */
-/* ライトモード */
-html.light #sidebar {
-  background-color: #f9fafb;
-  border-color: #e5e7eb;
-}
-
-html.light #sidebar .border-gray-200 {
-  border-color: #e5e7eb;
-}
-
-html.light #sidebar .bg-gray-100 {
-  background-color: #f9fafb;
-}
-
-html.light #sidebar .bg-white {
-  background-color: #ffffff;
-}
-
-html.light #sidebar .text-gray-800 {
-  color: #1f2937;
-}
-
-html.light #sidebar .text-gray-500 {
-  color: #6b7280;
-}
-
-html.light #sidebar .bg-gray-200 {
-  background-color: #e5e7eb;
-}
-
-html.light #sidebar .hover\:bg-gray-200:hover {
-  background-color: #e5e7eb;
-}
-
-html.light #sidebar .hover\:text-gray-800:hover {
-  color: #1f2937;
-}
-
-html.light #sidebar .focus\:bg-gray-200:focus {
-  background-color: #e5e7eb;
-}
-
-html.light #sidebar .focus\:text-gray-800:focus {
-  color: #1f2937;
-}
-
-html.light #sidebar nav {
-  background-color: #f9fafb;
-}
-
-html.light #sidebar button,
-html.light #sidebar a {
-  color: #374151;
-}
-
-html.light #sidebar button:hover,
-html.light #sidebar a:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
-}
-
-/* ダークモード */
-html.dark #sidebar {
-  background-color: #171717;
-  border-color: #404040;
-}
-
-html.dark #sidebar .dark\:bg-neutral-900 {
-  background-color: #171717;
-}
-
-html.dark #sidebar .dark\:border-neutral-700 {
-  border-color: #404040;
-}
-
-html.dark #sidebar .dark\:bg-neutral-800 {
-  background-color: #262626;
-}
-
-html.dark #sidebar .dark\:text-neutral-300 {
-  color: #d4d4d4;
-}
-
-html.dark #sidebar .dark\:text-neutral-200 {
-  color: #e5e7eb;
-}
-
-html.dark #sidebar .dark\:text-neutral-400 {
-  color: #a3a3a3;
-}
-
-html.dark #sidebar .dark\:hover\:bg-neutral-700:hover {
-  background-color: #404040;
-}
-
-html.dark #sidebar .dark\:hover\:text-neutral-300:hover {
-  color: #d4d4d4;
-}
-
-html.dark #sidebar .dark\:focus\:bg-neutral-700:focus {
-  background-color: #404040;
-}
-
-html.dark #sidebar .dark\:focus\:text-neutral-300:focus {
-  color: #d4d4d4;
-}
-
-html.dark #sidebar nav {
-  background-color: #171717;
-}
-
-html.dark #sidebar button,
-html.dark #sidebar a {
-  color: #d1d5db;
-}
-
-html.dark #sidebar button:hover,
-html.dark #sidebar a:hover {
-  background-color: #374151;
-  color: #f9fafb;
-}
+/* サイドバーの基本スタイルはコンポーネント側でdark:プレフィックスを使用 */
 
 /* ===== メインコンテンツ ===== */
-html.light main {
-  background-color: #ffffff;
-}
+/* メインコンテンツのスタイルはコンポーネント側でdark:プレフィックスを使用 */
 
-html.dark main {
-  background-color: #0a0a0a;
-}
+/* ===== 汎用的な色設定 ===== */
+/* 色の設定はコンポーネント側でdark:プレフィックスを使用 */
 
-/* ===== カードスタイル ===== */
-html.dark main .bg-white,
-html.dark .card.bg-white {
-  background-color: #262626;
-}
+/* ===== カスタムコンポーネントクラス ===== */
+@layer components {
+  /* カードベース */
+  .card-base {
+    @apply bg-white rounded-lg shadow-xs border border-gray-200 p-4;
+    @apply dark:bg-neutral-800 dark:border-neutral-700;
+  }
 
-html.light main .bg-white,
-html.light .card.bg-white {
-  background-color: #ffffff;
-}
+  .card-header {
+    @apply text-lg font-medium text-gray-800 mb-3;
+    @apply dark:text-neutral-200;
+  }
 
-/* ===== JSON表示エリア ===== */
-html.light .json-display {
-  background-color: #ffffff;
-  color: #111827;
-}
+  .card-content {
+    @apply text-gray-600;
+    @apply dark:text-neutral-400;
+  }
 
-html.dark .json-display {
-  background-color: #171717;
-  color: #f9fafb;
-}
+  /* ボタン */
+  .btn-primary {
+    @apply px-3 py-2 bg-indigo-500 text-white text-sm font-medium rounded-lg;
+    @apply hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
 
-/* ===== 背景色設定 ===== */
-html.dark .bg-gray-100 {
-  background-color: #404040;
-}
-
-html.light .bg-gray-100 {
-  background-color: #f3f4f6;
-}
-
-html.dark .bg-gray-50 {
-  background-color: #1f2937;
-}
-
-html.light .bg-gray-50 {
-  background-color: #f9fafb;
-}
-
-html.dark .bg-gray-800 {
-  background-color: #1f2937;
-}
-
-html.light .bg-gray-800 {
-  background-color: #1f2937;
-}
-
-/* ===== ボーダー色設定 ===== */
-html.dark .border-gray-200 {
-  border-color: #404040;
-}
-
-html.light .border-gray-200 {
-  border-color: #e5e7eb;
-}
-
-html.dark .border-gray-700 {
-  border-color: #374151;
-}
-
-html.light .border-gray-700 {
-  border-color: #d1d5db;
-}
-
-html.dark .border-gray-500 {
-  border-color: #6b7280;
-}
-
-html.light .border-gray-500 {
-  border-color: #6b7280;
-}
-
-/* ===== テキスト色設定 ===== */
-html.dark .text-gray-900 {
-  color: #f9fafb;
-}
-
-html.light .text-gray-900 {
-  color: #111827;
-}
-
-html.dark .text-gray-800 {
-  color: #e5e7eb;
-}
-
-html.light .text-gray-800 {
-  color: #1f2937;
-}
-
-html.dark .text-gray-700 {
-  color: #d1d5db;
-}
-
-html.light .text-gray-700 {
-  color: #374151;
-}
-
-html.dark .text-gray-400 {
-  color: #9ca3af;
-}
-
-html.light .text-gray-400 {
-  color: #9ca3af;
-}
-
-html.dark .text-gray-200 {
-  color: #e5e7eb;
-}
-
-html.light .text-gray-200 {
-  color: #e5e7eb;
+  .btn-secondary {
+    @apply px-3 py-2 border border-gray-200 bg-white text-gray-800 text-sm font-medium rounded-lg;
+    @apply hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300;
+    @apply dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300;
+    @apply dark:hover:bg-neutral-700 dark:focus:ring-neutral-600;
+  }
 }
 
 /* ===== レスポンシブ対応 ===== */

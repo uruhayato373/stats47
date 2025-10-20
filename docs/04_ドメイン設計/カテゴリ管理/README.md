@@ -17,14 +17,14 @@ tags:
 
 ### 📋 仕様書 (specifications/)
 
-- [ドメイン概要](./specifications/overview.md) - ドメインの目的、責任、価値
-- [データ構造](./specifications/data-structure.md) - 型定義、JSON 構造、整合性ルール
-- [API 仕様](./specifications/api-specification.md) - CategoryService の詳細な API 仕様
+- [ドメイン概要](04_ドメイン設計/カテゴリ管理/overview.md) - ドメインの目的、責任、価値
+- [データ構造](04_ドメイン設計/カテゴリ管理/data-structure.md) - 型定義、JSON 構造、整合性ルール
+- [API 仕様](api-specification.md) - CategoryService の詳細な API 仕様
 
 ### 🚀 実装ガイド (implementation/)
 
-- [はじめに](./implementation/getting-started.md) - 基本的な使用方法とセットアップ
-- [ナビゲーション機能](./implementation/navigation.md) - ナビゲーション用の便利関数
+- [はじめに](04_ドメイン設計/カテゴリ管理/getting-started.md) - 基本的な使用方法とセットアップ
+- [ナビゲーション機能](navigation.md) - ナビゲーション用の便利関数
 - [ベストプラクティス](./implementation/best-practices.md) - 推奨される実装パターン
 - [使用例](./implementation/examples.md) - 具体的な実装例
 

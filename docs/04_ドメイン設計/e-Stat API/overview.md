@@ -301,20 +301,20 @@ await metaService.processAndSaveMetaInfo("0000010101");
 
 #### stats-data サブドメイン
 
-- **[overview.md](stats-data/overview.md)**: 統計データサブドメイン概要
+- **[overview.md](04_ドメイン設計/e-Stat%20API/04_統計データ/overview.md)**: 統計データサブドメイン概要
 - **[specifications/](stats-data/specifications/)**: 仕様書
-  - [api.md](stats-data/specifications/api.md): get-stats-data API 仕様
-  - [service.md](stats-data/specifications/service.md): 統計データサービス仕様
+  - [api.md](04_ドメイン設計/e-Stat%20API/04_統計データ/specifications/api.md): get-stats-data API 仕様
+  - [service.md](04_ドメイン設計/e-Stat%20API/04_統計データ/specifications/service.md): 統計データサービス仕様
 - **[implementation/](stats-data/implementation/)**: 実装ガイド
   - [fetcher.md](stats-data/implementation/fetcher.md): フェッチャー実装ガイド
   - [formatter.md](stats-data/implementation/formatter.md): フォーマッター実装ガイド
 
 #### stats-list サブドメイン
 
-- **[overview.md](stats-list/overview.md)**: 統計リストサブドメイン概要
+- **[overview.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/overview.md)**: 統計リストサブドメイン概要
 - **[specifications/](stats-list/specifications/)**: 仕様書
-  - [api.md](stats-list/specifications/api.md): get-stats-list API 仕様
-  - [service.md](stats-list/specifications/service.md): 統計リストサービス仕様
+  - [api.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/api.md): get-stats-list API 仕様
+  - [service.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/service.md): 統計リストサービス仕様
 - **[implementation/](stats-list/implementation/)**: 実装ガイド
   - [fetcher.md](stats-list/implementation/fetcher.md): フェッチャー実装ガイド
   - [formatter.md](stats-list/implementation/formatter.md): フォーマッター実装ガイド
@@ -323,28 +323,28 @@ await metaService.processAndSaveMetaInfo("0000010101");
 
 #### アーキテクチャ
 
-- **[architecture.md](architecture.md)**: 全体アーキテクチャ設計
+- **[architecture.md](04_ドメイン設計/e-Stat%20API/architecture.md)**: 全体アーキテクチャ設計
 
 #### 共有仕様
 
 - **[shared/](shared/)**: 共通仕様
-  - [api-endpoints.md](shared/api-endpoints.md): API エンドポイント一覧
-  - [type-system.md](shared/type-system.md): 型システム
-  - [error-handling.md](shared/error-handling.md): エラーハンドリング戦略
-  - [best-practices.md](shared/best-practices.md): ベストプラクティス
+  - [api-endpoints.md](api-endpoints.md): API エンドポイント一覧
+  - [type-system.md](type-system.md): 型システム
+  - [error-handling.md](error-handling.md): エラーハンドリング戦略
+  - [best-practices.md](04_ドメイン設計/e-Stat%20API/01_共有/best-practices.md): ベストプラクティス
 
 #### 実装ガイド
 
 - **[implementation/](implementation/)**: 全般的な実装ガイド
-  - [getting-started.md](implementation/getting-started.md): 開始ガイド
-  - [api-integration.md](implementation/api-integration.md): API 統合ガイド
-  - [data-fetching.md](implementation/data-fetching.md): データ取得実装
+  - [getting-started.md](04_ドメイン設計/e-Stat%20API/01_共有/getting-started.md): 開始ガイド
+  - [api-integration.md](api-integration.md): API 統合ガイド
+  - [data-fetching.md](data-fetching.md): データ取得実装
 
 #### テスト
 
 - **[testing/](testing/)**: テスト戦略
   - [testing-strategy.md](testing/testing-strategy.md): テスト戦略
-  - [unit-testing.md](testing/unit-testing.md): 単体テスト
+  - [unit-testing.md](04_ドメイン設計/e-Stat%20API/04_統計データ/testing/unit-testing.md): 単体テスト
 
 ## パフォーマンス最適化
 

@@ -187,7 +187,7 @@ class EstatMetaInfoService {
 }
 ```
 
-> **詳細な実装**: データベース操作の詳細は[データベース仕様書](./database-specification.md)を参照してください。
+> **詳細な実装**: データベース操作の詳細は[データベース仕様書](database-specification.md)を参照してください。
 
 ## 依存関係
 
@@ -239,7 +239,7 @@ class D1MetadataRepository implements MetadataRepository {
 }
 ```
 
-> **詳細な実装**: Repository Pattern の詳細は[データベース仕様書](./database-specification.md)を参照してください。
+> **詳細な実装**: Repository Pattern の詳細は[データベース仕様書](database-specification.md)を参照してください。
 
 ### 2. Adapter Pattern
 
@@ -359,7 +359,7 @@ class ErrorHandler {
 }
 ```
 
-> **データベースエラーハンドリング**: データベース関連のエラーハンドリングは[データベース仕様書](./database-specification.md)を参照してください。
+> **データベースエラーハンドリング**: データベース関連のエラーハンドリングは[データベース仕様書](database-specification.md)を参照してください。
 
 ## パフォーマンス最適化
 
@@ -612,7 +612,7 @@ class ConfigManager {
 
 ## 関連ドキュメント
 
-- [e-Stat API データベース仕様](./database-specification.md) - データベース設計と実装詳細
+- [e-Stat API データベース仕様](database-specification.md) - データベース設計と実装詳細
 - [API エンドポイント一覧](02-api-endpoints.md) - エンドポイント仕様とパラメータ
 - [型システム](02-type-system.md) - 型定義の詳細
 - [API 仕様詳細](apis/) - 各エンドポイントの詳細仕様
