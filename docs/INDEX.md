@@ -1,7 +1,7 @@
 ---
 title: ドキュメントインデックス
 created: 2024-10-14
-updated: 2025-01-17
+updated: 2025-10-20
 tags:
   - stats47
   - index
@@ -18,53 +18,94 @@ tags:
 
 「統計で見る都道府県」は、日本の地域統計データを可視化する Web アプリケーションです。e-Stat API を中心に、政府統計、自治体データ、民間統計など多様なデータソースから 47 都道府県の統計データを取得し、直感的なグラフとチャートで表示します。
 
-詳細なプロジェクト説明は、[00_project_overview/overview.md](./00_project_overview/overview.md)を参照してください。
+詳細なプロジェクト説明は、[00_プロジェクト管理/02_概要.md](./00_プロジェクト管理/02_概要.md)を参照してください。
 
 ## 📖 ドキュメント構成
 
-### 00_project_overview
+### 00_プロジェクト管理
 
 プロジェクトの全体像と基本情報
 
-- [overview.md](./00_project_overview/overview.md) - プロジェクト概要
-- [project_requirements.md](./00_project_overview/project_requirements.md) - プロジェクト要件
-- [functional_requirements.md](./00_project_overview/functional_requirements.md) - 機能要件
-- [non_functional_requirements.md](./00_project_overview/non_functional_requirements.md) - 非機能要件
-- [architecture.md](./00_project_overview/architecture.md) - システムアーキテクチャ
-- [roadmap.md](./00_project_overview/roadmap.md) - プロジェクトロードマップ
-- [monetization_strategy.md](./00_project_overview/monetization_strategy.md) - 収益化戦略
-- [growth-and-monetization-strategy-2025.md](./00_project_overview/growth-and-monetization-strategy-2025.md) - 2025 年成長・収益化戦略
-- [implementation-priority-guide.md](./00_project_overview/implementation-priority-guide.md) - 実装優先度ガイド
-- [development-sequence-best-practices.md](./00_project_overview/development-sequence-best-practices.md) - 開発順序ベストプラクティスガイド
-- [comprehensive-data-integration-design.md](./00_project_overview/comprehensive-data-integration-design.md) - 統合データプラットフォーム包括的設計書
-- [comprehensive-design-specification.md](./00_project_overview/comprehensive-design-specification.md) - 都道府県ランキング可視化アプリケーション設計仕様書
-- [japan-statistics-api-integration-plan.md](./00_project_overview/japan-statistics-api-integration-plan.md) - 日本統計 API 統合計画
-- [world-statistics-integration-plan.md](./00_project_overview/world-statistics-integration-plan.md) - 世界統計統合計画
-- [reference_links.md](./00_project_overview/reference_links.md) - 参考リンク集
+- [00_はじめに.md](./00_プロジェクト管理/00_はじめに.md) - プロジェクトへの導入ガイド
+- [01_プロジェクト憲章.md](./00_プロジェクト管理/01_プロジェクト憲章.md) - プロジェクトの目的・スコープ・体制
+- [02_概要.md](./00_プロジェクト管理/02_概要.md) - プロジェクト概要
+- [03_要件定義/](./00_プロジェクト管理/03_要件定義/) - プロジェクト要件
+  - [プロジェクト要件.md](./00_プロジェクト管理/03_要件定義/プロジェクト要件.md) - プロジェクト要件
+  - [機能要件一覧.md](./00_プロジェクト管理/03_要件定義/機能要件一覧.md) - 機能要件
+  - [非機能要件一覧.md](./00_プロジェクト管理/03_要件定義/非機能要件一覧.md) - 非機能要件
+- [04_ロードマップ.md](./00_プロジェクト管理/04_ロードマップ.md) - プロジェクトロードマップ
+- [05_収益化戦略/](./00_プロジェクト管理/05_収益化戦略/) - 収益化戦略
+  - [収益化戦略.md](./00_プロジェクト管理/05_収益化戦略/収益化戦略.md) - 収益化戦略
+  - [2025年成長戦略.md](./00_プロジェクト管理/05_収益化戦略/2025年成長戦略.md) - 2025年成長・収益化戦略
+- [06_統合計画/](./00_プロジェクト管理/06_統合計画/) - データ統合計画
+  - [データ統合設計書.md](./00_プロジェクト管理/06_統合計画/データ統合設計書.md) - 統合データプラットフォーム包括的設計書
+  - [日本統計API統合.md](./00_プロジェクト管理/06_統合計画/日本統計API統合.md) - 日本統計 API 統合計画
+  - [世界統計統合.md](./00_プロジェクト管理/06_統合計画/世界統計統合.md) - 世界統計統合計画
+- [07_議事録/](./00_プロジェクト管理/07_議事録/) - 会議記録
+- [参考リンク.md](./00_プロジェクト管理/参考リンク.md) - 参考リンク集
 
-### 01_development_guide
+### 01_開発ガイド
 
 開発ガイドラインとベストプラクティス
 
-- [coding_standards.md](./01_development_guide/coding_standards.md) - コーディング規約
-- [component_guide.md](./01_development_guide/component_guide.md) - コンポーネント設計ガイド
-- [styling_guide.md](./01_development_guide/styling_guide.md) - スタイリングガイド
-- [testing_guide.md](./01_development_guide/testing_guide.md) - テストガイド
-- [seo_guide.md](./01_development_guide/seo_guide.md) - SEO ガイド
-- [storybook_guide.md](./01_development_guide/storybook_guide.md) - Storybook ガイド
-- [d3js_choropleth_guide.md](./02_domain/visualization/implementation/d3js/d3js_choropleth_guide.md) - D3.js コロプレス地図ガイド
-- [deployment_guide.md](./01_development_guide/deployment_guide.md) - デプロイメントガイド
-- [environment_variables.md](./01_development_guide/environment_variables.md) - 環境変数設定ガイド
-- [performance_optimization.md](./01_development_guide/performance_optimization.md) - パフォーマンス最適化ガイド
-- [responsive-design-guide.md](./01_development_guide/responsive-design-guide.md) - レスポンシブデザイン実装ガイド
-- [tabnavigation-testing-analysis.md](./01_development_guide/tabnavigation-testing-analysis.md) - TabNavigation テスト分析
-- [engagement-features-guide.md](./02_domain/blog/features/engagement-features-guide.md) - エンゲージメント機能ガイド
-- [documentation_management.md](./01_development_guide/documentation_management.md) - ドキュメント管理ルール
-- [large_scale_implementation.md](./01_development_guide/large_scale_implementation.md) - 大規模プロジェクト実装ガイド
-- [data-fetching-strategy.md](./01_development_guide/data-fetching-strategy.md) - データフェッチング戦略（e-Stat API useSWR 最適化完了）
-- [useswr-specification.md](./01_development_guide/useswr-specification.md) - useSWR 仕様・ガイドライン
+- [コーディング規約.md](./01_開発ガイド/コーディング規約.md) - コーディング規約
+- [データフェッチング戦略.md](./01_開発ガイド/データフェッチング戦略.md) - データフェッチング戦略（e-Stat API useSWR 最適化完了）
+- [useSWR仕様.md](./01_開発ガイド/useSWR仕様.md) - useSWR 仕様・ガイドライン
+- [型管理ガイド.md](./01_開発ガイド/型管理ガイド.md) - 型管理ガイド
+- [型定義ガイド.md](./01_開発ガイド/型定義ガイド.md) - 型定義ガイド
+- [パフォーマンス最適化.md](./01_開発ガイド/パフォーマンス最適化.md) - パフォーマンス最適化ガイド
+- [Next.js最適化.md](./01_開発ガイド/Next.js最適化.md) - Next.js最適化ガイド
+- [SEOガイド.md](./01_開発ガイド/SEOガイド.md) - SEO ガイド
+- [環境変数設定.md](./01_開発ガイド/環境変数設定.md) - 環境変数設定ガイド
+- [ドキュメント管理.md](./01_開発ガイド/ドキュメント管理.md) - ドキュメント管理ルール
+- [大規模実装ガイド.md](./01_開発ガイド/大規模実装ガイド.md) - 大規模プロジェクト実装ガイド
 
-### 02_domain
+### 02_デザインシステム
+
+UI・UXデザインの原則と実装
+
+- [00_デザイン原則.md](./02_デザインシステム/00_デザイン原則.md) - デザインコンセプト・原則
+- [01_スタイルガイド/](./02_デザインシステム/01_スタイルガイド/) - スタイルガイド
+  - [スタイルガイド.md](./02_デザインシステム/01_スタイルガイド/スタイルガイド.md) - デザインガイド
+- [02_コンポーネント設計/](./02_デザインシステム/02_コンポーネント設計/) - コンポーネント設計
+  - [コンポーネント設計原則.md](./02_デザインシステム/02_コンポーネント設計/コンポーネント設計原則.md) - コンポーネント設計ガイド
+  - [atoms/](./02_デザインシステム/02_コンポーネント設計/atoms/) - Atomic Design atoms
+    - [alert.md](./02_デザインシステム/02_コンポーネント設計/atoms/alert.md) - Alert コンポーネント
+- [03_レスポンシブデザイン/](./02_デザインシステム/03_レスポンシブデザイン/) - レスポンシブデザイン
+  - [レスポンシブデザインガイド.md](./02_デザインシステム/03_レスポンシブデザイン/レスポンシブデザインガイド.md) - レスポンシブデザイン実装ガイド
+- [04_アクセシビリティ/](./02_デザインシステム/04_アクセシビリティ/) - アクセシビリティ
+- [05_Storybook/](./02_デザインシステム/05_Storybook/) - Storybook
+  - [Storybook運用ガイド.md](./02_デザインシステム/05_Storybook/Storybook運用ガイド.md) - Storybook ガイド
+
+### 03_テスト戦略
+
+テストに関する戦略と実装方法
+
+- [00_テスト戦略概要.md](./03_テスト戦略/00_テスト戦略概要.md) - 全体のテスト方針
+- [01_単体テスト/](./03_テスト戦略/01_単体テスト/) - 単体テスト
+  - [ユニットテストガイド.md](./03_テスト戦略/01_単体テスト/ユニットテストガイド.md) - テストガイド
+  - [TabNavigationテスト分析.md](./03_テスト戦略/01_単体テスト/TabNavigationテスト分析.md) - TabNavigation テスト分析
+- [02_統合テスト/](./03_テスト戦略/02_統合テスト/) - 統合テスト
+- [03_E2Eテスト/](./03_テスト戦略/03_E2Eテスト/) - E2Eテスト
+- [04_ビジュアルリグレッションテスト/](./03_テスト戦略/04_ビジュアルリグレッションテスト/) - ビジュアルリグレッションテスト
+- [05_パフォーマンステスト/](./03_テスト戦略/05_パフォーマンステスト/) - パフォーマンステスト
+- [06_ドメイン別テスト/](./03_テスト戦略/06_ドメイン別テスト/) - ドメイン別テスト
+
+### 04_技術設計
+
+システムアーキテクチャと技術的意思決定
+
+- [00_技術スタック.md](./04_技術設計/00_技術スタック.md) - 技術選定の概要
+- [01_アーキテクチャ/](./04_技術設計/01_アーキテクチャ/) - アーキテクチャ
+  - [システムアーキテクチャ.md](./04_技術設計/01_アーキテクチャ/システムアーキテクチャ.md) - システムアーキテクチャ
+  - [設計仕様書.md](./04_技術設計/01_アーキテクチャ/設計仕様書.md) - 都道府県ランキング可視化アプリケーション設計仕様書
+  - [実装優先度ガイド.md](./04_技術設計/01_アーキテクチャ/実装優先度ガイド.md) - 実装優先度ガイド
+  - [開発順序ベストプラクティス.md](./04_技術設計/01_アーキテクチャ/開発順序ベストプラクティス.md) - 開発順序ベストプラクティスガイド
+- [02_ADR（アーキテクチャ決定記録）/](./04_技術設計/02_ADR（アーキテクチャ決定記録）/) - ADR
+  - [001_Cloudflare採用理由.md](./04_技術設計/02_ADR（アーキテクチャ決定記録）/001_Cloudflare採用理由.md) - Cloudflare採用理由
+- [03_インフラストラクチャ/](./04_技術設計/03_インフラストラクチャ/) - インフラストラクチャ
+
+### 05_ドメイン設計
 
 ドメイン駆動設計に基づく機能別ドキュメント
 
@@ -72,193 +113,212 @@ tags:
 
 システム全体のアーキテクチャ設計とリファクタリング計画
 
-- [data-fetching-refactoring-plan.md](./02_domain/architecture/data-fetching-refactoring-plan.md) - データフェッチングリファクタリング計画
-- [providers-architecture.md](./02_domain/architecture/providers-architecture.md) - Providers アーキテクチャ
-- [providers-refactoring-report.md](./02_domain/architecture/providers-refactoring-report.md) - Providers リファクタリングレポート
-- [refactoring-roadmap.md](./02_domain/architecture/refactoring-roadmap.md) - リファクタリングロードマップ
-- [state-management-consolidation.md](./02_domain/architecture/state-management-consolidation.md) - 状態管理統合
-- [technical-specifications.md](./02_domain/architecture/technical-specifications.md) - 技術仕様書
-- [theme-fouc-resolution.md](./02_domain/architecture/theme-fouc-resolution.md) - テーマ FOUC 問題解決
-- [useswr-refactoring-analysis.md](./02_domain/architecture/useswr-refactoring-analysis.md) - useSWR リファクタリング分析
+- [データフェッチングリファクタリング.md](./05_ドメイン設計/アーキテクチャ/データフェッチングリファクタリング.md) - データフェッチングリファクタリング計画
+- [Providersアーキテクチャ.md](./05_ドメイン設計/アーキテクチャ/Providersアーキテクチャ.md) - Providers アーキテクチャ
+- [Providersリファクタリングレポート.md](./05_ドメイン設計/アーキテクチャ/Providersリファクタリングレポート.md) - Providers リファクタリングレポート
+- [リファクタリングロードマップ.md](./05_ドメイン設計/アーキテクチャ/リファクタリングロードマップ.md) - リファクタリングロードマップ
+- [状態管理統合.md](./05_ドメイン設計/アーキテクチャ/状態管理統合.md) - 状態管理統合
+- [技術仕様書.md](./05_ドメイン設計/アーキテクチャ/技術仕様書.md) - 技術仕様書
+- [テーマFOUC解決.md](./05_ドメイン設計/アーキテクチャ/テーマFOUC解決.md) - テーマ FOUC 問題解決
+- [useSWRリファクタリング分析.md](./05_ドメイン設計/アーキテクチャ/useSWRリファクタリング分析.md) - useSWR リファクタリング分析
 
 #### 認証ドメイン (auth)
 
 ユーザー認証・認可システム
 
-- [specifications/authentication-system.md](./02_domain/auth/specifications/authentication-system.md) - 認証システム仕様
-- [refactoring/authentication-analysis-and-improvement.md](./02_domain/auth/refactoring/authentication-analysis-and-improvement.md) - 認証システム分析と改善
-- [refactoring/authentication-system-audit.md](./02_domain/auth/refactoring/authentication-system-audit.md) - 認証システム監査
+- [仕様/](./05_ドメイン設計/認証/仕様/) - 認証システム仕様
+- [実装/](./05_ドメイン設計/認証/実装/) - 認証システム実装
+- [リファクタリング/](./05_ドメイン設計/認証/リファクタリング/) - 認証システムリファクタリング
+- [テスト/](./05_ドメイン設計/認証/テスト/) - 認証システムテスト
 
 #### 地域ドメイン (area)
 
 地域データ管理と GeoShape データ処理
 
-- [overview.md](./02_domain/area/overview.md) - 地域ドメイン概要
-- [specifications/administrative-boundary-data.md](./02_domain/area/specifications/administrative-boundary-data.md) - 行政境界データ仕様
-- [specifications/api.md](./02_domain/area/specifications/api.md) - 地域 API 仕様
-- [specifications/data-structure.md](./02_domain/area/specifications/data-structure.md) - データ構造仕様
-- [specifications/geoshape-auto-cache-specification.md](./02_domain/area/specifications/geoshape-auto-cache-specification.md) - GeoShape 自動キャッシュ仕様
-- [specifications/hierarchy.md](./02_domain/area/specifications/hierarchy.md) - 地域階層仕様
-- [implementation/getting-started.md](./02_domain/area/implementation/getting-started.md) - 地域管理実装ガイド
-- [refactoring/migration-plan.md](./02_domain/area/refactoring/migration-plan.md) - 地域管理リファクタリング
-- [testing/test-strategy.md](./02_domain/area/testing/test-strategy.md) - 地域管理テスト
+- [README.md](./05_ドメイン設計/地域管理/README.md) - 地域ドメイン概要
+- [仕様/](./05_ドメイン設計/地域管理/仕様/) - 地域管理仕様
+- [実装/](./05_ドメイン設計/地域管理/実装/) - 地域管理実装
+- [リファクタリング/](./05_ドメイン設計/地域管理/リファクタリング/) - 地域管理リファクタリング
+- [テスト/](./05_ドメイン設計/地域管理/テスト/) - 地域管理テスト
 
 #### ブログドメイン (blog)
 
 ブログ機能とコンテンツ管理
 
-- [specifications/overview.md](./02_domain/blog/specifications/overview.md) - ブログドメイン概要
-- [specifications/content-structure.md](./02_domain/blog/specifications/content-structure.md) - コンテンツ構造仕様
-- [specifications/mdx-architecture.md](./02_domain/blog/specifications/mdx-architecture.md) - MDX アーキテクチャ
-- [specifications/frontmatter-schema.md](./02_domain/blog/specifications/frontmatter-schema.md) - Frontmatter スキーマ
-- [specifications/component-integration.md](./02_domain/blog/specifications/component-integration.md) - コンポーネント統合
-- [specifications/related-post.md](./02_domain/blog/specifications/related-post.md) - 関連記事機能
-- [specifications/seo-strategy.md](./02_domain/blog/specifications/seo-strategy.md) - SEO 戦略
+- [README.md](./05_ドメイン設計/ブログ/README.md) - ブログドメイン概要
+- [仕様/](./05_ドメイン設計/ブログ/仕様/) - ブログ仕様
+- [実装/](./05_ドメイン設計/ブログ/実装/) - ブログ実装
+- [機能/](./05_ドメイン設計/ブログ/機能/) - ブログ機能
 
 #### カテゴリ管理ドメイン (category)
 
 統計カテゴリの管理と分類
 
-- [README.md](./02_domain/category/README.md) - カテゴリ管理ドメイン概要
-- [specifications/overview.md](./02_domain/category/specifications/overview.md) - カテゴリ管理仕様概要
-- [specifications/api-specification.md](./02_domain/category/specifications/api-specification.md) - カテゴリ API 仕様
-- [specifications/data-structure.md](./02_domain/category/specifications/data-structure.md) - カテゴリデータ構造
-- [implementation/getting-started.md](./02_domain/category/implementation/getting-started.md) - カテゴリ管理実装ガイド
-- [implementation/navigation.md](./02_domain/category/implementation/navigation.md) - ナビゲーション機能
+- [README.md](./05_ドメイン設計/カテゴリ管理/README.md) - カテゴリ管理ドメイン概要
+- [仕様/](./05_ドメイン設計/カテゴリ管理/仕様/) - カテゴリ管理仕様
+- [実装/](./05_ドメイン設計/カテゴリ管理/実装/) - カテゴリ管理実装
+- [ナビゲーション/](./05_ドメイン設計/カテゴリ管理/ナビゲーション/) - ナビゲーション機能
 
 #### コンポーネントドメイン (components)
 
 UI コンポーネントの設計と実装
 
-- [sidebar-refactoring.md](./02_domain/components/sidebar-refactoring.md) - Sidebar CategoryService 統合リファクタリング
+- [Sidebarリファクタリング.md](./05_ドメイン設計/コンポーネント/Sidebarリファクタリング.md) - Sidebar CategoryService 統合リファクタリング
 
 #### ダッシュボードドメイン (dashboard)
 
 データ可視化ダッシュボード
 
-- [components/choropleth-maps.md](./02_domain/dashboard/components/choropleth-maps.md) - コロプレス地図コンポーネント
-- [components/comparison-charts.md](./02_domain/dashboard/components/comparison-charts.md) - 比較チャートコンポーネント
-- [components/statistics-cards.md](./02_domain/dashboard/components/statistics-cards.md) - 統計カードコンポーネント
-- [components/time-series-charts.md](./02_domain/dashboard/components/time-series-charts.md) - 時系列チャートコンポーネント
-- [implementation/](./02_domain/dashboard/implementation/) - ダッシュボード実装ガイド
-- [refactoring/adapter-migration-plan.md](./02_domain/dashboard/refactoring/adapter-migration-plan.md) - アダプタ移行計画
-- [specifications/](./02_domain/dashboard/specifications/) - ダッシュボード仕様
+- [README.md](./05_ドメイン設計/ダッシュボード/README.md) - ダッシュボードドメイン概要
+- [仕様/](./05_ドメイン設計/ダッシュボード/仕様/) - ダッシュボード仕様
+- [実装/](./05_ドメイン設計/ダッシュボード/実装/) - ダッシュボード実装
+- [リファクタリング/](./05_ドメイン設計/ダッシュボード/リファクタリング/) - ダッシュボードリファクタリング
+- [コンポーネント/](./05_ドメイン設計/ダッシュボード/コンポーネント/) - ダッシュボードコンポーネント
 
 #### データベースドメイン (database)
 
 データベース設計と管理
 
-- [specifications/](./02_domain/database/specifications/) - データベース仕様
-  - [database-design.md](./02_domain/database/specifications/database-design.md) - データベース設計書
-  - [schema-reference.md](./02_domain/database/specifications/schema-reference.md) - スキーマリファレンス
-  - [migration-guide.md](./02_domain/database/specifications/migration-guide.md) - マイグレーションガイド
-- [implementation/](./02_domain/database/implementation/) - データベース実装
-  - [development-setup.md](./02_domain/database/implementation/development-setup.md) - 開発環境セットアップ
-  - [query-patterns.md](./02_domain/database/implementation/query-patterns.md) - クエリパターン集
-  - [best-practices.md](./02_domain/database/implementation/best-practices.md) - ベストプラクティス
-- [operations/](./02_domain/database/operations/) - データベース運用
-  - [backup-restore.md](./02_domain/database/operations/backup-restore.md) - バックアップ・リストアガイド
-  - [troubleshooting.md](./02_domain/database/operations/troubleshooting.md) - トラブルシューティングガイド
-- [refactoring/](./02_domain/database/refactoring/) - データベースリファクタリング
+- [README.md](./05_ドメイン設計/データベース/README.md) - データベースドメイン概要
+- [仕様/](./05_ドメイン設計/データベース/仕様/) - データベース仕様
+- [実装/](./05_ドメイン設計/データベース/実装/) - データベース実装
+- [運用/](./05_ドメイン設計/データベース/運用/) - データベース運用
+- [リファクタリング/](./05_ドメイン設計/データベース/リファクタリング/) - データベースリファクタリング
 
 #### e-Stat API ドメイン (estat-api)
 
 政府統計データ API 統合
 
-- [specifications/](./02_domain/estat-api/specifications/) - e-Stat API 仕様
-- [implementation/](./02_domain/estat-api/implementation/) - e-Stat API 実装ガイド
-- [refactoring/](./02_domain/estat-api/refactoring/) - e-Stat API リファクタリング
-- [testing/](./02_domain/estat-api/testing/) - e-Stat API テスト
+- [README.md](./05_ドメイン設計/e-Stat API/README.md) - e-Stat API ドメイン概要
+- [アーキテクチャ.md](./05_ドメイン設計/e-Stat API/アーキテクチャ.md) - e-Stat API アーキテクチャ
+- [データベース仕様.md](./05_ドメイン設計/e-Stat API/データベース仕様.md) - e-Stat API データベース仕様
+- [共通/](./05_ドメイン設計/e-Stat API/共通/) - e-Stat API 共通
+- [メタ情報/](./05_ドメイン設計/e-Stat API/メタ情報/) - e-Stat API メタ情報
+- [統計データ/](./05_ドメイン設計/e-Stat API/統計データ/) - e-Stat API 統計データ
+- [統計リスト/](./05_ドメイン設計/e-Stat API/統計リスト/) - e-Stat API 統計リスト
 
 #### エクスポートドメイン (export)
 
 データエクスポート機能
 
-- [specifications/csv-export-specification.md](./02_domain/export/specifications/csv-export-specification.md) - CSV エクスポート機能詳細仕様書
-- [implementation/csv-export-implementation-guide.md](./02_domain/export/implementation/csv-export-implementation-guide.md) - CSV エクスポート実装ガイド
+- [README.md](./05_ドメイン設計/エクスポート/README.md) - エクスポートドメイン概要
+- [仕様/](./05_ドメイン設計/エクスポート/仕様/) - エクスポート仕様
+- [実装/](./05_ドメイン設計/エクスポート/実装/) - エクスポート実装
 
 #### ランキングドメイン (ranking)
 
 統計ランキング機能
 
-- [specifications/](./02_domain/ranking/specifications/) - ランキング仕様
-- [implementation/](./02_domain/ranking/implementation/) - ランキング実装ガイド
-- [refactoring/](./02_domain/ranking/refactoring/) - ランキングリファクタリング
+- [README.md](./05_ドメイン設計/ランキング/README.md) - ランキングドメイン概要
+- [仕様/](./05_ドメイン設計/ランキング/仕様/) - ランキング仕様
+- [実装/](./05_ドメイン設計/ランキング/実装/) - ランキング実装
+- [リファクタリング/](./05_ドメイン設計/ランキング/リファクタリング/) - ランキングリファクタリング
 
 #### 可視化ドメイン (visualization)
 
 データ可視化とチャート機能
 
-- [specifications/](./02_domain/visualization/specifications/) - 可視化仕様
-- [implementation/](./02_domain/visualization/implementation/) - 可視化実装ガイド
-- [patterns/](./02_domain/visualization/patterns/) - 可視化パターン
-- [refactoring/](./02_domain/visualization/refactoring/) - 可視化リファクタリング
+- [README.md](./05_ドメイン設計/可視化/README.md) - 可視化ドメイン概要
+- [仕様/](./05_ドメイン設計/可視化/仕様/) - 可視化仕様
+- [実装/](./05_ドメイン設計/可視化/実装/) - 可視化実装
+- [パターン/](./05_ドメイン設計/可視化/パターン/) - 可視化パターン
+- [リファクタリング/](./05_ドメイン設計/可視化/リファクタリング/) - 可視化リファクタリング
 
-### 03_features
+#### スタイリングドメイン (styling)
+
+スタイリングとテーマ管理
+
+- [README.md](./05_ドメイン設計/スタイリング/README.md) - スタイリングドメイン概要
+- [Tailwindライトモード問題.md](./05_ドメイン設計/スタイリング/Tailwindライトモード問題.md) - Tailwind ライトモード問題の根本原因
+- [Tailwindリファクタリング計画.md](./05_ドメイン設計/スタイリング/Tailwindリファクタリング計画.md) - Tailwind リファクタリングアクションプラン
+
+### 06_機能実装
 
 機能別ドキュメント
 
-- [comments-guide.md](./02_domain/blog/features/comments-guide.md) - コメント機能
-- [image-generation/](./03_features/image-generation/) - 画像生成機能
-- [related-articles/](./03_features/related-articles/) - 関連記事機能
-- [sns/](./03_features/sns/) - SNS 連携機能
+- [画像生成/](./06_機能実装/画像生成/) - 画像生成機能
+- [関連記事/](./06_機能実装/関連記事/) - 関連記事機能
+- [SNS連携/](./06_機能実装/SNS連携/) - SNS 連携機能
 
-### 04_content_planning
+### 07_運用・保守
+
+リリース、デプロイ、監視に関するドキュメント
+
+- [00_運用ガイド概要.md](./07_運用・保守/00_運用ガイド概要.md) - 運用全体の方針
+- [01_リリース管理/](./07_運用・保守/01_リリース管理/) - リリース管理
+- [02_デプロイメント/](./07_運用・保守/02_デプロイメント/) - デプロイメント
+  - [デプロイ手順.md](./07_運用・保守/02_デプロイメント/デプロイ手順.md) - デプロイメントガイド
+- [03_データベース運用/](./07_運用・保守/03_データベース運用/) - データベース運用
+  - [バックアップ・リストア.md](./07_運用・保守/03_データベース運用/バックアップ・リストア.md) - データベースバックアップ・リストアガイド
+- [04_監視・アラート/](./07_運用・保守/04_監視・アラート/) - 監視・アラート
+- [05_トラブルシューティング/](./07_運用・保守/05_トラブルシューティング/) - トラブルシューティング
+  - [データベーストラブルシューティング.md](./07_運用・保守/05_トラブルシューティング/データベーストラブルシューティング.md) - データベーストラブルシューティングガイド
+- [06_セキュリティ/](./07_運用・保守/06_セキュリティ/) - セキュリティ
+- [07_パフォーマンス管理/](./07_運用・保守/07_パフォーマンス管理/) - パフォーマンス管理
+- [08_ドキュメント保守/](./07_運用・保守/08_ドキュメント保守/) - ドキュメント保守
+
+### 08_コンテンツ計画
 
 コンテンツ戦略と記事計画
 
-- [01\_ランキング記事/](./04_content_planning/01_ランキング記事/) - ランキング記事の計画
-- [02\_ダッシュボード/](./04_content_planning/02_ダッシュボード/) - ダッシュボードコンテンツ計画
-- [03\_ブログ記事/](./04_content_planning/03_ブログ記事/) - ブログ記事計画
+- [01_ランキング記事/](./08_コンテンツ計画/01_ランキング記事/) - ランキング記事の計画
+- [02_ダッシュボード/](./08_コンテンツ計画/02_ダッシュボード/) - ダッシュボードコンテンツ計画
+- [03_ブログ記事/](./08_コンテンツ計画/03_ブログ記事/) - ブログ記事計画
 
-### 05_resources
+### 09_リソース
 
 リソース・素材
 
-- [design.png](./05_resources/design.png) - デザイン素材
-- [instagram.md](./05_resources/instagram.md) - Instagram 関連リソース
-- [x.md](./05_resources/x.md) - X (Twitter)関連リソース
-- [sns-image-sizes.md](./05_resources/sns-image-sizes.md) - SNS 画像サイズ一覧
-- [ランキング画像サンプル](./05_resources/) - ランキング画像サンプル
+- [デザイン素材/](./09_リソース/デザイン素材/) - デザイン素材
+- [SNS画像サイズ一覧.md](./09_リソース/SNS画像サイズ一覧.md) - SNS 画像サイズ一覧
+- [Instagram関連.md](./09_リソース/Instagram関連.md) - Instagram 関連リソース
+- [X関連.md](./09_リソース/X関連.md) - X (Twitter)関連リソース
+
+### 99_課題管理
+
+既知の問題と調査結果
+
+- [e-Statフィールド選択エラー.md](./99_課題管理/e-Statフィールド選択エラー.md) - e-Stat フィールド選択エラー
+- [e-Stat検索パラメータ調査.md](./99_課題管理/e-Stat検索パラメータ調査.md) - e-Stat 検索パラメータ調査
 
 ## 🎯 ドキュメントの使い方
 
 ### 新規参加者向け
 
-1. まず [00_project_overview/overview.md](./00_project_overview/overview.md) でプロジェクト全体像を把握
-2. [00_project_overview/project_requirements.md](./00_project_overview/project_requirements.md) でプロジェクトの目的を理解
-3. [01_development_guide/coding_standards.md](./01_development_guide/coding_standards.md) で開発環境をセットアップ
+1. まず [00_プロジェクト管理/00_はじめに.md](./00_プロジェクト管理/00_はじめに.md) でプロジェクト全体像を把握
+2. [00_プロジェクト管理/01_プロジェクト憲章.md](./00_プロジェクト管理/01_プロジェクト憲章.md) でプロジェクトの目的を理解
+3. [01_開発ガイド/コーディング規約.md](./01_開発ガイド/コーディング規約.md) で開発環境をセットアップ
 
 ### 開発者向け
 
-- **コンポーネント開発**: [01_development_guide/component_guide.md](./01_development_guide/component_guide.md)
-- **スタイリング**: [01_development_guide/styling_guide.md](./01_development_guide/styling_guide.md)
-- **テスト実装**: [01_development_guide/testing_guide.md](./01_development_guide/testing_guide.md)
-- **SEO 対応**: [01_development_guide/seo_guide.md](./01_development_guide/seo_guide.md)
-- **ドキュメント管理**: [01_development_guide/documentation_management.md](./01_development_guide/documentation_management.md)
+- **コンポーネント開発**: [02_デザインシステム/02_コンポーネント設計/コンポーネント設計原則.md](./02_デザインシステム/02_コンポーネント設計/コンポーネント設計原則.md)
+- **スタイリング**: [02_デザインシステム/01_スタイルガイド/スタイルガイド.md](./02_デザインシステム/01_スタイルガイド/スタイルガイド.md)
+- **テスト実装**: [03_テスト戦略/01_単体テスト/ユニットテストガイド.md](./03_テスト戦略/01_単体テスト/ユニットテストガイド.md)
+- **SEO 対応**: [01_開発ガイド/SEOガイド.md](./01_開発ガイド/SEOガイド.md)
+- **ドキュメント管理**: [01_開発ガイド/ドキュメント管理.md](./01_開発ガイド/ドキュメント管理.md)
 
 ### ドメイン別開発
 
-- **カテゴリ管理**: [02_domain/category/README.md](./02_domain/category/README.md)
-- **e-Stat API**: [02_domain/estat-api/specifications/](./02_domain/estat-api/specifications/)
-- **ダッシュボード**: [02_domain/dashboard/components/](./02_domain/dashboard/components/)
-- **認証システム**: [02_domain/auth/specifications/authentication-system.md](./02_domain/auth/specifications/authentication-system.md)
-- **エクスポート機能**: [02_domain/export/specifications/csv-export-specification.md](./02_domain/export/specifications/csv-export-specification.md)
+- **カテゴリ管理**: [05_ドメイン設計/カテゴリ管理/README.md](./05_ドメイン設計/カテゴリ管理/README.md)
+- **e-Stat API**: [05_ドメイン設計/e-Stat API/README.md](./05_ドメイン設計/e-Stat API/README.md)
+- **ダッシュボード**: [05_ドメイン設計/ダッシュボード/README.md](./05_ドメイン設計/ダッシュボード/README.md)
+- **認証システム**: [05_ドメイン設計/認証/仕様/](./05_ドメイン設計/認証/仕様/)
+- **エクスポート機能**: [05_ドメイン設計/エクスポート/仕様/](./05_ドメイン設計/エクスポート/仕様/)
 
 ### 機能仕様確認
 
-- **プロジェクト要件**: [00_project_overview/project_requirements.md](./00_project_overview/project_requirements.md)
-- **機能要件**: [00_project_overview/functional_requirements.md](./00_project_overview/functional_requirements.md)
-- **非機能要件**: [00_project_overview/non_functional_requirements.md](./00_project_overview/non_functional_requirements.md)
-- **アーキテクチャ**: [00_project_overview/architecture.md](./00_project_overview/architecture.md)
-- **統合データプラットフォーム**: [00_project_overview/comprehensive-data-integration-design.md](./00_project_overview/comprehensive-data-integration-design.md)
+- **プロジェクト要件**: [00_プロジェクト管理/03_要件定義/プロジェクト要件.md](./00_プロジェクト管理/03_要件定義/プロジェクト要件.md)
+- **機能要件**: [00_プロジェクト管理/03_要件定義/機能要件一覧.md](./00_プロジェクト管理/03_要件定義/機能要件一覧.md)
+- **非機能要件**: [00_プロジェクト管理/03_要件定義/非機能要件一覧.md](./00_プロジェクト管理/03_要件定義/非機能要件一覧.md)
+- **アーキテクチャ**: [04_技術設計/01_アーキテクチャ/システムアーキテクチャ.md](./04_技術設計/01_アーキテクチャ/システムアーキテクチャ.md)
+- **統合データプラットフォーム**: [00_プロジェクト管理/06_統合計画/データ統合設計書.md](./00_プロジェクト管理/06_統合計画/データ統合設計書.md)
 
 ### リファクタリング・改善
 
-- **パフォーマンス**: [01_development_guide/performance_optimization.md](./01_development_guide/performance_optimization.md)
-- **大規模実装**: [01_development_guide/large_scale_implementation.md](./01_development_guide/large_scale_implementation.md)
-- **アーキテクチャ改善**: [02_domain/architecture/](./02_domain/architecture/)
-- **ドメイン別リファクタリング**: [02_domain/](./02_domain/) 内の各ドメインの refactoring ディレクトリ
+- **パフォーマンス**: [01_開発ガイド/パフォーマンス最適化.md](./01_開発ガイド/パフォーマンス最適化.md)
+- **大規模実装**: [01_開発ガイド/大規模実装ガイド.md](./01_開発ガイド/大規模実装ガイド.md)
+- **アーキテクチャ改善**: [05_ドメイン設計/アーキテクチャ/](./05_ドメイン設計/アーキテクチャ/)
+- **ドメイン別リファクタリング**: [05_ドメイン設計/](./05_ドメイン設計/) 内の各ドメインのリファクタリングディレクトリ
 
 ## 📝 ドキュメントの更新
 
@@ -266,6 +326,7 @@ UI コンポーネントの設計と実装
 
 ### 更新履歴
 
+- 2025-10-20: ドキュメント構造を全面的に日本語化、新セクション追加（デザインシステム、テスト戦略、運用・保守）、ADR追加
 - 2025-01-18: useSWR 仕様・ガイドライン共通化、e-Stat API 実装例分離、ドキュメント構造改善
 - 2025-10-18: ドキュメント整理完了、99_inbox 廃止、重複ドキュメント統合、適切な場所への移動
 - 2025-10-17: ドキュメント構造大幅更新、architecture・export ドメイン追加、包括的設計書追加
@@ -275,4 +336,4 @@ UI コンポーネントの設計と実装
 ---
 
 **プロジェクト**: 統計で見る都道府県 (stats47)  
-**最終更新**: 2025 年 1 月 18 日
+**最終更新**: 2025年10月20日

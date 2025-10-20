@@ -3,8 +3,7 @@ title: e-Stat API `GET_META_INFO` 完全ガイド
 created: 2025-10-14
 updated: 2025-10-16
 tags:
-  - domain/estat-api
-  - specifications
+  - eStat-API
 ---
 
 # e-Stat API `GET_META_INFO` 完全ガイド
