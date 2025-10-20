@@ -8,147 +8,35 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e1ab8d390c340863",
+            "id": "5f971908949f664a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_技術設計/01_アーキテクチャ/DDDドメイン分類設計書.md",
+                "file": "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DDDドメイン分類設計書"
+              "title": "プロジェクト要件"
             }
           },
           {
-            "id": "af961d3f8ba284e8",
+            "id": "19a7dcd3bf5f8522",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/01_概要/収益化戦略.md",
+                "file": "01_開発ガイド/データフェッチ.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "収益化戦略"
+              "title": "データフェッチ"
             }
           },
           {
-            "id": "c33a7e44a2787eb6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/02_要件定義/MVP定義.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "MVP定義"
-            }
-          },
-          {
-            "id": "12ce4808c118749a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01_日本の統計"
-            }
-          },
-          {
-            "id": "9f657af14136b271",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/04_統合計画/02_世界の統計.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02_世界の統計"
-            }
-          },
-          {
-            "id": "b26815c3a5378a42",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/ドキュメント管理.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ドキュメント管理"
-            }
-          },
-          {
-            "id": "12267107edd8802b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/パフォーマンス最適化.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "パフォーマンス最適化"
-            }
-          },
-          {
-            "id": "499382a2d848dde6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/SEOガイド.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "SEOガイド"
-            }
-          },
-          {
-            "id": "d18d7ca2ba1a0cd2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/useSWR仕様.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "useSWR仕様"
-            }
-          },
-          {
-            "id": "e137c5c4f1ec6155",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/データフェッチング戦略.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "データフェッチング戦略"
-            }
-          },
-          {
-            "id": "ae868fdfa0720dd1",
+            "id": "624ae06a4bbc9daf",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -162,91 +50,35 @@
             }
           },
           {
-            "id": "9d1314230b99a677",
+            "id": "ab0a721f6749d865",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/03_実装計画/README.md",
+                "file": "01_開発ガイド/ドキュメント管理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "ドキュメント管理"
             }
           },
           {
-            "id": "f4a752025bb959fb",
+            "id": "186ca3f54921e61d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/03_実装計画/Phase2.md",
+                "file": "01_開発ガイド/コーディング規約.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Phase2"
-            }
-          },
-          {
-            "id": "4af7d99cb0a9955d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/03_実装計画/Phase1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Phase1"
-            }
-          },
-          {
-            "id": "bcc0c71dac48137f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "プロジェクト憲章"
-            }
-          },
-          {
-            "id": "2f3ad8a37391d1c8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/02_要件定義/機能要件.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "機能要件"
-            }
-          },
-          {
-            "id": "582521a498a27b82",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_プロジェクト管理/02_要件定義/非機能要件.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "非機能要件"
+              "title": "コーディング規約"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -303,7 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 232.5
+    "width": 369.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -366,13 +198,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
+                "file": "01_開発ガイド/大規模実装ガイド.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "01_日本の統計のアウトライン"
+              "title": "大規模実装ガイドのアウトライン"
             }
           }
         ],
@@ -394,15 +226,19 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "d873db75767a7e2f",
+  "active": "624ae06a4bbc9daf",
   "lastOpenFiles": [
-    "00_プロジェクト管理/02_要件定義/MVP定義.md",
-    "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
-    "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
-    "01_開発ガイド/パフォーマンス最適化.md",
+    "01_開発ガイド/データフェッチ.md",
+    "01_開発ガイド/コーディング規約.md",
     "01_開発ガイド/ドキュメント管理.md",
     "01_開発ガイド/データフェッチング戦略.md",
     "01_開発ガイド/useSWR仕様.md",
+    "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
+    "02_デザインシステム/01_スタイルガイド.md",
+    "01_開発ガイド/大規模実装ガイド.md",
+    "01_開発ガイド/パフォーマンス最適化.md",
+    "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
+    "00_プロジェクト管理/02_要件定義/MVP定義.md",
     "01_開発ガイド/SEOガイド.md",
     "00_プロジェクト管理/04_統合計画/02_世界の統計.md",
     "01_開発ガイド/documentation_management.md",
@@ -412,16 +248,12 @@
     "00_プロジェクト管理/03_実装計画/Phase1.md",
     "00_プロジェクト管理/03_実装計画/README.md",
     "00_プロジェクト管理/03_実装計画/Phase2.md",
-    "01_開発ガイド/大規模実装ガイド.md",
     "00_プロジェクト管理/03_実装計画/Phase3.md",
     "01_開発ガイド/型定義ガイド.md",
     "01_開発ガイド/型管理ガイド.md",
     "00_プロジェクト管理/03_実装計画/ロードマップ.md",
     "00_プロジェクト管理/01_概要/MVP定義.md",
     "00_プロジェクト管理/01_概要/収益化戦略.md",
-    "03_技術設計/01_アーキテクチャ/DDDドメイン分類設計書.md",
-    "00_プロジェクト管理/04_統合計画/世界の統計.md",
-    "00_プロジェクト管理/02_要件定義/機能要件.md",
     "00_プロジェクト管理/03_実装計画",
     "00_プロジェクト管理/03_戦略/ロードマップ.md.tmp.62080.1760958805955",
     "03_技術設計/02_ADR（アーキテクチャ決定記録）",

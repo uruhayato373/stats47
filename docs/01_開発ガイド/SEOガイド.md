@@ -1,180 +1,59 @@
 ---
-title: SEO最適化ガイド
+title: stats47 SEO最適化ガイド
 created: 2025-10-14
-updated: 2025-10-16
+updated: 2025-10-20
 tags:
   - development-guide
+  - seo
+  - stats47
 ---
 
-# SEO最適化ガイド
+# stats47 SEO最適化ガイド
 
 ## 概要
 
-Next.js 15とTailwind CSSを使用したブログサイトで、SEO（検索エンジン最適化）を効果的に実装するための包括的なガイドです。メタタグ最適化、構造化データ、サイトマップ、robots.txtの設定方法を詳しく解説します。
+「統計で見る都道府県（stats47）」における、SEO（検索エンジン最適化）の実装ガイドです。
 
-## 1. メタタグ最適化（title, description, OGP設定）
+本ドキュメントは、**stats47プロジェクト固有のSEO戦略と実装方法**を記載しています。Next.js 15の一般的な使い方ではなく、47都道府県の統計データ可視化サービスに特化した実装例を提供します。
 
-Next.js 15ではApp Routerを使った新しいMetadata APIを使用して、メタタグの最適化が行えます。以下に主な実装方法を説明します。
+### Phase 1のSEO目標
 
-### 基本的な実装方法
+- **SEOスコア**: 80点以上（Google Lighthouse）
+- **月間PV**: 5万以上
+- **ページ表示時間**: 3秒以内
+- **Lighthouse Performance**: 80点以上
 
-App Routerでは、主に以下の2つの方法でメタデータを定義できます：
+詳細は [Phase 1実装計画](../00_プロジェクト管理/03_実装計画/Phase1.md) を参照。
 
-1. 静的メタデータ: `metadata` オブジェクト
-2. 動的メタデータ: `generateMetadata` 関数
+---
 
-### 静的メタデータの定義
+## 1. メタデータ戦略
 
-```tsx
-// app/page.tsx
-import { Metadata } from 'next';
+### 1.1 ルートレイアウト（共通設定）
 
-export const metadata: Metadata = {
-  title: 'ページタイトル',
-  description: 'ページの説明文をここに記述します。SEOに重要な要素です。',
-  // OGP設定
-  openGraph: {
-    title: 'OGPタイトル',
-    description: 'OGP用の説明文',
-    url: 'https://example.com/',
-    siteName: 'サイト名',
-    images: [
-      {
-        url: 'https://example.com/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: '画像の代替テキスト',
-      },
-    ],
-    locale: 'ja_JP',
-    type: 'website',
-  },
-  // Twitter Card設定
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Twitterカードのタイトル',
-    description: 'Twitterカードの説明',
-    creator: '@アカウント名',
-    images: ['https://example.com/twitter-image.jpg'],
-  },
-};
-
-export default function Page() {
-  return <div>ページコンテンツ</div>;
-}
-```
-
-### 動的メタデータの定義
-
-動的なルート（例：ブログ記事ページなど）では、`generateMetadata` 関数を使用してデータに基づいたメタデータを生成できます：
-
-```tsx
-// app/blog/[slug]/page.tsx
-import { Metadata, ResolvingMetadata } from 'next';
-
-type Props = {
-  params: { slug: string };
-};
-
-// 動的メタデータの生成
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // 記事データの取得
-  const article = await fetchArticle(params.slug);
-  
-  // 親メタデータの取得（あれば）
-  const previousImages = (await parent).openGraph?.images || [];
-
-  return {
-    title: article.title,
-    description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      url: `https://example.com/blog/${params.slug}`,
-      images: [
-        {
-          url: article.ogImage || 'https://example.com/default-og.jpg',
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-        ...previousImages,
-      ],
-      type: 'article',
-      publishedTime: article.publishedAt,
-      authors: [article.author],
-      tags: article.tags,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt,
-      images: [article.ogImage || 'https://example.com/default-og.jpg'],
-    },
-  };
-}
-
-export default async function ArticlePage({ params }: Props) {
-  const article = await fetchArticle(params.slug);
-  return <div>{/* 記事のコンテンツ */}</div>;
-}
-```
-
-### メタデータの継承とオーバーライド
-
-Next.js 15ではメタデータは自動的に継承されます。ルートレイアウト（`app/layout.tsx`）でベースとなるメタデータを設定し、各ページで必要に応じてオーバーライドできます。
+すべてのページに適用される基本メタデータを設定します。
 
 ```tsx
 // app/layout.tsx
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://example.com'),
+  metadataBase: new URL('https://stats47.com'),
   title: {
-    template: '%s | サイト名',
-    default: 'サイト名 - デフォルトタイトル',
+    template: '%s | 統計で見る都道府県',
+    default: '統計で見る都道府県 - データで知る、地域の今',
   },
-  description: 'サイト全体のデフォルト説明',
+  description:
+    '日本の47都道府県の統計データを可視化。e-Stat APIから取得した最新の政府統計を、わかりやすいグラフとランキングで表示します。地域の現状や特徴をデータから理解できます。',
   openGraph: {
     type: 'website',
-    siteName: 'サイト名',
+    siteName: '統計で見る都道府県',
     locale: 'ja_JP',
   },
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="ja">
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-### その他の重要なメタタグ
-
-```tsx
-// app/layout.tsx または特定のページコンポーネントで
-export const metadata: Metadata = {
-  // 基本設定
-  title: 'タイトル',
-  description: '説明',
-  
-  // viewport
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
+  twitter: {
+    card: 'summary_large_image',
+    site: '@stats47_jp', // 実際のアカウント名に変更
   },
-  
-  // robots
   robots: {
     index: true,
     follow: true,
@@ -186,97 +65,155 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-  
-  // canonical URL
-  alternates: {
-    canonical: 'https://example.com/current-page',
-    languages: {
-      'en-US': 'https://example.com/en/current-page',
-      'ja-JP': 'https://example.com/ja/current-page',
-    },
-  },
-  
-  // アイコン
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
-    },
-  },
-  
-  // テーマカラー
-  themeColor: '#4285f4',
 };
 ```
 
-### メタデータの検証
-
-Next.js 15のMetadata APIは型安全で、TypeScriptを使用してメタデータの検証が可能です。また、開発モードでは自動的にメタデータのバリデーションが行われ、警告が表示されます。
-
-### ベストプラクティス
-
-1. **メタデータの基本URLを設定する**：`metadataBase`を使用して、相対URLを絶対URLに変換するベースURLを設定
-    
-2. **タイトルテンプレートを活用する**：ルートレイアウトで`title.template`を設定し、各ページで一貫したタイトル形式を維持
-    
-3. **OGP画像の最適化**：OGP画像は1200×630ピクセルが推奨サイズ
-    
-4. **多言語対応**：`alternates.languages`を使用して言語ごとの代替URLを指定
-    
-5. **アナリティクスタグの追加**：必要に応じて`Scripts`コンポーネントを使用してアナリティクスタグを追加
-
-Next.js 15のMetadata APIを活用することで、SEOに最適化されたメタタグを効率的に管理・実装できます。
-
-## 2. 構造化データ（JSON-LD）実装方法
-
-### 基本的なアプローチ
-
-Next.jsの新しいApp Routerを使用して構造化データを実装するには、主に以下の方法があります：
-
-Metadata APIを使用する方法と、Script Componentを使って直接JSONスクリプトを埋め込む方法です。
-
-### Metadata APIを使用する方法
-
-App Routerの場合、各ページコンポーネントで`generateMetadata`関数や`metadata`オブジェクトを定義して構造化データを追加できます：
+### 1.2 トップページ
 
 ```tsx
-// app/page.tsx または app/[slug]/page.tsx などで
-export const generateMetadata = async ({ params }) => {
-  // ページのデータを取得（必要に応じて）
-  const pageData = await fetchPageData(params.slug);
-  
+// app/page.tsx
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '統計で見る都道府県 - データで知る、地域の今',
+  description:
+    '日本の47都道府県の統計データを可視化。人口、経済、教育、医療など、e-Stat APIから取得した政府統計を、わかりやすいグラフとランキングで表示します。',
+  openGraph: {
+    title: '統計で見る都道府県',
+    description: 'データで知る、地域の今',
+    url: 'https://stats47.com',
+    images: [
+      {
+        url: 'https://stats47.com/og-home.jpg',
+        width: 1200,
+        height: 630,
+        alt: '統計で見る都道府県 - トップページ',
+      },
+    ],
+  },
+};
+```
+
+### 1.3 ランキングページ（動的メタデータ）
+
+**最重要**: ランキングページは検索流入の主要ソースです。
+
+```tsx
+// app/ranking/[category]/[subcategory]/page.tsx
+import { Metadata } from 'next';
+import { getRankingData } from '@/lib/ranking/ranking-repository';
+
+type Props = {
+  params: { category: string; subcategory: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // ランキングデータを取得
+  const data = await getRankingData(params.subcategory);
+
+  // トップとボトムの都道府県を取得
+  const top = data.items[0]; // 1位
+  const bottom = data.items[data.items.length - 1]; // 47位
+
+  const title = `${data.metadata.name}の都道府県ランキング`;
+  const description =
+    `${data.metadata.name}を都道府県別に比較。${data.metadata.year}年の最新データから、` +
+    `${top.areaName}が1位（${top.displayValue}）、${bottom.areaName}が47位（${bottom.displayValue}）。` +
+    `e-Statの公式統計データを元にしたランキングです。`;
+
+  // 動的OGP画像のURL
+  const ogImageUrl = `/api/og?type=ranking&subcategory=${params.subcategory}`;
+
   return {
-    title: pageData.title,
-    openGraph: {...},
-    // 構造化データの追加
-    other: {
-      'application/ld+json': JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: pageData.title,
-        author: {
-          '@type': 'Person',
-          name: pageData.author
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://stats47.com/ranking/${params.category}/${params.subcategory}`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
         },
-        datePublished: pageData.date,
-        image: pageData.image
-        // 他の必要なプロパティ
-      })
-    }
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+    // canonical URL（重複コンテンツ回避）
+    alternates: {
+      canonical: `https://stats47.com/ranking/${params.category}/${params.subcategory}`,
+    },
   };
+}
+```
+
+**ポイント**:
+- **データ駆動型**: 実際のランキングデータから動的に生成
+- **具体的な数値**: トップとボトムの都道府県名・値を含める
+- **キーワード最適化**: 「都道府県ランキング」「比較」「統計データ」を自然に含める
+- **年次情報**: 最新性を示す
+- **権威性**: 「e-Stat公式統計」を明記
+
+### 1.4 カテゴリページ
+
+```tsx
+// app/ranking/[category]/page.tsx
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const categoryData = await getCategoryData(params.category);
+
+  const title = `${categoryData.name}の統計ランキング`;
+  const description =
+    `${categoryData.name}に関する都道府県統計ランキング一覧。` +
+    `${categoryData.subcategories.map(s => s.name).slice(0, 5).join('、')}など、` +
+    `${categoryData.subcategories.length}種類の指標を比較できます。`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://stats47.com/ranking/${params.category}`,
+    },
+  };
+}
+```
+
+### 1.5 ダッシュボードページ
+
+```tsx
+// app/dashboard/page.tsx
+export const metadata: Metadata = {
+  title: '都道府県統計ダッシュボード',
+  description:
+    '日本の47都道府県の統計データを一覧表示。人口、経済、教育、医療など、様々な指標をグラフとランキングで可視化します。',
+  openGraph: {
+    title: '都道府県統計ダッシュボード',
+    description: '47都道府県の統計データを一目で比較',
+    url: 'https://stats47.com/dashboard',
+  },
 };
 ```
 
-### Script Componentを使用する方法
+---
 
-コンポーネント内で直接スクリプトタグとして追加する方法も使えます：
+## 2. 構造化データ（JSON-LD）
+
+検索エンジンにコンテンツの意味を伝え、リッチリザルト表示を促進します。
+
+### 2.1 共通コンポーネント
 
 ```tsx
-// app/components/JsonLd.tsx
-export default function JsonLd({ data }) {
+// src/components/atoms/JsonLd.tsx
+export default function JsonLd({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"
@@ -284,150 +221,235 @@ export default function JsonLd({ data }) {
     />
   );
 }
+```
 
-// 使用例（app/page.tsxなど）
-import JsonLd from './components/JsonLd';
+### 2.2 ルートレイアウト（Organization + WebSite）
 
-export default function Page() {
-  const jsonLdData = {
+```tsx
+// app/layout.tsx
+import JsonLd from '@/components/atoms/JsonLd';
+
+export default function RootLayout({ children }) {
+  const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: '商品名',
-    // 他の必要なプロパティ
+    '@type': 'Organization',
+    name: '統計で見る都道府県',
+    url: 'https://stats47.com',
+    logo: 'https://stats47.com/logo.png',
+    sameAs: [
+      'https://twitter.com/stats47_jp',
+      // 他のSNSアカウント
+    ],
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: '統計で見る都道府県',
+    url: 'https://stats47.com',
+    description: '日本の47都道府県の統計データ可視化サービス',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://stats47.com/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  return (
+    <html lang="ja">
+      <head>
+        <JsonLd data={[organizationSchema, websiteSchema]} />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### 2.3 ランキングページ（Dataset + BreadcrumbList）
+
+**Dataset スキーマ**: 統計データセットとして認識されることで、Google Dataset Searchに表示される可能性があります。
+
+```tsx
+// app/ranking/[category]/[subcategory]/page.tsx
+export default async function RankingPage({ params }: Props) {
+  const data = await getRankingData(params.subcategory);
+  const categoryData = await getCategoryData(params.category);
+
+  // Dataset スキーマ
+  const datasetSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${data.metadata.name}の都道府県ランキング`,
+    description: `日本の47都道府県における${data.metadata.name}のランキングデータ（${data.metadata.year}年）`,
+    url: `https://stats47.com/ranking/${params.category}/${params.subcategory}`,
+    creator: {
+      '@type': 'Organization',
+      name: '統計で見る都道府県',
+    },
+    spatialCoverage: {
+      '@type': 'Place',
+      name: '日本',
+      geo: {
+        '@type': 'GeoShape',
+        addressCountry: 'JP',
+      },
+    },
+    temporalCoverage: data.metadata.year,
+    distribution: {
+      '@type': 'DataDownload',
+      encodingFormat: 'application/json',
+      contentUrl: `https://stats47.com/api/ranking/${params.subcategory}`,
+    },
+    variableMeasured: data.metadata.name,
+    includedInDataCatalog: {
+      '@type': 'DataCatalog',
+      name: 'e-Stat（政府統計の総合窓口）',
+      url: 'https://www.e-stat.go.jp/',
+    },
+  };
+
+  // BreadcrumbList スキーマ
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'トップ',
+        item: 'https://stats47.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: categoryData.name,
+        item: `https://stats47.com/ranking/${params.category}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: data.metadata.name,
+        item: `https://stats47.com/ranking/${params.category}/${params.subcategory}`,
+      },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={jsonLdData} />
-      {/* ページの残りの内容 */}
+      <JsonLd data={[datasetSchema, breadcrumbSchema]} />
+      {/* ページコンテンツ */}
     </>
   );
 }
 ```
 
-### 動的データの場合
+**ポイント**:
+- **Dataset スキーマ**: Google Dataset Searchでの発見可能性を向上
+- **spatialCoverage**: 地理的範囲（日本全国）を明示
+- **temporalCoverage**: 時間的範囲（年次）を明示
+- **includedInDataCatalog**: データソース（e-Stat）を明示して権威性を示す
+- **BreadcrumbList**: パンくずリストをリッチリザルトで表示
 
-データが動的に変わる場合（データベースやAPIから取得する場合など）は、Server ComponentsやクライアントコンポーネントでデータをフェッチしてからJSONデータを生成できます。
-
-### 複数の構造化データを追加
-
-複数の構造化データが必要な場合、配列として追加できます：
+### 2.4 ダッシュボードページ（WebApplication）
 
 ```tsx
-const jsonLdArray = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    // 組織情報
+// app/dashboard/page.tsx
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: '都道府県統計ダッシュボード',
+  url: 'https://stats47.com/dashboard',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web Browser',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'JPY',
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    // ウェブサイト情報
-  }
-];
-
-// Script Componentを使う場合
-<JsonLd data={jsonLdArray} />
-
-// または Metadata APIを使う場合
-other: {
-  'application/ld+json': JSON.stringify(jsonLdArray)
-}
+  featureList: [
+    '47都道府県の統計データ可視化',
+    'インタラクティブなグラフ表示',
+    'ランキング比較',
+  ],
+};
 ```
 
-### ライブラリを使用する方法
+---
 
-「next-seo」のような専用ライブラリを使うことで、より簡単に構造化データを実装できます。Next.js 15との互換性を確認した上で使用してください。
+## 3. サイトマップ生成
 
-Next.js 15はServer Componentsを優先するアプローチを採用しているため、サーバーサイドでのデータ取得と構造化データの生成がより自然な実装方法となります。
-
-## 3. サイトマップ自動生成
-
-Next.js 15ではサイトマップを自動生成するための組み込み機能が追加されました。以下に、その実装方法と応用例を説明します。
-
-### 基本的な実装方法
-
-#### App Router での実装
-
-App Router を使用している場合、`app/sitemap.ts`（または`.js`）ファイルを作成するだけで自動的にサイトマップが生成されます。
+### 3.1 基本実装
 
 ```typescript
 // app/sitemap.ts
 import { MetadataRoute } from 'next';
+import { getAllCategories, getAllSubcategories } from '@/lib/category/category-service';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://stats47.com';
+
+  // 静的ページ
+  const staticPages = [
     {
-      url: 'https://example.com',
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
+      changeFrequency: 'weekly' as const,
+      priority: 1.0,
     },
     {
-      url: 'https://example.com/about',
+      url: `${baseUrl}/dashboard`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
     },
     {
-      url: 'https://example.com/blog',
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
   ];
-}
-```
 
-このファイルは `/sitemap.xml` として自動的に公開されます。
-
-#### 動的ルートのサイトマップ生成
-
-ブログ記事やプロダクトページなど、動的に生成されるページのサイトマップは以下のように実装できます：
-
-```typescript
-// app/sitemap.ts
-import { MetadataRoute } from 'next';
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // データベースやCMSから記事データを取得
-  const posts = await fetchBlogPosts();
-  
-  // 記事ページのサイトマップエントリを生成
-  const postsEntries = posts.map((post) => ({
-    url: `https://example.com/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt || post.publishedAt),
+  // カテゴリページ
+  const categories = await getAllCategories();
+  const categoryPages = categories.map((category) => ({
+    url: `${baseUrl}/ranking/${category.id}`,
+    lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
-  // 静的ページのエントリー
-  const staticPages = [
-    {
-      url: 'https://example.com',
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 1,
-    },
-    {
-      url: 'https://example.com/about',
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-  ];
+  // ランキングページ（サブカテゴリ）
+  const subcategories = await getAllSubcategories();
+  const rankingPages = subcategories.map((subcategory) => ({
+    url: `${baseUrl}/ranking/${subcategory.categoryId}/${subcategory.id}`,
+    lastModified: new Date(subcategory.updatedAt || new Date()),
+    changeFrequency: 'daily' as const, // e-Statデータは毎日更新される可能性
+    priority: 0.9, // 最重要コンテンツ
+  }));
 
-  // すべてのエントリを結合して返す
-  return [...staticPages, ...postsEntries];
+  return [...staticPages, ...categoryPages, ...rankingPages];
 }
 ```
 
-### 応用例
+**ポイント**:
+- **ランキングページの優先度**: 0.9（検索流入の主要ソース）
+- **更新頻度**: 'daily'（e-Statデータの更新を反映）
+- **動的生成**: データベースから実際のカテゴリ・サブカテゴリを取得
 
-#### 複数のサイトマップ（サイトマップインデックス）
+### 3.2 推定ページ数
 
-大規模サイトでは、サイトマップを分割するために複数のサイトマップファイルを生成できます：
+Phase 1時点での想定：
+- トップページ: 1
+- カテゴリページ: 10-15
+- ランキングページ: 100-200（主要指標）
+- その他: 5-10
+- **合計: 116-226ページ**
+
+### 3.3 大規模化対応（Phase 2以降）
+
+ページ数が500を超える場合は、サイトマップを分割します。
 
 ```typescript
 // app/sitemap-index.ts
@@ -436,392 +458,28 @@ import { MetadataRoute } from 'next';
 export default function sitemapIndex(): MetadataRoute.SitemapIndex {
   return [
     {
-      url: 'https://example.com/sitemap-pages.xml',
+      url: 'https://stats47.com/sitemap-pages.xml',
       lastModified: new Date(),
     },
     {
-      url: 'https://example.com/sitemap-blog.xml',
-      lastModified: new Date(),
-    },
-    {
-      url: 'https://example.com/sitemap-products.xml',
+      url: 'https://stats47.com/sitemap-ranking.xml',
       lastModified: new Date(),
     },
   ];
 }
 ```
 
-そして、それぞれのサイトマップを個別に生成します：
+---
 
-```typescript
-// app/sitemap-blog.ts
-import { MetadataRoute } from 'next';
-
-export default async function sitemapBlog(): Promise<MetadataRoute.Sitemap> {
-  const posts = await fetchBlogPosts();
-  
-  return posts.map((post) => ({
-    url: `https://example.com/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt || post.publishedAt),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
-}
-```
-
-#### 国際化対応サイトマップ
-
-多言語サイトの場合、言語ごとのURLをサイトマップに含めることができます：
-
-```typescript
-// app/sitemap.ts
-import { MetadataRoute } from 'next';
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const languages = ['en', 'ja', 'fr', 'de'];
-  const pages = ['', 'about', 'contact', 'blog'];
-  
-  const entries = languages.flatMap((lang) => 
-    pages.map((page) => ({
-      url: `https://example.com/${lang}/${page}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: page === '' ? 1 : 0.8,
-    }))
-  );
-  
-  return entries;
-}
-```
-
-### パフォーマンス最適化
-
-大規模サイトでは、サイトマップの生成に時間がかかる場合があります。以下の点に注意してください：
-
-1. **キャッシュの活用**: `revalidate` オプションを使用してサイトマップをキャッシュする
-2. **ISR (Incremental Static Regeneration)**: サイトマップを定期的に再生成する
-3. **サイトマップの分割**: カテゴリごとにサイトマップを分割する
-
-### サードパーティパッケージの利用
-
-より高度な機能が必要な場合は、`next-sitemap`などのパッケージを利用することもできます。
-
-```bash
-npm install next-sitemap
-```
-
-設定ファイル `next-sitemap.config.js` を作成：
-
-```javascript
-/** @type {import('next-sitemap').IConfig} */
-module.exports = {
-  siteUrl: 'https://example.com',
-  generateRobotsTxt: true,
-  sitemapSize: 7000,
-  exclude: ['/admin/*', '/private/*'],
-  robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://example.com/server-sitemap.xml',
-    ],
-  },
-};
-```
-
-そして、`package.json` に以下のスクリプトを追加：
-
-```json
-{
-  "scripts": {
-    "postbuild": "next-sitemap"
-  }
-}
-```
-
-これにより、ビルド後に自動的にサイトマップが生成されます。
-
-### 注意点
-
-1. **環境変数の活用**: サイトURLは環境変数から取得するようにしましょう
-2. **更新頻度**: サイトマップは定期的に更新することが重要です
-3. **Search Console**: 生成したサイトマップをGoogle Search Consoleに登録することをお忘れなく
-4. **robots.txtとの連携**: robots.txtにサイトマップのURLを記載することも忘れないようにしましょう
-
-Next.js 15の組み込み機能を活用することで、簡単かつ効率的にサイトマップを自動生成できるようになりました。
-
-## 4. robots.txt適切な設定
-
-Next.js 15では、App Routerを使用してrobots.txtファイルを簡単に生成できる機能が組み込まれています。以下にその実装方法と最適化の方法を説明します。
-
-### 基本的な実装方法
-
-#### App Routerでの実装
-
-App Routerでは、`app/robots.ts`（または`.js`）ファイルを作成するだけで自動的にrobots.txtが生成されます。
+## 4. robots.txt設定
 
 ```typescript
 // app/robots.ts
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/private/'],
-    },
-    sitemap: 'https://example.com/sitemap.xml',
-  };
-}
-```
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://stats47.com';
 
-このファイルは `/robots.txt` として自動的に公開されます。
-
-#### 複数のユーザーエージェント設定
-
-異なるクローラーに対して異なるルールを設定する場合：
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/private/',
-          '/api/',
-          '/auth/',
-        ],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/temporary-content/',
-        ],
-        crawlDelay: 2,
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: ['/public/', '/blog/'],
-        disallow: '/',
-      },
-    ],
-    sitemap: 'https://example.com/sitemap.xml',
-  };
-}
-```
-
-#### 環境に応じた設定
-
-環境変数を使用して、開発環境とプロダクション環境で異なる設定を適用できます：
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
-  
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      // 本番環境以外ではすべてdisallow
-      ...(process.env.NODE_ENV !== 'production' ? { disallow: '/' } : {
-        disallow: ['/admin/', '/private/'],
-      }),
-    },
-    sitemap: `${baseUrl}/sitemap.xml`,
-  };
-}
-```
-
-### 応用例
-
-#### 複数のサイトマップの指定
-
-大規模サイトで複数のサイトマップを使用している場合：
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/private/'],
-    },
-    sitemap: [
-      'https://example.com/sitemap.xml',
-      'https://example.com/sitemap-blog.xml',
-      'https://example.com/sitemap-products.xml',
-    ],
-  };
-}
-```
-
-#### インデックス制御とrobots.txtの併用
-
-メタデータと併用してページのインデックス制御をより細かく設定：
-
-```typescript
-// app/layout.tsx または特定のページコンポーネントで
-export const metadata = {
-  robots: {
-    index: false,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: true,
-    },
-  },
-};
-```
-
-### ベストプラクティス
-
-#### 基本的な設定ガイドライン
-
-- **ユーザーエージェント**: 特定の理由がなければ `*` を使用してすべてのクローラーに適用
-- **クロールの許可**: デフォルトでは `/` を許可し、特定のディレクトリのみを制限
-- **クロール制限**: 管理パネル、ログインページ、プライベートページ、重複コンテンツなどを制限
-- **サイトマップ**: 常に最新のサイトマップURLを指定
-
-#### SEOに関する注意点
-
-- **過度な制限を避ける**: 重要なコンテンツをクロール禁止にしないよう注意
-- **一貫性を保つ**: robots.txtとmetaタグの設定は一貫性を持たせる
-- **検証**: 実装後に検索エンジンのツールで検証（Google Search Consoleなど）
-
-#### セキュリティに関する注意点
-
-- **機密情報は保護**: robots.txtはパブリックにアクセス可能なため、URLパターンだけで機密情報は保護できない
-- **認証を併用**: 重要なページは認証システムで保護
-
-#### 国際化サイトでの注意点
-
-多言語サイトの場合、言語ごとのサイトマップを指定：
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/'],
-    },
-    sitemap: [
-      'https://example.com/sitemap-en.xml',
-      'https://example.com/sitemap-ja.xml',
-      'https://example.com/sitemap-fr.xml',
-    ],
-  };
-}
-```
-
-### サードパーティパッケージの利用
-
-`next-sitemap`などのパッケージを使用すると、robots.txtとサイトマップを同時に生成できます。
-
-```javascript
-// next-sitemap.config.js
-module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://example.com',
-  generateRobotsTxt: true,
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/admin', '/private'],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/temporary-content'],
-      },
-    ],
-    additionalSitemaps: [
-      'https://example.com/sitemap-products.xml',
-      'https://example.com/sitemap-blog.xml',
-    ],
-  },
-};
-```
-
-### よくある設定例
-
-#### 標準的なウェブサイト
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: [
-        '/admin/',
-        '/api/',
-        '/private/',
-        '/tmp/',
-        '/draft/',
-      ],
-    },
-    sitemap: 'https://example.com/sitemap.xml',
-  };
-}
-```
-
-#### Eコマースサイト
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: [
-        '/admin/',
-        '/api/',
-        '/cart/',
-        '/checkout/',
-        '/my-account/',
-        '/search?*', // 検索結果ページ
-        '/product/*/review', // 製品レビューフォーム
-        '/out-of-stock/', // 在庫切れ商品
-      ],
-    },
-    sitemap: 'https://example.com/sitemap.xml',
-  };
-}
-```
-
-#### 開発環境での完全制限
-
-```typescript
-// app/robots.ts
-import { MetadataRoute } from 'next';
-
-export default function robots(): MetadataRoute.Robots {
   // 開発環境では完全にインデックスを防止
   if (process.env.NODE_ENV !== 'production') {
     return {
@@ -831,362 +489,334 @@ export default function robots(): MetadataRoute.Robots {
       },
     };
   }
-  
-  // 本番環境では通常設定
+
+  // 本番環境
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/private/'],
-    },
-    sitemap: 'https://example.com/sitemap.xml',
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          '/api/',           // APIルート禁止
+          '/admin/',         // 管理画面禁止（将来用）
+          '/*?*',            // クエリパラメータ付きURL禁止（重複コンテンツ回避）
+          '/search*',        // 検索結果ページ禁止
+          '/draft/',         // 下書きページ禁止
+        ],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/api/', '/admin/'],
+        crawlDelay: 1, // 1秒間隔でクロール
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
 ```
 
-Next.js 15の組み込み機能を活用することで、簡単かつ効率的にrobots.txtを設定できるようになりました。
-
-## まとめ
-
-Next.js 15とTailwind CSSを使用したブログサイトでSEOを最適化するには：
-
-1. **メタタグの最適化**: Metadata APIを使用してtitle、description、OGPを適切に設定
-2. **構造化データの実装**: JSON-LDを使用して検索エンジンにコンテンツの意味を伝える
-3. **サイトマップの自動生成**: 動的コンテンツを含むサイトマップを自動生成
-4. **robots.txtの適切な設定**: クローラーの動作を制御し、サイトマップを指定
-5. **パフォーマンスの最適化**: Core Web Vitalsを改善してSEOスコアを向上
-
-これらの最適化を実装することで、検索エンジンでの可視性を大幅に向上させることができます。
-
-## 関連ドキュメント
-
-- [パフォーマンス最適化ガイド](./08_パフォーマンス最適化ガイド.md)
-- [スタイリングガイド](./03_スタイリングガイド.md)
-- [エンゲージメント機能ガイド](./09_エンゲージメント機能ガイド.md)
+**ポイント**:
+- **環境別設定**: 開発環境では完全にインデックス防止
+- **クエリパラメータ禁止**: `/*?*` で重複コンテンツを回避
+- **クロール制限**: Googlebotに1秒間隔を指定（サーバー負荷軽減）
 
 ---
 
-**作成日**: 2024年10月14日  
-**最終更新日**: 2024年10月14日  
-**バージョン**: 1.0
+## 5. 動的OGP画像生成
 
-## 静的メタデータの定義
+ランキングページ用の動的OGP画像をAPIルートで生成します。
 
-```tsx
-// app/page.tsx
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'ページタイトル',
-  description: 'ページの説明文をここに記述します。SEOに重要な要素です。',
-  // OGP設定
-  openGraph: {
-    title: 'OGPタイトル',
-    description: 'OGP用の説明文',
-    url: 'https://example.com/',
-    siteName: 'サイト名',
-    images: [
-      {
-        url: 'https://example.com/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: '画像の代替テキスト',
-      },
-    ],
-    locale: 'ja_JP',
-    type: 'website',
-  },
-  // Twitter Card設定
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Twitterカードのタイトル',
-    description: 'Twitterカードの説明',
-    creator: '@アカウント名',
-    images: ['https://example.com/twitter-image.jpg'],
-  },
-};
-
-export default function Page() {
-  return <div>ページコンテンツ</div>;
-}
-```
-
-## 動的メタデータの定義
-
-動的なルート（例：ブログ記事ページなど）では、`generateMetadata` 関数を使用してデータに基づいたメタデータを生成できます：
+### 5.1 OGP画像API
 
 ```tsx
-// app/blog/[slug]/page.tsx
-import { Metadata, ResolvingMetadata } from 'next';
+// app/api/og/route.tsx
+import { ImageResponse } from 'next/og';
+import { NextRequest } from 'next/server';
+import { getRankingData } from '@/lib/ranking/ranking-repository';
 
-type Props = {
-  params: { slug: string };
-};
+export const runtime = 'edge';
 
-// 動的メタデータの生成
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // 記事データの取得
-  const article = await fetchArticle(params.slug);
-  
-  // 親メタデータの取得（あれば）
-  const previousImages = (await parent).openGraph?.images || [];
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const subcategory = searchParams.get('subcategory');
 
-  return {
-    title: article.title,
-    description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      url: `https://example.com/blog/${params.slug}`,
-      images: [
-        {
-          url: article.ogImage || 'https://example.com/default-og.jpg',
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-        ...previousImages,
-      ],
-      type: 'article',
-      publishedTime: article.publishedAt,
-      authors: [article.author],
-      tags: article.tags,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt,
-      images: [article.ogImage || 'https://example.com/default-og.jpg'],
-    },
-  };
-}
-
-export default async function ArticlePage({ params }: Props) {
-  const article = await fetchArticle(params.slug);
-  return <div>{/* 記事のコンテンツ */}</div>;
-}
-```
-
-## メタデータの継承とオーバーライド
-
-Next.js 15ではメタデータは自動的に継承されます。ルートレイアウト（`app/layout.tsx`）でベースとなるメタデータを設定し、各ページで必要に応じてオーバーライドできます。
-
-```tsx
-// app/layout.tsx
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://example.com'),
-  title: {
-    template: '%s | サイト名',
-    default: 'サイト名 - デフォルトタイトル',
-  },
-  description: 'サイト全体のデフォルト説明',
-  openGraph: {
-    type: 'website',
-    siteName: 'サイト名',
-    locale: 'ja_JP',
-  },
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="ja">
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-## その他の重要なメタタグ
-
-```tsx
-// app/layout.tsx または特定のページコンポーネントで
-export const metadata: Metadata = {
-  // 基本設定
-  title: 'タイトル',
-  description: '説明',
-  
-  // viewport
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  
-  // robots
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
-  },
-  
-  // canonical URL
-  alternates: {
-    canonical: 'https://example.com/current-page',
-    languages: {
-      'en-US': 'https://example.com/en/current-page',
-      'ja-JP': 'https://example.com/ja/current-page',
-    },
-  },
-  
-  // アイコン
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
-    },
-  },
-  
-  // テーマカラー
-  themeColor: '#4285f4',
-};
-```
-
-## メタデータの検証
-
-Next.js 15のMetadata APIは型安全で、TypeScriptを使用してメタデータの検証が可能です。また、開発モードでは自動的にメタデータのバリデーションが行われ、警告が表示されます。
-
-## ベストプラクティス
-
-1. **メタデータの基本URLを設定する**：`metadataBase`を使用して、相対URLを絶対URLに変換するベースURLを設定
-    
-2. **タイトルテンプレートを活用する**：ルートレイアウトで`title.template`を設定し、各ページで一貫したタイトル形式を維持
-    
-3. **OGP画像の最適化**：OGP画像は1200×630ピクセルが推奨サイズ
-    
-4. **多言語対応**：`alternates.languages`を使用して言語ごとの代替URLを指定
-    
-5. **アナリティクスタグの追加**：必要に応じて`Scripts`コンポーネントを使用してアナリティクスタグを追加
-    
-
-Next.js 15のMetadata APIを活用することで、SEOに最適化されたメタタグを効率的に管理・実装できます。
-
-# 構造化データ（JSON-LD）実装方法
-
-## 基本的なアプローチ
-
-Next.jsの新しいApp Routerを使用して構造化データを実装するには、主に以下の方法があります：
-
-Metadata APIを使用する方法と、Script Componentを使って直接JSONスクリプトを埋め込む方法です。
-
-## Metadata APIを使用する方法
-
-App Routerの場合、各ページコンポーネントで`generateMetadata`関数や`metadata`オブジェクトを定義して構造化データを追加できます：
-
-```tsx
-// app/page.tsx または app/[slug]/page.tsx などで
-export const generateMetadata = async ({ params }) => {
-  // ページのデータを取得（必要に応じて）
-  const pageData = await fetchPageData(params.slug);
-  
-  return {
-    title: pageData.title,
-    openGraph: {...},
-    // 構造化データの追加
-    other: {
-      'application/ld+json': JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: pageData.title,
-        author: {
-          '@type': 'Person',
-          name: pageData.author
-        },
-        datePublished: pageData.date,
-        image: pageData.image
-        // 他の必要なプロパティ
-      })
-    }
-  };
-};
-```
-
-## Script Componentを使用する方法
-
-コンポーネント内で直接スクリプトタグとして追加する方法も使えます：
-
-```tsx
-// app/components/JsonLd.tsx
-export default function JsonLd({ data }) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-// 使用例（app/page.tsxなど）
-import JsonLd from './components/JsonLd';
-
-export default function Page() {
-  const jsonLdData = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: '商品名',
-    // 他の必要なプロパティ
-  };
-
-  return (
-    <>
-      <JsonLd data={jsonLdData} />
-      {/* ページの残りの内容 */}
-    </>
-  );
-}
-```
-
-## 動的データの場合
-
-データが動的に変わる場合（データベースやAPIから取得する場合など）は、Server ComponentsやクライアントコンポーネントでデータをフェッチしてからJSONデータを生成できます。
-
-## 複数の構造化データを追加
-
-複数の構造化データが必要な場合、配列として追加できます：
-
-```tsx
-const jsonLdArray = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    // 組織情報
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    // ウェブサイト情報
+  if (!subcategory) {
+    return new Response('Missing subcategory', { status: 400 });
   }
-];
 
-// Script Componentを使う場合
-<JsonLd data={jsonLdArray} />
+  // ランキングデータを取得
+  const data = await getRankingData(subcategory);
+  const top3 = data.items.slice(0, 3);
 
-// または Metadata APIを使う場合
-other: {
-  'application/ld+json': JSON.stringify(jsonLdArray)
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 60,
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          padding: '40px',
+        }}
+      >
+        <div style={{ fontSize: 72, fontWeight: 'bold', marginBottom: 40 }}>
+          {data.metadata.name}
+        </div>
+        <div style={{ fontSize: 48, marginBottom: 60 }}>
+          都道府県ランキング
+        </div>
+
+        {/* トップ3表示 */}
+        {top3.map((item, index) => (
+          <div
+            key={item.areaCode}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: 20,
+              fontSize: 36,
+            }}
+          >
+            <span style={{ fontWeight: 'bold', marginRight: 20 }}>
+              {index + 1}位
+            </span>
+            <span style={{ marginRight: 20 }}>{item.areaName}</span>
+            <span style={{ fontWeight: 'bold' }}>{item.displayValue}</span>
+          </div>
+        ))}
+
+        <div style={{ fontSize: 32, marginTop: 60, opacity: 0.8 }}>
+          {data.metadata.year}年 | 統計で見る都道府県
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  );
 }
 ```
 
-## ライブラリを使用する方法
+**ポイント**:
+- **Edge Runtime**: 高速生成
+- **動的データ**: 実際のランキングデータを反映
+- **トップ3表示**: ユーザーの興味を引く
+- **ブランディング**: ロゴ・サイト名を含める
 
-「next-seo」のような専用ライブラリを使うことで、より簡単に構造化データを実装できます。Next.js 15との互換性を確認した上で使用してください。
+### 5.2 使用例
 
-Next.js 15はServer Componentsを優先するアプローチを採用しているため、サーバーサイドでのデータ取得と構造化データの生成がより自然な実装方法となります。
+```tsx
+// メタデータで使用
+const ogImageUrl = `/api/og?subcategory=${params.subcategory}`;
 
+export const metadata = {
+  openGraph: {
+    images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+  },
+};
+```
+
+---
+
+## 6. パフォーマンス最適化
+
+SEOスコアはパフォーマンスに大きく影響されます。
+
+### 6.1 Core Web Vitals 目標
+
+| 指標 | 目標値 | Phase 1基準 |
+|------|--------|-------------|
+| LCP (Largest Contentful Paint) | < 2.5秒 | < 3秒 |
+| FID (First Input Delay) | < 100ms | < 100ms |
+| CLS (Cumulative Layout Shift) | < 0.1 | < 0.1 |
+
+### 6.2 実装方針
+
+1. **SSG/ISR活用**
+   ```tsx
+   // ランキングページはISRで24時間キャッシュ
+   export const revalidate = 86400; // 24時間
+   ```
+
+2. **画像最適化**
+   ```tsx
+   // Next.js Imageコンポーネント使用
+   import Image from 'next/image';
+
+   <Image
+     src="/chart.png"
+     alt="ランキンググラフ"
+     width={800}
+     height={400}
+     loading="lazy"
+   />
+   ```
+
+3. **フォント最適化**
+   ```tsx
+   // app/layout.tsx
+   import { Noto_Sans_JP } from 'next/font/google';
+
+   const notoSansJP = Noto_Sans_JP({
+     subsets: ['latin'],
+     display: 'swap',
+   });
+   ```
+
+詳細は [パフォーマンス最適化ガイド](./パフォーマンス最適化.md) を参照。
+
+---
+
+## 7. SEO検証チェックリスト
+
+実装後、以下の項目を確認してください。
+
+### 7.1 メタデータ確認
+
+- [ ] すべてのページにtitle・descriptionが設定されている
+- [ ] タイトルは60文字以内
+- [ ] 説明文は120-160文字
+- [ ] OGP画像が1200×630pxで設定されている
+- [ ] canonical URLが設定されている
+
+### 7.2 構造化データ確認
+
+- [ ] Google Rich Results Testでエラーがない
+- [ ] Dataset スキーマがランキングページに設定されている
+- [ ] BreadcrumbList が正しく表示される
+
+**検証ツール**:
+- [Google Rich Results Test](https://search.google.com/test/rich-results)
+- [Schema Markup Validator](https://validator.schema.org/)
+
+### 7.3 サイトマップ確認
+
+- [ ] `/sitemap.xml` にアクセスできる
+- [ ] すべての主要ページが含まれている
+- [ ] Google Search Consoleにサイトマップを登録済み
+
+### 7.4 robots.txt確認
+
+- [ ] `/robots.txt` にアクセスできる
+- [ ] 開発環境で `Disallow: /` が設定されている
+- [ ] 本番環境で適切なルールが設定されている
+
+### 7.5 パフォーマンス確認
+
+- [ ] Lighthouse SEOスコアが80点以上
+- [ ] Lighthouse Performanceスコアが80点以上
+- [ ] LCPが3秒以内
+
+**検証方法**:
+```bash
+# Lighthouse CI
+npm run lighthouse
+
+# または Chrome DevToolsで手動検証
+# DevTools > Lighthouse > Generate report
+```
+
+---
+
+## 8. Google Search Console設定
+
+### 8.1 初期設定
+
+1. [Google Search Console](https://search.google.com/search-console) にアクセス
+2. プロパティを追加: `https://stats47.com`
+3. 所有権確認（DNSまたはHTMLファイル）
+4. サイトマップを送信: `https://stats47.com/sitemap.xml`
+
+### 8.2 モニタリング指標
+
+- **検索パフォーマンス**: クリック数、表示回数、CTR、平均掲載順位
+- **カバレッジ**: インデックス登録済みページ数、エラー
+- **Core Web Vitals**: LCP、FID、CLS
+
+### 8.3 重要クエリの監視
+
+Phase 1で狙うべき検索クエリ：
+- `[指標名] 都道府県 ランキング`
+- `都道府県 [指標名] 比較`
+- `[都道府県名] [指標名]`
+
+例：
+- `人口 都道府県 ランキング`
+- `都道府県 人口 比較`
+- `東京都 人口`
+
+---
+
+## 9. 関連ドキュメント
+
+### プロジェクト管理
+- [Phase 1実装計画](../00_プロジェクト管理/03_実装計画/Phase1.md) - SEOタスクの詳細スケジュール
+- [機能要件](../00_プロジェクト管理/02_要件定義/機能要件.md) - SEO関連の機能要件
+
+### 開発ガイド
+- [パフォーマンス最適化ガイド](./パフォーマンス最適化.md) - Core Web Vitals最適化
+- [コーディング規約](./コーディング規約.md) - メタデータの命名規則
+
+### ドメイン設計
+- [ランキングドメイン](../05_ドメイン設計/ランキング/README.md) - ランキングデータ構造
+- [カテゴリ管理ドメイン](../05_ドメイン設計/カテゴリ管理/README.md) - カテゴリ・サブカテゴリ管理
+
+---
+
+## 10. トラブルシューティング
+
+### 10.1 よくある問題
+
+#### Q1: サイトマップが生成されない
+
+**原因**: `app/sitemap.ts` の非同期処理でエラーが発生している
+
+**解決策**:
+```bash
+# ビルドログを確認
+npm run build
+
+# サイトマップにアクセスして確認
+curl http://localhost:3000/sitemap.xml
+```
+
+#### Q2: OGP画像が表示されない
+
+**原因**: 画像URLが相対パスになっている、または画像生成APIがエラー
+
+**解決策**:
+```tsx
+// 絶対URLを使用
+const ogImageUrl = `https://stats47.com/api/og?subcategory=${params.subcategory}`;
+
+// または metadataBase を設定
+export const metadata = {
+  metadataBase: new URL('https://stats47.com'),
+};
+```
+
+**検証**:
+- [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+- [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+
+#### Q3: Lighthouse SEOスコアが低い
+
+**よくある原因**:
+- [ ] `<title>` が設定されていない
+- [ ] `<meta name="description">` が設定されていない
+- [ ] 画像に `alt` 属性がない
+- [ ] リンクに説明的なテキストがない
+- [ ] `<html lang="ja">` が設定されていない
+
+---
+
+**作成日**: 2024年10月14日
+**最終更新日**: 2025年10月20日
+**バージョン**: 2.0
