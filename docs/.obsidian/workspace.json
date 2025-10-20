@@ -8,35 +8,21 @@
         "type": "tabs",
         "children": [
           {
-            "id": "94556f078362e90a",
+            "id": "b677b1b7e0133514",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/02_要件定義/02_機能要件.md",
+                "file": "01_開発ガイド/ドキュメント管理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02_機能要件"
+              "title": "ドキュメント管理"
             }
           },
           {
-            "id": "376fd95521b33213",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_技術設計/technical-specifications.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "technical-specifications"
-            }
-          },
-          {
-            "id": "8d3a1c3d71fea9cc",
+            "id": "d19a0393004e43cb",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -50,35 +36,91 @@
             }
           },
           {
-            "id": "c162feeba9bf3c88",
+            "id": "b18424a1e983f38c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_技術設計/システムアーキテクチャ.md",
+                "file": "03_技術設計/technical-specifications.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "システムアーキテクチャ"
+              "title": "technical-specifications"
             }
           },
           {
-            "id": "65e8fb4974f11deb",
+            "id": "199a5f4974a50896",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_技術設計/設計仕様書.md",
+                "file": "04_テスト戦略/01_単体テスト/ユニットテストガイド.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "設計仕様書"
+              "title": "ユニットテストガイド"
             }
           },
           {
-            "id": "0f5c9d5331c7dabf",
+            "id": "b87de705faf3fccc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/03_実装計画/00_はじめに.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "00_はじめに"
+            }
+          },
+          {
+            "id": "497933b06bb892ca",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/03_実装計画/01_フェーズ1_基盤整備.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_フェーズ1_基盤整備"
+            }
+          },
+          {
+            "id": "c955dfb80f9da198",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_デザインシステム/02_コンポーネント設計原則.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_コンポーネント設計原則"
+            }
+          },
+          {
+            "id": "9bda7a2eafccd3ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "06_運用保守/データベーストラブルシューティング.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "データベーストラブルシューティング"
+            }
+          },
+          {
+            "id": "d2c0c8f093c7f3b5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -92,7 +134,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -240,53 +282,53 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "0f5c9d5331c7dabf",
+  "active": "d2c0c8f093c7f3b5",
   "lastOpenFiles": [
-    "03_技術設計/設計仕様書.md",
-    "03_技術設計/システムアーキテクチャ.md",
-    "03_技術設計/TypeScript型ガイド.md",
-    "03_技術設計/technical-specifications.md",
-    "00_プロジェクト管理/02_要件定義/02_機能要件.md",
-    "03_技術設計/DDDドメイン分類設計書.md",
-    "99_課題管理/state-management-consolidation.md",
-    "99_課題管理/refactoring-roadmap.md",
-    "99_課題管理/sidebar-refactoring.md",
-    "99_課題管理/providers-architecture.md",
-    "99_課題管理/estat-search-parameter-investigation.md",
-    "99_課題管理/alert-style-not-reflecting.md",
-    "99_課題管理/estat-field-selection-no-data-error.md",
-    "99_課題管理/data-fetching-refactoring-plan.md",
-    "08_コンテンツ計画/02_ダッシュボード/01_国土・気象.md",
-    "07_運用保守/デプロイ手順.md",
-    "04_テスト戦略/01_単体テスト/ユニットテストガイド.md",
-    "00_プロジェクト管理/02_要件定義/01_プロジェクト要件.md",
+    "06_運用保守/データベーストラブルシューティング.md",
+    "02_デザインシステム/02_コンポーネント設計原則.md",
+    "08_リソース/都道府県別産業割合.png",
+    "08_リソース/都道府県ごとの物価分析.png",
+    "08_リソース/転入転出.png",
+    "08_リソース/就職率.png",
+    "08_リソース/参考リンク.md",
+    "08_リソース/ランキング画像サンプル_02.png",
+    "08_リソース/ランキング画像サンプル_01.png",
+    "08_リソース/x.md",
+    "08_リソース/sns-image-sizes.md",
+    "08_リソース/instagram.md",
+    "08_リソース/design.png",
+    "08_リソース",
+    "07_コンテンツ計画/02_ダッシュボード/01_国土・気象.md",
+    "07_コンテンツ計画/02_ダッシュボード/02_人口・世帯.md",
+    "07_コンテンツ計画/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
+    "07_コンテンツ計画/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
+    "07_コンテンツ計画/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
+    "07_コンテンツ計画/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
+    "07_コンテンツ計画/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
+    "07_コンテンツ計画/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
+    "07_コンテンツ計画/03_ブログ記事/ブログ記事改善案.md",
+    "07_コンテンツ計画/03_ブログ記事/「データで読み解く日本の交通安全 〜減少傾向にある交通事故と新たな課題〜」.md",
+    "07_コンテンツ計画/03_ブログ記事/よまれる記事.md",
+    "07_コンテンツ計画/01_ランキング記事",
+    "07_コンテンツ計画/02_ダッシュボード",
+    "07_コンテンツ計画/03_ブログ記事",
+    "07_コンテンツ計画",
+    "06_運用保守/バックアップリストア.md",
+    "06_運用保守/デプロイ手順.md",
+    "06_運用保守",
     "00_プロジェクト管理/03_実装計画/01_フェーズ1_基盤整備.md",
-    "00_プロジェクト管理/02_要件定義/04_MVP定義.md",
-    "00_プロジェクト管理/02_要件定義/03_非機能要件.md",
-    "00_プロジェクト管理/02_要件定義_backup_20251020212429/非機能要件.md",
-    "00_プロジェクト管理/02_要件定義_backup_20251020212429/機能要件.md",
-    "00_プロジェクト管理/02_要件定義_backup_20251020212429/プロジェクト要件.md",
-    "00_プロジェクト管理/02_要件定義_backup_20251020212429/MVP定義.md",
+    "00_プロジェクト管理/03_実装計画/00_はじめに.md",
+    "04_テスト戦略/01_単体テスト/ユニットテストガイド.md",
+    "03_技術設計/technical-specifications.md",
+    "03_技術設計/TypeScript型ガイド.md",
+    "01_開発ガイド/ドキュメント管理.md",
+    "01_開発ガイド/開発環境チューニング.md",
     "00_プロジェクト管理/02_要件定義_backup_20251020212429",
-    "05_ドメイン設計/ダッシュボード/components/choropleth-maps.md",
     "00_プロジェクト管理/03_実装計画",
     "00_プロジェクト管理/03_戦略/ロードマップ.md.tmp.62080.1760958805955",
     "03_技術設計/02_ADR（アーキテクチャ決定記録）",
-    "03_技術設計/01_アーキテクチャ",
-    "03_技術設計",
-    "04_テスト戦略/01_単体テスト",
-    "04_テスト戦略",
-    "05_ドメイン設計/共有/実装",
-    "05_ドメイン設計/共有/仕様",
     "09_リソース/転入転出.png",
     "09_リソース/都道府県別産業割合.png",
-    "09_リソース/都道府県ごとの物価分析.png",
-    "09_リソース/就職率.png",
-    "09_リソース/ランキング画像サンプル_02.png",
-    "09_リソース/ランキング画像サンプル_01.png",
-    "09_リソース/design.png",
-    "10_資料/都道府県別産業割合.png",
-    "10_資料/都道府県ごとの物価分析.png",
-    "10_資料/転入転出.png"
+    "09_リソース/都道府県ごとの物価分析.png"
   ]
 }
