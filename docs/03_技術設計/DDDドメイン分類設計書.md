@@ -3,9 +3,7 @@ title: ドメイン駆動設計によるドメイン分類設計書
 created: 2025-01-20
 updated: 2025-01-20
 tags:
-  - architecture
-  - domain-driven-design
-  - ddd
+  - ドメイン駆動設計
 ---
 
 # ドメイン駆動設計によるドメイン分類設計書

@@ -3,7 +3,7 @@ title: Storybook 開発ガイド
 created: 2025-10-14
 updated: 2025-10-16
 tags:
-  - development-guide
+  - storybook
 ---
 
 # Storybook 開発ガイド

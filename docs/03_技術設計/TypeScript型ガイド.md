@@ -96,4 +96,4 @@ type ApiState<T> =
 
 - `docs/03_技術設計/01_アーキテクチャ/システムアーキテクチャ.md`
 - `tsconfig.json` の `paths`
-- `docs/05_ドメイン設計/共有/README.md`（共有カーネルの運用と昇格要件）
+- `docs/04_ドメイン設計/共有/README.md`（共有カーネルの運用と昇格要件）
