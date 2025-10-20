@@ -330,7 +330,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 14
       }
     ],
     "direction": "vertical"
@@ -395,13 +395,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
+                "file": "04_技術設計/01_アーキテクチャ/DDDドメイン分類設計書.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "プロジェクト要件のアウトライン"
+              "title": "DDDドメイン分類設計書のアウトライン"
             }
           }
         ]
@@ -485,8 +485,9 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "7f1b92a6565f5add",
+  "active": "fc3a9fe0a24aa78c",
   "lastOpenFiles": [
+    "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
     "00_プロジェクト管理/02_要件定義/機能要件.md",
     "04_技術設計/01_アーキテクチャ/実装優先度ガイド.md",
     "04_技術設計/01_アーキテクチャ/開発順序ベストプラクティス.md",
@@ -512,7 +513,6 @@
     "00_プロジェクト管理/04_統合計画/データ統合設計書.md",
     "05_ドメイン設計/e-Stat API/メタ情報/概要.md",
     "05_ドメイン設計/e-Stat API/メタ情報/テスト/ユニットテスト.md",
-    "00_プロジェクト管理/04_統合計画/世界統計統合.md",
     "05_ドメイン設計/データベース/運用",
     "05_ドメイン設計/e-Stat API/メタ情報/テスト",
     "05_ドメイン設計/e-Stat API/メタ情報/実装",
