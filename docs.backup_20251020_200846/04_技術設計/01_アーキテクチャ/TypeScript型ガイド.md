@@ -1,0 +1,99 @@
+---
+title: TypeScript型ガイド
+created: 2025-10-20
+updated: 2025-10-20
+tags:
+  - architecture
+  - types
+  - development-guide
+---
+
+# TypeScript 型ガイド（実務最小）
+
+## 1. 概要
+
+- 目的: 型の配置・命名・インポート規約を最小限で統一
+- 適用範囲: `src/types`, `src/lib/*/types`, `src/components/*/types.ts`
+
+## 2. アーキテクチャ（3 層）
+
+- 共有型: `src/types/shared/`（3 ドメイン以上で共通・ドメイン非依存）
+- ドメイン型: `src/lib/DOMAIN/types/`（そのドメイン専用）
+- コンポーネント型: `src/components/.../types.ts`（そのコンポーネント専用）
+
+## 3. 配置ルール
+
+- 共有型は真に共通なもののみ（ID, Timestamp, Pagination など）
+- ドメイン型はドメインロジックの近くにコロケーション
+- コンポーネント固有の Props/State はコンポーネント直下
+
+推奨ディレクトリ構造（抜粋）:
+
+```
+src/
+├── types/
+│   └── shared/{primitives.ts,pagination.ts,table.ts,utility.ts}
+└── lib/
+    ├── ranking/types/{index.ts,item.ts,visualization.ts}
+    ├── estat-api/types/{index.ts,meta-info.ts}
+    └── area/types/{index.ts}
+```
+
+判断フロー:
+
+1. 3 ドメイン以上で共有? → `src/types/shared/`
+2. 単一コンポーネントのみ? → `components/.../types.ts`
+3. それ以外 → `lib/DOMAIN/types/`
+
+## 4. 命名規則
+
+- 型名: PascalCase、接頭辞（I/T）禁止
+- ファイル名: kebab-case、主要型と対応（例: `ranking-item.ts`）
+- ディレクトリ: kebab-case、ドメインは単数（例: `ranking/types`）
+
+## 5. import/export
+
+- 型専用は `import type { X } from '...'`
+- 再エクスポートは `index.ts` を用いて最小限
+- 循環参照回避: 共有型へ抽出 or 依存方向を上位 → 下位に統一
+
+例:
+
+```typescript
+// ✅ import type の利用
+import type { EstatMetaInfo } from "@/lib/estat-api/types";
+import type { Page } from "@/types/shared";
+```
+
+## 6. ベストプラクティス
+
+- 判別ユニオンで状態管理を型安全化
+- ユーティリティ型（Pick/Omit/Partial）を積極活用
+- 型ガードで入出力を検証
+
+例（判別ユニオン）:
+
+```typescript
+type ApiState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
+```
+
+## 7. 移行チェックリスト
+
+- 使用箇所特定 → 新配置へ移動 → import 置換 → tsc 通過確認 → 旧削除
+- コミット前に循環参照と不要再エクスポートを確認
+
+## 8. FAQ
+
+- enum よりユニオン型を推奨
+- 長いパスは `tsconfig.json` の `paths` を使用
+- 迷ったら「共有性 → コンポーネント専用 → ドメイン専用」の順で判定
+
+## 9. 関連
+
+- `docs/04_技術設計/01_アーキテクチャ/システムアーキテクチャ.md`
+- `tsconfig.json` の `paths`
+- `docs/05_ドメイン設計/共有/README.md`（共有カーネルの運用と昇格要件）

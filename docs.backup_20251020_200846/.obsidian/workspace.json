@@ -1,0 +1,306 @@
+{
+  "main": {
+    "id": "4f114ac3606b4295",
+    "type": "split",
+    "children": [
+      {
+        "id": "16cd2fade29c2453",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "838a39c3d472992d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_技術設計/01_アーキテクチャ/DDDドメイン分類設計書.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DDDドメイン分類設計書"
+            }
+          },
+          {
+            "id": "549772250f821c68",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/01_概要/プロジェクト概要.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "プロジェクト概要"
+            }
+          },
+          {
+            "id": "4435b687cc489e90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "プロジェクト憲章"
+            }
+          },
+          {
+            "id": "12078e8edba34a70",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_開発ガイド/ドキュメント管理.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ドキュメント管理"
+            }
+          },
+          {
+            "id": "aa136da81f537b6d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "プロジェクト要件"
+            }
+          },
+          {
+            "id": "b56b0fc28068d622",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/02_要件定義/機能要件.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "機能要件"
+            }
+          },
+          {
+            "id": "d67da9919a4962be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/02_要件定義/非機能要件.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "非機能要件"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "50ff58c470a4a136",
+    "type": "split",
+    "children": [
+      {
+        "id": "5ee186e6106be43c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "860eb1f2bf495c69",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "ファイルエクスプローラ"
+            }
+          },
+          {
+            "id": "a8b6a35ecc29e5b5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "検索"
+            }
+          },
+          {
+            "id": "ebea38cb8b94ad48",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "ブックマーク"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 232.5
+  },
+  "right": {
+    "id": "8ed870fdff91f44c",
+    "type": "split",
+    "children": [
+      {
+        "id": "b90d79240d48f3e9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "df70d06db1e43817",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "02_domain/dashboard/implementation/best-practices.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "best-practicesへのバックリンク"
+            }
+          },
+          {
+            "id": "6dce3cb1f191fe33",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "アウトゴーイングリンク"
+            }
+          },
+          {
+            "id": "ec34d3a6ce1aacbf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "タグ"
+            }
+          },
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "00_プロジェクト管理/02_要件定義/機能要件.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "機能要件のアウトライン"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:クイックスイッチャーを開く": false,
+      "graph:グラフビューを開く": false,
+      "canvas:新規キャンバスを作成": false,
+      "daily-notes:今日のデイリーノートを開く": false,
+      "templates:テンプレートを挿入": false,
+      "command-palette:コマンドパレットを開く": false,
+      "bases:Create new base": false,
+      "float-search:Search obsidian in modal view": false
+    }
+  },
+  "active": "b56b0fc28068d622",
+  "lastOpenFiles": [
+    "01_開発ガイド/ドキュメント管理.md",
+    "00_プロジェクト管理/02_要件定義/非機能要件.md",
+    "00_プロジェクト管理/02_要件定義/機能要件.md",
+    "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
+    "00_プロジェクト管理/01_概要/プロジェクト概要.md",
+    "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
+    "05_ドメイン設計/共有/README.md",
+    "05_ドメイン設計/共有/実装",
+    "05_ドメイン設計/共有/仕様",
+    "05_ドメイン設計/共有/テスト",
+    "05_ドメイン設計/共有",
+    "04_技術設計/01_アーキテクチャ/TypeScript型ガイド.md",
+    "04_技術設計/01_アーキテクチャ/DDDドメイン分類設計書.md",
+    "01_開発ガイド/documentation_management.md",
+    "00_プロジェクト管理/04_統合計画/世界の統計.md",
+    "01_development_guide",
+    "09_リソース/参考リンク.md",
+    "INDEX.md",
+    "01_概要.md",
+    "99_課題管理/issues/estat-search-parameter-investigation.md",
+    "99_課題管理/issues/estat-field-selection-no-data-error.md",
+    "99_課題管理/state-management-consolidation.md",
+    "99_課題管理/sidebar-refactoring.md",
+    "99_課題管理/refactoring-roadmap.md",
+    "99_課題管理/providers-architecture.md",
+    "99_課題管理/issues",
+    "99_課題管理/data-fetching-refactoring-plan.md",
+    "99_課題管理/alert-style-not-reflecting.md",
+    "99_課題管理",
+    "09_リソース/05_resources/転入転出.png",
+    "09_リソース/05_resources/都道府県別産業割合.png",
+    "09_リソース/05_resources/都道府県ごとの物価分析.png",
+    "09_リソース/05_resources/就職率.png",
+    "09_リソース/05_resources/ランキング画像サンプル_02.png",
+    "09_リソース/05_resources/ランキング画像サンプル_01.png",
+    "09_リソース/05_resources/x.md",
+    "09_リソース/05_resources/sns-image-sizes.md",
+    "09_リソース/05_resources/instagram.md",
+    "09_リソース/05_resources/design.png",
+    "09_リソース/05_resources",
+    "09_リソース",
+    "08_コンテンツ計画/04_content_planning/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
+    "08_コンテンツ計画/04_content_planning/03_ブログ記事",
+    "10_資料/都道府県別産業割合.png",
+    "10_資料/都道府県ごとの物価分析.png",
+    "10_資料/転入転出.png"
+  ]
+}
