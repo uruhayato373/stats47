@@ -8,21 +8,21 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5f971908949f664a",
+            "id": "bd90f5385c08f992",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
+                "file": "01_開発ガイド/パフォーマンス最適化.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "プロジェクト要件"
+              "title": "パフォーマンス最適化"
             }
           },
           {
-            "id": "19a7dcd3bf5f8522",
+            "id": "746bdc4193deaed4",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -36,7 +36,91 @@
             }
           },
           {
-            "id": "624ae06a4bbc9daf",
+            "id": "c474aaee6e435e58",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_開発ガイド/本番パフォーマンス最適化.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "本番パフォーマンス最適化"
+            }
+          },
+          {
+            "id": "19094b25c54a5986",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/DDDドメイン分類設計書.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DDDドメイン分類設計書"
+            }
+          },
+          {
+            "id": "1d6d8753e9e750ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/001_Cloudflare採用理由.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "001_Cloudflare採用理由"
+            }
+          },
+          {
+            "id": "e8af656d73152973",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/technical-specifications.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "technical-specifications"
+            }
+          },
+          {
+            "id": "20bf88ff98c33b71",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/TypeScript型ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TypeScript型ガイド"
+            }
+          },
+          {
+            "id": "801b88061d383f8f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/システムアーキテクチャ.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "システムアーキテクチャ"
+            }
+          },
+          {
+            "id": "b07c8eae52da13ba",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -50,7 +134,7 @@
             }
           },
           {
-            "id": "ab0a721f6749d865",
+            "id": "bb3cf3906e9c3d46",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -62,23 +146,9 @@
               "icon": "lucide-file",
               "title": "ドキュメント管理"
             }
-          },
-          {
-            "id": "186ca3f54921e61d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_開発ガイド/コーディング規約.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "コーディング規約"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -198,13 +268,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_開発ガイド/大規模実装ガイド.md",
+                "file": "01_概要.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大規模実装ガイドのアウトライン"
+              "title": "01_概要のアウトライン"
             }
           }
         ],
@@ -226,34 +296,34 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "624ae06a4bbc9daf",
+  "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
-    "01_開発ガイド/データフェッチ.md",
-    "01_開発ガイド/コーディング規約.md",
+    "03_技術設計/technical-specifications.md",
+    "03_技術設計/001_Cloudflare採用理由.md",
+    "03_技術設計/DDDドメイン分類設計書.md",
+    "00_プロジェクト管理/03_実装計画/03_フェーズ3_拡張と安定化.md",
+    "03_技術設計/システムアーキテクチャ.md",
+    "03_技術設計/TypeScript型ガイド.md",
+    "00_プロジェクト管理/03_実装計画/02_フェーズ2_コア機能.md",
+    "03_技術設計/01_アーキテクチャ/実装優先度ガイド.md",
+    "00_プロジェクト管理/03_実装計画/01_フェーズ1_基盤整備.md",
+    "00_プロジェクト管理/03_実装計画/00_はじめに.md",
+    "01_開発ガイド/本番パフォーマンス最適化.md",
+    "01_開発ガイド/大規模実装ガイド.md",
     "01_開発ガイド/ドキュメント管理.md",
+    "01_開発ガイド/パフォーマンス最適化.md",
+    "01_開発ガイド/データフェッチ.md",
+    "01_開発ガイド/開発環境チューニング.md",
+    "01_開発ガイド/コーディング規約.md",
     "01_開発ガイド/データフェッチング戦略.md",
     "01_開発ガイド/useSWR仕様.md",
     "00_プロジェクト管理/02_要件定義/プロジェクト要件.md",
     "02_デザインシステム/01_スタイルガイド.md",
-    "01_開発ガイド/大規模実装ガイド.md",
-    "01_開発ガイド/パフォーマンス最適化.md",
     "00_プロジェクト管理/04_統合計画/01_日本の統計.md",
     "00_プロジェクト管理/02_要件定義/MVP定義.md",
     "01_開発ガイド/SEOガイド.md",
     "00_プロジェクト管理/04_統合計画/02_世界の統計.md",
     "01_開発ガイド/documentation_management.md",
-    "01_開発ガイド/Next.js最適化.md",
-    "00_プロジェクト管理/02_要件定義/非機能要件.md",
-    "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
-    "00_プロジェクト管理/03_実装計画/Phase1.md",
-    "00_プロジェクト管理/03_実装計画/README.md",
-    "00_プロジェクト管理/03_実装計画/Phase2.md",
-    "00_プロジェクト管理/03_実装計画/Phase3.md",
-    "01_開発ガイド/型定義ガイド.md",
-    "01_開発ガイド/型管理ガイド.md",
-    "00_プロジェクト管理/03_実装計画/ロードマップ.md",
-    "00_プロジェクト管理/01_概要/MVP定義.md",
-    "00_プロジェクト管理/01_概要/収益化戦略.md",
     "00_プロジェクト管理/03_実装計画",
     "00_プロジェクト管理/03_戦略/ロードマップ.md.tmp.62080.1760958805955",
     "03_技術設計/02_ADR（アーキテクチャ決定記録）",
@@ -264,13 +334,13 @@
     "05_ドメイン設計/共有/実装",
     "05_ドメイン設計/共有/仕様",
     "05_ドメイン設計/共有/テスト",
-    "09_リソース/05_resources/転入転出.png",
-    "09_リソース/05_resources/都道府県別産業割合.png",
-    "09_リソース/05_resources/都道府県ごとの物価分析.png",
-    "09_リソース/05_resources/就職率.png",
-    "09_リソース/05_resources/ランキング画像サンプル_02.png",
-    "09_リソース/05_resources/ランキング画像サンプル_01.png",
-    "09_リソース/05_resources/design.png",
+    "09_リソース/転入転出.png",
+    "09_リソース/都道府県別産業割合.png",
+    "09_リソース/都道府県ごとの物価分析.png",
+    "09_リソース/就職率.png",
+    "09_リソース/ランキング画像サンプル_02.png",
+    "09_リソース/ランキング画像サンプル_01.png",
+    "09_リソース/design.png",
     "10_資料/都道府県別産業割合.png",
     "10_資料/都道府県ごとの物価分析.png",
     "10_資料/転入転出.png"
