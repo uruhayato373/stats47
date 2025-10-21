@@ -10,7 +10,6 @@ tags:
 
 # 技術仕様書
 
-
 ### 技術スタック
 
 #### フロントエンド
@@ -54,31 +53,125 @@ stats47/
 └── config files           # 設定ファイル
 ```
 
-### ソースコード構造
+### ソースコード構造（ルートグループ対応）
 
 ```
 src/
 ├── app/                    # Next.js App Router
+│   ├── (public)/          # 公開ページグループ
+│   │   ├── layout.tsx     # 共通レイアウト
+│   │   ├── page.tsx       # トップページ
+│   │   ├── about/
+│   │   └── blog/
+│   ├── (stats)/           # 統計データグループ
+│   │   ├── layout.tsx     # 統計ページ共通レイアウト
+│   │   └── [category]/
+│   │       └── [subcategory]/
+│   │           ├── page.tsx               # サブカテゴリトップ
+│   │           ├── ranking/
+│   │           │   └── [rankingKey]/
+│   │           └── area/
+│   │               └── [areaCode]/
+│   ├── admin/             # 管理画面（認証必須）
+│   │   ├── layout.tsx     # 管理画面レイアウト
+│   │   ├── middleware.ts  # 認証チェック
+│   │   ├── geoshape-cache/
+│   │   ├── visualization-settings/
+│   │   └── dev-tools/     # 開発ツールセクション
+│   │       └── estat-api/ # e-Stat API関連ツール
+│   │           ├── stats-data/
+│   │           ├── stats-list/
+│   │           └── meta-info/
 │   ├── api/               # API ルート
-│   ├── (dashboard)/       # ダッシュボードページ
 │   └── globals.css        # グローバルスタイル
 ├── components/            # React コンポーネント
-│   ├── common/           # 共通コンポーネント
-│   ├── layout/           # レイアウトコンポーネント
-│   ├── ranking/          # ランキング関連
-│   ├── estat-api/        # e-Stat API 関連
-│   └── d3/               # D3.js コンポーネント
+│   ├── atoms/            # Atomic Design: Atoms
+│   ├── molecules/        # Atomic Design: Molecules
+│   ├── organisms/        # Atomic Design: Organisms
+│   ├── templates/        # Atomic Design: Templates
+│   └── pages/            # Atomic Design: Pages
 ├── lib/                   # ユーティリティライブラリ
 │   ├── database/         # データベース接続
 │   ├── ranking/          # ランキングロジック
 │   ├── estat/            # e-Stat API 連携
 │   └── area/             # 地域データ管理
-├── atoms/                 # Jotai 状態管理
 ├── hooks/                 # カスタムフック
 ├── types/                 # TypeScript 型定義
 ├── config/                # 設定ファイル
 └── data/                  # データファイル
 ```
+
+## ルーティング戦略
+
+### URL 構造
+
+**統計データページ:**
+
+- `/{category}/{subcategory}` - サブカテゴリトップ（統合ビュー）
+- `/{category}/{subcategory}/ranking/{rankingKey}` - ランキング詳細
+- `/{category}/{subcategory}/area/{areaCode}` - 地域別ダッシュボード
+
+**管理画面:**
+
+- `/admin` - 管理画面トップ
+- `/admin/geoshape-cache` - 地図データキャッシュ管理
+- `/admin/visualization-settings` - 可視化設定管理
+- `/admin/dev-tools/estat-api/*` - e-Stat API 関連ツール（認証必須）
+
+### ルートグループの利点
+
+- **レイアウトの分離**: 各機能ごとに異なるレイアウトを適用
+- **メタデータの個別化**: 機能別の SEO 設定
+- **エラーハンドリングの分離**: 機能別のエラー表示
+- **アクセス制御の分離**: 管理画面と一般ページの認証制御を分離
+- **セキュリティの向上**: e-Stat API 関連ページを管理画面配下に配置
+
+## アクセス制御
+
+### 認証戦略
+
+#### 管理画面の認証
+
+```typescript
+// admin/middleware.ts
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // 管理画面全体の認証チェック
+  if (pathname.startsWith("/admin")) {
+    const token = await getToken({ req: request });
+
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    // 開発ツールは開発環境のみアクセス可能
+    if (pathname.startsWith("/admin/dev-tools/")) {
+      const env = process.env.NODE_ENV;
+      if (env === "production" && !token.isDeveloper) {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
+    }
+  }
+
+  return NextResponse.next();
+}
+```
+
+#### 環境別アクセス制御
+
+| 環境            | 一般ページ | 管理画面 | 開発ツール |
+| --------------- | ---------- | -------- | ---------- |
+| **development** | 自由       | 認証必須 | 認証必須   |
+| **staging**     | 自由       | 認証必須 | 認証必須   |
+| **production**  | 自由       | 認証必須 | 開発者のみ |
+
+### セキュリティ考慮事項
+
+1. **e-Stat API 関連ページの保護**: 管理画面配下に移動して認証必須化
+2. **環境別アクセス制御**: 本番環境では開発者のみ開発ツールにアクセス可能
+3. **SEO 最適化**: 管理画面は検索エンジンにインデックスしない設定
+4. **CSRF 保護**: API ルートでの適切な CSRF トークン検証
 
 ## 状態管理アーキテクチャ
 
@@ -136,7 +229,6 @@ export const customAtom = atomWithStorage("custom-key", defaultValue, {
 
 ### RESTful API 原則
 
-
 #### レスポンス形式
 
 ```typescript
@@ -191,9 +283,7 @@ const ERROR_CODES = {
 
 ### Cloudflare D1 (SQLite) スキーマ
 
-
 ### Cloudflare R2 ストレージ
-
 
 ## セキュリティ設計
 
@@ -271,7 +361,6 @@ const result = stmt.all(rankingKey, timeCode);
 ```
 
 ## パフォーマンス設計
-
 
 ## 監視・ログ設計
 
@@ -359,4 +448,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: stats47
 ```
-

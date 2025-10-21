@@ -13,20 +13,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "技術選定評価_2025"
-            }
-          },
-          {
-            "id": "e9eb907b9cfc9174",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "01_開発ガイド/08_ドキュメント管理.md",
                 "mode": "source",
                 "source": false
@@ -36,73 +22,31 @@
             }
           },
           {
-            "id": "5cca62898f0d43e2",
+            "id": "507c9ae167a2d313",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/01_概要/プロジェクト概要.md",
+                "file": "02_デザインシステム/02_アイコンシステム.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "プロジェクト概要"
+              "title": "02_アイコンシステム"
             }
           },
           {
-            "id": "ffe0efb792e8da69",
+            "id": "be63b710ab3d7aae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
+                "file": "03_技術設計/App Router URL構成最適化.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "プロジェクト憲章"
-            }
-          },
-          {
-            "id": "f0e8127b5cbf685e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_技術設計/実装パターン設計.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "実装パターン設計"
-            }
-          },
-          {
-            "id": "db959d3c718452e3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_技術設計/technical-specifications.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "technical-specifications"
-            }
-          },
-          {
-            "id": "fde4cb4f307994d3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_技術設計/DDDドメイン分類設計書.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "DDDドメイン分類設計書"
+              "title": "App Router URL構成最適化"
             }
           }
         ]
@@ -159,31 +103,10 @@
             }
           }
         ]
-      },
-      {
-        "id": "1077f4b849e0014a",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d873db75767a7e2f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "技術選定評価_2025のアウトライン"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 315.5
+    "width": 369.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -239,14 +162,28 @@
               "icon": "lucide-tags",
               "title": "タグ"
             }
+          },
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01_開発ガイド/08_ドキュメント管理.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "08_ドキュメント管理のアウトライン"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -260,53 +197,53 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "385ed1b796d65d92",
+  "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
+    "03_技術設計/ADR/Cloudflare採用理由.md",
+    "03_技術設計/ADR/001_Cloudflare採用理由.md",
+    "03_技術設計/ADR",
+    "ADR",
+    "無題のフォルダ",
     "03_技術設計/App Router URL構成最適化.md",
-    "05_テスト戦略/06_ドメイン別テスト",
-    "05_テスト戦略/05_パフォーマンステスト",
-    "05_テスト戦略/04_ビジュアルリグレッションテスト",
-    "05_テスト戦略/03_E2Eテスト",
-    "05_テスト戦略/02_統合テスト",
-    "01_開発ガイド/11_shadcn-ui統合ガイド.md",
-    "03_技術設計/DDDドメイン分類設計書.md",
-    "03_技術設計/実装パターン設計 1.md",
-    "03_技術設計/データフェッチ設計 1.md",
-    "03_技術設計/technical-specifications.md",
-    "03_技術設計/実装パターン設計.md",
-    "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
-    "00_プロジェクト管理/01_概要/プロジェクト概要.md",
-    "01_開発ガイド/08_ドキュメント管理.md",
-    "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
-    "02_デザインシステム/03_タイポグラフィシステム.md",
-    "00_プロジェクト管理/03_戦略",
-    "02_デザインシステム/01_スタイルガイド.md",
-    "01_開発ガイド/07_大規模実装ガイド.md",
-    "01_開発ガイド/09_コンポーネント実装ガイド.md",
-    "01_開発ガイド/10_Atomic Design実装.md",
-    "02_デザインシステム/06_Storybook運用ガイド.md",
-    "02_デザインシステム/04_レスポンシブデザインガイド.md",
     "02_デザインシステム/02_アイコンシステム.md",
-    "02_デザインシステム/05_タイポグラフィシステム.md",
-    "02_デザインシステム/04_アイコンシステム.md",
-    "02_デザインシステム/04_Storybook運用ガイド.md",
-    "02_デザインシステム/03_レスポンシブデザインガイド.md",
-    "01_開発ガイド/07_大規模実装ガイド.md.tmp.2526.1760996189168",
-    "01_開発ガイド/07_大規模実装ガイド.md.tmp.2526.1760996176645",
-    "01_開発ガイド/07_大規模実装ガイド.md.tmp.2526.1760996164664",
-    "03_技術設計/コンポーネントアーキテクチャ.md",
-    "02_デザインシステム/02_コンポーネント設計原則.md",
-    "04_ドメイン設計/e-Stat API/03_メタ情報/実装/サービス実装.md",
-    "03_技術設計/01_アーキテクチャ",
+    "01_開発ガイド/08_ドキュメント管理.md",
+    "99_課題管理/tailwind-refactoring-action-plan.md",
+    "99_課題管理/tailwind-light-mode-issues-root-cause.md",
+    "99_課題管理/state-management-consolidation.md",
+    "99_課題管理/sidebar-refactoring.md",
+    "99_課題管理/refactoring-roadmap.md",
+    "99_課題管理/providers-architecture.md",
+    "99_課題管理/estat-search-parameter-investigation.md",
+    "99_課題管理/alert-style-not-reflecting.md",
+    "99_課題管理/adapter-migration-plan.md",
+    "99_課題管理/README.md",
+    "99_課題管理",
     "08_リソース/都道府県別産業割合.png",
     "08_リソース/都道府県ごとの物価分析.png",
     "08_リソース/転入転出.png",
     "08_リソース/就職率.png",
+    "08_リソース/参考リンク.md",
     "08_リソース/ランキング画像サンプル_02.png",
     "08_リソース/ランキング画像サンプル_01.png",
+    "08_リソース/x.md",
+    "08_リソース/sns-image-sizes.md",
+    "08_リソース/instagram.md",
     "08_リソース/design.png",
-    "09_リソース/転入転出.png",
-    "09_リソース/都道府県別産業割合.png",
-    "09_リソース/都道府県ごとの物価分析.png"
+    "08_リソース",
+    "07_コンテンツ計画/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
+    "07_コンテンツ計画/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
+    "07_コンテンツ計画/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
+    "07_コンテンツ計画/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
+    "07_コンテンツ計画/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
+    "07_コンテンツ計画/03_ブログ記事/ブログ記事改善案.md",
+    "07_コンテンツ計画/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
+    "07_コンテンツ計画/03_ブログ記事",
+    "07_コンテンツ計画/02_ダッシュボード",
+    "07_コンテンツ計画/01_ランキング記事",
+    "07_コンテンツ計画",
+    "06_運用保守",
+    "05_resources/都道府県別産業割合.png",
+    "05_resources/都道府県ごとの物価分析.png",
+    "05_resources/転入転出.png"
   ]
 }
