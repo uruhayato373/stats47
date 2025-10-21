@@ -162,6 +162,62 @@
             }
           },
           {
+            "id": "91b96e7fb6dc5f38",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/システムアーキテクチャ.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "システムアーキテクチャ"
+            }
+          },
+          {
+            "id": "7817d719ddfb7ad9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/11_shadcn-ui統合ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "11_shadcn-ui統合ガイド"
+            }
+          },
+          {
+            "id": "5e43c1fd46b87eb8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/01_コーディング規約.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_コーディング規約"
+            }
+          },
+          {
+            "id": "4d389ec8493e5baf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/01_システム概要/03_技術スタック.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03_技術スタック"
+            }
+          },
+          {
             "id": "2ea781fb091a2ecf",
             "type": "leaf",
             "state": {
@@ -173,6 +229,34 @@
               },
               "icon": "lucide-file",
               "title": "DDDドメイン分類"
+            }
+          },
+          {
+            "id": "353a76f60959fbfc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/03_環境別起動ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03_環境別起動ガイド"
+            }
+          },
+          {
+            "id": "354eeae0899199cd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/06_開発環境チューニング.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "06_開発環境チューニング"
             }
           },
           {
@@ -232,7 +316,7 @@
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -352,13 +436,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
+                "file": "01_技術設計/01_システム概要/02_プロジェクト構造.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "ドメイン間依存関係のアウトライン"
+              "title": "02_プロジェクト構造のアウトライン"
             }
           }
         ],
@@ -380,20 +464,28 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "db52dab7ed519a6f",
+  "active": "e2c30bd0c4b8ff4d",
   "lastOpenFiles": [
+    "01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
+    "04_開発ガイド/02_環境設定ガイド.md",
+    "01_技術設計/システムアーキテクチャ.md",
+    "01_技術設計/01_システム概要/02_プロジェクト構造.md",
+    "04_開発ガイド/06_開発環境チューニング.md",
+    "04_開発ガイド/03_環境別起動ガイド.md",
+    "04_開発ガイド/01_コーディング規約.md",
+    "04_開発ガイド/11_shadcn-ui統合ガイド.md",
+    "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
+    "01_技術設計/02_ADR/01_Cloudflare採用理由.md",
+    "01_技術設計/02_ADR/00_はじめに.md",
     "01_技術設計/01_システム概要/03_技術スタック.md",
+    "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン/e-Stat-API/README.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン/e-Stat-API",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン",
-    "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
-    "01_技術設計/01_システム概要/02_プロジェクト構造.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/04_インフラ/リポジトリ.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/04_インフラ",
-    "04_開発ガイド/02_環境設定ガイド.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/03_サービス/ドメインサービス.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/03_サービス",
-    "01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/02_モデル/エンティティ.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/02_モデル",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/01_概要.md",
@@ -406,18 +498,10 @@
     "01_技術設計/05_フロントエンド設計/ルーティング設計.md",
     "02_ドメイン設計/00_共有カーネル/README.md",
     "02_ドメイン設計/00_共有カーネル",
-    "02_ドメイン設計/03_汎用ドメイン/Infrastructure/README.md",
     "02_ドメイン設計/03_汎用ドメイン/Infrastructure",
-    "02_ドメイン設計/03_汎用ドメイン/Export/README.md",
     "02_ドメイン設計/03_汎用ドメイン/Export",
-    "02_ドメイン設計/03_汎用ドメイン/Content/README.md",
     "02_ドメイン設計/03_汎用ドメイン/Content",
-    "02_ドメイン設計/03_汎用ドメイン/Auth/README.md",
     "02_ドメイン設計/03_汎用ドメイン/Auth",
-    "02_ドメイン設計/02_支援ドメイン/DataIntegration/README.md",
-    "02_ドメイン設計/02_支援ドメイン/Category/README.md",
-    "02_ドメイン設計/02_支援ドメイン/Area/README.md",
-    "02_ドメイン設計/01_コアドメイン/Visualization/02_モデル/エンティティ.md",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",
     "07_コンテンツ計画/リソース/都道府県ごとの物価分析.png",
     "07_コンテンツ計画/リソース/転入転出.png",
