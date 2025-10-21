@@ -162,20 +162,6 @@
             }
           },
           {
-            "id": "91b96e7fb6dc5f38",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_技術設計/システムアーキテクチャ.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "システムアーキテクチャ"
-            }
-          },
-          {
             "id": "7817d719ddfb7ad9",
             "type": "leaf",
             "state": {
@@ -260,6 +246,62 @@
             }
           },
           {
+            "id": "d83f37833cd7ba7f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/07_大規模実装ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "07_大規模実装ガイド"
+            }
+          },
+          {
+            "id": "4aff86ba4a72d463",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/08_ドキュメント管理.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "08_ドキュメント管理"
+            }
+          },
+          {
+            "id": "6bc980aec011e702",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04_開発ガイド/09_コンポーネント実装ガイド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "09_コンポーネント実装ガイド"
+            }
+          },
+          {
+            "id": "6f254bf1c0de4a61",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/04_データ設計/データベース設計.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "データベース設計"
+            }
+          },
+          {
             "id": "db52dab7ed519a6f",
             "type": "leaf",
             "state": {
@@ -316,7 +358,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 20
       }
     ],
     "direction": "vertical"
@@ -436,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_技術設計/01_システム概要/02_プロジェクト構造.md",
+                "file": "01_技術設計/04_データ設計/データベース設計.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "02_プロジェクト構造のアウトライン"
+              "title": "データベース設計のアウトライン"
             }
           }
         ],
@@ -464,21 +506,24 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "e2c30bd0c4b8ff4d",
+  "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
-    "01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
-    "04_開発ガイド/02_環境設定ガイド.md",
-    "01_技術設計/システムアーキテクチャ.md",
-    "01_技術設計/01_システム概要/02_プロジェクト構造.md",
+    "04_開発ガイド/09_コンポーネント実装ガイド.md",
+    "04_開発ガイド/08_ドキュメント管理.md",
+    "04_開発ガイド/07_大規模実装ガイド.md",
     "04_開発ガイド/06_開発環境チューニング.md",
     "04_開発ガイド/03_環境別起動ガイド.md",
+    "04_開発ガイド/02_環境設定ガイド.md",
+    "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
+    "01_技術設計/01_システム概要/02_プロジェクト構造.md",
+    "01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
+    "01_技術設計/システムアーキテクチャ.md",
     "04_開発ガイド/01_コーディング規約.md",
     "04_開発ガイド/11_shadcn-ui統合ガイド.md",
     "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
     "01_技術設計/02_ADR/01_Cloudflare採用理由.md",
     "01_技術設計/02_ADR/00_はじめに.md",
     "01_技術設計/01_システム概要/03_技術スタック.md",
-    "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン/e-Stat-API/README.md",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン/e-Stat-API",
     "02_ドメイン設計/02_支援ドメイン/DataIntegration/05_サブドメイン",
@@ -494,9 +539,6 @@
     "00_プロジェクト管理/02_要件定義/04_MVP定義.md",
     "00_プロジェクト管理/02_要件定義/03_非機能要件.md",
     "00_プロジェクト管理/02_要件定義/02_機能要件.md",
-    "00_プロジェクト管理/02_要件定義/01_プロジェクト要件.md",
-    "01_技術設計/05_フロントエンド設計/ルーティング設計.md",
-    "02_ドメイン設計/00_共有カーネル/README.md",
     "02_ドメイン設計/00_共有カーネル",
     "02_ドメイン設計/03_汎用ドメイン/Infrastructure",
     "02_ドメイン設計/03_汎用ドメイン/Export",
