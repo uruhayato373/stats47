@@ -1208,7 +1208,298 @@ export const Default: Story = {
 };
 ```
 
-## 8. まとめ
+## 9. shadcn/uiとAtomic Designの統合
+
+### 9.1 統合戦略
+
+shadcn/uiコンポーネントをAtomic Designの階層構造に自然に組み込むことで、既存のアーキテクチャを維持しながら高品質なUIコンポーネントを活用できます。
+
+**統合の原則:**
+- 既存のAtomic Design構造を維持
+- shadcn/uiコンポーネントを適切な階層に配置
+- 既存コンポーネントとの使い分けを明確化
+- 完全なコードコントロールを維持
+
+### 9.2 ディレクトリ構造の拡張
+
+```
+src/components/
+├── atoms/
+│   ├── ui/              # shadcn/ui Atoms
+│   │   ├── button/
+│   │   ├── switch/
+│   │   ├── checkbox/
+│   │   ├── slider/
+│   │   ├── input/
+│   │   └── label/
+│   └── Button/          # 既存コンポーネント
+├── molecules/
+│   ├── ui/              # shadcn/ui Molecules
+│   │   ├── dialog/
+│   │   ├── dropdown-menu/
+│   │   ├── popover/
+│   │   ├── tooltip/
+│   │   ├── alert/
+│   │   └── form/
+│   └── DataTable/       # 既存コンポーネント
+└── organisms/
+    ├── ui/              # shadcn/ui Organisms
+    │   ├── navigation-menu/
+    │   ├── command/
+    │   └── sheet/
+    └── layout/          # 既存コンポーネント
+```
+
+### 9.3 shadcn/uiコンポーネントの分類
+
+#### Atoms（原子）
+
+**shadcn/ui Atoms:**
+- `button` - ボタン要素
+- `switch` - スイッチ要素
+- `checkbox` - チェックボックス要素
+- `slider` - スライダー要素
+- `input` - 入力要素
+- `label` - ラベル要素
+
+**実装例:**
+```typescript
+// src/components/atoms/ui/button/Button.tsx
+export { Button } from "@/components/ui/button"
+
+// src/components/atoms/ui/switch/Switch.tsx
+export { Switch } from "@/components/ui/switch"
+```
+
+#### Molecules（分子）
+
+**shadcn/ui Molecules:**
+- `dialog` - ダイアログ（モーダル）
+- `dropdown-menu` - ドロップダウンメニュー
+- `popover` - ポップオーバー
+- `tooltip` - ツールチップ
+- `alert` - アラート
+- `form` - フォーム要素
+
+**実装例:**
+```typescript
+// src/components/molecules/ui/dialog/ConfirmDialog.tsx
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Button } from "@/components/atoms/ui/button/Button"
+
+interface ConfirmDialogProps {
+  title: string
+  description: string
+  onConfirm: () => void
+  children: React.ReactNode
+}
+
+export function ConfirmDialog({ title, description, onConfirm, children }: ConfirmDialogProps) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        {children}
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+        <p className="text-sm text-muted-foreground">{description}</p>
+        <div className="flex justify-end space-x-2">
+          <Button variant="outline">キャンセル</Button>
+          <Button onClick={onConfirm}>確認</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+#### Organisms（有機体）
+
+**shadcn/ui Organisms:**
+- `navigation-menu` - ナビゲーションメニュー
+- `command` - コマンドパレット
+- `sheet` - サイドシート
+
+**実装例:**
+```typescript
+// src/components/organisms/ui/navigation/NavigationMenu.tsx
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
+
+export function NavigationMenu() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>統計データ</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink>ランキング</NavigationMenuLink>
+            <NavigationMenuLink>ダッシュボード</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}
+```
+
+### 9.4 既存コンポーネントとの使い分け
+
+#### 使い分けガイドライン
+
+| 用途 | 使用するコンポーネント | 理由 |
+|------|----------------------|------|
+| **基本的なボタン** | 既存の`Button` | プロジェクト固有のスタイルと機能 |
+| **対話的コンポーネント** | shadcn/ui `Dialog`, `DropdownMenu` | アクセシビリティとUXの向上 |
+| **フォーム要素** | 既存の`Input`, `Select` | 既存のバリデーション統合 |
+| **データ表示** | 既存の`DataTable` | プロジェクト固有の機能とスタイル |
+| **レイアウト** | 既存の`Header`, `Sidebar` | プロジェクト固有の構造 |
+
+#### 統合例
+
+```typescript
+// src/components/molecules/EstatDataForm.tsx
+import { FormField } from "@/components/molecules/ui/form/FormField"
+import { Button } from "@/components/atoms/Button" // 既存コンポーネント
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog" // shadcn/ui
+
+export function EstatDataForm() {
+  return (
+    <Dialog>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>統計データ検索</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <FormField label="都道府県" placeholder="都道府県を選択" />
+          <FormField label="統計項目" placeholder="統計項目を選択" />
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline">キャンセル</Button>
+            <Button>検索</Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+### 9.5 カスタマイズ戦略
+
+#### 1. プロジェクト固有のラッパーコンポーネント
+
+```typescript
+// src/components/atoms/ui/button/CustomButton.tsx
+import { Button, ButtonProps } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+
+interface CustomButtonProps extends ButtonProps {
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "primary"
+}
+
+export function CustomButton({ className, variant = "default", ...props }: CustomButtonProps) {
+  return (
+    <Button
+      className={cn(
+        // 既存のカスタムクラスを追加
+        "font-medium transition-all duration-200",
+        variant === "primary" && "bg-primary text-primary-foreground hover:bg-primary/90",
+        className
+      )}
+      variant={variant === "primary" ? "default" : variant}
+      {...props}
+    />
+  )
+}
+```
+
+#### 2. テーマシステムとの統合
+
+```typescript
+// src/lib/theme.ts
+export const themeConfig = {
+  light: {
+    background: "hsl(0 0% 100%)",
+    foreground: "hsl(222.2 84% 4.9%)",
+    primary: "hsl(220 14% 96%)", // 既存のプライマリカラー
+    primaryForeground: "hsl(220 9% 46%)",
+  },
+  dark: {
+    background: "hsl(222.2 84% 4.9%)",
+    foreground: "hsl(210 40% 98%)",
+    primary: "hsl(220 9% 46%)",
+    primaryForeground: "hsl(220 14% 96%)",
+  }
+}
+```
+
+### 9.6 導入フェーズ
+
+#### Phase 1: 基盤構築
+- Dialog、DropdownMenu、Popover、Tooltip
+- 対話的コンポーネントの基盤を構築
+
+#### Phase 2: Atomic Design統合
+- `src/components/atoms/ui/`、`src/components/molecules/ui/`、`src/components/organisms/ui/`
+- 既存のAtomic Design構造に自然に組み込み
+
+#### Phase 3: 段階的拡張
+- 必要なコンポーネントを順次追加
+- 既存コンポーネントとの使い分けを明確化
+
+### 9.7 ベストプラクティス
+
+#### 1. インポート規約
+
+```typescript
+// ✅ 良い例：明確なインポートパス
+import { Button } from "@/components/atoms/ui/button/Button"
+import { Dialog } from "@/components/molecules/ui/dialog/Dialog"
+
+// ❌ 悪い例：直接的なインポート
+import { Button } from "@/components/ui/button"
+```
+
+#### 2. 命名規則
+
+```typescript
+// shadcn/uiコンポーネントはui/プレフィックスを使用
+src/components/atoms/ui/button/
+src/components/molecules/ui/dialog/
+src/components/organisms/ui/navigation-menu/
+```
+
+#### 3. テスト戦略
+
+```typescript
+// shadcn/uiコンポーネントのテスト
+// src/components/molecules/ui/dialog/__tests__/ConfirmDialog.test.tsx
+import { render, screen, fireEvent } from "@testing-library/react"
+import { ConfirmDialog } from "../ConfirmDialog"
+
+describe("ConfirmDialog", () => {
+  it("確認ボタンクリック時にonConfirmが呼ばれる", () => {
+    const mockOnConfirm = jest.fn()
+    render(
+      <ConfirmDialog title="テスト" description="説明" onConfirm={mockOnConfirm}>
+        <button>開く</button>
+      </ConfirmDialog>
+    )
+    
+    fireEvent.click(screen.getByText("開く"))
+    fireEvent.click(screen.getByText("確認"))
+    
+    expect(mockOnConfirm).toHaveBeenCalledTimes(1)
+  })
+})
+```
+
+### 9.8 参考資料
+
+- [shadcn/ui統合ガイド](./11_shadcn-ui統合ガイド.md) - 詳細なセットアップと使用方法
+- [技術選定評価_2025.md](../00_プロジェクト管理/03_戦略/技術選定評価_2025.md) - shadcn/ui選定理由
+- [スタイルガイド](../02_デザインシステム/01_スタイルガイド.md) - 既存デザインシステムとの統合
 
 Atomic Design は、UI コンポーネントを階層的に整理し、再利用性と保守性を向上させる優れた設計手法です。stats47 プロジェクトでは、以下の原則に従って実装しています：
 

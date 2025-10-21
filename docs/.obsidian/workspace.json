@@ -20,6 +20,90 @@
               "icon": "lucide-file",
               "title": "技術選定評価_2025"
             }
+          },
+          {
+            "id": "e9eb907b9cfc9174",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_開発ガイド/08_ドキュメント管理.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "08_ドキュメント管理"
+            }
+          },
+          {
+            "id": "5cca62898f0d43e2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/01_概要/プロジェクト概要.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "プロジェクト概要"
+            }
+          },
+          {
+            "id": "ffe0efb792e8da69",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "プロジェクト憲章"
+            }
+          },
+          {
+            "id": "f0e8127b5cbf685e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/実装パターン設計.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "実装パターン設計"
+            }
+          },
+          {
+            "id": "db959d3c718452e3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/technical-specifications.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "technical-specifications"
+            }
+          },
+          {
+            "id": "fde4cb4f307994d3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_技術設計/DDDドメイン分類設計書.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DDDドメイン分類設計書"
+            }
           }
         ]
       }
@@ -75,10 +159,31 @@
             }
           }
         ]
+      },
+      {
+        "id": "1077f4b849e0014a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "技術選定評価_2025のアウトライン"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 369.5
+    "width": 315.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -134,28 +239,14 @@
               "icon": "lucide-tags",
               "title": "タグ"
             }
-          },
-          {
-            "id": "d873db75767a7e2f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "技術選定評価_2025のアウトライン"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,8 +262,23 @@
   },
   "active": "385ed1b796d65d92",
   "lastOpenFiles": [
-    "02_デザインシステム/03_タイポグラフィシステム.md",
+    "03_技術設計/App Router URL構成最適化.md",
+    "05_テスト戦略/06_ドメイン別テスト",
+    "05_テスト戦略/05_パフォーマンステスト",
+    "05_テスト戦略/04_ビジュアルリグレッションテスト",
+    "05_テスト戦略/03_E2Eテスト",
+    "05_テスト戦略/02_統合テスト",
+    "01_開発ガイド/11_shadcn-ui統合ガイド.md",
+    "03_技術設計/DDDドメイン分類設計書.md",
+    "03_技術設計/実装パターン設計 1.md",
+    "03_技術設計/データフェッチ設計 1.md",
+    "03_技術設計/technical-specifications.md",
+    "03_技術設計/実装パターン設計.md",
+    "00_プロジェクト管理/01_概要/プロジェクト憲章.md",
+    "00_プロジェクト管理/01_概要/プロジェクト概要.md",
+    "01_開発ガイド/08_ドキュメント管理.md",
     "00_プロジェクト管理/03_戦略/技術選定評価_2025.md",
+    "02_デザインシステム/03_タイポグラフィシステム.md",
     "00_プロジェクト管理/03_戦略",
     "02_デザインシステム/01_スタイルガイド.md",
     "01_開発ガイド/07_大規模実装ガイド.md",
@@ -191,22 +297,7 @@
     "03_技術設計/コンポーネントアーキテクチャ.md",
     "02_デザインシステム/02_コンポーネント設計原則.md",
     "04_ドメイン設計/e-Stat API/03_メタ情報/実装/サービス実装.md",
-    "04_ドメイン設計/e-Stat API/03_メタ情報/仕様/サービス仕様.md",
-    "04_ドメイン設計/e-Stat API/architecture.md",
-    "04_ドメイン設計/e-Stat API/01_共有/database-specification.md",
-    "04_ドメイン設計/データベース/R2-S3セットアップ.md",
-    "04_ドメイン設計/データベース/R2デプロイガイド.md",
-    "04_ドメイン設計/ダッシュボード/architecture.md",
-    "99_課題管理/adapter-migration-plan.md",
-    "99_課題管理/README.md",
-    "99_課題管理/tailwind-light-mode-issues-root-cause.md",
-    "03_技術設計/実装パターン設計 1.md",
     "03_技術設計/01_アーキテクチャ",
-    "05_テスト戦略/01_単体テスト",
-    "05_テスト戦略",
-    "04_ドメイン設計/可視化/specifications/chart-types",
-    "04_ドメイン設計/可視化/implementation/recharts",
-    "04_ドメイン設計/可視化/implementation/d3js",
     "08_リソース/都道府県別産業割合.png",
     "08_リソース/都道府県ごとの物価分析.png",
     "08_リソース/転入転出.png",
