@@ -576,10 +576,22 @@ src/domain/category/
   - `params`: パラメータのマップ
 
 - **CacheEntry**（キャッシュエントリ）
+
   - `key`: キャッシュキー
   - `data`: キャッシュデータ
   - `ttl`: 有効期限
   - `lastUpdated`: 最終更新日時
+  - `metadata`: メタデータ（API 種別、パラメータ等）
+  - `size`: データサイズ
+  - `hitCount`: ヒット回数
+
+- **CacheStatistics**（キャッシュ統計）
+  - `totalRequests`: 総リクエスト数
+  - `hitCount`: ヒット数
+  - `missCount`: ミス数
+  - `hitRate`: ヒット率
+  - `averageResponseTime`: 平均応答時間
+  - `cacheSize`: キャッシュサイズ
 
 #### 境界づけられたコンテキスト
 
@@ -608,7 +620,11 @@ src/domain/data-integration/
 │   │   ├── MetaInfoService.ts
 │   │   ├── StatsDataService.ts
 │   │   ├── StatsListService.ts
-│   │   └── ApiParamsService.ts
+│   │   ├── ApiParamsService.ts
+│   │   ├── EstatCacheService.ts
+│   │   ├── GeoshapeCacheService.ts
+│   │   ├── CacheInvalidationService.ts
+│   │   └── CacheStatsService.ts
 │   └── repositories/
 │       └── EstatRepository.ts
 ├── world-bank/              # 将来の拡張
@@ -623,6 +639,161 @@ src/domain/data-integration/
     │   └── D1CacheService.ts
     └── repositories/
         └── CacheRepository.ts
+```
+
+#### データソース管理のベストプラクティス
+
+##### 7. e-Stat API キャッシュパターン
+
+```typescript
+// EstatCacheService の実装例
+export class EstatCacheService {
+  private readonly r2Client: R2Client;
+  private readonly d1Client: D1Client;
+
+  async getCachedResponse(
+    apiType: "getMetaInfo" | "getStatsData" | "getStatsList",
+    parameters: Record<string, any>
+  ): Promise<any> {
+    const cacheKey = this.generateCacheKey(apiType, parameters);
+
+    // R2からキャッシュを確認
+    const cached = await this.r2Client.get(cacheKey);
+    if (cached) {
+      // ヒット統計を更新
+      await this.updateHitStats(cacheKey);
+      return JSON.parse(cached);
+    }
+
+    // e-Stat APIを呼び出し
+    const response = await this.callEstatApi(apiType, parameters);
+
+    // R2にキャッシュ保存
+    await this.r2Client.put(cacheKey, JSON.stringify(response), {
+      metadata: {
+        ttl: this.getTtlForApiType(apiType),
+        createdAt: new Date().toISOString(),
+        apiType,
+        parameters: JSON.stringify(parameters),
+        size: JSON.stringify(response).length,
+      },
+    });
+
+    // D1にメタデータ保存
+    await this.saveCacheMetadata(cacheKey, apiType, parameters);
+
+    return response;
+  }
+
+  private generateCacheKey(
+    apiType: string,
+    parameters: Record<string, any>
+  ): string {
+    const paramHash = crypto
+      .createHash("sha256")
+      .update(JSON.stringify(parameters))
+      .digest("hex")
+      .substring(0, 12);
+
+    return `estat:${apiType}:${paramHash}`;
+  }
+
+  private getTtlForApiType(apiType: string): number {
+    const ttlMap = {
+      getMetaInfo: 7 * 24 * 60 * 60, // 7日
+      getStatsData: 24 * 60 * 60, // 24時間
+      getStatsList: 7 * 24 * 60 * 60, // 7日
+    };
+    return ttlMap[apiType] || 24 * 60 * 60;
+  }
+}
+```
+
+##### 8. キャッシュ無効化戦略
+
+```typescript
+// CacheInvalidationService の実装例
+export class CacheInvalidationService {
+  async invalidateByPattern(pattern: string): Promise<void> {
+    // R2のキー一覧を取得
+    const keys = await this.r2Client.list({ prefix: pattern });
+
+    // バッチで削除
+    const deletePromises = keys.objects.map((obj) =>
+      this.r2Client.delete(obj.key)
+    );
+
+    await Promise.all(deletePromises);
+
+    // D1のメタデータも削除
+    await this.d1Client
+      .prepare("DELETE FROM cache_metadata WHERE cache_key LIKE ?")
+      .bind(`${pattern}%`)
+      .run();
+  }
+
+  async invalidateByApiType(apiType: string): Promise<void> {
+    await this.invalidateByPattern(`estat:${apiType}:`);
+  }
+
+  async invalidateExpired(): Promise<void> {
+    const expiredKeys = await this.d1Client
+      .prepare(
+        `
+        SELECT cache_key FROM cache_metadata 
+        WHERE expires_at < datetime('now')
+      `
+      )
+      .all();
+
+    for (const row of expiredKeys.results) {
+      await this.r2Client.delete(row.cache_key);
+    }
+
+    // メタデータも削除
+    await this.d1Client
+      .prepare('DELETE FROM cache_metadata WHERE expires_at < datetime("now")')
+      .run();
+  }
+}
+```
+
+##### 9. TTL 管理とバージョン管理
+
+```typescript
+// TTL管理の実装例
+export class TTLManager {
+  private readonly ttlConfig = {
+    "estat:getMetaInfo": 7 * 24 * 60 * 60, // 7日
+    "estat:getStatsData": 24 * 60 * 60, // 24時間
+    "estat:getStatsList": 7 * 24 * 60 * 60, // 7日
+    "geo:topojson": 7 * 24 * 60 * 60, // 7日
+    "calc:cagr": 6 * 60 * 60, // 6時間
+    "calc:correlation": 6 * 60 * 60, // 6時間
+  };
+
+  getTTL(cacheKey: string): number {
+    for (const [pattern, ttl] of Object.entries(this.ttlConfig)) {
+      if (cacheKey.startsWith(pattern)) {
+        return ttl;
+      }
+    }
+    return 24 * 60 * 60; // デフォルト24時間
+  }
+
+  async updateTTL(cacheKey: string, newTTL: number): Promise<void> {
+    await this.d1Client
+      .prepare(
+        `
+        UPDATE cache_metadata 
+        SET ttl = ?, expires_at = datetime('now', '+' || ? || ' seconds')
+        WHERE cache_key = ?
+      `
+      )
+      .bind(newTTL, newTTL, cacheKey)
+      .run();
+  }
+}
 ```
 
 ---
