@@ -8,48 +8,105 @@
         "type": "tabs",
         "children": [
           {
-            "id": "385ed1b796d65d92",
+            "id": "3529ef39e8378901",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_開発ガイド/08_ドキュメント管理.md",
+                "file": "01_技術設計/02_ADR/技術選定評価_2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "08_ドキュメント管理"
+              "title": "技術選定評価_2025"
             }
           },
           {
-            "id": "507c9ae167a2d313",
+            "id": "87f6b2efc7336027",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_デザインシステム/02_アイコンシステム.md",
+                "file": "00_プロジェクト管理/02_要件定義/01_プロジェクト要件.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02_アイコンシステム"
+              "title": "01_プロジェクト要件"
             }
           },
           {
-            "id": "be63b710ab3d7aae",
+            "id": "c9388a1b8e76a517",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_技術設計/App Router URL構成最適化.md",
+                "file": "00_プロジェクト管理/01_概要/収益化戦略.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "App Router URL構成最適化"
+              "title": "収益化戦略"
+            }
+          },
+          {
+            "id": "a29d6ceab19cb7a2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/05_フロントエンド設計/ルーティング設計.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ルーティング設計"
+            }
+          },
+          {
+            "id": "19997ebc39da352f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_プロジェクト管理/02_要件定義/02_機能要件.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_機能要件"
+            }
+          },
+          {
+            "id": "a76d172b57325587",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/02_ADR/00_はじめに.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "00_はじめに"
+            }
+          },
+          {
+            "id": "ca084a1b1a2011dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_技術設計/02_ADR/01_Cloudflare採用理由.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_Cloudflare採用理由"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -169,13 +226,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_開発ガイド/08_ドキュメント管理.md",
+                "file": "01_技術設計/05_フロントエンド設計/ルーティング設計.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "08_ドキュメント管理のアウトライン"
+              "title": "ルーティング設計のアウトライン"
             }
           }
         ],
@@ -197,53 +254,53 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "860eb1f2bf495c69",
+  "active": "a29d6ceab19cb7a2",
   "lastOpenFiles": [
-    "03_技術設計/ADR/Cloudflare採用理由.md",
-    "03_技術設計/ADR/001_Cloudflare採用理由.md",
-    "03_技術設計/ADR",
-    "ADR",
-    "無題のフォルダ",
-    "03_技術設計/App Router URL構成最適化.md",
-    "02_デザインシステム/02_アイコンシステム.md",
-    "01_開発ガイド/08_ドキュメント管理.md",
-    "99_課題管理/tailwind-refactoring-action-plan.md",
-    "99_課題管理/tailwind-light-mode-issues-root-cause.md",
-    "99_課題管理/state-management-consolidation.md",
-    "99_課題管理/sidebar-refactoring.md",
-    "99_課題管理/refactoring-roadmap.md",
-    "99_課題管理/providers-architecture.md",
-    "99_課題管理/estat-search-parameter-investigation.md",
-    "99_課題管理/alert-style-not-reflecting.md",
-    "99_課題管理/adapter-migration-plan.md",
-    "99_課題管理/README.md",
-    "99_課題管理",
+    "02_ドメイン設計/00_共有カーネル/01_概要.md",
+    "02_ドメイン設計/00_共有カーネル/README.md",
+    "02_ドメイン設計/00_共有カーネル",
+    "02_ドメイン設計/03_汎用ドメイン/Infrastructure/README.md",
+    "02_ドメイン設計/03_汎用ドメイン/Infrastructure",
+    "02_ドメイン設計/03_汎用ドメイン/Export/README.md",
+    "02_ドメイン設計/03_汎用ドメイン/Export",
+    "02_ドメイン設計/03_汎用ドメイン/Content/README.md",
+    "02_ドメイン設計/03_汎用ドメイン/Content",
+    "02_ドメイン設計/03_汎用ドメイン/Auth/README.md",
+    "02_ドメイン設計/03_汎用ドメイン/Auth",
+    "02_ドメイン設計/03_汎用ドメイン",
+    "02_ドメイン設計/02_支援ドメイン/DataIntegration/README.md",
+    "02_ドメイン設計/02_支援ドメイン/DataIntegration",
+    "02_ドメイン設計/02_支援ドメイン/Category/README.md",
+    "02_ドメイン設計/02_支援ドメイン/Category",
+    "02_ドメイン設計/02_支援ドメイン/Area/README.md",
+    "02_ドメイン設計/02_支援ドメイン/Area",
+    "02_ドメイン設計/02_支援ドメイン",
+    "02_ドメイン設計/01_コアドメイン/Visualization/02_モデル/エンティティ.md",
+    "02_ドメイン設計/01_コアドメイン/Visualization/01_概要.md",
+    "02_ドメイン設計/01_コアドメイン/Visualization/README.md",
+    "02_ドメイン設計/01_コアドメイン/Analytics/02_モデル/集約.md",
+    "02_ドメイン設計/01_コアドメイン/Analytics/02_モデル/値オブジェクト.md",
+    "02_ドメイン設計/01_コアドメイン/Analytics/02_モデル/エンティティ.md",
+    "02_ドメイン設計/01_コアドメイン/Analytics/01_概要.md",
+    "02_ドメイン設計/01_コアドメイン/Analytics/README.md",
+    "02_ドメイン設計/README.md",
+    "01_技術設計/01_システム概要/docs/01_技術設計/01_システム概要/03_技術スタック.md",
+    "01_技術設計/01_システム概要/docs/01_技術設計/01_システム概要/02_プロジェクト構造.md",
+    "01_技術設計/01_システム概要/docs/01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
+    "01_技術設計/01_システム概要/02_プロジェクト構造.md",
+    "01_技術設計/01_システム概要/01_システムアーキテクチャ.md",
+    "00_プロジェクト管理/01_概要/収益化戦略.md",
+    "00_プロジェクト管理/02_要件定義/01_プロジェクト要件.md",
+    "00_プロジェクト管理/02_要件定義/02_機能要件.md",
+    "07_コンテンツ計画/リソース/都道府県別産業割合.png",
+    "07_コンテンツ計画/リソース/都道府県ごとの物価分析.png",
+    "07_コンテンツ計画/リソース/転入転出.png",
+    "07_コンテンツ計画/リソース/就職率.png",
+    "07_コンテンツ計画/リソース/ランキング画像サンプル_02.png",
+    "07_コンテンツ計画/リソース/ランキング画像サンプル_01.png",
+    "07_コンテンツ計画/リソース/design.png",
     "08_リソース/都道府県別産業割合.png",
     "08_リソース/都道府県ごとの物価分析.png",
-    "08_リソース/転入転出.png",
-    "08_リソース/就職率.png",
-    "08_リソース/参考リンク.md",
-    "08_リソース/ランキング画像サンプル_02.png",
-    "08_リソース/ランキング画像サンプル_01.png",
-    "08_リソース/x.md",
-    "08_リソース/sns-image-sizes.md",
-    "08_リソース/instagram.md",
-    "08_リソース/design.png",
-    "08_リソース",
-    "07_コンテンツ計画/03_ブログ記事/消防統計から見る日本の防災体制の変遷に関するブログ記事構成.md",
-    "07_コンテンツ計画/03_ブログ記事/日本の農家が5年で40万戸消失！長野県1位の理由と農業危機の真実.md",
-    "07_コンテンツ計画/03_ブログ記事/安全網の二重構造 〜日本の自賠責保険と任意保険のデータが語る交通社会の実像〜.md",
-    "07_コンテンツ計画/03_ブログ記事/増え続ける救急需要と変わりゆく救急医療体制.md",
-    "07_コンテンツ計画/03_ブログ記事/人口動態を理解する：出生・死亡に関する主要指標.md",
-    "07_コンテンツ計画/03_ブログ記事/ブログ記事改善案.md",
-    "07_コンテンツ計画/03_ブログ記事/データで見る日本の農業地図：就業人口と生産性から読み取れる地域格差と農業の現実.md",
-    "07_コンテンツ計画/03_ブログ記事",
-    "07_コンテンツ計画/02_ダッシュボード",
-    "07_コンテンツ計画/01_ランキング記事",
-    "07_コンテンツ計画",
-    "06_運用保守",
-    "05_resources/都道府県別産業割合.png",
-    "05_resources/都道府県ごとの物価分析.png",
-    "05_resources/転入転出.png"
+    "08_リソース/転入転出.png"
   ]
 }
