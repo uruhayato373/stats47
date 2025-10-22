@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_Area.md",
+                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_DataIntegration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01_Area"
+              "title": "03_DataIntegration"
             }
           }
         ]
@@ -86,13 +86,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_Area.md",
+                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_DataIntegration.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "01_Areaのアウトライン"
+              "title": "03_DataIntegrationのアウトライン"
             }
           }
         ]
@@ -178,6 +178,10 @@
   },
   "active": "19997ebc39da352f",
   "lastOpenFiles": [
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/05_Search.md",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geographic.md",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_Taxonomy.md",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_Area.md",
     "01_技術設計/03_ドメイン設計/01_コアドメイン/03_Comparison.md",
     "01_技術設計/03_ドメイン設計/01_コアドメイン/04_Comparison.md",
     "01_技術設計/03_ドメイン設計/01_コアドメイン/03_TimeSeries.md",
@@ -191,9 +195,7 @@
     "01_技術設計/03_ドメイン設計/01_コアドメイン/02_Visualization.md",
     "01_技術設計/01_システム概要/04_DDDドメイン分類.md",
     "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_Geographic.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_Area.md",
     "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_AreaManagement.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_Taxonomy.md",
     "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_DataIntegration.md",
     "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
     "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_TaxonomyManagement.md",
@@ -202,8 +204,6 @@
     "02_ドメイン設計/03_汎用ドメイン/01_Authentication.md",
     "02_ドメイン設計/02_支援ドメイン/04_Search.md",
     "02_ドメイン設計/02_支援ドメイン/03_DataIntegration.md",
-    "02_ドメイン設計/02_支援ドメイン/02_TaxonomyManagement.md",
-    "02_ドメイン設計/02_支援ドメイン/01_AreaManagement.md",
     "02_ドメイン設計/00_共有カーネル",
     "02_ドメイン設計/03_汎用ドメイン",
     "02_ドメイン設計/02_支援ドメイン",

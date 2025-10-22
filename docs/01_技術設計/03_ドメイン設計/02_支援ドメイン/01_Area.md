@@ -172,14 +172,6 @@ src/lib/area/
     └── AreaCodeMappingRepository.ts
 ```
 
-## DDDパターン実装例
-
-### エンティティ実装例
-
-
-### 仕様実装例
-
-
 ## ベストプラクティス
 
 ### 1. データ整合性の維持

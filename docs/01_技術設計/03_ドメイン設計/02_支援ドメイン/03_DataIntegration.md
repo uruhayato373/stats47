@@ -103,129 +103,25 @@ API呼び出しのパラメータを管理するエンティティ。
 
 データソースのタイプを表現する値オブジェクト。
 
-```typescript
-export class DataSourceType {
-  private constructor(private readonly value: string) {}
-
-  static readonly API = new DataSourceType("api");
-  static readonly DATABASE = new DataSourceType("database");
-  static readonly FILE = new DataSourceType("file");
-  static readonly ESTAT = new DataSourceType("estat");
-  static readonly WORLD_BANK = new DataSourceType("world_bank");
-  static readonly OECD = new DataSourceType("oecd");
-
-  static create(value: string): Result<DataSourceType> {
-    const validTypes = ["api", "database", "file", "estat", "world_bank", "oecd"];
-    if (!validTypes.includes(value)) {
-      return Result.fail(`Invalid data source type: ${value}`);
-    }
-    return Result.ok(new DataSourceType(value));
-  }
-
-  getValue(): string {
-    return this.value;
-  }
-
-  isApi(): boolean {
-    return this.value === "api";
-  }
-
-  isEstat(): boolean {
-    return this.value === "estat";
-  }
-}
-```
+- **具体例**: `estat`（e-Stat API）, `world_bank`（World Bank API）, `oecd`（OECD API）, `database`（データベース）, `file`（ファイル）
+- **制約**: 定義済みの6種類のタイプのみ（api, database, file, estat, world_bank, oecd）
+- **用途**: データソースの識別、アダプターの選択、API呼び出しのルーティング
 
 ### CacheKey（キャッシュキー）
 
 キャッシュキーを表現する値オブジェクト。
 
-```typescript
-export class CacheKey {
-  private constructor(private readonly value: string) {}
-
-  static create(
-    apiType: string,
-    parameters: Record<string, any>
-  ): Result<CacheKey> {
-    if (!apiType || apiType.trim().length === 0) {
-      return Result.fail("API type cannot be empty");
-    }
-
-    const paramHash = crypto
-      .createHash("sha256")
-      .update(JSON.stringify(parameters))
-      .digest("hex")
-      .substring(0, 12);
-
-    const key = `${apiType}:${paramHash}`;
-    return Result.ok(new CacheKey(key));
-  }
-
-  toString(): string {
-    return this.value;
-  }
-
-  getApiType(): string {
-    return this.value.split(":")[0];
-  }
-
-  getParameterHash(): string {
-    return this.value.split(":")[1];
-  }
-
-  equals(other: CacheKey): boolean {
-    return this.value === other.value;
-  }
-}
-```
+- **具体例**: `getStatsData:a3f5b2c8e1d4`（API種別:パラメータハッシュ）, `getMetaInfo:7d9e3f1a5c2b`
+- **制約**: APIタイプ必須、パラメータはSHA256ハッシュ（12文字）、形式は`{apiType}:{paramHash}`
+- **用途**: R2/D1でのキャッシュ識別、重複チェック、キャッシュ無効化のパターンマッチング
 
 ### TTL（有効期限）
 
 キャッシュの有効期限を表現する値オブジェクト。
 
-```typescript
-export class TTL {
-  private constructor(private readonly seconds: number) {}
-
-  static create(seconds: number): Result<TTL> {
-    if (seconds <= 0) {
-      return Result.fail("TTL must be positive");
-    }
-    if (seconds > 365 * 24 * 60 * 60) { // 1年
-      return Result.fail("TTL cannot exceed 1 year");
-    }
-    return Result.ok(new TTL(seconds));
-  }
-
-  static readonly ONE_HOUR = new TTL(60 * 60);
-  static readonly ONE_DAY = new TTL(24 * 60 * 60);
-  static readonly ONE_WEEK = new TTL(7 * 24 * 60 * 60);
-  static readonly ONE_MONTH = new TTL(30 * 24 * 60 * 60);
-
-  getSeconds(): number {
-    return this.seconds;
-  }
-
-  getMinutes(): number {
-    return Math.floor(this.seconds / 60);
-  }
-
-  getHours(): number {
-    return Math.floor(this.seconds / (60 * 60));
-  }
-
-  getDays(): number {
-    return Math.floor(this.seconds / (24 * 60 * 60));
-  }
-
-  isExpired(createdAt: Date): boolean {
-    const now = new Date();
-    const expirationTime = new Date(createdAt.getTime() + this.seconds * 1000);
-    return now > expirationTime;
-  }
-}
-```
+- **具体例**: `3600`（1時間）, `86400`（1日）, `604800`（1週間）, `2592000`（30日）
+- **制約**: 正の整数、最大1年（31536000秒）
+- **用途**: キャッシュ有効期限の管理、期限切れチェック、API種別ごとのTTL設定（MetaInfo=1週間、StatsData=1日）
 
 ## ドメインサービス
 
@@ -233,249 +129,36 @@ export class TTL {
 
 e-Stat APIのキャッシュ管理を実装するドメインサービス。
 
-```typescript
-export class EstatCacheService {
-  private readonly r2Client: R2Client;
-  private readonly d1Client: D1Client;
-
-  constructor(r2Client: R2Client, d1Client: D1Client) {
-    this.r2Client = r2Client;
-    this.d1Client = d1Client;
-  }
-
-  async getCachedResponse(
-    apiType: "getMetaInfo" | "getStatsData" | "getStatsList",
-    parameters: Record<string, any>
-  ): Promise<any> {
-    const cacheKeyResult = CacheKey.create(apiType, parameters);
-    if (!cacheKeyResult.isSuccess()) {
-      throw new Error(cacheKeyResult.getError());
-    }
-
-    const cacheKey = cacheKeyResult.getValue();
-
-    // R2からキャッシュを確認
-    const cached = await this.r2Client.get(cacheKey.toString());
-    if (cached) {
-      // ヒット統計を更新
-      await this.updateHitStats(cacheKey);
-      return JSON.parse(cached);
-    }
-
-    // e-Stat APIを呼び出し
-    const response = await this.callEstatApi(apiType, parameters);
-
-    // R2にキャッシュ保存
-    const ttl = this.getTtlForApiType(apiType);
-    await this.r2Client.put(cacheKey.toString(), JSON.stringify(response), {
-      metadata: {
-        ttl: ttl.getSeconds().toString(),
-        createdAt: new Date().toISOString(),
-        apiType,
-        parameters: JSON.stringify(parameters),
-        size: JSON.stringify(response).length,
-      },
-    });
-
-    // D1にメタデータ保存
-    await this.saveCacheMetadata(cacheKey, apiType, parameters);
-
-    return response;
-  }
-
-  private getTtlForApiType(apiType: string): TTL {
-    const ttlMap = {
-      getMetaInfo: TTL.ONE_WEEK,
-      getStatsData: TTL.ONE_DAY,
-      getStatsList: TTL.ONE_WEEK,
-    };
-    return ttlMap[apiType as keyof typeof ttlMap] || TTL.ONE_DAY;
-  }
-
-  private async updateHitStats(cacheKey: CacheKey): Promise<void> {
-    await this.d1Client
-      .prepare(
-        `
-        UPDATE cache_metadata 
-        SET hit_count = hit_count + 1, last_hit = datetime('now')
-        WHERE cache_key = ?
-      `
-      )
-      .bind(cacheKey.toString())
-      .run();
-  }
-
-  private async saveCacheMetadata(
-    cacheKey: CacheKey,
-    apiType: string,
-    parameters: Record<string, any>
-  ): Promise<void> {
-    const ttl = this.getTtlForApiType(apiType);
-    const expiresAt = new Date(Date.now() + ttl.getSeconds() * 1000);
-
-    await this.d1Client
-      .prepare(
-        `
-        INSERT INTO cache_metadata 
-        (cache_key, api_type, parameters, ttl, expires_at, created_at)
-        VALUES (?, ?, ?, ?, ?, datetime('now'))
-      `
-      )
-      .bind(
-        cacheKey.toString(),
-        apiType,
-        JSON.stringify(parameters),
-        ttl.getSeconds(),
-        expiresAt.toISOString()
-      )
-      .run();
-  }
-}
-```
+- **責務**: e-Stat APIのキャッシュ取得・保存、R2/D1連携、ヒット統計の更新
+- **主要メソッド**:
+  - `getCachedResponse(apiType, parameters)`: キャッシュからデータ取得（R2確認→API呼び出し→キャッシュ保存）
+  - `updateHitStats(cacheKey)`: ヒット統計の更新（D1）
+  - `saveCacheMetadata(cacheKey, apiType, parameters)`: キャッシュメタデータの保存
+- **使用例**: e-Stat API呼び出しの最適化、レスポンス時間の短縮、API制限の回避
 
 ### CacheInvalidationService
 
 キャッシュの無効化を管理するドメインサービス。
 
-```typescript
-export class CacheInvalidationService {
-  constructor(
-    private readonly r2Client: R2Client,
-    private readonly d1Client: D1Client
-  ) {}
-
-  async invalidateByPattern(pattern: string): Promise<void> {
-    // R2のキー一覧を取得
-    const keys = await this.r2Client.list({ prefix: pattern });
-
-    // バッチで削除
-    const deletePromises = keys.objects.map((obj) =>
-      this.r2Client.delete(obj.key)
-    );
-
-    await Promise.all(deletePromises);
-
-    // D1のメタデータも削除
-    await this.d1Client
-      .prepare("DELETE FROM cache_metadata WHERE cache_key LIKE ?")
-      .bind(`${pattern}%`)
-      .run();
-  }
-
-  async invalidateByApiType(apiType: string): Promise<void> {
-    await this.invalidateByPattern(`estat:${apiType}:`);
-  }
-
-  async invalidateExpired(): Promise<void> {
-    const expiredKeys = await this.d1Client
-      .prepare(
-        `
-        SELECT cache_key FROM cache_metadata 
-        WHERE expires_at < datetime('now')
-      `
-      )
-      .all();
-
-    for (const row of expiredKeys.results) {
-      await this.r2Client.delete(row.cache_key);
-    }
-
-    // メタデータも削除
-    await this.d1Client
-      .prepare('DELETE FROM cache_metadata WHERE expires_at < datetime("now")')
-      .run();
-  }
-
-  async invalidateByParameters(apiType: string, parameters: Record<string, any>): Promise<void> {
-    const cacheKeyResult = CacheKey.create(apiType, parameters);
-    if (!cacheKeyResult.isSuccess()) {
-      throw new Error(cacheKeyResult.getError());
-    }
-
-    const cacheKey = cacheKeyResult.getValue();
-    await this.r2Client.delete(cacheKey.toString());
-    
-    await this.d1Client
-      .prepare("DELETE FROM cache_metadata WHERE cache_key = ?")
-      .bind(cacheKey.toString())
-      .run();
-  }
-}
-```
+- **責務**: キャッシュの無効化、期限切れデータの削除、パターンマッチングによる一括削除
+- **主要メソッド**:
+  - `invalidateByPattern(pattern)`: パターンに一致するキャッシュの一括削除
+  - `invalidateByApiType(apiType)`: API種別によるキャッシュ削除
+  - `invalidateExpired()`: 期限切れキャッシュの自動削除
+  - `invalidateByParameters(apiType, parameters)`: 特定パラメータのキャッシュ削除
+- **使用例**: データ更新時のキャッシュクリア、メンテナンス時の一括削除
 
 ### DataQualityService
 
 データ品質の管理を実装するドメインサービス。
 
-```typescript
-export class DataQualityService {
-  constructor(
-    private readonly cacheService: CacheService,
-    private readonly validationService: ValidationService
-  ) {}
-
-  async validateData(data: any, schema: DataSchema): Promise<DataQualityReport> {
-    const validationResult = await this.validationService.validate(data, schema);
-    
-    const qualityScore = this.calculateQualityScore(validationResult);
-    const issues = this.identifyIssues(validationResult);
-    const recommendations = this.generateRecommendations(issues);
-
-    return DataQualityReport.create({
-      score: qualityScore,
-      issues,
-      recommendations,
-      validatedAt: new Date(),
-    }).getValue();
-  }
-
-  private calculateQualityScore(validationResult: ValidationResult): number {
-    const totalChecks = validationResult.getTotalChecks();
-    const passedChecks = validationResult.getPassedChecks();
-    
-    if (totalChecks === 0) {
-      return 100;
-    }
-    
-    return Math.round((passedChecks / totalChecks) * 100);
-  }
-
-  private identifyIssues(validationResult: ValidationResult): DataIssue[] {
-    const issues: DataIssue[] = [];
-    
-    validationResult.getErrors().forEach(error => {
-      issues.push(DataIssue.create({
-        type: error.getType(),
-        severity: error.getSeverity(),
-        message: error.getMessage(),
-        field: error.getField(),
-      }).getValue());
-    });
-
-    return issues;
-  }
-
-  private generateRecommendations(issues: DataIssue[]): string[] {
-    const recommendations: string[] = [];
-    
-    issues.forEach(issue => {
-      switch (issue.getType()) {
-        case "missing_data":
-          recommendations.push("Consider implementing data validation at the source");
-          break;
-        case "invalid_format":
-          recommendations.push("Update data transformation rules");
-          break;
-        case "outlier":
-          recommendations.push("Review data collection methodology");
-          break;
-      }
-    });
-
-    return recommendations;
-  }
-}
-```
+- **責務**: データ品質の検証、品質スコアの算出、問題の特定と推奨事項の生成
+- **主要メソッド**:
+  - `validateData(data, schema)`: データの品質検証とレポート生成
+  - `calculateQualityScore(validationResult)`: 品質スコアの算出（0-100）
+  - `identifyIssues(validationResult)`: データ問題の特定
+  - `generateRecommendations(issues)`: 改善推奨事項の生成
+- **使用例**: 外部APIデータの品質チェック、データ信頼性の評価、問題データの特定
 
 ## リポジトリ
 
@@ -483,50 +166,37 @@ export class DataQualityService {
 
 キャッシュデータの永続化を抽象化するリポジトリインターフェース。
 
-```typescript
-export interface CacheRepository {
-  get(key: CacheKey): Promise<any | null>;
-  set(key: CacheKey, data: any, ttl: TTL): Promise<void>;
-  delete(key: CacheKey): Promise<void>;
-  exists(key: CacheKey): Promise<boolean>;
-  getStats(): Promise<CacheStatistics>;
-  invalidatePattern(pattern: string): Promise<void>;
-  cleanup(): Promise<void>;
-}
-```
+- **責務**: キャッシュデータのCRUD操作、統計情報の取得、パターン削除、クリーンアップ
+- **主要メソッド**:
+  - `get(key)` / `set(key, data, ttl)` / `delete(key)`: キャッシュデータの基本操作
+  - `exists(key)`: キャッシュ存在確認
+  - `getStats()`: キャッシュ統計情報の取得
+  - `invalidatePattern(pattern)`: パターンマッチングによる一括削除
+  - `cleanup()`: 期限切れデータのクリーンアップ
 
 ### DataSourceRepository
 
 データソース情報の永続化を抽象化するリポジトリインターフェース。
 
-```typescript
-export interface DataSourceRepository {
-  findById(id: string): Promise<DataSource | null>;
-  findAll(): Promise<DataSource[]>;
-  findActive(): Promise<DataSource[]>;
-  findByType(type: DataSourceType): Promise<DataSource[]>;
-  save(dataSource: DataSource): Promise<void>;
-  delete(id: string): Promise<void>;
-  exists(id: string): Promise<boolean>;
-}
-```
+- **責務**: データソースのCRUD操作、タイプ別検索、アクティブ状態の管理
+- **主要メソッド**:
+  - `findById(id)` / `findAll()` / `findActive()`: データソースの検索
+  - `findByType(type)`: タイプ別データソース検索
+  - `save(dataSource)` / `delete(id)`: データソースの保存・削除
+  - `exists(id)`: データソース存在確認
 
 ## ディレクトリ構造
 
 ```
 src/lib/data-integration/
-├── estat-api/
-│   ├── adapters/
-│   │   ├── EstatRankingAdapter.ts
-│   │   └── EstatMetaInfoAdapter.ts
-│   ├── entities/
+├── estat-api/           # e-Stat API統合
+│   ├── model/
 │   │   ├── EstatMetaInfo.ts
 │   │   ├── EstatStatsData.ts
-│   │   └── EstatStatsList.ts
-│   ├── value-objects/
+│   │   ├── EstatStatsList.ts
 │   │   ├── StatsDataId.ts
 │   │   └── ApiParameter.ts
-│   ├── services/
+│   ├── service/
 │   │   ├── MetaInfoService.ts
 │   │   ├── StatsDataService.ts
 │   │   ├── StatsListService.ts
@@ -535,169 +205,32 @@ src/lib/data-integration/
 │   │   ├── GeoshapeCacheService.ts
 │   │   ├── CacheInvalidationService.ts
 │   │   └── CacheStatsService.ts
+│   ├── adapters/
+│   │   ├── EstatRankingAdapter.ts
+│   │   └── EstatMetaInfoAdapter.ts
 │   └── repositories/
 │       └── EstatRepository.ts
-├── world-bank/
-│   └── adapters/
-├── oecd/
-│   └── adapters/
-├── cache/
-│   ├── entities/
+├── cache/               # キャッシュ管理
+│   ├── model/
 │   │   ├── CacheEntry.ts
-│   │   └── CacheStatistics.ts
-│   ├── value-objects/
+│   │   ├── CacheStatistics.ts
 │   │   ├── CacheKey.ts
 │   │   └── TTL.ts
-│   ├── services/
+│   ├── service/
 │   │   ├── R2CacheService.ts
 │   │   └── D1CacheService.ts
 │   └── repositories/
 │       └── CacheRepository.ts
-├── quality/
-│   ├── entities/
+├── quality/             # データ品質管理
+│   ├── model/
 │   │   ├── DataQualityReport.ts
 │   │   └── DataIssue.ts
-│   ├── services/
-│   │   ├── DataQualityService.ts
-│   │   └── ValidationService.ts
-│   └── specifications/
-│       └── QualitySpecification.ts
-└── adapters/
+│   └── service/
+│       ├── DataQualityService.ts
+│       └── ValidationService.ts
+└── adapters/            # 共通アダプター
     ├── DataSourceAdapter.ts
     └── ApiClient.ts
-```
-
-## DDDパターン実装例
-
-### エンティティ実装例
-
-```typescript
-// src/lib/data-integration/cache/entities/CacheEntry.ts
-export class CacheEntry {
-  private constructor(
-    private readonly key: CacheKey,
-    private readonly data: any,
-    private readonly ttl: TTL,
-    private readonly createdAt: Date,
-    private readonly metadata: Map<string, any>,
-    private hitCount: number
-  ) {}
-
-  static create(props: {
-    key: CacheKey;
-    data: any;
-    ttl: TTL;
-    metadata?: Map<string, any>;
-  }): Result<CacheEntry> {
-    if (!props.data) {
-      return Result.fail("Cache data cannot be null");
-    }
-
-    return Result.ok(
-      new CacheEntry(
-        props.key,
-        props.data,
-        props.ttl,
-        new Date(),
-        props.metadata || new Map(),
-        0
-      )
-    );
-  }
-
-  isExpired(): boolean {
-    return this.ttl.isExpired(this.createdAt);
-  }
-
-  incrementHitCount(): void {
-    this.hitCount++;
-  }
-
-  getKey(): CacheKey {
-    return this.key;
-  }
-
-  getData(): any {
-    return this.data;
-  }
-
-  getTTL(): TTL {
-    return this.ttl;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
-
-  getHitCount(): number {
-    return this.hitCount;
-  }
-
-  getMetadata(): ReadonlyMap<string, any> {
-    return this.metadata;
-  }
-
-  getSize(): number {
-    return JSON.stringify(this.data).length;
-  }
-}
-```
-
-### アダプター実装例
-
-```typescript
-// src/lib/data-integration/estat-api/adapters/EstatRankingAdapter.ts
-export class EstatRankingAdapter implements DataSourceAdapter {
-  constructor(
-    private readonly apiClient: ApiClient,
-    private readonly cacheService: EstatCacheService
-  ) {}
-
-  async fetchData(parameters: ApiParameter): Promise<Result<any>> {
-    try {
-      // キャッシュから取得を試行
-      const cached = await this.cacheService.getCachedResponse(
-        "getStatsData",
-        parameters.toRecord()
-      );
-      
-      if (cached) {
-        return Result.ok(cached);
-      }
-
-      // APIから取得
-      const response = await this.apiClient.get("/api/estat/getStatsData", {
-        params: parameters.toRecord(),
-      });
-
-      // データ変換
-      const transformedData = this.transformResponse(response.data);
-      
-      return Result.ok(transformedData);
-    } catch (error) {
-      return Result.fail(`Failed to fetch e-Stat data: ${error.message}`);
-    }
-  }
-
-  private transformResponse(data: any): any {
-    // e-Stat APIのレスポンスを内部形式に変換
-    return {
-      statistics: data.STATISTICS_DATA,
-      metadata: data.METADATA,
-      timestamp: new Date().toISOString(),
-    };
-  }
-
-  async validateParameters(parameters: ApiParameter): Promise<Result<void>> {
-    if (!parameters.getRankingKey()) {
-      return Result.fail("Ranking key is required");
-    }
-    if (!parameters.getTimeCode()) {
-      return Result.fail("Time code is required");
-    }
-    return Result.ok();
-  }
-}
 ```
 
 ## ベストプラクティス
