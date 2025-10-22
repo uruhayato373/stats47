@@ -175,32 +175,26 @@ CAGR計算のビジネスロジックを実装するドメインサービス。
 ## ディレクトリ構造
 
 ```
-src/lib/time-series/
-├── entities/
+src/lib/timeseries/
+├── model/              # エンティティと値オブジェクト
 │   ├── TimeSeriesData.ts
 │   ├── TrendAnalysis.ts
 │   ├── CAGRCalculation.ts
 │   ├── YearOverYearChange.ts
-│   └── TimeSeriesChart.ts
-├── value-objects/
+│   ├── TimeSeriesChart.ts
 │   ├── TimePeriod.ts
 │   ├── CAGR.ts
 │   ├── TrendType.ts
 │   ├── ChangeRate.ts
 │   └── DataQuality.ts
-├── services/
+├── service/            # ドメインサービス
 │   ├── TimeSeriesService.ts
 │   ├── TrendCalculationService.ts
 │   ├── CAGRCalculationService.ts
 │   ├── YearOverYearService.ts
 │   └── AnomalyDetectionService.ts
-├── repositories/
-│   └── TimeSeriesRepository.ts
-├── aggregates/
-│   └── TimeSeriesAggregate.ts
-└── specifications/
-    ├── TrendSpecification.ts
-    └── QualitySpecification.ts
+└── repositories/       # リポジトリ
+    └── TimeSeriesRepository.ts
 ```
 
 
