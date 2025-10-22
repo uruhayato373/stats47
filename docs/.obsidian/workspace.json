@@ -75,10 +75,31 @@
             }
           }
         ]
+      },
+      {
+        "id": "f6913f92e206d914",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04_開発ガイド/10_Atomic Design実装.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "10_Atomic Design実装のアウトライン"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 369.5
+    "width": 298.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -134,28 +155,14 @@
               "icon": "lucide-tags",
               "title": "タグ"
             }
-          },
-          {
-            "id": "d873db75767a7e2f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "04_開発ガイド/10_Atomic Design実装.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "10_Atomic Design実装のアウトライン"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
