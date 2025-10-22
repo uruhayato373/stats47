@@ -60,6 +60,9 @@ tags:
 - 傾向分析
 - 統計サマリー生成
 - データ品質評価
+- 地域プロファイル生成
+- 地域の強み検出
+- 類似地域検出
 
 #### 主要エンティティ
 
@@ -89,6 +92,29 @@ tags:
   - `comparisonValue`: 比較対象値
   - `difference`: 差分
   - `ratio`: 比率
+
+- **RegionProfile**（地域プロファイル）
+
+  - `areaCode`: 地域コード
+  - `basicInfo`: 基本情報
+  - `keyIndicators`: 主要指標リスト
+  - `strengths`: 強み（トップ10ランキング項目）
+  - `radarData`: レーダーチャート用データ
+  - `similarRegions`: 類似地域リスト
+
+- **RegionStrength**（地域の強み）
+
+  - `indicator`: 統計指標
+  - `rank`: 順位
+  - `value`: 値
+  - `nationalAvg`: 全国平均
+  - `percentile`: パーセンタイル
+
+- **SimilarRegion**（類似地域）
+
+  - `areaCode`: 地域コード
+  - `similarityScore`: 類似度スコア
+  - `calculationMethod`: 計算方法（ユークリッド距離/コサイン類似度）
 
 #### 境界づけられたコンテキスト
 
@@ -127,13 +153,27 @@ src/domain/analytics/
 │   │   └── Trend.ts
 │   └── services/
 │       └── TrendAnalysisService.ts
-└── statistics/
+├── statistics/
+│   ├── value-objects/
+│   │   ├── Mean.ts
+│   │   ├── Median.ts
+│   │   └── StandardDeviation.ts
+│   └── services/
+│       └── StatisticsCalculationService.ts
+└── region-profile/
+    ├── entities/
+    │   ├── RegionProfile.ts
+    │   ├── RegionStrength.ts
+    │   └── SimilarRegion.ts
     ├── value-objects/
-    │   ├── Mean.ts
-    │   ├── Median.ts
-    │   └── StandardDeviation.ts
-    └── services/
-        └── StatisticsCalculationService.ts
+    │   ├── SimilarityScore.ts
+    │   └── StrengthThreshold.ts
+    ├── services/
+    │   ├── RegionProfileService.ts
+    │   ├── StrengthDetectionService.ts
+    │   └── SimilarityCalculationService.ts
+    └── repositories/
+        └── RegionProfileRepository.ts
 ```
 
 ---
@@ -487,6 +527,9 @@ src/domain/area/
 - サブカテゴリの定義と管理
 - カテゴリナビゲーション
 - 表示順序の管理
+- タグ管理
+- 複合フィルタリング
+- カテゴリ・タグ検索
 
 #### 主要エンティティ
 
@@ -511,6 +554,28 @@ src/domain/area/
   - `root`: ルートカテゴリ
   - `depth`: 階層の深さ
 
+- **Tag**（タグ）
+
+  - `id`: タグID
+  - `name`: タグ名
+  - `slug`: URLスラッグ
+  - `usageCount`: 使用回数
+  - `relatedTags`: 関連タグ
+
+- **TagCloud**（タグクラウド）
+
+  - `tags`: タグリスト
+  - `weights`: 重み付け
+  - `maxSize`: 最大サイズ
+  - `minSize`: 最小サイズ
+
+- **FilterCriteria**（フィルタ条件）
+
+  - `categoryId`: カテゴリID
+  - `tags`: タグリスト
+  - `areaCode`: 地域コード
+  - `dateRange`: 期間範囲
+
 #### 境界づけられたコンテキスト
 
 統計データの分類に関するすべての情報。
@@ -526,17 +591,26 @@ src/domain/category/
 ├── entities/
 │   ├── Category.ts
 │   ├── Subcategory.ts
-│   └── CategoryHierarchy.ts
+│   ├── CategoryHierarchy.ts
+│   ├── Tag.ts
+│   ├── TagCloud.ts
+│   └── FilterCriteria.ts
 ├── value-objects/
 │   ├── CategoryId.ts
 │   ├── DisplayOrder.ts
-│   └── CategoryIcon.ts
+│   ├── CategoryIcon.ts
+│   ├── TagId.ts
+│   └── TagWeight.ts
 ├── services/
 │   ├── CategoryService.ts
 │   ├── NavigationService.ts
-│   └── HierarchyService.ts
+│   ├── HierarchyService.ts
+│   ├── TagService.ts
+│   ├── TagCloudService.ts
+│   └── FilteringService.ts
 └── repositories/
-    └── CategoryRepository.ts
+    ├── CategoryRepository.ts
+    └── TagRepository.ts
 ```
 
 ---
@@ -794,6 +868,95 @@ export class TTLManager {
       .run();
   }
 }
+```
+
+---
+
+### 🔍 検索ドメイン（Search Domain）
+
+全コンテンツを横断する高度な検索機能を担当する支援ドメイン。
+
+#### 責務
+
+- 全文検索エンジン
+- 検索インデックス管理
+- 検索演算子処理（AND/OR/NOT/フレーズ/ワイルドカード）
+- オートコンプリート
+- サジェスト機能
+- 検索履歴管理
+- ファセット検索
+- スペルチェック
+
+#### 主要エンティティ
+
+- **SearchQuery**（検索クエリ）
+
+  - `query`: 検索文字列
+  - `filters`: フィルタ条件
+  - `operators`: 検索演算子
+  - `options`: 検索オプション
+
+- **SearchResult**（検索結果）
+
+  - `items`: 検索結果アイテム
+  - `totalCount`: 総件数
+  - `facets`: ファセット情報
+  - `suggestions`: サジェスト
+  - `highlightedText`: ハイライトされたテキスト
+
+- **SearchIndex**（検索インデックス）
+
+  - `contentType`: コンテンツタイプ
+  - `indexedFields`: インデックス化されたフィールド
+  - `lastUpdated`: 最終更新日時
+  - `documentCount`: ドキュメント数
+
+- **SearchHistory**（検索履歴）
+
+  - `userId`: ユーザーID（オプション）
+  - `query`: 検索クエリ
+  - `timestamp`: タイムスタンプ
+  - `resultCount`: 結果件数
+
+- **AutoCompleteResult**（オートコンプリート結果）
+
+  - `suggestions`: 候補リスト
+  - `score`: スコア
+  - `type`: 候補タイプ
+
+#### 境界づけられたコンテキスト
+
+全コンテンツの検索に関するすべての処理。
+
+#### 現在の配置
+
+新規実装（Phase 2）
+
+#### 提案される構造
+
+```
+src/domain/search/
+├── entities/
+│   ├── SearchQuery.ts
+│   ├── SearchResult.ts
+│   ├── SearchIndex.ts
+│   ├── SearchHistory.ts
+│   └── AutoCompleteResult.ts
+├── value-objects/
+│   ├── SearchOperator.ts
+│   ├── ContentType.ts
+│   ├── SearchScore.ts
+│   └── QueryString.ts
+├── services/
+│   ├── FullTextSearchService.ts
+│   ├── AutoCompleteService.ts
+│   ├── SearchHistoryService.ts
+│   ├── FacetSearchService.ts
+│   ├── SpellCheckService.ts
+│   └── SearchIndexService.ts
+└── repositories/
+    ├── SearchIndexRepository.ts
+    └── SearchHistoryRepository.ts
 ```
 
 ---
@@ -1100,12 +1263,19 @@ src/
 │   ├── category/                    # 【支援ドメイン】カテゴリ管理
 │   │   ├── entities/
 │   │   │   ├── Category.ts
-│   │   │   └── Subcategory.ts
+│   │   │   ├── Subcategory.ts
+│   │   │   ├── Tag.ts
+│   │   │   ├── TagCloud.ts
+│   │   │   └── FilterCriteria.ts
 │   │   ├── services/
 │   │   │   ├── CategoryService.ts
-│   │   │   └── NavigationService.ts
+│   │   │   ├── NavigationService.ts
+│   │   │   ├── TagService.ts
+│   │   │   ├── TagCloudService.ts
+│   │   │   └── FilteringService.ts
 │   │   └── repositories/
-│   │       └── CategoryRepository.ts
+│   │       ├── CategoryRepository.ts
+│   │       └── TagRepository.ts
 │   │
 │   ├── data-integration/            # 【支援ドメイン】データ統合
 │   │   ├── estat-api/
@@ -1118,7 +1288,13 @@ src/
 │   │   │   └── repositories/
 │   │   └── adapters/
 │   │
-│   ├── auth/                        # 【汎用ドメイン】認証
+│   └── search/                       # 【支援ドメイン】検索
+│       ├── entities/
+│       ├── value-objects/
+│       ├── services/
+│       └── repositories/
+│
+├── auth/                            # 【汎用ドメイン】認証
 │   │   ├── entities/
 │   │   │   ├── User.ts
 │   │   │   └── Session.ts
@@ -1248,8 +1424,9 @@ Infrastructure Layer (Data Access)
       ↓ 依存
 支援ドメイン
   ├── Area Domain
-  ├── Category Domain
-  └── Data Integration Domain
+  ├── Category Domain            # ← 拡張（タグ管理追加）
+  ├── Data Integration Domain
+  └── Search Domain              # ← 新規追加
       ↓ 依存
 汎用ドメイン
   ├── Auth Domain
@@ -2926,7 +3103,7 @@ export class GeoDataQualitySpecification {
 ### ドメイン分類
 
 1. **コアドメイン**: Analytics, Visualization
-2. **支援ドメイン**: Area, Category, Data Integration
+2. **支援ドメイン**: Area, Category, Data Integration, Search
 3. **汎用ドメイン**: Auth, Export, Content
 4. **共有カーネル**: 共通の値オブジェクトとユーティリティ
 
