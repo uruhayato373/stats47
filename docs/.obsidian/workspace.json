@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "19997ebc39da352f",
+            "id": "6f254bf1c0de4a61",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geographic.md",
+                "file": "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04_Geographic"
+              "title": "ドメイン間依存関係"
             }
           }
         ]
@@ -75,31 +75,10 @@
             }
           }
         ]
-      },
-      {
-        "id": "3f98125136299f2d",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d873db75767a7e2f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geographic.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "04_Geographicのアウトライン"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 280.5
+    "width": 369.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -155,14 +134,28 @@
               "icon": "lucide-tags",
               "title": "タグ"
             }
+          },
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01_技術設計/03_ドメイン設計/ドメイン間依存関係.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "ドメイン間依存関係のアウトライン"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -176,44 +169,44 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "19997ebc39da352f",
+  "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/05_Search.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_EstatAPI.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Cache.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_Taxonomy.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_DataIntegration.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geographic.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_Area.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/03_Comparison.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/04_Comparison.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/03_TimeSeries.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/02_TimeSeries.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/01_Ranking.md",
-    "01_技術設計/05_フロントエンド設計/アプリケーション層設計.md",
-    "04_開発ガイド/可視化/04_Rechartsライブラリ統合.md",
-    "04_開発ガイド/可視化/03_地図実装ガイド.md",
-    "04_開発ガイド/可視化/02_チャート実装ガイド.md",
-    "04_開発ガイド/可視化/01_可視化実装概要.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/02_Visualization.md",
+    "01_技術設計/04_インフラ設計/04_ストレージ選択ガイド.md",
+    "01_技術設計/04_インフラ設計/03_キャッシュ戦略.md",
+    "01_技術設計/04_インフラ設計/02_R2ストレージ設計.md",
+    "01_技術設計/04_インフラ設計/01_データベース設計.md",
+    "01_技術設計/03_ドメイン設計/03_汎用ドメイン/05_Content.md",
     "01_技術設計/01_システム概要/04_DDDドメイン分類.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_Geographic.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/01_AreaManagement.md",
-    "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_TaxonomyManagement.md",
-    "01_技術設計/01_システム概要/03_プロジェクト構造.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/01_Analytics.md",
-    "02_ドメイン設計/03_汎用ドメイン/01_Authentication.md",
-    "02_ドメイン設計/00_共有カーネル",
-    "02_ドメイン設計/03_汎用ドメイン",
-    "02_ドメイン設計/02_支援ドメイン",
-    "02_ドメイン設計/01_コアドメイン",
-    "02_ドメイン設計",
-    "01_技術設計/04_インフラ設計",
-    "01_技術設計/02_ADR/バリデーション_フォーム",
-    "01_技術設計/02_ADR/UIコンポーネント",
-    "01_技術設計/02_ADR/データ可視化",
-    "01_技術設計/02_ADR/状態管理",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/05_Search.md",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geoshape.md",
+    "01_技術設計/03_ドメイン設計/03_汎用ドメイン/04_Cache.md",
+    "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_EstatAPI.md",
+    "05_テスト戦略/ユニットテストガイド.md",
+    "04_開発ガイド/認証/specifications/authentication-system.md",
+    "04_開発ガイド/認証/refactoring/authentication-system-audit.md",
+    "04_開発ガイド/認証/refactoring/authentication-analysis-and-improvement.md",
+    "04_開発ガイド/認証/specifications",
+    "04_開発ガイド/認証/refactoring",
+    "04_開発ガイド/認証",
+    "04_開発ガイド/型定義管理.md",
+    "04_開発ガイド/地域管理/specifications/hierarchy.md",
+    "04_開発ガイド/地域管理/testing/test-strategy.md",
+    "04_開発ガイド/地域管理/specifications/geoshape-auto-cache-specification.md",
+    "04_開発ガイド/地域管理/specifications/data-structure.md",
+    "04_開発ガイド/地域管理/specifications/api.md",
+    "04_開発ガイド/地域管理/specifications/administrative-boundary-data.md",
+    "04_開発ガイド/地域管理/refactoring/migration-plan.md",
+    "04_開発ガイド/地域管理/implementation/getting-started.md",
+    "04_開発ガイド/地域管理/testing",
+    "04_開発ガイド/地域管理/specifications",
+    "04_開発ガイド/地域管理/refactoring",
+    "04_開発ガイド/地域管理/overview.md",
+    "04_開発ガイド/地域管理/implementation",
+    "04_開発ガイド/地域管理",
+    "04_開発ガイド/可視化/specifications/chart-types/line-chart.md",
+    "04_開発ガイド/可視化/specifications/chart-types/heatmap.md",
+    "04_開発ガイド/可視化/specifications/chart-types",
+    "04_開発ガイド/可視化/implementation/recharts",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",
     "07_コンテンツ計画/リソース/都道府県ごとの物価分析.png",
     "07_コンテンツ計画/リソース/転入転出.png",
