@@ -171,6 +171,7 @@
   },
   "active": "860eb1f2bf495c69",
   "lastOpenFiles": [
+    "04_開発ガイド/Area実装ガイド.md",
     "01_技術設計/04_インフラ設計/04_ストレージ選択ガイド.md",
     "01_技術設計/04_インフラ設計/03_キャッシュ戦略.md",
     "01_技術設計/04_インフラ設計/02_R2ストレージ設計.md",
@@ -204,7 +205,6 @@
     "04_開発ガイド/地域管理/implementation",
     "04_開発ガイド/地域管理",
     "04_開発ガイド/可視化/specifications/chart-types/line-chart.md",
-    "04_開発ガイド/可視化/specifications/chart-types/heatmap.md",
     "04_開発ガイド/可視化/specifications/chart-types",
     "04_開発ガイド/可視化/implementation/recharts",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",
