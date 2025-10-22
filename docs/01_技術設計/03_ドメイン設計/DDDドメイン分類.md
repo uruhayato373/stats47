@@ -47,6 +47,60 @@ tags:
 
 ---
 
+### ドメイン全体像
+
+| ドメイン名 | 分類 | 責務 |
+|-----------|------|------|
+| Analytics | コアドメイン | ランキング計算、比較分析、傾向分析、統計サマリー生成、地域プロファイル生成、地域の強み検出、類似地域検出 |
+| TimeSeries Analysis | コアドメイン | 複数年度データの取得・管理、CAGR計算、トレンドライン計算、前年比・前年同期比計算、時系列グラフ生成、複数地域の時系列比較 |
+| Visualization | コアドメイン | 地図表示（コロプレスマップ）、グラフ生成、チャート設定管理、色スケール管理、凡例生成、歴史的行政区域データの管理、データソース表記の生成 |
+| Area Management | 支援ドメイン | 都道府県・市区町村の階層構造管理、地域コードの検証と変換、地理形状データ管理、地域検索・フィルタリング、歴史的行政区域の変遷管理 |
+| Taxonomy Management | 支援ドメイン | 分類体系の管理（カテゴリ・タグ・メタデータ）、階層構造とフラット構造の統合管理、ナビゲーション機能、複合フィルタリング、分類ベース検索 |
+| Data Integration | 支援ドメイン | 外部API（e-Stat、World Bank、OECD等）との統合、データ取得・変換・正規化、APIパラメータマッピング、キャッシュ管理（R2/D1）、データ品質管理 |
+| Search | 支援ドメイン | 全文検索エンジン、検索インデックス管理、検索演算子処理、オートコンプリート、サジェスト機能、検索履歴管理、ファセット検索、スペルチェック |
+| Authentication & Authorization | 汎用ドメイン | ユーザー認証、セッション管理、権限制御、ロール管理 |
+| Export | 汎用ドメイン | CSV/Excel/PDF出力、フォーマット変換、ダウンロード管理、エクスポートジョブ管理 |
+| Content Management | 汎用ドメイン | ブログ記事管理、MDXコンテンツ処理、関連記事生成、SEO最適化 |
+
+### レイヤー構造
+
+```mermaid
+graph TD
+    subgraph "Presentation Layer"
+        UI[UI Components<br/>React/Next.js]
+    end
+    
+    subgraph "Application Layer"
+        UC[Use Cases<br/>アプリケーションロジック]
+    end
+    
+    subgraph "Domain Layer"
+        CORE[コアドメイン<br/>Analytics, Visualization, TimeSeries]
+        SUPPORT[支援ドメイン<br/>Area, Taxonomy, Data Integration, Search]
+        GENERIC[汎用ドメイン<br/>Auth, Export, Content]
+    end
+    
+    subgraph "Infrastructure Layer"
+        INFRA[Infrastructure<br/>D1, R2, e-Stat API, Cache]
+    end
+    
+    UI --> UC
+    UC --> CORE
+    UC --> SUPPORT
+    UC --> GENERIC
+    CORE -.依存.-> SUPPORT
+    SUPPORT -.依存.-> GENERIC
+    CORE --> INFRA
+    SUPPORT --> INFRA
+    GENERIC --> INFRA
+    
+    style CORE fill:#ff6b6b
+    style SUPPORT fill:#4ecdc4
+    style GENERIC fill:#95e1d3
+```
+
+---
+
 ## 1. コアドメイン（Core Domain）
 
 ### 🎯 統計分析ドメイン（Analytics Domain）
@@ -517,19 +571,18 @@ src/domain/area/
 
 ---
 
-### 📊 カテゴリ管理ドメイン（Category Management Domain）
+### 📊 分類体系管理ドメイン（Taxonomy Management Domain）
 
 統計データの分類体系を管理する支援ドメイン。
 
 #### 責務
 
-- 統計カテゴリの階層構造管理
-- サブカテゴリの定義と管理
-- カテゴリナビゲーション
+- 分類体系の管理（カテゴリ・タグ・メタデータ）
+- 階層構造とフラット構造の統合管理
+- ナビゲーション機能
 - 表示順序の管理
-- タグ管理
 - 複合フィルタリング
-- カテゴリ・タグ検索
+- 分類ベース検索
 
 #### 主要エンティティ
 
@@ -587,7 +640,7 @@ src/domain/area/
 #### 提案される構造
 
 ```
-src/domain/category/
+src/domain/taxonomy/
 ├── entities/
 │   ├── Category.ts
 │   ├── Subcategory.ts
@@ -1260,7 +1313,7 @@ src/
 │   │       ├── AreaRepository.ts
 │   │       └── GeoShapeRepository.ts
 │   │
-│   ├── category/                    # 【支援ドメイン】カテゴリ管理
+│   ├── taxonomy/                    # 【支援ドメイン】分類体系管理
 │   │   ├── entities/
 │   │   │   ├── Category.ts
 │   │   │   ├── Subcategory.ts
@@ -1424,7 +1477,7 @@ Infrastructure Layer (Data Access)
       ↓ 依存
 支援ドメイン
   ├── Area Domain
-  ├── Category Domain            # ← 拡張（タグ管理追加）
+  ├── Taxonomy Domain            # ← 拡張（タグ管理追加）
   ├── Data Integration Domain
   └── Search Domain              # ← 新規追加
       ↓ 依存

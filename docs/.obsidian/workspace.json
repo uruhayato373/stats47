@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_技術設計/02_ADR/UIコンポーネント/050_shadcn_ui.md",
+                "file": "06_運用保守/03_フォント移行ガイド.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "050_shadcn_ui"
+              "title": "03_フォント移行ガイド"
             }
           }
         ]
@@ -86,13 +86,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_技術設計/02_ADR/UIコンポーネント/050_shadcn_ui.md",
+                "file": "06_運用保守/03_フォント移行ガイド.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "050_shadcn_uiのアウトライン"
+              "title": "03_フォント移行ガイドのアウトライン"
             }
           }
         ]
@@ -176,10 +176,16 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "860eb1f2bf495c69",
+  "active": "19997ebc39da352f",
   "lastOpenFiles": [
-    "01_技術設計/02_ADR/インフラストラクチャ/005_R2_ストレージ.md",
+    "03_デザインシステム/03_タイポグラフィシステム.md",
+    "06_運用保守/03_フォント移行ガイド.md",
+    "04_開発ガイド/12_フォント実装ガイド.md",
+    "03_デザインシステム/02_アイコンシステム.md",
     "01_技術設計/03_ドメイン設計/DDDドメイン分類.md",
+    "02_ドメイン設計/README.md",
+    "01_技術設計/02_ADR/UIコンポーネント/050_shadcn_ui.md",
+    "01_技術設計/02_ADR/インフラストラクチャ/005_R2_ストレージ.md",
     "01_技術設計/02_ADR/インフラストラクチャ/004_D1_データベース.md",
     "01_技術設計/02_ADR/データフェッチ/021_TanStack_Query.md",
     "01_技術設計/02_ADR/データフェッチ/020_SWR.md",
@@ -194,15 +200,11 @@
     "01_技術設計/02_ADR/インフラストラクチャ/002_Hono.md",
     "00_プロジェクト管理/02_要件定義/01_プロジェクト要件.md",
     "01_技術設計/02_ADR/状態管理/030_Zustand.md",
-    "01_技術設計/02_ADR/UIコンポーネント/050_shadcn_ui.md",
     "01_技術設計/04_データベース設計/型定義管理.md",
     "01_技術設計/04_データベース設計/データベース設計.md",
     "01_技術設計/04_データベース設計/データフェッチ設計.md",
     "01_技術設計/04_データベース設計",
     "01_技術設計/02_ADR/バリデーション_フォーム/060_Valibot.md",
-    "01_技術設計/02_ADR/インフラストラクチャ/001_Cloudflare採用.md",
-    "01_技術設計/02_ADR/データ可視化/041_D3.js.md",
-    "01_技術設計/02_ADR/00_INDEX.md",
     "01_技術設計/02_ADR/バリデーション_フォーム",
     "01_技術設計/02_ADR/UIコンポーネント",
     "01_技術設計/02_ADR/データ可視化",
@@ -210,8 +212,6 @@
     "01_技術設計/02_ADR/データフェッチ",
     "01_技術設計/02_ADR/フロントエンド基盤",
     "01_技術設計/02_ADR/インフラストラクチャ",
-    "04_開発ガイド/認証/specifications/authentication-system.md",
-    "04_開発ガイド/認証/refactoring/authentication-analysis-and-improvement.md",
     "04_開発ガイド/認証/specifications",
     "04_開発ガイド/認証/refactoring",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",

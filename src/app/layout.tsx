@@ -1,12 +1,34 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { JotaiProvider } from "@/lib/providers";
 // import { SessionProvider } from "next-auth/react"; // 無効化: Auth.js機能を一時的に無効化
 import { Header } from "@/components/organisms/layout/Header";
 import { Sidebar } from "@/components/organisms/layout/Sidebar";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: true,
+});
+
+const notoSansJP = Noto_Sans_JP({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-sans-jp",
+  display: "swap",
+  preload: true,
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "CMS Dashboard",
@@ -22,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${GeistSans.variable} ${GeistMono.variable} relative min-h-full light`}
+      className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable} relative min-h-full light`}
     >
       <head>
         {/* ブロッキングスクリプト: レンダリング前にテーマを適用してFOUCを防止 */}
@@ -75,7 +97,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${GeistSans.className} bg-gray-100 dark:bg-neutral-900 antialiased light`}
+        className={`${inter.className} bg-gray-100 dark:bg-neutral-900 antialiased light`}
       >
         <JotaiProvider>
           <Header />
