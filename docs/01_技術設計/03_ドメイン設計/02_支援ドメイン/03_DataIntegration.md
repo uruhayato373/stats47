@@ -514,7 +514,7 @@ export interface DataSourceRepository {
 ## ディレクトリ構造
 
 ```
-src/domain/data-integration/
+src/lib/data-integration/
 ├── estat-api/
 │   ├── adapters/
 │   │   ├── EstatRankingAdapter.ts
@@ -572,7 +572,7 @@ src/domain/data-integration/
 ### エンティティ実装例
 
 ```typescript
-// src/domain/data-integration/cache/entities/CacheEntry.ts
+// src/lib/data-integration/cache/entities/CacheEntry.ts
 export class CacheEntry {
   private constructor(
     private readonly key: CacheKey,
@@ -646,7 +646,7 @@ export class CacheEntry {
 ### アダプター実装例
 
 ```typescript
-// src/domain/data-integration/estat-api/adapters/EstatRankingAdapter.ts
+// src/lib/data-integration/estat-api/adapters/EstatRankingAdapter.ts
 export class EstatRankingAdapter implements DataSourceAdapter {
   constructor(
     private readonly apiClient: ApiClient,
@@ -728,9 +728,8 @@ export class EstatRankingAdapter implements DataSourceAdapter {
 
 ## 関連ドメイン
 
-- **Analytics ドメイン**: 取得したデータの分析
+- **Ranking ドメイン**: 取得したデータの分析
 - **Area Management ドメイン**: 地域データの管理
-- **Visualization ドメイン**: データの可視化
 
 ---
 

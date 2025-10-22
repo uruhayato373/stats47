@@ -515,7 +515,7 @@ export interface SearchHistoryRepository {
 ## ディレクトリ構造
 
 ```
-src/domain/search/
+src/lib/search/
 ├── entities/
 │   ├── SearchQuery.ts
 │   ├── SearchResult.ts
@@ -556,7 +556,7 @@ src/domain/search/
 ### エンティティ実装例
 
 ```typescript
-// src/domain/search/entities/SearchQuery.ts
+// src/lib/search/entities/SearchQuery.ts
 export class SearchQuery {
   private constructor(
     private readonly query: string,
@@ -659,7 +659,7 @@ export class SearchQuery {
 ### 仕様実装例
 
 ```typescript
-// src/domain/search/specifications/SearchSpecification.ts
+// src/lib/search/specifications/SearchSpecification.ts
 export class SearchSpecification {
   static isComplexQuery(query: SearchQuery): boolean {
     return query.getOperators().length > 0 || query.getFilters().size > 0;
