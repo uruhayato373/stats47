@@ -138,7 +138,7 @@ export default function GeoShapeCacheAdminPage() {
               <div className="mt-4">
                 <h3 className="font-semibold text-red-800 mb-2">エラー詳細</h3>
                 <div className="bg-red-50 border border-red-200 rounded-md p-4">
-                  {prewarmData.results.errors.map((error, index) => (
+                  {prewarmData.results.errors.map((error: any, index: number) => (
                     <div key={index} className="text-sm text-red-800 mb-1">
                       <strong>{error.prefectureCode}:</strong> {error.error}
                     </div>

@@ -141,13 +141,20 @@ export function useMultipleGeoShapeData(
   };
 }
 
+interface UsePrewarmCacheReturn {
+  prewarmData: any;
+  prewarmError: Error | undefined;
+  isPrewarming: boolean;
+  executePrewarm: () => Promise<void>;
+}
+
 /**
  * プリウォーム実行フック
  *
  * @param level - データレベル
  * @returns プリウォーム実行関数と状態
  */
-export function usePrewarmCache(level: GeoShapeDataLevel = "municipality") {
+export function usePrewarmCache(level: GeoShapeDataLevel = "municipality"): UsePrewarmCacheReturn {
   const { data, error, isLoading, mutate } = useSWR(
     `prewarm-${level}`,
     async () => {

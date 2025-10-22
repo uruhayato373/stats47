@@ -69,7 +69,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
           placeholder="email@example.com"
         />
       </div>
@@ -100,7 +100,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             id="remember-me"
             name="remember-me"
             type="checkbox"
-            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            className="h-4 w-4 text-primary focus:ring-ring border-gray-300 rounded"
           />
           <label
             htmlFor="remember-me"
@@ -113,7 +113,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         <div className="text-sm">
           <Link
             href="/forgot-password"
-            className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+            className="font-medium text-primary hover:text-primary/90 dark:text-primary"
           >
             パスワードを忘れた？
           </Link>
@@ -124,7 +124,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? "ログイン中..." : "ログイン"}
       </button>

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Modal } from "@/components/atoms/Modal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/organisms/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/molecules/ui/tabs";
 import { LoginForm } from "@/components/organisms/auth/LoginForm";
 import { RegisterForm } from "@/components/organisms/auth/RegisterForm";
 
@@ -32,79 +33,54 @@ export function AuthModal({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="md">
-      <div className="space-y-6">
-        {/* ヘッダー */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-center">
             {activeTab === "login" ? "ログイン" : "新規登録"}
-          </h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {activeTab === "login"
-              ? "Stats47 管理画面"
-              : "Stats47 アカウント作成"}
-          </p>
-        </div>
-
-        {/* タブ切り替え */}
-        <div className="flex space-x-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
-          <button
-            onClick={() => setActiveTab("login")}
-            className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors ${
-              activeTab === "login"
-                ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-            }`}
-          >
-            ログイン
-          </button>
-          <button
-            onClick={() => setActiveTab("register")}
-            className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors ${
-              activeTab === "register"
-                ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-            }`}
-          >
-            新規登録
-          </button>
-        </div>
-
-        {/* フォーム */}
-        {activeTab === "login" ? (
-          <LoginForm onSuccess={handleLoginSuccess} />
-        ) : (
-          <RegisterForm
-            onSuccess={handleRegisterSuccess}
-            onSwitchToLogin={handleSwitchToLogin}
-          />
-        )}
-
-        {/* フッター */}
-        <div className="text-center text-sm text-gray-600 dark:text-gray-400">
-          {activeTab === "login" ? (
-            <p>
-              アカウントをお持ちでないですか？{" "}
-              <button
-                onClick={() => setActiveTab("register")}
-                className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
-              >
-                新規登録
-              </button>
-            </p>
-          ) : (
-            <p>
-              すでにアカウントをお持ちですか？{" "}
-              <button
-                onClick={() => setActiveTab("login")}
-                className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
-              >
-                ログイン
-              </button>
-            </p>
-          )}
-        </div>
-      </div>
-    </Modal>
+          </DialogTitle>
+        </DialogHeader>
+        
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "login" | "register")} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="login">ログイン</TabsTrigger>
+            <TabsTrigger value="register">新規登録</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="login" className="space-y-4">
+            <LoginForm onSuccess={handleLoginSuccess} />
+            <div className="text-center text-sm text-muted-foreground">
+              <p>
+                アカウントをお持ちでないですか？{" "}
+                <button
+                  onClick={() => setActiveTab("register")}
+                  className="font-medium text-primary hover:text-primary/90"
+                >
+                  新規登録
+                </button>
+              </p>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="register" className="space-y-4">
+            <RegisterForm
+              onSuccess={handleRegisterSuccess}
+              onSwitchToLogin={handleSwitchToLogin}
+            />
+            <div className="text-center text-sm text-muted-foreground">
+              <p>
+                すでにアカウントをお持ちですか？{" "}
+                <button
+                  onClick={() => setActiveTab("login")}
+                  className="font-medium text-primary hover:text-primary/90"
+                >
+                  ログイン
+                </button>
+              </p>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -97,7 +97,7 @@ export function RegisterForm({
           onChange={(e) =>
             setFormData({ ...formData, username: e.target.value })
           }
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
           placeholder="username"
         />
       </div>
@@ -118,7 +118,7 @@ export function RegisterForm({
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
           placeholder="email@example.com"
         />
       </div>
@@ -173,7 +173,7 @@ export function RegisterForm({
           name="terms"
           type="checkbox"
           required
-          className="h-4 w-4 mt-1 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          className="h-4 w-4 mt-1 text-primary focus:ring-ring border-gray-300 rounded"
         />
         <label
           htmlFor="terms"
@@ -181,14 +181,14 @@ export function RegisterForm({
         >
           <Link
             href="/terms"
-            className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+            className="text-primary hover:text-primary/90 dark:text-primary"
           >
             利用規約
           </Link>
           と
           <Link
             href="/privacy"
-            className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+            className="text-primary hover:text-primary/90 dark:text-primary"
           >
             プライバシーポリシー
           </Link>
@@ -200,7 +200,7 @@ export function RegisterForm({
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? "登録中..." : "新規登録"}
       </button>

@@ -80,7 +80,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
 
     // ベースクラス
     const baseInputClasses =
-      "w-full border border-gray-200 shadow-xs placeholder-gray-600 bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50 dark:placeholder-neutral-400";
+      "w-full border border-gray-200 shadow-xs placeholder-gray-600 bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-ring focus:border-primary dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50 dark:placeholder-neutral-400";
     const disabledClasses = "opacity-50 cursor-not-allowed";
     const errorClasses =
       "border-red-500 focus:border-red-500 focus:ring-red-500";

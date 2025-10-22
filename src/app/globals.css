@@ -1,43 +1,83 @@
 @import "tailwindcss";
 
-/* ===== CSS変数の定義 ===== */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== shadcn/ui Blue テーマ変数（HSL形式） ===== */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;            /* Blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 48%;
+  }
 }
 
-html.light {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-html.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-/* ===== Tailwind CSS v4のテーマ設定 ===== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), var(--font-noto-sans-jp);
   --font-mono: var(--font-geist-mono);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-primary-foreground: hsl(var(--primary-foreground));
 }
 
-/* ===== フォントフォールバック ===== */
 body {
-  font-family: var(--font-inter), var(--font-noto-sans-jp), 
-    -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-}
-
-/* ===== ベーススタイル ===== */
-body {
-  background-color: var(--background);
-  color: var(--foreground);
   font-family: var(--font-inter), var(--font-noto-sans-jp),
     -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -57,11 +97,11 @@ main {
 
 /* ===== ヘッダーのスタイル ===== */
 html.light header {
-  background-color: #f4f4f5;
+  background-color: hsl(var(--muted));
 }
 
 html.dark header {
-  background-color: #171717;
+  background-color: hsl(var(--card));
 }
 
 /* ヘッダー内のボタン背景 - Tailwindの@applyを使用して詳細度を統一 */
@@ -84,33 +124,37 @@ html.dark header .bg-white {
 
 /* ===== カスタムコンポーネントクラス ===== */
 @layer components {
-  /* カードベース */
   .card-base {
-    @apply bg-white rounded-lg shadow-xs border border-gray-200 p-4;
-    @apply dark:bg-neutral-800 dark:border-neutral-700;
+    background-color: var(--color-card);
+    color: var(--color-card-foreground);
+    @apply rounded-lg shadow-sm border p-4;
+    border-color: var(--color-border);
   }
 
   .card-header {
-    @apply text-lg font-medium text-gray-800 mb-3;
-    @apply dark:text-neutral-200;
+    @apply text-lg font-medium mb-3;
+    color: var(--color-foreground);
   }
 
   .card-content {
-    @apply text-gray-600;
-    @apply dark:text-neutral-400;
+    color: var(--color-muted-foreground);
   }
 
-  /* ボタン */
   .btn-primary {
-    @apply px-3 py-2 bg-indigo-500 text-white text-sm font-medium rounded-lg;
-    @apply hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+    @apply px-3 py-2 text-sm font-medium rounded-lg;
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    @apply hover:opacity-90 focus:outline-none focus:ring-2;
+    --tw-ring-color: var(--color-ring);
   }
 
   .btn-secondary {
-    @apply px-3 py-2 border border-gray-200 bg-white text-gray-800 text-sm font-medium rounded-lg;
-    @apply hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300;
-    @apply dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300;
-    @apply dark:hover:bg-neutral-700 dark:focus:ring-neutral-600;
+    @apply px-3 py-2 text-sm font-medium rounded-lg border;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border-color: var(--color-input);
+    @apply hover:opacity-90 focus:outline-none focus:ring-2;
+    --tw-ring-color: var(--color-ring);
   }
 }
 

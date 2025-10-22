@@ -25,7 +25,7 @@ export const CategoryPageHeader: React.FC<CategoryPageHeaderProps> = ({
         <div className="flex-shrink-0">
           <CategoryIcon
             iconName={category.icon}
-            className="w-8 h-8 text-indigo-600"
+            className="w-8 h-8 text-primary"
           />
         </div>
 

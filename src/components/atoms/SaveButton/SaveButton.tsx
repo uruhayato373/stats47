@@ -24,7 +24,7 @@ export default function SaveButton({
         <button
           onClick={onSave}
           disabled={saving}
-          className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+          className="p-2 bg-primary text-white rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
           title={saving ? "保存中..." : "データベースに保存"}
         >
           <Save className={`w-5 h-5 ${saving ? "animate-pulse" : ""}`} />

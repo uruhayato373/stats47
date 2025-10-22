@@ -68,7 +68,7 @@ export default function Header() {
                 href="#"
                 className="flex items-center gap-x-1.5 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
               >
-                <div className="bg-indigo-700 size-8 rounded-md flex items-center justify-center">
+                <div className="bg-primary size-8 rounded-md flex items-center justify-center">
                   <svg
                     className="size-4 text-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ export default function Header() {
                       {user?.email}
                     </p>
                     {isAdmin && (
-                      <p className="text-xs text-indigo-600 dark:text-indigo-400">
+                      <p className="text-xs text-primary dark:text-primary">
                         管理者
                       </p>
                     )}
@@ -155,7 +155,7 @@ export default function Header() {
           ) : (
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="flex items-center justify-center p-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+              className="flex items-center justify-center p-2 text-sm bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
               title="ログイン"
             >
               <LogIn className="size-4" />

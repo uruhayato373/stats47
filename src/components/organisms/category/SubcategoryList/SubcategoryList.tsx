@@ -54,7 +54,7 @@ export const SubcategoryList: React.FC<SubcategoryListProps> = ({
           <Link
             key={subcategory.id}
             href={`/${category.id}${subcategory.href}`}
-            className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-indigo-300 transition-colors dark:bg-neutral-800 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:border-indigo-500"
+            className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-primary/30 transition-colors dark:bg-neutral-800 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:border-primary/50"
           >
             <div className="flex items-center gap-3">
               <div

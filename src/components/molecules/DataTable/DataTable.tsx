@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/organisms/ui/table";
+import { Input } from "@/components/atoms/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/molecules/ui/select";
+import { Badge } from "@/components/atoms/ui/badge";
 
 export interface TableColumn<T = Record<string, unknown>> {
   key: string;
@@ -78,7 +82,7 @@ export default function DataTable<T = Record<string, unknown>>({
 
   if (!data || data.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500 dark:text-neutral-400">
+      <div className="text-center py-8 text-muted-foreground">
         {emptyMessage}
       </div>
     );
@@ -87,7 +91,7 @@ export default function DataTable<T = Record<string, unknown>>({
   const displayData = filteredData.slice(0, maxRows);
 
   return (
-    <div className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
+    <div className="overflow-hidden bg-card border border-border rounded-lg shadow-sm">
       <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
         <thead className="bg-gray-50 dark:bg-neutral-900">
           <tr>
@@ -111,7 +115,7 @@ export default function DataTable<T = Record<string, unknown>>({
                           onChange={(e) =>
                             updateFilter(column.key, e.target.value)
                           }
-                          className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
+                          className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-ring focus:border-primary dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
                         >
                           <option value="">すべて</option>
                           {getUniqueValues(column.key).map((value) => (
@@ -128,7 +132,7 @@ export default function DataTable<T = Record<string, unknown>>({
                             updateFilter(column.key, e.target.value)
                           }
                           placeholder="フィルター..."
-                          className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
+                          className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:ring-1 focus:ring-ring focus:border-primary dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200"
                         />
                       )}
                     </div>

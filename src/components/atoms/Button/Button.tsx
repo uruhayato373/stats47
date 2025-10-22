@@ -94,7 +94,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           return "border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-500 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800";
         case "primary":
         default:
-          return "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600";
+          return "bg-primary text-white hover:bg-primary/90 focus:ring-ring dark:bg-primary dark:hover:bg-primary/90";
       }
     };
 

@@ -78,7 +78,7 @@ const TabButton = memo(function TabButton({
           isDisabled
             ? "opacity-50 cursor-not-allowed text-gray-400"
             : isActive
-            ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
+            ? "border-primary text-primary dark:text-primary"
             : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-300"
         }
       `}

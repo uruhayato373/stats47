@@ -83,7 +83,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     // ベースクラス
     const baseSelectClasses =
-      "w-full border border-gray-200 shadow-xs bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50";
+      "w-full border border-gray-200 shadow-xs bg-white text-gray-900 focus:outline-hidden focus:ring-1 focus:ring-ring focus:border-primary dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-50";
     const disabledClasses = "opacity-50 cursor-not-allowed";
     const errorClasses =
       "border-red-500 focus:border-red-500 focus:ring-red-500";
