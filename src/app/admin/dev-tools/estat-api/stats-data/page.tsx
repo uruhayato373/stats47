@@ -10,7 +10,7 @@
 import { EstatAPIStatsDataPage } from "@/components/pages/EstatAPIStatsDataPage";
 import { estatAPI } from "@/lib/estat-api";
 import { getEnvironmentConfig } from "@/lib/env";
-import { getMockStatsData } from "../../../../data/mock/statsdata";
+import { getMockStatsData } from "../../../../../../data/mock/statsdata";
 
 /**
  * e-STAT API統計データページのサーバーコンポーネント

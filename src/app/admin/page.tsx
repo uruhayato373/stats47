@@ -176,13 +176,13 @@ export default function AdminPage() {
               <Settings className="w-8 h-8 text-orange-600" />
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  システム設定
+                  開発ツール
                 </p>
                 <Link
-                  href="/admin/settings"
+                  href="/admin/dev-tools"
                   className="text-sm text-indigo-600 hover:text-indigo-500"
                 >
-                  設定画面へ
+                  開発ツールへ
                 </Link>
               </div>
             </div>
