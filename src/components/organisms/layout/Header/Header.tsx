@@ -4,7 +4,7 @@ import React from "react";
 import { HeaderLogo } from "./HeaderLogo";
 import { HeaderActions } from "./HeaderActions";
 import { AuthModal } from "@/components/organisms/auth/AuthModal";
-import { useAuthModal } from "./hooks";
+import { useAuthModal } from "@/hooks/useAuthModal";
 
 /**
  * ヘッダーメインコンテナコンポーネント

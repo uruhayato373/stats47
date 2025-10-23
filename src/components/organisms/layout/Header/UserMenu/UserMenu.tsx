@@ -5,7 +5,7 @@ import { User, ChevronDown } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { UserMenuButton } from "./UserMenuButton";
 import { UserMenuDropdown } from "./UserMenuDropdown";
-import { useUserMenu } from "../hooks";
+import { useUserMenu } from "@/hooks/useUserMenu";
 
 /**
  * ユーザーメニューのコンテナコンポーネント

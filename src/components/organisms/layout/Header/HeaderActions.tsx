@@ -5,7 +5,7 @@ import { LogIn } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { ThemeToggleButton } from "@/components/atoms/ThemeToggleButton";
 import { UserMenu } from "./UserMenu";
-import { useAuthModal } from "./hooks";
+import { useAuthModal } from "@/hooks/useAuthModal";
 
 /**
  * ヘッダーの右側アクション部分コンポーネント
