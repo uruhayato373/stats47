@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/Category実装ガイド.md",
+                "file": "04_開発ガイド/03_インフラ/データベース/01_D1データベース概要.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Category実装ガイド"
+              "title": "01_D1データベース概要"
             }
           }
         ]
@@ -86,13 +86,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/Category実装ガイド.md",
+                "file": "04_開発ガイド/03_インフラ/データベース/01_D1データベース概要.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Category実装ガイドのアウトライン"
+              "title": "01_D1データベース概要のアウトライン"
             }
           }
         ]
@@ -178,9 +178,10 @@
   },
   "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
+    "04_開発ガイド/02_ドメイン/01_コアドメイン/Visualization/02_モデル/エンティティ.md",
+    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/Category実装ガイド.md",
     "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/CategoryAPIリファレンス.md",
     "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/README.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/Category実装ガイド.md",
     "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_Taxonomy.md",
     "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy",
     "04_髢狗匱繧ｬ繧､繝・02_繝峨Γ繧､繝ｳ/02_謾ｯ謠ｴ繝峨Γ繧､繝ｳ/Taxonomy",
@@ -210,7 +211,6 @@
     "04_開発ガイド/04_UI/ダッシュボード/architecture.md",
     "04_開発ガイド/04_UI/ダッシュボード/comparison-charts.md",
     "04_開発ガイド/03_インフラ/データベース/R2-S3セットアップ.md",
-    "04_開発ガイド/03_インフラ/データベース/best-practices.md",
     "04_開発ガイド/02_ドメイン/認証/specifications",
     "04_開発ガイド/02_ドメイン/認証/refactoring",
     "04_開発ガイド/02_ドメイン/認証",
