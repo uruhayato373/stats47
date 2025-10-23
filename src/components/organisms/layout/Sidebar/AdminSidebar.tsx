@@ -22,11 +22,7 @@ export function AdminSidebar() {
   const { navigationItems, isActiveLink } = useSidebarNavigation();
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b px-6 py-3">
-        <h2 className="text-lg font-semibold">管理画面</h2>
-      </SidebarHeader>
-      
+    <Sidebar collapsible="none">      
       <SidebarContent>
         {/* Dashboard */}
         <SidebarGroup>

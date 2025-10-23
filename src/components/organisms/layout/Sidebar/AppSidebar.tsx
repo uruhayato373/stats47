@@ -22,11 +22,7 @@ export function AppSidebar() {
   const { navigationItems, categories, isActiveLink } = useSidebarNavigation();
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b px-6 py-3">
-        <h2 className="text-lg font-semibold">統計で見る都道府県</h2>
-      </SidebarHeader>
-      
+    <Sidebar collapsible="none">      
       <SidebarContent>
         {/* Home Section */}
         <SidebarGroup>

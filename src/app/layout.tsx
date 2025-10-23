@@ -8,6 +8,7 @@ import { Header } from "@/components/organisms/layout/Header";
 import { SidebarWrapper } from "@/components/organisms/layout/Sidebar";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import { SidebarProvider } from "@/components/atoms/ui/sidebar";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/atoms/ui/resizable";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,20 +45,43 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable} relative min-h-full`}
+      className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable} h-full`}
       suppressHydrationWarning
     >
       <body
-        className={`${inter.className} bg-gray-100 dark:bg-neutral-900 antialiased`}
+        className={`${inter.className} bg-gray-100 dark:bg-neutral-900 antialiased h-full`}
       >
         <ThemeProvider>
           <SessionProvider>
             <SidebarProvider>
-              <SidebarWrapper />
-              <main className="lg:ps-60 z-10 relative">
+              <div className="flex flex-col h-full w-full">
+                {/* Header - 固定配置 */}
                 <Header />
-                <div className="pt-16">{children}</div>
-              </main>
+                
+                {/* Resizable Area - ヘッダーの下 */}
+                <ResizablePanelGroup 
+                  direction="horizontal" 
+                  className="flex-1 w-full"
+                  style={{ height: 'calc(100vh - var(--header-height))' }}
+                >
+                  {/* Sidebar Panel */}
+                  <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
+                    <div className="h-full overflow-y-auto">
+                      <SidebarWrapper />
+                    </div>
+                  </ResizablePanel>
+                  
+                  {/* Resizable Handle - ハンドルアイコン非表示 */}
+                  <ResizableHandle />
+                  
+                  {/* Main Content Panel */}
+                  <ResizablePanel defaultSize={80}>
+                    <main className="h-full overflow-y-auto p-4 md:p-6">
+                      {children}
+                    </main>
+                  </ResizablePanel>
+                </ResizablePanelGroup>
+              </div>
             </SidebarProvider>
           </SessionProvider>
         </ThemeProvider>

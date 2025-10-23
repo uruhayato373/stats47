@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-60 w-full bg-zinc-100 text-sm py-2.5 dark:bg-neutral-900">
+      <header className="sticky top-0 z-[60] w-full flex flex-wrap md:justify-start md:flex-nowrap bg-zinc-100 text-sm py-2.5 dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
         <nav className="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
           <div className="w-full flex items-center gap-x-1.5">
             <SidebarTrigger />
