@@ -89,19 +89,121 @@ export function ThemeToggle() {
 
 これにより、サーバーとクライアントでのハイドレーション不一致警告を抑制します。
 
-### 2. カスタムフックでのラップ
+### 2. カスタムフックでのラップ（推奨）
+
+next-themesを直接使用せず、カスタムフックでラップすることで、プロジェクト固有のロジックを追加できます。
 
 ```typescript
 // src/hooks/useTheme.ts
+"use client";
+
+import { useTheme as useNextTheme } from "next-themes";
+
+/**
+ * next-themes をラップしたカスタムフック
+ * 
+ * プロジェクト固有の拡張が必要な場合は、このフックで行います。
+ * 現時点では next-themes をそのまま再エクスポート。
+ */
 export function useTheme() {
-  const { theme, setTheme } = useNextTheme();
-  
+  const { theme, setTheme, systemTheme, resolvedTheme } = useNextTheme();
+  const currentTheme = resolvedTheme || theme;
+
   return {
-    theme,
+    theme: currentTheme, // 実際に適用されているテーマ
     setTheme,
-    toggleTheme: () => setTheme(theme === "light" ? "dark" : "light"),
+    systemTheme,
+    toggleTheme: () => {
+      setTheme(currentTheme === "light" ? "dark" : "light");
+    },
   };
 }
+```
+
+**利点**:
+- `toggleTheme()`の便利な関数を提供
+- `resolvedTheme`で実際のテーマを取得
+- next-themesのAPIが変わっても影響を最小化
+- 将来的な拡張が容易
+
+## shadcn/uiとの連携
+
+### 役割分担
+
+**next-themes**:
+- テーマ状態の管理（light/dark/system）
+- `<html>`タグへのクラス追加/削除
+- localStorageへの自動保存
+- SSRでのハイドレーション処理
+
+**shadcn/ui**:
+- CSS変数によるスタイリング定義
+- `:root`と`.dark`でのテーマカラー定義
+- Tailwindクラスへのマッピング
+
+### 動作フロー
+
+1. **ユーザーがボタンをクリック**
+```tsx
+<button onClick={toggleTheme}>
+```
+
+2. **next-themesが`<html>`のクラスを変更**
+```html
+<!-- 変更前 -->
+<html class="light">
+
+<!-- 変更後 -->
+<html class="dark">
+```
+
+3. **shadcn/uiのCSS変数が自動適用**
+```css
+/* .darkクラスがあるので、このルールが適用される */
+.dark {
+  --primary: 217 91% 60%;
+}
+```
+
+4. **すべての`bg-primary`が新しい色に**
+```tsx
+<div className="bg-primary">
+  {/* 自動的に新しい--primaryの色になる */}
+</div>
+```
+
+### ベストプラクティス
+
+**✅ 推奨**: shadcn/uiのテーマトークンを使用
+
+```tsx
+"use client";
+
+import { useTheme } from "@/hooks/useTheme";
+
+export function ThemeButton() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="bg-background text-foreground border-border hover:bg-accent"
+    >
+      {theme === "light" ? "Dark" : "Light"}
+    </button>
+  );
+}
+```
+
+**❌ 非推奨**: 条件分岐でスタイルを切り替え
+
+```tsx
+// これは冗長で保守性が低い
+const { theme } = useTheme();
+const bgClass = theme === "dark" ? "bg-gray-800" : "bg-white";
+const textClass = theme === "dark" ? "text-white" : "text-gray-900";
+
+return <div className={`${bgClass} ${textClass}`}>...</div>;
 ```
 
 ## トラブルシューティング

@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { User, ChevronDown } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { UserMenuButton } from "./UserMenuButton";
-import { UserMenuDropdown } from "./UserMenuDropdown";
+
 import { useUserMenu } from "@/hooks/useUserMenu";
+import { UserMenuButton, UserMenuDropdown } from ".";
 
 /**
  * ユーザーメニューのコンテナコンポーネント

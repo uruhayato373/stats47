@@ -4,18 +4,20 @@ import React from "react";
 
 /**
  * ヘッダーのロゴ部分コンポーネント
+ * 
+ * shadcn/uiのテーマシステムを使用して自動的にテーマが切り替わります。
  */
 export function HeaderLogo() {
   return (
     <ul className="flex items-center gap-1.5">
-      <li className="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700">
+      <li className="inline-flex items-center relative pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-border after:rounded-full after:-translate-y-1/2 after:rotate-12">
         <a
           href="#"
-          className="flex items-center gap-x-1.5 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+          className="flex items-center gap-x-1.5 text-muted-foreground hover:text-foreground focus:outline-hidden focus:text-foreground transition-colors"
         >
-          <div className="bg-primary size-8 rounded-md flex items-center justify-center">
+          <div className="size-8 rounded-md flex items-center justify-center bg-primary hover:bg-primary/90 transition-colors">
             <svg
-              className="size-4 text-white"
+              className="size-4 text-primary-foreground"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -30,7 +32,7 @@ export function HeaderLogo() {
               <polyline points="9,22 9,12 15,12 15,22" />
             </svg>
           </div>
-          <span className="text-gray-900 dark:text-white">
+          <span className="text-foreground font-medium">
             統計で見る都道府県
           </span>
         </a>

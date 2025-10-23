@@ -178,6 +178,7 @@
   },
   "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
+    "04_開発ガイド/02_ドメイン/UI/フック実装ガイド.md",
     "04_開発ガイド/02_ドメイン/UI/テーマ管理/next-themes-guide.md",
     "04_開発ガイド/02_ドメイン/UI/テーマ管理",
     "04_開発ガイド/02_ドメイン/UI",
@@ -209,7 +210,6 @@
     "04_開発ガイド/02_ドメイン/地域管理/specifications/hierarchy.md",
     "04_開発ガイド/02_ドメイン/地域管理/specifications/geoshape-auto-cache-specification.md",
     "04_開発ガイド/02_ドメイン/地域管理/specifications/data-structure.md",
-    "04_開発ガイド/02_ドメイン/地域管理/specifications/api.md",
     "04_開発ガイド/02_ドメイン/地域管理/testing",
     "04_開発ガイド/02_ドメイン/地域管理/specifications",
     "04_開発ガイド/02_ドメイン/地域管理/refactoring",
