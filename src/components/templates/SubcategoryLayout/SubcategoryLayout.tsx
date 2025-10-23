@@ -1,12 +1,12 @@
-import React from "react";
-import { CategoryIcon } from "@/components/atoms/CategoryIcon";
-import { SubcategoryNavigation } from "@/components/organisms/category/SubcategoryNavigation";
 import { ViewSwitchButtons } from "@/components/molecules/ViewSwitchButtons";
 import { PrefectureSelector } from "@/components/organisms/area/PrefectureSelector";
+import { SubcategoryNavigation } from "@/components/organisms/category/SubcategoryNavigation";
+import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import {
   CategoryData,
   SubcategoryData,
 } from "@/types/visualization/choropleth";
+import React from "react";
 
 interface SubcategoryLayoutProps {
   category: CategoryData;
@@ -33,10 +33,10 @@ export const SubcategoryLayout: React.FC<SubcategoryLayoutProps> = ({
             <div className="flex items-center gap-4">
               {/* カテゴリアイコン */}
               <div className="flex-shrink-0">
-                <CategoryIcon
-                  iconName={category.icon}
-                  className="w-6 h-6 text-indigo-600"
-                />
+                {(() => {
+                  const Icon = getCategoryIcon(category.icon);
+                  return <Icon className="w-6 h-6 text-indigo-600" />;
+                })()}
               </div>
 
               <div>

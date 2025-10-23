@@ -4,8 +4,8 @@
  * カテゴリページのヘッダー部分（パンくずナビ、タイトル、アイコン）を表示
  */
 
+import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import React from "react";
-import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 interface CategoryPageHeaderProps {
   category: {
@@ -23,10 +23,10 @@ export const CategoryPageHeader: React.FC<CategoryPageHeaderProps> = ({
       <div className="flex items-center gap-4">
         {/* カテゴリアイコン */}
         <div className="flex-shrink-0">
-          <CategoryIcon
-            iconName={category.icon}
-            className="w-8 h-8 text-primary"
-          />
+          {(() => {
+            const Icon = getCategoryIcon(category.icon);
+            return <Icon className="w-8 h-8 text-primary" />;
+          })()}
         </div>
 
         <div>

@@ -1,4 +1,3 @@
-import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 import {
   Sidebar,
   SidebarContent,
@@ -10,7 +9,8 @@ import {
   SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
 import { getSidebarNavigationItems } from "@/lib/navigation/sidebar-config";
-import { getSidebarCategories } from "@/lib/taxonomy/category";
+import { listCategories } from "@/lib/taxonomy/category";
+import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
@@ -18,11 +18,11 @@ import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
  * ホーム、統計カテゴリーを表示
  */
 export function AppSidebar() {
-  const categories = getSidebarCategories();
+  const categories = listCategories();
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar collapsible="none">      
+    <Sidebar collapsible="none">
       <SidebarContent>
         {/* Home Section */}
         <SidebarGroup>
@@ -50,8 +50,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {categories.map((category) => (
                 <SidebarMenuItem key={category.id}>
-                  <ActiveSidebarMenuButton href={category.href}>
-                    <CategoryIcon iconName={category.icon} className="size-4" />
+                  <ActiveSidebarMenuButton href={`/${category.id}`}>
+                    {(() => {
+                      const Icon = getCategoryIcon(category.icon);
+                      return <Icon className="size-4" />;
+                    })()}
                     <span>{category.name}</span>
                   </ActiveSidebarMenuButton>
                 </SidebarMenuItem>

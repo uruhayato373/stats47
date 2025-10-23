@@ -4,7 +4,7 @@
  * サブカテゴリの一覧表示とリンク機能を提供
  */
 
-import { CategoryIcon } from "@/components/atoms/CategoryIcon";
+import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import Link from "next/link";
 import React from "react";
 
@@ -28,15 +28,16 @@ export const SubcategoryList: React.FC<SubcategoryListProps> = ({
   subcategories,
   category,
 }) => {
-
   if (!subcategories || subcategories.length === 0) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <CategoryIcon
-            iconName={category.icon}
-            className="w-16 h-16 mx-auto text-gray-300 dark:text-neutral-600 mb-4"
-          />
+          {(() => {
+            const Icon = getCategoryIcon(category.icon);
+            return (
+              <Icon className="w-16 h-16 mx-auto text-gray-300 dark:text-neutral-600 mb-4" />
+            );
+          })()}
           <p className="text-gray-500 dark:text-neutral-400">
             このカテゴリーにはサブカテゴリーがありません
           </p>
@@ -56,10 +57,12 @@ export const SubcategoryList: React.FC<SubcategoryListProps> = ({
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <CategoryIcon
-                  iconName={category.icon}
-                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
-                />
+                {(() => {
+                  const Icon = getCategoryIcon(category.icon);
+                  return (
+                    <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  );
+                })()}
               </div>
               <div>
                 <h3 className="font-medium text-gray-900 dark:text-white">

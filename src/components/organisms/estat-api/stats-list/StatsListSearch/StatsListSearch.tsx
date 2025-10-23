@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
-import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
+import { Button } from "@/components/atoms/ui/button";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 import {
@@ -12,13 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
-import { Button } from "@/components/atoms/Button";
-import { LoadingButton } from "@/components/atoms/LoadingButton";
+import { StatsFieldCode, StatsListSearchOptions } from "@/lib/estat-api";
 import {
-  STATS_FIELD_OPTIONS,
   COLLECT_AREA_OPTIONS,
   LIMIT_OPTIONS,
+  STATS_FIELD_OPTIONS,
 } from "@/lib/estat-api/constants/search-options";
+import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
+import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;
@@ -123,7 +123,9 @@ export function StatsListSearch({
                 <SelectValue placeholder="選択してください" />
               </SelectTrigger>
               <SelectContent>
-                {STATS_FIELD_OPTIONS.filter(option => option.value !== "").map((option) => (
+                {STATS_FIELD_OPTIONS.filter(
+                  (option) => option.value !== ""
+                ).map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>
@@ -135,7 +137,12 @@ export function StatsListSearch({
           {/* 集計地域区分 */}
           <div className="space-y-2">
             <Label htmlFor="collectArea">集計地域区分</Label>
-            <Select value={collectArea} onValueChange={(value) => setCollectArea(value as "1" | "2" | "3" | "")}>
+            <Select
+              value={collectArea}
+              onValueChange={(value) =>
+                setCollectArea(value as "1" | "2" | "3" | "")
+              }
+            >
               <SelectTrigger>
                 <SelectValue placeholder="すべて" />
               </SelectTrigger>
@@ -167,7 +174,10 @@ export function StatsListSearch({
           {/* 取得件数 */}
           <div className="space-y-2">
             <Label htmlFor="limit">取得件数</Label>
-            <Select value={limit.toString()} onValueChange={(value) => setLimit(Number(value))}>
+            <Select
+              value={limit.toString()}
+              onValueChange={(value) => setLimit(Number(value))}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="100件" />
               </SelectTrigger>
@@ -184,23 +194,22 @@ export function StatsListSearch({
 
         {/* ボタン */}
         <div className="flex gap-2 pt-4">
-          <LoadingButton
-            type="submit"
-            loading={isLoading}
-            loadingText="検索中..."
-            variant="primary"
-            size="md"
-            rounded="md"
-          >
-            検索
-          </LoadingButton>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                検索中...
+              </>
+            ) : (
+              "検索"
+            )}
+          </Button>
           <Button
             type="button"
             onClick={handleReset}
             disabled={isLoading}
             variant="secondary"
-            size="md"
-            rounded="md"
+            size="default"
           >
             リセット
           </Button>
