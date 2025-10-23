@@ -1,6 +1,5 @@
 "use client";
 
-import { Modal } from "@/components/atoms/Modal";
 import { Button } from "@/components/atoms/ui/button";
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
 import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSummary";
@@ -12,6 +11,12 @@ import {
 } from "@/components/organisms/ranking/RankingItemSettings";
 import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useCSVExport } from "@/hooks/export/useCSVExport";
 import {
   useRankingData,
@@ -255,19 +260,20 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
 
       {/* 詳細設定モーダル（設定変更コールバックがある場合のみ表示） */}
       {onSettingsChange && (
-        <Modal
-          isOpen={isSettingsOpen}
-          onClose={() => setIsSettingsOpen(false)}
-          size="lg"
-        >
-          <RankingItemSettings
-            onSave={async (settings) => {
-              // 設定保存後にモーダルを閉じる
-              await onSettingsChange(settings);
-              setIsSettingsOpen(false);
-            }}
-          />
-        </Modal>
+        <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>ランキング設定</DialogTitle>
+            </DialogHeader>
+            <RankingItemSettings
+              onSave={async (settings) => {
+                // 設定保存後にモーダルを閉じる
+                await onSettingsChange(settings);
+                setIsSettingsOpen(false);
+              }}
+            />
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );
