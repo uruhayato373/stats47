@@ -3,7 +3,6 @@
 import { Provider } from "jotai";
 import { SWRConfig } from "swr";
 import { fetcher } from "@/lib/swr/fetcher";
-import { ThemeProvider } from "./theme-provider";
 
 interface JotaiProviderProps {
   children: React.ReactNode;
@@ -15,7 +14,9 @@ interface JotaiProviderProps {
  * アプリケーション全体にJotaiの状態管理を提供します。
  * - Jotai Provider: 状態管理の基盤
  * - SWR設定: データフェッチの設定
- * - テーマ初期化: テーマの初期化処理
+ * 
+ * テーマ管理は next-themes に移行したため、
+ * ThemeProvider はこのファイルから削除されました。
  */
 export function JotaiProvider({ children }: JotaiProviderProps) {
   return (
@@ -36,7 +37,7 @@ export function JotaiProvider({ children }: JotaiProviderProps) {
           },
         }}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </SWRConfig>
     </Provider>
   );

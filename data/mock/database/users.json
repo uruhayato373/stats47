@@ -1,0 +1,34 @@
+[
+  {
+    "results": [
+      {
+        "id": "mock-admin-001",
+        "name": "Mock Admin",
+        "email": "admin@stats47.local",
+        "username": "admin",
+        "password_hash": "$2b$10$adSSC8xcBfOlzz.zmODVWu8wsZbScpM2uyIdsQlETW6uetu5Cvwzm",
+        "role": "admin",
+        "is_active": 1,
+        "created_at": "2025-01-01T00:00:00Z",
+        "last_login": null,
+        "emailVerified": null,
+        "image": null,
+        "updated_at": "2025-01-01T00:00:00Z"
+      },
+      {
+        "id": "mock-user-001",
+        "name": "Mock User",
+        "email": "user@stats47.local",
+        "username": "user",
+        "password_hash": "$2b$10$1UzZnfwXhEFQPKQVBkoHPu//5He8nd/L0shTrNXEi68.B6Pebdo16",
+        "role": "user",
+        "is_active": 1,
+        "created_at": "2025-01-01T00:00:00Z",
+        "last_login": null,
+        "emailVerified": null,
+        "image": null,
+        "updated_at": "2025-01-01T00:00:00Z"
+      }
+    ]
+  }
+]

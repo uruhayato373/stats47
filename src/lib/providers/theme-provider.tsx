@@ -1,39 +1,25 @@
 "use client";
 
-import { useEffect } from "react";
-import { useAtom, useSetAtom } from "jotai";
-import { initThemeAtom, mountedAtom } from "@/store/theme";
+import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from "next-themes";
 
 /**
- * テーマ初期化プロバイダー
- *
- * アプリケーション起動時にテーマの初期化を行います。
- * - システム設定の検出
- * - localStorageからの復元
- * - マウント状態の管理
- * - ブロッキングスクリプトとの連携
+ * next-themes を使用したテーマプロバイダー
+ * 
+ * shadcn/ui の標準アプローチに従い、next-themes を使用します。
+ * - FOUC（Flash of Unstyled Content）を自動で防止
+ * - localStorage への自動保存
+ * - システムテーマの自動検出
  */
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const initTheme = useSetAtom(initThemeAtom);
-  const [mounted, setMounted] = useAtom(mountedAtom);
-
-  useEffect(() => {
-    if (!mounted) {
-      // ブロッキングスクリプトで既にテーマクラスが適用されているか確認
-      const hasThemeClass =
-        document.documentElement.classList.contains("light") ||
-        document.documentElement.classList.contains("dark");
-
-      if (hasThemeClass) {
-        // すでにテーマが適用されている場合は、Jotai の状態を同期するだけ
-        // 二重適用を防ぐため、initTheme は呼ばずに mounted だけ true にする
-        setMounted(true);
-      } else {
-        // ブロッキングスクリプトが実行されていない場合（フォールバック）
-        initTheme();
-      }
-    }
-  }, [initTheme, mounted, setMounted]);
-
-  return <>{children}</>;
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      disableTransitionOnChange={false}
+      {...props}
+    >
+      {children}
+    </NextThemesProvider>
+  );
 }

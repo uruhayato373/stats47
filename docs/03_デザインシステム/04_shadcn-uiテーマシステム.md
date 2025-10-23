@@ -4,6 +4,49 @@
 
 stats47プロジェクトでは、shadcn/uiのBlueテーマを使用して統計サイトに適したプロフェッショナルなデザインを実現しています。このドキュメントでは、テーマ変数、カラーパレット、ダークモード対応について詳しく説明します。
 
+## next-themes 統合
+
+### 概要
+
+stats47プロジェクトでは、テーマ管理に **next-themes** を採用しています。
+これは shadcn/ui の公式推奨アプローチであり、以下の利点があります：
+
+- FOUC（Flash of Unstyled Content）の自動防止
+- localStorage への自動保存
+- システムテーマの自動検出
+- SSR/SSG 完全対応
+
+### 使用方法
+
+#### コンポーネントでの使用
+
+```typescript
+import { useTheme } from "@/hooks/useTheme";
+
+export function MyComponent() {
+  const { theme, toggleTheme } = useTheme();
+  
+  return (
+    <button onClick={toggleTheme}>
+      Current theme: {theme}
+    </button>
+  );
+}
+```
+
+### 設定
+
+`src/lib/providers/theme-provider.tsx` で設定を変更できます：
+
+```typescript
+<ThemeProvider
+  attribute="class"           // HTML classでテーマを管理
+  defaultTheme="light"        // デフォルトテーマ
+  enableSystem={false}        // システムテーマ検出を無効化
+  disableTransitionOnChange={false}  // テーマ切り替え時のトランジション
+>
+```
+
 ## Blueテーマ変数
 
 ### ライトモード（:root）

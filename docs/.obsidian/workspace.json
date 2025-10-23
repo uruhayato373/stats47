@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04_開発ガイド/10_Atomic Design実装.md",
+                "file": "01_技術設計/02_ADR/状態管理/030_Zustand.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10_Atomic Design実装"
+              "title": "030_Zustand"
             }
           }
         ]
@@ -86,13 +86,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "04_開発ガイド/10_Atomic Design実装.md",
+                "file": "01_技術設計/02_ADR/状態管理/030_Zustand.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "10_Atomic Design実装のアウトライン"
+              "title": "030_Zustandのアウトライン"
             }
           }
         ]
@@ -178,6 +178,12 @@
   },
   "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
+    "04_開発ガイド/02_ドメイン/UI/テーマ管理/next-themes-guide.md",
+    "04_開発ガイド/02_ドメイン/UI/テーマ管理",
+    "04_開発ガイド/02_ドメイン/UI",
+    "04_開発ガイド/10_Atomic Design実装.md",
+    "04_開発ガイド/02_ドメイン/認証/implementation/nextauth-setup.md",
+    "04_開発ガイド/02_ドメイン/認証/implementation",
     "04_開発ガイド/04_UI/09_コンポーネント実装ガイド.md",
     "04_開発ガイド/04_UI/ダッシュボード/adapter-implementation-guide.md",
     "04_開発ガイド/03_インフラ/データベース/03_R2ストレージガイド.md",
@@ -204,16 +210,10 @@
     "04_開発ガイド/02_ドメイン/地域管理/specifications/geoshape-auto-cache-specification.md",
     "04_開発ガイド/02_ドメイン/地域管理/specifications/data-structure.md",
     "04_開発ガイド/02_ドメイン/地域管理/specifications/api.md",
-    "04_開発ガイド/02_ドメイン/地域管理/specifications/administrative-boundary-data.md",
-    "04_開発ガイド/02_ドメイン/地域管理/refactoring/migration-plan.md",
-    "04_開発ガイド/02_ドメイン/地域管理/implementation/getting-started.md",
     "04_開発ガイド/02_ドメイン/地域管理/testing",
     "04_開発ガイド/02_ドメイン/地域管理/specifications",
     "04_開発ガイド/02_ドメイン/地域管理/refactoring",
     "04_開発ガイド/02_ドメイン/地域管理/implementation",
-    "04_開発ガイド/02_ドメイン/地域管理",
-    "04_開発ガイド/04_UI/可視化/specifications/chart-types",
-    "04_開発ガイド/04_UI/可視化/implementation/recharts",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",
     "07_コンテンツ計画/リソース/都道府県ごとの物価分析.png",
     "07_コンテンツ計画/リソース/転入転出.png",

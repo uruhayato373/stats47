@@ -9,6 +9,7 @@
 | `ranking_items.json`  | ランキングアイテム  | 10 件      |
 | `ranking_values.json` | ランキング値データ  | 50 件      |
 | `estat_metainfo.json` | e-Stat 統計メタ情報 | 50 件      |
+| `users.json`          | ユーザー認証データ  | 2 件       |
 
 ## 🎯 使用目的
 
@@ -18,6 +19,34 @@
 - Storybook でのコンポーネント開発
 - オフライン環境での開発
 - CI/CD でのテスト実行
+- 認証機能のデザイン検証（ログイン/ログアウト状態）
+
+## 🔐 モック環境での認証
+
+### テストアカウント
+
+**管理者アカウント:**
+- Email: admin@stats47.local
+- Password: admin123
+- Role: admin
+
+**一般ユーザーアカウント:**
+- Email: user@stats47.local
+- Password: user123
+- Role: user
+
+### 使用方法
+
+1. `npm run dev:mock` でモック環境を起動
+2. `/login` にアクセス
+3. 上記のテストアカウントでログイン
+4. `/admin` で管理画面のデザインを確認
+
+### 注意事項
+
+- mock環境のデータはJSON ファイルから読み込まれます
+- パスワード変更やユーザー追加などの操作は反映されません
+- デザイン検証とUIテストのみを目的としています
 
 ## 📊 データ構造
 
