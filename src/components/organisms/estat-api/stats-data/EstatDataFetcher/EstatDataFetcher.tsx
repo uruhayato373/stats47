@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Search, RotateCcw, X } from "lucide-react";
 import { GetStatsDataParams } from "@/lib/estat-api";
-import InputField from "@/components/atoms/InputField";
+import { Input } from "@/components/atoms/ui/input";
+import { Label } from "@/components/atoms/ui/label";
 
 interface EstatDataFetcherProps {
   onSubmit: (params: GetStatsDataParams) => void;
@@ -144,31 +145,40 @@ export default function EstatDataFetcher({
         <form onSubmit={handleSubmit} className="p-6">
           {/* 基本設定（固定フィールド） */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <InputField
-              name="statsDataId"
-              label="統計表ID *"
-              placeholder="例: 0003412312"
-              description="必須項目"
-              value={formData.statsDataId}
-              onChange={handleInputChange}
-              required
-            />
-            <InputField
-              name="cdCat01"
-              label="分類01"
-              placeholder="カンマ区切り"
-              description="例: A1101,A1102"
-              value={formData.cdCat01}
-              onChange={handleInputChange}
-            />
-            <InputField
-              name="cdArea"
-              label="地域"
-              placeholder="カンマ区切り"
-              description="例: 13100,13101"
-              value={formData.cdArea}
-              onChange={handleInputChange}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="statsDataId">統計表ID *</Label>
+              <Input
+                id="statsDataId"
+                name="statsDataId"
+                placeholder="例: 0003412312"
+                value={formData.statsDataId}
+                onChange={handleInputChange}
+                required
+              />
+              <p className="text-sm text-muted-foreground">必須項目</p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cdCat01">分類01</Label>
+              <Input
+                id="cdCat01"
+                name="cdCat01"
+                placeholder="カンマ区切り"
+                value={formData.cdCat01}
+                onChange={handleInputChange}
+              />
+              <p className="text-sm text-muted-foreground">例: A1101,A1102</p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cdArea">地域</Label>
+              <Input
+                id="cdArea"
+                name="cdArea"
+                placeholder="カンマ区切り"
+                value={formData.cdArea}
+                onChange={handleInputChange}
+              />
+              <p className="text-sm text-muted-foreground">例: 13100,13101</p>
+            </div>
           </div>
 
           {/* 動的に追加されたフィールド */}
@@ -186,20 +196,23 @@ export default function EstatDataFetcher({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {dynamicFields.map((field) => (
                   <div key={field.id} className="relative group">
-                    <InputField
-                      name={field.id}
-                      label={field.label}
-                      placeholder="カンマ区切り"
-                      description={
-                        field.id === "cdTime"
+                    <div className="space-y-2">
+                      <Label htmlFor={field.id}>{field.label}</Label>
+                      <Input
+                        id={field.id}
+                        name={field.id}
+                        placeholder="カンマ区切り"
+                        value={field.value}
+                        onChange={(e) =>
+                          handleDynamicFieldChange(field.id, e.target.value)
+                        }
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        {field.id === "cdTime"
                           ? "例: 2020,2021"
-                          : "例: A1101,A1102"
-                      }
-                      value={field.value}
-                      onChange={(e) =>
-                        handleDynamicFieldChange(field.id, e.target.value)
-                      }
-                    />
+                          : "例: A1101,A1102"}
+                      </p>
+                    </div>
                     <button
                       type="button"
                       onClick={() => handleRemoveField(field.id)}

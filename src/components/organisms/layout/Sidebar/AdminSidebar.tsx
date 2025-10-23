@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
 import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
 import Link from "next/link";
@@ -44,6 +45,8 @@ export function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        <SidebarSeparator />
+
         {/* e-STAT API Section */}
         <SidebarGroup>
           <SidebarGroupLabel>e-STAT API</SidebarGroupLabel>
@@ -62,6 +65,8 @@ export function AdminSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarSeparator />
 
         {/* Development Tools */}
         <SidebarGroup>

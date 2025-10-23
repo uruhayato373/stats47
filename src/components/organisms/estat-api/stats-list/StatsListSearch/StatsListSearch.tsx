@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
 import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
-import { InputField } from "@/components/atoms/InputField";
+import { Input } from "@/components/atoms/ui/input";
+import { Label } from "@/components/atoms/ui/label";
 import { Select } from "@/components/atoms/Select";
 import { Button } from "@/components/atoms/Button";
 import { LoadingButton } from "@/components/atoms/LoadingButton";
@@ -83,26 +84,30 @@ export function StatsListSearch({
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* キーワード検索 */}
-          <InputField
-            name="searchWord"
-            label="キーワード"
-            value={searchWord}
-            onChange={(e) => setSearchWord(e.target.value)}
-            placeholder="例: 人口、就業構造"
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="searchWord">キーワード</Label>
+            <Input
+              id="searchWord"
+              name="searchWord"
+              value={searchWord}
+              onChange={(e) => setSearchWord(e.target.value)}
+              placeholder="例: 人口、就業構造"
+              className="rounded-md"
+            />
+          </div>
 
           {/* 政府統計コード */}
-          <InputField
-            name="statsCode"
-            label="政府統計コード"
-            value={statsCode}
-            onChange={(e) => setStatsCode(e.target.value)}
-            placeholder="例: 00200522"
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="statsCode">政府統計コード</Label>
+            <Input
+              id="statsCode"
+              name="statsCode"
+              value={statsCode}
+              onChange={(e) => setStatsCode(e.target.value)}
+              placeholder="例: 00200522"
+              className="rounded-md"
+            />
+          </div>
 
           {/* 分野コード */}
           <Select
@@ -131,17 +136,19 @@ export function StatsListSearch({
           />
 
           {/* 調査年月 */}
-          <InputField
-            name="surveyYears"
-            label="調査年月"
-            value={surveyYears}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSurveyYears(e.target.value)
-            }
-            placeholder="例: 202001-202312"
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="surveyYears">調査年月</Label>
+            <Input
+              id="surveyYears"
+              name="surveyYears"
+              value={surveyYears}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSurveyYears(e.target.value)
+              }
+              placeholder="例: 202001-202312"
+              className="rounded-md"
+            />
+          </div>
 
           {/* 取得件数 */}
           <Select

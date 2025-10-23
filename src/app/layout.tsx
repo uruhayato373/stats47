@@ -54,7 +54,7 @@ export default function RootLayout({
           <SessionProvider>
             <SidebarProvider>
               <SidebarWrapper />
-              <main className="lg:ps-60">
+              <main className="lg:ps-60 z-10 relative">
                 <Header />
                 <div className="pt-16">{children}</div>
               </main>

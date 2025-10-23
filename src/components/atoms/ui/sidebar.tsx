@@ -13,10 +13,8 @@ import { Sheet, SheetContent } from "@/components/atoms/ui/sheet"
 import { Skeleton } from "@/components/atoms/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/atoms/ui/tooltip"
 
-const SIDEBAR_COOKIE_NAME = "sidebar:state"
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
-const SIDEBAR_WIDTH_MOBILE = "18rem"
+const SIDEBAR_WIDTH = "15rem"
+const SIDEBAR_WIDTH_MOBILE = "20rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
@@ -205,7 +203,7 @@ const Sidebar = React.forwardRef<
       />
       <div
         className={cn(
-          "duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
+          "duration-200 fixed inset-y-0 z-50 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
           "group-data-[side=left]:left-0 group-data-[side=right]:right-0",
           "group-data-[collapsible=offcanvas]:group-data-[side=left]:-left-[--sidebar-width] group-data-[collapsible=offcanvas]:group-data-[side=right]:-right-[--sidebar-width]",
           "group-data-[collapsible=icon]:w-[--sidebar-width-icon]",
@@ -218,7 +216,7 @@ const Sidebar = React.forwardRef<
       >
         <div
           data-sidebar="sidebar"
-          className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:border-r group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-lg"
+          className="flex h-full w-full flex-col bg-sidebar border-r border-gray-200 dark:border-neutral-700 group-data-[variant=floating]:border-r group-data-[variant=floating]:border-gray-200 group-data-[variant=floating]:dark:border-neutral-700 group-data-[variant=floating]:shadow-lg"
         >
           {children}
         </div>
@@ -352,7 +350,7 @@ const SidebarSeparator = React.forwardRef<
     <Separator
       ref={ref}
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border", className)}
+      className={cn("mx-2 w-auto bg-gray-200 dark:bg-neutral-700", className)}
       {...props}
     />
   )

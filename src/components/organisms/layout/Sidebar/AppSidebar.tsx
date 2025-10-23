@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
 import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
@@ -45,6 +46,8 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarSeparator />
 
         {/* Categories Section */}
         <SidebarGroup>

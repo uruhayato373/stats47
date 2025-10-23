@@ -2,7 +2,8 @@
 
 import { useState, useCallback, memo } from "react";
 import { Search } from "lucide-react";
-import { InputField } from "@/components/atoms/InputField";
+import { Input } from "@/components/atoms/ui/input";
+import { Label } from "@/components/atoms/ui/label";
 import LoadingButton from "@/components/atoms/LoadingButton/LoadingButton";
 
 /**
@@ -121,23 +122,22 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
         {/* 右側セクション: 入力フィールド + 送信ボタン */}
         <div className="flex flex-row gap-4 items-end flex-1">
           {/* 統計表ID入力フィールド */}
-          <InputField
-            name="statsDataId"
-            label="例：0000010101"
-            placeholder="統計表ID 例：0000010101"
-            value={statsDataId}
-            onChange={handleInputChange}
-            disabled={loading}
-            required
-            inlineLabel
-            width="max-w-xs"
-            size="sm"
-            error={
-              statsDataId.trim() && !isValidStatsDataId(statsDataId)
-                ? "10桁の数字を入力してください"
-                : undefined
-            }
-          />
+          <div className="space-y-2 max-w-xs">
+            <Label htmlFor="statsDataId">例：0000010101</Label>
+            <Input
+              id="statsDataId"
+              name="statsDataId"
+              placeholder="統計表ID 例：0000010101"
+              value={statsDataId}
+              onChange={handleInputChange}
+              disabled={loading}
+              required
+              className="text-sm"
+            />
+            {statsDataId.trim() && !isValidStatsDataId(statsDataId) && (
+              <p className="text-sm text-red-600">10桁の数字を入力してください</p>
+            )}
+          </div>
 
           {/* 送信ボタン */}
           <LoadingButton
