@@ -65,7 +65,6 @@ export async function POST(
 
     // development/staging/production環境ではR2に保存
     // wrangler.tomlで定義されたMETAINFO_BUCKETバインディングを使用
-    // @ts-expect-error - Cloudflare環境でのみ利用可能
 
     if (!env.METAINFO_BUCKET) {
       // ローカル開発環境でR2バケットがない場合、S3互換APIを試す

@@ -1,8 +1,8 @@
 /**
- * コロプレス地図表示機能用のJotaiアトム定義
+ * コロプレス地図表示機能用のZustandストア定義
  */
 
-import { atom } from "jotai";
+import { create } from "zustand";
 import {
   CategoryData,
   SubcategoryData,
@@ -11,14 +11,6 @@ import {
 import { getAllCategories } from "@/lib/category";
 import type { Category } from "@/lib/category";
 
-// 基本状態アトム
-export const selectedCategoryAtom = atom<string | null>(null);
-export const selectedSubcategoryAtom = atom<string | null>(null);
-export const selectedYearAtom = atom<string | null>(null);
-export const loadingAtom = atom<boolean>(false);
-export const errorAtom = atom<string | null>(null);
-
-// カテゴリデータアトム
 // CategoryServiceの戻り値をCategoryData型に変換
 const convertToCategoryData = (category: Category): CategoryData => ({
   id: category.id,
@@ -35,81 +27,133 @@ const convertToCategoryData = (category: Category): CategoryData => ({
   displayOrder: category.displayOrder || 0,
 });
 
-export const categoriesAtom = atom<CategoryData[]>(
-  getAllCategories().map(convertToCategoryData)
-);
+interface ChoroplethStore {
+  // 基本状態
+  selectedCategory: string | null;
+  selectedSubcategory: string | null;
+  selectedYear: string | null;
+  loading: boolean;
+  error: string | null;
+  
+  // カテゴリデータ
+  categories: CategoryData[];
+  
+  // 地図表示設定
+  mapVisualizationSettings: MapVisualizationSettings;
+  
+  // 派生状態（getter）
+  getSelectedCategoryData: () => CategoryData | null;
+  getAvailableSubcategories: () => SubcategoryData[];
+  getSelectedSubcategoryData: () => SubcategoryData | null;
+  getAvailableYears: () => string[];
+  
+  // アクション
+  setCategory: (categoryId: string | null) => void;
+  setSubcategory: (subcategoryId: string | null) => void;
+  setYear: (year: string | null) => void;
+  resetSelection: () => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  updateMapSettings: (settings: Partial<MapVisualizationSettings>) => void;
+}
 
-// 地図表示設定アトム
-export const mapVisualizationSettingsAtom = atom<MapVisualizationSettings>({
-  colorScheme: "interpolateBlues",
-  divergingMidpoint: "zero",
-  showLegend: true,
-  showTooltip: true,
-});
-
-// 派生アトム
-export const selectedCategoryDataAtom = atom<CategoryData | null>((get) => {
-  const categories = get(categoriesAtom);
-  const selectedCategoryId = get(selectedCategoryAtom);
-  if (!selectedCategoryId) return null;
-  return categories.find((cat) => cat.id === selectedCategoryId) || null;
-});
-
-export const availableSubcategoriesAtom = atom<SubcategoryData[]>((get) => {
-  const selectedCategory = get(selectedCategoryDataAtom);
-  return selectedCategory?.subcategories || [];
-});
-
-export const selectedSubcategoryDataAtom = atom<SubcategoryData | null>(
-  (get) => {
-    const subcategories = get(availableSubcategoriesAtom);
-    const selectedSubcategoryId = get(selectedSubcategoryAtom);
-    if (!selectedSubcategoryId) return null;
-    return (
-      subcategories.find((sub) => sub.id === selectedSubcategoryId) || null
-    );
-  }
-);
-
-export const availableYearsAtom = atom<string[]>((get) => {
-  const subcategory = get(selectedSubcategoryDataAtom);
-  // デフォルトで過去5年分を設定（実際のデータ取得時に更新）
-  if (!subcategory) return [];
-  const currentYear = new Date().getFullYear();
-  return Array.from({ length: 5 }, (_, i) => String(currentYear - i));
-});
-
-// アクションアトム
-export const setCategoryAtom = atom(
-  null,
-  (get, set, categoryId: string | null) => {
-    set(selectedCategoryAtom, categoryId);
-    // カテゴリが変更されたらサブカテゴリと年度をリセット
-    set(selectedSubcategoryAtom, null);
-    set(selectedYearAtom, null);
-    set(errorAtom, null);
-  }
-);
-
-export const setSubcategoryAtom = atom(
-  null,
-  (get, set, subcategoryId: string | null) => {
-    set(selectedSubcategoryAtom, subcategoryId);
-    // サブカテゴリが変更されたら年度をリセット
-    set(selectedYearAtom, null);
-    set(errorAtom, null);
-  }
-);
-
-export const setYearAtom = atom(null, (get, set, year: string | null) => {
-  set(selectedYearAtom, year);
-  set(errorAtom, null);
-});
-
-export const resetSelectionAtom = atom(null, (get, set) => {
-  set(selectedCategoryAtom, null);
-  set(selectedSubcategoryAtom, null);
-  set(selectedYearAtom, null);
-  set(errorAtom, null);
-  set(loadingAtom, false);
-});
+export const useChoroplethStore = create<ChoroplethStore>((set, get) => ({
+  // 基本状態の初期値
+  selectedCategory: null,
+  selectedSubcategory: null,
+  selectedYear: null,
+  loading: false,
+  error: null,
+  
+  // カテゴリデータの初期値
+  categories: getAllCategories().map(convertToCategoryData),
+  
+  // 地図表示設定の初期値
+  mapVisualizationSettings: {
+    colorScheme: "interpolateBlues",
+    divergingMidpoint: "zero",
+    showLegend: true,
+    showTooltip: true,
+  },
+  
+  // 派生状態のgetter
+  getSelectedCategoryData: () => {
+    const { categories, selectedCategory } = get();
+    if (!selectedCategory) return null;
+    return categories.find((cat) => cat.id === selectedCategory) || null;
+  },
+  
+  getAvailableSubcategories: () => {
+    const selectedCategoryData = get().getSelectedCategoryData();
+    return selectedCategoryData?.subcategories || [];
+  },
+  
+  getSelectedSubcategoryData: () => {
+    const subcategories = get().getAvailableSubcategories();
+    const { selectedSubcategory } = get();
+    if (!selectedSubcategory) return null;
+    return subcategories.find((sub) => sub.id === selectedSubcategory) || null;
+  },
+  
+  getAvailableYears: () => {
+    const subcategory = get().getSelectedSubcategoryData();
+    // デフォルトで過去5年分を設定（実際のデータ取得時に更新）
+    if (!subcategory) return [];
+    const currentYear = new Date().getFullYear();
+    return Array.from({ length: 5 }, (_, i) => String(currentYear - i));
+  },
+  
+  // アクション
+  setCategory: (categoryId) => {
+    set((state) => ({
+      selectedCategory: categoryId,
+      // カテゴリが変更されたらサブカテゴリと年度をリセット
+      selectedSubcategory: null,
+      selectedYear: null,
+      error: null,
+    }));
+  },
+  
+  setSubcategory: (subcategoryId) => {
+    set((state) => ({
+      selectedSubcategory: subcategoryId,
+      // サブカテゴリが変更されたら年度をリセット
+      selectedYear: null,
+      error: null,
+    }));
+  },
+  
+  setYear: (year) => {
+    set((state) => ({
+      selectedYear: year,
+      error: null,
+    }));
+  },
+  
+  resetSelection: () => {
+    set({
+      selectedCategory: null,
+      selectedSubcategory: null,
+      selectedYear: null,
+      error: null,
+      loading: false,
+    });
+  },
+  
+  setLoading: (loading) => {
+    set({ loading });
+  },
+  
+  setError: (error) => {
+    set({ error });
+  },
+  
+  updateMapSettings: (settings) => {
+    set((state) => ({
+      mapVisualizationSettings: {
+        ...state.mapVisualizationSettings,
+        ...settings,
+      },
+    }));
+  },
+}));

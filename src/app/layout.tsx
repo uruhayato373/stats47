@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { Noto_Sans_JP } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { JotaiProvider } from "@/lib/providers";
 import { SessionProvider } from "next-auth/react";
 import { Header } from "@/components/organisms/layout/Header";
 import { Sidebar } from "@/components/organisms/layout/Sidebar";
@@ -51,13 +50,11 @@ export default function RootLayout({
         className={`${inter.className} bg-gray-100 dark:bg-neutral-900 antialiased`}
       >
         <ThemeProvider>
-          <JotaiProvider>
-            <SessionProvider>
-              <Header />
-              <Sidebar />
-              <main className="lg:ps-60 pt-16">{children}</main>
-            </SessionProvider>
-          </JotaiProvider>
+          <SessionProvider>
+            <Header />
+            <Sidebar />
+            <main className="lg:ps-60 pt-16">{children}</main>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { getDataProvider } from "@/lib/database";
 
 export const authConfig: NextAuthConfig = {
+  secret: process.env.AUTH_SECRET,
   providers: [
     // Credentials Provider（メール + パスワード）
     Credentials({

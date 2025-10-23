@@ -5,7 +5,6 @@
  * 一箇所からエクスポートします。
  */
 
-export { JotaiProvider } from "./jotai-provider";
 export { ThemeProvider } from "./theme-provider";
 
 // 将来的に追加予定のプロバイダー
