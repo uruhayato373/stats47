@@ -5,7 +5,13 @@ import { StatsListSearchOptions, StatsFieldCode } from "@/lib/estat-api";
 import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
-import { Select } from "@/components/atoms/Select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/atoms/ui/select";
 import { Button } from "@/components/atoms/Button";
 import { LoadingButton } from "@/components/atoms/LoadingButton";
 import {
@@ -110,30 +116,38 @@ export function StatsListSearch({
           </div>
 
           {/* 分野コード */}
-          <Select
-            name="statsField"
-            label="分野コード"
-            options={STATS_FIELD_OPTIONS}
-            value={statsField}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setStatsField(e.target.value)
-            }
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="statsField">分野コード</Label>
+            <Select value={statsField} onValueChange={setStatsField}>
+              <SelectTrigger>
+                <SelectValue placeholder="選択してください" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATS_FIELD_OPTIONS.filter(option => option.value !== "").map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* 集計地域区分 */}
-          <Select
-            name="collectArea"
-            label="集計地域区分"
-            options={COLLECT_AREA_OPTIONS}
-            value={collectArea}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setCollectArea(e.target.value as "1" | "2" | "3" | "")
-            }
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="collectArea">集計地域区分</Label>
+            <Select value={collectArea} onValueChange={(value) => setCollectArea(value as "1" | "2" | "3" | "")}>
+              <SelectTrigger>
+                <SelectValue placeholder="すべて" />
+              </SelectTrigger>
+              <SelectContent>
+                {COLLECT_AREA_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* 調査年月 */}
           <div className="space-y-2">
@@ -151,17 +165,21 @@ export function StatsListSearch({
           </div>
 
           {/* 取得件数 */}
-          <Select
-            name="limit"
-            label="取得件数"
-            options={LIMIT_OPTIONS}
-            value={limit.toString()}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setLimit(Number(e.target.value))
-            }
-            size="md"
-            rounded="md"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="limit">取得件数</Label>
+            <Select value={limit.toString()} onValueChange={(value) => setLimit(Number(value))}>
+              <SelectTrigger>
+                <SelectValue placeholder="100件" />
+              </SelectTrigger>
+              <SelectContent>
+                {LIMIT_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* ボタン */}

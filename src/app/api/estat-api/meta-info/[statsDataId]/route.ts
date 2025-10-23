@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { getEnvironmentConfig } from "@/lib/env";
 import { estatAPI } from "@/lib/estat-api";
+import { NextRequest, NextResponse } from "next/server";
+import { getMockMetaInfo } from "../../../../../../data/mock/metainfo";
 
 /**
  * e-Statメタ情報取得APIエンドポイント
@@ -23,8 +25,42 @@ export async function GET(
       );
     }
 
-    // e-Stat APIからメタ情報を取得
-    const metaInfo = await estatAPI.getMetaInfo({ statsDataId });
+    // 環境設定を取得
+    const config = getEnvironmentConfig();
+    console.log(`[${config.environment}] メタ情報取得リクエスト:`, statsDataId);
+
+    let metaInfo;
+
+    if (config.isMock) {
+      // Mock環境: ローカルJSONファイルを使用
+      console.log(
+        `[${config.environment}] モックデータからメタ情報を取得中...`
+      );
+      metaInfo = getMockMetaInfo(statsDataId);
+
+      if (!metaInfo) {
+        console.error(
+          `[${config.environment}] モックデータが見つかりません: ${statsDataId}`
+        );
+        return NextResponse.json(
+          {
+            success: false,
+            error: `モックデータが見つかりません: ${statsDataId}`,
+          },
+          { status: 404 }
+        );
+      }
+    } else {
+      // Development/Staging/Production環境: e-Stat APIを使用
+      console.log(`[${config.environment}] e-Stat APIからメタ情報を取得中...`);
+      metaInfo = await estatAPI.getMetaInfo({ statsDataId });
+    }
+
+    console.log(`[${config.environment}] メタ情報取得成功:`, {
+      statsDataId,
+      hasData: !!metaInfo,
+      dataKeys: metaInfo ? Object.keys(metaInfo) : null,
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { List } from "lucide-react";
-import {
-  StatsListSearchOptions,
-  StatsListTableInfo,
-  DetailedStatsListTableInfo,
-  StatsFieldCode,
-} from "@/lib/estat-api/types/stats-list";
 import { StatsFieldSidebar } from "@/components/organisms/estat-api/stats-list/StatsFieldSidebar";
-import { StatsListSearch } from "@/components/organisms/estat-api/stats-list/StatsListSearch";
 import { StatsListResults } from "@/components/organisms/estat-api/stats-list/StatsListResults";
+import { StatsListSearch } from "@/components/organisms/estat-api/stats-list/StatsListSearch";
 import { StatsTableDetailModal } from "@/components/organisms/estat-api/stats-list/StatsTableDetailModal";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
+import {
+  DetailedStatsListTableInfo,
+  StatsFieldCode,
+  StatsListSearchOptions,
+  StatsListTableInfo,
+} from "@/lib/estat-api/types/stats-list";
+import { List } from "lucide-react";
+import { useCallback, useState } from "react";
 
 /**
  * e-Stat統計表一覧ページコンポーネント
@@ -28,7 +28,7 @@ import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
  *
  * @returns JSX要素
  */
-export function EstatAPIStatsListPage() {
+export default function StatsListPageContent() {
   // ===== 状態管理 =====
 
   /** 選択された統計表の詳細情報（モーダル表示用） */

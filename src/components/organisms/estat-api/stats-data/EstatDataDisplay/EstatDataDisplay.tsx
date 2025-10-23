@@ -1,16 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { AlertTriangle, Info, BarChart3, Database } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
 import { EstatStatsDataResponse } from "@/lib/estat-api";
-import { EstatOverview } from "../EstatOverview";
+import { AlertTriangle, BarChart3, Database, Info } from "lucide-react";
+import { useState } from "react";
 import { EstatCategoriesTable } from "../EstatCategoriesTable";
-import { EstatYearsTable } from "../EstatYearsTable";
-import { EstatValuesTable } from "../EstatValuesTable";
+import { EstatOverview } from "../EstatOverview";
 import { EstatRawData } from "../EstatRawData";
-import TabNavigation, {
-  type TabItem,
-} from "@/components/molecules/TabNavigation";
+import { EstatValuesTable } from "../EstatValuesTable";
+import { EstatYearsTable } from "../EstatYearsTable";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
@@ -72,49 +70,50 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
     );
   }
 
-  const tabs: TabItem[] = [
-    { id: "overview", label: "概要", icon: Info },
-    { id: "categories", label: "カテゴリ", icon: BarChart3 },
-    { id: "years", label: "年度", icon: BarChart3 },
-    { id: "values", label: "値", icon: BarChart3 },
-    { id: "raw", label: "Raw JSON", icon: Database },
-  ];
-
   return (
     <div>
       {/* タブナビゲーション */}
-      <TabNavigation
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        spacing="space-x-6"
-        iconSize="w-4 h-4"
-        showCount={false}
-        className="px-4"
-      />
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as typeof activeTab)}>
+        <TabsList className="w-full justify-start px-4">
+          <TabsTrigger value="overview" className="gap-2">
+            <Info className="h-4 w-4" />
+            概要
+          </TabsTrigger>
+          <TabsTrigger value="categories" className="gap-2">
+            <BarChart3 className="h-4 w-4" />
+            カテゴリ
+          </TabsTrigger>
+          <TabsTrigger value="years" className="gap-2">
+            <BarChart3 className="h-4 w-4" />
+            年度
+          </TabsTrigger>
+          <TabsTrigger value="values" className="gap-2">
+            <BarChart3 className="h-4 w-4" />
+            値
+          </TabsTrigger>
+          <TabsTrigger value="raw" className="gap-2">
+            <Database className="h-4 w-4" />
+            Raw JSON
+          </TabsTrigger>
+        </TabsList>
 
-      {/* タブコンテンツ */}
-      <div
-        className={activeTab === "overview" || activeTab === "raw" ? "p-4" : ""}
-      >
-        {activeTab === "overview" && <EstatOverview data={data} />}
-        {activeTab === "categories" && (
-          <div className="p-4">
-            <EstatCategoriesTable data={data} />
-          </div>
-        )}
-        {activeTab === "years" && (
-          <div className="p-4">
-            <EstatYearsTable data={data} />
-          </div>
-        )}
-        {activeTab === "values" && (
-          <div className="p-4">
-            <EstatValuesTable data={data} />
-          </div>
-        )}
-        {activeTab === "raw" && <EstatRawData data={data} />}
-      </div>
+        {/* タブコンテンツ */}
+        <TabsContent value="overview" className="p-4">
+          <EstatOverview data={data} />
+        </TabsContent>
+        <TabsContent value="categories" className="p-4">
+          <EstatCategoriesTable data={data} />
+        </TabsContent>
+        <TabsContent value="years" className="p-4">
+          <EstatYearsTable data={data} />
+        </TabsContent>
+        <TabsContent value="values" className="p-4">
+          <EstatValuesTable data={data} />
+        </TabsContent>
+        <TabsContent value="raw" className="p-4">
+          <EstatRawData data={data} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

@@ -1,23 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { Code, Tag, FileText, MapPin, Calendar } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
+import { Button } from "@/components/atoms/ui/button";
+import { Card, CardHeader, CardTitle } from "@/components/atoms/ui/card";
+import { Skeleton } from "@/components/atoms/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import { JsonDisplay } from "@/components/molecules/JsonDisplay";
+import {
+  useMetaInfoDownload,
+  useMetaInfoSave,
+} from "@/hooks/estat-api/meta-info";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
-import { JsonDisplay } from "@/components/molecules/JsonDisplay";
-import { SaveButton } from "@/components/atoms/SaveButton";
-import { Alert } from "@/components/atoms/Alert";
-import {
-  TabNavigation,
-  type TabItem,
-} from "@/components/molecules/TabNavigation";
-import {
-  useMetaInfoSave,
-  useMetaInfoDownload,
-} from "@/hooks/estat-api/meta-info";
-import TableInfoTab from "./TableInfoTab";
-import CategoriesTab from "./CategoriesTab";
+import { AlertCircle, Calendar, Code, FileText, Info, MapPin, RefreshCw, Save, Tag } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import AreasTab from "./AreasTab";
+import CategoriesTab from "./CategoriesTab";
+import TableInfoTab from "./TableInfoTab";
 import TimeAxisTab from "./TimeAxisTab";
 
 /**
@@ -140,120 +139,125 @@ export default function EstatMetaInfoDisplay({
   }
 
   /**
+   * ローディング状態の表示
+   */
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        <Skeleton className="h-4 w-1/4" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-5/6" />
+        <Skeleton className="h-3 w-3/4" />
+      </div>
+    );
+  }
+
+  /**
    * エラー状態の表示
-   * エラーメッセージをAlertコンポーネントで表示
    */
   if (error) {
-    return <Alert type="error" message={error} showIcon={true} />;
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
   }
 
   /**
    * メタ情報が存在しない場合
-   * 何も表示しない（nullを返す）
    */
   if (!metaInfo || !parsedData) {
-    return null;
+    return (
+      <Alert>
+        <Info className="h-4 w-4" />
+        <AlertDescription>メタ情報が見つかりませんでした</AlertDescription>
+      </Alert>
+    );
   }
-
-  // ===== タブ設定 =====
-  /**
-   * タブ設定配列
-   * 各タブは対応するデータが存在する場合のみ表示
-   * JSONタブは常に表示
-   */
-  const tabs: TabItem[] = [
-    {
-      id: "table",
-      label: "統計表情報",
-      icon: FileText,
-    },
-    {
-      id: "categories",
-      label: "分類",
-      icon: Tag,
-    },
-    {
-      id: "areas",
-      label: "地域",
-      icon: MapPin,
-    },
-    {
-      id: "time",
-      label: "時間軸",
-      icon: Calendar,
-    },
-    {
-      id: "json",
-      label: "JSON レスポンス",
-      icon: Code,
-    },
-  ];
 
   // ===== メインコンテンツのレンダリング =====
   return (
     <div className="space-y-6">
       {/* ===== ヘッダーセクション ===== */}
       {/* 統計表IDとタイトル、保存ボタンを表示 */}
-      <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between border-b border-gray-200 pb-4">
-        {/* 統計表基本情報 */}
-        <div className="flex-1">
-          <div className="space-y-2">
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+      <Card>
+        <CardHeader className="flex flex-row items-start justify-between space-y-0">
+          <div className="space-y-1.5">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               統計表ID: {parsedData.tableInfo.id}
-            </div>
-            <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              {parsedData.tableInfo.title}
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              {parsedData.tableInfo.statName} •{" "}
-              {parsedData.tableInfo.organization}
-            </div>
+            </CardTitle>
+            <h2 className="text-lg font-semibold">{parsedData.tableInfo.title}</h2>
+            <p className="text-sm text-muted-foreground">
+              {parsedData.tableInfo.statName} • {parsedData.tableInfo.organization}
+            </p>
           </div>
-        </div>
-
-        {/* 保存ボタン */}
-        <SaveButton
-          onSave={handleSave}
-          saving={saving}
-          saveResult={saveResult}
-        />
-      </div>
+          <div className="flex gap-2">
+            <Button onClick={handleSave} disabled={saving} size="icon" variant="outline">
+              <Save className="h-4 w-4" />
+            </Button>
+          </div>
+        </CardHeader>
+      </Card>
 
       {/* ===== タブナビゲーション ===== */}
       {/* 統計表情報、分類、地域、時間軸、JSONレスポンスのタブ切り替え */}
-      <TabNavigation
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={(tabId) => setActiveTab(tabId as TabType)}
-      />
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
+        <TabsList className="w-full justify-start">
+          <TabsTrigger value="table" className="gap-2">
+            <FileText className="h-4 w-4" />
+            統計表情報
+          </TabsTrigger>
+          <TabsTrigger value="categories" className="gap-2">
+            <Tag className="h-4 w-4" />
+            分類
+          </TabsTrigger>
+          <TabsTrigger value="areas" className="gap-2">
+            <MapPin className="h-4 w-4" />
+            地域
+          </TabsTrigger>
+          <TabsTrigger value="time" className="gap-2">
+            <Calendar className="h-4 w-4" />
+            時間軸
+          </TabsTrigger>
+          <TabsTrigger value="json" className="gap-2">
+            <Code className="h-4 w-4" />
+            JSON
+          </TabsTrigger>
+        </TabsList>
 
-      {/* ===== タブコンテンツエリア ===== */}
-      <div className="mt-6">
-        {/* 統計表情報タブのコンテンツ */}
-        {activeTab === "table" && (
+        {/* ===== タブコンテンツエリア ===== */}
+        <TabsContent value="table">
           <TableInfoTab tableInfo={parsedData.tableInfo} />
-        )}
-
-        {/* 分類タブのコンテンツ */}
-        {activeTab === "categories" && (
+        </TabsContent>
+        <TabsContent value="categories">
           <CategoriesTab categories={parsedData.dimensions.categories} />
-        )}
-
-        {/* 地域タブのコンテンツ */}
-        {activeTab === "areas" && (
+        </TabsContent>
+        <TabsContent value="areas">
           <AreasTab areas={parsedData.dimensions.areas} />
-        )}
-
-        {/* 時間軸タブのコンテンツ */}
-        {activeTab === "time" && (
+        </TabsContent>
+        <TabsContent value="time">
           <TimeAxisTab timeAxis={parsedData.dimensions.timeAxis} />
-        )}
-
-        {/* JSONレスポンスタブのコンテンツ */}
-        {activeTab === "json" && (
+        </TabsContent>
+        <TabsContent value="json">
           <JsonDisplay data={metaInfo} onDownload={handleDownload} />
-        )}
-      </div>
+        </TabsContent>
+      </Tabs>
+
+      {/* 保存結果の表示 */}
+      {saveResult && (
+        <Alert variant={saveResult.success ? "default" : "destructive"} className="mt-4">
+          <AlertDescription className="flex items-center justify-between">
+            <span>{saveResult.message}</span>
+            {saveResult.success && (
+              <Button variant="ghost" size="sm" onClick={() => window.location.reload()}>
+                <RefreshCw className="h-3 w-3 mr-1" />
+                更新
+              </Button>
+            )}
+          </AlertDescription>
+        </Alert>
+      )}
     </div>
   );
 }

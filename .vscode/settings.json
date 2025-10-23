@@ -1,28 +1,13 @@
 {
-  "cSpell.words": [
-    "administrativefinancial",
-    "AUTOINCREMENT",
-    "Choropleth",
-    "chugoku",
-    "educationsports",
-    "Estat",
-    "FEFF",
-    "kanto",
-    "kinki",
-    "laborwage",
-    "landweather",
-    "METAGET",
-    "metainfo",
-    "miningindustry",
-    "safetyenvironment",
-    "shadcn",
-    "socialsecurity",
-    "Sparkline",
-    "statsdata",
-    "statslist",
-    "tohoku",
-    "Topo",
-    "topojson",
-    "turbopack"
-  ]
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.preferences.organizeImportsIgnoreCase": false,
+  "typescript.preferences.organizeImportsCollation": "ordinal",
+  "typescript.preferences.organizeImportsNumericCollation": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "cSpell.words": ["Estat", "Metainfo"]
 }

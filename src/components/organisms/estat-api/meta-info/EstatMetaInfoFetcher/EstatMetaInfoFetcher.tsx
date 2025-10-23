@@ -1,10 +1,32 @@
 "use client";
 
-import { useState, useCallback, memo } from "react";
-import { Search } from "lucide-react";
+import { Button } from "@/components/atoms/ui/button";
 import { Input } from "@/components/atoms/ui/input";
-import { Label } from "@/components/atoms/ui/label";
-import LoadingButton from "@/components/atoms/LoadingButton/LoadingButton";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/organisms/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { memo } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+/**
+ * フォームスキーマの定義
+ */
+const formSchema = z.object({
+  statsDataId: z
+    .string()
+    .min(1, { message: "統計表IDを入力してください" })
+    .regex(/^\d{10}$/, { message: "10桁の数字を入力してください" }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 /**
  * EstatMetaInfoFetcherProps - e-Statメタ情報取得フォームのプロパティ
@@ -46,113 +68,68 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   loading,
   clearOnSuccess = false,
 }: EstatMetaInfoFetcherProps) {
-  // ===== 状態管理 =====
+  // ===== react-hook-formの設定 =====
 
-  /** 入力中の統計表ID */
-  const [statsDataId, setStatsDataId] = useState<string>("");
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      statsDataId: "",
+    },
+  });
 
   // ===== イベントハンドラー =====
 
   /**
    * フォーム送信時の処理
-   * @param e - フォームイベント
+   * @param values - フォームの値
    */
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
+  const handleSubmit = (values: FormValues) => {
+    // 親コンポーネントに統計表IDを渡す
+    onSubmit(values.statsDataId);
 
-      // 入力値の前後空白を除去してチェック
-      if (statsDataId.trim()) {
-        // 親コンポーネントに統計表IDを渡す
-        onSubmit(statsDataId.trim());
-
-        // オプション: 送信成功後に入力フィールドをクリア
-        if (clearOnSuccess) {
-          setStatsDataId("");
-        }
-      }
-    },
-    [statsDataId, onSubmit, clearOnSuccess]
-  );
-
-  /**
-   * 入力値変更時の処理
-   * @param e - 入力イベント
-   */
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setStatsDataId(e.target.value);
-    },
-    []
-  );
-
-  /**
-   * 統計表IDのバリデーション
-   * @param value - 入力値
-   * @returns バリデーション結果
-   */
-  const isValidStatsDataId = useCallback((value: string): boolean => {
-    const trimmed = value.trim();
-    // 基本的な統計表ID形式チェック（10桁の数字）
-    return /^\d{10}$/.test(trimmed);
-  }, []);
-
-  /**
-   * 送信可能かどうかの判定
-   */
-  const canSubmit =
-    statsDataId.trim() && isValidStatsDataId(statsDataId) && !loading;
+    // オプション: 送信成功後に入力フィールドをクリア
+    if (clearOnSuccess) {
+      form.reset();
+    }
+  };
 
   // ===== レンダリング =====
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
-      {/* メインレイアウト: レスポンシブ対応（モバイル: 縦並び、デスクトップ: 横並び） */}
-      <div className="flex flex-col md:flex-row md:items-center gap-4">
-        {/* 左側セクション: アイコン + タイトル */}
-        <div className="flex items-center gap-2 md:flex-shrink-0">
-          {/* 検索アイコン（視覚的なヒント） */}
-          <Search className="w-5 h-5 text-indigo-600" />
-          {/* セクションタイトル */}
-          <h3 className="text-sm font-medium text-gray-900 dark:text-neutral-100">
-            メタ情報取得
-          </h3>
-        </div>
-
-        {/* 右側セクション: 入力フィールド + 送信ボタン */}
-        <div className="flex flex-row gap-4 items-end flex-1">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
+        {/* シンプルなレイアウト */}
+        <div className="flex flex-row gap-3 items-end">
           {/* 統計表ID入力フィールド */}
-          <div className="space-y-2 max-w-xs">
-            <Label htmlFor="statsDataId">例：0000010101</Label>
-            <Input
-              id="statsDataId"
+            <FormField
+              control={form.control}
               name="statsDataId"
-              placeholder="統計表ID 例：0000010101"
-              value={statsDataId}
-              onChange={handleInputChange}
-              disabled={loading}
-              required
-              className="text-sm"
+              render={({ field }) => (
+                <FormItem className="space-y-1 max-w-xs flex-1">
+                  <FormLabel>統計表ID</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="0000010101"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {statsDataId.trim() && !isValidStatsDataId(statsDataId) && (
-              <p className="text-sm text-red-600">10桁の数字を入力してください</p>
-            )}
-          </div>
 
-          {/* 送信ボタン */}
-          <LoadingButton
-            type="submit"
-            disabled={!canSubmit}
-            loading={loading}
-            loadingText="取得中..."
-            size="sm"
-            variant="primary"
-          >
-            取得
-          </LoadingButton>
+            {/* 送信ボタン */}
+            <Button
+              type="submit"
+              disabled={!form.formState.isValid || loading}
+            >
+              {loading && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
+              {loading ? "取得中" : "取得"}
+            </Button>
         </div>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 });
 

@@ -7,10 +7,10 @@
  * @module EstatDataPage
  */
 
-import { EstatAPIStatsDataPage } from "@/components/pages/EstatAPIStatsDataPage";
-import { estatAPI } from "@/lib/estat-api";
 import { getEnvironmentConfig } from "@/lib/env";
+import { estatAPI } from "@/lib/estat-api";
 import { getMockStatsData } from "../../../../../../data/mock/statsdata";
+import StatsDataPageContent from "./StatsDataPageContent";
 
 /**
  * e-STAT API統計データページのサーバーコンポーネント
@@ -66,5 +66,5 @@ export default async function Page(): Promise<React.ReactElement> {
     // エラーが発生してもページは表示する（initialData = null）
   }
 
-  return <EstatAPIStatsDataPage initialData={initialData} />;
+  return <StatsDataPageContent initialData={initialData} />;
 }

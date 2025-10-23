@@ -12,20 +12,20 @@
  * @module EstatAPIStatsDataPage
  */
 
-import { useState } from "react";
-import { RefreshCw, Database } from "lucide-react";
 import {
-  EstatDataFetcher,
   EstatDataDisplay,
+  EstatDataFetcher,
 } from "@/components/organisms/estat-api/stats-data";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
-import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
 import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
+import { Database, RefreshCw } from "lucide-react";
+import { useState } from "react";
 
 /**
- * EstatAPIStatsDataPage コンポーネントの Props
+ * StatsDataPageContent コンポーネントの Props
  */
-interface EstatAPIStatsDataPageProps {
+interface StatsDataPageContentProps {
   /**
    * サーバーサイドで取得した初期データ
    */
@@ -38,9 +38,9 @@ interface EstatAPIStatsDataPageProps {
  * @param {EstatAPIStatsDataPageProps} props - コンポーネントのプロパティ
  * @returns {JSX.Element} レンダリングされたページコンポーネント
  */
-export default function EstatAPIStatsDataPage({
+export default function StatsDataPageContent({
   initialData: _initialData = null,
-}: EstatAPIStatsDataPageProps) {
+}: StatsDataPageContentProps) {
   /**
    * 現在のAPIリクエストパラメータを保持するstate
    * @type {[GetStatsDataParams | null, React.Dispatch<React.SetStateAction<GetStatsDataParams | null>>]}

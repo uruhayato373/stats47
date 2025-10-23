@@ -1,4 +1,7 @@
-import { SelectOption } from "@/components/atoms/Select";
+export interface SelectOption {
+  value: string;
+  label: string;
+}
 
 /**
  * 統計分野の選択肢

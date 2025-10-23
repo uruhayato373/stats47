@@ -4,11 +4,12 @@ import { Noto_Sans_JP } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import { Header } from "@/components/organisms/layout/Header";
+
 import { SidebarWrapper } from "@/components/organisms/layout/Sidebar";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import { SidebarProvider } from "@/components/atoms/ui/sidebar";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/atoms/ui/resizable";
+import Header from "@/components/organisms/layout/Header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -76,7 +77,7 @@ export default function RootLayout({
                   
                   {/* Main Content Panel */}
                   <ResizablePanel defaultSize={80}>
-                    <main className="h-full overflow-y-auto p-4 md:p-6">
+                    <main className="h-full overflow-y-auto">
                       {children}
                     </main>
                   </ResizablePanel>

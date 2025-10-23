@@ -11,6 +11,10 @@ export function getEnvironment(): Environment {
 
   // デフォルトフォールバック
   if (!env) {
+    // package.jsonのスクリプト名から環境を推測
+    if (process.env.npm_lifecycle_event?.includes("mock")) {
+      return "mock";
+    }
     if (process.env.NODE_ENV === "production") {
       return "production";
     }

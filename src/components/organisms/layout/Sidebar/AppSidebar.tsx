@@ -1,17 +1,16 @@
+import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 import {
   Sidebar,
   SidebarContent,
-  SidebarHeader,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
+  SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
 import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
-import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 import Link from "next/link";
 
 /**

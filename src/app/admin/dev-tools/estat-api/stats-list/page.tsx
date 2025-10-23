@@ -1,5 +1,5 @@
-import { EstatAPIStatsListPage } from "@/components/pages/EstatAPIStatsListPage";
+import StatsListPageContent from "./StatsListPageContent";
 
 export default function StatsListPage() {
-  return <EstatAPIStatsListPage />;
+  return <StatsListPageContent />;
 }

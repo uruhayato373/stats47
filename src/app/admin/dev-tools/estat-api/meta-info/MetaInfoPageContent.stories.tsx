@@ -1,7 +1,7 @@
+import type { EstatMetaInfo } from "@/lib/database/estat/types/metainfo";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import EstatMetainfoPage from "./EstatMetainfoPage";
-import type { EstatMetaInfo } from "@/lib/database/estat/types/metainfo";
+import MetaInfoPageContent from "./MetaInfoPageContent";
 
 // モックデータ
 const mockSavedStatsList: EstatMetaInfo[] = [
@@ -67,9 +67,9 @@ const mockSavedStatsList: EstatMetaInfo[] = [
   },
 ];
 
-const meta: Meta<typeof EstatMetainfoPage> = {
-  title: "Pages/EstatApi/EstatMetainfoPage",
-  component: EstatMetainfoPage,
+const meta: Meta<typeof MetaInfoPageContent> = {
+  title: "Pages/EstatApi/MetaInfoPageContent",
+  component: MetaInfoPageContent,
   parameters: {
     layout: "fullscreen",
     docs: {
@@ -151,7 +151,7 @@ export const Interactive: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={savedStatsList} />
+        <MetaInfoPageContent savedStatsList={savedStatsList} />
       </div>
     );
   },
@@ -182,7 +182,7 @@ export const LoadingState: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+        <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
       </div>
     );
   },
@@ -213,7 +213,7 @@ export const ErrorState: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+        <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
       </div>
     );
   },
@@ -236,7 +236,7 @@ export const AutoSaveSuccess: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+        <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
       </div>
     );
   },
@@ -261,7 +261,7 @@ export const AutoSaveError: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+        <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
       </div>
     );
   },
@@ -317,7 +317,7 @@ export const DifferentAreaTypes: Story = {
 
     return (
       <div className="h-screen">
-        <EstatMetainfoPage savedStatsList={differentAreaTypesData} />
+        <MetaInfoPageContent savedStatsList={differentAreaTypesData} />
       </div>
     );
   },
@@ -334,7 +334,7 @@ export const DifferentAreaTypes: Story = {
 export const MobileLayout: Story = {
   render: () => (
     <div className="w-80 h-screen mx-auto">
-      <EstatMetainfoPage savedStatsList={mockSavedStatsList.slice(0, 3)} />
+      <MetaInfoPageContent savedStatsList={mockSavedStatsList.slice(0, 3)} />
     </div>
   ),
   parameters: {
@@ -349,7 +349,7 @@ export const MobileLayout: Story = {
 export const TabletLayout: Story = {
   render: () => (
     <div className="w-768 h-screen mx-auto">
-      <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+      <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
     </div>
   ),
   parameters: {
@@ -365,7 +365,7 @@ export const TabletLayout: Story = {
 export const DesktopLayout: Story = {
   render: () => (
     <div className="w-full h-screen">
-      <EstatMetainfoPage savedStatsList={mockSavedStatsList} />
+      <MetaInfoPageContent savedStatsList={mockSavedStatsList} />
     </div>
   ),
   parameters: {

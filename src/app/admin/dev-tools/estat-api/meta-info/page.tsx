@@ -1,8 +1,10 @@
-import { EstatMetainfoPage } from "@/components/pages/EstatMetainfoPage";
 import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
+import { getEnvironmentConfig } from "@/lib/env";
+import MetaInfoPageContent from "./MetaInfoPageContent";
 
 /**
  * e-Statメタ情報ページ
+ * Server Componentでデータ取得を行い、Client Componentに渡す
  *
  * 環境別の動作:
  * - mock: data/mock/database/estat_metainfo.json
@@ -19,5 +21,11 @@ export default async function EstatMetadataPage() {
     orderDirection: "DESC",
   });
 
-  return <EstatMetainfoPage savedStatsList={savedStatsList} />;
+  // mock環境の場合は初期統計表IDを設定
+  const config = getEnvironmentConfig();
+  console.log("[page.tsx] Environment config:", config);
+  const initialStatsId = config.isMock ? "0000010101" : undefined;
+  console.log("[page.tsx] initialStatsId:", initialStatsId);
+
+  return <MetaInfoPageContent savedStatsList={savedStatsList} initialStatsId={initialStatsId} />;
 }

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { RefreshCw, BarChart3 } from "lucide-react";
-import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
+import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
+import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
 import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import { useEstatMetaInfo } from "@/hooks/estat-api/useEstatMetaInfo";
 import { AreaType } from "@/lib/area/types";
-import { Alert } from "@/components/atoms/Alert";
+import { BarChart3, RefreshCw } from "lucide-react";
+import { useState } from "react";
 
 /**
  * e-Statメタ情報の型定義（クライアントサイド用）
@@ -27,15 +27,17 @@ interface EstatMetaInfo {
 }
 
 /**
- * EstatMetainfoPageProps - e-Statメタ情報ページのプロパティ
+ * MetaInfoPageContentProps - e-Statメタ情報ページのプロパティ
  */
-interface EstatMetainfoPageProps {
+interface MetaInfoPageContentProps {
   /** 保存済み統計表一覧（データベースから取得した統計表メタデータ） */
   savedStatsList?: EstatMetaInfo[];
+  /** 初期統計表ID（mock環境などで初期表示用） */
+  initialStatsId?: string;
 }
 
 /**
- * EstatMetainfoPage - e-Statメタ情報管理ページ
+ * MetaInfoPageContent - e-Statメタ情報管理ページ
  *
  * 機能:
  * - e-Stat APIから統計表のメタ情報を取得・表示
@@ -48,13 +50,18 @@ interface EstatMetainfoPageProps {
  * - メインエリア: メタ情報取得フォーム、詳細表示
  * - サイドバー: 保存済み統計表一覧
  */
-export default function EstatMetainfoPage({
+export default function MetaInfoPageContent({
   savedStatsList = [],
-}: EstatMetainfoPageProps) {
+  initialStatsId,
+}: MetaInfoPageContentProps) {
   // ===== 状態管理 =====
 
   /** 現在選択中の統計表ID */
-  const [currentStatsId, setCurrentStatsId] = useState<string>("");
+  const [currentStatsId, setCurrentStatsId] = useState<string>(initialStatsId || "");
+
+  // デバッグログ
+  console.log("MetaInfoPageContent - initialStatsId:", initialStatsId);
+  console.log("MetaInfoPageContent - currentStatsId:", currentStatsId);
 
   /** 自動保存ステータス管理 */
   const [autoSaveStatus, setAutoSaveStatus] = useState<{
@@ -84,6 +91,14 @@ export default function EstatMetainfoPage({
       },
     }
   );
+
+  // デバッグログ
+  console.log("MetaInfoPageContent - useEstatMetaInfo result:", {
+    currentStatsId,
+    hasMetaInfo: !!metaInfo,
+    error,
+    isLoading,
+  });
 
   // ===== イベントハンドラー =====
 
@@ -146,15 +161,12 @@ export default function EstatMetainfoPage({
         />
       }
     >
-      {/* 自動保存ステータス表示 */}
-      {autoSaveStatus.type && (
-        <Alert
-          type={autoSaveStatus.type === "success" ? "success" : "warning"}
-          message={autoSaveStatus.message}
-          showIcon={true}
-          className="mb-4"
-        />
-      )}
+            {/* 自動保存ステータス表示 */}
+            {autoSaveStatus.type && (
+              <Alert variant={autoSaveStatus.type === "success" ? "default" : "destructive"} className="mb-4">
+                <AlertDescription>{autoSaveStatus.message}</AlertDescription>
+              </Alert>
+            )}
 
       {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
       <EstatMetaInfoFetcher

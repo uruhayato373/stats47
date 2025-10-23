@@ -1,15 +1,15 @@
-import { vi, describe, it, expect, beforeEach } from "vitest";
 import type { EstatMetaInfo } from "@/lib/database/estat/types";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 /**
- * EstatMetainfoPage テストスイート
+ * MetaInfoPageContent テストスイート
  *
- * このテストファイルは、EstatMetainfoPageコンポーネントの動作を検証します。
+ * このテストファイルは、MetaInfoPageContentコンポーネントの動作を検証します。
  * React 19との互換性問題を回避するため、実際のレンダリングテストではなく、
  * 型定義、データ構造、ロジックの検証に焦点を当てています。
  *
  * テスト対象:
- * - EstatMetainfoPageProps の型定義
+ * - MetaInfoPageContentProps の型定義
  * - EstatMetaInfo の型定義とデータ構造
  * - コンポーネントの基本機能
  * - データ処理ロジック（ソート処理など）
@@ -21,15 +21,15 @@ import type { EstatMetaInfo } from "@/lib/database/estat/types";
  */
 
 // コンポーネントのモック（実際のレンダリングテストは実装していないため）
-const mockEstatMetainfoPage = vi.fn();
+const mockMetaInfoPageContent = vi.fn();
 
-describe("EstatMetainfoPage", () => {
+describe("MetaInfoPageContent", () => {
   // ===== テストデータ =====
 
   /**
    * モックデータ: 保存済み統計表一覧
    *
-   * このデータは、EstatMetainfoPageコンポーネントのプロパティとして渡される
+   * このデータは、MetaInfoPageContentコンポーネントのプロパティとして渡される
    * 保存済み統計表のメタデータを模擬しています。
    *
    * データ構造:
@@ -83,24 +83,24 @@ describe("EstatMetainfoPage", () => {
     vi.clearAllMocks();
   });
 
-  // ===== EstatMetainfoPageProps のテスト =====
+  // ===== MetaInfoPageContentProps のテスト =====
 
   /**
-   * EstatMetainfoPageProps の型定義とプロパティの検証
+   * MetaInfoPageContentProps の型定義とプロパティの検証
    *
-   * このセクションでは、EstatMetainfoPageコンポーネントが受け取る
+   * このセクションでは、MetaInfoPageContentコンポーネントが受け取る
    * プロパティの型定義と、様々な状態での動作を検証します。
    */
-  describe("EstatMetainfoPageProps", () => {
+  describe("MetaInfoPageContentProps", () => {
     /**
-     * EstatMetainfoPagePropsの型定義が正しく動作することを検証
+     * MetaInfoPageContentPropsの型定義が正しく動作することを検証
      *
      * テスト内容:
      * - savedStatsListプロパティが正しく定義されている
      * - 配列として認識される
      * - 期待される長さを持つ
      */
-    it("EstatMetainfoPagePropsの型定義が正しい", () => {
+    it("MetaInfoPageContentPropsの型定義が正しい", () => {
       // 型定義のテスト: 実際のプロパティ構造を模擬
       const props: { savedStatsList?: EstatMetaInfo[] } = {
         savedStatsList: mockSavedStatsList,
@@ -229,9 +229,9 @@ describe("EstatMetainfoPage", () => {
   // ===== コンポーネントの基本機能 =====
 
   /**
-   * EstatMetainfoPageコンポーネントの基本機能の検証
+   * MetaInfoPageContentコンポーネントの基本機能の検証
    *
-   * このセクションでは、EstatMetainfoPageコンポーネントの
+   * このセクションでは、MetaInfoPageContentコンポーネントの
    * 基本的な機能とインターフェースを検証します。
    *
    * 検証項目:
@@ -240,33 +240,33 @@ describe("EstatMetainfoPage", () => {
    */
   describe("コンポーネントの基本機能", () => {
     /**
-     * EstatMetainfoPageが関数として正しく定義されていることを検証
+     * MetaInfoPageContentが関数として正しく定義されていることを検証
      *
      * テスト内容:
      * - コンポーネントが関数として認識される
      * - モック関数が正しく動作する
      */
-    it("EstatMetainfoPageが関数として定義されている", () => {
+    it("MetaInfoPageContentが関数として定義されている", () => {
       // コンポーネントの型確認
-      expect(typeof mockEstatMetainfoPage).toBe("function");
+      expect(typeof mockMetaInfoPageContent).toBe("function");
     });
 
     /**
-     * EstatMetainfoPagePropsのインターフェースが正しく定義されていることを検証
+     * MetaInfoPageContentPropsのインターフェースが正しく定義されていることを検証
      *
      * テスト内容:
      * - インターフェースの型定義が正しい
      * - プロパティの受け渡しが正常に動作する
      * - 型安全性が保たれている
      */
-    it("EstatMetainfoPagePropsのインターフェースが正しく定義されている", () => {
+    it("MetaInfoPageContentPropsのインターフェースが正しく定義されている", () => {
       // インターフェースの型定義テスト
-      interface EstatMetainfoPageProps {
+      interface MetaInfoPageContentProps {
         savedStatsList?: EstatMetaInfo[];
       }
 
       // プロパティの受け渡しテスト
-      const props: EstatMetainfoPageProps = {
+      const props: MetaInfoPageContentProps = {
         savedStatsList: mockSavedStatsList,
       };
 
@@ -279,9 +279,9 @@ describe("EstatMetainfoPage", () => {
   // ===== データ処理ロジック =====
 
   /**
-   * EstatMetainfoPageで使用されるデータ処理ロジックの検証
+   * MetaInfoPageContentで使用されるデータ処理ロジックの検証
    *
-   * このセクションでは、EstatMetainfoPageコンポーネント内で
+   * このセクションでは、MetaInfoPageContentコンポーネント内で
    * 実行されるデータ処理ロジック（主にソート処理）を検証します。
    *
    * 検証項目:
