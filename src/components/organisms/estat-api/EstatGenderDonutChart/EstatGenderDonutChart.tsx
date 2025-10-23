@@ -4,7 +4,7 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import { RefreshCw, AlertCircle } from "lucide-react";
-import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
+import { GetStatsDataParams } from "@/lib/estat-api";
 
 export interface EstatGenderDonutChartProps {
   /**
