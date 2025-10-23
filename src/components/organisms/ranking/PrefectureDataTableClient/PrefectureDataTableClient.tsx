@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { ChevronUp, ChevronDown, TrendingUp } from "lucide-react";
+import { Button } from "@/components/atoms/ui/button";
+import { useCSVExport } from "@/hooks/export/useCSVExport";
 import { FormattedValue } from "@/lib/estat-api";
-import { ExportButton } from "@/components/atoms/ExportButton";
+import {
+  ChevronDown,
+  ChevronUp,
+  Download,
+  Loader2,
+  TrendingUp,
+} from "lucide-react";
+import React, { useMemo, useState } from "react";
 
 /**
  * ソート可能なフィールドの型定義
@@ -58,6 +65,12 @@ export const PrefectureDataTableClient: React.FC<
   // ソートフィールドとソート順序の状態管理
   const [sortField, setSortField] = useState<SortField>("rank");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+
+  // CSVエクスポート機能
+  const { exportToCSV, isExporting } = useCSVExport({
+    dataType: "prefecture-ranking",
+    metadata: { year: "2023" },
+  });
 
   // ===== データ処理 =====
   // ソート処理: データの配列を指定されたフィールドと順序でソート
@@ -164,11 +177,26 @@ export const PrefectureDataTableClient: React.FC<
             <div className="text-xs text-gray-500 dark:text-neutral-400">
               {sortedData.length}件
             </div>
-            <ExportButton
-              data={sortedData}
-              dataType="prefecture-ranking"
-              metadata={{ year: "2023" }}
-            />
+            <Button
+              onClick={async () => {
+                await exportToCSV(sortedData);
+              }}
+              disabled={isExporting || !sortedData || sortedData.length === 0}
+              variant="outline"
+              size="sm"
+            >
+              {isExporting ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="mr-2 h-4 w-4" />
+              )}
+              CSVダウンロード
+              {sortedData && sortedData.length > 0 && (
+                <span className="ml-2 text-xs text-muted-foreground">
+                  ({sortedData.length}行)
+                </span>
+              )}
+            </Button>
           </div>
         </div>
       </div>

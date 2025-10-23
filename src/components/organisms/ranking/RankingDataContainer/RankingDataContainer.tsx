@@ -1,26 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  useRankingYears,
-  useRankingData,
-} from "@/hooks/ranking/useRankingData";
-import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
+import { ErrorView } from "@/components/atoms/ErrorView";
+import { LoadingView } from "@/components/atoms/LoadingView";
+import { Modal } from "@/components/atoms/Modal";
+import { Button } from "@/components/atoms/ui/button";
+import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
 import { StatisticsSummary } from "@/components/molecules/ranking/StatisticsSummary";
 import { YearSelector } from "@/components/molecules/YearSelector";
-import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
-import { LoadingView } from "@/components/atoms/LoadingView";
-import { ErrorView } from "@/components/atoms/ErrorView";
 import { PrefectureDataTableClient } from "@/components/organisms/ranking/PrefectureDataTableClient";
-import { RankingVisualizationOptions } from "@/lib/ranking/types";
-import { Modal } from "@/components/atoms/Modal";
 import {
   RankingItemSettings,
   RankingItemSettingsData,
 } from "@/components/organisms/ranking/RankingItemSettings";
-import { ExportButton } from "@/components/atoms/ExportButton";
-import { Settings } from "lucide-react";
+import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
+import { useCSVExport } from "@/hooks/export/useCSVExport";
+import {
+  useRankingData,
+  useRankingYears,
+} from "@/hooks/ranking/useRankingData";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
+import { RankingVisualizationOptions } from "@/lib/ranking/types";
+import { Download, Loader2, Settings } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 /**
  * ランキングデータコンテナのプロパティ
@@ -43,6 +44,12 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
   // ===== 状態管理 =====
   // 詳細設定モーダルの開閉状態
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  // CSVエクスポート機能
+  const { exportToCSV, isExporting } = useCSVExport({
+    dataType: "ranking",
+    metadata: { year: selectedYear, areaName: rankingConfig.title },
+  });
 
   // ===== ranking_itemsデータはpropsから受け取る =====
   // サーバーサイドで取得済みのrankingConfigを使用
@@ -162,14 +169,26 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 都道府県ランキング地図
               </h3>
-              <ExportButton
-                data={data}
-                dataType="ranking"
-                metadata={{
-                  year: selectedYear,
-                  areaName: rankingConfig.title,
+              <Button
+                onClick={async () => {
+                  await exportToCSV(data);
                 }}
-              />
+                disabled={isExporting || !data || data.length === 0}
+                variant="outline"
+                size="sm"
+              >
+                {isExporting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="mr-2 h-4 w-4" />
+                )}
+                CSVダウンロード
+                {data && data.length > 0 && (
+                  <span className="ml-2 text-xs text-muted-foreground">
+                    ({data.length}行)
+                  </span>
+                )}
+              </Button>
             </div>
             <ChoroplethMap
               data={data}

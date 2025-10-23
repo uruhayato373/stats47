@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { Button } from "@/components/atoms/ui/button";
 import {
   D3LineChart,
   TimeSeriesDataPoint,
 } from "@/components/organisms/visualization/D3LineChart";
+import { useCSVExport } from "@/hooks/export/useCSVExport";
 import { EstatStatsDataFormatter, GetStatsDataParams } from "@/lib/estat-api";
-import { RefreshCw, AlertCircle } from "lucide-react";
-import { ExportButton } from "@/components/atoms/ExportButton";
+import { AlertCircle, Download, Loader2, RefreshCw } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 export interface EstatLineChartProps {
   /**
@@ -89,6 +90,12 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
   );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // CSVエクスポート機能
+  const { exportToCSV, isExporting } = useCSVExport({
+    dataType: "time-series",
+    metadata: { areaName: areaCode },
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -252,11 +259,28 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           {title || "時系列データ"}
         </h2>
-        <ExportButton
-          data={timeSeriesData}
-          dataType="time-series"
-          metadata={{ areaName: areaCode }}
-        />
+        <Button
+          onClick={async () => {
+            await exportToCSV(timeSeriesData);
+          }}
+          disabled={
+            isExporting || !timeSeriesData || timeSeriesData.length === 0
+          }
+          variant="outline"
+          size="sm"
+        >
+          {isExporting ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Download className="mr-2 h-4 w-4" />
+          )}
+          CSVダウンロード
+          {timeSeriesData && timeSeriesData.length > 0 && (
+            <span className="ml-2 text-xs text-muted-foreground">
+              ({timeSeriesData.length}行)
+            </span>
+          )}
+        </Button>
       </div>
       <D3LineChart
         data={timeSeriesData}
