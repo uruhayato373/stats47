@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { LogIn } from "lucide-react";
+import { LogIn, Moon, Sun } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { ThemeToggleButton } from "@/components/atoms/ThemeToggleButton";
+import { Toggle } from "@/components/atoms/ui/toggle";
 import { UserMenu } from "./UserMenu";
 import { useAuthModal } from "@/hooks/useAuthModal";
+import { useTheme } from "@/hooks/useTheme";
 
 /**
  * ヘッダーの右側アクション部分コンポーネント
@@ -13,12 +14,25 @@ import { useAuthModal } from "@/hooks/useAuthModal";
 export function HeaderActions() {
   const { status } = useSession();
   const { open } = useAuthModal();
+  const { theme, setTheme } = useTheme();
 
   const isAuthenticated = status === "authenticated";
 
   return (
     <div className="ms-auto flex items-center gap-x-2">
-      <ThemeToggleButton />
+      <Toggle
+        pressed={theme === "dark"}
+        onPressedChange={(pressed) => setTheme(pressed ? "dark" : "light")}
+        variant="outline"
+        size="sm"
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? (
+          <Moon className="size-4" />
+        ) : (
+          <Sun className="size-4" />
+        )}
+      </Toggle>
 
       {isAuthenticated ? (
         <UserMenu />

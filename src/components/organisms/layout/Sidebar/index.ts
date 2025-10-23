@@ -1,4 +1,3 @@
-export { default as Sidebar } from "./Sidebar";
-export { SidebarSection } from "./SidebarSection";
-export { SidebarLink } from "./SidebarLink";
-export { QuickActionsButton } from "./QuickActionsButton";
+export { AppSidebar } from "./AppSidebar";
+export { AdminSidebar } from "./AdminSidebar";
+export { SidebarWrapper } from "./SidebarWrapper";

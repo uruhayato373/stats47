@@ -5,8 +5,9 @@ import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Header } from "@/components/organisms/layout/Header";
-import { Sidebar } from "@/components/organisms/layout/Sidebar";
+import { SidebarWrapper } from "@/components/organisms/layout/Sidebar";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { SidebarProvider } from "@/components/atoms/ui/sidebar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,9 +52,13 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <SessionProvider>
-            <Header />
-            <Sidebar />
-            <main className="lg:ps-60 pt-16">{children}</main>
+            <SidebarProvider>
+              <SidebarWrapper />
+              <main className="lg:ps-60">
+                <Header />
+                <div className="pt-16">{children}</div>
+              </main>
+            </SidebarProvider>
           </SessionProvider>
         </ThemeProvider>
       </body>

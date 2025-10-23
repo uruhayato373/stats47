@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { getCategoriesForSidebar } from "@/lib/category";
