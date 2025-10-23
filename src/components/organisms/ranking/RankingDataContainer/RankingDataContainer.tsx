@@ -1,7 +1,6 @@
 "use client";
 
 import { ErrorView } from "@/components/atoms/ErrorView";
-import { LoadingView } from "@/components/atoms/LoadingView";
 import { Modal } from "@/components/atoms/Modal";
 import { Button } from "@/components/atoms/ui/button";
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
@@ -116,7 +115,14 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
 
   // ===== ローディング状態の表示 =====
   if (loading) {
-    return <LoadingView />;
+    return (
+      <div className="flex items-center justify-center min-h-[600px] bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-700">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-primary mx-auto mb-4 animate-spin" />
+          <p className="text-muted-foreground">データを読み込んでいます...</p>
+        </div>
+      </div>
+    );
   }
 
   // ===== エラー状態の表示 =====

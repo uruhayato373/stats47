@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 interface PasswordInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -44,19 +46,28 @@ export function PasswordInput({
   return (
     <div>
       <div className="relative">
-        <input
+        <Input
           {...props}
           type={showPassword ? "text" : "password"}
           onChange={handleChange}
-          className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
+          className="pr-10"
         />
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="sm"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+          className="absolute inset-y-0 right-0 h-full px-3 py-2 hover:bg-transparent"
         >
-          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-        </button>
+          {showPassword ? (
+            <EyeOff className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <Eye className="h-4 w-4 text-muted-foreground" />
+          )}
+          <span className="sr-only">
+            {showPassword ? "パスワードを隠す" : "パスワードを表示"}
+          </span>
+        </Button>
       </div>
 
       {showStrength && props.value && (
@@ -66,14 +77,12 @@ export function PasswordInput({
               <div
                 key={i}
                 className={`h-1 flex-1 rounded ${
-                  i < strength
-                    ? strengthColors[strength - 1]
-                    : "bg-gray-200 dark:bg-gray-600"
+                  i < strength ? strengthColors[strength - 1] : "bg-muted"
                 }`}
               />
             ))}
           </div>
-          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             パスワード強度: {strength > 0 ? strengthLabels[strength - 1] : ""}
           </p>
         </div>

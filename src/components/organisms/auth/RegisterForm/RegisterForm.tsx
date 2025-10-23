@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { PasswordInput } from "@/components/ui/password-input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { PasswordInput } from "@/components/atoms/PasswordInput";
+import { useState } from "react";
 
 interface RegisterFormProps {
   onSuccess?: () => void;
