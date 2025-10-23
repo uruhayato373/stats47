@@ -1,8 +1,7 @@
 "use client";
 
-import { MetricsCard } from "../components/atoms/MetricsCard";
-import { TopPosts } from "../components/molecules/TopPosts";
 import { TopAuthors } from "../components/molecules/TopAuthors";
+import { TopPosts } from "../components/molecules/TopPosts";
 
 export default function Dashboard() {
   return (
@@ -64,7 +63,6 @@ export default function Dashboard() {
 
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
           <div className="flex-1 flex flex-col overflow-hidden">
-            <MetricsCard />
             <TopPosts />
           </div>
 

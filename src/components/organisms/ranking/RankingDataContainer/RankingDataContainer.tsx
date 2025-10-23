@@ -1,6 +1,5 @@
 "use client";
 
-import { ErrorView } from "@/components/atoms/ErrorView";
 import { Modal } from "@/components/atoms/Modal";
 import { Button } from "@/components/atoms/ui/button";
 import { RankingHeader } from "@/components/molecules/ranking/RankingHeader";
@@ -12,6 +11,7 @@ import {
   RankingItemSettingsData,
 } from "@/components/organisms/ranking/RankingItemSettings";
 import { ChoroplethMap } from "@/components/organisms/visualization/ChoroplethMap";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useCSVExport } from "@/hooks/export/useCSVExport";
 import {
   useRankingData,
@@ -19,7 +19,13 @@ import {
 } from "@/hooks/ranking/useRankingData";
 import { RankingConfigResponse } from "@/lib/ranking/ranking-items";
 import { RankingVisualizationOptions } from "@/lib/ranking/types";
-import { Download, Loader2, Settings } from "lucide-react";
+import {
+  AlertCircle,
+  Download,
+  Loader2,
+  RefreshCw,
+  Settings,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 /**
@@ -128,13 +134,28 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
   // ===== エラー状態の表示 =====
   if (error) {
     return (
-      <ErrorView
-        error={error}
-        details={{
-          yearCode: selectedYear,
-        }}
-        onRetry={refetch} // リトライ機能付き
-      />
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>データ取得エラー</AlertTitle>
+        <AlertDescription>
+          {error.message}
+          <div className="mt-3 text-xs">
+            <p>詳細情報:</p>
+            <ul className="mt-1 space-y-1">
+              <li>年度: {selectedYear}</li>
+            </ul>
+          </div>
+          <Button
+            onClick={refetch}
+            variant="outline"
+            size="sm"
+            className="mt-3"
+          >
+            <RefreshCw className="mr-2 h-3 w-3" />
+            再試行
+          </Button>
+        </AlertDescription>
+      </Alert>
     );
   }
 
