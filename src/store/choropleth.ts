@@ -3,7 +3,7 @@
  */
 
 import type { Category } from "@/lib/taxonomy/category";
-import { allCategories } from "@/lib/taxonomy/category";
+import { listCategories } from "@/lib/taxonomy/category";
 import {
   CategoryData,
   MapVisualizationSettings,
@@ -66,7 +66,7 @@ export const useChoroplethStore = create<ChoroplethStore>((set, get) => ({
   error: null,
 
   // カテゴリデータの初期値
-  categories: allCategories().map(convertToCategoryData),
+  categories: listCategories().map(convertToCategoryData),
 
   // 地図表示設定の初期値
   mapVisualizationSettings: {

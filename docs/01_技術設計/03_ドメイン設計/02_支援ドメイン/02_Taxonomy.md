@@ -380,6 +380,49 @@ const relatedTags = await TagService.getRelatedTags("人口", 5);
   - `search(query)`: タグ名による検索
   - `save(tag)` / `delete(id)`: データの保存・削除
 
+## 設計原則
+
+### YAGNI (You Aren't Gonna Need It)
+
+このドメインでは、実際に必要になるまで機能を実装しない「YAGNI 原則」に従っています。
+
+#### 適用方針
+
+1. **必要最小限の実装**: 現在使用されている機能のみを実装
+2. **段階的な追加**: 新しい要件が発生した時点で機能を追加
+3. **定期的な見直し**: 未使用コードは積極的に削除
+
+#### 現在の実装範囲
+
+以下の 5 つの関数のみを提供しています:
+
+- `listCategories()` - 全カテゴリ取得（可視化設定で使用）
+- `findSubcategoryById()` - サブカテゴリ検索（ランキング表示で使用）
+- `validateSubcategoryOrThrow()` - サブカテゴリ検証（ルーティングで使用）
+- `normalizeCategoryData()` - データ正規化（ランキング表示で使用）
+- `validateSubcategory()` - 内部バリデーション（validateSubcategoryOrThrow 内で使用）
+
+#### 命名規約の適用
+
+Zenn の記事「[Get で始まる名前を関数につける前に読む記事](https://zenn.dev/blue_jam/articles/2a347b36b43d59)」に基づいて、適切な動詞を選択しています:
+
+- `listCategories()` - 配列全体を返す操作には`list`が適切
+- `findSubcategoryById()` - 検索操作には`find`が適切
+- `validate*()` - 検証操作には`validate`が適切
+- `normalize*()` - データ変換には`normalize`が適切
+
+#### 将来的に必要になる可能性のある機能
+
+必要に応じて以下の機能を追加できます:
+
+- カテゴリ検索機能 (`searchCategories`)
+- 高度なフィルタリング (`filterCategories`)
+- カスタムソート (`sortCategories`)
+- カテゴリ統計情報 (`categoryStats`)
+- ナビゲーション用データ生成 (`sidebarCategories`)
+
+これらは実際の要件が明確になった時点で実装します。
+
 ## ベストプラクティス
 
 ### 1. 階層構造の管理
@@ -405,6 +448,45 @@ const relatedTags = await TagService.getRelatedTags("人口", 5);
 - 新しい分類体系の追加
 - カスタムフィルタの実装
 - 多言語対応の準備
+
+### 5. コード品質管理
+
+#### 未使用コードの管理
+
+**YAGNI 原則の適用**:
+
+「必要になるまで実装しない (You Aren't Gonna Need It)」の原則に従います。
+
+**理由**:
+
+- コードベースの肥大化を防ぐ
+- 保守コストを削減
+- テストの対象範囲を最小化
+- 実際の要件に基づいた設計が可能
+
+#### 実装タイミング
+
+1. **実装する**: 現在のユースケースで確実に使用される機能
+2. **実装しない**: 将来使うかもしれない機能、推測に基づく機能
+3. **リファクタリング時に追加**: 同様のパターンが 3 回以上出現した時
+
+#### 未使用コードの検出と削除
+
+定期的に以下を実行します:
+
+```bash
+# 未使用エクスポートの検出
+npx ts-prune
+
+# 未使用インポートの削除
+npx eslint --fix
+```
+
+**削除対象**:
+
+- 一度も参照されていない関数・クラス
+- テストコードからのみ参照される実装コード
+- コメントアウトされたコード
 
 ## 他ドメインとの関係性
 

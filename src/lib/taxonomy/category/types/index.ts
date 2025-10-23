@@ -29,39 +29,6 @@ export interface Subcategory {
 }
 
 /**
- * カテゴリ検索オプション
- */
-export interface CategorySearchOptions {
-  query?: string;
-  includeSubcategories?: boolean;
-}
-
-/**
- * カテゴリソートオプション
- */
-export interface CategorySortOptions {
-  field: "name" | "displayOrder" | "id";
-  order: "asc" | "desc";
-}
-
-/**
- * カテゴリフィルタオプション
- */
-export interface CategoryFilterOptions {
-  hasSubcategories?: boolean;
-  categoryIds?: string[];
-}
-
-/**
- * カテゴリ検索結果
- */
-export interface CategorySearchResult {
-  categories: Category[];
-  subcategories: Subcategory[];
-  totalCount: number;
-}
-
-/**
  * サブカテゴリ検索結果（カテゴリ情報付き）
  */
 export interface SubcategorySearchResult {
@@ -86,56 +53,10 @@ export interface CategoryJsonItem {
 }
 
 /**
- * カテゴリバリデーション結果
- */
-export interface CategoryValidationResult {
-  isValid: boolean;
-  errors: string[];
-}
-
-/**
- * カテゴリ統計情報
- */
-export interface CategoryStats {
-  totalCategories: number;
-  totalSubcategories: number;
-  categoriesWithSubcategories: number;
-  categoriesWithoutSubcategories: number;
-}
-
-/**
- * サイドバー用カテゴリアイテム
- */
-export interface SidebarCategoryItem {
-  id: string;
-  name: string;
-  icon: string;
-  color: string;
-  href: string;
-  subcategories?: Array<{
-    id: string;
-    name: string;
-    href: string;
-  }>;
-}
-
-/**
- * 正規化されたカテゴリデータ
- */
-export interface NormalizedCategory {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  color: string;
-  displayOrder: number;
-  subcategories: Subcategory[];
-}
-
-/**
  * サブカテゴリバリデーション結果
  */
 export interface SubcategoryValidationResult {
   isValid: boolean;
-  errors: string[];
+  error?: string;
+  subcategoryData?: SubcategorySearchResult;
 }

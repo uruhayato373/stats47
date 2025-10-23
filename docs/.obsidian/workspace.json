@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04_開発ガイド/03_インフラ/データベース/01_D1データベース概要.md",
+                "file": "04_開発ガイド/10_Atomic Design実装.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01_D1データベース概要"
+              "title": "10_Atomic Design実装"
             }
           }
         ]
@@ -75,31 +75,10 @@
             }
           }
         ]
-      },
-      {
-        "id": "f6913f92e206d914",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d873db75767a7e2f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "04_開発ガイド/03_インフラ/データベース/01_D1データベース概要.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "01_D1データベース概要のアウトライン"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 298.5
+    "width": 369.5
   },
   "right": {
     "id": "8ed870fdff91f44c",
@@ -155,14 +134,28 @@
               "icon": "lucide-tags",
               "title": "タグ"
             }
+          },
+          {
+            "id": "d873db75767a7e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04_開発ガイド/10_Atomic Design実装.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "10_Atomic Design実装のアウトライン"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -178,42 +171,42 @@
   },
   "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
-    "04_開発ガイド/02_ドメイン/01_コアドメイン/Visualization/02_モデル/エンティティ.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/Category実装ガイド.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/CategoryAPIリファレンス.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy/README.md",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/02_Taxonomy.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Taxonomy",
-    "04_髢狗匱繧ｬ繧､繝・02_繝峨Γ繧､繝ｳ/02_謾ｯ謠ｴ繝峨Γ繧､繝ｳ/Taxonomy",
-    "04_髢狗匱繧ｬ繧､繝・02_繝峨Γ繧､繝ｳ/02_謾ｯ謠ｴ繝峨Γ繧､繝ｳ",
-    "04_髢狗匱繧ｬ繧､繝・02_繝峨Γ繧､繝ｳ",
-    "01_技術設計/03_ドメイン設計/02_支援ドメイン/03_EstatAPI.md",
-    "04_開発ガイド/02_ドメイン/02_支援ドメイン/Category/README.md",
-    "06_運用保守/データベーストラブルシューティング.md",
-    "06_運用保守/01_デプロイ運用ガイド.md",
-    "01_技術設計/02_ADR/状態管理/030_Zustand.md",
-    "04_開発ガイド/02_ドメイン/UI/フック実装ガイド.md",
-    "04_開発ガイド/02_ドメイン/UI/テーマ管理/next-themes-guide.md",
-    "04_開発ガイド/02_ドメイン/UI/テーマ管理",
-    "04_開発ガイド/02_ドメイン/UI",
-    "04_開発ガイド/10_Atomic Design実装.md",
-    "04_開発ガイド/02_ドメイン/認証/implementation/nextauth-setup.md",
-    "04_開発ガイド/02_ドメイン/認証/implementation",
-    "04_開発ガイド/04_UI/09_コンポーネント実装ガイド.md",
-    "04_開発ガイド/04_UI/ダッシュボード/adapter-implementation-guide.md",
-    "04_開発ガイド/03_インフラ/データベース/03_R2ストレージガイド.md",
-    "01_技術設計/03_ドメイン設計/01_コアドメイン/04_Visualization.md",
-    "04_開発ガイド/03_インフラ/データベース/README.md",
-    "04_開発ガイド/03_インフラ/データベース/05_運用・保守ガイド.md",
-    "04_開発ガイド/03_インフラ/データベース/04_環境設定ガイド.md",
-    "04_開発ガイド/03_インフラ/データベース/02_D1実装ガイド.md",
-    "04_開発ガイド/03_インフラ/データベース/01_D1データベース概要.md",
-    "04_開発ガイド/04_UI/ダッシュボード/architecture.md",
-    "04_開発ガイド/04_UI/ダッシュボード/comparison-charts.md",
-    "04_開発ガイド/03_インフラ/データベース/R2-S3セットアップ.md",
-    "04_開発ガイド/02_ドメイン/認証/specifications",
-    "04_開発ガイド/02_ドメイン/認証/refactoring",
-    "04_開発ガイド/02_ドメイン/認証",
+    "99_課題管理/authentication-system-audit.md",
+    "05_テスト戦略/ユニットテストガイド.md",
+    "04_開発ガイド/型定義管理.md",
+    "04_開発ガイド/Area実装ガイド.md",
+    "04_開発ガイド/13_shadcn-ui実装ガイド.md",
+    "04_開発ガイド/12_フォント実装ガイド.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types/scatter-plot.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types/line-chart.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types/heatmap.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types/choropleth-map.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types/bar-chart.md",
+    "04_開発ガイド/04_UI/可視化/implementation/recharts/common-patterns.md",
+    "04_開発ガイド/04_UI/可視化/implementation/d3js/choropleth-implementation.md",
+    "04_開発ガイド/04_UI/可視化/implementation/d3js/d3js_choropleth_guide.md",
+    "04_開発ガイド/04_UI/可視化/specifications/recharts-implementation-guide.md",
+    "04_開発ガイド/04_UI/可視化/specifications/overview.md",
+    "04_開発ガイド/04_UI/可視化/specifications/library-selection-guide.md",
+    "04_開発ガイド/04_UI/可視化/specifications/leaflet-integration.md",
+    "04_開発ガイド/04_UI/可視化/specifications/geoshape-data-source.md",
+    "04_開発ガイド/04_UI/可視化/specifications/d3js-implementation-guide.md",
+    "04_開発ガイド/04_UI/可視化/specifications/chart-types",
+    "04_開発ガイド/04_UI/可視化/specifications/accessibility.md",
+    "04_開発ガイド/04_UI/可視化/refactoring/migration-from-choropleth.md",
+    "04_開発ガイド/04_UI/可視化/patterns/map-visualization-patterns.md",
+    "04_開発ガイド/04_UI/可視化/implementation/topojson-geojson-adapter.md",
+    "04_開発ガイド/04_UI/可視化/implementation/recharts",
+    "04_開発ガイド/04_UI/可視化/implementation/page-level-loading-strategy.md",
+    "04_開発ガイド/04_UI/可視化/implementation/leaflet-integration-guide.md",
+    "04_開発ガイド/04_UI/可視化/implementation/d3js",
+    "04_開発ガイド/04_UI/可視化/specifications",
+    "04_開発ガイド/04_UI/可視化/refactoring",
+    "04_開発ガイド/04_UI/可視化/patterns",
+    "04_開発ガイド/04_UI/可視化/implementation",
+    "04_開発ガイド/04_UI/ランキング/specifications",
+    "04_開発ガイド/04_UI/ランキング/refactoring",
+    "04_開発ガイド/04_UI/ランキング/implementation",
     "07_コンテンツ計画/リソース/都道府県別産業割合.png",
     "07_コンテンツ計画/リソース/都道府県ごとの物価分析.png",
     "07_コンテンツ計画/リソース/転入転出.png",

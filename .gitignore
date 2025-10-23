@@ -49,3 +49,6 @@ storybook-static
 # Database backups
 database/backups/*.sql
 database/backups/*.json
+
+# Obsidian workspace files
+docs/.obsidian

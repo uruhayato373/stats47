@@ -12,7 +12,7 @@ import { getDataProvider } from "@/lib/database";
 import { mockDataProvider } from "@/lib/database/mock";
 import { getEnvironmentConfig } from "@/lib/env";
 import { RankingItem, RankingItemDB } from "@/lib/ranking/types";
-import { subcategoryById } from "@/lib/taxonomy/category";
+import { findSubcategoryById } from "@/lib/taxonomy/category";
 import { convertRankingItemFromDB } from "./ranking-converters";
 import { QUERIES } from "./ranking-queries";
 
@@ -144,7 +144,7 @@ export class RankingRepository {
   ): Promise<RankingConfigResponse | null> {
     try {
       // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = subcategoryById(subcategoryId);
+      const subcategory = findSubcategoryById(subcategoryId);
       if (!subcategory) {
         return null;
       }
