@@ -1,7 +1,5 @@
-import React from "react";
-import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
-import { normalizeCategoryData } from "@/lib/category/category-normalizer";
 import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
+import { normalizeCategoryData, validateSubcategoryOrThrow } from "@/lib/taxonomy/category";
 
 /**
  * ランキング統計項目ページのProps型定義

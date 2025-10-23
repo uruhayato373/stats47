@@ -11,10 +11,10 @@
 import { getDataProvider } from "@/lib/database";
 import { mockDataProvider } from "@/lib/database/mock";
 import { getEnvironmentConfig } from "@/lib/env";
-import { QUERIES } from "./ranking-queries";
 import { RankingItem, RankingItemDB } from "@/lib/ranking/types";
+import { subcategoryById } from "@/lib/taxonomy/category";
 import { convertRankingItemFromDB } from "./ranking-converters";
-import { CategoryService } from "@/lib/category";
+import { QUERIES } from "./ranking-queries";
 
 export interface SubcategoryConfig {
   id: string;
@@ -44,11 +44,15 @@ export class RankingRepository {
     const config = getEnvironmentConfig();
 
     if (config.isMock) {
-      console.log(`[${config.environment}] Creating RankingRepository with mock provider`);
+      console.log(
+        `[${config.environment}] Creating RankingRepository with mock provider`
+      );
       return new RankingRepository(mockDataProvider as any);
     }
 
-    console.log(`[${config.environment}] Creating RankingRepository with database provider`);
+    console.log(
+      `[${config.environment}] Creating RankingRepository with database provider`
+    );
     const db = await getDataProvider();
     return new RankingRepository(db);
   }
@@ -57,9 +61,7 @@ export class RankingRepository {
    * ranking_itemsテーブルからデータを取得
    * database/index.ts の fetchRankingItems() を置き換え
    */
-  async fetchRankingItems(options?: {
-    limit?: number;
-  }): Promise<any[]> {
+  async fetchRankingItems(options?: { limit?: number }): Promise<any[]> {
     const config = getEnvironmentConfig();
     const { limit = 10 } = options || {};
 
@@ -142,7 +144,7 @@ export class RankingRepository {
   ): Promise<RankingConfigResponse | null> {
     try {
       // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = CategoryService.getSubcategoryById(subcategoryId);
+      const subcategory = subcategoryById(subcategoryId);
       if (!subcategory) {
         return null;
       }

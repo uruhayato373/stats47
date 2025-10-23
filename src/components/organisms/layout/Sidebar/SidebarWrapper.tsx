@@ -1,15 +1,14 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import { AppSidebar } from "./AppSidebar";
+import { headers } from "next/headers";
 import { AdminSidebar } from "./AdminSidebar";
+import { AppSidebar } from "./AppSidebar";
 
 /**
- * パス名に基づいて適切なSidebarを表示するラッパーコンポーネント
+ * パス名に基づいて適切なSidebarを表示するラッパーコンポーネント（サーバーコンポーネント）
  */
-export function SidebarWrapper() {
-  const pathname = usePathname();
-  const isAdminRoute = pathname?.startsWith("/admin");
+export async function SidebarWrapper() {
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const isAdminRoute = pathname.startsWith("/admin");
 
   return isAdminRoute ? <AdminSidebar /> : <AppSidebar />;
 }

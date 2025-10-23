@@ -4,6 +4,12 @@ import { NextResponse } from "next/server";
 export default auth((req) => {
   const { pathname } = req.nextUrl;
 
+  // dashboardからareaへのリダイレクト
+  if (pathname.includes("/dashboard/")) {
+    const newPath = pathname.replace("/dashboard/", "/area/");
+    return NextResponse.redirect(new URL(newPath, req.url), 301);
+  }
+
   // 旧URLから新URLへのリダイレクト
   if (pathname.startsWith("/estat-api/")) {
     const newPath = pathname.replace(
@@ -35,13 +41,17 @@ export default auth((req) => {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  return NextResponse.next();
+  // パス名をヘッダーに追加（SidebarWrapperで使用）
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-pathname", pathname);
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 });
 
 export const config = {
-  matcher: [
-    "/estat-api/:path*",
-    "/profile/:path*",
-    "/admin/:path*",
-  ],
+  matcher: ["/estat-api/:path*", "/profile/:path*", "/admin/:path*"],
 };

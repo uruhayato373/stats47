@@ -9,36 +9,24 @@
         "id": "land-area",
         "name": "土地面積",
         "href": "/land-area",
-        "dashboardComponent": "LandAreaNationalDashboard",
-        "nationalDashboardComponent": "LandAreaNationalDashboard",
-        "prefectureDashboardComponent": "LandAreaPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "land-use",
         "name": "土地利用",
         "href": "/land-use",
-        "dashboardComponent": "LandUseNationalDashboard",
-        "nationalDashboardComponent": "LandUseNationalDashboard",
-        "prefectureDashboardComponent": "LandUsePrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "natural-environment",
         "name": "自然環境",
         "href": "/natural-environment",
-        "dashboardComponent": "NaturalEnvironmentNationalDashboard",
-        "nationalDashboardComponent": "NaturalEnvironmentNationalDashboard",
-        "prefectureDashboardComponent": "NaturalEnvironmentPrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "weather-climate",
         "name": "気象・気候",
         "href": "/weather-climate",
-        "dashboardComponent": "WeatherClimateNationalDashboard",
-        "nationalDashboardComponent": "WeatherClimateNationalDashboard",
-        "prefectureDashboardComponent": "WeatherClimatePrefectureDashboard",
         "displayOrder": 4
       }
     ]
@@ -53,54 +41,36 @@
         "id": "basic-population",
         "name": "総人口",
         "href": "/basic-population",
-        "dashboardComponent": "BasicPopulationNationalDashboard",
-        "nationalDashboardComponent": "BasicPopulationNationalDashboard",
-        "prefectureDashboardComponent": "BasicPopulationPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "population-movement",
         "name": "人口移動",
         "href": "/population-movement",
-        "dashboardComponent": "PopulationMovementNationalDashboard",
-        "nationalDashboardComponent": "PopulationMovementNationalDashboard",
-        "prefectureDashboardComponent": "PopulationMovementPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "population-composition",
         "name": "人口構成",
         "href": "/population-composition",
-        "dashboardComponent": "PopulationCompositionNationalDashboard",
-        "nationalDashboardComponent": "PopulationCompositionNationalDashboard",
-        "prefectureDashboardComponent": "PopulationCompositionPrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "marriage",
         "name": "婚姻・家族",
         "href": "/marriage",
-        "dashboardComponent": "MarriageNationalDashboard",
-        "nationalDashboardComponent": "MarriageNationalDashboard",
-        "prefectureDashboardComponent": "MarriagePrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "households",
         "name": "世帯",
         "href": "/households",
-        "dashboardComponent": "HouseholdsNationalDashboard",
-        "nationalDashboardComponent": "HouseholdsNationalDashboard",
-        "prefectureDashboardComponent": "HouseholdsPrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "birth-death",
         "name": "出生・死亡",
         "href": "/birth-death",
-        "dashboardComponent": "BirthDeathNationalDashboard",
-        "nationalDashboardComponent": "BirthDeathNationalDashboard",
-        "prefectureDashboardComponent": "BirthDeathPrefectureDashboard",
         "displayOrder": 6
       }
     ]
@@ -115,72 +85,48 @@
         "id": "wages-working-conditions",
         "name": "賃金・労働条件",
         "href": "/wages-working-conditions",
-        "dashboardComponent": "WagesWorkingConditionsNationalDashboard",
-        "nationalDashboardComponent": "WagesWorkingConditionsNationalDashboard",
-        "prefectureDashboardComponent": "WagesWorkingConditionsPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "labor-force-structure",
         "name": "労働力構造",
         "href": "/labor-force-structure",
-        "dashboardComponent": "LaborForceStructureNationalDashboard",
-        "nationalDashboardComponent": "LaborForceStructureNationalDashboard",
-        "prefectureDashboardComponent": "LaborForceStructurePrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "industrial-structure",
         "name": "産業構造",
         "href": "/industrial-structure",
-        "dashboardComponent": "IndustrialStructureNationalDashboard",
-        "nationalDashboardComponent": "IndustrialStructureNationalDashboard",
-        "prefectureDashboardComponent": "IndustrialStructurePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "commuting-employment",
         "name": "通勤・就職",
         "href": "/commuting-employment",
-        "dashboardComponent": "CommutingEmploymentNationalDashboard",
-        "nationalDashboardComponent": "CommutingEmploymentNationalDashboard",
-        "prefectureDashboardComponent": "CommutingEmploymentPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "labor-disputes",
         "name": "労働争議",
         "href": "/labor-disputes",
-        "dashboardComponent": "LaborDisputesNationalDashboard",
-        "nationalDashboardComponent": "LaborDisputesNationalDashboard",
-        "prefectureDashboardComponent": "LaborDisputesPrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "job-seeking-placement",
         "name": "求職・求人",
         "href": "/job-seeking-placement",
-        "dashboardComponent": "JobSeekingPlacementNationalDashboard",
-        "nationalDashboardComponent": "JobSeekingPlacementNationalDashboard",
-        "prefectureDashboardComponent": "JobSeekingPlacementPrefectureDashboard",
         "displayOrder": 6
       },
       {
         "id": "industry-occupation",
         "name": "産業・職業別",
         "href": "/industry-occupation",
-        "dashboardComponent": "IndustryOccupationNationalDashboard",
-        "nationalDashboardComponent": "IndustryOccupationNationalDashboard",
-        "prefectureDashboardComponent": "IndustryOccupationPrefectureDashboard",
         "displayOrder": 7
       },
       {
         "id": "employment-type",
         "name": "雇用形態",
         "href": "/employment-type",
-        "dashboardComponent": "EmploymentTypeNationalDashboard",
-        "nationalDashboardComponent": "EmploymentTypeNationalDashboard",
-        "prefectureDashboardComponent": "EmploymentTypePrefectureDashboard",
         "displayOrder": 8
       }
     ]
@@ -195,9 +141,6 @@
         "id": "agricultural-household",
         "name": "農業世帯",
         "href": "/agricultural-household",
-        "dashboardComponent": "AgriculturalHouseholdNationalDashboard",
-        "nationalDashboardComponent": "AgriculturalHouseholdNationalDashboard",
-        "prefectureDashboardComponent": "AgriculturalHouseholdPrefectureDashboard",
         "displayOrder": 1
       }
     ]
@@ -212,9 +155,6 @@
         "id": "manufacturing",
         "name": "製造業",
         "href": "/manufacturing",
-        "dashboardComponent": "ManufacturingNationalDashboard",
-        "nationalDashboardComponent": "ManufacturingNationalDashboard",
-        "prefectureDashboardComponent": "ManufacturingPrefectureDashboard",
         "displayOrder": 1
       }
     ]
@@ -229,18 +169,12 @@
         "id": "commerce-service-industry",
         "name": "商業・サービス産業",
         "href": "/commerce-service-industry",
-        "dashboardComponent": "CommerceServiceIndustryNationalDashboard",
-        "nationalDashboardComponent": "CommerceServiceIndustryNationalDashboard",
-        "prefectureDashboardComponent": "CommerceServiceIndustryPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "commercial-facilities",
         "name": "商業施設",
         "href": "/commercial-facilities",
-        "dashboardComponent": "CommercialFacilitiesNationalDashboard",
-        "nationalDashboardComponent": "CommercialFacilitiesNationalDashboard",
-        "prefectureDashboardComponent": "CommercialFacilitiesPrefectureDashboard",
         "displayOrder": 2
       }
     ]
@@ -255,54 +189,36 @@
         "id": "worker-household-income",
         "name": "労働者世帯収入",
         "href": "/worker-household-income",
-        "dashboardComponent": "WorkerHouseholdIncomeNationalDashboard",
-        "nationalDashboardComponent": "WorkerHouseholdIncomeNationalDashboard",
-        "prefectureDashboardComponent": "WorkerHouseholdIncomePrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "household-economy",
         "name": "家計",
         "href": "/household-economy",
-        "dashboardComponent": "HouseholdEconomyNationalDashboard",
-        "nationalDashboardComponent": "HouseholdEconomyNationalDashboard",
-        "prefectureDashboardComponent": "HouseholdEconomyPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "business-scale",
         "name": "企業規模",
         "href": "/business-scale",
-        "dashboardComponent": "BusinessScaleNationalDashboard",
-        "nationalDashboardComponent": "BusinessScaleNationalDashboard",
-        "prefectureDashboardComponent": "BusinessScalePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "business-activity",
         "name": "企業活動",
         "href": "/business-activity",
-        "dashboardComponent": "BusinessActivityNationalDashboard",
-        "nationalDashboardComponent": "BusinessActivityNationalDashboard",
-        "prefectureDashboardComponent": "BusinessActivityPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "gross-product-economic-indicators",
         "name": "総生産・経済指標",
         "href": "/gross-product-economic-indicators",
-        "dashboardComponent": "GrossProductEconomicIndicatorsNationalDashboard",
-        "nationalDashboardComponent": "GrossProductEconomicIndicatorsNationalDashboard",
-        "prefectureDashboardComponent": "GrossProductEconomicIndicatorsPrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "consumer-price-difference-index",
         "name": "消費者物価地域差指数",
         "href": "/consumer-price-difference-index",
-        "dashboardComponent": "ConsumerPriceDifferenceIndexNationalDashboard",
-        "nationalDashboardComponent": "ConsumerPriceDifferenceIndexNationalDashboard",
-        "prefectureDashboardComponent": "ConsumerPriceDifferenceIndexPrefectureDashboard",
         "displayOrder": 6
       }
     ]
@@ -317,63 +233,42 @@
         "id": "living-environment",
         "name": "生活環境",
         "href": "/living-environment",
-        "dashboardComponent": "LivingEnvironmentNationalDashboard",
-        "nationalDashboardComponent": "LivingEnvironmentNationalDashboard",
-        "prefectureDashboardComponent": "LivingEnvironmentPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "housing-ownership",
         "name": "住宅所有",
         "href": "/housing-ownership",
-        "dashboardComponent": "HousingOwnershipNationalDashboard",
-        "nationalDashboardComponent": "HousingOwnershipNationalDashboard",
-        "prefectureDashboardComponent": "HousingOwnershipPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "housing-structure",
         "name": "住宅構造",
         "href": "/housing-structure",
-        "dashboardComponent": "HousingStructureNationalDashboard",
-        "nationalDashboardComponent": "HousingStructureNationalDashboard",
-        "prefectureDashboardComponent": "HousingStructurePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "housing-facilities",
         "name": "住宅設備",
         "href": "/housing-facilities",
-        "dashboardComponent": "HousingFacilitiesNationalDashboard",
-        "nationalDashboardComponent": "HousingFacilitiesNationalDashboard",
-        "prefectureDashboardComponent": "HousingFacilitiesPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "construction-manufacturing",
         "name": "建設・製造",
         "href": "/construction-manufacturing",
-        "dashboardComponent": "ConstructionManufacturingNationalDashboard",
-        "nationalDashboardComponent": "ConstructionManufacturingNationalDashboard",
-        "prefectureDashboardComponent": "ConstructionManufacturingPrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "welfare-facilities",
         "name": "福祉施設",
         "href": "/welfare-facilities",
-        "dashboardComponent": "WelfareFacilitiesNationalDashboard",
-        "nationalDashboardComponent": "WelfareFacilitiesNationalDashboard",
-        "prefectureDashboardComponent": "WelfareFacilitiesPrefectureDashboard",
         "displayOrder": 6
       },
       {
         "id": "housing-statistics",
         "name": "住宅統計",
         "href": "/housing-statistics",
-        "dashboardComponent": "HousingStatisticsNationalDashboard",
-        "nationalDashboardComponent": "HousingStatisticsNationalDashboard",
-        "prefectureDashboardComponent": "HousingStatisticsPrefectureDashboard",
         "displayOrder": 7
       }
     ]
@@ -388,36 +283,24 @@
         "id": "water-supply-sewerage",
         "name": "上水道・下水道",
         "href": "/water-supply-sewerage",
-        "dashboardComponent": "WaterSupplySewerageNationalDashboard",
-        "nationalDashboardComponent": "WaterSupplySewerageNationalDashboard",
-        "prefectureDashboardComponent": "WaterSupplySeweragePrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "waste-management",
         "name": "廃棄物処理",
         "href": "/waste-management",
-        "dashboardComponent": "WasteManagementNationalDashboard",
-        "nationalDashboardComponent": "WasteManagementNationalDashboard",
-        "prefectureDashboardComponent": "WasteManagementPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "industrial-water",
         "name": "工業用水",
         "href": "/industrial-water",
-        "dashboardComponent": "IndustrialWaterNationalDashboard",
-        "nationalDashboardComponent": "IndustrialWaterNationalDashboard",
-        "prefectureDashboardComponent": "IndustrialWaterPrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "infrastructure-energy",
         "name": "インフラ・エネルギー",
         "href": "/infrastructure-energy",
-        "dashboardComponent": "InfrastructureEnergyNationalDashboard",
-        "nationalDashboardComponent": "InfrastructureEnergyNationalDashboard",
-        "prefectureDashboardComponent": "InfrastructureEnergyPrefectureDashboard",
         "displayOrder": 4
       }
     ]
@@ -432,9 +315,6 @@
         "id": "tourism-accommodation",
         "name": "観光・宿泊",
         "href": "/tourism-accommodation",
-        "dashboardComponent": "TourismAccommodationNationalDashboard",
-        "nationalDashboardComponent": "TourismAccommodationNationalDashboard",
-        "prefectureDashboardComponent": "TourismAccommodationPrefectureDashboard",
         "displayOrder": 1
       }
     ]
@@ -449,90 +329,60 @@
         "id": "kindergarten",
         "name": "幼稚園",
         "href": "/kindergarten",
-        "dashboardComponent": "KindergartenNationalDashboard",
-        "nationalDashboardComponent": "KindergartenNationalDashboard",
-        "prefectureDashboardComponent": "KindergartenPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "elementary-school",
         "name": "小学校",
         "href": "/elementary-school",
-        "dashboardComponent": "ElementarySchoolNationalDashboard",
-        "nationalDashboardComponent": "ElementarySchoolNationalDashboard",
-        "prefectureDashboardComponent": "ElementarySchoolPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "junior-high-school",
         "name": "中学校",
         "href": "/junior-high-school",
-        "dashboardComponent": "JuniorHighSchoolNationalDashboard",
-        "nationalDashboardComponent": "JuniorHighSchoolNationalDashboard",
-        "prefectureDashboardComponent": "JuniorHighSchoolPrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "high-school",
         "name": "高等学校",
         "href": "/high-school",
-        "dashboardComponent": "HighSchoolNationalDashboard",
-        "nationalDashboardComponent": "HighSchoolNationalDashboard",
-        "prefectureDashboardComponent": "HighSchoolPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "college-university",
         "name": "短大・大学",
         "href": "/college-university",
-        "dashboardComponent": "CollegeUniversityNationalDashboard",
-        "nationalDashboardComponent": "CollegeUniversityNationalDashboard",
-        "prefectureDashboardComponent": "CollegeUniversityPrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "cultural-facilities",
         "name": "文化施設",
         "href": "/cultural-facilities",
-        "dashboardComponent": "CulturalFacilitiesNationalDashboard",
-        "nationalDashboardComponent": "CulturalFacilitiesNationalDashboard",
-        "prefectureDashboardComponent": "CulturalFacilitiesPrefectureDashboard",
         "displayOrder": 6
       },
       {
         "id": "sports-facilities",
         "name": "スポーツ施設",
         "href": "/sports-facilities",
-        "dashboardComponent": "SportsFacilitiesNationalDashboard",
-        "nationalDashboardComponent": "SportsFacilitiesNationalDashboard",
-        "prefectureDashboardComponent": "SportsFacilitiesPrefectureDashboard",
         "displayOrder": 7
       },
       {
         "id": "social-activities",
         "name": "社会活動",
         "href": "/social-activities",
-        "dashboardComponent": "SocialActivitiesNationalDashboard",
-        "nationalDashboardComponent": "SocialActivitiesNationalDashboard",
-        "prefectureDashboardComponent": "SocialActivitiesPrefectureDashboard",
         "displayOrder": 8
       },
       {
         "id": "childcare-early-education",
         "name": "保育・幼児教育",
         "href": "/childcare-early-education",
-        "dashboardComponent": "ChildcareEarlyEducationNationalDashboard",
-        "nationalDashboardComponent": "ChildcareEarlyEducationNationalDashboard",
-        "prefectureDashboardComponent": "ChildcareEarlyEducationPrefectureDashboard",
         "displayOrder": 9
       },
       {
         "id": "compulsory-education",
         "name": "義務教育",
         "href": "/compulsory-education",
-        "dashboardComponent": "CompulsoryEducationNationalDashboard",
-        "nationalDashboardComponent": "CompulsoryEducationNationalDashboard",
-        "prefectureDashboardComponent": "CompulsoryEducationPrefectureDashboard",
         "displayOrder": 10
       }
     ]
@@ -547,54 +397,36 @@
         "id": "fiscal-indicators",
         "name": "財政指標",
         "href": "/fiscal-indicators",
-        "dashboardComponent": "FiscalIndicatorsNationalDashboard",
-        "nationalDashboardComponent": "FiscalIndicatorsNationalDashboard",
-        "prefectureDashboardComponent": "FiscalIndicatorsPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "staff-assembly-election",
         "name": "職員・議会・選挙",
         "href": "/staff-assembly-election",
-        "dashboardComponent": "StaffAssemblyElectionNationalDashboard",
-        "nationalDashboardComponent": "StaffAssemblyElectionNationalDashboard",
-        "prefectureDashboardComponent": "StaffAssemblyElectionPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "tax-revenue",
         "name": "税収",
         "href": "/tax-revenue",
-        "dashboardComponent": "TaxRevenueNationalDashboard",
-        "nationalDashboardComponent": "TaxRevenueNationalDashboard",
-        "prefectureDashboardComponent": "TaxRevenuePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "investment",
         "name": "投資",
         "href": "/investment",
-        "dashboardComponent": "InvestmentNationalDashboard",
-        "nationalDashboardComponent": "InvestmentNationalDashboard",
-        "prefectureDashboardComponent": "InvestmentPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "revenue",
         "name": "歳入",
         "href": "/revenue",
-        "dashboardComponent": "RevenueNationalDashboard",
-        "nationalDashboardComponent": "RevenueNationalDashboard",
-        "prefectureDashboardComponent": "RevenuePrefectureDashboard",
         "displayOrder": 5
       },
       {
         "id": "expenditure",
         "name": "歳出",
         "href": "/expenditure",
-        "dashboardComponent": "ExpenditureNationalDashboard",
-        "nationalDashboardComponent": "ExpenditureNationalDashboard",
-        "prefectureDashboardComponent": "ExpenditurePrefectureDashboard",
         "displayOrder": 6
       }
     ]
@@ -609,45 +441,30 @@
         "id": "fire-emergency",
         "name": "消防・緊急事態",
         "href": "/fire-emergency",
-        "dashboardComponent": "FireEmergencyNationalDashboard",
-        "nationalDashboardComponent": "FireEmergencyNationalDashboard",
-        "prefectureDashboardComponent": "FireEmergencyPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "fire-insurance",
         "name": "火災保険",
         "href": "/fire-insurance",
-        "dashboardComponent": "FireInsuranceNationalDashboard",
-        "nationalDashboardComponent": "FireInsuranceNationalDashboard",
-        "prefectureDashboardComponent": "FireInsurancePrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "police-crime",
         "name": "警察・犯罪",
         "href": "/police-crime",
-        "dashboardComponent": "PoliceCrimeNationalDashboard",
-        "nationalDashboardComponent": "PoliceCrimeNationalDashboard",
-        "prefectureDashboardComponent": "PoliceCrimePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "traffic-accidents",
         "name": "交通事故",
         "href": "/traffic-accidents",
-        "dashboardComponent": "TrafficAccidentsNationalDashboard",
-        "nationalDashboardComponent": "TrafficAccidentsNationalDashboard",
-        "prefectureDashboardComponent": "TrafficAccidentsPrefectureDashboard",
         "displayOrder": 4
       },
       {
         "id": "pollution-environment",
         "name": "公害・環境",
         "href": "/pollution-environment",
-        "dashboardComponent": "PollutionEnvironmentNationalDashboard",
-        "nationalDashboardComponent": "PollutionEnvironmentNationalDashboard",
-        "prefectureDashboardComponent": "PollutionEnvironmentPrefectureDashboard",
         "displayOrder": 5
       }
     ]
@@ -662,36 +479,24 @@
         "id": "card",
         "name": "社会保障指標",
         "href": "/card",
-        "dashboardComponent": "SocialSecurityCardNationalDashboard",
-        "nationalDashboardComponent": "SocialSecurityCardNationalDashboard",
-        "prefectureDashboardComponent": "SocialSecurityCardPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "death-statistics",
         "name": "死亡統計",
         "href": "/death-statistics",
-        "dashboardComponent": "DeathStatisticsNationalDashboard",
-        "nationalDashboardComponent": "DeathStatisticsNationalDashboard",
-        "prefectureDashboardComponent": "DeathStatisticsPrefectureDashboard",
         "displayOrder": 2
       },
       {
         "id": "public-assistance-welfare",
         "name": "生活保護・福祉",
         "href": "/public-assistance-welfare",
-        "dashboardComponent": "PublicAssistanceWelfareNationalDashboard",
-        "nationalDashboardComponent": "PublicAssistanceWelfareNationalDashboard",
-        "prefectureDashboardComponent": "PublicAssistanceWelfarePrefectureDashboard",
         "displayOrder": 3
       },
       {
         "id": "health-care",
         "name": "健康・保健",
         "href": "/health-care",
-        "dashboardComponent": "HealthCareNationalDashboard",
-        "nationalDashboardComponent": "HealthCareNationalDashboard",
-        "prefectureDashboardComponent": "HealthCarePrefectureDashboard",
         "displayOrder": 4
       }
     ]
@@ -706,18 +511,12 @@
         "id": "foreign-population",
         "name": "外国人人口",
         "href": "/foreign-population",
-        "dashboardComponent": "ForeignPopulationNationalDashboard",
-        "nationalDashboardComponent": "ForeignPopulationNationalDashboard",
-        "prefectureDashboardComponent": "ForeignPopulationPrefectureDashboard",
         "displayOrder": 1
       },
       {
         "id": "foreigners",
         "name": "外国人統計",
         "href": "/foreigners",
-        "dashboardComponent": "ForeignersNationalDashboard",
-        "nationalDashboardComponent": "ForeignersNationalDashboard",
-        "prefectureDashboardComponent": "ForeignersPrefectureDashboard",
         "displayOrder": 2
       }
     ]
@@ -732,9 +531,6 @@
         "id": "roads",
         "name": "道路",
         "href": "/roads",
-        "dashboardComponent": "RoadsNationalDashboard",
-        "nationalDashboardComponent": "RoadsNationalDashboard",
-        "prefectureDashboardComponent": "RoadsPrefectureDashboard",
         "displayOrder": 1
       }
     ]

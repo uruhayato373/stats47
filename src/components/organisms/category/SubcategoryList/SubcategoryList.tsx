@@ -4,10 +4,9 @@
  * サブカテゴリの一覧表示とリンク機能を提供
  */
 
-import React from "react";
-import Link from "next/link";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
-import { getCategoryColorClasses } from "@/lib/category/color-mapping";
+import Link from "next/link";
+import React from "react";
 
 interface SubcategoryItem {
   id: string;
@@ -29,7 +28,6 @@ export const SubcategoryList: React.FC<SubcategoryListProps> = ({
   subcategories,
   category,
 }) => {
-  const colorClasses = getCategoryColorClasses(category.color);
 
   if (!subcategories || subcategories.length === 0) {
     return (
@@ -57,12 +55,10 @@ export const SubcategoryList: React.FC<SubcategoryListProps> = ({
             className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-primary/30 transition-colors dark:bg-neutral-800 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:border-primary/50"
           >
             <div className="flex items-center gap-3">
-              <div
-                className={`w-10 h-10 rounded-full ${colorClasses.bg} ${colorClasses.bgDark} flex items-center justify-center`}
-              >
+              <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                 <CategoryIcon
                   iconName={category.icon}
-                  className={`w-5 h-5 ${colorClasses.text} ${colorClasses.textDark}`}
+                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
                 />
               </div>
               <div>

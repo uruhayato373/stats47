@@ -6,19 +6,20 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
-import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
-import Link from "next/link";
+import { getSidebarNavigationItems } from "@/lib/navigation/sidebar-config";
+import { getSidebarCategories } from "@/lib/taxonomy/category";
+import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
- * 通常ページ用サイドバー
+ * 通常ページ用サイドバー（サーバーコンポーネント）
  * ホーム、統計カテゴリーを表示
  */
 export function AppSidebar() {
-  const { navigationItems, categories, isActiveLink } = useSidebarNavigation();
+  const categories = getSidebarCategories();
+  const navigationItems = getSidebarNavigationItems();
 
   return (
     <Sidebar collapsible="none">      
@@ -30,12 +31,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {navigationItems.home.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={isActiveLink(item.href)}>
-                    <Link href={item.href}>
-                      <item.icon className="size-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  <ActiveSidebarMenuButton href={item.href}>
+                    <item.icon className="size-4" />
+                    <span>{item.label}</span>
+                  </ActiveSidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -51,12 +50,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {categories.map((category) => (
                 <SidebarMenuItem key={category.id}>
-                  <SidebarMenuButton asChild isActive={isActiveLink(category.href)}>
-                    <Link href={category.href}>
-                      <CategoryIcon iconName={category.icon} className="size-4" />
-                      <span>{category.name}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  <ActiveSidebarMenuButton href={category.href}>
+                    <CategoryIcon iconName={category.icon} className="size-4" />
+                    <span>{category.name}</span>
+                  </ActiveSidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

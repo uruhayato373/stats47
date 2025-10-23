@@ -1,25 +1,23 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarHeader,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
   SidebarSeparator,
 } from "@/components/atoms/ui/sidebar";
-import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
-import Link from "next/link";
-import { Settings, Database, FileText } from "lucide-react";
+import { getSidebarNavigationItems } from "@/lib/navigation/sidebar-config";
+import { Database, FileText, Settings } from "lucide-react";
+import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
- * 管理画面用サイドバー
+ * 管理画面用サイドバー（サーバーコンポーネント）
  * e-STAT API、開発ツール、設定を表示
  */
 export function AdminSidebar() {
-  const { navigationItems, isActiveLink } = useSidebarNavigation();
+  const navigationItems = getSidebarNavigationItems();
 
   return (
     <Sidebar collapsible="none">      
@@ -30,12 +28,10 @@ export function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveLink("/admin")}>
-                  <Link href="/admin">
-                    <Settings className="size-4" />
-                    <span>概要</span>
-                  </Link>
-                </SidebarMenuButton>
+                <ActiveSidebarMenuButton href="/admin">
+                  <Settings className="size-4" />
+                  <span>概要</span>
+                </ActiveSidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
@@ -50,12 +46,10 @@ export function AdminSidebar() {
             <SidebarMenu>
               {navigationItems.estat.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={isActiveLink(item.href)}>
-                    <Link href={item.href}>
-                      <item.icon className="size-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  <ActiveSidebarMenuButton href={item.href}>
+                    <item.icon className="size-4" />
+                    <span>{item.label}</span>
+                  </ActiveSidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -70,20 +64,16 @@ export function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveLink("/admin/database")}>
-                  <Link href="/admin/database">
-                    <Database className="size-4" />
-                    <span>データベース</span>
-                  </Link>
-                </SidebarMenuButton>
+                <ActiveSidebarMenuButton href="/admin/database">
+                  <Database className="size-4" />
+                  <span>データベース</span>
+                </ActiveSidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveLink("/admin/logs")}>
-                  <Link href="/admin/logs">
-                    <FileText className="size-4" />
-                    <span>ログ</span>
-                  </Link>
-                </SidebarMenuButton>
+                <ActiveSidebarMenuButton href="/admin/logs">
+                  <FileText className="size-4" />
+                  <span>ログ</span>
+                </ActiveSidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

@@ -26,7 +26,6 @@ export interface Subcategory {
   name: string;
   href?: string;
   displayOrder?: number;
-  dashboardComponent?: string;
 }
 
 /**
@@ -82,7 +81,6 @@ export interface CategoryJsonItem {
     id: string;
     name: string;
     href?: string;
-    dashboardComponent?: string;
     displayOrder?: number;
   }>;
 }
@@ -103,4 +101,41 @@ export interface CategoryStats {
   totalSubcategories: number;
   categoriesWithSubcategories: number;
   categoriesWithoutSubcategories: number;
+}
+
+/**
+ * サイドバー用カテゴリアイテム
+ */
+export interface SidebarCategoryItem {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
+  href: string;
+  subcategories?: Array<{
+    id: string;
+    name: string;
+    href: string;
+  }>;
+}
+
+/**
+ * 正規化されたカテゴリデータ
+ */
+export interface NormalizedCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  displayOrder: number;
+  subcategories: Subcategory[];
+}
+
+/**
+ * サブカテゴリバリデーション結果
+ */
+export interface SubcategoryValidationResult {
+  isValid: boolean;
+  errors: string[];
 }

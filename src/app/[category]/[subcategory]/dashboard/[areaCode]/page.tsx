@@ -1,5 +1,4 @@
-import React from "react";
-import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
+import { validateSubcategoryOrThrow } from "@/lib/taxonomy/category";
 
 /**
  * ダッシュボードページのProps型定義

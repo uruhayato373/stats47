@@ -1,8 +1,7 @@
-import React from "react";
-import { redirect } from "next/navigation";
-import { RankingService } from "@/lib/ranking/ranking-service";
-import { validateSubcategoryOrThrow } from "@/lib/category/subcategory-validator";
 import { SubcategoryRankingPage } from "@/components/templates/SubcategoryRankingPage";
+import { RankingService } from "@/lib/ranking/ranking-service";
+import { validateSubcategoryOrThrow } from "@/lib/taxonomy/category";
+import { redirect } from "next/navigation";
 
 /**
  * ランキングページのProps型定義

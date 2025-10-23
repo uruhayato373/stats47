@@ -1,13 +1,34 @@
----
-title: カテゴリ管理ドメイン
-created: 2025-10-16
-updated: 2025-10-16
-tags:
-  - domain/category
-  - README.md
----
-
 # カテゴリ管理ドメイン
+
+> ⚠️ **非推奨**: このドキュメントは非推奨です。新しい実装では [Taxonomy ドメイン](../../Taxonomy/README.md) をご利用ください。
+
+## 移行情報
+
+**新しいパス**: `@/lib/taxonomy/category`  
+**旧パス**: `@/lib/category` (削除済み)
+
+### 移行手順
+
+1. **インポートの更新**
+
+   ```typescript
+   // 変更前
+   import { CategoryService } from "@/lib/category";
+
+   // 変更後
+   import { CategoryService } from "@/lib/taxonomy/category";
+   ```
+
+2. **削除された機能**
+
+   - `color-mapping.ts` - カラーマッピング機能は削除されました
+   - `navigation.ts` - 機能は`CategoryService`に統合されました
+   - `server-navigation.ts` - 機能は`CategoryService`に統合されました
+
+3. **新しいドキュメント**
+   - [Taxonomy ドメイン開発ガイド](../../Taxonomy/README.md)
+   - [Category 実装ガイド](../../Taxonomy/Category実装ガイド.md)
+   - [Category API リファレンス](../../Taxonomy/CategoryAPIリファレンス.md)
 
 ## 概要
 
@@ -37,7 +58,7 @@ tags:
 ### 1. 基本的な使用
 
 ```typescript
-import { CategoryService } from "@/lib/category";
+import { CategoryService } from "@/lib/taxonomy/category";
 
 // 全カテゴリを取得
 const categories = CategoryService.getAllCategories();
@@ -53,7 +74,7 @@ const result = CategoryService.getSubcategoryById("programming");
 
 ```typescript
 // カテゴリ名で検索
-const searchResults = CategoryService.getAllCategories({
+const searchResults = CategoryService.searchCategories({
   query: "テクノロジー",
   includeSubcategories: true,
 });
@@ -69,13 +90,13 @@ const filtered = CategoryService.getAllCategories({
 ### 3. ナビゲーション機能
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getSidebarCategories } from "@/lib/taxonomy/category";
 
 // サイドバー用のカテゴリデータを取得
-const categories = getCategoriesForSidebar();
+const categories = getSidebarCategories();
 
 // ナビゲーション表示用のカテゴリ一覧を取得
-const navigationCategories = getNavigationCategories();
+const navigationCategories = CategoryService.getNavigationCategories();
 ```
 
 ### 4. バリデーション
@@ -143,8 +164,8 @@ UI Components
 ## データソース
 
 - **設定ファイル**: `src/config/categories.json`
-- **型定義**: `src/lib/category/types/`
-- **サービス**: `src/lib/category/category-service.ts`
+- **型定義**: `src/lib/taxonomy/category/types/`
+- **サービス**: `src/lib/taxonomy/category/service/category.ts`
 
 ## 関連ドメイン
 
@@ -166,11 +187,18 @@ UI Components
 
 ## テスト
 
-- 単体テスト: `src/lib/category/__tests__/`
+- 単体テスト: `src/lib/taxonomy/category/__tests__/`
 - テストカバレッジ: 90%以上
 - モックデータによるテスト
 
 ## 更新履歴
+
+### v2.0.0 (2025-10-23)
+
+- **BREAKING CHANGE**: `src/lib/category`から`src/lib/taxonomy/category`に移行
+- **BREAKING CHANGE**: カラーマッピング機能を削除
+- **改善**: 全機能を`CategoryService`に統合
+- **改善**: より明確な DDD 的な構造に再編
 
 ### v1.0.0 (2024-01-XX)
 
@@ -182,9 +210,10 @@ UI Components
 
 ## サポート
 
-- ドキュメント: このディレクトリ内の各ファイル
-- 実装例: `implementation/examples.md`
-- トラブルシューティング: `implementation/best-practices.md`
+- ドキュメント: [Taxonomy ドメイン開発ガイド](../../Taxonomy/README.md)
+- 実装例: [Category 実装ガイド](../../Taxonomy/Category実装ガイド.md)
+- API 仕様: [Category API リファレンス](../../Taxonomy/CategoryAPIリファレンス.md)
+- トラブルシューティング: [Category 実装ガイド](../../Taxonomy/Category実装ガイド.md)
 
 ## ライセンス
 

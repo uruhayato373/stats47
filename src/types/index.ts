@@ -11,7 +11,7 @@
  * ドメイン固有の型は各ドメインディレクトリから直接インポートしてください：
  * - 地域型: @/lib/area/types
  * - 認証型: @/lib/auth/types
- * - カテゴリ型: @/lib/category/types
+ * - カテゴリ型: @/lib/taxonomy/category
  * - e-Stat API型: @/lib/estat-api/types
  * - ランキング型: @/lib/ranking/types
  * - データベース型: @/lib/database/estat/types
