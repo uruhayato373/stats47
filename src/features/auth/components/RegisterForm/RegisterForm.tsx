@@ -1,6 +1,6 @@
 "use client";
 
-import { PasswordInput } from "@/components/ui/password-input";
+import { PasswordInput } from "@/components/atoms/ui/password-input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

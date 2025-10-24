@@ -3,7 +3,8 @@
  */
 
 export const config = {
-  env: process.env.NEXT_PUBLIC_ENV || "development",
+  env: process.env.NODE_ENV || "development",
+  useMock: process.env.NEXT_PUBLIC_USE_MOCK === "true",
 
   estat: {
     baseUrl:

@@ -5,7 +5,7 @@ import {
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from "@/components/ui/item";
+} from "@/components/atoms/ui/item";
 import { validateSubcategoryOrThrow } from "@/lib/taxonomy/category";
 import { ChevronRightIcon, MapIcon, TrendingUpIcon } from "lucide-react";
 import { Metadata } from "next";

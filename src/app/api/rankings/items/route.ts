@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getDataProvider } from "@/lib/database";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/features/auth/lib/auth";
 
 export async function POST(request: NextRequest) {
   // 管理者認証チェック

@@ -4,6 +4,30 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { getDataProvider } from "@/lib/database";
 
+// TypeScript型定義の拡張
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      username?: string;
+      role: "admin" | "user";
+    };
+  }
+
+  interface User {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    username?: string;
+    role: "admin" | "user";
+  }
+}
+
+// NextAuth設定
 export const authConfig: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
   providers: [
@@ -117,4 +141,52 @@ export const authConfig: NextAuthConfig = {
   debug: process.env.NODE_ENV === "development",
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+// NextAuthインスタンスの作成とエクスポート
+export const { handlers, auth: nextAuthAuth, signIn: nextAuthSignIn, signOut: nextAuthSignOut } = NextAuth(authConfig);
+
+// Mock環境対応のauth関数（Server Components用）
+export const auth = async () => {
+  const isMockEnv = process.env.NEXT_PUBLIC_USE_MOCK === "true";
+
+  // Mock環境ではモックセッションを返す
+  if (isMockEnv && process.env.NODE_ENV !== "production") {
+    return {
+      user: {
+        id: "mock-admin",
+        name: "モック管理者",
+        email: "admin@example.com",
+        username: "admin",
+        role: "admin" as const,
+      },
+    };
+  }
+
+  // API環境・本番環境では通常の認証処理
+  return await nextAuthAuth();
+};
+
+// Mock環境でも動作するsignIn/signOut
+export const signIn = async (...args: Parameters<typeof nextAuthSignIn>) => {
+  const isMockEnv = process.env.NEXT_PUBLIC_USE_MOCK === "true";
+
+  if (isMockEnv && process.env.NODE_ENV !== "production") {
+    // Mock環境では何もしない
+    return;
+  }
+
+  return await nextAuthSignIn(...args);
+};
+
+export const signOut = async (...args: Parameters<typeof nextAuthSignOut>) => {
+  const isMockEnv = process.env.NEXT_PUBLIC_USE_MOCK === "true";
+
+  if (isMockEnv && process.env.NODE_ENV !== "production") {
+    // Mock環境では何もしない
+    return;
+  }
+
+  return await nextAuthSignOut(...args);
+};
+
+// ミドルウェア用のauth（NextAuthネイティブの関数を使用）
+export const authMiddleware = nextAuthAuth;

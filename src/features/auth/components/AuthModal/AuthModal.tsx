@@ -1,20 +1,20 @@
 "use client";
 
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/atoms/ui/dialog";
+import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/molecules/ui/tabs";
-import { LoginForm } from "@/components/organisms/auth/LoginForm";
-import { RegisterForm } from "@/components/organisms/auth/RegisterForm";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { useState } from "react";
+import { LoginForm } from "../LoginForm";
+import { RegisterForm } from "../RegisterForm";
 
 interface AuthModalProps {
   isOpen: boolean;

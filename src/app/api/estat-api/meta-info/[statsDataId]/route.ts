@@ -1,7 +1,7 @@
 import { getEnvironmentConfig } from "@/lib/env";
 import { estatAPI } from "@/lib/estat-api";
 import { NextRequest, NextResponse } from "next/server";
-import { getMockMetaInfo } from "../../../../../../data/mock/metainfo";
+import { getMockMetaInfo } from "@data/mock/metainfo";
 
 /**
  * e-Statメタ情報取得APIエンドポイント

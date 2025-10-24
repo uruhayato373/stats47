@@ -62,56 +62,56 @@ NODE_ENV=<node_environment>
 #### 開発環境 (.env.development)
 
 ```bash
-NEXT_PUBLIC_ENV=development
 NODE_ENV=development
-NEXTAUTH_SECRET=dFIWzT92Oi8MA+m55uQJ3mw9HfNUT94BK1nZBELtdFc=
-NEXTAUTH_URL=http://localhost:3000
-```
+AUTH_SECRET=dFIWzT92Oi8MA+m55uQJ3mw9HfNUT94BK1nZBELtdFc=
+AUTH_URL=http://localhost:3000
 
-#### モック環境 (.env.mock)
-
-```bash
-NEXT_PUBLIC_ENV=mock
-NODE_ENV=development
-NEXTAUTH_SECRET=WrxL+lg9EDhLvj8/niWds3TY93DnpCLUfadL3IFcvz0=
-NEXTAUTH_URL=http://localhost:3000
+# 注意: NEXT_PUBLIC_USE_MOCKはpackage.jsonのスクリプトで指定
+# dev:mock → NEXT_PUBLIC_USE_MOCK=true
+# dev:api → NEXT_PUBLIC_USE_MOCK=false
 ```
 
 #### ステージング環境 (.env.staging)
 
 ```bash
-NEXT_PUBLIC_ENV=staging
 NODE_ENV=production
-NEXTAUTH_SECRET=Bfyg2rBcdObHoPpfDzBggskEgqZPhzw+t/Y5aPgbDl4=
-NEXTAUTH_URL=https://staging.stats47.com
+AUTH_SECRET=Bfyg2rBcdObHoPpfDzBggskEgqZPhzw+t/Y5aPgbDl4=
+AUTH_URL=https://staging.stats47.com
 ```
 
 #### 本番環境 (.env.production)
 
 ```bash
-NEXT_PUBLIC_ENV=production
 NODE_ENV=production
-NEXTAUTH_SECRET=h4ne0nzXDRpivDKzQv1Eivi5xJ3ssOm0+BjUD1qCqJY=
-NEXTAUTH_URL=https://stats47.com
+AUTH_SECRET=h4ne0nzXDRpivDKzQv1Eivi5xJ3ssOm0+BjUD1qCqJY=
+AUTH_URL=https://stats47.com
 ```
 
-### 2.3 NEXTAUTH_SECRET の生成
+### 2.3 AUTH_SECRET の生成
 
-**方法1: Node.jsで生成（推奨）:**
+**方法 1: Node.js で生成（推奨）:**
+
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
-**方法2: OpenSSLで生成:**
+**方法 2: OpenSSL で生成:**
+
 ```bash
 openssl rand -base64 32
 ```
 
 **セキュリティ注意事項:**
+
 - 各環境で異なるシークレットを使用
-- シークレットは最低32文字
+- シークレットは最低 32 文字
 - 本番環境のシークレットは特に厳重に管理
 - `.env.*` ファイルは Git にコミットしない
+
+**NextAuth v5 (Auth.js) の変更点:**
+
+- 旧: `NEXTAUTH_SECRET` (NextAuth v4)
+- 新: `AUTH_SECRET` (NextAuth v5 / Auth.js)
 
 ## 3. SessionProvider の設定
 
@@ -205,21 +205,17 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: [
-    "/estat-api/:path*",
-    "/profile/:path*",
-    "/admin/:path*",
-  ],
+  matcher: ["/estat-api/:path*", "/profile/:path*", "/admin/:path*"],
 };
 ```
 
 ### 4.2 保護されたルート
 
-| パス | 認証 | ロール | 説明 |
-|------|------|--------|------|
-| `/profile` | 必須 | 任意 | ユーザープロフィール |
-| `/admin` | 必須 | admin | 管理画面 |
-| `/admin/dev-tools` | 必須 | admin | 開発ツール |
+| パス               | 認証 | ロール | 説明                 |
+| ------------------ | ---- | ------ | -------------------- |
+| `/profile`         | 必須 | 任意   | ユーザープロフィール |
+| `/admin`           | 必須 | admin  | 管理画面             |
+| `/admin/dev-tools` | 必須 | admin  | 開発ツール           |
 
 ## 5. 認証フローの説明
 
@@ -247,10 +243,11 @@ sequenceDiagram
 ### 5.2 セッション管理
 
 **JWT 戦略の特徴:**
+
 - セッション情報は JWT トークンに保存
 - データベースへの書き込みが不要（パフォーマンス向上）
 - ステートレス（Cloudflare Workers に最適）
-- トークンの有効期限: 30日間
+- トークンの有効期限: 30 日間
 
 ### 5.3 ログアウトフロー
 
@@ -305,13 +302,16 @@ env.production.example             # 本番環境設定例
 **症状:** ログインフォームでエラーが発生する
 
 **原因と解決方法:**
+
 1. **NEXTAUTH_SECRET が設定されていない**
+
    ```bash
    # 環境変数を確認
    echo $NEXTAUTH_SECRET
    ```
 
 2. **データベース接続エラー**
+
    ```bash
    # データベースの状態を確認
    npx wrangler d1 list
@@ -328,7 +328,9 @@ env.production.example             # 本番環境設定例
 **症状:** ページリロード後にログアウトされる
 
 **原因と解決方法:**
+
 1. **NEXTAUTH_URL が間違っている**
+
    ```bash
    # 正しいURLを設定
    NEXTAUTH_URL=http://localhost:3000
@@ -343,7 +345,9 @@ env.production.example             # 本番環境設定例
 **症状:** 管理者でログインしても `isAdmin` が `false`
 
 **原因と解決方法:**
+
 1. **データベースのロールが正しくない**
+
    ```bash
    # ユーザーのロールを確認
    npx wrangler d1 execute stats47 --local --command "SELECT username, role FROM users WHERE username='admin';"
@@ -377,6 +381,7 @@ console.log("Current session:", session);
 #### 問題: 認証チェックが遅い
 
 **解決方法:**
+
 1. **JWT 戦略を使用**（既に実装済み）
 2. **ミドルウェアでキャッシュ**を活用
 3. **不要な認証チェック**を削除
@@ -392,7 +397,7 @@ console.log("Current session:", session);
 ### 8.2 セッションセキュリティ
 
 - JWT トークンは暗号化されている
-- セッションの有効期限: 30日間
+- セッションの有効期限: 30 日間
 - ログアウト時にセッションを無効化
 
 ### 8.3 環境変数の管理
@@ -401,30 +406,34 @@ console.log("Current session:", session);
 - 開発環境でも本番と同じレベルのセキュリティを維持
 - 定期的なシークレットのローテーション
 
-## 9. Mock環境でのテスト
+## 9. Mock 環境でのテスト
 
 ### 9.1 テストアカウント
 
-mock環境では以下のテストアカウントが利用可能です：
+mock 環境では以下のテストアカウントが利用可能です：
 
 **管理者アカウント:**
+
 - Email: admin@stats47.local
 - Password: admin123
 - Role: admin
 
 **一般ユーザーアカウント:**
+
 - Email: user@stats47.local
 - Password: user123
 - Role: user
 
 ### 9.2 使用方法
 
-1. mock環境を起動:
+1. mock 環境を起動:
+
    ```bash
    npm run dev:mock
    ```
 
 2. ログインページにアクセス:
+
    ```
    http://localhost:3000/login
    ```
@@ -438,9 +447,9 @@ mock環境では以下のテストアカウントが利用可能です：
 
 ### 9.3 注意事項
 
-- mock環境のデータはJSON ファイルから読み込まれます
+- mock 環境のデータは JSON ファイルから読み込まれます
 - パスワード変更やユーザー追加などの操作は反映されません
-- デザイン検証とUIテストのみを目的としています
+- デザイン検証と UI テストのみを目的としています
 
 ## 10. 参考リソース
 
@@ -459,6 +468,6 @@ mock環境では以下のテストアカウントが利用可能です：
 
 ---
 
-**作成日**: 2025年1月20日  
-**最終更新日**: 2025年1月20日  
+**作成日**: 2025 年 1 月 20 日  
+**最終更新日**: 2025 年 1 月 20 日  
 **バージョン**: 1.0

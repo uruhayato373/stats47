@@ -1,7 +1,7 @@
-import { auth } from "@/lib/auth/auth";
 import { NextResponse } from "next/server";
+import { authMiddleware } from "@/features/auth/lib/auth";
 
-export default auth((req) => {
+export default authMiddleware((req: any) => {
   const { pathname } = req.nextUrl;
 
   // dashboardからareaへのリダイレクト
@@ -53,5 +53,10 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/estat-api/:path*", "/profile/:path*", "/admin/:path*"],
+  matcher: [
+    "/estat-api/:path*",
+    "/profile/:path*",
+    "/admin/:path*",
+    "/dashboard/:path*",
+  ],
 };

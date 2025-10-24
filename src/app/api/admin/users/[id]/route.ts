@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/features/auth/lib/auth";
 import { getDataProvider } from "@/lib/database";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
   request: NextRequest,

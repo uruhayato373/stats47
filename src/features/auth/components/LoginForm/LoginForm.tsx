@@ -1,6 +1,6 @@
 "use client";
 
-import { PasswordInput } from "@/components/ui/password-input";
+import { PasswordInput } from "@/components/atoms/ui/password-input";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

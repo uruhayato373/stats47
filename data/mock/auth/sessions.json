@@ -1,0 +1,16 @@
+[
+  {
+    "id": "session-1",
+    "user_id": "1",
+    "token": "mock-admin-token",
+    "expires_at": "2024-12-31T23:59:59Z",
+    "created_at": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": "session-2",
+    "user_id": "2",
+    "token": "mock-user-token",
+    "expires_at": "2024-12-31T23:59:59Z",
+    "created_at": "2024-01-14T15:30:00Z"
+  }
+]

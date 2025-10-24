@@ -4,7 +4,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemTitle,
-} from "@/components/ui/item";
+} from "@/components/atoms/ui/item";
 import { listCategories } from "@/lib/taxonomy/category";
 import { ChevronRightIcon } from "lucide-react";
 import { Metadata } from "next";

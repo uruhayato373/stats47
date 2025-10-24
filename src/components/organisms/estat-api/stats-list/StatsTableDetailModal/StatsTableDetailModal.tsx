@@ -10,7 +10,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/atoms/ui/dialog";
 import {
   formatOpenDate,
   formatSurveyDate,

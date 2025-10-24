@@ -14,7 +14,7 @@ import {
 } from "@/components/atoms/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/atoms/ui/sidebar";
 import { Toggle } from "@/components/atoms/ui/toggle";
-import { AuthModal } from "@/components/organisms/auth/AuthModal";
+import { AuthModal } from "@/features/auth/components/AuthModal";
 import { useAuthModal } from "@/hooks/useAuthModal";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -42,7 +42,7 @@ export default function Header() {
           {/* Left: Sidebar Trigger + Logo */}
           <div className="w-full flex items-center gap-x-1.5">
             <SidebarTrigger />
-            
+
             {/* Logo */}
             <ul className="flex items-center gap-1.5">
               <li className="inline-flex items-center relative pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-border after:rounded-full after:-translate-y-1/2 after:rotate-12">
@@ -80,7 +80,9 @@ export default function Header() {
             {/* Theme Toggle */}
             <Toggle
               pressed={theme === "dark"}
-              onPressedChange={(pressed) => setTheme(pressed ? "dark" : "light")}
+              onPressedChange={(pressed) =>
+                setTheme(pressed ? "dark" : "light")
+              }
               variant="outline"
               size="sm"
               aria-label="Toggle theme"
@@ -106,8 +108,12 @@ export default function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuLabel>
-                    <p className="text-sm font-medium">{user?.username || user?.name}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                    <p className="text-sm font-medium">
+                      {user?.username || user?.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {user?.email}
+                    </p>
                     {isAdmin && <p className="text-xs text-primary">管理者</p>}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
