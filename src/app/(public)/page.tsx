@@ -1,7 +1,7 @@
 "use client";
 
-import { TopAuthors } from "../components/molecules/TopAuthors";
-import { TopPosts } from "../components/molecules/TopPosts";
+import { TopAuthors } from "../../components/molecules/TopAuthors";
+import { TopPosts } from "../../components/molecules/TopPosts";
 
 export default function Dashboard() {
   return (

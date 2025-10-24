@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarMenuButton } from "@/components/atoms/ui/sidebar";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
@@ -10,15 +10,24 @@ interface ActiveSidebarMenuButtonProps {
   children: ReactNode;
 }
 
-export function ActiveSidebarMenuButton({ href, children }: ActiveSidebarMenuButtonProps) {
+export function ActiveSidebarMenuButton({
+  href,
+  children,
+}: ActiveSidebarMenuButtonProps) {
   const pathname = usePathname();
   const isActive = pathname === href || pathname?.startsWith(`${href}/`);
 
   return (
-    <SidebarMenuButton asChild isActive={isActive}>
-      <Link href={href}>
-        {children}
-      </Link>
-    </SidebarMenuButton>
+    <Link
+      href={href}
+      className={cn(
+        "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+        "hover:bg-accent hover:text-accent-foreground",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        isActive && "bg-accent text-accent-foreground"
+      )}
+    >
+      {children}
+    </Link>
   );
 }

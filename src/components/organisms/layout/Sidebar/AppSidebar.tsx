@@ -1,16 +1,7 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarSeparator,
-} from "@/components/atoms/ui/sidebar";
 import { getSidebarNavigationItems } from "@/lib/navigation/sidebar-config";
 import { listCategories } from "@/lib/taxonomy/category";
 import { getCategoryIcon } from "@/lib/utils/get-category-icon";
+import Link from "next/link";
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
@@ -22,47 +13,47 @@ export function AppSidebar() {
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
-      <SidebarContent>
+    <div className="w-64 h-full bg-sidebar border-r border-border flex flex-col">
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto p-4">
         {/* Home Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Home</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navigationItems.home.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <ActiveSidebarMenuButton href={item.href}>
-                    <item.icon className="size-4" />
-                    <span>{item.label}</span>
-                  </ActiveSidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <div className="mb-6">
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">
+            Home
+          </h3>
+          <div className="space-y-1">
+            {navigationItems.home.map((item) => (
+              <ActiveSidebarMenuButton key={item.href} href={item.href}>
+                <item.icon className="size-4" />
+                <span>{item.label}</span>
+              </ActiveSidebarMenuButton>
+            ))}
+          </div>
+        </div>
 
-        <SidebarSeparator />
+        <div className="border-t border-border my-4" />
 
         {/* Categories Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel>統計カテゴリー</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {categories.map((category) => (
-                <SidebarMenuItem key={category.id}>
-                  <ActiveSidebarMenuButton href={`/${category.id}`}>
-                    {(() => {
-                      const Icon = getCategoryIcon(category.icon);
-                      return <Icon className="size-4" />;
-                    })()}
-                    <span>{category.name}</span>
-                  </ActiveSidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+        <div>
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">
+            統計カテゴリー
+          </h3>
+          <div className="space-y-1">
+            {categories.map((category) => (
+              <ActiveSidebarMenuButton
+                key={category.id}
+                href={`/${category.id}`}
+              >
+                {(() => {
+                  const Icon = getCategoryIcon(category.icon ?? "");
+                  return <Icon className="size-4" />;
+                })()}
+                <span>{category.name}</span>
+              </ActiveSidebarMenuButton>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

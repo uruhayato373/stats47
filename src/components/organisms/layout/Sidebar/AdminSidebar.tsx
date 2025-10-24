@@ -1,15 +1,6 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarSeparator,
-} from "@/components/atoms/ui/sidebar";
 import { getSidebarNavigationItems } from "@/lib/navigation/sidebar-config";
 import { Database, FileText, Settings } from "lucide-react";
+import Link from "next/link";
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
@@ -28,65 +19,58 @@ export function AdminSidebar() {
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
-      <SidebarContent>
+    <div className="w-64 h-full bg-sidebar border-r border-border flex flex-col">
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto p-4">
         {/* Dashboard */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <ActiveSidebarMenuButton href="/admin">
-                  <Settings className="size-4" />
-                  <span>概要</span>
-                </ActiveSidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <div className="mb-6">
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">
+            Dashboard
+          </h3>
+          <div className="space-y-1">
+            <ActiveSidebarMenuButton href="/admin">
+              <Settings className="size-4" />
+              <span>概要</span>
+            </ActiveSidebarMenuButton>
+          </div>
+        </div>
 
-        <SidebarSeparator />
+        <div className="border-t border-border my-4" />
 
         {/* e-STAT API Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel>e-STAT API</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navigationItems.estat.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <ActiveSidebarMenuButton href={item.href}>
-                    <item.icon className="size-4" />
-                    <span>{item.label}</span>
-                  </ActiveSidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <div className="mb-6">
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">
+            e-STAT API
+          </h3>
+          <div className="space-y-1">
+            {navigationItems.estat.map((item) => (
+              <ActiveSidebarMenuButton key={item.href} href={item.href}>
+                <item.icon className="size-4" />
+                <span>{item.label}</span>
+              </ActiveSidebarMenuButton>
+            ))}
+          </div>
+        </div>
 
-        <SidebarSeparator />
+        <div className="border-t border-border my-4" />
 
         {/* Development Tools */}
-        <SidebarGroup>
-          <SidebarGroupLabel>開発ツール</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <ActiveSidebarMenuButton href="/admin/database">
-                  <Database className="size-4" />
-                  <span>データベース</span>
-                </ActiveSidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <ActiveSidebarMenuButton href="/admin/logs">
-                  <FileText className="size-4" />
-                  <span>ログ</span>
-                </ActiveSidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+        <div>
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">
+            開発ツール
+          </h3>
+          <div className="space-y-1">
+            <ActiveSidebarMenuButton href="/admin/database">
+              <Database className="size-4" />
+              <span>データベース</span>
+            </ActiveSidebarMenuButton>
+            <ActiveSidebarMenuButton href="/admin/logs">
+              <FileText className="size-4" />
+              <span>ログ</span>
+            </ActiveSidebarMenuButton>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

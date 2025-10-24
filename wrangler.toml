@@ -52,6 +52,12 @@ binding = "METAINFO_BUCKET"
 bucket_name = "stats47"
 preview_bucket_name = "stats47-development"
 
+# R2ストレージ（Area地域データ用）
+[[r2_buckets]]
+binding = "AREA_DATA"
+bucket_name = "stats47-area-data"
+preview_bucket_name = "stats47-area-data-dev"
+
 [env.local]
 NODE_ENV = "development"
 ESTAT_API_KEY = "your_estat_api_key_here"
@@ -80,6 +86,10 @@ bucket_name = "stats47-staging"
 [[env.staging.r2_buckets]]
 binding = "GEOSHAPE_BUCKET"
 bucket_name = "stats47-geoshape-staging"
+
+[[env.staging.r2_buckets]]
+binding = "AREA_DATA"
+bucket_name = "stats47-area-data-staging"
 
 # 本番環境
 [env.production]

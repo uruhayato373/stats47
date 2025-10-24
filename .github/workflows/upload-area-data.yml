@@ -1,0 +1,71 @@
+name: Upload Area Data to R2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/mock/area/**"
+      - "scripts/upload-area-data.ts"
+  workflow_dispatch:
+
+jobs:
+  upload-area-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for area data changes
+        id: check-changes
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -q "data/mock/area/"; then
+            echo "area-data-changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "area-data-changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload to R2 (Development)
+        if: steps.check-changes.outputs.area-data-changed == 'true'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          R2_AREA_BUCKET_NAME: stats47-area-data-dev
+        run: |
+          npx tsx scripts/upload-area-data.ts
+
+      - name: Upload to R2 (Staging)
+        if: steps.check-changes.outputs.area-data-changed == 'true' && github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          R2_AREA_BUCKET_NAME: stats47-area-data-staging
+        run: |
+          npx tsx scripts/upload-area-data.ts
+
+      - name: Upload to R2 (Production)
+        if: steps.check-changes.outputs.area-data-changed == 'true' && github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          R2_AREA_BUCKET_NAME: stats47-area-data
+        run: |
+          npx tsx scripts/upload-area-data.ts
+
+      - name: Verify upload
+        if: steps.check-changes.outputs.area-data-changed == 'true'
+        run: |
+          echo "✅ Area data upload completed successfully"
+          echo "📊 Uploaded files:"
+          echo "  - area/prefectures.json"
+          echo "  - area/municipalities.json"
+          echo "  - area/metadata.json"

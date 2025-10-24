@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { SidebarTrigger } from "@/components/atoms/ui/sidebar";
 import { HeaderAuthSection } from "@/features/auth/components/HeaderAuthSection";
 import { useTheme } from "@/hooks/useTheme";
-import { Moon, Sun } from "lucide-react";
+import { useSidebarStore } from "@/store/sidebar-store";
+import { Menu, Moon, Sun } from "lucide-react";
+import Link from "next/link";
 
 /**
  * アプリケーションヘッダーコンポーネント
@@ -12,13 +12,21 @@ import { Moon, Sun } from "lucide-react";
  */
 export default function Header() {
   const { toggleTheme } = useTheme();
+  const { toggle } = useSidebarStore();
 
   return (
     <header className="sticky top-0 z-[60] w-full flex flex-wrap md:justify-start md:flex-nowrap bg-background text-sm py-2.5 border-b border-border">
       <nav className="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
-        {/* Left: Sidebar Trigger + Logo */}
+        {/* Left: Sidebar Toggle Button + Logo */}
         <div className="w-full flex items-center gap-x-1.5">
-          <SidebarTrigger />
+          <button
+            onClick={toggle}
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+            aria-label="Toggle sidebar"
+          >
+            <Menu className="size-4" />
+            <span className="sr-only">Toggle sidebar</span>
+          </button>
 
           {/* Logo */}
           <ul className="flex items-center gap-1.5">

@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Noto_Sans_JP } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import { Geist_Mono, Inter, Noto_Sans_JP } from "next/font/google";
+import "./globals.css";
 
+import Header from "@/components/organisms/layout/Header";
 import { SidebarWrapper } from "@/components/organisms/layout/Sidebar";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
-import { SidebarProvider, SidebarInset } from "@/components/atoms/ui/sidebar";
-import Header from "@/components/organisms/layout/Header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,15 +50,13 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <SessionProvider>
-            <SidebarProvider>
-              <SidebarWrapper />
-              <SidebarInset>
-                <Header />
-                <main className="flex-1 overflow-y-auto p-4">
-                  {children}
-                </main>
-              </SidebarInset>
-            </SidebarProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex flex-1">
+                <SidebarWrapper />
+                <main className="flex-1 overflow-y-auto p-4">{children}</main>
+              </div>
+            </div>
           </SessionProvider>
         </ThemeProvider>
       </body>
