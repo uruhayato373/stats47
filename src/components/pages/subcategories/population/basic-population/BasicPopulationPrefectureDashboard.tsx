@@ -6,8 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
-import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
+// Props simplified - category and subcategory are now handled by layout
 import React from "react";
 
 // モックデータ
@@ -26,16 +25,10 @@ const mockData = {
 };
 
 export const BasicPopulationPrefectureDashboard: React.FC<
-  SubcategoryDashboardPageProps
-> = ({ category, subcategory, areaCode }) => {
+  { areaCode: string }
+> = ({ areaCode }) => {
   return (
-    <SubcategoryLayout
-      category={category}
-      subcategory={subcategory}
-      viewType="dashboard"
-      areaCode={areaCode}
-    >
-      <div className="px-4 pt-4">
+    <div className="px-4 pt-4">
         {/* メトリックカード */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {mockData.metrics.map((metric, index) => (
@@ -65,6 +58,6 @@ export const BasicPopulationPrefectureDashboard: React.FC<
           </CardContent>
         </Card>
       </div>
-    </SubcategoryLayout>
+    
   );
 };

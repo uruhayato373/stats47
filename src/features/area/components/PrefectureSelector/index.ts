@@ -1,1 +1,0 @@
-export { PrefectureSelector } from "./PrefectureSelector";

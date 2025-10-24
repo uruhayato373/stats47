@@ -1,1 +1,0 @@
-export { SubcategoryList } from "./SubcategoryList";

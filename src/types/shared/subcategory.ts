@@ -29,26 +29,16 @@ export interface CategoryConfig {
 }
 
 /**
- * ダッシュボードページのProps（全国・都道府県共通）
+ * ダッシュボードページのProps（簡略化）
+ * category と subcategory は layout.tsx で処理されるため、areaCode のみ必要
  */
 export interface SubcategoryDashboardPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
   areaCode: string; // "00000" = 全国, その他 = 都道府県
 }
 
 /**
- * ランキングページのProps
- */
-export interface SubcategoryRankingPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-  rankingKey?: string; // 統計項目キー（オプション）
-}
-
-/**
  * 標準的なサブカテゴリページのProps（後方互換性のため維持）
- * @deprecated SubcategoryDashboardPageProps または SubcategoryRankingPageProps を使用してください
+ * @deprecated 使用されていません
  */
 export interface SubcategoryPageProps {
   category: CategoryData;
@@ -57,7 +47,7 @@ export interface SubcategoryPageProps {
 
 /**
  * 都道府県別ページのProps（後方互換性のため維持）
- * @deprecated SubcategoryDashboardPageProps を使用してください
+ * @deprecated 使用されていません
  */
 export interface SubcategoryAreaPageProps {
   category: CategoryData;

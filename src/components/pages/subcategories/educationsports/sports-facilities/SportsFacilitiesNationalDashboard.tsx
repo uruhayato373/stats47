@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
+// Props simplified - category and subcategory are now handled by layout
 
 // モックデータ
 const mockData = {
@@ -20,19 +19,13 @@ const mockData = {
   ],
 };
 
-export const SportsFacilitiesNationalDashboard: React.FC<SubcategoryDashboardPageProps> = ({
+export const SportsFacilitiesNationalDashboard: React.FC<{ areaCode: string }> = ({
   category,
   subcategory,
   areaCode,
 }) => {
   return (
-    <SubcategoryLayout
-      category={category}
-      subcategory={subcategory}
-      viewType="dashboard"
-      areaCode={areaCode}
-    >
-      <div className="px-4 pt-4">
+    <div className="px-4 pt-4">
         {/* メトリックカード */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {mockData.metrics.map((metric, index) => (
@@ -60,6 +53,6 @@ export const SportsFacilitiesNationalDashboard: React.FC<SubcategoryDashboardPag
           </CardContent>
         </Card>
       </div>
-    </SubcategoryLayout>
+    
   );
 };
