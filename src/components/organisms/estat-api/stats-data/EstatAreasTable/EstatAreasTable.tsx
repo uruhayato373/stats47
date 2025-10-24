@@ -1,11 +1,12 @@
 "use client";
 
+import { Badge } from "@/components/atoms/ui/badge";
+import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
 import {
+  EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedArea,
-  EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
 
 interface EstatAreasTableProps {
   data: EstatStatsDataResponse;
@@ -39,11 +40,7 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
     {
       key: "level",
       label: "レベル",
-      render: (item) => (
-        <span className="text-gray-600 dark:text-neutral-300">
-          {item.level || "-"}
-        </span>
-      ),
+      render: (item) => <Badge variant="outline">{item.level || "-"}</Badge>,
     },
     {
       key: "parentCode",

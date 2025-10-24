@@ -2,13 +2,13 @@
  * e-Stat関連のカスタムフック
  */
 
+export { useEstatStatsData } from "./useEstatStatsData";
 export { useMapOptions } from "./useMapOptions";
-export { usePrefectureRankingData } from "./usePrefectureRankingData";
-export { useYearSelection } from "./useYearSelection";
 export { useMetadataList } from "./useMetadataList";
+export { usePrefectureRankingData } from "./usePrefectureRankingData";
 export { useRankingKey } from "./useRankingKey";
 export { useStatsListSearch } from "./useStatsListSearch";
-export { useEstatStatsData } from "./useEstatStatsData";
+export { useYearSelection } from "./useYearSelection";
 
 // メタ情報関連のフック
-export * from "./meta-info";
+export * from "@/features/estat-api/meta-info/hooks";

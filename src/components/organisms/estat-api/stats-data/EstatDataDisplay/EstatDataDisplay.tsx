@@ -1,6 +1,13 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
+import { Skeleton } from "@/components/atoms/ui/skeleton";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/atoms/ui/tabs";
 import { EstatStatsDataResponse } from "@/lib/estat-api";
 import { AlertTriangle, BarChart3, Database, Info } from "lucide-react";
 import { useState } from "react";
@@ -23,12 +30,15 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
 
   if (loading) {
     return (
-      <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
-        <div className="p-8 text-center">
-          <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-indigo-600 rounded-full"></div>
-          <p className="mt-4 text-gray-600 dark:text-neutral-400">
-            データを取得中...
-          </p>
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+        <div className="text-center text-muted-foreground">
+          データを取得中...
         </div>
       </div>
     );
@@ -36,21 +46,12 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
 
   if (error) {
     return (
-      <div className="bg-white border border-red-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-red-700">
-        <div className="p-6">
-          <div className="flex items-center gap-3">
-            <AlertTriangle className="w-6 h-6 text-red-500" />
-            <div>
-              <h3 className="font-medium text-red-800 dark:text-red-200">
-                データ取得エラー
-              </h3>
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                {error}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertDescription>
+          <strong>データ取得エラー:</strong> {error}
+        </AlertDescription>
+      </Alert>
     );
   }
 
@@ -73,7 +74,10 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
   return (
     <div>
       {/* タブナビゲーション */}
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as typeof activeTab)}>
+      <Tabs
+        value={activeTab}
+        onValueChange={(value) => setActiveTab(value as typeof activeTab)}
+      >
         <TabsList className="w-full justify-start px-4">
           <TabsTrigger value="overview" className="gap-2">
             <Info className="h-4 w-4" />
@@ -88,8 +92,7 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
             年度
           </TabsTrigger>
           <TabsTrigger value="values" className="gap-2">
-            <BarChart3 className="h-4 w-4" />
-            値
+            <BarChart3 className="h-4 w-4" />値
           </TabsTrigger>
           <TabsTrigger value="raw" className="gap-2">
             <Database className="h-4 w-4" />

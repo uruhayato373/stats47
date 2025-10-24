@@ -1,10 +1,10 @@
 "use client";
 
 import { Pagination } from "@/components/molecules/Pagination";
-import { SavedMetaInfoListItem } from "@/components/organisms/estat-api/meta-info/SavedMetaInfoListItem";
 import type { EstatMetaInfo } from "@/lib/database/estat/types";
 import { Archive } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
+import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
 
 /**
  * EstatMetaInfoSidebar のプロパティ定義

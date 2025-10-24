@@ -11,10 +11,6 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
-import {
-  useMetaInfoDownload,
-  useMetaInfoSave,
-} from "@/hooks/estat-api/meta-info";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
 import {
@@ -29,10 +25,11 @@ import {
   Tag,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import AreasTab from "./AreasTab";
-import CategoriesTab from "./CategoriesTab";
-import TableInfoTab from "./TableInfoTab";
-import TimeAxisTab from "./TimeAxisTab";
+import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
+import AreasTab from "./tabs/AreasTab";
+import CategoriesTab from "./tabs/CategoriesTab";
+import TableInfoTab from "./tabs/TableInfoTab";
+import TimeAxisTab from "./tabs/TimeAxisTab";
 
 /**
  * EstatMetaInfoDisplayProps - e-Statメタ情報表示コンポーネントのプロパティ

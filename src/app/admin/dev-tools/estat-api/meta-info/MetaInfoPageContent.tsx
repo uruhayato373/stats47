@@ -1,10 +1,10 @@
 "use client";
 
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
-import { EstatMetaInfoDisplay } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoDisplay";
-import { EstatMetaInfoFetcher } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoFetcher";
-import { EstatMetaInfoSidebar } from "@/components/organisms/estat-api/meta-info/EstatMetaInfoSidebar";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
+import { EstatMetaInfoDisplay } from "@/features/estat-api/meta-info/components/EstatMetaInfoDisplay";
+import { EstatMetaInfoFetcher } from "@/features/estat-api/meta-info/components/EstatMetaInfoFetcher";
+import { EstatMetaInfoSidebar } from "@/features/estat-api/meta-info/components/EstatMetaInfoSidebar";
 import { useEstatMetaInfo } from "@/hooks/estat-api/useEstatMetaInfo";
 import { AreaType } from "@/lib/area/types";
 import { BarChart3, RefreshCw } from "lucide-react";
@@ -57,7 +57,9 @@ export default function MetaInfoPageContent({
   // ===== 状態管理 =====
 
   /** 現在選択中の統計表ID */
-  const [currentStatsId, setCurrentStatsId] = useState<string>(initialStatsId || "");
+  const [currentStatsId, setCurrentStatsId] = useState<string>(
+    initialStatsId || ""
+  );
 
   // デバッグログ
   console.log("MetaInfoPageContent - initialStatsId:", initialStatsId);
@@ -161,12 +163,17 @@ export default function MetaInfoPageContent({
         />
       }
     >
-            {/* 自動保存ステータス表示 */}
-            {autoSaveStatus.type && (
-              <Alert variant={autoSaveStatus.type === "success" ? "default" : "destructive"} className="mb-4">
-                <AlertDescription>{autoSaveStatus.message}</AlertDescription>
-              </Alert>
-            )}
+      {/* 自動保存ステータス表示 */}
+      {autoSaveStatus.type && (
+        <Alert
+          variant={
+            autoSaveStatus.type === "success" ? "default" : "destructive"
+          }
+          className="mb-4"
+        >
+          <AlertDescription>{autoSaveStatus.message}</AlertDescription>
+        </Alert>
+      )}
 
       {/* メタ情報取得フォーム - 統計表IDを入力してAPI呼び出し */}
       <EstatMetaInfoFetcher
