@@ -1,17 +1,10 @@
 /**
  * Area Repository
- * 地域データのアクセス層を担当
+ * 都道府県データのアクセス層を担当
  * Mock環境ではローカルJSON、開発・本番環境ではR2ストレージからデータを取得
  */
 
-import {
-  AreaCodeNotFoundError,
-  DataSourceError,
-  MockMunicipality,
-  MockPrefecturesData,
-  Municipality,
-  Prefecture,
-} from "../types";
+import { DataSourceError, MockPrefecturesData, Prefecture } from "../types";
 
 // ============================================================================
 // 設定
@@ -27,7 +20,6 @@ const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === "true";
 export class AreaRepository {
   // メモリキャッシュ
   private static prefecturesCache: Prefecture[] | null = null;
-  private static municipalitiesCache: Map<string, Municipality[]> = new Map();
   private static regionsCache: Record<string, string[]> | null = null;
 
   /**
@@ -43,7 +35,7 @@ export class AreaRepository {
 
       if (USE_MOCK_DATA) {
         // Mock環境: ローカルJSONから読み込み
-        const mockData = await import("@/data/mock/area/prefectures.json");
+        const mockData = require("@/data/mock/area/prefectures.json");
         data = mockData.default || mockData;
       } else {
         // 開発・本番環境: R2ストレージから取得
@@ -58,7 +50,6 @@ export class AreaRepository {
         data = await response.json();
       }
 
-      // 地域ブロックキーを設定
       const prefectures: Prefecture[] = data.prefectures.map((pref) => ({
         ...pref,
         regionKey: this.getRegionKeyFromPrefectureCode(pref.prefCode),
@@ -73,85 +64,6 @@ export class AreaRepository {
   }
 
   /**
-   * 市区町村一覧を取得
-   */
-  static async getMunicipalities(): Promise<Municipality[]> {
-    try {
-      let data: { municipalities: MockMunicipality[] };
-
-      if (USE_MOCK_DATA) {
-        // Mock環境: ローカルJSONから読み込み
-        const mockData = await import("@/data/mock/area/municipalities.json");
-        data = mockData.default || mockData;
-      } else {
-        // 開発・本番環境: R2ストレージから取得
-        if (!R2_BASE_URL) {
-          throw new Error("R2_AREA_DATA_URL is not configured");
-        }
-
-        const response = await fetch(`${R2_BASE_URL}/area/municipalities.json`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch municipalities: ${response.status}`);
-        }
-        data = await response.json();
-      }
-
-      // MockMunicipalityをMunicipalityに変換
-      const municipalities: Municipality[] = data.municipalities.map((muni) => {
-        const prefCode = muni["@parentCode"];
-        const level = parseInt(muni["@level"], 10);
-
-        return {
-          code: muni["@code"],
-          name: muni["@name"],
-          fullName: `${muni["@name"]}`, // 完全名称は後で都道府県名と結合
-          prefCode,
-          parentCode: level > 1 ? prefCode : undefined,
-          type: this.detectMunicipalityType(muni["@name"]),
-          level,
-        };
-      });
-
-      // 完全名称を設定（都道府県名を含む）
-      const prefectures = await this.getPrefectures();
-      const prefMap = new Map(prefectures.map((p) => [p.prefCode, p.prefName]));
-
-      municipalities.forEach((muni) => {
-        const prefName = prefMap.get(muni.prefCode);
-        if (prefName) {
-          muni.fullName = `${prefName}${muni.name}`;
-        }
-      });
-
-      return municipalities;
-    } catch (error) {
-      const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
-      throw new DataSourceError(source, error as Error);
-    }
-  }
-
-  /**
-   * 特定の都道府県の市区町村を取得
-   */
-  static async getMunicipalitiesByPrefecture(
-    prefCode: string
-  ): Promise<Municipality[]> {
-    // キャッシュチェック
-    if (this.municipalitiesCache.has(prefCode)) {
-      return this.municipalitiesCache.get(prefCode)!;
-    }
-
-    const allMunicipalities = await this.getMunicipalities();
-    const municipalities = allMunicipalities.filter(
-      (muni) => muni.prefCode === prefCode
-    );
-
-    // キャッシュに保存
-    this.municipalitiesCache.set(prefCode, municipalities);
-    return municipalities;
-  }
-
-  /**
    * 地域ブロックマップを取得
    */
   static async getRegions(): Promise<Record<string, string[]>> {
@@ -163,7 +75,7 @@ export class AreaRepository {
       let data: MockPrefecturesData;
 
       if (USE_MOCK_DATA) {
-        const mockData = await import("@/data/mock/area/prefectures.json");
+        const mockData = require("@/data/mock/area/prefectures.json");
         data = mockData.default || mockData;
       } else {
         if (!R2_BASE_URL) {
@@ -177,8 +89,8 @@ export class AreaRepository {
         data = await response.json();
       }
 
-      this.regionsCache = data.regions;
-      return data.regions;
+      this.regionsCache = data.regions as unknown as Record<string, string[]>;
+      return data.regions as unknown as Record<string, string[]>;
     } catch (error) {
       const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
       throw new DataSourceError(source, error as Error);
@@ -193,24 +105,10 @@ export class AreaRepository {
     const prefecture = prefectures.find((p) => p.prefCode === prefCode);
 
     if (!prefecture) {
-      throw new AreaCodeNotFoundError(prefCode);
+      throw new Error(`Prefecture not found: ${prefCode}`);
     }
 
     return prefecture;
-  }
-
-  /**
-   * 特定の地域コードで市区町村を検索
-   */
-  static async getMunicipalityByCode(code: string): Promise<Municipality> {
-    const municipalities = await this.getMunicipalities();
-    const municipality = municipalities.find((m) => m.code === code);
-
-    if (!municipality) {
-      throw new AreaCodeNotFoundError(code);
-    }
-
-    return municipality;
   }
 
   /**
@@ -218,7 +116,6 @@ export class AreaRepository {
    */
   static clearCache(): void {
     this.prefecturesCache = null;
-    this.municipalitiesCache.clear();
     this.regionsCache = null;
   }
 
@@ -227,12 +124,10 @@ export class AreaRepository {
    */
   static getCacheStatus(): {
     prefectures: boolean;
-    municipalities: number;
     regions: boolean;
   } {
     return {
       prefectures: this.prefecturesCache !== null,
-      municipalities: this.municipalitiesCache.size,
       regions: this.regionsCache !== null,
     };
   }
@@ -296,20 +191,5 @@ export class AreaRepository {
     };
 
     return regionMap[prefCode] || "unknown";
-  }
-
-  /**
-   * 市区町村タイプを判定
-   */
-  private static detectMunicipalityType(
-    name: string
-  ): "city" | "ward" | "town" | "village" {
-    if (name.includes("市")) return "city";
-    if (name.includes("区")) return "ward";
-    if (name.includes("町")) return "town";
-    if (name.includes("村")) return "village";
-
-    // デフォルトは市
-    return "city";
   }
 }

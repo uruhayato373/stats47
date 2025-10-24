@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { listCategories } from "@/lib/taxonomy/category";
+import { listCategories } from "@/features/category";
 import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import { ChevronRight } from "lucide-react";
 import { Metadata } from "next";

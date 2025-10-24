@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { listCategories } from "@/lib/taxonomy/category";
+import { listCategories } from "@/features/category";
 import { MapPin, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";

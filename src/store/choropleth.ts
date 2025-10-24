@@ -2,8 +2,8 @@
  * コロプレス地図表示機能用のZustandストア定義
  */
 
-import type { Category } from "@/lib/taxonomy/category";
-import { listCategories } from "@/lib/taxonomy/category";
+import type { Category } from "@/features/category";
+import { listCategories } from "@/features/category";
 import {
   CategoryData,
   MapVisualizationSettings,
