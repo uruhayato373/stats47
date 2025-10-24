@@ -1,21 +1,30 @@
 "use client";
 
 import React from "react";
-
-import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
 
-export const LandAreaNationalDashboard: React.FC<
-  SubcategoryDashboardPageProps
-> = ({ category, subcategory, areaCode }) => {
-  const statsDataId = "0000010201";
-  const cdCat01 = {
-    totalArea: "#A01101", // 総面積
-    habitableArea: "#A01102", // 可住地面積
-    habitableAreaRatio: "#A01103", // 可住地面積割合
-  };
+// モックデータ
+const mockData = {
+  metrics: [
+    { title: "指標1", value: "1,234", unit: "人" },
+    { title: "指標2", value: "56.7", unit: "%" },
+    { title: "指標3", value: "890", unit: "件" },
+  ],
+  chartData: [
+    { year: "2020", value: 100 },
+    { year: "2021", value: 120 },
+    { year: "2022", value: 150 },
+    { year: "2023", value: 180 },
+  ],
+};
 
+export const LandAreaNationalDashboard: React.FC<SubcategoryDashboardPageProps> = ({
+  category,
+  subcategory,
+  areaCode,
+}) => {
   return (
     <SubcategoryLayout
       category={category}
@@ -23,68 +32,33 @@ export const LandAreaNationalDashboard: React.FC<
       viewType="dashboard"
       areaCode={areaCode}
     >
-      {/* 統計カード */}
       <div className="px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {/* 総面積 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.totalArea,
-            }}
-            areaCode={areaCode}
-            title="全国総面積"
-            color="#3b82f6"
-          />
-
-          {/* 可住地面積 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.habitableArea,
-            }}
-            areaCode={areaCode}
-            title="全国可住地面積"
-            color="#10b981"
-          />
-
-          {/* 可住地面積割合 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.habitableAreaRatio,
-            }}
-            areaCode={areaCode}
-            title="全国可住地面積割合"
-            color="#8b5cf6"
-          />
+        {/* メトリックカード */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {mockData.metrics.map((metric, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle className="text-sm font-medium">{metric.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{metric.value}</div>
+                <p className="text-xs text-muted-foreground">{metric.unit}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </div>
 
-      {/* 全国土地面積の詳細分析 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国土地面積の詳細分析
-          </h2>
-          {/* 土地面積の詳細分析コンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            土地面積詳細分析コンポーネント（実装予定）
-          </div>
-        </div>
-      </div>
-
-      {/* 全国の土地利用分布 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国の土地利用分布
-          </h2>
-          {/* 土地利用分布グラフコンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            土地利用分布グラフコンポーネント（実装予定）
-          </div>
-        </div>
+        {/* チャートエリア（後でshadcn/ui chartsを使用） */}
+        <Card>
+          <CardHeader>
+            <CardTitle>データ推移</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              チャート表示エリア（後で実装）
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </SubcategoryLayout>
   );

@@ -1,6 +1,6 @@
 import { ViewSwitchButtons } from "@/components/molecules/ViewSwitchButtons";
-import { PrefectureSelector } from "@/components/organisms/area/PrefectureSelector";
 import { SubcategoryNavigation } from "@/components/organisms/category/SubcategoryNavigation";
+import { PrefectureSelector } from "@/features/area/components/PrefectureSelector";
 import { getCategoryIcon } from "@/lib/utils/get-category-icon";
 import {
   CategoryData,

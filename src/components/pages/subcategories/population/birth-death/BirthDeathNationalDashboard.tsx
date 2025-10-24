@@ -1,23 +1,33 @@
 "use client";
 
-import React from "react";
-
-import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
 import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
+import React from "react";
+
+// モックデータ
+const mockData = {
+  metrics: [
+    { title: "指標1", value: "1,234", unit: "人" },
+    { title: "指標2", value: "56.7", unit: "%" },
+    { title: "指標3", value: "890", unit: "件" },
+  ],
+  chartData: [
+    { year: "2020", value: 100 },
+    { year: "2021", value: 120 },
+    { year: "2022", value: 150 },
+    { year: "2023", value: 180 },
+  ],
+};
 
 export const BirthDeathNationalDashboard: React.FC<
   SubcategoryDashboardPageProps
 > = ({ category, subcategory, areaCode }) => {
-  const statsDataId = "0000010101";
-  const cdCat01 = {
-    births: "A4101", // 出生数
-    deaths: "A4102", // 死亡数
-    naturalIncrease: "A4103", // 自然増減数
-    birthRate: "A4104", // 出生率
-    deathRate: "A4105", // 死亡率
-  };
-
   return (
     <SubcategoryLayout
       category={category}
@@ -25,90 +35,35 @@ export const BirthDeathNationalDashboard: React.FC<
       viewType="dashboard"
       areaCode={areaCode}
     >
-      {/* 統計カード */}
       <div className="px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-          {/* 出生数 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.births,
-            }}
-            areaCode={areaCode}
-            title="全国出生数"
-            color="#3b82f6"
-          />
-
-          {/* 死亡数 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.deaths,
-            }}
-            areaCode={areaCode}
-            title="全国死亡数"
-            color="#ef4444"
-          />
-
-          {/* 自然増減数 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.naturalIncrease,
-            }}
-            areaCode={areaCode}
-            title="全国自然増減数"
-            color="#10b981"
-          />
-
-          {/* 出生率 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.birthRate,
-            }}
-            areaCode={areaCode}
-            title="全国出生率"
-            color="#8b5cf6"
-          />
-
-          {/* 死亡率 */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.deathRate,
-            }}
-            areaCode={areaCode}
-            title="全国死亡率"
-            color="#f59e0b"
-          />
+        {/* メトリックカード */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {mockData.metrics.map((metric, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle className="text-sm font-medium">
+                  {metric.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{metric.value}</div>
+                <p className="text-xs text-muted-foreground">{metric.unit}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </div>
 
-      {/* 全国出生・死亡の推移 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国出生・死亡の推移
-          </h2>
-          {/* 出生・死亡の推移グラフコンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            出生・死亡推移グラフコンポーネント（実装予定）
-          </div>
-        </div>
-      </div>
-
-      {/* 全国人口動態分析 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国人口動態分析
-          </h2>
-          {/* 人口動態分析コンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            人口動態分析コンポーネント（実装予定）
-          </div>
-        </div>
+        {/* チャートエリア（後でshadcn/ui chartsを使用） */}
+        <Card>
+          <CardHeader>
+            <CardTitle>データ推移</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              チャート表示エリア（後で実装）
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </SubcategoryLayout>
   );

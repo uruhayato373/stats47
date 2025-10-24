@@ -38,3 +38,8 @@ export { AreaRepository } from "./repositories/area-repository";
 // サービス
 // ============================================================================
 export { PrefectureService } from "./services/prefecture-service";
+
+// ============================================================================
+// コンポーネント
+// ============================================================================
+export { PrefectureSelector } from "./components/PrefectureSelector";

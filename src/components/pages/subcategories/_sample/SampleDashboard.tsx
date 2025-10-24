@@ -1,9 +1,14 @@
 "use client";
 
-import React from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
+import React from "react";
 
 // モックデータ
 const mockData = {
@@ -20,7 +25,7 @@ const mockData = {
   ],
 };
 
-export const PollutionEnvironmentPrefectureDashboard: React.FC<SubcategoryDashboardPageProps> = ({
+export const SampleDashboard: React.FC<SubcategoryDashboardPageProps> = ({
   category,
   subcategory,
   areaCode,
@@ -38,7 +43,9 @@ export const PollutionEnvironmentPrefectureDashboard: React.FC<SubcategoryDashbo
           {mockData.metrics.map((metric, index) => (
             <Card key={index}>
               <CardHeader>
-                <CardTitle className="text-sm font-medium">{metric.title}</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  {metric.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{metric.value}</div>

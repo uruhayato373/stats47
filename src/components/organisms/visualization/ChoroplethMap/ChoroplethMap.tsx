@@ -71,6 +71,13 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
       setError(null);
 
       try {
+        // 都道府県データを取得してマップを作成
+        const prefectures = await PrefectureService.listPrefectures();
+        const prefectureNameMap = new Map<string, string>();
+        prefectures.forEach((pref) => {
+          prefectureNameMap.set(pref.prefCode, pref.prefName);
+        });
+
         // TopoJSONデータを読み込み
         const topojsonData = await d3.json<Topology>(
           "https://geoshape.ex.nii.ac.jp/city/topojson/20230101/jp_pref.l.topojson"
@@ -213,8 +220,8 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             // データを検索
             let dataPoint = prefectureData.get(prefCode);
             if (!dataPoint) {
-              const prefName =
-                PrefectureService.getPrefectureNameFromCode(prefCode);
+              // 都道府県コードから都道府県名を取得（同期的に）
+              const prefName = prefectureNameMap.get(prefCode);
               if (prefName) {
                 dataPoint =
                   prefectureData.get(prefName) ||
@@ -234,8 +241,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
             const feature = d as Feature<Geometry, GeoJsonProperties>;
             const index = japan.features.indexOf(feature);
             const prefCode = String(index + 1).padStart(2, "0");
-            const prefName =
-              PrefectureService.getPrefectureNameFromCode(prefCode) || "不明";
+            const prefName = prefectureNameMap.get(prefCode) || "不明";
 
             // データを検索
             let dataPoint = prefectureData.get(prefCode);

@@ -1,21 +1,30 @@
 "use client";
 
 import React from "react";
-
-import { EstatStatisticsMetricCard } from "@/components/organisms/estat-api/EstatStatisticsMetricCard";
 import { SubcategoryLayout } from "@/components/templates/SubcategoryLayout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 import { SubcategoryDashboardPageProps } from "@/types/shared/subcategory";
 
-export const HousingFacilitiesPrefectureDashboard: React.FC<
-  SubcategoryDashboardPageProps
-> = ({ category, subcategory, areaCode }) => {
-  const statsDataId = "0000010139";
-  const cdCat01 = {
-    airConditioning: "LL1101", // エアコン
-    internet: "LL1102", // インターネット
-    solarPanel: "LL1103", // 太陽光パネル
-  };
+// モックデータ
+const mockData = {
+  metrics: [
+    { title: "指標1", value: "1,234", unit: "人" },
+    { title: "指標2", value: "56.7", unit: "%" },
+    { title: "指標3", value: "890", unit: "件" },
+  ],
+  chartData: [
+    { year: "2020", value: 100 },
+    { year: "2021", value: 120 },
+    { year: "2022", value: 150 },
+    { year: "2023", value: 180 },
+  ],
+};
 
+export const HousingFacilitiesPrefectureDashboard: React.FC<SubcategoryDashboardPageProps> = ({
+  category,
+  subcategory,
+  areaCode,
+}) => {
   return (
     <SubcategoryLayout
       category={category}
@@ -23,81 +32,33 @@ export const HousingFacilitiesPrefectureDashboard: React.FC<
       viewType="dashboard"
       areaCode={areaCode}
     >
-      {/* 統計カード */}
       <div className="px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {/* エアコン */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.airConditioning,
-            }}
-            areaCode={areaCode}
-            title="エアコン設置率"
-            color="#f97316"
-          />
-
-          {/* インターネット */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.internet,
-            }}
-            areaCode={areaCode}
-            title="インターネット普及率"
-            color="#ea580c"
-          />
-
-          {/* 太陽光パネル */}
-          <EstatStatisticsMetricCard
-            params={{
-              statsDataId: statsDataId,
-              cdCat01: cdCat01.solarPanel,
-            }}
-            areaCode={areaCode}
-            title="太陽光パネル設置率"
-            color="#c2410c"
-          />
+        {/* メトリックカード */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {mockData.metrics.map((metric, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle className="text-sm font-medium">{metric.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{metric.value}</div>
+                <p className="text-xs text-muted-foreground">{metric.unit}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </div>
 
-      {/* 都道府県の住宅設備詳細 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            住宅設備詳細
-          </h2>
-          {/* 都道府県の住宅設備詳細コンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            住宅設備詳細コンポーネント（実装予定）
-          </div>
-        </div>
-      </div>
-
-      {/* 全国との比較 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            全国との比較
-          </h2>
-          {/* 全国との比較グラフコンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            全国との比較グラフコンポーネント（実装予定）
-          </div>
-        </div>
-      </div>
-
-      {/* 周辺都道府県との比較 */}
-      <div className="px-4 pb-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 p-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            周辺都道府県との比較
-          </h2>
-          {/* 周辺都道府県との比較コンポーネントをここに追加 */}
-          <div className="text-gray-500 dark:text-neutral-400 text-center py-8">
-            周辺都道府県との比較コンポーネント（実装予定）
-          </div>
-        </div>
+        {/* チャートエリア（後でshadcn/ui chartsを使用） */}
+        <Card>
+          <CardHeader>
+            <CardTitle>データ推移</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              チャート表示エリア（後で実装）
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </SubcategoryLayout>
   );

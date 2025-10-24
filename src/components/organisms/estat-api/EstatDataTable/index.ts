@@ -1,1 +1,0 @@
-export { EstatDataTable } from "./EstatDataTable";

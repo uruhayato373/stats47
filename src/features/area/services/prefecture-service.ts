@@ -10,14 +10,14 @@ export class PrefectureService {
   /**
    * 全ての都道府県を取得
    */
-  static async getAllPrefectures(): Promise<Prefecture[]> {
+  static async listPrefectures(): Promise<Prefecture[]> {
     return await AreaRepository.getPrefectures();
   }
 
   /**
    * 都道府県コードで検索
    */
-  static async getPrefectureByCode(prefCode: string): Promise<Prefecture> {
+  static async findPrefectureByCode(prefCode: string): Promise<Prefecture> {
     return await AreaRepository.getPrefectureByCode(prefCode);
   }
 
@@ -36,7 +36,7 @@ export class PrefectureService {
   /**
    * 地域ブロックで都道府県を取得
    */
-  static async getPrefecturesByRegion(
+  static async listPrefecturesByRegion(
     regionKey: string
   ): Promise<Prefecture[]> {
     const allPrefectures = await AreaRepository.getPrefectures();
@@ -46,7 +46,19 @@ export class PrefectureService {
   /**
    * 地域ブロック一覧を取得
    */
-  static async getRegions(): Promise<Record<string, string[]>> {
+  static async listRegions(): Promise<Record<string, string[]>> {
     return await AreaRepository.getRegions();
+  }
+
+  /**
+   * 都道府県コードから都道府県名を取得
+   */
+  static async lookupPrefectureName(prefCode: string): Promise<string | null> {
+    try {
+      const prefecture = await this.findPrefectureByCode(prefCode);
+      return prefecture.prefName;
+    } catch {
+      return null;
+    }
   }
 }
