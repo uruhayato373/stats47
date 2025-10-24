@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { authMiddleware } from "@/features/auth/lib/auth";
+import { NextResponse } from "next/server";
 
 export default authMiddleware((req: any) => {
   const { pathname } = req.nextUrl;

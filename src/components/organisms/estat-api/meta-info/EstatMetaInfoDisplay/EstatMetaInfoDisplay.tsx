@@ -4,7 +4,12 @@ import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 import {
   useMetaInfoDownload,
@@ -12,7 +17,17 @@ import {
 } from "@/hooks/estat-api/meta-info";
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
 import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
-import { AlertCircle, Calendar, Code, FileText, Info, MapPin, RefreshCw, Save, Tag } from "lucide-react";
+import {
+  AlertCircle,
+  Calendar,
+  Code,
+  FileText,
+  Info,
+  MapPin,
+  RefreshCw,
+  Save,
+  Tag,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import AreasTab from "./AreasTab";
 import CategoriesTab from "./CategoriesTab";
@@ -187,13 +202,21 @@ export default function EstatMetaInfoDisplay({
             <CardTitle className="text-sm font-medium text-muted-foreground">
               統計表ID: {parsedData.tableInfo.id}
             </CardTitle>
-            <h2 className="text-lg font-semibold">{parsedData.tableInfo.title}</h2>
+            <h2 className="text-lg font-semibold">
+              {parsedData.tableInfo.title}
+            </h2>
             <p className="text-sm text-muted-foreground">
-              {parsedData.tableInfo.statName} • {parsedData.tableInfo.organization}
+              {parsedData.tableInfo.statName} •{" "}
+              {parsedData.tableInfo.organization}
             </p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleSave} disabled={saving} size="icon" variant="outline">
+            <Button
+              onClick={handleSave}
+              disabled={saving}
+              size="icon"
+              variant="outline"
+            >
               <Save className="h-4 w-4" />
             </Button>
           </div>
@@ -202,7 +225,10 @@ export default function EstatMetaInfoDisplay({
 
       {/* ===== タブナビゲーション ===== */}
       {/* 統計表情報、分類、地域、時間軸、JSONレスポンスのタブ切り替え */}
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
+      <Tabs
+        value={activeTab}
+        onValueChange={(value) => setActiveTab(value as TabType)}
+      >
         <TabsList className="w-full justify-start">
           <TabsTrigger value="table" className="gap-2">
             <FileText className="h-4 w-4" />
@@ -246,11 +272,18 @@ export default function EstatMetaInfoDisplay({
 
       {/* 保存結果の表示 */}
       {saveResult && (
-        <Alert variant={saveResult.success ? "default" : "destructive"} className="mt-4">
+        <Alert
+          variant={saveResult.success ? "default" : "destructive"}
+          className="mt-4"
+        >
           <AlertDescription className="flex items-center justify-between">
             <span>{saveResult.message}</span>
             {saveResult.success && (
-              <Button variant="ghost" size="sm" onClick={() => window.location.reload()}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => window.location.reload()}
+              >
                 <RefreshCw className="h-3 w-3 mr-1" />
                 更新
               </Button>

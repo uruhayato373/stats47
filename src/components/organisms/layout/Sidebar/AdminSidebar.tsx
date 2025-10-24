@@ -28,7 +28,7 @@ export function AdminSidebar() {
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar collapsible="none">
+    <Sidebar variant="inset" collapsible="icon">
       <SidebarContent>
         {/* Dashboard */}
         <SidebarGroup>

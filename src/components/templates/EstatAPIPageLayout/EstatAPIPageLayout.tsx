@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { ExternalLink } from "lucide-react";
 
@@ -22,6 +20,9 @@ export interface EstatAPIPageLayoutProps {
 /**
  * EstatAPIPageLayout - e-Stat API ページ用の共通レイアウトテンプレート
  *
+ * **Server Component**: このコンポーネントはServer Componentとして実装されています。
+ * Client Componentが必要な場合は、actionsやsidebarとして渡してください。
+ *
  * 機能:
  * - e-Stat API 関連ページの統一されたレイアウトを提供
  * - ヘッダー、メインコンテンツ、サイドバーの配置を管理
@@ -35,15 +36,21 @@ export interface EstatAPIPageLayoutProps {
  *
  * 使用例:
  * ```tsx
+ * // Server Component内で使用
  * <EstatAPIPageLayout
  *   title="メタ情報"
  *   icon={Database}
- *   actions={<RefreshButton />}
+ *   actions={<RefreshButton />}  // Client Componentも渡せる
  *   sidebar={<MetaInfoSidebar />}
  * >
  *   <MetaInfoContent />
  * </EstatAPIPageLayout>
  * ```
+ *
+ * Next.js App Router ベストプラクティス:
+ * - Server Componentとして実装することで、不要な再レンダリングを防ぐ
+ * - Client Componentはprops（actions, sidebar）として渡す（composition pattern）
+ * - 各ページで明示的に使用することで、柔軟性を保つ
  */
 export function EstatAPIPageLayout({
   title,
@@ -69,17 +76,6 @@ export function EstatAPIPageLayout({
         <div className="flex items-center gap-x-2">
           {/* カスタムアクションボタン（リフレッシュボタンなど） */}
           {actions}
-
-          {/* e-STAT API 公式リンク */}
-          <a
-            href="https://www.e-stat.go.jp/api/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-1.5 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-600 transition-colors"
-          >
-            <ExternalLink className="w-3 h-3" />
-            e-STAT API
-          </a>
         </div>
       </div>
 

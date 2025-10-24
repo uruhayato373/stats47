@@ -1,4 +1,10 @@
-import React from "react";
+import { Badge } from "@/components/atoms/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
 import { TableInfo } from "@/lib/estat-api/types/meta-info";
 
 interface TableInfoTabProps {
@@ -87,80 +93,84 @@ export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
   return (
     <div className="space-y-6">
       {/* 基本情報セクション */}
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          基本情報
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {infoItems.map((item, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-lg border ${
-                item.highlight
-                  ? "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800"
-                  : "bg-gray-50 border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
-              }`}
-            >
-              <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
-                {item.label}
-              </div>
-              <div
-                className={`text-sm ${
-                  item.highlight
-                    ? "text-blue-900 dark:text-blue-100 font-medium"
-                    : "text-gray-900 dark:text-gray-100"
-                }`}
-              >
-                {item.value || "-"}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 分類情報セクション */}
-      {categoryInfo.length > 0 && (
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-            分類情報
-          </h3>
-          <div className="space-y-3">
-            {categoryInfo.map((item, index) => (
+      <Card>
+        <CardHeader>
+          <CardTitle>基本情報</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {infoItems.map((item, index) => (
               <div
                 key={index}
-                className="p-4 rounded-lg bg-gray-50 border border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
+                className={`p-4 rounded-lg border ${
+                  item.highlight
+                    ? "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800"
+                    : "bg-gray-50 border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
+                }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                    {item.label}
-                  </div>
-                  {item.code && (
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      コード: {item.code}
-                    </div>
-                  )}
+                <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  {item.label}
                 </div>
-                <div className="text-sm text-gray-900 dark:text-gray-100 mt-1">
-                  {item.value}
+                <div
+                  className={`text-sm ${
+                    item.highlight
+                      ? "text-blue-900 dark:text-blue-100 font-medium"
+                      : "text-gray-900 dark:text-gray-100"
+                  }`}
+                >
+                  {item.value || "-"}
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </CardContent>
+      </Card>
+
+      {/* 分類情報セクション */}
+      {categoryInfo.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>分類情報</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {categoryInfo.map((item, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-lg bg-gray-50 border border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                      {item.label}
+                    </div>
+                    {item.code && (
+                      <Badge variant="outline" className="text-xs">
+                        コード: {item.code}
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="text-sm text-gray-900 dark:text-gray-100 mt-1">
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* 説明セクション */}
       {tableInfo.explanation && (
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-            説明
-          </h3>
-          <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
+        <Card>
+          <CardHeader>
+            <CardTitle>説明</CardTitle>
+          </CardHeader>
+          <CardContent>
             <div className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap">
               {tableInfo.explanation}
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

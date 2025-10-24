@@ -45,7 +45,8 @@
       "Bash(curl -s \"https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=59eb12e8a25751dfc27f2e48fcdfa8600b86655e&statsField=10&limit=1\")",
       "Bash(openssl rand:*)",
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:ui.shadcn.com)"
     ],
     "deny": [],
     "ask": []

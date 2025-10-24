@@ -22,7 +22,7 @@ export function AppSidebar() {
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar collapsible="none">
+    <Sidebar variant="inset" collapsible="icon">
       <SidebarContent>
         {/* Home Section */}
         <SidebarGroup>
