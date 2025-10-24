@@ -1,8 +1,8 @@
 "use client";
 
+import { PrefectureService } from "@/features/area";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
-import { useRouter, useParams } from "next/navigation";
-import { PrefectureService } from "@/lib/area";
 
 /**
  * 都道府県選択コンポーネント

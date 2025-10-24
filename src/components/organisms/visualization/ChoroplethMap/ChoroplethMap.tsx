@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { PrefectureService } from "@/features/area";
+import { FormattedValue } from "@/lib/estat-api";
+import { formatRankingValueDisplay } from "@/lib/ranking/types";
 import * as d3 from "d3";
-import { feature } from "topojson-client";
-import { Topology } from "topojson-specification";
 import {
   Feature,
   FeatureCollection,
-  Geometry,
   GeoJsonProperties,
+  Geometry,
 } from "geojson";
-import { FormattedValue } from "@/lib/estat-api";
-import { formatRankingValueDisplay } from "@/lib/ranking/types";
-import { PrefectureService } from "@/lib/area";
+import React, { useEffect, useRef, useState } from "react";
+import { feature } from "topojson-client";
+import { Topology } from "topojson-specification";
 
 export interface MapVisualizationOptions {
   colorScheme: string;

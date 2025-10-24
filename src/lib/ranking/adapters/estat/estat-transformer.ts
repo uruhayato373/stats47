@@ -3,13 +3,13 @@
  * FormattedEstatData → RankingDataPoint[]
  */
 
-import type { FormattedEstatData } from "@/lib/estat-api/types";
-import type { RankingDataPoint, TargetAreaLevel } from "@/types/ranking";
 import {
+  createAreaFilter,
   getAreaType,
   getParentPrefectureCode,
-  createAreaFilter,
-} from "@/lib/area";
+} from "@/lib/area/utils/code-converter";
+import type { FormattedEstatData } from "@/lib/estat-api/types";
+import type { RankingDataPoint, TargetAreaLevel } from "@/types/ranking";
 
 /**
  * e-Statデータ変換クラス

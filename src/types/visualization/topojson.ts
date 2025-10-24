@@ -3,8 +3,6 @@
  * 日本の都道府県境界データ（jp_pref.l.topojson）用の型定義
  */
 
-import { PrefectureService } from "@/lib/area";
-
 // 基本の座標型
 export type Coordinate = [number, number];
 

@@ -123,20 +123,29 @@ import type { Prefecture } from "@/types/models/prefecture";
 import type { Prefecture } from "@/lib/area";
 ```
 
-### フェーズ 3: 旧ファイルの削除
+### フェーズ 3: 旧ファイルの削除 ✅ 完了
 
-#### 3.1 段階的削除
+#### 3.1 段階的削除 ✅ 完了
 
-1. **Step 1**: 旧ファイルを非推奨としてマーク
-2. **Step 2**: 全ての参照を新しいドメインに移行
-3. **Step 3**: 旧ファイルを削除
+1. **Step 1**: 旧ファイルを非推奨としてマーク ✅
+2. **Step 2**: 全ての参照を新しいドメインに移行 ✅
+3. **Step 3**: 旧ファイルを削除 ✅
 
-#### 3.2 削除前の確認
+#### 3.2 削除前の確認 ✅ 完了
 
-- [ ] 全インポートが新しいドメインに移行済み
-- [ ] テストが全て成功
-- [ ] ビルドエラーがない
-- [ ] 機能テストが完了
+- [x] 全インポートが新しいドメインに移行済み
+- [x] テストが全て成功
+- [x] ビルドエラーがない
+- [x] 機能テストが完了
+
+**削除完了ファイル**:
+
+- `src/lib/area/services/area-service.ts` ✅
+- `src/lib/area/services/prefecture-service.ts` ✅
+- `src/lib/area/services/municipality-service.ts` ✅
+- `src/lib/area/services/` ディレクトリ ✅
+
+**移行先**: `src/features/area/services/` に完全統合
 
 ## 詳細移行手順
 
