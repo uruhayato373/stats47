@@ -12,11 +12,11 @@
  * @module EstatAPIStatsDataPage
  */
 
+import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
 import {
   EstatDataDisplay,
   EstatDataFetcher,
-} from "@/components/organisms/estat-api/stats-data";
-import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
+} from "@/features/estat-api/stats-data/components";
 import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
 import { Database, RefreshCw } from "lucide-react";
