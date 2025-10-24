@@ -171,6 +171,7 @@
   },
   "active": "6f254bf1c0de4a61",
   "lastOpenFiles": [
+    "04_開発ガイド/02_ドメイン/02_支援ドメイン/カテゴリ管理/Category実装ガイド.md",
     "04_開発ガイド/02_ドメイン/Area実装ガイド.md",
     "layout-issue-analysis.md",
     "04_開発ガイド/環境別認証動作.md",
@@ -199,7 +200,6 @@
     "04_開発ガイド/04_UI/可視化/specifications/library-selection-guide.md",
     "04_開発ガイド/04_UI/可視化/specifications/leaflet-integration.md",
     "04_開発ガイド/04_UI/可視化/specifications/geoshape-data-source.md",
-    "04_開発ガイド/04_UI/可視化/specifications/d3js-implementation-guide.md",
     "04_開発ガイド/04_UI/可視化/specifications/chart-types",
     "04_開発ガイド/04_UI/可視化/implementation/recharts",
     "04_開発ガイド/04_UI/可視化/implementation/d3js",

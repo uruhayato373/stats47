@@ -172,7 +172,6 @@ export function detectMunicipalityType(name: string): MunicipalityType {
   // デフォルトは市
   return "city";
 }
-
 /**
  * 市区町村タイプが有効かチェック
  * @param type 市区町村タイプ

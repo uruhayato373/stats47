@@ -69,7 +69,6 @@ export { AreaRepository } from "./repositories/area-repository";
 export { AreaService } from "./services/area-service";
 export { MunicipalityService } from "./services/municipality-service";
 export { PrefectureService } from "./services/prefecture-service";
-
 // ============================================================================
 // React Hooks
 // ============================================================================
