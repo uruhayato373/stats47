@@ -14,13 +14,21 @@ import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
  * 管理画面用サイドバー（サーバーコンポーネント）
- * e-STAT API、開発ツール、設定を表示
+ *
+ * 表示条件:
+ * - /admin パスにアクセスしている場合
+ * - Mock環境で管理者としてログインしている場合
+ *
+ * 機能:
+ * - e-STAT API管理
+ * - 開発ツール（データベース、ログ）
+ * - 設定
  */
 export function AdminSidebar() {
   const navigationItems = getSidebarNavigationItems();
 
   return (
-    <Sidebar collapsible="none">      
+    <Sidebar collapsible="none">
       <SidebarContent>
         {/* Dashboard */}
         <SidebarGroup>
