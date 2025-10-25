@@ -10,7 +10,7 @@ import {
   MockPrefecturesData,
   Municipality,
   Prefecture,
-} from "../types";
+} from "../types/index";
 
 // ============================================================================
 // 設定

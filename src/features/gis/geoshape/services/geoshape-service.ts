@@ -4,12 +4,12 @@
  */
 
 import { GeoshapeRepository } from "../repositories/geoshape-repository";
+import { TopojsonConverter } from "../utils/topojson-converter";
 import type {
   FetchOptions,
   PrefectureFeature,
   PrefectureFeatureCollection,
-} from "../types";
-import { TopojsonConverter } from "../utils/topojson-converter";
+} from "../types/index";
 
 /**
  * Geoshapeサービスクラス

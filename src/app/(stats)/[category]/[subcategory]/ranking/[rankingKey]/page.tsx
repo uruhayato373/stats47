@@ -3,7 +3,6 @@
 import { use } from "react";
 
 import { RankingItemNotFound } from "@/components/molecules/ranking/RankingItemNotFound";
-import { RankingDataCard } from "@/components/organisms/ranking/RankingDataCard";
 import { RankingMapCard } from "@/components/organisms/ranking/RankingMapCard";
 
 import { useRankingItem } from "@/hooks/ranking/useRankingItem";
@@ -30,10 +29,5 @@ export default function RankingKeyPage({ params }: PageProps) {
     return <RankingItemNotFound rankingKey={rankingKey} />;
   }
 
-  return (
-    <>
-      <RankingMapCard />
-      <RankingDataCard rankingKey={rankingKey} />
-    </>
-  );
+  return <RankingMapCard />;
 }

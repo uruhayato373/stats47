@@ -7,7 +7,7 @@
 
 import { PrefectureMapD3 } from "../d3/PrefectureMapD3";
 
-import type { MapConfig } from "../types";
+import type { MapConfig } from "../types/index";
 
 interface PrefectureMapProps extends MapConfig {
   /** 使用する地図ライブラリ */

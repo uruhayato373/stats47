@@ -4,7 +4,7 @@
  */
 
 import { AreaRepository } from "../repositories/area-repository";
-import { Prefecture } from "../types";
+import { Prefecture } from "../types/index";
 
 export class PrefectureService {
   /**

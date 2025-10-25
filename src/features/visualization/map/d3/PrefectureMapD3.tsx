@@ -10,9 +10,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 import { GeoshapeService } from "@/features/gis/geoshape/services/geoshape-service";
-import type { PrefectureFeature } from "@/features/gis/geoshape/types";
+import type { PrefectureFeature } from "@/features/gis/geoshape/types/index";
 
-import type { MapConfig, MapState } from "../types";
+import type { MapConfig, MapState } from "../types/index";
 
 interface PrefectureMapD3Props extends MapConfig {
   /** 地図の幅（デフォルト: 800） */
@@ -116,10 +116,10 @@ export function PrefectureMapD3({
           projection.translate([transform.x, transform.y]);
 
           // パスを再描画
-          svg.selectAll("path").attr("d", path);
+          svg.selectAll("path").attr("d", (d) => path(d as GeoJSON.Feature));
 
           svg.selectAll("text").attr("transform", (d) => {
-            const centroid = path.centroid(d as any);
+            const centroid = path.centroid(d as GeoJSON.Feature);
             return `translate(${centroid[0]},${centroid[1]})`;
           });
 
@@ -130,13 +130,13 @@ export function PrefectureMapD3({
       svg.call(zoomBehavior);
 
       // 都道府県境界を描画
-      const prefecturePaths = svg
+      svg
         .selectAll("path.prefecture")
         .data(geojson.features)
         .enter()
         .append("path")
         .attr("class", "prefecture")
-        .attr("d", path)
+        .attr("d", (d) => path(d as GeoJSON.Feature))
         .attr("fill", fillColor)
         .attr("stroke", strokeColor)
         .attr("stroke-width", strokeWidth)
@@ -157,7 +157,7 @@ export function PrefectureMapD3({
           }));
           onPrefectureHover?.(d as PrefectureFeature);
         })
-        .on("mouseout", function (event, d) {
+        .on("mouseout", function () {
           if (enableAnimation) {
             d3.select(this)
               .transition()
@@ -212,7 +212,7 @@ export function PrefectureMapD3({
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "middle")
         .attr("transform", (d) => {
-          const centroid = path.centroid(d as any);
+          const centroid = path.centroid(d as GeoJSON.Feature);
           return `translate(${centroid[0]},${centroid[1]})`;
         })
         .text((d) => (d as PrefectureFeature).properties.prefName)
@@ -240,9 +240,6 @@ export function PrefectureMapD3({
   }, [
     width,
     height,
-    center,
-    zoom,
-    projection,
     fillColor,
     strokeColor,
     strokeWidth,
@@ -258,6 +255,7 @@ export function PrefectureMapD3({
     onZoom,
     onPan,
     createProjection,
+    mapState.selectedPrefecture?.properties.prefCode,
   ]);
 
   // 初期化

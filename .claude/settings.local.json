@@ -46,7 +46,10 @@
       "Bash(openssl rand:*)",
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
-      "WebFetch(domain:ui.shadcn.com)"
+      "WebFetch(domain:ui.shadcn.com)",
+      "Bash(git checkout:*)",
+      "Bash(git mv:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

@@ -23,12 +23,6 @@ interface RankingMapCardProps {
 export function RankingMapCard({ className }: RankingMapCardProps) {
   return (
     <Card className={className}>
-      <CardHeader>
-        <CardTitle>都道府県別マップ</CardTitle>
-        <CardDescription>
-          都道府県の境界とランキングデータを地図で表示します
-        </CardDescription>
-      </CardHeader>
       <CardContent>
         <PrefectureMap
           width={800}

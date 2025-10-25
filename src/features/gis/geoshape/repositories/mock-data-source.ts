@@ -4,7 +4,7 @@
  */
 
 import { geoshapeConfig } from "../config/geoshape-config";
-import type { ResolutionLevel, TopoJSONTopology } from "../types";
+import type { ResolutionLevel, TopoJSONTopology } from "../types/index";
 
 /**
  * MockデータソースクラS

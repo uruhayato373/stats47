@@ -4,7 +4,11 @@
  */
 
 import { isMockEnvironment } from "../config/geoshape-config";
-import type { FetchOptions, FetchResult, TopoJSONTopology } from "../types";
+import type {
+  FetchOptions,
+  FetchResult,
+  TopoJSONTopology,
+} from "../types/index";
 import { ExternalDataSource } from "./external-data-source";
 import { MockDataSource } from "./mock-data-source";
 import { R2DataSource } from "./r2-data-source";

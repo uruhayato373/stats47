@@ -4,7 +4,7 @@
  */
 
 import { AreaRepository } from "../repositories/area-repository";
-import { Municipality, MunicipalityType } from "../types";
+import { Municipality, MunicipalityType } from "../types/index";
 
 export class MunicipalityService {
   /**

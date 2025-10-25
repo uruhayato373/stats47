@@ -5,10 +5,10 @@
 
 import * as topojson from "topojson-client";
 import type {
-  TopoJSONTopology,
-  PrefectureFeatureCollection,
   PrefectureFeature,
-} from "../types";
+  PrefectureFeatureCollection,
+  TopoJSONTopology,
+} from "../types/index";
 
 /**
  * TopoJSON変換クラス
@@ -87,10 +87,7 @@ export class TopojsonConverter {
   private static extractPrefName(properties: Record<string, any>): string {
     // Geoshapeデータの構造に基づいて抽出
     return (
-      properties.N03_001 ||
-      properties.prefName ||
-      properties.name ||
-      "不明"
+      properties.N03_001 || properties.prefName || properties.name || "不明"
     );
   }
 
@@ -99,9 +96,7 @@ export class TopojsonConverter {
    * @param geojson GeoJSON FeatureCollection
    * @returns TopoJSONトポロジー
    */
-  static toTopoJSON(
-    geojson: PrefectureFeatureCollection
-  ): TopoJSONTopology {
+  static toTopoJSON(geojson: PrefectureFeatureCollection): TopoJSONTopology {
     // topojson-serverライブラリが必要（オプション）
     throw new Error("TopoJSON conversion not implemented yet");
   }
@@ -121,4 +116,3 @@ export class TopojsonConverter {
     );
   }
 }
-

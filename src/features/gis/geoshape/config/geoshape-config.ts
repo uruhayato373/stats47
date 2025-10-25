@@ -3,7 +3,7 @@
  * データソースとキャッシュの設定
  */
 
-import { GeoshapeConfig } from "../types";
+import { GeoshapeConfig } from "../types/index";
 
 /**
  * 環境判定
@@ -43,7 +43,9 @@ export const resolutionFileMap = {
  * @param resolution 解像度レベル
  * @returns 完全なURL
  */
-export function buildGeoshapeExternalUrl(resolution: "low" | "medium" | "high" = "low"): string {
+export function buildGeoshapeExternalUrl(
+  resolution: "low" | "medium" | "high" = "low"
+): string {
   // Geoshapeリポジトリの実際のURL構造に基づいて構築
   // 例: https://geoshape.ex.nii.ac.jp/geonlp/download/latest/jp_pref.l.topojson
   return `${geoshapeConfig.externalApiUrl}/geonlp/download/latest/${resolutionFileMap[resolution]}`;
@@ -54,7 +56,8 @@ export function buildGeoshapeExternalUrl(resolution: "low" | "medium" | "high" =
  * @param resolution 解像度レベル
  * @returns R2オブジェクトキー
  */
-export function buildR2Key(resolution: "low" | "medium" | "high" = "low"): string {
+export function buildR2Key(
+  resolution: "low" | "medium" | "high" = "low"
+): string {
   return `${geoshapeConfig.r2BucketPath}/prefecture.${resolution}.topojson`;
 }
-

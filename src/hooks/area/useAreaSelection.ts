@@ -2,7 +2,7 @@
 
 import { MunicipalityService } from "@/features/area/services/municipality-service";
 import { PrefectureService } from "@/features/area/services/prefecture-service";
-import { Municipality, Prefecture } from "@/features/area/types";
+import { Municipality, Prefecture } from "@/features/area/types/index";
 import { useCallback, useState } from "react";
 
 /**

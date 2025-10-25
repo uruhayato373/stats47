@@ -3,7 +3,7 @@
  * ライブラリ非依存の共通型定義
  */
 
-import type { PrefectureFeature } from "@/features/gis/geoshape/types";
+import type { PrefectureFeature } from "@/features/gis/geoshape/types/index";
 
 // 地図プロパティ
 export interface MapProps {
