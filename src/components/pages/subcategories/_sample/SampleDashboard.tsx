@@ -25,8 +25,6 @@ const mockData = {
 };
 
 export const SampleDashboard: React.FC<{ areaCode: string }> = ({
-  category,
-  subcategory,
   areaCode,
 }) => {
   return (

@@ -20,8 +20,6 @@ const mockData = {
 };
 
 export const TrafficAccidentsPrefectureDashboard: React.FC<{ areaCode: string }> = ({
-  category,
-  subcategory,
   areaCode,
 }) => {
   return (

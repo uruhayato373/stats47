@@ -20,8 +20,6 @@ const mockData = {
 };
 
 export const SocialSecurityCardNationalDashboard: React.FC<{ areaCode: string }> = ({
-  category,
-  subcategory,
   areaCode,
 }) => {
   return (

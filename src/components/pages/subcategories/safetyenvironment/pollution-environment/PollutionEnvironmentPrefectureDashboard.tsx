@@ -20,8 +20,6 @@ const mockData = {
 };
 
 export const PollutionEnvironmentPrefectureDashboard: React.FC<{ areaCode: string }> = ({
-  category,
-  subcategory,
   areaCode,
 }) => {
   return (
