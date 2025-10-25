@@ -21,9 +21,18 @@
 
 ## サブドメイン
 
-### e-Stat-API
+### e-Stat API
 
-e-Stat API との連携機能
+e-Stat API（政府統計の総合窓口）との連携機能を提供します。
+
+**詳細ドキュメント**: [e-Stat API ドメイン](../e-Stat%20API/)
+
+- [overview.md](../e-Stat%20API/overview.md) - e-Stat API 統合の全体像
+- [architecture.md](../e-Stat%20API/architecture.md) - アーキテクチャ設計
+- [01_共有/](../e-Stat%20API/01_共有/) - 共通機能とベストプラクティス
+- [02_統計表リスト/](../e-Stat%20API/02_統計表リスト/) - 統計表リスト API
+- [03_メタ情報/](../e-Stat%20API/03_メタ情報/) - メタ情報 API
+- [04_統計データ/](../e-Stat%20API/04_統計データ/) - 統計データ API
 
 ## 主要エンティティ
 
