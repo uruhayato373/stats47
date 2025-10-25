@@ -37,4 +37,3 @@ export default function RankingKeyPage({ params }: PageProps) {
     </>
   );
 }
-e;
