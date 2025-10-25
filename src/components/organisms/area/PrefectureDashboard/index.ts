@@ -1,0 +1,1 @@
+export { PrefectureDashboard } from "./PrefectureDashboard";

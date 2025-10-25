@@ -1,19 +1,17 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
 import { AreaSelector } from "@/components/molecules/area/AreaSelector";
 import { RankingItemsSidebar } from "@/components/molecules/ranking/RankingItemsSidebar";
+import {
+  MunicipalityDashboard,
+  NationalDashboard,
+  PrefectureDashboard,
+} from "@/components/organisms/area";
 
 import { Municipality, Prefecture } from "@/features/area/types";
 
 import { AreaType, useAreaSelection } from "@/hooks/area/useAreaSelection";
-import { usePathname } from "next/navigation";
+import { useCategoryParams } from "@/hooks/routing/useCategoryParams";
 
 /**
  * 地域別ダッシュボードページのクライアントコンポーネント
@@ -24,10 +22,7 @@ import { usePathname } from "next/navigation";
  */
 export function AreaPageClient() {
   // URLパラメータからカテゴリとサブカテゴリを取得
-  const pathname = usePathname();
-  const pathSegments = pathname.split("/").filter(Boolean);
-  const category = pathSegments[0] || "";
-  const subcategory = pathSegments[1] || "";
+  const { category, subcategory } = useCategoryParams();
   const { selection, changeAreaType, selectPrefecture, selectMunicipality } =
     useAreaSelection();
 
@@ -58,7 +53,7 @@ export function AreaPageClient() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <>
       {/* メインコンテンツ（左側） */}
       <div className="lg:col-span-2 space-y-6">
         {/* 地域選択コンポーネント */}
@@ -80,82 +75,6 @@ export function AreaPageClient() {
       <div className="lg:col-span-1">
         <RankingItemsSidebar category={category} subcategory={subcategory} />
       </div>
-    </div>
-  );
-}
-
-/**
- * 全国ダッシュボードコンポーネント
- */
-function NationalDashboard({ areaCode }: { areaCode: string }) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>全国ダッシュボード</CardTitle>
-        <CardDescription>全国の統計データを表示しています</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-center py-8">
-          <p className="text-muted-foreground">
-            全国データのダッシュボード表示機能は準備中です
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            地域コード: {areaCode}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-/**
- * 都道府県ダッシュボードコンポーネント
- */
-function PrefectureDashboard({ areaCode }: { areaCode: string }) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>都道府県ダッシュボード</CardTitle>
-        <CardDescription>
-          選択された都道府県の統計データを表示しています
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-center py-8">
-          <p className="text-muted-foreground">
-            都道府県データのダッシュボード表示機能は準備中です
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            地域コード: {areaCode}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-/**
- * 市区町村ダッシュボードコンポーネント
- */
-function MunicipalityDashboard({ areaCode }: { areaCode: string }) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>市区町村ダッシュボード</CardTitle>
-        <CardDescription>
-          選択された市区町村の統計データを表示しています
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-center py-8">
-          <p className="text-muted-foreground">
-            市区町村データのダッシュボード表示機能は準備中です
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            地域コード: {areaCode}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    </>
   );
 }
