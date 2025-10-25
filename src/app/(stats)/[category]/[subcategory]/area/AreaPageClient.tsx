@@ -8,10 +8,12 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 import { AreaSelector } from "@/components/molecules/area/AreaSelector";
+import { RankingItemsSidebar } from "@/components/molecules/ranking/RankingItemsSidebar";
 
 import { Municipality, Prefecture } from "@/features/area/types";
 
 import { AreaType, useAreaSelection } from "@/hooks/area/useAreaSelection";
+import { usePathname } from "next/navigation";
 
 /**
  * 地域別ダッシュボードページのクライアントコンポーネント
@@ -21,6 +23,11 @@ import { AreaType, useAreaSelection } from "@/hooks/area/useAreaSelection";
  * @returns 地域別ダッシュボードページのJSX要素
  */
 export function AreaPageClient() {
+  // URLパラメータからカテゴリとサブカテゴリを取得
+  const pathname = usePathname();
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const category = pathSegments[0] || "";
+  const subcategory = pathSegments[1] || "";
   const { selection, changeAreaType, selectPrefecture, selectMunicipality } =
     useAreaSelection();
 
@@ -51,20 +58,28 @@ export function AreaPageClient() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* 地域選択コンポーネント */}
-      <AreaSelector
-        selectedAreaType={selection.areaType}
-        selectedPrefectureCode={selection.prefectureCode}
-        onAreaTypeChange={handleAreaTypeChange}
-        onPrefectureSelect={handlePrefectureSelect}
-        onMunicipalitySelect={handleMunicipalitySelect}
-      />
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* メインコンテンツ（左側） */}
+      <div className="lg:col-span-2 space-y-6">
+        {/* 地域選択コンポーネント */}
+        <AreaSelector
+          selectedAreaType={selection.areaType}
+          selectedPrefectureCode={selection.prefectureCode}
+          onAreaTypeChange={handleAreaTypeChange}
+          onPrefectureSelect={handlePrefectureSelect}
+          onMunicipalitySelect={handleMunicipalitySelect}
+        />
 
-      {/* 選択された地域のダッシュボード */}
-      {selection.selectedCode && (
-        <div className="mt-6">{renderDashboard()}</div>
-      )}
+        {/* 選択された地域のダッシュボード */}
+        {selection.selectedCode && (
+          <div className="mt-6">{renderDashboard()}</div>
+        )}
+      </div>
+
+      {/* ランキング項目サイドバー（右側） */}
+      <div className="lg:col-span-1">
+        <RankingItemsSidebar category={category} subcategory={subcategory} />
+      </div>
     </div>
   );
 }
