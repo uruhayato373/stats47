@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+
+import { AlertCircle } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -10,10 +14,10 @@ import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Label } from "@/components/atoms/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
+
 import { Prefecture } from "@/features/area/types";
+
 import { useAreaSelection } from "@/hooks/area/useAreaSelection";
-import { AlertCircle } from "lucide-react";
-import { useEffect } from "react";
 
 /**
  * PrefectureSelector の Props
