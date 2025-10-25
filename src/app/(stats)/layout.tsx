@@ -23,7 +23,9 @@ export default function StatsLayout({ children }: StatsLayoutProps) {
     <main className="lg:ps-60 transition-all duration-300 min-h-screen">
       <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-background">
         <StatsBreadcrumb />
-        <div className="flex-1 overflow-y-auto">{children}</div>
+        <div className="flex-1 overflow-y-auto">
+          <div className="container mx-auto px-4 py-6">{children}</div>
+        </div>
       </div>
     </main>
   );

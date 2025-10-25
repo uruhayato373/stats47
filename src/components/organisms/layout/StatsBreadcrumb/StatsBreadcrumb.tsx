@@ -20,15 +20,22 @@ export const StatsBreadcrumb = () => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
 
-  // URLパスからカテゴリとサブカテゴリを取得
+  // URLパスからカテゴリ、サブカテゴリ、ページタイプを取得
   const categoryId = pathSegments[0];
   const subcategoryId = pathSegments[1];
+  const pageType = pathSegments[2];
 
   const categories = listCategories();
   const category = categories.find((cat) => cat.id === categoryId);
   const subcategory = category?.subcategories?.find(
     (sub) => sub.id === subcategoryId
   );
+
+  // ページタイプの表示名マッピング
+  const pageTypeNames: Record<string, string> = {
+    area: "地域別",
+    ranking: "ランキング",
+  };
 
   return (
     <div className="sticky top-0 z-10 py-3 px-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +58,20 @@ export const StatsBreadcrumb = () => {
         {subcategory && (
           <>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground/70">{subcategory.name}</span>
+            <Link
+              href={`/${category.id}/${subcategory.id}`}
+              className="transition-colors hover:text-foreground"
+            >
+              {subcategory.name}
+            </Link>
+          </>
+        )}
+        {pageType && pageTypeNames[pageType] && (
+          <>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-foreground/70">
+              {pageTypeNames[pageType]}
+            </span>
           </>
         )}
       </nav>

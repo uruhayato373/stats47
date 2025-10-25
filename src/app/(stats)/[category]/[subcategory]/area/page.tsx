@@ -8,6 +8,9 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 
+/**
+ * 地域別ダッシュボードページのProps型定義
+ */
 interface PageProps {
   params: Promise<{
     category: string;
@@ -15,6 +18,10 @@ interface PageProps {
   }>;
 }
 
+/**
+ * 地域別ダッシュボードページのメタデータを生成
+ * SEO対応のためのタイトルと説明を動的に生成
+ */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -26,20 +33,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function AreaPage({ params }: PageProps) {
-  const { category, subcategory } = await params;
-
+/**
+ * 地域別ダッシュボードページのメインコンポーネント
+ *
+ * 指定されたカテゴリとサブカテゴリの地域別統計データを表示するページです。
+ * 現在は準備中状態で、将来的に地域選択機能とダッシュボード表示機能を実装予定です。
+ *
+ * @returns 地域別ダッシュボードページのJSX要素
+ */
+export default async function AreaPage() {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">
-          地域別ダッシュボード
-        </h2>
-        <p className="text-muted-foreground">
-          {category}の{subcategory}に関する地域別統計データを表示します
-        </p>
-      </div>
-
+      {/* 地域選択カード */}
       <Card>
         <CardHeader>
           <CardTitle>地域選択</CardTitle>
