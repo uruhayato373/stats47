@@ -5,11 +5,13 @@
 
 "use client";
 
-import * as d3 from "d3";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+import * as d3 from "d3";
 
 import { GeoshapeService } from "@/features/gis/geoshape/services/geoshape-service";
 import type { PrefectureFeature } from "@/features/gis/geoshape/types";
+
 import type { MapConfig, MapState } from "../types";
 
 interface PrefectureMapD3Props extends MapConfig {

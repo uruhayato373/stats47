@@ -3,8 +3,8 @@
  * ローカルのMockデータからTopoJSONを取得
  */
 
-import type { TopoJSONTopology } from "../types";
 import { geoshapeConfig } from "../config/geoshape-config";
+import type { ResolutionLevel, TopoJSONTopology } from "../types";
 
 /**
  * MockデータソースクラS
@@ -14,7 +14,9 @@ export class MockDataSource {
    * MockデータからTopoJSONを取得
    * @returns TopoJSONトポロジー
    */
-  static async fetch(): Promise<TopoJSONTopology> {
+  static async fetch(
+    resolution: ResolutionLevel = "low"
+  ): Promise<TopoJSONTopology> {
     try {
       const response = await fetch(geoshapeConfig.mockDataPath);
 
@@ -36,7 +38,9 @@ export class MockDataSource {
     } catch (error) {
       console.error("[MockDataSource] Failed to load mock data:", error);
       throw new Error(
-        `Mock data fetch failed: ${error instanceof Error ? error.message : "Unknown error"}`
+        `Mock data fetch failed: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
       );
     }
   }
@@ -56,4 +60,3 @@ export class MockDataSource {
     }
   }
 }
-

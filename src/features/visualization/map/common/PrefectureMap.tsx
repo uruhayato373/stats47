@@ -6,6 +6,7 @@
 "use client";
 
 import { PrefectureMapD3 } from "../d3/PrefectureMapD3";
+
 import type { MapConfig } from "../types";
 
 interface PrefectureMapProps extends MapConfig {

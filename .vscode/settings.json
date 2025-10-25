@@ -9,5 +9,5 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "cSpell.words": ["Estat", "Metainfo"]
+  "cSpell.words": ["Estat", "geoshape", "Metainfo"]
 }
