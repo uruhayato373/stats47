@@ -28,13 +28,9 @@ export class GeoshapeRepository {
   static async getPrefectureTopology(
     options: FetchOptions = {}
   ): Promise<FetchResult<TopoJSONTopology>> {
-    const {
-      resolution = "low",
-      useCache = true,
-      forceRefresh = false,
-    } = options;
+    const { useCache = true, forceRefresh = false } = options;
 
-    const cacheKey = `prefecture_${resolution}`;
+    const cacheKey = "prefecture_low";
 
     // 1. メモリキャッシュチェック
     if (useCache && !forceRefresh) {
@@ -52,10 +48,8 @@ export class GeoshapeRepository {
 
     // 2. Mockデータを優先（開発環境では常にMockを使用）
     try {
-      console.log(
-        `[GeoshapeRepository] Loading from mock data (${resolution})`
-      );
-      const data = await MockDataSource.fetch(resolution);
+      console.log("[GeoshapeRepository] Loading from mock data");
+      const data = await MockDataSource.fetch();
       this.setMemoryCache(cacheKey, data);
 
       return {
@@ -71,10 +65,8 @@ export class GeoshapeRepository {
 
     // 3. R2ストレージから取得
     try {
-      console.log(
-        `[GeoshapeRepository] Loading from R2 storage (${resolution})`
-      );
-      const data = await R2DataSource.fetch(resolution);
+      console.log("[GeoshapeRepository] Loading from R2 storage");
+      const data = await R2DataSource.fetch();
 
       if (data) {
         this.setMemoryCache(cacheKey, data);
@@ -93,13 +85,11 @@ export class GeoshapeRepository {
 
     // 4. 外部APIから取得
     try {
-      console.log(
-        `[GeoshapeRepository] Loading from external API (${resolution})`
-      );
-      const data = await ExternalDataSource.fetch(resolution);
+      console.log("[GeoshapeRepository] Loading from external API");
+      const data = await ExternalDataSource.fetch();
 
       // 取得後、R2に非同期保存（バックグラウンド）
-      R2DataSource.save(data, resolution).catch((error) => {
+      R2DataSource.save(data).catch((error) => {
         console.warn("[GeoshapeRepository] R2 save failed:", error);
       });
 

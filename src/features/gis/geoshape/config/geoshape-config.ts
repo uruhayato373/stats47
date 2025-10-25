@@ -30,34 +30,24 @@ export const geoshapeConfig: GeoshapeConfig = {
 };
 
 /**
- * 解像度別のファイル名マッピング
+ * 使用する解像度（低解像度のみ）
  */
-export const resolutionFileMap = {
-  low: "jp_pref.l.topojson",
-  medium: "jp_pref.m.topojson",
-  high: "jp_pref.h.topojson",
-} as const;
+const RESOLUTION_FILE = "jp_pref.l.topojson";
 
 /**
  * Geoshape外部APIのデータURL構築
- * @param resolution 解像度レベル
  * @returns 完全なURL
  */
-export function buildGeoshapeExternalUrl(
-  resolution: "low" | "medium" | "high" = "low"
-): string {
+export function buildGeoshapeExternalUrl(): string {
   // Geoshapeリポジトリの実際のURL構造に基づいて構築
   // 例: https://geoshape.ex.nii.ac.jp/geonlp/download/latest/jp_pref.l.topojson
-  return `${geoshapeConfig.externalApiUrl}/geonlp/download/latest/${resolutionFileMap[resolution]}`;
+  return `${geoshapeConfig.externalApiUrl}/geonlp/download/latest/${RESOLUTION_FILE}`;
 }
 
 /**
  * R2ストレージのキーを構築
- * @param resolution 解像度レベル
  * @returns R2オブジェクトキー
  */
-export function buildR2Key(
-  resolution: "low" | "medium" | "high" = "low"
-): string {
-  return `${geoshapeConfig.r2BucketPath}/prefecture.${resolution}.topojson`;
+export function buildR2Key(): string {
+  return `${geoshapeConfig.r2BucketPath}/prefecture.low.topojson`;
 }

@@ -4,7 +4,7 @@
  */
 
 import { geoshapeConfig } from "../config/geoshape-config";
-import type { ResolutionLevel, TopoJSONTopology } from "../types/index";
+import type { TopoJSONTopology } from "../types/index";
 
 /**
  * MockデータソースクラS
@@ -14,9 +14,7 @@ export class MockDataSource {
    * MockデータからTopoJSONを取得
    * @returns TopoJSONトポロジー
    */
-  static async fetch(
-    resolution: ResolutionLevel = "low"
-  ): Promise<TopoJSONTopology> {
+  static async fetch(): Promise<TopoJSONTopology> {
     try {
       const response = await fetch(geoshapeConfig.mockDataPath);
 
@@ -26,7 +24,7 @@ export class MockDataSource {
         );
       }
 
-      const data = await response.json();
+      const data = (await response.json()) as TopoJSONTopology;
 
       // データの妥当性チェック
       if (!data || data.type !== "Topology") {

@@ -3,13 +3,7 @@
  * 都道府県別マップの表示とイベント処理を担当
  */
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
+import { Card, CardContent } from "@/components/atoms/ui/card";
 
 import { PrefectureMap } from "@/features/visualization/map/common/PrefectureMap";
 
@@ -23,11 +17,11 @@ interface RankingMapCardProps {
 export function RankingMapCard({ className }: RankingMapCardProps) {
   return (
     <Card className={className}>
-      <CardContent>
+      <CardContent className="p-0">
         <PrefectureMap
-          width={800}
+          width={undefined}
           height={600}
-          className="w-full"
+          className="w-full h-full"
           center={[137, 38]}
           zoom={1}
           projection="mercator"

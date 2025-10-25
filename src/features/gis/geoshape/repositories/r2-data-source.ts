@@ -3,8 +3,8 @@
  * Cloudflare R2ストレージからTopoJSONを取得・保存
  */
 
-import type { TopoJSONTopology, ResolutionLevel } from "../types";
 import { buildR2Key, geoshapeConfig } from "../config/geoshape-config";
+import type { TopoJSONTopology } from "../types";
 
 /**
  * R2データソースクラス
@@ -12,19 +12,18 @@ import { buildR2Key, geoshapeConfig } from "../config/geoshape-config";
 export class R2DataSource {
   /**
    * R2ストレージからTopoJSONを取得
-   * @param resolution 解像度レベル
    * @returns TopoJSONトポロジー、存在しない場合はnull
    */
-  static async fetch(
-    resolution: ResolutionLevel = "low"
-  ): Promise<TopoJSONTopology | null> {
+  static async fetch(): Promise<TopoJSONTopology | null> {
     try {
-      const r2Key = buildR2Key(resolution);
+      const r2Key = buildR2Key();
       console.log(`[R2DataSource] Attempting to fetch: ${r2Key}`);
 
       // R2バケットへのアクセスはサーバーサイド（API Route）経由で行う
       // クライアントサイドからは直接アクセスできない
-      const response = await fetch(`/api/gis/geoshape/r2?key=${encodeURIComponent(r2Key)}`);
+      const response = await fetch(
+        `/api/gis/geoshape/r2?key=${encodeURIComponent(r2Key)}`
+      );
 
       if (response.status === 404) {
         console.log(`[R2DataSource] Data not found in R2: ${r2Key}`);
@@ -56,14 +55,10 @@ export class R2DataSource {
   /**
    * R2ストレージにTopoJSONを保存（バックグラウンド処理）
    * @param data TopoJSONトポロジー
-   * @param resolution 解像度レベル
    */
-  static async save(
-    data: TopoJSONTopology,
-    resolution: ResolutionLevel = "low"
-  ): Promise<void> {
+  static async save(data: TopoJSONTopology): Promise<void> {
     try {
-      const r2Key = buildR2Key(resolution);
+      const r2Key = buildR2Key();
       console.log(`[R2DataSource] Saving to R2: ${r2Key}`);
 
       // R2への保存はAPI Route経由で行う
@@ -92,16 +87,18 @@ export class R2DataSource {
 
   /**
    * R2ストレージからデータを削除
-   * @param resolution 解像度レベル
    */
-  static async delete(resolution: ResolutionLevel = "low"): Promise<void> {
+  static async delete(): Promise<void> {
     try {
-      const r2Key = buildR2Key(resolution);
+      const r2Key = buildR2Key();
       console.log(`[R2DataSource] Deleting from R2: ${r2Key}`);
 
-      const response = await fetch(`/api/gis/geoshape/r2?key=${encodeURIComponent(r2Key)}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `/api/gis/geoshape/r2?key=${encodeURIComponent(r2Key)}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok && response.status !== 404) {
         throw new Error(`R2 delete failed: ${response.status}`);
@@ -127,4 +124,3 @@ export class R2DataSource {
     }
   }
 }
-

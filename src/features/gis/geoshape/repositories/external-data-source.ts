@@ -3,8 +3,8 @@
  * Geoshapeリポジトリ（https://geoshape.ex.nii.ac.jp）からデータを取得
  */
 
-import type { TopoJSONTopology, ResolutionLevel } from "../types";
 import { buildGeoshapeExternalUrl } from "../config/geoshape-config";
+import type { TopoJSONTopology } from "../types";
 
 /**
  * 外部APIデータソースクラス
@@ -12,13 +12,10 @@ import { buildGeoshapeExternalUrl } from "../config/geoshape-config";
 export class ExternalDataSource {
   /**
    * Geoshape外部APIからTopoJSONを取得
-   * @param resolution 解像度レベル
    * @returns TopoJSONトポロジー
    */
-  static async fetch(
-    resolution: ResolutionLevel = "low"
-  ): Promise<TopoJSONTopology> {
-    const url = buildGeoshapeExternalUrl(resolution);
+  static async fetch(): Promise<TopoJSONTopology> {
+    const url = buildGeoshapeExternalUrl();
 
     try {
       console.log(`[ExternalDataSource] Fetching from: ${url}`);
@@ -37,16 +34,14 @@ export class ExternalDataSource {
         );
       }
 
-      const data = await response.json();
+      const data = (await response.json()) as TopoJSONTopology;
 
       // データの妥当性チェック
       if (!data || data.type !== "Topology") {
         throw new Error("Invalid TopoJSON format from external API");
       }
 
-      console.log(
-        `[ExternalDataSource] Successfully fetched data (${resolution} resolution)`
-      );
+      console.log("[ExternalDataSource] Successfully fetched data");
       return data as TopoJSONTopology;
     } catch (error) {
       console.error("[ExternalDataSource] Failed to fetch:", error);
@@ -56,7 +51,9 @@ export class ExternalDataSource {
       }
 
       throw new Error(
-        `External API fetch failed: ${error instanceof Error ? error.message : "Unknown error"}`
+        `External API fetch failed: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
       );
     }
   }
@@ -66,7 +63,7 @@ export class ExternalDataSource {
    * @returns 利用可能ならtrue
    */
   static async isAvailable(): Promise<boolean> {
-    const url = buildGeoshapeExternalUrl("low");
+    const url = buildGeoshapeExternalUrl();
 
     try {
       const response = await fetch(url, {
@@ -79,4 +76,3 @@ export class ExternalDataSource {
     }
   }
 }
-
