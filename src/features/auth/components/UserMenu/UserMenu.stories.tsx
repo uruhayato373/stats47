@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { UserMenu } from "./UserMenu";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof UserMenu> = {
   title: "Features/Auth/UserMenu",

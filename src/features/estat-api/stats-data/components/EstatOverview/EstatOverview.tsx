@@ -1,17 +1,6 @@
 "use client";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/atoms/ui/accordion";
-import { Badge } from "@/components/atoms/ui/badge";
-import {
-  EstatStatsDataFormatter,
-  EstatStatsDataResponse,
-} from "@/lib/estat-api";
-import {
   AlertTriangle,
   BarChart3,
   CheckCircle,
@@ -19,6 +8,19 @@ import {
   Info,
   MapPin,
 } from "lucide-react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/atoms/ui/accordion";
+import { Badge } from "@/components/atoms/ui/badge";
+
+import {
+  EstatStatsDataFormatter,
+  EstatStatsDataResponse,
+} from "@/lib/estat-api";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;

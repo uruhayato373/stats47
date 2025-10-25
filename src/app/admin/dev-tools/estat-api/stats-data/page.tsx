@@ -9,7 +9,9 @@
 
 import { getEnvironmentConfig } from "@/lib/env";
 import { estatAPI } from "@/lib/estat-api";
+
 import { getMockStatsData } from "@data/mock/statsdata";
+
 import StatsDataPageContent from "./StatsDataPageContent";
 
 /**

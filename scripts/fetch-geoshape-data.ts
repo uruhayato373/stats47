@@ -10,9 +10,10 @@
  * - 出典表記: 「歴史的行政区域データセットβ版（CODH作成）」
  */
 
-import fetch from "node-fetch";
 import fs from "fs/promises";
 import path from "path";
+
+import fetch from "node-fetch";
 
 interface FetchOptions {
   year: number; // 取得する年度（例: 2023）

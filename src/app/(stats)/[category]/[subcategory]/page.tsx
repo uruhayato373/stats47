@@ -1,3 +1,8 @@
+import Link from "next/link";
+
+import { MapPin, TrendingUp } from "lucide-react";
+import { Metadata } from "next";
+
 import { Button } from "@/components/atoms/ui/button";
 import {
   Card,
@@ -6,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
+import { NotFoundMessage } from "@/components/molecules/errors/NotFoundMessage";
+
 import { listCategories } from "@/features/category";
-import { MapPin, TrendingUp } from "lucide-react";
-import { Metadata } from "next";
-import Link from "next/link";
+
 
 /**
  * サブカテゴリページのプロパティ
@@ -70,19 +75,12 @@ export default async function SubcategoryPage({ params }: PageProps) {
   // カテゴリまたはサブカテゴリが見つからない場合は404ページを表示
   if (!categoryData || !subcategoryData) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">
-            ページが見つかりません
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            指定されたページは存在しません。
-          </p>
-          <Button asChild>
-            <Link href="/">トップページに戻る</Link>
-          </Button>
-        </div>
-      </div>
+      <NotFoundMessage
+        title="ページが見つかりません"
+        message="指定されたページは存在しません。"
+        buttonText="トップページに戻る"
+        buttonHref="/"
+      />
     );
   }
 

@@ -3,10 +3,11 @@
  * 責務: 複数データの一括処理とレート制限
  */
 
-import { EstatMetaInfoFetcher } from "./fetcher";
-import { EstatIdUtils } from "./id-utils";
 import { ESTAT_API_CONFIG } from "../config";
 import { EstatBatchProcessError } from "../errors";
+
+import { EstatMetaInfoFetcher } from "./fetcher";
+import { EstatIdUtils } from "./id-utils";
 
 /**
  * バッチ処理結果の型定義

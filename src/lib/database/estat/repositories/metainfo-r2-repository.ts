@@ -5,8 +5,8 @@
  * データ永続化層：Repository Pattern
  */
 
-import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 import { MetaInfoCacheDataR2 } from "@/lib/database/estat/types";
+import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 
 /**
  * R2環境インターフェース

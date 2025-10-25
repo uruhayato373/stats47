@@ -1,6 +1,8 @@
-import type { Preview } from "@storybook/nextjs-vite";
 import React, { useEffect, useState } from "react";
+
 import { Provider } from "jotai";
+
+import type { Preview } from "@storybook/nextjs-vite";
 import "./storybook.css";
 
 const preview: Preview = {

@@ -1,12 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { EstatStatsDataFormatter } from "../formatter";
+
 import { EstatDataFilter } from "../filter";
+import { EstatStatsDataFormatter } from "../formatter";
 import {
   getPrefectures,
   sortByValueDesc,
   filterByTime,
   groupByArea,
 } from "../helpers";
+
 import { mockStatsDataResponse } from "./fixtures";
 
 describe("Stats Data Integration Tests", () => {

@@ -1,17 +1,19 @@
 "use client"
 
 import * as React from "react"
+
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/atoms/ui/button"
 import { Input } from "@/components/atoms/ui/input"
 import { Separator } from "@/components/atoms/ui/separator"
 import { Sheet, SheetContent } from "@/components/atoms/ui/sheet"
 import { Skeleton } from "@/components/atoms/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/atoms/ui/tooltip"
+
+import { cn } from "@/lib/utils"
 
 const SIDEBAR_WIDTH = "15rem"
 const SIDEBAR_WIDTH_MOBILE = "20rem"

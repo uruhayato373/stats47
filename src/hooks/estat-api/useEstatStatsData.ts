@@ -6,9 +6,11 @@
 "use client";
 
 import { useMemo } from "react";
+
 import useSWR from "swr";
-import { generateStatsDataCacheKey } from "@/lib/estat-api/stats-data/cache-key";
+
 import { GetStatsDataParams, EstatStatsDataResponse } from "@/lib/estat-api";
+import { generateStatsDataCacheKey } from "@/lib/estat-api/stats-data/cache-key";
 
 /**
  * APIレスポンスの型定義

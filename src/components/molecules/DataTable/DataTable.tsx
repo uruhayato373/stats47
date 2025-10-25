@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/organisms/ui/table";
+
+import { Badge } from "@/components/atoms/ui/badge";
 import { Input } from "@/components/atoms/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/molecules/ui/select";
-import { Badge } from "@/components/atoms/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/organisms/ui/table";
 
 export interface TableColumn<T = Record<string, unknown>> {
   key: string;

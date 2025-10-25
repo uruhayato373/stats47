@@ -1,7 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import EstatMetaInfoDisplay from "./EstatMetaInfoDisplay";
+
 import type { EstatMetaInfoResponse } from "@/lib/estat-api";
+
+import EstatMetaInfoDisplay from "./EstatMetaInfoDisplay";
+
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 // モックデータ
 const mockMetaInfoResponse: EstatMetaInfoResponse = {

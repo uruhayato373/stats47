@@ -1,3 +1,5 @@
+import { Calendar, Clock, TrendingUp } from "lucide-react";
+
 import { Badge } from "@/components/atoms/ui/badge";
 import {
   Card,
@@ -5,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
+
 import { TimeAxisInfo } from "@/lib/estat-api/types/meta-info";
-import { Calendar, Clock, TrendingUp } from "lucide-react";
 
 interface TimeAxisTabProps {
   timeAxis: TimeAxisInfo;

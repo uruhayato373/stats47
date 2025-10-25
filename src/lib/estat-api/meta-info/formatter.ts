@@ -5,6 +5,7 @@
  * @see GET_META_INFO完全ガイド
  */
 
+import { ESTAT_API_CONFIG } from "../config";
 import { EstatMetaInfoResponse } from "../types";
 import {
   TableInfo,
@@ -18,7 +19,6 @@ import {
   ClassItem,
   DimensionSelectOptions,
 } from "../types/meta-info";
-import { ESTAT_API_CONFIG } from "../config";
 
 export class EstatMetaInfoFormatter {
   /**

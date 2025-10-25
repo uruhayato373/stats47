@@ -1,12 +1,13 @@
 "use client";
 
+import React from "react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import React from "react";
 // Props simplified - category and subcategory are now handled by layout
 
 // モックデータ

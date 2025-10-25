@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import {
   Card,
   CardContent,
@@ -7,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 // Props simplified - category and subcategory are now handled by layout
-import React from "react";
 
 // モックデータ
 const mockData = {

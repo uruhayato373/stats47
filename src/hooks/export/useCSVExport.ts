@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
+
+import { FormattedValue } from "@/lib/estat-api";
 import {
   generateCSV,
   downloadCSV,
   generateFilename,
 } from "@/lib/export/csv/generator";
-import { FormattedValue } from "@/lib/estat-api";
 import {
   CSVExportOptions,
   ExportResult,

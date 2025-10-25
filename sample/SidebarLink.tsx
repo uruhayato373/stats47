@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
+
 import type { NavigationItem } from "@/lib/navigation/sidebar-config";
+import { cn } from "@/lib/utils";
 
 interface SidebarLinkProps extends NavigationItem {
   isActive: boolean;

@@ -5,9 +5,11 @@
 
 "use client";
 
-import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
-import { useEstatAPIFieldStats } from "@/hooks/estat-api/useEstatAPIFieldStats";
 import { Filter } from "lucide-react";
+
+import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
+
+import { useEstatAPIFieldStats } from "@/hooks/estat-api/useEstatAPIFieldStats";
 
 /**
  * StatsFieldSidebarのプロパティ定義

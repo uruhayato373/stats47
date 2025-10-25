@@ -10,11 +10,12 @@
  */
 
 import { GEOSHAPE_CONFIG } from "./config";
-import type { GeoShapeDataLevel, LoadResult, PrewarmResult } from "./types";
 import {
   convertTopoJsonToGeoJson,
   validateTopoJson,
 } from "./utils/topojson-converter";
+
+import type { GeoShapeDataLevel, LoadResult, PrewarmResult } from "./types";
 
 export class AutoCacheGeoShapeLoader {
   private static memoryCache = new Map<string, any>();

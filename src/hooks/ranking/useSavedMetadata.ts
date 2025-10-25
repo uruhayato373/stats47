@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { SavedMetadataItem } from "@/lib/estat-api/types/meta-info";
 
 export function useSavedMetadata(initialData?: SavedMetadataItem[]) {

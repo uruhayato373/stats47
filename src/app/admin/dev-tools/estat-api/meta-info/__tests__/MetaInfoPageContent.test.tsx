@@ -1,5 +1,6 @@
-import type { EstatMetaInfo } from "@/lib/database/estat/types";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import type { EstatMetaInfo } from "@/lib/database/estat/types";
 
 /**
  * MetaInfoPageContent テストスイート

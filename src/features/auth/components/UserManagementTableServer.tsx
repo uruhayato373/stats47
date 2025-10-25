@@ -1,7 +1,8 @@
 // サーバーコンポーネント
 
-import type { User } from "../types";
 import { UserToggleButton } from "./UserToggleButton";
+
+import type { User } from "../types";
 
 interface UserManagementTableServerProps {
   users: User[];

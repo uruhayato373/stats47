@@ -3,10 +3,10 @@
  */
 
 // 都道府県データ
+import municipalityData0000020201_A1101 from "./municipality/0000020201_A1101.json";
 import prefectureData0000010101_A1101 from "./prefecture/0000010101_A1101.json";
 
 // 市区町村データ
-import municipalityData0000020201_A1101 from "./municipality/0000020201_A1101.json";
 
 /**
  * モックデータマップ

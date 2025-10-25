@@ -1,3 +1,7 @@
+import { useMemo } from "react";
+
+import { MapPin } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -12,9 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/organisms/ui/table";
+
 import { PrefectureInfo } from "@/lib/estat-api/types/meta-info";
-import { MapPin } from "lucide-react";
-import { useMemo } from "react";
 
 interface AreasTabProps {
   areas: PrefectureInfo[];

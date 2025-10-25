@@ -1,6 +1,7 @@
 import useSWR from "swr";
-import { fetcher } from "@/lib/swr/fetcher";
+
 import { FormattedValue } from "@/lib/estat-api";
+import { fetcher } from "@/lib/swr/fetcher";
 
 /**
  * 年度一覧を取得するカスタムフック（新API対応）

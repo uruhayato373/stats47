@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { createRankingRepository } from "@/lib/ranking/ranking-repository";
 
 /**

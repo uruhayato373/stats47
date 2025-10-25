@@ -1,8 +1,12 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { EstatStatsDataFormatter } from "../formatter";
+
 import { parseEstatValue } from "../../types/stats-data";
-import type { EstatStatsDataResponse, FormattedEstatData } from "../../types";
+import { EstatStatsDataFormatter } from "../formatter";
+
 import { mockStatsDataResponse } from "./fixtures";
+
+import type { EstatStatsDataResponse, FormattedEstatData } from "../../types";
+
 
 describe("EstatStatsDataFormatter", () => {
   let response: EstatStatsDataResponse;

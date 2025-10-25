@@ -4,9 +4,10 @@
  */
 
 import { estatAPI } from "../client";
-import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../types";
-import { EstatMetaInfoFormatter } from "./formatter";
 import { EstatMetaInfoFetchError } from "../errors";
+import { EstatMetaInfoResponse, TransformedMetadataEntry } from "../types";
+
+import { EstatMetaInfoFormatter } from "./formatter";
 
 export class EstatMetaInfoFetcher {
   /**

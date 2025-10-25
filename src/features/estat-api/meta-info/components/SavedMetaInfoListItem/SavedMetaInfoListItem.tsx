@@ -1,7 +1,8 @@
 "use client";
 
-import type { EstatMetaInfo } from "@/lib/database/estat/types";
 import { Eye } from "lucide-react";
+
+import type { EstatMetaInfo } from "@/lib/database/estat/types";
 
 interface SavedMetaInfoListItemProps {
   item: EstatMetaInfo;

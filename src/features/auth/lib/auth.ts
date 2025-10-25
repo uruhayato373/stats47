@@ -1,8 +1,10 @@
-import NextAuth from "next-auth";
-import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+
 import { getDataProvider } from "@/lib/database";
+
+import type { NextAuthConfig } from "next-auth";
 
 // TypeScript型定義の拡張
 declare module "next-auth" {

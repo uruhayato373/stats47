@@ -3,6 +3,7 @@
  * 責務: ビジネスロジック（e-Stat API操作）のみを担当
  */
 
+import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "../constants";
 import {
   EstatMetaInfoResponse,
   EstatStatsDataResponse,
@@ -11,9 +12,9 @@ import {
   GetStatsDataParams,
   GetStatsListParams,
 } from "../types";
-import { ESTAT_API, ESTAT_ENDPOINTS, ESTAT_APP_ID } from "../constants";
-import { EstatHTTPClient } from "./http-client";
+
 import { EstatErrorHandler } from "./error-handler";
+import { EstatHTTPClient } from "./http-client";
 
 /**
  * e-Stat API クライアント

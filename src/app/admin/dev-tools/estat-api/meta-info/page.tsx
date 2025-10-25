@@ -1,5 +1,6 @@
 import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
 import { getEnvironmentConfig } from "@/lib/env";
+
 import MetaInfoPageContent from "./MetaInfoPageContent";
 
 /**

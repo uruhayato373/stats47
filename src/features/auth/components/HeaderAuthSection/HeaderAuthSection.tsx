@@ -1,7 +1,9 @@
 "use client";
 
-import { useAuthModal } from "@/hooks/useAuthModal";
 import { useSession } from "next-auth/react";
+
+import { useAuthModal } from "@/hooks/useAuthModal";
+
 import { AuthModal } from "../AuthModal";
 import { LoginButton } from "../LoginButton";
 import { UserMenu } from "../UserMenu";

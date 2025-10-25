@@ -1,7 +1,9 @@
 "use client";
 
-import { useSidebarStore } from "@/store/sidebar-store";
 import { usePathname } from "next/navigation";
+
+import { useSidebarStore } from "@/store/sidebar-store";
+
 import { AdminSidebar } from "./AdminSidebar";
 import { AppSidebar } from "./AppSidebar";
 

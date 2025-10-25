@@ -2,8 +2,9 @@
  * 地域コードバリデーター
  */
 
-import type { AreaValidationResult, AreaType } from "../types";
 import { getAreaType, validateAreaCode } from "../utils/code-converter";
+
+import type { AreaValidationResult, AreaType } from "../types";
 
 /**
  * 地域コードの包括的な検証

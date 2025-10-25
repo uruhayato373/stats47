@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { AppSidebar } from "./AppSidebar";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof AppSidebar> = {
   title: "Organisms/Layout/Sidebar/AppSidebar",

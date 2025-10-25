@@ -7,6 +7,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
+
 import { EstatStatsDataFormatter } from '../formatter';
 import {
   filterByArea,

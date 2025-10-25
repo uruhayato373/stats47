@@ -1,8 +1,9 @@
 import { estatAPI } from "../client";
 import { EstatStatsDataResponse } from "../types";
 import { FormattedEstatData } from "../types/stats-data";
-import { FetchOptions } from "./types";
+
 import { EstatStatsDataFormatter } from "./formatter";
+import { FetchOptions } from "./types";
 
 /**
  * e-STAT統計データ取得クラス

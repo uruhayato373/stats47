@@ -1,3 +1,8 @@
+import Link from "next/link";
+
+import { ChevronRight } from "lucide-react";
+import { Metadata } from "next";
+
 import { Button } from "@/components/atoms/ui/button";
 import {
   Card,
@@ -6,18 +11,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { listCategories } from "@/features/category";
-import { getCategoryIcon } from "@/lib/utils/get-category-icon";
-import { ChevronRight } from "lucide-react";
-import { Metadata } from "next";
-import Link from "next/link";
+import { NotFoundMessage } from "@/components/molecules/errors/NotFoundMessage";
 
+import { listCategories } from "@/features/category";
+
+/**
+ * カテゴリページのProps型定義
+ */
 interface PageProps {
   params: Promise<{
     category: string;
   }>;
 }
 
+/**
+ * カテゴリページのメタデータを生成
+ * SEOとOGPタグの設定を行う
+ */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -36,48 +46,46 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * カテゴリページのメインコンポーネント
+ *
+ * 指定されたカテゴリの統計データ一覧を表示するページです。
+ * カテゴリが存在しない場合は404エラーメッセージを表示します。
+ *
+ * @param params - URLパラメータ（カテゴリID）
+ * @returns カテゴリページのJSX要素
+ */
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
   const categories = listCategories();
   const categoryData = categories.find((cat) => cat.id === category);
 
+  // カテゴリが存在しない場合のエラーハンドリング
   if (!categoryData) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">
-            カテゴリが見つかりません
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            指定されたカテゴリ「{category}」は存在しません。
-          </p>
-          <Button asChild>
-            <Link href="/">トップページに戻る</Link>
-          </Button>
-        </div>
-      </div>
+      <NotFoundMessage
+        title="カテゴリが見つかりません"
+        message={`指定されたカテゴリ「${category}」は存在しません。`}
+        buttonText="トップページに戻る"
+        buttonHref="/"
+      />
     );
   }
 
-  const Icon = getCategoryIcon(categoryData.icon);
-
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* ページヘッダー */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-primary/10 rounded-lg">
-            <Icon className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-4xl font-bold text-foreground">
-            {categoryData.name}
-          </h1>
-        </div>
+        <h1 className="text-4xl font-bold text-foreground mb-4">
+          {categoryData.name}
+        </h1>
         <p className="text-xl text-muted-foreground">
           {categoryData.name}
           に関する統計データを様々な角度から分析・可視化できます
         </p>
       </div>
 
+      {/* サブカテゴリ一覧 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categoryData.subcategories.map((subcategory) => (
           <Card

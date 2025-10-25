@@ -1,8 +1,11 @@
 import { describe, it, expect, beforeAll } from "vitest";
+
 import { EstatDataFilter } from "../filter";
 import { EstatStatsDataFormatter } from "../formatter";
-import type { FormattedValue } from "../../types/stats-data";
+
 import { mockStatsDataResponse } from "./fixtures";
+
+import type { FormattedValue } from "../../types/stats-data";
 
 describe("EstatDataFilter", () => {
   let values: FormattedValue[];

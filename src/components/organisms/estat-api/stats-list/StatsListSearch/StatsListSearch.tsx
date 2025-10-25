@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+import { Loader2 } from "lucide-react";
+
 import { Button } from "@/components/atoms/ui/button";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
@@ -10,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
+
 import { StatsFieldCode, StatsListSearchOptions } from "@/lib/estat-api";
 import {
   COLLECT_AREA_OPTIONS,
@@ -17,8 +22,6 @@ import {
   STATS_FIELD_OPTIONS,
 } from "@/lib/estat-api/constants/search-options";
 import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
-import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;

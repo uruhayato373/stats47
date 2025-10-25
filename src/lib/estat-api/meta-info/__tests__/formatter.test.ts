@@ -1,10 +1,13 @@
 import { describe, it, expect, beforeAll } from "vitest";
+
 import { EstatMetaInfoFormatter } from "../formatter";
+
+import { mockMetaInfoResponse, minimalMetaInfoResponse } from "./fixtures";
+
 import type {
   EstatMetaInfoResponse,
   DimensionSelectOptions,
 } from "../../types";
-import { mockMetaInfoResponse, minimalMetaInfoResponse } from "./fixtures";
 
 describe("EstatMetaInfoFormatter", () => {
   let fullResponse: EstatMetaInfoResponse;

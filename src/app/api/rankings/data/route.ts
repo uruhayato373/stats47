@@ -7,6 +7,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+
 import { RankingCacheService } from "@/lib/ranking/RankingCacheService";
 
 export async function GET(request: NextRequest) {

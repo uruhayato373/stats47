@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { MapVisualizationOptions } from "@/components/organisms/visualization/ColorSchemeSelector";
 
 interface UseMapOptionsOptions {

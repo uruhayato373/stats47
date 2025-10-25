@@ -4,6 +4,7 @@
 
 import { readFileSync } from "fs";
 import { join } from "path";
+
 import type { EstatStatsDataResponse } from "../../../types";
 
 // モックデータをファイルから読み込む

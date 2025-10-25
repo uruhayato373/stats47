@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/atoms/ui/badge";
 import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+
 import {
   EstatStatsDataFormatter,
   EstatStatsDataResponse,

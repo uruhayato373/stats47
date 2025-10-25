@@ -3,9 +3,10 @@
  * 責務: キャッシュキーからAPIリクエストを実行し、フォーマット済みデータを返却
  */
 
-import { EstatStatsListFetcher, EstatStatsListFormatter } from "./";
-import { StatsListSearchResult } from "./types/stats-list";
 import { parseStatsListCacheKey } from "./cache-key";
+import { StatsListSearchResult } from "./types/stats-list";
+
+import { EstatStatsListFetcher, EstatStatsListFormatter } from "./";
 
 /**
  * SWR用のfetcher関数

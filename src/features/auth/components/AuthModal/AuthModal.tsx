@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -12,7 +14,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/molecules/ui/tabs";
-import { useState } from "react";
+
 import { LoginForm } from "../LoginForm";
 import { RegisterForm } from "../RegisterForm";
 

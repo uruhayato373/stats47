@@ -1,5 +1,10 @@
 "use client";
 
+import Link from "next/link";
+
+import { ChevronDown, LogOut, User } from "lucide-react";
+import { signOut } from "next-auth/react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/atoms/ui/dropdown-menu";
-import { ChevronDown, LogOut, User } from "lucide-react";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
+
 
 interface UserMenuProps {
   user: {

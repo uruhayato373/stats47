@@ -6,8 +6,9 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { generateCSV } from "@/lib/export/csv/generator";
+
 import { FormattedValue } from "@/lib/estat-api";
+import { generateCSV } from "@/lib/export/csv/generator";
 import { CSVExportOptions } from "@/lib/export/types";
 
 export async function POST(request: NextRequest) {

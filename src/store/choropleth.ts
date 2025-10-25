@@ -2,14 +2,16 @@
  * コロプレス地図表示機能用のZustandストア定義
  */
 
+import { create } from "zustand";
+
 import type { Category } from "@/features/category";
 import { listCategories } from "@/features/category";
+
 import {
   CategoryData,
   MapVisualizationSettings,
   SubcategoryData,
 } from "@/types/visualization/choropleth";
-import { create } from "zustand";
 
 // CategoryServiceの戻り値をCategoryData型に変換
 const convertToCategoryData = (category: Category): CategoryData => ({

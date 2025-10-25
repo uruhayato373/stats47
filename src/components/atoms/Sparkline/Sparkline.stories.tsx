@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Sparkline, SparklineDataPoint } from "./Sparkline";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 // モックデータ
 const generateMockData = (

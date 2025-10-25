@@ -1,7 +1,9 @@
 "use server";
 
-import usersData from "@data/mock/auth/users.json";
 import { revalidatePath } from "next/cache";
+
+import usersData from "@data/mock/auth/users.json";
+
 import type { User } from "../types";
 
 /**

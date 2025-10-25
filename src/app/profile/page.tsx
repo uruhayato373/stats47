@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSession } from "next-auth/react";
-import { User, Mail, Calendar, Shield } from "lucide-react";
+
 import Link from "next/link";
+
+import { User, Mail, Calendar, Shield } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function ProfilePage() {
   const { data: session } = useSession();

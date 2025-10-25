@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
+
 import { getDataProvider } from "@/lib/database";
 
 export async function POST(request: NextRequest) {

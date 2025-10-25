@@ -1,6 +1,8 @@
-import { render, screen } from "@testing-library/react";
 import { headers } from "next/headers";
+
+import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { SidebarWrapper } from "./SidebarWrapper";
 
 // モック

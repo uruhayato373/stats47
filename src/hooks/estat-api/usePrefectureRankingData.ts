@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
+
 import {
   FormattedEstatData,
   EstatStatsDataFormatter,
   EstatDataFilter,
 } from "@/lib/estat-api";
-import { VisualizationSettings } from "@/lib/ranking/visualization-settings";
 import { PrefectureRankingSettingsService } from "@/lib/ranking/settings-service";
+import { VisualizationSettings } from "@/lib/ranking/visualization-settings";
 
 interface UsePrefectureRankingDataOptions {
   data: any;

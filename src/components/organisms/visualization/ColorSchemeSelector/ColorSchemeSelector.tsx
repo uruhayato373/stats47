@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { ChevronDown, Palette } from "lucide-react";
 
 export interface MapVisualizationOptions {

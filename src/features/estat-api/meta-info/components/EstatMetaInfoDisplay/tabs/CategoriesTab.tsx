@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/organisms/ui/table";
+
 import { CategoryInfo } from "@/lib/estat-api/types/meta-info";
 
 interface CategoriesTabProps {

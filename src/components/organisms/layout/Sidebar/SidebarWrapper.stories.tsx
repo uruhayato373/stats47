@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { SidebarWrapper } from "./SidebarWrapper";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof SidebarWrapper> = {
   title: "Organisms/Layout/Sidebar/SidebarWrapper",

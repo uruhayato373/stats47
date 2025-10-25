@@ -1,6 +1,6 @@
+import estatMetainfo from "@data/mock/database/estat_metainfo.json";
 import rankingItems from "@data/mock/database/ranking_items.json";
 import rankingValues from "@data/mock/database/ranking_values.json";
-import estatMetainfo from "@data/mock/database/estat_metainfo.json";
 import users from "@data/mock/database/users.json";
 
 /**

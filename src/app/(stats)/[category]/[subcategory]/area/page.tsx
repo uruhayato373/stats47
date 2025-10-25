@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import {
   Card,
   CardContent,
@@ -5,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{

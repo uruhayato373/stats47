@@ -5,12 +5,15 @@
 
 "use client";
 
+import { useState } from "react";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/atoms/ui/dialog";
+
 import {
   formatOpenDate,
   formatSurveyDate,
@@ -22,7 +25,6 @@ import {
   truncateTitle,
 } from "@/lib/estat-api/stats-list/utils";
 import { DetailedStatsListTableInfo } from "@/lib/estat-api/types/stats-list";
-import { useState } from "react";
 
 interface StatsTableDetailModalProps {
   table: DetailedStatsListTableInfo | null;

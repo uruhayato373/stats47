@@ -1,6 +1,7 @@
 import useSWR from "swr";
-import { fetcher } from "@/lib/swr/fetcher";
+
 import { EstatMetaInfoResponse } from "@/lib/estat-api";
+import { fetcher } from "@/lib/swr/fetcher";
 
 /**
  * APIレスポンスの型定義

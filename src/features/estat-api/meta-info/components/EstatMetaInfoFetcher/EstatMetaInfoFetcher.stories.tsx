@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
+
 import EstatMetaInfoFetcher from "./EstatMetaInfoFetcher";
+
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof EstatMetaInfoFetcher> = {
   title: "Organisms/EstatApi/EstatMetaInfoFetcher",

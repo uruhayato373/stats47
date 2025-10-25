@@ -4,6 +4,7 @@
  */
 
 import { EstatAPIError } from "../types";
+
 import { EstatResponseParser } from "./response-parser";
 
 /**

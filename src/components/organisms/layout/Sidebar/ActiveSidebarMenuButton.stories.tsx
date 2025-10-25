@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Home, Settings } from "lucide-react";
+
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof ActiveSidebarMenuButton> = {
   title: "Organisms/Layout/Sidebar/ActiveSidebarMenuButton",

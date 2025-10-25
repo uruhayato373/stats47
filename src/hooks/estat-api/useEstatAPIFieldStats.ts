@@ -4,12 +4,13 @@
  */
 
 import { useState, useEffect } from "react";
-import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
+
 import {
   EstatStatsListFetcher,
   EstatStatsListError,
   EstatErrorType,
 } from "@/lib/estat-api/stats-list";
+import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
 
 export interface FieldStats {
   fieldCode: StatsFieldCode;

@@ -1,11 +1,12 @@
 "use client";
 
+import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+
 import {
   EstatStatsDataResponse,
   FormattedYear,
   EstatStatsDataFormatter,
 } from "@/lib/estat-api";
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
 
 interface EstatYearsTableProps {
   data: EstatStatsDataResponse;

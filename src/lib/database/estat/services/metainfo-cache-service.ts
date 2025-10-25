@@ -1,8 +1,8 @@
-import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 import {
   SaveMetaInfoCacheRequest,
   SaveMetaInfoCacheResponse,
 } from "@/lib/database/estat/types";
+import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
 
 export class EstatMetaInfoCacheService {
   /**

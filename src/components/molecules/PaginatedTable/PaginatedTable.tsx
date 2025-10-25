@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+
 import {
   ChevronRight,
   ChevronLeft,
   ChevronFirst,
   ChevronLast,
 } from "lucide-react";
+
 import { safeRender } from "@/lib/estat-api/meta-info";
 
 interface PaginatedTableProps {

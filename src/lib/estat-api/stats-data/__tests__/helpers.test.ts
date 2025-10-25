@@ -1,4 +1,6 @@
 import { describe, it, expect, beforeAll } from "vitest";
+
+import { EstatStatsDataFormatter } from "../formatter";
 import {
   filterByArea,
   filterByTime,
@@ -13,9 +15,11 @@ import {
   sortByValueDesc,
   sortByValueAsc,
 } from "../helpers";
-import { EstatStatsDataFormatter } from "../formatter";
-import type { FormattedValue } from "../../types/stats-data";
+
 import { mockStatsDataResponse } from "./fixtures";
+
+import type { FormattedValue } from "../../types/stats-data";
+
 
 describe("Stats Data Helpers", () => {
   let values: FormattedValue[];

@@ -1,5 +1,6 @@
-import { vi, describe, it, expect, beforeEach } from "vitest";
 import { Info, Database, BarChart3 } from "lucide-react";
+import { vi, describe, it, expect, beforeEach } from "vitest";
+
 import type { TabItem, TabNavigationProps } from "../TabNavigation";
 
 /**

@@ -1,5 +1,6 @@
-import { SidebarLink } from "./SidebarLink";
 import type { NavigationItem } from "@/lib/navigation/sidebar-config";
+
+import { SidebarLink } from "./SidebarLink";
 
 interface SidebarSectionProps {
   title: string;

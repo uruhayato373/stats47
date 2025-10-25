@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { describe, expect, it, vi } from "vitest";
+
 import { HeaderAuthSection } from "./HeaderAuthSection";
 
 // next-auth/reactをモック

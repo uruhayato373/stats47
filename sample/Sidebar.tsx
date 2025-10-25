@@ -1,6 +1,7 @@
 "use client";
 
 import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
+
 import { QuickActionsButton } from "./QuickActionsButton";
 import { SidebarSection } from "./SidebarSection";
 

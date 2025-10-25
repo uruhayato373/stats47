@@ -12,15 +12,20 @@
  * @module EstatAPIStatsDataPage
  */
 
+import { useState } from "react";
+
+import { Database, RefreshCw } from "lucide-react";
+
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
+
 import {
   EstatDataDisplay,
   EstatDataFetcher,
 } from "@/features/estat-api/stats-data/components";
-import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
+
 import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
-import { Database, RefreshCw } from "lucide-react";
-import { useState } from "react";
+
+import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
 
 /**
  * StatsDataPageContent コンポーネントの Props

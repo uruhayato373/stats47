@@ -1,14 +1,18 @@
 "use client";
 
+import { useState } from "react";
+
+import { BarChart3, RefreshCw } from "lucide-react";
+
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
+
 import { AreaType } from "@/features/area";
 import { EstatMetaInfoDisplay } from "@/features/estat-api/meta-info/components/EstatMetaInfoDisplay";
 import { EstatMetaInfoFetcher } from "@/features/estat-api/meta-info/components/EstatMetaInfoFetcher";
 import { EstatMetaInfoSidebar } from "@/features/estat-api/meta-info/components/EstatMetaInfoSidebar";
+
 import { useEstatMetaInfo } from "@/hooks/estat-api/useEstatMetaInfo";
-import { BarChart3, RefreshCw } from "lucide-react";
-import { useState } from "react";
 
 /**
  * e-Statメタ情報の型定義（クライアントサイド用）

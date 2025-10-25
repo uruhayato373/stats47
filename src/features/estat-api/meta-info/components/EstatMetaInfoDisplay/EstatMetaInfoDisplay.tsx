@@ -1,18 +1,7 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
-import { Button } from "@/components/atoms/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-import { Skeleton } from "@/components/atoms/ui/skeleton";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/atoms/ui/tabs";
-import { JsonDisplay } from "@/components/molecules/JsonDisplay";
-import { EstatMetaInfoResponse } from "@/lib/estat-api";
-import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
+import { useEffect, useMemo, useState } from "react";
+
 import {
   AlertCircle,
   Calendar,
@@ -24,8 +13,24 @@ import {
   Save,
   Tag,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+
+import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
+import { Button } from "@/components/atoms/ui/button";
+import { Card, CardHeader, CardTitle } from "@/components/atoms/ui/card";
+import { Skeleton } from "@/components/atoms/ui/skeleton";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/atoms/ui/tabs";
+import { JsonDisplay } from "@/components/molecules/JsonDisplay";
+
+import { EstatMetaInfoResponse } from "@/lib/estat-api";
+import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
+
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
+
 import AreasTab from "./tabs/AreasTab";
 import CategoriesTab from "./tabs/CategoriesTab";
 import TableInfoTab from "./tabs/TableInfoTab";

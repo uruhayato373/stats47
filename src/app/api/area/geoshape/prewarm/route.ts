@@ -6,6 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+
 import { AutoCacheGeoShapeLoader } from "@/lib/area/geoshape/auto-cache-loader";
 import type {
   PrewarmRequest,

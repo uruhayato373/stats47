@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { getDataProvider } from "@/lib/database";
 
 interface VisualizationUpdateRequest {

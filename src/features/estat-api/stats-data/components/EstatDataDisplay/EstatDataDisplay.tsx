@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
+import { AlertTriangle, BarChart3, Database, Info } from "lucide-react";
+
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 import {
@@ -8,9 +12,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
+
 import { EstatStatsDataResponse } from "@/lib/estat-api";
-import { AlertTriangle, BarChart3, Database, Info } from "lucide-react";
-import { useState } from "react";
+
 import { EstatCategoriesTable } from "../EstatCategoriesTable";
 import { EstatOverview } from "../EstatOverview";
 import { EstatRawData } from "../EstatRawData";

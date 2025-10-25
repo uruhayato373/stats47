@@ -6,6 +6,7 @@
  */
 
 import useSWR from "swr";
+
 import { AutoCacheGeoShapeLoader } from "@/lib/area/geoshape/auto-cache-loader";
 import type {
   GeoShapeDataLevel,

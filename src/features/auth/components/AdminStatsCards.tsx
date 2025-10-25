@@ -1,6 +1,8 @@
 import { BarChart3, Settings, Shield, Users } from "lucide-react";
-import type { UserStats } from "../types";
+
 import { UserStatCard } from "./UserStatCard";
+
+import type { UserStats } from "../types";
 
 interface AdminStatsCardsProps {
   stats: UserStats;

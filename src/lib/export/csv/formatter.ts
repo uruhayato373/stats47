@@ -1,5 +1,7 @@
-import { FormattedValue } from "@/lib/estat-api";
 import { TimeSeriesDataPoint } from "@/components/organisms/visualization/D3LineChart";
+
+import { FormattedValue } from "@/lib/estat-api";
+
 import { MultiSeriesDataPoint } from "../types";
 
 /**
