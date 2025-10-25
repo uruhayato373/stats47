@@ -74,17 +74,6 @@ export default async function CategoryPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* ページヘッダー */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-foreground mb-4">
-          {categoryData.name}
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          {categoryData.name}
-          に関する統計データを様々な角度から分析・可視化できます
-        </p>
-      </div>
-
       {/* サブカテゴリ一覧 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categoryData.subcategories.map((subcategory) => (
