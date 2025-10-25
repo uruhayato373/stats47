@@ -1,4 +1,5 @@
 export { useEstatStatsData } from "./useEstatStatsData";
-export { useRankingData } from "./useRankingData";
 export { useItemNames } from "./useItemNames";
+export { useRankingData } from "./useRankingData";
+export { useRankingItem } from "./useRankingItem";
 export { useSavedMetadata } from "./useSavedMetadata";

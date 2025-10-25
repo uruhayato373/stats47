@@ -149,7 +149,9 @@ tags:
 
 ##### Geoshape（地理データ管理）
 
-- [04_Geoshape.md](./01_技術設計/03_ドメイン設計/02_支援ドメイン/04_Geoshape.md) - Geoshape リポジトリの歴史的行政区域データ管理
+- [README.md](./01_技術設計/03_ドメイン設計/02_支援ドメイン/Geoshape/README.md) - Geoshape ドメイン技術設計書
+- [地図実装ガイド.md](./04_開発ガイド/02_ドメイン/Geoshape/地図実装ガイド.md) - 地図実装ガイド
+- [API リファレンス.md](./04_開発ガイド/02_ドメイン/Geoshape/APIリファレンス.md) - API リファレンス
 
 ##### EstatAPI（e-Stat API 統合）
 
