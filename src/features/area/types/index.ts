@@ -33,6 +33,22 @@ export interface Prefecture {
   regionKey?: string;
 }
 
+/**
+ * 市区町村エンティティ
+ */
+export interface Municipality {
+  /** 市区町村コード（5桁） */
+  code: string;
+  /** 市区町村名 */
+  name: string;
+  /** 都道府県コード（5桁） */
+  prefectureCode: string;
+  /** 市区町村タイプ */
+  type: MunicipalityType;
+  /** 都道府県名（表示用） */
+  prefectureName?: string;
+}
+
 // ============================================================================
 // 地域ブロック定義
 // ============================================================================
@@ -74,6 +90,23 @@ export interface MockPrefecture {
 export interface MockPrefecturesData {
   prefectures: MockPrefecture[];
   regions: RegionMap;
+}
+
+/**
+ * Mockデータ用の市区町村型
+ */
+export interface MockMunicipality {
+  code: string;
+  name: string;
+  prefectureCode: string;
+  type: MunicipalityType;
+}
+
+/**
+ * Mockデータ用の市区町村JSON型
+ */
+export interface MockMunicipalitiesData {
+  municipalities: MockMunicipality[];
 }
 
 // ============================================================================

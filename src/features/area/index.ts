@@ -8,8 +8,11 @@
 // ============================================================================
 export type {
   AreaType,
+  MockMunicipalitiesData,
+  MockMunicipality,
   MockPrefecture,
   MockPrefecturesData,
+  Municipality,
   MunicipalityType,
   Prefecture,
   Region,
@@ -37,6 +40,7 @@ export { AreaRepository } from "./repositories/area-repository";
 // ============================================================================
 // サービス
 // ============================================================================
+export { MunicipalityService } from "./services/municipality-service";
 export { PrefectureService } from "./services/prefecture-service";
 
 // ============================================================================

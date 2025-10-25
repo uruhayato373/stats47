@@ -4,7 +4,13 @@
  * Mock環境ではローカルJSON、開発・本番環境ではR2ストレージからデータを取得
  */
 
-import { DataSourceError, MockPrefecturesData, Prefecture } from "../types";
+import {
+  DataSourceError,
+  MockMunicipalitiesData,
+  MockPrefecturesData,
+  Municipality,
+  Prefecture,
+} from "../types";
 
 // ============================================================================
 // 設定
@@ -21,6 +27,7 @@ export class AreaRepository {
   // メモリキャッシュ
   private static prefecturesCache: Prefecture[] | null = null;
   private static regionsCache: Record<string, string[]> | null = null;
+  private static municipalitiesCache: Municipality[] | null = null;
 
   /**
    * 都道府県一覧を取得
@@ -112,11 +119,95 @@ export class AreaRepository {
   }
 
   /**
+   * 市区町村一覧を取得
+   */
+  static async getMunicipalities(): Promise<Municipality[]> {
+    if (this.municipalitiesCache) {
+      return this.municipalitiesCache;
+    }
+
+    try {
+      let data: MockMunicipalitiesData;
+
+      if (USE_MOCK_DATA) {
+        // Mock環境: ローカルJSONから読み込み
+        const mockData = require("@/data/mock/area/municipalities.json");
+        data = mockData.default || mockData;
+      } else {
+        // 開発・本番環境: R2ストレージから取得
+        if (!R2_BASE_URL) {
+          throw new Error("R2_AREA_DATA_URL is not configured");
+        }
+
+        const response = await fetch(`${R2_BASE_URL}/area/municipalities.json`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch municipalities: ${response.status}`);
+        }
+        data = await response.json();
+      }
+
+      const municipalities: Municipality[] = data.municipalities.map(
+        (muni) => ({
+          ...muni,
+          prefectureName: this.getPrefectureNameByCode(muni.prefectureCode),
+        })
+      );
+
+      this.municipalitiesCache = municipalities;
+      return municipalities;
+    } catch (error) {
+      const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
+      throw new DataSourceError(source, error as Error);
+    }
+  }
+
+  /**
+   * 特定の都道府県の市区町村を取得
+   */
+  static async getMunicipalitiesByPrefecture(
+    prefectureCode: string
+  ): Promise<Municipality[]> {
+    const allMunicipalities = await this.getMunicipalities();
+    return allMunicipalities.filter(
+      (muni) => muni.prefectureCode === prefectureCode
+    );
+  }
+
+  /**
+   * 特定の市区町村コードで市区町村を検索
+   */
+  static async getMunicipalityByCode(code: string): Promise<Municipality> {
+    const municipalities = await this.getMunicipalities();
+    const municipality = municipalities.find((m) => m.code === code);
+
+    if (!municipality) {
+      throw new Error(`Municipality not found: ${code}`);
+    }
+
+    return municipality;
+  }
+
+  /**
+   * 都道府県コードから都道府県名を取得（内部用）
+   */
+  private static getPrefectureNameByCode(prefectureCode: string): string {
+    // 都道府県データがキャッシュされている場合は使用
+    if (this.prefecturesCache) {
+      const prefecture = this.prefecturesCache.find(
+        (p) => p.prefCode === prefectureCode
+      );
+      return prefecture?.prefName || "";
+    }
+    return "";
+  }
+
+  /**
    * キャッシュをクリア
    */
   static clearCache(): void {
     this.prefecturesCache = null;
     this.regionsCache = null;
+    this.municipalitiesCache = null;
   }
 
   /**
@@ -125,10 +216,12 @@ export class AreaRepository {
   static getCacheStatus(): {
     prefectures: boolean;
     regions: boolean;
+    municipalities: boolean;
   } {
     return {
       prefectures: this.prefecturesCache !== null,
       regions: this.regionsCache !== null,
+      municipalities: this.municipalitiesCache !== null,
     };
   }
 
