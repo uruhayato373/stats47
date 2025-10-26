@@ -5,20 +5,20 @@
 
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import useSWR from "swr";
 
 import {
+  StatsListSearchOptions,
+  StatsListSearchResult,
+  StatsListTableInfo,
+} from "@/features/estat-api/core/types/stats-list";
+import {
   EstatStatsListFormatter,
   generateStatsListCacheKey,
   statsListFetcherWithErrorHandling,
-} from "@/lib/estat-api/stats-list";
-import {
-  StatsListSearchResult,
-  StatsListTableInfo,
-  StatsListSearchOptions,
-} from "@/lib/estat-api/types/stats-list";
+} from "@/features/estat-api/stats-list/services";
 
 /**
  * フィルタ条件の型

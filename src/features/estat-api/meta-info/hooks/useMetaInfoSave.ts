@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { EstatMetaInfoResponse } from "@/lib/estat-api";
+import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
 
 /**
  * メタ情報保存フックのオプション

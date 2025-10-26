@@ -9,8 +9,11 @@ import { useMemo } from "react";
 
 import useSWR from "swr";
 
-import { GetStatsDataParams, EstatStatsDataResponse } from "@/lib/estat-api";
-import { generateStatsDataCacheKey } from "@/lib/estat-api/stats-data/cache-key";
+import {
+  EstatStatsDataResponse,
+  GetStatsDataParams,
+} from "@/features/estat-api/core/types";
+import { generateStatsDataCacheKey } from "@/features/estat-api/stats-data/services/cache-key";
 
 /**
  * APIレスポンスの型定義

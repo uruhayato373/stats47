@@ -3,13 +3,13 @@
 import React, { useState } from "react";
 
 import {
-  ChevronRight,
-  ChevronLeft,
   ChevronFirst,
   ChevronLast,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
-import { safeRender } from "@/lib/estat-api/meta-info";
+import { safeRender } from "@/features/estat-api/meta-info/utils/helpers";
 
 interface PaginatedTableProps {
   data: Array<{

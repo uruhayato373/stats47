@@ -26,8 +26,8 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
-import { EstatMetaInfoResponse } from "@/lib/estat-api";
-import { EstatMetaInfoFormatter } from "@/lib/estat-api/meta-info/formatter";
+import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { EstatMetaInfoFormatter } from "../../services/formatter";
 
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
 

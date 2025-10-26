@@ -1,5 +1,5 @@
 /**
- * e-Stat API meta-info 機能
+ * e-Stat API stats-data 機能
  * UI、ビジネスロジック、ユーティリティを統合
  */
 
@@ -9,27 +9,32 @@
 export * from "./components";
 
 // ============================================================================
-// React Hooks
-// ============================================================================
-export * from "./hooks";
-
-// ============================================================================
 // ビジネスロジック（Services）
 // ============================================================================
 
-// 型定義
-export type {
-  BatchProcessOptions,
-  BatchProcessResult,
-} from "./services/batch-processor";
-
 // クラス
-export { EstatMetaInfoBatchProcessor } from "./services/batch-processor";
-export { EstatMetaInfoFetcher } from "./services/fetcher";
-export { EstatMetaInfoFormatter } from "./services/formatter";
-export { EstatIdUtils } from "./services/id-utils";
+export { EstatCSVConverter } from "./services/csv-converter";
+export { EstatStatsDataFetcher } from "./services/fetcher";
+export { EstatDataFilter } from "./services/filter";
+export { EstatStatsDataFormatter } from "./services/formatter";
+
+// Cache Key
+export {
+  generateStatsDataCacheKey,
+  isValidStatsDataCacheKey,
+  parseStatsDataCacheKey,
+} from "./services/cache-key";
+
+// Helpers
+export * from "./services/helpers";
 
 // ============================================================================
-// ユーティリティ関数
+// 型定義（coreから再エクスポート）
 // ============================================================================
-export * from "./utils";
+export type {
+  DataNote,
+  FormattedEstatData,
+  FormattedMetadata,
+  FormattedTableInfo,
+  FormattedValue,
+} from "@/features/estat-api/core/types/stats-data";

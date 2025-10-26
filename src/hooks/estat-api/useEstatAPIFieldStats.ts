@@ -3,14 +3,17 @@
  * 責務: 各分野の統計数の取得・管理のみ
  */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
-  EstatStatsListFetcher,
-  EstatStatsListError,
+  STATS_FIELDS,
+  StatsFieldCode,
+} from "@/features/estat-api/core/types/stats-list";
+import {
   EstatErrorType,
-} from "@/lib/estat-api/stats-list";
-import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
+  EstatStatsListError,
+  EstatStatsListFetcher,
+} from "@/features/estat-api/stats-list/services";
 
 export interface FieldStats {
   fieldCode: StatsFieldCode;

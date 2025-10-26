@@ -14,6 +14,7 @@ import {
   DialogTitle,
 } from "@/components/atoms/ui/dialog";
 
+import { DetailedStatsListTableInfo } from "@/features/estat-api/core/types/stats-list";
 import {
   formatOpenDate,
   formatSurveyDate,
@@ -23,8 +24,7 @@ import {
   getStatsFieldName,
   getUpdateFrequency,
   truncateTitle,
-} from "@/lib/estat-api/stats-list/utils";
-import { DetailedStatsListTableInfo } from "@/lib/estat-api/types/stats-list";
+} from "@/features/estat-api/stats-list/services/utils";
 
 interface StatsTableDetailModalProps {
   table: DetailedStatsListTableInfo | null;
