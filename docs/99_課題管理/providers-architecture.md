@@ -38,7 +38,7 @@ stats47 プロジェクトにおけるプロバイダーコンポーネントの
 
 ### 3. 統一エクスポート
 
-すべてのプロバイダーは`src/lib/providers/index.ts`から統一してエクスポートされ、一箇所で管理されます。
+すべてのプロバイダーは個別ファイルから直接インポートして使用します。
 
 ## アーキテクチャ詳細
 
@@ -46,9 +46,8 @@ stats47 プロジェクトにおけるプロバイダーコンポーネントの
 
 ```
 src/lib/providers/
-├── index.ts                    # 統一エクスポート
-├── jotai-provider.tsx          # Jotai + SWR設定
-└── theme-provider.tsx          # テーマ管理
+├── theme-provider.tsx          # テーマ管理
+└── jotai-provider.tsx          # Jotai + SWR設定（将来実装予定）
 ```
 
 ### コンポーネント設計
@@ -126,7 +125,7 @@ const swrConfig = {
 
 ```typescript
 // src/app/layout.tsx
-import { JotaiProvider } from "@/lib/providers";
+import { ThemeProvider } from "@/lib/providers/theme-provider";
 
 export default function RootLayout({ children }) {
   return (
@@ -143,7 +142,7 @@ export default function RootLayout({ children }) {
 
 ```typescript
 // テーマのみが必要な場合
-import { ThemeProvider } from "@/lib/providers";
+import { ThemeProvider } from "@/lib/providers/theme-provider";
 
 function ThemeOnlyComponent() {
   return (
@@ -198,8 +197,7 @@ function ThemeOnlyComponent() {
 ### 将来追加予定のプロバイダー
 
 ```typescript
-// src/lib/providers/index.ts
-export { JotaiProvider } from "./jotai-provider";
+// src/lib/providers/theme-provider.tsx
 export { ThemeProvider } from "./theme-provider";
 
 // 将来的に追加予定
@@ -312,7 +310,7 @@ if (process.env.NODE_ENV === "development") {
    import { JotaiProvider } from "@/providers/JotaiProvider";
 
    // 新
-   import { JotaiProvider } from "@/lib/providers";
+   import { ThemeProvider } from "@/lib/providers/theme-provider";
    ```
 
 2. **ThemeInitializer の削除**

@@ -8,7 +8,7 @@ import {
   getAreaType,
   getParentPrefectureCode,
 } from "@/features/area/utils/code-converter";
-import type { FormattedEstatData } from "@/lib/estat-api/types";
+import type { FormattedEstatData } from "@/features/estat-api/core/types";
 
 import type { RankingDataPoint, TargetAreaLevel } from "@/types/ranking";
 

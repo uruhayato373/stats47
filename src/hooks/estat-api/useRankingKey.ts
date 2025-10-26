@@ -1,6 +1,23 @@
 import useSWR from "swr";
 
-import { fetcher } from "@/lib/swr/fetcher";
+/**
+ * HTTPリクエストを実行し、レスポンスを処理するfetcher関数
+ * useSWRから呼び出され、統一的なエラーハンドリングを提供
+ *
+ * @param url - リクエスト先のURL
+ * @returns Promise<T> - レスポンスデータ
+ * @throws Error - HTTPエラーまたはレスポンス解析エラー
+ */
+async function fetcher<T>(url: string): Promise<T> {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const error = new Error("An error occurred while fetching the data.");
+    throw error;
+  }
+
+  return response.json();
+}
 
 /**
  * ranking_key と ranking_items の設定を取得するカスタムフック

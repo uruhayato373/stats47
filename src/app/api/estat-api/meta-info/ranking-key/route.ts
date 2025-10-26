@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { RankingItemDB } from "@/features/ranking/types";
 import { getDataProvider } from "@/lib/database";
-import { RankingItemDB } from "@/lib/ranking/types";
 
 /**
  * APIレスポンスの型定義

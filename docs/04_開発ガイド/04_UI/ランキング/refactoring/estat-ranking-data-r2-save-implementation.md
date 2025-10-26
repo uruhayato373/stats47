@@ -838,7 +838,7 @@ import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 -import { YearSelector } from "@/components/common";
 +import { EstatYearSelector } from "@/components/estat/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
-import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient";
+// import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient"; // 削除済み
 import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {

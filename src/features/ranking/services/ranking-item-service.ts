@@ -4,6 +4,7 @@
  */
 
 import { getActiveRankingItems } from "@/data/mock/ranking-items";
+
 import type { RankingItem } from "../types";
 
 /**

@@ -1,21 +1,23 @@
 /**
- * Rankingドメインの型定義
+ * ランキング型定義
+ * Domain-driven Designに従い、ランキングドメインの型をここに集約
  */
 
-export interface RankingItem {
-  id: string;
-  ranking_key: string;
-  label: string;
-  unit: string;
-  description?: string;
-  ranking_direction: "asc" | "desc";
-  data_source_id: string;
-  subcategory_id: string;
-  is_active: boolean;
-}
+// ランキング項目とランキング値の型定義
+export * from "./item";
 
+// 統一ランキングデータの型定義（アダプターレイヤー用）
+export * from "./unified";
+
+// ランキング可視化オプションの型定義
+export * from "./visualization";
+
+// ランキングサイドバーのProps型定義
 export interface RankingItemsSidebarProps {
-  category: string;
-  subcategory: string;
+  /** 選択されたランキングキー */
+  selectedRankingKey?: string;
+  /** ランキングキー選択時のコールバック */
+  onRankingKeySelect: (rankingKey: string) => void;
+  /** クラス名 */
   className?: string;
 }

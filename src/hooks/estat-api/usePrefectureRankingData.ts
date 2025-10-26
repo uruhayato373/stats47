@@ -2,13 +2,9 @@
 
 import { useMemo } from "react";
 
-import {
-  FormattedEstatData,
-  EstatStatsDataFormatter,
-  EstatDataFilter,
-} from "@/lib/estat-api";
-import { PrefectureRankingSettingsService } from "@/lib/ranking/settings-service";
-import { VisualizationSettings } from "@/lib/ranking/visualization-settings";
+import { PrefectureRankingSettingsService } from "@/features/ranking/services/settings-service";
+import { VisualizationSettings } from "@/features/ranking/visualization-settings";
+import { EstatStatsDataFormatter } from "@/lib/estat-api";
 
 interface UsePrefectureRankingDataOptions {
   data: any;

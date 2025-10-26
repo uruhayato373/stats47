@@ -330,7 +330,7 @@ return (
         <ChoroplethMap data={formattedValues} options={...} />
         <StatisticsSummary data={formattedValues} unit={...} />
       </div>
-      <PrefectureDataTableClient data={formattedValues} subcategory={subcategory} />
+      {/* データテーブル（削除済み） */}
     </div>
   </div>
 );
@@ -365,7 +365,14 @@ return (
 
 ```typescript
 import useSWR from "swr";
-import { fetcher } from "@/lib/swr/fetcher";
+// fetcher関数は各hook内で直接定義
+async function fetcher<T>(url: string): Promise<T> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("An error occurred while fetching the data.");
+  }
+  return response.json();
+}
 
 /**
  * 年度一覧を取得するカスタムフック（useSWR使用）
@@ -685,7 +692,7 @@ export const RankingDataContainer: React.FC<RankingDataContainerProps> = ({
           options={visualizationOptions}
         />
 
-        <PrefectureDataTableClient data={data} subcategory={subcategory} />
+        {/* データテーブル（削除済み） */}
       </div>
     </div>
   );
@@ -822,7 +829,7 @@ const { data, isLoading, error } = useRankingData(
 ### Priority 0（最優先）: useSWR の導入準備
 
 - [ ] `npm install swr` で useSWR をインストール
-- [ ] fetcher 関数の作成（`src/lib/swr/fetcher.ts`）
+- [x] fetcher 関数の作成（各 hook 内で直接定義）
 - [ ] SWRConfig でグローバル設定（`src/app/providers.tsx`）
 
 **期待効果**:
@@ -951,7 +958,7 @@ const { data, isLoading, error } = useRankingData(
 ✅ **Phase 0: useSWR 導入準備**
 
 - `swr` パッケージのインストール
-- `src/lib/swr/fetcher.ts` - 統一 fetcher ユーティリティの作成
+- `src/hooks/ranking/useRankingData.ts` - 各 hook 内で fetcher 関数を直接定義
 - `src/providers/JotaiProvider.tsx` - SWRConfig グローバル設定の追加
 
 ✅ **Phase 1: カスタムフックの作成（useSWR 使用）**

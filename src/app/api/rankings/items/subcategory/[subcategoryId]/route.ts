@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { createRankingRepository } from "@/lib/ranking/ranking-repository";
+import { createRankingRepository } from "@/features/ranking/repositories/ranking-repository";
 
 /**
  * ランキング項目取得API

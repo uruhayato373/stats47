@@ -76,7 +76,7 @@ export async function fetchRankingItems(options?: {
     "fetchRankingItems is deprecated. Use RankingRepository.create().fetchRankingItems() instead."
   );
   const { RankingRepository } = await import(
-    "@/lib/ranking/ranking-repository"
+    "@/features/ranking/repositories/ranking-repository"
   );
   const repository = await RankingRepository.create();
   return await repository.fetchRankingItems(options);
@@ -93,7 +93,7 @@ export async function fetchRankingValues(options?: {
     "fetchRankingValues is deprecated. Use RankingRepository.create().fetchRankingValues() instead."
   );
   const { RankingRepository } = await import(
-    "@/lib/ranking/ranking-repository"
+    "@/features/ranking/repositories/ranking-repository"
   );
   const repository = await RankingRepository.create();
   return await repository.fetchRankingValues(options);

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { RankingValue } from "@/lib/ranking/types";
+import { RankingValue } from "@/features/ranking/types";
 
 export interface StatisticsSummaryProps {
   data: RankingValue[] | null;
