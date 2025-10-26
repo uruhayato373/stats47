@@ -2,7 +2,7 @@ import {
   MunicipalityDashboard,
   NationalDashboard,
   PrefectureDashboard,
-} from "@/components/organisms/area";
+} from "@/features/area/components/dashboards";
 
 /**
  * 地域詳細ページのProps型定義

@@ -1,8 +1,6 @@
-import {
-  MunicipalityDashboard,
-  NationalDashboard,
-  PrefectureDashboard,
-} from "./index";
+import { MunicipalityDashboard } from "./MunicipalityDashboard";
+import { NationalDashboard } from "./NationalDashboard";
+import { PrefectureDashboard } from "./PrefectureDashboard";
 
 import type { AreaType } from "@/hooks/area/useAreaSelection";
 
