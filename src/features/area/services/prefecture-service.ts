@@ -3,62 +3,80 @@
  * 都道府県に関するビジネスロジックを担当
  */
 
-import { AreaRepository } from "../repositories/area-repository";
+import {
+  fetchPrefectures,
+  fetchRegions,
+  findPrefectureByCode as findPrefectureByCodeFromRepo,
+} from "../repositories/area-repository";
 import { Prefecture } from "../types/index";
 
-export class PrefectureService {
-  /**
-   * 全ての都道府県を取得
-   */
-  static async listPrefectures(): Promise<Prefecture[]> {
-    return await AreaRepository.getPrefectures();
-  }
+// ============================================================================
+// リスト全体を取得（list動詞）
+// ============================================================================
 
-  /**
-   * 都道府県コードで検索
-   */
-  static async findPrefectureByCode(prefCode: string): Promise<Prefecture> {
-    return await AreaRepository.getPrefectureByCode(prefCode);
-  }
+/**
+ * 全ての都道府県を取得
+ */
+export async function listPrefectures(): Promise<Prefecture[]> {
+  return await fetchPrefectures();
+}
 
-  /**
-   * 都道府県名で検索
-   */
-  static async searchPrefectures(query: string): Promise<Prefecture[]> {
-    const allPrefectures = await AreaRepository.getPrefectures();
-    const lowerQuery = query.toLowerCase();
+/**
+ * 地域ブロックで都道府県を取得
+ */
+export async function listPrefecturesByRegion(
+  regionKey: string
+): Promise<Prefecture[]> {
+  const allPrefectures = await fetchPrefectures();
+  return allPrefectures.filter((pref) => pref.regionKey === regionKey);
+}
 
-    return allPrefectures.filter((pref) =>
-      pref.prefName.toLowerCase().includes(lowerQuery)
-    );
-  }
+/**
+ * 地域ブロック一覧を取得
+ */
+export async function listRegions(): Promise<Record<string, string[]>> {
+  return await fetchRegions();
+}
 
-  /**
-   * 地域ブロックで都道府県を取得
-   */
-  static async listPrefecturesByRegion(
-    regionKey: string
-  ): Promise<Prefecture[]> {
-    const allPrefectures = await AreaRepository.getPrefectures();
-    return allPrefectures.filter((pref) => pref.regionKey === regionKey);
-  }
+// ============================================================================
+// 検索（find動詞、search動詞）
+// ============================================================================
 
-  /**
-   * 地域ブロック一覧を取得
-   */
-  static async listRegions(): Promise<Record<string, string[]>> {
-    return await AreaRepository.getRegions();
-  }
+/**
+ * 都道府県コードで検索
+ */
+export async function findPrefectureByCode(
+  prefCode: string
+): Promise<Prefecture> {
+  return await findPrefectureByCodeFromRepo(prefCode);
+}
 
-  /**
-   * 都道府県コードから都道府県名を取得
-   */
-  static async lookupPrefectureName(prefCode: string): Promise<string | null> {
-    try {
-      const prefecture = await this.findPrefectureByCode(prefCode);
-      return prefecture.prefName;
-    } catch {
-      return null;
-    }
+/**
+ * 都道府県名で検索
+ */
+export async function searchPrefectures(query: string): Promise<Prefecture[]> {
+  const allPrefectures = await fetchPrefectures();
+  const lowerQuery = query.toLowerCase();
+
+  return allPrefectures.filter((pref) =>
+    pref.prefName.toLowerCase().includes(lowerQuery)
+  );
+}
+
+// ============================================================================
+// dictionary/mapから読み出し（lookup動詞）
+// ============================================================================
+
+/**
+ * 都道府県コードから都道府県名を取得
+ */
+export async function lookupPrefectureName(
+  prefCode: string
+): Promise<string | null> {
+  try {
+    const prefecture = await findPrefectureByCode(prefCode);
+    return prefecture.prefName;
+  } catch {
+    return null;
   }
 }

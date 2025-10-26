@@ -3,6 +3,15 @@
  * 地理データ（TopoJSON/GeoJSON）の型定義
  */
 
+// ============================================================================
+// 共通型定義（他のドメインからインポート）
+// ============================================================================
+
+/**
+ * 地域タイプ（Areaドメインからインポート）
+ */
+export type { AreaType } from "@/features/area/types/index";
+
 // TopoJSON型定義（topojson-clientライブラリと互換性のある型）
 export interface TopoJSONTopology {
   type: "Topology";
@@ -45,6 +54,39 @@ export interface PrefectureFeatureCollection extends GeoJSON.FeatureCollection {
   features: PrefectureFeature[];
 }
 
+// ============================================================================
+// 市区町村用の型定義
+// ============================================================================
+
+/**
+ * 市区町村Feature型
+ */
+export interface MunicipalityFeature extends GeoJSON.Feature {
+  type: "Feature";
+  properties: {
+    cityCode: string;
+    cityName: string;
+    prefCode: string;
+    prefName: string;
+    [key: string]: any;
+  };
+  geometry: GeoJSON.Geometry;
+}
+
+/**
+ * 市区町村FeatureCollection型
+ */
+export interface MunicipalityFeatureCollection
+  extends GeoJSON.FeatureCollection {
+  type: "FeatureCollection";
+  features: MunicipalityFeature[];
+}
+
+/**
+ * 市区町村版タイプ
+ */
+export type MunicipalityVersion = "merged" | "split"; // merged=統合版(dc), split=分割版
+
 // データソース設定
 export interface GeoshapeConfig {
   /** Mockデータのパス */
@@ -61,12 +103,16 @@ export interface GeoshapeConfig {
 export type ResolutionLevel = "low" | "medium" | "high";
 
 // データソースタイプ
-export type DataSourceType = "mock" | "r2" | "external";
+export type DataSourceType = "memory" | "mock" | "r2" | "external";
 
 // データ取得オプション
 export interface FetchOptions {
-  /** 解像度レベル */
-  resolution?: ResolutionLevel;
+  /** 地域レベル（"country"は都道府県と同じデータを使用） */
+  areaType?: import("@/features/area/types/index").AreaType;
+  /** 都道府県コード（2桁）- municipalityで必須 */
+  prefCode?: string;
+  /** 市区町村版タイプ */
+  municipalityVersion?: MunicipalityVersion;
   /** キャッシュを使用するか */
   useCache?: boolean;
   /** 強制再取得 */
@@ -79,9 +125,6 @@ export interface FetchResult<T> {
   data: T;
   /** データソース */
   source: DataSourceType;
-  /** キャッシュヒットしたか */
-  cached: boolean;
-  /** 取得時刻 */
-  fetchedAt: Date;
+  /** 取得時刻（タイムスタンプ） */
+  timestamp: number;
 }
-

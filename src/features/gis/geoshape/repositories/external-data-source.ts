@@ -4,7 +4,12 @@
  */
 
 import { buildGeoshapeExternalUrl } from "../config/geoshape-config";
-import type { TopoJSONTopology } from "../types";
+
+import type {
+  AreaType,
+  MunicipalityVersion,
+  TopoJSONTopology,
+} from "../types/index";
 
 /**
  * 外部APIデータソースクラス
@@ -12,10 +17,17 @@ import type { TopoJSONTopology } from "../types";
 export class ExternalDataSource {
   /**
    * Geoshape外部APIからTopoJSONを取得
+   * @param areaType 地域タイプ
+   * @param prefCode 都道府県コード（2桁）- municipalityで必須
+   * @param version 市区町村版タイプ
    * @returns TopoJSONトポロジー
    */
-  static async fetch(): Promise<TopoJSONTopology> {
-    const url = buildGeoshapeExternalUrl();
+  static async fetch(
+    areaType: AreaType = "prefecture",
+    prefCode?: string,
+    version: MunicipalityVersion = "merged"
+  ): Promise<TopoJSONTopology> {
+    const url = buildGeoshapeExternalUrl(areaType, prefCode, version);
 
     try {
       console.log(`[ExternalDataSource] Fetching from: ${url}`);
@@ -60,10 +72,17 @@ export class ExternalDataSource {
 
   /**
    * 外部APIが利用可能かチェック
+   * @param areaType 地域タイプ
+   * @param prefCode 都道府県コード（2桁）
+   * @param version 市区町村版タイプ
    * @returns 利用可能ならtrue
    */
-  static async isAvailable(): Promise<boolean> {
-    const url = buildGeoshapeExternalUrl();
+  static async isAvailable(
+    areaType: AreaType = "prefecture",
+    prefCode?: string,
+    version: MunicipalityVersion = "merged"
+  ): Promise<boolean> {
+    const url = buildGeoshapeExternalUrl(areaType, prefCode, version);
 
     try {
       const response = await fetch(url, {

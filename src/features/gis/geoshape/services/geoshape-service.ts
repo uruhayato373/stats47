@@ -3,167 +3,178 @@
  * ビジネスロジックとデータ変換
  */
 
-import { GeoshapeRepository } from "../repositories/geoshape-repository";
-import { TopojsonConverter } from "../utils/topojson-converter";
+import {
+  buildCacheStatus,
+  checkDataSources as checkDataSourcesFromRepo,
+  fetchTopology,
+} from "../repositories/geoshape-repository";
+import {
+  determineAreaTypeFromCode,
+  extractPrefCodeFrom5Digit,
+} from "../utils/area-code-converter";
+import { validateTopojson } from "../utils/topojson-converter";
+
 import type {
+  AreaType,
   FetchOptions,
-  PrefectureFeature,
-  PrefectureFeatureCollection,
+  MunicipalityVersion,
+  TopoJSONTopology,
 } from "../types/index";
 
+// ============================================================================
+// TopoJSONを直接取得（fetch動詞）
+// ============================================================================
+
 /**
- * Geoshapeサービスクラス
- * 地理データの取得と変換を提供
+ * 都道府県のTopoJSONトポロジーを取得
+ * @param options 取得オプション
+ * @returns TopoJSONトポロジー
  */
-export class GeoshapeService {
-  /**
-   * 都道府県のGeoJSON FeatureCollectionを取得
-   * @param options 取得オプション
-   * @returns GeoJSON FeatureCollection
-   */
-  static async getPrefectureFeatures(
-    options: FetchOptions = {}
-  ): Promise<PrefectureFeatureCollection> {
-    try {
-      console.log("[GeoshapeService] Fetching prefecture features...");
+export async function fetchPrefectureTopology(
+  options: FetchOptions = {}
+): Promise<TopoJSONTopology> {
+  try {
+    console.log("[GeoshapeService] Fetching prefecture topology...");
 
-      // TopoJSONを取得
-      const result = await GeoshapeRepository.getPrefectureTopology(options);
+    // TopoJSONを取得
+    const result = await fetchTopology(
+      "prefecture",
+      undefined,
+      "merged",
+      options
+    );
 
-      // TopoJSONをGeoJSONに変換
-      const geojson = TopojsonConverter.toGeoJSON(result.data);
-
-      console.log(
-        `[GeoshapeService] Successfully converted to GeoJSON (${geojson.features.length} features)`
-      );
-
-      return geojson as PrefectureFeatureCollection;
-    } catch (error) {
-      console.error(
-        "[GeoshapeService] Failed to get prefecture features:",
-        error
-      );
-      throw new Error(
-        `Failed to get prefecture features: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      );
+    // データの妥当性チェック
+    if (!validateTopojson(result.data)) {
+      throw new Error("Invalid TopoJSON format");
     }
-  }
 
-  /**
-   * 特定の都道府県のFeatureを取得
-   * @param prefCode 都道府県コード
-   * @param options 取得オプション
-   * @returns 都道府県Feature、見つからない場合はnull
-   */
-  static async getPrefectureFeature(
-    prefCode: string,
-    options: FetchOptions = {}
-  ): Promise<PrefectureFeature | null> {
-    try {
-      const features = await this.getPrefectureFeatures(options);
-      return (
-        features.features.find((f) => f.properties.prefCode === prefCode) ||
-        null
-      );
-    } catch (error) {
-      console.error(
-        `[GeoshapeService] Failed to get prefecture feature for ${prefCode}:`,
-        error
-      );
-      return null;
+    console.log(`[GeoshapeService] Successfully fetched prefecture topology`);
+
+    return result.data;
+  } catch (error) {
+    console.error(
+      "[GeoshapeService] Failed to fetch prefecture topology:",
+      error
+    );
+    throw new Error(
+      `Failed to fetch prefecture topology: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
+  }
+}
+
+/**
+ * 市区町村のTopoJSONトポロジーを取得
+ * @param prefCode 都道府県コード（2桁）
+ * @param version 市区町村版タイプ
+ * @param options 取得オプション
+ * @returns TopoJSONトポロジー
+ */
+export async function fetchMunicipalityTopology(
+  prefCode: string,
+  version: MunicipalityVersion = "merged",
+  options: FetchOptions = {}
+): Promise<TopoJSONTopology> {
+  try {
+    console.log(
+      `[GeoshapeService] Fetching municipality topology for ${prefCode}...`
+    );
+
+    // TopoJSONを取得
+    const result = await fetchTopology(
+      "municipality",
+      prefCode,
+      version,
+      options
+    );
+
+    // データの妥当性チェック
+    if (!validateTopojson(result.data)) {
+      throw new Error("Invalid TopoJSON format");
     }
-  }
 
-  /**
-   * 都道府県コードのリストを取得
-   * @param options 取得オプション
-   * @returns 都道府県コードの配列
-   */
-  static async getPrefectureCodes(
-    options: FetchOptions = {}
-  ): Promise<string[]> {
-    try {
-      const features = await this.getPrefectureFeatures(options);
-      return features.features.map((f) => f.properties.prefCode);
-    } catch (error) {
-      console.error("[GeoshapeService] Failed to get prefecture codes:", error);
-      return [];
+    console.log(`[GeoshapeService] Successfully fetched municipality topology`);
+
+    return result.data;
+  } catch (error) {
+    console.error(
+      "[GeoshapeService] Failed to fetch municipality topology:",
+      error
+    );
+    throw new Error(
+      `Failed to fetch municipality topology: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
+  }
+}
+
+/**
+ * 地域コードに基づいてTopoJSONトポロジーを取得
+ * @param areaCode 地域コード（5桁）
+ * @param version 市区町村版タイプ
+ * @param options 取得オプション
+ * @returns TopoJSONトポロジー
+ */
+export async function fetchTopologyByAreaCode(
+  areaCode: string,
+  version: MunicipalityVersion = "merged",
+  options: FetchOptions = {}
+): Promise<TopoJSONTopology> {
+  try {
+    console.log(
+      `[GeoshapeService] Fetching topology for area code: ${areaCode}`
+    );
+
+    const areaType = determineAreaTypeFromCode(areaCode);
+
+    if (areaType === "country" || areaType === "prefecture") {
+      return await fetchPrefectureTopology(options);
+    } else {
+      const prefCode = extractPrefCodeFrom5Digit(areaCode);
+      return await fetchMunicipalityTopology(prefCode, version, options);
     }
+  } catch (error) {
+    console.error(
+      "[GeoshapeService] Failed to fetch topology by area code:",
+      error
+    );
+    throw new Error(
+      `Failed to fetch topology by area code: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
   }
+}
 
-  /**
-   * 都道府県名のリストを取得
-   * @param options 取得オプション
-   * @returns 都道府県名の配列
-   */
-  static async getPrefectureNames(
-    options: FetchOptions = {}
-  ): Promise<string[]> {
-    try {
-      const features = await this.getPrefectureFeatures(options);
-      return features.features.map((f) => f.properties.prefName);
-    } catch (error) {
-      console.error("[GeoshapeService] Failed to get prefecture names:", error);
-      return [];
-    }
-  }
+// ============================================================================
+// データソース可用性チェック
+// ============================================================================
 
-  /**
-   * 都道府県コードと名前のマッピングを取得
-   * @param options 取得オプション
-   * @returns 都道府県コードと名前のマッピング
-   */
-  static async getPrefectureMapping(
-    options: FetchOptions = {}
-  ): Promise<Record<string, string>> {
-    try {
-      const features = await this.getPrefectureFeatures(options);
-      const mapping: Record<string, string> = {};
+/**
+ * データソースの可用性をチェック
+ */
+export async function checkDataSources(
+  areaType: AreaType,
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): Promise<{ mock: boolean; r2: boolean; external: boolean }> {
+  return await checkDataSourcesFromRepo(areaType, prefCode, version);
+}
 
-      features.features.forEach((f) => {
-        mapping[f.properties.prefCode] = f.properties.prefName;
-      });
+// ============================================================================
+// キャッシュステータスを構築（既存のまま）
+// ============================================================================
 
-      return mapping;
-    } catch (error) {
-      console.error(
-        "[GeoshapeService] Failed to get prefecture mapping:",
-        error
-      );
-      return {};
-    }
-  }
-
-  /**
-   * データソースの可用性をチェック
-   * @returns 各データソースの可用性
-   */
-  static async checkDataSources(): Promise<{
-    mock: boolean;
-    r2: boolean;
-    external: boolean;
-  }> {
-    return GeoshapeRepository.checkDataSources();
-  }
-
-  /**
-   * キャッシュをクリア
-   */
-  static clearCache(): void {
-    GeoshapeRepository.clearMemoryCache();
-  }
-
-  /**
-   * キャッシュステータスを取得
-   * @returns キャッシュステータス
-   */
-  static getCacheStatus(): {
-    memoryCache: number;
-    r2Available: boolean;
-    externalAvailable: boolean;
-  } {
-    return GeoshapeRepository.getCacheStatus();
-  }
+/**
+ * キャッシュステータスを構築
+ */
+export function getCacheStatus(): {
+  memoryCache: number;
+  r2Available: boolean;
+  externalAvailable: boolean;
+} {
+  return buildCacheStatus();
 }

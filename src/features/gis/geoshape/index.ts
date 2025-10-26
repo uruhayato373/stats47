@@ -29,14 +29,25 @@ export {
   resolutionFileMap,
 } from "./config/geoshape-config";
 
-// リポジトリ
+// リポジトリ（純粋な関数）
 export { ExternalDataSource } from "./repositories/external-data-source";
-export { GeoshapeRepository } from "./repositories/geoshape-repository";
+export {
+  buildCacheStatus,
+  checkDataSources,
+  clearGeoshapeCache,
+  fetchTopology,
+} from "./repositories/geoshape-repository";
 export { MockDataSource } from "./repositories/mock-data-source";
 export { R2DataSource } from "./repositories/r2-data-source";
 
-// サービス
-export { GeoshapeService } from "./services/geoshape-service";
+// サービス（純粋な関数）
+export {
+  checkDataSources as checkGeoshapeDataSources,
+  fetchMunicipalityTopology,
+  fetchPrefectureTopology,
+  fetchTopologyByAreaCode,
+  getCacheStatus,
+} from "./services/geoshape-service";
 
 // ユーティリティ
-export { convertTopoJsonToGeoJson } from "./utils/topojson-converter";
+export { validateTopojson } from "./utils/topojson-converter";

@@ -1,7 +1,10 @@
 "use client";
 
-import { MunicipalityService } from "@/features/area/services/municipality-service";
-import { PrefectureService } from "@/features/area/services/prefecture-service";
+import { listMunicipalitiesByPrefecture } from "@/features/area/services/municipality-service";
+import {
+  listPrefectures,
+  listRegions,
+} from "@/features/area/services/prefecture-service";
 import { Municipality, Prefecture } from "@/features/area/types/index";
 import { useCallback, useState } from "react";
 
@@ -56,8 +59,8 @@ export function useAreaSelection() {
 
     try {
       const [prefecturesData, regionsData] = await Promise.all([
-        PrefectureService.listPrefectures(),
-        PrefectureService.listRegions(),
+        listPrefectures(),
+        listRegions(),
       ]);
 
       setPrefectures(prefecturesData);
@@ -171,9 +174,7 @@ export function useAreaSelection() {
       setError(null);
 
       try {
-        const data = await MunicipalityService.listMunicipalitiesByPrefecture(
-          prefectureCode
-        );
+        const data = await listMunicipalitiesByPrefecture(prefectureCode);
         setMunicipalities(data);
       } catch (err) {
         setError(

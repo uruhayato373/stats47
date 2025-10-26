@@ -51,8 +51,13 @@ src/lib/visualization/d3js/choropleth/
 ```typescript
 // src/components/charts/d3js/ChoroplethMap.tsx
 
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useCallback } from "react";
 import * as d3 from "d3";
+import * as topojson from "topojson-client";
+import {
+  fetchPrefectureTopology,
+  fetchMunicipalityTopology,
+} from "@/features/gis/geoshape/services/geoshape-service";
 import { ChoroplethData, ChoroplethConfig } from "@/types/visualization";
 import { createProjection } from "@/lib/visualization/d3js/choropleth/projection";
 import { createColorScale } from "@/lib/visualization/d3js/choropleth/color-scale";
@@ -62,7 +67,6 @@ import { setupAccessibility } from "@/lib/visualization/d3js/choropleth/accessib
 interface ChoroplethMapProps {
   data: ChoroplethData[];
   config: ChoroplethConfig;
-  geoJsonData: GeoJSON.FeatureCollection;
   width?: number;
   height?: number;
   onAreaClick?: (area: ChoroplethData) => void;
@@ -73,7 +77,6 @@ interface ChoroplethMapProps {
 export function ChoroplethMap({
   data,
   config,
-  geoJsonData,
   width = 800,
   height = 600,
   onAreaClick,
@@ -82,6 +85,63 @@ export function ChoroplethMap({
 }: ChoroplethMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // TopoJSONデータの取得とGeoJSON変換
+  const geoJsonData = useMemo(async () => {
+    try {
+      let topology;
+
+      if (config.level === "prefecture") {
+        topology = await fetchPrefectureTopology({
+          useCache: true,
+        });
+      } else {
+        // 市区町村データの場合、都道府県コードを抽出
+        const prefCode = data[0]?.areaCode.substring(0, 2) || "28";
+        topology = await fetchMunicipalityTopology(prefCode, "merged", {
+          useCache: true,
+        });
+      }
+
+      // D3.js側でGeoJSONに変換
+      const objectName = Object.keys(topology.objects)[0];
+      const geojson = topojson.feature(
+        topology,
+        topology.objects[objectName]
+      ) as GeoJSON.FeatureCollection;
+
+      // 都道府県コードと名前を正規化
+      const normalizedFeatures = geojson.features.map((feature) => {
+        const properties = feature.properties || {};
+
+        const code =
+          properties.N03_007 || properties.prefCode || properties.code;
+        const prefCode = code ? `${String(code).padStart(2, "0")}000` : "00000";
+        const prefName =
+          properties.N03_001 ||
+          properties.prefName ||
+          properties.name ||
+          "不明";
+
+        return {
+          ...feature,
+          properties: {
+            ...properties,
+            prefCode,
+            prefName,
+          },
+        };
+      });
+
+      return {
+        type: "FeatureCollection" as const,
+        features: normalizedFeatures,
+      };
+    } catch (error) {
+      console.error("地図データの取得に失敗:", error);
+      throw error;
+    }
+  }, [config.level, data]);
 
   // データの最適化
   const optimizedData = useMemo(() => {
@@ -382,7 +442,13 @@ function updateSelection(index: number) {
 
 ## パフォーマンス最適化
 
-### 1. データ最適化
+### 1. TopoJSON 直接使用のメリット
+
+- **ファイルサイズの削減**: TopoJSON は GeoJSON より約 80%小さく、ネットワーク転送が高速
+- **メモリ効率**: 変換処理を D3.js 側に移譲することで、サーバー側のメモリ使用量を削減
+- **キャッシュ効率**: TopoJSON データをそのままキャッシュすることで、ストレージ効率が向上
+
+### 2. データ最適化
 
 ```typescript
 // src/lib/visualization/d3js/choropleth/data-processor.ts
@@ -395,6 +461,18 @@ export function optimizeChoroplethData(
   const filteredData = data.filter((item) => {
     if (level === "prefecture") {
       return item.areaCode.length === 2;
+    } else {
+      return item.areaCode.length === 5;
+    }
+  });
+
+  // データの重複を除去
+  const uniqueData = Array.from(
+    new Map(filteredData.map((item) => [item.areaCode, item])).values()
+  );
+
+  return uniqueData;
+}
     } else {
       return item.areaCode.length === 5;
     }

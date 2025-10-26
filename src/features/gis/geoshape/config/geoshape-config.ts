@@ -5,6 +5,8 @@
 
 import { GeoshapeConfig } from "../types/index";
 
+import type { AreaType, MunicipalityVersion } from "../types/index";
+
 /**
  * 環境判定
  */
@@ -30,24 +32,74 @@ export const geoshapeConfig: GeoshapeConfig = {
 };
 
 /**
- * 使用する解像度（低解像度のみ）
- */
-const RESOLUTION_FILE = "jp_pref.l.topojson";
-
-/**
- * Geoshape外部APIのデータURL構築
+ * Geoshape API URL構築
+ * @param areaType 地域タイプ（"country"と"prefecture"は同じデータ）
+ * @param prefCode 都道府県コード（2桁）- municipalityで必須
+ * @param version 市区町村版タイプ
  * @returns 完全なURL
  */
-export function buildGeoshapeExternalUrl(): string {
-  // Geoshapeリポジトリの実際のURL構造に基づいて構築
-  // 例: https://geoshape.ex.nii.ac.jp/geonlp/download/latest/jp_pref.l.topojson
-  return `${geoshapeConfig.externalApiUrl}/geonlp/download/latest/${RESOLUTION_FILE}`;
+export function buildGeoshapeExternalUrl(
+  areaType: AreaType = "prefecture",
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): string {
+  const baseUrl = `${geoshapeConfig.externalApiUrl}/city/topojson/20230101`;
+
+  // countryとprefectureは同じ都道府県データを使用
+  if (areaType === "country" || areaType === "prefecture") {
+    return `${baseUrl}/jp_pref.l.topojson`;
+  }
+
+  // municipality
+  if (!prefCode) {
+    throw new Error("prefCode is required for municipality areaType");
+  }
+
+  // merged: _city_dc.i.topojson (政令指定都市統合版)
+  // split:  _city.i.topojson    (政令指定都市分割版)
+  const versionSuffix =
+    version === "merged" ? "_city_dc.i.topojson" : "_city.i.topojson";
+  return `${baseUrl}/${prefCode}/${prefCode}${versionSuffix}`;
 }
 
 /**
  * R2ストレージのキーを構築
+ * @param areaType 地域タイプ
+ * @param prefCode 都道府県コード（2桁）
+ * @param version 市区町村版タイプ
  * @returns R2オブジェクトキー
  */
-export function buildR2Key(): string {
-  return `${geoshapeConfig.r2BucketPath}/prefecture.low.topojson`;
+export function buildR2Key(
+  areaType: AreaType = "prefecture",
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): string {
+  if (areaType === "country" || areaType === "prefecture") {
+    return `${geoshapeConfig.r2BucketPath}/prefecture.topojson`;
+  }
+
+  const versionSuffix = version === "merged" ? "merged" : "split";
+  return `${geoshapeConfig.r2BucketPath}/municipality/${prefCode}.${versionSuffix}.topojson`;
+}
+
+/**
+ * Mockデータパスを構築
+ * @param areaType 地域タイプ
+ * @param prefCode 都道府県コード（2桁）
+ * @param version 市区町村版タイプ
+ * @returns Mockデータのパス
+ */
+export function buildMockDataPath(
+  areaType: AreaType = "prefecture",
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): string {
+  if (areaType === "country" || areaType === "prefecture") {
+    return "/data/mock/gis/geoshape/jp_pref.l.topojson";
+  }
+
+  // merged: _city_dc (政令指定都市統合版)
+  // split:  _city    (政令指定都市分割版)
+  const versionSuffix = version === "merged" ? "_dc" : "";
+  return `/data/mock/gis/geoshape/${prefCode}/${prefCode}_city${versionSuffix}.i.topojson`;
 }

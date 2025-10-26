@@ -4,7 +4,11 @@
  */
 
 import { buildR2Key, geoshapeConfig } from "../config/geoshape-config";
-import type { TopoJSONTopology } from "../types";
+import type {
+  AreaType,
+  MunicipalityVersion,
+  TopoJSONTopology,
+} from "../types/index";
 
 /**
  * R2データソースクラス
@@ -12,11 +16,18 @@ import type { TopoJSONTopology } from "../types";
 export class R2DataSource {
   /**
    * R2ストレージからTopoJSONを取得
+   * @param areaType 地域タイプ
+   * @param prefCode 都道府県コード（2桁）- municipalityで必須
+   * @param version 市区町村版タイプ
    * @returns TopoJSONトポロジー、存在しない場合はnull
    */
-  static async fetch(): Promise<TopoJSONTopology | null> {
+  static async fetch(
+    areaType: AreaType = "prefecture",
+    prefCode?: string,
+    version: MunicipalityVersion = "merged"
+  ): Promise<TopoJSONTopology | null> {
     try {
-      const r2Key = buildR2Key();
+      const r2Key = buildR2Key(areaType, prefCode, version);
       console.log(`[R2DataSource] Attempting to fetch: ${r2Key}`);
 
       // R2バケットへのアクセスはサーバーサイド（API Route）経由で行う
@@ -55,10 +66,18 @@ export class R2DataSource {
   /**
    * R2ストレージにTopoJSONを保存（バックグラウンド処理）
    * @param data TopoJSONトポロジー
+   * @param areaType 地域タイプ
+   * @param prefCode 都道府県コード（2桁）
+   * @param version 市区町村版タイプ
    */
-  static async save(data: TopoJSONTopology): Promise<void> {
+  static async save(
+    data: TopoJSONTopology,
+    areaType: AreaType = "prefecture",
+    prefCode?: string,
+    version: MunicipalityVersion = "merged"
+  ): Promise<void> {
     try {
-      const r2Key = buildR2Key();
+      const r2Key = buildR2Key(areaType, prefCode, version);
       console.log(`[R2DataSource] Saving to R2: ${r2Key}`);
 
       // R2への保存はAPI Route経由で行う
@@ -87,10 +106,17 @@ export class R2DataSource {
 
   /**
    * R2ストレージからデータを削除
+   * @param areaType 地域タイプ
+   * @param prefCode 都道府県コード（2桁）
+   * @param version 市区町村版タイプ
    */
-  static async delete(): Promise<void> {
+  static async delete(
+    areaType: AreaType = "prefecture",
+    prefCode?: string,
+    version: MunicipalityVersion = "merged"
+  ): Promise<void> {
     try {
-      const r2Key = buildR2Key();
+      const r2Key = buildR2Key(areaType, prefCode, version);
       console.log(`[R2DataSource] Deleting from R2: ${r2Key}`);
 
       const response = await fetch(

@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
-import { MunicipalityService } from "@/features/area/services/municipality-service";
+import { listMunicipalitiesByPrefecture } from "@/features/area/services/municipality-service";
 import { Municipality, MunicipalityType } from "@/features/area/types";
 import { AlertCircle, Search } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -68,9 +68,7 @@ export function MunicipalitySelector({
     setError(null);
 
     try {
-      const data = await MunicipalityService.listMunicipalitiesByPrefecture(
-        prefectureCode
-      );
+      const data = await listMunicipalitiesByPrefecture(prefectureCode);
       setMunicipalities(data);
     } catch (err) {
       setError(

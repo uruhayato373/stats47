@@ -4,188 +4,229 @@
  */
 
 import { isMockEnvironment } from "../config/geoshape-config";
-import type {
-  FetchOptions,
-  FetchResult,
-  TopoJSONTopology,
-} from "../types/index";
+
 import { ExternalDataSource } from "./external-data-source";
 import { MockDataSource } from "./mock-data-source";
 import { R2DataSource } from "./r2-data-source";
 
+import type {
+  AreaType,
+  FetchOptions,
+  FetchResult,
+  MunicipalityVersion,
+  TopoJSONTopology,
+} from "../types/index";
+
+// ============================================================================
+// モジュールレベルのキャッシュ
+// ============================================================================
+
+const memoryCache = new Map<string, TopoJSONTopology>();
+const cacheTimestamps = new Map<string, number>();
+
+// ============================================================================
+// TopoJSONデータを取得（fetch動詞）
+// ============================================================================
+
 /**
- * Geoshapeリポジトリクラス
- * 3段階フォールバック戦略でデータを取得
+ * TopoJSONデータを取得（汎用メソッド）
+ * フォールバック順序: メモリキャッシュ → Mock → R2 → 外部API
+ * @param areaType 地域タイプ
+ * @param prefCode 都道府県コード（2桁）- municipalityで必須
+ * @param version 市区町村版タイプ
+ * @param options 取得オプション
  */
-export class GeoshapeRepository {
-  private static memoryCache = new Map<string, TopoJSONTopology>();
-  private static cacheTimestamps = new Map<string, number>();
+export async function fetchTopology(
+  areaType: AreaType = "prefecture",
+  prefCode?: string,
+  version: MunicipalityVersion = "merged",
+  options: FetchOptions = {}
+): Promise<FetchResult<TopoJSONTopology>> {
+  const { useCache = true, forceRefresh = false } = options;
 
-  /**
-   * 都道府県TopoJSONデータを取得
-   * フォールバック順序: メモリキャッシュ → Mock → R2 → 外部API
-   */
-  static async getPrefectureTopology(
-    options: FetchOptions = {}
-  ): Promise<FetchResult<TopoJSONTopology>> {
-    const { useCache = true, forceRefresh = false } = options;
+  // キャッシュキーを生成
+  const cacheKey = generateCacheKey(areaType, prefCode, version);
 
-    const cacheKey = "prefecture_low";
-
-    // 1. メモリキャッシュチェック
-    if (useCache && !forceRefresh) {
-      const cached = this.getFromMemoryCache(cacheKey);
-      if (cached) {
-        console.log(`[GeoshapeRepository] Memory cache hit: ${cacheKey}`);
-        return {
-          data: cached,
-          source: "mock",
-          cached: true,
-          fetchedAt: new Date(this.cacheTimestamps.get(cacheKey) || Date.now()),
-        };
-      }
-    }
-
-    // 2. Mockデータを優先（開発環境では常にMockを使用）
-    try {
-      console.log("[GeoshapeRepository] Loading from mock data");
-      const data = await MockDataSource.fetch();
-      this.setMemoryCache(cacheKey, data);
-
+  // 1. メモリキャッシュチェック
+  if (useCache && !forceRefresh) {
+    const cached = getFromMemoryCache(cacheKey);
+    if (cached) {
+      console.log(`[GeoshapeRepository] Cache hit: ${cacheKey}`);
       return {
-        data,
-        source: "mock",
-        cached: false,
-        fetchedAt: new Date(),
+        data: cached,
+        source: "memory",
+        timestamp: cacheTimestamps.get(cacheKey) || Date.now(),
       };
-    } catch (error) {
-      console.warn("[GeoshapeRepository] Mock data fetch failed:", error);
-      // Mock失敗時は次のソースにフォールバック
     }
+  }
 
-    // 3. R2ストレージから取得
+  // 2. Mockデータソース（開発環境）
+  if (isMockEnvironment()) {
     try {
-      console.log("[GeoshapeRepository] Loading from R2 storage");
-      const data = await R2DataSource.fetch();
-
+      console.log(`[GeoshapeRepository] Trying MockDataSource for ${cacheKey}`);
+      const data = await MockDataSource.fetch(areaType, prefCode, version);
       if (data) {
-        this.setMemoryCache(cacheKey, data);
-
+        saveToMemoryCache(cacheKey, data);
         return {
           data,
-          source: "r2",
-          cached: false,
-          fetchedAt: new Date(),
+          source: "mock",
+          timestamp: Date.now(),
         };
       }
     } catch (error) {
-      console.warn("[GeoshapeRepository] R2 fetch failed:", error);
-      // R2失敗時は次のソースにフォールバック
+      console.warn(`[GeoshapeRepository] MockDataSource failed:`, error);
     }
+  }
 
-    // 4. 外部APIから取得
-    try {
-      console.log("[GeoshapeRepository] Loading from external API");
-      const data = await ExternalDataSource.fetch();
-
-      // 取得後、R2に非同期保存（バックグラウンド）
-      R2DataSource.save(data).catch((error) => {
-        console.warn("[GeoshapeRepository] R2 save failed:", error);
-      });
-
-      this.setMemoryCache(cacheKey, data);
-
+  // 3. R2ストレージ
+  try {
+    console.log(`[GeoshapeRepository] Trying R2DataSource for ${cacheKey}`);
+    const data = await R2DataSource.fetch(areaType, prefCode, version);
+    if (data) {
+      saveToMemoryCache(cacheKey, data);
       return {
         data,
-        source: "external",
-        cached: false,
-        fetchedAt: new Date(),
+        source: "r2",
+        timestamp: Date.now(),
       };
-    } catch (error) {
-      console.error("[GeoshapeRepository] All data sources failed:", error);
-      throw new Error(
-        `Failed to fetch prefecture topology data: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      );
     }
+  } catch (error) {
+    console.warn(`[GeoshapeRepository] R2DataSource failed:`, error);
   }
 
-  /**
-   * メモリキャッシュから取得
-   */
-  private static getFromMemoryCache(key: string): TopoJSONTopology | null {
-    const data = this.memoryCache.get(key);
-    const timestamp = this.cacheTimestamps.get(key);
-
-    if (!data || !timestamp) {
-      return null;
-    }
-
-    // キャッシュ有効期限チェック（24時間）
-    const now = Date.now();
-    const cacheAge = now - timestamp;
-    const maxAge = 24 * 60 * 60 * 1000; // 24時間
-
-    if (cacheAge > maxAge) {
-      this.memoryCache.delete(key);
-      this.cacheTimestamps.delete(key);
-      return null;
-    }
-
-    return data;
-  }
-
-  /**
-   * メモリキャッシュに保存
-   */
-  private static setMemoryCache(key: string, data: TopoJSONTopology): void {
-    this.memoryCache.set(key, data);
-    this.cacheTimestamps.set(key, Date.now());
-  }
-
-  /**
-   * メモリキャッシュをクリア
-   */
-  static clearMemoryCache(): void {
-    this.memoryCache.clear();
-    this.cacheTimestamps.clear();
-    console.log("[GeoshapeRepository] Memory cache cleared");
-  }
-
-  /**
-   * キャッシュステータスを取得
-   */
-  static getCacheStatus(): {
-    memoryCache: number;
-    r2Available: boolean;
-    externalAvailable: boolean;
-  } {
+  // 4. 外部API（最後の手段）
+  try {
+    console.log(
+      `[GeoshapeRepository] Trying ExternalDataSource for ${cacheKey}`
+    );
+    const data = await ExternalDataSource.fetch(areaType, prefCode, version);
+    saveToMemoryCache(cacheKey, data);
     return {
-      memoryCache: this.memoryCache.size,
-      r2Available: false, // 非同期チェックが必要
-      externalAvailable: false, // 非同期チェックが必要
+      data,
+      source: "external",
+      timestamp: Date.now(),
     };
+  } catch (error) {
+    console.error(`[GeoshapeRepository] All data sources failed:`, error);
+    throw new Error(
+      `Failed to fetch topology data: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
+  }
+}
+
+// ============================================================================
+// キャッシュ管理
+// ============================================================================
+
+/**
+ * キャッシュをクリア
+ */
+export function clearGeoshapeCache(): void {
+  memoryCache.clear();
+  cacheTimestamps.clear();
+  console.log("[GeoshapeRepository] Memory cache cleared");
+}
+
+/**
+ * キャッシュステータスを構築
+ */
+export function buildCacheStatus(): {
+  memoryCache: number;
+  r2Available: boolean;
+  externalAvailable: boolean;
+} {
+  return {
+    memoryCache: memoryCache.size,
+    r2Available: false, // 非同期チェックが必要
+    externalAvailable: false, // 非同期チェックが必要
+  };
+}
+
+// ============================================================================
+// データソース可用性チェック
+// ============================================================================
+
+/**
+ * データソースの可用性をチェック
+ */
+export async function checkDataSources(
+  areaType: AreaType,
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): Promise<{ mock: boolean; r2: boolean; external: boolean }> {
+  const results = await Promise.allSettled([
+    MockDataSource.isAvailable(areaType, prefCode, version),
+    R2DataSource.isAvailable(),
+    ExternalDataSource.isAvailable(areaType, prefCode, version),
+  ]);
+
+  return {
+    mock: results[0].status === "fulfilled" && results[0].value,
+    r2: results[1].status === "fulfilled" && results[1].value,
+    external: results[2].status === "fulfilled" && results[2].value,
+  };
+}
+
+// ============================================================================
+// プライベート関数（非エクスポート）
+// ============================================================================
+
+/**
+ * キャッシュキーを生成
+ */
+function generateCacheKey(
+  areaType: AreaType,
+  prefCode?: string,
+  version: MunicipalityVersion = "merged"
+): string {
+  if (areaType === "country" || areaType === "prefecture") {
+    return "prefecture";
+  }
+  return `${areaType}_${prefCode}_${version}`;
+}
+
+/**
+ * メモリキャッシュから取得
+ */
+function getFromMemoryCache(key: string): TopoJSONTopology | null {
+  const data = memoryCache.get(key);
+
+  if (!data) {
+    return null;
   }
 
-  /**
-   * データソースの可用性をチェック
-   */
-  static async checkDataSources(): Promise<{
-    mock: boolean;
-    r2: boolean;
-    external: boolean;
-  }> {
-    const [r2Available, externalAvailable] = await Promise.allSettled([
-      R2DataSource.isAvailable(),
-      ExternalDataSource.isAvailable(),
-    ]);
-
-    return {
-      mock: isMockEnvironment(),
-      r2: r2Available.status === "fulfilled" && r2Available.value,
-      external:
-        externalAvailable.status === "fulfilled" && externalAvailable.value,
-    };
+  // キャッシュの有効期限チェック（24時間）
+  const timestamp = cacheTimestamps.get(key);
+  if (timestamp && isCacheExpired(key)) {
+    memoryCache.delete(key);
+    cacheTimestamps.delete(key);
+    console.log(`[GeoshapeRepository] Cache expired: ${key}`);
+    return null;
   }
+
+  return data;
+}
+
+/**
+ * メモリキャッシュに保存
+ */
+function saveToMemoryCache(key: string, data: TopoJSONTopology): void {
+  memoryCache.set(key, data);
+  cacheTimestamps.set(key, Date.now());
+  console.log(`[GeoshapeRepository] Cached: ${key}`);
+}
+
+/**
+ * キャッシュの有効期限チェック
+ */
+function isCacheExpired(key: string): boolean {
+  const timestamp = cacheTimestamps.get(key);
+  if (!timestamp) {
+    return true;
+  }
+
+  const CACHE_EXPIRATION_MS = 24 * 60 * 60 * 1000; // 24時間
+  return Date.now() - timestamp > CACHE_EXPIRATION_MS;
 }

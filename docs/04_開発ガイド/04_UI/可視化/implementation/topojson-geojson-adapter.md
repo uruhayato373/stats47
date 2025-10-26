@@ -1,7 +1,7 @@
 ---
-title: TopoJSON/GeoJSONアダプター実装仕様
+title: TopoJSON/GeoJSONアダプター実装仕様（廃止）
 created: 2025-10-16
-updated: 2025-10-16
+updated: 2025-01-20
 tags:
   - domain/visualization
   - implementation
@@ -9,13 +9,60 @@ tags:
   - geojson
   - adapter-pattern
   - geoshape
+  - deprecated
 ---
 
-# TopoJSON/GeoJSON アダプター実装仕様
+# TopoJSON/GeoJSON アダプター実装仕様（廃止）
+
+> **⚠️ 廃止予告**: このドキュメントは廃止されました。TopoJSON 直接使用アプローチに移行しました。
+>
+> **新しいアプローチ**: [TopoJSON 直接使用ガイド](../../02_ドメイン/Geoshape/TopoJSON直接使用ガイド.md) を参照してください。
 
 ## 概要
 
-Geoshape データセットの TopoJSON 形式データを GeoJSON 形式に変換し、Leaflet 地図コンポーネントで利用するためのアダプター実装仕様を定義します。topojson-client ライブラリを活用し、効率的なデータ変換とパフォーマンス最適化を実現します。
+**このドキュメントは廃止されました。** Geoshape ドメインでは、TopoJSON を直接使用し、D3.js 側で`topojson.feature()`を使用して GeoJSON に変換する新しいアプローチを採用しています。
+
+## 新しいアプローチ
+
+### TopoJSON 直接使用のメリット
+
+1. **ファイルサイズの削減**: TopoJSON は GeoJSON より約 80%小さく、ネットワーク転送が高速
+2. **メモリ効率**: 変換処理を D3.js 側に移譲することで、サーバー側のメモリ使用量を削減
+3. **パフォーマンスの向上**: 不要な変換処理を削除し、データ取得が高速化
+4. **コードの簡素化**: GeoshapeService の責務をデータ取得のみに集中
+5. **キャッシュ効率の向上**: TopoJSON データをそのままキャッシュすることで、ストレージ効率が向上
+
+### 実装例
+
+```typescript
+import { fetchPrefectureTopology } from "@/features/gis/geoshape/services/geoshape-service";
+import * as topojson from "topojson-client";
+
+// TopoJSONデータを取得
+const topology = await fetchPrefectureTopology({
+  useCache: true,
+});
+
+// D3.js側でGeoJSONに変換
+const objectName = Object.keys(topology.objects)[0];
+const geojson = topojson.feature(
+  topology,
+  topology.objects[objectName]
+) as GeoJSON.FeatureCollection;
+```
+
+## 関連ドキュメント
+
+- [TopoJSON 直接使用ガイド](../../02_ドメイン/Geoshape/TopoJSON直接使用ガイド.md)
+- [Geoshape API リファレンス](../../02_ドメイン/Geoshape/APIリファレンス.md)
+- [地図実装ガイド](../../02_ドメイン/Geoshape/地図実装ガイド.md)
+- [D3.js コロプレスマップ実装ガイド](./d3js/choropleth-implementation.md)
+
+---
+
+## 旧実装（参考用）
+
+以下は旧実装の内容です。参考用として残していますが、新しいプロジェクトでは使用しないでください。
 
 ## TopoJSON 形式の概要
 

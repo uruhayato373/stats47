@@ -122,80 +122,123 @@ interface FetchResult<T> {
 
 ### `GeoshapeService`
 
-地理データの取得と変換を提供するメインサービス。
+地理データの取得を提供するメインサービス。TopoJSON を直接返却し、D3.js 側で`topojson.feature()`を使用して GeoJSON に変換します。
 
-#### `getPrefectureFeatures(options?: FetchOptions): Promise<PrefectureFeatureCollection>`
+#### `fetchPrefectureTopology(options?: FetchOptions): Promise<TopoJSONTopology>`
 
-都道府県の GeoJSON FeatureCollection を取得。
+都道府県の TopoJSON トポロジーを取得。
 
 **パラメータ**:
 
 - `options`: 取得オプション（オプション）
 
-**戻り値**: 都道府県の FeatureCollection
+**戻り値**: 都道府県の TopoJSON トポロジー
 
 **例**:
 
 ```typescript
-const features = await GeoshapeService.getPrefectureFeatures({
-  resolution: "low",
+import { fetchPrefectureTopology } from "@/features/gis/geoshape/services/geoshape-service";
+import * as topojson from "topojson-client";
+
+const topology = await fetchPrefectureTopology({
   useCache: true,
 });
-console.log(features.features.length); // 47
+
+// D3.js側でGeoJSONに変換
+const objectName = Object.keys(topology.objects)[0];
+const geojson = topojson.feature(
+  topology,
+  topology.objects[objectName]
+) as GeoJSON.FeatureCollection;
+
+console.log(geojson.features.length); // 47
 ```
 
-#### `getPrefectureFeature(prefCode: string, options?: FetchOptions): Promise<PrefectureFeature | null>`
+#### `fetchMunicipalityTopology(prefCode: string, version?: MunicipalityVersion, options?: FetchOptions): Promise<TopoJSONTopology>`
 
-特定の都道府県の Feature を取得。
+市区町村の TopoJSON トポロジーを取得。
 
 **パラメータ**:
 
-- `prefCode`: 都道府県コード
+- `prefCode`: 都道府県コード（2 桁）
+- `version`: 市区町村版タイプ（"merged" | "split"）
 - `options`: 取得オプション（オプション）
 
-**戻り値**: 都道府県 Feature、見つからない場合は null
+**戻り値**: 市区町村の TopoJSON トポロジー
 
 **例**:
 
 ```typescript
-const tokyo = await GeoshapeService.getPrefectureFeature("13000");
-if (tokyo) {
-  console.log(tokyo.properties.prefName); // "東京都"
-}
+import { fetchMunicipalityTopology } from "@/features/gis/geoshape/services/geoshape-service";
+import * as topojson from "topojson-client";
+
+// 兵庫県の市区町村データを取得（統合版）
+const topology = await fetchMunicipalityTopology("28", "merged");
+
+// D3.js側でGeoJSONに変換
+const objectName = Object.keys(topology.objects)[0];
+const geojson = topojson.feature(
+  topology,
+  topology.objects[objectName]
+) as GeoJSON.FeatureCollection;
+
+console.log(geojson.features.length); // 兵庫県の市区町村数
 ```
 
-#### `getPrefectureCodes(options?: FetchOptions): Promise<string[]>`
+#### `fetchTopologyByAreaCode(areaCode: string, version?: MunicipalityVersion, options?: FetchOptions): Promise<TopoJSONTopology>`
 
-都道府県コードのリストを取得。
+地域コードに基づいて TopoJSON トポロジーを取得。
 
 **パラメータ**:
 
+- `areaCode`: 地域コード（5 桁）
+- `version`: 市区町村版タイプ（"merged" | "split"）
 - `options`: 取得オプション（オプション）
 
-**戻り値**: 都道府県コードの配列
+**戻り値**: TopoJSON トポロジー
 
 **例**:
 
 ```typescript
-const codes = await GeoshapeService.getPrefectureCodes();
-console.log(codes); // ["01000", "02000", ..., "47000"]
+import { fetchTopologyByAreaCode } from "@/features/gis/geoshape/services/geoshape-service";
+
+// 都道府県コードの場合
+const prefectureTopology = await fetchTopologyByAreaCode("13000");
+
+// 市区町村コードの場合
+const municipalityTopology = await fetchTopologyByAreaCode("13101", "merged");
 ```
 
-#### `getPrefectureNames(options?: FetchOptions): Promise<string[]>`
+#### `checkDataSources(areaType: AreaType, prefCode?: string, version?: MunicipalityVersion): Promise<{mock: boolean; r2: boolean; external: boolean}>`
 
-都道府県名のリストを取得。
+データソースの可用性をチェック。
 
 **パラメータ**:
 
-- `options`: 取得オプション（オプション）
+- `areaType`: 地域タイプ
+- `prefCode`: 都道府県コード（2 桁、オプション）
+- `version`: 市区町村版タイプ（オプション）
 
-**戻り値**: 都道府県名の配列
+**戻り値**: 各データソースの可用性
 
 **例**:
 
 ```typescript
-const names = await GeoshapeService.getPrefectureNames();
-console.log(names); // ["北海道", "青森県", ..., "沖縄県"]
+const availability = await checkDataSources("prefecture");
+console.log(availability); // { mock: true, r2: false, external: true }
+```
+
+#### `getCacheStatus(): {memoryCache: number; r2Available: boolean; externalAvailable: boolean}`
+
+キャッシュステータスを構築。
+
+**戻り値**: キャッシュステータス
+
+**例**:
+
+```typescript
+const status = getCacheStatus();
+console.log(status); // { memoryCache: 2, r2Available: false, externalAvailable: true }
 ```
 
 #### `getPrefectureMapping(options?: FetchOptions): Promise<Record<string, string>>`
@@ -375,22 +418,69 @@ R2 ストレージが利用可能かチェック。
 
 ## ユーティリティ API
 
-### `convertTopoJsonToGeoJson(topojsonData: TopoJSONTopology, objectName: string): GeoJSON.FeatureCollection`
+### `validateTopojson(topology: unknown): topology is TopoJSONTopology`
 
-TopoJSON を GeoJSON に変換。
+TopoJSON の妥当性を検証。
 
 **パラメータ**:
 
-- `topojsonData`: TopoJSON データ
-- `objectName`: オブジェクト名（例: "pref"）
+- `topology`: 検証するオブジェクト
 
-**戻り値**: GeoJSON FeatureCollection
+**戻り値**: TopoJSON トポロジーかどうかの型ガード
 
 **例**:
 
 ```typescript
-const geojson = convertTopoJsonToGeoJson(topology, "pref");
-console.log(geojson.features.length); // 47
+import { validateTopojson } from "@/features/gis/geoshape/utils/topojson-converter";
+
+if (validateTopojson(data)) {
+  // 有効なTopoJSONデータ
+  console.log("TopoJSON is valid");
+} else {
+  console.error("Invalid TopoJSON format");
+}
+```
+
+### TopoJSON → GeoJSON 変換（D3.js 側）
+
+TopoJSON から GeoJSON への変換は、D3.js 側で`topojson.feature()`を使用して行います。
+
+**例**:
+
+```typescript
+import * as topojson from "topojson-client";
+
+// TopoJSONを取得
+const topology = await fetchPrefectureTopology();
+
+// D3.js側でGeoJSONに変換
+const objectName = Object.keys(topology.objects)[0];
+const geojson = topojson.feature(
+  topology,
+  topology.objects[objectName]
+) as GeoJSON.FeatureCollection;
+
+// 都道府県コードと名前を正規化（D3.js側で実装）
+const normalizedFeatures = geojson.features.map((feature) => {
+  const properties = feature.properties || {};
+
+  // 都道府県コードを抽出（5桁形式に正規化）
+  const code = properties.N03_007 || properties.prefCode || properties.code;
+  const prefCode = code ? `${String(code).padStart(2, "0")}000` : "00000";
+
+  // 都道府県名を抽出
+  const prefName =
+    properties.N03_001 || properties.prefName || properties.name || "不明";
+
+  return {
+    ...feature,
+    properties: {
+      ...properties,
+      prefCode,
+      prefName,
+    },
+  };
+});
 ```
 
 ## 設定 API

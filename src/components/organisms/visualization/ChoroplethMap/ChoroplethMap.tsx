@@ -13,12 +13,10 @@ import {
 import { feature } from "topojson-client";
 import { Topology } from "topojson-specification";
 
-import { PrefectureService } from "@/features/area";
+import { listPrefectures } from "@/features/area";
 
 import { FormattedValue } from "@/lib/estat-api";
 import { formatRankingValueDisplay } from "@/lib/ranking/types";
-
-
 
 export interface MapVisualizationOptions {
   colorScheme: string;
@@ -77,7 +75,7 @@ export const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
       try {
         // 都道府県データを取得してマップを作成
-        const prefectures = await PrefectureService.listPrefectures();
+        const prefectures = await listPrefectures();
         const prefectureNameMap = new Map<string, string>();
         prefectures.forEach((pref) => {
           prefectureNameMap.set(pref.prefCode, pref.prefName);

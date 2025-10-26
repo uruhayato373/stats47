@@ -8,8 +8,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import * as d3 from "d3";
+import * as topojson from "topojson-client";
 
-import { GeoshapeService } from "@/features/gis/geoshape/services/geoshape-service";
+import { fetchPrefectureTopology } from "@/features/gis/geoshape/services/geoshape-service";
 import type { PrefectureFeature } from "@/features/gis/geoshape/types/index";
 
 import type { MapConfig, MapState } from "../types/index";
@@ -78,11 +79,52 @@ export function PrefectureMapD3({
     setMapState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      // GeoJSONデータを取得
-      const geojson = await GeoshapeService.getPrefectureFeatures({
-        resolution: "low",
+      // TopoJSONデータを取得
+      const topology = await fetchPrefectureTopology({
         useCache: true,
       });
+
+      // D3.js側でGeoJSONに変換
+      const objectName = Object.keys(topology.objects)[0];
+      if (!objectName) {
+        throw new Error("TopoJSON objects is empty");
+      }
+
+      const geojson = topojson.feature(
+        topology as any,
+        topology.objects[objectName] as any
+      ) as unknown as GeoJSON.FeatureCollection;
+
+      // 都道府県コードと名前を正規化
+      const normalizedFeatures = geojson.features.map((feature) => {
+        const properties = feature.properties || {};
+
+        // 都道府県コードを抽出（5桁形式に正規化）
+        const code =
+          properties.N03_007 || properties.prefCode || properties.code;
+        const prefCode = code ? `${String(code).padStart(2, "0")}000` : "00000";
+
+        // 都道府県名を抽出
+        const prefName =
+          properties.N03_001 ||
+          properties.prefName ||
+          properties.name ||
+          "不明";
+
+        return {
+          ...feature,
+          properties: {
+            ...properties,
+            prefCode,
+            prefName,
+          },
+        };
+      });
+
+      const normalizedGeojson = {
+        type: "FeatureCollection" as const,
+        features: normalizedFeatures,
+      };
 
       const svg = d3.select(svgRef.current);
 
@@ -132,7 +174,7 @@ export function PrefectureMapD3({
       // 都道府県境界を描画
       svg
         .selectAll("path.prefecture")
-        .data(geojson.features)
+        .data(normalizedGeojson.features)
         .enter()
         .append("path")
         .attr("class", "prefecture")
@@ -203,7 +245,7 @@ export function PrefectureMapD3({
       // 都道府県名ラベルを描画
       svg
         .selectAll("text.prefecture-label")
-        .data(geojson.features)
+        .data(normalizedGeojson.features)
         .enter()
         .append("text")
         .attr("class", "prefecture-label")
