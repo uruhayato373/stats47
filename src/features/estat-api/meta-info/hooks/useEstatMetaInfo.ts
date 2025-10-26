@@ -32,7 +32,7 @@ interface ApiResponse {
 /**
  * useEstatMetaInfoのオプション
  */
-interface UseEstatMetaInfoOptions {
+export interface UseEstatMetaInfoOptions {
   autoSave?: boolean; // 自動保存を有効にするか
   onSaveSuccess?: (message: string) => void; // 保存成功時のコールバック
   onSaveError?: (error: string) => void; // 保存失敗時のコールバック
@@ -41,7 +41,7 @@ interface UseEstatMetaInfoOptions {
 /**
  * useEstatMetaInfoの戻り値の型定義
  */
-interface UseEstatMetaInfoReturn {
+export interface UseEstatMetaInfoReturn {
   metaInfo: EstatMetaInfoResponse | null;
   error: string | null;
   isLoading: boolean;
