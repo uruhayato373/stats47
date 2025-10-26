@@ -6,9 +6,9 @@ import { Archive } from "lucide-react";
 
 import { Pagination } from "@/components/molecules/Pagination";
 
-import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
-
 import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
+
+import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
 
 /**
  * EstatMetaInfoSidebar のプロパティ定義

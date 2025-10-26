@@ -73,7 +73,7 @@ export default function MetaInfoPage() {
   };
 
   // ===== レイアウト構築 =====
-  
+
   // ヘッダー
   const header = (
     <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
@@ -113,7 +113,8 @@ export default function MetaInfoPage() {
           <EstatMetaInfoDisplay
             key={
               // 統計表IDをキーとして使用（同じIDの場合は再レンダリングを防ぐ）
-              metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] || "empty"
+              metaInfo?.GET_META_INFO?.METADATA_INF?.TABLE_INF?.["@id"] ||
+              "empty"
             }
             metaInfo={metaInfo}
             loading={isLoading}
@@ -130,25 +131,22 @@ export default function MetaInfoPage() {
 
   // サイドバー
   const sidebar = (
-    <EstatMetaInfoSidebar
-      className="h-full"
-      onView={handleSidebarItemView}
-    />
+    <EstatMetaInfoSidebar className="h-full" onView={handleSidebarItemView} />
   );
 
   // ===== レスポンシブレイアウト =====
   return (
     <div className="transition-all duration-300 min-h-screen bg-white dark:bg-neutral-900">
       {header}
-      
+
       {/* サイドバーありレイアウト（レスポンシブ対応） */}
       <div className="flex flex-col lg:flex-row min-h-full">
         {/* メインコンテンツ */}
         {mainContent}
-        
+
         {/* サイドバー区切り線（デスクトップのみ） */}
         <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-        
+
         {/* サイドバーコンテンツ */}
         <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">{sidebar}</div>
       </div>

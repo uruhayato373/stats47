@@ -1,7 +1,6 @@
-import { listCategories } from "@/features/category";
+import { getCategoryIcon, listCategories } from "@/features/category";
 
 import { getSidebarNavigationItems } from "@/infrastructure/navigation/sidebar-config";
-import { getCategoryIcon } from "@/infrastructure/utils/get-category-icon";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 

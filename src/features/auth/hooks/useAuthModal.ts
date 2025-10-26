@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * 認証モーダルの状態とURLパラメータ処理を管理するカスタムフック

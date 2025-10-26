@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 
-import { useAuthModal } from "@/hooks/useAuthModal";
+import { useAuthModal } from "../../hooks";
 
 import { AuthModal } from "../AuthModal";
 import { LoginButton } from "../LoginButton";

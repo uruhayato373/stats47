@@ -2,10 +2,11 @@
 
 import { use } from "react";
 
-import { RankingItemNotFound } from "@/features/ranking/components";
-import { RankingMapCard } from "@/features/ranking/components/RankingMapCard";
-
-import { useRankingItem } from "@/hooks/ranking/useRankingItem";
+import {
+  RankingItemNotFound,
+  RankingMapCard,
+  useRankingItem,
+} from "@/features/ranking";
 
 /**
  * ランキング詳細ページのProps型定義

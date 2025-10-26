@@ -6,7 +6,7 @@
 import type { RankingItem } from "@data/mock/ranking/ranking-items";
 import { getRankingItemByKey } from "@data/mock/ranking/ranking-items";
 
-interface UseRankingItemReturn {
+export interface UseRankingItemReturn {
   rankingItem: RankingItem | null;
   isLoading: boolean;
   error: string | null;

@@ -1,5 +1,5 @@
 /**
- * e-Stat統計データ取得カスタムフック（useSWR最適化版）
+ * 統計データ取得カスタムフック（useSWR最適化版）
  * 責務: 統計データ取得の状態管理とビジネスロジック
  */
 
@@ -24,9 +24,9 @@ interface ApiResponse {
 }
 
 /**
- * useEstatStatsDataの戻り値の型定義
+ * useStatsDataの戻り値の型定義
  */
-interface UseEstatStatsDataReturn {
+export interface UseStatsDataReturn {
   data: EstatStatsDataResponse | null;
   error: string | null;
   isLoading: boolean;
@@ -102,9 +102,9 @@ async function statsDataFetcher(
  * @param params - 統計データ取得パラメータ（nullの場合はリクエストを無効化）
  * @returns 統計データ、エラー、ローディング状態、再取得関数
  */
-export function useEstatStatsData(
+export function useStatsData(
   params: GetStatsDataParams | null
-): UseEstatStatsDataReturn {
+): UseStatsDataReturn {
   // キャッシュキー生成
   const cacheKey = useMemo(() => {
     return params ? generateStatsDataCacheKey(params) : null;
@@ -128,13 +128,13 @@ export function useEstatStatsData(
         return true;
       },
       onSuccess: (data) => {
-        console.log("✅ useEstatStatsData - Success:", {
+        console.log("✅ useStatsData - Success:", {
           params,
           dataKeys: data ? Object.keys(data) : null,
         });
       },
       onError: (error) => {
-        console.log("❌ useEstatStatsData - Error:", {
+        console.log("❌ useStatsData - Error:", {
           params,
           error: error.message,
         });

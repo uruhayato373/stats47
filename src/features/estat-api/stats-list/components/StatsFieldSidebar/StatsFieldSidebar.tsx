@@ -7,9 +7,11 @@
 
 import { Filter } from "lucide-react";
 
-import { STATS_FIELDS, StatsFieldCode } from "@/features/estat-api/core/types/stats-list";
-
-import { useEstatAPIFieldStats } from "@/hooks/estat-api/useEstatAPIFieldStats";
+import {
+  STATS_FIELDS,
+  StatsFieldCode,
+} from "@/features/estat-api/core/types/stats-list";
+import { useFieldStats } from "@/features/estat-api/stats-list/hooks";
 
 /**
  * StatsFieldSidebarのプロパティ定義
@@ -35,7 +37,7 @@ interface StatsFieldSidebarProps {
  *
  * 設計思想:
  * - サイドバー専用のコンパクトな表示
- * - 統計数はuseEstatAPIFieldStatsフックから取得
+ * - 統計数はuseFieldStatsフックから取得
  * - 選択状態はラジオボタンで表現
  * - EstatMetainfoPageのサイドバーと同様のデザイン
  *
@@ -53,10 +55,9 @@ export function StatsFieldSidebar({
 
   /** 統計数取得フック - データ取得とフォーマット機能を委譲 */
   console.log("🔵 Component: StatsFieldSidebar レンダリング開始");
-  const { fieldStats, isLoading, getFieldStats, formatCount } =
-    useEstatAPIFieldStats({
-      showStatsCount: true,
-    });
+  const { fieldStats, isLoading, getFieldStats, formatCount } = useFieldStats({
+    showStatsCount: true,
+  });
   console.log("🔵 Component: StatsFieldSidebar フック結果", {
     fieldStats,
     isLoading,

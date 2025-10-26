@@ -210,15 +210,15 @@ export default function StatsListPageContent() {
   return (
     <div className="transition-all duration-300 min-h-screen bg-white dark:bg-neutral-900">
       {header}
-      
+
       {/* サイドバーありレイアウト（レスポンシブ対応） */}
       <div className="flex flex-col lg:flex-row min-h-full">
         {/* メインコンテンツ */}
         {mainContent}
-        
+
         {/* サイドバー区切り線（デスクトップのみ） */}
         <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-        
+
         {/* サイドバーコンテンツ */}
         <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">{sidebar}</div>
       </div>
