@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
-import { Input } from "@/components/atoms/ui/input";
 import {
   Form,
   FormControl,
@@ -16,9 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/organisms/ui/form";
-
-
+} from "@/components/atoms/ui/form";
+import { Input } from "@/components/atoms/ui/input";
 
 /**
  * フォームスキーマの定義
@@ -105,32 +103,29 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
         {/* シンプルなレイアウト */}
         <div className="flex flex-row gap-3 items-end">
           {/* 統計表ID入力フィールド */}
-            <FormField
-              control={form.control}
-              name="statsDataId"
-              render={({ field }) => (
-                <FormItem className="space-y-1 max-w-xs flex-1">
-                  <FormLabel>統計表ID</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="0000010101"
-                      disabled={loading}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="statsDataId"
+            render={({ field }) => (
+              <FormItem className="space-y-1 max-w-xs flex-1">
+                <FormLabel>統計表ID</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="0000010101"
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* 送信ボタン */}
-            <Button
-              type="submit"
-              disabled={!form.formState.isValid || loading}
-            >
-              {loading && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
-              {loading ? "取得中" : "取得"}
-            </Button>
+          {/* 送信ボタン */}
+          <Button type="submit" disabled={!form.formState.isValid || loading}>
+            {loading && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
+            {loading ? "取得中" : "取得"}
+          </Button>
         </div>
       </form>
     </Form>
