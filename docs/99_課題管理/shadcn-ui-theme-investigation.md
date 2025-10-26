@@ -52,7 +52,7 @@ darkMode: "class"
 ### 1.2 next-themes統合
 
 #### ThemeProvider設定
-**ファイル**: `src/lib/providers/theme-provider.tsx`
+**ファイル**: `src/infrastructure/providers/theme-provider.tsx`
 
 ```typescript
 <NextThemesProvider
@@ -179,7 +179,7 @@ export function useTheme() {
 - 追加の手動操作不要
 
 **影響範囲**:
-- `src/lib/providers/theme-provider.tsx`: 設定変更
+- `src/infrastructure/providers/theme-provider.tsx`: 設定変更
 - `src/components/organisms/layout/Header/Header.tsx`: UIは変更不要（既存のトグルボタンで対応可能）
 - （オプション）テーマセレクター追加で3択対応（Light/Dark/System）
 
@@ -213,7 +213,7 @@ export function useTheme() {
 - 不要なアニメーション防止
 
 **影響範囲**:
-- `src/lib/providers/theme-provider.tsx`: 設定変更のみ
+- `src/infrastructure/providers/theme-provider.tsx`: 設定変更のみ
 - UIコンポーネント: 変更不要（テーマトグルボタンのアニメーションは独立）
 
 ### 2.3 localStorage Key未指定
@@ -247,7 +247,7 @@ export function useTheme() {
 - デバッグの容易性向上
 
 **影響範囲**:
-- `src/lib/providers/theme-provider.tsx`: 設定追加のみ
+- `src/infrastructure/providers/theme-provider.tsx`: 設定追加のみ
 - 既存ユーザー: 初回訪問時にテーマがリセットされる（軽微な影響）
 
 ### 2.4 テーマ選択UIの不足
@@ -352,7 +352,7 @@ export function ThemeSelector() {
 ### 3.1 優先度: 高
 
 #### 1. システムテーマ検出の有効化
-**ファイル**: `src/lib/providers/theme-provider.tsx`
+**ファイル**: `src/infrastructure/providers/theme-provider.tsx`
 
 ```typescript
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
@@ -430,7 +430,7 @@ describe("Theme persistence", () => {
 1. **ThemeProvider設定更新**
    - 推定時間: 5分
    - リスク: 低（既存ユーザーのテーマ設定がリセットされる可能性）
-   - ファイル: `src/lib/providers/theme-provider.tsx`
+   - ファイル: `src/infrastructure/providers/theme-provider.tsx`
 
 ### フェーズ2: UI改善（推奨）
 
@@ -456,7 +456,7 @@ describe("Theme persistence", () => {
    - リスク: なし
    - 新規ファイル:
      - `src/components/molecules/ThemeSelector/ThemeSelector.test.tsx`
-     - `src/lib/providers/theme-provider.test.tsx`
+     - `src/infrastructure/providers/theme-provider.test.tsx`
 
 ---
 

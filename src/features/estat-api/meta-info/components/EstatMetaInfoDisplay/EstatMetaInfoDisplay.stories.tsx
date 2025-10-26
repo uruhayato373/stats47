@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { EstatMetaInfoResponse } from "@/lib/estat-api";
+import type { EstatMetaInfoResponse } from "@/features/estat-api";
 
 import EstatMetaInfoDisplay from "./EstatMetaInfoDisplay";
 

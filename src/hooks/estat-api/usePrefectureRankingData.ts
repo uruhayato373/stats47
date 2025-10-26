@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { PrefectureRankingSettingsService } from "@/features/ranking/services/settings-service";
 import { VisualizationSettings } from "@/features/ranking/visualization-settings";
-import { EstatStatsDataFormatter } from "@/lib/estat-api";
+import { EstatStatsDataFormatter } from "@/features/estat-api";
 
 interface UsePrefectureRankingDataOptions {
   data: any;

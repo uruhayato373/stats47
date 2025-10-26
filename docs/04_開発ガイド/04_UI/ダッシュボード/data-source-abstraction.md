@@ -450,7 +450,7 @@ class DashboardErrorHandler {
 ### ディレクトリ構成
 
 ```
-src/lib/dashboard/
+src/infrastructure/dashboard/
 ├── core/
 │   ├── types.ts                 # 共通データ型定義
 │   ├── interfaces.ts            # アダプターインターフェース

@@ -211,7 +211,7 @@ export default function RelatedPosts({ posts, title = "関連記事" }: RelatedP
 
 ```tsx
 // app/blog/[slug]/page.tsx
-import { getPostBySlug, getRelatedPosts } from '@/lib/api';
+import { getPostBySlug, getRelatedPosts } from '@/infrastructure/api';
 import RelatedPosts from '@/components/RelatedPosts';
 import { notFound } from 'next/navigation';
 
@@ -250,7 +250,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
 ```tsx
 // app/blog/[slug]/page.tsx
-import { getPostBySlug, getRelatedPosts, getAllPosts } from '@/lib/api';
+import { getPostBySlug, getRelatedPosts, getAllPosts } from '@/infrastructure/api';
 import RelatedPosts from '@/components/RelatedPosts';
 import { notFound } from 'next/navigation';
 
@@ -330,7 +330,7 @@ export default function PostAnalytics({ post }: PostAnalyticsProps) {
 ```tsx
 // app/api/analytics/page-view/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { incrementViewCount } from '@/lib/analytics';
+import { incrementViewCount } from '@/infrastructure/analytics';
 
 export async function POST(request: NextRequest) {
   try {

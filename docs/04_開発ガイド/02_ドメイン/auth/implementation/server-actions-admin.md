@@ -59,9 +59,9 @@ export default async function AdminPage() {
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/infrastructure/auth/auth";
 import { redirect } from "next/navigation";
-import { getDataProvider } from "@/lib/database";
+import { getDataProvider } from "@/infrastructure/database";
 
 /**
  * ユーザー状態切り替え（Server Action）

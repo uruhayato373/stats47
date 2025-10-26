@@ -56,7 +56,7 @@ const bgClass = theme === "dark" ? "bg-gray-800" : "bg-white";
 
 ### 設定
 
-`src/lib/providers/theme-provider.tsx` で設定を変更できます：
+`src/infrastructure/providers/theme-provider.tsx` で設定を変更できます：
 
 ```typescript
 <ThemeProvider

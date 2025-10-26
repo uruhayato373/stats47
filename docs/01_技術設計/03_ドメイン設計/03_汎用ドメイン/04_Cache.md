@@ -167,7 +167,7 @@ D1 データベースとの連携を実装するドメインサービス。
 ## ディレクトリ構造
 
 ```
-src/lib/cache/
+src/infrastructure/cache/
 ├── model/              # エンティティと値オブジェクト
 │   ├── CacheEntry.ts
 │   ├── CacheStatistics.ts

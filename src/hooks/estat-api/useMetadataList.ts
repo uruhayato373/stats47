@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import type { SavedEstatMetainfoItem } from "@/lib/estat-api/types/meta-info";
+import type { SavedEstatMetainfoItem } from "@/features/estat-api/core/types/meta-info";
 
 export function useMetadataList() {
   const [data, setData] = useState<SavedEstatMetainfoItem[]>([]);

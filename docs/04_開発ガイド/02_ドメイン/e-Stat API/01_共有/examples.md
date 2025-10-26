@@ -34,7 +34,7 @@ import {
   EstatMetaInfoService,
   FormattedEstatData,
   FormattedValue,
-} from "@/lib/estat";
+} from "@/infrastructure/estat";
 ```
 
 ### 最小限の例
@@ -692,7 +692,7 @@ async function createDashboardData(db: D1Database) {
 ```typescript
 // app/api/stats/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsDataService } from "@/lib/estat";
+import { EstatStatsDataService } from "@/infrastructure/estat";
 
 export async function GET(
   request: NextRequest,
@@ -738,7 +738,7 @@ export async function GET(
 
 ```typescript
 // worker.ts
-import { EstatStatsDataService, EstatMetaInfoService } from "@/lib/estat";
+import { EstatStatsDataService, EstatMetaInfoService } from "@/infrastructure/estat";
 
 export interface Env {
   DB: D1Database;

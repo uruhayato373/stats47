@@ -577,7 +577,7 @@ class EstatRankingAdapter implements RankingDataAdapter {
 - e-Stat API クライアント
 - 気象庁 API クライアント
 
-**ディレクトリ**: `src/lib/database/`, `src/lib/storage/`, `src/lib/api/`
+**ディレクトリ**: `src/infrastructure/database/`, `src/infrastructure/storage/`, `src/infrastructure/api/`
 
 ---
 
@@ -986,7 +986,7 @@ import type {
   UnifiedRankingData,
   TargetAreaLevel,
 } from '@/features/ranking/types';
-import { EstatApiClient } from '@/lib/api/estat';
+import { EstatApiClient } from '@/infrastructure/api/estat';
 import { EstatTransformer } from './estat-transformer';
 import { RankingCalculator } from '@/features/ranking/calculators';
 
@@ -1162,7 +1162,7 @@ import type {
   AdapterFetchParams,
   UnifiedRankingData,
 } from '@/features/ranking/types';
-import { JmaApiClient } from '@/lib/api/jma';
+import { JmaApiClient } from '@/infrastructure/api/jma';
 
 /**
  * 気象庁データソースアダプター

@@ -21,7 +21,7 @@ e-Stat API を Next.js アプリケーションに統合する方法について
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsDataService } from "@/lib/estat";
+import { EstatStatsDataService } from "@/infrastructure/estat";
 import { z } from "zod";
 
 // リクエストスキーマ
@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListService } from "@/lib/estat";
+import { EstatStatsListService } from "@/infrastructure/estat";
 import { z } from "zod";
 
 const GetStatsListSchema = z.object({
@@ -158,7 +158,7 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatMetaInfoService } from "@/lib/estat";
+import { EstatMetaInfoService } from "@/infrastructure/estat";
 import { z } from "zod";
 
 const GetMetaInfoSchema = z.object({
@@ -390,7 +390,7 @@ export function StatsDataDisplay({ statsDataId }: StatsDataDisplayProps) {
 
 ### 1. API キーの管理
 
-`src/lib/auth/api-key.ts`
+`src/infrastructure/auth/api-key.ts`
 
 ```typescript
 export class ApiKeyManager {
@@ -426,7 +426,7 @@ export class ApiKeyManager {
 
 ### 2. レート制限の実装
 
-`src/lib/rate-limit.ts`
+`src/infrastructure/rate-limit.ts`
 
 ```typescript
 interface RateLimitConfig {
@@ -484,7 +484,7 @@ export const rateLimiter = new RateLimiter({
 ### 3. API Routes でのレート制限適用
 
 ```typescript
-import { rateLimiter } from "@/lib/rate-limit";
+import { rateLimiter } from "@/infrastructure/rate-limit";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -520,7 +520,7 @@ export async function GET(request: NextRequest) {
 
 ### 1. 統一エラーレスポンス
 
-`src/lib/errors/api-error.ts`
+`src/infrastructure/errors/api-error.ts`
 
 ```typescript
 export class ApiError extends Error {
@@ -559,7 +559,7 @@ export class RateLimitError extends ApiError {
 
 ### 2. エラーハンドラーミドルウェア
 
-`src/lib/errors/error-handler.ts`
+`src/infrastructure/errors/error-handler.ts`
 
 ```typescript
 import { NextResponse } from "next/server";
@@ -733,10 +733,10 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 import { GET } from "../route";
-import { EstatStatsDataService } from "@/lib/estat";
+import { EstatStatsDataService } from "@/infrastructure/estat";
 
 // モック
-jest.mock("@/lib/estat");
+jest.mock("@/infrastructure/estat");
 const mockEstatStatsDataService = EstatStatsDataService as jest.Mocked<
   typeof EstatStatsDataService
 >;

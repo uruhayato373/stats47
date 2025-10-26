@@ -49,9 +49,14 @@
       "WebFetch(domain:ui.shadcn.com)",
       "Bash(git checkout:*)",
       "Bash(git mv:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ]
 }

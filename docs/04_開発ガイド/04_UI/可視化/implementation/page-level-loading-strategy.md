@@ -71,7 +71,7 @@ Next.js 15 + React 19では、Suspenseを使った実装が最も推奨されま
 // src/app/estat-api/meta-info/page.tsx
 import { Suspense } from 'react';
 import { EstatMetainfoPage } from '@/components/pages/EstatMetainfoPage';
-import { EstatMetaInfoRepository } from '@/lib/database/estat/repositories';
+import { EstatMetaInfoRepository } from '@/infrastructure/database/estat/repositories';
 import { PageLoadingFallback } from '@/components/loading/PageLoadingFallback';
 
 export default async function EstatMetadataPage() {

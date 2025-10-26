@@ -36,7 +36,7 @@ src/components/charts/d3js/
 ├── ChoroplethTooltip.tsx       # ツールチップコンポーネント
 └── ChoroplethControls.tsx      # ズームコントロール
 
-src/lib/visualization/d3js/choropleth/
+src/infrastructure/visualization/d3js/choropleth/
 ├── projection.ts               # 地図投影設定
 ├── color-scale.ts              # カラースケール
 ├── interactions.ts             # インタラクション処理
@@ -59,10 +59,10 @@ import {
   fetchMunicipalityTopology,
 } from "@/features/gis/geoshape/services/geoshape-service";
 import { ChoroplethData, ChoroplethConfig } from "@/types/visualization";
-import { createProjection } from "@/lib/visualization/d3js/choropleth/projection";
-import { createColorScale } from "@/lib/visualization/d3js/choropleth/color-scale";
-import { setupInteractions } from "@/lib/visualization/d3js/choropleth/interactions";
-import { setupAccessibility } from "@/lib/visualization/d3js/choropleth/accessibility";
+import { createProjection } from "@/infrastructure/visualization/d3js/choropleth/projection";
+import { createColorScale } from "@/infrastructure/visualization/d3js/choropleth/color-scale";
+import { setupInteractions } from "@/infrastructure/visualization/d3js/choropleth/interactions";
+import { setupAccessibility } from "@/infrastructure/visualization/d3js/choropleth/accessibility";
 
 interface ChoroplethMapProps {
   data: ChoroplethData[];
@@ -251,7 +251,7 @@ export function ChoroplethMap({
 ### 2. 投影法設定
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/projection.ts
+// src/infrastructure/visualization/d3js/choropleth/projection.ts
 
 import * as d3 from "d3";
 
@@ -286,7 +286,7 @@ export function createAlternativeProjection(
 ### 3. カラースケール
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/color-scale.ts
+// src/infrastructure/visualization/d3js/choropleth/color-scale.ts
 
 import * as d3 from "d3";
 import { ChoroplethData } from "@/types/visualization";
@@ -337,7 +337,7 @@ function getColorInterpolator(scheme: string): (t: number) => string {
 ### 4. インタラクション処理
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/interactions.ts
+// src/infrastructure/visualization/d3js/choropleth/interactions.ts
 
 import * as d3 from "d3";
 import { ChoroplethData } from "@/types/visualization";
@@ -382,7 +382,7 @@ export function setupInteractions(
 ### 5. アクセシビリティ対応
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/accessibility.ts
+// src/infrastructure/visualization/d3js/choropleth/accessibility.ts
 
 import * as d3 from "d3";
 import { ChoroplethData } from "@/types/visualization";
@@ -451,7 +451,7 @@ function updateSelection(index: number) {
 ### 2. データ最適化
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/data-processor.ts
+// src/infrastructure/visualization/d3js/choropleth/data-processor.ts
 
 export function optimizeChoroplethData(
   data: ChoroplethData[],

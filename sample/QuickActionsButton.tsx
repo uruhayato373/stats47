@@ -1,4 +1,4 @@
-import { quickActionsConfig } from "@/lib/navigation/sidebar-config";
+import { quickActionsConfig } from "@/infrastructure/navigation/sidebar-config";
 
 /**
  * Quick Actionsボタンコンポーネント

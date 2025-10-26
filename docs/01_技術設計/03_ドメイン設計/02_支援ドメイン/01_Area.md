@@ -46,7 +46,7 @@ src/features/area/
 ### データソース
 
 ```
-src/config/areas/
+data/mock/area/
 ├── prefectures.json      # 都道府県マスターデータ (4KB)
 └── municipalities.json   # 市区町村マスターデータ (258KB)
 ```

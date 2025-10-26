@@ -182,7 +182,7 @@ Next.js 15 の App Router を使用して API ルートを作成します：
 ```typescript
 // app/api/comments/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/infrastructure/supabase";
 
 // コメントの取得
 export async function GET(request: NextRequest) {

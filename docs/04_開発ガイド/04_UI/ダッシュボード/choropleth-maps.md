@@ -74,7 +74,7 @@ interface PrefectureChoroplethMapProps {
 import React, { useState, useMemo } from 'react';
 import { ChoroplethMap } from '@/components/maps/ChoroplethMap';
 import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const PrefectureChoroplethMap: React.FC<PrefectureChoroplethMapProps> = ({
   data,
@@ -225,7 +225,7 @@ interface MunicipalityChoroplethMapProps {
 import React, { useState, useMemo } from 'react';
 import { MunicipalityMap } from '@/components/maps/MunicipalityMap';
 import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps> = ({
   prefectureCode,
@@ -458,7 +458,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 ```typescript
 // src/hooks/useMapData.ts
 import { useState, useEffect } from 'react';
-import { MapDataService } from '@/lib/services/MapDataService';
+import { MapDataService } from '@/infrastructure/services/MapDataService';
 
 export function useMapData(
   mapType: 'prefecture' | 'municipality',
@@ -500,7 +500,7 @@ export function useMapData(
 ### 2. カラースケールの生成
 
 ```typescript
-// src/lib/utils/color-scale.ts
+// src/infrastructure/utils/color-scale.ts
 export function generateColorScale(
   data: Array<{ value: number }>,
   colorScheme: string

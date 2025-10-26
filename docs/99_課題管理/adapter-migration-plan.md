@@ -60,7 +60,7 @@ tags:
 #### 1.1 共通データ構造の実装
 
 ```typescript
-// src/lib/dashboard/core/types.ts
+// src/infrastructure/dashboard/core/types.ts
 export interface DashboardData {
   type: DataType;
   values: DataValue[];
@@ -88,7 +88,7 @@ export interface DataValue {
 #### 1.2 アダプターインターフェースの実装
 
 ```typescript
-// src/lib/dashboard/core/interfaces.ts
+// src/infrastructure/dashboard/core/interfaces.ts
 export interface DataAdapter {
   readonly sourceType: string;
   readonly version: string;
@@ -107,7 +107,7 @@ export interface DataAdapter {
 #### 1.3 データサービスの実装
 
 ```typescript
-// src/lib/dashboard/services/data-service.ts
+// src/infrastructure/dashboard/services/data-service.ts
 export class DashboardDataService {
   constructor(
     private registry: AdapterRegistry,
@@ -126,7 +126,7 @@ export class DashboardDataService {
 #### 2.1 e-Stat API アダプターの作成
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-adapter.ts
+// src/infrastructure/dashboard/adapters/estat/estat-adapter.ts
 export class EstatDataAdapter implements DataAdapter {
   readonly sourceType = "estat";
   readonly version = "1.0.0";
@@ -149,7 +149,7 @@ export class EstatDataAdapter implements DataAdapter {
 #### 2.2 データ変換器の実装
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-transformer.ts
+// src/infrastructure/dashboard/adapters/estat/estat-transformer.ts
 export class EstatTransformer {
   transform(
     data: RawDataSourceData,
@@ -163,7 +163,7 @@ export class EstatTransformer {
 #### 2.3 データ検証器の実装
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-validator.ts
+// src/infrastructure/dashboard/adapters/estat/estat-validator.ts
 export class EstatValidator {
   validate(data: RawDataSourceData): ValidationResult {
     // e-Stat APIデータの検証
@@ -277,7 +277,7 @@ export function useDashboardData(params: AdapterParams, areaCode?: string) {
 ##### Step 3: データ変換ロジックの共通化
 
 ```typescript
-// src/lib/dashboard/utils/data-transformers.ts
+// src/infrastructure/dashboard/utils/data-transformers.ts
 export class DashboardDataTransformer {
   static toTimeSeriesData(dashboardData: DashboardData): TimeSeriesDataPoint[] {
     // 時系列データへの変換
@@ -298,7 +298,7 @@ export class DashboardDataTransformer {
 #### 4.1 単体テストの実装
 
 ```typescript
-// src/lib/dashboard/adapters/estat/__tests__/estat-adapter.test.ts
+// src/infrastructure/dashboard/adapters/estat/__tests__/estat-adapter.test.ts
 describe("EstatDataAdapter", () => {
   it("should transform e-Stat data to common format", async () => {
     const adapter = new EstatDataAdapter();
@@ -316,7 +316,7 @@ describe("EstatDataAdapter", () => {
 #### 4.2 統合テストの実装
 
 ```typescript
-// src/lib/dashboard/__tests__/integration/data-service.test.ts
+// src/infrastructure/dashboard/__tests__/integration/data-service.test.ts
 describe("DashboardDataService Integration", () => {
   it("should fetch and transform data through adapter", async () => {
     const service = new DashboardDataService(registry, cache, errorHandler);
@@ -357,7 +357,7 @@ describe("StatisticsMetricCard", () => {
 #### 5.1 段階的移行のためのラッパー
 
 ```typescript
-// src/lib/dashboard/legacy/estat-legacy-adapter.ts
+// src/infrastructure/dashboard/legacy/estat-legacy-adapter.ts
 export class EstatLegacyAdapter {
   static async getAndFormatStatsData(
     statsDataId: string,
@@ -385,7 +385,7 @@ export class EstatLegacyAdapter {
 #### 5.2 設定による切り替え
 
 ```typescript
-// src/lib/config.ts
+// src/infrastructure/config.ts
 export const config = {
   // 既存の設定...
   dashboard: {

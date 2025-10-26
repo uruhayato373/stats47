@@ -71,7 +71,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
 ### 2. Server Components
 ```typescript
 // app/statistics/page.tsx
-import { getStatisticsData } from '@/lib/statistics';
+import { getStatisticsData } from '@/infrastructure/statistics';
 
 export default async function StatisticsPage() {
   const data = await getStatisticsData();

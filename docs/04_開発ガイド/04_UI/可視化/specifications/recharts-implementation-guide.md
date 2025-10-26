@@ -440,7 +440,7 @@ export function CustomLegend({ payload, onClick }: CustomLegendProps) {
 ### 1. カラーパレット
 
 ```typescript
-// src/lib/visualization/recharts/theme.ts
+// src/infrastructure/visualization/recharts/theme.ts
 
 export const ChartTheme = {
   colors: {
@@ -479,7 +479,7 @@ export const ChartTheme = {
 ### 2. スタイル設定
 
 ```typescript
-// src/lib/visualization/recharts/styles.ts
+// src/infrastructure/visualization/recharts/styles.ts
 
 export const ChartStyles = {
   container: {

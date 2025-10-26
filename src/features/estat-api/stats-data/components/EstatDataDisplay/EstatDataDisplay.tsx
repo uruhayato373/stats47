@@ -13,7 +13,7 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 
-import { EstatStatsDataResponse } from "@/lib/estat-api";
+import { EstatStatsDataResponse } from "@/features/estat-api";
 
 import { EstatCategoriesTable } from "../EstatCategoriesTable";
 import { EstatOverview } from "../EstatOverview";

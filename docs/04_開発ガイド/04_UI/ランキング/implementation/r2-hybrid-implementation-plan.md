@@ -467,7 +467,7 @@ export * from "./index-db";
 
 #### タスク4.1: R2キー生成ユーティリティ（30分）
 
-**ファイル**: `src/lib/ranking/utils/r2-key-generator.ts`（新規作成）
+**ファイル**: `src/infrastructure/ranking/utils/r2-key-generator.ts`（新規作成）
 
 ```typescript
 import type { TargetAreaLevel } from "@/types/ranking";
@@ -547,7 +547,7 @@ export class RankingR2KeyGenerator {
 
 #### タスク4.2: RankingR2Service実装（2時間）
 
-**ファイル**: `src/lib/ranking/services/RankingR2Service.ts`（新規作成）
+**ファイル**: `src/infrastructure/ranking/services/RankingR2Service.ts`（新規作成）
 
 ```typescript
 import type { UnifiedRankingData, TargetAreaLevel } from "@/types/ranking";
@@ -748,7 +748,7 @@ export class RankingR2Service {
 
 #### タスク4.3: RankingDataService実装（2時間）
 
-**ファイル**: `src/lib/ranking/services/RankingDataService.ts`（新規作成）
+**ファイル**: `src/infrastructure/ranking/services/RankingDataService.ts`（新規作成）
 
 ```typescript
 import type { D1Database } from "@cloudflare/workers-types";
@@ -1071,8 +1071,8 @@ export class RankingDataService {
  *   npx tsx scripts/migrate-ranking-to-r2.ts --execute
  */
 
-import { RankingDataService } from "../src/lib/ranking/services/RankingDataService";
-import { RankingR2Service } from "../src/lib/ranking/services/RankingR2Service";
+import { RankingDataService } from "../src/infrastructure/ranking/services/RankingDataService";
+import { RankingR2Service } from "../src/infrastructure/ranking/services/RankingR2Service";
 
 // 実装省略（詳細は別途作成）
 ```
@@ -1110,8 +1110,8 @@ import { RankingR2Service } from "../src/lib/ranking/services/RankingR2Service";
 
 ```bash
 # サービスクラスのテスト
-npm run test src/lib/ranking/services/RankingR2Service.test.ts
-npm run test src/lib/ranking/services/RankingDataService.test.ts
+npm run test src/infrastructure/ranking/services/RankingR2Service.test.ts
+npm run test src/infrastructure/ranking/services/RankingDataService.test.ts
 ```
 
 ### 統合テスト

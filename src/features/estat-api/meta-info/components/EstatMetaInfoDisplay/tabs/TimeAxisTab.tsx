@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 
-import { TimeAxisInfo } from "@/lib/estat-api/types/meta-info";
+import { TimeAxisInfo } from "@/features/estat-api/core/types/meta-info";
 
 interface TimeAxisTabProps {
   timeAxis: TimeAxisInfo;

@@ -1,7 +1,7 @@
 import type { AreaType } from "@/features/ranking/types";
-import { getDataProvider } from "@/lib/database";
-import { mockDataProvider, MockDataProvider } from "@/lib/database/mock";
-import { buildEnvironmentConfig } from "@/lib/env";
+import { getDataProvider } from "@/infrastructure/database";
+import { mockDataProvider, MockDataProvider } from "@/infrastructure/database/mock";
+import { buildEnvironmentConfig } from "@/infrastructure/env";
 
 import type {
   EstatMetaInfo,

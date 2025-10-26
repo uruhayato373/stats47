@@ -82,7 +82,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -209,7 +209,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatMultiTimeSeriesData } from '@/hooks/useEstatMultiTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -316,7 +316,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -426,7 +426,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -490,7 +490,7 @@ export const EstatBarChart: React.FC<EstatBarChartProps> = ({
 ```typescript
 // src/hooks/useEstatTimeSeriesData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatTimeSeriesData(
   params: { statsDataId: string; cdCat01: string },
@@ -546,7 +546,7 @@ export function useEstatTimeSeriesData(
 ```typescript
 // src/hooks/useEstatMultiTimeSeriesData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatMultiTimeSeriesData(
   params: { statsDataId: string; cdCat01: string[] },

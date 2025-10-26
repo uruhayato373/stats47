@@ -9,13 +9,13 @@
  * - External: 外部ライブラリの型拡張（next-auth）
  *
  * ドメイン固有の型は各ドメインディレクトリから直接インポートしてください：
- * - 地域型: @/lib/area/types
- * - 認証型: @/lib/auth/types
+ * - 地域型: @/infrastructure/area/types
+ * - 認証型: @/infrastructure/auth/types
  * - カテゴリ型: @/features/category
- * - e-Stat API型: @/lib/estat-api/types
- * - ランキング型: @/lib/ranking/types
- * - データベース型: @/lib/database/estat/types
- * - 可視化型: @/lib/visualization/types
+ * - e-Stat API型: @/features/estat-api/core/types
+ * - ランキング型: @/infrastructure/ranking/types
+ * - データベース型: @/infrastructure/database/estat/types
+ * - 可視化型: @/infrastructure/visualization/types
  *
  * 詳細は docs/01_development_guide/type-management-guide.md を参照してください。
  */

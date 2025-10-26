@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { GetStatsDataParams } from "@/lib/estat-api";
+import { GetStatsDataParams } from "@/features/estat-api";
 
 interface EstatDataFetcherProps {
   onSubmit: (params: GetStatsDataParams) => void;

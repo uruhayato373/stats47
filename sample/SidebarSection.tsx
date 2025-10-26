@@ -1,4 +1,4 @@
-import type { NavigationItem } from "@/lib/navigation/sidebar-config";
+import type { NavigationItem } from "@/infrastructure/navigation/sidebar-config";
 
 import { SidebarLink } from "./SidebarLink";
 

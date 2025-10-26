@@ -119,7 +119,7 @@ src/components/charts/
 
 ### ライブラリ構造
 ```
-src/lib/visualization/
+src/infrastructure/visualization/
 ├── d3js/
 │   ├── choropleth/
 │   ├── bar-chart/

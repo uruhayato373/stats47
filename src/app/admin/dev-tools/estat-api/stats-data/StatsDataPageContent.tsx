@@ -23,7 +23,7 @@ import {
   EstatDataFetcher,
 } from "@/features/estat-api/stats-data/components";
 
-import { EstatStatsDataResponse, GetStatsDataParams } from "@/lib/estat-api";
+import { EstatStatsDataResponse, GetStatsDataParams } from "@/features/estat-api";
 
 import { useEstatStatsData } from "@/hooks/estat-api/useEstatStatsData";
 

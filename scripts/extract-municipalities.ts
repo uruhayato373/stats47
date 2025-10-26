@@ -76,7 +76,7 @@ async function extractMunicipalities() {
 
     const outputPath = path.join(
       process.cwd(),
-      "src/config/areas/municipalities.json"
+      "data/mock/area/municipalities.json"
     );
 
     // ディレクトリが存在しない場合は作成

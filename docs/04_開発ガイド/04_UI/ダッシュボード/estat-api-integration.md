@@ -161,7 +161,7 @@ export async function fetchMunicipalityData(
 ### 1. EstatDataService
 
 ```typescript
-// src/lib/services/EstatDataService.ts
+// src/infrastructure/services/EstatDataService.ts
 export class EstatDataService {
   private static cache = new Map<string, CachedData>();
   private static readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24時間
@@ -277,7 +277,7 @@ export class EstatDataService {
 ### 2. エラーハンドリング
 
 ```typescript
-// src/lib/errors/EstatApiError.ts
+// src/infrastructure/errors/EstatApiError.ts
 export class EstatApiError extends Error {
   public readonly statsDataId: string;
   public readonly categoryCode: string;
@@ -310,7 +310,7 @@ export class EstatApiError extends Error {
 ```typescript
 // src/hooks/useEstatData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatData(
   params: { statsDataId: string; cdCat01: string },
@@ -353,7 +353,7 @@ export function useEstatData(
 ```typescript
 // src/hooks/useEstatTimeSeriesData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatTimeSeriesData(
   params: { statsDataId: string; cdCat01: string },
@@ -409,7 +409,7 @@ export function useEstatTimeSeriesData(
 ```typescript
 // src/hooks/useEstatMultiTimeSeriesData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatMultiTimeSeriesData(
   params: { statsDataId: string; cdCat01: string[] },
@@ -519,7 +519,7 @@ export const ESTAT_CONFIG = {
 ### 2. カテゴリコードの取得
 
 ```typescript
-// src/lib/utils/estat-utils.ts
+// src/infrastructure/utils/estat-utils.ts
 export function getEstatConfig(
   category: string,
   subcategory: string
@@ -550,7 +550,7 @@ export function getCategoryCode(
 ### 1. メモリキャッシュ
 
 ```typescript
-// src/lib/cache/MemoryCache.ts
+// src/infrastructure/cache/MemoryCache.ts
 export class MemoryCache {
   private cache = new Map<string, CachedData>();
   private readonly defaultTTL: number;
@@ -596,7 +596,7 @@ export class MemoryCache {
 ### 2. R2キャッシュ
 
 ```typescript
-// src/lib/cache/R2Cache.ts
+// src/infrastructure/cache/R2Cache.ts
 export class R2Cache {
   private r2: R2Bucket;
   private readonly defaultTTL: number;
@@ -657,7 +657,7 @@ export class R2Cache {
 ### 1. エラーレベルの定義
 
 ```typescript
-// src/lib/errors/ErrorLevel.ts
+// src/infrastructure/errors/ErrorLevel.ts
 export enum ErrorLevel {
   CRITICAL = 'critical',
   ERROR = 'error',
@@ -676,7 +676,7 @@ export interface ErrorContext {
 ### 2. エラーハンドラー
 
 ```typescript
-// src/lib/errors/ErrorHandler.ts
+// src/infrastructure/errors/ErrorHandler.ts
 export class ErrorHandler {
   static handleEstatApiError(error: EstatApiError): DashboardError {
     return {
@@ -726,7 +726,7 @@ export class ErrorHandler {
 ### 1. 並列データ取得
 
 ```typescript
-// src/lib/services/ParallelDataFetcher.ts
+// src/infrastructure/services/ParallelDataFetcher.ts
 export class ParallelDataFetcher {
   static async fetchMultipleData(
     requests: Array<{
@@ -776,7 +776,7 @@ export class ParallelDataFetcher {
 ### 2. プリフェッチ
 
 ```typescript
-// src/lib/services/DataPrefetcher.ts
+// src/infrastructure/services/DataPrefetcher.ts
 export class DataPrefetcher {
   static async prefetchRelatedData(
     category: string,

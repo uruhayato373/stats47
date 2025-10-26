@@ -11,7 +11,7 @@ tags:
 
 ## 概要
 
-このドキュメントでは、`src/lib/estat-api` および関連ライブラリのテスト戦略とベストプラクティスを定義します。
+このドキュメントでは、`src/infrastructure/estat-api` および関連ライブラリのテスト戦略とベストプラクティスを定義します。
 
 ## テストの目的
 
@@ -59,7 +59,7 @@ tags:
 テストファイルはテスト対象のファイルと同じディレクトリに配置します。
 
 ```
-src/lib/estat-api/
+src/infrastructure/estat-api/
 ├── client/
 │   ├── api-client.ts
 │   ├── api-client.test.ts
@@ -459,7 +459,7 @@ describe("EstatAPIClient", () => {
 **テストフィクスチャの作成**
 
 ```typescript
-// src/lib/estat-api/__tests__/fixtures/index.ts
+// src/infrastructure/estat-api/__tests__/fixtures/index.ts
 
 export const fixtures = {
   metaInfoResponse: {
@@ -604,7 +604,7 @@ import {
   afterAll,
 } from "@jest/globals";
 import { server } from "../setup-msw";
-import { estatAPI } from "@/lib/estat-api";
+import { estatAPI } from "@/infrastructure/estat-api";
 
 describe("EstatAPIClient Integration", () => {
   beforeAll(() => server.listen());
@@ -663,8 +663,8 @@ describe("EstatAPIClient Integration", () => {
 // __tests__/e2e/full-flow.e2e.test.ts
 
 import { describe, it, expect } from "@jest/globals";
-import { estatAPI } from "@/lib/estat-api";
-import { EstatMetaInfoFormatter } from "@/lib/estat-api/metainfo";
+import { estatAPI } from "@/infrastructure/estat-api";
+import { EstatMetaInfoFormatter } from "@/infrastructure/estat-api/metainfo";
 
 describe("E2E: Full Data Flow", () => {
   // E2Eテストは時間がかかるためスキップ可能にする

@@ -79,7 +79,7 @@ curl http://localhost:3000/api/rankings-items/land-area
 import {
   getRankingConfig,
   convertToRankingData,
-} from "@/lib/ranking/get-ranking-items";
+} from "@/infrastructure/ranking/get-ranking-items";
 
 // ランキング設定を取得
 const config = await getRankingConfig("land-area");
@@ -93,7 +93,7 @@ const rankings = convertToRankingData(config.rankingItems);
 データベース接続失敗時は、フォールバック設定が使用されます：
 
 ```typescript
-import { FALLBACK_CONFIGS } from "@/lib/ranking/get-ranking-items";
+import { FALLBACK_CONFIGS } from "@/infrastructure/ranking/get-ranking-items";
 
 // フォールバック設定を使用
 const config =
@@ -104,7 +104,7 @@ const config =
 
 1. **データベースにサブカテゴリ設定を追加**
 2. **ランキング項目を追加**
-3. **フォールバック設定を更新** (`src/lib/ranking/get-ranking-items.ts`)
+3. **フォールバック設定を更新** (`src/infrastructure/ranking/get-ranking-items.ts`)
 4. **ランキングコンポーネントを作成**
 5. **ルーティングを設定**
 

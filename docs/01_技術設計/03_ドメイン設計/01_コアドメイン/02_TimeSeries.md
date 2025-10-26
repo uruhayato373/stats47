@@ -175,7 +175,7 @@ CAGR計算のビジネスロジックを実装するドメインサービス。
 ## ディレクトリ構造
 
 ```
-src/lib/timeseries/
+src/infrastructure/timeseries/
 ├── model/              # エンティティと値オブジェクト
 │   ├── TimeSeriesData.ts
 │   ├── TrendAnalysis.ts

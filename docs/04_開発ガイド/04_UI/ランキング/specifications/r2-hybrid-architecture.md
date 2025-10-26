@@ -383,7 +383,7 @@ export class RankingR2KeyGenerator {
 ### R2 操作サービス
 
 ```typescript
-// src/lib/ranking/services/RankingR2Service.ts
+// src/infrastructure/ranking/services/RankingR2Service.ts
 
 export class RankingR2Service {
   constructor(private r2Bucket: R2Bucket, private cacheApi: Cache) {}
@@ -579,7 +579,7 @@ CREATE TABLE data_quality (
 ### 統一サービスクラス
 
 ```typescript
-// src/lib/ranking/services/RankingDataService.ts
+// src/infrastructure/ranking/services/RankingDataService.ts
 
 export class RankingDataService {
   constructor(private db: D1Database, private r2Service: RankingR2Service) {}

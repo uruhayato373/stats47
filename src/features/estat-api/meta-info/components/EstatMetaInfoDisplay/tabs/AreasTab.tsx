@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/organisms/ui/table";
 
-import { PrefectureInfo } from "@/lib/estat-api/types/meta-info";
+import { PrefectureInfo } from "@/features/estat-api/core/types/meta-info";
 
 interface AreasTabProps {
   areas: PrefectureInfo[];

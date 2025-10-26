@@ -40,7 +40,7 @@ Taxonomy（分類管理）ドメインは、統計データの分類体系を管
 **実装構造:**
 
 ```
-src/lib/taxonomy/category/
+src/infrastructure/taxonomy/category/
 ├── types/
 │   └── index.ts           # 型定義
 ├── service/
@@ -73,7 +73,7 @@ src/lib/taxonomy/category/
 ### 基本的な使用
 
 ```typescript
-import { CategoryService } from "@/lib/taxonomy/category";
+import { CategoryService } from "@/infrastructure/taxonomy/category";
 
 // 全カテゴリを取得
 const categories = CategoryService.getAllCategories();
@@ -88,7 +88,7 @@ const result = CategoryService.getSubcategoryById("basic-population");
 ### ナビゲーション用データの取得
 
 ```typescript
-import { getSidebarCategories } from "@/lib/taxonomy/category";
+import { getSidebarCategories } from "@/infrastructure/taxonomy/category";
 
 // サイドバー用のカテゴリデータを取得
 const categories = getSidebarCategories();
@@ -97,7 +97,7 @@ const categories = getSidebarCategories();
 ### バリデーション
 
 ```typescript
-import { validateSubcategoryOrThrow } from "@/lib/taxonomy/category";
+import { validateSubcategoryOrThrow } from "@/infrastructure/taxonomy/category";
 
 // サブカテゴリのバリデーション（無効な場合は404エラー）
 const subcategoryData = validateSubcategoryOrThrow(
@@ -150,7 +150,7 @@ interface CategorySearchOptions {
 
 ## テスト
 
-- 単体テスト: `src/lib/taxonomy/category/__tests__/`
+- 単体テスト: `src/infrastructure/taxonomy/category/__tests__/`
 - テストカバレッジ: 90%以上
 - モックデータによるテスト
 
@@ -161,14 +161,14 @@ interface CategorySearchOptions {
 **変更前:**
 
 ```typescript
-import { CategoryService } from "@/lib/category";
-import { getSidebarCategories } from "@/lib/category/server-navigation";
+import { CategoryService } from "@/infrastructure/category";
+import { getSidebarCategories } from "@/infrastructure/category/server-navigation";
 ```
 
 **変更後:**
 
 ```typescript
-import { CategoryService, getSidebarCategories } from "@/lib/taxonomy/category";
+import { CategoryService, getSidebarCategories } from "@/infrastructure/taxonomy/category";
 ```
 
 ### 削除された機能
@@ -183,11 +183,11 @@ import { CategoryService, getSidebarCategories } from "@/lib/taxonomy/category";
 
 1. **インポートエラー**
 
-   - 旧パス`@/lib/category`から新パス`@/lib/taxonomy/category`に変更してください
+   - 旧パス`@/infrastructure/category`から新パス`@/infrastructure/taxonomy/category`に変更してください
 
 2. **型エラー**
 
-   - 型定義は`src/lib/taxonomy/category/types/index.ts`に移動しました
+   - 型定義は`src/infrastructure/taxonomy/category/types/index.ts`に移動しました
 
 3. **色機能のエラー**
    - カラーマッピング機能は削除されました。代替のスタイリング手法を使用してください
@@ -196,7 +196,7 @@ import { CategoryService, getSidebarCategories } from "@/lib/taxonomy/category";
 
 ### v2.0.0 (2025-10-23)
 
-- **BREAKING CHANGE**: `src/lib/category`から`src/lib/taxonomy/category`に移行
+- **BREAKING CHANGE**: `src/infrastructure/category`から`src/infrastructure/taxonomy/category`に移行
 - **BREAKING CHANGE**: カラーマッピング機能を削除
 - **改善**: 全機能を`CategoryService`に統合
 - **改善**: より明確な DDD 的な構造に再編

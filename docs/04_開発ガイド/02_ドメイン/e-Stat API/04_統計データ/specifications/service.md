@@ -13,7 +13,7 @@ tags:
 
 `EstatStatsDataService` は、e-Stat APIから統計データを取得し、アプリケーションで使いやすい形式に整形するためのサービスクラスです。
 
-**ファイルパス**: `src/lib/estat/statsdata/EstatStatsDataService.ts`
+**ファイルパス**: `src/infrastructure/estat/statsdata/EstatStatsDataService.ts`
 
 ## 主な機能
 

@@ -18,7 +18,7 @@ e-Stat API からデータを効率的に取得するための実装パターン
 ### 1. 単一統計表の取得
 
 ```typescript
-import { EstatStatsDataService } from "@/lib/estat";
+import { EstatStatsDataService } from "@/infrastructure/estat";
 
 async function fetchSingleStatsData(statsDataId: string) {
   try {

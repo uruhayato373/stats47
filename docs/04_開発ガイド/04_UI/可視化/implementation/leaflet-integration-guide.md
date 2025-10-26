@@ -358,8 +358,8 @@ export const ChoroplethLayer: React.FC<ChoroplethLayerProps> = ({
 import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import { ChoroplethLayer } from "./ChoroplethLayer";
-import { GeoshapeDataService } from "@/lib/geoshape";
-import { TopoJSONConverter } from "@/lib/topojson";
+import { GeoshapeDataService } from "@/infrastructure/geoshape";
+import { TopoJSONConverter } from "@/infrastructure/topojson";
 
 interface ChoroplethMapProps {
   areaLevel: "prefecture" | "municipality";
@@ -892,8 +892,8 @@ export const ResponsiveMap: React.FC<ResponsiveMapProps> = ({
 ```typescript
 // src/hooks/useGeographicData.ts
 import { useState, useEffect } from "react";
-import { GeoshapeDataService } from "@/lib/geoshape";
-import { TopoJSONConverter } from "@/lib/topojson";
+import { GeoshapeDataService } from "@/infrastructure/geoshape";
+import { TopoJSONConverter } from "@/infrastructure/topojson";
 
 export const useGeographicData = (
   areaLevel: "prefecture" | "municipality",

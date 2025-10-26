@@ -895,8 +895,8 @@ const metaInfo = await cache.getMetaInfo("0003412313");
 #### R2保存実装
 
 ```typescript
-import { EstatMetaInfoR2Repository } from "@/lib/database/estat/repositories";
-import { EstatMetaInfoResponse } from "@/lib/estat-api";
+import { EstatMetaInfoR2Repository } from "@/infrastructure/database/estat/repositories";
+import { EstatMetaInfoResponse } from "@/infrastructure/estat-api";
 
 /**
  * e-StatメタインフォメーションをR2に保存

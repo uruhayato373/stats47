@@ -52,7 +52,7 @@ import {
   EstatStatsDataService,
   EstatStatsListService,
   EstatMetaInfoService,
-} from "@/lib/estat";
+} from "@/infrastructure/estat";
 ```
 
 ## 基本的な使用方法

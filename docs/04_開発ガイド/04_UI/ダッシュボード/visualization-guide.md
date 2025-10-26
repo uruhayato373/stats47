@@ -50,7 +50,7 @@ tags:
 // src/components/dashboard/StatisticsMetricCard.tsx
 import React from 'react';
 import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue } from '@/lib/utils/format';
+import { formatValue } from '@/infrastructure/utils/format';
 import { TrendIndicator } from '@/components/common/TrendIndicator';
 import { CardSkeleton } from '@/components/common/CardSkeleton';
 import { CardError } from '@/components/common/CardError';
@@ -139,7 +139,7 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
 // src/components/dashboard/ComparisonCard.tsx
 import React from 'react';
 import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue, calculateComparison } from '@/lib/utils/format';
+import { formatValue, calculateComparison } from '@/infrastructure/utils/format';
 
 interface ComparisonCardProps {
   params: {
@@ -223,7 +223,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -314,7 +314,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { useEstatMultiTimeSeriesData } from '@/hooks/useEstatMultiTimeSeriesData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -399,7 +399,7 @@ import {
   Legend
 } from 'recharts';
 import { useEstatGenderData } from '@/hooks/useEstatGenderData';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 import { ChartSkeleton } from '@/components/common/ChartSkeleton';
 import { ChartError } from '@/components/common/ChartError';
 
@@ -542,7 +542,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 interface StackedBarChartProps {
   data: Array<{
@@ -618,7 +618,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
 ```typescript
 // src/components/dashboard/RankingChart.tsx
 import React from 'react';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 interface RankingChartProps {
   data: Array<{
@@ -693,7 +693,7 @@ export const RankingChart: React.FC<RankingChartProps> = ({
 import React, { useState } from 'react';
 import { ChoroplethMap } from '@/components/maps/ChoroplethMap';
 import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 interface PrefectureChoroplethMapProps {
   data: Array<{
@@ -763,7 +763,7 @@ export const PrefectureChoroplethMap: React.FC<PrefectureChoroplethMapProps> = (
 import React, { useState } from 'react';
 import { MunicipalityMap } from '@/components/maps/MunicipalityMap';
 import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 interface MunicipalityChoroplethMapProps {
   prefectureCode: string;
@@ -856,7 +856,7 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
 ### 1. フォーマット関数
 
 ```typescript
-// src/lib/utils/format.ts
+// src/infrastructure/utils/format.ts
 export function formatValue(value: number | null, format: string): string {
   if (value === null || value === undefined) return 'データなし';
   
@@ -900,7 +900,7 @@ export function formatComparison(current: number, previous: number, format: stri
 ```typescript
 // src/components/common/TrendIndicator.tsx
 import React from 'react';
-import { calculateComparison } from '@/lib/utils/format';
+import { calculateComparison } from '@/infrastructure/utils/format';
 
 interface TrendIndicatorProps {
   current: number;

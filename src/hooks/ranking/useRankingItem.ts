@@ -3,8 +3,8 @@
  * ランキング項目の取得とエラーハンドリングを担当
  */
 
-import type { RankingItem } from "@/data/mock/ranking-items";
-import { getRankingItemByKey } from "@/data/mock/ranking-items";
+import type { RankingItem } from "@data/mock/ranking/ranking-items";
+import { getRankingItemByKey } from "@data/mock/ranking/ranking-items";
 
 interface UseRankingItemReturn {
   rankingItem: RankingItem | null;

@@ -10,9 +10,9 @@
 
 import { findSubcategoryById } from "@/features/category";
 
-import { getDataProvider } from "@/lib/database";
-import { mockDataProvider } from "@/lib/database/mock";
-import { buildEnvironmentConfig } from "@/lib/env";
+import { getDataProvider } from "@/infrastructure/database";
+import { mockDataProvider } from "@/infrastructure/database/mock";
+import { buildEnvironmentConfig } from "@/infrastructure/env";
 import { RankingItem, RankingItemDB } from "../types";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";

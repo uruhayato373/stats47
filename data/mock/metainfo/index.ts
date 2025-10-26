@@ -2,7 +2,7 @@
  * Mock環境用のメタ情報データ取得関数
  */
 
-import { EstatMetaInfoResponse } from "@/lib/estat-api/types";
+import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
 
 /**
  * 統計表IDに対応するモックメタ情報を取得

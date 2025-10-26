@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getDataProvider } from "@/lib/database";
+import { getDataProvider } from "@/infrastructure/database";
 
 export async function GET(request: NextRequest) {
   try {

@@ -30,7 +30,7 @@ import {
   AreaService,
   PrefectureService,
   MunicipalityService,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 ```
 
 ### 型定義のインポート
@@ -41,7 +41,7 @@ import type {
   Municipality,
   AreaHierarchy,
   AreaType,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 ```
 
 ### バリデーション関数のインポート
@@ -51,7 +51,7 @@ import {
   validateArea,
   validatePrefectureCode,
   validateMunicipalityCode,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 ```
 
 ## 都道府県の基本操作
@@ -394,7 +394,7 @@ const normalized = PrefectureService.normalize("13");
 console.log(normalized); // "13000"
 
 // 地域コードの正規化
-import { normalizeAreaCode } from "@/lib/area";
+import { normalizeAreaCode } from "@/infrastructure/area";
 const normalized = normalizeAreaCode("13");
 console.log(normalized); // "13000"
 ```
@@ -454,7 +454,7 @@ function processAreaCode(areaCode: string) {
 ```typescript
 // 必要時のみデータを読み込み
 async function loadAreaData() {
-  const { AreaService } = await import("@/lib/area");
+  const { AreaService } = await import("@/infrastructure/area");
   return AreaService.getAllPrefectures();
 }
 ```

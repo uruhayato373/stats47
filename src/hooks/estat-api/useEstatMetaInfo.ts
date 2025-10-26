@@ -1,6 +1,6 @@
 import useSWR from "swr";
 
-import { EstatMetaInfoResponse } from "@/lib/estat-api";
+import { EstatMetaInfoResponse } from "@/features/estat-api";
 
 /**
  * HTTPリクエストを実行し、レスポンスを処理するfetcher関数

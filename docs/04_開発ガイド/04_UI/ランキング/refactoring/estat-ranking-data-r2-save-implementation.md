@@ -43,7 +43,7 @@ tags:
 #### FormattedValue 型（保存対象）
 
 ```typescript
-// src/lib/estat/types/formatted.ts
+// src/infrastructure/estat/types/formatted.ts
 export interface FormattedValue {
   value: number; // 数値データ（簡素化）
   unit: string | null; // 単位
@@ -294,7 +294,7 @@ export interface SaveEstatCacheResponse {
 
 ### ステップ 3: R2 キャッシュサービスの作成（30 分）
 
-**ファイル**: `src/lib/ranking/cache/EstatRankingR2Service.ts` (新規作成)
+**ファイル**: `src/infrastructure/ranking/cache/EstatRankingR2Service.ts` (新規作成)
 
 ```typescript
 /**
@@ -303,7 +303,7 @@ export interface SaveEstatCacheResponse {
  * FormattedValue v1.1対応版
  */
 
-import { FormattedValue } from "@/lib/estat-api/types";
+import { FormattedValue } from "@/infrastructure/estat-api/types";
 import {
   EstatRankingCacheDataR2,
   EstatRankingCacheValueR2,
@@ -521,7 +521,7 @@ export class EstatRankingR2Service {
 }
 ```
 
-**ファイル**: `src/lib/ranking/cache/index.ts` (新規作成)
+**ファイル**: `src/infrastructure/ranking/cache/index.ts` (新規作成)
 
 ```typescript
 export { EstatRankingR2Service } from "./EstatRankingR2Service";
@@ -534,8 +534,8 @@ export { RankingCacheService } from "../RankingCacheService";
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatRankingR2Service } from "@/lib/ranking/cache";
-import { FormattedValue } from "@/lib/estat-api/types";
+import { EstatRankingR2Service } from "@/infrastructure/ranking/cache";
+import { FormattedValue } from "@/infrastructure/estat-api/types";
 import {
   SaveEstatCacheRequest,
   SaveEstatCacheResponse,
@@ -831,8 +831,8 @@ actions={
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
--import { EstatStatsDataResponse, FormattedYear } from "@/lib/estat/types";
-+import { EstatStatsDataResponse } from "@/lib/estat/types";
+-import { EstatStatsDataResponse, FormattedYear } from "@/infrastructure/estat/types";
++import { EstatStatsDataResponse } from "@/infrastructure/estat/types";
 import { ChoroplethMap } from "@/components/d3/ChoroplethMap";
 import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 -import { YearSelector } from "@/components/common";
@@ -847,7 +847,7 @@ import {
 } from "@/components/ranking/ui";
 -import { Settings } from "lucide-react";
 +import { Settings, Save, Check, AlertCircle } from "lucide-react";
-import { EstatStatsDataService } from "@/lib/estat/statsdata/EstatStatsDataService";
+import { EstatStatsDataService } from "@/infrastructure/estat/statsdata/EstatStatsDataService";
 import { RankingItem } from "@/types/models/ranking";
 +import { SaveEstatCacheRequest } from "@/types/models/r2/estat-cache";
 
@@ -1159,7 +1159,7 @@ cat wrangler.toml | grep -A 3 "r2_buckets"
 **解決方法**:
 
 ```typescript
-// src/lib/estat/types/formatted.ts を確認
+// src/infrastructure/estat/types/formatted.ts を確認
 export interface FormattedValue {
   value: number; // ← string ではなく number であることを確認
   // ...
@@ -1212,7 +1212,7 @@ Cmd+Shift+P > "TypeScript: Restart TS Server"
 - [ ] R2 バケット作成（`stats47-cache`, `stats47-cache-preview`, `stats47-cache-local`）
 - [ ] `wrangler.toml`に R2 設定追加
 - [ ] 型定義ファイル作成（`src/types/models/r2/estat-cache.ts`）
-- [ ] R2 サービスクラス作成（`src/lib/estat/cache/EstatR2CacheService.ts`）
+- [ ] R2 サービスクラス作成（`src/infrastructure/estat/cache/EstatR2CacheService.ts`）
 - [ ] API エンドポイント作成（`src/app/api/estat-api/cache/save/route.ts`）
 - [ ] フロントエンド更新（`EstatRankingDataContainer.tsx`）
 - [ ] ローカル環境でテスト

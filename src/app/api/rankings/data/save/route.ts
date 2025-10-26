@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 // TODO: 実装が必要 - 新しい構造に合わせて修正
-// import { EstatRelationalCacheService } from "@/lib/estat/cache/EstatRelationalCacheService";
-// import { EstatStatsDataFormatter } from "@/lib/estat-api";
-// import { EstatStatsDataResponse } from "@/lib/estat-api";
+// import { EstatRelationalCacheService } from "@/infrastructure/estat/cache/EstatRelationalCacheService";
+// import { EstatStatsDataFormatter } from "@/features/estat-api";
+// import { EstatStatsDataResponse } from "@/features/estat-api";
 
 interface SaveRequest {
   statsDataId: string;

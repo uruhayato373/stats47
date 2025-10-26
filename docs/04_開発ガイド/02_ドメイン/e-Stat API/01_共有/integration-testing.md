@@ -95,7 +95,7 @@ console.log = (...args: any[]) => {
 
 ### 1. meta-info と stats-data の連携
 
-`src/lib/estat-api/__tests__/integration/meta-info-stats-data.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/meta-info-stats-data.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -326,7 +326,7 @@ describe("Meta-info and Stats-data Integration", () => {
 
 ### 2. stats-list と stats-data の連携
 
-`src/lib/estat-api/__tests__/integration/stats-list-stats-data.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/stats-list-stats-data.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -539,7 +539,7 @@ describe("Stats-list and Stats-data Integration", () => {
 
 ### 1. 実際の API との通信テスト
 
-`src/lib/estat-api/__tests__/integration/api-communication.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/api-communication.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -602,7 +602,7 @@ describe("API Communication Integration", () => {
 
 ### 2. エラーレスポンスの処理テスト
 
-`src/lib/estat-api/__tests__/integration/error-handling.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/error-handling.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -671,7 +671,7 @@ describe("Error Handling Integration", () => {
 
 ### 1. ユーザー操作フローのテスト
 
-`src/lib/estat-api/__tests__/integration/e2e-flow.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/e2e-flow.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -867,7 +867,7 @@ describe("End-to-End Flow Integration", () => {
 
 ### 1. レスポンス時間の測定
 
-`src/lib/estat-api/__tests__/integration/performance.test.ts`
+`src/infrastructure/estat-api/__tests__/integration/performance.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";

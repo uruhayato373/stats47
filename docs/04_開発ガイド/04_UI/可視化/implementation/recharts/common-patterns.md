@@ -284,7 +284,7 @@ export function useChartData<T>(
 // src/hooks/useChartConfig.ts
 
 import { useMemo } from 'react';
-import { ChartTheme } from '@/lib/visualization/recharts/theme';
+import { ChartTheme } from '@/infrastructure/visualization/recharts/theme';
 
 interface UseChartConfigOptions {
   colorScheme?: string;
@@ -366,7 +366,7 @@ export function useResponsiveChart(options: UseResponsiveChartOptions = {}) {
 ### 1. データフォーマッター
 
 ```typescript
-// src/lib/visualization/recharts/utils/formatters.ts
+// src/infrastructure/visualization/recharts/utils/formatters.ts
 
 export const formatters = {
   // 数値フォーマット
@@ -405,7 +405,7 @@ export const formatters = {
 ### 2. カラーユーティリティ
 
 ```typescript
-// src/lib/visualization/recharts/utils/colors.ts
+// src/infrastructure/visualization/recharts/utils/colors.ts
 
 export const colorUtils = {
   // カラーパレットの取得
@@ -445,7 +445,7 @@ export const colorUtils = {
 ### 3. データ変換ユーティリティ
 
 ```typescript
-// src/lib/visualization/recharts/utils/transformers.ts
+// src/infrastructure/visualization/recharts/utils/transformers.ts
 
 export const transformers = {
   // ランキングデータの変換

@@ -354,7 +354,7 @@ export function useNewData(params: DataParams, areaCode: string) {
 #### ステップ2: データ取得サービスの実装
 
 ```typescript
-// src/lib/services/NewDataService.ts
+// src/infrastructure/services/NewDataService.ts
 export class NewDataService {
   static async fetchNewData(params: DataParams, areaCode: string): Promise<NewData> {
     // データ取得の実装

@@ -137,7 +137,7 @@ src/components/charts/
 #### ライブラリ構造
 
 ```
-src/lib/visualization/
+src/infrastructure/visualization/
 ├── d3js/
 │   ├── choropleth/
 │   ├── bar-chart/
@@ -186,10 +186,10 @@ src/lib/visualization/
 
    ```typescript
    // 変更前
-   import { createProjection } from "@/lib/visualization/choropleth/projection";
+   import { createProjection } from "@/infrastructure/visualization/choropleth/projection";
 
    // 変更後
-   import { createProjection } from "@/lib/visualization/d3js/choropleth/projection";
+   import { createProjection } from "@/infrastructure/visualization/d3js/choropleth/projection";
    ```
 
 ### 3. 設定ファイルの更新

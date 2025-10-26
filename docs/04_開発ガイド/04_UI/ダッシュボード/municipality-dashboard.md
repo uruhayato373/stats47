@@ -49,7 +49,7 @@ import { EstatGenderDonutChart } from '@/components/dashboard/EstatGenderDonutCh
 import { EstatLineChart } from '@/components/dashboard/EstatLineChart';
 import { MunicipalityChoroplethMap } from '@/components/dashboard/MunicipalityChoroplethMap';
 import { DashboardProps } from '@/types/dashboard';
-import { getPrefectureCodeFromMunicipality } from '@/lib/utils/area-utils';
+import { getPrefectureCodeFromMunicipality } from '@/infrastructure/utils/area-utils';
 
 export const BasicPopulationMunicipalityDashboard: React.FC<DashboardProps> = ({
   category,
@@ -596,7 +596,7 @@ export function VirtualizedList<T>({
 ```typescript
 // useMunicipalityData.ts
 import { useState, useEffect, useCallback } from 'react';
-import { MunicipalityDataService } from '@/lib/services/MunicipalityDataService';
+import { MunicipalityDataService } from '@/infrastructure/services/MunicipalityDataService';
 
 export function useMunicipalityData(areaCode: string) {
   const [data, setData] = useState<MunicipalityData[]>([]);

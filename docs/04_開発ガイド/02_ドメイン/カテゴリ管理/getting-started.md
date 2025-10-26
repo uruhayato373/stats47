@@ -64,13 +64,13 @@ tags:
 ### 1. インポート
 
 ```typescript
-import { CategoryService } from "@/lib/category";
+import { CategoryService } from "@/infrastructure/category";
 // または個別の関数をインポート
 import {
   getAllCategories,
   getCategoryById,
   getSubcategoryById,
-} from "@/lib/category";
+} from "@/infrastructure/category";
 ```
 
 ### 2. 全カテゴリの取得
@@ -247,7 +247,7 @@ console.log(
 
 ```typescript
 // app/[category]/page.tsx
-import { CategoryService } from "@/lib/category";
+import { CategoryService } from "@/infrastructure/category";
 
 export default async function CategoryPage({ params }: PageProps) {
   const { category: categoryId } = await params;
@@ -269,7 +269,7 @@ export default async function CategoryPage({ params }: PageProps) {
 "use client";
 
 import { useState, useEffect } from "react";
-import { CategoryService } from "@/lib/category";
+import { CategoryService } from "@/infrastructure/category";
 
 export function CategoryList() {
   const [categories, setCategories] = useState([]);
@@ -314,8 +314,8 @@ export function CategoryList() {
 ```typescript
 // hooks/useCategories.ts
 import { useState, useEffect } from "react";
-import { CategoryService } from "@/lib/category";
-import type { Category } from "@/lib/category";
+import { CategoryService } from "@/infrastructure/category";
+import type { Category } from "@/infrastructure/category";
 
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([]);

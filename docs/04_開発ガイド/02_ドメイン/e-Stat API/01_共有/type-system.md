@@ -11,7 +11,7 @@ tags:
 
 ## 概要
 
-`src/lib/estat/types` ディレクトリには、e-Statライブラリで使用されるすべての型定義が含まれています。型定義は以下のカテゴリに分類されます：
+`src/infrastructure/estat/types` ディレクトリには、e-Statライブラリで使用されるすべての型定義が含まれています。型定義は以下のカテゴリに分類されます：
 
 1. **APIパラメータ型**: API呼び出し時のパラメータ
 2. **生APIレスポンス型**: e-Stat APIから返される生のレスポンス
@@ -559,7 +559,7 @@ import {
   EstatMetaCategoryData,
   MetadataSummary,
   MetadataSearchResult
-} from '@/lib/estat/types';
+} from '@/infrastructure/estat/types';
 ```
 
 ### パラメータ型のインポート
@@ -569,7 +569,7 @@ import {
   GetStatsDataParams,
   GetMetaInfoParams,
   GetStatsListParams
-} from '@/lib/estat/types';
+} from '@/infrastructure/estat/types';
 ```
 
 ### 処理済みデータ型のインポート
@@ -580,7 +580,7 @@ import {
   StatsMetadata,
   StatsDataRecord,
   StatsStatistics
-} from '@/lib/estat/types';
+} from '@/infrastructure/estat/types';
 ```
 
 ## 型ガード

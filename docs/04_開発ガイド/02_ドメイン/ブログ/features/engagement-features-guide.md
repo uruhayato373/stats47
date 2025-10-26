@@ -228,7 +228,7 @@ export default function RelatedPosts({
 
 ```tsx
 // app/blog/[slug]/page.tsx
-import { getPostBySlug, getRelatedPosts } from "@/lib/api";
+import { getPostBySlug, getRelatedPosts } from "@/infrastructure/api";
 import RelatedPosts from "@/components/RelatedPosts";
 import { notFound } from "next/navigation";
 
@@ -502,7 +502,7 @@ Next.js 15 の App Router を使用して API ルートを作成します：
 ```typescript
 // app/api/comments/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/infrastructure/supabase";
 
 // コメントの取得
 export async function GET(request: NextRequest) {

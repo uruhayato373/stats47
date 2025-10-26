@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { buildEnvironmentConfig } from "@/lib/env";
-import { estatAPI } from "@/lib/estat-api";
+import { buildEnvironmentConfig } from "@/infrastructure/env";
+import { estatAPI } from "@/features/estat-api";
 
 import { getMockMetaInfo } from "@data/mock/metainfo";
 

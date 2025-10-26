@@ -49,7 +49,7 @@ tags:
 
 #### タイトルタグ
 ```typescript
-// src/lib/blog/seo.ts
+// src/infrastructure/blog/seo.ts
 
 export function generateTitle(frontmatter: Frontmatter): string {
   const { title, category, date } = frontmatter;

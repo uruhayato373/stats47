@@ -8,7 +8,7 @@ import {
   EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedArea,
-} from "@/lib/estat-api";
+} from "@/features/estat-api";
 
 interface EstatAreasTableProps {
   data: EstatStatsDataResponse;

@@ -11,7 +11,7 @@
 ナビゲーション表示用のカテゴリ一覧を取得します。`displayOrder`順にソートされた状態で返します。
 
 ```typescript
-import { getNavigationCategories } from "@/lib/category";
+import { getNavigationCategories } from "@/infrastructure/category";
 
 const categories = getNavigationCategories();
 // Category[] 型で返される
@@ -28,7 +28,7 @@ const categories = getNavigationCategories();
 サイドバーのカテゴリセクション用データを取得します。ナビゲーションアイテムとして使用しやすい形式に変換されます。
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 
 const sidebarCategories = getCategoriesForSidebar();
 // SidebarCategoryItem[] 型で返される
@@ -67,7 +67,7 @@ export interface SidebarCategoryItem {
 #### サイドバーでの使用
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 import { useMemo } from "react";
 
 function Sidebar() {
@@ -89,7 +89,7 @@ function Sidebar() {
 #### ヘッダーメニューでの使用
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 
 function HeaderMenu() {
   const categories = getCategoriesForSidebar();
@@ -125,7 +125,7 @@ function HeaderMenu() {
 #### アクティブなカテゴリのみ表示
 
 ```typescript
-import { getNavigationCategories } from "@/lib/category";
+import { getNavigationCategories } from "@/infrastructure/category";
 
 function ActiveCategories() {
   const categories = useMemo(() => {
@@ -146,7 +146,7 @@ function ActiveCategories() {
 #### 名前順でソート
 
 ```typescript
-import { getNavigationCategories } from "@/lib/category";
+import { getNavigationCategories } from "@/infrastructure/category";
 
 function SortedCategories() {
   const categories = useMemo(() => {
@@ -169,7 +169,7 @@ function SortedCategories() {
 #### useMemo による最適化
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 import { useMemo } from "react";
 
 function OptimizedSidebar() {
@@ -189,7 +189,7 @@ function OptimizedSidebar() {
 #### 条件付きレンダリング
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 
 function ConditionalNavigation({ showSubcategories = false }) {
   const categories = useMemo(() => {
@@ -245,7 +245,7 @@ const categories = getCategoriesForSidebar(); // 型推論される
 ### 3. エラーハンドリング
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 
 function SafeNavigation() {
   const categories = useMemo(() => {

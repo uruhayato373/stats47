@@ -212,7 +212,7 @@ seo:
 ### スキーマバリデーション
 
 ```typescript
-// src/lib/blog/frontmatter.ts
+// src/infrastructure/blog/frontmatter.ts
 
 import { FrontmatterSchema } from '@/types/blog';
 
@@ -319,7 +319,7 @@ export const categoryDefaults = {
 ### テンプレート生成
 
 ```typescript
-// src/lib/blog/template-generator.ts
+// src/infrastructure/blog/template-generator.ts
 
 export function generateFrontmatterTemplate(category: string): string {
   const defaults = categoryDefaults[category];
@@ -463,7 +463,7 @@ export async function migrateFrontmatter(articlePath: string) {
 ### スキーマテスト
 
 ```typescript
-// src/lib/blog/__tests__/frontmatter.test.ts
+// src/infrastructure/blog/__tests__/frontmatter.test.ts
 
 describe('Frontmatter Schema', () => {
   test('valid frontmatter passes validation', () => {

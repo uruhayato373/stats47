@@ -2,7 +2,7 @@
 
 import { Copy, Download } from "lucide-react";
 
-import { EstatStatsDataResponse } from "@/lib/estat-api";
+import { EstatStatsDataResponse } from "@/features/estat-api";
 
 interface EstatRawDataProps {
   data: EstatStatsDataResponse;

@@ -1392,7 +1392,7 @@ export function EstatDataForm() {
 ```typescript
 // src/components/atoms/ui/button/CustomButton.tsx
 import { Button, ButtonProps } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { cn } from "@/infrastructure/utils"
 
 interface CustomButtonProps extends ButtonProps {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "primary"
@@ -1417,7 +1417,7 @@ export function CustomButton({ className, variant = "default", ...props }: Custo
 #### 2. テーマシステムとの統合
 
 ```typescript
-// src/lib/theme.ts
+// src/infrastructure/theme.ts
 export const themeConfig = {
   light: {
     background: "hsl(0 0% 100%)",

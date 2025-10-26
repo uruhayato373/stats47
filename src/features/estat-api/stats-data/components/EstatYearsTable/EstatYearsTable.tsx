@@ -7,7 +7,7 @@ import {
   EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedYear,
-} from "@/lib/estat-api";
+} from "@/features/estat-api";
 
 interface EstatYearsTableProps {
   data: EstatStatsDataResponse;

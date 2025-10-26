@@ -745,7 +745,7 @@ export const authConfig: NextAuthConfig = {
 #### API Guards
 
 ```typescript
-// src/lib/auth/api-guards.ts
+// src/infrastructure/auth/api-guards.ts
 export async function requireAuth() {
   const session = await auth();
 
@@ -785,7 +785,7 @@ export async function requireAdmin() {
 
 ```typescript
 // src/app/api/admin/users/route.ts
-import { requireAdmin } from "@/lib/auth/api-guards";
+import { requireAdmin } from "@/infrastructure/auth/api-guards";
 
 export async function GET() {
   const { error, session } = await requireAdmin();
@@ -919,13 +919,13 @@ export const AuthErrors = {
 
 #### Step 1.1: 権限チェックユーティリティの作成
 
-- [ ] `src/lib/auth/api-guards.ts` を作成
+- [ ] `src/infrastructure/auth/api-guards.ts` を作成
   - `requireAuth()` 関数
   - `requireAdmin()` 関数
-- [ ] `src/lib/auth/api-responses.ts` を作成
+- [ ] `src/infrastructure/auth/api-responses.ts` を作成
   - エラーレスポンスの統一定義
 - [ ] ユニットテストを作成
-  - `src/lib/auth/__tests__/api-guards.test.ts`
+  - `src/infrastructure/auth/__tests__/api-guards.test.ts`
 
 #### Step 1.2: 認証コンポーネントの作成
 
@@ -959,14 +959,14 @@ export const AuthErrors = {
 
 - [ ] `users` テーブルに `session_version` カラムを追加
 - [ ] マイグレーションファイルを作成
-- [ ] `src/lib/auth/auth.ts` の `jwt` コールバックに検証ロジックを追加
+- [ ] `src/infrastructure/auth/auth.ts` の `jwt` コールバックに検証ロジックを追加
 - [ ] ログアウト時にバージョンをインクリメント
 
 #### Step 3.2: レート制限の実装
 
 - [ ] Upstash Redis アカウントを作成（無料枠）
 - [ ] `@upstash/ratelimit` と `@upstash/redis` をインストール
-- [ ] `src/lib/rate-limit.ts` を作成
+- [ ] `src/infrastructure/rate-limit.ts` を作成
 - [ ] ログイン API にレート制限を追加
 - [ ] 登録 API にレート制限を追加
 
@@ -981,7 +981,7 @@ export const AuthErrors = {
 
 #### Step 4.1: ユニットテスト
 
-- [ ] `src/lib/auth/__tests__/api-guards.test.ts`
+- [ ] `src/infrastructure/auth/__tests__/api-guards.test.ts`
 - [ ] `src/hooks/__tests__/useAuth.test.ts`
 - [ ] `src/components/auth/__tests__/RequireAuth.test.tsx`
 - [ ] `src/components/auth/__tests__/withAuth.test.tsx`

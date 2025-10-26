@@ -21,7 +21,7 @@ Area ドメインの実装ガイドです。既存の環境設定（`NEXT_PUBLIC
 ### ソースコード構成
 
 ```
-src/lib/area/
+src/infrastructure/area/
 ├── model/
 │   ├── Prefecture.ts          # 都道府県値オブジェクト
 │   ├── Municipality.ts        # 市区町村値オブジェクト
@@ -41,7 +41,7 @@ src/lib/area/
 
 ```
 # ソースデータ
-src/config/areas/
+data/mock/area/
 ├── prefectures.json
 └── municipalities.json
 
@@ -56,7 +56,7 @@ data/mock/r2/areas/
 ### Prefecture
 
 ```typescript
-// src/lib/area/model/Prefecture.ts
+// src/infrastructure/area/model/Prefecture.ts
 export class Prefecture {
   constructor(public readonly code: AreaCode, public readonly name: string) {}
 
@@ -77,7 +77,7 @@ export class Prefecture {
 ### Municipality
 
 ```typescript
-// src/lib/area/model/Municipality.ts
+// src/infrastructure/area/model/Municipality.ts
 export class Municipality {
   constructor(
     public readonly code: AreaCode,
@@ -102,7 +102,7 @@ export class Municipality {
 ### インターフェース
 
 ```typescript
-// src/lib/area/repository/AreaRepository.ts
+// src/infrastructure/area/repository/AreaRepository.ts
 export interface AreaRepository {
   getPrefectures(): Promise<Prefecture[]>;
   getMunicipalities(): Promise<Municipality[]>;
@@ -115,7 +115,7 @@ export interface AreaRepository {
 ### Mock 実装
 
 ```typescript
-// src/lib/area/repository/MockAreaRepository.ts
+// src/infrastructure/area/repository/MockAreaRepository.ts
 export class MockAreaRepository implements AreaRepository {
   private prefecturesCache: Prefecture[] | null = null;
   private municipalitiesCache: Municipality[] | null = null;
@@ -165,7 +165,7 @@ export class MockAreaRepository implements AreaRepository {
 ### R2 実装
 
 ```typescript
-// src/lib/area/repository/R2AreaRepository.ts
+// src/infrastructure/area/repository/R2AreaRepository.ts
 export class R2AreaRepository implements AreaRepository {
   private prefecturesCache: Prefecture[] | null = null;
   private municipalitiesCache: Municipality[] | null = null;
@@ -205,7 +205,7 @@ export class R2AreaRepository implements AreaRepository {
 ### ファクトリー
 
 ```typescript
-// src/lib/area/factory/createAreaRepository.ts
+// src/infrastructure/area/factory/createAreaRepository.ts
 export function createAreaRepository(): AreaRepository {
   const env = process.env.NEXT_PUBLIC_ENV;
 
@@ -229,7 +229,7 @@ function getR2Bucket(): R2Bucket {
 ## サービス層の実装
 
 ```typescript
-// src/lib/area/service/AreaService.ts
+// src/infrastructure/area/service/AreaService.ts
 export class AreaService {
   constructor(private repository: AreaRepository) {}
 
@@ -263,8 +263,8 @@ export class AreaService {
 
 ```typescript
 // app/areas/page.tsx
-import { createAreaRepository } from "@/lib/area/factory/createAreaRepository";
-import { AreaService } from "@/lib/area/service/AreaService";
+import { createAreaRepository } from "@/infrastructure/area/factory/createAreaRepository";
+import { AreaService } from "@/infrastructure/area/service/AreaService";
 
 export default async function AreasPage() {
   const repository = createAreaRepository();
@@ -290,8 +290,8 @@ export default async function AreasPage() {
 ```typescript
 // app/api/areas/prefectures/route.ts
 import { NextResponse } from "next/server";
-import { createAreaRepository } from "@/lib/area/factory/createAreaRepository";
-import { AreaService } from "@/lib/area/service/AreaService";
+import { createAreaRepository } from "@/infrastructure/area/factory/createAreaRepository";
+import { AreaService } from "@/infrastructure/area/service/AreaService";
 
 export async function GET() {
   const repository = createAreaRepository();
@@ -345,10 +345,10 @@ export function AreaSelector() {
 ### Mock 環境用データの準備
 
 ```bash
-# src/config/areas/ から data/mock/r2/areas/ へコピー
+# data/mock/area/ から data/mock/r2/areas/ へコピー
 mkdir -p data/mock/r2/areas
-cp src/config/areas/prefectures.json data/mock/r2/areas/
-cp src/config/areas/municipalities.json data/mock/r2/areas/
+cp data/mock/area/prefectures.json data/mock/r2/areas/
+cp data/mock/area/municipalities.json data/mock/r2/areas/
 ```
 
 ### R2 へのアップロード（本番環境）
@@ -361,7 +361,7 @@ import { R2Bucket } from "@cloudflare/workers-types";
 async function uploadAreasToR2(r2Bucket: R2Bucket) {
   // prefectures.json をアップロード
   const prefectures = await fs.readFile(
-    "src/config/areas/prefectures.json",
+    "data/mock/area/prefectures.json",
     "utf-8"
   );
   await r2Bucket.put("areas/prefectures.json", prefectures, {
@@ -372,7 +372,7 @@ async function uploadAreasToR2(r2Bucket: R2Bucket) {
 
   // municipalities.json をアップロード
   const municipalities = await fs.readFile(
-    "src/config/areas/municipalities.json",
+    "data/mock/area/municipalities.json",
     "utf-8"
   );
   await r2Bucket.put("areas/municipalities.json", municipalities, {
@@ -390,7 +390,7 @@ async function uploadAreasToR2(r2Bucket: R2Bucket) {
 ### 単体テスト
 
 ```typescript
-// src/lib/area/repository/__tests__/MockAreaRepository.test.ts
+// src/infrastructure/area/repository/__tests__/MockAreaRepository.test.ts
 import { MockAreaRepository } from "../MockAreaRepository";
 
 describe("MockAreaRepository", () => {
@@ -422,7 +422,7 @@ describe("MockAreaRepository", () => {
 ### 統合テスト
 
 ```typescript
-// src/lib/area/service/__tests__/AreaService.integration.test.ts
+// src/infrastructure/area/service/__tests__/AreaService.integration.test.ts
 import { AreaService } from "../AreaService";
 import { MockAreaRepository } from "../../repository/MockAreaRepository";
 
@@ -463,7 +463,7 @@ ls -la data/mock/r2/areas/
 
 # ファイルがない場合はコピー
 mkdir -p data/mock/r2/areas
-cp src/config/areas/*.json data/mock/r2/areas/
+cp data/mock/area/*.json data/mock/r2/areas/
 ```
 
 ### 環境判断が正しく動作しない

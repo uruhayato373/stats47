@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 
-import { TableInfo } from "@/lib/estat-api/types/meta-info";
+import { TableInfo } from "@/features/estat-api/core/types/meta-info";
 
 interface TableInfoTabProps {
   tableInfo: TableInfo;

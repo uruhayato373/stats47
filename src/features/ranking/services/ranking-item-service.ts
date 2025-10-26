@@ -3,7 +3,7 @@
  * ランキング項目のデータ取得とビジネスロジックを担当
  */
 
-import { getActiveRankingItems } from "@/data/mock/ranking-items";
+import { getActiveRankingItems } from "@data/mock/ranking/ranking-items";
 
 import type { RankingItem } from "../types";
 

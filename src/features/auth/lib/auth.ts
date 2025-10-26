@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-import { getDataProvider } from "@/lib/database";
+import { getDataProvider } from "@/infrastructure/database";
 
 import type { NextAuthConfig } from "next-auth";
 

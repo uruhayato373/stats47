@@ -501,7 +501,7 @@ import * as d3 from "d3";
 import { feature } from "topojson-client";
 import { Topology } from "topojson-specification";
 import { FeatureCollection, Geometry } from "geojson";
-import { FormattedValue } from "@/lib/estat-api";
+import { FormattedValue } from "@/infrastructure/estat-api";
 
 export interface MapVisualizationOptions {
   colorScheme: string;

@@ -15,13 +15,13 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { StatsFieldCode, StatsListSearchOptions } from "@/lib/estat-api";
+import { StatsFieldCode, StatsListSearchOptions } from "@/features/estat-api";
 import {
   COLLECT_AREA_OPTIONS,
   LIMIT_OPTIONS,
   STATS_FIELD_OPTIONS,
-} from "@/lib/estat-api/constants/search-options";
-import { STATS_FIELDS } from "@/lib/estat-api/types/stats-list";
+} from "@/features/estat-api/constants/search-options";
+import { STATS_FIELDS } from "@/features/estat-api/core/types/stats-list";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;

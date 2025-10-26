@@ -114,7 +114,7 @@ export interface StatsImageConfig {
 // src/actions/generateStatsImage.ts
 "use server";
 
-import { ImageGenerator } from "@/lib/image";
+import { ImageGenerator } from "@/infrastructure/image";
 import { ColorScheme } from "@/types/features";
 import { StatsSchema } from "@/types/stats";
 import { SNSImageConfig, StatsImageConfig } from "@/types/image";
@@ -210,7 +210,7 @@ export async function generateStatsImage(
 ### 3. **SNS特化画像生成クラスの実装**
 
 ```typescript
-// src/lib/image/snsImageGenerator.ts
+// src/infrastructure/image/snsImageGenerator.ts
 import { createCanvas, loadImage, registerFont } from 'canvas';
 import { SNSImageConfig, StatsSchema } from '@/types/image';
 import { ColorScheme } from '@/types/features';

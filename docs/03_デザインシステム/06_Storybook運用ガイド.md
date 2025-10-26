@@ -288,7 +288,7 @@ export const WithIcon: Story = {
 ```typescript
 import type { Meta, StoryObj } from '@storybook/react';
 import { RankingTable } from './RankingTable';
-import { MockDataProvider } from '@/lib/mock-data/provider';
+import { MockDataProvider } from '@/infrastructure/mock-data/provider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const meta = {
@@ -484,7 +484,7 @@ export default config;
 
 ```typescript
 import type { Preview } from '@storybook/react';
-import { MockDataProvider } from '../src/lib/mock-data/provider';
+import { MockDataProvider } from '../src/infrastructure/mock-data/provider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '../src/styles/globals.css';
 
@@ -732,7 +732,7 @@ export const withDarkMode: Decorator = (Story) => (
 ### src/stories/mock-data.ts
 
 ```typescript
-import { FormattedEstatData } from '@/lib/estat/types';
+import { FormattedEstatData } from '@/infrastructure/estat/types';
 
 /**
  * 共通のモックデータ

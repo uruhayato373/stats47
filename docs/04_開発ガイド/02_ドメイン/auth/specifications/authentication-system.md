@@ -1648,7 +1648,7 @@ export function RegisterForm() {
 
 ```typescript
 import { Metadata } from 'next';
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/infrastructure/auth/auth';
 import { redirect } from 'next/navigation';
 import { UserList } from '@/components/user/UserList';
 
@@ -2043,7 +2043,7 @@ export function UserCard({ user, onUpdate }: UserCardProps) {
 
 ### 1. Auth.js 設定
 
-`src/lib/auth/auth.ts`
+`src/infrastructure/auth/auth.ts`
 
 ```typescript
 import NextAuth from 'next-auth';
@@ -2313,7 +2313,7 @@ export async function POST(request: NextRequest) {
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/infrastructure/auth/auth';
 
 function getD1Database(): D1Database {
   // @ts-ignore
@@ -2365,7 +2365,7 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/infrastructure/auth/auth';
 
 function getD1Database(): D1Database {
   // @ts-ignore
@@ -2615,14 +2615,14 @@ npx wrangler d1 execute stats47-db --file=./database/seeds/users_seed.sql
 
 #### 3.1 Auth.js 設定ファイルの作成
 
-`src/lib/auth/auth.ts` を作成（上記参照）
+`src/infrastructure/auth/auth.ts` を作成（上記参照）
 
 #### 3.2 Auth.js API Route の作成
 
 `src/app/api/auth/[...nextauth]/route.ts`
 
 ```typescript
-import { handlers } from '@/lib/auth/auth';
+import { handlers } from '@/infrastructure/auth/auth';
 
 export const { GET, POST } = handlers;
 
@@ -2634,7 +2634,7 @@ export const runtime = 'edge'; // Cloudflare Workers/Pages で動作させる
 `src/middleware.ts`
 
 ```typescript
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/infrastructure/auth/auth';
 import { NextResponse } from 'next/server';
 
 export default auth((req) => {
@@ -2881,7 +2881,7 @@ npm run dev
 `src/app/(protected)/profile/page.tsx`
 
 ```typescript
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/infrastructure/auth/auth';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 

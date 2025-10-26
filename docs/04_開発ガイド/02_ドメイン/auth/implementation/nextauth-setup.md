@@ -173,7 +173,7 @@ export function useAuth() {
 `middleware.ts` でルートレベルの認証保護を実装：
 
 ```typescript
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/infrastructure/auth/auth";
 import { NextResponse } from "next/server";
 
 export default auth((req) => {
@@ -354,7 +354,7 @@ env.production.example             # 本番環境設定例
    ```
 
 2. **NextAuth のコールバックが正しく動作していない**
-   - `src/lib/auth/auth.ts` の `jwt` と `session` コールバックを確認
+   - `src/infrastructure/auth/auth.ts` の `jwt` と `session` コールバックを確認
 
 ### 7.2 デバッグ方法
 

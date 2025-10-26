@@ -26,8 +26,8 @@ related:
 
 | ファイル                                   | 理由     | 移行先                                        |
 | ------------------------------------------ | -------- | --------------------------------------------- |
-| `src/lib/prefecture.ts`                    | 機能重複 | `src/lib/area/services/prefecture-service.ts` |
-| `src/lib/ranking/utils/area-code-utils.ts` | 機能重複 | `src/lib/area/utils/code-converter.ts`        |
+| `src/infrastructure/prefecture.ts`                    | 機能重複 | `src/infrastructure/area/services/prefecture-service.ts` |
+| `src/infrastructure/ranking/utils/area-code-utils.ts` | 機能重複 | `src/infrastructure/area/utils/code-converter.ts`        |
 
 ### 更新対象
 
@@ -37,8 +37,8 @@ related:
 | `src/components/d3/ChoroplethMap.tsx`                 | インポート変更 | 中     |
 | `src/types/visualization/topojson.ts`                 | インポート変更 | 低     |
 | `src/components/subcategories/PrefectureSelector.tsx` | インポート変更 | 中     |
-| `src/lib/ranking/calculators/ranking-calculator.ts`   | インポート変更 | 中     |
-| `src/lib/ranking/adapters/estat/estat-transformer.ts` | インポート変更 | 中     |
+| `src/infrastructure/ranking/calculators/ranking-calculator.ts`   | インポート変更 | 中     |
+| `src/infrastructure/ranking/adapters/estat/estat-transformer.ts` | インポート変更 | 中     |
 
 ## 移行フェーズ
 
@@ -63,11 +63,11 @@ import {
   prefList,
   PREFECTURE_MAP,
   getPrefectureNameFromCode,
-} from "@/lib/prefecture";
+} from "@/infrastructure/prefecture";
 import {
   getAreaType,
   validateAreaCode,
-} from "@/lib/ranking/utils/area-code-utils";
+} from "@/infrastructure/ranking/utils/area-code-utils";
 ```
 
 **変更後**:
@@ -78,7 +78,7 @@ import {
   AreaService,
   getAreaType,
   validateAreaCode,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 ```
 
 #### 2.2 関数呼び出しの更新
@@ -120,7 +120,7 @@ import type { Prefecture } from "@/types/models/prefecture";
 **変更後**:
 
 ```typescript
-import type { Prefecture } from "@/lib/area";
+import type { Prefecture } from "@/infrastructure/area";
 ```
 
 ### フェーズ 3: 旧ファイルの削除 ✅ 完了
@@ -140,10 +140,10 @@ import type { Prefecture } from "@/lib/area";
 
 **削除完了ファイル**:
 
-- `src/lib/area/services/area-service.ts` ✅
-- `src/lib/area/services/prefecture-service.ts` ✅
-- `src/lib/area/services/municipality-service.ts` ✅
-- `src/lib/area/services/` ディレクトリ ✅
+- `src/infrastructure/area/services/area-service.ts` ✅
+- `src/infrastructure/area/services/prefecture-service.ts` ✅
+- `src/infrastructure/area/services/municipality-service.ts` ✅
+- `src/infrastructure/area/services/` ディレクトリ ✅
 
 **移行先**: `src/features/area/services/` に完全統合
 
@@ -156,13 +156,13 @@ import type { Prefecture } from "@/lib/area";
 **変更前**:
 
 ```typescript
-import { PREFECTURE_MAP } from "@/lib/prefecture";
+import { PREFECTURE_MAP } from "@/infrastructure/prefecture";
 ```
 
 **変更後**:
 
 ```typescript
-import { PrefectureService } from "@/lib/area";
+import { PrefectureService } from "@/infrastructure/area";
 
 // 使用箇所の変更
 const prefName = PrefectureService.getPrefectureNameFromCode(code);
@@ -175,13 +175,13 @@ const prefName = PrefectureService.getPrefectureNameFromCode(code);
 **変更前**:
 
 ```typescript
-import { prefList } from "@/lib/prefecture";
+import { prefList } from "@/infrastructure/prefecture";
 ```
 
 **変更後**:
 
 ```typescript
-import { PrefectureService } from "@/lib/area";
+import { PrefectureService } from "@/infrastructure/area";
 
 // 使用箇所の変更
 const prefectures = PrefectureService.getAllPrefectures();
@@ -189,18 +189,18 @@ const prefectures = PrefectureService.getAllPrefectures();
 
 ### 3. ranking-calculator.ts の移行
 
-**ファイル**: `src/lib/ranking/calculators/ranking-calculator.ts`
+**ファイル**: `src/infrastructure/ranking/calculators/ranking-calculator.ts`
 
 **変更前**:
 
 ```typescript
-import { getPrefectureName } from "@/lib/ranking/utils/area-code-utils";
+import { getPrefectureName } from "@/infrastructure/ranking/utils/area-code-utils";
 ```
 
 **変更後**:
 
 ```typescript
-import { PrefectureService } from "@/lib/area";
+import { PrefectureService } from "@/infrastructure/area";
 
 // 使用箇所の変更
 const prefName = PrefectureService.getPrefectureNameFromCode(code);
@@ -208,18 +208,18 @@ const prefName = PrefectureService.getPrefectureNameFromCode(code);
 
 ### 4. estat-transformer.ts の移行
 
-**ファイル**: `src/lib/ranking/adapters/estat/estat-transformer.ts`
+**ファイル**: `src/infrastructure/ranking/adapters/estat/estat-transformer.ts`
 
 **変更前**:
 
 ```typescript
-import { getPrefectureName } from "@/lib/ranking/utils/area-code-utils";
+import { getPrefectureName } from "@/infrastructure/ranking/utils/area-code-utils";
 ```
 
 **変更後**:
 
 ```typescript
-import { PrefectureService } from "@/lib/area";
+import { PrefectureService } from "@/infrastructure/area";
 
 // 使用箇所の変更
 const prefName = PrefectureService.getPrefectureNameFromCode(code);
@@ -232,8 +232,8 @@ const prefName = PrefectureService.getPrefectureNameFromCode(code);
 ### 互換性レイヤーの例
 
 ```typescript
-// src/lib/prefecture-compat.ts
-import { PrefectureService } from "@/lib/area";
+// src/infrastructure/prefecture-compat.ts
+import { PrefectureService } from "@/infrastructure/area";
 
 // 既存の関数名で新しいサービスをラップ
 export const prefList = PrefectureService.getAllPrefectures();
@@ -279,7 +279,7 @@ export const getPrefectureNameFromCode =
 git revert <migration-commit-hash>
 
 # 部分ロールバック
-git checkout <previous-commit> -- src/lib/prefecture.ts
+git checkout <previous-commit> -- src/infrastructure/prefecture.ts
 ```
 
 ## パフォーマンス影響

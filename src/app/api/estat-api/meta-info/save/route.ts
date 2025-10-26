@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getDataProvider } from "@/lib/database";
-import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
+import { getDataProvider } from "@/infrastructure/database";
+import { EstatMetaInfoRepository } from "@/infrastructure/database/estat/repositories";
 import {
   EstatMetaInfoFetcher,
   EstatMetaInfoBatchProcessor,
-} from "@/lib/estat-api";
+} from "@/features/estat-api";
 
 export async function POST(request: NextRequest) {
   try {

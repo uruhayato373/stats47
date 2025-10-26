@@ -68,7 +68,7 @@ console.error = (...args: any[]) => {
 
 ### 1. 基本テスト
 
-`src/lib/estat-api/stats-data/__tests__/service.test.ts`
+`src/infrastructure/estat-api/stats-data/__tests__/service.test.ts`
 
 ```typescript
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -332,7 +332,7 @@ describe("EstatStatsDataService", () => {
 
 ### 1. 基本テスト
 
-`src/lib/estat-api/stats-data/__tests__/formatter.test.ts`
+`src/infrastructure/estat-api/stats-data/__tests__/formatter.test.ts`
 
 ```typescript
 import { describe, it, expect } from "vitest";
@@ -662,7 +662,7 @@ describe("EstatStatsDataFormatter", () => {
 
 ### 1. フィルタリングテスト
 
-`src/lib/estat-api/stats-data/__tests__/filtering.test.ts`
+`src/infrastructure/estat-api/stats-data/__tests__/filtering.test.ts`
 
 ```typescript
 import { describe, it, expect } from "vitest";
@@ -799,7 +799,7 @@ describe("Stats Data Filtering", () => {
 
 ### 1. テストデータファクトリ
 
-`src/lib/estat-api/stats-data/__tests__/fixtures/index.ts`
+`src/infrastructure/estat-api/stats-data/__tests__/fixtures/index.ts`
 
 ```typescript
 export const mockEstatStatsDataResponse = {

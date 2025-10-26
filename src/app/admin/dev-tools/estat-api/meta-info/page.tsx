@@ -1,5 +1,5 @@
-import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
-import { buildEnvironmentConfig } from "@/lib/env";
+import { EstatMetaInfoRepository } from "@/infrastructure/database/estat/repositories";
+import { buildEnvironmentConfig } from "@/infrastructure/env";
 
 import MetaInfoPageContent from "./MetaInfoPageContent";
 

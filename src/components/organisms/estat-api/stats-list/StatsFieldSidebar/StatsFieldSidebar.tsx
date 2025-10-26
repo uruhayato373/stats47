@@ -7,7 +7,7 @@
 
 import { Filter } from "lucide-react";
 
-import { STATS_FIELDS, StatsFieldCode } from "@/lib/estat-api/types/stats-list";
+import { STATS_FIELDS, StatsFieldCode } from "@/features/estat-api/core/types/stats-list";
 
 import { useEstatAPIFieldStats } from "@/hooks/estat-api/useEstatAPIFieldStats";
 

@@ -17,7 +17,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-import { estatAPI, GetStatsDataParams } from "@/lib/estat-api";
+import { estatAPI, GetStatsDataParams } from "@/features/estat-api";
 
 export async function GET(request: NextRequest) {
   try {

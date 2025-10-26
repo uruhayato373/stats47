@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@/features/auth/lib/auth";
 
-import { getDataProvider } from "@/lib/database";
+import { getDataProvider } from "@/infrastructure/database";
 
 export async function PATCH(request: NextRequest) {
   // 管理者認証チェック

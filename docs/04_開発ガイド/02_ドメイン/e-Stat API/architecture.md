@@ -197,11 +197,11 @@ class EstatMetaInfoService {
 // サービス層の依存関係
 EstatStatsDataService
 ├── @/services/estat-api (EstatApiClient)
-└── @/lib/estat/types (型定義)
+└── @/infrastructure/estat/types (型定義)
 
 EstatMetaInfoService
 ├── @/services/estat-api (EstatApiClient)
-├── @/lib/estat/types (型定義)
+├── @/infrastructure/estat/types (型定義)
 └── D1Database (Cloudflare D1)
 ```
 

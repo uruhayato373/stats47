@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { EstatMetaInfo } from "@/lib/database/estat/types/metainfo";
+import type { EstatMetaInfo } from "@/infrastructure/database/estat/types/metainfo";
 
 import MetaInfoPageContent from "./MetaInfoPageContent";
 

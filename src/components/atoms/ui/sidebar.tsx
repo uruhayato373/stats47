@@ -13,7 +13,7 @@ import { Sheet, SheetContent } from "@/components/atoms/ui/sheet"
 import { Skeleton } from "@/components/atoms/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/atoms/ui/tooltip"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/infrastructure/utils"
 
 const SIDEBAR_WIDTH = "15rem"
 const SIDEBAR_WIDTH_MOBILE = "20rem"

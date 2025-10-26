@@ -15,7 +15,7 @@ import {
   StatsFieldCode,
   StatsListSearchOptions,
   StatsListTableInfo,
-} from "@/lib/estat-api/types/stats-list";
+} from "@/features/estat-api/core/types/stats-list";
 
 import { useStatsListSearch } from "@/hooks/estat-api/useStatsListSearch";
 

@@ -11,7 +11,7 @@ tags:
 
 ## 目的
 
-`src/lib/estat` ライブラリは、政府統計ポータルサイト「e-Stat」の API からデータを取得・整形・保存するための TypeScript ライブラリです。統計データの可視化や分析に必要なデータを効率的に取得し、アプリケーションで利用しやすい形式に変換します。
+`src/infrastructure/estat` ライブラリは、政府統計ポータルサイト「e-Stat」の API からデータを取得・整形・保存するための TypeScript ライブラリです。統計データの可視化や分析に必要なデータを効率的に取得し、アプリケーションで利用しやすい形式に変換します。
 
 ## 主要な機能
 
@@ -224,7 +224,7 @@ e-Stat API から返される生の JSON 形式のデータ。
 ## ディレクトリ構成
 
 ```
-src/lib/estat/
+src/infrastructure/estat/
 ├── index.ts                          # エントリーポイント
 ├── statsdata/                        # 統計データサービス
 │   ├── EstatStatsDataService.ts
@@ -260,7 +260,7 @@ import {
   EstatStatsDataService,
   EstatStatsListService,
   EstatMetaInfoService,
-} from "@/lib/estat";
+} from "@/infrastructure/estat";
 ```
 
 ### 基本的な使用例

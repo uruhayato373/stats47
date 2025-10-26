@@ -216,7 +216,7 @@ export const DataLayers: React.FC<DataLayersProps> = ({
 import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { GeoJSONFeature, LayerStyle } from "@/types/leaflet";
-import { createCustomIcon } from "@/lib/leaflet/icons";
+import { createCustomIcon } from "@/infrastructure/leaflet/icons";
 
 interface MarkerLayerProps {
   features: GeoJSONFeature[];
@@ -359,7 +359,7 @@ export const HeatmapLayer: React.FC<HeatmapLayerProps> = ({
 import React, { useMemo } from "react";
 import { GeoJSON, GeoJSONProps } from "react-leaflet";
 import { GeoJSONFeature, LayerStyle } from "@/types/leaflet";
-import { createColorScale } from "@/lib/leaflet/colorScales";
+import { createColorScale } from "@/infrastructure/leaflet/colorScales";
 
 interface ChoroplethLayerProps {
   features: GeoJSONFeature[];
@@ -445,7 +445,7 @@ export const ChoroplethLayer: React.FC<ChoroplethLayerProps> = ({
 ### 1. アイコン作成ユーティリティ
 
 ```typescript
-// src/lib/leaflet/icons.ts
+// src/infrastructure/leaflet/icons.ts
 import L from "leaflet";
 import { IconConfig } from "@/types/leaflet";
 

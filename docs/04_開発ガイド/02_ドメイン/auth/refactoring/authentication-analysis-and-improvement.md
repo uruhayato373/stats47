@@ -149,7 +149,7 @@ sequenceDiagram
 
 ### 2. ログインフロー
 
-**場所**: `src/lib/auth/auth.ts:16-68`
+**場所**: `src/infrastructure/auth/auth.ts:16-68`
 
 ```mermaid
 sequenceDiagram
@@ -207,7 +207,7 @@ sequenceDiagram
 
 ### 3. セッション管理
 
-**場所**: `src/lib/auth/auth.ts:72-102`
+**場所**: `src/infrastructure/auth/auth.ts:72-102`
 
 ```typescript
 session: {
@@ -620,7 +620,7 @@ if (isProtectedPath && !isLoggedIn) {
 
 **該当箇所**:
 
-- `src/lib/auth/auth.ts` - ユニットテストなし
+- `src/infrastructure/auth/auth.ts` - ユニットテストなし
 - `src/hooks/auth/useAuth.ts` - ユニットテストなし
 - `src/middleware.ts` - 統合テストなし
 
@@ -811,10 +811,10 @@ export function RequireAuth({
 
 #### 2.1 ミドルウェア関数の作成
 
-**新規ファイル**: `src/lib/auth/api-guards.ts`
+**新規ファイル**: `src/infrastructure/auth/api-guards.ts`
 
 ```typescript
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/infrastructure/auth/auth";
 import { NextResponse } from "next/server";
 
 /**
@@ -878,7 +878,7 @@ export async function POST(request: Request) {
 **After**:
 
 ```typescript
-import { requireAdmin } from "@/lib/auth/api-guards";
+import { requireAdmin } from "@/infrastructure/auth/api-guards";
 
 export async function POST(request: Request) {
   const { error, session } = await requireAdmin();
@@ -899,7 +899,7 @@ export async function POST(request: Request) {
 
 #### 2.2 エラーレスポンスの統一
 
-**新規ファイル**: `src/lib/auth/api-responses.ts`
+**新規ファイル**: `src/infrastructure/auth/api-responses.ts`
 
 ```typescript
 import { NextResponse } from "next/server";
@@ -961,10 +961,10 @@ CREATE INDEX idx_blacklist_expires ON token_blacklist(expires_at);
 CREATE INDEX idx_blacklist_user ON token_blacklist(user_id);
 ```
 
-**実装**: `src/lib/auth/token-blacklist.ts`
+**実装**: `src/infrastructure/auth/token-blacklist.ts`
 
 ```typescript
-import { createD1Database } from "@/lib/d1-client";
+import { createD1Database } from "@/infrastructure/d1-client";
 
 /**
  * トークンをブラックリストに追加
@@ -1012,7 +1012,7 @@ export async function cleanupExpiredTokens() {
 **NextAuth 設定に統合**:
 
 ```typescript
-// src/lib/auth/auth.ts
+// src/infrastructure/auth/auth.ts
 import { isTokenBlacklisted } from "./token-blacklist";
 
 export const authConfig: NextAuthConfig = {
@@ -1043,8 +1043,8 @@ export const authConfig: NextAuthConfig = {
 
 ```typescript
 // src/app/api/auth/logout/route.ts
-import { auth } from "@/lib/auth/auth";
-import { blacklistToken } from "@/lib/auth/token-blacklist";
+import { auth } from "@/infrastructure/auth/auth";
+import { blacklistToken } from "@/infrastructure/auth/token-blacklist";
 
 export async function POST() {
   const session = await auth();
@@ -1127,7 +1127,7 @@ await db
 npm install @upstash/ratelimit @upstash/redis
 ```
 
-**設定**: `src/lib/rate-limit.ts`
+**設定**: `src/infrastructure/rate-limit.ts`
 
 ```typescript
 import { Ratelimit } from "@upstash/ratelimit";
@@ -1161,8 +1161,8 @@ export const apiRateLimit = new Ratelimit({
 **使用例（ログイン）**:
 
 ```typescript
-// src/lib/auth/auth.ts
-import { loginRateLimit } from "@/lib/rate-limit";
+// src/infrastructure/auth/auth.ts
+import { loginRateLimit } from "@/infrastructure/rate-limit";
 
 async authorize(credentials) {
   const identifier = credentials.email as string;
@@ -1184,7 +1184,7 @@ async authorize(credentials) {
 
 ```typescript
 // src/app/api/admin/users/route.ts
-import { apiRateLimit } from "@/lib/rate-limit";
+import { apiRateLimit } from "@/infrastructure/rate-limit";
 
 export async function GET(request: Request) {
   const ip = request.headers.get("x-forwarded-for") || "anonymous";
@@ -1315,7 +1315,7 @@ export default withAuth(AdminPage, { requireAdmin: true });
 
 ```typescript
 // src/app/admin/page.tsx
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/infrastructure/auth/auth";
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
@@ -1457,7 +1457,7 @@ function ProtectedAction() {
 
 ```typescript
 // src/app/api/items/[id]/route.ts
-import { requireAdmin } from "@/lib/auth/api-guards";
+import { requireAdmin } from "@/infrastructure/auth/api-guards";
 
 export async function DELETE(
   request: Request,
@@ -1564,13 +1564,13 @@ if (user.role === "admin") {
 
 #### Step 1.1: 権限チェックユーティリティの作成
 
-- [ ] `src/lib/auth/api-guards.ts` を作成
+- [ ] `src/infrastructure/auth/api-guards.ts` を作成
   - `requireAuth()` 関数
   - `requireAdmin()` 関数
-- [ ] `src/lib/auth/api-responses.ts` を作成
+- [ ] `src/infrastructure/auth/api-responses.ts` を作成
   - エラーレスポンスの統一定義
 - [ ] ユニットテストを作成
-  - `src/lib/auth/__tests__/api-guards.test.ts`
+  - `src/infrastructure/auth/__tests__/api-guards.test.ts`
 
 **所要時間**: 2-3 時間
 
@@ -1632,7 +1632,7 @@ if (user.role === "admin") {
 
 - [ ] `users` テーブルに `session_version` カラムを追加
 - [ ] マイグレーションファイルを作成
-- [ ] `src/lib/auth/auth.ts` の `jwt` コールバックに検証ロジックを追加
+- [ ] `src/infrastructure/auth/auth.ts` の `jwt` コールバックに検証ロジックを追加
 - [ ] ログアウト時にバージョンをインクリメント
 - [ ] ユニットテストを作成
 
@@ -1644,7 +1644,7 @@ if (user.role === "admin") {
 
 - [ ] Upstash Redis アカウントを作成（無料枠）
 - [ ] `@upstash/ratelimit` と `@upstash/redis` をインストール
-- [ ] `src/lib/rate-limit.ts` を作成
+- [ ] `src/infrastructure/rate-limit.ts` を作成
 - [ ] ログイン API にレート制限を追加
 - [ ] 登録 API にレート制限を追加
 - [ ] 主要な API Route にレート制限を追加
@@ -1666,7 +1666,7 @@ if (user.role === "admin") {
 
 #### Step 4.1: ユニットテスト
 
-- [ ] `src/lib/auth/__tests__/api-guards.test.ts`
+- [ ] `src/infrastructure/auth/__tests__/api-guards.test.ts`
 - [ ] `src/hooks/__tests__/useAuth.test.ts`
 - [ ] `src/components/auth/__tests__/RequireAuth.test.tsx`
 - [ ] `src/components/auth/__tests__/withAuth.test.tsx`
@@ -1706,7 +1706,7 @@ if (user.role === "admin") {
 
 #### 1.1 API Guards のテスト
 
-**ファイル**: `src/lib/auth/__tests__/api-guards.test.ts`
+**ファイル**: `src/infrastructure/auth/__tests__/api-guards.test.ts`
 
 ```typescript
 import { describe, it, expect, vi } from "vitest";
@@ -1842,11 +1842,11 @@ describe("useAuth", () => {
 
 ```typescript
 import { POST } from "../route";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/infrastructure/auth/auth";
 import { NextRequest } from "next/server";
 import { vi } from "vitest";
 
-vi.mock("@/lib/auth/auth");
+vi.mock("@/infrastructure/auth/auth");
 
 describe("POST /api/ranking-items", () => {
   it("管理者は新規アイテムを作成できる", async () => {

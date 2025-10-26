@@ -43,16 +43,16 @@ npm run debug:meta-info
 
 ```bash
 # 出力ファイル一覧
-ls -la src/lib/estat-api/meta-info/__debug__/output/
+ls -la src/infrastructure/estat-api/meta-info/__debug__/output/
 
 # 統計表情報の確認（軽量）
-cat src/lib/estat-api/meta-info/__debug__/output/tableInfo.json | jq
+cat src/infrastructure/estat-api/meta-info/__debug__/output/tableInfo.json | jq
 
 # カテゴリ情報の確認
-cat src/lib/estat-api/meta-info/__debug__/output/categories.json | jq '.[0:5]'
+cat src/infrastructure/estat-api/meta-info/__debug__/output/categories.json | jq '.[0:5]'
 
 # 地域情報の確認
-cat src/lib/estat-api/meta-info/__debug__/output/areas.json | jq '.prefectures[0:5]'
+cat src/infrastructure/estat-api/meta-info/__debug__/output/areas.json | jq '.prefectures[0:5]'
 ```
 
 ## 注意事項

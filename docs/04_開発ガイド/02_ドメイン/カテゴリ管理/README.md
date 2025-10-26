@@ -4,8 +4,8 @@
 
 ## 移行情報
 
-**新しいパス**: `@/lib/taxonomy/category`  
-**旧パス**: `@/lib/category` (削除済み)
+**新しいパス**: `@/infrastructure/taxonomy/category`  
+**旧パス**: `@/infrastructure/category` (削除済み)
 
 ### 移行手順
 
@@ -13,10 +13,10 @@
 
    ```typescript
    // 変更前
-   import { CategoryService } from "@/lib/category";
+   import { CategoryService } from "@/infrastructure/category";
 
    // 変更後
-   import { CategoryService } from "@/lib/taxonomy/category";
+   import { CategoryService } from "@/infrastructure/taxonomy/category";
    ```
 
 2. **削除された機能**
@@ -58,7 +58,7 @@
 ### 1. 基本的な使用
 
 ```typescript
-import { CategoryService } from "@/lib/taxonomy/category";
+import { CategoryService } from "@/infrastructure/taxonomy/category";
 
 // 全カテゴリを取得
 const categories = CategoryService.getAllCategories();
@@ -90,7 +90,7 @@ const filtered = CategoryService.getAllCategories({
 ### 3. ナビゲーション機能
 
 ```typescript
-import { getSidebarCategories } from "@/lib/taxonomy/category";
+import { getSidebarCategories } from "@/infrastructure/taxonomy/category";
 
 // サイドバー用のカテゴリデータを取得
 const categories = getSidebarCategories();
@@ -164,8 +164,8 @@ UI Components
 ## データソース
 
 - **設定ファイル**: `src/config/categories.json`
-- **型定義**: `src/lib/taxonomy/category/types/`
-- **サービス**: `src/lib/taxonomy/category/service/category.ts`
+- **型定義**: `src/infrastructure/taxonomy/category/types/`
+- **サービス**: `src/infrastructure/taxonomy/category/service/category.ts`
 
 ## 関連ドメイン
 
@@ -187,7 +187,7 @@ UI Components
 
 ## テスト
 
-- 単体テスト: `src/lib/taxonomy/category/__tests__/`
+- 単体テスト: `src/infrastructure/taxonomy/category/__tests__/`
 - テストカバレッジ: 90%以上
 - モックデータによるテスト
 
@@ -195,7 +195,7 @@ UI Components
 
 ### v2.0.0 (2025-10-23)
 
-- **BREAKING CHANGE**: `src/lib/category`から`src/lib/taxonomy/category`に移行
+- **BREAKING CHANGE**: `src/infrastructure/category`から`src/infrastructure/taxonomy/category`に移行
 - **BREAKING CHANGE**: カラーマッピング機能を削除
 - **改善**: 全機能を`CategoryService`に統合
 - **改善**: より明確な DDD 的な構造に再編

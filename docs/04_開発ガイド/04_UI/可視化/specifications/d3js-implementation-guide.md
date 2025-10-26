@@ -270,7 +270,7 @@ export function AnimatedD3Chart({ data }: { data: ChartData[] }) {
 ### 1. スケールファクトリー
 
 ```typescript
-// src/lib/visualization/d3js/common/scales.ts
+// src/infrastructure/visualization/d3js/common/scales.ts
 
 export class ScaleFactory {
   static createLinearScale(
@@ -307,7 +307,7 @@ export class ScaleFactory {
 ### 2. アニメーション設定
 
 ```typescript
-// src/lib/visualization/d3js/common/animations.ts
+// src/infrastructure/visualization/d3js/common/animations.ts
 
 export const AnimationConfig = {
   default: {
@@ -337,7 +337,7 @@ export function createTransition(
 ### 3. ツールチップ管理
 
 ```typescript
-// src/lib/visualization/d3js/common/tooltip.ts
+// src/infrastructure/visualization/d3js/common/tooltip.ts
 
 export class TooltipManager {
   private tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, any>;

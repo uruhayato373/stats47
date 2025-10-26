@@ -1,4 +1,4 @@
-import { buildEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/infrastructure/env";
 
 import { createLocalD1Database } from "./local";
 import { mockDataProvider } from "./mock";
@@ -60,7 +60,7 @@ export async function fetchEstatMetainfoUnique(options?: {
     "fetchEstatMetainfoUnique is deprecated. Use EstatMetaInfoRepository.create().getStatsList() instead."
   );
   const { EstatMetaInfoRepository } = await import(
-    "@/lib/database/estat/repositories"
+    "@/infrastructure/database/estat/repositories"
   );
   const repository = await EstatMetaInfoRepository.create();
   return await repository.getStatsList(options);

@@ -22,8 +22,8 @@ tags:
 新しいアダプターを作成する際は、以下の基本構造に従います：
 
 ```typescript
-// src/lib/dashboard/adapters/[source-type]/[source-name]-adapter.ts
-import { DataAdapter, AdapterParams, RawDataSourceData, DashboardData, ValidationResult, DataSourceMetadata } from '@/lib/dashboard/core/interfaces';
+// src/infrastructure/dashboard/adapters/[source-type]/[source-name]-adapter.ts
+import { DataAdapter, AdapterParams, RawDataSourceData, DashboardData, ValidationResult, DataSourceMetadata } from '@/infrastructure/dashboard/core/interfaces';
 
 export class [SourceName]DataAdapter implements DataAdapter {
   readonly sourceType = '[source-type]';
@@ -55,7 +55,7 @@ export class [SourceName]DataAdapter implements DataAdapter {
 ### 2. インデックスファイルの作成
 
 ```typescript
-// src/lib/dashboard/adapters/[source-type]/index.ts
+// src/infrastructure/dashboard/adapters/[source-type]/index.ts
 export { [SourceName]DataAdapter } from './[source-name]-adapter';
 export { [SourceName]Transformer } from './[source-name]-transformer';
 export { [SourceName]Validator } from './[source-name]-validator';
@@ -68,7 +68,7 @@ export { [SourceName]Validator } from './[source-name]-validator';
 #### 1. アダプター実装
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-adapter.ts
+// src/infrastructure/dashboard/adapters/estat/estat-adapter.ts
 import {
   DataAdapter,
   AdapterParams,
@@ -78,8 +78,8 @@ import {
   DataSourceMetadata,
   DataType,
   AreaLevel,
-} from "@/lib/dashboard/core/interfaces";
-import { EstatApiClient } from "@/lib/estat-api";
+} from "@/infrastructure/dashboard/core/interfaces";
+import { EstatApiClient } from "@/infrastructure/estat-api";
 import { EstatTransformer } from "./estat-transformer";
 import { EstatValidator } from "./estat-validator";
 
@@ -181,7 +181,7 @@ export class EstatDataAdapter implements DataAdapter {
 #### 2. データ変換器
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-transformer.ts
+// src/infrastructure/dashboard/adapters/estat/estat-transformer.ts
 import {
   RawDataSourceData,
   DashboardData,
@@ -189,8 +189,8 @@ import {
   DataMetadata,
   DataType,
   AreaLevel,
-} from "@/lib/dashboard/core/types";
-import { TransformOptions } from "@/lib/dashboard/core/interfaces";
+} from "@/infrastructure/dashboard/core/types";
+import { TransformOptions } from "@/infrastructure/dashboard/core/interfaces";
 
 export class EstatTransformer {
   transform(
@@ -369,13 +369,13 @@ export class EstatTransformer {
 #### 3. データ検証器
 
 ```typescript
-// src/lib/dashboard/adapters/estat/estat-validator.ts
+// src/infrastructure/dashboard/adapters/estat/estat-validator.ts
 import {
   RawDataSourceData,
   ValidationResult,
   ValidationError,
   ValidationWarning,
-} from "@/lib/dashboard/core/interfaces";
+} from "@/infrastructure/dashboard/core/interfaces";
 
 export class EstatValidator {
   validate(data: RawDataSourceData): ValidationResult {
@@ -481,7 +481,7 @@ export class EstatValidator {
 #### 1. アダプター実装
 
 ```typescript
-// src/lib/dashboard/adapters/csv/csv-adapter.ts
+// src/infrastructure/dashboard/adapters/csv/csv-adapter.ts
 import {
   DataAdapter,
   AdapterParams,
@@ -489,7 +489,7 @@ import {
   DashboardData,
   ValidationResult,
   DataSourceMetadata,
-} from "@/lib/dashboard/core/interfaces";
+} from "@/infrastructure/dashboard/core/interfaces";
 import { CSVTransformer } from "./csv-transformer";
 import { CSVValidator } from "./csv-validator";
 
@@ -573,7 +573,7 @@ export class CSVDataAdapter implements DataAdapter {
 #### 2. CSV パーサー
 
 ```typescript
-// src/lib/dashboard/adapters/csv/csv-parser.ts
+// src/infrastructure/dashboard/adapters/csv/csv-parser.ts
 export interface CSVRow {
   [key: string]: string | number;
 }
@@ -664,7 +664,7 @@ interface ParseOptions {
 ### モックデータアダプター
 
 ```typescript
-// src/lib/dashboard/adapters/mock/mock-adapter.ts
+// src/infrastructure/dashboard/adapters/mock/mock-adapter.ts
 import {
   DataAdapter,
   AdapterParams,
@@ -672,7 +672,7 @@ import {
   DashboardData,
   ValidationResult,
   DataSourceMetadata,
-} from "@/lib/dashboard/core/interfaces";
+} from "@/infrastructure/dashboard/core/interfaces";
 import { MockDataGenerator } from "./mock-data-generator";
 
 export class MockDataAdapter implements DataAdapter {
@@ -757,9 +757,9 @@ export class MockDataAdapter implements DataAdapter {
 ### 1. 単体テスト
 
 ```typescript
-// src/lib/dashboard/adapters/estat/__tests__/estat-adapter.test.ts
+// src/infrastructure/dashboard/adapters/estat/__tests__/estat-adapter.test.ts
 import { EstatDataAdapter } from "../estat-adapter";
-import { AdapterParams } from "@/lib/dashboard/core/interfaces";
+import { AdapterParams } from "@/infrastructure/dashboard/core/interfaces";
 
 describe("EstatDataAdapter", () => {
   let adapter: EstatDataAdapter;
@@ -840,7 +840,7 @@ describe("EstatDataAdapter", () => {
 ### 2. 統合テスト
 
 ```typescript
-// src/lib/dashboard/__tests__/integration/data-service.test.ts
+// src/infrastructure/dashboard/__tests__/integration/data-service.test.ts
 import { DashboardDataService } from "../services/data-service";
 import { AdapterRegistry } from "../services/adapter-registry";
 import { EstatDataAdapter } from "../adapters/estat/estat-adapter";

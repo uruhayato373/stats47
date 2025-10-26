@@ -20,7 +20,7 @@ import { Badge } from "@/components/atoms/ui/badge";
 import {
   EstatStatsDataFormatter,
   EstatStatsDataResponse,
-} from "@/lib/estat-api";
+} from "@/features/estat-api";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;

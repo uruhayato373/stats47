@@ -510,7 +510,7 @@ describe("BarChart Performance", () => {
 
 - `src/components/charts/recharts/BarChart.tsx`
 - `src/components/charts/d3js/BarChart.tsx`
-- `src/lib/visualization/common/bar-chart/`
+- `src/infrastructure/visualization/common/bar-chart/`
 
 ## 関連ドキュメント
 

@@ -51,7 +51,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write
 2. **配置先の決定**
    - Atom/Molecule: `src/components/atoms/` または `src/components/molecules/`（汎用的に保つ）
    - Organism: `src/components/organisms/[domain]/`（ドメイン別に配置）
-   - ビジネスロジック: `src/lib/[domain]/`
+   - ビジネスロジック: `src/infrastructure/[domain]/`
 
 3. **パターンの適用**
    - データ取得が必要 → Fetcher/Formatter/Display パターン
@@ -60,7 +60,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write
 
 4. **型定義**
    - 型はドメイン直下の `types/` ディレクトリに配置
-   - 例: `src/lib/ranking/types/item.ts`
+   - 例: `src/infrastructure/ranking/types/item.ts`
 
 ### リファクタリング時
 
@@ -132,7 +132,7 @@ src/components/organisms/analytics/ranking/
 src/components/organisms/visualization/maps/
 
 # e-Stat API連携の例
-src/lib/estat-api/
+src/infrastructure/estat-api/
 ```
 
 ## 注意事項

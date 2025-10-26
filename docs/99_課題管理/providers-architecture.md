@@ -45,7 +45,7 @@ stats47 プロジェクトにおけるプロバイダーコンポーネントの
 ### ディレクトリ構造
 
 ```
-src/lib/providers/
+src/infrastructure/providers/
 ├── theme-provider.tsx          # テーマ管理
 └── jotai-provider.tsx          # Jotai + SWR設定（将来実装予定）
 ```
@@ -125,7 +125,7 @@ const swrConfig = {
 
 ```typescript
 // src/app/layout.tsx
-import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { ThemeProvider } from "@/infrastructure/providers/theme-provider";
 
 export default function RootLayout({ children }) {
   return (
@@ -142,7 +142,7 @@ export default function RootLayout({ children }) {
 
 ```typescript
 // テーマのみが必要な場合
-import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { ThemeProvider } from "@/infrastructure/providers/theme-provider";
 
 function ThemeOnlyComponent() {
   return (
@@ -197,7 +197,7 @@ function ThemeOnlyComponent() {
 ### 将来追加予定のプロバイダー
 
 ```typescript
-// src/lib/providers/theme-provider.tsx
+// src/infrastructure/providers/theme-provider.tsx
 export { ThemeProvider } from "./theme-provider";
 
 // 将来的に追加予定
@@ -218,7 +218,7 @@ export { ThemeProvider } from "./theme-provider";
 ### 単体テスト
 
 ```typescript
-// src/lib/providers/__tests__/jotai-provider.test.tsx
+// src/infrastructure/providers/__tests__/jotai-provider.test.tsx
 import { render } from "@testing-library/react";
 import { JotaiProvider } from "../jotai-provider";
 
@@ -236,7 +236,7 @@ test("JotaiProvider renders children", () => {
 ### 統合テスト
 
 ```typescript
-// src/lib/providers/__tests__/integration.test.tsx
+// src/infrastructure/providers/__tests__/integration.test.tsx
 test("providers work together", () => {
   render(
     <JotaiProvider>
@@ -310,7 +310,7 @@ if (process.env.NODE_ENV === "development") {
    import { JotaiProvider } from "@/providers/JotaiProvider";
 
    // 新
-   import { ThemeProvider } from "@/lib/providers/theme-provider";
+   import { ThemeProvider } from "@/infrastructure/providers/theme-provider";
    ```
 
 2. **ThemeInitializer の削除**

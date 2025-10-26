@@ -309,7 +309,7 @@ export async function getAndFormatStatsData(
 ### 基本的な使用例
 
 ```typescript
-import { EstatStatsDataService } from "@/lib/estat-api/stats-data";
+import { EstatStatsDataService } from "@/infrastructure/estat-api/stats-data";
 
 // 統計データを取得
 const data = await EstatStatsDataService.getAndFormatStatsData("0000010101");

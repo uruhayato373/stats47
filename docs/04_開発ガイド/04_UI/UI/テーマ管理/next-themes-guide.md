@@ -28,7 +28,7 @@ npm install next-themes
 ### 2. ThemeProvider の設定
 
 ```typescript
-// src/lib/providers/theme-provider.tsx
+// src/infrastructure/providers/theme-provider.tsx
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ThemeProvider({ children }) {
@@ -48,7 +48,7 @@ export function ThemeProvider({ children }) {
 
 ```typescript
 // src/app/layout.tsx
-import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { ThemeProvider } from "@/infrastructure/providers/theme-provider";
 
 export default function RootLayout({ children }) {
   return (

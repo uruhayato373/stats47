@@ -81,7 +81,7 @@ tags:
 
 ```typescript
 // ❌ 悪い例：rankingドメインがestat-apiに直接依存
-import { EstatStatsDataFetcher } from "@/lib/estat-api";
+import { EstatStatsDataFetcher } from "@/infrastructure/estat-api";
 
 class RankingService {
   async getRanking() {
@@ -123,7 +123,7 @@ export class ResasRankingAdapter implements RankingDataAdapter {
 ### 全体構造
 
 ```
-src/lib/
+src/infrastructure/
 ├── estat-api/                          # e-Statドメイン（既存）
 │   ├── client/
 │   │   ├── api-client.ts
@@ -255,7 +255,7 @@ services/
 ### アダプターインターフェース
 
 ```typescript
-// src/lib/ranking/adapters/base/adapter-interface.ts
+// src/infrastructure/ranking/adapters/base/adapter-interface.ts
 
 import type { UnifiedRankingData, TargetAreaLevel } from "@/types/ranking";
 
@@ -331,7 +331,7 @@ export interface AdapterTransformResult {
 ### アダプターレジストリ
 
 ```typescript
-// src/lib/ranking/adapters/base/adapter-registry.ts
+// src/infrastructure/ranking/adapters/base/adapter-registry.ts
 
 import type { RankingDataAdapter } from "./adapter-interface";
 
@@ -391,9 +391,9 @@ export class RankingAdapterRegistry {
 ### e-Statアダプター実装
 
 ```typescript
-// src/lib/ranking/adapters/estat/estat-adapter.ts
+// src/infrastructure/ranking/adapters/estat/estat-adapter.ts
 
-import { EstatStatsDataFetcher } from "@/lib/estat-api";
+import { EstatStatsDataFetcher } from "@/infrastructure/estat-api";
 import type {
   RankingDataAdapter,
   AdapterFetchParams,
@@ -551,9 +551,9 @@ export class EstatRankingAdapter implements RankingDataAdapter {
 ### Transformer（変換ロジック）
 
 ```typescript
-// src/lib/ranking/adapters/estat/estat-transformer.ts
+// src/infrastructure/ranking/adapters/estat/estat-transformer.ts
 
-import type { FormattedEstatData } from "@/lib/estat-api/types";
+import type { FormattedEstatData } from "@/infrastructure/estat-api/types";
 import type { RankingDataPoint, TargetAreaLevel } from "@/types/ranking";
 import { getAreaType, getParentPrefectureCode } from "../../utils/area-code-utils";
 
@@ -763,10 +763,10 @@ export interface AdapterConfig {
 
 ```bash
 # ファイル作成
-mkdir -p src/lib/ranking/adapters/base
-touch src/lib/ranking/adapters/base/adapter-interface.ts
-touch src/lib/ranking/adapters/base/adapter-registry.ts
-touch src/lib/ranking/adapters/base/index.ts
+mkdir -p src/infrastructure/ranking/adapters/base
+touch src/infrastructure/ranking/adapters/base/adapter-interface.ts
+touch src/infrastructure/ranking/adapters/base/adapter-registry.ts
+touch src/infrastructure/ranking/adapters/base/index.ts
 ```
 
 #### Day 2: ユーティリティ実装
@@ -774,7 +774,7 @@ touch src/lib/ranking/adapters/base/index.ts
 1. **地域コードユーティリティ**
 
 ```typescript
-// src/lib/ranking/utils/area-code-utils.ts
+// src/infrastructure/ranking/utils/area-code-utils.ts
 
 export function getAreaType(areaCode: string): AreaType {
   if (areaCode === "00000") return "country";
@@ -798,20 +798,20 @@ export function validateAreaCode(areaCode: string): boolean {
 #### Day 3-4: Transformer実装
 
 ```bash
-mkdir -p src/lib/ranking/adapters/estat
-touch src/lib/ranking/adapters/estat/estat-adapter.ts
-touch src/lib/ranking/adapters/estat/estat-transformer.ts
-touch src/lib/ranking/adapters/estat/index.ts
+mkdir -p src/infrastructure/ranking/adapters/estat
+touch src/infrastructure/ranking/adapters/estat/estat-adapter.ts
+touch src/infrastructure/ranking/adapters/estat/estat-transformer.ts
+touch src/infrastructure/ranking/adapters/estat/index.ts
 ```
 
 #### Day 5: Calculator実装
 
 ```bash
-mkdir -p src/lib/ranking/calculators
-touch src/lib/ranking/calculators/ranking-calculator.ts
-touch src/lib/ranking/calculators/statistics-calculator.ts
-touch src/lib/ranking/calculators/quality-assessor.ts
-touch src/lib/ranking/calculators/index.ts
+mkdir -p src/infrastructure/ranking/calculators
+touch src/infrastructure/ranking/calculators/ranking-calculator.ts
+touch src/infrastructure/ranking/calculators/statistics-calculator.ts
+touch src/infrastructure/ranking/calculators/quality-assessor.ts
+touch src/infrastructure/ranking/calculators/index.ts
 ```
 
 ### Phase 3: 統合とテスト（2日）
@@ -819,7 +819,7 @@ touch src/lib/ranking/calculators/index.ts
 #### Day 6: RankingDataServiceとの統合
 
 ```typescript
-// src/lib/ranking/services/RankingDataService.ts
+// src/infrastructure/ranking/services/RankingDataService.ts
 
 import { RankingAdapterRegistry } from "../adapters/base/adapter-registry";
 
@@ -857,7 +857,7 @@ export class RankingDataService {
 #### Day 7: テスト作成
 
 ```typescript
-// src/lib/ranking/adapters/estat/__tests__/estat-adapter.test.ts
+// src/infrastructure/ranking/adapters/estat/__tests__/estat-adapter.test.ts
 
 describe("EstatRankingAdapter", () => {
   it("should transform estat data to ranking format", async () => {

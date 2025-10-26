@@ -13,7 +13,7 @@ tags:
 
 `EstatStatsListService` は、e-Stat APIから統計データリスト（統計表の一覧）を取得し、整形するためのサービスクラスです。
 
-**ファイルパス**: `src/lib/estat/statslist/EstatStatsListService.ts`
+**ファイルパス**: `src/infrastructure/estat/statslist/EstatStatsListService.ts`
 
 ## 主な機能
 

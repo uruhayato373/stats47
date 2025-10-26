@@ -7,7 +7,7 @@ import {
   EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedCategory,
-} from "@/lib/estat-api";
+} from "@/features/estat-api";
 
 interface EstatCategoriesTableProps {
   data: EstatStatsDataResponse;

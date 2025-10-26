@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/organisms/ui/table";
 
-import { CategoryInfo } from "@/lib/estat-api/types/meta-info";
+import { CategoryInfo } from "@/features/estat-api/core/types/meta-info";
 
 interface CategoriesTabProps {
   categories: CategoryInfo[];

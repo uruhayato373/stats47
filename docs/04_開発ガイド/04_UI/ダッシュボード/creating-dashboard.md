@@ -451,7 +451,7 @@ import { EstatGenderDonutChart } from "@/components/dashboard/EstatGenderDonutCh
 import { EstatLineChart } from "@/components/dashboard/EstatLineChart";
 import { MunicipalityChoroplethMap } from "@/components/dashboard/MunicipalityChoroplethMap";
 import { DashboardProps } from "@/types/dashboard";
-import { getPrefectureCodeFromMunicipality } from "@/lib/utils/area-utils";
+import { getPrefectureCodeFromMunicipality } from "@/infrastructure/utils/area-utils";
 
 export const BasicPopulationMunicipalityDashboard: React.FC<DashboardProps> = ({
   category,
@@ -646,7 +646,7 @@ export * from "./basic-population";
 ```typescript
 // src/hooks/usePrefectureRanking.ts
 import { useState, useEffect } from "react";
-import { RankingDataService } from "@/lib/services/RankingDataService";
+import { RankingDataService } from "@/infrastructure/services/RankingDataService";
 
 export function usePrefectureRanking(areaCode: string) {
   const [data, setData] = useState<PrefectureRankingItem[]>([]);
@@ -684,7 +684,7 @@ export function usePrefectureRanking(areaCode: string) {
 ```typescript
 // src/hooks/useNationalComparison.ts
 import { useState, useEffect } from "react";
-import { EstatStatsDataService } from "@/lib/services/EstatStatsDataService";
+import { EstatStatsDataService } from "@/infrastructure/services/EstatStatsDataService";
 
 export function useNationalComparison(areaCode: string) {
   const [data, setData] = useState<NationalComparisonData | null>(null);
@@ -836,7 +836,7 @@ npm run deploy
 ### 実装例
 
 ```typescript
-// src/lib/dashboard/get-dashboard-component.ts
+// src/infrastructure/dashboard/get-dashboard-component.ts
 import { ComponentType } from "react";
 import { DashboardProps } from "@/types/dashboard";
 

@@ -163,7 +163,7 @@ export function ZoomControls({
 ### 1. 地図投影設定
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/projection.ts
+// src/infrastructure/visualization/d3js/choropleth/projection.ts
 
 export function createProjection(
   width: number,
@@ -183,7 +183,7 @@ export function createProjection(
 ### 2. カラースケール
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/color-scale.ts
+// src/infrastructure/visualization/d3js/choropleth/color-scale.ts
 
 export function createColorScale(
   data: ChoroplethData[],
@@ -216,7 +216,7 @@ export function createColorScale(
 ### 3. インタラクション処理
 
 ```typescript
-// src/lib/visualization/d3js/choropleth/interactions.ts
+// src/infrastructure/visualization/d3js/choropleth/interactions.ts
 
 export function setupInteractions(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
@@ -413,7 +413,7 @@ describe("ChoroplethMap Visual Regression", () => {
 ## 関連コンポーネント
 
 - `src/components/charts/d3js/ChoroplethMap.tsx`
-- `src/lib/visualization/d3js/choropleth/`
+- `src/infrastructure/visualization/d3js/choropleth/`
 - `src/data/geojson/` (GeoJSON データ)
 
 ## 関連ドキュメント

@@ -67,16 +67,16 @@ npm run debug:helpers
 
 ```bash
 # 出力ファイル一覧
-ls -la src/lib/estat-api/stats-data/__debug__/output/
+ls -la src/infrastructure/estat-api/stats-data/__debug__/output/
 
 # 統計表情報の確認（軽量）
-cat src/lib/estat-api/stats-data/__debug__/output/tableInfo.json | jq
+cat src/infrastructure/estat-api/stats-data/__debug__/output/tableInfo.json | jq
 
 # メタデータの確認
-cat src/lib/estat-api/stats-data/__debug__/output/metadata.json | jq '.dataQuality'
+cat src/infrastructure/estat-api/stats-data/__debug__/output/metadata.json | jq '.dataQuality'
 
 # 特定の統計値の確認（最初の5件）
-cat src/lib/estat-api/stats-data/__debug__/output/values.json | jq '.[0:5]'
+cat src/infrastructure/estat-api/stats-data/__debug__/output/values.json | jq '.[0:5]'
 ```
 
 ## 注意事項

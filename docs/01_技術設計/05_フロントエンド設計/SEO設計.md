@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 ```tsx
 // app/ranking/[category]/[subcategory]/page.tsx
 import { Metadata } from "next";
-import { getRankingData } from "@/lib/ranking/ranking-repository";
+import { getRankingData } from "@/infrastructure/ranking/ranking-repository";
 
 type Props = {
   params: { category: string; subcategory: string };
@@ -278,7 +278,7 @@ import { MetadataRoute } from "next";
 import {
   getAllCategories,
   getAllSubcategories,
-} from "@/lib/category/category-service";
+} from "@/infrastructure/category/category-service";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://stats47.com";
@@ -393,7 +393,7 @@ export default function robots(): Promise<MetadataRoute.Robots> {
 // app/api/og/route.tsx
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
-import { getRankingData } from "@/lib/ranking/ranking-repository";
+import { getRankingData } from "@/infrastructure/ranking/ranking-repository";
 
 export const runtime = "edge";
 

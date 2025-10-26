@@ -86,7 +86,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   data,
@@ -212,7 +212,7 @@ interface RankingChartProps {
 ```typescript
 // src/components/dashboard/RankingChart.tsx
 import React from 'react';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const RankingChart: React.FC<RankingChartProps> = ({
   data,
@@ -343,7 +343,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const ComparisonChart: React.FC<ComparisonChartProps> = ({
   data,
@@ -511,7 +511,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { formatNumber } from '@/lib/utils/format';
+import { formatNumber } from '@/infrastructure/utils/format';
 
 export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
   data,
@@ -640,7 +640,7 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
 ```typescript
 // src/hooks/useRankingData.ts
 import { useState, useEffect } from 'react';
-import { RankingDataService } from '@/lib/services/RankingDataService';
+import { RankingDataService } from '@/infrastructure/services/RankingDataService';
 
 export function useRankingData(
   areaLevel: 'national' | 'prefecture' | 'municipality',
@@ -687,7 +687,7 @@ export function useRankingData(
 ```typescript
 // src/hooks/useComparisonData.ts
 import { useState, useEffect } from 'react';
-import { ComparisonDataService } from '@/lib/services/ComparisonDataService';
+import { ComparisonDataService } from '@/infrastructure/services/ComparisonDataService';
 
 export function useComparisonData(
   areaLevel: 'national' | 'prefecture' | 'municipality',
@@ -734,7 +734,7 @@ export function useComparisonData(
 ```typescript
 // src/hooks/useTrendComparisonData.ts
 import { useState, useEffect } from 'react';
-import { TrendComparisonDataService } from '@/lib/services/TrendComparisonDataService';
+import { TrendComparisonDataService } from '@/infrastructure/services/TrendComparisonDataService';
 
 export function useTrendComparisonData(
   areaLevel: 'national' | 'prefecture' | 'municipality',

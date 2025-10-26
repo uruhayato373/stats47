@@ -16,7 +16,7 @@ import { Topology } from "topojson-specification";
 import { listPrefectures } from "@/features/area";
 
 import { formatRankingValueDisplay } from "@/features/ranking/types";
-import { FormattedValue } from "@/lib/estat-api";
+import { FormattedValue } from "@/features/estat-api";
 
 export interface MapVisualizationOptions {
   colorScheme: string;

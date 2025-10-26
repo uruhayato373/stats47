@@ -4,7 +4,7 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form"
 
 import { Label } from "@/components/atoms/ui/label"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/infrastructure/utils"
 
 import type { FieldPath, FieldValues } from "react-hook-form"
 

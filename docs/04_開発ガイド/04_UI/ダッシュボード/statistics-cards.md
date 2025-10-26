@@ -69,7 +69,7 @@ interface StatisticsMetricCardProps {
 // src/components/dashboard/StatisticsMetricCard.tsx
 import React from 'react';
 import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue } from '@/lib/utils/format';
+import { formatValue } from '@/infrastructure/utils/format';
 import { TrendIndicator } from '@/components/common/TrendIndicator';
 import { CardSkeleton } from '@/components/common/CardSkeleton';
 import { CardError } from '@/components/common/CardError';
@@ -190,7 +190,7 @@ interface ComparisonCardProps {
 // src/components/dashboard/ComparisonCard.tsx
 import React from 'react';
 import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue, calculateComparison } from '@/lib/utils/format';
+import { formatValue, calculateComparison } from '@/infrastructure/utils/format';
 
 export const ComparisonCard: React.FC<ComparisonCardProps> = ({
   params,
@@ -297,7 +297,7 @@ interface TrendCardProps {
 // src/components/dashboard/TrendCard.tsx
 import React from 'react';
 import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatValue } from '@/lib/utils/format';
+import { formatValue } from '@/infrastructure/utils/format';
 import { TrendChart } from '@/components/charts/TrendChart';
 
 export const TrendCard: React.FC<TrendCardProps> = ({
@@ -357,7 +357,7 @@ export const TrendCard: React.FC<TrendCardProps> = ({
 ```typescript
 // src/hooks/useEstatData.ts
 import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/lib/services/EstatDataService';
+import { EstatDataService } from '@/infrastructure/services/EstatDataService';
 
 export function useEstatData(
   params: { statsDataId: string; cdCat01: string },
@@ -398,7 +398,7 @@ export function useEstatData(
 ### 2. フォーマット関数
 
 ```typescript
-// src/lib/utils/format.ts
+// src/infrastructure/utils/format.ts
 export function formatValue(value: number | null, format: string): string {
   if (value === null || value === undefined) return 'データなし';
   
@@ -438,7 +438,7 @@ export function formatComparison(current: number, previous: number, format: stri
 ```typescript
 // src/components/common/TrendIndicator.tsx
 import React from 'react';
-import { calculateComparison } from '@/lib/utils/format';
+import { calculateComparison } from '@/infrastructure/utils/format';
 
 interface TrendIndicatorProps {
   current: number;

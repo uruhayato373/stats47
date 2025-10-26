@@ -58,7 +58,7 @@ graph TD
 ### 基本的な使用方法
 
 ```typescript
-import { getCategoriesForSidebar } from "@/lib/category";
+import { getCategoriesForSidebar } from "@/infrastructure/category";
 
 function MyComponent() {
   const categories = useMemo(() => getCategoriesForSidebar(), []);
@@ -81,7 +81,7 @@ function MyComponent() {
 ### カスタムソート・フィルタ
 
 ```typescript
-import { getNavigationCategories } from "@/lib/category";
+import { getNavigationCategories } from "@/infrastructure/category";
 
 function CustomNavigation() {
   const categories = useMemo(() => {

@@ -504,7 +504,7 @@ describe("ScatterPlot Performance", () => {
 
 - `src/components/charts/recharts/ScatterPlot.tsx`
 - `src/components/charts/d3js/ScatterPlot.tsx`
-- `src/lib/visualization/common/scatter-plot/`
+- `src/infrastructure/visualization/common/scatter-plot/`
 
 ## 関連ドキュメント
 

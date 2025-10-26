@@ -502,7 +502,7 @@ describe("LineChart Performance", () => {
 
 - `src/components/charts/recharts/LineChart.tsx`
 - `src/components/charts/d3js/LineChart.tsx`
-- `src/lib/visualization/common/line-chart/`
+- `src/infrastructure/visualization/common/line-chart/`
 
 ## 関連ドキュメント
 

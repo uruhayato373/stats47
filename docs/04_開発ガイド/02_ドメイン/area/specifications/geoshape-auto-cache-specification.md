@@ -96,7 +96,7 @@ sequenceDiagram
 ### コンポーネント構成
 
 ```
-src/lib/geoshape/
+src/infrastructure/geoshape/
 ├── config.ts                    # 設定管理
 ├── auto-cache-loader.ts         # 自動キャッシングローダー
 ├── types.ts                     # 型定義
@@ -120,7 +120,7 @@ src/app/admin/geoshape-cache/
 
 ### 1. 設定管理
 
-#### ファイル: `src/lib/geoshape/config.ts`
+#### ファイル: `src/infrastructure/geoshape/config.ts`
 
 ```typescript
 export const GEOSHAPE_CONFIG = {
@@ -165,7 +165,7 @@ export const GEOSHAPE_CONFIG = {
 
 ### 2. 自動キャッシングローダー
 
-#### ファイル: `src/lib/geoshape/auto-cache-loader.ts`
+#### ファイル: `src/infrastructure/geoshape/auto-cache-loader.ts`
 
 ```typescript
 import { GEOSHAPE_CONFIG } from "./config";
@@ -564,8 +564,8 @@ export async function POST(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { AutoCacheGeoShapeLoader } from "@/lib/geoshape/auto-cache-loader";
-import { requireAdmin } from "@/lib/auth/api-guards";
+import { AutoCacheGeoShapeLoader } from "@/infrastructure/geoshape/auto-cache-loader";
+import { requireAdmin } from "@/infrastructure/auth/api-guards";
 
 export const runtime = "edge";
 export const maxDuration = 300; // 5分
@@ -634,8 +634,8 @@ export async function POST(request: Request) {
 
 ```typescript
 import useSWR from "swr";
-import { AutoCacheGeoShapeLoader } from "@/lib/geoshape/auto-cache-loader";
-import type { GeoShapeDataLevel } from "@/lib/geoshape/types";
+import { AutoCacheGeoShapeLoader } from "@/infrastructure/geoshape/auto-cache-loader";
+import type { GeoShapeDataLevel } from "@/infrastructure/geoshape/types";
 
 /**
  * GeoShapeデータ取得フック（SWR統合）
@@ -1068,7 +1068,7 @@ export function measureLoadTime(key: string) {
 ### ユニットテスト
 
 ```typescript
-// src/lib/geoshape/__tests__/auto-cache-loader.test.ts
+// src/infrastructure/geoshape/__tests__/auto-cache-loader.test.ts
 
 describe("AutoCacheGeoShapeLoader", () => {
   it("should load from R2 when available", async () => {

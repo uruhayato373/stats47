@@ -91,7 +91,7 @@ curl "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=XXX&statsFie
 
 ## Phase 1: データなしを正常ケースとして扱う（必須）
 
-### 修正ファイル: `src/lib/estat-api/stats-list/fetcher.ts`
+### 修正ファイル: `src/infrastructure/estat-api/stats-list/fetcher.ts`
 
 **修正箇所**: 73-89行目
 

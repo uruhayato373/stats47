@@ -31,7 +31,7 @@ version: 1.0.0
 ### サービスレイヤー構成
 
 ```
-src/lib/area/
+src/infrastructure/area/
 ├── services/
 │   ├── area-service.ts           # 階層管理サービス
 │   ├── prefecture-service.ts     # 都道府県サービス
@@ -48,7 +48,7 @@ src/lib/area/
 ### データソース
 
 ```
-src/config/areas/
+data/mock/area/
 ├── prefectures.json      # 都道府県マスターデータ (4KB)
 └── municipalities.json   # 市区町村マスターデータ (258KB)
 ```
@@ -157,7 +157,7 @@ import {
   PrefectureService,
   MunicipalityService,
   AreaService,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 
 // 都道府県を取得
 const tokyo = PrefectureService.getPrefectureByCode("13");

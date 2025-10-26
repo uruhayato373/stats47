@@ -62,7 +62,7 @@ npx shadcn-ui@latest init
   },
   "aliases": {
     "components": "src/components",
-    "utils": "src/lib/utils"
+    "utils": "src/infrastructure/utils"
   }
 }
 ```
@@ -76,7 +76,7 @@ npm install @radix-ui/react-slot
 
 ### 2.2 ユーティリティ関数の設定
 
-`src/lib/utils.ts`に以下の関数を追加：
+`src/infrastructure/utils.ts`に以下の関数を追加：
 
 ```typescript
 import { type ClassValue, clsx } from "clsx"
@@ -302,7 +302,7 @@ export function UserMenu() {
 既存のダークモードシステムと統合：
 
 ```typescript
-// src/lib/theme.ts
+// src/infrastructure/theme.ts
 export const themeConfig = {
   light: {
     background: "hsl(0 0% 100%)",
@@ -326,7 +326,7 @@ export const themeConfig = {
 ```typescript
 // src/components/atoms/ui/button/CustomButton.tsx
 import { Button, ButtonProps } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { cn } from "@/infrastructure/utils"
 
 interface CustomButtonProps extends ButtonProps {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "primary"

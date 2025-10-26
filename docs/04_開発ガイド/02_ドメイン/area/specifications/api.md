@@ -519,7 +519,7 @@ import {
   AreaService,
   PrefectureService,
   MunicipalityService,
-} from "@/lib/area";
+} from "@/infrastructure/area";
 
 // 都道府県を取得
 const tokyo = PrefectureService.getPrefectureByCode("13");
@@ -555,7 +555,7 @@ const munics = MunicipalityService.searchMunicipalities({
 ### バリデーションの使い方
 
 ```typescript
-import { validateArea, validatePrefectureCode } from "@/lib/area";
+import { validateArea, validatePrefectureCode } from "@/infrastructure/area";
 
 // 地域コードを検証
 const result = validateArea("13101");

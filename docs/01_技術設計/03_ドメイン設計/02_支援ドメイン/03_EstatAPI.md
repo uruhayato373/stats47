@@ -790,7 +790,7 @@ export class EstatStatsDataCache {
 ## ディレクトリ構造
 
 ```
-src/lib/estat-api/
+src/infrastructure/estat-api/
 ├── model/              # エンティティと値オブジェクト
 │   ├── EstatMetaInfo.ts
 │   ├── EstatStatsData.ts

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { FormattedEstatData } from "@/lib/estat-api";
+import { FormattedEstatData } from "@/features/estat-api";
 
 interface UseYearSelectionOptions {
   years: FormattedEstatData["years"];

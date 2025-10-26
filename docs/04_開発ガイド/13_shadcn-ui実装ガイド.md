@@ -159,7 +159,7 @@ import {
   Button as BaseButton,
   ButtonProps,
 } from "@/components/atoms/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/infrastructure/utils";
 
 interface ExtendedButtonProps extends ButtonProps {
   loading?: boolean;

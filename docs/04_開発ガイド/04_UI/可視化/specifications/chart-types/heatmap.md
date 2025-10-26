@@ -546,7 +546,7 @@ describe("Heatmap Performance", () => {
 
 - `src/components/charts/d3js/Heatmap.tsx`
 - `src/components/charts/recharts/Heatmap.tsx`
-- `src/lib/visualization/common/heatmap/`
+- `src/infrastructure/visualization/common/heatmap/`
 
 ## 関連ドキュメント
 
