@@ -56,26 +56,22 @@ export function UserStatCard({
   link,
 }: UserStatCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <div className="bg-card rounded-lg shadow p-6">
       <div className="flex items-center">
         {/* アイコン表示 */}
         <Icon className={`w-8 h-8 ${iconColor}`} />
         <div className="ml-4">
           {/* ラベル表示 */}
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-            {label}
-          </p>
+          <p className="text-sm font-medium text-muted-foreground">{label}</p>
           {/* 値の表示（数値、リンク、文字列の3パターン） */}
           {typeof value === "number" ? (
             // 数値の場合は大きく表示
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">
-              {value}
-            </p>
+            <p className="text-2xl font-bold text-foreground">{value}</p>
           ) : link ? (
             // リンクが指定されている場合はリンクとして表示
             <Link
               href={link.href}
-              className="text-sm text-indigo-600 hover:text-indigo-500"
+              className="text-sm text-primary hover:text-primary/80"
             >
               {link.text}
             </Link>

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 import { PasswordInput } from "@/components/atoms/ui/password-input";
 
-
 interface RegisterFormProps {
   onSuccess?: () => void;
   onSwitchToLogin?: () => void;
@@ -77,7 +76,7 @@ export function RegisterForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* エラーメッセージ */}
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded">
+        <div className="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded">
           {error}
         </div>
       )}
@@ -86,7 +85,7 @@ export function RegisterForm({
       <div>
         <label
           htmlFor="username"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-medium text-foreground mb-1"
         >
           ユーザーネーム
         </label>
@@ -100,7 +99,7 @@ export function RegisterForm({
           onChange={(e) =>
             setFormData({ ...formData, username: e.target.value })
           }
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
+          className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary"
           placeholder="username"
         />
       </div>
@@ -109,7 +108,7 @@ export function RegisterForm({
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-medium text-foreground mb-1"
         >
           メールアドレス
         </label>
@@ -121,7 +120,7 @@ export function RegisterForm({
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary dark:bg-gray-700 dark:text-white"
+          className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary"
           placeholder="email@example.com"
         />
       </div>
@@ -130,7 +129,7 @@ export function RegisterForm({
       <div>
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-medium text-foreground mb-1"
         >
           パスワード
         </label>
@@ -152,7 +151,7 @@ export function RegisterForm({
       <div>
         <label
           htmlFor="confirmPassword"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-medium text-foreground mb-1"
         >
           パスワード（確認）
         </label>
@@ -176,23 +175,14 @@ export function RegisterForm({
           name="terms"
           type="checkbox"
           required
-          className="h-4 w-4 mt-1 text-primary focus:ring-ring border-gray-300 rounded"
+          className="h-4 w-4 mt-1 text-primary focus:ring-ring border-input rounded"
         />
-        <label
-          htmlFor="terms"
-          className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-        >
-          <Link
-            href="/terms"
-            className="text-primary hover:text-primary/90 dark:text-primary"
-          >
+        <label htmlFor="terms" className="ml-2 block text-sm text-foreground">
+          <Link href="/terms" className="text-primary hover:text-primary/80">
             利用規約
           </Link>
           と
-          <Link
-            href="/privacy"
-            className="text-primary hover:text-primary/90 dark:text-primary"
-          >
+          <Link href="/privacy" className="text-primary hover:text-primary/80">
             プライバシーポリシー
           </Link>
           に同意します

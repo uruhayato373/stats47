@@ -35,8 +35,8 @@ export function UserToggleButton({ userId, isActive }: UserToggleButtonProps) {
       size="sm"
       className={
         isActive
-          ? "text-red-600 hover:text-red-900"
-          : "text-green-600 hover:text-green-900"
+          ? "text-destructive hover:text-destructive/80"
+          : "text-primary hover:text-primary/80"
       }
     >
       {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
