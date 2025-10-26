@@ -3,7 +3,7 @@
 import { use } from "react";
 
 import { RankingItemNotFound } from "@/components/molecules/ranking/RankingItemNotFound";
-import { RankingMapCard } from "@/components/organisms/ranking/RankingMapCard";
+import { RankingMapCard } from "@/features/ranking/components/RankingMapCard";
 
 import { useRankingItem } from "@/hooks/ranking/useRankingItem";
 

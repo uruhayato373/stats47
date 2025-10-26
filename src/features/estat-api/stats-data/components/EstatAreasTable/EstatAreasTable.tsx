@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/atoms/ui/badge";
-import { DataTable } from "@/components/organisms/DataTable";
+import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {

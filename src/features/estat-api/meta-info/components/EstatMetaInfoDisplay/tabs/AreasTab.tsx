@@ -15,7 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/organisms/ui/table";
+} from "@/components/atoms/ui/table";
 
 import { PrefectureInfo } from "@/features/estat-api/core/types/meta-info";
 
