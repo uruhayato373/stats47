@@ -46,4 +46,4 @@ export * from "./services/prefecture-service";
 // ============================================================================
 // コンポーネント
 // ============================================================================
-export { PrefectureSelector } from "./components/PrefectureSelector";
+export * from "./components";

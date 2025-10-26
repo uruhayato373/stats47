@@ -1,1 +1,0 @@
-export { useCategoryParams } from "./useCategoryParams";

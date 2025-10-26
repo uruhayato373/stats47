@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { AlertCircle } from "lucide-react";
 
@@ -15,9 +15,8 @@ import { Label } from "@/components/atoms/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 
-import { Prefecture } from "@/features/area/types";
-
-import { useAreaSelection } from "@/hooks/area/useAreaSelection";
+import { listPrefectures, listRegions } from "../services/prefecture-service";
+import { Prefecture, Region, RegionMap } from "../types";
 
 /**
  * PrefectureSelector の Props
@@ -42,21 +41,59 @@ export function PrefectureSelector({
   onPrefectureSelect,
   className,
 }: PrefectureSelectorProps) {
-  const {
-    prefectures,
-    regions,
-    isLoading,
-    error,
-    loadPrefectureData,
-    getPrefecturesByRegion,
-    getRegionList,
-    getRegionDisplayName,
-  } = useAreaSelection();
+  const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
+  const [regions, setRegions] = useState<RegionMap>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // コンポーネントマウント時に都道府県データを読み込み
   useEffect(() => {
-    loadPrefectureData();
-  }, [loadPrefectureData]);
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const [prefecturesData, regionsData] = await Promise.all([
+          listPrefectures(),
+          listRegions(),
+        ]);
+        setPrefectures(prefecturesData);
+
+        // RegionMap型に変換
+        const regionMap: RegionMap = {};
+        Object.entries(regionsData).forEach(([key, prefectureCodes]) => {
+          regionMap[key] = {
+            key,
+            name: key, // 地域名はキーと同じとする
+            prefectures: prefectureCodes,
+          };
+        });
+        setRegions(regionMap);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "データの読み込みに失敗しました"
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // 地域ブロック別の都道府県を取得
+  const getPrefecturesByRegion = (regionKey: string): Prefecture[] => {
+    const region = regions[regionKey];
+    if (!region) return [];
+
+    return prefectures.filter((prefecture) =>
+      region.prefectures.includes(prefecture.prefCode)
+    );
+  };
+
+  // 地域ブロックリストを取得
+  const getRegionList = (): Region[] => {
+    return Object.values(regions);
+  };
 
   // エラー状態の表示
   if (error) {

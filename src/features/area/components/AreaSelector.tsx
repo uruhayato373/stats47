@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
+import { useParams, useRouter } from "next/navigation";
+
 import { Badge } from "@/components/atoms/ui/badge";
 import {
   Card,
@@ -14,8 +18,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
-import { Municipality, Prefecture } from "@/features/area/types";
-import { AreaType, useAreaSelection } from "@/hooks/area/useAreaSelection";
+
+import { AreaType, Municipality, Prefecture } from "../types";
+
 import { MunicipalitySelector } from "./MunicipalitySelector";
 import { PrefectureSelector } from "./PrefectureSelector";
 
@@ -23,16 +28,6 @@ import { PrefectureSelector } from "./PrefectureSelector";
  * AreaSelector の Props
  */
 interface AreaSelectorProps {
-  /** 選択された地域タイプ */
-  selectedAreaType: AreaType;
-  /** 選択された都道府県コード */
-  selectedPrefectureCode?: string;
-  /** 地域タイプ変更時のコールバック */
-  onAreaTypeChange: (areaType: AreaType) => void;
-  /** 都道府県選択時のコールバック */
-  onPrefectureSelect: (prefecture: Prefecture) => void;
-  /** 市区町村選択時のコールバック */
-  onMunicipalitySelect: (municipality: Municipality) => void;
   /** クラス名 */
   className?: string;
 }
@@ -41,22 +36,41 @@ interface AreaSelectorProps {
  * 地域レベル（全国/都道府県/市区町村）を切り替えるメインコンポーネント
  *
  * タブで地域レベルを切り替え、各レベルに応じた選択UIを提供します。
+ * 選択時に自動的に/area/[areaCode]へ遷移します。
  */
-export function AreaSelector({
-  selectedAreaType,
-  selectedPrefectureCode,
-  onAreaTypeChange,
-  onPrefectureSelect,
-  onMunicipalitySelect,
-  className,
-}: AreaSelectorProps) {
-  const { selection } = useAreaSelection();
+export function AreaSelector({ className }: AreaSelectorProps) {
+  const router = useRouter();
+  const { category, subcategory } = useParams() as {
+    category: string;
+    subcategory: string;
+  };
+  const [selectedAreaType, setSelectedAreaType] = useState<AreaType>("country");
+  const [selectedPrefectureCode, setSelectedPrefectureCode] =
+    useState<string>();
+
+  const handleAreaTypeChange = (areaType: AreaType) => {
+    setSelectedAreaType(areaType);
+
+    // 全国選択時は即座に遷移
+    if (areaType === "country") {
+      router.push(`/${category}/${subcategory}/area/00000`);
+    }
+  };
+
+  const handlePrefectureSelect = (prefecture: Prefecture) => {
+    setSelectedPrefectureCode(prefecture.prefCode);
+    router.push(`/${category}/${subcategory}/area/${prefecture.prefCode}`);
+  };
+
+  const handleMunicipalitySelect = (municipality: Municipality) => {
+    router.push(`/${category}/${subcategory}/area/${municipality.code}`);
+  };
 
   return (
     <div className={className}>
       <Tabs
         value={selectedAreaType}
-        onValueChange={(value) => onAreaTypeChange(value as AreaType)}
+        onValueChange={(value) => handleAreaTypeChange(value as AreaType)}
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-3">
@@ -108,7 +122,7 @@ export function AreaSelector({
             <CardContent>
               <PrefectureSelector
                 selectedPrefectureCode={selectedPrefectureCode}
-                onPrefectureSelect={onPrefectureSelect}
+                onPrefectureSelect={handlePrefectureSelect}
               />
             </CardContent>
           </Card>
@@ -124,11 +138,11 @@ export function AreaSelector({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {selection.prefectureCode ? (
+              {selectedPrefectureCode ? (
                 <MunicipalitySelector
-                  prefectureCode={selection.prefectureCode}
-                  selectedMunicipalityCode={selection.municipalityCode}
-                  onMunicipalitySelect={onMunicipalitySelect}
+                  prefectureCode={selectedPrefectureCode}
+                  selectedMunicipalityCode={undefined}
+                  onMunicipalitySelect={handleMunicipalitySelect}
                 />
               ) : (
                 <div className="text-center py-8">

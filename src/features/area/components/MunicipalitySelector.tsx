@@ -11,10 +11,10 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
-import { listMunicipalitiesByPrefecture } from "@/features/area/services/municipality-service";
-import { Municipality, MunicipalityType } from "@/features/area/types";
 import { AlertCircle, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { listMunicipalitiesByPrefecture } from "../services/municipality-service";
+import { Municipality, MunicipalityType } from "../types";
 
 /**
  * MunicipalitySelector の Props
