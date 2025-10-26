@@ -21,7 +21,7 @@ tags:
 
 ## 関連ドキュメント
 
-- [既存の D3.js コロプレスガイド](./d3js_choropleth_guide.md)
+- [既存の D3.js コロプレスガイド](d3js_choropleth_guide.md)
 - [コロプレスマップ仕様](../仕様/chart-types/choropleth-map.md)
 - [D3.js 実装ガイド](../仕様/d3js-implementation-guide.md)
 
@@ -613,7 +613,7 @@ describe("ChoroplethMap Visual Regression", () => {
 
 ## 関連ドキュメント
 
-- [既存の D3.js コロプレスガイド](./d3js_choropleth_guide.md)
+- [既存の D3.js コロプレスガイド](d3js_choropleth_guide.md)
 - [コロプレスマップ仕様](../仕様/chart-types/choropleth-map.md)
 - [D3.js 実装ガイド](../仕様/d3js-implementation-guide.md)
 - [アクセシビリティガイド](../仕様/accessibility.md)

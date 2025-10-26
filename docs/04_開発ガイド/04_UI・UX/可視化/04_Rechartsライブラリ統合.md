@@ -681,8 +681,8 @@ export const ChartWithErrorHandling: React.FC<ChartWithErrorHandlingProps> = ({
 
 ## 関連ドキュメント
 
-- [01_可視化実装概要.md](./01_可視化実装概要.md) - 可視化ライブラリと全体アーキテクチャ
-- [02_チャート実装ガイド.md](./02_チャート実装ガイド.md) - Rechartsによるグラフ実装
+- [01_可視化実装概要.md](01_可視化実装概要.md) - 可視化ライブラリと全体アーキテクチャ
+- [02_チャート実装ガイド.md](02_チャート実装ガイド.md) - Rechartsによるグラフ実装
 
 ---
 

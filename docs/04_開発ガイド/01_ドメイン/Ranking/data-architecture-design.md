@@ -2217,9 +2217,9 @@ async function migrateToR2(rankingKey: string) {
 
 ## 関連ドキュメント
 
-- [e-Stat API アーキテクチャ](../e-Stat%20API/architecture.md) - e-Stat固有のアーキテクチャ詳細
-- [データベース仕様](../e-Stat%20API/01_共有/database-specification.md) - D1データベーススキーマ
-- [型システム](../e-Stat%20API/01_共有/type-system.md) - TypeScript型定義
+- [e-Stat API アーキテクチャ](04_開発ガイド/01_ドメイン/estat-api/architecture.md) - e-Stat固有のアーキテクチャ詳細
+- [データベース仕様](database-specification.md) - D1データベーススキーマ
+- [型システム](type-system.md) - TypeScript型定義
 - [Adapter Pattern](https://refactoring.guru/design-patterns/adapter) - デザインパターン参考資料
 - [Cloudflare R2 Documentation](https://developers.cloudflare.com/r2/) - R2ストレージ公式ドキュメント
 - [Cloudflare D1 Documentation](https://developers.cloudflare.com/d1/) - D1データベース公式ドキュメント

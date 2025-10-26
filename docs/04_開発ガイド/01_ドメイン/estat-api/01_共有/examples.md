@@ -805,7 +805,7 @@ export default {
 
 ## 関連ドキュメント
 
-- [ライブラリ概要](../overview.md)
+- [ライブラリ概要](04_開発ガイド/01_ドメイン/estat-api/overview.md)
 - [API 統合ガイド](api-integration.md)
 - [データ取得実装](data-fetching.md)
 - [ベストプラクティス](best-practices%201.md)

@@ -56,7 +56,7 @@ const geojson = topojson.feature(
 - [TopoJSON 直接使用ガイド](../../02_ドメイン/Geoshape/TopoJSON直接使用ガイド.md)
 - [Geoshape API リファレンス](../../02_ドメイン/Geoshape/APIリファレンス.md)
 - [地図実装ガイド](../../02_ドメイン/Geoshape/地図実装ガイド.md)
-- [D3.js コロプレスマップ実装ガイド](./d3js/choropleth-implementation.md)
+- [D3.js コロプレスマップ実装ガイド](choropleth-implementation.md)
 
 ---
 

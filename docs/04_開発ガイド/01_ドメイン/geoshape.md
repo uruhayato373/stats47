@@ -801,5 +801,5 @@ try {
 
 ## 関連ドキュメント
 
-- [可視化実装ガイド](./visualization.md)
-- [D3.js コロプレスマップ実装ガイド](../04_UI/可視化/implementation/d3js/choropleth-implementation.md)
+- [可視化実装ガイド](visualization.md)
+- [D3.js コロプレスマップ実装ガイド](choropleth-implementation.md)

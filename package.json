@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "echo 'Please use dev:mock or dev:api instead of dev' && exit 1",
-    "dev:mock": "NEXT_PUBLIC_USE_MOCK=true next dev --turbopack",
-    "dev:api": "NEXT_PUBLIC_USE_MOCK=false next dev",
+    "dev:mock": "cross-env NEXT_PUBLIC_USE_MOCK=true next dev --turbopack",
+    "dev:api": "cross-env NEXT_PUBLIC_USE_MOCK=false next dev",
     "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_USE_MOCK=false next dev --turbopack",
     "dev:production": "cross-env NODE_ENV=production NEXT_PUBLIC_USE_MOCK=false next dev --turbopack",
     "build": "next build",

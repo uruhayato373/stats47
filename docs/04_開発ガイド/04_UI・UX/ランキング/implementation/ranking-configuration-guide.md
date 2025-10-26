@@ -171,5 +171,5 @@ SELECT * FROM ranking_items WHERE subcategory_id = 'land-area' AND is_active = 1
 ## 関連ドキュメント
 
 - [データベース設計](../../database/database-design.md)
-- [ランキングアーキテクチャ](../specifications/r2-hybrid-architecture.md)
-- [ランキングコンポーネントリファクタリング](../refactoring/ranking-components-refactoring.md)
+- [ランキングアーキテクチャ](r2-hybrid-architecture.md)
+- [ランキングコンポーネントリファクタリング](ranking-components-refactoring.md)
