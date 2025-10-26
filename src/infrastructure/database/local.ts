@@ -1,4 +1,4 @@
-import { buildEnvironmentConfig } from "@/infrastructure/env";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 
 /**
  * 開発環境用のローカルD1データベースクライアント

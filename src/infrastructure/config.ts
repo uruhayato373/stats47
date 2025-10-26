@@ -2,6 +2,19 @@
  * 環境変数の一元管理と型安全なアクセスを提供する設定ファイル
  */
 
+/**
+ * 環境タイプの定義
+ */
+export type Environment = "development" | "staging" | "production";
+
+/**
+ * 環境設定の型定義
+ */
+export interface EnvironmentConfig {
+  environment: Environment;
+  isMock: boolean;
+}
+
 export const config = {
   env: process.env.NODE_ENV || "development",
   useMock: process.env.NEXT_PUBLIC_USE_MOCK === "true",
@@ -25,6 +38,30 @@ export const config = {
 } as const;
 
 export type Config = typeof config;
+
+/**
+ * 現在の環境を取得
+ */
+export function detectEnvironment(): Environment {
+  return (process.env.NODE_ENV as Environment) || "development";
+}
+
+/**
+ * モックデータを使用するかどうか
+ */
+export function isMockDataEnabled(): boolean {
+  return process.env.NEXT_PUBLIC_USE_MOCK === "true";
+}
+
+/**
+ * 環境別の設定を構築
+ */
+export function buildEnvironmentConfig(): EnvironmentConfig {
+  return {
+    environment: detectEnvironment(),
+    isMock: isMockDataEnabled(),
+  };
+}
 
 /**
  * 環境判定ヘルパー関数

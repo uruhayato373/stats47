@@ -12,7 +12,7 @@ import { findSubcategoryById } from "@/features/category";
 
 import { getDataProvider } from "@/infrastructure/database";
 import { mockDataProvider } from "@/infrastructure/database/mock";
-import { buildEnvironmentConfig } from "@/infrastructure/env";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 import { RankingItem, RankingItemDB } from "../types";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";

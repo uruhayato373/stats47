@@ -1,4 +1,4 @@
-import { buildEnvironmentConfig } from "@/infrastructure/env";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 
 import { createLocalD1Database } from "./local";
 import { mockDataProvider } from "./mock";
