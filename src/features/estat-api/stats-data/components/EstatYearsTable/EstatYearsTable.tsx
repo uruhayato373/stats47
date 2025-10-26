@@ -1,11 +1,12 @@
 "use client";
 
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+import { DataTable } from "@/components/organisms/DataTable";
+import { ColumnDef } from "@tanstack/react-table";
 
 import {
+  EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedYear,
-  EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 
 interface EstatYearsTableProps {
@@ -18,22 +19,22 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const years = formattedData.years;
 
-  const columns: TableColumn<FormattedYear>[] = [
+  const columns: ColumnDef<FormattedYear>[] = [
     {
-      key: "timeCode",
-      label: "時間コード",
-      render: (item) => (
+      accessorKey: "timeCode",
+      header: "時間コード",
+      cell: ({ row }) => (
         <span className="text-gray-600 dark:text-neutral-300">
-          {item.timeCode || "-"}
+          {row.original.timeCode || "-"}
         </span>
       ),
     },
     {
-      key: "timeName",
-      label: "時間名",
-      render: (item) => (
+      accessorKey: "timeName",
+      header: "時間名",
+      cell: ({ row }) => (
         <span className="text-gray-900 dark:text-neutral-100">
-          {item.timeName || "-"}
+          {row.original.timeName || "-"}
         </span>
       ),
     },
@@ -41,9 +42,10 @@ export default function EstatYearsTable({ data }: EstatYearsTableProps) {
 
   return (
     <DataTable
-      data={years}
       columns={columns}
+      data={years}
       emptyMessage="年度情報がありません"
+      showIndex
     />
   );
 }

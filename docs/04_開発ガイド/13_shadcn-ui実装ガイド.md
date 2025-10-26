@@ -2,9 +2,9 @@
 
 ## 概要
 
-stats47プロジェクトでは、shadcn/uiをAtomic Designの階層構造に統合して使用しています。このガイドでは、コンポーネントの配置ルール、インポートパス、カスタマイズ方法について説明します。
+stats47 プロジェクトでは、shadcn/ui を Atomic Design の階層構造に統合して使用しています。このガイドでは、コンポーネントの配置ルール、インポートパス、カスタマイズ方法について説明します。
 
-## Atomic Design統合方式
+## Atomic Design 統合方式
 
 ### ディレクトリ構造
 
@@ -31,12 +31,17 @@ src/components/
 │   │   ├── dropdown-menu.tsx
 │   │   ├── alert.tsx
 │   │   └── tabs.tsx
-│   └── DataTable/       # カスタムコンポーネント
 ├── organisms/
 │   ├── ui/              # shadcn/ui Organisms
 │   │   ├── dialog.tsx
 │   │   ├── form.tsx
 │   │   └── table.tsx
+│   ├── DataTable/       # shadcn/ui Data Table (@tanstack/react-table)
+│   │   ├── data-table.tsx
+│   │   ├── data-table-toolbar.tsx
+│   │   ├── data-table-pagination.tsx
+│   │   ├── types.ts
+│   │   └── index.ts
 │   └── Header/          # カスタムコンポーネント
 └── templates/
 ```
@@ -44,6 +49,7 @@ src/components/
 ### コンポーネント分類ガイドライン
 
 #### Atoms（atoms/ui/）
+
 単体で機能する最小単位のコンポーネント：
 
 - **button**: ボタン要素
@@ -58,7 +64,8 @@ src/components/
 - **skeleton**: ローディング用スケルトン
 
 #### Molecules（molecules/ui/）
-複数のAtomsを組み合わせた機能的なコンポーネント：
+
+複数の Atoms を組み合わせた機能的なコンポーネント：
 
 - **card**: カードレイアウト（CardHeader, CardContent, CardFooter）
 - **select**: セレクトボックス（SelectTrigger, SelectContent, SelectItem）
@@ -67,6 +74,7 @@ src/components/
 - **tabs**: タブナビゲーション（TabsList, TabsTrigger, TabsContent）
 
 #### Organisms（organisms/ui/）
+
 複雑な機能を持つ高レベルコンポーネント：
 
 - **dialog**: モーダルダイアログ（DialogContent, DialogHeader, DialogTitle）
@@ -85,11 +93,23 @@ import { Badge } from "@/components/atoms/ui/badge";
 
 // Moleculesレベル
 import { Card, CardContent, CardHeader } from "@/components/molecules/ui/card";
-import { Select, SelectTrigger, SelectContent } from "@/components/molecules/ui/select";
-import { Alert, AlertTitle, AlertDescription } from "@/components/molecules/ui/alert";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+} from "@/components/molecules/ui/select";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/molecules/ui/alert";
 
 // Organismsレベル
-import { Dialog, DialogContent, DialogHeader } from "@/components/organisms/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+} from "@/components/organisms/ui/dialog";
 import { Form, FormField, FormItem } from "@/components/organisms/ui/form";
 import { Table, TableBody, TableCell } from "@/components/organisms/ui/table";
 ```
@@ -98,20 +118,20 @@ import { Table, TableBody, TableCell } from "@/components/organisms/ui/table";
 
 ```typescript
 // 複数のコンポーネントを一度にインポート
-import { 
-  Card, 
-  CardContent, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
 } from "@/components/molecules/ui/card";
 
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/organisms/ui/dialog";
 ```
 
@@ -119,7 +139,7 @@ import {
 
 ### テーマ変数の使用
 
-shadcn/uiのテーマ変数を使用してスタイリングします：
+shadcn/ui のテーマ変数を使用してスタイリングします：
 
 ```typescript
 // カスタムクラスでのテーマ変数使用
@@ -131,25 +151,37 @@ shadcn/uiのテーマ変数を使用してスタイリングします：
 
 ### コンポーネントの拡張
 
-既存のshadcn/uiコンポーネントを拡張する場合：
+既存の shadcn/ui コンポーネントを拡張する場合：
 
 ```typescript
 // src/components/atoms/ui/button.tsx を拡張
-import { Button as BaseButton, ButtonProps } from "@/components/atoms/ui/button";
+import {
+  Button as BaseButton,
+  ButtonProps,
+} from "@/components/atoms/ui/button";
 import { cn } from "@/lib/utils";
 
 interface ExtendedButtonProps extends ButtonProps {
   loading?: boolean;
 }
 
-export const Button = ({ loading, className, children, ...props }: ExtendedButtonProps) => {
+export const Button = ({
+  loading,
+  className,
+  children,
+  ...props
+}: ExtendedButtonProps) => {
   return (
-    <BaseButton 
-      className={cn("relative", className)} 
+    <BaseButton
+      className={cn("relative", className)}
       disabled={loading || props.disabled}
       {...props}
     >
-      {loading && <div className="absolute inset-0 flex items-center justify-center">...</div>}
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          ...
+        </div>
+      )}
       {children}
     </BaseButton>
   );
@@ -158,13 +190,19 @@ export const Button = ({ loading, className, children, ...props }: ExtendedButto
 
 ### カスタムコンポーネントでの活用
 
-カスタムコンポーネント内でshadcn/uiを使用：
+カスタムコンポーネント内で shadcn/ui を使用：
 
 ```typescript
 // src/components/atoms/MetricsCard/MetricsCard.tsx
 import { Card, CardContent, CardHeader } from "@/components/molecules/ui/card";
 import { Badge } from "@/components/atoms/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/molecules/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/molecules/ui/select";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 export default function MetricsCard() {
@@ -183,11 +221,13 @@ export default function MetricsCard() {
           </SelectContent>
         </Select>
       </CardHeader>
-      
+
       <CardContent className="mt-2">
         <div className="grid grid-cols-2 gap-2">
           <div className="flex flex-col">
-            <span className="block font-medium text-xl text-foreground">22,900</span>
+            <span className="block font-medium text-xl text-foreground">
+              22,900
+            </span>
             <Badge variant="default" className="w-fit">
               <TrendingUp className="w-3 h-3 mr-1" />
               +12.5%
@@ -200,13 +240,13 @@ export default function MetricsCard() {
 }
 ```
 
-## Blueテーマシステム
+## Blue テーマシステム
 
 ### カラーパレット
 
 ```css
 :root {
-  --primary: 221 83% 53%;            /* Blue */
+  --primary: 221 83% 53%; /* Blue */
   --primary-foreground: 210 40% 98%;
   --secondary: 210 40% 96%;
   --secondary-foreground: 222 47% 11%;
@@ -242,6 +282,48 @@ export default function MetricsCard() {
 }
 ```
 
+## Data Table 実装例
+
+### @tanstack/react-table を使用した Data Table
+
+```typescript
+import { ColumnDef } from "@tanstack/react-table";
+import { DataTable } from "@/components/organisms/DataTable";
+
+const columns: ColumnDef<YourDataType>[] = [
+  {
+    accessorKey: "name",
+    header: "名前",
+    meta: { filterable: true, filterType: "text" },
+  },
+  {
+    accessorKey: "status",
+    header: "ステータス",
+    cell: ({ row }) => <Badge variant="outline">{row.original.status}</Badge>,
+    meta: { filterable: true, filterType: "select" },
+  },
+];
+
+export function YourTable({ data }: { data: YourDataType[] }) {
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      emptyMessage="データがありません"
+      showIndex
+    />
+  );
+}
+```
+
+### 機能
+
+- **ソート**: カラムヘッダークリックでソート
+- **フィルタリング**: テキスト/セレクトフィルター
+- **ページネーション**: 表示件数制御とページング
+- **インデックス列**: 行番号の自動表示
+- **型安全性**: TypeScript の型推論を活用
+
 ## ベストプラクティス
 
 ### 1. 一貫性の維持
@@ -254,17 +336,17 @@ export default function MetricsCard() {
 
 - 必要なコンポーネントのみインポート
 - バンドルサイズの監視
-- Tree-shakingの活用
+- Tree-shaking の活用
 
 ### 3. アクセシビリティ
 
-- shadcn/uiのアクセシビリティ機能を活用
-- ARIA属性の適切な使用
+- shadcn/ui のアクセシビリティ機能を活用
+- ARIA 属性の適切な使用
 - キーボードナビゲーションの対応
 
 ### 4. 型安全性
 
-- TypeScriptの型定義を活用
+- TypeScript の型定義を活用
 - カスタムプロパティの型定義
 - エラーハンドリングの実装
 
@@ -273,15 +355,17 @@ export default function MetricsCard() {
 ### よくある問題
 
 1. **インポートエラー**
+
    - パスが正しいか確認
    - コンポーネントが正しい階層に配置されているか確認
 
 2. **スタイルが適用されない**
+
    - テーマ変数が正しく定義されているか確認
-   - CSS変数のスコープを確認
+   - CSS 変数のスコープを確認
 
 3. **ビルドエラー**
-   - TypeScriptの型定義を確認
+   - TypeScript の型定義を確認
    - 依存関係のバージョンを確認
 
 ### デバッグ方法
@@ -292,19 +376,19 @@ console.log(className);
 
 // テーマ変数の値を確認
 const root = document.documentElement;
-const primaryColor = getComputedStyle(root).getPropertyValue('--primary');
-console.log('Primary color:', primaryColor);
+const primaryColor = getComputedStyle(root).getPropertyValue("--primary");
+console.log("Primary color:", primaryColor);
 ```
 
 ## 参考資料
 
-- [shadcn/ui公式ドキュメント](https://ui.shadcn.com/)
-- [Radix UI公式ドキュメント](https://www.radix-ui.com/)
-- [Tailwind CSS公式ドキュメント](https://tailwindcss.com/)
+- [shadcn/ui 公式ドキュメント](https://ui.shadcn.com/)
+- [Radix UI 公式ドキュメント](https://www.radix-ui.com/)
+- [Tailwind CSS 公式ドキュメント](https://tailwindcss.com/)
 - [Atomic Design Methodology](https://bradfrost.com/blog/post/atomic-web-design/)
 
 ---
 
 **更新日**: 2025-01-20  
 **バージョン**: 1.0.0  
-**作成者**: stats47開発チーム
+**作成者**: stats47 開発チーム

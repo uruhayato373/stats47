@@ -1,11 +1,12 @@
 "use client";
 
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+import { DataTable } from "@/components/organisms/DataTable";
+import { ColumnDef } from "@tanstack/react-table";
 
 import {
+  EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedCategory,
-  EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 
 interface EstatCategoriesTableProps {
@@ -21,37 +22,39 @@ export default function EstatCategoriesTable({
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const categories = formattedData.categories;
 
-  const columns: TableColumn<FormattedCategory>[] = [
+  const columns: ColumnDef<FormattedCategory>[] = [
     {
-      key: "categoryCode",
-      label: "カテゴリコード",
-      render: (item) => (
+      accessorKey: "categoryCode",
+      header: "カテゴリコード",
+      cell: ({ row }) => (
         <code className="text-sm bg-gray-100 px-2 py-1 rounded dark:bg-gray-700">
-          {item.categoryCode}
+          {row.original.categoryCode}
         </code>
       ),
     },
     {
-      key: "categoryName",
-      label: "カテゴリ名（原文）",
-      render: (item) => (
+      accessorKey: "categoryName",
+      header: "カテゴリ名（原文）",
+      cell: ({ row }) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
-          {item.categoryName}
+          {row.original.categoryName}
         </span>
       ),
     },
     {
-      key: "displayName",
-      label: "表示名",
-      render: (item) => <span className="font-medium">{item.displayName}</span>,
+      accessorKey: "displayName",
+      header: "表示名",
+      cell: ({ row }) => (
+        <span className="font-medium">{row.original.displayName}</span>
+      ),
     },
     {
-      key: "unit",
-      label: "単位",
-      render: (item) =>
-        item.unit ? (
+      accessorKey: "unit",
+      header: "単位",
+      cell: ({ row }) =>
+        row.original.unit ? (
           <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-            {item.unit}
+            {row.original.unit}
           </span>
         ) : (
           <span className="text-gray-400 dark:text-gray-500">-</span>
@@ -61,9 +64,10 @@ export default function EstatCategoriesTable({
 
   return (
     <DataTable
-      data={categories}
       columns={columns}
+      data={categories}
       emptyMessage="カテゴリ情報がありません"
+      showIndex
     />
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+import { DataTable } from "@/components/organisms/DataTable";
+import { ColumnDef } from "@tanstack/react-table";
 
 import {
+  EstatStatsDataFormatter,
   EstatStatsDataResponse,
   FormattedValue,
-  EstatStatsDataFormatter,
 } from "@/lib/estat-api";
 
 interface EstatValuesTableProps {
@@ -18,48 +19,52 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const values = formattedData.values;
 
-  const columns: TableColumn<FormattedValue>[] = [
-    { key: "value", label: "value", filterable: true, filterType: "text" },
+  const columns: ColumnDef<FormattedValue>[] = [
     {
-      key: "numericValue",
-      label: "numericValue",
-      filterable: true,
-      filterType: "text",
+      accessorKey: "value",
+      header: "value",
+      meta: { filterable: true, filterType: "text" },
     },
     {
-      key: "displayValue",
-      label: "displayValue",
-      filterable: true,
-      filterType: "text",
-    },
-    { key: "unit", label: "unit", filterable: true, filterType: "select" },
-    {
-      key: "areaCode",
-      label: "areaCode",
-      filterable: true,
-      filterType: "select",
+      accessorKey: "numericValue",
+      header: "numericValue",
+      meta: { filterable: true, filterType: "text" },
     },
     {
-      key: "areaName",
-      label: "areaName",
-      filterable: true,
-      filterType: "select",
-      render: (item) => item.areaName || "-",
+      accessorKey: "displayValue",
+      header: "displayValue",
+      meta: { filterable: true, filterType: "text" },
     },
     {
-      key: "timeName",
-      label: "timeName",
-      filterable: true,
-      filterType: "select",
-      render: (item) => item.timeName || "-",
+      accessorKey: "unit",
+      header: "unit",
+      meta: { filterable: true, filterType: "select" },
+    },
+    {
+      accessorKey: "areaCode",
+      header: "areaCode",
+      meta: { filterable: true, filterType: "select" },
+    },
+    {
+      accessorKey: "areaName",
+      header: "areaName",
+      cell: ({ row }) => row.original.areaName || "-",
+      meta: { filterable: true, filterType: "select" },
+    },
+    {
+      accessorKey: "timeName",
+      header: "timeName",
+      cell: ({ row }) => row.original.timeName || "-",
+      meta: { filterable: true, filterType: "select" },
     },
   ];
 
   return (
     <DataTable
-      data={values}
       columns={columns}
+      data={values}
       emptyMessage="表形式で表示できるデータがありません"
+      showIndex
     />
   );
 }

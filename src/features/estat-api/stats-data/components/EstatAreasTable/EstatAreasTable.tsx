@@ -1,7 +1,8 @@
 "use client";
 
 import { Badge } from "@/components/atoms/ui/badge";
-import DataTable, { type TableColumn } from "@/components/molecules/DataTable";
+import { DataTable } from "@/components/organisms/DataTable";
+import { ColumnDef } from "@tanstack/react-table";
 
 import {
   EstatStatsDataFormatter,
@@ -19,36 +20,38 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
   const formattedData = EstatStatsDataFormatter.formatStatsData(data);
   const areas = formattedData.areas;
 
-  const columns: TableColumn<FormattedArea>[] = [
+  const columns: ColumnDef<FormattedArea>[] = [
     {
-      key: "areaName",
-      label: "地域名",
-      render: (item) => (
+      accessorKey: "areaName",
+      header: "地域名",
+      cell: ({ row }) => (
         <span className="text-gray-900 dark:text-neutral-100">
-          {item.areaName || "-"}
+          {row.original.areaName || "-"}
         </span>
       ),
     },
     {
-      key: "areaCode",
-      label: "地域コード",
-      render: (item) => (
+      accessorKey: "areaCode",
+      header: "地域コード",
+      cell: ({ row }) => (
         <span className="text-gray-600 dark:text-neutral-300">
-          {item.areaCode || "-"}
+          {row.original.areaCode || "-"}
         </span>
       ),
     },
     {
-      key: "level",
-      label: "レベル",
-      render: (item) => <Badge variant="outline">{item.level || "-"}</Badge>,
+      accessorKey: "level",
+      header: "レベル",
+      cell: ({ row }) => (
+        <Badge variant="outline">{row.original.level || "-"}</Badge>
+      ),
     },
     {
-      key: "parentCode",
-      label: "親コード",
-      render: (item) => (
+      accessorKey: "parentCode",
+      header: "親コード",
+      cell: ({ row }) => (
         <span className="text-gray-600 dark:text-neutral-300">
-          {item.parentCode || "-"}
+          {row.original.parentCode || "-"}
         </span>
       ),
     },
@@ -56,9 +59,10 @@ export default function EstatAreasTable({ data }: EstatAreasTableProps) {
 
   return (
     <DataTable
-      data={areas}
       columns={columns}
+      data={areas}
       emptyMessage="地域情報がありません"
+      showIndex
     />
   );
 }
