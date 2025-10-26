@@ -1,4 +1,117 @@
-# Visualization ドメイン - エンティティ
+---
+title: Visualization（可視化）ドメイン完全ガイド
+created: 2025-10-26
+updated: 2025-01-26
+status: published
+tags:
+  - stats47
+  - domain/visualization
+  - complete-guide
+author: 開発チーム
+version: 3.0.0
+---
+
+# Visualization（可視化）ドメイン完全ガイド
+
+## 目次
+
+1. [概要・責任](#概要責任)
+2. [ユビキタス言語](#ユビキタス言語)
+3. [境界づけられたコンテキスト](#境界づけられたコンテキスト)
+4. [エンティティ設計](#エンティティ設計)
+5. [関連ドキュメント](#関連ドキュメント)
+
+---
+
+# 概要・責任
+
+## ドメインの責任
+
+可視化（Visualization）ドメインは、Stats47 プロジェクトのコアドメインの一つです。統計データを視覚的に表現し、ユーザーが直感的に理解できるようにします。
+
+### 主な責務
+
+1. **データの視覚化**: 統計データを適切な視覚的表現に変換
+2. **インタラクティブ性**: ユーザーがデータを探索できる機能提供
+3. **レスポンシブ対応**: 様々なデバイスでの適切な表示
+4. **アクセシビリティ**: 全てのユーザーが利用可能な設計
+5. **データソース表記**: 適切な出典表示
+
+## ドメインの価値
+
+可視化ドメインは、Stats47 プロジェクトの競争優位性を生み出す中核機能です：
+
+1. **直感的理解**: 複雑な統計データを直感的に理解可能
+2. **インタラクティブ探索**: ユーザーがデータを能動的に探索
+3. **多様な表現**: 様々な可視化手法でデータを表現
+4. **アクセシブル**: 全てのユーザーが利用可能
+5. **レスポンシブ**: あらゆるデバイスで最適な表示
+
+---
+
+# ユビキタス言語
+
+## 基本概念
+
+- **ダッシュボード**: 統計データの総合的な表示画面
+- **チャート**: 統計データの図表表現
+- **地図**: 地理的な統計データの可視化
+- **コロプレス地図**: 地域別の統計値を色分けで表示
+- **ベースマップ**: 地図の背景となる地理情報
+- **可視化設定**: 表示方法やスタイルの設定
+
+## チャート関連
+
+- **棒グラフ**: カテゴリ別の値を棒の高さで表現
+- **折れ線グラフ**: 時系列データの変化を線で表現
+- **円グラフ**: 全体に対する割合を円の扇形で表現
+- **散布図**: 2 つの変数の関係を点で表現
+- **ヒートマップ**: 2 次元データを色の濃淡で表現
+
+## 地図関連
+
+- **コロプレス地図**: 地域別の統計値を色分けで表示
+- **ベースマップ**: 地図の背景となる地理情報
+- **タイルレイヤー**: 地図の背景タイル
+- **地理データ**: 行政区域などの地理情報
+- **代表点**: 地域の代表的な座標点
+
+---
+
+# 境界づけられたコンテキスト
+
+## 含まれるもの
+
+- データの視覚的表現ロジック
+- チャート・地図の描画ロジック
+- インタラクティブ機能の実装
+- レスポンシブ表示の制御
+- アクセシビリティ機能
+
+## 含まれないもの
+
+- 統計データの分析・計算（Analytics ドメイン）
+- データの取得・永続化（DataIntegration ドメイン）
+- 地域情報の管理（Area ドメイン）
+- カテゴリ情報の管理（Category ドメイン）
+
+## 他ドメインとの関係性
+
+### 依存関係
+
+- **Analytics ドメイン**: 分析結果の取得
+- **Area ドメイン**: 地域情報の取得
+- **Category ドメイン**: カテゴリ情報の取得
+- **DataIntegration ドメイン**: 地理データの取得
+
+### 提供するサービス
+
+- **Export ドメイン**: 可視化結果のエクスポート
+- **Content ドメイン**: 可視化結果のコンテンツ化
+
+---
+
+# エンティティ設計
 
 ## 主要エンティティ
 
@@ -28,42 +141,6 @@ class Dashboard {
 
   getTitle(): string {
     return this.title;
-  }
-
-  getDescription(): string {
-    return this.description;
-  }
-
-  getLayout(): Layout {
-    return this.layout;
-  }
-
-  getWidgets(): Widget[] {
-    return [...this.widgets]; // 防御的コピー
-  }
-
-  getAreaCode(): AreaCode {
-    return this.areaCode;
-  }
-
-  getCategory(): Category {
-    return this.category;
-  }
-
-  getSubcategory(): Subcategory {
-    return this.subcategory;
-  }
-
-  isPublic(): boolean {
-    return this.isPublic;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
-
-  getUpdatedAt(): Date {
-    return this.updatedAt;
   }
 
   addWidget(widget: Widget): void {
@@ -100,48 +177,11 @@ class Chart {
     private readonly rankingKey: RankingKey,
     private readonly year: Year,
     private readonly areaCodes: AreaCode[],
-    private readonly isInteractive: boolean,
-    private readonly createdAt: Date
+    private readonly isInteractive: boolean
   ) {}
 
   getChartId(): ChartId {
     return this.chartId;
-  }
-
-  getChartType(): ChartType {
-    return this.chartType;
-  }
-
-  getTitle(): string {
-    return this.title;
-  }
-
-  getData(): ChartData {
-    return this.data;
-  }
-
-  getConfig(): ChartConfig {
-    return this.config;
-  }
-
-  getRankingKey(): RankingKey {
-    return this.rankingKey;
-  }
-
-  getYear(): Year {
-    return this.year;
-  }
-
-  getAreaCodes(): AreaCode[] {
-    return [...this.areaCodes]; // 防御的コピー
-  }
-
-  isInteractive(): boolean {
-    return this.isInteractive;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
   }
 
   updateData(data: ChartData): void {
@@ -150,16 +190,6 @@ class Chart {
 
   updateConfig(config: ChartConfig): void {
     this.config = config;
-  }
-
-  addAreaCode(areaCode: AreaCode): void {
-    if (!this.areaCodes.some((code) => code.equals(areaCode))) {
-      this.areaCodes.push(areaCode);
-    }
-  }
-
-  removeAreaCode(areaCode: AreaCode): void {
-    this.areaCodes = this.areaCodes.filter((code) => !code.equals(areaCode));
   }
 }
 ```
@@ -181,77 +211,15 @@ class Map {
     private readonly classificationMethod: ClassificationMethod,
     private readonly rankingKey: RankingKey,
     private readonly year: Year,
-    private readonly isInteractive: boolean,
-    private readonly attribution: Attribution,
-    private readonly createdAt: Date
+    private readonly isInteractive: boolean
   ) {}
-
-  getMapId(): MapId {
-    return this.mapId;
-  }
-
-  getMapType(): MapType {
-    return this.mapType;
-  }
-
-  getTitle(): string {
-    return this.title;
-  }
-
-  getGeoData(): GeoData {
-    return this.geoData;
-  }
-
-  getStatisticalData(): MapStatisticalData {
-    return this.statisticalData;
-  }
-
-  getBasemapType(): BasemapType {
-    return this.basemapType;
-  }
-
-  getColorScheme(): ColorScheme {
-    return this.colorScheme;
-  }
-
-  getClassificationMethod(): ClassificationMethod {
-    return this.classificationMethod;
-  }
-
-  getRankingKey(): RankingKey {
-    return this.rankingKey;
-  }
-
-  getYear(): Year {
-    return this.year;
-  }
-
-  isInteractive(): boolean {
-    return this.isInteractive;
-  }
-
-  getAttribution(): Attribution {
-    return this.attribution;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
 
   updateStatisticalData(data: MapStatisticalData): void {
     this.statisticalData = data;
   }
 
-  updateBasemapType(basemapType: BasemapType): void {
-    this.basemapType = basemapType;
-  }
-
   updateColorScheme(colorScheme: ColorScheme): void {
     this.colorScheme = colorScheme;
-  }
-
-  updateClassificationMethod(method: ClassificationMethod): void {
-    this.classificationMethod = method;
   }
 }
 ```
@@ -270,56 +238,11 @@ class Widget {
     private readonly size: Size,
     private readonly config: WidgetConfig,
     private readonly dataSource: DataSource,
-    private readonly isVisible: boolean,
-    private readonly createdAt: Date
+    private readonly isVisible: boolean
   ) {}
-
-  getWidgetId(): WidgetId {
-    return this.widgetId;
-  }
-
-  getWidgetType(): WidgetType {
-    return this.widgetType;
-  }
-
-  getTitle(): string {
-    return this.title;
-  }
-
-  getPosition(): Position {
-    return this.position;
-  }
-
-  getSize(): Size {
-    return this.size;
-  }
-
-  getConfig(): WidgetConfig {
-    return this.config;
-  }
-
-  getDataSource(): DataSource {
-    return this.dataSource;
-  }
-
-  isVisible(): boolean {
-    return this.isVisible;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
 
   updatePosition(position: Position): void {
     this.position = position;
-  }
-
-  updateSize(size: Size): void {
-    this.size = size;
-  }
-
-  updateConfig(config: WidgetConfig): void {
-    this.config = config;
   }
 
   setVisible(visible: boolean): void {
@@ -341,60 +264,15 @@ class VisualizationConfig {
     private readonly theme: Theme,
     private readonly accessibility: AccessibilitySettings,
     private readonly responsive: ResponsiveSettings,
-    private readonly isDefault: boolean,
-    private readonly createdAt: Date
+    private readonly isDefault: boolean
   ) {}
-
-  getConfigId(): ConfigId {
-    return this.configId;
-  }
-
-  getConfigType(): ConfigType {
-    return this.configType;
-  }
-
-  getSettings(): Map<string, any> {
-    return new Map(this.settings); // 防御的コピー
-  }
-
-  getTheme(): Theme {
-    return this.theme;
-  }
-
-  getAccessibility(): AccessibilitySettings {
-    return this.accessibility;
-  }
-
-  getResponsive(): ResponsiveSettings {
-    return this.responsive;
-  }
-
-  isDefault(): boolean {
-    return this.isDefault;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
 
   updateSetting(key: string, value: any): void {
     this.settings.set(key, value);
   }
 
-  removeSetting(key: string): void {
-    this.settings.delete(key);
-  }
-
   updateTheme(theme: Theme): void {
     this.theme = theme;
-  }
-
-  updateAccessibility(accessibility: AccessibilitySettings): void {
-    this.accessibility = accessibility;
-  }
-
-  updateResponsive(responsive: ResponsiveSettings): void {
-    this.responsive = responsive;
   }
 }
 ```
@@ -414,3 +292,9 @@ class VisualizationConfig {
 3. **Map** の地理データと統計データは整合性がある必要がある
 4. **Widget** の位置は重複してはいけない
 5. **VisualizationConfig** は有効な設定値を持つ必要がある
+
+---
+
+# 関連ドキュメント
+
+- [DDD ドメイン分類 - 可視化ドメイン](../../../01_技術設計/03_ドメイン設計/DDDドメイン分類.md#可視化ドメイン)
