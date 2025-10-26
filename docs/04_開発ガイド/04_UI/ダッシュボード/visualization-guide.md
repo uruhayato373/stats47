@@ -7,37 +7,45 @@ tags:
   - implementation
 ---
 
+> **注意**: このコンポーネントは現在未実装です。
+> 実装時にはこのドキュメントを参考に、`src/features/visualization/components/` 配下に作成してください。
+
 # 可視化実装ガイド
 
 ## 概要
 
-このガイドでは、ダッシュボードドメインで使用する可視化コンポーネントの実装方法について説明します。RechartsとD3.jsを活用した、階層対応の可視化コンポーネントの作成方法を学習できます。
+このガイドでは、ダッシュボードドメインで使用する可視化コンポーネントの実装方法について説明します。Recharts と D3.js を活用した、階層対応の可視化コンポーネントの作成方法を学習できます。
 
 ## 可視化コンポーネントの分類
 
 ### 1. 統計カード系
+
 - **StatisticsMetricCard**: 単一指標の数値表示
 - **ComparisonCard**: 比較データ付きカード
 - **TrendCard**: トレンド表示付きカード
 
 ### 2. 時系列グラフ系
+
 - **EstatLineChart**: 単一系列折れ線グラフ
 - **EstatMultiLineChart**: 複数系列折れ線グラフ
 - **EstatAreaChart**: エリアチャート
 - **EstatBarChart**: 棒グラフ
 
 ### 3. 構成比グラフ系
+
 - **EstatGenderDonutChart**: 男女比率円グラフ
 - **EstatPopulationPyramid**: 人口ピラミッド
 - **EstatPieChart**: 一般的な円グラフ
 - **EstatDonutChart**: ドーナツチャート
 
 ### 4. 比較・ランキング系
+
 - **StackedBarChart**: 積み上げ棒グラフ
 - **RankingChart**: ランキング表示
 - **ComparisonChart**: 比較グラフ
 
 ### 5. 地図系
+
 - **PrefectureChoroplethMap**: 都道府県別コロプレス地図
 - **MunicipalityChoroplethMap**: 市区町村別コロプレス地図
 - **InteractiveMap**: インタラクティブ地図
@@ -48,12 +56,12 @@ tags:
 
 ```typescript
 // src/components/dashboard/StatisticsMetricCard.tsx
-import React from 'react';
-import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue } from '@/infrastructure/utils/format';
-import { TrendIndicator } from '@/components/common/TrendIndicator';
-import { CardSkeleton } from '@/components/common/CardSkeleton';
-import { CardError } from '@/components/common/CardError';
+import React from "react";
+import { useEstatData } from "@/hooks/useEstatData";
+import { formatValue } from "@/infrastructure/utils/format";
+import { TrendIndicator } from "@/components/common/TrendIndicator";
+import { CardSkeleton } from "@/components/common/CardSkeleton";
+import { CardError } from "@/components/common/CardError";
 
 interface StatisticsMetricCardProps {
   params: {
@@ -65,9 +73,9 @@ interface StatisticsMetricCardProps {
   color: string;
   showComparison?: boolean;
   showTrend?: boolean;
-  format?: 'number' | 'percentage' | 'currency';
+  format?: "number" | "percentage" | "currency";
   unit?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 }
 
 export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
@@ -77,35 +85,37 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
   color,
   showComparison = true,
   showTrend = true,
-  format = 'number',
+  format = "number",
   unit,
-  size = 'md'
+  size = "md",
 }) => {
   const { data, loading, error } = useEstatData(params, areaCode);
-  
+
   if (loading) return <CardSkeleton size={size} />;
   if (error) return <CardError error={error} size={size} />;
-  
+
   const sizeClasses = {
-    sm: 'p-3',
-    md: 'p-4',
-    lg: 'p-6'
+    sm: "p-3",
+    md: "p-4",
+    lg: "p-6",
   };
-  
+
   const textSizeClasses = {
-    sm: 'text-lg',
-    md: 'text-2xl',
-    lg: 'text-3xl'
+    sm: "text-lg",
+    md: "text-2xl",
+    lg: "text-3xl",
   };
-  
+
   return (
-    <div className={`
+    <div
+      className={`
       bg-white dark:bg-neutral-800 
       rounded-lg border border-gray-200 dark:border-neutral-700 
       ${sizeClasses[size]} 
       transition-all duration-200
       hover:shadow-md hover:scale-105
-    `}>
+    `}
+    >
       <h3 className="text-sm font-medium text-gray-500 dark:text-neutral-400 mb-2">
         {title}
       </h3>
@@ -137,9 +147,12 @@ export const StatisticsMetricCard: React.FC<StatisticsMetricCardProps> = ({
 
 ```typescript
 // src/components/dashboard/ComparisonCard.tsx
-import React from 'react';
-import { useEstatData } from '@/hooks/useEstatData';
-import { formatValue, calculateComparison } from '@/infrastructure/utils/format';
+import React from "react";
+import { useEstatData } from "@/hooks/useEstatData";
+import {
+  formatValue,
+  calculateComparison,
+} from "@/infrastructure/utils/format";
 
 interface ComparisonCardProps {
   params: {
@@ -150,7 +163,7 @@ interface ComparisonCardProps {
   compareAreaCode: string;
   title: string;
   color: string;
-  format?: 'number' | 'percentage' | 'currency';
+  format?: "number" | "percentage" | "currency";
   unit?: string;
 }
 
@@ -160,14 +173,14 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
   compareAreaCode,
   title,
   color,
-  format = 'number',
-  unit
+  format = "number",
+  unit,
 }) => {
   const { data: currentData } = useEstatData(params, areaCode);
   const { data: compareData } = useEstatData(params, compareAreaCode);
-  
+
   const comparison = calculateComparison(currentData.value, compareData.value);
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-sm font-medium text-gray-500 dark:text-neutral-400 mb-2">
@@ -191,9 +204,16 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
         <div className="flex justify-between items-center">
           <span className="text-sm">差</span>
           <div className="flex items-center">
-            <span className={`font-semibold ${comparison.isPositive ? 'text-green-600' : 'text-red-600'}`}>
-              {comparison.isPositive ? '+' : ''}{formatValue(comparison.difference, format)}
-              {unit && <span className="text-sm text-gray-500 ml-1">{unit}</span>}
+            <span
+              className={`font-semibold ${
+                comparison.isPositive ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {comparison.isPositive ? "+" : ""}
+              {formatValue(comparison.difference, format)}
+              {unit && (
+                <span className="text-sm text-gray-500 ml-1">{unit}</span>
+              )}
             </span>
             <span className="text-xs text-gray-500 ml-1">
               ({comparison.percentage}%)
@@ -212,7 +232,7 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
 
 ```typescript
 // src/components/dashboard/EstatLineChart.tsx
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -220,12 +240,12 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatTimeSeriesData } from "@/hooks/useEstatTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 interface EstatLineChartProps {
   params: {
@@ -247,45 +267,49 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
   areaCode,
   title,
   years,
-  color = '#8884d8',
+  color = "#8884d8",
   showDataPoints = true,
   showGrid = true,
   height = 300,
-  showLegend = false
+  showLegend = false,
 }) => {
-  const { data, loading, error } = useEstatTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       <ResponsiveContainer width="100%" height={height}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
-          <XAxis 
-            dataKey="year" 
+          <XAxis
+            dataKey="year"
             tick={{ fontSize: 12 }}
-            tickLine={{ stroke: '#666' }}
+            tickLine={{ stroke: "#666" }}
           />
-          <YAxis 
+          <YAxis
             tick={{ fontSize: 12 }}
-            tickLine={{ stroke: '#666' }}
+            tickLine={{ stroke: "#666" }}
             tickFormatter={formatNumber}
           />
-          <Tooltip 
+          <Tooltip
             formatter={(value: any) => [formatNumber(value), title]}
             labelFormatter={(label) => `${label}年`}
             contentStyle={{
-              backgroundColor: 'rgba(255, 255, 255, 0.95)',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
+              backgroundColor: "rgba(255, 255, 255, 0.95)",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
             }}
           />
-          <Line 
-            type="monotone" 
-            dataKey="value" 
+          <Line
+            type="monotone"
+            dataKey="value"
             stroke={color}
             strokeWidth={2}
             dot={showDataPoints ? { r: 4 } : false}
@@ -302,7 +326,7 @@ export const EstatLineChart: React.FC<EstatLineChartProps> = ({
 
 ```typescript
 // src/components/dashboard/EstatMultiLineChart.tsx
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -311,12 +335,12 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatMultiTimeSeriesData } from '@/hooks/useEstatMultiTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatMultiTimeSeriesData } from "@/hooks/useEstatMultiTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 interface EstatMultiLineChartProps {
   params: {
@@ -342,13 +366,17 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
   years,
   series,
   height = 300,
-  showLegend = true
+  showLegend = true,
 }) => {
-  const { data, loading, error } = useEstatMultiTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatMultiTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -357,15 +385,15 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
           <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
           <XAxis dataKey="year" />
           <YAxis tickFormatter={formatNumber} />
-          <Tooltip 
+          <Tooltip
             formatter={(value: any, name: string) => [
-              formatNumber(value), 
-              series.find(s => s.key === name)?.name || name
+              formatNumber(value),
+              series.find((s) => s.key === name)?.name || name,
             ]}
             labelFormatter={(label) => `${label}年`}
           />
           {showLegend && <Legend />}
-          {series.map(serie => (
+          {series.map((serie) => (
             <Line
               key={serie.key}
               type="monotone"
@@ -389,19 +417,19 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
 
 ```typescript
 // src/components/dashboard/EstatGenderDonutChart.tsx
-import React from 'react';
+import React from "react";
 import {
   PieChart,
   Pie,
   Cell,
   ResponsiveContainer,
   Tooltip,
-  Legend
-} from 'recharts';
-import { useEstatGenderData } from '@/hooks/useEstatGenderData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  Legend,
+} from "recharts";
+import { useEstatGenderData } from "@/hooks/useEstatGenderData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 interface EstatGenderDonutChartProps {
   params: {
@@ -424,23 +452,23 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
   title,
   width = 300,
   height = 300,
-  showLegend = true
+  showLegend = true,
 }) => {
   const { data, loading, error } = useEstatGenderData(
-    params, 
-    areaCode, 
-    maleCategoryCode, 
+    params,
+    areaCode,
+    maleCategoryCode,
     femaleCategoryCode
   );
-  
+
   if (loading) return <ChartSkeleton width={width} height={height} />;
   if (error) return <ChartError error={error} width={width} height={height} />;
-  
+
   const chartData = [
-    { name: '男性', value: data.male, color: '#3b82f6' },
-    { name: '女性', value: data.female, color: '#ec4899' }
+    { name: "男性", value: data.male, color: "#3b82f6" },
+    { name: "女性", value: data.female, color: "#ec4899" },
   ];
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4 text-center">{title}</h3>
@@ -460,10 +488,13 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip 
+            <Tooltip
               formatter={(value: any) => [
-                `${formatNumber(value)}人 (${((value / data.total) * 100).toFixed(1)}%)`,
-                '人数'
+                `${formatNumber(value)}人 (${(
+                  (value / data.total) *
+                  100
+                ).toFixed(1)}%)`,
+                "人数",
               ]}
             />
             {showLegend && <Legend />}
@@ -479,11 +510,11 @@ export const EstatGenderDonutChart: React.FC<EstatGenderDonutChartProps> = ({
 
 ```typescript
 // src/components/dashboard/EstatPopulationPyramid.tsx
-import React from 'react';
-import { useEstatPopulationPyramidData } from '@/hooks/useEstatPopulationPyramidData';
-import { PopulationPyramidChart } from '@/components/charts/PopulationPyramidChart';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+import React from "react";
+import { useEstatPopulationPyramidData } from "@/hooks/useEstatPopulationPyramidData";
+import { PopulationPyramidChart } from "@/components/charts/PopulationPyramidChart";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 interface EstatPopulationPyramidProps {
   params: {
@@ -502,13 +533,16 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
   title,
   width = 600,
   height = 400,
-  showLegend = true
+  showLegend = true,
 }) => {
-  const { data, loading, error } = useEstatPopulationPyramidData(params, areaCode);
-  
+  const { data, loading, error } = useEstatPopulationPyramidData(
+    params,
+    areaCode
+  );
+
   if (loading) return <ChartSkeleton width={width} height={height} />;
   if (error) return <ChartError error={error} width={width} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4 text-center">{title}</h3>
@@ -531,7 +565,7 @@ export const EstatPopulationPyramid: React.FC<EstatPopulationPyramidProps> = ({
 
 ```typescript
 // src/components/dashboard/StackedBarChart.tsx
-import React from 'react';
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -540,9 +574,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { formatNumber } from '@/infrastructure/utils/format';
+  ResponsiveContainer,
+} from "recharts";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 interface StackedBarChartProps {
   data: Array<{
@@ -566,7 +600,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   series,
   height = 300,
   horizontal = false,
-  showLegend = true
+  showLegend = true,
 }) => {
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
@@ -577,9 +611,9 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" tickFormatter={formatNumber} />
             <YAxis dataKey="name" type="category" width={100} />
-            <Tooltip formatter={(value: any) => [formatNumber(value), '']} />
+            <Tooltip formatter={(value: any) => [formatNumber(value), ""]} />
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Bar
                 key={serie.key}
                 dataKey={serie.key}
@@ -594,9 +628,9 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis tickFormatter={formatNumber} />
-            <Tooltip formatter={(value: any) => [formatNumber(value), '']} />
+            <Tooltip formatter={(value: any) => [formatNumber(value), ""]} />
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Bar
                 key={serie.key}
                 dataKey={serie.key}
@@ -617,8 +651,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
 
 ```typescript
 // src/components/dashboard/RankingChart.tsx
-import React from 'react';
-import { formatNumber } from '@/infrastructure/utils/format';
+import React from "react";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 interface RankingChartProps {
   data: Array<{
@@ -638,11 +672,11 @@ export const RankingChart: React.FC<RankingChartProps> = ({
   title,
   maxItems = 10,
   showValues = true,
-  showPercentages = true
+  showPercentages = true,
 }) => {
   const displayData = data.slice(0, maxItems);
-  const maxValue = Math.max(...displayData.map(item => item.value));
-  
+  const maxValue = Math.max(...displayData.map((item) => item.value));
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -666,7 +700,7 @@ export const RankingChart: React.FC<RankingChartProps> = ({
                   className="h-2 rounded-full"
                   style={{
                     width: `${(item.value / maxValue) * 100}%`,
-                    backgroundColor: item.color || '#3b82f6'
+                    backgroundColor: item.color || "#3b82f6",
                   }}
                 />
               </div>
@@ -690,10 +724,10 @@ export const RankingChart: React.FC<RankingChartProps> = ({
 
 ```typescript
 // src/components/dashboard/PrefectureChoroplethMap.tsx
-import React, { useState } from 'react';
-import { ChoroplethMap } from '@/components/maps/ChoroplethMap';
-import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/infrastructure/utils/format';
+import React, { useState } from "react";
+import { ChoroplethMap } from "@/components/maps/ChoroplethMap";
+import { MapLegend } from "@/components/maps/MapLegend";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 interface PrefectureChoroplethMapProps {
   data: Array<{
@@ -703,21 +737,25 @@ interface PrefectureChoroplethMapProps {
   }>;
   title: string;
   metric: string;
-  colorScheme?: 'blue' | 'green' | 'red' | 'purple';
+  colorScheme?: "blue" | "green" | "red" | "purple";
   height?: number;
   showLegend?: boolean;
 }
 
-export const PrefectureChoroplethMap: React.FC<PrefectureChoroplethMapProps> = ({
+export const PrefectureChoroplethMap: React.FC<
+  PrefectureChoroplethMapProps
+> = ({
   data,
   title,
   metric,
-  colorScheme = 'blue',
+  colorScheme = "blue",
   height = 400,
-  showLegend = true
+  showLegend = true,
 }) => {
-  const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
-  
+  const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(
+    null
+  );
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -741,11 +779,16 @@ export const PrefectureChoroplethMap: React.FC<PrefectureChoroplethMapProps> = (
         {selectedPrefecture && (
           <div className="absolute top-4 left-4 bg-white dark:bg-neutral-800 border rounded-lg p-3 shadow-lg">
             <h4 className="font-semibold">
-              {data.find(item => item.prefectureCode === selectedPrefecture)?.name}
+              {
+                data.find((item) => item.prefectureCode === selectedPrefecture)
+                  ?.name
+              }
             </h4>
             <p className="text-sm text-gray-600">
-              {metric}: {formatNumber(
-                data.find(item => item.prefectureCode === selectedPrefecture)?.value || 0
+              {metric}:{" "}
+              {formatNumber(
+                data.find((item) => item.prefectureCode === selectedPrefecture)
+                  ?.value || 0
               )}
             </p>
           </div>
@@ -760,10 +803,10 @@ export const PrefectureChoroplethMap: React.FC<PrefectureChoroplethMapProps> = (
 
 ```typescript
 // src/components/dashboard/MunicipalityChoroplethMap.tsx
-import React, { useState } from 'react';
-import { MunicipalityMap } from '@/components/maps/MunicipalityMap';
-import { MapLegend } from '@/components/maps/MapLegend';
-import { formatNumber } from '@/infrastructure/utils/format';
+import React, { useState } from "react";
+import { MunicipalityMap } from "@/components/maps/MunicipalityMap";
+import { MapLegend } from "@/components/maps/MapLegend";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 interface MunicipalityChoroplethMapProps {
   prefectureCode: string;
@@ -774,23 +817,27 @@ interface MunicipalityChoroplethMapProps {
   }>;
   title: string;
   metric: string;
-  colorScheme?: 'blue' | 'green' | 'red' | 'purple';
+  colorScheme?: "blue" | "green" | "red" | "purple";
   height?: number;
   showLegend?: boolean;
 }
 
-export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps> = ({
+export const MunicipalityChoroplethMap: React.FC<
+  MunicipalityChoroplethMapProps
+> = ({
   prefectureCode,
   data,
   title,
   metric,
-  colorScheme = 'blue',
+  colorScheme = "blue",
   height = 400,
-  showLegend = true
+  showLegend = true,
 }) => {
-  const [selectedMunicipality, setSelectedMunicipality] = useState<string | null>(null);
+  const [selectedMunicipality, setSelectedMunicipality] = useState<
+    string | null
+  >(null);
   const [zoomLevel, setZoomLevel] = useState(1);
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <div className="flex justify-between items-center mb-4">
@@ -802,7 +849,9 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
           >
             -
           </button>
-          <span className="px-2 py-1 text-sm">{Math.round(zoomLevel * 100)}%</span>
+          <span className="px-2 py-1 text-sm">
+            {Math.round(zoomLevel * 100)}%
+          </span>
           <button
             onClick={() => setZoomLevel(Math.min(2, zoomLevel + 0.1))}
             className="px-2 py-1 text-sm border rounded hover:bg-gray-50 dark:hover:bg-neutral-700"
@@ -811,7 +860,7 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
           </button>
         </div>
       </div>
-      
+
       <div className="relative overflow-hidden">
         <MunicipalityMap
           prefectureCode={prefectureCode}
@@ -823,7 +872,7 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
           onMunicipalityClick={setSelectedMunicipality}
           selectedMunicipality={selectedMunicipality}
         />
-        
+
         {showLegend && (
           <MapLegend
             data={data}
@@ -832,15 +881,22 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
             position="bottom-right"
           />
         )}
-        
+
         {selectedMunicipality && (
           <div className="absolute top-4 left-4 bg-white dark:bg-neutral-800 border rounded-lg p-3 shadow-lg">
             <h4 className="font-semibold">
-              {data.find(item => item.municipalityCode === selectedMunicipality)?.name}
+              {
+                data.find(
+                  (item) => item.municipalityCode === selectedMunicipality
+                )?.name
+              }
             </h4>
             <p className="text-sm text-gray-600">
-              {metric}: {formatNumber(
-                data.find(item => item.municipalityCode === selectedMunicipality)?.value || 0
+              {metric}:{" "}
+              {formatNumber(
+                data.find(
+                  (item) => item.municipalityCode === selectedMunicipality
+                )?.value || 0
               )}
             </p>
           </div>
@@ -858,14 +914,14 @@ export const MunicipalityChoroplethMap: React.FC<MunicipalityChoroplethMapProps>
 ```typescript
 // src/infrastructure/utils/format.ts
 export function formatValue(value: number | null, format: string): string {
-  if (value === null || value === undefined) return 'データなし';
-  
+  if (value === null || value === undefined) return "データなし";
+
   switch (format) {
-    case 'number':
+    case "number":
       return value.toLocaleString();
-    case 'percentage':
+    case "percentage":
       return `${value.toFixed(1)}%`;
-    case 'currency':
+    case "currency":
       return `¥${value.toLocaleString()}`;
     default:
       return value.toString();
@@ -879,19 +935,25 @@ export function formatNumber(value: number): string {
 export function calculateComparison(current: number, previous: number) {
   const difference = current - previous;
   const percentage = previous !== 0 ? (difference / previous) * 100 : 0;
-  
+
   return {
     difference,
     percentage: Math.abs(percentage).toFixed(1),
-    isPositive: difference >= 0
+    isPositive: difference >= 0,
   };
 }
 
-export function formatComparison(current: number, previous: number, format: string): string {
+export function formatComparison(
+  current: number,
+  previous: number,
+  format: string
+): string {
   const comparison = calculateComparison(current, previous);
   const formattedDifference = formatValue(comparison.difference, format);
-  
-  return `前年比: ${comparison.isPositive ? '+' : ''}${formattedDifference} (${comparison.percentage}%)`;
+
+  return `前年比: ${comparison.isPositive ? "+" : ""}${formattedDifference} (${
+    comparison.percentage
+  }%)`;
 }
 ```
 
@@ -899,38 +961,38 @@ export function formatComparison(current: number, previous: number, format: stri
 
 ```typescript
 // src/components/common/TrendIndicator.tsx
-import React from 'react';
-import { calculateComparison } from '@/infrastructure/utils/format';
+import React from "react";
+import { calculateComparison } from "@/infrastructure/utils/format";
 
 interface TrendIndicatorProps {
   current: number;
   previous: number;
   format: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 }
 
-export function TrendIndicator({ 
-  current, 
-  previous, 
-  format, 
-  size = 'md' 
+export function TrendIndicator({
+  current,
+  previous,
+  format,
+  size = "md",
 }: TrendIndicatorProps) {
   const comparison = calculateComparison(current, previous);
-  
+
   const sizeClasses = {
-    sm: 'text-xs',
-    md: 'text-sm',
-    lg: 'text-base'
+    sm: "text-xs",
+    md: "text-sm",
+    lg: "text-base",
   };
-  
+
   return (
-    <div className={`flex items-center ${sizeClasses[size]} ${
-      comparison.isPositive ? 'text-green-600' : 'text-red-600'
-    }`}>
-      {comparison.isPositive ? '↗' : '↘'}
-      <span className="ml-1">
-        {comparison.percentage}%
-      </span>
+    <div
+      className={`flex items-center ${sizeClasses[size]} ${
+        comparison.isPositive ? "text-green-600" : "text-red-600"
+      }`}
+    >
+      {comparison.isPositive ? "↗" : "↘"}
+      <span className="ml-1">{comparison.percentage}%</span>
     </div>
   );
 }
@@ -942,28 +1004,28 @@ export function TrendIndicator({
 
 ```typescript
 // StatisticsMetricCard.test.tsx
-import { render, screen } from '@testing-library/react';
-import { StatisticsMetricCard } from './StatisticsMetricCard';
+import { render, screen } from "@testing-library/react";
+import { StatisticsMetricCard } from "./StatisticsMetricCard";
 
-describe('StatisticsMetricCard', () => {
+describe("StatisticsMetricCard", () => {
   const mockProps = {
-    params: { statsDataId: '0000010101', cdCat01: 'A1101' },
-    areaCode: '00000',
-    title: '総人口',
-    color: '#4f46e5'
+    params: { statsDataId: "0000010101", cdCat01: "A1101" },
+    areaCode: "00000",
+    title: "総人口",
+    color: "#4f46e5",
   };
-  
-  it('should render title and value', () => {
+
+  it("should render title and value", () => {
     render(<StatisticsMetricCard {...mockProps} />);
-    
-    expect(screen.getByText('総人口')).toBeInTheDocument();
-    expect(screen.getByText('データなし')).toBeInTheDocument();
+
+    expect(screen.getByText("総人口")).toBeInTheDocument();
+    expect(screen.getByText("データなし")).toBeInTheDocument();
   });
-  
-  it('should show trend indicator when data is available', () => {
+
+  it("should show trend indicator when data is available", () => {
     // モックデータの設定
     render(<StatisticsMetricCard {...mockProps} />);
-    
+
     // トレンドインジケーターの確認
   });
 });
@@ -973,21 +1035,21 @@ describe('StatisticsMetricCard', () => {
 
 ```typescript
 // useEstatData.test.ts
-import { renderHook, waitFor } from '@testing-library/react';
-import { useEstatData } from './useEstatData';
+import { renderHook, waitFor } from "@testing-library/react";
+import { useEstatData } from "./useEstatData";
 
-describe('useEstatData', () => {
-  it('should fetch data successfully', async () => {
-    const { result } = renderHook(() => 
-      useEstatData({ statsDataId: '0000010101', cdCat01: 'A1101' }, '00000')
+describe("useEstatData", () => {
+  it("should fetch data successfully", async () => {
+    const { result } = renderHook(() =>
+      useEstatData({ statsDataId: "0000010101", cdCat01: "A1101" }, "00000")
     );
-    
+
     expect(result.current.loading).toBe(true);
-    
+
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    
+
     expect(result.current.data).toBeDefined();
   });
 });

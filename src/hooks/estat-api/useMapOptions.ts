@@ -1,8 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { MapVisualizationOptions } from "@/components/organisms/visualization/ColorSchemeSelector";
+// 型定義を直接定義
+export interface MapVisualizationOptions {
+  colorScheme: string;
+  divergingMidpoint: "zero" | "mean" | "median" | number;
+}
 
 interface UseMapOptionsOptions {
   initialColorScheme?: string;

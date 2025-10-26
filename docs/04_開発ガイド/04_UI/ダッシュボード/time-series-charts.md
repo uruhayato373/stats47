@@ -7,11 +7,14 @@ tags:
   - components
 ---
 
+> **注意**: このコンポーネントは現在未実装です。
+> 実装時にはこのドキュメントを参考に、`src/features/visualization/components/` 配下に作成してください。
+
 # 時系列グラフコンポーネント
 
 ## 概要
 
-時系列グラフコンポーネントは、ダッシュボードで時系列データを可視化するためのコンポーネントです。全国・都道府県・市区町村の3階層すべてで使用でき、単一系列や複数系列のデータを効率的に表示します。
+時系列グラフコンポーネントは、ダッシュボードで時系列データを可視化するためのコンポーネントです。全国・都道府県・市区町村の 3 階層すべてで使用でき、単一系列や複数系列のデータを効率的に表示します。
 
 ## コンポーネント一覧
 
@@ -71,7 +74,7 @@ interface EstatLineChartProps {
 
 ```typescript
 // src/components/dashboard/EstatLineChart.tsx
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -79,60 +82,64 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatTimeSeriesData } from "@/hooks/useEstatTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 export const EstatLineChart: React.FC<EstatLineChartProps> = ({
   params,
   areaCode,
   title,
   years,
-  color = '#8884d8',
+  color = "#8884d8",
   showDataPoints = true,
   showGrid = true,
   height = 300,
   showLegend = false,
-  showTooltip = true
+  showTooltip = true,
 }) => {
-  const { data, loading, error } = useEstatTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       <ResponsiveContainer width="100%" height={height}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
-          <XAxis 
-            dataKey="year" 
+          <XAxis
+            dataKey="year"
             tick={{ fontSize: 12 }}
-            tickLine={{ stroke: '#666' }}
+            tickLine={{ stroke: "#666" }}
           />
-          <YAxis 
+          <YAxis
             tick={{ fontSize: 12 }}
-            tickLine={{ stroke: '#666' }}
+            tickLine={{ stroke: "#666" }}
             tickFormatter={formatNumber}
           />
           {showTooltip && (
-            <Tooltip 
+            <Tooltip
               formatter={(value: any) => [formatNumber(value), title]}
               labelFormatter={(label) => `${label}年`}
               contentStyle={{
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid #ccc',
-                borderRadius: '4px'
+                backgroundColor: "rgba(255, 255, 255, 0.95)",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
               }}
             />
           )}
-          <Line 
-            type="monotone" 
-            dataKey="value" 
+          <Line
+            type="monotone"
+            dataKey="value"
             stroke={color}
             strokeWidth={2}
             dot={showDataPoints ? { r: 4 } : false}
@@ -177,16 +184,16 @@ interface EstatMultiLineChartProps {
 ```typescript
 // 複数系列の比較
 <EstatMultiLineChart
-  params={{ 
-    statsDataId: "0000010101", 
-    cdCat01: ["A110101", "A110102"] 
+  params={{
+    statsDataId: "0000010101",
+    cdCat01: ["A110101", "A110102"],
   }}
   areaCode="00000"
   title="男女別人口推移"
   years={["2010", "2015", "2020", "2023"]}
   series={[
     { key: "A110101", name: "男性", color: "#3b82f6" },
-    { key: "A110102", name: "女性", color: "#ec4899" }
+    { key: "A110102", name: "女性", color: "#ec4899" },
   ]}
   height={350}
   showLegend={true}
@@ -197,7 +204,7 @@ interface EstatMultiLineChartProps {
 
 ```typescript
 // src/components/dashboard/EstatMultiLineChart.tsx
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -206,12 +213,12 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatMultiTimeSeriesData } from '@/hooks/useEstatMultiTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatMultiTimeSeriesData } from "@/hooks/useEstatMultiTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
   params,
@@ -222,13 +229,17 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
   height = 300,
   showLegend = true,
   showTooltip = true,
-  showGrid = true
+  showGrid = true,
 }) => {
-  const { data, loading, error } = useEstatMultiTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatMultiTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -238,16 +249,16 @@ export const EstatMultiLineChart: React.FC<EstatMultiLineChartProps> = ({
           <XAxis dataKey="year" />
           <YAxis tickFormatter={formatNumber} />
           {showTooltip && (
-            <Tooltip 
+            <Tooltip
               formatter={(value: any, name: string) => [
-                formatNumber(value), 
-                series.find(s => s.key === name)?.name || name
+                formatNumber(value),
+                series.find((s) => s.key === name)?.name || name,
               ]}
               labelFormatter={(label) => `${label}年`}
             />
           )}
           {showLegend && <Legend />}
-          {series.map(serie => (
+          {series.map((serie) => (
             <Line
               key={serie.key}
               type="monotone"
@@ -305,7 +316,7 @@ interface EstatAreaChartProps {
 
 ```typescript
 // src/components/dashboard/EstatAreaChart.tsx
-import React from 'react';
+import React from "react";
 import {
   AreaChart,
   Area,
@@ -313,28 +324,32 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatTimeSeriesData } from "@/hooks/useEstatTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 export const EstatAreaChart: React.FC<EstatAreaChartProps> = ({
   params,
   areaCode,
   title,
   years,
-  color = '#8884d8',
+  color = "#8884d8",
   height = 300,
   showGrid = true,
-  showTooltip = true
+  showTooltip = true,
 }) => {
-  const { data, loading, error } = useEstatTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -344,7 +359,7 @@ export const EstatAreaChart: React.FC<EstatAreaChartProps> = ({
           <XAxis dataKey="year" />
           <YAxis tickFormatter={formatNumber} />
           {showTooltip && (
-            <Tooltip 
+            <Tooltip
               formatter={(value: any) => [formatNumber(value), title]}
               labelFormatter={(label) => `${label}年`}
             />
@@ -415,7 +430,7 @@ interface EstatBarChartProps {
 
 ```typescript
 // src/components/dashboard/EstatBarChart.tsx
-import React from 'react';
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -423,29 +438,33 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
-} from 'recharts';
-import { useEstatTimeSeriesData } from '@/hooks/useEstatTimeSeriesData';
-import { formatNumber } from '@/infrastructure/utils/format';
-import { ChartSkeleton } from '@/components/common/ChartSkeleton';
-import { ChartError } from '@/components/common/ChartError';
+  ResponsiveContainer,
+} from "recharts";
+import { useEstatTimeSeriesData } from "@/hooks/useEstatTimeSeriesData";
+import { formatNumber } from "@/infrastructure/utils/format";
+import { ChartSkeleton } from "@/components/common/ChartSkeleton";
+import { ChartError } from "@/components/common/ChartError";
 
 export const EstatBarChart: React.FC<EstatBarChartProps> = ({
   params,
   areaCode,
   title,
   years,
-  color = '#8884d8',
+  color = "#8884d8",
   height = 300,
   showGrid = true,
   showTooltip = true,
-  horizontal = false
+  horizontal = false,
 }) => {
-  const { data, loading, error } = useEstatTimeSeriesData(params, areaCode, years);
-  
+  const { data, loading, error } = useEstatTimeSeriesData(
+    params,
+    areaCode,
+    years
+  );
+
   if (loading) return <ChartSkeleton height={height} />;
   if (error) return <ChartError error={error} height={height} />;
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -456,7 +475,7 @@ export const EstatBarChart: React.FC<EstatBarChartProps> = ({
             <XAxis type="number" tickFormatter={formatNumber} />
             <YAxis dataKey="year" type="category" width={100} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any) => [formatNumber(value), title]}
                 labelFormatter={(label) => `${label}年`}
               />
@@ -469,7 +488,7 @@ export const EstatBarChart: React.FC<EstatBarChartProps> = ({
             <XAxis dataKey="year" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any) => [formatNumber(value), title]}
                 labelFormatter={(label) => `${label}年`}
               />
@@ -489,8 +508,8 @@ export const EstatBarChart: React.FC<EstatBarChartProps> = ({
 
 ```typescript
 // src/hooks/useEstatTimeSeriesData.ts
-import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/infrastructure/services/EstatDataService';
+import { useState, useEffect } from "react";
+import { EstatDataService } from "@/infrastructure/services/EstatDataService";
 
 export function useEstatTimeSeriesData(
   params: { statsDataId: string; cdCat01: string },
@@ -500,43 +519,43 @@ export function useEstatTimeSeriesData(
   const [data, setData] = useState<TimeSeriesData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         const promises = years.map(async (year) => {
           const result = await EstatDataService.getStatsData(
             params.statsDataId,
             params.cdCat01,
             areaCode
           );
-          
+
           const yearData = result.values.find(
             (value) => value.timeCode === year
           );
-          
+
           return {
             year,
-            value: yearData?.value || 0
+            value: yearData?.value || 0,
           };
         });
-        
+
         const results = await Promise.all(promises);
         setData(results);
       } catch (err) {
         setError(err as Error);
-        console.error('Estat time series data fetch error:', err);
+        console.error("Estat time series data fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [params.statsDataId, params.cdCat01, areaCode, years]);
-  
+
   return { data, loading, error };
 }
 ```
@@ -545,8 +564,8 @@ export function useEstatTimeSeriesData(
 
 ```typescript
 // src/hooks/useEstatMultiTimeSeriesData.ts
-import { useState, useEffect } from 'react';
-import { EstatDataService } from '@/infrastructure/services/EstatDataService';
+import { useState, useEffect } from "react";
+import { EstatDataService } from "@/infrastructure/services/EstatDataService";
 
 export function useEstatMultiTimeSeriesData(
   params: { statsDataId: string; cdCat01: string[] },
@@ -556,39 +575,39 @@ export function useEstatMultiTimeSeriesData(
   const [data, setData] = useState<MultiTimeSeriesData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         const promises = params.cdCat01.map(async (categoryCode) => {
           const result = await EstatDataService.getStatsData(
             params.statsDataId,
             categoryCode,
             areaCode
           );
-          
+
           const timeSeriesData = years.map((year) => {
             const yearData = result.values.find(
               (value) => value.timeCode === year
             );
-            
+
             return {
               year,
-              value: yearData?.value || 0
+              value: yearData?.value || 0,
             };
           });
-          
+
           return {
             categoryCode,
-            data: timeSeriesData
+            data: timeSeriesData,
           };
         });
-        
+
         const results = await Promise.all(promises);
-        
+
         // データを結合
         const combinedData = years.map((year) => {
           const yearData: any = { year };
@@ -598,19 +617,19 @@ export function useEstatMultiTimeSeriesData(
           });
           return yearData;
         });
-        
+
         setData(combinedData);
       } catch (err) {
         setError(err as Error);
-        console.error('Estat multi time series data fetch error:', err);
+        console.error("Estat multi time series data fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [params.statsDataId, params.cdCat01, areaCode, years]);
-  
+
   return { data, loading, error };
 }
 ```
@@ -619,7 +638,7 @@ export function useEstatMultiTimeSeriesData(
 
 ```typescript
 // src/components/common/ChartSkeleton.tsx
-import React from 'react';
+import React from "react";
 
 interface ChartSkeletonProps {
   height?: number;
@@ -630,9 +649,9 @@ export function ChartSkeleton({ height = 300, width }: ChartSkeletonProps) {
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <div className="h-6 bg-gray-200 dark:bg-neutral-700 rounded mb-4 w-1/3 animate-pulse"></div>
-      <div 
+      <div
         className="bg-gray-200 dark:bg-neutral-700 rounded animate-pulse"
-        style={{ height, width: width || '100%' }}
+        style={{ height, width: width || "100%" }}
       ></div>
     </div>
   );
@@ -643,7 +662,7 @@ export function ChartSkeleton({ height = 300, width }: ChartSkeletonProps) {
 
 ```typescript
 // src/components/common/ChartError.tsx
-import React from 'react';
+import React from "react";
 
 interface ChartErrorProps {
   error: Error;
@@ -655,9 +674,9 @@ export function ChartError({ error, height = 300, width }: ChartErrorProps) {
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <div className="h-6 bg-gray-200 dark:bg-neutral-700 rounded mb-4 w-1/3"></div>
-      <div 
+      <div
         className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded flex items-center justify-center"
-        style={{ height, width: width || '100%' }}
+        style={{ height, width: width || "100%" }}
       >
         <div className="text-center">
           <div className="text-red-600 dark:text-red-400 mb-2">
@@ -678,7 +697,7 @@ export function ChartError({ error, height = 300, width }: ChartErrorProps) {
 
 ## アクセシビリティ
 
-### 1. セマンティックHTML
+### 1. セマンティック HTML
 
 ```typescript
 // アクセシブルな時系列グラフ
@@ -691,9 +710,7 @@ export function AccessibleEstatLineChart(props: EstatLineChartProps) {
     >
       <h3 className="text-lg font-semibold mb-4">{props.title}</h3>
       <ResponsiveContainer width="100%" height={props.height}>
-        <LineChart data={data}>
-          {/* グラフの実装 */}
-        </LineChart>
+        <LineChart data={data}>{/* グラフの実装 */}</LineChart>
       </ResponsiveContainer>
     </div>
   );
@@ -706,22 +723,22 @@ export function AccessibleEstatLineChart(props: EstatLineChartProps) {
 // キーボードで操作可能なグラフ
 export function KeyboardNavigableChart(props: EstatLineChartProps) {
   const [focusedElement, setFocusedElement] = useState<string | null>(null);
-  
+
   const handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
-      case 'ArrowRight':
+      case "ArrowRight":
         // 次のデータポイントにフォーカス
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         // 前のデータポイントにフォーカス
         break;
-      case 'Enter':
-      case ' ':
+      case "Enter":
+      case " ":
         // データポイントの詳細表示
         break;
     }
   };
-  
+
   return (
     <div
       role="img"
@@ -742,37 +759,39 @@ export function KeyboardNavigableChart(props: EstatLineChartProps) {
 
 ```typescript
 // EstatLineChart.test.tsx
-import { render, screen } from '@testing-library/react';
-import { EstatLineChart } from './EstatLineChart';
+import { render, screen } from "@testing-library/react";
+import { EstatLineChart } from "./EstatLineChart";
 
-describe('EstatLineChart', () => {
+describe("EstatLineChart", () => {
   const mockProps = {
-    params: { statsDataId: '0000010101', cdCat01: 'A1101' },
-    areaCode: '00000',
-    title: '全国総人口推移',
-    years: ['2010', '2015', '2020', '2023']
+    params: { statsDataId: "0000010101", cdCat01: "A1101" },
+    areaCode: "00000",
+    title: "全国総人口推移",
+    years: ["2010", "2015", "2020", "2023"],
   };
-  
-  it('should render title and chart', () => {
+
+  it("should render title and chart", () => {
     render(<EstatLineChart {...mockProps} />);
-    
-    expect(screen.getByText('全国総人口推移')).toBeInTheDocument();
-    expect(screen.getByRole('img')).toBeInTheDocument();
+
+    expect(screen.getByText("全国総人口推移")).toBeInTheDocument();
+    expect(screen.getByRole("img")).toBeInTheDocument();
   });
-  
-  it('should show loading state', () => {
+
+  it("should show loading state", () => {
     // ローディング状態のテスト
   });
-  
-  it('should show error state', () => {
+
+  it("should show error state", () => {
     // エラー状態のテスト
   });
-  
-  it('should be accessible', () => {
+
+  it("should be accessible", () => {
     render(<EstatLineChart {...mockProps} />);
-    
-    expect(screen.getByRole('img')).toBeInTheDocument();
-    expect(screen.getByLabelText('全国総人口推移の時系列グラフ')).toBeInTheDocument();
+
+    expect(screen.getByRole("img")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("全国総人口推移の時系列グラフ")
+    ).toBeInTheDocument();
   });
 });
 ```
@@ -781,42 +800,42 @@ describe('EstatLineChart', () => {
 
 ```typescript
 // useEstatTimeSeriesData.test.ts
-import { renderHook, waitFor } from '@testing-library/react';
-import { useEstatTimeSeriesData } from './useEstatTimeSeriesData';
+import { renderHook, waitFor } from "@testing-library/react";
+import { useEstatTimeSeriesData } from "./useEstatTimeSeriesData";
 
-describe('useEstatTimeSeriesData', () => {
-  it('should fetch time series data successfully', async () => {
-    const { result } = renderHook(() => 
+describe("useEstatTimeSeriesData", () => {
+  it("should fetch time series data successfully", async () => {
+    const { result } = renderHook(() =>
       useEstatTimeSeriesData(
-        { statsDataId: '0000010101', cdCat01: 'A1101' },
-        '00000',
-        ['2010', '2015', '2020', '2023']
+        { statsDataId: "0000010101", cdCat01: "A1101" },
+        "00000",
+        ["2010", "2015", "2020", "2023"]
       )
     );
-    
+
     expect(result.current.loading).toBe(true);
-    
+
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    
+
     expect(result.current.data).toBeDefined();
     expect(Array.isArray(result.current.data)).toBe(true);
   });
-  
-  it('should handle errors gracefully', async () => {
-    const { result } = renderHook(() => 
+
+  it("should handle errors gracefully", async () => {
+    const { result } = renderHook(() =>
       useEstatTimeSeriesData(
-        { statsDataId: 'invalid', cdCat01: 'A1101' },
-        '00000',
-        ['2010', '2015', '2020', '2023']
+        { statsDataId: "invalid", cdCat01: "A1101" },
+        "00000",
+        ["2010", "2015", "2020", "2023"]
       )
     );
-    
+
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    
+
     expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
   });
@@ -828,10 +847,10 @@ describe('useEstatTimeSeriesData', () => {
 時系列グラフコンポーネントは、ダッシュボードで時系列データを可視化するための重要なコンポーネントです。主な特徴は以下の通りです：
 
 1. **多様なグラフタイプ**: 折れ線、エリア、棒グラフなど
-2. **3階層対応**: 全国・都道府県・市区町村の3階層すべてで使用可能
+2. **3 階層対応**: 全国・都道府県・市区町村の 3 階層すべてで使用可能
 3. **複数系列対応**: 複数の指標を同時に表示
 4. **カスタマイズ性**: 色、サイズ、表示オプションの柔軟な設定
-5. **アクセシビリティ**: セマンティックHTMLとキーボードナビゲーション対応
+5. **アクセシビリティ**: セマンティック HTML とキーボードナビゲーション対応
 6. **エラーハンドリング**: ローディング・エラー状態の適切な表示
 
 これらのコンポーネントにより、ユーザーは時系列データの変化を直感的に理解し、地域間の比較や時系列の傾向を把握することができます。

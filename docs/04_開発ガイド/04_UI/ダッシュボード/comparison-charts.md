@@ -7,11 +7,14 @@ tags:
   - components
 ---
 
+> **注意**: このコンポーネントは現在未実装です。
+> 実装時にはこのドキュメントを参考に、`src/features/visualization/components/` 配下に作成してください。
+
 # 比較グラフコンポーネント
 
 ## 概要
 
-比較グラフコンポーネントは、ダッシュボードで複数のデータを比較表示するためのコンポーネントです。全国・都道府県・市区町村の3階層すべてで使用でき、ランキング表示や積み上げ表示などの機能を提供します。
+比較グラフコンポーネントは、ダッシュボードで複数のデータを比較表示するためのコンポーネントです。全国・都道府県・市区町村の 3 階層すべてで使用でき、ランキング表示や積み上げ表示などの機能を提供します。
 
 ## コンポーネント一覧
 
@@ -75,7 +78,7 @@ interface StackedBarChartProps {
 
 ```typescript
 // src/components/dashboard/StackedBarChart.tsx
-import React from 'react';
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -84,9 +87,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { formatNumber } from '@/infrastructure/utils/format';
+  ResponsiveContainer,
+} from "recharts";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   data,
@@ -97,7 +100,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   showLegend = true,
   showTooltip = true,
   showGrid = true,
-  showValues = false
+  showValues = false,
 }) => {
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
@@ -109,15 +112,15 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             <XAxis type="number" tickFormatter={formatNumber} />
             <YAxis dataKey="name" type="category" width={100} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any, name: string) => [
-                  formatNumber(value), 
-                  series.find(s => s.key === name)?.name || name
+                  formatNumber(value),
+                  series.find((s) => s.key === name)?.name || name,
                 ]}
               />
             )}
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Bar
                 key={serie.key}
                 dataKey={serie.key}
@@ -133,15 +136,15 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             <XAxis dataKey="name" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any, name: string) => [
-                  formatNumber(value), 
-                  series.find(s => s.key === name)?.name || name
+                  formatNumber(value),
+                  series.find((s) => s.key === name)?.name || name,
                 ]}
               />
             )}
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Bar
                 key={serie.key}
                 dataKey={serie.key}
@@ -211,8 +214,8 @@ interface RankingChartProps {
 
 ```typescript
 // src/components/dashboard/RankingChart.tsx
-import React from 'react';
-import { formatNumber } from '@/infrastructure/utils/format';
+import React from "react";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 export const RankingChart: React.FC<RankingChartProps> = ({
   data,
@@ -222,21 +225,21 @@ export const RankingChart: React.FC<RankingChartProps> = ({
   showPercentages = true,
   showTrend = false,
   height = 400,
-  onItemClick
+  onItemClick,
 }) => {
   const displayData = data.slice(0, maxItems);
-  const maxValue = Math.max(...displayData.map(item => item.value));
-  
+  const maxValue = Math.max(...displayData.map((item) => item.value));
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
-      <div 
+      <div
         className="space-y-2 overflow-y-auto"
         style={{ height: height - 60 }}
       >
         {displayData.map((item, index) => (
-          <div 
-            key={item.name} 
+          <div
+            key={item.name}
             className="flex items-center space-x-3 p-2 hover:bg-gray-50 dark:hover:bg-neutral-700 rounded cursor-pointer"
             onClick={() => onItemClick?.(item)}
           >
@@ -257,7 +260,7 @@ export const RankingChart: React.FC<RankingChartProps> = ({
                   className="h-2 rounded-full"
                   style={{
                     width: `${(item.value / maxValue) * 100}%`,
-                    backgroundColor: item.color || '#3b82f6'
+                    backgroundColor: item.color || "#3b82f6",
                   }}
                 />
               </div>
@@ -289,7 +292,7 @@ interface ComparisonChartProps {
     color?: string;
   }>;
   title: string;
-  chartType?: 'bar' | 'line' | 'area';
+  chartType?: "bar" | "line" | "area";
   height?: number;
   showLegend?: boolean;
   showTooltip?: boolean;
@@ -328,7 +331,7 @@ interface ComparisonChartProps {
 
 ```typescript
 // src/components/dashboard/ComparisonChart.tsx
-import React from 'react';
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -341,90 +344,90 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { formatNumber } from '@/infrastructure/utils/format';
+  ResponsiveContainer,
+} from "recharts";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 export const ComparisonChart: React.FC<ComparisonChartProps> = ({
   data,
   title,
-  chartType = 'bar',
+  chartType = "bar",
   height = 400,
   showLegend = true,
   showTooltip = true,
   showGrid = true,
-  onItemClick
+  onItemClick,
 }) => {
   const renderChart = () => {
     const commonProps = {
       data,
-      height: height - 60
+      height: height - 60,
     };
-    
+
     switch (chartType) {
-      case 'bar':
+      case "bar":
         return (
           <BarChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="name" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip formatter={(value: any) => [formatNumber(value), '']} />
+              <Tooltip formatter={(value: any) => [formatNumber(value), ""]} />
             )}
             {showLegend && <Legend />}
-            <Bar 
-              dataKey="value" 
+            <Bar
+              dataKey="value"
               fill="#3b82f6"
               onClick={(data) => onItemClick?.(data)}
             />
           </BarChart>
         );
-      
-      case 'line':
+
+      case "line":
         return (
           <LineChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="name" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip formatter={(value: any) => [formatNumber(value), '']} />
+              <Tooltip formatter={(value: any) => [formatNumber(value), ""]} />
             )}
             {showLegend && <Legend />}
-            <Line 
-              type="monotone" 
-              dataKey="value" 
-              stroke="#3b82f6" 
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke="#3b82f6"
               strokeWidth={2}
               dot={{ r: 4 }}
             />
           </LineChart>
         );
-      
-      case 'area':
+
+      case "area":
         return (
           <AreaChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="name" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip formatter={(value: any) => [formatNumber(value), '']} />
+              <Tooltip formatter={(value: any) => [formatNumber(value), ""]} />
             )}
             {showLegend && <Legend />}
-            <Area 
-              type="monotone" 
-              dataKey="value" 
-              stroke="#3b82f6" 
-              fill="#3b82f6" 
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="#3b82f6"
+              fill="#3b82f6"
               fillOpacity={0.3}
             />
           </AreaChart>
         );
-      
+
       default:
         return null;
     }
   };
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -458,7 +461,7 @@ interface TrendComparisonChartProps {
   showLegend?: boolean;
   showTooltip?: boolean;
   showGrid?: boolean;
-  chartType?: 'line' | 'area' | 'bar';
+  chartType?: "line" | "area" | "bar";
 }
 ```
 
@@ -496,7 +499,7 @@ interface TrendComparisonChartProps {
 
 ```typescript
 // src/components/dashboard/TrendComparisonChart.tsx
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -509,9 +512,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { formatNumber } from '@/infrastructure/utils/format';
+  ResponsiveContainer,
+} from "recharts";
+import { formatNumber } from "@/infrastructure/utils/format";
 
 export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
   data,
@@ -521,32 +524,32 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
   showLegend = true,
   showTooltip = true,
   showGrid = true,
-  chartType = 'line'
+  chartType = "line",
 }) => {
   const renderChart = () => {
     const commonProps = {
       data,
-      height: height - 60
+      height: height - 60,
     };
-    
+
     switch (chartType) {
-      case 'line':
+      case "line":
         return (
           <LineChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="year" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any, name: string) => [
-                  formatNumber(value), 
-                  series.find(s => s.key === name)?.name || name
+                  formatNumber(value),
+                  series.find((s) => s.key === name)?.name || name,
                 ]}
                 labelFormatter={(label) => `${label}年`}
               />
             )}
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Line
                 key={serie.key}
                 type="monotone"
@@ -559,24 +562,24 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
             ))}
           </LineChart>
         );
-      
-      case 'area':
+
+      case "area":
         return (
           <AreaChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="year" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any, name: string) => [
-                  formatNumber(value), 
-                  series.find(s => s.key === name)?.name || name
+                  formatNumber(value),
+                  series.find((s) => s.key === name)?.name || name,
                 ]}
                 labelFormatter={(label) => `${label}年`}
               />
             )}
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Area
                 key={serie.key}
                 type="monotone"
@@ -589,24 +592,24 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
             ))}
           </AreaChart>
         );
-      
-      case 'bar':
+
+      case "bar":
         return (
           <BarChart {...commonProps}>
             <CartesianGrid strokeDasharray="3 3" opacity={showGrid ? 0.3 : 0} />
             <XAxis dataKey="year" />
             <YAxis tickFormatter={formatNumber} />
             {showTooltip && (
-              <Tooltip 
+              <Tooltip
                 formatter={(value: any, name: string) => [
-                  formatNumber(value), 
-                  series.find(s => s.key === name)?.name || name
+                  formatNumber(value),
+                  series.find((s) => s.key === name)?.name || name,
                 ]}
                 labelFormatter={(label) => `${label}年`}
               />
             )}
             {showLegend && <Legend />}
-            {series.map(serie => (
+            {series.map((serie) => (
               <Bar
                 key={serie.key}
                 dataKey={serie.key}
@@ -616,12 +619,12 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
             ))}
           </BarChart>
         );
-      
+
       default:
         return null;
     }
   };
-  
+
   return (
     <div className="bg-white dark:bg-neutral-800 rounded-lg border p-4">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
@@ -639,45 +642,54 @@ export const TrendComparisonChart: React.FC<TrendComparisonChartProps> = ({
 
 ```typescript
 // src/hooks/useRankingData.ts
-import { useState, useEffect } from 'react';
-import { RankingDataService } from '@/infrastructure/services/RankingDataService';
+import { useState, useEffect } from "react";
+import { RankingDataService } from "@/infrastructure/services/RankingDataService";
 
 export function useRankingData(
-  areaLevel: 'national' | 'prefecture' | 'municipality',
+  areaLevel: "national" | "prefecture" | "municipality",
   areaCode: string,
   metric: string
 ) {
   const [data, setData] = useState<RankingItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         let result;
-        if (areaLevel === 'national') {
-          result = await RankingDataService.getPrefectureRanking(areaCode, metric);
-        } else if (areaLevel === 'prefecture') {
-          result = await RankingDataService.getMunicipalityRanking(areaCode, metric);
-        } else if (areaLevel === 'municipality') {
-          result = await RankingDataService.getNeighboringMunicipalityRanking(areaCode, metric);
+        if (areaLevel === "national") {
+          result = await RankingDataService.getPrefectureRanking(
+            areaCode,
+            metric
+          );
+        } else if (areaLevel === "prefecture") {
+          result = await RankingDataService.getMunicipalityRanking(
+            areaCode,
+            metric
+          );
+        } else if (areaLevel === "municipality") {
+          result = await RankingDataService.getNeighboringMunicipalityRanking(
+            areaCode,
+            metric
+          );
         }
-        
+
         setData(result);
       } catch (err) {
         setError(err as Error);
-        console.error('Ranking data fetch error:', err);
+        console.error("Ranking data fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [areaLevel, areaCode, metric]);
-  
+
   return { data, loading, error };
 }
 ```
@@ -686,45 +698,55 @@ export function useRankingData(
 
 ```typescript
 // src/hooks/useComparisonData.ts
-import { useState, useEffect } from 'react';
-import { ComparisonDataService } from '@/infrastructure/services/ComparisonDataService';
+import { useState, useEffect } from "react";
+import { ComparisonDataService } from "@/infrastructure/services/ComparisonDataService";
 
 export function useComparisonData(
-  areaLevel: 'national' | 'prefecture' | 'municipality',
+  areaLevel: "national" | "prefecture" | "municipality",
   areaCode: string,
   metric: string
 ) {
   const [data, setData] = useState<ComparisonItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         let result;
-        if (areaLevel === 'national') {
-          result = await ComparisonDataService.getPrefectureComparison(areaCode, metric);
-        } else if (areaLevel === 'prefecture') {
-          result = await ComparisonDataService.getMunicipalityComparison(areaCode, metric);
-        } else if (areaLevel === 'municipality') {
-          result = await ComparisonDataService.getNeighboringMunicipalityComparison(areaCode, metric);
+        if (areaLevel === "national") {
+          result = await ComparisonDataService.getPrefectureComparison(
+            areaCode,
+            metric
+          );
+        } else if (areaLevel === "prefecture") {
+          result = await ComparisonDataService.getMunicipalityComparison(
+            areaCode,
+            metric
+          );
+        } else if (areaLevel === "municipality") {
+          result =
+            await ComparisonDataService.getNeighboringMunicipalityComparison(
+              areaCode,
+              metric
+            );
         }
-        
+
         setData(result);
       } catch (err) {
         setError(err as Error);
-        console.error('Comparison data fetch error:', err);
+        console.error("Comparison data fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [areaLevel, areaCode, metric]);
-  
+
   return { data, loading, error };
 }
 ```
@@ -733,11 +755,11 @@ export function useComparisonData(
 
 ```typescript
 // src/hooks/useTrendComparisonData.ts
-import { useState, useEffect } from 'react';
-import { TrendComparisonDataService } from '@/infrastructure/services/TrendComparisonDataService';
+import { useState, useEffect } from "react";
+import { TrendComparisonDataService } from "@/infrastructure/services/TrendComparisonDataService";
 
 export function useTrendComparisonData(
-  areaLevel: 'national' | 'prefecture' | 'municipality',
+  areaLevel: "national" | "prefecture" | "municipality",
   areaCode: string,
   metric: string,
   years: string[]
@@ -745,41 +767,56 @@ export function useTrendComparisonData(
   const [data, setData] = useState<TrendComparisonItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         let result;
-        if (areaLevel === 'national') {
-          result = await TrendComparisonDataService.getPrefectureTrendComparison(areaCode, metric, years);
-        } else if (areaLevel === 'prefecture') {
-          result = await TrendComparisonDataService.getMunicipalityTrendComparison(areaCode, metric, years);
-        } else if (areaLevel === 'municipality') {
-          result = await TrendComparisonDataService.getNeighboringMunicipalityTrendComparison(areaCode, metric, years);
+        if (areaLevel === "national") {
+          result =
+            await TrendComparisonDataService.getPrefectureTrendComparison(
+              areaCode,
+              metric,
+              years
+            );
+        } else if (areaLevel === "prefecture") {
+          result =
+            await TrendComparisonDataService.getMunicipalityTrendComparison(
+              areaCode,
+              metric,
+              years
+            );
+        } else if (areaLevel === "municipality") {
+          result =
+            await TrendComparisonDataService.getNeighboringMunicipalityTrendComparison(
+              areaCode,
+              metric,
+              years
+            );
         }
-        
+
         setData(result);
       } catch (err) {
         setError(err as Error);
-        console.error('Trend comparison data fetch error:', err);
+        console.error("Trend comparison data fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [areaLevel, areaCode, metric, years]);
-  
+
   return { data, loading, error };
 }
 ```
 
 ## アクセシビリティ
 
-### 1. セマンティックHTML
+### 1. セマンティック HTML
 
 ```typescript
 // アクセシブルな比較グラフ
@@ -792,9 +829,7 @@ export function AccessibleStackedBarChart(props: StackedBarChartProps) {
     >
       <h3 className="text-lg font-semibold mb-4">{props.title}</h3>
       <ResponsiveContainer width="100%" height={props.height}>
-        <BarChart data={props.data}>
-          {/* グラフの実装 */}
-        </BarChart>
+        <BarChart data={props.data}>{/* グラフの実装 */}</BarChart>
       </ResponsiveContainer>
     </div>
   );
@@ -807,28 +842,28 @@ export function AccessibleStackedBarChart(props: StackedBarChartProps) {
 // キーボードで操作可能なランキングチャート
 export function KeyboardNavigableRankingChart(props: RankingChartProps) {
   const [focusedItem, setFocusedItem] = useState<number | null>(null);
-  
+
   const handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
-      case 'ArrowDown':
-        setFocusedItem(prev => 
+      case "ArrowDown":
+        setFocusedItem((prev) =>
           prev === null ? 0 : Math.min(prev + 1, props.data.length - 1)
         );
         break;
-      case 'ArrowUp':
-        setFocusedItem(prev => 
+      case "ArrowUp":
+        setFocusedItem((prev) =>
           prev === null ? props.data.length - 1 : Math.max(prev - 1, 0)
         );
         break;
-      case 'Enter':
-      case ' ':
+      case "Enter":
+      case " ":
         if (focusedItem !== null && props.onItemClick) {
           props.onItemClick(props.data[focusedItem]);
         }
         break;
     }
   };
-  
+
   return (
     <div
       role="list"
@@ -849,21 +884,21 @@ export function KeyboardNavigableRankingChart(props: RankingChartProps) {
 
 ```typescript
 // StackedBarChart.test.tsx
-import { render, screen } from '@testing-library/react';
-import { StackedBarChart } from './StackedBarChart';
+import { render, screen } from "@testing-library/react";
+import { StackedBarChart } from "./StackedBarChart";
 
-describe('StackedBarChart', () => {
+describe("StackedBarChart", () => {
   const mockData = [
-    { name: '東京都', male: 1000000, female: 1100000 },
-    { name: '大阪府', male: 800000, female: 900000 }
+    { name: "東京都", male: 1000000, female: 1100000 },
+    { name: "大阪府", male: 800000, female: 900000 },
   ];
-  
+
   const mockSeries = [
-    { key: 'male', name: '男性', color: '#3b82f6' },
-    { key: 'female', name: '女性', color: '#ec4899' }
+    { key: "male", name: "男性", color: "#3b82f6" },
+    { key: "female", name: "女性", color: "#ec4899" },
   ];
-  
-  it('should render title and chart', () => {
+
+  it("should render title and chart", () => {
     render(
       <StackedBarChart
         data={mockData}
@@ -871,12 +906,12 @@ describe('StackedBarChart', () => {
         series={mockSeries}
       />
     );
-    
-    expect(screen.getByText('都道府県別人口構成')).toBeInTheDocument();
-    expect(screen.getByRole('img')).toBeInTheDocument();
+
+    expect(screen.getByText("都道府県別人口構成")).toBeInTheDocument();
+    expect(screen.getByRole("img")).toBeInTheDocument();
   });
-  
-  it('should show legend when enabled', () => {
+
+  it("should show legend when enabled", () => {
     render(
       <StackedBarChart
         data={mockData}
@@ -885,12 +920,12 @@ describe('StackedBarChart', () => {
         showLegend={true}
       />
     );
-    
-    expect(screen.getByText('男性')).toBeInTheDocument();
-    expect(screen.getByText('女性')).toBeInTheDocument();
+
+    expect(screen.getByText("男性")).toBeInTheDocument();
+    expect(screen.getByText("女性")).toBeInTheDocument();
   });
-  
-  it('should be accessible', () => {
+
+  it("should be accessible", () => {
     render(
       <StackedBarChart
         data={mockData}
@@ -898,9 +933,11 @@ describe('StackedBarChart', () => {
         series={mockSeries}
       />
     );
-    
-    expect(screen.getByRole('img')).toBeInTheDocument();
-    expect(screen.getByLabelText('都道府県別人口構成の積み上げ棒グラフ')).toBeInTheDocument();
+
+    expect(screen.getByRole("img")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("都道府県別人口構成の積み上げ棒グラフ")
+    ).toBeInTheDocument();
   });
 });
 ```
@@ -909,34 +946,34 @@ describe('StackedBarChart', () => {
 
 ```typescript
 // useRankingData.test.ts
-import { renderHook, waitFor } from '@testing-library/react';
-import { useRankingData } from './useRankingData';
+import { renderHook, waitFor } from "@testing-library/react";
+import { useRankingData } from "./useRankingData";
 
-describe('useRankingData', () => {
-  it('should fetch ranking data successfully', async () => {
-    const { result } = renderHook(() => 
-      useRankingData('national', '00000', 'population')
+describe("useRankingData", () => {
+  it("should fetch ranking data successfully", async () => {
+    const { result } = renderHook(() =>
+      useRankingData("national", "00000", "population")
     );
-    
+
     expect(result.current.loading).toBe(true);
-    
+
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    
+
     expect(result.current.data).toBeDefined();
     expect(Array.isArray(result.current.data)).toBe(true);
   });
-  
-  it('should handle errors gracefully', async () => {
-    const { result } = renderHook(() => 
-      useRankingData('invalid', '00000', 'population')
+
+  it("should handle errors gracefully", async () => {
+    const { result } = renderHook(() =>
+      useRankingData("invalid", "00000", "population")
     );
-    
+
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    
+
     expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
   });
@@ -947,11 +984,11 @@ describe('useRankingData', () => {
 
 比較グラフコンポーネントは、ダッシュボードで複数のデータを比較表示するための重要なコンポーネントです。主な特徴は以下の通りです：
 
-1. **3階層対応**: 全国・都道府県・市区町村の3階層すべてで使用可能
+1. **3 階層対応**: 全国・都道府県・市区町村の 3 階層すべてで使用可能
 2. **多様な表示形式**: 積み上げ棒グラフ、ランキング、比較グラフ、トレンド比較
 3. **インタラクティブ機能**: クリック、ホバー、キーボードナビゲーション
 4. **カスタマイズ性**: 色、サイズ、表示オプションの柔軟な設定
-5. **アクセシビリティ**: セマンティックHTMLとキーボードナビゲーション対応
+5. **アクセシビリティ**: セマンティック HTML とキーボードナビゲーション対応
 6. **エラーハンドリング**: ローディング・エラー状態の適切な表示
 
 これらのコンポーネントにより、ユーザーは複数の地域や指標を効率的に比較し、データの傾向や関係性を理解することができます。
