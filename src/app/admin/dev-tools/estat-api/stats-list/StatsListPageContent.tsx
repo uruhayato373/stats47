@@ -4,11 +4,13 @@ import { useCallback, useState } from "react";
 
 import { List } from "lucide-react";
 
-import { StatsFieldSidebar } from "@/components/organisms/estat-api/stats-list/StatsFieldSidebar";
-import { StatsListResults } from "@/components/organisms/estat-api/stats-list/StatsListResults";
-import { StatsListSearch } from "@/components/organisms/estat-api/stats-list/StatsListSearch";
-import { StatsTableDetailModal } from "@/components/organisms/estat-api/stats-list/StatsTableDetailModal";
 import { EstatAPIPageLayout } from "@/components/templates/EstatAPIPageLayout";
+import {
+  StatsFieldSidebar,
+  StatsListResults,
+  StatsListSearch,
+  StatsTableDetailModal,
+} from "@/features/estat-api/stats-list/components";
 
 import {
   DetailedStatsListTableInfo,
