@@ -1,5 +1,5 @@
 import { EstatMetaInfoRepository } from "@/lib/database/estat/repositories";
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 
 import MetaInfoPageContent from "./MetaInfoPageContent";
 
@@ -23,10 +23,15 @@ export default async function EstatMetadataPage() {
   });
 
   // mock環境の場合は初期統計表IDを設定
-  const config = getEnvironmentConfig();
+  const config = buildEnvironmentConfig();
   console.log("[page.tsx] Environment config:", config);
   const initialStatsId = config.isMock ? "0000010101" : undefined;
   console.log("[page.tsx] initialStatsId:", initialStatsId);
 
-  return <MetaInfoPageContent savedStatsList={savedStatsList} initialStatsId={initialStatsId} />;
+  return (
+    <MetaInfoPageContent
+      savedStatsList={savedStatsList}
+      initialStatsId={initialStatsId}
+    />
+  );
 }

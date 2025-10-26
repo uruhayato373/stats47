@@ -1,14 +1,14 @@
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 
 /**
  * 開発環境用のローカルD1データベースクライアント
  * Cloudflare WranglerのローカルD1を使用
  */
 export const createLocalD1Database = async () => {
-  const config = getEnvironmentConfig();
-  
+  const config = buildEnvironmentConfig();
+
   // 開発環境ではローカルD1を使用
-  if (config.isDevelopment) {
+  if (config.environment === "development") {
     // ローカルD1のパスを取得
     const localD1Path =
       process.env.LOCAL_D1_PATH ||

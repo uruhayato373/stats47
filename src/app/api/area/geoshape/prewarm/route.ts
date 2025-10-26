@@ -7,12 +7,12 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-import { AutoCacheGeoShapeLoader } from "@/lib/area/geoshape/auto-cache-loader";
+import { AutoCacheGeoShapeLoader } from "@/features/gis/geoshape/loaders/auto-cache-loader";
 import type {
   PrewarmRequest,
   PrewarmResponse,
   PrewarmResult,
-} from "@/lib/area/geoshape/types";
+} from "@/features/gis/geoshape/types";
 
 export async function POST(request: NextRequest) {
   const startTime = performance.now();

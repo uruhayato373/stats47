@@ -18,7 +18,7 @@ export type {
 } from "./types";
 
 // エラークラス
-export { CacheError, DataSourceError, GeoshapeError } from "./types";
+export { GeoShapeError } from "./types";
 
 // 設定
 export {
@@ -26,7 +26,6 @@ export {
   buildR2Key,
   geoshapeConfig,
   isMockEnvironment,
-  resolutionFileMap,
 } from "./config/geoshape-config";
 
 // リポジトリ（純粋な関数）

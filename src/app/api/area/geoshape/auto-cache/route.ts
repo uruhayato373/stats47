@@ -7,7 +7,10 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-import type { R2SaveRequest, R2SaveResponse } from "@/lib/area/geoshape/types";
+import type {
+  R2SaveRequest,
+  R2SaveResponse,
+} from "@/features/gis/geoshape/types";
 
 export async function POST(request: NextRequest) {
   try {

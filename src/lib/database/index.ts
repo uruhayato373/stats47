@@ -1,9 +1,8 @@
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 
 import { createLocalD1Database } from "./local";
 import { mockDataProvider } from "./mock";
 import { createRemoteD1Database } from "./remote";
-
 
 /**
  * 環境に応じて適切なD1クライアントを作成
@@ -22,7 +21,7 @@ export const createD1Database = async (useRemote = false) => {
  * 環境に応じて適切なデータプロバイダーを取得
  */
 export const getDataProvider = async () => {
-  const config = getEnvironmentConfig();
+  const config = buildEnvironmentConfig();
 
   if (config.isMock) {
     return mockDataProvider;
@@ -41,7 +40,7 @@ export const getDataProvider = async () => {
 };
 
 // 後方互換性のため個別エクスポートも提供
-export { createRemoteD1Database, createLocalD1Database, mockDataProvider };
+export { createLocalD1Database, createRemoteD1Database, mockDataProvider };
 
 // ストレージサブドメイン
 export * from "./storage";

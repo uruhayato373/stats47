@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 import { estatAPI } from "@/lib/estat-api";
 
 import { getMockMetaInfo } from "@data/mock/metainfo";
@@ -28,7 +28,7 @@ export async function GET(
     }
 
     // 環境設定を取得
-    const config = getEnvironmentConfig();
+    const config = buildEnvironmentConfig();
     console.log(`[${config.environment}] メタ情報取得リクエスト:`, statsDataId);
 
     let metaInfo;

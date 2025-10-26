@@ -4,31 +4,33 @@
 export type Environment = "development" | "staging" | "production";
 
 /**
+ * 環境設定の型定義
+ */
+export interface EnvironmentConfig {
+  environment: Environment;
+  isMock: boolean;
+}
+
+/**
  * 現在の環境を取得
  */
-export function getEnvironment(): Environment {
+export function detectEnvironment(): Environment {
   return (process.env.NODE_ENV as Environment) || "development";
 }
 
 /**
  * モックデータを使用するかどうか
  */
-export function useMockData(): boolean {
+export function isMockDataEnabled(): boolean {
   return process.env.NEXT_PUBLIC_USE_MOCK === "true";
 }
 
 /**
- * 環境別の設定を取得
+ * 環境別の設定を構築
  */
-export function getEnvironmentConfig() {
-  const env = getEnvironment();
-  const isMock = useMockData();
-
+export function buildEnvironmentConfig(): EnvironmentConfig {
   return {
-    environment: env,
-    isMock,
-    isProduction: env === "production",
-    isDevelopment: env === "development",
-    isStaging: env === "staging",
+    environment: detectEnvironment(),
+    isMock: isMockDataEnabled(),
   };
 }

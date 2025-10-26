@@ -9,13 +9,13 @@
  * 5. 次回以降はR2から高速配信
  */
 
-import { GEOSHAPE_CONFIG } from "./config";
+import { GEOSHAPE_CONFIG } from "../config/geoshape-config";
 import {
   convertTopoJsonToGeoJson,
   validateTopoJson,
-} from "./utils/topojson-converter";
+} from "../utils/topojson-converter";
 
-import type { GeoShapeDataLevel, LoadResult, PrewarmResult } from "./types";
+import type { GeoShapeDataLevel, PrewarmResult } from "../types/index";
 
 export class AutoCacheGeoShapeLoader {
   private static memoryCache = new Map<string, any>();
@@ -201,7 +201,7 @@ export class AutoCacheGeoShapeLoader {
         throw new Error(`R2 save failed: ${response.statusText}`);
       }
 
-      const result = await response.json();
+      const result = (await response.json()) as { size: number };
       console.log(`[AutoCache] Saved ${result.size} bytes to R2`);
     } catch (error) {
       // エラーでもユーザー体験に影響しないため、ログのみ

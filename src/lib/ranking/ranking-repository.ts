@@ -12,7 +12,7 @@ import { findSubcategoryById } from "@/features/category";
 
 import { getDataProvider } from "@/lib/database";
 import { mockDataProvider } from "@/lib/database/mock";
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 import { RankingItem, RankingItemDB } from "@/lib/ranking/types";
 
 import { convertRankingItemFromDB } from "./ranking-converters";
@@ -43,7 +43,7 @@ export class RankingRepository {
    * ファクトリーメソッド
    */
   static async create(): Promise<RankingRepository> {
-    const config = getEnvironmentConfig();
+    const config = buildEnvironmentConfig();
 
     if (config.isMock) {
       console.log(
@@ -64,7 +64,7 @@ export class RankingRepository {
    * database/index.ts の fetchRankingItems() を置き換え
    */
   async fetchRankingItems(options?: { limit?: number }): Promise<any[]> {
-    const config = getEnvironmentConfig();
+    const config = buildEnvironmentConfig();
     const { limit = 10 } = options || {};
 
     try {
@@ -99,7 +99,7 @@ export class RankingRepository {
     limit?: number;
     rankingKey?: string;
   }): Promise<any[]> {
-    const config = getEnvironmentConfig();
+    const config = buildEnvironmentConfig();
     const { limit = 50, rankingKey } = options || {};
 
     try {

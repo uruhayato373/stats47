@@ -25,17 +25,27 @@ export { AreaError, DataSourceError } from "./types";
 // ユーティリティ
 // ============================================================================
 export {
-  areaCodeToPrefectureCode,
-  detectMunicipalityType,
-  isValidPrefectureCode,
+  areAllCodesValid,
+  createAreaFilter,
+  extractPrefectureCode,
+  getAreaType,
+  getDesignatedCityCode,
+  getParentPrefectureCode,
+  isDesignatedCityWard,
   normalizeAreaCode,
-  prefectureCodeToAreaCode,
-} from "./utils/code-validator";
+  normalizePrefectureCode,
+  validateArea,
+  validateAreaCode,
+  validateAreaCodes,
+  validateMunicipalityCode,
+  validatePrefectureCode,
+  validatePrefectureName,
+} from "./utils/code-converter";
 
 // ============================================================================
 // リポジトリ
 // ============================================================================
-export { AreaRepository } from "./repositories/area-repository";
+export * from "./repositories/area-repository";
 
 // ============================================================================
 // サービス

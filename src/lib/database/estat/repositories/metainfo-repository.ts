@@ -1,15 +1,15 @@
 import { getDataProvider } from "@/lib/database";
 import { mockDataProvider, MockDataProvider } from "@/lib/database/mock";
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 import type { AreaType } from "@/lib/ranking/types";
 
 import type {
   EstatMetaInfo,
-  SaveEstatMetaInfoInput,
-  EstatMetaInfoSearchResult,
-  EstatMetaInfoSummary,
   EstatMetaInfoListOptions,
   EstatMetaInfoSearchOptions,
+  EstatMetaInfoSearchResult,
+  EstatMetaInfoSummary,
+  SaveEstatMetaInfoInput,
 } from "../types/metainfo";
 
 /**
@@ -50,7 +50,7 @@ export class EstatMetaInfoRepository {
    * 環境に応じた適切なリポジトリインスタンスを作成
    */
   static async create(): Promise<EstatMetaInfoRepository> {
-    const config = getEnvironmentConfig();
+    const config = buildEnvironmentConfig();
 
     if (config.isMock) {
       console.log(

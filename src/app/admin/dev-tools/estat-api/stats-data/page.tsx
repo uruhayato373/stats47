@@ -7,7 +7,7 @@
  * @module EstatDataPage
  */
 
-import { getEnvironmentConfig } from "@/lib/env";
+import { buildEnvironmentConfig } from "@/lib/env";
 import { estatAPI } from "@/lib/estat-api";
 
 import { getMockStatsData } from "@data/mock/statsdata";
@@ -24,7 +24,7 @@ import StatsDataPageContent from "./StatsDataPageContent";
  * @returns {Promise<React.ReactElement>} レンダリングされたページコンポーネント
  */
 export default async function Page(): Promise<React.ReactElement> {
-  const config = getEnvironmentConfig();
+  const config = buildEnvironmentConfig();
   let initialData = null;
 
   const defaultParams = {
