@@ -1,6 +1,7 @@
 "use client";
 
 import { MetaInfoPageView } from "@/features/estat-api/meta-info/components/MetaInfoPageView";
+
 import { useMetaInfoPage } from "@/hooks/estat-api/useMetaInfoPage";
 
 /**
