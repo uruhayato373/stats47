@@ -495,7 +495,7 @@ export const resetMockServer = () => {
 
 ### 3. テストでの使用
 
-`src/test/setup-msw.ts`
+`src/config/test.setup-msw.ts`
 
 ```typescript
 import { beforeAll, afterEach, afterAll } from "vitest";

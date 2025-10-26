@@ -58,7 +58,7 @@ import {
   fetchPrefectureTopology,
   fetchMunicipalityTopology,
 } from "@/features/gis/geoshape/services/geoshape-service";
-import { ChoroplethData, ChoroplethConfig } from "@/types/visualization";
+import { ChoroplethData, ChoroplethConfig } from "<!-- NOTE: src/types/visualization は2025年10月26日に削除されました。必要になった場合は src/features/visualization/core/types/ に再実装してください。 -->";
 import { createProjection } from "@/infrastructure/visualization/d3js/choropleth/projection";
 import { createColorScale } from "@/infrastructure/visualization/d3js/choropleth/color-scale";
 import { setupInteractions } from "@/infrastructure/visualization/d3js/choropleth/interactions";
@@ -289,7 +289,7 @@ export function createAlternativeProjection(
 // src/infrastructure/visualization/d3js/choropleth/color-scale.ts
 
 import * as d3 from "d3";
-import { ChoroplethData } from "@/types/visualization";
+import { ChoroplethData } from "<!-- NOTE: src/types/visualization は2025年10月26日に削除されました。必要になった場合は src/features/visualization/core/types/ に再実装してください。 -->";
 
 export function createColorScale(
   data: ChoroplethData[],
@@ -340,7 +340,7 @@ function getColorInterpolator(scheme: string): (t: number) => string {
 // src/infrastructure/visualization/d3js/choropleth/interactions.ts
 
 import * as d3 from "d3";
-import { ChoroplethData } from "@/types/visualization";
+import { ChoroplethData } from "<!-- NOTE: src/types/visualization は2025年10月26日に削除されました。必要になった場合は src/features/visualization/core/types/ に再実装してください。 -->";
 
 export function setupInteractions(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
@@ -385,7 +385,7 @@ export function setupInteractions(
 // src/infrastructure/visualization/d3js/choropleth/accessibility.ts
 
 import * as d3 from "d3";
-import { ChoroplethData } from "@/types/visualization";
+import { ChoroplethData } from "<!-- NOTE: src/types/visualization は2025年10月26日に削除されました。必要になった場合は src/features/visualization/core/types/ に再実装してください。 -->";
 
 export function setupAccessibility(
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,

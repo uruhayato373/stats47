@@ -36,7 +36,7 @@ export default defineConfig({
   test: {
     environment: "node",
     globals: true,
-    setupFiles: ["./src/test/setup.ts"],
+    setupFiles: ["./src/config/test.setup.ts"],
   },
   resolve: {
     alias: {
@@ -48,7 +48,7 @@ export default defineConfig({
 
 ### 3. テストセットアップ
 
-`src/test/setup.ts`
+`src/config/test.setup.ts`
 
 ```typescript
 // 環境変数の設定

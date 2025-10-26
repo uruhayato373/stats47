@@ -839,7 +839,7 @@ import { StatisticsSummary } from "@/components/ranking/ui/StatisticsSummary";
 +import { EstatYearSelector } from "@/components/estat/EstatYearSelector";
 import { RankingHeader } from "@/components/ranking/ui/RankingHeader";
 // import { PrefectureDataTableClient } from "@/components/ranking/ui/PrefectureDataTableClient"; // 削除済み
-import { RankingVisualizationOptions } from "@/types/visualization/ranking-options";
+import { RankingVisualizationOptions } from "<!-- NOTE: src/types/visualization は2025年10月26日に削除されました。必要になった場合は src/features/visualization/core/types/ に再実装してください。 -->/ranking-options";
 import { Modal } from "@/components/common/Modal/Modal";
 import {
   RankingItemSettings,

@@ -2,8 +2,6 @@
  * サブカテゴリページコンポーネントの共通型定義
  */
 
-import { CategoryData, SubcategoryData } from "../visualization/choropleth";
-
 /**
  * サブカテゴリーの設定情報（categories.json構造）
  */
@@ -34,23 +32,4 @@ export interface CategoryConfig {
  */
 export interface SubcategoryDashboardPageProps {
   areaCode: string; // "00000" = 全国, その他 = 都道府県
-}
-
-/**
- * 標準的なサブカテゴリページのProps（後方互換性のため維持）
- * @deprecated 使用されていません
- */
-export interface SubcategoryPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-}
-
-/**
- * 都道府県別ページのProps（後方互換性のため維持）
- * @deprecated 使用されていません
- */
-export interface SubcategoryAreaPageProps {
-  category: CategoryData;
-  subcategory: SubcategoryData;
-  areaCode: string;
 }
