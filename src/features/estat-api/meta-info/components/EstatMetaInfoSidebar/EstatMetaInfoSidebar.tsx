@@ -8,8 +8,8 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationPrevious,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/atoms/ui/pagination";
 
 import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
@@ -173,14 +173,14 @@ export default function EstatMetaInfoSidebar({
               }
             />
           </PaginationItem>
-          
+
           {/* ページ情報 */}
           <PaginationItem>
             <span className="text-sm text-muted-foreground">
               {currentPage} / {totalPages}
             </span>
           </PaginationItem>
-          
+
           <PaginationItem>
             <PaginationNext
               onClick={() =>
