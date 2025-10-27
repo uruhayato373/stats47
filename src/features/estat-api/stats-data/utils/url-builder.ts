@@ -1,24 +1,42 @@
-import { DynamicField, FormData } from "../types";
+import { StatsDataFormValues } from "../schemas/stats-data-form.schema";
 
 /**
- * フォームデータと動的フィールドからURLパラメータを構築
- * @param formData - 基本フォームデータ
- * @param dynamicFields - 動的フィールド配列
+ * フォームデータからURLパラメータを構築
+ * @param values - フォームデータ
  * @returns 構築されたURLSearchParams
  */
 export function buildStatsDataUrlParams(
-  formData: FormData,
-  dynamicFields: DynamicField[]
+  values: StatsDataFormValues
 ): URLSearchParams {
   const urlParams = new URLSearchParams();
 
-  urlParams.set("statsDataId", formData.statsDataId);
-  if (formData.cdCat01) urlParams.set("cdCat01", formData.cdCat01);
+  urlParams.set("statsDataId", values.statsDataId);
+  if (values.cdCat01) urlParams.set("cdCat01", values.cdCat01);
 
   // 動的フィールドの値を追加
-  dynamicFields.forEach((field) => {
-    if (field.value) {
-      urlParams.set(field.id, field.value);
+  const dynamicFields = [
+    "cdTime",
+    "cdArea",
+    "cdCat02",
+    "cdCat03",
+    "cdCat04",
+    "cdCat05",
+    "cdCat06",
+    "cdCat07",
+    "cdCat08",
+    "cdCat09",
+    "cdCat10",
+    "cdCat11",
+    "cdCat12",
+    "cdCat13",
+    "cdCat14",
+    "cdCat15",
+  ] as const;
+
+  dynamicFields.forEach((fieldId) => {
+    const value = values[fieldId];
+    if (value && value.trim() !== "") {
+      urlParams.set(fieldId, value);
     }
   });
 
@@ -27,14 +45,10 @@ export function buildStatsDataUrlParams(
 
 /**
  * stats-dataページへの完全なURLを構築
- * @param formData - 基本フォームデータ
- * @param dynamicFields - 動的フィールド配列
+ * @param values - フォームデータ
  * @returns 完全なURL文字列
  */
-export function buildStatsDataUrl(
-  formData: FormData,
-  dynamicFields: DynamicField[]
-): string {
-  const urlParams = buildStatsDataUrlParams(formData, dynamicFields);
+export function buildStatsDataUrl(values: StatsDataFormValues): string {
+  const urlParams = buildStatsDataUrlParams(values);
   return `/admin/dev-tools/estat-api/stats-data?${urlParams.toString()}`;
 }

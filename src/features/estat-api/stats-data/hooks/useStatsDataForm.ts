@@ -1,39 +1,43 @@
 "use client";
 
 /**
- * @fileoverview 統計データフォームの状態管理カスタムフック
+ * @fileoverview 統計データフォームのReact Hook Form実装
  */
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ReadonlyURLSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import { AVAILABLE_CATEGORIES, DYNAMIC_FIELD_IDS } from "../constants";
-import { DynamicField, FormData } from "../types";
+import {
+  statsDataFormSchema,
+  StatsDataFormValues,
+} from "../schemas/stats-data-form.schema";
 
 /**
  * useStatsDataFormの戻り値
  */
 export interface UseStatsDataFormReturn {
-  // 状態
-  formData: FormData;
-  dynamicFields: DynamicField[];
-  unusedCategories: (typeof AVAILABLE_CATEGORIES)[number][];
-
+  // React Hook Formオブジェクト
+  form: ReturnType<typeof useForm<StatsDataFormValues>>;
+  // アクティブな動的フィールドのリスト
+  activeFields: string[];
+  // まだ追加されていない分類のリスト
+  unusedCategories: typeof AVAILABLE_CATEGORIES;
   // ハンドラー
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleAddField: (categoryId: string) => void;
   handleRemoveField: (fieldId: string) => void;
-  handleDynamicFieldChange: (fieldId: string, value: string) => void;
   handleReset: () => void;
 }
 
 /**
- * 統計データフォームの状態管理フック
+ * 統計データフォームのReact Hook Form実装
  *
  * 機能:
- * - フォームデータの状態管理
- * - 動的フィールドの追加/削除/変更
+ * - React Hook Formによる統合状態管理
+ * - zodスキーマによるバリデーション
  * - URLパラメータからの初期値復元
+ * - 動的フィールドの追加/削除管理
  *
  * @param searchParams - URLSearchParams
  * @returns フォーム状態とハンドラー
@@ -41,116 +45,70 @@ export interface UseStatsDataFormReturn {
 export function useStatsDataForm(
   searchParams: ReadonlyURLSearchParams
 ): UseStatsDataFormReturn {
-  const [formData, setFormData] = useState<FormData>({
-    statsDataId: "",
-    cdCat01: "",
+  // URLパラメータから初期値を構築
+  const defaultValues: Partial<StatsDataFormValues> = {
+    statsDataId: searchParams.get("statsDataId") || "0000010101",
+    cdCat01: searchParams.get("cdCat01") || "A1101",
+  };
+
+  // 動的フィールドの初期値をURLから復元
+  DYNAMIC_FIELD_IDS.forEach((fieldId) => {
+    const value = searchParams.get(fieldId);
+    if (value) {
+      defaultValues[fieldId as keyof StatsDataFormValues] = value;
+    }
   });
 
-  const [dynamicFields, setDynamicFields] = useState<DynamicField[]>([]);
+  // React Hook Form初期化
+  const form = useForm<StatsDataFormValues>({
+    resolver: zodResolver(statsDataFormSchema),
+    defaultValues: defaultValues as StatsDataFormValues,
+  });
 
-  /**
-   * URLパラメータから初期値を取得
-   */
-  useEffect(() => {
-    const statsDataId = searchParams.get("statsDataId") || "";
-    const cdCat01 = searchParams.get("cdCat01") || "";
+  // アクティブなフィールドを追跡（undefinedでないフィールド）
+  const formValues = form.watch();
+  const activeFields = DYNAMIC_FIELD_IDS.filter((fieldId) => {
+    const value = formValues[fieldId as keyof StatsDataFormValues];
+    return value !== undefined;
+  });
 
-    setFormData({
-      statsDataId: statsDataId || "0000010101",
-      cdCat01: cdCat01 || "A1101",
-    });
-
-    // 動的フィールドも復元
-    const dynamicFieldsFromUrl: DynamicField[] = [];
-
-    DYNAMIC_FIELD_IDS.forEach((fieldId) => {
-      const value = searchParams.get(fieldId);
-      if (value) {
-        const category = AVAILABLE_CATEGORIES.find((cat) => cat.id === fieldId);
-        if (category) {
-          dynamicFieldsFromUrl.push({
-            id: category.id,
-            label: category.label,
-            value,
-          });
-        }
-      }
-    });
-
-    if (dynamicFieldsFromUrl.length > 0) {
-      setDynamicFields(dynamicFieldsFromUrl);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
-
-  /**
-   * まだ追加されていない分類のリスト
-   */
+  // まだ追加されていない分類のリスト
   const unusedCategories = AVAILABLE_CATEGORIES.filter(
-    (cat) => !dynamicFields.some((field) => field.id === cat.id)
+    (cat) => !activeFields.includes(cat.id)
   );
-
-  /**
-   * 基本フィールドの入力値変更ハンドラー
-   */
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   /**
    * 動的フィールドを追加
    */
   const handleAddField = (categoryId: string) => {
-    const category = AVAILABLE_CATEGORIES.find((cat) => cat.id === categoryId);
-    if (!category) return;
-
-    setDynamicFields([
-      ...dynamicFields,
-      { id: category.id, label: category.label, value: "" },
-    ]);
+    const fieldId = categoryId as keyof StatsDataFormValues;
+    form.setValue(fieldId, "");
   };
 
   /**
    * 動的フィールドを削除
    */
   const handleRemoveField = (fieldId: string) => {
-    setDynamicFields(dynamicFields.filter((field) => field.id !== fieldId));
-  };
-
-  /**
-   * 動的フィールドの値を変更
-   */
-  const handleDynamicFieldChange = (fieldId: string, value: string) => {
-    setDynamicFields(
-      dynamicFields.map((field) =>
-        field.id === fieldId ? { ...field, value } : field
-      )
-    );
+    const id = fieldId as keyof StatsDataFormValues;
+    form.setValue(id, "");
   };
 
   /**
    * フォームをリセット
    */
   const handleReset = () => {
-    setFormData({
+    form.reset({
       statsDataId: "0000010101",
       cdCat01: "",
     });
-    setDynamicFields([]);
   };
 
   return {
-    formData,
-    dynamicFields,
+    form,
+    activeFields,
     unusedCategories,
-    handleInputChange,
     handleAddField,
     handleRemoveField,
-    handleDynamicFieldChange,
     handleReset,
   };
 }

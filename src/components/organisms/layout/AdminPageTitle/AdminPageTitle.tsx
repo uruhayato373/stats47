@@ -27,9 +27,9 @@ export const AdminPageTitle = () => {
     admin: "管理画面",
     "dev-tools": "開発ツール",
     "estat-api": "e-STAT API",
-    "meta-info": "メタ情報",
-    "stats-data": "統計データ",
-    "stats-list": "統計一覧",
+    "meta-info": "メタ情報管理",
+    "stats-data": "統計データ管理",
+    "stats-list": "統計リスト検索",
   };
 
   // パスセグメントのアイコンマッピング

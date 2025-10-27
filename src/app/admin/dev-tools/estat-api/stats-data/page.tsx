@@ -73,7 +73,7 @@ export default async function StatsDataPage({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <EstatDataFetcher />
       <EstatDataDisplay 
         data={statsData} 

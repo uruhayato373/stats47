@@ -17,10 +17,9 @@ import {
 } from "@/components/atoms/ui/accordion";
 import { Badge } from "@/components/atoms/ui/badge";
 
-import {
-  EstatStatsDataResponse,
-  formatStatsData,
-} from "@/features/estat-api";
+import { formatStatsData } from "../../services/formatter";
+
+import type { EstatStatsDataResponse } from "../../types";
 
 interface EstatOverviewProps {
   data: EstatStatsDataResponse;
