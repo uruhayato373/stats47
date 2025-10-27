@@ -1,9 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
 
+import { mockStatsDataMap } from "../../../../../data/mock/estat-api/stats-data";
 import { formatStatsData } from "../services/formatter";
 import { parseEstatValue } from "../types";
-
-import { mockStatsDataResponse } from "./fixtures";
 
 import type { EstatStatsDataResponse, FormattedEstatData } from "../types";
 
@@ -12,7 +11,8 @@ describe("formatStatsData", () => {
   let result: FormattedEstatData;
 
   beforeAll(() => {
-    response = mockStatsDataResponse;
+    const mockData = mockStatsDataMap["0000010101_A1101"];
+    response = mockData as unknown as EstatStatsDataResponse;
     result = formatStatsData(response);
   });
   it("統計データを正しく整形する", () => {
