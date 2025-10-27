@@ -1,20 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { EstatMetaInfoR2Repository } from "@/infrastructure/database/estat/repositories";
+import {
+  EstatMetaInfoR2Repository,
+  EstatMetaInfoR2Env,
+} from "@/infrastructure/database/estat/repositories";
 import { EstatMetaInfoR2S3Repository } from "@/infrastructure/database/estat/repositories/metainfo-r2-s3-repository";
 import {
   SaveMetaInfoCacheRequest,
   SaveMetaInfoCacheResponse,
 } from "@/infrastructure/database/estat/types";
 import { EstatMetaInfoResponse } from "@/features/estat-api";
-
-// Cloudflare R2 Bucket型定義
-type R2Bucket = {
-  put: (key: string, value: any, options?: any) => Promise<any>;
-  get: (key: string, options?: any) => Promise<any>;
-  delete: (key: string) => Promise<any>;
-  list: (options?: any) => Promise<any>;
-};
 
 /**
  * e-StatメタインフォメーションをR2に保存するAPIエンドポイント
@@ -40,7 +35,7 @@ export async function POST(
     }
 
     // 環境変数の取得
-    const env = process.env as unknown as { METAINFO_BUCKET: R2Bucket };
+    const env = process.env as unknown as EstatMetaInfoR2Env;
 
     // デバッグ用ログ
     console.log("R2保存デバッグ情報:", {

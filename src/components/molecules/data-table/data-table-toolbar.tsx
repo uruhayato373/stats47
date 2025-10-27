@@ -42,7 +42,10 @@ export function DataTableToolbar<TData>({
             return (
               <div key={column.id} className="flex items-center space-x-2">
                 <span className="text-sm font-medium">
-                  {column.columnDef.header}:
+                  {typeof column.columnDef.header === "string"
+                    ? column.columnDef.header
+                    : column.id}
+                  :
                 </span>
                 <Select
                   value={(column.getFilterValue() as string) ?? ""}
@@ -69,7 +72,10 @@ export function DataTableToolbar<TData>({
             return (
               <div key={column.id} className="flex items-center space-x-2">
                 <span className="text-sm font-medium">
-                  {column.columnDef.header}:
+                  {typeof column.columnDef.header === "string"
+                    ? column.columnDef.header
+                    : column.id}
+                  :
                 </span>
                 <Input
                   placeholder={meta.filterPlaceholder || "フィルター..."}

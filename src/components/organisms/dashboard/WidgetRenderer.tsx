@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { DashboardWidget, WidgetData } from '@/types/dashboard';
+import { DashboardWidget, WidgetData, MetricCardConfig } from '@/types/dashboard';
 import {
   MetricCardWidget,
   LineChartWidget,
@@ -21,7 +21,7 @@ export function WidgetRenderer({ widget, data }: WidgetRendererProps) {
   const renderWidget = () => {
     switch (widgetType) {
       case 'metric':
-        return <MetricCardWidget data={data} config={config} />;
+        return <MetricCardWidget data={data} config={config as MetricCardConfig} />;
 
       case 'chart':
         // チャートタイプに応じて分岐

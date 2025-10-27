@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
       },
     },
     enableSorting,
-    enableFiltering,
+    enableFilters: enableFiltering,
   });
 
   if (!data || data.length === 0) {

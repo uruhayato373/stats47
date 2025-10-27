@@ -1,8 +1,8 @@
-import { Cityashboard } from "./Cityashboard";
+import { MunicipalityDashboard } from "./MunicipalityDashboard";
 import { NationalDashboard } from "./NationalDashboard";
 import { PrefectureDashboard } from "./PrefectureDashboard";
 
-import type { AreaType } from "@/hooks/area/useAreaSelection";
+import type { AreaType } from "@/features/area";
 
 /**
  * AreaDashboardSelector の Props
@@ -36,5 +36,5 @@ export function AreaDashboardSelector({
     return <PrefectureDashboard areaCode={areaCode} />;
   }
 
-  return <Cityashboard areaCode={areaCode} />;
+  return <MunicipalityDashboard areaCode={areaCode} />;
 }

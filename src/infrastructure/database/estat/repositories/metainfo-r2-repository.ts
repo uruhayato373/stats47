@@ -6,7 +6,7 @@
  */
 
 import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
 
 /**
  * R2環境インターフェース

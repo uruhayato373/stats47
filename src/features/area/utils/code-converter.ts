@@ -324,7 +324,7 @@ export function validatePrefectureCode(prefCode: string): AreaValidationResult {
 /**
  * 市区町村コードの検証
  */
-export function validateCityode(
+export function validateCityCode(
   municCode: string
 ): AreaValidationResult {
   const result = validateArea(municCode);

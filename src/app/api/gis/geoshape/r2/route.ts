@@ -72,7 +72,11 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      key?: string;
+      data?: unknown;
+      cacheMaxAge?: number;
+    };
     const { key, data, cacheMaxAge } = body;
 
     if (!key || !data) {

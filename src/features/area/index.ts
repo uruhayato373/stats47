@@ -34,7 +34,13 @@ export {
 // ============================================================================
 // リポジトリ
 // ============================================================================
-export * from "./repositories/area-repository";
+export {
+  fetchCities,
+  fetchPrefectures,
+  fetchRegions,
+  findCityByCode,
+  getRegionKeyFromPrefectureCode,
+} from "./repositories/area-repository";
 
 // ============================================================================
 // サービス

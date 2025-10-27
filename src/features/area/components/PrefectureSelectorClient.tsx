@@ -49,11 +49,13 @@ export function PrefectureSelectorClient({
 }: PrefectureSelectorClientProps) {
   // 初期データで初期化（useEffect不要）
   const [prefectures, setPrefectures] =
-    useState<Prefecture[]>(initialPrefectures);
+    useState<Prefecture[]>(initialPrefectures || []);
   const [regions, setRegions] = useState<Record<string, Region>>(() => {
     // 地域データを変換
     const regionMap: Record<string, Region> = {};
-    Object.entries(initialRegions).forEach(([key, prefectureCodes]) => {
+    // initialRegionsがundefinedまたはnullの場合は空オブジェクトとして扱う
+    const regionsData = initialRegions || {};
+    Object.entries(regionsData).forEach(([key, prefectureCodes]) => {
       const region = REGIONS.find((r) => r.regionCode === key);
       if (region) {
         regionMap[key] = {

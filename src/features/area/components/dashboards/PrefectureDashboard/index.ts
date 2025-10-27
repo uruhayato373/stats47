@@ -1,1 +1,0 @@
-export { PrefectureDashboard } from "./PrefectureDashboard";

@@ -2,7 +2,7 @@
  * Mock環境用のメタ情報データ取得関数
  */
 
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
 
 // 静的インポート
 import municipality0000020201 from "./municipality/0000020201.json";

@@ -1,8 +1,6 @@
-import {
-  Cityashboard,
-  NationalDashboard,
-  PrefectureDashboard,
-} from "@/features/area/components/dashboards";
+import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
+import { NationalDashboard } from "@/components/organisms/dashboard/NationalDashboard";
+import { PrefectureDashboard } from "@/components/organisms/dashboard/PrefectureDashboard";
 
 /**
  * 地域詳細ページのProps型定義
@@ -28,9 +26,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
   const { category, subcategory, areaCode } = await params;
 
   // 地域コードから地域タイプを判定
-  const getAreaType = (
-    code: string
-  ): "national" | "prefecture" | "city" => {
+  const getAreaType = (code: string): "national" | "prefecture" | "city" => {
     if (code === "00000") return "national";
     if (code.endsWith("000")) return "prefecture";
     return "city";
@@ -45,7 +41,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
     } else if (areaType === "prefecture") {
       return <PrefectureDashboard areaCode={areaCode} />;
     } else {
-      return <Cityashboard areaCode={areaCode} />;
+      return <MunicipalityDashboard areaCode={areaCode} />;
     }
   };
 

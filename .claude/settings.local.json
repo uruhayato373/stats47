@@ -57,7 +57,18 @@
       "Bash(npx wrangler d1 execute:*)",
       "mcp__shadcn__search_items_in_registries",
       "mcp__shadcn__get_item_examples_from_registries",
-      "Bash(npx shadcn@latest add chart:*)"
+      "Bash(npx shadcn@latest add chart:*)",
+      "Bash(if [ -f .env.local ])",
+      "Bash(then grep \"R2_PUBLIC_URL\" .env.local)",
+      "Bash(else echo \".env.local not found\")",
+      "Bash(fi)",
+      "Bash(if [ -f .env ])",
+      "Bash(then grep \"R2_PUBLIC_URL\" .env)",
+      "Bash(else echo \".env not found\")",
+      "Bash(if [ -f .env.example ])",
+      "Bash(then cat .env.example)",
+      "Bash(else echo \".env.example not found\")",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []

@@ -38,15 +38,15 @@ const ResizablePanel = React.forwardRef<
 })
 ResizablePanel.displayName = "ResizablePanel"
 
-const ResizableHandle = React.forwardRef<
-  React.ElementRef<typeof PanelResizeHandle>,
-  React.ComponentProps<typeof PanelResizeHandle> & {
-    withHandle?: boolean
-  }
->(({ className, withHandle, ...props }, ref) => {
+const ResizableHandle = ({
+  className,
+  withHandle,
+  ...props
+}: React.ComponentProps<typeof PanelResizeHandle> & {
+  withHandle?: boolean
+}) => {
   return (
     <PanelResizeHandle
-      ref={ref}
       className={cn(
         "relative w-px bg-gray-200 dark:bg-neutral-700 hover:bg-primary/50 transition-colors after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className
@@ -54,8 +54,7 @@ const ResizableHandle = React.forwardRef<
       {...props}
     />
   )
-})
-ResizableHandle.displayName = "ResizableHandle"
+}
 
 export { ResizableHandle, ResizablePanel, ResizablePanelGroup }
 
