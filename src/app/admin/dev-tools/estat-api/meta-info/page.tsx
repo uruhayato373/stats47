@@ -1,4 +1,4 @@
-import { estatAPI } from "@/features/estat-api";
+import { fetchMetaInfo } from "@/features/estat-api/meta-info";
 import {
   EstatMetaInfoDisplay,
   EstatMetaInfoFetcher,
@@ -49,7 +49,7 @@ export default async function MetaInfoPage({
         }
       } else {
         console.log(`[${config.environment}] Fetching meta info from e-Stat API...`);
-            metaInfo = await estatAPI.fetchMetaInfo({ statsDataId: statsId });
+            metaInfo = await fetchMetaInfo(statsId);
       }
     } catch (err) {
       console.error(`[${config.environment}] メタ情報取得エラー:`, err);

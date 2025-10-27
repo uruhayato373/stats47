@@ -1,15 +1,6 @@
 /**
- * e-Stat API クライアント
+ * e-Stat API HTTP通信層
  */
 
 // HTTP通信
-export { EstatHTTPClient } from "./http-client";
-
-// エラーハンドリング
-export { EstatErrorHandler } from "./error-handler";
-
-// レスポンス解析
-export { EstatResponseParser } from "./response-parser";
-
-// API クライアント
-export { estatAPI, EstatAPIClient } from "./api-client";
+export { executeHttpRequest } from "./http-client";

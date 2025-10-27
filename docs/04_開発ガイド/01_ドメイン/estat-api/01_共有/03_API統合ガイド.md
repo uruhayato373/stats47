@@ -8,15 +8,15 @@ tags:
   - integration
 ---
 
-# API統合ガイド
+# API 統合ガイド
 
 ## 概要
 
-このドキュメントでは、e-Stat APIの統合方法について包括的に説明します。エンドポイントの仕様、Next.js統合、データ取得パターン、パフォーマンス最適化まで、API利用に必要なすべての情報を網羅しています。
+このドキュメントでは、e-Stat API の統合方法について包括的に説明します。エンドポイントの仕様、Next.js 統合、データ取得パターン、パフォーマンス最適化まで、API 利用に必要なすべての情報を網羅しています。
 
 ## 目次
 
-1. [e-Stat APIエンドポイント](#e-stat-apiエンドポイント)
+1. [e-Stat API エンドポイント](#e-stat-apiエンドポイント)
 2. [Next.js API Routes での統合](#nextjs-api-routes-での統合)
 3. [クライアントサイドでの使用](#クライアントサイドでの使用)
 4. [データ取得パターン](#データ取得パターン)
@@ -26,7 +26,7 @@ tags:
 
 ---
 
-# 第1章: e-Stat APIエンドポイント
+# 第 1 章: e-Stat API エンドポイント
 
 ## 基本情報
 
@@ -164,7 +164,7 @@ GET /api/stats/data
 
 ---
 
-# 第2章: Next.js API Routes での統合
+# 第 2 章: Next.js API Routes での統合
 
 ## 1. 統計データ取得 API
 
@@ -172,7 +172,7 @@ GET /api/stats/data
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsDataService } from "@/infrastructure/estat";
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
 import { z } from "zod";
 
 // リクエストスキーマ
@@ -201,8 +201,8 @@ export async function GET(request: NextRequest) {
         : undefined,
     });
 
-    // 統計データを取得
-    const data = await EstatStatsDataService.getAndFormatStatsData(
+    // 統計データを取得（Fetcherを使用）
+    const data = await EstatStatsDataFetcher.fetchAndFormat(
       params.statsDataId,
       {
         categoryFilter: params.categoryFilter,
@@ -257,7 +257,7 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { EstatStatsListService } from "@/infrastructure/estat";
+import { EstatStatsListFetcher } from "@/features/estat-api/stats-list";
 import { z } from "zod";
 
 const GetStatsListSchema = z.object({
@@ -280,7 +280,11 @@ export async function GET(request: NextRequest) {
         : undefined,
     });
 
-    const result = await EstatStatsListService.getAndFormatStatsList(params);
+    // 統計リストを取得（Fetcherを使用）
+    const result = await EstatStatsListFetcher.searchByKeyword(
+      params.searchWord,
+      { limit: params.limit, startPosition: params.startPosition }
+    );
 
     return NextResponse.json({
       success: true,
@@ -305,7 +309,7 @@ export async function GET(request: NextRequest) {
 
 ---
 
-# 第3章: クライアントサイドでの使用
+# 第 3 章: クライアントサイドでの使用
 
 ## 1. カスタムフックの作成
 
@@ -463,18 +467,18 @@ export function StatsDataDisplay({ statsDataId }: StatsDataDisplayProps) {
 
 ---
 
-# 第4章: データ取得パターン
+# 第 4 章: データ取得パターン
 
 ## 基本的なデータ取得パターン
 
 ### 1. 単一統計表の取得
 
 ```typescript
-import { EstatStatsDataService } from "@/infrastructure/estat";
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
 
 async function fetchSingleStatsData(statsDataId: string) {
   try {
-    const data = await EstatStatsDataService.getAndFormatStatsData(statsDataId);
+    const data = await EstatStatsDataFetcher.fetchAndFormat(statsDataId);
 
     console.log("取得したデータ:", {
       valueCount: data.values.length,
@@ -494,18 +498,11 @@ async function fetchSingleStatsData(statsDataId: string) {
 ### 2. フィルタリング付きデータ取得
 
 ```typescript
-interface DataFetchOptions {
-  categoryFilter?: string;
-  yearFilter?: string;
-  areaFilter?: string;
-  limit?: number;
-}
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
+import type { FetchOptions } from "@/features/estat-api/stats-data/types";
 
-async function fetchFilteredData(
-  statsDataId: string,
-  options: DataFetchOptions
-) {
-  const data = await EstatStatsDataService.getAndFormatStatsData(statsDataId, {
+async function fetchFilteredData(statsDataId: string, options: FetchOptions) {
+  const data = await EstatStatsDataFetcher.fetchAndFormat(statsDataId, {
     categoryFilter: options.categoryFilter,
     yearFilter: options.yearFilter,
     areaFilter: options.areaFilter,
@@ -514,34 +511,36 @@ async function fetchFilteredData(
 
   return data;
 }
+```
 
 // 使用例
 const populationData = await fetchFilteredData("0000010101", {
-  categoryFilter: "A1101", // 総人口
-  yearFilter: "2023", // 2023年
-  limit: 1000,
+categoryFilter: "A1101", // 総人口
+yearFilter: "2023", // 2023 年
+limit: 1000,
 });
-```
+
+````
 
 ## 高度なデータ取得パターン
 
 ### 1. 複数年度のデータ取得
 
 ```typescript
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
+import type { FetchOptions } from "@/features/estat-api/stats-data/types";
+
 async function fetchMultiYearData(
   statsDataId: string,
   years: string[],
-  options: DataFetchOptions = {}
+  options: FetchOptions = {}
 ) {
   const results = await Promise.allSettled(
     years.map(async (year) => {
-      const data = await EstatStatsDataService.getAndFormatStatsData(
-        statsDataId,
-        {
-          ...options,
-          yearFilter: year,
-        }
-      );
+      const data = await EstatStatsDataFetcher.fetchAndFormat(statsDataId, {
+        ...options,
+        yearFilter: year,
+      });
 
       return {
         year,
@@ -558,11 +557,13 @@ async function fetchMultiYearData(
     error: result.status === "rejected" ? result.reason : null,
   }));
 }
-```
+````
 
 ### 2. バッチ処理でのデータ取得
 
 ```typescript
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
+
 interface BatchFetchOptions {
   statsDataIds: string[];
   concurrency?: number;
@@ -580,9 +581,7 @@ async function batchFetchData(options: BatchFetchOptions) {
     // 並列処理
     const chunkResults = await Promise.allSettled(
       chunk.map(async (statsDataId) => {
-        const data = await EstatStatsDataService.getAndFormatStatsData(
-          statsDataId
-        );
+        const data = await EstatStatsDataFetcher.fetchAndFormat(statsDataId);
         return { statsDataId, data };
       })
     );
@@ -606,7 +605,7 @@ async function batchFetchData(options: BatchFetchOptions) {
 
 ---
 
-# 第5章: 認証とセキュリティ
+# 第 5 章: 認証とセキュリティ
 
 ## 1. API キーの管理
 
@@ -703,7 +702,7 @@ export const rateLimiter = new RateLimiter({
 
 ---
 
-# 第6章: パフォーマンス最適化
+# 第 6 章: パフォーマンス最適化
 
 ## 1. キャッシュを活用したデータ取得
 
@@ -800,7 +799,7 @@ class ParallelDataFetcher {
 
 ---
 
-# 第7章: エラーハンドリング
+# 第 7 章: エラーハンドリング
 
 ## 1. リトライ機能付きデータ取得
 

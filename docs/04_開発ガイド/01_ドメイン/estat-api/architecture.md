@@ -74,15 +74,16 @@ e-Stat API ドメインのアーキテクチャ設計について説明します
   - トランザクション管理
   - キャッシュ戦略
 
-#### API Client Layer
+#### API Client Layer (Core 層)
 
-- **責務**: 外部 API との通信
-- **コンポーネント**: API クライアントクラス
+- **責務**: **純粋な HTTP 通信のみ**
+- **コンポーネント**: `executeHttpRequest()` 関数
 - **特徴**:
   - HTTP 通信の抽象化
-  - リトライ機能
-  - レート制限対応
-  - レスポンス変換
+  - タイムアウト処理
+  - URL 構築とパラメータ変換
+
+**注意**: Core 層はサブドメイン固有の知識を持たない。各サブドメインの fetcher が HTTP 通信を直接使用し、自身のレスポンス検証を実装する。
 
 #### External Services
 
@@ -100,14 +101,15 @@ e-Stat API ドメインのアーキテクチャ設計について説明します
 ```mermaid
 graph TD
     A[Client Request] --> B[API Route]
-    B --> C[EstatStatsDataService]
-    C --> D[EstatApiClient]
+    B --> C[EstatStatsDataFetcher]
+    C --> D[executeHttpRequest]
     D --> E[e-Stat API]
     E --> F[Raw Response]
     F --> D
-    D --> G[Response Parser]
+    D --> C
+    C --> G[validateStatsDataResponse]
     G --> C
-    C --> H[Data Formatter]
+    C --> H[EstatStatsDataFormatter]
     H --> I[Formatted Data]
     I --> B
     B --> J[HTTP Response]
@@ -118,17 +120,17 @@ graph TD
 ```mermaid
 graph TD
     A[Client Request] --> B[API Route]
-    B --> C[EstatMetaInfoService]
-    C --> D[EstatApiClient]
+    B --> C[fetchMetaInfo]
+    C --> D[executeHttpRequest]
     D --> E[e-Stat API]
     E --> F[Meta Info Response]
     F --> D
-    D --> G[Response Parser]
+    D --> C
+    C --> G[validateMetaInfoResponse]
     G --> C
     C --> H[Data Transformer]
     H --> I[CSV Format]
-    I --> C
-    C --> J[Batch Processor]
+    I --> J[Batch Processor]
     J --> K[D1 Database]
     K --> L[Success Response]
     L --> B
@@ -137,53 +139,69 @@ graph TD
 
 ## サービスクラス設計
 
-### EstatStatsDataService
+### EstatStatsDataFetcher (stats-data/sources/fetcher)
 
 ```typescript
-class EstatStatsDataService {
+export class EstatStatsDataFetcher {
   // パブリックメソッド
-  static async getAndFormatStatsData(
+  static async fetchStatsData(
     statsDataId: string,
-    options?: StatsDataOptions
-  ): Promise<FormattedStatsData>;
+    options: FetchOptions = {}
+  ): Promise<EstatStatsDataResponse>;
 
-  static async getAvailableYears(statsDataId: string): Promise<string[]>;
-
-  static async getPrefectureData(
+  static async fetchAndFormat(
     statsDataId: string,
-    options?: PrefectureDataOptions
-  ): Promise<PrefectureData[]>;
+    options: FetchOptions = {}
+  ): Promise<FormattedEstatData>;
 
   // プライベートメソッド
-  private static async getStatsDataRaw(
-    statsDataId: string,
-    options: StatsDataOptions
-  ): Promise<RawStatsData>;
-
-  private static formatStatsData(rawData: RawStatsData): FormattedStatsData;
-
-  private static formatAreas(areas: RawArea[]): FormattedArea[];
-  private static formatCategories(
-    categories: RawCategory[]
-  ): FormattedCategory[];
-  private static formatYears(years: RawYear[]): FormattedYear[];
-  private static formatValues(values: RawValue[]): FormattedValue[];
+  private static composeRequestParams(
+    params: Record<string, unknown>
+  ): Record<string, unknown>;
+  private static validateStatsDataResponse(data: unknown, url: string): void;
 }
 ```
 
-### EstatMetaInfoService
+### fetchMetaInfo (meta-info/services/fetcher)
 
 ```typescript
-class EstatMetaInfoService {
-  constructor(private db: D1Database) {}
+export async function fetchMetaInfo(
+  statsDataId: string
+): Promise<EstatMetaInfoResponse>;
 
-  // パブリックメソッド
-  async processAndSaveMetaInfo(statsDataId: string): Promise<ProcessResult>;
-  async getSavedMetadataByStatsId(
-    statsDataId: string
-  ): Promise<SavedMetadata[]>;
-  async searchMetadata(query: SearchQuery): Promise<SearchResult[]>;
-  async getMetadataSummary(statsDataId: string): Promise<MetadataSummary>;
+export async function fetchAndTransformMetaInfo(
+  statsDataId: string
+): Promise<TransformedMetadataEntry[]>;
+
+// プライベート関数
+function composeRequestParams(
+  params: Record<string, unknown>
+): Record<string, unknown>;
+function validateMetaInfoResponse(data: unknown, url: string): void;
+```
+
+### EstatStatsListFetcher (stats-list/services/fetcher)
+
+```typescript
+export class EstatStatsListFetcher {
+  static async fetchStatsList(
+    params: Omit<GetStatsListParams, "appId">
+  ): Promise<EstatStatsListResponse>;
+
+  static async searchByKeyword(
+    keyword: string,
+    options?: StatsListSearchOptions
+  ): Promise<EstatStatsListResponse>;
+  static async searchByStatsCode(
+    statsCode: string,
+    options?: StatsListSearchOptions
+  ): Promise<EstatStatsListResponse>;
+  static async searchByField(
+    fieldCode: string,
+    options?: StatsListSearchOptions
+  ): Promise<EstatStatsListResponse>;
+
+  // その他の検索メソッド...
 }
 ```
 
@@ -195,14 +213,22 @@ class EstatMetaInfoService {
 
 ```typescript
 // サービス層の依存関係
-EstatStatsDataService
-├── @/services/estat-api (EstatApiClient)
-└── @/infrastructure/estat/types (型定義)
+EstatStatsDataFetcher
+├── core/client/http-client (executeHttpRequest)
+├── core/constants (ESTAT_API, ESTAT_ENDPOINTS)
+└── core/types (EstatStatsDataResponse)
 
-EstatMetaInfoService
-├── @/services/estat-api (EstatApiClient)
-├── @/infrastructure/estat/types (型定義)
-└── D1Database (Cloudflare D1)
+fetchMetaInfo
+├── core/client/http-client (executeHttpRequest)
+├── core/constants (ESTAT_API, ESTAT_ENDPOINTS)
+└── core/types (EstatMetaInfoResponse)
+
+EstatStatsListFetcher
+├── core/client/http-client (executeHttpRequest)
+├── core/constants (ESTAT_API, ESTAT_ENDPOINTS)
+└── core/types (EstatStatsListResponse)
+
+**重要**: Core層は汎用的なHTTP通信のみを提供。各サブドメインは独自のレスポンス検証を実装。
 ```
 
 ### 外部依存関係

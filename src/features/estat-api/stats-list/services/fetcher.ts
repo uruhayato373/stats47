@@ -3,7 +3,12 @@
  * 責務: API通信とエラーハンドリング
  */
 
-import { estatAPI } from "@/features/estat-api/core/client";
+import { executeHttpRequest } from "@/features/estat-api/core/client/http-client";
+import {
+  ESTAT_API,
+  ESTAT_APP_ID,
+  ESTAT_ENDPOINTS,
+} from "@/features/estat-api/core/constants";
 import {
   EstatStatsListResponse,
   GetStatsListParams,
@@ -36,6 +41,72 @@ export class EstatStatsListError extends Error {
 }
 
 /**
+ * リクエストパラメータを構築
+ *
+ * @param params - 追加パラメータ
+ * @param appId - アプリケーションID
+ * @returns 完全なリクエストパラメータ
+ */
+function composeRequestParams(
+  params: Record<string, unknown>,
+  appId: string
+): Record<string, unknown> {
+  return {
+    appId,
+    lang: ESTAT_API.DEFAULT_LANG,
+    dataFormat: ESTAT_API.DATA_FORMAT,
+    ...params,
+  };
+}
+
+/**
+ * e-Stat APIの統計表リストレスポンスを検証し、エラーの場合にthrow
+ *
+ * @param data - e-Stat APIのレスポンスデータ
+ * @param url - リクエストURL（エラー詳細に含める）
+ */
+function validateStatsListResponse(data: unknown, url: string): void {
+  if (typeof data === "object" && data !== null) {
+    const obj = data as Record<string, unknown>;
+
+    // GET_STATS_LIST構造を確認
+    if (obj.GET_STATS_LIST && typeof obj.GET_STATS_LIST === "object") {
+      const statsList = obj.GET_STATS_LIST as Record<string, unknown>;
+      const result = statsList.RESULT;
+
+      if (result && typeof result === "object" && result !== null) {
+        const resultObj = result as Record<string, unknown>;
+
+        if (typeof resultObj.STATUS === "number") {
+          // STATUS=1は警告（データは取得できている）なのでログのみ
+          if (resultObj.STATUS === 1) {
+            console.warn(
+              "e-STAT API warning (STATUS=1):",
+              resultObj.ERROR_MSG || "一部にエラーがあります"
+            );
+          }
+          // STATUS>=100は実際のエラー
+          else if (resultObj.STATUS >= 100) {
+            const errorDetails = {
+              STATUS: resultObj.STATUS,
+              ERROR_MSG: resultObj.ERROR_MSG,
+              URL: url,
+              fullResponse: result,
+            };
+            console.error("e-STAT API error details:", errorDetails);
+            throw new Error(
+              `e-STAT API error (STATUS=${resultObj.STATUS}): ${
+                resultObj.ERROR_MSG || "Unknown error"
+              }`
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * e-Stat統計表リスト取得クラス
  * 責務: API通信とエラーハンドリング
  */
@@ -54,42 +125,16 @@ export class EstatStatsListFetcher {
       console.log("🔵 Fetcher: リクエストパラメータ:", params);
       const startTime = Date.now();
 
-      const response = await estatAPI.fetchStatsList(params);
+      const requestParams = composeRequestParams(params, ESTAT_APP_ID);
+      const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_LIST}`;
 
-      console.log("🔵 Fetcher: APIレスポンス受信:", response);
-
-      // ステータスチェック
-      const status = response.GET_STATS_LIST.RESULT.STATUS;
-      const errorMsg = response.GET_STATS_LIST.RESULT.ERROR_MSG;
-
-      console.log(
-        `🔵 Fetcher: ステータス: ${status}, エラーメッセージ: ${errorMsg}`
+      const response = await executeHttpRequest<EstatStatsListResponse>(
+        ESTAT_API.BASE_URL,
+        ESTAT_ENDPOINTS.GET_STATS_LIST,
+        requestParams
       );
 
-      if (status !== 0) {
-        // エラーメッセージから種類を判定
-        if (errorMsg.includes("アプリケーションID")) {
-          throw new EstatStatsListError(
-            EstatErrorType.INVALID_APP_ID,
-            errorMsg
-          );
-        } else if (
-          errorMsg.includes("該当するデータが存在しません") ||
-          errorMsg.includes("該当データはありませんでした") ||
-          errorMsg.includes(
-            "正常に終了しましたが、該当データはありませんでした"
-          )
-        ) {
-          throw new EstatStatsListError(EstatErrorType.NO_DATA_FOUND, errorMsg);
-        } else if (errorMsg.includes("パラメータが不正")) {
-          throw new EstatStatsListError(
-            EstatErrorType.INVALID_PARAMETER,
-            errorMsg
-          );
-        } else {
-          throw new EstatStatsListError(EstatErrorType.UNKNOWN_ERROR, errorMsg);
-        }
-      }
+      validateStatsListResponse(response, url);
 
       console.log(
         `✅ Fetcher: 統計表リスト取得完了 (${Date.now() - startTime}ms)`
@@ -103,12 +148,36 @@ export class EstatStatsListFetcher {
         throw error;
       }
 
+      // エラーメッセージから種類を判定
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes("アプリケーションID")) {
+        throw new EstatStatsListError(
+          EstatErrorType.INVALID_APP_ID,
+          errorMessage
+        );
+      } else if (
+        errorMessage.includes("該当するデータが存在しません") ||
+        errorMessage.includes("該当データはありませんでした") ||
+        errorMessage.includes(
+          "正常に終了しましたが、該当データはありませんでした"
+        )
+      ) {
+        throw new EstatStatsListError(
+          EstatErrorType.NO_DATA_FOUND,
+          errorMessage
+        );
+      } else if (errorMessage.includes("パラメータが不正")) {
+        throw new EstatStatsListError(
+          EstatErrorType.INVALID_PARAMETER,
+          errorMessage
+        );
+      }
+
       // ネットワークエラー等の場合
       throw new EstatStatsListError(
         EstatErrorType.NETWORK_ERROR,
-        `統計表リストの取得に失敗しました: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
+        `統計表リストの取得に失敗しました: ${errorMessage}`,
         error
       );
     }
