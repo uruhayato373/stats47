@@ -1,6 +1,8 @@
 "use client";
 
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { EstatMetaInfoResponse } from "../types";
+
+
 
 export function useMetaInfoDownload() {
   const download = async (metaInfo: EstatMetaInfoResponse): Promise<void> => {

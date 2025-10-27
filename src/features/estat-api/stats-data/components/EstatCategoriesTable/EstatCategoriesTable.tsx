@@ -4,8 +4,8 @@ import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
-  EstatStatsDataFormatter,
   EstatStatsDataResponse,
+  formatStatsData,
   FormattedCategory,
 } from "@/features/estat-api";
 
@@ -19,7 +19,7 @@ export default function EstatCategoriesTable({
   if (!data) return null;
 
   // FormattedCategoryデータを取得
-  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
+  const formattedData = formatStatsData(data);
   const categories = formattedData.categories;
 
   const columns: ColumnDef<FormattedCategory>[] = [

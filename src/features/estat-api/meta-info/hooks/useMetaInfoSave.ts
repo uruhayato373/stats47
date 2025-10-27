@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { EstatMetaInfoResponse } from "../types";
 
 /**
  * メタ情報保存フックのオプション

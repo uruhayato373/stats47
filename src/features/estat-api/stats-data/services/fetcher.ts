@@ -4,13 +4,15 @@ import {
   ESTAT_APP_ID,
   ESTAT_ENDPOINTS,
 } from "@/features/estat-api/core/constants";
+
 import {
   EstatStatsDataResponse,
+  FetchOptions,
+  FormattedEstatData,
   GetStatsDataParams,
-} from "@/features/estat-api/core/types";
-import { FetchOptions, FormattedEstatData } from "../types";
+} from "../types";
 
-import { EstatStatsDataFormatter } from "./formatter";
+import { formatStatsData } from "./formatter";
 
 /**
  * リクエストパラメータを構築
@@ -19,7 +21,7 @@ import { EstatStatsDataFormatter } from "./formatter";
  * @param appId - アプリケーションID
  * @returns 完全なリクエストパラメータ
  */
-function composeRequestParams(
+function buildRequestParams(
   params: Record<string, unknown>,
   appId: string
 ): Record<string, unknown> {
@@ -79,83 +81,75 @@ function validateStatsDataResponse(data: unknown, url: string): void {
 }
 
 /**
- * e-STAT統計データ取得クラス
- * 責務: API通信とエラーハンドリング
+ * 統計データを取得（生データ）
+ *
+ * @param statsDataId - 統計表ID
+ * @param options - 取得オプション
+ * @returns 統計データのAPIレスポンス
+ * @throws {Error} API呼び出しが失敗した場合
  */
-export class EstatStatsDataFetcher {
-  /**
-   * 統計データを取得（生データ）
-   *
-   * @param statsDataId - 統計表ID
-   * @param options - 取得オプション
-   * @returns 統計データのAPIレスポンス
-   * @throws {Error} API呼び出しが失敗した場合
-   */
-  static async fetchStatsData(
-    statsDataId: string,
-    options: FetchOptions = {}
-  ): Promise<EstatStatsDataResponse> {
-    try {
-      console.log(`🔵 Fetcher: 統計データ取得開始 - ${statsDataId}`);
-      const startTime = Date.now();
+export async function fetchStatsData(
+  statsDataId: string,
+  options: FetchOptions = {}
+): Promise<EstatStatsDataResponse> {
+  try {
+    console.log(`🔵 Fetcher: 統計データ取得開始 - ${statsDataId}`);
+    const startTime = Date.now();
 
-      const params: Omit<GetStatsDataParams, "appId"> = {
-        statsDataId,
-        metaGetFlg: "Y",
-        cntGetFlg: "N",
-        explanationGetFlg: "N",
-        annotationGetFlg: "N",
-        replaceSpChars: "0",
-        startPosition: 1,
-        limit: options.limit || 10000,
-        ...(options.categoryFilter && { cdCat01: options.categoryFilter }),
-        ...(options.yearFilter && { cdTime: options.yearFilter }),
-        ...(options.areaFilter && { cdArea: options.areaFilter }),
-      };
+    const params: Omit<GetStatsDataParams, "appId"> = {
+      statsDataId,
+      metaGetFlg: "Y",
+      cntGetFlg: "N",
+      explanationGetFlg: "N",
+      annotationGetFlg: "N",
+      replaceSpChars: "0",
+      startPosition: 1,
+      limit: options.limit || 10000,
+      ...(options.categoryFilter && { cdCat01: options.categoryFilter }),
+      ...(options.yearFilter && { cdTime: options.yearFilter }),
+      ...(options.areaFilter && { cdArea: options.areaFilter }),
+    };
 
-      const requestParams = composeRequestParams(params, ESTAT_APP_ID);
-      const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
+    const requestParams = buildRequestParams(params, ESTAT_APP_ID);
+    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
 
-      const response = await executeHttpRequest<EstatStatsDataResponse>(
-        ESTAT_API.BASE_URL,
-        ESTAT_ENDPOINTS.GET_STATS_DATA,
-        requestParams
-      );
+    const response = await executeHttpRequest<EstatStatsDataResponse>(
+      ESTAT_API.BASE_URL,
+      ESTAT_ENDPOINTS.GET_STATS_DATA,
+      requestParams
+    );
 
-      validateStatsDataResponse(response, url);
+    validateStatsDataResponse(response, url);
 
-      console.log(
-        `✅ Fetcher: 統計データ取得完了 (${Date.now() - startTime}ms)`
-      );
-      return response;
-    } catch (error) {
-      console.error("❌ Fetcher: 統計データ取得失敗:", error);
-      console.error("Error details:", {
-        statsDataId,
-        options,
-        error: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : undefined,
-      });
-      throw new Error(
-        `統計データの取得に失敗しました: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      );
-    }
+    console.log(`✅ Fetcher: 統計データ取得完了 (${Date.now() - startTime}ms)`);
+    return response;
+  } catch (error) {
+    console.error("❌ Fetcher: 統計データ取得失敗:", error);
+    console.error("Error details:", {
+      statsDataId,
+      options,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    throw new Error(
+      `統計データの取得に失敗しました: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
   }
+}
 
-  /**
-   * 統計データを取得して整形（便利メソッド）
-   *
-   * @param statsDataId - 統計表ID
-   * @param options - 取得オプション
-   * @returns 整形された統計データ
-   */
-  static async fetchAndFormat(
-    statsDataId: string,
-    options: FetchOptions = {}
-  ): Promise<FormattedEstatData> {
-    const response = await this.fetchStatsData(statsDataId, options);
-    return EstatStatsDataFormatter.formatStatsData(response);
-  }
+/**
+ * 統計データを取得して整形（便利メソッド）
+ *
+ * @param statsDataId - 統計表ID
+ * @param options - 取得オプション
+ * @returns 整形された統計データ
+ */
+export async function fetchFormattedStatsData(
+  statsDataId: string,
+  options: FetchOptions = {}
+): Promise<FormattedEstatData> {
+  const response = await fetchStatsData(statsDataId, options);
+  return formatStatsData(response);
 }

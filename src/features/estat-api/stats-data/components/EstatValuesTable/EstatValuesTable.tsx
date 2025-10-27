@@ -4,8 +4,8 @@ import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
-  EstatStatsDataFormatter,
   EstatStatsDataResponse,
+  formatStatsData,
   FormattedValue,
 } from "@/features/estat-api";
 
@@ -16,7 +16,7 @@ interface EstatValuesTableProps {
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   if (!data) return null;
 
-  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
+  const formattedData = formatStatsData(data);
   const values = formattedData.values;
 
   const columns: ColumnDef<FormattedValue>[] = [

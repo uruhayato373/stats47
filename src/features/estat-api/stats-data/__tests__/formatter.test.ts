@@ -1,98 +1,92 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
-import { parseEstatValue } from "../../types/stats-data";
-import { EstatStatsDataFormatter } from "../formatter";
+import { formatStatsData } from "../services/formatter";
+import { parseEstatValue } from "../types";
 
 import { mockStatsDataResponse } from "./fixtures";
 
-import type { EstatStatsDataResponse, FormattedEstatData } from "../../types";
+import type { EstatStatsDataResponse, FormattedEstatData } from "../types";
 
-
-describe("EstatStatsDataFormatter", () => {
+describe("formatStatsData", () => {
   let response: EstatStatsDataResponse;
   let result: FormattedEstatData;
 
   beforeAll(() => {
     response = mockStatsDataResponse;
-    result = EstatStatsDataFormatter.formatStatsData(response);
+    result = formatStatsData(response);
+  });
+  it("統計データを正しく整形する", () => {
+    expect(result).toBeDefined();
+    expect(result.values).toBeInstanceOf(Array);
+    expect(result.values.length).toBeGreaterThan(0);
   });
 
-  describe("formatStatsData", () => {
-    it("統計データを正しく整形する", () => {
-      expect(result).toBeDefined();
-      expect(result.values).toBeInstanceOf(Array);
-      expect(result.values.length).toBeGreaterThan(0);
-    });
+  it("tableInfo を正しく抽出する", () => {
+    expect(result.tableInfo).toBeDefined();
+    expect(result.tableInfo.id).toBeTruthy();
+    expect(result.tableInfo.title).toBeTruthy();
+    expect(result.tableInfo.statName).toBeTruthy();
+  });
 
-    it("tableInfo を正しく抽出する", () => {
-      expect(result.tableInfo).toBeDefined();
-      expect(result.tableInfo.id).toBeTruthy();
-      expect(result.tableInfo.title).toBeTruthy();
-      expect(result.tableInfo.statName).toBeTruthy();
-    });
+  it("全次元（area, time）が必須で存在する", () => {
+    const firstValue = result.values[0];
 
-    it("全次元（area, time）が必須で存在する", () => {
-      const firstValue = result.values[0];
+    expect(firstValue.dimensions.area).toBeDefined();
+    expect(firstValue.dimensions.time).toBeDefined();
+    expect(firstValue.dimensions.area.code).toBeTruthy();
+    expect(firstValue.dimensions.area.name).toBeTruthy();
+    expect(firstValue.dimensions.time.code).toBeTruthy();
+    expect(firstValue.dimensions.time.name).toBeTruthy();
+  });
 
-      expect(firstValue.dimensions.area).toBeDefined();
-      expect(firstValue.dimensions.time).toBeDefined();
-      expect(firstValue.dimensions.area.code).toBeTruthy();
-      expect(firstValue.dimensions.area.name).toBeTruthy();
-      expect(firstValue.dimensions.time.code).toBeTruthy();
-      expect(firstValue.dimensions.time.name).toBeTruthy();
-    });
+  it("オプション次元（cat01等）を抽出する", () => {
+    const valuesWithCat01 = result.values.filter(
+      (v) => v.dimensions.cat01 && v.dimensions.cat01.code !== ""
+    );
 
-    it("オプション次元（cat01等）を抽出する", () => {
-      const valuesWithCat01 = result.values.filter((v) => v.dimensions.cat01);
+    if (valuesWithCat01.length > 0) {
+      const firstWithCat01 = valuesWithCat01[0];
+      expect(firstWithCat01.dimensions.cat01?.code).toBeTruthy();
+      expect(firstWithCat01.dimensions.cat01?.name).toBeTruthy();
+    }
+  });
 
-      if (valuesWithCat01.length > 0) {
-        const firstWithCat01 = valuesWithCat01[0];
-        expect(firstWithCat01.dimensions.cat01?.code).toBeTruthy();
-        expect(firstWithCat01.dimensions.cat01?.name).toBeTruthy();
-      }
-    });
+  it("地域の階層レベルを正しく抽出する", () => {
+    const areasWithLevel = result.values.filter((v) => v.dimensions.area.level);
 
-    it("地域の階層レベルを正しく抽出する", () => {
-      const areasWithLevel = result.values.filter(
-        (v) => v.dimensions.area.level
-      );
+    if (areasWithLevel.length > 0) {
+      const levels = areasWithLevel.map((v) => v.dimensions.area.level);
+      levels.forEach((level) => {
+        expect(["1", "2", "3", undefined]).toContain(level);
+      });
+    }
+  });
 
-      if (areasWithLevel.length > 0) {
-        const levels = areasWithLevel.map((v) => v.dimensions.area.level);
-        levels.forEach((level) => {
-          expect(["1", "2", "3", undefined]).toContain(level);
-        });
-      }
-    });
+  it("メタデータを正しく生成する", () => {
+    expect(result.metadata).toBeDefined();
+    expect(result.metadata.stats.totalRecords).toBe(result.values.length);
+    expect(result.metadata.stats.validValues).toBeGreaterThanOrEqual(0);
+    expect(result.metadata.stats.nullValues).toBeGreaterThanOrEqual(0);
+    expect(result.metadata.quality?.completenessScore).toBeGreaterThanOrEqual(
+      0
+    );
+    expect(result.metadata.quality?.completenessScore).toBeLessThanOrEqual(100);
+  });
 
-    it("メタデータを正しく生成する", () => {
-      expect(result.metadata).toBeDefined();
-      expect(result.metadata.stats.totalRecords).toBe(result.values.length);
-      expect(result.metadata.stats.validValues).toBeGreaterThanOrEqual(0);
-      expect(result.metadata.stats.nullValues).toBeGreaterThanOrEqual(0);
-      expect(result.metadata.quality?.completenessScore).toBeGreaterThanOrEqual(
-        0
-      );
-      expect(result.metadata.quality?.completenessScore).toBeLessThanOrEqual(
-        100
-      );
-    });
+  it("データ範囲情報を正しく計算する", () => {
+    if (result.metadata.range) {
+      expect(result.metadata.range.years).toBeDefined();
+      expect(result.metadata.range.areas).toBeDefined();
+      expect(result.metadata.range.categories).toBeDefined();
 
-    it("データ範囲情報を正しく計算する", () => {
-      if (result.metadata.range) {
-        expect(result.metadata.range.years).toBeDefined();
-        expect(result.metadata.range.areas).toBeDefined();
-        expect(result.metadata.range.categories).toBeDefined();
+      expect(result.metadata.range.years.count).toBeGreaterThan(0);
+      expect(result.metadata.range.areas.count).toBeGreaterThan(0);
+    }
+  });
 
-        expect(result.metadata.range.years.count).toBeGreaterThan(0);
-        expect(result.metadata.range.areas.count).toBeGreaterThan(0);
-      }
-    });
-
-    it("注記情報を抽出する", () => {
-      expect(result.notes).toBeDefined();
-      expect(Array.isArray(result.notes)).toBe(true);
-    });
+  it("注記情報を抽出する", () => {
+    expect(result.notes).toBeDefined();
+    expect(Array.isArray(result.notes)).toBe(true);
   });
 
   describe("parseEstatValue", () => {
@@ -127,7 +121,7 @@ describe("EstatStatsDataFormatter", () => {
   describe("パフォーマンステスト", () => {
     it("データ処理を妥当な時間内で完了する", () => {
       const startTime = performance.now();
-      EstatStatsDataFormatter.formatStatsData(response);
+      formatStatsData(response);
       const endTime = performance.now();
 
       const processingTime = endTime - startTime;
@@ -145,7 +139,7 @@ describe("EstatStatsDataFormatter", () => {
 
       for (let i = 0; i < iterations; i++) {
         const startTime = performance.now();
-        EstatStatsDataFormatter.formatStatsData(response);
+        formatStatsData(response);
         const endTime = performance.now();
         times.push(endTime - startTime);
       }
@@ -177,7 +171,7 @@ describe("EstatStatsDataFormatter", () => {
       };
 
       expect(() => {
-        EstatStatsDataFormatter.formatStatsData(emptyResponse as any);
+        formatStatsData(emptyResponse as any);
       }).not.toThrow();
     });
   });

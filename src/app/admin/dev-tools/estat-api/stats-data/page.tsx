@@ -1,5 +1,5 @@
 
-import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
+import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
 import {
   EstatDataDisplay,
   EstatDataFetcher,
@@ -60,7 +60,7 @@ export default async function StatsDataPage({
         }
       } else {
         console.log(`[${config.environment}] Fetching stats data from e-Stat API...`);
-        statsData = await EstatStatsDataFetcher.fetchAndFormat(statsDataId, {
+        statsData = await fetchFormattedStatsData(statsDataId, {
           categoryFilter: cdCat01,
           ...(params.cdArea && { areaFilter: params.cdArea }),
           ...(params.cdTime && { yearFilter: params.cdTime }),

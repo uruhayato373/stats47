@@ -18,8 +18,8 @@ import {
 import { Badge } from "@/components/atoms/ui/badge";
 
 import {
-  EstatStatsDataFormatter,
   EstatStatsDataResponse,
+  formatStatsData,
 } from "@/features/estat-api";
 
 interface EstatOverviewProps {
@@ -34,7 +34,7 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
   const statisticalData = data.GET_STATS_DATA.STATISTICAL_DATA;
 
   // 地域データを取得
-  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
+  const formattedData = formatStatsData(data);
   const areas = formattedData.areas;
 
   return (

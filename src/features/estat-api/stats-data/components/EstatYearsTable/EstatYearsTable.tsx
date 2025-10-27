@@ -4,8 +4,8 @@ import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
-  EstatStatsDataFormatter,
   EstatStatsDataResponse,
+  formatStatsData,
   FormattedYear,
 } from "@/features/estat-api";
 
@@ -16,7 +16,7 @@ interface EstatYearsTableProps {
 export default function EstatYearsTable({ data }: EstatYearsTableProps) {
   if (!data) return null;
 
-  const formattedData = EstatStatsDataFormatter.formatStatsData(data);
+  const formattedData = formatStatsData(data);
   const years = formattedData.years;
 
   const columns: ColumnDef<FormattedYear>[] = [
