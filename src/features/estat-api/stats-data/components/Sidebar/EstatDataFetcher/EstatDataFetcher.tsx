@@ -32,9 +32,9 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { AVAILABLE_CATEGORIES } from "../../constants";
-import { useStatsDataForm } from "../../hooks";
-import { buildStatsDataUrl } from "../../utils";
+import { AVAILABLE_CATEGORIES } from "../../../constants";
+import { useStatsDataForm } from "../../../hooks";
+import { buildStatsDataUrl } from "../../../utils";
 
 /**
  * EstatDataFetcher - e-Stat統計データ取得フォーム

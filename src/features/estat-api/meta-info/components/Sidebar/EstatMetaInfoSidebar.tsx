@@ -14,8 +14,8 @@ import {
   PaginationPrevious,
 } from "@/components/atoms/ui/pagination";
 
-import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
-import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
+import { EstatMetaInfoFetcher } from "./EstatMetaInfoFetcher";
+import { SavedMetaInfoListItem } from "./SavedMetaInfoListItem";
 
 import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
 

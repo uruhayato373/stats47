@@ -27,7 +27,7 @@ interface EstatDataDisplayProps {
   error: string | null;
 }
 
-function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
+export default function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<
     "overview" | "categories" | "years" | "values" | "raw"
   >("overview");
@@ -124,5 +124,3 @@ function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
     </div>
   );
 }
-
-export default EstatDataDisplay;
