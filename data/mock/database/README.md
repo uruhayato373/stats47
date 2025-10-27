@@ -4,12 +4,14 @@
 
 ## 📋 ファイル一覧
 
-| ファイル名            | 説明                | レコード数 |
-| --------------------- | ------------------- | ---------- |
-| `ranking_items.json`  | ランキングアイテム  | 10 件      |
-| `ranking_values.json` | ランキング値データ  | 50 件      |
-| `estat_metainfo.json` | e-Stat 統計メタ情報 | 50 件      |
-| `users.json`          | ユーザー認証データ  | 2 件       |
+| ファイル名                           | 説明                              | レコード数 | 更新日     |
+| ------------------------------------ | --------------------------------- | ---------- | ---------- |
+| `ranking_items.json`                 | ランキングアイテム                | 10 件      | 2025-10-11 |
+| `ranking_values.json`                | ランキング値データ                | 50 件      | 2025-10-11 |
+| `estat_metainfo.json`                | e-Stat 統計メタ情報               | 50 件      | 2025-10-11 |
+| `users.json`                         | ユーザー認証データ                | 2 件       | 2025-10-27 |
+| `subcategory_ranking_items.json` 🆕 | サブカテゴリ×ランキング項目マッピング | 8 件       | 2025-10-27 |
+| `subcategory_configs.json` 🆕        | サブカテゴリ設定                  | 24 件      | 2025-10-27 |
 
 ## 🎯 使用目的
 
@@ -119,6 +121,54 @@
   ]
 }
 ```
+
+### subcategory_ranking_items.json 🆕
+
+サブカテゴリとランキング項目のマッピングデータ（2025-10-27追加）
+
+```typescript
+{
+  "results": [
+    {
+      "id": number,
+      "subcategory_id": string,        // 例: "land-area", "households"
+      "ranking_item_id": number,       // ranking_items_new.id への参照
+      "display_order": number,         // サブカテゴリ内での表示順
+      "is_default": number,            // デフォルト選択（1 or 0）
+      "created_at": string
+    }
+  ]
+}
+```
+
+**用途**: サブカテゴリページで表示するランキング項目を決定
+
+**マッピング例**:
+- `land-area` → `areaRatio` (面積割合)
+- `land-use` → `agriculturalLand` (農用地), `agriculturalLandRatio` (農用地割合)
+- `weather-climate` → `avgTemperature` (年平均気温)
+
+### subcategory_configs.json 🆕
+
+サブカテゴリの設定データ（categories.jsonと対応、2025-10-27追加）
+
+```typescript
+{
+  "results": [
+    {
+      "id": string,                    // subcategory_id (例: "land-area")
+      "category_id": string,           // 親カテゴリID (例: "landweather")
+      "name": string,                  // サブカテゴリ名 (例: "土地面積")
+      "description": string | null,    // 説明文
+      "default_ranking_key": string | null,  // デフォルトランキングキー
+      "created_at": string,
+      "updated_at": string
+    }
+  ]
+}
+```
+
+**用途**: サブカテゴリのメタデータ管理（categories.jsonのデータベース版）
 
 ## 🔄 モックデータの更新方法
 
