@@ -58,16 +58,17 @@ export default function EstatDataFetcher() {
 
   return (
     <Form {...form}>
-      {/* ヘッダー */}
-      <div className="flex items-center gap-2 p-4 border-b border-gray-200 dark:border-neutral-700">
-        <Search className="w-5 h-5 text-indigo-600" />
-        <h3 className="font-medium text-gray-900 dark:text-neutral-100">
-          検索条件
-        </h3>
-      </div>
+      <div className="bg-white dark:bg-neutral-800 rounded-lg">
+        {/* ヘッダー */}
+        <div className="flex items-center gap-2 p-4 border-b border-gray-200 dark:border-neutral-700">
+          <Search className="w-5 h-5 text-indigo-600" />
+          <h3 className="font-medium text-gray-900 dark:text-neutral-100">
+            検索条件
+          </h3>
+        </div>
 
-      {/* フォーム本体 */}
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
+        {/* フォーム本体 */}
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
         {/* 基本フィールド */}
         <div className="grid grid-cols-1 gap-4">
           <FormField
@@ -200,7 +201,8 @@ export default function EstatDataFetcher() {
             リセット
           </Button>
         </div>
-      </form>
+        </form>
+      </div>
     </Form>
   );
 }

@@ -14,6 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/atoms/ui/pagination";
 
+import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
 import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
 
 import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
@@ -135,9 +136,14 @@ export default function EstatMetaInfoSidebar({
 
   return (
     <div
-      className={`w-full h-full flex flex-col ${className}`}
+      className={`w-full h-full flex flex-col bg-white dark:bg-neutral-800 ${className}`}
       style={{ minHeight: "400px" }}
     >
+      {/* 検索フォーム */}
+      <div className="p-4 border-b border-gray-200 dark:border-neutral-700">
+        <EstatMetaInfoFetcher />
+      </div>
+
       {/* ヘッダー */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-neutral-700">
         <div className="flex items-center gap-2">

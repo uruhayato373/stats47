@@ -10,12 +10,12 @@ import { z } from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
 
@@ -93,19 +93,16 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
-        <div className="flex flex-row gap-3 items-end">
+        <div className="flex flex-col gap-3">
           {/* 統計表ID入力フィールド */}
           <FormField
             control={form.control}
             name="statsDataId"
             render={({ field }) => (
-              <FormItem className="space-y-1 max-w-xs flex-1">
+              <FormItem className="space-y-1">
                 <FormLabel>統計表ID</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="0000010101"
-                    {...field}
-                  />
+                  <Input placeholder="0000010101" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,7 +110,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           />
 
           {/* 送信ボタン */}
-          <Button type="submit" disabled={!form.formState.isValid}>
+          <Button type="submit" disabled={!form.formState.isValid} className="w-full">
             取得
           </Button>
         </div>

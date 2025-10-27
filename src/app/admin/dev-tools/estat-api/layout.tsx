@@ -37,7 +37,7 @@ export default function EstatApiLayout({
 
       {/* サイドバー（右側） */}
       <ResizablePanel defaultSize={30} minSize={20} maxSize={50}>
-        <div className="h-full overflow-auto bg-gray-50 dark:bg-neutral-900 border-l border-border">
+        <div className="h-full overflow-auto border-l border-border">
           {sidebar}
         </div>
       </ResizablePanel>

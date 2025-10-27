@@ -1,8 +1,5 @@
 import { fetchMetaInfo } from "@/features/estat-api/meta-info";
-import {
-  EstatMetaInfoDisplay,
-  EstatMetaInfoFetcher,
-} from "@/features/estat-api/meta-info/components";
+import { EstatMetaInfoDisplay } from "@/features/estat-api/meta-info/components";
 
 import { buildEnvironmentConfig } from "@/lib/environment";
 
@@ -47,8 +44,7 @@ export default async function MetaInfoMainSlot({
   }
 
   return (
-    <div className="p-4 space-y-6">
-      <EstatMetaInfoFetcher />
+    <div className="p-4">
       <EstatMetaInfoDisplay
         metaInfo={metaInfo}
         statsId={statsId || null}
