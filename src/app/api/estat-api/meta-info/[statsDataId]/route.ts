@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { buildEnvironmentConfig } from "@/infrastructure/config";
 import { estatAPI } from "@/features/estat-api";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 
-import { getMockMetaInfo } from "@data/mock/metainfo";
+import { getMockMetaInfo } from "@data/mock/estat-api/metainfo";
 
 /**
  * e-Statメタ情報取得APIエンドポイント

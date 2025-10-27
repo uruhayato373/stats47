@@ -1,11 +1,3 @@
-import { Badge } from "@/components/atoms/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
-
 import { TableInfo } from "@/features/estat-api/core/types/meta-info";
 
 interface TableInfoTabProps {
@@ -21,158 +13,129 @@ interface TableInfoTabProps {
  * - 調査周期、公開日、レコード数などのメタデータ
  */
 export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
-  const infoItems = [
-    {
-      label: "統計表ID",
-      value: tableInfo.id,
-      highlight: true,
-    },
-    {
-      label: "統計表題名",
-      value: tableInfo.title,
-      highlight: true,
-    },
-    {
-      label: "政府統計名",
-      value: tableInfo.statName,
-    },
-    {
-      label: "作成機関",
-      value: tableInfo.organization,
-    },
-    {
-      label: "統計調査名",
-      value: tableInfo.statisticsName,
-    },
-    {
-      label: "調査周期",
-      value: tableInfo.cycle,
-    },
-    {
-      label: "調査年月日",
-      value: tableInfo.surveyDate ? String(tableInfo.surveyDate) : "-",
-    },
-    {
-      label: "公開日",
-      value: tableInfo.openDate,
-    },
-    {
-      label: "更新日",
-      value: tableInfo.updatedDate,
-    },
-    {
-      label: "小地域集計",
-      value: tableInfo.smallArea ? "あり" : "なし",
-    },
-    {
-      label: "集計地域",
-      value: tableInfo.collectArea,
-    },
-    {
-      label: "総レコード数",
-      value: tableInfo.totalRecords.toLocaleString(),
-    },
-  ];
-
-  const categoryInfo = [
-    {
-      label: "大分類",
-      value: tableInfo.mainCategory.name,
-      code: tableInfo.mainCategory.code,
-    },
-    ...(tableInfo.subCategory
-      ? [
-          {
-            label: "小分類",
-            value: tableInfo.subCategory.name,
-            code: tableInfo.subCategory.code,
-          },
-        ]
-      : []),
-  ];
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* 基本情報セクション */}
-      <Card>
-        <CardHeader>
-          <CardTitle>基本情報</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {infoItems.map((item, index) => (
-              <div
-                key={index}
-                className={`p-4 rounded-lg border ${
-                  item.highlight
-                    ? "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800"
-                    : "bg-gray-50 border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
-                }`}
-              >
-                <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
-                  {item.label}
-                </div>
-                <div
-                  className={`text-sm ${
-                    item.highlight
-                      ? "text-blue-900 dark:text-blue-100 font-medium"
-                      : "text-gray-900 dark:text-gray-100"
-                  }`}
-                >
-                  {item.value || "-"}
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div>
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+          基本情報
+        </h3>
+        <dl className="space-y-3">
+          <InfoRow label="統計表ID" value={tableInfo.id} highlight />
+          <InfoRow label="統計表題名" value={tableInfo.title} highlight />
+          <InfoRow label="政府統計名" value={tableInfo.statName} />
+          <InfoRow label="作成機関" value={tableInfo.organization} />
+          <InfoRow label="統計調査名" value={tableInfo.statisticsName} />
+          <InfoRow label="調査周期" value={tableInfo.cycle} />
+          <InfoRow
+            label="調査年月日"
+            value={tableInfo.surveyDate ? String(tableInfo.surveyDate) : "-"}
+          />
+          <InfoRow label="公開日" value={tableInfo.openDate} />
+          <InfoRow label="更新日" value={tableInfo.updatedDate} />
+          <InfoRow
+            label="小地域集計"
+            value={tableInfo.smallArea ? "あり" : "なし"}
+          />
+          <InfoRow label="集計地域" value={tableInfo.collectArea} />
+          <InfoRow
+            label="総レコード数"
+            value={tableInfo.totalRecords.toLocaleString()}
+          />
+        </dl>
+      </div>
 
       {/* 分類情報セクション */}
-      {categoryInfo.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>分類情報</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {categoryInfo.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-4 rounded-lg bg-gray-50 border border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                      {item.label}
-                    </div>
-                    {item.code && (
-                      <Badge variant="outline" className="text-xs">
-                        コード: {item.code}
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="text-sm text-gray-900 dark:text-gray-100 mt-1">
-                    {item.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      <div>
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+          分類情報
+        </h3>
+        <dl className="space-y-3">
+          <CategoryRow
+            label="大分類"
+            value={tableInfo.mainCategory.name}
+            code={tableInfo.mainCategory.code}
+          />
+          {tableInfo.subCategory && (
+            <CategoryRow
+              label="小分類"
+              value={tableInfo.subCategory.name}
+              code={tableInfo.subCategory.code}
+            />
+          )}
+        </dl>
+      </div>
 
       {/* 説明セクション */}
       {tableInfo.explanation && (
-        <Card>
-          <CardHeader>
-            <CardTitle>説明</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap">
-              {tableInfo.explanation}
-            </div>
-          </CardContent>
-        </Card>
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+            説明
+          </h3>
+          <div className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap leading-relaxed">
+            {tableInfo.explanation}
+          </div>
+        </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * InfoRow - 情報行表示コンポーネント
+ */
+function InfoRow({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:gap-4">
+      <dt className="text-sm font-medium text-gray-600 dark:text-gray-400 sm:w-40 flex-shrink-0">
+        {label}
+      </dt>
+      <dd
+        className={`text-sm mt-1 sm:mt-0 ${
+          highlight
+            ? "font-medium text-blue-600 dark:text-blue-400"
+            : "text-gray-900 dark:text-gray-100"
+        }`}
+      >
+        {value || "-"}
+      </dd>
+    </div>
+  );
+}
+
+/**
+ * CategoryRow - 分類情報行表示コンポーネント
+ */
+function CategoryRow({
+  label,
+  value,
+  code,
+}: {
+  label: string;
+  value: string;
+  code: string;
+}) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:gap-4">
+      <dt className="text-sm font-medium text-gray-600 dark:text-gray-400 sm:w-40 flex-shrink-0">
+        {label}
+      </dt>
+      <dd className="text-sm mt-1 sm:mt-0 text-gray-900 dark:text-gray-100">
+        {value}
+        {code && (
+          <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+            (コード: {code})
+          </span>
+        )}
+      </dd>
     </div>
   );
 }

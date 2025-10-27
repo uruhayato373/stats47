@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
-
 import {
   AlertCircle,
   Calendar,
@@ -19,7 +17,6 @@ import {
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-import { Skeleton } from "@/components/atoms/ui/skeleton";
 import {
   Tabs,
   TabsContent,
@@ -28,10 +25,9 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
-import { buildEnvironmentConfig } from "@/infrastructure/config";
+import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
 
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
-import { useEstatMetaInfo } from "../../hooks/useEstatMetaInfo";
 import { EstatMetaInfoFormatter } from "../../services/formatter";
 
 
@@ -43,11 +39,15 @@ import TimeAxisTab from "./tabs/TimeAxisTab";
 
 /**
  * EstatMetaInfoDisplayProps - e-Statメタ情報表示コンポーネントのプロパティ
- * 
- * プロパティなし（URL paramsから自動取得）
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface EstatMetaInfoDisplayProps {}
+interface EstatMetaInfoDisplayProps {
+  /** メタ情報データ */
+  metaInfo: EstatMetaInfoResponse | null;
+  /** 統計表ID */
+  statsId: string | null;
+  /** エラーメッセージ */
+  error?: string | null;
+}
 
 /**
  * TabType - タブの種類
@@ -75,29 +75,11 @@ type TabType = "table" | "categories" | "areas" | "time" | "json";
  * <EstatMetaInfoDisplay />
  * ```
  */
-export default function EstatMetaInfoDisplay({}: EstatMetaInfoDisplayProps) {
-  const router = useRouter();
-  // URL paramsからstatsIdを取得
-  const searchParams = useSearchParams();
-  const statsId = searchParams.get("statsId") || "";
-
-  // 初期値の設定（Mock環境）
-  useEffect(() => {
-    if (!statsId) {
-      const config = buildEnvironmentConfig();
-      if (config.isMock) {
-        router.replace("/admin/dev-tools/estat-api/meta-info?statsId=0000010101");
-      }
-    }
-  }, [statsId, router]);
-
-  // データフェッチング
-  const { metaInfo, error, isLoading: loading } = useEstatMetaInfo(
-    statsId || null,
-    {
-      autoSave: true,
-    }
-  );
+export default function EstatMetaInfoDisplay({
+  metaInfo,
+  statsId,
+  error: serverError,
+}: EstatMetaInfoDisplayProps) {
   // ===== 状態管理 =====
   /** アクティブなタブ */
   const [activeTab, setActiveTab] = useState<TabType>("table");
@@ -164,27 +146,13 @@ export default function EstatMetaInfoDisplay({}: EstatMetaInfoDisplayProps) {
   };
 
   /**
-   * ローディング状態の表示
-   */
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-4 w-1/4" />
-        <Skeleton className="h-3 w-full" />
-        <Skeleton className="h-3 w-5/6" />
-        <Skeleton className="h-3 w-3/4" />
-      </div>
-    );
-  }
-
-  /**
    * エラー状態の表示
    */
-  if (error) {
+  if (serverError) {
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
-        <AlertDescription>{error}</AlertDescription>
+        <AlertDescription>{serverError}</AlertDescription>
       </Alert>
     );
   }

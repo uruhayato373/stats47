@@ -1,3 +1,7 @@
+import { estatAPI } from "@/features/estat-api";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
+import { getMockMetaInfo } from "@data/mock/estat-api/metainfo";
+
 import {
   EstatMetaInfoDisplay,
   EstatMetaInfoFetcher,
@@ -5,21 +9,53 @@ import {
 } from "@/features/estat-api/meta-info/components";
 
 /**
- * MetaInfoPage - e-Statメタ情報管理ページ
+ * MetaInfoPage - e-Statメタ情報管理ページ（サーバーコンポーネント）
  *
  * 責務:
- * - レイアウト構築のみ
- *
- * 注: データフェッチと状態管理は各コンポーネントに移譲
+ * - サーバーサイドでデータ取得
+ * - レイアウト構築
  */
-export default function MetaInfoPage() {
+export default async function MetaInfoPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ statsId?: string }>;
+}) {
+  const { statsId } = await searchParams;
+  const config = buildEnvironmentConfig();
+  let metaInfo = null;
+  let error = null;
+
+  // サーバーサイドでデータ取得
+  if (statsId) {
+    try {
+      if (config.isMock) {
+        console.log(`[${config.environment}] Loading meta info from mock...`);
+        metaInfo = getMockMetaInfo(statsId);
+
+        if (!metaInfo) {
+          error = `モックデータが見つかりません: ${statsId}`;
+        }
+      } else {
+        console.log(`[${config.environment}] Fetching meta info from e-Stat API...`);
+        metaInfo = await estatAPI.getMetaInfo({ statsDataId: statsId });
+      }
+    } catch (err) {
+      console.error(`[${config.environment}] メタ情報取得エラー:`, err);
+      error = err instanceof Error ? err.message : "メタ情報の取得に失敗しました";
+    }
+  }
+
   return (
     <div className="transition-all duration-300 min-h-screen bg-white dark:bg-neutral-900">
       <div className="flex flex-col lg:flex-row min-h-full">
         <div className="flex-1 bg-white dark:bg-neutral-800">
           <div className="p-4 md:p-6 space-y-6">
             <EstatMetaInfoFetcher />
-            <EstatMetaInfoDisplay />
+            <EstatMetaInfoDisplay
+              metaInfo={metaInfo}
+              statsId={statsId || null}
+              error={error}
+            />
           </div>
         </div>
         <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>

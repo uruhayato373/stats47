@@ -10,7 +10,7 @@
 import { estatAPI } from "@/features/estat-api";
 import { buildEnvironmentConfig } from "@/infrastructure/config";
 
-import { getMockStatsData } from "@data/mock/statsdata";
+import { getMockStatsData } from "@data/mock/estat-api/statsdata";
 
 import StatsDataPageContent from "./StatsDataPageContent";
 

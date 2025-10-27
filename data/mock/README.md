@@ -15,23 +15,36 @@
 
 ```
 data/mock/
-├── database/                    # データベースモックデータ（NEW!）
+├── area/                        # 地域データ
+│   ├── prefectures.json
+│   └── municipalities.json
+├── auth/                        # 認証データ
+│   ├── users.json
+│   └── sessions.json
+├── catalog.json                 # データカタログ
+├── database/                    # データベースモックデータ
 │   ├── ranking_items.json       # ランキングアイテム（10件）
 │   ├── ranking_values.json      # ランキング値（50件）
 │   ├── estat_metainfo.json      # e-Stat統計メタ情報（50件）
 │   └── README.md                # データベースモック詳細
-├── metainfo/                    # メタ情報モックデータ
-│   ├── prefecture/              # 都道府県メタ情報
-│   └── municipality/            # 市区町村メタ情報
-├── statsdata/                   # 統計データモックデータ
-│   ├── prefecture/              # 都道府県統計データ
-│   └── municipality/            # 市区町村統計データ
-├── statslist/                   # 統計表リストモックデータ
+├── estat-api/                   # e-Stat API関連モックデータ
+│   ├── metainfo/                # メタ情報モックデータ
+│   │   ├── prefecture/          # 都道府県メタ情報
+│   │   └── municipality/        # 市区町村メタ情報
+│   ├── statsdata/               # 統計データモックデータ
+│   │   ├── prefecture/          # 都道府県統計データ
+│   │   └── municipality/        # 市区町村統計データ
+│   └── statslist/               # 統計表リストモックデータ
 ├── fixtures/                    # テスト用フィクスチャ
 │   ├── minimal/                 # 最小データ
 │   ├── small/                   # 小データ
 │   └── medium/                  # 中データ
-└── catalog.json                 # データカタログ
+├── gis/                         # GISデータ
+│   └── geoshape/
+├── ranking/                     # ランキングデータ
+├── r2/                          # R2データ
+│   └── areas/
+└── README.md                     # このファイル
 ```
 
 ## データの種類
@@ -46,13 +59,13 @@ data/mock/
 
 詳細は [`database/README.md`](./database/README.md) を参照してください。
 
-### 2. e-Stat API モックデータ (`metainfo/`, `statsdata/`, `statslist/`)
+### 2. e-Stat API モックデータ (`estat-api/`)
 
 **用途**: e-Stat API 接続なしで開発・テスト
 
-- `metainfo/` - メタ情報 API のレスポンス
-- `statsdata/` - 統計データ API のレスポンス
-- `statslist/` - 統計表リスト API のレスポンス
+- `estat-api/metainfo/` - メタ情報 API のレスポンス
+- `estat-api/statsdata/` - 統計データ API のレスポンス
+- `estat-api/statslist/` - 統計表リスト API のレスポンス
 
 ## データの取得方法
 
