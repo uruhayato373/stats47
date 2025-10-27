@@ -13,13 +13,13 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 
-import { EstatStatsDataResponse } from "@/features/estat-api";
+import type { EstatStatsDataResponse } from "../../types";
 
-import { EstatCategoriesTable } from "../EstatCategoriesTable";
-import { EstatOverview } from "../EstatOverview";
-import { EstatRawData } from "../EstatRawData";
-import { EstatValuesTable } from "../EstatValuesTable";
-import { EstatYearsTable } from "../EstatYearsTable";
+import EstatCategoriesTable from "./components/EstatCategoriesTable";
+import EstatOverview from "./components/EstatOverview";
+import EstatRawData from "./components/EstatRawData";
+import EstatValuesTable from "./components/EstatValuesTable";
+import EstatYearsTable from "./components/EstatYearsTable";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
