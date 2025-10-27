@@ -16,6 +16,8 @@ import {
   TransformedMetadataEntry,
 } from "@/features/estat-api/core/types";
 
+import { EstatMetaInfoR2S3Repository } from "@/infrastructure/database/estat/repositories/metainfo-r2-s3-repository";
+
 import { extractCategories } from "./formatter";
 
 /**
@@ -85,7 +87,7 @@ function validateMetaInfoResponse(data: unknown, url: string): void {
 }
 
 /**
- * APIからメタ情報を取得
+ * APIからメタ情報を取得（R2キャッシュ優先）
  *
  * @param statsDataId - 統計表ID
  * @returns メタ情報のAPIレスポンス
@@ -94,6 +96,23 @@ function validateMetaInfoResponse(data: unknown, url: string): void {
 export async function fetchMetaInfo(
   statsDataId: string
 ): Promise<EstatMetaInfoResponse> {
+  // 1. R2キャッシュを確認
+  try {
+    const cached = await EstatMetaInfoR2S3Repository.findByStatsId(statsDataId);
+    if (cached) {
+      console.log("✅ R2キャッシュヒット:", statsDataId);
+      return cached;
+    }
+    console.log("R2キャッシュミス、e-Stat APIから取得:", statsDataId);
+  } catch (error) {
+    // R2設定がない場合も継続（ローカル開発環境でのフォールバック）
+    console.warn(
+      "R2キャッシュ取得エラー、e-Stat APIへフォールバック:",
+      error instanceof Error ? error.message : error
+    );
+  }
+
+  // 2. 既存のe-Stat API取得ロジック
   try {
     const params: Omit<GetMetaInfoParams, "appId"> = { statsDataId };
     const requestParams = composeRequestParams(params, ESTAT_APP_ID);
@@ -106,6 +125,11 @@ export async function fetchMetaInfo(
     );
 
     validateMetaInfoResponse(data, url);
+
+    // 3. バックグラウンドでR2に保存（awaitしない）
+    EstatMetaInfoR2S3Repository.save(statsDataId, data)
+      .then(() => console.log("✅ R2バックグラウンド保存完了:", statsDataId))
+      .catch((err) => console.warn("R2保存失敗（無視）:", err));
 
     return data;
   } catch (error) {

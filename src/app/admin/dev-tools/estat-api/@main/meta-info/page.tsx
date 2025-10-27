@@ -1,10 +1,6 @@
 import { fetchMetaInfo } from "@/features/estat-api/meta-info";
 import { EstatMetaInfoDisplay } from "@/features/estat-api/meta-info/components";
 
-import { buildEnvironmentConfig } from "@/lib/environment";
-
-import { getMockMetaInfo } from "@data/mock/estat-api/meta-info";
-
 /**
  * MetaInfoMainSlot - e-Statメタ情報管理ページのメインコンテンツ（サーバーコンポーネント）
  *
@@ -18,26 +14,15 @@ export default async function MetaInfoMainSlot({
   searchParams: Promise<{ statsId?: string }>;
 }) {
   const { statsId } = await searchParams;
-  const config = buildEnvironmentConfig();
   let metaInfo = null;
   let error = null;
 
-  // サーバーサイドでデータ取得
   if (statsId) {
     try {
-      if (config.isMock) {
-        console.log(`[${config.environment}] Loading meta info from mock...`);
-        metaInfo = getMockMetaInfo(statsId);
-
-        if (!metaInfo) {
-          error = `モックデータが見つかりません: ${statsId}`;
-        }
-      } else {
-        console.log(`[${config.environment}] Fetching meta info from e-Stat API...`);
-        metaInfo = await fetchMetaInfo(statsId);
-      }
+      // fetchMetaInfo内部でR2 → e-Stat APIのフォールバックが行われる
+      metaInfo = await fetchMetaInfo(statsId);
     } catch (err) {
-      console.error(`[${config.environment}] メタ情報取得エラー:`, err);
+      console.error("メタ情報取得エラー:", err);
       error =
         err instanceof Error ? err.message : "メタ情報の取得に失敗しました";
     }
@@ -53,4 +38,3 @@ export default async function MetaInfoMainSlot({
     </div>
   );
 }
-
