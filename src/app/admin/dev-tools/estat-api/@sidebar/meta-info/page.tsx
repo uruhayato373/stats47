@@ -1,6 +1,6 @@
 import { EstatMetaInfoSidebar } from "@/features/estat-api/meta-info/components";
 
-import { mockDataProvider } from "@/infrastructure/database/mock";
+import { EstatMetaInfoRepository } from "@/infrastructure/database/estat/repositories";
 
 import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
 
@@ -15,7 +15,8 @@ export default async function MetaInfoSidebarSlot() {
   let savedMetaInfoList: EstatMetaInfo[] = [];
 
   try {
-    savedMetaInfoList = await mockDataProvider.fetchEstatMetainfoUnique({
+    const repository = await EstatMetaInfoRepository.create();
+    savedMetaInfoList = await repository.getStatsList({
       limit: 20,
     });
   } catch (err) {

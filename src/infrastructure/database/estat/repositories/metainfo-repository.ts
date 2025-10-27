@@ -1,9 +1,6 @@
 import type { AreaType } from "@/features/ranking/types";
 import { getDataProvider } from "@/infrastructure/database";
-import {
-  mockDataProvider,
-  MockDataProvider,
-} from "@/infrastructure/database/mock";
+import { MockDataProvider } from "@/infrastructure/database/mock";
 import { buildEnvironmentConfig } from "@/lib/environment";
 
 import type {
@@ -54,13 +51,6 @@ export class EstatMetaInfoRepository {
    */
   static async create(): Promise<EstatMetaInfoRepository> {
     const config = buildEnvironmentConfig();
-
-    if (config.isMock) {
-      console.log(
-        `[${config.environment}] Creating EstatMetaInfoRepository with mock provider`
-      );
-      return new EstatMetaInfoRepository(mockDataProvider);
-    }
 
     console.log(
       `[${config.environment}] Creating EstatMetaInfoRepository with database provider`

@@ -11,7 +11,6 @@
 import { findSubcategoryById } from "@/features/category";
 
 import { getDataProvider } from "@/infrastructure/database";
-import { mockDataProvider } from "@/infrastructure/database/mock";
 import { buildEnvironmentConfig } from "@/lib/environment";
 import { RankingItem, RankingItemDB } from "../types";
 
@@ -44,13 +43,6 @@ export class RankingRepository {
    */
   static async create(): Promise<RankingRepository> {
     const config = buildEnvironmentConfig();
-
-    if (config.isMock) {
-      console.log(
-        `[${config.environment}] Creating RankingRepository with mock provider`
-      );
-      return new RankingRepository(mockDataProvider as any);
-    }
 
     console.log(
       `[${config.environment}] Creating RankingRepository with database provider`

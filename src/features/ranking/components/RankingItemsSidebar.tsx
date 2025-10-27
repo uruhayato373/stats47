@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 
-import { fetchRankingItemsBySubcategory } from "../ranking-items";
+import { RankingRepository } from "../repositories/ranking-repository";
 
 import { RankingItemCard } from "./RankingItemCard";
 
@@ -33,7 +33,10 @@ export async function RankingItemsSidebar({
   let error: string | null = null;
 
   try {
-    const config = await fetchRankingItemsBySubcategory(subcategory);
+    // ローカルD1から直接取得（SQLが実行される）
+    const repository = await RankingRepository.create();
+    const config = await repository.getRankingItemsBySubcategory(subcategory);
+    
     if (config) {
       rankingItems = config.rankingItems;
     }
