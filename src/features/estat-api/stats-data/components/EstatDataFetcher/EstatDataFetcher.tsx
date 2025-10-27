@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+/**
+ * @fileoverview e-Stat統計データ取得フォームコンポーネント
+ *
+ * 責務:
+ * - フォームUIの描画
+ * - フォーム送信時のURL遷移
+ */
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -8,168 +14,54 @@ import { RotateCcw, Search, X } from "lucide-react";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/atoms/ui/card";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/atoms/ui/select";
 
-interface EstatDataFetcherProps {}
+import { useStatsDataForm } from "../../hooks";
+import { buildStatsDataUrl } from "../../utils";
 
-type DynamicField = {
-  id: string; // 一意のID（cdTime, cdCat02, cdCat03など）
-  label: string; // 表示ラベル（時間軸, 分類02, 分類03など）
-  value: string; // 入力値
-};
-
-type FormData = {
-  statsDataId: string;
-  cdCat01: string;
-  cdArea: string;
-};
-
-export default function EstatDataFetcher({}: EstatDataFetcherProps) {
+/**
+ * EstatDataFetcher - e-Stat統計データ取得フォーム
+ *
+ * URLパラメータでデータ取得パラメータを指定し、
+ * フォーム送信時にURL遷移します。
+ */
+export default function EstatDataFetcher() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  const [formData, setFormData] = useState<FormData>({
-    statsDataId: "",
-    cdCat01: "",
-    cdArea: "",
-  });
+  const {
+    formData,
+    dynamicFields,
+    unusedCategories,
+    handleInputChange,
+    handleAddField,
+    handleRemoveField,
+    handleDynamicFieldChange,
+    handleReset,
+  } = useStatsDataForm(searchParams);
 
-  // URLパラメータから初期値を取得
-  useEffect(() => {
-    const statsDataId = searchParams.get("statsDataId") || "";
-    const cdCat01 = searchParams.get("cdCat01") || "";
-    const cdArea = searchParams.get("cdArea") || "";
-
-    setFormData({
-      statsDataId: statsDataId || "0000010101",
-      cdCat01: cdCat01 || "A1101",
-      cdArea,
-    });
-
-    // 動的フィールドも復元
-    const dynamicFieldsFromUrl: DynamicField[] = [];
-    const availableFields = ["cdTime", "cdCat02", "cdCat03", "cdCat04", "cdCat05", "cdCat06", "cdCat07", "cdCat08", "cdCat09", "cdCat10", "cdCat11", "cdCat12", "cdCat13", "cdCat14", "cdCat15"];
-    
-    availableFields.forEach((field) => {
-      const value = searchParams.get(field);
-      if (value) {
-        const category = availableCategories.find((cat) => cat.id === field);
-        if (category) {
-          dynamicFieldsFromUrl.push({
-            id: category.id,
-            label: category.label,
-            value,
-          });
-        }
-      }
-    });
-
-    if (dynamicFieldsFromUrl.length > 0) {
-      setDynamicFields(dynamicFieldsFromUrl);
-    }
-  }, [searchParams]);
-
-  // 動的に追加されたフィールド
-  const [dynamicFields, setDynamicFields] = useState<DynamicField[]>([]);
-
-  // 利用可能な分類オプション（cdTime + cdCat02～cdCat15）
-  const availableCategories = [
-    { id: "cdTime", label: "時間軸" },
-    { id: "cdCat02", label: "分類02" },
-    { id: "cdCat03", label: "分類03" },
-    { id: "cdCat04", label: "分類04" },
-    { id: "cdCat05", label: "分類05" },
-    { id: "cdCat06", label: "分類06" },
-    { id: "cdCat07", label: "分類07" },
-    { id: "cdCat08", label: "分類08" },
-    { id: "cdCat09", label: "分類09" },
-    { id: "cdCat10", label: "分類10" },
-    { id: "cdCat11", label: "分類11" },
-    { id: "cdCat12", label: "分類12" },
-    { id: "cdCat13", label: "分類13" },
-    { id: "cdCat14", label: "分類14" },
-    { id: "cdCat15", label: "分類15" },
-  ];
-
-  // まだ追加されていない分類のリスト
-  const unusedCategories = availableCategories.filter(
-    (cat) => !dynamicFields.some((field) => field.id === cat.id)
-  );
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // フィールド追加
-  const handleAddField = (categoryId: string) => {
-    const category = availableCategories.find((cat) => cat.id === categoryId);
-    if (!category) return;
-
-    setDynamicFields([
-      ...dynamicFields,
-      { id: category.id, label: category.label, value: "" },
-    ]);
-  };
-
-  // フィールド削除
-  const handleRemoveField = (fieldId: string) => {
-    setDynamicFields(dynamicFields.filter((field) => field.id !== fieldId));
-  };
-
-  // フィールド値変更
-  const handleDynamicFieldChange = (fieldId: string, value: string) => {
-    setDynamicFields(
-      dynamicFields.map((field) =>
-        field.id === fieldId ? { ...field, value } : field
-      )
-    );
-  };
-
+  /**
+   * フォーム送信ハンドラー
+   * URLを構築してページ遷移
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // URLパラメータを構築
-    const urlParams = new URLSearchParams();
-    urlParams.set("statsDataId", formData.statsDataId);
-    if (formData.cdCat01) urlParams.set("cdCat01", formData.cdCat01);
-    if (formData.cdArea) urlParams.set("cdArea", formData.cdArea);
-
-    // 動的フィールドの値を追加
-    dynamicFields.forEach((field) => {
-      if (field.value) {
-        urlParams.set(field.id, field.value);
-      }
-    });
-
-    // URL遷移
-    router.push(`/admin/dev-tools/estat-api/stats-data?${urlParams.toString()}`);
-  };
-
-  const handleReset = () => {
-    setFormData({
-      statsDataId: "0000010101",
-      cdCat01: "",
-      cdArea: "",
-    });
-    setDynamicFields([]); // 動的フィールドもクリア
+    const url = buildStatsDataUrl(formData, dynamicFields);
+    router.push(url);
   };
 
   return (
@@ -190,7 +82,7 @@ export default function EstatDataFetcher({}: EstatDataFetcherProps) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* 基本設定（固定フィールド） */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="statsDataId">統計表ID *</Label>
                 <Input
@@ -201,7 +93,6 @@ export default function EstatDataFetcher({}: EstatDataFetcherProps) {
                   onChange={handleInputChange}
                   required
                 />
-                <p className="text-sm text-muted-foreground">必須項目</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cdCat01">分類01</Label>
@@ -212,18 +103,6 @@ export default function EstatDataFetcher({}: EstatDataFetcherProps) {
                   value={formData.cdCat01}
                   onChange={handleInputChange}
                 />
-                <p className="text-sm text-muted-foreground">例: A1101,A1102</p>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cdArea">地域</Label>
-                <Input
-                  id="cdArea"
-                  name="cdArea"
-                  placeholder="カンマ区切り"
-                  value={formData.cdArea}
-                  onChange={handleInputChange}
-                />
-                <p className="text-sm text-muted-foreground">例: 13100,13101</p>
               </div>
             </div>
 
@@ -275,38 +154,28 @@ export default function EstatDataFetcher({}: EstatDataFetcherProps) {
 
             {/* フィールド追加セクション */}
             {unusedCategories.length > 0 && (
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700">
-                <div className="flex items-center justify-between mb-3">
-                  <h5 className="text-sm font-medium text-gray-700 dark:text-neutral-300">
-                    分類パラメータを追加
-                  </h5>
-                  <span className="text-xs text-gray-500 dark:text-neutral-400 bg-gray-200 dark:bg-neutral-700 px-2 py-1 rounded-full">
-                    残り {unusedCategories.length} 個
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Select
-                    onValueChange={(value) => {
-                      if (value) {
-                        handleAddField(value);
-                      }
-                    }}
-                  >
-                    <SelectTrigger className="flex-1">
-                      <SelectValue placeholder="分類を選択して追加..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {unusedCategories.map((cat) => (
-                        <SelectItem key={cat.id} value={cat.id}>
-                          {cat.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <div className="text-xs text-muted-foreground">
-                    よく使う: 時間軸, 分類02, 分類03
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700">
+                <span className="text-sm font-medium text-gray-700 dark:text-neutral-300 whitespace-nowrap">
+                  パラメータ追加:
+                </span>
+                <Select
+                  onValueChange={(value) => {
+                    if (value) {
+                      handleAddField(value);
+                    }
+                  }}
+                >
+                  <SelectTrigger className="w-[200px]">
+                    <SelectValue placeholder="選択..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {unusedCategories.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.id}>
+                        {cat.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             )}
 

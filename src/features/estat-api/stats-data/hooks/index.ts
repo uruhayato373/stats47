@@ -2,4 +2,4 @@
  * e-Stat stats-data関連のカスタムフック
  */
 
-// 現在フックは使用されていません
+export { useStatsDataForm, type UseStatsDataFormReturn } from "./useStatsDataForm";

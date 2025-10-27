@@ -28,7 +28,7 @@ import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
 
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
-import { EstatMetaInfoFormatter } from "../../services/formatter";
+import { parseCompleteMetaInfo } from "../../services/formatter";
 
 
 
@@ -95,7 +95,7 @@ export default function EstatMetaInfoDisplay({
   const parsedData = useMemo(() => {
     if (!metaInfo || !statsId) return null;
     try {
-      return EstatMetaInfoFormatter.parseCompleteMetaInfo(metaInfo);
+      return parseCompleteMetaInfo(metaInfo);
     } catch (error) {
       console.error("メタ情報の解析に失敗しました:", error);
       return null;

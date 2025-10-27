@@ -25,9 +25,22 @@ export type {
 
 // クラス
 export { EstatMetaInfoBatchProcessor } from "./services/batch-processor";
-export { EstatMetaInfoFetcher } from "./services/fetcher";
-export { EstatMetaInfoFormatter } from "./services/formatter";
-export { EstatIdUtils } from "./services/id-utils";
+
+// 関数
+export { fetchAndTransformMetaInfo, fetchMetaInfo } from "./services/fetcher";
+export {
+  extractCategories,
+  extractTableInfo,
+  extractTimeAxis,
+  parseCompleteMetaInfo,
+} from "./services/formatter";
+export {
+  formatEstatId,
+  generateEstatIdRange,
+  normalizeEstatId,
+  validateEstatId,
+  validateEstatIdFormat,
+} from "./services/id-utils";
 
 // ============================================================================
 // ユーティリティ関数

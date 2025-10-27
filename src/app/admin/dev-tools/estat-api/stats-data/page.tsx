@@ -1,4 +1,3 @@
-import { getMockStatsData } from "@data/mock/estat-api/stats-data";
 
 import { estatAPI } from "@/features/estat-api";
 import {
@@ -7,6 +6,7 @@ import {
 } from "@/features/estat-api/stats-data/components";
 
 import { buildEnvironmentConfig } from "@/infrastructure/config";
+import { getMockStatsData } from "@data/mock/estat-api/stats-data";
 
 /**
  * StatsDataPage - e-Stat統計データページ（サーバーコンポーネント）
@@ -44,21 +44,25 @@ export default async function StatsDataPage({
   let statsData = null;
   let error = null;
 
+  // デフォルト値（mock環境用）
+  const statsDataId = params.statsDataId || (config.isMock ? "0000010101" : undefined);
+  const cdCat01 = params.cdCat01 || (config.isMock ? "A1101" : undefined);
+
   // サーバーサイドでデータ取得
-  if (params.statsDataId && params.cdCat01) {
+  if (statsDataId && cdCat01) {
     try {
       if (config.isMock) {
         console.log(`[${config.environment}] Loading stats data from mock...`);
-        statsData = getMockStatsData(params.statsDataId, params.cdCat01);
+        statsData = getMockStatsData(statsDataId, cdCat01);
 
         if (!statsData) {
-          error = `モックデータが見つかりません: ${params.statsDataId}_${params.cdCat01}`;
+          error = `モックデータが見つかりません: ${statsDataId}_${cdCat01}`;
         }
       } else {
         console.log(`[${config.environment}] Fetching stats data from e-Stat API...`);
         statsData = await estatAPI.getStatsData({
-          statsDataId: params.statsDataId,
-          cdCat01: params.cdCat01,
+          statsDataId,
+          cdCat01,
           ...(params.cdArea && { cdArea: params.cdArea }),
           ...(params.cdTime && { cdTime: params.cdTime }),
           ...(params.cdCat02 && { cdCat02: params.cdCat02 }),

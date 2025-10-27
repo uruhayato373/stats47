@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import {
+  EstatMetaInfoBatchProcessor,
+  fetchAndTransformMetaInfo,
+} from "@/features/estat-api";
 import { getDataProvider } from "@/infrastructure/database";
 import { EstatMetaInfoRepository } from "@/infrastructure/database/estat/repositories";
-import {
-  EstatMetaInfoFetcher,
-  EstatMetaInfoBatchProcessor,
-} from "@/features/estat-api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -75,9 +75,7 @@ export async function POST(request: NextRequest) {
       });
     } else if (statsDataId) {
       // 単一IDの処理
-      const transformedData = await EstatMetaInfoFetcher.fetchAndTransform(
-        statsDataId
-      );
+      const transformedData = await fetchAndTransformMetaInfo(statsDataId);
 
       // TODO: データベースに保存
       // const result = await metaInfoRepository.saveTransformedData(transformedData);

@@ -5,8 +5,8 @@
 
 import { ESTAT_API_CONFIG } from "@/features/estat-api/core/config";
 
-import { EstatMetaInfoFetcher } from "./fetcher";
-import { EstatIdUtils } from "./id-utils";
+import { fetchAndTransformMetaInfo } from "./fetcher";
+import { generateEstatIdRange } from "./id-utils";
 
 /**
  * バッチ処理結果の型定義
@@ -68,8 +68,7 @@ export class EstatMetaInfoBatchProcessor {
       const batchResults = await Promise.allSettled(
         batch.map(async (id) => {
           try {
-            const transformedData =
-              await EstatMetaInfoFetcher.fetchAndTransform(id);
+            const transformedData = await fetchAndTransformMetaInfo(id);
             return {
               statsDataId: id,
               success: true,
@@ -140,7 +139,7 @@ export class EstatMetaInfoBatchProcessor {
     endId: string,
     options?: BatchProcessOptions
   ): Promise<BatchProcessResult> {
-    const statsDataIds = EstatIdUtils.generateIdRange(startId, endId);
+    const statsDataIds = generateEstatIdRange(startId, endId);
     return this.processBulk(statsDataIds, options);
   }
 }
