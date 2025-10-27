@@ -5,11 +5,12 @@
  * @see GET_META_INFO完全ガイド
  */
 
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+
 import {
   CategoryInfo,
   ClassItem,
   ClassObject,
+  EstatMetaInfoResponse,
   ParsedMetaInfo,
   TableInfo,
   TimeAxisInfo,
@@ -21,8 +22,6 @@ import {
  * @param metaInfo - e-Stat APIのメタ情報レスポンス
  * @returns 統計表の基本情報
  * @throws {Error} メタ情報が不足している場合
- *
- * @see GET_META_INFO完全ガイド 4.2 TABLE_INF
  *
  * @example
  * ```typescript

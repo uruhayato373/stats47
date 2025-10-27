@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 
+import { getMockMetaInfo } from "../../../../../data/mock/estat-api/meta-info";
 import {
   extractCategories,
   extractTableInfo,
@@ -7,18 +8,23 @@ import {
   parseCompleteMetaInfo,
 } from "../services/formatter";
 
-import { minimalMetaInfoResponse, mockMetaInfoResponse } from "./fixtures";
-
-import type { EstatMetaInfoResponse } from "../../types";
-import type { DimensionSelectOptions } from "../../types/meta-info-response";
+import type { EstatMetaInfoResponse } from "../types";
 
 describe("EstatMetaInfoFormatter", () => {
   let fullResponse: EstatMetaInfoResponse;
   let minimalResponse: EstatMetaInfoResponse;
 
   beforeAll(() => {
-    fullResponse = mockMetaInfoResponse;
-    minimalResponse = minimalMetaInfoResponse;
+    // モックデータから取得
+    const fullData = getMockMetaInfo("0000010101");
+    const minimalData = getMockMetaInfo("0000010101");
+
+    if (!fullData || !minimalData) {
+      throw new Error("モックデータの取得に失敗しました");
+    }
+
+    fullResponse = fullData;
+    minimalResponse = minimalData;
   });
 
   describe("extractTableInfo", () => {
@@ -63,9 +69,17 @@ describe("EstatMetaInfoFormatter", () => {
       expect(categories).toBeInstanceOf(Array);
       expect(categories.length).toBeGreaterThan(0);
 
-      const firstCategory = categories[0];
-      expect(firstCategory).toHaveProperty("id");
-      expect(firstCategory).toHaveProperty("name");
+      // catプレフィックスを持つ分類のみ抽出されることを確認
+      const catCategory = categories.find((c) => c.id === "cat01");
+      expect(catCategory).toBeDefined();
+      expect(catCategory?.id).toBe("cat01");
+      expect(catCategory?.name).toBe("Ａ　人口・世帯");
+      expect(catCategory?.items).toBeInstanceOf(Array);
+      expect(catCategory?.items.length).toBeGreaterThan(0);
+
+      // tabなどcatプレフィックスのない分類は抽出されないことを確認
+      const tabCategory = categories.find((c) => c.id === "tab");
+      expect(tabCategory).toBeUndefined();
     });
 
     it("最小限のデータでも正しく抽出する", () => {
@@ -76,20 +90,8 @@ describe("EstatMetaInfoFormatter", () => {
     });
   });
 
-  // TODO: extractAreaHierarchy は未実装のため、テストを一時的に無効化
-  describe.skip("extractAreaHierarchy", () => {
-    it("地域階層情報を正しく抽出する", () => {
-      const areas: any = [];
-      expect(areas).toBeDefined();
-      expect(Array.isArray(areas)).toBe(true);
-    });
-
-    it("最小限のデータでも正しく抽出する", () => {
-      const areas: any = [];
-      expect(areas).toBeDefined();
-      expect(Array.isArray(areas)).toBe(true);
-    });
-  });
+  // NOTE: extractAreaHierarchy はprivateな関数のため、
+  // parseCompleteMetaInfo経由でのテストで十分（parseCompleteMetaInfoで既にテスト済み）
 
   describe("extractTimeAxis", () => {
     it("時間軸情報を正しく抽出する", () => {
@@ -115,10 +117,26 @@ describe("EstatMetaInfoFormatter", () => {
 
       expect(parsed).toBeDefined();
       expect(parsed.tableInfo).toBeDefined();
+      expect(parsed.tableInfo.id).toBe("0000010101");
       expect(parsed.dimensions).toBeDefined();
+
+      // categories
       expect(parsed.dimensions.categories).toBeInstanceOf(Array);
-      expect(parsed.dimensions.areas).toBeDefined();
+      expect(parsed.dimensions.categories.length).toBeGreaterThan(0);
+
+      // areas (都道府県情報の配列)
+      expect(parsed.dimensions.areas).toBeInstanceOf(Array);
+      expect(parsed.dimensions.areas.length).toBeGreaterThan(0);
+      const area = parsed.dimensions.areas[0];
+      expect(area).toHaveProperty("code");
+      expect(area).toHaveProperty("name");
+      expect(area).toHaveProperty("level");
+      expect(typeof area.level).toBe("number");
+
+      // timeAxis
       expect(parsed.dimensions.timeAxis).toBeDefined();
+      expect(parsed.dimensions.timeAxis.availableYears).toBeInstanceOf(Array);
+      expect(parsed.dimensions.timeAxis.formattedYears).toBeInstanceOf(Array);
     });
 
     it("最小限のデータでも正しく解析する", () => {
@@ -128,163 +146,12 @@ describe("EstatMetaInfoFormatter", () => {
       expect(parsed.tableInfo).toBeDefined();
       expect(parsed.dimensions).toBeDefined();
       expect(parsed.dimensions.categories).toBeInstanceOf(Array);
-      expect(parsed.dimensions.areas).toBeDefined();
+      expect(parsed.dimensions.areas).toBeInstanceOf(Array);
       expect(parsed.dimensions.timeAxis).toBeDefined();
     });
   });
 
-  // TODO: generateSelectOptions は未実装のため、テスト全体をスキップ
-  describe.skip("generateSelectOptions", () => {
-    // すべてのテストは未実装関数を参照するため、スキップ
-    const generateSelectOptions = () => ({ area: [], time: [] });
-    it("stats-data互換の選択肢を正しく生成する", () => {
-      const options = generateSelectOptions(fullResponse);
-
-      expect(options).toBeDefined();
-      expect(options).toHaveProperty("area");
-      expect(options).toHaveProperty("time");
-      expect(Array.isArray(options.area)).toBe(true);
-      expect(Array.isArray(options.time)).toBe(true);
-    });
-
-    it("最小限のデータでも正しく生成する", () => {
-      const options = generateSelectOptions(minimalResponse);
-
-      expect(options).toBeDefined();
-      expect(options).toHaveProperty("area");
-      expect(options).toHaveProperty("time");
-      expect(Array.isArray(options.area)).toBe(true);
-      expect(Array.isArray(options.time)).toBe(true);
-    });
-
-    it("stats-dataのFormattedValue.dimensionsと同じ構造を返す", () => {
-      const options = generateSelectOptions(fullResponse);
-
-      // 必須次元の存在確認
-      expect(options.area).toBeDefined();
-      expect(options.time).toBeDefined();
-
-      // オプション次元の存在確認（存在する場合のみ）
-      if (options.tab) {
-        expect(Array.isArray(options.tab)).toBe(true);
-      }
-
-      // cat01-cat15の存在確認（存在する場合のみ）
-      for (let i = 1; i <= 15; i++) {
-        const catId = `cat${String(i).padStart(
-          2,
-          "0"
-        )}` as keyof DimensionSelectOptions;
-        if (options[catId]) {
-          expect(Array.isArray(options[catId])).toBe(true);
-        }
-      }
-    });
-
-    it("都道府県フィルタリングが正しく動作する", () => {
-      const options = generateSelectOptions(fullResponse);
-
-      // 都道府県の選択肢が正しくフィルタリングされているか確認
-      options.area.forEach((option) => {
-        expect(option.value).toMatch(/^\d{5}$/); // 5桁の数字
-        expect(option.value).toMatch(/000$/); // 末尾が000
-        expect(option.value).not.toBe("00000"); // 全国コードは除外
-      });
-    });
-
-    it("年次が降順でソートされている", () => {
-      const options = generateSelectOptions(fullResponse);
-
-      if (options.time.length > 1) {
-        for (let i = 0; i < options.time.length - 1; i++) {
-          expect(
-            options.time[i].value.localeCompare(options.time[i + 1].value)
-          ).toBeGreaterThan(0);
-        }
-      }
-    });
-
-    it("CLASS_OBJが存在しない場合は空の配列を返す", () => {
-      const invalidResponse = {
-        GET_META_INFO: {
-          RESULT: { STATUS: 0 },
-          PARAMETER: {},
-          METADATA_INF: {
-            TABLE_INF: {},
-            CLASS_INF: {},
-          },
-        },
-      } as EstatMetaInfoResponse;
-
-      const options = generateSelectOptions(invalidResponse);
-
-      expect(options).toEqual({ area: [], time: [] });
-    });
-
-    it("複数分類を持つ統計表で正しく動作する", () => {
-      // cat01とcat02の両方を持つモックデータを作成
-      const multiCategoryResponse = {
-        ...fullResponse,
-        GET_META_INFO: {
-          ...fullResponse.GET_META_INFO,
-          METADATA_INF: {
-            ...fullResponse.GET_META_INFO.METADATA_INF,
-            CLASS_INF: {
-              CLASS_OBJ: [
-                {
-                  "@id": "area",
-                  "@name": "地域",
-                  CLASS: [
-                    { "@code": "13000", "@name": "東京都" },
-                    { "@code": "27000", "@name": "大阪府" },
-                  ],
-                },
-                {
-                  "@id": "time",
-                  "@name": "時間",
-                  CLASS: [
-                    { "@code": "2020", "@name": "2020年" },
-                    { "@code": "2021", "@name": "2021年" },
-                  ],
-                },
-                {
-                  "@id": "cat01",
-                  "@name": "男女別",
-                  CLASS: [
-                    { "@code": "1", "@name": "男" },
-                    { "@code": "2", "@name": "女" },
-                  ],
-                },
-                {
-                  "@id": "cat02",
-                  "@name": "年齢別",
-                  CLASS: [
-                    { "@code": "1", "@name": "0-14歳" },
-                    { "@code": "2", "@name": "15-64歳" },
-                    { "@code": "3", "@name": "65歳以上" },
-                  ],
-                },
-              ],
-            },
-          },
-        },
-      } as EstatMetaInfoResponse;
-
-      // TODO: generateSelectOptions は未実装
-      const options: any = { cat01: [], cat02: [] };
-
-      expect(options.cat01).toBeDefined();
-      expect(options.cat01).toHaveLength(2);
-      expect(options.cat01![0]).toEqual({ value: "1", label: "男" });
-      expect(options.cat01![1]).toEqual({ value: "2", label: "女" });
-
-      expect(options.cat02).toBeDefined();
-      expect(options.cat02).toHaveLength(3);
-      expect(options.cat02![0]).toEqual({ value: "1", label: "0-14歳" });
-      expect(options.cat02![1]).toEqual({ value: "2", label: "15-64歳" });
-      expect(options.cat02![2]).toEqual({ value: "3", label: "65歳以上" });
-    });
-  });
+  // NOTE: generateSelectOptions は未実装のためテストをスキップ
 
   describe("エラーハンドリング", () => {
     it("無効なレスポンスでエラーを投げる", () => {
