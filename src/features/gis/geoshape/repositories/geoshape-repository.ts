@@ -3,14 +3,11 @@
  * データソースの抽象化とフォールバック戦略
  */
 
-import { isMockEnvironment } from "../config/geoshape-config";
-
 import {
   fetchFromExternalAPI,
   isExternalAPIAvailable,
 } from "./external-data-source";
-import { fetchFromMockData, isMockDataAvailable } from "./mock-data-source";
-import { fetchFromR2, isR2Available } from "./r2-data-source";
+import { fetchFromR2, isR2Available, saveToR2 } from "./r2-data-source";
 
 import type {
   AreaType,
@@ -33,7 +30,7 @@ const cacheTimestamps = new Map<string, number>();
 
 /**
  * TopoJSONデータを取得（汎用メソッド）
- * フォールバック順序: メモリキャッシュ → Mock → R2 → 外部API
+ * フォールバック順序: メモリキャッシュ → R2 → 外部API（+R2保存）
  * @param areaType 地域タイプ
  * @param prefCode 都道府県コード（2桁）- municipalityで必須
  * @param version 市区町村版タイプ
@@ -63,25 +60,7 @@ export async function fetchTopology(
     }
   }
 
-  // 2. Mockデータソース（開発環境）
-  if (isMockEnvironment()) {
-    try {
-      console.log(`[GeoshapeRepository] Trying MockData for ${cacheKey}`);
-      const data = await fetchFromMockData(areaType, prefCode, version);
-      if (data) {
-        saveToMemoryCache(cacheKey, data);
-        return {
-          data,
-          source: "mock",
-          timestamp: Date.now(),
-        };
-      }
-    } catch (error) {
-      console.warn(`[GeoshapeRepository] MockData failed:`, error);
-    }
-  }
-
-  // 3. R2ストレージ
+  // 2. R2ストレージ
   try {
     console.log(`[GeoshapeRepository] Trying R2 for ${cacheKey}`);
     const data = await fetchFromR2(areaType, prefCode, version);
@@ -97,11 +76,17 @@ export async function fetchTopology(
     console.warn(`[GeoshapeRepository] R2 failed:`, error);
   }
 
-  // 4. 外部API（最後の手段）
+  // 3. 外部API（最後の手段）
   try {
     console.log(`[GeoshapeRepository] Trying ExternalAPI for ${cacheKey}`);
     const data = await fetchFromExternalAPI(areaType, prefCode, version);
     saveToMemoryCache(cacheKey, data);
+
+    // R2にバックグラウンド保存（awaitしない）
+    saveToR2(data, areaType, prefCode, version).catch((err) => {
+      console.warn(`[GeoshapeRepository] R2 background save failed:`, err);
+    });
+
     return {
       data,
       source: "external",
@@ -156,17 +141,15 @@ export async function checkDataSources(
   areaType: AreaType,
   prefCode?: string,
   version: MunicipalityVersion = "merged"
-): Promise<{ mock: boolean; r2: boolean; external: boolean }> {
+): Promise<{ r2: boolean; external: boolean }> {
   const results = await Promise.allSettled([
-    isMockDataAvailable(areaType, prefCode, version),
     isR2Available(),
     isExternalAPIAvailable(areaType, prefCode, version),
   ]);
 
   return {
-    mock: results[0].status === "fulfilled" && results[0].value,
-    r2: results[1].status === "fulfilled" && results[1].value,
-    external: results[2].status === "fulfilled" && results[2].value,
+    r2: results[0].status === "fulfilled" && results[0].value,
+    external: results[1].status === "fulfilled" && results[1].value,
   };
 }
 

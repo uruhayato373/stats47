@@ -25,7 +25,6 @@ export {
   buildGeoshapeExternalUrl,
   buildR2Key,
   geoshapeConfig,
-  isMockEnvironment,
 } from "./config/geoshape-config";
 
 // リポジトリ（純粋な関数）
@@ -39,10 +38,6 @@ export {
   clearGeoshapeCache,
   fetchTopology,
 } from "./repositories/geoshape-repository";
-export {
-  fetchFromMockData,
-  isMockDataAvailable,
-} from "./repositories/mock-data-source";
 export {
   deleteFromR2,
   fetchFromR2,

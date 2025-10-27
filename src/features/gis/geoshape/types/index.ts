@@ -103,7 +103,7 @@ export interface GeoshapeConfig {
 export type ResolutionLevel = "low" | "medium" | "high";
 
 // データソースタイプ
-export type DataSourceType = "memory" | "mock" | "r2" | "external";
+export type DataSourceType = "memory" | "r2" | "external";
 
 // データ取得オプション
 export interface FetchOptions {
