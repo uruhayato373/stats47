@@ -1,4 +1,4 @@
-import { MunicipalityDashboard } from "./MunicipalityDashboard";
+import { Cityashboard } from "./Cityashboard";
 import { NationalDashboard } from "./NationalDashboard";
 import { PrefectureDashboard } from "./PrefectureDashboard";
 
@@ -28,7 +28,7 @@ export function AreaDashboardSelector({
   areaType,
   areaCode,
 }: AreaDashboardSelectorProps) {
-  if (areaType === "country") {
+  if (areaType === "national") {
     return <NationalDashboard areaCode={areaCode} />;
   }
 
@@ -36,5 +36,5 @@ export function AreaDashboardSelector({
     return <PrefectureDashboard areaCode={areaCode} />;
   }
 
-  return <MunicipalityDashboard areaCode={areaCode} />;
+  return <Cityashboard areaCode={areaCode} />;
 }

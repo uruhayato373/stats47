@@ -54,7 +54,10 @@
       "Bash(git rm:*)",
       "Bash(npx eslint:*)",
       "Bash(npm test:*)",
-      "Bash(npx wrangler d1 execute:*)"
+      "Bash(npx wrangler d1 execute:*)",
+      "mcp__shadcn__search_items_in_registries",
+      "mcp__shadcn__get_item_examples_from_registries",
+      "Bash(npx shadcn@latest add chart:*)"
     ],
     "deny": [],
     "ask": []

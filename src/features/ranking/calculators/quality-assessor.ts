@@ -40,7 +40,7 @@ export class QualityAssessor {
     switch (level) {
       case "prefecture":
         return 47; // 都道府県数
-      case "municipality":
+      case "city":
         return 1700; // 市区町村数（概算）
       case "both":
         return 47 + 1700; // 両方
@@ -94,7 +94,7 @@ export class QualityAssessor {
       }
     }
     
-    if (level === "municipality" || level === "both") {
+    if (level === "city" || level === "both") {
       // 市区町村コード（簡易実装）
       // 実際の実装では、より詳細な市区町村コードリストが必要
       for (let pref = 1; pref <= 47; pref++) {

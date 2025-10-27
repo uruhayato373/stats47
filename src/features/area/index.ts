@@ -6,18 +6,7 @@
 // ============================================================================
 // 型定義
 // ============================================================================
-export type {
-  AreaType,
-  MockMunicipalitiesData,
-  MockMunicipality,
-  MockPrefecture,
-  MockPrefecturesData,
-  Municipality,
-  MunicipalityType,
-  Prefecture,
-  Region,
-  RegionMap,
-} from "./types";
+export type { AreaType, City, Prefecture, Region } from "./types";
 
 export { AreaError, DataSourceError } from "./types";
 
@@ -37,7 +26,7 @@ export {
   validateArea,
   validateAreaCode,
   validateAreaCodes,
-  validateMunicipalityCode,
+  validateCityCode,
   validatePrefectureCode,
   validatePrefectureName,
 } from "./utils/code-converter";

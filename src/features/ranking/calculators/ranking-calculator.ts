@@ -22,7 +22,7 @@ export class RankingCalculator {
     const rankedData = this.calculateOverallRanking(dataPoints);
     
     // 2. 都道府県内ランキング計算（市区町村の場合）
-    if (level === "municipality") {
+    if (level === "city") {
       return this.calculateParentRanking(rankedData);
     }
     

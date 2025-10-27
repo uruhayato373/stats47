@@ -6,7 +6,7 @@
 import { buildR2Key, geoshapeConfig } from "../config/geoshape-config";
 import type {
   AreaType,
-  MunicipalityVersion,
+  Cityersion,
   TopoJSONTopology,
 } from "../types/index";
 
@@ -20,7 +20,7 @@ import type {
 export async function fetchFromR2(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<TopoJSONTopology | null> {
   try {
     const r2Key = buildR2Key(areaType, prefCode, version);
@@ -70,7 +70,7 @@ export async function saveToR2(
   data: TopoJSONTopology,
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<void> {
   try {
     const r2Key = buildR2Key(areaType, prefCode, version);
@@ -109,7 +109,7 @@ export async function saveToR2(
 export async function deleteFromR2(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<void> {
   try {
     const r2Key = buildR2Key(areaType, prefCode, version);

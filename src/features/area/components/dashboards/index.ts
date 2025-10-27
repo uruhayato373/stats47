@@ -1,4 +1,4 @@
 export { AreaDashboardSelector } from "./AreaDashboardSelector";
-export { MunicipalityDashboard } from "./MunicipalityDashboard";
+export { Cityashboard } from "./Cityashboard";
 export { NationalDashboard } from "./NationalDashboard";
 export { PrefectureDashboard } from "./PrefectureDashboard";

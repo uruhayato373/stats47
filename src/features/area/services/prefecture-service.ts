@@ -7,12 +7,9 @@ import {
   fetchPrefectures,
   fetchRegions,
   findPrefectureByCode as findPrefectureByCodeFromRepo,
+  getRegionKeyFromPrefectureCode,
 } from "../repositories/area-repository";
 import { Prefecture } from "../types/index";
-
-// ============================================================================
-// リスト全体を取得（list動詞）
-// ============================================================================
 
 /**
  * 全ての都道府県を取得
@@ -28,7 +25,9 @@ export async function listPrefecturesByRegion(
   regionKey: string
 ): Promise<Prefecture[]> {
   const allPrefectures = await fetchPrefectures();
-  return allPrefectures.filter((pref) => pref.regionKey === regionKey);
+  return allPrefectures.filter(
+    (pref) => getRegionKeyFromPrefectureCode(pref.prefCode) === regionKey
+  );
 }
 
 /**
@@ -37,10 +36,6 @@ export async function listPrefecturesByRegion(
 export async function listRegions(): Promise<Record<string, string[]>> {
   return await fetchRegions();
 }
-
-// ============================================================================
-// 検索（find動詞、search動詞）
-// ============================================================================
 
 /**
  * 都道府県コードで検索
@@ -62,10 +57,6 @@ export async function searchPrefectures(query: string): Promise<Prefecture[]> {
     pref.prefName.toLowerCase().includes(lowerQuery)
   );
 }
-
-// ============================================================================
-// dictionary/mapから読み出し（lookup動詞）
-// ============================================================================
 
 /**
  * 都道府県コードから都道府県名を取得

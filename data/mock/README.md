@@ -15,9 +15,8 @@
 
 ```
 data/mock/
-├── area/                        # 地域データ
-│   ├── prefectures.json
-│   └── municipalities.json
+├── prefectures.json             # 都道府県データ
+├── cities.json                  # 市区町村データ
 ├── auth/                        # 認証データ
 │   ├── users.json
 │   └── sessions.json

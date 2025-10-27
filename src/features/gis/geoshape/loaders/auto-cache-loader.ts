@@ -216,7 +216,7 @@ export class AutoCacheGeoShapeLoader {
    * R2キャッシュを事前に温めておく
    */
   static async prewarmCache(
-    level: GeoShapeDataLevel = "municipality"
+    level: GeoShapeDataLevel = "city"
   ): Promise<PrewarmResult> {
     const results: PrewarmResult = {
       success: 0,
@@ -297,7 +297,7 @@ export class AutoCacheGeoShapeLoader {
     level: GeoShapeDataLevel,
     prefectureCode: string
   ): string {
-    return level === "municipality"
+    return level === "city"
       ? `municipalities/${prefectureCode}_city.topojson`
       : `municipalities-merged/${prefectureCode}_city_dc.topojson`;
   }
@@ -309,7 +309,7 @@ export class AutoCacheGeoShapeLoader {
     level: GeoShapeDataLevel,
     prefectureCode: string
   ): string {
-    return level === "municipality"
+    return level === "city"
       ? `${prefectureCode}_city.topojson`
       : `${prefectureCode}_city_dc.topojson`;
   }

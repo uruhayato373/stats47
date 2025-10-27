@@ -9,7 +9,7 @@ import {
 /**
  * 市区町村ダッシュボードのProps型定義
  */
-interface MunicipalityDashboardProps {
+interface CityashboardProps {
   /** 地域コード */
   areaCode: string;
 }
@@ -23,9 +23,9 @@ interface MunicipalityDashboardProps {
  * @param props - コンポーネントのProps
  * @returns 市区町村ダッシュボードのJSX要素
  */
-export function MunicipalityDashboard({
+export function Cityashboard({
   areaCode,
-}: MunicipalityDashboardProps) {
+}: CityDashboardProps) {
   return (
     <Card>
       <CardHeader>

@@ -1,1 +1,1 @@
-export { MunicipalityDashboard } from "./MunicipalityDashboard";
+export { Cityashboard } from "./Cityashboard";

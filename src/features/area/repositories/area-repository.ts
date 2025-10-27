@@ -4,31 +4,12 @@
  * すべての環境でR2ストレージからデータを取得
  */
 
-import {
-  DataSourceError,
-  MockMunicipalitiesData,
-  MockPrefecturesData,
-  Municipality,
-  Prefecture,
-} from "../types/index";
-
-// ============================================================================
-// 設定
-// ============================================================================
-
-const R2_BASE_URL = process.env.R2_PUBLIC_URL || "";
-
-// ============================================================================
-// モジュールレベルのキャッシュ
-// ============================================================================
+import { PREFECTURE_TO_REGION_MAP } from "../constants/region-mapping";
+import { City, DataSourceError, Prefecture } from "../types/index";
 
 let prefecturesCache: Prefecture[] | null = null;
 let regionsCache: Record<string, string[]> | null = null;
-let municipalitiesCache: Municipality[] | null = null;
-
-// ============================================================================
-// 外部データソースからデータを取得（fetch動詞）
-// ============================================================================
+let citiesCache: City[] | null = null;
 
 /**
  * 都道府県一覧を取得
@@ -39,26 +20,20 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
   }
 
   try {
-    // R2ストレージから取得
-    if (!R2_BASE_URL) {
-      throw new Error("R2_PUBLIC_URL is not configured");
-    }
-
-    const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
+    // サーバーサイドのAPIルート経由で取得（CORS回避）
+    const response = await fetch("/api/area/prefectures");
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch prefectures from R2: ${response.status}`
+        `Failed to fetch prefectures: ${response.status} ${response.statusText}`
       );
     }
-    const data: MockPrefecturesData = await response.json();
+    const data = (await response.json()) as {
+      prefectures: Prefecture[];
+      regions: Record<string, string[]>;
+    };
 
-    const prefectures: Prefecture[] = data.prefectures.map((pref) => ({
-      ...pref,
-      regionKey: getRegionKeyFromPrefectureCode(pref.prefCode),
-    }));
-
-    prefecturesCache = prefectures;
-    return prefectures;
+    prefecturesCache = data.prefectures;
+    return data.prefectures;
   } catch (error) {
     throw new DataSourceError("R2 storage", error as Error);
   }
@@ -73,19 +48,18 @@ export async function fetchRegions(): Promise<Record<string, string[]>> {
   }
 
   try {
-    // R2ストレージから取得
-    if (!R2_BASE_URL) {
-      throw new Error("R2_PUBLIC_URL is not configured");
-    }
-
-    const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
+    // サーバーサイドのAPIルート経由で取得（CORS回避）
+    const response = await fetch("/api/area/prefectures");
     if (!response.ok) {
-      throw new Error(`Failed to fetch regions from R2: ${response.status}`);
+      throw new Error(`Failed to fetch regions: ${response.status}`);
     }
-    const data: MockPrefecturesData = await response.json();
+    const data = (await response.json()) as {
+      prefectures: Prefecture[];
+      regions: Record<string, string[]>;
+    };
 
-    regionsCache = data.regions as unknown as Record<string, string[]>;
-    return data.regions as unknown as Record<string, string[]>;
+    regionsCache = data.regions;
+    return data.regions;
   } catch (error) {
     throw new DataSourceError("R2 storage", error as Error);
   }
@@ -94,32 +68,22 @@ export async function fetchRegions(): Promise<Record<string, string[]>> {
 /**
  * 市区町村一覧を取得
  */
-export async function fetchMunicipalities(): Promise<Municipality[]> {
-  if (municipalitiesCache) {
-    return municipalitiesCache;
+export async function fetchCities(): Promise<City[]> {
+  if (citiesCache) {
+    return citiesCache;
   }
 
   try {
-    // R2ストレージから取得
-    if (!R2_BASE_URL) {
-      throw new Error("R2_PUBLIC_URL is not configured");
-    }
-
-    const response = await fetch(`${R2_BASE_URL}/area/municipalities.json`);
+    // サーバーサイドのAPIルート経由で取得（CORS回避）
+    const response = await fetch("/api/area/cities");
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch municipalities from R2: ${response.status}`
-      );
+      throw new Error(`Failed to fetch cities: ${response.status}`);
     }
-    const data: MockMunicipalitiesData = await response.json();
+    const jsonData = await response.json();
+    const data = jsonData as { cities: City[] };
 
-    const municipalities: Municipality[] = data.municipalities.map((muni) => ({
-      ...muni,
-      prefectureName: getPrefectureNameByCode(muni.prefectureCode),
-    }));
-
-    municipalitiesCache = municipalities;
-    return municipalities;
+    citiesCache = data.cities;
+    return data.cities;
   } catch (error) {
     throw new DataSourceError("R2 storage", error as Error);
   }
@@ -128,18 +92,12 @@ export async function fetchMunicipalities(): Promise<Municipality[]> {
 /**
  * 特定の都道府県の市区町村を取得
  */
-export async function fetchMunicipalitiesByPrefecture(
+export async function fetchCitiesByPrefecture(
   prefectureCode: string
-): Promise<Municipality[]> {
-  const allMunicipalities = await fetchMunicipalities();
-  return allMunicipalities.filter(
-    (muni) => muni.prefectureCode === prefectureCode
-  );
+): Promise<City[]> {
+  const allCities = await fetchCities();
+  return allCities.filter((city) => city.prefCode === prefectureCode);
 }
-
-// ============================================================================
-// データベース・配列から検索（find動詞）
-// ============================================================================
 
 /**
  * 特定の地域コードで都道府県を検索
@@ -160,22 +118,16 @@ export async function findPrefectureByCode(
 /**
  * 特定の市区町村コードで市区町村を検索
  */
-export async function findMunicipalityByCode(
-  code: string
-): Promise<Municipality> {
-  const municipalities = await fetchMunicipalities();
-  const municipality = municipalities.find((m) => m.code === code);
+export async function findCityByCode(code: string): Promise<City> {
+  const cities = await fetchCities();
+  const city = cities.find((c) => c.cityCode === code);
 
-  if (!municipality) {
-    throw new Error(`Municipality not found: ${code}`);
+  if (!city) {
+    throw new Error(`City not found: ${code}`);
   }
 
-  return municipality;
+  return city;
 }
-
-// ============================================================================
-// キャッシュ管理
-// ============================================================================
 
 /**
  * キャッシュをクリア
@@ -183,7 +135,7 @@ export async function findMunicipalityByCode(
 export function clearAreaCache(): void {
   prefecturesCache = null;
   regionsCache = null;
-  municipalitiesCache = null;
+  citiesCache = null;
 }
 
 /**
@@ -192,86 +144,19 @@ export function clearAreaCache(): void {
 export function buildAreaCacheStatus(): {
   prefectures: boolean;
   regions: boolean;
-  municipalities: boolean;
+  cities: boolean;
 } {
   return {
     prefectures: prefecturesCache !== null,
     regions: regionsCache !== null,
-    municipalities: municipalitiesCache !== null,
+    cities: citiesCache !== null,
   };
-}
-
-// ============================================================================
-// プライベート関数
-// ============================================================================
-
-/**
- * 都道府県コードから都道府県名を取得（内部用）
- */
-function getPrefectureNameByCode(prefectureCode: string): string {
-  // 都道府県データがキャッシュされている場合は使用
-  if (prefecturesCache) {
-    const prefecture = prefecturesCache.find(
-      (p) => p.prefCode === prefectureCode
-    );
-    return prefecture?.prefName || "";
-  }
-  return "";
 }
 
 /**
  * 都道府県コードから地域ブロックキーを取得
  */
-function getRegionKeyFromPrefectureCode(prefCode: string): string {
-  const regionMap: Record<string, string> = {
-    "01": "hokkaido", // 北海道
-    "02": "tohoku", // 青森
-    "03": "tohoku", // 岩手
-    "04": "tohoku", // 宮城
-    "05": "tohoku", // 秋田
-    "06": "tohoku", // 山形
-    "07": "tohoku", // 福島
-    "08": "kanto", // 茨城
-    "09": "kanto", // 栃木
-    "10": "kanto", // 群馬
-    "11": "kanto", // 埼玉
-    "12": "kanto", // 千葉
-    "13": "kanto", // 東京
-    "14": "kanto", // 神奈川
-    "15": "chubu", // 新潟
-    "16": "chubu", // 富山
-    "17": "chubu", // 石川
-    "18": "chubu", // 福井
-    "19": "chubu", // 山梨
-    "20": "chubu", // 長野
-    "21": "chubu", // 岐阜
-    "22": "chubu", // 静岡
-    "23": "chubu", // 愛知
-    "24": "kinki", // 三重
-    "25": "kinki", // 滋賀
-    "26": "kinki", // 京都
-    "27": "kinki", // 大阪
-    "28": "kinki", // 兵庫
-    "29": "kinki", // 奈良
-    "30": "kinki", // 和歌山
-    "31": "chugoku", // 鳥取
-    "32": "chugoku", // 島根
-    "33": "chugoku", // 岡山
-    "34": "chugoku", // 広島
-    "35": "chugoku", // 山口
-    "36": "shikoku", // 徳島
-    "37": "shikoku", // 香川
-    "38": "shikoku", // 愛媛
-    "39": "shikoku", // 高知
-    "40": "kyushu", // 福岡
-    "41": "kyushu", // 佐賀
-    "42": "kyushu", // 長崎
-    "43": "kyushu", // 熊本
-    "44": "kyushu", // 大分
-    "45": "kyushu", // 宮崎
-    "46": "kyushu", // 鹿児島
-    "47": "kyushu", // 沖縄
-  };
-
-  return regionMap[prefCode] || "unknown";
+export function getRegionKeyFromPrefectureCode(prefCode: string): string {
+  const code = prefCode.substring(0, 2);
+  return PREFECTURE_TO_REGION_MAP[code] || "unknown";
 }

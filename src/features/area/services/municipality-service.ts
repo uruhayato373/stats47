@@ -1,14 +1,14 @@
 /**
- * Municipality Service
+ * CityService
  * 市区町村に関するビジネスロジックを担当
  */
 
 import {
-  fetchMunicipalities,
-  fetchMunicipalitiesByPrefecture,
-  findMunicipalityByCode as findMunicipalityByCodeFromRepo,
+  fetchCities,
+  fetchCitiesByPrefecture,
+  findCityByCode as findCityByCodeFromRepo,
 } from "../repositories/area-repository";
-import { Municipality, MunicipalityType } from "../types/index";
+import { City } from "../types/index";
 
 // ============================================================================
 // リスト全体を取得（list動詞）
@@ -17,8 +17,8 @@ import { Municipality, MunicipalityType } from "../types/index";
 /**
  * 全ての市区町村を取得
  */
-export async function listMunicipalities(): Promise<Municipality[]> {
-  return await fetchMunicipalities();
+export async function listMunicipalities(): Promise<City[]> {
+  return await fetchCities();
 }
 
 /**
@@ -26,29 +26,8 @@ export async function listMunicipalities(): Promise<Municipality[]> {
  */
 export async function listMunicipalitiesByPrefecture(
   prefectureCode: string
-): Promise<Municipality[]> {
-  return await fetchMunicipalitiesByPrefecture(prefectureCode);
-}
-
-/**
- * 市区町村タイプ別にフィルタリング
- */
-export async function listMunicipalitiesByType(
-  type: MunicipalityType
-): Promise<Municipality[]> {
-  const allMunicipalities = await fetchMunicipalities();
-  return allMunicipalities.filter((muni) => muni.type === type);
-}
-
-/**
- * 特定の都道府県内で市区町村タイプ別にフィルタリング
- */
-export async function listMunicipalitiesByTypeInPrefecture(
-  prefectureCode: string,
-  type: MunicipalityType
-): Promise<Municipality[]> {
-  const municipalities = await fetchMunicipalitiesByPrefecture(prefectureCode);
-  return municipalities.filter((muni) => muni.type === type);
+): Promise<City[]> {
+  return await fetchCitiesByPrefecture(prefectureCode);
 }
 
 // ============================================================================
@@ -58,23 +37,19 @@ export async function listMunicipalitiesByTypeInPrefecture(
 /**
  * 市区町村コードで検索
  */
-export async function findMunicipalityByCode(
-  code: string
-): Promise<Municipality> {
-  return await findMunicipalityByCodeFromRepo(code);
+export async function findMunicipalityByCode(code: string): Promise<City> {
+  return await findCityByCodeFromRepo(code);
 }
 
 /**
  * 市区町村名で検索
  */
-export async function searchMunicipalities(
-  query: string
-): Promise<Municipality[]> {
-  const allMunicipalities = await fetchMunicipalities();
+export async function searchMunicipalities(query: string): Promise<City[]> {
+  const allMunicipalities = await fetchCities();
   const lowerQuery = query.toLowerCase();
 
-  return allMunicipalities.filter((muni) =>
-    muni.name.toLowerCase().includes(lowerQuery)
+  return allMunicipalities.filter((city) =>
+    city.cityName.toLowerCase().includes(lowerQuery)
   );
 }
 
@@ -84,12 +59,12 @@ export async function searchMunicipalities(
 export async function searchMunicipalitiesInPrefecture(
   prefectureCode: string,
   query: string
-): Promise<Municipality[]> {
-  const municipalities = await fetchMunicipalitiesByPrefecture(prefectureCode);
+): Promise<City[]> {
+  const municipalities = await fetchCitiesByPrefecture(prefectureCode);
   const lowerQuery = query.toLowerCase();
 
-  return municipalities.filter((muni) =>
-    muni.name.toLowerCase().includes(lowerQuery)
+  return municipalities.filter((city) =>
+    city.cityName.toLowerCase().includes(lowerQuery)
   );
 }
 
@@ -104,8 +79,8 @@ export async function lookupMunicipalityName(
   code: string
 ): Promise<string | null> {
   try {
-    const municipality = await findMunicipalityByCodeFromRepo(code);
-    return municipality.name;
+    const city = await findCityByCodeFromRepo(code);
+    return city.cityName;
   } catch {
     return null;
   }
@@ -120,31 +95,21 @@ export async function lookupMunicipalityName(
  */
 export async function buildMunicipalityStats(): Promise<{
   total: number;
-  byType: Record<MunicipalityType, number>;
   byPrefecture: Record<string, number>;
 }> {
-  const municipalities = await fetchMunicipalities();
+  const cities = await fetchCities();
 
   const stats = {
-    total: municipalities.length,
-    byType: {
-      city: 0,
-      ward: 0,
-      town: 0,
-      village: 0,
-    } as Record<MunicipalityType, number>,
+    total: cities.length,
     byPrefecture: {} as Record<string, number>,
   };
 
-  municipalities.forEach((muni) => {
-    // タイプ別カウント
-    stats.byType[muni.type]++;
-
+  cities.forEach((city) => {
     // 都道府県別カウント
-    if (!stats.byPrefecture[muni.prefectureCode]) {
-      stats.byPrefecture[muni.prefectureCode] = 0;
+    if (!stats.byPrefecture[city.prefCode]) {
+      stats.byPrefecture[city.prefCode] = 0;
     }
-    stats.byPrefecture[muni.prefectureCode]++;
+    stats.byPrefecture[city.prefCode]++;
   });
 
   return stats;

@@ -24,7 +24,7 @@ const mockCountryData: EstatMetaInfo = {
   stats_data_id: "0000020101",
   stat_name: "労働力調査",
   title: "労働力調査（2022年平均）",
-  area_type: "country",
+  area_type: "national",
   cycle: "年次",
   survey_date: "2022-01-01",
   description: "全国の労働力調査データ",
@@ -33,11 +33,11 @@ const mockCountryData: EstatMetaInfo = {
   updated_at: "2025-01-14T15:20:00Z",
 };
 
-const mockMunicipalityData: EstatMetaInfo = {
+const mockCityata: EstatMetaInfo = {
   stats_data_id: "0000030101",
   stat_name: "住宅・土地統計調査",
   title: "住宅・土地統計調査（2018年）",
-  area_type: "municipality",
+  area_type: "city",
   cycle: "5年次",
   survey_date: "2018-10-01",
   description: "市区町村別の住宅・土地統計データ",
@@ -76,7 +76,7 @@ const mockOldData: EstatMetaInfo = {
   stats_data_id: "0000060101",
   stat_name: "学校基本調査",
   title: "学校基本調査（2022年度）",
-  area_type: "municipality",
+  area_type: "city",
   cycle: "年次",
   survey_date: "2022-05-01",
   description: "市区町村別の学校基本調査データ",
@@ -140,9 +140,9 @@ export const CountryData: Story = {
   },
 };
 
-export const MunicipalityData: Story = {
+export const Cityata: Story = {
   args: {
-    item: mockMunicipalityData,
+    item: mockCityata,
     onView: (item) => console.log("View item:", item),
   },
   parameters: {
@@ -212,7 +212,7 @@ export const Interactive: Story = {
     const items = [
       mockEstatMetaInfo,
       mockCountryData,
-      mockMunicipalityData,
+      mockCityata,
       mockLongTitleData,
     ];
 
@@ -286,8 +286,8 @@ export const DifferentAreaTypes: Story = {
   render: () => {
     const areaTypes = [
       { type: "prefecture", label: "都道府県", data: mockEstatMetaInfo },
-      { type: "country", label: "全国", data: mockCountryData },
-      { type: "municipality", label: "市区町村", data: mockMunicipalityData },
+      { type: "national", label: "全国", data: mockCountryData },
+      { type: "city", label: "市区町村", data: mockCityata },
     ];
 
     return (
@@ -323,7 +323,7 @@ export const HoverStates: Story = {
     const items = [
       { label: "通常状態", data: mockEstatMetaInfo },
       { label: "ホバー状態", data: mockCountryData },
-      { label: "フォーカス状態", data: mockMunicipalityData },
+      { label: "フォーカス状態", data: mockCityata },
     ];
 
     return (
@@ -420,7 +420,7 @@ export const ListContext: Story = {
     const items = [
       mockEstatMetaInfo,
       mockCountryData,
-      mockMunicipalityData,
+      mockCityata,
       mockLongTitleData,
       mockRecentData,
     ];

@@ -15,8 +15,9 @@ import { Label } from "@/components/atoms/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 
+import { REGIONS } from "../constants/region-mapping";
 import { listPrefectures, listRegions } from "../services/prefecture-service";
-import { Prefecture, Region, RegionMap } from "../types";
+import { Prefecture, Region } from "../types";
 
 /**
  * PrefectureSelector の Props
@@ -42,7 +43,7 @@ export function PrefectureSelector({
   className,
 }: PrefectureSelectorProps) {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  const [regions, setRegions] = useState<RegionMap>({});
+  const [regions, setRegions] = useState<Record<string, Region>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -58,14 +59,17 @@ export function PrefectureSelector({
         ]);
         setPrefectures(prefecturesData);
 
-        // RegionMap型に変換
-        const regionMap: RegionMap = {};
+        // 地域データを変換
+        const regionMap: Record<string, Region> = {};
         Object.entries(regionsData).forEach(([key, prefectureCodes]) => {
-          regionMap[key] = {
-            key,
-            name: key, // 地域名はキーと同じとする
-            prefectures: prefectureCodes,
-          };
+          const region = REGIONS.find((r) => r.regionCode === key);
+          if (region) {
+            regionMap[key] = {
+              regionCode: region.regionCode,
+              regionName: region.regionName,
+              prefectures: prefectureCodes,
+            };
+          }
         });
         setRegions(regionMap);
       } catch (err) {
@@ -152,16 +156,16 @@ export function PrefectureSelector({
       >
         <Accordion type="multiple" className="w-full">
           {getRegionList().map((region) => {
-            const regionPrefectures = getPrefecturesByRegion(region.key);
+            const regionPrefectures = getPrefecturesByRegion(region.regionCode);
 
             if (regionPrefectures.length === 0) {
               return null;
             }
 
             return (
-              <AccordionItem key={region.key} value={region.key}>
+              <AccordionItem key={region.regionCode} value={region.regionCode}>
                 <AccordionTrigger className="text-sm font-medium">
-                  {region.name}
+                  {region.regionName}
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="grid grid-cols-1 gap-2 pl-2">

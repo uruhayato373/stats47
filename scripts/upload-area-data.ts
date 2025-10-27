@@ -12,7 +12,7 @@ import { join } from "path";
 // 設定
 // ============================================================================
 
-const MOCK_DATA_DIR = join(process.cwd(), "data", "mock", "area");
+const MOCK_DATA_DIR = join(process.cwd(), "data", "mock");
 const OUTPUT_DIR = join(process.cwd(), "scripts", "output");
 
 // R2バケット設定（環境変数から取得）
@@ -99,19 +99,20 @@ async function loadAndValidatePrefectures(): Promise<any> {
 }
 
 async function loadAndValidateMunicipalities(): Promise<any> {
-  console.log("📖 Loading municipalities data...");
+  console.log("📖 Loading cities data...");
 
-  const filePath = join(MOCK_DATA_DIR, "municipalities.json");
+  const filePath = join(MOCK_DATA_DIR, "cities.json");
   const data = JSON.parse(readFileSync(filePath, "utf-8"));
 
-  // データ検証
-  if (!data.municipalities || !Array.isArray(data.municipalities)) {
-    throw new Error("Invalid municipalities data format");
+  // データ検証（cities.jsonは直接配列形式）
+  if (!Array.isArray(data)) {
+    throw new Error("Invalid cities data format");
   }
 
-  console.log(`✅ Loaded ${data.municipalities.length} municipalities`);
+  console.log(`✅ Loaded ${data.length} cities`);
 
-  return data;
+  // 既存の形式に合わせて変換
+  return { municipalities: data };
 }
 
 // ============================================================================
@@ -131,14 +132,13 @@ async function optimizeData(
     regionKey: getRegionKeyFromPrefectureCode(pref.prefCode),
   }));
 
-  // 市区町村データの最適化
+  // 市区町村データの最適化（cities.jsonは既に簡潔な形式）
   const optimizedMunicipalities = municipalitiesData.municipalities.map(
-    (muni: any) => ({
-      code: muni["@code"],
-      name: muni["@name"],
-      prefCode: muni["@parentCode"],
-      level: parseInt(muni["@level"], 10),
-      type: detectMunicipalityType(muni["@name"]),
+    (city: any) => ({
+      cityCode: city.cityCode,
+      cityName: city.cityName,
+      prefCode: city.prefCode,
+      level: city.level,
     })
   );
 
@@ -189,10 +189,10 @@ async function uploadToR2(data: any): Promise<void> {
       ),
     },
     {
-      key: "area/municipalities.json",
+      key: "area/cities.json",
       data: JSON.stringify(
         {
-          municipalities: data.municipalities,
+          cities: data.municipalities,
         },
         null,
         2
@@ -237,7 +237,7 @@ async function verifyUpload(): Promise<void> {
 
   const files = [
     "area/prefectures.json",
-    "area/municipalities.json",
+    "area/cities.json",
     "area/metadata.json",
   ];
 
@@ -315,15 +315,6 @@ function getRegionKeyFromPrefectureCode(prefCode: string): string {
   return regionMap[prefCode] || "unknown";
 }
 
-function detectMunicipalityType(
-  name: string
-): "city" | "ward" | "town" | "village" {
-  if (name.includes("市")) return "city";
-  if (name.includes("区")) return "ward";
-  if (name.includes("町")) return "town";
-  if (name.includes("村")) return "village";
-  return "city";
-}
 
 // ============================================================================
 // 実行

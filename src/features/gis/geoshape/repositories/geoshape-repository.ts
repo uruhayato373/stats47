@@ -13,7 +13,7 @@ import type {
   AreaType,
   FetchOptions,
   FetchResult,
-  MunicipalityVersion,
+  Cityersion,
   TopoJSONTopology,
 } from "../types/index";
 
@@ -39,7 +39,7 @@ const cacheTimestamps = new Map<string, number>();
 export async function fetchTopology(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged",
+  version: CityVersion = "merged",
   options: FetchOptions = {}
 ): Promise<FetchResult<TopoJSONTopology>> {
   const { useCache = true, forceRefresh = false } = options;
@@ -140,7 +140,7 @@ export function buildCacheStatus(): {
 export async function checkDataSources(
   areaType: AreaType,
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<{ r2: boolean; external: boolean }> {
   const results = await Promise.allSettled([
     isR2Available(),
@@ -163,9 +163,9 @@ export async function checkDataSources(
 function generateCacheKey(
   areaType: AreaType,
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): string {
-  if (areaType === "country" || areaType === "prefecture") {
+  if (areaType === "national" || areaType === "prefecture") {
     return "prefecture";
   }
   return `${areaType}_${prefCode}_${version}`;

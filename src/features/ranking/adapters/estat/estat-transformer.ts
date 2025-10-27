@@ -44,7 +44,7 @@ export class EstatTransformer {
         areaName: value.dimensions.area.name,
         areaType,
         parentAreaCode:
-          areaType === "municipality"
+          areaType === "city"
             ? getParentPrefectureCode(areaCode)
             : undefined,
         parentAreaName: undefined, // 後で設定

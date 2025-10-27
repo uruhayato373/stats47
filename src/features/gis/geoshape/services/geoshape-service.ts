@@ -17,7 +17,7 @@ import { validateTopojson } from "../utils/topojson-converter";
 import type {
   AreaType,
   FetchOptions,
-  MunicipalityVersion,
+  Cityersion,
   TopoJSONTopology,
 } from "../types/index";
 
@@ -74,7 +74,7 @@ export async function fetchPrefectureTopology(
  */
 export async function fetchMunicipalityTopology(
   prefCode: string,
-  version: MunicipalityVersion = "merged",
+  version: CityVersion = "merged",
   options: FetchOptions = {}
 ): Promise<TopoJSONTopology> {
   try {
@@ -84,7 +84,7 @@ export async function fetchMunicipalityTopology(
 
     // TopoJSONを取得
     const result = await fetchTopology(
-      "municipality",
+      "city",
       prefCode,
       version,
       options
@@ -120,7 +120,7 @@ export async function fetchMunicipalityTopology(
  */
 export async function fetchTopologyByAreaCode(
   areaCode: string,
-  version: MunicipalityVersion = "merged",
+  version: CityVersion = "merged",
   options: FetchOptions = {}
 ): Promise<TopoJSONTopology> {
   try {
@@ -130,7 +130,7 @@ export async function fetchTopologyByAreaCode(
 
     const areaType = determineAreaTypeFromCode(areaCode);
 
-    if (areaType === "country" || areaType === "prefecture") {
+    if (areaType === "national" || areaType === "prefecture") {
       return await fetchPrefectureTopology(options);
     } else {
       const prefCode = extractPrefCodeFrom5Digit(areaCode);
@@ -159,7 +159,7 @@ export async function fetchTopologyByAreaCode(
 export async function checkDataSources(
   areaType: AreaType,
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<{ mock: boolean; r2: boolean; external: boolean }> {
   return await checkDataSourcesFromRepo(areaType, prefCode, version);
 }

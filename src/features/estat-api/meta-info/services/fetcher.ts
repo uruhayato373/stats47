@@ -129,7 +129,14 @@ export async function fetchMetaInfo(
     // 3. バックグラウンドでR2に保存（awaitしない）
     EstatMetaInfoR2S3Repository.save(statsDataId, data)
       .then(() => console.log("✅ R2バックグラウンド保存完了:", statsDataId))
-      .catch((err) => console.warn("R2保存失敗（無視）:", err));
+      .catch((err) => {
+        // R2設定がない場合は警告のみ表示
+        if (err instanceof Error && err.message.includes("R2 S3設定")) {
+          console.log("R2設定がないためスキップ:", statsDataId);
+        } else {
+          console.warn("R2保存失敗（無視）:", err);
+        }
+      });
 
     return data;
   } catch (error) {

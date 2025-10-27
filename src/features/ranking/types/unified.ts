@@ -6,12 +6,12 @@
 /**
  * 地域タイプ
  */
-export type AreaType = "country" | "prefecture" | "municipality";
+export type AreaType = "national" | "prefecture" | "city";
 
 /**
  * 対象地域レベル
  */
-export type TargetAreaLevel = "prefecture" | "municipality" | "both";
+export type TargetAreaLevel = "prefecture" | "city" | "both";
 
 /**
  * ランキングメタデータ
@@ -35,7 +35,7 @@ export interface RankingMetadata {
   targetAreaLevel: TargetAreaLevel;
   hierarchy?: {
     supportsPrefecture: boolean;
-    supportsMunicipality: boolean;
+    supportsCity boolean;
     supportsComparison: boolean;
   };
 }

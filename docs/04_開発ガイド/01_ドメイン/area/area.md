@@ -67,9 +67,9 @@ src/infrastructure/area/
 ### データソース
 
 ```
-data/mock/area/
+data/mock/
 ├── prefectures.json      # 都道府県マスターデータ (4KB)
-└── municipalities.json   # 市区町村マスターデータ (258KB)
+└── cities.json           # 市区町村マスターデータ (220KB)
 ```
 
 **特徴**:
@@ -111,7 +111,7 @@ data/mock/area/
 ```
 ┌─────────────────┐
 │  prefectures.json │
-│municipalities.json│
+│    cities.json    │
 └────────┬──────────┘
          │
          ↓
@@ -171,8 +171,8 @@ Prefecture  Municipality
 ### メモリ使用量
 
 - prefectures.json: 4KB
-- municipalities.json: 258KB → 圧縮後 約60KB
-- **合計**: 約64KB（圧縮後）
+- cities.json: 220KB → 圧縮後 約30KB
+- **合計**: 約34KB（圧縮後）
 
 ### 初回ロード時間
 
@@ -223,14 +223,14 @@ src/infrastructure/area/
 
 ```
 # ソースデータ
-data/mock/area/
+data/mock/
 ├── prefectures.json
-└── municipalities.json
+└── cities.json
 
 # Mock環境用データ
 data/mock/r2/areas/
 ├── prefectures.json
-└── municipalities.json
+└── cities.json
 ```
 
 ---
@@ -305,7 +305,7 @@ interface Prefecture {
 
 ## 市区町村データ構造
 
-### municipalities.json
+### cities.json
 
 e-Stat API metainfoのarea構造をそのまま保持する配列形式：
 
@@ -488,7 +488,7 @@ interface AreaHierarchy {
 
 ### e-Stat 互換性
 
-municipalities.jsonはe-Stat API metainfoのarea構造を配列として保持しており、以下の利点があります：
+cities.jsonはe-Stat API metainfoのarea構造を配列として保持しており、以下の利点があります：
 
 1. **データ整合性**: e-Stat APIとの完全互換
 2. **メンテナンス性**: 再抽出時の変換ロジック不要
@@ -1116,8 +1116,8 @@ export class MockAreaRepository implements AreaRepository {
 
   async getMunicipalities(): Promise<Municipality[]> {
     if (!this.municipalitiesCache) {
-      // data/mock/r2/areas/municipalities.json から読み込み
-      const data = await import('@/data/mock/r2/areas/municipalities.json');
+      // data/mock/r2/areas/cities.json から読み込み
+      const data = await import('@/data/mock/r2/areas/cities.json');
       this.municipalitiesCache = data.map(Municipality.fromJson);
     }
     return this.municipalitiesCache;
@@ -1171,7 +1171,7 @@ export class R2AreaRepository implements AreaRepository {
   async getMunicipalities(): Promise<Municipality[]> {
     if (!this.municipalitiesCache) {
       // Cloudflare R2 から読み込み
-      const object = await this.r2Bucket.get('areas/municipalities.json');
+      const object = await this.r2Bucket.get('areas/cities.json');
       if (!object) {
         throw new Error('Municipalities data not found in R2');
       }

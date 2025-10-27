@@ -5,7 +5,7 @@
 
 import { GeoshapeConfig } from "../types/index";
 
-import type { AreaType, MunicipalityVersion } from "../types/index";
+import type { AreaType, Cityersion } from "../types/index";
 
 /**
  * 環境判定
@@ -94,7 +94,7 @@ export function normalizePrefectureCode(code: string | number): string {
  * キャッシュキー生成
  */
 export function generateCacheKey(
-  level: "municipality" | "municipality_merged",
+  level: "city" | "municipality_merged",
   prefectureCode: string
 ): string {
   return `${level}/${prefectureCode}`;
@@ -104,10 +104,10 @@ export function generateCacheKey(
  * R2ファイル名生成
  */
 export function generateR2FileName(
-  level: "municipality" | "municipality_merged",
+  level: "city" | "municipality_merged",
   prefectureCode: string
 ): string {
-  return level === "municipality"
+  return level === "city"
     ? `municipalities/${prefectureCode}_city.topojson`
     : `municipalities-merged/${prefectureCode}_city_dc.topojson`;
 }
@@ -116,17 +116,17 @@ export function generateR2FileName(
  * 外部URLファイル名生成
  */
 export function generateExternalFileName(
-  level: "municipality" | "municipality_merged",
+  level: "city" | "municipality_merged",
   prefectureCode: string
 ): string {
-  return level === "municipality"
+  return level === "city"
     ? `${prefectureCode}_city.topojson`
     : `${prefectureCode}_city_dc.topojson`;
 }
 
 /**
  * Geoshape API URL構築
- * @param areaType 地域タイプ（"country"と"prefecture"は同じデータ）
+ * @param areaType 地域タイプ（"national"と"prefecture"は同じデータ）
  * @param prefCode 都道府県コード（2桁）- municipalityで必須
  * @param version 市区町村版タイプ
  * @returns 完全なURL
@@ -134,12 +134,12 @@ export function generateExternalFileName(
 export function buildGeoshapeExternalUrl(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): string {
   const baseUrl = `${geoshapeConfig.externalApiUrl}/city/topojson/20230101`;
 
   // countryとprefectureは同じ都道府県データを使用
-  if (areaType === "country" || areaType === "prefecture") {
+  if (areaType === "national" || areaType === "prefecture") {
     return `${baseUrl}/jp_pref.l.topojson`;
   }
 
@@ -165,9 +165,9 @@ export function buildGeoshapeExternalUrl(
 export function buildR2Key(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): string {
-  if (areaType === "country" || areaType === "prefecture") {
+  if (areaType === "national" || areaType === "prefecture") {
     return `${geoshapeConfig.r2BucketPath}/prefecture.topojson`;
   }
 
@@ -185,9 +185,9 @@ export function buildR2Key(
 export function buildMockDataPath(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): string {
-  if (areaType === "country" || areaType === "prefecture") {
+  if (areaType === "national" || areaType === "prefecture") {
     return "/data/mock/gis/geoshape/jp_pref.l.topojson";
   }
 

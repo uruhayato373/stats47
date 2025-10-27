@@ -34,16 +34,16 @@ export class EstatMetaInfoRepository {
       tableInf?.STATISTICS_NAME_SPEC?.TABULATION_CATEGORY;
 
     if (!tabulationCategory) {
-      return "country";
+      return "national";
     }
 
     if (tabulationCategory.includes("市区町村")) {
-      return "municipality";
+      return "city";
     }
     if (tabulationCategory.includes("都道府県")) {
       return "prefecture";
     }
-    return "country";
+    return "national";
   }
 
   /**

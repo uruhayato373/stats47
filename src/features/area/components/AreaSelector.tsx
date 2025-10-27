@@ -19,9 +19,9 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 
-import { AreaType, Municipality, Prefecture } from "../types";
+import { AreaType, City, Prefecture } from "../types";
 
-import { MunicipalitySelector } from "./MunicipalitySelector";
+import { CitySelector } from "./CitySelector";
 import { PrefectureSelector } from "./PrefectureSelector";
 
 /**
@@ -36,7 +36,7 @@ interface AreaSelectorProps {
  * 地域レベル（全国/都道府県/市区町村）を切り替えるメインコンポーネント
  *
  * タブで地域レベルを切り替え、各レベルに応じた選択UIを提供します。
- * 選択時に自動的に/area/[areaCode]へ遷移します。
+ * 選択時に自動的に/dashboard/[areaCode]へ遷移します。
  */
 export function AreaSelector({ className }: AreaSelectorProps) {
   const router = useRouter();
@@ -44,7 +44,7 @@ export function AreaSelector({ className }: AreaSelectorProps) {
     category: string;
     subcategory: string;
   };
-  const [selectedAreaType, setSelectedAreaType] = useState<AreaType>("country");
+  const [selectedAreaType, setSelectedAreaType] = useState<AreaType>("national");
   const [selectedPrefectureCode, setSelectedPrefectureCode] =
     useState<string>();
 
@@ -52,18 +52,18 @@ export function AreaSelector({ className }: AreaSelectorProps) {
     setSelectedAreaType(areaType);
 
     // 全国選択時は即座に遷移
-    if (areaType === "country") {
-      router.push(`/${category}/${subcategory}/area/00000`);
+    if (areaType === "national") {
+      router.push(`/${category}/${subcategory}/dashboard/00000`);
     }
   };
 
   const handlePrefectureSelect = (prefecture: Prefecture) => {
     setSelectedPrefectureCode(prefecture.prefCode);
-    router.push(`/${category}/${subcategory}/area/${prefecture.prefCode}`);
+    router.push(`/${category}/${subcategory}/dashboard/${prefecture.prefCode}`);
   };
 
-  const handleMunicipalitySelect = (municipality: Municipality) => {
-    router.push(`/${category}/${subcategory}/area/${municipality.code}`);
+  const handleCitySelect = (city: City) => {
+    router.push(`/${category}/${subcategory}/dashboard/${city.cityCode}`);
   };
 
   return (
@@ -74,19 +74,19 @@ export function AreaSelector({ className }: AreaSelectorProps) {
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="country" className="text-sm">
+          <TabsTrigger value="national" className="text-sm">
             全国
           </TabsTrigger>
           <TabsTrigger value="prefecture" className="text-sm">
             都道府県
           </TabsTrigger>
-          <TabsTrigger value="municipality" className="text-sm">
+          <TabsTrigger value="city" className="text-sm">
             市区町村
           </TabsTrigger>
         </TabsList>
 
         {/* 全国タブ */}
-        <TabsContent value="country" className="mt-4">
+        <TabsContent value="national" className="mt-4">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -129,7 +129,7 @@ export function AreaSelector({ className }: AreaSelectorProps) {
         </TabsContent>
 
         {/* 市区町村タブ */}
-        <TabsContent value="municipality" className="mt-4">
+        <TabsContent value="city" className="mt-4">
           <Card>
             <CardHeader>
               <CardTitle>市区町村選択</CardTitle>
@@ -139,10 +139,10 @@ export function AreaSelector({ className }: AreaSelectorProps) {
             </CardHeader>
             <CardContent>
               {selectedPrefectureCode ? (
-                <MunicipalitySelector
+                <CitySelector
                   prefectureCode={selectedPrefectureCode}
-                  selectedMunicipalityCode={undefined}
-                  onMunicipalitySelect={handleMunicipalitySelect}
+                  selectedCityCode={undefined}
+                  onCitySelect={handleCitySelect}
                 />
               ) : (
                 <div className="text-center py-8">

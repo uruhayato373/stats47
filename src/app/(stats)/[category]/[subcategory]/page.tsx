@@ -95,7 +95,7 @@ export default async function SubcategoryPage({ params }: PageProps) {
       title: "地域別ダッシュボード",
       description: "全国および各都道府県の詳細データ",
       icon: MapPin,
-      href: `/${category}/${subcategory}/area`,
+      href: `/${category}/${subcategory}/dashboard`,
     },
   ];
 

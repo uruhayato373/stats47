@@ -13,7 +13,7 @@ export function getAreaType(areaCode: string): AreaType {
   }
 
   // 国レベル
-  if (areaCode === "00000") return "country";
+  if (areaCode === "00000") return "national";
 
   // 都道府県レベル（末尾が000）
   if (areaCode.endsWith("000") && areaCode.length === 5) {
@@ -22,7 +22,7 @@ export function getAreaType(areaCode: string): AreaType {
 
   // 市区町村レベル
   if (areaCode.length === 5) {
-    return "municipality";
+    return "city";
   }
 
   throw new Error(`Invalid area code format: ${areaCode}`);
@@ -160,7 +160,7 @@ export function isDesignatedCityWard(municCode: string): boolean {
  * 地域レベルに応じたフィルタリング関数を生成
  */
 export function createAreaFilter(
-  level: "prefecture" | "municipality" | "both",
+  level: "prefecture" | "city" | "both",
   parentCode?: string
 ) {
   return (areaCode: string): boolean => {
@@ -170,8 +170,8 @@ export function createAreaFilter(
       case "prefecture":
         return areaType === "prefecture";
 
-      case "municipality":
-        if (areaType !== "municipality") return false;
+      case "city":
+        if (areaType !== "city") return false;
 
         // 特定都道府県内のみ
         if (parentCode) {
@@ -182,7 +182,7 @@ export function createAreaFilter(
         return true;
 
       case "both":
-        return areaType === "prefecture" || areaType === "municipality";
+        return areaType === "prefecture" || areaType === "city";
 
       default:
         return false;
@@ -241,7 +241,7 @@ export function validateArea(areaCode: string): AreaValidationResult {
   if (areaCode === "00000") {
     return {
       isValid: true,
-      areaType: "country",
+      areaType: "national",
       message: "Valid country code",
     };
   }
@@ -324,7 +324,7 @@ export function validatePrefectureCode(prefCode: string): AreaValidationResult {
 /**
  * 市区町村コードの検証
  */
-export function validateMunicipalityCode(
+export function validateCityode(
   municCode: string
 ): AreaValidationResult {
   const result = validateArea(municCode);
@@ -334,7 +334,7 @@ export function validateMunicipalityCode(
   }
 
   // 市区町村コードであることを確認
-  if (result.areaType !== "municipality") {
+  if (result.areaType !== "city") {
     return {
       isValid: false,
       message: "Not a municipality code",

@@ -1,5 +1,5 @@
 export { AreaSelector } from "./AreaSelector";
-export { MunicipalitySelector } from "./MunicipalitySelector";
+export { Cityelector } from "./Cityelector";
 export { PrefectureSelector } from "./PrefectureSelector";
 
 // Dashboards

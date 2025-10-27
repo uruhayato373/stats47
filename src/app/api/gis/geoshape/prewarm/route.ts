@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body: PrewarmRequest = await request.json();
-    const { level = "municipality" } = body;
+    const { level = "city" } = body;
 
     console.log(`[Prewarm API] Starting prewarm for level: ${level}`);
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     const errorResponse: PrewarmResponse = {
       success: false,
       message: error instanceof Error ? error.message : "Unknown error",
-      level: "municipality",
+      level: "city",
       results: {
         success: 0,
         failed: 0,

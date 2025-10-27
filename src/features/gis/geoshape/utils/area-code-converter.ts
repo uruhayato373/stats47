@@ -35,9 +35,9 @@ export function convertPrefCodeTo5Digit(prefCode: string): string {
  * @returns 地域タイプ
  */
 export function determineAreaTypeFromCode(areaCode: string): AreaType {
-  if (areaCode === "00000") return "country";
+  if (areaCode === "00000") return "national";
   if (areaCode.endsWith("000")) return "prefecture";
-  return "municipality";
+  return "city";
 }
 
 /**

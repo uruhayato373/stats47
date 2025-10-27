@@ -7,7 +7,7 @@ import { buildGeoshapeExternalUrl } from "../config/geoshape-config";
 
 import type {
   AreaType,
-  MunicipalityVersion,
+  Cityersion,
   TopoJSONTopology,
 } from "../types/index";
 
@@ -21,7 +21,7 @@ import type {
 export async function fetchFromExternalAPI(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<TopoJSONTopology> {
   const url = buildGeoshapeExternalUrl(areaType, prefCode, version);
 
@@ -76,7 +76,7 @@ export async function fetchFromExternalAPI(
 export async function isExternalAPIAvailable(
   areaType: AreaType = "prefecture",
   prefCode?: string,
-  version: MunicipalityVersion = "merged"
+  version: CityVersion = "merged"
 ): Promise<boolean> {
   const url = buildGeoshapeExternalUrl(areaType, prefCode, version);
 

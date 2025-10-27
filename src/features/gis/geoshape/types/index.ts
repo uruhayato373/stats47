@@ -61,7 +61,7 @@ export interface PrefectureFeatureCollection extends GeoJSON.FeatureCollection {
 /**
  * 市区町村Feature型
  */
-export interface MunicipalityFeature extends GeoJSON.Feature {
+export interface Cityeature extends GeoJSON.Feature {
   type: "Feature";
   properties: {
     cityCode: string;
@@ -76,16 +76,16 @@ export interface MunicipalityFeature extends GeoJSON.Feature {
 /**
  * 市区町村FeatureCollection型
  */
-export interface MunicipalityFeatureCollection
+export interface CityeatureCollection
   extends GeoJSON.FeatureCollection {
   type: "FeatureCollection";
-  features: MunicipalityFeature[];
+  features: CityFeature[];
 }
 
 /**
  * 市区町村版タイプ
  */
-export type MunicipalityVersion = "merged" | "split"; // merged=統合版(dc), split=分割版
+export type Cityersion = "merged" | "split"; // merged=統合版(dc), split=分割版
 
 // データソース設定
 export interface GeoshapeConfig {
@@ -107,12 +107,12 @@ export type DataSourceType = "memory" | "r2" | "external";
 
 // データ取得オプション
 export interface FetchOptions {
-  /** 地域レベル（"country"は都道府県と同じデータを使用） */
+  /** 地域レベル（"national"は都道府県と同じデータを使用） */
   areaType?: import("@/features/area/types/index").AreaType;
   /** 都道府県コード（2桁）- municipalityで必須 */
   prefCode?: string;
   /** 市区町村版タイプ */
-  municipalityVersion?: MunicipalityVersion;
+  municipalityVersion?: CityVersion;
   /** キャッシュを使用するか */
   useCache?: boolean;
   /** 強制再取得 */
@@ -133,7 +133,7 @@ export interface FetchResult<T> {
 // GeoShapeデータ自動キャッシング型定義
 // ============================================================================
 
-export type GeoShapeDataLevel = "municipality" | "municipality_merged";
+export type GeoShapeDataLevel = "city" | "municipality_merged";
 
 /**
  * プリウォーム結果
