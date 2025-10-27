@@ -29,15 +29,26 @@ export {
 } from "./config/geoshape-config";
 
 // リポジトリ（純粋な関数）
-export { ExternalDataSource } from "./repositories/external-data-source";
+export {
+  fetchFromExternalAPI,
+  isExternalAPIAvailable,
+} from "./repositories/external-data-source";
 export {
   buildCacheStatus,
   checkDataSources,
   clearGeoshapeCache,
   fetchTopology,
 } from "./repositories/geoshape-repository";
-export { MockDataSource } from "./repositories/mock-data-source";
-export { R2DataSource } from "./repositories/r2-data-source";
+export {
+  fetchFromMockData,
+  isMockDataAvailable,
+} from "./repositories/mock-data-source";
+export {
+  deleteFromR2,
+  fetchFromR2,
+  isR2Available,
+  saveToR2,
+} from "./repositories/r2-data-source";
 
 // サービス（純粋な関数）
 export {

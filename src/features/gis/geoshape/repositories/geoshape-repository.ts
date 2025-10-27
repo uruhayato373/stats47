@@ -5,9 +5,12 @@
 
 import { isMockEnvironment } from "../config/geoshape-config";
 
-import { ExternalDataSource } from "./external-data-source";
-import { MockDataSource } from "./mock-data-source";
-import { R2DataSource } from "./r2-data-source";
+import {
+  fetchFromExternalAPI,
+  isExternalAPIAvailable,
+} from "./external-data-source";
+import { fetchFromMockData, isMockDataAvailable } from "./mock-data-source";
+import { fetchFromR2, isR2Available } from "./r2-data-source";
 
 import type {
   AreaType,
@@ -63,8 +66,8 @@ export async function fetchTopology(
   // 2. Mockデータソース（開発環境）
   if (isMockEnvironment()) {
     try {
-      console.log(`[GeoshapeRepository] Trying MockDataSource for ${cacheKey}`);
-      const data = await MockDataSource.fetch(areaType, prefCode, version);
+      console.log(`[GeoshapeRepository] Trying MockData for ${cacheKey}`);
+      const data = await fetchFromMockData(areaType, prefCode, version);
       if (data) {
         saveToMemoryCache(cacheKey, data);
         return {
@@ -74,14 +77,14 @@ export async function fetchTopology(
         };
       }
     } catch (error) {
-      console.warn(`[GeoshapeRepository] MockDataSource failed:`, error);
+      console.warn(`[GeoshapeRepository] MockData failed:`, error);
     }
   }
 
   // 3. R2ストレージ
   try {
-    console.log(`[GeoshapeRepository] Trying R2DataSource for ${cacheKey}`);
-    const data = await R2DataSource.fetch(areaType, prefCode, version);
+    console.log(`[GeoshapeRepository] Trying R2 for ${cacheKey}`);
+    const data = await fetchFromR2(areaType, prefCode, version);
     if (data) {
       saveToMemoryCache(cacheKey, data);
       return {
@@ -91,15 +94,13 @@ export async function fetchTopology(
       };
     }
   } catch (error) {
-    console.warn(`[GeoshapeRepository] R2DataSource failed:`, error);
+    console.warn(`[GeoshapeRepository] R2 failed:`, error);
   }
 
   // 4. 外部API（最後の手段）
   try {
-    console.log(
-      `[GeoshapeRepository] Trying ExternalDataSource for ${cacheKey}`
-    );
-    const data = await ExternalDataSource.fetch(areaType, prefCode, version);
+    console.log(`[GeoshapeRepository] Trying ExternalAPI for ${cacheKey}`);
+    const data = await fetchFromExternalAPI(areaType, prefCode, version);
     saveToMemoryCache(cacheKey, data);
     return {
       data,
@@ -157,9 +158,9 @@ export async function checkDataSources(
   version: MunicipalityVersion = "merged"
 ): Promise<{ mock: boolean; r2: boolean; external: boolean }> {
   const results = await Promise.allSettled([
-    MockDataSource.isAvailable(areaType, prefCode, version),
-    R2DataSource.isAvailable(),
-    ExternalDataSource.isAvailable(areaType, prefCode, version),
+    isMockDataAvailable(areaType, prefCode, version),
+    isR2Available(),
+    isExternalAPIAvailable(areaType, prefCode, version),
   ]);
 
   return {
