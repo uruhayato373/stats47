@@ -1,10 +1,8 @@
 /**
  * Area Repository
  * 都道府県データのアクセス層を担当
- * Mock環境ではローカルJSON、開発・本番環境ではR2ストレージからデータを取得
+ * すべての環境でR2ストレージからデータを取得
  */
-
-import { checkMockDataEnabled } from "@/lib/environment";
 
 import {
   DataSourceError,
@@ -18,8 +16,7 @@ import {
 // 設定
 // ============================================================================
 
-const R2_BASE_URL = process.env.R2_AREA_DATA_URL || "";
-const USE_MOCK_DATA = checkMockDataEnabled();
+const R2_BASE_URL = process.env.R2_PUBLIC_URL || "";
 
 // ============================================================================
 // モジュールレベルのキャッシュ
@@ -42,24 +39,18 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
   }
 
   try {
-    let data: MockPrefecturesData;
-
-    if (USE_MOCK_DATA) {
-      // Mock環境: ローカルJSONから読み込み
-      const mockData = require("@/data/mock/area/prefectures.json");
-      data = mockData.default || mockData;
-    } else {
-      // 開発・本番環境: R2ストレージから取得
-      if (!R2_BASE_URL) {
-        throw new Error("R2_AREA_DATA_URL is not configured");
-      }
-
-      const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch prefectures: ${response.status}`);
-      }
-      data = await response.json();
+    // R2ストレージから取得
+    if (!R2_BASE_URL) {
+      throw new Error("R2_PUBLIC_URL is not configured");
     }
+
+    const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch prefectures from R2: ${response.status}`
+      );
+    }
+    const data: MockPrefecturesData = await response.json();
 
     const prefectures: Prefecture[] = data.prefectures.map((pref) => ({
       ...pref,
@@ -69,8 +60,7 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
     prefecturesCache = prefectures;
     return prefectures;
   } catch (error) {
-    const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
-    throw new DataSourceError(source, error as Error);
+    throw new DataSourceError("R2 storage", error as Error);
   }
 }
 
@@ -83,28 +73,21 @@ export async function fetchRegions(): Promise<Record<string, string[]>> {
   }
 
   try {
-    let data: MockPrefecturesData;
-
-    if (USE_MOCK_DATA) {
-      const mockData = require("@/data/mock/area/prefectures.json");
-      data = mockData.default || mockData;
-    } else {
-      if (!R2_BASE_URL) {
-        throw new Error("R2_AREA_DATA_URL is not configured");
-      }
-
-      const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch regions: ${response.status}`);
-      }
-      data = await response.json();
+    // R2ストレージから取得
+    if (!R2_BASE_URL) {
+      throw new Error("R2_PUBLIC_URL is not configured");
     }
+
+    const response = await fetch(`${R2_BASE_URL}/area/prefectures.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch regions from R2: ${response.status}`);
+    }
+    const data: MockPrefecturesData = await response.json();
 
     regionsCache = data.regions as unknown as Record<string, string[]>;
     return data.regions as unknown as Record<string, string[]>;
   } catch (error) {
-    const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
-    throw new DataSourceError(source, error as Error);
+    throw new DataSourceError("R2 storage", error as Error);
   }
 }
 
@@ -117,24 +100,18 @@ export async function fetchMunicipalities(): Promise<Municipality[]> {
   }
 
   try {
-    let data: MockMunicipalitiesData;
-
-    if (USE_MOCK_DATA) {
-      // Mock環境: ローカルJSONから読み込み
-      const mockData = require("@/data/mock/area/municipalities.json");
-      data = mockData.default || mockData;
-    } else {
-      // 開発・本番環境: R2ストレージから取得
-      if (!R2_BASE_URL) {
-        throw new Error("R2_AREA_DATA_URL is not configured");
-      }
-
-      const response = await fetch(`${R2_BASE_URL}/area/municipalities.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch municipalities: ${response.status}`);
-      }
-      data = await response.json();
+    // R2ストレージから取得
+    if (!R2_BASE_URL) {
+      throw new Error("R2_PUBLIC_URL is not configured");
     }
+
+    const response = await fetch(`${R2_BASE_URL}/area/municipalities.json`);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch municipalities from R2: ${response.status}`
+      );
+    }
+    const data: MockMunicipalitiesData = await response.json();
 
     const municipalities: Municipality[] = data.municipalities.map((muni) => ({
       ...muni,
@@ -144,8 +121,7 @@ export async function fetchMunicipalities(): Promise<Municipality[]> {
     municipalitiesCache = municipalities;
     return municipalities;
   } catch (error) {
-    const source = USE_MOCK_DATA ? "mock JSON" : "R2 storage";
-    throw new DataSourceError(source, error as Error);
+    throw new DataSourceError("R2 storage", error as Error);
   }
 }
 
