@@ -21,7 +21,12 @@ export async function GET() {
       );
     }
 
-    const response = await fetch(`${R2_PUBLIC_URL}/area/prefectures.json`);
+    const response = await fetch(`${R2_PUBLIC_URL}/area/prefectures.json`, {
+      next: {
+        revalidate: 86400, // 24時間キャッシュ
+        tags: ["area-prefectures"],
+      },
+    });
 
     if (!response.ok) {
       return NextResponse.json(

@@ -16,28 +16,31 @@ export interface UserStats {
 }
 
 // NextAuth型定義の拡張
-import { DefaultSession, DefaultUser } from "next-auth";
-import { JWT as DefaultJWT } from "next-auth/jwt";
+import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      username: string;
+      username?: string;
       role: "admin" | "user";
     } & DefaultSession["user"];
   }
 
-  interface User extends DefaultUser {
-    username: string;
+  interface User {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    username?: string;
     role: "admin" | "user";
   }
 }
 
 declare module "next-auth/jwt" {
-  interface JWT extends DefaultJWT {
+  interface JWT {
     id: string;
-    username: string;
+    username?: string;
     role: "admin" | "user";
   }
 }

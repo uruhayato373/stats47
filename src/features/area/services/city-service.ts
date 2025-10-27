@@ -3,11 +3,7 @@
  * 市区町村に関するビジネスロジックを担当
  */
 
-import {
-  fetchCities,
-  fetchCitiesByPrefecture,
-  findCityByCode as findCityByCodeFromRepo,
-} from "../repositories/area-repository";
+import { fetchCities } from "../repositories/area-repository";
 import { City } from "../types/index";
 
 // ============================================================================
@@ -27,7 +23,8 @@ export async function listMunicipalities(): Promise<City[]> {
 export async function listMunicipalitiesByPrefecture(
   prefectureCode: string
 ): Promise<City[]> {
-  return await fetchCitiesByPrefecture(prefectureCode);
+  const allCities = await fetchCities();
+  return allCities.filter((city) => city.prefCode === prefectureCode);
 }
 
 // ============================================================================
@@ -38,7 +35,14 @@ export async function listMunicipalitiesByPrefecture(
  * 市区町村コードで検索
  */
 export async function findMunicipalityByCode(code: string): Promise<City> {
-  return await findCityByCodeFromRepo(code);
+  const cities = await fetchCities();
+  const city = cities.find((c) => c.cityCode === code);
+
+  if (!city) {
+    throw new Error(`City not found: ${code}`);
+  }
+
+  return city;
 }
 
 /**
@@ -60,7 +64,7 @@ export async function searchMunicipalitiesInPrefecture(
   prefectureCode: string,
   query: string
 ): Promise<City[]> {
-  const municipalities = await fetchCitiesByPrefecture(prefectureCode);
+  const municipalities = await listMunicipalitiesByPrefecture(prefectureCode);
   const lowerQuery = query.toLowerCase();
 
   return municipalities.filter((city) =>
@@ -79,7 +83,7 @@ export async function lookupMunicipalityName(
   code: string
 ): Promise<string | null> {
   try {
-    const city = await findCityByCodeFromRepo(code);
+    const city = await findMunicipalityByCode(code);
     return city.cityName;
   } catch {
     return null;

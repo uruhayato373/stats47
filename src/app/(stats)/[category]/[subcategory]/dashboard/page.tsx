@@ -1,8 +1,6 @@
-import { AreaSelectorClient, Prefecture } from "@/features/area";
-import {
-  fetchPrefectures,
-  fetchRegions,
-} from "@/features/area/repositories/area-repository";
+import { AreaSelectorClient } from "@/features/area/components/AreaSelectorClient";
+import { fetchPrefectures } from "@/features/area/repositories/area-repository";
+import { Prefecture } from "@/features/area/types";
 
 /**
  * 地域選択ページのメインコンポーネント（Server Component）
@@ -15,13 +13,9 @@ import {
 export default async function AreaPage() {
   // サーバーサイドでデータを取得（R2から直接）
   let prefectures: Prefecture[] = [];
-  let regions: Record<string, string[]> = {};
 
   try {
-    [prefectures, regions] = await Promise.all([
-      fetchPrefectures(),
-      fetchRegions(),
-    ]);
+    prefectures = await fetchPrefectures();
   } catch (error) {
     console.error("Failed to fetch area data:", error);
     // エラーが発生しても空のデータで続行
@@ -30,10 +24,7 @@ export default async function AreaPage() {
   return (
     <div className="space-y-6">
       {/* 地域選択コンポーネント（データをpropsで渡す） */}
-      <AreaSelectorClient
-        initialPrefectures={prefectures}
-        initialRegions={regions}
-      />
+      <AreaSelectorClient initialPrefectures={prefectures} />
     </div>
   );
 }

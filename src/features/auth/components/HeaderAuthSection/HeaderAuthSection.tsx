@@ -21,7 +21,14 @@ export function HeaderAuthSection() {
   return (
     <>
       {isAuthenticated ? (
-        <UserMenu user={session.user} />
+        <UserMenu
+          user={{
+            ...session.user,
+            name: session.user.name ?? undefined,
+            email: session.user.email ?? undefined,
+            role: session.user.role ?? undefined,
+          }}
+        />
       ) : (
         <LoginButton onClick={open} />
       )}

@@ -59,7 +59,7 @@ export const StatsBreadcrumb = () => {
           <>
             <ChevronRight className="w-3 h-3" />
             <Link
-              href={`/${category.id}/${subcategory.id}`}
+              href={`/${category?.id}/${subcategory.id}`}
               className="transition-colors hover:text-foreground"
             >
               {subcategory.name}

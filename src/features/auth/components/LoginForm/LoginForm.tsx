@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 
 import { PasswordInput } from "@/components/atoms/ui/password-input";
 
-interface LoginFormProps {
+export interface LoginFormProps {
   onSuccess?: () => void;
 }
 

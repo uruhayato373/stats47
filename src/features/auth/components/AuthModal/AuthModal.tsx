@@ -18,7 +18,7 @@ import {
 import { LoginForm } from "../LoginForm";
 import { RegisterForm } from "../RegisterForm";
 
-interface AuthModalProps {
+export interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialTab?: "login" | "register";

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { PasswordInput } from "@/components/atoms/ui/password-input";
 
-interface RegisterFormProps {
+export interface RegisterFormProps {
   onSuccess?: () => void;
   onSwitchToLogin?: () => void;
 }

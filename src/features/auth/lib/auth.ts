@@ -6,29 +6,6 @@ import { getDataProvider } from "@/infrastructure/database";
 
 import type { NextAuthConfig } from "next-auth";
 
-// TypeScript型定義の拡張
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-      username?: string;
-      role: "admin" | "user";
-    };
-  }
-
-  interface User {
-    id: string;
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-    username?: string;
-    role: "admin" | "user";
-  }
-}
-
 // NextAuth設定
 export const authConfig: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
