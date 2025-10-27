@@ -13,7 +13,10 @@ import {
   EstatStatsListResponse,
   GetStatsListParams,
 } from "@/features/estat-api/core/types";
-import { PagingOptions, StatsListSearchOptions } from "../../types";
+import {
+  PagingOptions,
+  StatsListSearchOptions,
+} from "@/features/estat-api/stats-list/types";
 
 /**
  * e-Stat APIエラーの種類

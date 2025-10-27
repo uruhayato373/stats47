@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CategoryIcon } from "@/components/atoms/CategoryIcon";
 
 import type { NavigationItem } from "@/infrastructure/navigation/sidebar-config";
-import { cn } from "@/infrastructure/utils";
+import { cn } from "@/lib/utils";
 
 interface SidebarLinkProps extends NavigationItem {
   isActive: boolean;

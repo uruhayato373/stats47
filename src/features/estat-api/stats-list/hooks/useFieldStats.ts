@@ -10,7 +10,10 @@ import {
   EstatStatsListError,
   EstatStatsListFetcher,
 } from "@/features/estat-api/stats-list/services";
-import { STATS_FIELDS, StatsFieldCode } from "../../types";
+import {
+  STATS_FIELDS,
+  StatsFieldCode,
+} from "@/features/estat-api/stats-list/types";
 
 export interface FieldStats {
   fieldCode: StatsFieldCode;

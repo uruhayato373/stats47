@@ -1,11 +1,11 @@
 
-import { estatAPI } from "@/features/estat-api";
+import { EstatStatsDataFetcher } from "@/features/estat-api/stats-data";
 import {
   EstatDataDisplay,
   EstatDataFetcher,
 } from "@/features/estat-api/stats-data/components";
 
-import { buildEnvironmentConfig } from "@/infrastructure/config";
+import { buildEnvironmentConfig } from "@/lib/environment";
 import { getMockStatsData } from "@data/mock/estat-api/stats-data";
 
 /**
@@ -60,30 +60,10 @@ export default async function StatsDataPage({
         }
       } else {
         console.log(`[${config.environment}] Fetching stats data from e-Stat API...`);
-          statsData = await estatAPI.fetchStatsData({
-          statsDataId,
-          cdCat01,
-          ...(params.cdArea && { cdArea: params.cdArea }),
-          ...(params.cdTime && { cdTime: params.cdTime }),
-          ...(params.cdCat02 && { cdCat02: params.cdCat02 }),
-          ...(params.cdCat03 && { cdCat03: params.cdCat03 }),
-          ...(params.cdCat04 && { cdCat04: params.cdCat04 }),
-          ...(params.cdCat05 && { cdCat05: params.cdCat05 }),
-          ...(params.cdCat06 && { cdCat06: params.cdCat06 }),
-          ...(params.cdCat07 && { cdCat07: params.cdCat07 }),
-          ...(params.cdCat08 && { cdCat08: params.cdCat08 }),
-          ...(params.cdCat09 && { cdCat09: params.cdCat09 }),
-          ...(params.cdCat10 && { cdCat10: params.cdCat10 }),
-          ...(params.cdCat11 && { cdCat11: params.cdCat11 }),
-          ...(params.cdCat12 && { cdCat12: params.cdCat12 }),
-          ...(params.cdCat13 && { cdCat13: params.cdCat13 }),
-          ...(params.cdCat14 && { cdCat14: params.cdCat14 }),
-          ...(params.cdCat15 && { cdCat15: params.cdCat15 }),
-          metaGetFlg: "Y",
-          cntGetFlg: "N",
-          explanationGetFlg: "N",
-          annotationGetFlg: "N",
-          replaceSpChars: "0",
+        statsData = await EstatStatsDataFetcher.fetchAndFormat(statsDataId, {
+          categoryFilter: cdCat01,
+          ...(params.cdArea && { areaFilter: params.cdArea }),
+          ...(params.cdTime && { yearFilter: params.cdTime }),
         });
       }
     } catch (err) {

@@ -4,7 +4,7 @@
  * Mock環境ではローカルJSON、開発・本番環境ではR2ストレージからデータを取得
  */
 
-import { isMockDataEnabled } from "@/infrastructure/config";
+import { isMockDataEnabled } from "@/lib/environment";
 
 import {
   DataSourceError,

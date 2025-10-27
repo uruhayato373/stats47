@@ -53,6 +53,28 @@ export interface MapStyle {
   labelColor?: string;
 }
 
+// コロプレス地図データ
+export interface ChoroplethData {
+  /** 地域コード（5桁形式、例: "01000"） */
+  areaCode: string;
+  /** 値 */
+  value: number;
+  /** 地域名（オプショナル） */
+  areaName?: string;
+}
+
+// コロプレス地図設定
+export interface ChoroplethConfig {
+  /** コロプレス地図用のデータ */
+  data?: ChoroplethData[];
+  /** カラースケール（D3のinterpolate関数名、例: "interpolateBlues"） */
+  colorScheme?: string;
+  /** 分岐点設定（発散カラースケール用） */
+  divergingMidpoint?: "zero" | "mean" | "median" | number;
+  /** データがない地域の色 */
+  noDataColor?: string;
+}
+
 // 地図コントロール
 export interface MapControls {
   /** ズームコントロールを表示するか */
@@ -82,7 +104,12 @@ export interface MapState {
 }
 
 // 地図設定
-export interface MapConfig extends MapProps, MapEvents, MapStyle, MapControls {
+export interface MapConfig
+  extends MapProps,
+    MapEvents,
+    MapStyle,
+    MapControls,
+    ChoroplethConfig {
   /** 地図の投影法 */
   projection?: "mercator" | "albers" | "equalEarth";
   /** アニメーションを有効にするか */

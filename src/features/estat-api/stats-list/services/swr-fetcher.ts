@@ -3,7 +3,7 @@
  * 責務: キャッシュキーからAPIリクエストを実行し、フォーマット済みデータを返却
  */
 
-import { StatsListSearchResult } from "../../types";
+import { StatsListSearchResult } from "@/features/estat-api/stats-list/types";
 import { parseStatsListCacheKey } from "./cache-key";
 
 import { EstatStatsListFetcher } from "./fetcher";

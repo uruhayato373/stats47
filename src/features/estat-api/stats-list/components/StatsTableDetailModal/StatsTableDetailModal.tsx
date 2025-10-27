@@ -24,7 +24,7 @@ import {
     getUpdateFrequency,
     truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
-import { DetailedStatsListTableInfo } from "../../../types";
+import { DetailedStatsListTableInfo } from "@/features/estat-api/stats-list/types";
 
 interface StatsTableDetailModalProps {
   table: DetailedStatsListTableInfo | null;

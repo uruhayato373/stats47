@@ -4,12 +4,14 @@
  */
 
 import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
   DeleteObjectCommand,
+  GetObjectCommand,
   ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client,
 } from "@aws-sdk/client-s3";
+
+import { getCloudflareConfig } from "../config";
 
 /**
  * R2 S3互換API設定
@@ -140,10 +142,11 @@ export class R2S3Client {
  * 環境変数からR2 S3設定を取得
  */
 export function getR2S3Config(): R2S3Config | null {
-  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const cloudflareConfig = getCloudflareConfig();
+  const accountId = cloudflareConfig.accountId;
+  const bucketName = cloudflareConfig.r2;
   const accessKeyId = process.env.CLOUDFLARE_R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY;
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME;
 
   if (!accountId || !accessKeyId || !secretAccessKey || !bucketName) {
     return null;
@@ -153,6 +156,6 @@ export function getR2S3Config(): R2S3Config | null {
     accountId,
     accessKeyId,
     secretAccessKey,
-    bucketName,
+    bucketName: bucketName,
   };
 }

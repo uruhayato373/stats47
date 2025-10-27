@@ -2,10 +2,9 @@
 
 import * as React from "react"
 
-import { GripVertical } from "lucide-react"
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 
-import { cn } from "@/infrastructure/utils"
+import { cn } from "@/lib/cn"
 
 const ResizablePanelGroup = ({
   className,
@@ -58,4 +57,5 @@ const ResizableHandle = React.forwardRef<
 })
 ResizableHandle.displayName = "ResizableHandle"
 
-export { ResizablePanelGroup, ResizablePanel, ResizableHandle }
+export { ResizableHandle, ResizablePanel, ResizablePanelGroup }
+

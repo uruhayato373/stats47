@@ -183,7 +183,7 @@ export class AutoCacheGeoShapeLoader {
     data: GeoJSON.FeatureCollection
   ): Promise<void> {
     try {
-      const response = await fetch("/api/area/geoshape/auto-cache", {
+      const response = await fetch("/api/gis/geoshape/cache", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

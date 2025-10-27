@@ -6,7 +6,12 @@ export * from "./hooks";
 // ============================================================================
 // コンポーネント
 // ============================================================================
-export { RankingItemCard, RankingItemsSidebar } from "./components";
+export {
+  RankingItemCard,
+  RankingItemNotFound,
+  RankingItemsSidebar,
+  RankingMapCard,
+} from "./components";
 
 // ============================================================================
 // サービス

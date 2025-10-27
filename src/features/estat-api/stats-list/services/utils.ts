@@ -7,7 +7,7 @@ import {
   AdvancedStatsListSearchOptions,
   STATS_FIELDS,
   StatsFieldCode,
-} from "../../types";
+} from "@/features/estat-api/stats-list/types";
 
 /**
  * 統計分野コード情報マップ

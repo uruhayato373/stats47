@@ -7,7 +7,7 @@ import "./globals.css";
 import Header from "@/components/organisms/layout/Header";
 import { SidebarWrapper } from "@/components/organisms/layout/Sidebar";
 
-import { ThemeProvider } from "@/infrastructure/providers/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import type { Metadata } from "next";
 

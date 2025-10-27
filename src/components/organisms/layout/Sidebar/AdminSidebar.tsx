@@ -1,8 +1,7 @@
-import Link from "next/link";
 
 import { Database, FileText, Settings } from "lucide-react";
 
-import { getSidebarNavigationItems } from "@/infrastructure/navigation/sidebar-config";
+import { getSidebarNavigationItems } from "@/lib/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 

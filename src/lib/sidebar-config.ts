@@ -1,10 +1,10 @@
-import { 
-  LayoutDashboard, 
-  FileCode, 
-  Users, 
+import {
+  ChevronDown,
+  FileCode,
+  LayoutDashboard,
   Maximize,
   MoreHorizontal,
-  ChevronDown
+  Users,
 } from "lucide-react";
 
 /**
@@ -18,7 +18,7 @@ export interface NavigationItem {
 
 /**
  * サイドバーナビゲーション設定
- * 
+ *
  * 各セクションのナビゲーションアイテムを定義します。
  * Lucide Reactのアイコンコンポーネントを使用して一貫性を保ちます。
  */

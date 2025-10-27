@@ -10,7 +10,7 @@ import {
     getUpdateFrequency,
     truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
-import { StatsListTableInfo } from "../../../types";
+import { StatsListTableInfo } from "@/features/estat-api/stats-list/types";
 
 interface StatsListResultsProps {
   tables: StatsListTableInfo[];

@@ -18,7 +18,7 @@ import {
   StatsListSearchOptions,
   StatsListSearchResult,
   StatsListTableInfo,
-} from "../../types";
+} from "@/features/estat-api/stats-list/types";
 
 /**
  * フィルタ条件の型

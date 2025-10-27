@@ -5,6 +5,8 @@
 
 // 型定義
 export type {
+  ChoroplethConfig,
+  ChoroplethData,
   MapConfig,
   MapControls,
   MapEvents,
@@ -16,3 +18,11 @@ export type {
 // コンポーネント
 export { PrefectureMap } from "./common/PrefectureMap";
 export { PrefectureMapD3 } from "./d3/PrefectureMapD3";
+export { MapLegend } from "./components";
+
+// ユーティリティ
+export {
+  createColorScale,
+  createChoroplethColorMapper,
+  createLegendData,
+} from "./utils/color-scale";

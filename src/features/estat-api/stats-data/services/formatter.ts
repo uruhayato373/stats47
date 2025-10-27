@@ -10,7 +10,7 @@ import {
   FormattedTableInfo,
   FormattedValue,
   parseEstatValue,
-} from "../../types";
+} from "@/features/estat-api/stats-data/types";
 
 /**
  * e-STAT統計データフォーマッター（最適化版）

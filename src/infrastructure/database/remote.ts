@@ -1,3 +1,5 @@
+import { getCloudflareConfig } from "./config";
+
 /**
  * Cloudflare D1 API レスポンス型定義
  */
@@ -19,9 +21,10 @@ interface D1ApiResponse {
  * @throws {Error} 環境変数が不足している場合やAPI接続に失敗した場合
  */
 export const createRemoteD1Database = async () => {
-  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
-  const databaseId = process.env.CLOUDFLARE_D1_DATABASE_ID;
+  const cloudflareConfig = getCloudflareConfig();
+  const accountId = cloudflareConfig.accountId;
+  const apiToken = cloudflareConfig.apiToken;
+  const databaseId = cloudflareConfig.d1;
 
   // 環境変数のバリデーション
   const missingVars = [];

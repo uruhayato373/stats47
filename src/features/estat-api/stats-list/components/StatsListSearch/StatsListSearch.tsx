@@ -21,7 +21,7 @@ import {
     LIMIT_OPTIONS,
     STATS_FIELD_OPTIONS,
 } from "@/features/estat-api/core/constants/search-options";
-import { STATS_FIELDS } from "../../../types";
+import { STATS_FIELDS } from "@/features/estat-api/stats-list";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;

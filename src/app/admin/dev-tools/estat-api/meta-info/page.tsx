@@ -5,8 +5,8 @@ import {
   EstatMetaInfoSidebar,
 } from "@/features/estat-api/meta-info/components";
 
-import { buildEnvironmentConfig } from "@/infrastructure/config";
 import { mockDataProvider } from "@/infrastructure/database/mock";
+import { buildEnvironmentConfig } from "@/lib/environment";
 import { getMockMetaInfo } from "@data/mock/estat-api/meta-info";
 
 import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";

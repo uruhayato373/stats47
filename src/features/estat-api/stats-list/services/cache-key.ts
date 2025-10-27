@@ -3,7 +3,7 @@
  * 責務: 検索オプションから一意のキャッシュキーを生成
  */
 
-import { StatsListSearchOptions } from "../../types";
+import { StatsListSearchOptions } from "@/features/estat-api/stats-list/types";
 
 /**
  * 検索オプションを正規化する

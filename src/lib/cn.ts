@@ -1,13 +1,12 @@
 /**
- * shadcn/ui ユーティリティ関数
+ * shadcn/ui クラス名ユーティリティ
  *
- * このファイルは shadcn/ui の標準ユーティリティで、
  * Tailwind CSS のクラス名を条件付きで結合・マージするために使用されます。
  *
  * @see https://ui.shadcn.com/docs/installation
  *
  * @warning このファイルは削除しないでください
- * プロジェクト全体のUIコンポーネント（36ファイル）で使用されています。
+ * プロジェクト全体のUIコンポーネント（32ファイル）で使用されています。
  */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";

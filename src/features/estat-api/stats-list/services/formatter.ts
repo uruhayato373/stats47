@@ -11,7 +11,7 @@ import {
   DetailedStatsListTableInfo,
   StatsListSearchResult,
   StatsListTableInfo,
-} from "../../types";
+} from "@/features/estat-api/stats-list/types";
 
 /**
  * e-Stat統計表リストフォーマッター

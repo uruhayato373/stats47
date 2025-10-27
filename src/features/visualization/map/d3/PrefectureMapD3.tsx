@@ -13,6 +13,9 @@ import * as topojson from "topojson-client";
 import { fetchPrefectureTopology } from "@/features/gis/geoshape/services/geoshape-service";
 import type { PrefectureFeature } from "@/features/gis/geoshape/types/index";
 
+import { createChoroplethColorMapper } from "../utils/color-scale";
+
+
 import type { MapConfig, MapState } from "../types/index";
 
 interface PrefectureMapD3Props extends MapConfig {
@@ -40,6 +43,10 @@ export function PrefectureMapD3({
   labelColor = "#374151",
   enableAnimation = true,
   animationDuration = 300,
+  data,
+  colorScheme,
+  divergingMidpoint,
+  noDataColor = "#e0e0e0",
   onPrefectureClick,
   onPrefectureHover,
   onMapClick,
@@ -91,8 +98,8 @@ export function PrefectureMapD3({
       }
 
       const geojson = topojson.feature(
-        topology as any,
-        topology.objects[objectName] as any
+        topology as unknown as topojson.Topology,
+        topology.objects[objectName] as topojson.GeometryObject
       ) as unknown as GeoJSON.FeatureCollection;
 
       // 都道府県コードと名前を正規化
@@ -134,6 +141,16 @@ export function PrefectureMapD3({
       // 投影法とパス生成器を設定
       const projection = createProjection();
       const path = d3.geoPath().projection(projection);
+
+      // コロプレスカラーマッパーを作成（データがある場合）
+      const getColor = data
+        ? createChoroplethColorMapper({
+            data,
+            colorScheme,
+            divergingMidpoint,
+            noDataColor,
+          })
+        : null;
 
       // ズーム動作を設定
       const zoomBehavior = d3
@@ -179,7 +196,15 @@ export function PrefectureMapD3({
         .append("path")
         .attr("class", "prefecture")
         .attr("d", (d) => path(d as GeoJSON.Feature))
-        .attr("fill", fillColor)
+        .attr("fill", (d) => {
+          const feature = d as PrefectureFeature;
+          // コロプレスデータがある場合はそれに基づいて色分け
+          if (getColor) {
+            return getColor(feature.properties.prefCode);
+          }
+          // データがない場合はデフォルト色
+          return fillColor;
+        })
         .attr("stroke", strokeColor)
         .attr("stroke-width", strokeWidth)
         .style("cursor", "pointer")
@@ -199,14 +224,20 @@ export function PrefectureMapD3({
           }));
           onPrefectureHover?.(d as PrefectureFeature);
         })
-        .on("mouseout", function () {
+        .on("mouseout", function (event, d) {
+          const feature = d as PrefectureFeature;
+          // 元の色を取得（コロプレスまたはデフォルト）
+          const originalColor = getColor
+            ? getColor(feature.properties.prefCode)
+            : fillColor;
+
           if (enableAnimation) {
             d3.select(this)
               .transition()
               .duration(animationDuration)
-              .attr("fill", fillColor);
+              .attr("fill", originalColor);
           } else {
-            d3.select(this).attr("fill", fillColor);
+            d3.select(this).attr("fill", originalColor);
           }
 
           setMapState((prev) => ({ ...prev, hoveredPrefecture: null }));
@@ -228,15 +259,15 @@ export function PrefectureMapD3({
           // 選択された都道府県の色を変更
           svg.selectAll("path.prefecture").attr("fill", (pathData) => {
             const pathFeature = pathData as PrefectureFeature;
-            if (
-              pathFeature.properties.prefCode === feature.properties.prefCode
-            ) {
-              return mapState.selectedPrefecture?.properties.prefCode ===
-                feature.properties.prefCode
-                ? selectedColor
-                : fillColor;
+            const prefCode = pathFeature.properties.prefCode;
+
+            // この都道府県が選択されている場合
+            if (prefCode === mapState.selectedPrefecture?.properties.prefCode) {
+              return selectedColor;
             }
-            return fillColor;
+
+            // 選択解除の場合、元の色に戻す
+            return getColor ? getColor(prefCode) : fillColor;
           });
 
           onPrefectureClick?.(feature);
@@ -291,6 +322,10 @@ export function PrefectureMapD3({
     labelColor,
     enableAnimation,
     animationDuration,
+    data,
+    colorScheme,
+    divergingMidpoint,
+    noDataColor,
     onPrefectureClick,
     onPrefectureHover,
     onMapClick,
