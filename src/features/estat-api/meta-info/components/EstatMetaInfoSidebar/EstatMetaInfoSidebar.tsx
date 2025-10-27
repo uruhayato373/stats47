@@ -7,11 +7,11 @@ import { useRouter } from "next/navigation";
 import { Archive } from "lucide-react";
 
 import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationNext,
-    PaginationPrevious,
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
 } from "@/components/atoms/ui/pagination";
 
 import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
@@ -135,7 +135,7 @@ export default function EstatMetaInfoSidebar({
 
   return (
     <div
-      className={`w-full xl:w-80 bg-white dark:bg-neutral-800 flex flex-col ${className}`}
+      className={`w-full h-full flex flex-col ${className}`}
       style={{ minHeight: "400px" }}
     >
       {/* ヘッダー */}
