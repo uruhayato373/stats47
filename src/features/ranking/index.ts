@@ -16,7 +16,6 @@ export {
 // ============================================================================
 // サービス
 // ============================================================================
-export { RankingCacheService } from "./services/ranking-cache-service";
 export { RankingItemService } from "./services/ranking-item-service";
 export { RankingService, type RankingConfig } from "./services/ranking-service";
 export { PrefectureRankingSettingsService } from "./services/settings-service";
@@ -24,7 +23,8 @@ export { PrefectureRankingSettingsService } from "./services/settings-service";
 // ============================================================================
 // リポジトリ
 // ============================================================================
-export * from "./repositories";
+// Note: Repositories are server-only and should be imported directly when needed
+// export * from "./repositories";
 
 // ============================================================================
 // アダプター
