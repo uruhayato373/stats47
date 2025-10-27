@@ -4,7 +4,7 @@
  * Mock環境ではローカルJSON、開発・本番環境ではR2ストレージからデータを取得
  */
 
-import { isMockDataEnabled } from "@/lib/environment";
+import { checkMockDataEnabled } from "@/lib/environment";
 
 import {
   DataSourceError,
@@ -19,7 +19,7 @@ import {
 // ============================================================================
 
 const R2_BASE_URL = process.env.R2_AREA_DATA_URL || "";
-const USE_MOCK_DATA = isMockDataEnabled();
+const USE_MOCK_DATA = checkMockDataEnabled();
 
 // ============================================================================
 // モジュールレベルのキャッシュ

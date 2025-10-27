@@ -1,6 +1,6 @@
 import { getCategoryIcon, listCategories } from "@/features/category";
 
-import { getSidebarNavigationItems } from "@/lib/sidebar-config";
+import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
@@ -10,7 +10,7 @@ import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
  */
 export function AppSidebar() {
   const categories = listCategories();
-  const navigationItems = getSidebarNavigationItems();
+  const navigationItems = buildSidebarNavigationItems();
 
   return (
     <div className="w-64 h-full bg-sidebar border-r border-border flex flex-col">

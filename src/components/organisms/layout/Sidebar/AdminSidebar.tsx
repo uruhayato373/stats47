@@ -1,7 +1,7 @@
 
 import { Database, FileText, Settings } from "lucide-react";
 
-import { getSidebarNavigationItems } from "@/lib/sidebar-config";
+import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
@@ -18,7 +18,7 @@ import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
  * - 設定
  */
 export function AdminSidebar() {
-  const navigationItems = getSidebarNavigationItems();
+  const navigationItems = buildSidebarNavigationItems();
 
   return (
     <div className="w-64 h-full bg-sidebar border-r border-border flex flex-col">

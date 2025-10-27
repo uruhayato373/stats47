@@ -17,12 +17,12 @@ export interface NavigationItem {
 }
 
 /**
- * サイドバーナビゲーション設定
+ * サイドバーナビゲーション設定を構築
  *
  * 各セクションのナビゲーションアイテムを定義します。
  * Lucide Reactのアイコンコンポーネントを使用して一貫性を保ちます。
  */
-export const getSidebarNavigationItems = () => ({
+export const buildSidebarNavigationItems = () => ({
   home: [
     {
       href: "/",
@@ -50,7 +50,7 @@ export const getSidebarNavigationItems = () => ({
 });
 
 /**
- * Quick Actionsボタンの設定
+ * Quick Actionsボタンの設定データ
  */
 export const quickActionsConfig = {
   icon: MoreHorizontal,

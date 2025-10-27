@@ -30,16 +30,16 @@ export const config = {
 } as const;
 
 /**
- * 現在の実行環境を取得
+ * 現在の実行環境を解決
  */
-function detectEnvironment(): Environment {
+function resolveEnvironment(): Environment {
   return (process.env.NODE_ENV as Environment) || "development";
 }
 
 /**
  * モックデータモードが有効かどうかを判定
  */
-export function isMockDataEnabled(): boolean {
+export function checkMockDataEnabled(): boolean {
   return process.env.NEXT_PUBLIC_USE_MOCK === "true";
 }
 
@@ -50,7 +50,7 @@ export function isMockDataEnabled(): boolean {
  */
 export function buildEnvironmentConfig(): EnvironmentConfig {
   return {
-    environment: detectEnvironment(),
-    isMock: isMockDataEnabled(),
+    environment: resolveEnvironment(),
+    isMock: checkMockDataEnabled(),
   };
 }
