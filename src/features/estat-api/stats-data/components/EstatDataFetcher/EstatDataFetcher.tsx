@@ -1,33 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { RotateCcw, Search, X } from "lucide-react";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "@/components/atoms/ui/card";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { GetStatsDataParams } from "@/features/estat-api";
-
-interface EstatDataFetcherProps {
-  onSubmit: (params: GetStatsDataParams) => void;
-  loading: boolean;
-}
+interface EstatDataFetcherProps {}
 
 type DynamicField = {
   id: string; // 一意のID（cdTime, cdCat02, cdCat03など）
@@ -41,15 +38,50 @@ type FormData = {
   cdArea: string;
 };
 
-export default function EstatDataFetcher({
-  onSubmit,
-  loading,
-}: EstatDataFetcherProps) {
+export default function EstatDataFetcher({}: EstatDataFetcherProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
   const [formData, setFormData] = useState<FormData>({
-    statsDataId: "0000010101",
-    cdCat01: "A1101",
+    statsDataId: "",
+    cdCat01: "",
     cdArea: "",
   });
+
+  // URLパラメータから初期値を取得
+  useEffect(() => {
+    const statsDataId = searchParams.get("statsDataId") || "";
+    const cdCat01 = searchParams.get("cdCat01") || "";
+    const cdArea = searchParams.get("cdArea") || "";
+
+    setFormData({
+      statsDataId: statsDataId || "0000010101",
+      cdCat01: cdCat01 || "A1101",
+      cdArea,
+    });
+
+    // 動的フィールドも復元
+    const dynamicFieldsFromUrl: DynamicField[] = [];
+    const availableFields = ["cdTime", "cdCat02", "cdCat03", "cdCat04", "cdCat05", "cdCat06", "cdCat07", "cdCat08", "cdCat09", "cdCat10", "cdCat11", "cdCat12", "cdCat13", "cdCat14", "cdCat15"];
+    
+    availableFields.forEach((field) => {
+      const value = searchParams.get(field);
+      if (value) {
+        const category = availableCategories.find((cat) => cat.id === field);
+        if (category) {
+          dynamicFieldsFromUrl.push({
+            id: category.id,
+            label: category.label,
+            value,
+          });
+        }
+      }
+    });
+
+    if (dynamicFieldsFromUrl.length > 0) {
+      setDynamicFields(dynamicFieldsFromUrl);
+    }
+  }, [searchParams]);
 
   // 動的に追加されたフィールド
   const [dynamicFields, setDynamicFields] = useState<DynamicField[]>([]);
@@ -114,22 +146,21 @@ export default function EstatDataFetcher({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const params: GetStatsDataParams = {
-      appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID || "",
-      statsDataId: formData.statsDataId,
-      ...(formData.cdCat01 && { cdCat01: formData.cdCat01 }),
-      ...(formData.cdArea && { cdArea: formData.cdArea }),
-    };
+    // URLパラメータを構築
+    const urlParams = new URLSearchParams();
+    urlParams.set("statsDataId", formData.statsDataId);
+    if (formData.cdCat01) urlParams.set("cdCat01", formData.cdCat01);
+    if (formData.cdArea) urlParams.set("cdArea", formData.cdArea);
 
     // 動的フィールドの値を追加
     dynamicFields.forEach((field) => {
       if (field.value) {
-        // 動的フィールドの値を安全に追加
-        (params as unknown as Record<string, string>)[field.id] = field.value;
+        urlParams.set(field.id, field.value);
       }
     });
 
-    onSubmit(params);
+    // URL遷移
+    router.push(`/admin/dev-tools/estat-api/stats-data?${urlParams.toString()}`);
   };
 
   const handleReset = () => {
@@ -295,18 +326,17 @@ export default function EstatDataFetcher({
             <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t">
               <Button
                 type="submit"
-                disabled={loading || !formData.statsDataId}
+                disabled={!formData.statsDataId}
                 className="flex-1"
               >
                 <Search className="w-4 h-4 mr-2" />
-                {loading ? "データ取得中..." : "データを取得"}
+                データを取得
               </Button>
 
               <Button
                 type="button"
                 variant="outline"
                 onClick={handleReset}
-                disabled={loading}
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 リセット

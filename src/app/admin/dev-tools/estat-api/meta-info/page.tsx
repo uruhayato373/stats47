@@ -1,14 +1,16 @@
 import { estatAPI } from "@/features/estat-api";
-import { buildEnvironmentConfig } from "@/infrastructure/config";
-import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
-import { mockDataProvider } from "@/infrastructure/database/mock";
-import { getMockMetaInfo } from "@data/mock/estat-api/metainfo";
-
 import {
   EstatMetaInfoDisplay,
   EstatMetaInfoFetcher,
   EstatMetaInfoSidebar,
 } from "@/features/estat-api/meta-info/components";
+
+import { buildEnvironmentConfig } from "@/infrastructure/config";
+import { mockDataProvider } from "@/infrastructure/database/mock";
+import { getMockMetaInfo } from "@data/mock/estat-api/meta-info";
+
+import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
+
 
 /**
  * MetaInfoPage - e-Statメタ情報管理ページ（サーバーコンポーネント）

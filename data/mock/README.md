@@ -28,10 +28,10 @@ data/mock/
 │   ├── estat_metainfo.json      # e-Stat統計メタ情報（50件）
 │   └── README.md                # データベースモック詳細
 ├── estat-api/                   # e-Stat API関連モックデータ
-│   ├── metainfo/                # メタ情報モックデータ
+│   ├── meta-info/               # メタ情報モックデータ
 │   │   ├── prefecture/          # 都道府県メタ情報
 │   │   └── municipality/        # 市区町村メタ情報
-│   ├── statsdata/               # 統計データモックデータ
+│   ├── stats-data/              # 統計データモックデータ
 │   │   ├── prefecture/          # 都道府県統計データ
 │   │   └── municipality/        # 市区町村統計データ
 │   └── statslist/               # 統計表リストモックデータ
@@ -63,8 +63,8 @@ data/mock/
 
 **用途**: e-Stat API 接続なしで開発・テスト
 
-- `estat-api/metainfo/` - メタ情報 API のレスポンス
-- `estat-api/statsdata/` - 統計データ API のレスポンス
+- `estat-api/meta-info/` - メタ情報 API のレスポンス
+- `estat-api/stats-data/` - 統計データ API のレスポンス
 - `estat-api/statslist/` - 統計表リスト API のレスポンス
 
 ## データの取得方法

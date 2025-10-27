@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { estatAPI } from "@/features/estat-api";
 import { buildEnvironmentConfig } from "@/infrastructure/config";
 
-import { getMockMetaInfo } from "@data/mock/estat-api/metainfo";
+import { getMockMetaInfo } from "@data/mock/estat-api/meta-info";
 
 /**
  * e-Statメタ情報取得APIエンドポイント
