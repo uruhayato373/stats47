@@ -1,4 +1,5 @@
--- ステップ1: ranking_itemsに可視化設定カラムを追加
+-- ステップ1: ranking_itemsに可視化設定カラムを追加（既に存在する場合はスキップ）
+-- SQLiteはIF NOT EXISTSをサポートしていないため、エラーは無視される想定
 ALTER TABLE ranking_items ADD COLUMN map_color_scheme TEXT DEFAULT 'interpolateBlues';
 ALTER TABLE ranking_items ADD COLUMN map_diverging_midpoint TEXT DEFAULT 'zero';
 ALTER TABLE ranking_items ADD COLUMN ranking_direction TEXT DEFAULT 'desc';
