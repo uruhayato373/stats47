@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useRouter, useSearchParams } from "next/navigation";
+
 import {
   AlertCircle,
   Calendar,
@@ -26,10 +28,13 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
-import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
-import { EstatMetaInfoFormatter } from "../../services/formatter";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
+import { useEstatMetaInfo } from "../../hooks/useEstatMetaInfo";
+import { EstatMetaInfoFormatter } from "../../services/formatter";
+
+
 
 import AreasTab from "./tabs/AreasTab";
 import CategoriesTab from "./tabs/CategoriesTab";
@@ -38,15 +43,11 @@ import TimeAxisTab from "./tabs/TimeAxisTab";
 
 /**
  * EstatMetaInfoDisplayProps - e-Statメタ情報表示コンポーネントのプロパティ
+ * 
+ * プロパティなし（URL paramsから自動取得）
  */
-interface EstatMetaInfoDisplayProps {
-  /** e-Statメタ情報レスポンスデータ */
-  metaInfo: EstatMetaInfoResponse | null;
-  /** ローディング状態 */
-  loading?: boolean;
-  /** エラーメッセージ */
-  error?: string | null;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface EstatMetaInfoDisplayProps {}
 
 /**
  * TabType - タブの種類
@@ -57,7 +58,8 @@ type TabType = "table" | "categories" | "areas" | "time" | "json";
  * EstatMetaInfoDisplay - e-Statメタ情報表示コンポーネント
  *
  * 機能:
- * - e-Statメタ情報の表示と管理
+ * - URL paramsからstatsIdを自動取得
+ * - e-Statメタ情報の取得と表示
  * - 統計表基本情報の表示（タイトル、政府統計名、作成機関）
  * - カテゴリ分類とJSONレスポンスのタブ表示
  * - メタ情報の保存とダウンロード機能
@@ -70,18 +72,32 @@ type TabType = "table" | "categories" | "areas" | "time" | "json";
  *
  * 使用例:
  * ```tsx
- * <EstatMetaInfoDisplay
- *   metaInfo={metaInfoData}
- *   loading={isLoading}
- *   error={errorMessage}
- * />
+ * <EstatMetaInfoDisplay />
  * ```
  */
-export default function EstatMetaInfoDisplay({
-  metaInfo,
-  loading,
-  error,
-}: EstatMetaInfoDisplayProps) {
+export default function EstatMetaInfoDisplay({}: EstatMetaInfoDisplayProps) {
+  const router = useRouter();
+  // URL paramsからstatsIdを取得
+  const searchParams = useSearchParams();
+  const statsId = searchParams.get("statsId") || "";
+
+  // 初期値の設定（Mock環境）
+  useEffect(() => {
+    if (!statsId) {
+      const config = buildEnvironmentConfig();
+      if (config.isMock) {
+        router.replace("/admin/dev-tools/estat-api/meta-info?statsId=0000010101");
+      }
+    }
+  }, [statsId, router]);
+
+  // データフェッチング
+  const { metaInfo, error, isLoading: loading } = useEstatMetaInfo(
+    statsId || null,
+    {
+      autoSave: true,
+    }
+  );
   // ===== 状態管理 =====
   /** アクティブなタブ */
   const [activeTab, setActiveTab] = useState<TabType>("table");
@@ -95,14 +111,14 @@ export default function EstatMetaInfoDisplay({
   // ===== データ処理 =====
   /** フォーマット済みメタ情報 */
   const parsedData = useMemo(() => {
-    if (!metaInfo) return null;
+    if (!metaInfo || !statsId) return null;
     try {
       return EstatMetaInfoFormatter.parseCompleteMetaInfo(metaInfo);
     } catch (error) {
       console.error("メタ情報の解析に失敗しました:", error);
       return null;
     }
-  }, [metaInfo]);
+  }, [metaInfo, statsId]);
 
   // ===== エフェクト =====
   /**
@@ -112,6 +128,19 @@ export default function EstatMetaInfoDisplay({
   useEffect(() => {
     setActiveTab("table");
   }, [metaInfo]);
+
+  // ===== レンダリング条件分岐 =====
+
+  /**
+   * statsId未指定時の表示
+   */
+  if (!statsId) {
+    return (
+      <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+        <p>統計表IDを入力してメタ情報を取得してください</p>
+      </div>
+    );
+  }
 
   // ===== イベントハンドラー =====
   /**
@@ -133,27 +162,6 @@ export default function EstatMetaInfoDisplay({
       download(metaInfo);
     }
   };
-
-  // ===== レンダリング条件分岐 =====
-
-  /**
-   * ローディング状態の表示
-   * スケルトンローダーでコンテンツの読み込み中を表現
-   */
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <div className="animate-pulse">
-          <div className="h-4 bg-gray-300 rounded w-1/4 mb-3"></div>
-          <div className="space-y-2">
-            <div className="h-3 bg-gray-300 rounded w-full"></div>
-            <div className="h-3 bg-gray-300 rounded w-5/6"></div>
-            <div className="h-3 bg-gray-300 rounded w-3/4"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   /**
    * ローディング状態の表示

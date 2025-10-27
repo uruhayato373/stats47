@@ -2,19 +2,20 @@
 
 import { memo } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
 
@@ -34,10 +35,6 @@ type FormValues = z.infer<typeof formSchema>;
  * EstatMetaInfoFetcherProps - e-Statメタ情報取得フォームのプロパティ
  */
 interface EstatMetaInfoFetcherProps {
-  /** 統計表IDが送信された時のコールバック関数 */
-  onSubmit: (statsDataId: string) => void;
-  /** API通信中のローディング状態 */
-  loading?: boolean;
   /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
   clearOnSuccess?: boolean;
 }
@@ -48,28 +45,22 @@ interface EstatMetaInfoFetcherProps {
  * 機能:
  * - 統計表IDの入力フォーム
  * - フォーム送信時のバリデーション
- * - ローディング状態の表示
+ * - URL更新によるデータ取得
  * - 送信成功後の入力クリア（オプション）
  *
  * レイアウト:
  * - レスポンシブデザイン（モバイル: 縦並び、デスクトップ: 横並び）
- * - 左側: アイコン + タイトル
- * - 右側: 入力フィールド + 送信ボタン
+ * - 入力フィールド + 送信ボタン
  *
  * 使用例:
  * ```tsx
- * <EstatMetaInfoFetcher
- *   onSubmit={(statsDataId) => handleFetchMetaInfo(statsDataId)}
- *   loading={isLoading}
- *   clearOnSuccess={true}
- * />
+ * <EstatMetaInfoFetcher clearOnSuccess={true} />
  * ```
  */
 const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
-  onSubmit,
-  loading,
   clearOnSuccess = false,
 }: EstatMetaInfoFetcherProps) {
+  const router = useRouter();
   // ===== react-hook-formの設定 =====
 
   const form = useForm<FormValues>({
@@ -86,8 +77,10 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
    * @param values - フォームの値
    */
   const handleSubmit = (values: FormValues) => {
-    // 親コンポーネントに統計表IDを渡す
-    onSubmit(values.statsDataId);
+    // URLを更新してデータ取得をトリガー
+    router.push(
+      `/admin/dev-tools/estat-api/meta-info?statsId=${values.statsDataId}`
+    );
 
     // オプション: 送信成功後に入力フィールドをクリア
     if (clearOnSuccess) {
@@ -100,7 +93,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
-        {/* シンプルなレイアウト */}
         <div className="flex flex-row gap-3 items-end">
           {/* 統計表ID入力フィールド */}
           <FormField
@@ -112,7 +104,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
                 <FormControl>
                   <Input
                     placeholder="0000010101"
-                    disabled={loading}
                     {...field}
                   />
                 </FormControl>
@@ -122,9 +113,8 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           />
 
           {/* 送信ボタン */}
-          <Button type="submit" disabled={!form.formState.isValid || loading}>
-            {loading && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
-            {loading ? "取得中" : "取得"}
+          <Button type="submit" disabled={!form.formState.isValid}>
+            取得
           </Button>
         </div>
       </form>

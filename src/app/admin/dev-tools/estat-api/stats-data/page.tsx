@@ -7,8 +7,8 @@
  * @module EstatDataPage
  */
 
-import { buildEnvironmentConfig } from "@/infrastructure/config";
 import { estatAPI } from "@/features/estat-api";
+import { buildEnvironmentConfig } from "@/infrastructure/config";
 
 import { getMockStatsData } from "@data/mock/statsdata";
 

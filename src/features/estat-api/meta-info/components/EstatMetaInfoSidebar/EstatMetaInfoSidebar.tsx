@@ -2,14 +2,16 @@
 
 import { useCallback, useMemo, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Archive } from "lucide-react";
 
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious,
 } from "@/components/atoms/ui/pagination";
 
 import { SavedMetaInfoListItem } from "../SavedMetaInfoListItem";
@@ -24,8 +26,6 @@ interface EstatMetaInfoSidebarProps {
   className?: string;
   /** 初期データ（保存済み統計表一覧） */
   initialData?: EstatMetaInfo[];
-  /** アイテムがクリックされた時のコールバック関数 */
-  onView?: (item: EstatMetaInfo) => void;
 }
 
 /**
@@ -42,13 +42,13 @@ interface EstatMetaInfoSidebarProps {
  *
  * @param className - カスタムクラス名
  * @param initialData - 初期データ（保存済み統計表一覧）
- * @param onView - アイテムがクリックされた時のコールバック関数
  */
 export default function EstatMetaInfoSidebar({
   className = "",
   initialData = [],
-  onView,
 }: EstatMetaInfoSidebarProps) {
+  const router = useRouter();
+
   // ===== 状態管理 =====
 
   /** 現在のページ番号 */
@@ -64,11 +64,13 @@ export default function EstatMetaInfoSidebar({
    */
   const handleView = useCallback(
     (item: EstatMetaInfo) => {
-      if (onView) {
-        onView(item);
+      if (item.stats_data_id) {
+        router.push(
+          `/admin/dev-tools/estat-api/meta-info?statsId=${item.stats_data_id}`
+        );
       }
     },
-    [onView]
+    [router]
   );
 
   /**
