@@ -1,6 +1,8 @@
 export { AreaSelector } from "./AreaSelector";
-export { Cityelector } from "./Cityelector";
+export { AreaSelectorClient } from "./AreaSelectorClient";
+export { CitySelector } from "./CitySelector";
 export { PrefectureSelector } from "./PrefectureSelector";
+export { PrefectureSelectorClient } from "./PrefectureSelectorClient";
 
 // Dashboards
 export * from "./dashboards";

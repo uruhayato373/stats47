@@ -1,7 +1,6 @@
 "use client";
 
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
-import { Badge } from "@/components/atoms/ui/badge";
 import { Label } from "@/components/atoms/ui/label";
 import {
   Select,
@@ -13,7 +12,7 @@ import {
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 import { AlertCircle, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { listMunicipalitiesByPrefecture } from "../services/municipality-service";
+import { listMunicipalitiesByPrefecture } from "../services/city-service";
 import { City } from "../types";
 
 /**

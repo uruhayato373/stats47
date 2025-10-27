@@ -33,7 +33,7 @@ src/features/area/
 │   └── area-repository.ts        # データアクセス層（純粋な関数）
 ├── services/
 │   ├── prefecture-service.ts     # 都道府県サービス（純粋な関数）
-│   └── municipality-service.ts   # 市区町村サービス（純粋な関数）
+│   └── city-service.ts           # 市区町村サービス（純粋な関数）
 ├── utils/
 │   └── code-converter.ts         # コード変換ユーティリティ
 ├── validators/
@@ -46,9 +46,9 @@ src/features/area/
 ### データソース
 
 ```
-data/mock/area/
+data/mock/
 ├── prefectures.json      # 都道府県マスターデータ (4KB)
-└── municipalities.json   # 市区町村マスターデータ (258KB)
+└── cities.json           # 市区町村マスターデータ (220KB)
 ```
 
 **特徴**:
@@ -164,7 +164,7 @@ export class AreaRepository {
 
   async getMunicipalities(): Promise<Municipality[]> {
     if (!this.municipalitiesCache) {
-      const data = await import("@/config/areas/municipalities.json");
+      const data = await import("@/data/mock/cities.json");
       this.municipalitiesCache = data.map(Municipality.fromJson);
     }
     return this.municipalitiesCache;

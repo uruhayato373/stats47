@@ -39,7 +39,7 @@ export * from "./repositories/area-repository";
 // ============================================================================
 // サービス
 // ============================================================================
-export * from "./services/municipality-service";
+export * from "./services/city-service";
 export * from "./services/prefecture-service";
 
 // ============================================================================

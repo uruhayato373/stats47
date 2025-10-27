@@ -12,7 +12,16 @@ let regionsCache: Record<string, string[]> | null = null;
 let citiesCache: City[] | null = null;
 
 /**
+ * 実行環境がサーバーサイドかどうかを判定
+ */
+function isServer(): boolean {
+  return typeof window === "undefined";
+}
+
+/**
  * 都道府県一覧を取得
+ * サーバーサイド: R2公開URLから直接取得
+ * クライアントサイド: APIルート経由で取得
  */
 export async function fetchPrefectures(): Promise<Prefecture[]> {
   if (prefecturesCache) {
@@ -20,17 +29,34 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
   }
 
   try {
-    // サーバーサイドのAPIルート経由で取得（CORS回避）
-    const response = await fetch("/api/area/prefectures");
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch prefectures: ${response.status} ${response.statusText}`
-      );
-    }
-    const data = (await response.json()) as {
+    let data: {
       prefectures: Prefecture[];
       regions: Record<string, string[]>;
     };
+
+    if (isServer()) {
+      // サーバーサイド: 直接R2から取得
+      const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
+      if (!R2_PUBLIC_URL) {
+        throw new Error("R2_PUBLIC_URL is not configured");
+      }
+      const response = await fetch(`${R2_PUBLIC_URL}/area/prefectures.json`);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch prefectures from R2: ${response.status}`
+        );
+      }
+      data = await response.json();
+    } else {
+      // クライアントサイド: API経由
+      const response = await fetch("/api/area/prefectures");
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch prefectures: ${response.status} ${response.statusText}`
+        );
+      }
+      data = await response.json();
+    }
 
     prefecturesCache = data.prefectures;
     return data.prefectures;
@@ -41,6 +67,8 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
 
 /**
  * 地域ブロックマップを取得
+ * サーバーサイド: R2公開URLから直接取得
+ * クライアントサイド: APIルート経由で取得
  */
 export async function fetchRegions(): Promise<Record<string, string[]>> {
   if (regionsCache) {
@@ -48,15 +76,30 @@ export async function fetchRegions(): Promise<Record<string, string[]>> {
   }
 
   try {
-    // サーバーサイドのAPIルート経由で取得（CORS回避）
-    const response = await fetch("/api/area/prefectures");
-    if (!response.ok) {
-      throw new Error(`Failed to fetch regions: ${response.status}`);
-    }
-    const data = (await response.json()) as {
+    let data: {
       prefectures: Prefecture[];
       regions: Record<string, string[]>;
     };
+
+    if (isServer()) {
+      // サーバーサイド: 直接R2から取得
+      const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
+      if (!R2_PUBLIC_URL) {
+        throw new Error("R2_PUBLIC_URL is not configured");
+      }
+      const response = await fetch(`${R2_PUBLIC_URL}/area/prefectures.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch regions from R2: ${response.status}`);
+      }
+      data = await response.json();
+    } else {
+      // クライアントサイド: API経由
+      const response = await fetch("/api/area/prefectures");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch regions: ${response.status}`);
+      }
+      data = await response.json();
+    }
 
     regionsCache = data.regions;
     return data.regions;
@@ -67,6 +110,8 @@ export async function fetchRegions(): Promise<Record<string, string[]>> {
 
 /**
  * 市区町村一覧を取得
+ * サーバーサイド: R2公開URLから直接取得
+ * クライアントサイド: APIルート経由で取得
  */
 export async function fetchCities(): Promise<City[]> {
   if (citiesCache) {
@@ -74,13 +119,27 @@ export async function fetchCities(): Promise<City[]> {
   }
 
   try {
-    // サーバーサイドのAPIルート経由で取得（CORS回避）
-    const response = await fetch("/api/area/cities");
-    if (!response.ok) {
-      throw new Error(`Failed to fetch cities: ${response.status}`);
+    let data: { cities: City[] };
+
+    if (isServer()) {
+      // サーバーサイド: 直接R2から取得
+      const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
+      if (!R2_PUBLIC_URL) {
+        throw new Error("R2_PUBLIC_URL is not configured");
+      }
+      const response = await fetch(`${R2_PUBLIC_URL}/area/cities.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch cities from R2: ${response.status}`);
+      }
+      data = await response.json();
+    } else {
+      // クライアントサイド: API経由
+      const response = await fetch("/api/area/cities");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch cities: ${response.status}`);
+      }
+      data = await response.json();
     }
-    const jsonData = await response.json();
-    const data = jsonData as { cities: City[] };
 
     citiesCache = data.cities;
     return data.cities;
