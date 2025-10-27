@@ -6,14 +6,11 @@
 import { useEffect, useState } from "react";
 
 import {
-  STATS_FIELDS,
-  StatsFieldCode,
-} from "@/features/estat-api/core/types/stats-list";
-import {
   EstatErrorType,
   EstatStatsListError,
   EstatStatsListFetcher,
 } from "@/features/estat-api/stats-list/services";
+import { STATS_FIELDS, StatsFieldCode } from "../../types";
 
 export interface FieldStats {
   fieldCode: StatsFieldCode;

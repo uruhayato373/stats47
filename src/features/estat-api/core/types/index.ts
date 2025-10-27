@@ -4,11 +4,11 @@ export * from "./common";
 // Raw API Response Types
 export * from "./datacatalog";
 
-// Formatted Data Types
-export * from "./stats-data";
+// StatsData Types (re-exported from stats-data feature)
+export * from "@/features/estat-api/stats-data/types";
 
-// MetaInfo Types
-export * from "./meta-info";
+// MetaInfo Types (re-exported from meta-info feature)
+export * from "@/features/estat-api/meta-info/types";
 
-// StatsList Types
-export * from "./stats-list";
+// StatsList Types (re-exported from stats-list feature)
+export * from "@/features/estat-api/stats-list/types";

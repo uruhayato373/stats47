@@ -2,13 +2,13 @@ import { Calendar, Clock, TrendingUp } from "lucide-react";
 
 import { Badge } from "@/components/atoms/ui/badge";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
 } from "@/components/atoms/ui/card";
 
-import { TimeAxisInfo } from "@/features/estat-api/core/types/meta-info";
+import { TimeAxisInfo } from "../../../types";
 
 interface TimeAxisTabProps {
   timeAxis: TimeAxisInfo;

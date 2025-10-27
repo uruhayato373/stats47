@@ -49,7 +49,7 @@ export default async function MetaInfoPage({
         }
       } else {
         console.log(`[${config.environment}] Fetching meta info from e-Stat API...`);
-        metaInfo = await estatAPI.getMetaInfo({ statsDataId: statsId });
+            metaInfo = await estatAPI.fetchMetaInfo({ statsDataId: statsId });
       }
     } catch (err) {
       console.error(`[${config.environment}] メタ情報取得エラー:`, err);

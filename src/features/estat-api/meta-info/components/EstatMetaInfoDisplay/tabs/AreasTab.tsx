@@ -3,21 +3,21 @@ import { useMemo } from "react";
 import { MapPin } from "lucide-react";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/atoms/ui/table";
 
-import { PrefectureInfo } from "@/features/estat-api/core/types/meta-info";
+import { PrefectureInfo } from "../../../types";
 
 interface AreasTabProps {
   areas: PrefectureInfo[];

@@ -8,10 +8,7 @@ import {
   EstatStatsListResponse,
   GetStatsListParams,
 } from "@/features/estat-api/core/types";
-import {
-  PagingOptions,
-  StatsListSearchOptions,
-} from "@/features/estat-api/core/types/stats-list";
+import { PagingOptions, StatsListSearchOptions } from "../../types";
 
 /**
  * e-Stat APIエラーの種類
@@ -57,7 +54,7 @@ export class EstatStatsListFetcher {
       console.log("🔵 Fetcher: リクエストパラメータ:", params);
       const startTime = Date.now();
 
-      const response = await estatAPI.getStatsList(params);
+      const response = await estatAPI.fetchStatsList(params);
 
       console.log("🔵 Fetcher: APIレスポンス受信:", response);
 

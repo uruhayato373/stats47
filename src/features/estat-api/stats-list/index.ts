@@ -54,4 +54,4 @@ export type {
   StatsListSearchOptions,
   StatsListSearchResult,
   StatsListTableInfo,
-} from "@/features/estat-api/core/types/stats-list";
+} from "./types";

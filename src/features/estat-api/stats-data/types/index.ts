@@ -1,6 +1,9 @@
 /**
- * e-Stat統計データフォーマッター共通型定義
+ * e-Stat統計データ共通型定義
  */
+
+// e-Stat APIレスポンス型を再エクスポート
+export * from "./stats-data-response";
 
 /**
  * 統計データ取得オプション

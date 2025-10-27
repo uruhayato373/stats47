@@ -2,7 +2,10 @@
  * e-Stat統計表リスト共通型定義
  */
 
-import { EstatResult, EstatTextNode } from "./common";
+import {
+  EstatResult,
+  EstatTextNode,
+} from "@/features/estat-api/core/types/common";
 
 /**
  * 統計分野コード

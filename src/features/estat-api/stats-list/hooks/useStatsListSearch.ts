@@ -10,15 +10,15 @@ import { useCallback, useMemo, useState } from "react";
 import useSWR from "swr";
 
 import {
-  StatsListSearchOptions,
-  StatsListSearchResult,
-  StatsListTableInfo,
-} from "@/features/estat-api/core/types/stats-list";
-import {
   EstatStatsListFormatter,
   generateStatsListCacheKey,
   statsListFetcherWithErrorHandling,
 } from "@/features/estat-api/stats-list/services";
+import {
+  StatsListSearchOptions,
+  StatsListSearchResult,
+  StatsListTableInfo,
+} from "../../types";
 
 /**
  * フィルタ条件の型

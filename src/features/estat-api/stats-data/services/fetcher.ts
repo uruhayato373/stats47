@@ -1,9 +1,6 @@
 import { estatAPI } from "@/features/estat-api/core/client";
-import {
-  EstatStatsDataResponse,
-  FetchOptions,
-} from "@/features/estat-api/core/types";
-import { FormattedEstatData } from "@/features/estat-api/core/types/stats-data";
+import { EstatStatsDataResponse } from "@/features/estat-api/core/types";
+import { FetchOptions, FormattedEstatData } from "../types";
 
 import { EstatStatsDataFormatter } from "./formatter";
 
@@ -28,7 +25,7 @@ export class EstatStatsDataFetcher {
       console.log(`🔵 Fetcher: 統計データ取得開始 - ${statsDataId}`);
       const startTime = Date.now();
 
-      const response = await estatAPI.getStatsData({
+      const response = await estatAPI.fetchStatsData({
         statsDataId,
         metaGetFlg: "Y",
         cntGetFlg: "N",

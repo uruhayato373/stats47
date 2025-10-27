@@ -2,15 +2,15 @@
 
 import { useMemo, useState } from "react";
 
-import { StatsListTableInfo } from "@/features/estat-api/core/types/stats-list";
 import {
-  formatOpenDate,
-  formatSurveyDate,
-  getStatsFieldIcon,
-  getStatsFieldName,
-  getUpdateFrequency,
-  truncateTitle,
+    formatOpenDate,
+    formatSurveyDate,
+    getStatsFieldIcon,
+    getStatsFieldName,
+    getUpdateFrequency,
+    truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
+import { StatsListTableInfo } from "../../../types";
 
 interface StatsListResultsProps {
   tables: StatsListTableInfo[];

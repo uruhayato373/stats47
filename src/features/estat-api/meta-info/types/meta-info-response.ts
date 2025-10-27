@@ -1,6 +1,9 @@
-import { EstatResult, EstatTableInfo, EstatClassInfo } from "./common";
-
-import { EstatMetaCategoryData } from "./index";
+import {
+  EstatClassInfo,
+  EstatResult,
+  EstatTableInfo,
+} from "@/features/estat-api/core/types/common";
+import { EstatMetaCategoryData } from "@/features/estat-api/stats-data/types";
 
 /**
  * getMetaInfo APIパラメータ
@@ -175,13 +178,15 @@ export interface SelectOption {
  * e-Stat API CLASS_OBJ の型定義（common.tsのEstatClassObjectのエイリアス）
  * GET_META_INFO完全ガイド 4.3 CLASS_INF に基づく
  */
-export type ClassObject = import("./common").EstatClassObject;
+export type ClassObject =
+  import("@/features/estat-api/core/types/common").EstatClassObject;
 
 /**
  * e-Stat API CLASS の型定義（common.tsのEstatClassのエイリアス）
  * GET_META_INFO完全ガイド 4.3 CLASS_INF に基づく
  */
-export type ClassItem = import("./common").EstatClass;
+export type ClassItem =
+  import("@/features/estat-api/core/types/common").EstatClass;
 
 /**
  * stats-data互換の選択肢型（フラット構造）

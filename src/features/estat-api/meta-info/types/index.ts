@@ -4,6 +4,10 @@
 
 import { AreaType } from "@/features/area";
 
+// e-Stat APIレスポンス型を再エクスポート
+// core/types で使用されるため、ここから再エクスポート
+export * from "./meta-info-response";
+
 /**
  * e-Statメタ情報の型定義
  */

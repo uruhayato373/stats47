@@ -1,4 +1,4 @@
-import { TableInfo } from "@/features/estat-api/core/types/meta-info";
+import { TableInfo } from "../../../types";
 
 interface TableInfoTabProps {
   tableInfo: TableInfo;

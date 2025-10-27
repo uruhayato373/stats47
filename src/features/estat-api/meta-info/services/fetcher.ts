@@ -23,7 +23,7 @@ export async function fetchMetaInfo(
   statsDataId: string
 ): Promise<EstatMetaInfoResponse> {
   try {
-    const response = await estatAPI.getMetaInfo({ statsDataId });
+    const response = await estatAPI.fetchMetaInfo({ statsDataId });
     return response;
   } catch (error) {
     throw new EstatMetaInfoFetchError(

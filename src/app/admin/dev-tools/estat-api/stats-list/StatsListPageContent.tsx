@@ -5,19 +5,19 @@ import { useCallback, useState } from "react";
 import { List } from "lucide-react";
 
 import {
-  StatsFieldSidebar,
-  StatsListResults,
-  StatsListSearch,
-  StatsTableDetailModal,
+    StatsFieldSidebar,
+    StatsListResults,
+    StatsListSearch,
+    StatsTableDetailModal,
 } from "@/features/estat-api/stats-list/components";
 
-import {
-  DetailedStatsListTableInfo,
-  StatsFieldCode,
-  StatsListSearchOptions,
-  StatsListTableInfo,
-} from "@/features/estat-api/core/types/stats-list";
 import { useStatsListSearch } from "@/features/estat-api/stats-list/hooks/useStatsListSearch";
+import {
+    DetailedStatsListTableInfo,
+    StatsFieldCode,
+    StatsListSearchOptions,
+    StatsListTableInfo,
+} from "@/features/estat-api/stats-list/types";
 
 /**
  * e-Stat統計表一覧ページコンポーネント

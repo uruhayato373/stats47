@@ -346,6 +346,15 @@ export interface EstatClassObject {
  * };
  * ```
  */
+export interface EstatClass {
+  "@code": string; // 分類コード
+  "@name": string; // 分類名
+  "@level"?: string; // 階層レベル
+  "@unit"?: string; // 単位
+  "@parentCode"?: string; // 親コード
+  "@explanation"?: string; // 説明
+}
+
 /**
  * API取得オプション
  */

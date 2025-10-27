@@ -7,11 +7,11 @@
 
 import { Filter } from "lucide-react";
 
-import {
-  STATS_FIELDS,
-  StatsFieldCode,
-} from "@/features/estat-api/core/types/stats-list";
 import { useFieldStats } from "@/features/estat-api/stats-list/hooks";
+import {
+    STATS_FIELDS,
+    StatsFieldCode,
+} from "../../../types";
 
 /**
  * StatsFieldSidebarのプロパティ定義

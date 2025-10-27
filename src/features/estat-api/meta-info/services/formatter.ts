@@ -13,7 +13,7 @@ import {
   ParsedMetaInfo,
   TableInfo,
   TimeAxisInfo,
-} from "@/features/estat-api/core/types/meta-info";
+} from "../types";
 
 /**
  * 統計表の基本情報を抽出

@@ -1,4 +1,4 @@
-import { FormattedValue } from "@/features/estat-api/core/types/stats-data";
+import { FormattedValue } from "../../types";
 
 /**
  * e-STATデータフィルター

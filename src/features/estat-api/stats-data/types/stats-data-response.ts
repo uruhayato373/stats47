@@ -5,7 +5,11 @@
  * 共通型は common.ts からインポート。
  */
 
-import { EstatResult, EstatTableInfo, EstatClassInfo } from "./common";
+import {
+  EstatClassInfo,
+  EstatResult,
+  EstatTableInfo,
+} from "@/features/estat-api/core/types/common";
 
 /**
  * e-STAT API getStatsData のレスポンス型

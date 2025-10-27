@@ -42,4 +42,4 @@ export type {
   FormattedMetadata,
   FormattedTableInfo,
   FormattedValue,
-} from "@/features/estat-api/core/types/stats-data";
+} from "./types";

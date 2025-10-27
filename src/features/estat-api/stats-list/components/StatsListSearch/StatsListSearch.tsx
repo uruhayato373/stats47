@@ -8,20 +8,20 @@ import { Button } from "@/components/atoms/ui/button";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/atoms/ui/select";
 
 import { StatsFieldCode, StatsListSearchOptions } from "@/features/estat-api";
 import {
-  COLLECT_AREA_OPTIONS,
-  LIMIT_OPTIONS,
-  STATS_FIELD_OPTIONS,
+    COLLECT_AREA_OPTIONS,
+    LIMIT_OPTIONS,
+    STATS_FIELD_OPTIONS,
 } from "@/features/estat-api/core/constants/search-options";
-import { STATS_FIELDS } from "@/features/estat-api/core/types/stats-list";
+import { STATS_FIELDS } from "../../../types";
 
 interface StatsListSearchProps {
   onSearch: (options: StatsListSearchOptions) => void;

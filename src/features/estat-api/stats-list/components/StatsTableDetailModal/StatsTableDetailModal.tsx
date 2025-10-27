@@ -8,23 +8,23 @@
 import { useState } from "react";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
 } from "@/components/atoms/ui/dialog";
 
-import { DetailedStatsListTableInfo } from "@/features/estat-api/core/types/stats-list";
 import {
-  formatOpenDate,
-  formatSurveyDate,
-  getCollectAreaDescription,
-  getSmallAreaDescription,
-  getStatsFieldIcon,
-  getStatsFieldName,
-  getUpdateFrequency,
-  truncateTitle,
+    formatOpenDate,
+    formatSurveyDate,
+    getCollectAreaDescription,
+    getSmallAreaDescription,
+    getStatsFieldIcon,
+    getStatsFieldName,
+    getUpdateFrequency,
+    truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
+import { DetailedStatsListTableInfo } from "../../../types";
 
 interface StatsTableDetailModalProps {
   table: DetailedStatsListTableInfo | null;

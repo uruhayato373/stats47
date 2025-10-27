@@ -60,7 +60,7 @@ export default async function StatsDataPage({
         }
       } else {
         console.log(`[${config.environment}] Fetching stats data from e-Stat API...`);
-        statsData = await estatAPI.getStatsData({
+          statsData = await estatAPI.fetchStatsData({
           statsDataId,
           cdCat01,
           ...(params.cdArea && { cdArea: params.cdArea }),
