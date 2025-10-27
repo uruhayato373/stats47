@@ -68,7 +68,9 @@
       "Bash(if [ -f .env.example ])",
       "Bash(then cat .env.example)",
       "Bash(else echo \".env.example not found\")",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(cat:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

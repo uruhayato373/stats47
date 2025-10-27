@@ -20,29 +20,34 @@ function isServer(): boolean {
  */
 export async function fetchPrefectures(): Promise<Prefecture[]> {
   try {
-    let data: {
-      prefectures: Prefecture[];
-      regions: Record<string, string[]>;
-    };
-
     if (isServer()) {
-      // サーバーサイド: 直接R2から取得（Next.jsキャッシュ利用）
+      // サーバーサイド: 直接R2から取得
       const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
       if (!R2_PUBLIC_URL) {
         throw new Error("R2_PUBLIC_URL is not configured");
       }
+      // 開発環境ではキャッシュなし、本番環境ではブラウザキャッシュ
       const response = await fetch(`${R2_PUBLIC_URL}/area/prefectures.json`, {
-        next: {
-          revalidate: 86400, // 24時間キャッシュ
-          tags: ["area-prefectures"],
-        },
+        cache: "no-store", // 開発環境での動作確認用
       });
       if (!response.ok) {
         throw new Error(
           `Failed to fetch prefectures from R2: ${response.status}`
         );
       }
-      data = await response.json();
+      const data = (await response.json()) as
+        | Prefecture[]
+        | { prefectures: Prefecture[] };
+
+      // データ構造を判定: 配列なら直接返す、オブジェクトならprefecturesプロパティを返す
+      if (Array.isArray(data)) {
+        return data;
+      } else if ("prefectures" in data) {
+        return data.prefectures;
+      }
+      throw new Error(
+        "Invalid data structure: expected array or object with prefectures property"
+      );
     } else {
       // クライアントサイド: API経由
       const response = await fetch("/api/area/prefectures");
@@ -51,10 +56,20 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
           `Failed to fetch prefectures: ${response.status} ${response.statusText}`
         );
       }
-      data = await response.json();
-    }
+      const data = (await response.json()) as
+        | Prefecture[]
+        | { prefectures: Prefecture[] };
 
-    return data.prefectures;
+      // データ構造を判定
+      if (Array.isArray(data)) {
+        return data;
+      } else if ("prefectures" in data) {
+        return data.prefectures;
+      }
+      throw new Error(
+        "Invalid data structure: expected array or object with prefectures property"
+      );
+    }
   } catch (error) {
     throw new DataSourceError("R2 storage", error as Error);
   }
@@ -67,8 +82,6 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
  */
 export async function fetchCities(): Promise<City[]> {
   try {
-    let data: { cities: City[] };
-
     if (isServer()) {
       // サーバーサイド: 直接R2から取得（Next.jsキャッシュ利用）
       const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
@@ -78,23 +91,40 @@ export async function fetchCities(): Promise<City[]> {
       const response = await fetch(`${R2_PUBLIC_URL}/area/cities.json`, {
         next: {
           revalidate: 86400, // 24時間キャッシュ
-          tags: ["area-cities"],
         },
       });
       if (!response.ok) {
         throw new Error(`Failed to fetch cities from R2: ${response.status}`);
       }
-      data = await response.json();
+      const data = (await response.json()) as City[] | { cities: City[] };
+
+      // データ構造を判定: 配列なら直接返す、オブジェクトならcitiesプロパティを返す
+      if (Array.isArray(data)) {
+        return data;
+      } else if ("cities" in data) {
+        return data.cities;
+      }
+      throw new Error(
+        "Invalid data structure: expected array or object with cities property"
+      );
     } else {
       // クライアントサイド: API経由
       const response = await fetch("/api/area/cities");
       if (!response.ok) {
         throw new Error(`Failed to fetch cities: ${response.status}`);
       }
-      data = await response.json();
-    }
+      const data = (await response.json()) as City[] | { cities: City[] };
 
-    return data.cities;
+      // データ構造を判定
+      if (Array.isArray(data)) {
+        return data;
+      } else if ("cities" in data) {
+        return data.cities;
+      }
+      throw new Error(
+        "Invalid data structure: expected array or object with cities property"
+      );
+    }
   } catch (error) {
     throw new DataSourceError("R2 storage", error as Error);
   }
