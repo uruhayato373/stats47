@@ -136,7 +136,7 @@ export default function EstatMetaInfoSidebar({
 
   return (
     <div
-      className={`w-full h-full flex flex-col bg-white dark:bg-neutral-800 ${className}`}
+      className={`w-full h-full flex flex-col bg-background ${className}`}
       style={{ minHeight: "400px" }}
     >
       {/* 検索フォーム */}
@@ -147,16 +147,14 @@ export default function EstatMetaInfoSidebar({
       {/* ヘッダー */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-neutral-700">
         <div className="flex items-center gap-2">
-          <Archive className="w-5 h-5 text-indigo-600" />
-          <h3 className="font-medium text-gray-900 dark:text-neutral-100">
-            保存済みデータ
-          </h3>
+          <Archive className="w-5 h-5 text-primary" />
+          <h3 className="font-medium text-foreground">保存済みデータ</h3>
         </div>
       </div>
 
       {/* データリスト */}
       <div className="flex-1 overflow-y-auto">
-        <div className="divide-y divide-gray-200 dark:divide-neutral-600">
+        <div className="divide-y divide-gray-200 dark:divide-neutral-700">
           {paginatedData.map((item) => (
             <SavedMetaInfoListItem
               key={item.stats_data_id}

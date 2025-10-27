@@ -443,6 +443,112 @@ export class RankingRepository {
       throw error;
     }
   }
+
+  /**
+   * 全ランキング項目を取得（管理画面用）
+   */
+  async getAllRankingItems(): Promise<RankingItem[]> {
+    try {
+      const result = await this.db
+        .prepare(
+          `
+          SELECT 
+            ri.*,
+            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
+            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+          FROM ranking_items ri
+          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
+          ORDER BY ri.created_at DESC
+        `
+        )
+        .all();
+
+      return (result.results || [])
+        .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+        .filter((item) => item !== null) as RankingItem[];
+    } catch (error) {
+      console.error("Failed to get all ranking items:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * IDでランキング項目を取得（管理画面用）
+   */
+  async getRankingItemById(id: number): Promise<RankingItem | null> {
+    try {
+      const result = await this.db
+        .prepare(QUERIES.getRankingItemById)
+        .bind(id)
+        .first();
+
+      if (!result) {
+        return null;
+      }
+
+      return convertRankingItemFromDB(result as RankingItemDB);
+    } catch (error) {
+      console.error("Failed to get ranking item by id:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * ランキング項目を新規作成（管理画面用）
+   */
+  async createRankingItem(item: {
+    rankingKey: string;
+    label: string;
+    name: string;
+    description?: string;
+    unit: string;
+    dataSourceId: string;
+    mapColorScheme: string;
+    mapDivergingMidpoint: string;
+    rankingDirection: "asc" | "desc";
+    conversionFactor: number;
+    decimalPlaces: number;
+  }): Promise<RankingItem> {
+    try {
+      const result = await this.db
+        .prepare(
+          `
+          INSERT INTO ranking_items 
+          (
+            ranking_key, label, name, description, unit, data_source_id,
+            map_color_scheme, map_diverging_midpoint, ranking_direction,
+            conversion_factor, decimal_places, is_active,
+            created_at, updated_at
+          )
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+          RETURNING *
+        `
+        )
+        .bind(
+          item.rankingKey,
+          item.label,
+          item.name,
+          item.description || null,
+          item.unit,
+          item.dataSourceId,
+          item.mapColorScheme,
+          item.mapDivergingMidpoint,
+          item.rankingDirection,
+          item.conversionFactor,
+          item.decimalPlaces
+        )
+        .first();
+
+      if (!result) {
+        throw new Error("Failed to create ranking item");
+      }
+
+      return convertRankingItemFromDB(result as RankingItemDB);
+    } catch (error) {
+      console.error("Failed to create ranking item:", error);
+      throw error;
+    }
+  }
 }
 
 /**
