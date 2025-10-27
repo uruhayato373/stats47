@@ -20,7 +20,6 @@ export default async function AreaPage() {
     console.error("Failed to fetch area data:", error);
     // エラーが発生しても空のデータで続行
   }
-  console.log("prefectures", prefectures);
 
   return (
     <div className="space-y-6">
