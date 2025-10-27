@@ -29,7 +29,7 @@ export function RankingItemCard({
   category,
   subcategory,
 }: RankingItemCardProps) {
-  const rankingUrl = `/${category}/${subcategory}/ranking/${item.ranking_key}`;
+  const rankingUrl = `/${category}/${subcategory}/ranking/${item.rankingKey}`;
 
   return (
     <Link
@@ -52,10 +52,10 @@ export function RankingItemCard({
 
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span className="capitalize">
-            {item.ranking_direction === "desc" ? "降順" : "昇順"}
+            {item.rankingDirection === "desc" ? "降順" : "昇順"}
           </span>
           <span>•</span>
-          <span>{item.data_source_id}</span>
+          <span>{item.dataSourceId}</span>
         </div>
       </div>
     </Link>

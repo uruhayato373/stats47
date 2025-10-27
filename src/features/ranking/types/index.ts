@@ -14,10 +14,10 @@ export * from "./visualization";
 
 // ランキングサイドバーのProps型定義
 export interface RankingItemsSidebarProps {
-  /** 選択されたランキングキー */
-  selectedRankingKey?: string;
-  /** ランキングキー選択時のコールバック */
-  onRankingKeySelect: (rankingKey: string) => void;
+  /** カテゴリID */
+  category: string;
+  /** サブカテゴリID */
+  subcategory: string;
   /** クラス名 */
   className?: string;
 }

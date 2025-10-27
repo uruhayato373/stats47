@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { AlertCircle, TrendingUp } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import {
@@ -10,12 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { Skeleton } from "@/components/atoms/ui/skeleton";
-import { AlertCircle, TrendingUp } from "lucide-react";
 
-import { RankingItemService } from "../services/ranking-item-service";
-import type { RankingItem, RankingItemsSidebarProps } from "../types";
+import { fetchRankingItemsBySubcategory } from "../ranking-items";
+
 import { RankingItemCard } from "./RankingItemCard";
+
+import type { RankingItem, RankingItemsSidebarProps } from "../types";
 
 /**
  * ランキング項目を表示するサイドバーコンポーネント
@@ -26,43 +24,25 @@ import { RankingItemCard } from "./RankingItemCard";
  * @param props - コンポーネントのProps
  * @returns ランキング項目サイドバーのJSX要素
  */
-export function RankingItemsSidebar({
+export async function RankingItemsSidebar({
   category,
   subcategory,
   className,
 }: RankingItemsSidebarProps) {
-  const [rankingItems, setRankingItems] = useState<RankingItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  let rankingItems: RankingItem[] = [];
+  let error: string | null = null;
 
-  // ランキング項目データを読み込み
-  useEffect(() => {
-    loadRankingItems();
-  }, [category, subcategory]);
-
-  /**
-   * ランキング項目データを読み込み
-   */
-  const loadRankingItems = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const items = await RankingItemService.getItemsByCategory(
-        category,
-        subcategory
-      );
-      setRankingItems(items);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "ランキング項目の取得に失敗しました"
-      );
-    } finally {
-      setIsLoading(false);
+  try {
+    const config = await fetchRankingItemsBySubcategory(subcategory);
+    if (config) {
+      rankingItems = config.rankingItems;
     }
-  };
+  } catch (err) {
+    error =
+      err instanceof Error
+        ? err.message
+        : "ランキング項目の取得に失敗しました";
+  }
 
   // エラー状態の表示
   if (error) {
@@ -74,32 +54,6 @@ export function RankingItemsSidebar({
             ランキング項目の読み込みに失敗しました: {error}
           </AlertDescription>
         </Alert>
-      </div>
-    );
-  }
-
-  // ローディング状態の表示
-  if (isLoading) {
-    return (
-      <div className={className}>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              ランキング項目
-            </CardTitle>
-            <CardDescription>
-              利用可能なランキング項目を選択してください
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Skeleton key={index} className="h-16 w-full" />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
       </div>
     );
   }
@@ -146,7 +100,7 @@ export function RankingItemsSidebar({
           <div className="space-y-3">
             {rankingItems.map((item) => (
               <RankingItemCard
-                key={item.id}
+                key={item.rankingKey}
                 item={item}
                 category={category}
                 subcategory={subcategory}
