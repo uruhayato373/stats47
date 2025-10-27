@@ -13,6 +13,11 @@ import { findSubcategoryById } from "@/features/category";
 import { getDataProvider } from "@/infrastructure/database";
 import { buildEnvironmentConfig } from "@/lib/environment";
 import { RankingItem, RankingItemDB } from "../types";
+import type {
+  RankingGroup,
+  RankingGroupDB,
+  RankingGroupResponse,
+} from "../types/group";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
 import { QUERIES } from "../ranking-queries";
@@ -211,7 +216,7 @@ export class RankingRepository {
   }
 
   /**
-   * 単一のランキング項目を取得
+   * 単一のランキング項目を取得（ID）
    */
   async getRankingItemById(id: number): Promise<RankingItem | null> {
     try {
@@ -227,6 +232,35 @@ export class RankingRepository {
       return convertRankingItemFromDB(result as RankingItemDB);
     } catch (error) {
       console.error("Failed to get ranking item by id:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * 単一のランキング項目を取得（キー）
+   */
+  async getRankingItemByKey(rankingKey: string): Promise<RankingItem | null> {
+    try {
+      const result = await this.db
+        .prepare(
+          `SELECT 
+            ri.*,
+            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
+            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+          FROM ranking_items ri
+          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
+          WHERE ri.ranking_key = ? AND ri.is_active = 1`
+        )
+        .bind(rankingKey)
+        .first();
+
+      if (!result) {
+        return null;
+      }
+
+      return convertRankingItemFromDB(result as RankingItemDB);
+    } catch (error) {
+      console.error("Failed to get ranking item by key:", error);
       throw error;
     }
   }
@@ -299,6 +333,113 @@ export class RankingRepository {
       return result.success;
     } catch (error) {
       console.error("Failed to update ranking item order:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * サブカテゴリのランキンググループを取得
+   * グループ化されたランキング項目と、グループに属さない項目を返す
+   */
+  async getRankingGroupsBySubcategory(
+    subcategoryId: string
+  ): Promise<RankingGroupResponse | null> {
+    try {
+      // categories.jsonからサブカテゴリ設定を取得
+      const subcategory = findSubcategoryById(subcategoryId);
+      if (!subcategory) {
+        return null;
+      }
+
+      const subcategoryConfig = {
+        id: subcategory.id,
+        categoryId: subcategory.categoryId,
+        name: subcategory.name,
+        defaultRankingKey: subcategory.statsDataId || "",
+      };
+
+      // 1. グループ情報を取得
+      const groupsResult = await this.db
+        .prepare(
+          `
+          SELECT * FROM ranking_groups
+          WHERE subcategory_id = ?
+          ORDER BY display_order
+        `
+        )
+        .bind(subcategoryId)
+        .all();
+
+      const groups: RankingGroup[] = [];
+
+      // 2. 各グループのアイテムを取得
+      for (const groupRow of groupsResult.results) {
+        const groupDB = groupRow as RankingGroupDB;
+
+        const itemsResult = await this.db
+          .prepare(
+            `
+            SELECT 
+              ri.*,
+              json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
+              json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+            FROM ranking_items ri
+            JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
+            LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
+            WHERE rgi.group_id = ? AND ri.is_active = 1
+            ORDER BY rgi.display_order
+          `
+          )
+          .bind(groupDB.id)
+          .all();
+
+        const items = (itemsResult.results || [])
+          .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+          .filter((item) => item !== null) as RankingItem[];
+
+        groups.push({
+          id: groupDB.id,
+          groupKey: groupDB.group_key,
+          subcategoryId: groupDB.subcategory_id,
+          name: groupDB.name,
+          description: groupDB.description || undefined,
+          icon: groupDB.icon || undefined,
+          displayOrder: groupDB.display_order,
+          isCollapsed: groupDB.is_collapsed === 1,
+          items,
+        });
+      }
+
+      // 3. グループに属さないアイテムを取得
+      const ungroupedItemsResult = await this.db
+        .prepare(
+          `
+          SELECT 
+            ri.*,
+            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
+            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+          FROM ranking_items ri
+          JOIN subcategory_ranking_items sri ON ri.id = sri.ranking_item_id
+          LEFT JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
+          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
+          WHERE sri.subcategory_id = ? AND ri.is_active = 1 AND rgi.ranking_item_id IS NULL
+          ORDER BY sri.display_order
+        `
+        )
+        .bind(subcategoryId)
+        .all();
+
+      const ungroupedItems = (ungroupedItemsResult.results || [])
+        .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+        .filter((item) => item !== null) as RankingItem[];
+
+      return {
+        subcategory: subcategoryConfig,
+        groups,
+        ungroupedItems,
+      };
+    } catch (error) {
+      console.error("Failed to get ranking groups by subcategory:", error);
       throw error;
     }
   }

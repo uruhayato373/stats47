@@ -1,7 +1,7 @@
 ---
 title: ランキング設定管理ガイド
 created: 2025-01-15
-updated: 2025-01-15
+updated: 2025-01-27
 tags:
   - domain/ranking
   - implementation
@@ -15,12 +15,19 @@ tags:
 
 ランキング設定は、データベース経由で動的に管理されます。コードの変更なしで統計項目の追加・変更が可能です。
 
+### 最新の改善 (2025-01-27)
+
+- **ランキンググループ機能**: 関連する複数のランキング項目をグループ化して管理
+- **グループ表示 API**: `/api/rankings/groups/subcategory/[subcategoryId]` エンドポイント追加
+
 ## データベース設計
 
 ランキング設定は以下のテーブルで管理されます：
 
-- `subcategory_configs`: サブカテゴリの基本設定
 - `ranking_items`: 各統計項目の詳細設定
+- `subcategory_ranking_items`: サブカテゴリとランキング項目の関連
+- **`ranking_groups`**（新規）: ランキンググループの定義
+- **`ranking_group_items`**（新規）: グループとランキング項目の関連
 
 詳細は [データベース設計ドキュメント](../../database/database-design.md) を参照してください。
 
@@ -61,14 +68,47 @@ WHERE subcategory_id = 'land-area' AND ranking_key = 'majorLakeArea';
 
 ランキング設定は以下の API エンドポイントで取得できます：
 
+#### 従来の API（グループ化前）
+
 ```
-GET /api/rankings-items/[subcategoryId]
+GET /api/rankings/items/subcategory/[subcategoryId]
 ```
 
 例：
 
 ```bash
-curl http://localhost:3000/api/rankings-items/land-area
+curl http://localhost:3000/api/rankings/items/subcategory/land-area
+```
+
+#### 新しい API（グループ化対応）
+
+```
+GET /api/rankings/groups/subcategory/[subcategoryId]
+```
+
+例：
+
+```bash
+curl http://localhost:3000/api/rankings/groups/subcategory/manufacturing
+```
+
+**レスポンス構造**:
+
+```typescript
+{
+  subcategory: { id, name, ... },
+  groups: [
+    {
+      id: 1,
+      groupKey: 'manufacturing-output',
+      name: '製造品出荷',
+      items: [...],
+      isCollapsed: false,
+      displayOrder: 1
+    }
+  ],
+  ungroupedItems: [...]  // グループに属さない項目
+}
 ```
 
 ### データ取得関数

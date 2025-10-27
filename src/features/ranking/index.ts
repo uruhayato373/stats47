@@ -16,7 +16,6 @@ export {
 // ============================================================================
 // サービス
 // ============================================================================
-export { RankingItemService } from "./services/ranking-item-service";
 export { RankingService, type RankingConfig } from "./services/ranking-service";
 export { PrefectureRankingSettingsService } from "./services/settings-service";
 

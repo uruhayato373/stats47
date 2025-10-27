@@ -1,0 +1,68 @@
+/**
+ * ランキンググループの型定義
+ */
+
+import type { RankingItem } from "./item";
+
+/**
+ * サブカテゴリ設定の型定義
+ */
+export interface SubcategoryConfig {
+  id: string;
+  categoryId: string;
+  name: string;
+  description?: string;
+  defaultRankingKey: string;
+}
+
+/**
+ * ランキンググループの型定義
+ */
+export interface RankingGroup {
+  id: number;
+  groupKey: string;
+  subcategoryId: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  displayOrder: number;
+  isCollapsed: boolean;
+  items: RankingItem[];
+}
+
+/**
+ * ランキンググループのレスポンス型定義
+ */
+export interface RankingGroupResponse {
+  subcategory: SubcategoryConfig;
+  groups: RankingGroup[];
+  ungroupedItems: RankingItem[]; // グループに属さない項目
+}
+
+/**
+ * ランキンググループのデータベース型定義
+ */
+export interface RankingGroupDB {
+  id: number;
+  group_key: string;
+  subcategory_id: string;
+  name: string;
+  description: string | null;
+  icon: string | null;
+  display_order: number;
+  is_collapsed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * ランキンググループアイテムのデータベース型定義
+ */
+export interface RankingGroupItemDB {
+  id: number;
+  group_id: number;
+  ranking_item_id: number;
+  display_order: number;
+  is_featured: boolean;
+  created_at: string;
+}

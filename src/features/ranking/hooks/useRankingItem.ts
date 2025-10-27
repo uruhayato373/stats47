@@ -1,10 +1,13 @@
+"use client";
+
 /**
  * ランキング項目情報取得カスタムフック
  * ランキング項目の取得とエラーハンドリングを担当
  */
 
-import type { RankingItem } from "@data/mock/ranking/ranking-items";
-import { getRankingItemByKey } from "@data/mock/ranking/ranking-items";
+import { useEffect, useState } from "react";
+
+import type { RankingItem } from "../types";
 
 export interface UseRankingItemReturn {
   rankingItem: RankingItem | null;
@@ -18,12 +21,52 @@ export interface UseRankingItemReturn {
  * @returns ランキング項目情報、ローディング状態、エラー状態
  */
 export function useRankingItem(rankingKey: string): UseRankingItemReturn {
-  // 現在は同期的なデータ取得だが、将来的にAPI対応時は非同期化
-  const rankingItem = getRankingItemByKey(rankingKey);
+  const [rankingItem, setRankingItem] = useState<RankingItem | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchRankingItem() {
+      try {
+        setIsLoading(true);
+        // API経由でランキング項目を取得
+        const baseUrl =
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+        const response = await fetch(
+          `${baseUrl}/api/rankings/item/${encodeURIComponent(rankingKey)}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setRankingItem(data);
+        setError(!data ? "ランキング項目が見つかりません" : null);
+      } catch (err) {
+        console.error("Failed to fetch ranking item:", err);
+        setError(
+          err instanceof Error
+            ? err.message
+            : "ランキング項目の取得に失敗しました"
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchRankingItem();
+  }, [rankingKey]);
 
   return {
     rankingItem,
-    isLoading: false, // 現在は同期的なため常にfalse
-    error: !rankingItem ? "ランキング項目が見つかりません" : null,
+    isLoading,
+    error,
   };
 }

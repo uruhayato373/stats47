@@ -12,6 +12,9 @@ export * from "./unified";
 // ランキング可視化オプションの型定義
 export * from "./visualization";
 
+// ランキンググループの型定義
+export * from "./group";
+
 // ランキングサイドバーのProps型定義
 export interface RankingItemsSidebarProps {
   /** カテゴリID */
