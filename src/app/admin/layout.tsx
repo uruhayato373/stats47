@@ -23,7 +23,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-background">
       <AdminPageTitle />
       <div className="flex-1 overflow-y-auto">
-        <div className="container mx-auto px-4 py-6">{children}</div>
+        <div className="container mx-auto px-4">{children}</div>
       </div>
     </div>
   );

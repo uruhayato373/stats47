@@ -1,11 +1,14 @@
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/atoms/ui/resizable";
 
 import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
-import {
-  EstatDataDisplay,
-  EstatDataFetcher,
-} from "@/features/estat-api/stats-data/components";
+import { EstatDataDisplay, EstatDataFetcher } from "@/features/estat-api/stats-data/components";
 
 import { buildEnvironmentConfig } from "@/lib/environment";
+
 import { getMockStatsData } from "@data/mock/estat-api/stats-data";
 
 /**
@@ -73,13 +76,27 @@ export default async function StatsDataPage({
   }
 
   return (
-    <div className="space-y-4">
-      <EstatDataFetcher />
-      <EstatDataDisplay 
-        data={statsData} 
-        loading={false} 
-        error={error} 
-      />
-    </div>
+    <ResizablePanelGroup direction="horizontal" className="min-h-screen">
+      {/* メインコンテンツエリア */}
+      <ResizablePanel defaultSize={70} minSize={50}>
+        <div className="h-full overflow-auto p-4">
+          <EstatDataDisplay 
+            data={statsData} 
+            loading={false} 
+            error={error} 
+          />
+        </div>
+      </ResizablePanel>
+
+      {/* リサイズハンドル */}
+      <ResizableHandle />
+
+      {/* サイドバー（右側） */}
+      <ResizablePanel defaultSize={30} minSize={20} maxSize={50}>
+        <div className="h-full overflow-auto p-4 bg-gray-50 dark:bg-neutral-900 border-l border-border">
+          <EstatDataFetcher />
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
