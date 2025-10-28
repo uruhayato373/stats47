@@ -66,7 +66,7 @@ export class EstatMetaInfoRepository {
     console.log(`🔵 Repository: saveStatsData - ${data.stats_data_id}`);
 
     // MockDataProviderの場合は何もしない（読み取り専用）
-    if ("fetchEstatMetainfoUnique" in this.db) {
+    if (this.db instanceof MockDataProvider) {
       console.log(
         `⚠️ Repository: MockDataProvider - saveStatsData skipped for ${data.stats_data_id}`
       );
@@ -116,7 +116,7 @@ export class EstatMetaInfoRepository {
     }
 
     // MockDataProviderの場合は何もしない（読み取り専用）
-    if ("fetchEstatMetainfoUnique" in this.db) {
+    if (this.db instanceof MockDataProvider) {
       console.log(
         `⚠️ Repository: MockDataProvider - saveStatsDataBatch skipped for ${dataList.length} items`
       );
@@ -203,28 +203,11 @@ export class EstatMetaInfoRepository {
   ): Promise<EstatMetaInfoSearchResult> {
     const { limit = 50, offset = 0, searchType = "full" } = options;
 
-    // MockDataProviderの場合は簡易検索
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: limit + offset,
-        orderBy: "updated_at DESC",
-      });
-
-      // 簡易フィルタリング
-      const filtered = data.filter((item: any) => {
-        const searchFields = [
-          item.stat_name,
-          item.title,
-          item.description,
-        ].filter(Boolean);
-        return searchFields.some((field) =>
-          field.toLowerCase().includes(query.toLowerCase())
-        );
-      });
-
+    // MockDataProviderの場合は空の結果を返す
+    if (this.db instanceof MockDataProvider) {
       return {
-        items: filtered.slice(offset, offset + limit) as EstatMetaInfo[],
-        totalCount: filtered.length,
+        items: [],
+        totalCount: 0,
         searchQuery: query,
         executedAt: new Date().toISOString(),
       };
@@ -320,13 +303,9 @@ export class EstatMetaInfoRepository {
       orderDirection = "DESC",
     } = options;
 
-    // MockDataProviderの場合は専用メソッドを使用
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: limit + offset,
-        orderBy: `${orderBy} ${orderDirection}`,
-      });
-      return data.slice(offset) as unknown as EstatMetaInfo[];
+    // MockDataProviderの場合は空の結果を返す
+    if (this.db instanceof MockDataProvider) {
+      return [];
     }
 
     const result = await this.db
@@ -347,15 +326,9 @@ export class EstatMetaInfoRepository {
    * 特定の統計表を取得
    */
   async getStatsData(statsDataId: string): Promise<EstatMetaInfo | null> {
-    // MockDataProviderの場合は簡易検索
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: 1000,
-      });
-      const found = data.find(
-        (item: any) => item.stats_data_id === statsDataId
-      );
-      return found as EstatMetaInfo | null;
+    // MockDataProviderの場合はnullを返す
+    if (this.db instanceof MockDataProvider) {
+      return null;
     }
 
     const result = await this.db
@@ -374,12 +347,9 @@ export class EstatMetaInfoRepository {
    * 統計表の存在確認
    */
   async exists(statsDataId: string): Promise<boolean> {
-    // MockDataProviderの場合は簡易検索
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: 1000,
-      });
-      return data.some((item: any) => item.stats_data_id === statsDataId);
+    // MockDataProviderの場合はfalseを返す
+    if (this.db instanceof MockDataProvider) {
+      return false;
     }
 
     const result = await this.db
@@ -398,22 +368,9 @@ export class EstatMetaInfoRepository {
    * メタ情報サマリーを取得
    */
   async getMetaInfoSummary(): Promise<EstatMetaInfoSummary> {
-    // MockDataProviderの場合は簡易計算
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: 10000,
-      });
-      const totalEntries = data.length;
-      const lastUpdated =
-        data.length > 0
-          ? data.reduce(
-              (latest: string, item: any) =>
-                item.updated_at > latest ? item.updated_at : latest,
-              data[0].updated_at
-            )
-          : null;
-
-      return { totalEntries, lastUpdated };
+    // MockDataProviderの場合は空の結果を返す
+    if (this.db instanceof MockDataProvider) {
+      return { totalEntries: 0, lastUpdated: null };
     }
 
     const totalResult = await this.db
@@ -438,7 +395,7 @@ export class EstatMetaInfoRepository {
    */
   async deleteStatsData(statsDataId: string): Promise<boolean> {
     // MockDataProviderの場合は何もしない（読み取り専用）
-    if ("fetchEstatMetainfoUnique" in this.db) {
+    if (this.db instanceof MockDataProvider) {
       console.log(
         `⚠️ Repository: MockDataProvider - deleteStatsData skipped for ${statsDataId}`
       );
@@ -466,16 +423,9 @@ export class EstatMetaInfoRepository {
   ): Promise<EstatMetaInfo[]> {
     const { limit = 50, offset = 0 } = options || {};
 
-    // MockDataProviderの場合は簡易フィルタリング
-    if ("fetchEstatMetainfoUnique" in this.db) {
-      const data = await (this.db as any).fetchEstatMetainfoUnique({
-        limit: limit + offset,
-        orderBy: "updated_at DESC",
-      });
-
-      // area_typeでフィルタリング
-      const filtered = data.filter((item: any) => item.area_type === areaType);
-      return filtered.slice(offset, offset + limit) as EstatMetaInfo[];
+    // MockDataProviderの場合は空の結果を返す
+    if (this.db instanceof MockDataProvider) {
+      return [];
     }
 
     const result = await this.db
@@ -500,7 +450,7 @@ export class EstatMetaInfoRepository {
     if (statsDataIds.length === 0) return 0;
 
     // MockDataProviderの場合は何もしない（読み取り専用）
-    if ("fetchEstatMetainfoUnique" in this.db) {
+    if (this.db instanceof MockDataProvider) {
       console.log(
         `⚠️ Repository: MockDataProvider - deleteStatsDataBatch skipped for ${statsDataIds.length} items`
       );
