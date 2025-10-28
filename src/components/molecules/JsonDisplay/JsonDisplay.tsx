@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Download, CheckCircle } from "lucide-react";
+import { CheckCircle, Download } from "lucide-react";
 
 import { EstatMetaInfoResponse } from "@/features/estat-api";
 
@@ -63,7 +63,7 @@ export default function JsonDisplay({ data, onDownload }: JsonDisplayProps) {
           </button>
         </div>
       </div>
-      <div className="json-display rounded-lg p-4 overflow-auto max-h-96 border border-gray-200 dark:border-neutral-700 shadow-sm">
+      <div className="json-display rounded-lg p-4 overflow-auto max-h-96 border border-border shadow-sm">
         <pre className="text-xs whitespace-pre-wrap font-mono leading-relaxed">
           {JSON.stringify(data, null, 2)}
         </pre>

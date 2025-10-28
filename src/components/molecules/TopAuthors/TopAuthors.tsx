@@ -31,7 +31,7 @@ export default function TopAuthors() {
   return (
     <div className="relative z-1 bg-white dark:bg-neutral-800">
       <div className="p-4 pb-0">
-        <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700">
+        <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-border">
           <h2 className="font-medium text-sm text-gray-800 dark:text-neutral-200">
             Top authors
           </h2>

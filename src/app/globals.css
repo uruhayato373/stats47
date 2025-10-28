@@ -9,7 +9,7 @@
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 221 83% 53%;            /* Blue */
+    --primary: 221 83% 53%; /* Blue */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
@@ -23,10 +23,10 @@
     --input: 214 32% 91%;
     --ring: 221 83% 53%;
     --radius: 0.5rem;
-    
+
     /* Header height */
     --header-height: 52px;
-    
+
     /* Sidebar variables */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -58,7 +58,7 @@
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 224 76% 48%;
-    
+
     /* Sidebar variables for dark mode */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -93,7 +93,7 @@
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-primary-foreground: hsl(var(--primary-foreground));
-  
+
   /* Sidebar colors */
   --color-sidebar: hsl(var(--sidebar-background));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
@@ -106,11 +106,13 @@
 }
 
 body {
-  font-family: var(--font-inter), var(--font-noto-sans-jp),
-    -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  font-family: var(--font-inter), var(--font-noto-sans-jp), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo",
+    sans-serif;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
-

@@ -33,11 +33,11 @@ export default function TopPosts() {
 
   return (
     <div className="p-4 flex flex-col bg-white dark:bg-neutral-800">
-      <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700">
+      <div className="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-border">
         <h2 className="font-medium text-gray-800 dark:text-neutral-200">
           Top posts
         </h2>
-        <button className="py-1.5 px-2.5 flex items-center justify-center gap-x-1.5 border border-gray-200 text-gray-800 text-[13px] rounded-lg hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+        <button className="py-1.5 px-2.5 flex items-center justify-center gap-x-1.5 border border-border text-foreground text-[13px] rounded-lg hover:bg-muted focus:outline-hidden focus:bg-muted">
           <svg
             className="size-3"
             xmlns="http://www.w3.org/2000/svg"
