@@ -8,8 +8,6 @@ set -e
 # 設定
 DATABASE_NAME="stats47"
 MAIN_SCHEMA_FILE="./database/schemas/main.sql"
-RANKING_SCHEMA_FILE="./database/schemas/ranking_visualizations.sql"
-CHOROPLETH_SCHEMA_FILE="./database/schemas/choropleth_simple.sql"
 
 # 色付きのログ出力
 log_info() {
@@ -31,11 +29,9 @@ show_help() {
     echo "使用方法: $0 <コマンド>"
     echo ""
     echo "コマンド:"
-    echo "  init        - データベースの初期化（メイン + ランキング設定 + コロプレス）"
+    echo "  init        - データベースの初期化"
     echo "  create      - データベースの作成"
     echo "  schema      - メインスキーマの適用"
-    echo "  ranking     - ランキング可視化設定スキーマの適用"
-    echo "  choropleth  - コロプレス地図機能スキーマの適用（簡素版）"
     echo "  status      - データベースの状態確認"
     echo "  help        - このヘルプを表示"
     echo ""
@@ -43,8 +39,6 @@ show_help() {
     echo "  $0 init              # データベースの初期化"
     echo "  $0 create            # データベースの作成のみ"
     echo "  $0 schema            # メインスキーマの適用"
-    echo "  $0 ranking           # ランキング設定スキーマの適用"
-    echo "  $0 choropleth        # コロプレス地図スキーマの適用（簡素版）"
     echo "  $0 status            # データベースの状態確認"
 }
 
@@ -83,35 +77,6 @@ apply_main_schema() {
     log_info "メインスキーマが適用されました。"
 }
 
-# ランキング可視化設定スキーマの適用
-apply_ranking_schema() {
-    log_info "ランキング可視化設定スキーマを適用中..."
-
-    if [ ! -f "$RANKING_SCHEMA_FILE" ]; then
-        log_error "ランキングスキーマファイルが見つかりません: $RANKING_SCHEMA_FILE"
-        exit 1
-    fi
-
-    # 本番D1データベースにスキーマを適用
-    npx wrangler d1 execute $DATABASE_NAME --file="$RANKING_SCHEMA_FILE"
-
-    log_info "ランキング可視化設定スキーマが適用されました。"
-}
-
-# コロプレス地図スキーマの適用（簡素版）
-apply_choropleth_schema() {
-    log_info "コロプレス地図スキーマ（簡素版）を適用中..."
-
-    if [ ! -f "$CHOROPLETH_SCHEMA_FILE" ]; then
-        log_error "コロプレス地図スキーマファイルが見つかりません: $CHOROPLETH_SCHEMA_FILE"
-        exit 1
-    fi
-
-    npx wrangler d1 execute $DATABASE_NAME --file="$CHOROPLETH_SCHEMA_FILE"
-
-    log_info "コロプレス地図スキーマ（簡素版）が適用されました。"
-}
-
 
 # データベースの状態確認
 check_status() {
@@ -122,13 +87,6 @@ check_status() {
         log_info "メインスキーマファイル: 存在 ($MAIN_SCHEMA_FILE)"
     else
         log_error "メインスキーマファイル: 存在しません"
-    fi
-
-    # ランキングスキーマファイルの確認
-    if [ -f "$RANKING_SCHEMA_FILE" ]; then
-        log_info "ランキングスキーマファイル: 存在 ($RANKING_SCHEMA_FILE)"
-    else
-        log_error "ランキングスキーマファイル: 存在しません"
     fi
 
     # wrangler.toml の確認
@@ -164,13 +122,7 @@ init_database() {
     # メインスキーマの適用
     apply_main_schema
 
-    # ランキングスキーマの適用
-    apply_ranking_schema
-
-    # コロプレス地図スキーマの適用
-    apply_choropleth_schema
-
-    log_info "データベースの初期化が完了しました（メイン + ランキング + コロプレス簡素版）。"
+    log_info "データベースの初期化が完了しました。"
     log_info "wrangler.toml の database_id を更新してください。"
 }
 
@@ -184,12 +136,6 @@ case "${1:-help}" in
         ;;
     "schema")
         apply_main_schema
-        ;;
-    "ranking")
-        apply_ranking_schema
-        ;;
-    "choropleth")
-        apply_choropleth_schema
         ;;
     "status")
         check_status

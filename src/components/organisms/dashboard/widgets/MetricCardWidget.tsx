@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/ui/card';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { MetricData, MetricCardConfig } from '@/types/dashboard';
+import { MetricCardConfig, MetricData } from '@/types/dashboard';
+import { Minus, TrendingDown, TrendingUp } from 'lucide-react';
 
 interface MetricCardWidgetProps {
   data: MetricData;
@@ -19,6 +18,22 @@ export function MetricCardWidget({ data, config }: MetricCardWidgetProps) {
     decimalPlaces = 0,
     formatting,
   } = config;
+
+  // データが存在しない場合のフォールバック
+  if (!data) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-medium text-muted-foreground">
+            {title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-muted-foreground">データ取得中...</div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   const { value, previousValue, trend, changePercent } = data;
 

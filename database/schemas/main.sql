@@ -31,17 +31,6 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   CHECK (area_type IN ('country', 'prefecture', 'municipality'))
 );
 
--- 統計データの履歴管理テーブル
-CREATE TABLE IF NOT EXISTS estat_data_history (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  stats_data_id TEXT NOT NULL,
-  action TEXT NOT NULL, -- 'created', 'updated', 'deleted'
-  user_id INTEGER,
-  metadata_snapshot TEXT, -- JSON形式でメタデータのスナップショット
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
 -- インデックスの作成（検索パフォーマンス向上）
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
@@ -49,8 +38,6 @@ CREATE INDEX IF NOT EXISTS idx_estat_metainfo_stat_name ON estat_metainfo(stat_n
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_title ON estat_metainfo(title);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_area_type ON estat_metainfo(area_type);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
-CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
-CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 
 -- サンプルデータの挿入は無効化（開発時は必要に応じて手動で挿入）
 -- ユーザー認証サンプル（必要に応じて手動で挿入）
@@ -79,8 +66,7 @@ SELECT
   u.username,
   u.email,
   u.last_login,
-  COUNT(h.id) as action_count
+  0 as action_count
 FROM users u
-LEFT JOIN estat_data_history h ON u.id = h.user_id
 GROUP BY u.id, u.username, u.email, u.last_login
 ORDER BY u.last_login DESC;

@@ -72,7 +72,8 @@
       "Bash(cat:*)",
       "Bash(curl:*)",
       "Bash(for file in docs/99_課題管理/*.md)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

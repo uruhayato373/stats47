@@ -31,11 +31,10 @@ export const QUERIES = {
       ri.decimal_places,
       ri.created_at,
       ri.updated_at,
-      -- e-Stat固有情報を取得
-      dsm.metadata as metadata_json
+      ri.description,
+      ri.data_source_id
     FROM subcategory_ranking_items sri
     JOIN ranking_items ri ON sri.ranking_item_id = ri.id AND ri.is_active = 1
-    LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
     WHERE sri.subcategory_id = ?
     ORDER BY sri.display_order
   `,
@@ -44,13 +43,7 @@ export const QUERIES = {
    * 単一のランキング項目を取得（新スキーマ対応）
    */
   getRankingItemById: `
-    SELECT 
-      ri.*,
-      json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
-      json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
-    FROM ranking_items ri
-    LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
-    WHERE ri.id = ?
+    SELECT * FROM ranking_items WHERE id = ?
   `,
 
   /**

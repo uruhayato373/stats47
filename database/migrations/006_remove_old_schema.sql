@@ -11,8 +11,10 @@ ALTER TABLE ranking_items_new RENAME TO ranking_items;
 
 -- 3. 旧APIエンドポイントで使用されていたテーブルの確認
 -- 以下のテーブルは削除しない（他の機能で使用中）:
--- - ranking_visualizations (ランキング設定で使用)
 -- - subcategory_configs (サブカテゴリ設定で使用)
+--
+-- 注意: ranking_visualizations は ranking_items に統合されました（マイグレーション002/004）
+-- 可視化設定は ranking_items のカラム（map_color_scheme, map_diverging_midpoint 等）に含まれます
 
 -- 4. インデックスの再作成（新テーブル名に合わせて）
 DROP INDEX IF EXISTS idx_ranking_items_new_data_source;

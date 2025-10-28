@@ -1,12 +1,11 @@
 'use client';
 
-import React from 'react';
-import { DashboardWidget, WidgetData, MetricCardConfig } from '@/types/dashboard';
+import { DashboardWidget, MetricCardConfig, WidgetData } from '@/types/dashboard';
 import {
-  MetricCardWidget,
-  LineChartWidget,
-  BarChartWidget,
   AreaChartWidget,
+  BarChartWidget,
+  LineChartWidget,
+  MetricCardWidget,
 } from './widgets';
 
 interface WidgetRendererProps {
@@ -16,6 +15,11 @@ interface WidgetRendererProps {
 
 export function WidgetRenderer({ widget, data }: WidgetRendererProps) {
   const { widgetType, config, position } = widget;
+
+  // データが存在しない場合の警告
+  if (!data) {
+    console.warn(`[WidgetRenderer] Data not available for widget: ${widget.widgetKey}`);
+  }
 
   // ウィジェットタイプに応じたコンポーネントを選択
   const renderWidget = () => {
@@ -46,8 +50,8 @@ export function WidgetRenderer({ widget, data }: WidgetRendererProps) {
     <div
       className="widget-container"
       style={{
-        gridRow: `${position.row + 1} / span ${position.height}`,
-        gridColumn: `${position.col + 1} / span ${position.width}`,
+        gridRow: `${position.row + 1} / span ${position.height || 1}`,
+        gridColumn: `${position.col + 1} / span ${position.width || 1}`,
       }}
     >
       {renderWidget()}

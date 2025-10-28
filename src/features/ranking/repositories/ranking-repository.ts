@@ -10,17 +10,19 @@
 
 import { findSubcategoryById } from "@/features/category";
 
-import { getDataProvider } from "@/infrastructure/database";
 import { buildEnvironmentConfig } from "@/lib/environment";
+
+import { getDataProvider } from "@/infrastructure/database";
+
+import { convertRankingItemFromDB } from "../converters/ranking-converters";
+import { QUERIES } from "../ranking-queries";
 import { RankingItem, RankingItemDB } from "../types";
+
 import type {
   RankingGroup,
   RankingGroupDB,
   RankingGroupResponse,
 } from "../types/group";
-
-import { convertRankingItemFromDB } from "../converters/ranking-converters";
-import { QUERIES } from "../ranking-queries";
 
 export interface SubcategoryConfig {
   id: string;
@@ -185,23 +187,28 @@ export class RankingRepository {
         defaultRankingKey: defaultRankingKey,
       };
 
-      // ランキング項目を取得（ランキング項目がある行のみ）
+      // ランキング項目を取得（ranking_nameをnameに変換）
       const rankingItems = rows
         .filter((row) => row.ranking_key)
         .map((row) => {
-          const dbItem = row as RankingItemDB & { metadata_json?: string };
-
-          // JSONメタデータをパースしてstats_data_idとcd_cat01を抽出
-          if (dbItem.metadata_json) {
-            try {
-              const metadata = JSON.parse(dbItem.metadata_json);
-              dbItem.stats_data_id = metadata.stats_data_id;
-              dbItem.cd_cat01 = metadata.cd_cat01;
-            } catch (error) {
-              console.warn("Failed to parse metadata JSON:", error);
-            }
-          }
-
+          const item = row as any;
+          const dbItem: RankingItemDB = {
+            id: item.id,
+            ranking_key: item.ranking_key,
+            label: item.label,
+            name: item.ranking_name,
+            description: item.description,
+            unit: item.unit,
+            data_source_id: item.data_source_id,
+            map_color_scheme: item.map_color_scheme,
+            map_diverging_midpoint: item.map_diverging_midpoint,
+            ranking_direction: item.ranking_direction,
+            conversion_factor: item.conversion_factor,
+            decimal_places: item.decimal_places,
+            is_active: item.is_active,
+            created_at: item.created_at,
+            updated_at: item.updated_at,
+          };
           return convertRankingItemFromDB(dbItem);
         });
 
@@ -216,40 +223,14 @@ export class RankingRepository {
   }
 
   /**
-   * 単一のランキング項目を取得（ID）
-   */
-  async getRankingItemById(id: number): Promise<RankingItem | null> {
-    try {
-      const result = await this.db
-        .prepare(QUERIES.getRankingItemById)
-        .bind(id)
-        .first();
-
-      if (!result) {
-        return null;
-      }
-
-      return convertRankingItemFromDB(result as RankingItemDB);
-    } catch (error) {
-      console.error("Failed to get ranking item by id:", error);
-      throw error;
-    }
-  }
-
-  /**
    * 単一のランキング項目を取得（キー）
    */
   async getRankingItemByKey(rankingKey: string): Promise<RankingItem | null> {
     try {
       const result = await this.db
         .prepare(
-          `SELECT 
-            ri.*,
-            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
-            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
-          FROM ranking_items ri
-          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
-          WHERE ri.ranking_key = ? AND ri.is_active = 1`
+          `SELECT * FROM ranking_items 
+          WHERE ranking_key = ? AND is_active = 1`
         )
         .bind(rankingKey)
         .first();
@@ -258,7 +239,7 @@ export class RankingRepository {
         return null;
       }
 
-      return convertRankingItemFromDB(result as RankingItemDB);
+      return convertRankingItemFromDB(result as unknown as RankingItemDB);
     } catch (error) {
       console.error("Failed to get ranking item by key:", error);
       throw error;
@@ -374,18 +355,14 @@ export class RankingRepository {
 
       // 2. 各グループのアイテムを取得
       for (const groupRow of groupsResult.results) {
-        const groupDB = groupRow as RankingGroupDB;
+        const groupDB = groupRow as unknown as RankingGroupDB;
 
         const itemsResult = await this.db
           .prepare(
             `
-            SELECT 
-              ri.*,
-              json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
-              json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+            SELECT ri.*
             FROM ranking_items ri
             JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
-            LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
             WHERE rgi.group_id = ? AND ri.is_active = 1
             ORDER BY rgi.display_order
           `
@@ -394,7 +371,9 @@ export class RankingRepository {
           .all();
 
         const items = (itemsResult.results || [])
-          .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+          .map((row) =>
+            convertRankingItemFromDB(row as unknown as RankingItemDB)
+          )
           .filter((item) => item !== null) as RankingItem[];
 
         groups.push({
@@ -405,7 +384,7 @@ export class RankingRepository {
           description: groupDB.description || undefined,
           icon: groupDB.icon || undefined,
           displayOrder: groupDB.display_order,
-          isCollapsed: groupDB.is_collapsed === 1,
+          isCollapsed: Boolean(groupDB.is_collapsed),
           items,
         });
       }
@@ -414,14 +393,10 @@ export class RankingRepository {
       const ungroupedItemsResult = await this.db
         .prepare(
           `
-          SELECT 
-            ri.*,
-            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
-            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
+          SELECT ri.*
           FROM ranking_items ri
           JOIN subcategory_ranking_items sri ON ri.id = sri.ranking_item_id
           LEFT JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
-          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
           WHERE sri.subcategory_id = ? AND ri.is_active = 1 AND rgi.ranking_item_id IS NULL
           ORDER BY sri.display_order
         `
@@ -430,7 +405,7 @@ export class RankingRepository {
         .all();
 
       const ungroupedItems = (ungroupedItemsResult.results || [])
-        .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+        .map((row) => convertRankingItemFromDB(row as unknown as RankingItemDB))
         .filter((item) => item !== null) as RankingItem[];
 
       return {
@@ -452,19 +427,14 @@ export class RankingRepository {
       const result = await this.db
         .prepare(
           `
-          SELECT 
-            ri.*,
-            json_extract(dsm.metadata, '$.stats_data_id') as stats_data_id,
-            json_extract(dsm.metadata, '$.cd_cat01') as cd_cat01
-          FROM ranking_items ri
-          LEFT JOIN data_source_metadata dsm ON ri.id = dsm.ranking_item_id AND dsm.data_source_id = 'estat'
-          ORDER BY ri.created_at DESC
+          SELECT * FROM ranking_items
+          ORDER BY created_at DESC
         `
         )
         .all();
 
       return (result.results || [])
-        .map((row) => convertRankingItemFromDB(row as RankingItemDB))
+        .map((row) => convertRankingItemFromDB(row as unknown as RankingItemDB))
         .filter((item) => item !== null) as RankingItem[];
     } catch (error) {
       console.error("Failed to get all ranking items:", error);
@@ -486,7 +456,7 @@ export class RankingRepository {
         return null;
       }
 
-      return convertRankingItemFromDB(result as RankingItemDB);
+      return convertRankingItemFromDB(result as unknown as RankingItemDB);
     } catch (error) {
       console.error("Failed to get ranking item by id:", error);
       throw error;
@@ -543,7 +513,7 @@ export class RankingRepository {
         throw new Error("Failed to create ranking item");
       }
 
-      return convertRankingItemFromDB(result as RankingItemDB);
+      return convertRankingItemFromDB(result as unknown as RankingItemDB);
     } catch (error) {
       console.error("Failed to create ranking item:", error);
       throw error;
