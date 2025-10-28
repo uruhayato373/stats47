@@ -142,15 +142,15 @@ CREATE TABLE IF NOT EXISTS ranking_items (
 --   比率: {"numerator":{...},"denominator":{...},"multiplier":1000}
 CREATE TABLE IF NOT EXISTS data_source_metadata (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ranking_item_id INTEGER NOT NULL,
+  ranking_key TEXT NOT NULL,
   data_source_id TEXT NOT NULL,
   area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
   calculation_type TEXT NOT NULL DEFAULT 'direct',  -- 'direct' | 'ratio' | 'aggregate'
   metadata TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(ranking_item_id, data_source_id, area_type),
-  FOREIGN KEY (ranking_item_id) REFERENCES ranking_items(id) ON DELETE CASCADE,
+  UNIQUE(ranking_key, data_source_id, area_type),
+  FOREIGN KEY (ranking_key) REFERENCES ranking_items(ranking_key) ON DELETE CASCADE,
   FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
   CHECK (area_type IN ('prefecture', 'city', 'national')),
   CHECK (calculation_type IN ('direct', 'ratio', 'aggregate'))
@@ -260,7 +260,7 @@ CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updat
 CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_source_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_key ON ranking_items(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
-CREATE INDEX IF NOT EXISTS idx_data_source_metadata_ranking ON data_source_metadata(ranking_item_id);
+CREATE INDEX IF NOT EXISTS idx_data_source_metadata_ranking ON data_source_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_source ON data_source_metadata(data_source_id);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_area ON data_source_metadata(area_type);
 CREATE INDEX IF NOT EXISTS idx_ranking_values_lookup ON ranking_values(ranking_key, time_code);
