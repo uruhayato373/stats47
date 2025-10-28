@@ -9,7 +9,6 @@ import { DataSourceMetadataForm } from "./forms/DataSourceMetadataForm";
 import { VisualizationForm } from "./forms/VisualizationForm";
 
 interface RankingItem {
-  id: number;
   rankingKey: string;
   label: string;
   name: string;
@@ -22,9 +21,10 @@ interface RankingItem {
 interface RankingItemFormProps {
   item?: RankingItem;
   mode: "create" | "edit";
+  rankingKey?: string;
 }
 
-export function RankingItemForm({ item, mode }: RankingItemFormProps) {
+export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps) {
   return (
     <Tabs defaultValue="basic" className="w-full">
       <TabsList className="grid w-full grid-cols-5">
@@ -51,9 +51,9 @@ export function RankingItemForm({ item, mode }: RankingItemFormProps) {
         <VisualizationForm item={item} />
       </TabsContent>
 
-      {mode === "edit" && item && (
+      {mode === "edit" && rankingKey && (
         <TabsContent value="danger" className="mt-6">
-          <DangerZone itemId={item.id} />
+          <DangerZone rankingKey={rankingKey} />
         </TabsContent>
       )}
     </Tabs>

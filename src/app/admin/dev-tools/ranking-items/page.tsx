@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";
 
-import { RankingItemsTable } from "@/features/ranking/components/RankingItemsTable";
+import { RankingItemsTable } from "@/features/ranking/components/admin/RankingItemsTable";
 import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
 
 /**

@@ -3,13 +3,14 @@
 import Link from "next/link";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Edit } from "lucide-react";
+
 
 import { Badge } from "@/components/atoms/ui/badge";
 import { Button } from "@/components/atoms/ui/button";
 import { DataTable } from "@/components/molecules/data-table/data-table";
 
 interface RankingItem {
-  id: number;
   rankingKey: string;
   label: string;
   unit: string;
@@ -55,9 +56,10 @@ const columns: ColumnDef<RankingItem>[] = [
     id: "actions",
     header: "操作",
     cell: ({ row }) => (
-      <Link href={`/admin/dev-tools/ranking-items/${row.original.id}`}>
-        <Button variant="ghost" size="sm">
-          編集
+      <Link href={`/admin/dev-tools/ranking-items/${row.original.rankingKey}`}>
+        <Button variant="ghost" size="icon">
+          <Edit className="h-4 w-4" />
+          <span className="sr-only">編集</span>
         </Button>
       </Link>
     ),

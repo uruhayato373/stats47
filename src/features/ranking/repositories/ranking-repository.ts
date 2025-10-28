@@ -16,6 +16,7 @@ import { getDataProvider } from "@/infrastructure/database";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
 import { RankingItem, RankingItemDB } from "../types";
+
 import { QUERIES } from "./ranking-queries";
 
 import type {
