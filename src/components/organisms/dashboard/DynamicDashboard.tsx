@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { ResolvedDashboard } from '@/features/dashboard/services/dashboard-service';
 import {
   DashboardConfig,
   DashboardWidget,
   LayoutTemplate,
   WidgetData,
 } from '@/types/dashboard';
-import { getMockDashboardConfig, getMockWidgetData } from '@/lib/dashboard/mock-data';
+import { useEffect, useState } from 'react';
+import { DashboardError } from './DashboardError';
 import { DashboardLayout } from './DashboardLayout';
 import { DashboardSkeleton } from './DashboardSkeleton';
-import { DashboardError } from './DashboardError';
 import { WidgetRenderer } from './WidgetRenderer';
 
 interface DynamicDashboardProps {
@@ -36,20 +36,40 @@ export function DynamicDashboard({
       try {
         setLoading(true);
 
-        // 1. ダッシュボード設定を取得
-        const dashboardData = await getMockDashboardConfig(subcategoryId, areaType);
+        // 1. ダッシュボード設定を取得（API）
+        const response = await fetch(
+          `/api/dashboard/${subcategoryId}/${areaType}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch dashboard: ${response.statusText}`);
+        }
+
+        const dashboardData: ResolvedDashboard = await response.json();
         setConfig(dashboardData.config);
         setWidgets(dashboardData.widgets);
         setLayout(dashboardData.layout);
 
-        // 2. 各ウィジェットのデータを取得
+        // 2. 各ウィジェットのデータを取得（API）
         const data: Record<string, WidgetData> = {};
-        dashboardData.widgets.forEach((widget) => {
-          const widgetData = getMockWidgetData(widget.dataSourceKey);
-          if (widgetData) {
-            data[widget.widgetKey] = widgetData;
+        const dataPromises = dashboardData.widgets.map(async (widget) => {
+          try {
+            const widgetResponse = await fetch(
+              `/api/dashboard/widgets/${widget.widgetKey}/data?areaCode=${areaCode}`
+            );
+            if (widgetResponse.ok) {
+              const widgetDataResult = await widgetResponse.json();
+              data[widget.widgetKey] = widgetDataResult.data;
+            }
+          } catch (err) {
+            console.error(
+              `Failed to load widget data for ${widget.widgetKey}:`,
+              err
+            );
           }
         });
+
+        await Promise.all(dataPromises);
         setWidgetData(data);
 
         setLoading(false);
