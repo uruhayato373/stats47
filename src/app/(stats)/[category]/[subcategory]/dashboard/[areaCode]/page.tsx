@@ -1,6 +1,6 @@
+import { DynamicDashboard } from "@/components/organisms/dashboard/DynamicDashboard";
+
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
-import { NationalDashboard } from "@/components/organisms/dashboard/NationalDashboard";
-import { PrefectureDashboard } from "@/components/organisms/dashboard/PrefectureDashboard";
 
 /**
  * 地域詳細ページのProps型定義
@@ -36,10 +36,14 @@ export default async function Page({ params }: PageProps) {
 
   // ダッシュボードコンポーネントを選択
   const renderDashboard = () => {
-    if (areaType === "national") {
-      return <NationalDashboard areaCode={areaCode} />;
-    } else if (areaType === "prefecture") {
-      return <PrefectureDashboard areaCode={areaCode} />;
+    if (areaType === "national" || areaType === "prefecture") {
+      return (
+        <DynamicDashboard
+          subcategoryId={subcategory}
+          areaCode={areaCode}
+          areaType={areaType}
+        />
+      );
     } else {
       return <MunicipalityDashboard areaCode={areaCode} />;
     }
