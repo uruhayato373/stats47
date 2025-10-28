@@ -112,3 +112,96 @@ export const QUERIES = {
  * クエリの型定義
  */
 export type QueryKey = keyof typeof QUERIES;
+
+/**
+ * ランキンググループ管理用クエリ
+ */
+export const GROUP_QUERIES = {
+  /**
+   * すべてのランキンググループを取得（項目数を含む）
+   */
+  getAllGroups: `
+    SELECT 
+      rg.*,
+      COUNT(ri.id) as item_count
+    FROM ranking_groups rg
+    LEFT JOIN ranking_items ri ON rg.id = ri.group_id AND ri.is_active = 1
+    GROUP BY rg.id
+    ORDER BY rg.subcategory_id, rg.display_order
+  `,
+
+  /**
+   * ID でランキンググループを取得
+   */
+  getGroupById: `
+    SELECT * FROM ranking_groups WHERE id = ?
+  `,
+
+  /**
+   * ランキンググループを作成
+   */
+  createGroup: `
+    INSERT INTO ranking_groups 
+    (group_key, subcategory_id, name, description, icon, display_order, is_collapsed)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `,
+
+  /**
+   * ランキンググループを更新
+   */
+  updateGroup: `
+    UPDATE ranking_groups 
+    SET 
+      group_key = ?, 
+      name = ?, 
+      description = ?, 
+      icon = ?, 
+      display_order = ?, 
+      is_collapsed = ?, 
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `,
+
+  /**
+   * ランキンググループを削除
+   */
+  deleteGroup: `
+    DELETE FROM ranking_groups WHERE id = ?
+  `,
+
+  /**
+   * グループの表示順を更新
+   */
+  updateGroupOrder: `
+    UPDATE ranking_groups SET display_order = ? WHERE id = ?
+  `,
+
+  /**
+   * 項目をグループに割り当て
+   */
+  assignItemToGroup: `
+    UPDATE ranking_items 
+    SET 
+      group_id = ?, 
+      display_order_in_group = ?, 
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `,
+
+  /**
+   * 項目をグループから削除
+   */
+  removeItemFromGroup: `
+    UPDATE ranking_items 
+    SET 
+      group_id = NULL, 
+      display_order_in_group = 0, 
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `,
+} as const;
+
+/**
+ * グループクエリの型定義
+ */
+export type GroupQueryKey = keyof typeof GROUP_QUERIES;

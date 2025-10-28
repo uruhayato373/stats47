@@ -17,12 +17,14 @@ import { getDataProvider } from "@/infrastructure/database";
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
 import { RankingItem, RankingItemDB } from "../types";
 
-import { QUERIES } from "./ranking-queries";
+import { GROUP_QUERIES, QUERIES } from "./ranking-queries";
 
 import type {
+  CreateRankingGroupInput,
   RankingGroup,
   RankingGroupDB,
   RankingGroupResponse,
+  UpdateRankingGroupInput,
 } from "../types/group";
 
 export interface SubcategoryConfig {
@@ -514,6 +516,246 @@ export class RankingRepository {
       return convertRankingItemFromDB(result as unknown as RankingItemDB);
     } catch (error) {
       console.error("Failed to create ranking item:", error);
+      throw error;
+    }
+  }
+
+  // ============================================================
+  // ランキンググループ管理メソッド
+  // ============================================================
+
+  /**
+   * すべてのランキンググループを取得
+   */
+  async getAllRankingGroups(): Promise<RankingGroup[]> {
+    try {
+      const result = await this.db.prepare(GROUP_QUERIES.getAllGroups).all();
+      const items = (await this.getAllRankingItems()).filter((i) => i.groupId);
+
+      return (result.results || []).map((row: any) => {
+        const groupDB = row as unknown as RankingGroupDB;
+        const groupItems = items.filter((i) => i.groupId === groupDB.id);
+
+        return {
+          id: groupDB.id,
+          groupKey: groupDB.group_key,
+          subcategoryId: groupDB.subcategory_id,
+          name: groupDB.name,
+          description: groupDB.description || undefined,
+          icon: groupDB.icon || undefined,
+          displayOrder: groupDB.display_order,
+          isCollapsed: Boolean(groupDB.is_collapsed),
+          items: groupItems.sort(
+            (a, b) =>
+              (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
+          ),
+        };
+      });
+    } catch (error) {
+      console.error("Failed to get all ranking groups:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * IDでランキンググループを取得
+   */
+  async getRankingGroupById(id: number): Promise<RankingGroup | null> {
+    try {
+      const result = await this.db
+        .prepare(GROUP_QUERIES.getGroupById)
+        .bind(id)
+        .first();
+
+      if (!result) {
+        return null;
+      }
+
+      const groupDB = result as unknown as RankingGroupDB;
+      const items = (await this.getAllRankingItems())
+        .filter((i) => i.groupId === id)
+        .sort(
+          (a, b) => (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
+        );
+
+      return {
+        id: groupDB.id,
+        groupKey: groupDB.group_key,
+        subcategoryId: groupDB.subcategory_id,
+        name: groupDB.name,
+        description: groupDB.description || undefined,
+        icon: groupDB.icon || undefined,
+        displayOrder: groupDB.display_order,
+        isCollapsed: Boolean(groupDB.is_collapsed),
+        items,
+      };
+    } catch (error) {
+      console.error("Failed to get ranking group by id:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * ランキンググループを作成
+   */
+  async createRankingGroup(data: CreateRankingGroupInput): Promise<number> {
+    try {
+      const result = await this.db
+        .prepare(GROUP_QUERIES.createGroup)
+        .bind(
+          data.groupKey,
+          data.subcategoryId,
+          data.name,
+          data.description || null,
+          data.icon || null,
+          data.displayOrder,
+          data.isCollapsed ? 1 : 0
+        )
+        .first();
+
+      const id = (result as any)?.id;
+      if (!id) {
+        throw new Error("Failed to create ranking group");
+      }
+
+      return id;
+    } catch (error) {
+      console.error("Failed to create ranking group:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * ランキンググループを更新
+   */
+  async updateRankingGroup(
+    id: number,
+    data: UpdateRankingGroupInput
+  ): Promise<void> {
+    try {
+      // 既存のグループを取得してから更新
+      const group = await this.getRankingGroupById(id);
+      if (!group) {
+        throw new Error("Ranking group not found");
+      }
+
+      await this.db
+        .prepare(GROUP_QUERIES.updateGroup)
+        .bind(
+          data.groupKey ?? group.groupKey,
+          data.name ?? group.name,
+          data.description ?? group.description ?? null,
+          data.icon ?? group.icon ?? null,
+          data.displayOrder ?? group.displayOrder,
+          data.isCollapsed !== undefined
+            ? data.isCollapsed
+              ? 1
+              : 0
+            : group.isCollapsed
+            ? 1
+            : 0,
+          id
+        )
+        .run();
+    } catch (error) {
+      console.error("Failed to update ranking group:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * ランキンググループを削除
+   */
+  async deleteRankingGroup(id: number): Promise<void> {
+    try {
+      // グループに属する項目のgroup_idをNULLにする
+      await this.db
+        .prepare(
+          `UPDATE ranking_items 
+           SET group_id = NULL, display_order_in_group = 0, updated_at = CURRENT_TIMESTAMP
+           WHERE group_id = ?`
+        )
+        .bind(id)
+        .run();
+
+      // グループを削除
+      await this.db.prepare(GROUP_QUERIES.deleteGroup).bind(id).run();
+    } catch (error) {
+      console.error("Failed to delete ranking group:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * グループの表示順を更新
+   */
+  async updateGroupDisplayOrder(
+    groupId: number,
+    newOrder: number
+  ): Promise<void> {
+    try {
+      await this.db
+        .prepare(GROUP_QUERIES.updateGroupOrder)
+        .bind(newOrder, groupId)
+        .run();
+    } catch (error) {
+      console.error("Failed to update group display order:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * 項目をグループに割り当て
+   */
+  async assignItemsToGroup(
+    groupId: number,
+    itemIds: number[],
+    orders: number[]
+  ): Promise<void> {
+    try {
+      for (let i = 0; i < itemIds.length; i++) {
+        await this.db
+          .prepare(GROUP_QUERIES.assignItemToGroup)
+          .bind(groupId, orders[i], itemIds[i])
+          .run();
+      }
+    } catch (error) {
+      console.error("Failed to assign items to group:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * 項目をグループから削除
+   */
+  async removeItemsFromGroup(itemIds: number[]): Promise<void> {
+    try {
+      for (const itemId of itemIds) {
+        await this.db
+          .prepare(GROUP_QUERIES.removeItemFromGroup)
+          .bind(itemId)
+          .run();
+      }
+    } catch (error) {
+      console.error("Failed to remove items from group:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * グループ内の項目の表示順を更新
+   */
+  async updateItemDisplayOrderInGroup(
+    itemId: number,
+    newOrder: number
+  ): Promise<void> {
+    try {
+      await this.db
+        .prepare(QUERIES.updateRankingItemOrder)
+        .bind(newOrder, itemId)
+        .run();
+    } catch (error) {
+      console.error("Failed to update item display order in group:", error);
       throw error;
     }
   }

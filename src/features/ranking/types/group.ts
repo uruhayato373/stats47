@@ -45,3 +45,36 @@ export interface RankingGroupDB {
   created_at: string;
   updated_at: string;
 }
+
+/**
+ * ランキンググループ作成時の入力型
+ */
+export interface CreateRankingGroupInput {
+  groupKey: string;
+  subcategoryId: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  displayOrder: number;
+  isCollapsed: boolean;
+}
+
+/**
+ * ランキンググループ更新時の入力型
+ */
+export interface UpdateRankingGroupInput {
+  groupKey?: string;
+  name?: string;
+  description?: string;
+  icon?: string;
+  displayOrder?: number;
+  isCollapsed?: boolean;
+}
+
+/**
+ * 項目数を含むランキンググループ
+ */
+export interface RankingGroupWithStats extends RankingGroup {
+  itemCount: number;
+  ungroupedItemCount?: number;
+}
