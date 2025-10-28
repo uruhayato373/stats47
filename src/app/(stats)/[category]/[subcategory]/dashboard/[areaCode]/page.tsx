@@ -22,7 +22,7 @@ interface PageProps {
  * @param props - コンポーネントのProps
  * @returns 地域詳細ページのJSX要素
  */
-export default async function AreaDetailPage({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { category, subcategory, areaCode } = await params;
 
   // 地域コードから地域タイプを判定

@@ -7,6 +7,8 @@ import { ChevronRight } from "lucide-react";
 
 import { listCategories } from "@/features/category";
 
+import { BreadcrumbAreaDropdown } from "./BreadcrumbAreaDropdown";
+
 /**
  * 統計データページのパンくずナビゲーションコンポーネント
  *
@@ -20,10 +22,11 @@ export const StatsBreadcrumb = () => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
 
-  // URLパスからカテゴリ、サブカテゴリ、ページタイプを取得
+  // URLパスからカテゴリ、サブカテゴリ、ページタイプ、地域コードを取得
   const categoryId = pathSegments[0];
   const subcategoryId = pathSegments[1];
   const pageType = pathSegments[2];
+  const areaCode = pathSegments[3];
 
   const categories = listCategories();
   const category = categories.find((cat) => cat.id === categoryId);
@@ -73,6 +76,17 @@ export const StatsBreadcrumb = () => {
             <span className="text-foreground/70">
               {pageTypeNames[pageType]}
             </span>
+          </>
+        )}
+        {areaCode && (
+          <>
+            <ChevronRight className="w-3 h-3" />
+            <BreadcrumbAreaDropdown
+              areaCode={areaCode}
+              categoryId={categoryId}
+              subcategoryId={subcategoryId}
+              pageType={pageType}
+            />
           </>
         )}
       </nav>

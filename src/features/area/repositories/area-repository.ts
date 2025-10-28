@@ -4,9 +4,6 @@
  * Next.js Fetch APIキャッシュを活用
  */
 
-import { readFileSync } from "fs";
-import { join } from "path";
-
 import { City, DataSourceError, Prefecture } from "../types/index";
 
 /**
@@ -24,17 +21,27 @@ function isDevelopment(): boolean {
 }
 
 /**
- * ローカルモックデータから都道府県を読み込む
+ * ローカルモックデータから都道府県を読み込む（サーバーサイドのみ）
  */
-function loadPrefecturesFromLocal(): Prefecture[] {
-  const mockPath = join(
-    process.cwd(),
-    "data",
-    "mock",
-    "area",
-    "prefectures.json"
-  );
+async function loadPrefecturesFromLocal(): Promise<Prefecture[]> {
+  // サーバーサイドのみサポート
+  if (!isServer()) {
+    throw new Error("Local file loading is only supported on server side");
+  }
+
   try {
+    // 動的インポートでfsモジュールを使用
+    const { readFileSync } = await import("fs");
+    const { join } = await import("path");
+
+    const mockPath = join(
+      process.cwd(),
+      "data",
+      "mock",
+      "area",
+      "prefectures.json"
+    );
+
     const data = JSON.parse(readFileSync(mockPath, "utf-8"));
     // 配列形式のみをサポート
     if (!Array.isArray(data)) {
@@ -48,11 +55,20 @@ function loadPrefecturesFromLocal(): Prefecture[] {
 }
 
 /**
- * ローカルモックデータから市区町村を読み込む
+ * ローカルモックデータから市区町村を読み込む（サーバーサイドのみ）
  */
-function loadCitiesFromLocal(): City[] {
-  const mockPath = join(process.cwd(), "data", "mock", "area", "cities.json");
+async function loadCitiesFromLocal(): Promise<City[]> {
+  // サーバーサイドのみサポート
+  if (!isServer()) {
+    throw new Error("Local file loading is only supported on server side");
+  }
+
   try {
+    // 動的インポートでfsモジュールを使用
+    const { readFileSync } = await import("fs");
+    const { join } = await import("path");
+
+    const mockPath = join(process.cwd(), "data", "mock", "area", "cities.json");
     const data = JSON.parse(readFileSync(mockPath, "utf-8"));
     // 配列形式のみをサポート
     if (!Array.isArray(data)) {
@@ -112,7 +128,7 @@ export async function fetchPrefectures(): Promise<Prefecture[]> {
             `[AreaRepository] R2 connection failed, falling back to local mock data:`,
             r2Error
           );
-          const localData = loadPrefecturesFromLocal();
+          const localData = await loadPrefecturesFromLocal();
           console.log(
             `[AreaRepository] Successfully loaded ${localData.length} prefectures from local mock`
           );
@@ -189,7 +205,7 @@ export async function fetchCities(): Promise<City[]> {
             `[AreaRepository] R2 connection failed, falling back to local mock data:`,
             r2Error
           );
-          const localData = loadCitiesFromLocal();
+          const localData = await loadCitiesFromLocal();
           console.log(
             `[AreaRepository] Successfully loaded ${localData.length} cities from local mock`
           );

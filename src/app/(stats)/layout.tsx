@@ -23,7 +23,7 @@ export default function StatsLayout({ children }: StatsLayoutProps) {
     <div className="h-[calc(100dvh-62px)] lg:h-full overflow-auto flex flex-col bg-background">
       <StatsBreadcrumb />
       <div className="flex-1 overflow-y-auto">
-        <div className="container mx-auto px-4 py-6">{children}</div>
+        <div className="container mx-auto px-2">{children}</div>
       </div>
     </div>
   );
