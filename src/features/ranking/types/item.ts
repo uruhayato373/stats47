@@ -128,6 +128,24 @@ export interface RankingItem {
    * このランキング項目が有効かどうか
    */
   isActive: boolean;
+
+  /**
+   * ランキンググループID
+   * この項目が属するランキンググループ（オプショナル）
+   */
+  groupId?: number;
+
+  /**
+   * グループ内での表示順
+   * グループ内での表示順序
+   */
+  displayOrderInGroup: number;
+
+  /**
+   * おすすめフラグ
+   * この項目をおすすめとして表示するかどうか
+   */
+  isFeatured: boolean;
 }
 
 /**
@@ -286,6 +304,24 @@ export interface RankingItemDB {
    * このランキング項目が有効かどうか
    */
   is_active: boolean;
+
+  /**
+   * ランキンググループID
+   * この項目が属するランキンググループ（オプショナル）
+   */
+  group_id: number | null;
+
+  /**
+   * グループ内での表示順
+   * グループ内での表示順序
+   */
+  display_order_in_group: number;
+
+  /**
+   * おすすめフラグ
+   * この項目をおすすめとして表示するかどうか
+   */
+  is_featured: boolean;
 
   /**
    * 作成日時

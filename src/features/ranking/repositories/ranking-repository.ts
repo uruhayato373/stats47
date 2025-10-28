@@ -304,12 +304,12 @@ export class RankingRepository {
    */
   async updateRankingItemOrder(
     id: number,
-    displayOrder: number
+    displayOrderInGroup: number
   ): Promise<boolean> {
     try {
       const result = await this.db
-        .prepare(QUERIES.updateRankingGroupItemOrder)
-        .bind(displayOrder, id)
+        .prepare(QUERIES.updateRankingItemOrder)
+        .bind(displayOrderInGroup, id)
         .run();
 
       return result.success;
@@ -363,9 +363,8 @@ export class RankingRepository {
             `
             SELECT ri.*
             FROM ranking_items ri
-            JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
-            WHERE rgi.group_id = ? AND ri.is_active = 1
-            ORDER BY rgi.display_order
+            WHERE ri.group_id = ? AND ri.is_active = 1
+            ORDER BY ri.display_order_in_group
           `
           )
           .bind(groupDB.id)
@@ -396,13 +395,11 @@ export class RankingRepository {
           `
           SELECT ri.*
           FROM ranking_items ri
-          JOIN subcategory_ranking_items sri ON ri.id = sri.ranking_item_id
-          LEFT JOIN ranking_group_items rgi ON ri.id = rgi.ranking_item_id
-          WHERE sri.subcategory_id = ? AND ri.is_active = 1 AND rgi.ranking_item_id IS NULL
-          ORDER BY sri.display_order
+          WHERE ri.group_id IS NULL AND ri.is_active = 1
+          ORDER BY ri.display_order_in_group
         `
         )
-        .bind(subcategoryId)
+        .bind()
         .all();
 
       const ungroupedItems = (ungroupedItemsResult.results || [])

@@ -25,16 +25,15 @@ export const QUERIES = {
       rg.icon as group_icon,
       rg.display_order as group_display_order,
       rg.is_collapsed,
-      rgi.id as item_relation_id,
-      rgi.ranking_item_id,
-      rgi.display_order,
-      rgi.is_featured,
       ri.id,
       ri.ranking_key,
       ri.label,
       ri.unit,
       ri.name as ranking_name,
       ri.is_active,
+      ri.group_id,
+      ri.display_order_in_group,
+      ri.is_featured,
       ri.map_color_scheme,
       ri.map_diverging_midpoint,
       ri.ranking_direction,
@@ -45,10 +44,9 @@ export const QUERIES = {
       ri.description,
       ri.data_source_id
     FROM ranking_groups rg
-    LEFT JOIN ranking_group_items rgi ON rg.id = rgi.group_id
-    LEFT JOIN ranking_items ri ON rgi.ranking_item_id = ri.id AND ri.is_active = 1
+    LEFT JOIN ranking_items ri ON rg.id = ri.group_id AND ri.is_active = 1
     WHERE rg.subcategory_id = ?
-    ORDER BY rg.display_order, rgi.display_order
+    ORDER BY rg.display_order, ri.display_order_in_group
   `,
 
   /**
@@ -88,11 +86,25 @@ export const QUERIES = {
   /**
    * ランキンググループ内のアイテム表示順を更新
    */
-  updateRankingGroupItemOrder: `
-    UPDATE ranking_group_items 
+  updateRankingItemOrder: `
+    UPDATE ranking_items 
     SET 
-      display_order = ?
-    WHERE ranking_item_id = ?
+      display_order_in_group = ?,
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `,
+
+  /**
+   * ランキング項目のグループIDを更新
+   */
+  updateRankingItemGroup: `
+    UPDATE ranking_items 
+    SET 
+      group_id = ?,
+      display_order_in_group = ?,
+      is_featured = ?,
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
   `,
 } as const;
 

@@ -121,6 +121,9 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   description TEXT,
   unit TEXT NOT NULL,
   data_source_id TEXT NOT NULL,
+  group_id INTEGER,
+  display_order_in_group INTEGER DEFAULT 0,
+  is_featured BOOLEAN DEFAULT 0,
   map_color_scheme TEXT DEFAULT 'interpolateBlues',
   map_diverging_midpoint TEXT DEFAULT 'zero',
   ranking_direction TEXT DEFAULT 'desc',
@@ -129,7 +132,8 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   is_active BOOLEAN DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (data_source_id) REFERENCES data_sources(id)
+  FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
+  FOREIGN KEY (group_id) REFERENCES ranking_groups(id)
 );
 
 -- data_source_metadata: データソース固有メタデータテーブル（拡張版）
@@ -182,19 +186,6 @@ CREATE TABLE IF NOT EXISTS ranking_groups (
   is_collapsed BOOLEAN DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- ranking_group_items: ランキンググループとアイテムの関係テーブル
-CREATE TABLE IF NOT EXISTS ranking_group_items (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  group_id INTEGER NOT NULL,
-  ranking_item_id INTEGER NOT NULL,
-  display_order INTEGER DEFAULT 0,
-  is_featured BOOLEAN DEFAULT 0,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(group_id, ranking_item_id),
-  FOREIGN KEY (group_id) REFERENCES ranking_groups(id) ON DELETE CASCADE,
-  FOREIGN KEY (ranking_item_id) REFERENCES ranking_items(id) ON DELETE CASCADE
 );
 
 -- ============================================================================
