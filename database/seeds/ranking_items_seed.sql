@@ -1,8 +1,8 @@
 -- ランキング項目とサブカテゴリのマッピングデータ
 -- 作成日: 2025-10-27
 
--- 1. ranking_items_new にデータを投入
-INSERT INTO ranking_items_new (
+-- 1. ranking_items にデータを投入
+INSERT OR REPLACE INTO ranking_items (
   id, ranking_key, label, name, description, unit, data_source_id,
   map_color_scheme, map_diverging_midpoint, ranking_direction,
   conversion_factor, decimal_places, is_active, created_at, updated_at
@@ -79,5 +79,5 @@ SELECT
   ri.ranking_key,
   ri.label
 FROM subcategory_ranking_items sri
-JOIN ranking_items_new ri ON sri.ranking_item_id = ri.id
+JOIN ranking_items ri ON sri.ranking_item_id = ri.id
 ORDER BY sri.subcategory_id, sri.display_order;

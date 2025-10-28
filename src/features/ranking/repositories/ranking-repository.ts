@@ -15,8 +15,8 @@ import { buildEnvironmentConfig } from "@/lib/environment";
 import { getDataProvider } from "@/infrastructure/database";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
-import { QUERIES } from "../ranking-queries";
 import { RankingItem, RankingItemDB } from "../types";
+import { QUERIES } from "./ranking-queries";
 
 import type {
   RankingGroup,
@@ -307,7 +307,7 @@ export class RankingRepository {
   ): Promise<boolean> {
     try {
       const result = await this.db
-        .prepare(QUERIES.updateRankingItemOrder)
+        .prepare(QUERIES.updateRankingGroupItemOrder)
         .bind(displayOrder, id)
         .run();
 

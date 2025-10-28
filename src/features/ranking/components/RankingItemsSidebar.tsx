@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/atoms/ui/card";
 
-import { fetchRankingItemsBySubcategory } from "../ranking-items";
+import { fetchRankingItemsBySubcategory } from "../services/ranking-service";
 
 import { RankingItemCard } from "./RankingItemCard";
 

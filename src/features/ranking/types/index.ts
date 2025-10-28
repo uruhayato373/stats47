@@ -4,16 +4,19 @@
  */
 
 // ランキング項目とランキング値の型定義
-export * from "./item";
-
-// 統一ランキングデータの型定義（アダプターレイヤー用）
-export * from "./unified";
-
-// ランキング可視化オプションの型定義
-export * from "./visualization";
+export type {
+  RankingItem,
+  RankingItemDB,
+  RankingValue,
+  RankingValueDB,
+} from "./item";
 
 // ランキンググループの型定義
-export * from "./group";
+export type {
+  RankingGroup,
+  RankingGroupDB,
+  RankingGroupResponse,
+} from "./group";
 
 // ランキングサイドバーのProps型定義
 export interface RankingItemsSidebarProps {

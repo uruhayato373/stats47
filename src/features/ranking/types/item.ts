@@ -1,19 +1,4 @@
 /**
- * ランキング値の表示用ヘルパー関数
- */
-export function formatRankingValueDisplay(
-  value: number | undefined,
-  unit: string | undefined
-): string {
-  if (value === undefined || value === null) {
-    return "データなし";
-  }
-
-  const formattedValue = value.toLocaleString();
-  return unit ? `${formattedValue} ${unit}` : formattedValue;
-}
-
-/**
  * ランキング値の基本情報
  * データベースのranking_valuesテーブルに対応
  */
@@ -143,24 +128,6 @@ export interface RankingItem {
    * このランキング項目が有効かどうか
    */
   isActive: boolean;
-}
-
-/**
- * ランキングオプション（タブ項目）の構造
- * UIのタブ表示で使用される汎用的なオプション型
- */
-export interface RankingOption<T extends string> {
-  /**
-   * オプションの一意なキー
-   * タブの識別子として使用
-   */
-  key: T;
-
-  /**
-   * 表示用ラベル
-   * タブに表示されるテキスト
-   */
-  label: string;
 }
 
 /**

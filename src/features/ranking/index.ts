@@ -16,24 +16,23 @@ export {
 // ============================================================================
 // サービス
 // ============================================================================
-export { RankingService, type RankingConfig } from "./services/ranking-service";
-export { PrefectureRankingSettingsService } from "./services/settings-service";
+export {
+  fetchDefaultRankingKey,
+  fetchRankingConfig,
+  fetchRankingItemsBySubcategory,
+  updateVisualizationSettings,
+} from "./services/ranking-service";
+export type {
+  RankingConfig,
+  RankingConfigResponse,
+  SubcategoryConfig,
+} from "./services/ranking-service";
 
 // ============================================================================
 // リポジトリ
 // ============================================================================
 // Note: Repositories are server-only and should be imported directly when needed
 // export * from "./repositories";
-
-// ============================================================================
-// アダプター
-// ============================================================================
-export * from "./adapters";
-
-// ============================================================================
-// 計算器
-// ============================================================================
-export * from "./calculators";
 
 // ============================================================================
 // コンバーター
@@ -44,15 +43,3 @@ export * from "./converters";
 // 型定義
 // ============================================================================
 export type { RankingItem, RankingItemsSidebarProps } from "./types";
-
-// ============================================================================
-// ユーティリティ
-// ============================================================================
-export * from "./utils";
-
-// ============================================================================
-// その他
-// ============================================================================
-export * from "./ranking-items";
-export * from "./ranking-queries";
-export * from "./visualization-settings";

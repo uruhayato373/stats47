@@ -2,18 +2,9 @@
  * ランキンググループの型定義
  */
 
-import type { RankingItem } from "./item";
+import { Subcategory } from "@/features/category";
 
-/**
- * サブカテゴリ設定の型定義
- */
-export interface SubcategoryConfig {
-  id: string;
-  categoryId: string;
-  name: string;
-  description?: string;
-  defaultRankingKey: string;
-}
+import type { RankingItem } from "./item";
 
 /**
  * ランキンググループの型定義
@@ -34,7 +25,7 @@ export interface RankingGroup {
  * ランキンググループのレスポンス型定義
  */
 export interface RankingGroupResponse {
-  subcategory: SubcategoryConfig;
+  subcategory: Subcategory;
   groups: RankingGroup[];
   ungroupedItems: RankingItem[]; // グループに属さない項目
 }
@@ -53,16 +44,4 @@ export interface RankingGroupDB {
   is_collapsed: boolean;
   created_at: string;
   updated_at: string;
-}
-
-/**
- * ランキンググループアイテムのデータベース型定義
- */
-export interface RankingGroupItemDB {
-  id: number;
-  group_id: number;
-  ranking_item_id: number;
-  display_order: number;
-  is_featured: boolean;
-  created_at: string;
 }
