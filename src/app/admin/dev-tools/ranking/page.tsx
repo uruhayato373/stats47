@@ -1,3 +1,12 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/atoms/ui/table";
+
 import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
 
 /**
@@ -8,19 +17,8 @@ export default async function RankingsPage() {
   const items = await repository.getAllRankingItems();
 
   return (
-    <div className="min-h-screen bg-background pt-20">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              ランキング項目管理
-            </h1>
-            <p className="text-muted-foreground mt-2">
-              統計項目の設定と管理を行います
-            </p>
-          </div>
-        </div>
-
+    <div className="min-h-screen bg-background">
+      <div className="max-w-7xl mx-auto px-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -30,58 +28,51 @@ export default async function RankingsPage() {
               </button>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-2 font-medium">ID</th>
-                    <th className="text-left p-2 font-medium">
-                      ランキングキー
-                    </th>
-                    <th className="text-left p-2 font-medium">ラベル</th>
-                    <th className="text-left p-2 font-medium">単位</th>
-                    <th className="text-left p-2 font-medium">状態</th>
-                    <th className="text-left p-2 font-medium">操作</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item) => (
-                    <tr
-                      key={item.rankingKey}
-                      className="border-b hover:bg-muted/50"
-                    >
-                      <td className="p-2 text-sm">{item.rankingKey}</td>
-                      <td className="p-2 text-sm font-mono">
-                        {item.rankingKey}
-                      </td>
-                      <td className="p-2">{item.label}</td>
-                      <td className="p-2 text-sm">{item.unit}</td>
-                      <td className="p-2">
-                        <span
-                          className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
-                            item.isActive
-                              ? "bg-green-100 text-green-800"
-                              : "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {item.isActive ? "有効" : "無効"}
-                        </span>
-                      </td>
-                      <td className="p-2">
-                        <div className="flex gap-2">
-                          <button className="text-blue-600 hover:text-blue-800 text-sm">
-                            編集
-                          </button>
-                          <button className="text-red-600 hover:text-red-800 text-sm">
-                            削除
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>ID</TableHead>
+                  <TableHead>ランキングキー</TableHead>
+                  <TableHead>ラベル</TableHead>
+                  <TableHead>単位</TableHead>
+                  <TableHead>状態</TableHead>
+                  <TableHead>操作</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {items.map((item) => (
+                  <TableRow key={item.rankingKey}>
+                    <TableCell>{item.rankingKey}</TableCell>
+                    <TableCell className="font-mono">
+                      {item.rankingKey}
+                    </TableCell>
+                    <TableCell>{item.label}</TableCell>
+                    <TableCell>{item.unit}</TableCell>
+                    <TableCell>
+                      <span
+                        className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
+                          item.isActive
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                            : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                        }`}
+                      >
+                        {item.isActive ? "有効" : "無効"}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <button className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                          編集
+                        </button>
+                        <button className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
+                          削除
+                        </button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
 
             <div className="text-center text-sm text-muted-foreground">
               合計 {items.length} 件のランキング項目
