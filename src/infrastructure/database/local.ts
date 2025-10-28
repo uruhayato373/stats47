@@ -1,4 +1,6 @@
 import { buildEnvironmentConfig } from "@/lib/environment";
+import * as fs from "fs";
+import * as path from "path";
 
 /**
  * 開発環境用のローカルD1データベースクライアント
@@ -13,6 +15,27 @@ export const createLocalD1Database = async () => {
     const localD1Path =
       process.env.LOCAL_D1_PATH ||
       ".wrangler/state/v3/d1/miniflare-D1DatabaseObject/b3c084603f7be30f18c6a887d294217e3e6b2010e83e9d09910eae3515a26884.sqlite";
+
+    // ディレクトリの存在確認
+    const dbDir = path.dirname(localD1Path);
+    if (!fs.existsSync(dbDir)) {
+      throw new Error(
+        `Local D1 database directory does not exist: ${dbDir}\n\n` +
+          `Please run the following command to initialize the local database:\n` +
+          `  npm run db:init:local\n\n` +
+          `Or reset the local database:\n` +
+          `  npm run db:reset:local`
+      );
+    }
+
+    // ファイルの存在確認
+    if (!fs.existsSync(localD1Path)) {
+      throw new Error(
+        `Local D1 database file does not exist: ${localD1Path}\n\n` +
+          `Please run the following command to initialize the local database:\n` +
+          `  npm run db:init:local`
+      );
+    }
 
     // SQLite3を使用してローカルD1に接続
     const Database = require("better-sqlite3");

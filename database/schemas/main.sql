@@ -268,9 +268,6 @@ CREATE INDEX IF NOT EXISTS idx_ranking_values_area ON ranking_values(area_code);
 CREATE INDEX IF NOT EXISTS idx_ranking_values_time ON ranking_values(time_code);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);
-CREATE INDEX IF NOT EXISTS idx_ranking_group_items_group ON ranking_group_items(group_id);
-CREATE INDEX IF NOT EXISTS idx_ranking_group_items_item ON ranking_group_items(ranking_item_id);
-CREATE INDEX IF NOT EXISTS idx_ranking_group_items_order ON ranking_group_items(group_id, display_order);
 
 -- ダッシュボード関連インデックス
 CREATE INDEX IF NOT EXISTS idx_dashboard_configs_subcategory ON dashboard_configs(subcategory_id, area_type);
