@@ -30,10 +30,8 @@ export function useRankingItem(rankingKey: string): UseRankingItemReturn {
       try {
         setIsLoading(true);
         // API経由でランキング項目を取得
-        const baseUrl =
-          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
         const response = await fetch(
-          `${baseUrl}/api/rankings/item/${encodeURIComponent(rankingKey)}`,
+          `/api/rankings/item/${encodeURIComponent(rankingKey)}`,
           {
             method: "GET",
             headers: {
