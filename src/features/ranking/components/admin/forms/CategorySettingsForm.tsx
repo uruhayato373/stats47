@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Checkbox } from "@/components/atoms/ui/checkbox";
@@ -17,23 +17,26 @@ import {
   FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/atoms/ui/select";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 
-const groupItemSchema = z.object({
-  groupId: z.number(),
-  groupName: z.string(),
-  subcategoryId: z.string(),
-  isSelected: z.boolean(),
-  displayOrder: z.number().min(0).max(999),
+import categories from "@/config/categories.json";
+
+const categorySettingsSchema = z.object({
+  categoryId: z.string().min(1, "カテゴリを選択してください"),
+  subcategoryId: z.string().min(1, "サブカテゴリを選択してください"),
+  groupId: z.number().nullable(),
+  displayOrderInGroup: z.number().min(0).max(999),
   isFeatured: z.boolean(),
 });
 
-const categorySettingsSchema = z.object({
-  groups: z.array(groupItemSchema),
-});
-
 type CategorySettingsFormValues = z.infer<typeof categorySettingsSchema>;
-type GroupItem = z.infer<typeof groupItemSchema>;
 
 interface RankingGroup {
   id: number;
@@ -46,59 +49,65 @@ interface RankingGroup {
 
 interface CategorySettingsFormProps {
   item?: any;
-  rankingItemId?: number;
 }
 
-export function CategorySettingsForm({ item, rankingItemId }: CategorySettingsFormProps) {
+export function CategorySettingsForm({ item }: CategorySettingsFormProps) {
   const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<CategorySettingsFormValues>({
     resolver: zodResolver(categorySettingsSchema),
     defaultValues: {
-      groups: [],
+      categoryId: item?.categoryId || "",
+      subcategoryId: item?.subcategoryId || "",
+      groupId: item?.groupId || null,
+      displayOrderInGroup: item?.displayOrderInGroup || 0,
+      isFeatured: item?.isFeatured || false,
     },
   });
 
-  const { fields, replace } = useFieldArray({
-    control: form.control,
-    name: "groups",
-  });
+  const selectedCategoryId = form.watch("categoryId");
+  const selectedSubcategoryId = form.watch("subcategoryId");
 
-  // ranking_groups を取得
+  // 選択されたカテゴリのサブカテゴリを取得
+  const selectedCategory = categories.find((c) => c.id === selectedCategoryId);
+  const subcategories = selectedCategory?.subcategories || [];
+
+  // サブカテゴリ変更時にグループを取得
   useEffect(() => {
+    if (!selectedSubcategoryId) {
+      setAvailableGroups([]);
+      return;
+    }
+
     const fetchGroups = async () => {
       try {
         setLoading(true);
         // TODO: 実際のAPIエンドポイントから取得
-        // const response = await fetch("/api/admin/ranking-groups");
+        // const response = await fetch(`/api/admin/ranking-groups?subcategoryId=${selectedSubcategoryId}`);
         // const groups = await response.json();
-        
+
         // モックデータ
         const mockGroups: RankingGroup[] = [
-          { id: 1, groupKey: "population-basic", subcategoryId: "population", name: "人口統計", displayOrder: 0 },
-          { id: 2, groupKey: "economy-basic", subcategoryId: "economy", name: "経済統計", displayOrder: 0 },
-          { id: 3, groupKey: "society-basic", subcategoryId: "society", name: "社会統計", displayOrder: 0 },
-          { id: 4, groupKey: "environment-basic", subcategoryId: "environment", name: "環境統計", displayOrder: 0 },
+          {
+            id: 1,
+            groupKey: "basic-stats",
+            subcategoryId: selectedSubcategoryId,
+            name: "基本統計",
+            description: "基本的な統計指標",
+            displayOrder: 0,
+          },
+          {
+            id: 2,
+            groupKey: "detailed-stats",
+            subcategoryId: selectedSubcategoryId,
+            name: "詳細統計",
+            description: "詳細な統計指標",
+            displayOrder: 1,
+          },
         ];
 
         setAvailableGroups(mockGroups);
-
-        // 既存の設定を反映
-        const existingGroupIds = item?.groupIds || [];
-        const existingDisplayOrders = item?.displayOrders || {};
-        const existingFeatured = item?.featuredGroups || [];
-
-        const initialGroups: GroupItem[] = mockGroups.map((group) => ({
-          groupId: group.id,
-          groupName: group.name,
-          subcategoryId: group.subcategoryId,
-          isSelected: existingGroupIds.includes(group.id),
-          displayOrder: existingDisplayOrders[group.id] || 0,
-          isFeatured: existingFeatured.includes(group.id),
-        }));
-
-        replace(initialGroups);
       } catch (error) {
         console.error("グループ取得エラー:", error);
       } finally {
@@ -107,142 +116,161 @@ export function CategorySettingsForm({ item, rankingItemId }: CategorySettingsFo
     };
 
     fetchGroups();
-  }, [item, replace]);
+  }, [selectedSubcategoryId]);
+
+  // カテゴリ変更時にサブカテゴリをリセット
+  useEffect(() => {
+    if (selectedCategoryId && !subcategories.find((s) => s.id === selectedSubcategoryId)) {
+      form.setValue("subcategoryId", "");
+      form.setValue("groupId", null);
+    }
+  }, [selectedCategoryId, selectedSubcategoryId, subcategories, form]);
 
   const onSubmit = async (values: CategorySettingsFormValues) => {
-    try {
-      const selectedGroups = values.groups.filter((g) => g.isSelected);
-
-      // ranking_group_items テーブルへ保存するデータ
-      const groupItems = selectedGroups.map((group) => ({
-        groupId: group.groupId,
-        rankingItemId: rankingItemId,
-        displayOrder: group.displayOrder,
-        isFeatured: group.isFeatured,
-      }));
-
-      console.log("カテゴリ設定保存:", groupItems);
-      
-      // TODO: API呼び出し
-      // await fetch(`/api/admin/ranking-items/${rankingItemId}/groups`, {
-      //   method: "PUT",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ groups: groupItems }),
-      // });
-
-      alert("保存しました（モック）");
-    } catch (error) {
-      console.error("保存エラー:", error);
-      alert("保存に失敗しました");
-    }
+    console.log("カテゴリ設定保存:", values);
+    // TODO: API呼び出し
   };
-
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-20 w-full" />
-        <Skeleton className="h-20 w-full" />
-        <Skeleton className="h-20 w-full" />
-      </div>
-    );
-  }
 
   return (
     <Form {...form}>
       <div className="space-y-4">
-        <div className="space-y-4">
-          <div>
-            <FormLabel>ランキンググループ</FormLabel>
-            <FormDescription>
-              このランキング項目を含めるグループを選択してください
-            </FormDescription>
-          </div>
+        {/* カテゴリ・サブカテゴリ・グループ選択（3列） */}
+        <div className="grid grid-cols-3 gap-4">
+          <FormField
+            control={form.control}
+            name="categoryId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>カテゴリ *</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="カテゴリを選択" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="space-y-3 border rounded-lg p-4">
-            {fields.map((field, index) => (
-              <div
-                key={field.id}
-                className="flex items-start gap-3 p-3 border rounded-md bg-muted/50"
-              >
-                <FormField
-                  control={form.control}
-                  name={`groups.${index}.isSelected`}
-                  render={({ field }) => (
-                    <FormItem className="flex items-center space-y-0 mt-2">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+          <FormField
+            control={form.control}
+            name="subcategoryId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>サブカテゴリ *</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  disabled={!selectedCategoryId || subcategories.length === 0}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="サブカテゴリを選択" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {subcategories.map((subcategory) => (
+                      <SelectItem key={subcategory.id} value={subcategory.id}>
+                        {subcategory.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-                <div className="flex-1 space-y-2">
-                  <div>
-                    <p className="font-medium">{fields[index].groupName}</p>
-                    <p className="text-xs text-muted-foreground">
-                      サブカテゴリ: {fields[index].subcategoryId}
-                    </p>
-                  </div>
-
-                  {form.watch(`groups.${index}.isSelected`) && (
-                    <div className="grid grid-cols-2 gap-3">
-                      <FormField
-                        control={form.control}
-                        name={`groups.${index}.displayOrder`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-xs">表示順</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                min="0"
-                                max="999"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(parseInt(e.target.value, 10) || 0)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name={`groups.${index}.isFeatured`}
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2 space-y-0 pt-6">
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-xs font-normal">
-                              おすすめ
-                            </FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {fields.length === 0 && (
-            <p className="text-sm text-muted-foreground text-center py-8">
-              利用可能なグループがありません
-            </p>
-          )}
+          <FormField
+            control={form.control}
+            name="groupId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ランキンググループ *</FormLabel>
+                {loading ? (
+                  <Skeleton className="h-8 w-full" />
+                ) : (
+                  <Select
+                    onValueChange={(value) =>
+                      field.onChange(value ? parseInt(value, 10) : null)
+                    }
+                    value={field.value?.toString() || ""}
+                    disabled={!selectedSubcategoryId || availableGroups.length === 0}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="グループを選択" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {availableGroups.map((group) => (
+                        <SelectItem key={group.id} value={group.id.toString()}>
+                          {group.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
+        {/* グループ内設定 */}
+        {form.watch("groupId") && (
+          <div className="space-y-3 border rounded-lg p-4 bg-muted/30">
+            <h4 className="text-sm font-medium">グループ内設定</h4>
+
+            <FormField
+              control={form.control}
+              name="displayOrderInGroup"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>表示順</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min="0"
+                      max="999"
+                      {...field}
+                      onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 0)}
+                    />
+                  </FormControl>
+                  <FormDescription>グループ内での表示順序（0-999）</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="isFeatured"
+              render={({ field }) => (
+                <FormItem className="flex items-center space-x-2 space-y-0">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>おすすめ</FormLabel>
+                    <FormDescription>
+                      このランキング項目をおすすめとして強調表示
+                    </FormDescription>
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
+        )}
       </div>
     </Form>
   );
