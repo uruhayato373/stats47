@@ -73,7 +73,8 @@
       "Bash(curl:*)",
       "Bash(for file in docs/99_課題管理/*.md)",
       "Bash(head:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "WebFetch(domain:knip.dev)"
     ],
     "deny": [],
     "ask": []

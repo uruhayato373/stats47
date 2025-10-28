@@ -1,0 +1,65 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/app/**/{error,layout,loading,not-found,page,template,route}.{js,jsx,ts,tsx}!",
+    "src/middleware.ts",
+    "src/instrumentation.ts",
+    "scripts/**/*.{js,ts}",
+    ".storybook/**/*.{ts,tsx}"
+  ],
+  "project": [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "scripts/**/*.{js,ts}",
+    ".storybook/**/*.{ts,tsx}"
+  ],
+  "ignore": [
+    "**/__tests__/**",
+    "**/__debug__/**",
+    "**/*.test.{ts,tsx}",
+    "**/*.stories.{ts,tsx}",
+    "database/**",
+    "data/**",
+    ".next/**",
+    ".wrangler/**",
+    "storybook-static/**",
+    "coverage/**"
+  ],
+  "ignoreDependencies": [
+    "@types/*"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "ignoreWorkspaces": [],
+  "ignoreBinaries": [
+    "wrangler",
+    "tsx"
+  ],
+  "next": {
+    "entry": [
+      "next.config.ts"
+    ]
+  },
+  "vitest": {
+    "entry": [
+      "vitest.config.ts",
+      "src/**/*.test.{ts,tsx}",
+      ".storybook/vitest.setup.ts"
+    ]
+  },
+  "storybook": {
+    "entry": [
+      ".storybook/main.ts",
+      ".storybook/preview.tsx",
+      "src/**/*.stories.{ts,tsx}"
+    ]
+  },
+  "eslint": {
+    "entry": [
+      "eslint.config.mjs"
+    ]
+  },
+  "tailwind": {
+    "entry": [
+      "tailwind.config.ts"
+    ]
+  }
+}

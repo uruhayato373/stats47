@@ -16,6 +16,7 @@ export interface Category {
 export interface Subcategory {
   id: string;
   name: string;
+  categoryId?: string; // 親カテゴリID（オプショナル）
 }
 
 // ============================================================================
@@ -33,6 +34,19 @@ export * from "./utils";
 export function listCategories(): Category[] {
   const categoriesData = require("@/config/categories.json");
   return categoriesData.default || categoriesData;
+}
+
+/**
+ * 全サブカテゴリを取得
+ */
+export async function getSubcategories(): Promise<Subcategory[]> {
+  const categories = listCategories();
+  return categories.flatMap((category) =>
+    category.subcategories.map((sub) => ({
+      ...sub,
+      categoryId: category.id,
+    }))
+  );
 }
 
 /**

@@ -1,5 +1,4 @@
-
-import { Database, FileText, List, Settings } from "lucide-react";
+import { Database, FileText, FolderTree, List, Settings } from "lucide-react";
 
 import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
 
@@ -65,6 +64,10 @@ export function AdminSidebar() {
             <ActiveSidebarMenuButton href="/admin/dev-tools/ranking-items">
               <List className="size-4" />
               <span>ランキング項目</span>
+            </ActiveSidebarMenuButton>
+            <ActiveSidebarMenuButton href="/admin/dev-tools/ranking-groups">
+              <FolderTree className="size-4" />
+              <span>ランキンググループ</span>
             </ActiveSidebarMenuButton>
           </div>
         </div>
