@@ -4,8 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/atoms/ui/button";
-import { Checkbox } from "@/components/atoms/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -16,13 +14,7 @@ import {
   FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/atoms/ui/select";
+import { Switch } from "@/components/atoms/ui/switch";
 import { Textarea } from "@/components/atoms/ui/textarea";
 
 const basicInfoSchema = z.object({
@@ -30,7 +22,6 @@ const basicInfoSchema = z.object({
   label: z.string().min(1).max(50),
   name: z.string().min(1).max(100),
   unit: z.string().min(1).max(20),
-  dataSourceId: z.enum(["estat", "custom"]),
   description: z.string().max(500).optional(),
   isActive: z.boolean(),
 });
@@ -50,7 +41,6 @@ export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
       label: item?.label || "",
       name: item?.name || "",
       unit: item?.unit || "",
-      dataSourceId: item?.dataSourceId || "estat",
       description: item?.description || "",
       isActive: item?.isActive ?? true,
     },
@@ -63,70 +53,25 @@ export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="rankingKey"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>ランキングキー *</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  disabled={mode === "edit"}
-                  placeholder="population-density"
-                />
-              </FormControl>
-              <FormDescription>
-                英数字、ハイフン、アンダースコアのみ使用可能
-                {mode === "edit" && "（編集不可）"}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="label"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>表示ラベル *</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="人口密度" />
-              </FormControl>
-              <FormDescription>UI表示用の短い名前</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>項目名 *</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="人口密度（人/km²）" />
-              </FormControl>
-              <FormDescription>統計項目の正式名称</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+      <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}
-            name="unit"
+            name="rankingKey"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>単位 *</FormLabel>
+                <FormLabel>ランキングキー *</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="人/km²" />
+                  <Input
+                    {...field}
+                    disabled={mode === "edit"}
+                    placeholder="population-density"
+                  />
                 </FormControl>
-                <FormDescription>データの単位</FormDescription>
+                <FormDescription>
+                  英数字、ハイフン、アンダースコアのみ使用可能
+                  {mode === "edit" && "（編集不可）"}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -134,22 +79,71 @@ export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
 
           <FormField
             control={form.control}
-            name="dataSourceId"
+            name="isActive"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>データソース *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormLabel>ステータス</FormLabel>
+                <div className="flex items-center space-x-2">
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="データソースを選択" />
-                    </SelectTrigger>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="estat">e-Stat</SelectItem>
-                    <SelectItem value="custom">カスタム</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription>データ取得元</FormDescription>
+                  <span className="text-sm font-medium">
+                    {field.value ? "有効" : "無効"}
+                  </span>
+                </div>
+                <FormDescription>
+                  このランキング項目の有効/無効を切り替え
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="grid grid-cols-3 gap-4">
+          <FormField
+            control={form.control}
+            name="label"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>表示ラベル *</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="人口密度" />
+                </FormControl>
+                <FormDescription>UI表示用の短い名前</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>項目名 *</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="人口密度（人/km²）" />
+                </FormControl>
+                <FormDescription>統計項目の正式名称</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="unit"
+            render={({ field }) => (
+              <FormItem className="w-32">
+                <FormLabel>単位 *</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="人/km²" />
+                </FormControl>
+                <FormDescription>データの単位</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -175,33 +169,7 @@ export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="isActive"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>有効にする</FormLabel>
-                <FormDescription>
-                  このランキング項目を有効にする
-                </FormDescription>
-              </div>
-            </FormItem>
-          )}
-        />
-
-        <div className="flex justify-end">
-          <Button type="submit" disabled={mode === "edit"}>
-            {mode === "create" ? "作成" : "保存"}
-          </Button>
-        </div>
-      </form>
+      </div>
     </Form>
   );
 }

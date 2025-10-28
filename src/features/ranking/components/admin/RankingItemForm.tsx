@@ -1,6 +1,7 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import { Button } from "@/components/atoms/ui/button";
+import { Separator } from "@/components/atoms/ui/separator";
 
 import { BasicInfoForm } from "./forms/BasicInfoForm";
 import { CategorySettingsForm } from "./forms/CategorySettingsForm";
@@ -25,38 +26,57 @@ interface RankingItemFormProps {
 }
 
 export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: 全フォームデータを統合して保存
+    console.log("統合保存処理");
+  };
+
   return (
-    <Tabs defaultValue="basic" className="w-full">
-      <TabsList className="grid w-full grid-cols-5">
-        <TabsTrigger value="basic">基本情報</TabsTrigger>
-        <TabsTrigger value="datasource">データソース</TabsTrigger>
-        <TabsTrigger value="categories">カテゴリ</TabsTrigger>
-        <TabsTrigger value="visualization">可視化</TabsTrigger>
-        {mode === "edit" && <TabsTrigger value="danger">危険な操作</TabsTrigger>}
-      </TabsList>
-
-      <TabsContent value="basic" className="mt-6">
+    <form onSubmit={handleSubmit} className="w-full space-y-4">
+      {/* 基本情報 */}
+      <section>
         <BasicInfoForm item={item} mode={mode} />
-      </TabsContent>
+      </section>
 
-      <TabsContent value="datasource" className="mt-6">
+
+      {/* データソース設定 */}
+      <section>
         <DataSourceMetadataForm item={item} />
-      </TabsContent>
+      </section>
 
-      <TabsContent value="categories" className="mt-6">
+
+      {/* カテゴリ設定 */}
+      <section>
         <CategorySettingsForm item={item} />
-      </TabsContent>
+      </section>
 
-      <TabsContent value="visualization" className="mt-6">
+
+      {/* 可視化設定 */}
+      <section>
         <VisualizationForm item={item} />
-      </TabsContent>
+      </section>
 
+      {/* 統合保存ボタン */}
+      <div className="sticky bottom-0 bg-background py-4 border-t flex justify-end gap-2">
+        <Button type="button" variant="outline">
+          キャンセル
+        </Button>
+        <Button type="submit">
+          {mode === "create" ? "作成" : "保存"}
+        </Button>
+      </div>
+
+      {/* 危険な操作（編集時のみ） */}
       {mode === "edit" && rankingKey && (
-        <TabsContent value="danger" className="mt-6">
-          <DangerZone rankingKey={rankingKey} />
-        </TabsContent>
+        <>
+          <Separator />
+          <section>
+            <DangerZone rankingKey={rankingKey} />
+          </section>
+        </>
       )}
-    </Tabs>
+    </form>
   );
 }
 

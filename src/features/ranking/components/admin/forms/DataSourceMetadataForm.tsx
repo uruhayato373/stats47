@@ -1,18 +1,25 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Plus, Trash2 } from "lucide-react";
+import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
+import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
 import {
@@ -22,15 +29,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/atoms/ui/toggle-group";
 
-const dataSourceMetadataSchema = z.object({
+// メタデータのスキーマ（計算タイプに応じて変わる）
+const directMetadataSchema = z.object({
+  stats_data_id: z.string().min(1, "統計データIDは必須です"),
+  cd_cat01: z.string().min(1, "分類コードは必須です"),
+});
+
+const ratioMetadataSchema = z.object({
+  numerator: z.string().min(1, "分子は必須です"),
+  denominator: z.string().min(1, "分母は必須です"),
+  multiplier: z.number().min(0, "乗数は0以上である必要があります"),
+});
+
+const aggregateMetadataSchema = z.object({
+  // 将来の拡張用
+});
+
+const metadataItemSchema = z.object({
+  dataSourceId: z.enum(["estat", "custom"]),
   areaType: z.enum(["prefecture", "city", "national"]),
   calculationType: z.enum(["direct", "ratio", "aggregate"]),
-  statsDataId: z.string().optional(),
-  cdCat01: z.string().optional(),
-  numerator: z.string().optional(),
-  denominator: z.string().optional(),
-  multiplier: z.number().optional(),
+  metadata: z.union([directMetadataSchema, ratioMetadataSchema, aggregateMetadataSchema]),
+});
+
+const dataSourceMetadataSchema = z.object({
+  metadataItems: z.array(metadataItemSchema),
 });
 
 type DataSourceMetadataFormValues = z.infer<typeof dataSourceMetadataSchema>;
@@ -43,176 +71,277 @@ export function DataSourceMetadataForm({ item }: DataSourceMetadataFormProps) {
   const form = useForm<DataSourceMetadataFormValues>({
     resolver: zodResolver(dataSourceMetadataSchema),
     defaultValues: {
-      areaType: item?.areaType || "prefecture",
-      calculationType: item?.calculationType || "direct",
-      statsDataId: item?.statsDataId || "",
-      cdCat01: item?.cdCat01 || "",
-      numerator: item?.numerator || "",
-      denominator: item?.denominator || "",
-      multiplier: item?.multiplier || 1,
+      metadataItems: item?.metadataItems || [
+        {
+          dataSourceId: "estat",
+          areaType: "prefecture",
+          calculationType: "direct",
+          metadata: {
+            stats_data_id: "",
+            cd_cat01: "",
+          },
+        },
+      ],
     },
   });
 
-  const calculationType = form.watch("calculationType");
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "metadataItems",
+  });
 
   const onSubmit = (values: DataSourceMetadataFormValues) => {
     console.log("データソース設定フォーム送信:", values);
     // TODO: API呼び出し
   };
 
+  const addMetadata = () => {
+    append({
+      dataSourceId: "estat",
+      areaType: "prefecture",
+      calculationType: "direct",
+      metadata: {
+        stats_data_id: "",
+        cd_cat01: "",
+      },
+    });
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="areaType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>エリアタイプ *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="エリアタイプを選択" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="prefecture">都道府県</SelectItem>
-                    <SelectItem value="city">市区町村</SelectItem>
-                    <SelectItem value="national">全国</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription>データの集計単位</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="calculationType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>計算タイプ *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="計算タイプを選択" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="direct">直接値</SelectItem>
-                    <SelectItem value="ratio">比率</SelectItem>
-                    <SelectItem value="aggregate">集計</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription>データの計算方法</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {calculationType === "direct" && (
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="statsDataId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>統計データID</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="0000010102" />
-                  </FormControl>
-                  <FormDescription>e-Stat の統計データID</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="cdCat01"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>分類コード</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="B1101" />
-                  </FormControl>
-                  <FormDescription>e-Stat の分類コード</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        )}
-
-        {calculationType === "ratio" && (
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="numerator"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>分子</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="人口" />
-                  </FormControl>
-                  <FormDescription>比率計算の分子</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="denominator"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>分母</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="面積" />
-                  </FormControl>
-                  <FormDescription>比率計算の分母</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="multiplier"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>乗数</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      value={field.value || 1}
-                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 1)}
-                    />
-                  </FormControl>
-                  <FormDescription>比率計算の乗数（例: 1000）</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        )}
-
-        {calculationType === "aggregate" && (
-          <div className="p-4 bg-muted rounded-lg">
-            <p className="text-sm text-muted-foreground">
-              集計タイプの設定は後ほど実装予定です。
+      <div className="space-y-4">
+        <div className="flex justify-between items-center">
+          <div>
+            <h3 className="text-sm font-medium">データソースメタデータ</h3>
+            <p className="text-[10px] text-muted-foreground pl-2">
+              複数のデータソースを設定できます
             </p>
           </div>
-        )}
-
-        <div className="flex justify-end">
-          <Button type="submit">保存</Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={addMetadata}
+          >
+            <Plus className="h-4 w-4 mr-1" />
+            追加
+          </Button>
         </div>
-      </form>
+
+        <div className="grid grid-cols-2 gap-4">
+          {fields.map((field, index) => {
+            const calculationType = form.watch(
+              `metadataItems.${index}.calculationType`
+            );
+            return (
+              <Card key={field.id}>
+                <CardHeader className="pb-3">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-sm">
+                        データソース {index + 1}
+                      </CardTitle>
+                      <CardDescription className="text-[10px]">
+                        メタデータ設定
+                      </CardDescription>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => remove(index)}
+                      disabled={fields.length === 1}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <FormField
+                    control={form.control}
+                    name={`metadataItems.${index}.dataSourceId`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>データソース *</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="選択" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="estat">e-Stat</SelectItem>
+                            <SelectItem value="custom">カスタム</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`metadataItems.${index}.areaType`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>エリアタイプ *</FormLabel>
+                        <FormControl>
+                          <ToggleGroup
+                            type="single"
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            variant="outline"
+                            className="flex-wrap"
+                          >
+                            <ToggleGroupItem value="prefecture">
+                              都道府県
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="city">
+                              市区町村
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="national">
+                              全国
+                            </ToggleGroupItem>
+                          </ToggleGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`metadataItems.${index}.calculationType`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>計算タイプ *</FormLabel>
+                        <FormControl>
+                          <ToggleGroup
+                            type="single"
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            variant="outline"
+                            className="flex-wrap"
+                          >
+                            <ToggleGroupItem value="direct">
+                              直接値
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="ratio">
+                              比率
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="aggregate">
+                              集計
+                            </ToggleGroupItem>
+                          </ToggleGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {calculationType === "direct" && (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name={`metadataItems.${index}.metadata.stats_data_id`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>統計データID *</FormLabel>
+                            <FormControl>
+                              <Input {...field} placeholder="0000010102" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`metadataItems.${index}.metadata.cd_cat01`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>分類コード *</FormLabel>
+                            <FormControl>
+                              <Input {...field} placeholder="B1101" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+
+                  {calculationType === "ratio" && (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name={`metadataItems.${index}.metadata.numerator`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>分子 *</FormLabel>
+                            <FormControl>
+                              <Input {...field} placeholder="人口" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`metadataItems.${index}.metadata.denominator`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>分母 *</FormLabel>
+                            <FormControl>
+                              <Input {...field} placeholder="面積" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`metadataItems.${index}.metadata.multiplier`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>乗数 *</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="number"
+                                {...field}
+                                value={field.value || 1}
+                                onChange={(e) =>
+                                  field.onChange(
+                                    parseFloat(e.target.value) || 1
+                                  )
+                                }
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+
+                  {calculationType === "aggregate" && (
+                    <div className="p-3 bg-muted rounded-lg">
+                      <p className="text-[10px] text-muted-foreground">
+                        集計タイプの設定は後ほど実装予定です。
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
     </Form>
   );
 }

@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/atoms/ui/button";
 import {
   Form,
   FormControl,
@@ -67,7 +66,7 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <div className="space-y-4">
         <FormField
           control={form.control}
           name="mapColorScheme"
@@ -205,10 +204,7 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
           />
         </div>
 
-        <div className="flex justify-end">
-          <Button type="submit">保存</Button>
-        </div>
-      </form>
+      </div>
     </Form>
   );
 }

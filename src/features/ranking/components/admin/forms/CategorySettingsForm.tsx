@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/atoms/ui/button";
 import { Checkbox } from "@/components/atoms/ui/checkbox";
 import {
   Form,
@@ -151,7 +150,7 @@ export function CategorySettingsForm({ item, rankingItemId }: CategorySettingsFo
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <div className="space-y-4">
         <div className="space-y-4">
           <div>
             <FormLabel>ランキンググループ</FormLabel>
@@ -244,13 +243,7 @@ export function CategorySettingsForm({ item, rankingItemId }: CategorySettingsFo
           )}
         </div>
 
-        <div className="flex justify-end gap-2">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
-            リセット
-          </Button>
-          <Button type="submit">保存</Button>
-        </div>
-      </form>
+      </div>
     </Form>
   );
 }
