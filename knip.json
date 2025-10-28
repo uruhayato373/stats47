@@ -1,16 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    "src/app/**/{error,layout,loading,not-found,page,template,route}.{js,jsx,ts,tsx}!",
-    "src/middleware.ts",
-    "src/instrumentation.ts",
-    "scripts/**/*.{js,ts}",
-    ".storybook/**/*.{ts,tsx}"
+    "src/app/**/{error,layout,loading,not-found,page,template,route}.{js,jsx,ts,tsx}!"
   ],
   "project": [
-    "src/**/*.{js,jsx,ts,tsx}",
-    "scripts/**/*.{js,ts}",
-    ".storybook/**/*.{ts,tsx}"
+    "src/**/*.{js,jsx,ts,tsx}"
   ],
   "ignore": [
     "**/__tests__/**",
@@ -25,13 +19,16 @@
     "coverage/**"
   ],
   "ignoreDependencies": [
-    "@types/*"
+    "@types/*",
+    "eslint-config-next",
+    "postcss"
   ],
   "ignoreExportsUsedInFile": true,
   "ignoreWorkspaces": [],
   "ignoreBinaries": [
     "wrangler",
-    "tsx"
+    "tsx",
+    "du"
   ],
   "next": {
     "entry": [
@@ -46,8 +43,10 @@
     ]
   },
   "storybook": {
+    "config": [
+      ".storybook/main.ts"
+    ],
     "entry": [
-      ".storybook/main.ts",
       ".storybook/preview.tsx",
       "src/**/*.stories.{ts,tsx}"
     ]
