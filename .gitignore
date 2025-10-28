@@ -52,3 +52,6 @@ database/backups/*.json
 
 # Obsidian workspace files
 docs/.obsidian
+
+# Wrangler local state
+.wrangler
