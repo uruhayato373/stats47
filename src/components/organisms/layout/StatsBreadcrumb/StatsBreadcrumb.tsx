@@ -34,6 +34,7 @@ export const StatsBreadcrumb = () => {
   // ページタイプの表示名マッピング
   const pageTypeNames: Record<string, string> = {
     area: "地域別",
+    dashboard: "ダッシュボード",
     ranking: "ランキング",
   };
 

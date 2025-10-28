@@ -1,6 +1,7 @@
 import { buildEnvironmentConfig } from "@/lib/environment";
 
 import { createLocalD1Database } from "./local";
+import { mockDataProvider } from "./mock";
 import { createRemoteD1Database } from "./remote";
 
 /**
@@ -42,7 +43,7 @@ export const getDataProvider = async () => {
 };
 
 // 後方互換性のため個別エクスポートも提供
-export { createLocalD1Database, createRemoteD1Database };
+export { createLocalD1Database, createRemoteD1Database, mockDataProvider };
 
 // ストレージサブドメイン
 export * from "./storage";

@@ -1,6 +1,6 @@
 import type { AreaType } from "@/features/ranking/types";
 import { getDataProvider } from "@/infrastructure/database";
-import { MockDataProvider } from "@/infrastructure/database/mock";
+import type { MockDataProvider } from "@/infrastructure/database/mock";
 import { buildEnvironmentConfig } from "@/lib/environment";
 
 import type {
