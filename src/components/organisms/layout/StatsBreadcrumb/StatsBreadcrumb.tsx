@@ -73,9 +73,12 @@ export const StatsBreadcrumb = () => {
         {pageType && pageTypeNames[pageType] && (
           <>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground/70">
+            <Link
+              href={`/${categoryId}/${subcategoryId}/${pageType}`}
+              className="transition-colors hover:text-foreground"
+            >
               {pageTypeNames[pageType]}
-            </span>
+            </Link>
           </>
         )}
         {areaCode && (
