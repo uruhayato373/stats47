@@ -19,19 +19,18 @@ export const QUERIES = {
   getRankingItemsBySubcategory: `
     SELECT 
       rg.subcategory_id,
-      rg.id as group_id,
+      rg.group_key,
       rg.name as group_name,
       rg.description as group_description,
       rg.icon as group_icon,
       rg.display_order as group_display_order,
       rg.is_collapsed,
-      ri.id,
       ri.ranking_key,
       ri.label,
       ri.unit,
       ri.name as ranking_name,
       ri.is_active,
-      ri.group_id,
+      ri.group_key,
       ri.display_order_in_group,
       ri.is_featured,
       ri.map_color_scheme,
@@ -44,16 +43,17 @@ export const QUERIES = {
       ri.description,
       ri.data_source_id
     FROM ranking_groups rg
-    LEFT JOIN ranking_items ri ON rg.id = ri.group_id AND ri.is_active = 1
+    LEFT JOIN ranking_items ri ON rg.group_key = ri.group_key AND ri.is_active = 1
     WHERE rg.subcategory_id = ?
     ORDER BY rg.display_order, ri.display_order_in_group
   `,
 
   /**
-   * 単一のランキング項目を取得
+   * 単一のランキング項目を取得（非推奨：getRankingItemByKey を使用）
+   * @deprecated このクエリは使用されません。getRankingItemByKeyを使用してください。
    */
   getRankingItemById: `
-    SELECT * FROM ranking_items WHERE id = ?
+    SELECT * FROM ranking_items WHERE ranking_key = ?
   `,
 
   /**
@@ -109,20 +109,20 @@ export const QUERIES = {
     SET 
       display_order_in_group = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 
   /**
-   * ランキング項目のグループIDを更新
+   * ランキング項目のグループキーを更新
    */
   updateRankingItemGroup: `
     UPDATE ranking_items 
     SET 
-      group_id = ?,
+      group_key = ?,
       display_order_in_group = ?,
       is_featured = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 
   /**
@@ -169,18 +169,18 @@ export const GROUP_QUERIES = {
   getAllGroups: `
     SELECT 
       rg.*,
-      COUNT(ri.id) as item_count
+      COUNT(ri.ranking_key) as item_count
     FROM ranking_groups rg
-    LEFT JOIN ranking_items ri ON rg.id = ri.group_id AND ri.is_active = 1
-    GROUP BY rg.id
+    LEFT JOIN ranking_items ri ON rg.group_key = ri.group_key AND ri.is_active = 1
+    GROUP BY rg.group_key
     ORDER BY rg.subcategory_id, rg.display_order
   `,
 
   /**
-   * ID でランキンググループを取得
+   * group_key でランキンググループを取得
    */
-  getGroupById: `
-    SELECT * FROM ranking_groups WHERE id = ?
+  getGroupByKey: `
+    SELECT * FROM ranking_groups WHERE group_key = ?
   `,
 
   /**
@@ -198,28 +198,27 @@ export const GROUP_QUERIES = {
   updateGroup: `
     UPDATE ranking_groups 
     SET 
-      group_key = ?, 
       name = ?, 
       description = ?, 
       icon = ?, 
       display_order = ?, 
       is_collapsed = ?, 
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE group_key = ?
   `,
 
   /**
    * ランキンググループを削除
    */
   deleteGroup: `
-    DELETE FROM ranking_groups WHERE id = ?
+    DELETE FROM ranking_groups WHERE group_key = ?
   `,
 
   /**
    * グループの表示順を更新
    */
   updateGroupOrder: `
-    UPDATE ranking_groups SET display_order = ? WHERE id = ?
+    UPDATE ranking_groups SET display_order = ? WHERE group_key = ?
   `,
 
   /**
@@ -228,10 +227,10 @@ export const GROUP_QUERIES = {
   assignItemToGroup: `
     UPDATE ranking_items 
     SET 
-      group_id = ?, 
+      group_key = ?, 
       display_order_in_group = ?, 
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 
   /**
@@ -240,10 +239,10 @@ export const GROUP_QUERIES = {
   removeItemFromGroup: `
     UPDATE ranking_items 
     SET 
-      group_id = NULL, 
+      group_key = NULL, 
       display_order_in_group = 0, 
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 } as const;
 

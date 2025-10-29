@@ -54,7 +54,9 @@ export async function listCategories(): Promise<Category[]> {
   // 各カテゴリのサブカテゴリも取得
   const categoriesWithSubcategories = await Promise.all(
     categories.map(async (category) => {
-      const subcategories = await findSubcategoriesByCategory(category.id);
+      const subcategories = await findSubcategoriesByCategory(
+        category.category_name
+      );
       return convertCategoryFromDB(category, subcategories);
     })
   );
@@ -63,42 +65,19 @@ export async function listCategories(): Promise<Category[]> {
 }
 
 /**
- * カテゴリIDでカテゴリを検索
+ * カテゴリ名でカテゴリを検索
  *
- * @param id - カテゴリのID
+ * @param categoryName - カテゴリの名前
  * @returns カテゴリ、または存在しない場合はnull
  */
-export async function findCategoryById(id: number): Promise<Category | null> {
-  const db = await getDataProvider();
-
-  const result = await db
-    .prepare(CATEGORY_QUERIES.findCategoryById)
-    .bind(id)
-    .first();
-
-  if (!result) {
-    return null;
-  }
-
-  const dbCategory = result as unknown as CategoryDB;
-  const subcategories = await findSubcategoriesByCategory(id);
-  return convertCategoryFromDB(dbCategory, subcategories);
-}
-
-/**
- * カテゴリキーでカテゴリを検索
- *
- * @param categoryKey - カテゴリのキー（例: "population"）
- * @returns カテゴリ、または存在しない場合はnull
- */
-export async function findCategoryByKey(
-  categoryKey: string
+export async function findCategoryByName(
+  categoryName: string
 ): Promise<Category | null> {
   const db = await getDataProvider();
 
   const result = await db
-    .prepare(CATEGORY_QUERIES.findCategoryByKey)
-    .bind(categoryKey)
+    .prepare(CATEGORY_QUERIES.findCategoryByName)
+    .bind(categoryName)
     .first();
 
   if (!result) {
@@ -106,7 +85,7 @@ export async function findCategoryByKey(
   }
 
   const dbCategory = result as unknown as CategoryDB;
-  const subcategories = await findSubcategoriesByCategory(dbCategory.id);
+  const subcategories = await findSubcategoriesByCategory(categoryName);
   return convertCategoryFromDB(dbCategory, subcategories);
 }
 
@@ -124,15 +103,14 @@ export async function createCategory(
 
   const result = await db
     .prepare(CATEGORY_QUERIES.createCategory)
-    .bind(data.categoryKey, data.name, data.icon || null, data.displayOrder)
+    .bind(data.categoryName, data.name, data.icon || null, data.displayOrder)
     .run();
 
   if (!result.success) {
     throw new Error("Failed to create category");
   }
 
-  const lastRowId = (result.meta as any).last_row_id as number;
-  const createdCategory = await findCategoryById(lastRowId);
+  const createdCategory = await findCategoryByName(data.categoryName);
   if (!createdCategory) {
     throw new Error("Failed to retrieve created category");
   }
@@ -142,13 +120,13 @@ export async function createCategory(
 /**
  * カテゴリを更新
  *
- * @param id - 更新するカテゴリのID
+ * @param categoryName - 更新するカテゴリの名前
  * @param data - カテゴリ更新時の入力データ（部分更新可）
  * @returns 更新されたカテゴリ、またはnull
  * @throws Error - カテゴリの更新に失敗した場合
  */
 export async function updateCategory(
-  id: number,
+  categoryName: string,
   data: UpdateCategoryInput
 ): Promise<Category | null> {
   const db = await getDataProvider();
@@ -156,9 +134,9 @@ export async function updateCategory(
   const fields: string[] = [];
   const values: (string | number | null)[] = [];
 
-  if (data.categoryKey !== undefined) {
-    fields.push("category_key = ?");
-    values.push(data.categoryKey);
+  if (data.categoryName !== undefined) {
+    fields.push("category_name = ?");
+    values.push(data.categoryName);
   }
   if (data.name !== undefined) {
     fields.push("name = ?");
@@ -173,10 +151,12 @@ export async function updateCategory(
     values.push(data.displayOrder);
   }
 
-  values.push(id);
+  values.push(categoryName);
 
   const result = await db
-    .prepare(`UPDATE categories SET ${fields.join(", ")} WHERE id = ?`)
+    .prepare(
+      `UPDATE categories SET ${fields.join(", ")} WHERE category_name = ?`
+    )
     .bind(...values)
     .run();
 
@@ -184,21 +164,22 @@ export async function updateCategory(
     throw new Error("Failed to update category");
   }
 
-  return findCategoryById(id);
+  const updatedName = data.categoryName || categoryName;
+  return findCategoryByName(updatedName);
 }
 
 /**
  * カテゴリを削除
  *
- * @param id - 削除するカテゴリのID
+ * @param categoryName - 削除するカテゴリの名前
  * @returns 削除が成功したかどうか
  */
-export async function deleteCategory(id: number): Promise<boolean> {
+export async function deleteCategory(categoryName: string): Promise<boolean> {
   const db = await getDataProvider();
 
   const result = await db
     .prepare(CATEGORY_QUERIES.deleteCategory)
-    .bind(id)
+    .bind(categoryName)
     .run();
 
   return result.success;
@@ -227,21 +208,21 @@ export async function listSubcategories(): Promise<Subcategory[]> {
 }
 
 /**
- * カテゴリIDでサブカテゴリを検索
+ * カテゴリ名でサブカテゴリを検索
  *
  * 指定されたカテゴリに属するすべてのサブカテゴリを取得します。
  *
- * @param categoryId - カテゴリのID
+ * @param categoryName - カテゴリの名前
  * @returns サブカテゴリの配列
  */
 export async function findSubcategoriesByCategory(
-  categoryId: number
+  categoryName: string
 ): Promise<Subcategory[]> {
   const db = await getDataProvider();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.findSubcategoriesByCategory)
-    .bind(categoryId)
+    .bind(categoryName)
     .all();
 
   return ((result.results || []) as unknown as SubcategoryDB[]).map(
@@ -250,42 +231,19 @@ export async function findSubcategoriesByCategory(
 }
 
 /**
- * サブカテゴリIDでサブカテゴリを検索
+ * サブカテゴリ名でサブカテゴリを検索
  *
- * @param id - サブカテゴリのID
+ * @param subcategoryName - サブカテゴリの名前（例: "basic-population"）
  * @returns サブカテゴリ、または存在しない場合はnull
  */
-export async function findSubcategoryById(
-  id: number
+export async function findSubcategoryByName(
+  subcategoryName: string
 ): Promise<Subcategory | null> {
   const db = await getDataProvider();
 
   const result = await db
-    .prepare(SUBCATEGORY_QUERIES.findSubcategoryById)
-    .bind(id)
-    .first();
-
-  if (!result) {
-    return null;
-  }
-
-  return convertSubcategoryFromDB(result as unknown as SubcategoryDB);
-}
-
-/**
- * サブカテゴリキーでサブカテゴリを検索
- *
- * @param subcategoryKey - サブカテゴリのキー（例: "basic-population"）
- * @returns サブカテゴリ、または存在しない場合はnull
- */
-export async function findSubcategoryByKey(
-  subcategoryKey: string
-): Promise<Subcategory | null> {
-  const db = await getDataProvider();
-
-  const result = await db
-    .prepare(SUBCATEGORY_QUERIES.findSubcategoryByKey)
-    .bind(subcategoryKey)
+    .prepare(SUBCATEGORY_QUERIES.findSubcategoryByName)
+    .bind(subcategoryName)
     .first();
 
   if (!result) {
@@ -309,15 +267,14 @@ export async function createSubcategory(
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.createSubcategory)
-    .bind(data.subcategoryKey, data.name, data.categoryId, data.displayOrder)
+    .bind(data.subcategoryName, data.name, data.categoryName, data.displayOrder)
     .run();
 
   if (!result.success) {
     throw new Error("Failed to create subcategory");
   }
 
-  const lastRowId = (result.meta as any).last_row_id as number;
-  const createdSubcategory = await findSubcategoryById(lastRowId);
+  const createdSubcategory = await findSubcategoryByName(data.subcategoryName);
   if (!createdSubcategory) {
     throw new Error("Failed to retrieve created subcategory");
   }
@@ -327,13 +284,13 @@ export async function createSubcategory(
 /**
  * サブカテゴリを更新
  *
- * @param id - 更新するサブカテゴリのID
+ * @param subcategoryName - 更新するサブカテゴリの名前
  * @param data - サブカテゴリ更新時の入力データ（部分更新可）
  * @returns 更新されたサブカテゴリ、またはnull
  * @throws Error - サブカテゴリの更新に失敗した場合
  */
 export async function updateSubcategory(
-  id: number,
+  subcategoryName: string,
   data: UpdateSubcategoryInput
 ): Promise<Subcategory | null> {
   const db = await getDataProvider();
@@ -341,27 +298,29 @@ export async function updateSubcategory(
   const fields: string[] = [];
   const values: (string | number | null)[] = [];
 
-  if (data.subcategoryKey !== undefined) {
-    fields.push("subcategory_key = ?");
-    values.push(data.subcategoryKey);
+  if (data.subcategoryName !== undefined) {
+    fields.push("subcategory_name = ?");
+    values.push(data.subcategoryName);
   }
   if (data.name !== undefined) {
     fields.push("name = ?");
     values.push(data.name);
   }
-  if (data.categoryId !== undefined) {
-    fields.push("category_id = ?");
-    values.push(data.categoryId);
+  if (data.categoryName !== undefined) {
+    fields.push("category_name = ?");
+    values.push(data.categoryName);
   }
   if (data.displayOrder !== undefined) {
     fields.push("display_order = ?");
     values.push(data.displayOrder);
   }
 
-  values.push(id);
+  values.push(subcategoryName);
 
   const result = await db
-    .prepare(`UPDATE subcategories SET ${fields.join(", ")} WHERE id = ?`)
+    .prepare(
+      `UPDATE subcategories SET ${fields.join(", ")} WHERE subcategory_name = ?`
+    )
     .bind(...values)
     .run();
 
@@ -369,21 +328,24 @@ export async function updateSubcategory(
     throw new Error("Failed to update subcategory");
   }
 
-  return findSubcategoryById(id);
+  const updatedName = data.subcategoryName || subcategoryName;
+  return findSubcategoryByName(updatedName);
 }
 
 /**
  * サブカテゴリを削除
  *
- * @param id - 削除するサブカテゴリのID
+ * @param subcategoryName - 削除するサブカテゴリの名前
  * @returns 削除が成功したかどうか
  */
-export async function deleteSubcategory(id: number): Promise<boolean> {
+export async function deleteSubcategory(
+  subcategoryName: string
+): Promise<boolean> {
   const db = await getDataProvider();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.deleteSubcategory)
-    .bind(id)
+    .bind(subcategoryName)
     .run();
 
   return result.success;
@@ -408,8 +370,7 @@ function convertCategoryFromDB(
   subcategories: Subcategory[]
 ): Category {
   return {
-    id: dbCategory.id,
-    categoryKey: dbCategory.category_key,
+    categoryName: dbCategory.category_name,
     name: dbCategory.name,
     icon: dbCategory.icon || undefined,
     displayOrder: dbCategory.display_order,
@@ -428,10 +389,9 @@ function convertCategoryFromDB(
  */
 function convertSubcategoryFromDB(dbSubcategory: SubcategoryDB): Subcategory {
   return {
-    id: dbSubcategory.id,
-    subcategoryKey: dbSubcategory.subcategory_key,
+    subcategoryName: dbSubcategory.subcategory_name,
     name: dbSubcategory.name,
-    categoryId: dbSubcategory.category_id,
+    categoryName: dbSubcategory.category_name,
     displayOrder: dbSubcategory.display_order,
   };
 }

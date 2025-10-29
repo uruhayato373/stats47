@@ -78,8 +78,7 @@ CREATE TABLE IF NOT EXISTS estat_data_history (
 
 -- categories: カテゴリ管理テーブル
 CREATE TABLE IF NOT EXISTS categories (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  category_key TEXT UNIQUE NOT NULL,
+  category_name TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   icon TEXT,
   display_order INTEGER DEFAULT 0,
@@ -89,14 +88,13 @@ CREATE TABLE IF NOT EXISTS categories (
 
 -- subcategories: サブカテゴリ管理テーブル
 CREATE TABLE IF NOT EXISTS subcategories (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  subcategory_key TEXT UNIQUE NOT NULL,
+  subcategory_name TEXT PRIMARY KEY,
   name TEXT NOT NULL,
-  category_id INTEGER NOT NULL,
+  category_name TEXT NOT NULL,
   display_order INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+  FOREIGN KEY (category_name) REFERENCES categories(category_name) ON DELETE CASCADE
 );
 
 -- ============================================================================
@@ -141,14 +139,13 @@ INSERT OR IGNORE INTO data_sources (id, name, description, base_url, api_version
 
 -- ranking_items: ランキング項目設定テーブル
 CREATE TABLE IF NOT EXISTS ranking_items (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ranking_key TEXT UNIQUE NOT NULL,
+  ranking_key TEXT PRIMARY KEY,
   label TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT,
   unit TEXT NOT NULL,
   data_source_id TEXT NOT NULL,
-  group_id INTEGER,
+  group_key TEXT,
   display_order_in_group INTEGER DEFAULT 0,
   is_featured BOOLEAN DEFAULT 0,
   map_color_scheme TEXT DEFAULT 'interpolateBlues',
@@ -160,7 +157,7 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
-  FOREIGN KEY (group_id) REFERENCES ranking_groups(id)
+  FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key)
 );
 
 -- data_source_metadata: データソース固有メタデータテーブル（拡張版）
@@ -189,8 +186,7 @@ CREATE TABLE IF NOT EXISTS data_source_metadata (
 
 -- ranking_groups: ランキンググループ定義テーブル
 CREATE TABLE IF NOT EXISTS ranking_groups (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  group_key TEXT UNIQUE NOT NULL,
+  group_key TEXT PRIMARY KEY,
   subcategory_id TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT,
@@ -255,11 +251,11 @@ CREATE TABLE IF NOT EXISTS widget_templates (
 -- ============================================================================
 
 -- カテゴリ・サブカテゴリ関連インデックス
-CREATE INDEX IF NOT EXISTS idx_categories_key ON categories(category_key);
+-- category_name は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_categories_display_order ON categories(display_order);
 
-CREATE INDEX IF NOT EXISTS idx_subcategories_key ON subcategories(subcategory_key);
-CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_id);
+-- subcategory_name は PRIMARY KEY なので追加インデックス不要
+CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_name);
 CREATE INDEX IF NOT EXISTS idx_subcategories_display_order ON subcategories(display_order);
 
 -- 認証関連インデックス
@@ -279,8 +275,9 @@ CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updat
 
 -- ランキング関連インデックス
 CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_source_id);
-CREATE INDEX IF NOT EXISTS idx_ranking_items_key ON ranking_items(ranking_key);
+-- ranking_key は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
+CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_ranking ON data_source_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_source ON data_source_metadata(data_source_id);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_area ON data_source_metadata(area_type);

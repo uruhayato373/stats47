@@ -8,7 +8,7 @@
  * - テスト容易性の向上
  */
 
-import { findSubcategoryById } from "@/features/category";
+import { findSubcategoryByName } from "@/features/category";
 
 import { buildEnvironmentConfig } from "@/lib/environment";
 
@@ -31,6 +31,8 @@ export interface SubcategoryConfig {
   id: string;
   categoryId: string;
   name: string;
+  subcategoryName?: string;
+  categoryName?: string;
   description?: string;
   defaultRankingKey: string;
 }
@@ -116,16 +118,18 @@ export class RankingRepository {
   ): Promise<RankingConfigResponse | null> {
     try {
       // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = findSubcategoryById(subcategoryId);
+      const subcategory = findSubcategoryByName(subcategoryId);
       if (!subcategory) {
         return null;
       }
 
       const subcategoryConfig: SubcategoryConfig = {
-        id: subcategory.id,
-        categoryId: subcategory.categoryId,
+        id: subcategory.subcategoryName,
+        categoryId: subcategory.categoryName || "",
         name: subcategory.name,
-        defaultRankingKey: subcategory.statsDataId || "",
+        subcategoryName: subcategory.subcategoryName,
+        categoryName: subcategory.categoryName,
+        defaultRankingKey: "",
       };
 
       const result = await this.db
@@ -155,7 +159,7 @@ export class RankingRepository {
         categoryId: subcategoryConfig.categoryId,
         name: subcategoryConfig.name,
         description: subcategoryConfig.description,
-        defaultRankingKey: defaultRankingKey,
+        defaultRankingKey: defaultRankingKey || "",
       };
 
       // ランキング項目を取得（ranking_nameをnameに変換）
@@ -164,7 +168,6 @@ export class RankingRepository {
         .map((row) => {
           const item = row as any;
           const dbItem: RankingItemDB = {
-            id: item.id,
             ranking_key: item.ranking_key,
             label: item.label,
             name: item.ranking_name,
@@ -177,6 +180,9 @@ export class RankingRepository {
             conversion_factor: item.conversion_factor,
             decimal_places: item.decimal_places,
             is_active: item.is_active,
+            group_key: item.group_key || null,
+            display_order_in_group: item.display_order_in_group || 0,
+            is_featured: item.is_featured || false,
             created_at: item.created_at,
             updated_at: item.updated_at,
           };
@@ -304,13 +310,13 @@ export class RankingRepository {
    * ランキング項目の表示順序を更新
    */
   async updateRankingItemOrder(
-    id: number,
+    rankingKey: string,
     displayOrderInGroup: number
   ): Promise<boolean> {
     try {
       const result = await this.db
         .prepare(QUERIES.updateRankingItemOrder)
-        .bind(displayOrderInGroup, id)
+        .bind(displayOrderInGroup, rankingKey)
         .run();
 
       return result.success;
@@ -329,16 +335,18 @@ export class RankingRepository {
   ): Promise<RankingGroupResponse | null> {
     try {
       // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = findSubcategoryById(subcategoryId);
+      const subcategory = findSubcategoryByName(subcategoryId);
       if (!subcategory) {
         return null;
       }
 
       const subcategoryConfig = {
-        id: subcategory.id,
-        categoryId: subcategory.categoryId,
+        id: subcategory.subcategoryName,
+        categoryId: subcategory.categoryName || "",
         name: subcategory.name,
-        defaultRankingKey: subcategory.statsDataId || "",
+        subcategoryName: subcategory.subcategoryName,
+        categoryName: subcategory.categoryName,
+        defaultRankingKey: "",
       };
 
       // 1. グループ情報を取得
@@ -364,11 +372,11 @@ export class RankingRepository {
             `
             SELECT ri.*
             FROM ranking_items ri
-            WHERE ri.group_id = ? AND ri.is_active = 1
+            WHERE ri.group_key = ? AND ri.is_active = 1
             ORDER BY ri.display_order_in_group
           `
           )
-          .bind(groupDB.id)
+          .bind(groupDB.group_key)
           .all();
 
         const items = (itemsResult.results || [])
@@ -378,7 +386,6 @@ export class RankingRepository {
           .filter((item) => item !== null) as RankingItem[];
 
         groups.push({
-          id: groupDB.id,
           groupKey: groupDB.group_key,
           subcategoryId: groupDB.subcategory_id,
           name: groupDB.name,
@@ -396,7 +403,7 @@ export class RankingRepository {
           `
           SELECT ri.*
           FROM ranking_items ri
-          WHERE ri.group_id IS NULL AND ri.is_active = 1
+          WHERE ri.group_key IS NULL AND ri.is_active = 1
           ORDER BY ri.display_order_in_group
         `
         )
@@ -443,23 +450,11 @@ export class RankingRepository {
 
   /**
    * IDでランキング項目を取得（管理画面用）
+   * @deprecated getRankingItemByKeyを使用してください
    */
   async getRankingItemById(id: number): Promise<RankingItem | null> {
-    try {
-      const result = await this.db
-        .prepare(QUERIES.getRankingItemById)
-        .bind(id)
-        .first();
-
-      if (!result) {
-        return null;
-      }
-
-      return convertRankingItemFromDB(result as unknown as RankingItemDB);
-    } catch (error) {
-      console.error("Failed to get ranking item by id:", error);
-      throw error;
-    }
+    // IDは使用されないので、空の値でキー検索を試みる
+    return this.getRankingItemByKey(String(id));
   }
 
   /**
@@ -529,14 +524,15 @@ export class RankingRepository {
   async getAllRankingGroups(): Promise<RankingGroup[]> {
     try {
       const result = await this.db.prepare(GROUP_QUERIES.getAllGroups).all();
-      const items = (await this.getAllRankingItems()).filter((i) => i.groupId);
+      const items = (await this.getAllRankingItems()).filter((i) => i.groupKey);
 
       return (result.results || []).map((row: any) => {
         const groupDB = row as unknown as RankingGroupDB;
-        const groupItems = items.filter((i) => i.groupId === groupDB.id);
+        const groupItems = items.filter(
+          (i) => i.groupKey === groupDB.group_key
+        );
 
         return {
-          id: groupDB.id,
           groupKey: groupDB.group_key,
           subcategoryId: groupDB.subcategory_id,
           name: groupDB.name,
@@ -557,13 +553,13 @@ export class RankingRepository {
   }
 
   /**
-   * IDでランキンググループを取得
+   * group_keyでランキンググループを取得
    */
-  async getRankingGroupById(id: number): Promise<RankingGroup | null> {
+  async getRankingGroupByKey(groupKey: string): Promise<RankingGroup | null> {
     try {
       const result = await this.db
-        .prepare(GROUP_QUERIES.getGroupById)
-        .bind(id)
+        .prepare(GROUP_QUERIES.getGroupByKey)
+        .bind(groupKey)
         .first();
 
       if (!result) {
@@ -572,13 +568,12 @@ export class RankingRepository {
 
       const groupDB = result as unknown as RankingGroupDB;
       const items = (await this.getAllRankingItems())
-        .filter((i) => i.groupId === id)
+        .filter((i) => i.groupKey === groupKey)
         .sort(
           (a, b) => (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
         );
 
       return {
-        id: groupDB.id,
         groupKey: groupDB.group_key,
         subcategoryId: groupDB.subcategory_id,
         name: groupDB.name,
@@ -589,7 +584,7 @@ export class RankingRepository {
         items,
       };
     } catch (error) {
-      console.error("Failed to get ranking group by id:", error);
+      console.error("Failed to get ranking group by key:", error);
       throw error;
     }
   }
@@ -597,9 +592,9 @@ export class RankingRepository {
   /**
    * ランキンググループを作成
    */
-  async createRankingGroup(data: CreateRankingGroupInput): Promise<number> {
+  async createRankingGroup(data: CreateRankingGroupInput): Promise<string> {
     try {
-      const result = await this.db
+      await this.db
         .prepare(GROUP_QUERIES.createGroup)
         .bind(
           data.groupKey,
@@ -610,14 +605,9 @@ export class RankingRepository {
           data.displayOrder,
           data.isCollapsed ? 1 : 0
         )
-        .first();
+        .run();
 
-      const id = (result as any)?.id;
-      if (!id) {
-        throw new Error("Failed to create ranking group");
-      }
-
-      return id;
+      return data.groupKey;
     } catch (error) {
       console.error("Failed to create ranking group:", error);
       throw error;
@@ -628,12 +618,12 @@ export class RankingRepository {
    * ランキンググループを更新
    */
   async updateRankingGroup(
-    id: number,
+    groupKey: string,
     data: UpdateRankingGroupInput
   ): Promise<void> {
     try {
       // 既存のグループを取得してから更新
-      const group = await this.getRankingGroupById(id);
+      const group = await this.getRankingGroupByKey(groupKey);
       if (!group) {
         throw new Error("Ranking group not found");
       }
@@ -641,7 +631,6 @@ export class RankingRepository {
       await this.db
         .prepare(GROUP_QUERIES.updateGroup)
         .bind(
-          data.groupKey ?? group.groupKey,
           data.name ?? group.name,
           data.description ?? group.description ?? null,
           data.icon ?? group.icon ?? null,
@@ -653,7 +642,7 @@ export class RankingRepository {
             : group.isCollapsed
             ? 1
             : 0,
-          id
+          groupKey
         )
         .run();
     } catch (error) {
@@ -665,20 +654,20 @@ export class RankingRepository {
   /**
    * ランキンググループを削除
    */
-  async deleteRankingGroup(id: number): Promise<void> {
+  async deleteRankingGroup(groupKey: string): Promise<void> {
     try {
-      // グループに属する項目のgroup_idをNULLにする
+      // グループに属する項目のgroup_keyをNULLにする
       await this.db
         .prepare(
           `UPDATE ranking_items 
-           SET group_id = NULL, display_order_in_group = 0, updated_at = CURRENT_TIMESTAMP
-           WHERE group_id = ?`
+           SET group_key = NULL, display_order_in_group = 0, updated_at = CURRENT_TIMESTAMP
+           WHERE group_key = ?`
         )
-        .bind(id)
+        .bind(groupKey)
         .run();
 
       // グループを削除
-      await this.db.prepare(GROUP_QUERIES.deleteGroup).bind(id).run();
+      await this.db.prepare(GROUP_QUERIES.deleteGroup).bind(groupKey).run();
     } catch (error) {
       console.error("Failed to delete ranking group:", error);
       throw error;
@@ -689,13 +678,13 @@ export class RankingRepository {
    * グループの表示順を更新
    */
   async updateGroupDisplayOrder(
-    groupId: number,
+    groupKey: string,
     newOrder: number
   ): Promise<void> {
     try {
       await this.db
         .prepare(GROUP_QUERIES.updateGroupOrder)
-        .bind(newOrder, groupId)
+        .bind(newOrder, groupKey)
         .run();
     } catch (error) {
       console.error("Failed to update group display order:", error);
@@ -707,15 +696,15 @@ export class RankingRepository {
    * 項目をグループに割り当て
    */
   async assignItemsToGroup(
-    groupId: number,
-    itemIds: number[],
+    groupKey: string,
+    itemKeys: string[],
     orders: number[]
   ): Promise<void> {
     try {
-      for (let i = 0; i < itemIds.length; i++) {
+      for (let i = 0; i < itemKeys.length; i++) {
         await this.db
           .prepare(GROUP_QUERIES.assignItemToGroup)
-          .bind(groupId, orders[i], itemIds[i])
+          .bind(groupKey, orders[i], itemKeys[i])
           .run();
       }
     } catch (error) {
@@ -727,12 +716,12 @@ export class RankingRepository {
   /**
    * 項目をグループから削除
    */
-  async removeItemsFromGroup(itemIds: number[]): Promise<void> {
+  async removeItemsFromGroup(itemKeys: string[]): Promise<void> {
     try {
-      for (const itemId of itemIds) {
+      for (const itemKey of itemKeys) {
         await this.db
           .prepare(GROUP_QUERIES.removeItemFromGroup)
-          .bind(itemId)
+          .bind(itemKey)
           .run();
       }
     } catch (error) {
@@ -745,13 +734,13 @@ export class RankingRepository {
    * グループ内の項目の表示順を更新
    */
   async updateItemDisplayOrderInGroup(
-    itemId: number,
+    rankingKey: string,
     newOrder: number
   ): Promise<void> {
     try {
       await this.db
         .prepare(QUERIES.updateRankingItemOrder)
-        .bind(newOrder, itemId)
+        .bind(newOrder, rankingKey)
         .run();
     } catch (error) {
       console.error("Failed to update item display order in group:", error);

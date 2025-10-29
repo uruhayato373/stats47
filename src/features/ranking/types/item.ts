@@ -130,10 +130,10 @@ export interface RankingItem {
   isActive: boolean;
 
   /**
-   * ランキンググループID
+   * ランキンググループキー
    * この項目が属するランキンググループ（オプショナル）
    */
-  groupId?: number;
+  groupKey?: string;
 
   /**
    * グループ内での表示順
@@ -264,14 +264,8 @@ export interface DataSourceMetadata {
  */
 export interface RankingItemDB {
   /**
-   * ランキング項目の一意なID
-   * データベースの主キー
-   */
-  id: number;
-
-  /**
-   * ランキングキー（一意識別子）
-   * estat_metainfoテーブルのranking_keyと関連付けられる
+   * ランキングキー（一意識別子・主キー）
+   * データベースの主キーとして使用
    */
   ranking_key: string;
 
@@ -342,10 +336,10 @@ export interface RankingItemDB {
   is_active: boolean;
 
   /**
-   * ランキンググループID
+   * ランキンググループキー
    * この項目が属するランキンググループ（オプショナル）
    */
-  group_id: number | null;
+  group_key: string | null;
 
   /**
    * グループ内での表示順

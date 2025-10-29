@@ -6,7 +6,7 @@
 
 -- 1-1. ranking_items にデータを投入（バッチ 1/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at
@@ -164,7 +164,7 @@ INSERT OR REPLACE INTO ranking_items (
 
 -- 1-2. ranking_items にデータを投入（バッチ 2/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at
@@ -322,7 +322,7 @@ INSERT OR REPLACE INTO ranking_items (
 
 -- 1-3. ranking_items にデータを投入（バッチ 3/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at
@@ -480,7 +480,7 @@ INSERT OR REPLACE INTO ranking_items (
 
 -- 1-4. ranking_items にデータを投入（バッチ 4/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at
@@ -638,7 +638,7 @@ INSERT OR REPLACE INTO ranking_items (
 
 -- 1-5. ranking_items にデータを投入（バッチ 5/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at
@@ -796,7 +796,7 @@ INSERT OR REPLACE INTO ranking_items (
 
 -- 1-6. ranking_items にデータを投入（バッチ 6/6）
 INSERT OR REPLACE INTO ranking_items (
-  ranking_key, label, name, unit, data_source_id, group_id,
+  ranking_key, label, name, unit, data_source_id, group_key,
   display_order_in_group, map_color_scheme, map_diverging_midpoint,
   ranking_direction, conversion_factor, decimal_places, is_active,
   created_at, updated_at

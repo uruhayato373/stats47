@@ -7,16 +7,16 @@
 // 型定義
 // ============================================================================
 export interface Category {
-  id: string;
+  categoryName: string;
   name: string;
   icon?: string;
   subcategories: Subcategory[];
 }
 
 export interface Subcategory {
-  id: string;
+  subcategoryName: string;
   name: string;
-  categoryId?: string; // 親カテゴリID（オプショナル）
+  categoryName?: string; // 親カテゴリ名（オプショナル）
 }
 
 // ============================================================================
@@ -44,20 +44,22 @@ export async function getSubcategories(): Promise<Subcategory[]> {
   return categories.flatMap((category) =>
     category.subcategories.map((sub) => ({
       ...sub,
-      categoryId: category.id,
+      categoryName: category.categoryName,
     }))
   );
 }
 
 /**
- * サブカテゴリIDでサブカテゴリを検索
+ * サブカテゴリ名でサブカテゴリを検索
  */
-export function findSubcategoryById(subcategoryId: string): Subcategory | null {
+export function findSubcategoryByName(
+  subcategoryName: string
+): Subcategory | null {
   const categories = listCategories();
 
   for (const category of categories) {
     const subcategory = category.subcategories.find(
-      (sub) => sub.id === subcategoryId
+      (sub) => sub.subcategoryName === subcategoryName
     );
     if (subcategory) {
       return subcategory;

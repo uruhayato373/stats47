@@ -5,12 +5,12 @@ import { useState } from "react";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/atoms/ui/table";
 
 import type { RankingGroup } from "../../types/group";
@@ -78,7 +78,7 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
             </TableRow>
           ) : (
             filteredGroups.map((group) => (
-              <TableRow key={group.id}>
+              <TableRow key={group.groupKey}>
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
                     {group.icon && <span>{group.icon}</span>}
@@ -93,13 +93,13 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Link
-                      href={`/admin/dev-tools/ranking-groups/${group.id}/items`}
+                      href={`/admin/dev-tools/ranking-groups/${group.groupKey}/items`}
                     >
                       <Button variant="ghost" size="sm">
                         項目管理
                       </Button>
                     </Link>
-                    <Link href={`/admin/dev-tools/ranking-groups/${group.id}`}>
+                    <Link href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}>
                       <Button variant="ghost" size="sm">
                         編集
                       </Button>

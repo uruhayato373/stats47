@@ -34,6 +34,9 @@ export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
     conversionFactor: dbItem.conversion_factor,
     decimalPlaces: dbItem.decimal_places,
     isActive: dbItem.is_active,
+    groupKey: dbItem.group_key || undefined,
+    displayOrderInGroup: dbItem.display_order_in_group,
+    isFeatured: dbItem.is_featured,
   };
 }
 

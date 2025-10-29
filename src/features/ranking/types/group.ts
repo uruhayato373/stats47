@@ -10,7 +10,6 @@ import type { RankingItem } from "./item";
  * ランキンググループの型定義
  */
 export interface RankingGroup {
-  id: number;
   groupKey: string;
   subcategoryId: string;
   name: string;
@@ -34,7 +33,6 @@ export interface RankingGroupResponse {
  * ランキンググループのデータベース型定義
  */
 export interface RankingGroupDB {
-  id: number;
   group_key: string;
   subcategory_id: string;
   name: string;

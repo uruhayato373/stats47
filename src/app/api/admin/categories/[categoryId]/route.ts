@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import {
   deleteCategory,
-  findCategoryById,
+  findCategoryByName,
   updateCategory,
 } from "@/features/category/repositories/category-repository";
 
@@ -17,7 +17,7 @@ interface RouteContext {
 export async function GET(_: NextRequest, { params }: RouteContext) {
   try {
     const { categoryId } = await params;
-    const category = await findCategoryById(parseInt(categoryId, 10));
+    const category = await findCategoryByName(categoryId);
 
     if (!category) {
       return NextResponse.json(
@@ -45,8 +45,8 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const { categoryId } = await params;
     const body = await request.json();
 
-    const category = await updateCategory(parseInt(categoryId, 10), {
-      categoryKey: body.categoryKey,
+    const category = await updateCategory(categoryId, {
+      categoryName: body.categoryName,
       name: body.name,
       icon: body.icon,
       displayOrder: body.displayOrder,
@@ -69,7 +69,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
 export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
     const { categoryId } = await params;
-    const success = await deleteCategory(parseInt(categoryId, 10));
+    const success = await deleteCategory(categoryId);
 
     if (!success) {
       return NextResponse.json(

@@ -78,7 +78,8 @@
       "Bash(npx knip)",
       "Bash(npx knip --include files)",
       "Bash(npx knip:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

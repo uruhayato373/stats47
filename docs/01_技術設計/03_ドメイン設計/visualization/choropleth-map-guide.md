@@ -376,7 +376,7 @@ function ResponsiveMap() {
 
 ## 関連ドキュメント
 
-- [visualization.md](./visualization.md) - 可視化ドメイン全体の概要
+- [visualization.md](visualization.md) - 可視化ドメイン全体の概要
 - [D3.js公式ドキュメント](https://d3js.org/)
 - [ColorBrewer](https://colorbrewer2.org/) - カラースキームの参考
 

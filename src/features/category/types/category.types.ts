@@ -12,11 +12,8 @@
  * スネークケース（snake_case）のカラム名を使用します。
  */
 export interface CategoryDB {
-  /** カテゴリの一意なID */
-  id: number;
-
-  /** カテゴリのキー（例: "population", "economy"） */
-  category_key: string;
+  /** カテゴリ名（PRIMARY KEY、例: "population", "economy"） */
+  category_name: string;
 
   /** カテゴリの表示名（例: "人口・世帯"） */
   name: string;
@@ -41,17 +38,14 @@ export interface CategoryDB {
  * スネークケース（snake_case）のカラム名を使用します。
  */
 export interface SubcategoryDB {
-  /** サブカテゴリの一意なID */
-  id: number;
-
-  /** サブカテゴリのキー（例: "basic-population", "land-area"） */
-  subcategory_key: string;
+  /** サブカテゴリ名（PRIMARY KEY、例: "basic-population", "land-area"） */
+  subcategory_name: string;
 
   /** サブカテゴリの表示名（例: "総人口", "土地面積"） */
   name: string;
 
-  /** 親カテゴリのID（categoriesテーブルへの外部キー） */
-  category_id: number;
+  /** 親カテゴリ名（categoriesテーブルへの外部キー） */
+  category_name: string;
 
   /** 表示順序（0から始まる） */
   display_order: number;
@@ -71,11 +65,8 @@ export interface SubcategoryDB {
  * データベースモデルから変換されます。
  */
 export interface Category {
-  /** カテゴリの一意なID */
-  id: number;
-
-  /** カテゴリのキー（例: "population", "economy"） */
-  categoryKey: string;
+  /** カテゴリ名（PRIMARY KEY、例: "population", "economy"） */
+  categoryName: string;
 
   /** カテゴリの表示名（例: "人口・世帯"） */
   name: string;
@@ -98,17 +89,14 @@ export interface Category {
  * データベースモデルから変換されます。
  */
 export interface Subcategory {
-  /** サブカテゴリの一意なID */
-  id: number;
-
-  /** サブカテゴリのキー（例: "basic-population", "land-area"） */
-  subcategoryKey: string;
+  /** サブカテゴリ名（PRIMARY KEY、例: "basic-population", "land-area"） */
+  subcategoryName: string;
 
   /** サブカテゴリの表示名（例: "総人口", "土地面積"） */
   name: string;
 
-  /** 親カテゴリのID（categoriesテーブルへの外部キー） */
-  categoryId: number;
+  /** 親カテゴリ名（categoriesテーブルへの外部キー） */
+  categoryName: string;
 
   /** 表示順序（0から始まる） */
   displayOrder: number;
@@ -118,8 +106,8 @@ export interface Subcategory {
  * カテゴリ作成時の入力データ型
  */
 export interface CreateCategoryInput {
-  /** カテゴリのキー（必須） */
-  categoryKey: string;
+  /** カテゴリ名（必須、PRIMARY KEY） */
+  categoryName: string;
 
   /** カテゴリの表示名（必須） */
   name: string;
@@ -135,8 +123,8 @@ export interface CreateCategoryInput {
  * カテゴリ更新時の入力データ型
  */
 export interface UpdateCategoryInput {
-  /** カテゴリのキー（オプション） */
-  categoryKey?: string;
+  /** カテゴリ名（オプション、PRIMARY KEY） */
+  categoryName?: string;
 
   /** カテゴリの表示名（オプション） */
   name?: string;
@@ -152,14 +140,14 @@ export interface UpdateCategoryInput {
  * サブカテゴリ作成時の入力データ型
  */
 export interface CreateSubcategoryInput {
-  /** サブカテゴリのキー（必須） */
-  subcategoryKey: string;
+  /** サブカテゴリ名（必須、PRIMARY KEY） */
+  subcategoryName: string;
 
   /** サブカテゴリの表示名（必須） */
   name: string;
 
-  /** 親カテゴリのID（必須） */
-  categoryId: number;
+  /** 親カテゴリ名（必須） */
+  categoryName: string;
 
   /** 表示順序（デフォルト: 0） */
   displayOrder: number;
@@ -169,14 +157,14 @@ export interface CreateSubcategoryInput {
  * サブカテゴリ更新時の入力データ型
  */
 export interface UpdateSubcategoryInput {
-  /** サブカテゴリのキー（オプション） */
-  subcategoryKey?: string;
+  /** サブカテゴリ名（オプション、PRIMARY KEY） */
+  subcategoryName?: string;
 
   /** サブカテゴリの表示名（オプション） */
   name?: string;
 
-  /** 親カテゴリのID（オプション） */
-  categoryId?: number;
+  /** 親カテゴリ名（オプション） */
+  categoryName?: string;
 
   /** 表示順序（オプション） */
   displayOrder?: number;

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import {
   deleteSubcategory,
-  findSubcategoryById,
+  findSubcategoryByName,
   updateSubcategory,
 } from "@/features/category/repositories/category-repository";
 
@@ -17,7 +17,7 @@ interface RouteContext {
 export async function GET(_: NextRequest, { params }: RouteContext) {
   try {
     const { subcategoryId } = await params;
-    const subcategory = await findSubcategoryById(parseInt(subcategoryId, 10));
+    const subcategory = await findSubcategoryByName(subcategoryId);
 
     if (!subcategory) {
       return NextResponse.json(
@@ -45,10 +45,10 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const { subcategoryId } = await params;
     const body = await request.json();
 
-    const subcategory = await updateSubcategory(parseInt(subcategoryId, 10), {
-      subcategoryKey: body.subcategoryKey,
+    const subcategory = await updateSubcategory(subcategoryId, {
+      subcategoryName: body.subcategoryName,
       name: body.name,
-      categoryId: body.categoryId,
+      categoryName: body.categoryName,
       displayOrder: body.displayOrder,
     });
 
@@ -69,7 +69,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
 export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
     const { subcategoryId } = await params;
-    const success = await deleteSubcategory(parseInt(subcategoryId, 10));
+    const success = await deleteSubcategory(subcategoryId);
 
     if (!success) {
       return NextResponse.json(
