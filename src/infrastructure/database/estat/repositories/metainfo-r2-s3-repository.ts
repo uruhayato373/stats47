@@ -3,9 +3,12 @@
  * ローカル開発環境でR2にアクセスするためのS3互換APIリポジトリ
  */
 
-import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
-import { R2S3Client, getR2S3Config } from "@/infrastructure/database/storage/s3-client";
 import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
+import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
+import {
+  R2S3Client,
+  getR2S3Config,
+} from "@/infrastructure/database/storage/s3-client";
 
 /**
  * e-StatメタインフォメーションR2 S3互換APIリポジトリ
@@ -61,7 +64,7 @@ export class EstatMetaInfoR2S3Repository {
     };
 
     // R2オブジェクトキー生成
-    const key = `estat_metainfo/${statsDataId}/meta.json`;
+    const key = `estat-api/meta-info/${statsDataId}.json`;
 
     // JSONに変換
     const jsonString = JSON.stringify(r2Data, null, 2);
@@ -113,7 +116,7 @@ export class EstatMetaInfoR2S3Repository {
     statsDataId: string
   ): Promise<EstatMetaInfoResponse | null> {
     try {
-      const key = `estat_metainfo/${statsDataId}/meta.json`;
+      const key = `estat-api/meta-info/${statsDataId}.json`;
       const client = this.getClient();
       const buffer = await client.getObject(key);
 
@@ -147,7 +150,7 @@ export class EstatMetaInfoR2S3Repository {
    */
   static async delete(statsDataId: string): Promise<void> {
     try {
-      const key = `estat_metainfo/${statsDataId}/meta.json`;
+      const key = `estat-api/meta-info/${statsDataId}.json`;
       const client = this.getClient();
       await client.deleteObject(key);
 
@@ -170,12 +173,12 @@ export class EstatMetaInfoR2S3Repository {
   static async listAll(): Promise<string[]> {
     try {
       const client = this.getClient();
-      const keys = await client.listObjects("estat_metainfo/");
+      const keys = await client.listObjects("estat-api/meta-info/");
 
       const statsDataIds = keys
         .map((key) => {
-          // "estat_metainfo/{statsDataId}/meta.json" から statsDataId を抽出
-          const match = key.match(/estat_metainfo\/([^/]+)\/meta\.json$/);
+          // "estat-api/meta-info/{statsDataId}.json" から statsDataId を抽出
+          const match = key.match(/estat-api\/meta-info\/([^/]+)\.json$/);
           return match ? match[1] : null;
         })
         .filter((id): id is string => id !== null);

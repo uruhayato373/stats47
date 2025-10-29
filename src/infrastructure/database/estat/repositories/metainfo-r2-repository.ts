@@ -5,8 +5,8 @@
  * データ永続化層：Repository Pattern
  */
 
-import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
 import { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
+import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
 
 /**
  * R2環境インターフェース
@@ -53,7 +53,7 @@ export class EstatMetaInfoR2Repository {
     };
 
     // R2オブジェクトキー生成
-    const key = `estat_metainfo/${statsDataId}/meta.json`;
+    const key = `estat-api/meta-info/${statsDataId}.json`;
 
     // JSONに変換
     const jsonString = JSON.stringify(r2Data, null, 2);
@@ -95,7 +95,7 @@ export class EstatMetaInfoR2Repository {
     statsDataId: string
   ): Promise<EstatMetaInfoResponse | null> {
     try {
-      const key = `estat_metainfo/${statsDataId}/meta.json`;
+      const key = `estat-api/meta-info/${statsDataId}.json`;
       const object = await env.METAINFO_BUCKET.get(key);
 
       if (!object) {
@@ -132,7 +132,7 @@ export class EstatMetaInfoR2Repository {
     statsDataId: string
   ): Promise<void> {
     try {
-      const key = `estat_metainfo/${statsDataId}/meta.json`;
+      const key = `estat-api/meta-info/${statsDataId}.json`;
       await env.METAINFO_BUCKET.delete(key);
 
       if (process.env.NODE_ENV === "development") {
@@ -154,13 +154,13 @@ export class EstatMetaInfoR2Repository {
    */
   static async listAll(env: EstatMetaInfoR2Env): Promise<string[]> {
     try {
-      const prefix = `estat_metainfo/`;
+      const prefix = `estat-api/meta-info/`;
       const list = await env.METAINFO_BUCKET.list({ prefix });
 
       const statsDataIds = list.objects
         .map((obj) => {
-          // "estat_metainfo/{statsDataId}/meta.json" から statsDataId を抽出
-          const match = obj.key.match(/estat_metainfo\/([^/]+)\/meta\.json$/);
+          // "estat-api/meta-info/{statsDataId}.json" から statsDataId を抽出
+          const match = obj.key.match(/estat-api\/meta-info\/([^/]+)\.json$/);
           return match ? match[1] : null;
         })
         .filter((id): id is string => id !== null);
