@@ -859,3 +859,638 @@ src/infrastructure/estat-api/
 
 - 2025-01-20: 初版作成
 - 2025-01-20: ドメイン設計の統合・整理（04\_開発ガイドから移行）
+
+# e-Stat API テストガイド
+
+## 概要
+
+e-Stat API ドメインのテスト戦略、統合テスト、テストデータ管理について包括的に説明します。単体テスト、統合テスト、E2Eテスト、テストデータの作成・管理方法まで網羅しています。
+
+## 目次
+
+1. [テスト戦略](#テスト戦略)
+2. [単体テスト](#単体テスト)
+3. [統合テスト](#統合テスト)
+4. [テストデータ管理](#テストデータ管理)
+5. [モック・スタブ](#モックスタブ)
+6. [テスト実行](#テスト実行)
+
+---
+
+# 第1章: テスト戦略
+
+## テストピラミッド
+
+```
+        /\
+       /E2E\          少数
+      /------\
+     /統合テスト\       中程度
+    /----------\
+   /  単体テスト  \     多数
+  /--------------\
+```
+
+### 単体テスト (70%)
+
+- 個別の関数・クラスのテスト
+- 高速で実行可能
+- モックを活用
+
+### 統合テスト (20%)
+
+- 複数のモジュール間の連携テスト
+- 実際のAPIとの通信
+- データベースアクセス
+
+### E2Eテスト (10%)
+
+- ユーザーの操作フロー全体をテスト
+- 実環境に近い状態でのテスト
+
+## テストの原則
+
+### 1. FIRST原則
+
+- **Fast** (高速): テストは高速に実行されるべき
+- **Independent** (独立): テスト間に依存関係を持たない
+- **Repeatable** (再現可能): いつでも同じ結果を返す
+- **Self-validating** (自己検証): 成功/失敗が明確
+- **Timely** (適時): コードと同時にテストを書く
+
+### 2. AAA パターン
+
+```typescript
+test("should calculate total correctly", () => {
+  // Arrange: テスト準備
+  const data = [10, 20, 30];
+
+  // Act: 実行
+  const result = calculateTotal(data);
+
+  // Assert: 検証
+  expect(result).toBe(60);
+});
+```
+
+---
+
+# 第2章: 単体テスト
+
+## サービスクラスのテスト
+
+### EstatStatsDataService のテスト
+
+```typescript
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { EstatStatsDataService } from "@/features/estat-api/stats-data";
+
+describe("EstatStatsDataService", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  describe("getAndFormatStatsData", () => {
+    it("正常にデータを取得・整形できる", async () => {
+      // Arrange
+      const mockResponse = createMockStatsDataResponse();
+      vi.spyOn(estatAPI, "getStatsData").mockResolvedValue(mockResponse);
+
+      // Act
+      const result = await EstatStatsDataService.getAndFormatStatsData(
+        "0000010101"
+      );
+
+      // Assert
+      expect(result.values).toHaveLength(1);
+      expect(result.areas).toHaveLength(1);
+      expect(result.categories).toHaveLength(1);
+      expect(result.years).toHaveLength(1);
+    });
+
+    it("APIエラー時に適切なエラーをスローする", async () => {
+      // Arrange
+      vi.spyOn(estatAPI, "getStatsData").mockRejectedValue(
+        new Error("API Error")
+      );
+
+      // Act & Assert
+      await expect(
+        EstatStatsDataService.getAndFormatStatsData("0000010101")
+      ).rejects.toThrow("データ取得に失敗しました");
+    });
+
+    it("無効なstatsDataIdでエラーをスローする", async () => {
+      // Act & Assert
+      await expect(
+        EstatStatsDataService.getAndFormatStatsData("invalid-id")
+      ).rejects.toThrow("無効な統計表IDです");
+    });
+  });
+
+  describe("getPrefectureDataByYear", () => {
+    it("都道府県データのみを返す", async () => {
+      // Arrange
+      const mockData = createMockPrefectureData();
+      vi.spyOn(
+        EstatStatsDataService,
+        "getAndFormatStatsData"
+      ).mockResolvedValue(mockData);
+
+      // Act
+      const result = await EstatStatsDataService.getPrefectureDataByYear(
+        "0000010101",
+        "A1101",
+        "2020"
+      );
+
+      // Assert
+      expect(result.every((item) => item.areaCode.length === 5)).toBe(true);
+      expect(result.every((item) => item.areaCode !== "00000")).toBe(true);
+    });
+  });
+});
+```
+
+## フォーマッター関数のテスト
+
+```typescript
+import { EstatMetaInfoFormatter } from "@/features/estat-api/meta-info";
+
+describe("EstatMetaInfoFormatter", () => {
+  describe("parseCompleteMetaInfo", () => {
+    it("メタ情報を正しくパースできる", () => {
+      // Arrange
+      const rawMetaInfo = createMockMetaInfoResponse();
+
+      // Act
+      const result = EstatMetaInfoFormatter.parseCompleteMetaInfo(rawMetaInfo);
+
+      // Assert
+      expect(result.categories).toHaveLength(3);
+      expect(result.areas).toHaveLength(47);
+      expect(result.years).toHaveLength(10);
+    });
+
+    it("空のメタ情報でエラーをスローする", () => {
+      // Arrange
+      const emptyMetaInfo = {};
+
+      // Act & Assert
+      expect(() =>
+        EstatMetaInfoFormatter.parseCompleteMetaInfo(emptyMetaInfo)
+      ).toThrow("メタ情報が空です");
+    });
+  });
+});
+```
+
+## ユーティリティ関数のテスト
+
+```typescript
+describe("Utility Functions", () => {
+  describe("validateStatsDataId", () => {
+    it.each([
+      ["0000010101", true],
+      ["0003109687", true],
+      ["invalid", false],
+      ["123", false],
+      ["00000101011", false],
+    ])("validateStatsDataId('%s') should return %s", (id, expected) => {
+      expect(validateStatsDataId(id)).toBe(expected);
+    });
+  });
+
+  describe("formatNumber", () => {
+    it("数値を正しくフォーマットする", () => {
+      expect(formatNumber(1000000)).toBe("1,000,000");
+      expect(formatNumber(0)).toBe("0");
+      expect(formatNumber(null)).toBe("-");
+    });
+  });
+});
+```
+
+---
+
+# 第3章: 統合テスト
+
+## API統合テスト
+
+```typescript
+import { describe, it, expect } from "vitest";
+
+describe("Estat API Integration", () => {
+  // 実際のAPIを使用するテスト（スキップ可能）
+  it.skip("実際のAPIからデータを取得できる", async () => {
+    const result = await EstatStatsDataService.getAndFormatStatsData(
+      "0000010101"
+    );
+
+    expect(result).toBeDefined();
+    expect(result.values).toBeInstanceOf(Array);
+    expect(result.values.length).toBeGreaterThan(0);
+  });
+
+  // モックAPIを使用するテスト
+  it("モックAPIとの統合が正常に動作する", async () => {
+    // Mock Server起動
+    const server = setupMockServer();
+
+    try {
+      const result = await EstatStatsDataService.getAndFormatStatsData(
+        "0000010101"
+      );
+
+      expect(result.values).toHaveLength(47);
+      expect(result.areas).toHaveLength(48);
+    } finally {
+      server.close();
+    }
+  });
+});
+```
+
+## Next.js API Routes のテスト
+
+```typescript
+import { GET } from "@/app/api/stats/data/route";
+import { NextRequest } from "next/server";
+
+describe("API Route: /api/stats/data", () => {
+  it("正常にデータを返す", async () => {
+    // Arrange
+    const request = new NextRequest(
+      "http://localhost/api/stats/data?statsDataId=0000010101"
+    );
+
+    // Act
+    const response = await GET(request);
+    const data = await response.json();
+
+    // Assert
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+    expect(data.data).toBeDefined();
+  });
+
+  it("無効なパラメータでエラーを返す", async () => {
+    // Arrange
+    const request = new NextRequest(
+      "http://localhost/api/stats/data?statsDataId=invalid"
+    );
+
+    // Act
+    const response = await GET(request);
+    const data = await response.json();
+
+    // Assert
+    expect(response.status).toBe(400);
+    expect(data.success).toBe(false);
+    expect(data.error.code).toBe("VALIDATION_ERROR");
+  });
+});
+```
+
+## データベース統合テスト
+
+```typescript
+import { EstatMetaInfoService } from "@/features/estat-api/meta-info";
+
+describe("Database Integration", () => {
+  let db: D1Database;
+  let service: EstatMetaInfoService;
+
+  beforeAll(async () => {
+    db = await setupTestDatabase();
+    service = new EstatMetaInfoService(db);
+  });
+
+  afterAll(async () => {
+    await teardownTestDatabase(db);
+  });
+
+  it("メタ情報を保存・取得できる", async () => {
+    // Arrange
+    const statsDataId = "0000010101";
+
+    // Act: 保存
+    await service.processAndSaveMetaInfo(statsDataId);
+
+    // Assert: 取得
+    const result = await service.getSavedMetadataByStatsId(statsDataId);
+    expect(result.length).toBeGreaterThan(0);
+  });
+
+  it("検索が正常に動作する", async () => {
+    // Act
+    const result = await service.searchMetaInfo("人口", {
+      searchType: "full",
+      limit: 10,
+    });
+
+    // Assert
+    expect(result.entries.length).toBeGreaterThan(0);
+    expect(result.entries[0].stat_name).toContain("人口");
+  });
+});
+```
+
+---
+
+# 第4章: テストデータ管理
+
+## モックデータの作成
+
+### ファイル構成
+
+```
+tests/
+├── fixtures/
+│   ├── stats-data.ts          # 統計データのモック
+│   ├── meta-info.ts           # メタ情報のモック
+│   ├── stats-list.ts          # 統計リストのモック
+│   └── index.ts               # エクスポート
+├── helpers/
+│   ├── mock-server.ts         # Mock Server設定
+│   └── test-utils.ts          # テストユーティリティ
+└── setup.ts                   # テスト初期化
+```
+
+### モックデータの例
+
+`tests/fixtures/stats-data.ts`
+
+```typescript
+export const MOCK_STATS_DATA_RESPONSE = {
+  GET_STATS_DATA: {
+    RESULT: {
+      STATUS: 0,
+      ERROR_MSG: "",
+      DATE: "2024-01-01",
+    },
+    STATISTICAL_DATA: {
+      TABLE_INF: {
+        "@id": "0000010101",
+        STAT_NAME: { $: "人口推計" },
+        TITLE: { $: "都道府県別人口" },
+        GOV_ORG: { $: "総務省" },
+        STATISTICS_NAME: { $: "国勢調査" },
+      },
+      CLASS_INF: [
+        {
+          "@id": "cat01",
+          "@name": "分類項目",
+          CLASS: [
+            { "@code": "A1101", "@name": "総人口", "@unit": "人" },
+            { "@code": "A1301", "@name": "男性人口", "@unit": "人" },
+            { "@code": "A1401", "@name": "女性人口", "@unit": "人" },
+          ],
+        },
+        {
+          "@id": "area",
+          "@name": "地域",
+          CLASS: [
+            { "@code": "00000", "@name": "全国", "@level": "1" },
+            { "@code": "13000", "@name": "東京都", "@level": "2" },
+          ],
+        },
+        {
+          "@id": "time",
+          "@name": "時間軸",
+          CLASS: [
+            { "@code": "2020", "@name": "2020年" },
+            { "@code": "2021", "@name": "2021年" },
+          ],
+        },
+      ],
+      DATA_INF: {
+        VALUE: [
+          {
+            $: "13921000",
+            "@cat01": "A1101",
+            "@area": "13000",
+            "@time": "2020",
+          },
+          {
+            $: "7082000",
+            "@cat01": "A1301",
+            "@area": "13000",
+            "@time": "2020",
+          },
+        ],
+      },
+    },
+  },
+};
+
+export function createMockStatsDataResponse() {
+  return JSON.parse(JSON.stringify(MOCK_STATS_DATA_RESPONSE));
+}
+```
+
+## テストヘルパー関数
+
+`tests/helpers/test-utils.ts`
+
+```typescript
+export function createMockPrefectureData(): FormattedStatsData {
+  return {
+    tableInfo: {
+      id: "0000010101",
+      title: "都道府県別人口",
+      statName: "国勢調査",
+      govOrg: "総務省",
+      statisticsName: "人口推計",
+      totalNumber: 47,
+      fromNumber: 1,
+      toNumber: 47,
+    },
+    areas: Array.from({ length: 47 }, (_, i) => ({
+      areaCode: `${(i + 1).toString().padStart(2, "0")}000`,
+      areaName: `都道府県${i + 1}`,
+      level: "2",
+    })),
+    categories: [
+      {
+        categoryCode: "A1101",
+        categoryName: "総人口",
+        displayName: "総人口",
+        unit: "人",
+      },
+    ],
+    years: [{ timeCode: "2020", timeName: "2020年" }],
+    values: Array.from({ length: 47 }, (_, i) => ({
+      value: Math.floor(Math.random() * 10000000),
+      unit: "人",
+      areaCode: `${(i + 1).toString().padStart(2, "0")}000`,
+      areaName: `都道府県${i + 1}`,
+      categoryCode: "A1101",
+      categoryName: "総人口",
+      timeCode: "2020",
+      timeName: "2020年",
+    })),
+    metadata: {
+      processedAt: new Date().toISOString(),
+      totalRecords: 47,
+      validValues: 47,
+      nullValues: 0,
+    },
+  };
+}
+
+export async function setupTestDatabase(): Promise<D1Database> {
+  // テスト用データベースのセットアップ
+  // 実装は環境に依存
+  return {} as D1Database;
+}
+
+export async function teardownTestDatabase(db: D1Database): Promise<void> {
+  // テスト用データベースのクリーンアップ
+}
+```
+
+## Mock Server の設定
+
+`tests/helpers/mock-server.ts`
+
+```typescript
+import { setupServer } from "msw/node";
+import { http, HttpResponse } from "msw";
+
+export function setupMockServer() {
+  const handlers = [
+    http.get(
+      "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData",
+      () => {
+        return HttpResponse.json(MOCK_STATS_DATA_RESPONSE);
+      }
+    ),
+    http.get(
+      "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo",
+      () => {
+        return HttpResponse.json(MOCK_META_INFO_RESPONSE);
+      }
+    ),
+  ];
+
+  const server = setupServer(...handlers);
+  server.listen();
+
+  return server;
+}
+```
+
+---
+
+# 第5章: モック・スタブ
+
+## Vitest でのモック
+
+```typescript
+import { vi } from "vitest";
+
+describe("EstatStatsDataService with mocks", () => {
+  it("API呼び出しをモックする", async () => {
+    // APIをモック
+    const mockGetStatsData = vi.fn().mockResolvedValue(MOCK_RESPONSE);
+    vi.spyOn(estatAPI, "getStatsData").mockImplementation(mockGetStatsData);
+
+    // テスト実行
+    await EstatStatsDataService.getAndFormatStatsData("0000010101");
+
+    // モックが呼ばれたことを検証
+    expect(mockGetStatsData).toHaveBeenCalledWith({
+      appId: expect.any(String),
+      statsDataId: "0000010101",
+    });
+  });
+});
+```
+
+## 部分的なモック
+
+```typescript
+vi.mock("@/infrastructure/estat", async () => {
+  const actual = await vi.importActual("@/infrastructure/estat");
+  return {
+    ...actual,
+    // 特定の関数のみモック
+    getApiKey: vi.fn(() => "mock-api-key"),
+  };
+});
+```
+
+---
+
+# 第6章: テスト実行
+
+## テスト設定
+
+`vitest.config.ts`
+
+```typescript
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: "node",
+    setupFiles: ["./tests/setup.ts"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      include: ["src/**/*.ts"],
+      exclude: [
+        "src/**/*.test.ts",
+        "src/**/*.spec.ts",
+        "src/**/types/**",
+      ],
+    },
+  },
+});
+```
+
+## テストスクリプト
+
+`package.json`
+
+```json
+{
+  "scripts": {
+    "test": "vitest",
+    "test:unit": "vitest run --testPathPattern=unit",
+    "test:integration": "vitest run --testPathPattern=integration",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch"
+  }
+}
+```
+
+## CI/CD での実行
+
+`.github/workflows/test.yml`
+
+```yaml
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npm run test:coverage
+      - uses: codecov/codecov-action@v3
+```
+
+## 関連ドキュメント
+
+- [ベストプラクティス](06_ベストプラクティス.md)
+- [API統合ガイド](03_API統合ガイド.md)
+- [エラーハンドリング](05_エラーハンドリング.md)

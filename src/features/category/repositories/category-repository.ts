@@ -55,7 +55,7 @@ export async function listCategories(): Promise<Category[]> {
   const categoriesWithSubcategories = await Promise.all(
     categories.map(async (category) => {
       const subcategories = await findSubcategoriesByCategory(
-        category.category_name
+        category.category_key
       );
       return convertCategoryFromDB(category, subcategories);
     })
@@ -138,10 +138,6 @@ export async function updateCategory(
     fields.push("category_name = ?");
     values.push(data.categoryName);
   }
-  if (data.name !== undefined) {
-    fields.push("name = ?");
-    values.push(data.name);
-  }
   if (data.icon !== undefined) {
     fields.push("icon = ?");
     values.push(data.icon || null);
@@ -155,7 +151,7 @@ export async function updateCategory(
 
   const result = await db
     .prepare(
-      `UPDATE categories SET ${fields.join(", ")} WHERE category_name = ?`
+      `UPDATE categories SET ${fields.join(", ")} WHERE category_key = ?`
     )
     .bind(...values)
     .run();
@@ -164,8 +160,7 @@ export async function updateCategory(
     throw new Error("Failed to update category");
   }
 
-  const updatedName = data.categoryName || categoryName;
-  return findCategoryByName(updatedName);
+  return findCategoryByName(categoryName);
 }
 
 /**
@@ -302,12 +297,8 @@ export async function updateSubcategory(
     fields.push("subcategory_name = ?");
     values.push(data.subcategoryName);
   }
-  if (data.name !== undefined) {
-    fields.push("name = ?");
-    values.push(data.name);
-  }
   if (data.categoryName !== undefined) {
-    fields.push("category_name = ?");
+    fields.push("category_key = ?");
     values.push(data.categoryName);
   }
   if (data.displayOrder !== undefined) {
@@ -319,7 +310,7 @@ export async function updateSubcategory(
 
   const result = await db
     .prepare(
-      `UPDATE subcategories SET ${fields.join(", ")} WHERE subcategory_name = ?`
+      `UPDATE subcategories SET ${fields.join(", ")} WHERE subcategory_key = ?`
     )
     .bind(...values)
     .run();
@@ -328,8 +319,7 @@ export async function updateSubcategory(
     throw new Error("Failed to update subcategory");
   }
 
-  const updatedName = data.subcategoryName || subcategoryName;
-  return findSubcategoryByName(updatedName);
+  return findSubcategoryByName(subcategoryName);
 }
 
 /**
@@ -370,8 +360,9 @@ function convertCategoryFromDB(
   subcategories: Subcategory[]
 ): Category {
   return {
+    categoryKey: dbCategory.category_key,
     categoryName: dbCategory.category_name,
-    name: dbCategory.name,
+    id: dbCategory.category_key, // 後方互換性のためのエイリアス
     icon: dbCategory.icon || undefined,
     displayOrder: dbCategory.display_order,
     subcategories,
@@ -389,9 +380,11 @@ function convertCategoryFromDB(
  */
 function convertSubcategoryFromDB(dbSubcategory: SubcategoryDB): Subcategory {
   return {
+    subcategoryKey: dbSubcategory.subcategory_key,
     subcategoryName: dbSubcategory.subcategory_name,
-    name: dbSubcategory.name,
-    categoryName: dbSubcategory.category_name,
+    id: dbSubcategory.subcategory_key, // 後方互換性のためのエイリアス
+    categoryKey: dbSubcategory.category_key,
+    categoryId: dbSubcategory.category_key, // 後方互換性のためのエイリアス
     displayOrder: dbSubcategory.display_order,
   };
 }

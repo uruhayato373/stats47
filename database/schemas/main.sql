@@ -61,25 +61,14 @@ CREATE TABLE IF NOT EXISTS verification_tokens (
   PRIMARY KEY (identifier, token)
 );
 
--- estat_data_history: e-Statデータ履歴
-CREATE TABLE IF NOT EXISTS estat_data_history (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  stats_data_id TEXT NOT NULL,
-  action TEXT NOT NULL,
-  user_id TEXT,
-  metadata_snapshot TEXT,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
 -- ============================================================================
 -- 2. カテゴリ・サブカテゴリテーブル
 -- ============================================================================
 
 -- categories: カテゴリ管理テーブル
 CREATE TABLE IF NOT EXISTS categories (
-  category_name TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
+  category_key TEXT PRIMARY KEY,
+  category_name TEXT NOT NULL,
   icon TEXT,
   display_order INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -88,13 +77,13 @@ CREATE TABLE IF NOT EXISTS categories (
 
 -- subcategories: サブカテゴリ管理テーブル
 CREATE TABLE IF NOT EXISTS subcategories (
-  subcategory_name TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  category_name TEXT NOT NULL,
+  subcategory_key TEXT PRIMARY KEY,
+  subcategory_name TEXT NOT NULL,
+  category_key TEXT NOT NULL,
   display_order INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (category_name) REFERENCES categories(category_name) ON DELETE CASCADE
+  FOREIGN KEY (category_key) REFERENCES categories(category_key) ON DELETE CASCADE
 );
 
 -- ============================================================================
@@ -251,11 +240,11 @@ CREATE TABLE IF NOT EXISTS widget_templates (
 -- ============================================================================
 
 -- カテゴリ・サブカテゴリ関連インデックス
--- category_name は PRIMARY KEY なので追加インデックス不要
+-- category_key は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_categories_display_order ON categories(display_order);
 
--- subcategory_name は PRIMARY KEY なので追加インデックス不要
-CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_name);
+-- subcategory_key は PRIMARY KEY なので追加インデックス不要
+CREATE INDEX IF NOT EXISTS idx_subcategories_category_key ON subcategories(category_key);
 CREATE INDEX IF NOT EXISTS idx_subcategories_display_order ON subcategories(display_order);
 
 -- 認証関連インデックス
@@ -264,8 +253,6 @@ CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE UNIQUE INDEX IF NOT EXISTS idx_accounts_provider ON accounts(provider, providerAccountId);
 CREATE INDEX IF NOT EXISTS idx_sessions_userId ON sessions(userId);
 CREATE INDEX IF NOT EXISTS idx_sessions_sessionToken ON sessions(sessionToken);
-CREATE INDEX IF NOT EXISTS idx_history_stats_id ON estat_data_history(stats_data_id);
-CREATE INDEX IF NOT EXISTS idx_history_user_id ON estat_data_history(user_id);
 
 -- e-Stat関連インデックス
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_stat_name ON estat_metainfo(stat_name);

@@ -17,25 +17,25 @@ export const CATEGORY_QUERIES = {
   listCategories: `SELECT * FROM categories ORDER BY display_order`,
 
   /**
-   * カテゴリ名で検索（PRIMARY KEY）
+   * カテゴリキーで検索（PRIMARY KEY）
    */
-  findCategoryByName: `SELECT * FROM categories WHERE category_name = ?`,
+  findCategoryByName: `SELECT * FROM categories WHERE category_key = ?`,
 
   /**
    * カテゴリを作成
    */
-  createCategory: `INSERT INTO categories (category_name, name, icon, display_order)
+  createCategory: `INSERT INTO categories (category_key, category_name, icon, display_order)
                    VALUES (?, ?, ?, ?)`,
 
   /**
    * カテゴリを更新
    */
-  updateCategory: `UPDATE categories SET {fields} WHERE category_name = ?`,
+  updateCategory: `UPDATE categories SET {fields} WHERE category_key = ?`,
 
   /**
    * カテゴリを削除
    */
-  deleteCategory: `DELETE FROM categories WHERE category_name = ?`,
+  deleteCategory: `DELETE FROM categories WHERE category_key = ?`,
 } as const;
 
 /**
@@ -45,33 +45,33 @@ export const SUBCATEGORY_QUERIES = {
   /**
    * 全サブカテゴリを取得
    */
-  listSubcategories: `SELECT * FROM subcategories ORDER BY category_name, display_order`,
+  listSubcategories: `SELECT * FROM subcategories ORDER BY category_key, display_order`,
 
   /**
-   * カテゴリ名でサブカテゴリを検索
+   * カテゴリキーでサブカテゴリを検索
    */
   findSubcategoriesByCategory: `SELECT * FROM subcategories 
-                                 WHERE category_name = ? 
+                                 WHERE category_key = ? 
                                  ORDER BY display_order`,
 
   /**
-   * サブカテゴリ名で検索（PRIMARY KEY）
+   * サブカテゴリキーで検索（PRIMARY KEY）
    */
-  findSubcategoryByName: `SELECT * FROM subcategories WHERE subcategory_name = ?`,
+  findSubcategoryByName: `SELECT * FROM subcategories WHERE subcategory_key = ?`,
 
   /**
    * サブカテゴリを作成
    */
-  createSubcategory: `INSERT INTO subcategories (subcategory_name, name, category_name, display_order)
+  createSubcategory: `INSERT INTO subcategories (subcategory_key, subcategory_name, category_key, display_order)
                        VALUES (?, ?, ?, ?)`,
 
   /**
    * サブカテゴリを更新
    */
-  updateSubcategory: `UPDATE subcategories SET {fields} WHERE subcategory_name = ?`,
+  updateSubcategory: `UPDATE subcategories SET {fields} WHERE subcategory_key = ?`,
 
   /**
    * サブカテゴリを削除
    */
-  deleteSubcategory: `DELETE FROM subcategories WHERE subcategory_name = ?`,
+  deleteSubcategory: `DELETE FROM subcategories WHERE subcategory_key = ?`,
 } as const;

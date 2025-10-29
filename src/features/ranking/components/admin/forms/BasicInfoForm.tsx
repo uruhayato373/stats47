@@ -7,13 +7,13 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
 import { Switch } from "@/components/atoms/ui/switch";
@@ -185,3 +185,5 @@ export const BasicInfoForm = forwardRef<BasicInfoFormRef, BasicInfoFormProps>(
   );
   }
 );
+
+BasicInfoForm.displayName = 'BasicInfoForm';
