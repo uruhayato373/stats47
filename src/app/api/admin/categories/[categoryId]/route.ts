@@ -46,8 +46,8 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const body = await request.json();
 
     const category = await updateCategory(categoryId, {
+      categoryKey: body.categoryKey,
       categoryName: body.categoryName,
-      name: body.name,
       icon: body.icon,
       displayOrder: body.displayOrder,
     });

@@ -25,12 +25,8 @@ import { CATEGORY_QUERIES, SUBCATEGORY_QUERIES } from "./category-queries";
 import type {
   Category,
   CategoryDB,
-  CreateCategoryInput,
-  CreateSubcategoryInput,
   Subcategory,
   SubcategoryDB,
-  UpdateCategoryInput,
-  UpdateSubcategoryInput,
 } from "../types/category.types";
 
 // ============================================================================
@@ -96,21 +92,29 @@ export async function findCategoryByName(
  * @returns 作成されたカテゴリ
  * @throws Error - カテゴリの作成に失敗した場合
  */
-export async function createCategory(
-  data: CreateCategoryInput
-): Promise<Category> {
+export async function createCategory(data: {
+  categoryKey: string;
+  name: string;
+  icon?: string | null;
+  displayOrder?: number;
+}): Promise<Category> {
   const db = await getDataProvider();
 
   const result = await db
     .prepare(CATEGORY_QUERIES.createCategory)
-    .bind(data.categoryName, data.name, data.icon || null, data.displayOrder)
+    .bind(
+      data.categoryKey,
+      data.name,
+      data.icon || null,
+      data.displayOrder || 0
+    )
     .run();
 
   if (!result.success) {
     throw new Error("Failed to create category");
   }
 
-  const createdCategory = await findCategoryByName(data.categoryName);
+  const createdCategory = await findCategoryByName(data.categoryKey);
   if (!createdCategory) {
     throw new Error("Failed to retrieve created category");
   }
@@ -126,8 +130,13 @@ export async function createCategory(
  * @throws Error - カテゴリの更新に失敗した場合
  */
 export async function updateCategory(
-  categoryName: string,
-  data: UpdateCategoryInput
+  categoryKey: string,
+  data: {
+    categoryKey?: string;
+    categoryName?: string;
+    icon?: string | null;
+    displayOrder?: number;
+  }
 ): Promise<Category | null> {
   const db = await getDataProvider();
 
@@ -138,6 +147,10 @@ export async function updateCategory(
     fields.push("category_name = ?");
     values.push(data.categoryName);
   }
+  if (data.categoryKey !== undefined) {
+    fields.push("category_key = ?");
+    values.push(data.categoryKey);
+  }
   if (data.icon !== undefined) {
     fields.push("icon = ?");
     values.push(data.icon || null);
@@ -147,7 +160,7 @@ export async function updateCategory(
     values.push(data.displayOrder);
   }
 
-  values.push(categoryName);
+  values.push(categoryKey);
 
   const result = await db
     .prepare(
@@ -160,7 +173,9 @@ export async function updateCategory(
     throw new Error("Failed to update category");
   }
 
-  return findCategoryByName(categoryName);
+  const updatedKey =
+    data.categoryKey !== undefined ? data.categoryKey : categoryKey;
+  return findCategoryByName(updatedKey);
 }
 
 /**
@@ -255,21 +270,29 @@ export async function findSubcategoryByName(
  * @returns 作成されたサブカテゴリ
  * @throws Error - サブカテゴリの作成に失敗した場合
  */
-export async function createSubcategory(
-  data: CreateSubcategoryInput
-): Promise<Subcategory> {
+export async function createSubcategory(data: {
+  subcategoryKey: string;
+  name: string;
+  categoryKey: string;
+  displayOrder?: number;
+}): Promise<Subcategory> {
   const db = await getDataProvider();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.createSubcategory)
-    .bind(data.subcategoryName, data.name, data.categoryName, data.displayOrder)
+    .bind(
+      data.subcategoryKey,
+      data.name,
+      data.categoryKey,
+      data.displayOrder || 0
+    )
     .run();
 
   if (!result.success) {
     throw new Error("Failed to create subcategory");
   }
 
-  const createdSubcategory = await findSubcategoryByName(data.subcategoryName);
+  const createdSubcategory = await findSubcategoryByName(data.subcategoryKey);
   if (!createdSubcategory) {
     throw new Error("Failed to retrieve created subcategory");
   }
@@ -285,8 +308,13 @@ export async function createSubcategory(
  * @throws Error - サブカテゴリの更新に失敗した場合
  */
 export async function updateSubcategory(
-  subcategoryName: string,
-  data: UpdateSubcategoryInput
+  subcategoryKey: string,
+  data: {
+    subcategoryKey?: string;
+    subcategoryName?: string;
+    categoryKey?: string;
+    displayOrder?: number;
+  }
 ): Promise<Subcategory | null> {
   const db = await getDataProvider();
 
@@ -297,16 +325,20 @@ export async function updateSubcategory(
     fields.push("subcategory_name = ?");
     values.push(data.subcategoryName);
   }
-  if (data.categoryName !== undefined) {
+  if (data.subcategoryKey !== undefined) {
+    fields.push("subcategory_key = ?");
+    values.push(data.subcategoryKey);
+  }
+  if (data.categoryKey !== undefined) {
     fields.push("category_key = ?");
-    values.push(data.categoryName);
+    values.push(data.categoryKey);
   }
   if (data.displayOrder !== undefined) {
     fields.push("display_order = ?");
     values.push(data.displayOrder);
   }
 
-  values.push(subcategoryName);
+  values.push(subcategoryKey);
 
   const result = await db
     .prepare(
@@ -319,7 +351,9 @@ export async function updateSubcategory(
     throw new Error("Failed to update subcategory");
   }
 
-  return findSubcategoryByName(subcategoryName);
+  const updatedKey =
+    data.subcategoryKey !== undefined ? data.subcategoryKey : subcategoryKey;
+  return findSubcategoryByName(updatedKey);
 }
 
 /**
@@ -362,7 +396,6 @@ function convertCategoryFromDB(
   return {
     categoryKey: dbCategory.category_key,
     categoryName: dbCategory.category_name,
-    id: dbCategory.category_key, // 後方互換性のためのエイリアス
     icon: dbCategory.icon || undefined,
     displayOrder: dbCategory.display_order,
     subcategories,
@@ -382,9 +415,7 @@ function convertSubcategoryFromDB(dbSubcategory: SubcategoryDB): Subcategory {
   return {
     subcategoryKey: dbSubcategory.subcategory_key,
     subcategoryName: dbSubcategory.subcategory_name,
-    id: dbSubcategory.subcategory_key, // 後方互換性のためのエイリアス
     categoryKey: dbSubcategory.category_key,
-    categoryId: dbSubcategory.category_key, // 後方互換性のためのエイリアス
     displayOrder: dbSubcategory.display_order,
   };
 }

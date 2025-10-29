@@ -1,31 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import * as LucideReact from "lucide-react";
 import { AlertCircle, Edit2, Loader2 } from "lucide-react";
 import useSWR from "swr";
 
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import {
-    Card,
-    CardContent,
-    CardTitle,
+  Card,
+  CardContent,
+  CardTitle,
 } from "@/components/atoms/ui/card";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/atoms/ui/dialog";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
@@ -38,7 +38,14 @@ interface EditDialogProps {
   category?: Category;
   subcategory?: Subcategory;
   categoryName?: string;
-  onSave: () => void;
+  onSave: (formData: {
+    categoryKey?: string;
+    categoryName?: string;
+    icon?: string;
+    displayOrder?: number;
+    subcategoryKey?: string;
+    subcategoryName?: string;
+  }) => void;
   onDelete: () => void;
 }
 
@@ -52,9 +59,67 @@ function EditDialog({
   onDelete,
 }: EditDialogProps) {
   const isCategory = !!category;
-  const item = isCategory ? category : subcategory;
+  
+  // フォーム状態管理
+  const [formData, setFormData] = useState<{
+    categoryKey: string;
+    categoryName: string;
+    icon: string;
+    displayOrder: string;
+    subcategoryKey: string;
+    subcategoryName: string;
+  }>(() => {
+    if (isCategory && category) {
+      return {
+        categoryKey: category.categoryKey,
+        categoryName: category.categoryName,
+        icon: category.icon || "",
+        displayOrder: category.displayOrder.toString(),
+        subcategoryKey: "",
+        subcategoryName: "",
+      };
+    } else if (subcategory) {
+      return {
+        categoryKey: subcategory.categoryKey,
+        categoryName: "",
+        icon: "",
+        displayOrder: subcategory.displayOrder.toString(),
+        subcategoryKey: subcategory.subcategoryKey,
+        subcategoryName: subcategory.subcategoryName,
+      };
+    }
+    return {
+      categoryKey: "",
+      categoryName: "",
+      icon: "",
+      displayOrder: "0",
+      subcategoryKey: "",
+      subcategoryName: "",
+    };
+  });
 
-  if (!item) return null;
+  // カテゴリまたはサブカテゴリが変更されたときにフォームをリセット
+  React.useEffect(() => {
+    if (isCategory && category) {
+      setFormData({
+        categoryKey: category.categoryKey,
+        categoryName: category.categoryName,
+        icon: category.icon || "",
+        displayOrder: category.displayOrder.toString(),
+        subcategoryKey: "",
+        subcategoryName: "",
+      });
+    } else if (subcategory) {
+      setFormData({
+        categoryKey: subcategory.categoryKey,
+        categoryName: "",
+        icon: "",
+        displayOrder: subcategory.displayOrder.toString(),
+        subcategoryKey: subcategory.subcategoryKey,
+        subcategoryName: subcategory.subcategoryName,
+      });
+    }
+  }, [category, subcategory, isCategory]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -65,15 +130,26 @@ function EditDialog({
           </DialogTitle>
           <DialogDescription>
             {isCategory
-              ? `カテゴリ「${item.name}」を編集します`
-              : `サブカテゴリ「${item.name}」を編集します`}
+              ? `カテゴリ「${formData.categoryName}」を編集します`
+              : `サブカテゴリ「${formData.subcategoryName}」を編集します`}
           </DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="name">名前</Label>
-            <Input id="name" defaultValue={item.name} />
+            <Input
+              id="name"
+              value={isCategory ? formData.categoryName : formData.subcategoryName}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  ...(isCategory
+                    ? { categoryName: e.target.value }
+                    : { subcategoryName: e.target.value }),
+                }))
+              }
+            />
           </div>
 
           <div className="grid gap-2">
@@ -82,8 +158,14 @@ function EditDialog({
             </Label>
             <Input
               id="key"
-              defaultValue={
-                isCategory ? category.categoryKey : subcategory?.subcategoryKey || ""
+              value={isCategory ? formData.categoryKey : formData.subcategoryKey}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  ...(isCategory
+                    ? { categoryKey: e.target.value }
+                    : { subcategoryKey: e.target.value }),
+                }))
               }
               className="font-mono"
             />
@@ -94,19 +176,40 @@ function EditDialog({
               <Label htmlFor="icon">アイコン</Label>
               <Input
                 id="icon"
-                defaultValue={category.icon || ""}
+                value={formData.icon}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, icon: e.target.value }))
+                }
                 placeholder="Users, MapPin, etc."
               />
             </div>
           )}
 
-
           {!isCategory && categoryName && (
             <div className="grid gap-2">
-              <Label>カテゴリ</Label>
-              <Input defaultValue={categoryName} disabled />
+              <Label htmlFor="categoryKey">カテゴリキー</Label>
+              <Input
+                id="categoryKey"
+                value={formData.categoryKey}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, categoryKey: e.target.value }))
+                }
+                className="font-mono"
+              />
             </div>
           )}
+
+          <div className="grid gap-2">
+            <Label htmlFor="displayOrder">表示順序</Label>
+            <Input
+              id="displayOrder"
+              type="number"
+              value={formData.displayOrder}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, displayOrder: e.target.value }))
+              }
+            />
+          </div>
         </div>
 
         <DialogFooter>
@@ -127,7 +230,25 @@ function EditDialog({
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
                 キャンセル
               </Button>
-              <Button type="button" onClick={onSave}>
+              <Button
+                type="button"
+                onClick={() => {
+                  const submitData = isCategory
+                    ? {
+                        categoryKey: formData.categoryKey,
+                        categoryName: formData.categoryName,
+                        icon: formData.icon || undefined,
+                        displayOrder: parseInt(formData.displayOrder, 10),
+                      }
+                    : {
+                        subcategoryKey: formData.subcategoryKey,
+                        subcategoryName: formData.subcategoryName,
+                        categoryKey: formData.categoryKey,
+                        displayOrder: parseInt(formData.displayOrder, 10),
+                      };
+                  onSave(submitData);
+                }}
+              >
                 保存
               </Button>
             </div>
@@ -172,19 +293,19 @@ export function CategoriesManagement() {
   } | null>(null);
 
 
-  const handleSaveCategory = async () => {
+  const handleSaveCategory = async (formData: {
+    categoryKey?: string;
+    categoryName?: string;
+    icon?: string;
+    displayOrder?: number;
+  }) => {
     if (!editingCategory) return;
     
     try {
-      const response = await fetch(`/api/admin/categories/${editingCategory.id}`, {
-        method: "PUT",
+      const response = await fetch(`/api/admin/categories/${editingCategory.categoryKey}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          categoryKey: editingCategory.categoryKey,
-          name: editingCategory.name,
-          icon: editingCategory.icon,
-          displayOrder: editingCategory.displayOrder,
-        }),
+        body: JSON.stringify(formData),
       });
       
       if (response.ok) {
@@ -199,7 +320,7 @@ export function CategoriesManagement() {
   const handleDeleteCategory = async () => {
     if (!editingCategory) return;
     try {
-      const response = await fetch(`/api/admin/categories/${editingCategory.id}`, {
+      const response = await fetch(`/api/admin/categories/${editingCategory.categoryKey}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -218,21 +339,21 @@ export function CategoriesManagement() {
     setEditingSubcategory({ subcategory, categoryName });
   };
 
-  const handleSaveSubcategory = async () => {
+  const handleSaveSubcategory = async (formData: {
+    subcategoryKey?: string;
+    subcategoryName?: string;
+    categoryKey?: string;
+    displayOrder?: number;
+  }) => {
     if (!editingSubcategory) return;
     
     try {
       const response = await fetch(
-        `/api/admin/subcategories/${editingSubcategory.subcategory.id}`,
+        `/api/admin/subcategories/${editingSubcategory.subcategory.subcategoryKey}`,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            subcategoryKey: editingSubcategory.subcategory.subcategoryKey,
-            name: editingSubcategory.subcategory.name,
-            categoryId: editingSubcategory.subcategory.categoryId,
-            displayOrder: editingSubcategory.subcategory.displayOrder,
-          }),
+          body: JSON.stringify(formData),
         }
       );
       
@@ -249,7 +370,7 @@ export function CategoriesManagement() {
     if (!editingSubcategory) return;
     try {
       const response = await fetch(
-        `/api/admin/subcategories/${editingSubcategory.subcategory.id}`,
+        `/api/admin/subcategories/${editingSubcategory.subcategory.subcategoryKey}`,
         {
           method: "DELETE",
         }
@@ -313,8 +434,8 @@ export function CategoriesManagement() {
 
             return (
               <AccordionItem 
-                key={category.id} 
-                value={`category-${category.id}`}
+                key={category.categoryKey} 
+                value={`category-${category.categoryKey}`}
                 className="border-gray-300"
               >
                 <Card>
@@ -325,7 +446,7 @@ export function CategoriesManagement() {
                           <IconComponent className="h-5 w-5 text-muted-foreground" />
                         )}
                         <div className="text-left">
-                          <CardTitle className="text-lg">{category.name}</CardTitle>
+                          <CardTitle className="text-lg">{category.categoryName}</CardTitle>
                           <p className="text-sm font-mono text-muted-foreground">
                             {category.categoryKey}
                           </p>
@@ -346,15 +467,15 @@ export function CategoriesManagement() {
                         {category.subcategories && category.subcategories.length > 0 ? (
                           category.subcategories.map((subcategory) => (
                             <div
-                              key={subcategory.id}
+                              key={subcategory.subcategoryKey}
                               className="group relative flex items-center rounded-lg border border-gray-300 p-3 hover:bg-accent"
                             >
-                              <span className="text-sm">{subcategory.name}</span>
+                              <span className="text-sm">{subcategory.subcategoryName}</span>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 className="absolute right-1 top-1 opacity-0 transition-opacity group-hover:opacity-100"
-                                onClick={() => handleEditSubcategory(subcategory, category.name)}
+                                onClick={() => handleEditSubcategory(subcategory, category.categoryName)}
                               >
                                 <Edit2 className="h-3.5 w-3.5" />
                               </Button>
