@@ -222,9 +222,9 @@ export class RankingRepository {
         itemResult as unknown as RankingItemDB
       );
 
-      // メタデータを取得
+      // メタデータを取得（estat-api専用）
       const metadataResults = await this.db
-        .prepare(`SELECT * FROM data_source_metadata WHERE ranking_key = ?`)
+        .prepare(`SELECT * FROM estat_api_metadata WHERE ranking_key = ?`)
         .bind(rankingKey)
         .all();
 
@@ -232,7 +232,6 @@ export class RankingRepository {
         item.metadataItems = (
           metadataResults.results as unknown as DataSourceMetadataDB[]
         ).map((meta) => ({
-          dataSourceId: meta.data_source_id,
           areaType: meta.area_type,
           calculationType: meta.calculation_type,
           metadata: JSON.parse(meta.metadata),
@@ -753,11 +752,10 @@ export class RankingRepository {
   // ============================================================
 
   /**
-   * データソースメタデータを作成
+   * データソースメタデータを作成（estat-api専用）
    */
   async createDataSourceMetadata(metadata: {
     rankingKey: string;
-    dataSourceId: string;
     areaType: "prefecture" | "city" | "national";
     calculationType: "direct" | "ratio" | "aggregate";
     metadata: object;
@@ -768,7 +766,6 @@ export class RankingRepository {
         .prepare(QUERIES.createDataSourceMetadata)
         .bind(
           metadata.rankingKey,
-          metadata.dataSourceId,
           metadata.areaType,
           metadata.calculationType,
           metadataJson
@@ -781,11 +778,10 @@ export class RankingRepository {
   }
 
   /**
-   * データソースメタデータを更新
+   * データソースメタデータを更新（estat-api専用）
    */
   async updateDataSourceMetadata(
     rankingKey: string,
-    dataSourceId: string,
     areaType: "prefecture" | "city" | "national",
     metadata: {
       calculationType: "direct" | "ratio" | "aggregate";
@@ -800,7 +796,6 @@ export class RankingRepository {
           metadata.calculationType,
           metadataJson,
           rankingKey,
-          dataSourceId,
           areaType
         )
         .run();

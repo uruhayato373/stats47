@@ -149,22 +149,22 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key)
 );
 
--- data_source_metadata: データソース固有メタデータテーブル（拡張版）
+-- estat_api_metadata: e-Stat API固有のメタデータテーブル
+-- e-Stat APIのパラメータ（stats_data_id、cd_cat01等）をランキングキーと紐付けて保存
 -- metadata JSON構造:
 --   直接: {"stats_data_id":"xxx","cd_cat01":"yyy","cd_area":"zzz"}
 --   比率: {"numerator":{...},"denominator":{...},"multiplier":1000}
-CREATE TABLE IF NOT EXISTS data_source_metadata (
+-- 注意: このテーブルはe-Stat API専用である。他のデータソース用メタデータは別テーブルで管理する
+CREATE TABLE IF NOT EXISTS estat_api_metadata (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   ranking_key TEXT NOT NULL,
-  data_source_id TEXT NOT NULL,
   area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
   calculation_type TEXT NOT NULL DEFAULT 'direct',  -- 'direct' | 'ratio' | 'aggregate'
-  metadata TEXT NOT NULL,
+  metadata TEXT NOT NULL,  -- e-Stat API固有のパラメータ（JSON形式）
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(ranking_key, data_source_id, area_type),
+  UNIQUE(ranking_key, area_type),
   FOREIGN KEY (ranking_key) REFERENCES ranking_items(ranking_key) ON DELETE CASCADE,
-  FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
   CHECK (area_type IN ('prefecture', 'city', 'national')),
   CHECK (calculation_type IN ('direct', 'ratio', 'aggregate'))
 );
@@ -265,9 +265,8 @@ CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_s
 -- ranking_key は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
-CREATE INDEX IF NOT EXISTS idx_data_source_metadata_ranking ON data_source_metadata(ranking_key);
-CREATE INDEX IF NOT EXISTS idx_data_source_metadata_source ON data_source_metadata(data_source_id);
-CREATE INDEX IF NOT EXISTS idx_data_source_metadata_area ON data_source_metadata(area_type);
+CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_ranking ON estat_api_metadata(ranking_key);
+CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_area ON estat_api_metadata(area_type);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);

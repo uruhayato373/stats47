@@ -64,10 +64,10 @@ export const QUERIES = {
   `,
 
   /**
-   * ランキングキーでデータソースメタデータを取得
+   * ランキングキーでデータソースメタデータを取得（estat-api専用）
    */
   getDataSourceMetadataByKey: `
-    SELECT * FROM data_source_metadata WHERE ranking_key = ?
+    SELECT * FROM estat_api_metadata WHERE ranking_key = ?
   `,
 
   /**
@@ -126,31 +126,31 @@ export const QUERIES = {
   `,
 
   /**
-   * データソースメタデータを作成
+   * データソースメタデータを作成（estat-api専用）
    */
   createDataSourceMetadata: `
-    INSERT INTO data_source_metadata 
-    (ranking_key, data_source_id, area_type, calculation_type, metadata)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO estat_api_metadata 
+    (ranking_key, area_type, calculation_type, metadata)
+    VALUES (?, ?, ?, ?)
   `,
 
   /**
-   * データソースメタデータを更新
+   * データソースメタデータを更新（estat-api専用）
    */
   updateDataSourceMetadata: `
-    UPDATE data_source_metadata 
+    UPDATE estat_api_metadata 
     SET 
       calculation_type = ?,
       metadata = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ? AND data_source_id = ? AND area_type = ?
+    WHERE ranking_key = ? AND area_type = ?
   `,
 
   /**
-   * ランキングキーでデータソースメタデータを削除
+   * ランキングキーでデータソースメタデータを削除（estat-api専用）
    */
   deleteDataSourceMetadataByRankingKey: `
-    DELETE FROM data_source_metadata WHERE ranking_key = ?
+    DELETE FROM estat_api_metadata WHERE ranking_key = ?
   `,
 } as const;
 

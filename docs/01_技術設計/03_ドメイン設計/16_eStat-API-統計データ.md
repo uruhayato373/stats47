@@ -74,31 +74,77 @@ e-Stat の各統計表に付与される一意の識別子。
 
 **制約**: 8-10 桁の数字、e-Stat で定義された ID のみ有効
 
-**用途**: 統計データ取得時の識別子、統計表の一意識別
+**用途**: 統計データ取得時の識別子（`statsDataId`パラメータ）、統計表の一意識別
 
-#### AreaCode（地域コード）
+#### API パラメータ
 
-統計データの地域を表すコード。
+e-Stat API 呼び出しで使用するパラメータ名。
 
-**形式**: 5 桁の数字（例: `13000`=東京都、`13101`=千代田区）
+**分類事項パラメータ**:
 
-**用途**: 地域によるデータの絞り込み、地域名の変換
+- **`cdCat01`〜`cdCat15`**: 分類事項 01-15 の絞り込みパラメータ（任意）
+- 具体例: `cdCat01=001,002`（総数、男）
 
-#### TimeCode（時間軸コード）
+**地域パラメータ**:
 
-統計データの時間軸を表すコード。
+- **`cdArea`**: 地域コード指定パラメータ（任意）
+- 具体例: `cdArea=13000,27000`（東京都、大阪府）
 
-**形式**: 10 桁の数字（例: `2023000000`=2023 年）
+**時間軸パラメータ**:
 
-**用途**: 年度によるデータの絞り込み、時系列データの取得
+- **`cdTime`**: 時間軸コード指定パラメータ（任意）
+- 具体例: `cdTime=2023000000`（2023 年）
 
-#### CategoryCode（分類コード）
+**詳細**: [API パラメータ](#api-パラメータ)セクションを参照
 
-統計データの分類事項を表すコード（cat01〜cat15）。
+#### API レスポンス構造（生データ）
 
-**形式**: 3 桁の数字（例: `001`=総数、`002`=男）
+e-Stat API から返されるそのままのデータ構造。
 
-**用途**: 分類項目によるデータの絞り込み、分類名の変換
+**EstatStatsDataResponse**:
+
+e-Stat API の統計データ取得 API（`GET_STATS_DATA`）のレスポンス構造。
+
+- **構造**: `GET_STATS_DATA.STATISTICAL_DATA`
+- **主要要素**:
+  - `CLASS_INF`: 分類情報（`CLASS_OBJ[]`）
+  - `DATA_INF`: データ値（`VALUE[]`、`NOTE[]`）
+  - `TABLE_INF`: 統計表情報
+
+**DATA_INF.VALUE**:
+
+実際の統計数値データを含む配列。各要素は以下の属性を持つ。
+
+- **`@tab`**: 表章項目コード（必須、例: `"A1101"`）
+- **`@area`**: 地域コード（任意、例: `"13000"`）
+- **`@time`**: 時間軸コード（任意、例: `"2020"`）
+- **`@cat01`〜`@cat15`**: 分類コード（任意、例: `"001"`）
+- **`$`**: データ値（数値または特殊文字、例: `"14047594"`、`"***"`）
+
+**詳細**: [API レスポンス構造](#api-レスポンス構造)セクションを参照
+
+#### 変換後のデータ構造
+
+e-Stat API の生データを整形・変換した後のデータ構造。
+
+**FormattedEstatData**:
+
+整形済み統計データの全体構造。
+
+- **構造**: `{ tableInfo, areas, categories, years, values, metadata, notes? }`
+- **用途**: アプリケーション内で使用する標準的なデータ形式
+
+**FormattedValue**:
+
+整形済み統計値。生データの`VALUE`を変換した形式。
+
+- **構造**: `{ value, unit, dimensions: { area, time, tab?, cat01?〜cat15? }, rank? }`
+- **特徴**:
+  - `dimensions`で全次元を統一的に管理（`area`、`time`は必須、`cat01`〜`cat15`はオプション）
+  - 特殊文字（`***`、`-`など）は`null`に変換
+  - 地域・時間・分類のコードと名称がセットで管理
+
+**詳細**: 型定義は`src/features/estat-api/stats-data/types/`を参照
 
 ---
 
@@ -106,46 +152,41 @@ e-Stat の各統計表に付与される一意の識別子。
 
 ### 主要エンティティ
 
-#### StatsData（統計データ）
+#### FormattedEstatData（整形済み統計データ）
 
-e-Stat API から取得した統計データの表現。
+e-Stat API の生データを整形・変換した後のデータ構造。アプリケーション内で使用する標準的な形式。
 
-| 属性名        | 型              | 説明                                 |
-| ------------- | --------------- | ------------------------------------ |
-| `statsDataId` | `string`        | 統計表 ID（8-10 桁）                 |
-| `values`      | `StatsValue[]`  | 統計値の配列                         |
-| `metadata`    | `StatsMetadata` | メタ情報（表情報、分類情報）         |
-| `resultInfo`  | `ResultInfo`    | 取得結果情報（件数、ページング情報） |
-
-型定義は`src/features/estat-api/stats-data/types/`を参照してください。
-
-#### StatsValue（統計値）
-
-個別の統計値データ。
-
-| 属性名       | 型                                                      | 説明                                           |
-| ------------ | ------------------------------------------------------- | ---------------------------------------------- |
-| `dimensions` | `{ area?: string; time?: string; cat01?: string; ... }` | 多次元データの次元情報（地域、年次、分類など） |
-| `value`      | `number \| string \| null`                              | 統計値（数値または文字列）                     |
+| 属性名       | 型                    | 説明                                 |
+| ------------ | --------------------- | ------------------------------------ |
+| `tableInfo`  | `FormattedTableInfo`  | 統計表情報（変換後）                 |
+| `areas`      | `FormattedArea[]`     | 地域情報の配列（変換後）             |
+| `categories` | `FormattedCategory[]` | 分類情報の配列（変換後）             |
+| `years`      | `FormattedYear[]`     | 年度情報の配列（変換後）             |
+| `values`     | `FormattedValue[]`    | 統計値の配列（変換後）               |
+| `metadata`   | `FormattedMetadata`   | メタデータ（処理情報、統計情報など） |
+| `notes?`     | `DataNote[]`          | 注記情報（任意）                     |
 
 型定義は`src/features/estat-api/stats-data/types/`を参照してください。
 
-### 値オブジェクト
+#### FormattedValue（整形済み統計値）
 
-#### StatsDataId（統計表 ID）
+個別の統計値データ。生データの`DATA_INF.VALUE`を整形した形式。
 
-統計表の一意識別子。
+| 属性名       | 型                                                              | 説明                                              |
+| ------------ | --------------------------------------------------------------- | ------------------------------------------------- |
+| `value`      | `number \| null`                                                | 統計値（数値または null。特殊文字は null に変換） |
+| `unit`       | `string \| null`                                                | 単位                                              |
+| `dimensions` | `{ area: {...}, time: {...}, tab?: {...}, cat01?: {...}, ... }` | 多次元データの次元情報（統一的に管理）            |
+| `rank?`      | `number`                                                        | ランキング順位（オプション）                      |
 
-**制約**:
+**`dimensions`の構造**:
 
-- 8-10 桁の数字
-- e-Stat API で登録されている統計表 ID
+- `area`: `{ code, name, level?, parentCode? }`（必須）
+- `time`: `{ code, name }`（必須）
+- `tab`: `{ code, name, unit? }`（任意）
+- `cat01`〜`cat15`: `{ code, name, unit? }`（任意）
 
-#### AreaCode（地域コード）
-
-統計データの地域を表すコード。
-
-**形式**: 5 桁の数字（例: `13000`=東京都、`13101`=千代田区）
+型定義は`src/features/estat-api/stats-data/types/`を参照してください。
 
 ---
 
@@ -398,6 +439,35 @@ interface GetStatsDataResponse {
 
 詳細な型定義は実装コード（`src/features/estat-api/stats-data/types/`）を参照してください。
 
+### R2 ストレージ構造
+
+R2 ストレージへのキャッシュは以下のディレクトリ構造で管理されます。詳細は [R2 ストレージ設計ドキュメント](../04_インフラ設計/02_R2ストレージ設計.md#estatapi-ドメイン) を参照してください。
+
+```
+estat-api/
+└── stats-data/                      # 統計データキャッシュ
+    └── {statsDataId}/               # 統計表ID別ディレクトリ
+        └── {params_hash}.json       # パラメータハッシュベースのファイル名
+```
+
+**キー生成規則**:
+
+- **統計データ**: `estat-api/stats-data/{statsDataId}/{params_hash}.json`
+
+**パラメータ**:
+
+- `statsDataId`: 統計表 ID（8-10 桁、例: `0003412313`）
+- `params_hash`: パラメータのハッシュ値（`cdArea`、`cdTime`、`cdCat01`〜`cdCat15`などを含むリクエストパラメータから生成）
+
+**例**:
+
+- `estat-api/stats-data/0003412313/a1b2c3d4e5f6g7h8.json`（統計表 ID: `0003412313`、パラメータハッシュ: `a1b2c3d4e5f6g7h8`）
+- `estat-api/stats-data/0003000001/f9g0h1i2j3k4l5m6.json`（統計表 ID: `0003000001`、パラメータハッシュ: `f9g0h1i2j3k4l5m6`）
+
+**キャッシュデータ形式**:
+
+オリジナルの API レスポンス（`EstatStatsDataResponse`）を JSON 形式でそのまま保存します。これにより、整形ロジックが変更されても同じオリジナルデータから再整形が可能です。
+
 ### キャッシュ戦略
 
 #### 1. R2 ストレージ（永続キャッシュ）
@@ -410,7 +480,6 @@ interface GetStatsDataResponse {
 
 - R2 バケットに統計データを JSON 形式で保存
 - **キャッシュデータ**: オリジナルの API レスポンス（`EstatStatsDataResponse`）を保存
-- キー設計: `estat-api/stats-data/{statsDataId}/{params_hash}.json`
 - キャッシュヒット時は R2 からオリジナルデータを取得し、必要に応じて整形
 - キャッシュミス時は e-Stat API から取得し、バックグラウンドで R2 に保存
 

@@ -74,7 +74,6 @@ export async function PUT(
           const metadata = JSON.parse(metadataItem.metadata);
           await repository.createDataSourceMetadata({
             rankingKey,
-            dataSourceId: metadataItem.dataSourceId,
             areaType: metadataItem.areaType,
             calculationType: metadataItem.calculationType,
             metadata,

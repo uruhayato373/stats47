@@ -234,12 +234,11 @@ export interface RankingValueDB {
 
 /**
  * データソースメタデータの型（データベース）
- * data_source_metadataテーブルに対応
+ * estat_api_metadataテーブルに対応（e-Stat API専用）
  */
 export interface DataSourceMetadataDB {
   id: number;
   ranking_key: string;
-  data_source_id: string;
   area_type: string;
   calculation_type: string;
   metadata: string;
@@ -249,9 +248,9 @@ export interface DataSourceMetadataDB {
 
 /**
  * データソースメタデータの型（アプリケーション）
+ * estat-api専用（dataSourceIdは不要）
  */
 export interface DataSourceMetadata {
-  dataSourceId: string;
   areaType: string;
   calculationType: string;
   metadata: object;
