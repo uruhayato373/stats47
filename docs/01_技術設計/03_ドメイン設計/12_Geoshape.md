@@ -394,13 +394,37 @@ geoshape/
 
 ### 3. 地域コードによる取得
 
-**機能**: 地域コード（都道府県または市区町村）に基づいて TopoJSON トポロジーを取得
+**機能**: 地域コード（5桁）に基づいて TopoJSON トポロジーを取得
 
 **設計判断**:
 
-- 地域コードの形式から自動的に地域タイプを判定
+- 地域コードから自動的に地域タイプを判定
 - 都道府県データと市区町村データを透過的に扱う
+- コンポーネントからの使用を想定した簡便なAPI
 - エラーハンドリングを統一的に実装
+
+**使用例**:
+
+```typescript
+// コンポーネント内（ページコンポーネントなど）
+const areaCode = params.areaCode; // "00000" (全国) / "13000" (東京都) / "13101" (千代田区)
+const topology = await fetchTopologyByAreaCode(areaCode);
+```
+
+**内部処理**:
+
+1. **地域タイプの自動判定**:
+   - `"00000"` → `"national"`（全国）
+   - `"XX000"`（末尾3桁が000） → `"prefecture"`（都道府県）
+   - その他 → `"city"`（市区町村）
+
+2. **TopoJSON取得**:
+   - `national`/`prefecture`: `fetchPrefectureTopology()`を呼び出し
+   - `city`: 都道府県コードを抽出して`fetchMunicipalityTopology(prefCode)`を呼び出し
+
+3. **フォールバック戦略**: メモリキャッシュ → R2 → 外部API の順で取得を試みる
+
+**注意**: 現在はGeoshapeドメイン内で地域タイプを判定していますが、将来的にはAreaドメインの機能を利用する予定です（下記「将来の拡張計画」参照）。
 
 ---
 
@@ -512,5 +536,56 @@ geoshape/
 
 ## 関連ドメイン
 
-- **Area ドメイン**: 地域コードと地理データを関連付け
+- **Area ドメイン**: 地域コードと地理データを関連付け。将来的には地域タイプの判定機能をAreaドメインに移行予定
 - **Visualization ドメイン**: 本ドメインが提供する TopoJSON データを利用してコロプレス地図などを描画
+
+---
+
+## 将来の拡張計画
+
+### areaType判別の責務移行
+
+#### 現状の実装
+
+- **場所**: `src/features/gis/geoshape/utils/area-code-converter.ts`
+- **関数**: `determineAreaTypeFromCode(areaCode: string): AreaType`
+- **ロジック**: 地域コードの形式から判定（`"00000"`、`endsWith("000")`など）
+
+#### 目標設計（最終系）
+
+- **場所**: Areaドメインのサービスまたはユーティリティ
+- **関数**: `determineAreaType(areaCode: string): AreaType`
+- **理由**: 
+  - 地域コードの解釈は地域管理ドメインの責務（単一責任の原則）
+  - 他のドメイン（EstatAPI、Ranking等）でも再利用可能
+  - テストとメンテナンスが容易
+- **移行後の構造**:
+  ```typescript
+  // GeoshapeドメインからAreaドメインの関数を使用
+  import { determineAreaType } from '@/features/area/services/area-service';
+  
+  export async function fetchTopologyByAreaCode(areaCode: string) {
+    const areaType = determineAreaType(areaCode); // Areaドメインの関数を使用
+    // ...
+  }
+  ```
+
+#### 移行手順
+
+1. Areaドメインに`determineAreaType()`関数を実装
+2. GeoshapeドメインはAreaドメインの関数をインポートして使用
+3. Geoshapeドメイン内の`determineAreaTypeFromCode()`を非推奨化
+4. 段階的に既存コードを移行
+5. `area-code-converter.ts`の判定関数を削除（他のユーティリティ関数は保持）
+
+---
+
+## TODO
+
+### areaType判別の責務移行
+
+- [ ] Areaドメインに`determineAreaType(areaCode)`関数を実装
+- [ ] GeoshapeドメインでAreaドメインの関数を使用するように変更
+- [ ] Geoshapeドメイン内の`determineAreaTypeFromCode()`を非推奨化
+- [ ] 既存コードを段階的に移行
+- [ ] テストケースの追加と更新
