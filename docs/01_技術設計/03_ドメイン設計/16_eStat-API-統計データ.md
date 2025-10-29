@@ -110,46 +110,25 @@ e-Stat の各統計表に付与される一意の識別子。
 
 e-Stat API から取得した統計データの表現。
 
-**属性**:
+| 属性名        | 型              | 説明                                 |
+| ------------- | --------------- | ------------------------------------ |
+| `statsDataId` | `string`        | 統計表 ID（8-10 桁）                 |
+| `values`      | `StatsValue[]`  | 統計値の配列                         |
+| `metadata`    | `StatsMetadata` | メタ情報（表情報、分類情報）         |
+| `resultInfo`  | `ResultInfo`    | 取得結果情報（件数、ページング情報） |
 
-- `statsDataId`: 統計表 ID（8-10 桁）
-- `values`: 統計値の配列
-- `metadata`: メタ情報（表情報、分類情報）
-- `resultInfo`: 取得結果情報（件数、ページング情報）
-
-**型定義**:
-
-```typescript
-interface StatsData {
-  statsDataId: string;
-  values: StatsValue[];
-  metadata: StatsMetadata;
-  resultInfo: ResultInfo;
-}
-```
+型定義は`src/features/estat-api/stats-data/types/`を参照してください。
 
 #### StatsValue（統計値）
 
 個別の統計値データ。
 
-**属性**:
+| 属性名       | 型                                                      | 説明                                           |
+| ------------ | ------------------------------------------------------- | ---------------------------------------------- |
+| `dimensions` | `{ area?: string; time?: string; cat01?: string; ... }` | 多次元データの次元情報（地域、年次、分類など） |
+| `value`      | `number \| string \| null`                              | 統計値（数値または文字列）                     |
 
-- `dimensions`: 多次元データの次元情報（地域、年次、分類など）
-- `value`: 統計値（数値または文字列）
-
-**型定義**:
-
-```typescript
-interface StatsValue {
-  dimensions: {
-    area?: string; // 地域コード
-    time?: string; // 時間軸コード
-    cat01?: string; // 分類事項01
-    // ... cat02-cat15
-  };
-  value: number | string | null;
-}
-```
+型定義は`src/features/estat-api/stats-data/types/`を参照してください。
 
 ### 値オブジェクト
 

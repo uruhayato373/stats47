@@ -132,85 +132,43 @@ e-Stat API から返される生のメタ情報レスポンス。
 
 統計表の基本情報を管理するエンティティ。
 
-**属性**:
+| 属性名         | 型       | 説明                       |
+| -------------- | -------- | -------------------------- |
+| `id`           | `string` | 統計表 ID                  |
+| `statName`     | `string` | 統計調査名                 |
+| `organization` | `string` | 作成機関                   |
+| `title`        | `string` | 統計表タイトル             |
+| `cycle`        | `string` | 周期（"5 年"、"年次"など） |
+| `surveyDate`   | `string` | 調査年月                   |
+| `totalRecords` | `number` | 総データ件数               |
+| `updatedDate`  | `string` | 更新日                     |
 
-- `id`: 統計表 ID
-- `statName`: 統計調査名
-- `organization`: 作成機関
-- `title`: 統計表タイトル
-- `cycle`: 周期（"5 年"、"年次"など）
-- `surveyDate`: 調査年月
-- `totalRecords`: 総データ件数
-- `updatedDate`: 更新日
-
-**型定義**:
-
-```typescript
-interface TableInfo {
-  id: string;
-  statName: string;
-  organization: string;
-  statisticsName: string;
-  title: string;
-  cycle: string;
-  surveyDate: string;
-  openDate: string;
-  totalRecords: number;
-  updatedDate: string;
-  mainCategory?: { code: string; name: string };
-  subCategory?: { code: string; name: string };
-}
-```
+型定義は`src/features/estat-api/meta-info/types/`を参照してください。
 
 #### CategoryInfo（分類情報）
 
 統計データの分類項目を管理するエンティティ。
 
-**属性**:
+| 属性名  | 型                                                          | 説明                                               |
+| ------- | ----------------------------------------------------------- | -------------------------------------------------- |
+| `id`    | `string`                                                    | 分類 ID（"cat01"〜"cat15"、"area"、"time"、"tab"） |
+| `name`  | `string`                                                    | 分類名                                             |
+| `items` | `Array<{ code: string; name: string; unit?: string; ... }>` | 分類項目の配列                                     |
 
-- `id`: 分類 ID（"cat01"〜"cat15"、"area"、"time"、"tab"）
-- `name`: 分類名
-- `items`: 分類項目の配列
-
-**型定義**:
-
-```typescript
-interface CategoryInfo {
-  id: string;
-  name: string;
-  items: Array<{
-    code: string;
-    name: string;
-    unit?: string;
-    level?: string;
-    parentCode?: string;
-  }>;
-}
-```
+型定義は`src/features/estat-api/meta-info/types/`を参照してください。
 
 #### ParsedMetaInfo（解析済みメタ情報）
 
 メタ情報を完全解析した結果を管理するエンティティ。
 
-**属性**:
+| 属性名                  | 型               | 説明           |
+| ----------------------- | ---------------- | -------------- |
+| `tableInfo`             | `TableInfo`      | 統計表基本情報 |
+| `dimensions.categories` | `CategoryInfo[]` | 分類情報の配列 |
+| `dimensions.areas`      | `AreaInfo[]`     | 地域情報の配列 |
+| `dimensions.timeAxis`   | `TimeAxisInfo`   | 時間軸情報     |
 
-- `tableInfo`: 統計表基本情報
-- `dimensions.categories`: 分類情報の配列
-- `dimensions.areas`: 地域情報の配列
-- `dimensions.timeAxis`: 時間軸情報
-
-**型定義**:
-
-```typescript
-interface ParsedMetaInfo {
-  tableInfo: TableInfo;
-  dimensions: {
-    categories: CategoryInfo[];
-    areas: AreaInfo[];
-    timeAxis: TimeAxisInfo;
-  };
-}
-```
+型定義は`src/features/estat-api/meta-info/types/`を参照してください。
 
 ### データ変換の段階
 
