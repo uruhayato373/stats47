@@ -665,20 +665,20 @@ interface UnifiedRankingData {
 
 #### 5. ranking_values（ランキング値データ）
 
-| カラム名      | データ型 | 制約                      | デフォルト値      | 説明           |
-| ------------- | -------- | ------------------------- | ----------------- | -------------- |
-| id            | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                 | ID             |
+| カラム名          | データ型     | 制約                        | デフォルト値            | 説明      |
+| ------------- | -------- | ------------------------- | ----------------- | ------- |
+| id            | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                 | ID      |
 | ranking_key   | TEXT     | NOT NULL FK               | -                 | ランキングキー |
-| area_code     | TEXT     | NOT NULL                  | -                 | 地域コード     |
-| area_name     | TEXT     | -                         | NULL              | 地域名         |
-| time_code     | TEXT     | NOT NULL                  | -                 | 時間コード     |
-| time_name     | TEXT     | -                         | NULL              | 時間名         |
-| value         | TEXT     | NOT NULL                  | -                 | 値（文字列）   |
-| numeric_value | REAL     | -                         | NULL              | 数値           |
-| display_value | TEXT     | -                         | NULL              | 表示用値       |
-| rank          | INTEGER  | -                         | NULL              | 順位           |
-| created_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 作成日時       |
-| updated_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 更新日時       |
+| area_code     | TEXT     | NOT NULL                  | -                 | 地域コード   |
+| area_name     | TEXT     | -                         | NULL              | 地域名     |
+| time_code     | TEXT     | NOT NULL                  | -                 | 時間コード   |
+| time_name     | TEXT     | -                         | NULL              | 時間名     |
+| value         | TEXT     | NOT NULL                  | -                 | 値（文字列）  |
+| numeric_value | REAL     | -                         | NULL              | 数値      |
+| display_value | TEXT     | -                         | NULL              | 表示用値    |
+| rank          | INTEGER  | -                         | NULL              | 順位      |
+| created_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 作成日時    |
+| updated_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 更新日時    |
 
 **UNIQUE 制約**: (ranking_key, time_code, area_code)
 
