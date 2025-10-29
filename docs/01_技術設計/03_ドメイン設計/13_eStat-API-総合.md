@@ -284,122 +284,8 @@ const metaService = new EstatMetaInfoService(db);
 await metaService.processAndSaveMetaInfo("0000010101");
 ```
 
-## ドキュメント構成
 
-### サブドメイン別ドキュメント
 
-#### meta-info サブドメイン
-
-- **[overview.md](meta-info/overview.md)**: メタ情報サブドメイン概要
-- **[specifications/](meta-info/specifications/)**: 仕様書
-  - [api.md](meta-info/specifications/api.md): get-meta-info API 仕様
-  - [service.md](meta-info/specifications/service.md): メタ情報サービス仕様
-- **[implementation/](meta-info/implementation/)**: 実装ガイド
-  - [fetcher.md](meta-info/implementation/fetcher.md): フェッチャー実装ガイド
-  - [formatter.md](meta-info/implementation/formatter.md): フォーマッター実装ガイド
-  - [batch-processor.md](meta-info/implementation/batch-processor.md): バッチ処理実装ガイド
-
-#### stats-data サブドメイン
-
-- **[overview.md](04_ドメイン設計/e-Stat%20API/04_統計データ/overview.md)**: 統計データサブドメイン概要
-- **[specifications/](stats-data/specifications/)**: 仕様書
-  - [api.md](04_ドメイン設計/e-Stat%20API/04_統計データ/specifications/api.md): get-stats-data API 仕様
-  - [service.md](04_ドメイン設計/e-Stat%20API/04_統計データ/specifications/service.md): 統計データサービス仕様
-- **[implementation/](stats-data/implementation/)**: 実装ガイド
-  - [fetcher.md](stats-data/implementation/fetcher.md): フェッチャー実装ガイド
-  - [formatter.md](stats-data/implementation/formatter.md): フォーマッター実装ガイド
-
-#### stats-list サブドメイン
-
-- **[overview.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/overview.md)**: 統計リストサブドメイン概要
-- **[specifications/](stats-list/specifications/)**: 仕様書
-  - [api.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/api.md): get-stats-list API 仕様
-  - [service.md](04_ドメイン設計/e-Stat%20API/02_統計表リスト/service.md): 統計リストサービス仕様
-- **[implementation/](stats-list/implementation/)**: 実装ガイド
-  - [fetcher.md](stats-list/implementation/fetcher.md): フェッチャー実装ガイド
-  - [formatter.md](stats-list/implementation/formatter.md): フォーマッター実装ガイド
-
-### 共通ドキュメント
-
-#### アーキテクチャ
-
-- **[architecture.md](04_ドメイン設計/e-Stat%20API/architecture.md)**: 全体アーキテクチャ設計
-
-#### 共有仕様
-
-- **[shared/](shared/)**: 共通仕様
-  - [api-endpoints.md](api-endpoints.md): API エンドポイント一覧
-  - [type-system.md](type-system.md): 型システム
-  - [error-handling.md](error-handling.md): エラーハンドリング戦略
-  - [best-practices.md](04_ドメイン設計/e-Stat%20API/01_共有/best-practices.md): ベストプラクティス
-
-#### 実装ガイド
-
-- **[implementation/](implementation/)**: 全般的な実装ガイド
-  - [getting-started.md](04_ドメイン設計/e-Stat%20API/01_共有/getting-started.md): 開始ガイド
-  - [api-integration.md](api-integration.md): API 統合ガイド
-  - [data-fetching.md](data-fetching.md): データ取得実装
-
-#### テスト
-
-- **[testing/](testing/)**: テスト戦略
-  - [testing-strategy.md](testing/testing-strategy.md): テスト戦略
-  - [unit-testing.md](04_ドメイン設計/e-Stat%20API/04_統計データ/testing/unit-testing.md): 単体テスト
-
-## パフォーマンス最適化
-
-### 1. バッチ処理
-
-メタ情報の保存時に、複数レコードをバッチでまとめて処理することで、データベース操作を効率化しています。
-
-```typescript
-// バッチサイズ: 20件
-// 並列実行: 最大3チャンク同時
-```
-
-### 2. 並列処理
-
-複数の統計表を処理する際、並列処理により処理時間を短縮します。
-
-```typescript
-await Promise.allSettled(
-  batch.map(async (id) => ({
-    statsDataId: id,
-    ...(await this.processAndSaveMetaInfo(id)),
-  }))
-);
-```
-
-### 3. レート制限対応
-
-API 制限を考慮し、バッチ間に待機時間を設けています。
-
-```typescript
-// デフォルト: 1000ms
-await new Promise((resolve) => setTimeout(resolve, delayMs));
-```
-
-## エラーハンドリング
-
-### エラーの種類
-
-1. **API 通信エラー**: e-Stat API との通信に失敗した場合
-2. **データ形式エラー**: API レスポンスが期待した形式でない場合
-3. **データベースエラー**: データベース操作に失敗した場合
-
-### エラーログ
-
-詳細なエラーログを出力することで、問題の特定を容易にしています。
-
-```typescript
-console.error("Failed to fetch stats data:", error);
-console.error("Error details:", {
-  statsDataId,
-  options,
-  error: error instanceof Error ? error.message : String(error),
-  stack: error instanceof Error ? error.stack : undefined,
-});
-```
 
 ## データベーススキーマ
 
@@ -420,33 +306,7 @@ console.error("Error details:", {
 
 複合主キー: `(stats_data_id, cat01)`
 
-## 型安全性
 
-TypeScript の型システムを活用し、コンパイル時の型チェックによりバグを防ぎます。
-
-- すべての API パラメータに型定義
-- レスポンスデータの型定義
-- 内部データ構造の型定義
-
-詳細は [型システム](02-type-system.md) を参照してください。
-
-## 拡張性
-
-### 新しい API エンドポイントの追加
-
-新しい e-Stat API エンドポイントを追加する場合：
-
-1. `types/` に型定義を追加
-2. `@/services/estat-api` に API クライアントメソッドを追加
-3. 適切なサービスクラスにメソッドを追加
-
-### 新しいデータ変換の追加
-
-データ変換ロジックを追加する場合：
-
-1. サービスクラスに private メソッドを追加
-2. 既存の `format*()` メソッドから呼び出す
-3. 必要に応じて型定義を追加
 
 ## ベストプラクティス
 
@@ -2528,7 +2388,7 @@ async function fetchWithFallback(fallbackOptions: FallbackOptions) {
 
 ## 関連ドキュメント
 
-- [開始ガイド](estat-api-core.md)
+- [開始ガイド](13_eStat-API-総合.md)
 - [型システム](02_型システム.md)
 - [エラーハンドリング](05_エラーハンドリング.md)
 - [ベストプラクティス](06_ベストプラクティス.md)
