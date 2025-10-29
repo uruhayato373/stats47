@@ -8,12 +8,14 @@ export interface DataTableProps<TData, TValue> {
   enableFiltering?: boolean;
   enableSorting?: boolean;
   showIndex?: boolean;
+  showBorder?: boolean;
 }
 
 export interface DataTableColumnMeta {
   filterable?: boolean;
   filterType?: "text" | "select";
   filterPlaceholder?: string;
+  width?: string;
 }
 
 declare module "@tanstack/react-table" {

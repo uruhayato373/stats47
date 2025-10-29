@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,7 +14,6 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import * as React from "react";
 
 import {
   Table,
@@ -35,6 +36,7 @@ export function DataTable<TData, TValue>({
   enableFiltering = true,
   enableSorting = true,
   showIndex = true,
+  showBorder = true,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -98,14 +100,15 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       {enableFiltering && <DataTableToolbar table={table} />}
-      <div className="rounded-md border">
+      <div className={showBorder ? "rounded-md border" : ""}>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const width = header.column.columnDef.meta?.width;
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} style={{ width }}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -125,21 +128,24 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const width = cell.column.columnDef.meta?.width;
+                    return (
+                      <TableCell key={cell.id} style={{ width }}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))
             ) : (
               <TableRow>
                 <TableCell
                   colSpan={columnsWithIndex.length}
-                  className="h-24 text-center"
+                  className="text-center"
                 >
                   {emptyMessage}
                 </TableCell>

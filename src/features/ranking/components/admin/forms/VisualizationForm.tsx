@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -38,8 +39,13 @@ interface VisualizationFormProps {
   item?: any;
 }
 
-export function VisualizationForm({ item }: VisualizationFormProps) {
-  const form = useForm<VisualizationFormValues>({
+export interface VisualizationFormRef {
+  getValues: () => VisualizationFormValues;
+}
+
+export const VisualizationForm = forwardRef<VisualizationFormRef, VisualizationFormProps>(
+  ({ item }, ref) => {
+    const form = useForm<VisualizationFormValues>({
     resolver: zodResolver(visualizationSchema),
     defaultValues: {
       mapColorScheme: item?.mapColorScheme || "interpolateBlues",
@@ -49,6 +55,10 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
       decimalPlaces: item?.decimalPlaces ?? 0,
     },
   });
+
+  useImperativeHandle(ref, () => ({
+    getValues: () => form.getValues(),
+  }));
 
   const onSubmit = (values: VisualizationFormValues) => {
     console.log("可視化設定フォーム送信:", values);
@@ -209,4 +219,5 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
       </div>
     </Form>
   );
-}
+  }
+);

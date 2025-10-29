@@ -57,19 +57,37 @@ export const QUERIES = {
   `,
 
   /**
+   * ランキングキーで単一のランキング項目を取得
+   */
+  getRankingItemByKey: `
+    SELECT * FROM ranking_items WHERE ranking_key = ? AND is_active = 1
+  `,
+
+  /**
+   * ランキングキーでデータソースメタデータを取得
+   */
+  getDataSourceMetadataByKey: `
+    SELECT * FROM data_source_metadata WHERE ranking_key = ?
+  `,
+
+  /**
    * ランキング項目を更新
    */
   updateRankingItem: `
     UPDATE ranking_items 
     SET 
       label = ?,
+      name = ?,
+      description = ?,
+      unit = ?,
+      data_source_id = ?,
       map_color_scheme = ?,
       map_diverging_midpoint = ?,
       ranking_direction = ?,
       conversion_factor = ?,
       decimal_places = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 
   /**
@@ -80,7 +98,7 @@ export const QUERIES = {
     SET 
       is_active = 0,
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
+    WHERE ranking_key = ?
   `,
 
   /**
@@ -105,6 +123,34 @@ export const QUERIES = {
       is_featured = ?,
       updated_at = CURRENT_TIMESTAMP
     WHERE id = ?
+  `,
+
+  /**
+   * データソースメタデータを作成
+   */
+  createDataSourceMetadata: `
+    INSERT INTO data_source_metadata 
+    (ranking_key, data_source_id, area_type, calculation_type, metadata)
+    VALUES (?, ?, ?, ?, ?)
+  `,
+
+  /**
+   * データソースメタデータを更新
+   */
+  updateDataSourceMetadata: `
+    UPDATE data_source_metadata 
+    SET 
+      calculation_type = ?,
+      metadata = ?,
+      updated_at = CURRENT_TIMESTAMP
+    WHERE ranking_key = ? AND data_source_id = ? AND area_type = ?
+  `,
+
+  /**
+   * ランキングキーでデータソースメタデータを削除
+   */
+  deleteDataSourceMetadataByRankingKey: `
+    DELETE FROM data_source_metadata WHERE ranking_key = ?
   `,
 } as const;
 

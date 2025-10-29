@@ -172,10 +172,6 @@ export async function updateCategory(
     fields.push("display_order = ?");
     values.push(data.displayOrder);
   }
-  if (data.isActive !== undefined) {
-    fields.push("is_active = ?");
-    values.push(data.isActive ? 1 : 0);
-  }
 
   values.push(id);
 
@@ -313,13 +309,7 @@ export async function createSubcategory(
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.createSubcategory)
-    .bind(
-      data.subcategoryKey,
-      data.name,
-      data.categoryId,
-      data.href || null,
-      data.displayOrder
-    )
+    .bind(data.subcategoryKey, data.name, data.categoryId, data.displayOrder)
     .run();
 
   if (!result.success) {
@@ -363,17 +353,9 @@ export async function updateSubcategory(
     fields.push("category_id = ?");
     values.push(data.categoryId);
   }
-  if (data.href !== undefined) {
-    fields.push("href = ?");
-    values.push(data.href || null);
-  }
   if (data.displayOrder !== undefined) {
     fields.push("display_order = ?");
     values.push(data.displayOrder);
-  }
-  if (data.isActive !== undefined) {
-    fields.push("is_active = ?");
-    values.push(data.isActive ? 1 : 0);
   }
 
   values.push(id);
@@ -431,7 +413,6 @@ function convertCategoryFromDB(
     name: dbCategory.name,
     icon: dbCategory.icon || undefined,
     displayOrder: dbCategory.display_order,
-    isActive: dbCategory.is_active,
     subcategories,
   };
 }
@@ -451,8 +432,6 @@ function convertSubcategoryFromDB(dbSubcategory: SubcategoryDB): Subcategory {
     subcategoryKey: dbSubcategory.subcategory_key,
     name: dbSubcategory.name,
     categoryId: dbSubcategory.category_id,
-    href: dbSubcategory.href || undefined,
     displayOrder: dbSubcategory.display_order,
-    isActive: dbSubcategory.is_active,
   };
 }

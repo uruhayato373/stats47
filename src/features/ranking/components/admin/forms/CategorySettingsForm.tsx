@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -51,11 +51,16 @@ interface CategorySettingsFormProps {
   item?: any;
 }
 
-export function CategorySettingsForm({ item }: CategorySettingsFormProps) {
-  const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
-  const [loading, setLoading] = useState(false);
+export interface CategorySettingsFormRef {
+  getValues: () => CategorySettingsFormValues;
+}
 
-  const form = useForm<CategorySettingsFormValues>({
+export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, CategorySettingsFormProps>(
+  ({ item }, ref) => {
+    const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
+    const [loading, setLoading] = useState(false);
+
+    const form = useForm<CategorySettingsFormValues>({
     resolver: zodResolver(categorySettingsSchema),
     defaultValues: {
       categoryId: item?.categoryId || "",
@@ -126,12 +131,16 @@ export function CategorySettingsForm({ item }: CategorySettingsFormProps) {
     }
   }, [selectedCategoryId, selectedSubcategoryId, subcategories, form]);
 
-  const onSubmit = async (values: CategorySettingsFormValues) => {
-    console.log("カテゴリ設定保存:", values);
-    // TODO: API呼び出し
-  };
+    useImperativeHandle(ref, () => ({
+      getValues: () => form.getValues(),
+    }));
 
-  return (
+    const onSubmit = async (values: CategorySettingsFormValues) => {
+      console.log("カテゴリ設定保存:", values);
+      // TODO: API呼び出し
+    };
+
+    return (
     <Form {...form}>
       <div className="space-y-4">
         {/* カテゴリ・サブカテゴリ・グループ選択（3列） */}
@@ -274,4 +283,5 @@ export function CategorySettingsForm({ item }: CategorySettingsFormProps) {
       </div>
     </Form>
   );
-}
+  }
+);

@@ -3,7 +3,8 @@
 import { useState } from "react";
 
 import * as LucideReact from "lucide-react";
-import { Edit2 } from "lucide-react";
+import { AlertCircle, Edit2, Loader2 } from "lucide-react";
+import useSWR from "swr";
 
 import {
     Accordion,
@@ -11,6 +12,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import {
     Card,
@@ -29,10 +31,6 @@ import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 
 import type { Category, Subcategory } from "@/features/category/types/category.types";
-
-interface CategoriesManagementProps {
-  categories: Category[];
-}
 
 interface EditDialogProps {
   open: boolean;
@@ -102,16 +100,6 @@ function EditDialog({
             </div>
           )}
 
-          {!isCategory && (
-            <div className="grid gap-2">
-              <Label htmlFor="href">URL</Label>
-              <Input
-                id="href"
-                defaultValue={subcategory?.href || ""}
-                className="font-mono"
-              />
-            </div>
-          )}
 
           {!isCategory && categoryName && (
             <div className="grid gap-2">
@@ -150,7 +138,33 @@ function EditDialog({
   );
 }
 
-export function CategoriesManagement({ categories }: CategoriesManagementProps) {
+/**
+ * カテゴリデータ取得用のフェッチャー関数
+ */
+async function fetchCategories(): Promise<Category[]> {
+  const response = await fetch("/api/admin/categories");
+  if (!response.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+  const data = (await response.json()) as { categories: Category[] };
+  return data.categories;
+}
+
+export function CategoriesManagement() {
+  // useSWRでデータ取得
+  const {
+    data: categories,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR<Category[]>("/api/admin/categories", fetchCategories, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+    dedupingInterval: 300000, // 5分間キャッシュ
+    errorRetryCount: 3,
+    errorRetryInterval: 5000,
+  });
+
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [editingSubcategory, setEditingSubcategory] = useState<{
     subcategory: Subcategory;
@@ -159,9 +173,27 @@ export function CategoriesManagement({ categories }: CategoriesManagementProps) 
 
 
   const handleSaveCategory = async () => {
-    // TODO: API呼び出し
-    console.log("Save category:", editingCategory);
-    window.location.reload();
+    if (!editingCategory) return;
+    
+    try {
+      const response = await fetch(`/api/admin/categories/${editingCategory.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          categoryKey: editingCategory.categoryKey,
+          name: editingCategory.name,
+          icon: editingCategory.icon,
+          displayOrder: editingCategory.displayOrder,
+        }),
+      });
+      
+      if (response.ok) {
+        setEditingCategory(null);
+        await mutate(); // データ再取得
+      }
+    } catch (error) {
+      console.error("Error saving category:", error);
+    }
   };
 
   const handleDeleteCategory = async () => {
@@ -171,7 +203,8 @@ export function CategoriesManagement({ categories }: CategoriesManagementProps) 
         method: "DELETE",
       });
       if (response.ok) {
-        window.location.reload();
+        setEditingCategory(null);
+        await mutate(); // データ再取得
       }
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -186,9 +219,30 @@ export function CategoriesManagement({ categories }: CategoriesManagementProps) 
   };
 
   const handleSaveSubcategory = async () => {
-    // TODO: API呼び出し
-    console.log("Save subcategory:", editingSubcategory);
-    window.location.reload();
+    if (!editingSubcategory) return;
+    
+    try {
+      const response = await fetch(
+        `/api/admin/subcategories/${editingSubcategory.subcategory.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            subcategoryKey: editingSubcategory.subcategory.subcategoryKey,
+            name: editingSubcategory.subcategory.name,
+            categoryId: editingSubcategory.subcategory.categoryId,
+            displayOrder: editingSubcategory.subcategory.displayOrder,
+          }),
+        }
+      );
+      
+      if (response.ok) {
+        setEditingSubcategory(null);
+        await mutate(); // データ再取得
+      }
+    } catch (error) {
+      console.error("Error saving subcategory:", error);
+    }
   };
 
   const handleDeleteSubcategory = async () => {
@@ -201,7 +255,8 @@ export function CategoriesManagement({ categories }: CategoriesManagementProps) 
         }
       );
       if (response.ok) {
-        window.location.reload();
+        setEditingSubcategory(null);
+        await mutate(); // データ再取得
       }
     } catch (error) {
       console.error("Error deleting subcategory:", error);
@@ -216,6 +271,38 @@ export function CategoriesManagement({ categories }: CategoriesManagementProps) 
     }>>)[iconName];
     return IconComponent || null;
   };
+
+  // ローディング状態
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <span className="ml-2 text-muted-foreground">読み込み中...</span>
+      </div>
+    );
+  }
+
+  // エラー状態
+  if (error) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>エラー</AlertTitle>
+        <AlertDescription>
+          カテゴリデータの取得に失敗しました。ページをリロードしてください。
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
+  // データがない場合
+  if (!categories || categories.length === 0) {
+    return (
+      <div className="text-center py-12 text-muted-foreground">
+        カテゴリがありません
+      </div>
+    );
+  }
 
   return (
     <>

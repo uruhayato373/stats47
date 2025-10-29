@@ -5,6 +5,8 @@
 
 // ランキング項目とランキング値の型定義
 export type {
+  DataSourceMetadata,
+  DataSourceMetadataDB,
   RankingItem,
   RankingItemDB,
   RankingValue,

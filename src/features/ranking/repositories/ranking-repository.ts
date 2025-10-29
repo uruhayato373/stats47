@@ -15,7 +15,7 @@ import { buildEnvironmentConfig } from "@/lib/environment";
 import { getDataProvider } from "@/infrastructure/database";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
-import { RankingItem, RankingItemDB } from "../types";
+import { DataSourceMetadataDB, RankingItem, RankingItemDB } from "../types";
 
 import { GROUP_QUERIES, QUERIES } from "./ranking-queries";
 
@@ -95,49 +95,17 @@ export class RankingRepository {
 
   /**
    * ranking_valuesテーブルからデータを取得
-   * database/index.ts の fetchRankingValues() を置き換え
+   * @deprecated このメソッドは使用されません。設計によりR2ストレージを使用します。
+   * ランキング値データは R2 Storage に JSON 形式で保存されます。
    */
   async fetchRankingValues(options?: {
     limit?: number;
     rankingKey?: string;
   }): Promise<any[]> {
-    const config = buildEnvironmentConfig();
-    const { limit = 50, rankingKey } = options || {};
-
-    try {
-      // Mock環境
-      if (config.isMock) {
-        console.log(
-          `[${config.environment}] Fetching ranking values from mock data...`
-        );
-        return await mockDataProvider.fetchRankingValues(options);
-      }
-
-      // Development/Staging/Production環境
-      console.log(
-        `[${config.environment}] Fetching ranking values from database...`
-      );
-
-      let query = `SELECT * FROM ranking_values`;
-      const params: any[] = [];
-
-      if (rankingKey) {
-        query += ` WHERE ranking_key = ?`;
-        params.push(rankingKey);
-      }
-
-      query += ` LIMIT ${limit}`;
-
-      const result = await this.db
-        .prepare(query)
-        .bind(...params)
-        .all();
-
-      return result.results;
-    } catch (error) {
-      console.error("Failed to fetch ranking values:", error);
-      return [];
-    }
+    console.warn(
+      "[DEPRECATED] fetchRankingValues() は使用されません。R2 ストレージを使用してください。"
+    );
+    return [];
   }
 
   /**
@@ -227,10 +195,12 @@ export class RankingRepository {
 
   /**
    * 単一のランキング項目を取得（キー）
+   * メタデータも同時に取得する
    */
   async getRankingItemByKey(rankingKey: string): Promise<RankingItem | null> {
     try {
-      const result = await this.db
+      // ランキング項目を取得
+      const itemResult = await this.db
         .prepare(
           `SELECT * FROM ranking_items 
           WHERE ranking_key = ? AND is_active = 1`
@@ -238,11 +208,32 @@ export class RankingRepository {
         .bind(rankingKey)
         .first();
 
-      if (!result) {
+      if (!itemResult) {
         return null;
       }
 
-      return convertRankingItemFromDB(result as unknown as RankingItemDB);
+      const item = convertRankingItemFromDB(
+        itemResult as unknown as RankingItemDB
+      );
+
+      // メタデータを取得
+      const metadataResults = await this.db
+        .prepare(`SELECT * FROM data_source_metadata WHERE ranking_key = ?`)
+        .bind(rankingKey)
+        .all();
+
+      if (metadataResults.results && metadataResults.results.length > 0) {
+        item.metadataItems = (
+          metadataResults.results as unknown as DataSourceMetadataDB[]
+        ).map((meta) => ({
+          dataSourceId: meta.data_source_id,
+          areaType: meta.area_type,
+          calculationType: meta.calculation_type,
+          metadata: JSON.parse(meta.metadata),
+        }));
+      }
+
+      return item;
     } catch (error) {
       console.error("Failed to get ranking item by key:", error);
       throw error;
@@ -253,9 +244,13 @@ export class RankingRepository {
    * ランキング項目を更新
    */
   async updateRankingItem(
-    id: number,
+    rankingKey: string,
     updates: {
       label?: string;
+      name?: string;
+      description?: string;
+      unit?: string;
+      dataSourceId?: string;
       mapColorScheme?: string;
       mapDivergingMidpoint?: string;
       rankingDirection?: "asc" | "desc";
@@ -267,13 +262,17 @@ export class RankingRepository {
       const result = await this.db
         .prepare(QUERIES.updateRankingItem)
         .bind(
-          updates.label,
-          updates.mapColorScheme,
-          updates.mapDivergingMidpoint,
-          updates.rankingDirection,
-          updates.conversionFactor,
-          updates.decimalPlaces,
-          id
+          updates.label || null,
+          updates.name || null,
+          updates.description || null,
+          updates.unit || null,
+          updates.dataSourceId || null,
+          updates.mapColorScheme || null,
+          updates.mapDivergingMidpoint || null,
+          updates.rankingDirection || null,
+          updates.conversionFactor || null,
+          updates.decimalPlaces || null,
+          rankingKey
         )
         .run();
 
@@ -287,11 +286,11 @@ export class RankingRepository {
   /**
    * ランキング項目を削除（論理削除）
    */
-  async deleteRankingItem(id: number): Promise<boolean> {
+  async deleteRankingItem(rankingKey: string): Promise<boolean> {
     try {
       const result = await this.db
         .prepare(QUERIES.deleteRankingItem)
-        .bind(id)
+        .bind(rankingKey)
         .run();
 
       return result.success;
@@ -756,6 +755,85 @@ export class RankingRepository {
         .run();
     } catch (error) {
       console.error("Failed to update item display order in group:", error);
+      throw error;
+    }
+  }
+
+  // ============================================================
+  // データソースメタデータ管理メソッド
+  // ============================================================
+
+  /**
+   * データソースメタデータを作成
+   */
+  async createDataSourceMetadata(metadata: {
+    rankingKey: string;
+    dataSourceId: string;
+    areaType: "prefecture" | "city" | "national";
+    calculationType: "direct" | "ratio" | "aggregate";
+    metadata: object;
+  }): Promise<void> {
+    try {
+      const metadataJson = JSON.stringify(metadata.metadata);
+      await this.db
+        .prepare(QUERIES.createDataSourceMetadata)
+        .bind(
+          metadata.rankingKey,
+          metadata.dataSourceId,
+          metadata.areaType,
+          metadata.calculationType,
+          metadataJson
+        )
+        .run();
+    } catch (error) {
+      console.error("Failed to create data source metadata:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * データソースメタデータを更新
+   */
+  async updateDataSourceMetadata(
+    rankingKey: string,
+    dataSourceId: string,
+    areaType: "prefecture" | "city" | "national",
+    metadata: {
+      calculationType: "direct" | "ratio" | "aggregate";
+      metadata: object;
+    }
+  ): Promise<void> {
+    try {
+      const metadataJson = JSON.stringify(metadata.metadata);
+      await this.db
+        .prepare(QUERIES.updateDataSourceMetadata)
+        .bind(
+          metadata.calculationType,
+          metadataJson,
+          rankingKey,
+          dataSourceId,
+          areaType
+        )
+        .run();
+    } catch (error) {
+      console.error("Failed to update data source metadata:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * ランキングキーでデータソースメタデータを削除
+   */
+  async deleteDataSourceMetadataByRankingKey(
+    rankingKey: string
+  ): Promise<void> {
+    try {
+      await this.db
+        .prepare(QUERIES.deleteDataSourceMetadataByRankingKey)
+        .bind(rankingKey)
+        .run();
+    } catch (error) {
+      console.error("Failed to delete data source metadata:", error);
       throw error;
     }
   }

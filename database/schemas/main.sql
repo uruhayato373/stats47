@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS categories (
   name TEXT NOT NULL,
   icon TEXT,
   display_order INTEGER DEFAULT 0,
-  is_active BOOLEAN DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -94,9 +93,7 @@ CREATE TABLE IF NOT EXISTS subcategories (
   subcategory_key TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
   category_id INTEGER NOT NULL,
-  href TEXT,
   display_order INTEGER DEFAULT 0,
-  is_active BOOLEAN DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
@@ -186,23 +183,9 @@ CREATE TABLE IF NOT EXISTS data_source_metadata (
   CHECK (calculation_type IN ('direct', 'ratio', 'aggregate'))
 );
 
--- ranking_values: ランキング値データテーブル
-CREATE TABLE IF NOT EXISTS ranking_values (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ranking_key TEXT NOT NULL,
-  area_code TEXT NOT NULL,
-  area_name TEXT,
-  time_code TEXT NOT NULL,
-  time_name TEXT,
-  value TEXT NOT NULL,
-  numeric_value REAL,
-  display_value TEXT,
-  rank INTEGER,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(ranking_key, time_code, area_code),
-  FOREIGN KEY (ranking_key) REFERENCES ranking_items(ranking_key) ON DELETE CASCADE
-);
+-- 注意: ranking_values テーブルは使用しません（設計により R2 ストレージを使用）
+-- ランキング値データは R2 Storage に JSON 形式で保存されます
+-- パス: ranking/{ranking_key}/{area_type}/{time_code}.json
 
 -- ranking_groups: ランキンググループ定義テーブル
 CREATE TABLE IF NOT EXISTS ranking_groups (
@@ -273,12 +256,10 @@ CREATE TABLE IF NOT EXISTS widget_templates (
 
 -- カテゴリ・サブカテゴリ関連インデックス
 CREATE INDEX IF NOT EXISTS idx_categories_key ON categories(category_key);
-CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(is_active);
 CREATE INDEX IF NOT EXISTS idx_categories_display_order ON categories(display_order);
 
 CREATE INDEX IF NOT EXISTS idx_subcategories_key ON subcategories(subcategory_key);
 CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_id);
-CREATE INDEX IF NOT EXISTS idx_subcategories_active ON subcategories(is_active);
 CREATE INDEX IF NOT EXISTS idx_subcategories_display_order ON subcategories(display_order);
 
 -- 認証関連インデックス
@@ -303,9 +284,7 @@ CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_ranking ON data_source_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_source ON data_source_metadata(data_source_id);
 CREATE INDEX IF NOT EXISTS idx_data_source_metadata_area ON data_source_metadata(area_type);
-CREATE INDEX IF NOT EXISTS idx_ranking_values_lookup ON ranking_values(ranking_key, time_code);
-CREATE INDEX IF NOT EXISTS idx_ranking_values_area ON ranking_values(area_code);
-CREATE INDEX IF NOT EXISTS idx_ranking_values_time ON ranking_values(time_code);
+-- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);
 

@@ -1,17 +1,18 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
 import { Switch } from "@/components/atoms/ui/switch";
@@ -33,23 +34,32 @@ interface BasicInfoFormProps {
   mode: "create" | "edit";
 }
 
-export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
-  const form = useForm<BasicInfoFormValues>({
-    resolver: zodResolver(basicInfoSchema),
-    defaultValues: {
-      rankingKey: item?.rankingKey || "",
-      label: item?.label || "",
-      name: item?.name || "",
-      unit: item?.unit || "",
-      description: item?.description || "",
-      isActive: item?.isActive ?? true,
-    },
-  });
+export interface BasicInfoFormRef {
+  getValues: () => BasicInfoFormValues;
+}
 
-  const onSubmit = (values: BasicInfoFormValues) => {
-    console.log("基本情報フォーム送信:", values);
-    // TODO: API呼び出し
-  };
+export const BasicInfoForm = forwardRef<BasicInfoFormRef, BasicInfoFormProps>(
+  ({ item, mode }, ref) => {
+    const form = useForm<BasicInfoFormValues>({
+      resolver: zodResolver(basicInfoSchema),
+      defaultValues: {
+        rankingKey: item?.rankingKey || "",
+        label: item?.label || "",
+        name: item?.name || "",
+        unit: item?.unit || "",
+        description: item?.description || "",
+        isActive: item?.isActive ?? true,
+      },
+    });
+
+    useImperativeHandle(ref, () => ({
+      getValues: () => form.getValues(),
+    }));
+
+    const onSubmit = (values: BasicInfoFormValues) => {
+      console.log("基本情報フォーム送信:", values);
+      // TODO: API呼び出し
+    };
 
   return (
     <Form {...form}>
@@ -172,4 +182,5 @@ export function BasicInfoForm({ item, mode }: BasicInfoFormProps) {
       </div>
     </Form>
   );
-}
+  }
+);

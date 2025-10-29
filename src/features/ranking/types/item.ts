@@ -146,12 +146,23 @@ export interface RankingItem {
    * この項目をおすすめとして表示するかどうか
    */
   isFeatured: boolean;
+
+  /**
+   * メタデータアイテム（オプショナル）
+   * データソースのメタデータ設定
+   */
+  metadataItems?: Array<{
+    dataSourceId: string;
+    areaType: string;
+    calculationType: string;
+    metadata: object;
+  }>;
 }
 
 /**
  * データベースのランキング値型（スネークケース）
- * 実際のranking_valuesテーブル構造と完全に一致
- * データベースから直接取得した生データの型
+ * @deprecated ranking_valuesテーブルは使用しません。R2ストレージを使用してください。
+ * ランキング値データは R2 Storage に JSON 形式で保存されます。
  */
 export interface RankingValueDB {
   /**
@@ -219,6 +230,31 @@ export interface RankingValueDB {
    * レコードが最後に更新された日時（ISO 8601形式）
    */
   updated_at: string;
+}
+
+/**
+ * データソースメタデータの型（データベース）
+ * data_source_metadataテーブルに対応
+ */
+export interface DataSourceMetadataDB {
+  id: number;
+  ranking_key: string;
+  data_source_id: string;
+  area_type: string;
+  calculation_type: string;
+  metadata: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * データソースメタデータの型（アプリケーション）
+ */
+export interface DataSourceMetadata {
+  dataSourceId: string;
+  areaType: string;
+  calculationType: string;
+  metadata: object;
 }
 
 /**

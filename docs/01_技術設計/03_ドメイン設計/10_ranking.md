@@ -560,27 +560,32 @@ interface UnifiedRankingData {
 
 #### 1. ranking_items（ランキング項目定義）
 
-| カラム名               | データ型 | 制約                      | デフォルト値       | 説明               |
-| ---------------------- | -------- | ------------------------- | ------------------ | ------------------ |
-| id                     | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                  | 項目 ID            |
-| ranking_key            | TEXT     | UNIQUE NOT NULL           | -                  | ランキングキー     |
-| label                  | TEXT     | NOT NULL                  | -                  | 短縮ラベル         |
-| name                   | TEXT     | NOT NULL                  | -                  | 正式名称           |
-| description            | TEXT     | -                         | NULL               | 説明               |
-| unit                   | TEXT     | NOT NULL                  | -                  | 単位               |
-| data_source_id         | TEXT     | NOT NULL FK               | -                  | データソース ID    |
-| map_color_scheme       | TEXT     | -                         | 'interpolateBlues' | 地図カラースキーム |
-| map_diverging_midpoint | TEXT     | -                         | 'zero'             | 発散型カラー中央値 |
-| ranking_direction      | TEXT     | -                         | 'desc'             | ランキング方向     |
-| conversion_factor      | REAL     | -                         | 1                  | 変換係数           |
-| decimal_places         | INTEGER  | -                         | 0                  | 小数点以下桁数     |
-| is_active              | BOOLEAN  | -                         | 1                  | アクティブフラグ   |
-| created_at             | DATETIME | -                         | CURRENT_TIMESTAMP  | 作成日時           |
-| updated_at             | DATETIME | -                         | CURRENT_TIMESTAMP  | 更新日時           |
+| カラム名                | データ型 | 制約                      | デフォルト値       | 説明                       |
+| ----------------------- | -------- | ------------------------- | ------------------ | -------------------------- |
+| id                      | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                  | 項目 ID                    |
+| ranking_key             | TEXT     | UNIQUE NOT NULL           | -                  | ランキングキー             |
+| label                   | TEXT     | NOT NULL                  | -                  | 短縮ラベル                 |
+| name                    | TEXT     | NOT NULL                  | -                  | 正式名称                   |
+| description             | TEXT     | -                         | NULL               | 説明                       |
+| unit                    | TEXT     | NOT NULL                  | -                  | 単位                       |
+| data_source_id          | TEXT     | NOT NULL FK               | -                  | データソース ID            |
+| group_id                | INTEGER  | FK                        | NULL               | ランキンググループ ID      |
+| display_order_in_group  | INTEGER  | -                         | 0                  | グループ内表示順           |
+| is_featured             | BOOLEAN  | -                         | 0                  | 注目項目フラグ             |
+| map_color_scheme        | TEXT     | -                         | 'interpolateBlues' | 地図カラースキーム         |
+| map_diverging_midpoint  | TEXT     | -                         | 'zero'             | 発散型カラー中央値         |
+| ranking_direction       | TEXT     | -                         | 'desc'             | ランキング方向             |
+| conversion_factor       | REAL     | -                         | 1                  | 変換係数                   |
+| decimal_places          | INTEGER  | -                         | 0                  | 小数点以下桁数             |
+| is_active               | BOOLEAN  | -                         | 1                  | アクティブフラグ           |
+| created_at              | DATETIME | -                         | CURRENT_TIMESTAMP  | 作成日時                   |
+| updated_at              | DATETIME | -                         | CURRENT_TIMESTAMP  | 更新日時                   |
 
-**インデックス**: `idx_ranking_items_data_source`, `idx_ranking_items_active`
+**インデックス**: `idx_ranking_items_data_source`, `idx_ranking_items_active`, `idx_ranking_items_key`
 
-**外部キー**: data_source_id → data_sources(id)
+**外部キー**:
+- data_source_id → data_sources(id)
+- group_id → ranking_groups(id)
 
 #### 2. data_sources（データソース定義）
 
@@ -649,42 +654,42 @@ interface UnifiedRankingData {
 
 **インデックス**: `idx_ranking_groups_subcategory`, `idx_ranking_groups_display_order`
 
-#### 5. ranking_group_items（グループ・アイテム関連）
+**関連**:
+- ランキング項目は `ranking_items.group_id` で直接このグループを参照
+- サブカテゴリとの紐付けは `subcategory_id` で管理
 
-| カラム名        | データ型 | 制約                      | デフォルト値      | 説明              |
-| --------------- | -------- | ------------------------- | ----------------- | ----------------- |
-| id              | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                 | ID                |
-| group_id        | INTEGER  | NOT NULL FK               | -                 | グループ ID       |
-| ranking_item_id | INTEGER  | NOT NULL FK               | -                 | ランキング項目 ID |
-| display_order   | INTEGER  | -                         | 0                 | 表示順            |
-| is_featured     | BOOLEAN  | -                         | 0                 | 注目項目フラグ    |
-| created_at      | DATETIME | -                         | CURRENT_TIMESTAMP | 作成日時          |
+**設計の特徴**:
+- 中間テーブル不要: `ranking_items` が直接 `group_id` を保持
+- グループ内の順序: `ranking_items.display_order_in_group` で管理
+- 注目項目: `ranking_items.is_featured` で管理
 
-**UNIQUE 制約**: (group_id, ranking_item_id)
+#### 5. ranking_values（ランキング値データ）
 
-**インデックス**: `idx_ranking_group_items_group`, `idx_ranking_group_items_item`, `idx_ranking_group_items_order`
+| カラム名      | データ型 | 制約                      | デフォルト値      | 説明           |
+| ------------- | -------- | ------------------------- | ----------------- | -------------- |
+| id            | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                 | ID             |
+| ranking_key   | TEXT     | NOT NULL FK               | -                 | ランキングキー |
+| area_code     | TEXT     | NOT NULL                  | -                 | 地域コード     |
+| area_name     | TEXT     | -                         | NULL              | 地域名         |
+| time_code     | TEXT     | NOT NULL                  | -                 | 時間コード     |
+| time_name     | TEXT     | -                         | NULL              | 時間名         |
+| value         | TEXT     | NOT NULL                  | -                 | 値（文字列）   |
+| numeric_value | REAL     | -                         | NULL              | 数値           |
+| display_value | TEXT     | -                         | NULL              | 表示用値       |
+| rank          | INTEGER  | -                         | NULL              | 順位           |
+| created_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 作成日時       |
+| updated_at    | DATETIME | -                         | CURRENT_TIMESTAMP | 更新日時       |
 
-**外部キー**:
+**UNIQUE 制約**: (ranking_key, time_code, area_code)
 
-- group_id → ranking_groups(id) ON DELETE CASCADE
-- ranking_item_id → ranking_items(id) ON DELETE CASCADE
+**インデックス**:
+- `idx_ranking_values_lookup` ON (ranking_key, time_code)
+- `idx_ranking_values_area` ON (area_code)
+- `idx_ranking_values_time` ON (time_code)
 
-#### 6. subcategory_ranking_items（サブカテゴリ・アイテム関連）
+**外部キー**: ranking_key → ranking_items(ranking_key) ON DELETE CASCADE
 
-| カラム名        | データ型 | 制約                      | デフォルト値      | 説明              |
-| --------------- | -------- | ------------------------- | ----------------- | ----------------- |
-| id              | INTEGER  | PRIMARY KEY AUTOINCREMENT | -                 | ID                |
-| subcategory_id  | TEXT     | NOT NULL                  | -                 | サブカテゴリ ID   |
-| ranking_item_id | INTEGER  | NOT NULL FK               | -                 | ランキング項目 ID |
-| display_order   | INTEGER  | -                         | 0                 | 表示順            |
-| is_default      | BOOLEAN  | -                         | 0                 | デフォルト選択    |
-| created_at      | DATETIME | -                         | CURRENT_TIMESTAMP | 作成日時          |
-
-**UNIQUE 制約**: (subcategory_id, ranking_item_id)
-
-**インデックス**: `idx_subcategory_ranking_subcategory`, `idx_subcategory_ranking_item`, `idx_subcategory_ranking_order`
-
-**外部キー**: ranking_item_id → ranking_items(id) ON DELETE CASCADE
+**注意**: 大量データは R2 ストレージに保存推奨
 
 ### R2 ストレージ構造
 
@@ -738,16 +743,17 @@ ranking/
 ```mermaid
 erDiagram
     data_sources ||--o{ data_source_metadata : "provides"
+    data_sources ||--o{ ranking_items : "defines"
     ranking_items ||--o{ data_source_metadata : "has"
-    ranking_items ||--o{ ranking_group_items : "belongs to"
-    ranking_items ||--o{ subcategory_ranking_items : "belongs to"
-    ranking_groups ||--o{ ranking_group_items : "contains"
+    ranking_items }o--|| ranking_groups : "belongs to"
+    ranking_items ||--o{ ranking_values : "has"
 
     data_sources {
         TEXT id PK
         TEXT name
         TEXT description
         TEXT base_url
+        TEXT api_version
         BOOLEAN is_active
     }
 
@@ -756,16 +762,23 @@ erDiagram
         TEXT ranking_key UK
         TEXT label
         TEXT name
+        TEXT description
         TEXT unit
         TEXT data_source_id FK
+        INTEGER group_id FK
+        INTEGER display_order_in_group
+        BOOLEAN is_featured
         TEXT map_color_scheme
+        TEXT ranking_direction
         BOOLEAN is_active
     }
 
     data_source_metadata {
         INTEGER id PK
-        INTEGER ranking_item_id FK
+        TEXT ranking_key FK
         TEXT data_source_id FK
+        TEXT area_type
+        TEXT calculation_type
         TEXT metadata
     }
 
@@ -774,26 +787,30 @@ erDiagram
         TEXT group_key UK
         TEXT subcategory_id
         TEXT name
+        TEXT description
+        TEXT icon
         INTEGER display_order
         BOOLEAN is_collapsed
     }
 
-    ranking_group_items {
+    ranking_values {
         INTEGER id PK
-        INTEGER group_id FK
-        INTEGER ranking_item_id FK
-        INTEGER display_order
-        BOOLEAN is_featured
-    }
-
-    subcategory_ranking_items {
-        INTEGER id PK
-        TEXT subcategory_id
-        INTEGER ranking_item_id FK
-        INTEGER display_order
-        BOOLEAN is_default
+        TEXT ranking_key FK
+        TEXT area_code
+        TEXT area_name
+        TEXT time_code
+        TEXT time_name
+        TEXT value
+        REAL numeric_value
+        INTEGER rank
     }
 ```
+
+**設計のポイント**:
+1. **ranking_items → ranking_groups**: 直接参照（中間テーブル不要）
+2. **ranking_groups → subcategory**: `subcategory_id` で紐付け（外部キーなし）
+3. **ranking_items → data_source_metadata**: `ranking_key` 経由で複数メタデータ保持可能
+4. **ranking_values**: 大量データのため R2 推奨（D1 はメタデータのみ）
 
 ## ディレクトリ構造
 

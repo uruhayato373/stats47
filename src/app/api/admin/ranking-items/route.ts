@@ -11,16 +11,56 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // TODO: バリデーション（zod など）
+    // 必須フィールドのバリデーション
+    if (
+      !body.rankingKey ||
+      !body.label ||
+      !body.name ||
+      !body.unit ||
+      !body.dataSourceId
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
 
     const repository = await RankingRepository.create();
-    // TODO: 新規作成処理を実装
-    // const item = await repository.createRankingItem(body);
 
-    return NextResponse.json(
-      { message: "Created successfully" },
-      { status: 201 }
-    );
+    // ランキング項目を作成
+    const item = await repository.createRankingItem({
+      rankingKey: body.rankingKey,
+      label: body.label,
+      name: body.name,
+      description: body.description,
+      unit: body.unit,
+      dataSourceId: body.dataSourceId,
+      mapColorScheme: body.mapColorScheme || "interpolateBlues",
+      mapDivergingMidpoint: body.mapDivergingMidpoint || "zero",
+      rankingDirection: body.rankingDirection || "desc",
+      conversionFactor: body.conversionFactor ?? 1,
+      decimalPlaces: body.decimalPlaces ?? 0,
+    });
+
+    // メタデータがあれば保存
+    if (body.metadataItems && Array.isArray(body.metadataItems)) {
+      for (const metadataItem of body.metadataItems) {
+        try {
+          const metadata = JSON.parse(metadataItem.metadata);
+          await repository.createDataSourceMetadata({
+            rankingKey: body.rankingKey,
+            dataSourceId: metadataItem.dataSourceId,
+            areaType: metadataItem.areaType,
+            calculationType: metadataItem.calculationType,
+            metadata,
+          });
+        } catch (error) {
+          console.error("Failed to save metadata item:", error);
+        }
+      }
+    }
+
+    return NextResponse.json({ item }, { status: 201 });
   } catch (error) {
     console.error("[Admin Ranking Items API] Error:", error);
     return NextResponse.json(

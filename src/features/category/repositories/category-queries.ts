@@ -72,8 +72,8 @@ export const SUBCATEGORY_QUERIES = {
   /**
    * サブカテゴリを作成
    */
-  createSubcategory: `INSERT INTO subcategories (subcategory_key, name, category_id, href, display_order)
-                       VALUES (?, ?, ?, ?, ?)`,
+  createSubcategory: `INSERT INTO subcategories (subcategory_key, name, category_id, display_order)
+                       VALUES (?, ?, ?, ?)`,
 
   /**
    * サブカテゴリを更新

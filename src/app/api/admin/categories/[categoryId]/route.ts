@@ -50,7 +50,6 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
       name: body.name,
       icon: body.icon,
       displayOrder: body.displayOrder,
-      isActive: body.isActive,
     });
 
     return NextResponse.json({ category }, { status: 200 });

@@ -49,9 +49,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
       subcategoryKey: body.subcategoryKey,
       name: body.name,
       categoryId: body.categoryId,
-      href: body.href,
       displayOrder: body.displayOrder,
-      isActive: body.isActive,
     });
 
     return NextResponse.json({ subcategory }, { status: 200 });

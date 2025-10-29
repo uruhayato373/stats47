@@ -34,6 +34,7 @@ const columns: ColumnDef<RankingItem>[] = [
   {
     accessorKey: "unit",
     header: "単位",
+    meta: { width: "80px" },
   },
   {
     accessorKey: "isActive",
@@ -50,7 +51,7 @@ const columns: ColumnDef<RankingItem>[] = [
         {row.original.isActive ? "有効" : "無効"}
       </Badge>
     ),
-    meta: { filterable: true, filterType: "select" },
+    meta: { filterable: true, filterType: "select", width: "80px" },
   },
   {
     id: "actions",
@@ -64,6 +65,7 @@ const columns: ColumnDef<RankingItem>[] = [
       </Link>
     ),
     enableSorting: false,
+    meta: { width: "80px" },
   },
 ];
 
@@ -78,6 +80,7 @@ export function RankingItemsTable({ items }: RankingItemsTableProps) {
       data={items}
       emptyMessage="ランキング項目がありません"
       showIndex={false}
+      showBorder={false}
     />
   );
 }

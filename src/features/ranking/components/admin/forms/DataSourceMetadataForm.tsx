@@ -1,5 +1,7 @@
 "use client";
 
+import { forwardRef, useImperativeHandle } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2 } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -7,32 +9,32 @@ import * as z from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/atoms/ui/card";
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/atoms/ui/form";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/atoms/ui/select";
 import { Textarea } from "@/components/atoms/ui/textarea";
 import {
-    ToggleGroup,
-    ToggleGroupItem,
+  ToggleGroup,
+  ToggleGroupItem,
 } from "@/components/atoms/ui/toggle-group";
 
 // メタデータアイテムのスキーマ（metadataはJSON文字列として扱う）
@@ -68,53 +70,115 @@ interface DataSourceMetadataFormProps {
       dataSourceId: string;
       areaType: string;
       calculationType: string;
-      metadata: object;
+      metadata: unknown;
     }>;
   };
 }
+
+export interface DataSourceMetadataFormRef {
+  getValues: () => DataSourceMetadataFormValues;
+}
+
+// 計算タイプ別のサンプルメタデータ
+const getDefaultMetadataForType = (calculationType: "direct" | "ratio" | "aggregate") => {
+  switch (calculationType) {
+    case "direct":
+      return JSON.stringify(
+        {
+          stats_data_id: "0000010102",
+          cd_cat01: "B1101",
+        },
+        null,
+        2
+      );
+    case "ratio":
+      return JSON.stringify(
+        {
+          numerator: {
+            source_key: "population",
+            stats_data_id: "0000010102",
+            cd_cat01: "A1101",
+          },
+          denominator: {
+            source_key: "area",
+            stats_data_id: "0000020101",
+            cd_cat01: "B1101",
+          },
+          multiplier: 1000,
+          decimal_places: 2,
+        },
+        null,
+        2
+      );
+    case "aggregate":
+      return JSON.stringify(
+        {
+          sources: [],
+          aggregation_method: "sum",
+        },
+        null,
+        2
+      );
+    default:
+      return JSON.stringify({}, null, 2);
+  }
+};
+
+// 計算タイプ別のプレースホルダー
+const getPlaceholderForType = (calculationType: "direct" | "ratio" | "aggregate") => {
+  switch (calculationType) {
+    case "direct":
+      return '例: {\n  "stats_data_id": "0000010102",\n  "cd_cat01": "B1101"\n}';
+    case "ratio":
+      return '例: {\n  "numerator": {\n    "stats_data_id": "0000010102",\n    "cd_cat01": "A1101"\n  },\n  "denominator": {\n    "stats_data_id": "0000020101",\n    "cd_cat01": "B1101"\n  },\n  "multiplier": 1000\n}';
+    case "aggregate":
+      return '例: {\n  "sources": [],\n  "aggregation_method": "sum"\n}';
+    default:
+      return "メタデータを入力してください";
+  }
+};
 
 // デフォルトのサンプルメタデータ
 const defaultMetadataItem = {
   dataSourceId: "estat" as const,
   areaType: "prefecture" as const,
   calculationType: "direct" as const,
-  metadata: JSON.stringify(
-    {
-      stats_data_id: "0000010102",
-      cd_cat01: "B1101",
-    },
-    null,
-    2
-  ),
+  metadata: getDefaultMetadataForType("direct"),
 };
 
-export function DataSourceMetadataForm({ item }: DataSourceMetadataFormProps) {
-  const form = useForm<DataSourceMetadataFormValues>({
-    resolver: zodResolver(dataSourceMetadataSchema),
-    defaultValues: {
-      metadataItems:
-        item?.metadataItems?.map((item) => ({
-          dataSourceId: item.dataSourceId,
-          areaType: item.areaType,
-          calculationType: item.calculationType,
-          metadata: JSON.stringify(item.metadata, null, 2),
-        })) || [defaultMetadataItem],
-    },
-  });
+export const DataSourceMetadataForm = forwardRef<DataSourceMetadataFormRef, DataSourceMetadataFormProps>(
+  function DataSourceMetadataForm({ item }, ref) {
+    const form = useForm<DataSourceMetadataFormValues>({
+      resolver: zodResolver(dataSourceMetadataSchema),
+      defaultValues: {
+        metadataItems:
+          item?.metadataItems?.map((item) => ({
+            dataSourceId: item.dataSourceId as "estat" | "custom",
+            areaType: item.areaType as "prefecture" | "city" | "national",
+            calculationType: item.calculationType as "direct" | "ratio" | "aggregate",
+            metadata: JSON.stringify(item.metadata, null, 2),
+          })) || [defaultMetadataItem],
+      },
+    });
 
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: "metadataItems",
-  });
+    useImperativeHandle(ref, () => ({
+      getValues: () => form.getValues(),
+    }));
 
-  const onSubmit = (values: DataSourceMetadataFormValues) => {
-    console.log("データソース設定フォーム送信:", values);
-    // TODO: API呼び出し
-  };
+    const { fields, append, remove } = useFieldArray({
+      control: form.control,
+      name: "metadataItems",
+    });
 
-  const addMetadata = () => {
-    append(defaultMetadataItem);
-  };
+    const addMetadata = () => {
+      append(defaultMetadataItem);
+    };
+
+    // calculationType変更時の処理
+    const handleCalculationTypeChange = (index: number, newType: "direct" | "ratio" | "aggregate") => {
+      // calculationTypeのみ更新し、メタデータはユーザーが既に入力している場合は保持
+      form.setValue(`metadataItems.${index}.calculationType`, newType);
+    };
 
   return (
     <Form {...form}>
@@ -227,7 +291,11 @@ export function DataSourceMetadataForm({ item }: DataSourceMetadataFormProps) {
                         <ToggleGroup
                           type="single"
                           value={field.value}
-                          onValueChange={field.onChange}
+                          onValueChange={(value) => {
+                            if (value) {
+                              handleCalculationTypeChange(index, value as "direct" | "ratio" | "aggregate");
+                            }
+                          }}
                           variant="outline"
                           className="flex-wrap"
                         >
@@ -248,23 +316,30 @@ export function DataSourceMetadataForm({ item }: DataSourceMetadataFormProps) {
                 <FormField
                   control={form.control}
                   name={`metadataItems.${index}.metadata`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>メタデータ（JSON） *</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          className="font-mono text-xs resize-y"
-                          rows={6}
-                          placeholder='例: {\n  "stats_data_id": "0000010102",\n  "cd_cat01": "B1101"\n}'
-                        />
-                      </FormControl>
-                      <FormDescription className="text-xs">
-                        JSON形式でメタデータを入力してください
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  render={({ field }) => {
+                    const calculationType = form.watch(`metadataItems.${index}.calculationType`);
+                    return (
+                      <FormItem>
+                        <FormLabel>メタデータ（JSON） *</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            className="font-mono text-xs resize-y"
+                            rows={6}
+                            placeholder={getPlaceholderForType(calculationType as "direct" | "ratio" | "aggregate")}
+                          />
+                        </FormControl>
+                        <FormDescription className="text-xs">
+                          JSON形式でメタデータを入力してください
+                          <br />
+                          <span className="font-mono text-muted-foreground">
+                            {getPlaceholderForType(calculationType as "direct" | "ratio" | "aggregate")}
+                          </span>
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
                 />
               </CardContent>
             </Card>
@@ -273,4 +348,5 @@ export function DataSourceMetadataForm({ item }: DataSourceMetadataFormProps) {
       </div>
     </Form>
   );
-}
+  }
+);

@@ -27,9 +27,6 @@ export interface CategoryDB {
   /** 表示順序（0から始まる） */
   display_order: number;
 
-  /** アクティブフラグ（有効かどうか） */
-  is_active: boolean;
-
   /** 作成日時 */
   created_at: string;
 
@@ -56,14 +53,8 @@ export interface SubcategoryDB {
   /** 親カテゴリのID（categoriesテーブルへの外部キー） */
   category_id: number;
 
-  /** URLパス（例: "/basic-population"） */
-  href: string | null;
-
   /** 表示順序（0から始まる） */
   display_order: number;
-
-  /** アクティブフラグ（有効かどうか） */
-  is_active: boolean;
 
   /** 作成日時 */
   created_at: string;
@@ -95,9 +86,6 @@ export interface Category {
   /** 表示順序（0から始まる） */
   displayOrder: number;
 
-  /** アクティブフラグ（有効かどうか） */
-  isActive: boolean;
-
   /** このカテゴリに属するサブカテゴリのリスト */
   subcategories?: Subcategory[];
 }
@@ -122,14 +110,8 @@ export interface Subcategory {
   /** 親カテゴリのID（categoriesテーブルへの外部キー） */
   categoryId: number;
 
-  /** URLパス（例: "/basic-population"） */
-  href?: string;
-
   /** 表示順序（0から始まる） */
   displayOrder: number;
-
-  /** アクティブフラグ（有効かどうか） */
-  isActive: boolean;
 }
 
 /**
@@ -164,9 +146,6 @@ export interface UpdateCategoryInput {
 
   /** 表示順序（オプション） */
   displayOrder?: number;
-
-  /** アクティブフラグ（オプション） */
-  isActive?: boolean;
 }
 
 /**
@@ -181,9 +160,6 @@ export interface CreateSubcategoryInput {
 
   /** 親カテゴリのID（必須） */
   categoryId: number;
-
-  /** URLパス（オプション） */
-  href?: string;
 
   /** 表示順序（デフォルト: 0） */
   displayOrder: number;
@@ -202,12 +178,6 @@ export interface UpdateSubcategoryInput {
   /** 親カテゴリのID（オプション） */
   categoryId?: number;
 
-  /** URLパス（オプション） */
-  href?: string;
-
   /** 表示順序（オプション） */
   displayOrder?: number;
-
-  /** アクティブフラグ（オプション） */
-  isActive?: boolean;
 }
