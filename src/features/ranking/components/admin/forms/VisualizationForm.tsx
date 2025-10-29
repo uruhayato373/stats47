@@ -103,22 +103,23 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  className="flex flex-row flex-wrap gap-4"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="zero" id="midpoint-zero" />
-                    <Label htmlFor="midpoint-zero">ゼロ</Label>
+                    <Label htmlFor="midpoint-zero" className="text-sm">ゼロ</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="mean" id="midpoint-mean" />
-                    <Label htmlFor="midpoint-mean">平均値</Label>
+                    <Label htmlFor="midpoint-mean" className="text-sm">平均値</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="median" id="midpoint-median" />
-                    <Label htmlFor="midpoint-median">中央値</Label>
+                    <Label htmlFor="midpoint-median" className="text-sm">中央値</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="custom" id="midpoint-custom" />
-                    <Label htmlFor="midpoint-custom">カスタム値</Label>
+                    <Label htmlFor="midpoint-custom" className="text-sm">カスタム値</Label>
                   </div>
                 </RadioGroup>
               </FormControl>
@@ -138,14 +139,15 @@ export function VisualizationForm({ item }: VisualizationFormProps) {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  className="flex flex-row flex-wrap gap-4"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="desc" id="direction-desc" />
-                    <Label htmlFor="direction-desc">降順（大きい順）</Label>
+                    <Label htmlFor="direction-desc" className="text-sm">降順（大きい順）</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="asc" id="direction-asc" />
-                    <Label htmlFor="direction-asc">昇順（小さい順）</Label>
+                    <Label htmlFor="direction-asc" className="text-sm">昇順（小さい順）</Label>
                   </div>
                 </RadioGroup>
               </FormControl>
