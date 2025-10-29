@@ -154,12 +154,17 @@ interface Category {
 - `subcategories`: サブカテゴリのリスト
 - `description`: 説明文（現在は空文字列、将来的に追加予定）
 
-**現在の実装について:**
+**データベース実装:**
 
-- `slug`と`isActive`は設計の参考として記載していますが、現在の実装では使用していません
-- `id`が URL スラッグとして直接使用されています（例: `/population`, `/landweather`）
-- 全てのカテゴリがアクティブとして扱われます
-- データソースは`src/config/categories.json`です
+- カテゴリは`categories`テーブルで管理されています
+- `category_key`, `name`, `icon`, `color`, `display_order`で構成
+- データの取得は`CategoryRepository`を使用
+- 管理 UI は`/admin/categories`からアクセス可能
+
+**レガシー実装（deprecated）:**
+
+- 以前は`src/config/categories.json`で静的に管理していました
+- 新しい実装ではデータベースから取得します
 
 #### Subcategory（サブカテゴリ）
 
@@ -188,11 +193,17 @@ interface Subcategory {
 - `href`: URL href（例: `/basic-population`）
 - `displayOrder`: 表示順序（categories.json の displayOrder フィールドから取得、デフォルト 0）
 
-**現在の実装について:**
+**データベース実装:**
 
-- `slug`と`isActive`は設計の参考として記載していますが、現在の実装では使用していません
-- `id`が URL の一部として使用されます（例: `/population/basic-population`）
-- データソースは`src/config/categories.json`の各カテゴリ内の subcategories 配列です
+- サブカテゴリは`subcategories`テーブルで管理されています
+- `subcategory_key`, `name`, `category_id`, `href`, `display_order`で構成
+- `category_id`は`categories`テーブルへの外部キー
+- データの取得は`CategoryRepository`を使用
+
+**レガシー実装（deprecated）:**
+
+- 以前は`src/config/categories.json`で静的に管理していました
+- 新しい実装ではデータベースから取得します
 
 #### Tag（タグ）
 
@@ -265,7 +276,11 @@ interface Tag {
 ### 基本的な使い方
 
 ```typescript
-import { CategoryService, TagService, FilteringService } from "@/infrastructure/taxonomy";
+import {
+  CategoryService,
+  TagService,
+  FilteringService,
+} from "@/infrastructure/taxonomy";
 
 // カテゴリを取得
 const categories = await CategoryService.getAllCategories();

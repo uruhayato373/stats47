@@ -1,6 +1,7 @@
 import {
   ChevronDown,
   FileCode,
+  FolderTree,
   LayoutDashboard,
   Maximize,
   MoreHorizontal,
@@ -28,6 +29,13 @@ export const buildSidebarNavigationItems = () => ({
       href: "/",
       label: "Dashboard",
       icon: LayoutDashboard,
+    },
+  ],
+  categories: [
+    {
+      href: "/admin/categories",
+      label: "カテゴリ管理",
+      icon: FolderTree,
     },
   ],
   estat: [

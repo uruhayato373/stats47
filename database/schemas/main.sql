@@ -73,7 +73,38 @@ CREATE TABLE IF NOT EXISTS estat_data_history (
 );
 
 -- ============================================================================
--- 2. e-Statメタデータテーブル
+-- 2. カテゴリ・サブカテゴリテーブル
+-- ============================================================================
+
+-- categories: カテゴリ管理テーブル
+CREATE TABLE IF NOT EXISTS categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  category_key TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  icon TEXT,
+  color TEXT,
+  display_order INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- subcategories: サブカテゴリ管理テーブル
+CREATE TABLE IF NOT EXISTS subcategories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  subcategory_key TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  category_id INTEGER NOT NULL,
+  href TEXT,
+  display_order INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
+-- ============================================================================
+-- 3. e-Statメタデータテーブル
 -- ============================================================================
 
 -- estat_metainfo: e-Stat APIから取得した統計表メタデータを保存
@@ -92,7 +123,7 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
 );
 
 -- ============================================================================
--- 3. ランキング関連テーブル
+-- 4. ランキング関連テーブル
 -- ============================================================================
 
 -- data_sources: データソース定義テーブル
@@ -189,7 +220,7 @@ CREATE TABLE IF NOT EXISTS ranking_groups (
 );
 
 -- ============================================================================
--- 4. ダッシュボード関連テーブル
+-- 5. ダッシュボード関連テーブル
 -- ============================================================================
 
 -- dashboard_configs: ダッシュボード設定テーブル
@@ -238,8 +269,18 @@ CREATE TABLE IF NOT EXISTS widget_templates (
 );
 
 -- ============================================================================
--- 5. インデックス作成
+-- 6. インデックス作成
 -- ============================================================================
+
+-- カテゴリ・サブカテゴリ関連インデックス
+CREATE INDEX IF NOT EXISTS idx_categories_key ON categories(category_key);
+CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(is_active);
+CREATE INDEX IF NOT EXISTS idx_categories_display_order ON categories(display_order);
+
+CREATE INDEX IF NOT EXISTS idx_subcategories_key ON subcategories(subcategory_key);
+CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_id);
+CREATE INDEX IF NOT EXISTS idx_subcategories_active ON subcategories(is_active);
+CREATE INDEX IF NOT EXISTS idx_subcategories_display_order ON subcategories(display_order);
 
 -- 認証関連インデックス
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
@@ -279,7 +320,7 @@ CREATE INDEX IF NOT EXISTS idx_widget_templates_key ON widget_templates(template
 CREATE INDEX IF NOT EXISTS idx_widget_templates_type ON widget_templates(widget_type);
 
 -- ============================================================================
--- 6. ビュー作成
+-- 7. ビュー作成
 -- ============================================================================
 
 -- v_estat_metainfo_summary: 統計表サマリービュー
