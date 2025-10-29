@@ -71,9 +71,6 @@ export interface Category {
   /** カテゴリの表示名（例: "人口・世帯"） */
   categoryName: string;
 
-  /** 後方互換性のためのエイリアス（categoryKeyと同じ） */
-  id: string;
-
   /** Lucide Reactのアイコン名（例: "Users", "MapPin"） */
   icon?: string;
 
@@ -98,77 +95,9 @@ export interface Subcategory {
   /** サブカテゴリの表示名（例: "総人口", "土地面積"） */
   subcategoryName: string;
 
-  /** 後方互換性のためのエイリアス（subcategoryKeyと同じ） */
-  id: string;
-
   /** 親カテゴリキー（categoriesテーブルへの外部キー） */
   categoryKey: string;
 
-  /** 後方互換性のためのエイリアス（categoryKeyと同じ） */
-  categoryId: string;
-
   /** 表示順序（0から始まる） */
   displayOrder: number;
-}
-
-/**
- * カテゴリ作成時の入力データ型
- */
-export interface CreateCategoryInput {
-  /** カテゴリキー（必須、PRIMARY KEY） */
-  categoryName: string;
-
-  /** カテゴリの表示名（必須） */
-  name: string;
-
-  /** Lucide Reactのアイコン名（オプション） */
-  icon?: string;
-
-  /** 表示順序（デフォルト: 0） */
-  displayOrder: number;
-}
-
-/**
- * カテゴリ更新時の入力データ型
- */
-export interface UpdateCategoryInput {
-  /** カテゴリの表示名（オプション） */
-  categoryName?: string;
-
-  /** Lucide Reactのアイコン名（オプション） */
-  icon?: string;
-
-  /** 表示順序（オプション） */
-  displayOrder?: number;
-}
-
-/**
- * サブカテゴリ作成時の入力データ型
- */
-export interface CreateSubcategoryInput {
-  /** サブカテゴリキー（必須、PRIMARY KEY） */
-  subcategoryName: string;
-
-  /** サブカテゴリの表示名（必須） */
-  name: string;
-
-  /** 親カテゴリキー（必須） */
-  categoryName: string;
-
-  /** 表示順序（デフォルト: 0） */
-  displayOrder: number;
-}
-
-/**
- * サブカテゴリ更新時の入力データ型
- */
-export interface UpdateSubcategoryInput {
-  /** サブカテゴリの表示名（オプション） */
-  subcategoryName?: string;
-
-  /** 親カテゴリキー（オプション） */
-  categoryName?: string;
-
-  /** 表示順序（オプション） */
-  displayOrder?: number;
 }
