@@ -22,22 +22,27 @@ allowed-tools: Read, Glob, Grep, Edit, Write
 ### 必読ドキュメント（コード作成前に読む）
 
 1. **アーキテクチャ設計**
-   - `/Users/minamidaisuke/stats47/docs/01_技術設計/06_設計パターン/実装パターン.md`
+   - `C:\Users\m004195\stats47\docs\01_技術設計\06_設計パターン\実装パターン.md`
    - Fetcher/Formatter/Display パターン
    - Server/Client分離原則
    - DDD + 3層アーキテクチャ
 
 2. **コンポーネント設計**
-   - `/Users/minamidaisuke/stats47/docs/01_技術設計/05_フロントエンド設計/コンポーネント設計.md`
+   - `C:\Users\m004195\stats47\docs\01_技術設計\05_フロントエンド設計\コンポーネント設計.md`
    - Atomic Design原則
    - Organismsのドメイン別整理
    - コンポーネント解決システム
 
 3. **プロジェクト構造**
-   - `/Users/minamidaisuke/stats47/docs/01_技術設計/01_システム概要/03_プロジェクト構造.md`
+   - `C:\Users\m004195\stats47\docs\01_技術設計\01_システム概要\03_プロジェクト構造.md`
    - ディレクトリ配置ルール
    - DDDとAtomic Designの統合
    - ドメイン別責務
+
+4. **ドメイン設計（該当ドメイン）**
+   - Rankingドメイン: `C:\Users\m004195\stats47\docs\01_技術設計\03_ドメイン設計\10_ranking.md`
+   - Categoryドメイン: `C:\Users\m004195\stats47\docs\01_技術設計\03_ドメイン設計\03_category.md`
+   - Areaドメイン: `C:\Users\m004195\stats47\docs\01_技術設計\03_ドメイン設計\01_area.md`
 
 ## 作業フロー
 
@@ -146,12 +151,18 @@ src/infrastructure/estat-api/
 
 ### コンポーネントの配置場所が分からない場合
 
-1. `/Users/minamidaisuke/stats47/docs/01_技術設計/01_システム概要/03_プロジェクト構造.md` を再度読む
+1. `C:\Users\m004195\stats47\docs\01_技術設計\01_システム概要\03_プロジェクト構造.md` を再度読む
 2. 類似コンポーネントをGlobで検索する
 3. ドメイン分類を確認する
 
 ### アーキテクチャパターンが分からない場合
 
-1. `/Users/minamidaisuke/stats47/docs/01_技術設計/06_設計パターン/実装パターン.md` を再度読む
+1. `C:\Users\m004195\stats47\docs\01_技術設計\06_設計パターン\実装パターン.md` を再度読む
 2. 既存の類似実装を参照する
 3. ユーザーに確認する
+
+### ドメイン実装の詳細が知りたい場合
+
+1. 技術設計ドキュメント（例: `C:\Users\m004195\stats47\docs\01_技術設計\03_ドメイン設計\10_ranking.md`）でアーキテクチャを確認
+2. 開発ガイド（例: `C:\Users\m004195\stats47\docs\04_開発ガイド\01_ドメイン\ranking\`）で実装手順を確認
+3. 既存コードを参照する
