@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS categories (
   category_key TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
   icon TEXT,
-  color TEXT,
   display_order INTEGER DEFAULT 0,
   is_active BOOLEAN DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

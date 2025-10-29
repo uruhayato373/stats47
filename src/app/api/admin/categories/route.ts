@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { CategoryRepository } from "@/features/category/repositories/category-repository";
+import {
+  createCategory,
+  listCategories,
+} from "@/features/category/repositories/category-repository";
 
 /**
  * GET /api/admin/categories
@@ -8,8 +11,7 @@ import { CategoryRepository } from "@/features/category/repositories/category-re
  */
 export async function GET() {
   try {
-    const repository = await CategoryRepository.create();
-    const categories = await repository.getAllCategories();
+    const categories = await listCategories();
 
     return NextResponse.json({ categories }, { status: 200 });
   } catch (error) {
@@ -28,13 +30,11 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const repository = await CategoryRepository.create();
 
-    const category = await repository.createCategory({
+    const category = await createCategory({
       categoryKey: body.categoryKey,
       name: body.name,
       icon: body.icon,
-      color: body.color,
       displayOrder: body.displayOrder || 0,
     });
 

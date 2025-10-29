@@ -38,6 +38,27 @@ export function AdminSidebar() {
 
         <div className="border-t border-border my-4" />
 
+        {/* Categories Section */}
+        {navigationItems.categories && navigationItems.categories.length > 0 && (
+          <>
+            <div className="mb-6">
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">
+                カテゴリ管理
+              </h3>
+              <div className="space-y-1">
+                {navigationItems.categories.map((item) => (
+                  <ActiveSidebarMenuButton key={item.href} href={item.href}>
+                    <item.icon className="size-4" />
+                    <span>{item.label}</span>
+                  </ActiveSidebarMenuButton>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-border my-4" />
+          </>
+        )}
+
         {/* e-STAT API Section */}
         <div className="mb-6">
           <h3 className="text-sm font-medium text-muted-foreground mb-2">

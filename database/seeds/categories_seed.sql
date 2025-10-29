@@ -7,24 +7,24 @@
 -- カテゴリの作成
 -- ========================================
 INSERT OR REPLACE INTO categories (
-  category_key, name, icon, color, display_order, is_active, created_at, updated_at
+  category_key, name, icon, display_order, is_active, created_at, updated_at
 ) VALUES
-  ('landweather', '国土・気象', 'MapPin', 'teal', 0, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('population', '人口・世帯', 'Users', 'blue', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('laborwage', '労働・賃金', 'TrendingUp', 'yellow', 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('agriculture', '農林水産業', 'Sprout', 'green', 3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('miningindustry', '鉱工業', 'Factory', 'gray', 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('commercial', '商業・サービス業', 'Store', 'purple', 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('economy', '企業・家計・経済', 'PieChart', 'blue', 6, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('construction', '住宅・土地・建設', 'Home', 'orange', 7, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('energy', 'エネルギー・水', 'Droplets', 'teal', 8, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('tourism', '運輸・観光', 'Plane', 'indigo', 9, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('educationsports', '教育・文化・スポーツ', 'GraduationCap', 'yellow', 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('administrativefinancial', '行財政', 'Building2', 'gray', 11, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('safetyenvironment', '司法・安全・環境', 'ShieldCheck', 'red', 12, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('socialsecurity', '社会保障・衛生', 'Hospital', 'pink', 13, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('international', '国際', 'Globe', 'blue', 14, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('infrastructure', '社会基盤施設', 'Construction', 'gray', 15, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+  ('landweather', '国土・気象', 'MapPin', 0, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('population', '人口・世帯', 'Users', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('laborwage', '労働・賃金', 'TrendingUp', 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('agriculture', '農林水産業', 'Sprout', 3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('miningindustry', '鉱工業', 'Factory', 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('commercial', '商業・サービス業', 'Store', 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('economy', '企業・家計・経済', 'PieChart', 6, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('construction', '住宅・土地・建設', 'Home', 7, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('energy', 'エネルギー・水', 'Droplets', 8, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('tourism', '運輸・観光', 'Plane', 9, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('educationsports', '教育・文化・スポーツ', 'GraduationCap', 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('administrativefinancial', '行財政', 'Building2', 11, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('safetyenvironment', '司法・安全・環境', 'ShieldCheck', 12, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('socialsecurity', '社会保障・衛生', 'Hospital', 13, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('international', '国際', 'Globe', 14, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('infrastructure', '社会基盤施設', 'Construction', 15, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- ========================================
 -- サブカテゴリの作成

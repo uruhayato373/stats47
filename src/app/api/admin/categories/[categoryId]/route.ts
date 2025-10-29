@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { CategoryRepository } from "@/features/category/repositories/category-repository";
+import {
+  deleteCategory,
+  findCategoryById,
+  updateCategory,
+} from "@/features/category/repositories/category-repository";
 
 interface RouteContext {
   params: Promise<{ categoryId: string }>;
@@ -13,9 +17,7 @@ interface RouteContext {
 export async function GET(_: NextRequest, { params }: RouteContext) {
   try {
     const { categoryId } = await params;
-    const repository = await CategoryRepository.create();
-
-    const category = await repository.getCategoryById(parseInt(categoryId, 10));
+    const category = await findCategoryById(parseInt(categoryId, 10));
 
     if (!category) {
       return NextResponse.json(
@@ -42,13 +44,11 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
   try {
     const { categoryId } = await params;
     const body = await request.json();
-    const repository = await CategoryRepository.create();
 
-    const category = await repository.updateCategory(parseInt(categoryId, 10), {
+    const category = await updateCategory(parseInt(categoryId, 10), {
       categoryKey: body.categoryKey,
       name: body.name,
       icon: body.icon,
-      color: body.color,
       displayOrder: body.displayOrder,
       isActive: body.isActive,
     });
@@ -70,9 +70,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
 export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
     const { categoryId } = await params;
-    const repository = await CategoryRepository.create();
-
-    const success = await repository.deleteCategory(parseInt(categoryId, 10));
+    const success = await deleteCategory(parseInt(categoryId, 10));
 
     if (!success) {
       return NextResponse.json(

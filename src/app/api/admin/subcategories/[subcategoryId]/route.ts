@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { CategoryRepository } from "@/features/category/repositories/category-repository";
+import {
+  deleteSubcategory,
+  findSubcategoryById,
+  updateSubcategory,
+} from "@/features/category/repositories/category-repository";
 
 interface RouteContext {
   params: Promise<{ subcategoryId: string }>;
@@ -13,11 +17,7 @@ interface RouteContext {
 export async function GET(_: NextRequest, { params }: RouteContext) {
   try {
     const { subcategoryId } = await params;
-    const repository = await CategoryRepository.create();
-
-    const subcategory = await repository.getSubcategoryById(
-      parseInt(subcategoryId, 10)
-    );
+    const subcategory = await findSubcategoryById(parseInt(subcategoryId, 10));
 
     if (!subcategory) {
       return NextResponse.json(
@@ -44,19 +44,15 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
   try {
     const { subcategoryId } = await params;
     const body = await request.json();
-    const repository = await CategoryRepository.create();
 
-    const subcategory = await repository.updateSubcategory(
-      parseInt(subcategoryId, 10),
-      {
-        subcategoryKey: body.subcategoryKey,
-        name: body.name,
-        categoryId: body.categoryId,
-        href: body.href,
-        displayOrder: body.displayOrder,
-        isActive: body.isActive,
-      }
-    );
+    const subcategory = await updateSubcategory(parseInt(subcategoryId, 10), {
+      subcategoryKey: body.subcategoryKey,
+      name: body.name,
+      categoryId: body.categoryId,
+      href: body.href,
+      displayOrder: body.displayOrder,
+      isActive: body.isActive,
+    });
 
     return NextResponse.json({ subcategory }, { status: 200 });
   } catch (error) {
@@ -75,11 +71,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
 export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
     const { subcategoryId } = await params;
-    const repository = await CategoryRepository.create();
-
-    const success = await repository.deleteSubcategory(
-      parseInt(subcategoryId, 10)
-    );
+    const success = await deleteSubcategory(parseInt(subcategoryId, 10));
 
     if (!success) {
       return NextResponse.json(

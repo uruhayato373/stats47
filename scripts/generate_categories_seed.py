@@ -34,7 +34,7 @@ def generate_categories_seed():
     
     # カテゴリのINSERT
     sql_parts.append("INSERT OR REPLACE INTO categories (\n")
-    sql_parts.append("  category_key, name, icon, color, display_order, is_active, created_at, updated_at\n")
+    sql_parts.append("  category_key, name, icon, display_order, is_active, created_at, updated_at\n")
     sql_parts.append(") VALUES\n")
     
     category_values = []
@@ -42,12 +42,11 @@ def generate_categories_seed():
         category_key = category["id"]
         name = category["name"].replace("'", "''")  # SQLインジェクション対策
         icon = category.get("icon", "")
-        color = category.get("color", "")
         display_order = index
         is_active = 1
         
         category_values.append(
-            f"  ('{category_key}', '{name}', '{icon}', '{color}', {display_order}, {is_active}, "
+            f"  ('{category_key}', '{name}', '{icon}', {display_order}, {is_active}, "
             f"CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
         )
     
