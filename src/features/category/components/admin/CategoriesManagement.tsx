@@ -4,14 +4,6 @@ import React, { useEffect, useState } from "react";
 
 import * as LucideReact from "lucide-react";
 import { AlertCircle, Edit2, Loader2 } from "lucide-react";
-import {
-  deleteCategoryAction,
-  deleteSubcategoryAction,
-  listCategoriesAction,
-  revalidateCategoriesAction,
-  updateCategoryAction,
-  updateSubcategoryAction,
-} from "@/features/category/actions";
 
 import {
   Accordion,
@@ -19,13 +11,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/atoms/ui/alert";
-import { Button } from "@/components/atoms/ui/button";
 import {
-  Card,
-  CardContent,
-  CardTitle,
-} from "@/components/atoms/ui/card";
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/atoms/ui/alert";
+import { Button } from "@/components/atoms/ui/button";
+import { Card, CardContent, CardTitle } from "@/components/atoms/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -37,7 +29,18 @@ import {
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 
-import type { Category, Subcategory } from "@/features/category/types/category.types";
+import {
+  deleteCategoryAction,
+  deleteSubcategoryAction,
+  listCategoriesAction,
+  revalidateCategoriesAction,
+  updateCategoryAction,
+  updateSubcategoryAction,
+} from "@/features/category/actions";
+import type {
+  Category,
+  Subcategory,
+} from "@/features/category/types/category.types";
 
 interface EditDialogProps {
   open: boolean;
@@ -66,7 +69,7 @@ function EditDialog({
   onDelete,
 }: EditDialogProps) {
   const isCategory = !!category;
-  
+
   // フォーム状態管理
   const [formData, setFormData] = useState<{
     categoryKey: string;
@@ -147,7 +150,9 @@ function EditDialog({
             <Label htmlFor="name">名前</Label>
             <Input
               id="name"
-              value={isCategory ? formData.categoryName : formData.subcategoryName}
+              value={
+                isCategory ? formData.categoryName : formData.subcategoryName
+              }
               onChange={(e) =>
                 setFormData((prev) => ({
                   ...prev,
@@ -165,7 +170,9 @@ function EditDialog({
             </Label>
             <Input
               id="key"
-              value={isCategory ? formData.categoryKey : formData.subcategoryKey}
+              value={
+                isCategory ? formData.categoryKey : formData.subcategoryKey
+              }
               onChange={(e) =>
                 setFormData((prev) => ({
                   ...prev,
@@ -199,7 +206,10 @@ function EditDialog({
                 id="categoryKey"
                 value={formData.categoryKey}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, categoryKey: e.target.value }))
+                  setFormData((prev) => ({
+                    ...prev,
+                    categoryKey: e.target.value,
+                  }))
                 }
                 className="font-mono"
               />
@@ -213,7 +223,10 @@ function EditDialog({
               type="number"
               value={formData.displayOrder}
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, displayOrder: e.target.value }))
+                setFormData((prev) => ({
+                  ...prev,
+                  displayOrder: e.target.value,
+                }))
               }
             />
           </div>
@@ -234,7 +247,11 @@ function EditDialog({
               削除
             </Button>
             <div className="flex gap-2">
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+              >
                 キャンセル
               </Button>
               <Button
@@ -294,7 +311,6 @@ export function CategoriesManagement() {
     categoryName: string;
   } | null>(null);
 
-
   const handleSaveCategory = async (formData: {
     categoryKey?: string;
     categoryName?: string;
@@ -302,7 +318,7 @@ export function CategoriesManagement() {
     displayOrder?: number;
   }) => {
     if (!editingCategory) return;
-    
+
     try {
       await updateCategoryAction(editingCategory.categoryKey, {
         categoryKey: formData.categoryKey,
@@ -344,7 +360,7 @@ export function CategoriesManagement() {
     displayOrder?: number;
   }) => {
     if (!editingSubcategory) return;
-    
+
     try {
       await updateSubcategoryAction(
         editingSubcategory.subcategory.subcategoryKey,
@@ -380,9 +396,14 @@ export function CategoriesManagement() {
   // アイコンコンポーネントの取得
   const getIconComponent = (iconName?: string) => {
     if (!iconName) return null;
-    const IconComponent = (LucideReact as unknown as Record<string, React.ComponentType<{
-      className?: string;
-    }>>)[iconName];
+    const IconComponent = (
+      LucideReact as unknown as Record<
+        string,
+        React.ComponentType<{
+          className?: string;
+        }>
+      >
+    )[iconName];
     return IconComponent || null;
   };
 
@@ -426,8 +447,8 @@ export function CategoriesManagement() {
             const IconComponent = getIconComponent(category.icon);
 
             return (
-              <AccordionItem 
-                key={category.categoryKey} 
+              <AccordionItem
+                key={category.categoryKey}
                 value={`category-${category.categoryKey}`}
                 className="border-gray-300"
               >
@@ -439,7 +460,9 @@ export function CategoriesManagement() {
                           <IconComponent className="h-5 w-5 text-muted-foreground" />
                         )}
                         <div className="text-left">
-                          <CardTitle className="text-lg">{category.categoryName}</CardTitle>
+                          <CardTitle className="text-lg">
+                            {category.categoryName}
+                          </CardTitle>
                           <p className="text-sm font-mono text-muted-foreground">
                             {category.categoryKey}
                           </p>
@@ -457,18 +480,26 @@ export function CategoriesManagement() {
                   <AccordionContent>
                     <CardContent className="px-4 pb-4 pt-0">
                       <div className="grid grid-cols-3 gap-3">
-                        {category.subcategories && category.subcategories.length > 0 ? (
+                        {category.subcategories &&
+                        category.subcategories.length > 0 ? (
                           category.subcategories.map((subcategory) => (
                             <div
                               key={subcategory.subcategoryKey}
                               className="group relative flex items-center rounded-lg border border-gray-300 p-3 hover:bg-accent"
                             >
-                              <span className="text-sm">{subcategory.subcategoryName}</span>
+                              <span className="text-sm">
+                                {subcategory.subcategoryName}
+                              </span>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 className="absolute right-1 top-1 opacity-0 transition-opacity group-hover:opacity-100"
-                                onClick={() => handleEditSubcategory(subcategory, category.categoryName)}
+                                onClick={() =>
+                                  handleEditSubcategory(
+                                    subcategory,
+                                    category.categoryName
+                                  )
+                                }
                               >
                                 <Edit2 className="h-3.5 w-3.5" />
                               </Button>
