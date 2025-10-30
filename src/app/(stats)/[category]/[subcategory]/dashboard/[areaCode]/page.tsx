@@ -1,12 +1,8 @@
-import { DynamicDashboard } from "@/components/organisms/dashboard/DynamicDashboard";
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
-import { PrefectureMap } from "@/components/PrefectureMap";
-
 import { determineAreaType } from "@/features/area";
+import { loadDashboardData } from "@/features/dashboard/actions/loadDashboardData";
+import { widgetComponents } from "@/features/dashboard/widgets/registry";
 
-/**
- * 地域詳細ページのProps型定義
- */
 interface PageProps {
   params: Promise<{
     category: string;
@@ -15,51 +11,62 @@ interface PageProps {
   }>;
 }
 
-/**
- * 地域詳細ページのメインコンポーネント
- *
- * 特定の地域コードの詳細ダッシュボードを表示します。
- * 地域コードから地域タイプを自動判定し、適切なダッシュボードを表示します。
- *
- * @param props - コンポーネントのProps
- * @returns 地域詳細ページのJSX要素
- */
 export default async function Page({ params }: PageProps) {
   const { subcategory, areaCode } = await params;
-  // categoryパラメータは削除（未使用のため）
-  // const { /* category, */ subcategory, areaCode } = await params;
 
-  // 地域コードから地域タイプを判定
   const areaType = determineAreaType(areaCode);
 
-  // ダッシュボードコンポーネントを選択
-  const renderDashboard = () => {
-    if (areaType === "national") {
-      return (
-        <>
-          <PrefectureMap areaCode="00000" width={500} height={500} />
-          <DynamicDashboard
-            subcategoryId={subcategory}
-            areaCode={areaCode}
-            areaType={areaType}
-          />
-        </>
-      );
-    } else if (areaType === "prefecture") {
-      return (
-        <>
-          <PrefectureMap areaCode={areaCode} width={500} height={500} />
-          <DynamicDashboard
-            subcategoryId={subcategory}
-            areaCode={areaCode}
-            areaType={areaType}
-          />
-        </>
-      );
-    } else {
-      return <MunicipalityDashboard areaCode={areaCode} />;
-    }
-  };
+  // 市区町村は従来のダッシュボードを維持（必要に応じて後日レイアウト化）
+  if (areaType === "city") {
+    return <div><MunicipalityDashboard areaCode={areaCode} /></div>;
+  }
 
-  return <div>{renderDashboard()}</div>;
+  // レイアウトとデータの取得
+  const { layout, data } = await loadDashboardData({ subcategoryId: subcategory, areaCode });
+
+  if (!layout) {
+    return <div>このサブカテゴリのダッシュボードは未定義です。</div>;
+  }
+
+  const { cols, rowHeight } = layout.grid;
+
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+        gridAutoRows: `${rowHeight}px`,
+        gap: "12px",
+        width: "100%",
+      }}
+    >
+      {layout.widgets.map((w) => {
+        const Comp = (widgetComponents as any)[w.type] as any;
+        if (!Comp) return null;
+
+        const gridStyle: React.CSSProperties = {
+          gridColumn: `${w.col + 1} / span ${w.w}`,
+          gridRow: `${w.row + 1} / span ${w.h}`,
+        };
+
+        // ウィジェット種別ごとの最小propsマッピング
+        let props: any = {};
+        if (w.type === "metric") {
+          const d = (data as any)[w.key] || {};
+          props = { title: d.title ?? "—", value: d.value ?? "—" };
+        } else if (w.type === "chart.line") {
+          const d = (data as any)[w.key] || {};
+          props = { title: d.title ?? "—" };
+        } else if (w.type === "viz.pref-map") {
+          props = { areaCode };
+        }
+
+        return (
+          <div key={w.key} style={gridStyle}>
+            <Comp {...props} />
+          </div>
+        );
+      })}
+    </div>
+  );
 }

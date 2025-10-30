@@ -3,7 +3,7 @@
  * ダッシュボード設定とウィジェット定義を統合して返す
  */
 
-import { getMockLayoutTemplate } from "@/lib/dashboard/mock-data";
+import { getMockLayoutTemplate } from "../../../../data/mock/dashboard/mock-data";
 import {
   AreaType,
   DashboardConfig,
