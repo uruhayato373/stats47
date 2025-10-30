@@ -1,10 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import * as LucideReact from "lucide-react";
 import { AlertCircle, Edit2, Loader2 } from "lucide-react";
-import useSWR from "swr";
+import {
+  deleteCategoryAction,
+  deleteSubcategoryAction,
+  listCategoriesAction,
+  revalidateCategoriesAction,
+  updateCategoryAction,
+  updateSubcategoryAction,
+} from "@/features/category/actions";
 
 import {
   Accordion,
@@ -259,32 +266,27 @@ function EditDialog({
   );
 }
 
-/**
- * カテゴリデータ取得用のフェッチャー関数
- */
-async function fetchCategories(): Promise<Category[]> {
-  const response = await fetch("/api/admin/categories");
-  if (!response.ok) {
-    throw new Error("Failed to fetch categories");
-  }
-  const data = (await response.json()) as { categories: Category[] };
-  return data.categories;
-}
-
 export function CategoriesManagement() {
-  // useSWRでデータ取得
-  const {
-    data: categories,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR<Category[]>("/api/admin/categories", fetchCategories, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
-    dedupingInterval: 300000, // 5分間キャッシュ
-    errorRetryCount: 3,
-    errorRetryInterval: 5000,
-  });
+  const [categories, setCategories] = useState<Category[] | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const load = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await listCategoriesAction();
+      setCategories(data);
+    } catch (e) {
+      setError(e as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    void load();
+  }, []);
 
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [editingSubcategory, setEditingSubcategory] = useState<{
@@ -302,16 +304,15 @@ export function CategoriesManagement() {
     if (!editingCategory) return;
     
     try {
-      const response = await fetch(`/api/admin/categories/${editingCategory.categoryKey}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      await updateCategoryAction(editingCategory.categoryKey, {
+        categoryKey: formData.categoryKey,
+        categoryName: formData.categoryName,
+        icon: formData.icon ?? null,
+        displayOrder: formData.displayOrder,
       });
-      
-      if (response.ok) {
-        setEditingCategory(null);
-        await mutate(); // データ再取得
-      }
+      await revalidateCategoriesAction();
+      setEditingCategory(null);
+      await load();
     } catch (error) {
       console.error("Error saving category:", error);
     }
@@ -320,13 +321,10 @@ export function CategoriesManagement() {
   const handleDeleteCategory = async () => {
     if (!editingCategory) return;
     try {
-      const response = await fetch(`/api/admin/categories/${editingCategory.categoryKey}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        setEditingCategory(null);
-        await mutate(); // データ再取得
-      }
+      await deleteCategoryAction(editingCategory.categoryKey);
+      await revalidateCategoriesAction();
+      setEditingCategory(null);
+      await load();
     } catch (error) {
       console.error("Error deleting category:", error);
     }
@@ -348,19 +346,18 @@ export function CategoriesManagement() {
     if (!editingSubcategory) return;
     
     try {
-      const response = await fetch(
-        `/api/admin/subcategories/${editingSubcategory.subcategory.subcategoryKey}`,
+      await updateSubcategoryAction(
+        editingSubcategory.subcategory.subcategoryKey,
         {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          subcategoryKey: formData.subcategoryKey,
+          subcategoryName: formData.subcategoryName,
+          categoryKey: formData.categoryKey,
+          displayOrder: formData.displayOrder,
         }
       );
-      
-      if (response.ok) {
-        setEditingSubcategory(null);
-        await mutate(); // データ再取得
-      }
+      await revalidateCategoriesAction();
+      setEditingSubcategory(null);
+      await load();
     } catch (error) {
       console.error("Error saving subcategory:", error);
     }
@@ -369,16 +366,12 @@ export function CategoriesManagement() {
   const handleDeleteSubcategory = async () => {
     if (!editingSubcategory) return;
     try {
-      const response = await fetch(
-        `/api/admin/subcategories/${editingSubcategory.subcategory.subcategoryKey}`,
-        {
-          method: "DELETE",
-        }
+      await deleteSubcategoryAction(
+        editingSubcategory.subcategory.subcategoryKey
       );
-      if (response.ok) {
-        setEditingSubcategory(null);
-        await mutate(); // データ再取得
-      }
+      await revalidateCategoriesAction();
+      setEditingSubcategory(null);
+      await load();
     } catch (error) {
       console.error("Error deleting subcategory:", error);
     }
