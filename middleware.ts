@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
-import { authMiddleware } from "@/features/auth/lib/auth";
+import { auth } from "@/features/auth/lib/auth";
 
-export default authMiddleware((req: any) => {
+export default auth((req: any) => {
   const { pathname } = req.nextUrl;
 
   // dashboardからareaへのリダイレクト
@@ -42,7 +42,7 @@ export default authMiddleware((req: any) => {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // パス名をヘッダーに追加（SidebarWrapperで使用）
+  // パス名をヘッダーに追加
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-pathname", pathname);
 
