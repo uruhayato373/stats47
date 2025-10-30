@@ -1,5 +1,4 @@
 import { DynamicDashboard } from "@/components/organisms/dashboard/DynamicDashboard";
-
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
 
 /**

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { Button } from "@/components/atoms/ui/button";
 import { Label } from "@/components/atoms/ui/label";
@@ -23,15 +23,23 @@ import type { City, Prefecture } from "@/features/area/types";
 
 type AreaType = "national" | "prefecture" | "city";
 
-// [追加] カテゴリ・サブカテゴリを必須propsとする
-interface AreaNavigatorProps {
-  category: string;
-  subcategory: string;
-}
-
-export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
+export function AreaNavigator() {
+  const params = useParams();
+  // 必ずどちらも文字列（または空文字になる）
+  const category =
+    typeof params.category === "string"
+      ? params.category
+      : Array.isArray(params.category)
+      ? params.category[0]
+      : "";
+  const subcategory =
+    typeof params.subcategory === "string"
+      ? params.subcategory
+      : Array.isArray(params.subcategory)
+      ? params.subcategory[0]
+      : "";
+  // 全Hook先頭で呼び出し
   const router = useRouter();
-
   const [areaType, setAreaType] = React.useState<AreaType>("national");
   const [prefectures, setPrefectures] = React.useState<Prefecture[]>([]);
   const [cities, setCities] = React.useState<City[]>([]);
@@ -39,7 +47,7 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
   const [selectedCity, setSelectedCity] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | null>(null);
-
+  // 副作用も宣言的に
   React.useEffect(() => {
     const load = async () => {
       try {
@@ -50,25 +58,26 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
         ]);
         setPrefectures(prefs);
         setCities(cts);
-      } catch (e) {
+      } catch {
         setError("地域データの読み込みに失敗しました");
       }
     };
     void load();
   }, []);
-
   const filteredCities = React.useMemo(() => {
     if (!selectedPref) return [] as City[];
     return cities.filter((c) => c.prefCode === selectedPref);
   }, [cities, selectedPref]);
-
   const canSubmit = React.useMemo(() => {
     if (areaType === "national") return true;
     if (areaType === "prefecture") return !!selectedPref;
     if (areaType === "city") return !!selectedPref && !!selectedCity;
     return false;
   }, [areaType, selectedPref, selectedCity]);
-
+  // category・subcategory未取得時は early return（ただしこの時点でhooks全呼び出し済み）
+  if (!category || !subcategory) {
+    return <div>カテゴリ情報未指定</div>;
+  }
   const handleSubmit = async () => {
     if (!canSubmit) return;
     setLoading(true);
@@ -79,13 +88,11 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
           : areaType === "prefecture"
           ? selectedPref
           : selectedCity;
-      // ここで新パス仕様でpush
-      router.push(`/stats/${category}/${subcategory}/dashboard/${code}`);
+      router.push(`/${category}/${subcategory}/dashboard/${code}`);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="flex flex-col gap-4">
       <Tabs value={areaType} onValueChange={(v) => setAreaType(v as AreaType)}>
@@ -95,7 +102,6 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
           <TabsTrigger value="city">市区町村</TabsTrigger>
         </TabsList>
       </Tabs>
-
       {areaType === "prefecture" && (
         <div className="grid gap-2">
           <Label htmlFor="pref-select">都道府県</Label>
@@ -116,7 +122,6 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
           </Select>
         </div>
       )}
-
       {areaType === "city" && (
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="grid gap-2">
@@ -140,7 +145,6 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
               </SelectContent>
             </Select>
           </div>
-
           <div className="grid gap-2">
             <Label htmlFor="city-select">市区町村</Label>
             <Select
@@ -166,13 +170,11 @@ export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
           </div>
         </div>
       )}
-
       {error && (
         <div className="text-sm text-red-600" role="alert">
           {error}
         </div>
       )}
-
       <div>
         <Button onClick={handleSubmit} disabled={!canSubmit || loading}>
           {loading ? "遷移中..." : "ダッシュボードへ"}

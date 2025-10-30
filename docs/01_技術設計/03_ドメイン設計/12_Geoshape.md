@@ -319,21 +319,19 @@ https://geoshape.ex.nii.ac.jp/city/topojson/{YYYYMMDD}/jp_pref.l.topojson
 R2 ストレージへのキャッシュは以下のディレクトリ構造で管理されます。詳細は [R2 ストレージ設計ドキュメント](../04_インフラ設計/02_R2ストレージ設計.md#geoshape-ドメイン) を参照してください。
 
 ```
-geoshape/
+gis/geoshape/
 ├── prefecture.topojson         # 都道府県データ（全国）
 └── city/                       # 市区町村データ
-    ├── 01000_merged.topojson   # 北海道（統合版）
-    ├── 01000_split.topojson    # 北海道（分割版）
-    ├── 13000_merged.topojson   # 東京都（統合版）
-    ├── 13000_split.topojson    # 東京都（分割版）
+    ├── 13.merged.topojson      # 東京都（統合版）
+    ├── 13.split.topojson       # 東京都（分割版）
     └── ...
 ```
 
 **キー生成規則**:
 
-- **都道府県**: `geoshape/prefecture.topojson`
-- **市区町村（統合版）**: `geoshape/city/{prefCode}_merged.topojson`
-- **市区町村（分割版）**: `geoshape/city/{prefCode}_split.topojson`
+- **都道府県**: `gis/geoshape/prefecture.topojson`
+- **市区町村（統合版）**: `gis/geoshape/city/{prefCode}.merged.topojson`
+- **市区町村（分割版）**: `gis/geoshape/city/{prefCode}.split.topojson`
 
 **パラメータ**:
 

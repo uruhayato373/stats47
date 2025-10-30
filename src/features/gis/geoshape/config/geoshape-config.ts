@@ -5,7 +5,7 @@
 
 import { GeoshapeConfig } from "../types/index";
 
-import type { AreaType, Cityersion } from "../types/index";
+import type { AreaType, CityVersion } from "../types/index";
 
 /**
  * 環境判定
@@ -24,8 +24,8 @@ export const geoshapeConfig: GeoshapeConfig = {
   // 外部API（Geoshapeリポジトリ）
   externalApiUrl: "https://geoshape.ex.nii.ac.jp",
 
-  // R2ストレージパス
-  r2BucketPath: "geoshape/cache/2023",
+  // R2ストレージパス（修正）
+  r2BucketPath: "gis/geoshape",
 
   // キャッシュ有効期限（24時間）
   cacheMaxAge: 86400,

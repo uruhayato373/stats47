@@ -1,10 +1,9 @@
-import { AreaNavigatorWithParams } from "@/features/area/components/AreaNavigatorWithParams";
+import { AreaNavigator } from "@/features/area/components/AreaNavigator";
 
 export default function AreaPage() {
   return (
     <div className="space-y-6">
-      {/* 地域ナビゲーション（category/subcategoryパラメータを必ずpropsで供給すること） */}
-      <AreaNavigatorWithParams />
+      <AreaNavigator />
     </div>
   );
 }

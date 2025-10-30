@@ -85,7 +85,7 @@ export interface CityeatureCollection
 /**
  * 市区町村版タイプ
  */
-export type Cityersion = "merged" | "split"; // merged=統合版(dc), split=分割版
+export type CityVersion = "merged" | "split"; // merged=統合版(dc), split=分割版
 
 // データソース設定
 export interface GeoshapeConfig {
