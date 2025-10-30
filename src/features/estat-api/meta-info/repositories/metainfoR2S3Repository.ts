@@ -4,7 +4,7 @@
  */
 
 import { EstatMetaInfoResponse } from "@/features/estat-api/core/types";
-import { MetaInfoCacheDataR2 } from "@/infrastructure/database/estat/types";
+import { MetaInfoCacheDataR2 } from "../types";
 import {
   R2S3Client,
   getR2S3Config,

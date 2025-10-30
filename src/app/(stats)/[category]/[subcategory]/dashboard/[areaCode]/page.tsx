@@ -1,5 +1,8 @@
 import { DynamicDashboard } from "@/components/organisms/dashboard/DynamicDashboard";
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
+import { PrefectureMap } from "@/components/PrefectureMap";
+
+import { determineAreaType } from "@/features/area";
 
 /**
  * 地域詳細ページのProps型定義
@@ -22,26 +25,36 @@ interface PageProps {
  * @returns 地域詳細ページのJSX要素
  */
 export default async function Page({ params }: PageProps) {
-  const { category, subcategory, areaCode } = await params;
+  const { subcategory, areaCode } = await params;
+  // categoryパラメータは削除（未使用のため）
+  // const { /* category, */ subcategory, areaCode } = await params;
 
   // 地域コードから地域タイプを判定
-  const getAreaType = (code: string): "national" | "prefecture" | "city" => {
-    if (code === "00000") return "national";
-    if (code.endsWith("000")) return "prefecture";
-    return "city";
-  };
-
-  const areaType = getAreaType(areaCode);
+  const areaType = determineAreaType(areaCode);
 
   // ダッシュボードコンポーネントを選択
   const renderDashboard = () => {
-    if (areaType === "national" || areaType === "prefecture") {
+    if (areaType === "national") {
       return (
-        <DynamicDashboard
-          subcategoryId={subcategory}
-          areaCode={areaCode}
-          areaType={areaType}
-        />
+        <>
+          <PrefectureMap areaCode="00000" width={500} height={500} />
+          <DynamicDashboard
+            subcategoryId={subcategory}
+            areaCode={areaCode}
+            areaType={areaType}
+          />
+        </>
+      );
+    } else if (areaType === "prefecture") {
+      return (
+        <>
+          <PrefectureMap areaCode={areaCode} width={500} height={500} />
+          <DynamicDashboard
+            subcategoryId={subcategory}
+            areaCode={areaCode}
+            areaType={areaType}
+          />
+        </>
       );
     } else {
       return <MunicipalityDashboard areaCode={areaCode} />;

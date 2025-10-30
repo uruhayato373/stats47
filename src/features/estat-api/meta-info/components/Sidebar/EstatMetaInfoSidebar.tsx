@@ -17,7 +17,7 @@ import {
 import { EstatMetaInfoFetcher } from "./EstatMetaInfoFetcher";
 import { SavedMetaInfoListItem } from "./SavedMetaInfoListItem";
 
-import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
+import type { EstatMetaInfo } from "../../types";
 
 /**
  * EstatMetaInfoSidebar のプロパティ定義

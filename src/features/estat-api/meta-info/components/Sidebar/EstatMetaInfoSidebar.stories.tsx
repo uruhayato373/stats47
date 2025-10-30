@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { EstatMetaInfo } from "@/infrastructure/database/estat/types";
+import type { EstatMetaInfo } from "../../types";
 
 import EstatMetaInfoSidebar from "./EstatMetaInfoSidebar";
 

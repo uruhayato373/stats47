@@ -16,7 +16,7 @@ import {
   TransformedMetadataEntry,
 } from "@/features/estat-api/core/types";
 
-import { EstatMetaInfoR2S3Repository } from "@/infrastructure/database/estat/repositories/metainfo-r2-s3-repository";
+import { EstatMetaInfoR2CacheRepository } from "../repositories/metainfoR2CacheRepository";
 
 import { extractCategories } from "./formatter";
 
@@ -98,7 +98,7 @@ export async function fetchMetaInfo(
 ): Promise<EstatMetaInfoResponse> {
   // 1. R2キャッシュを確認
   try {
-    const cached = await EstatMetaInfoR2S3Repository.findByStatsId(statsDataId);
+    const cached = await EstatMetaInfoR2CacheRepository.findByStatsId(statsDataId);
     if (cached) {
       console.log("✅ R2キャッシュヒット:", statsDataId);
       return cached;
@@ -127,7 +127,7 @@ export async function fetchMetaInfo(
     validateMetaInfoResponse(data, url);
 
     // 3. バックグラウンドでR2に保存（awaitしない）
-    EstatMetaInfoR2S3Repository.save(statsDataId, data)
+    EstatMetaInfoR2CacheRepository.save(statsDataId, data)
       .then(() => console.log("✅ R2バックグラウンド保存完了:", statsDataId))
       .catch((err) => {
         // R2設定がない場合は警告のみ表示
