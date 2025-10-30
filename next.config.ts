@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
   // 静的ファイルの最適化
   experimental: {
     optimizePackageImports: ["@/infrastructure/mock-data"],
+    useCache: true,
   },
 };
 

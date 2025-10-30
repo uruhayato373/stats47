@@ -7,7 +7,7 @@ import type { AreaType, AreaValidationResult } from "../types";
 /**
  * 地域コードから地域タイプを判定
  */
-export function getAreaType(areaCode: string): AreaType {
+export function determineAreaType(areaCode: string): AreaType {
   if (!areaCode || typeof areaCode !== "string") {
     throw new Error("Invalid area code: must be a non-empty string");
   }
@@ -31,7 +31,7 @@ export function getAreaType(areaCode: string): AreaType {
 /**
  * 市区町村コードから親都道府県コードを取得（5桁形式）
  */
-export function getParentPrefectureCode(areaCode: string): string {
+export function deriveParentPrefectureCode(areaCode: string): string {
   if (!areaCode || areaCode.length < 5) {
     throw new Error("Invalid area code: must be at least 5 characters");
   }
@@ -128,7 +128,7 @@ export function normalizeAreaCode(areaCode: string): string {
  * 市区町村コードから政令指定都市コードを取得
  * 区の場合は親の市コードを返す
  */
-export function getDesignatedCityCode(municCode: string): string | null {
+export function deriveDesignatedCityCode(municCode: string): string | null {
   if (!municCode || municCode.length !== 5) {
     return null;
   }
@@ -164,7 +164,7 @@ export function createAreaFilter(
   parentCode?: string
 ) {
   return (areaCode: string): boolean => {
-    const areaType = getAreaType(areaCode);
+    const areaType = determineAreaType(areaCode);
 
     switch (level) {
       case "prefecture":
@@ -175,7 +175,7 @@ export function createAreaFilter(
 
         // 特定都道府県内のみ
         if (parentCode) {
-          const prefCode = getParentPrefectureCode(areaCode);
+          const prefCode = deriveParentPrefectureCode(areaCode);
           return prefCode === parentCode;
         }
 
@@ -263,7 +263,7 @@ export function validateArea(areaCode: string): AreaValidationResult {
   // 地域タイプを判定
   let areaType: AreaType;
   try {
-    areaType = getAreaType(areaCode);
+    areaType = determineAreaType(areaCode);
   } catch (error) {
     return {
       isValid: false,
@@ -324,9 +324,7 @@ export function validatePrefectureCode(prefCode: string): AreaValidationResult {
 /**
  * 市区町村コードの検証
  */
-export function validateCityCode(
-  municCode: string
-): AreaValidationResult {
+export function validateCityCode(municCode: string): AreaValidationResult {
   const result = validateArea(municCode);
 
   if (!result.isValid) {

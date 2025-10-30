@@ -14,6 +14,7 @@ import {
 } from "@/components/atoms/ui/dropdown-menu";
 
 import { type Prefecture } from "@/features/area";
+import { listPrefecturesAction } from "@/features/area/actions";
 
 /**
  * BreadcrumbAreaDropdown の Props
@@ -54,11 +55,8 @@ export const BreadcrumbAreaDropdown = ({
         if (pageType === "dashboard") {
           // 全国の場合も都道府県リストを取得（ドロップダウン用）
           try {
-            const response = await fetch("/api/area/prefectures");
-            if (response.ok) {
-              const prefs = (await response.json()) as Prefecture[];
-              setPrefectures(prefs);
-            }
+            const prefs = await listPrefecturesAction();
+            setPrefectures(prefs);
           } catch (error) {
             console.error("Failed to load prefectures:", error);
           }
@@ -69,17 +67,10 @@ export const BreadcrumbAreaDropdown = ({
       // 都道府県コード（末尾が000の5桁コード）
       if (areaCode.endsWith("000") && areaCode.length === 5) {
         try {
-          const response = await fetch("/api/area/prefectures");
-          if (response.ok) {
-            const prefs = (await response.json()) as Prefecture[];
-            setPrefectures(prefs);
-            const pref = prefs.find((p) => p.prefCode === areaCode);
-            setAreaName(pref?.prefName || null);
-          } else {
-            console.error(
-              `Failed to load prefectures: ${response.status} ${response.statusText}`
-            );
-          }
+          const prefs = await listPrefecturesAction();
+          setPrefectures(prefs);
+          const pref = prefs.find((p) => p.prefCode === areaCode);
+          setAreaName(pref?.prefName || null);
         } catch (error) {
           console.error("Failed to load prefecture data:", error);
           setAreaName(null);
