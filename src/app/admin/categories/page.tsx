@@ -1,3 +1,4 @@
+import { AdminPageTitle } from "@/components/organisms/layout/AdminPageTitle";
 import { CategoriesManagement } from "@/features/category/components/admin/CategoriesManagement";
 
 /**
@@ -7,12 +8,12 @@ import { CategoriesManagement } from "@/features/category/components/admin/Categ
  */
 export default async function CategoriesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-2 py-4 space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">カテゴリ管理</h2>
+    <>
+      <AdminPageTitle title="カテゴリ管理" iconName="Database" />
+      <div className="max-w-7xl mx-auto px-2 py-4 space-y-4">
+        <CategoriesManagement />
       </div>
-      <CategoriesManagement />
-    </div>
+    </>
   );
 }
 

@@ -3,26 +3,84 @@
 import { usePathname } from "next/navigation";
 
 import {
-    Database,
-    FileText,
-    LayoutDashboard,
-    List,
-    Wrench,
+  Database,
+  FileText,
+  LayoutDashboard,
+  List,
+  Wrench,
+  type LucideIcon,
 } from "lucide-react";
+
+/**
+ * AdminPageTitleコンポーネントのProps型定義
+ */
+export interface AdminPageTitleProps {
+  /**
+   * ページタイトル
+   * 指定されない場合は、URLパスから自動的に推測されます
+   */
+  title?: string;
+  /**
+   * アイコン名（Lucide Reactのアイコン名）
+   * 指定されない場合は、URLパスから自動的に推測されます
+   * 例: "Database", "FileText", "LayoutDashboard"など
+   */
+  iconName?: string;
+}
+
+/**
+ * アイコンマッピング
+ * Lucide Reactのアイコン名からコンポーネントへのマッピング
+ */
+const iconMap: Record<string, LucideIcon> = {
+  Database,
+  FileText,
+  LayoutDashboard,
+  List,
+  Wrench,
+};
+
+/**
+ * アイコン名からアイコンコンポーネントを取得
+ */
+function getIconComponent(iconName?: string): LucideIcon | null {
+  if (!iconName) return null;
+  return iconMap[iconName] || null;
+}
 
 /**
  * Adminページのタイトル表示コンポーネント
  *
- * URLパスから現在のページタイトルを抽出して表示します。
+ * propsでタイトルとアイコンを指定できます。
+ * propsが指定されない場合は、URLパスから自動的に推測されます。
  * スティッキーヘッダーとして動作し、ブラー効果を持ちます。
  *
+ * @param props - AdminPageTitleProps
  * @returns ページタイトルのJSX要素
  */
-export const AdminPageTitle = () => {
+export const AdminPageTitle = ({
+  title,
+  iconName,
+}: AdminPageTitleProps = {}) => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
 
-  // パスセグメントの表示名マッピング
+  // propsが指定されている場合はそれを使用
+  if (title || iconName) {
+    const Icon = getIconComponent(iconName);
+    return (
+      <div className="sticky top-0 z-10 py-2 px-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+        <div className="flex items-center gap-2">
+          {Icon && <Icon className="w-4 h-4 text-primary" />}
+          {title && (
+            <h1 className="text-base font-medium text-foreground">{title}</h1>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // フォールバック: URLパスから自動推測
   const segmentNames: Record<string, string> = {
     admin: "管理画面",
     "dev-tools": "開発ツール",
@@ -32,7 +90,6 @@ export const AdminPageTitle = () => {
     "stats-list": "統計リスト検索",
   };
 
-  // パスセグメントのアイコンマッピング
   const segmentIcons: Record<
     string,
     React.ComponentType<{ className?: string }>
