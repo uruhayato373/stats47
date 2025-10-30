@@ -1,20 +1,35 @@
 "use client";
 
 import React from "react";
+
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/atoms/ui/button";
 import { Label } from "@/components/atoms/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/atoms/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
 
-import { listCitiesAction, listPrefecturesAction } from "@/features/area/actions";
-
+import {
+  listCitiesAction,
+  listPrefecturesAction,
+} from "@/features/area/actions";
 import type { City, Prefecture } from "@/features/area/types";
 
 type AreaType = "national" | "prefecture" | "city";
 
-export function AreaNavigator() {
+// [追加] カテゴリ・サブカテゴリを必須propsとする
+interface AreaNavigatorProps {
+  category: string;
+  subcategory: string;
+}
+
+export function AreaNavigator({ category, subcategory }: AreaNavigatorProps) {
   const router = useRouter();
 
   const [areaType, setAreaType] = React.useState<AreaType>("national");
@@ -64,7 +79,8 @@ export function AreaNavigator() {
           : areaType === "prefecture"
           ? selectedPref
           : selectedCity;
-      router.push(`/landweather/land-area/dashboard/${areaType}/${code}`);
+      // ここで新パス仕様でpush
+      router.push(`/stats/${category}/${subcategory}/dashboard/${code}`);
     } finally {
       setLoading(false);
     }
@@ -83,7 +99,10 @@ export function AreaNavigator() {
       {areaType === "prefecture" && (
         <div className="grid gap-2">
           <Label htmlFor="pref-select">都道府県</Label>
-          <Select value={selectedPref} onValueChange={(v) => setSelectedPref(v)}>
+          <Select
+            value={selectedPref}
+            onValueChange={(v) => setSelectedPref(v)}
+          >
             <SelectTrigger id="pref-select">
               <SelectValue placeholder="選択してください" />
             </SelectTrigger>
@@ -130,7 +149,11 @@ export function AreaNavigator() {
               disabled={!selectedPref}
             >
               <SelectTrigger id="city-select">
-                <SelectValue placeholder={selectedPref ? "選択してください" : "先に都道府県を選択"} />
+                <SelectValue
+                  placeholder={
+                    selectedPref ? "選択してください" : "先に都道府県を選択"
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
                 {filteredCities.map((c) => (
@@ -158,5 +181,3 @@ export function AreaNavigator() {
     </div>
   );
 }
-
-
