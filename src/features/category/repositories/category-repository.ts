@@ -19,7 +19,7 @@ import "server-only";
  * - delete: 削除
  */
 
-import { getDataProvider } from "@/infrastructure/database";
+import { getD1 } from "../db/d1";
 
 import { CATEGORY_QUERIES, SUBCATEGORY_QUERIES } from "./category-queries";
 
@@ -43,7 +43,7 @@ import type {
  * @returns カテゴリの配列（各カテゴリにサブカテゴリが含まれる）
  */
 export async function listCategories(): Promise<Category[]> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db.prepare(CATEGORY_QUERIES.listCategories).all();
   const categories = (result.results || []) as unknown as CategoryDB[];
@@ -70,7 +70,7 @@ export async function listCategories(): Promise<Category[]> {
 export async function findCategoryByName(
   categoryName: string
 ): Promise<Category | null> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(CATEGORY_QUERIES.findCategoryByName)
@@ -99,7 +99,7 @@ export async function createCategory(data: {
   icon?: string | null;
   displayOrder?: number;
 }): Promise<Category> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(CATEGORY_QUERIES.createCategory)
@@ -139,7 +139,7 @@ export async function updateCategory(
     displayOrder?: number;
   }
 ): Promise<Category | null> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const fields: string[] = [];
   const values: (string | number | null)[] = [];
@@ -186,7 +186,7 @@ export async function updateCategory(
  * @returns 削除が成功したかどうか
  */
 export async function deleteCategory(categoryName: string): Promise<boolean> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(CATEGORY_QUERIES.deleteCategory)
@@ -209,7 +209,7 @@ export async function deleteCategory(categoryName: string): Promise<boolean> {
  * @returns サブカテゴリの配列
  */
 export async function listSubcategories(): Promise<Subcategory[]> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db.prepare(SUBCATEGORY_QUERIES.listSubcategories).all();
 
@@ -229,7 +229,7 @@ export async function listSubcategories(): Promise<Subcategory[]> {
 export async function findSubcategoriesByCategory(
   categoryName: string
 ): Promise<Subcategory[]> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.findSubcategoriesByCategory)
@@ -250,7 +250,7 @@ export async function findSubcategoriesByCategory(
 export async function findSubcategoryByName(
   subcategoryName: string
 ): Promise<Subcategory | null> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.findSubcategoryByName)
@@ -277,7 +277,7 @@ export async function createSubcategory(data: {
   categoryKey: string;
   displayOrder?: number;
 }): Promise<Subcategory> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.createSubcategory)
@@ -317,7 +317,7 @@ export async function updateSubcategory(
     displayOrder?: number;
   }
 ): Promise<Subcategory | null> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const fields: string[] = [];
   const values: (string | number | null)[] = [];
@@ -366,7 +366,7 @@ export async function updateSubcategory(
 export async function deleteSubcategory(
   subcategoryName: string
 ): Promise<boolean> {
-  const db = await getDataProvider();
+  const db = getD1();
 
   const result = await db
     .prepare(SUBCATEGORY_QUERIES.deleteSubcategory)

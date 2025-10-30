@@ -1,4 +1,4 @@
-// Cloudflare D1対応 DB Providerユーティリティ（できるだけシンプルに）
+// Cloudflare D1対応 DB Providerユーティリティ
 export type D1Database = any; // cloudflare/workers-types で型定義できる場合は利用可
 
 /**
@@ -91,11 +91,13 @@ function createLocalD1Adapter(): D1Database | null {
               }
             },
             bind: (...args: any[]) => {
+              // bind()を呼び出すと、新しいステートメントを返す（チェーン可能）
               return createStmt(...args);
             },
           };
         };
         
+        // prepare()が返すオブジェクトは、直接.all()や.bind()を呼び出せる
         return createStmt();
       },
       exec: (sql: string) => {
@@ -103,6 +105,7 @@ function createLocalD1Adapter(): D1Database | null {
       },
     } as D1Database;
   } catch (error) {
+    // better-sqlite3が利用できない、またはインポートエラーの場合
     return null;
   }
 }
@@ -165,10 +168,4 @@ export const getD1 = (): D1Database => {
   throw new Error(errorMessage);
 };
 
-// ラッパUtils例
-export async function runQuery(sql: string, ...params: any[]): Promise<any> {
-  const db = getD1();
-  const stmt = db.prepare(sql);
-  if (params && params.length > 0) stmt.bind(...params);
-  return await stmt.all(); // .first()等、用途に応じて拡張可
-}
+

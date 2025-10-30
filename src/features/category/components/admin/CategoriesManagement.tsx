@@ -295,7 +295,17 @@ export function CategoriesManagement() {
       const data = await listCategoriesAction();
       setCategories(data);
     } catch (e) {
-      setError(e as Error);
+      const error = e as Error;
+      console.error("カテゴリデータ取得エラー:", error);
+      // エラーオブジェクトに詳細情報を追加
+      const enhancedError = new Error(
+        error.message || "カテゴリデータの取得に失敗しました"
+      );
+      enhancedError.name = error.name || "CategoryLoadError";
+      if (error.stack) {
+        enhancedError.stack = error.stack;
+      }
+      setError(enhancedError);
     } finally {
       setIsLoading(false);
     }
@@ -419,12 +429,33 @@ export function CategoriesManagement() {
 
   // エラー状態
   if (error) {
+    const isDatabaseError = error.message.includes("STATS47_DB") || 
+                           error.message.includes("Database") ||
+                           error.message.includes("バインディング");
+    
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>エラー</AlertTitle>
-        <AlertDescription>
-          カテゴリデータの取得に失敗しました。ページをリロードしてください。
+        <AlertDescription className="space-y-2">
+          <p>カテゴリデータの取得に失敗しました。</p>
+          {isDatabaseError && (
+            <div className="mt-2 text-sm">
+              <p className="font-semibold mb-1">データベース接続エラーの可能性があります:</p>
+              <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                <li>ローカル開発時は、別ターミナルで <code className="bg-muted px-1 rounded">npx wrangler dev</code> を実行してください</li>
+                <li>データベースが正しく初期化されているか確認してください</li>
+              </ul>
+            </div>
+          )}
+          <div className="mt-2">
+            <button
+              onClick={() => void load()}
+              className="text-sm underline hover:no-underline"
+            >
+              再試行
+            </button>
+          </div>
         </AlertDescription>
       </Alert>
     );

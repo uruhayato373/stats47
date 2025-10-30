@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
-import { getDataProvider } from "@/infrastructure/database";
+import { getD1 } from "@/features/auth/db/d1";
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const db = await getDataProvider();
+    const db = getD1();
 
     // メールアドレスの重複チェック
     const existingUser = await db

@@ -12,7 +12,7 @@ import { findSubcategoryByName } from "@/features/category";
 
 import { buildEnvironmentConfig } from "@/lib/environment";
 
-import { getDataProvider } from "@/infrastructure/database";
+import { getD1 } from "../db/d1";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
 import { DataSourceMetadataDB, RankingItem, RankingItemDB } from "../types";
@@ -59,7 +59,7 @@ export class RankingRepository {
     console.log(
       `[${config.environment}] Creating RankingRepository with database provider`
     );
-    const db = await getDataProvider();
+    const db = getD1();
     return new RankingRepository(db);
   }
 

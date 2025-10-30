@@ -1,4 +1,4 @@
-// Cloudflare D1対応 DB Providerユーティリティ（できるだけシンプルに）
+// Cloudflare D1対応 DB Providerユーティリティ
 export type D1Database = any; // cloudflare/workers-types で型定義できる場合は利用可
 
 /**
@@ -165,10 +165,5 @@ export const getD1 = (): D1Database => {
   throw new Error(errorMessage);
 };
 
-// ラッパUtils例
-export async function runQuery(sql: string, ...params: any[]): Promise<any> {
-  const db = getD1();
-  const stmt = db.prepare(sql);
-  if (params && params.length > 0) stmt.bind(...params);
-  return await stmt.all(); // .first()等、用途に応じて拡張可
-}
+
+

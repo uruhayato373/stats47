@@ -11,8 +11,6 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 
-import { getCloudflareConfig } from "../config";
-
 /**
  * R2 S3互換API設定
  */
@@ -142,9 +140,8 @@ export class R2S3Client {
  * 環境変数からR2 S3設定を取得
  */
 export function getR2S3Config(): R2S3Config | null {
-  const cloudflareConfig = getCloudflareConfig();
-  const accountId = cloudflareConfig.accountId;
-  const bucketName = cloudflareConfig.r2;
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME;
   const accessKeyId = process.env.CLOUDFLARE_R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY;
 
