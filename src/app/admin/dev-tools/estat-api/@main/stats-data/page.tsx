@@ -1,10 +1,6 @@
 import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
 import { EstatDataDisplay } from "@/features/estat-api/stats-data/components";
 
-import { buildEnvironmentConfig } from "@/lib/environment";
-
-import { getMockStatsData } from "@data/mock/estat-api/stats-data";
-
 /**
  * StatsDataMainSlot - e-Stat統計データページのメインコンテンツ（サーバーコンポーネント）
  *
@@ -37,35 +33,24 @@ export default async function StatsDataMainSlot({
   }>;
 }) {
   const params = await searchParams;
-  const config = buildEnvironmentConfig();
   let statsData = null;
   let error = null;
 
-  // デフォルト値（mock環境用）
-  const statsDataId =
-    params.statsDataId || (config.isMock ? "0000010101" : undefined);
-  const cdCat01 = params.cdCat01 || (config.isMock ? "A1101" : undefined);
+  // パラメータの取得
+  const statsDataId = params.statsDataId;
+  const cdCat01 = params.cdCat01;
 
   // サーバーサイドでデータ取得
   if (statsDataId && cdCat01) {
     try {
-      if (config.isMock) {
-        console.log(`[${config.environment}] Loading stats data from mock...`);
-        statsData = getMockStatsData(statsDataId, cdCat01);
-
-        if (!statsData) {
-          error = `モックデータが見つかりません: ${statsDataId}_${cdCat01}`;
-        }
-      } else {
-        console.log(`[${config.environment}] Fetching stats data from e-Stat API...`);
-        statsData = await fetchFormattedStatsData(statsDataId, {
-          categoryFilter: cdCat01,
-          ...(params.cdArea && { areaFilter: params.cdArea }),
-          ...(params.cdTime && { yearFilter: params.cdTime }),
-        });
-      }
+      console.log(`Fetching stats data from e-Stat API...`);
+      statsData = await fetchFormattedStatsData(statsDataId, {
+        categoryFilter: cdCat01,
+        ...(params.cdArea && { areaFilter: params.cdArea }),
+        ...(params.cdTime && { yearFilter: params.cdTime }),
+      });
     } catch (err) {
-      console.error(`[${config.environment}] データ取得エラー:`, err);
+      console.error(`データ取得エラー:`, err);
       error = err instanceof Error ? err.message : "データの取得に失敗しました";
     }
   }

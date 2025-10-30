@@ -72,15 +72,7 @@ export class RankingRepository {
     const { limit = 10 } = options || {};
 
     try {
-      // Mock環境
-      if (config.isMock) {
-        console.log(
-          `[${config.environment}] Fetching ranking items from mock data...`
-        );
-        return await mockDataProvider.fetchRankingItems(options);
-      }
-
-      // Development/Staging/Production環境
+      // Development/Staging/Production環境: データベースから取得
       console.log(
         `[${config.environment}] Fetching ranking items from database...`
       );

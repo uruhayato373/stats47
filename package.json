@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'Please use dev:mock or dev:api instead of dev' && exit 1",
-    "dev:mock": "cross-env NEXT_PUBLIC_USE_MOCK=true next dev --turbopack",
-    "dev:api": "cross-env NEXT_PUBLIC_USE_MOCK=false next dev",
-    "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_USE_MOCK=false next dev --turbopack",
-    "dev:production": "cross-env NODE_ENV=production NEXT_PUBLIC_USE_MOCK=false next dev --turbopack",
+    "dev": "next dev --turbopack",
+    "dev:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=staging next dev --turbopack",
     "build": "next build",
     "build:staging": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=staging next build",
     "build:production": "cross-env NODE_ENV=production NEXT_PUBLIC_ENV=production next build",

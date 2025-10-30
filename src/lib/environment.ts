@@ -22,10 +22,8 @@ export type { Config, Environment, EnvironmentConfig };
  */
 export const config = {
   env: process.env.NODE_ENV || "development",
-  useMock: process.env.NEXT_PUBLIC_USE_MOCK === "true",
-
   mock: {
-    dataPath: process.env.MOCK_DATA_PATH || "data/mock",
+    dataPath: process.env.MOCK_DATA_PATH || "data/mock", // テストやStorybook用
   },
 } as const;
 
@@ -33,24 +31,18 @@ export const config = {
  * 現在の実行環境を解決
  */
 function resolveEnvironment(): Environment {
-  return (process.env.NODE_ENV as Environment) || "development";
-}
-
-/**
- * モックデータモードが有効かどうかを判定
- */
-export function checkMockDataEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_USE_MOCK === "true";
+  const env = process.env.NEXT_PUBLIC_ENV || process.env.NODE_ENV || "development";
+  if (env === "production" || env === "staging" || env === "development") {
+    return env;
+  }
+  return "development";
 }
 
 /**
  * 環境設定オブジェクトを構築
- *
- * この関数は環境情報とモック設定を統合した設定オブジェクトを返します。
  */
 export function buildEnvironmentConfig(): EnvironmentConfig {
   return {
     environment: resolveEnvironment(),
-    isMock: checkMockDataEnabled(),
   };
 }

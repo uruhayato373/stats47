@@ -6,8 +6,6 @@ import { AuthService } from "../services/AuthService";
 
 import type { NextAuthConfig, Session, User } from "../types";
 
-const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "true";
-
 export const authConfig: NextAuthConfig = {
   providers: [
     Credentials({
@@ -16,20 +14,17 @@ export const authConfig: NextAuthConfig = {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-        // パスワードをD1/mock両対応でハッシュor生で送る
-        const user = await AuthService.login(
-          credentials.email,
-          USE_MOCK
-            ? credentials.password
-            : await bcrypt.hash(credentials.password, 10)
-        );
+        // パスワードハッシュ化
+        const passwordHash = await bcrypt.hash(credentials.password, 10);
+        
+        // D1データベースからユーザーを取得
+        const user = await AuthService.login(credentials.email, passwordHash);
         if (!user || !user.is_active) return null;
-        // パスワード検証（D1: hash保存、Mock:生保存想定）
-        if (
-          !USE_MOCK &&
-          !(await bcrypt.compare(credentials.password, user.passwordHash))
-        )
+        
+        // パスワード検証（D1: hash保存）
+        if (!(await bcrypt.compare(credentials.password, user.passwordHash))) {
           return null;
+        }
         return {
           id: user.id,
           name: user.name,

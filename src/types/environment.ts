@@ -12,7 +12,6 @@ export type Environment = "development" | "staging" | "production";
  */
 export interface EnvironmentConfig {
   environment: Environment;
-  isMock: boolean;
 }
 
 /**
@@ -20,7 +19,6 @@ export interface EnvironmentConfig {
  */
 export type Config = {
   readonly env: string;
-  readonly useMock: boolean;
   readonly mock: {
     readonly dataPath: string;
   };
