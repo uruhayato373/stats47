@@ -24,9 +24,9 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
-import { useMetaInfoDownload, useMetaInfoSave } from "../../../hooks";
-import { parseCompleteMetaInfo } from "../../../services/formatter";
-import { EstatMetaInfoResponse } from "../../../types";
+import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
+import { parseCompleteMetaInfo } from "../../services/formatter";
+import { EstatMetaInfoResponse } from "../../types";
 import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
 
 import AreasTab from "./tabs/AreasTab";

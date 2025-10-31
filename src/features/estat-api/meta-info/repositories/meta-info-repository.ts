@@ -24,7 +24,7 @@ import type { AreaType } from "@/features/area";
 import { getD1 } from "../db/d1";
 
 import type {
-  EstatMetaInfo,
+  SavedEstatMetaInfo,
   EstatMetaInfoListOptions,
   SaveEstatMetaInfoInput,
 } from "../types";
@@ -37,7 +37,7 @@ import type {
  */
 export async function listSavedMetaInfo(
   options: EstatMetaInfoListOptions = {}
-): Promise<EstatMetaInfo[]> {
+): Promise<SavedEstatMetaInfo[]> {
   const db = getD1();
 
   const {
@@ -86,7 +86,7 @@ export async function listSavedMetaInfo(
       ? result
       : [];
 
-  // EstatMetaInfo形式に変換
+  // SavedEstatMetaInfo形式に変換
   return rows.map((row: Record<string, unknown>) => ({
     stats_data_id: String(row.stats_data_id || ""),
     stat_name: String(row.stat_name || ""),

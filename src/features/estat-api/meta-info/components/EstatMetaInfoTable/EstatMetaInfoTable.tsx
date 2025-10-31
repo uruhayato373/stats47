@@ -6,20 +6,20 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTable } from "@/components/molecules/data-table";
 
-import type { EstatMetaInfo } from "../../../types";
+import type { SavedEstatMetaInfo } from "../../types";
 
 /**
  * EstatMetaInfoTableProps - e-Statメタ情報テーブルコンポーネントのプロパティ
  */
 interface EstatMetaInfoTableProps {
   /** 保存済みメタ情報の配列 */
-  data: EstatMetaInfo[];
+  data: SavedEstatMetaInfo[];
 }
 
 /**
  * area_typeをバッジ表示用のラベルとスタイルに変換
  */
-function getAreaTypeBadge(areaType: EstatMetaInfo["area_type"]) {
+function getAreaTypeBadge(areaType: SavedEstatMetaInfo["area_type"]) {
   const config = {
     national: {
       label: "全国",
@@ -44,7 +44,7 @@ function getAreaTypeBadge(areaType: EstatMetaInfo["area_type"]) {
 /**
  * EstatMetaInfoTable - e-Statメタ情報テーブルコンポーネント
  *
- * データベースに登録されているEstatMetaInfo情報をDataTableで表示します。
+ * データベースに登録されているSavedEstatMetaInfo情報をDataTableで表示します。
  *
  * 機能:
  * - 保存済みメタ情報の一覧表示
@@ -69,7 +69,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
   /**
    * カラム定義
    */
-  const columns: ColumnDef<EstatMetaInfo>[] = [
+  const columns: ColumnDef<SavedEstatMetaInfo>[] = [
     {
       accessorKey: "stats_data_id",
       header: "統計表ID",
@@ -140,7 +140,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
       enableFiltering={true}
       enableSorting={true}
       showIndex={false}
-      showBorder={true}
+      showBorder={false}
     />
   );
 }

@@ -72,7 +72,7 @@ export interface TableInfo {
  *
  * @example
  * ```typescript
- * const metaInfo: EstatMetaInfo = {
+ * const metaInfo: SavedEstatMetaInfo = {
  *   stats_data_id: "0000010101",
  *   stat_name: "社会・人口統計体系",
  *   title: "Ａ　人口・世帯",
@@ -82,7 +82,7 @@ export interface TableInfo {
  * };
  * ```
  */
-export interface EstatMetaInfo {
+export interface SavedEstatMetaInfo {
   /** 統計表ID（e-Statの統計表を一意に識別するID、例: "0000010101"） */
   stats_data_id: string;
   /** 政府統計名（例: "社会・人口統計体系"） */
@@ -102,7 +102,7 @@ export interface EstatMetaInfo {
  * e-Statメタ情報保存用入力データ
  *
  * データベースに保存するためのメタ情報の入力形式。
- * EstatMetaInfoから自動生成されるタイムスタンプ（created_at, updated_at）を除いた形式。
+ * SavedEstatMetaInfoから自動生成されるタイムスタンプ（created_at, updated_at）を除いた形式。
  *
  * @example
  * ```typescript
@@ -144,7 +144,7 @@ export interface SaveEstatMetaInfoInput {
  */
 export interface EstatMetaInfoSearchResult {
   /** 検索結果のメタ情報配列 */
-  items: EstatMetaInfo[];
+  items: SavedEstatMetaInfo[];
   /** 検索条件に一致する総件数（ページネーション前の全件数） */
   totalCount: number;
   /** 検索クエリ（ユーザーが入力した検索文字列、オプション） */
