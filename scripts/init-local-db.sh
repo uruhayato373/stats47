@@ -72,17 +72,64 @@ wrangler d1 execute stats47 --local --command="SELECT name FROM sqlite_master WH
 # シードファイルの適用（オプション）
 if [ "${APPLY_SEEDS}" = "true" ]; then
   log_info "Applying seed files..."
-  if [ -f "database/seeds/ranking_items_seed.sql" ]; then
-    log_info "Applying ranking_items seed..."
-    wrangler d1 execute stats47 --local --file=database/seeds/ranking_items_seed.sql || {
-      log_warn "Failed to apply seed files"
+  
+  # 基本シードファイル（優先度高）
+  if [ -f "database/seeds/users_seed.sql" ]; then
+    log_info "Applying users seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/users_seed.sql || {
+      log_warn "Failed to apply users seed"
     }
   fi
   
+  if [ -f "database/seeds/categories_seed.sql" ]; then
+    log_info "Applying categories seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/categories_seed.sql || {
+      log_warn "Failed to apply categories seed"
+    }
+  fi
+  
+  # e-Statメタ情報シード
+  if [ -f "database/seeds/estat_metainfo_seed.sql" ]; then
+    log_info "Applying estat_metainfo seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/estat_metainfo_seed.sql || {
+      log_warn "Failed to apply estat_metainfo seed"
+    }
+  fi
+  
+  # ランキング関連シード
+  if [ -f "database/seeds/ranking_groups_seed.sql" ]; then
+    log_info "Applying ranking_groups seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/ranking_groups_seed.sql || {
+      log_warn "Failed to apply ranking_groups seed"
+    }
+  fi
+  
+  if [ -f "database/seeds/ranking_items_seed.sql" ]; then
+    log_info "Applying ranking_items seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/ranking_items_seed.sql || {
+      log_warn "Failed to apply ranking_items seed"
+    }
+  fi
+  
+  # ダッシュボード関連シード
   if [ -f "database/seeds/widget_templates_seed.sql" ]; then
     log_info "Applying widget_templates seed..."
     wrangler d1 execute stats47 --local --file=database/seeds/widget_templates_seed.sql || {
       log_warn "Failed to apply widget_templates seed"
+    }
+  fi
+  
+  if [ -f "database/seeds/dashboard_configs_seed.sql" ]; then
+    log_info "Applying dashboard_configs seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/dashboard_configs_seed.sql || {
+      log_warn "Failed to apply dashboard_configs seed"
+    }
+  fi
+  
+  if [ -f "database/seeds/dashboard_widgets_seed.sql" ]; then
+    log_info "Applying dashboard_widgets seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/dashboard_widgets_seed.sql || {
+      log_warn "Failed to apply dashboard_widgets seed"
     }
   fi
 fi
