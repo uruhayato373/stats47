@@ -77,9 +77,6 @@ export interface TableInfo {
  *   stat_name: "社会・人口統計体系",
  *   title: "Ａ　人口・世帯",
  *   area_type: "prefecture",
- *   cycle: "年度次",
- *   survey_date: "2020",
- *   last_fetched_at: "2025-01-31T00:00:00Z",
  *   created_at: "2025-01-31T00:00:00Z",
  *   updated_at: "2025-01-31T00:00:00Z"
  * };
@@ -94,14 +91,8 @@ export interface EstatMetaInfo {
   title: string;
   /** 地域レベル（'national': 全国, 'prefecture': 都道府県, 'city': 市区町村） */
   area_type: AreaType;
-  /** 調査周期（例: "年度次", "月次", "年次"） */
-  cycle?: string;
-  /** 調査年月（例: "2020", "202001"） */
-  survey_date?: string;
   /** 説明文（統計表の詳細説明、オプション） */
   description?: string;
-  /** 最終取得日時（ISO 8601形式、e-Stat APIから最後に取得した日時） */
-  last_fetched_at: string;
   /** 作成日時（ISO 8601形式、レコードが作成された日時） */
   created_at: string;
   /** 更新日時（ISO 8601形式、レコードが最後に更新された日時） */
@@ -111,7 +102,7 @@ export interface EstatMetaInfo {
  * e-Statメタ情報保存用入力データ
  *
  * データベースに保存するためのメタ情報の入力形式。
- * EstatMetaInfoから自動生成されるタイムスタンプ（created_at, updated_at, last_fetched_at）を除いた形式。
+ * EstatMetaInfoから自動生成されるタイムスタンプ（created_at, updated_at）を除いた形式。
  *
  * @example
  * ```typescript
@@ -119,8 +110,7 @@ export interface EstatMetaInfo {
  *   stats_data_id: "0000010101",
  *   stat_name: "社会・人口統計体系",
  *   title: "Ａ　人口・世帯",
- *   area_type: "prefecture",
- *   cycle: "年度次"
+ *   area_type: "prefecture"
  * };
  * ```
  */
@@ -133,10 +123,6 @@ export interface SaveEstatMetaInfoInput {
   title: string;
   /** 地域レベル */
   area_type: AreaType;
-  /** 調査周期 */
-  cycle?: string;
-  /** 調査年月 */
-  survey_date?: string;
   /** 説明文 */
   description?: string;
 }

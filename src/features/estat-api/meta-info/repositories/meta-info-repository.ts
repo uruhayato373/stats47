@@ -68,10 +68,7 @@ export async function listSavedMetaInfo(
       stat_name,
       title,
       area_type,
-      cycle,
-      survey_date,
       description,
-      last_fetched_at,
       created_at,
       updated_at
     FROM estat_metainfo 
@@ -96,10 +93,7 @@ export async function listSavedMetaInfo(
     title: String(row.title || ""),
     area_type:
       (row.area_type as AreaType) || "national",
-    cycle: row.cycle ? String(row.cycle) : undefined,
-    survey_date: row.survey_date ? String(row.survey_date) : undefined,
     description: row.description ? String(row.description) : undefined,
-    last_fetched_at: String(row.last_fetched_at || ""),
     created_at: String(row.created_at || ""),
     updated_at: String(row.updated_at || ""),
   }));
@@ -135,21 +129,15 @@ export async function saveMetaInfo(
       stat_name,
       title,
       area_type,
-      cycle,
-      survey_date,
       description,
-      last_fetched_at,
       created_at,
       updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(stats_data_id) DO UPDATE SET
       stat_name = excluded.stat_name,
       title = excluded.title,
       area_type = excluded.area_type,
-      cycle = excluded.cycle,
-      survey_date = excluded.survey_date,
       description = excluded.description,
-      last_fetched_at = excluded.last_fetched_at,
       updated_at = excluded.updated_at`
   );
 
@@ -159,10 +147,7 @@ export async function saveMetaInfo(
       input.stat_name,
       input.title,
       input.area_type,
-      input.cycle || null,
-      input.survey_date || null,
       input.description || null,
-      now,
       createdAt,
       now
     )

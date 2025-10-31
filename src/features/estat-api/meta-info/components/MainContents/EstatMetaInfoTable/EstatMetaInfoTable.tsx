@@ -42,25 +42,13 @@ function getAreaTypeBadge(areaType: EstatMetaInfo["area_type"]) {
 }
 
 /**
- * ISO 8601形式の日付文字列をYYYY-MM-DD形式に変換
- */
-function formatDate(dateString: string): string {
-  try {
-    const date = new Date(dateString);
-    return date.toISOString().split("T")[0];
-  } catch {
-    return dateString;
-  }
-}
-
-/**
  * EstatMetaInfoTable - e-Statメタ情報テーブルコンポーネント
  *
  * データベースに登録されているEstatMetaInfo情報をDataTableで表示します。
  *
  * 機能:
  * - 保存済みメタ情報の一覧表示
- * - ソート機能（デフォルト: updated_at降順）
+ * - ソート機能
  * - フィルタリング機能（全カラム）
  * - ページネーション機能
  * - 行クリックで統計表IDの詳細ページに遷移
@@ -141,44 +129,6 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
         filterType: "select",
       },
     },
-    {
-      accessorKey: "cycle",
-      header: "調査周期",
-      cell: ({ row }) => (
-        <span className="text-sm text-muted-foreground">
-          {row.original.cycle || "-"}
-        </span>
-      ),
-      meta: {
-        filterable: true,
-        filterType: "text",
-      },
-    },
-    {
-      accessorKey: "survey_date",
-      header: "調査年月",
-      cell: ({ row }) => (
-        <span className="text-sm text-muted-foreground">
-          {row.original.survey_date || "-"}
-        </span>
-      ),
-      meta: {
-        filterable: true,
-        filterType: "text",
-      },
-    },
-    {
-      accessorKey: "updated_at",
-      header: "更新日時",
-      cell: ({ row }) => (
-        <span className="text-sm text-muted-foreground">
-          {formatDate(row.original.updated_at)}
-        </span>
-      ),
-      meta: {
-        filterable: false,
-      },
-    },
   ];
 
   return (
@@ -189,7 +139,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
       maxRows={20}
       enableFiltering={true}
       enableSorting={true}
-      showIndex={true}
+      showIndex={false}
       showBorder={true}
     />
   );

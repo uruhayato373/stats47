@@ -96,10 +96,7 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   stat_name TEXT NOT NULL,
   title TEXT NOT NULL,
   area_type TEXT NOT NULL DEFAULT 'national',
-  cycle TEXT,
-  survey_date TEXT,
   description TEXT,
-  last_fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   CHECK (area_type IN ('national', 'prefecture', 'city'))

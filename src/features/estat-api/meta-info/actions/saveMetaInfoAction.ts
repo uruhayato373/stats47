@@ -70,8 +70,6 @@ export async function saveMetaInfoAction(
       stat_name: tableInfo.statName || "",
       title: tableInfo.title || "",
       area_type: areaType,
-      cycle: tableInfo.cycle || undefined,
-      survey_date: String(tableInfo.surveyDate || "") || undefined,
       description: undefined,
     });
 
