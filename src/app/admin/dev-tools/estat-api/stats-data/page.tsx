@@ -1,7 +1,6 @@
 import { fetchStatsData } from "@/features/estat-api/stats-data";
+import { EstatDataDisplay } from "@/features/estat-api/stats-data/components";
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
-
-import StatsDataPageClient from "./StatsDataPageClient";
 
 /**
  * StatsDataPage - e-Stat統計データページ（サーバーコンポーネント）
@@ -60,6 +59,8 @@ export default async function StatsDataPage({
   }
 
   return (
-    <StatsDataPageClient statsData={statsData} loading={false} error={error} />
+    <div className="h-full p-4">
+      <EstatDataDisplay data={statsData} loading={false} error={error} />
+    </div>
   );
 }

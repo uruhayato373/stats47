@@ -3,5 +3,5 @@
  * 統計データの取得・表示に関するコンポーネントを提供
  */
 
-// MainContents
-export { EstatDataDisplay } from "./MainContents/EstatDataDisplay";
+export { EstatDataDisplay } from "./EstatDataDisplay";
+export { EstatStatsDataFetcher } from "./EstatStatsDataFetcher";
