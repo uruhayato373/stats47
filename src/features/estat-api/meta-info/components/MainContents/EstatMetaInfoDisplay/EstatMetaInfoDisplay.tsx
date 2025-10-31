@@ -117,7 +117,7 @@ export default function EstatMetaInfoDisplay({
   if (!statsId) {
     return (
       <div className="space-y-6">
-        <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+        <div className="p-8 text-center text-muted-foreground">
           <p className="mb-6">統計表IDを入力してメタ情報を取得してください</p>
           <div className="max-w-md mx-auto">
             <EstatMetaInfoFetcher clearOnSuccess={false} />

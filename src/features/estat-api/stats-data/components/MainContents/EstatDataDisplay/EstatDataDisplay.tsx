@@ -13,7 +13,7 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 
-import type { EstatStatsDataResponse } from "../../types";
+import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
 import EstatCategoriesTable from "./components/EstatCategoriesTable";
 import EstatOverview from "./components/EstatOverview";
@@ -27,7 +27,11 @@ interface EstatDataDisplayProps {
   error: string | null;
 }
 
-export default function EstatDataDisplay({ data, loading, error }: EstatDataDisplayProps) {
+export default function EstatDataDisplay({
+  data,
+  loading,
+  error,
+}: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<
     "overview" | "categories" | "years" | "values" | "raw"
   >("overview");
@@ -61,13 +65,13 @@ export default function EstatDataDisplay({ data, loading, error }: EstatDataDisp
 
   if (!data) {
     return (
-      <div className="bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
+      <div className="bg-card border border-border rounded-lg shadow-sm">
         <div className="p-8 text-center">
-          <Database className="w-12 h-12 text-gray-500 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-neutral-100 mb-2">
+          <Database className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-foreground mb-2">
             データ取得前
           </h3>
-          <p className="text-gray-600 dark:text-neutral-400">
+          <p className="text-muted-foreground">
             上のフォームからパラメータを入力してデータを取得してください
           </p>
         </div>

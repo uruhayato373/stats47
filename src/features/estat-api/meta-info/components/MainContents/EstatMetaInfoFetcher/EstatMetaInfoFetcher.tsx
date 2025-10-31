@@ -93,27 +93,35 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
-        <div className="flex flex-col gap-3">
-          {/* 統計表ID入力フィールド */}
-          <FormField
-            control={form.control}
-            name="statsDataId"
-            render={({ field }) => (
-              <FormItem className="space-y-1">
-                <FormLabel>統計表ID</FormLabel>
+        <FormField
+          control={form.control}
+          name="statsDataId"
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>統計表ID</FormLabel>
+              <div className="flex flex-row gap-2">
+                {/* 統計表ID入力フィールド */}
                 <FormControl>
-                  <Input placeholder="0000010101" {...field} />
+                  <Input
+                    placeholder="0000010101"
+                    {...field}
+                    className="h-8 w-40"
+                  />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* 送信ボタン */}
-          <Button type="submit" disabled={!form.formState.isValid} className="w-full">
-            取得
-          </Button>
-        </div>
+                {/* 送信ボタン */}
+                <Button
+                  type="submit"
+                  disabled={!form.formState.isValid}
+                  size="sm"
+                  className="px-4"
+                >
+                  取得
+                </Button>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </form>
     </Form>
   );
@@ -122,4 +130,3 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
 EstatMetaInfoFetcher.displayName = "EstatMetaInfoFetcher";
 
 export default EstatMetaInfoFetcher;
-
