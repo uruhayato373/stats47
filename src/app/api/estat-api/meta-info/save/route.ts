@@ -2,6 +2,7 @@ import "server-only";
 
 import { NextRequest, NextResponse } from "next/server";
 
+import type { AreaType } from "@/features/area";
 import { fetchMetaInfo } from "@/features/estat-api/meta-info/services/fetcher";
 import { extractTableInfo } from "@/features/estat-api/meta-info/services/formatter";
 import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-repository";
@@ -45,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     // area_typeを推定（COLLECT_AREAから）
     const collectArea = tableInfo.collectArea || "";
-    let areaType: "country" | "prefecture" | "municipality" = "country";
+    let areaType: AreaType = "national";
     if (collectArea.includes("都道府県") || collectArea.includes("県")) {
       areaType = "prefecture";
     } else if (
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
       collectArea.includes("町") ||
       collectArea.includes("村")
     ) {
-      areaType = "municipality";
+      areaType = "city";
     }
 
     // データベースに保存

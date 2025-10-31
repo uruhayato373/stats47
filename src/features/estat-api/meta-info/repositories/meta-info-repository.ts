@@ -19,6 +19,8 @@ import "server-only";
  * - delete: 削除
  */
 
+import type { AreaType } from "@/features/area";
+
 import { getD1 } from "../db/d1";
 
 import type {
@@ -93,8 +95,7 @@ export async function listSavedMetaInfo(
     stat_name: String(row.stat_name || ""),
     title: String(row.title || ""),
     area_type:
-      (row.area_type as "country" | "prefecture" | "municipality") ||
-      "country",
+      (row.area_type as AreaType) || "national",
     cycle: row.cycle ? String(row.cycle) : undefined,
     survey_date: row.survey_date ? String(row.survey_date) : undefined,
     description: row.description ? String(row.description) : undefined,

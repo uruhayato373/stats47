@@ -7,7 +7,7 @@ export interface EstatMetaInfo {
   stats_data_id: string;
   stat_name: string;
   title: string;
-  area_type: AreaType; // 'country' | 'prefecture' | 'municipality'
+  area_type: AreaType; // 'national' | 'prefecture' | 'city'
   cycle?: string;
   survey_date?: string;
   description?: string;
