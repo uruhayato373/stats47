@@ -5,6 +5,4 @@
 
 // MainContents
 export { EstatDataDisplay } from "./MainContents/EstatDataDisplay";
-
-// Sidebar
-export { EstatDataFetcher } from "./Sidebar/EstatDataFetcher";
+export { EstatDataFetcher } from "./MainContents/EstatDataFetcher";
