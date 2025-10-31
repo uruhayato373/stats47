@@ -62,6 +62,32 @@ async function executeTimeoutFetch(
     if (error instanceof DOMException && error.name === "AbortError") {
       throw new Error("e-STAT APIへのリクエストがタイムアウトしました");
     }
+
+    // ネットワークエラーの処理
+    if (error instanceof Error) {
+      // DNS解決エラー（ENOTFOUND）
+      if (
+        (error as any).code === "ENOTFOUND" ||
+        (error as any).errno === -3008 ||
+        error.message.includes("getaddrinfo ENOTFOUND")
+      ) {
+        throw new Error(
+          `ネットワーク接続エラー: ${(error as any).hostname || "api.e-stat.go.jp"} に接続できません。インターネット接続を確認してください。`
+        );
+      }
+
+      // その他のネットワークエラー
+      if (
+        (error as any).code === "ECONNREFUSED" ||
+        (error as any).code === "ETIMEDOUT" ||
+        (error as any).syscall === "getaddrinfo"
+      ) {
+        throw new Error(
+          `ネットワーク接続エラー: e-Stat APIに接続できません。${error.message}`
+        );
+      }
+    }
+
     throw error;
   }
 }

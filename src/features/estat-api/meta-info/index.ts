@@ -30,3 +30,10 @@ export {
   extractTimeAxis,
   parseCompleteMetaInfo
 } from "./services/formatter";
+
+// ============================================================================
+// データベースアクセス（Repositories）
+// ============================================================================
+// 注意: repositoriesはサーバーコンポーネントからのみアクセス可能です
+// クライアントコンポーネントから間接的にインポートされないよう、ここではエクスポートしません
+// 使用例: import { listSavedMetaInfo } from "@/features/estat-api/meta-info/repositories";

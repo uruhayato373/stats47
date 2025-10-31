@@ -2,7 +2,7 @@
 
 import { Eye } from "lucide-react";
 
-import type { EstatMetaInfo } from "../../../../types";
+import type { EstatMetaInfo } from "../../../types";
 
 interface SavedMetaInfoListItemProps {
   item: EstatMetaInfo;

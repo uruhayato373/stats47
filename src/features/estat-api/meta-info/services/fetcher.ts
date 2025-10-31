@@ -87,56 +87,104 @@ function validateMetaInfoResponse(data: unknown, url: string): void {
 }
 
 /**
- * APIからメタ情報を取得（R2キャッシュ優先）
+ * R2キャッシュからメタ情報を取得
  *
  * @param statsDataId - 統計表ID
- * @returns メタ情報のAPIレスポンス
- * @throws {Error} API呼び出しが失敗した場合
+ * @returns キャッシュされたメタ情報、または存在しない場合はnull
  */
-export async function fetchMetaInfo(
+async function checkR2Cache(
   statsDataId: string
-): Promise<EstatMetaInfoResponse> {
-  // 1. R2キャッシュを確認
+): Promise<EstatMetaInfoResponse | null> {
   try {
-    const cached = await EstatMetaInfoR2CacheRepository.findByStatsId(statsDataId);
+    const cached = await EstatMetaInfoR2CacheRepository.findByStatsId(
+      statsDataId
+    );
     if (cached) {
       console.log("✅ R2キャッシュヒット:", statsDataId);
       return cached;
     }
     console.log("R2キャッシュミス、e-Stat APIから取得:", statsDataId);
+    return null;
   } catch (error) {
     // R2設定がない場合も継続（ローカル開発環境でのフォールバック）
     console.warn(
       "R2キャッシュ取得エラー、e-Stat APIへフォールバック:",
       error instanceof Error ? error.message : error
     );
+    return null;
+  }
+}
+
+/**
+ * e-Stat APIからメタ情報を取得
+ *
+ * @param statsDataId - 統計表ID
+ * @returns メタ情報のAPIレスポンス
+ * @throws {EstatMetaInfoFetchError} API呼び出しが失敗した場合
+ */
+async function fetchMetaInfoFromEstatApi(
+  statsDataId: string
+): Promise<EstatMetaInfoResponse> {
+  const params: Omit<GetMetaInfoParams, "appId"> = { statsDataId };
+  const requestParams = composeRequestParams(params, ESTAT_APP_ID);
+  const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
+
+  const data = await executeHttpRequest<EstatMetaInfoResponse>(
+    ESTAT_API.BASE_URL,
+    ESTAT_ENDPOINTS.GET_META_INFO,
+    requestParams
+  );
+
+  validateMetaInfoResponse(data, url);
+
+  return data;
+}
+
+/**
+ * R2キャッシュにメタ情報を保存（バックグラウンド、エラーハンドリング付き）
+ *
+ * @param statsDataId - 統計表ID
+ * @param data - 保存するメタ情報
+ */
+async function saveToR2Cache(
+  statsDataId: string,
+  data: EstatMetaInfoResponse
+): Promise<void> {
+  try {
+    await EstatMetaInfoR2CacheRepository.save(statsDataId, data);
+    console.log("✅ R2バックグラウンド保存完了:", statsDataId);
+  } catch (err) {
+    // R2設定がない場合は警告のみ表示
+    if (err instanceof Error && err.message.includes("R2 S3設定")) {
+      console.log("R2設定がないためスキップ:", statsDataId);
+    } else {
+      console.warn("R2保存失敗（無視）:", err);
+    }
+  }
+}
+
+/**
+ * APIからメタ情報を取得（R2キャッシュ優先）
+ *
+ * @param statsDataId - 統計表ID
+ * @returns メタ情報のAPIレスポンス
+ * @throws {EstatMetaInfoFetchError} API呼び出しが失敗した場合
+ */
+export async function fetchMetaInfo(
+  statsDataId: string
+): Promise<EstatMetaInfoResponse> {
+  // 1. R2キャッシュを確認
+  const cached = await checkR2Cache(statsDataId);
+  if (cached) {
+    return cached;
   }
 
-  // 2. 既存のe-Stat API取得ロジック
+  // 2. e-Stat APIから取得
   try {
-    const params: Omit<GetMetaInfoParams, "appId"> = { statsDataId };
-    const requestParams = composeRequestParams(params, ESTAT_APP_ID);
-    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
-
-    const data = await executeHttpRequest<EstatMetaInfoResponse>(
-      ESTAT_API.BASE_URL,
-      ESTAT_ENDPOINTS.GET_META_INFO,
-      requestParams
-    );
-
-    validateMetaInfoResponse(data, url);
+    const data = await fetchMetaInfoFromEstatApi(statsDataId);
 
     // 3. バックグラウンドでR2に保存（awaitしない）
-    EstatMetaInfoR2CacheRepository.save(statsDataId, data)
-      .then(() => console.log("✅ R2バックグラウンド保存完了:", statsDataId))
-      .catch((err) => {
-        // R2設定がない場合は警告のみ表示
-        if (err instanceof Error && err.message.includes("R2 S3設定")) {
-          console.log("R2設定がないためスキップ:", statsDataId);
-        } else {
-          console.warn("R2保存失敗（無視）:", err);
-        }
-      });
+    void saveToR2Cache(statsDataId, data);
 
     return data;
   } catch (error) {
