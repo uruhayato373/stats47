@@ -1,7 +1,7 @@
 ---
 title: eStat API（メタ情報）サブドメイン設計
 created: 2025-01-18
-updated: 2025-01-26
+updated: 2025-01-31
 status: published
 tags:
   - stats47
@@ -120,13 +120,48 @@ e-Stat の各統計表に付与される一意の識別子。
 
 e-Stat API から返される生のメタ情報レスポンス。
 
-**型定義**: `src/features/estat-api/core/types` を参照
+**型定義**: `src/features/estat-api/meta-info/types/metainfo.ts` を参照
 
 **構造**:
 
-- `GET_META_INFO.RESULT`: リクエスト結果（STATUS, ERROR_MSG）
-- `GET_META_INFO.METADATA_INF.TABLE_INF`: 統計表情報
-- `GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ`: 分類情報
+- `GET_META_INFO.RESULT`: リクエスト結果（STATUS, ERROR_MSG, DATE）
+- `GET_META_INFO.PARAMETER`: APIリクエストパラメータ（LANG, STATS_DATA_ID, DATA_FORMAT）
+- `GET_META_INFO.METADATA_INF.TABLE_INF`: 統計表情報（EstatTableInfo）
+- `GET_META_INFO.METADATA_INF.CLASS_INF`: 分類情報（EstatClassInfo）
+
+**詳細**:
+
+- `RESULT.STATUS`: 0（正常終了）または100以上（エラー）
+- `RESULT.ERROR_MSG`: エラーメッセージ（正常時は "正常に終了しました。"）
+- `RESULT.DATE`: 処理日時（ISO 8601形式）
+- `PARAMETER.LANG`: 言語設定（"J": 日本語, "E": 英語）
+- `PARAMETER.STATS_DATA_ID`: 統計表ID（例: "0000010101"）
+- `PARAMETER.DATA_FORMAT`: データ形式（"J": 日本語形式, "E": 英語形式）
+
+実際のAPIレスポンス例は`data/mock/estat-api/meta-info/prefecture/0000010101.json`を参照してください。
+
+#### EstatMetaInfo（メタ情報エンティティ）
+
+データベースに保存されるe-Statメタ情報のエンティティ。
+
+**型定義**: `src/features/estat-api/meta-info/types/metainfo.ts` を参照
+
+| 属性名            | 型          | 説明                                    |
+| ----------------- | ----------- | --------------------------------------- |
+| `stats_data_id`   | `string`    | 統計表ID（例: "0000010101"）             |
+| `stat_name`       | `string`    | 政府統計名（例: "社会・人口統計体系"）  |
+| `title`           | `string`    | 統計表のタイトル（例: "Ａ　人口・世帯"） |
+| `area_type`       | `AreaType`  | 地域レベル（'national'/'prefecture'/'city'） |
+| `cycle`           | `string?`   | 調査周期（例: "年度次", "月次"）        |
+| `survey_date`     | `string?`   | 調査年月（例: "2020", "202001"）        |
+| `description`    | `string?`   | 説明文（オプション）                    |
+| `last_fetched_at` | `string`    | 最終取得日時（ISO 8601形式）            |
+| `created_at`      | `string`    | 作成日時（ISO 8601形式）                |
+| `updated_at`      | `string`    | 更新日時（ISO 8601形式）                |
+
+**データベーステーブル**: `estat_metainfo`
+
+**注意**: `area_type`フィールドは`AreaType`型（'national' | 'prefecture' | 'city'）を使用しています。以前の'country'/'municipality'から移行しました。
 
 #### TableInfo（統計表情報）
 
@@ -450,6 +485,8 @@ estat-api/
 **キャッシュデータ形式**:
 
 オリジナルの API レスポンス（`EstatMetaInfoResponse`）を JSON 形式でそのまま保存します。これにより、解析ロジックが変更されても同じオリジナルデータから再解析が可能です。
+
+**型定義**: `src/features/estat-api/meta-info/types/metainfo.ts` の `EstatMetaInfoResponse` を参照してください。
 
 ### キャッシュ戦略
 
