@@ -1,5 +1,4 @@
 import { fetchMetaInfo } from "@/features/estat-api/meta-info";
-import { EstatMetaInfoDisplay, EstatMetaInfoTable } from "@/features/estat-api/meta-info/components";
 import { listSavedMetaInfo } from "@/features/estat-api/meta-info/repositories";
 import type { EstatMetaInfo } from "@/features/estat-api/meta-info/types";
 import type { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";

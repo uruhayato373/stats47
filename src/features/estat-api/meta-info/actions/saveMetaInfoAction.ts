@@ -1,6 +1,4 @@
-import "server-only";
-
-import { NextRequest, NextResponse } from "next/server";
+"use server";
 
 import type { AreaType } from "@/features/area";
 import { fetchMetaInfo } from "@/features/estat-api/meta-info/services/fetcher";
@@ -8,34 +6,28 @@ import { extractTableInfo } from "@/features/estat-api/meta-info/services/format
 import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-repository";
 
 /**
- * POST /api/estat-api/meta-info/save
+ * サーバーアクション: e-Statメタ情報を保存
  *
- * e-Statメタ情報を取得してデータベースに保存
+ * e-Stat APIからメタ情報を取得してデータベースに保存します。
+ * area_typeはCOLLECT_AREAの内容から自動推定されます。
  *
- * リクエストボディ:
- * {
- *   "statsDataId": "0000010101"
+ * @param statsDataId - 統計表ID
+ * @returns 保存結果（成功/失敗とメッセージ）
+ *
+ * @example
+ * ```tsx
+ * const result = await saveMetaInfoAction("0000010101");
+ * if (result.success) {
+ *   console.log(result.message);
  * }
- *
- * レスポンス:
- * {
- *   "success": true,
- *   "message": "メタ情報を保存しました"
- * }
+ * ```
  */
-export async function POST(request: NextRequest) {
+export async function saveMetaInfoAction(
+  statsDataId: string
+): Promise<{ success: boolean; message: string }> {
   try {
-    const body = (await request.json()) as {
-      statsDataId?: string;
-    };
-
-    const { statsDataId } = body;
-
     if (!statsDataId) {
-      return NextResponse.json(
-        { error: "統計表IDが必要です" },
-        { status: 400 }
-      );
+      return { success: false, message: "統計表IDが必要です" };
     }
 
     // e-Stat APIからメタ情報を取得
@@ -71,27 +63,22 @@ export async function POST(request: NextRequest) {
     });
 
     if (!success) {
-      return NextResponse.json(
-        { error: "メタ情報の保存に失敗しました" },
-        { status: 500 }
-      );
+      return { success: false, message: "メタ情報の保存に失敗しました" };
     }
 
-    return NextResponse.json({
+    return {
       success: true,
       message: `${statsDataId}のメタ情報を保存しました`,
-    });
+    };
   } catch (error) {
     console.error("メタ情報保存エラー:", error);
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "メタ情報の保存に失敗しました",
-      },
-      { status: 500 }
-    );
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "メタ情報の保存に失敗しました",
+    };
   }
 }
 

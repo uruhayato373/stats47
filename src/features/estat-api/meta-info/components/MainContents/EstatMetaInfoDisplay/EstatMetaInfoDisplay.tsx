@@ -25,13 +25,11 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
-
-
 import { useMetaInfoDownload, useMetaInfoSave } from "../../../hooks";
 import { parseCompleteMetaInfo } from "../../../services/formatter";
 import { EstatMetaInfoResponse } from "../../../types";
-
 import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
+
 import AreasTab from "./tabs/AreasTab";
 import CategoriesTab from "./tabs/CategoriesTab";
 import TableInfoTab from "./tabs/TableInfoTab";
@@ -177,6 +175,11 @@ export default function EstatMetaInfoDisplay({
   // ===== メインコンテンツのレンダリング =====
   return (
     <div className="space-y-6">
+      {/* ===== 統計表ID入力フォーム（常時表示） ===== */}
+      <div className="max-w-md">
+        <EstatMetaInfoFetcher clearOnSuccess={false} />
+      </div>
+
       {/* ===== ヘッダーセクション ===== */}
       {/* 統計表IDとタイトル、保存ボタンを表示 */}
       <Card>

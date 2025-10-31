@@ -161,7 +161,7 @@ e-Stat API から返される生のメタ情報レスポンス。
 
 **データベーステーブル**: `estat_metainfo`
 
-**注意**: `area_type`フィールドは`AreaType`型（'national' | 'prefecture' | 'city'）を使用しています。以前の'country'/'municipality'から移行しました。
+**注意**: `area_type`フィールドは`AreaType`型（'national' | 'prefecture' | 'city'）を使用しています。
 
 #### TableInfo（統計表情報）
 

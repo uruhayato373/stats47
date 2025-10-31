@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { saveMetaInfoAction } from "../actions/saveMetaInfoAction";
 import { EstatMetaInfoResponse } from "../types";
 
 /**
@@ -85,9 +86,9 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
    * 処理フロー:
    * 1. メタ情報の存在確認
    * 2. 統計表IDの抽出
-   * 3. APIエンドポイントへのPOSTリクエスト
+   * 3. サーバーアクションの呼び出し
    * 4. タイムアウト処理
-   * 5. レスポンスの検証
+   * 5. 結果の検証
    * 6. 成功時のページリロード
    * 7. エラーハンドリング
    *
@@ -105,13 +106,6 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
       setSaving(true);
       setSaveResult(null);
 
-      // ===== タイムアウト設定 =====
-      const controller = new AbortController();
-      timeoutRef.current = setTimeout(() => {
-        console.log(`⏰ タイムアウト発生（${timeout / 1000}秒）`);
-        controller.abort();
-      }, timeout);
-
       try {
         // ===== 統計表IDの抽出 =====
         const statsDataId =
@@ -121,53 +115,49 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
           throw new Error("統計表IDが見つかりません");
         }
 
-        console.log("🔵 API呼び出し開始:", statsDataId);
+        console.log("🔵 サーバーアクション呼び出し開始:", statsDataId);
 
-        // ===== APIリクエスト =====
-        const response = await fetch("/api/estat-api/meta-info/save", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ statsDataId }),
-          signal: controller.signal,
+        // ===== タイムアウト設定 =====
+        // サーバーアクションはAbortControllerを直接サポートしないため、
+        // Promise.raceでタイムアウトを実装
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          timeoutRef.current = setTimeout(() => {
+            console.log(`⏰ タイムアウト発生（${timeout / 1000}秒）`);
+            reject(new Error(`保存処理がタイムアウトしました（${timeout / 1000}秒）`));
+          }, timeout);
         });
+
+        // ===== サーバーアクション呼び出し =====
+        const actionPromise = saveMetaInfoAction(statsDataId);
+        
+        // タイムアウトとアクションを競争させる
+        const actionResult = await Promise.race([actionPromise, timeoutPromise]);
 
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
         }
-        console.log("🔵 API応答受信:", response.status);
+        console.log("✅ 保存成功:", actionResult);
 
-        // ===== レスポンス検証 =====
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("❌ APIエラー:", errorText);
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-
-        const result = (await response.json()) as { message?: string };
-        console.log("✅ 保存成功:", result);
-
-        // ===== 成功結果の設定 =====
-        const successResult = {
-          success: true,
-          message:
-            result.message ||
-            "メタ情報を正常に保存しました。画面を更新しています...",
+        // ===== 結果の設定 =====
+        const saveResult: SaveResult = {
+          success: actionResult.success,
+          message: actionResult.message || "メタ情報を正常に保存しました。画面を更新しています...",
         };
 
-        setSaveResult(successResult);
+        setSaveResult(saveResult);
 
-        // ===== 自動ページリロード =====
+        // ===== 成功時のみ自動ページリロード =====
         // 保存成功後、2秒後にページをリロードして最新データを表示
         // タイマーをrefで管理してクリーンアップ可能にする
-        reloadTimerRef.current = setTimeout(() => {
-          console.log("🔄 ページをリロードして最新データを表示");
-          window.location.reload();
-        }, 2000);
+        if (actionResult.success) {
+          reloadTimerRef.current = setTimeout(() => {
+            console.log("🔄 ページをリロードして最新データを表示");
+            window.location.reload();
+          }, 2000);
+        }
 
-        return successResult;
+        return saveResult;
       } catch (err) {
         // ===== エラーハンドリング =====
         if (timeoutRef.current) {
@@ -178,16 +168,14 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
 
         let errorMessage = "保存に失敗しました";
         if (err instanceof Error) {
-          if (err.name === "AbortError") {
-            errorMessage = `保存処理がタイムアウトしました（${
-              timeout / 1000
-            }秒）。APIサーバーが応答していない可能性があります。`;
+          if (err.message.includes("タイムアウト")) {
+            errorMessage = err.message;
           } else {
             errorMessage = err.message;
           }
         }
 
-        const errorResult = {
+        const errorResult: SaveResult = {
           success: false,
           message: errorMessage,
         };
