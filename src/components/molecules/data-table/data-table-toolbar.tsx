@@ -39,6 +39,17 @@ export function DataTableToolbar<TData>({
               );
             }, [column]);
 
+            // filterOptionsが指定されている場合はそれを使用、なければユニーク値を使用
+            const options = React.useMemo(() => {
+              if (meta.filterOptions) {
+                // filterOptionsが指定されている場合は、指定されたすべてのオプションを表示
+                // フィルタリングは実際のデータ値に対して行われるため、全オプションを表示しても問題ない
+                return meta.filterOptions;
+              }
+              // filterOptionsがない場合はユニーク値を使用
+              return uniqueValues.map((value) => ({ value, label: value }));
+            }, [meta.filterOptions, uniqueValues]);
+
             return (
               <div key={column.id} className="flex items-center space-x-2">
                 <span className="text-sm font-medium">
@@ -58,9 +69,12 @@ export function DataTableToolbar<TData>({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">すべて</SelectItem>
-                    {uniqueValues.map((value) => (
-                      <SelectItem key={value} value={value}>
-                        {value}
+                    {options.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                      >
+                        {option.label}
                       </SelectItem>
                     ))}
                   </SelectContent>

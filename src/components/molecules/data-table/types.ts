@@ -15,6 +15,8 @@ export interface DataTableColumnMeta {
   filterable?: boolean;
   filterType?: "text" | "select";
   filterPlaceholder?: string;
+  /** セレクトフィルターの選択肢（値とラベルのマッピング） */
+  filterOptions?: Array<{ value: string; label: string }>;
   width?: string;
 }
 

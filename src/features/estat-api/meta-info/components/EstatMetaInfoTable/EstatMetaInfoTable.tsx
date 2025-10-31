@@ -88,9 +88,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
         );
       },
       meta: {
-        filterable: true,
-        filterType: "text",
-        filterPlaceholder: "統計表IDで検索",
+        filterable: false,
       },
     },
     {
@@ -100,9 +98,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
         <span className="text-sm">{row.original.stat_name}</span>
       ),
       meta: {
-        filterable: true,
-        filterType: "text",
-        filterPlaceholder: "統計名で検索",
+        filterable: false,
       },
     },
     {
@@ -127,6 +123,11 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
       meta: {
         filterable: true,
         filterType: "select",
+        filterOptions: [
+          { value: "national", label: "全国" },
+          { value: "prefecture", label: "都道府県" },
+          { value: "city", label: "市区町村" },
+        ],
       },
     },
   ];
