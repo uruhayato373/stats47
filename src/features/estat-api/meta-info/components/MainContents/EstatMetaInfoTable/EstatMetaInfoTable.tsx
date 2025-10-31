@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 
-import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
+
+import { DataTable } from "@/components/molecules/data-table";
 
 import type { EstatMetaInfo } from "../../../types";
 
@@ -66,9 +67,7 @@ function formatDate(dateString: string): string {
  *
  * @param data - 保存済みメタ情報の配列
  */
-export default function EstatMetaInfoTable({
-  data,
-}: EstatMetaInfoTableProps) {
+export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
   const router = useRouter();
 
   /**
@@ -76,9 +75,7 @@ export default function EstatMetaInfoTable({
    * 統計表IDの詳細ページに遷移
    */
   const handleRowClick = (statsDataId: string) => {
-    router.push(
-      `/admin/dev-tools/estat-api/meta-info?statsId=${statsDataId}`
-    );
+    router.push(`/admin/dev-tools/estat-api/meta-info?statsId=${statsDataId}`);
   };
 
   /**
@@ -197,4 +194,3 @@ export default function EstatMetaInfoTable({
     />
   );
 }
-

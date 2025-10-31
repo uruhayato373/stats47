@@ -60,6 +60,7 @@ export function extractTableInfo(metaInfo: EstatMetaInfoResponse): TableInfo {
       : undefined,
     totalRecords: parseInt(String(tableInf.OVERALL_TOTAL_NUMBER || "0")),
     updatedDate: tableInf.UPDATED_DATE || "",
+    tabulationCategory: tableInf.STATISTICS_NAME_SPEC?.TABULATION_CATEGORY,
   };
 }
 

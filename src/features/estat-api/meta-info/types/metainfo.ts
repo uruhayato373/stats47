@@ -9,6 +9,61 @@ import type {
   EstatResult,
   EstatTableInfo,
 } from "../../core/types/common";
+
+/**
+ * 統計表の基本情報
+ *
+ * extractTableInfo関数が返す統計表の基本情報を表す型。
+ * e-Stat APIのTABLE_INFから抽出された情報を含む。
+ *
+ * @example
+ * ```typescript
+ * const tableInfo: TableInfo = extractTableInfo(metaInfo);
+ * console.log(tableInfo.title); // "Ａ　人口・世帯"
+ * console.log(tableInfo.tabulationCategory); // "都道府県データ"
+ * ```
+ */
+export interface TableInfo {
+  /** 統計表ID */
+  id: string;
+  /** 政府統計名 */
+  statName: string;
+  /** 作成機関 */
+  organization: string;
+  /** 提供統計名及び提供分類名 */
+  statisticsName: string;
+  /** 統計表題名 */
+  title: string;
+  /** 提供周期 */
+  cycle: string;
+  /** 調査年月 */
+  surveyDate: string;
+  /** 公開日 */
+  openDate: string;
+  /** 小地域属性 */
+  smallArea: string;
+  /** 集計地域区分 */
+  collectArea: string;
+  /** 大分類 */
+  mainCategory: {
+    code: string;
+    name: string;
+  };
+  /** 小分類（オプション） */
+  subCategory?: {
+    code: string;
+    name: string;
+  };
+  /** 総レコード数 */
+  totalRecords: number;
+  /** 更新日 */
+  updatedDate: string;
+  /** 集計区分（STATISTICS_NAME_SPEC.TABULATION_CATEGORY） */
+  tabulationCategory?: string;
+  /** 説明文（オプション） */
+  explanation?: string;
+}
+
 /**
  * e-Statメタ情報エンティティ
  *
