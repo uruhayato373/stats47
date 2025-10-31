@@ -1,8 +1,8 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,8 @@ import {
   FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
+
+import type { MetaInfoSource } from "@/features/estat-api/meta-info";
 
 /**
  * フォームスキーマの定義
@@ -37,6 +39,10 @@ type FormValues = z.infer<typeof formSchema>;
 interface EstatMetaInfoFetcherProps {
   /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
   clearOnSuccess?: boolean;
+  /** 統計表ID（初期値として使用、オプション） */
+  statsId?: string | null;
+  /** データ取得元（'r2': R2ストレージ, 'api': e-Stat API） */
+  dataSource?: MetaInfoSource | null;
 }
 
 /**
@@ -59,16 +65,34 @@ interface EstatMetaInfoFetcherProps {
  */
 const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   clearOnSuccess = false,
+  statsId: statsIdProp,
+  dataSource,
 }: EstatMetaInfoFetcherProps) {
   const router = useRouter();
-  // ===== react-hook-formの設定 =====
+  const searchParams = useSearchParams();
 
+  // ===== 統計表IDの取得 =====
+  // propsまたはURLパラメータから統計表IDを取得（props優先）
+  const statsId = statsIdProp ?? searchParams.get("statsId");
+
+  // ===== react-hook-formの設定 =====
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      statsDataId: "",
+      statsDataId: statsId || "",
     },
   });
+
+  // ===== エフェクト =====
+  /**
+   * statsIdが変更されたらフォームの値を更新
+   * 保存後のリフレッシュなどでstatsIdが変更された場合にフォームを同期
+   */
+  useEffect(() => {
+    if (statsId) {
+      form.setValue("statsDataId", statsId);
+    }
+  }, [statsId, form]);
 
   // ===== イベントハンドラー =====
 
@@ -90,6 +114,16 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
 
   // ===== レンダリング =====
 
+  /**
+   * 取得元情報のラベルを取得
+   */
+  const getDataSourceLabel = (): string | null => {
+    if (!dataSource) return null;
+    return dataSource === "r2" ? "R2ストレージから取得" : "e-Stat APIから取得";
+  };
+
+  const dataSourceLabel = getDataSourceLabel();
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
@@ -99,7 +133,7 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
           render={({ field }) => (
             <FormItem className="space-y-1">
               <FormLabel>統計表ID</FormLabel>
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-row items-center gap-2">
                 {/* 統計表ID入力フィールド */}
                 <FormControl>
                   <Input
@@ -117,6 +151,12 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
                 >
                   取得
                 </Button>
+                {/* 取得元情報の表示 */}
+                {dataSourceLabel && (
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">
+                    {dataSourceLabel}
+                  </span>
+                )}
               </div>
               <FormMessage />
             </FormItem>

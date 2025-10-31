@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, SortingState } from "@tanstack/react-table";
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -9,6 +9,8 @@ export interface DataTableProps<TData, TValue> {
   enableSorting?: boolean;
   showIndex?: boolean;
   showBorder?: boolean;
+  /** デフォルトのソート順 */
+  defaultSorting?: SortingState;
 }
 
 export interface DataTableColumnMeta {

@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { toast } from "sonner";
 
 import { saveMetaInfoAction } from "../actions/saveMetaInfoAction";
@@ -34,7 +36,7 @@ interface SaveResult {
  * - 保存状態の管理（ローディング、結果）
  * - エラーハンドリング
  * - トースト通知による結果表示
- * - 保存成功後の自動ページリロード
+ * - 保存成功後のサーバーコンポーネントデータ再取得
  *
  * @param options - フックのオプション設定
  * @returns 保存関数、状態、リセット関数
@@ -52,6 +54,7 @@ interface SaveResult {
  */
 export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
   const { timeout = 120000 } = options;
+  const router = useRouter();
 
   // ===== 状態管理 =====
   /** 保存処理中のローディング状態 */
@@ -162,12 +165,13 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
             duration: 2000,
           });
 
-          // ===== 成功時のみ自動ページリロード =====
-          // 保存成功後、2秒後にページをリロードして最新データを表示
+          // ===== 成功時のみサーバーコンポーネントのデータを再取得 =====
+          // 保存成功後、2秒後にサーバーコンポーネントのデータのみ再取得
+          // router.refresh()を使用してページ全体のリロードを避け、フォーム状態を保持
           // タイマーをrefで管理してクリーンアップ可能にする
           reloadTimerRef.current = setTimeout(() => {
-            console.log("🔄 ページをリロードして最新データを表示");
-            window.location.reload();
+            console.log("🔄 サーバーコンポーネントのデータを再取得");
+            router.refresh();
           }, 2000);
         }
 

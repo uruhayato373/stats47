@@ -142,6 +142,7 @@ export default function EstatMetaInfoTable({ data }: EstatMetaInfoTableProps) {
       enableSorting={true}
       showIndex={false}
       showBorder={false}
+      defaultSorting={[{ id: "stats_data_id", desc: false }]}
     />
   );
 }

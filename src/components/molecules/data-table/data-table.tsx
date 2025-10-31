@@ -37,8 +37,11 @@ export function DataTable<TData, TValue>({
   enableSorting = true,
   showIndex = true,
   showBorder = true,
+  defaultSorting,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>(
+    defaultSorting || []
+  );
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -84,6 +87,7 @@ export function DataTable<TData, TValue>({
       pagination: {
         pageSize: maxRows,
       },
+      sorting: defaultSorting || [],
     },
     enableSorting,
     enableFilters: enableFiltering,

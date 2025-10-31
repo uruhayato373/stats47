@@ -199,6 +199,56 @@ export async function fetchMetaInfo(
 }
 
 /**
+ * メタ情報取得元の種類
+ */
+export type MetaInfoSource = "r2" | "api";
+
+/**
+ * メタ情報と取得元を含む結果
+ */
+export interface FetchMetaInfoResult {
+  /** メタ情報のAPIレスポンス */
+  data: EstatMetaInfoResponse;
+  /** データの取得元（'r2': R2ストレージ, 'api': e-Stat API） */
+  source: MetaInfoSource;
+}
+
+/**
+ * APIからメタ情報を取得（R2キャッシュ優先、取得元情報付き）
+ *
+ * @param statsDataId - 統計表ID
+ * @returns メタ情報のAPIレスポンスと取得元情報
+ * @throws {EstatMetaInfoFetchError} API呼び出しが失敗した場合
+ */
+export async function fetchMetaInfoWithSource(
+  statsDataId: string
+): Promise<FetchMetaInfoResult> {
+  // 1. R2キャッシュを確認
+  const cached = await checkR2Cache(statsDataId);
+  if (cached) {
+    return { data: cached, source: "r2" };
+  }
+
+  // 2. e-Stat APIから取得
+  try {
+    const data = await fetchMetaInfoFromEstatApi(statsDataId);
+
+    // 3. バックグラウンドでR2に保存（awaitしない）
+    void saveToR2Cache(statsDataId, data);
+
+    return { data, source: "api" };
+  } catch (error) {
+    throw new EstatMetaInfoFetchError(
+      `メタ情報の取得に失敗しました: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
+      statsDataId,
+      error
+    );
+  }
+}
+
+/**
  * メタ情報を取得して変換（便利メソッド）
  *
  * @param statsDataId - 統計表ID

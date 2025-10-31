@@ -1,4 +1,7 @@
-import { fetchMetaInfo } from "@/features/estat-api/meta-info";
+import {
+  fetchMetaInfoWithSource,
+  type MetaInfoSource,
+} from "@/features/estat-api/meta-info";
 import { listSavedMetaInfo } from "@/features/estat-api/meta-info/repositories";
 import type { EstatMetaInfo } from "@/features/estat-api/meta-info/types";
 import type { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
@@ -22,12 +25,15 @@ export default async function MetaInfoPage({
   
   // メタ情報の取得
   let metaInfo: EstatMetaInfoResponse | null = null;
+  let dataSource: MetaInfoSource | null = null;
   let error: string | null = null;
 
   if (statsId) {
     try {
-      // fetchMetaInfo内部でR2 → e-Stat APIのフォールバックが行われる
-      metaInfo = await fetchMetaInfo(statsId);
+      // fetchMetaInfoWithSource内部でR2 → e-Stat APIのフォールバックが行われる
+      const result = await fetchMetaInfoWithSource(statsId);
+      metaInfo = result.data;
+      dataSource = result.source;
     } catch (err) {
       console.error("メタ情報取得エラー:", err);
       error = err instanceof Error ? err.message : "メタ情報の取得に失敗しました";
@@ -53,6 +59,7 @@ export default async function MetaInfoPage({
     <MetaInfoPageClient
       metaInfo={metaInfo}
       statsId={statsId || null}
+      dataSource={dataSource}
       error={error}
       savedMetaInfoList={savedMetaInfoList}
     />

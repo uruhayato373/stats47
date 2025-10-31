@@ -24,6 +24,8 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
+import type { MetaInfoSource } from "@/features/estat-api/meta-info";
+
 import { useMetaInfoDownload, useMetaInfoSave } from "../../hooks";
 import { parseCompleteMetaInfo } from "../../services/formatter";
 import { EstatMetaInfoResponse } from "../../types";
@@ -42,6 +44,8 @@ interface EstatMetaInfoDisplayProps {
   metaInfo: EstatMetaInfoResponse | null;
   /** 統計表ID */
   statsId: string | null;
+  /** データ取得元（'r2': R2ストレージ, 'api': e-Stat API） */
+  dataSource?: MetaInfoSource | null;
   /** エラーメッセージ */
   error?: string | null;
 }
@@ -75,6 +79,7 @@ type TabType = "table" | "categories" | "areas" | "time" | "json";
 export default function EstatMetaInfoDisplay({
   metaInfo,
   statsId,
+  dataSource,
   error: serverError,
 }: EstatMetaInfoDisplayProps) {
   // ===== 状態管理 =====
@@ -119,7 +124,11 @@ export default function EstatMetaInfoDisplay({
         <div className="p-8 text-center text-muted-foreground">
           <p className="mb-6">統計表IDを入力してメタ情報を取得してください</p>
           <div className="max-w-md mx-auto">
-            <EstatMetaInfoFetcher clearOnSuccess={false} />
+            <EstatMetaInfoFetcher
+              clearOnSuccess={false}
+              statsId={statsId}
+              dataSource={dataSource}
+            />
           </div>
         </div>
       </div>
@@ -176,7 +185,11 @@ export default function EstatMetaInfoDisplay({
     <div className="space-y-6">
       {/* ===== 統計表ID入力フォーム（常時表示） ===== */}
       <div className="max-w-md">
-        <EstatMetaInfoFetcher clearOnSuccess={false} />
+        <EstatMetaInfoFetcher
+          clearOnSuccess={false}
+          statsId={statsId}
+          dataSource={dataSource}
+        />
       </div>
 
       {/* ===== ヘッダーセクション ===== */}

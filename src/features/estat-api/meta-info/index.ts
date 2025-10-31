@@ -23,7 +23,13 @@ export * from "./hooks";
 // ============================================================================
 
 // 関数
-export { fetchAndTransformMetaInfo, fetchMetaInfo } from "./services/fetcher";
+export {
+  fetchAndTransformMetaInfo,
+  fetchMetaInfo,
+  fetchMetaInfoWithSource,
+  type FetchMetaInfoResult,
+  type MetaInfoSource,
+} from "./services/fetcher";
 export {
   extractCategories,
   extractTableInfo,

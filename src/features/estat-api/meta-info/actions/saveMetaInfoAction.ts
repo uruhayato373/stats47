@@ -38,19 +38,30 @@ export async function saveMetaInfoAction(
     const tableInfo = extractTableInfo(metaInfoResponse);
 
     // area_typeを推定（TABULATION_CATEGORYを優先、なければCOLLECT_AREAから）
-    const tabulationCategory = tableInfo.tabulationCategory || "";
-    const collectArea = tableInfo.collectArea || "";
+    const tabulationCategory = (tableInfo.tabulationCategory || "").trim();
+    const collectArea = (tableInfo.collectArea || "").trim();
     let areaType: AreaType = "national";
 
+    // デバッグログ（開発環境のみ）
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `[地域レベル判定] statsDataId: ${statsDataId}, tabulationCategory: "${tabulationCategory}", collectArea: "${collectArea}"`
+      );
+    }
+
     // TABULATION_CATEGORYでの判定を優先
-    if (tabulationCategory.includes("都道府県データ")) {
-      areaType = "prefecture";
-    } else if (tabulationCategory.includes("市区町村データ")) {
-      areaType = "city";
-    } else if (tabulationCategory.includes("全国データ")) {
-      areaType = "national";
-    } else {
-      // フォールバック: COLLECT_AREAでの判定
+    if (tabulationCategory) {
+      if (tabulationCategory.includes("都道府県データ")) {
+        areaType = "prefecture";
+      } else if (tabulationCategory.includes("市区町村データ")) {
+        areaType = "city";
+      } else if (tabulationCategory.includes("全国データ")) {
+        areaType = "national";
+      }
+    }
+
+    // TABULATION_CATEGORYで判定できなかった場合、フォールバック: COLLECT_AREAでの判定
+    if (areaType === "national" && collectArea) {
       if (collectArea.includes("都道府県") || collectArea.includes("県")) {
         areaType = "prefecture";
       } else if (
@@ -62,6 +73,11 @@ export async function saveMetaInfoAction(
       ) {
         areaType = "city";
       }
+    }
+
+    // デバッグログ（開発環境のみ）
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[地域レベル判定] 最終判定: areaType = "${areaType}"`);
     }
 
     // データベースに保存
