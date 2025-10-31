@@ -148,7 +148,10 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
         }
-        console.log("✅ 保存成功:", actionResult);
+        console.log(
+          actionResult.success ? "✅ 保存成功:" : "❌ 保存失敗:",
+          actionResult
+        );
 
         // ===== 結果の設定 =====
         const saveResult: SaveResult = {
@@ -173,6 +176,12 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
             console.log("🔄 サーバーコンポーネントのデータを再取得");
             router.refresh();
           }, 2000);
+        } else {
+          // ===== 失敗時のトースト通知 =====
+          toast.error("保存失敗", {
+            description: actionResult.message || "メタ情報の保存に失敗しました",
+            duration: 5000,
+          });
         }
 
         return saveResult;

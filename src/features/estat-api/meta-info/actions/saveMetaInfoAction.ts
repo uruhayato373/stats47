@@ -81,15 +81,23 @@ export async function saveMetaInfoAction(
     }
 
     // データベースに保存
-    const success = await saveMetaInfo({
+    const saveInput = {
       stats_data_id: tableInfo.id || statsDataId,
       stat_name: tableInfo.statName || "",
       title: tableInfo.title || "",
       area_type: areaType,
       description: undefined,
-    });
+    };
+
+    // デバッグログ（開発環境のみ）
+    if (process.env.NODE_ENV === "development") {
+      console.log("[データベース保存] 保存データ:", saveInput);
+    }
+
+    const success = await saveMetaInfo(saveInput);
 
     if (!success) {
+      console.error("[データベース保存] 保存に失敗しました", saveInput);
       return { success: false, message: "メタ情報の保存に失敗しました" };
     }
 

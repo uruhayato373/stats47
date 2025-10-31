@@ -141,18 +141,37 @@ export async function saveMetaInfo(
       updated_at = excluded.updated_at`
   );
 
-  const result = await stmt
-    .bind(
-      input.stats_data_id,
-      input.stat_name,
-      input.title,
-      input.area_type,
-      input.description || null,
-      createdAt,
-      now
-    )
-    .run();
+  try {
+    const result = await stmt
+      .bind(
+        input.stats_data_id,
+        input.stat_name,
+        input.title,
+        input.area_type,
+        input.description || null,
+        createdAt,
+        now
+      )
+      .run();
 
-  return result.success !== false;
+    if (result.success === false) {
+      console.error("[データベース保存] SQL実行エラー:", {
+        stats_data_id: input.stats_data_id,
+        error: result.error,
+        meta: result.meta,
+      });
+      return false;
+    }
+
+    // successプロパティが存在しない場合でも、エラーがなければ成功とみなす
+    return true;
+  } catch (error) {
+    console.error("[データベース保存] 例外発生:", {
+      stats_data_id: input.stats_data_id,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    return false;
+  }
 }
 
