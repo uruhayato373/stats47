@@ -4,8 +4,5 @@
 
 // MainContents
 export { EstatMetaInfoDisplay } from "./MainContents/EstatMetaInfoDisplay";
-
-// Sidebar
-export { EstatMetaInfoSidebar } from "./Sidebar";
-export { EstatMetaInfoFetcher } from "./Sidebar/EstatMetaInfoFetcher";
-export { SavedMetaInfoListItem } from "./Sidebar/SavedMetaInfoListItem";
+export { EstatMetaInfoFetcher } from "./MainContents/EstatMetaInfoFetcher";
+export { EstatMetaInfoTable } from "./MainContents/EstatMetaInfoTable";

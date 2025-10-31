@@ -1,47 +1,16 @@
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/atoms/ui/resizable";
-
-/**
- * EstatApi共通レイアウトのProps型定義
- */
-interface EstatApiLayoutProps {
-  main: React.ReactNode;
-  sidebar: React.ReactNode;
-}
-
 /**
  * EstatApi共通レイアウトコンポーネント
  *
- * 各ページで共通のResizableレイアウトを提供し、
- * メインコンテンツとサイドバーを配置します。
+ * シンプルなレイアウトを提供します。
+ * 各ページはタブ形式などで独自にレイアウトを管理します。
  *
- * @param main - メインコンテンツスロット
- * @param sidebar - サイドバースロット
+ * @param children - 子コンポーネント
  */
 export default function EstatApiLayout({
-  main,
-  sidebar,
-}: EstatApiLayoutProps) {
-  return (
-    <ResizablePanelGroup direction="horizontal" className="min-h-screen">
-      {/* メインコンテンツエリア */}
-      <ResizablePanel defaultSize={70} minSize={50}>
-        <div className="h-full overflow-auto">{main}</div>
-      </ResizablePanel>
-
-      {/* リサイズハンドル */}
-      <ResizableHandle />
-
-      {/* サイドバー（右側） */}
-      <ResizablePanel defaultSize={30} minSize={20} maxSize={50}>
-        <div className="h-full overflow-auto border-l border-border">
-          {sidebar}
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
-  );
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="min-h-screen">{children}</div>;
 }
 

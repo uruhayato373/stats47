@@ -31,6 +31,7 @@ import { useMetaInfoDownload, useMetaInfoSave } from "../../../hooks";
 import { parseCompleteMetaInfo } from "../../../services/formatter";
 import { EstatMetaInfoResponse } from "../../../types";
 
+import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
 import AreasTab from "./tabs/AreasTab";
 import CategoriesTab from "./tabs/CategoriesTab";
 import TableInfoTab from "./tabs/TableInfoTab";
@@ -117,8 +118,13 @@ export default function EstatMetaInfoDisplay({
    */
   if (!statsId) {
     return (
-      <div className="p-8 text-center text-gray-500 dark:text-gray-400">
-        <p>統計表IDを入力してメタ情報を取得してください</p>
+      <div className="space-y-6">
+        <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+          <p className="mb-6">統計表IDを入力してメタ情報を取得してください</p>
+          <div className="max-w-md mx-auto">
+            <EstatMetaInfoFetcher clearOnSuccess={false} />
+          </div>
+        </div>
       </div>
     );
   }
