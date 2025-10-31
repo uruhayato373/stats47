@@ -1,6 +1,7 @@
 import { Geist_Mono, Inter, Noto_Sans_JP } from "next/font/google";
 
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
                 <main className="flex-1 overflow-y-auto">{children}</main>
               </div>
             </div>
+            <Toaster position="top-right" richColors />
           </SessionProvider>
         </ThemeProvider>
       </body>

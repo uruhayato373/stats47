@@ -1,9 +1,9 @@
 "use server";
 
 import type { AreaType } from "@/features/area";
+import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-repository";
 import { fetchMetaInfo } from "@/features/estat-api/meta-info/services/fetcher";
 import { extractTableInfo } from "@/features/estat-api/meta-info/services/formatter";
-import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-repository";
 
 /**
  * サーバーアクション: e-Statメタ情報を保存
@@ -86,10 +86,7 @@ export async function saveMetaInfoAction(
     return {
       success: false,
       message:
-        error instanceof Error
-          ? error.message
-          : "メタ情報の保存に失敗しました",
+        error instanceof Error ? error.message : "メタ情報の保存に失敗しました",
     };
   }
 }
-

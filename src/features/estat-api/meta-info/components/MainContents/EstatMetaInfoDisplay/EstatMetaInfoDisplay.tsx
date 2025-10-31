@@ -9,7 +9,6 @@ import {
   FileText,
   Info,
   MapPin,
-  RefreshCw,
   Save,
   Tag,
 } from "lucide-react";
@@ -84,7 +83,7 @@ export default function EstatMetaInfoDisplay({
 
   // ===== カスタムフック =====
   /** メタ情報保存機能 */
-  const { save, saving, saveResult } = useMetaInfoSave();
+  const { save, saving } = useMetaInfoSave();
   /** メタ情報ダウンロード機能 */
   const { download } = useMetaInfoDownload();
 
@@ -255,28 +254,6 @@ export default function EstatMetaInfoDisplay({
           <JsonDisplay data={metaInfo} onDownload={handleDownload} />
         </TabsContent>
       </Tabs>
-
-      {/* 保存結果の表示 */}
-      {saveResult && (
-        <Alert
-          variant={saveResult.success ? "default" : "destructive"}
-          className="mt-4"
-        >
-          <AlertDescription className="flex items-center justify-between">
-            <span>{saveResult.message}</span>
-            {saveResult.success && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => window.location.reload()}
-              >
-                <RefreshCw className="h-3 w-3 mr-1" />
-                更新
-              </Button>
-            )}
-          </AlertDescription>
-        </Alert>
-      )}
     </div>
   );
 }

@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { toast } from "sonner";
+
 import { saveMetaInfoAction } from "../actions/saveMetaInfoAction";
 import { EstatMetaInfoResponse } from "../types";
 
@@ -31,6 +33,7 @@ interface SaveResult {
  * - タイムアウト処理（デフォルト120秒）
  * - 保存状態の管理（ローディング、結果）
  * - エラーハンドリング
+ * - トースト通知による結果表示
  * - 保存成功後の自動ページリロード
  *
  * @param options - フックのオプション設定
@@ -99,7 +102,12 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
     async (metaInfo: EstatMetaInfoResponse): Promise<SaveResult> => {
       // ===== 入力検証 =====
       if (!metaInfo) {
-        return { success: false, message: "メタ情報がありません" };
+        const errorResult = { success: false, message: "メタ情報がありません" };
+        toast.error("保存失敗", {
+          description: "メタ情報がありません",
+          duration: 5000,
+        });
+        return errorResult;
       }
 
       console.log("🔵 保存開始");
@@ -147,10 +155,16 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
 
         setSaveResult(saveResult);
 
-        // ===== 成功時のみ自動ページリロード =====
-        // 保存成功後、2秒後にページをリロードして最新データを表示
-        // タイマーをrefで管理してクリーンアップ可能にする
+        // ===== トースト通知 =====
         if (actionResult.success) {
+          toast.success("保存成功", {
+            description: actionResult.message || "メタ情報を正常に保存しました。画面を更新しています...",
+            duration: 2000,
+          });
+
+          // ===== 成功時のみ自動ページリロード =====
+          // 保存成功後、2秒後にページをリロードして最新データを表示
+          // タイマーをrefで管理してクリーンアップ可能にする
           reloadTimerRef.current = setTimeout(() => {
             console.log("🔄 ページをリロードして最新データを表示");
             window.location.reload();
@@ -181,6 +195,13 @@ export function useMetaInfoSave(options: UseMetaInfoSaveOptions = {}) {
         };
 
         setSaveResult(errorResult);
+
+        // ===== エラートースト通知 =====
+        toast.error("保存失敗", {
+          description: errorMessage,
+          duration: 5000,
+        });
+
         return errorResult;
       } finally {
         // ===== クリーンアップ =====
