@@ -73,20 +73,23 @@ npx wrangler d1 migrations apply stats47 --remote
 
 ```sql
 CREATE TABLE IF NOT EXISTS estat_metainfo (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  stats_data_id TEXT NOT NULL,
+  stats_data_id TEXT PRIMARY KEY,
   stat_name TEXT NOT NULL,
   title TEXT NOT NULL,
-  cat01 TEXT,
-  item_name TEXT,
-  unit TEXT,
+  area_type TEXT NOT NULL DEFAULT 'national',
+  cycle TEXT,
+  survey_date TEXT,
+  description TEXT,
+  last_fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  CHECK (area_type IN ('national', 'prefecture', 'city'))
 );
 
-CREATE INDEX idx_stats_data_id ON estat_metainfo(stats_data_id);
-CREATE INDEX idx_stat_name ON estat_metainfo(stat_name);
-CREATE INDEX idx_cat01 ON estat_metainfo(cat01);
+CREATE INDEX idx_estat_metainfo_stat_name ON estat_metainfo(stat_name);
+CREATE INDEX idx_estat_metainfo_title ON estat_metainfo(title);
+CREATE INDEX idx_estat_metainfo_area_type ON estat_metainfo(area_type);
+CREATE INDEX idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
 ```
 
 ## 使用方法
