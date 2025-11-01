@@ -1,5 +1,5 @@
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
-import { determineAreaType } from "@/features/area";
+import { determineAreaType } from "@/features/area/utils/code-converter";
 import { loadDashboardData } from "@/features/dashboard/actions/loadDashboardData";
 import { widgetComponents } from "@/features/dashboard/widgets/registry";
 
@@ -12,7 +12,17 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { subcategory, areaCode } = await params;
+  const { category, subcategory, areaCode } = await params;
+
+  // landweather/land-area/dashboard/00000 でPrefectureMapを表示
+  if (category === "landweather" && subcategory === "land-area" && areaCode === "00000") {
+    const { PrefectureMap } = await import("@/features/visualization/map/common/PrefectureMap");
+    return (
+      <div className="w-full h-screen p-4">
+        <PrefectureMap width={1200} height={800} />
+      </div>
+    );
+  }
 
   const areaType = determineAreaType(areaCode);
 

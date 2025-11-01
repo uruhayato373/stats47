@@ -60,21 +60,23 @@ export async function fetchTopology(
     }
   }
 
-  // 2. R2ストレージ
-  try {
-    console.log(`[GeoshapeRepository] Trying R2 for ${cacheKey}`);
-    const data = await fetchFromR2(areaType, prefCode, version);
-    if (data) {
-      saveToMemoryCache(cacheKey, data);
-      return {
-        data,
-        source: "r2",
-        timestamp: Date.now(),
-      };
-    }
-  } catch (error) {
-    console.warn(`[GeoshapeRepository] R2 failed:`, error);
-  }
+  // 2. R2ストレージ（APIルートが存在する場合のみ）
+  // 注: APIルートが存在しない場合はスキップして外部APIにフォールバック
+  // TODO: R2 APIルートを実装したら有効化
+  // try {
+  //   console.log(`[GeoshapeRepository] Trying R2 for ${cacheKey}`);
+  //   const data = await fetchFromR2(areaType, prefCode, version);
+  //   if (data) {
+  //     saveToMemoryCache(cacheKey, data);
+  //     return {
+  //       data,
+  //       source: "r2",
+  //       timestamp: Date.now(),
+  //     };
+  //   }
+  // } catch (error) {
+  //   console.warn(`[GeoshapeRepository] R2 failed:`, error);
+  // }
 
   // 3. 外部API（最後の手段）
   try {
@@ -82,10 +84,11 @@ export async function fetchTopology(
     const data = await fetchFromExternalAPI(areaType, prefCode, version);
     saveToMemoryCache(cacheKey, data);
 
-    // R2にバックグラウンド保存（awaitしない）
-    saveToR2(data, areaType, prefCode, version).catch((err) => {
-      console.warn(`[GeoshapeRepository] R2 background save failed:`, err);
-    });
+    // R2にバックグラウンド保存（APIルートが存在する場合のみ）
+    // TODO: R2 APIルートを実装したら有効化
+    // saveToR2(data, areaType, prefCode, version).catch((err) => {
+    //   console.warn(`[GeoshapeRepository] R2 background save failed:`, err);
+    // });
 
     return {
       data,

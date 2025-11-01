@@ -15,7 +15,6 @@ import type { PrefectureFeature } from "@/features/gis/geoshape/types/index";
 
 import { createChoroplethColorMapper } from "../utils/color-scale";
 
-
 import type { MapConfig, MapState } from "../types/index";
 
 interface PrefectureMapD3Props extends MapConfig {
@@ -98,8 +97,8 @@ export function PrefectureMapD3({
       }
 
       const geojson = topojson.feature(
-        topology as unknown as topojson.Topology,
-        topology.objects[objectName] as topojson.GeometryObject
+        topology as any,
+        topology.objects[objectName] as any
       ) as unknown as GeoJSON.FeatureCollection;
 
       // 都道府県コードと名前を正規化
@@ -246,28 +245,32 @@ export function PrefectureMapD3({
         .on("click", function (event, d) {
           const feature = d as PrefectureFeature;
 
-          // 選択状態を更新
-          setMapState((prev) => ({
-            ...prev,
-            selectedPrefecture:
+          // 選択状態を更新（前回の状態を参照）
+          setMapState((prev) => {
+            const newSelected =
               prev.selectedPrefecture?.properties.prefCode ===
               feature.properties.prefCode
                 ? null
-                : feature,
-          }));
+                : feature;
 
-          // 選択された都道府県の色を変更
-          svg.selectAll("path.prefecture").attr("fill", (pathData) => {
-            const pathFeature = pathData as PrefectureFeature;
-            const prefCode = pathFeature.properties.prefCode;
+            // 選択された都道府県の色を変更
+            svg.selectAll("path.prefecture").attr("fill", (pathData) => {
+              const pathFeature = pathData as PrefectureFeature;
+              const prefCode = pathFeature.properties.prefCode;
 
-            // この都道府県が選択されている場合
-            if (prefCode === mapState.selectedPrefecture?.properties.prefCode) {
-              return selectedColor;
-            }
+              // この都道府県が選択されている場合
+              if (newSelected && prefCode === newSelected.properties.prefCode) {
+                return selectedColor;
+              }
 
-            // 選択解除の場合、元の色に戻す
-            return getColor ? getColor(prefCode) : fillColor;
+              // 選択解除の場合、元の色に戻す
+              return getColor ? getColor(prefCode) : fillColor;
+            });
+
+            return {
+              ...prev,
+              selectedPrefecture: newSelected,
+            };
           });
 
           onPrefectureClick?.(feature);
@@ -332,13 +335,32 @@ export function PrefectureMapD3({
     onZoom,
     onPan,
     createProjection,
-    mapState.selectedPrefecture?.properties.prefCode,
   ]);
 
-  // 初期化
+  // renderMapの参照を保持（依存関係の変更で再生成されても、最新の参照を保持）
+  const renderMapRef = useRef(renderMap);
+  renderMapRef.current = renderMap;
+
+  // 初回マウント時のみ実行
   useEffect(() => {
-    renderMap();
-  }, [renderMap]);
+    renderMapRef.current();
+  }, []);
+
+  // 重要な設定変更時のみ再描画（data, colorScheme等）
+  // center/zoomの変更は除外（ズーム操作では再描画しない）
+  useEffect(() => {
+    if (svgRef.current && !mapState.isLoading) {
+      renderMapRef.current();
+    }
+  }, [
+    width,
+    height,
+    data,
+    colorScheme,
+    divergingMidpoint,
+    projection,
+    mapState.isLoading,
+  ]);
 
   // ズームリセット
   const resetZoom = useCallback(() => {
