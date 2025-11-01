@@ -164,9 +164,7 @@ export function formatStatsData(
   }
 
   const values = formatValues(valuesArray, classInfo);
-  console.log(
-    `[formatStatsData] 整形後: values.length=${values.length}`
-  );
+  console.log(`[formatStatsData] 整形後: values.length=${values.length}`);
 
   // 注記情報
   const notes: DataNote[] = data.DATA_INF?.NOTE
@@ -494,13 +492,25 @@ export function convertToStatsSchema(
     return undefined;
   }
 
+  // timeCodeを4桁に変換（例: 1975100000 → 1975）
+  const fullTimeCode = formattedValue.dimensions.time.code;
+  const timeCode4Digits =
+    fullTimeCode.length >= 4 ? fullTimeCode.substring(0, 4) : fullTimeCode;
+
+  // categoryNameからcategoryCodeのプレフィックスを削除（例: A1101_総人口 → 総人口）
+  let categoryName = cat01.name;
+  const categoryCodePrefix = cat01.code + "_";
+  if (categoryName.startsWith(categoryCodePrefix)) {
+    categoryName = categoryName.substring(categoryCodePrefix.length);
+  }
+
   return {
     areaCode: formattedValue.dimensions.area.code,
     areaName: formattedValue.dimensions.area.name,
-    timeCode: formattedValue.dimensions.time.code,
+    timeCode: timeCode4Digits,
     timeName: formattedValue.dimensions.time.name,
     categoryCode: cat01.code,
-    categoryName: cat01.name,
+    categoryName: categoryName,
     value: formattedValue.value ?? 0, // nullの場合は0
     unit: formattedValue.unit || "",
   };

@@ -383,8 +383,9 @@ export async function convertToRankingAction(
     for (const targetTimeCode of targetTimeCodes) {
       try {
         // StatsSchema[]形式に変換（指定された時間コードのみ）
+        // フォーマット済みデータを渡すことで、再フォーマットを回避
         const statsSchemas = convertStatsDataToRankingFormat(
-          response,
+          formattedData,
           mapping.item_code,
           targetTimeCode,
           mapping.unit || undefined
@@ -685,10 +686,11 @@ export async function convertAllRankingsAction(
         for (const targetTimeCode of targetTimeCodes) {
           try {
             // StatsSchema[]形式に変換（指定された時間コードのみ）
+            // フォーマット済みデータを渡すことで、再フォーマットを回避
             let statsSchemas;
             try {
               statsSchemas = convertStatsDataToRankingFormat(
-                response,
+                formattedData,
                 mapping.item_code,
                 targetTimeCode,
                 mapping.unit || undefined

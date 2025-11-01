@@ -7,7 +7,7 @@ import "server-only";
  */
 
 import { formatStatsData, convertToStatsSchema } from "../../stats-data/services/formatter";
-import type { EstatStatsDataResponse, FormattedValue } from "../../stats-data/types";
+import type { EstatStatsDataResponse, FormattedValue, FormattedEstatData } from "../../stats-data/types";
 import type { StatsSchema } from "@/types/stats";
 
 import type {
@@ -85,27 +85,20 @@ function calculateStatistics(values: number[]): {
 }
 
 /**
- * e-Stat APIレスポンスをStatsSchema[]形式に変換
+ * フォーマット済みデータからStatsSchema[]形式に変換（最適化版）
  *
- * @param response - e-Stat APIレスポンス
+ * @param formattedData - フォーマット済みデータ
  * @param rankingKey - ランキングキー（item_code、使用されないが互換性のために保持）
  * @param timeCode - 時間コード（オプション、指定がない場合は最初の時間コードを使用）
- * @param unit - 単位（オプション、responseから自動取得）
+ * @param unit - 単位（オプション）
  * @returns StatsSchema配列
  */
-export function convertStatsDataToRankingFormat(
-  response: EstatStatsDataResponse,
+function convertFormattedDataToRankingFormat(
+  formattedData: Awaited<ReturnType<typeof formatStatsData>>,
   rankingKey: string,
   timeCode?: string,
   unit?: string
 ): StatsSchema[] {
-  console.log(
-    `[convertStatsDataToRankingFormat] ランキング変換開始: rankingKey=${rankingKey}, timeCode=${timeCode || "auto"}`
-  );
-
-  // データ整形
-  const formattedData = formatStatsData(response);
-
   // 時間コードの決定
   let targetTimeCode = timeCode;
   if (!targetTimeCode) {
@@ -142,6 +135,45 @@ export function convertStatsDataToRankingFormat(
   if (statsSchemas.length === 0) {
     throw new Error("StatsSchemaデータが生成できませんでした");
   }
+
+  return statsSchemas;
+}
+
+/**
+ * e-Stat APIレスポンスをStatsSchema[]形式に変換
+ *
+ * @param response - e-Stat APIレスポンス（またはフォーマット済みデータ）
+ * @param rankingKey - ランキングキー（item_code、使用されないが互換性のために保持）
+ * @param timeCode - 時間コード（オプション、指定がない場合は最初の時間コードを使用）
+ * @param unit - 単位（オプション、responseから自動取得）
+ * @returns StatsSchema配列
+ */
+export function convertStatsDataToRankingFormat(
+  response: EstatStatsDataResponse | Awaited<ReturnType<typeof formatStatsData>>,
+  rankingKey: string,
+  timeCode?: string,
+  unit?: string
+): StatsSchema[] {
+  console.log(
+    `[convertStatsDataToRankingFormat] ランキング変換開始: rankingKey=${rankingKey}, timeCode=${timeCode || "auto"}`
+  );
+
+  // すでにフォーマット済みの場合はそのまま使用
+  let formattedData: Awaited<ReturnType<typeof formatStatsData>>;
+  if ("values" in response && Array.isArray(response.values)) {
+    // フォーマット済みデータとして扱う
+    formattedData = response as Awaited<ReturnType<typeof formatStatsData>>;
+  } else {
+    // データ整形
+    formattedData = formatStatsData(response as EstatStatsDataResponse);
+  }
+
+  const statsSchemas = convertFormattedDataToRankingFormat(
+    formattedData,
+    rankingKey,
+    timeCode,
+    unit
+  );
 
   console.log(
     `[convertStatsDataToRankingFormat] ランキング変換完了: ${statsSchemas.length}件`
