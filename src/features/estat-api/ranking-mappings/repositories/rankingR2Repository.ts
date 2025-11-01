@@ -190,36 +190,39 @@ export class EstatRankingR2Repository {
   }
 
   /**
-   * ランキングキー配下のすべてのデータを削除
+   * rankingディレクトリ配下のすべてのデータを一括削除
    *
-   * @param areaType - 地域タイプ
-   * @param rankingKey - ランキングキー
    * @returns 削除されたファイル数とキーの配列
    */
-  static async deleteAllRankingDataByKey(
-    areaType: "prefecture" | "city" | "national",
-    rankingKey: string
-  ): Promise<{ deletedCount: number; deletedKeys: string[] }> {
+  static async deleteAllRankingData(): Promise<{
+    deletedCount: number;
+    deletedKeys: string[];
+  }> {
     try {
-      // 該当するすべてのファイルキーを取得
-      const keys = await this.listRankingKeys(areaType, rankingKey);
+      console.log("[EstatRankingR2Repository] rankingディレクトリ配下の全データ削除開始");
 
-      if (keys.length === 0) {
+      // rankingディレクトリ配下のすべてのオブジェクトを取得
+      const client = this.getClient();
+      const allKeys = await client.listObjects("ranking/");
+
+      if (allKeys.length === 0) {
         console.log(
-          `[EstatRankingR2Repository] 削除対象のファイルが見つかりません: ranking/${areaType}/${rankingKey}/`
+          "[EstatRankingR2Repository] 削除対象のファイルが見つかりません: ranking/"
         );
         return { deletedCount: 0, deletedKeys: [] };
       }
 
-      const deletedKeys: string[] = [];
-      const client = this.getClient();
+      console.log(
+        `[EstatRankingR2Repository] 削除対象: ${allKeys.length}件のオブジェクト`
+      );
 
-      // 各ファイルを削除
-      for (const key of keys) {
+      const deletedKeys: string[] = [];
+
+      // 各オブジェクトを削除
+      for (const key of allKeys) {
         try {
           await client.deleteObject(key);
           deletedKeys.push(key);
-          console.log(`[EstatRankingR2Repository] ランキングデータを削除: ${key}`);
         } catch (error) {
           console.error(
             `[EstatRankingR2Repository] ファイル削除エラー: ${key}`,
@@ -230,7 +233,73 @@ export class EstatRankingR2Repository {
       }
 
       console.log(
-        `[EstatRankingR2Repository] ランキングデータ削除完了: ${deletedKeys.length}/${keys.length}件`
+        `[EstatRankingR2Repository] rankingディレクトリ配下の全データ削除完了: ${deletedKeys.length}件`
+      );
+
+      return {
+        deletedCount: deletedKeys.length,
+        deletedKeys,
+      };
+    } catch (error) {
+      console.error(
+        "[EstatRankingR2Repository] rankingディレクトリ配下の全データ削除失敗:",
+        error
+      );
+      return { deletedCount: 0, deletedKeys: [] };
+    }
+  }
+
+  /**
+   * ランキングキー配下のすべてのデータを削除（ランキングデータとメタデータの両方）
+   *
+   * @param areaType - 地域タイプ
+   * @param rankingKey - ランキングキー
+   * @returns 削除されたファイル数とキーの配列
+   */
+  static async deleteAllRankingDataByKey(
+    areaType: "prefecture" | "city" | "national",
+    rankingKey: string
+  ): Promise<{ deletedCount: number; deletedKeys: string[] }> {
+    try {
+      // 該当するすべてのファイルキーを取得（ランキングデータファイル）
+      const keys = await this.listRankingKeys(areaType, rankingKey);
+
+      // メタデータファイルも追加
+      const metadataKey = `ranking/${areaType}/${rankingKey}/metadata.json`;
+      const allKeys = [...keys, metadataKey];
+
+      if (allKeys.length === 0) {
+        console.log(
+          `[EstatRankingR2Repository] 削除対象のファイルが見つかりません: ranking/${areaType}/${rankingKey}/`
+        );
+        return { deletedCount: 0, deletedKeys: [] };
+      }
+
+      const deletedKeys: string[] = [];
+      const client = this.getClient();
+
+      // 各ファイルを削除
+      for (const key of allKeys) {
+        try {
+          await client.deleteObject(key);
+          deletedKeys.push(key);
+          console.log(`[EstatRankingR2Repository] ランキングデータを削除: ${key}`);
+        } catch (error) {
+          // メタデータファイルが存在しない場合はエラーを無視
+          if (key === metadataKey) {
+            // メタデータファイルが存在しない場合はスキップ
+            continue;
+          }
+          console.error(
+            `[EstatRankingR2Repository] ファイル削除エラー: ${key}`,
+            error
+          );
+          // エラーが発生しても続行
+        }
+      }
+
+      console.log(
+        `[EstatRankingR2Repository] ランキングデータ削除完了: ${deletedKeys.length}/${allKeys.length}件`
       );
 
       return {

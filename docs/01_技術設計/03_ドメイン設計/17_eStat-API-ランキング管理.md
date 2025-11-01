@@ -278,10 +278,11 @@ export interface StatsSchema {
 - 重複する年度コードは除去され、ソート済みの状態で保存
 - R2に保存されているすべての時間コード（`{timeCode}.json`）から年度情報を抽出
 
-**既存データへの対応**:
+**メタデータ生成のタイミング**:
 
-- 管理画面の「メタデータ一括生成」ボタンから、既存のランキングデータに対してメタデータファイルを一括生成可能
-- `generateMetadataForAllRankingsAction`を使用して、`estat_ranking_mappings`テーブルのすべてのレコードに対してメタデータを生成
+- ランキング変換実行時（`convertToRankingAction`、`convertAllRankingsAction`）に自動的にメタデータファイルが生成されます
+- ランキングデータをR2に保存した後、同じランキングキーに対してメタデータファイルを生成または更新します
+- `statName`と`title`は、ランキング変換時にe-Stat APIから取得した`tableInfo`から取得されます
 
 — 互換（旧構造）—
 
@@ -313,6 +314,7 @@ export interface StatsSchema {
   - **単一項目**: テーブルの「変換実行」ボタンから個別に実行（`convertToRankingAction`を使用）
   - **全項目一括**: 「一括ランキング変換」カードから`isRanking=true`の全項目を一括処理（`convertAllRankingsAction`を使用）
   - 進捗表示: `toast`通知で処理件数、成功/失敗件数を表示
+  - **メタデータ自動生成**: ランキング変換時にメタデータファイル（`metadata.json`）も自動的に生成されます
 
 ### CSV インポート（スクリプト経由）
 

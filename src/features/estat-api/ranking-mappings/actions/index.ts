@@ -397,6 +397,24 @@ export async function convertToRankingAction(
           continue;
         }
 
+        // 既存のR2データを削除（古いデータを削除してから新しく保存）
+        try {
+          // 特定の時間コードのファイルのみ削除
+          await EstatRankingR2Repository.deleteRankingData(
+            mapping.area_type,
+            mapping.item_code,
+            targetTimeCode
+          );
+          console.log(
+            `[convertToRankingAction] 既存データ削除: ${mapping.item_code}/${targetTimeCode}`
+          );
+        } catch (error) {
+          // ファイルが存在しない場合はエラーを無視（続行）
+          console.log(
+            `[convertToRankingAction] 既存データなし（新規）または削除スキップ: ${mapping.item_code}/${targetTimeCode}`
+          );
+        }
+
         // R2に保存
         const result = await EstatRankingR2Repository.saveRankingData(
           mapping.area_type,
@@ -540,6 +558,18 @@ export async function convertAllRankingsAction(
     console.log(
       `[convertAllRankingsAction] ${mappings.length}件の項目を変換します`
     );
+
+    // rankingディレクトリ配下のすべてのデータを一括削除（高速化のため）
+    console.log("[convertAllRankingsAction] rankingディレクトリ配下の全データを一括削除開始");
+    try {
+      const deleteResult = await EstatRankingR2Repository.deleteAllRankingData();
+      console.log(
+        `[convertAllRankingsAction] rankingディレクトリ配下の全データ削除完了: ${deleteResult.deletedCount}件`
+      );
+    } catch (error) {
+      // 削除エラーは警告のみ（変換処理は続行）
+      console.warn("[convertAllRankingsAction] rankingディレクトリ配下の全データ削除エラー:", error);
+    }
 
     const results: Array<{
       stats_data_id: string;
@@ -727,6 +757,59 @@ export async function convertAllRankingsAction(
             message: "保存できるデータがありませんでした",
           });
           continue;
+        }
+
+        // メタデータを生成して保存
+        try {
+          const savedTimeCodes = savedFiles.map((f) => f.timeCode);
+          
+          // tableInfoからstatNameとtitleを取得
+          const statName = formattedData.tableInfo?.statName || "";
+          const title = formattedData.tableInfo?.title || "";
+          
+          // 既存のメタデータを取得
+          const existingMetadata = await EstatRankingR2Repository.findRankingMetadata(
+            mapping.area_type,
+            mapping.item_code
+          );
+
+          let metadata;
+          if (existingMetadata) {
+            // 既存のメタデータを更新（新しい年度情報を追加、ソース情報も更新）
+            metadata = MetadataGenerator.updateMetadataWithNewTimes(
+              existingMetadata,
+              savedTimeCodes
+            );
+            // ソース情報を更新（既存のメタデータがある場合でも、新しい情報で更新）
+            metadata.source = {
+              name: MetadataGenerator.generateSourceName(statName, title),
+              url: MetadataGenerator.generateSourceUrl(mapping.stats_data_id),
+            };
+          } else {
+            // 新規メタデータを生成
+            metadata = await MetadataGenerator.generateMetadata(
+              mapping,
+              savedTimeCodes,
+              statName,
+              title
+            );
+          }
+
+          // メタデータを保存
+          await EstatRankingR2Repository.saveRankingMetadata(
+            mapping.area_type,
+            mapping.item_code,
+            metadata
+          );
+          console.log(
+            `[convertAllRankingsAction] メタデータを保存: ${mapping.item_code}`
+          );
+        } catch (error) {
+          // メタデータ保存エラーは警告のみ（データ保存は成功している）
+          console.warn(
+            `[convertAllRankingsAction] メタデータ保存エラー: ${mapping.item_code}`,
+            error
+          );
         }
 
         results.push({

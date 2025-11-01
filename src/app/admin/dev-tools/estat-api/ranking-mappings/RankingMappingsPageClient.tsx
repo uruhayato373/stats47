@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 
-import { AlertTriangle, Download, List, RefreshCw, Zap, FileJson } from "lucide-react";
+import { AlertTriangle, Download, List, RefreshCw, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/atoms/ui/button";
@@ -24,7 +24,6 @@ import { EstatRankingMappingsTable } from "@/features/estat-api/ranking-mappings
 import {
   convertAllRankingsAction,
   exportRankingMappingsToCsvAction,
-  generateMetadataForAllRankingsAction,
   listRankingMappingsAction,
 } from "@/features/estat-api/ranking-mappings/actions";
 
@@ -42,7 +41,6 @@ export default function RankingMappingsPageClient({
   );
   const [isPending, startTransition] = useTransition();
   const [isConvertingAll, setIsConvertingAll] = useState(false);
-  const [isGeneratingMetadata, setIsGeneratingMetadata] = useState(false);
 
   // 重複しているitem_codeを検出
   const duplicateItemCodes = useMemo(() => {
@@ -144,35 +142,6 @@ export default function RankingMappingsPageClient({
     }
   };
 
-  /**
-   * メタデータ一括生成実行
-   */
-  const handleGenerateMetadata = async () => {
-    setIsGeneratingMetadata(true);
-    try {
-      toast.info("メタデータを生成中...");
-      const result = await generateMetadataForAllRankingsAction();
-      if (result.success) {
-        toast.success(result.message);
-      } else {
-        toast.error(result.message);
-      }
-      // 結果の詳細を表示
-      if (result.errorCount > 0) {
-        toast.warning(
-          `メタデータ生成結果: 成功${result.generatedCount}件、失敗${result.errorCount}件`,
-          {
-            duration: 5000,
-          }
-        );
-      }
-    } catch (error) {
-      toast.error("メタデータ一括生成に失敗しました");
-    } finally {
-      setIsGeneratingMetadata(false);
-    }
-  };
-
 
   return (
     <div className="w-full px-4 py-6 space-y-6">
@@ -197,7 +166,9 @@ export default function RankingMappingsPageClient({
         <CardHeader>
           <CardTitle>一括ランキング変換</CardTitle>
           <CardDescription>
-            isRanking=trueの全項目をランキング形式に変換してR2に保存します
+            isRanking=trueの全項目をランキング形式に変換してR2に保存します。
+            メタデータファイル（metadata.json）も自動的に生成されます。
+            is_ranking=falseのデータに対応するR2データは自動的に削除されます。
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -231,33 +202,6 @@ export default function RankingMappingsPageClient({
             <Download className="mr-2 h-4 w-4" />
             CSV保存
           </Button>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FileJson className="h-5 w-5" />
-            メタデータ一括生成
-          </CardTitle>
-          <CardDescription>
-            既存のランキングデータに対してmetadata.jsonファイルを一括生成します。
-            R2に保存されているすべてのランキングキーに対してメタデータファイルを作成します。
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Button
-            onClick={handleGenerateMetadata}
-            disabled={isGeneratingMetadata}
-            variant="outline"
-            className="w-full"
-          >
-            <FileJson className="mr-2 h-4 w-4" />
-            {isGeneratingMetadata ? "生成中..." : "メタデータ生成実行"}
-          </Button>
-          <p className="text-sm text-muted-foreground mt-2">
-            注意: 大量のデータに対して処理するため、時間がかかる場合があります
-          </p>
         </CardContent>
       </Card>
 
