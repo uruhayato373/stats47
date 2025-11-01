@@ -112,24 +112,26 @@ export async function importCsvUploadAction(
 /**
  * isRankingフラグを更新
  *
- * @param id - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @param isRanking - ランキング変換対象フラグ
  * @returns 更新結果
  */
 export async function updateIsRankingAction(
-  id: number,
+  stats_data_id: string,
+  cat01: string,
   isRanking: boolean
 ): Promise<{ success: boolean; message: string }> {
   try {
-    if (!id) {
-      return { success: false, message: "IDが必要です" };
+    if (!stats_data_id || !cat01) {
+      return { success: false, message: "stats_data_idとcat01が必要です" };
     }
 
     console.log(
-      `[updateIsRankingAction] isRanking更新: id=${id}, isRanking=${isRanking}`
+      `[updateIsRankingAction] isRanking更新: stats_data_id=${stats_data_id}, cat01=${cat01}, isRanking=${isRanking}`
     );
 
-    const success = await updateIsRanking(id, isRanking);
+    const success = await updateIsRanking(stats_data_id, cat01, isRanking);
 
     if (!success) {
       return { success: false, message: "更新に失敗しました" };
@@ -152,12 +154,14 @@ export async function updateIsRankingAction(
 /**
  * ランキング変換実行（単一項目）
  *
- * @param mappingId - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @param timeCode - 時間コード（オプション）
  * @returns 変換結果
  */
 export async function convertToRankingAction(
-  mappingId: number,
+  stats_data_id: string,
+  cat01: string,
   timeCode?: string
 ): Promise<{
   success: boolean;
@@ -166,19 +170,19 @@ export async function convertToRankingAction(
   size?: number;
 }> {
   try {
-    if (!mappingId) {
-      return { success: false, message: "マッピングIDが必要です" };
+    if (!stats_data_id || !cat01) {
+      return { success: false, message: "stats_data_idとcat01が必要です" };
     }
 
     console.log(
-      `[convertToRankingAction] ランキング変換開始: mappingId=${mappingId}, timeCode=${timeCode || "auto"}`
+      `[convertToRankingAction] ランキング変換開始: stats_data_id=${stats_data_id}, cat01=${cat01}, timeCode=${timeCode || "auto"}`
     );
 
     // マッピング情報を取得
-    const { findRankingMappingById } = await import(
+    const { findRankingMappingByKey } = await import(
       "../repositories/ranking-mappings-repository"
     );
-    const mapping = await findRankingMappingById(mappingId);
+    const mapping = await findRankingMappingByKey(stats_data_id, cat01);
 
     if (!mapping) {
       return { success: false, message: "マッピングが見つかりません" };
@@ -239,7 +243,8 @@ export async function convertAllRankingsAction(
   success: boolean;
   message: string;
   results: Array<{
-    mappingId: number;
+    stats_data_id: string;
+    cat01: string;
     itemName: string;
     success: boolean;
     message: string;
@@ -267,7 +272,8 @@ export async function convertAllRankingsAction(
     );
 
     const results: Array<{
-      mappingId: number;
+      stats_data_id: string;
+      cat01: string;
       itemName: string;
       success: boolean;
       message: string;
@@ -307,7 +313,8 @@ export async function convertAllRankingsAction(
         );
 
         results.push({
-          mappingId: mapping.id,
+          stats_data_id: mapping.stats_data_id,
+          cat01: mapping.cat01,
           itemName: mapping.item_name,
           success: true,
           message: `変換完了: ${payload.values.length}件`,
@@ -322,7 +329,8 @@ export async function convertAllRankingsAction(
           error
         );
         results.push({
-          mappingId: mapping.id,
+          stats_data_id: mapping.stats_data_id,
+          cat01: mapping.cat01,
           itemName: mapping.item_name,
           success: false,
           message:

@@ -68,29 +68,20 @@ export async function parseCsvFile(filePath: string): Promise<CsvRow[]> {
     // ヘッダー行を取得
     const headers = parseCsvLine(lines[0]);
 
-    // 期待されるヘッダー
-    const expectedHeaders = [
+    // 最小限の必須ヘッダー
+    const requiredHeaders = [
       "stats_data_id",
       "cat01",
       "item_name",
       "item_code",
       "unit",
-      "dividing_value",
-      "new_unit",
-      "ascending",
     ];
 
-    // ヘッダーの検証
-    if (headers.length !== expectedHeaders.length) {
-      throw new Error(
-        `CSVヘッダーが不正です。期待: ${expectedHeaders.length}カラム、実際: ${headers.length}カラム`
-      );
-    }
-
-    for (let i = 0; i < headers.length; i++) {
-      if (headers[i] !== expectedHeaders[i]) {
+    // 必須ヘッダーの検証
+    for (const required of requiredHeaders) {
+      if (!headers.includes(required)) {
         throw new Error(
-          `CSVヘッダーが不正です。期待: ${expectedHeaders[i]}、実際: ${headers[i]}`
+          `CSVヘッダーに必須カラムがありません: ${required}`
         );
       }
     }
@@ -104,24 +95,28 @@ export async function parseCsvFile(filePath: string): Promise<CsvRow[]> {
       }
 
       const values = parseCsvLine(line);
-      if (values.length !== headers.length) {
-        console.warn(
-          `[parseCsvFile] 行 ${i + 1} のカラム数が不正です。スキップします:`,
-          values
-        );
-        continue;
-      }
+      
+      // ヘッダーと値の対応を取得
+      const getValueByHeader = (headerName: string): string => {
+        const index = headers.indexOf(headerName);
+        return index >= 0 && index < values.length ? values[index] || "" : "";
+      };
 
-      rows.push({
-        stats_data_id: values[0] || "",
-        cat01: values[1] || "",
-        item_name: values[2] || "",
-        item_code: values[3] || "",
-        unit: values[4] || "",
-        dividing_value: values[5] || "",
-        new_unit: values[6] || "",
-        ascending: values[7] || "",
-      });
+      const rowData: CsvRow = {
+        stats_data_id: getValueByHeader("stats_data_id"),
+        cat01: getValueByHeader("cat01"),
+        item_name: getValueByHeader("item_name"),
+        item_code: getValueByHeader("item_code"),
+        unit: getValueByHeader("unit"),
+      };
+      
+      // オプションカラム（area_type）がある場合は追加
+      const areaType = getValueByHeader("area_type");
+      if (areaType) {
+        rowData.area_type = areaType;
+      }
+      
+      rows.push(rowData);
     }
 
     return rows;
@@ -144,9 +139,7 @@ function convertCsvRowToInput(row: CsvRow): EstatRankingMappingInput {
     item_name: row.item_name,
     item_code: row.item_code,
     unit: row.unit || null,
-    dividing_value: row.dividing_value || null,
-    new_unit: row.new_unit || null,
-    ascending: row.ascending.toLowerCase() === "true",
+    area_type: (row.area_type as "prefecture" | "city" | "national") || "prefecture",
     is_ranking: false, // デフォルトでfalse（CSVインポート時は更新しない）
   };
 }
@@ -205,29 +198,20 @@ export async function parseCsvContent(csvContent: string): Promise<CsvRow[]> {
     // ヘッダー行を取得
     const headers = parseCsvLine(lines[0]);
 
-    // 期待されるヘッダー
-    const expectedHeaders = [
+    // 最小限の必須ヘッダー
+    const requiredHeaders = [
       "stats_data_id",
       "cat01",
       "item_name",
       "item_code",
       "unit",
-      "dividing_value",
-      "new_unit",
-      "ascending",
     ];
 
-    // ヘッダーの検証
-    if (headers.length !== expectedHeaders.length) {
-      throw new Error(
-        `CSVヘッダーが不正です。期待: ${expectedHeaders.length}カラム、実際: ${headers.length}カラム`
-      );
-    }
-
-    for (let i = 0; i < headers.length; i++) {
-      if (headers[i] !== expectedHeaders[i]) {
+    // 必須ヘッダーの検証
+    for (const required of requiredHeaders) {
+      if (!headers.includes(required)) {
         throw new Error(
-          `CSVヘッダーが不正です。期待: ${expectedHeaders[i]}、実際: ${headers[i]}`
+          `CSVヘッダーに必須カラムがありません: ${required}`
         );
       }
     }
@@ -241,24 +225,28 @@ export async function parseCsvContent(csvContent: string): Promise<CsvRow[]> {
       }
 
       const values = parseCsvLine(line);
-      if (values.length !== headers.length) {
-        console.warn(
-          `[parseCsvContent] 行 ${i + 1} のカラム数が不正です。スキップします:`,
-          values
-        );
-        continue;
-      }
+      
+      // ヘッダーと値の対応を取得
+      const getValueByHeader = (headerName: string): string => {
+        const index = headers.indexOf(headerName);
+        return index >= 0 && index < values.length ? values[index] || "" : "";
+      };
 
-      rows.push({
-        stats_data_id: values[0] || "",
-        cat01: values[1] || "",
-        item_name: values[2] || "",
-        item_code: values[3] || "",
-        unit: values[4] || "",
-        dividing_value: values[5] || "",
-        new_unit: values[6] || "",
-        ascending: values[7] || "",
-      });
+      const rowData: CsvRow = {
+        stats_data_id: getValueByHeader("stats_data_id"),
+        cat01: getValueByHeader("cat01"),
+        item_name: getValueByHeader("item_name"),
+        item_code: getValueByHeader("item_code"),
+        unit: getValueByHeader("unit"),
+      };
+      
+      // オプションカラム（area_type）がある場合は追加
+      const areaType = getValueByHeader("area_type");
+      if (areaType) {
+        rowData.area_type = areaType;
+      }
+      
+      rows.push(rowData);
     }
 
     return rows;
@@ -306,4 +294,3 @@ export async function importCsvContentToDatabase(
     throw error;
   }
 }
-

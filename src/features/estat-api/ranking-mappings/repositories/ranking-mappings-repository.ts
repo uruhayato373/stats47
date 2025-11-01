@@ -35,15 +35,12 @@ function convertRowToEstatRankingMapping(
   row: Record<string, unknown>
 ): EstatRankingMapping {
   return {
-    id: Number(row.id || 0),
     stats_data_id: String(row.stats_data_id || ""),
     cat01: String(row.cat01 || ""),
     item_name: String(row.item_name || ""),
     item_code: String(row.item_code || ""),
     unit: row.unit ? String(row.unit) : null,
-    dividing_value: row.dividing_value ? String(row.dividing_value) : null,
-    new_unit: row.new_unit ? String(row.new_unit) : null,
-    ascending: Boolean(row.ascending),
+    area_type: (row.area_type as "prefecture" | "city" | "national") || "prefecture",
     is_ranking: Boolean(row.is_ranking),
     created_at: String(row.created_at || ""),
     updated_at: String(row.updated_at || ""),
@@ -112,21 +109,23 @@ export async function listRankingMappings(options?: {
 }
 
 /**
- * IDでランキングマッピングを取得
+ * stats_data_idとcat01でランキングマッピングを取得
  *
- * @param id - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @returns ランキングマッピング、またはnull
  */
-export async function findRankingMappingById(
-  id: number
+export async function findRankingMappingByKey(
+  stats_data_id: string,
+  cat01: string
 ): Promise<EstatRankingMapping | null> {
   const db = getD1();
 
   try {
     const stmt = db.prepare(
-      "SELECT * FROM estat_ranking_mappings WHERE id = ?"
+      "SELECT * FROM estat_ranking_mappings WHERE stats_data_id = ? AND cat01 = ?"
     );
-    const row = await stmt.bind(id).first();
+    const row = await stmt.bind(stats_data_id, cat01).first();
 
     if (!row) {
       return null;
@@ -134,7 +133,7 @@ export async function findRankingMappingById(
 
     return convertRowToEstatRankingMapping(row as Record<string, unknown>);
   } catch (error) {
-    console.error("[findRankingMappingById] 例外発生:", error);
+    console.error("[findRankingMappingByKey] 例外発生:", error);
     return null;
   }
 }
@@ -166,9 +165,9 @@ export async function createRankingMapping(
     const stmt = db.prepare(
       `INSERT INTO estat_ranking_mappings (
         stats_data_id, cat01, item_name, item_code,
-        unit, dividing_value, new_unit, ascending, is_ranking,
+        unit, area_type, is_ranking,
         created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       RETURNING *`
     );
 
@@ -179,9 +178,7 @@ export async function createRankingMapping(
         input.item_name,
         input.item_code,
         input.unit ?? null,
-        input.dividing_value ?? null,
-        input.new_unit ?? null,
-        input.ascending ? 1 : 0,
+        input.area_type ?? "prefecture",
         input.is_ranking ? 1 : 0,
         now,
         now
@@ -202,12 +199,14 @@ export async function createRankingMapping(
 /**
  * ランキングマッピングを更新
  *
- * @param id - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @param data - 更新するデータ
  * @returns 更新成功フラグ
  */
 export async function updateRankingMapping(
-  id: number,
+  stats_data_id: string,
+  cat01: string,
   data: Partial<EstatRankingMappingInput>
 ): Promise<boolean> {
   const db = getD1();
@@ -216,15 +215,7 @@ export async function updateRankingMapping(
   const updates: string[] = [];
   const bindings: unknown[] = [];
 
-  // 更新フィールドの構築
-  if (data.stats_data_id !== undefined) {
-    updates.push("stats_data_id = ?");
-    bindings.push(data.stats_data_id);
-  }
-  if (data.cat01 !== undefined) {
-    updates.push("cat01 = ?");
-    bindings.push(data.cat01);
-  }
+  // 更新フィールドの構築（stats_data_idとcat01は主キーなので更新不可）
   if (data.item_name !== undefined) {
     updates.push("item_name = ?");
     bindings.push(data.item_name);
@@ -237,17 +228,9 @@ export async function updateRankingMapping(
     updates.push("unit = ?");
     bindings.push(data.unit);
   }
-  if (data.dividing_value !== undefined) {
-    updates.push("dividing_value = ?");
-    bindings.push(data.dividing_value);
-  }
-  if (data.new_unit !== undefined) {
-    updates.push("new_unit = ?");
-    bindings.push(data.new_unit);
-  }
-  if (data.ascending !== undefined) {
-    updates.push("ascending = ?");
-    bindings.push(data.ascending ? 1 : 0);
+  if (data.area_type !== undefined) {
+    updates.push("area_type = ?");
+    bindings.push(data.area_type);
   }
   if (data.is_ranking !== undefined) {
     updates.push("is_ranking = ?");
@@ -260,13 +243,13 @@ export async function updateRankingMapping(
 
   updates.push("updated_at = ?");
   bindings.push(now);
-  bindings.push(id);
+  bindings.push(stats_data_id, cat01);
 
   try {
     const stmt = db.prepare(
       `UPDATE estat_ranking_mappings 
        SET ${updates.join(", ")} 
-       WHERE id = ?`
+       WHERE stats_data_id = ? AND cat01 = ?`
     );
 
     const result = await stmt.bind(...bindings).run();
@@ -281,31 +264,37 @@ export async function updateRankingMapping(
 /**
  * isRankingフラグを更新
  *
- * @param id - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @param isRanking - ランキング変換対象フラグ
  * @returns 更新成功フラグ
  */
 export async function updateIsRanking(
-  id: number,
+  stats_data_id: string,
+  cat01: string,
   isRanking: boolean
 ): Promise<boolean> {
-  return updateRankingMapping(id, { is_ranking: isRanking });
+  return updateRankingMapping(stats_data_id, cat01, { is_ranking: isRanking });
 }
 
 /**
  * ランキングマッピングを削除
  *
- * @param id - マッピングID
+ * @param stats_data_id - 統計表ID
+ * @param cat01 - 分類コード
  * @returns 削除成功フラグ
  */
-export async function deleteRankingMapping(id: number): Promise<boolean> {
+export async function deleteRankingMapping(
+  stats_data_id: string,
+  cat01: string
+): Promise<boolean> {
   const db = getD1();
 
   try {
     const stmt = db.prepare(
-      "DELETE FROM estat_ranking_mappings WHERE id = ?"
+      "DELETE FROM estat_ranking_mappings WHERE stats_data_id = ? AND cat01 = ?"
     );
-    const result = await stmt.bind(id).run();
+    const result = await stmt.bind(stats_data_id, cat01).run();
 
     return result.success === true;
   } catch (error) {
@@ -341,16 +330,15 @@ export async function bulkUpsertRankingMappings(
       const stmt = db.prepare(
         `INSERT INTO estat_ranking_mappings (
           stats_data_id, cat01, item_name, item_code,
-          unit, dividing_value, new_unit, ascending, is_ranking,
+          unit, area_type, is_ranking,
           created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(stats_data_id, cat01, item_code) 
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(stats_data_id, cat01) 
         DO UPDATE SET
           item_name = excluded.item_name,
+          item_code = excluded.item_code,
           unit = excluded.unit,
-          dividing_value = excluded.dividing_value,
-          new_unit = excluded.new_unit,
-          ascending = excluded.ascending,
+          area_type = excluded.area_type,
           updated_at = excluded.updated_at
         -- is_rankingは既存の値を保持（CSVインポート時は更新しない）
         `
@@ -364,9 +352,7 @@ export async function bulkUpsertRankingMappings(
             mapping.item_name,
             mapping.item_code,
             mapping.unit ?? null,
-            mapping.dividing_value ?? null,
-            mapping.new_unit ?? null,
-            mapping.ascending ? 1 : 0,
+            mapping.area_type ?? "prefecture",
             mapping.is_ranking ? 1 : 0,
             now,
             now

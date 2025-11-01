@@ -2,7 +2,7 @@
 -- 認証、e-Statメタデータ、ランキング、ダッシュボードを統合
 -- 作成日: 2024-12-19
 -- 最終更新: 2025-01-31
--- 備考: マイグレーション履歴（025-037）を統合した完全版スキーマ
+-- 備考: マイグレーション履歴（025-038）を統合した完全版スキーマ
 
 -- ============================================================================
 -- 1. 認証関連テーブル（Auth.js準拠）
@@ -102,6 +102,23 @@ CREATE TABLE IF NOT EXISTS estat_metainfo (
   CHECK (area_type IN ('national', 'prefecture', 'city'))
 );
 
+-- estat_ranking_mappings: e-Stat APIパラメータとランキング項目のマッピングテーブル
+-- CSVファイル（mapping.csv）からインポートするデータを保存
+-- isRankingフラグでランキング変換対象を指定
+CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
+  stats_data_id TEXT NOT NULL,
+  cat01 TEXT NOT NULL,
+  item_name TEXT NOT NULL,
+  item_code TEXT NOT NULL,
+  unit TEXT,
+  area_type TEXT NOT NULL DEFAULT 'prefecture',  -- 'prefecture' | 'city' | 'national'
+  is_ranking BOOLEAN DEFAULT 0,  -- ランキング変換対象フラグ
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (stats_data_id, cat01),
+  CHECK (area_type IN ('prefecture', 'city', 'national'))
+);
+
 -- ============================================================================
 -- 4. ランキング関連テーブル
 -- ============================================================================
@@ -169,25 +186,6 @@ CREATE TABLE IF NOT EXISTS estat_api_metadata (
 -- 注意: ranking_values テーブルは使用しません（設計により R2 ストレージを使用）
 -- ランキング値データは R2 Storage に JSON 形式で保存されます
 -- パス: ranking/{ranking_key}/{area_type}/{time_code}.json
-
--- estat_ranking_mappings: e-Stat APIパラメータとランキング項目のマッピングテーブル
--- CSVファイル（data/prefectures.csv）からインポートするデータを保存
--- isRankingフラグでランキング変換対象を指定
-CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  stats_data_id TEXT NOT NULL,
-  cat01 TEXT NOT NULL,
-  item_name TEXT NOT NULL,
-  item_code TEXT NOT NULL,
-  unit TEXT,
-  dividing_value TEXT,
-  new_unit TEXT,
-  ascending BOOLEAN DEFAULT 0,
-  is_ranking BOOLEAN DEFAULT 0,  -- ランキング変換対象フラグ
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(stats_data_id, cat01, item_code)
-);
 
 -- ranking_groups: ランキンググループ定義テーブル
 CREATE TABLE IF NOT EXISTS ranking_groups (
@@ -275,6 +273,10 @@ CREATE INDEX IF NOT EXISTS idx_estat_metainfo_stat_name ON estat_metainfo(stat_n
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_title ON estat_metainfo(title);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_area_type ON estat_metainfo(area_type);
 CREATE INDEX IF NOT EXISTS idx_estat_metainfo_updated_at ON estat_metainfo(updated_at);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_stats_data_id ON estat_ranking_mappings(stats_data_id);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_is_ranking ON estat_ranking_mappings(is_ranking);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_item_code ON estat_ranking_mappings(item_code);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_area_type ON estat_ranking_mappings(area_type);
 
 -- ランキング関連インデックス
 CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_source_id);
@@ -283,11 +285,6 @@ CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_ranking ON estat_api_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_area ON estat_api_metadata(area_type);
-
--- estat_ranking_mappings テーブルのインデックス
-CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_stats_data_id ON estat_ranking_mappings(stats_data_id);
-CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_is_ranking ON estat_ranking_mappings(is_ranking);
-CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_item_code ON estat_ranking_mappings(item_code);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);

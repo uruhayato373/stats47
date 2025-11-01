@@ -13,9 +13,10 @@ interface CsvRow {
   item_name: string;
   item_code: string;
   unit: string;
-  dividing_value: string;
-  new_unit: string;
-  ascending: string;
+  dividing_value?: string;
+  new_unit?: string;
+  ascending?: string;
+  area_type?: string;
 }
 
 /**
@@ -55,21 +56,21 @@ function parseCsvFile(filePath: string): CsvRow[] {
   }
 
   const headers = parseCsvLine(lines[0]);
-  const expectedHeaders = [
+  
+  // 最小限の必須ヘッダー
+  const requiredHeaders = [
     "stats_data_id",
     "cat01",
     "item_name",
     "item_code",
     "unit",
-    "dividing_value",
-    "new_unit",
-    "ascending",
   ];
 
-  if (headers.length !== expectedHeaders.length) {
-    throw new Error(
-      `CSVヘッダーが不正です。期待: ${expectedHeaders.length}カラム、実際: ${headers.length}カラム`
-    );
+  // 必須ヘッダーの検証
+  for (const required of requiredHeaders) {
+    if (!headers.includes(required)) {
+      throw new Error(`CSVヘッダーに必須カラムがありません: ${required}`);
+    }
   }
 
   const rows: CsvRow[] = [];
@@ -80,21 +81,28 @@ function parseCsvFile(filePath: string): CsvRow[] {
     }
 
     const values = parseCsvLine(line);
-    if (values.length !== headers.length) {
-      console.warn(`行 ${i + 1} のカラム数が不正です。スキップします:`, values);
-      continue;
-    }
+    
+    // ヘッダーと値の対応を取得
+    const getValueByHeader = (headerName: string): string => {
+      const index = headers.indexOf(headerName);
+      return index >= 0 && index < values.length ? values[index] || "" : "";
+    };
 
-    rows.push({
-      stats_data_id: values[0] || "",
-      cat01: values[1] || "",
-      item_name: values[2] || "",
-      item_code: values[3] || "",
-      unit: values[4] || "",
-      dividing_value: values[5] || "",
-      new_unit: values[6] || "",
-      ascending: values[7] || "",
-    });
+    const rowData: CsvRow = {
+      stats_data_id: getValueByHeader("stats_data_id"),
+      cat01: getValueByHeader("cat01"),
+      item_name: getValueByHeader("item_name"),
+      item_code: getValueByHeader("item_code"),
+      unit: getValueByHeader("unit"),
+    };
+    
+    // オプションカラム（area_type等）がある場合は追加
+    const areaType = getValueByHeader("area_type");
+    if (areaType) {
+      rowData.area_type = areaType;
+    }
+    
+    rows.push(rowData);
   }
 
   return rows;
@@ -131,18 +139,17 @@ async function main() {
     const stmt = db.prepare(
       `INSERT INTO estat_ranking_mappings (
         stats_data_id, cat01, item_name, item_code,
-        unit, dividing_value, new_unit, ascending, is_ranking,
+        unit, area_type, is_ranking,
         created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      ON CONFLICT(stats_data_id, cat01, item_code) 
-      DO UPDATE SET
-        item_name = excluded.item_name,
-        unit = excluded.unit,
-        dividing_value = excluded.dividing_value,
-        new_unit = excluded.new_unit,
-        ascending = excluded.ascending,
-        updated_at = excluded.updated_at
-      -- is_rankingは既存の値を保持（CSVインポート時は更新しない）
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(stats_data_id, cat01) 
+        DO UPDATE SET
+          item_name = excluded.item_name,
+          item_code = excluded.item_code,
+          unit = excluded.unit,
+          area_type = excluded.area_type,
+          updated_at = excluded.updated_at
+        -- is_rankingは既存の値を保持（CSVインポート時は更新しない）
       `
     );
 
@@ -151,6 +158,9 @@ async function main() {
 
       for (const row of batch) {
         try {
+          // CSVにarea_typeがあれば使用、なければ'prefecture'をデフォルト
+          const areaType = row.area_type || "prefecture";
+          
           const result = await stmt
             .bind(
               row.stats_data_id,
@@ -158,9 +168,7 @@ async function main() {
               row.item_name,
               row.item_code,
               row.unit || null,
-              row.dividing_value || null,
-              row.new_unit || null,
-              row.ascending.toLowerCase() === "true" ? 1 : 0,
+              areaType,
               0, // is_rankingは全てfalse
               now,
               now

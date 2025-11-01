@@ -50,11 +50,9 @@ export interface RankingExportPayload {
  * estat_ranking_mappingsテーブルの行型
  */
 export interface EstatRankingMapping {
-  /** ID（主キー） */
-  id: number;
-  /** e-Stat統計表ID */
+  /** e-Stat統計表ID（主キーの一部） */
   stats_data_id: string;
-  /** e-Stat分類コード（cdCat01パラメータに対応） */
+  /** e-Stat分類コード（cdCat01パラメータに対応、主キーの一部） */
   cat01: string;
   /** 項目名（日本語） */
   item_name: string;
@@ -62,12 +60,8 @@ export interface EstatRankingMapping {
   item_code: string;
   /** 単位 */
   unit: string | null;
-  /** 除算値（CSVからインポート、未使用） */
-  dividing_value: string | null;
-  /** 新単位（CSVからインポート、未使用） */
-  new_unit: string | null;
-  /** 昇順フラグ（CSVからインポート、未使用） */
-  ascending: boolean;
+  /** 地域タイプ（'prefecture' | 'city' | 'national'） */
+  area_type: "prefecture" | "city" | "national";
   /** ランキング変換対象フラグ（trueの場合、ランキング変換を実行） */
   is_ranking: boolean;
   /** 作成日時 */
@@ -91,12 +85,8 @@ export interface EstatRankingMappingInput {
   item_code: string;
   /** 単位 */
   unit?: string | null;
-  /** 除算値 */
-  dividing_value?: string | null;
-  /** 新単位 */
-  new_unit?: string | null;
-  /** 昇順フラグ */
-  ascending?: boolean;
+  /** 地域タイプ（'prefecture' | 'city' | 'national'） */
+  area_type?: "prefecture" | "city" | "national";
   /** ランキング変換対象フラグ */
   is_ranking?: boolean;
 }
@@ -110,8 +100,9 @@ export interface CsvRow {
   item_name: string;
   item_code: string;
   unit: string;
-  dividing_value: string;
-  new_unit: string;
-  ascending: string;
+  dividing_value?: string;
+  new_unit?: string;
+  ascending?: string;
+  area_type?: string;
 }
 
