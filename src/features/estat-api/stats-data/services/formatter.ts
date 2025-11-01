@@ -9,6 +9,8 @@ import {
   parseEstatValue,
 } from "@/features/estat-api/stats-data/types";
 
+import { StatsSchema } from "@/types/stats";
+
 import { EstatClassObject } from "../../core";
 
 type DimensionInfo = {
@@ -421,5 +423,58 @@ function extractDimension(
     name: info.name,
     level: info.level,
     parentCode: info.parentCode,
+  };
+}
+
+/**
+ * FormattedValueをStatsSchemaに変換
+ *
+ * 現在はcat01のみサポート。cat02以降の情報がある場合は
+ * 変換できないため、undefinedを返す。
+ *
+ * @param formattedValue - 変換元のFormattedValue
+ * @returns StatsSchemaまたはundefined（cat01が存在しない場合、またはcat02以降の情報がある場合）
+ */
+export function convertToStatsSchema(
+  formattedValue: FormattedValue
+): StatsSchema | undefined {
+  // cat01が存在しない場合は変換不可
+  if (!formattedValue.dimensions.cat01) {
+    return undefined;
+  }
+
+  // cat02以降の情報がある場合は将来的に実装予定
+  // TODO: cat02-cat15の対応を追加（複数のカテゴリがある場合は変換方法を検討する必要がある）
+  const hasAdditionalCategories =
+    formattedValue.dimensions.cat02 ||
+    formattedValue.dimensions.cat03 ||
+    formattedValue.dimensions.cat04 ||
+    formattedValue.dimensions.cat05 ||
+    formattedValue.dimensions.cat06 ||
+    formattedValue.dimensions.cat07 ||
+    formattedValue.dimensions.cat08 ||
+    formattedValue.dimensions.cat09 ||
+    formattedValue.dimensions.cat10 ||
+    formattedValue.dimensions.cat11 ||
+    formattedValue.dimensions.cat12 ||
+    formattedValue.dimensions.cat13 ||
+    formattedValue.dimensions.cat14 ||
+    formattedValue.dimensions.cat15;
+
+  if (hasAdditionalCategories) {
+    // cat02以降がある場合は現時点では変換しない
+    // 将来的に複数カテゴリを扱う方法を検討する必要がある
+    return undefined;
+  }
+
+  return {
+    areaCode: formattedValue.dimensions.area.code,
+    areaName: formattedValue.dimensions.area.name,
+    timeCode: formattedValue.dimensions.time.code,
+    timeName: formattedValue.dimensions.time.name,
+    categoryCode: formattedValue.dimensions.cat01.code,
+    categoryName: formattedValue.dimensions.cat01.name,
+    value: formattedValue.value ?? 0, // nullの場合は0
+    unit: formattedValue.unit || "",
   };
 }

@@ -19,7 +19,7 @@ export * from "./components";
 
 // 関数
 export { fetchFormattedStatsData, fetchStatsData } from "./services/fetcher";
-export { formatStatsData } from "./services/formatter";
+export { formatStatsData, convertToStatsSchema } from "./services/formatter";
 
 // ============================================================================
 // 型定義（coreから再エクスポート）
