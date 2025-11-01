@@ -429,6 +429,10 @@ export async function convertToRankingAction(
     try {
       const savedTimeCodes = savedFiles.map((f) => f.timeCode);
       
+      // tableInfoからstatNameとtitleを取得
+      const statName = formattedData.tableInfo?.statName || "";
+      const title = formattedData.tableInfo?.title || "";
+      
       // 既存のメタデータを取得
       const existingMetadata = await EstatRankingR2Repository.findRankingMetadata(
         mapping.area_type,
@@ -437,16 +441,23 @@ export async function convertToRankingAction(
 
       let metadata;
       if (existingMetadata) {
-        // 既存のメタデータを更新（新しい年度情報を追加）
+        // 既存のメタデータを更新（新しい年度情報を追加、ソース情報も更新）
         metadata = MetadataGenerator.updateMetadataWithNewTimes(
           existingMetadata,
           savedTimeCodes
         );
+        // ソース情報を更新（既存のメタデータがある場合でも、新しい情報で更新）
+        metadata.source = {
+          name: MetadataGenerator.generateSourceName(statName, title),
+          url: MetadataGenerator.generateSourceUrl(mapping.stats_data_id),
+        };
       } else {
         // 新規メタデータを生成
         metadata = await MetadataGenerator.generateMetadata(
           mapping,
-          savedTimeCodes
+          savedTimeCodes,
+          statName,
+          title
         );
       }
 
@@ -808,8 +819,9 @@ export async function generateMetadataForAllRankingsAction(): Promise<{
       "[generateMetadataForAllRankingsAction] メタデータ一括生成開始"
     );
 
-    // すべてのランキングマッピングを取得
+    // is_ranking=trueのランキングマッピングのみを取得
     const mappings = await listRankingMappings({
+      isRanking: true,
       limit: 100000,
     });
 
@@ -822,6 +834,10 @@ export async function generateMetadataForAllRankingsAction(): Promise<{
       };
     }
 
+    console.log(
+      `[generateMetadataForAllRankingsAction] 処理対象: ${mappings.length}件`
+    );
+
     let generatedCount = 0;
     let errorCount = 0;
     const errors: Array<{
@@ -831,10 +847,34 @@ export async function generateMetadataForAllRankingsAction(): Promise<{
     }> = [];
 
     // 各マッピングに対してメタデータを生成
-    for (const mapping of mappings) {
+    for (let i = 0; i < mappings.length; i++) {
+      const mapping = mappings[i];
+      
+      // 進捗ログ（100件ごと、または最後の件）
+      if (i % 100 === 0 || i === mappings.length - 1) {
+        console.log(
+          `[generateMetadataForAllRankingsAction] 進捗: ${i + 1}/${mappings.length}件 (成功: ${generatedCount}件、失敗: ${errorCount}件)`
+        );
+      }
+
       try {
-        // メタデータを生成（R2から時間コードを取得）
-        const metadata = await MetadataGenerator.generateMetadata(mapping);
+        // タイムアウト設定（5秒）
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          setTimeout(() => reject(new Error("タイムアウト: 5秒を超過")), 5000);
+        });
+
+        // メタデータを生成（R2から時間コードを取得、statNameとtitleは空文字列）
+        // バッチ処理時はAPIを呼び出さないため、ソース名は空文字列になる
+        // 必要に応じて後で更新可能
+        const metadata = await Promise.race([
+          MetadataGenerator.generateMetadata(
+            mapping,
+            undefined,
+            "",
+            ""
+          ),
+          timeoutPromise,
+        ]);
 
         // メタデータを保存
         await EstatRankingR2Repository.saveRankingMetadata(
@@ -844,9 +884,6 @@ export async function generateMetadataForAllRankingsAction(): Promise<{
         );
 
         generatedCount++;
-        console.log(
-          `[generateMetadataForAllRankingsAction] メタデータ生成完了: ${mapping.area_type}/${mapping.item_code}`
-        );
       } catch (error) {
         errorCount++;
         const errorMessage =
@@ -860,6 +897,14 @@ export async function generateMetadataForAllRankingsAction(): Promise<{
           `[generateMetadataForAllRankingsAction] メタデータ生成エラー: ${mapping.area_type}/${mapping.item_code}`,
           error
         );
+        
+        // エラーが多すぎる場合は中断
+        if (errorCount > 100) {
+          console.error(
+            `[generateMetadataForAllRankingsAction] エラーが多すぎるため処理を中断します (エラー件数: ${errorCount})`
+          );
+          break;
+        }
       }
     }
 

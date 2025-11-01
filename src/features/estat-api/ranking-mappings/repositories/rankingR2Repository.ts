@@ -272,8 +272,6 @@ export class EstatRankingR2Repository {
       metadata: {
         "ranking-key": rankingKey,
         "area-type": areaType,
-        "saved-at": metadata.saved_at,
-        "data-source": "estat",
       },
     });
 

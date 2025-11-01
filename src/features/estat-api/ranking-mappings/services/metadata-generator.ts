@@ -111,15 +111,52 @@ export class MetadataGenerator {
   }
 
   /**
+   * ソース名を生成（statName > title形式）
+   *
+   * @param statName - 政府統計名
+   * @param title - 統計表題名
+   * @returns ソース名
+   */
+  static generateSourceName(
+    statName: string,
+    title: string
+  ): string {
+    if (!statName && !title) {
+      return "";
+    }
+    if (!statName) {
+      return title;
+    }
+    if (!title) {
+      return statName;
+    }
+    return `${statName} > ${title}`;
+  }
+
+  /**
+   * ソースURLを生成
+   *
+   * @param statsDataId - 統計表ID
+   * @returns e-StatへのURL
+   */
+  static generateSourceUrl(statsDataId: string): string {
+    return `https://www.e-stat.go.jp/dbview?sid=${statsDataId}`;
+  }
+
+  /**
    * ランキングマッピングからメタデータを生成
    *
    * @param mapping - ランキングマッピング
    * @param timeCodes - 時間コード配列（指定がない場合はR2から取得）
+   * @param statName - 政府統計名（オプション）
+   * @param title - 統計表題名（オプション）
    * @returns メタデータ
    */
   static async generateMetadata(
     mapping: EstatRankingMapping,
-    timeCodes?: string[]
+    timeCodes?: string[],
+    statName?: string,
+    title?: string
   ): Promise<RankingMetadata> {
     // 時間コードが指定されていない場合はR2から取得
     const actualTimeCodes =
@@ -129,16 +166,23 @@ export class MetadataGenerator {
     // 年度情報配列を生成
     const times = this.generateTimes(actualTimeCodes);
 
+    // ソース情報を生成
+    const sourceName = this.generateSourceName(
+      statName || "",
+      title || ""
+    );
+    const sourceUrl = this.generateSourceUrl(mapping.stats_data_id);
+
     return {
       itemCode: mapping.item_code,
-      item_name: mapping.item_name,
+      itemName: mapping.item_name,
       unit: mapping.unit,
-      stats_data_id: mapping.stats_data_id,
-      cat01: mapping.cat01,
-      area_type: mapping.area_type,
-      saved_at: new Date().toISOString(),
-      data_source: "estat",
+      areaType: mapping.area_type,
       times,
+      source: {
+        name: sourceName,
+        url: sourceUrl,
+      },
     };
   }
 
@@ -178,7 +222,7 @@ export class MetadataGenerator {
     return {
       ...existingMetadata,
       times: mergedTimes,
-      saved_at: new Date().toISOString(),
+      // sourceは既存のものを保持（呼び出し側で更新する）
     };
   }
 }

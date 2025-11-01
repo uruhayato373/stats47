@@ -117,6 +117,16 @@ export interface RankingMetadataTime {
 }
 
 /**
+ * ランキングメタデータJSONのソース情報
+ */
+export interface RankingMetadataSource {
+  /** ソース名（statName > title形式） */
+  name: string;
+  /** e-StatへのURL */
+  url: string;
+}
+
+/**
  * ランキングメタデータJSON
  * ranking/{areaType}/{rankingKey}/metadata.json の形式
  */
@@ -124,20 +134,14 @@ export interface RankingMetadata {
   /** 項目コード（item_code） */
   itemCode: string;
   /** 項目名 */
-  item_name: string;
+  itemName: string;
   /** 単位 */
   unit: string | null;
-  /** e-Stat統計表ID */
-  stats_data_id: string;
-  /** e-Stat分類コード */
-  cat01: string;
   /** 地域タイプ */
-  area_type: "prefecture" | "city" | "national";
-  /** 保存日時（ISO 8601） */
-  saved_at: string;
-  /** データソース（常に"estat"） */
-  data_source: "estat";
+  areaType: "prefecture" | "city" | "national";
   /** 年度情報配列 */
   times: RankingMetadataTime[];
+  /** ソース情報 */
+  source: RankingMetadataSource;
 }
 
