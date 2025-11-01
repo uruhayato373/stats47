@@ -4,10 +4,11 @@ import { DataTable } from "@/components/molecules/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
+  convertToStatsSchema,
   EstatStatsDataResponse,
   formatStatsData,
-  FormattedValue,
-} from "@/features/estat-api";
+} from "@/features/estat-api/stats-data";
+import type { StatsSchema } from "@/types/stats";
 
 interface EstatValuesTableProps {
   data: EstatStatsDataResponse;
@@ -19,42 +20,50 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   const formattedData = formatStatsData(data);
   const values = formattedData.values;
 
-  const columns: ColumnDef<FormattedValue>[] = [
+  // FormattedValueをStatsSchemaに変換（変換できない値は除外）
+  const statsSchemaData: StatsSchema[] = values
+    .map((value) => convertToStatsSchema(value))
+    .filter((schema): schema is StatsSchema => schema !== undefined);
+
+  const columns: ColumnDef<StatsSchema>[] = [
+    {
+      accessorKey: "areaCode",
+      header: "地域コード",
+      meta: { filterable: true, filterType: "text" },
+    },
+    {
+      accessorKey: "areaName",
+      header: "地域名",
+      meta: { filterable: true, filterType: "select" },
+    },
+    {
+      accessorKey: "timeCode",
+      header: "時間コード",
+      meta: { filterable: true, filterType: "text" },
+    },
+    {
+      accessorKey: "timeName",
+      header: "時間名",
+      meta: { filterable: true, filterType: "select" },
+    },
+    {
+      accessorKey: "categoryCode",
+      header: "カテゴリコード",
+      meta: { filterable: true, filterType: "text" },
+    },
+    {
+      accessorKey: "categoryName",
+      header: "カテゴリ名",
+      meta: { filterable: true, filterType: "select" },
+    },
     {
       accessorKey: "value",
-      header: "value",
-      meta: { filterable: true, filterType: "text" },
-    },
-    {
-      accessorKey: "numericValue",
-      header: "numericValue",
-      meta: { filterable: true, filterType: "text" },
-    },
-    {
-      accessorKey: "displayValue",
-      header: "displayValue",
+      header: "値",
       meta: { filterable: true, filterType: "text" },
     },
     {
       accessorKey: "unit",
-      header: "unit",
-      meta: { filterable: true, filterType: "select" },
-    },
-    {
-      accessorKey: "areaCode",
-      header: "areaCode",
-      meta: { filterable: true, filterType: "select" },
-    },
-    {
-      accessorKey: "areaName",
-      header: "areaName",
-      cell: ({ row }) => row.original.areaName || "-",
-      meta: { filterable: true, filterType: "select" },
-    },
-    {
-      accessorKey: "timeName",
-      header: "timeName",
-      cell: ({ row }) => row.original.timeName || "-",
+      header: "単位",
       meta: { filterable: true, filterType: "select" },
     },
   ];
@@ -62,7 +71,7 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   return (
     <DataTable
       columns={columns}
-      data={values}
+      data={statsSchemaData}
       emptyMessage="表形式で表示できるデータがありません"
       showIndex
     />

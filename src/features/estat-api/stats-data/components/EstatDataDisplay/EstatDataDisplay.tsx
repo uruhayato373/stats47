@@ -16,11 +16,10 @@ import {
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
 import { EstatStatsDataFetcher } from "../EstatStatsDataFetcher";
-import EstatCategoriesTable from "./components/EstatCategoriesTable";
+
 import EstatOverview from "./components/EstatOverview";
 import EstatRawData from "./components/EstatRawData";
 import EstatValuesTable from "./components/EstatValuesTable";
-import EstatYearsTable from "./components/EstatYearsTable";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
@@ -33,9 +32,9 @@ export default function EstatDataDisplay({
   loading,
   error,
 }: EstatDataDisplayProps) {
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "categories" | "years" | "values" | "raw"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "values" | "raw">(
+    "overview"
+  );
 
   // デバッグログ: コンポーネントの状態を確認
   console.log("[EstatDataDisplay] コンポーネント状態:", {
@@ -112,14 +111,6 @@ export default function EstatDataDisplay({
               <Info className="h-4 w-4" />
               概要
             </TabsTrigger>
-            <TabsTrigger value="categories" className="gap-2">
-              <BarChart3 className="h-4 w-4" />
-              カテゴリ
-            </TabsTrigger>
-            <TabsTrigger value="years" className="gap-2">
-              <BarChart3 className="h-4 w-4" />
-              年度
-            </TabsTrigger>
             <TabsTrigger value="values" className="gap-2">
               <BarChart3 className="h-4 w-4" />値
             </TabsTrigger>
@@ -131,19 +122,25 @@ export default function EstatDataDisplay({
 
           {/* タブコンテンツ */}
           <TabsContent value="overview" className="p-4">
-            {data ? <EstatOverview data={data} /> : <div>データがありません</div>}
-          </TabsContent>
-          <TabsContent value="categories" className="p-4">
-            {data ? <EstatCategoriesTable data={data} /> : <div>データがありません</div>}
-          </TabsContent>
-          <TabsContent value="years" className="p-4">
-            {data ? <EstatYearsTable data={data} /> : <div>データがありません</div>}
+            {data ? (
+              <EstatOverview data={data} />
+            ) : (
+              <div>データがありません</div>
+            )}
           </TabsContent>
           <TabsContent value="values" className="p-4">
-            {data ? <EstatValuesTable data={data} /> : <div>データがありません</div>}
+            {data ? (
+              <EstatValuesTable data={data} />
+            ) : (
+              <div>データがありません</div>
+            )}
           </TabsContent>
           <TabsContent value="raw" className="p-4">
-            {data ? <EstatRawData data={data} /> : <div>データがありません</div>}
+            {data ? (
+              <EstatRawData data={data} />
+            ) : (
+              <div>データがありません</div>
+            )}
           </TabsContent>
         </Tabs>
       </div>

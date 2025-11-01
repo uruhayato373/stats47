@@ -49,6 +49,7 @@ export default function RootLayout({
       lang="ja"
       className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable}`}
       suppressHydrationWarning
+      style={{ colorScheme: "light" }}
     >
       <body
         className={`${inter.className} bg-gray-100 dark:bg-neutral-900 antialiased`}
