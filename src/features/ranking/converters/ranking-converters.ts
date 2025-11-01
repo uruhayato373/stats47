@@ -20,6 +20,7 @@ import {
 export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
   return {
     rankingKey: dbItem.ranking_key,
+    areaType: (dbItem.area_type as "prefecture" | "city" | "national") || "prefecture",
     label: dbItem.label,
     name: dbItem.name,
     description: dbItem.description,

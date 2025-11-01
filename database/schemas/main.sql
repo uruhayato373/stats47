@@ -142,7 +142,8 @@ INSERT OR IGNORE INTO data_sources (id, name, description, base_url, api_version
 
 -- ranking_items: ランキング項目設定テーブル
 CREATE TABLE IF NOT EXISTS ranking_items (
-  ranking_key TEXT PRIMARY KEY,
+  ranking_key TEXT NOT NULL,
+  area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
   label TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT,
@@ -159,6 +160,8 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   is_active BOOLEAN DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ranking_key, area_type),
+  CHECK (area_type IN ('prefecture', 'city', 'national')),
   FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
   FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key)
 );
@@ -178,7 +181,7 @@ CREATE TABLE IF NOT EXISTS estat_api_metadata (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   UNIQUE(ranking_key, area_type),
-  FOREIGN KEY (ranking_key) REFERENCES ranking_items(ranking_key) ON DELETE CASCADE,
+  FOREIGN KEY (ranking_key, area_type) REFERENCES ranking_items(ranking_key, area_type) ON DELETE CASCADE,
   CHECK (area_type IN ('prefecture', 'city', 'national')),
   CHECK (calculation_type IN ('direct', 'ratio', 'aggregate'))
 );
@@ -280,9 +283,10 @@ CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_area_type ON estat_ranking
 
 -- ランキング関連インデックス
 CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_source_id);
--- ranking_key は PRIMARY KEY なので追加インデックス不要
+-- (ranking_key, area_type) は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
+CREATE INDEX IF NOT EXISTS idx_ranking_items_area_type ON ranking_items(area_type);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_ranking ON estat_api_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_area ON estat_api_metadata(area_type);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）

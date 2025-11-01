@@ -87,7 +87,7 @@ export const QUERIES = {
       conversion_factor = ?,
       decimal_places = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ?
+    WHERE ranking_key = ? AND area_type = ?
   `,
 
   /**
@@ -98,7 +98,7 @@ export const QUERIES = {
     SET 
       is_active = 0,
       updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ?
+    WHERE ranking_key = ? AND area_type = ?
   `,
 
   /**
@@ -109,7 +109,7 @@ export const QUERIES = {
     SET 
       display_order_in_group = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ?
+    WHERE ranking_key = ? AND area_type = ?
   `,
 
   /**
@@ -122,7 +122,7 @@ export const QUERIES = {
       display_order_in_group = ?,
       is_featured = ?,
       updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ?
+    WHERE ranking_key = ? AND area_type = ?
   `,
 
   /**

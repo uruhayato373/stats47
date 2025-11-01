@@ -112,12 +112,9 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
     }
   fi
   
-  if [ -f "database/seeds/ranking_items_seed.sql" ]; then
-    log_info "Applying ranking_items seed..."
-    wrangler d1 execute stats47 --local --file=database/seeds/ranking_items_seed.sql || {
-      log_warn "Failed to apply ranking_items seed"
-    }
-  fi
+  # ranking_items_seed.sql は削除されました
+  # ranking_itemsテーブルはR2→D1同期機能で自動生成・更新されます
+  # 管理画面の「R2→D1同期（ranking_items自動生成）」から実行してください
   
   # ダッシュボード関連シード
   if [ -f "database/seeds/widget_templates_seed.sql" ]; then

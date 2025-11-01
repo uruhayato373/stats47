@@ -192,16 +192,75 @@ export class RankingRepository {
   }
 
   /**
-   * 単一のランキング項目を取得（キー）
+   * 単一のランキング項目を取得（キーと地域タイプ）
    * メタデータも同時に取得する
    */
-  async getRankingItemByKey(rankingKey: string): Promise<RankingItem | null> {
+  async getRankingItemByKeyAndAreaType(
+    rankingKey: string,
+    areaType: "prefecture" | "city" | "national"
+  ): Promise<RankingItem | null> {
     try {
       // ランキング項目を取得
       const itemResult = await this.db
         .prepare(
           `SELECT * FROM ranking_items 
-          WHERE ranking_key = ? AND is_active = 1`
+          WHERE ranking_key = ? AND area_type = ? AND is_active = 1`
+        )
+        .bind(rankingKey, areaType)
+        .first();
+
+      if (!itemResult) {
+        return null;
+      }
+
+      const item = convertRankingItemFromDB(
+        itemResult as unknown as RankingItemDB
+      );
+
+      // メタデータを取得（estat-api専用）
+      const metadataResults = await this.db
+        .prepare(
+          `SELECT * FROM estat_api_metadata WHERE ranking_key = ? AND area_type = ?`
+        )
+        .bind(rankingKey, areaType)
+        .all();
+
+      if (metadataResults.results && metadataResults.results.length > 0) {
+        item.metadataItems = (
+          metadataResults.results as unknown as DataSourceMetadataDB[]
+        ).map((meta) => ({
+          areaType: meta.area_type,
+          calculationType: meta.calculation_type,
+          metadata: JSON.parse(meta.metadata),
+        }));
+      }
+
+      return item;
+    } catch (error) {
+      console.error("Failed to get ranking item by key and area type:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * 単一のランキング項目を取得（キーのみ、互換性のため）
+   * @deprecated getRankingItemByKeyAndAreaTypeを使用してください
+   * 注意: 複合主キーになったため、ranking_keyのみでは複数の結果が返る可能性があります
+   */
+  async getRankingItemByKey(rankingKey: string): Promise<RankingItem | null> {
+    try {
+      // 最初の一致するアイテムを取得（prefectureを優先）
+      const itemResult = await this.db
+        .prepare(
+          `SELECT * FROM ranking_items 
+          WHERE ranking_key = ? AND is_active = 1
+          ORDER BY 
+            CASE area_type 
+              WHEN 'prefecture' THEN 1
+              WHEN 'city' THEN 2
+              WHEN 'national' THEN 3
+            END
+          LIMIT 1`
         )
         .bind(rankingKey)
         .first();
@@ -242,6 +301,7 @@ export class RankingRepository {
    */
   async updateRankingItem(
     rankingKey: string,
+    areaType: "prefecture" | "city" | "national",
     updates: {
       label?: string;
       name?: string;
@@ -269,7 +329,8 @@ export class RankingRepository {
           updates.rankingDirection || null,
           updates.conversionFactor || null,
           updates.decimalPlaces || null,
-          rankingKey
+          rankingKey,
+          areaType
         )
         .run();
 
@@ -283,11 +344,14 @@ export class RankingRepository {
   /**
    * ランキング項目を削除（論理削除）
    */
-  async deleteRankingItem(rankingKey: string): Promise<boolean> {
+  async deleteRankingItem(
+    rankingKey: string,
+    areaType: "prefecture" | "city" | "national"
+  ): Promise<boolean> {
     try {
       const result = await this.db
         .prepare(QUERIES.deleteRankingItem)
-        .bind(rankingKey)
+        .bind(rankingKey, areaType)
         .run();
 
       return result.success;
@@ -302,12 +366,13 @@ export class RankingRepository {
    */
   async updateRankingItemOrder(
     rankingKey: string,
+    areaType: "prefecture" | "city" | "national",
     displayOrderInGroup: number
   ): Promise<boolean> {
     try {
       const result = await this.db
         .prepare(QUERIES.updateRankingItemOrder)
-        .bind(displayOrderInGroup, rankingKey)
+        .bind(displayOrderInGroup, rankingKey, areaType)
         .run();
 
       return result.success;
@@ -726,12 +791,13 @@ export class RankingRepository {
    */
   async updateItemDisplayOrderInGroup(
     rankingKey: string,
+    areaType: "prefecture" | "city" | "national",
     newOrder: number
   ): Promise<void> {
     try {
       await this.db
         .prepare(QUERIES.updateRankingItemOrder)
-        .bind(newOrder, rankingKey)
+        .bind(newOrder, rankingKey, areaType)
         .run();
     } catch (error) {
       console.error("Failed to update item display order in group:", error);

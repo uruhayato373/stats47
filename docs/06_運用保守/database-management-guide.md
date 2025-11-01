@@ -52,8 +52,10 @@ database/
 │
 ├── seeds/                          # シードデータ
 │   ├── users_seed.sql              # ユーザーサンプルデータ
-│   ├── ranking_items_seed.sql      # ランキングアイテムデータ
+│   ├── estat_ranking_mappings_seed.sql  # e-Stat ランキングマッピングデータ
+│   ├── ranking_groups_seed.sql     # ランキンググループデータ
 │   ├── dashboard_configs_seed.sql  # ダッシュボード設定データ
+│   └── ...
 │   ├── dashboard_widgets_seed.sql  # ダッシュボードウィジェットデータ
 │   └── widget_templates_seed.sql   # ウィジェットテンプレートデータ
 │
@@ -461,10 +463,9 @@ VALUES
 プレゼンテーションやデモ用のリアルなデータ：
 
 ```sql
--- ranking_items_seed.sql（ランキングデモデータ）
-INSERT INTO ranking_items (ranking_key, title, category_id, ...) VALUES
-  ('population_2023', '2023年人口ランキング', 1, ...),
-  ('gdp_per_capita_2023', '2023年一人当たりGDP', 2, ...);
+-- ranking_itemsテーブルはR2→D1同期機能で自動生成されます
+-- 管理画面の「R2→D1同期（ranking_items自動生成）」から実行してください
+-- 詳細: docs/01_技術設計/03_ドメイン設計/17_eStat-API-ランキング管理.md
 ```
 
 ### このプロジェクトのシードファイル
@@ -472,11 +473,15 @@ INSERT INTO ranking_items (ranking_key, title, category_id, ...) VALUES
 ```
 database/seeds/
 ├── users_seed.sql                # 開発用ユーザー（admin, testuser）
-├── ranking_items_seed.sql        # ランキングアイテムのサンプル
+├── estat_metainfo_seed.sql       # e-Stat メタ情報
+├── estat_ranking_mappings_seed.sql  # e-Stat ランキングマッピング
+├── ranking_groups_seed.sql       # ランキンググループ
 ├── dashboard_configs_seed.sql    # ダッシュボード設定のサンプル
 ├── dashboard_widgets_seed.sql    # ダッシュボードウィジェットのサンプル
 └── widget_templates_seed.sql     # ウィジェットテンプレート
 ```
+
+**注意**: `ranking_items_seed.sql`は削除されました。`ranking_items`テーブルはR2→D1同期機能で自動生成・更新されます。
 
 ### シードデータの投入方法
 
@@ -488,10 +493,8 @@ npx wrangler d1 execute stats47 \
   --local \
   --file=./database/seeds/users_seed.sql
 
-# ランキングアイテムシードを投入
-npx wrangler d1 execute stats47 \
-  --local \
-  --file=./database/seeds/ranking_items_seed.sql
+# ランキングアイテムはR2→D1同期機能で自動生成されます
+# 管理画面の「R2→D1同期（ranking_items自動生成）」から実行してください
 ```
 
 #### 方法2: 一括投入スクリプト
@@ -527,7 +530,7 @@ npx wrangler d1 migrations apply stats47 --local
 # シードデータ投入（開発環境のみ）
 if [ "$NODE_ENV" != "production" ]; then
   npx wrangler d1 execute stats47 --local --file=./database/seeds/users_seed.sql
-  npx wrangler d1 execute stats47 --local --file=./database/seeds/ranking_items_seed.sql
+  # ranking_itemsはR2→D1同期機能で自動生成されます
 fi
 ```
 

@@ -181,8 +181,10 @@ export class R2SyncService {
       for (const item of items) {
         try {
           const existing = await db
-            .prepare("SELECT ranking_key, unit, data_source_id FROM ranking_items WHERE ranking_key = ?")
-            .bind(item.rankingKey)
+            .prepare(
+              "SELECT ranking_key, area_type, unit, data_source_id FROM ranking_items WHERE ranking_key = ? AND area_type = ?"
+            )
+            .bind(item.rankingKey, item.areaType)
             .first();
 
           if (existing) {
@@ -220,10 +222,10 @@ export class R2SyncService {
         // 既存データを確認（UPDATEでは既存データを保持するため、必要最小限の情報のみ取得）
         const existing = await db
           .prepare(
-            `SELECT ranking_key, unit, data_source_id
-             FROM ranking_items WHERE ranking_key = ?`
+            `SELECT ranking_key, area_type, unit, data_source_id
+             FROM ranking_items WHERE ranking_key = ? AND area_type = ?`
           )
-          .bind(item.rankingKey)
+          .bind(item.rankingKey, item.areaType)
           .first();
 
         if (existing) {
@@ -235,20 +237,20 @@ export class R2SyncService {
                SET unit = ?, 
                    data_source_id = ?, 
                    updated_at = CURRENT_TIMESTAMP
-               WHERE ranking_key = ?`
+               WHERE ranking_key = ? AND area_type = ?`
             )
-            .bind(item.unit, item.dataSourceId, item.rankingKey)
+            .bind(item.unit, item.dataSourceId, item.rankingKey, item.areaType)
             .run();
 
           if (result.success && result.meta && result.meta.changes > 0) {
             stats.updated++;
             console.log(
-              `[R2SyncService] 更新完了: ${item.rankingKey} (unit: ${existing.unit} → ${item.unit}, data_source_id: ${existing.data_source_id} → ${item.dataSourceId})`
+              `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (unit: ${existing.unit} → ${item.unit}, data_source_id: ${existing.data_source_id} → ${item.dataSourceId})`
             );
           } else if (result.success && result.meta && result.meta.changes === 0) {
             // 更新対象がなかった場合（値が同じなど）
             console.log(
-              `[R2SyncService] 更新スキップ: ${item.rankingKey} (値に変更なし)`
+              `[R2SyncService] 更新スキップ: ${item.rankingKey}:${item.areaType} (値に変更なし)`
             );
             stats.skipped++;
           } else {
@@ -270,14 +272,15 @@ export class R2SyncService {
           const result = await db
             .prepare(
               `INSERT INTO ranking_items 
-               (ranking_key, label, name, description, unit, data_source_id,
+               (ranking_key, area_type, label, name, description, unit, data_source_id,
                 display_order_in_group, is_featured,
                 map_color_scheme, map_diverging_midpoint, ranking_direction,
                 conversion_factor, decimal_places, is_active, created_at, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
             )
             .bind(
               item.rankingKey,
+              item.areaType,
               label,
               name,
               null, // description
@@ -296,7 +299,7 @@ export class R2SyncService {
           if (result.success) {
             stats.created++;
             console.log(
-              `[R2SyncService] 作成完了: ${item.rankingKey} (unit: ${item.unit})`
+              `[R2SyncService] 作成完了: ${item.rankingKey}:${item.areaType} (unit: ${item.unit})`
             );
           } else {
             throw new Error("INSERT処理が失敗しました");
@@ -311,29 +314,45 @@ export class R2SyncService {
           errorMessage = error.message;
           errorDetails = error.stack;
           console.error(
-            `[R2SyncService] データベース反映エラー: ${item.rankingKey}`,
+            `[R2SyncService] データベース反映エラー: ${item.rankingKey}:${item.areaType}`,
             {
               message: error.message,
               stack: error.stack,
               name: error.name,
+              rankingKey: item.rankingKey,
+              areaType: item.areaType,
+              unit: item.unit,
+              dataSourceId: item.dataSourceId,
             }
           );
         } else if (typeof error === "object" && error !== null) {
           errorMessage = JSON.stringify(error);
           console.error(
-            `[R2SyncService] データベース反映エラー: ${item.rankingKey}`,
-            error
+            `[R2SyncService] データベース反映エラー: ${item.rankingKey}:${item.areaType}`,
+            {
+              error,
+              rankingKey: item.rankingKey,
+              areaType: item.areaType,
+              unit: item.unit,
+              dataSourceId: item.dataSourceId,
+            }
           );
         } else {
           errorMessage = String(error);
           console.error(
-            `[R2SyncService] データベース反映エラー: ${item.rankingKey}`,
-            error
+            `[R2SyncService] データベース反映エラー: ${item.rankingKey}:${item.areaType}`,
+            {
+              error,
+              rankingKey: item.rankingKey,
+              areaType: item.areaType,
+              unit: item.unit,
+              dataSourceId: item.dataSourceId,
+            }
           );
         }
 
         stats.errors.push({
-          rankingKey: item.rankingKey,
+          rankingKey: `${item.rankingKey}:${item.areaType}`,
           error: errorDetails ? `${errorMessage}\n${errorDetails}` : errorMessage,
         });
         stats.skipped++;
@@ -342,63 +361,83 @@ export class R2SyncService {
 
     // R2に存在しないranking_keyのレコードを削除（data_source_id='estat'のみ対象）
     try {
-      // R2から取得したranking_keyのセットを作成
-      const r2RankingKeys = new Set(items.map((item) => item.rankingKey));
+      // R2から取得したranking_keyとarea_typeの組み合わせのセットを作成
+      const r2RankingKeys = new Set(
+        items.map((item) => `${item.rankingKey}:${item.areaType}`)
+      );
 
-      // データベースからすべての'estat'ソースのranking_keyを取得
+      // データベースからすべての'estat'ソースのranking_keyとarea_typeを取得
       const allEstatKeys = await db
         .prepare(
-          `SELECT ranking_key FROM ranking_items WHERE data_source_id = 'estat'`
+          `SELECT ranking_key, area_type FROM ranking_items WHERE data_source_id = 'estat'`
         )
         .all();
 
-      const dbRankingKeys =
-        (allEstatKeys.results as Array<{ ranking_key: string }>).map(
-          (row) => row.ranking_key
-        ) || [];
+      const dbRankingItems =
+        (allEstatKeys.results as Array<{
+          ranking_key: string;
+          area_type: string;
+        }>).map((row) => ({
+          rankingKey: row.ranking_key,
+          areaType: row.area_type as "prefecture" | "city" | "national",
+        })) || [];
 
-      // R2に存在しないranking_keyを抽出
-      const orphanKeys = dbRankingKeys.filter(
-        (key) => !r2RankingKeys.has(key)
+      // R2に存在しないranking_keyとarea_typeの組み合わせを抽出
+      const orphanItems = dbRankingItems.filter(
+        (dbItem) =>
+          !r2RankingKeys.has(
+            `${dbItem.rankingKey}:${dbItem.areaType}`
+          ) &&
+          // R2から取得したアイテムに一致するものが存在しないか確認
+          !items.some(
+            (r2Item) =>
+              r2Item.rankingKey === dbItem.rankingKey &&
+              r2Item.areaType === dbItem.areaType
+          )
       );
 
-      if (orphanKeys.length > 0) {
+      if (orphanItems.length > 0) {
         console.log(
-          `[R2SyncService] R2に存在しないranking_keyを検出: ${orphanKeys.length}件`
+          `[R2SyncService] R2に存在しないranking_keyを検出: ${orphanItems.length}件`
         );
         console.log(
-          `[R2SyncService] 削除対象: ${orphanKeys.slice(0, 10).join(", ")}${orphanKeys.length > 10 ? "..." : ""}`
+          `[R2SyncService] 削除対象: ${orphanItems
+            .slice(0, 10)
+            .map((item) => `${item.rankingKey}:${item.areaType}`)
+            .join(", ")}${orphanItems.length > 10 ? "..." : ""}`
         );
 
         if (dryRun) {
           console.log(
-            `[R2SyncService] DRY-RUN: ${orphanKeys.length}件のranking_keyを削除予定`
+            `[R2SyncService] DRY-RUN: ${orphanItems.length}件のranking_keyを削除予定`
           );
-          stats.deleted = orphanKeys.length;
+          stats.deleted = orphanItems.length;
         } else {
-          // 各orphanキーを削除
-          for (const rankingKey of orphanKeys) {
+          // 各orphanアイテムを削除
+          for (const item of orphanItems) {
             try {
               const deleteResult = await db
-                .prepare(`DELETE FROM ranking_items WHERE ranking_key = ?`)
-                .bind(rankingKey)
+                .prepare(
+                  `DELETE FROM ranking_items WHERE ranking_key = ? AND area_type = ?`
+                )
+                .bind(item.rankingKey, item.areaType)
                 .run();
 
               if (deleteResult.success && deleteResult.meta?.changes > 0) {
                 stats.deleted++;
                 console.log(
-                  `[R2SyncService] 削除完了: ${rankingKey} (R2に存在しないため)`
+                  `[R2SyncService] 削除完了: ${item.rankingKey}:${item.areaType} (R2に存在しないため)`
                 );
               }
             } catch (error) {
               const errorMessage =
                 error instanceof Error ? error.message : String(error);
               console.error(
-                `[R2SyncService] 削除エラー: ${rankingKey}`,
+                `[R2SyncService] 削除エラー: ${item.rankingKey}:${item.areaType}`,
                 error
               );
               stats.errors.push({
-                rankingKey,
+                rankingKey: `${item.rankingKey}:${item.areaType}`,
                 error: `削除失敗: ${errorMessage}`,
               });
               stats.skipped++;

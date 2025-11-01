@@ -58,10 +58,17 @@ export interface RankingValue {
  */
 export interface RankingItem {
   /**
-   * ランキングキー（一意識別子）
+   * ランキングキー（一意識別子の一部）
    * estat_metainfoテーブルのranking_keyと関連付けられる
    */
   rankingKey: string;
+
+  /**
+   * 地域タイプ（一意識別子の一部）
+   * 'prefecture' | 'city' | 'national'
+   * ranking_keyとarea_typeの組み合わせが1意のキー
+   */
+  areaType: "prefecture" | "city" | "national";
 
   /**
    * 表示ラベル
@@ -263,10 +270,17 @@ export interface DataSourceMetadata {
  */
 export interface RankingItemDB {
   /**
-   * ランキングキー（一意識別子・主キー）
-   * データベースの主キーとして使用
+   * ランキングキー（一意識別子・複合主キーの一部）
+   * データベースの複合主キーとして使用
    */
   ranking_key: string;
+
+  /**
+   * 地域タイプ（一意識別子・複合主キーの一部）
+   * 'prefecture' | 'city' | 'national'
+   * ranking_keyとarea_typeの組み合わせが複合主キー
+   */
+  area_type: string;
 
   /**
    * 表示ラベル
