@@ -19,6 +19,7 @@ import {
   importCsvToDatabase,
   parseCsvContent,
 } from "../services/csv-importer";
+import { MetadataGenerator } from "../services/metadata-generator";
 import type { EstatRankingMapping } from "../types";
 
 /**
@@ -424,6 +425,48 @@ export async function convertToRankingAction(
       };
     }
 
+    // メタデータを生成して保存
+    try {
+      const savedTimeCodes = savedFiles.map((f) => f.timeCode);
+      
+      // 既存のメタデータを取得
+      const existingMetadata = await EstatRankingR2Repository.findRankingMetadata(
+        mapping.area_type,
+        mapping.item_code
+      );
+
+      let metadata;
+      if (existingMetadata) {
+        // 既存のメタデータを更新（新しい年度情報を追加）
+        metadata = MetadataGenerator.updateMetadataWithNewTimes(
+          existingMetadata,
+          savedTimeCodes
+        );
+      } else {
+        // 新規メタデータを生成
+        metadata = await MetadataGenerator.generateMetadata(
+          mapping,
+          savedTimeCodes
+        );
+      }
+
+      // メタデータを保存
+      await EstatRankingR2Repository.saveRankingMetadata(
+        mapping.area_type,
+        mapping.item_code,
+        metadata
+      );
+      console.log(
+        `[convertToRankingAction] メタデータを保存: ${mapping.item_code}`
+      );
+    } catch (error) {
+      // メタデータ保存エラーは警告のみ（データ保存は成功している）
+      console.warn(
+        `[convertToRankingAction] メタデータ保存エラー: ${mapping.item_code}`,
+        error
+      );
+    }
+
     const totalCount = savedFiles.reduce(
       (sum, file) => sum + (file.size || 0),
       0
@@ -742,6 +785,109 @@ export async function listRankingMappingsAction(options?: {
   } catch (error) {
     console.error("[listRankingMappingsAction] 取得エラー:", error);
     return [];
+  }
+}
+
+/**
+ * 既存データに対してメタデータファイルを一括生成
+ *
+ * R2に保存されているすべてのランキングデータに対して、
+ * metadata.jsonファイルを生成または更新します。
+ *
+ * @returns 生成結果
+ */
+export async function generateMetadataForAllRankingsAction(): Promise<{
+  success: boolean;
+  message: string;
+  generatedCount: number;
+  errorCount: number;
+  errors?: Array<{ rankingKey: string; areaType: string; error: string }>;
+}> {
+  try {
+    console.log(
+      "[generateMetadataForAllRankingsAction] メタデータ一括生成開始"
+    );
+
+    // すべてのランキングマッピングを取得
+    const mappings = await listRankingMappings({
+      limit: 100000,
+    });
+
+    if (mappings.length === 0) {
+      return {
+        success: false,
+        message: "ランキングマッピングがありません",
+        generatedCount: 0,
+        errorCount: 0,
+      };
+    }
+
+    let generatedCount = 0;
+    let errorCount = 0;
+    const errors: Array<{
+      rankingKey: string;
+      areaType: string;
+      error: string;
+    }> = [];
+
+    // 各マッピングに対してメタデータを生成
+    for (const mapping of mappings) {
+      try {
+        // メタデータを生成（R2から時間コードを取得）
+        const metadata = await MetadataGenerator.generateMetadata(mapping);
+
+        // メタデータを保存
+        await EstatRankingR2Repository.saveRankingMetadata(
+          mapping.area_type,
+          mapping.item_code,
+          metadata
+        );
+
+        generatedCount++;
+        console.log(
+          `[generateMetadataForAllRankingsAction] メタデータ生成完了: ${mapping.area_type}/${mapping.item_code}`
+        );
+      } catch (error) {
+        errorCount++;
+        const errorMessage =
+          error instanceof Error ? error.message : "不明なエラー";
+        errors.push({
+          rankingKey: mapping.item_code,
+          areaType: mapping.area_type,
+          error: errorMessage,
+        });
+        console.error(
+          `[generateMetadataForAllRankingsAction] メタデータ生成エラー: ${mapping.area_type}/${mapping.item_code}`,
+          error
+        );
+      }
+    }
+
+    const message = `メタデータ生成完了: 成功${generatedCount}件、失敗${errorCount}件`;
+
+    console.log(`[generateMetadataForAllRankingsAction] ${message}`);
+
+    return {
+      success: errorCount === 0,
+      message,
+      generatedCount,
+      errorCount,
+      errors: errorCount > 0 ? errors : undefined,
+    };
+  } catch (error) {
+    console.error(
+      "[generateMetadataForAllRankingsAction] メタデータ一括生成エラー:",
+      error
+    );
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "メタデータ一括生成に失敗しました",
+      generatedCount: 0,
+      errorCount: 0,
+    };
   }
 }
 

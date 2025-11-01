@@ -9,7 +9,7 @@ import "server-only";
 import { R2S3Client, getR2S3Config } from "@/infrastructure/storage/s3-client";
 import type { StatsSchema } from "@/types/stats";
 
-import type { RankingExportPayload } from "../types";
+import type { RankingExportPayload, RankingMetadata } from "../types";
 
 /**
  * ランキングR2保存リポジトリ
@@ -243,6 +243,78 @@ export class EstatRankingR2Repository {
         error
       );
       return { deletedCount: 0, deletedKeys: [] };
+    }
+  }
+
+  /**
+   * ランキングメタデータをR2に保存
+   *
+   * @param areaType - 地域タイプ
+   * @param rankingKey - ランキングキー
+   * @param metadata - メタデータ
+   * @returns 保存されたキーとサイズ
+   */
+  static async saveRankingMetadata(
+    areaType: "prefecture" | "city" | "national",
+    rankingKey: string,
+    metadata: RankingMetadata
+  ): Promise<{ key: string; size: number }> {
+    // キー生成: ranking/{areaType}/{rankingKey}/metadata.json
+    const key = `ranking/${areaType}/${rankingKey}/metadata.json`;
+
+    // メタデータをJSON形式で保存
+    const jsonString = JSON.stringify(metadata, null, 2);
+    const jsonBuffer = Buffer.from(jsonString, "utf-8");
+    const client = this.getClient();
+
+    await client.putObject(key, jsonBuffer, {
+      contentType: "application/json",
+      metadata: {
+        "ranking-key": rankingKey,
+        "area-type": areaType,
+        "saved-at": metadata.saved_at,
+        "data-source": "estat",
+      },
+    });
+
+    console.log(`[EstatRankingR2Repository] ランキングメタデータを保存: ${key}`);
+
+    return { key, size: jsonBuffer.length };
+  }
+
+  /**
+   * R2からランキングメタデータを取得
+   *
+   * @param areaType - 地域タイプ
+   * @param rankingKey - ランキングキー
+   * @returns メタデータ、またはnull（見つからない場合）
+   */
+  static async findRankingMetadata(
+    areaType: "prefecture" | "city" | "national",
+    rankingKey: string
+  ): Promise<RankingMetadata | null> {
+    try {
+      const key = `ranking/${areaType}/${rankingKey}/metadata.json`;
+      const client = this.getClient();
+      const buffer = await client.getObject(key);
+
+      if (!buffer) {
+        return null;
+      }
+
+      const metadata: RankingMetadata = JSON.parse(buffer.toString("utf-8"));
+
+      console.log(
+        `[EstatRankingR2Repository] ランキングメタデータを取得: ${key}`
+      );
+
+      return metadata;
+    } catch (error) {
+      console.warn(
+        `[EstatRankingR2Repository] ランキングメタデータ取得失敗:`,
+        error
+      );
+      return null;
     }
   }
 }

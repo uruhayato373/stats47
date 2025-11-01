@@ -53,7 +53,7 @@ function IsRankingSwitchCell({
       } else {
         toast.error(result.message);
       }
-    } catch (error) {
+    } catch {
       toast.error("更新に失敗しました");
     } finally {
       setIsUpdating(false);
@@ -101,7 +101,7 @@ function ConvertButtonCell({
       } else {
         toast.error(result.message);
       }
-    } catch (error) {
+    } catch {
       toast.error("ランキング変換に失敗しました");
     } finally {
       setIsConverting(false);

@@ -213,6 +213,8 @@ export interface StatsSchema {
 
 ## R2 保存仕様
 
+### ランキングデータファイル
+
 - キー設計: `ranking/{areaType}/{rankingKey}/{timeCode}.json`
   - 例: `ranking/prefecture/total-population/2020000000.json`
 - 保存方針:
@@ -220,6 +222,67 @@ export interface StatsSchema {
   - 保存形式: `StatsSchema[]`配列（順位・パーセンタイルは含めない）
   - `convertToStatsSchema`を使用して各値を`StatsSchema`形式に変換
   - 各要素には`areaCode`, `areaName`, `timeCode`, `timeName`, `categoryCode`, `categoryName`, `value`, `unit`が含まれる
+
+### メタデータファイル
+
+ランキングデータ保存時に、メタ情報を`metadata.json`ファイルとして同時に保存します。
+
+- **キー設計**: `ranking/{areaType}/{rankingKey}/metadata.json`
+  - 例: `ranking/prefecture/total-population/metadata.json`
+- **保存方針**:
+  - ランキングキーごとに1ファイル（年度ごとではない）
+  - ランキングデータ保存時に自動更新
+  - 既存のメタデータがある場合は、年度情報のみ追加・更新
+
+#### メタデータJSON構造
+
+```json
+{
+  "itemCode": "total-population",
+  "item_name": "総人口",
+  "unit": "人",
+  "stats_data_id": "0000010201",
+  "cat01": "#A1101",
+  "area_type": "prefecture",
+  "saved_at": "2025-02-02T10:30:00.000Z",
+  "data_source": "estat",
+  "times": [
+    {
+      "timeCode": "2020",
+      "timeName": "2020年度"
+    },
+    {
+      "timeCode": "2021",
+      "timeName": "2021年度"
+    }
+  ]
+}
+```
+
+**フィールド説明**:
+
+- `itemCode`: 項目コード（`estat_ranking_mappings.item_code`）
+- `item_name`: 項目名（`estat_ranking_mappings.item_name`）
+- `unit`: 単位（`estat_ranking_mappings.unit`）
+- `stats_data_id`: e-Stat統計表ID（`estat_ranking_mappings.stats_data_id`）
+- `cat01`: e-Stat分類コード（`estat_ranking_mappings.cat01`）
+- `area_type`: 地域タイプ（`prefecture` | `city` | `national`）
+- `saved_at`: 保存日時（ISO 8601形式）
+- `data_source`: データソース（常に`"estat"`）
+- `times`: 年度情報配列
+  - `timeCode`: 年度コード（4桁、例: `"2020"`）- 時間コード（10桁）から最初の4桁を抽出
+  - `timeName`: 年度名（例: `"2020年度"`）
+
+**年度情報の更新ロジック**:
+
+- 既存のメタデータがある場合、新しい時間コードを追加して既存の年度情報と統合
+- 重複する年度コードは除去され、ソート済みの状態で保存
+- R2に保存されているすべての時間コード（`{timeCode}.json`）から年度情報を抽出
+
+**既存データへの対応**:
+
+- 管理画面の「メタデータ一括生成」ボタンから、既存のランキングデータに対してメタデータファイルを一括生成可能
+- `generateMetadataForAllRankingsAction`を使用して、`estat_ranking_mappings`テーブルのすべてのレコードに対してメタデータを生成
 
 — 互換（旧構造）—
 

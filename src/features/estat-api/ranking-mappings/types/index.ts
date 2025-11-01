@@ -106,3 +106,38 @@ export interface CsvRow {
   area_type?: string;
 }
 
+/**
+ * ランキングメタデータJSONの年度情報
+ */
+export interface RankingMetadataTime {
+  /** 年度コード（4桁、例: "2020"） */
+  timeCode: string;
+  /** 年度名（例: "2020年度"） */
+  timeName: string;
+}
+
+/**
+ * ランキングメタデータJSON
+ * ranking/{areaType}/{rankingKey}/metadata.json の形式
+ */
+export interface RankingMetadata {
+  /** 項目コード（item_code） */
+  itemCode: string;
+  /** 項目名 */
+  item_name: string;
+  /** 単位 */
+  unit: string | null;
+  /** e-Stat統計表ID */
+  stats_data_id: string;
+  /** e-Stat分類コード */
+  cat01: string;
+  /** 地域タイプ */
+  area_type: "prefecture" | "city" | "national";
+  /** 保存日時（ISO 8601） */
+  saved_at: string;
+  /** データソース（常に"estat"） */
+  data_source: "estat";
+  /** 年度情報配列 */
+  times: RankingMetadataTime[];
+}
+
