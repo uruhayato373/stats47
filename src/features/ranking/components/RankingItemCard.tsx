@@ -54,8 +54,6 @@ export function RankingItemCard({
           <span className="capitalize">
             {item.rankingDirection === "desc" ? "降順" : "昇順"}
           </span>
-          <span>•</span>
-          <span>{item.dataSourceId}</span>
         </div>
       </div>
     </Link>

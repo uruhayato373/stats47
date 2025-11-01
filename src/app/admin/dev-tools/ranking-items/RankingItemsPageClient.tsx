@@ -23,9 +23,12 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { syncR2ToDatabaseAction } from "@/features/estat-api/ranking-mappings/actions";
-import type { SyncResult } from "@/features/estat-api/ranking-mappings/services/r2-sync-service";
+import {
+  getAllRankingItems,
+  syncR2ToDatabaseAction,
+} from "@/features/ranking/actions";
 import { RankingItemsTable } from "@/features/ranking/components/admin/RankingItemsTable";
+import type { SyncResult } from "@/features/ranking/services/r2-sync-service";
 import type { RankingItem } from "@/features/ranking/types";
 
 interface RankingItemsPageClientProps {
@@ -35,12 +38,24 @@ interface RankingItemsPageClientProps {
 export default function RankingItemsPageClient({
   initialItems,
 }: RankingItemsPageClientProps) {
-  const [items] = useState<RankingItem[]>(initialItems);
+  const [items, setItems] = useState<RankingItem[]>(initialItems);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncAreaType, setSyncAreaType] = useState<
     "prefecture" | "city" | "national" | "all"
   >("all");
   const [syncDryRun, setSyncDryRun] = useState(false);
+
+  /**
+   * ランキング項目一覧を更新
+   */
+  const handleRefreshItems = async () => {
+    try {
+      const refreshedItems = await getAllRankingItems();
+      setItems(refreshedItems);
+    } catch (error) {
+      console.error("ランキング項目の取得に失敗しました", error);
+    }
+  };
 
   /**
    * R2→D1同期実行
@@ -204,7 +219,7 @@ export default function RankingItemsPageClient({
       </Card>
 
       {/* テーブル */}
-      <RankingItemsTable items={items} />
+      <RankingItemsTable items={items} onRefresh={handleRefreshItems} />
     </div>
   );
 }

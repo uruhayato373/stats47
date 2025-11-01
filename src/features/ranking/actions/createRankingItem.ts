@@ -4,11 +4,11 @@ import type { RankingItem } from "../types";
 
 export interface CreateRankingItemInput {
   rankingKey: string;
+  areaType: "prefecture" | "city" | "national";
   label: string;
   name: string;
   description?: string;
   unit: string;
-  dataSourceId: string;
   mapColorScheme: string;
   mapDivergingMidpoint: string;
   rankingDirection: "asc" | "desc";

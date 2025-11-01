@@ -19,10 +19,7 @@ import {
   importCsvToDatabase,
   parseCsvContent,
 } from "../services/csv-importer";
-import { R2SyncService } from "../services/r2-sync-service";
-
 import type { EstatRankingMapping } from "../types";
-import type { SyncResult } from "../services/r2-sync-service";
 
 /**
  * CSVファイルをインポート（ファイルパス版）
@@ -730,49 +727,9 @@ export async function listRankingMappingsAction(options?: {
 }
 
 /**
- * R2→D1同期実行（ranking_itemsテーブル自動生成）
+ * @deprecated syncR2ToDatabaseAction は ranking ドメインに移動しました
+ * 使用する場合は @/features/ranking/actions からインポートしてください
  *
- * R2ストレージのrankingディレクトリを走査し、ranking_itemsテーブルを自動生成・更新します。
- *
- * @param areaType - 地域タイプ（指定がない場合は全地域タイプを走査）
- * @param dryRun - 実際の更新を行わず、変更内容をプレビューする
- * @returns 同期結果
+ * 旧コードは削除され、ranking/actions/syncR2ToDatabase.ts に移動しました
  */
-export async function syncR2ToDatabaseAction(
-  areaType?: "prefecture" | "city" | "national",
-  dryRun: boolean = false
-): Promise<SyncResult> {
-  try {
-    console.log(
-      `[syncR2ToDatabaseAction] 同期実行開始: areaType=${areaType || "all"}, dryRun=${dryRun}`
-    );
-
-    const result = await R2SyncService.syncR2ToDatabase(areaType, dryRun);
-
-    console.log(`[syncR2ToDatabaseAction] 同期実行完了: ${result.message}`);
-    return result;
-  } catch (error) {
-    console.error("[syncR2ToDatabaseAction] 同期実行エラー:", error);
-    return {
-      success: false,
-      message:
-        error instanceof Error
-          ? error.message
-          : "R2→D1同期実行に失敗しました",
-      stats: {
-        scanned: 0,
-        created: 0,
-        updated: 0,
-        skipped: 0,
-        errors: [
-          {
-            rankingKey: "unknown",
-            error:
-              error instanceof Error ? error.message : String(error),
-          },
-        ],
-      },
-    };
-  }
-}
 

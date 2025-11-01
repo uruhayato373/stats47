@@ -6,9 +6,9 @@ import "server-only";
  * R2ストレージのrankingディレクトリを走査し、ranking_itemsテーブルを自動生成・更新する機能を提供します。
  */
 
-import { getD1 } from "../../db/d1";
-import { EstatRankingR2Repository } from "../repositories/rankingR2Repository";
-import type { StatsSchema } from "@/types/stats";
+import { getD1 } from "../db/d1";
+// estat-apiドメインのR2リポジトリを使用（ランキングデータの保存/取得はestat-apiの責務）
+import { EstatRankingR2Repository } from "@/features/estat-api/ranking-mappings/repositories/rankingR2Repository";
 
 /**
  * R2から抽出したランキング項目情報
@@ -17,7 +17,6 @@ export interface R2RankingItemInfo {
   rankingKey: string;
   areaType: "prefecture" | "city" | "national";
   unit: string;
-  dataSourceId: string;
 }
 
 /**
@@ -54,7 +53,7 @@ export class R2SyncService {
       : ["prefecture", "city", "national"];
 
     const results: R2RankingItemInfo[] = [];
-    const processedKeys = new Set<string>(); // 重複排除用
+    const processedKeys = new Set<string>(); // 重複排除用（areaType:rankingKey形式）
 
     for (const at of areaTypes) {
       try {
@@ -62,18 +61,23 @@ export class R2SyncService {
         const prefix = `ranking/${at}/`;
         const keys = await EstatRankingR2Repository.listRankingKeys(at);
 
+        console.log(
+          `[R2SyncService] ${at}ディレクトリから${keys.length}件のキーを検出`
+        );
+
         // キーからrankingKeyを抽出
         // パターン: ranking/{areaType}/{rankingKey}/{timeCode}.json
-        const pattern = new RegExp(
-          `^ranking/${at}/([^/]+)/([^/]+)\\.json$`
-        );
+        const pattern = new RegExp(`^ranking/${at}/([^/]+)/([^/]+)\\.json$`);
 
         // キーをグループ化（同じrankingKeyのキーをまとめる）
         const rankingKeyMap = new Map<string, string[]>();
 
         for (const key of keys) {
           const match = key.match(pattern);
-          if (!match) continue;
+          if (!match) {
+            console.warn(`[R2SyncService] パターンに一致しないキー: ${key}`);
+            continue;
+          }
 
           const [, rankingKey, timeCode] = match;
 
@@ -83,11 +87,19 @@ export class R2SyncService {
           rankingKeyMap.get(rankingKey)!.push(key);
         }
 
+        console.log(
+          `[R2SyncService] ${at}ディレクトリから${rankingKeyMap.size}件のユニークなrankingKeyを抽出`
+        );
+
         // 各rankingKeyに対して処理（最初に見つかったファイルを使用）
         for (const [rankingKey, fileKeys] of rankingKeyMap.entries()) {
-          // 既に処理済みのrankingKeyはスキップ（異なるareaTypeでも同一rankingKeyは1回だけ処理）
-          const keyId = `${rankingKey}`;
+          // 既に処理済みのareaType:rankingKeyの組み合わせをスキップ
+          // 異なるareaTypeでも同じrankingKeyは別レコードとして扱う
+          const keyId = `${at}:${rankingKey}`;
           if (processedKeys.has(keyId)) {
+            console.log(
+              `[R2SyncService] 既に処理済み: ${keyId}（スキップ）`
+            );
             continue;
           }
 
@@ -108,9 +120,7 @@ export class R2SyncService {
             );
 
             if (!statsSchemas || statsSchemas.length === 0) {
-              console.warn(
-                `[R2SyncService] データが空です: ${key}`
-              );
+              console.warn(`[R2SyncService] データが空です: ${key}`);
               continue;
             }
 
@@ -118,9 +128,7 @@ export class R2SyncService {
             const unit = statsSchemas[0]?.unit || "";
 
             if (!unit) {
-              console.warn(
-                `[R2SyncService] unitが取得できません: ${key}`
-              );
+              console.warn(`[R2SyncService] unitが取得できません: ${key}`);
               continue;
             }
 
@@ -128,10 +136,12 @@ export class R2SyncService {
               rankingKey,
               areaType: at,
               unit,
-              dataSourceId: "estat",
             });
 
             processedKeys.add(keyId);
+            console.log(
+              `[R2SyncService] ${at}ディレクトリから追加: ${rankingKey} (unit: ${unit})`
+            );
           } catch (error) {
             console.error(
               `[R2SyncService] メタデータ抽出エラー: ${key}`,
@@ -182,7 +192,7 @@ export class R2SyncService {
         try {
           const existing = await db
             .prepare(
-              "SELECT ranking_key, area_type, unit, data_source_id FROM ranking_items WHERE ranking_key = ? AND area_type = ?"
+              "SELECT ranking_key, area_type, unit FROM ranking_items WHERE ranking_key = ? AND area_type = ?"
             )
             .bind(item.rankingKey, item.areaType)
             .first();
@@ -222,7 +232,7 @@ export class R2SyncService {
         // 既存データを確認（UPDATEでは既存データを保持するため、必要最小限の情報のみ取得）
         const existing = await db
           .prepare(
-            `SELECT ranking_key, area_type, unit, data_source_id
+            `SELECT ranking_key, area_type, unit
              FROM ranking_items WHERE ranking_key = ? AND area_type = ?`
           )
           .bind(item.rankingKey, item.areaType)
@@ -235,19 +245,22 @@ export class R2SyncService {
             .prepare(
               `UPDATE ranking_items 
                SET unit = ?, 
-                   data_source_id = ?, 
                    updated_at = CURRENT_TIMESTAMP
                WHERE ranking_key = ? AND area_type = ?`
             )
-            .bind(item.unit, item.dataSourceId, item.rankingKey, item.areaType)
+            .bind(item.unit, item.rankingKey, item.areaType)
             .run();
 
           if (result.success && result.meta && result.meta.changes > 0) {
             stats.updated++;
             console.log(
-              `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (unit: ${existing.unit} → ${item.unit}, data_source_id: ${existing.data_source_id} → ${item.dataSourceId})`
+              `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (unit: ${existing.unit} → ${item.unit})`
             );
-          } else if (result.success && result.meta && result.meta.changes === 0) {
+          } else if (
+            result.success &&
+            result.meta &&
+            result.meta.changes === 0
+          ) {
             // 更新対象がなかった場合（値が同じなど）
             console.log(
               `[R2SyncService] 更新スキップ: ${item.rankingKey}:${item.areaType} (値に変更なし)`
@@ -255,7 +268,9 @@ export class R2SyncService {
             stats.skipped++;
           } else {
             throw new Error(
-              `UPDATE処理が失敗しました: ${result.meta?.error || "unknown error"}`
+              `UPDATE処理が失敗しました: ${
+                result.meta?.error || "unknown error"
+              }`
             );
           }
         } else {
@@ -268,15 +283,15 @@ export class R2SyncService {
             .join(" ");
 
           // データベーススキーマに応じて必要なカラムのみを指定
-          // group_key/group_idはNULLで良い（デフォルト値を使用）
+          // group_keyはNULLで良い（デフォルト値を使用）
           const result = await db
             .prepare(
               `INSERT INTO ranking_items 
-               (ranking_key, area_type, label, name, description, unit, data_source_id,
-                display_order_in_group, is_featured,
+               (ranking_key, area_type, label, name, description, unit,
+                display_order_in_group,
                 map_color_scheme, map_diverging_midpoint, ranking_direction,
                 conversion_factor, decimal_places, is_active, created_at, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
             )
             .bind(
               item.rankingKey,
@@ -285,9 +300,7 @@ export class R2SyncService {
               name,
               null, // description
               item.unit,
-              item.dataSourceId,
               0, // display_order_in_group
-              0, // is_featured
               "interpolateBlues", // map_color_scheme
               "zero", // map_diverging_midpoint
               "desc", // ranking_direction
@@ -322,7 +335,6 @@ export class R2SyncService {
               rankingKey: item.rankingKey,
               areaType: item.areaType,
               unit: item.unit,
-              dataSourceId: item.dataSourceId,
             }
           );
         } else if (typeof error === "object" && error !== null) {
@@ -334,7 +346,6 @@ export class R2SyncService {
               rankingKey: item.rankingKey,
               areaType: item.areaType,
               unit: item.unit,
-              dataSourceId: item.dataSourceId,
             }
           );
         } else {
@@ -346,38 +357,39 @@ export class R2SyncService {
               rankingKey: item.rankingKey,
               areaType: item.areaType,
               unit: item.unit,
-              dataSourceId: item.dataSourceId,
             }
           );
         }
 
         stats.errors.push({
           rankingKey: `${item.rankingKey}:${item.areaType}`,
-          error: errorDetails ? `${errorMessage}\n${errorDetails}` : errorMessage,
+          error: errorDetails
+            ? `${errorMessage}\n${errorDetails}`
+            : errorMessage,
         });
         stats.skipped++;
       }
     }
 
-    // R2に存在しないranking_keyのレコードを削除（data_source_id='estat'のみ対象）
+    // R2に存在しないranking_keyのレコードを削除
     try {
       // R2から取得したranking_keyとarea_typeの組み合わせのセットを作成
       const r2RankingKeys = new Set(
         items.map((item) => `${item.rankingKey}:${item.areaType}`)
       );
 
-      // データベースからすべての'estat'ソースのranking_keyとarea_typeを取得
+      // データベースからすべてのranking_keyとarea_typeを取得
       const allEstatKeys = await db
-        .prepare(
-          `SELECT ranking_key, area_type FROM ranking_items WHERE data_source_id = 'estat'`
-        )
+        .prepare(`SELECT ranking_key, area_type FROM ranking_items`)
         .all();
 
       const dbRankingItems =
-        (allEstatKeys.results as Array<{
-          ranking_key: string;
-          area_type: string;
-        }>).map((row) => ({
+        (
+          allEstatKeys.results as Array<{
+            ranking_key: string;
+            area_type: string;
+          }>
+        ).map((row) => ({
           rankingKey: row.ranking_key,
           areaType: row.area_type as "prefecture" | "city" | "national",
         })) || [];
@@ -385,9 +397,7 @@ export class R2SyncService {
       // R2に存在しないranking_keyとarea_typeの組み合わせを抽出
       const orphanItems = dbRankingItems.filter(
         (dbItem) =>
-          !r2RankingKeys.has(
-            `${dbItem.rankingKey}:${dbItem.areaType}`
-          ) &&
+          !r2RankingKeys.has(`${dbItem.rankingKey}:${dbItem.areaType}`) &&
           // R2から取得したアイテムに一致するものが存在しないか確認
           !items.some(
             (r2Item) =>
@@ -445,9 +455,7 @@ export class R2SyncService {
           }
         }
       } else {
-        console.log(
-          `[R2SyncService] R2に存在しないranking_keyはありません`
-        );
+        console.log(`[R2SyncService] R2に存在しないranking_keyはありません`);
       }
     } catch (error) {
       const errorMessage =
@@ -480,12 +488,18 @@ export class R2SyncService {
     areaType?: "prefecture" | "city" | "national",
     dryRun: boolean = false
   ): Promise<SyncResult> {
-    console.log(`[R2SyncService] 同期処理開始: areaType=${areaType || "all"}, dryRun=${dryRun}`);
+    console.log(
+      `[R2SyncService] 同期処理開始: areaType=${
+        areaType || "all"
+      }, dryRun=${dryRun}`
+    );
 
     try {
       // 1. R2ディレクトリを走査
       const items = await this.scanRankingDirectory(areaType);
-      console.log(`[R2SyncService] 走査完了: ${items.length}件のrankingKeyを検出`);
+      console.log(
+        `[R2SyncService] 走査完了: ${items.length}件のrankingKeyを検出`
+      );
 
       if (items.length === 0) {
         // R2にデータがない場合でも、既存の'estat'ソースのデータを削除する必要がある
@@ -493,7 +507,9 @@ export class R2SyncService {
         const deleteResult = await this.syncToDatabase([], dryRun);
         return {
           success: deleteResult.success,
-          message: deleteResult.message || "R2にランキングデータが見つかりませんでした",
+          message:
+            deleteResult.message ||
+            "R2にランキングデータが見つかりませんでした",
           stats: deleteResult.stats,
         };
       }
@@ -515,6 +531,7 @@ export class R2SyncService {
           scanned: 0,
           created: 0,
           updated: 0,
+          deleted: 0,
           skipped: 0,
           errors: [{ rankingKey: "unknown", error: errorMessage }],
         },

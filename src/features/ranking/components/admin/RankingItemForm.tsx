@@ -30,11 +30,11 @@ import { VisualizationForm, type VisualizationFormRef } from "./forms/Visualizat
 
 interface RankingItem {
   rankingKey: string;
+  areaType: "prefecture" | "city" | "national";
   label: string;
   name: string;
   description?: string;
   unit: string;
-  dataSourceId: string;
   isActive: boolean;
 }
 
@@ -78,7 +78,6 @@ export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps
         ...basicInfoValues,
         ...categorySettingsValues,
         ...visualizationValues,
-        dataSourceId: "estat", // デフォルト値
         ...metadataValues,
       };
 

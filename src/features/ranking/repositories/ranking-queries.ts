@@ -26,13 +26,13 @@ export const QUERIES = {
       rg.display_order as group_display_order,
       rg.is_collapsed,
       ri.ranking_key,
+      ri.area_type,
       ri.label,
       ri.unit,
       ri.name as ranking_name,
       ri.is_active,
       ri.group_key,
       ri.display_order_in_group,
-      ri.is_featured,
       ri.map_color_scheme,
       ri.map_diverging_midpoint,
       ri.ranking_direction,
@@ -40,8 +40,7 @@ export const QUERIES = {
       ri.decimal_places,
       ri.created_at,
       ri.updated_at,
-      ri.description,
-      ri.data_source_id
+      ri.description
     FROM ranking_groups rg
     LEFT JOIN ranking_items ri ON rg.group_key = ri.group_key AND ri.is_active = 1
     WHERE rg.subcategory_id = ?
@@ -80,7 +79,7 @@ export const QUERIES = {
       name = ?,
       description = ?,
       unit = ?,
-      data_source_id = ?,
+      is_active = ?,
       map_color_scheme = ?,
       map_diverging_midpoint = ?,
       ranking_direction = ?,
@@ -120,7 +119,6 @@ export const QUERIES = {
     SET 
       group_key = ?,
       display_order_in_group = ?,
-      is_featured = ?,
       updated_at = CURRENT_TIMESTAMP
     WHERE ranking_key = ? AND area_type = ?
   `,

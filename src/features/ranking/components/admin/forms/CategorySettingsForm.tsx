@@ -33,7 +33,6 @@ const categorySettingsSchema = z.object({
   subcategoryId: z.string().min(1, "サブカテゴリを選択してください"),
   groupId: z.number().nullable(),
   displayOrderInGroup: z.number().min(0).max(999),
-  isFeatured: z.boolean(),
 });
 
 type CategorySettingsFormValues = z.infer<typeof categorySettingsSchema>;
@@ -67,7 +66,6 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
       subcategoryId: item?.subcategoryId || "",
       groupId: item?.groupId || null,
       displayOrderInGroup: item?.displayOrderInGroup || 0,
-      isFeatured: item?.isFeatured || false,
     },
   });
 
@@ -257,24 +255,6 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                   </FormControl>
                   <FormDescription>グループ内での表示順序（0-999）</FormDescription>
                   <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="isFeatured"
-              render={({ field }) => (
-                <FormItem className="flex items-center space-x-2 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>おすすめ</FormLabel>
-                    <FormDescription>
-                      このランキング項目をおすすめとして強調表示
-                    </FormDescription>
-                  </div>
                 </FormItem>
               )}
             />

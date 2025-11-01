@@ -25,7 +25,6 @@ export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
     name: dbItem.name,
     description: dbItem.description,
     unit: dbItem.unit,
-    dataSourceId: dbItem.data_source_id,
     mapColorScheme: dbItem.map_color_scheme,
     mapDivergingMidpoint: dbItem.map_diverging_midpoint as
       | "zero"
@@ -37,7 +36,6 @@ export function convertRankingItemFromDB(dbItem: RankingItemDB): RankingItem {
     isActive: dbItem.is_active,
     groupKey: dbItem.group_key || undefined,
     displayOrderInGroup: dbItem.display_order_in_group,
-    isFeatured: dbItem.is_featured,
   };
 }
 

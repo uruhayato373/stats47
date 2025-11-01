@@ -141,6 +141,7 @@ INSERT OR IGNORE INTO data_sources (id, name, description, base_url, api_version
   ('custom', 'カスタムデータ', 'ユーザー定義データソース', NULL, NULL);
 
 -- ranking_items: ランキング項目設定テーブル
+-- 注意: このテーブルはe-Stat API専用です
 CREATE TABLE IF NOT EXISTS ranking_items (
   ranking_key TEXT NOT NULL,
   area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
@@ -148,10 +149,8 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   name TEXT NOT NULL,
   description TEXT,
   unit TEXT NOT NULL,
-  data_source_id TEXT NOT NULL,
   group_key TEXT,
   display_order_in_group INTEGER DEFAULT 0,
-  is_featured BOOLEAN DEFAULT 0,
   map_color_scheme TEXT DEFAULT 'interpolateBlues',
   map_diverging_midpoint TEXT DEFAULT 'zero',
   ranking_direction TEXT DEFAULT 'desc',
@@ -162,7 +161,6 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ranking_key, area_type),
   CHECK (area_type IN ('prefecture', 'city', 'national')),
-  FOREIGN KEY (data_source_id) REFERENCES data_sources(id),
   FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key)
 );
 
@@ -282,7 +280,6 @@ CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_item_code ON estat_ranking
 CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_area_type ON estat_ranking_mappings(area_type);
 
 -- ランキング関連インデックス
-CREATE INDEX IF NOT EXISTS idx_ranking_items_data_source ON ranking_items(data_source_id);
 -- (ranking_key, area_type) は PRIMARY KEY なので追加インデックス不要
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);

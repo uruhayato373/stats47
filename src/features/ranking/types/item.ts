@@ -95,12 +95,6 @@ export interface RankingItem {
   unit: string;
 
   /**
-   * データソースID
-   * データの取得元を識別（例: "estat"）
-   */
-  dataSourceId: string;
-
-  /**
    * 地図の色スキーム
    * コロプレスマップで使用する色のスキーム（例: "interpolateBlues"）
    */
@@ -149,17 +143,10 @@ export interface RankingItem {
   displayOrderInGroup: number;
 
   /**
-   * おすすめフラグ
-   * この項目をおすすめとして表示するかどうか
-   */
-  isFeatured: boolean;
-
-  /**
    * メタデータアイテム（オプショナル）
-   * データソースのメタデータ設定
+   * データソースのメタデータ設定（e-Stat API専用）
    */
   metadataItems?: Array<{
-    dataSourceId: string;
     areaType: string;
     calculationType: string;
     metadata: object;
@@ -307,12 +294,6 @@ export interface RankingItemDB {
   unit: string;
 
   /**
-   * データソースID
-   * データの取得元を識別（例: "estat"）
-   */
-  data_source_id: string;
-
-  /**
    * 地図の色スキーム
    * コロプレスマップで使用する色のスキーム（例: "interpolateBlues"）
    */
@@ -359,12 +340,6 @@ export interface RankingItemDB {
    * グループ内での表示順序
    */
   display_order_in_group: number;
-
-  /**
-   * おすすめフラグ
-   * この項目をおすすめとして表示するかどうか
-   */
-  is_featured: boolean;
 
   /**
    * 作成日時

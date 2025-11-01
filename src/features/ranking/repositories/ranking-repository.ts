@@ -161,11 +161,11 @@ export class RankingRepository {
           const item = row as any;
           const dbItem: RankingItemDB = {
             ranking_key: item.ranking_key,
+            area_type: item.area_type || "prefecture",
             label: item.label,
             name: item.ranking_name,
             description: item.description,
             unit: item.unit,
-            data_source_id: item.data_source_id,
             map_color_scheme: item.map_color_scheme,
             map_diverging_midpoint: item.map_diverging_midpoint,
             ranking_direction: item.ranking_direction,
@@ -174,7 +174,6 @@ export class RankingRepository {
             is_active: item.is_active,
             group_key: item.group_key || null,
             display_order_in_group: item.display_order_in_group || 0,
-            is_featured: item.is_featured || false,
             created_at: item.created_at,
             updated_at: item.updated_at,
           };
@@ -307,7 +306,7 @@ export class RankingRepository {
       name?: string;
       description?: string;
       unit?: string;
-      dataSourceId?: string;
+      isActive?: boolean;
       mapColorScheme?: string;
       mapDivergingMidpoint?: string;
       rankingDirection?: "asc" | "desc";
@@ -323,7 +322,7 @@ export class RankingRepository {
           updates.name || null,
           updates.description || null,
           updates.unit || null,
-          updates.dataSourceId || null,
+          updates.isActive !== undefined ? (updates.isActive ? 1 : 0) : null,
           updates.mapColorScheme || null,
           updates.mapDivergingMidpoint || null,
           updates.rankingDirection || null,
@@ -518,11 +517,11 @@ export class RankingRepository {
    */
   async createRankingItem(item: {
     rankingKey: string;
+    areaType: "prefecture" | "city" | "national";
     label: string;
     name: string;
     description?: string;
     unit: string;
-    dataSourceId: string;
     mapColorScheme: string;
     mapDivergingMidpoint: string;
     rankingDirection: "asc" | "desc";
@@ -535,7 +534,7 @@ export class RankingRepository {
           `
           INSERT INTO ranking_items 
           (
-            ranking_key, label, name, description, unit, data_source_id,
+            ranking_key, area_type, label, name, description, unit,
             map_color_scheme, map_diverging_midpoint, ranking_direction,
             conversion_factor, decimal_places, is_active,
             created_at, updated_at
@@ -546,11 +545,11 @@ export class RankingRepository {
         )
         .bind(
           item.rankingKey,
+          item.areaType,
           item.label,
           item.name,
           item.description || null,
           item.unit,
-          item.dataSourceId,
           item.mapColorScheme,
           item.mapDivergingMidpoint,
           item.rankingDirection,

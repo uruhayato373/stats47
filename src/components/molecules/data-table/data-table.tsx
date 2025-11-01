@@ -38,6 +38,7 @@ export function DataTable<TData, TValue>({
   showIndex = true,
   showBorder = true,
   defaultSorting,
+  meta,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>(
     defaultSorting || []
@@ -91,6 +92,7 @@ export function DataTable<TData, TValue>({
     },
     enableSorting,
     enableFilters: enableFiltering,
+    meta,
   });
 
   if (!data || data.length === 0) {

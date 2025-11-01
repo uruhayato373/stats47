@@ -11,6 +11,8 @@ export interface DataTableProps<TData, TValue> {
   showBorder?: boolean;
   /** デフォルトのソート順 */
   defaultSorting?: SortingState;
+  /** テーブルのメタデータ（リフレッシュコールバックなど） */
+  meta?: Record<string, unknown>;
 }
 
 export interface DataTableColumnMeta {
