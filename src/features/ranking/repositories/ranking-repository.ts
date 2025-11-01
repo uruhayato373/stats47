@@ -15,7 +15,7 @@ import { buildEnvironmentConfig } from "@/lib/environment";
 import { getD1 } from "../db/d1";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
-import { DataSourceMetadataDB, RankingItem, RankingItemDB } from "../types";
+import { RankingItem, RankingItemDB } from "../types";
 
 import { GROUP_QUERIES, QUERIES } from "./ranking-queries";
 
@@ -216,24 +216,6 @@ export class RankingRepository {
         itemResult as unknown as RankingItemDB
       );
 
-      // メタデータを取得（estat-api専用）
-      const metadataResults = await this.db
-        .prepare(
-          `SELECT * FROM estat_api_metadata WHERE ranking_key = ? AND area_type = ?`
-        )
-        .bind(rankingKey, areaType)
-        .all();
-
-      if (metadataResults.results && metadataResults.results.length > 0) {
-        item.metadataItems = (
-          metadataResults.results as unknown as DataSourceMetadataDB[]
-        ).map((meta) => ({
-          areaType: meta.area_type,
-          calculationType: meta.calculation_type,
-          metadata: JSON.parse(meta.metadata),
-        }));
-      }
-
       return item;
     } catch (error) {
       console.error("Failed to get ranking item by key and area type:", error);
@@ -271,22 +253,6 @@ export class RankingRepository {
       const item = convertRankingItemFromDB(
         itemResult as unknown as RankingItemDB
       );
-
-      // メタデータを取得（estat-api専用）
-      const metadataResults = await this.db
-        .prepare(`SELECT * FROM estat_api_metadata WHERE ranking_key = ?`)
-        .bind(rankingKey)
-        .all();
-
-      if (metadataResults.results && metadataResults.results.length > 0) {
-        item.metadataItems = (
-          metadataResults.results as unknown as DataSourceMetadataDB[]
-        ).map((meta) => ({
-          areaType: meta.area_type,
-          calculationType: meta.calculation_type,
-          metadata: JSON.parse(meta.metadata),
-        }));
-      }
 
       return item;
     } catch (error) {
@@ -804,80 +770,6 @@ export class RankingRepository {
     }
   }
 
-  // ============================================================
-  // データソースメタデータ管理メソッド
-  // ============================================================
-
-  /**
-   * データソースメタデータを作成（estat-api専用）
-   */
-  async createDataSourceMetadata(metadata: {
-    rankingKey: string;
-    areaType: "prefecture" | "city" | "national";
-    calculationType: "direct" | "ratio" | "aggregate";
-    metadata: object;
-  }): Promise<void> {
-    try {
-      const metadataJson = JSON.stringify(metadata.metadata);
-      await this.db
-        .prepare(QUERIES.createDataSourceMetadata)
-        .bind(
-          metadata.rankingKey,
-          metadata.areaType,
-          metadata.calculationType,
-          metadataJson
-        )
-        .run();
-    } catch (error) {
-      console.error("Failed to create data source metadata:", error);
-      throw error;
-    }
-  }
-
-  /**
-   * データソースメタデータを更新（estat-api専用）
-   */
-  async updateDataSourceMetadata(
-    rankingKey: string,
-    areaType: "prefecture" | "city" | "national",
-    metadata: {
-      calculationType: "direct" | "ratio" | "aggregate";
-      metadata: object;
-    }
-  ): Promise<void> {
-    try {
-      const metadataJson = JSON.stringify(metadata.metadata);
-      await this.db
-        .prepare(QUERIES.updateDataSourceMetadata)
-        .bind(
-          metadata.calculationType,
-          metadataJson,
-          rankingKey,
-          areaType
-        )
-        .run();
-    } catch (error) {
-      console.error("Failed to update data source metadata:", error);
-      throw error;
-    }
-  }
-
-  /**
-   * ランキングキーでデータソースメタデータを削除
-   */
-  async deleteDataSourceMetadataByRankingKey(
-    rankingKey: string
-  ): Promise<void> {
-    try {
-      await this.db
-        .prepare(QUERIES.deleteDataSourceMetadataByRankingKey)
-        .bind(rankingKey)
-        .run();
-    } catch (error) {
-      console.error("Failed to delete data source metadata:", error);
-      throw error;
-    }
-  }
 }
 
 /**

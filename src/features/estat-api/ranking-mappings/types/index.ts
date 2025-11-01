@@ -40,8 +40,6 @@ export interface RankingExportPayload {
     timeCode: string;
     /** 単位 */
     unit: string;
-    /** データソースID（常に"estat"） */
-    dataSourceId: "estat";
   };
 }
 

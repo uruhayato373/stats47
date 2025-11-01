@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/atoms/ui/table";
 
 import type { RankingGroup } from "../../types/group";
@@ -99,7 +99,9 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
                         項目管理
                       </Button>
                     </Link>
-                    <Link href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}>
+                    <Link
+                      href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}
+                    >
                       <Button variant="ghost" size="sm">
                         編集
                       </Button>

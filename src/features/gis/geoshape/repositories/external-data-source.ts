@@ -3,7 +3,10 @@
  * Geoshapeリポジトリ（https://geoshape.ex.nii.ac.jp）からデータを取得
  */
 
-import { buildGeoshapeExternalUrl } from "../config/geoshape-config";
+import {
+  buildAllCitiesGeoshapeUrl,
+  buildGeoshapeExternalUrl,
+} from "../config/geoshape-config";
 
 import type {
   AreaType,
@@ -53,6 +56,54 @@ export async function fetchFromExternalAPI(
     return data as TopoJSONTopology;
   } catch (error) {
     console.error("[ExternalAPI] Failed to fetch:", error);
+
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new Error("External API request timeout");
+    }
+
+    throw new Error(
+      `External API fetch failed: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
+  }
+}
+
+/**
+ * 外部APIから全国市区町村TopoJSONを取得
+ * @returns TopoJSONトポロジー
+ */
+export async function fetchAllCitiesFromExternalAPI(): Promise<TopoJSONTopology> {
+  const url = buildAllCitiesGeoshapeUrl();
+
+  try {
+    console.log(`[ExternalAPI] Fetching all cities from: ${url}`);
+
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "stats47-app/1.0",
+      },
+      // タイムアウト設定（30秒 - 全国データは大きいため）
+      signal: AbortSignal.timeout(30000),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP error! status: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const data = (await response.json()) as TopoJSONTopology;
+
+    // データの妥当性チェック
+    if (!data || data.type !== "Topology") {
+      throw new Error("Invalid TopoJSON format from external API");
+    }
+
+    console.log("[ExternalAPI] Successfully fetched all cities data");
+    return data as TopoJSONTopology;
+  } catch (error) {
+    console.error("[ExternalAPI] Failed to fetch all cities:", error);
 
     if (error instanceof Error && error.name === "AbortError") {
       throw new Error("External API request timeout");

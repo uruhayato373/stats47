@@ -156,6 +156,15 @@ export function buildGeoshapeExternalUrl(
 }
 
 /**
+ * 全国市区町村TopoJSONデータのURLを構築
+ * @returns 完全なURL
+ */
+export function buildAllCitiesGeoshapeUrl(): string {
+  const baseUrl = `${geoshapeConfig.externalApiUrl}/city/topojson/20230101`;
+  return `${baseUrl}/jp_city.c.topojson`;
+}
+
+/**
  * R2ストレージのキーを構築
  * @param areaType 地域タイプ
  * @param prefCode 都道府県コード（2桁）

@@ -24,6 +24,16 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
+  // landweather/land-area/dashboard/00000/city-map でCityMapを表示
+  if (category === "landweather" && subcategory === "land-area" && areaCode === "city-map") {
+    const { CityMap } = await import("@/features/visualization/map/common/CityMap");
+    return (
+      <div className="w-full h-screen p-4">
+        <CityMap width={1200} height={800} />
+      </div>
+    );
+  }
+
   const areaType = determineAreaType(areaCode);
 
   // 市区町村は従来のダッシュボードを維持（必要に応じて後日レイアウト化）

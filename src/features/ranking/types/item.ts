@@ -142,15 +142,6 @@ export interface RankingItem {
    */
   displayOrderInGroup: number;
 
-  /**
-   * メタデータアイテム（オプショナル）
-   * データソースのメタデータ設定（e-Stat API専用）
-   */
-  metadataItems?: Array<{
-    areaType: string;
-    calculationType: string;
-    metadata: object;
-  }>;
 }
 
 /**
@@ -224,30 +215,6 @@ export interface RankingValueDB {
    * レコードが最後に更新された日時（ISO 8601形式）
    */
   updated_at: string;
-}
-
-/**
- * データソースメタデータの型（データベース）
- * estat_api_metadataテーブルに対応（e-Stat API専用）
- */
-export interface DataSourceMetadataDB {
-  id: number;
-  ranking_key: string;
-  area_type: string;
-  calculation_type: string;
-  metadata: string;
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * データソースメタデータの型（アプリケーション）
- * estat-api専用（dataSourceIdは不要）
- */
-export interface DataSourceMetadata {
-  areaType: string;
-  calculationType: string;
-  metadata: object;
 }
 
 /**

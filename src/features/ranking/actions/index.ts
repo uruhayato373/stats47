@@ -14,7 +14,4 @@ export * from "./updateGroupDisplayOrder";
 export * from "./assignItemsToGroup";
 export * from "./removeItemsFromGroup";
 export * from "./updateItemDisplayOrderInGroup";
-export * from "./createDataSourceMetadata";
-export * from "./updateDataSourceMetadata";
-export * from "./deleteDataSourceMetadataByRankingKey";
 export * from "./syncR2ToDatabase";

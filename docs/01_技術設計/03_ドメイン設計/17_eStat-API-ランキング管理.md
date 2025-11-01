@@ -47,7 +47,6 @@ tags:
 
 ### 主要概念
 
-- `estat_api_metadata`: ランキングキーと e-Stat パラメータの対応（構造は estat-api ドメインが定義、書き込みは Ranking 機能）
 - `estat_ranking_mappings`: e-Stat パラメータ（`stats_data_id`, `cat01`, `item_code`等）とランキング項目のマッピングテーブル（CSV ベース、`isRanking`フラグでランキング変換対象を指定）
 - `StatsSchema`: 統計データの基本型（`areaCode`, `areaName`, `timeCode`, `timeName`, `categoryCode`, `categoryName`, `value`, `unit`）
 - `isRanking`: ランキング変換対象フラグ（`true`の場合、R2 に`StatsSchema[]`形式で保存）
@@ -62,8 +61,7 @@ src/features/estat-api/
 │   ├── actions/            # Server Actions（管理画面用）
 │   └── types/              # 型定義
 ├── fetcher/                 # e-Stat API 呼び出し
-├── formatter/               # 値のみランキング形式へ正規化
-└── metadata/                # estat_api_metadata 取り扱い
+└── formatter/               # 値のみランキング形式へ正規化
 ```
 
 — コンポーネント —
@@ -75,7 +73,6 @@ src/features/estat-api/
   - components: 管理画面テーブル表示（`EstatRankingMappingsTable`）
 - fetcher: StatsData の取得、基本検証、ページング
 - formatter: 値抽出/単位整形/NULL・欠損処理/地域コード・名前解決
-- metadata: `rankingKey → {stats_data_id, cd_cat01...}` マッピング取得
 
 ## I/O 仕様
 

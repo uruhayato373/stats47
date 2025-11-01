@@ -123,23 +123,6 @@ CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
 -- 4. ランキング関連テーブル
 -- ============================================================================
 
--- data_sources: データソース定義テーブル
-CREATE TABLE IF NOT EXISTS data_sources (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  description TEXT,
-  base_url TEXT,
-  api_version TEXT,
-  is_active BOOLEAN DEFAULT 1,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- 初期データの投入
-INSERT OR IGNORE INTO data_sources (id, name, description, base_url, api_version) VALUES
-  ('estat', 'e-Stat', '政府統計の総合窓口', 'https://api.e-stat.go.jp', 'v3'),
-  ('custom', 'カスタムデータ', 'ユーザー定義データソース', NULL, NULL);
-
 -- ranking_items: ランキング項目設定テーブル
 -- 注意: このテーブルはe-Stat API専用です
 CREATE TABLE IF NOT EXISTS ranking_items (
@@ -164,27 +147,8 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key)
 );
 
--- estat_api_metadata: e-Stat API固有のメタデータテーブル
--- e-Stat APIのパラメータ（stats_data_id、cd_cat01等）をランキングキーと紐付けて保存
--- metadata JSON構造:
---   直接: {"stats_data_id":"xxx","cd_cat01":"yyy","cd_area":"zzz"}
---   比率: {"numerator":{...},"denominator":{...},"multiplier":1000}
--- 注意: このテーブルはe-Stat API専用である。他のデータソース用メタデータは別テーブルで管理する
-CREATE TABLE IF NOT EXISTS estat_api_metadata (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ranking_key TEXT NOT NULL,
-  area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
-  calculation_type TEXT NOT NULL DEFAULT 'direct',  -- 'direct' | 'ratio' | 'aggregate'
-  metadata TEXT NOT NULL,  -- e-Stat API固有のパラメータ（JSON形式）
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(ranking_key, area_type),
-  FOREIGN KEY (ranking_key, area_type) REFERENCES ranking_items(ranking_key, area_type) ON DELETE CASCADE,
-  CHECK (area_type IN ('prefecture', 'city', 'national')),
-  CHECK (calculation_type IN ('direct', 'ratio', 'aggregate'))
-);
-
 -- 注意: ranking_values テーブルは使用しません（設計により R2 ストレージを使用）
+-- 注意: estat_api_metadata テーブルも使用しません（estat_ranking_mappings で十分）
 -- ランキング値データは R2 Storage に JSON 形式で保存されます
 -- パス: ranking/{ranking_key}/{area_type}/{time_code}.json
 
@@ -284,9 +248,8 @@ CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_area_type ON estat_ranking
 CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_area_type ON ranking_items(area_type);
-CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_ranking ON estat_api_metadata(ranking_key);
-CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_area ON estat_api_metadata(area_type);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
+-- 注意: estat_api_metadata のインデックスも使用しません（テーブルを削除したため）
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);
 

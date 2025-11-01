@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import {
   AlertTriangle,
   BarChart3,
-  Database,
   FileText,
   FolderTree,
 } from "lucide-react";
@@ -25,7 +24,6 @@ import { Separator } from "@/components/atoms/ui/separator";
 import { BasicInfoForm, type BasicInfoFormRef } from "./forms/BasicInfoForm";
 import { CategorySettingsForm, type CategorySettingsFormRef } from "./forms/CategorySettingsForm";
 import { DangerZone } from "./forms/DangerZone";
-import { DataSourceMetadataForm, type DataSourceMetadataFormRef } from "./forms/DataSourceMetadataForm";
 import { VisualizationForm, type VisualizationFormRef } from "./forms/VisualizationForm";
 
 interface RankingItem {
@@ -51,7 +49,6 @@ export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps
   const basicInfoFormRef = useRef<BasicInfoFormRef>(null);
   const categorySettingsFormRef = useRef<CategorySettingsFormRef>(null);
   const visualizationFormRef = useRef<VisualizationFormRef>(null);
-  const dataSourceMetadataFormRef = useRef<DataSourceMetadataFormRef>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +60,6 @@ export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps
       const basicInfoValues = basicInfoFormRef.current?.getValues() || {} as any;
       const categorySettingsValues = categorySettingsFormRef.current?.getValues() || {} as any;
       const visualizationValues = visualizationFormRef.current?.getValues() || {} as any;
-      const metadataValues = dataSourceMetadataFormRef.current?.getValues() || { metadataItems: [] };
 
       // バリデーション
       const hasRequiredFields = basicInfoValues.rankingKey && basicInfoValues.label && basicInfoValues.name && basicInfoValues.unit;
@@ -78,7 +74,6 @@ export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps
         ...basicInfoValues,
         ...categorySettingsValues,
         ...visualizationValues,
-        ...metadataValues,
       };
 
       // APIに送信
@@ -145,24 +140,6 @@ export function RankingItemForm({ item, mode, rankingKey }: RankingItemFormProps
           <CategorySettingsForm ref={categorySettingsFormRef} item={item} />
         </CardContent>
       </Card>
-
-      {/* データソース設定 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Database className="h-5 w-5" />
-            データソース設定
-          </CardTitle>
-          <CardDescription>
-            メタデータとデータ取得元の設定を行います
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <DataSourceMetadataForm ref={dataSourceMetadataFormRef} item={item as any} />
-        </CardContent>
-      </Card>
-
-
 
       {/* 可視化設定 */}
       <Card>

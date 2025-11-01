@@ -61,7 +61,7 @@ export interface PrefectureFeatureCollection extends GeoJSON.FeatureCollection {
 /**
  * 市区町村Feature型
  */
-export interface Cityeature extends GeoJSON.Feature {
+export interface CityFeature extends GeoJSON.Feature {
   type: "Feature";
   properties: {
     cityCode: string;
@@ -76,7 +76,7 @@ export interface Cityeature extends GeoJSON.Feature {
 /**
  * 市区町村FeatureCollection型
  */
-export interface CityeatureCollection
+export interface CityFeatureCollection
   extends GeoJSON.FeatureCollection {
   type: "FeatureCollection";
   features: CityFeature[];

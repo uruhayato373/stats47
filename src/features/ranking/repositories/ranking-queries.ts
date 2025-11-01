@@ -63,13 +63,6 @@ export const QUERIES = {
   `,
 
   /**
-   * ランキングキーでデータソースメタデータを取得（estat-api専用）
-   */
-  getDataSourceMetadataByKey: `
-    SELECT * FROM estat_api_metadata WHERE ranking_key = ?
-  `,
-
-  /**
    * ランキング項目を更新
    */
   updateRankingItem: `
@@ -123,33 +116,6 @@ export const QUERIES = {
     WHERE ranking_key = ? AND area_type = ?
   `,
 
-  /**
-   * データソースメタデータを作成（estat-api専用）
-   */
-  createDataSourceMetadata: `
-    INSERT INTO estat_api_metadata 
-    (ranking_key, area_type, calculation_type, metadata)
-    VALUES (?, ?, ?, ?)
-  `,
-
-  /**
-   * データソースメタデータを更新（estat-api専用）
-   */
-  updateDataSourceMetadata: `
-    UPDATE estat_api_metadata 
-    SET 
-      calculation_type = ?,
-      metadata = ?,
-      updated_at = CURRENT_TIMESTAMP
-    WHERE ranking_key = ? AND area_type = ?
-  `,
-
-  /**
-   * ランキングキーでデータソースメタデータを削除（estat-api専用）
-   */
-  deleteDataSourceMetadataByRankingKey: `
-    DELETE FROM estat_api_metadata WHERE ranking_key = ?
-  `,
 } as const;
 
 /**
