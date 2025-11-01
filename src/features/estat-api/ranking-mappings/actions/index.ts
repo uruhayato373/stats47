@@ -13,10 +13,7 @@ import {
   updateIsRanking,
 } from "../repositories/ranking-mappings-repository";
 import { EstatRankingR2Repository } from "../repositories/rankingR2Repository";
-import {
-  convertStatsDataToRankingFormat,
-  determineAreaType,
-} from "../services/ranking-converter";
+import { convertStatsDataToRankingFormat } from "../services/ranking-converter";
 import {
   importCsvContentToDatabase,
   importCsvToDatabase,
@@ -193,31 +190,98 @@ export async function convertToRankingAction(
       categoryFilter: mapping.cat01.replace(/^#/, ""), // #を除去
     });
 
-    // ランキング形式に変換
-    const payload = convertStatsDataToRankingFormat(
-      response,
-      mapping.item_code,
-      timeCode,
-      mapping.unit || undefined
+    // データ整形
+    const { formatStatsData } = await import(
+      "../../stats-data/services/formatter"
     );
+    const formattedData = formatStatsData(response);
 
-    // 地域タイプを判定
-    const areaCodes = payload.values.map((v) => v.areaCode);
-    const areaType = determineAreaType(areaCodes);
+    // 地域タイプの検証（必須）
+    if (!mapping.area_type) {
+      return {
+        success: false,
+        message:
+          "地域タイプ（area_type）が設定されていません。CSVインポート時にarea_typeを指定するか、データベースで更新してください。",
+      };
+    }
 
-    // R2に保存
-    const result = await EstatRankingR2Repository.saveRankingData(
-      areaType,
-      mapping.item_code,
-      payload.metadata.timeCode,
-      payload
+    // すべての時間コードを取得
+    const allTimeCodes = Array.from(
+      new Set(
+        formattedData.values
+          .map((v) => v.dimensions.time?.code)
+          .filter((code): code is string => !!code)
+      )
+    ).sort();
+
+    if (allTimeCodes.length === 0) {
+      return { success: false, message: "時間コードが見つかりません" };
+    }
+
+    // 時間コードが指定されている場合は、その時間コードのみ処理
+    const targetTimeCodes = timeCode
+      ? [timeCode]
+      : allTimeCodes; // 指定がない場合は全ての時間コードを処理
+
+    const savedFiles: Array<{ key: string; size: number; timeCode: string }> =
+      [];
+
+    // 各時間コードごとに処理
+    for (const targetTimeCode of targetTimeCodes) {
+      try {
+        // StatsSchema[]形式に変換（指定された時間コードのみ）
+        const statsSchemas = convertStatsDataToRankingFormat(
+          response,
+          mapping.item_code,
+          targetTimeCode,
+          mapping.unit || undefined
+        );
+
+        if (statsSchemas.length === 0) {
+          console.warn(
+            `[convertToRankingAction] 時間コード ${targetTimeCode} のデータがありません`
+          );
+          continue;
+        }
+
+        // R2に保存
+        const result = await EstatRankingR2Repository.saveRankingData(
+          mapping.area_type,
+          mapping.item_code,
+          targetTimeCode,
+          statsSchemas
+        );
+
+        savedFiles.push({
+          key: result.key,
+          size: result.size,
+          timeCode: targetTimeCode,
+        });
+      } catch (error) {
+        console.error(
+          `[convertToRankingAction] 時間コード ${targetTimeCode} の保存エラー:`,
+          error
+        );
+      }
+    }
+
+    if (savedFiles.length === 0) {
+      return {
+        success: false,
+        message: "保存できるデータがありませんでした",
+      };
+    }
+
+    const totalCount = savedFiles.reduce(
+      (sum, file) => sum + (file.size || 0),
+      0
     );
 
     return {
       success: true,
-      message: `ランキング変換完了: ${mapping.item_name} (${payload.values.length}件)`,
-      key: result.key,
-      size: result.size,
+      message: `ランキング変換完了: ${mapping.item_name} (${savedFiles.length}年度、合計サイズ: ${totalCount}bytes)`,
+      key: savedFiles[0].key, // 最初のファイルのキーを返す（互換性のため）
+      size: totalCount,
     };
   } catch (error) {
     console.error("[convertToRankingAction] ランキング変換エラー:", error);
@@ -292,33 +356,112 @@ export async function convertAllRankingsAction(
           categoryFilter: mapping.cat01.replace(/^#/, ""), // #を除去
         });
 
-        // ランキング形式に変換
-        const payload = convertStatsDataToRankingFormat(
-          response,
-          mapping.item_code,
-          timeCode,
-          mapping.unit || undefined
+        // データ整形
+        const { formatStatsData } = await import(
+          "../../stats-data/services/formatter"
         );
+        const formattedData = formatStatsData(response);
 
-        // 地域タイプを判定
-        const areaCodes = payload.values.map((v) => v.areaCode);
-        const areaType = determineAreaType(areaCodes);
+        // 地域タイプの検証（必須）
+        if (!mapping.area_type) {
+          results.push({
+            stats_data_id: mapping.stats_data_id,
+            cat01: mapping.cat01,
+            itemName: mapping.item_name,
+            success: false,
+            message:
+              "地域タイプ（area_type）が設定されていません。CSVインポート時にarea_typeを指定するか、データベースで更新してください。",
+          });
+          continue;
+        }
 
-        // R2に保存
-        const result = await EstatRankingR2Repository.saveRankingData(
-          areaType,
-          mapping.item_code,
-          payload.metadata.timeCode,
-          payload
-        );
+        // すべての時間コードを取得
+        const allTimeCodes = Array.from(
+          new Set(
+            formattedData.values
+              .map((v) => v.dimensions.time?.code)
+              .filter((code): code is string => !!code)
+          )
+        ).sort();
+
+        if (allTimeCodes.length === 0) {
+          results.push({
+            stats_data_id: mapping.stats_data_id,
+            cat01: mapping.cat01,
+            itemName: mapping.item_name,
+            success: false,
+            message: "時間コードが見つかりません",
+          });
+          continue;
+        }
+
+        // 時間コードが指定されている場合は、その時間コードのみ処理
+        const targetTimeCodes = timeCode
+          ? [timeCode]
+          : allTimeCodes; // 指定がない場合は全ての時間コードを処理
+
+        const savedFiles: Array<{ key: string; size: number; timeCode: string }> =
+          [];
+        let totalCount = 0;
+
+        // 各時間コードごとに処理
+        for (const targetTimeCode of targetTimeCodes) {
+          try {
+            // StatsSchema[]形式に変換（指定された時間コードのみ）
+            const statsSchemas = convertStatsDataToRankingFormat(
+              response,
+              mapping.item_code,
+              targetTimeCode,
+              mapping.unit || undefined
+            );
+
+            if (statsSchemas.length === 0) {
+              console.warn(
+                `[convertAllRankingsAction] 時間コード ${targetTimeCode} のデータがありません: ${mapping.item_name}`
+              );
+              continue;
+            }
+
+            // R2に保存
+            const result = await EstatRankingR2Repository.saveRankingData(
+              mapping.area_type,
+              mapping.item_code,
+              targetTimeCode,
+              statsSchemas
+            );
+
+            savedFiles.push({
+              key: result.key,
+              size: result.size,
+              timeCode: targetTimeCode,
+            });
+            totalCount += statsSchemas.length;
+          } catch (error) {
+            console.error(
+              `[convertAllRankingsAction] 時間コード ${targetTimeCode} の保存エラー: ${mapping.item_name}`,
+              error
+            );
+          }
+        }
+
+        if (savedFiles.length === 0) {
+          results.push({
+            stats_data_id: mapping.stats_data_id,
+            cat01: mapping.cat01,
+            itemName: mapping.item_name,
+            success: false,
+            message: "保存できるデータがありませんでした",
+          });
+          continue;
+        }
 
         results.push({
           stats_data_id: mapping.stats_data_id,
           cat01: mapping.cat01,
           itemName: mapping.item_name,
           success: true,
-          message: `変換完了: ${payload.values.length}件`,
-          key: result.key,
+          message: `変換完了: ${savedFiles.length}年度、${totalCount}件`,
+          key: savedFiles[0].key, // 最初のファイルのキーを返す（互換性のため）
         });
 
         // APIレート制限を考慮して少し待機（100ms）

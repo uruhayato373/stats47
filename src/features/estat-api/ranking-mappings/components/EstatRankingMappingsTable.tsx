@@ -22,7 +22,7 @@ import type { EstatRankingMapping } from "../types";
 
 interface EstatRankingMappingsTableProps {
   mappings: EstatRankingMapping[];
-  onRefresh?: () => void;
+  onRefresh?: (showToast?: boolean) => void;
 }
 
 /**
@@ -33,7 +33,7 @@ function IsRankingSwitchCell({
   onRefresh,
 }: {
   mapping: EstatRankingMapping;
-  onRefresh?: () => void;
+  onRefresh?: (showToast?: boolean) => void;
 }) {
   const [isRanking, setIsRanking] = useState(mapping.is_ranking);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -49,7 +49,7 @@ function IsRankingSwitchCell({
       if (result.success) {
         setIsRanking(!isRanking);
         toast.success(result.message);
-        onRefresh?.();
+        onRefresh?.(false); // 既にtoastを表示しているので、更新時のtoastは表示しない
       } else {
         toast.error(result.message);
       }
@@ -79,7 +79,7 @@ function ConvertButtonCell({
   onRefresh,
 }: {
   mapping: EstatRankingMapping;
-  onRefresh?: () => void;
+  onRefresh?: (showToast?: boolean) => void;
 }) {
   const [isConverting, setIsConverting] = useState(false);
 
@@ -97,7 +97,7 @@ function ConvertButtonCell({
       );
       if (result.success) {
         toast.success(result.message);
-        onRefresh?.();
+        onRefresh?.(false); // 変換実行時はtoastを表示しない
       } else {
         toast.error(result.message);
       }

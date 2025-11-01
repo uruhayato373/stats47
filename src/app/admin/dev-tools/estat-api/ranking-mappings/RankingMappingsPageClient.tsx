@@ -62,15 +62,18 @@ export default function RankingMappingsPageClient({
 
   /**
    * データをリフレッシュ
+   * @param showToast - toastを表示するかどうか（デフォルト: true）
    */
-  const handleRefresh = () => {
+  const handleRefresh = (showToast = true) => {
     startTransition(async () => {
       try {
         const newMappings = await listRankingMappingsAction({
           limit: 10000,
         });
         setMappings(newMappings);
-        toast.success("データを更新しました");
+        if (showToast) {
+          toast.success("データを更新しました");
+        }
       } catch (error) {
         toast.error("データの取得に失敗しました");
       }

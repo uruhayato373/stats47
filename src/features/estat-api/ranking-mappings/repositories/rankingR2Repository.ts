@@ -7,6 +7,7 @@ import "server-only";
  */
 
 import { R2S3Client, getR2S3Config } from "@/infrastructure/storage/s3-client";
+import type { StatsSchema } from "@/types/stats";
 
 import type { RankingExportPayload } from "../types";
 
@@ -31,19 +32,20 @@ export class EstatRankingR2Repository {
    * @param areaType - 地域タイプ（prefecture/city/national）
    * @param rankingKey - ランキングキー（item_code）
    * @param timeCode - 時間コード
-   * @param payload - ランキングエクスポートペイロード
+   * @param statsSchemas - StatsSchema配列
    * @returns 保存されたキーとサイズ
    */
   static async saveRankingData(
     areaType: "prefecture" | "city" | "national",
     rankingKey: string,
     timeCode: string,
-    payload: RankingExportPayload
+    statsSchemas: StatsSchema[]
   ): Promise<{ key: string; size: number }> {
     // キー生成: ranking/{areaType}/{rankingKey}/{timeCode}.json
     const key = `ranking/${areaType}/${rankingKey}/${timeCode}.json`;
 
-    const jsonString = JSON.stringify(payload, null, 2);
+    // StatsSchema[]をJSON形式で保存
+    const jsonString = JSON.stringify(statsSchemas, null, 2);
     const jsonBuffer = Buffer.from(jsonString, "utf-8");
     const client = this.getClient();
 
@@ -55,6 +57,9 @@ export class EstatRankingR2Repository {
         .trim()
         .substring(0, 1024);
 
+    // 最初の要素から単位を取得（すべて同じ単位と仮定）
+    const unit = statsSchemas.length > 0 ? statsSchemas[0].unit : "";
+
     await client.putObject(key, jsonBuffer, {
       contentType: "application/json",
       metadata: {
@@ -63,8 +68,8 @@ export class EstatRankingR2Repository {
         "time-code": timeCode,
         "saved-at": new Date().toISOString(),
         "data-source": "estat",
-        "unit": sanitize(payload.metadata.unit),
-        "values-count": String(payload.values.length),
+        "unit": sanitize(unit),
+        "values-count": String(statsSchemas.length),
       },
     });
 
@@ -79,13 +84,13 @@ export class EstatRankingR2Repository {
    * @param areaType - 地域タイプ
    * @param rankingKey - ランキングキー
    * @param timeCode - 時間コード
-   * @returns ランキングエクスポートペイロード、またはnull（見つからない場合）
+   * @returns StatsSchema配列、またはnull（見つからない場合）
    */
   static async findRankingData(
     areaType: "prefecture" | "city" | "national",
     rankingKey: string,
     timeCode: string
-  ): Promise<RankingExportPayload | null> {
+  ): Promise<StatsSchema[] | null> {
     try {
       const key = `ranking/${areaType}/${rankingKey}/${timeCode}.json`;
       const client = this.getClient();
@@ -95,7 +100,7 @@ export class EstatRankingR2Repository {
         return null;
       }
 
-      const payload: RankingExportPayload = JSON.parse(
+      const statsSchemas: StatsSchema[] = JSON.parse(
         buffer.toString("utf-8")
       );
 
@@ -103,7 +108,7 @@ export class EstatRankingR2Repository {
         `[EstatRankingR2Repository] ランキングデータを取得: ${key}`
       );
 
-      return payload;
+      return statsSchemas;
     } catch (error) {
       console.warn(
         `[EstatRankingR2Repository] ランキングデータ取得失敗:`,

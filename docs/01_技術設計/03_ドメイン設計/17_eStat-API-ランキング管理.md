@@ -1,7 +1,7 @@
 ---
 title: eStat-API ランキング変換サブドメイン
 created: 2025-10-30
-updated: 2025-01-31
+updated: 2025-02-01
 tags:
   - eStat-API
   - ドメイン設計
@@ -13,11 +13,11 @@ tags:
 
 ## 概要
 
-本サブドメインは、e-Stat API（StatsData）から取得した応答を、Ranking 機能が直接利用可能なランキング形式（値のみ＋最小限 metadata）へ正規化し、R2 ストレージへ保存する役割を担います。順位やパーセンタイルの計算は行いません（Ranking 機能の責務）。
+本サブドメインは、e-Stat API（StatsData）から取得した応答を、`StatsSchema`形式へ正規化し、R2 ストレージへ保存する役割を担います。順位やパーセンタイルの計算は行いません（Ranking 機能の責務）。
 
 — 境界の要点 —
 
-- 本サブドメイン: 取得 → 正規化（値のみ）→ 統計量付与（min/max/mean/median）→ R2 保存
+- 本サブドメイン: 取得 → `convertToStatsSchema`で正規化 → `StatsSchema[]`形式で R2 保存
 - Ranking 機能: D1 の視覚化設定に基づく順位/パーセンタイル計算と表示
 
 ## 目次
@@ -37,9 +37,8 @@ tags:
 ### 責務
 
 - e-Stat API 応答（StatsData）を内部共通形式に変換
-- ランキング形式（値のみ: `areaCode`, `areaName`, `value`）へ正規化
-- 最小限の統計量（`min`, `max`, `mean`, `median`）の計算と付与
-- R2 への保存（冪等・上書き方針の遵守）
+- `convertToStatsSchema`を使用して`StatsSchema`形式へ正規化
+- `StatsSchema[]`配列として R2 への保存（冪等・上書き方針の遵守）
 
 ### 非責務
 
@@ -49,8 +48,8 @@ tags:
 
 - `estat_api_metadata`: ランキングキーと e-Stat パラメータの対応（構造は estat-api ドメインが定義、書き込みは Ranking 機能）
 - `estat_ranking_mappings`: e-Stat パラメータ（`stats_data_id`, `cat01`, `item_code`等）とランキング項目のマッピングテーブル（CSV ベース、`isRanking`フラグでランキング変換対象を指定）
-- `RankingDataPoint`: 値のみの最小単位（`areaCode`, `areaName`, `value`）
-- `isRanking`: ランキング変換対象フラグ（`true`の場合、R2 にランキング形式で保存）
+- `StatsSchema`: 統計データの基本型（`areaCode`, `areaName`, `timeCode`, `timeName`, `categoryCode`, `categoryName`, `value`, `unit`）
+- `isRanking`: ランキング変換対象フラグ（`true`の場合、R2 に`StatsSchema[]`形式で保存）
 
 ## アーキテクチャ設計
 
@@ -87,8 +86,7 @@ src/features/estat-api/
 
 出力
 
-- R2 に保存するランキング JSON（値のみ）
-- 付随する `statistics` と `metadata`
+- R2 に保存する`StatsSchema[]`形式の JSON
 
 ### CSV ファイル形式
 
@@ -111,7 +109,7 @@ stats_data_id,cat01,item_name,item_code,unit
 
 **注意:**
 
-- CSVファイルに古いカラム（`dividing_value`, `new_unit`, `ascending`）が含まれていても無視されます（互換性のため）
+- CSV ファイルに古いカラム（`dividing_value`, `new_unit`, `ascending`）が含まれていても無視されます（互換性のため）
 
 **CSV インポート方法**:
 
@@ -124,20 +122,31 @@ stats_data_id,cat01,item_name,item_code,unit
 
 ### JSON（R2 へ保存）
 
+`StatsSchema[]`形式の配列として保存されます：
+
 ```json
-{
-  "values": [
-    { "areaCode": "13000", "areaName": "東京都", "value": 6439.3 },
-    { "areaCode": "27000", "areaName": "大阪府", "value": 4646.5 }
-  ],
-  "statistics": { "min": 64.5, "max": 6439.3, "mean": 338.7, "median": 124.5 },
-  "metadata": {
-    "rankingKey": "population_density",
-    "timeCode": "2023",
-    "unit": "人/km²",
-    "dataSourceId": "estat"
+[
+  {
+    "areaCode": "13000",
+    "areaName": "東京都",
+    "timeCode": "2020000000",
+    "timeName": "2020年",
+    "categoryCode": "A1101",
+    "categoryName": "総人口",
+    "value": 14047594,
+    "unit": "人"
+  },
+  {
+    "areaCode": "27000",
+    "areaName": "大阪府",
+    "timeCode": "2020000000",
+    "timeName": "2020年",
+    "categoryCode": "A1101",
+    "categoryName": "総人口",
+    "value": 8839469,
+    "unit": "人"
   }
-}
+]
 ```
 
 ### データベーススキーマ
@@ -177,10 +186,10 @@ CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
 
 ```ts
 export interface EstatRankingMapping {
-  stats_data_id: string;  // 主キーの一部
-  cat01: string;  // 主キーの一部
+  stats_data_id: string; // 主キーの一部
+  cat01: string; // 主キーの一部
   item_name: string;
-  item_code: string;  // 重複許可
+  item_code: string; // 重複許可
   unit: string | null;
   area_type: "prefecture" | "city" | "national";
   is_ranking: boolean;
@@ -188,32 +197,28 @@ export interface EstatRankingMapping {
   updated_at: string;
 }
 
-export interface RankingDataPointValueOnly {
+// StatsSchema: 統計データの基本型
+export interface StatsSchema {
   areaCode: string;
   areaName: string;
+  timeCode: string;
+  timeName: string;
+  categoryCode: string;
+  categoryName: string;
   value: number;
-}
-
-export interface RankingExportPayload {
-  values: RankingDataPointValueOnly[];
-  statistics: { min: number; max: number; mean: number; median: number };
-  metadata: {
-    rankingKey: string; // item_code を使用
-    timeCode: string;
-    unit: string;
-    dataSourceId: "estat";
-  };
+  unit: string;
 }
 ```
 
 ## R2 保存仕様
 
 - キー設計: `ranking/{areaType}/{rankingKey}/{timeCode}.json`
-  - 例: `ranking/prefecture/population_density/2023.json`
+  - 例: `ranking/prefecture/total-population/2020000000.json`
 - 保存方針:
   - 同一キーは上書き（冪等）
-  - 値は「値のみ」（順位・パーセンタイルは含めない）
-  - `metadata.unit` は e-Stat に準拠し正規化
+  - 保存形式: `StatsSchema[]`配列（順位・パーセンタイルは含めない）
+  - `convertToStatsSchema`を使用して各値を`StatsSchema`形式に変換
+  - 各要素には`areaCode`, `areaName`, `timeCode`, `timeName`, `categoryCode`, `categoryName`, `value`, `unit`が含まれる
 
 — 互換（旧構造）—
 
@@ -266,6 +271,10 @@ export interface RankingExportPayload {
 - 新規機能: ランキング変換実行機能を追加（単一項目・全項目一括）
 - CSV インポート: スクリプト経由で実行（管理画面 UI には非表示）
 - API 変更: Server Actions のパラメータが`id`から`(stats_data_id, cat01)`に変更
+- データ形式変更: R2 保存形式が`RankingExportPayload`から`StatsSchema[]`に変更（2025-01-31）
+  - `convertToStatsSchema`を使用して各値を`StatsSchema`形式に変換
+  - 統計量（min/max/mean/median）の計算は削除
+  - 各要素には`areaCode`, `areaName`, `timeCode`, `timeName`, `categoryCode`, `categoryName`, `value`, `unit`が含まれる
 
 ## 実装済み機能
 
@@ -281,12 +290,14 @@ export interface RankingExportPayload {
   - `findRankingMappingByKey(stats_data_id, cat01)`: 複合キーで検索（旧`findRankingMappingById`を置き換え）
   - `updateIsRanking(stats_data_id, cat01, isRanking)`: 複合キーで更新
   - `bulkUpsertRankingMappings`: `ON CONFLICT(stats_data_id, cat01)`を使用してバルクアップサート
-- ✅ `EstatRankingR2Repository`: R2 へのランキングデータ保存・取得
+- ✅ `EstatRankingR2Repository`: R2 への`StatsSchema[]`形式データ保存・取得
+  - `saveRankingData(areaType, rankingKey, timeCode, statsSchemas: StatsSchema[])`: `StatsSchema[]`配列を保存
+  - `findRankingData(areaType, rankingKey, timeCode)`: `StatsSchema[]`配列を取得
 
 ### サービス
 
 - ✅ `csv-importer`: CSV パース・インポート機能（`parseCsvFile`, `importCsvToDatabase`）
-- ✅ `ranking-converter`: e-Stat データ → ランキング形式変換、統計量計算
+- ✅ `ranking-converter`: e-Stat データ → `StatsSchema[]`形式変換（`convertStatsDataToRankingFormat`は`StatsSchema[]`を返す）
 
 ### Server Actions
 
@@ -333,12 +344,13 @@ export interface RankingExportPayload {
 2. `convertToRankingAction`で該当項目を変換
    - e-Stat API からデータ取得（`fetchStatsData`）
    - `formatStatsData`でデータ整形
-   - `convertStatsDataToRankingFormat`でランキング形式に変換
-     - `areaCode`, `areaName`, `value`のみ抽出
-     - 統計量（min/max/mean/median）計算
+   - `convertStatsDataToRankingFormat`で`StatsSchema[]`形式に変換
+     - `convertToStatsSchema`を使用して各`FormattedValue`を`StatsSchema`に変換
+     - 時間コードが一致するもののみ処理
+   - `determineAreaType`で地域タイプを判定
    - `EstatRankingR2Repository.saveRankingData`で R2 に保存
      - キー: `ranking/{areaType}/{item_code}/{timeCode}.json`
-     - 形式: `RankingExportPayload`
+     - 形式: `StatsSchema[]`配列
 
 #### 3.2. 全項目の一括変換
 

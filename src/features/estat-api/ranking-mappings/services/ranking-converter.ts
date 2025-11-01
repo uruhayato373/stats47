@@ -3,11 +3,12 @@ import "server-only";
 /**
  * ランキング変換サービス
  *
- * e-Stat APIレスポンスをランキング形式（`RankingExportPayload`）に変換する機能を提供します。
+ * e-Stat APIレスポンスをランキング形式（`StatsSchema[]`）に変換する機能を提供します。
  */
 
-import { formatStatsData } from "../../stats-data/services/formatter";
+import { formatStatsData, convertToStatsSchema } from "../../stats-data/services/formatter";
 import type { EstatStatsDataResponse, FormattedValue } from "../../stats-data/types";
+import type { StatsSchema } from "@/types/stats";
 
 import type {
   RankingDataPointValueOnly,
@@ -84,32 +85,26 @@ function calculateStatistics(values: number[]): {
 }
 
 /**
- * e-Stat APIレスポンスをランキング形式に変換
+ * e-Stat APIレスポンスをStatsSchema[]形式に変換
  *
  * @param response - e-Stat APIレスポンス
- * @param rankingKey - ランキングキー（item_code）
+ * @param rankingKey - ランキングキー（item_code、使用されないが互換性のために保持）
  * @param timeCode - 時間コード（オプション、指定がない場合は最初の時間コードを使用）
  * @param unit - 単位（オプション、responseから自動取得）
- * @returns ランキングエクスポートペイロード
+ * @returns StatsSchema配列
  */
 export function convertStatsDataToRankingFormat(
   response: EstatStatsDataResponse,
   rankingKey: string,
   timeCode?: string,
   unit?: string
-): RankingExportPayload {
+): StatsSchema[] {
   console.log(
     `[convertStatsDataToRankingFormat] ランキング変換開始: rankingKey=${rankingKey}, timeCode=${timeCode || "auto"}`
   );
 
   // データ整形
   const formattedData = formatStatsData(response);
-
-  // 単位の決定（引数で指定されていない場合）
-  let targetUnit = unit;
-  if (!targetUnit && formattedData.values.length > 0) {
-    targetUnit = formattedData.values[0].unit || "";
-  }
 
   // 時間コードの決定
   let targetTimeCode = timeCode;
@@ -125,43 +120,34 @@ export function convertStatsDataToRankingFormat(
     throw new Error("時間コードが特定できません");
   }
 
-  // FormattedValueからランキングデータポイントに変換
-  const rankingPoints: RankingDataPointValueOnly[] = [];
+  // FormattedValueからStatsSchemaに変換
+  const statsSchemas: StatsSchema[] = [];
 
   for (const value of formattedData.values) {
-    const point = convertToRankingDataPoint(value, targetTimeCode);
-    if (point) {
-      rankingPoints.push(point);
+    // 時間コードが一致するもののみ処理
+    if (value.dimensions.time?.code !== targetTimeCode) {
+      continue;
+    }
+
+    const schema = convertToStatsSchema(value);
+    if (schema) {
+      // 単位が指定されている場合は上書き
+      if (unit) {
+        schema.unit = unit;
+      }
+      statsSchemas.push(schema);
     }
   }
 
-  if (rankingPoints.length === 0) {
-    throw new Error("ランキングデータポイントが生成できませんでした");
+  if (statsSchemas.length === 0) {
+    throw new Error("StatsSchemaデータが生成できませんでした");
   }
 
-  // 統計量を計算
-  const values = rankingPoints.map((p) => p.value);
-  const statistics = calculateStatistics(values);
-
-  // メタデータ
-  const metadata = {
-    rankingKey,
-    timeCode: targetTimeCode,
-    unit: targetUnit || "",
-    dataSourceId: "estat" as const,
-  };
-
-  const payload: RankingExportPayload = {
-    values: rankingPoints,
-    statistics,
-    metadata,
-  };
-
   console.log(
-    `[convertStatsDataToRankingFormat] ランキング変換完了: ${rankingPoints.length}件`
+    `[convertStatsDataToRankingFormat] ランキング変換完了: ${statsSchemas.length}件`
   );
 
-  return payload;
+  return statsSchemas;
 }
 
 /**
@@ -175,31 +161,35 @@ export function determineAreaType(areaCodes: string[]): "prefecture" | "city" | 
     return "prefecture";
   }
 
-  // 全国コードが含まれているか
-  if (areaCodes.includes("00000")) {
+  // 全国コード以外のコードを取得（全国コードを除外）
+  const nonNationalCodes = areaCodes.filter((code) => code !== "00000");
+
+  // 全国コードのみの場合は national
+  if (nonNationalCodes.length === 0) {
     return "national";
   }
 
-  // 都道府県コード（2桁で始まる、または"13000"のような形式）
-  const prefectureCodes = areaCodes.filter(
-    (code) => code.length >= 5 && code.substring(0, 2) !== "00" && code.endsWith("000")
+  // 都道府県コード（5桁、最後が"000"で、先頭2桁が"00"でない）
+  const prefectureCodes = nonNationalCodes.filter(
+    (code) => code.length === 5 && code.substring(0, 2) !== "00" && code.endsWith("000")
   );
 
-  if (prefectureCodes.length > areaCodes.length * 0.8) {
-    // 80%以上が都道府県コードの場合
+  // 市区町村コード（5桁、最後が"000"でない）
+  const cityCodes = nonNationalCodes.filter(
+    (code) => code.length === 5 && !code.endsWith("000")
+  );
+
+  // 都道府県コードが最も多い場合
+  if (prefectureCodes.length > cityCodes.length && prefectureCodes.length >= nonNationalCodes.length * 0.5) {
     return "prefecture";
   }
 
-  // 市区町村コード（5桁、最後が"000"でない）
-  const cityCodes = areaCodes.filter(
-    (code) => code.length >= 5 && !code.endsWith("000")
-  );
-
-  if (cityCodes.length > areaCodes.length * 0.8) {
+  // 市区町村コードが最も多い場合
+  if (cityCodes.length > prefectureCodes.length && cityCodes.length >= nonNationalCodes.length * 0.5) {
     return "city";
   }
 
-  // デフォルトは都道府県
+  // デフォルトは都道府県（都道府県コードが多く含まれている可能性が高い）
   return "prefecture";
 }
 
