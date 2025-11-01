@@ -123,10 +123,24 @@ export async function executeHttpRequest<T>(
 ): Promise<T> {
   const url = composeApiUrl(baseUrl, endpoint, params);
   console.log("🌐 HTTP Client: リクエストURL:", url);
+  console.log("🌐 HTTP Client: リクエストパラメータ:", params);
+  console.log("🌐 HTTP Client: リクエストパラメータ詳細:", {
+    hasLimit: "LIMIT" in params || "limit" in params,
+    LIMIT: params.LIMIT || params.limit,
+    hasStartPosition: "START_POSITION" in params || "startPosition" in params,
+    START_POSITION: params.START_POSITION || params.startPosition,
+    hasFIELD: "FIELD" in params || "statsField" in params || "field" in params,
+    FIELD: params.FIELD || params.statsField || params.field,
+    allKeys: Object.keys(params),
+  });
   const response = await executeTimeoutFetch(url, timeout);
   console.log("🌐 HTTP Client: レスポンスステータス:", response.status);
   await validateResponseStatus(response);
   const data = await response.json();
   console.log("🌐 HTTP Client: レスポンスデータ:", data);
+  console.log("🌐 HTTP Client: レスポンスデータ構造:", {
+    keys: Object.keys(data),
+    hasGET_STATS_LIST: !!(data as any).GET_STATS_LIST,
+  });
   return data as T;
 }

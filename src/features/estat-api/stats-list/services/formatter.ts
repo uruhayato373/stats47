@@ -28,13 +28,26 @@ export class EstatStatsListFormatter {
     response: EstatStatsListResponse
   ): StatsListSearchResult {
     console.log("🔵 Formatter: formatStatsListData 開始");
-    console.log("🔵 Formatter: レスポンス:", response);
+    console.log("🔵 Formatter: レスポンス全体:", JSON.stringify(response, null, 2));
     const startTime = Date.now();
 
     const datalist = response.GET_STATS_LIST.DATALIST_INF;
     console.log("🔵 Formatter: DATALIST_INF:", datalist);
+    console.log("🔵 Formatter: DATALIST_INF構造:", {
+      NUMBER: datalist.NUMBER,
+      RESULT_INF: datalist.RESULT_INF,
+      LIST_INF: datalist.LIST_INF,
+      DATALIST_INFのキー: Object.keys(datalist),
+    });
     console.log("🔵 Formatter: DATALIST_INF.NUMBER:", datalist.NUMBER);
+    console.log("🔵 Formatter: DATALIST_INF.RESULT_INF:", datalist.RESULT_INF);
     console.log("🔵 Formatter: DATALIST_INF.LIST_INF:", datalist.LIST_INF);
+    
+    // DATALIST_INF直下にTABLE_INFが存在する可能性も確認
+    const directTableInf = (datalist as any).TABLE_INF;
+    console.log("🔵 Formatter: DATALIST_INF直下のTABLE_INF:", directTableInf);
+    console.log("🔵 Formatter: DATALIST_INF直下のTABLE_INF存在:", !!directTableInf);
+    
     const tables = datalist.LIST_INF?.TABLE_INF;
     console.log("🔵 Formatter: TABLE_INF:", tables);
     console.log("🔵 Formatter: TABLE_INF存在:", !!tables);
@@ -51,14 +64,34 @@ export class EstatStatsListFormatter {
       console.log("⚠️ Formatter: DATALIST_INF詳細:", {
         NUMBER: datalist.NUMBER,
         LIST_INF: datalist.LIST_INF,
+        LIST_INF存在: !!datalist.LIST_INF,
+        LIST_INF型: typeof datalist.LIST_INF,
+        LIST_INFのキー: datalist.LIST_INF ? Object.keys(datalist.LIST_INF) : [],
+        TABLE_INF存在: !!datalist.LIST_INF?.TABLE_INF,
+        TABLE_INF型: typeof datalist.LIST_INF?.TABLE_INF,
+        TABLE_INF値: datalist.LIST_INF?.TABLE_INF,
         RESULT_INF: datalist.RESULT_INF,
+        RESULT_INF存在: !!datalist.RESULT_INF,
+        RESULT_INF_FROM_NUMBER: datalist.RESULT_INF?.FROM_NUMBER,
+        RESULT_INF_TO_NUMBER: datalist.RESULT_INF?.TO_NUMBER,
+        RESULT_INF_NEXT_KEY: datalist.RESULT_INF?.NEXT_KEY,
       });
+      
+      // DATALIST_INF全体の構造を確認
+      console.log("⚠️ Formatter: DATALIST_INF全体の構造:", {
+        DATALIST_INFのキー: Object.keys(datalist),
+        DATALIST_INF値: JSON.stringify(datalist, null, 2),
+      });
+      // LIST_INFが存在しない場合でも、RESULT_INFから情報を取得できる可能性がある
+      // e-Stat APIの仕様では、LIST_INFは0件の場合は存在しないが、
+      // RESULT_INFは存在する可能性がある
       return {
         totalCount: datalist.NUMBER || 0,
         tables: [],
         pagination: {
-          fromNumber: 0,
-          toNumber: 0,
+          fromNumber: datalist.RESULT_INF?.FROM_NUMBER || 0,
+          toNumber: datalist.RESULT_INF?.TO_NUMBER || 0,
+          nextKey: datalist.RESULT_INF?.NEXT_KEY,
         },
       };
     }

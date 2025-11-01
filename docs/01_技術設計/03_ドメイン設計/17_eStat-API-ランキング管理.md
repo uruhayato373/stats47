@@ -7,6 +7,7 @@ tags:
   - ドメイン設計
   - サブドメイン
   - R2
+  - データ同期
 ---
 
 # eStat-API ランキング変換サブドメイン設計
@@ -258,6 +259,92 @@ export interface StatsSchema {
   - バルクアップサート: 既存データは更新、新規データは追加（`ON CONFLICT(stats_data_id, cat01)`を使用）
   - `is_ranking`フラグ: 全て`false`で初期化（インポート後、管理画面で個別に設定）
   - `area_type`: 未指定時は`'prefecture'`がデフォルト値として設定される
+
+### R2→D1 同期機能（ranking_items テーブル自動生成）
+
+R2 ストレージの`ranking`ディレクトリを走査し、実際に保存されているランキングデータから`ranking_items`テーブルを自動生成・更新する機能を提供します。
+
+#### 目的
+
+- R2 ストレージ内の実データ構造を調査し、`ranking_items`テーブルを自動生成・更新
+- R2 に保存されているランキングデータと D1 データベースの`ranking_items`テーブルを同期
+- 手動でのデータ投入作業を削減し、R2 ストレージが唯一の情報源となる状況を支援
+
+#### R2 ストレージ構造
+
+- **パス形式**: `ranking/{areaType}/{rankingKey}/{timeCode}.json`
+  - `areaType`: 地域タイプ（`prefecture` | `city` | `national`）
+  - `rankingKey`: ランキングキー（`ranking_items.ranking_key`として使用）
+  - `timeCode`: 時間コード（例: `2020000000`）
+- **データ形式**: `StatsSchema[]`配列（JSON 形式）
+- **例**: `ranking/prefecture/total-population/2020000000.json`
+  - `areaType = "prefecture"`
+  - `rankingKey = "total-population"`（`ranking_items.ranking_key`として抽出）
+  - `timeCode = "2020000000"`
+
+#### 走査対象パスとルール
+
+- **対象ディレクトリ**: `ranking/{areaType}/` のパターンで走査開始
+  - `ranking/prefecture/` - 都道府県データ
+  - `ranking/city/` - 市区町村データ
+  - `ranking/national/` - 全国データ
+- **走査方法**:
+  1. `ranking/{areaType}/` ディレクトリ内の各サブディレクトリ（`{rankingKey}/`）を検出
+  2. パス例: `ranking/prefecture/total-population/` → `areaType="prefecture"`, `rankingKey="total-population"`
+  3. 各`rankingKey`に対して、`{rankingKey}/{timeCode}.json` のファイルを 1 つ読み取り
+  4. `StatsSchema[]`配列からメタデータを抽出（`unit`など）
+
+#### 更新ポリシー（上書き: 指定フィールドのみ）
+
+R2 から抽出可能な情報のみ更新し、既存の設定（視覚化設定など）は保持します。
+
+- **新規作成時**: 以下のフィールドを設定
+
+  - `ranking_key`: R2 から抽出した`rankingKey`
+  - `unit`: `StatsSchema[]`配列の最初の要素から抽出
+  - `data_source_id`: `"estat"`固定（e-Stat API 由来のデータのため）
+  - `label`: `rankingKey`を基に自動生成（未設定の場合）
+  - `name`: `rankingKey`を基に自動生成（未設定の場合）
+  - その他のフィールド: デフォルト値を使用
+
+- **既存データ更新時**: 以下のフィールドのみ更新（その他の表示系は非上書き）
+  - `unit`: R2 から抽出した値で更新
+  - `data_source_id`: `"estat"`に更新（異なる場合）
+  - その他のフィールド（`label`, `name`, `map_color_scheme`, `ranking_direction`など）: 既存の値を保持
+
+#### 同期フロー
+
+1. R2 の`ranking`ディレクトリを走査
+   - `ranking/{areaType}/` のパターンで走査開始
+   - 各`areaType`ディレクトリ内の`{rankingKey}/` ディレクトリを検出
+2. メタデータ抽出
+   - 各`rankingKey`に対して、`{rankingKey}/{timeCode}.json` のファイルを 1 つ読み取り
+   - `StatsSchema[]`配列から`unit`を抽出（最初の要素から）
+3. `ranking_items`テーブルへの反映
+   - `ranking_key`を基に検索
+   - 存在しない場合は作成（`INSERT`）
+   - 存在する場合は更新（`UPDATE`、指定フィールドのみ）
+4. 統計ログ出力
+   - 新規作成件数、更新件数、スキップ件数、警告を記録
+
+#### 実装方法
+
+- **サービス**: `src/features/estat-api/ranking-mappings/services/r2-sync-service.ts`
+  - R2 ディレクトリ走査機能
+  - メタデータ抽出機能
+  - `ranking_items`テーブルへの反映機能
+- **Server Action**: `src/features/estat-api/ranking-mappings/actions/sync-r2-to-db-action.ts`
+  - 管理画面から同期実行を可能にする
+  - 同期結果を返却
+- **管理画面 UI**: 同期実行ボタンを追加
+  - 実行ボタンをクリックすると、R2→D1 同期処理を実行
+  - 進捗と結果を`toast`通知で表示
+
+#### 運用と安全性
+
+- **管理者専用**: Server Action として実装し、管理者権限でのみ実行可能
+- **dry-run サポート**: 実際のデータベース更新を行わず、変更内容をプレビュー可能
+- **冪等性**: 何度実行しても同じ結果になる（`INSERT OR REPLACE`を使用）
 
 ## 変更影響
 
