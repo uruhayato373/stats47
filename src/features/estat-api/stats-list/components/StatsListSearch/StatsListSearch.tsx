@@ -54,13 +54,21 @@ export function StatsListSearch({
     const options: StatsListSearchOptions = {
       ...(searchWord && { searchWord }),
       ...(statsCode && { statsCode }),
-      ...(statsField && { statsField }),
-      ...(collectArea && { collectArea }),
+      ...(statsField && statsField !== "" && { statsField }),
+      ...(collectArea && collectArea !== "" && { collectArea }),
       ...(surveyYears && { surveyYears }),
       limit,
     };
 
     console.log("🔵 Component: 検索オプション", options);
+    console.log("🔵 Component: 検索フォーム状態", {
+      searchWord,
+      statsCode,
+      statsField,
+      collectArea,
+      surveyYears,
+      limit,
+    });
     onSearch(options);
   };
 
@@ -121,7 +129,7 @@ export function StatsListSearch({
           {/* 分野コード */}
           <div className="space-y-2">
             <Label htmlFor="statsField">分野コード</Label>
-            <Select value={statsField} onValueChange={setStatsField}>
+            <Select value={statsField || undefined} onValueChange={setStatsField}>
               <SelectTrigger>
                 <SelectValue placeholder="選択してください" />
               </SelectTrigger>
@@ -141,7 +149,7 @@ export function StatsListSearch({
           <div className="space-y-2">
             <Label htmlFor="collectArea">集計地域区分</Label>
             <Select
-              value={collectArea}
+              value={collectArea || undefined}
               onValueChange={(value) =>
                 setCollectArea(value as "1" | "2" | "3" | "")
               }
@@ -150,7 +158,9 @@ export function StatsListSearch({
                 <SelectValue placeholder="すべて" />
               </SelectTrigger>
               <SelectContent>
-                {COLLECT_AREA_OPTIONS.map((option) => (
+                {COLLECT_AREA_OPTIONS.filter(
+                  (option) => option.value !== ""
+                ).map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>

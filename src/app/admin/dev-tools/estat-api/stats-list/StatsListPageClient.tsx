@@ -5,44 +5,34 @@ import { useCallback, useState } from "react";
 import { List } from "lucide-react";
 
 import {
-    StatsFieldSidebar,
-    StatsListResults,
-    StatsListSearch,
-    StatsTableDetailModal,
+  StatsListResults,
+  StatsListSearch,
+  StatsTableDetailModal,
 } from "@/features/estat-api/stats-list/components";
-
 import { useStatsListSearch } from "@/features/estat-api/stats-list/hooks/useStatsListSearch";
 import {
-    DetailedStatsListTableInfo,
-    StatsFieldCode,
-    StatsListSearchOptions,
-    StatsListTableInfo,
+  DetailedStatsListTableInfo,
+  StatsListSearchOptions,
+  StatsListTableInfo,
 } from "@/features/estat-api/stats-list/types";
 
 /**
- * e-Stat統計表一覧ページコンポーネント
+ * StatsListPageClient - e-Stat統計表一覧ページのクライアントコンポーネント
  *
- * 機能:
- * - 統合検索タブ（分野別、シンプル、高度検索）
- * - 検索結果の表示（リスト/グリッド表示）
+ * 責務:
+ * - 統計表検索機能の提供
+ * - 検索結果の表示
  * - 統計表の詳細表示（モーダル）
- * - お気に入り機能
- * - 検索履歴の表示
  * - ソート・フィルタ機能
  *
- * @returns JSX要素
+ * 注: 将来的にサーバーサイドでデータ取得する場合は、propsを追加する
  */
-export default function StatsListPageContent() {
+export default function StatsListPageClient() {
   // ===== 状態管理 =====
 
   /** 選択された統計表の詳細情報（モーダル表示用） */
   const [selectedTable, setSelectedTable] =
     useState<DetailedStatsListTableInfo | null>(null);
-
-  /** 選択された統計分野コード */
-  const [selectedField, setSelectedField] = useState<
-    StatsFieldCode | undefined
-  >(undefined);
 
   // ===== カスタムフック =====
 
@@ -65,6 +55,14 @@ export default function StatsListPageContent() {
   const handleSimpleSearch = useCallback(
     async (options: StatsListSearchOptions) => {
       console.log("🔵 Page: シンプル検索開始", options);
+      console.log("🔵 Page: 検索オプション詳細", {
+        hasSearchWord: !!options.searchWord,
+        hasStatsCode: !!options.statsCode,
+        hasStatsField: !!options.statsField,
+        statsField: options.statsField,
+        hasCollectArea: !!options.collectArea,
+        limit: options.limit,
+      });
       await search(options);
     },
     [search]
@@ -85,24 +83,6 @@ export default function StatsListPageContent() {
     };
     setSelectedTable(detailedTable);
   }, []);
-
-  /**
-   * 統計分野の選択処理
-   * @param fieldCode - 選択された統計分野コード
-   */
-  const handleFieldSelect = useCallback(
-    (fieldCode: StatsFieldCode) => {
-      console.log("🔵 Page: 分野選択", fieldCode);
-      setSelectedField(fieldCode);
-
-      // 選択した分野で検索
-      search({
-        statsField: fieldCode,
-        limit: 100,
-      });
-    },
-    [search]
-  );
 
   /**
    * ソート処理
@@ -134,38 +114,30 @@ export default function StatsListPageContent() {
 
   // ===== レンダリング =====
 
-  // ヘッダー
-  const header = (
-    <div className="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
-      <div>
-        <h1 className="font-medium text-lg text-gray-800 dark:text-neutral-200 flex items-center gap-2">
-          <List className="w-6 h-6 text-indigo-600" />
+  return (
+    <div className="h-full p-4">
+      {/* ヘッダー */}
+      <div className="mb-6 pb-4 border-b border-border">
+        <h1 className="font-medium text-lg text-foreground flex items-center gap-2">
+          <List className="w-6 h-6 text-primary" />
           e-Stat 統計表一覧
         </h1>
       </div>
-    </div>
-  );
 
-  // メインコンテンツ
-  const mainContent = (
-    <div className="flex-1 bg-white dark:bg-neutral-800">
-      <div className="p-4 md:p-6 space-y-6">
+      {/* メインコンテンツ */}
+      <div className="space-y-6">
         {/* シンプル検索フォーム */}
-        <StatsListSearch
-          onSearch={handleSimpleSearch}
-          isLoading={isLoading}
-          selectedField={selectedField}
-        />
+        <StatsListSearch onSearch={handleSimpleSearch} isLoading={isLoading} />
 
         {/* エラー表示 */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4">
+          <div className="bg-destructive/10 border border-destructive/20 rounded-md p-4">
             <div className="flex">
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">
+                <h3 className="text-sm font-medium text-destructive">
                   エラーが発生しました
                 </h3>
-                <div className="mt-2 text-sm text-red-700">
+                <div className="mt-2 text-sm text-destructive/80">
                   <p>{error}</p>
                 </div>
               </div>
@@ -187,40 +159,62 @@ export default function StatsListPageContent() {
           />
         )}
 
+        {/* デバッグ情報 */}
+        {process.env.NODE_ENV === "development" && (
+          <div className="mt-4 p-4 bg-gray-100 rounded-md text-xs">
+            <h4 className="font-bold mb-2">デバッグ情報</h4>
+            <div className="space-y-1">
+              <p>searchResult: {searchResult ? "存在" : "null"}</p>
+              <p>
+                searchResult.tables.length:{" "}
+                {searchResult?.tables?.length ?? "N/A"}
+              </p>
+              <p>
+                searchResult.tables存在:{" "}
+                {searchResult?.tables ? "はい" : "いいえ"}
+              </p>
+              <p>
+                searchResult.tables型:{" "}
+                {searchResult?.tables
+                  ? Array.isArray(searchResult.tables)
+                    ? "配列"
+                    : typeof searchResult.tables
+                  : "N/A"}
+              </p>
+              <p>totalCount: {searchResult?.totalCount ?? "N/A"}</p>
+              <p>isLoading: {isLoading ? "true" : "false"}</p>
+              <p>error: {error || "なし"}</p>
+              {searchResult && (
+                <details className="mt-2">
+                  <summary className="cursor-pointer font-semibold">
+                    searchResult詳細
+                  </summary>
+                  <pre className="mt-1 p-2 bg-white rounded text-xs overflow-auto max-h-40">
+                    {JSON.stringify(
+                      {
+                        totalCount: searchResult.totalCount,
+                        tablesLength: searchResult.tables?.length,
+                        tablesType: Array.isArray(searchResult.tables)
+                          ? "array"
+                          : typeof searchResult.tables,
+                        pagination: searchResult.pagination,
+                      },
+                      null,
+                      2
+                    )}
+                  </pre>
+                </details>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* 統計表詳細モーダル */}
         <StatsTableDetailModal
           table={selectedTable}
           isOpen={selectedTable !== null}
           onClose={() => setSelectedTable(null)}
         />
-      </div>
-    </div>
-  );
-
-  // サイドバー
-  const sidebar = (
-    <StatsFieldSidebar
-      onFieldSelect={handleFieldSelect}
-      selectedField={selectedField}
-      className="h-full"
-    />
-  );
-
-  // ===== レスポンシブレイアウト =====
-  return (
-    <div className="transition-all duration-300 min-h-screen bg-white dark:bg-neutral-900">
-      {header}
-
-      {/* サイドバーありレイアウト（レスポンシブ対応） */}
-      <div className="flex flex-col lg:flex-row min-h-full">
-        {/* メインコンテンツ */}
-        {mainContent}
-
-        {/* サイドバー区切り線（デスクトップのみ） */}
-        <div className="hidden lg:block w-px border-s border-gray-200 dark:border-neutral-700"></div>
-
-        {/* サイドバーコンテンツ */}
-        <div className="w-full lg:w-80 xl:w-96 flex-shrink-0">{sidebar}</div>
       </div>
     </div>
   );

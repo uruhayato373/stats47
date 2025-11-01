@@ -33,11 +33,26 @@ export class EstatStatsListFormatter {
 
     const datalist = response.GET_STATS_LIST.DATALIST_INF;
     console.log("🔵 Formatter: DATALIST_INF:", datalist);
+    console.log("🔵 Formatter: DATALIST_INF.NUMBER:", datalist.NUMBER);
+    console.log("🔵 Formatter: DATALIST_INF.LIST_INF:", datalist.LIST_INF);
     const tables = datalist.LIST_INF?.TABLE_INF;
     console.log("🔵 Formatter: TABLE_INF:", tables);
+    console.log("🔵 Formatter: TABLE_INF存在:", !!tables);
+    console.log("🔵 Formatter: TABLE_INF型:", typeof tables);
+    if (tables) {
+      console.log("🔵 Formatter: TABLE_INF配列か:", Array.isArray(tables));
+      if (Array.isArray(tables)) {
+        console.log("🔵 Formatter: TABLE_INF配列長:", tables.length);
+      }
+    }
 
     if (!tables) {
       console.log("⚠️ Formatter: テーブル情報が見つかりません");
+      console.log("⚠️ Formatter: DATALIST_INF詳細:", {
+        NUMBER: datalist.NUMBER,
+        LIST_INF: datalist.LIST_INF,
+        RESULT_INF: datalist.RESULT_INF,
+      });
       return {
         totalCount: datalist.NUMBER || 0,
         tables: [],

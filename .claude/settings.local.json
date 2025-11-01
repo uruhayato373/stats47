@@ -79,7 +79,8 @@
       "Bash(npx knip --include files)",
       "Bash(npx knip:*)",
       "Bash(npm uninstall:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "WebFetch(domain:www.e-stat.go.jp)"
     ],
     "deny": [],
     "ask": []

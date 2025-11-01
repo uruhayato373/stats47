@@ -140,6 +140,15 @@ export function useStatsListSearch() {
    */
   const search = useCallback((options: StatsListSearchOptions) => {
     console.log("🔵 Hook: 検索開始", options);
+    console.log("🔵 Hook: 検索オプション詳細", {
+      hasSearchWord: !!options.searchWord,
+      hasStatsCode: !!options.statsCode,
+      hasStatsField: !!options.statsField,
+      statsField: options.statsField,
+      hasCollectArea: !!options.collectArea,
+      limit: options.limit,
+      allKeys: Object.keys(options),
+    });
     setSearchOptions(options);
   }, []);
 
