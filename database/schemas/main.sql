@@ -2,7 +2,7 @@
 -- 認証、e-Statメタデータ、ランキング、ダッシュボードを統合
 -- 作成日: 2024-12-19
 -- 最終更新: 2025-01-31
--- 備考: マイグレーション履歴（025-034）を統合した完全版スキーマ
+-- 備考: マイグレーション履歴（025-037）を統合した完全版スキーマ
 
 -- ============================================================================
 -- 1. 認証関連テーブル（Auth.js準拠）
@@ -170,6 +170,25 @@ CREATE TABLE IF NOT EXISTS estat_api_metadata (
 -- ランキング値データは R2 Storage に JSON 形式で保存されます
 -- パス: ranking/{ranking_key}/{area_type}/{time_code}.json
 
+-- estat_ranking_mappings: e-Stat APIパラメータとランキング項目のマッピングテーブル
+-- CSVファイル（data/prefectures.csv）からインポートするデータを保存
+-- isRankingフラグでランキング変換対象を指定
+CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  stats_data_id TEXT NOT NULL,
+  cat01 TEXT NOT NULL,
+  item_name TEXT NOT NULL,
+  item_code TEXT NOT NULL,
+  unit TEXT,
+  dividing_value TEXT,
+  new_unit TEXT,
+  ascending BOOLEAN DEFAULT 0,
+  is_ranking BOOLEAN DEFAULT 0,  -- ランキング変換対象フラグ
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(stats_data_id, cat01, item_code)
+);
+
 -- ranking_groups: ランキンググループ定義テーブル
 CREATE TABLE IF NOT EXISTS ranking_groups (
   group_key TEXT PRIMARY KEY,
@@ -264,6 +283,11 @@ CREATE INDEX IF NOT EXISTS idx_ranking_items_active ON ranking_items(is_active);
 CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_key);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_ranking ON estat_api_metadata(ranking_key);
 CREATE INDEX IF NOT EXISTS idx_estat_api_metadata_area ON estat_api_metadata(area_type);
+
+-- estat_ranking_mappings テーブルのインデックス
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_stats_data_id ON estat_ranking_mappings(stats_data_id);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_is_ranking ON estat_ranking_mappings(is_ranking);
+CREATE INDEX IF NOT EXISTS idx_estat_ranking_mappings_item_code ON estat_ranking_mappings(item_code);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);
