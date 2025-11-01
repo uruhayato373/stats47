@@ -39,21 +39,52 @@ export default async function StatsDataPage({
   const statsDataId = params.statsDataId;
   const cdCat01 = params.cdCat01;
 
+  // デバッグログ: パラメータの確認
+  console.log("[StatsDataPage] URLパラメータ:", {
+    statsDataId,
+    cdCat01,
+    cdArea: params.cdArea,
+    cdTime: params.cdTime,
+    allParams: params,
+  });
+
   // 統計データの取得
   let statsData: EstatStatsDataResponse | null = null;
   let error: string | null = null;
 
-  // サーバーサイドでデータ取得
-  if (statsDataId && cdCat01) {
+  // データ取得条件の検証
+  if (!statsDataId) {
+    console.log("[StatsDataPage] statsDataIdが指定されていません");
+    error = "統計表IDが必要です";
+  } else if (!cdCat01) {
+    console.log("[StatsDataPage] cdCat01が指定されていません");
+    error = "分類01が必要です";
+  } else {
+    // サーバーサイドでデータ取得
     try {
-      console.log(`Fetching stats data from e-Stat API...`);
+      console.log("[StatsDataPage] データ取得開始:", {
+        statsDataId,
+        cdCat01,
+        cdArea: params.cdArea,
+        cdTime: params.cdTime,
+      });
       statsData = await fetchStatsData(statsDataId, {
         categoryFilter: cdCat01,
         ...(params.cdArea && { areaFilter: params.cdArea }),
         ...(params.cdTime && { yearFilter: params.cdTime }),
       });
+      console.log("[StatsDataPage] データ取得成功:", {
+        hasData: !!statsData,
+        status: statsData?.GET_STATS_DATA?.RESULT?.STATUS,
+      });
     } catch (err) {
-      console.error(`データ取得エラー:`, err);
+      console.error("[StatsDataPage] データ取得エラー:", err);
+      console.error("[StatsDataPage] エラー詳細:", {
+        statsDataId,
+        cdCat01,
+        error: err instanceof Error ? err.message : String(err),
+        stack: err instanceof Error ? err.stack : undefined,
+      });
       error = err instanceof Error ? err.message : "データの取得に失敗しました";
     }
   }

@@ -37,6 +37,14 @@ export default function EstatDataDisplay({
     "overview" | "categories" | "years" | "values" | "raw"
   >("overview");
 
+  // デバッグログ: コンポーネントの状態を確認
+  console.log("[EstatDataDisplay] コンポーネント状態:", {
+    hasData: !!data,
+    data: data ? { hasGetStatsData: !!data.GET_STATS_DATA } : null,
+    loading,
+    error,
+  });
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -53,21 +61,18 @@ export default function EstatDataDisplay({
     );
   }
 
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertTriangle className="h-4 w-4" />
-        <AlertDescription>
-          <strong>データ取得エラー:</strong> {error}
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
   if (!data) {
     return (
       <div className="space-y-6">
         <EstatStatsDataFetcher />
+        {error && (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>
+              <strong>データ取得エラー:</strong> {error}
+            </AlertDescription>
+          </Alert>
+        )}
         <div className="bg-card border border-border rounded-lg shadow-sm">
           <div className="p-8 text-center">
             <Database className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
@@ -75,7 +80,9 @@ export default function EstatDataDisplay({
               データ取得前
             </h3>
             <p className="text-muted-foreground">
-              上のフォームからパラメータを入力してデータを取得してください
+              {error
+                ? "エラーが発生しました。パラメータを確認して再試行してください"
+                : "上のフォームからパラメータを入力してデータを取得してください"}
             </p>
           </div>
         </div>
@@ -86,6 +93,14 @@ export default function EstatDataDisplay({
   return (
     <div className="space-y-6">
       <EstatStatsDataFetcher />
+      {error && (
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>
+            <strong>データ取得エラー:</strong> {error}
+          </AlertDescription>
+        </Alert>
+      )}
       <div>
         {/* タブナビゲーション */}
         <Tabs
@@ -116,19 +131,19 @@ export default function EstatDataDisplay({
 
           {/* タブコンテンツ */}
           <TabsContent value="overview" className="p-4">
-            <EstatOverview data={data} />
+            {data ? <EstatOverview data={data} /> : <div>データがありません</div>}
           </TabsContent>
           <TabsContent value="categories" className="p-4">
-            <EstatCategoriesTable data={data} />
+            {data ? <EstatCategoriesTable data={data} /> : <div>データがありません</div>}
           </TabsContent>
           <TabsContent value="years" className="p-4">
-            <EstatYearsTable data={data} />
+            {data ? <EstatYearsTable data={data} /> : <div>データがありません</div>}
           </TabsContent>
           <TabsContent value="values" className="p-4">
-            <EstatValuesTable data={data} />
+            {data ? <EstatValuesTable data={data} /> : <div>データがありません</div>}
           </TabsContent>
           <TabsContent value="raw" className="p-4">
-            <EstatRawData data={data} />
+            {data ? <EstatRawData data={data} /> : <div>データがありません</div>}
           </TabsContent>
         </Tabs>
       </div>

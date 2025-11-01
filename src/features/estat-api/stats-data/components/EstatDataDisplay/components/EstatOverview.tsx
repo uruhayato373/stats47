@@ -26,7 +26,29 @@ interface EstatOverviewProps {
 }
 
 export default function EstatOverview({ data }: EstatOverviewProps) {
-  if (!data?.GET_STATS_DATA) return null;
+  // デバッグログ
+  console.log("[EstatOverview] データ状態:", {
+    hasData: !!data,
+    hasGetStatsData: !!data?.GET_STATS_DATA,
+    getStatsData: data?.GET_STATS_DATA ? {
+      hasResult: !!data.GET_STATS_DATA.RESULT,
+      hasParameter: !!data.GET_STATS_DATA.PARAMETER,
+      hasStatisticalData: !!data.GET_STATS_DATA.STATISTICAL_DATA,
+    } : null,
+  });
+
+  if (!data?.GET_STATS_DATA) {
+    console.warn("[EstatOverview] GET_STATS_DATAが存在しません", {
+      data,
+      keys: data ? Object.keys(data) : null,
+    });
+    return (
+      <div className="p-4 text-center text-muted-foreground">
+        <p>データが見つかりませんでした。</p>
+        <p className="text-xs mt-2">GET_STATS_DATAが存在しません</p>
+      </div>
+    );
+  }
 
   const result = data.GET_STATS_DATA.RESULT;
   const parameter = data.GET_STATS_DATA.PARAMETER;
