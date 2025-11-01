@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 
-import { AlertTriangle, List, RefreshCw, Zap } from "lucide-react";
+import { AlertTriangle, Download, List, RefreshCw, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/atoms/ui/button";
@@ -23,6 +23,7 @@ import {
 import { EstatRankingMappingsTable } from "@/features/estat-api/ranking-mappings/components/EstatRankingMappingsTable";
 import {
   convertAllRankingsAction,
+  exportRankingMappingsToCsvAction,
   listRankingMappingsAction,
 } from "@/features/estat-api/ranking-mappings/actions";
 
@@ -78,6 +79,37 @@ export default function RankingMappingsPageClient({
         toast.error("データの取得に失敗しました");
       }
     });
+  };
+
+  /**
+   * CSVエクスポート
+   */
+  const handleExportCsv = async () => {
+    try {
+      toast.info("CSVファイルを生成中...");
+      const result = await exportRankingMappingsToCsvAction();
+
+      if (!result.success || !result.csv) {
+        toast.error(result.message || "CSVエクスポートに失敗しました");
+        return;
+      }
+
+      // CSVファイルをダウンロード
+      const blob = new Blob([result.csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `estat_ranking_mappings_${new Date().toISOString().split("T")[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      toast.success("CSVファイルをダウンロードしました");
+    } catch (error) {
+      console.error("CSVエクスポートエラー:", error);
+      toast.error("CSVエクスポートに失敗しました");
+    }
   };
 
   /**
@@ -150,6 +182,24 @@ export default function RankingMappingsPageClient({
           <p className="text-sm text-muted-foreground mt-2">
             注意: 大量のデータを変換するため、時間がかかる場合があります
           </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Download className="h-5 w-5" />
+            CSVエクスポート
+          </CardTitle>
+          <CardDescription>
+            estat_ranking_mappingsテーブルのデータをCSVファイルとしてダウンロードします。
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button onClick={handleExportCsv} variant="outline" className="w-full">
+            <Download className="mr-2 h-4 w-4" />
+            CSV保存
+          </Button>
         </CardContent>
       </Card>
 

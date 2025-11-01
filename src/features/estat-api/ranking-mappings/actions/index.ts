@@ -22,6 +22,25 @@ import {
 import type { EstatRankingMapping } from "../types";
 
 /**
+ * CSV値のエスケープ処理
+ */
+function escapeCsvValue(value: string | null | undefined): string {
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  const str = String(value);
+  
+  // カンマ、ダブルクォート、改行を含む場合はダブルクォートで囲む
+  if (str.includes(",") || str.includes('"') || str.includes("\n")) {
+    // ダブルクォートをエスケープ
+    return `"${str.replace(/"/g, '""')}"`;
+  }
+  
+  return str;
+}
+
+/**
  * CSVファイルをインポート（ファイルパス版）
  *
  * @param filePath - CSVファイルのパス（data/prefectures.csv等）
@@ -723,6 +742,90 @@ export async function listRankingMappingsAction(options?: {
   } catch (error) {
     console.error("[listRankingMappingsAction] 取得エラー:", error);
     return [];
+  }
+}
+
+/**
+ * CSVエクスポートアクション
+ *
+ * estat_ranking_mappingsテーブルのデータをCSV形式で取得
+ *
+ * @returns CSV文字列
+ */
+export async function exportRankingMappingsToCsvAction(): Promise<{
+  success: boolean;
+  csv?: string;
+  message?: string;
+}> {
+  try {
+    console.log("[exportRankingMappingsToCsvAction] CSVエクスポート開始");
+
+    // すべてのランキングマッピングを取得
+    const mappings = await listRankingMappings({
+      limit: 100000, // 十分に大きな値を設定
+    });
+
+    if (mappings.length === 0) {
+      return {
+        success: false,
+        message: "エクスポートするデータがありません",
+      };
+    }
+
+    // CSVヘッダー
+    const headers = [
+      "stats_data_id",
+      "cat01",
+      "item_name",
+      "item_code",
+      "unit",
+      "area_type",
+      "is_ranking",
+      "created_at",
+      "updated_at",
+    ];
+
+    // CSV行を生成
+    const csvRows: string[] = [];
+
+    // ヘッダー行
+    csvRows.push(headers.map((h) => escapeCsvValue(h)).join(","));
+
+    // データ行
+    for (const mapping of mappings) {
+      const csvRow = [
+        escapeCsvValue(mapping.stats_data_id),
+        escapeCsvValue(mapping.cat01),
+        escapeCsvValue(mapping.item_name),
+        escapeCsvValue(mapping.item_code),
+        escapeCsvValue(mapping.unit),
+        escapeCsvValue(mapping.area_type),
+        escapeCsvValue(mapping.is_ranking ? "1" : "0"),
+        escapeCsvValue(mapping.created_at),
+        escapeCsvValue(mapping.updated_at),
+      ];
+      csvRows.push(csvRow.join(","));
+    }
+
+    const csv = csvRows.join("\n");
+
+    console.log(
+      `[exportRankingMappingsToCsvAction] CSVエクスポート完了: ${mappings.length}件`
+    );
+
+    return {
+      success: true,
+      csv,
+    };
+  } catch (error) {
+    console.error("[exportRankingMappingsToCsvAction] CSVエクスポートエラー:", error);
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "CSVエクスポートに失敗しました",
+    };
   }
 }
 
