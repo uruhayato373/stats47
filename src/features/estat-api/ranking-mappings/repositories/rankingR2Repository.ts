@@ -188,5 +188,62 @@ export class EstatRankingR2Repository {
       return [];
     }
   }
+
+  /**
+   * ランキングキー配下のすべてのデータを削除
+   *
+   * @param areaType - 地域タイプ
+   * @param rankingKey - ランキングキー
+   * @returns 削除されたファイル数とキーの配列
+   */
+  static async deleteAllRankingDataByKey(
+    areaType: "prefecture" | "city" | "national",
+    rankingKey: string
+  ): Promise<{ deletedCount: number; deletedKeys: string[] }> {
+    try {
+      // 該当するすべてのファイルキーを取得
+      const keys = await this.listRankingKeys(areaType, rankingKey);
+
+      if (keys.length === 0) {
+        console.log(
+          `[EstatRankingR2Repository] 削除対象のファイルが見つかりません: ranking/${areaType}/${rankingKey}/`
+        );
+        return { deletedCount: 0, deletedKeys: [] };
+      }
+
+      const deletedKeys: string[] = [];
+      const client = this.getClient();
+
+      // 各ファイルを削除
+      for (const key of keys) {
+        try {
+          await client.deleteObject(key);
+          deletedKeys.push(key);
+          console.log(`[EstatRankingR2Repository] ランキングデータを削除: ${key}`);
+        } catch (error) {
+          console.error(
+            `[EstatRankingR2Repository] ファイル削除エラー: ${key}`,
+            error
+          );
+          // エラーが発生しても続行
+        }
+      }
+
+      console.log(
+        `[EstatRankingR2Repository] ランキングデータ削除完了: ${deletedKeys.length}/${keys.length}件`
+      );
+
+      return {
+        deletedCount: deletedKeys.length,
+        deletedKeys,
+      };
+    } catch (error) {
+      console.error(
+        `[EstatRankingR2Repository] ランキングデータ一括削除失敗:`,
+        error
+      );
+      return { deletedCount: 0, deletedKeys: [] };
+    }
+  }
 }
 

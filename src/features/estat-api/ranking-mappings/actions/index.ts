@@ -128,10 +128,54 @@ export async function updateIsRankingAction(
       `[updateIsRankingAction] isRanking更新: stats_data_id=${stats_data_id}, cat01=${cat01}, isRanking=${isRanking}`
     );
 
+    // 変更前のマッピング情報を取得（変更前のisRanking値とarea_typeを取得するため）
+    const { findRankingMappingByKey } = await import(
+      "../repositories/ranking-mappings-repository"
+    );
+    const previousMapping = await findRankingMappingByKey(stats_data_id, cat01);
+
+    // データベースを更新
     const success = await updateIsRanking(stats_data_id, cat01, isRanking);
 
     if (!success) {
       return { success: false, message: "更新に失敗しました" };
+    }
+
+    // isRankingがtrueからfalseに変更された場合、R2から関連データを削除
+    if (previousMapping?.is_ranking === true && isRanking === false) {
+      try {
+        // マッピング情報からarea_typeとitem_codeを取得
+        if (!previousMapping.area_type) {
+          console.warn(
+            `[updateIsRankingAction] area_typeが設定されていないため、R2データ削除をスキップ: ${stats_data_id}, ${cat01}`
+          );
+        } else {
+          const { EstatRankingR2Repository } = await import(
+            "../repositories/rankingR2Repository"
+          );
+          const deleteResult =
+            await EstatRankingR2Repository.deleteAllRankingDataByKey(
+              previousMapping.area_type,
+              previousMapping.item_code
+            );
+
+          if (deleteResult.deletedCount > 0) {
+            console.log(
+              `[updateIsRankingAction] R2データ削除完了: ${deleteResult.deletedCount}件 (${previousMapping.item_code})`
+            );
+          } else {
+            console.log(
+              `[updateIsRankingAction] 削除対象のR2データが見つかりませんでした: ${previousMapping.item_code}`
+            );
+          }
+        }
+      } catch (error) {
+        // R2削除が失敗してもデータベース更新は成功させる
+        console.error(
+          `[updateIsRankingAction] R2データ削除エラー（データベース更新は成功）:`,
+          error
+        );
+      }
     }
 
     return {
@@ -186,9 +230,37 @@ export async function convertToRankingAction(
     }
 
     // e-Stat APIからデータ取得
+    // cat01をそのまま使用（#は除去しない）
+    console.log(
+      `[convertToRankingAction] データ取得: stats_data_id=${mapping.stats_data_id}, cat01=${mapping.cat01}`
+    );
+
     const response = await fetchStatsData(mapping.stats_data_id, {
-      categoryFilter: mapping.cat01.replace(/^#/, ""), // #を除去
+      categoryFilter: mapping.cat01,
     });
+
+    // デバッグ: APIレスポンスの構造を確認
+    const responseData =
+      response?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE;
+    console.log(
+      `[convertToRankingAction] APIレスポンス: VALUE.length=${Array.isArray(responseData) ? responseData.length : "not array"}`
+    );
+    if (Array.isArray(responseData) && responseData.length > 0) {
+      const firstRawValue = responseData[0] as any;
+      console.log(
+        `[convertToRankingAction] 最初の生データ:`,
+        JSON.stringify(
+          {
+            "@cat01": firstRawValue?.["@cat01"],
+            "@time": firstRawValue?.["@time"],
+            "@area": firstRawValue?.["@area"],
+            hasValue: !!firstRawValue?.$,
+          },
+          null,
+          2
+        )
+      );
+    }
 
     // データ整形
     const { formatStatsData } = await import(
@@ -205,17 +277,79 @@ export async function convertToRankingAction(
       };
     }
 
+    // デバッグ: データ構造を確認
+    console.log(
+      `[convertToRankingAction] データ確認: values.length=${formattedData.values.length}`
+    );
+    if (formattedData.values.length > 0) {
+      const firstValue = formattedData.values[0];
+      console.log(
+        `[convertToRankingAction] 最初の値の構造:`,
+        JSON.stringify(
+          {
+            hasTime: !!firstValue.dimensions.time,
+            timeCode: firstValue.dimensions.time?.code,
+            timeName: firstValue.dimensions.time?.name,
+            hasArea: !!firstValue.dimensions.area,
+            areaCode: firstValue.dimensions.area?.code,
+            hasCat01: !!firstValue.dimensions.cat01,
+            cat01Code: firstValue.dimensions.cat01?.code,
+          },
+          null,
+          2
+        )
+      );
+    }
+
     // すべての時間コードを取得
     const allTimeCodes = Array.from(
       new Set(
         formattedData.values
           .map((v) => v.dimensions.time?.code)
-          .filter((code): code is string => !!code)
+          .filter((code): code is string => !!code && code !== "")
       )
     ).sort();
 
+    console.log(
+      `[convertToRankingAction] 検出された時間コード: ${JSON.stringify(allTimeCodes)}`
+    );
+
     if (allTimeCodes.length === 0) {
-      return { success: false, message: "時間コードが見つかりません" };
+      // より詳細なエラーメッセージを返す
+      const hasValues = formattedData.values.length > 0;
+      const hasTimeDimensions = formattedData.values.some(
+        (v) => v.dimensions.time
+      );
+      const hasTimeCodes = formattedData.values.some(
+        (v) => v.dimensions.time?.code
+      );
+      const emptyTimeCodes = formattedData.values.some(
+        (v) => v.dimensions.time?.code === ""
+      );
+
+      let errorMessage = "時間コードが見つかりません";
+      if (!hasValues) {
+        errorMessage = "データが存在しません（valuesが空です）";
+      } else if (!hasTimeDimensions) {
+        errorMessage = "時間次元（time）が存在しません";
+      } else if (!hasTimeCodes) {
+        errorMessage = "時間コード（time.code）が存在しません";
+      } else if (emptyTimeCodes) {
+        errorMessage = "時間コードが空文字列です";
+      }
+
+      console.error(
+        `[convertToRankingAction] 時間コード検出失敗: ${errorMessage}`,
+        {
+          hasValues,
+          hasTimeDimensions,
+          hasTimeCodes,
+          emptyTimeCodes,
+          valuesCount: formattedData.values.length,
+        }
+      );
+
+      return { success: false, message: errorMessage };
     }
 
     // 時間コードが指定されている場合は、その時間コードのみ処理
@@ -348,19 +482,60 @@ export async function convertAllRankingsAction(
     for (const mapping of mappings) {
       try {
         console.log(
-          `[convertAllRankingsAction] 変換中: ${mapping.item_name} (${mapping.stats_data_id})`
+          `[convertAllRankingsAction] 変換中: ${mapping.item_name} (${mapping.stats_data_id}, cat01=${mapping.cat01})`
         );
 
         // e-Stat APIからデータ取得
-        const response = await fetchStatsData(mapping.stats_data_id, {
-          categoryFilter: mapping.cat01.replace(/^#/, ""), // #を除去
-        });
+        // cat01をそのまま使用（#は除去しない）
+        let response;
+        try {
+          response = await fetchStatsData(mapping.stats_data_id, {
+            categoryFilter: mapping.cat01,
+          });
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error
+              ? error.message.substring(0, 100) // エラーメッセージを100文字に制限
+              : "e-Stat APIからのデータ取得に失敗しました";
+          console.error(
+            `[convertAllRankingsAction] API取得エラー: ${mapping.item_name}`,
+            error
+          );
+          results.push({
+            stats_data_id: mapping.stats_data_id,
+            cat01: mapping.cat01,
+            itemName: mapping.item_name,
+            success: false,
+            message: `API取得エラー: ${errorMessage}`,
+          });
+          continue;
+        }
 
         // データ整形
-        const { formatStatsData } = await import(
-          "../../stats-data/services/formatter"
-        );
-        const formattedData = formatStatsData(response);
+        let formattedData;
+        try {
+          const { formatStatsData } = await import(
+            "../../stats-data/services/formatter"
+          );
+          formattedData = formatStatsData(response);
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error
+              ? error.message.substring(0, 100) // エラーメッセージを100文字に制限
+              : "データ整形に失敗しました";
+          console.error(
+            `[convertAllRankingsAction] データ整形エラー: ${mapping.item_name}`,
+            error
+          );
+          results.push({
+            stats_data_id: mapping.stats_data_id,
+            cat01: mapping.cat01,
+            itemName: mapping.item_name,
+            success: false,
+            message: `データ整形エラー: ${errorMessage}`,
+          });
+          continue;
+        }
 
         // 地域タイプの検証（必須）
         if (!mapping.area_type) {
@@ -408,12 +583,26 @@ export async function convertAllRankingsAction(
         for (const targetTimeCode of targetTimeCodes) {
           try {
             // StatsSchema[]形式に変換（指定された時間コードのみ）
-            const statsSchemas = convertStatsDataToRankingFormat(
-              response,
-              mapping.item_code,
-              targetTimeCode,
-              mapping.unit || undefined
-            );
+            let statsSchemas;
+            try {
+              statsSchemas = convertStatsDataToRankingFormat(
+                response,
+                mapping.item_code,
+                targetTimeCode,
+                mapping.unit || undefined
+              );
+            } catch (error) {
+              const errorMessage =
+                error instanceof Error
+                  ? error.message
+                  : "データ変換に失敗しました";
+              console.error(
+                `[convertAllRankingsAction] データ変換エラー: ${mapping.item_name} (時間コード: ${targetTimeCode})`,
+                error
+              );
+              // データ変換エラーは記録するが、次の時間コードに続行
+              continue;
+            }
 
             if (statsSchemas.length === 0) {
               console.warn(
@@ -423,24 +612,37 @@ export async function convertAllRankingsAction(
             }
 
             // R2に保存
-            const result = await EstatRankingR2Repository.saveRankingData(
-              mapping.area_type,
-              mapping.item_code,
-              targetTimeCode,
-              statsSchemas
-            );
+            try {
+              const result = await EstatRankingR2Repository.saveRankingData(
+                mapping.area_type,
+                mapping.item_code,
+                targetTimeCode,
+                statsSchemas
+              );
 
-            savedFiles.push({
-              key: result.key,
-              size: result.size,
-              timeCode: targetTimeCode,
-            });
-            totalCount += statsSchemas.length;
+              savedFiles.push({
+                key: result.key,
+                size: result.size,
+                timeCode: targetTimeCode,
+              });
+              totalCount += statsSchemas.length;
+            } catch (error) {
+              const errorMessage =
+                error instanceof Error
+                  ? error.message
+                  : "R2保存に失敗しました";
+              console.error(
+                `[convertAllRankingsAction] R2保存エラー: ${mapping.item_name} (時間コード: ${targetTimeCode})`,
+                error
+              );
+              // R2保存エラーは記録するが、次の時間コードに続行
+            }
           } catch (error) {
             console.error(
-              `[convertAllRankingsAction] 時間コード ${targetTimeCode} の保存エラー: ${mapping.item_name}`,
+              `[convertAllRankingsAction] 時間コード ${targetTimeCode} の処理エラー: ${mapping.item_name}`,
               error
             );
+            // 予期しないエラーも記録するが、続行
           }
         }
 
@@ -471,15 +673,16 @@ export async function convertAllRankingsAction(
           `[convertAllRankingsAction] 変換エラー: ${mapping.item_name}`,
           error
         );
+        const errorMessage =
+          error instanceof Error
+            ? error.message.substring(0, 100) // エラーメッセージを100文字に制限
+            : "ランキング変換に失敗しました";
         results.push({
           stats_data_id: mapping.stats_data_id,
           cat01: mapping.cat01,
           itemName: mapping.item_name,
           success: false,
-          message:
-            error instanceof Error
-              ? error.message
-              : "ランキング変換に失敗しました",
+          message: errorMessage,
         });
       }
     }

@@ -144,7 +144,29 @@ export function formatStatsData(
   // データ値（最適化版）
   const rawValues = data.DATA_INF?.VALUE || [];
   const valuesArray = Array.isArray(rawValues) ? rawValues : [rawValues];
+  console.log(
+    `[formatStatsData] 生データ: rawValues.length=${valuesArray.length}, classInfo.length=${classInfo.length}`
+  );
+  if (valuesArray.length > 0) {
+    const firstRaw = valuesArray[0] as any;
+    console.log(
+      `[formatStatsData] 最初の生データ:`,
+      JSON.stringify(
+        {
+          "@cat01": firstRaw?.["@cat01"],
+          "@time": firstRaw?.["@time"],
+          "@area": firstRaw?.["@area"],
+        },
+        null,
+        2
+      )
+    );
+  }
+
   const values = formatValues(valuesArray, classInfo);
+  console.log(
+    `[formatStatsData] 整形後: values.length=${values.length}`
+  );
 
   // 注記情報
   const notes: DataNote[] = data.DATA_INF?.NOTE
