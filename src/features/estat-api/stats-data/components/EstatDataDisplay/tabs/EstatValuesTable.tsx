@@ -25,6 +25,18 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     .map((value) => convertToStatsSchema(value))
     .filter((schema): schema is StatsSchema => schema !== undefined);
 
+  // デバッグログ
+  if (statsSchemaData.length === 0 && values.length > 0) {
+    console.warn(
+      "[EstatValuesTable] 変換可能なデータがありません:",
+      {
+        totalValues: values.length,
+        sampleValue: values[0],
+        sampleConversion: convertToStatsSchema(values[0]),
+      }
+    );
+  }
+
   const columns: ColumnDef<StatsSchema>[] = [
     {
       accessorKey: "areaCode",

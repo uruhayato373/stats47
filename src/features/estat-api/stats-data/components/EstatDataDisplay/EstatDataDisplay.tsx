@@ -12,14 +12,14 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
+import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
 import { EstatStatsDataFetcher } from "../EstatStatsDataFetcher";
 
-import EstatOverview from "./components/EstatOverview";
-import EstatRawData from "./components/EstatRawData";
-import EstatValuesTable from "./components/EstatValuesTable";
+import EstatOverview from "./tabs/EstatOverview";
+import EstatValuesTable from "./tabs/EstatValuesTable";
 
 interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
@@ -43,6 +43,26 @@ export default function EstatDataDisplay({
     loading,
     error,
   });
+
+  /**
+   * データダウンロードハンドラー
+   * 現在のデータをJSONファイルとしてダウンロードする
+   */
+  const handleDownload = () => {
+    if (!data) return;
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `estat-data-${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   if (loading) {
     return (
@@ -137,7 +157,7 @@ export default function EstatDataDisplay({
           </TabsContent>
           <TabsContent value="raw" className="p-4">
             {data ? (
-              <EstatRawData data={data} />
+              <JsonDisplay data={data} onDownload={handleDownload} />
             ) : (
               <div>データがありません</div>
             )}

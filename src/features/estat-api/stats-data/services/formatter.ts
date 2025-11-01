@@ -438,28 +438,33 @@ function extractDimension(
 export function convertToStatsSchema(
   formattedValue: FormattedValue
 ): StatsSchema | undefined {
-  // cat01が存在しない場合は変換不可
-  if (!formattedValue.dimensions.cat01) {
+  // cat01が存在しない、またはcodeが空の場合は変換不可
+  const cat01 = formattedValue.dimensions.cat01;
+  if (!cat01 || !cat01.code) {
     return undefined;
   }
 
   // cat02以降の情報がある場合は将来的に実装予定
   // TODO: cat02-cat15の対応を追加（複数のカテゴリがある場合は変換方法を検討する必要がある）
-  const hasAdditionalCategories =
-    formattedValue.dimensions.cat02 ||
-    formattedValue.dimensions.cat03 ||
-    formattedValue.dimensions.cat04 ||
-    formattedValue.dimensions.cat05 ||
-    formattedValue.dimensions.cat06 ||
-    formattedValue.dimensions.cat07 ||
-    formattedValue.dimensions.cat08 ||
-    formattedValue.dimensions.cat09 ||
-    formattedValue.dimensions.cat10 ||
-    formattedValue.dimensions.cat11 ||
-    formattedValue.dimensions.cat12 ||
-    formattedValue.dimensions.cat13 ||
-    formattedValue.dimensions.cat14 ||
-    formattedValue.dimensions.cat15;
+  const additionalCats = [
+    formattedValue.dimensions.cat02,
+    formattedValue.dimensions.cat03,
+    formattedValue.dimensions.cat04,
+    formattedValue.dimensions.cat05,
+    formattedValue.dimensions.cat06,
+    formattedValue.dimensions.cat07,
+    formattedValue.dimensions.cat08,
+    formattedValue.dimensions.cat09,
+    formattedValue.dimensions.cat10,
+    formattedValue.dimensions.cat11,
+    formattedValue.dimensions.cat12,
+    formattedValue.dimensions.cat13,
+    formattedValue.dimensions.cat14,
+    formattedValue.dimensions.cat15,
+  ];
+  const hasAdditionalCategories = additionalCats.some(
+    (cat) => cat && cat.code && cat.code !== ""
+  );
 
   if (hasAdditionalCategories) {
     // cat02以降がある場合は現時点では変換しない
@@ -472,8 +477,8 @@ export function convertToStatsSchema(
     areaName: formattedValue.dimensions.area.name,
     timeCode: formattedValue.dimensions.time.code,
     timeName: formattedValue.dimensions.time.name,
-    categoryCode: formattedValue.dimensions.cat01.code,
-    categoryName: formattedValue.dimensions.cat01.name,
+    categoryCode: cat01.code,
+    categoryName: cat01.name,
     value: formattedValue.value ?? 0, // nullの場合は0
     unit: formattedValue.unit || "",
   };

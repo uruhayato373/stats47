@@ -4,14 +4,15 @@ import { useState } from "react";
 
 import { CheckCircle, Download } from "lucide-react";
 
-import { EstatMetaInfoResponse } from "@/features/estat-api";
-
-interface JsonDisplayProps {
-  data: EstatMetaInfoResponse;
+interface JsonDisplayProps<T = unknown> {
+  data: T;
   onDownload: () => void;
 }
 
-export default function JsonDisplay({ data, onDownload }: JsonDisplayProps) {
+export default function JsonDisplay<T = unknown>({
+  data,
+  onDownload,
+}: JsonDisplayProps<T>) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
