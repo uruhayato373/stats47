@@ -3,6 +3,7 @@ import {
   FileCode,
   FolderTree,
   LayoutDashboard,
+  Link as LinkIcon,
   Maximize,
   MoreHorizontal,
   Users,
@@ -53,6 +54,11 @@ export const buildSidebarNavigationItems = () => ({
       href: "/admin/dev-tools/estat-api/stats-list",
       label: "統計表リスト",
       icon: Maximize,
+    },
+    {
+      href: "/admin/dev-tools/estat-api/ranking-mappings",
+      label: "ランキング管理",
+      icon: LinkIcon,
     },
   ],
 });

@@ -1,0 +1,117 @@
+/**
+ * e-Statランキングマッピング型定義
+ */
+
+/**
+ * ランキングデータポイント（値のみ）
+ */
+export interface RankingDataPointValueOnly {
+  /** 地域コード */
+  areaCode: string;
+  /** 地域名 */
+  areaName: string;
+  /** 値 */
+  value: number;
+}
+
+/**
+ * ランキングエクスポートペイロード
+ * R2に保存するランキングデータ形式
+ */
+export interface RankingExportPayload {
+  /** ランキングデータポイント配列（値のみ） */
+  values: RankingDataPointValueOnly[];
+  /** 統計量 */
+  statistics: {
+    /** 最小値 */
+    min: number;
+    /** 最大値 */
+    max: number;
+    /** 平均値 */
+    mean: number;
+    /** 中央値 */
+    median: number;
+  };
+  /** メタデータ */
+  metadata: {
+    /** ランキングキー（item_codeを使用） */
+    rankingKey: string;
+    /** 時間コード */
+    timeCode: string;
+    /** 単位 */
+    unit: string;
+    /** データソースID（常に"estat"） */
+    dataSourceId: "estat";
+  };
+}
+
+/**
+ * e-Statランキングマッピング
+ * estat_ranking_mappingsテーブルの行型
+ */
+export interface EstatRankingMapping {
+  /** ID（主キー） */
+  id: number;
+  /** e-Stat統計表ID */
+  stats_data_id: string;
+  /** e-Stat分類コード（cdCat01パラメータに対応） */
+  cat01: string;
+  /** 項目名（日本語） */
+  item_name: string;
+  /** 項目コード（ranking_items.ranking_keyとは別管理） */
+  item_code: string;
+  /** 単位 */
+  unit: string | null;
+  /** 除算値（CSVからインポート、未使用） */
+  dividing_value: string | null;
+  /** 新単位（CSVからインポート、未使用） */
+  new_unit: string | null;
+  /** 昇順フラグ（CSVからインポート、未使用） */
+  ascending: boolean;
+  /** ランキング変換対象フラグ（trueの場合、ランキング変換を実行） */
+  is_ranking: boolean;
+  /** 作成日時 */
+  created_at: string;
+  /** 更新日時 */
+  updated_at: string;
+}
+
+/**
+ * e-Statランキングマッピング入力型
+ * CSVインポートまたは作成時に使用
+ */
+export interface EstatRankingMappingInput {
+  /** e-Stat統計表ID */
+  stats_data_id: string;
+  /** e-Stat分類コード */
+  cat01: string;
+  /** 項目名 */
+  item_name: string;
+  /** 項目コード */
+  item_code: string;
+  /** 単位 */
+  unit?: string | null;
+  /** 除算値 */
+  dividing_value?: string | null;
+  /** 新単位 */
+  new_unit?: string | null;
+  /** 昇順フラグ */
+  ascending?: boolean;
+  /** ランキング変換対象フラグ */
+  is_ranking?: boolean;
+}
+
+/**
+ * CSV行パース結果
+ */
+export interface CsvRow {
+  stats_data_id: string;
+  cat01: string;
+  item_name: string;
+  item_code: string;
+  unit: string;
+  dividing_value: string;
+  new_unit: string;
+  ascending: string;
+}
+
