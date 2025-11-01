@@ -53,6 +53,7 @@ export function PrefectureMapD3({
   onPan,
 }: PrefectureMapD3Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const isRenderingRef = useRef(false); // 描画中のフラグ
   const [mapState, setMapState] = useState<MapState>({
     zoom: zoom,
     center: center,
@@ -82,6 +83,13 @@ export function PrefectureMapD3({
   const renderMap = useCallback(async () => {
     if (!svgRef.current) return;
 
+    // 既に描画中の場合はスキップ
+    if (isRenderingRef.current) {
+      console.log("[PrefectureMapD3] Render already in progress, skipping");
+      return;
+    }
+
+    isRenderingRef.current = true;
     setMapState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
@@ -312,6 +320,8 @@ export function PrefectureMapD3({
             ? error.message
             : "地図の読み込みに失敗しました",
       }));
+    } finally {
+      isRenderingRef.current = false;
     }
   }, [
     width,
@@ -348,19 +358,13 @@ export function PrefectureMapD3({
 
   // 重要な設定変更時のみ再描画（data, colorScheme等）
   // center/zoomの変更は除外（ズーム操作では再描画しない）
+  // mapState.isLoadingは条件チェックのみで使用（依存配列には含めない）
   useEffect(() => {
     if (svgRef.current && !mapState.isLoading) {
       renderMapRef.current();
     }
-  }, [
-    width,
-    height,
-    data,
-    colorScheme,
-    divergingMidpoint,
-    projection,
-    mapState.isLoading,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, data, colorScheme, divergingMidpoint, projection]);
 
   // ズームリセット
   const resetZoom = useCallback(() => {
