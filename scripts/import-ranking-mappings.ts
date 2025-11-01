@@ -2,6 +2,19 @@
  * e-StatランキングマッピングCSVインポートスクリプト
  * 
  * mapping.csvのデータをestat_ranking_mappingsテーブルに投入します
+ * 
+ * 使用方法:
+ *   npx tsx scripts/import-ranking-mappings.ts <CSVファイルパス> [area_type]
+ * 
+ * 引数:
+ *   CSVファイルパス: インポートするCSVファイルのパス（必須）
+ *   area_type: 全てのレコードに適用する地域タイプ（オプション）
+ *              'prefecture' | 'city' | 'national'
+ *              指定しない場合は、CSV内のarea_typeカラム、またはデフォルトの'prefecture'を使用
+ * 
+ * 例:
+ *   npx tsx scripts/import-ranking-mappings.ts mapping.csv
+ *   npx tsx scripts/import-ranking-mappings.ts mapping_city.csv city
  */
 
 import { readFileSync } from "fs";
@@ -115,8 +128,26 @@ async function main() {
   const csvFilePath =
     process.argv[2] ||
     "/Users/minamidaisuke/stats47-blog/_backend/e_stat/mapping/mapping.csv";
+  
+  // コマンドライン引数からarea_typeを取得（オプション）
+  const commandLineAreaType = process.argv[3];
+  
+  // area_typeが指定されている場合は有効な値か検証
+  const validAreaTypes = ["prefecture", "city", "national"];
+  if (commandLineAreaType && !validAreaTypes.includes(commandLineAreaType)) {
+    console.error(
+      `[import-ranking-mappings] ❌ 無効なarea_type: ${commandLineAreaType}`
+    );
+    console.error(
+      `[import-ranking-mappings] 有効な値: ${validAreaTypes.join(", ")}`
+    );
+    process.exit(1);
+  }
 
   console.log(`[import-ranking-mappings] CSVインポート開始: ${csvFilePath}`);
+  if (commandLineAreaType) {
+    console.log(`[import-ranking-mappings] area_typeを強制設定: ${commandLineAreaType}`);
+  }
 
   try {
     // CSVファイルをパース
@@ -158,8 +189,8 @@ async function main() {
 
       for (const row of batch) {
         try {
-          // CSVにarea_typeがあれば使用、なければ'prefecture'をデフォルト
-          const areaType = row.area_type || "prefecture";
+          // 優先順位: コマンドライン引数 > CSV内の値 > デフォルト
+          const areaType = commandLineAreaType || row.area_type || "prefecture";
           
           const result = await stmt
             .bind(
