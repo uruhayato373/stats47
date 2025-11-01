@@ -1,24 +1,10 @@
 "use client";
 
-import {
-  AlertTriangle,
-  BarChart3,
-  CheckCircle,
-  Clock,
-  Info,
-  MapPin,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/atoms/ui/accordion";
 import { Badge } from "@/components/atoms/ui/badge";
 
 import { formatStatsData } from "@/features/estat-api/stats-data/services/formatter";
-
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
 interface EstatOverviewProps {
@@ -30,11 +16,13 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
   console.log("[EstatOverview] データ状態:", {
     hasData: !!data,
     hasGetStatsData: !!data?.GET_STATS_DATA,
-    getStatsData: data?.GET_STATS_DATA ? {
-      hasResult: !!data.GET_STATS_DATA.RESULT,
-      hasParameter: !!data.GET_STATS_DATA.PARAMETER,
-      hasStatisticalData: !!data.GET_STATS_DATA.STATISTICAL_DATA,
-    } : null,
+    getStatsData: data?.GET_STATS_DATA
+      ? {
+          hasResult: !!data.GET_STATS_DATA.RESULT,
+          hasParameter: !!data.GET_STATS_DATA.PARAMETER,
+          hasStatisticalData: !!data.GET_STATS_DATA.STATISTICAL_DATA,
+        }
+      : null,
   });
 
   if (!data?.GET_STATS_DATA) {
@@ -59,220 +47,206 @@ export default function EstatOverview({ data }: EstatOverviewProps) {
   const areas = formattedData.areas;
 
   return (
-    <Accordion type="multiple" defaultValue={["basic"]} className="space-y-4">
-      {/* 基本情報 */}
-      <AccordionItem value="basic">
-        <AccordionTrigger className="hover:no-underline">
-          <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-blue-500" />
-            基本情報
-          </div>
-        </AccordionTrigger>
-        <AccordionContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                ステータス
-              </dt>
-              <dd className="mt-1">
-                {result?.STATUS === 0 ? (
+    <div className="space-y-8">
+      {/* 基本情報セクション */}
+      <div>
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+          基本情報
+        </h3>
+        <dl className="space-y-3">
+          <InfoRow
+            label="ステータス"
+            value={
+              result?.STATUS === 0 ? (
+                <Badge
+                  variant="default"
+                  className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                >
+                  <CheckCircle className="w-3 h-3 mr-1" />
+                  成功
+                </Badge>
+              ) : (
+                <Badge variant="destructive">
+                  <AlertTriangle className="w-3 h-3 mr-1" />
+                  エラー (コード: {result?.STATUS})
+                </Badge>
+              )
+            }
+          />
+          <InfoRow
+            label="統計表ID"
+            value={parameter?.STATS_DATA_ID || "-"}
+            highlight
+          />
+          {formattedData?.tableInfo && (
+            <>
+              <InfoRow
+                label="統計表名"
+                value={formattedData.tableInfo.statName}
+              />
+              <InfoRow
+                label="表題"
+                value={formattedData.tableInfo.title}
+                highlight
+              />
+              <InfoRow
+                label="作成機関"
+                value={formattedData.tableInfo.govOrg}
+              />
+              <InfoRow
+                label="提供周期"
+                value={formattedData.tableInfo.characteristics.cycle}
+              />
+              <InfoRow
+                label="最終更新"
+                value={formattedData.tableInfo.dates.updatedDate}
+              />
+              <InfoRow
+                label="データ品質"
+                value={
                   <Badge
-                    variant="default"
-                    className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                    variant={
+                      (formattedData.metadata.quality?.completenessScore ||
+                        0) >= 90
+                        ? "default"
+                        : (formattedData.metadata.quality?.completenessScore ||
+                            0) >= 70
+                        ? "secondary"
+                        : "destructive"
+                    }
+                    className={
+                      (formattedData.metadata.quality?.completenessScore ||
+                        0) >= 90
+                        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                        : (formattedData.metadata.quality?.completenessScore ||
+                            0) >= 70
+                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                        : ""
+                    }
                   >
-                    <CheckCircle className="w-3 h-3 mr-1" />
-                    成功
+                    {formattedData.metadata.quality?.completenessScore || 0}%
+                    完全性
                   </Badge>
-                ) : (
-                  <Badge variant="destructive">
-                    <AlertTriangle className="w-3 h-3 mr-1" />
-                    エラー (コード: {result?.STATUS})
-                  </Badge>
-                )}
-              </dd>
-            </div>
+                }
+              />
+            </>
+          )}
+        </dl>
+      </div>
 
-            <div>
-              <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                統計表ID
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100 font-mono">
-                {parameter?.STATS_DATA_ID}
-              </dd>
-            </div>
-
-            {formattedData?.tableInfo && (
-              <>
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    統計表名
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                    {formattedData.tableInfo.statName}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    表題
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                    {formattedData.tableInfo.title}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    作成機関
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                    {formattedData.tableInfo.govOrg}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    提供周期
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                    {formattedData.tableInfo.characteristics.cycle}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    最終更新
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100">
-                    {formattedData.tableInfo.dates.updatedDate}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                    データ品質
-                  </dt>
-                  <dd className="mt-1">
-                    <Badge
-                      variant={
-                        (formattedData.metadata.quality?.completenessScore ||
-                          0) >= 90
-                          ? "default"
-                          : (formattedData.metadata.quality
-                              ?.completenessScore || 0) >= 70
-                          ? "secondary"
-                          : "destructive"
-                      }
-                      className={
-                        (formattedData.metadata.quality?.completenessScore ||
-                          0) >= 90
-                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                          : (formattedData.metadata.quality
-                              ?.completenessScore || 0) >= 70
-                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
-                          : ""
-                      }
-                    >
-                      {formattedData.metadata.quality?.completenessScore || 0}%
-                      完全性
-                    </Badge>
-                  </dd>
-                </div>
-              </>
-            )}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-
-      {/* データ詳細 */}
+      {/* データ詳細セクション */}
       {statisticalData && (
-        <AccordionItem value="data">
-          <AccordionTrigger className="hover:no-underline">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-indigo-500" />
-              データ詳細
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                  データ件数
-                </dt>
-                <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-neutral-100">
-                  {Array.isArray(statisticalData.DATA_INF?.VALUE)
-                    ? statisticalData.DATA_INF.VALUE.length
-                    : statisticalData.DATA_INF?.VALUE
-                    ? 1
-                    : 0}{" "}
-                  件
-                </dd>
-              </div>
-
-              <div>
-                <dt className="text-sm font-medium text-gray-600 dark:text-neutral-400">
-                  分類項目数
-                </dt>
-                <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-neutral-100">
-                  {statisticalData.CLASS_INF?.CLASS_OBJ?.length || 0} 項目
-                </dd>
-              </div>
-
-              <div>
-                <dt className="text-sm font-medium text-gray-700 dark:text-neutral-400">
-                  更新日時
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 dark:text-neutral-100 flex items-center gap-1">
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+            データ詳細
+          </h3>
+          <dl className="space-y-3">
+            <InfoRow
+              label="データ件数"
+              value={
+                Array.isArray(statisticalData.DATA_INF?.VALUE)
+                  ? statisticalData.DATA_INF.VALUE.length.toLocaleString()
+                  : statisticalData.DATA_INF?.VALUE
+                  ? "1"
+                  : "0"
+              }
+              suffix="件"
+            />
+            <InfoRow
+              label="分類項目数"
+              value={(
+                statisticalData.CLASS_INF?.CLASS_OBJ?.length || 0
+              ).toLocaleString()}
+              suffix="項目"
+            />
+            <InfoRow
+              label="更新日時"
+              value={
+                <span className="flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   {result?.DATE || "不明"}
-                </dd>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                </span>
+              }
+            />
+          </dl>
+        </div>
       )}
 
-      {/* 地域情報 */}
+      {/* 地域情報セクション */}
       {areas && areas.length > 0 && (
-        <AccordionItem value="areas">
-          <AccordionTrigger className="hover:no-underline">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-green-500" />
-              地域情報 ({areas.length}件)
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="max-h-64 overflow-y-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {areas.slice(0, 50).map((area, index) => (
-                  <div
-                    key={index}
-                    className="p-3 bg-gray-50 rounded-lg dark:bg-neutral-700"
-                  >
-                    <div className="font-medium text-sm text-gray-900 dark:text-neutral-100">
-                      {area.areaName}
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-neutral-400">
-                      コード: {area.areaCode}
-                    </div>
-                    {area.level && (
-                      <div className="text-xs text-gray-500 dark:text-neutral-400">
-                        レベル: {area.level}
-                      </div>
-                    )}
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+            地域情報 ({areas.length.toLocaleString()}件)
+          </h3>
+          <div className="max-h-64 overflow-y-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {areas.slice(0, 50).map((area, index) => (
+                <div
+                  key={index}
+                  className="p-3 bg-gray-50 rounded-lg dark:bg-neutral-700"
+                >
+                  <div className="font-medium text-sm text-gray-900 dark:text-neutral-100">
+                    {area.areaName}
                   </div>
-                ))}
-              </div>
-              {areas.length > 50 && (
-                <div className="mt-3 text-sm text-gray-500 dark:text-neutral-400 text-center">
-                  {areas.length - 50}
-                  件の地域が他にもあります。詳細は「値」タブで確認できます。
+                  <div className="text-xs text-gray-500 dark:text-neutral-400">
+                    コード: {area.areaCode}
+                  </div>
+                  {area.level && (
+                    <div className="text-xs text-gray-500 dark:text-neutral-400">
+                      レベル: {area.level}
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          </AccordionContent>
-        </AccordionItem>
+            {areas.length > 50 && (
+              <div className="mt-3 text-sm text-gray-500 dark:text-neutral-400 text-center">
+                {areas.length - 50}
+                件の地域が他にもあります。詳細は「値」タブで確認できます。
+              </div>
+            )}
+          </div>
+        </div>
       )}
-    </Accordion>
+    </div>
+  );
+}
+
+/**
+ * InfoRow - 情報行表示コンポーネント
+ */
+function InfoRow({
+  label,
+  value,
+  highlight = false,
+  suffix,
+}: {
+  label: string;
+  value: string | React.ReactNode;
+  highlight?: boolean;
+  suffix?: string;
+}) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:gap-4">
+      <dt className="text-sm font-medium text-gray-600 dark:text-gray-400 sm:w-40 flex-shrink-0">
+        {label}
+      </dt>
+      <dd
+        className={`text-sm mt-1 sm:mt-0 ${
+          highlight
+            ? "font-medium text-blue-600 dark:text-blue-400"
+            : "text-gray-900 dark:text-gray-100"
+        }`}
+      >
+        {typeof value === "string" ? (
+          <>
+            {value || "-"}
+            {suffix && <span className="ml-1">{suffix}</span>}
+          </>
+        ) : (
+          value
+        )}
+      </dd>
+    </div>
   );
 }
