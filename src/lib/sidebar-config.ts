@@ -41,6 +41,11 @@ export const buildSidebarNavigationItems = () => ({
   ],
   estat: [
     {
+      href: "/admin/dev-tools/estat-api/stats-list",
+      label: "統計表リスト",
+      icon: Maximize,
+    },
+    {
       href: "/admin/dev-tools/estat-api/meta-info",
       label: "メタ情報",
       icon: FileCode,
@@ -49,11 +54,6 @@ export const buildSidebarNavigationItems = () => ({
       href: "/admin/dev-tools/estat-api/stats-data",
       label: "統計データ",
       icon: Users,
-    },
-    {
-      href: "/admin/dev-tools/estat-api/stats-list",
-      label: "統計表リスト",
-      icon: Maximize,
     },
     {
       href: "/admin/dev-tools/estat-api/ranking-mappings",
