@@ -96,6 +96,14 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
     }
   fi
   
+  # e-Statランキングマッピングシード
+  if [ -f "database/seeds/estat_ranking_mappings_seed.sql" ]; then
+    log_info "Applying estat_ranking_mappings seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/estat_ranking_mappings_seed.sql || {
+      log_warn "Failed to apply estat_ranking_mappings seed"
+    }
+  fi
+  
   # ランキング関連シード
   if [ -f "database/seeds/ranking_groups_seed.sql" ]; then
     log_info "Applying ranking_groups seed..."
