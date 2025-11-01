@@ -1,4 +1,7 @@
-import { fetchStatsData } from "@/features/estat-api/stats-data";
+import {
+  fetchStatsDataWithSource,
+  type StatsDataSource,
+} from "@/features/estat-api/stats-data";
 import { EstatDataDisplay } from "@/features/estat-api/stats-data/components";
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
@@ -50,6 +53,7 @@ export default async function StatsDataPage({
 
   // 統計データの取得
   let statsData: EstatStatsDataResponse | null = null;
+  let dataSource: StatsDataSource | null = null;
   let error: string | null = null;
 
   // データ取得条件の検証
@@ -68,13 +72,16 @@ export default async function StatsDataPage({
         cdArea: params.cdArea,
         cdTime: params.cdTime,
       });
-      statsData = await fetchStatsData(statsDataId, {
+      const result = await fetchStatsDataWithSource(statsDataId, {
         categoryFilter: cdCat01,
         ...(params.cdArea && { areaFilter: params.cdArea }),
         ...(params.cdTime && { yearFilter: params.cdTime }),
       });
+      statsData = result.data;
+      dataSource = result.source;
       console.log("[StatsDataPage] データ取得成功:", {
         hasData: !!statsData,
+        source: dataSource,
         status: statsData?.GET_STATS_DATA?.RESULT?.STATUS,
       });
     } catch (err) {
@@ -91,7 +98,12 @@ export default async function StatsDataPage({
 
   return (
     <div className="h-full p-4">
-      <EstatDataDisplay data={statsData} loading={false} error={error} />
+      <EstatDataDisplay
+        data={statsData}
+        loading={false}
+        error={error}
+        dataSource={dataSource}
+      />
     </div>
   );
 }

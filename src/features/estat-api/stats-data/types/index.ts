@@ -36,3 +36,22 @@ export type FormData = {
   /** 分類01 */
   cdCat01: string;
 };
+
+/**
+ * R2に保存されるe-Stat統計データキャッシュの型定義
+ */
+export interface StatsDataCacheDataR2 {
+  version: string; // バージョン情報
+  stats_data_id: string; // 統計表ID
+  saved_at: string; // 保存日時（ISO 8601）
+  // e-Stat API レスポンス全体を保存
+  stats_data_response: EstatStatsDataResponse;
+  // 検索・フィルタ用サマリー情報
+  summary: {
+    table_title: string;
+    stat_name: string;
+    organization: string;
+    survey_date: string;
+    updated_date: string;
+  };
+}

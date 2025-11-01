@@ -18,8 +18,15 @@ export * from "./components";
 // ============================================================================
 
 // 関数
-export { fetchFormattedStatsData, fetchStatsData } from "./services/fetcher";
+export {
+  fetchFormattedStatsData,
+  fetchStatsData,
+  fetchStatsDataWithSource,
+} from "./services/fetcher";
 export { formatStatsData, convertToStatsSchema } from "./services/formatter";
+
+// 型定義（Services）
+export type { StatsDataSource, FetchStatsDataResult } from "./services/fetcher";
 
 // ============================================================================
 // 型定義（coreから再エクスポート）

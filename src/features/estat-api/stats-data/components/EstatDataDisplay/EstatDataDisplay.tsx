@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AlertTriangle, BarChart3, Database, Info } from "lucide-react";
+import { toast } from "sonner";
 
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
@@ -14,6 +15,7 @@ import {
 } from "@/components/atoms/ui/tabs";
 import { JsonDisplay } from "@/components/molecules/JsonDisplay";
 
+import type { StatsDataSource } from "@/features/estat-api/stats-data/services/fetcher";
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
 import { EstatStatsDataFetcher } from "../EstatStatsDataFetcher";
@@ -25,12 +27,15 @@ interface EstatDataDisplayProps {
   data: EstatStatsDataResponse | null;
   loading: boolean;
   error: string | null;
+  /** データ取得元（'r2': R2ストレージ, 'api': e-Stat API） */
+  dataSource?: StatsDataSource | null;
 }
 
 export default function EstatDataDisplay({
   data,
   loading,
   error,
+  dataSource,
 }: EstatDataDisplayProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "values" | "raw">(
     "overview"
@@ -43,6 +48,25 @@ export default function EstatDataDisplay({
     loading,
     error,
   });
+
+  /**
+   * データ取得元のtoast通知を表示
+   */
+  useEffect(() => {
+    if (data && dataSource) {
+      if (dataSource === "r2") {
+        toast.success("データ取得完了", {
+          description: "R2ストレージから取得しました",
+          duration: 3000,
+        });
+      } else {
+        toast.info("データ取得完了", {
+          description: "e-Stat APIから取得しました",
+          duration: 3000,
+        });
+      }
+    }
+  }, [data, dataSource]);
 
   /**
    * データダウンロードハンドラー
