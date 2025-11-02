@@ -14,7 +14,7 @@ export type {
 // ============================================================================
 // サービス
 // ============================================================================
-export { resolveDashboardComponent } from "./services/dashboard-component-resolver";
+export { fetchDashboardComponent } from "./services/dashboard-component-resolver";
 
 // ============================================================================
 // 共通コンポーネント

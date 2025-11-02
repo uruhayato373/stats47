@@ -1,6 +1,8 @@
 /**
- * ダッシュボードコンポーネント解決システム
- * カテゴリ・サブカテゴリ・地域レベルに応じて適切なダッシュボードコンポーネントを解決
+ * ダッシュボードコンポーネント取得システム
+ *
+ * カテゴリ・サブカテゴリ・地域タイプに応じて適切なダッシュボードコンポーネントを
+ * 動的インポートで取得する。
  */
 
 import type { ComponentType } from "react";
@@ -14,8 +16,11 @@ import type { DashboardProps } from "../types/dashboard";
  * サブカテゴリ名をコンポーネント名に変換
  *
  * 例: "land-area" -> "LandArea"
+ *
+ * @param subcategory - サブカテゴリキー（ハイフン区切り）
+ * @returns 変換されたコンポーネント名（PascalCase）
  */
-function subcategoryToComponentName(subcategory: string): string {
+function convertSubcategoryToComponentName(subcategory: string): string {
   return subcategory
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -23,9 +28,12 @@ function subcategoryToComponentName(subcategory: string): string {
 }
 
 /**
- * 地域タイプからコンポーネント名のサフィックスを取得
+ * 地域タイプからコンポーネント名のサフィックスを構築
+ *
+ * @param areaType - 地域タイプ
+ * @returns コンポーネント名のサフィックス（例: "NationalDashboard"）
  */
-function getComponentSuffix(areaType: AreaType): string {
+function buildComponentSuffix(areaType: AreaType): string {
   switch (areaType) {
     case "national":
       return "NationalDashboard";
@@ -37,23 +45,32 @@ function getComponentSuffix(areaType: AreaType): string {
 }
 
 /**
- * コンポーネント名を生成
+ * ダッシュボードコンポーネント名を構築
+ *
+ * サブカテゴリ名と地域タイプから完全なコンポーネント名を生成する。
+ *
+ * @param subcategory - サブカテゴリキー
+ * @param areaType - 地域タイプ
+ * @returns 完全なコンポーネント名（例: "LandAreaPrefectureDashboard"）
  */
-function getComponentName(subcategory: string, areaType: AreaType): string {
-  const componentName = subcategoryToComponentName(subcategory);
-  const suffix = getComponentSuffix(areaType);
+function buildComponentName(subcategory: string, areaType: AreaType): string {
+  const componentName = convertSubcategoryToComponentName(subcategory);
+  const suffix = buildComponentSuffix(areaType);
   return `${componentName}${suffix}`;
 }
 
 /**
- * ダッシュボードコンポーネントを解決
+ * ダッシュボードコンポーネントを取得
+ *
+ * カテゴリ・サブカテゴリ・地域コードに基づいて、適切なダッシュボードコンポーネントを
+ * 動的インポートで取得する。
  *
  * @param category - カテゴリキー
  * @param subcategory - サブカテゴリキー
  * @param areaCode - 地域コード
  * @returns ダッシュボードコンポーネント、またはnull（見つからない場合）
  */
-export async function resolveDashboardComponent(
+export async function fetchDashboardComponent(
   category: string,
   subcategory: string,
   areaCode: string
@@ -62,15 +79,15 @@ export async function resolveDashboardComponent(
     // 地域タイプ判定
     const areaType = determineAreaType(areaCode);
 
-    // コンポーネント名を生成
-    const componentName = getComponentName(subcategory, areaType);
+    // コンポーネント名を構築
+    const componentName = buildComponentName(subcategory, areaType);
 
-    // 動的インポートでコンポーネントを解決
+    // 動的インポートでコンポーネントを取得
     const componentModule = await import(
       `../components/${category}/${subcategory}/${componentName}`
     );
 
-    // コンポーネントを取得
+    // コンポーネントを抽出
     const Component = componentModule[
       componentName
     ] as ComponentType<DashboardProps>;
@@ -97,7 +114,7 @@ export async function resolveDashboardComponent(
 
     // その他のエラーは再スロー
     console.error(
-      `[DashboardComponentResolver] Error resolving component:`,
+      `[DashboardComponentResolver] Error fetching component:`,
       error
     );
     throw error;

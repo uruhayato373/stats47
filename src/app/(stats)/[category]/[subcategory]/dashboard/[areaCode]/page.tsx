@@ -1,8 +1,6 @@
-import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
-
 import { determineAreaType } from "@/features/area/utils/code-converter";
 import { DashboardError } from "@/features/dashboard/components/shared/DashboardError";
-import { resolveDashboardComponent } from "@/features/dashboard/services/dashboard-component-resolver";
+import { fetchDashboardComponent } from "@/features/dashboard/services/dashboard-component-resolver";
 
 interface PageProps {
   params: Promise<{
@@ -18,34 +16,9 @@ export default async function Page({ params }: PageProps) {
   // 地域タイプを判定
   const areaType = determineAreaType(areaCode);
 
-  // landweather/land-area/dashboard/00000/city-map でCityMapを表示（特別なケース）
-  if (
-    category === "landweather" &&
-    subcategory === "land-area" &&
-    areaCode === "city-map"
-  ) {
-    const { CityMap } = await import(
-      "@/features/visualization/map/common/CityMap"
-    );
-    return (
-      <div className="w-full h-screen p-4">
-        <CityMap width={1200} height={800} />
-      </div>
-    );
-  }
-
-  // 市区町村は従来のダッシュボードを維持（必要に応じて後日レイアウト化）
-  if (areaType === "city") {
-    return (
-      <div>
-        <MunicipalityDashboard areaCode={areaCode} />
-      </div>
-    );
-  }
-
-  // コンポーネント解決を試行
+  // コンポーネント取得を試行
   try {
-    const DashboardComponent = await resolveDashboardComponent(
+    const DashboardComponent = await fetchDashboardComponent(
       category,
       subcategory,
       areaCode
