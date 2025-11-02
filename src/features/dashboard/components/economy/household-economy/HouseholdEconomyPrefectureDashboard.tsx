@@ -3,9 +3,13 @@
  * 都道府県レベルの家計統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  PrivateConsumptionExpenditureCard,
+  ConsumerPriceIndexCard,
+  PrivateConsumptionTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +17,38 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 家計都道府県ダッシュボード
  */
 export async function HouseholdEconomyPrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureHouseholdEconomyData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の家計</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの家計統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 民間最終消費支出統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PrivateConsumptionExpenditureCard
+          areaCode={areaCode}
+          title="民間最終消費支出"
+        />
+      </div>
+
+      {/* 消費者物価指数変化率統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <ConsumerPriceIndexCard
+          areaCode={areaCode}
+          title="消費者物価指数変化率"
+        />
+      </div>
+
+      {/* 民間最終消費支出推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <PrivateConsumptionTrendChart
+          areaCode={areaCode}
+          title="民間最終消費支出推移"
+          description="年度別の民間最終消費支出の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }
