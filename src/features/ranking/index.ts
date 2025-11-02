@@ -68,10 +68,9 @@ export type {
 } from "./groups/types";
 
 // ============================================================================
-// まだ移動していない admin コンポーネント（後方互換性のため）
+// Admin コンポーネント（後方互換性のため）
 // ============================================================================
-// TODO: これらのコンポーネントも items/ または groups/ に移動する必要があります
-export { RankingItemForm } from "./components/admin/RankingItemForm";
-export { RankingItemsTable } from "./components/admin/RankingItemsTable";
-export { RankingGroupForm } from "./components/admin/forms/RankingGroupForm";
-export { GroupItemsManager } from "./components/admin/GroupItemsManager";
+export { RankingItemForm } from "./items/components/admin/RankingItemForm";
+export { RankingItemsTable } from "./items/components/admin/RankingItemsTable";
+export { RankingGroupForm } from "./groups/components/admin/RankingGroupForm";
+export { GroupItemsManager } from "./groups/components/admin/GroupItemsManager";

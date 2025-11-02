@@ -1,7 +1,12 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Button } from "@/components/atoms/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+
 import { getSubcategories } from "@/features/category";
-import { RankingGroupForm } from "@/features/ranking/components/admin/forms/RankingGroupForm";
+import { GroupItemsManager } from "@/features/ranking/groups/components/admin/GroupItemsManager";
+import { RankingGroupForm } from "@/features/ranking/groups/components/admin/RankingGroupForm";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 interface PageProps {
@@ -9,23 +14,49 @@ interface PageProps {
 }
 
 /**
- * ランキンググループ編集画面
+ * ランキンググループ編集・項目管理統合画面
  */
 export default async function EditRankingGroupPage({ params }: PageProps) {
   const { groupId } = await params;
   const repository = await RankingRepository.create();
-  const group = await repository.getRankingGroupById(parseInt(groupId, 10));
+  // groupIdは実際にはgroupKeyです
+  const group = await repository.getRankingGroupByKey(groupId);
 
   if (!group) {
     notFound();
   }
 
   const subcategories = await getSubcategories();
+  const allItems = await repository.getAllRankingItems();
+  const ungroupedItems = allItems.filter((item) => !item.groupKey);
 
   return (
-    <div className="max-w-2xl mx-auto px-2 py-4 space-y-4">
-      <h2 className="text-xl font-semibold">グループ編集</h2>
-      <RankingGroupForm group={group} subcategories={subcategories} />
+    <div className="max-w-7xl mx-auto px-2 py-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold">
+          {group.label || group.name} - グループ管理
+        </h2>
+        <Link href="/admin/dev-tools/ranking-groups">
+          <Button variant="outline">グループ一覧へ戻る</Button>
+        </Link>
+      </div>
+
+      <Tabs defaultValue="group-info" className="w-full">
+        <TabsList>
+          <TabsTrigger value="group-info">グループ情報</TabsTrigger>
+          <TabsTrigger value="items">項目管理</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="group-info" className="mt-4">
+          <div className="max-w-2xl">
+            <RankingGroupForm group={group} subcategories={subcategories} />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="items" className="mt-4">
+          <GroupItemsManager group={group} ungroupedItems={ungroupedItems} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

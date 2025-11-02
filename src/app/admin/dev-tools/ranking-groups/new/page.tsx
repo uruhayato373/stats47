@@ -1,5 +1,5 @@
 import { getSubcategories } from "@/features/category";
-import { RankingGroupForm } from "@/features/ranking/components/admin/forms/RankingGroupForm";
+import { RankingGroupForm } from "@/features/ranking/groups/components/admin/RankingGroupForm";
 
 /**
  * ランキンググループ新規作成画面

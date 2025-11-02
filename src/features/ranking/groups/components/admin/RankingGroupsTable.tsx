@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
+
 import Link from "next/link";
 
+import { MoreVertical } from "lucide-react";
+
 import { Button } from "@/components/atoms/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/atoms/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -87,22 +96,23 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
                 <TableCell>{group.subcategoryId}</TableCell>
                 <TableCell>{group.items.length}</TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/admin/dev-tools/ranking-groups/${group.groupKey}/items`}
-                    >
-                      <Button variant="ghost" size="sm">
-                        項目管理
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <MoreVertical className="h-4 w-4" />
+                        <span className="sr-only">アクションメニュー</span>
                       </Button>
-                    </Link>
-                    <Link
-                      href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}
-                    >
-                      <Button variant="ghost" size="sm">
-                        編集
-                      </Button>
-                    </Link>
-                  </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}
+                        >
+                          編集
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))
@@ -112,4 +122,3 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     </div>
   );
 }
-

@@ -21,8 +21,8 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import { RankingItemsTable } from "@/features/ranking/components/admin/RankingItemsTable";
 import { getAllRankingItems } from "@/features/ranking/items/actions";
+import { RankingItemsTable } from "@/features/ranking/items/components/admin/RankingItemsTable";
 import type { RankingItem } from "@/features/ranking/items/types";
 import { syncR2ToDatabaseAction } from "@/features/ranking/shared/actions/syncR2ToDatabase";
 import type { SyncResult } from "@/features/ranking/shared/services/r2-sync-service";

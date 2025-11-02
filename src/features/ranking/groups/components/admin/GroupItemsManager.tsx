@@ -11,7 +11,8 @@ import {
 } from "@/components/atoms/ui/card";
 import { Checkbox } from "@/components/atoms/ui/checkbox";
 
-import type { RankingGroup, RankingItem } from "../../types";
+import type { RankingGroup } from "@/features/ranking/groups/types";
+import type { RankingItem } from "@/features/ranking/items/types";
 
 interface GroupItemsManagerProps {
   group: RankingGroup;
@@ -22,29 +23,33 @@ export function GroupItemsManager({
   group,
   ungroupedItems,
 }: GroupItemsManagerProps) {
-  const [selectedUngrouped, setSelectedUngrouped] = useState<Set<number>>(
+  // rankingKey:areaTypeの組み合わせで一意のキーを生成
+  const getItemKey = (item: RankingItem) =>
+    `${item.rankingKey}:${item.areaType}`;
+
+  const [selectedUngrouped, setSelectedUngrouped] = useState<Set<string>>(
     new Set()
   );
-  const [selectedGrouped, setSelectedGrouped] = useState<Set<number>>(
+  const [selectedGrouped, setSelectedGrouped] = useState<Set<string>>(
     new Set()
   );
 
-  const handleUngroupedToggle = (itemId: number) => {
+  const handleUngroupedToggle = (itemKey: string) => {
     const newSet = new Set(selectedUngrouped);
-    if (newSet.has(itemId)) {
-      newSet.delete(itemId);
+    if (newSet.has(itemKey)) {
+      newSet.delete(itemKey);
     } else {
-      newSet.add(itemId);
+      newSet.add(itemKey);
     }
     setSelectedUngrouped(newSet);
   };
 
-  const handleGroupedToggle = (itemId: number) => {
+  const handleGroupedToggle = (itemKey: string) => {
     const newSet = new Set(selectedGrouped);
-    if (newSet.has(itemId)) {
-      newSet.delete(itemId);
+    if (newSet.has(itemKey)) {
+      newSet.delete(itemKey);
     } else {
-      newSet.add(itemId);
+      newSet.add(itemKey);
     }
     setSelectedGrouped(newSet);
   };
@@ -63,15 +68,17 @@ export function GroupItemsManager({
                 グループに項目がありません
               </p>
             ) : (
-              group.items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-2 p-2 rounded border"
-                >
-                  <Checkbox
-                    checked={selectedGrouped.has(item.id)}
-                    onCheckedChange={() => handleGroupedToggle(item.id)}
-                  />
+              group.items.map((item) => {
+                const itemKey = getItemKey(item);
+                return (
+                  <div
+                    key={itemKey}
+                    className="flex items-center gap-2 p-2 rounded border"
+                  >
+                    <Checkbox
+                      checked={selectedGrouped.has(itemKey)}
+                      onCheckedChange={() => handleGroupedToggle(itemKey)}
+                    />
                   <div className="flex-1">
                     <div className="font-medium text-sm">{item.label}</div>
                     <div className="text-xs text-muted-foreground">
@@ -79,7 +86,8 @@ export function GroupItemsManager({
                     </div>
                   </div>
                 </div>
-              ))
+                );
+              })
             )}
             {selectedGrouped.size > 0 && (
               <div className="pt-2 border-t">
@@ -104,15 +112,17 @@ export function GroupItemsManager({
                 未割り当ての項目がありません
               </p>
             ) : (
-              ungroupedItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-2 p-2 rounded border"
-                >
-                  <Checkbox
-                    checked={selectedUngrouped.has(item.id)}
-                    onCheckedChange={() => handleUngroupedToggle(item.id)}
-                  />
+              ungroupedItems.map((item) => {
+                const itemKey = getItemKey(item);
+                return (
+                  <div
+                    key={itemKey}
+                    className="flex items-center gap-2 p-2 rounded border"
+                  >
+                    <Checkbox
+                      checked={selectedUngrouped.has(itemKey)}
+                      onCheckedChange={() => handleUngroupedToggle(itemKey)}
+                    />
                   <div className="flex-1">
                     <div className="font-medium text-sm">{item.label}</div>
                     <div className="text-xs text-muted-foreground">
@@ -120,7 +130,8 @@ export function GroupItemsManager({
                     </div>
                   </div>
                 </div>
-              ))
+                );
+              })
             )}
             {selectedUngrouped.size > 0 && (
               <div className="pt-2 border-t">

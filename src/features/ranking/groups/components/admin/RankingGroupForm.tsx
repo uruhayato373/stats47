@@ -5,7 +5,7 @@ import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 
 import type { Subcategory } from "@/features/category";
-import type { RankingGroup } from "../../types/group";
+import type { RankingGroup } from "@/features/ranking/groups/types";
 
 interface RankingGroupFormProps {
   group?: RankingGroup;

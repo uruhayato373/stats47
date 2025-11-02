@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Button } from "@/components/atoms/ui/button";
 
-import { RankingItemForm } from "@/features/ranking/components/admin/RankingItemForm";
+import { RankingItemForm } from "@/features/ranking/items/components/admin/RankingItemForm";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 interface PageProps {
