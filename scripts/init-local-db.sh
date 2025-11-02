@@ -4,7 +4,6 @@
 # このスクリプトは以下の処理を実行します:
 # 1. Wrangler CLIを使用してローカルD1を初期化
 # 2. database/schemas/main.sql を適用
-# 3. database/migrations/ のマイグレーションを適用
 
 set -e
 
@@ -51,15 +50,7 @@ if [ ! -f ".wrangler/state/v3/d1/miniflare-D1DatabaseObject/b3c084603f7be30f18c6
     }
   fi
 else
-  log_info "Database already exists. Applying migrations only..."
-fi
-
-# マイグレーションを適用
-log_info "Applying migrations..."
-if [ -d "database/migrations" ]; then
-  wrangler d1 migrations apply stats47 --local || {
-    log_warn "Some migrations failed. This is expected if they have already been applied."
-  }
+  log_info "Database already exists. Schema already applied."
 fi
 
 log_info "Verifying database..."
@@ -96,23 +87,9 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
     }
   fi
   
-  # e-Statランキングマッピングシード（分割版）
-  # 分割されたシードファイルを順次適用
-  estat_ranking_seed_files=$(find database/seeds -name "estat_ranking_mappings_seed_part_*.sql" -type f | sort)
-  if [ -n "$estat_ranking_seed_files" ]; then
-    log_info "Applying estat_ranking_mappings seeds (split files)..."
-    part_count=0
-    for seed_file in $estat_ranking_seed_files; do
-      part_count=$((part_count + 1))
-      log_info "Applying part $part_count: $(basename $seed_file)"
-      wrangler d1 execute stats47 --local --file="$seed_file" || {
-        log_warn "Failed to apply estat_ranking_mappings seed part: $seed_file"
-      }
-    done
-    log_info "Applied $part_count parts of estat_ranking_mappings seeds"
-  # 旧形式（単一ファイル）の互換性サポート
-  elif [ -f "database/seeds/estat_ranking_mappings_seed.sql" ]; then
-    log_info "Applying estat_ranking_mappings seed (single file)..."
+  # e-Statランキングマッピングシード
+  if [ -f "database/seeds/estat_ranking_mappings_seed.sql" ]; then
+    log_info "Applying estat_ranking_mappings seed..."
     wrangler d1 execute stats47 --local --file=database/seeds/estat_ranking_mappings_seed.sql || {
       log_warn "Failed to apply estat_ranking_mappings seed"
     }
@@ -144,28 +121,6 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
   
   # 注意: ranking_itemsテーブルはR2→D1同期機能で自動生成・更新されることも可能です
   # 管理画面の「R2→D1同期（ranking_items自動生成）」から実行してください
-  
-  # ダッシュボード関連シード
-  if [ -f "database/seeds/widget_templates_seed.sql" ]; then
-    log_info "Applying widget_templates seed..."
-    wrangler d1 execute stats47 --local --file=database/seeds/widget_templates_seed.sql || {
-      log_warn "Failed to apply widget_templates seed"
-    }
-  fi
-  
-  if [ -f "database/seeds/dashboard_configs_seed.sql" ]; then
-    log_info "Applying dashboard_configs seed..."
-    wrangler d1 execute stats47 --local --file=database/seeds/dashboard_configs_seed.sql || {
-      log_warn "Failed to apply dashboard_configs seed"
-    }
-  fi
-  
-  if [ -f "database/seeds/dashboard_widgets_seed.sql" ]; then
-    log_info "Applying dashboard_widgets seed..."
-    wrangler d1 execute stats47 --local --file=database/seeds/dashboard_widgets_seed.sql || {
-      log_warn "Failed to apply dashboard_widgets seed"
-    }
-  fi
 fi
 
 log_info "Local D1 database initialized successfully!"
