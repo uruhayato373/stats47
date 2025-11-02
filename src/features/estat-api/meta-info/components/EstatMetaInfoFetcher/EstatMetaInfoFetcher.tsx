@@ -1,11 +1,12 @@
 "use client";
 
-import { memo, useEffect } from "react";
+import { memo, useEffect, useRef } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/atoms/ui/button";
@@ -22,7 +23,11 @@ import { Input } from "@/components/atoms/ui/input";
 import type { MetaInfoSource } from "@/features/estat-api/meta-info";
 
 /**
- * フォームスキーマの定義
+ * フォームスキーマ
+ *
+ * 統計表IDのバリデーションルール:
+ * - 必須項目
+ * - 10桁の数字のみ許可
  */
 const formSchema = z.object({
   statsDataId: z
@@ -34,33 +39,34 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 /**
- * e-Statメタ情報取得フォームのプロパティ
+ * EstatMetaInfoFetcherのプロパティ
  */
 interface EstatMetaInfoFetcherProps {
-  /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
+  /** 送信成功後に入力フィールドをクリアするか（デフォルト: false） */
   clearOnSuccess?: boolean;
-  /** 統計表ID（初期値として使用、オプション） */
+  /** 統計表ID（初期値として使用） */
   statsId?: string | null;
   /** データ取得元（'r2': R2ストレージ, 'api': e-Stat API） */
   dataSource?: MetaInfoSource | null;
 }
 
 /**
- * EstatMetaInfoFetcher - e-Statメタ情報取得フォームコンポーネント
+ * e-Statメタ情報取得フォームコンポーネント
  *
  * 機能:
  * - 統計表IDの入力フォーム
  * - フォーム送信時のバリデーション
  * - URL更新によるデータ取得
+ * - データ取得元のtoast通知表示
  * - 送信成功後の入力クリア（オプション）
  *
- * レイアウト:
- * - レスポンシブデザイン（モバイル: 縦並び、デスクトップ: 横並び）
- * - 入力フィールド + 送信ボタン
- *
- * 使用例:
+ * @example
  * ```tsx
- * <EstatMetaInfoFetcher clearOnSuccess={true} />
+ * <EstatMetaInfoFetcher
+ *   clearOnSuccess={true}
+ *   statsId="0000010101"
+ *   dataSource="r2"
+ * />
  * ```
  */
 const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
@@ -81,17 +87,44 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
     },
   });
 
+  // 前回のdataSourceを保持（初回表示時のみtoastを表示しないため）
+  const prevDataSourceRef = useRef<MetaInfoSource | null | undefined>(
+    undefined
+  );
+
   /**
    * statsIdが変更されたらフォームの値を更新
    *
    * 保存後のリフレッシュなどでstatsIdが変更された場合にフォームを同期します。
-   * statsIdまたはformが変更されたときに実行されます。
    */
   useEffect(() => {
     if (statsId) {
       form.setValue("statsDataId", statsId);
     }
   }, [statsId, form]);
+
+  /**
+   * データ取得元が変更されたらtoast通知を表示
+   *
+   * dataSourceが存在し、前回と異なる場合にtoastを表示します。
+   * 初回マウント時（prevDataSourceRef.current === undefined）は表示しません。
+   */
+  useEffect(() => {
+    if (dataSource && prevDataSourceRef.current !== undefined) {
+      if (dataSource === "r2") {
+        toast.success("データ取得完了", {
+          description: "R2ストレージから取得しました",
+          duration: 3000,
+        });
+      } else if (dataSource === "api") {
+        toast.info("データ取得完了", {
+          description: "e-Stat APIから取得しました",
+          duration: 3000,
+        });
+      }
+    }
+    prevDataSourceRef.current = dataSource;
+  }, [dataSource]);
 
   /**
    * フォーム送信時の処理
@@ -109,18 +142,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
       form.reset();
     }
   };
-
-  /**
-   * データ取得元のラベルを取得
-   *
-   * @returns データ取得元のラベル（'r2': "R2ストレージから取得", 'api': "e-Stat APIから取得"）、取得元が未指定の場合はnull
-   */
-  const getDataSourceLabel = (): string | null => {
-    if (!dataSource) return null;
-    return dataSource === "r2" ? "R2ストレージから取得" : "e-Stat APIから取得";
-  };
-
-  const dataSourceLabel = getDataSourceLabel();
 
   return (
     <Form {...form}>
@@ -147,11 +168,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
                 >
                   取得
                 </Button>
-                {dataSourceLabel && (
-                  <span className="text-xs text-muted-foreground whitespace-nowrap">
-                    {dataSourceLabel}
-                  </span>
-                )}
               </div>
               <FormMessage />
             </FormItem>
