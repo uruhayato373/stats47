@@ -1,16 +1,35 @@
-import { getCategoryIcon, listCategories } from "@/features/category";
+"use client";
+
+import { useEffect, useState } from "react";
+
+import { getCategoryIcon } from "@/features/category";
+import { listCategoriesAction } from "@/features/category/actions";
+import type { Category } from "@/features/category/types/category.types";
 
 import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
 /**
- * 通常ページ用サイドバー（サーバーコンポーネント）
+ * 通常ページ用サイドバー（クライアントコンポーネント）
  * ホーム、統計カテゴリーを表示
  */
 export function AppSidebar() {
-  const categories = listCategories();
+  const [categories, setCategories] = useState<Category[]>([]);
   const navigationItems = buildSidebarNavigationItems();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await listCategoriesAction();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("カテゴリ取得エラー:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <div className="w-64 h-full bg-sidebar border-r border-border flex flex-col">
@@ -41,14 +60,14 @@ export function AppSidebar() {
           <div className="space-y-1">
             {categories.map((category) => (
               <ActiveSidebarMenuButton
-                key={category.categoryName}
-                href={`/${category.categoryName}`}
+                key={category.categoryKey}
+                href={`/${category.categoryKey}`}
               >
                 {(() => {
                   const Icon = getCategoryIcon(category.icon ?? "");
                   return <Icon className="size-4" />;
                 })()}
-                <span>{category.name}</span>
+                <span>{category.categoryName}</span>
               </ActiveSidebarMenuButton>
             ))}
           </div>

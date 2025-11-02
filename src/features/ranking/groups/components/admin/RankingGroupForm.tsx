@@ -17,7 +17,8 @@ import { Checkbox } from "@/components/atoms/ui/checkbox";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 
-import { listCategories } from "@/features/category";
+import { listCategoriesAction } from "@/features/category/actions";
+import type { Category } from "@/features/category/types/category.types";
 import { createRankingGroup } from "@/features/ranking/groups/actions/createRankingGroup";
 import { updateRankingGroup } from "@/features/ranking/groups/actions/updateRankingGroup";
 
@@ -35,7 +36,21 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
       ? group.subcategoryIds.filter((id) => id !== "uncategorized")
       : []
   );
-  const categoriesList = listCategories();
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+
+  // カテゴリ一覧を取得
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await listCategoriesAction();
+        setCategoriesList(categoriesData);
+      } catch (error) {
+        console.error("カテゴリ取得エラー:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // グループがある場合、サブカテゴリIDを初期化（uncategorizedは除外）
   useEffect(() => {
@@ -150,12 +165,8 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
         <Label>サブカテゴリ（複数選択可）</Label>
         <div className="rounded-md border border-input p-4 max-h-96 overflow-y-auto">
           <Accordion type="multiple" className="w-full">
-            {categoriesList.map((category, categoryIndex) => {
-              const categoryId =
-                (category as any).id ||
-                (category as any).categoryName ||
-                `category-${categoryIndex}`;
-
+            {categoriesList.map((category) => {
+              const categoryId = category.categoryKey;
               const categorySubcategories = category.subcategories || [];
 
               if (categorySubcategories.length === 0) {
@@ -164,8 +175,7 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
 
               // このカテゴリに選択済みのサブカテゴリがあるかチェック（uncategorizedは除外）
               const selectedCount = categorySubcategories.filter((sub) => {
-                const subId =
-                  (sub as any).id || (sub as any).subcategoryName || "";
+                const subId = sub.subcategoryKey;
                 return (
                   subId !== "uncategorized" &&
                   selectedSubcategoryIds.includes(subId)
@@ -176,7 +186,7 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
                 <AccordionItem key={categoryId} value={categoryId}>
                   <AccordionTrigger className="text-sm font-medium">
                     <div className="flex items-center justify-between w-full pr-4">
-                      <span>{category.name}</span>
+                      <span>{category.categoryName}</span>
                       {selectedCount > 0 && (
                         <span className="text-xs text-muted-foreground">
                           {selectedCount}個選択中
@@ -187,19 +197,12 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
                   <AccordionContent>
                     <div className="space-y-2 pl-2">
                       {categorySubcategories
-                        .filter((subcategory, subIndex) => {
+                        .filter((subcategory) => {
                           // uncategorizedは表示しない
-                          const subcategoryId =
-                            (subcategory as any).id ||
-                            (subcategory as any).subcategoryName ||
-                            `subcategory-${subIndex}`;
-                          return subcategoryId !== "uncategorized";
+                          return subcategory.subcategoryKey !== "uncategorized";
                         })
-                        .map((subcategory, subIndex) => {
-                          const subcategoryId =
-                            (subcategory as any).id ||
-                            (subcategory as any).subcategoryName ||
-                            `subcategory-${subIndex}`;
+                        .map((subcategory) => {
+                          const subcategoryId = subcategory.subcategoryKey;
                           const isChecked = selectedSubcategoryIds.includes(
                             subcategoryId
                           );
@@ -223,7 +226,7 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
                                 htmlFor={`subcategory-${categoryId}-${subcategoryId}`}
                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex-1"
                               >
-                                {subcategory.name}
+                                {subcategory.subcategoryName}
                               </label>
                             </div>
                           );

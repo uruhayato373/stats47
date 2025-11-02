@@ -29,7 +29,7 @@ import type { Category, Subcategory } from "../types/category.types";
  * 全てのカテゴリとサブカテゴリを取得
  *
  * すべてのカテゴリとそのサブカテゴリを一覧で取得する。
- * リポジトリ層から取得したデータをそのまま返す。
+ * リポジトリ層の `listCategories()` を直接呼び出して返す。
  *
  * @returns {Promise<Category[]>} カテゴリとサブカテゴリの配列
  * @throws {Error} リポジトリ層でのデータ取得に失敗した場合

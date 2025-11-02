@@ -13,7 +13,7 @@ import {
 } from "@/components/atoms/ui/card";
 import { NotFoundMessage } from "@/components/molecules/errors/NotFoundMessage";
 
-import { listCategories } from "@/features/category";
+import { listCategories } from "@/features/category/repositories/category-repository";
 
 /**
  * カテゴリページのProps型定義
@@ -32,15 +32,15 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category } = await params;
-  const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.categoryName === category);
+  const categories = await listCategories();
+  const categoryData = categories.find((cat) => cat.categoryKey === category);
 
   return {
-    title: categoryData?.name || category,
-    description: `${categoryData?.name || category}に関する統計データを表示`,
+    title: categoryData?.categoryName || category,
+    description: `${categoryData?.categoryName || category}に関する統計データを表示`,
     openGraph: {
-      title: categoryData?.name || category,
-      description: `${categoryData?.name || category}に関する統計データを表示`,
+      title: categoryData?.categoryName || category,
+      description: `${categoryData?.categoryName || category}に関する統計データを表示`,
       type: "article",
     },
   };
@@ -57,8 +57,8 @@ export async function generateMetadata({
  */
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
-  const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.categoryName === category);
+  const categories = await listCategories();
+  const categoryData = categories.find((cat) => cat.categoryKey === category);
 
   // カテゴリが存在しない場合のエラーハンドリング
   if (!categoryData) {
@@ -82,14 +82,14 @@ export default async function CategoryPage({ params }: PageProps) {
             className="hover:shadow-lg transition-shadow"
           >
             <CardHeader>
-              <CardTitle className="text-xl">{subcategory.name}</CardTitle>
+              <CardTitle className="text-xl">{subcategory.subcategoryName}</CardTitle>
               <CardDescription>
-                {subcategory.name}に関する詳細な統計データを表示
+                {subcategory.subcategoryName}に関する詳細な統計データを表示
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button asChild className="w-full">
-                <Link href={`/${category}/${subcategory.subcategoryName}`}>
+                <Link href={`/${category}/${subcategory.subcategoryKey}`}>
                   詳細を見る
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Link>

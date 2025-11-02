@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-categories.jsonからカテゴリとサブカテゴリのseedを生成する
+⚠️ DEPRECATED: このスクリプトは categories.json に依存していますが、ファイルは削除されました。
+
+カテゴリは既にデータベースで管理されているため、このスクリプトは不要です。
+新しいカテゴリを追加する場合は、管理画面またはデータベースシードファイルを直接編集してください。
+
+このスクリプトを実行するとエラーになります。
 """
 
 import json
@@ -13,7 +18,13 @@ output_file = project_root / "database" / "seeds" / "categories_seed.sql"
 
 
 def generate_categories_seed():
-    """categories.jsonからSQL seedを生成"""
+    """categories.jsonからSQL seedを生成（⚠️ 非推奨）"""
+    
+    if not json_file.exists():
+        print(f"ERROR: {json_file} が見つかりません。")
+        print("categories.json は削除され、カテゴリはデータベースで管理されています。")
+        print("このスクリプトは不要です。新しいカテゴリは管理画面から追加してください。")
+        return None
     
     # JSONファイルを読み込む
     with open(json_file, "r", encoding="utf-8") as f:
@@ -90,10 +101,18 @@ def generate_categories_seed():
 
 def main():
     """メイン処理"""
+    print("⚠️ WARNING: このスクリプトは非推奨です。")
+    print("categories.json は削除され、カテゴリはデータベースで管理されています。")
+    print("このスクリプトを実行する必要はありません。")
+    print()
+    
     print(f"Reading JSON file: {json_file}")
     
     print("Generating SQL...")
     sql = generate_categories_seed()
+    
+    if sql is None:
+        return
     
     print(f"Writing to: {output_file}")
     with open(output_file, "w", encoding="utf-8") as f:

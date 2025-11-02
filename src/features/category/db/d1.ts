@@ -1,8 +1,7 @@
 // Cloudflare D1対応 DB Providerユーティリティ
 export type D1Database = any; // cloudflare/workers-types で型定義できる場合は利用可
 
-import fs from "fs";
-import path from "path";
+import "server-only";
 
 /**
  * ローカルSQLiteデータベースへのアクセスを提供するD1互換アダプタ
@@ -16,6 +15,11 @@ function createLocalD1Adapter(): D1Database | null {
   }
 
   try {
+    // 動的インポートでfsとpathを取得（サーバーサイドのみ）
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("fs");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path");
     // better-sqlite3を動的にインポート（サーバーサイドのみ）
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const Database = require("better-sqlite3");
@@ -35,7 +39,7 @@ function createLocalD1Adapter(): D1Database | null {
       // ディレクトリ内の.sqliteファイルを検索
       const files = fs.readdirSync(basePath, { recursive: true });
       const sqliteFile = files.find(
-        (file): file is string =>
+        (file: string | Buffer): file is string =>
           typeof file === "string" && file.endsWith(".sqlite")
       );
 

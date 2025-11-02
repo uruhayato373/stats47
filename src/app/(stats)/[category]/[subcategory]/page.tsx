@@ -13,7 +13,7 @@ import {
 } from "@/components/atoms/ui/card";
 import { NotFoundMessage } from "@/components/molecules/errors/NotFoundMessage";
 
-import { listCategories } from "@/features/category";
+import { listCategories } from "@/features/category/repositories/category-repository";
 
 /**
  * サブカテゴリページのプロパティ
@@ -33,25 +33,25 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category, subcategory } = await params;
-  const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.categoryName === category);
+  const categories = await listCategories();
+  const categoryData = categories.find((cat) => cat.categoryKey === category);
   const subcategoryData = categoryData?.subcategories?.find(
-    (sub) => sub.subcategoryName === subcategory
+    (sub) => sub.subcategoryKey === subcategory
   );
 
   return {
-    title: `${subcategoryData?.name || subcategory} - ${
-      categoryData?.name || category
+    title: `${subcategoryData?.subcategoryName || subcategory} - ${
+      categoryData?.categoryName || category
     }`,
-    description: `${categoryData?.name || category}の${
-      subcategoryData?.name || subcategory
+    description: `${categoryData?.categoryName || category}の${
+      subcategoryData?.subcategoryName || subcategory
     }に関する統計データを表示`,
     openGraph: {
-      title: `${subcategoryData?.name || subcategory} - ${
-        categoryData?.name || category
+      title: `${subcategoryData?.subcategoryName || subcategory} - ${
+        categoryData?.categoryName || category
       }`,
-      description: `${categoryData?.name || category}の${
-        subcategoryData?.name || subcategory
+      description: `${categoryData?.categoryName || category}の${
+        subcategoryData?.subcategoryName || subcategory
       }に関する統計データを表示`,
       type: "article",
     },
@@ -65,10 +65,10 @@ export async function generateMetadata({
  */
 export default async function SubcategoryPage({ params }: PageProps) {
   const { category, subcategory } = await params;
-  const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.categoryName === category);
+  const categories = await listCategories();
+  const categoryData = categories.find((cat) => cat.categoryKey === category);
   const subcategoryData = categoryData?.subcategories?.find(
-    (sub) => sub.subcategoryName === subcategory
+    (sub) => sub.subcategoryKey === subcategory
   );
 
   // カテゴリまたはサブカテゴリが見つからない場合は404ページを表示

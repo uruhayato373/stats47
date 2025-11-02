@@ -92,10 +92,18 @@ def create_dashboard_component(
 
 def main():
     """メイン処理"""
-    # categories.jsonを読み込み
+    # ⚠️ WARNING: categories.json は削除されました。
+    # このスクリプトはデータベースからカテゴリ一覧を取得するように修正する必要があります。
+    # または、データベースから既存のカテゴリ一覧をエクスポートして使用してください。
     script_dir = Path(__file__).parent
     project_root = script_dir.parent
     categories_path = project_root / 'src' / 'config' / 'categories.json'
+    
+    if not categories_path.exists():
+        print(f"ERROR: {categories_path} が見つかりません。")
+        print("このスクリプトは categories.json に依存していますが、ファイルは削除されました。")
+        print("データベースからカテゴリ一覧を取得するようにスクリプトを修正する必要があります。")
+        return
     
     with open(categories_path, 'r', encoding='utf-8') as f:
         categories = json.load(f)

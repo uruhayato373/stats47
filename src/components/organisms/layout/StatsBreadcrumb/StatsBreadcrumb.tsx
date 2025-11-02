@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { ChevronRight } from "lucide-react";
 
-import { listCategories } from "@/features/category";
+import { listCategoriesAction } from "@/features/category/actions";
+import type { Category } from "@/features/category/types/category.types";
 
 import { BreadcrumbAreaDropdown } from "./BreadcrumbAreaDropdown";
 
@@ -21,6 +23,7 @@ import { BreadcrumbAreaDropdown } from "./BreadcrumbAreaDropdown";
 export const StatsBreadcrumb = () => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   // URLパスからカテゴリ、サブカテゴリ、ページタイプ、地域コードを取得
   const categoryId = pathSegments[0];
@@ -28,10 +31,23 @@ export const StatsBreadcrumb = () => {
   const pageType = pathSegments[2];
   const areaCode = pathSegments[3];
 
-  const categories = listCategories();
-  const category = categories.find((cat) => cat.id === categoryId);
+  // カテゴリ一覧を取得
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await listCategoriesAction();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("カテゴリ取得エラー:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const category = categories.find((cat) => cat.categoryKey === categoryId);
   const subcategory = category?.subcategories?.find(
-    (sub) => sub.id === subcategoryId
+    (sub) => sub.subcategoryKey === subcategoryId
   );
 
   // ページタイプの表示名マッピング
@@ -52,10 +68,10 @@ export const StatsBreadcrumb = () => {
           <>
             <ChevronRight className="w-3 h-3" />
             <Link
-              href={`/${category.id}`}
+              href={`/${category.categoryKey}`}
               className="transition-colors hover:text-foreground"
             >
-              {category.name}
+              {category.categoryName}
             </Link>
           </>
         )}
@@ -63,10 +79,10 @@ export const StatsBreadcrumb = () => {
           <>
             <ChevronRight className="w-3 h-3" />
             <Link
-              href={`/${category?.id}/${subcategory.id}`}
+              href={`/${category?.categoryKey}/${subcategory.subcategoryKey}`}
               className="transition-colors hover:text-foreground"
             >
-              {subcategory.name}
+              {subcategory.subcategoryName}
             </Link>
           </>
         )}

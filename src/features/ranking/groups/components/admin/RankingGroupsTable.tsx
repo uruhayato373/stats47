@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Link from "next/link";
 
@@ -15,7 +15,8 @@ import {
   TableRow,
 } from "@/components/atoms/ui/table";
 
-import { listCategories } from "@/features/category";
+import { listCategoriesAction } from "@/features/category/actions";
+import type { Category } from "@/features/category/types/category.types";
 
 import type { RankingGroup } from "../../types";
 
@@ -25,21 +26,30 @@ interface RankingGroupsTableProps {
 
 export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("all");
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 
   // カテゴリ一覧を取得
-  const categoriesList = listCategories();
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await listCategoriesAction();
+        setCategoriesList(categoriesData);
+      } catch (error) {
+        console.error("カテゴリ取得エラー:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // サブカテゴリIDからサブカテゴリ名を取得するヘルパー関数
   const getSubcategoryName = (subcategoryId: string): string => {
     for (const category of categoriesList) {
-      const subcategory = category.subcategories?.find((sub) => {
-        // categories.jsonはidプロパティを使用
-        const subId =
-          "id" in sub ? (sub as { id: string }).id : sub.subcategoryName;
-        return subId === subcategoryId || sub.subcategoryName === subcategoryId;
-      });
+      const subcategory = category.subcategories?.find(
+        (sub) => sub.subcategoryKey === subcategoryId
+      );
       if (subcategory) {
-        return subcategory.name;
+        return subcategory.subcategoryName;
       }
     }
     return subcategoryId; // 見つからない場合はIDをそのまま返す
@@ -50,11 +60,8 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     const map = new Map<string, string>();
     categoriesList.forEach((category) => {
       category.subcategories?.forEach((sub) => {
-        // categories.jsonはidプロパティを使用
-        const subId =
-          "id" in sub ? (sub as { id: string }).id : sub.subcategoryName;
-        if (subId) {
-          map.set(subId, sub.name);
+        if (sub.subcategoryKey) {
+          map.set(sub.subcategoryKey, sub.subcategoryName);
         }
       });
     });

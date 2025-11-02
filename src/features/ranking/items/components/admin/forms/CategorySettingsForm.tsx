@@ -26,7 +26,8 @@ import {
 } from "@/components/atoms/ui/select";
 import { Skeleton } from "@/components/atoms/ui/skeleton";
 
-import categories from "@/config/categories.json";
+import { listCategoriesAction } from "@/features/category/actions";
+import type { Category } from "@/features/category/types/category.types";
 
 const categorySettingsSchema = z.object({
   categoryId: z.string().min(1, "カテゴリを選択してください"),
@@ -58,6 +59,8 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
   ({ item }, ref) => {
     const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
     const [loading, setLoading] = useState(false);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [categoriesLoading, setCategoriesLoading] = useState(true);
 
     const form = useForm<CategorySettingsFormValues>({
     resolver: zodResolver(categorySettingsSchema),
@@ -72,8 +75,25 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
   const selectedCategoryId = form.watch("categoryId");
   const selectedSubcategoryId = form.watch("subcategoryId");
 
+  // カテゴリ一覧を取得
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setCategoriesLoading(true);
+        const categoriesData = await listCategoriesAction();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("カテゴリ取得エラー:", error);
+      } finally {
+        setCategoriesLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   // 選択されたカテゴリのサブカテゴリを取得
-  const selectedCategory = categories.find((c) => c.id === selectedCategoryId);
+  const selectedCategory = categories.find((c) => c.categoryKey === selectedCategoryId);
   const subcategories = selectedCategory?.subcategories || [];
 
   // サブカテゴリ変更時にグループを取得
@@ -123,7 +143,7 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
 
   // カテゴリ変更時にサブカテゴリをリセット
   useEffect(() => {
-    if (selectedCategoryId && !subcategories.find((s) => s.id === selectedSubcategoryId)) {
+    if (selectedCategoryId && !subcategories.find((s) => s.subcategoryKey === selectedSubcategoryId)) {
       form.setValue("subcategoryId", "");
       form.setValue("groupId", null);
     }
@@ -149,20 +169,24 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
             render={({ field }) => (
               <FormItem>
                 <FormLabel>カテゴリ *</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="カテゴリを選択" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        {category.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                {categoriesLoading ? (
+                  <Skeleton className="h-8 w-full" />
+                ) : (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="カテゴリを選択" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category.categoryKey} value={category.categoryKey}>
+                          {category.categoryName}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
                 <FormMessage />
               </FormItem>
             )}
@@ -186,8 +210,8 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                   </FormControl>
                   <SelectContent>
                     {subcategories.map((subcategory) => (
-                      <SelectItem key={subcategory.id} value={subcategory.id}>
-                        {subcategory.name}
+                      <SelectItem key={subcategory.subcategoryKey} value={subcategory.subcategoryKey}>
+                        {subcategory.subcategoryName}
                       </SelectItem>
                     ))}
                   </SelectContent>

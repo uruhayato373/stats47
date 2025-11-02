@@ -8,7 +8,7 @@
  * - テスト容易性の向上
  */
 
-import { findSubcategoryByName } from "@/features/category";
+import { findSubcategoryByName } from "@/features/category/repositories/category-repository";
 
 import { buildEnvironmentConfig } from "@/lib/environment";
 
@@ -108,18 +108,18 @@ export class RankingRepository {
     subcategoryId: string
   ): Promise<RankingConfigResponse | null> {
     try {
-      // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = findSubcategoryByName(subcategoryId);
+      // データベースからサブカテゴリ設定を取得
+      const subcategory = await findSubcategoryByName(subcategoryId);
       if (!subcategory) {
         return null;
       }
 
       const subcategoryConfig: SubcategoryConfig = {
-        id: subcategory.subcategoryName,
-        categoryId: subcategory.categoryName || "",
-        name: subcategory.name,
-        subcategoryName: subcategory.subcategoryName,
-        categoryName: subcategory.categoryName,
+        id: subcategory.subcategoryKey,
+        categoryId: subcategory.categoryKey,
+        name: subcategory.subcategoryName,
+        subcategoryName: subcategory.subcategoryKey,
+        categoryName: subcategory.categoryKey,
         defaultRankingKey: "",
       };
 
@@ -414,8 +414,8 @@ export class RankingRepository {
     subcategoryId: string
   ): Promise<RankingGroupResponse | null> {
     try {
-      // categories.jsonからサブカテゴリ設定を取得
-      const subcategory = findSubcategoryByName(subcategoryId);
+      // データベースからサブカテゴリ設定を取得
+      const subcategory = await findSubcategoryByName(subcategoryId);
       if (!subcategory) {
         console.error(`[RankingRepository] サブカテゴリが見つかりません: ${subcategoryId}`);
         return null;
@@ -426,12 +426,12 @@ export class RankingRepository {
         foundSubcategory: subcategory,
       });
 
-      const subcategoryConfig = {
-        id: subcategory.subcategoryName,
-        categoryId: subcategory.categoryName || "",
-        name: subcategory.name,
-        subcategoryName: subcategory.subcategoryName,
-        categoryName: subcategory.categoryName,
+      const subcategoryConfig: SubcategoryConfig = {
+        id: subcategory.subcategoryKey,
+        categoryId: subcategory.categoryKey,
+        name: subcategory.subcategoryName,
+        subcategoryName: subcategory.subcategoryKey,
+        categoryName: subcategory.categoryKey,
         defaultRankingKey: "",
       };
 
