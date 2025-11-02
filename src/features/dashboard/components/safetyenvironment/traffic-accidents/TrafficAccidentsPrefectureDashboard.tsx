@@ -3,9 +3,14 @@
  * 都道府県レベルの交通事故統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  TrafficAccidentCountCard,
+  TrafficAccidentDeathCountCard,
+  TrafficAccidentCasualtiesCard,
+  TrafficAccidentCountTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +18,46 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 交通事故都道府県ダッシュボード
  */
 export async function TrafficAccidentsPrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureTrafficAccidentsData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の交通事故</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの交通事故統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 交通事故発生件数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <TrafficAccidentCountCard
+          areaCode={areaCode}
+          title="交通事故発生件数"
+        />
+      </div>
+
+      {/* 交通事故死者数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <TrafficAccidentDeathCountCard
+          areaCode={areaCode}
+          title="交通事故死者数"
+        />
+      </div>
+
+      {/* 交通事故死傷者数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <TrafficAccidentCasualtiesCard
+          areaCode={areaCode}
+          title="交通事故死傷者数"
+        />
+      </div>
+
+      {/* 交通事故発生件数推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <TrafficAccidentCountTrendChart
+          areaCode={areaCode}
+          title="交通事故発生件数推移"
+          description="年度別の交通事故発生件数の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }

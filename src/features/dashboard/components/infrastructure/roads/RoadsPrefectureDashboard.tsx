@@ -3,9 +3,14 @@
  * 都道府県レベルの道路統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  RoadLengthCard,
+  MajorRoadLengthCard,
+  PavedRoadLengthCard,
+  RoadLengthTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +18,43 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 道路都道府県ダッシュボード
  */
 export async function RoadsPrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureRoadsData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の道路</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの道路統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 道路実延長統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <RoadLengthCard areaCode={areaCode} title="道路実延長" />
+      </div>
+
+      {/* 道路実延長（主要道路）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <MajorRoadLengthCard
+          areaCode={areaCode}
+          title="道路実延長（主要道路）"
+        />
+      </div>
+
+      {/* 舗装道路実延長統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PavedRoadLengthCard
+          areaCode={areaCode}
+          title="舗装道路実延長"
+        />
+      </div>
+
+      {/* 道路実延長推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <RoadLengthTrendChart
+          areaCode={areaCode}
+          title="道路実延長推移"
+          description="年度別の道路実延長の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }

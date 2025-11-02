@@ -3,9 +3,14 @@
  * 都道府県レベルの社会保障指標統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  SocialWelfareExpensesCard,
+  PublicAssistanceHouseholdsCard,
+  WelfareExpensesCard,
+  SocialWelfareExpensesTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +18,46 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 社会保障指標都道府県ダッシュボード
  */
 export async function CardPrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureCardData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の社会保障指標</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの社会保障指標統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 社会福祉費（都道府県財政）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <SocialWelfareExpensesCard
+          areaCode={areaCode}
+          title="社会福祉費（都道府県財政）"
+        />
+      </div>
+
+      {/* 生活保護被保護実世帯数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PublicAssistanceHouseholdsCard
+          areaCode={areaCode}
+          title="生活保護被保護実世帯数"
+        />
+      </div>
+
+      {/* 民生費（都道府県財政）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <WelfareExpensesCard
+          areaCode={areaCode}
+          title="民生費（都道府県財政）"
+        />
+      </div>
+
+      {/* 社会福祉費推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <SocialWelfareExpensesTrendChart
+          areaCode={areaCode}
+          title="社会福祉費推移"
+          description="年度別の社会福祉費（都道府県財政）の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }
