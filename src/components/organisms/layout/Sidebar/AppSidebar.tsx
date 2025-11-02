@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { getCategoryIcon } from "@/features/category";
+import { getCategoryIcon } from "@/features/category/utils";
 import { listCategoriesAction } from "@/features/category/actions";
 import type { Category } from "@/features/category/types/category.types";
 
