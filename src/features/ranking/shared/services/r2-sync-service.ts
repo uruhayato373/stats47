@@ -9,6 +9,12 @@ import "server-only";
 import { getD1 } from "../db/d1";
 // estat-apiドメインのR2リポジトリを使用（ランキングデータの保存/取得はestat-apiの責務）
 import { EstatRankingR2Repository } from "@/features/estat-api/ranking-mappings/repositories/rankingR2Repository";
+import type { D1Database } from "@cloudflare/workers-types";
+
+/**
+ * デフォルトのサブカテゴリID（「未分類」）
+ */
+const DEFAULT_SUBCATEGORY_ID = "uncategorized";
 
 /**
  * R2から抽出したランキング項目情報
@@ -39,6 +45,91 @@ export interface SyncResult {
  * R2ディレクトリ走査とメタデータ抽出
  */
 export class R2SyncService {
+  /**
+   * ランキンググループが存在することを確認し、存在しない場合は作成する
+   *
+   * @param db - D1データベースインスタンス
+   * @param groupKey - グループキー
+   * @param groupName - グループ名（ranking_nameから取得）
+   * @param label - ラベル（annotationから取得、NULL可）
+   */
+  private static async ensureGroupExists(
+    db: D1Database,
+    groupKey: string,
+    groupName: string,
+    label: string | null
+  ): Promise<void> {
+    try {
+      // 既にグループが存在するか確認
+      const existing = await db
+        .prepare("SELECT group_key FROM ranking_groups WHERE group_key = ?")
+        .bind(groupKey)
+        .first();
+
+      if (existing) {
+        // 既に存在する場合は何もしない
+        console.log(
+          `[R2SyncService] グループは既に存在します: ${groupKey}`
+        );
+        return;
+      }
+
+      // グループが存在しない場合は作成
+      const result = await db
+        .prepare(
+          `INSERT INTO ranking_groups 
+           (group_key, subcategory_id, group_name, label, icon, display_order, created_at, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+        )
+        .bind(
+          groupKey,
+          DEFAULT_SUBCATEGORY_ID,
+          groupName,
+          label,
+          null, // icon
+          0 // display_order
+        )
+        .run();
+
+      if (result.success) {
+        console.log(
+          `[R2SyncService] グループを作成しました: ${groupKey} (group_name: ${groupName})`
+        );
+      } else {
+        const errorDetail = result.meta?.error || result.error || "unknown error";
+        console.error(
+          `[R2SyncService] グループ作成失敗: ${groupKey}`,
+          {
+            groupKey,
+            groupName,
+            label,
+            subcategoryId: DEFAULT_SUBCATEGORY_ID,
+            error: errorDetail,
+          }
+        );
+        throw new Error(
+          `グループの作成に失敗しました: ${errorDetail} (group_key: ${groupKey}, subcategory_id: ${DEFAULT_SUBCATEGORY_ID})`
+        );
+      }
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      console.error(
+        `[R2SyncService] グループ作成エラー: ${groupKey}`,
+        {
+          groupKey,
+          groupName,
+          label,
+          subcategoryId: DEFAULT_SUBCATEGORY_ID,
+          error: errorMessage,
+          originalError: error,
+        }
+      );
+      throw new Error(
+        `グループの作成に失敗しました: ${errorMessage} (group_key: ${groupKey}, subcategory_id: ${DEFAULT_SUBCATEGORY_ID})`
+      );
+    }
+  }
   /**
    * R2のrankingディレクトリを走査し、rankingKeyを抽出
    *
@@ -192,7 +283,7 @@ export class R2SyncService {
         try {
           const existing = await db
             .prepare(
-              "SELECT ranking_key, area_type, unit FROM ranking_items WHERE ranking_key = ? AND area_type = ?"
+              "SELECT ranking_key, area_type, unit, group_key, ranking_name, annotation FROM ranking_items WHERE ranking_key = ? AND area_type = ?"
             )
             .bind(item.rankingKey, item.areaType)
             .first();
@@ -229,26 +320,43 @@ export class R2SyncService {
     // 実際の更新処理
     for (const item of items) {
       try {
-        // 既存データを確認（UPDATEでは既存データを保持するため、必要最小限の情報のみ取得）
+        // 既存データを確認（UPDATEでは既存データを保持するため、必要な情報を取得）
         const existing = await db
           .prepare(
-            `SELECT ranking_key, area_type, unit
+            `SELECT ranking_key, area_type, unit, group_key, ranking_name, annotation
              FROM ranking_items WHERE ranking_key = ? AND area_type = ?`
           )
           .bind(item.rankingKey, item.areaType)
-          .first();
+          .first<{
+            ranking_key: string;
+            area_type: string;
+            unit: string;
+            group_key: string | null;
+            ranking_name: string;
+            annotation: string | null;
+          }>();
 
         if (existing) {
           // 既存データがある場合は、指定フィールドのみ更新
-          // よりシンプルなUPDATE文を使用
+          // group_keyがNULLの場合、ranking_keyと同じ値を設定
+          const groupKey = existing.group_key || item.rankingKey;
+
+          // group_keyが変更される場合、UPDATE文に含める
+          const updateFields = existing.group_key
+            ? `unit = ?, updated_at = CURRENT_TIMESTAMP`
+            : `unit = ?, group_key = ?, updated_at = CURRENT_TIMESTAMP`;
+
+          const bindValues = existing.group_key
+            ? [item.unit, item.rankingKey, item.areaType]
+            : [item.unit, groupKey, item.rankingKey, item.areaType];
+
           const result = await db
             .prepare(
               `UPDATE ranking_items 
-               SET unit = ?, 
-                   updated_at = CURRENT_TIMESTAMP
+               SET ${updateFields}
                WHERE ranking_key = ? AND area_type = ?`
             )
-            .bind(item.unit, item.rankingKey, item.areaType)
+            .bind(...bindValues)
             .run();
 
           if (result.success && result.meta && result.meta.changes > 0) {
@@ -256,6 +364,33 @@ export class R2SyncService {
             console.log(
               `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (unit: ${existing.unit} → ${item.unit})`
             );
+
+            // group_keyがNULLだった場合、グループの存在確認・作成を実行
+            if (!existing.group_key) {
+              try {
+                await this.ensureGroupExists(
+                  db,
+                  groupKey,
+                  existing.ranking_name,
+                  existing.annotation
+                );
+              } catch (groupError) {
+                // グループ作成エラーは個別に記録して続行
+                const groupErrorMessage =
+                  groupError instanceof Error
+                    ? groupError.message
+                    : String(groupError);
+                console.error(
+                  `[R2SyncService] グループ作成エラー（続行）: ${groupKey}`,
+                  groupError
+                );
+                stats.errors.push({
+                  rankingKey: `${item.rankingKey}:${item.areaType}`,
+                  error: `グループ作成エラー: ${groupErrorMessage}`,
+                });
+                // エラーが発生しても処理は続行（ranking_itemは更新済み）
+              }
+            }
           } else if (
             result.success &&
             result.meta &&
@@ -282,16 +417,40 @@ export class R2SyncService {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
 
+          // group_keyはranking_keyと同じ値を設定
+          const groupKey = item.rankingKey;
+
+          // INSERT前にグループを確実に作成（FOREIGN KEY制約を満たすため）
+          let finalGroupKey = groupKey;
+          try {
+            await this.ensureGroupExists(db, groupKey, name, null);
+          } catch (groupError) {
+            // グループ作成エラーは記録して続行（NULLでINSERTを試みる）
+            const groupErrorMessage =
+              groupError instanceof Error
+                ? groupError.message
+                : String(groupError);
+            console.error(
+              `[R2SyncService] グループ作成エラー（続行）: ${groupKey}`,
+              groupError
+            );
+            // groupKeyをnullにしてINSERTを試みる
+            finalGroupKey = null;
+            stats.errors.push({
+              rankingKey: `${item.rankingKey}:${item.areaType}`,
+              error: `グループ作成エラー: ${groupErrorMessage}`,
+            });
+          }
+
           // データベーススキーマに応じて必要なカラムのみを指定
-          // group_keyはNULLで良い（デフォルト値を使用）
           const result = await db
             .prepare(
               `INSERT INTO ranking_items 
                (ranking_key, area_type, label, ranking_name, annotation, unit,
-                display_order_in_group,
+                group_key, display_order_in_group,
                 map_color_scheme, map_diverging_midpoint, ranking_direction,
                 conversion_factor, decimal_places, is_active, created_at, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
             )
             .bind(
               item.rankingKey,
@@ -300,12 +459,14 @@ export class R2SyncService {
               name, // ranking_name
               null, // annotation
               item.unit,
+              finalGroupKey, // group_key（グループ作成済みまたはnull）
               0, // display_order_in_group
               "interpolateBlues", // map_color_scheme
               "zero", // map_diverging_midpoint
               "desc", // ranking_direction
               1, // conversion_factor
-              0 // decimal_places
+              0, // decimal_places
+              1 // is_active
             )
             .run();
 
@@ -315,7 +476,25 @@ export class R2SyncService {
               `[R2SyncService] 作成完了: ${item.rankingKey}:${item.areaType} (unit: ${item.unit})`
             );
           } else {
-            throw new Error("INSERT処理が失敗しました");
+            const errorDetail =
+              result.meta?.error ||
+              result.error ||
+              "unknown error";
+            const errorInfo = {
+              message: "INSERT処理が失敗しました",
+              detail: errorDetail,
+              rankingKey: item.rankingKey,
+              areaType: item.areaType,
+              unit: item.unit,
+              meta: result.meta,
+            };
+            console.error(
+              `[R2SyncService] INSERT失敗: ${item.rankingKey}:${item.areaType}`,
+              errorInfo
+            );
+            throw new Error(
+              `INSERT処理が失敗しました: ${errorDetail} (${item.rankingKey}:${item.areaType})`
+            );
           }
         }
       } catch (error) {

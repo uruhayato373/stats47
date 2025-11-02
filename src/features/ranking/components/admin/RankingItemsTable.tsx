@@ -19,6 +19,7 @@ interface RankingItem {
   rankingKey: string;
   areaType: "prefecture" | "city" | "national";
   label: string;
+  name: string;
   unit: string;
   isActive: boolean;
 }
@@ -105,8 +106,8 @@ const columns: ColumnDef<RankingItem>[] = [
     },
   },
   {
-    accessorKey: "label",
-    header: "ラベル",
+    accessorKey: "name",
+    header: "ランキング名",
     meta: { filterable: true, filterType: "text" },
   },
   {

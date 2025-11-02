@@ -27,23 +27,41 @@ function createLocalD1Adapter(): D1Database | null {
 
     let dbPath: string | null = null;
 
-    for (const basePath of possiblePaths) {
-      if (!fs.existsSync(basePath)) continue;
-
-      // ディレクトリ内の.sqliteファイルを検索
-      const files = fs.readdirSync(basePath, { recursive: true });
-      const sqliteFile = files.find((file: string) =>
-        typeof file === "string" && file.endsWith(".sqlite")
-      );
-
-      if (sqliteFile) {
-        dbPath = path.join(basePath, sqliteFile);
-        break;
-      }
+    // 再帰的にファイルを検索する関数
+    const findSqliteFile = (dir: string): string | null => {
+      if (!fs.existsSync(dir)) return null;
 
       // ディレクトリ自体が.sqliteファイルの場合
-      if (basePath.endsWith(".sqlite")) {
-        dbPath = basePath;
+      if (dir.endsWith(".sqlite") && fs.statSync(dir).isFile()) {
+        return dir;
+      }
+
+      try {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          
+          if (entry.isFile() && entry.name.endsWith(".sqlite")) {
+            return fullPath;
+          }
+          
+          if (entry.isDirectory()) {
+            const found = findSqliteFile(fullPath);
+            if (found) return found;
+          }
+        }
+      } catch (error) {
+        // 読み取りエラーは無視
+      }
+      
+      return null;
+    };
+
+    for (const basePath of possiblePaths) {
+      const found = findSqliteFile(basePath);
+      if (found) {
+        dbPath = found;
         break;
       }
     }

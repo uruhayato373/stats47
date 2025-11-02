@@ -99,4 +99,5 @@ INSERT OR REPLACE INTO subcategories (
   ('health-care', '健康・保健', 'socialsecurity', 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   ('foreign-population', '外国人人口', 'international', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   ('foreigners', '外国人統計', 'international', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-  ('roads', '道路', 'infrastructure', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+  ('roads', '道路', 'infrastructure', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+  ('uncategorized', '未分類', 'population', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
