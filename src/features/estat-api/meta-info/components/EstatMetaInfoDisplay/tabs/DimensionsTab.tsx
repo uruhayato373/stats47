@@ -70,12 +70,7 @@ function CategoryAccordionItem({ category }: { category: CategoryInfo }) {
     >
       <AccordionTrigger className="px-4 py-3 hover:no-underline">
         <div className="flex items-center justify-between w-full mr-4">
-          <div>
-            <div className="font-medium text-foreground">{category.name}</div>
-            <div className="text-sm text-muted-foreground">
-              ID: {category.id} • {itemCount}項目
-            </div>
-          </div>
+          <div className="font-medium text-foreground">{category.name}</div>
           <div className="text-sm text-muted-foreground">{itemCount}項目</div>
         </div>
       </AccordionTrigger>
@@ -274,13 +269,8 @@ export default function DimensionsTab({
                   >
                     <AccordionTrigger className="px-4 py-3 hover:no-underline">
                       <div className="flex items-center justify-between w-full mr-4">
-                        <div>
-                          <div className="font-medium text-foreground">
-                            {getLevelLabel(level)}
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            レベル {level} • {areaCount}地域
-                          </div>
+                        <div className="font-medium text-foreground">
+                          {getLevelLabel(level)}
                         </div>
                         <div className="text-sm text-muted-foreground">
                           {areaCount}地域
@@ -346,17 +336,7 @@ export default function DimensionsTab({
             >
               <AccordionTrigger className="px-4 py-3 hover:no-underline">
                 <div className="flex items-center justify-between w-full mr-4">
-                  <div>
-                    <div className="font-medium text-foreground">
-                      時間軸情報
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {yearCount}年 •{" "}
-                      {minYear && maxYear
-                        ? `${minYear} - ${maxYear}`
-                        : "範囲不明"}
-                    </div>
-                  </div>
+                  <div className="font-medium text-foreground">時間軸情報</div>
                   <div className="text-sm text-muted-foreground">
                     {yearCount}年
                   </div>
