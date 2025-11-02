@@ -20,7 +20,7 @@ import {
     COLLECT_AREA_OPTIONS,
     LIMIT_OPTIONS,
     STATS_FIELD_OPTIONS,
-} from "@/features/estat-api/core/constants/search-options";
+} from "@/features/estat-api/core/config";
 import { STATS_FIELDS } from "@/features/estat-api/stats-list";
 
 interface StatsListSearchProps {

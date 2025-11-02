@@ -3,7 +3,7 @@ import {
   ESTAT_API,
   ESTAT_APP_ID,
   ESTAT_ENDPOINTS,
-} from "@/features/estat-api/core/constants";
+} from "@/features/estat-api/core/config";
 
 import {
   EstatStatsDataResponse,

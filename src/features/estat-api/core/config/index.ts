@@ -1,8 +1,9 @@
 /**
- * e-Stat API 設定
+ * e-Stat API 設定・定数
  *
- * e-Stat API関連の設定値を環境変数から読み込み、統一して管理する。
- * バッチ処理、レート制限、タイムアウトなどの設定を含む。
+ * e-Stat API関連の設定値と定数を統一して管理する。
+ * - 設定値: 環境変数から読み込む実行時設定（バッチ処理、レート制限、タイムアウトなど）
+ * - 定数: 固定の値（API URL、エンドポイント、選択肢オプションなど）
  */
 
 /**
@@ -176,11 +177,113 @@ export function setConfigValue<K extends EstatApiConfigKey>(
   value: EstatApiConfig[K]
 ): void {
   if (process.env.NODE_ENV === "development") {
-    (ESTAT_API_CONFIG as any)[key] = value;
+    // 開発環境でのみ書き込み可能にするため、型アサーションを使用
+
+    (ESTAT_API_CONFIG as Record<string, unknown>)[key] = value;
   } else {
     console.warn("設定値の変更は開発環境でのみ可能です");
   }
 }
+
+// ============================================================================
+// 定数定義
+// ============================================================================
+
+/**
+ * e-Stat API の基本設定定数
+ */
+export const ESTAT_API = {
+  BASE_URL: "https://api.e-stat.go.jp/rest/3.0",
+  VERSION: "3.0",
+  DATA_FORMAT: "json",
+  DEFAULT_LANG: "J",
+} as const;
+
+/**
+ * 環境変数からAPIキーを取得
+ * Cloudflare Workers環境ではprocess.envが利用できないため、直接値を設定
+ */
+export const ESTAT_APP_ID = "59eb12e8a25751dfc27f2e48fcdfa8600b86655e";
+
+/**
+ * API エンドポイント
+ */
+export const ESTAT_ENDPOINTS = {
+  GET_STATS_DATA: "/app/json/getStatsData",
+  GET_META_INFO: "/app/json/getMetaInfo",
+  GET_STATS_LIST: "/app/json/getStatsList",
+  GET_DATA_CATALOG: "/app/json/getDataCatalog",
+} as const;
+
+/**
+ * サンプル統計表ID（人口統計など）
+ */
+export const SAMPLE_STATS_DATA_IDS = {
+  POPULATION: "0003448237", // 人口推計
+  HOUSEHOLD: "0003348237", // 世帯数
+  ECONOMY: "0003160000", // 県民経済計算
+} as const;
+
+// ============================================================================
+// 選択肢オプション
+// ============================================================================
+
+/**
+ * 選択肢の型定義
+ */
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+/**
+ * 統計分野の選択肢
+ * e-Stat API公式の統計分野コードに準拠
+ * @see https://www.e-stat.go.jp/api/api-info/statsfield
+ */
+export const STATS_FIELD_OPTIONS: SelectOption[] = [
+  { value: "", label: "選択してください" },
+  { value: "01", label: "国土・気象" },
+  { value: "02", label: "人口・世帯" },
+  { value: "03", label: "労働・賃金" },
+  { value: "04", label: "農林水産業" },
+  { value: "05", label: "鉱工業" },
+  { value: "06", label: "商業・サービス業" },
+  { value: "07", label: "企業・家計・経済" },
+  { value: "08", label: "住宅・土地・建設" },
+  { value: "09", label: "エネルギー・水" },
+  { value: "10", label: "運輸・観光" },
+  { value: "11", label: "情報通信・科学技術" },
+  { value: "12", label: "教育・文化・スポーツ・生活" },
+  { value: "13", label: "行財政" },
+  { value: "14", label: "司法・安全・環境" },
+  { value: "15", label: "社会保障・衛生" },
+  { value: "16", label: "国際" },
+];
+
+/**
+ * 集計地域区分の選択肢
+ */
+export const COLLECT_AREA_OPTIONS: SelectOption[] = [
+  { value: "", label: "すべて" },
+  { value: "1", label: "全国" },
+  { value: "2", label: "都道府県" },
+  { value: "3", label: "市区町村" },
+];
+
+/**
+ * 取得件数の選択肢
+ */
+export const LIMIT_OPTIONS: SelectOption[] = [
+  { value: "50", label: "50件" },
+  { value: "100", label: "100件" },
+  { value: "500", label: "500件" },
+  { value: "1000", label: "1000件" },
+];
+
+// ============================================================================
+// 初期化
+// ============================================================================
 
 // 初期化時に設定値を検証
 if (typeof window === "undefined") {

@@ -6,6 +6,29 @@
 import { APIResponseError } from "../types";
 
 /**
+ * Node.jsのネットワークエラーの型定義
+ */
+interface NodeJsNetworkError extends Error {
+  code?: string;
+  errno?: number;
+  syscall?: string;
+  hostname?: string;
+}
+
+/**
+ * エラーがNode.jsのネットワークエラーかどうかを判定
+ *
+ * @param error - 判定対象のエラー
+ * @returns Node.jsのネットワークエラーの場合true
+ */
+function isNodeJsNetworkError(error: unknown): error is NodeJsNetworkError {
+  return (
+    error instanceof Error &&
+    ("code" in error || "errno" in error || "syscall" in error)
+  );
+}
+
+/**
  * API URLを構築
  *
  * @param baseUrl - ベースURL
@@ -64,23 +87,25 @@ async function executeTimeoutFetch(
     }
 
     // ネットワークエラーの処理
-    if (error instanceof Error) {
+    if (isNodeJsNetworkError(error)) {
       // DNS解決エラー（ENOTFOUND）
       if (
-        (error as any).code === "ENOTFOUND" ||
-        (error as any).errno === -3008 ||
+        error.code === "ENOTFOUND" ||
+        error.errno === -3008 ||
         error.message.includes("getaddrinfo ENOTFOUND")
       ) {
         throw new Error(
-          `ネットワーク接続エラー: ${(error as any).hostname || "api.e-stat.go.jp"} に接続できません。インターネット接続を確認してください。`
+          `ネットワーク接続エラー: ${
+            error.hostname || "api.e-stat.go.jp"
+          } に接続できません。インターネット接続を確認してください。`
         );
       }
 
       // その他のネットワークエラー
       if (
-        (error as any).code === "ECONNREFUSED" ||
-        (error as any).code === "ETIMEDOUT" ||
-        (error as any).syscall === "getaddrinfo"
+        error.code === "ECONNREFUSED" ||
+        error.code === "ETIMEDOUT" ||
+        error.syscall === "getaddrinfo"
       ) {
         throw new Error(
           `ネットワーク接続エラー: e-Stat APIに接続できません。${error.message}`
@@ -139,8 +164,11 @@ export async function executeHttpRequest<T>(
   const data = await response.json();
   console.log("🌐 HTTP Client: レスポンスデータ:", data);
   console.log("🌐 HTTP Client: レスポンスデータ構造:", {
-    keys: Object.keys(data),
-    hasGET_STATS_LIST: !!(data as any).GET_STATS_LIST,
+    keys: data && typeof data === "object" ? Object.keys(data) : [],
+    hasGET_STATS_LIST:
+      data &&
+      typeof data === "object" &&
+      "GET_STATS_LIST" in (data as Record<string, unknown>),
   });
   return data as T;
 }

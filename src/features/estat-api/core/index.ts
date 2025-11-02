@@ -9,11 +9,8 @@ export * from "./client";
 // Types
 export * from "./types";
 
-// Config
+// Config (設定値と定数を統合)
 export * from "./config";
-
-// Constants
-export * from "./constants";
 
 // Errors
 export * from "./errors";
