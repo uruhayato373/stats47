@@ -3,9 +3,15 @@
  * 都道府県レベルの土地面積統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  AssessedLandAreaStackedBarChart,
+  ForestRatioDonutChart,
+  HabitableAreaCard,
+  TotalAreaCard,
+  TotalAreaTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -19,25 +25,50 @@ export async function LandAreaPrefectureDashboard({
   areaType,
   areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureLandAreaData(areaCode);
-
+  // 未使用のパラメータは型定義の互換性のため必須
+  void category;
+  void subcategory;
+  void areaType;
+  void areaLevel;
+  
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の土地面積</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの土地面積統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 総面積統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <TotalAreaCard areaCode={areaCode} title="総面積" />
+      </div>
+
+      {/* 可住地面積統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <HabitableAreaCard areaCode={areaCode} title="可住地面積" />
+      </div>
+
+      {/* 林野・森林面積割合ドーナツチャート */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <ForestRatioDonutChart
+          areaCode={areaCode}
+          title="林野面積内訳"
+          description="森林面積とその他の林野面積の割合を表示"
+        />
+      </div>
+
+      {/* 総面積推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <TotalAreaTrendChart
+          areaCode={areaCode}
+          title="総面積推移"
+          description="年度別の総面積推移を表示"
+        />
+      </div>
+
+      {/* 評価総地積内訳スタックバーチャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <AssessedLandAreaStackedBarChart
+          areaCode={areaCode}
+          title="評価総地積内訳"
+          description="田、畑、宅地、山林、牧場、原野、その他の評価総地積推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }

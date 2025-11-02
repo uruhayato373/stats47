@@ -3,9 +3,14 @@
  * 全国レベルの土地利用統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  LandUseZoneStackedBarChart,
+  UrbanPlanningAreaCard,
+  UrbanPlanningTrendChart,
+  UrbanizationZoneCard,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -19,22 +24,41 @@ export async function LandUseNationalDashboard({
   areaType,
   areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getNationalLandUseData(areaCode);
+  // 未使用のパラメータは型定義の互換性のため必須
+  void category;
+  void subcategory;
+  void areaType;
+  void areaLevel;
 
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>全国の土地利用</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            全国レベルの土地利用統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 都市計画区域指定面積統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <UrbanPlanningAreaCard areaCode={areaCode} title="都市計画区域指定面積" />
+      </div>
+
+      {/* 市街化区域面積統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <UrbanizationZoneCard areaCode={areaCode} title="市街化区域面積" />
+      </div>
+
+      {/* 都市計画区域面積推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <UrbanPlanningTrendChart
+          areaCode={areaCode}
+          title="都市計画区域面積推移"
+          description="年度別の都市計画区域指定面積推移を表示"
+        />
+      </div>
+
+      {/* 用途地域内訳スタックバーチャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <LandUseZoneStackedBarChart
+          areaCode={areaCode}
+          title="用途地域内訳"
+          description="住居専用地域、住居地域、近隣商業地域、商業地域、準工業地域、工業地域、工業専用地域の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }

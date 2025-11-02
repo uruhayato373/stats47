@@ -3,9 +3,14 @@
  * 都道府県レベルの人口移動統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  MigrationTrendChart,
+  MoversInCard,
+  MoversOutCard,
+  NetMigrationCard,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -19,25 +24,37 @@ export async function PopulationMovementPrefectureDashboard({
   areaType,
   areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefecturePopulationMovementData(areaCode);
+  // 未使用のパラメータは型定義の互換性のため必須
+  void category;
+  void subcategory;
+  void areaType;
+  void areaLevel;
 
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の人口移動</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの人口移動統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 転入者数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <MoversInCard areaCode={areaCode} title="転入者数" />
+      </div>
+
+      {/* 転出者数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <MoversOutCard areaCode={areaCode} title="転出者数" />
+      </div>
+
+      {/* 転入超過数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <NetMigrationCard areaCode={areaCode} title="転入超過数" />
+      </div>
+
+      {/* 転入・転出推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <MigrationTrendChart
+          areaCode={areaCode}
+          title="転入・転出推移"
+          description="年度別の転入者数、転出者数、転入超過数の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }
