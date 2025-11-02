@@ -11,10 +11,9 @@ import type { RankingItem } from "../../items/types";
  */
 export interface RankingGroup {
   groupKey: string;
-  subcategoryId: string;
+  subcategoryIds: string[];
   name: string;
   label?: string;
-  icon?: string;
   displayOrder: number;
   items: RankingItem[];
 }
@@ -33,13 +32,21 @@ export interface RankingGroupResponse {
  */
 export interface RankingGroupDB {
   group_key: string;
-  subcategory_id: string;
   group_name: string;
   label: string | null;
-  icon: string | null;
   display_order: number;
   created_at: string;
   updated_at: string;
+}
+
+/**
+ * ランキンググループとサブカテゴリの関連テーブルの型定義
+ */
+export interface RankingGroupSubcategoryDB {
+  group_key: string;
+  subcategory_id: string;
+  display_order: number;
+  created_at: string;
 }
 
 /**
@@ -47,10 +54,9 @@ export interface RankingGroupDB {
  */
 export interface CreateRankingGroupInput {
   groupKey: string;
-  subcategoryId: string;
+  subcategoryIds: string[];
   group_name: string;
   label?: string;
-  icon?: string;
   displayOrder: number;
 }
 
@@ -59,10 +65,9 @@ export interface CreateRankingGroupInput {
  */
 export interface UpdateRankingGroupInput {
   groupKey?: string;
-  subcategoryId?: string;
+  subcategoryIds?: string[];
   group_name?: string;
   label?: string;
-  icon?: string;
   displayOrder?: number;
 }
 

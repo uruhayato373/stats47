@@ -61,15 +61,17 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     return map;
   }, [categoriesList]);
 
-  // サブカテゴリでフィルタリング
+  // サブカテゴリでフィルタリング（いずれかのサブカテゴリに一致するグループを表示）
   const filteredGroups =
     selectedSubcategory === "all"
       ? groups
-      : groups.filter((group) => group.subcategoryId === selectedSubcategory);
+      : groups.filter((group) =>
+          group.subcategoryIds.includes(selectedSubcategory)
+        );
 
   // ユニークなサブカテゴリIDを取得（表示用に名前付き）
   const subcategories = Array.from(
-    new Set(groups.map((group) => group.subcategoryId))
+    new Set(groups.flatMap((group) => group.subcategoryIds))
   );
 
   return (
@@ -117,13 +119,12 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
           ) : (
             filteredGroups.map((group) => (
               <TableRow key={group.groupKey}>
-                <TableCell className="font-medium">
-                  <div className="flex items-center gap-2">
-                    {group.icon && <span>{group.icon}</span>}
-                    <span>{group.name}</span>
-                  </div>
+                <TableCell className="font-medium">{group.name}</TableCell>
+                <TableCell>
+                  {group.subcategoryIds
+                    .map((id) => getSubcategoryName(id))
+                    .join(", ")}
                 </TableCell>
-                <TableCell>{getSubcategoryName(group.subcategoryId)}</TableCell>
                 <TableCell>{group.items.length}</TableCell>
                 <TableCell>
                   <Link

@@ -78,20 +78,24 @@ export class R2SyncService {
       const result = await db
         .prepare(
           `INSERT INTO ranking_groups 
-           (group_key, subcategory_id, group_name, label, icon, display_order, created_at, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+           (group_key, group_name, label, display_order, created_at, updated_at)
+           VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
         )
-        .bind(
-          groupKey,
-          DEFAULT_SUBCATEGORY_ID,
-          groupName,
-          label,
-          null, // icon
-          0 // display_order
-        )
+        .bind(groupKey, groupName, label, 0) // display_order
         .run();
 
       if (result.success) {
+        // junction tableにデフォルトサブカテゴリを追加
+        await db
+          .prepare(
+            `INSERT INTO ranking_group_subcategories
+             (group_key, subcategory_id, display_order)
+             VALUES (?, ?, ?)
+             ON CONFLICT(group_key, subcategory_id) DO NOTHING`
+          )
+          .bind(groupKey, DEFAULT_SUBCATEGORY_ID, 0)
+          .run();
+
         console.log(
           `[R2SyncService] グループを作成しました: ${groupKey} (group_name: ${groupName})`
         );

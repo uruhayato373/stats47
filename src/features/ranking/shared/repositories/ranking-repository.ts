@@ -369,13 +369,15 @@ export class RankingRepository {
         defaultRankingKey: "",
       };
 
-      // 1. グループ情報を取得
+      // 1. グループ情報を取得（junction table経由）
       const groupsResult = await this.db
         .prepare(
           `
-          SELECT * FROM ranking_groups
-          WHERE subcategory_id = ?
-          ORDER BY display_order
+          SELECT DISTINCT rg.*
+          FROM ranking_groups rg
+          INNER JOIN ranking_group_subcategories rgs ON rg.group_key = rgs.group_key
+          WHERE rgs.subcategory_id = ?
+          ORDER BY rgs.display_order, rg.display_order
         `
         )
         .bind(subcategoryId)
@@ -383,7 +385,7 @@ export class RankingRepository {
 
       const groups: RankingGroup[] = [];
 
-      // 2. 各グループのアイテムを取得
+      // 2. 各グループのアイテムとサブカテゴリを取得
       for (const groupRow of groupsResult.results) {
         const groupDB = groupRow as unknown as RankingGroupDB;
 
@@ -405,12 +407,16 @@ export class RankingRepository {
           )
           .filter((item) => item !== null) as RankingItem[];
 
+        // サブカテゴリを取得
+        const subcategoryIds = await this.getGroupSubcategories(
+          groupDB.group_key
+        );
+
         groups.push({
           groupKey: groupDB.group_key,
-          subcategoryId: groupDB.subcategory_id,
+          subcategoryIds,
           name: groupDB.group_name,
           label: groupDB.label || undefined,
-          icon: groupDB.icon || undefined,
           displayOrder: groupDB.display_order,
           items,
         });
@@ -538,6 +544,28 @@ export class RankingRepository {
   // ============================================================
 
   /**
+   * グループのサブカテゴリ一覧を取得（ヘルパーメソッド）
+   */
+  private async getGroupSubcategories(groupKey: string): Promise<string[]> {
+    try {
+      const result = await this.db
+        .prepare(GROUP_QUERIES.getGroupSubcategories)
+        .bind(groupKey)
+        .all();
+
+      return (result.results || []).map(
+        (row: any) => (row as { subcategory_id: string }).subcategory_id
+      );
+    } catch (error) {
+      console.error(
+        `Failed to get subcategories for group ${groupKey}:`,
+        error
+      );
+      return [];
+    }
+  }
+
+  /**
    * すべてのランキンググループを取得
    */
   async getAllRankingGroups(): Promise<RankingGroup[]> {
@@ -545,25 +573,32 @@ export class RankingRepository {
       const result = await this.db.prepare(GROUP_QUERIES.getAllGroups).all();
       const items = (await this.getAllRankingItems()).filter((i) => i.groupKey);
 
-      return (result.results || []).map((row: any) => {
-        const groupDB = row as unknown as RankingGroupDB;
-        const groupItems = items.filter(
-          (i) => i.groupKey === groupDB.group_key
-        );
+      // サブカテゴリを取得（非同期処理のためPromise.allを使用）
+      const groupsWithSubcategories = await Promise.all(
+        (result.results || []).map(async (row: any) => {
+          const groupDB = row as unknown as RankingGroupDB;
+          const groupItems = items.filter(
+            (i) => i.groupKey === groupDB.group_key
+          );
+          const subcategoryIds = await this.getGroupSubcategories(
+            groupDB.group_key
+          );
 
-        return {
-          groupKey: groupDB.group_key,
-          subcategoryId: groupDB.subcategory_id,
-          name: groupDB.group_name,
-          label: groupDB.label || undefined,
-          icon: groupDB.icon || undefined,
-          displayOrder: groupDB.display_order,
-          items: groupItems.sort(
-            (a, b) =>
-              (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
-          ),
-        };
-      });
+          return {
+            groupKey: groupDB.group_key,
+            subcategoryIds,
+            name: groupDB.group_name,
+            label: groupDB.label || undefined,
+            displayOrder: groupDB.display_order,
+            items: groupItems.sort(
+              (a, b) =>
+                (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
+            ),
+          };
+        })
+      );
+
+      return groupsWithSubcategories;
     } catch (error) {
       console.error("Failed to get all ranking groups:", error);
       throw error;
@@ -591,12 +626,14 @@ export class RankingRepository {
           (a, b) => (a.displayOrderInGroup || 0) - (b.displayOrderInGroup || 0)
         );
 
+      // サブカテゴリを取得
+      const subcategoryIds = await this.getGroupSubcategories(groupKey);
+
       return {
         groupKey: groupDB.group_key,
-        subcategoryId: groupDB.subcategory_id,
+        subcategoryIds,
         name: groupDB.group_name,
         label: groupDB.label || undefined,
-        icon: groupDB.icon || undefined,
         displayOrder: groupDB.display_order,
         items,
       };
@@ -611,17 +648,22 @@ export class RankingRepository {
    */
   async createRankingGroup(data: CreateRankingGroupInput): Promise<string> {
     try {
+      // 1. グループを作成
       await this.db
         .prepare(GROUP_QUERIES.createGroup)
-        .bind(
-          data.groupKey,
-          data.subcategoryId,
-          data.group_name,
-          data.label || null,
-          data.icon || null,
-          data.displayOrder
-        )
+        .bind(data.groupKey, data.group_name, data.label || null, data.displayOrder)
         .run();
+
+      // 2. サブカテゴリをjunction tableに挿入
+      if (data.subcategoryIds && data.subcategoryIds.length > 0) {
+        for (let i = 0; i < data.subcategoryIds.length; i++) {
+          const subcategoryId = data.subcategoryIds[i];
+          await this.db
+            .prepare(GROUP_QUERIES.addSubcategoryToGroup)
+            .bind(data.groupKey, subcategoryId, i) // display_orderとしてインデックスを使用
+            .run();
+        }
+      }
 
       return data.groupKey;
     } catch (error) {
@@ -644,17 +686,36 @@ export class RankingRepository {
         throw new Error("Ranking group not found");
       }
 
+      // 1. グループ基本情報を更新
       await this.db
         .prepare(GROUP_QUERIES.updateGroup)
         .bind(
-          data.subcategoryId ?? group.subcategoryId,
           data.group_name ?? group.name,
           data.label ?? group.label ?? null,
-          data.icon ?? group.icon ?? null,
           data.displayOrder ?? group.displayOrder,
           groupKey
         )
         .run();
+
+      // 2. サブカテゴリを更新（subcategoryIdsが指定されている場合）
+      if (data.subcategoryIds !== undefined) {
+        // 既存のサブカテゴリをすべて削除
+        await this.db
+          .prepare(GROUP_QUERIES.deleteAllGroupSubcategories)
+          .bind(groupKey)
+          .run();
+
+        // 新しいサブカテゴリを挿入
+        if (data.subcategoryIds.length > 0) {
+          for (let i = 0; i < data.subcategoryIds.length; i++) {
+            const subcategoryId = data.subcategoryIds[i];
+            await this.db
+              .prepare(GROUP_QUERIES.addSubcategoryToGroup)
+              .bind(groupKey, subcategoryId, i) // display_orderとしてインデックスを使用
+              .run();
+          }
+        }
+      }
     } catch (error) {
       console.error("Failed to update ranking group:", error);
       throw error;

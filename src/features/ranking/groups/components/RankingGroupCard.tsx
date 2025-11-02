@@ -59,10 +59,6 @@ export function RankingGroupCard({
             </span>
           )}
         </div>
-
-        {group.icon && (
-          <div className="text-xs text-muted-foreground">{group.icon}</div>
-        )}
       </div>
     </Link>
   );

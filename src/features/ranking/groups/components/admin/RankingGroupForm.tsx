@@ -7,15 +7,15 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/atoms/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/atoms/ui/accordion";
+import { Checkbox } from "@/components/atoms/ui/checkbox";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/atoms/ui/select";
 
 import { listCategories } from "@/features/category";
 import { createRankingGroup } from "@/features/ranking/groups/actions/createRankingGroup";
@@ -30,45 +30,41 @@ interface RankingGroupFormProps {
 export function RankingGroupForm({ group }: RankingGroupFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
-  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string>(
-    group?.subcategoryId || ""
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<string[]>(
+    group?.subcategoryIds
+      ? group.subcategoryIds.filter((id) => id !== "uncategorized")
+      : []
   );
   const categoriesList = listCategories();
 
-  // グループがある場合、サブカテゴリIDから親カテゴリを特定
+  // グループがある場合、サブカテゴリIDを初期化（uncategorizedは除外）
   useEffect(() => {
-    if (group?.subcategoryId) {
-      for (const category of categoriesList) {
-        // categories.jsonはidプロパティを使用
-        const subcategory = category.subcategories?.find(
-          (sub) => (sub as any).id === group.subcategoryId || (sub as any).subcategoryName === group.subcategoryId
-        );
-        if (subcategory) {
-          // categories.jsonはidプロパティを使用
-          setSelectedCategoryId((category as any).id || (category as any).categoryName || "");
-          setSelectedSubcategoryId(group.subcategoryId);
-          break;
-        }
-      }
+    if (group?.subcategoryIds && group.subcategoryIds.length > 0) {
+      // uncategorizedを除外して初期化
+      setSelectedSubcategoryIds(
+        group.subcategoryIds.filter((id) => id !== "uncategorized")
+      );
     }
-  }, [group, categoriesList]);
+  }, [group]);
 
-  // 選択されたカテゴリのサブカテゴリを取得
-  const selectedCategory = categoriesList.find(
-    (c) => (c as any).id === selectedCategoryId || (c as any).categoryName === selectedCategoryId
-  );
-  const subcategories = selectedCategory?.subcategories || [];
-
-  // カテゴリ変更時にサブカテゴリをリセット
-  const handleCategoryChange = (categoryId: string) => {
-    setSelectedCategoryId(categoryId);
-    setSelectedSubcategoryId(""); // サブカテゴリをリセット
-  };
-
-  // サブカテゴリ変更時
-  const handleSubcategoryChange = (subcategoryId: string) => {
-    setSelectedSubcategoryId(subcategoryId);
+  // サブカテゴリのチェックボックス変更時
+  const handleSubcategoryToggle = (subcategoryId: string, checked: boolean) => {
+    const UNCategorized_ID = "uncategorized";
+    
+    if (checked) {
+      // サブカテゴリを選択した場合、uncategorizedを除外
+      setSelectedSubcategoryIds((prev) => {
+        const filtered = prev.filter((id) => id !== UNCategorized_ID);
+        // 既に選択されている場合は追加しない
+        if (filtered.includes(subcategoryId)) {
+          return filtered;
+        }
+        return [...filtered, subcategoryId];
+      });
+    } else {
+      // サブカテゴリを解除した場合
+      setSelectedSubcategoryIds((prev) => prev.filter((id) => id !== subcategoryId));
+    }
   };
 
   // フォーム送信処理
@@ -80,13 +76,17 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
     try {
       const formData = new FormData(e.currentTarget);
       const groupKey = formData.get("groupKey") as string;
-      const subcategoryId = formData.get("subcategoryId") as string;
       const name = formData.get("name") as string;
-      const icon = formData.get("icon") as string;
       const displayOrder = parseInt(formData.get("displayOrder") as string, 10);
 
-      if (!groupKey || !subcategoryId || !name || isNaN(displayOrder)) {
+      if (!groupKey || !name || isNaN(displayOrder)) {
         toast.error("必須項目を入力してください");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (selectedSubcategoryIds.length === 0) {
+        toast.error("少なくとも1つのサブカテゴリを選択してください");
         setIsSubmitting(false);
         return;
       }
@@ -94,10 +94,9 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
       if (group) {
         // 更新
         const success = await updateRankingGroup(group.groupKey, {
-          subcategoryId,
+          subcategoryIds: selectedSubcategoryIds,
           group_name: name,
           label: name, // labelもnameと同じ値に設定（後で変更可能）
-          icon: icon || undefined,
           displayOrder,
         });
 
@@ -111,10 +110,9 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
         // 作成
         const result = await createRankingGroup({
           groupKey,
-          subcategoryId,
+          subcategoryIds: selectedSubcategoryIds,
           group_name: name,
           label: name, // labelもnameと同じ値に設定
-          icon: icon || undefined,
           displayOrder,
         });
 
@@ -149,68 +147,99 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="categoryId">カテゴリ</Label>
-        <Select
-          value={selectedCategoryId}
-          onValueChange={handleCategoryChange}
-          required
-        >
-          <SelectTrigger id="categoryId" name="categoryId">
-            <SelectValue placeholder="カテゴリを選択" />
-          </SelectTrigger>
-          <SelectContent>
-            {categoriesList.map((category, index) => {
-              // categories.jsonはidプロパティを使用
-              const categoryId = (category as any).id || (category as any).categoryName || `category-${index}`;
-              return (
-                <SelectItem
-                  key={categoryId}
-                  value={categoryId}
-                >
-                  {category.name}
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
-        <input
-          type="hidden"
-          name="categoryId"
-          value={selectedCategoryId}
-        />
-      </div>
+        <Label>サブカテゴリ（複数選択可）</Label>
+        <div className="rounded-md border border-input p-4 max-h-96 overflow-y-auto">
+          <Accordion type="multiple" className="w-full">
+            {categoriesList.map((category, categoryIndex) => {
+              const categoryId =
+                (category as any).id ||
+                (category as any).categoryName ||
+                `category-${categoryIndex}`;
 
-      <div className="space-y-2">
-        <Label htmlFor="subcategoryId">サブカテゴリ</Label>
-        <Select
-          value={selectedSubcategoryId}
-          onValueChange={handleSubcategoryChange}
-          disabled={!selectedCategoryId || subcategories.length === 0}
-          required
-        >
-          <SelectTrigger id="subcategoryId">
-            <SelectValue placeholder="サブカテゴリを選択" />
-          </SelectTrigger>
-          <SelectContent>
-            {subcategories.map((subcategory, index) => {
-              // categories.jsonはidプロパティを使用
-              const subcategoryId = (subcategory as any).id || (subcategory as any).subcategoryName || `subcategory-${index}`;
+              const categorySubcategories = category.subcategories || [];
+
+              if (categorySubcategories.length === 0) {
+                return null;
+              }
+
+              // このカテゴリに選択済みのサブカテゴリがあるかチェック（uncategorizedは除外）
+              const selectedCount = categorySubcategories.filter((sub) => {
+                const subId =
+                  (sub as any).id || (sub as any).subcategoryName || "";
+                return (
+                  subId !== "uncategorized" &&
+                  selectedSubcategoryIds.includes(subId)
+                );
+              }).length;
+
               return (
-                <SelectItem
-                  key={subcategoryId}
-                  value={subcategoryId}
-                >
-                  {subcategory.name}
-                </SelectItem>
+                <AccordionItem key={categoryId} value={categoryId}>
+                  <AccordionTrigger className="text-sm font-medium">
+                    <div className="flex items-center justify-between w-full pr-4">
+                      <span>{category.name}</span>
+                      {selectedCount > 0 && (
+                        <span className="text-xs text-muted-foreground">
+                          {selectedCount}個選択中
+                        </span>
+                      )}
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-2 pl-2">
+                      {categorySubcategories
+                        .filter((subcategory, subIndex) => {
+                          // uncategorizedは表示しない
+                          const subcategoryId =
+                            (subcategory as any).id ||
+                            (subcategory as any).subcategoryName ||
+                            `subcategory-${subIndex}`;
+                          return subcategoryId !== "uncategorized";
+                        })
+                        .map((subcategory, subIndex) => {
+                          const subcategoryId =
+                            (subcategory as any).id ||
+                            (subcategory as any).subcategoryName ||
+                            `subcategory-${subIndex}`;
+                          const isChecked = selectedSubcategoryIds.includes(
+                            subcategoryId
+                          );
+
+                          return (
+                            <div
+                              key={subcategoryId}
+                              className="flex items-center space-x-2"
+                            >
+                              <Checkbox
+                                id={`subcategory-${categoryId}-${subcategoryId}`}
+                                checked={isChecked}
+                                onCheckedChange={(checked) =>
+                                  handleSubcategoryToggle(
+                                    subcategoryId,
+                                    checked === true
+                                  )
+                                }
+                              />
+                              <label
+                                htmlFor={`subcategory-${categoryId}-${subcategoryId}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex-1"
+                              >
+                                {subcategory.name}
+                              </label>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
               );
             })}
-          </SelectContent>
-        </Select>
-        <input
-          type="hidden"
-          name="subcategoryId"
-          value={selectedSubcategoryId}
-        />
+          </Accordion>
+        </div>
+        {selectedSubcategoryIds.length > 0 && (
+          <p className="text-xs text-muted-foreground">
+            選択済み: {selectedSubcategoryIds.length}個
+          </p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -221,16 +250,6 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
           defaultValue={group?.name}
           placeholder="総人口グループ"
           required
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="icon">アイコン（絵文字またはテキスト）</Label>
-        <Input
-          id="icon"
-          name="icon"
-          defaultValue={group?.icon}
-          placeholder="🔧"
         />
       </div>
 

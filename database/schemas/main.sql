@@ -155,13 +155,22 @@ CREATE TABLE IF NOT EXISTS ranking_items (
 -- ranking_groups: ランキンググループ定義テーブル
 CREATE TABLE IF NOT EXISTS ranking_groups (
   group_key TEXT PRIMARY KEY,
-  subcategory_id TEXT NOT NULL,
   group_name TEXT NOT NULL,
   label TEXT,
-  icon TEXT,
   display_order INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ranking_group_subcategories: ランキンググループとサブカテゴリの多対多リレーション（中間テーブル）
+CREATE TABLE IF NOT EXISTS ranking_group_subcategories (
+  group_key TEXT NOT NULL,
+  subcategory_id TEXT NOT NULL,
+  display_order INTEGER DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (group_key, subcategory_id),
+  FOREIGN KEY (group_key) REFERENCES ranking_groups(group_key) ON DELETE CASCADE,
+  FOREIGN KEY (subcategory_id) REFERENCES subcategories(subcategory_key) ON DELETE CASCADE
 );
 
 -- ============================================================================
@@ -249,8 +258,9 @@ CREATE INDEX IF NOT EXISTS idx_ranking_items_group_key ON ranking_items(group_ke
 CREATE INDEX IF NOT EXISTS idx_ranking_items_area_type ON ranking_items(area_type);
 -- 注意: ranking_values のインデックスは使用しません（R2 ストレージを使用）
 -- 注意: estat_api_metadata のインデックスも使用しません（テーブルを削除したため）
-CREATE INDEX IF NOT EXISTS idx_ranking_groups_subcategory ON ranking_groups(subcategory_id);
-CREATE INDEX IF NOT EXISTS idx_ranking_groups_display_order ON ranking_groups(subcategory_id, display_order);
+CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_group ON ranking_group_subcategories(group_key);
+CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_subcategory ON ranking_group_subcategories(subcategory_id);
+CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_display_order ON ranking_group_subcategories(subcategory_id, display_order);
 
 -- ダッシュボード関連インデックス
 CREATE INDEX IF NOT EXISTS idx_dashboard_configs_subcategory ON dashboard_configs(subcategory_id, area_type);

@@ -18,11 +18,10 @@ export const QUERIES = {
    */
   getRankingItemsBySubcategory: `
     SELECT 
-      rg.subcategory_id,
+      rgs.subcategory_id,
       rg.group_key,
       rg.group_name,
       rg.label as group_label,
-      rg.icon as group_icon,
       rg.display_order as group_display_order,
       ri.ranking_key,
       ri.area_type,
@@ -40,10 +39,11 @@ export const QUERIES = {
       ri.created_at,
       ri.updated_at,
       ri.annotation
-    FROM ranking_groups rg
+    FROM ranking_group_subcategories rgs
+    INNER JOIN ranking_groups rg ON rgs.group_key = rg.group_key
     LEFT JOIN ranking_items ri ON rg.group_key = ri.group_key AND ri.is_active = 1
-    WHERE rg.subcategory_id = ?
-    ORDER BY rg.display_order, ri.display_order_in_group
+    WHERE rgs.subcategory_id = ?
+    ORDER BY rgs.display_order, rg.display_order, ri.display_order_in_group
   `,
 
   /**
@@ -136,7 +136,7 @@ export const GROUP_QUERIES = {
     FROM ranking_groups rg
     LEFT JOIN ranking_items ri ON rg.group_key = ri.group_key AND ri.is_active = 1
     GROUP BY rg.group_key
-    ORDER BY rg.subcategory_id, rg.display_order
+    ORDER BY rg.display_order
   `,
 
   /**
@@ -151,8 +151,8 @@ export const GROUP_QUERIES = {
    */
   createGroup: `
     INSERT INTO ranking_groups 
-    (group_key, subcategory_id, group_name, label, icon, display_order)
-    VALUES (?, ?, ?, ?, ?, ?)
+    (group_key, group_name, label, display_order)
+    VALUES (?, ?, ?, ?)
   `,
 
   /**
@@ -161,10 +161,8 @@ export const GROUP_QUERIES = {
   updateGroup: `
     UPDATE ranking_groups 
     SET 
-      subcategory_id = ?,
       group_name = ?, 
       label = ?,
-      icon = ?, 
       display_order = ?, 
       updated_at = CURRENT_TIMESTAMP
     WHERE group_key = ?
@@ -206,6 +204,41 @@ export const GROUP_QUERIES = {
       display_order_in_group = 0, 
       updated_at = CURRENT_TIMESTAMP
     WHERE ranking_key = ?
+  `,
+
+  /**
+   * グループのサブカテゴリ一覧を取得
+   */
+  getGroupSubcategories: `
+    SELECT * FROM ranking_group_subcategories
+    WHERE group_key = ?
+    ORDER BY display_order, created_at
+  `,
+
+  /**
+   * グループにサブカテゴリを追加
+   */
+  addSubcategoryToGroup: `
+    INSERT INTO ranking_group_subcategories
+    (group_key, subcategory_id, display_order)
+    VALUES (?, ?, ?)
+    ON CONFLICT(group_key, subcategory_id) DO NOTHING
+  `,
+
+  /**
+   * グループからサブカテゴリを削除
+   */
+  removeSubcategoryFromGroup: `
+    DELETE FROM ranking_group_subcategories
+    WHERE group_key = ? AND subcategory_id = ?
+  `,
+
+  /**
+   * グループのサブカテゴリを一括更新（既存を削除して新しいものを挿入）
+   */
+  deleteAllGroupSubcategories: `
+    DELETE FROM ranking_group_subcategories
+    WHERE group_key = ?
   `,
 } as const;
 

@@ -6,6 +6,12 @@ import type { CreateRankingGroupInput } from "../types";
 
 export async function createRankingGroup(input: CreateRankingGroupInput): Promise<string | null> {
   try {
+    // バリデーション: 少なくとも1つのサブカテゴリが必要
+    if (!input.subcategoryIds || input.subcategoryIds.length === 0) {
+      console.error("createRankingGroup error: At least one subcategory is required");
+      return null;
+    }
+
     const repo = await RankingRepository.create();
     const groupKey = await repo.createRankingGroup(input);
     
