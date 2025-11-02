@@ -1,18 +1,24 @@
 /**
  * Geoshapeドメイン - 型定義
- * 地理データ（TopoJSON/GeoJSON）の型定義
+ *
+ * 地理データ（TopoJSON/GeoJSON）に関するすべての型定義を提供。
+ * TopoJSON、GeoJSON、データソース設定、キャッシュ管理に関する型を含む。
  */
 
-// ============================================================================
 // 共通型定義（他のドメインからインポート）
-// ============================================================================
 
 /**
- * 地域タイプ（Areaドメインからインポート）
+ * 地域タイプ
+ *
+ * Areaドメインからインポートされた地域タイプ定義。
  */
 export type { AreaType } from "@/features/area/types/index";
 
-// TopoJSON型定義（topojson-clientライブラリと互換性のある型）
+/**
+ * TopoJSONトポロジー型
+ *
+ * topojson-clientライブラリと互換性のあるTopoJSONトポロジーの型定義。
+ */
 export interface TopoJSONTopology {
   type: "Topology";
   objects: Record<string, TopoJSONGeometryCollection>;
@@ -22,44 +28,52 @@ export interface TopoJSONTopology {
     translate: [number, number];
   };
   bbox?: [number, number, number, number];
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
+/**
+ * TopoJSONジオメトリコレクション型
+ *
+ * TopoJSONトポロジー内のオブジェクト構造を表す。
+ */
 export interface TopoJSONGeometryCollection {
   type: "GeometryCollection";
   geometries: TopoJSONGeometry[];
 }
 
+/**
+ * TopoJSONジオメトリ型
+ *
+ * TopoJSON内の個別のジオメトリを表す。
+ */
 export interface TopoJSONGeometry {
   type: string;
   arcs?: number[][] | number[][][];
-  properties?: Record<string, any>;
+  properties?: Record<string, unknown>;
   id?: string | number;
 }
 
-// GeoJSON Feature型（都道府県用）
+// GeoJSON型定義
+
+/**
+ * 都道府県用GeoJSON Feature型
+ *
+ * 都道府県データを表現するGeoJSON Feature。
+ */
 export interface PrefectureFeature extends GeoJSON.Feature {
   type: "Feature";
   properties: {
     prefCode: string;
     prefName: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   geometry: GeoJSON.Geometry;
 }
 
-// GeoJSON FeatureCollection型（都道府県用）
-export interface PrefectureFeatureCollection extends GeoJSON.FeatureCollection {
-  type: "FeatureCollection";
-  features: PrefectureFeature[];
-}
-
-// ============================================================================
-// 市区町村用の型定義
-// ============================================================================
-
 /**
- * 市区町村Feature型
+ * 市区町村用GeoJSON Feature型
+ *
+ * 市区町村データを表現するGeoJSON Feature。
  */
 export interface CityFeature extends GeoJSON.Feature {
   type: "Feature";
@@ -68,30 +82,28 @@ export interface CityFeature extends GeoJSON.Feature {
     cityName: string;
     prefCode: string;
     prefName: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   geometry: GeoJSON.Geometry;
 }
 
 /**
- * 市区町村FeatureCollection型
+ * 市区町村版タイプ
+ *
+ * - `"merged"`: 政令指定都市統合版（_dc）
+ * - `"split"`: 政令指定都市分割版
  */
-export interface CityFeatureCollection
-  extends GeoJSON.FeatureCollection {
-  type: "FeatureCollection";
-  features: CityFeature[];
-}
+export type CityVersion = "merged" | "split";
 
 /**
- * 市区町村版タイプ
+ * Geoshape設定
+ *
+ * Mockデータパス、外部API URL、R2ストレージパス、キャッシュ有効期限を定義。
  */
-export type CityVersion = "merged" | "split"; // merged=統合版(dc), split=分割版
-
-// データソース設定
 export interface GeoshapeConfig {
-  /** Mockデータのパス */
+  /** Mockデータのパス（publicディレクトリ配下） */
   mockDataPath: string;
-  /** 外部API（Geoshape）のベースURL */
+  /** 外部API（Geoshapeリポジトリ）のベースURL */
   externalApiUrl: string;
   /** R2ストレージのバケットパス */
   r2BucketPath: string;
@@ -99,151 +111,73 @@ export interface GeoshapeConfig {
   cacheMaxAge: number;
 }
 
-// データ解像度レベル
-export type ResolutionLevel = "low" | "medium" | "high";
-
-// データソースタイプ
+/**
+ * データソースタイプ
+ *
+ * TopoJSONデータの取得元を表す。
+ */
 export type DataSourceType = "memory" | "r2" | "external";
 
-// データ取得オプション
+/**
+ * データ取得オプション
+ *
+ * TopoJSONデータ取得時のオプション設定。
+ */
 export interface FetchOptions {
   /** 地域レベル（"national"は都道府県と同じデータを使用） */
   areaType?: import("@/features/area/types/index").AreaType;
-  /** 都道府県コード（2桁）- municipalityで必須 */
+  /** 都道府県コード（2桁）。`municipality` の場合は必須 */
   prefCode?: string;
   /** 市区町村版タイプ */
   municipalityVersion?: CityVersion;
-  /** キャッシュを使用するか */
+  /** キャッシュを使用するか（デフォルト: `true`） */
   useCache?: boolean;
-  /** 強制再取得 */
+  /** 強制再取得（キャッシュを無視） */
   forceRefresh?: boolean;
 }
 
-// データ取得結果
+/**
+ * データ取得結果
+ *
+ * TopoJSONデータの取得結果と取得元情報を含む。
+ *
+ * @template T - 取得されたデータの型（通常は `TopoJSONTopology`）
+ */
 export interface FetchResult<T> {
-  /** データ */
+  /** 取得されたデータ */
   data: T;
-  /** データソース */
+  /** データソース（"memory" | "r2" | "external"） */
   source: DataSourceType;
-  /** 取得時刻（タイムスタンプ） */
+  /** 取得時刻（Unixタイムスタンプ） */
   timestamp: number;
 }
 
-// ============================================================================
 // GeoShapeデータ自動キャッシング型定義
-// ============================================================================
 
+/**
+ * GeoShapeデータレベル
+ *
+ * 市区町村データの種類を表す。
+ */
 export type GeoShapeDataLevel = "city" | "municipality_merged";
 
 /**
  * プリウォーム結果
+ *
+ * データの事前読み込み（プリウォーム）の結果を表す。
  */
 export interface PrewarmResult {
+  /** 成功した数 */
   success: number;
+  /** 失敗した数 */
   failed: number;
+  /** スキップされた数 */
   skipped: number;
+  /** エラー詳細 */
   errors: Array<{
+    /** 都道府県コード */
     prefectureCode: string;
+    /** エラーメッセージ */
     error: string;
   }>;
-}
-
-/**
- * ロード結果
- */
-export interface LoadResult {
-  data: GeoJSON.FeatureCollection;
-  source: "r2" | "external";
-  cached: boolean;
-  loadTime: number;
-}
-
-/**
- * R2保存リクエスト
- */
-export interface R2SaveRequest {
-  key: string;
-  data: GeoJSON.FeatureCollection;
-  metadata: {
-    cachedAt: string;
-    source: "external" | "manual";
-    version: string;
-  };
-}
-
-/**
- * R2保存レスポンス
- */
-export interface R2SaveResponse {
-  success: boolean;
-  key: string;
-  size: number;
-  metadata: any;
-  timestamp: string;
-}
-
-/**
- * プリウォームリクエスト
- */
-export interface PrewarmRequest {
-  level?: GeoShapeDataLevel;
-}
-
-/**
- * プリウォームレスポンス
- */
-export interface PrewarmResponse {
-  success: boolean;
-  message: string;
-  level: GeoShapeDataLevel;
-  results: PrewarmResult;
-  summary: string;
-  duration: string;
-  timestamp: string;
-}
-
-/**
- * キャッシュ統計
- */
-export interface CacheStats {
-  hitRate: number;
-  totalRequests: number;
-  cacheHits: number;
-  cacheMisses: number;
-  r2Usage: {
-    size: number;
-    files: number;
-  };
-  lastUpdated: string;
-}
-
-/**
- * エラー情報
- */
-export interface GeoShapeError {
-  code: string;
-  message: string;
-  details?: any;
-  timestamp: string;
-}
-
-/**
- * ローディング状態
- */
-export interface LoadingState {
-  isLoading: boolean;
-  progress?: number;
-  current?: string;
-  total?: number;
-}
-
-/**
- * プリウォーム進行状況
- */
-export interface PrewarmProgress {
-  current: number;
-  total: number;
-  currentPrefecture: string;
-  status: "idle" | "running" | "completed" | "error";
-  results?: PrewarmResult;
 }
