@@ -1,0 +1,1314 @@
+# Category ドメイン テスト戦略
+
+## 概要
+
+このドキュメントは、`src/features/category` ドメインの包括的なテスト戦略を定義します。
+カテゴリ・サブカテゴリ管理機能の品質を保証し、継続的な改善を可能にするためのテストアプローチを規定します。
+
+## 作成日
+
+2025-11-02
+
+## ドメインの責務
+
+Categoryドメインは以下の責務を持ちます：
+
+1. **カテゴリ・サブカテゴリ管理**: カテゴリとサブカテゴリのCRUD操作
+2. **階層構造管理**: カテゴリとサブカテゴリの親子関係の管理
+3. **表示順序制御**: カテゴリ・サブカテゴリの表示順序の管理
+4. **アイコンマッピング**: Lucide Reactアイコンのマッピング管理
+5. **データ変換**: データベースモデルとドメインモデルの相互変換
+
+## ディレクトリ構成とレイヤー
+
+```
+src/features/category/
+├── types/                          # 型定義層
+│   ├── category.types.ts           # Category, Subcategory, DB型定義
+│   └── index.ts
+├── utils/                          # ユーティリティ層
+│   ├── get-category-icon.ts        # アイコンマッピング
+│   └── index.ts
+├── repositories/                   # データアクセス層
+│   ├── category-repository.ts      # CRUD操作
+│   ├── category-queries.ts         # SQLクエリ定義
+│   └── index.ts
+├── services/                       # ビジネスロジック層
+│   ├── category-service.ts         # バリデーション・ビジネスロジック
+│   └── index.ts
+├── actions/                        # Server Actions層
+│   └── index.ts                    # Server Actions
+├── components/                     # UIコンポーネント層
+│   └── admin/
+│       └── CategoriesManagement.tsx
+├── db/                             # データベース接続層
+│   └── d1.ts
+└── index.ts
+```
+
+## テストツールとフレームワーク
+
+### 単体テスト・統合テスト
+
+- **Vitest**: テストランナー（高速、ESM対応）
+- **@testing-library/react**: Reactコンポーネントのテスト
+- **@testing-library/jest-dom**: DOMマッチャー
+- **@testing-library/user-event**: ユーザーインタラクションのシミュレーション
+
+### モック・スタブ
+
+- **vi.mock()**: モジュールモック（Vitest組み込み）
+- **MSW (Mock Service Worker)**: HTTPリクエストのモック（推奨）
+
+### カバレッジ測定
+
+- **Vitest Coverage**: c8ベースのカバレッジレポート
+
+## テスト戦略（レイヤー別）
+
+### 1. ユーティリティ層（utils/）
+
+**対象ファイル**:
+- `get-category-icon.ts` - Lucide Reactアイコンマッピング
+
+**テストアプローチ**: ユニットテスト（純粋関数）
+
+**優先度**: 🟢 低（Low）
+
+**理由**:
+- 単純なマッピング関数
+- バグの影響範囲が限定的（アイコン表示のみ）
+- 視覚的な確認が容易
+
+**カバレッジ目標**: 85%
+
+#### テストすべき内容
+
+##### get-category-icon.ts
+
+1. **getCategoryIcon()**
+   - 正常系: 存在するアイコン名で正しいアイコンコンポーネントを返す
+   - 異常系: 存在しないアイコン名でMapPinフォールバックを返す
+   - 異常系: 空文字列でMapPinフォールバックを返す
+   - ログ出力: 存在しないアイコン名でwarningログが出力される
+
+**テストファイル例**:
+```typescript
+// src/features/category/utils/__tests__/get-category-icon.test.ts
+import { describe, it, expect, vi } from 'vitest';
+import { getCategoryIcon } from '../get-category-icon';
+import { Users, MapPin, Briefcase } from 'lucide-react';
+
+describe('getCategoryIcon', () => {
+  it('should return correct icon for valid icon name', () => {
+    expect(getCategoryIcon('Users')).toBe(Users);
+    expect(getCategoryIcon('Briefcase')).toBe(Briefcase);
+    expect(getCategoryIcon('MapPin')).toBe(MapPin);
+  });
+
+  it('should return MapPin as fallback for invalid icon name', () => {
+    expect(getCategoryIcon('InvalidIcon')).toBe(MapPin);
+    expect(getCategoryIcon('')).toBe(MapPin);
+  });
+
+  it('should log warning for invalid icon name', () => {
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    getCategoryIcon('InvalidIcon');
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      'Icon "InvalidIcon" not found, using MapPin as fallback'
+    );
+
+    consoleWarnSpy.mockRestore();
+  });
+
+  it('should handle all registered icons', () => {
+    const registeredIcons = [
+      'MapPin', 'Users', 'Briefcase', 'Wheat', 'Factory', 'Store',
+      'TrendingUp', 'Home', 'Zap', 'Plane', 'GraduationCap',
+      'Building2', 'Shield', 'Heart', 'Globe', 'Construction',
+      'Sprout', 'PieChart', 'Droplets', 'ShieldCheck', 'Hospital', 'Computer'
+    ];
+
+    registeredIcons.forEach(iconName => {
+      const icon = getCategoryIcon(iconName);
+      expect(icon).toBeDefined();
+      expect(icon).not.toBe(undefined);
+    });
+  });
+});
+```
+
+---
+
+### 2. リポジトリ層（repositories/）
+
+**対象ファイル**:
+- `category-repository.ts` - カテゴリ・サブカテゴリのCRUD操作
+- `category-queries.ts` - SQLクエリ定義
+
+**テストアプローチ**: 統合テスト + モック
+
+**優先度**: 🔴 最高（Critical）
+
+**理由**:
+- データベース操作の中核
+- CRUD操作のバグは深刻な影響を及ぼす
+- 動的SQL生成（UPDATE文）の検証が必要
+
+**カバレッジ目標**: 95%
+
+#### テストすべき内容
+
+##### category-repository.ts
+
+1. **listCategories()**
+   - 正常系: 全カテゴリとサブカテゴリの取得
+   - 正常系: 表示順序でソートされている
+   - エッジケース: カテゴリが0件の場合は空配列
+
+2. **findCategoryByName()**
+   - 正常系: 存在するカテゴリキーで検索成功
+   - 異常系: 存在しないカテゴリキーはnull
+
+3. **createCategory()**
+   - 正常系: カテゴリ作成成功
+   - 正常系: icon未指定時はnull
+   - 正常系: displayOrder未指定時は0
+   - 異常系: 重複するcategoryKeyでエラー（UNIQUE制約）
+   - 異常系: 作成後の取得失敗時にエラー
+
+4. **updateCategory()**
+   - 正常系: 部分更新（単一フィールド）
+   - 正常系: 部分更新（複数フィールド）
+   - 正常系: categoryKeyの更新
+   - 正常系: iconをnullに更新
+   - 異常系: 存在しないcategoryKeyの更新
+   - 動的SQL: 更新フィールドのみSET句に含まれる
+
+5. **deleteCategory()**
+   - 正常系: カテゴリ削除成功
+   - 異常系: 存在しないカテゴリの削除
+   - 外部キー制約: サブカテゴリが存在する場合の動作（CASCADE）
+
+6. **listSubcategories()**
+   - 正常系: 全サブカテゴリの取得
+   - 正常系: categoryKeyとdisplayOrderでソート
+
+7. **findSubcategoriesByCategory()**
+   - 正常系: 指定カテゴリのサブカテゴリ取得
+   - 正常系: 表示順序でソート
+   - エッジケース: サブカテゴリが0件の場合は空配列
+
+8. **findSubcategoryByName()**
+   - 正常系: 存在するサブカテゴリキーで検索成功
+   - 異常系: 存在しないサブカテゴリキーはnull
+
+9. **createSubcategory()**
+   - 正常系: サブカテゴリ作成成功
+   - 正常系: displayOrder未指定時は0
+   - 異常系: 重複するsubcategoryKeyでエラー
+   - 異常系: 存在しないcategoryKeyで外部キー制約エラー
+
+10. **updateSubcategory()**
+    - 正常系: 部分更新（単一フィールド）
+    - 正常系: 部分更新（複数フィールド）
+    - 正常系: subcategoryKeyの更新
+    - 正常系: 所属カテゴリの変更（categoryKey更新）
+    - 異常系: 存在しないsubcategoryKeyの更新
+
+11. **deleteSubcategory()**
+    - 正常系: サブカテゴリ削除成功
+    - 異常系: 存在しないサブカテゴリの削除
+
+12. **convertCategoryFromDB() / convertSubcategoryFromDB()**
+    - 正常系: スネークケース→キャメルケース変換
+    - エッジケース: nullフィールドの処理
+
+**モック戦略**:
+- D1Database: `getD1()`をモック
+- SQLクエリ実行結果: `prepare().bind().run()`をモック
+- トランザクション: 必要に応じて`batch()`をモック
+
+**テストファイル例**:
+```typescript
+// src/features/category/repositories/__tests__/category-repository.test.ts
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import {
+  listCategories,
+  findCategoryByName,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  listSubcategories,
+  findSubcategoriesByCategory,
+  createSubcategory,
+  updateSubcategory,
+} from '../category-repository';
+import * as d1 from '../../db/d1';
+
+vi.mock('../../db/d1');
+
+describe('category-repository', () => {
+  let mockDb: any;
+
+  beforeEach(() => {
+    mockDb = {
+      prepare: vi.fn().mockReturnThis(),
+      bind: vi.fn().mockReturnThis(),
+      run: vi.fn(),
+      first: vi.fn(),
+      all: vi.fn(),
+    };
+    vi.mocked(d1.getD1).mockReturnValue(mockDb);
+  });
+
+  describe('listCategories', () => {
+    it('should return all categories with subcategories', async () => {
+      const mockCategories = [
+        {
+          category_key: 'population',
+          category_name: '人口・世帯',
+          icon: 'Users',
+          display_order: 0,
+          created_at: '2024-01-01',
+          updated_at: '2024-01-01',
+        },
+      ];
+
+      const mockSubcategories = [
+        {
+          subcategory_key: 'basic-population',
+          subcategory_name: '総人口',
+          category_key: 'population',
+          display_order: 0,
+          created_at: '2024-01-01',
+          updated_at: '2024-01-01',
+        },
+      ];
+
+      mockDb.all.mockResolvedValueOnce({ results: mockCategories });
+      mockDb.all.mockResolvedValueOnce({ results: mockSubcategories });
+
+      const result = await listCategories();
+
+      expect(result).toHaveLength(1);
+      expect(result[0].categoryKey).toBe('population');
+      expect(result[0].categoryName).toBe('人口・世帯');
+      expect(result[0].subcategories).toHaveLength(1);
+      expect(result[0].subcategories![0].subcategoryKey).toBe('basic-population');
+    });
+
+    it('should return empty array when no categories exist', async () => {
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await listCategories();
+
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('findCategoryByName', () => {
+    it('should return category for valid key', async () => {
+      const mockCategory = {
+        category_key: 'population',
+        category_name: '人口・世帯',
+        icon: 'Users',
+        display_order: 0,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-01',
+      };
+
+      mockDb.first.mockResolvedValue(mockCategory);
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await findCategoryByName('population');
+
+      expect(result).not.toBeNull();
+      expect(result?.categoryKey).toBe('population');
+    });
+
+    it('should return null for non-existent key', async () => {
+      mockDb.first.mockResolvedValue(null);
+
+      const result = await findCategoryByName('non-existent');
+
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('createCategory', () => {
+    it('should create category with all fields', async () => {
+      const mockCreated = {
+        category_key: 'test',
+        category_name: 'テストカテゴリ',
+        icon: 'Users',
+        display_order: 1,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-01',
+      };
+
+      mockDb.run.mockResolvedValue({ success: true });
+      mockDb.first.mockResolvedValue(mockCreated);
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await createCategory({
+        categoryKey: 'test',
+        name: 'テストカテゴリ',
+        icon: 'Users',
+        displayOrder: 1,
+      });
+
+      expect(result.categoryKey).toBe('test');
+      expect(result.categoryName).toBe('テストカテゴリ');
+      expect(mockDb.bind).toHaveBeenCalledWith('test', 'テストカテゴリ', 'Users', 1);
+    });
+
+    it('should create category with default values', async () => {
+      mockDb.run.mockResolvedValue({ success: true });
+      mockDb.first.mockResolvedValue({
+        category_key: 'test',
+        category_name: 'テスト',
+        icon: null,
+        display_order: 0,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-01',
+      });
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await createCategory({
+        categoryKey: 'test',
+        name: 'テスト',
+      });
+
+      expect(mockDb.bind).toHaveBeenCalledWith('test', 'テスト', null, 0);
+    });
+
+    it('should throw error when creation fails', async () => {
+      mockDb.run.mockResolvedValue({ success: false });
+
+      await expect(
+        createCategory({ categoryKey: 'test', name: 'テスト' })
+      ).rejects.toThrow('Failed to create category');
+    });
+  });
+
+  describe('updateCategory', () => {
+    it('should update single field', async () => {
+      const mockUpdated = {
+        category_key: 'test',
+        category_name: '更新後',
+        icon: 'Users',
+        display_order: 0,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-02',
+      };
+
+      mockDb.run.mockResolvedValue({ success: true });
+      mockDb.first.mockResolvedValue(mockUpdated);
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await updateCategory('test', {
+        categoryName: '更新後',
+      });
+
+      expect(result?.categoryName).toBe('更新後');
+      expect(mockDb.prepare).toHaveBeenCalledWith(
+        expect.stringContaining('UPDATE categories SET category_name = ?')
+      );
+    });
+
+    it('should update multiple fields', async () => {
+      mockDb.run.mockResolvedValue({ success: true });
+      mockDb.first.mockResolvedValue({
+        category_key: 'test',
+        category_name: '更新後',
+        icon: 'Briefcase',
+        display_order: 2,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-02',
+      });
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      await updateCategory('test', {
+        categoryName: '更新後',
+        icon: 'Briefcase',
+        displayOrder: 2,
+      });
+
+      expect(mockDb.prepare).toHaveBeenCalledWith(
+        expect.stringContaining('category_name = ?')
+      );
+      expect(mockDb.prepare).toHaveBeenCalledWith(
+        expect.stringContaining('icon = ?')
+      );
+      expect(mockDb.prepare).toHaveBeenCalledWith(
+        expect.stringContaining('display_order = ?')
+      );
+    });
+
+    it('should update categoryKey', async () => {
+      mockDb.run.mockResolvedValue({ success: true });
+      mockDb.first.mockResolvedValue({
+        category_key: 'new-key',
+        category_name: 'テスト',
+        icon: null,
+        display_order: 0,
+        created_at: '2024-01-01',
+        updated_at: '2024-01-02',
+      });
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await updateCategory('old-key', {
+        categoryKey: 'new-key',
+      });
+
+      expect(result?.categoryKey).toBe('new-key');
+    });
+
+    it('should throw error when update fails', async () => {
+      mockDb.run.mockResolvedValue({ success: false });
+
+      await expect(
+        updateCategory('test', { categoryName: '更新' })
+      ).rejects.toThrow('Failed to update category');
+    });
+  });
+
+  describe('deleteCategory', () => {
+    it('should delete category successfully', async () => {
+      mockDb.run.mockResolvedValue({ success: true });
+
+      const result = await deleteCategory('test');
+
+      expect(result).toBe(true);
+      expect(mockDb.bind).toHaveBeenCalledWith('test');
+    });
+
+    it('should return false when delete fails', async () => {
+      mockDb.run.mockResolvedValue({ success: false });
+
+      const result = await deleteCategory('non-existent');
+
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('findSubcategoriesByCategory', () => {
+    it('should return subcategories for given category', async () => {
+      const mockSubcategories = [
+        {
+          subcategory_key: 'sub1',
+          subcategory_name: 'サブ1',
+          category_key: 'test',
+          display_order: 0,
+          created_at: '2024-01-01',
+          updated_at: '2024-01-01',
+        },
+        {
+          subcategory_key: 'sub2',
+          subcategory_name: 'サブ2',
+          category_key: 'test',
+          display_order: 1,
+          created_at: '2024-01-01',
+          updated_at: '2024-01-01',
+        },
+      ];
+
+      mockDb.all.mockResolvedValue({ results: mockSubcategories });
+
+      const result = await findSubcategoriesByCategory('test');
+
+      expect(result).toHaveLength(2);
+      expect(result[0].subcategoryKey).toBe('sub1');
+      expect(result[1].subcategoryKey).toBe('sub2');
+    });
+
+    it('should return empty array when no subcategories exist', async () => {
+      mockDb.all.mockResolvedValue({ results: [] });
+
+      const result = await findSubcategoriesByCategory('test');
+
+      expect(result).toEqual([]);
+    });
+  });
+});
+```
+
+---
+
+### 3. サービス層（services/）
+
+**対象ファイル**:
+- `category-service.ts` - バリデーション、ビジネスロジック
+
+**テストアプローチ**: ユニットテスト + モック
+
+**優先度**: 🟡 中（Medium）
+
+**理由**:
+- ビジネスロジックはシンプル（主にバリデーション）
+- リポジトリ層への依存をモック可能
+
+**カバレッジ目標**: 90%
+
+#### テストすべき内容
+
+##### category-service.ts
+
+1. **listCategoriesWithSubcategories()**
+   - リポジトリからのデータ取得確認
+
+2. **updateCategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: categoryKeyが空文字列でエラー
+
+3. **deleteCategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: categoryKeyが空文字列でエラー
+
+4. **createCategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: categoryKeyまたはnameが未指定でエラー
+
+5. **updateSubcategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: subcategoryKeyが空文字列でエラー
+
+6. **deleteSubcategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: subcategoryKeyが空文字列でエラー
+
+7. **createSubcategoryService()**
+   - 正常系: リポジトリへの委譲
+   - 異常系: subcategoryKey、name、categoryKeyのいずれかが未指定でエラー
+
+**テストファイル例**:
+```typescript
+// src/features/category/services/__tests__/category-service.test.ts
+import { describe, it, expect, vi } from 'vitest';
+import * as categoryService from '../category-service';
+import * as categoryRepository from '../../repositories/category-repository';
+
+vi.mock('../../repositories/category-repository');
+
+describe('category-service', () => {
+  describe('listCategoriesWithSubcategories', () => {
+    it('should return categories from repository', async () => {
+      const mockCategories = [
+        {
+          categoryKey: 'test',
+          categoryName: 'テスト',
+          displayOrder: 0,
+          subcategories: [],
+        },
+      ];
+
+      vi.mocked(categoryRepository.listCategories).mockResolvedValue(mockCategories);
+
+      const result = await categoryService.listCategoriesWithSubcategories();
+
+      expect(result).toEqual(mockCategories);
+      expect(categoryRepository.listCategories).toHaveBeenCalled();
+    });
+  });
+
+  describe('updateCategoryService', () => {
+    it('should update category', async () => {
+      const mockUpdated = {
+        categoryKey: 'test',
+        categoryName: '更新後',
+        displayOrder: 0,
+      };
+
+      vi.mocked(categoryRepository.updateCategory).mockResolvedValue(mockUpdated);
+
+      const result = await categoryService.updateCategoryService('test', {
+        categoryName: '更新後',
+      });
+
+      expect(result).toEqual(mockUpdated);
+      expect(categoryRepository.updateCategory).toHaveBeenCalledWith('test', {
+        categoryName: '更新後',
+      });
+    });
+
+    it('should throw error when categoryKey is empty', async () => {
+      await expect(
+        categoryService.updateCategoryService('', { categoryName: 'テスト' })
+      ).rejects.toThrow('categoryKey is required');
+    });
+  });
+
+  describe('createCategoryService', () => {
+    it('should create category', async () => {
+      const mockCreated = {
+        categoryKey: 'test',
+        categoryName: 'テスト',
+        displayOrder: 0,
+      };
+
+      vi.mocked(categoryRepository.createCategory).mockResolvedValue(mockCreated);
+
+      const result = await categoryService.createCategoryService({
+        categoryKey: 'test',
+        name: 'テスト',
+      });
+
+      expect(result).toEqual(mockCreated);
+    });
+
+    it('should throw error when categoryKey is missing', async () => {
+      await expect(
+        categoryService.createCategoryService({ categoryKey: '', name: 'テスト' })
+      ).rejects.toThrow('categoryKey and name are required');
+    });
+
+    it('should throw error when name is missing', async () => {
+      await expect(
+        categoryService.createCategoryService({ categoryKey: 'test', name: '' })
+      ).rejects.toThrow('categoryKey and name are required');
+    });
+  });
+
+  describe('createSubcategoryService', () => {
+    it('should create subcategory', async () => {
+      const mockCreated = {
+        subcategoryKey: 'test-sub',
+        subcategoryName: 'テストサブ',
+        categoryKey: 'test',
+        displayOrder: 0,
+      };
+
+      vi.mocked(categoryRepository.createSubcategory).mockResolvedValue(mockCreated);
+
+      const result = await categoryService.createSubcategoryService({
+        subcategoryKey: 'test-sub',
+        name: 'テストサブ',
+        categoryKey: 'test',
+      });
+
+      expect(result).toEqual(mockCreated);
+    });
+
+    it('should throw error when required fields are missing', async () => {
+      await expect(
+        categoryService.createSubcategoryService({
+          subcategoryKey: '',
+          name: 'テスト',
+          categoryKey: 'test',
+        })
+      ).rejects.toThrow('subcategoryKey, name and categoryKey are required');
+
+      await expect(
+        categoryService.createSubcategoryService({
+          subcategoryKey: 'test',
+          name: '',
+          categoryKey: 'test',
+        })
+      ).rejects.toThrow('subcategoryKey, name and categoryKey are required');
+
+      await expect(
+        categoryService.createSubcategoryService({
+          subcategoryKey: 'test',
+          name: 'テスト',
+          categoryKey: '',
+        })
+      ).rejects.toThrow('subcategoryKey, name and categoryKey are required');
+    });
+  });
+});
+```
+
+---
+
+### 4. Server Actions層（actions/）
+
+**対象ファイル**:
+- `actions/index.ts` - Server Actions
+
+**テストアプローチ**: 統合テスト + モック
+
+**優先度**: 🟡 中（Medium）
+
+**理由**:
+- Next.js Server Actionsの動作確認
+- キャッシュ無効化のテスト
+- サービス層への依存をモック可能
+
+**カバレッジ目標**: 85%
+
+#### テストすべき内容
+
+1. **listCategoriesAction()**
+   - サービス層からのデータ取得確認
+   - "use cache"ディレクティブの動作確認
+
+2. **updateCategoryAction()**
+   - サービス層への委譲確認
+   - キャッシュタグの無効化確認
+
+3. **deleteCategoryAction()**
+   - サービス層への委譲確認
+   - 削除成功時のみキャッシュ無効化
+
+4. **updateSubcategoryAction()**
+   - サービス層への委譲確認
+   - キャッシュタグの無効化確認
+
+5. **deleteSubcategoryAction()**
+   - サービス層への委譲確認
+   - 削除成功時のみキャッシュ無効化
+
+6. **revalidateCategoriesAction()**
+   - キャッシュタグの無効化確認
+
+**テストファイル例**:
+```typescript
+// src/features/category/actions/__tests__/index.test.ts
+import { describe, it, expect, vi } from 'vitest';
+import {
+  listCategoriesAction,
+  updateCategoryAction,
+  deleteCategoryAction,
+  revalidateCategoriesAction,
+} from '../index';
+import * as categoryService from '../../services/category-service';
+import { revalidateTag } from 'next/cache';
+
+vi.mock('../../services/category-service');
+vi.mock('next/cache');
+
+describe('category-actions', () => {
+  describe('listCategoriesAction', () => {
+    it('should call service and return categories', async () => {
+      const mockCategories = [
+        {
+          categoryKey: 'test',
+          categoryName: 'テスト',
+          displayOrder: 0,
+          subcategories: [],
+        },
+      ];
+
+      vi.mocked(categoryService.listCategoriesWithSubcategories).mockResolvedValue(
+        mockCategories
+      );
+
+      const result = await listCategoriesAction();
+
+      expect(result).toEqual(mockCategories);
+      expect(categoryService.listCategoriesWithSubcategories).toHaveBeenCalled();
+    });
+  });
+
+  describe('updateCategoryAction', () => {
+    it('should update category and revalidate cache', async () => {
+      const mockUpdated = {
+        categoryKey: 'test',
+        categoryName: '更新後',
+        displayOrder: 0,
+      };
+
+      vi.mocked(categoryService.updateCategoryService).mockResolvedValue(mockUpdated);
+
+      const result = await updateCategoryAction('test', {
+        categoryName: '更新後',
+      });
+
+      expect(result).toEqual(mockUpdated);
+      expect(categoryService.updateCategoryService).toHaveBeenCalledWith('test', {
+        categoryName: '更新後',
+      });
+      expect(revalidateTag).toHaveBeenCalledWith('categories');
+    });
+  });
+
+  describe('deleteCategoryAction', () => {
+    it('should delete category and revalidate cache on success', async () => {
+      vi.mocked(categoryService.deleteCategoryService).mockResolvedValue(true);
+
+      const result = await deleteCategoryAction('test');
+
+      expect(result).toBe(true);
+      expect(categoryService.deleteCategoryService).toHaveBeenCalledWith('test');
+      expect(revalidateTag).toHaveBeenCalledWith('categories');
+    });
+
+    it('should not revalidate cache on failure', async () => {
+      vi.mocked(categoryService.deleteCategoryService).mockResolvedValue(false);
+
+      const result = await deleteCategoryAction('test');
+
+      expect(result).toBe(false);
+      expect(revalidateTag).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('revalidateCategoriesAction', () => {
+    it('should revalidate categories cache', async () => {
+      await revalidateCategoriesAction();
+
+      expect(revalidateTag).toHaveBeenCalledWith('categories');
+    });
+  });
+});
+```
+
+---
+
+### 5. UIコンポーネント層（components/）
+
+**対象ファイル**:
+- `CategoriesManagement.tsx` - カテゴリ管理UI
+
+**テストアプローチ**: コンポーネントテスト（RTL）
+
+**優先度**: 🟢 低（Low）
+
+**理由**:
+- 管理画面のUIで一般ユーザーには非公開
+- 複雑な状態管理がある
+- 手動テストでもカバー可能
+
+**カバレッジ目標**: 70%
+
+#### テストすべき内容
+
+1. **レンダリング**
+   - カテゴリ・サブカテゴリのアコーディオン表示
+   - ローディング状態の表示
+
+2. **編集ダイアログ**
+   - カテゴリ編集ダイアログの表示
+   - サブカテゴリ編集ダイアログの表示
+   - フォーム入力の状態管理
+
+3. **CRUD操作**
+   - カテゴリ更新
+   - カテゴリ削除
+   - サブカテゴリ更新
+   - サブカテゴリ削除
+
+4. **エラーハンドリング**
+   - データ取得失敗時のエラー表示
+   - 更新失敗時のエラー表示
+
+**テストファイル例**:
+```typescript
+// src/features/category/components/admin/__tests__/CategoriesManagement.test.tsx
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { CategoriesManagement } from '../CategoriesManagement';
+import * as categoryActions from '../../../actions';
+
+vi.mock('../../../actions');
+
+describe('CategoriesManagement', () => {
+  const mockCategories = [
+    {
+      categoryKey: 'test',
+      categoryName: 'テストカテゴリ',
+      icon: 'Users',
+      displayOrder: 0,
+      subcategories: [
+        {
+          subcategoryKey: 'test-sub',
+          subcategoryName: 'テストサブカテゴリ',
+          categoryKey: 'test',
+          displayOrder: 0,
+        },
+      ],
+    },
+  ];
+
+  beforeEach(() => {
+    vi.mocked(categoryActions.listCategoriesAction).mockResolvedValue(mockCategories);
+  });
+
+  it('should render categories and subcategories', async () => {
+    render(<CategoriesManagement />);
+
+    await waitFor(() => {
+      expect(screen.getByText('テストカテゴリ')).toBeInTheDocument();
+      expect(screen.getByText('テストサブカテゴリ')).toBeInTheDocument();
+    });
+  });
+
+  it('should show loading state', () => {
+    vi.mocked(categoryActions.listCategoriesAction).mockImplementation(
+      () => new Promise(() => {})
+    );
+
+    render(<CategoriesManagement />);
+
+    expect(screen.getByText(/読み込み中/)).toBeInTheDocument();
+  });
+
+  it('should show error when data loading fails', async () => {
+    vi.mocked(categoryActions.listCategoriesAction).mockRejectedValue(
+      new Error('Network error')
+    );
+
+    render(<CategoriesManagement />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/データの読み込みに失敗/)).toBeInTheDocument();
+    });
+  });
+
+  it('should open edit dialog when edit button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<CategoriesManagement />);
+
+    await waitFor(() => {
+      expect(screen.getByText('テストカテゴリ')).toBeInTheDocument();
+    });
+
+    const editButtons = screen.getAllByRole('button', { name: /編集/ });
+    await user.click(editButtons[0]);
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+});
+```
+
+---
+
+## テスト実行とCI/CD統合
+
+### テスト実行コマンド
+
+```bash
+# 全テスト実行
+npm run test
+
+# カバレッジ付き実行
+npm run test:coverage
+
+# 特定のファイルのみテスト
+npm run test src/features/category/repositories/__tests__/category-repository.test.ts
+
+# ウォッチモード（開発時）
+npm run test:watch
+
+# UIモード（対話的なテスト実行）
+npm run test:ui
+```
+
+### カバレッジ基準
+
+以下のカバレッジ基準を満たすことを目標とします：
+
+| レイヤー | 目標カバレッジ | 優先度 |
+|---------|-------------|--------|
+| リポジトリ層（repositories/） | 95% | 最高 |
+| サービス層（services/） | 90% | 中 |
+| Server Actions層（actions/） | 85% | 中 |
+| ユーティリティ層（utils/） | 85% | 低 |
+| コンポーネント層（components/） | 70% | 低 |
+
+### CI/CDパイプライン統合
+
+```yaml
+# .github/workflows/test.yml
+name: Test Category Domain
+
+on:
+  push:
+    paths:
+      - 'src/features/category/**'
+  pull_request:
+    paths:
+      - 'src/features/category/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run test:coverage -- src/features/category
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+```
+
+---
+
+## テスト実装の優先順位
+
+### フェーズ1: データ層テスト（最優先）
+
+1. ✅ **リポジトリ層のテスト**
+   - `category-repository.ts`: 全CRUD操作、動的SQL、変換関数
+
+**理由**: データベース操作の中核。バグの影響が大きい。
+
+### フェーズ2: ビジネスロジックテスト（高優先）
+
+2. ✅ **サービス層のテスト**
+   - `category-service.ts`: バリデーション、ビジネスロジック
+
+3. ✅ **Server Actions層のテスト**
+   - `actions/index.ts`: キャッシュ管理
+
+**理由**: ビジネスロジックの正確性を保証。
+
+### フェーズ3: ユーティリティテスト（中優先）
+
+4. ✅ **ユーティリティ層のテスト**
+   - `get-category-icon.ts`: アイコンマッピング
+
+**理由**: 単純な関数。影響範囲が限定的。
+
+### フェーズ4: UIテスト（低優先）
+
+5. ✅ **コンポーネント層のテスト**
+   - `CategoriesManagement.tsx`: 管理画面UI
+
+**理由**: 管理画面で一般ユーザーに非公開。手動テストでもカバー可能。
+
+---
+
+## モックデータの管理
+
+### モックデータの配置
+
+```
+tests/
+└── fixtures/
+    └── category/
+        ├── categories.json       # カテゴリモックデータ
+        └── subcategories.json    # サブカテゴリモックデータ
+```
+
+### モックデータの内容例
+
+**categories.json**:
+```json
+[
+  {
+    "category_key": "population",
+    "category_name": "人口・世帯",
+    "icon": "Users",
+    "display_order": 0,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "category_key": "economy",
+    "category_name": "経済",
+    "icon": "Briefcase",
+    "display_order": 1,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]
+```
+
+**subcategories.json**:
+```json
+[
+  {
+    "subcategory_key": "basic-population",
+    "subcategory_name": "総人口",
+    "category_key": "population",
+    "display_order": 0,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "subcategory_key": "household",
+    "subcategory_name": "世帯数",
+    "category_key": "population",
+    "display_order": 1,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]
+```
+
+---
+
+## テストのベストプラクティス
+
+### 1. テスト命名規則
+
+```typescript
+// ✅ Good: 明確で読みやすい
+describe('createCategory', () => {
+  it('should create category with all fields', () => {
+    // ...
+  });
+});
+
+// ❌ Bad: 曖昧で理解しづらい
+describe('createCategory', () => {
+  it('works', () => {
+    // ...
+  });
+});
+```
+
+### 2. AAA（Arrange-Act-Assert）パターン
+
+```typescript
+it('should update category name', async () => {
+  // Arrange（準備）
+  const categoryKey = 'test';
+  const updates = { categoryName: '更新後' };
+  mockDb.run.mockResolvedValue({ success: true });
+
+  // Act（実行）
+  const result = await updateCategory(categoryKey, updates);
+
+  // Assert（検証）
+  expect(result?.categoryName).toBe('更新後');
+});
+```
+
+### 3. テストの独立性
+
+```typescript
+// ✅ Good: 各テストが独立
+describe('category repository', () => {
+  beforeEach(() => {
+    // 各テストの前にモックをリセット
+    vi.clearAllMocks();
+  });
+
+  it('test 1', () => { /* ... */ });
+  it('test 2', () => { /* ... */ });
+});
+
+// ❌ Bad: テスト間で状態を共有
+let sharedCategory;
+it('test 1', () => {
+  sharedCategory = { /* ... */ }; // 次のテストに影響
+});
+it('test 2', () => {
+  expect(sharedCategory).toBeDefined(); // test 1に依存
+});
+```
+
+### 4. エッジケースのテスト
+
+```typescript
+describe('updateCategory', () => {
+  it('should handle normal update', async () => {
+    // 正常系
+  });
+
+  // エッジケース
+  it('should handle empty string icon as null', async () => {
+    // ...
+  });
+
+  it('should handle category key change', async () => {
+    // ...
+  });
+
+  it('should throw error on update failure', async () => {
+    // ...
+  });
+});
+```
+
+---
+
+## 既知の問題と改善提案
+
+### 1. キャッシュタグの問題
+
+**現状**: リポジトリ層でキャッシュタグが設定されていないため、`revalidateTag("categories")`が機能しない可能性があります。
+
+**改善案**:
+```typescript
+// category-repository.ts
+import { unstable_cache } from 'next/cache';
+
+export const listCategories = unstable_cache(
+  async () => {
+    // 実装
+  },
+  ['categories'],
+  { tags: ['categories'] }
+);
+```
+
+### 2. 動的SQL生成のセキュリティ
+
+**現状**: UPDATE文で動的にSQLを生成しているため、SQLインジェクションのリスクがあります。
+
+**改善案**: プレースホルダーを使用したパラメータバインドを徹底する。
+
+---
+
+## 継続的な改善
+
+### テストメトリクスの追跡
+
+以下のメトリクスを定期的に確認・改善します：
+
+- **コードカバレッジ**: 目標値の達成状況
+- **テスト実行時間**: パフォーマンス劣化の検出
+- **テスト失敗率**: 品質指標
+- **テストメンテナンスコスト**: テストの保守性
+
+### レビュープロセス
+
+- 新機能追加時は必ずテストを含める
+- PRレビュー時にテストカバレッジを確認
+- 定期的なテストコードレビュー（月1回）
+
+---
+
+## 参考資料
+
+- [Vitest公式ドキュメント](https://vitest.dev/)
+- [Testing Library公式ドキュメント](https://testing-library.com/)
+- [Next.js Testing Best Practices](https://nextjs.org/docs/testing)
+
+---
+
+## 更新履歴
+
+| 日付 | 変更内容 | 担当者 |
+|------|---------|--------|
+| 2025-11-02 | 初版作成 | Claude |
+
+---
+
+## 付録: テストコマンド一覧
+
+```bash
+# 単体テスト
+npm run test src/features/category/utils/__tests__/get-category-icon.test.ts
+npm run test src/features/category/repositories/__tests__/category-repository.test.ts
+npm run test src/features/category/services/__tests__/category-service.test.ts
+npm run test src/features/category/actions/__tests__/index.test.ts
+npm run test src/features/category/components/admin/__tests__/CategoriesManagement.test.tsx
+
+# レイヤー別テスト
+npm run test src/features/category/utils
+npm run test src/features/category/repositories
+npm run test src/features/category/services
+npm run test src/features/category/actions
+npm run test src/features/category/components
+
+# ドメイン全体テスト
+npm run test src/features/category
+
+# カバレッジレポート生成
+npm run test:coverage src/features/category
+
+# ウォッチモード（開発時）
+npm run test:watch src/features/category
+```

@@ -1,9 +1,12 @@
 // Cloudflare D1対応 DB Providerユーティリティ
 export type D1Database = any; // cloudflare/workers-types で型定義できる場合は利用可
 
+import fs from "fs";
+import path from "path";
+
 /**
  * ローカルSQLiteデータベースへのアクセスを提供するD1互換アダプタ
- * 
+ *
  * better-sqlite3を使用してローカルの.wrangler/state/v3/d1/*.sqliteファイルにアクセスします
  */
 function createLocalD1Adapter(): D1Database | null {
@@ -14,9 +17,8 @@ function createLocalD1Adapter(): D1Database | null {
 
   try {
     // better-sqlite3を動的にインポート（サーバーサイドのみ）
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const Database = require("better-sqlite3");
-    const fs = require("fs");
-    const path = require("path");
 
     // ローカルD1データベースのパスを検索
     const possiblePaths = [
@@ -28,12 +30,13 @@ function createLocalD1Adapter(): D1Database | null {
     let dbPath: string | null = null;
 
     for (const basePath of possiblePaths) {
-      if (!fs.existsSync(basePath)) continue;
+      if (!basePath || !fs.existsSync(basePath)) continue;
 
       // ディレクトリ内の.sqliteファイルを検索
       const files = fs.readdirSync(basePath, { recursive: true });
-      const sqliteFile = files.find((file: string) =>
-        typeof file === "string" && file.endsWith(".sqlite")
+      const sqliteFile = files.find(
+        (file): file is string =>
+          typeof file === "string" && file.endsWith(".sqlite")
       );
 
       if (sqliteFile) {
@@ -62,7 +65,8 @@ function createLocalD1Adapter(): D1Database | null {
           return {
             all: async () => {
               try {
-                const results = boundArgs.length > 0 ? stmt.all(...boundArgs) : stmt.all();
+                const results =
+                  boundArgs.length > 0 ? stmt.all(...boundArgs) : stmt.all();
                 return { results, success: true };
               } catch (error) {
                 return { results: [], success: false, error };
@@ -70,7 +74,8 @@ function createLocalD1Adapter(): D1Database | null {
             },
             first: async () => {
               try {
-                const result = boundArgs.length > 0 ? stmt.get(...boundArgs) : stmt.get();
+                const result =
+                  boundArgs.length > 0 ? stmt.get(...boundArgs) : stmt.get();
                 return result || null;
               } catch (error) {
                 return null;
@@ -78,7 +83,8 @@ function createLocalD1Adapter(): D1Database | null {
             },
             run: async () => {
               try {
-                const result = boundArgs.length > 0 ? stmt.run(...boundArgs) : stmt.run();
+                const result =
+                  boundArgs.length > 0 ? stmt.run(...boundArgs) : stmt.run();
                 return {
                   success: true,
                   meta: {
@@ -96,7 +102,7 @@ function createLocalD1Adapter(): D1Database | null {
             },
           };
         };
-        
+
         // prepare()が返すオブジェクトは、直接.all()や.bind()を呼び出せる
         return createStmt();
       },
@@ -114,13 +120,13 @@ function createLocalD1Adapter(): D1Database | null {
  * Cloudflare D1データベースにアクセスするための関数
  *
  * バインディング名: STATS47_DB（wrangler.tomlで定義）
- * 
+ *
  * アクセス方法の優先順位:
  * 1. globalThis.STATS47_DB（Cloudflare Pages/Workers環境）
  * 2. process.env.STATS47_DB（環境変数経由）
  * 3. ローカルSQLiteアダプタ（開発環境、better-sqlite3使用）
  * 4. globalThis.DB（フォールバック、互換性のため）
- * 
+ *
  * ローカル開発時の注意:
  * - 開発環境では、ローカルの.wrangler/state/v3/d1/*.sqliteファイルに直接アクセスします
  * - `npx wrangler dev`を別ターミナルで実行すると、SQLiteファイルが作成されます
@@ -167,5 +173,3 @@ export const getD1 = (): D1Database => {
 
   throw new Error(errorMessage);
 };
-
-

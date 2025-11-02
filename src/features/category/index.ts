@@ -1,11 +1,36 @@
 /**
  * Category Domain 統一エクスポート
- * カテゴリ管理機能を提供
+ *
+ * カテゴリ・サブカテゴリ管理機能を提供するドメインの統一エクスポート。
+ * 型定義、ユーティリティ関数、レガシー関数のすべてを再エクスポートする。
+ *
+ * ## エクスポート内容
+ * - **型定義**: カテゴリ、サブカテゴリの型定義
+ * - **ユーティリティ**: カテゴリアイコン取得関数など
+ * - **レガシー関数**: 既存のカテゴリ取得関数（段階的削除予定）
+ *
+ * ## 注意事項
+ * - Server Actions は manifest 解決の安定性の観点から、
+ *   このバレル（index.ts）越しの再エクスポートを避け、
+ *   呼び出し側は `@/features/category/actions` を直接 import してください。
+ *
+ * @module CategoryDomain
+ *
+ * @example
+ * ```ts
+ * // 型定義のインポート
+ * import type { Category, Subcategory } from "@/features/category";
+ *
+ * // ユーティリティ関数のインポート
+ * import { getCategoryIcon } from "@/features/category";
+ *
+ * // Server Actions は直接インポート（推奨）
+ * import { listCategoriesAction } from "@/features/category/actions";
+ * ```
  */
 
-// ============================================================================
-// 型定義
-// ============================================================================
+import categoriesData from "@/config/categories.json";
+
 export interface Category {
   id: string; // URLパスで使用される識別子（categoryNameと同じ値）
   categoryName: string;
@@ -21,51 +46,66 @@ export interface Subcategory {
   categoryName?: string; // 親カテゴリ名（オプショナル）
 }
 
-// ============================================================================
-// ユーティリティ
-// ============================================================================
 export * from "./utils";
 
-// ============================================================================
-// 注意点（Server Actions）
-// ============================================================================
-// Server Action はバレル越しの再エクスポートを避け、
-// `@/features/category/actions` から直接 import してください。
-// 例: `import { listCategoriesAction } from "@/features/category/actions";`
-
-// ============================================================================
-// 既存（レガシー）ユーティリティ的関数（必要に応じて段階的削除）
-// ============================================================================
 /**
- * カテゴリ一覧を取得
+ * カテゴリ一覧を取得（レガシー関数）
+ *
+ * ⚠️ **注意**: この関数は既存コードとの互換性のために残されていますが、
+ * 段階的に削除する予定です。新しいコードでは `@/features/category/actions` の
+ * `listCategoriesAction` を使用してください。
+ *
+ * @returns {Category[]} カテゴリの配列
+ *
+ * @deprecated 新しいコードでは `listCategoriesAction` を使用してください
  */
 export function listCategories(): Category[] {
-  const categoriesData = require("@/config/categories.json");
-  const rawCategories = categoriesData.default || categoriesData;
-  
+  const rawCategories = Array.isArray(categoriesData) ? categoriesData : [];
+
   // categories.jsonの構造（id/name）をCategoryインターフェース（categoryName/subcategoryName）に変換
-  return rawCategories.map((cat: any) => {
-    const categoryName = cat.id || cat.categoryName || "";
-    return {
-      id: categoryName, // URLパス用のidプロパティを追加
-      categoryName: categoryName,
-      name: cat.name || "",
-      icon: cat.icon,
-      subcategories: (cat.subcategories || []).map((sub: any) => {
-        const subcategoryName = sub.id || sub.subcategoryName || "";
-        return {
-          id: subcategoryName, // URLパス用のidプロパティを追加
-          subcategoryName: subcategoryName,
-          name: sub.name || "",
-          categoryName: categoryName,
-        };
-      }),
-    };
-  });
+  return rawCategories.map(
+    (cat: {
+      id?: string;
+      categoryName?: string;
+      name?: string;
+      icon?: string;
+      subcategories?: Array<{
+        id?: string;
+        subcategoryName?: string;
+        name?: string;
+      }>;
+    }) => {
+      const categoryName = cat.id || cat.categoryName || "";
+      return {
+        id: categoryName, // URLパス用のidプロパティを追加
+        categoryName: categoryName,
+        name: cat.name || "",
+        icon: cat.icon,
+        subcategories: (cat.subcategories || []).map(
+          (sub: { id?: string; subcategoryName?: string; name?: string }) => {
+            const subcategoryName = sub.id || sub.subcategoryName || "";
+            return {
+              id: subcategoryName, // URLパス用のidプロパティを追加
+              subcategoryName: subcategoryName,
+              name: sub.name || "",
+              categoryName: categoryName,
+            };
+          }
+        ),
+      };
+    }
+  );
 }
 
 /**
- * 全サブカテゴリを取得
+ * 全サブカテゴリを取得（レガシー関数）
+ *
+ * ⚠️ **注意**: この関数は既存コードとの互換性のために残されていますが、
+ * 段階的に削除する予定です。新しいコードでは適切なサービス関数を使用してください。
+ *
+ * @returns {Promise<Subcategory[]>} サブカテゴリの配列
+ *
+ * @deprecated 新しいコードでは適切なサービス関数を使用してください
  */
 export async function getSubcategories(): Promise<Subcategory[]> {
   const categories = listCategories();
@@ -78,7 +118,15 @@ export async function getSubcategories(): Promise<Subcategory[]> {
 }
 
 /**
- * サブカテゴリ名でサブカテゴリを検索
+ * サブカテゴリ名でサブカテゴリを検索（レガシー関数）
+ *
+ * ⚠️ **注意**: この関数は既存コードとの互換性のために残されていますが、
+ * 段階的に削除する予定です。新しいコードでは適切なサービス関数を使用してください。
+ *
+ * @param {string} subcategoryName - サブカテゴリ名
+ * @returns {Subcategory | null} サブカテゴリ。見つからない場合は `null`
+ *
+ * @deprecated 新しいコードでは適切なサービス関数を使用してください
  */
 export function findSubcategoryByName(
   subcategoryName: string
