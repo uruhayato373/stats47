@@ -6,11 +6,9 @@
 import {
   buildCacheStatus,
   checkDataSources as checkDataSourcesFromRepo,
+  fetchAllCitiesFromExternalAPI,
   fetchTopology,
 } from "../repositories/geoshape-repository";
-import {
-  fetchAllCitiesFromExternalAPI,
-} from "../repositories/external-data-source";
 import {
   determineAreaTypeFromCode,
   extractPrefCodeFrom5Digit,
