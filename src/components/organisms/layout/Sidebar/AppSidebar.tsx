@@ -6,7 +6,7 @@ import { getCategoryIcon } from "@/features/category/utils";
 import { listCategoriesAction } from "@/features/category/actions";
 import type { Category } from "@/features/category/types/category.types";
 
-import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
+import { buildSidebarNavigationItems } from "@/config/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 

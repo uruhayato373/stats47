@@ -71,3 +71,4 @@ export const quickActionsConfig = {
   label: "Quick actions",
   chevronIcon: ChevronDown,
 };
+

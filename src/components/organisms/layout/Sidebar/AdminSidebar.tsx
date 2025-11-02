@@ -1,6 +1,6 @@
 import { Database, FileText, FolderTree, List, Settings } from "lucide-react";
 
-import { buildSidebarNavigationItems } from "@/lib/sidebar-config";
+import { buildSidebarNavigationItems } from "@/config/sidebar-config";
 
 import { ActiveSidebarMenuButton } from "./ActiveSidebarMenuButton";
 
