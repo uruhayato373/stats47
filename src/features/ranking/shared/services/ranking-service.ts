@@ -5,24 +5,15 @@
  */
 
 import type { RankingItem } from "../../items/types";
+import type {
+  RankingConfigResponse,
+  SubcategoryConfig,
+} from "../repositories/ranking-repository";
 
 export interface RankingConfig {
   subcategory: {
     defaultRankingKey: string;
   };
-}
-
-export interface SubcategoryConfig {
-  id: string;
-  categoryId: string;
-  name: string;
-  description?: string;
-  defaultRankingKey: string;
-}
-
-export interface RankingConfigResponse {
-  subcategory: SubcategoryConfig;
-  rankingItems: RankingItem[];
 }
 
 /**

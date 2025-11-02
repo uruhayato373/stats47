@@ -31,8 +31,6 @@ export {
 } from "./shared/services/ranking-service";
 export type {
   RankingConfig,
-  RankingConfigResponse,
-  SubcategoryConfig,
 } from "./shared/services/ranking-service";
 
 // ============================================================================
