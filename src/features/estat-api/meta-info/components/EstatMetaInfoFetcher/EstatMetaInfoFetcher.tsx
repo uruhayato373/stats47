@@ -34,7 +34,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 /**
- * EstatMetaInfoFetcherProps - e-Statメタ情報取得フォームのプロパティ
+ * e-Statメタ情報取得フォームのプロパティ
  */
 interface EstatMetaInfoFetcherProps {
   /** 送信成功後に入力フィールドをクリアするかどうか（デフォルト: false） */
@@ -71,11 +71,9 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // ===== 統計表IDの取得 =====
   // propsまたはURLパラメータから統計表IDを取得（props優先）
   const statsId = statsIdProp ?? searchParams.get("statsId");
 
-  // ===== react-hook-formの設定 =====
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -83,10 +81,11 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
     },
   });
 
-  // ===== エフェクト =====
   /**
    * statsIdが変更されたらフォームの値を更新
-   * 保存後のリフレッシュなどでstatsIdが変更された場合にフォームを同期
+   *
+   * 保存後のリフレッシュなどでstatsIdが変更された場合にフォームを同期します。
+   * statsIdまたはformが変更されたときに実行されます。
    */
   useEffect(() => {
     if (statsId) {
@@ -94,28 +93,27 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
     }
   }, [statsId, form]);
 
-  // ===== イベントハンドラー =====
-
   /**
    * フォーム送信時の処理
+   *
+   * URLを更新してデータ取得をトリガーし、オプションで入力フィールドをクリアします。
+   *
    * @param values - フォームの値
    */
   const handleSubmit = (values: FormValues) => {
-    // URLを更新してデータ取得をトリガー
     router.push(
       `/admin/dev-tools/estat-api/meta-info?statsId=${values.statsDataId}`
     );
 
-    // オプション: 送信成功後に入力フィールドをクリア
     if (clearOnSuccess) {
       form.reset();
     }
   };
 
-  // ===== レンダリング =====
-
   /**
-   * 取得元情報のラベルを取得
+   * データ取得元のラベルを取得
+   *
+   * @returns データ取得元のラベル（'r2': "R2ストレージから取得", 'api': "e-Stat APIから取得"）、取得元が未指定の場合はnull
    */
   const getDataSourceLabel = (): string | null => {
     if (!dataSource) return null;
@@ -134,7 +132,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
             <FormItem className="space-y-1">
               <FormLabel>統計表ID</FormLabel>
               <div className="flex flex-row items-center gap-2">
-                {/* 統計表ID入力フィールド */}
                 <FormControl>
                   <Input
                     placeholder="0000010101"
@@ -142,7 +139,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
                     className="h-8 w-40"
                   />
                 </FormControl>
-                {/* 送信ボタン */}
                 <Button
                   type="submit"
                   disabled={!form.formState.isValid}
@@ -151,7 +147,6 @@ const EstatMetaInfoFetcher = memo(function EstatMetaInfoFetcher({
                 >
                   取得
                 </Button>
-                {/* 取得元情報の表示 */}
                 {dataSourceLabel && (
                   <span className="text-xs text-muted-foreground whitespace-nowrap">
                     {dataSourceLabel}
