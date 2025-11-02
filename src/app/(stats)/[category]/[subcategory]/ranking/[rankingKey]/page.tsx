@@ -14,6 +14,7 @@ import {
   TabsTrigger,
 } from "@/components/atoms/ui/tabs";
 
+import { auth } from "@/features/auth/lib/auth";
 import {
   RankingDataTable,
   RankingMapCard,
@@ -26,6 +27,7 @@ import {
   RankingItemTabContent,
   RankingYearSelector,
 } from "@/features/ranking/items/components";
+import { EditRankingItemButton } from "@/features/ranking/items/components/admin/EditRankingItemButton";
 
 /**
  * ランキング詳細ページのProps型定義
@@ -50,6 +52,13 @@ export default async function RankingKeyPage({
 }: PageProps) {
   const { rankingKey } = await params;
   const { year } = await searchParams;
+
+  // 認証チェック（管理者権限）
+  const session = await auth();
+  // 開発環境では自動的に管理者として扱う
+  const isAdmin =
+    process.env.NODE_ENV === "development" ||
+    session?.user?.role === "admin";
 
   // サーバーサイドでランキングアイテムを取得
   const rankingItem = await getRankingItem(rankingKey);
@@ -112,14 +121,22 @@ export default async function RankingKeyPage({
                   rankingItem.label}
               </CardTitle>
             </div>
-            {metadataForSingle &&
-              metadataForSingle.times &&
-              metadataForSingle.times.length > 0 && (
-                <RankingYearSelector
-                  times={metadataForSingle.times}
-                  defaultValue={selectedYearForSingle}
+            <div className="flex items-center gap-2">
+              {isAdmin && (
+                <EditRankingItemButton
+                  isAdmin={isAdmin}
+                  rankingItem={rankingItem}
                 />
               )}
+              {metadataForSingle &&
+                metadataForSingle.times &&
+                metadataForSingle.times.length > 0 && (
+                  <RankingYearSelector
+                    times={metadataForSingle.times}
+                    defaultValue={selectedYearForSingle}
+                  />
+                )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -158,12 +175,20 @@ export default async function RankingKeyPage({
                 {metadata?.itemName || rankingItem.name || rankingItem.label}
               </CardTitle>
             </div>
-            {metadata && metadata.times && metadata.times.length > 0 && (
-              <RankingYearSelector
-                times={metadata.times}
-                defaultValue={selectedYear}
-              />
-            )}
+            <div className="flex items-center gap-2">
+              {isAdmin && (
+                <EditRankingItemButton
+                  isAdmin={isAdmin}
+                  rankingItem={rankingItem}
+                />
+              )}
+              {metadata && metadata.times && metadata.times.length > 0 && (
+                <RankingYearSelector
+                  times={metadata.times}
+                  defaultValue={selectedYear}
+                />
+              )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -207,12 +232,20 @@ export default async function RankingKeyPage({
               タブからランキング項目を選択して、詳細なランキングデータを表示してください
             </CardDescription>
           </div>
-          {metadata && metadata.times && metadata.times.length > 0 && (
-            <RankingYearSelector
-              times={metadata.times}
-              defaultValue={selectedYear}
-            />
-          )}
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <EditRankingItemButton
+                isAdmin={isAdmin}
+                rankingItem={rankingItem}
+              />
+            )}
+            {metadata && metadata.times && metadata.times.length > 0 && (
+              <RankingYearSelector
+                times={metadata.times}
+                defaultValue={selectedYear}
+              />
+            )}
+          </div>
         </div>
       </CardHeader>
       <CardContent>
