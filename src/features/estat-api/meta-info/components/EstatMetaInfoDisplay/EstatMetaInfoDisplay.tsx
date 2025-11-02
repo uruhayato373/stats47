@@ -25,9 +25,6 @@ import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
 import DimensionsTab from "./tabs/DimensionsTab";
 import TableInfoTab from "./tabs/TableInfoTab";
 
-/**
- * e-Statメタ情報表示コンポーネントのプロパティ
- */
 interface EstatMetaInfoDisplayProps {
   /** メタ情報データ */
   metaInfo: EstatMetaInfoResponse | null;
@@ -39,9 +36,6 @@ interface EstatMetaInfoDisplayProps {
   error?: string | null;
 }
 
-/**
- * タブの種類
- */
 type TabType = "basic" | "dimensions" | "json";
 
 /**

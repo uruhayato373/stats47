@@ -72,21 +72,17 @@ function CategoryAccordionItem({ category }: { category: CategoryInfo }) {
   return (
     <AccordionItem
       value={category.id}
-      className="border border-gray-200 rounded-lg dark:border-neutral-700"
+      className="border rounded-lg border-border"
     >
       <AccordionTrigger className="px-4 py-3 hover:no-underline">
         <div className="flex items-center justify-between w-full mr-4">
           <div>
-            <div className="font-medium text-gray-900 dark:text-gray-100">
-              {category.name}
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
+            <div className="font-medium text-foreground">{category.name}</div>
+            <div className="text-sm text-muted-foreground">
               ID: {category.id} • {itemCount}項目
             </div>
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            {itemCount}項目
-          </div>
+          <div className="text-sm text-muted-foreground">{itemCount}項目</div>
         </div>
       </AccordionTrigger>
       <AccordionContent>
@@ -216,10 +212,6 @@ export default function DimensionsTab({
     .map(Number)
     .sort((a, b) => a - b);
 
-  const defaultExpandedLevels = sortedLevels
-    .filter((level) => level <= 2)
-    .map(String);
-
   // 時間軸情報の処理
   const { availableYears, formattedYears, minYear, maxYear } = timeAxis;
   const sortedYears = [...availableYears].sort((a, b) => b.localeCompare(a));
@@ -235,19 +227,17 @@ export default function DimensionsTab({
     <div className="space-y-8">
       {/* 分類セクション */}
       <section className="space-y-4">
-        <h2 className="flex items-center space-x-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-          <Tag className="w-5 h-5 text-gray-500" />
+        <h2 className="flex items-center space-x-2 text-xl font-semibold text-foreground">
+          <Tag className="w-5 h-5 text-muted-foreground" />
           <span>分類</span>
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+          <span className="text-sm font-normal text-muted-foreground">
             ({categories.length}個)
           </span>
         </h2>
 
         {categories.length === 0 ? (
           <div className="text-center py-8">
-            <div className="text-gray-500 dark:text-gray-400">
-              分類情報がありません
-            </div>
+            <div className="text-muted-foreground">分類情報がありません</div>
           </div>
         ) : (
           <Accordion type="multiple" className="space-y-2">
@@ -260,32 +250,26 @@ export default function DimensionsTab({
 
       {/* 地域セクション */}
       <section className="space-y-4">
-        <h2 className="flex items-center space-x-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-          <MapPin className="w-5 h-5 text-gray-500" />
+        <h2 className="flex items-center space-x-2 text-xl font-semibold text-foreground">
+          <MapPin className="w-5 h-5 text-muted-foreground" />
           <span>地域</span>
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+          <span className="text-sm font-normal text-muted-foreground">
             ({areas.length}個)
           </span>
         </h2>
 
         {areas.length === 0 ? (
           <div className="text-center py-8">
-            <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <div className="text-gray-500 dark:text-gray-400">
-              地域情報がありません
-            </div>
+            <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <div className="text-muted-foreground">地域情報がありません</div>
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {areas.length}個の地域が見つかりました
             </div>
 
-            <Accordion
-              type="multiple"
-              defaultValue={defaultExpandedLevels}
-              className="space-y-2"
-            >
+            <Accordion type="multiple" className="space-y-2">
               {sortedLevels.map((level) => {
                 const levelAreas = groupedAreas[level];
                 const areaCount = levelAreas.length;
@@ -294,22 +278,22 @@ export default function DimensionsTab({
                   <AccordionItem
                     key={level}
                     value={String(level)}
-                    className="border border-gray-200 rounded-lg dark:border-neutral-700"
+                    className="border rounded-lg border-border"
                   >
                     <AccordionTrigger className="px-4 py-3 hover:no-underline">
                       <div className="flex items-center justify-between w-full mr-4">
                         <div className="flex items-center space-x-3">
-                          <MapPin className="w-4 h-4 text-gray-500" />
+                          <MapPin className="w-4 h-4 text-muted-foreground" />
                           <div>
-                            <div className="font-medium text-gray-900 dark:text-gray-100">
+                            <div className="font-medium text-foreground">
                               {getLevelLabel(level)}
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                            <div className="text-sm text-muted-foreground">
                               レベル {level} • {areaCount}地域
                             </div>
                           </div>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-muted-foreground">
                           {areaCount}地域
                         </div>
                       </div>
@@ -352,20 +336,18 @@ export default function DimensionsTab({
 
       {/* 時間軸セクション */}
       <section className="space-y-4">
-        <h2 className="flex items-center space-x-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-          <Calendar className="w-5 h-5 text-gray-500" />
+        <h2 className="flex items-center space-x-2 text-xl font-semibold text-foreground">
+          <Calendar className="w-5 h-5 text-muted-foreground" />
           <span>時間軸</span>
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+          <span className="text-sm font-normal text-muted-foreground">
             ({yearCount}個)
           </span>
         </h2>
 
         {availableYears.length === 0 ? (
           <div className="text-center py-8">
-            <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <div className="text-gray-500 dark:text-gray-400">
-              時間軸情報がありません
-            </div>
+            <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <div className="text-muted-foreground">時間軸情報がありません</div>
           </div>
         ) : (
           <div className="space-y-6">
@@ -432,18 +414,18 @@ export default function DimensionsTab({
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="text-sm font-medium text-muted-foreground mb-1">
                       最小年
                     </div>
-                    <div className="text-lg text-gray-900 dark:text-gray-100">
+                    <div className="text-lg text-foreground">
                       {minYear || "-"}
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="text-sm font-medium text-muted-foreground mb-1">
                       最大年
                     </div>
-                    <div className="text-lg text-gray-900 dark:text-gray-100">
+                    <div className="text-lg text-foreground">
                       {maxYear || "-"}
                     </div>
                   </div>
@@ -464,12 +446,12 @@ export default function DimensionsTab({
                       className={`p-3 rounded-lg border text-center ${
                         index === 0
                           ? "bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-100"
-                          : "bg-gray-50 border-gray-200 text-gray-900 dark:bg-neutral-800 dark:border-neutral-700 dark:text-gray-100"
+                          : "bg-muted border-border text-foreground"
                       }`}
                     >
                       <div className="text-sm font-mono">{year}</div>
                       {sortedFormattedYears[index] && (
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        <div className="text-xs text-muted-foreground mt-1">
                           {sortedFormattedYears[index]}
                         </div>
                       )}
@@ -493,20 +475,16 @@ export default function DimensionsTab({
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <div className="text-gray-600 dark:text-gray-400 mb-1">
-                        年次間隔
-                      </div>
-                      <div className="text-gray-900 dark:text-gray-100">
+                      <div className="text-muted-foreground mb-1">年次間隔</div>
+                      <div className="text-foreground">
                         {availableYears.length > 1 ? "複数年" : "単年"}
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-600 dark:text-gray-400 mb-1">
+                      <div className="text-muted-foreground mb-1">
                         データ期間
                       </div>
-                      <div className="text-gray-900 dark:text-gray-100">
-                        {yearRange}
-                      </div>
+                      <div className="text-foreground">{yearRange}</div>
                     </div>
                   </div>
                 </CardContent>

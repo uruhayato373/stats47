@@ -1,4 +1,4 @@
-import { TableInfo } from "../../../../types";
+import type { TableInfo } from "@/features/estat-api/meta-info/types";
 
 interface TableInfoTabProps {
   tableInfo: TableInfo;
@@ -17,12 +17,12 @@ export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
     <div className="space-y-8">
       {/* 基本情報セクション */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+        <h3 className="text-sm font-semibold text-foreground mb-4 pb-2 border-b border-border">
           基本情報
         </h3>
         <dl className="space-y-3">
-          <InfoRow label="統計表ID" value={tableInfo.id} highlight />
-          <InfoRow label="統計表題名" value={tableInfo.title} highlight />
+          <InfoRow label="統計表ID" value={tableInfo.id} />
+          <InfoRow label="統計表題名" value={tableInfo.title} />
           <InfoRow label="政府統計名" value={tableInfo.statName} />
           <InfoRow label="作成機関" value={tableInfo.organization} />
           <InfoRow label="統計調査名" value={tableInfo.statisticsName} />
@@ -47,7 +47,7 @@ export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
 
       {/* 分類情報セクション */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+        <h3 className="text-sm font-semibold text-foreground mb-4 pb-2 border-b border-border">
           分類情報
         </h3>
         <dl className="space-y-3">
@@ -69,10 +69,10 @@ export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
       {/* 説明セクション */}
       {tableInfo.explanation && (
         <div>
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
+          <h3 className="text-sm font-semibold text-foreground mb-4 pb-2 border-b border-border">
             説明
           </h3>
-          <div className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap leading-relaxed">
+          <div className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">
             {tableInfo.explanation}
           </div>
         </div>
@@ -84,29 +84,13 @@ export default function TableInfoTab({ tableInfo }: TableInfoTabProps) {
 /**
  * InfoRow - 情報行表示コンポーネント
  */
-function InfoRow({
-  label,
-  value,
-  highlight = false,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
+function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col sm:flex-row sm:gap-4">
-      <dt className="text-sm font-medium text-gray-600 dark:text-gray-400 sm:w-40 flex-shrink-0">
+      <dt className="text-sm font-medium text-muted-foreground sm:w-40 flex-shrink-0">
         {label}
       </dt>
-      <dd
-        className={`text-sm mt-1 sm:mt-0 ${
-          highlight
-            ? "font-medium text-blue-600 dark:text-blue-400"
-            : "text-gray-900 dark:text-gray-100"
-        }`}
-      >
-        {value || "-"}
-      </dd>
+      <dd className="text-sm mt-1 sm:mt-0 text-foreground">{value || "-"}</dd>
     </div>
   );
 }
@@ -125,13 +109,13 @@ function CategoryRow({
 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:gap-4">
-      <dt className="text-sm font-medium text-gray-600 dark:text-gray-400 sm:w-40 flex-shrink-0">
+      <dt className="text-sm font-medium text-muted-foreground sm:w-40 flex-shrink-0">
         {label}
       </dt>
-      <dd className="text-sm mt-1 sm:mt-0 text-gray-900 dark:text-gray-100">
+      <dd className="text-sm mt-1 sm:mt-0 text-foreground">
         {value}
         {code && (
-          <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+          <span className="ml-2 text-xs text-muted-foreground">
             (コード: {code})
           </span>
         )}
