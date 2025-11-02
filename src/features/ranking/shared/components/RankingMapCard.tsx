@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ランキングマップ表示コンポーネント
  * 都道府県別マップの表示とイベント処理を担当
@@ -7,9 +9,10 @@ import { useMemo } from "react";
 
 import { Card, CardContent } from "@/components/atoms/ui/card";
 
-import type { RankingValue } from "../../items/types";
 import { PrefectureMap } from "@/features/visualization/map/common/PrefectureMap";
 import type { ChoroplethData } from "@/features/visualization/map/types/index";
+
+import type { RankingValue } from "../../items/types";
 
 interface RankingMapCardProps {
   /** ランキングデータ */
@@ -85,4 +88,3 @@ export function RankingMapCard({
     </Card>
   );
 }
-

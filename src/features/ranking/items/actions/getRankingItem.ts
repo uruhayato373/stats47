@@ -1,8 +1,11 @@
 "use server";
 import { RankingRepository } from "../../shared/repositories/ranking-repository";
+
 import type { RankingItem } from "../types";
 
-export async function getRankingItem(rankingKey: string): Promise<RankingItem | null> {
+export async function getRankingItem(
+  rankingKey: string
+): Promise<RankingItem | null> {
   try {
     const repo = await RankingRepository.create();
     return await repo.getRankingItemByKey(rankingKey);
@@ -12,4 +15,3 @@ export async function getRankingItem(rankingKey: string): Promise<RankingItem | 
     return null;
   }
 }
-
