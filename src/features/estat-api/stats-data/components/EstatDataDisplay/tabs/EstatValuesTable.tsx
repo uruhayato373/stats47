@@ -12,10 +12,25 @@ import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/typ
 
 import type { StatsSchema } from "@/types/stats";
 
+/**
+ * e-Stat統計データの値テーブルコンポーネントのプロパティ
+ */
 interface EstatValuesTableProps {
+  /** e-Stat APIから取得した統計データのレスポンス */
   data: EstatStatsDataResponse;
 }
 
+/**
+ * e-Stat統計データの値を表形式で表示するコンポーネント
+ *
+ * @remarks
+ * - 統計データを表形式で表示し、地域名・時間名・カテゴリ名でフィルタリング可能
+ * - セレクトフィルターの選択肢は実際のデータから自動的に抽出される
+ * - 地域名の選択肢は地域コードの昇順で並べられる
+ *
+ * @param props - コンポーネントのプロパティ
+ * @returns 統計データの値テーブル、またはデータがない場合はnull
+ */
 export default function EstatValuesTable({ data }: EstatValuesTableProps) {
   if (!data) return null;
 
@@ -27,7 +42,7 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     .map((value) => convertToStatsSchema(value))
     .filter((schema): schema is StatsSchema => schema !== undefined);
 
-  // デバッグログ
+  // 変換可能なデータがない場合の警告
   if (statsSchemaData.length === 0 && values.length > 0) {
     console.warn("[EstatValuesTable] 変換可能なデータがありません:", {
       totalValues: values.length,
@@ -36,19 +51,25 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     });
   }
 
-  // データから選択肢を抽出
+  // 地域名の選択肢を抽出（地域コードの昇順でソート）
   const areaNameOptions = Array.from(
-    new Set(statsSchemaData.map((d) => d.areaName).filter(Boolean))
+    new Map(
+      statsSchemaData
+        .filter((d) => d.areaName)
+        .map((d) => [d.areaName, d.areaCode])
+    ).entries()
   )
-    .sort()
-    .map((value) => ({ value, label: value }));
+    .sort(([, codeA], [, codeB]) => codeA.localeCompare(codeB))
+    .map(([value]) => ({ value, label: value }));
 
+  // 時間名の選択肢を抽出（アルファベット順でソート）
   const timeNameOptions = Array.from(
     new Set(statsSchemaData.map((d) => d.timeName).filter(Boolean))
   )
     .sort()
     .map((value) => ({ value, label: value }));
 
+  // カテゴリ名の選択肢を抽出（アルファベット順でソート）
   const categoryNameOptions = Array.from(
     new Set(statsSchemaData.map((d) => d.categoryName).filter(Boolean))
   )
