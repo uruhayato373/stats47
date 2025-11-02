@@ -1,8 +1,3 @@
-/**
- * 統計分野の統計数取得カスタムフック
- * 責務: 各分野の統計数の取得・管理のみ
- */
-
 import { useEffect, useState } from "react";
 
 import {
@@ -15,27 +10,62 @@ import {
   StatsFieldCode,
 } from "@/features/estat-api/stats-list/types";
 
+/**
+ * 統計分野ごとの統計数情報
+ */
 export interface FieldStats {
+  /** 統計分野コード */
   fieldCode: StatsFieldCode;
+  /** 統計数 */
   count: number;
+  /** 読み込み中かどうか */
   isLoading: boolean;
 }
 
+/**
+ * useFieldStatsフックのオプション
+ */
 export interface UseFieldStatsOptions {
+  /** 統計数を表示するかどうか（デフォルト: true） */
   showStatsCount?: boolean;
 }
 
+/**
+ * useFieldStatsフックの戻り値
+ */
 export interface UseFieldStatsReturn {
+  /** 各統計分野の統計数情報の配列 */
   fieldStats: FieldStats[];
+  /** 読み込み中かどうか */
   isLoading: boolean;
+  /** 指定された分野の統計数を取得する関数 */
   getFieldStats: (fieldCode: StatsFieldCode) => FieldStats | undefined;
+  /** 数値をフォーマットする関数（1k, 10k+など） */
   formatCount: (count: number) => string;
 }
 
 /**
- * 統計分野の統計数取得フック
- * @param options - オプション
+ * 統計分野ごとの統計数を取得するReact Hook
+ *
+ * @remarks
+ * - 各統計分野の統計数を並列で取得
+ * - NO_DATA_FOUNDエラーは正常なケースとして扱う（count: 0）
+ * - 統計数の表示を制御可能（showStatsCountオプション）
+ * - 取得した統計数を検索・フォーマットするヘルパー関数を提供
+ *
+ * @param options - フックのオプション
+ * @param options.showStatsCount - 統計数を表示するかどうか（デフォルト: true）
  * @returns 統計数データとヘルパー関数
+ *
+ * @example
+ * ```tsx
+ * const { fieldStats, isLoading, getFieldStats, formatCount } = useFieldStats({
+ *   showStatsCount: true
+ * });
+ *
+ * const statsCount = getFieldStats("01");
+ * const formatted = formatCount(1234); // "1.2k"
+ * ```
  */
 export function useFieldStats({
   showStatsCount = true,
@@ -44,7 +74,6 @@ export function useFieldStats({
   const [fieldStats, setFieldStats] = useState<FieldStats[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // 各分野の統計数を取得
   useEffect(() => {
     if (!showStatsCount) return;
 
@@ -85,10 +114,11 @@ export function useFieldStats({
 
             // エラーメッセージでNO_DATA_FOUNDを判定（フォールバック）
             if (error && typeof error === "object" && "message" in error) {
-              const errorMessage = (error as any).message;
+              const errorMessage = (error as { message: unknown }).message;
               console.log(`🔵 Hook: エラーメッセージ: ${errorMessage}`);
               if (
                 errorMessage &&
+                typeof errorMessage === "string" &&
                 (errorMessage.includes("該当データはありませんでした") ||
                   errorMessage.includes(
                     "正常に終了しましたが、該当データはありませんでした"
@@ -130,16 +160,10 @@ export function useFieldStats({
     fetchFieldStats();
   }, [showStatsCount]);
 
-  /**
-   * 指定された分野の統計数を取得
-   */
   const getFieldStats = (fieldCode: StatsFieldCode): FieldStats | undefined => {
     return fieldStats.find((stat) => stat.fieldCode === fieldCode);
   };
 
-  /**
-   * 数値をフォーマット（1k, 10k+など）
-   */
   const formatCount = (count: number): string => {
     if (count >= 10000) {
       return `${Math.floor(count / 1000)}k+`;

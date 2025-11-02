@@ -12,8 +12,6 @@ import {
 import {
   EstatStatsListResponse,
   GetStatsListParams,
-} from "@/features/estat-api/core/types";
-import {
   PagingOptions,
   StatsListSearchOptions,
 } from "@/features/estat-api/stats-list/types";
@@ -21,6 +19,7 @@ import {
 /**
  * e-Stat APIエラーの種類
  */
+
 export enum EstatErrorType {
   INVALID_APP_ID = "INVALID_APP_ID",
   NO_DATA_FOUND = "NO_DATA_FOUND",
@@ -58,7 +57,7 @@ function mapParameterNames(
   params: Record<string, unknown>
 ): Record<string, unknown> {
   const mapped: Record<string, unknown> = {};
-  
+
   Object.entries(params).forEach(([key, value]) => {
     // e-Stat APIの公式パラメータ名にマッピング
     switch (key) {
@@ -116,7 +115,7 @@ function mapParameterNames(
         break;
     }
   });
-  
+
   return mapped;
 }
 
@@ -128,10 +127,10 @@ function composeRequestParams(
   // Web検索結果と実際のAPIレスポンスを確認して判断
   // パラメータ名マッピングを有効化（LIMIT、FIELDなどが正しく送信されるように）
   const mappedParams = mapParameterNames(params);
-  
+
   console.log("🔵 composeRequestParams: マッピング前", params);
   console.log("🔵 composeRequestParams: マッピング後", mappedParams);
-  
+
   return {
     appId,
     lang: ESTAT_API.DEFAULT_LANG,
@@ -215,14 +214,25 @@ export class EstatStatsListFetcher {
       const startTime = Date.now();
 
       const requestParams = composeRequestParams(params, ESTAT_APP_ID);
-      console.log("🔵 Fetcher: composeRequestParams後のパラメータ:", requestParams);
+      console.log(
+        "🔵 Fetcher: composeRequestParams後のパラメータ:",
+        requestParams
+      );
       console.log("🔵 Fetcher: composeRequestParams後のパラメータ詳細:", {
         hasLimit: "LIMIT" in requestParams || "limit" in requestParams,
         LIMIT: requestParams.LIMIT || requestParams.limit,
-        hasStartPosition: "START_POSITION" in requestParams || "startPosition" in requestParams,
-        START_POSITION: requestParams.START_POSITION || requestParams.startPosition,
-        hasFIELD: "FIELD" in requestParams || "statsField" in requestParams || "field" in requestParams,
-        FIELD: requestParams.FIELD || requestParams.statsField || requestParams.field,
+        hasStartPosition:
+          "START_POSITION" in requestParams || "startPosition" in requestParams,
+        START_POSITION:
+          requestParams.START_POSITION || requestParams.startPosition,
+        hasFIELD:
+          "FIELD" in requestParams ||
+          "statsField" in requestParams ||
+          "field" in requestParams,
+        FIELD:
+          requestParams.FIELD ||
+          requestParams.statsField ||
+          requestParams.field,
         allKeys: Object.keys(requestParams),
       });
       const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_LIST}`;
@@ -240,9 +250,12 @@ export class EstatStatsListFetcher {
         NUMBER: response.GET_STATS_LIST?.DATALIST_INF?.NUMBER,
         hasRESULT_INF: !!response.GET_STATS_LIST?.DATALIST_INF?.RESULT_INF,
         hasLIST_INF: !!response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF,
-        hasTABLE_INF: !!response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF?.TABLE_INF,
+        hasTABLE_INF:
+          !!response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF?.TABLE_INF,
         TABLE_INF型: response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF?.TABLE_INF
-          ? Array.isArray(response.GET_STATS_LIST.DATALIST_INF.LIST_INF.TABLE_INF)
+          ? Array.isArray(
+              response.GET_STATS_LIST.DATALIST_INF.LIST_INF.TABLE_INF
+            )
             ? "配列"
             : typeof response.GET_STATS_LIST.DATALIST_INF.LIST_INF.TABLE_INF
           : "存在しない",
@@ -251,8 +264,8 @@ export class EstatStatsListFetcher {
         )
           ? response.GET_STATS_LIST.DATALIST_INF.LIST_INF.TABLE_INF.length
           : response.GET_STATS_LIST?.DATALIST_INF?.LIST_INF?.TABLE_INF
-            ? 1
-            : 0,
+          ? 1
+          : 0,
       });
 
       validateStatsListResponse(response, url);

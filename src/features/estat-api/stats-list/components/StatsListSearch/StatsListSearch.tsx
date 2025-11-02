@@ -8,18 +8,18 @@ import { Button } from "@/components/atoms/ui/button";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/atoms/ui/select";
 
 import { StatsFieldCode, StatsListSearchOptions } from "@/features/estat-api";
 import {
-    COLLECT_AREA_OPTIONS,
-    LIMIT_OPTIONS,
-    STATS_FIELD_OPTIONS,
+  COLLECT_AREA_OPTIONS,
+  LIMIT_OPTIONS,
+  STATS_FIELD_OPTIONS,
 } from "@/features/estat-api/core/config";
 import { STATS_FIELDS } from "@/features/estat-api/stats-list";
 
@@ -54,8 +54,8 @@ export function StatsListSearch({
     const options: StatsListSearchOptions = {
       ...(searchWord && { searchWord }),
       ...(statsCode && { statsCode }),
-      ...(statsField && statsField !== "" && { statsField }),
-      ...(collectArea && collectArea !== "" && { collectArea }),
+      ...(statsField && { statsField }),
+      ...(collectArea && { collectArea }),
       ...(surveyYears && { surveyYears }),
       limit,
     };
@@ -129,7 +129,10 @@ export function StatsListSearch({
           {/* 分野コード */}
           <div className="space-y-2">
             <Label htmlFor="statsField">分野コード</Label>
-            <Select value={statsField || undefined} onValueChange={setStatsField}>
+            <Select
+              value={statsField || undefined}
+              onValueChange={setStatsField}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="選択してください" />
               </SelectTrigger>

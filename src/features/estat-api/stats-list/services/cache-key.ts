@@ -95,10 +95,15 @@ export function parseStatsListCacheKey(
         case "searchWord":
         case "statsCode":
         case "statsField":
-        case "collectArea":
         case "surveyYears":
         case "openYears":
           options[key] = value;
+          break;
+        case "collectArea":
+          // collectAreaは "1" | "2" | "3" のみ許可
+          if (value === "1" || value === "2" || value === "3") {
+            options[key] = value;
+          }
           break;
         case "limit":
         case "startPosition":

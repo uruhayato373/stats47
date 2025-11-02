@@ -4,8 +4,8 @@
  */
 
 import { StatsListSearchResult } from "@/features/estat-api/stats-list/types";
-import { parseStatsListCacheKey } from "./cache-key";
 
+import { parseStatsListCacheKey } from "./cache-key";
 import { EstatStatsListFetcher } from "./fetcher";
 import { EstatStatsListFormatter } from "./formatter";
 

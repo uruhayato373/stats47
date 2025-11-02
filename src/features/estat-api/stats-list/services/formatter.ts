@@ -6,7 +6,7 @@
 import {
   EstatStatsListResponse,
   EstatTableListItem,
-} from "@/features/estat-api/core/types";
+} from "@/features/estat-api/stats-list/types";
 import {
   DetailedStatsListTableInfo,
   StatsListSearchResult,

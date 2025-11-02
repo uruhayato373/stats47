@@ -1,40 +1,60 @@
-/**
- * 統計表詳細モーダルコンポーネント
- * 統計表の全情報表示、関連統計へのリンク、データ取得ボタンなど
- */
-
 "use client";
 
 import { useState } from "react";
 
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/atoms/ui/dialog";
 
+import { StatsFieldCode } from "@/features/estat-api/stats-list";
 import {
-    formatOpenDate,
-    formatSurveyDate,
-    getCollectAreaDescription,
-    getSmallAreaDescription,
-    getStatsFieldIcon,
-    getStatsFieldName,
-    getUpdateFrequency,
-    truncateTitle,
+  formatOpenDate,
+  formatSurveyDate,
+  getCollectAreaDescription,
+  getSmallAreaDescription,
+  getStatsFieldIcon,
+  getStatsFieldName,
+  getUpdateFrequency,
+  truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
 import { DetailedStatsListTableInfo } from "@/features/estat-api/stats-list/types";
 
+/**
+ * 統計表詳細モーダルコンポーネントのプロパティ
+ */
 interface StatsTableDetailModalProps {
+  /** 表示する統計表情報 */
   table: DetailedStatsListTableInfo | null;
+  /** モーダルの表示状態 */
   isOpen: boolean;
+  /** モーダルを閉じるハンドラー */
   onClose: () => void;
+  /** データ取得ボタンクリック時のハンドラー（統計表IDを渡す） */
   onGetData?: (tableId: string) => void;
+  /** メタ情報取得ボタンクリック時のハンドラー（統計表IDを渡す） */
   onGetMetaInfo?: (tableId: string) => void;
+  /** お気に入り切り替えハンドラー */
   onToggleFavorite?: (table: DetailedStatsListTableInfo) => void;
+  /** お気に入り状態 */
   isFavorite?: boolean;
 }
+
+/**
+ * 統計表詳細モーダルコンポーネント
+ *
+ * @remarks
+ * - 統計表の基本情報・詳細情報・関連情報をタブで表示
+ * - お気に入り機能（オプション）
+ * - データ取得・メタ情報取得ボタン（オプション）
+ * - 関連統計検索へのリンク
+ * - e-Stat公式サイトへの外部リンク
+ *
+ * @param props - コンポーネントのプロパティ
+ * @returns 統計表詳細モーダル、またはtableがない場合はnull
+ */
 
 export function StatsTableDetailModal({
   table,
@@ -79,7 +99,7 @@ export function StatsTableDetailModal({
             <div className="flex items-center space-x-3">
               <span className="text-2xl">
                 {table.mainCategory
-                  ? getStatsFieldIcon(table.mainCategory.code as any)
+                  ? getStatsFieldIcon(table.mainCategory.code as StatsFieldCode)
                   : "📊"}
               </span>
               <div>
@@ -119,7 +139,6 @@ export function StatsTableDetailModal({
           </div>
         </DialogHeader>
 
-        {/* タブナビゲーション */}
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8">
             {[
@@ -129,7 +148,9 @@ export function StatsTableDetailModal({
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() =>
+                  setActiveTab(tab.id as "basic" | "detailed" | "related")
+                }
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id
                     ? "border-blue-500 text-blue-600"
@@ -141,8 +162,6 @@ export function StatsTableDetailModal({
             ))}
           </nav>
         </div>
-
-        {/* コンテンツ */}
         <div className="max-h-96 overflow-y-auto">
           {activeTab === "basic" && (
             <div className="space-y-4">
@@ -219,10 +238,14 @@ export function StatsTableDetailModal({
                   </label>
                   <div className="mt-1 flex items-center space-x-2">
                     <span className="text-lg">
-                      {getStatsFieldIcon(table.mainCategory.code as any)}
+                      {getStatsFieldIcon(
+                        table.mainCategory.code as StatsFieldCode
+                      )}
                     </span>
                     <span className="text-sm text-gray-900">
-                      {getStatsFieldName(table.mainCategory.code as any)}
+                      {getStatsFieldName(
+                        table.mainCategory.code as StatsFieldCode
+                      )}
                     </span>
                   </div>
                 </div>
@@ -408,7 +431,6 @@ export function StatsTableDetailModal({
           )}
         </div>
 
-        {/* フッター */}
         <div className="bg-gray-50 px-6 py-4 flex justify-between items-center">
           <div className="text-sm text-gray-500">
             最終更新:{" "}
