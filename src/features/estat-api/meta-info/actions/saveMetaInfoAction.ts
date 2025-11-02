@@ -1,7 +1,7 @@
 "use server";
 
 import type { AreaType } from "@/features/area";
-import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-repository";
+import { saveMetaInfo } from "@/features/estat-api/meta-info/repositories/meta-info-db-repository";
 import { fetchMetaInfo } from "@/features/estat-api/meta-info/services/fetcher";
 import { extractTableInfo } from "@/features/estat-api/meta-info/services/formatter";
 
