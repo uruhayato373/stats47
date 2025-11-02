@@ -55,7 +55,7 @@ export class MetadataGenerator {
         rankingKey
       );
 
-      // パターン: ranking/{areaType}/{rankingKey}/{timeCode}.json
+      // パターン: ranking/{areaType}/{rankingKey}/{yearCode}.json (yearCodeは4桁年度コード)
       const pattern = new RegExp(
         `^ranking/${areaType}/${rankingKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/(.+)\\.json$`
       );
@@ -67,7 +67,13 @@ export class MetadataGenerator {
         if (match && match[1]) {
           // metadata.jsonは除外
           if (match[1] !== "metadata") {
-            timeCodes.push(match[1]);
+            const fileYearCode = match[1];
+            // ファイル名から抽出した4桁年度コードを10桁timeCodeに変換
+            // （generateTimesメソッドでextractYearを使用するため）
+            const timeCode = fileYearCode.length === 4 
+              ? `${fileYearCode}000000` 
+              : fileYearCode; // 既に10桁の場合はそのまま使用（互換性）
+            timeCodes.push(timeCode);
           }
         }
       }

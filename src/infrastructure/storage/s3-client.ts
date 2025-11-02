@@ -120,19 +120,30 @@ export class R2S3Client {
   }
 
   /**
-   * オブジェクト一覧を取得
+   * オブジェクト一覧を取得（ページネーション対応）
    */
   async listObjects(prefix?: string): Promise<string[]> {
-    const command = new ListObjectsV2Command({
-      Bucket: this.bucketName,
-      Prefix: prefix,
-    });
+    const allKeys: string[] = [];
+    let continuationToken: string | undefined = undefined;
 
-    const response = await this.client.send(command);
+    do {
+      const command = new ListObjectsV2Command({
+        Bucket: this.bucketName,
+        Prefix: prefix,
+        ContinuationToken: continuationToken,
+      });
 
-    return (
-      response.Contents?.map((obj) => obj.Key || "").filter((key) => key) || []
-    );
+      const response = await this.client.send(command);
+
+      if (response.Contents) {
+        const keys = response.Contents.map((obj) => obj.Key || "").filter((key) => key);
+        allKeys.push(...keys);
+      }
+
+      continuationToken = response.NextContinuationToken;
+    } while (continuationToken);
+
+    return allKeys;
   }
 }
 

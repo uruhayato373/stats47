@@ -27,6 +27,20 @@ export class EstatRankingR2Repository {
   }
 
   /**
+   * 10桁のtimeCodeから4桁の年度コードを抽出
+   *
+   * @param timeCode - 時間コード（例: "2020000000"）
+   * @returns 年度コード（例: "2020"）
+   */
+  private static extractYearFromTimeCode(timeCode: string): string {
+    // 10桁の時間コードから最初の4桁を抽出
+    if (timeCode.length >= 4) {
+      return timeCode.substring(0, 4);
+    }
+    return timeCode;
+  }
+
+  /**
    * ランキングデータをR2に保存
    *
    * @param areaType - 地域タイプ（prefecture/city/national）
@@ -41,8 +55,10 @@ export class EstatRankingR2Repository {
     timeCode: string,
     statsSchemas: StatsSchema[]
   ): Promise<{ key: string; size: number }> {
-    // キー生成: ranking/{areaType}/{rankingKey}/{timeCode}.json
-    const key = `ranking/${areaType}/${rankingKey}/${timeCode}.json`;
+    // 10桁timeCodeから4桁年度コードを抽出してファイル名に使用
+    const yearCode = this.extractYearFromTimeCode(timeCode);
+    // キー生成: ranking/{areaType}/{rankingKey}/{yearCode}.json
+    const key = `ranking/${areaType}/${rankingKey}/${yearCode}.json`;
 
     // StatsSchema[]をJSON形式で保存
     const jsonString = JSON.stringify(statsSchemas, null, 2);
@@ -92,7 +108,9 @@ export class EstatRankingR2Repository {
     timeCode: string
   ): Promise<StatsSchema[] | null> {
     try {
-      const key = `ranking/${areaType}/${rankingKey}/${timeCode}.json`;
+      // 10桁timeCodeから4桁年度コードを抽出してファイル名に使用
+      const yearCode = this.extractYearFromTimeCode(timeCode);
+      const key = `ranking/${areaType}/${rankingKey}/${yearCode}.json`;
       const client = this.getClient();
       const buffer = await client.getObject(key);
 
@@ -131,7 +149,9 @@ export class EstatRankingR2Repository {
     rankingKey: string,
     timeCode: string
   ): string {
-    return `ranking/${areaType}/${rankingKey}/${timeCode}.json`;
+    // 10桁timeCodeから4桁年度コードを抽出してファイル名に使用
+    const yearCode = this.extractYearFromTimeCode(timeCode);
+    return `ranking/${areaType}/${rankingKey}/${yearCode}.json`;
   }
 
   /**
@@ -233,8 +253,16 @@ export class EstatRankingR2Repository {
       }
 
       console.log(
-        `[EstatRankingR2Repository] rankingディレクトリ配下の全データ削除完了: ${deletedKeys.length}件`
+        `[EstatRankingR2Repository] rankingディレクトリ配下の全データ削除完了: ${deletedKeys.length}/${allKeys.length}件`
       );
+
+      // 削除に失敗したオブジェクトがある場合は警告
+      if (deletedKeys.length < allKeys.length) {
+        const failedCount = allKeys.length - deletedKeys.length;
+        console.warn(
+          `[EstatRankingR2Repository] ${failedCount}件のオブジェクトの削除に失敗しました`
+        );
+      }
 
       return {
         deletedCount: deletedKeys.length,

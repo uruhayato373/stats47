@@ -1,28 +1,34 @@
 #!/usr/bin/env python3
 """
-e-Statランキングマッピングのシードファイル生成スクリプト
+e-Statランキングマッピングのシードファイル生成スクリプト（分割版）
 
 現在のローカルD1データベースからestat_ranking_mappingsテーブルのデータを取得し、
-INSERT OR REPLACE形式のSQLファイルを生成します。
+バッチサイズごとに分割されたINSERT OR REPLACE形式のSQLファイルを生成します。
 
 使用方法:
     python scripts/generate_estat_ranking_mappings_seed.py
 
 出力:
-    database/seeds/estat_ranking_mappings_seed.sql
+    database/seeds/estat_ranking_mappings_seed_part_001.sql
+    database/seeds/estat_ranking_mappings_seed_part_002.sql
+    ...
+    database/seeds/estat_ranking_mappings_seed_part_XXX.sql
 """
 
 import json
 import subprocess
 import sys
 from pathlib import Path
+from datetime import datetime
 from typing import Optional
 
 # プロジェクトルートのパス
 PROJECT_ROOT = Path(__file__).parent.parent
-SEED_OUTPUT_PATH = (
-    PROJECT_ROOT / "database" / "seeds" / "estat_ranking_mappings_seed.sql"
-)
+SEED_DIR = PROJECT_ROOT / "database" / "seeds"
+
+# バッチサイズ（SQLの長さ制限を避けるため、1ファイルあたりの最大レコード数）
+# SQLiteの制限（約1MB）を考慮して300件に設定
+BATCH_SIZE = 300
 
 
 def escape_sql_string(value: Optional[str]) -> str:
@@ -99,16 +105,16 @@ def fetch_data_from_database() -> list[dict]:
         sys.exit(1)
 
 
-def generate_seed_sql(rows: list[dict]) -> str:
-    """SQLシードファイルの内容を生成"""
+def generate_seed_sql_batch(rows: list[dict], batch_num: int, total_batches: int) -> str:
+    """SQLシードファイルの内容を生成（1バッチ分）"""
     if not rows:
-        return "-- estat_ranking_mappings テーブルにデータがありません\n"
+        return ""
 
     sql_lines = [
-        "-- e-Statランキングマッピングのシードデータ",
-        "-- 生成日: 自動生成",
-        f"-- データソース: ローカルD1データベース",
-        f"-- レコード数: {len(rows)}",
+        f"-- e-Statランキングマッピングのシードデータ（パート {batch_num}/{total_batches}）",
+        f"-- 生成日: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        "-- データソース: ローカルD1データベース",
+        f"-- このバッチのレコード数: {len(rows)}",
         "",
         "-- べき等性を保つため、INSERT OR REPLACEを使用",
         "-- このファイルは何度実行しても同じ結果になります",
@@ -152,32 +158,66 @@ def generate_seed_sql(rows: list[dict]) -> str:
 
 def main():
     """メイン処理"""
-    print("🔧 e-Statランキングマッピングシードファイル生成スクリプト")
-    print("=" * 50)
+    print("🔧 e-Statランキングマッピングシードファイル生成スクリプト（分割版）")
+    print("=" * 70)
 
     # データベースからデータを取得
     rows = fetch_data_from_database()
 
     if not rows:
-        print("⚠️  データが見つかりませんでした。空のseedファイルを作成します。")
-        rows = []
+        print("⚠️  データが見つかりませんでした。")
+        sys.exit(0)
 
-    # SQLファイルを生成
-    sql_content = generate_seed_sql(rows)
+    print(f"📊 {len(rows)}件のレコードを取得しました")
 
-    # ファイルに書き込み
-    SEED_OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    SEED_OUTPUT_PATH.write_text(sql_content, encoding="utf-8")
+    # 既存のシードファイル（パート番号付き）を削除
+    print("🧹 既存の分割シードファイルを削除中...")
+    for seed_file in SEED_DIR.glob("estat_ranking_mappings_seed_part_*.sql"):
+        seed_file.unlink()
+        print(f"  削除: {seed_file.name}")
 
-    print(f"✅ Seedファイルを作成しました: {SEED_OUTPUT_PATH}")
-    print(f"📊 レコード数: {len(rows)}")
-    print("")
+    # バッチに分割してSQLファイルを生成
+    total_batches = (len(rows) + BATCH_SIZE - 1) // BATCH_SIZE
+    print(f"📦 {total_batches}個のファイルに分割します（1ファイルあたり最大{BATCH_SIZE}件）")
+    print()
+
+    generated_files = []
+
+    for batch_num in range(total_batches):
+        batch_start = batch_num * BATCH_SIZE
+        batch_end = min(batch_start + BATCH_SIZE, len(rows))
+        batch_rows = rows[batch_start:batch_end]
+
+        # SQLファイルの内容を生成
+        sql_content = generate_seed_sql_batch(
+            batch_rows, batch_num + 1, total_batches
+        )
+
+        # ファイル名を生成（001, 002, ...）
+        part_num = batch_num + 1
+        filename = f"estat_ranking_mappings_seed_part_{part_num:03d}.sql"
+        file_path = SEED_DIR / filename
+
+        # ファイルに書き込み
+        SEED_DIR.mkdir(parents=True, exist_ok=True)
+        file_path.write_text(sql_content, encoding="utf-8")
+
+        generated_files.append(filename)
+        print(
+            f"✅ {filename} を作成しました: {len(batch_rows)}件（バッチ {batch_num + 1}/{total_batches}）"
+        )
+
+    print()
+    print("=" * 70)
+    print(f"✅ {len(generated_files)}個のシードファイルを生成しました")
+    print()
     print("次のコマンドで適用できます:")
-    print(
-        f"  npx wrangler d1 execute stats47 --local --file={SEED_OUTPUT_PATH}"
-    )
+    print("  APPLY_SEEDS=true npm run db:reset:local")
+    print()
+    print("または、個別に適用:")
+    for filename in generated_files:
+        print(f"  npx wrangler d1 execute stats47 --local --file=database/seeds/{filename}")
 
 
 if __name__ == "__main__":
     main()
-

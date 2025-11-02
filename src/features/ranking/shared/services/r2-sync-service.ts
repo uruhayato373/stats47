@@ -161,7 +161,7 @@ export class R2SyncService {
         );
 
         // キーからrankingKeyを抽出
-        // パターン: ranking/{areaType}/{rankingKey}/{timeCode}.json
+        // パターン: ranking/{areaType}/{rankingKey}/{yearCode}.json (yearCodeは4桁年度コード)
         const pattern = new RegExp(`^ranking/${at}/([^/]+)/([^/]+)\\.json$`);
 
         // キーをグループ化（同じrankingKeyのキーをまとめる）
@@ -202,16 +202,19 @@ export class R2SyncService {
           const key = fileKeys[0];
 
           try {
-            // ファイルキーからtimeCodeを抽出
+            // ファイルキーから年度コードを抽出（4桁形式を想定）
             const fileMatch = key.match(pattern);
             if (!fileMatch) continue;
-            const [, , fileTimeCode] = fileMatch;
+            const [, , fileYearCode] = fileMatch;
+
+            // 4桁年度コードを10桁timeCodeに変換（EstatRankingR2Repository.findRankingDataは10桁timeCodeを引数として受け取る）
+            const timeCode = `${fileYearCode}000000`;
 
             // メタデータ抽出（1つのJSONファイルを読み取り）
             const statsSchemas = await EstatRankingR2Repository.findRankingData(
               at,
               rankingKey,
-              fileTimeCode
+              timeCode
             );
 
             if (!statsSchemas || statsSchemas.length === 0) {

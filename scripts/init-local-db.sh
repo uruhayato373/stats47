@@ -96,9 +96,23 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
     }
   fi
   
-  # e-Statランキングマッピングシード
-  if [ -f "database/seeds/estat_ranking_mappings_seed.sql" ]; then
-    log_info "Applying estat_ranking_mappings seed..."
+  # e-Statランキングマッピングシード（分割版）
+  # 分割されたシードファイルを順次適用
+  estat_ranking_seed_files=$(find database/seeds -name "estat_ranking_mappings_seed_part_*.sql" -type f | sort)
+  if [ -n "$estat_ranking_seed_files" ]; then
+    log_info "Applying estat_ranking_mappings seeds (split files)..."
+    part_count=0
+    for seed_file in $estat_ranking_seed_files; do
+      part_count=$((part_count + 1))
+      log_info "Applying part $part_count: $(basename $seed_file)"
+      wrangler d1 execute stats47 --local --file="$seed_file" || {
+        log_warn "Failed to apply estat_ranking_mappings seed part: $seed_file"
+      }
+    done
+    log_info "Applied $part_count parts of estat_ranking_mappings seeds"
+  # 旧形式（単一ファイル）の互換性サポート
+  elif [ -f "database/seeds/estat_ranking_mappings_seed.sql" ]; then
+    log_info "Applying estat_ranking_mappings seed (single file)..."
     wrangler d1 execute stats47 --local --file=database/seeds/estat_ranking_mappings_seed.sql || {
       log_warn "Failed to apply estat_ranking_mappings seed"
     }
