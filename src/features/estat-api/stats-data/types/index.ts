@@ -2,6 +2,8 @@
  * e-Stat統計データ共通型定義
  */
 
+import { EstatStatsDataResponse } from "./stats-data-response";
+
 // e-Stat APIレスポンス型を再エクスポート
 export * from "./stats-data-response";
 

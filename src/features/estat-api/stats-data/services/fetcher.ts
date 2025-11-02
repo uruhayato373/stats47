@@ -6,13 +6,15 @@ import {
 } from "@/features/estat-api/core/config";
 
 import {
+  findStatsDataByStatsIdAndParams,
+  saveStatsDataCache,
+} from "../repositories/stats-data-r2-cache-repository";
+import {
   EstatStatsDataResponse,
   FetchOptions,
   FormattedEstatData,
   GetStatsDataParams,
 } from "../types";
-
-import { EstatStatsDataR2CacheRepository } from "../repositories/statsdataR2CacheRepository";
 
 import { formatStatsData } from "./formatter";
 
@@ -94,10 +96,7 @@ async function checkR2Cache(
   options: FetchOptions = {}
 ): Promise<EstatStatsDataResponse | null> {
   try {
-    return await EstatStatsDataR2CacheRepository.findByStatsIdAndParams(
-      statsDataId,
-      options
-    );
+    return await findStatsDataByStatsIdAndParams(statsDataId, options);
   } catch (err) {
     // R2設定がない場合は警告のみ表示
     if (err instanceof Error && err.message.includes("R2 S3設定")) {
@@ -122,7 +121,7 @@ async function saveToR2Cache(
   data: EstatStatsDataResponse
 ): Promise<void> {
   try {
-    await EstatStatsDataR2CacheRepository.save(statsDataId, options, data);
+    await saveStatsDataCache(statsDataId, options, data);
     console.log("✅ R2バックグラウンド保存完了:", statsDataId);
   } catch (err) {
     // R2設定がない場合は警告のみ表示
@@ -135,18 +134,19 @@ async function saveToR2Cache(
 }
 
 /**
- * 統計データを取得（生データ）
- * R2キャッシュ優先、キャッシュミス時はe-Stat APIから取得
+ * 統計データ取得の共通ロジック（内部関数）
  *
  * @param statsDataId - 統計表ID
  * @param options - 取得オプション
- * @returns 統計データのAPIレスポンス
+ * @param includeSource - 取得元情報を含めるかどうか
+ * @returns 統計データ（取得元情報付きの場合あり）
  * @throws {Error} API呼び出しが失敗した場合
  */
-export async function fetchStatsData(
+async function fetchStatsDataInternal(
   statsDataId: string,
-  options: FetchOptions = {}
-): Promise<EstatStatsDataResponse> {
+  options: FetchOptions = {},
+  includeSource: boolean
+): Promise<EstatStatsDataResponse | FetchStatsDataResult> {
   try {
     console.log(`🔵 Fetcher: 統計データ取得開始 - ${statsDataId}`);
     const startTime = Date.now();
@@ -157,6 +157,9 @@ export async function fetchStatsData(
       console.log(
         `✅ Fetcher: R2キャッシュから取得 (${Date.now() - startTime}ms)`
       );
+      if (includeSource) {
+        return { data: cached, source: "r2" };
+      }
       return cached;
     }
 
@@ -190,6 +193,10 @@ export async function fetchStatsData(
     void saveToR2Cache(statsDataId, options, response);
 
     console.log(`✅ Fetcher: 統計データ取得完了 (${Date.now() - startTime}ms)`);
+
+    if (includeSource) {
+      return { data: response, source: "api" };
+    }
     return response;
   } catch (error) {
     console.error("❌ Fetcher: 統計データ取得失敗:", error);
@@ -205,6 +212,23 @@ export async function fetchStatsData(
       }`
     );
   }
+}
+
+/**
+ * 統計データを取得（生データ）
+ * R2キャッシュ優先、キャッシュミス時はe-Stat APIから取得
+ *
+ * @param statsDataId - 統計表ID
+ * @param options - 取得オプション
+ * @returns 統計データのAPIレスポンス
+ * @throws {Error} API呼び出しが失敗した場合
+ */
+export async function fetchStatsData(
+  statsDataId: string,
+  options: FetchOptions = {}
+): Promise<EstatStatsDataResponse> {
+  const result = await fetchStatsDataInternal(statsDataId, options, false);
+  return result as EstatStatsDataResponse;
 }
 
 /**
@@ -234,64 +258,8 @@ export async function fetchStatsDataWithSource(
   statsDataId: string,
   options: FetchOptions = {}
 ): Promise<FetchStatsDataResult> {
-  try {
-    console.log(`🔵 Fetcher: 統計データ取得開始 - ${statsDataId}`);
-    const startTime = Date.now();
-
-    // 1. R2キャッシュを確認
-    const cached = await checkR2Cache(statsDataId, options);
-    if (cached) {
-      console.log(
-        `✅ Fetcher: R2キャッシュから取得 (${Date.now() - startTime}ms)`
-      );
-      return { data: cached, source: "r2" };
-    }
-
-    // 2. e-Stat APIから取得
-    const params: Omit<GetStatsDataParams, "appId"> = {
-      statsDataId,
-      metaGetFlg: "Y",
-      cntGetFlg: "N",
-      explanationGetFlg: "N",
-      annotationGetFlg: "N",
-      replaceSpChars: "0",
-      startPosition: 1,
-      limit: options.limit || 10000,
-      ...(options.categoryFilter && { cdCat01: options.categoryFilter }),
-      ...(options.yearFilter && { cdTime: options.yearFilter }),
-      ...(options.areaFilter && { cdArea: options.areaFilter }),
-    };
-
-    const requestParams = buildRequestParams(params, ESTAT_APP_ID);
-    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
-
-    const response = await executeHttpRequest<EstatStatsDataResponse>(
-      ESTAT_API.BASE_URL,
-      ESTAT_ENDPOINTS.GET_STATS_DATA,
-      requestParams
-    );
-
-    validateStatsDataResponse(response, url);
-
-    // 3. バックグラウンドでR2に保存（awaitしない）
-    void saveToR2Cache(statsDataId, options, response);
-
-    console.log(`✅ Fetcher: 統計データ取得完了 (${Date.now() - startTime}ms)`);
-    return { data: response, source: "api" };
-  } catch (error) {
-    console.error("❌ Fetcher: 統計データ取得失敗:", error);
-    console.error("Error details:", {
-      statsDataId,
-      options,
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    throw new Error(
-      `統計データの取得に失敗しました: ${
-        error instanceof Error ? error.message : "Unknown error"
-      }`
-    );
-  }
+  const result = await fetchStatsDataInternal(statsDataId, options, true);
+  return result as FetchStatsDataResult;
 }
 
 /**

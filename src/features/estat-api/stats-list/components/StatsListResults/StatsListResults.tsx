@@ -3,12 +3,12 @@
 import { useMemo, useState } from "react";
 
 import {
-    formatOpenDate,
-    formatSurveyDate,
-    getStatsFieldIcon,
-    getStatsFieldName,
-    getUpdateFrequency,
-    truncateTitle,
+  formatOpenDate,
+  formatSurveyDate,
+  getStatsFieldIcon,
+  getStatsFieldName,
+  getUpdateFrequency,
+  truncateTitle,
 } from "@/features/estat-api/stats-list/services/utils";
 import { StatsListTableInfo } from "@/features/estat-api/stats-list/types";
 
@@ -73,7 +73,9 @@ export function StatsListResults({
   // 周期の一覧を取得
   const cycles = useMemo(() => {
     const cycleSet = new Set(
-      tables.map((table) => table.cycle).filter(Boolean)
+      tables
+        .map((table) => table.cycle)
+        .filter((cycle): cycle is string => Boolean(cycle))
     );
     return Array.from(cycleSet).sort();
   }, [tables]);
