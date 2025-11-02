@@ -320,6 +320,18 @@ export class R2SyncService {
     // 実際の更新処理
     for (const item of items) {
       try {
+        // metadata.jsonからitemNameとunitを取得
+        const metadata = await EstatRankingR2Repository.findRankingMetadata(
+          item.areaType,
+          item.rankingKey
+        );
+
+        // metadata.jsonから値を取得（フォールバック値あり）
+        const itemName = metadata?.itemName || item.rankingKey;
+        const unitFromMetadata = metadata?.unit ?? item.unit;
+        const label = itemName;
+        const rankingName = itemName;
+
         // 既存データを確認（UPDATEでは既存データを保持するため、必要な情報を取得）
         const existing = await db
           .prepare(
@@ -342,13 +354,14 @@ export class R2SyncService {
           const groupKey = existing.group_key || item.rankingKey;
 
           // group_keyが変更される場合、UPDATE文に含める
+          // metadata.jsonから取得した値でlabel, ranking_name, unitを更新
           const updateFields = existing.group_key
-            ? `unit = ?, updated_at = CURRENT_TIMESTAMP`
-            : `unit = ?, group_key = ?, updated_at = CURRENT_TIMESTAMP`;
+            ? `label = ?, ranking_name = ?, unit = ?, updated_at = CURRENT_TIMESTAMP`
+            : `label = ?, ranking_name = ?, unit = ?, group_key = ?, updated_at = CURRENT_TIMESTAMP`;
 
           const bindValues = existing.group_key
-            ? [item.unit, item.rankingKey, item.areaType]
-            : [item.unit, groupKey, item.rankingKey, item.areaType];
+            ? [label, rankingName, unitFromMetadata, item.rankingKey, item.areaType]
+            : [label, rankingName, unitFromMetadata, groupKey, item.rankingKey, item.areaType];
 
           const result = await db
             .prepare(
@@ -362,7 +375,7 @@ export class R2SyncService {
           if (result.success && result.meta && result.meta.changes > 0) {
             stats.updated++;
             console.log(
-              `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (unit: ${existing.unit} → ${item.unit})`
+              `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (label: ${existing.ranking_name} → ${label}, ranking_name: ${existing.ranking_name} → ${rankingName}, unit: ${existing.unit} → ${unitFromMetadata})`
             );
 
             // group_keyがNULLだった場合、グループの存在確認・作成を実行
@@ -371,7 +384,7 @@ export class R2SyncService {
                 await this.ensureGroupExists(
                   db,
                   groupKey,
-                  existing.ranking_name,
+                  rankingName, // metadata.jsonから取得したranking_nameを使用
                   existing.annotation
                 );
               } catch (groupError) {
@@ -410,20 +423,13 @@ export class R2SyncService {
           }
         } else {
           // 新規作成
-          // rankingKeyからlabelとnameを自動生成
-          const label = item.rankingKey;
-          const name = item.rankingKey
-            .split("-")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-
           // group_keyはranking_keyと同じ値を設定
           const groupKey = item.rankingKey;
 
           // INSERT前にグループを確実に作成（FOREIGN KEY制約を満たすため）
           let finalGroupKey = groupKey;
           try {
-            await this.ensureGroupExists(db, groupKey, name, null);
+            await this.ensureGroupExists(db, groupKey, rankingName, null);
           } catch (groupError) {
             // グループ作成エラーは記録して続行（NULLでINSERTを試みる）
             const groupErrorMessage =
@@ -455,10 +461,10 @@ export class R2SyncService {
             .bind(
               item.rankingKey,
               item.areaType,
-              label,
-              name, // ranking_name
+              label, // metadata.jsonから取得したitemName
+              rankingName, // metadata.jsonから取得したitemName
               null, // annotation
-              item.unit,
+              unitFromMetadata, // metadata.jsonから取得したunit
               finalGroupKey, // group_key（グループ作成済みまたはnull）
               0, // display_order_in_group
               "interpolateBlues", // map_color_scheme
@@ -473,7 +479,7 @@ export class R2SyncService {
           if (result.success) {
             stats.created++;
             console.log(
-              `[R2SyncService] 作成完了: ${item.rankingKey}:${item.areaType} (unit: ${item.unit})`
+              `[R2SyncService] 作成完了: ${item.rankingKey}:${item.areaType} (label: ${label}, ranking_name: ${rankingName}, unit: ${unitFromMetadata})`
             );
           } else {
             const errorDetail =
@@ -485,7 +491,7 @@ export class R2SyncService {
               detail: errorDetail,
               rankingKey: item.rankingKey,
               areaType: item.areaType,
-              unit: item.unit,
+              unit: unitFromMetadata,
               meta: result.meta,
             };
             console.error(

@@ -1,0 +1,36 @@
+ranking_key,area_type,label,ranking_name,annotation,unit,group_key,is_active,created_at,updated_at
+aging-index,prefecture,aging-index,Aging Index,null,‐,aging-index,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+agricultural-income-ratio,prefecture,agricultural-income-ratio,Agricultural Income Ratio,null,％,agricultural-income-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+agricultural-output-per-employed-person,prefecture,agricultural-output-per-employed-person,Agricultural Output Per Employed Person,null,万円,agricultural-output-per-employed-person,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+annual-precipitation,prefecture,annual-precipitation,Annual Precipitation,null,mm,annual-precipitation,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+annual-sales-amount-per-employee,prefecture,annual-sales-amount-per-employee,Annual Sales Amount Per Employee,null,万円,annual-sales-amount-per-employee,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+average-persons-per-general-household,prefecture,average-persons-per-general-household,Average Persons Per General Household,null,人,average-persons-per-general-household,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+average-relative-humidity,prefecture,average-relative-humidity,Average Relative Humidity,null,％,average-relative-humidity,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+average-temperature,prefecture,average-temperature,Average Temperature,null,ﾟC,average-temperature,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+bank-deposit-balance-per-person,prefecture,bank-deposit-balance-per-person,Bank Deposit Balance Per Person,null,万円,bank-deposit-balance-per-person,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+block-park-count-per-100km2,prefecture,block-park-count-per-100km2,Block Park Count Per 100km2,null,所,block-park-count-per-100km2,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+building-fire-count-per-100-thousand-people,prefecture,building-fire-count-per-100-thousand-people,Building Fire Count Per 100 Thousand People,null,件,building-fire-count-per-100-thousand-people,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+city-gas-sales-volume,prefecture,city-gas-sales-volume,City Gas Sales Volume,null,万ＭＪ,city-gas-sales-volume,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+city-gas-supply-area-household-ratio,prefecture,city-gas-supply-area-household-ratio,City Gas Supply Area Household Ratio,null,％,city-gas-supply-area-household-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+complainant-rate-per-1000,prefecture,complainant-rate-per-1000,Complainant Rate Per 1000,null,‐,complainant-rate-per-1000,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+criminal-arrest-rate,prefecture,criminal-arrest-rate,Criminal Arrest Rate,null,％,criminal-arrest-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+criminal-recognition-count-of-serious-crime-rate,prefecture,criminal-recognition-count-of-serious-crime-rate,Criminal Recognition Count Of Serious Crime Rate,null,％,criminal-recognition-count-of-serious-crime-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+crude-birth-rate,prefecture,crude-birth-rate,Crude Birth Rate,null,‐,crude-birth-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+crude-death-rate,prefecture,crude-death-rate,Crude Death Rate,null,‐,crude-death-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+cultivated-land-area-ratio,prefecture,cultivated-land-area-ratio,Cultivated Land Area Ratio,null,％,cultivated-land-area-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+day-time-population-ratio,prefecture,day-time-population-ratio,Day Time Population Ratio,null,％,day-time-population-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+densely-inhabited-district-population-density,prefecture,densely-inhabited-district-population-density,Densely Inhabited District Population Density,null,人,densely-inhabited-district-population-density,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+densely-inhabited-district-population-ratio,prefecture,densely-inhabited-district-population-ratio,Densely Inhabited District Population Ratio,null,％,densely-inhabited-district-population-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+densely-populated-area-change-rate,prefecture,densely-populated-area-change-rate,Densely Populated Area Change Rate,null,％,densely-populated-area-change-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+densely-populated-area-ratio,prefecture,densely-populated-area-ratio,Densely Populated Area Ratio,null,％,densely-populated-area-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+dependent-population-index,prefecture,dependent-population-index,Dependent Population Index,null,‐,dependent-population-index,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+deposit-balance-per-person,prefecture,deposit-balance-per-person,Deposit Balance Per Person,null,万円,deposit-balance-per-person,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+divorces-per-total-population,prefecture,divorces-per-total-population,Divorces Per Total Population,null,‐,divorces-per-total-population,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+dual-income-household-ratio,prefecture,dual-income-household-ratio,Dual Income Household Ratio,null,％,dual-income-household-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+electricity-generation-capacity,prefecture,electricity-generation-capacity,Electricity Generation Capacity,null,Ｍｗｈ,electricity-generation-capacity,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+elementary-school-count-per-100k-6-11,prefecture,elementary-school-count-per-100k-6-11,Elementary School Count Per 100k 6 11,null,校,elementary-school-count-per-100k-6-11,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+elementary-school-students-per-teacher,prefecture,elementary-school-students-per-teacher,Elementary School Students Per Teacher,null,人,elementary-school-students-per-teacher,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+employed-people-ratio,prefecture,employed-people-ratio,Employed People Ratio,null,％,employed-people-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+employee-ratio,prefecture,employee-ratio,Employee Ratio,null,％,employee-ratio,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+employment-insurance-receipt-rate,prefecture,employment-insurance-receipt-rate,Employment Insurance Receipt Rate,null,％,employment-insurance-receipt-rate,1,2025-11-02 00:27:12,2025-11-02 00:30:49
+total-population,city,total-population,Total Population,null,人,total-population,1,2025-11-02 00:27:12,2025-11-02 00:30:49

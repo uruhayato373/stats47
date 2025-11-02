@@ -19,6 +19,7 @@ export default async function RankingItemEditPage({ params }: PageProps) {
     notFound();
   }
 
+  // データベースの値をそのまま使用（metadata.jsonの値は同期時にデータベースに保存済み）
   return (
     <div className="max-w-7xl mx-auto px-2 py-4 space-y-4">
       <div className="flex items-center gap-4">
