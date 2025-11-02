@@ -6,7 +6,7 @@ import "server-only";
  * R2ストレージのrankingディレクトリを走査し、ranking_itemsテーブルを自動生成・更新する機能を提供します。
  */
 
-import { getD1 } from "../db/d1";
+import { getD1 } from "@/infrastructure/database";
 // estat-apiドメインのR2リポジトリを使用（ランキングデータの保存/取得はestat-apiの責務）
 import { EstatRankingR2Repository } from "@/features/estat-api/ranking-mappings/repositories/rankingR2Repository";
 import type { D1Database } from "@cloudflare/workers-types";

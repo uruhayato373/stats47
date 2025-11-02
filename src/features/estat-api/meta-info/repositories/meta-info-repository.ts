@@ -21,7 +21,7 @@ import "server-only";
 
 import type { AreaType } from "@/features/area";
 
-import { getD1 } from "../db/d1";
+import { getD1 } from "@/infrastructure/database";
 
 import type {
   SavedEstatMetaInfo,

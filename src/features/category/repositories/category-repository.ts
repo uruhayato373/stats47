@@ -19,7 +19,7 @@ import "server-only";
  * - delete: 削除
  */
 
-import { getD1 } from "../db/d1";
+import { getD1 } from "@/infrastructure/database";
 
 import { CATEGORY_QUERIES, SUBCATEGORY_QUERIES } from "./category-queries";
 

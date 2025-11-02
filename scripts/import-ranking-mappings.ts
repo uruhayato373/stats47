@@ -18,7 +18,7 @@
  */
 
 import { readFileSync } from "fs";
-import { getD1 } from "../src/features/estat-api/db/d1";
+import { getD1 } from "../src/infrastructure/database";
 
 interface CsvRow {
   stats_data_id: string;

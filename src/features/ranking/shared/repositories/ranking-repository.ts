@@ -12,7 +12,7 @@ import { findSubcategoryByName } from "@/features/category/repositories/category
 
 import { buildEnvironmentConfig } from "@/lib/environment";
 
-import { getD1 } from "../db/d1";
+import { getD1 } from "@/infrastructure/database";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
 import type { RankingItem, RankingItemDB } from "../../items/types";

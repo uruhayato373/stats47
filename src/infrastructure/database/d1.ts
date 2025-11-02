@@ -1,10 +1,25 @@
-// Cloudflare D1対応 DB Providerユーティリティ
+/**
+ * Cloudflare D1対応 データベースクライアント
+ *
+ * このモジュールは、Cloudflare D1データベースへのアクセスを提供します。
+ * 開発環境、ステージング環境、本番環境のすべてに対応しています。
+ *
+ * 責務:
+ * - D1データベースバインディングの取得
+ * - ローカル開発環境でのSQLiteアダプタ提供
+ * - エラーハンドリングと分かりやすいエラーメッセージ
+ */
+
+import "server-only";
+
 export type D1Database = any; // cloudflare/workers-types で型定義できる場合は利用可
 
 /**
  * ローカルSQLiteデータベースへのアクセスを提供するD1互換アダプタ
- * 
+ *
  * better-sqlite3を使用してローカルの.wrangler/state/v3/d1/*.sqliteファイルにアクセスします
+ *
+ * @returns D1互換データベースオブジェクト、またはnull（クライアントサイドまたはエラー時）
  */
 function createLocalD1Adapter(): D1Database | null {
   // サーバーサイドでのみ実行
@@ -13,10 +28,14 @@ function createLocalD1Adapter(): D1Database | null {
   }
 
   try {
-    // better-sqlite3を動的にインポート（サーバーサイドのみ）
-    const Database = require("better-sqlite3");
+    // 動的インポートでfsとpathを取得（サーバーサイドのみ）
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const fs = require("fs");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const path = require("path");
+    // better-sqlite3を動的にインポート（サーバーサイドのみ）
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
 
     // ローカルD1データベースのパスを検索
     const possiblePaths = [
@@ -27,41 +46,24 @@ function createLocalD1Adapter(): D1Database | null {
 
     let dbPath: string | null = null;
 
-    // 再帰的にファイルを検索する関数
-    const findSqliteFile = (dir: string): string | null => {
-      if (!fs.existsSync(dir)) return null;
+    for (const basePath of possiblePaths) {
+      if (!basePath || !fs.existsSync(basePath)) continue;
+
+      // ディレクトリ内の.sqliteファイルを検索
+      const files = fs.readdirSync(basePath, { recursive: true });
+      const sqliteFile = files.find(
+        (file: string | Buffer): file is string =>
+          typeof file === "string" && file.endsWith(".sqlite")
+      );
+
+      if (sqliteFile) {
+        dbPath = path.join(basePath, sqliteFile);
+        break;
+      }
 
       // ディレクトリ自体が.sqliteファイルの場合
-      if (dir.endsWith(".sqlite") && fs.statSync(dir).isFile()) {
-        return dir;
-      }
-
-      try {
-        const entries = fs.readdirSync(dir, { withFileTypes: true });
-        
-        for (const entry of entries) {
-          const fullPath = path.join(dir, entry.name);
-          
-          if (entry.isFile() && entry.name.endsWith(".sqlite")) {
-            return fullPath;
-          }
-          
-          if (entry.isDirectory()) {
-            const found = findSqliteFile(fullPath);
-            if (found) return found;
-          }
-        }
-      } catch (error) {
-        // 読み取りエラーは無視
-      }
-      
-      return null;
-    };
-
-    for (const basePath of possiblePaths) {
-      const found = findSqliteFile(basePath);
-      if (found) {
-        dbPath = found;
+      if (basePath.endsWith(".sqlite")) {
+        dbPath = basePath;
         break;
       }
     }
@@ -80,7 +82,8 @@ function createLocalD1Adapter(): D1Database | null {
           return {
             all: async () => {
               try {
-                const results = boundArgs.length > 0 ? stmt.all(...boundArgs) : stmt.all();
+                const results =
+                  boundArgs.length > 0 ? stmt.all(...boundArgs) : stmt.all();
                 return { results, success: true };
               } catch (error) {
                 return { results: [], success: false, error };
@@ -88,7 +91,8 @@ function createLocalD1Adapter(): D1Database | null {
             },
             first: async () => {
               try {
-                const result = boundArgs.length > 0 ? stmt.get(...boundArgs) : stmt.get();
+                const result =
+                  boundArgs.length > 0 ? stmt.get(...boundArgs) : stmt.get();
                 return result || null;
               } catch (error) {
                 return null;
@@ -96,7 +100,8 @@ function createLocalD1Adapter(): D1Database | null {
             },
             run: async () => {
               try {
-                const result = boundArgs.length > 0 ? stmt.run(...boundArgs) : stmt.run();
+                const result =
+                  boundArgs.length > 0 ? stmt.run(...boundArgs) : stmt.run();
                 return {
                   success: true,
                   meta: {
@@ -109,11 +114,13 @@ function createLocalD1Adapter(): D1Database | null {
               }
             },
             bind: (...args: any[]) => {
+              // bind()を呼び出すと、新しいステートメントを返す（チェーン可能）
               return createStmt(...args);
             },
           };
         };
-        
+
+        // prepare()が返すオブジェクトは、直接.all()や.bind()を呼び出せる
         return createStmt();
       },
       exec: (sql: string) => {
@@ -121,6 +128,7 @@ function createLocalD1Adapter(): D1Database | null {
       },
     } as D1Database;
   } catch (error) {
+    // better-sqlite3が利用できない、またはインポートエラーの場合
     return null;
   }
 }
@@ -129,17 +137,26 @@ function createLocalD1Adapter(): D1Database | null {
  * Cloudflare D1データベースにアクセスするための関数
  *
  * バインディング名: STATS47_DB（wrangler.tomlで定義）
- * 
+ *
  * アクセス方法の優先順位:
  * 1. globalThis.STATS47_DB（Cloudflare Pages/Workers環境）
  * 2. process.env.STATS47_DB（環境変数経由）
  * 3. ローカルSQLiteアダプタ（開発環境、better-sqlite3使用）
  * 4. globalThis.DB（フォールバック、互換性のため）
- * 
+ *
  * ローカル開発時の注意:
  * - 開発環境では、ローカルの.wrangler/state/v3/d1/*.sqliteファイルに直接アクセスします
  * - `npx wrangler dev`を別ターミナルで実行すると、SQLiteファイルが作成されます
  * - または`npm run db:init:local`を実行してデータベースを初期化できます
+ *
+ * @returns D1データベースオブジェクト
+ * @throws {Error} バインディングが見つからない場合
+ *
+ * @example
+ * ```typescript
+ * const db = getD1();
+ * const result = await db.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first();
+ * ```
  */
 export const getD1 = (): D1Database => {
   // 優先1: STATS47_DBバインディング（Cloudflare Pages/Workers環境）
@@ -182,4 +199,28 @@ export const getD1 = (): D1Database => {
 
   throw new Error(errorMessage);
 };
+
+/**
+ * SQLクエリを実行するユーティリティ関数
+ *
+ * @param sql - 実行するSQLクエリ
+ * @param params - クエリパラメータ
+ * @returns クエリ結果
+ *
+ * @example
+ * ```typescript
+ * const results = await runQuery("SELECT * FROM users WHERE id = ?", userId);
+ * ```
+ */
+export async function runQuery(
+  sql: string,
+  ...params: any[]
+): Promise<{ results: any[]; success: boolean; error?: unknown }> {
+  const db = getD1();
+  const stmt = db.prepare(sql);
+  if (params && params.length > 0) {
+    return await stmt.bind(...params).all();
+  }
+  return await stmt.all();
+}
 

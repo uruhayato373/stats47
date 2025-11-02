@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { User } from '../types';
-import { runQuery } from '../db/d1';
+import { runQuery } from "@/infrastructure/database";
 
 export class AuthService {
   static async login(email: string, passwordHash: string): Promise<User | null> {

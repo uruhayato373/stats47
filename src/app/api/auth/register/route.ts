@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
-import { getD1 } from "@/features/auth/db/d1";
+import { getD1 } from "@/infrastructure/database";
 
 export async function POST(request: NextRequest) {
   try {
