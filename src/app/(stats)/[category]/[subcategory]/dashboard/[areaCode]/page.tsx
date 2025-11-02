@@ -1,4 +1,5 @@
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
+
 import { determineAreaType } from "@/features/area/utils/code-converter";
 import { loadDashboardData } from "@/features/dashboard/actions/loadDashboardData";
 import { widgetComponents } from "@/features/dashboard/widgets/registry";
@@ -15,8 +16,14 @@ export default async function Page({ params }: PageProps) {
   const { category, subcategory, areaCode } = await params;
 
   // landweather/land-area/dashboard/00000 でPrefectureMapを表示
-  if (category === "landweather" && subcategory === "land-area" && areaCode === "00000") {
-    const { PrefectureMap } = await import("@/features/visualization/map/common/PrefectureMap");
+  if (
+    category === "landweather" &&
+    subcategory === "land-area" &&
+    areaCode === "00000"
+  ) {
+    const { PrefectureMap } = await import(
+      "@/features/visualization/map/common/PrefectureMap"
+    );
     return (
       <div className="w-full h-screen p-4">
         <PrefectureMap width={1200} height={800} />
@@ -25,8 +32,14 @@ export default async function Page({ params }: PageProps) {
   }
 
   // landweather/land-area/dashboard/00000/city-map でCityMapを表示
-  if (category === "landweather" && subcategory === "land-area" && areaCode === "city-map") {
-    const { CityMap } = await import("@/features/visualization/map/common/CityMap");
+  if (
+    category === "landweather" &&
+    subcategory === "land-area" &&
+    areaCode === "city-map"
+  ) {
+    const { CityMap } = await import(
+      "@/features/visualization/map/common/CityMap"
+    );
     return (
       <div className="w-full h-screen p-4">
         <CityMap width={1200} height={800} />
@@ -38,11 +51,18 @@ export default async function Page({ params }: PageProps) {
 
   // 市区町村は従来のダッシュボードを維持（必要に応じて後日レイアウト化）
   if (areaType === "city") {
-    return <div><MunicipalityDashboard areaCode={areaCode} /></div>;
+    return (
+      <div>
+        <MunicipalityDashboard areaCode={areaCode} />
+      </div>
+    );
   }
 
   // レイアウトとデータの取得
-  const { layout, data } = await loadDashboardData({ subcategoryId: subcategory, areaCode });
+  const { layout, data } = await loadDashboardData({
+    subcategoryId: subcategory,
+    areaCode,
+  });
 
   if (!layout) {
     return <div>このサブカテゴリのダッシュボードは未定義です。</div>;
