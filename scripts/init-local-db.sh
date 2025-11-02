@@ -105,6 +105,8 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
   fi
   
   # ランキング関連シード
+  # 注意: 順序が重要です（ranking_groups → ranking_group_subcategories → ranking_items）
+  
   if [ -f "database/seeds/ranking_groups_seed.sql" ]; then
     log_info "Applying ranking_groups seed..."
     wrangler d1 execute stats47 --local --file=database/seeds/ranking_groups_seed.sql || {
@@ -112,8 +114,21 @@ if [ "${APPLY_SEEDS}" = "true" ]; then
     }
   fi
   
-  # ranking_items_seed.sql は削除されました
-  # ranking_itemsテーブルはR2→D1同期機能で自動生成・更新されます
+  if [ -f "database/seeds/ranking_group_subcategories_seed.sql" ]; then
+    log_info "Applying ranking_group_subcategories seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/ranking_group_subcategories_seed.sql || {
+      log_warn "Failed to apply ranking_group_subcategories seed"
+    }
+  fi
+  
+  if [ -f "database/seeds/ranking_items_seed.sql" ]; then
+    log_info "Applying ranking_items seed..."
+    wrangler d1 execute stats47 --local --file=database/seeds/ranking_items_seed.sql || {
+      log_warn "Failed to apply ranking_items seed"
+    }
+  fi
+  
+  # 注意: ranking_itemsテーブルはR2→D1同期機能で自動生成・更新されることも可能です
   # 管理画面の「R2→D1同期（ranking_items自動生成）」から実行してください
   
   # ダッシュボード関連シード

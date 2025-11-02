@@ -39,7 +39,19 @@ export * from "./utils";
  */
 export function listCategories(): Category[] {
   const categoriesData = require("@/config/categories.json");
-  return categoriesData.default || categoriesData;
+  const rawCategories = categoriesData.default || categoriesData;
+  
+  // categories.jsonの構造（id/name）をCategoryインターフェース（categoryName/subcategoryName）に変換
+  return rawCategories.map((cat: any) => ({
+    categoryName: cat.id || cat.categoryName || "",
+    name: cat.name || "",
+    icon: cat.icon,
+    subcategories: (cat.subcategories || []).map((sub: any) => ({
+      subcategoryName: sub.id || sub.subcategoryName || "",
+      name: sub.name || "",
+      categoryName: cat.id || cat.categoryName || "",
+    })),
+  }));
 }
 
 /**
@@ -64,6 +76,7 @@ export function findSubcategoryByName(
   const categories = listCategories();
 
   for (const category of categories) {
+    // listCategories()で既に変換されているので、そのままsubcategoryNameで検索
     const subcategory = category.subcategories.find(
       (sub) => sub.subcategoryName === subcategoryName
     );

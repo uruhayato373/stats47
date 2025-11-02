@@ -357,8 +357,14 @@ export class RankingRepository {
       // categories.jsonからサブカテゴリ設定を取得
       const subcategory = findSubcategoryByName(subcategoryId);
       if (!subcategory) {
+        console.error(`[RankingRepository] サブカテゴリが見つかりません: ${subcategoryId}`);
         return null;
       }
+
+      console.log(`[RankingRepository] サブカテゴリが見つかりました:`, {
+        subcategoryId,
+        foundSubcategory: subcategory,
+      });
 
       const subcategoryConfig = {
         id: subcategory.subcategoryName,
@@ -369,6 +375,10 @@ export class RankingRepository {
         defaultRankingKey: "",
       };
 
+      // データベースクエリでは、subcategoryId（URLパラメータ）を直接使用
+      // ranking_group_subcategories.subcategory_idはsubcategory_keyを参照
+      console.log(`[RankingRepository] データベースクエリを実行: subcategoryId=${subcategoryId}`);
+      
       // 1. グループ情報を取得（junction table経由）
       const groupsResult = await this.db
         .prepare(
@@ -382,6 +392,11 @@ export class RankingRepository {
         )
         .bind(subcategoryId)
         .all();
+
+      console.log(`[RankingRepository] グループ取得結果:`, {
+        count: groupsResult.results?.length || 0,
+        groups: groupsResult.results,
+      });
 
       const groups: RankingGroup[] = [];
 

@@ -34,8 +34,15 @@ export async function RankingItemsSidebar({
 
   try {
     // データベースからグループを取得（サーバーサイドでDBアクセス）
+    console.log(`[RankingItemsSidebar] サブカテゴリでグループを取得: ${subcategory}`);
     const repository = await RankingRepository.create();
     const config = await repository.getRankingGroupsBySubcategory(subcategory);
+    
+    console.log(`[RankingItemsSidebar] 取得結果:`, {
+      hasConfig: !!config,
+      groupsCount: config?.groups.length || 0,
+      groups: config?.groups.map(g => ({ key: g.groupKey, name: g.name, itemsCount: g.items.length })),
+    });
     
     if (config) {
       // グループのみを表示（ungroupedItemsは除外）
