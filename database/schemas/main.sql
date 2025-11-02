@@ -1,8 +1,9 @@
 -- stats47 統合データベーススキーマ
--- 認証、e-Statメタデータ、ランキング、ダッシュボードを統合
+-- 認証、e-Statメタデータ、ランキングを統合
 -- 作成日: 2024-12-19
 -- 最終更新: 2025-01-31
 -- 備考: マイグレーション履歴（025-038）を統合した完全版スキーマ
+-- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、データベーステーブルは使用しません
 
 -- ============================================================================
 -- 1. 認証関連テーブル（Auth.js準拠）
@@ -176,51 +177,10 @@ CREATE TABLE IF NOT EXISTS ranking_group_subcategories (
 -- ============================================================================
 -- 5. ダッシュボード関連テーブル
 -- ============================================================================
-
--- dashboard_configs: ダッシュボード設定テーブル
-CREATE TABLE IF NOT EXISTS dashboard_configs (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  subcategory_id TEXT NOT NULL,
-  area_type TEXT NOT NULL CHECK(area_type IN ('national', 'prefecture')),
-  layout_type TEXT NOT NULL DEFAULT 'grid' CHECK(layout_type IN ('grid', 'stacked', 'custom')),
-  version INTEGER NOT NULL DEFAULT 1,
-  is_active BOOLEAN NOT NULL DEFAULT 1,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(subcategory_id, area_type)
-);
-
--- dashboard_widgets: ダッシュボードウィジェットテーブル
-CREATE TABLE IF NOT EXISTS dashboard_widgets (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  dashboard_config_id INTEGER NOT NULL,
-  widget_type TEXT NOT NULL CHECK(widget_type IN ('metric', 'line-chart', 'bar-chart', 'area-chart', 'table')),
-  widget_key TEXT NOT NULL,
-  title TEXT NOT NULL,
-  config TEXT,
-  data_source_type TEXT NOT NULL CHECK(data_source_type IN ('ranking', 'estat', 'mock', 'custom')),
-  data_source_key TEXT NOT NULL,
-  grid_col_span INTEGER NOT NULL DEFAULT 1,
-  grid_row_span INTEGER NOT NULL DEFAULT 1,
-  display_order INTEGER NOT NULL DEFAULT 0,
-  is_visible BOOLEAN NOT NULL DEFAULT 1,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (dashboard_config_id) REFERENCES dashboard_configs(id) ON DELETE CASCADE,
-  UNIQUE(dashboard_config_id, widget_key)
-);
-
--- widget_templates: ウィジェットテンプレートテーブル
-CREATE TABLE IF NOT EXISTS widget_templates (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  template_key TEXT NOT NULL UNIQUE,
-  name TEXT NOT NULL,
-  widget_type TEXT NOT NULL,
-  default_config TEXT,
-  description TEXT,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+-- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、
+-- データベーステーブルは使用しません。
+-- 各サブカテゴリのダッシュボードコンポーネントは以下の場所に配置されています：
+-- src/features/dashboard/components/[category]/[subcategory]/[ComponentName]Dashboard.tsx
 
 -- ============================================================================
 -- 6. インデックス作成
@@ -263,13 +223,8 @@ CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_subcategory ON rankin
 CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_display_order ON ranking_group_subcategories(subcategory_id, display_order);
 
 -- ダッシュボード関連インデックス
-CREATE INDEX IF NOT EXISTS idx_dashboard_configs_subcategory ON dashboard_configs(subcategory_id, area_type);
-CREATE INDEX IF NOT EXISTS idx_dashboard_configs_active ON dashboard_configs(is_active);
-CREATE INDEX IF NOT EXISTS idx_dashboard_widgets_config ON dashboard_widgets(dashboard_config_id);
-CREATE INDEX IF NOT EXISTS idx_dashboard_widgets_order ON dashboard_widgets(dashboard_config_id, display_order);
-CREATE INDEX IF NOT EXISTS idx_dashboard_widgets_visible ON dashboard_widgets(is_visible);
-CREATE INDEX IF NOT EXISTS idx_widget_templates_key ON widget_templates(template_key);
-CREATE INDEX IF NOT EXISTS idx_widget_templates_type ON widget_templates(widget_type);
+-- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、
+-- データベースインデックスは不要です。
 
 -- ============================================================================
 -- 7. ビュー作成

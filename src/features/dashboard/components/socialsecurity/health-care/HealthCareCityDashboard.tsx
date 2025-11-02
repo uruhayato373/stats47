@@ -18,7 +18,7 @@ export async function HealthCareCityDashboard({
   areaCode,
   areaType,
   areaLevel,
-}}: DashboardProps) {
+}: DashboardProps) {
   // TODO: 実際のデータ取得処理を実装
   // const data = await getCityHealthCareData(areaCode);
 
