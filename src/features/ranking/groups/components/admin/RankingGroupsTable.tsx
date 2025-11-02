@@ -1,3 +1,9 @@
+/**
+ * Ranking Groups Domain - Admin Components
+ *
+ * ランキンググループ管理画面用のコンポーネントを提供。
+ */
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -21,14 +27,29 @@ import type { Category } from "@/features/category/types/category.types";
 import type { RankingGroup } from "../../types";
 
 interface RankingGroupsTableProps {
+  /** 表示するランキンググループの配列 */
   groups: RankingGroup[];
 }
 
+/**
+ * ランキンググループ一覧テーブル
+ *
+ * ランキンググループを一覧表示し、サブカテゴリでフィルタリングできる。
+ * グループ名、サブカテゴリ、項目数、編集リンクを表示する。
+ *
+ * @param props - コンポーネントの props
+ * @param props.groups - 表示するランキンググループの配列
+ *
+ * @example
+ * ```tsx
+ * const groups = await repository.getAllRankingGroups();
+ * <RankingGroupsTable groups={groups} />
+ * ```
+ */
 export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("all");
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 
-  // カテゴリ一覧を取得
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -42,7 +63,12 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     fetchCategories();
   }, []);
 
-  // サブカテゴリIDからサブカテゴリ名を取得するヘルパー関数
+  /**
+   * サブカテゴリIDからサブカテゴリ名を取得
+   *
+   * @param subcategoryId - サブカテゴリID
+   * @returns サブカテゴリ名。見つからない場合はIDをそのまま返す
+   */
   const getSubcategoryName = (subcategoryId: string): string => {
     for (const category of categoriesList) {
       const subcategory = category.subcategories?.find(
@@ -52,10 +78,15 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
         return subcategory.subcategoryName;
       }
     }
-    return subcategoryId; // 見つからない場合はIDをそのまま返す
+    return subcategoryId;
   };
 
-  // サブカテゴリIDと名前のマッピングを作成
+  /**
+   * サブカテゴリIDと名前のマッピング
+   *
+   * カテゴリ一覧からサブカテゴリIDと名前の対応関係を作成し、
+   * フィルター選択肢の表示に使用する。
+   */
   const subcategoryMap = useMemo(() => {
     const map = new Map<string, string>();
     categoriesList.forEach((category) => {
@@ -68,7 +99,12 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     return map;
   }, [categoriesList]);
 
-  // サブカテゴリでフィルタリング（いずれかのサブカテゴリに一致するグループを表示）
+  /**
+   * フィルタリングされたグループ一覧
+   *
+   * 選択されたサブカテゴリに一致するグループのみを表示する。
+   * "all"が選択されている場合はすべてのグループを表示。
+   */
   const filteredGroups =
     selectedSubcategory === "all"
       ? groups
@@ -76,7 +112,12 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
           group.subcategoryIds.includes(selectedSubcategory)
         );
 
-  // ユニークなサブカテゴリIDを取得（表示用に名前付き）
+  /**
+   * ユニークなサブカテゴリIDの配列
+   *
+   * フィルター選択肢として使用するため、全グループから
+   * サブカテゴリIDを抽出し、重複を除去した配列。
+   */
   const subcategories = Array.from(
     new Set(groups.flatMap((group) => group.subcategoryIds))
   );

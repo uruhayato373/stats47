@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Checkbox } from "@/components/atoms/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -55,20 +54,22 @@ export interface CategorySettingsFormRef {
   getValues: () => CategorySettingsFormValues;
 }
 
-export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, CategorySettingsFormProps>(
-  ({ item }, ref) => {
-    const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [categoriesLoading, setCategoriesLoading] = useState(true);
+export const CategorySettingsForm = forwardRef<
+  CategorySettingsFormRef,
+  CategorySettingsFormProps
+>(({ item }, ref) => {
+  const [availableGroups, setAvailableGroups] = useState<RankingGroup[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
 
-    const form = useForm<CategorySettingsFormValues>({
+  const form = useForm<CategorySettingsFormValues>({
     resolver: zodResolver(categorySettingsSchema),
     defaultValues: {
       categoryId: item?.categoryId || "",
       subcategoryId: item?.subcategoryId || "",
-      groupId: item?.groupId || null,
-      displayOrderInGroup: item?.displayOrderInGroup || 0,
+      groupId: item?.groupId ?? null,
+      displayOrderInGroup: item?.displayOrderInGroup ?? 0,
     },
   });
 
@@ -93,7 +94,9 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
   }, []);
 
   // 選択されたカテゴリのサブカテゴリを取得
-  const selectedCategory = categories.find((c) => c.categoryKey === selectedCategoryId);
+  const selectedCategory = categories.find(
+    (c) => c.categoryKey === selectedCategoryId
+  );
   const subcategories = selectedCategory?.subcategories || [];
 
   // サブカテゴリ変更時にグループを取得
@@ -143,22 +146,25 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
 
   // カテゴリ変更時にサブカテゴリをリセット
   useEffect(() => {
-    if (selectedCategoryId && !subcategories.find((s) => s.subcategoryKey === selectedSubcategoryId)) {
+    if (
+      selectedCategoryId &&
+      !subcategories.find((s) => s.subcategoryKey === selectedSubcategoryId)
+    ) {
       form.setValue("subcategoryId", "");
       form.setValue("groupId", null);
     }
   }, [selectedCategoryId, selectedSubcategoryId, subcategories, form]);
 
-    useImperativeHandle(ref, () => ({
-      getValues: () => form.getValues(),
-    }));
+  useImperativeHandle(ref, () => ({
+    getValues: () => form.getValues(),
+  }));
 
-    const onSubmit = async (values: CategorySettingsFormValues) => {
-      console.log("カテゴリ設定保存:", values);
-      // TODO: API呼び出し
-    };
+  const onSubmit = async (values: CategorySettingsFormValues) => {
+    console.log("カテゴリ設定保存:", values);
+    // TODO: API呼び出し
+  };
 
-    return (
+  return (
     <Form {...form}>
       <div className="space-y-4">
         {/* カテゴリ・サブカテゴリ・グループ選択（3列） */}
@@ -180,7 +186,10 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                     </FormControl>
                     <SelectContent>
                       {categories.map((category) => (
-                        <SelectItem key={category.categoryKey} value={category.categoryKey}>
+                        <SelectItem
+                          key={category.categoryKey}
+                          value={category.categoryKey}
+                        >
                           {category.categoryName}
                         </SelectItem>
                       ))}
@@ -210,7 +219,10 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                   </FormControl>
                   <SelectContent>
                     {subcategories.map((subcategory) => (
-                      <SelectItem key={subcategory.subcategoryKey} value={subcategory.subcategoryKey}>
+                      <SelectItem
+                        key={subcategory.subcategoryKey}
+                        value={subcategory.subcategoryKey}
+                      >
                         {subcategory.subcategoryName}
                       </SelectItem>
                     ))}
@@ -235,7 +247,9 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                       field.onChange(value ? parseInt(value, 10) : null)
                     }
                     value={field.value?.toString() || ""}
-                    disabled={!selectedSubcategoryId || availableGroups.length === 0}
+                    disabled={
+                      !selectedSubcategoryId || availableGroups.length === 0
+                    }
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -274,10 +288,14 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
                       min="0"
                       max="999"
                       {...field}
-                      onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 0)}
+                      onChange={(e) =>
+                        field.onChange(parseInt(e.target.value, 10) || 0)
+                      }
                     />
                   </FormControl>
-                  <FormDescription>グループ内での表示順序（0-999）</FormDescription>
+                  <FormDescription>
+                    グループ内での表示順序（0-999）
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -287,5 +305,6 @@ export const CategorySettingsForm = forwardRef<CategorySettingsFormRef, Category
       </div>
     </Form>
   );
-  }
-);
+});
+
+CategorySettingsForm.displayName = "CategorySettingsForm";

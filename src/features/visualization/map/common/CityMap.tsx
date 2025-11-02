@@ -13,19 +13,16 @@ interface CityMapProps extends MapConfig {
   /** 使用する地図ライブラリ */
   library?: "d3" | "leaflet" | "mapbox";
   /** 市区町村クリック時のコールバック */
-  onCityClick?: (feature: any) => void;
+  onCityClick?: (feature: unknown) => void;
   /** 市区町村ホバー時のコールバック */
-  onCityHover?: (feature: any | null) => void;
+  onCityHover?: (feature: unknown | null) => void;
 }
 
 /**
  * 市区町村地図コンポーネント
  * 複数の地図ライブラリを抽象化した統一インターフェース
  */
-export function CityMap({
-  library = "d3",
-  ...props
-}: CityMapProps) {
+export function CityMap({ library = "d3", ...props }: CityMapProps) {
   // 現在はD3.jsのみ実装
   // 将来的にLeafletやMapboxの実装を追加予定
   switch (library) {

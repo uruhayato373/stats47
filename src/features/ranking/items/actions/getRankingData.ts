@@ -1,6 +1,7 @@
 "use server";
 
 import { EstatRankingR2Repository } from "@/features/estat-api/ranking-mappings/repositories/rankingR2Repository";
+
 import type { StatsSchema } from "@/types/stats";
 
 /**
@@ -51,4 +52,3 @@ export async function getRankingData(
     return null;
   }
 }
-

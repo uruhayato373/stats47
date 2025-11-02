@@ -1,5 +1,6 @@
 "use server";
 import { RankingRepository } from "../../shared/repositories/ranking-repository";
+
 import type { RankingItem } from "../types";
 
 export async function getAllRankingItems(): Promise<RankingItem[]> {
@@ -11,4 +12,3 @@ export async function getAllRankingItems(): Promise<RankingItem[]> {
     return [];
   }
 }
-

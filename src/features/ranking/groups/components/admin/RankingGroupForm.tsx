@@ -1,18 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
 
-import { Button } from "@/components/atoms/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
+import { Button } from "@/components/atoms/ui/button";
 import { Checkbox } from "@/components/atoms/ui/checkbox";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
@@ -21,7 +22,6 @@ import { listCategoriesAction } from "@/features/category/actions";
 import type { Category } from "@/features/category/types/category.types";
 import { createRankingGroup } from "@/features/ranking/groups/actions/createRankingGroup";
 import { updateRankingGroup } from "@/features/ranking/groups/actions/updateRankingGroup";
-
 import type { RankingGroup } from "@/features/ranking/groups/types";
 
 interface RankingGroupFormProps {
@@ -31,7 +31,9 @@ interface RankingGroupFormProps {
 export function RankingGroupForm({ group }: RankingGroupFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<string[]>(
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<
+    string[]
+  >(
     group?.subcategoryIds
       ? group.subcategoryIds.filter((id) => id !== "uncategorized")
       : []
@@ -65,7 +67,7 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
   // サブカテゴリのチェックボックス変更時
   const handleSubcategoryToggle = (subcategoryId: string, checked: boolean) => {
     const UNCategorized_ID = "uncategorized";
-    
+
     if (checked) {
       // サブカテゴリを選択した場合、uncategorizedを除外
       setSelectedSubcategoryIds((prev) => {
@@ -78,7 +80,9 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
       });
     } else {
       // サブカテゴリを解除した場合
-      setSelectedSubcategoryIds((prev) => prev.filter((id) => id !== subcategoryId));
+      setSelectedSubcategoryIds((prev) =>
+        prev.filter((id) => id !== subcategoryId)
+      );
     }
   };
 
@@ -141,7 +145,9 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
     } catch (error) {
       console.error("Error saving ranking group:", error);
       toast.error(
-        `保存に失敗しました: ${error instanceof Error ? error.message : "Unknown error"}`
+        `保存に失敗しました: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
       );
     } finally {
       setIsSubmitting(false);
@@ -203,9 +209,8 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
                         })
                         .map((subcategory) => {
                           const subcategoryId = subcategory.subcategoryKey;
-                          const isChecked = selectedSubcategoryIds.includes(
-                            subcategoryId
-                          );
+                          const isChecked =
+                            selectedSubcategoryIds.includes(subcategoryId);
 
                           return (
                             <div

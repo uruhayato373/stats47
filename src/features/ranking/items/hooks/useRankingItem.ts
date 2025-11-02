@@ -8,6 +8,7 @@
 import { useEffect, useState } from "react";
 
 import { getRankingItem } from "../actions/getRankingItem";
+
 import type { RankingItem } from "../types";
 
 export interface UseRankingItemReturn {
@@ -64,4 +65,3 @@ export function useRankingItem(rankingKey: string): UseRankingItemReturn {
     error,
   };
 }
-

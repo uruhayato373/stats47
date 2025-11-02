@@ -107,9 +107,7 @@ export function CityMapD3({
 
     try {
       // TopoJSONデータを取得
-      const topology = await fetchAllCitiesTopology({
-        useCache: true,
-      });
+      const topology = await fetchAllCitiesTopology();
 
       // D3.js側でGeoJSONに変換
       const objectName = Object.keys(topology.objects)[0];
