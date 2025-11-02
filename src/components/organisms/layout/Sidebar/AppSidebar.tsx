@@ -41,8 +41,8 @@ export function AppSidebar() {
           <div className="space-y-1">
             {categories.map((category) => (
               <ActiveSidebarMenuButton
-                key={category.id}
-                href={`/${category.id}`}
+                key={category.categoryName}
+                href={`/${category.categoryName}`}
               >
                 {(() => {
                   const Icon = getCategoryIcon(category.icon ?? "");

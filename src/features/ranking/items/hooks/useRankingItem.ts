@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 
+import { getRankingItem } from "../actions/getRankingItem";
 import type { RankingItem } from "../types";
 
 export interface UseRankingItemReturn {
@@ -29,24 +30,16 @@ export function useRankingItem(rankingKey: string): UseRankingItemReturn {
     async function fetchRankingItem() {
       try {
         setIsLoading(true);
-        // API経由でランキング項目を取得
-        const response = await fetch(
-          `/api/rankings/item/${encodeURIComponent(rankingKey)}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        // Server Action経由でランキング項目を取得
+        const data = await getRankingItem(rankingKey);
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        if (!data) {
+          setError("ランキング項目が見つかりません");
+          setRankingItem(null);
+        } else {
+          setRankingItem(data);
+          setError(null);
         }
-
-        const data = await response.json();
-        setRankingItem(data);
-        setError(!data ? "ランキング項目が見つかりません" : null);
       } catch (err) {
         console.error("Failed to fetch ranking item:", err);
         setError(
@@ -54,12 +47,15 @@ export function useRankingItem(rankingKey: string): UseRankingItemReturn {
             ? err.message
             : "ランキング項目の取得に失敗しました"
         );
+        setRankingItem(null);
       } finally {
         setIsLoading(false);
       }
     }
 
-    fetchRankingItem();
+    if (rankingKey) {
+      fetchRankingItem();
+    }
   }, [rankingKey]);
 
   return {

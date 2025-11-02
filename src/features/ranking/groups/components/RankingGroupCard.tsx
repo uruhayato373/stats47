@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/cn";
 
@@ -20,9 +20,24 @@ interface RankingGroupCardProps {
 }
 
 /**
+ * グループ内の最初のアイテム（display_order_in_groupが最小）を取得
+ */
+function getFirstItemByDisplayOrder(group: RankingGroup): string | null {
+  if (group.items.length === 0) {
+    return null;
+  }
+
+  // display_order_in_groupでソートして、最小のものを取得
+  const sortedItems = [...group.items].sort(
+    (a, b) => a.displayOrderInGroup - b.displayOrderInGroup
+  );
+  return sortedItems[0].rankingKey;
+}
+
+/**
  * 個別のランキンググループカードコンポーネント
  *
- * ランキンググループの情報を表示し、クリックでグループのアイテムを表示します。
+ * ランキンググループの情報を表示し、クリックでグループ内の最初のアイテムに遷移します。
  *
  * @param props - コンポーネントのProps
  * @returns ランキンググループカードのJSX要素
@@ -32,17 +47,27 @@ export function RankingGroupCard({
   category,
   subcategory,
 }: RankingGroupCardProps) {
-  const searchParams = useSearchParams();
-  const currentGroup = searchParams.get("group");
-  const isActive = currentGroup === group.groupKey;
+  const pathname = usePathname();
+  
+  // グループ内の最初のアイテム（display_order_in_groupが最小）を取得
+  const firstItemKey = getFirstItemByDisplayOrder(group);
+  
+  // 現在のパスがこのグループのアイテムのパスかどうかをチェック
+  const isActive = firstItemKey
+    ? pathname === `/${category}/${subcategory}/ranking/${firstItemKey}`
+    : false;
 
-  const rankingUrl = `/${category}/${subcategory}/ranking?group=${group.groupKey}`;
+  // アイテムがない場合はリンクを無効化
+  const rankingUrl = firstItemKey
+    ? `/${category}/${subcategory}/ranking/${firstItemKey}`
+    : "#";
 
   return (
     <Link
       href={rankingUrl}
       className={cn(
         "block p-3 rounded-lg border transition-colors",
+        !firstItemKey && "opacity-50 cursor-not-allowed",
         isActive
           ? "border-primary bg-primary/10 hover:bg-primary/20"
           : "border-border hover:border-primary hover:bg-accent/50"
