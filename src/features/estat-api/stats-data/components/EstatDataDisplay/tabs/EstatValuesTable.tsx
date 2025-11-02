@@ -36,6 +36,25 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     });
   }
 
+  // データから選択肢を抽出
+  const areaNameOptions = Array.from(
+    new Set(statsSchemaData.map((d) => d.areaName).filter(Boolean))
+  )
+    .sort()
+    .map((value) => ({ value, label: value }));
+
+  const timeNameOptions = Array.from(
+    new Set(statsSchemaData.map((d) => d.timeName).filter(Boolean))
+  )
+    .sort()
+    .map((value) => ({ value, label: value }));
+
+  const categoryNameOptions = Array.from(
+    new Set(statsSchemaData.map((d) => d.categoryName).filter(Boolean))
+  )
+    .sort()
+    .map((value) => ({ value, label: value }));
+
   const columns: ColumnDef<StatsSchema>[] = [
     {
       accessorKey: "areaCode",
@@ -45,7 +64,11 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     {
       accessorKey: "areaName",
       header: "地域名",
-      meta: { filterable: true, filterType: "select" },
+      meta: {
+        filterable: true,
+        filterType: "select",
+        filterOptions: areaNameOptions,
+      },
     },
     {
       accessorKey: "timeCode",
@@ -55,7 +78,11 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     {
       accessorKey: "timeName",
       header: "時間名",
-      meta: { filterable: true, filterType: "select" },
+      meta: {
+        filterable: true,
+        filterType: "select",
+        filterOptions: timeNameOptions,
+      },
     },
     {
       accessorKey: "categoryCode",
@@ -65,7 +92,11 @@ export default function EstatValuesTable({ data }: EstatValuesTableProps) {
     {
       accessorKey: "categoryName",
       header: "カテゴリ名",
-      meta: { filterable: true, filterType: "select" },
+      meta: {
+        filterable: true,
+        filterType: "select",
+        filterOptions: categoryNameOptions,
+      },
     },
     {
       accessorKey: "value",
