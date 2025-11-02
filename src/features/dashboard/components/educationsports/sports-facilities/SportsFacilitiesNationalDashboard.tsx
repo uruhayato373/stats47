@@ -3,9 +3,14 @@
  * 全国レベルのスポーツ施設統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  PublicGymnasiumCountCard,
+  PrivateGymnasiumCountCard,
+  PublicSwimmingPoolCountCard,
+  PublicGymnasiumTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,28 +18,46 @@ import type { DashboardProps } from "../../../types/dashboard";
  * スポーツ施設全国ダッシュボード
  */
 export async function SportsFacilitiesNationalDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getNationalSportsFacilitiesData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>全国のスポーツ施設</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            全国レベルのスポーツ施設統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 体育館数（公共）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PublicGymnasiumCountCard
+          areaCode={areaCode}
+          title="体育館数（公共）"
+        />
+      </div>
+
+      {/* 体育館数（民間）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PrivateGymnasiumCountCard
+          areaCode={areaCode}
+          title="体育館数（民間）"
+        />
+      </div>
+
+      {/* 水泳プール数（公共）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PublicSwimmingPoolCountCard
+          areaCode={areaCode}
+          title="水泳プール数（公共）"
+        />
+      </div>
+
+      {/* 体育館数（公共）推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <PublicGymnasiumTrendChart
+          areaCode={areaCode}
+          title="体育館数（公共）推移"
+          description="年度別の体育館数（公共）の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }

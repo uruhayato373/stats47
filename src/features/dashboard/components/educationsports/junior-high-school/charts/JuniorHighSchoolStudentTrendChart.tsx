@@ -1,0 +1,96 @@
+/**
+ * 年度別中学校生徒数推移チャートコンポーネント（Server Component）
+ * e-Stat APIから直接データを取得
+ */
+
+import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
+import {
+  convertToStatsSchema,
+  formatStatsData,
+} from "@/features/estat-api/stats-data/services/formatter";
+
+import { JuniorHighSchoolStudentTrendChartClient } from "./JuniorHighSchoolStudentTrendChartClient";
+
+// e-Stat APIパラメータ定義
+const STATS_DATA_ID = "0000010105"; // 都道府県データ 基礎データ
+const CAT01_JUNIOR_HIGH_SCHOOL_STUDENT_COUNT = "E3501"; // 中学校生徒数
+
+interface JuniorHighSchoolStudentTrendChartProps {
+  /** 地域コード */
+  areaCode: string;
+  /** タイトル */
+  title: string;
+  /** 説明 */
+  description?: string;
+}
+
+/**
+ * 年度別中学校生徒数推移チャート（Server Component）
+ */
+export async function JuniorHighSchoolStudentTrendChart({
+  areaCode,
+  title,
+  description,
+}: JuniorHighSchoolStudentTrendChartProps) {
+  try {
+    // e-Stat APIから中学校生徒数データを取得（全年度）
+    const response = await fetchStatsData(STATS_DATA_ID, {
+      categoryFilter: CAT01_JUNIOR_HIGH_SCHOOL_STUDENT_COUNT,
+      areaFilter: areaCode,
+    });
+
+    // データを整形
+    const formattedData = formatStatsData(response);
+
+    // StatsSchema形式に変換
+    const statsSchemas = formattedData.values
+      .filter((value) => value.dimensions.area?.code === areaCode)
+      .map((value) => convertToStatsSchema(value))
+      .filter(
+        (schema): schema is NonNullable<typeof schema> => schema !== undefined
+      );
+
+    if (statsSchemas.length === 0) {
+      return (
+        <JuniorHighSchoolStudentTrendChartClient
+          chartData={[]}
+          title={title}
+          description={description}
+        />
+      );
+    }
+
+    // 年度順にソート
+    statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
+
+    // StatsSchemaをチャート用のデータ形式に変換
+    const chartData = statsSchemas.map((item) => ({
+      year: item.timeCode,
+      yearName: item.timeName,
+      value:
+        typeof item.value === "number" ? item.value : Number(item.value) || 0,
+      unit: item.unit,
+    }));
+
+    return (
+      <JuniorHighSchoolStudentTrendChartClient
+        chartData={chartData}
+        title={title}
+        description={description}
+      />
+    );
+  } catch (error) {
+    console.error(
+      "[JuniorHighSchoolStudentTrendChart] データ取得エラー:",
+      error
+    );
+    return (
+      <JuniorHighSchoolStudentTrendChartClient
+        chartData={[]}
+        title={title}
+        description={description}
+      />
+    );
+  }
+}
+
