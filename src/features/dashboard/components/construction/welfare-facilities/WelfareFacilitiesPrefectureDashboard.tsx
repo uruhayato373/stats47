@@ -3,9 +3,14 @@
  * 都道府県レベルの福祉施設統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  WelfareEstablishmentsCard,
+  WelfareEmployeesCard,
+  WelfareExpensesCard,
+  WelfareEstablishmentsTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +18,46 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 福祉施設都道府県ダッシュボード
  */
 export async function WelfareFacilitiesPrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureWelfareFacilitiesData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の福祉施設</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの福祉施設統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 福祉事業所数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <WelfareEstablishmentsCard
+          areaCode={areaCode}
+          title="福祉事業所数"
+        />
+      </div>
+
+      {/* 福祉従業者数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <WelfareEmployeesCard
+          areaCode={areaCode}
+          title="福祉従業者数"
+        />
+      </div>
+
+      {/* 福祉費統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <WelfareExpensesCard
+          areaCode={areaCode}
+          title="福祉費"
+        />
+      </div>
+
+      {/* 福祉事業所数推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <WelfareEstablishmentsTrendChart
+          areaCode={areaCode}
+          title="福祉事業所数推移"
+          description="年度別の福祉事業所数の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }
