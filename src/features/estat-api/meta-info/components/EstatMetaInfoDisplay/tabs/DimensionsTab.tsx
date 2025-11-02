@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { Calendar, Clock, MapPin, Tag, TrendingUp } from "lucide-react";
+import { Calendar, MapPin, Tag } from "lucide-react";
 
 import {
   Accordion,
@@ -11,12 +11,6 @@ import {
   AccordionTrigger,
 } from "@/components/atoms/ui/accordion";
 import { Badge } from "@/components/atoms/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
 import {
   Pagination,
   PaginationContent,
@@ -220,8 +214,6 @@ export default function DimensionsTab({
   );
   const yearRange = minYear && maxYear ? `${minYear} - ${maxYear}` : "不明";
   const yearCount = availableYears.length;
-  const latestYear = sortedYears[0];
-  const oldestYear = sortedYears[sortedYears.length - 1];
 
   return (
     <div className="space-y-8">
@@ -282,15 +274,12 @@ export default function DimensionsTab({
                   >
                     <AccordionTrigger className="px-4 py-3 hover:no-underline">
                       <div className="flex items-center justify-between w-full mr-4">
-                        <div className="flex items-center space-x-3">
-                          <MapPin className="w-4 h-4 text-muted-foreground" />
-                          <div>
-                            <div className="font-medium text-foreground">
-                              {getLevelLabel(level)}
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              レベル {level} • {areaCount}地域
-                            </div>
+                        <div>
+                          <div className="font-medium text-foreground">
+                            {getLevelLabel(level)}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            レベル {level} • {areaCount}地域
                           </div>
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -350,147 +339,88 @@ export default function DimensionsTab({
             <div className="text-muted-foreground">時間軸情報がありません</div>
           </div>
         ) : (
-          <div className="space-y-6">
-            {/* 統計情報セクション */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Calendar className="w-4 h-4 text-blue-600" />
-                    <div className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                      利用可能年数
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">
-                    {yearCount}
-                  </div>
-                  <div className="text-xs text-blue-600 dark:text-blue-300">
-                    年
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <TrendingUp className="w-4 h-4 text-green-600" />
-                    <div className="text-sm font-medium text-green-800 dark:text-green-200">
-                      最新年
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-green-900 dark:text-green-100">
-                    {latestYear || "-"}
-                  </div>
-                  <div className="text-xs text-green-600 dark:text-green-300">
-                    {sortedFormattedYears[0] || ""}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-orange-50 border-orange-200 dark:bg-orange-900/20 dark:border-orange-800">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Clock className="w-4 h-4 text-orange-600" />
-                    <div className="text-sm font-medium text-orange-800 dark:text-orange-200">
-                      最古年
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-orange-900 dark:text-orange-100">
-                    {oldestYear || "-"}
-                  </div>
-                  <div className="text-xs text-orange-600 dark:text-orange-300">
-                    {sortedFormattedYears[sortedFormattedYears.length - 1] ||
-                      ""}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 年次範囲情報 */}
-            <Card>
-              <CardHeader>
-                <CardTitle>年次範囲</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Accordion type="multiple" className="space-y-2">
+            <AccordionItem
+              value="time-axis"
+              className="border rounded-lg border-border"
+            >
+              <AccordionTrigger className="px-4 py-3 hover:no-underline">
+                <div className="flex items-center justify-between w-full mr-4">
                   <div>
-                    <div className="text-sm font-medium text-muted-foreground mb-1">
-                      最小年
+                    <div className="font-medium text-foreground">
+                      時間軸情報
                     </div>
-                    <div className="text-lg text-foreground">
-                      {minYear || "-"}
+                    <div className="text-sm text-muted-foreground">
+                      {yearCount}年 •{" "}
+                      {minYear && maxYear
+                        ? `${minYear} - ${maxYear}`
+                        : "範囲不明"}
                     </div>
                   </div>
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground mb-1">
-                      最大年
-                    </div>
-                    <div className="text-lg text-foreground">
-                      {maxYear || "-"}
-                    </div>
+                  <div className="text-sm text-muted-foreground">
+                    {yearCount}年
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-4">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>年次</TableHead>
+                          <TableHead>フォーマット済み年次</TableHead>
+                          <TableHead>状態</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {sortedYears.map((year, index) => (
+                          <TableRow key={year}>
+                            <TableCell className="font-mono">{year}</TableCell>
+                            <TableCell>
+                              {sortedFormattedYears[index] || "-"}
+                            </TableCell>
+                            <TableCell>
+                              {index === 0 && (
+                                <Badge variant="default" className="text-xs">
+                                  最新
+                                </Badge>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
 
-            {/* 年次リスト */}
-            <Card>
-              <CardHeader>
-                <CardTitle>利用可能な年次一覧</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {sortedYears.map((year, index) => (
-                    <div
-                      key={year}
-                      className={`p-3 rounded-lg border text-center ${
-                        index === 0
-                          ? "bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-100"
-                          : "bg-muted border-border text-foreground"
-                      }`}
-                    >
-                      <div className="text-sm font-mono">{year}</div>
-                      {sortedFormattedYears[index] && (
-                        <div className="text-xs text-muted-foreground mt-1">
-                          {sortedFormattedYears[index]}
+                  {/* 年次統計 */}
+                  {availableYears.length > 1 && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground mb-4 pb-2 border-b border-border">
+                        年次統計
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <div className="text-muted-foreground mb-1">
+                            年次間隔
+                          </div>
+                          <div className="text-foreground">
+                            {availableYears.length > 1 ? "複数年" : "単年"}
+                          </div>
                         </div>
-                      )}
-                      {index === 0 && (
-                        <Badge variant="default" className="text-xs mt-1">
-                          最新
-                        </Badge>
-                      )}
+                        <div>
+                          <div className="text-muted-foreground mb-1">
+                            データ期間
+                          </div>
+                          <div className="text-foreground">{yearRange}</div>
+                        </div>
+                      </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* 年次統計 */}
-            {availableYears.length > 1 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>年次統計</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <div className="text-muted-foreground mb-1">年次間隔</div>
-                      <div className="text-foreground">
-                        {availableYears.length > 1 ? "複数年" : "単年"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-muted-foreground mb-1">
-                        データ期間
-                      </div>
-                      <div className="text-foreground">{yearRange}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         )}
       </section>
     </div>
