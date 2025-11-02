@@ -9,6 +9,7 @@ import {
   AgeDistributionChart,
   AgeGroupStackedBarChart,
   GenderRatioDonutChart,
+  MedianAgeCard,
   PopulationTrendChart,
   TotalPopulationCard,
 } from "./charts";
@@ -30,6 +31,11 @@ export async function BasicPopulationPrefectureDashboard({
       {/* 総人口統計カード */}
       <div className="col-span-12 md:col-span-6 lg:col-span-4">
         <TotalPopulationCard areaCode={areaCode} title="総人口" />
+      </div>
+
+      {/* 年齢中位数統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <MedianAgeCard areaCode={areaCode} title="年齢中位数" />
       </div>
 
       {/* 総人口男女別割合ドーナツチャート */}

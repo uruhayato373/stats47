@@ -1,5 +1,5 @@
 /**
- * 総人口統計カードコンポーネント
+ * 年齢中位数統計カードコンポーネント
  * e-Stat APIから直接データを取得
  */
 
@@ -18,9 +18,9 @@ import {
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
-const CAT01_TOTAL_POPULATION = "A1101"; // 総人口
+const CAT01_MEDIAN_AGE = "A1231"; // 年齢中位数
 
-interface TotalPopulationCardProps {
+interface MedianAgeCardProps {
   /** 地域コード */
   areaCode: string;
   /** 年度（最新年度を取得する場合は指定しない） */
@@ -30,17 +30,17 @@ interface TotalPopulationCardProps {
 }
 
 /**
- * 総人口統計カード
+ * 年齢中位数統計カード
  */
-export async function TotalPopulationCard({
+export async function MedianAgeCard({
   areaCode,
   timeCode,
-  title = "総人口",
-}: TotalPopulationCardProps) {
+  title = "年齢中位数",
+}: MedianAgeCardProps) {
   try {
-    // e-Stat APIから総人口データを取得
+    // e-Stat APIから年齢中位数データを取得
     const response = await fetchStatsData(STATS_DATA_ID, {
-      categoryFilter: CAT01_TOTAL_POPULATION,
+      categoryFilter: CAT01_MEDIAN_AGE,
       areaFilter: areaCode,
       ...(timeCode && { yearFilter: timeCode }),
     });
@@ -90,9 +90,12 @@ export async function TotalPopulationCard({
       );
     }
 
-    // 数値をカンマ区切りでフォーマット
+    // 数値を小数点以下1桁でフォーマット
     const formatNumber = (value: number): string => {
-      return new Intl.NumberFormat("ja-JP").format(value);
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
     };
 
     return (
@@ -103,17 +106,17 @@ export async function TotalPopulationCard({
         <CardContent>
           <div className="space-y-2">
             <div className="text-3xl font-bold">
-              {formatNumber(targetData.value)}
+              {formatNumber(targetData.value)}歳
             </div>
             <p className="text-sm text-muted-foreground">
-              {targetData.timeName}（{targetData.unit}）
+              {targetData.timeName}
             </p>
           </div>
         </CardContent>
       </Card>
     );
   } catch (error) {
-    console.error("[TotalPopulationCard] データ取得エラー:", error);
+    console.error("[MedianAgeCard] データ取得エラー:", error);
     return (
       <Card>
         <CardHeader>
@@ -129,3 +132,4 @@ export async function TotalPopulationCard({
     );
   }
 }
+

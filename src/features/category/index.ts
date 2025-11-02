@@ -7,6 +7,7 @@
 // 型定義
 // ============================================================================
 export interface Category {
+  id: string; // URLパスで使用される識別子（categoryNameと同じ値）
   categoryName: string;
   name: string;
   icon?: string;
@@ -14,6 +15,7 @@ export interface Category {
 }
 
 export interface Subcategory {
+  id: string; // URLパスで使用される識別子（subcategoryNameと同じ値）
   subcategoryName: string;
   name: string;
   categoryName?: string; // 親カテゴリ名（オプショナル）
@@ -42,16 +44,24 @@ export function listCategories(): Category[] {
   const rawCategories = categoriesData.default || categoriesData;
   
   // categories.jsonの構造（id/name）をCategoryインターフェース（categoryName/subcategoryName）に変換
-  return rawCategories.map((cat: any) => ({
-    categoryName: cat.id || cat.categoryName || "",
-    name: cat.name || "",
-    icon: cat.icon,
-    subcategories: (cat.subcategories || []).map((sub: any) => ({
-      subcategoryName: sub.id || sub.subcategoryName || "",
-      name: sub.name || "",
-      categoryName: cat.id || cat.categoryName || "",
-    })),
-  }));
+  return rawCategories.map((cat: any) => {
+    const categoryName = cat.id || cat.categoryName || "";
+    return {
+      id: categoryName, // URLパス用のidプロパティを追加
+      categoryName: categoryName,
+      name: cat.name || "",
+      icon: cat.icon,
+      subcategories: (cat.subcategories || []).map((sub: any) => {
+        const subcategoryName = sub.id || sub.subcategoryName || "";
+        return {
+          id: subcategoryName, // URLパス用のidプロパティを追加
+          subcategoryName: subcategoryName,
+          name: sub.name || "",
+          categoryName: categoryName,
+        };
+      }),
+    };
+  });
 }
 
 /**
