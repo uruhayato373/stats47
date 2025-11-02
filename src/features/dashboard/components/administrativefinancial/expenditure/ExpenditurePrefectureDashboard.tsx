@@ -3,9 +3,14 @@
  * 都道府県レベルの歳出統計を表示
  */
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
-
 import { DashboardLayout } from "../../shared/DashboardLayout";
+
+import {
+  TotalExpenditureCard,
+  PersonnelExpensesCard,
+  PublicBondExpensesCard,
+  TotalExpenditureTrendChart,
+} from "./charts";
 
 import type { DashboardProps } from "../../../types/dashboard";
 
@@ -13,31 +18,46 @@ import type { DashboardProps } from "../../../types/dashboard";
  * 歳出都道府県ダッシュボード
  */
 export async function ExpenditurePrefectureDashboard({
-  category,
-  subcategory,
+  category: _category,
+  subcategory: _subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType: _areaType,
+  areaLevel: _areaLevel,
 }: DashboardProps) {
-  // TODO: 実際のデータ取得処理を実装
-  // const data = await getPrefectureExpenditureData(areaCode);
-
   return (
     <DashboardLayout columns={12} gap="1rem">
-      <Card className="col-span-12">
-        <CardHeader>
-          <CardTitle>都道府県の歳出</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            都道府県コード: {areaCode}
-          </p>
-          <p className="text-muted-foreground">
-            都道府県レベルの歳出統計データを表示します。
-          </p>
-          {/* TODO: 実際のデータ表示を実装 */}
-        </CardContent>
-      </Card>
+      {/* 歳出決算総額（都道府県財政）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <TotalExpenditureCard
+          areaCode={areaCode}
+          title="歳出決算総額（都道府県財政）"
+        />
+      </div>
+
+      {/* 人件費（都道府県財政）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PersonnelExpensesCard
+          areaCode={areaCode}
+          title="人件費（都道府県財政）"
+        />
+      </div>
+
+      {/* 公債費（都道府県財政）統計カード */}
+      <div className="col-span-12 md:col-span-6 lg:col-span-4">
+        <PublicBondExpensesCard
+          areaCode={areaCode}
+          title="公債費（都道府県財政）"
+        />
+      </div>
+
+      {/* 歳出決算総額（都道府県財政）推移チャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <TotalExpenditureTrendChart
+          areaCode={areaCode}
+          title="歳出決算総額（都道府県財政）推移"
+          description="年度別の歳出決算総額（都道府県財政）の推移を表示"
+        />
+      </div>
     </DashboardLayout>
   );
 }
