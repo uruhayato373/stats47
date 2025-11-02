@@ -6,7 +6,10 @@ import { useSearchParams } from "next/navigation";
 import { useRankingItem } from "@/features/ranking/items/hooks/useRankingItem";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { getRankingMetadata } from "@/features/ranking/items/actions/getRankingMetadata";
-import { RankingMapCard } from "@/features/ranking/shared/components/RankingMapCard";
+import {
+  RankingDataTable,
+  RankingMapCard,
+} from "@/features/ranking/shared/components";
 import { RankingItemNotFound } from "./RankingItemNotFound";
 
 import type { StatsSchema } from "@/types/stats";
@@ -110,11 +113,19 @@ export function RankingItemTabContent({
   }
 
   return (
-    <RankingMapCard
-      colorScheme={rankingItem.mapColorScheme}
-      divergingMidpoint={rankingItem.mapDivergingMidpoint}
-      data={rankingData || undefined}
-    />
+    <div className="space-y-6">
+      <RankingMapCard
+        colorScheme={rankingItem.mapColorScheme}
+        divergingMidpoint={rankingItem.mapDivergingMidpoint}
+        data={rankingData || undefined}
+      />
+      {rankingData && rankingData.length > 0 && (
+        <RankingDataTable
+          data={rankingData}
+          rankingItem={rankingItem}
+        />
+      )}
+    </div>
   );
 }
 

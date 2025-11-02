@@ -366,20 +366,6 @@ export function PrefectureMapD3({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height, data, colorScheme, divergingMidpoint, projection]);
 
-  // ズームリセット
-  const resetZoom = useCallback(() => {
-    if (svgRef.current) {
-      const svg = d3.select(svgRef.current);
-      svg
-        .transition()
-        .duration(animationDuration)
-        .call(
-          d3.zoom<SVGSVGElement, unknown>().transform,
-          d3.zoomIdentity.scale(1).translate(0, 0)
-        );
-    }
-  }, [animationDuration]);
-
   if (mapState.error) {
     return (
       <div
@@ -417,15 +403,6 @@ export function PrefectureMapD3({
         height={height}
         className="border border-gray-200 rounded-lg"
       />
-
-      {/* ズームリセットボタン */}
-      <button
-        onClick={resetZoom}
-        className="absolute top-2 right-2 px-3 py-1 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 text-sm"
-        disabled={mapState.isLoading}
-      >
-        リセット
-      </button>
     </div>
   );
 }

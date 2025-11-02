@@ -19,6 +19,7 @@ export * from "./groups";
 // Shared コンポーネント
 // ============================================================================
 export { RankingMapCard } from "./shared/components/RankingMapCard";
+export { RankingDataTable } from "./shared/components/RankingDataTable";
 
 // ============================================================================
 // Shared サービス

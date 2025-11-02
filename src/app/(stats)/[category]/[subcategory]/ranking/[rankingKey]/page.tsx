@@ -15,6 +15,7 @@ import {
 } from "@/components/atoms/ui/tabs";
 
 import {
+  RankingDataTable,
   RankingMapCard,
   getRankingGroupByKey,
   getRankingItem,
@@ -121,12 +122,18 @@ export default async function RankingKeyPage({
               )}
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-6">
           <RankingMapCard
             colorScheme={rankingItem.mapColorScheme}
             divergingMidpoint={rankingItem.mapDivergingMidpoint}
             data={rankingDataForSingle || undefined}
           />
+          {rankingDataForSingle && rankingDataForSingle.length > 0 && (
+            <RankingDataTable
+              data={rankingDataForSingle}
+              rankingItem={rankingItem}
+            />
+          )}
         </CardContent>
       </Card>
     );
@@ -159,12 +166,18 @@ export default async function RankingKeyPage({
             )}
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-6">
           <RankingMapCard
             colorScheme={rankingItem.mapColorScheme}
             divergingMidpoint={rankingItem.mapDivergingMidpoint}
             data={rankingDataForSingle || undefined}
           />
+          {rankingDataForSingle && rankingDataForSingle.length > 0 && (
+            <RankingDataTable
+              data={rankingDataForSingle}
+              rankingItem={rankingItem}
+            />
+          )}
         </CardContent>
       </Card>
     );
