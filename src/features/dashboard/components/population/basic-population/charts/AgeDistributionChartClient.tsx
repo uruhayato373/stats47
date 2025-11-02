@@ -64,9 +64,11 @@ export function AgeDistributionChartClient({
   const chartConfig = {
     value: {
       label: title,
-      color: "hsl(var(--chart-2))",
+      color: "hsl(142, 76%, 36%)", // Green（緑色）
     },
   };
+  
+  const chartColor = "hsl(142, 76%, 36%)"; // Green（緑色）
 
   // 数値をカンマ区切りでフォーマット
   const formatValue = (value: number): string => {
@@ -129,7 +131,7 @@ export function AgeDistributionChartClient({
               />
               <Bar
                 dataKey="value"
-                fill="hsl(var(--chart-2))"
+                fill={chartColor}
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>

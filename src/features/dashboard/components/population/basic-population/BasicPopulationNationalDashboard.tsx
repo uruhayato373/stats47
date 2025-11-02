@@ -7,6 +7,7 @@ import { DashboardLayout } from "../../shared/DashboardLayout";
 
 import {
   AgeDistributionChart,
+  AgeGroupStackedBarChart,
   GenderRatioDonutChart,
   PopulationTrendChart,
   TotalPopulationCard,
@@ -46,6 +47,15 @@ export async function BasicPopulationNationalDashboard({
           areaCode={areaCode}
           title="総人口推移"
           description="年度別の総人口推移を表示"
+        />
+      </div>
+
+      {/* 年齢区分別人口スタックバーチャート */}
+      <div className="col-span-12 lg:col-span-8">
+        <AgeGroupStackedBarChart
+          areaCode={areaCode}
+          title="年齢区分別人口推移"
+          description="15歳未満、15～64歳、65歳以上の人口推移を表示"
         />
       </div>
 

@@ -62,18 +62,18 @@ export function GenderRatioDonutChartClient({
   const chartConfig = {
     male: {
       label: "男性",
-      color: "hsl(var(--chart-1))",
+      color: "hsl(221, 83%, 53%)", // Blue（青色）
     },
     female: {
       label: "女性",
-      color: "hsl(var(--chart-2))",
+      color: "hsl(346, 77%, 50%)", // Pink（ピンク色）
     },
   };
 
   // 色定義
   const COLORS = [
-    "hsl(var(--chart-1))", // 男性（青）
-    "hsl(var(--chart-2))", // 女性（ピンク）
+    "hsl(221, 83%, 53%)", // 男性（青）
+    "hsl(346, 77%, 50%)", // 女性（ピンク）
   ];
 
   // 数値をカンマ区切りでフォーマット

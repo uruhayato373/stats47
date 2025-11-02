@@ -61,9 +61,11 @@ export function PopulationTrendChartClient({
   const chartConfig = {
     value: {
       label: title,
-      color: "hsl(var(--chart-1))",
+      color: "hsl(221, 83%, 53%)", // Blue（青色）
     },
   };
+  
+  const chartColor = "hsl(221, 83%, 53%)"; // Blue（青色）
 
   // 数値をカンマ区切りでフォーマット
   const formatValue = (value: number): string => {
@@ -123,9 +125,9 @@ export function PopulationTrendChartClient({
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="hsl(var(--chart-1))"
+                stroke={chartColor}
                 strokeWidth={2}
-                dot={{ fill: "hsl(var(--chart-1))", r: 4 }}
+                dot={{ fill: chartColor, r: 4 }}
                 activeDot={{ r: 6 }}
               />
             </LineChart>
