@@ -42,6 +42,23 @@ export function EditRankingItemButton({
     }
   ): Promise<boolean> => {
     try {
+      console.log("更新リクエスト:", {
+        rankingKey,
+        areaType,
+        updates: {
+          label: values.label,
+          name: values.name,
+          annotation: values.annotation,
+          unit: values.unit,
+          mapColorScheme: values.mapColorScheme,
+          mapDivergingMidpoint: values.mapDivergingMidpoint,
+          rankingDirection: values.rankingDirection,
+          conversionFactor: values.conversionFactor,
+          decimalPlaces: values.decimalPlaces,
+          isActive: values.isActive,
+        },
+      });
+
       const success = await updateRankingItem({
         rankingKey,
         areaType,
@@ -63,11 +80,15 @@ export function EditRankingItemButton({
         router.refresh();
         return true;
       }
+      console.error("更新失敗: success=false");
       return false;
     } catch (error) {
-      console.error("Failed to update ranking item:", error);
-      alert(`更新に失敗しました: ${error instanceof Error ? error.message : "Unknown error"}`);
-      return false;
+      console.error("更新エラー:", error);
+      if (error instanceof Error) {
+        console.error("エラーメッセージ:", error.message);
+        console.error("エラースタック:", error.stack);
+      }
+      throw error; // エラーを再スローしてModalでキャッチできるようにする
     }
   };
 

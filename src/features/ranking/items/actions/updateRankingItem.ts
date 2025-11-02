@@ -20,11 +20,20 @@ export interface UpdateRankingItemInput {
 
 export async function updateRankingItem(input: UpdateRankingItemInput): Promise<boolean> {
   try {
+    console.log("updateRankingItem called with:", input);
     const repo = await RankingRepository.create();
-    return await repo.updateRankingItem(input.rankingKey, input.areaType, input.updates);
+    const result = await repo.updateRankingItem(input.rankingKey, input.areaType, input.updates);
+    console.log("updateRankingItem result:", result);
+    return result;
   } catch (error) {
-    console.error("updateRankingItem error", error);
-    return false;
+    console.error("updateRankingItem error:", error);
+    if (error instanceof Error) {
+      console.error("エラーメッセージ:", error.message);
+      console.error("エラースタック:", error.stack);
+      // エラーを再スローしてクライアント側でキャッチできるようにする
+      throw new Error(`データベース更新エラー: ${error.message}`);
+    }
+    throw new Error("データベース更新中に予期しないエラーが発生しました");
   }
 }
 

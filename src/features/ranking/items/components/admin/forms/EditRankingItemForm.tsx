@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,7 +20,10 @@ import { Textarea } from "@/components/atoms/ui/textarea";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
@@ -29,13 +33,28 @@ import { Label } from "@/components/atoms/ui/label";
 const editRankingItemSchema = z.object({
   label: z.string().min(1, "表示ラベルは必須です").max(50),
   name: z.string().min(1, "項目名は必須です").max(100),
-  annotation: z.string().max(500).optional(),
+  annotation: z.string().max(500).optional().or(z.literal("")),
   unit: z.string().min(1, "単位は必須です").max(20),
-  mapColorScheme: z.string().min(1),
-  mapDivergingMidpoint: z.string(),
-  rankingDirection: z.enum(["asc", "desc"]),
-  conversionFactor: z.number().min(0.0001).max(1000000),
-  decimalPlaces: z.number().min(0).max(5),
+  mapColorScheme: z.string().min(1, "色スキームは必須です"),
+  mapDivergingMidpoint: z.string().min(1, "分岐点設定は必須です"),
+  rankingDirection: z.enum(["asc", "desc"], {
+    errorMap: () => ({ message: "ランキング方向を選択してください" }),
+  }),
+  conversionFactor: z
+    .number({
+      required_error: "変換係数は必須です",
+      invalid_type_error: "変換係数は数値である必要があります",
+    })
+    .positive("変換係数は正の数である必要があります")
+    .max(1000000, "変換係数は1000000以下である必要があります"),
+  decimalPlaces: z
+    .number({
+      required_error: "小数点以下桁数は必須です",
+      invalid_type_error: "小数点以下桁数は数値である必要があります",
+    })
+    .int("小数点以下桁数は整数である必要があります")
+    .min(0, "小数点以下桁数は0以上である必要があります")
+    .max(5, "小数点以下桁数は5以下である必要があります"),
   isActive: z.boolean(),
 });
 
@@ -75,7 +94,9 @@ export function EditRankingItemForm({
       annotation: rankingItem.annotation ?? "",
       unit: rankingItem.unit,
       mapColorScheme: rankingItem.mapColorScheme,
-      mapDivergingMidpoint: rankingItem.mapDivergingMidpoint,
+      mapDivergingMidpoint: typeof rankingItem.mapDivergingMidpoint === "string"
+        ? rankingItem.mapDivergingMidpoint
+        : String(rankingItem.mapDivergingMidpoint),
       rankingDirection: rankingItem.rankingDirection,
       conversionFactor: rankingItem.conversionFactor,
       decimalPlaces: rankingItem.decimalPlaces,
@@ -83,22 +104,129 @@ export function EditRankingItemForm({
     },
   });
 
-  const handleSubmit = form.handleSubmit(async (values) => {
-    await onSubmit(values);
-  });
+  // デバッグ用: フォームの初期値をログ出力
+  React.useEffect(() => {
+    console.log("📝 フォームの初期値:", form.getValues());
+    console.log("📝 rankingItem:", rankingItem);
+  }, []);
 
-  const mapColorSchemeOptions = [
-    { value: "interpolateBlues", label: "青" },
-    { value: "interpolateReds", label: "赤" },
-    { value: "interpolateGreens", label: "緑" },
-    { value: "interpolateViridis", label: "Viridis" },
-    { value: "interpolateInferno", label: "Inferno" },
-    { value: "interpolateYlOrRd", label: "黄→赤" },
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log("🔵 フォーム送信開始");
+    const currentValues = form.getValues();
+    console.log("🔵 フォームの現在の値:", currentValues);
+    // 型の不一致を確認（バリデーション前）
+    Object.entries(currentValues).forEach(([key, value]) => {
+      console.log(`  🔵 ${key}: ${typeof value} = ${JSON.stringify(value)}`);
+    });
+    console.log("🔵 フォームのエラー状態（バリデーション前）:", form.formState.errors);
+    
+    // バリデーションを手動で実行（全フィールド）
+    const isValid = await form.trigger();
+    console.log("🔵 バリデーション結果:", isValid);
+    console.log("🔵 フォームのエラー状態（バリデーション後）:", form.formState.errors);
+    
+    if (!isValid) {
+      console.error("❌ バリデーション失敗");
+      console.error("❌ エラーオブジェクト全体:", JSON.stringify(form.formState.errors, null, 2));
+      
+      // 各フィールドのエラーを詳細にログ出力
+      const errors = form.formState.errors;
+      if (Object.keys(errors).length === 0) {
+        console.error("❌ エラーオブジェクトが空です。form.trigger()の結果を確認してください。");
+        // 各フィールドを個別にバリデーション
+        const fields = [
+          'label', 'name', 'annotation', 'unit', 
+          'mapColorScheme', 'mapDivergingMidpoint', 'rankingDirection',
+          'conversionFactor', 'decimalPlaces', 'isActive'
+        ];
+        for (const field of fields) {
+          const fieldError = await form.trigger(field as any);
+          if (!fieldError) {
+            const fieldErrors = form.formState.errors[field as keyof typeof form.formState.errors];
+            if (fieldErrors) {
+              console.error(`❌ フィールド "${field}" のエラー:`, fieldErrors);
+            }
+          }
+        }
+      } else {
+        Object.entries(errors).forEach(([fieldName, error]) => {
+          console.error(`❌ フィールド "${fieldName}" のエラー:`, {
+            message: error?.message,
+            type: error?.type,
+            error: error,
+            raw: JSON.stringify(error),
+          });
+        });
+      }
+      
+      // フォームの現在の値を確認
+      const values = form.getValues();
+      console.error("❌ フォームの現在の値（詳細）:", values);
+      // 型の不一致を確認
+      Object.entries(values).forEach(([key, value]) => {
+        console.error(`  ❌ ${key}: ${typeof value} = ${JSON.stringify(value)} (${value === null ? 'null' : value === undefined ? 'undefined' : 'has value'})`);
+      });
+      return;
+    }
+    
+    const values = form.getValues();
+    console.log("✅ フォーム送信値（バリデーション通過）:", values);
+    
+    try {
+      await onSubmit(values);
+    } catch (error) {
+      console.error("❌ onSubmitエラー:", error);
+      throw error;
+    }
+  };
+
+  // 色スキームオプション（グループ化）
+  const colorSchemeGroups = [
+    {
+      label: "単色グラデーション",
+      options: [
+        { value: "interpolateBlues", label: "青" },
+        { value: "interpolateGreens", label: "緑" },
+        { value: "interpolateGreys", label: "グレー" },
+        { value: "interpolateOranges", label: "オレンジ" },
+        { value: "interpolatePurples", label: "紫" },
+        { value: "interpolateReds", label: "赤" },
+      ],
+    },
+    {
+      label: "多色グラデーション",
+      options: [
+        { value: "interpolateViridis", label: "Viridis" },
+        { value: "interpolatePlasma", label: "Plasma" },
+        { value: "interpolateInferno", label: "Inferno" },
+        { value: "interpolateMagma", label: "Magma" },
+        { value: "interpolateTurbo", label: "Turbo" },
+        { value: "interpolateCool", label: "Cool" },
+        { value: "interpolateWarm", label: "Warm" },
+      ],
+    },
+    {
+      label: "発散カラースケール",
+      options: [
+        { value: "interpolateBrBG", label: "茶→青緑" },
+        { value: "interpolatePRGn", label: "紫→緑" },
+        { value: "interpolatePiYG", label: "ピンク→黄緑" },
+        { value: "interpolatePuOr", label: "紫→オレンジ" },
+        { value: "interpolateRdBu", label: "赤→青" },
+        { value: "interpolateRdGy", label: "赤→グレー" },
+        { value: "interpolateRdYlBu", label: "赤→黄→青" },
+        { value: "interpolateRdYlGn", label: "赤→黄→緑" },
+        { value: "interpolateSpectral", label: "スペクトラル" },
+      ],
+    },
   ];
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} noValidate className="space-y-6">
         {/* 基本情報 */}
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -178,7 +306,7 @@ export function EditRankingItemForm({
                 <FormLabel>色スキーム *</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -186,10 +314,18 @@ export function EditRankingItemForm({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {mapColorSchemeOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
+                    {colorSchemeGroups.map((group, groupIndex) => (
+                      <React.Fragment key={group.label}>
+                        {groupIndex > 0 && <SelectSeparator />}
+                        <SelectGroup>
+                          <SelectLabel>{group.label}</SelectLabel>
+                          {group.options.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </React.Fragment>
                     ))}
                   </SelectContent>
                 </Select>
@@ -208,7 +344,7 @@ export function EditRankingItemForm({
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
                     className="flex flex-row flex-wrap gap-4"
                   >
                     <div className="flex items-center space-x-2">
@@ -252,7 +388,7 @@ export function EditRankingItemForm({
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
                     className="flex flex-row flex-wrap gap-4"
                   >
                     <div className="flex items-center space-x-2">
@@ -286,11 +422,21 @@ export function EditRankingItemForm({
                     <Input
                       type="number"
                       step="0.0001"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value) || 1)
-                      }
+                      min="0.0001"
+                      max="1000000"
+                      value={field.value ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value === "") {
+                          // 空文字列の場合は既存の値を保持
+                          return;
+                        }
+                        const numValue = parseFloat(value);
+                        if (!isNaN(numValue) && numValue > 0) {
+                          field.onChange(numValue);
+                        }
+                      }}
+                      onBlur={field.onBlur}
                     />
                   </FormControl>
                   <FormDescription>表示用に値を変換する係数</FormDescription>
@@ -310,11 +456,19 @@ export function EditRankingItemForm({
                       type="number"
                       min="0"
                       max="5"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) =>
-                        field.onChange(parseInt(e.target.value, 10) || 0)
-                      }
+                      value={field.value ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value === "") {
+                          // 空文字列の場合は既存の値を保持
+                          return;
+                        }
+                        const intValue = parseInt(value, 10);
+                        if (!isNaN(intValue) && intValue >= 0 && intValue <= 5) {
+                          field.onChange(intValue);
+                        }
+                      }}
+                      onBlur={field.onBlur}
                     />
                   </FormControl>
                   <FormDescription>表示時の小数点以下の桁数</FormDescription>

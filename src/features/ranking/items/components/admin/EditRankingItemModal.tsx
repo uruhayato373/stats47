@@ -51,15 +51,21 @@ export function EditRankingItemModal({
     setIsSubmitting(true);
     setError(null);
     try {
+      console.log("フォーム送信値:", values);
       const success = await onUpdate(rankingItem.rankingKey, rankingItem.areaType, values);
       if (success) {
         onSuccess?.();
         onClose();
       } else {
-        setError("更新に失敗しました");
+        setError("更新に失敗しました。データベースの更新ができませんでした。");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "更新に失敗しました");
+      console.error("更新エラー:", err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "予期しないエラーが発生しました";
+      setError(`更新に失敗しました: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }
