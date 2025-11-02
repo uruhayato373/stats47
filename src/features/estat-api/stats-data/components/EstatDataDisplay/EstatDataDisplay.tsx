@@ -23,14 +23,41 @@ import { EstatStatsDataFetcher } from "../EstatStatsDataFetcher";
 import EstatOverview from "./tabs/EstatOverview";
 import EstatValuesTable from "./tabs/EstatValuesTable";
 
+/**
+ * EstatDataDisplayのプロパティ
+ */
 interface EstatDataDisplayProps {
+  /** 統計データ */
   data: EstatStatsDataResponse | null;
+  /** 読み込み中かどうか */
   loading: boolean;
+  /** エラーメッセージ */
   error: string | null;
   /** データ取得元（'r2': R2ストレージ, 'api': e-Stat API） */
   dataSource?: StatsDataSource | null;
 }
 
+/**
+ * e-Stat統計データ表示コンポーネント
+ *
+ * 機能:
+ * - 統計データの概要表示
+ * - 統計値のテーブル表示
+ * - JSONレスポンスの表示
+ * - データ取得元のtoast通知表示
+ * - JSONデータのダウンロード機能
+ * - エラーハンドリング
+ *
+ * @example
+ * ```tsx
+ * <EstatDataDisplay
+ *   data={data}
+ *   loading={false}
+ *   error={null}
+ *   dataSource="r2"
+ * />
+ * ```
+ */
 export default function EstatDataDisplay({
   data,
   loading,
@@ -41,16 +68,10 @@ export default function EstatDataDisplay({
     "overview"
   );
 
-  // デバッグログ: コンポーネントの状態を確認
-  console.log("[EstatDataDisplay] コンポーネント状態:", {
-    hasData: !!data,
-    data: data ? { hasGetStatsData: !!data.GET_STATS_DATA } : null,
-    loading,
-    error,
-  });
-
   /**
-   * データ取得元のtoast通知を表示
+   * データ取得元が変更されたらtoast通知を表示
+   *
+   * dataとdataSourceが存在する場合、取得元に応じてtoast通知を表示します。
    */
   useEffect(() => {
     if (data && dataSource) {
@@ -69,8 +90,9 @@ export default function EstatDataDisplay({
   }, [data, dataSource]);
 
   /**
-   * データダウンロードハンドラー
-   * 現在のデータをJSONファイルとしてダウンロードする
+   * データをJSONファイルとしてダウンロード
+   *
+   * 現在のデータをJSON形式でファイルとしてダウンロードします。
    */
   const handleDownload = () => {
     if (!data) return;
@@ -145,7 +167,6 @@ export default function EstatDataDisplay({
         </Alert>
       )}
       <div>
-        {/* タブナビゲーション */}
         <Tabs
           value={activeTab}
           onValueChange={(value) => setActiveTab(value as typeof activeTab)}
@@ -164,7 +185,6 @@ export default function EstatDataDisplay({
             </TabsTrigger>
           </TabsList>
 
-          {/* タブコンテンツ */}
           <TabsContent value="overview" className="p-4">
             {data ? (
               <EstatOverview data={data} />
