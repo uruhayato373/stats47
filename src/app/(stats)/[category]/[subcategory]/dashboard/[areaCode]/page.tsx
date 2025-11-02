@@ -2,6 +2,11 @@ import { MunicipalityDashboard } from "@/components/organisms/dashboard/Municipa
 
 import { determineAreaType } from "@/features/area/utils/code-converter";
 import { loadDashboardData } from "@/features/dashboard/actions/loadDashboardData";
+import { DashboardError } from "@/features/dashboard/components/shared/DashboardError";
+import {
+  determineAreaLevel,
+  resolveDashboardComponent,
+} from "@/features/dashboard/services/dashboard-component-resolver";
 import { widgetComponents } from "@/features/dashboard/widgets/registry";
 
 interface PageProps {
@@ -15,23 +20,11 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { category, subcategory, areaCode } = await params;
 
-  // landweather/land-area/dashboard/00000 でPrefectureMapを表示
-  if (
-    category === "landweather" &&
-    subcategory === "land-area" &&
-    areaCode === "00000"
-  ) {
-    const { PrefectureMap } = await import(
-      "@/features/visualization/map/common/PrefectureMap"
-    );
-    return (
-      <div className="w-full h-screen p-4">
-        <PrefectureMap width={1200} height={800} />
-      </div>
-    );
-  }
+  // 地域タイプとレベルを判定
+  const areaType = determineAreaType(areaCode);
+  const areaLevel = determineAreaLevel(areaCode);
 
-  // landweather/land-area/dashboard/00000/city-map でCityMapを表示
+  // landweather/land-area/dashboard/00000/city-map でCityMapを表示（特別なケース）
   if (
     category === "landweather" &&
     subcategory === "land-area" &&
@@ -47,14 +40,45 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
-  const areaType = determineAreaType(areaCode);
-
   // 市区町村は従来のダッシュボードを維持（必要に応じて後日レイアウト化）
   if (areaType === "city") {
     return (
       <div>
         <MunicipalityDashboard areaCode={areaCode} />
       </div>
+    );
+  }
+
+  // コンポーネント解決を試行
+  try {
+    const DashboardComponent = await resolveDashboardComponent(
+      category,
+      subcategory,
+      areaCode
+    );
+
+    // コンポーネントが見つかった場合
+    if (DashboardComponent) {
+      return (
+        <DashboardComponent
+          category={category}
+          subcategory={subcategory}
+          areaCode={areaCode}
+          areaType={areaType}
+          areaLevel={areaLevel}
+        />
+      );
+    }
+  } catch (error) {
+    console.error(
+      `[DashboardPage] Failed to resolve dashboard component for ${category}/${subcategory}/${areaCode}:`,
+      error
+    );
+    return (
+      <DashboardError
+        message="ダッシュボードコンポーネントの解決に失敗しました"
+        error={error instanceof Error ? error : new Error(String(error))}
+      />
     );
   }
 
