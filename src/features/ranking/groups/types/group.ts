@@ -59,6 +59,7 @@ export interface CreateRankingGroupInput {
  */
 export interface UpdateRankingGroupInput {
   groupKey?: string;
+  subcategoryId?: string;
   group_name?: string;
   label?: string;
   icon?: string;

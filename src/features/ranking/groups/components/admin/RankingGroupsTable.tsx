@@ -4,15 +4,8 @@ import { useMemo, useState } from "react";
 
 import Link from "next/link";
 
-import { MoreVertical } from "lucide-react";
+import { Pencil } from "lucide-react";
 
-import { Button } from "@/components/atoms/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/atoms/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -108,7 +101,7 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
             <TableHead>グループ名</TableHead>
             <TableHead>サブカテゴリ</TableHead>
             <TableHead>項目数</TableHead>
-            <TableHead>アクション</TableHead>
+            <TableHead>編集</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -133,23 +126,13 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
                 <TableCell>{getSubcategoryName(group.subcategoryId)}</TableCell>
                 <TableCell>{group.items.length}</TableCell>
                 <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <MoreVertical className="h-4 w-4" />
-                        <span className="sr-only">アクションメニュー</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}
-                        >
-                          編集
-                        </Link>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <Link
+                    href={`/admin/dev-tools/ranking-groups/${group.groupKey}`}
+                    className="inline-flex items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground h-8 w-8"
+                  >
+                    <Pencil className="h-4 w-4" />
+                    <span className="sr-only">編集</span>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))

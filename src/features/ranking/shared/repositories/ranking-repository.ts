@@ -647,6 +647,7 @@ export class RankingRepository {
       await this.db
         .prepare(GROUP_QUERIES.updateGroup)
         .bind(
+          data.subcategoryId ?? group.subcategoryId,
           data.group_name ?? group.name,
           data.label ?? group.label ?? null,
           data.icon ?? group.icon ?? null,

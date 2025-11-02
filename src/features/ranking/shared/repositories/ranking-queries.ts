@@ -161,6 +161,7 @@ export const GROUP_QUERIES = {
   updateGroup: `
     UPDATE ranking_groups 
     SET 
+      subcategory_id = ?,
       group_name = ?, 
       label = ?,
       icon = ?, 

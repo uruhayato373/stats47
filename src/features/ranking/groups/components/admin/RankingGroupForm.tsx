@@ -94,6 +94,7 @@ export function RankingGroupForm({ group }: RankingGroupFormProps) {
       if (group) {
         // 更新
         const success = await updateRankingGroup(group.groupKey, {
+          subcategoryId,
           group_name: name,
           label: name, // labelもnameと同じ値に設定（後で変更可能）
           icon: icon || undefined,
