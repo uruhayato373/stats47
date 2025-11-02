@@ -5,11 +5,6 @@
 import type { AreaType } from "@/features/area/types";
 
 /**
- * 地域レベル
- */
-export type AreaLevel = "national" | "prefecture" | "municipality";
-
-/**
  * ダッシュボードコンポーネントのProps
  */
 export interface DashboardProps {
@@ -21,8 +16,6 @@ export interface DashboardProps {
   areaCode: string;
   /** 地域タイプ */
   areaType: AreaType;
-  /** 地域レベル */
-  areaLevel: AreaLevel;
 }
 
 /**

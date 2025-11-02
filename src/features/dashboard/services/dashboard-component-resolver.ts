@@ -5,34 +5,14 @@
 
 import type { ComponentType } from "react";
 
+import type { AreaType } from "@/features/area/types";
 import { determineAreaType } from "@/features/area/utils/code-converter";
 
-import type { AreaLevel, DashboardComponent, DashboardProps } from "../types/dashboard";
-
-/**
- * 地域コードから地域レベルを判定
- */
-export function determineAreaLevel(areaCode: string): AreaLevel {
-  if (areaCode === "00000") {
-    return "national";
-  }
-
-  // 都道府県レベル（末尾が000）
-  if (areaCode.endsWith("000") && areaCode.length === 5) {
-    return "prefecture";
-  }
-
-  // 市区町村レベル（5桁で末尾が000以外）
-  if (areaCode.length === 5) {
-    return "municipality";
-  }
-
-  throw new Error(`Invalid area code format: ${areaCode}`);
-}
+import type { DashboardProps } from "../types/dashboard";
 
 /**
  * サブカテゴリ名をコンポーネント名に変換
- * 
+ *
  * 例: "land-area" -> "LandArea"
  */
 function subcategoryToComponentName(subcategory: string): string {
@@ -43,15 +23,15 @@ function subcategoryToComponentName(subcategory: string): string {
 }
 
 /**
- * 地域レベルからコンポーネント名のサフィックスを取得
+ * 地域タイプからコンポーネント名のサフィックスを取得
  */
-function getComponentSuffix(areaLevel: AreaLevel): string {
-  switch (areaLevel) {
+function getComponentSuffix(areaType: AreaType): string {
+  switch (areaType) {
     case "national":
       return "NationalDashboard";
     case "prefecture":
       return "PrefectureDashboard";
-    case "municipality":
+    case "city":
       return "CityDashboard";
   }
 }
@@ -59,18 +39,15 @@ function getComponentSuffix(areaLevel: AreaLevel): string {
 /**
  * コンポーネント名を生成
  */
-function getComponentName(
-  subcategory: string,
-  areaLevel: AreaLevel
-): string {
+function getComponentName(subcategory: string, areaType: AreaType): string {
   const componentName = subcategoryToComponentName(subcategory);
-  const suffix = getComponentSuffix(areaLevel);
+  const suffix = getComponentSuffix(areaType);
   return `${componentName}${suffix}`;
 }
 
 /**
  * ダッシュボードコンポーネントを解決
- * 
+ *
  * @param category - カテゴリキー
  * @param subcategory - サブカテゴリキー
  * @param areaCode - 地域コード
@@ -82,20 +59,21 @@ export async function resolveDashboardComponent(
   areaCode: string
 ): Promise<ComponentType<DashboardProps> | null> {
   try {
-    // 地域レベル判定
-    const areaLevel = determineAreaLevel(areaCode);
+    // 地域タイプ判定
     const areaType = determineAreaType(areaCode);
 
     // コンポーネント名を生成
-    const componentName = getComponentName(subcategory, areaLevel);
+    const componentName = getComponentName(subcategory, areaType);
 
     // 動的インポートでコンポーネントを解決
-    const module = await import(
+    const componentModule = await import(
       `../components/${category}/${subcategory}/${componentName}`
     );
 
     // コンポーネントを取得
-    const Component = module[componentName] as ComponentType<DashboardProps>;
+    const Component = componentModule[
+      componentName
+    ] as ComponentType<DashboardProps>;
 
     if (!Component) {
       console.warn(
@@ -125,4 +103,3 @@ export async function resolveDashboardComponent(
     throw error;
   }
 }
-

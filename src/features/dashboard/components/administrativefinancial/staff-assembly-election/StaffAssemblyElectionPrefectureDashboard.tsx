@@ -22,8 +22,7 @@ export async function StaffAssemblyElectionPrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 一般行政部門職員数（都道府県）統計カード */}

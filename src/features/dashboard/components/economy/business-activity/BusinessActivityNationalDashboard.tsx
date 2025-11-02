@@ -22,8 +22,7 @@ export async function BusinessActivityNationalDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 事業所数統計カード */}

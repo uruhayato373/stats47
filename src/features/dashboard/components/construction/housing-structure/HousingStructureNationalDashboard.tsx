@@ -22,8 +22,7 @@ export async function HousingStructureNationalDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 一戸建住宅数統計カード */}

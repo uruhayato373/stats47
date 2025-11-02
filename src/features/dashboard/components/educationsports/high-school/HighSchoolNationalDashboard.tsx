@@ -22,8 +22,7 @@ export async function HighSchoolNationalDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 高等学校数統計カード */}

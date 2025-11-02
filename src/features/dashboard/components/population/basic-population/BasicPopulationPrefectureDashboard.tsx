@@ -24,8 +24,7 @@ export async function BasicPopulationPrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 総人口統計カード */}

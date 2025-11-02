@@ -21,8 +21,7 @@ export async function SocialActivitiesNationalDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 社会教育関係職員数統計カード */}

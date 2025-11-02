@@ -22,8 +22,7 @@ export async function TaxRevenuePrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 地方税（都道府県財政）統計カード */}

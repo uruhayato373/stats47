@@ -23,8 +23,7 @@ export async function TourismAccommodationPrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 旅館営業施設数統計カード */}

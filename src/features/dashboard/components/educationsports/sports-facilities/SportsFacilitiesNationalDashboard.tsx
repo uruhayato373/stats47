@@ -22,8 +22,7 @@ export async function SportsFacilitiesNationalDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 体育館数（公共）統計カード */}

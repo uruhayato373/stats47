@@ -23,14 +23,13 @@ export async function BasicPopulationNationalDashboard({
   category,
   subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType  
 }: DashboardProps) {
   // 未使用のパラメータは型定義の互換性のため必須
   void category;
   void subcategory;
   void areaType;
-  void areaLevel;
+
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 総人口統計カード */}

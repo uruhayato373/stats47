@@ -22,8 +22,7 @@ export async function ConsumerPriceDifferenceIndexPrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 消費者物価地域差指数（総合）統計カード */}

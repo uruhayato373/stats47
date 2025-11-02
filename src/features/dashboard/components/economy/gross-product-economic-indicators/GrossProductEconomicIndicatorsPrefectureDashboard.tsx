@@ -22,8 +22,7 @@ export async function GrossProductEconomicIndicatorsPrefectureDashboard({
   subcategory: _subcategory,
   areaCode,
   areaType: _areaType,
-  areaLevel: _areaLevel,
-}: DashboardProps) {
+  }: DashboardProps) {
   return (
     <DashboardLayout columns={12} gap="1rem">
       {/* 県内総生産額統計カード */}

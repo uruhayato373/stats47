@@ -7,7 +7,6 @@
 // 型定義
 // ============================================================================
 export type {
-  AreaLevel,
   DashboardComponent,
   DashboardProps,
 } from "./types/dashboard";
@@ -15,18 +14,10 @@ export type {
 // ============================================================================
 // サービス
 // ============================================================================
-export {
-  determineAreaLevel,
-  resolveDashboardComponent,
-} from "./services/dashboard-component-resolver";
+export { resolveDashboardComponent } from "./services/dashboard-component-resolver";
 
 // ============================================================================
 // 共通コンポーネント
 // ============================================================================
 export { DashboardError, DashboardLayout } from "./components/shared";
-
-// ============================================================================
-// アクション
-// ============================================================================
-export { loadDashboardData } from "./actions/loadDashboardData";
 

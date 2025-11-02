@@ -1,13 +1,8 @@
 import { MunicipalityDashboard } from "@/components/organisms/dashboard/MunicipalityDashboard";
 
 import { determineAreaType } from "@/features/area/utils/code-converter";
-import { loadDashboardData } from "@/features/dashboard/actions/loadDashboardData";
 import { DashboardError } from "@/features/dashboard/components/shared/DashboardError";
-import {
-  determineAreaLevel,
-  resolveDashboardComponent,
-} from "@/features/dashboard/services/dashboard-component-resolver";
-import { widgetComponents } from "@/features/dashboard/widgets/registry";
+import { resolveDashboardComponent } from "@/features/dashboard/services/dashboard-component-resolver";
 
 interface PageProps {
   params: Promise<{
@@ -20,9 +15,8 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { category, subcategory, areaCode } = await params;
 
-  // 地域タイプとレベルを判定
+  // 地域タイプを判定
   const areaType = determineAreaType(areaCode);
-  const areaLevel = determineAreaLevel(areaCode);
 
   // landweather/land-area/dashboard/00000/city-map でCityMapを表示（特別なケース）
   if (
@@ -65,7 +59,6 @@ export default async function Page({ params }: PageProps) {
           subcategory={subcategory}
           areaCode={areaCode}
           areaType={areaType}
-          areaLevel={areaLevel}
         />
       );
     }
@@ -82,55 +75,12 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
-  // レイアウトとデータの取得
-  const { layout, data } = await loadDashboardData({
-    subcategoryId: subcategory,
-    areaCode,
-  });
-
-  if (!layout) {
-    return <div>このサブカテゴリのダッシュボードは未定義です。</div>;
-  }
-
-  const { cols, rowHeight } = layout.grid;
-
+  // コンポーネントが見つからない場合
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-        gridAutoRows: `${rowHeight}px`,
-        gap: "12px",
-        width: "100%",
-      }}
-    >
-      {layout.widgets.map((w) => {
-        const Comp = (widgetComponents as any)[w.type] as any;
-        if (!Comp) return null;
-
-        const gridStyle: React.CSSProperties = {
-          gridColumn: `${w.col + 1} / span ${w.w}`,
-          gridRow: `${w.row + 1} / span ${w.h}`,
-        };
-
-        // ウィジェット種別ごとの最小propsマッピング
-        let props: any = {};
-        if (w.type === "metric") {
-          const d = (data as any)[w.key] || {};
-          props = { title: d.title ?? "—", value: d.value ?? "—" };
-        } else if (w.type === "chart.line") {
-          const d = (data as any)[w.key] || {};
-          props = { title: d.title ?? "—" };
-        } else if (w.type === "viz.pref-map") {
-          props = { areaCode };
-        }
-
-        return (
-          <div key={w.key} style={gridStyle}>
-            <Comp {...props} />
-          </div>
-        );
-      })}
+    <div className="p-4">
+      <p className="text-muted-foreground">
+        このサブカテゴリのダッシュボードは未定義です。
+      </p>
     </div>
   );
 }

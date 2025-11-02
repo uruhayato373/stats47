@@ -16,8 +16,7 @@ export async function BasicPopulationCityDashboard({
   category,
   subcategory,
   areaCode,
-  areaType,
-  areaLevel,
+  areaType  
 }: DashboardProps) {
   // TODO: 実際のデータ取得処理を実装
   // const data = await getCityBasicPopulationData(areaCode);
