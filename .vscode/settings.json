@@ -13,10 +13,12 @@
     "administrativefinancial",
     "AUTOINCREMENT",
     "Choropleth",
+    "chugoku",
     "educationsports",
     "Estat",
     "Frontmatter",
     "geoshape",
+    "kanto",
     "laborwage",
     "Mapbox",
     "Metainfo",
@@ -25,6 +27,7 @@
     "socialsecurity",
     "statsdata",
     "statslist",
+    "tohoku",
     "topojson",
     "vitest"
   ]

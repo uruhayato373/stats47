@@ -20,4 +20,10 @@ export {
   validatePrefectureName,
 } from "./code-converter";
 
+export {
+  REGIONS,
+  PREFECTURE_TO_REGION_MAP,
+  getRegionByCode,
+} from "./region-mapping";
+
 
