@@ -1,31 +1,23 @@
 /**
- * 年度別人口推移チャートコンポーネント（LineChart）
+ * 年度別人口推移チャートコンポーネント（Server Component）
+ * e-Stat APIから直接データを取得
  */
 
-"use client";
-
+import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-} from "recharts";
+  convertToStatsSchema,
+  formatStatsData,
+} from "@/features/estat-api/stats-data/services/formatter";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
-import { ChartContainer, ChartTooltip } from "@/components/atoms/ui/chart";
-import type { StatsSchema } from "@/types/stats";
+import { PopulationTrendChartClient } from "./PopulationTrendChartClient";
+
+// e-Stat APIパラメータ定義
+const STATS_DATA_ID = "0000010101"; // 人口推計
+const CAT01_TOTAL_POPULATION = "A1101"; // 総人口
 
 interface PopulationTrendChartProps {
-  /** 人口データ（年度別） */
-  data: StatsSchema[];
+  /** 地域コード */
+  areaCode: string;
   /** タイトル */
   title: string;
   /** 説明 */
@@ -33,114 +25,68 @@ interface PopulationTrendChartProps {
 }
 
 /**
- * 年度別人口推移チャート
+ * 年度別人口推移チャート（Server Component）
  */
-export function PopulationTrendChart({
-  data,
+export async function PopulationTrendChart({
+  areaCode,
   title,
   description,
 }: PopulationTrendChartProps) {
-  // データが空の場合はエラーメッセージを表示
-  if (!data || data.length === 0) {
+  try {
+    // e-Stat APIから総人口データを取得（全年度）
+    const response = await fetchStatsData(STATS_DATA_ID, {
+      categoryFilter: CAT01_TOTAL_POPULATION,
+      areaFilter: areaCode,
+    });
+
+    // データを整形
+    const formattedData = formatStatsData(response);
+
+    // StatsSchema形式に変換
+    const statsSchemas = formattedData.values
+      .filter((value) => value.dimensions.area?.code === areaCode)
+      .map((value) => convertToStatsSchema(value))
+      .filter(
+        (schema): schema is NonNullable<typeof schema> => schema !== undefined
+      );
+
+    if (statsSchemas.length === 0) {
+      return (
+        <PopulationTrendChartClient
+          chartData={[]}
+          title={title}
+          description={description}
+        />
+      );
+    }
+
+    // 年度順にソート
+    statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
+
+    // StatsSchemaをチャート用のデータ形式に変換
+    const chartData = statsSchemas.map((item) => ({
+      year: item.timeCode,
+      yearName: item.timeName,
+      value:
+        typeof item.value === "number" ? item.value : Number(item.value) || 0,
+      unit: item.unit,
+    }));
+
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          {description && <CardDescription>{description}</CardDescription>}
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">データがありません</p>
-        </CardContent>
-      </Card>
+      <PopulationTrendChartClient
+        chartData={chartData}
+        title={title}
+        description={description}
+      />
+    );
+  } catch (error) {
+    console.error("[PopulationTrendChart] データ取得エラー:", error);
+    return (
+      <PopulationTrendChartClient
+        chartData={[]}
+        title={title}
+        description={description}
+      />
     );
   }
-
-  // StatsSchemaをチャート用のデータ形式に変換
-  const chartData = data.map((item) => ({
-    year: item.timeCode,
-    yearName: item.timeName,
-    value: typeof item.value === "number" ? item.value : Number(item.value) || 0,
-    unit: item.unit,
-  }));
-
-  // デバッグ: データを確認
-  console.log("[PopulationTrendChart] chartData:", chartData);
-
-  const chartConfig = {
-    value: {
-      label: title,
-      color: "hsl(var(--chart-1))",
-    },
-  };
-
-  // 数値をカンマ区切りでフォーマット
-  const formatValue = (value: number): string => {
-    return new Intl.NumberFormat("ja-JP").format(value);
-  };
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        {description && <CardDescription>{description}</CardDescription>}
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart
-              data={chartData}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis
-                dataKey="yearName"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                className="text-xs"
-              />
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                className="text-xs"
-                tickFormatter={formatValue}
-              />
-              <ChartTooltip
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length > 0) {
-                    const data = payload[0].payload;
-                    return (
-                      <div className="rounded-lg border bg-background p-2 shadow-sm">
-                        <div className="grid gap-1.5">
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="text-muted-foreground">
-                              {data.yearName}
-                            </span>
-                            <span className="font-mono font-medium tabular-nums">
-                              {formatValue(data.value)} {data.unit}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="hsl(var(--chart-1))"
-                strokeWidth={2}
-                dot={{ fill: "hsl(var(--chart-1))", r: 4 }}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
 }
-
