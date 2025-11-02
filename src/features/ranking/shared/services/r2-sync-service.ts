@@ -50,7 +50,7 @@ export class R2SyncService {
    *
    * @param db - D1データベースインスタンス
    * @param groupKey - グループキー
-   * @param groupName - グループ名（ranking_nameから取得）
+   * @param groupName - グループ名（metadata.jsonのitemNameから取得）
    * @param label - ラベル（annotationから取得、NULL可）
    */
   private static async ensureGroupExists(
@@ -353,15 +353,44 @@ export class R2SyncService {
           // group_keyがNULLの場合、ranking_keyと同じ値を設定
           const groupKey = existing.group_key || item.rankingKey;
 
+          // group_keyがNULLの場合、UPDATE文を実行する前にグループを作成する必要がある
+          let shouldUpdateGroupKey = !existing.group_key;
+          if (!existing.group_key) {
+            try {
+              await this.ensureGroupExists(
+                db,
+                groupKey,
+                itemName, // metadata.jsonから取得したitemNameをgroup_nameに使用
+                existing.annotation
+              );
+            } catch (groupError) {
+              // グループ作成エラーは個別に記録して続行
+              const groupErrorMessage =
+                groupError instanceof Error
+                  ? groupError.message
+                  : String(groupError);
+              console.error(
+                `[R2SyncService] グループ作成エラー（続行）: ${groupKey}`,
+                groupError
+              );
+              stats.errors.push({
+                rankingKey: `${item.rankingKey}:${item.areaType}`,
+                error: `グループ作成エラー: ${groupErrorMessage}`,
+              });
+              // エラーが発生した場合は、group_keyをNULLのまま更新を続行
+              shouldUpdateGroupKey = false;
+            }
+          }
+
           // group_keyが変更される場合、UPDATE文に含める
           // metadata.jsonから取得した値でlabel, ranking_name, unitを更新
-          const updateFields = existing.group_key
-            ? `label = ?, ranking_name = ?, unit = ?, updated_at = CURRENT_TIMESTAMP`
-            : `label = ?, ranking_name = ?, unit = ?, group_key = ?, updated_at = CURRENT_TIMESTAMP`;
+          const updateFields = shouldUpdateGroupKey
+            ? `label = ?, ranking_name = ?, unit = ?, group_key = ?, updated_at = CURRENT_TIMESTAMP`
+            : `label = ?, ranking_name = ?, unit = ?, updated_at = CURRENT_TIMESTAMP`;
 
-          const bindValues = existing.group_key
-            ? [label, rankingName, unitFromMetadata, item.rankingKey, item.areaType]
-            : [label, rankingName, unitFromMetadata, groupKey, item.rankingKey, item.areaType];
+          const bindValues = shouldUpdateGroupKey
+            ? [label, rankingName, unitFromMetadata, groupKey, item.rankingKey, item.areaType]
+            : [label, rankingName, unitFromMetadata, item.rankingKey, item.areaType];
 
           const result = await db
             .prepare(
@@ -372,54 +401,40 @@ export class R2SyncService {
             .bind(...bindValues)
             .run();
 
-          if (result.success && result.meta && result.meta.changes > 0) {
+          // エラーチェック: result.successがfalseの場合はエラー
+          if (!result.success) {
+            const errorDetail =
+              result.error ||
+              result.meta?.error ||
+              "unknown error";
+            const errorMessage =
+              errorDetail instanceof Error
+                ? errorDetail.message
+                : typeof errorDetail === "string"
+                  ? errorDetail
+                  : JSON.stringify(errorDetail);
+            throw new Error(
+              `UPDATE処理が失敗しました: ${errorMessage} (ranking_key: ${item.rankingKey}, area_type: ${item.areaType})`
+            );
+          }
+
+          if (result.meta && result.meta.changes > 0) {
             stats.updated++;
             console.log(
               `[R2SyncService] 更新完了: ${item.rankingKey}:${item.areaType} (label: ${existing.ranking_name} → ${label}, ranking_name: ${existing.ranking_name} → ${rankingName}, unit: ${existing.unit} → ${unitFromMetadata})`
             );
-
-            // group_keyがNULLだった場合、グループの存在確認・作成を実行
-            if (!existing.group_key) {
-              try {
-                await this.ensureGroupExists(
-                  db,
-                  groupKey,
-                  rankingName, // metadata.jsonから取得したranking_nameを使用
-                  existing.annotation
-                );
-              } catch (groupError) {
-                // グループ作成エラーは個別に記録して続行
-                const groupErrorMessage =
-                  groupError instanceof Error
-                    ? groupError.message
-                    : String(groupError);
-                console.error(
-                  `[R2SyncService] グループ作成エラー（続行）: ${groupKey}`,
-                  groupError
-                );
-                stats.errors.push({
-                  rankingKey: `${item.rankingKey}:${item.areaType}`,
-                  error: `グループ作成エラー: ${groupErrorMessage}`,
-                });
-                // エラーが発生しても処理は続行（ranking_itemは更新済み）
-              }
-            }
-          } else if (
-            result.success &&
-            result.meta &&
-            result.meta.changes === 0
-          ) {
+          } else if (result.meta && result.meta.changes === 0) {
             // 更新対象がなかった場合（値が同じなど）
             console.log(
               `[R2SyncService] 更新スキップ: ${item.rankingKey}:${item.areaType} (値に変更なし)`
             );
             stats.skipped++;
           } else {
-            throw new Error(
-              `UPDATE処理が失敗しました: ${
-                result.meta?.error || "unknown error"
-              }`
+            // result.metaがundefinedの場合もスキップとして扱う
+            console.log(
+              `[R2SyncService] 更新スキップ: ${item.rankingKey}:${item.areaType} (meta情報なし)`
             );
+            stats.skipped++;
           }
         } else {
           // 新規作成
@@ -429,7 +444,7 @@ export class R2SyncService {
           // INSERT前にグループを確実に作成（FOREIGN KEY制約を満たすため）
           let finalGroupKey = groupKey;
           try {
-            await this.ensureGroupExists(db, groupKey, rankingName, null);
+            await this.ensureGroupExists(db, groupKey, itemName, null); // metadata.jsonから取得したitemNameをgroup_nameに使用
           } catch (groupError) {
             // グループ作成エラーは記録して続行（NULLでINSERTを試みる）
             const groupErrorMessage =
