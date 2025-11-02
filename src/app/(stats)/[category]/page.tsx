@@ -33,7 +33,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { category } = await params;
   const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.id === category);
+  const categoryData = categories.find((cat) => cat.categoryName === category);
 
   return {
     title: categoryData?.name || category,
@@ -58,7 +58,7 @@ export async function generateMetadata({
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
   const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.id === category);
+  const categoryData = categories.find((cat) => cat.categoryName === category);
 
   // カテゴリが存在しない場合のエラーハンドリング
   if (!categoryData) {
@@ -78,7 +78,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categoryData.subcategories.map((subcategory) => (
           <Card
-            key={subcategory.id}
+            key={subcategory.subcategoryName}
             className="hover:shadow-lg transition-shadow"
           >
             <CardHeader>
@@ -89,7 +89,7 @@ export default async function CategoryPage({ params }: PageProps) {
             </CardHeader>
             <CardContent>
               <Button asChild className="w-full">
-                <Link href={`/${category}/${subcategory.id}`}>
+                <Link href={`/${category}/${subcategory.subcategoryName}`}>
                   詳細を見る
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Link>

@@ -34,9 +34,9 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { category, subcategory } = await params;
   const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.id === category);
+  const categoryData = categories.find((cat) => cat.categoryName === category);
   const subcategoryData = categoryData?.subcategories?.find(
-    (sub) => sub.id === subcategory
+    (sub) => sub.subcategoryName === subcategory
   );
 
   return {
@@ -66,9 +66,9 @@ export async function generateMetadata({
 export default async function SubcategoryPage({ params }: PageProps) {
   const { category, subcategory } = await params;
   const categories = listCategories();
-  const categoryData = categories.find((cat) => cat.id === category);
+  const categoryData = categories.find((cat) => cat.categoryName === category);
   const subcategoryData = categoryData?.subcategories?.find(
-    (sub) => sub.id === subcategory
+    (sub) => sub.subcategoryName === subcategory
   );
 
   // カテゴリまたはサブカテゴリが見つからない場合は404ページを表示

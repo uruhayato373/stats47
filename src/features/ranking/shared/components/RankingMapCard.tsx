@@ -42,14 +42,17 @@ export function RankingMapCard({
 }: RankingMapCardProps) {
   console.log(data);
   // StatsSchema[]をChoroplethData[]に変換
+  // areaCode=00000（全国合計）のデータを除外し、47都道府県のデータのみを表示
   const choroplethData = useMemo<ChoroplethData[] | undefined>(() => {
     if (!data) return undefined;
 
-    return data.map((item) => ({
-      areaCode: item.areaCode,
-      value: item.value,
-      areaName: item.areaName,
-    }));
+    return data
+      .filter((item) => item.areaCode !== "00000")
+      .map((item) => ({
+        areaCode: item.areaCode,
+        value: item.value,
+        areaName: item.areaName,
+      }));
   }, [data]);
 
   return (
@@ -69,7 +72,7 @@ export function RankingMapCard({
           strokeWidth={1}
           hoverColor="#3b82f6"
           selectedColor="#1d4ed8"
-          labelFontSize={12}
+          labelFontSize={0}
           labelColor="#374151"
           enableAnimation={true}
           animationDuration={300}
