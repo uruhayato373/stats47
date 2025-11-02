@@ -2,16 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  AlertCircle,
-  Calendar,
-  Code,
-  FileText,
-  Info,
-  MapPin,
-  Save,
-  Tag,
-} from "lucide-react";
+import { AlertCircle, Code, FileText, Info, Layers, Save } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
@@ -31,13 +22,11 @@ import { parseCompleteMetaInfo } from "../../services/formatter";
 import { EstatMetaInfoResponse } from "../../types";
 import { EstatMetaInfoFetcher } from "../EstatMetaInfoFetcher";
 
-import AreasTab from "./tabs/AreasTab";
-import CategoriesTab from "./tabs/CategoriesTab";
+import DimensionsTab from "./tabs/DimensionsTab";
 import TableInfoTab from "./tabs/TableInfoTab";
-import TimeAxisTab from "./tabs/TimeAxisTab";
 
 /**
- * EstatMetaInfoDisplayProps - e-Statメタ情報表示コンポーネントのプロパティ
+ * e-Statメタ情報表示コンポーネントのプロパティ
  */
 interface EstatMetaInfoDisplayProps {
   /** メタ情報データ */
@@ -51,29 +40,33 @@ interface EstatMetaInfoDisplayProps {
 }
 
 /**
- * TabType - タブの種類
+ * タブの種類
  */
-type TabType = "table" | "categories" | "areas" | "time" | "json";
+type TabType = "basic" | "dimensions" | "json";
 
 /**
- * EstatMetaInfoDisplay - e-Statメタ情報表示コンポーネント
+ * e-Statメタ情報表示コンポーネント
  *
  * 機能:
- * - URL paramsからstatsIdを自動取得
- * - e-Statメタ情報の取得と表示
+ * - e-Statメタ情報の表示
  * - 統計表基本情報の表示（タイトル、政府統計名、作成機関）
- * - カテゴリ分類とJSONレスポンスのタブ表示
+ * - 次元情報（分類、地域、時間軸）の表示
+ * - JSONレスポンスの表示
  * - メタ情報の保存とダウンロード機能
- * - ローディング状態とエラーハンドリング
+ * - エラーハンドリング
  *
  * レイアウト構成:
  * - ヘッダー: 統計表基本情報 + 保存ボタン
- * - タブナビゲーション: カテゴリ分類 / JSONレスポンス
+ * - タブナビゲーション: 基本情報 / 次元 / JSON
  * - コンテンツエリア: タブに応じた内容表示
  *
  * 使用例:
  * ```tsx
- * <EstatMetaInfoDisplay />
+ * <EstatMetaInfoDisplay
+ *   metaInfo={metaInfo}
+ *   statsId="0000010101"
+ *   dataSource="r2"
+ * />
  * ```
  */
 export default function EstatMetaInfoDisplay({
@@ -82,18 +75,11 @@ export default function EstatMetaInfoDisplay({
   dataSource,
   error: serverError,
 }: EstatMetaInfoDisplayProps) {
-  // ===== 状態管理 =====
-  /** アクティブなタブ */
-  const [activeTab, setActiveTab] = useState<TabType>("table");
+  const [activeTab, setActiveTab] = useState<TabType>("basic");
 
-  // ===== カスタムフック =====
-  /** メタ情報保存機能 */
   const { save, saving } = useMetaInfoSave();
-  /** メタ情報ダウンロード機能 */
   const { download } = useMetaInfoDownload();
 
-  // ===== データ処理 =====
-  /** フォーマット済みメタ情報 */
   const parsedData = useMemo(() => {
     if (!metaInfo || !statsId) return null;
     try {
@@ -104,20 +90,15 @@ export default function EstatMetaInfoDisplay({
     }
   }, [metaInfo, statsId]);
 
-  // ===== エフェクト =====
   /**
    * メタ情報が変更されたらタブをリセット
-   * 新しいメタ情報が読み込まれた際に、デフォルトの統計表情報タブに戻す
+   *
+   * 新しいメタ情報が読み込まれた際に、デフォルトの基本情報タブに戻します。
    */
   useEffect(() => {
-    setActiveTab("table");
+    setActiveTab("basic");
   }, [metaInfo]);
 
-  // ===== レンダリング条件分岐 =====
-
-  /**
-   * statsId未指定時の表示
-   */
   if (!statsId) {
     return (
       <div className="space-y-6">
@@ -135,10 +116,8 @@ export default function EstatMetaInfoDisplay({
     );
   }
 
-  // ===== イベントハンドラー =====
   /**
-   * メタ情報保存ハンドラー
-   * 現在のメタ情報を保存する
+   * メタ情報を保存
    */
   const handleSave = () => {
     if (metaInfo) {
@@ -147,8 +126,7 @@ export default function EstatMetaInfoDisplay({
   };
 
   /**
-   * メタ情報ダウンロードハンドラー
-   * 現在のメタ情報をJSONファイルとしてダウンロードする
+   * メタ情報をJSONファイルとしてダウンロード
    */
   const handleDownload = () => {
     if (metaInfo) {
@@ -156,9 +134,6 @@ export default function EstatMetaInfoDisplay({
     }
   };
 
-  /**
-   * エラー状態の表示
-   */
   if (serverError) {
     return (
       <Alert variant="destructive">
@@ -168,9 +143,6 @@ export default function EstatMetaInfoDisplay({
     );
   }
 
-  /**
-   * メタ情報が存在しない場合
-   */
   if (!metaInfo || !parsedData) {
     return (
       <Alert>
@@ -180,10 +152,8 @@ export default function EstatMetaInfoDisplay({
     );
   }
 
-  // ===== メインコンテンツのレンダリング =====
   return (
     <div className="space-y-6">
-      {/* ===== 統計表ID入力フォーム（常時表示） ===== */}
       <div className="max-w-md">
         <EstatMetaInfoFetcher
           clearOnSuccess={false}
@@ -192,8 +162,6 @@ export default function EstatMetaInfoDisplay({
         />
       </div>
 
-      {/* ===== ヘッダーセクション ===== */}
-      {/* 統計表IDとタイトル、保存ボタンを表示 */}
       <Card>
         <CardHeader className="flex flex-row items-start justify-between space-y-0">
           <div className="space-y-1.5">
@@ -221,28 +189,18 @@ export default function EstatMetaInfoDisplay({
         </CardHeader>
       </Card>
 
-      {/* ===== タブナビゲーション ===== */}
-      {/* 統計表情報、分類、地域、時間軸、JSONレスポンスのタブ切り替え */}
       <Tabs
         value={activeTab}
         onValueChange={(value) => setActiveTab(value as TabType)}
       >
         <TabsList className="w-full justify-start">
-          <TabsTrigger value="table" className="gap-2">
+          <TabsTrigger value="basic" className="gap-2">
             <FileText className="h-4 w-4" />
-            統計表情報
+            基本情報
           </TabsTrigger>
-          <TabsTrigger value="categories" className="gap-2">
-            <Tag className="h-4 w-4" />
-            分類
-          </TabsTrigger>
-          <TabsTrigger value="areas" className="gap-2">
-            <MapPin className="h-4 w-4" />
-            地域
-          </TabsTrigger>
-          <TabsTrigger value="time" className="gap-2">
-            <Calendar className="h-4 w-4" />
-            時間軸
+          <TabsTrigger value="dimensions" className="gap-2">
+            <Layers className="h-4 w-4" />
+            次元
           </TabsTrigger>
           <TabsTrigger value="json" className="gap-2">
             <Code className="h-4 w-4" />
@@ -250,18 +208,15 @@ export default function EstatMetaInfoDisplay({
           </TabsTrigger>
         </TabsList>
 
-        {/* ===== タブコンテンツエリア ===== */}
-        <TabsContent value="table">
+        <TabsContent value="basic">
           <TableInfoTab tableInfo={parsedData.tableInfo} />
         </TabsContent>
-        <TabsContent value="categories">
-          <CategoriesTab categories={parsedData.dimensions.categories} />
-        </TabsContent>
-        <TabsContent value="areas">
-          <AreasTab areas={parsedData.dimensions.areas} />
-        </TabsContent>
-        <TabsContent value="time">
-          <TimeAxisTab timeAxis={parsedData.dimensions.timeAxis} />
+        <TabsContent value="dimensions">
+          <DimensionsTab
+            categories={parsedData.dimensions.categories}
+            areas={parsedData.dimensions.areas}
+            timeAxis={parsedData.dimensions.timeAxis}
+          />
         </TabsContent>
         <TabsContent value="json">
           <JsonDisplay data={metaInfo} onDownload={handleDownload} />
