@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import Link from "next/link";
 
@@ -22,6 +22,8 @@ import {
   TableRow,
 } from "@/components/atoms/ui/table";
 
+import { listCategories } from "@/features/category";
+
 import type { RankingGroup } from "../../types";
 
 interface RankingGroupsTableProps {
@@ -31,13 +33,48 @@ interface RankingGroupsTableProps {
 export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("all");
 
+  // カテゴリ一覧を取得
+  const categoriesList = listCategories();
+
+  // サブカテゴリIDからサブカテゴリ名を取得するヘルパー関数
+  const getSubcategoryName = (subcategoryId: string): string => {
+    for (const category of categoriesList) {
+      const subcategory = category.subcategories?.find((sub) => {
+        // categories.jsonはidプロパティを使用
+        const subId =
+          "id" in sub ? (sub as { id: string }).id : sub.subcategoryName;
+        return subId === subcategoryId || sub.subcategoryName === subcategoryId;
+      });
+      if (subcategory) {
+        return subcategory.name;
+      }
+    }
+    return subcategoryId; // 見つからない場合はIDをそのまま返す
+  };
+
+  // サブカテゴリIDと名前のマッピングを作成
+  const subcategoryMap = useMemo(() => {
+    const map = new Map<string, string>();
+    categoriesList.forEach((category) => {
+      category.subcategories?.forEach((sub) => {
+        // categories.jsonはidプロパティを使用
+        const subId =
+          "id" in sub ? (sub as { id: string }).id : sub.subcategoryName;
+        if (subId) {
+          map.set(subId, sub.name);
+        }
+      });
+    });
+    return map;
+  }, [categoriesList]);
+
   // サブカテゴリでフィルタリング
   const filteredGroups =
     selectedSubcategory === "all"
       ? groups
       : groups.filter((group) => group.subcategoryId === selectedSubcategory);
 
-  // ユニークなサブカテゴリIDを取得
+  // ユニークなサブカテゴリIDを取得（表示用に名前付き）
   const subcategories = Array.from(
     new Set(groups.map((group) => group.subcategoryId))
   );
@@ -58,7 +95,7 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
           <option value="all">全て</option>
           {subcategories.map((subcategoryId) => (
             <option key={subcategoryId} value={subcategoryId}>
-              {subcategoryId}
+              {subcategoryMap.get(subcategoryId) || subcategoryId}
             </option>
           ))}
         </select>
@@ -93,7 +130,7 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
                     <span>{group.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{group.subcategoryId}</TableCell>
+                <TableCell>{getSubcategoryName(group.subcategoryId)}</TableCell>
                 <TableCell>{group.items.length}</TableCell>
                 <TableCell>
                   <DropdownMenu>
