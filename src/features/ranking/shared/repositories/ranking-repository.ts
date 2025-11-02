@@ -262,6 +262,13 @@ export class RankingRepository {
 
   /**
    * ランキング項目を更新
+   * 
+   * 動的にUPDATE文を構築することで、以下の問題を解決：
+   * - 部分更新が可能
+   * - 0や空文字列を正しく処理できる
+   * - 更新したくないフィールドはそのまま保持される
+   * 
+   * @see Issue #12: ranking_items データベース更新エラーの調査結果
    */
   async updateRankingItem(
     rankingKey: string,
@@ -280,22 +287,75 @@ export class RankingRepository {
     }
   ): Promise<boolean> {
     try {
+      // 更新するフィールドのみを抽出
+      const setClauses: string[] = [];
+      const bindValues: any[] = [];
+
+      if (updates.label !== undefined) {
+        setClauses.push("label = ?");
+        bindValues.push(updates.label);
+      }
+      if (updates.name !== undefined) {
+        setClauses.push("ranking_name = ?");
+        bindValues.push(updates.name);
+      }
+      if (updates.annotation !== undefined) {
+        setClauses.push("annotation = ?");
+        // annotationはnullを許可するため、空文字列の場合はnullに変換
+        bindValues.push(updates.annotation || null);
+      }
+      if (updates.unit !== undefined) {
+        setClauses.push("unit = ?");
+        bindValues.push(updates.unit);
+      }
+      if (updates.isActive !== undefined) {
+        setClauses.push("is_active = ?");
+        bindValues.push(updates.isActive ? 1 : 0);
+      }
+      if (updates.mapColorScheme !== undefined) {
+        setClauses.push("map_color_scheme = ?");
+        bindValues.push(updates.mapColorScheme);
+      }
+      if (updates.mapDivergingMidpoint !== undefined) {
+        setClauses.push("map_diverging_midpoint = ?");
+        bindValues.push(updates.mapDivergingMidpoint);
+      }
+      if (updates.rankingDirection !== undefined) {
+        setClauses.push("ranking_direction = ?");
+        bindValues.push(updates.rankingDirection);
+      }
+      if (updates.conversionFactor !== undefined) {
+        setClauses.push("conversion_factor = ?");
+        // 0を含む全ての数値を正しく処理
+        bindValues.push(updates.conversionFactor);
+      }
+      if (updates.decimalPlaces !== undefined) {
+        setClauses.push("decimal_places = ?");
+        // 0を含む全ての数値を正しく処理
+        bindValues.push(updates.decimalPlaces);
+      }
+
+      // 更新するフィールドがない場合はエラー
+      if (setClauses.length === 0) {
+        throw new Error("No fields to update");
+      }
+
+      // updated_atは常に更新
+      setClauses.push("updated_at = CURRENT_TIMESTAMP");
+
+      // 動的にUPDATE文を構築
+      const query = `
+        UPDATE ranking_items
+        SET ${setClauses.join(", ")}
+        WHERE ranking_key = ? AND area_type = ?
+      `;
+
+      // WHERE句のパラメータを追加
+      bindValues.push(rankingKey, areaType);
+
       const result = await this.db
-        .prepare(QUERIES.updateRankingItem)
-        .bind(
-          updates.label || null,
-          updates.name || null,
-          updates.annotation || null,
-          updates.unit || null,
-          updates.isActive !== undefined ? (updates.isActive ? 1 : 0) : null,
-          updates.mapColorScheme || null,
-          updates.mapDivergingMidpoint || null,
-          updates.rankingDirection || null,
-          updates.conversionFactor || null,
-          updates.decimalPlaces || null,
-          rankingKey,
-          areaType
-        )
+        .prepare(query)
+        .bind(...bindValues)
         .run();
 
       return result.success;

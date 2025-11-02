@@ -45,7 +45,7 @@ const editRankingItemSchema = z.object({
       required_error: "変換係数は必須です",
       invalid_type_error: "変換係数は数値である必要があります",
     })
-    .positive("変換係数は正の数である必要があります")
+    .min(0, "変換係数は0以上である必要があります")
     .max(1000000, "変換係数は1000000以下である必要があります"),
   decimalPlaces: z
     .number({
@@ -422,21 +422,30 @@ export function EditRankingItemForm({
                     <Input
                       type="number"
                       step="0.0001"
-                      min="0.0001"
+                      min="0"
                       max="1000000"
                       value={field.value ?? ""}
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value === "") {
-                          // 空文字列の場合は既存の値を保持
+                          // 空文字列の場合はundefinedを設定（onBlurで復元される）
+                          field.onChange(undefined as any);
                           return;
                         }
                         const numValue = parseFloat(value);
-                        if (!isNaN(numValue) && numValue > 0) {
+                        if (!isNaN(numValue) && numValue >= 0) {
                           field.onChange(numValue);
                         }
                       }}
-                      onBlur={field.onBlur}
+                      onBlur={(e) => {
+                        // フォーカスアウト時に空文字列または無効な値の場合は既存の値を復元
+                        const currentValue = form.getValues("conversionFactor");
+                        const inputValue = e.target.value;
+                        if (inputValue === "" || isNaN(parseFloat(inputValue)) || currentValue === undefined || currentValue === null || isNaN(currentValue)) {
+                          field.onChange(rankingItem.conversionFactor);
+                        }
+                        field.onBlur();
+                      }}
                     />
                   </FormControl>
                   <FormDescription>表示用に値を変換する係数</FormDescription>
@@ -460,7 +469,8 @@ export function EditRankingItemForm({
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value === "") {
-                          // 空文字列の場合は既存の値を保持
+                          // 空文字列の場合はundefinedを設定（onBlurで復元される）
+                          field.onChange(undefined as any);
                           return;
                         }
                         const intValue = parseInt(value, 10);
@@ -468,7 +478,15 @@ export function EditRankingItemForm({
                           field.onChange(intValue);
                         }
                       }}
-                      onBlur={field.onBlur}
+                      onBlur={(e) => {
+                        // フォーカスアウト時に空文字列または無効な値の場合は既存の値を復元
+                        const currentValue = form.getValues("decimalPlaces");
+                        const inputValue = e.target.value;
+                        if (inputValue === "" || isNaN(parseInt(inputValue, 10)) || currentValue === undefined || currentValue === null || isNaN(currentValue)) {
+                          field.onChange(rankingItem.decimalPlaces);
+                        }
+                        field.onBlur();
+                      }}
                     />
                   </FormControl>
                   <FormDescription>表示時の小数点以下の桁数</FormDescription>

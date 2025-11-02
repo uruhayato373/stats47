@@ -63,6 +63,14 @@ export const QUERIES = {
 
   /**
    * ランキング項目を更新
+   * @deprecated このクエリは使用されません。
+   * RankingRepository.updateRankingItem() で動的にUPDATE文を構築しています。
+   * 
+   * 理由:
+   * - 部分更新に対応できない
+   * - 0や空文字列などのfalsyな値が正しく処理されない
+   * 
+   * @see Issue #12: ranking_items データベース更新エラーの調査結果
    */
   updateRankingItem: `
     UPDATE ranking_items 
