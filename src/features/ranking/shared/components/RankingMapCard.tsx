@@ -12,11 +12,11 @@ import { Card, CardContent } from "@/components/atoms/ui/card";
 import { PrefectureMap } from "@/features/visualization/map/common/PrefectureMap";
 import type { ChoroplethData } from "@/features/visualization/map/types/index";
 
-import type { RankingValue } from "../../items/types";
+import type { StatsSchema } from "@/types/stats";
 
 interface RankingMapCardProps {
   /** ランキングデータ */
-  data?: RankingValue[];
+  data?: StatsSchema[];
   /** カラースキーム（デフォルト: "interpolateBlues"） */
   colorScheme?: string;
   /** 分岐点設定 */
@@ -40,7 +40,8 @@ export function RankingMapCard({
   className,
   onPrefectureClick,
 }: RankingMapCardProps) {
-  // RankingValue[]をChoroplethData[]に変換
+  console.log(data);
+  // StatsSchema[]をChoroplethData[]に変換
   const choroplethData = useMemo<ChoroplethData[] | undefined>(() => {
     if (!data) return undefined;
 
