@@ -2,9 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Button } from "@/components/atoms/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
 
-import { getSubcategories } from "@/features/category";
 import { GroupItemsManager } from "@/features/ranking/groups/components/admin/GroupItemsManager";
 import { RankingGroupForm } from "@/features/ranking/groups/components/admin/RankingGroupForm";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
@@ -26,12 +31,11 @@ export default async function EditRankingGroupPage({ params }: PageProps) {
     notFound();
   }
 
-  const subcategories = await getSubcategories();
   const allItems = await repository.getAllRankingItems();
   const ungroupedItems = allItems.filter((item) => !item.groupKey);
 
   return (
-    <div className="max-w-7xl mx-auto px-2 py-4 space-y-4">
+    <div className="max-w-7xl mx-auto px-2 py-4 space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">
           {group.label || group.name} - グループ管理
@@ -41,22 +45,29 @@ export default async function EditRankingGroupPage({ params }: PageProps) {
         </Link>
       </div>
 
-      <Tabs defaultValue="group-info" className="w-full">
-        <TabsList>
-          <TabsTrigger value="group-info">グループ情報</TabsTrigger>
-          <TabsTrigger value="items">項目管理</TabsTrigger>
-        </TabsList>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* グループ情報フォーム */}
+        <Card>
+          <CardHeader>
+            <CardTitle>グループ情報</CardTitle>
+            <CardDescription>グループの基本設定を行います</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <RankingGroupForm group={group} />
+          </CardContent>
+        </Card>
 
-        <TabsContent value="group-info" className="mt-4">
-          <div className="max-w-2xl">
-            <RankingGroupForm group={group} subcategories={subcategories} />
-          </div>
-        </TabsContent>
-
-        <TabsContent value="items" className="mt-4">
-          <GroupItemsManager group={group} ungroupedItems={ungroupedItems} />
-        </TabsContent>
-      </Tabs>
+        {/* 項目管理 */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>項目管理</CardTitle>
+            <CardDescription>グループに属する項目を管理します</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <GroupItemsManager group={group} ungroupedItems={ungroupedItems} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
