@@ -123,6 +123,17 @@ export function EditRankingItemForm({
     });
     console.log("🔵 フォームのエラー状態（バリデーション前）:", form.formState.errors);
     
+    // 空文字列やundefinedの場合は既存の値で補完
+    const valuesToValidate = { ...currentValues };
+    if (valuesToValidate.conversionFactor === undefined || valuesToValidate.conversionFactor === null || isNaN(valuesToValidate.conversionFactor)) {
+      valuesToValidate.conversionFactor = rankingItem.conversionFactor;
+      form.setValue("conversionFactor", rankingItem.conversionFactor);
+    }
+    if (valuesToValidate.decimalPlaces === undefined || valuesToValidate.decimalPlaces === null || isNaN(valuesToValidate.decimalPlaces)) {
+      valuesToValidate.decimalPlaces = rankingItem.decimalPlaces;
+      form.setValue("decimalPlaces", rankingItem.decimalPlaces);
+    }
+    
     // バリデーションを手動で実行（全フィールド）
     const isValid = await form.trigger();
     console.log("🔵 バリデーション結果:", isValid);
@@ -428,8 +439,7 @@ export function EditRankingItemForm({
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value === "") {
-                          // 空文字列の場合はundefinedを設定（onBlurで復元される）
-                          field.onChange(undefined as any);
+                          // 空文字列の場合は何もしない（バリデーション時に補完される）
                           return;
                         }
                         const numValue = parseFloat(value);
@@ -469,8 +479,7 @@ export function EditRankingItemForm({
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value === "") {
-                          // 空文字列の場合はundefinedを設定（onBlurで復元される）
-                          field.onChange(undefined as any);
+                          // 空文字列の場合は何もしない（バリデーション時に補完される）
                           return;
                         }
                         const intValue = parseInt(value, 10);
