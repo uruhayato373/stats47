@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/atoms/ui/button";
 
 import { RankingItemForm } from "@/features/ranking/components/admin/RankingItemForm";
-import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
+import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 interface PageProps {
   params: Promise<{ rankingKey: string }>;

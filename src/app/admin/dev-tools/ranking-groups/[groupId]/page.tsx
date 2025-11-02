@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getSubcategories } from "@/features/category";
 import { RankingGroupForm } from "@/features/ranking/components/admin/forms/RankingGroupForm";
-import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
+import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 interface PageProps {
   params: Promise<{ groupId: string }>;

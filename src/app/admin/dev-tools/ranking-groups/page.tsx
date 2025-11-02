@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";
 
-import { RankingGroupsTable } from "@/features/ranking/components/admin/RankingGroupsTable";
-import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
+import { RankingGroupsTable } from "@/features/ranking/groups/components/admin/RankingGroupsTable";
+import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 /**
  * ランキンググループ管理画面

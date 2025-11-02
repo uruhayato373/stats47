@@ -24,7 +24,7 @@ const basicInfoSchema = z.object({
   label: z.string().min(1).max(50),
   name: z.string().min(1).max(100),
   unit: z.string().min(1).max(20),
-  description: z.string().max(500).optional(),
+  annotation: z.string().max(500).optional(),
   isActive: z.boolean(),
 });
 
@@ -48,7 +48,7 @@ export const BasicInfoForm = forwardRef<BasicInfoFormRef, BasicInfoFormProps>(
         label: item?.label || "",
         name: item?.name || "",
         unit: item?.unit || "",
-        description: item?.description || "",
+        annotation: item?.annotation || "",
         isActive: item?.isActive ?? true,
       },
     });
@@ -163,18 +163,18 @@ export const BasicInfoForm = forwardRef<BasicInfoFormRef, BasicInfoFormProps>(
 
         <FormField
           control={form.control}
-          name="description"
+          name="annotation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>説明</FormLabel>
+              <FormLabel>注釈</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder="統計項目の詳細説明（オプション）"
+                  placeholder="統計項目の詳細説明や注釈（オプション）"
                   rows={3}
                 />
               </FormControl>
-              <FormDescription>統計項目の詳細説明（任意）</FormDescription>
+              <FormDescription>統計項目の詳細説明や注釈（任意）</FormDescription>
               <FormMessage />
             </FormItem>
           )}

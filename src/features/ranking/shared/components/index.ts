@@ -1,0 +1,2 @@
+export { RankingMapCard } from "./RankingMapCard";
+

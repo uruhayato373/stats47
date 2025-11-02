@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 
-import Link from "next/link";
-
-import { Database, Plus } from "lucide-react";
+import { Database } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/atoms/ui/button";
@@ -23,13 +21,11 @@ import {
   SelectValue,
 } from "@/components/atoms/ui/select";
 
-import {
-  getAllRankingItems,
-  syncR2ToDatabaseAction,
-} from "@/features/ranking/actions";
 import { RankingItemsTable } from "@/features/ranking/components/admin/RankingItemsTable";
-import type { SyncResult } from "@/features/ranking/services/r2-sync-service";
-import type { RankingItem } from "@/features/ranking/types";
+import { getAllRankingItems } from "@/features/ranking/items/actions";
+import type { RankingItem } from "@/features/ranking/items/types";
+import { syncR2ToDatabaseAction } from "@/features/ranking/shared/actions/syncR2ToDatabase";
+import type { SyncResult } from "@/features/ranking/shared/services/r2-sync-service";
 
 interface RankingItemsPageClientProps {
   initialItems: RankingItem[];
@@ -146,15 +142,9 @@ export default function RankingItemsPageClient({
         <div>
           <h2 className="text-xl font-semibold">ランキング項目一覧</h2>
           <p className="text-sm text-muted-foreground mt-1">
-            ranking_itemsテーブルのデータを管理します
+            ranking_itemsテーブルのデータを管理します（R2ストレージから同期されます）
           </p>
         </div>
-        <Link href="/admin/dev-tools/ranking-items/new">
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            新規作成
-          </Button>
-        </Link>
       </div>
 
       {/* R2→D1同期カード */}

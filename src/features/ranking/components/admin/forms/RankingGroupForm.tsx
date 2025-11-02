@@ -1,10 +1,8 @@
 import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";
-import { Checkbox } from "@/components/atoms/ui/checkbox";
 import { Input } from "@/components/atoms/ui/input";
 import { Label } from "@/components/atoms/ui/label";
-import { Textarea } from "@/components/atoms/ui/textarea";
 
 import type { Subcategory } from "@/features/category";
 import type { RankingGroup } from "../../types/group";
@@ -69,17 +67,6 @@ export function RankingGroupForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">説明</Label>
-        <Textarea
-          id="description"
-          name="description"
-          defaultValue={group?.description}
-          placeholder="総人口に関するランキング項目をまとめる"
-          rows={3}
-        />
-      </div>
-
-      <div className="space-y-2">
         <Label htmlFor="icon">アイコン（絵文字またはテキスト）</Label>
         <Input
           id="icon"
@@ -99,17 +86,6 @@ export function RankingGroupForm({
           placeholder="0"
           required
         />
-      </div>
-
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="isCollapsed"
-          name="isCollapsed"
-          defaultChecked={group?.isCollapsed}
-        />
-        <Label htmlFor="isCollapsed" className="cursor-pointer">
-          デフォルトで折りたたむ
-        </Label>
       </div>
 
       <div className="flex justify-end gap-2">

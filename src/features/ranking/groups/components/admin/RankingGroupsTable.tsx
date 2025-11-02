@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";
@@ -14,7 +13,7 @@ import {
   TableRow,
 } from "@/components/atoms/ui/table";
 
-import type { RankingGroup } from "@/features/ranking/groups/types";
+import type { RankingGroup } from "../../types";
 
 interface RankingGroupsTableProps {
   groups: RankingGroup[];
@@ -113,3 +112,4 @@ export function RankingGroupsTable({ groups }: RankingGroupsTableProps) {
     </div>
   );
 }
+

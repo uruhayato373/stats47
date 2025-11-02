@@ -1,45 +1,79 @@
-// ============================================================================
-// Hooks
-// ============================================================================
-export * from "./hooks";
+/**
+ * Ranking ドメイン - 後方互換性のためのエクスポート
+ * 
+ * 新しいサブドメイン構造への移行期間中の後方互換性を提供します。
+ * 段階的に各ファイルのインポートパスを更新してください。
+ */
 
 // ============================================================================
-// コンポーネント
+// Items サブドメイン
 // ============================================================================
-export {
-  RankingItemCard,
-  RankingItemNotFound,
-  RankingItemsSidebar,
-  RankingMapCard,
-} from "./components";
+export * from "./items";
 
 // ============================================================================
-// サービス
+// Groups サブドメイン
+// ============================================================================
+export * from "./groups";
+
+// ============================================================================
+// Shared コンポーネント
+// ============================================================================
+export { RankingMapCard } from "./shared/components/RankingMapCard";
+
+// ============================================================================
+// Shared サービス
 // ============================================================================
 export {
   fetchDefaultRankingKey,
   fetchRankingConfig,
   fetchRankingItemsBySubcategory,
   updateVisualizationSettings,
-} from "./services/ranking-service";
+} from "./shared/services/ranking-service";
 export type {
   RankingConfig,
   RankingConfigResponse,
   SubcategoryConfig,
-} from "./services/ranking-service";
+} from "./shared/services/ranking-service";
 
 // ============================================================================
-// リポジトリ
+// Shared 型定義
 // ============================================================================
-// Note: Repositories are server-only and should be imported directly when needed
-// export * from "./repositories";
+export type { RankingItemsSidebarProps } from "./shared/types";
 
 // ============================================================================
-// コンバーター
+// Shared Actions
 // ============================================================================
-export * from "./converters";
+export { syncR2ToDatabaseAction } from "./shared/actions/syncR2ToDatabase";
+export type { SyncResult } from "./shared/services/r2-sync-service";
 
 // ============================================================================
-// 型定義
+// Shared Repository（後方互換性のため）
 // ============================================================================
-export type { RankingItem, RankingItemsSidebarProps } from "./types";
+export { RankingRepository } from "./shared/repositories/ranking-repository";
+export type { RankingConfigResponse, SubcategoryConfig } from "./shared/repositories/ranking-repository";
+
+// ============================================================================
+// 後方互換性のための旧エクスポート
+// ============================================================================
+// 以下の型は items/ または groups/ に移動しました
+// - RankingItem → ./items/types
+// - RankingGroup → ./groups/types
+// 下記のエクスポートは旧パスから参照しているファイルがある可能性があるため残します
+export type { RankingItem, RankingItemDB, RankingValue, RankingValueDB } from "./items/types";
+export type {
+  RankingGroup,
+  RankingGroupDB,
+  RankingGroupResponse,
+  CreateRankingGroupInput,
+  UpdateRankingGroupInput,
+  RankingGroupWithStats,
+} from "./groups/types";
+
+// ============================================================================
+// まだ移動していない admin コンポーネント（後方互換性のため）
+// ============================================================================
+// TODO: これらのコンポーネントも items/ または groups/ に移動する必要があります
+export { RankingItemForm } from "./components/admin/RankingItemForm";
+export { RankingItemsTable } from "./components/admin/RankingItemsTable";
+export { RankingGroupForm } from "./components/admin/forms/RankingGroupForm";
+export { GroupItemsManager } from "./components/admin/GroupItemsManager";

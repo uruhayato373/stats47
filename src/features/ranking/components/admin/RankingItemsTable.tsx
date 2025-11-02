@@ -13,7 +13,7 @@ import { Button } from "@/components/atoms/ui/button";
 import { Switch } from "@/components/atoms/ui/switch";
 import { DataTable } from "@/components/molecules/data-table/data-table";
 
-import { updateRankingItem } from "@/features/ranking/actions";
+import { updateRankingItem } from "@/features/ranking/items/actions";
 
 interface RankingItem {
   rankingKey: string;

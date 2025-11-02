@@ -129,8 +129,8 @@ CREATE TABLE IF NOT EXISTS ranking_items (
   ranking_key TEXT NOT NULL,
   area_type TEXT NOT NULL,  -- 'prefecture' | 'city' | 'national'
   label TEXT NOT NULL,
-  name TEXT NOT NULL,
-  description TEXT,
+  ranking_name TEXT NOT NULL,
+  annotation TEXT,
   unit TEXT NOT NULL,
   group_key TEXT,
   display_order_in_group INTEGER DEFAULT 0,
@@ -156,11 +156,10 @@ CREATE TABLE IF NOT EXISTS ranking_items (
 CREATE TABLE IF NOT EXISTS ranking_groups (
   group_key TEXT PRIMARY KEY,
   subcategory_id TEXT NOT NULL,
-  name TEXT NOT NULL,
-  description TEXT,
+  group_name TEXT NOT NULL,
+  label TEXT,
   icon TEXT,
   display_order INTEGER DEFAULT 0,
-  is_collapsed BOOLEAN DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

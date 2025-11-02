@@ -1,4 +1,4 @@
-import { RankingRepository } from "@/features/ranking/repositories/ranking-repository";
+import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 import RankingItemsPageClient from "./RankingItemsPageClient";
 
