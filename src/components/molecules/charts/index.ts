@@ -6,8 +6,6 @@
 export { TrendLineChart } from "./TrendLineChart";
 export type {
   TrendLineChartProps,
-  LineConfig,
   ChartConfig,
-  TooltipConfig,
 } from "./TrendLineChart";
 

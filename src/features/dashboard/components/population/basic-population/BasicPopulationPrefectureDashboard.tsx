@@ -48,11 +48,7 @@ export async function BasicPopulationPrefectureDashboard({
 
       {/* 総人口推移チャート */}
       <div className="col-span-12 lg:col-span-8">
-        <PopulationTrendChart
-          areaCode={areaCode}
-          title="総人口推移"
-          description="年度別の総人口推移を表示"
-        />
+        <PopulationTrendChart areaCode={areaCode} />
       </div>
 
       {/* 年齢区分別人口スタックバーチャート */}

@@ -12,11 +12,11 @@ import {
 import {
   EstatStatsDataResponse,
   FetchOptions,
-  FormattedEstatData,
   GetStatsDataParams,
 } from "../types";
 
-import { formatStatsData } from "./formatter";
+import { convertToStatsSchema, formatStatsData } from "./formatter";
+import type { StatsSchema } from "@/types/stats";
 
 /**
  * リクエストパラメータを構築
@@ -263,16 +263,23 @@ export async function fetchStatsDataWithSource(
 }
 
 /**
- * 統計データを取得して整形（便利メソッド）
+ * 統計データを取得して整形し、StatsSchema[]に変換（便利メソッド）
  *
  * @param statsDataId - 統計表ID
- * @param options - 取得オプション
- * @returns 整形された統計データ
+ * @param options - 取得オプション（areaFilter が指定されている場合、API側でフィルタリング済み）
+ * @returns StatsSchema[] に変換された統計データ
+ * @throws {Error} API呼び出しが失敗した場合
  */
 export async function fetchFormattedStatsData(
   statsDataId: string,
   options: FetchOptions = {}
-): Promise<FormattedEstatData> {
+): Promise<StatsSchema[]> {
   const response = await fetchStatsData(statsDataId, options);
-  return formatStatsData(response);
+  const formattedData = formatStatsData(response);
+
+  // FormattedValue[] を StatsSchema[] に変換
+  // フィルタリングは既にAPI側（areaFilter）で実施済みのため不要
+  return formattedData.values
+    .map((value) => convertToStatsSchema(value))
+    .filter((schema): schema is StatsSchema => schema !== undefined);
 }

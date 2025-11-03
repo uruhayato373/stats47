@@ -48,11 +48,7 @@ export async function BirthDeathPrefectureDashboard({
 
       {/* 出生・死亡推移チャート */}
       <div className="col-span-12 lg:col-span-8">
-        <BirthDeathTrendChart
-          areaCode={areaCode}
-          title="出生・死亡推移"
-          description="年度別の出生数と死亡数の推移を表示"
-        />
+        <BirthDeathTrendChart areaCode={areaCode} />
       </div>
     </DashboardLayout>
   );

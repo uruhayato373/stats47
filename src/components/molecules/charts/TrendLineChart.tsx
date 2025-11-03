@@ -8,13 +8,13 @@
 "use client";
 
 import {
-  LineChart,
+  CartesianGrid,
+  Legend,
   Line,
+  LineChart,
+  ResponsiveContainer,
   XAxis,
   YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Legend,
 } from "recharts";
 
 import {
@@ -24,11 +24,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/atoms/ui/chart";
+import { ChartContainer, ChartTooltip } from "@/components/atoms/ui/chart";
+
+import { CHART_COLORS } from "@/lib/chart-colors";
 import { formatNumber } from "@/lib/format";
 
 /**
@@ -54,41 +52,19 @@ export interface ChartConfig {
 }
 
 /**
- * Tooltip の設定
- */
-export interface TooltipConfig {
-  /** 表示するデータキーの配列 */
-  dataKeys: string[];
-  /** 各データキーのラベル（オプション） */
-  labels?: Record<string, string>;
-  /** 各データキーの色（オプション） */
-  colors?: Record<string, string>;
-  /** 単位のデータキー（デフォルト: "unit"） */
-  unitKey?: string;
-  /** X軸のラベルキー（デフォルト: "yearName"） */
-  xLabelKey?: string;
-}
-
-/**
  * TrendLineChart の Props
  */
 export interface TrendLineChartProps {
   /** チャート用データ */
   chartData: Array<Record<string, unknown>>;
-  /** チャート設定（dataKey をキーとする） */
-  chartConfig: Record<string, ChartConfig>;
-  /** Line の設定配列 */
-  lines: LineConfig[];
+  /** チャート設定（dataKey をキーとする、指定しない場合は chartData から自動生成） */
+  chartConfig?: Record<string, ChartConfig>;
   /** タイトル */
   title: string;
   /** 説明 */
   description?: string;
-  /** X軸のデータキー（デフォルト: "yearName"） */
-  xAxisDataKey?: string;
   /** Legend を表示するか（デフォルト: false） */
   showLegend?: boolean;
-  /** Tooltip の設定（オプション、指定しない場合はデフォルトの tooltip を使用） */
-  tooltipConfig?: TooltipConfig;
 }
 
 /**
@@ -102,6 +78,7 @@ export interface TrendLineChartProps {
  *
  * @example
  * ```tsx
+ * // chartConfig を指定する場合
  * const chartConfig = {
  *   value: {
  *     label: "人口",
@@ -109,18 +86,25 @@ export interface TrendLineChartProps {
  *   },
  * };
  *
- * const lines = [
+ * <TrendLineChart
+ *   chartData={data}
+ *   chartConfig={chartConfig}
+ *   title="人口推移"
+ * />
+ *
+ * // chartConfig を省略する場合（chartData から自動生成）
+ * const chartData = [
  *   {
- *     dataKey: "value",
- *     name: "value",
+ *     yearName: "2020年",
+ *     value: 14047594,
+ *     unit: "人",
+ *     categoryName: "総人口",
  *     color: "hsl(221, 83%, 53%)",
  *   },
  * ];
  *
  * <TrendLineChart
- *   chartData={data}
- *   chartConfig={chartConfig}
- *   lines={lines}
+ *   chartData={chartData}
  *   title="人口推移"
  * />
  * ```
@@ -128,13 +112,55 @@ export interface TrendLineChartProps {
 export function TrendLineChart({
   chartData,
   chartConfig,
-  lines,
   title,
   description,
-  xAxisDataKey = "yearName",
   showLegend = false,
-  tooltipConfig,
 }: TrendLineChartProps) {
+  // プロジェクト共通の定数
+  const X_AXIS_DATA_KEY = "yearName";
+  const X_LABEL_KEY = "yearName";
+  const UNIT_KEY = "unit";
+
+  // メタデータキー（データ値ではないキー）
+  const META_KEYS = ["year", "yearName", "unit"];
+
+  // chartConfig が未指定の場合、chartData から自動生成
+  const finalChartConfig: Record<string, ChartConfig> =
+    chartConfig ||
+    (chartData && chartData.length > 0
+      ? (() => {
+          const firstItem = chartData[0];
+          const dataKeys = Object.keys(firstItem).filter(
+            (key) => !META_KEYS.includes(key)
+          );
+
+          return dataKeys.reduce((acc, dataKey) => {
+            // chartData から categoryName と color を取得
+            // 単一データキーの場合: categoryName, color
+            // 複数データキーの場合: {dataKey}CategoryName, {dataKey}Color
+            const categoryName =
+              (firstItem.categoryName as string | undefined) ||
+              (firstItem[`${dataKey}CategoryName`] as string | undefined);
+            const color =
+              (firstItem.color as string | undefined) ||
+              (firstItem[`${dataKey}Color`] as string | undefined);
+
+            acc[dataKey] = {
+              label: categoryName || dataKey,
+              color: color || CHART_COLORS.primary,
+            };
+            return acc;
+          }, {} as Record<string, ChartConfig>);
+        })()
+      : {});
+
+  // chartConfig から lines を自動生成
+  const lines: LineConfig[] = Object.keys(finalChartConfig).map((dataKey) => ({
+    dataKey,
+    name: dataKey,
+    color: finalChartConfig[dataKey].color,
+  }));
+
   if (!chartData || chartData.length === 0) {
     return (
       <Card>
@@ -156,7 +182,7 @@ export function TrendLineChart({
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+        <ChartContainer config={finalChartConfig} className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart
               data={chartData}
@@ -164,7 +190,7 @@ export function TrendLineChart({
             >
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis
-                dataKey={xAxisDataKey}
+                dataKey={X_AXIS_DATA_KEY}
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
@@ -184,65 +210,55 @@ export function TrendLineChart({
                   }
 
                   const data = payload[0].payload;
+                  const unit = data[UNIT_KEY] as string | undefined;
+                  const xLabel = data[X_LABEL_KEY] as string | undefined;
 
-                  // tooltipConfig が指定されている場合はカスタム tooltip を表示
-                  if (tooltipConfig) {
-                    const unitKey = tooltipConfig.unitKey || "unit";
-                    const xLabelKey = tooltipConfig.xLabelKey || "yearName";
-                    const unit = data[unitKey] as string | undefined;
-                    const xLabel = data[xLabelKey] as string | undefined;
+                  // chartConfig のキーを dataKeys として使用
+                  const dataKeys = Object.keys(finalChartConfig);
 
-                    return (
-                      <div className="rounded-lg border bg-background p-2 shadow-sm">
-                        <div className="grid gap-1.5">
-                          {xLabel && (
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="text-muted-foreground">
-                                {xLabel}
+                  return (
+                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                      <div className="grid gap-1.5">
+                        {xLabel && (
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-muted-foreground">
+                              {xLabel}
+                            </span>
+                          </div>
+                        )}
+                        {dataKeys.map((dataKey) => {
+                          const value = data[dataKey] as number | undefined;
+                          const label =
+                            finalChartConfig[dataKey]?.label || dataKey;
+                          const color =
+                            finalChartConfig[dataKey]?.color || "inherit";
+
+                          if (value === undefined) {
+                            return null;
+                          }
+
+                          return (
+                            <div
+                              key={dataKey}
+                              className="flex items-center justify-between gap-2"
+                            >
+                              <span style={{ color }}>{label}:</span>
+                              <span className="font-mono font-medium tabular-nums">
+                                {formatNumber(value)}
+                                {unit ? ` ${unit}` : ""}
                               </span>
                             </div>
-                          )}
-                          {tooltipConfig.dataKeys.map((dataKey) => {
-                            const value = data[dataKey] as number | undefined;
-                            const label =
-                              tooltipConfig.labels?.[dataKey] ||
-                              chartConfig[dataKey]?.label ||
-                              dataKey;
-                            const color =
-                              tooltipConfig.colors?.[dataKey] ||
-                              chartConfig[dataKey]?.color ||
-                              "inherit";
-
-                            if (value === undefined) {
-                              return null;
-                            }
-
-                            return (
-                              <div
-                                key={dataKey}
-                                className="flex items-center justify-between gap-2"
-                              >
-                                <span style={{ color }}>{label}:</span>
-                                <span className="font-mono font-medium tabular-nums">
-                                  {formatNumber(value)}
-                                  {unit ? ` ${unit}` : ""}
-                                </span>
-                              </div>
-                            );
-                          })}
-                        </div>
+                          );
+                        })}
                       </div>
-                    );
-                  }
-
-                  // デフォルトの tooltip を表示（Recharts のデフォルト動作）
-                  return null;
+                    </div>
+                  );
                 }}
               />
               {showLegend && (
                 <Legend
                   formatter={(value) => {
-                    const config = chartConfig[value as string];
+                    const config = finalChartConfig[value as string];
                     return config ? config.label : value;
                   }}
                 />
@@ -266,4 +282,3 @@ export function TrendLineChart({
     </Card>
   );
 }
-

@@ -3,30 +3,27 @@
  * e-Stat APIから直接データを取得
  */
 
-import {
-  TrendLineChart,
-  type ChartConfig,
-  type LineConfig,
-  type TooltipConfig,
-} from "@/components/molecules/charts";
+import { TrendLineChart } from "@/components/molecules/charts";
 
-import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
-import {
-  convertToStatsSchema,
-  formatStatsData,
-} from "@/features/estat-api/stats-data/services/formatter";
+import { fetchFormattedStatsData } from "@/features/estat-api/stats-data/services/fetcher";
+
+import { CHART_COLORS } from "@/lib/chart-colors";
+import { convertStatsSchemasToTrendChartData } from "@/lib/chart-data-converter";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
 const CAT01_TOTAL_POPULATION = "A1101"; // 総人口
 
+// チャートのタイトルと説明
+const CHART_TITLE = "総人口推移";
+const CHART_DESCRIPTION = "年度別の総人口推移を表示";
+
+// チャートの色設定（shadcn/ui primary 色と同期: hsl(221, 83%, 53%)）
+const CHART_COLOR = CHART_COLORS.primary;
+
 interface PopulationTrendChartProps {
   /** 地域コード */
   areaCode: string;
-  /** タイトル */
-  title: string;
-  /** 説明 */
-  description?: string;
 }
 
 /**
@@ -34,124 +31,34 @@ interface PopulationTrendChartProps {
  */
 export async function PopulationTrendChart({
   areaCode,
-  title,
-  description,
 }: PopulationTrendChartProps) {
   try {
-    // e-Stat APIから総人口データを取得（全年度）
-    const response = await fetchStatsData(STATS_DATA_ID, {
+    // e-Stat APIから総人口データを取得して整形（API側でareaCodeでフィルタリング済み）
+    const statsSchemas = await fetchFormattedStatsData(STATS_DATA_ID, {
       categoryFilter: CAT01_TOTAL_POPULATION,
       areaFilter: areaCode,
     });
 
-    // データを整形
-    const formattedData = formatStatsData(response);
-
-    // StatsSchema形式に変換
-    const statsSchemas = formattedData.values
-      .filter((value) => value.dimensions.area?.code === areaCode)
-      .map((value) => convertToStatsSchema(value))
-      .filter(
-        (schema): schema is NonNullable<typeof schema> => schema !== undefined
-      );
-
+    // データがない場合は早期リターン
     if (statsSchemas.length === 0) {
-      const chartConfig: Record<string, ChartConfig> = {
-        value: {
-          label: title,
-          color: "hsl(221, 83%, 53%)",
-        },
-      };
-
-      const lines: LineConfig[] = [
-        {
-          dataKey: "value",
-          name: "value",
-          color: "hsl(221, 83%, 53%)",
-        },
-      ];
-
-      return (
-        <TrendLineChart
-          chartData={[]}
-          chartConfig={chartConfig}
-          lines={lines}
-          title={title}
-          description={description}
-        />
-      );
+      return null;
     }
 
-    // 年度順にソート
-    statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
-
     // StatsSchemaをチャート用のデータ形式に変換
-    const chartData = statsSchemas.map((item) => ({
-      year: item.timeCode,
-      yearName: item.timeName,
-      value:
-        typeof item.value === "number" ? item.value : Number(item.value) || 0,
-      unit: item.unit,
-    }));
-
-    // チャート設定（サーバー側で定義）
-    const chartConfig: Record<string, ChartConfig> = {
-      value: {
-        label: title,
-        color: "hsl(221, 83%, 53%)", // Blue（青色）
-      },
-    };
-
-    const lines: LineConfig[] = [
-      {
-        dataKey: "value",
-        name: "value",
-        color: "hsl(221, 83%, 53%)", // Blue（青色）
-      },
-    ];
-
-    // Tooltip の設定
-    const tooltipConfig: TooltipConfig = {
-      dataKeys: ["value"],
-      xLabelKey: "yearName",
-      unitKey: "unit",
-    };
+    const chartData = convertStatsSchemasToTrendChartData(statsSchemas, {
+      includeCategoryName: true,
+      color: CHART_COLOR,
+    });
 
     return (
       <TrendLineChart
         chartData={chartData}
-        chartConfig={chartConfig}
-        lines={lines}
-        title={title}
-        description={description}
-        tooltipConfig={tooltipConfig}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
       />
     );
   } catch (error) {
     console.error("[PopulationTrendChart] データ取得エラー:", error);
-    const chartConfig: Record<string, ChartConfig> = {
-      value: {
-        label: title,
-        color: "hsl(221, 83%, 53%)",
-      },
-    };
-
-    const lines: LineConfig[] = [
-      {
-        dataKey: "value",
-        name: "value",
-        color: "hsl(221, 83%, 53%)",
-      },
-    ];
-
-    return (
-      <TrendLineChart
-        chartData={[]}
-        chartConfig={chartConfig}
-        lines={lines}
-        title={title}
-        description={description}
-      />
-    );
+    return null;
   }
 }

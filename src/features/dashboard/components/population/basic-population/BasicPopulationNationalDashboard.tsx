@@ -23,7 +23,7 @@ export async function BasicPopulationNationalDashboard({
   category,
   subcategory,
   areaCode,
-  areaType  
+  areaType,
 }: DashboardProps) {
   // 未使用のパラメータは型定義の互換性のため必須
   void category;
@@ -53,11 +53,7 @@ export async function BasicPopulationNationalDashboard({
 
       {/* 総人口推移チャート */}
       <div className="col-span-12 lg:col-span-8">
-        <PopulationTrendChart
-          areaCode={areaCode}
-          title="総人口推移"
-          description="年度別の総人口推移を表示"
-        />
+        <PopulationTrendChart areaCode={areaCode} />
       </div>
 
       {/* 年齢区分別人口スタックバーチャート */}

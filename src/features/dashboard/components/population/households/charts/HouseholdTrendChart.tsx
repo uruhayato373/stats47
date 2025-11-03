@@ -9,6 +9,8 @@ import {
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
 
+import { convertStatsSchemasToTrendChartData } from "@/lib/chart-data-converter";
+
 import { HouseholdTrendChartClient } from "./HouseholdTrendChartClient";
 
 // e-Stat APIパラメータ定義
@@ -60,17 +62,8 @@ export async function HouseholdTrendChart({
       );
     }
 
-    // 年度順にソート
-    statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
-
     // StatsSchemaをチャート用のデータ形式に変換
-    const chartData = statsSchemas.map((item) => ({
-      year: item.timeCode,
-      yearName: item.timeName,
-      value:
-        typeof item.value === "number" ? item.value : Number(item.value) || 0,
-      unit: item.unit,
-    }));
+    const chartData = convertStatsSchemasToTrendChartData(statsSchemas);
 
     return (
       <HouseholdTrendChartClient
