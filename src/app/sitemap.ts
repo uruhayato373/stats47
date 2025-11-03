@@ -2,12 +2,18 @@
  * サイトマップ生成
  *
  * Next.jsのsitemap.xmlを生成
+ *
+ * ビルド時に生成し、1時間ごとに再検証（ISR）
  */
 
 import { MetadataRoute } from "next";
 
 import { getAllArticlesAction } from "@/features/blog/actions/getArticles";
 import { listCategories } from "@/features/category/repositories/category-repository";
+
+// ISR（Incremental Static Regeneration）設定
+// ビルド時に生成し、1時間ごとに再生成
+export const revalidate = 3600; // 1時間（秒単位）
 
 /**
  * サイトマップを生成
@@ -49,6 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ? `/blog/${article.actualCategory}/${article.slug}/${time}`
       : `/blog/${article.actualCategory}/${article.slug}`;
 
+    // TODO: 将来的にfrontmatterにpublishedAtやupdatedAtを追加して、
+    // 実際の更新日時を反映することを検討
     return {
       url: `${baseUrl}${path}`,
       changeFrequency: "monthly",

@@ -13,6 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
+import { Label } from "@/components/atoms/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
 import {
   Tabs,
   TabsContent,
@@ -41,6 +43,7 @@ export default function RankingMappingsPageClient({
   );
   const [isPending, startTransition] = useTransition();
   const [isConvertingAll, setIsConvertingAll] = useState(false);
+  const [mode, setMode] = useState<"delete_all" | "skip_existing">("delete_all");
 
   // 重複しているitem_codeを検出
   const duplicateItemCodes = useMemo(() => {
@@ -118,7 +121,7 @@ export default function RankingMappingsPageClient({
   const handleConvertAll = async () => {
     setIsConvertingAll(true);
     try {
-      const result = await convertAllRankingsAction();
+      const result = await convertAllRankingsAction(undefined, mode);
       if (result.success) {
         toast.success(result.message);
       } else {
@@ -171,7 +174,41 @@ export default function RankingMappingsPageClient({
             is_ranking=falseのデータに対応するR2データは自動的に削除されます。
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
+          <div className="space-y-3">
+            <Label className="text-base font-medium">処理モード</Label>
+            <RadioGroup
+              value={mode}
+              onValueChange={(value) =>
+                setMode(value as "delete_all" | "skip_existing")
+              }
+              className="space-y-2"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="delete_all" id="mode-delete-all" />
+                <Label
+                  htmlFor="mode-delete-all"
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  全削除してから保存
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="skip_existing" id="mode-skip-existing" />
+                <Label
+                  htmlFor="mode-skip-existing"
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  新規のみ追加
+                </Label>
+              </div>
+            </RadioGroup>
+            <p className="text-xs text-muted-foreground">
+              {mode === "delete_all"
+                ? "R2ストレージの全データを削除してから、全ての項目を保存します。"
+                : "既存のデータはスキップして、新規のデータのみ追加します。"}
+            </p>
+          </div>
           <Button
             onClick={handleConvertAll}
             disabled={isConvertingAll}
@@ -181,7 +218,7 @@ export default function RankingMappingsPageClient({
             <Zap className="h-4 w-4 mr-2" />
             {isConvertingAll ? "変換中..." : "全項目を変換実行"}
           </Button>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="text-sm text-muted-foreground">
             注意: 大量のデータを変換するため、時間がかかる場合があります
           </p>
         </CardContent>

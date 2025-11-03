@@ -210,6 +210,28 @@ export class EstatRankingR2Repository {
   }
 
   /**
+   * ランキングデータが存在するか確認
+   *
+   * @param areaType - 地域タイプ
+   * @param rankingKey - ランキングキー
+   * @param timeCode - 時間コード
+   * @returns データが存在する場合はtrue、存在しない場合はfalse
+   */
+  static async hasRankingData(
+    areaType: "prefecture" | "city" | "national",
+    rankingKey: string,
+    timeCode: string
+  ): Promise<boolean> {
+    try {
+      const key = this.generateRankingKey(areaType, rankingKey, timeCode);
+      const keys = await this.listRankingKeys(areaType, rankingKey);
+      return keys.includes(key);
+    } catch {
+      return false;
+    }
+  }
+
+  /**
    * rankingディレクトリ配下のすべてのデータを一括削除
    *
    * @returns 削除されたファイル数とキーの配列

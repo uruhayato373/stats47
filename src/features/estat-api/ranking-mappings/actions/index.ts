@@ -524,10 +524,12 @@ export async function convertToRankingAction(
  * ランキング変換実行（isRanking=trueの全項目）
  *
  * @param timeCode - 時間コード（オプション、各項目で自動判定）
+ * @param mode - 処理モード（"delete_all": 全削除してから保存, "skip_existing": 既存データをスキップして新規のみ追加）
  * @returns 変換結果の配列
  */
 export async function convertAllRankingsAction(
-  timeCode?: string
+  timeCode?: string,
+  mode: "delete_all" | "skip_existing" = "delete_all"
 ): Promise<{
   success: boolean;
   message: string;
@@ -542,7 +544,7 @@ export async function convertAllRankingsAction(
 }> {
   try {
     console.log(
-      `[convertAllRankingsAction] 全ランキング変換開始: timeCode=${timeCode || "auto"}`
+      `[convertAllRankingsAction] 全ランキング変換開始: timeCode=${timeCode || "auto"}, mode=${mode}`
     );
 
     // isRanking=trueの項目を取得
@@ -560,16 +562,20 @@ export async function convertAllRankingsAction(
       `[convertAllRankingsAction] ${mappings.length}件の項目を変換します`
     );
 
-    // rankingディレクトリ配下のすべてのデータを一括削除（高速化のため）
-    console.log("[convertAllRankingsAction] rankingディレクトリ配下の全データを一括削除開始");
-    try {
-      const deleteResult = await EstatRankingR2Repository.deleteAllRankingData();
-      console.log(
-        `[convertAllRankingsAction] rankingディレクトリ配下の全データ削除完了: ${deleteResult.deletedCount}件`
-      );
-    } catch (error) {
-      // 削除エラーは警告のみ（変換処理は続行）
-      console.warn("[convertAllRankingsAction] rankingディレクトリ配下の全データ削除エラー:", error);
+    // モード1（delete_all）の場合のみ、rankingディレクトリ配下のすべてのデータを一括削除
+    if (mode === "delete_all") {
+      console.log("[convertAllRankingsAction] rankingディレクトリ配下の全データを一括削除開始");
+      try {
+        const deleteResult = await EstatRankingR2Repository.deleteAllRankingData();
+        console.log(
+          `[convertAllRankingsAction] rankingディレクトリ配下の全データ削除完了: ${deleteResult.deletedCount}件`
+        );
+      } catch (error) {
+        // 削除エラーは警告のみ（変換処理は続行）
+        console.warn("[convertAllRankingsAction] rankingディレクトリ配下の全データ削除エラー:", error);
+      }
+    } else {
+      console.log("[convertAllRankingsAction] モード2（新規のみ追加）のため、全削除をスキップします");
     }
 
     const results: Array<{
@@ -685,6 +691,22 @@ export async function convertAllRankingsAction(
         // 各時間コードごとに処理
         for (const targetTimeCode of targetTimeCodes) {
           try {
+            // モード2（skip_existing）の場合、既存ファイルの存在確認
+            if (mode === "skip_existing") {
+              const exists = await EstatRankingR2Repository.hasRankingData(
+                mapping.area_type,
+                mapping.item_code,
+                targetTimeCode
+              );
+              if (exists) {
+                console.log(
+                  `[convertAllRankingsAction] 既存データのためスキップ: ${mapping.item_name} (時間コード: ${targetTimeCode})`
+                );
+                // 既存ファイルがある場合はスキップ（次の時間コードに続行）
+                continue;
+              }
+            }
+
             // StatsSchema[]形式に変換（指定された時間コードのみ）
             // フォーマット済みデータを渡すことで、再フォーマットを回避
             let statsSchemas;
