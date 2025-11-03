@@ -3,7 +3,7 @@ import {
   type MetaInfoSource,
 } from "@/features/estat-api/meta-info";
 import { listSavedMetaInfo } from "@/features/estat-api/meta-info/repositories";
-import type { EstatMetaInfo } from "@/features/estat-api/meta-info/types";
+import type { SavedEstatMetaInfo } from "@/features/estat-api/meta-info/types";
 import type { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
 
 import MetaInfoPageClient from "./MetaInfoPageClient";
@@ -41,7 +41,7 @@ export default async function MetaInfoPage({
   }
 
   // 登録済みデータの取得
-  let savedMetaInfoList: EstatMetaInfo[] = [];
+  let savedMetaInfoList: SavedEstatMetaInfo[] = [];
 
   try {
     // リポジトリから保存済みメタ情報を取得（全件取得）

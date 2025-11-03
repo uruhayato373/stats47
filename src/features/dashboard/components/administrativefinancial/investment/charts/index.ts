@@ -7,6 +7,3 @@ export { TotalAdministrativeInvestmentCard } from "./TotalAdministrativeInvestme
 export { TotalGeneralProjectInvestmentCard } from "./TotalGeneralProjectInvestmentCard";
 export { InvestmentExpensesTrendChart } from "./InvestmentExpensesTrendChart";
 
-// Client Components（内部使用）
-export { InvestmentExpensesTrendChartClient } from "./InvestmentExpensesTrendChartClient";
-

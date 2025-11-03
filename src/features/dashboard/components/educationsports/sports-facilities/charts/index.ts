@@ -8,5 +8,5 @@ export { PublicSwimmingPoolCountCard } from "./PublicSwimmingPoolCountCard";
 export { PublicGymnasiumTrendChart } from "./PublicGymnasiumTrendChart";
 
 // Client Components（内部使用）
-export { PublicGymnasiumTrendChartClient } from "./PublicGymnasiumTrendChartClient";
+// export { PublicGymnasiumTrendChartClient } from "./PublicGymnasiumTrendChartClient"; // Deleted
 

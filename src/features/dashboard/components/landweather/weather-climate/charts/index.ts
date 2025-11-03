@@ -8,6 +8,6 @@ export { TemperatureTrendChart } from "./TemperatureTrendChart";
 export { PrecipitationSunshineChart } from "./PrecipitationSunshineChart";
 
 // Client Components（内部使用）
-export { TemperatureTrendChartClient } from "./TemperatureTrendChartClient";
+// export { TemperatureTrendChartClient } from "./TemperatureTrendChartClient"; // Deleted
 export { PrecipitationSunshineChartClient } from "./PrecipitationSunshineChartClient";
 

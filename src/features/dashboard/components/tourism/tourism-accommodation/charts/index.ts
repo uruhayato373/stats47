@@ -9,5 +9,5 @@ export { ForeignOvernightGuestsCard } from "./ForeignOvernightGuestsCard";
 export { OvernightGuestsTrendChart } from "./OvernightGuestsTrendChart";
 
 // Client Components（内部使用）
-export { OvernightGuestsTrendChartClient } from "./OvernightGuestsTrendChartClient";
+// export { OvernightGuestsTrendChartClient } from "./OvernightGuestsTrendChartClient"; // Deleted
 

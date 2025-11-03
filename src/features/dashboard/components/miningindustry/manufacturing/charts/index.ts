@@ -8,5 +8,5 @@ export { ManufacturingShipmentAmountCard } from "./ManufacturingShipmentAmountCa
 export { ManufacturingShipmentTrendChart } from "./ManufacturingShipmentTrendChart";
 
 // Client Components（内部使用）
-export { ManufacturingShipmentTrendChartClient } from "./ManufacturingShipmentTrendChartClient";
+// export { ManufacturingShipmentTrendChartClient } from "./ManufacturingShipmentTrendChartClient"; // Deleted
 

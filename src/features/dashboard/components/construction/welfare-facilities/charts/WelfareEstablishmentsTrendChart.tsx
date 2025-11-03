@@ -3,13 +3,13 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { WelfareEstablishmentsTrendChartClient } from "./WelfareEstablishmentsTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010103"; // 都道府県データ 基礎データ
@@ -50,16 +50,6 @@ export async function WelfareEstablishmentsTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (statsSchemas.length === 0) {
-      return (
-        <WelfareEstablishmentsTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
 
@@ -72,9 +62,17 @@ export async function WelfareEstablishmentsTrendChart({
       unit: item.unit,
     }));
 
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(142, 71%, 45%)", // Green（緑色）
+      },
+    };
+
     return (
-      <WelfareEstablishmentsTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
       />
@@ -84,9 +82,16 @@ export async function WelfareEstablishmentsTrendChart({
       "[WelfareEstablishmentsTrendChart] データ取得エラー:",
       error
     );
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(142, 71%, 45%)", // Green（緑色）
+      },
+    };
     return (
-      <WelfareEstablishmentsTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
       />

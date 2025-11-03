@@ -8,5 +8,5 @@ export { PavedRoadLengthCard } from "./PavedRoadLengthCard";
 export { RoadLengthTrendChart } from "./RoadLengthTrendChart";
 
 // Client Components（内部使用）
-export { RoadLengthTrendChartClient } from "./RoadLengthTrendChartClient";
+// export { RoadLengthTrendChartClient } from "./RoadLengthTrendChartClient"; // Deleted
 

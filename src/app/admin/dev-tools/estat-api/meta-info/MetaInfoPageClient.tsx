@@ -11,7 +11,7 @@ import {
 
 import { EstatMetaInfoDisplay, EstatMetaInfoTable } from "@/features/estat-api/meta-info/components";
 import type { MetaInfoSource } from "@/features/estat-api/meta-info";
-import type { EstatMetaInfo } from "@/features/estat-api/meta-info/types";
+import type { SavedEstatMetaInfo } from "@/features/estat-api/meta-info/types";
 import type { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types";
 
 /**
@@ -27,7 +27,7 @@ interface MetaInfoPageClientProps {
   /** エラーメッセージ */
   error?: string | null;
   /** 登録済みメタ情報の配列 */
-  savedMetaInfoList: EstatMetaInfo[];
+  savedMetaInfoList: SavedEstatMetaInfo[];
 }
 
 /**

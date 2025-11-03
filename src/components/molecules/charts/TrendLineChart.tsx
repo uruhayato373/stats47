@@ -65,6 +65,8 @@ export interface TrendLineChartProps {
   description?: string;
   /** Legend を表示するか（デフォルト: false） */
   showLegend?: boolean;
+  /** 値のフォーマッター（デフォルト: formatNumber） */
+  valueFormatter?: (value: number) => string;
 }
 
 /**
@@ -115,6 +117,7 @@ export function TrendLineChart({
   title,
   description,
   showLegend = false,
+  valueFormatter = formatNumber,
 }: TrendLineChartProps) {
   // プロジェクト共通の定数
   const X_AXIS_DATA_KEY = "yearName";
@@ -201,7 +204,7 @@ export function TrendLineChart({
                 axisLine={false}
                 tickMargin={8}
                 className="text-xs"
-                tickFormatter={formatNumber}
+                tickFormatter={valueFormatter}
               />
               <ChartTooltip
                 content={({ active, payload }) => {
@@ -244,7 +247,7 @@ export function TrendLineChart({
                             >
                               <span style={{ color }}>{label}:</span>
                               <span className="font-mono font-medium tabular-nums">
-                                {formatNumber(value)}
+                                {valueFormatter(value)}
                                 {unit ? ` ${unit}` : ""}
                               </span>
                             </div>

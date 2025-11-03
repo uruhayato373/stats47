@@ -7,5 +7,5 @@ export { WageSalaryCard } from "./WageSalaryCard";
 export { MinimumWageTrendChart } from "./MinimumWageTrendChart";
 
 // Client Components（内部使用）
-export { MinimumWageTrendChartClient } from "./MinimumWageTrendChartClient";
+// export { MinimumWageTrendChartClient } from "./MinimumWageTrendChartClient"; // Deleted
 

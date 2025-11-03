@@ -9,5 +9,5 @@ export { JuniorCollegeStudentCountCard } from "./JuniorCollegeStudentCountCard";
 export { UniversityStudentTrendChart } from "./UniversityStudentTrendChart";
 
 // Client Components（内部使用）
-export { UniversityStudentTrendChartClient } from "./UniversityStudentTrendChartClient";
+// export { UniversityStudentTrendChartClient } from "./UniversityStudentTrendChartClient"; // Deleted
 

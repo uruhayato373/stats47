@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { TemperatureTrendChartClient } from "./TemperatureTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010102"; // 国土統計
@@ -132,23 +131,73 @@ export async function TemperatureTrendChart({
         average: item.average,
         maximum: item.maximum,
         minimum: item.minimum,
+        unit: "°C",
       }))
       .sort((a, b) => a.year.localeCompare(b.year));
 
+    const chartConfig = {
+      average: {
+        label: "年平均気温",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      maximum: {
+        label: "最高気温",
+        color: "hsl(0, 84%, 60%)", // Red（赤色）
+      },
+      minimum: {
+        label: "最低気温",
+        color: "hsl(221, 83%, 60%)", // Light Blue（ライトブルー）
+      },
+    };
+
+    // 小数点以下1桁でフォーマット
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
+
     return (
-      <TemperatureTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
+        valueFormatter={formatValue}
       />
     );
   } catch (error) {
     console.error("[TemperatureTrendChart] データ取得エラー:", error);
+    const chartConfig = {
+      average: {
+        label: "年平均気温",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      maximum: {
+        label: "最高気温",
+        color: "hsl(0, 84%, 60%)", // Red（赤色）
+      },
+      minimum: {
+        label: "最低気温",
+        color: "hsl(221, 83%, 60%)", // Light Blue（ライトブルー）
+      },
+    };
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
     return (
-      <TemperatureTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
+        valueFormatter={formatValue}
       />
     );
   }

@@ -156,7 +156,7 @@ export default function RankingMappingsPageClient({
             e-Statパラメータとランキング項目のマッピングを管理します
           </p>
         </div>
-        <Button onClick={handleRefresh} disabled={isPending} variant="outline">
+        <Button onClick={() => handleRefresh()} disabled={isPending} variant="outline">
           <RefreshCw
             className={`h-4 w-4 mr-2 ${isPending ? "animate-spin" : ""}`}
           />

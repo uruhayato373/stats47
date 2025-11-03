@@ -10,5 +10,5 @@ export { LaborForceTrendChart } from "./LaborForceTrendChart";
 
 // Client Components（内部使用）
 export { LaborForceCompositionDonutChartClient } from "./LaborForceCompositionDonutChartClient";
-export { LaborForceTrendChartClient } from "./LaborForceTrendChartClient";
+// export { LaborForceTrendChartClient } from "./LaborForceTrendChartClient"; // Deleted
 

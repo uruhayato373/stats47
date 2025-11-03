@@ -8,5 +8,5 @@ export { StandardizedMortalityRateCard } from "./StandardizedMortalityRateCard";
 export { DeathCountTrendChart } from "./DeathCountTrendChart";
 
 // Client Components（内部使用）
-export { DeathCountTrendChartClient } from "./DeathCountTrendChartClient";
+// export { DeathCountTrendChartClient } from "./DeathCountTrendChartClient"; // Deleted
 

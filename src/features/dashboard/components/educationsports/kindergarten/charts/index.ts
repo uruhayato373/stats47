@@ -8,5 +8,5 @@ export { KindergartenTeacherCountCard } from "./KindergartenTeacherCountCard";
 export { KindergartenEnrollmentTrendChart } from "./KindergartenEnrollmentTrendChart";
 
 // Client Components（内部使用）
-export { KindergartenEnrollmentTrendChartClient } from "./KindergartenEnrollmentTrendChartClient";
+// export { KindergartenEnrollmentTrendChartClient } from "./KindergartenEnrollmentTrendChartClient"; // Deleted
 

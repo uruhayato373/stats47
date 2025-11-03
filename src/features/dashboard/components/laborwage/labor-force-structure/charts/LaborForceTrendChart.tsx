@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { LaborForceTrendChartClient } from "./LaborForceTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010106"; // 労働統計
@@ -65,16 +64,6 @@ export async function LaborForceTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (laborForceSchemas.length === 0 || employedSchemas.length === 0) {
-      return (
-        <LaborForceTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     laborForceSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
     employedSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
@@ -112,20 +101,45 @@ export async function LaborForceTrendChart({
         (d) => d.laborForceValue > 0 || d.employedValue > 0
       ); // データが存在する年度のみ
 
+    const chartConfig = {
+      laborForceValue: {
+        label: "労働力人口",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      employedValue: {
+        label: "就業者数",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+    };
+
     return (
-      <LaborForceTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
       />
     );
   } catch (error) {
     console.error("[LaborForceTrendChart] データ取得エラー:", error);
+    const chartConfig = {
+      laborForceValue: {
+        label: "労働力人口",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      employedValue: {
+        label: "就業者数",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+    };
     return (
-      <LaborForceTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
       />
     );
   }

@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { MigrationTrendChartClient } from "./MigrationTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -65,16 +64,6 @@ export async function MigrationTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (inSchemas.length === 0 || outSchemas.length === 0) {
-      return (
-        <MigrationTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     inSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
     outSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
@@ -113,20 +102,53 @@ export async function MigrationTrendChart({
       })
       .filter((d) => d.inValue > 0 || d.outValue > 0); // データが存在する年度のみ
 
+    const chartConfig = {
+      inValue: {
+        label: "転入者数",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      outValue: {
+        label: "転出者数",
+        color: "hsl(346, 77%, 50%)", // Pink（ピンク色）
+      },
+      netValue: {
+        label: "転入超過数",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+    };
+
     return (
-      <MigrationTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
       />
     );
   } catch (error) {
     console.error("[MigrationTrendChart] データ取得エラー:", error);
+    const chartConfig = {
+      inValue: {
+        label: "転入者数",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      outValue: {
+        label: "転出者数",
+        color: "hsl(346, 77%, 50%)", // Pink（ピンク色）
+      },
+      netValue: {
+        label: "転入超過数",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+    };
     return (
-      <MigrationTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        showLegend={true}
       />
     );
   }

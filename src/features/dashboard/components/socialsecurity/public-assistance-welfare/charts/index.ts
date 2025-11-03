@@ -8,5 +8,5 @@ export { PublicAssistancePersonsCard } from "./PublicAssistancePersonsCard";
 export { PublicAssistanceHouseholdsTrendChart } from "./PublicAssistanceHouseholdsTrendChart";
 
 // Client Components（内部使用）
-export { PublicAssistanceHouseholdsTrendChartClient } from "./PublicAssistanceHouseholdsTrendChartClient";
+// export { PublicAssistanceHouseholdsTrendChartClient } from "./PublicAssistanceHouseholdsTrendChartClient"; // Deleted
 

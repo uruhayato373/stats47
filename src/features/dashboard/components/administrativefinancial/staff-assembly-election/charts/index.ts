@@ -7,6 +7,3 @@ export { PrefecturalAssemblyMembersCard } from "./PrefecturalAssemblyMembersCard
 export { VoterListRegistrantsCard } from "./VoterListRegistrantsCard";
 export { PrefecturalStaffTrendChart } from "./PrefecturalStaffTrendChart";
 
-// Client Components（内部使用）
-export { PrefecturalStaffTrendChartClient } from "./PrefecturalStaffTrendChartClient";
-

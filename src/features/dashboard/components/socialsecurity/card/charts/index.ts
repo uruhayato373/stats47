@@ -8,5 +8,5 @@ export { WelfareExpensesCard } from "./WelfareExpensesCard";
 export { SocialWelfareExpensesTrendChart } from "./SocialWelfareExpensesTrendChart";
 
 // Client Components（内部使用）
-export { SocialWelfareExpensesTrendChartClient } from "./SocialWelfareExpensesTrendChartClient";
+// export { SocialWelfareExpensesTrendChartClient } from "./SocialWelfareExpensesTrendChartClient"; // Deleted
 

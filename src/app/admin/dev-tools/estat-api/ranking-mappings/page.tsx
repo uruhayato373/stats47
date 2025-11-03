@@ -1,4 +1,5 @@
 import { listRankingMappingsAction } from "@/features/estat-api/ranking-mappings/actions";
+import type { EstatRankingMapping } from "@/features/estat-api/ranking-mappings/types";
 
 import RankingMappingsPageClient from "./RankingMappingsPageClient";
 
@@ -11,7 +12,7 @@ import RankingMappingsPageClient from "./RankingMappingsPageClient";
  */
 export default async function RankingMappingsPage() {
   // ランキングマッピング一覧を取得
-  let mappings = [];
+  let mappings: EstatRankingMapping[] = [];
 
   try {
     mappings = await listRankingMappingsAction({

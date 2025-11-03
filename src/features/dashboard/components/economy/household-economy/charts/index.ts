@@ -6,6 +6,3 @@ export { PrivateConsumptionExpenditureCard } from "./PrivateConsumptionExpenditu
 export { ConsumerPriceIndexCard } from "./ConsumerPriceIndexCard";
 export { PrivateConsumptionTrendChart } from "./PrivateConsumptionTrendChart";
 
-// Client Components（内部使用）
-export { PrivateConsumptionTrendChartClient } from "./PrivateConsumptionTrendChartClient";
-

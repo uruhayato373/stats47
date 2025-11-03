@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { ConsumerPriceDifferenceIndexTrendChartClient } from "./ConsumerPriceDifferenceIndexTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010103"; // 都道府県データ 基礎データ
@@ -50,16 +49,6 @@ export async function ConsumerPriceDifferenceIndexTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (statsSchemas.length === 0) {
-      return (
-        <ConsumerPriceDifferenceIndexTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
 
@@ -72,11 +61,28 @@ export async function ConsumerPriceDifferenceIndexTrendChart({
       unit: item.unit,
     }));
 
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(271, 81%, 56%)", // Purple（紫色）
+      },
+    };
+
+    // 小数点以下1桁でフォーマット
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
+
     return (
-      <ConsumerPriceDifferenceIndexTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        valueFormatter={formatValue}
       />
     );
   } catch (error) {
@@ -84,11 +90,25 @@ export async function ConsumerPriceDifferenceIndexTrendChart({
       "[ConsumerPriceDifferenceIndexTrendChart] データ取得エラー:",
       error
     );
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(271, 81%, 56%)", // Purple（紫色）
+      },
+    };
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
     return (
-      <ConsumerPriceDifferenceIndexTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        valueFormatter={formatValue}
       />
     );
   }

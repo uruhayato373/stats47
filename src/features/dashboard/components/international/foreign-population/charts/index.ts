@@ -8,5 +8,5 @@ export { ResidentForeignerPopulationCard } from "./ResidentForeignerPopulationCa
 export { ForeignPopulationTrendChart } from "./ForeignPopulationTrendChart";
 
 // Client Components（内部使用）
-export { ForeignPopulationTrendChartClient } from "./ForeignPopulationTrendChartClient";
+// export { ForeignPopulationTrendChartClient } from "./ForeignPopulationTrendChartClient"; // Deleted
 

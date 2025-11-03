@@ -8,5 +8,5 @@ export { JuniorHighSchoolTeacherCountCard } from "./JuniorHighSchoolTeacherCount
 export { JuniorHighSchoolStudentTrendChart } from "./JuniorHighSchoolStudentTrendChart";
 
 // Client Components（内部使用）
-export { JuniorHighSchoolStudentTrendChartClient } from "./JuniorHighSchoolStudentTrendChartClient";
+// export { JuniorHighSchoolStudentTrendChartClient } from "./JuniorHighSchoolStudentTrendChartClient"; // Deleted
 

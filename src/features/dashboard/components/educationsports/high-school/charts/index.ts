@@ -8,5 +8,5 @@ export { HighSchoolTeacherCountCard } from "./HighSchoolTeacherCountCard";
 export { HighSchoolStudentTrendChart } from "./HighSchoolStudentTrendChart";
 
 // Client Components（内部使用）
-export { HighSchoolStudentTrendChartClient } from "./HighSchoolStudentTrendChartClient";
+// export { HighSchoolStudentTrendChartClient } from "./HighSchoolStudentTrendChartClient"; // Deleted
 

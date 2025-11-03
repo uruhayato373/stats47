@@ -8,5 +8,5 @@ export { EmergencyDispatchCountCard } from "./EmergencyDispatchCountCard";
 export { EmergencyDispatchTrendChart } from "./EmergencyDispatchTrendChart";
 
 // Client Components（内部使用）
-export { EmergencyDispatchTrendChartClient } from "./EmergencyDispatchTrendChartClient";
+// export { EmergencyDispatchTrendChartClient } from "./EmergencyDispatchTrendChartClient"; // Deleted
 

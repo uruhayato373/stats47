@@ -9,5 +9,5 @@ export { UrbanPlanningTrendChart } from "./UrbanPlanningTrendChart";
 
 // Client Components（内部使用）
 export { LandUseZoneStackedBarChartClient } from "./LandUseZoneStackedBarChartClient";
-export { UrbanPlanningTrendChartClient } from "./UrbanPlanningTrendChartClient";
+// export { UrbanPlanningTrendChartClient } from "./UrbanPlanningTrendChartClient"; // Deleted
 

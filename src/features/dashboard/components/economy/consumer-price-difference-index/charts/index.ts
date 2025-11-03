@@ -8,5 +8,5 @@ export { ConsumerPriceDifferenceIndexHousingCard } from "./ConsumerPriceDifferen
 export { ConsumerPriceDifferenceIndexTrendChart } from "./ConsumerPriceDifferenceIndexTrendChart";
 
 // Client Components（内部使用）
-export { ConsumerPriceDifferenceIndexTrendChartClient } from "./ConsumerPriceDifferenceIndexTrendChartClient";
+// export { ConsumerPriceDifferenceIndexTrendChartClient } from "./ConsumerPriceDifferenceIndexTrendChartClient"; // Deleted
 

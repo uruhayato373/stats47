@@ -8,5 +8,5 @@ export { NetMigrationCard } from "./NetMigrationCard";
 export { MigrationTrendChart } from "./MigrationTrendChart";
 
 // Client Components（内部使用）
-export { MigrationTrendChartClient } from "./MigrationTrendChartClient";
+// export { MigrationTrendChartClient } from "./MigrationTrendChartClient"; // Deleted
 

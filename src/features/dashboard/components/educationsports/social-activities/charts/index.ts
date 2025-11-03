@@ -7,5 +7,5 @@ export { VolunteerActivityRateCard } from "./VolunteerActivityRateCard";
 export { SocialEducationStaffTrendChart } from "./SocialEducationStaffTrendChart";
 
 // Client Components（内部使用）
-export { SocialEducationStaffTrendChartClient } from "./SocialEducationStaffTrendChartClient";
+// export { SocialEducationStaffTrendChartClient } from "./SocialEducationStaffTrendChartClient"; // Deleted
 

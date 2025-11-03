@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { MinimumWageTrendChartClient } from "./MinimumWageTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010106"; // 労働統計
@@ -50,16 +49,6 @@ export async function MinimumWageTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (statsSchemas.length === 0) {
-      return (
-        <MinimumWageTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
 
@@ -72,18 +61,33 @@ export async function MinimumWageTrendChart({
       unit: item.unit,
     }));
 
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
+
     return (
-      <MinimumWageTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
       />
     );
   } catch (error) {
     console.error("[MinimumWageTrendChart] データ取得エラー:", error);
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
     return (
-      <MinimumWageTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
       />

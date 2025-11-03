@@ -8,5 +8,5 @@ export { DentalClinicCountCard } from "./DentalClinicCountCard";
 export { HospitalCountTrendChart } from "./HospitalCountTrendChart";
 
 // Client Components（内部使用）
-export { HospitalCountTrendChartClient } from "./HospitalCountTrendChartClient";
+// export { HospitalCountTrendChartClient } from "./HospitalCountTrendChartClient"; // Deleted
 

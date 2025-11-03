@@ -9,5 +9,5 @@ export { NaturalParkTrendChart } from "./NaturalParkTrendChart";
 
 // Client Components（内部使用）
 export { NationalParkRatioDonutChartClient } from "./NationalParkRatioDonutChartClient";
-export { NaturalParkTrendChartClient } from "./NaturalParkTrendChartClient";
+// export { NaturalParkTrendChartClient } from "./NaturalParkTrendChartClient"; // Deleted
 

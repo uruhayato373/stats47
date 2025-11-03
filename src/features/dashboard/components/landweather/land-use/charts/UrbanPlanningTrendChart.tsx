@@ -3,13 +3,12 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { UrbanPlanningTrendChartClient } from "./UrbanPlanningTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010108"; // 住宅・土地統計調査
@@ -50,16 +49,6 @@ export async function UrbanPlanningTrendChart({
         (schema): schema is NonNullable<typeof schema> => schema !== undefined
       );
 
-    if (statsSchemas.length === 0) {
-      return (
-        <UrbanPlanningTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
-    }
-
     // 年度順にソート
     statsSchemas.sort((a, b) => a.timeCode.localeCompare(b.timeCode));
 
@@ -72,20 +61,51 @@ export async function UrbanPlanningTrendChart({
       unit: item.unit,
     }));
 
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
+
+    // 小数点以下1桁でフォーマット
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
+
     return (
-      <UrbanPlanningTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        valueFormatter={formatValue}
       />
     );
   } catch (error) {
     console.error("[UrbanPlanningTrendChart] データ取得エラー:", error);
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(value);
+    };
     return (
-      <UrbanPlanningTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
         title={title}
         description={description}
+        valueFormatter={formatValue}
       />
     );
   }
