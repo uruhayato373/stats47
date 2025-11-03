@@ -9,3 +9,9 @@ export type {
   ChartConfig,
 } from "./TrendLineChart";
 
+export { HorizontalBarChart } from "./HorizontalBarChart";
+export type {
+  HorizontalBarChartProps,
+  HorizontalBarChartData,
+} from "./HorizontalBarChart";
+

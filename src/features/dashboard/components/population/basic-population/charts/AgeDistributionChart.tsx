@@ -3,13 +3,17 @@
  * e-Stat APIから直接データを取得
  */
 
+import { HorizontalBarChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
 
-import { AgeDistributionChartClient } from "./AgeDistributionChartClient";
+// チャート設定
+const CHART_TITLE = "年齢別人口分布";
+const CHART_DESCRIPTION = "年齢区分別の人口分布を表示";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -41,10 +45,6 @@ const AGE_GROUP_CAT01_CODES = [
 interface AgeDistributionChartProps {
   /** 地域コード */
   areaCode: string;
-  /** タイトル */
-  title: string;
-  /** 説明 */
-  description?: string;
   /** 年度（最新年度を取得する場合は指定しない） */
   timeCode?: string;
 }
@@ -54,8 +54,6 @@ interface AgeDistributionChartProps {
  */
 export async function AgeDistributionChart({
   areaCode,
-  title,
-  description,
   timeCode,
 }: AgeDistributionChartProps) {
   try {
@@ -122,10 +120,13 @@ export async function AgeDistributionChart({
 
     if (ageGroups.length === 0) {
       return (
-        <AgeDistributionChartClient
+        <HorizontalBarChart
           chartData={[]}
-          title={title}
-          description={description}
+          title={CHART_TITLE}
+          description={CHART_DESCRIPTION}
+          categoryDataKey="categoryKey"
+          labelDataKey="labelKey"
+          valueDataKey="value"
         />
       );
     }
@@ -163,8 +164,8 @@ export async function AgeDistributionChart({
           .replace(/～/g, "-");
 
         return {
-          ageRange,
-          ageGroup: group.itemName,
+          categoryKey: ageRange,
+          labelKey: group.itemName,
           value: data.value,
           unit: data.unit,
         };
@@ -172,26 +173,32 @@ export async function AgeDistributionChart({
       .filter((item): item is NonNullable<typeof item> => item !== null)
       .sort((a, b) => {
         // 年齢順にソート（0-4, 5-9, ...）
-        const ageA = parseInt(a.ageRange.split("-")[0]);
-        const ageB = parseInt(b.ageRange.split("-")[0]);
+        const ageA = parseInt(a.categoryKey.split("-")[0]);
+        const ageB = parseInt(b.categoryKey.split("-")[0]);
         return ageA - ageB;
       });
 
     return (
-      <AgeDistributionChartClient
+      <HorizontalBarChart
         chartData={chartData}
-        title={title}
-        description={description}
-        timeName={targetTimeName}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
+        extraInfo={targetTimeName}
+        categoryDataKey="categoryKey"
+        labelDataKey="labelKey"
+        valueDataKey="value"
       />
     );
   } catch (error) {
     console.error("[AgeDistributionChart] データ取得エラー:", error);
     return (
-      <AgeDistributionChartClient
+      <HorizontalBarChart
         chartData={[]}
-        title={title}
-        description={description}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
+        categoryDataKey="categoryKey"
+        labelDataKey="labelKey"
+        valueDataKey="value"
       />
     );
   }

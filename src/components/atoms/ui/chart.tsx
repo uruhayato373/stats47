@@ -145,6 +145,7 @@ const ChartLegendContent = React.forwardRef<
     onClick?: (event: React.MouseEvent) => void;
     onMouseEnter?: (event: React.MouseEvent) => void;
     onMouseLeave?: (event: React.MouseEvent) => void;
+    onBBoxUpdate?: (box: any) => void;
   }
 >(
   (
@@ -161,6 +162,7 @@ const ChartLegendContent = React.forwardRef<
       onClick: _onClick,
       onMouseEnter: _onMouseEnter,
       onMouseLeave: _onMouseLeave,
+      onBBoxUpdate: _onBBoxUpdate,
       ...props
     },
     ref
@@ -175,6 +177,7 @@ const ChartLegendContent = React.forwardRef<
     void _onClick;
     void _onMouseEnter;
     void _onMouseLeave;
+    void _onBBoxUpdate;
 
     const { config } = useChart();
 

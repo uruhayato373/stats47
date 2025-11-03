@@ -62,11 +62,7 @@ export async function BasicPopulationPrefectureDashboard({
 
       {/* 年齢別人口分布チャート */}
       <div className="col-span-12">
-        <AgeDistributionChart
-          areaCode={areaCode}
-          title="年齢別人口分布"
-          description="年齢区分別の人口分布を表示"
-        />
+        <AgeDistributionChart areaCode={areaCode} />
       </div>
     </DashboardLayout>
   );
