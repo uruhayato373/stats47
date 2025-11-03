@@ -29,6 +29,7 @@ export async function getRankingData(
   rankingKey: string,
   yearCode: string
 ): Promise<StatsSchema[] | null> {
+  console.log("getRankingData", areaType, rankingKey, yearCode);
   try {
     // 4桁の年度コードを10桁のtimeCodeに変換（EstatRankingR2Repository.findRankingDataは10桁timeCodeを引数として受け取る）
     const timeCode = convertYearToTimeCode(yearCode);

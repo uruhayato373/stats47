@@ -1,25 +1,26 @@
 /**
  * MDXコンテンツレンダリングコンポーネント
- * 
+ *
  * next-mdx-remoteを使用してMDXコンテンツをレンダリングする
  * Server Componentsで使用可能
  */
 
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkGfm from "remark-gfm";
 
 import { ArticleContextProvider } from "../contexts/ArticleContext";
-import type { Article } from "../types/article.types";
 
 // カスタムMDXコンポーネントをインポート
-import { PrefectureRankingMap } from "./mdx-components/PrefectureRankingMap";
-import { PrefectureRankingTable } from "./mdx-components/PrefectureRankingTable";
 import { PrefectureRankingHighlights } from "./mdx-components/PrefectureRankingHighlights";
+import { PrefectureRankingMap } from "./mdx-components/PrefectureRankingMap";
 import { PrefectureRankingRegion } from "./mdx-components/PrefectureRankingRegion";
+import { PrefectureRankingTable } from "./mdx-components/PrefectureRankingTable";
 import { PrefectureStatisticsCard } from "./mdx-components/PrefectureStatisticsCard";
+
+import type { Article } from "../types/article.types";
 
 /**
  * MDXコンポーネントのマッピング
@@ -76,16 +77,10 @@ const mdxComponents = {
     );
   },
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
-      className="mb-4 overflow-x-auto rounded-lg bg-muted p-4"
-      {...props}
-    />
+    <pre className="mb-4 overflow-x-auto rounded-lg bg-muted p-4" {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a
-      className="text-primary underline-offset-4 hover:underline"
-      {...props}
-    />
+    <a className="text-primary underline-offset-4 hover:underline" {...props} />
   ),
   hr: (props: React.HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-8 border-border" {...props} />
@@ -104,7 +99,7 @@ export interface MDXContentProps {
 
 /**
  * MDXコンテンツレンダリングコンポーネント
- * 
+ *
  * ArticleContextProviderでラップして、カスタムコンポーネントから
  * 記事のメタデータにアクセスできるようにする
  */
@@ -123,27 +118,37 @@ export function MDXContent({ article, className }: MDXContentProps) {
   const componentsWithContext = {
     ...mdxComponents,
     // カスタムコンポーネントをラップしてコンテキストを提供
-    PrefectureRankingMap: (props: React.ComponentProps<typeof PrefectureRankingMap>) => (
+    PrefectureRankingMap: (
+      props: React.ComponentProps<typeof PrefectureRankingMap>
+    ) => (
       <ArticleContextProvider value={contextValue}>
         <PrefectureRankingMap {...props} />
       </ArticleContextProvider>
     ),
-    PrefectureRankingTable: (props: React.ComponentProps<typeof PrefectureRankingTable>) => (
+    PrefectureRankingTable: (
+      props: React.ComponentProps<typeof PrefectureRankingTable>
+    ) => (
       <ArticleContextProvider value={contextValue}>
         <PrefectureRankingTable {...props} />
       </ArticleContextProvider>
     ),
-    PrefectureRankingHighlights: (props: React.ComponentProps<typeof PrefectureRankingHighlights>) => (
+    PrefectureRankingHighlights: (
+      props: React.ComponentProps<typeof PrefectureRankingHighlights>
+    ) => (
       <ArticleContextProvider value={contextValue}>
         <PrefectureRankingHighlights {...props} />
       </ArticleContextProvider>
     ),
-    PrefectureRankingRegion: (props: React.ComponentProps<typeof PrefectureRankingRegion>) => (
+    PrefectureRankingRegion: (
+      props: React.ComponentProps<typeof PrefectureRankingRegion>
+    ) => (
       <ArticleContextProvider value={contextValue}>
         <PrefectureRankingRegion {...props} />
       </ArticleContextProvider>
     ),
-    PrefectureStatisticsCard: (props: React.ComponentProps<typeof PrefectureStatisticsCard>) => (
+    PrefectureStatisticsCard: (
+      props: React.ComponentProps<typeof PrefectureStatisticsCard>
+    ) => (
       <ArticleContextProvider value={contextValue}>
         <PrefectureStatisticsCard {...props} />
       </ArticleContextProvider>
@@ -171,4 +176,3 @@ export function MDXContent({ article, className }: MDXContentProps) {
     </ArticleContextProvider>
   );
 }
-

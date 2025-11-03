@@ -13,11 +13,9 @@ import {
   getArticle,
 } from "@/features/blog/actions/getArticles";
 import { ArticleList } from "@/features/blog/components/ArticleList";
-import { CategoryBadge } from "@/features/blog/components/CategoryBadge";
 import { MDXContent } from "@/features/blog/components/MDXContent";
 import { TagList } from "@/features/blog/components/TagList";
 import { generateArticleStructuredData } from "@/features/blog/utils/structured-data";
-import { findCategoryByName } from "@/features/category/repositories/category-repository";
 
 /**
  * ページのプロパティ
@@ -100,9 +98,6 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     // 記事を取得
     const article = await getArticle(category, slug, year);
 
-    // カテゴリ情報を取得
-    const categoryData = await findCategoryByName(category);
-
     // 関連記事を取得（同じカテゴリ、同じスラッグの異なる年度）
     const relatedArticles = await getAllArticlesAction({
       category,
@@ -139,14 +134,6 @@ export default async function ArticleDetailPage({ params }: PageProps) {
         />
         {/* ヘッダー */}
         <header className="mb-8">
-          <div className="mb-4 flex items-center gap-2">
-            {categoryData && (
-              <CategoryBadge
-                category={category}
-                categoryName={categoryData.categoryName}
-              />
-            )}
-          </div>
           <h1 className="text-4xl font-bold mb-4">
             {article.frontmatter.title}
           </h1>

@@ -1,6 +1,6 @@
 /**
  * 都道府県ランキングマップコンポーネント（MDX用）
- * 
+ *
  * MDXコンテンツ内で使用する都道府県ランキングマップ表示コンポーネント
  * ArticleContextからstatsDataIdとchartSettingsを取得してRankingMapCardを表示
  */
@@ -12,13 +12,13 @@ import { useEffect, useState } from "react";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { RankingMapCard } from "@/features/ranking/shared/components/RankingMapCard";
 
-import { useArticleContext } from "../../contexts/ArticleContext";
-
 import type { StatsSchema } from "@/types/stats";
+
+import { useArticleContext } from "../../contexts/ArticleContext";
 
 /**
  * 都道府県ランキングマップコンポーネント
- * 
+ *
  * MDXコンテンツ内で使用する都道府県別ランキングマップを表示します。
  * ArticleContextからstatsDataIdとchartSettingsを取得し、ランキングデータを取得して表示します。
  */
@@ -28,6 +28,9 @@ export function PrefectureRankingMap() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  console.log("statsDataId", statsDataId);
+  console.log("chartSettings", chartSettings);
+  console.log("year", year);
   useEffect(() => {
     async function fetchData() {
       if (!statsDataId) {
@@ -99,10 +102,12 @@ export function PrefectureRankingMap() {
   }
 
   // chartSettingsからカラースキームと分岐点を取得
-  const colorScheme =
-    chartSettings?.colorScheme
-      ? `interpolate${chartSettings.colorScheme.charAt(0).toUpperCase() + chartSettings.colorScheme.slice(1)}`
-      : "interpolateBlues";
+  const colorScheme = chartSettings?.colorScheme
+    ? `interpolate${
+        chartSettings.colorScheme.charAt(0).toUpperCase() +
+        chartSettings.colorScheme.slice(1)
+      }`
+    : "interpolateBlues";
 
   // centerTypeを分岐点に変換
   let divergingMidpoint: "zero" | "mean" | "median" | undefined;
@@ -119,4 +124,3 @@ export function PrefectureRankingMap() {
     />
   );
 }
-
