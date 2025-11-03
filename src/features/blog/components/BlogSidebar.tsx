@@ -1,10 +1,11 @@
 /**
  * ブログサイドバーコンポーネント
- * 
+ *
  * ブログ記事一覧ページのサイドバー
  */
 
 import { TagCloud } from "./TagCloud";
+
 import type { TagStats } from "./TagCloud";
 
 /**
@@ -19,9 +20,9 @@ export interface BlogSidebarProps {
 
 /**
  * 代表的なタグのみを取得（上位N件）
- * 
+ *
  * タグは既に使用回数でソートされていることを前提とする
- * 
+ *
  * @param tagStats - タグ統計情報の配列
  * @param limit - 表示件数（デフォルト: 20）
  * @returns 上位N件のタグ統計情報
@@ -33,7 +34,7 @@ function getTopTags(tagStats: TagStats[], limit: number = 20): TagStats[] {
 
 /**
  * ブログサイドバーコンポーネント
- * 
+ *
  * タグクラウドなどを表示するサイドバー
  */
 export function BlogSidebar({ tagStats, className }: BlogSidebarProps) {
@@ -58,4 +59,3 @@ export function BlogSidebar({ tagStats, className }: BlogSidebarProps) {
     </aside>
   );
 }
-

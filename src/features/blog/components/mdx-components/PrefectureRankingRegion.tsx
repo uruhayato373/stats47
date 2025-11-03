@@ -168,7 +168,7 @@ export function PrefectureRankingRegion({
     const summaries: RegionSummary[] = Object.entries(REGIONS).map(
       ([regionName, prefectureNames]) => {
         const regionData = filtered.filter((item) =>
-          prefectureNames.includes(item.areaName)
+          (prefectureNames as readonly string[]).includes(item.areaName)
         );
 
         if (regionData.length === 0) {
@@ -208,14 +208,9 @@ export function PrefectureRankingRegion({
     );
 
     // 集計方法に応じてソート（デフォルトは平均でソート）
-    const sortBy = "average";
     summaries.sort((a, b) => {
-      if (sortBy === "sum") {
-        return b.total - a.total;
-      } else {
-        // average または mean
-        return b.average - a.average;
-      }
+      // 平均でソート（デフォルト）
+      return b.average - a.average;
     });
 
     return summaries;
