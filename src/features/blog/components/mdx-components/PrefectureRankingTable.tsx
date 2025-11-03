@@ -1,6 +1,6 @@
 /**
  * 都道府県ランキングテーブルコンポーネント（MDX用）
- * 
+ *
  * MDXコンテンツ内で使用する都道府県ランキングテーブル表示コンポーネント
  */
 
@@ -10,10 +10,10 @@ import { useEffect, useState } from "react";
 
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { getRankingItem } from "@/features/ranking/items/actions/getRankingItem";
+import type { RankingItem } from "@/features/ranking/items/types";
 import { RankingDataTable } from "@/features/ranking/shared/components/RankingDataTable";
 
 import type { StatsSchema } from "@/types/stats";
-import type { RankingItem } from "@/features/ranking/items/types";
 
 /**
  * PrefectureRankingTableコンポーネントのprops
@@ -27,7 +27,7 @@ interface PrefectureRankingTableProps {
 
 /**
  * 都道府県ランキングテーブルコンポーネント
- * 
+ *
  * MDXコンテンツ内で使用する都道府県別ランキングテーブルを表示します。
  */
 export function PrefectureRankingTable({
@@ -59,15 +59,8 @@ export function PrefectureRankingTable({
 
       try {
         // ランキング項目情報を取得（rankingKeyを使用）
+        // rankingItemはオプショナル（RankingDataTableはrankingItemなしでも動作可能）
         const item = await getRankingItem(rankingKey);
-        if (!item) {
-          setError("ランキング項目が見つかりませんでした");
-          setRankingItem(null);
-          setRankingData(null);
-          setIsLoading(false);
-          return;
-        }
-
         setRankingItem(item);
 
         // 都道府県データを取得（areaType: "prefecture"）
@@ -127,4 +120,3 @@ export function PrefectureRankingTable({
     />
   );
 }
-
