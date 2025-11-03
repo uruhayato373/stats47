@@ -15,6 +15,11 @@ import {
   readMDXFile,
   type ArticleFilePath,
 } from "../repositories/article-repository";
+import {
+  getArticleFromDB,
+  listArticlesFromDB,
+  countArticlesFromDB,
+} from "../repositories/article-db-repository";
 
 /**
  * 抜粋を生成（最初の160文字）
@@ -87,18 +92,20 @@ function sortArticles(articles: Article[], order: ArticleSortOrder): Article[] {
 
   switch (order) {
     case "date-desc":
+      // dateが削除されたため、timeでソート（降順）
       sorted.sort((a, b) => {
-        const dateA = new Date(a.frontmatter.date).getTime();
-        const dateB = new Date(b.frontmatter.date).getTime();
-        return dateB - dateA;
+        const timeA = a.time ? parseInt(a.time, 10) : 0;
+        const timeB = b.time ? parseInt(b.time, 10) : 0;
+        return timeB - timeA;
       });
       break;
 
     case "date-asc":
+      // dateが削除されたため、timeでソート（昇順）
       sorted.sort((a, b) => {
-        const dateA = new Date(a.frontmatter.date).getTime();
-        const dateB = new Date(b.frontmatter.date).getTime();
-        return dateA - dateB;
+        const timeA = a.time ? parseInt(a.time, 10) : 0;
+        const timeB = b.time ? parseInt(b.time, 10) : 0;
+        return timeA - timeB;
       });
       break;
 
@@ -125,7 +132,7 @@ function filterArticles(articles: Article[], filter: ArticleFilter): Article[] {
   // カテゴリでフィルタ
   if (filter.category) {
     filtered = filtered.filter(
-      (article) => article.frontmatter.category === filter.category
+      (article) => article.actualCategory === filter.category
     );
   }
 
@@ -138,9 +145,9 @@ function filterArticles(articles: Article[], filter: ArticleFilter): Article[] {
     });
   }
 
-  // 年度でフィルタ
-  if (filter.year) {
-    filtered = filtered.filter((article) => article.year === filter.year);
+  // 時間でフィルタ
+  if (filter.time) {
+    filtered = filtered.filter((article) => article.time === filter.time);
   }
 
   return filtered;
@@ -148,6 +155,8 @@ function filterArticles(articles: Article[], filter: ArticleFilter): Article[] {
 
 /**
  * スラッグと年度から記事を取得
+ * 
+ * データベース優先で読み込み、見つからない場合はファイルから読み込みます。
  * 
  * @param category - カテゴリ（ディレクトリ名。見つからない場合は全カテゴリから検索）
  * @param slug - スラッグ
@@ -160,11 +169,42 @@ export async function getArticleBySlug(
   slug: string,
   year: string
 ): Promise<Article> {
-  // まず指定されたカテゴリで試す
+  // まずデータベースから取得を試みる
+  try {
+    const articleFromDB = await getArticleFromDB(category, slug, year);
+    if (articleFromDB) {
+      // コンテンツはファイルから読み込む必要がある
+      try {
+        const articleFromFile = await readMDXFile(category, slug, year);
+        articleFromDB.content = articleFromFile.content;
+        // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
+        if (!articleFromDB.frontmatter.description) {
+          articleFromDB.frontmatter.description = generateExcerpt(articleFromDB.content);
+        }
+        articleFromDB.readingTime = calculateReadingTime(articleFromDB.content);
+      } catch (fileError) {
+        // ファイルが見つからない場合はデータベースのデータを使用
+        console.warn(
+          `ファイルが見つかりませんが、データベースから取得しました: ${category}/${slug}/${year}.mdx`
+        );
+      }
+      return articleFromDB;
+    }
+  } catch (dbError) {
+    // データベースからの取得に失敗した場合は、ファイルから読み込む
+    console.warn(
+      `データベースからの取得に失敗、ファイルから読み込みます:`,
+      dbError instanceof Error ? dbError.message : String(dbError)
+    );
+  }
+
+  // データベースにない場合はファイルから読み込み
   try {
     const article = await readMDXFile(category, slug, year);
-    // 抜粋と読了時間を計算
-    article.excerpt = generateExcerpt(article.content);
+    // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
+    if (!article.frontmatter.description) {
+      article.frontmatter.description = generateExcerpt(article.content);
+    }
     article.readingTime = calculateReadingTime(article.content);
     return article;
   } catch (error) {
@@ -180,8 +220,10 @@ export async function getArticleBySlug(
         matchingFile.slug,
         matchingFile.year
       );
-      // 抜粋と読了時間を計算
-      article.excerpt = generateExcerpt(article.content);
+      // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
+      if (!article.frontmatter.description) {
+        article.frontmatter.description = generateExcerpt(article.content);
+      }
       article.readingTime = calculateReadingTime(article.content);
       return article;
     }
@@ -194,6 +236,8 @@ export async function getArticleBySlug(
 /**
  * 記事一覧を取得
  * 
+ * データベース優先で読み込み、データベースにデータがない場合はファイルから読み込みます。
+ * 
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事一覧レスポンス
@@ -202,7 +246,53 @@ export async function listArticles(
   filter: ArticleFilter = {},
   sortOrder: ArticleSortOrder = "date-desc"
 ): Promise<ArticleListResponse> {
-  // Repository層からファイル一覧を取得
+  // まずデータベースから取得を試みる
+  try {
+    const articlesFromDB = await listArticlesFromDB(filter, sortOrder);
+    const totalFromDB = await countArticlesFromDB(filter);
+
+    // データベースにデータがある場合は、コンテンツをファイルから読み込む
+    if (articlesFromDB.length > 0) {
+      const articlesWithContent: Article[] = [];
+
+      for (const article of articlesFromDB) {
+        try {
+          const articleFromFile = await readMDXFile(
+            article.actualCategory,
+            article.slug,
+            article.time || ""
+          );
+          article.content = articleFromFile.content;
+        } catch (fileError) {
+          // ファイルが見つからない場合は空コンテンツのまま
+          console.warn(
+            `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
+          );
+        }
+        articlesWithContent.push(article);
+      }
+
+      // ページネーション処理
+      const limit = filter.limit || 10;
+      const offset = filter.offset || 0;
+      const paginated = articlesWithContent.slice(offset, offset + limit);
+      const hasMore = offset + limit < totalFromDB;
+
+      return {
+        articles: paginated,
+        total: totalFromDB,
+        hasMore,
+      };
+    }
+  } catch (dbError) {
+    // データベースからの取得に失敗した場合は、ファイルから読み込む
+    console.warn(
+      `データベースからの取得に失敗、ファイルから読み込みます:`,
+      dbError instanceof Error ? dbError.message : String(dbError)
+    );
+  }
+
+  // データベースにデータがない場合は、従来通りファイルから読み込み
   const filePaths = await listMDXFiles(filter.category);
 
   // 各ファイルを読み込んでArticleオブジェクトに変換
@@ -216,19 +306,22 @@ export async function listArticles(
         filePath.year
       );
 
-      // 抜粋と読了時間を計算
+      // descriptionと読了時間を計算
       try {
-        article.excerpt = generateExcerpt(article.content);
+        // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
+        if (!article.frontmatter.description) {
+          article.frontmatter.description = generateExcerpt(article.content);
+        }
         article.readingTime = calculateReadingTime(article.content);
       } catch (processingError) {
-        // 抜粋や読了時間の計算でエラーが発生した場合は、エラーを記録して続行
+        // descriptionや読了時間の計算でエラーが発生した場合は、エラーを記録して続行
         console.warn(
           `Failed to process article metadata: ${filePath.fullPath}`,
           processingError instanceof Error
             ? `${processingError.message}${processingError.stack ? `\nStack: ${processingError.stack}` : ""}`
             : String(processingError)
         );
-        // 抜粋や読了時間が設定されていなくても記事自体は有効
+        // descriptionや読了時間が設定されていなくても記事自体は有効
       }
 
       articles.push(article);
@@ -270,6 +363,8 @@ export async function listArticles(
 /**
  * すべての記事を取得（ページネーションなし）
  * 
+ * データベース優先で読み込み、データベースにデータがない場合はファイルから読み込みます。
+ * 
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事配列
@@ -278,7 +373,45 @@ export async function getAllArticles(
   filter: ArticleFilter = {},
   sortOrder: ArticleSortOrder = "date-desc"
 ): Promise<Article[]> {
-  // Repository層からファイル一覧を取得
+  // まずデータベースから取得を試みる
+  try {
+    const articlesFromDB = await listArticlesFromDB(
+      { ...filter, limit: undefined, offset: undefined },
+      sortOrder
+    );
+
+    // データベースにデータがある場合は、コンテンツをファイルから読み込む
+    if (articlesFromDB.length > 0) {
+      const articlesWithContent: Article[] = [];
+
+      for (const article of articlesFromDB) {
+        try {
+          const articleFromFile = await readMDXFile(
+            article.actualCategory,
+            article.slug,
+            article.time || ""
+          );
+          article.content = articleFromFile.content;
+        } catch (fileError) {
+          // ファイルが見つからない場合は空コンテンツのまま
+          console.warn(
+            `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
+          );
+        }
+        articlesWithContent.push(article);
+      }
+
+      return articlesWithContent;
+    }
+  } catch (dbError) {
+    // データベースからの取得に失敗した場合は、ファイルから読み込む
+    console.warn(
+      `データベースからの取得に失敗、ファイルから読み込みます:`,
+      dbError instanceof Error ? dbError.message : String(dbError)
+    );
+  }
+
+  // データベースにデータがない場合は、従来通りファイルから読み込み
   const filePaths = await listMDXFiles(filter.category);
 
   // 各ファイルを読み込んでArticleオブジェクトに変換
@@ -292,19 +425,22 @@ export async function getAllArticles(
         filePath.year
       );
 
-      // 抜粋と読了時間を計算
+      // descriptionと読了時間を計算
       try {
-        article.excerpt = generateExcerpt(article.content);
+        // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
+        if (!article.frontmatter.description) {
+          article.frontmatter.description = generateExcerpt(article.content);
+        }
         article.readingTime = calculateReadingTime(article.content);
       } catch (processingError) {
-        // 抜粋や読了時間の計算でエラーが発生した場合は、エラーを記録して続行
+        // descriptionや読了時間の計算でエラーが発生した場合は、エラーを記録して続行
         console.warn(
           `Failed to process article metadata: ${filePath.fullPath}`,
           processingError instanceof Error
             ? `${processingError.message}${processingError.stack ? `\nStack: ${processingError.stack}` : ""}`
             : String(processingError)
         );
-        // 抜粋や読了時間が設定されていなくても記事自体は有効
+        // descriptionや読了時間が設定されていなくても記事自体は有効
       }
 
       articles.push(article);

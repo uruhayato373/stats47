@@ -31,12 +31,12 @@ export interface ArticleCardProps {
  * 記事のタイトル、抜粋、タグ、カテゴリを表示するカード
  */
 export function ArticleCard({ article, className }: ArticleCardProps) {
-  const { frontmatter, slug, year, excerpt } = article;
+  const { frontmatter, slug, time, actualCategory } = article;
 
   // 記事詳細ページのURL
-  const href = year
-    ? `/blog/${frontmatter.category}/${slug}/${year}`
-    : `/blog/${frontmatter.category}/${slug}`;
+  const href = time
+    ? `/blog/${actualCategory}/${slug}/${time}`
+    : `/blog/${actualCategory}/${slug}`;
 
   return (
     <Card className={className}>
@@ -46,8 +46,10 @@ export function ArticleCard({ article, className }: ArticleCardProps) {
             {frontmatter.title}
           </Link>
         </CardTitle>
-        {excerpt && (
-          <CardDescription className="line-clamp-3">{excerpt}</CardDescription>
+        {frontmatter.description && (
+          <CardDescription className="line-clamp-3">
+            {frontmatter.description}
+          </CardDescription>
         )}
       </CardHeader>
     </Card>

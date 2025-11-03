@@ -105,23 +105,6 @@ export async function readMDXFile(
     frontmatterData = parsed.data;
     content = parsed.content;
 
-    // gray-matterがDateオブジェクトに変換したdateフィールドを文字列に戻す
-    if (
-      frontmatterData &&
-      typeof frontmatterData === "object" &&
-      "date" in frontmatterData &&
-      frontmatterData.date instanceof Date
-    ) {
-      // DateオブジェクトをYYYY-MM-DD形式の文字列に変換
-      const dateObj = frontmatterData.date as Date;
-      const year = dateObj.getFullYear();
-      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-      const day = String(dateObj.getDate()).padStart(2, "0");
-      frontmatterData = {
-        ...frontmatterData,
-        date: `${year}-${month}-${day}`,
-      };
-    }
   } catch (error) {
     throw new Error(
       `MDXファイルのパースに失敗しました: ${error instanceof Error ? error.message : String(error)}`

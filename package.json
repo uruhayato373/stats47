@@ -38,7 +38,8 @@
     "db:migrations:staging": "npx wrangler d1 migrations apply stats47 --env staging",
     "db:migrations:production": "npx wrangler d1 migrations apply stats47 --env production",
     "db:init:local": "bash scripts/init-local-db.sh",
-    "db:reset:local": "rm -rf .wrangler/state/v3/d1 && bash scripts/init-local-db.sh"
+    "db:reset:local": "rm -rf .wrangler/state/v3/d1 && bash scripts/init-local-db.sh",
+    "sync:mdx": "tsx scripts/sync-mdx-frontmatter-to-db.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.913.0",

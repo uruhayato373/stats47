@@ -54,14 +54,6 @@ export function searchArticles(
       return true;
     }
 
-    // 抜粋で検索
-    if (
-      article.excerpt &&
-      article.excerpt.toLowerCase().includes(normalizedQuery)
-    ) {
-      return true;
-    }
-
     return false;
   });
 }
@@ -113,11 +105,10 @@ export function sortSearchResults(
     if (aTagMatch && !bTagMatch) return -1;
     if (!aTagMatch && bTagMatch) return 1;
 
-    // 日付降順（新しい順）
-    return (
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime()
-    );
+    // 時間降順（新しい順）
+    const timeA = a.time ? parseInt(a.time, 10) : 0;
+    const timeB = b.time ? parseInt(b.time, 10) : 0;
+    return timeB - timeA;
   });
 }
 

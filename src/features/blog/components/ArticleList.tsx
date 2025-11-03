@@ -38,7 +38,7 @@ export function ArticleList({ articles, className }: ArticleListProps) {
     >
       {articles.map((article) => (
         <ArticleCard
-          key={`${article.slug}-${article.year || "latest"}`}
+          key={`${article.slug}-${article.time || "latest"}`}
           article={article}
         />
       ))}

@@ -45,7 +45,7 @@ export async function generateStaticParams() {
   return articles.map((article) => ({
     category: article.actualCategory,
     slug: article.slug,
-    year: article.year || "",
+    year: article.time || "",
   }));
 }
 
@@ -60,9 +60,8 @@ export async function generateMetadata({
   try {
     const article = await getArticle(category, slug, year);
 
-    // descriptionがない場合はexcerptを使用
-    const description =
-      article.frontmatter.description || article.excerpt || "";
+    // descriptionを取得（frontmatter.descriptionを使用）
+    const description = article.frontmatter.description || "";
 
     return {
       title: article.frontmatter.title,
@@ -71,7 +70,6 @@ export async function generateMetadata({
         title: article.frontmatter.title,
         description,
         type: "article",
-        publishedTime: article.frontmatter.date,
         tags: article.frontmatter.tags,
       },
       twitter: {
@@ -105,17 +103,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
     // 同じスラッグの記事のみフィルタ
     const sameSlugArticles = relatedArticles.filter(
-      (a) => a.slug === slug && a.year !== year
-    );
-
-    // 日付をフォーマット
-    const formattedDate = new Date(article.frontmatter.date).toLocaleDateString(
-      "ja-JP",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }
+      (a) => a.slug === slug && a.time !== year
     );
 
     // 構造化データを生成
@@ -145,7 +133,6 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
           {/* メタ情報 */}
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <time dateTime={article.frontmatter.date}>{formattedDate}</time>
             {article.readingTime && (
               <span>{article.readingTime}分で読める</span>
             )}

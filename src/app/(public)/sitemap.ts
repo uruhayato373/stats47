@@ -44,14 +44,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 記事ページ
   const articles = await getAllArticlesAction();
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => {
-    const year = article.year || "";
-    const path = year
-      ? `/blog/${article.frontmatter.category}/${article.slug}/${year}`
-      : `/blog/${article.frontmatter.category}/${article.slug}`;
+    const time = article.time || "";
+    const path = time
+      ? `/blog/${article.actualCategory}/${article.slug}/${time}`
+      : `/blog/${article.actualCategory}/${article.slug}`;
 
     return {
       url: `${baseUrl}${path}`,
-      lastModified: new Date(article.frontmatter.date),
       changeFrequency: "monthly",
       priority: 0.6,
     };

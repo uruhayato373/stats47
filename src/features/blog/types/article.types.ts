@@ -10,29 +10,8 @@ export interface ArticleFrontmatter {
   title: string;
   /** 概要（SEO対策） - オプショナル */
   description?: string;
-  /** カテゴリキー（既存のcategoryテーブルと連携） */
-  category: string;
   /** タグ配列 */
   tags: string[];
-  /** 公開日 */
-  date: string;
-  /** 統計データID（ranking_itemsと連携） */
-  statsDataId?: string;
-  /** グラフ表示設定 */
-  chartSettings?: {
-    /** カラースキーム */
-    colorScheme?: string;
-    /** グラフタイプ */
-    type?: "sequential" | "diverging" | "categorical";
-    /** スケールに最小値を使用するか */
-    useMinValueForScale?: boolean;
-    /** 中央値のタイプ */
-    centerType?: "zero" | "mean" | "median" | "value";
-    /** 中央値（centerTypeが"value"の場合に使用） */
-    centerValue?: number;
-    /** 地域の値の計算方法 */
-    regionValues?: "sum" | "average" | "mean";
-  };
 }
 
 /**
@@ -41,16 +20,14 @@ export interface ArticleFrontmatter {
 export interface Article {
   /** ファイル名から生成（例: total-population） */
   slug: string;
-  /** 年度（例: 2023） */
-  year?: string;
+  /** 時間（年度など、例: 2023） */
+  time?: string;
   /** 実際のディレクトリ名（カテゴリ） */
   actualCategory: string;
   /** Frontmatterメタデータ */
   frontmatter: ArticleFrontmatter;
   /** MDXコンテンツ */
   content: string;
-  /** 抜粋（最初の160文字） */
-  excerpt?: string;
   /** 読了時間（分） */
   readingTime?: number;
 }
@@ -63,8 +40,8 @@ export interface ArticleFilter {
   category?: string;
   /** タグ配列 */
   tags?: string[];
-  /** 年度 */
-  year?: string;
+  /** 時間（年度など） */
+  time?: string;
   /** 取得件数 */
   limit?: number;
   /** オフセット */

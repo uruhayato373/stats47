@@ -183,7 +183,27 @@ CREATE TABLE IF NOT EXISTS ranking_group_subcategories (
 -- src/features/dashboard/components/[category]/[subcategory]/[ComponentName]Dashboard.tsx
 
 -- ============================================================================
--- 6. インデックス作成
+-- 6. ブログ記事関連テーブル
+-- ============================================================================
+
+-- articles: MDXファイルのfrontmatter管理テーブル
+-- contents内のMDXファイルのfrontmatterをデータベースで管理
+CREATE TABLE IF NOT EXISTS articles (
+  category TEXT NOT NULL,  -- 実際のディレクトリ名（actualCategory）
+  slug TEXT NOT NULL,
+  time TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT,  -- frontmatter.descriptionまたはコンテンツから生成した抜粋
+  tags TEXT,  -- JSON配列として保存
+  file_path TEXT NOT NULL,  -- 元のファイルパス
+  file_hash TEXT,  -- ファイル内容のハッシュ（変更検知用、SHA-256）
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (slug, time)
+);
+
+-- ============================================================================
+-- 7. インデックス作成
 -- ============================================================================
 
 -- カテゴリ・サブカテゴリ関連インデックス
@@ -226,8 +246,14 @@ CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_display_order ON rank
 -- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、
 -- データベースインデックスは不要です。
 
+-- ブログ記事関連インデックス
+CREATE INDEX IF NOT EXISTS idx_articles_category ON articles(category);
+CREATE INDEX IF NOT EXISTS idx_articles_slug ON articles(slug);
+CREATE INDEX IF NOT EXISTS idx_articles_time ON articles(time DESC);
+CREATE INDEX IF NOT EXISTS idx_articles_file_path ON articles(file_path);
+
 -- ============================================================================
--- 7. ビュー作成
+-- 8. ビュー作成
 -- ============================================================================
 
 -- v_estat_metainfo_summary: 統計表サマリービュー

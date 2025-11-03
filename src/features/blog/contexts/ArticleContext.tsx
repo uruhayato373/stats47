@@ -17,10 +17,6 @@ import type { ArticleFrontmatter } from "../types/article.types";
 interface ArticleContextValue {
   /** 記事のFrontmatter */
   frontmatter: ArticleFrontmatter;
-  /** 統計データID */
-  statsDataId?: string;
-  /** チャート設定 */
-  chartSettings?: ArticleFrontmatter["chartSettings"];
   /** カテゴリ */
   category: string;
   /** 年度 */

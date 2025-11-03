@@ -39,14 +39,14 @@ export default async function ArticleSlugPage({ params }: PageProps) {
 
   // 年度でソート（降順）
   sameSlugArticles.sort((a, b) => {
-    const yearA = a.year ? parseInt(a.year, 10) : 0;
-    const yearB = b.year ? parseInt(b.year, 10) : 0;
+    const yearA = a.time ? parseInt(a.time, 10) : 0;
+    const yearB = b.time ? parseInt(b.time, 10) : 0;
     return yearB - yearA;
   });
 
   // 最新年度の記事にリダイレクト
   const latestArticle = sameSlugArticles[0];
-  const year = latestArticle.year || "";
+  const year = latestArticle.time || "";
 
   redirect(`/blog/${category}/${slug}/${year}`);
 }

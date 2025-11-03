@@ -107,10 +107,8 @@ export function MDXContent({ article, className }: MDXContentProps) {
   // コンテキストの値を準備
   const contextValue = {
     frontmatter: article.frontmatter,
-    statsDataId: article.frontmatter.statsDataId,
-    chartSettings: article.frontmatter.chartSettings,
-    category: article.frontmatter.category,
-    year: article.year,
+    category: article.actualCategory,
+    year: article.time,
   };
 
   // カスタムコンポーネントにコンテキスト値を渡すためにラッパーを作成

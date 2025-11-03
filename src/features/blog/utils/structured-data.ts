@@ -17,10 +17,10 @@ export function generateArticleStructuredData(
   article: Article,
   baseUrl: string
 ): object {
-  const year = article.year || "";
-  const path = year
-    ? `/blog/${article.frontmatter.category}/${article.slug}/${year}`
-    : `/blog/${article.frontmatter.category}/${article.slug}`;
+  const time = article.time || "";
+  const path = time
+    ? `/blog/${article.actualCategory}/${article.slug}/${time}`
+    : `/blog/${article.actualCategory}/${article.slug}`;
 
   const url = `${baseUrl}${path}`;
 
@@ -30,8 +30,6 @@ export function generateArticleStructuredData(
     headline: article.frontmatter.title,
     description: article.frontmatter.description,
     image: `${baseUrl}/og-image.jpg`, // OGP画像のURL（実装時に更新）
-    datePublished: article.frontmatter.date,
-    dateModified: article.frontmatter.date,
     author: {
       "@type": "Organization",
       name: "統計で見る都道府県",
@@ -49,7 +47,7 @@ export function generateArticleStructuredData(
       "@id": url,
     },
     keywords: article.frontmatter.tags?.join(", ") || "",
-    articleSection: article.frontmatter.category,
+    articleSection: article.actualCategory,
   };
 }
 

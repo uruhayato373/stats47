@@ -15,26 +15,27 @@ export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.example.com";
   const articles = await getAllArticlesAction();
 
-  // 最新10件の記事を取得（日付降順）
+  // 最新10件の記事を取得（時間降順）
   const latestArticles = articles
     .sort((a, b) => {
-      return (
-        new Date(b.frontmatter.date).getTime() -
-        new Date(a.frontmatter.date).getTime()
-      );
+      const timeA = a.time ? parseInt(a.time, 10) : 0;
+      const timeB = b.time ? parseInt(b.time, 10) : 0;
+      return timeB - timeA;
     })
     .slice(0, 10);
 
   // RSS XMLを生成
   const rssItems = latestArticles.map((article) => {
-    const year = article.year || "";
-    const path = year
-      ? `/blog/${article.frontmatter.category}/${article.slug}/${year}`
-      : `/blog/${article.frontmatter.category}/${article.slug}`;
+    const time = article.time || "";
+    const path = time
+      ? `/blog/${article.actualCategory}/${article.slug}/${time}`
+      : `/blog/${article.actualCategory}/${article.slug}`;
 
     const url = `${baseUrl}${path}`;
-    const description = article.excerpt || article.frontmatter.description;
-    const pubDate = new Date(article.frontmatter.date).toUTCString();
+    // descriptionを取得（frontmatter.descriptionを使用）
+    const description = article.frontmatter.description || "";
+    // dateが削除されたため、現在時刻を使用
+    const pubDate = new Date().toUTCString();
 
     // タグをカンマ区切りで結合
     const categories = article.frontmatter.tags
