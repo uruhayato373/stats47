@@ -85,7 +85,8 @@
       "Bash(do echo \"=== Testing statsField=$code ===\")",
       "Bash(__NEW_LINE__ curl -s \"https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=59eb12e8a25751dfc27f2e48fcdfa8600b86655e&statsField=$code&limit=1\")",
       "Bash(__NEW_LINE__ echo \"\")",
-      "Bash(__NEW_LINE__ done)"
+      "Bash(__NEW_LINE__ done)",
+      "Bash(npm run dev)"
     ],
     "deny": [],
     "ask": []
