@@ -7,6 +7,3 @@ export { DivorceCountCard } from "./DivorceCountCard";
 export { AverageMarriageAgeCard } from "./AverageMarriageAgeCard";
 export { MarriageDivorceTrendChart } from "./MarriageDivorceTrendChart";
 
-// Client Components（内部使用）
-export { MarriageDivorceTrendChartClient } from "./MarriageDivorceTrendChartClient";
-
