@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 
-import { Menu, Moon, Sun } from "lucide-react";
+import {
+  BarChart3,
+  BookOpen,
+  LayoutDashboard,
+  Menu,
+  Moon,
+  Sun,
+} from "lucide-react";
 
 import { HeaderAuthSection } from "@/features/auth/components/HeaderAuthSection";
 
@@ -64,8 +71,47 @@ export default function Header() {
           </ul>
         </div>
 
-        {/* Right: Theme Toggle + Auth Section */}
+        {/* Right: Navigation Icons + Theme Toggle + Auth Section */}
         <div className="ms-auto flex items-center gap-x-2">
+          {/* Navigation Icons: Dashboard, Ranking, Blog */}
+          <ul className="flex items-center gap-1">
+            <li className="inline-flex items-center relative pe-1 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-border after:rounded-full after:-translate-y-1/2 after:rotate-12">
+              <Link
+                href="/"
+                className="inline-flex flex-col items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-3 py-2 gap-0.5"
+                aria-label="Dashboard"
+              >
+                <LayoutDashboard className="size-4" />
+                <span className="text-[10px] leading-tight text-muted-foreground">
+                  dashboard
+                </span>
+              </Link>
+            </li>
+            <li className="inline-flex items-center relative pe-1 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-border after:rounded-full after:-translate-y-1/2 after:rotate-12">
+              <Link
+                href="/"
+                className="inline-flex flex-col items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-3 py-2 gap-0.5"
+                aria-label="Ranking"
+              >
+                <BarChart3 className="size-4" />
+                <span className="text-[10px] leading-tight text-muted-foreground">
+                  ranking
+                </span>
+              </Link>
+            </li>
+            <li className="inline-flex items-center">
+              <Link
+                href="/blog"
+                className="inline-flex flex-col items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-3 py-2 gap-0.5"
+                aria-label="Blog"
+              >
+                <BookOpen className="size-4" />
+                <span className="text-[10px] leading-tight text-muted-foreground">
+                  blog
+                </span>
+              </Link>
+            </li>
+          </ul>
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
