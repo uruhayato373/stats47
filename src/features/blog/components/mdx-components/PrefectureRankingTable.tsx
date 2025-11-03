@@ -1,6 +1,6 @@
 /**
  * 都道府県ランキングテーブルコンポーネント（MDX用）
- *
+ * 
  * MDXコンテンツ内で使用する都道府県ランキングテーブル表示コンポーネント
  */
 
@@ -27,7 +27,7 @@ interface PrefectureRankingTableProps {
 
 /**
  * 都道府県ランキングテーブルコンポーネント
- *
+ * 
  * MDXコンテンツ内で使用する都道府県別ランキングテーブルを表示します。
  */
 export function PrefectureRankingTable({

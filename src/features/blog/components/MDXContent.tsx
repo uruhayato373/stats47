@@ -100,21 +100,21 @@ export interface MDXContentProps {
  */
 export function MDXContent({ article, className }: MDXContentProps) {
   return (
-    <div className={className}>
-      <MDXRemote
-        source={article.content}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [
-              rehypeHighlight,
-              rehypeSlug,
-              [rehypeAutolinkHeadings, { behavior: "wrap" }],
-            ],
-          },
-        }}
+      <div className={className}>
+        <MDXRemote
+          source={article.content}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [
+                rehypeHighlight,
+                rehypeSlug,
+                [rehypeAutolinkHeadings, { behavior: "wrap" }],
+              ],
+            },
+          }}
         components={mdxComponents}
-      />
-    </div>
+        />
+      </div>
   );
 }
