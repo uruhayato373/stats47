@@ -3,13 +3,18 @@
  * e-Stat APIから直接データを取得
  */
 
+import {
+  TrendLineChart,
+  type ChartConfig,
+  type LineConfig,
+  type TooltipConfig,
+} from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { PopulationTrendChartClient } from "./PopulationTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -51,9 +56,26 @@ export async function PopulationTrendChart({
       );
 
     if (statsSchemas.length === 0) {
+      const chartConfig: Record<string, ChartConfig> = {
+        value: {
+          label: title,
+          color: "hsl(221, 83%, 53%)",
+        },
+      };
+
+      const lines: LineConfig[] = [
+        {
+          dataKey: "value",
+          name: "value",
+          color: "hsl(221, 83%, 53%)",
+        },
+      ];
+
       return (
-        <PopulationTrendChartClient
+        <TrendLineChart
           chartData={[]}
+          chartConfig={chartConfig}
+          lines={lines}
           title={title}
           description={description}
         />
@@ -72,18 +94,61 @@ export async function PopulationTrendChart({
       unit: item.unit,
     }));
 
+    // チャート設定（サーバー側で定義）
+    const chartConfig: Record<string, ChartConfig> = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
+
+    const lines: LineConfig[] = [
+      {
+        dataKey: "value",
+        name: "value",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    ];
+
+    // Tooltip の設定
+    const tooltipConfig: TooltipConfig = {
+      dataKeys: ["value"],
+      xLabelKey: "yearName",
+      unitKey: "unit",
+    };
+
     return (
-      <PopulationTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
+        lines={lines}
         title={title}
         description={description}
+        tooltipConfig={tooltipConfig}
       />
     );
   } catch (error) {
     console.error("[PopulationTrendChart] データ取得エラー:", error);
+    const chartConfig: Record<string, ChartConfig> = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)",
+      },
+    };
+
+    const lines: LineConfig[] = [
+      {
+        dataKey: "value",
+        name: "value",
+        color: "hsl(221, 83%, 53%)",
+      },
+    ];
+
     return (
-      <PopulationTrendChartClient
+      <TrendLineChart
         chartData={[]}
+        chartConfig={chartConfig}
+        lines={lines}
         title={title}
         description={description}
       />
