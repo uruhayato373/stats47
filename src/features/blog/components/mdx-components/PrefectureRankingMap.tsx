@@ -2,11 +2,17 @@
  * 都道府県ランキングマップコンポーネント（MDX用）
  *
  * MDXコンテンツ内で使用する都道府県ランキングマップ表示コンポーネント
- * サーバーコンポーネントとして実装され、R2ストレージからデータを取得します。
+ * クライアントコンポーネントとして実装され、ランタイム時にR2ストレージからデータを取得します。
  */
+
+"use client";
+
+import { useEffect, useState } from "react";
 
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { RankingMapCard } from "@/features/ranking/shared/components/RankingMapCard";
+
+import type { StatsSchema } from "@/types/stats";
 
 /**
  * PrefectureRankingMapコンポーネントのprops
@@ -22,46 +28,75 @@ interface PrefectureRankingMapProps {
  * 都道府県ランキングマップコンポーネント
  *
  * MDXコンテンツ内で使用する都道府県別ランキングマップを表示します。
- * サーバーコンポーネントとして実装され、データ取得をサーバー側で行います。
+ * クライアントコンポーネントとして実装され、ランタイム時にデータを取得します。
  */
-export async function PrefectureRankingMap({
+export function PrefectureRankingMap({
   rankingKey,
   time,
 }: PrefectureRankingMapProps) {
-  // バリデーション
-  if (!rankingKey) {
+  const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (!rankingKey) {
+        setError("rankingKeyが指定されていません");
+        setIsLoading(false);
+        return;
+      }
+
+      if (!time) {
+        setError("timeが指定されていません");
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        // 都道府県データを取得（areaType: "prefecture"）
+        const data = await getRankingData("prefecture", rankingKey, time);
+
+        if (!data || data.length === 0) {
+          setError("ランキングデータが見つかりませんでした");
+          setRankingData(null);
+        } else {
+          setRankingData(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch ranking data:", err);
+        setError(
+          err instanceof Error
+            ? err.message
+            : "ランキングデータの取得に失敗しました"
+        );
+        setRankingData(null);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [rankingKey, time]);
+
+  if (isLoading) {
     return (
-      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-        rankingKeyが指定されていません
+      <div className="flex items-center justify-center py-12">
+        <p className="text-muted-foreground">ランキングデータを読み込み中...</p>
       </div>
     );
   }
 
-  if (!time) {
+  if (error) {
     return (
       <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-        timeが指定されていません
+        {error}
       </div>
     );
   }
 
-  // サーバー側でランキングデータを取得
-  let rankingData;
-  try {
-    // 都道府県データを取得（areaType: "prefecture"）
-    rankingData = await getRankingData("prefecture", rankingKey, time);
-  } catch (error) {
-    console.error("Failed to fetch ranking data:", error);
-    return (
-      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-        {error instanceof Error
-          ? error.message
-          : "ランキングデータの取得に失敗しました"}
-      </div>
-    );
-  }
-
-  // データが存在しない場合
   if (!rankingData || rankingData.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground">
@@ -70,7 +105,6 @@ export async function PrefectureRankingMap({
     );
   }
 
-  // クライアントコンポーネント（RankingMapCard）にデータを渡す
   return (
     <RankingMapCard
       data={rankingData}

@@ -23,16 +23,9 @@ tags:
 
 この指標は各都道府県の税収基盤の強弱を表すものであり、地域経済の活力や財政の自立度を測る重要な尺度として機能しています。
 
-<PrefectureRankingCard
-  dataFile="prefecture-rank/standard-fiscal-revenue/2021/stats.json"
-  title="都道府県別基準財政収入額ランキング（2021年度）"
-  colorScheme="blue"
-/>
+<PrefectureRankingTable rankingKey="standard-fiscal-revenue" time="2021" />
 
-<PrefectureRankingHighlights dataFile="prefecture-rank/standard-fiscal-revenue/2021/stats.json"
-  title="都道府県別基準財政収入額ランキング（2021年度）"
-  colorScheme="blue"
-/ rankingKey="standard-fiscal-revenue" time="2021">
+<PrefectureRankingHighlights rankingKey="standard-fiscal-revenue" time="2021" />
 
 ## 上位5県の詳細分析
 
@@ -82,10 +75,7 @@ tags:
 
 ## 統計データの基本情報と分析
 
-<PrefectureStatisticsCard dataFile="prefecture-rank/standard-fiscal-revenue/2021/stats.json"
-  title="都道府県別基準財政収入額ランキング（2021年度）"
-  colorScheme="blue"
-/ rankingKey="standard-fiscal-revenue" time="2021">
+<PrefectureStatisticsCard rankingKey="standard-fiscal-revenue" time="2021" />
 
 統計分析の結果、平均値と中央値の間に大きな乖離が見られ、データ分布が東京都を頂点とした極端な右偏りの構造を示しています。東京都の数値が突出しているため、全体の平均値が中央値を大幅に上回る結果となっています。
 
@@ -102,7 +92,3 @@ tags:
 - 最上位と最下位の40倍を超える格差は、地方財政制度における構造的課題を示している
 
 今後は人口減少社会の進展により、地方部の基準財政収入額のさらなる減少が懸念されます。地域経済の活性化と税収基盤の強化に向けた取り組みが急務であり、継続的なモニタリングを通じて地域間格差の推移を注視していく必要があります。
-
-<SourceSection 
-sources={["https://www.e-stat.go.jp/dbview?sid=0000010104"]}
-/>

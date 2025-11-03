@@ -24,18 +24,11 @@ tags:
 
 ## ランキング一覧
 
-<PrefectureRankingCard
-  dataFile="prefecture-rank/pharmacy-count-per-100k/2022/stats.json"
-  title="都道府県別薬局数（人口10万人当たり）ランキング（2022年度）"
-  colorScheme="blue"
-/>
+<PrefectureRankingTable rankingKey="pharmacy-count-per-100k" time="2022" />
 
 ## 上位県・下位県の比較
 
-<PrefectureRankingHighlights dataFile="prefecture-rank/pharmacy-count-per-100k/2022/stats.json"
-  title="都道府県別薬局数（人口10万人当たり）ランキング（2022年度）"
-  colorScheme="blue"
-/ rankingKey="pharmacy-count-per-100k" time="2022">
+<PrefectureRankingHighlights rankingKey="pharmacy-count-per-100k" time="2022" />
 
 ## 上位5県の詳細分析
 
@@ -180,10 +173,7 @@ tags:
 
 ## 統計データの基本情報
 
-<PrefectureStatisticsCard dataFile="prefecture-rank/pharmacy-count-per-100k/2022/stats.json"
-  title="都道府県別薬局数（人口10万人当たり）ランキング（2022年度）"
-  colorScheme="blue"
-/ rankingKey="pharmacy-count-per-100k" time="2022">
+<PrefectureStatisticsCard rankingKey="pharmacy-count-per-100k" time="2022" />
 
 統計分析の結果、全国平均**49.4所**に対して標準偏差は**6.5所**となっている。分布は比較的正規分布に近く、極端な外れ値は見られない。
 
