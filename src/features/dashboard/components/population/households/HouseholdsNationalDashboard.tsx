@@ -43,20 +43,12 @@ export async function HouseholdsNationalDashboard({
 
       {/* 世帯構成スタックバーチャート */}
       <div className="col-span-12 lg:col-span-8">
-        <HouseholdCompositionStackedBarChart
-          areaCode={areaCode}
-          title="世帯構成"
-          description="単独世帯、核家族世帯、核家族以外の世帯、その他の内訳を表示"
-        />
+        <HouseholdCompositionStackedBarChart areaCode={areaCode} />
       </div>
 
       {/* 世帯数推移チャート */}
       <div className="col-span-12 lg:col-span-8">
-        <HouseholdTrendChart
-          areaCode={areaCode}
-          title="世帯数推移"
-          description="年度別の世帯数推移を表示"
-        />
+        <HouseholdTrendChart areaCode={areaCode} />
       </div>
     </DashboardLayout>
   );

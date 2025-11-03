@@ -3,15 +3,14 @@
  * e-Stat APIから直接データを取得
  */
 
-import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
-import {
-  convertToStatsSchema,
-  formatStatsData,
-} from "@/features/estat-api/stats-data/services/formatter";
+import { TrendLineChart } from "@/components/molecules/charts";
 
+import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
 import { convertStatsSchemasToTrendChartData } from "@/lib/chart-data-converter";
 
-import { HouseholdTrendChartClient } from "./HouseholdTrendChartClient";
+// チャート設定
+const CHART_TITLE = "世帯数推移";
+const CHART_DESCRIPTION = "年度別の世帯数推移を表示";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -20,10 +19,6 @@ const CAT01_HOUSEHOLD_COUNT = "A7101"; // 世帯数
 interface HouseholdTrendChartProps {
   /** 地域コード */
   areaCode: string;
-  /** タイトル */
-  title: string;
-  /** 説明 */
-  description?: string;
 }
 
 /**
@@ -31,56 +26,42 @@ interface HouseholdTrendChartProps {
  */
 export async function HouseholdTrendChart({
   areaCode,
-  title,
-  description,
 }: HouseholdTrendChartProps) {
   try {
-    // e-Stat APIから世帯数データを取得（全年度）
-    const response = await fetchStatsData(STATS_DATA_ID, {
+    // e-Stat APIから世帯数データを取得（fetchFormattedStatsDataで整形と変換まで実行）
+    const statsSchemas = await fetchFormattedStatsData(STATS_DATA_ID, {
       categoryFilter: CAT01_HOUSEHOLD_COUNT,
       areaFilter: areaCode,
     });
 
-    // データを整形
-    const formattedData = formatStatsData(response);
-
-    // StatsSchema形式に変換
-    const statsSchemas = formattedData.values
-      .filter((value) => value.dimensions.area?.code === areaCode)
-      .map((value) => convertToStatsSchema(value))
-      .filter(
-        (schema): schema is NonNullable<typeof schema> => schema !== undefined
-      );
-
     if (statsSchemas.length === 0) {
-      return (
-        <HouseholdTrendChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
+      return null;
     }
 
     // StatsSchemaをチャート用のデータ形式に変換
-    const chartData = convertStatsSchemasToTrendChartData(statsSchemas);
+    const chartData = convertStatsSchemasToTrendChartData(statsSchemas, {
+      color: "hsl(221, 83%, 53%)", // Blue（青色）
+    });
+
+    // チャート設定
+    const chartConfig = {
+      value: {
+        label: CHART_TITLE,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
 
     return (
-      <HouseholdTrendChartClient
+      <TrendLineChart
         chartData={chartData}
-        title={title}
-        description={description}
+        chartConfig={chartConfig}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
       />
     );
   } catch (error) {
     console.error("[HouseholdTrendChart] データ取得エラー:", error);
-    return (
-      <HouseholdTrendChartClient
-        chartData={[]}
-        title={title}
-        description={description}
-      />
-    );
+    return null;
   }
 }
 
