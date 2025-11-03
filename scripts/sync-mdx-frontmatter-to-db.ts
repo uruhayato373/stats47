@@ -173,6 +173,15 @@ async function syncMDXFilesToDatabase(): Promise<void> {
         // ファイルを読み込み
         const article = await readMDXFile(file.category, file.slug, file.year);
 
+        // timeを決定：article.timeがあればそれを使い、なければファイルパスから取得したyearを使用
+        const time = article.time || file.year;
+
+        if (!time) {
+          console.log(`${progress} ⏭️  スキップ: ${file.fullPath} (timeが取得できません)`);
+          skippedCount++;
+          continue;
+        }
+
         // ファイルハッシュを計算
         const fileHash = calculateFileHash(file.fullPath);
 
@@ -182,7 +191,7 @@ async function syncMDXFilesToDatabase(): Promise<void> {
           .bind(
             article.actualCategory,
             article.slug,
-            article.year || ""
+            time
           )
           .first();
 
@@ -206,9 +215,11 @@ async function syncMDXFilesToDatabase(): Promise<void> {
               tags, file_path, file_hash
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(slug, time) DO UPDATE SET
+              category = excluded.category,
               title = excluded.title,
               description = excluded.description,
               tags = excluded.tags,
+              file_path = excluded.file_path,
               file_hash = excluded.file_hash,
               updated_at = CURRENT_TIMESTAMP
             `
@@ -216,7 +227,7 @@ async function syncMDXFilesToDatabase(): Promise<void> {
           .bind(
             article.actualCategory,
             article.slug,
-            article.year || "",
+            time,
             article.frontmatter.title,
             description || null,
             JSON.stringify(article.frontmatter.tags),

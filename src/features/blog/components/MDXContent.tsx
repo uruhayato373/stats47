@@ -11,8 +11,6 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-import { ArticleContextProvider } from "../contexts/ArticleContext";
-
 // カスタムMDXコンポーネントをインポート
 import { PrefectureRankingHighlights } from "./mdx-components/PrefectureRankingHighlights";
 import { PrefectureRankingMap } from "./mdx-components/PrefectureRankingMap";
@@ -99,78 +97,24 @@ export interface MDXContentProps {
 
 /**
  * MDXコンテンツレンダリングコンポーネント
- *
- * ArticleContextProviderでラップして、カスタムコンポーネントから
- * 記事のメタデータにアクセスできるようにする
  */
 export function MDXContent({ article, className }: MDXContentProps) {
-  // コンテキストの値を準備
-  const contextValue = {
-    frontmatter: article.frontmatter,
-    category: article.actualCategory,
-    year: article.time,
-  };
-
-  // カスタムコンポーネントにコンテキスト値を渡すためにラッパーを作成
-  // 各カスタムコンポーネントをArticleContextProviderでラップ
-  const componentsWithContext = {
-    ...mdxComponents,
-    // カスタムコンポーネントをラップしてコンテキストを提供
-    PrefectureRankingMap: (
-      props: React.ComponentProps<typeof PrefectureRankingMap>
-    ) => (
-      <ArticleContextProvider value={contextValue}>
-        <PrefectureRankingMap {...props} />
-      </ArticleContextProvider>
-    ),
-    PrefectureRankingTable: (
-      props: React.ComponentProps<typeof PrefectureRankingTable>
-    ) => (
-      <ArticleContextProvider value={contextValue}>
-        <PrefectureRankingTable {...props} />
-      </ArticleContextProvider>
-    ),
-    PrefectureRankingHighlights: (
-      props: React.ComponentProps<typeof PrefectureRankingHighlights>
-    ) => (
-      <ArticleContextProvider value={contextValue}>
-        <PrefectureRankingHighlights {...props} />
-      </ArticleContextProvider>
-    ),
-    PrefectureRankingRegion: (
-      props: React.ComponentProps<typeof PrefectureRankingRegion>
-    ) => (
-      <ArticleContextProvider value={contextValue}>
-        <PrefectureRankingRegion {...props} />
-      </ArticleContextProvider>
-    ),
-    PrefectureStatisticsCard: (
-      props: React.ComponentProps<typeof PrefectureStatisticsCard>
-    ) => (
-      <ArticleContextProvider value={contextValue}>
-        <PrefectureStatisticsCard {...props} />
-      </ArticleContextProvider>
-    ),
-  };
-
   return (
-    <ArticleContextProvider value={contextValue}>
-      <div className={className}>
-        <MDXRemote
-          source={article.content}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                rehypeHighlight,
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: "wrap" }],
-              ],
-            },
-          }}
-          components={componentsWithContext}
-        />
-      </div>
-    </ArticleContextProvider>
+    <div className={className}>
+      <MDXRemote
+        source={article.content}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [
+              rehypeHighlight,
+              rehypeSlug,
+              [rehypeAutolinkHeadings, { behavior: "wrap" }],
+            ],
+          },
+        }}
+        components={mdxComponents}
+      />
+    </div>
   );
 }

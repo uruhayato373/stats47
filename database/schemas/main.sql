@@ -5,9 +5,7 @@
 -- 備考: マイグレーション履歴（025-038）を統合した完全版スキーマ
 -- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、データベーステーブルは使用しません
 
--- ============================================================================
 -- 1. 認証関連テーブル（Auth.js準拠）
--- ============================================================================
 
 -- users: ユーザー認証・管理テーブル
 CREATE TABLE IF NOT EXISTS users (
@@ -62,9 +60,7 @@ CREATE TABLE IF NOT EXISTS verification_tokens (
   PRIMARY KEY (identifier, token)
 );
 
--- ============================================================================
 -- 2. カテゴリ・サブカテゴリテーブル
--- ============================================================================
 
 -- categories: カテゴリ管理テーブル
 CREATE TABLE IF NOT EXISTS categories (
@@ -87,9 +83,7 @@ CREATE TABLE IF NOT EXISTS subcategories (
   FOREIGN KEY (category_key) REFERENCES categories(category_key) ON DELETE CASCADE
 );
 
--- ============================================================================
 -- 3. e-Statメタデータテーブル
--- ============================================================================
 
 -- estat_metainfo: e-Stat APIから取得した統計表メタデータを保存
 CREATE TABLE IF NOT EXISTS estat_metainfo (
@@ -120,9 +114,7 @@ CREATE TABLE IF NOT EXISTS estat_ranking_mappings (
   CHECK (area_type IN ('prefecture', 'city', 'national'))
 );
 
--- ============================================================================
 -- 4. ランキング関連テーブル
--- ============================================================================
 
 -- ranking_items: ランキング項目設定テーブル
 -- 注意: このテーブルはe-Stat API専用です
@@ -174,17 +166,7 @@ CREATE TABLE IF NOT EXISTS ranking_group_subcategories (
   FOREIGN KEY (subcategory_id) REFERENCES subcategories(subcategory_key) ON DELETE CASCADE
 );
 
--- ============================================================================
--- 5. ダッシュボード関連テーブル
--- ============================================================================
--- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、
--- データベーステーブルは使用しません。
--- 各サブカテゴリのダッシュボードコンポーネントは以下の場所に配置されています：
--- src/features/dashboard/components/[category]/[subcategory]/[ComponentName]Dashboard.tsx
-
--- ============================================================================
--- 6. ブログ記事関連テーブル
--- ============================================================================
+-- 5. ブログ記事関連テーブル
 
 -- articles: MDXファイルのfrontmatter管理テーブル
 -- contents内のMDXファイルのfrontmatterをデータベースで管理
@@ -202,9 +184,7 @@ CREATE TABLE IF NOT EXISTS articles (
   PRIMARY KEY (slug, time)
 );
 
--- ============================================================================
--- 7. インデックス作成
--- ============================================================================
+-- 6. インデックス作成
 
 -- カテゴリ・サブカテゴリ関連インデックス
 -- category_key は PRIMARY KEY なので追加インデックス不要
@@ -242,19 +222,13 @@ CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_group ON ranking_grou
 CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_subcategory ON ranking_group_subcategories(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_ranking_group_subcategories_display_order ON ranking_group_subcategories(subcategory_id, display_order);
 
--- ダッシュボード関連インデックス
--- 注意: ダッシュボードはコンポーネントベースのアプローチに移行したため、
--- データベースインデックスは不要です。
-
 -- ブログ記事関連インデックス
 CREATE INDEX IF NOT EXISTS idx_articles_category ON articles(category);
 CREATE INDEX IF NOT EXISTS idx_articles_slug ON articles(slug);
 CREATE INDEX IF NOT EXISTS idx_articles_time ON articles(time DESC);
 CREATE INDEX IF NOT EXISTS idx_articles_file_path ON articles(file_path);
 
--- ============================================================================
--- 8. ビュー作成
--- ============================================================================
+-- 7. ビュー作成
 
 -- v_estat_metainfo_summary: 統計表サマリービュー
 CREATE VIEW IF NOT EXISTS v_estat_metainfo_summary AS

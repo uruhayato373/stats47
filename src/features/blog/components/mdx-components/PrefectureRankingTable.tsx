@@ -2,7 +2,6 @@
  * 都道府県ランキングテーブルコンポーネント（MDX用）
  * 
  * MDXコンテンツ内で使用する都道府県ランキングテーブル表示コンポーネント
- * ArticleContextからstatsDataIdを取得してRankingDataTableを表示
  */
 
 "use client";
@@ -13,8 +12,6 @@ import { getRankingData } from "@/features/ranking/items/actions/getRankingData"
 import { getRankingItem } from "@/features/ranking/items/actions/getRankingItem";
 import { RankingDataTable } from "@/features/ranking/shared/components/RankingDataTable";
 
-import { useArticleContext } from "../../contexts/ArticleContext";
-
 import type { StatsSchema } from "@/types/stats";
 import type { RankingItem } from "@/features/ranking/items/types";
 
@@ -22,29 +19,21 @@ import type { RankingItem } from "@/features/ranking/items/types";
  * PrefectureRankingTableコンポーネントのprops
  */
 interface PrefectureRankingTableProps {
-  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
-  rankingKey?: string;
-  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
-  time?: string;
+  /** ランキングキー */
+  rankingKey: string;
+  /** 時間（年度など） */
+  time: string;
 }
 
 /**
  * 都道府県ランキングテーブルコンポーネント
  * 
  * MDXコンテンツ内で使用する都道府県別ランキングテーブルを表示します。
- * propsでrankingKeyとtimeが渡された場合はそれを使用し、
- * 渡されていない場合はArticleContextから取得します。
  */
 export function PrefectureRankingTable({
-  rankingKey: propsRankingKey,
-  time: propsTime,
-}: PrefectureRankingTableProps = {}) {
-  const context = useArticleContext();
-  const { year: contextYear } = context;
-  
-  // propsが渡された場合はそれを優先、なければcontextから取得
-  const rankingKey = propsRankingKey || (context as any).statsDataId;
-  const time = propsTime || contextYear;
+  rankingKey,
+  time,
+}: PrefectureRankingTableProps) {
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [rankingItem, setRankingItem] = useState<RankingItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);

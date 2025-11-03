@@ -2,7 +2,6 @@
  * 都道府県ランキング地域別分析コンポーネント（MDX用）
  * 
  * MDXコンテンツ内で使用する地域別分析表示コンポーネント
- * ArticleContextからstatsDataIdを取得してランキングデータを地域別に集計して表示
  */
 
 "use client";
@@ -12,18 +11,16 @@ import { useEffect, useMemo, useState } from "react";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 
-import { useArticleContext } from "../../contexts/ArticleContext";
-
 import type { StatsSchema } from "@/types/stats";
 
 /**
  * PrefectureRankingRegionコンポーネントのprops
  */
 interface PrefectureRankingRegionProps {
-  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
-  rankingKey?: string;
-  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
-  time?: string;
+  /** ランキングキー */
+  rankingKey: string;
+  /** 時間（年度など） */
+  time: string;
 }
 
 /**
@@ -61,19 +58,11 @@ interface RegionSummary {
  * 都道府県ランキング地域別分析コンポーネント
  * 
  * MDXコンテンツ内で使用する地域別分析を表示します。
- * propsでrankingKeyとtimeが渡された場合はそれを使用し、
- * 渡されていない場合はArticleContextから取得します。
  */
 export function PrefectureRankingRegion({
-  rankingKey: propsRankingKey,
-  time: propsTime,
-}: PrefectureRankingRegionProps = {}) {
-  const context = useArticleContext();
-  const { chartSettings, year: contextYear } = context;
-  
-  // propsが渡された場合はそれを優先、なければcontextから取得
-  const rankingKey = propsRankingKey || (context as any).statsDataId;
-  const time = propsTime || contextYear;
+  rankingKey,
+  time,
+}: PrefectureRankingRegionProps) {
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -177,8 +166,8 @@ export function PrefectureRankingRegion({
       }
     );
 
-    // 集計方法に応じてソート（chartSettings.regionValues）
-    const sortBy = chartSettings?.regionValues || "average";
+    // 集計方法に応じてソート（デフォルトは平均でソート）
+    const sortBy = "average";
     summaries.sort((a, b) => {
       if (sortBy === "sum") {
         return b.total - a.total;
@@ -189,7 +178,7 @@ export function PrefectureRankingRegion({
     });
 
     return summaries;
-  }, [rankingData, chartSettings?.regionValues]);
+  }, [rankingData]);
 
   if (isLoading) {
     return (
@@ -220,13 +209,8 @@ export function PrefectureRankingRegion({
     return value.toLocaleString("ja-JP");
   };
 
-  // 集計方法のラベル
-  const aggregateLabel =
-    chartSettings?.regionValues === "sum"
-      ? "合計"
-      : chartSettings?.regionValues === "mean" || chartSettings?.regionValues === "average"
-        ? "平均"
-        : "平均";
+  // 集計方法のラベル（デフォルトは平均）
+  const aggregateLabel = "平均";
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -240,11 +224,7 @@ export function PrefectureRankingRegion({
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">{aggregateLabel}:</span>
                 <span className="font-mono font-semibold">
-                  {formatValue(
-                    chartSettings?.regionValues === "sum"
-                      ? summary.total
-                      : summary.average
-                  )}
+                  {formatValue(summary.average)}
                 </span>
                 {summary.unit && (
                   <span className="text-xs text-muted-foreground">

@@ -2,7 +2,6 @@
  * 都道府県統計カードコンポーネント（MDX用）
  * 
  * MDXコンテンツ内で使用する統計カード表示コンポーネント
- * ArticleContextからstatsDataIdを取得してランキングデータの統計情報を表示
  */
 
 "use client";
@@ -12,37 +11,27 @@ import { useEffect, useMemo, useState } from "react";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 
-import { useArticleContext } from "../../contexts/ArticleContext";
-
 import type { StatsSchema } from "@/types/stats";
 
 /**
  * PrefectureStatisticsCardコンポーネントのprops
  */
 interface PrefectureStatisticsCardProps {
-  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
-  rankingKey?: string;
-  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
-  time?: string;
+  /** ランキングキー */
+  rankingKey: string;
+  /** 時間（年度など） */
+  time: string;
 }
 
 /**
  * 都道府県統計カードコンポーネント
  * 
  * MDXコンテンツ内で使用する統計情報カードを表示します。
- * propsでrankingKeyとtimeが渡された場合はそれを使用し、
- * 渡されていない場合はArticleContextから取得します。
  */
 export function PrefectureStatisticsCard({
-  rankingKey: propsRankingKey,
-  time: propsTime,
-}: PrefectureStatisticsCardProps = {}) {
-  const context = useArticleContext();
-  const { chartSettings, year: contextYear } = context;
-  
-  // propsが渡された場合はそれを優先、なければcontextから取得
-  const rankingKey = propsRankingKey || (context as any).statsDataId;
-  const time = propsTime || contextYear;
+  rankingKey,
+  time,
+}: PrefectureStatisticsCardProps) {
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

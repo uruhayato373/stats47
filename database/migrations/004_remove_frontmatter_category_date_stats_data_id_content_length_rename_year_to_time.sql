@@ -3,6 +3,15 @@
 -- 説明: articlesテーブルからfrontmatter_category、date、stats_data_id、content_lengthカラムを削除し、yearカラムをtimeにリネーム
 
 -- ============================================================================
+-- インデックスの削除（カラム削除前に実行）
+-- ============================================================================
+
+-- 削除予定のカラムのインデックスを削除（存在する場合のみ）
+DROP INDEX IF EXISTS idx_articles_date;
+DROP INDEX IF EXISTS idx_articles_frontmatter_category;
+DROP INDEX IF EXISTS idx_articles_stats_data_id;
+
+-- ============================================================================
 -- カラムの削除とリネーム
 -- ============================================================================
 
@@ -25,11 +34,6 @@ ALTER TABLE articles RENAME COLUMN year TO time;
 -- ============================================================================
 -- インデックスの再作成
 -- ============================================================================
-
--- 削除されたカラムのインデックスを削除
-DROP INDEX IF EXISTS idx_articles_date;
-DROP INDEX IF EXISTS idx_articles_frontmatter_category;
-DROP INDEX IF EXISTS idx_articles_stats_data_id;
 
 -- yearをtimeにリネームしたため、time用のインデックスを作成
 CREATE INDEX IF NOT EXISTS idx_articles_time ON articles(time DESC);

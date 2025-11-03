@@ -2,7 +2,6 @@
  * 都道府県ランキングハイライトコンポーネント（MDX用）
  * 
  * MDXコンテンツ内で使用する上位・下位県のハイライト表示コンポーネント
- * ArticleContextからstatsDataIdを取得してランキングデータの上位・下位を表示
  */
 
 "use client";
@@ -12,37 +11,27 @@ import { useEffect, useMemo, useState } from "react";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 
-import { useArticleContext } from "../../contexts/ArticleContext";
-
 import type { StatsSchema } from "@/types/stats";
 
 /**
  * PrefectureRankingHighlightsコンポーネントのprops
  */
 interface PrefectureRankingHighlightsProps {
-  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
-  rankingKey?: string;
-  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
-  time?: string;
+  /** ランキングキー */
+  rankingKey: string;
+  /** 時間（年度など） */
+  time: string;
 }
 
 /**
  * 都道府県ランキングハイライトコンポーネント
  * 
  * MDXコンテンツ内で使用する上位・下位県のハイライトを表示します。
- * propsでrankingKeyとtimeが渡された場合はそれを使用し、
- * 渡されていない場合はArticleContextから取得します。
  */
 export function PrefectureRankingHighlights({
-  rankingKey: propsRankingKey,
-  time: propsTime,
-}: PrefectureRankingHighlightsProps = {}) {
-  const context = useArticleContext();
-  const { year: contextYear } = context;
-  
-  // propsが渡された場合はそれを優先、なければcontextから取得
-  const rankingKey = propsRankingKey || (context as any).statsDataId;
-  const time = propsTime || contextYear;
+  rankingKey,
+  time,
+}: PrefectureRankingHighlightsProps) {
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
