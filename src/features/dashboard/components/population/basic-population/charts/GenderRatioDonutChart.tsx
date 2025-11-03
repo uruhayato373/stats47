@@ -3,12 +3,13 @@
  * e-Stat APIから直接データを取得
  */
 
-import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
-import {
-  formatStatsData,
-  convertToStatsSchema,
-} from "@/features/estat-api/stats-data/services/formatter";
-import { GenderRatioDonutChartClient } from "./GenderRatioDonutChartClient";
+import { DonutChart } from "@/components/molecules/charts";
+
+import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
+
+// チャート設定
+const CHART_TITLE = "総人口男女別割合";
+const CHART_DESCRIPTION = "総人口の男女別割合を表示";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -18,10 +19,6 @@ const CAT01_TOTAL_POPULATION_FEMALE = "A110102"; // 総人口（女）
 interface GenderRatioDonutChartProps {
   /** 地域コード */
   areaCode: string;
-  /** タイトル */
-  title: string;
-  /** 説明 */
-  description?: string;
   /** 年度（最新年度を取得する場合は指定しない） */
   timeCode?: string;
 }
@@ -31,46 +28,23 @@ interface GenderRatioDonutChartProps {
  */
 export async function GenderRatioDonutChart({
   areaCode,
-  title,
-  description,
   timeCode,
 }: GenderRatioDonutChartProps) {
   try {
-    // 男女別データを並列取得
-    const [maleResponse, femaleResponse] = await Promise.all([
-      fetchStatsData(STATS_DATA_ID, {
+    // 男女別データを並列取得（fetchFormattedStatsDataで整形と変換まで実行）
+    const [maleSchemas, femaleSchemas] = await Promise.all([
+      fetchFormattedStatsData(STATS_DATA_ID, {
         categoryFilter: CAT01_TOTAL_POPULATION_MALE,
         areaFilter: areaCode,
       }),
-      fetchStatsData(STATS_DATA_ID, {
+      fetchFormattedStatsData(STATS_DATA_ID, {
         categoryFilter: CAT01_TOTAL_POPULATION_FEMALE,
         areaFilter: areaCode,
       }),
     ]);
 
-    // データを整形
-    const maleFormattedData = formatStatsData(maleResponse);
-    const femaleFormattedData = formatStatsData(femaleResponse);
-
-    // StatsSchema形式に変換
-    const maleSchemas = maleFormattedData.values
-      .filter((value) => value.dimensions.area?.code === areaCode)
-      .map((value) => convertToStatsSchema(value))
-      .filter((schema): schema is NonNullable<typeof schema> => schema !== undefined);
-
-    const femaleSchemas = femaleFormattedData.values
-      .filter((value) => value.dimensions.area?.code === areaCode)
-      .map((value) => convertToStatsSchema(value))
-      .filter((schema): schema is NonNullable<typeof schema> => schema !== undefined);
-
     if (maleSchemas.length === 0 || femaleSchemas.length === 0) {
-      return (
-        <GenderRatioDonutChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
+      return null;
     }
 
     // 年度順にソート
@@ -91,25 +65,23 @@ export async function GenderRatioDonutChart({
       }
     } else {
       // 指定年度の名前を取得
-      const maleDataItem = maleSchemas.find((d) => d.timeCode === targetTimeCode);
+      const maleDataItem = maleSchemas.find(
+        (d) => d.timeCode === targetTimeCode
+      );
       if (maleDataItem) {
         targetTimeName = maleDataItem.timeName;
       }
     }
 
     // 指定年度のデータを取得
-    const maleValue = maleSchemas.find((d) => d.timeCode === targetTimeCode)?.value || 0;
-    const femaleValue = femaleSchemas.find((d) => d.timeCode === targetTimeCode)?.value || 0;
+    const maleValue =
+      maleSchemas.find((d) => d.timeCode === targetTimeCode)?.value || 0;
+    const femaleValue =
+      femaleSchemas.find((d) => d.timeCode === targetTimeCode)?.value || 0;
     const total = maleValue + femaleValue;
 
     if (total === 0) {
-      return (
-        <GenderRatioDonutChartClient
-          chartData={[]}
-          title={title}
-          description={description}
-        />
-      );
+      return null;
     }
 
     // チャート用のデータ形式に変換
@@ -126,23 +98,36 @@ export async function GenderRatioDonutChart({
       },
     ];
 
+    // チャート設定
+    const chartConfig = {
+      male: {
+        label: "男性",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      female: {
+        label: "女性",
+        color: "hsl(346, 77%, 50%)", // Pink（ピンク色）
+      },
+    };
+
+    const colors = [
+      "hsl(221, 83%, 53%)", // 男性（青）
+      "hsl(346, 77%, 50%)", // 女性（ピンク）
+    ];
+
     return (
-      <GenderRatioDonutChartClient
+      <DonutChart
         chartData={chartData}
-        title={title}
-        description={description}
-        timeName={targetTimeName}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
+        extraInfo={targetTimeName}
+        chartConfig={chartConfig}
+        colors={colors}
+        unit="人"
       />
     );
   } catch (error) {
     console.error("[GenderRatioDonutChart] データ取得エラー:", error);
-    return (
-      <GenderRatioDonutChartClient
-        chartData={[]}
-        title={title}
-        description={description}
-      />
-    );
+    return null;
   }
 }
-

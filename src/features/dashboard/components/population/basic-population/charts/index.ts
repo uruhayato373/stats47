@@ -10,6 +10,4 @@ export { GenderRatioDonutChart } from "./GenderRatioDonutChart";
 export { AgeGroupStackedBarChart } from "./AgeGroupStackedBarChart";
 
 // Client Components（内部使用）
-export { GenderRatioDonutChartClient } from "./GenderRatioDonutChartClient";
-export { AgeGroupStackedBarChartClient } from "./AgeGroupStackedBarChartClient";
 

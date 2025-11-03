@@ -15,3 +15,16 @@ export type {
   HorizontalBarChartData,
 } from "./HorizontalBarChart";
 
+export { StackedBarChart } from "./StackedBarChart";
+export type {
+  StackedBarChartProps,
+  StackedBarConfig,
+} from "./StackedBarChart";
+
+export { DonutChart } from "./DonutChart";
+export type {
+  DonutChartProps,
+  DonutChartData,
+  DonutChartConfig,
+} from "./DonutChart";
+

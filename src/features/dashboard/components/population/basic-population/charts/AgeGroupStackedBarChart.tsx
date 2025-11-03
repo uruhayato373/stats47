@@ -3,13 +3,17 @@
  * e-Stat APIから直接データを取得
  */
 
+import { StackedBarChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
 
-import { AgeGroupStackedBarChartClient } from "./AgeGroupStackedBarChartClient";
+// チャート設定
+const CHART_TITLE = "年齢区分別人口推移";
+const CHART_DESCRIPTION = "15歳未満、15～64歳、65歳以上の人口推移を表示";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -20,10 +24,6 @@ const CAT01_OLD_POPULATION = "A1303"; // 65歳以上人口
 interface AgeGroupStackedBarChartProps {
   /** 地域コード */
   areaCode: string;
-  /** タイトル */
-  title: string;
-  /** 説明 */
-  description?: string;
 }
 
 /**
@@ -31,8 +31,6 @@ interface AgeGroupStackedBarChartProps {
  */
 export async function AgeGroupStackedBarChart({
   areaCode,
-  title,
-  description,
 }: AgeGroupStackedBarChartProps) {
   try {
     // 3つの年齢区分データを並列取得
@@ -84,10 +82,29 @@ export async function AgeGroupStackedBarChart({
       oldSchemas.length === 0
     ) {
       return (
-        <AgeGroupStackedBarChartClient
+        <StackedBarChart
           chartData={[]}
-          title={title}
-          description={description}
+          title={CHART_TITLE}
+          description={CHART_DESCRIPTION}
+          chartConfig={{
+            young: {
+              dataKey: "young",
+              label: "15歳未満",
+              color: "hsl(221, 83%, 53%)",
+            },
+            production: {
+              dataKey: "production",
+              label: "15～64歳",
+              color: "hsl(142, 76%, 36%)",
+            },
+            old: {
+              dataKey: "old",
+              label: "65歳以上",
+              color: "hsl(38, 92%, 50%)",
+            },
+          }}
+          showTotal
+          unit="人"
         />
       );
     }
@@ -170,22 +187,64 @@ export async function AgeGroupStackedBarChart({
       }))
       .sort((a, b) => a.year.localeCompare(b.year));
 
+    // チャート設定
+    const chartConfig = {
+      young: {
+        dataKey: "young",
+        label: "15歳未満",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      production: {
+        dataKey: "production",
+        label: "15～64歳",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+      old: {
+        dataKey: "old",
+        label: "65歳以上",
+        color: "hsl(38, 92%, 50%)", // Orange（オレンジ色）
+      },
+    };
+
     return (
-      <AgeGroupStackedBarChartClient
+      <StackedBarChart
         chartData={chartData}
-        title={title}
-        description={description}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
+        chartConfig={chartConfig}
+        showTotal
+        totalLabel="合計"
+        unit="人"
       />
     );
   } catch (error) {
     console.error("[AgeGroupStackedBarChart] データ取得エラー:", error);
     return (
-      <AgeGroupStackedBarChartClient
+      <StackedBarChart
         chartData={[]}
-        title={title}
-        description={description}
+        title={CHART_TITLE}
+        description={CHART_DESCRIPTION}
+        chartConfig={{
+          young: {
+            dataKey: "young",
+            label: "15歳未満",
+            color: "hsl(221, 83%, 53%)",
+          },
+          production: {
+            dataKey: "production",
+            label: "15～64歳",
+            color: "hsl(142, 76%, 36%)",
+          },
+          old: {
+            dataKey: "old",
+            label: "65歳以上",
+            color: "hsl(38, 92%, 50%)",
+          },
+        }}
+        showTotal
+        totalLabel="合計"
+        unit="人"
       />
     );
   }
 }
-

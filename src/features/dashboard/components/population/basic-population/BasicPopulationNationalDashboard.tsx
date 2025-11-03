@@ -44,11 +44,7 @@ export async function BasicPopulationNationalDashboard({
 
       {/* 総人口男女別割合ドーナツチャート */}
       <div className="col-span-12 md:col-span-6 lg:col-span-4">
-        <GenderRatioDonutChart
-          areaCode={areaCode}
-          title="総人口男女別割合"
-          description="総人口の男女別割合を表示"
-        />
+        <GenderRatioDonutChart areaCode={areaCode} />
       </div>
 
       {/* 総人口推移チャート */}
@@ -58,11 +54,7 @@ export async function BasicPopulationNationalDashboard({
 
       {/* 年齢区分別人口スタックバーチャート */}
       <div className="col-span-12 lg:col-span-8">
-        <AgeGroupStackedBarChart
-          areaCode={areaCode}
-          title="年齢区分別人口推移"
-          description="15歳未満、15～64歳、65歳以上の人口推移を表示"
-        />
+        <AgeGroupStackedBarChart areaCode={areaCode} />
       </div>
 
       {/* 年齢別人口分布チャート */}
