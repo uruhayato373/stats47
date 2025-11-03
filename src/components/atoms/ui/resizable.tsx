@@ -48,7 +48,7 @@ const ResizableHandle = ({
   return (
     <PanelResizeHandle
       className={cn(
-        "relative w-px bg-gray-200 dark:bg-neutral-700 hover:bg-primary/50 transition-colors after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "relative w-px bg-border hover:bg-primary/50 transition-colors after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
       {...props}
