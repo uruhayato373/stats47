@@ -3,13 +3,13 @@
  * e-Stat APIから直接データを取得
  */
 
+import { DonutChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   formatStatsData,
   convertToStatsSchema,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { ForestRatioDonutChartClient } from "./ForestRatioDonutChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010102"; // 国土統計
@@ -70,10 +70,12 @@ export async function ForestRatioDonutChart({
 
     if (forestSchemas.length === 0 || woodlandSchemas.length === 0) {
       return (
-        <ForestRatioDonutChartClient
+        <DonutChart
           chartData={[]}
           title={title}
           description={description}
+          chartConfig={{}}
+          colors={[]}
         />
       );
     }
@@ -113,10 +115,12 @@ export async function ForestRatioDonutChart({
 
     if (total === 0) {
       return (
-        <ForestRatioDonutChartClient
+        <DonutChart
           chartData={[]}
           title={title}
           description={description}
+          chartConfig={{}}
+          colors={[]}
         />
       );
     }
@@ -142,23 +146,46 @@ export async function ForestRatioDonutChart({
       },
     ];
 
+    // チャート設定
+    const chartConfig = {
+      woodland: {
+        label: "森林面積",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+      other: {
+        label: "その他の林野面積",
+        color: "hsl(38, 92%, 50%)", // Orange（オレンジ色）
+      },
+    };
+
+    // 色定義
+    const colors = [
+      "hsl(142, 76%, 36%)", // 森林面積（緑）
+      "hsl(38, 92%, 50%)", // その他の林野面積（オレンジ）
+    ];
+
     return (
-      <ForestRatioDonutChartClient
+      <DonutChart
         chartData={chartData}
         title={title}
         description={description}
-        timeName={targetTimeName}
+        extraInfo={targetTimeName}
+        chartConfig={chartConfig}
+        colors={colors}
         totalValue={forestValue}
+        totalLabel="林野面積合計"
         unit="ｈａ"
       />
     );
   } catch (error) {
     console.error("[ForestRatioDonutChart] データ取得エラー:", error);
     return (
-      <ForestRatioDonutChartClient
+      <DonutChart
         chartData={[]}
         title={title}
         description={description}
+        chartConfig={{}}
+        colors={[]}
       />
     );
   }

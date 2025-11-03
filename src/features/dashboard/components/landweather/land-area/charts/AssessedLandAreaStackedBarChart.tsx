@@ -277,21 +277,12 @@ export async function AssessedLandAreaStackedBarChart({
       },
     };
 
-    // 数値をカンマ区切りでフォーマット
-    const formatValue = (value: number): string => {
-      return new Intl.NumberFormat("ja-JP", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(value);
-    };
-
     return (
       <StackedBarChart
         chartData={chartData}
         title={title}
         description={description}
         chartConfig={chartConfig}
-        valueFormatter={formatValue}
         showTotal={true}
         totalLabel="合計"
         unit="㎡"

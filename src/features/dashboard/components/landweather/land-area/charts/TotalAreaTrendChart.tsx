@@ -3,13 +3,13 @@
  * e-Stat APIから直接データを取得
  */
 
+import { TrendLineChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { TotalAreaTrendChartClient } from "./TotalAreaTrendChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010102"; // 国土統計
@@ -52,10 +52,11 @@ export async function TotalAreaTrendChart({
 
     if (statsSchemas.length === 0) {
       return (
-        <TotalAreaTrendChartClient
+        <TrendLineChart
           chartData={[]}
           title={title}
           description={description}
+          chartConfig={{}}
         />
       );
     }
@@ -72,9 +73,18 @@ export async function TotalAreaTrendChart({
       unit: item.unit,
     }));
 
+    // チャート設定
+    const chartConfig = {
+      value: {
+        label: title,
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+    };
+
     return (
-      <TotalAreaTrendChartClient
+      <TrendLineChart
         chartData={chartData}
+        chartConfig={chartConfig}
         title={title}
         description={description}
       />
@@ -82,10 +92,11 @@ export async function TotalAreaTrendChart({
   } catch (error) {
     console.error("[TotalAreaTrendChart] データ取得エラー:", error);
     return (
-      <TotalAreaTrendChartClient
+      <TrendLineChart
         chartData={[]}
         title={title}
         description={description}
+        chartConfig={{}}
       />
     );
   }
