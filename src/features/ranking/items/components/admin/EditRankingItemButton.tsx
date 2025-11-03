@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { Pencil } from "lucide-react";
 
 import { Button } from "@/components/atoms/ui/button";
-import { EditRankingItemModal } from "./EditRankingItemModal";
+
 import { updateRankingItem } from "@/features/ranking/items/actions/updateRankingItem";
 import type { RankingItem } from "@/features/ranking/items/types";
+
+import { EditRankingItemModal } from "./EditRankingItemModal";
 
 interface EditRankingItemButtonProps {
   isAdmin: boolean;
@@ -117,8 +121,8 @@ export function EditRankingItemButton({
             typeof rankingItem.mapDivergingMidpoint === "string"
               ? rankingItem.mapDivergingMidpoint
               : typeof rankingItem.mapDivergingMidpoint === "number"
-                ? String(rankingItem.mapDivergingMidpoint)
-                : "zero",
+              ? String(rankingItem.mapDivergingMidpoint)
+              : "zero",
         }}
         onUpdate={handleUpdate}
         onSuccess={handleSuccess}
@@ -126,4 +130,3 @@ export function EditRankingItemButton({
     </>
   );
 }
-

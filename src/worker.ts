@@ -1,8 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { EstatMetaInfoRepository } from "./infrastructure/database/estat/repositories";
-import { EstatMetaInfoCacheService } from "./infrastructure/database/estat/services";
-
 export interface Env {
   AUTH_DB: D1Database;
   STATS47_DB: D1Database;
@@ -54,42 +51,12 @@ async function handleSave(request: Request, env: Env): Promise<Response> {
   }
 
   try {
-    const { statsDataId, batchMode, startId, endId } =
-      (await request.json()) as {
-        statsDataId?: string | string[];
-        batchMode?: boolean;
-        startId?: string;
-        endId?: string;
-      };
-    const metaInfoRepository = new EstatMetaInfoRepository(env.STATS47_DB);
-    const metaInfoService = new EstatMetaInfoCacheService(metaInfoRepository);
-
-    if (batchMode && startId && endId) {
-      const result = await metaInfoService.processMetaInfoRange(startId, endId);
-      return Response.json({
-        success: true,
-        message: `${startId}から${endId}までの統計表IDを処理しました`,
-        details: result,
-      });
-    } else if (Array.isArray(statsDataId)) {
-      const result = await metaInfoService.processBulkMetaInfo(statsDataId);
-      return Response.json({
-        success: true,
-        message: `${statsDataId.length}件の統計表IDを処理しました`,
-        details: result,
-      });
-    } else if (statsDataId) {
-      const result = await metaInfoService.processAndSaveMetaInfo(statsDataId);
-      return Response.json({
-        success: result.success,
-        message: result.success
-          ? `${statsDataId}のメタ情報を保存しました`
-          : `${statsDataId}のメタ情報保存に失敗しました`,
-        details: result,
-      });
-    } else {
-      return Response.json({ error: "統計表IDが必要です" }, { status: 400 });
-    }
+    // TODO: EstatMetaInfoRepository と EstatMetaInfoCacheService の実装が必要
+    // 現在はこれらのクラスが存在しないため、実装を保留
+    return Response.json(
+      { error: "この機能は現在実装されていません" },
+      { status: 501 }
+    );
   } catch (error) {
     console.error("メタ情報保存エラー:", error);
     return Response.json(

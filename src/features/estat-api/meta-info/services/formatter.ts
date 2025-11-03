@@ -6,6 +6,7 @@
  */
 
 import {
+  AreaInfo,
   CategoryInfo,
   ClassItem,
   ClassObject,
@@ -216,7 +217,7 @@ export function parseCompleteMetaInfo(
  * const prefectures = areas.filter(a => a.level === 2);
  * ```
  */
-function extractAreaHierarchy(metaInfo: EstatMetaInfoResponse) {
+function extractAreaHierarchy(metaInfo: EstatMetaInfoResponse): AreaInfo[] {
   const areaClass = lookupClassObj(metaInfo, "area");
   if (!areaClass) {
     return [];

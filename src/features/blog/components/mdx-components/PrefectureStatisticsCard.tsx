@@ -1,6 +1,6 @@
 /**
  * 都道府県統計カードコンポーネント（MDX用）
- * 
+ *
  * MDXコンテンツ内で使用する統計カード表示コンポーネント
  */
 
@@ -8,8 +8,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
+
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 
 import type { StatsSchema } from "@/types/stats";
 
@@ -25,7 +31,7 @@ interface PrefectureStatisticsCardProps {
 
 /**
  * 都道府県統計カードコンポーネント
- * 
+ *
  * MDXコンテンツ内で使用する統計情報カードを表示します。
  */
 export function PrefectureStatisticsCard({
@@ -242,4 +248,3 @@ export function PrefectureStatisticsCard({
     </Card>
   );
 }
-

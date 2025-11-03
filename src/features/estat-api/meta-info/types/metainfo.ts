@@ -287,3 +287,83 @@ export interface EstatMetaInfoResponse {
     };
   };
 }
+
+/**
+ * 分類項目情報
+ */
+export interface CategoryInfo {
+  /** 分類ID（例: "cat01"） */
+  id: string;
+  /** 分類名（例: "性別"） */
+  name: string;
+  /** 分類項目の配列 */
+  items: {
+    /** 項目コード */
+    code: string;
+    /** 項目名 */
+    name: string;
+    /** 単位 */
+    unit?: string;
+    /** 階層レベル */
+    level?: string;
+    /** 親コード */
+    parentCode?: string;
+  }[];
+}
+
+/**
+ * 時間軸情報
+ */
+export interface TimeAxisInfo {
+  /** 利用可能な年度コードの配列 */
+  availableYears: string[];
+  /** フォーマット済み年度名の配列 */
+  formattedYears: string[];
+  /** 最小年度コード */
+  minYear: string;
+  /** 最大年度コード */
+  maxYear: string;
+}
+
+/**
+ * 地域情報
+ */
+export interface AreaInfo {
+  /** 地域コード */
+  code: string;
+  /** 地域名 */
+  name: string;
+  /** 階層レベル */
+  level: number;
+  /** 親コード */
+  parentCode?: string;
+  /** 単位 */
+  unit?: string;
+}
+
+/**
+ * 完全解析済みメタ情報
+ */
+export interface ParsedMetaInfo {
+  /** 統計表の基本情報 */
+  tableInfo: TableInfo;
+  /** 次元情報 */
+  dimensions: {
+    /** 分類情報の配列 */
+    categories: CategoryInfo[];
+    /** 地域情報の配列 */
+    areas: AreaInfo[];
+    /** 時間軸情報 */
+    timeAxis: TimeAxisInfo;
+  };
+}
+
+/**
+ * 分類オブジェクト（エイリアス）
+ */
+export type ClassObject = import("../../core/types/common").EstatClassObject;
+
+/**
+ * 分類項目（エイリアス）
+ */
+export type ClassItem = import("../../core/types/common").EstatClass;

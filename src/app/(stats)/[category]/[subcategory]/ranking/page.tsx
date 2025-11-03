@@ -7,11 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/atoms/ui/tabs";
 
-import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
-import { RankingItemTabContent } from "@/features/ranking/items/components/RankingItemTabContent";
 import type { RankingGroup } from "@/features/ranking/groups/types";
+import { RankingItemTabContent } from "@/features/ranking/items/components/RankingItemTabContent";
+import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
 interface PageProps {
   params: Promise<{
@@ -34,11 +39,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function RankingPage({
-  params,
-  searchParams,
-}: PageProps) {
-  const { category, subcategory } = await params;
+export default async function RankingPage({ params, searchParams }: PageProps) {
+  const { subcategory } = await params;
   const { group } = await searchParams;
 
   // グループが選択されていない場合

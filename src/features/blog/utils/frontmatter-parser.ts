@@ -1,6 +1,6 @@
 /**
  * Frontmatterパーサー
- * 
+ *
  * MDXファイルのFrontmatterをパースしてバリデーションする
  */
 
@@ -19,7 +19,7 @@ const FrontmatterSchema = z.object({
 
 /**
  * 生のFrontmatterデータをパースしてバリデーション
- * 
+ *
  * @param data - パース対象のデータ
  * @returns バリデーション済みのFrontmatter
  * @throws {Error} バリデーションエラー時
@@ -29,11 +29,11 @@ export function parseFrontmatter(data: unknown): ArticleFrontmatter {
     return FrontmatterSchema.parse(data) as ArticleFrontmatter;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      // errorsプロパティが存在し、配列であることを確認
+      // issuesプロパティを使用（ZodErrorの正しいプロパティ名）
       const errorMessages =
-        error.errors && Array.isArray(error.errors)
-          ? error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ")
-          : error.message || "不明なバリデーションエラー";
+        error.issues
+          .map((e) => `${e.path.join(".")}: ${e.message}`)
+          .join(", ") || "不明なバリデーションエラー";
       throw new Error(`Frontmatterバリデーションエラー: ${errorMessages}`);
     }
     throw error;
@@ -42,7 +42,7 @@ export function parseFrontmatter(data: unknown): ArticleFrontmatter {
 
 /**
  * オプショナルなFrontmatterデータをパース（エラー時はnullを返す）
- * 
+ *
  * @param data - パース対象のデータ
  * @returns バリデーション済みのFrontmatterまたはnull
  */
@@ -53,4 +53,3 @@ export function parseFrontmatterSafe(data: unknown): ArticleFrontmatter | null {
     return null;
   }
 }
-

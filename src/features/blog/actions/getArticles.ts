@@ -1,6 +1,6 @@
 /**
  * 記事取得Server Actions
- * 
+ *
  * Next.js Server Actionsとして実装
  * クライアントから直接呼び出し可能
  */
@@ -12,6 +12,7 @@ import {
   getArticleBySlug as getArticleBySlugService,
   listArticles as listArticlesService,
 } from "../services/article-service";
+
 import type {
   Article,
   ArticleFilter,
@@ -21,7 +22,7 @@ import type {
 
 /**
  * 記事一覧を取得（Server Action）
- * 
+ *
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事一覧レスポンス
@@ -40,7 +41,7 @@ export async function getArticles(
 
 /**
  * 記事を取得（Server Action）
- * 
+ *
  * @param category - カテゴリ
  * @param slug - スラッグ
  * @param year - 年度
@@ -62,7 +63,7 @@ export async function getArticle(
 
 /**
  * すべての記事を取得（ページネーションなし、Server Action）
- * 
+ *
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事配列
@@ -78,4 +79,3 @@ export async function getAllArticlesAction(
 
   return articles;
 }
-

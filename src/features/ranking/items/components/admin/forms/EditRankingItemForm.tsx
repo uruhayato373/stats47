@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -15,8 +16,8 @@ import {
   FormMessage,
 } from "@/components/atoms/ui/form";
 import { Input } from "@/components/atoms/ui/input";
-import { Switch } from "@/components/atoms/ui/switch";
-import { Textarea } from "@/components/atoms/ui/textarea";
+import { Label } from "@/components/atoms/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -27,8 +28,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/atoms/ui/radio-group";
-import { Label } from "@/components/atoms/ui/label";
+import { Switch } from "@/components/atoms/ui/switch";
+import { Textarea } from "@/components/atoms/ui/textarea";
 
 const editRankingItemSchema = z.object({
   label: z.string().min(1, "表示ラベルは必須です").max(50),
@@ -38,19 +39,17 @@ const editRankingItemSchema = z.object({
   mapColorScheme: z.string().min(1, "色スキームは必須です"),
   mapDivergingMidpoint: z.string().min(1, "分岐点設定は必須です"),
   rankingDirection: z.enum(["asc", "desc"], {
-    errorMap: () => ({ message: "ランキング方向を選択してください" }),
+    message: "ランキング方向を選択してください",
   }),
   conversionFactor: z
     .number({
-      required_error: "変換係数は必須です",
-      invalid_type_error: "変換係数は数値である必要があります",
+      message: "変換係数は数値である必要があります",
     })
     .min(0, "変換係数は0以上である必要があります")
     .max(1000000, "変換係数は1000000以下である必要があります"),
   decimalPlaces: z
     .number({
-      required_error: "小数点以下桁数は必須です",
-      invalid_type_error: "小数点以下桁数は数値である必要があります",
+      message: "小数点以下桁数は数値である必要があります",
     })
     .int("小数点以下桁数は整数である必要があります")
     .min(0, "小数点以下桁数は0以上である必要があります")
@@ -94,9 +93,10 @@ export function EditRankingItemForm({
       annotation: rankingItem.annotation ?? "",
       unit: rankingItem.unit,
       mapColorScheme: rankingItem.mapColorScheme,
-      mapDivergingMidpoint: typeof rankingItem.mapDivergingMidpoint === "string"
-        ? rankingItem.mapDivergingMidpoint
-        : String(rankingItem.mapDivergingMidpoint),
+      mapDivergingMidpoint:
+        typeof rankingItem.mapDivergingMidpoint === "string"
+          ? rankingItem.mapDivergingMidpoint
+          : String(rankingItem.mapDivergingMidpoint),
       rankingDirection: rankingItem.rankingDirection,
       conversionFactor: rankingItem.conversionFactor,
       decimalPlaces: rankingItem.decimalPlaces,
@@ -113,7 +113,7 @@ export function EditRankingItemForm({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     console.log("🔵 フォーム送信開始");
     const currentValues = form.getValues();
     console.log("🔵 フォームの現在の値:", currentValues);
@@ -121,42 +121,71 @@ export function EditRankingItemForm({
     Object.entries(currentValues).forEach(([key, value]) => {
       console.log(`  🔵 ${key}: ${typeof value} = ${JSON.stringify(value)}`);
     });
-    console.log("🔵 フォームのエラー状態（バリデーション前）:", form.formState.errors);
-    
+    console.log(
+      "🔵 フォームのエラー状態（バリデーション前）:",
+      form.formState.errors
+    );
+
     // 空文字列やundefinedの場合は既存の値で補完
     const valuesToValidate = { ...currentValues };
-    if (valuesToValidate.conversionFactor === undefined || valuesToValidate.conversionFactor === null || isNaN(valuesToValidate.conversionFactor)) {
+    if (
+      valuesToValidate.conversionFactor === undefined ||
+      valuesToValidate.conversionFactor === null ||
+      isNaN(valuesToValidate.conversionFactor)
+    ) {
       valuesToValidate.conversionFactor = rankingItem.conversionFactor;
       form.setValue("conversionFactor", rankingItem.conversionFactor);
     }
-    if (valuesToValidate.decimalPlaces === undefined || valuesToValidate.decimalPlaces === null || isNaN(valuesToValidate.decimalPlaces)) {
+    if (
+      valuesToValidate.decimalPlaces === undefined ||
+      valuesToValidate.decimalPlaces === null ||
+      isNaN(valuesToValidate.decimalPlaces)
+    ) {
       valuesToValidate.decimalPlaces = rankingItem.decimalPlaces;
       form.setValue("decimalPlaces", rankingItem.decimalPlaces);
     }
-    
+
     // バリデーションを手動で実行（全フィールド）
     const isValid = await form.trigger();
     console.log("🔵 バリデーション結果:", isValid);
-    console.log("🔵 フォームのエラー状態（バリデーション後）:", form.formState.errors);
-    
+    console.log(
+      "🔵 フォームのエラー状態（バリデーション後）:",
+      form.formState.errors
+    );
+
     if (!isValid) {
       console.error("❌ バリデーション失敗");
-      console.error("❌ エラーオブジェクト全体:", JSON.stringify(form.formState.errors, null, 2));
-      
+      console.error(
+        "❌ エラーオブジェクト全体:",
+        JSON.stringify(form.formState.errors, null, 2)
+      );
+
       // 各フィールドのエラーを詳細にログ出力
       const errors = form.formState.errors;
       if (Object.keys(errors).length === 0) {
-        console.error("❌ エラーオブジェクトが空です。form.trigger()の結果を確認してください。");
+        console.error(
+          "❌ エラーオブジェクトが空です。form.trigger()の結果を確認してください。"
+        );
         // 各フィールドを個別にバリデーション
         const fields = [
-          'label', 'name', 'annotation', 'unit', 
-          'mapColorScheme', 'mapDivergingMidpoint', 'rankingDirection',
-          'conversionFactor', 'decimalPlaces', 'isActive'
+          "label",
+          "name",
+          "annotation",
+          "unit",
+          "mapColorScheme",
+          "mapDivergingMidpoint",
+          "rankingDirection",
+          "conversionFactor",
+          "decimalPlaces",
+          "isActive",
         ];
         for (const field of fields) {
           const fieldError = await form.trigger(field as any);
           if (!fieldError) {
-            const fieldErrors = form.formState.errors[field as keyof typeof form.formState.errors];
+            const fieldErrors =
+              form.formState.errors[
+                field as keyof typeof form.formState.errors
+              ];
             if (fieldErrors) {
               console.error(`❌ フィールド "${field}" のエラー:`, fieldErrors);
             }
@@ -172,20 +201,28 @@ export function EditRankingItemForm({
           });
         });
       }
-      
+
       // フォームの現在の値を確認
       const values = form.getValues();
       console.error("❌ フォームの現在の値（詳細）:", values);
       // 型の不一致を確認
       Object.entries(values).forEach(([key, value]) => {
-        console.error(`  ❌ ${key}: ${typeof value} = ${JSON.stringify(value)} (${value === null ? 'null' : value === undefined ? 'undefined' : 'has value'})`);
+        console.error(
+          `  ❌ ${key}: ${typeof value} = ${JSON.stringify(value)} (${
+            value === null
+              ? "null"
+              : value === undefined
+              ? "undefined"
+              : "has value"
+          })`
+        );
       });
       return;
     }
-    
+
     const values = form.getValues();
     console.log("✅ フォーム送信値（バリデーション通過）:", values);
-    
+
     try {
       await onSubmit(values);
     } catch (error) {
@@ -300,7 +337,9 @@ export function EditRankingItemForm({
                     rows={3}
                   />
                 </FormControl>
-                <FormDescription>統計項目の詳細説明や注釈（任意）</FormDescription>
+                <FormDescription>
+                  統計項目の詳細説明や注釈（任意）
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -315,10 +354,7 @@ export function EditRankingItemForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>色スキーム *</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="色スキームを選択" />
@@ -451,7 +487,13 @@ export function EditRankingItemForm({
                         // フォーカスアウト時に空文字列または無効な値の場合は既存の値を復元
                         const currentValue = form.getValues("conversionFactor");
                         const inputValue = e.target.value;
-                        if (inputValue === "" || isNaN(parseFloat(inputValue)) || currentValue === undefined || currentValue === null || isNaN(currentValue)) {
+                        if (
+                          inputValue === "" ||
+                          isNaN(parseFloat(inputValue)) ||
+                          currentValue === undefined ||
+                          currentValue === null ||
+                          isNaN(currentValue)
+                        ) {
                           field.onChange(rankingItem.conversionFactor);
                         }
                         field.onBlur();
@@ -483,7 +525,11 @@ export function EditRankingItemForm({
                           return;
                         }
                         const intValue = parseInt(value, 10);
-                        if (!isNaN(intValue) && intValue >= 0 && intValue <= 5) {
+                        if (
+                          !isNaN(intValue) &&
+                          intValue >= 0 &&
+                          intValue <= 5
+                        ) {
                           field.onChange(intValue);
                         }
                       }}
@@ -491,7 +537,13 @@ export function EditRankingItemForm({
                         // フォーカスアウト時に空文字列または無効な値の場合は既存の値を復元
                         const currentValue = form.getValues("decimalPlaces");
                         const inputValue = e.target.value;
-                        if (inputValue === "" || isNaN(parseInt(inputValue, 10)) || currentValue === undefined || currentValue === null || isNaN(currentValue)) {
+                        if (
+                          inputValue === "" ||
+                          isNaN(parseInt(inputValue, 10)) ||
+                          currentValue === undefined ||
+                          currentValue === null ||
+                          isNaN(currentValue)
+                        ) {
                           field.onChange(rankingItem.decimalPlaces);
                         }
                         field.onBlur();
@@ -554,4 +606,3 @@ export function EditRankingItemForm({
     </Form>
   );
 }
-

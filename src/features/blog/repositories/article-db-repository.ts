@@ -1,25 +1,26 @@
 /**
  * 記事データベースリポジトリ
- * 
+ *
  * D1データベースから記事メタデータを取得するRepository層
  * Server-onlyの純粋関数として実装
  */
 
 import { getD1 } from "@/infrastructure/database/d1";
+
+import { readMDXFile } from "./article-repository";
+
 import type {
   Article,
   ArticleFilter,
   ArticleSortOrder,
-  ArticleFrontmatter,
 } from "../types/article.types";
-import { readMDXFile } from "./article-repository";
 
 /**
  * データベースから記事メタデータを取得
- * 
+ *
  * 注意: コンテンツ本体はデータベースに保存されていないため、
  * ファイルから読み込む必要があります。
- * 
+ *
  * @param category - カテゴリ（ディレクトリ名）
  * @param slug - スラッグ
  * @param time - 時間（年度など）
@@ -51,7 +52,7 @@ export async function getArticleFromDB(
 
   // コンテンツはファイルから読み込む必要がある
   let content = "";
-  
+
   try {
     const articleFromFile = await readMDXFile(category, slug, time);
     content = articleFromFile.content;
@@ -79,7 +80,7 @@ export async function getArticleFromDB(
 
 /**
  * データベースから記事一覧を取得
- * 
+ *
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事配列（コンテンツは空、必要に応じてファイルから読み込み）
@@ -139,7 +140,10 @@ export async function listArticlesFromDB(
   }
 
   // データベースから取得
-  const results = await db.prepare(query).bind(...params).all();
+  const results = await db
+    .prepare(query)
+    .bind(...params)
+    .all();
 
   // Article型に変換
   return results.results.map((row: any) => ({
@@ -158,7 +162,7 @@ export async function listArticlesFromDB(
 
 /**
  * データベースから記事の総数を取得
- * 
+ *
  * @param filter - フィルタ条件
  * @returns 記事総数
  */
@@ -188,8 +192,10 @@ export async function countArticlesFromDB(
     }
   }
 
-  const result = await db.prepare(query).bind(...params).first();
+  const result = await db
+    .prepare(query)
+    .bind(...params)
+    .first();
 
   return result ? (result.count as number) : 0;
 }
-

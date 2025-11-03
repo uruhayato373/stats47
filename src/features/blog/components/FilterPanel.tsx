@@ -1,6 +1,6 @@
 /**
  * フィルターパネルコンポーネント
- * 
+ *
  * カテゴリ、タグ、年度でフィルタリングするUIコンポーネント
  */
 
@@ -9,6 +9,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/atoms/ui/button";
+import { Label } from "@/components/atoms/ui/label";
 import {
   Select,
   SelectContent,
@@ -16,7 +17,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/atoms/ui/select";
-import { Label } from "@/components/atoms/ui/label";
 
 import type { Category } from "@/features/category/types/category.types";
 
@@ -36,7 +36,7 @@ export interface FilterPanelProps {
 
 /**
  * フィルターパネルコンポーネント
- * 
+ *
  * カテゴリ、タグ、年度でフィルタリングするUIを提供
  */
 export function FilterPanel({
@@ -75,19 +75,14 @@ export function FilterPanel({
   };
 
   // フィルターが適用されているかチェック
-  const hasActiveFilters =
-    currentCategory || currentTag || currentYear;
+  const hasActiveFilters = currentCategory || currentTag || currentYear;
 
   return (
     <div className={`space-y-4 rounded-lg border p-4 ${className || ""}`}>
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">フィルター</h3>
         {hasActiveFilters && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={resetFilters}
-          >
+          <Button variant="ghost" size="sm" onClick={resetFilters}>
             リセット
           </Button>
         )}
@@ -107,7 +102,10 @@ export function FilterPanel({
             <SelectContent>
               <SelectItem value="">すべてのカテゴリ</SelectItem>
               {categories.map((category) => (
-                <SelectItem key={category.categoryKey} value={category.categoryKey}>
+                <SelectItem
+                  key={category.categoryKey}
+                  value={category.categoryKey}
+                >
                   {category.categoryName}
                 </SelectItem>
               ))}
@@ -164,4 +162,3 @@ export function FilterPanel({
     </div>
   );
 }
-

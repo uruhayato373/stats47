@@ -1,16 +1,18 @@
 /**
  * 記事リポジトリ
- * 
+ *
  * MDXファイルの読み込みとパースを担当するRepository層
  * Server-onlyの純粋関数として実装
  */
 
 import fs from "fs/promises";
 import path from "path";
+
 import matter from "gray-matter";
 
-import type { Article, ArticleFilePath } from "../types/article.types";
 import { parseFrontmatter } from "../utils/frontmatter-parser";
+
+import type { Article, ArticleFilePath } from "../types/article.types";
 
 /**
  * contentsディレクトリのパス（プロジェクトルート基準）
@@ -24,7 +26,7 @@ const MDX_EXTENSION = ".mdx";
 
 /**
  * スラッグをサニタイズ（パストラバーサル対策）
- * 
+ *
  * @param slug - サニタイズ対象のスラッグ
  * @returns サニタイズ済みのスラッグ
  */
@@ -35,7 +37,7 @@ function sanitizeSlug(slug: string): string {
 
 /**
  * カテゴリをサニタイズ（パストラバーサル対策）
- * 
+ *
  * @param category - サニタイズ対象のカテゴリ
  * @returns サニタイズ済みのカテゴリ
  */
@@ -46,7 +48,7 @@ function sanitizeCategory(category: string): string {
 
 /**
  * 年度をサニタイズ（パストラバーサル対策）
- * 
+ *
  * @param year - サニタイズ対象の年度
  * @returns サニタイズ済みの年度
  */
@@ -57,7 +59,7 @@ function sanitizeYear(year: string): string {
 
 /**
  * MDXファイルを読み込み、パースする
- * 
+ *
  * @param category - カテゴリ（ディレクトリ名）
  * @param slug - スラッグ（ディレクトリ名）
  * @param year - 年度（ファイル名から抽出）
@@ -94,7 +96,11 @@ export async function readMDXFile(
   try {
     fileContent = await fs.readFile(filePath, "utf-8");
   } catch (error) {
-    throw new Error(`MDXファイルの読み込みに失敗しました: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `MDXファイルの読み込みに失敗しました: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    );
   }
 
   // Frontmatterとコンテンツを分離
@@ -104,10 +110,11 @@ export async function readMDXFile(
     const parsed = matter(fileContent);
     frontmatterData = parsed.data;
     content = parsed.content;
-
   } catch (error) {
     throw new Error(
-      `MDXファイルのパースに失敗しました: ${error instanceof Error ? error.message : String(error)}`
+      `MDXファイルのパースに失敗しました: ${
+        error instanceof Error ? error.message : String(error)
+      }`
     );
   }
 
@@ -117,13 +124,15 @@ export async function readMDXFile(
     frontmatter = parseFrontmatter(frontmatterData);
   } catch (error) {
     throw new Error(
-      `Frontmatterのパースに失敗しました: ${error instanceof Error ? error.message : String(error)}`
+      `Frontmatterのパースに失敗しました: ${
+        error instanceof Error ? error.message : String(error)
+      }`
     );
   }
 
   return {
     slug: sanitizedSlug,
-    year: sanitizedYear,
+    time: sanitizedYear,
     actualCategory: sanitizedCategory,
     frontmatter,
     content,
@@ -132,7 +141,7 @@ export async function readMDXFile(
 
 /**
  * MDXファイルの一覧を取得
- * 
+ *
  * @param category - カテゴリでフィルタリング（オプション）
  * @returns ファイルパス情報の配列
  */
@@ -171,7 +180,9 @@ export async function listMDXFiles(
 
             // MDXファイルを取得
             const files = await fs.readdir(slugPath);
-            const mdxFiles = files.filter((file) => file.endsWith(MDX_EXTENSION));
+            const mdxFiles = files.filter((file) =>
+              file.endsWith(MDX_EXTENSION)
+            );
 
             for (const file of mdxFiles) {
               // 年度をファイル名から抽出（例: "2023.mdx" → "2023"）
@@ -195,9 +206,12 @@ export async function listMDXFiles(
       }
     }
   } catch (error) {
-    throw new Error(`MDXファイル一覧の取得に失敗しました: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `MDXファイル一覧の取得に失敗しました: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    );
   }
 
   return results;
 }
-

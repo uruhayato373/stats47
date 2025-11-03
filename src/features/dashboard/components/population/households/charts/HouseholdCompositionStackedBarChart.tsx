@@ -9,7 +9,8 @@ import { fetchFormattedStatsData } from "@/features/estat-api/stats-data";
 
 // チャート設定
 const CHART_TITLE = "世帯構成";
-const CHART_DESCRIPTION = "単独世帯、核家族世帯、核家族以外の世帯、その他の内訳を表示";
+const CHART_DESCRIPTION =
+  "単独世帯、核家族世帯、核家族以外の世帯、その他の内訳を表示";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
@@ -105,16 +106,17 @@ export async function HouseholdCompositionStackedBarChart({
       nonNuclearSchemas.find((d) => d.timeCode === targetTimeCode)?.value || 0;
 
     // その他の世帯数（一般世帯数 - 単独世帯数 - 核家族世帯数 - 核家族以外の世帯数）
-    const otherValue = generalValue - singleValue - nuclearValue - nonNuclearValue;
+    const otherValue =
+      generalValue - singleValue - nuclearValue - nonNuclearValue;
 
     // チャート用のデータ形式に変換
     const chartData = [
       {
         category: "世帯構成",
-        "単独世帯": singleValue,
-        "核家族世帯": nuclearValue,
-        "核家族以外の世帯": nonNuclearValue,
-        "その他": otherValue > 0 ? otherValue : 0,
+        単独世帯: singleValue,
+        核家族世帯: nuclearValue,
+        核家族以外の世帯: nonNuclearValue,
+        その他: otherValue > 0 ? otherValue : 0,
       },
     ];
 
@@ -146,8 +148,11 @@ export async function HouseholdCompositionStackedBarChart({
       <StackedBarChart
         chartData={chartData}
         title={CHART_TITLE}
-        description={CHART_DESCRIPTION}
-        extraInfo={targetTimeName}
+        description={
+          targetTimeName
+            ? `${CHART_DESCRIPTION}（${targetTimeName}）`
+            : CHART_DESCRIPTION
+        }
         chartConfig={chartConfig}
         xAxisDataKey="category"
         height={300}
@@ -164,4 +169,3 @@ export async function HouseholdCompositionStackedBarChart({
     return null;
   }
 }
-

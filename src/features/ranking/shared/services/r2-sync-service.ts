@@ -6,9 +6,11 @@ import "server-only";
  * R2ストレージのrankingディレクトリを走査し、ranking_itemsテーブルを自動生成・更新する機能を提供します。
  */
 
-import { getD1 } from "@/infrastructure/database";
-// estat-apiドメインのR2リポジトリを使用（ランキングデータの保存/取得はestat-apiの責務）
 import { EstatRankingR2Repository } from "@/features/estat-api/ranking-mappings/repositories/rankingR2Repository";
+
+import { getD1 } from "@/infrastructure/database";
+
+// estat-apiドメインのR2リポジトリを使用（ランキングデータの保存/取得はestat-apiの責務）
 import type { D1Database } from "@cloudflare/workers-types";
 
 /**
@@ -68,9 +70,7 @@ export class R2SyncService {
 
       if (existing) {
         // 既に存在する場合は何もしない
-        console.log(
-          `[R2SyncService] グループは既に存在します: ${groupKey}`
-        );
+        console.log(`[R2SyncService] グループは既に存在します: ${groupKey}`);
         return;
       }
 
@@ -100,17 +100,15 @@ export class R2SyncService {
           `[R2SyncService] グループを作成しました: ${groupKey} (group_name: ${groupName})`
         );
       } else {
-        const errorDetail = result.meta?.error || result.error || "unknown error";
-        console.error(
-          `[R2SyncService] グループ作成失敗: ${groupKey}`,
-          {
-            groupKey,
-            groupName,
-            label,
-            subcategoryId: DEFAULT_SUBCATEGORY_ID,
-            error: errorDetail,
-          }
-        );
+        const errorDetail =
+          result.meta?.error || result.error || "unknown error";
+        console.error(`[R2SyncService] グループ作成失敗: ${groupKey}`, {
+          groupKey,
+          groupName,
+          label,
+          subcategoryId: DEFAULT_SUBCATEGORY_ID,
+          error: errorDetail,
+        });
         throw new Error(
           `グループの作成に失敗しました: ${errorDetail} (group_key: ${groupKey}, subcategory_id: ${DEFAULT_SUBCATEGORY_ID})`
         );
@@ -118,17 +116,14 @@ export class R2SyncService {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      console.error(
-        `[R2SyncService] グループ作成エラー: ${groupKey}`,
-        {
-          groupKey,
-          groupName,
-          label,
-          subcategoryId: DEFAULT_SUBCATEGORY_ID,
-          error: errorMessage,
-          originalError: error,
-        }
-      );
+      console.error(`[R2SyncService] グループ作成エラー: ${groupKey}`, {
+        groupKey,
+        groupName,
+        label,
+        subcategoryId: DEFAULT_SUBCATEGORY_ID,
+        error: errorMessage,
+        originalError: error,
+      });
       throw new Error(
         `グループの作成に失敗しました: ${errorMessage} (group_key: ${groupKey}, subcategory_id: ${DEFAULT_SUBCATEGORY_ID})`
       );
@@ -192,9 +187,7 @@ export class R2SyncService {
           // 異なるareaTypeでも同じrankingKeyは別レコードとして扱う
           const keyId = `${at}:${rankingKey}`;
           if (processedKeys.has(keyId)) {
-            console.log(
-              `[R2SyncService] 既に処理済み: ${keyId}（スキップ）`
-            );
+            console.log(`[R2SyncService] 既に処理済み: ${keyId}（スキップ）`);
             continue;
           }
 
@@ -340,20 +333,20 @@ export class R2SyncService {
         const rankingName = itemName;
 
         // 既存データを確認（UPDATEでは既存データを保持するため、必要な情報を取得）
-        const existing = await db
+        const existing = (await db
           .prepare(
             `SELECT ranking_key, area_type, unit, group_key, ranking_name, annotation
              FROM ranking_items WHERE ranking_key = ? AND area_type = ?`
           )
           .bind(item.rankingKey, item.areaType)
-          .first<{
-            ranking_key: string;
-            area_type: string;
-            unit: string;
-            group_key: string | null;
-            ranking_name: string;
-            annotation: string | null;
-          }>();
+          .first()) as {
+          ranking_key: string;
+          area_type: string;
+          unit: string;
+          group_key: string | null;
+          ranking_name: string;
+          annotation: string | null;
+        } | null;
 
         if (existing) {
           // 既存データがある場合は、指定フィールドのみ更新
@@ -396,8 +389,21 @@ export class R2SyncService {
             : `label = ?, ranking_name = ?, unit = ?, updated_at = CURRENT_TIMESTAMP`;
 
           const bindValues = shouldUpdateGroupKey
-            ? [label, rankingName, unitFromMetadata, groupKey, item.rankingKey, item.areaType]
-            : [label, rankingName, unitFromMetadata, item.rankingKey, item.areaType];
+            ? [
+                label,
+                rankingName,
+                unitFromMetadata,
+                groupKey,
+                item.rankingKey,
+                item.areaType,
+              ]
+            : [
+                label,
+                rankingName,
+                unitFromMetadata,
+                item.rankingKey,
+                item.areaType,
+              ];
 
           const result = await db
             .prepare(
@@ -411,15 +417,13 @@ export class R2SyncService {
           // エラーチェック: result.successがfalseの場合はエラー
           if (!result.success) {
             const errorDetail =
-              result.error ||
-              result.meta?.error ||
-              "unknown error";
+              result.error || result.meta?.error || "unknown error";
             const errorMessage =
               errorDetail instanceof Error
                 ? errorDetail.message
                 : typeof errorDetail === "string"
-                  ? errorDetail
-                  : JSON.stringify(errorDetail);
+                ? errorDetail
+                : JSON.stringify(errorDetail);
             throw new Error(
               `UPDATE処理が失敗しました: ${errorMessage} (ranking_key: ${item.rankingKey}, area_type: ${item.areaType})`
             );
@@ -449,7 +453,7 @@ export class R2SyncService {
           const groupKey = item.rankingKey;
 
           // INSERT前にグループを確実に作成（FOREIGN KEY制約を満たすため）
-          let finalGroupKey = groupKey;
+          let finalGroupKey: string | null = groupKey;
           try {
             await this.ensureGroupExists(db, groupKey, itemName, null); // metadata.jsonから取得したitemNameをgroup_nameに使用
           } catch (groupError) {
@@ -505,9 +509,7 @@ export class R2SyncService {
             );
           } else {
             const errorDetail =
-              result.meta?.error ||
-              result.error ||
-              "unknown error";
+              result.meta?.error || result.error || "unknown error";
             const errorInfo = {
               message: "INSERT処理が失敗しました",
               detail: errorDetail,
@@ -746,4 +748,3 @@ export class R2SyncService {
     }
   }
 }
-

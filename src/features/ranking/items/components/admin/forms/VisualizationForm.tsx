@@ -1,7 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { forwardRef, useImperativeHandle } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -43,9 +44,11 @@ export interface VisualizationFormRef {
   getValues: () => VisualizationFormValues;
 }
 
-export const VisualizationForm = forwardRef<VisualizationFormRef, VisualizationFormProps>(
-  ({ item }, ref) => {
-    const form = useForm<VisualizationFormValues>({
+export const VisualizationForm = forwardRef<
+  VisualizationFormRef,
+  VisualizationFormProps
+>(({ item }, ref) => {
+  const form = useForm<VisualizationFormValues>({
     resolver: zodResolver(visualizationSchema),
     defaultValues: {
       mapColorScheme: item?.mapColorScheme || "interpolateBlues",
@@ -117,19 +120,27 @@ export const VisualizationForm = forwardRef<VisualizationFormRef, VisualizationF
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="zero" id="midpoint-zero" />
-                    <Label htmlFor="midpoint-zero" className="text-sm">ゼロ</Label>
+                    <Label htmlFor="midpoint-zero" className="text-sm">
+                      ゼロ
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="mean" id="midpoint-mean" />
-                    <Label htmlFor="midpoint-mean" className="text-sm">平均値</Label>
+                    <Label htmlFor="midpoint-mean" className="text-sm">
+                      平均値
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="median" id="midpoint-median" />
-                    <Label htmlFor="midpoint-median" className="text-sm">中央値</Label>
+                    <Label htmlFor="midpoint-median" className="text-sm">
+                      中央値
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="custom" id="midpoint-custom" />
-                    <Label htmlFor="midpoint-custom" className="text-sm">カスタム値</Label>
+                    <Label htmlFor="midpoint-custom" className="text-sm">
+                      カスタム値
+                    </Label>
                   </div>
                 </RadioGroup>
               </FormControl>
@@ -153,11 +164,15 @@ export const VisualizationForm = forwardRef<VisualizationFormRef, VisualizationF
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="desc" id="direction-desc" />
-                    <Label htmlFor="direction-desc" className="text-sm">降順（大きい順）</Label>
+                    <Label htmlFor="direction-desc" className="text-sm">
+                      降順（大きい順）
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="asc" id="direction-asc" />
-                    <Label htmlFor="direction-asc" className="text-sm">昇順（小さい順）</Label>
+                    <Label htmlFor="direction-asc" className="text-sm">
+                      昇順（小さい順）
+                    </Label>
                   </div>
                 </RadioGroup>
               </FormControl>
@@ -215,9 +230,9 @@ export const VisualizationForm = forwardRef<VisualizationFormRef, VisualizationF
             )}
           />
         </div>
-
       </div>
     </Form>
   );
-  }
-);
+});
+
+VisualizationForm.displayName = "VisualizationForm";

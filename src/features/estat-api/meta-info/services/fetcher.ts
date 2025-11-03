@@ -10,11 +10,7 @@ import {
   ESTAT_ENDPOINTS,
 } from "@/features/estat-api/core/config";
 import { EstatMetaInfoFetchError } from "@/features/estat-api/core/errors";
-import {
-  EstatMetaInfoResponse,
-  GetMetaInfoParams,
-  TransformedMetadataEntry,
-} from "@/features/estat-api/core/types";
+import type { EstatMetaCategoryData } from "@/features/estat-api/stats-data/types/stats-data-response";
 
 import {
   findMetaInfoByStatsId,
@@ -22,6 +18,8 @@ import {
 } from "../repositories/meta-info-r2-cache-repository";
 
 import { extractCategories } from "./formatter";
+
+import type { EstatMetaInfoResponse } from "../types";
 
 /**
  * リクエストパラメータを構築
@@ -126,7 +124,7 @@ async function checkR2Cache(
 async function fetchMetaInfoFromEstatApi(
   statsDataId: string
 ): Promise<EstatMetaInfoResponse> {
-  const params: Omit<GetMetaInfoParams, "appId"> = { statsDataId };
+  const params = { statsDataId };
   const requestParams = composeRequestParams(params, ESTAT_APP_ID);
   const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
 
@@ -257,7 +255,7 @@ export async function fetchMetaInfoWithSource(
  */
 export async function fetchAndTransformMetaInfo(
   statsDataId: string
-): Promise<TransformedMetadataEntry[]> {
+): Promise<EstatMetaCategoryData[]> {
   const response = await fetchMetaInfo(statsDataId);
   return extractCategories(response).map((category) => ({
     stats_data_id: statsDataId,

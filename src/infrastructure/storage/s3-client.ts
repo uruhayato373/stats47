@@ -127,7 +127,7 @@ export class R2S3Client {
     let continuationToken: string | undefined = undefined;
 
     do {
-      const command = new ListObjectsV2Command({
+      const command: ListObjectsV2Command = new ListObjectsV2Command({
         Bucket: this.bucketName,
         Prefix: prefix,
         ContinuationToken: continuationToken,
@@ -136,7 +136,9 @@ export class R2S3Client {
       const response = await this.client.send(command);
 
       if (response.Contents) {
-        const keys = response.Contents.map((obj) => obj.Key || "").filter((key) => key);
+        const keys = response.Contents.map((obj) => obj.Key || "").filter(
+          (key) => key
+        );
         allKeys.push(...keys);
       }
 

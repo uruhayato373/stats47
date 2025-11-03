@@ -1,6 +1,6 @@
 /**
  * 記事検索ユーティリティ
- * 
+ *
  * 全文検索ロジックを提供
  */
 
@@ -8,15 +8,12 @@ import type { Article } from "../types/article.types";
 
 /**
  * 記事を全文検索
- * 
+ *
  * @param articles - 検索対象の記事配列
  * @param query - 検索クエリ
  * @returns 検索結果の記事配列
  */
-export function searchArticles(
-  articles: Article[],
-  query: string
-): Article[] {
+export function searchArticles(articles: Article[], query: string): Article[] {
   if (!query || query.trim() === "") {
     return articles;
   }
@@ -25,17 +22,13 @@ export function searchArticles(
 
   return articles.filter((article) => {
     // タイトルで検索
-    if (
-      article.frontmatter.title.toLowerCase().includes(normalizedQuery)
-    ) {
+    if (article.frontmatter.title.toLowerCase().includes(normalizedQuery)) {
       return true;
     }
 
     // 説明で検索
     if (
-      article.frontmatter.description
-        .toLowerCase()
-        .includes(normalizedQuery)
+      article.frontmatter.description?.toLowerCase().includes(normalizedQuery)
     ) {
       return true;
     }
@@ -60,7 +53,7 @@ export function searchArticles(
 
 /**
  * 検索結果をソート（関連度順）
- * 
+ *
  * @param articles - 検索結果の記事配列
  * @param query - 検索クエリ
  * @returns ソート済みの記事配列
@@ -84,12 +77,12 @@ export function sortSearchResults(
     if (!aTitleMatch && bTitleMatch) return 1;
 
     // 説明で一致する方が優先
-    const aDescMatch = a.frontmatter.description
-      .toLowerCase()
-      .includes(normalizedQuery);
-    const bDescMatch = b.frontmatter.description
-      .toLowerCase()
-      .includes(normalizedQuery);
+    const aDescMatch =
+      a.frontmatter.description?.toLowerCase().includes(normalizedQuery) ??
+      false;
+    const bDescMatch =
+      b.frontmatter.description?.toLowerCase().includes(normalizedQuery) ??
+      false;
 
     if (aDescMatch && !bDescMatch) return -1;
     if (!aDescMatch && bDescMatch) return 1;
@@ -111,4 +104,3 @@ export function sortSearchResults(
     return timeB - timeA;
   });
 }
-

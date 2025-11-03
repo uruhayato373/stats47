@@ -6,11 +6,9 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { Button } from "@/components/atoms/ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
 
 /**
  * ページネーションのプロパティ
@@ -28,7 +26,7 @@ export interface PaginationProps {
 
 /**
  * ページネーションコンポーネント
- * 
+ *
  * ページネーションUIを表示
  */
 export function Pagination({
@@ -113,7 +111,10 @@ export function Pagination({
         {pageNumbers.map((page, index) => {
           if (page === "...") {
             return (
-              <span key={`ellipsis-${index}`} className="px-2 text-muted-foreground">
+              <span
+                key={`ellipsis-${index}`}
+                className="px-2 text-muted-foreground"
+              >
                 ...
               </span>
             );
@@ -150,4 +151,3 @@ export function Pagination({
     </nav>
   );
 }
-

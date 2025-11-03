@@ -1,6 +1,6 @@
 /**
  * 都道府県ランキングハイライトコンポーネント（MDX用）
- * 
+ *
  * MDXコンテンツ内で使用する上位・下位県のハイライト表示コンポーネント
  */
 
@@ -8,8 +8,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/atoms/ui/card";
+
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/ui/card";
 
 import type { StatsSchema } from "@/types/stats";
 
@@ -25,7 +31,7 @@ interface PrefectureRankingHighlightsProps {
 
 /**
  * 都道府県ランキングハイライトコンポーネント
- * 
+ *
  * MDXコンテンツ内で使用する上位・下位県のハイライトを表示します。
  */
 export function PrefectureRankingHighlights({
@@ -101,10 +107,13 @@ export function PrefectureRankingHighlights({
       ...item,
       rank: index + 1,
     }));
-    const bottom = sorted.slice(-5).reverse().map((item, index) => ({
-      ...item,
-      rank: sorted.length - 4 + index,
-    }));
+    const bottom = sorted
+      .slice(-5)
+      .reverse()
+      .map((item, index) => ({
+        ...item,
+        rank: sorted.length - 4 + index,
+      }));
 
     return { top5: top, bottom5: bottom, unit: itemUnit };
   }, [rankingData]);
@@ -206,4 +215,3 @@ export function PrefectureRankingHighlights({
     </div>
   );
 }
-

@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { useSearchParams } from "next/navigation";
 
-import { useRankingItem } from "@/features/ranking/items/hooks/useRankingItem";
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { getRankingMetadata } from "@/features/ranking/items/actions/getRankingMetadata";
+import { useRankingItem } from "@/features/ranking/items/hooks/useRankingItem";
 import {
   RankingDataTable,
   RankingMapCard,
 } from "@/features/ranking/shared/components";
-import { RankingItemNotFound } from "./RankingItemNotFound";
 
 import type { StatsSchema } from "@/types/stats";
+
+import { RankingItemNotFound } from "./RankingItemNotFound";
 
 interface RankingItemTabContentProps {
   rankingKey: string;
@@ -20,7 +22,7 @@ interface RankingItemTabContentProps {
 
 /**
  * ランキングアイテムのタブコンテンツコンポーネント
- * 
+ *
  * ランキングアイテムの情報を取得し、ランキングマップを表示します。
  */
 export function RankingItemTabContent({
@@ -120,12 +122,8 @@ export function RankingItemTabContent({
         data={rankingData || undefined}
       />
       {rankingData && rankingData.length > 0 && (
-        <RankingDataTable
-          data={rankingData}
-          rankingItem={rankingItem}
-        />
+        <RankingDataTable data={rankingData} rankingItem={rankingItem} />
       )}
     </div>
   );
 }
-

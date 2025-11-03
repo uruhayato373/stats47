@@ -15,7 +15,9 @@ import { buildEnvironmentConfig } from "@/lib/environment";
 import { getD1 } from "@/infrastructure/database";
 
 import { convertRankingItemFromDB } from "../converters/ranking-converters";
-import type { RankingItem, RankingItemDB } from "../../items/types";
+
+import { GROUP_QUERIES, QUERIES } from "./ranking-queries";
+
 import type {
   CreateRankingGroupInput,
   RankingGroup,
@@ -23,8 +25,7 @@ import type {
   RankingGroupResponse,
   UpdateRankingGroupInput,
 } from "../../groups/types";
-
-import { GROUP_QUERIES, QUERIES } from "./ranking-queries";
+import type { RankingItem, RankingItemDB } from "../../items/types";
 
 export interface SubcategoryConfig {
   id: string;
@@ -262,12 +263,12 @@ export class RankingRepository {
 
   /**
    * ランキング項目を更新
-   * 
+   *
    * 動的にUPDATE文を構築することで、以下の問題を解決：
    * - 部分更新が可能
    * - 0や空文字列を正しく処理できる
    * - 更新したくないフィールドはそのまま保持される
-   * 
+   *
    * @see Issue #12: ranking_items データベース更新エラーの調査結果
    */
   async updateRankingItem(
@@ -417,7 +418,9 @@ export class RankingRepository {
       // データベースからサブカテゴリ設定を取得
       const subcategory = await findSubcategoryByName(subcategoryId);
       if (!subcategory) {
-        console.error(`[RankingRepository] サブカテゴリが見つかりません: ${subcategoryId}`);
+        console.error(
+          `[RankingRepository] サブカテゴリが見つかりません: ${subcategoryId}`
+        );
         return null;
       }
 
@@ -426,19 +429,12 @@ export class RankingRepository {
         foundSubcategory: subcategory,
       });
 
-      const subcategoryConfig: SubcategoryConfig = {
-        id: subcategory.subcategoryKey,
-        categoryId: subcategory.categoryKey,
-        name: subcategory.subcategoryName,
-        subcategoryName: subcategory.subcategoryKey,
-        categoryName: subcategory.categoryKey,
-        defaultRankingKey: "",
-      };
-
       // データベースクエリでは、subcategoryId（URLパラメータ）を直接使用
       // ranking_group_subcategories.subcategory_idはsubcategory_keyを参照
-      console.log(`[RankingRepository] データベースクエリを実行: subcategoryId=${subcategoryId}`);
-      
+      console.log(
+        `[RankingRepository] データベースクエリを実行: subcategoryId=${subcategoryId}`
+      );
+
       // 1. グループ情報を取得（junction table経由）
       const groupsResult = await this.db
         .prepare(
@@ -515,7 +511,7 @@ export class RankingRepository {
         .filter((item) => item !== null) as RankingItem[];
 
       return {
-        subcategory: subcategoryConfig,
+        subcategory,
         groups,
         ungroupedItems,
       };
@@ -726,7 +722,12 @@ export class RankingRepository {
       // 1. グループを作成
       await this.db
         .prepare(GROUP_QUERIES.createGroup)
-        .bind(data.groupKey, data.group_name, data.label || null, data.displayOrder)
+        .bind(
+          data.groupKey,
+          data.group_name,
+          data.label || null,
+          data.displayOrder
+        )
         .run();
 
       // 2. サブカテゴリをjunction tableに挿入
@@ -894,7 +895,6 @@ export class RankingRepository {
       throw error;
     }
   }
-
 }
 
 /**
@@ -904,4 +904,3 @@ export class RankingRepository {
 export async function createRankingRepository(): Promise<RankingRepository> {
   return await RankingRepository.create();
 }
-

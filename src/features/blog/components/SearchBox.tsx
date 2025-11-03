@@ -1,6 +1,6 @@
 /**
  * 検索ボックスコンポーネント
- * 
+ *
  * 記事検索用のUIコンポーネント
  */
 
@@ -8,9 +8,10 @@
 
 import { useState } from "react";
 
-import { Input } from "@/components/atoms/ui/input";
-import { Button } from "@/components/atoms/ui/button";
 import { Search } from "lucide-react";
+
+import { Button } from "@/components/atoms/ui/button";
+import { Input } from "@/components/atoms/ui/input";
 
 /**
  * 検索ボックスのプロパティ
@@ -28,7 +29,7 @@ export interface SearchBoxProps {
 
 /**
  * 検索ボックスコンポーネント
- * 
+ *
  * 記事検索用の検索UIを提供
  */
 export function SearchBox({
@@ -62,4 +63,3 @@ export function SearchBox({
     </form>
   );
 }
-

@@ -1,6 +1,6 @@
 /**
  * タグクラウドコンポーネント
- * 
+ *
  * タグをクラウド形式で表示するコンポーネント
  * 使用頻度に応じてフォントサイズを変更
  */
@@ -10,6 +10,7 @@
 import Link from "next/link";
 
 import { Badge } from "@/components/atoms/ui/badge";
+
 import { cn } from "@/lib/cn";
 
 /**
@@ -38,7 +39,7 @@ export interface TagCloudProps {
 
 /**
  * タグクラウドコンポーネント
- * 
+ *
  * タグをクラウド形式で表示。使用頻度に応じてフォントサイズを変更。
  */
 export function TagCloud({
@@ -91,7 +92,9 @@ export function TagCloud({
               }}
             >
               {tagStats.tag}
-              <span className="ml-1 text-xs opacity-70">({tagStats.count})</span>
+              <span className="ml-1 text-xs opacity-70">
+                ({tagStats.count})
+              </span>
             </Badge>
           </Link>
         );
@@ -99,4 +102,3 @@ export function TagCloud({
     </div>
   );
 }
-

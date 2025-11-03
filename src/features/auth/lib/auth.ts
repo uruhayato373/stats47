@@ -1,28 +1,34 @@
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { AuthService } from "../services/AuthService";
-
-import type { NextAuthConfig, Session, User } from "../types";
 
 export const authConfig: NextAuthConfig = {
   providers: [
     Credentials({
       name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-        // パスワードハッシュ化
-        const passwordHash = await bcrypt.hash(credentials.password, 10);
-        
-        // D1データベースからユーザーを取得
-        const user = await AuthService.login(credentials.email, passwordHash);
+
+        const email = String(credentials.email);
+        const password = String(credentials.password);
+
+        // D1データベースからユーザーを取得（メールアドレスで検索）
+        const user = await AuthService.getUserByEmail(email);
         if (!user || !user.is_active) return null;
-        
+
         // パスワード検証（D1: hash保存）
-        if (!(await bcrypt.compare(credentials.password, user.passwordHash))) {
+        if (
+          !user.passwordHash ||
+          !(await bcrypt.compare(password, user.passwordHash))
+        ) {
           return null;
         }
         return {

@@ -76,7 +76,7 @@ export default async function CategoryPage({ params }: PageProps) {
     <div>
       {/* サブカテゴリ一覧 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categoryData.subcategories.map((subcategory) => (
+        {(categoryData.subcategories ?? []).map((subcategory) => (
           <Card
             key={subcategory.subcategoryName}
             className="hover:shadow-lg transition-shadow"

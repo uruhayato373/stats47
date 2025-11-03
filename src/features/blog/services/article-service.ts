@@ -1,8 +1,15 @@
 /**
  * 記事サービス
- * 
+ *
  * ビジネスロジック層：記事取得、一覧取得、データ変換を担当
  */
+
+import {
+  getArticleFromDB,
+  listArticlesFromDB,
+  countArticlesFromDB,
+} from "../repositories/article-db-repository";
+import { listMDXFiles, readMDXFile } from "../repositories/article-repository";
 
 import type {
   Article,
@@ -10,20 +17,10 @@ import type {
   ArticleListResponse,
   ArticleSortOrder,
 } from "../types/article.types";
-import {
-  listMDXFiles,
-  readMDXFile,
-  type ArticleFilePath,
-} from "../repositories/article-repository";
-import {
-  getArticleFromDB,
-  listArticlesFromDB,
-  countArticlesFromDB,
-} from "../repositories/article-db-repository";
 
 /**
  * 抜粋を生成（最初の160文字）
- * 
+ *
  * @param content - MDXコンテンツ
  * @returns 抜粋テキスト
  */
@@ -46,12 +43,14 @@ function generateExcerpt(content: string): string {
   const truncated = plainText.slice(0, 160);
   const lastSpace = truncated.lastIndexOf(" ");
 
-  return lastSpace > 0 ? truncated.slice(0, lastSpace) + "..." : truncated + "...";
+  return lastSpace > 0
+    ? truncated.slice(0, lastSpace) + "..."
+    : truncated + "...";
 }
 
 /**
  * 読了時間を計算（300語/分）
- * 
+ *
  * @param content - MDXコンテンツ
  * @returns 読了時間（分）
  */
@@ -67,7 +66,9 @@ function calculateReadingTime(content: string): number {
     .trim();
 
   // 日本語と英語の語数を計算（日本語は文字数、英語は単語数）
-  const japaneseChars = (plainText.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g) || []).length;
+  const japaneseChars = (
+    plainText.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g) || []
+  ).length;
   const englishWords = plainText
     .replace(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, "")
     .split(/\s+/)
@@ -82,7 +83,7 @@ function calculateReadingTime(content: string): number {
 
 /**
  * 記事一覧をソート
- * 
+ *
  * @param articles - ソート対象の記事配列
  * @param order - ソート順
  * @returns ソート済みの記事配列
@@ -121,7 +122,7 @@ function sortArticles(articles: Article[], order: ArticleSortOrder): Article[] {
 
 /**
  * 記事一覧をフィルタリング
- * 
+ *
  * @param articles - フィルタ対象の記事配列
  * @param filter - フィルタ条件
  * @returns フィルタ済みの記事配列
@@ -155,9 +156,9 @@ function filterArticles(articles: Article[], filter: ArticleFilter): Article[] {
 
 /**
  * スラッグと年度から記事を取得
- * 
+ *
  * データベース優先で読み込み、見つからない場合はファイルから読み込みます。
- * 
+ *
  * @param category - カテゴリ（ディレクトリ名。見つからない場合は全カテゴリから検索）
  * @param slug - スラッグ
  * @param year - 年度
@@ -179,7 +180,9 @@ export async function getArticleBySlug(
         articleFromDB.content = articleFromFile.content;
         // descriptionがない場合は抜粋を生成してfrontmatter.descriptionに設定
         if (!articleFromDB.frontmatter.description) {
-          articleFromDB.frontmatter.description = generateExcerpt(articleFromDB.content);
+          articleFromDB.frontmatter.description = generateExcerpt(
+            articleFromDB.content
+          );
         }
         articleFromDB.readingTime = calculateReadingTime(articleFromDB.content);
       } catch (fileError) {
@@ -235,9 +238,9 @@ export async function getArticleBySlug(
 
 /**
  * 記事一覧を取得
- * 
+ *
  * データベース優先で読み込み、データベースにデータがない場合はファイルから読み込みます。
- * 
+ *
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事一覧レスポンス
@@ -318,7 +321,9 @@ export async function listArticles(
         console.warn(
           `Failed to process article metadata: ${filePath.fullPath}`,
           processingError instanceof Error
-            ? `${processingError.message}${processingError.stack ? `\nStack: ${processingError.stack}` : ""}`
+            ? `${processingError.message}${
+                processingError.stack ? `\nStack: ${processingError.stack}` : ""
+              }`
             : String(processingError)
         );
         // descriptionや読了時間が設定されていなくても記事自体は有効
@@ -331,8 +336,8 @@ export async function listArticles(
         error instanceof Error
           ? `${error.message}${error.stack ? `\nStack: ${error.stack}` : ""}`
           : typeof error === "string"
-            ? error
-            : JSON.stringify(error);
+          ? error
+          : JSON.stringify(error);
       console.error(
         `Failed to load article: ${filePath.fullPath}`,
         errorMessage
@@ -362,9 +367,9 @@ export async function listArticles(
 
 /**
  * すべての記事を取得（ページネーションなし）
- * 
+ *
  * データベース優先で読み込み、データベースにデータがない場合はファイルから読み込みます。
- * 
+ *
  * @param filter - フィルタ条件
  * @param sortOrder - ソート順（デフォルト: "date-desc"）
  * @returns 記事配列
@@ -437,7 +442,9 @@ export async function getAllArticles(
         console.warn(
           `Failed to process article metadata: ${filePath.fullPath}`,
           processingError instanceof Error
-            ? `${processingError.message}${processingError.stack ? `\nStack: ${processingError.stack}` : ""}`
+            ? `${processingError.message}${
+                processingError.stack ? `\nStack: ${processingError.stack}` : ""
+              }`
             : String(processingError)
         );
         // descriptionや読了時間が設定されていなくても記事自体は有効
@@ -450,8 +457,8 @@ export async function getAllArticles(
         error instanceof Error
           ? `${error.message}${error.stack ? `\nStack: ${error.stack}` : ""}`
           : typeof error === "string"
-            ? error
-            : JSON.stringify(error);
+          ? error
+          : JSON.stringify(error);
       console.error(
         `Failed to load article: ${filePath.fullPath}`,
         errorMessage
@@ -466,4 +473,3 @@ export async function getAllArticles(
   // ソート
   return sortArticles(filtered, sortOrder);
 }
-

@@ -1,15 +1,15 @@
 /**
  * タグ関連ユーティリティ
- * 
+ *
  * タグの統計情報を取得・計算する関数
  */
 
-import type { Article } from "../types/article.types";
 import type { TagStats } from "../components/TagCloud";
+import type { Article } from "../types/article.types";
 
 /**
  * 記事配列からタグ統計を計算
- * 
+ *
  * @param articles - 記事配列
  * @returns タグ統計情報の配列（使用回数降順）
  */
@@ -36,7 +36,7 @@ export function calculateTagStats(articles: Article[]): TagStats[] {
 
 /**
  * すべてのユニークなタグを取得
- * 
+ *
  * @param articles - 記事配列
  * @returns ユニークなタグ名の配列（アルファベット順）
  */
@@ -53,4 +53,3 @@ export function getAllUniqueTags(articles: Article[]): string[] {
 
   return Array.from(tagSet).sort((a, b) => a.localeCompare(b, "ja"));
 }
-

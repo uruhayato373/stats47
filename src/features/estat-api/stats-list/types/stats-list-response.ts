@@ -146,8 +146,10 @@ export interface EstatTableListItem {
   SURVEY_DATE?: string; // 調査年月
   OPEN_DATE?: string; // 公開日
   SMALL_AREA?: "0" | "1" | "2"; // 小地域
+  COLLECT_AREA?: "1" | "2" | "3"; // 集計地域区分（1: 全国, 2: 都道府県, 3: 市区町村）
   OVERALL_TOTAL_NUMBER?: number; // 総件数
   UPDATED_DATE?: string; // 更新日
+  DESCRIPTION?: string; // 解説（explanationGetFlg=Y時）
   TITLE_SPEC?: {
     TABLE_CATEGORY?: string;
     TABLE_NAME: string;
