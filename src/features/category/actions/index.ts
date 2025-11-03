@@ -34,11 +34,6 @@ import type { Category, Subcategory } from "../types/category.types";
  * カテゴリ一覧を取得
  *
  * すべてのカテゴリとそのサブカテゴリを取得する。
- * `"use cache"` ディレクティブにより、関数の結果がキャッシュされる。
- *
- * ⚠️ **注意**: 現在、リポジトリ層でキャッシュタグが設定されていないため、
- * `revalidateTag("categories")` でキャッシュを無効化できません。
- * リポジトリ層で `unstable_cache` を使用してキャッシュタグを設定する必要があります。
  *
  * @returns {Promise<Category[]>} カテゴリとサブカテゴリの配列
  *
@@ -49,7 +44,6 @@ import type { Category, Subcategory } from "../types/category.types";
  * ```
  */
 export async function listCategoriesAction(): Promise<Category[]> {
-  "use cache";
   return await listCategoriesWithSubcategories();
 }
 

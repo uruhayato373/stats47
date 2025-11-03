@@ -13,9 +13,11 @@ import {
   getArticle,
 } from "@/features/blog/actions/getArticles";
 import { ArticleList } from "@/features/blog/components/ArticleList";
+import { BlogSidebar } from "@/features/blog/components/BlogSidebar";
 import { MDXContent } from "@/features/blog/components/MDXContent";
 import { TagList } from "@/features/blog/components/TagList";
 import { generateArticleStructuredData } from "@/features/blog/utils/structured-data";
+import { calculateTagStats } from "@/features/blog/utils/tag-utils";
 
 /**
  * ページのプロパティ
@@ -111,8 +113,12 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.example.com";
     const structuredData = generateArticleStructuredData(article, baseUrl);
 
+    // タグ統計を計算（サイドバー用）
+    const allArticles = await getAllArticlesAction();
+    const tagStats = calculateTagStats(allArticles);
+
     return (
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* 構造化データ */}
         <script
           type="application/ld+json"
@@ -120,45 +126,60 @@ export default async function ArticleDetailPage({ params }: PageProps) {
             __html: JSON.stringify(structuredData),
           }}
         />
-        {/* ヘッダー */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">
-            {article.frontmatter.title}
-          </h1>
-          {article.frontmatter.description && (
-            <p className="text-xl text-muted-foreground mb-4">
-              {article.frontmatter.description}
-            </p>
-          )}
 
-          {/* メタ情報 */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            {article.readingTime && (
-              <span>{article.readingTime}分で読める</span>
+        {/* メインコンテンツとサイドバー */}
+        <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
+          {/* メインコンテンツ */}
+          <div className="min-w-0">
+            {/* ヘッダー */}
+            <header className="mb-8">
+              <h1 className="text-4xl font-bold mb-4">
+                {article.frontmatter.title}
+              </h1>
+              {article.frontmatter.description && (
+                <p className="text-xl text-muted-foreground mb-4">
+                  {article.frontmatter.description}
+                </p>
+              )}
+
+              {/* メタ情報 */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                {article.readingTime && (
+                  <span>{article.readingTime}分で読める</span>
+                )}
+                {year && <span>{year}年度</span>}
+              </div>
+
+              {/* タグ */}
+              {article.frontmatter.tags &&
+                article.frontmatter.tags.length > 0 && (
+                  <div className="mt-4">
+                    <TagList tags={article.frontmatter.tags} />
+                  </div>
+                )}
+            </header>
+
+            {/* 記事本文 */}
+            <article className="prose prose-slate dark:prose-invert max-w-none">
+              <MDXContent article={article} />
+            </article>
+
+            {/* 関連記事（異なる年度） */}
+            {sameSlugArticles.length > 0 && (
+              <aside className="mt-12 pt-8 border-t">
+                <h2 className="text-2xl font-bold mb-4">
+                  関連記事（他の年度）
+                </h2>
+                <ArticleList articles={sameSlugArticles.slice(0, 5)} />
+              </aside>
             )}
-            {year && <span>{year}年度</span>}
           </div>
 
-          {/* タグ */}
-          {article.frontmatter.tags && article.frontmatter.tags.length > 0 && (
-            <div className="mt-4">
-              <TagList tags={article.frontmatter.tags} />
-            </div>
-          )}
-        </header>
-
-        {/* 記事本文 */}
-        <article className="prose prose-slate dark:prose-invert max-w-none">
-          <MDXContent article={article} />
-        </article>
-
-        {/* 関連記事（異なる年度） */}
-        {sameSlugArticles.length > 0 && (
-          <aside className="mt-12 pt-8 border-t">
-            <h2 className="text-2xl font-bold mb-4">関連記事（他の年度）</h2>
-            <ArticleList articles={sameSlugArticles.slice(0, 5)} />
+          {/* サイドバー */}
+          <aside className="hidden lg:block">
+            <BlogSidebar tagStats={tagStats} />
           </aside>
-        )}
+        </div>
       </div>
     );
   } catch (error) {
