@@ -17,6 +17,16 @@ import { useArticleContext } from "../../contexts/ArticleContext";
 import type { StatsSchema } from "@/types/stats";
 
 /**
+ * PrefectureRankingRegionコンポーネントのprops
+ */
+interface PrefectureRankingRegionProps {
+  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
+  rankingKey?: string;
+  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
+  time?: string;
+}
+
+/**
  * 地域定義
  */
 const REGIONS = {
@@ -51,25 +61,34 @@ interface RegionSummary {
  * 都道府県ランキング地域別分析コンポーネント
  * 
  * MDXコンテンツ内で使用する地域別分析を表示します。
- * ArticleContextからstatsDataIdを取得し、ランキングデータを地域別に集計して表示します。
+ * propsでrankingKeyとtimeが渡された場合はそれを使用し、
+ * 渡されていない場合はArticleContextから取得します。
  */
-export function PrefectureRankingRegion() {
-  const { statsDataId, year, chartSettings } = useArticleContext();
+export function PrefectureRankingRegion({
+  rankingKey: propsRankingKey,
+  time: propsTime,
+}: PrefectureRankingRegionProps = {}) {
+  const context = useArticleContext();
+  const { chartSettings, year: contextYear } = context;
+  
+  // propsが渡された場合はそれを優先、なければcontextから取得
+  const rankingKey = propsRankingKey || (context as any).statsDataId;
+  const time = propsTime || contextYear;
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      if (!statsDataId) {
-        setError("statsDataIdが指定されていません");
+      if (!rankingKey) {
+        setError("rankingKeyが指定されていません");
         setIsLoading(false);
         return;
       }
 
       // 年度が指定されていない場合はエラーとする
-      if (!year) {
-        setError("年度が指定されていません");
+      if (!time) {
+        setError("timeが指定されていません");
         setIsLoading(false);
         return;
       }
@@ -79,7 +98,7 @@ export function PrefectureRankingRegion() {
 
       try {
         // 都道府県データを取得（areaType: "prefecture"）
-        const data = await getRankingData("prefecture", statsDataId, year);
+        const data = await getRankingData("prefecture", rankingKey, time);
 
         if (!data || data.length === 0) {
           setError("ランキングデータが見つかりませんでした");
@@ -101,7 +120,7 @@ export function PrefectureRankingRegion() {
     }
 
     fetchData();
-  }, [statsDataId, year]);
+  }, [rankingKey, time]);
 
   // 地域別集計
   const regionSummaries = useMemo<RegionSummary[]>(() => {

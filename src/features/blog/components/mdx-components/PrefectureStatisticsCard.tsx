@@ -17,28 +17,47 @@ import { useArticleContext } from "../../contexts/ArticleContext";
 import type { StatsSchema } from "@/types/stats";
 
 /**
+ * PrefectureStatisticsCardコンポーネントのprops
+ */
+interface PrefectureStatisticsCardProps {
+  /** ランキングキー（オプショナル、propsがない場合はArticleContextから取得） */
+  rankingKey?: string;
+  /** 時間（年度など、オプショナル、propsがない場合はArticleContextから取得） */
+  time?: string;
+}
+
+/**
  * 都道府県統計カードコンポーネント
  * 
  * MDXコンテンツ内で使用する統計情報カードを表示します。
- * ArticleContextからstatsDataIdを取得し、ランキングデータの統計情報（平均、最大、最小、中央値など）を表示します。
+ * propsでrankingKeyとtimeが渡された場合はそれを使用し、
+ * 渡されていない場合はArticleContextから取得します。
  */
-export function PrefectureStatisticsCard() {
-  const { statsDataId, year, chartSettings } = useArticleContext();
+export function PrefectureStatisticsCard({
+  rankingKey: propsRankingKey,
+  time: propsTime,
+}: PrefectureStatisticsCardProps = {}) {
+  const context = useArticleContext();
+  const { chartSettings, year: contextYear } = context;
+  
+  // propsが渡された場合はそれを優先、なければcontextから取得
+  const rankingKey = propsRankingKey || (context as any).statsDataId;
+  const time = propsTime || contextYear;
   const [rankingData, setRankingData] = useState<StatsSchema[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      if (!statsDataId) {
-        setError("statsDataIdが指定されていません");
+      if (!rankingKey) {
+        setError("rankingKeyが指定されていません");
         setIsLoading(false);
         return;
       }
 
       // 年度が指定されていない場合はエラーとする
-      if (!year) {
-        setError("年度が指定されていません");
+      if (!time) {
+        setError("timeが指定されていません");
         setIsLoading(false);
         return;
       }
@@ -48,7 +67,7 @@ export function PrefectureStatisticsCard() {
 
       try {
         // 都道府県データを取得（areaType: "prefecture"）
-        const data = await getRankingData("prefecture", statsDataId, year);
+        const data = await getRankingData("prefecture", rankingKey, time);
 
         if (!data || data.length === 0) {
           setError("ランキングデータが見つかりませんでした");
@@ -70,7 +89,7 @@ export function PrefectureStatisticsCard() {
     }
 
     fetchData();
-  }, [statsDataId, year]);
+  }, [rankingKey, time]);
 
   // 統計情報を計算
   const statistics = useMemo(() => {
