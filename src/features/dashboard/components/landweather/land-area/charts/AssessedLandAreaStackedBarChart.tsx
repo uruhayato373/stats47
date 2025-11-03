@@ -3,13 +3,13 @@
  * e-Stat APIから直接データを取得
  */
 
+import { StackedBarChart } from "@/components/molecules/charts";
+
 import { fetchStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 import {
   convertToStatsSchema,
   formatStatsData,
 } from "@/features/estat-api/stats-data/services/formatter";
-
-import { AssessedLandAreaStackedBarChartClient } from "./AssessedLandAreaStackedBarChartClient";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010102"; // 国土統計
@@ -238,20 +238,73 @@ export async function AssessedLandAreaStackedBarChart({
       }))
       .sort((a, b) => a.year.localeCompare(b.year));
 
+    // チャート設定
+    const chartConfig = {
+      paddy: {
+        dataKey: "paddy",
+        label: "田",
+        color: "hsl(142, 76%, 36%)", // Green（緑色）
+      },
+      field: {
+        dataKey: "field",
+        label: "畑",
+        color: "hsl(38, 92%, 50%)", // Orange（オレンジ色）
+      },
+      residential: {
+        dataKey: "residential",
+        label: "宅地",
+        color: "hsl(346, 77%, 50%)", // Pink（ピンク色）
+      },
+      mountainForest: {
+        dataKey: "mountainForest",
+        label: "山林",
+        color: "hsl(221, 83%, 53%)", // Blue（青色）
+      },
+      pasture: {
+        dataKey: "pasture",
+        label: "牧場",
+        color: "hsl(173, 80%, 40%)", // Cyan（シアン色）
+      },
+      wilderness: {
+        dataKey: "wilderness",
+        label: "原野",
+        color: "hsl(280, 70%, 50%)", // Purple（紫色）
+      },
+      other: {
+        dataKey: "other",
+        label: "その他",
+        color: "hsl(0, 0%, 60%)", // Gray（灰色）
+      },
+    };
+
+    // 数値をカンマ区切りでフォーマット
+    const formatValue = (value: number): string => {
+      return new Intl.NumberFormat("ja-JP", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(value);
+    };
+
     return (
-      <AssessedLandAreaStackedBarChartClient
+      <StackedBarChart
         chartData={chartData}
         title={title}
         description={description}
+        chartConfig={chartConfig}
+        valueFormatter={formatValue}
+        showTotal={true}
+        totalLabel="合計"
+        unit="㎡"
       />
     );
   } catch (error) {
     console.error("[AssessedLandAreaStackedBarChart] データ取得エラー:", error);
     return (
-      <AssessedLandAreaStackedBarChartClient
+      <StackedBarChart
         chartData={[]}
         title={title}
         description={description}
+        chartConfig={{}}
       />
     );
   }

@@ -8,7 +8,6 @@ import { TrendLineChart } from "@/components/molecules/charts";
 import { fetchFormattedStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 
 import { convertMultipleStatsSchemasToTrendChartData } from "@/lib/chart-data-converter";
-import { SEMANTIC_CHART_COLORS } from "@/lib/chart-colors";
 
 // e-Stat APIパラメータ定義
 const STATS_DATA_ID = "0000010101"; // 人口推計
