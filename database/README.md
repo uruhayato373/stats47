@@ -47,6 +47,9 @@ npx wrangler d1 execute stats47_staging --env staging --remote --command "SELECT
 # マイグレーション適用
 npx wrangler d1 migrations apply stats47_staging --env staging --remote
 
+# ローカルD1からステージング環境への同期（推奨）
+npm run db:sync:local-to-staging
+
 # 本番データのコピー
 node scripts/import-to-staging.js
 ```

@@ -35,10 +35,11 @@
     "db:dump:staging": "bash database/scripts/backup.sh staging",
     "db:dump:production": "bash database/scripts/backup.sh production",
     "db:migrations:local": "npx wrangler d1 migrations apply stats47 --local",
-    "db:migrations:staging": "npx wrangler d1 migrations apply stats47 --env staging",
+    "db:migrations:staging": "npx wrangler d1 migrations apply stats47_staging --env staging --remote",
     "db:migrations:production": "npx wrangler d1 migrations apply stats47 --env production",
     "db:init:local": "bash scripts/init-local-db.sh",
     "db:reset:local": "rm -rf .wrangler/state/v3/d1 && bash scripts/init-local-db.sh",
+    "db:sync:local-to-staging": "node database/scripts/sync-local-to-staging.js",
     "sync:mdx": "tsx scripts/sync-mdx-frontmatter-to-db.ts"
   },
   "dependencies": {
