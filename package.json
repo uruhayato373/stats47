@@ -41,6 +41,10 @@
     "db:reset:local": "rm -rf .wrangler/state/v3/d1 && bash scripts/init-local-db.sh",
     "db:sync:local-to-staging": "node database/scripts/sync-local-to-staging.js",
     "sync:mdx": "tsx scripts/sync-mdx-frontmatter-to-db.ts",
+    "sync:r2:dev-to-staging": "tsx scripts/sync-r2-development-to-staging.ts",
+    "sync:r2:staging-to-prod": "tsx scripts/sync-r2-staging-to-production.ts",
+    "sync:r2:dev-to-staging:dry": "tsx scripts/sync-r2-development-to-staging.ts --dry-run",
+    "sync:r2:staging-to-prod:dry": "tsx scripts/sync-r2-staging-to-production.ts --dry-run",
     "pages:build": "next build && opennextjs-cloudflare build",
     "pages:preview": "opennextjs-cloudflare preview",
     "pages:build:check": "npm run pages:build"
