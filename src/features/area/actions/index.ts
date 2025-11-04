@@ -24,7 +24,8 @@ import type { City, Prefecture } from "../types";
  * @throws {Error} R2ストレージからの取得に失敗した場合（開発環境以外）
  */
 export async function listPrefecturesAction(): Promise<Prefecture[]> {
-  "use cache";
+  // Edge Runtimeでは"use cache"が使用できないため削除
+  // キャッシュはNext.jsのfetch cacheを使用
   return await fetchPrefectures();
 }
 
@@ -39,7 +40,8 @@ export async function listPrefecturesAction(): Promise<Prefecture[]> {
  * @throws {Error} R2ストレージからの取得に失敗した場合（開発環境以外）
  */
 export async function listCitiesAction(): Promise<City[]> {
-  "use cache";
+  // Edge Runtimeでは"use cache"が使用できないため削除
+  // キャッシュはNext.jsのfetch cacheを使用
   return await fetchCities();
 }
 

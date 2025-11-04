@@ -3,8 +3,6 @@ import type { EstatRankingMapping } from "@/features/estat-api/ranking-mappings/
 
 import RankingMappingsPageClient from "./RankingMappingsPageClient";
 
-export const runtime = "edge";
-
 /**
  * RankingMappingsPage - e-Statランキングマッピング管理ページ（サーバーコンポーネント）
  *

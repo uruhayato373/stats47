@@ -5,10 +5,12 @@
  * データの取得・更新・削除を行う関数を提供する。
  *
  * ## キャッシュ戦略
- * - **取得**: `listCategoriesAction()` は `"use cache"` でキャッシュされる
+ * - **取得**: `listCategoriesAction()` はデータベースから直接取得（リポジトリ層でキャッシュタグを設定する場合は`fetch`キャッシュまたは`unstable_cache`を使用）
  * - **更新・削除**: 操作後に `revalidateTag("categories")` でキャッシュを無効化
  *
  * ## 注意事項
+ * ⚠️ **Edge Runtimeでの制約**: Edge Runtimeでは`"use cache"`ディレクティブは使用できません。
+ * キャッシュが必要な場合は、リポジトリ層で`fetch`キャッシュ（`cache: "force-cache"` + `next.tags`）または`unstable_cache`を使用してください。
  * ⚠️ **キャッシュタグの問題**: 現在、リポジトリ層でキャッシュタグが設定されていないため、
  * `revalidateTag("categories")` が正しく機能しない可能性があります。
  * 修正が必要な場合は、リポジトリ層で `unstable_cache` を使用してキャッシュタグを設定してください。

@@ -19,9 +19,6 @@ import { TagList } from "@/features/blog/components/TagList";
 import { generateArticleStructuredData } from "@/features/blog/utils/structured-data";
 import { calculateTagStats } from "@/features/blog/utils/tag-utils";
 
-export const runtime = "edge";
-export const dynamicParams = false;
-
 /**
  * ページのプロパティ
  */
@@ -31,27 +28,6 @@ interface PageProps {
     slug: string;
     year: string;
   }>;
-}
-
-/**
- * 静的パラメータ生成
- *
- * ビルド時にすべての記事のパラメータを生成
- */
-export async function generateStaticParams() {
-  // すべての記事を取得
-  const articles = await getAllArticlesAction();
-
-  // パラメータを生成
-  // 実際のディレクトリ構造に基づいてパラメータを生成
-  // actualCategoryは実際のディレクトリ名（例: "prefecture-rank"）
-  // frontmatter.categoryはfrontmatterに記述されたカテゴリ（例: "miningindustry"）
-  // URLパスには実際のディレクトリ名を使用する必要がある
-  return articles.map((article) => ({
-    category: article.actualCategory,
-    slug: article.slug,
-    year: article.time || "",
-  }));
 }
 
 /**

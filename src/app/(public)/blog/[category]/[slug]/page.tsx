@@ -8,8 +8,6 @@ import { redirect } from "next/navigation";
 
 import { getAllArticlesAction } from "@/features/blog/actions/getArticles";
 
-export const runtime = "edge";
-
 /**
  * ページのプロパティ
  */

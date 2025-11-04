@@ -15,8 +15,6 @@ import { NotFoundMessage } from "@/components/molecules/errors/NotFoundMessage";
 
 import { listCategories } from "@/features/category/repositories/category-repository";
 
-export const runtime = "edge";
-
 /**
  * サブカテゴリページのプロパティ
  */

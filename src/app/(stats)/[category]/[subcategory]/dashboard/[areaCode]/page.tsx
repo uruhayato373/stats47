@@ -15,8 +15,6 @@ import { SubcategorySidebar } from "@/features/dashboard/components/shared/Subca
 import { fetchDashboardComponent } from "@/features/dashboard/services/dashboard-component-resolver";
 import { fetchFormattedStatsData } from "@/features/estat-api/stats-data/services/fetcher";
 
-export const runtime = "edge";
-
 interface PageProps {
   params: Promise<{
     category: string;

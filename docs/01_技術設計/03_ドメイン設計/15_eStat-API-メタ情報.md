@@ -522,7 +522,8 @@ estat-api/
 import { fetchMetaInfo } from "./services/fetcher";
 
 export async function fetchMetaInfoAction(statsDataId: string) {
-  "use cache"; // Next.js 15でのキャッシュ（複数リクエスト間で有効）
+  // Edge Runtimeでは"use cache"が使用できないため削除
+  // キャッシュが必要な場合は、リポジトリ層でfetchキャッシュまたはunstable_cacheを使用
 
   return await fetchMetaInfo(statsDataId);
 }
@@ -530,18 +531,20 @@ export async function fetchMetaInfoAction(statsDataId: string) {
 
 **特徴**:
 
-- 関数レベルのキャッシュ
-- 入力パラメータに基づく自動キャッシュ
+- Edge Runtimeでは`"use cache"`ディレクティブは使用できないため、リポジトリ層で`fetch`キャッシュまたは`unstable_cache`を使用
+- 入力パラメータに基づくキャッシュは`fetch`キャッシュまたは`unstable_cache`で実装
 - 複数リクエスト間で有効
 
 #### 3. ハイブリッドキャッシュ戦略
 
-**推奨**: R2 キャッシュと`use cache`ディレクティブの組み合わせ
+**推奨**: R2 キャッシュと`fetch`キャッシュまたは`unstable_cache`の組み合わせ
 
-1. Server Action 内で`use cache`を有効化
+1. Server Action 内でキャッシュが必要な場合は、リポジトリ層で`fetch`キャッシュまたは`unstable_cache`を使用
 2. `fetchMetaInfo()`関数内で R2 キャッシュを優先的に確認
 3. R2 キャッシュミス時のみ e-Stat API から取得
 4. 取得したデータをバックグラウンドで R2 に保存
+
+**注意**: Edge Runtimeでは`"use cache"`ディレクティブは使用できないため、`fetch`キャッシュまたは`unstable_cache`を使用してください。
 
 ---
 

@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { getD1 } from "@/infrastructure/database";
 
-export const runtime = "edge";
-
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as {

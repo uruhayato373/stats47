@@ -320,7 +320,8 @@ export async function searchStatsListAction(options: {
   limit?: number;
   startPosition?: number;
 }) {
-  "use cache"; // Next.js 15でのキャッシュ（複数リクエスト間で有効）
+  // Edge Runtimeでは"use cache"が使用できないため削除
+  // キャッシュが必要な場合は、リポジトリ層でfetchキャッシュまたはunstable_cacheを使用
 
   return await searchStatsListByKeyword(options.searchWord || "", {
     limit: options.limit,

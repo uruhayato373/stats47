@@ -20,6 +20,17 @@ const nextConfig: NextConfig = {
         "@/data/mock": false,
       };
     }
+
+    // Edge Runtimeではbetter-sqlite3を使用できないため、外部化
+    // better-sqlite3はNode.js環境でのみ使用される
+    config.externals = config.externals || [];
+    if (Array.isArray(config.externals)) {
+      config.externals.push({
+        "better-sqlite3": "commonjs better-sqlite3",
+        bindings: "commonjs bindings",
+      });
+    }
+
     return config;
   },
 
@@ -31,7 +42,8 @@ const nextConfig: NextConfig = {
   // 静的ファイルの最適化
   experimental: {
     optimizePackageImports: ["@/infrastructure/mock-data"],
-    useCache: true,
+    // Edge Runtimeと互換性がないため、useCacheを無効化
+    // useCache: true,
   },
 };
 

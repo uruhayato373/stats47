@@ -513,7 +513,8 @@ export async function getStatsDataAction(
   statsDataId: string,
   options?: FetchOptions
 ) {
-  "use cache"; // Next.js 15でのキャッシュ（複数リクエスト間で有効）
+  // Edge Runtimeでは"use cache"が使用できないため削除
+  // キャッシュが必要な場合は、リポジトリ層でfetchキャッシュまたはunstable_cacheを使用
 
   return await fetchFormattedStatsData(statsDataId, options);
 }
@@ -521,9 +522,9 @@ export async function getStatsDataAction(
 
 **特徴**:
 
-- 関数レベルのキャッシュ
-- 入力パラメータに基づく自動キャッシュ
-- 複数リクエスト間で有効
+- Edge Runtimeでは`"use cache"`ディレクティブは使用できないため、リポジトリ層で`fetch`キャッシュまたは`unstable_cache`を使用
+- 入力パラメータに基づくキャッシュは`fetch`キャッシュまたは`unstable_cache`で実装
+- 複数リクエスト間で有効なキャッシュは`fetch`キャッシュまたは`unstable_cache`で実装
 
 ### パフォーマンス考慮事項
 

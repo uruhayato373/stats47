@@ -8,8 +8,6 @@ import type { EstatMetaInfoResponse } from "@/features/estat-api/meta-info/types
 
 import MetaInfoPageClient from "./MetaInfoPageClient";
 
-export const runtime = "edge";
-
 /**
  * MetaInfoPage - e-Statメタ情報管理ページ（サーバーコンポーネント）
  *

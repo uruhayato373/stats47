@@ -31,8 +31,6 @@ import {
 } from "@/features/ranking/items/components";
 import { EditRankingItemButton } from "@/features/ranking/items/components/admin/EditRankingItemButton";
 
-export const runtime = "edge";
-
 /**
  * ランキング詳細ページのProps型定義
  */

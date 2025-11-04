@@ -5,8 +5,6 @@ import { Button } from "@/components/atoms/ui/button";
 import { RankingGroupsTable } from "@/features/ranking/groups/components/admin/RankingGroupsTable";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
-export const runtime = "edge";
-
 /**
  * ランキンググループ管理画面
  * 

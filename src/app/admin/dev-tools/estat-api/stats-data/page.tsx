@@ -5,8 +5,6 @@ import {
 import { EstatDataDisplay } from "@/features/estat-api/stats-data/components";
 import type { EstatStatsDataResponse } from "@/features/estat-api/stats-data/types";
 
-export const runtime = "edge";
-
 /**
  * StatsDataPage - e-Stat統計データページ（サーバーコンポーネント）
  *
