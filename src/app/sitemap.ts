@@ -38,44 +38,59 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // カテゴリページ
-  const categories = await listCategories();
-  const categoryPages: MetadataRoute.Sitemap = categories.map((category) => ({
-    url: `${baseUrl}/blog/${category.categoryKey}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  // カテゴリページ（ビルド時にはD1にアクセスできない可能性があるため、エラーハンドリングを追加）
+  let categoryPages: MetadataRoute.Sitemap = [];
+  try {
+    const categories = await listCategories();
+    categoryPages = categories.map((category) => ({
+      url: `${baseUrl}/blog/${category.categoryKey}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+  } catch (error) {
+    // ビルド時やD1にアクセスできない環境では、カテゴリページをスキップ
+    // ランタイム時（Cloudflare Pages環境）でISRにより再生成される
+    console.warn("Failed to fetch categories for sitemap:", error);
+  }
 
   // 記事ページ
-  const articles = await getAllArticlesAction();
-  const articlePages: MetadataRoute.Sitemap = articles.map((article) => {
-    const time = article.time || "";
-    const path = time
-      ? `/blog/${article.actualCategory}/${article.slug}/${time}`
-      : `/blog/${article.actualCategory}/${article.slug}`;
+  let articlePages: MetadataRoute.Sitemap = [];
+  let tagPages: MetadataRoute.Sitemap = [];
+  try {
+    const articles = await getAllArticlesAction();
+    articlePages = articles.map((article) => {
+      const time = article.time || "";
+      const path = time
+        ? `/blog/${article.actualCategory}/${article.slug}/${time}`
+        : `/blog/${article.actualCategory}/${article.slug}`;
 
-    // TODO: 将来的にfrontmatterにpublishedAtやupdatedAtを追加して、
-    // 実際の更新日時を反映することを検討
-    return {
-      url: `${baseUrl}${path}`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    };
-  });
+      // TODO: 将来的にfrontmatterにpublishedAtやupdatedAtを追加して、
+      // 実際の更新日時を反映することを検討
+      return {
+        url: `${baseUrl}${path}`,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      };
+    });
 
-  // タグページ（ユニークなタグのみ）
-  const uniqueTags = new Set<string>();
-  articles.forEach((article) => {
-    article.frontmatter.tags?.forEach((tag) => uniqueTags.add(tag));
-  });
+    // タグページ（ユニークなタグのみ）
+    const uniqueTags = new Set<string>();
+    articles.forEach((article) => {
+      article.frontmatter.tags?.forEach((tag) => uniqueTags.add(tag));
+    });
 
-  const tagPages: MetadataRoute.Sitemap = Array.from(uniqueTags).map((tag) => ({
-    url: `${baseUrl}/blog/tags/${encodeURIComponent(tag)}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.5,
-  }));
+    tagPages = Array.from(uniqueTags).map((tag) => ({
+      url: `${baseUrl}/blog/tags/${encodeURIComponent(tag)}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    }));
+  } catch (error) {
+    // 記事の取得に失敗した場合もスキップ
+    // ランタイム時（Cloudflare Pages環境）でISRにより再生成される
+    console.warn("Failed to fetch articles for sitemap:", error);
+  }
 
   return [...staticPages, ...categoryPages, ...articlePages, ...tagPages];
 }
