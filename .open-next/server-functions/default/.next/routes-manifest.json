@@ -1,0 +1,258 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/dev-tools/ranking-groups/[groupId]",
+      "regex": "^/admin/dev\\-tools/ranking\\-groups/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPgroupId": "nxtPgroupId"
+      },
+      "namedRegex": "^/admin/dev\\-tools/ranking\\-groups/(?<nxtPgroupId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/ranking-items/[rankingKey]",
+      "regex": "^/admin/dev\\-tools/ranking\\-items/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPrankingKey": "nxtPrankingKey"
+      },
+      "namedRegex": "^/admin/dev\\-tools/ranking\\-items/(?<nxtPrankingKey>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/auth/[...nextauth]",
+      "regex": "^/api/auth/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnextauth": "nxtPnextauth"
+      },
+      "namedRegex": "^/api/auth/(?<nxtPnextauth>.+?)(?:/)?$"
+    },
+    {
+      "page": "/blog/tags/[tag]",
+      "regex": "^/blog/tags/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtag": "nxtPtag"
+      },
+      "namedRegex": "^/blog/tags/(?<nxtPtag>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/blog/[category]",
+      "regex": "^/blog/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory"
+      },
+      "namedRegex": "^/blog/(?<nxtPcategory>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/blog/[category]/[slug]",
+      "regex": "^/blog/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/blog/(?<nxtPcategory>[^/]+?)/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/blog/[category]/[slug]/[year]",
+      "regex": "^/blog/([^/]+?)/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPslug": "nxtPslug",
+        "nxtPyear": "nxtPyear"
+      },
+      "namedRegex": "^/blog/(?<nxtPcategory>[^/]+?)/(?<nxtPslug>[^/]+?)/(?<nxtPyear>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[category]",
+      "regex": "^/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[category]/[subcategory]",
+      "regex": "^/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPsubcategory": "nxtPsubcategory"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)/(?<nxtPsubcategory>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[category]/[subcategory]/dashboard",
+      "regex": "^/([^/]+?)/([^/]+?)/dashboard(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPsubcategory": "nxtPsubcategory"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)/(?<nxtPsubcategory>[^/]+?)/dashboard(?:/)?$"
+    },
+    {
+      "page": "/[category]/[subcategory]/dashboard/[areaCode]",
+      "regex": "^/([^/]+?)/([^/]+?)/dashboard/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPsubcategory": "nxtPsubcategory",
+        "nxtPareaCode": "nxtPareaCode"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)/(?<nxtPsubcategory>[^/]+?)/dashboard/(?<nxtPareaCode>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[category]/[subcategory]/ranking",
+      "regex": "^/([^/]+?)/([^/]+?)/ranking(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPsubcategory": "nxtPsubcategory"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)/(?<nxtPsubcategory>[^/]+?)/ranking(?:/)?$"
+    },
+    {
+      "page": "/[category]/[subcategory]/ranking/[rankingKey]",
+      "regex": "^/([^/]+?)/([^/]+?)/ranking/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcategory": "nxtPcategory",
+        "nxtPsubcategory": "nxtPsubcategory",
+        "nxtPrankingKey": "nxtPrankingKey"
+      },
+      "namedRegex": "^/(?<nxtPcategory>[^/]+?)/(?<nxtPsubcategory>[^/]+?)/ranking/(?<nxtPrankingKey>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/blog",
+      "regex": "^/admin/blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/blog(?:/)?$"
+    },
+    {
+      "page": "/admin/categories",
+      "regex": "^/admin/categories(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/categories(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/estat-api/meta-info",
+      "regex": "^/admin/dev\\-tools/estat\\-api/meta\\-info(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/estat\\-api/meta\\-info(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/estat-api/ranking-mappings",
+      "regex": "^/admin/dev\\-tools/estat\\-api/ranking\\-mappings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/estat\\-api/ranking\\-mappings(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/estat-api/stats-data",
+      "regex": "^/admin/dev\\-tools/estat\\-api/stats\\-data(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/estat\\-api/stats\\-data(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/estat-api/stats-list",
+      "regex": "^/admin/dev\\-tools/estat\\-api/stats\\-list(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/estat\\-api/stats\\-list(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/ranking-groups",
+      "regex": "^/admin/dev\\-tools/ranking\\-groups(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/ranking\\-groups(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/ranking-groups/new",
+      "regex": "^/admin/dev\\-tools/ranking\\-groups/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/ranking\\-groups/new(?:/)?$"
+    },
+    {
+      "page": "/admin/dev-tools/ranking-items",
+      "regex": "^/admin/dev\\-tools/ranking\\-items(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dev\\-tools/ranking\\-items(?:/)?$"
+    },
+    {
+      "page": "/blog",
+      "regex": "^/blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
+    },
+    {
+      "page": "/profile",
+      "regex": "^/profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/profile(?:/)?$"
+    },
+    {
+      "page": "/profile/edit",
+      "regex": "^/profile/edit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/profile/edit(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

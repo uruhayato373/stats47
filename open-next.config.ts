@@ -1,6 +1,7 @@
-import { defineConfig } from "@opennextjs/cloudflare";
+// default open-next.config.ts file created by @opennextjs/cloudflare
+import { defineCloudflareConfig } from "@opennextjs/cloudflare/config";
+import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
 
-export default defineConfig({
-  // Cloudflare Pages用の設定
-  // D1/R2バインディングはwrangler.tomlで管理されるため、ここでは追加設定は不要
+export default defineCloudflareConfig({
+	incrementalCache: r2IncrementalCache,
 });
