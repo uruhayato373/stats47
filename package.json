@@ -41,9 +41,9 @@
     "db:reset:local": "rm -rf .wrangler/state/v3/d1 && bash scripts/init-local-db.sh",
     "db:sync:local-to-staging": "node database/scripts/sync-local-to-staging.js",
     "sync:mdx": "tsx scripts/sync-mdx-frontmatter-to-db.ts",
-    "pages:build": "npx @cloudflare/next-on-pages@1",
-    "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static",
-    "pages:build:check": "node -e \"console.log('注意: Windows環境ではGit BashまたはWSLが必要です。GitHub Actionsでは自動的に動作します。')\" && npm run pages:build"
+    "pages:build": "next build && opennextjs-cloudflare build",
+    "pages:preview": "opennextjs-cloudflare preview",
+    "pages:build:check": "npm run pages:build"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.913.0",
@@ -132,6 +132,6 @@
     "vite": "^7.1.9",
     "vitest": "^3.2.4",
     "wrangler": "^4.33.1",
-    "@cloudflare/next-on-pages": "^1.0.0"
+    "@opennextjs/cloudflare": "^1.0.0"
   }
 }

@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // OpenNextの要件: standalone出力を有効化
+  output: "standalone",
   eslint: {
     // ビルド時にESLintエラーを無視する（警告は表示される）
     ignoreDuringBuilds: true,

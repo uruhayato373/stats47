@@ -52,9 +52,9 @@ jobs:
       - name: ☁️ Deploy to Cloudflare Pages
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
-            npx wrangler pages deploy .vercel/output/static --env production
+            npx wrangler pages deploy .open-next --env production
           else
-            npx wrangler pages deploy .vercel/output/static --env staging
+            npx wrangler pages deploy .open-next --env staging
           fi
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -77,6 +77,6 @@ jobs:
       - run: npm run pages:build
 
       - name: 🔍 Deploy preview to Cloudflare Pages
-        run: npx wrangler pages deploy .vercel/output/static --branch=${{ github.head_ref }}
+        run: npx wrangler pages deploy .open-next --branch=${{ github.head_ref }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
