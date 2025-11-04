@@ -14,6 +14,8 @@ import { getArticles } from "@/features/blog/actions/getArticles";
 import { findCategoryByName } from "@/features/category/repositories/category-repository";
 import type { ArticleSortOrder } from "@/features/blog/types/article.types";
 
+export const runtime = "edge";
+
 /**
  * ページのプロパティ
  */

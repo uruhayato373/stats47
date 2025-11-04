@@ -1,5 +1,7 @@
 import { RankingGroupForm } from "@/features/ranking/groups/components/admin/RankingGroupForm";
 
+export const runtime = "edge";
+
 /**
  * ランキンググループ新規作成画面
  */

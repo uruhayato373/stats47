@@ -1,5 +1,7 @@
 import StatsListPageClient from "./StatsListPageClient";
 
+export const runtime = "edge";
+
 /**
  * StatsListPage - e-Stat統計表一覧ページ（サーバーコンポーネント）
  *

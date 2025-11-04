@@ -19,6 +19,8 @@ import type { ArticleSortOrder } from "@/features/blog/types/article.types";
 import { generateBlogStructuredData } from "@/features/blog/utils/structured-data";
 import { calculateTagStats } from "@/features/blog/utils/tag-utils";
 
+export const runtime = "edge";
+
 /**
  * ページのプロパティ
  */

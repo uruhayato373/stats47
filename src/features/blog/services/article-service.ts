@@ -19,6 +19,23 @@ import type {
 } from "../types/article.types";
 
 /**
+ * 警告ログを出力するかどうかを判定
+ * production環境やビルド時には警告を出力しない
+ */
+function shouldLogWarning(): boolean {
+  const env = process.env.NEXT_PUBLIC_ENV || process.env.NODE_ENV || "development";
+  // production環境では警告を出力しない
+  if (env === "production") {
+    return false;
+  }
+  // ビルド時（NEXT_PHASEが設定されている場合）も警告を出力しない
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return false;
+  }
+  return true;
+}
+
+/**
  * 抜粋を生成（最初の160文字）
  *
  * @param content - MDXコンテンツ
@@ -187,18 +204,22 @@ export async function getArticleBySlug(
         articleFromDB.readingTime = calculateReadingTime(articleFromDB.content);
       } catch (fileError) {
         // ファイルが見つからない場合はデータベースのデータを使用
-        console.warn(
-          `ファイルが見つかりませんが、データベースから取得しました: ${category}/${slug}/${year}.mdx`
-        );
+        if (shouldLogWarning()) {
+          console.warn(
+            `ファイルが見つかりませんが、データベースから取得しました: ${category}/${slug}/${year}.mdx`
+          );
+        }
       }
       return articleFromDB;
     }
   } catch (dbError) {
     // データベースからの取得に失敗した場合は、ファイルから読み込む
-    console.warn(
-      `データベースからの取得に失敗、ファイルから読み込みます:`,
-      dbError instanceof Error ? dbError.message : String(dbError)
-    );
+    if (shouldLogWarning()) {
+      console.warn(
+        `データベースからの取得に失敗、ファイルから読み込みます:`,
+        dbError instanceof Error ? dbError.message : String(dbError)
+      );
+    }
   }
 
   // データベースにない場合はファイルから読み込み
@@ -268,9 +289,11 @@ export async function listArticles(
           article.content = articleFromFile.content;
         } catch (fileError) {
           // ファイルが見つからない場合は空コンテンツのまま
-          console.warn(
-            `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
-          );
+          if (shouldLogWarning()) {
+            console.warn(
+              `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
+            );
+          }
         }
         articlesWithContent.push(article);
       }
@@ -289,10 +312,12 @@ export async function listArticles(
     }
   } catch (dbError) {
     // データベースからの取得に失敗した場合は、ファイルから読み込む
-    console.warn(
-      `データベースからの取得に失敗、ファイルから読み込みます:`,
-      dbError instanceof Error ? dbError.message : String(dbError)
-    );
+    if (shouldLogWarning()) {
+      console.warn(
+        `データベースからの取得に失敗、ファイルから読み込みます:`,
+        dbError instanceof Error ? dbError.message : String(dbError)
+      );
+    }
   }
 
   // データベースにデータがない場合は、従来通りファイルから読み込み
@@ -399,9 +424,11 @@ export async function getAllArticles(
           article.content = articleFromFile.content;
         } catch (fileError) {
           // ファイルが見つからない場合は空コンテンツのまま
-          console.warn(
-            `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
-          );
+          if (shouldLogWarning()) {
+            console.warn(
+              `ファイルが見つかりませんが、データベースから取得しました: ${article.actualCategory}/${article.slug}/${article.time}.mdx`
+            );
+          }
         }
         articlesWithContent.push(article);
       }
@@ -410,10 +437,12 @@ export async function getAllArticles(
     }
   } catch (dbError) {
     // データベースからの取得に失敗した場合は、ファイルから読み込む
-    console.warn(
-      `データベースからの取得に失敗、ファイルから読み込みます:`,
-      dbError instanceof Error ? dbError.message : String(dbError)
-    );
+    if (shouldLogWarning()) {
+      console.warn(
+        `データベースからの取得に失敗、ファイルから読み込みます:`,
+        dbError instanceof Error ? dbError.message : String(dbError)
+      );
+    }
   }
 
   // データベースにデータがない場合は、従来通りファイルから読み込み

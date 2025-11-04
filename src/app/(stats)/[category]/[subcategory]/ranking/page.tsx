@@ -18,6 +18,8 @@ import type { RankingGroup } from "@/features/ranking/groups/types";
 import { RankingItemTabContent } from "@/features/ranking/items/components/RankingItemTabContent";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
+export const runtime = "edge";
+
 interface PageProps {
   params: Promise<{
     category: string;

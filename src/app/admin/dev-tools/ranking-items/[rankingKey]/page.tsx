@@ -6,6 +6,8 @@ import { Button } from "@/components/atoms/ui/button";
 import { RankingItemForm } from "@/features/ranking/items/components/admin/RankingItemForm";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
+export const runtime = "edge";
+
 interface PageProps {
   params: Promise<{ rankingKey: string }>;
 }

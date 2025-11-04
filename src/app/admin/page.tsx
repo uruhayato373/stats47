@@ -7,6 +7,8 @@ import { AdminStatsCards } from "@/features/auth/components/AdminStatsCards";
 import { UserManagementTableServer } from "@/features/auth/components/UserManagementTableServer";
 import { calculateUserStats } from "@/features/auth/utils";
 
+export const runtime = "edge";
+
 /**
  * 管理画面ページ
  *

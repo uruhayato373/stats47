@@ -2,6 +2,8 @@ import { RankingRepository } from "@/features/ranking/shared/repositories/rankin
 
 import RankingItemsPageClient from "./RankingItemsPageClient";
 
+export const runtime = "edge";
+
 /**
  * ランキング項目一覧画面（サーバーコンポーネント）
  * 

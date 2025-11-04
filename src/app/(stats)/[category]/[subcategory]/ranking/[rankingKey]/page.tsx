@@ -15,12 +15,14 @@ import {
 } from "@/components/atoms/ui/tabs";
 
 import { auth } from "@/features/auth/lib/auth";
+
 import {
   RankingDataTable,
   RankingMapCard,
   getRankingGroupByKey,
   getRankingItem,
 } from "@/features/ranking";
+
 import { getRankingData } from "@/features/ranking/items/actions/getRankingData";
 import { getRankingMetadata } from "@/features/ranking/items/actions/getRankingMetadata";
 import {
@@ -28,6 +30,8 @@ import {
   RankingYearSelector,
 } from "@/features/ranking/items/components";
 import { EditRankingItemButton } from "@/features/ranking/items/components/admin/EditRankingItemButton";
+
+export const runtime = "edge";
 
 /**
  * ランキング詳細ページのProps型定義

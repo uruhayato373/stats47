@@ -2,6 +2,8 @@ import { listArticlesFromDB } from "@/features/blog/repositories/article-db-repo
 
 import BlogArticlesPageClient from "./BlogArticlesPageClient";
 
+export const runtime = "edge";
+
 /**
  * ブログ記事一覧管理画面（サーバーコンポーネント）
  * 

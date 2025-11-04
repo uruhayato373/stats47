@@ -9,10 +9,13 @@ import {
   findSubcategoriesByCategory,
   findSubcategoryByName,
 } from "@/features/category/repositories/category-repository";
+
 import { DashboardError } from "@/features/dashboard/components/shared/DashboardError";
 import { SubcategorySidebar } from "@/features/dashboard/components/shared/SubcategorySidebar";
 import { fetchDashboardComponent } from "@/features/dashboard/services/dashboard-component-resolver";
 import { fetchFormattedStatsData } from "@/features/estat-api/stats-data/services/fetcher";
+
+export const runtime = "edge";
 
 interface PageProps {
   params: Promise<{

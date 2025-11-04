@@ -19,6 +19,9 @@ import { TagList } from "@/features/blog/components/TagList";
 import { generateArticleStructuredData } from "@/features/blog/utils/structured-data";
 import { calculateTagStats } from "@/features/blog/utils/tag-utils";
 
+export const runtime = "edge";
+export const dynamicParams = false;
+
 /**
  * ページのプロパティ
  */

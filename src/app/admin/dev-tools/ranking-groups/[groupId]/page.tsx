@@ -14,6 +14,8 @@ import { GroupItemsManager } from "@/features/ranking/groups/components/admin/Gr
 import { RankingGroupForm } from "@/features/ranking/groups/components/admin/RankingGroupForm";
 import { RankingRepository } from "@/features/ranking/shared/repositories/ranking-repository";
 
+export const runtime = "edge";
+
 interface PageProps {
   params: Promise<{ groupId: string }>;
 }

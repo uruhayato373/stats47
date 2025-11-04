@@ -14,6 +14,8 @@ import { getArticles, getAllArticlesAction } from "@/features/blog/actions/getAr
 import { calculateTagStats } from "@/features/blog/utils/tag-utils";
 import type { ArticleSortOrder } from "@/features/blog/types/article.types";
 
+export const runtime = "edge";
+
 /**
  * ページのプロパティ
  */

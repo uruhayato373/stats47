@@ -1,6 +1,8 @@
 import { AdminPageTitle } from "@/components/organisms/layout/AdminPageTitle";
 import { CategoriesManagement } from "@/features/category/components/admin/CategoriesManagement";
 
+export const runtime = "edge";
+
 /**
  * カテゴリ管理画面
  * useSWRを使用してクライアントサイドでデータを取得するため、
