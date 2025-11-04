@@ -3,7 +3,7 @@
  *
  * Next.jsのsitemap.xmlを生成
  *
- * ビルド時に生成し、1時間ごとに再検証（ISR）
+ * ビルド時に生成し、24時間ごとに再検証（ISR）
  */
 
 import { MetadataRoute } from "next";
@@ -12,8 +12,9 @@ import { getAllArticlesAction } from "@/features/blog/actions/getArticles";
 import { listCategories } from "@/features/category/repositories/category-repository";
 
 // ISR（Incremental Static Regeneration）設定
-// ビルド時に生成し、1時間ごとに再生成
-export const revalidate = 3600; // 1時間（秒単位）
+// ビルド時に生成し、24時間ごとに再生成
+// 記事ページはmonthly、カテゴリ・タグページはweeklyの更新頻度のため、24時間ごとの再検証で十分
+export const revalidate = 86400; // 24時間（秒単位）
 
 /**
  * サイトマップを生成
