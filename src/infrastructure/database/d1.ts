@@ -134,6 +134,43 @@ function createLocalD1Adapter(): D1Database | null {
 }
 
 /**
+ * D1データベースバインディングが利用可能かチェック
+ *
+ * エラーをスローせずに、D1バインディングが利用可能かを確認します。
+ * ビルド時など、D1にアクセスできない環境での事前チェックに使用します。
+ *
+ * @returns D1バインディングが利用可能な場合はtrue、そうでない場合はfalse
+ */
+export const isD1Available = (): boolean => {
+  // 優先1: STATS47_DBバインディング（Cloudflare Pages/Workers環境）
+  if (typeof globalThis !== "undefined" && (globalThis as any).STATS47_DB) {
+    return true;
+  }
+
+  // 優先2: 環境変数経由
+  if (
+    typeof process !== "undefined" &&
+    "env" in process &&
+    (process.env as any).STATS47_DB
+  ) {
+    return true;
+  }
+
+  // 優先3: ローカルSQLiteアダプタ（開発環境）
+  const localAdapter = createLocalD1Adapter();
+  if (localAdapter) {
+    return true;
+  }
+
+  // 優先4: 互換性のため（古い実装との互換性）
+  if (typeof globalThis !== "undefined" && (globalThis as any).DB) {
+    return true;
+  }
+
+  return false;
+};
+
+/**
  * Cloudflare D1データベースにアクセスするための関数
  *
  * バインディング名: STATS47_DB（wrangler.tomlで定義）

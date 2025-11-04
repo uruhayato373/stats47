@@ -88,25 +88,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. 静的ページを定義
   const staticPages = [...];
 
-  // 2. D1データベースからカテゴリを取得
+  // 2. ビルド時はD1にアクセスできないため、静的ページのみ返す
+  // ランタイム時（Cloudflare Pages環境）でISRにより完全なサイトマップが再生成される
+  if (!isD1Available()) {
+    console.warn("D1 is not available during build time. Returning static pages only.");
+    return staticPages;
+  }
+
+  // 3. D1データベースからカテゴリを取得
   const categories = await listCategories();
   const categoryPages = categories.map(...);
 
-  // 3. MDXファイルから記事を取得
+  // 4. MDXファイルから記事を取得
   const articles = await getAllArticlesAction();
   const articlePages = articles.map(...);
 
-  // 4. 記事からユニークなタグを抽出
+  // 5. 記事からユニークなタグを抽出
   const uniqueTags = new Set<string>();
   articles.forEach((article) => {
     article.frontmatter.tags?.forEach((tag) => uniqueTags.add(tag));
   });
   const tagPages = Array.from(uniqueTags).map(...);
 
-  // 5. 統合して返却
+  // 6. 統合して返却
   return [...staticPages, ...categoryPages, ...articlePages, ...tagPages];
 }
 ```
+
+### ビルド時のハンドリング
+
+Next.jsのビルドプロセスでは、Cloudflare D1データベースバインディングにアクセスできません。そのため、以下の対策を実装しています：
+
+1. **`isD1Available()` による事前チェック**: D1バインディングが利用可能かをエラーをスローせずに確認
+2. **ビルド時のフォールバック**: D1が利用できない場合は静的ページのみを返す
+3. **ランタイム時のISR**: Cloudflare Pages環境では、ISRにより24時間ごとに完全なサイトマップが自動生成される
+
+この実装により、ビルドプロセスが失敗することなく、かつランタイム時には完全なサイトマップが提供されます。
 
 ### ベースURL設定
 
