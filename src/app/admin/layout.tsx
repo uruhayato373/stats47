@@ -1,6 +1,14 @@
 import { ReactNode } from "react";
 
 /**
+ * 管理画面は常に動的レンダリング
+ *
+ * ビルド時のプリレンダリングを回避し、ランタイム時にD1バインディングを使用します。
+ * これにより、ビルド時にD1バインディングが利用できない環境でもエラーが発生しません。
+ */
+export const dynamic = 'force-dynamic';
+
+/**
  * AdminレイアウトのProps型定義
  */
 interface AdminLayoutProps {
