@@ -3,14 +3,15 @@ import { Metadata } from "next";
 
 import { isOk } from "@stats47/types";
 import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { Button } from "@stats47/components/atoms/ui/button";
 import { eq, countDistinct } from "drizzle-orm";
-import { BarChart3, Map as MapIcon, GitCompareArrows } from "lucide-react";
+import { BarChart3, Map as MapIcon, GitCompareArrows, Search } from "lucide-react";
 
 import { FeaturedRankings } from "@/features/ranking/server";
-import { HeroSearch } from "@/features/search";
 import { listCategories } from "@/features/category/server";
 import { CategoryGrid } from "@/features/category";
 import { listLatestArticles } from "@/features/blog/server";
+import { CountUp } from "@/components/atoms/CountUp";
 import { ScrollReveal } from "@/components/atoms/ScrollReveal";
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
@@ -115,32 +116,36 @@ export default async function HomePage() {
   return (
     <div className="w-full" suppressHydrationWarning>
       {/* ① Hero Section */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-8 md:py-12 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-80 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:opacity-100" />
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-100/30 to-transparent skew-x-12 dark:from-blue-900/10" />
 
         <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
-          <p className="text-sm md:text-base text-primary font-medium mb-3 tracking-wide">
-            探すのに半日、加工にもう半日。そんな時代を終わらせたくて、元県庁職員がつくりました。
-          </p>
-          <h1 className="text-2xl font-bold mb-5">
+          <h1 className="text-2xl font-bold mb-2">
             あなたの県は<span className="text-primary relative inline-block">
               何位？
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
                 <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z" fill="currentColor" />
               </svg>
             </span>
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground mb-2 max-w-2xl mx-auto leading-relaxed">
-            年収、人口、焼肉消費量まで——
+          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            <CountUp end={1800} className="font-semibold text-primary" suffix="以上の統計" />で47都道府県をランキング
           </p>
-          <p className="text-2xl md:text-3xl font-bold text-primary mb-2">
-            1,800以上の統計
-          </p>
-          <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            で47都道府県をランキング。知って楽しい、調べて発見。統計データを「自分ごと」に。
-          </p>
-          <HeroSearch />
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
+            <Button asChild>
+              <Link href="/ranking">
+                <BarChart3 className="h-4 w-4 mr-1.5" />
+                ランキングを見る
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/search">
+                <Search className="h-4 w-4 mr-1.5" />
+                キーワードで探す
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -152,10 +157,10 @@ export default async function HomePage() {
       {/* ③ カテゴリから探す */}
       {categories.length > 0 && (
         <ScrollReveal>
-          <section className="py-14 px-4">
+          <section className="py-10 px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold">カテゴリから探す</h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-bold">カテゴリから探す</h2>
                 <Link href="/ranking" className="text-sm text-primary hover:underline font-medium">
                   ランキング一覧 &rarr;
                 </Link>
@@ -168,9 +173,9 @@ export default async function HomePage() {
 
       {/* ④ 3つの切り口でデータを探す（旧「できること」） */}
       <ScrollReveal>
-        <section className="py-14 px-4 bg-muted/30">
+        <section className="py-10 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-10">3つの切り口でデータを探す</h2>
+            <h2 className="text-lg font-bold mb-8">3つの切り口でデータを探す</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <ScrollReveal delay={0}>
                 <Link href="/ranking" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
@@ -213,10 +218,10 @@ export default async function HomePage() {
       {/* ⑤ 新着ブログ記事 */}
       {latestArticles.length > 0 && (
         <ScrollReveal>
-          <section className="py-14 px-4">
+          <section className="py-10 px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold">統計ブログ</h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-bold">統計ブログ</h2>
                 <Link href="/blog" className="text-sm text-primary hover:underline font-medium">
                   すべての記事 &rarr;
                 </Link>

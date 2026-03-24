@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 import { buildRankingDisplayInfo } from "@stats47/ranking";
-import { listTopRankingValuesBatch } from "@stats47/ranking/server";
+import { listTopRankingValuesBatch, listRankingValues } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
+import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { logger } from "@/lib/logger";
 
@@ -21,7 +22,7 @@ interface FeaturedRankingsProps {
  * おすすめランキングコンポーネント
  *
  * おすすめランキングをカード形式で表示するサーバーコンポーネント。
- * 各ランキングの1位データを取得してカードに表示する。
+ * 各ランキングの1位データとタイルマップSVGを生成してカードに表示する。
  */
 export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
   let items: {
@@ -33,6 +34,7 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
     topValue?: string;
     demographicAttr?: string;
     normalizationBasis?: string;
+    tileMapSvg?: string;
   }[] = [];
 
   try {
@@ -45,18 +47,36 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
         return true;
       });
 
-      // 1位データをバッチ取得（N個の個別クエリ → 1クエリ）
+      // 1位データ + 全47件データを並列取得
       const batchItems = uniqueItems.map((item) => ({
         rankingKey: item.rankingKey,
         yearCode: item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024",
       }));
-      const batchResult = await listTopRankingValuesBatch(batchItems, "prefecture");
+
+      const [batchResult, ...allValuesResults] = await Promise.all([
+        listTopRankingValuesBatch(batchItems, "prefecture"),
+        ...uniqueItems.map((item) => {
+          const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
+          return listRankingValues(item.rankingKey, "prefecture", yearCode);
+        }),
+      ]);
       const topMap = isOk(batchResult) ? batchResult.data : new Map();
 
-      items = uniqueItems.map((item) => {
+      items = uniqueItems.map((item, idx) => {
         const latestYear = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
         const displayInfo = buildRankingDisplayInfo(item);
         const top = topMap.get(item.rankingKey);
+
+        // タイルマップSVG生成
+        const valuesResult = allValuesResults[idx];
+        let tileMapSvg: string | undefined;
+        if (isOk(valuesResult) && valuesResult.data.length > 0) {
+          tileMapSvg = generateMiniTileSvg(
+            valuesResult.data.map((v) => ({ areaCode: v.areaCode, value: v.value })),
+            item.visualization?.colorScheme,
+            item.visualization?.isReversed,
+          );
+        }
 
         return {
           rankingKey: item.rankingKey,
@@ -67,6 +87,7 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
           topValue: top ? top.value.toLocaleString("ja-JP") : undefined,
           demographicAttr: displayInfo.demographicAttr || undefined,
           normalizationBasis: displayInfo.normalizationBasis || undefined,
+          tileMapSvg,
         };
       });
     }
@@ -85,14 +106,11 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
   }
 
   return (
-    <section className="py-14 px-4 bg-muted/30">
+    <section className="py-8 px-4 bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <span className="bg-primary/10 p-2 rounded-lg text-primary">🏆</span>
-            注目のランキング
-          </h2>
-          <Link href="/ranking" className="text-sm text-primary hover:underline font-medium">
+          <h2 className="text-lg font-bold">注目のランキング</h2>
+          <Link href="/ranking" className="text-sm text-primary hover:underline font-medium" aria-label="注目のランキングをもっと見る">
             もっと見る &rarr;
           </Link>
         </div>
@@ -108,6 +126,7 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
               topValue={item.topValue}
               demographicAttr={item.demographicAttr}
               normalizationBasis={item.normalizationBasis}
+              tileMapSvg={item.tileMapSvg}
             />
           ))}
         </div>

@@ -30,6 +30,11 @@
       "import": "./src/leaflet/constants/tile-providers.ts",
       "require": "./src/leaflet/constants/tile-providers.ts"
     },
+    "./server": {
+      "types": "./src/server/index.ts",
+      "import": "./src/server/index.ts",
+      "require": "./src/server/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
