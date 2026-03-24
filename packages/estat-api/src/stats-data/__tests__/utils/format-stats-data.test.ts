@@ -1,0 +1,128 @@
+import { beforeAll, describe, expect, it } from "vitest";
+
+import { mockStatsDataMap } from "@stats47/mock/estat-api";
+import { formatStatsData } from "../../utils/format-stats-data";
+
+import type { EstatStatsDataResponse, FormattedEstatData } from "../../types";
+
+describe("統計データの整形 (formatStatsData)", () => {
+  let response: EstatStatsDataResponse;
+  let result: FormattedEstatData;
+
+  beforeAll(() => {
+    const mockData = mockStatsDataMap["0000010101_A1101"];
+    response = mockData as unknown as EstatStatsDataResponse;
+    result = formatStatsData(response);
+  });
+  it("統計データを正しく整形する", () => {
+    expect(result).toBeDefined();
+    expect(result.values).toBeInstanceOf(Array);
+    expect(result.values.length).toBeGreaterThan(0);
+  });
+
+  it("tableInfo を正しく抽出する", () => {
+    expect(result.tableInfo).toBeDefined();
+    expect(result.tableInfo.id).toBeTruthy();
+    expect(result.tableInfo.title).toBeTruthy();
+    expect(result.tableInfo.statName).toBeTruthy();
+  });
+
+  it("全次元（area, time）が必須で存在する", () => {
+    const firstValue = result.values[0];
+
+    expect(firstValue.dimensions.area).toBeDefined();
+    expect(firstValue.dimensions.time).toBeDefined();
+    if (firstValue.dimensions.area && firstValue.dimensions.time) {
+      expect(firstValue.dimensions.area.code).toBeTruthy();
+      expect(firstValue.dimensions.area.name).toBeTruthy();
+      expect(firstValue.dimensions.time.code).toBeTruthy();
+      expect(firstValue.dimensions.time.name).toBeTruthy();
+    }
+  });
+
+  it("オプション次元（cat01等）を抽出する", () => {
+    const valuesWithCat01 = result.values.filter(
+      (v) => v.dimensions.cat01 && v.dimensions.cat01.code !== ""
+    );
+
+    if (valuesWithCat01.length > 0) {
+      const firstWithCat01 = valuesWithCat01[0];
+      expect(firstWithCat01.dimensions.cat01?.code).toBeTruthy();
+      expect(firstWithCat01.dimensions.cat01?.name).toBeTruthy();
+    }
+  });
+
+  it("地域の階層レベルを正しく抽出する", () => {
+    const areasWithLevel = result.values.filter((v) => v.dimensions.area?.level);
+
+    if (areasWithLevel.length > 0) {
+      const levels = areasWithLevel.map((v) => v.dimensions.area?.level);
+      levels.forEach((level) => {
+        expect(["1", "2", "3", undefined]).toContain(level);
+      });
+    }
+  });
+
+  it("注記情報を抽出する", () => {
+    expect(result.notes).toBeDefined();
+    expect(Array.isArray(result.notes)).toBe(true);
+  });
+
+  describe("パフォーマンステスト", () => {
+    it("データ処理を妥当な時間内で完了する", () => {
+      const startTime = performance.now();
+      formatStatsData(response);
+      const endTime = performance.now();
+
+      const processingTime = endTime - startTime;
+      console.log(
+        `処理時間: ${processingTime.toFixed(2)}ms (${result.values.length}件)`
+      );
+
+      // データ件数に応じて調整（1秒以内）
+      expect(processingTime).toBeLessThan(1000);
+    });
+
+    it("処理速度を測定する", () => {
+      const iterations = 10;
+      const times: number[] = [];
+
+      for (let i = 0; i < iterations; i++) {
+        const startTime = performance.now();
+        formatStatsData(response);
+        const endTime = performance.now();
+        times.push(endTime - startTime);
+      }
+
+      const avgTime = times.reduce((a, b) => a + b, 0) / iterations;
+      const recordsPerSecond = (result.values.length / avgTime) * 1000;
+
+      console.log(`平均処理時間: ${avgTime.toFixed(2)}ms`);
+      console.log(`処理速度: ${recordsPerSecond.toFixed(0)}件/秒`);
+
+      // 最低でも1000件/秒以上
+      expect(recordsPerSecond).toBeGreaterThan(1000);
+    });
+  });
+
+  describe("エッジケース", () => {
+    it("空のvalues配列でもエラーにならない", () => {
+      const emptyResponse = {
+        ...response,
+        GET_STATS_DATA: {
+          ...response.GET_STATS_DATA,
+          STATISTICAL_DATA: {
+            ...response.GET_STATS_DATA.STATISTICAL_DATA,
+            DATA_INF: {
+              VALUE: [],
+            },
+          },
+        },
+      };
+
+      expect(() => {
+        formatStatsData(emptyResponse as unknown as EstatStatsDataResponse);
+      }).not.toThrow();
+    });
+  });
+});

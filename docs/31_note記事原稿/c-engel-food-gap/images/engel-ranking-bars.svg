@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="800" height="600" fill="#fafafa"/>
+
+<!-- Title -->
+<text x="400" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e293b">エンゲル係数 都道府県ランキング（2024年）</text>
+<text x="400" y="52" text-anchor="middle" font-size="12" fill="#64748b">上位10県・下位10県 ── 二人以上の世帯</text>
+
+<!-- Plot area: x=120..760, top10: y=70..290, bottom10: y=330..550 -->
+
+<!-- Average line at 27.8% -->
+<!-- Bar scale: 20%=120, 32%=760 => 1% = (760-120)/(32-20) = 53.33px -->
+<!-- 27.8% => 120 + (27.8-20)*53.33 = 120 + 415.97 = 535.97 -->
+<line x1="536" y1="64" x2="536" y2="558" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="536" y="574" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="bold">全国平均 27.8%</text>
+
+<!-- Grid lines -->
+<!-- 22% => 120 + 2*53.33 = 226.66 -->
+<line x1="227" y1="64" x2="227" y2="558" stroke="#f1f5f9" stroke-width="1"/>
+<text x="227" y="590" text-anchor="middle" font-size="10" fill="#94a3b8">22%</text>
+<!-- 24% => 120 + 4*53.33 = 333.33 -->
+<line x1="333" y1="64" x2="333" y2="558" stroke="#f1f5f9" stroke-width="1"/>
+<text x="333" y="590" text-anchor="middle" font-size="10" fill="#94a3b8">24%</text>
+<!-- 26% => 120 + 6*53.33 = 440 -->
+<line x1="440" y1="64" x2="440" y2="558" stroke="#f1f5f9" stroke-width="1"/>
+<text x="440" y="590" text-anchor="middle" font-size="10" fill="#94a3b8">26%</text>
+<!-- 28% => 120 + 8*53.33 = 546.66 -->
+<!-- 30% => 120 + 10*53.33 = 653.33 -->
+<line x1="653" y1="64" x2="653" y2="558" stroke="#f1f5f9" stroke-width="1"/>
+<text x="653" y="590" text-anchor="middle" font-size="10" fill="#94a3b8">30%</text>
+<!-- 32% => 760 -->
+
+<!-- Section label: Top 10 -->
+<text x="120" y="80" font-size="13" font-weight="bold" fill="#dc2626">上位10県</text>
+
+<!-- Top 10 bars (red) -->
+<!-- Row height=21, gap=1, start y=88 -->
+<!-- 1. 兵庫 31.8% => width = (31.8-20)*53.33 = 629.3 -->
+<text x="115" y="103" text-anchor="end" font-size="12" fill="#1e293b">1 兵庫県</text>
+<rect x="120" y="90" width="629" height="19" fill="#dc2626" rx="2" opacity="0.85"/>
+<text x="755" y="104" font-size="11" font-weight="bold" fill="#dc2626">31.8%</text>
+
+<!-- 2. 大阪 31.5% => width = (31.5-20)*53.33 = 613.3 -->
+<text x="115" y="125" text-anchor="end" font-size="12" fill="#1e293b">2 大阪府</text>
+<rect x="120" y="112" width="613" height="19" fill="#dc2626" rx="2" opacity="0.82"/>
+<text x="739" y="126" font-size="11" font-weight="bold" fill="#dc2626">31.5%</text>
+
+<!-- 3. 青森 30.7% => width = (30.7-20)*53.33 = 570.6 -->
+<text x="115" y="147" text-anchor="end" font-size="12" fill="#1e293b">3 青森県</text>
+<rect x="120" y="134" width="571" height="19" fill="#dc2626" rx="2" opacity="0.79"/>
+<text x="697" y="148" font-size="11" font-weight="bold" fill="#dc2626">30.7%</text>
+
+<!-- 4. 岐阜 30.0% => width = (30.0-20)*53.33 = 533.3 -->
+<text x="115" y="169" text-anchor="end" font-size="12" fill="#1e293b">4 岐阜県</text>
+<rect x="120" y="156" width="533" height="19" fill="#dc2626" rx="2" opacity="0.76"/>
+<text x="659" y="170" font-size="11" font-weight="bold" fill="#dc2626">30.0%</text>
+
+<!-- 5. 宮崎 29.6% => width = (29.6-20)*53.33 = 512.0 -->
+<text x="115" y="191" text-anchor="end" font-size="12" fill="#1e293b">5 宮崎県</text>
+<rect x="120" y="178" width="512" height="19" fill="#dc2626" rx="2" opacity="0.73"/>
+<text x="638" y="192" font-size="11" font-weight="bold" fill="#dc2626">29.6%</text>
+
+<!-- 6. 奈良 29.5% => width = 506.6 -->
+<text x="115" y="213" text-anchor="end" font-size="12" fill="#1e293b">6 奈良県</text>
+<rect x="120" y="200" width="507" height="19" fill="#dc2626" rx="2" opacity="0.70"/>
+<text x="633" y="214" font-size="11" font-weight="bold" fill="#dc2626">29.5%</text>
+
+<!-- 7. 山口 29.3% => width = 495.9 -->
+<text x="115" y="235" text-anchor="end" font-size="12" fill="#1e293b">7 山口県</text>
+<rect x="120" y="222" width="496" height="19" fill="#dc2626" rx="2" opacity="0.67"/>
+<text x="622" y="236" font-size="11" font-weight="bold" fill="#dc2626">29.3%</text>
+
+<!-- 8. 和歌山 29.1% => width = 485.3 -->
+<text x="115" y="257" text-anchor="end" font-size="12" fill="#1e293b">8 和歌山県</text>
+<rect x="120" y="244" width="485" height="19" fill="#dc2626" rx="2" opacity="0.64"/>
+<text x="611" y="258" font-size="11" font-weight="bold" fill="#dc2626">29.1%</text>
+
+<!-- 9. 徳島 29.0% => width = 480.0 -->
+<text x="115" y="279" text-anchor="end" font-size="12" fill="#1e293b">9 徳島県</text>
+<rect x="120" y="266" width="480" height="19" fill="#dc2626" rx="2" opacity="0.61"/>
+<text x="606" y="280" font-size="11" font-weight="bold" fill="#dc2626">29.0%</text>
+
+<!-- 10. 京都 28.9% => width = 474.6 -->
+<text x="115" y="301" text-anchor="end" font-size="12" fill="#1e293b">10 京都府</text>
+<rect x="120" y="288" width="475" height="19" fill="#dc2626" rx="2" opacity="0.58"/>
+<text x="601" y="302" font-size="11" font-weight="bold" fill="#dc2626">28.9%</text>
+
+<!-- Divider -->
+<line x1="120" y1="316" x2="760" y2="316" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="440" y="331" text-anchor="middle" font-size="10" fill="#94a3b8">... 中略 ...</text>
+
+<!-- Section label: Bottom 10 -->
+<text x="120" y="348" font-size="13" font-weight="bold" fill="#3b82f6">下位10県</text>
+
+<!-- Bottom 10 bars (blue) -->
+<!-- 38. 佐賀 26.8% => width = (26.8-20)*53.33 = 362.7 -->
+<text x="115" y="369" text-anchor="end" font-size="12" fill="#1e293b">38 佐賀県</text>
+<rect x="120" y="356" width="363" height="19" fill="#3b82f6" rx="2" opacity="0.85"/>
+<text x="489" y="370" font-size="11" font-weight="bold" fill="#3b82f6">26.8%</text>
+
+<!-- 39. 滋賀 26.7% => width = 357.3 -->
+<text x="115" y="391" text-anchor="end" font-size="12" fill="#1e293b">39 滋賀県</text>
+<rect x="120" y="378" width="357" height="19" fill="#3b82f6" rx="2" opacity="0.82"/>
+<text x="483" y="392" font-size="11" font-weight="bold" fill="#3b82f6">26.7%</text>
+
+<!-- 40. 群馬 26.6% => width = 352.0 -->
+<text x="115" y="413" text-anchor="end" font-size="12" fill="#1e293b">40 群馬県</text>
+<rect x="120" y="400" width="352" height="19" fill="#3b82f6" rx="2" opacity="0.79"/>
+<text x="478" y="414" font-size="11" font-weight="bold" fill="#3b82f6">26.6%</text>
+
+<!-- 41. 富山 26.5% => width = 346.7 -->
+<text x="115" y="435" text-anchor="end" font-size="12" fill="#1e293b">41 富山県</text>
+<rect x="120" y="422" width="347" height="19" fill="#3b82f6" rx="2" opacity="0.76"/>
+<text x="473" y="436" font-size="11" font-weight="bold" fill="#3b82f6">26.5%</text>
+
+<!-- 42. 山梨 26.3% => width = 336.0 -->
+<text x="115" y="457" text-anchor="end" font-size="12" fill="#1e293b">42 山梨県</text>
+<rect x="120" y="444" width="336" height="19" fill="#3b82f6" rx="2" opacity="0.73"/>
+<text x="462" y="458" font-size="11" font-weight="bold" fill="#3b82f6">26.3%</text>
+
+<!-- 43. 福井 25.9% => width = 314.6 -->
+<text x="115" y="479" text-anchor="end" font-size="12" fill="#1e293b">43 福井県</text>
+<rect x="120" y="466" width="315" height="19" fill="#3b82f6" rx="2" opacity="0.70"/>
+<text x="441" y="480" font-size="11" font-weight="bold" fill="#3b82f6">25.9%</text>
+
+<!-- 44. 長野 25.8% => width = 309.3 -->
+<text x="115" y="501" text-anchor="end" font-size="12" fill="#1e293b">44 長野県</text>
+<rect x="120" y="488" width="309" height="19" fill="#3b82f6" rx="2" opacity="0.67"/>
+<text x="435" y="502" font-size="11" font-weight="bold" fill="#3b82f6">25.8%</text>
+
+<!-- 45. 鳥取 25.5% => width = 293.3 -->
+<text x="115" y="523" text-anchor="end" font-size="12" fill="#1e293b">45 鳥取県</text>
+<rect x="120" y="510" width="293" height="19" fill="#3b82f6" rx="2" opacity="0.64"/>
+<text x="419" y="524" font-size="11" font-weight="bold" fill="#3b82f6">25.5%</text>
+
+<!-- 46. 茨城 25.4% => width = 288.0 -->
+<text x="115" y="545" text-anchor="end" font-size="12" fill="#1e293b">46 茨城県</text>
+<rect x="120" y="532" width="288" height="19" fill="#3b82f6" rx="2" opacity="0.61"/>
+<text x="414" y="546" font-size="11" font-weight="bold" fill="#3b82f6">25.4%</text>
+
+<!-- 47. 栃木 25.2% => width = 277.3 -->
+<text x="115" y="567" text-anchor="end" font-size="12" fill="#1e293b">47 栃木県</text>
+<rect x="120" y="554" width="277" height="19" fill="#3b82f6" rx="2" opacity="0.58"/>
+<text x="403" y="568" font-size="11" font-weight="bold" fill="#3b82f6">25.2%</text>
+
+<!-- Annotation: gap -->
+<rect x="675" y="57" width="115" height="36" fill="white" opacity="0.85" rx="4"/>
+<text x="732" y="73" text-anchor="middle" font-size="10" fill="#64748b">1位と47位の差</text>
+<text x="732" y="90" text-anchor="middle" font-size="16" font-weight="bold" fill="#475569">6.6pt</text>
+
+<!-- Footer -->
+<text x="400" y="598" text-anchor="middle" font-size="10" fill="#94a3b8">家計調査（2024年）二人以上の世帯 ── stats47.jp</text>
+</svg>

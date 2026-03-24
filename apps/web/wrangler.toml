@@ -1,0 +1,112 @@
+name = "stats47-dev"
+main = ".open-next/worker.js"
+compatibility_date = "2025-05-05"
+compatibility_flags = ["nodejs_compat_v2"]
+
+[dev]
+persist_to = "../../.local/d1"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[vars]
+NODE_ENV = "development"
+NEXT_PUBLIC_ENV = "development"
+
+# デフォルト設定（ローカル開発用）
+# Static DB (Local) - Drizzle マイグレーションでスキーマ管理
+[[d1_databases]]
+binding = "STATS47_STATIC_DB"
+database_name = "stats47_local_static"
+database_id = "6cea2d7a-87c2-408b-9de3-72b1bc240478" # Production Static ID (for remote preview)
+migrations_dir = "../../packages/database/drizzle"
+
+# デフォルトR2ストレージ（ローカル開発用）
+[[r2_buckets]]
+binding = "STATS47_BUCKET"
+bucket_name = "stats47"
+preview_bucket_name = "stats47"
+
+# OpenNext インクリメンタルキャッシュ用R2バケット（ローカル開発用）
+
+# OpenNext インクリメンタルキャッシュ用R2バケット（ローカル開発用）
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "stats47-cache"
+preview_bucket_name = "stats47-cache"
+
+# Observability設定（デフォルト）
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
+
+# ============================================
+# Production環境
+# ============================================
+[env.production]
+name = "stats47"
+
+[env.production.vars]
+NODE_ENV = "production"
+NEXT_PUBLIC_ENV = "production"
+# NextAuth用のシークレット（本番環境用に別途生成してください）
+# openssl rand -base64 32
+# AUTH_SECRET = "your-production-secret-here-minimum-32-characters"
+NEXTAUTH_URL = "https://stats47.jp"
+NEXT_PUBLIC_BASE_URL = "https://stats47.jp"
+NEXT_PUBLIC_ESTAT_APP_ID = "59eb12e8a25751dfc27f2e48fcdfa8600b86655e"
+R2_PUBLIC_URL = "https://storage.stats47.jp"
+NEXT_PUBLIC_R2_PUBLIC_URL = "https://storage.stats47.jp"
+# R2ストレージバケット名（機密情報ではないため、varsセクションに設定）
+CLOUDFLARE_R2_BUCKET_NAME = "stats47"
+# Google AdSense設定
+NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID = "ca-pub-7995274743017484"
+NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "true"
+# Amazon アソシエイト
+NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
+
+# Static DB (Production)
+[[env.production.d1_databases]]
+binding = "STATS47_STATIC_DB"
+database_name = "stats47_static"
+database_id = "6cea2d7a-87c2-408b-9de3-72b1bc240478"
+migrations_dir = "../../packages/database/drizzle"
+
+[[env.production.r2_buckets]]
+binding = "STATS47_BUCKET"
+bucket_name = "stats47"
+
+# OpenNext インクリメンタルキャッシュ用R2バケット
+
+# OpenNext インクリメンタルキャッシュ用R2バケット
+[[env.production.r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "stats47-cache"
+
+# Observability設定（Production）
+[env.production.observability]
+enabled = false
+head_sampling_rate = 1
+
+[env.production.observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[env.production.observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1

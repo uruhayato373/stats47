@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "lint": {},
+    "type-check": {},
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "pipeline:images": {
+      "dependsOn": ["^build"],
+      "inputs": [".local/r2/ranking/**/*.json"],
+      "outputs": [".local/r2/ranking/**/images/**", ".local/r2/ranking/**/reels/**"]
+    },
+    "pipeline:captions": {
+      "dependsOn": ["pipeline:images"],
+      "inputs": [".local/r2/ranking/**/*.json"],
+      "outputs": [".local/r2/ranking/**/reels/*.md"]
+    },
+    "pipeline:refine": {
+      "dependsOn": ["pipeline:captions"],
+      "inputs": [".local/r2/ranking/**/reels/*.md"],
+      "outputs": [".local/r2/ranking/**/reels/*.png"]
+    },
+    "pipeline:render": {
+      "dependsOn": ["pipeline:refine"],
+      "inputs": [".local/r2/ranking/**/reels/*.png"],
+      "outputs": [".local/r2/ranking/**/video/*.mp4"]
+    }
+  }
+}

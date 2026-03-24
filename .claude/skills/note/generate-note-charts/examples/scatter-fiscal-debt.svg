@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 540" width="600" height="540">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="600" height="540" fill="#fafafa"/>
+
+<!-- Title -->
+<text x="300" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">財政力指数 × 地方債現在高比率（2022年度）</text>
+
+<!-- Plot background -->
+<rect x="65" y="40" width="505" height="445" fill="white" stroke="#e2e8f0"/>
+
+<!-- Grid lines -->
+<line x1="121.1" y1="40" x2="121.1" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="177.2" y1="40" x2="177.2" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="233.3" y1="40" x2="233.3" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="289.4" y1="40" x2="289.4" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="345.6" y1="40" x2="345.6" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="401.7" y1="40" x2="401.7" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="457.8" y1="40" x2="457.8" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="513.9" y1="40" x2="513.9" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="65" y1="418.3" x2="570" y2="418.3" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="65" y1="307.0" x2="570" y2="307.0" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="65" y1="195.8" x2="570" y2="195.8" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="65" y1="84.5" x2="570" y2="84.5" stroke="#f1f5f9" stroke-width="1"/>
+
+<!-- X axis -->
+<text x="121.1" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.3</text>
+<text x="177.2" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.4</text>
+<text x="233.3" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.5</text>
+<text x="289.4" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.6</text>
+<text x="345.6" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.7</text>
+<text x="401.7" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.8</text>
+<text x="457.8" y="503" text-anchor="middle" font-size="11" fill="#64748b">0.9</text>
+<text x="513.9" y="503" text-anchor="middle" font-size="11" fill="#64748b">1.0</text>
+<text x="317.5" y="532" text-anchor="middle" font-size="12" fill="#475569">財政力指数 →高いほど「稼ぐ力」が強い</text>
+
+<!-- Y axis -->
+<text x="57" y="418.3" text-anchor="end" dominant-baseline="central" font-size="11" fill="#64748b">50%</text>
+<text x="57" y="307.0" text-anchor="end" dominant-baseline="central" font-size="11" fill="#64748b">100%</text>
+<text x="57" y="195.8" text-anchor="end" dominant-baseline="central" font-size="11" fill="#64748b">150%</text>
+<text x="57" y="84.5" text-anchor="end" dominant-baseline="central" font-size="11" fill="#64748b">200%</text>
+<text x="16" y="262.5" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#475569" transform="rotate(-90, 16, 262.5)">地方債現在高比率 →高いほど借金が重い</text>
+
+<!-- Zone labels -->
+<text x="77" y="58" font-size="11" fill="#fca5a5" opacity="0.7">二重苦</text>
+<text x="562" y="58" text-anchor="end" font-size="11" fill="#fdba74" opacity="0.7">投資型</text>
+<text x="562" y="477" text-anchor="end" font-size="11" fill="#93c5fd" opacity="0.7">優等生</text>
+
+<!-- Gray dots -->
+<circle cx="301.4" cy="166.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="300.8" cy="145.2" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="296.3" cy="167.9" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="288.9" cy="226.0" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="284.3" cy="228.9" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="279.5" cy="142.1" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="270.3" cy="138.6" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="267.5" cy="137.5" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="252.2" cy="174.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="248.5" cy="125.0" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="237.8" cy="159.3" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="235.0" cy="217.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="224.9" cy="109.2" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="207.2" cy="116.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="206.0" cy="163.5" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="193.5" cy="185.3" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="189.5" cy="216.7" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="182.6" cy="164.6" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="177.8" cy="194.9" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="175.6" cy="150.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="162.3" cy="179.5" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="161.2" cy="190.2" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="154.6" cy="160.6" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="151.2" cy="177.5" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="144.7" cy="260.7" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="144.1" cy="245.6" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="144.0" cy="259.4" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="142.8" cy="153.9" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="139.4" cy="176.2" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="131.1" cy="156.8" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="127.8" cy="200.4" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="104.5" cy="171.7" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+<circle cx="95.1" cy="180.0" r="3.5" fill="#cbd5e1" opacity="0.6"/>
+
+<!-- Highlighted dots and labels -->
+<circle cx="549.8" cy="436.9" r="5" fill="#3b82f6" opacity="0.85"/>
+<text x="541.8" y="426.9" text-anchor="end" font-size="10.5" font-weight="bold" fill="#3b82f6">東京</text>
+<circle cx="439.5" cy="165.0" r="5" fill="#f97316" opacity="0.85"/>
+<text x="447.5" y="157.0" text-anchor="start" font-size="10.5" font-weight="bold" fill="#f97316">愛知</text>
+<circle cx="426.9" cy="241.4" r="5" fill="#3b82f6" opacity="0.85"/>
+<text x="434.9" y="233.4" text-anchor="start" font-size="10.5" font-weight="bold" fill="#3b82f6">神奈川</text>
+<circle cx="370.8" cy="225.1" r="5" fill="#3b82f6" opacity="0.85"/>
+<text x="378.8" y="217.1" text-anchor="start" font-size="10.5" font-weight="bold" fill="#3b82f6">千葉</text>
+<circle cx="369.0" cy="247.6" r="5" fill="#3b82f6" opacity="0.85"/>
+<text x="377.0" y="252.6" text-anchor="start" font-size="10.5" font-weight="bold" fill="#3b82f6">大阪</text>
+<circle cx="367.3" cy="150.8" r="5" fill="#f97316" opacity="0.85"/>
+<text x="375.3" y="164.8" text-anchor="start" font-size="10.5" font-weight="bold" fill="#f97316">埼玉</text>
+<circle cx="332.4" cy="65.6" r="5" fill="#f97316" opacity="0.85"/>
+<text x="340.4" y="55.6" text-anchor="start" font-size="10.5" font-weight="bold" fill="#f97316">静岡</text>
+<circle cx="295.1" cy="267.6" r="5" fill="#8b5cf6" opacity="0.85"/>
+<text x="303.1" y="259.6" text-anchor="start" font-size="10.5" font-weight="bold" fill="#8b5cf6">栃木</text>
+<circle cx="240.9" cy="270.7" r="5" fill="#22c55e" opacity="0.85"/>
+<text x="232.9" y="262.7" text-anchor="end" font-size="10.5" font-weight="bold" fill="#22c55e">福島</text>
+<circle cx="206.0" cy="73.2" r="5" fill="#ef4444" opacity="0.85"/>
+<text x="198.0" y="65.2" text-anchor="end" font-size="10.5" font-weight="bold" fill="#ef4444">新潟</text>
+<circle cx="202.0" cy="109.2" r="5" fill="#ef4444" opacity="0.85"/>
+<text x="194.0" y="123.2" text-anchor="end" font-size="10.5" font-weight="bold" fill="#ef4444">北海道</text>
+<circle cx="154.6" cy="391.8" r="5" fill="#22c55e" opacity="0.85"/>
+<text x="162.6" y="396.8" text-anchor="start" font-size="10.5" font-weight="bold" fill="#22c55e">沖縄</text>
+<circle cx="126.4" cy="98.5" r="5" fill="#ef4444" opacity="0.85"/>
+<text x="134.4" y="103.5" text-anchor="start" font-size="10.5" font-weight="bold" fill="#ef4444">秋田</text>
+<circle cx="99.3" cy="119.0" r="5" fill="#ef4444" opacity="0.85"/>
+<text x="91.3" y="124.0" text-anchor="end" font-size="10.5" font-weight="bold" fill="#ef4444">高知</text>
+
+<!-- Legend -->
+<rect x="73" y="420" width="175" height="88" rx="4" fill="white" fill-opacity="0.85" stroke="#e2e8f0"/>
+<circle cx="85" cy="434" r="4" fill="#3b82f6"/>
+<text x="95" y="434" dominant-baseline="central" font-size="10" fill="#475569">優等生（稼げて借金少）</text>
+<circle cx="85" cy="450" r="4" fill="#f97316"/>
+<text x="95" y="450" dominant-baseline="central" font-size="10" fill="#475569">投資型（稼げるが借金多）</text>
+<circle cx="85" cy="466" r="4" fill="#ef4444"/>
+<text x="95" y="466" dominant-baseline="central" font-size="10" fill="#475569">二重苦（稼げず借金多）</text>
+<circle cx="85" cy="482" r="4" fill="#22c55e"/>
+<text x="95" y="482" dominant-baseline="central" font-size="10" fill="#475569">特異点（国の特別措置）</text>
+<circle cx="85" cy="498" r="4" fill="#8b5cf6"/>
+<text x="95" y="498" dominant-baseline="central" font-size="10" fill="#475569">バランス型</text>
+</svg>

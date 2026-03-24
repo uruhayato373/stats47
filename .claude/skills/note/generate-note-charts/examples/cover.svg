@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670" width="1280" height="670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#fafafa"/>
+
+<!-- Left side: text content -->
+<line x1="60" y1="120" x2="60" y2="170" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+
+<text x="80" y="148" font-size="16" fill="#475569" font-weight="500">47都道府県「稼ぐ力」と「借金」の比較</text>
+
+<text x="80" y="220" font-size="36" font-weight="bold" fill="#1e293b">財政力7位なのに</text>
+<text x="80" y="268" font-size="36" font-weight="bold" fill="#1e293b">借金1位？</text>
+
+<text x="80" y="330" font-size="22" fill="#334155" font-weight="500">財政力指数 × 地方債現在高比率</text>
+<text x="80" y="362" font-size="22" fill="#334155" font-weight="500">のギャップを可視化</text>
+
+<text x="80" y="420" font-size="16" fill="#64748b">静岡県の逆説：稼ぐ力は全国上位、</text>
+<text x="80" y="446" font-size="16" fill="#64748b">しかし借金は全国で最も多い。</text>
+<text x="80" y="472" font-size="16" fill="#64748b">3つの構造パターンで読み解く。</text>
+
+<!-- stats47 branding -->
+<text x="80" y="560" font-size="14" fill="#94a3b8">stats47.jp</text>
+
+<!-- Right side: mini scatter plot -->
+<rect x="550" y="50" width="690" height="570" rx="8" fill="white" fill-opacity="0.5"/>
+
+<!-- Axis labels -->
+<text x="890" y="622" text-anchor="middle" font-size="11" fill="#94a3b8">財政力指数 →</text>
+<text x="554" y="330" text-anchor="middle" font-size="11" fill="#94a3b8" transform="rotate(-90, 554, 330)">地方債比率 →</text>
+
+<!-- Grid -->
+<line x1="633.3" y1="60" x2="633.3" y2="600" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="780.0" y1="60" x2="780.0" y2="600" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="926.7" y1="60" x2="926.7" y2="600" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="1073.3" y1="60" x2="1073.3" y2="600" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="560" y1="519.0" x2="1220" y2="519.0" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="560" y1="384.0" x2="1220" y2="384.0" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="560" y1="249.0" x2="1220" y2="249.0" stroke="#f1f5f9" stroke-width="0.5"/>
+<line x1="560" y1="114.0" x2="1220" y2="114.0" stroke="#f1f5f9" stroke-width="0.5"/>
+
+<!-- Data points -->
+<circle cx="1193.6" cy="541.7" r="6" fill="#3b82f6" opacity="0.8"/>
+<text x="1187.6" y="533.7" text-anchor="end" font-size="12" font-weight="bold" fill="#3b82f6">東京</text>
+<circle cx="1049.4" cy="211.7" r="4" fill="#f97316" opacity="0.8"/>
+<circle cx="1033.0" cy="304.4" r="4" fill="#3b82f6" opacity="0.8"/>
+<circle cx="959.7" cy="284.6" r="4" fill="#3b82f6" opacity="0.8"/>
+<circle cx="957.4" cy="311.9" r="4" fill="#3b82f6" opacity="0.8"/>
+<circle cx="955.1" cy="194.5" r="4" fill="#f97316" opacity="0.8"/>
+<circle cx="909.5" cy="91.1" r="6" fill="#f97316" opacity="0.8"/>
+<text x="915.5" y="83.1" text-anchor="start" font-size="12" font-weight="bold" fill="#f97316">静岡</text>
+<circle cx="868.9" cy="213.9" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="868.2" cy="187.7" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="862.3" cy="215.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="860.7" cy="336.2" r="6" fill="#8b5cf6" opacity="0.8"/>
+<text x="866.7" y="330.2" text-anchor="start" font-size="12" font-weight="bold" fill="#8b5cf6">栃木</text>
+<circle cx="852.6" cy="285.7" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="846.6" cy="289.2" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="840.4" cy="183.9" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="828.4" cy="179.6" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="824.6" cy="178.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="804.6" cy="223.6" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="799.8" cy="163.1" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="789.8" cy="340.0" r="4" fill="#22c55e" opacity="0.8"/>
+<circle cx="785.9" cy="204.7" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="782.2" cy="275.7" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="769.0" cy="144.0" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="745.9" cy="153.1" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="744.3" cy="209.8" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="744.3" cy="100.2" r="6" fill="#ef4444" opacity="0.8"/>
+<text x="738.3" y="94.2" text-anchor="end" font-size="12" font-weight="bold" fill="#ef4444">新潟</text>
+<circle cx="739.1" cy="144.0" r="4" fill="#ef4444" opacity="0.8"/>
+<circle cx="727.9" cy="236.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="722.8" cy="274.4" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="713.7" cy="211.2" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="707.4" cy="247.9" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="704.5" cy="194.5" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="687.2" cy="229.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="685.7" cy="242.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="677.1" cy="206.3" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="677.1" cy="486.9" r="6" fill="#22c55e" opacity="0.8"/>
+<text x="683.1" y="490.9" text-anchor="start" font-size="12" font-weight="bold" fill="#22c55e">沖縄</text>
+<circle cx="672.7" cy="226.9" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="664.1" cy="327.8" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="663.3" cy="309.5" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="663.3" cy="326.2" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="661.7" cy="198.2" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="657.3" cy="225.2" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="646.3" cy="201.8" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="642.1" cy="254.7" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="640.2" cy="131.0" r="6" fill="#ef4444" opacity="0.8"/>
+<text x="646.2" y="135.0" text-anchor="start" font-size="12" font-weight="bold" fill="#ef4444">秋田</text>
+<circle cx="611.6" cy="219.8" r="4" fill="#94a3b8" opacity="0.4"/>
+<circle cx="604.8" cy="155.9" r="4" fill="#ef4444" opacity="0.8"/>
+<circle cx="599.4" cy="229.8" r="4" fill="#94a3b8" opacity="0.4"/>
+</svg>

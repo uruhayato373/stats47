@@ -1,0 +1,43 @@
+{
+  "rankingKey": "retail-stores-per",
+  "areaType": "city",
+  "rankingName": "小売店数",
+  "title": "小売店数",
+  "subtitle": null,
+  "annotation": "事業所・企業統計調査結果",
+  "demographicAttr": null,
+  "unit": "店",
+  "standardizedUnit": "人口千人当たり",
+  "isActive": true,
+  "isFeatured": true,
+  "featuredOrder": 0,
+  "latestYear": {
+    "yearCode": "2006",
+    "yearName": "2006年度"
+  },
+  "valueDisplay": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+    "displayUnit": null
+  },
+  "visualization": {
+    "colorScheme": "interpolateOranges",
+    "colorSchemeType": "sequential",
+    "minValueType": "zero",
+    "divergingMidpoint": "zero",
+    "isSymmetrized": false,
+    "isReversed": false
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "dataSourceId": "estat",
+  "sourceConfig": {
+    "statsDataId": "0000020308",
+    "cdCat01": "#H06101"
+  },
+  "source": {
+    "name": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  }
+}

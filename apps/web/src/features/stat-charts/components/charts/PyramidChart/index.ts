@@ -1,0 +1,1 @@
+export { PyramidChartDashboard } from "./PyramidChartDashboard";

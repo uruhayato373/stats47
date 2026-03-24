@@ -1,0 +1,49 @@
+{
+  "name": "remotion",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "remotion studio --port 3002",
+    "build": "remotion render",
+    "render": "remotion render src/index.ts RankingShort out/video.mp4",
+    "pipeline:ranking-thumbnails": "tsx scripts/pipeline/render-ranking-thumbnails.ts",
+    "pipeline:ranking-ogp": "tsx scripts/pipeline/render-ranking-ogp.ts",
+    "pipeline:all": "tsx scripts/pipeline/render-ranking-all.ts",
+    "pipeline:blog-ogp": "tsx scripts/pipeline/render-blog-ogp.ts",
+    "pipeline:blog-thumbnails": "tsx scripts/pipeline/render-blog-thumbnails.ts",
+    "pipeline:blog-assets": "tsx scripts/pipeline/render-blog-assets.ts",
+    "pipeline:sns": "tsx scripts/pipeline/render-sns-all.ts",
+    "pipeline:bar-chart-race": "tsx scripts/pipeline/render-bar-chart-race.ts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@stats47/area": "*",
+    "@stats47/mock": "*",
+    "@stats47/ranking": "*",
+    "@stats47/types": "*",
+    "@stats47/utils": "*",
+    "better-sqlite3": "^12.6.2",
+    "clsx": "^2.1.0",
+    "d3-geo": "^3.1.0",
+    "d3-scale": "^4.0.0",
+    "d3-scale-chromatic": "^3.1.0",
+    "dotenv": "^17.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.252",
+    "sharp": "^0.33.5",
+    "tailwind-merge": "^2.2.2",
+    "topojson-client": "^3.1.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.252",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/d3-geo": "^3.1.0",
+    "@types/d3-scale": "^4.0.0",
+    "@types/d3-scale-chromatic": "^3.1.0",
+    "@types/react": "^19.0.0",
+    "@types/topojson-client": "^3.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.3.3"
+  }
+}

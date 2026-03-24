@@ -1,0 +1,39 @@
+{
+  "name": "stats47-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "NODE_OPTIONS=\"--max-old-space-size=4096\" turbo run type-check",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "knip": "knip",
+    "knip:report": "knip --reporter json > knip-report-all.json",
+    "db:studio": "cd packages/database && cross-env DB_LOCAL=true npx drizzle-kit studio",
+    "r2:upload": "tsx packages/r2-storage/src/scripts/sync-upload.ts",
+    "r2:download": "tsx packages/r2-storage/src/scripts/sync-download.ts",
+    "r2:ges-portrait": "tsx packages/r2-storage/src/scripts/generate-portrait-videos.ts"
+  },
+  "devDependencies": {
+    "csv-parse": "^6.1.0",
+    "googleapis": "^171.4.0",
+    "knip": "^5.82.1",
+    "prettier": "^3.4.2",
+    "turbo": "^2.8.9"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "overrides": {
+    "next": "15.1.7",
+    "jsdom": "25.0.1",
+    "ajv": "^8.17.1"
+  },
+  "packageManager": "npm@10.8.2",
+  "dependencies": {
+    "d3": "^7.9.0",
+    "topojson-client": "^3.1.0",
+    "topojson-simplify": "^3.0.3"
+  }
+}

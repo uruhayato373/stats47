@@ -1,0 +1,197 @@
+name: 🔍 Pull Request Quality Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+# 同じPRの複数実行を防ぐ（最新のみ実行）
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  quality-check:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 全履歴取得（差分チェック用）
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📝 ESLint Check
+        run: npm run lint
+        continue-on-error: false # Lintエラーで失敗させる
+
+      - name: 📐 Type Check
+        run: npm run type-check
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        continue-on-error: false # 型エラーで失敗させる
+
+      - name: 🧪 Run Unit Tests with Coverage
+        run: npm run test:coverage -w apps/web
+        continue-on-error: false # テスト失敗で止める
+
+      - name: 📊 Upload coverage to artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: apps/web/coverage/
+          retention-days: 90
+
+      - name: 💬 Comment PR with coverage summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            try {
+              const coverageSummaryPath = path.join(process.cwd(), 'coverage', 'coverage-summary.json');
+              if (fs.existsSync(coverageSummaryPath)) {
+                const summary = JSON.parse(fs.readFileSync(coverageSummaryPath, 'utf8'));
+                const total = summary.total;
+                
+                // メトリクス計算
+                const lines = total.lines.pct.toFixed(2);
+                const statements = total.statements.pct.toFixed(2);
+                const functions = total.functions.pct.toFixed(2);
+                const branches = total.branches.pct.toFixed(2);
+                
+                // 閾値チェック用の絵文字とバッジ
+                const threshold = 100;
+                const getEmoji = (value) => value >= threshold ? '✅' : '⚠️';
+                const getBadge = (value) => {
+                  if (value >= 80) return '🟢';
+                  if (value >= 50) return '🟡';
+                  if (value >= threshold) return '🟠';
+                  return '🔴';
+                };
+                
+                // ファイル別のカバレッジ（上位10件、低カバレッジ優先）
+                const fileCoverage = Object.entries(summary)
+                  .filter(([key]) => key !== 'total')
+                  .map(([file, data]) => ({
+                    file: file.replace(process.cwd() + '/', '').replace(/^src\//, ''),
+                    lines: data.lines.pct,
+                    statements: data.statements.pct,
+                    functions: data.functions.pct,
+                    branches: data.branches.pct
+                  }))
+                  .sort((a, b) => a.lines - b.lines) // 低い順にソート
+                  .slice(0, 10);
+                
+                const lowCoverageFiles = fileCoverage.filter(f => f.lines < threshold);
+                const highCoverageFiles = fileCoverage.filter(f => f.lines >= threshold);
+                
+                let fileList = '';
+                if (lowCoverageFiles.length > 0) {
+                  fileList += '\n\n**⚠️ 低カバレッジファイル（改善推奨）:**\n';
+                  fileList += lowCoverageFiles.map(f => 
+                    `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
+                  ).join('\n');
+                }
+                if (highCoverageFiles.length > 0 && lowCoverageFiles.length < 10) {
+                  fileList += '\n\n**✅ 高カバレッジファイル（参考）:**\n';
+                  fileList += highCoverageFiles.slice(0, 5).map(f => 
+                    `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
+                  ).join('\n');
+                }
+                
+                const workflowUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+                
+                const comment = `## 📊 Test Coverage Report
+                
+                | Metric | Coverage | Status |
+                |--------|----------|--------|
+                | Lines | ${lines}% | ${getBadge(parseFloat(lines))} ${getEmoji(parseFloat(lines))} |
+                | Statements | ${statements}% | ${getBadge(parseFloat(statements))} ${getEmoji(parseFloat(statements))} |
+                | Functions | ${functions}% | ${getBadge(parseFloat(functions))} ${getEmoji(parseFloat(functions))} |
+                | Branches | ${branches}% | ${getBadge(parseFloat(branches))} ${getEmoji(parseFloat(branches))} |
+                
+                **Target:** ${threshold}% (100% Coverage Goal)
+                
+                📥 [Download full coverage report](${workflowUrl})${fileList}
+                
+                <details>
+                <summary>📋 Coverage Details</summary>
+                
+                Full HTML report is available in the workflow artifacts. Download the \`coverage-report\` artifact and open \`coverage/index.html\` in your browser.
+                
+                **How to view:**
+                1. Go to the [workflow run](${workflowUrl})
+                2. Download the \`coverage-report\` artifact
+                3. Extract and open \`coverage/index.html\` in your browser
+                </details>`;
+                
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            } catch (error) {
+              console.error('Failed to generate coverage comment:', error);
+            }
+
+      - name: 📈 Check coverage thresholds
+        run: |
+          node -e "
+            const fs = require('fs');
+            const summary = JSON.parse(fs.readFileSync('apps/web/coverage/coverage-summary.json', 'utf8'));
+            const total = summary.total;
+            const threshold = 100;
+            
+            const metrics = {
+              lines: total.lines.pct,
+              statements: total.statements.pct,
+              functions: total.functions.pct,
+              branches: total.branches.pct
+            };
+            
+            const failed = Object.entries(metrics).filter(([_, value]) => value < threshold);
+            
+            if (failed.length > 0) {
+              console.error('❌ Coverage thresholds not met:');
+              failed.forEach(([metric, value]) => {
+                console.error(\`  \${metric}: \${value.toFixed(2)}% < \${threshold}%\`);
+              });
+              process.exit(1);
+            } else {
+              console.log('✅ All coverage thresholds met!');
+              Object.entries(metrics).forEach(([metric, value]) => {
+                const status = value >= threshold ? '✅' : '⚠️';
+                console.log(\`  \${status} \${metric}: \${value.toFixed(2)}%\`);
+              });
+            }
+          "
+        continue-on-error: false # カバレッジ閾値100%を必須とする
+
+      - name: 🏗️ Build Check
+        run: npm run build -w apps/web
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_ENV: production
+          NEXT_PUBLIC_BASE_URL: https://stats47.jp
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        continue-on-error: false # ビルドエラーで失敗させる
+
+      - name: ✅ All Checks Passed
+        run: echo "✅ All quality checks passed!"

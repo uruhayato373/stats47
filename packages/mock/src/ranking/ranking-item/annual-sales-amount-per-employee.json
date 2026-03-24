@@ -1,0 +1,42 @@
+{
+  "rankingKey": "annual-sales-amount-per-employee",
+  "areaType": "prefecture",
+  "rankingName": "商業年間商品販売額（卸売業＋小売業）",
+  "title": "商業年間商品販売額",
+  "subtitle": null,
+  "demographicAttr": "卸売業＋小売業",
+  "unit": "万円",
+  "standardizedUnit": "従業者1人当たり",
+  "isActive": true,
+  "isFeatured": true,
+  "featuredOrder": 0,
+  "latestYear": {
+    "yearCode": "2021",
+    "yearName": "2021年度"
+  },
+  "valueDisplay": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+    "displayUnit": null
+  },
+  "visualization": {
+    "colorScheme": "interpolatePurples",
+    "colorSchemeType": "sequential",
+    "minValueType": "zero",
+    "divergingMidpoint": "mean",
+    "isSymmetrized": false,
+    "isReversed": false
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "dataSourceId": "estat",
+  "sourceConfig": {
+    "statsDataId": "0000010203",
+    "cdCat01": "#C04505"
+  },
+  "source": {
+    "name": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  }
+}

@@ -1,0 +1,82 @@
+# AIエージェントが不正なUTF-8としてパニックになるのを防ぐための設定
+# (PDFやバイナリ、自動生成ファイルを除外)
+
+# バイナリファイル
+*.pdf
+*.zip
+*.tar
+*.gz
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+*.bak
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.ico
+*.svg
+*.pem
+*.exe
+*.bin
+*.dll
+*.so
+*.dylib
+
+# データベース・ローカルストレージ・キャッシュ
+.local/
+.wrangler/
+.turbo/
+.next/
+.open-next/
+.reg/
+.vercel/
+.pnp/
+.pnp.*
+.obsidian/
+.cursor/
+.git-old/
+
+# 特定のディレクトリ（PDFなどが含まれる）
+docs/参考資料/
+/Users/minamidaisuke/stats47/docs/参考資料/
+
+# ビルド成果物・依存関係
+node_modules/
+dist/
+build/
+out/
+/out/
+/build/
+
+# ログファイル・レポート
+*.log
+*storybook.log
+knip-report.json
+playwright-report/
+test-results/
+coverage/
+**/coverage/
+.coverage-history
+
+# 一時ファイル
+.temp-sync/
+.temp-r2-sync/
+database/backups/
+database-backups_*.sql
+backup-*.sql
+local-r2/database-backups/
+tsc_output*.txt
+type_errors_summary.md
+inspect-knip.js
+
+# ストーリーブック
+storybook-static/
+/storybook-static/
+
+# その他、バイナリや巨大なデータが含まれそうな場所
+**/__debug__/output/
+**/__test_outputs__/
+apps/web/tests/visual/__screenshots__/

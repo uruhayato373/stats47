@@ -1,0 +1,2 @@
+# Pre-commitチェックスクリプトを実行
+bash apps/web/scripts/pre-commit-checks.sh

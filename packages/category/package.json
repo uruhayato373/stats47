@@ -1,0 +1,27 @@
+{
+  "name": "@stats47/category",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "private": true,
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "dependencies": {
+    "@stats47/area": "*",
+    "@stats47/database": "*",
+    "@stats47/logger": "*",
+    "@stats47/types": "*",
+    "drizzle-orm": "^0.45.1",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "server-only": "^0.0.1"
+  }
+}

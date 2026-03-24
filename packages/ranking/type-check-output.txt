@@ -1,0 +1,23 @@
+
+> @stats47/ranking@0.1.0 type-check
+> tsc --noEmit
+
+src/repositories/ranking-repository.ts(298,13): error TS2322: Type '{ areaType: any; areaCode: any; areaName: any; yearCode: string; yearName: any; categoryCode: any; categoryName: any; value: number; unit: any; rank: number | undefined; }[]' is not assignable to type 'RankingValue[]'.
+  Type '{ areaType: any; areaCode: any; areaName: any; yearCode: string; yearName: any; categoryCode: any; categoryName: any; value: number; unit: any; rank: number | undefined; }' is not assignable to type 'RankingValue'.
+    Types of property 'rank' are incompatible.
+      Type 'number | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+src/utils/__tests__/compute-bottom-ranking.test.ts(16,3): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; value: number; yearCode: string; yearName: string; categoryCode: string; categoryName: string; unit: string; }' but required in type 'RankingValue'.
+src/utils/__tests__/compute-rank-in-ranking-values.test.ts(16,3): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; value: number; yearCode: string; yearName: string; categoryCode: string; categoryName: string; unit: string; }' but required in type 'RankingValue'.
+src/utils/__tests__/compute-ranking-stats.test.ts(16,3): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; value: number; yearCode: string; yearName: string; categoryCode: string; categoryName: string; unit: string; }' but required in type 'RankingValue'.
+src/utils/__tests__/compute-sorted-rankings.test.ts(16,3): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; value: number; yearCode: string; yearName: string; categoryCode: string; categoryName: string; unit: string; }' but required in type 'RankingValue'.
+src/utils/__tests__/compute-top-rankings.test.ts(16,3): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; value: number; yearCode: string; yearName: string; categoryCode: string; categoryName: string; unit: string; }' but required in type 'RankingValue'.
+src/utils/__tests__/get-max-decimal-places-from-rankings.test.ts(6,66): error TS2741: Property 'rank' is missing in type '{ areaCode: string; areaName: string; yearCode: string; yearName: string; categoryCode: string; categoryName: string; value: number; unit: string; }' but required in type 'RankingValue'.
+src/utils/get-max-decimal-places-from-rankings.ts(2,37): error TS6305: Output file '/Users/minamidaisuke/stats47/packages/utils/dist/index.d.ts' has not been built from source file '/Users/minamidaisuke/stats47/packages/utils/src/index.ts'.
+npm error Lifecycle script `type-check` failed with error:
+npm error code 2
+npm error path /Users/minamidaisuke/stats47/packages/ranking
+npm error workspace @stats47/ranking@0.1.0
+npm error location /Users/minamidaisuke/stats47/packages/ranking
+npm error command failed
+npm error command sh -c tsc --noEmit

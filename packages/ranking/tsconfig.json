@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "paths": {
+        "@/*": ["./src/*"],
+        "@stats47/utils": ["../../packages/utils/src"],
+        "@stats47/utils/*": ["../../packages/utils/src/*"]
+    },
+    "skipLibCheck": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    { "path": "../utils" }
+  ]
+}

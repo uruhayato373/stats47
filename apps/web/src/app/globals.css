@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Modern Sophistication Theme (Indigo/Slate) ===== */
+@layer base {
+  :root {
+    /* 
+     * Core Colors - Indigo & Slate 
+     * Using HSL values for Tailwind opacity support 
+     */
+    --background: 210 40% 98%; /* Slate-50: #f8fafc */
+    --foreground: 222 47% 11%; /* Slate-900 */
+    
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* Primary: Indigo-600 */
+    --primary: 226 70% 55%; 
+    --primary-foreground: 210 40% 98%;
+    
+    /* Secondary: Slate-100 */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    
+    /* Muted: Slate-100 */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    /* Accent: Slate-100 */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 226 70% 55%; /* Indigo-600 */
+    
+    --radius: 0.75rem; /* rounded-xl */
+
+    /* Header height */
+    --header-height: 64px;
+
+    /* Footer height */
+    --footer-height: 80px;
+    
+    /* Safe Area Variables */
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 100%; /* White in light mode for cleaner look */
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 226 70% 55%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 226 70% 55%;
+
+    /* Chart colors - Vibrant yet sophisticated */
+    --chart-1: 226 70% 55%;  /* Indigo */
+    --chart-2: 173 58% 39%;  /* Teal */
+    --chart-3: 197 37% 24%;  /* Slate Blue */
+    --chart-4: 43 96% 64%;   /* Amber */
+    --chart-5: 25 95% 53%;   /* Orange */
+  }
+}
+
+/*
+ * Dark mode CSS variables
+ * PostCSS 8.5+ と Tailwind CSS v3 の @layer 処理の競合を回避するため、
+ * .dark ブロックは @layer base の外に配置する。
+ * @layer 外のルールは @layer 内より高優先度なので、dark 時に正しく上書きされる。
+ */
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+
+  --card: 217 33% 17%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 217 33% 17%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 226 70% 65%;
+  --primary-foreground: 222 47% 11%;
+
+  --secondary: 217 33% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217 33% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+
+  --accent: 217 33% 17.5%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217 33% 17.5%;
+  --input: 217 33% 17.5%;
+  --ring: 224.3 76.3% 48%;
+
+  --sidebar-background: 222 47% 11%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 226 70% 65%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 226 70% 65%;
+
+  --chart-1: 226 70% 65%;
+  --chart-2: 173 58% 49%;
+  --chart-3: 197 37% 34%;
+  --chart-4: 43 96% 74%;
+  --chart-5: 25 95% 63%;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    font-family: var(--font-inter), var(--font-noto-sans-jp), -apple-system,
+      BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo",
+      sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* カラープロファイルの明示的指定 */
+    color-scheme: light dark;
+  }
+
+  /* Prevent zoom on iOS inputs */
+  input, select, textarea {
+    font-size: max(16px, 1rem); 
+  }
+}
+
+/* ===== Blog Article Typography ===== */
+@layer components {
+  .blog-article {
+    @apply text-foreground leading-relaxed text-base;
+  }
+
+  .blog-article h2 {
+    @apply text-2xl font-bold mt-12 mb-6 py-3 border-y border-border scroll-mt-20 text-center;
+  }
+
+  .blog-article h3 {
+    @apply text-xl font-semibold mt-8 mb-4 scroll-mt-20;
+  }
+
+  .blog-article p {
+    @apply my-4 leading-7;
+  }
+
+  .blog-article ul,
+  .blog-article ol {
+    @apply my-4 pl-6;
+  }
+
+  .blog-article li {
+    @apply my-1 leading-7;
+  }
+
+  .blog-article ul > li {
+    @apply list-disc;
+  }
+
+  .blog-article ol > li {
+    @apply list-decimal;
+  }
+
+  .blog-article a {
+    @apply text-primary underline underline-offset-2 hover:opacity-80;
+  }
+
+  .blog-article strong {
+    @apply font-bold;
+  }
+
+  .blog-article blockquote {
+    @apply border-l-4 border-border pl-4 my-4 text-muted-foreground italic;
+  }
+
+  .blog-article hr {
+    @apply my-8 border-border;
+  }
+
+  .blog-article table {
+    @apply w-full my-4 text-sm;
+  }
+
+  .blog-article thead th {
+    @apply border-b border-border px-3 py-2 text-left font-semibold;
+  }
+
+  .blog-article tbody td {
+    @apply border-b border-border/50 px-3 py-2;
+  }
+
+  .blog-article code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .blog-article pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto my-4;
+  }
+
+  .blog-article pre code {
+    @apply bg-transparent p-0;
+  }
+}
+
+@layer utilities {
+  /* Safe Area Utilities */
+  .pb-safe {
+    padding-bottom: var(--safe-area-bottom);
+  }
+  .pt-safe {
+    padding-top: var(--safe-area-top);
+  }
+  .pl-safe {
+    padding-left: var(--safe-area-left);
+  }
+  .pr-safe {
+    padding-right: var(--safe-area-right);
+  }
+
+  /* Soft Shadows */
+  .shadow-soft-sm {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .shadow-soft-md {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  }
+  .shadow-soft-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  }
+  
+  /* Glassmorphism Utilities */
+  .glass {
+    @apply bg-background/80 backdrop-blur-md border-b border-border/50;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+  
+  /* Touch Feedback */
+  .touch-feedback {
+    @apply active:scale-[0.98] active:opacity-90 transition-transform duration-100;
+  }
+}

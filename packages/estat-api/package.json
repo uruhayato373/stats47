@@ -1,0 +1,38 @@
+{
+  "name": "@stats47/estat-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    },
+    "./server": {
+      "types": "./src/server.ts",
+      "import": "./src/server.ts",
+      "require": "./src/server.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "type-check": "NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --noEmit"
+  },
+  "dependencies": {
+    "@stats47/area": "*",
+    "@stats47/database": "*",
+    "@stats47/logger": "*",
+    "@stats47/r2-storage": "*",
+    "@stats47/types": "*",
+    "drizzle-orm": "^0.45.1"
+  },
+  "devDependencies": {
+    "@stats47/mock": "*",
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.8"
+  }
+}

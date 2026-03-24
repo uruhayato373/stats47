@@ -1,0 +1,53 @@
+{
+  "name": "@stats47/mock",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts",
+      "require": "./src/index.ts"
+    },
+    "./ranking": {
+      "import": "./src/ranking/index.ts",
+      "types": "./src/ranking/index.ts",
+      "require": "./src/ranking/index.ts"
+    },
+    "./geoshape": {
+      "import": "./src/geoshape/index.ts",
+      "types": "./src/geoshape/index.ts",
+      "require": "./src/geoshape/index.ts"
+    },
+    "./area": {
+      "import": "./src/area/index.ts",
+      "types": "./src/area/index.ts",
+      "require": "./src/area/index.ts"
+    },
+    "./category": {
+      "import": "./src/category/index.ts",
+      "types": "./src/category/index.ts",
+      "require": "./src/category/index.ts"
+    },
+    "./database": {
+      "import": "./src/database/index.ts",
+      "types": "./src/database/index.ts",
+      "require": "./src/database/index.ts"
+    },
+    "./estat-api": {
+      "import": "./src/estat-api/index.ts",
+      "types": "./src/estat-api/index.ts",
+      "require": "./src/estat-api/index.ts"
+    },
+    "./estat-api/*": {
+      "import": "./src/estat-api/*",
+      "require": "./src/estat-api/*"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

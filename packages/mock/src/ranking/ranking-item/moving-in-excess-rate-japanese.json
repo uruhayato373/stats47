@@ -1,0 +1,42 @@
+{
+  "rankingKey": "moving-in-excess-rate-japanese",
+  "areaType": "prefecture",
+  "rankingName": "転入超過率",
+  "title": "転入超過率",
+  "subtitle": "日本人移動者",
+  "demographicAttr": null,
+  "unit": "％",
+  "standardizedUnit": null,
+  "isActive": true,
+  "isFeatured": true,
+  "featuredOrder": 0,
+  "latestYear": {
+    "yearCode": "2023",
+    "yearName": "2023年度"
+  },
+  "valueDisplay": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+    "displayUnit": null
+  },
+  "visualization": {
+    "colorScheme": "interpolateRdBu",
+    "colorSchemeType": "diverging",
+    "minValueType": "zero",
+    "divergingMidpoint": "mean",
+    "isSymmetrized": false,
+    "isReversed": false
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "dataSourceId": "estat",
+  "sourceConfig": {
+    "statsDataId": "0000010201",
+    "cdCat01": "#A05301"
+  },
+  "source": {
+    "name": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  }
+}

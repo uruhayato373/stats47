@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite",
+        "--db-path",
+        "/Users/minamidaisuke/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic-ai/mcp-server-playwright"
+      ]
+    },
+    "mlit-dpf-mcp": {
+      "command": "/Users/minamidaisuke/mlit-dpf-mcp/.venv/bin/python",
+      "args": ["-m", "src.server"],
+      "cwd": "/Users/minamidaisuke/mlit-dpf-mcp",
+      "env": {
+        "MLIT_API_KEY": "A6m3-g1F1RAyau2jqRrjRiC6ehxo.Hrc",
+        "MLIT_BASE_URL": "https://www.mlit-data.jp/api/v1/",
+        "PYTHONUNBUFFERED": "1",
+        "LOG_LEVEL": "WARNING"
+      }
+    }
+  }
+}

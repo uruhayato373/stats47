@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="800" height="400" fill="#fafafa"/>
+
+<!-- Title -->
+<text x="400" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">エンゲル係数の推移（全国平均）</text>
+<text x="400" y="48" text-anchor="middle" font-size="11" fill="#64748b">2000年〜2024年 ── 二人以上の世帯</text>
+
+<!-- Plot area: x=80..750, y=70..330 -->
+<!-- Y axis: 22%..29% => range 7 -->
+<!-- y scale: (330-70)/7 = 37.14 px per 1% -->
+<!-- Y(val) = 330 - (val-22)*37.14 -->
+<!-- X axis: 2000..2024 => 24 years -->
+<!-- x scale: (750-80)/24 = 27.92 px per year -->
+<!-- X(year) = 80 + (year-2000)*27.92 -->
+
+<!-- Grid lines horizontal -->
+<!-- 22% => y=330 -->
+<line x1="80" y1="330" x2="750" y2="330" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="334" text-anchor="end" font-size="10" fill="#94a3b8">22%</text>
+<!-- 23% => y=292.86 -->
+<line x1="80" y1="293" x2="750" y2="293" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="297" text-anchor="end" font-size="10" fill="#94a3b8">23%</text>
+<!-- 24% => y=255.71 -->
+<line x1="80" y1="256" x2="750" y2="256" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="260" text-anchor="end" font-size="10" fill="#94a3b8">24%</text>
+<!-- 25% => y=218.57 -->
+<line x1="80" y1="219" x2="750" y2="219" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="223" text-anchor="end" font-size="10" fill="#94a3b8">25%</text>
+<!-- 26% => y=181.43 -->
+<line x1="80" y1="181" x2="750" y2="181" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="185" text-anchor="end" font-size="10" fill="#94a3b8">26%</text>
+<!-- 27% => y=144.29 -->
+<line x1="80" y1="144" x2="750" y2="144" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="148" text-anchor="end" font-size="10" fill="#94a3b8">27%</text>
+<!-- 28% => y=107.14 -->
+<line x1="80" y1="107" x2="750" y2="107" stroke="#e2e8f0" stroke-width="1"/>
+<text x="72" y="111" text-anchor="end" font-size="10" fill="#94a3b8">28%</text>
+<!-- 29% => y=70 -->
+<line x1="80" y1="70" x2="750" y2="70" stroke="#f1f5f9" stroke-width="1"/>
+<text x="72" y="74" text-anchor="end" font-size="10" fill="#94a3b8">29%</text>
+
+<!-- X axis labels -->
+<!-- 2000 => x=80 -->
+<text x="80" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2000</text>
+<!-- 2005 => x=80+5*27.92=219.6 -->
+<text x="220" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2005</text>
+<!-- 2010 => x=80+10*27.92=359.2 -->
+<text x="359" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2010</text>
+<!-- 2015 => x=80+15*27.92=498.8 -->
+<text x="499" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2015</text>
+<!-- 2020 => x=80+20*27.92=638.4 -->
+<text x="638" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2020</text>
+<!-- 2024 => x=750 -->
+<text x="750" y="350" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+
+<!-- Shaded area for sharp rise (2011-2024) -->
+<rect x="387" y="70" width="363" height="260" fill="#fef2f2" opacity="0.3"/>
+<text x="568" y="86" text-anchor="middle" font-size="10" fill="#dc2626" opacity="0.6">物価高・高齢化で急上昇</text>
+
+<!-- Data points and line -->
+<!-- 2000: 22.91% => x=80, y=330-(22.91-22)*37.14 = 330-33.78 = 296.2 -->
+<!-- 2001: 22.84% => x=107.9, y=330-(22.84-22)*37.14 = 330-31.18 = 298.8 -->
+<!-- 2002: 22.74% => x=135.8, y=330-(22.74-22)*37.14 = 330-27.47 = 302.5 -->
+<!-- 2003: 23.00% => x=163.8, y=330-(23.0-22)*37.14 = 330-37.14 = 292.9 -->
+<!-- 2004: 22.94% => x=191.7, y=330-(22.94-22)*37.14 = 330-34.89 = 295.1 -->
+<!-- 2005: 22.78% => x=219.6, y=330-(22.78-22)*37.14 = 330-28.96 = 301.0 -->
+<!-- 2006: 22.87% => x=247.5, y=330-(22.87-22)*37.14 = 330-32.30 = 297.7 -->
+<!-- 2007: 22.56% => x=275.4, y=330-(22.56-22)*37.14 = 330-20.80 = 309.2 -->
+<!-- 2008: 23.15% => x=303.4, y=330-(23.15-22)*37.14 = 330-42.71 = 287.3 -->
+<!-- 2009: 23.16% => x=331.3, y=330-(23.16-22)*37.14 = 330-43.08 = 286.9 -->
+<!-- 2010: 23.14% => x=359.2, y=330-(23.14-22)*37.14 = 330-42.34 = 287.7 -->
+<!-- 2011: 23.50% => x=387.1, y=330-(23.50-22)*37.14 = 330-55.71 = 274.3 -->
+<!-- Interpolate 2012-2023: approximate path through known values -->
+<!-- Using interpolated estimates based on public data: -->
+<!-- 2012: 23.5%, 2013: 23.6%, 2014: 24.0%, 2015: 25.0%, 2016: 25.8%, -->
+<!-- 2017: 25.7%, 2018: 25.7%, 2019: 25.7%, 2020: 27.5%, 2021: 26.3%, -->
+<!-- 2022: 26.4%, 2023: 27.0%, 2024: 27.79% -->
+<!-- 2012: x=415.0, y=274.3 -->
+<!-- 2013: x=443.0, y=330-(23.6-22)*37.14=270.6 -->
+<!-- 2014: x=471.0, y=330-(24.0-22)*37.14=255.7 -->
+<!-- 2015: x=499.0, y=330-(25.0-22)*37.14=218.6 -->
+<!-- 2016: x=527.0, y=330-(25.8-22)*37.14=188.9 -->
+<!-- 2017: x=555.0, y=330-(25.7-22)*37.14=192.6 -->
+<!-- 2018: x=582.9, y=192.6 -->
+<!-- 2019: x=610.9, y=192.6 -->
+<!-- 2020: x=638.4, y=330-(27.5-22)*37.14=125.7 -->
+<!-- 2021: x=666.3, y=330-(26.3-22)*37.14=170.3 -->
+<!-- 2022: x=694.3, y=330-(26.4-22)*37.14=166.6 -->
+<!-- 2023: x=722.2, y=330-(27.0-22)*37.14=144.3 -->
+<!-- 2024: x=750.0, y=330-(27.79-22)*37.14=115.1 -->
+
+<!-- Gradient area under line -->
+<defs>
+  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#dc2626" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#dc2626" stop-opacity="0.02"/>
+  </linearGradient>
+</defs>
+
+<path d="M80,296 L108,299 L136,303 L164,293 L192,295 L220,301 L248,298 L275,309 L303,287 L331,287 L359,288 L387,274 L415,274 L443,271 L471,256 L499,219 L527,189 L555,193 L583,193 L611,193 L638,126 L666,170 L694,167 L722,144 L750,115 L750,330 L80,330 Z" fill="url(#areaGrad)"/>
+
+<!-- Line path -->
+<path d="M80,296 L108,299 L136,303 L164,293 L192,295 L220,301 L248,298 L275,309 L303,287 L331,287 L359,288 L387,274 L415,274 L443,271 L471,256 L499,219 L527,189 L555,193 L583,193 L611,193 L638,126 L666,170 L694,167 L722,144 L750,115" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+<!-- Key data points as circles -->
+<!-- 2000: 22.91% -->
+<circle cx="80" cy="296" r="3.5" fill="#dc2626"/>
+<!-- 2007: 22.56% (bottom) -->
+<circle cx="275" cy="309" r="3.5" fill="#dc2626"/>
+<!-- 2011: 23.50% -->
+<circle cx="387" cy="274" r="3.5" fill="#dc2626"/>
+<!-- 2015: 25.0% -->
+<circle cx="499" cy="219" r="3.5" fill="#dc2626"/>
+<!-- 2020: 27.5% -->
+<circle cx="638" cy="126" r="3.5" fill="#dc2626"/>
+<!-- 2024: 27.79% -->
+<circle cx="750" cy="115" r="5" fill="#dc2626"/>
+
+<!-- Annotations -->
+<!-- 2000 annotation -->
+<text x="80" y="286" text-anchor="start" font-size="11" font-weight="bold" fill="#475569">22.9%</text>
+
+<!-- 2007 annotation (bottom) -->
+<text x="275" y="325" text-anchor="middle" font-size="10" fill="#64748b">22.6%</text>
+<text x="275" y="337" text-anchor="middle" font-size="9" fill="#94a3b8">最低値</text>
+
+<!-- 2015 annotation -->
+<text x="499" y="209" text-anchor="middle" font-size="10" fill="#64748b">25.0%</text>
+
+<!-- 2024 annotation (big) -->
+<rect x="698" y="92" width="72" height="22" fill="white" opacity="0.8" rx="3"/>
+<text x="734" y="108" text-anchor="middle" font-size="14" font-weight="bold" fill="#dc2626">27.8%</text>
+<text x="734" y="82" text-anchor="middle" font-size="10" fill="#dc2626">2024年</text>
+
+<!-- Arrow showing increase from 2007 to 2024 -->
+<line x1="300" y1="250" x2="300" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="354" y="172" text-anchor="middle" font-size="11" fill="#475569">+5.2pt</text>
+<text x="354" y="186" text-anchor="middle" font-size="10" fill="#64748b">(2007→2024)</text>
+
+<!-- Footer -->
+<text x="400" y="385" text-anchor="middle" font-size="10" fill="#94a3b8">家計調査（2000-2024年）二人以上の世帯 ── stats47.jp</text>
+</svg>

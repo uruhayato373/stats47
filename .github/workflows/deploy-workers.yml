@@ -1,0 +1,213 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: 🔐 Verify Cloudflare authentication
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          echo "🔍 Verifying Cloudflare authentication..."
+
+          # 環境変数の存在確認
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "❌ エラー: CLOUDFLARE_API_TOKEN が設定されていません"
+            echo "📝 解決方法: GitHub リポジトリの Settings > Secrets and variables > Actions で CLOUDFLARE_API_TOKEN を設定してください"
+            exit 1
+          fi
+
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "❌ エラー: CLOUDFLARE_ACCOUNT_ID が設定されていません"
+            echo "📝 解決方法: GitHub リポジトリの Settings > Secrets and variables > Actions で CLOUDFLARE_ACCOUNT_ID を設定してください"
+            exit 1
+          fi
+
+          # APIトークンの形式確認（Bearerトークンの場合は先頭が異なる）
+          if [[ "$CLOUDFLARE_API_TOKEN" =~ ^[a-zA-Z0-9_-]{40}$ ]]; then
+            echo "✅ APIトークンの形式は正しいようです（40文字の英数字）"
+          else
+            echo "⚠️  警告: APIトークンの形式が期待と異なります（通常は40文字の英数字、ハイフン、アンダースコア）"
+          fi
+
+          # Account IDの形式確認
+          if [[ "$CLOUDFLARE_ACCOUNT_ID" =~ ^[a-f0-9]{32}$ ]]; then
+            echo "✅ Account IDの形式は正しいようです（32文字の16進数）"
+          else
+            echo "⚠️  警告: Account IDの形式が期待と異なります（通常は32文字の16進数）"
+          fi
+
+          # Wranglerで認証をテスト
+          echo "🧪 Testing authentication with Wrangler..."
+          # set -e によりコマンド失敗時に即終了するのを防ぐため || true を追加
+          # CLOUDFLARE_API_TOKEN は環境変数から自動的に読み込まれるため、引数での指定は不要（かつエラーになる）
+          WRANGLER_OUTPUT=$(npx wrangler whoami 2>&1 || true)
+          echo "$WRANGLER_OUTPUT"
+
+          if echo "$WRANGLER_OUTPUT" | grep -q "You are logged in"; then
+            echo "✅ 認証成功: Cloudflare APIトークンは有効です"
+          else
+            echo "❌ 認証失敗: Cloudflare APIトークンが無効または権限が不足しています"
+            echo "👇 Wrangler Output:"
+            echo "$WRANGLER_OUTPUT"
+            echo "📝 解決方法:"
+            echo "   1. Cloudflare Dashboard > My Profile > API Tokens で新しいトークンを作成"
+            echo "   2. 以下の権限を設定:"
+            echo "      - Account - Workers Scripts - Read"
+            echo "      - Account - Workers Scripts - Edit"
+            echo "      - Account - Account - Read"
+            echo "      - Account - D1 - Edit"
+            echo "      - Account - R2 - Edit"
+            echo "   3. GitHub Secrets で CLOUDFLARE_API_TOKEN を更新"
+            exit 1
+          fi
+
+          echo "✅ 認証確認完了"
+
+      - name: Build
+        working-directory: apps/web
+        env:
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+          NEXT_PUBLIC_ENV: "production"
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL_PRODUCTION }}
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID: "ca-pub-7995274743017484"
+          NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED: "true"
+          NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG: "stats47-22"
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        run: npm run workers:build
+
+      - name: Verify OpenNext build
+        working-directory: apps/web
+        run: |
+          echo "Checking OpenNext build output..."
+
+          # 必須ファイルの存在確認
+          REQUIRED_FILES=(
+            ".open-next/worker.js"
+            ".open-next/server-functions/default/handler.mjs"
+            ".open-next/assets"
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -e "$file" ]; then
+              echo "Error: Required file/directory not found: $file"
+              exit 1
+            fi
+          done
+
+          # wrangler.toml設定の確認
+          if ! grep -q 'main = ".open-next/worker.js"' wrangler.toml; then
+            echo "Error: main entry point not configured correctly in wrangler.toml"
+            exit 1
+          fi
+
+          if ! grep -q "nodejs_compat_v2" wrangler.toml; then
+            echo "Warning: nodejs_compat_v2 flag not found in wrangler.toml. require() calls will fail at runtime."
+          fi
+
+          # ビルドサイズの確認（警告のみ）
+          if [ -f ".open-next/worker.js" ]; then
+            WORKER_SIZE=$(stat -c%s ".open-next/worker.js" 2>/dev/null || stat -f%z ".open-next/worker.js" 2>/dev/null || echo "0")
+            echo "Worker size: $WORKER_SIZE bytes"
+            
+            if [ "$WORKER_SIZE" -gt 10485760 ]; then
+              echo "Warning: Worker bundle is large (>10MB). This may cause deployment issues."
+            fi
+          fi
+
+          echo "✅ Build verification passed"
+
+      - name: 🔐 Set Secrets for Production
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          echo "🔐 Setting secrets for production environment..."
+
+          # シークレット設定用のヘルパー関数
+          set_secret() {
+            local secret_name=$1
+            local secret_value=$2
+            
+            if [ -z "$secret_value" ]; then
+              echo "⚠️  Warning: $secret_name not found in GitHub Secrets"
+              return 0
+            fi
+            
+            # 一時的にエラーで停止しないように設定
+            set +e
+            echo "$secret_value" | npx wrangler secret put "$secret_name" --env production 2>&1 | tee /tmp/wrangler_output.log
+            local exit_code=$?
+            set -e
+            
+            # エラーコード10053（Binding name already in use）の場合は警告を出して続行
+            if [ $exit_code -ne 0 ]; then
+              if grep -q "code: 10053" /tmp/wrangler_output.log || grep -q "already in use" /tmp/wrangler_output.log; then
+                echo "⚠️  Warning: $secret_name is already set as a secret or variable. Skipping..."
+                return 0
+              else
+                echo "❌ Error: Failed to set $secret_name"
+                cat /tmp/wrangler_output.log
+                return $exit_code
+              fi
+            else
+              echo "✅ $secret_name set for production"
+            fi
+          }
+
+          # AUTH_SECRETを設定（GitHub Secretsから取得）
+          set_secret "AUTH_SECRET" "$AUTH_SECRET"
+
+          # CLOUDFLARE_ACCOUNT_IDを設定（R2ストレージアクセス用）
+          set_secret "CLOUDFLARE_ACCOUNT_ID" "$CLOUDFLARE_ACCOUNT_ID"
+
+          # CLOUDFLARE_API_TOKENを設定（R2ストレージアクセス用）
+          set_secret "CLOUDFLARE_API_TOKEN" "$CLOUDFLARE_API_TOKEN"
+
+          # R2ストレージ認証情報を設定
+          set_secret "CLOUDFLARE_R2_ACCESS_KEY_ID" "$CLOUDFLARE_R2_ACCESS_KEY_ID"
+          set_secret "CLOUDFLARE_R2_SECRET_ACCESS_KEY" "$CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+
+          echo "✅ Secrets configuration completed for production"
+
+      - name: Deploy to Production
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: apps/web
+          command: deploy --env production
+
+      - name: Purge ISR cache (Production)
+        continue-on-error: true
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts

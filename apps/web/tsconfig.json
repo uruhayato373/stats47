@@ -1,0 +1,140 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    "tsBuildInfoFile": ".next/cache/tsconfig.tsbuildinfo",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["node", "react", "react-dom"],
+    "typeRoots": [
+      "../../node_modules/@types",
+      "./node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@scripts/*": [
+        "./scripts/*"
+      ],
+      "@mock/*": [
+        "../../packages/mock/src/*"
+      ],
+      "@stats47/components/*": [
+        "../../packages/components/src/*"
+      ],
+      "@stats47/logger": [
+        "../../packages/logger/src"
+      ],
+      "@stats47/logger/*": [
+        "../../packages/logger/src/*"
+      ],
+      "@stats47/r2-storage": [
+        "../../packages/r2-storage/src"
+      ],
+      "@stats47/r2-storage/*": [
+        "../../packages/r2-storage/src/*"
+      ],
+      "@stats47/estat-api": [
+        "../../packages/estat-api/src"
+      ],
+      "@stats47/estat-api/*": [
+        "../../packages/estat-api/src/*"
+      ],
+      "@stats47/types": [
+        "../../packages/types/src"
+      ],
+      "@stats47/types/*": [
+        "../../packages/types/src/*"
+      ],
+      "@stats47/category": [
+        "../../packages/category/src"
+      ],
+      "@stats47/category/*": [
+        "../../packages/category/src/*"
+      ],
+      "@stats47/ranking": [
+        "../../packages/ranking/src"
+      ],
+      "@stats47/ranking/*": [
+        "../../packages/ranking/src/*"
+      ],
+      "@stats47/database": [
+        "../../packages/database/src"
+      ],
+      "@stats47/database/*": [
+        "../../packages/database/src/*"
+      ],
+      "@stats47/blog": [
+        "../../packages/blog/src"
+      ],
+      "@stats47/blog/*": [
+        "../../packages/blog/src/*"
+      ],
+      "@stats47/visualization": [
+        "../../packages/visualization/src"
+      ],
+      "@stats47/visualization/*": [
+        "../../packages/visualization/src/*"
+      ],
+      "@stats47/utils": [
+        "../../packages/utils/src"
+      ],
+      "@stats47/utils/*": [
+        "../../packages/utils/src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/dev/types/**/*.ts",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "src/types/vitest.d.ts",
+    "src/types/jsdom.d.ts",
+    "./.next/types/**/*.ts",
+    "../../index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "scripts/**/*",
+    "src/features/correlation-analysis/actions/resumeBatch.ts",
+    "src/features/correlation-analysis/actions/retryFailedBatch.ts",
+    "src/features/database/components/DatabaseInfoTable.tsx",
+    "src/features/estat-api/ranking-mappings/components/RankingMappingsActionsModal.tsx",
+    "sample",
+    "**/__debug__",
+    "**/__mocks__",
+
+    ".local",
+    "local-r2",
+    "../../docs/docs",
+    "playwright.config.ts",
+    "tests/visual",
+    "database",
+  ]
+}

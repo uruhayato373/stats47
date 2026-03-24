@@ -1,0 +1,1 @@
+export { CompositionChartDashboard } from "./CompositionChart";

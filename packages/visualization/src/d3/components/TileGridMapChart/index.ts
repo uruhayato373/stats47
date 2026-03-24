@@ -1,0 +1,1 @@
+export { TileGridMap } from "./TileGridMapChart";

@@ -1,0 +1,148 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.*
+
+# testing
+/coverage
+**/coverage/
+.coverage-history
+
+# next.js
+**/.next/
+/out/
+
+# OpenNext
+.open-next/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+*.bak
+
+# knip
+knip-report.json
+
+# reports
+/reports
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+scripts/*.log
+
+# npm 統一のため、他パッケージマネージャーのロックファイルは無視
+yarn.lock
+pnpm-lock.yaml
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# Google service account keys
+stats47-*.json
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+*storybook.log
+storybook-static
+
+# Debug output files
+**/__debug__/output/**/*.json
+
+# Obsidian workspace files
+docs/.obsidian
+.obsidian/
+
+# Wrangler local state
+.wrangler
+
+# Database sync temporary files
+.temp-sync/
+
+# R2 sync temporary files
+.temp-r2-sync/
+
+# Database backups
+database/backups/
+database-backups_*.sql
+backup-*.sql
+d1-export*.sql
+local-r2/database-backups/
+
+# Windows reserved names
+NUL
+
+# Test images
+local-r2/test-images/
+
+# Temporary test scripts
+test-*.ts
+test-*.js
+
+# Turborepo cache
+.turbo
+
+# Large mock data (keep locally, not in git)
+packages/mock/src/estat-api/stats-data/*.json
+
+# Test output files (development only)
+apps/web/src/features/estat-api/stats-data/__test_outputs__/
+apps/web/src/features/gis/geoshape/adapters/__test_outputs__/
+
+# Playwrightレポート
+playwright-report/
+playwright-report-visual/
+playwright-smoke-report/
+test-results/
+
+# reg-suit
+.reg/
+apps/web/.reg/
+
+# スナップショット差分（コミット不要）
+apps/web/tests/visual/__screenshots__/**/*-diff.png
+apps/web/tests/visual/__screenshots__/**/*-actual.png
+**/__golden__/*-actual.png
+**/__golden__/*-diff.png
+
+# ベースライン画像はコミットする
+!apps/web/tests/visual/__screenshots__/**/*.png
+
+# Note記事の画像（原稿段階はgit管理。公開後にR2へ移動しgitから削除）
+# docs/31_note記事原稿/*/images/
+
+# Remotion render output
+apps/remotion/out/
+
+# Local development data
+.local/
+
+
+
+# ルートの一時ファイル
+tmp_*
+tmp-*
+tsc_output*.txt
+type_errors_summary.md
+inspect-knip.js
+
+.git-old/
+.cursor/
+.cursorrules
+.cursorignore

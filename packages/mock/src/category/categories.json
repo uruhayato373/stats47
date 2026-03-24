@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "exportedAt": "2026-01-24T05:20:35.431Z",
+  "categories": [
+    {
+      "categoryKey": "landweather",
+      "categoryName": "国土・気象",
+      "icon": "MapPin",
+      "displayOrder": 0
+    },
+    {
+      "categoryKey": "population",
+      "categoryName": "人口・世帯",
+      "icon": "Users",
+      "displayOrder": 1
+    },
+    {
+      "categoryKey": "laborwage",
+      "categoryName": "労働・賃金",
+      "icon": "TrendingUp",
+      "displayOrder": 2
+    },
+    {
+      "categoryKey": "agriculture",
+      "categoryName": "農林水産業",
+      "icon": "Sprout",
+      "displayOrder": 3
+    },
+    {
+      "categoryKey": "miningindustry",
+      "categoryName": "鉱工業",
+      "icon": "Factory",
+      "displayOrder": 4
+    },
+    {
+      "categoryKey": "commercial",
+      "categoryName": "商業・サービス業",
+      "icon": "Store",
+      "displayOrder": 5
+    },
+    {
+      "categoryKey": "economy",
+      "categoryName": "企業・家計・経済",
+      "icon": "PieChart",
+      "displayOrder": 6
+    },
+    {
+      "categoryKey": "construction",
+      "categoryName": "住宅・土地・建設",
+      "icon": "Home",
+      "displayOrder": 7
+    },
+    {
+      "categoryKey": "energy",
+      "categoryName": "エネルギー・水",
+      "icon": "Droplets",
+      "displayOrder": 8
+    },
+    {
+      "categoryKey": "tourism",
+      "categoryName": "運輸・観光",
+      "icon": "Plane",
+      "displayOrder": 9
+    },
+    {
+      "categoryKey": "educationsports",
+      "categoryName": "教育・文化・スポーツ",
+      "icon": "GraduationCap",
+      "displayOrder": 10
+    },
+    {
+      "categoryKey": "administrativefinancial",
+      "categoryName": "行財政",
+      "icon": "Building2",
+      "displayOrder": 11
+    },
+    {
+      "categoryKey": "safetyenvironment",
+      "categoryName": "司法・安全・環境",
+      "icon": "ShieldCheck",
+      "displayOrder": 12
+    },
+    {
+      "categoryKey": "socialsecurity",
+      "categoryName": "社会保障・衛生",
+      "icon": "Hospital",
+      "displayOrder": 13
+    },
+    {
+      "categoryKey": "international",
+      "categoryName": "国際",
+      "icon": "Globe",
+      "displayOrder": 14
+    },
+    {
+      "categoryKey": "infrastructure",
+      "categoryName": "社会基盤施設",
+      "icon": "Construction",
+      "displayOrder": 15
+    },
+    {
+      "categoryKey": "ict",
+      "categoryName": "情報通信・科学技術",
+      "icon": "Wifi",
+      "displayOrder": 16
+    }
+  ]
+}

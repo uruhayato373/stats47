@@ -1,0 +1,263 @@
+import Link from "next/link";
+import { Metadata } from "next";
+
+import { isOk } from "@stats47/types";
+import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { eq, countDistinct } from "drizzle-orm";
+import { BarChart3, Map as MapIcon, GitCompareArrows } from "lucide-react";
+
+import { FeaturedRankings } from "@/features/ranking/server";
+import { HeroSearch } from "@/features/search";
+import { listCategories } from "@/features/category/server";
+import { CategoryGrid } from "@/features/category";
+import { listLatestArticles } from "@/features/blog/server";
+import { ScrollReveal } from "@/components/atoms/ScrollReveal";
+import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.example.com";
+
+  const title = "統計で見る都道府県 | 47都道府県ランキング・データ比較";
+  const description =
+    "あなたの県は何位？年収・人口・消費量から教育・医療まで、1,800以上の統計で47都道府県をランキング。地図やグラフで地域の特徴をわかりやすく可視化します。";
+
+  return {
+    title,
+    description,
+    keywords: [
+      "統計",
+      "都道府県",
+      "ランキング",
+      "地域の特徴",
+      "データ可視化",
+      "人口統計",
+      "経済統計",
+      "政府統計",
+      "e-Stat",
+      "日本",
+      "47都道府県",
+    ],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: baseUrl,
+      siteName: "Stats47",
+      images: [
+        {
+          url: `${baseUrl}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "統計で見る都道府県 - 47都道府県ランキング",
+        },
+      ],
+      locale: "ja_JP",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${baseUrl}/og-image.jpg`],
+    },
+    alternates: {
+      canonical: "/",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
+
+/** カテゴリ + ランキング件数を取得（1クエリで集計） */
+async function getCategoriesWithCounts() {
+  try {
+    const catResult = await listCategories();
+    if (!isOk(catResult)) return [];
+    const categories = catResult.data;
+
+    const db = getDrizzle();
+    const counts = await db
+      .select({
+        categoryKey: rankingItems.categoryKey,
+        count: countDistinct(rankingItems.rankingKey),
+      })
+      .from(rankingItems)
+      .where(eq(rankingItems.isActive, true))
+      .groupBy(rankingItems.categoryKey);
+
+    const countMap = new Map(counts.map((c) => [c.categoryKey, c.count] as [string, number]));
+
+    return categories
+      .map((cat) => ({ ...cat, itemCount: countMap.get(cat.categoryKey) ?? 0 }))
+      .filter((c) => c.itemCount > 0);
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const [categories, latestArticles] = await Promise.all([
+    getCategoriesWithCounts(),
+    listLatestArticles(3).catch(() => []),
+  ]);
+
+  return (
+    <div className="w-full" suppressHydrationWarning>
+      {/* ① Hero Section */}
+      <section className="relative py-16 overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-80 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:opacity-100" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-100/30 to-transparent skew-x-12 dark:from-blue-900/10" />
+
+        <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
+          <p className="text-sm md:text-base text-primary font-medium mb-3 tracking-wide">
+            探すのに半日、加工にもう半日。そんな時代を終わらせたくて、元県庁職員がつくりました。
+          </p>
+          <h1 className="text-2xl font-bold mb-5">
+            あなたの県は<span className="text-primary relative inline-block">
+              何位？
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z" fill="currentColor" />
+              </svg>
+            </span>
+          </h1>
+          <p className="text-base md:text-lg text-muted-foreground mb-2 max-w-2xl mx-auto leading-relaxed">
+            年収、人口、焼肉消費量まで——
+          </p>
+          <p className="text-2xl md:text-3xl font-bold text-primary mb-2">
+            1,800以上の統計
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            で47都道府県をランキング。知って楽しい、調べて発見。統計データを「自分ごと」に。
+          </p>
+          <HeroSearch />
+        </div>
+      </section>
+
+      {/* ② 注目のランキング */}
+      <ScrollReveal>
+        <FeaturedRankings limit={8} />
+      </ScrollReveal>
+
+      {/* ③ カテゴリから探す */}
+      {categories.length > 0 && (
+        <ScrollReveal>
+          <section className="py-14 px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold">カテゴリから探す</h2>
+                <Link href="/ranking" className="text-sm text-primary hover:underline font-medium">
+                  ランキング一覧 &rarr;
+                </Link>
+              </div>
+              <CategoryGrid categories={categories} />
+            </div>
+          </section>
+        </ScrollReveal>
+      )}
+
+      {/* ④ 3つの切り口でデータを探す（旧「できること」） */}
+      <ScrollReveal>
+        <section className="py-14 px-4 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-10">3つの切り口でデータを探す</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <ScrollReveal delay={0}>
+                <Link href="/ranking" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
+                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
+                    <BarChart3 className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-semibold mb-2">1,800以上のランキング</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    年収・人口・消費量から教育・医療・環境まで。身近な雑学から社会課題まで、幅広い統計をランキングで楽しめます。
+                  </p>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal delay={100}>
+                <Link href="/areas" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
+                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
+                    <MapIcon className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-semibold mb-2">地元の「強み」を発見</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    地図・偏差値で、あなたの都道府県の全国での立ち位置をひと目で把握。意外な強みや特徴が見つかります。
+                  </p>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal delay={200}>
+                <Link href="/correlation" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
+                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
+                    <GitCompareArrows className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-semibold mb-2">データの「なぜ？」を探る</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    2つの指標を掛け合わせて関係性を可視化。「年収が高い県は何が違う？」など、数字の裏にあるストーリーを探れます。
+                  </p>
+                </Link>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ⑤ 新着ブログ記事 */}
+      {latestArticles.length > 0 && (
+        <ScrollReveal>
+          <section className="py-14 px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold">統計ブログ</h2>
+                <Link href="/blog" className="text-sm text-primary hover:underline font-medium">
+                  すべての記事 &rarr;
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {latestArticles.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
+                    className="group block"
+                  >
+                    <div className="rounded-lg border border-border bg-background p-5 h-full hover:border-primary/50 hover:shadow-md transition-all">
+                      {article.publishedAt && (
+                        <time className="text-xs text-muted-foreground">
+                          {article.publishedAt.slice(0, 10)}
+                        </time>
+                      )}
+                      <h3 className="text-base font-semibold mt-1 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      {article.description && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {article.description}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
+      )}
+
+      {/* 広告 */}
+      <div className="flex justify-center my-8">
+        <AdSenseAd
+          format={RANKING_PAGE_FOOTER.format}
+          slotId={RANKING_PAGE_FOOTER.slotId}
+        />
+      </div>
+    </div>
+  );
+}

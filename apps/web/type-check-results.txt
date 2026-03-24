@@ -1,0 +1,54 @@
+• turbo 2.8.1
+• Packages in scope: web
+• Running type-check in 1 packages
+• Remote caching disabled
+web:type-check: cache miss, executing 838fdcc5d32c7d18
+web:type-check: 
+web:type-check: > web@0.1.0 type-check
+web:type-check: > tsc --noEmit --skipLibCheck
+web:type-check: 
+web:type-check: src/app/ranking/page.stories.tsx(84,5): error TS2322: Type '{ rankingKey: string; title: string; subtitle: string; latestYear: string; definition: string; }[]' is not assignable to type 'FeaturedRankingItem[]'.
+web:type-check:   Property 'areaType' is missing in type '{ rankingKey: string; title: string; subtitle: string; latestYear: string; definition: string; }' but required in type 'FeaturedRankingItem'.
+web:type-check: src/app/ranking/page.stories.tsx(103,5): error TS2322: Type '{ rankingKey: string; title: string; subtitle: string; latestYear: string; definition: string; }[]' is not assignable to type 'FeaturedRankingItem[]'.
+web:type-check:   Property 'areaType' is missing in type '{ rankingKey: string; title: string; subtitle: string; latestYear: string; definition: string; }' but required in type 'FeaturedRankingItem'.
+web:type-check: src/features/dashboard/components/cards/StatCard/StatCard.tsx(62,33): error TS2339: Property 'changeRate' does not exist on type 'StatDataResult'.
+web:type-check: src/features/dashboard/components/cards/StatCard/StatCard.tsx(63,38): error TS2339: Property 'changeDirection' does not exist on type 'StatDataResult'.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceClient.stories.tsx(2,15): error TS2305: Module '"@stats47/visualization/d3"' has no exported member 'BarChartRaceFrame'.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceClient.stories.tsx(4,36): error TS2307: Cannot find module './BarChartRaceClient' or its corresponding type declarations.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceClient.tsx(6,3): error TS2724: '"@stats47/visualization/d3"' has no exported member named 'BarChartRace'. Did you mean 'D3BarChartRace'?
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceClient.tsx(7,8): error TS2305: Module '"@stats47/visualization/d3"' has no exported member 'BarChartRaceFrame'.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceDashboard.tsx(5,15): error TS2305: Module '"@stats47/visualization/d3"' has no exported member 'BarChartRaceFrame'.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceDashboard.tsx(7,10): error TS2724: '"../../../services"' has no exported member named 'fetchBarChartRaceData'. Did you mean 'fetchD3BarChartRaceData'?
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceDashboard.tsx(10,36): error TS2307: Cannot find module './BarChartRaceClient' or its corresponding type declarations.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/D3BarChartRaceSkeleton.stories.tsx(1,38): error TS2307: Cannot find module './BarChartRaceSkeleton' or its corresponding type declarations.
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/index.ts(1,10): error TS2724: '"./D3BarChartRaceDashboard"' has no exported member named 'D3BarChartRaceDashboard'. Did you mean 'BarChartRaceDashboard'?
+web:type-check: src/features/dashboard/components/charts/D3BarChartRace/index.ts(2,10): error TS2724: '"./D3BarChartRaceSkeleton"' has no exported member named 'D3BarChartRaceSkeleton'. Did you mean 'BarChartRaceSkeleton'?
+web:type-check: src/features/dashboard/components/DashboardComponentRenderer.tsx(30,3): error TS2353: Object literal may only specify known properties, and '"stacked-bar-chart"' does not exist in type 'Omit<Record<keyof DashboardConfigMap, ComponentType<DashboardItemProps<keyof DashboardConfigMap>>>, "stat-card">'.
+web:type-check: src/features/dashboard/services/fetchD3BarChartRaceData.ts(3,15): error TS2305: Module '"@stats47/visualization/d3"' has no exported member 'BarChartRaceFrame'.
+web:type-check: src/features/ranking/utils/__tests__/generate-meta-data.test.ts(13,13): error TS2353: Object literal may only specify known properties, and 'rankingValue' does not exist in type '{ rankingItem: RankingItem; areaType: AreaType; }'.
+web:type-check: src/features/ranking/utils/__tests__/generate-meta-data.test.ts(23,13): error TS2353: Object literal may only specify known properties, and 'rankingValue' does not exist in type '{ rankingItem: RankingItem; areaType: AreaType; }'.
+web:type-check: src/features/ranking/utils/__tests__/generate-meta-data.test.ts(36,13): error TS2353: Object literal may only specify known properties, and 'rankingValue' does not exist in type '{ rankingItem: RankingItem; areaType: AreaType; }'.
+web:type-check: src/features/ranking/utils/__tests__/generate-meta-data.test.ts(49,13): error TS2353: Object literal may only specify known properties, and 'rankingValue' does not exist in type '{ rankingItem: RankingItem; areaType: AreaType; }'.
+web:type-check: src/features/ranking/utils/__tests__/generate-meta-data.test.ts(61,13): error TS2353: Object literal may only specify known properties, and 'rankingValue' does not exist in type '{ rankingItem: RankingItem; areaType: AreaType; }'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/extract-year-code.ts(1,15): error TS2305: Module '"@stats47/types"' has no exported member 'EstatTimeCode'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/extract-year-code.ts(1,30): error TS2305: Module '"@stats47/types"' has no exported member 'YearCode'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/generate-year-name.ts(1,15): error TS2305: Module '"@stats47/types"' has no exported member 'YearCode'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/generate-year-name.ts(1,25): error TS2305: Module '"@stats47/types"' has no exported member 'YearName'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/validate-year-code.ts(1,15): error TS2305: Module '"@stats47/types"' has no exported member 'EstatTimeCode'.
+web:type-check: ../../packages/estat-api/src/stats-data/utils/validate-year-code.ts(1,30): error TS2305: Module '"@stats47/types"' has no exported member 'YearCode'.
+web:type-check: npm error Lifecycle script `type-check` failed with error:
+web:type-check: npm error code 1
+web:type-check: npm error path /Users/minamidaisuke/stats47/apps/web
+web:type-check: npm error workspace web@0.1.0
+web:type-check: npm error location /Users/minamidaisuke/stats47/apps/web
+web:type-check: npm error command failed
+web:type-check: npm error command sh -c tsc --noEmit --skipLibCheck
+web:type-check: ERROR: command finished with error: command (/Users/minamidaisuke/stats47/apps/web) /opt/homebrew/opt/node@20/bin/npm run type-check exited (1)
+web#type-check: command (/Users/minamidaisuke/stats47/apps/web) /opt/homebrew/opt/node@20/bin/npm run type-check exited (1)
+
+ Tasks:    0 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    6.413s 
+Failed:    web#type-check
+
+ ERROR  run failed: command  exited (1)

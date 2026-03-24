@@ -1,0 +1,39 @@
+{
+  "rankingKey": "criminal-recognition-count",
+  "areaType": "prefecture",
+  "rankingName": "刑法犯認知件数",
+  "title": "刑法犯認知件数",
+  "subtitle": null,
+  "demographicAttr": null,
+  "unit": "件",
+  "standardizedUnit": null,
+  "isActive": true,
+  "isFeatured": true,
+  "featuredOrder": 0,
+  "latestYear": {
+    "yearCode": "2022",
+    "yearName": "2022年"
+  },
+  "valueDisplay": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+    "displayUnit": null
+  },
+  "visualization": {
+    "colorScheme": "interpolateReds",
+    "colorSchemeType": "sequential",
+    "minValueType": "zero",
+    "divergingMidpoint": "mean",
+    "isSymmetrized": false,
+    "isReversed": false
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "dataSourceId": "estat",
+  "sourceConfig": {},
+  "source": {
+    "name": "犯罪統計",
+    "url": "https://www.e-stat.go.jp/"
+  }
+}

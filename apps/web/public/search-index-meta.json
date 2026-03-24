@@ -1,0 +1,890 @@
+{
+  "categories": [
+    {
+      "categoryKey": "landweather",
+      "categoryName": "国土・気象"
+    },
+    {
+      "categoryKey": "population",
+      "categoryName": "人口・世帯"
+    },
+    {
+      "categoryKey": "laborwage",
+      "categoryName": "労働・賃金"
+    },
+    {
+      "categoryKey": "agriculture",
+      "categoryName": "農林水産業"
+    },
+    {
+      "categoryKey": "miningindustry",
+      "categoryName": "鉱工業"
+    },
+    {
+      "categoryKey": "commercial",
+      "categoryName": "商業・サービス業"
+    },
+    {
+      "categoryKey": "economy",
+      "categoryName": "企業・家計・経済"
+    },
+    {
+      "categoryKey": "construction",
+      "categoryName": "住宅・土地・建設"
+    },
+    {
+      "categoryKey": "energy",
+      "categoryName": "エネルギー・水"
+    },
+    {
+      "categoryKey": "tourism",
+      "categoryName": "運輸・観光"
+    },
+    {
+      "categoryKey": "educationsports",
+      "categoryName": "教育・文化・スポーツ"
+    },
+    {
+      "categoryKey": "administrativefinancial",
+      "categoryName": "行財政"
+    },
+    {
+      "categoryKey": "safetyenvironment",
+      "categoryName": "司法・安全・環境"
+    },
+    {
+      "categoryKey": "socialsecurity",
+      "categoryName": "社会保障・衛生"
+    },
+    {
+      "categoryKey": "international",
+      "categoryName": "国際"
+    },
+    {
+      "categoryKey": "infrastructure",
+      "categoryName": "社会基盤施設"
+    },
+    {
+      "categoryKey": "ict",
+      "categoryName": "情報通信・科学技術"
+    }
+  ],
+  "blogTags": [
+    {
+      "tag": "家計",
+      "count": 12
+    },
+    {
+      "tag": "少子化",
+      "count": 11
+    },
+    {
+      "tag": "地域格差",
+      "count": 10
+    },
+    {
+      "tag": "消費者物価指数",
+      "count": 9
+    },
+    {
+      "tag": "物価",
+      "count": 9
+    },
+    {
+      "tag": "晩婚化",
+      "count": 7
+    },
+    {
+      "tag": "高齢化",
+      "count": 7
+    },
+    {
+      "tag": "財政",
+      "count": 7
+    },
+    {
+      "tag": "出生率",
+      "count": 6
+    },
+    {
+      "tag": "地方財政",
+      "count": 6
+    },
+    {
+      "tag": "勤労者世帯",
+      "count": 6
+    },
+    {
+      "tag": "共働き",
+      "count": 5
+    },
+    {
+      "tag": "人口減少",
+      "count": 4
+    },
+    {
+      "tag": "介護",
+      "count": 4
+    },
+    {
+      "tag": "財政健全性",
+      "count": 4
+    },
+    {
+      "tag": "消費支出",
+      "count": 4
+    },
+    {
+      "tag": "単独世帯",
+      "count": 4
+    },
+    {
+      "tag": "世帯構造",
+      "count": 4
+    },
+    {
+      "tag": "消費",
+      "count": 4
+    },
+    {
+      "tag": "結婚・婚姻",
+      "count": 4
+    },
+    {
+      "tag": "所得格差",
+      "count": 4
+    },
+    {
+      "tag": "実収入",
+      "count": 4
+    },
+    {
+      "tag": "気候",
+      "count": 4
+    },
+    {
+      "tag": "住宅",
+      "count": 3
+    },
+    {
+      "tag": "社会保障",
+      "count": 3
+    },
+    {
+      "tag": "福祉",
+      "count": 3
+    },
+    {
+      "tag": "賃金",
+      "count": 3
+    },
+    {
+      "tag": "労働",
+      "count": 3
+    },
+    {
+      "tag": "交通安全",
+      "count": 3
+    },
+    {
+      "tag": "交通事故",
+      "count": 3
+    },
+    {
+      "tag": "雇用",
+      "count": 3
+    },
+    {
+      "tag": "生活コスト",
+      "count": 3
+    },
+    {
+      "tag": "人口構造",
+      "count": 3
+    },
+    {
+      "tag": "核家族",
+      "count": 3
+    },
+    {
+      "tag": "地域経済",
+      "count": 3
+    },
+    {
+      "tag": "環境",
+      "count": 3
+    },
+    {
+      "tag": "健康",
+      "count": 3
+    },
+    {
+      "tag": "小学校",
+      "count": 3
+    },
+    {
+      "tag": "中学校",
+      "count": 3
+    },
+    {
+      "tag": "製造業",
+      "count": 2
+    },
+    {
+      "tag": "工業統計",
+      "count": 2
+    },
+    {
+      "tag": "ものづくり",
+      "count": 2
+    },
+    {
+      "tag": "空き家",
+      "count": 2
+    },
+    {
+      "tag": "老朽化",
+      "count": 2
+    },
+    {
+      "tag": "耐震",
+      "count": 2
+    },
+    {
+      "tag": "交通安全白書",
+      "count": 2
+    },
+    {
+      "tag": "失業率",
+      "count": 2
+    },
+    {
+      "tag": "労働市場",
+      "count": 2
+    },
+    {
+      "tag": "アルコール",
+      "count": 2
+    },
+    {
+      "tag": "酒類消費",
+      "count": 2
+    },
+    {
+      "tag": "酒税改正",
+      "count": 2
+    },
+    {
+      "tag": "子育て・保育",
+      "count": 2
+    },
+    {
+      "tag": "待機児童",
+      "count": 2
+    },
+    {
+      "tag": "財政力指数",
+      "count": 2
+    },
+    {
+      "tag": "経常収支比率",
+      "count": 2
+    },
+    {
+      "tag": "貯蓄",
+      "count": 2
+    },
+    {
+      "tag": "県民性",
+      "count": 2
+    },
+    {
+      "tag": "食文化",
+      "count": 2
+    },
+    {
+      "tag": "食料品",
+      "count": 2
+    },
+    {
+      "tag": "県民所得",
+      "count": 2
+    },
+    {
+      "tag": "GDP",
+      "count": 2
+    },
+    {
+      "tag": "教育費",
+      "count": 2
+    },
+    {
+      "tag": "教育格差",
+      "count": 2
+    },
+    {
+      "tag": "人口",
+      "count": 2
+    },
+    {
+      "tag": "地方創生",
+      "count": 2
+    },
+    {
+      "tag": "地方税",
+      "count": 2
+    },
+    {
+      "tag": "地方交付税",
+      "count": 2
+    },
+    {
+      "tag": "東京一極集中",
+      "count": 2
+    },
+    {
+      "tag": "転入超過",
+      "count": 2
+    },
+    {
+      "tag": "民生費",
+      "count": 2
+    },
+    {
+      "tag": "不動産",
+      "count": 2
+    },
+    {
+      "tag": "所得",
+      "count": 2
+    },
+    {
+      "tag": "経済",
+      "count": 2
+    },
+    {
+      "tag": "老年化指数",
+      "count": 2
+    },
+    {
+      "tag": "合計特殊出生率",
+      "count": 2
+    },
+    {
+      "tag": "人口動態",
+      "count": 2
+    },
+    {
+      "tag": "身長",
+      "count": 2
+    },
+    {
+      "tag": "体重",
+      "count": 2
+    },
+    {
+      "tag": "体格",
+      "count": 2
+    },
+    {
+      "tag": "中学生",
+      "count": 2
+    },
+    {
+      "tag": "学校保健統計",
+      "count": 2
+    },
+    {
+      "tag": "商業",
+      "count": 2
+    },
+    {
+      "tag": "小売",
+      "count": 2
+    },
+    {
+      "tag": "人口密度",
+      "count": 2
+    },
+    {
+      "tag": "世帯収入",
+      "count": 2
+    },
+    {
+      "tag": "エンゲル係数",
+      "count": 2
+    },
+    {
+      "tag": "食料費",
+      "count": 2
+    },
+    {
+      "tag": "生活費",
+      "count": 2
+    },
+    {
+      "tag": "地方債",
+      "count": 2
+    },
+    {
+      "tag": "借金",
+      "count": 2
+    },
+    {
+      "tag": "将来負担比率",
+      "count": 2
+    },
+    {
+      "tag": "婚姻率",
+      "count": 2
+    },
+    {
+      "tag": "離婚率",
+      "count": 2
+    },
+    {
+      "tag": "初婚年齢",
+      "count": 2
+    },
+    {
+      "tag": "離婚",
+      "count": 2
+    },
+    {
+      "tag": "公園",
+      "count": 2
+    },
+    {
+      "tag": "自然公園",
+      "count": 2
+    },
+    {
+      "tag": "国立公園",
+      "count": 2
+    },
+    {
+      "tag": "緑地",
+      "count": 2
+    },
+    {
+      "tag": "世帯主収入",
+      "count": 2
+    },
+    {
+      "tag": "月収",
+      "count": 2
+    },
+    {
+      "tag": "貯蓄率",
+      "count": 2
+    },
+    {
+      "tag": "不登校",
+      "count": 2
+    },
+    {
+      "tag": "長期欠席",
+      "count": 2
+    },
+    {
+      "tag": "教育",
+      "count": 2
+    },
+    {
+      "tag": "スポーツ",
+      "count": 2
+    },
+    {
+      "tag": "ウォーキング",
+      "count": 2
+    },
+    {
+      "tag": "ゴルフ",
+      "count": 2
+    },
+    {
+      "tag": "日照時間",
+      "count": 2
+    },
+    {
+      "tag": "快晴日数",
+      "count": 2
+    },
+    {
+      "tag": "晴れ",
+      "count": 2
+    },
+    {
+      "tag": "太陽光",
+      "count": 2
+    },
+    {
+      "tag": "外国人",
+      "count": 1
+    },
+    {
+      "tag": "多文化共生",
+      "count": 1
+    },
+    {
+      "tag": "国際化",
+      "count": 1
+    },
+    {
+      "tag": "ひとり親世帯",
+      "count": 1
+    },
+    {
+      "tag": "未婚率",
+      "count": 1
+    },
+    {
+      "tag": "学校教育",
+      "count": 1
+    },
+    {
+      "tag": "地方自治",
+      "count": 1
+    },
+    {
+      "tag": "人口移動",
+      "count": 1
+    },
+    {
+      "tag": "若者流出",
+      "count": 1
+    },
+    {
+      "tag": "旅館",
+      "count": 1
+    },
+    {
+      "tag": "ホテル",
+      "count": 1
+    },
+    {
+      "tag": "宿泊施設",
+      "count": 1
+    },
+    {
+      "tag": "稼働率",
+      "count": 1
+    },
+    {
+      "tag": "二極化",
+      "count": 1
+    },
+    {
+      "tag": "観光業",
+      "count": 1
+    },
+    {
+      "tag": "下水道",
+      "count": 1
+    },
+    {
+      "tag": "水道",
+      "count": 1
+    },
+    {
+      "tag": "インフラ",
+      "count": 1
+    },
+    {
+      "tag": "エネルギー",
+      "count": 1
+    },
+    {
+      "tag": "電力",
+      "count": 1
+    },
+    {
+      "tag": "ふるさと納税",
+      "count": 1
+    },
+    {
+      "tag": "税収",
+      "count": 1
+    },
+    {
+      "tag": "医療",
+      "count": 1
+    },
+    {
+      "tag": "引越し",
+      "count": 1
+    },
+    {
+      "tag": "家賃",
+      "count": 1
+    },
+    {
+      "tag": "最低賃金",
+      "count": 1
+    },
+    {
+      "tag": "観光",
+      "count": 1
+    },
+    {
+      "tag": "旅行",
+      "count": 1
+    },
+    {
+      "tag": "宿泊",
+      "count": 1
+    },
+    {
+      "tag": "インバウンド",
+      "count": 1
+    },
+    {
+      "tag": "未婚",
+      "count": 1
+    },
+    {
+      "tag": "理容",
+      "count": 1
+    },
+    {
+      "tag": "美容",
+      "count": 1
+    },
+    {
+      "tag": "サービス業",
+      "count": 1
+    },
+    {
+      "tag": "人口当たり",
+      "count": 1
+    },
+    {
+      "tag": "地価",
+      "count": 1
+    },
+    {
+      "tag": "商業地",
+      "count": 1
+    },
+    {
+      "tag": "販売額",
+      "count": 1
+    },
+    {
+      "tag": "生産性",
+      "count": 1
+    },
+    {
+      "tag": "卸売",
+      "count": 1
+    },
+    {
+      "tag": "コンビニ",
+      "count": 1
+    },
+    {
+      "tag": "地域インフラ",
+      "count": 1
+    },
+    {
+      "tag": "治安",
+      "count": 1
+    },
+    {
+      "tag": "犯罪率",
+      "count": 1
+    },
+    {
+      "tag": "窃盗犯",
+      "count": 1
+    },
+    {
+      "tag": "検挙率",
+      "count": 1
+    },
+    {
+      "tag": "刑法犯",
+      "count": 1
+    },
+    {
+      "tag": "高校",
+      "count": 1
+    },
+    {
+      "tag": "歳出",
+      "count": 1
+    },
+    {
+      "tag": "土木費",
+      "count": 1
+    },
+    {
+      "tag": "消防",
+      "count": 1
+    },
+    {
+      "tag": "火災",
+      "count": 1
+    },
+    {
+      "tag": "消防団",
+      "count": 1
+    },
+    {
+      "tag": "消防署",
+      "count": 1
+    },
+    {
+      "tag": "可住地面積",
+      "count": 1
+    },
+    {
+      "tag": "土地利用",
+      "count": 1
+    },
+    {
+      "tag": "森林",
+      "count": 1
+    },
+    {
+      "tag": "国土",
+      "count": 1
+    },
+    {
+      "tag": "財政格差",
+      "count": 1
+    },
+    {
+      "tag": "歳入構成",
+      "count": 1
+    },
+    {
+      "tag": "公害",
+      "count": 1
+    },
+    {
+      "tag": "環境汚染",
+      "count": 1
+    },
+    {
+      "tag": "大気汚染",
+      "count": 1
+    },
+    {
+      "tag": "水質汚濁",
+      "count": 1
+    },
+    {
+      "tag": "苦情",
+      "count": 1
+    },
+    {
+      "tag": "都市化",
+      "count": 1
+    },
+    {
+      "tag": "人口集中地区",
+      "count": 1
+    },
+    {
+      "tag": "昼夜間人口",
+      "count": 1
+    },
+    {
+      "tag": "ベッドタウン",
+      "count": 1
+    },
+    {
+      "tag": "降水量",
+      "count": 1
+    },
+    {
+      "tag": "降雪量",
+      "count": 1
+    },
+    {
+      "tag": "積雪",
+      "count": 1
+    },
+    {
+      "tag": "雪国",
+      "count": 1
+    },
+    {
+      "tag": "中小企業",
+      "count": 1
+    },
+    {
+      "tag": "零細企業",
+      "count": 1
+    },
+    {
+      "tag": "事業所",
+      "count": 1
+    },
+    {
+      "tag": "産業構造",
+      "count": 1
+    },
+    {
+      "tag": "自殺率",
+      "count": 1
+    },
+    {
+      "tag": "メンタルヘルス",
+      "count": 1
+    },
+    {
+      "tag": "気温",
+      "count": 1
+    },
+    {
+      "tag": "猛暑日",
+      "count": 1
+    },
+    {
+      "tag": "真冬日",
+      "count": 1
+    },
+    {
+      "tag": "大学",
+      "count": 1
+    },
+    {
+      "tag": "進学率",
+      "count": 1
+    },
+    {
+      "tag": "収容力指数",
+      "count": 1
+    },
+    {
+      "tag": "人口流出",
+      "count": 1
+    },
+    {
+      "tag": "労働災害",
+      "count": 1
+    },
+    {
+      "tag": "安全衛生",
+      "count": 1
+    },
+    {
+      "tag": "労災保険",
+      "count": 1
+    },
+    {
+      "tag": "将来推計人口",
+      "count": 1
+    },
+    {
+      "tag": "2050年",
+      "count": 1
+    }
+  ],
+  "blogYears": [
+    "2026",
+    "2025"
+  ]
+}

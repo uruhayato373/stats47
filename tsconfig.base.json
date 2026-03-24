@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@stats47/area": ["packages/area/src"],
+      "@stats47/category": ["packages/category/src"],
+      "@stats47/components": ["packages/components/src"],
+      "@stats47/correlation": ["packages/correlation/src"],
+      "@stats47/database": ["packages/database/src"],
+      "@stats47/estat-api": ["packages/estat-api/src"],
+      "@stats47/gis": ["packages/gis/src"],
+      "@stats47/logger": ["packages/logger/src"],
+      "@stats47/mock": ["packages/mock/src"],
+      "@stats47/r2-storage": ["packages/r2-storage/src"],
+      "@stats47/ranking": ["packages/ranking/src"],
+      "@stats47/types": ["packages/types/src"],
+      "@stats47/utils": ["packages/utils/src"],
+      "@stats47/svg-builder": ["packages/svg-builder/src"],
+      "@stats47/svg-builder/charts": ["packages/svg-builder/src/charts"],
+      "@stats47/svg-builder/tables": ["packages/svg-builder/src/tables"],
+      "@stats47/svg-builder/shared": ["packages/svg-builder/src/shared"],
+      "@stats47/visualization": ["packages/visualization/src"]
+    }
+  }
+}

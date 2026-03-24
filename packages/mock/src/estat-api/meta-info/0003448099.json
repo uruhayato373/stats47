@@ -1,0 +1,539 @@
+{
+  "GET_META_INFO": {
+    "RESULT": {
+      "STATUS": 0,
+      "ERROR_MSG": "正常に終了しました。",
+      "DATE": "2026-02-19T19:32:07.306+09:00"
+    },
+    "PARAMETER": {
+      "LANG": "J",
+      "STATS_DATA_ID": "0003448099",
+      "DATA_FORMAT": "J"
+    },
+    "METADATA_INF": {
+      "TABLE_INF": {
+        "@id": "0003448099",
+        "STAT_NAME": {
+          "@code": "00550010",
+          "$": "工業統計調査"
+        },
+        "GOV_ORG": {
+          "@code": "00550",
+          "$": "経済産業省"
+        },
+        "STATISTICS_NAME": "工業統計調査 確報 ２０２０年確報",
+        "TITLE": {
+          "@no": "1-02",
+          "$": "品目編 【１．製造品に関する統計表】（２）品目群による都道府県別出荷額（産業中分類別、従業者４人以上の事業所）"
+        },
+        "CYCLE": "年次",
+        "SURVEY_DATE": "202001-202012",
+        "OPEN_DATE": "2022-03-05",
+        "SMALL_AREA": 0,
+        "COLLECT_AREA": "全国",
+        "MAIN_CATEGORY": {
+          "@code": "05",
+          "$": "鉱工業"
+        },
+        "SUB_CATEGORY": {
+          "@code": "02",
+          "$": "製造業"
+        },
+        "OVERALL_TOTAL_NUMBER": 1297,
+        "UPDATED_DATE": "2022-07-05",
+        "STATISTICS_NAME_SPEC": {
+          "TABULATION_CATEGORY": "工業統計調査",
+          "TABULATION_SUB_CATEGORY1": "確報",
+          "TABULATION_SUB_CATEGORY2": "２０２０年確報"
+        },
+        "DESCRIPTION": "",
+        "TITLE_SPEC": {
+          "TABLE_CATEGORY": "品目編",
+          "TABLE_NAME": "【１．製造品に関する統計表】（２）品目群による都道府県別出荷額（産業中分類別、従業者４人以上の事業所）"
+        }
+      },
+      "CLASS_INF": {
+        "CLASS_OBJ": [
+          {
+            "@id": "cat01",
+            "@name": "産業中分類(コード付加)",
+            "CLASS": [
+              {
+                "@code": "00",
+                "@name": "【00】製造業計",
+                "@level": "1"
+              },
+              {
+                "@code": "09",
+                "@name": "【09】食料品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "10",
+                "@name": "【10】飲料・たばこ・飼料製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "11",
+                "@name": "【11】繊維工業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "12",
+                "@name": "【12】木材・木製品製造業（家具を除く）",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "13",
+                "@name": "【13】家具・装備品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "14",
+                "@name": "【14】パルプ・紙・紙加工品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "15",
+                "@name": "【15】印刷・同関連業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "16",
+                "@name": "【16】化学工業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "17",
+                "@name": "【17】石油製品・石炭製品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "18",
+                "@name": "【18】プラスチック製品製造業（別掲を除く）",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "19",
+                "@name": "【19】ゴム製品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "20",
+                "@name": "【20】なめし革・同製品・毛皮製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "21",
+                "@name": "【21】窯業・土石製品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "22",
+                "@name": "【22】鉄鋼業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "23",
+                "@name": "【23】非鉄金属製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "24",
+                "@name": "【24】金属製品製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "25",
+                "@name": "【25】はん用機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "26",
+                "@name": "【26】生産用機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "27",
+                "@name": "【27】業務用機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "28",
+                "@name": "【28】電子部品・デバイス・電子回路製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "29",
+                "@name": "【29】電気機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "30",
+                "@name": "【30】情報通信機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "31",
+                "@name": "【31】輸送用機械器具製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              },
+              {
+                "@code": "32",
+                "@name": "【32】その他の製造業",
+                "@level": "2",
+                "@parentCode": "00"
+              }
+            ]
+          },
+          {
+            "@id": "cat02",
+            "@name": "確報（品目編）・集計項目",
+            "CLASS": {
+              "@code": "01020",
+              "@name": "出荷額（百万円）",
+              "@level": "2",
+              "@parentCode": "01000"
+            }
+          },
+          {
+            "@id": "area",
+            "@name": "都道府県(全国_年次あり)",
+            "CLASS": [
+              {
+                "@code": "00215",
+                "@name": "全国【平成27(2015)年】",
+                "@level": "1"
+              },
+              {
+                "@code": "00216",
+                "@name": "全国【平成28(2016)年】",
+                "@level": "1"
+              },
+              {
+                "@code": "00217",
+                "@name": "全国【平成29(2017)年】",
+                "@level": "1"
+              },
+              {
+                "@code": "00218",
+                "@name": "全国【平成30(2018)年】",
+                "@level": "1"
+              },
+              {
+                "@code": "00219",
+                "@name": "全国【平成31(2019)年】",
+                "@level": "1"
+              },
+              {
+                "@code": "01000",
+                "@name": "北海道",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "02000",
+                "@name": "青森県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "03000",
+                "@name": "岩手県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "04000",
+                "@name": "宮城県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "05000",
+                "@name": "秋田県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "06000",
+                "@name": "山形県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "07000",
+                "@name": "福島県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "08000",
+                "@name": "茨城県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "09000",
+                "@name": "栃木県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "10000",
+                "@name": "群馬県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "11000",
+                "@name": "埼玉県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "12000",
+                "@name": "千葉県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "13000",
+                "@name": "東京都",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "14000",
+                "@name": "神奈川県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "15000",
+                "@name": "新潟県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "16000",
+                "@name": "富山県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "17000",
+                "@name": "石川県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "18000",
+                "@name": "福井県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "19000",
+                "@name": "山梨県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "20000",
+                "@name": "長野県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "21000",
+                "@name": "岐阜県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "22000",
+                "@name": "静岡県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "23000",
+                "@name": "愛知県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "24000",
+                "@name": "三重県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "25000",
+                "@name": "滋賀県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "26000",
+                "@name": "京都府",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "27000",
+                "@name": "大阪府",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "28000",
+                "@name": "兵庫県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "29000",
+                "@name": "奈良県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "30000",
+                "@name": "和歌山県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "31000",
+                "@name": "鳥取県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "32000",
+                "@name": "島根県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "33000",
+                "@name": "岡山県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "34000",
+                "@name": "広島県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "35000",
+                "@name": "山口県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "36000",
+                "@name": "徳島県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "37000",
+                "@name": "香川県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "38000",
+                "@name": "愛媛県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "39000",
+                "@name": "高知県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "40000",
+                "@name": "福岡県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "41000",
+                "@name": "佐賀県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "42000",
+                "@name": "長崎県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "43000",
+                "@name": "熊本県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "44000",
+                "@name": "大分県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "45000",
+                "@name": "宮崎県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "46000",
+                "@name": "鹿児島県",
+                "@level": "2",
+                "@parentCode": "00000"
+              },
+              {
+                "@code": "47000",
+                "@name": "沖縄県",
+                "@level": "2",
+                "@parentCode": "00000"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

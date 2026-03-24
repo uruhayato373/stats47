@@ -1,0 +1,1446 @@
+{
+  "_meta": {
+    "prefName": "長崎県",
+    "cityName": "長崎市",
+    "areaCode": "42003",
+    "year": 2024,
+    "source": "家計調査 品目分類(2020年改定) 金額 都道府県庁所在市別",
+    "statsDataId": "0003348239"
+  },
+  "summary": {
+    "totalExpenditure": 3243455.0,
+    "totalRank": 42,
+    "totalRatio": 0.9,
+    "nationalTotal": 3602915.0,
+    "foodExpenditure": 1011557.0,
+    "engelCoefficient": 31.19,
+    "firstPlaceCount": 10,
+    "lastPlaceCount": 28
+  },
+  "categoryBreakdown": [
+    {
+      "catCode": "010000000",
+      "catName": "食料",
+      "value": 1011557.0,
+      "national": 1079228.0,
+      "ratio": 0.937
+    },
+    {
+      "catCode": "020000000",
+      "catName": "住居",
+      "value": 183783.0,
+      "national": 217054.0,
+      "ratio": 0.847
+    },
+    {
+      "catCode": "030000000",
+      "catName": "光熱・水道",
+      "value": 248814.0,
+      "national": 277332.0,
+      "ratio": 0.897
+    },
+    {
+      "catCode": "040000000",
+      "catName": "家具・家事用品",
+      "value": 118828.0,
+      "national": 153459.0,
+      "ratio": 0.774
+    },
+    {
+      "catCode": "050000000",
+      "catName": "被服及び履物",
+      "value": 95078.0,
+      "national": 119822.0,
+      "ratio": 0.793
+    },
+    {
+      "catCode": "060000000",
+      "catName": "保健医療",
+      "value": 147009.0,
+      "national": 184178.0,
+      "ratio": 0.798
+    },
+    {
+      "catCode": "070000000",
+      "catName": "交通・通信",
+      "value": 474483.0,
+      "national": 500766.0,
+      "ratio": 0.948
+    },
+    {
+      "catCode": "080000000",
+      "catName": "教育",
+      "value": 62495.0,
+      "national": 140462.0,
+      "ratio": 0.445
+    },
+    {
+      "catCode": "090000000",
+      "catName": "教養娯楽",
+      "value": 270134.0,
+      "national": 362877.0,
+      "ratio": 0.744
+    },
+    {
+      "catCode": "100000000",
+      "catName": "その他の消費支出",
+      "value": 631273.0,
+      "national": 567737.0,
+      "ratio": 1.112
+    }
+  ],
+  "foodBreakdown": [
+    {
+      "catCode": "010100000",
+      "catName": "穀類",
+      "value": 86761.0,
+      "national": 89067.0,
+      "ratio": 0.974
+    },
+    {
+      "catCode": "010200000",
+      "catName": "魚介類",
+      "value": 81685.0,
+      "national": 74715.0,
+      "ratio": 1.093
+    },
+    {
+      "catCode": "010300000",
+      "catName": "肉類",
+      "value": 105508.0,
+      "national": 99326.0,
+      "ratio": 1.062
+    },
+    {
+      "catCode": "010400000",
+      "catName": "乳卵類",
+      "value": 46646.0,
+      "national": 52004.0,
+      "ratio": 0.897
+    },
+    {
+      "catCode": "010500000",
+      "catName": "野菜・海藻",
+      "value": 112356.0,
+      "national": 112081.0,
+      "ratio": 1.002
+    },
+    {
+      "catCode": "010600000",
+      "catName": "果物",
+      "value": 43765.0,
+      "national": 42660.0,
+      "ratio": 1.026
+    },
+    {
+      "catCode": "010700000",
+      "catName": "油脂・調味料",
+      "value": 47536.0,
+      "national": 49191.0,
+      "ratio": 0.966
+    },
+    {
+      "catCode": "010800000",
+      "catName": "菓子類",
+      "value": 101508.0,
+      "national": 104417.0,
+      "ratio": 0.972
+    },
+    {
+      "catCode": "010900000",
+      "catName": "調理食品",
+      "value": 156271.0,
+      "national": 155977.0,
+      "ratio": 1.002
+    },
+    {
+      "catCode": "011000000",
+      "catName": "飲料",
+      "value": 59753.0,
+      "national": 67225.0,
+      "ratio": 0.889
+    },
+    {
+      "catCode": "011100000",
+      "catName": "酒類",
+      "value": 32476.0,
+      "national": 44967.0,
+      "ratio": 0.722
+    },
+    {
+      "catCode": "011200000",
+      "catName": "外食",
+      "value": 137291.0,
+      "national": 187598.0,
+      "ratio": 0.732
+    }
+  ],
+  "categoryItems": {
+    "010000000": {
+      "catName": "食料",
+      "highItems": [
+        {
+          "catCode": "010800040",
+          "name": "カステラ",
+          "value": 6611.0,
+          "national": 905.0,
+          "ratio": 7.305
+        },
+        {
+          "catCode": "010211020",
+          "name": "あじ",
+          "value": 2308.0,
+          "national": 911.0,
+          "ratio": 2.533
+        },
+        {
+          "catCode": "010230030",
+          "name": "かまぼこ",
+          "value": 7049.0,
+          "national": 3257.0,
+          "ratio": 2.164
+        },
+        {
+          "catCode": "010230010",
+          "name": "揚げかまぼこ",
+          "value": 4678.0,
+          "national": 2419.0,
+          "ratio": 1.934
+        },
+        {
+          "catCode": "010211090",
+          "name": "たい",
+          "value": 1774.0,
+          "national": 969.0,
+          "ratio": 1.831
+        },
+        {
+          "catCode": "010230000",
+          "name": "魚肉練製品",
+          "value": 15994.0,
+          "national": 9307.0,
+          "ratio": 1.718
+        },
+        {
+          "catCode": "010211160",
+          "name": "さしみ盛合わせ",
+          "value": 6759.0,
+          "national": 4088.0,
+          "ratio": 1.653
+        },
+        {
+          "catCode": "010513110",
+          "name": "他の野菜のその他",
+          "value": 7745.0,
+          "national": 4784.0,
+          "ratio": 1.619
+        },
+        {
+          "catCode": "010211100",
+          "name": "ぶり",
+          "value": 4877.0,
+          "national": 3040.0,
+          "ratio": 1.604
+        },
+        {
+          "catCode": "010420010",
+          "name": "粉ミルク",
+          "value": 1366.0,
+          "national": 881.0,
+          "ratio": 1.551
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "010211010",
+          "name": "まぐろ",
+          "value": 1539.0,
+          "national": 5302.0,
+          "ratio": 0.29
+        },
+        {
+          "catCode": "010220030",
+          "name": "しらす干し",
+          "value": 532.0,
+          "national": 1643.0,
+          "ratio": 0.324
+        },
+        {
+          "catCode": "011100040",
+          "name": "ウイスキー",
+          "value": 1064.0,
+          "national": 2887.0,
+          "ratio": 0.369
+        },
+        {
+          "catCode": "010610040",
+          "name": "オレンジ",
+          "value": 188.0,
+          "national": 507.0,
+          "ratio": 0.371
+        },
+        {
+          "catCode": "010920110",
+          "name": "そうざい材料セット",
+          "value": 1399.0,
+          "national": 3707.0,
+          "ratio": 0.377
+        },
+        {
+          "catCode": "011100050",
+          "name": "ワイン",
+          "value": 1454.0,
+          "national": 3463.0,
+          "ratio": 0.42
+        },
+        {
+          "catCode": "010211080",
+          "name": "さんま",
+          "value": 263.0,
+          "national": 608.0,
+          "ratio": 0.433
+        },
+        {
+          "catCode": "010220010",
+          "name": "塩さけ",
+          "value": 1115.0,
+          "national": 2533.0,
+          "ratio": 0.44
+        },
+        {
+          "catCode": "011100080",
+          "name": "他の酒(2014年までは3X8を含む)",
+          "value": 631.0,
+          "national": 1320.0,
+          "ratio": 0.478
+        },
+        {
+          "catCode": "010920060",
+          "name": "しゅうまい",
+          "value": 598.0,
+          "national": 1204.0,
+          "ratio": 0.497
+        }
+      ]
+    },
+    "020000000": {
+      "catName": "住居",
+      "highItems": [
+        {
+          "catCode": "020100020",
+          "name": "公営家賃",
+          "value": 48343.0,
+          "national": 8485.0,
+          "ratio": 5.697
+        },
+        {
+          "catCode": "020100030",
+          "name": "給与住宅家賃",
+          "value": 7433.0,
+          "national": 4697.0,
+          "ratio": 1.582
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "020210010",
+          "name": "設備器具",
+          "value": 8032.0,
+          "national": 41112.0,
+          "ratio": 0.195
+        },
+        {
+          "catCode": "020210000",
+          "name": "設備材料",
+          "value": 11386.0,
+          "national": 46779.0,
+          "ratio": 0.243
+        },
+        {
+          "catCode": "020220020",
+          "name": "給排水関係工事費",
+          "value": 2493.0,
+          "national": 5916.0,
+          "ratio": 0.421
+        },
+        {
+          "catCode": "020220030",
+          "name": "外壁・塀等工事費",
+          "value": 11702.0,
+          "national": 27411.0,
+          "ratio": 0.427
+        }
+      ]
+    },
+    "030000000": {
+      "catName": "光熱・水道",
+      "highItems": [],
+      "lowItems": [
+        {
+          "catCode": "030300010",
+          "name": "灯油",
+          "value": 4730.0,
+          "national": 14625.0,
+          "ratio": 0.323
+        }
+      ]
+    },
+    "040000000": {
+      "catName": "家具・家事用品",
+      "highItems": [
+        {
+          "catCode": "040200050",
+          "name": "カーテン",
+          "value": 3655.0,
+          "national": 1229.0,
+          "ratio": 2.974
+        },
+        {
+          "catCode": "040200030",
+          "name": "室内装飾品",
+          "value": 2214.0,
+          "national": 1167.0,
+          "ratio": 1.897
+        },
+        {
+          "catCode": "040400050",
+          "name": "電球・ランプ",
+          "value": 1346.0,
+          "national": 883.0,
+          "ratio": 1.524
+        },
+        {
+          "catCode": "040300010",
+          "name": "ベッド",
+          "value": 2540.0,
+          "national": 1668.0,
+          "ratio": 1.523
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "040300020",
+          "name": "布団",
+          "value": 458.0,
+          "national": 2697.0,
+          "ratio": 0.17
+        },
+        {
+          "catCode": "040120010",
+          "name": "エアコン",
+          "value": 4892.0,
+          "national": 16212.0,
+          "ratio": 0.302
+        },
+        {
+          "catCode": "040120000",
+          "name": "冷暖房用器具",
+          "value": 8105.0,
+          "national": 20678.0,
+          "ratio": 0.392
+        },
+        {
+          "catCode": "040110040",
+          "name": "電気冷蔵庫",
+          "value": 2925.0,
+          "national": 6730.0,
+          "ratio": 0.435
+        },
+        {
+          "catCode": "040600030",
+          "name": "家具・家事用品関連サービス",
+          "value": 1964.0,
+          "national": 4352.0,
+          "ratio": 0.451
+        },
+        {
+          "catCode": "040600020",
+          "name": "清掃代",
+          "value": 2450.0,
+          "national": 4997.0,
+          "ratio": 0.49
+        }
+      ]
+    },
+    "050000000": {
+      "catName": "被服及び履物",
+      "highItems": [
+        {
+          "catCode": "050230020",
+          "name": "乳児服",
+          "value": 1175.0,
+          "national": 659.0,
+          "ratio": 1.783
+        },
+        {
+          "catCode": "050210060",
+          "name": "他の男子用洋服",
+          "value": 8554.0,
+          "national": 5159.0,
+          "ratio": 1.658
+        },
+        {
+          "catCode": "050600010",
+          "name": "帽子",
+          "value": 2267.0,
+          "national": 1448.0,
+          "ratio": 1.566
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "050800020",
+          "name": "被服賃借料",
+          "value": 193.0,
+          "national": 1810.0,
+          "ratio": 0.107
+        },
+        {
+          "catCode": "050220050",
+          "name": "婦人用コート",
+          "value": 365.0,
+          "national": 1804.0,
+          "ratio": 0.202
+        },
+        {
+          "catCode": "050330000",
+          "name": "子供用シャツ・セーター類",
+          "value": 663.0,
+          "national": 2035.0,
+          "ratio": 0.326
+        },
+        {
+          "catCode": "050410020",
+          "name": "男子用寝巻き",
+          "value": 285.0,
+          "national": 665.0,
+          "ratio": 0.429
+        },
+        {
+          "catCode": "050230010",
+          "name": "子供服",
+          "value": 2439.0,
+          "national": 5104.0,
+          "ratio": 0.478
+        }
+      ]
+    },
+    "060000000": {
+      "catName": "保健医療",
+      "highItems": [],
+      "lowItems": [
+        {
+          "catCode": "060400070",
+          "name": "人間ドック等受診料",
+          "value": 544.0,
+          "national": 4320.0,
+          "ratio": 0.126
+        },
+        {
+          "catCode": "060300050",
+          "name": "他の保健医療用品・器具",
+          "value": 2895.0,
+          "national": 6477.0,
+          "ratio": 0.447
+        },
+        {
+          "catCode": "060400060",
+          "name": "マッサージ料金等(診療外)",
+          "value": 1949.0,
+          "national": 3919.0,
+          "ratio": 0.497
+        }
+      ]
+    },
+    "070000000": {
+      "catName": "交通・通信",
+      "highItems": [
+        {
+          "catCode": "070210020",
+          "name": "自動車以外の輸送機器購入",
+          "value": 15231.0,
+          "national": 830.0,
+          "ratio": 18.351
+        },
+        {
+          "catCode": "070100060",
+          "name": "バス通勤定期代",
+          "value": 5571.0,
+          "national": 1158.0,
+          "ratio": 4.811
+        },
+        {
+          "catCode": "070100040",
+          "name": "バス代",
+          "value": 9585.0,
+          "national": 2756.0,
+          "ratio": 3.478
+        },
+        {
+          "catCode": "070100070",
+          "name": "タクシー代",
+          "value": 11388.0,
+          "national": 4405.0,
+          "ratio": 2.585
+        },
+        {
+          "catCode": "070100050",
+          "name": "バス通学定期代",
+          "value": 1753.0,
+          "national": 876.0,
+          "ratio": 2.001
+        },
+        {
+          "catCode": "070230060",
+          "name": "年極・月極駐車場借料",
+          "value": 25262.0,
+          "national": 14060.0,
+          "ratio": 1.797
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "070220001",
+          "name": "自転車購入",
+          "value": 342.0,
+          "national": 3838.0,
+          "ratio": 0.089
+        },
+        {
+          "catCode": "070100030",
+          "name": "鉄道通勤定期代",
+          "value": 2397.0,
+          "national": 10666.0,
+          "ratio": 0.225
+        },
+        {
+          "catCode": "070100020",
+          "name": "鉄道通学定期代",
+          "value": 878.0,
+          "national": 3488.0,
+          "ratio": 0.252
+        },
+        {
+          "catCode": "070100010",
+          "name": "鉄道運賃",
+          "value": 10368.0,
+          "national": 23447.0,
+          "ratio": 0.442
+        },
+        {
+          "catCode": "070300050",
+          "name": "携帯電話機",
+          "value": 3935.0,
+          "national": 8037.0,
+          "ratio": 0.49
+        }
+      ]
+    },
+    "080000000": {
+      "catName": "教育",
+      "highItems": [
+        {
+          "catCode": "080100070",
+          "name": "国公立大学",
+          "value": 19635.0,
+          "national": 4665.0,
+          "ratio": 4.209
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "080100100",
+          "name": "専修学校",
+          "value": 220.0,
+          "national": 5581.0,
+          "ratio": 0.039
+        },
+        {
+          "catCode": "080100020",
+          "name": "私立小学校",
+          "value": 214.0,
+          "national": 1277.0,
+          "ratio": 0.168
+        },
+        {
+          "catCode": "080100040",
+          "name": "私立中学校",
+          "value": 1436.0,
+          "national": 6385.0,
+          "ratio": 0.225
+        },
+        {
+          "catCode": "080300030",
+          "name": "高校補習教育・予備校",
+          "value": 2556.0,
+          "national": 10807.0,
+          "ratio": 0.237
+        },
+        {
+          "catCode": "080100010",
+          "name": "国公立小学校",
+          "value": 1181.0,
+          "national": 4089.0,
+          "ratio": 0.289
+        },
+        {
+          "catCode": "080100050",
+          "name": "国公立高校",
+          "value": 3709.0,
+          "national": 7926.0,
+          "ratio": 0.468
+        },
+        {
+          "catCode": "080200010",
+          "name": "教科書",
+          "value": 503.0,
+          "national": 1039.0,
+          "ratio": 0.484
+        },
+        {
+          "catCode": "080100030",
+          "name": "国公立中学校",
+          "value": 2095.0,
+          "national": 4200.0,
+          "ratio": 0.499
+        }
+      ]
+    },
+    "090000000": {
+      "catName": "教養娯楽",
+      "highItems": [
+        {
+          "catCode": "090100040",
+          "name": "ビデオレコーダー・プレイヤー",
+          "value": 1158.0,
+          "national": 568.0,
+          "ratio": 2.039
+        },
+        {
+          "catCode": "090205010",
+          "name": "動物病院代",
+          "value": 17416.0,
+          "national": 9572.0,
+          "ratio": 1.819
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "090100080",
+          "name": "楽器",
+          "value": 88.0,
+          "national": 1844.0,
+          "ratio": 0.048
+        },
+        {
+          "catCode": "090430060",
+          "name": "自動車教習料",
+          "value": 437.0,
+          "national": 3218.0,
+          "ratio": 0.136
+        },
+        {
+          "catCode": "090100060",
+          "name": "カメラ・ビデオカメラ",
+          "value": 140.0,
+          "national": 920.0,
+          "ratio": 0.152
+        },
+        {
+          "catCode": "090202010",
+          "name": "ゴルフ用具",
+          "value": 196.0,
+          "national": 1267.0,
+          "ratio": 0.155
+        },
+        {
+          "catCode": "090100110",
+          "name": "教養娯楽用耐久財修理代",
+          "value": 123.0,
+          "national": 691.0,
+          "ratio": 0.178
+        },
+        {
+          "catCode": "090430030",
+          "name": "音楽月謝",
+          "value": 997.0,
+          "national": 4387.0,
+          "ratio": 0.227
+        },
+        {
+          "catCode": "090442050",
+          "name": "他のスポーツ施設使用料",
+          "value": 831.0,
+          "national": 3654.0,
+          "ratio": 0.227
+        },
+        {
+          "catCode": "090203150",
+          "name": "ゲームソフト等",
+          "value": 630.0,
+          "national": 2147.0,
+          "ratio": 0.293
+        },
+        {
+          "catCode": "090442080",
+          "name": "他の入場・ゲーム代",
+          "value": 1624.0,
+          "national": 5015.0,
+          "ratio": 0.324
+        },
+        {
+          "catCode": "090430050",
+          "name": "スポーツ月謝",
+          "value": 4136.0,
+          "national": 11158.0,
+          "ratio": 0.371
+        }
+      ]
+    },
+    "100000000": {
+      "catName": "その他の消費支出",
+      "highItems": [
+        {
+          "catCode": "100150030",
+          "name": "婚礼関係費",
+          "value": 51955.0,
+          "national": 3195.0,
+          "ratio": 16.261
+        },
+        {
+          "catCode": "100150050",
+          "name": "他の冠婚葬祭費",
+          "value": 15194.0,
+          "national": 1851.0,
+          "ratio": 8.209
+        },
+        {
+          "catCode": "100133040",
+          "name": "身の回り用品関連サービス",
+          "value": 3891.0,
+          "national": 609.0,
+          "ratio": 6.389
+        },
+        {
+          "catCode": "100400010",
+          "name": "国内遊学仕送り金",
+          "value": 94384.0,
+          "national": 50910.0,
+          "ratio": 1.854
+        },
+        {
+          "catCode": "100150020",
+          "name": "祭具・墓石",
+          "value": 3308.0,
+          "national": 2143.0,
+          "ratio": 1.544
+        },
+        {
+          "catCode": "100370020",
+          "name": "住宅関係負担費",
+          "value": 34805.0,
+          "national": 22735.0,
+          "ratio": 1.531
+        }
+      ],
+      "lowItems": [
+        {
+          "catCode": "100132020",
+          "name": "通学用かばん",
+          "value": 73.0,
+          "national": 1157.0,
+          "ratio": 0.063
+        },
+        {
+          "catCode": "100133020",
+          "name": "腕時計",
+          "value": 341.0,
+          "national": 1965.0,
+          "ratio": 0.174
+        },
+        {
+          "catCode": "100150040",
+          "name": "葬儀関係費",
+          "value": 3244.0,
+          "national": 9710.0,
+          "ratio": 0.334
+        },
+        {
+          "catCode": "100150110",
+          "name": "他の諸雑費のその他",
+          "value": 4571.0,
+          "national": 10982.0,
+          "ratio": 0.416
+        },
+        {
+          "catCode": "100133010",
+          "name": "アクセサリー",
+          "value": 1851.0,
+          "national": 4417.0,
+          "ratio": 0.419
+        },
+        {
+          "catCode": "100150080",
+          "name": "寄付金",
+          "value": 4958.0,
+          "national": 10426.0,
+          "ratio": 0.476
+        }
+      ]
+    }
+  },
+  "firstPlaceItems": [
+    {
+      "catCode": "100150030",
+      "name": "婚礼関係費",
+      "value": 51955.0,
+      "national": 3195.0,
+      "ratio": 16.261
+    },
+    {
+      "catCode": "100150050",
+      "name": "他の冠婚葬祭費",
+      "value": 15194.0,
+      "national": 1851.0,
+      "ratio": 8.209
+    },
+    {
+      "catCode": "010800040",
+      "name": "カステラ",
+      "value": 6611.0,
+      "national": 905.0,
+      "ratio": 7.305
+    },
+    {
+      "catCode": "100133040",
+      "name": "身の回り用品関連サービス",
+      "value": 3891.0,
+      "national": 609.0,
+      "ratio": 6.389
+    },
+    {
+      "catCode": "070100060",
+      "name": "バス通勤定期代",
+      "value": 5571.0,
+      "national": 1158.0,
+      "ratio": 4.811
+    },
+    {
+      "catCode": "070100040",
+      "name": "バス代",
+      "value": 9585.0,
+      "national": 2756.0,
+      "ratio": 3.478
+    },
+    {
+      "catCode": "010230000",
+      "name": "魚肉練製品",
+      "value": 15994.0,
+      "national": 9307.0,
+      "ratio": 1.718
+    },
+    {
+      "catCode": "010211160",
+      "name": "さしみ盛合わせ",
+      "value": 6759.0,
+      "national": 4088.0,
+      "ratio": 1.653
+    },
+    {
+      "catCode": "050600010",
+      "name": "帽子",
+      "value": 2267.0,
+      "national": 1448.0,
+      "ratio": 1.566
+    },
+    {
+      "catCode": "010211150",
+      "name": "他の鮮魚",
+      "value": 9910.0,
+      "national": 6523.0,
+      "ratio": 1.519
+    }
+  ],
+  "lastPlaceItems": [
+    {
+      "catCode": "040120020",
+      "name": "ストーブ・温風ヒーター",
+      "value": 0.0,
+      "national": 1184.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "040600010",
+      "name": "家事代行料",
+      "value": 0.0,
+      "national": 1680.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "050220060",
+      "name": "女子用学校制服",
+      "value": 0.0,
+      "national": 1186.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "070220001",
+      "name": "自転車購入",
+      "value": 342.0,
+      "national": 3838.0,
+      "ratio": 0.089
+    },
+    {
+      "catCode": "060400070",
+      "name": "人間ドック等受診料",
+      "value": 544.0,
+      "national": 4320.0,
+      "ratio": 0.126
+    },
+    {
+      "catCode": "040300020",
+      "name": "布団",
+      "value": 458.0,
+      "national": 2697.0,
+      "ratio": 0.17
+    },
+    {
+      "catCode": "090442050",
+      "name": "他のスポーツ施設使用料",
+      "value": 831.0,
+      "national": 3654.0,
+      "ratio": 0.227
+    },
+    {
+      "catCode": "080100010",
+      "name": "国公立小学校",
+      "value": 1181.0,
+      "national": 4089.0,
+      "ratio": 0.289
+    },
+    {
+      "catCode": "090442080",
+      "name": "他の入場・ゲーム代",
+      "value": 1624.0,
+      "national": 5015.0,
+      "ratio": 0.324
+    },
+    {
+      "catCode": "040600000",
+      "name": "家事サービス",
+      "value": 4414.0,
+      "national": 11029.0,
+      "ratio": 0.4
+    },
+    {
+      "catCode": "110500040",
+      "name": "サービス(家具・家事用品)",
+      "value": 4414.0,
+      "national": 11029.0,
+      "ratio": 0.4
+    },
+    {
+      "catCode": "090442060",
+      "name": "文化施設入場料",
+      "value": 1157.0,
+      "national": 2651.0,
+      "ratio": 0.436
+    },
+    {
+      "catCode": "040600030",
+      "name": "家具・家事用品関連サービス",
+      "value": 1964.0,
+      "national": 4352.0,
+      "ratio": 0.451
+    },
+    {
+      "catCode": "050230010",
+      "name": "子供服",
+      "value": 2439.0,
+      "national": 5104.0,
+      "ratio": 0.478
+    },
+    {
+      "catCode": "050220040",
+      "name": "婦人用スラックス",
+      "value": 3270.0,
+      "national": 5815.0,
+      "ratio": 0.562
+    },
+    {
+      "catCode": "100150060",
+      "name": "医療保険料",
+      "value": 13135.0,
+      "national": 23233.0,
+      "ratio": 0.565
+    },
+    {
+      "catCode": "090204090",
+      "name": "他の教養娯楽用品のその他",
+      "value": 3954.0,
+      "national": 6685.0,
+      "ratio": 0.591
+    },
+    {
+      "catCode": "050210030",
+      "name": "男子用ズボン",
+      "value": 2260.0,
+      "national": 3798.0,
+      "ratio": 0.595
+    },
+    {
+      "catCode": "090442120",
+      "name": "インターネット接続料",
+      "value": 21182.0,
+      "national": 34610.0,
+      "ratio": 0.612
+    },
+    {
+      "catCode": "100121070",
+      "name": "ヘアコンディショナー",
+      "value": 1823.0,
+      "national": 2925.0,
+      "ratio": 0.623
+    },
+    {
+      "catCode": "011020020",
+      "name": "コーヒー飲料",
+      "value": 3677.0,
+      "national": 5619.0,
+      "ratio": 0.654
+    },
+    {
+      "catCode": "010420030",
+      "name": "バター",
+      "value": 910.0,
+      "national": 1365.0,
+      "ratio": 0.667
+    },
+    {
+      "catCode": "050320020",
+      "name": "他の婦人用シャツ",
+      "value": 4799.0,
+      "national": 7109.0,
+      "ratio": 0.675
+    },
+    {
+      "catCode": "111000020",
+      "name": "半耐久財(教養娯楽)",
+      "value": 28286.0,
+      "national": 41655.0,
+      "ratio": 0.679
+    },
+    {
+      "catCode": "100121060",
+      "name": "シャンプー",
+      "value": 3062.0,
+      "national": 4153.0,
+      "ratio": 0.737
+    },
+    {
+      "catCode": "010800080",
+      "name": "他の洋生菓子",
+      "value": 8103.0,
+      "national": 10915.0,
+      "ratio": 0.742
+    },
+    {
+      "catCode": "030100000",
+      "name": "電気代",
+      "value": 109550.0,
+      "national": 144092.0,
+      "ratio": 0.76
+    },
+    {
+      "catCode": "110500000",
+      "name": "家具・家事用品(財・サービス)",
+      "value": 118828.0,
+      "national": 153459.0,
+      "ratio": 0.774
+    }
+  ],
+  "topRatioItems": [
+    {
+      "catCode": "100150030",
+      "name": "婚礼関係費",
+      "value": 51955.0,
+      "national": 3195.0,
+      "ratio": 16.261
+    },
+    {
+      "catCode": "100150050",
+      "name": "他の冠婚葬祭費",
+      "value": 15194.0,
+      "national": 1851.0,
+      "ratio": 8.209
+    },
+    {
+      "catCode": "020100020",
+      "name": "公営家賃",
+      "value": 48343.0,
+      "national": 8485.0,
+      "ratio": 5.697
+    },
+    {
+      "catCode": "070100060",
+      "name": "バス通勤定期代",
+      "value": 5571.0,
+      "national": 1158.0,
+      "ratio": 4.811
+    },
+    {
+      "catCode": "080100070",
+      "name": "国公立大学",
+      "value": 19635.0,
+      "national": 4665.0,
+      "ratio": 4.209
+    },
+    {
+      "catCode": "070100040",
+      "name": "バス代",
+      "value": 9585.0,
+      "national": 2756.0,
+      "ratio": 3.478
+    },
+    {
+      "catCode": "040200050",
+      "name": "カーテン",
+      "value": 3655.0,
+      "national": 1229.0,
+      "ratio": 2.974
+    },
+    {
+      "catCode": "070100070",
+      "name": "タクシー代",
+      "value": 11388.0,
+      "national": 4405.0,
+      "ratio": 2.585
+    },
+    {
+      "catCode": "010230030",
+      "name": "かまぼこ",
+      "value": 7049.0,
+      "national": 3257.0,
+      "ratio": 2.164
+    },
+    {
+      "catCode": "010230010",
+      "name": "揚げかまぼこ",
+      "value": 4678.0,
+      "national": 2419.0,
+      "ratio": 1.934
+    },
+    {
+      "catCode": "040200030",
+      "name": "室内装飾品",
+      "value": 2214.0,
+      "national": 1167.0,
+      "ratio": 1.897
+    },
+    {
+      "catCode": "100400010",
+      "name": "国内遊学仕送り金",
+      "value": 94384.0,
+      "national": 50910.0,
+      "ratio": 1.854
+    },
+    {
+      "catCode": "090205010",
+      "name": "動物病院代",
+      "value": 17416.0,
+      "national": 9572.0,
+      "ratio": 1.819
+    },
+    {
+      "catCode": "070230060",
+      "name": "年極・月極駐車場借料",
+      "value": 25262.0,
+      "national": 14060.0,
+      "ratio": 1.797
+    },
+    {
+      "catCode": "010230000",
+      "name": "魚肉練製品",
+      "value": 15994.0,
+      "national": 9307.0,
+      "ratio": 1.718
+    },
+    {
+      "catCode": "050210060",
+      "name": "他の男子用洋服",
+      "value": 8554.0,
+      "national": 5159.0,
+      "ratio": 1.658
+    },
+    {
+      "catCode": "010211160",
+      "name": "さしみ盛合わせ",
+      "value": 6759.0,
+      "national": 4088.0,
+      "ratio": 1.653
+    },
+    {
+      "catCode": "010513110",
+      "name": "他の野菜のその他",
+      "value": 7745.0,
+      "national": 4784.0,
+      "ratio": 1.619
+    },
+    {
+      "catCode": "010211100",
+      "name": "ぶり",
+      "value": 4877.0,
+      "national": 3040.0,
+      "ratio": 1.604
+    },
+    {
+      "catCode": "020100030",
+      "name": "給与住宅家賃",
+      "value": 7433.0,
+      "national": 4697.0,
+      "ratio": 1.582
+    }
+  ],
+  "bottomRatioItems": [
+    {
+      "catCode": "080100080",
+      "name": "私立大学",
+      "value": 0.0,
+      "national": 46702.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "050220060",
+      "name": "女子用学校制服",
+      "value": 0.0,
+      "national": 1186.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "040600010",
+      "name": "家事代行料",
+      "value": 0.0,
+      "national": 1680.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "040120020",
+      "name": "ストーブ・温風ヒーター",
+      "value": 0.0,
+      "national": 1184.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "020100050",
+      "name": "他の家賃地代",
+      "value": 0.0,
+      "national": 1002.0,
+      "ratio": 0.0
+    },
+    {
+      "catCode": "080100100",
+      "name": "専修学校",
+      "value": 220.0,
+      "national": 5581.0,
+      "ratio": 0.039
+    },
+    {
+      "catCode": "090100080",
+      "name": "楽器",
+      "value": 88.0,
+      "national": 1844.0,
+      "ratio": 0.048
+    },
+    {
+      "catCode": "100132020",
+      "name": "通学用かばん",
+      "value": 73.0,
+      "national": 1157.0,
+      "ratio": 0.063
+    },
+    {
+      "catCode": "070220001",
+      "name": "自転車購入",
+      "value": 342.0,
+      "national": 3838.0,
+      "ratio": 0.089
+    },
+    {
+      "catCode": "050800020",
+      "name": "被服賃借料",
+      "value": 193.0,
+      "national": 1810.0,
+      "ratio": 0.107
+    },
+    {
+      "catCode": "060400070",
+      "name": "人間ドック等受診料",
+      "value": 544.0,
+      "national": 4320.0,
+      "ratio": 0.126
+    },
+    {
+      "catCode": "090430060",
+      "name": "自動車教習料",
+      "value": 437.0,
+      "national": 3218.0,
+      "ratio": 0.136
+    },
+    {
+      "catCode": "090202010",
+      "name": "ゴルフ用具",
+      "value": 196.0,
+      "national": 1267.0,
+      "ratio": 0.155
+    },
+    {
+      "catCode": "080100020",
+      "name": "私立小学校",
+      "value": 214.0,
+      "national": 1277.0,
+      "ratio": 0.168
+    },
+    {
+      "catCode": "040300020",
+      "name": "布団",
+      "value": 458.0,
+      "national": 2697.0,
+      "ratio": 0.17
+    },
+    {
+      "catCode": "100133020",
+      "name": "腕時計",
+      "value": 341.0,
+      "national": 1965.0,
+      "ratio": 0.174
+    },
+    {
+      "catCode": "110400010",
+      "name": "耐久財(住居)",
+      "value": 8032.0,
+      "national": 41112.0,
+      "ratio": 0.195
+    },
+    {
+      "catCode": "020210010",
+      "name": "設備器具",
+      "value": 8032.0,
+      "national": 41112.0,
+      "ratio": 0.195
+    },
+    {
+      "catCode": "050220050",
+      "name": "婦人用コート",
+      "value": 365.0,
+      "national": 1804.0,
+      "ratio": 0.202
+    },
+    {
+      "catCode": "080100040",
+      "name": "私立中学校",
+      "value": 1436.0,
+      "national": 6385.0,
+      "ratio": 0.225
+    }
+  ]
+}
