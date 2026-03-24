@@ -11,7 +11,7 @@ export function createLocalAdapter(dbPath: string): D1Database {
   const Database = require("better-sqlite3");
   
   if (dbPath) {
-    logger.info({ dbPath }, "[D1 Local Adapter] DBを開いています");
+    logger.debug({ dbPath }, "[D1 Local Adapter] DBを開いています");
   }
 
   const db = new Database(dbPath, { readonly: false });

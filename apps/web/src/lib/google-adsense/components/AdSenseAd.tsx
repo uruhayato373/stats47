@@ -35,13 +35,6 @@ export function AdSenseAd({
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
   const isEnabled = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
 
-  console.log("[AdSenseAd] Config:", {
-    NODE_ENV: process.env.NODE_ENV,
-    ENABLED_VAR: process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED,
-    isEnabled,
-    clientId: clientId ? "Set" : "Not Set"
-  });
-
   // 開発環境またはAdSenseが無効な場合はプレースホルダーを表示
   if (!isEnabled) {
     return <AdSensePlaceholder format={format} className={className} />;

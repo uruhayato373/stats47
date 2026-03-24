@@ -65,7 +65,7 @@ export function createDatabaseClient(options: DatabaseClientOptions): D1Database
 
     if (fs.existsSync(resolvedPath)) {
       logger.debug({ dbPath: resolvedPath }, "ローカルD1アダプタを使用");
-      logger.info({ dbPath: resolvedPath }, "ローカルDBファイルが見つかりました");
+      logger.debug({ dbPath: resolvedPath }, "ローカルDBファイルが見つかりました");
 
       return createLocalAdapter(resolvedPath);
     } else {

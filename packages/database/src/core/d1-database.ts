@@ -56,7 +56,7 @@ export function getStaticDatabase(): D1Database {
 
   // 3. ローカルアダプタパス (開発環境またはフォールバック用)
   const localPath = getLocalDbPaths().STATIC.getPath();
-  logger.info({ localPath }, "[getStaticDatabase] Fallback to Local Adapter");
+  logger.debug({ localPath }, "[getStaticDatabase] Fallback to Local Adapter");
 
   // 4. クライアント作成
   // createDatabaseClientは binding があればそれを使い、なければ条件に応じてローカルアダプタを使う
