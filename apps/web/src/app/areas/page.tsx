@@ -1,6 +1,7 @@
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { AreaSelectorMap } from "@/features/area-profile/components/AreaSelectorMap";
+import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -86,6 +87,13 @@ export default function AreasPage() {
                     );
                 })}
               </div>
+            </div>
+
+            <div className="flex justify-center mt-8">
+              <AdSenseAd
+                format={RANKING_PAGE_FOOTER.format}
+                slotId={RANKING_PAGE_FOOTER.slotId}
+              />
             </div>
         </div>
     );
