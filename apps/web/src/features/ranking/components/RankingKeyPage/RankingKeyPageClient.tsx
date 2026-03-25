@@ -268,6 +268,11 @@ export function RankingKeyPageClient({
     return (
         <div className="container mx-auto px-4 py-4">
             <h1 className="text-lg font-bold">{displayInfo.title}</h1>
+            {(displayInfo.subtitle || displayInfo.demographicAttr || displayInfo.normalizationBasis) && (
+                <p className="text-xs text-muted-foreground mt-0.5">
+                    {[displayInfo.subtitle, displayInfo.demographicAttr, displayInfo.normalizationBasis].filter(Boolean).join(" / ")}
+                </p>
+            )}
 
             {/* メインコンテンツ + 右サイドバー */}
             <div className={isAboveLg && sidebarSection ? "flex gap-4 mt-4 items-start" : "mt-4"}>
