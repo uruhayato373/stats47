@@ -16,6 +16,9 @@ export { RelatedAreas } from "./components/RelatedAreas";
 export { CategoryNavGrid } from "./components/CategoryNavGrid";
 export { CategorySelect } from "./components/CategorySelect";
 
+// チャートセクション（Server Component）
+export { AreaChartSection } from "./components/AreaChartSection";
+
 // ユーティリティ
 export {
   generateAreaProfileBreadcrumbStructuredData,

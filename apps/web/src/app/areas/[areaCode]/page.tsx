@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
+    AreaChartSection,
     RelatedAreas,
     CategoryNavGrid,
     generateAreaProfileBreadcrumbStructuredData,
@@ -183,6 +184,12 @@ export default async function AreaProfilePage({ params }: PageProps) {
             {/* 1カラムレイアウト */}
             <div className="container mx-auto px-4 py-10">
                 <main className="min-w-0 space-y-10">
+                    {/* DB管理チャート */}
+                    <AreaChartSection
+                        areaCode={areaCode}
+                        areaName={profile.areaName}
+                    />
+
                     {/* カテゴリナビゲーション */}
                     <CategoryNavGrid
                         categories={categories}
