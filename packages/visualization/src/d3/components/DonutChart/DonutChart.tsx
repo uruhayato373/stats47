@@ -87,7 +87,7 @@ export function DonutChart({
 
         const total = d3.sum(data, d => d.value);
 
-        const baseFontSize = computeFontSize(width, height, 0.02); // 12 / 600 = 0.02
+        const baseFontSize = computeFontSize(width, height, 0.025); // 12 / 600 = 0.02
 
         g.append("g")
             .attr("font-family", "sans-serif")

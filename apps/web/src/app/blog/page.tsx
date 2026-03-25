@@ -53,7 +53,7 @@ export default async function BlogIndexPage() {
 
             <div className="container mx-auto px-4 py-6">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-bold mb-1">ブログ</h1>
+                    <h1 className="text-lg font-bold mb-1">ブログ</h1>
                     <p className="text-sm text-muted-foreground">
                         都道府県の統計データを分析した記事を掲載しています
                     </p>

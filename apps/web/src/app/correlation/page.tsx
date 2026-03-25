@@ -52,9 +52,13 @@ export default async function CorrelationPage({ searchParams }: PageProps) {
         unit: item.unit,
     }));
 
+    // URL パラメータ指定 or ランキング1位をデフォルト表示
+    const defaultX = x ?? topCorrelations[0]?.rankingKeyX;
+    const defaultY = y ?? topCorrelations[0]?.rankingKeyY;
+
     let initialData: Awaited<ReturnType<typeof fetchCorrelationPairAction>> | undefined;
-    if (x && y && x !== y) {
-        initialData = await fetchCorrelationPairAction(x, y);
+    if (defaultX && defaultY && defaultX !== defaultY) {
+        initialData = await fetchCorrelationPairAction(defaultX, defaultY);
     }
 
     return (
@@ -63,8 +67,8 @@ export default async function CorrelationPage({ searchParams }: PageProps) {
             topCorrelations={topCorrelations}
             totalPairs={totalPairs}
             strongCorrelationCount={strongCount}
-            initialX={x}
-            initialY={y}
+            initialX={defaultX}
+            initialY={defaultY}
             initialData={initialData}
         />
     );

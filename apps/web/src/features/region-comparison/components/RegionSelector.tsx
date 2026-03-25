@@ -27,28 +27,20 @@ interface PrefectureSelectProps {
   excludeCode: string;
   /** ドット表示色 */
   color: string;
-  /** 「地域 A」「地域 B」など */
-  label: string;
 }
 
 /**
  * 都道府県選択ドロップダウン（地域A・B共通サブコンポーネント）
  */
-function PrefectureSelect({ value, onChange, excludeCode, color, label }: PrefectureSelectProps) {
+function PrefectureSelect({ value, onChange, excludeCode, color }: PrefectureSelectProps) {
   const allPrefectures = fetchPrefectures();
   const available = allPrefectures.filter((p) => p.prefCode !== excludeCode);
   const selected = allPrefectures.find((p) => p.prefCode === value);
 
   return (
-    <div className="flex flex-col gap-2">
-      {/* ラベル行 */}
-      <div className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
-        <span className="inline-block h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
-        {label}
-      </div>
-      {/* ドロップダウン */}
+    <div>
       <Select value={value || ""} onValueChange={onChange}>
-        <SelectTrigger className="h-12 w-full rounded-xl border-2 text-base font-bold text-foreground focus:ring-2"
+        <SelectTrigger className="h-9 w-full rounded-lg border text-sm font-semibold text-foreground focus:ring-2"
           style={{ borderColor: value ? color : undefined }}>
           <SelectValue placeholder="都道府県を選択">
             {selected ? selected.prefName : "都道府県を選択"}
@@ -88,20 +80,19 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
   const handleSelectB = (code: string) => updateUrl([codeA, code]);
 
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
-      <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-4">
+    <div className="rounded-xl border bg-card px-4 py-3 shadow-sm">
+      <div className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
         {/* 地域A */}
         <PrefectureSelect
           value={codeA}
           onChange={handleSelectA}
           excludeCode={codeB}
           color={REGION_A_COLOR}
-          label="地域 A"
         />
 
         {/* VS バッジ */}
-        <div className="flex h-12 items-center justify-center">
-          <span className="text-2xl font-black tracking-widest text-muted-foreground/50">VS</span>
+        <div className="flex h-9 items-center justify-center">
+          <span className="text-sm font-bold text-muted-foreground/50">VS</span>
         </div>
 
         {/* 地域B */}
@@ -110,18 +101,13 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
           onChange={handleSelectB}
           excludeCode={codeA}
           color={REGION_B_COLOR}
-          label="地域 B"
         />
       </div>
 
       {/* 未選択時のガイドテキスト */}
       {(!codeA || !codeB) && (
         <p className="mt-4 text-center text-sm text-amber-600">
-          {!codeA && !codeB
-            ? "地域AとBをそれぞれ選択してください"
-            : !codeA
-            ? "地域Aを選択してください"
-            : "地域Bを選択してください"}
+          2つの都道府県を選択してください
         </p>
       )}
     </div>

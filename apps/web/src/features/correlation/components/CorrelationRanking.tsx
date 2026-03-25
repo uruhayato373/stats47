@@ -13,6 +13,8 @@ import type { TopCorrelation } from "@stats47/correlation/server";
 
 interface CorrelationRankingProps {
     topCorrelations: TopCorrelation[];
+    totalPairs: number;
+    strongCorrelationCount: number;
     onSelect: (keyX: string, keyY: string) => void;
 }
 
@@ -20,6 +22,8 @@ const INITIAL_DISPLAY = 10;
 
 export function CorrelationRanking({
     topCorrelations,
+    totalPairs,
+    strongCorrelationCount,
     onSelect,
 }: CorrelationRankingProps) {
     const [showAll, setShowAll] = useState(false);
@@ -27,10 +31,18 @@ export function CorrelationRanking({
         ? topCorrelations
         : topCorrelations.slice(0, INITIAL_DISPLAY);
 
+    const strongRatio =
+        totalPairs > 0
+            ? ((strongCorrelationCount / totalPairs) * 100).toFixed(1)
+            : "0";
+
     return (
         <Card>
             <CardHeader className="pb-3">
                 <CardTitle className="text-base">相関係数ランキング</CardTitle>
+                <p className="text-xs text-muted-foreground">
+                    {totalPairs.toLocaleString()}ペア中 |r| ≥ 0.7: {strongCorrelationCount.toLocaleString()}件（{strongRatio}%）
+                </p>
             </CardHeader>
             <CardContent className="space-y-1 px-3 pb-3">
                 {displayed.map((item, idx) => (

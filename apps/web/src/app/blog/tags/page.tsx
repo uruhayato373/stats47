@@ -57,7 +57,7 @@ export default async function TagsIndexPage() {
             </div>
 
             <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-2 text-2xl font-bold">タグ一覧</h1>
+                <h1 className="mb-2 text-lg font-bold">タグ一覧</h1>
                 <p className="mb-8 text-muted-foreground">
                     タグから記事を探す
                 </p>

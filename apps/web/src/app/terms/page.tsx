@@ -36,7 +36,7 @@ export default function TermsPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-4">利用規約</h1>
+        <h1 className="text-lg font-bold mb-4">利用規約</h1>
         <p className="text-muted-foreground leading-relaxed">
           本規約は、統計で見る都道府県（stats47、以下「当サービス」）の提供するサービスの利用条件を定めるものです。利用者は、本規約に同意の上、当サービスを利用するものとします。
         </p>

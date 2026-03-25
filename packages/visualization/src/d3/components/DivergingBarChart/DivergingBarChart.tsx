@@ -43,7 +43,7 @@ export function DivergingBarChart({
   const marginsByRatio = computeMarginsByRatio(width, height, {
     top: 10 / 500,
     right: 10 / 800,
-    bottom: 30 / 500,
+    bottom: 50 / 500,
     left: 50 / 800,
   });
 
@@ -62,7 +62,7 @@ export function DivergingBarChart({
     marginRight,
     marginBottom,
   } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.02);
+  const baseFontSize = computeFontSize(width, height, 0.025);
 
   const defaultFormatter = (d: number) => {
     const abs = Math.abs(d);
@@ -180,7 +180,8 @@ export function DivergingBarChart({
           .tickSizeOuter(0),
       )
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize));
+      .call((g) => g.selectAll(".tick line").remove())
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     // --- Y axis ---
     svg
@@ -193,14 +194,11 @@ export function DivergingBarChart({
           .tickFormat((v) => formatY(Number(v))),
       )
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize))
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", innerWidth)
-          .attr("stroke-opacity", 0.06),
-      );
+          .attr("stroke-opacity", 0.06)
+      )
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
   }, [
     data,
     categoryKey,

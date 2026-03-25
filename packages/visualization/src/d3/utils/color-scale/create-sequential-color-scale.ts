@@ -6,7 +6,7 @@
  */
 
 import type { SequentialColorScaleOptions } from "../../types";
-import { createColorSchemes } from './create-color-schemes';
+import { resolveColorInterpolator } from './create-color-schemes';
 
 /**
  * 順序カラースケールを生成
@@ -33,9 +33,8 @@ export async function createSequentialColorScale(
     return () => noDataColor;
   }
 
-  const colorSchemes = createColorSchemes(d3);
+  const base = resolveColorInterpolator(d3, colorScheme);
   const interpolator = (t: number) => {
-    const base = colorSchemes[colorScheme] || d3.interpolateBlues;
     return isReversed ? base(1 - t) : base(t);
   };
 

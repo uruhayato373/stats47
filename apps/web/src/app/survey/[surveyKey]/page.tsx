@@ -132,7 +132,7 @@ export default async function SurveyPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 text-foreground">
       {/* ヘッダー */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-lg font-bold">
           {survey.name}
           <span className="ml-2 text-sm font-normal text-muted-foreground">
             {rankingItems.length}件

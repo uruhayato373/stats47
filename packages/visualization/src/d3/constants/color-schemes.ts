@@ -13,7 +13,21 @@ export const SEQUENTIAL_COLOR_SCHEMES: ColorScheme[] = [
   { value: 'interpolatePurples', label: '紫', type: 'sequential' },
   { value: 'interpolateReds', label: '赤', type: 'sequential' },
   
-  // 多色グラデーション
+  // マルチカラー系
+  { value: 'interpolateBuGn', label: '青→緑', type: 'sequential' },
+  { value: 'interpolateBuPu', label: '青→紫', type: 'sequential' },
+  { value: 'interpolateGnBu', label: '緑→青', type: 'sequential' },
+  { value: 'interpolateOrRd', label: 'オレンジ→赤', type: 'sequential' },
+  { value: 'interpolatePuBuGn', label: '紫→青→緑', type: 'sequential' },
+  { value: 'interpolatePuBu', label: '紫→青', type: 'sequential' },
+  { value: 'interpolatePuRd', label: '紫→赤', type: 'sequential' },
+  { value: 'interpolateRdPu', label: '赤→紫', type: 'sequential' },
+  { value: 'interpolateYlGnBu', label: '黄→緑→青', type: 'sequential' },
+  { value: 'interpolateYlGn', label: '黄→緑', type: 'sequential' },
+  { value: 'interpolateYlOrBr', label: '黄→橙→茶', type: 'sequential' },
+  { value: 'interpolateYlOrRd', label: '黄→橙→赤', type: 'sequential' },
+
+  // 知覚的に均一（色覚異常対応）
   { value: 'interpolateViridis', label: 'Viridis', type: 'sequential' },
   { value: 'interpolatePlasma', label: 'Plasma', type: 'sequential' },
   { value: 'interpolateInferno', label: 'Inferno', type: 'sequential' },

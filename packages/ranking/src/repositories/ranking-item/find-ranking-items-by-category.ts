@@ -19,6 +19,7 @@ export interface CategoryRankingItem {
   description: string | null;
   demographicAttr: string | null;
   normalizationBasis: string | null;
+  groupKey: string | null;
   isFeatured: boolean;
 }
 
@@ -40,6 +41,7 @@ export async function findRankingItemsByCategory(
         description: rankingItems.description,
         demographicAttr: rankingItems.demographicAttr,
         normalizationBasis: rankingItems.normalizationBasis,
+        groupKey: rankingItems.groupKey,
         isFeatured: rankingItems.isFeatured,
       })
       .from(rankingItems)

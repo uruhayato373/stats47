@@ -12,6 +12,12 @@ interface MapColorLegendProps {
   data: MapDataPoint[];
   unit?: string;
   position?: L.ControlPosition;
+  /** 値の変換表示（conversionFactor, decimalPlaces, displayUnit） */
+  valueDisplay?: {
+    conversionFactor?: number;
+    decimalPlaces?: number;
+    displayUnit?: string;
+  };
 }
 
 /**
@@ -24,6 +30,7 @@ export function MapColorLegend({
   data,
   unit = "",
   position = "bottomright",
+  valueDisplay,
 }: MapColorLegendProps) {
   const map = useMap();
   const controlRef = useRef<L.Control | null>(null);
@@ -52,7 +59,7 @@ export function MapColorLegend({
       legend.onAdd = () => {
         const div = L.DomUtil.create("div", "leaflet-legend");
         div.style.cssText =
-          "background:rgba(255,255,255,0.92);padding:6px 10px;border-radius:6px;font-size:11px;line-height:1.4;box-shadow:0 1px 4px rgba(0,0,0,0.15);backdrop-filter:blur(4px);";
+          "background:rgba(255,255,255,0.92);padding:6px 10px;border-radius:6px;font-size:11px;line-height:1.4;box-shadow:0 1px 4px rgba(0,0,0,0.15);backdrop-filter:blur(4px);min-width:180px;";
 
         // 10段階グラデーション
         const steps = 10;
@@ -68,8 +75,14 @@ export function MapColorLegend({
           gradientParts.push(color);
         }
 
+        const factor = valueDisplay?.conversionFactor ?? 1;
+        const dp = valueDisplay?.decimalPlaces;
+        const displayUnit = valueDisplay?.displayUnit ?? unit;
+        const fmtMin = formatValue(min * factor, dp);
+        const fmtMax = formatValue(max * factor, dp);
+
         const gradientBar = `<div style="height:10px;border-radius:3px;background:linear-gradient(to right,${gradientParts.join(",")});margin:2px 0;"></div>`;
-        const labels = `<div style="display:flex;justify-content:space-between;color:#64748b;"><span>${formatValue(min)}</span><span>${formatValue(max)}${unit ? ` ${unit}` : ""}</span></div>`;
+        const labels = `<div style="display:flex;justify-content:space-between;color:#64748b;"><span>${fmtMin}</span><span>${fmtMax}${displayUnit ? ` ${displayUnit}` : ""}</span></div>`;
 
         div.innerHTML = gradientBar + labels;
         return div;
@@ -91,7 +104,10 @@ export function MapColorLegend({
   return null;
 }
 
-function formatValue(value: number): string {
+function formatValue(value: number, decimalPlaces?: number): string {
+  if (decimalPlaces !== undefined) {
+    return value.toLocaleString(undefined, { minimumFractionDigits: decimalPlaces, maximumFractionDigits: decimalPlaces });
+  }
   if (Math.abs(value) >= 10000) {
     return (value / 10000).toFixed(1) + "万";
   }

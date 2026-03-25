@@ -87,8 +87,23 @@
    - top 10: 再生数上位 10 本（再生・いいね・コメント）
    → 前週データがある場合は増減を算出
 
-6. 週次メトリクス記録
-   取得した GA4/GSC/YouTube データを `docs/60_運用ログ/weekly-metrics/YYYY-WNN.md` に保存:
+6. SEO 指標を DB に記録
+   GSC カバレッジレポートの数値を `seo_tracking` テーブルに INSERT する:
+   ```sql
+   -- ローカル D1 に better-sqlite3 で接続
+   INSERT OR REPLACE INTO seo_tracking (date, metric_key, value, note, created_at)
+   VALUES ('YYYY-MM-DD', 'crawled_not_indexed', N, 'GSCカバレッジレポートより', datetime('now'));
+   INSERT OR REPLACE INTO seo_tracking (date, metric_key, value, note, created_at)
+   VALUES ('YYYY-MM-DD', 'indexed', N, 'GSCカバレッジレポートより', datetime('now'));
+   ```
+   また `seo_actions` テーブルの施策ステータスを確認し、実施済みの施策があれば更新する:
+   ```sql
+   UPDATE seo_actions SET status = 'done', implemented_at = 'YYYY-MM-DD', updated_at = datetime('now')
+   WHERE id = ? AND status != 'done';
+   ```
+
+7. 週次メトリクス記録
+   GA4/GSC/YouTube データを `docs/60_運用ログ/weekly-metrics/YYYY-WNN.md` に保存:
    ```markdown
    # 週次メトリクス YYYY-WNN
    ## GA4（YYYY-MM-DD 取得）
@@ -102,6 +117,7 @@
    - 登録者: N / 総再生: N / 動画数: N
    - 再生数 Top 10: ...
    ```
+   注: SEO カバレッジ指標（クロール済み未インデックス数等）は DB（seo_tracking）で管理。md には GA4/GSC/YouTube の詳細データのみ記録する。
 
 出力形式:
 - 「パフォーマンス概況」（GA4/GSC/YouTube の主要指標を明記）
@@ -308,7 +324,9 @@ generatedAt: "YYYY-MM-DD"
 ## 参照
 
 - `docs/03_レビュー/weekly/` — 週次計画・レビューの蓄積先
-- `docs/60_運用ログ/weekly-metrics/` — 週次メトリクスの蓄積先
+- `docs/60_運用ログ/weekly-metrics/` — 週次メトリクスの蓄積先（GA4/GSC/YouTube 詳細データ）
+- DB `seo_tracking` テーブル — SEO カバレッジ指標の数値推移（crawled_not_indexed 等）
+- DB `seo_actions` テーブル — SEO 改善施策の管理（planned → in_progress → done）
 - `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
 - `docs/11_SNS投稿管理/` — SNS コンテンツ状況
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順

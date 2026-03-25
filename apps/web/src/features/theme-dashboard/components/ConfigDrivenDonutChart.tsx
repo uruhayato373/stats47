@@ -84,8 +84,8 @@ export function ConfigDrivenDonutChart({ config, prefCode, prefName }: Props) {
         ))}
       </div>
       {config.source && (
-        <p className="text-[10px] text-muted-foreground mt-1">
-          {prefName} / 出典: {config.source}
+        <p className="text-[10px] text-muted-foreground mt-1 text-right">
+          出典: {config.source}
         </p>
       )}
     </>

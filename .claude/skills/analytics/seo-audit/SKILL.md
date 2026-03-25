@@ -387,6 +387,30 @@ focus: "all | technical | content | keywords | programmatic"
 - 主要指標の推移を記載（トラフィック・インデックス率・順位）
 - 前回 P0/P1 で未実行のアクションは今回も引き継ぐ
 
+## SEO トラッキング DB の活用
+
+DB `seo_tracking` テーブルと `seo_actions` テーブルを参照・更新する:
+
+### データ参照
+```sql
+-- カバレッジ指標の推移（直近10件）
+SELECT date, metric_key, value, note FROM seo_tracking ORDER BY date DESC LIMIT 10;
+
+-- 未完了の改善施策
+SELECT id, title, status, priority, description FROM seo_actions WHERE status != 'done' ORDER BY priority;
+```
+
+### レポート出力時
+- `seo_tracking` のトレンドをレポートの「インデックス状況」セクションに含める
+- `seo_actions` の未完了施策をアクションリストに反映（重複登録しない）
+
+### 新規施策の登録
+監査で新たに発見した改善施策は `seo_actions` に INSERT する:
+```sql
+INSERT INTO seo_actions (metric_key, title, description, status, priority, created_at, updated_at)
+VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, datetime('now'), datetime('now'));
+```
+
 ## トーンと姿勢
 
 - **データで語る**: 「たぶん改善できる」ではなく「順位 8 位・imp 2,400 → タイトル改善で CTR 3%→5% なら +48 clicks/月」
@@ -410,3 +434,5 @@ focus: "all | technical | content | keywords | programmatic"
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
 - `docs/03_レビュー/seo-audit/` — 過去の監査レポート
+- DB `seo_tracking` テーブル — SEO カバレッジ指標の数値推移
+- DB `seo_actions` テーブル — SEO 改善施策の管理（planned → in_progress → done）

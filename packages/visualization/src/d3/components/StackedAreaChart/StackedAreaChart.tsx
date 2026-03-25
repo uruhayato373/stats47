@@ -49,7 +49,7 @@ export function StackedAreaChart({
   const marginsByRatio = computeMarginsByRatio(width, height, {
     top: 20 / 500,
     right: 20 / 800,
-    bottom: 40 / 500,
+    bottom: 50 / 500,
     left: 55 / 800,
   });
 
@@ -68,7 +68,7 @@ export function StackedAreaChart({
     marginRight,
     marginBottom,
   } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.02);
+  const baseFontSize = computeFontSize(width, height, 0.025);
 
   const defaultYFormat = normalize
     ? (v: number) => `${Math.round(v)}%`
@@ -250,7 +250,8 @@ export function StackedAreaChart({
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(xAxis)
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize));
+      .call((g) => g.selectAll(".tick line").remove())
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     // Y axis
     const yAxis = d3
@@ -262,14 +263,11 @@ export function StackedAreaChart({
       .attr("transform", `translate(${marginLeft},0)`)
       .call(yAxis)
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize))
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
           .attr("stroke-opacity", 0.1)
-      );
+      )
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
     // Legend is rendered as HTML below the SVG
   }, [
@@ -306,6 +304,16 @@ export function StackedAreaChart({
       {title && (
         <h3 className="mb-2 self-start text-lg font-semibold">{title}</h3>
       )}
+      {showLegend && series.length > 0 && (
+        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
+          {series.map((s) => (
+            <div key={s.key} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: s.color, opacity: 0.7 }} />
+              <span>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
@@ -318,16 +326,6 @@ export function StackedAreaChart({
           </div>
         )}
       </div>
-      {showLegend && series.length > 0 && (
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-1">
-          {series.map((s) => (
-            <div key={s.key} className="flex items-center gap-1.5 text-xs @[400px]:text-sm text-muted-foreground">
-              <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: s.color, opacity: 0.7 }} />
-              <span>{s.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@
  */
 
 import { calculateMidpoint } from './calculate-midpoint';
-import { createColorSchemes } from './create-color-schemes';
+import { resolveColorInterpolator } from './create-color-schemes';
 
 import type { DivergingColorScaleOptions } from "../../types";
 
@@ -36,9 +36,8 @@ export async function createDivergingColorScale(
     return () => noDataColor;
   }
 
-  const colorSchemes = createColorSchemes(d3);
+  const base = resolveColorInterpolator(d3, colorScheme, "interpolateRdBu");
   const interpolator = (t: number) => {
-    const base = colorSchemes[colorScheme] || d3.interpolateRdBu;
     return isReversed ? base(1 - t) : base(t);
   };
 

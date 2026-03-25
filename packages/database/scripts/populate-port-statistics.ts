@@ -35,6 +35,8 @@ interface MetricDef {
   portDimension: string;
   /** 港湾種別（フィルタ用） */
   portClass?: "甲種" | "乙種";
+  /** 同一 port+year で複数行が返る場合に合算するフラグ */
+  needsAggregation?: boolean;
 }
 
 const METRICS: MetricDef[] = [
@@ -247,7 +249,16 @@ const METRICS: MetricDef[] = [
     portDimension: "cat03",
     portClass: "乙種",
   },
-  // 乙種 container_tonnage: cat03 に合計コードがないためスキップ
+  {
+    key: "container_tonnage",
+    label: "コンテナ・シャーシトン数（合計）[乙種]",
+    statsDataId: "0003130808",
+    unit: "トン",
+    filters: { cdCat01: "100" },
+    portDimension: "cat02",
+    portClass: "乙種",
+    needsAggregation: true,
+  },
   {
     key: "vehicle_ferry_total",
     label: "自動車航送車両台数（合計）[乙種]",
@@ -383,6 +394,10 @@ function isIndividualPort(code: string): boolean {
 async function processMetric(metric: MetricDef): Promise<number> {
   console.log(`\n--- ${metric.key}: ${metric.label} ---`);
 
+  if (metric.needsAggregation) {
+    return processAggregateMetric(metric);
+  }
+
   const rawData = await fetchEstatData(metric.statsDataId, metric.filters);
   console.log(`  API レスポンス: ${rawData.length} 件`);
 
@@ -401,6 +416,47 @@ async function processMetric(metric: MetricDef): Promise<number> {
 
       const year = timeCode.substring(0, 4);
 
+      if (!isDryRun) {
+        upsertStmt.run(portCode, year, metric.key, value, metric.unit);
+      }
+      inserted++;
+    }
+  });
+
+  txn();
+  console.log(`  ${isDryRun ? "[DRY RUN] " : ""}投入: ${inserted} 件`);
+  return inserted;
+}
+
+/** 同一 port+year の複数行を合算して投入 */
+async function processAggregateMetric(metric: MetricDef): Promise<number> {
+  const portDimKey = `@${metric.portDimension}`;
+
+  const rawData = await fetchEstatData(metric.statsDataId, metric.filters);
+  console.log(`  API レスポンス: ${rawData.length} 件（合算モード）`);
+
+  const aggregated = new Map<string, number>();
+
+  for (const row of rawData) {
+    const portCode = row[portDimKey];
+    const timeCode = row["@time"];
+    const value = parseFloat(row["$"]);
+
+    if (!portCode || !timeCode || isNaN(value)) continue;
+    if (!isIndividualPort(portCode)) continue;
+    if (!knownPorts.has(portCode)) continue;
+
+    const year = timeCode.substring(0, 4);
+    const key = `${portCode}_${year}`;
+    aggregated.set(key, (aggregated.get(key) ?? 0) + value);
+  }
+
+  console.log(`  合算結果: ${aggregated.size} 件`);
+
+  let inserted = 0;
+  const txn = db.transaction(() => {
+    for (const [key, value] of aggregated) {
+      const [portCode, year] = key.split("_");
       if (!isDryRun) {
         upsertStmt.run(portCode, year, metric.key, value, metric.unit);
       }

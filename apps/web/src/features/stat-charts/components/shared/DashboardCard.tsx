@@ -56,14 +56,9 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   ];
 
   return (
-  <div className={cn("@container bg-card border rounded-lg shadow-sm", accentColor && "relative overflow-hidden", className)}>
-    {accentColor && (
-      <div
-        className="absolute left-0 top-0 h-full w-1 rounded-l-lg"
-        style={{ backgroundColor: accentColor }}
-      />
-    )}
-    <div className={accentColor ? "pl-2" : undefined}>
+  <div className={cn("@container bg-card border rounded-lg shadow-sm", className)}
+    style={accentColor ? { borderColor: `${accentColor}33` } : undefined}
+  >
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <h3 className="font-semibold text-base leading-none">
           {(() => {
@@ -80,7 +75,7 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
         </h3>
       </div>
 
-      <div className="p-4">
+      <div className="px-4 pt-4 pb-1.5">
         {description && (
           <p className="text-sm text-muted-foreground mb-4">{description}</p>
         )}
@@ -101,10 +96,26 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
           children
         )}
 
+        {source && (
+          <p className="text-xs text-muted-foreground mt-2 text-right">
+            出典:{" "}
+            {sourceLink ? (
+              <a href={sourceLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {source}
+              </a>
+            ) : (
+              source
+            )}
+            {sourceDetail ? ` (${sourceDetail})` : ""}
+          </p>
+        )}
+        {annotation && (
+          <p className="text-xs text-muted-foreground mt-1 text-right">{annotation}</p>
+        )}
         {allLinks.length > 0 && (
           <Accordion type="single" collapsible className="mt-2 border-t border-border">
             <AccordionItem value="links" className="border-none">
-              <AccordionTrigger className="py-2 text-xs text-muted-foreground hover:no-underline">
+              <AccordionTrigger className="pt-2 pb-1 text-xs text-muted-foreground hover:no-underline">
                 関連ランキング（{allLinks.length}件）
               </AccordionTrigger>
               <AccordionContent className="pb-2">
@@ -123,24 +134,7 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
             </AccordionItem>
           </Accordion>
         )}
-        {source && (
-          <p className="text-xs text-muted-foreground mt-2 text-right">
-            出典:{" "}
-            {sourceLink ? (
-              <a href={sourceLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {source}
-              </a>
-            ) : (
-              source
-            )}
-            {sourceDetail ? ` (${sourceDetail})` : ""}
-          </p>
-        )}
-        {annotation && (
-          <p className="text-xs text-muted-foreground mt-1 text-right">{annotation}</p>
-        )}
       </div>
-    </div>
   </div>
   );
 };

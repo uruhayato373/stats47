@@ -100,8 +100,14 @@ export const RankingItemDBSchema = z.object({
 
   annotation: z.preprocess(normalizeNull, z.string().nullable()).optional(),
   description: z.preprocess(normalizeNull, z.string().nullable()),
-  latest_year: parseJsonColumn(z.object({ yearCode: z.string(), yearName: z.string() })),
-  available_years: parseJsonColumn(z.array(z.object({ yearCode: z.string(), yearName: z.string() }))),
+  latest_year: parseJsonColumn(z.union([
+    z.object({ yearCode: z.string(), yearName: z.string() }),
+    z.string().transform((v) => ({ yearCode: v, yearName: v })),
+  ])),
+  available_years: parseJsonColumn(z.array(z.union([
+    z.object({ yearCode: z.string(), yearName: z.string() }),
+    z.string().transform((v) => ({ yearCode: v, yearName: v })),
+  ]))),
   
   is_active: z.union([z.boolean(), z.number()]).transform((val) => typeof val === "number" ? val === 1 : val),
   is_featured: z.union([z.boolean(), z.number()]).transform((val) => typeof val === "number" ? val === 1 : val).optional().default(false),

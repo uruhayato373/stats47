@@ -75,6 +75,9 @@ export async function RankingSidebarContainer({
                 areaType: item.areaType,
                 title: item.title,
                 subtitle: item.subtitle,
+                demographicAttr: item.demographicAttr,
+                normalizationBasis: item.normalizationBasis,
+                groupKey: item.groupKey,
             }))}
         />
     );

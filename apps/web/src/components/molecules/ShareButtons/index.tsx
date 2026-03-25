@@ -12,6 +12,7 @@ import { Check, Facebook, Link as LinkIcon, Twitter } from "lucide-react";
 import { useClipboard } from "./hooks/use-clipboard";
 import { useShareUrl } from "./hooks/use-share-url";
 import { generateShareLinks } from "./utils/generate-share-links";
+import { trackShare } from "@/lib/analytics/events";
 
 interface ShareButtonsProps {
   title: string;
@@ -96,9 +97,10 @@ export function ShareButtons({
                   ? `h-10 w-10 p-0 shadow-sm ${link.prominentClass}`
                   : `h-8 w-8 ${link.color}`
                   }`}
-                onClick={() =>
-                  window.open(link.href, "_blank", "width=600,height=400")
-                }
+                onClick={() => {
+                  trackShare({ method: link.name, contentType: "page" });
+                  window.open(link.href, "_blank", "width=600,height=400");
+                }}
               >
                 <ShareButtonIcon name={link.name} isProminent={isProminent} />
                 <span className="sr-only">{link.name}</span>

@@ -114,7 +114,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
             </div>
 
             <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-2 text-2xl font-bold">「{tagName}」の記事一覧</h1>
+                <h1 className="mb-2 text-lg font-bold">「{tagName}」の記事一覧</h1>
                 <p className="mb-8 text-muted-foreground">
                     {articles.length} 件の記事
                 </p>

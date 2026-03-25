@@ -106,8 +106,8 @@ export function BirthDeathRateLineChart({ prefCode, prefName }: Props) {
           tooltipFormatter={(v) => `${v.toFixed(1)}`}
         />
       </div>
-      <p className="text-[10px] text-muted-foreground mt-1">
-        {prefName}の粗出生率・粗死亡率の推移（人口千対） / 出典: 人口動態統計
+      <p className="text-[10px] text-muted-foreground mt-1 text-right">
+        出典: 人口動態統計
       </p>
     </>
   );

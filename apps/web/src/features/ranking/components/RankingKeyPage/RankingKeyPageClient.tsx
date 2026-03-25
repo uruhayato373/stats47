@@ -25,6 +25,7 @@ import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { DataDownloadIconButton } from "@/features/ranking/components/DataDownloadButton";
+import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
 
 import type { AreaType } from "@/features/area";
 import {
@@ -43,6 +44,15 @@ import {
     RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
 
+/** グループメンバー（normalization_basis トグル用） */
+interface GroupMember {
+    rankingKey: string;
+    title: string;
+    subtitle: string | null;
+    unit: string;
+    normalizationBasis: string | null;
+}
+
 interface RankingKeyPageClientProps {
     rankingKey: string;
     rankingItem: RankingItem;
@@ -50,7 +60,6 @@ interface RankingKeyPageClientProps {
     areaType?: AreaType;
     selectedYear?: string;
     topology?: TopoJSONTopology | null;
-    relatedSection?: ReactNode;
     correlationSection?: ReactNode;
     rankingPageCards?: ReactNode;
     insightsSection?: ReactNode;
@@ -64,6 +73,8 @@ interface RankingKeyPageClientProps {
     cityRankingItem?: RankingItem;
     /** 調査名（surveys テーブルから取得） */
     surveyName?: string;
+    /** グループメンバー（normalization_basis トグル用） */
+    groupMembers?: GroupMember[];
 }
 
 export function RankingKeyPageClient({
@@ -73,7 +84,6 @@ export function RankingKeyPageClient({
     areaType = "prefecture",
     selectedYear,
     topology,
-    relatedSection,
     correlationSection,
     rankingPageCards,
     insightsSection,
@@ -83,6 +93,7 @@ export function RankingKeyPageClient({
     sidebarSection,
     cityRankingItem,
     surveyName,
+    groupMembers = [],
 }: RankingKeyPageClientProps) {
     const [rankingValues, setRankingValues] = useState<RankingValue[]>(initialRankingValues);
     const [currentYear, setCurrentYear] = useState(selectedYear ?? "");
@@ -92,6 +103,17 @@ export function RankingKeyPageClient({
     const pathname = usePathname();
     const isBelowLg = useBreakpoint("belowLg");
     const isAboveLg = useBreakpoint("aboveLg");
+
+    // ランキングページ閲覧イベント
+    useEffect(() => {
+        trackRankingView({
+            rankingKey,
+            title: rankingItem.title,
+            categoryKey: rankingItem.categoryKey,
+            areaType: currentAreaType,
+            yearCode: currentYear,
+        });
+    }, [rankingKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // 現在の areaType に応じたランキング定義
     const activeRankingItem = currentAreaType === "city" && cityRankingItem
@@ -126,6 +148,7 @@ export function RankingKeyPageClient({
     };
 
     const handleYearChange = (newYear: string) => {
+        trackYearChange({ rankingKey, fromYear: currentYear, toYear: newYear });
         setCurrentYear(newYear);
         window.history.replaceState(null, "", buildUrl(newYear, currentAreaType));
         startTransition(async () => {
@@ -143,6 +166,7 @@ export function RankingKeyPageClient({
     };
 
     const handleAreaTypeChange = (newAreaType: AreaType) => {
+        trackAreaTypeChange({ rankingKey, areaType: newAreaType });
         setCurrentAreaType(newAreaType);
 
         // 切替先の rankingItem に基づいて年度を決定
@@ -267,11 +291,38 @@ export function RankingKeyPageClient({
 
     return (
         <div className="container mx-auto px-4 py-4">
-            <h1 className="text-lg font-bold">{displayInfo.title}</h1>
-            {(displayInfo.subtitle || displayInfo.demographicAttr || displayInfo.normalizationBasis) && (
-                <p className="text-xs text-muted-foreground mt-0.5">
-                    {[displayInfo.subtitle, displayInfo.demographicAttr, displayInfo.normalizationBasis].filter(Boolean).join(" / ")}
-                </p>
+            <h1 className="text-lg font-bold">
+                {displayInfo.title}
+                {(() => {
+                    const detail = [displayInfo.subtitle, displayInfo.demographicAttr].filter(Boolean).join("・");
+                    return detail ? <span className="text-muted-foreground font-normal">（{detail}）</span> : null;
+                })()}
+            </h1>
+
+            {/* normalization_basis グループトグル */}
+            {groupMembers.length > 1 && (
+                <div className="flex items-center gap-0.5 mt-2 w-fit">
+                    {[...groupMembers].sort((a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)).map((member) => {
+                        const isCurrent = member.rankingKey === rankingKey;
+                        const label = member.normalizationBasis || "総数";
+                        return isCurrent ? (
+                            <span
+                                key={member.rankingKey}
+                                className="text-xs px-2.5 pb-1 border-b-2 border-primary text-foreground font-medium"
+                            >
+                                {label}
+                            </span>
+                        ) : (
+                            <Link
+                                key={member.rankingKey}
+                                href={`/ranking/${member.rankingKey}`}
+                                className="text-xs px-2.5 pb-1 border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30 transition-colors"
+                            >
+                                {label}
+                            </Link>
+                        );
+                    })}
+                </div>
             )}
 
             {/* メインコンテンツ + 右サイドバー */}
@@ -373,9 +424,6 @@ export function RankingKeyPageClient({
                             itemDetail={rankingItem}
                         />
                     )}
-
-                    {/* 関連セクション（関連記事・関連グループ等） */}
-                    {relatedSection}
 
                     {/* 出典情報 */}
                     {rankingItem?.source && (

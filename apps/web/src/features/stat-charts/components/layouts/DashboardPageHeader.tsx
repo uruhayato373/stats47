@@ -20,7 +20,7 @@ export const DashboardPageHeader: React.FC<
     <Card className="border border-border shadow-sm rounded-none">
       <CardContent>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-lg font-bold">
             {areaName}の{categoryName}
           </h1>
           {children && <div className="flex-shrink-0">{children}</div>}

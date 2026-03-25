@@ -208,7 +208,7 @@ export function PrefectureStatsPanel({
   const hasTimeSeries = chartData.length > 1;
 
   return (
-    <Card className="border border-border shadow-sm rounded-sm h-full">
+    <Card className="border border-border shadow-sm rounded-lg">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary" />
@@ -285,7 +285,7 @@ export function PrefectureStatsPanel({
 
         {/* CPI 品目別プロファイル（consumer-prices テーマのみ） */}
         {isConsumerPricesTheme && selectedPrefectureCode && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">物価プロファイル</h3>
             {isCpiPending ? (
               <Skeleton className="h-[250px] w-full rounded-md" />
@@ -310,7 +310,7 @@ export function PrefectureStatsPanel({
 
         {/* CPI 年×品目ヒートマップ（consumer-prices テーマのみ） */}
         {isConsumerPricesTheme && selectedPrefectureCode && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">物価推移ヒートマップ</h3>
             {isCpiPending ? (
               <Skeleton className="h-[280px] w-full rounded-md" />
@@ -335,7 +335,7 @@ export function PrefectureStatsPanel({
 
         {/* 産業構造ドーナツチャート（local-economy テーマのみ） */}
         {isLocalEconomyTheme && selectedPrefectureCode && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">産業構造</h3>
             {isIndustryPending ? (
               <Skeleton className="h-[200px] w-full rounded-md" />
@@ -366,7 +366,7 @@ export function PrefectureStatsPanel({
 
         {/* 新しい働き方チャート（local-economy テーマのみ） */}
         {isLocalEconomyTheme && selectedPrefectureCode && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">新しい働き方</h3>
             {isWorkstylePending ? (
               <Skeleton className="h-[180px] w-full rounded-md" />
@@ -403,7 +403,7 @@ export function PrefectureStatsPanel({
 
         {/* 人口構成チャート（population-dynamics / aging-society テーマのみ） */}
         {isPopulationDynamicsTheme && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">年齢3区分人口構成の推移</h3>
             <AgeCompositionChart
               prefData={popCompositionResult?.prefData ?? null}
@@ -416,7 +416,7 @@ export function PrefectureStatsPanel({
 
         {/* 人口ピラミッド（population-dynamics / aging-society テーマ） */}
         {isPopulationDynamicsTheme && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">人口ピラミッド</h3>
             <PopulationPyramidChart
               prefCode={selectedPrefectureCode ?? "00000"}
@@ -427,7 +427,7 @@ export function PrefectureStatsPanel({
 
         {/* 出生率・死亡率の推移チャート（population-dynamics / aging-society テーマ） */}
         {isPopulationDynamicsTheme && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">出生率・死亡率の推移</h3>
             <BirthDeathRateLineChart
               prefCode={selectedPrefectureCode ?? "00000"}
@@ -438,7 +438,7 @@ export function PrefectureStatsPanel({
 
         {/* 自然増減率・社会増減率の推移チャート（population-dynamics / aging-society テーマ） */}
         {isPopulationDynamicsTheme && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">自然増減率・社会増減率の推移</h3>
             <NaturalSocialRateLineChart
               prefCode={selectedPrefectureCode ?? "00000"}
@@ -449,7 +449,7 @@ export function PrefectureStatsPanel({
 
         {/* Config-driven チャート */}
         {themeConfig?.charts?.map((chart, i) => (
-          <div key={i}>
+          <div key={i} className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
             {chart.type === "dual-line" && (
               <ConfigDrivenDualLineChart
@@ -470,7 +470,7 @@ export function PrefectureStatsPanel({
 
         {/* 推移チャート（population-dynamics / aging-society テーマでは専用チャートがあるのでスキップ） */}
         {selectedPrefectureCode && !isPopulationDynamicsTheme && (
-          <div>
+          <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">
               {currentIndicator?.rankingItem.title}の推移
             </h3>

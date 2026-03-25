@@ -87,7 +87,7 @@ export default async function HomePage() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-100/30 to-transparent skew-x-12 dark:from-blue-900/10" />
 
         <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
-          <h1 className="text-2xl font-bold mb-2">
+          <h1 className="text-lg font-bold mb-2">
             あなたの県は<span className="text-primary relative inline-block">
               何位？
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">

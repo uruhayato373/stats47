@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 
 import { logger } from "@/lib/logger";
+import { trackSearch } from "@/lib/analytics/events";
 import { SearchProvider, useSearch } from "../context/SearchContext";
 import type {
   ContentType,
@@ -112,6 +113,9 @@ function SearchPageClientInner({
           month: selectedType === "blog" ? selectedMonth : undefined,
         });
         setResults(response.results);
+        if (newQuery.trim()) {
+          trackSearch({ searchTerm: newQuery.trim(), resultsCount: response.results.length });
+        }
       } catch (error) {
         logger.error("Search failed:", error instanceof Error ? error.message : String(error));
       } finally {
@@ -191,7 +195,7 @@ function SearchPageClientInner({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-8">検索</h1>
+      <h1 className="text-lg font-bold mb-8">検索</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-8">
         {/* メインコンテンツ: 検索と結果 */}

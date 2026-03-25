@@ -1,45 +1,38 @@
 /**
- * D3カラースケール関数のマッピングを生成
+ * D3カラースケール関数を動的解決
  *
- * D3.jsのカラースケール補間関数をマッピングオブジェクトとして提供します。
+ * D3オブジェクトから interpolate* プロパティを動的に参照する。
+ * 手動マッピングを排除し、D3ColorScheme 型に定義された全スキームを自動的にサポートする。
  */
 
 import type { D3Module } from "../../types";
 
+// D3 ではファクトリ関数になっているスキームの正式名マッピング
+const D3_NAME_OVERRIDES: Record<string, string> = {
+  interpolateCubehelix: "interpolateCubehelixDefault",
+};
+
 /**
- * D3カラースケール関数のマッピングを生成
+ * D3オブジェクトからカラースキーム補間関数を取得
  *
  * @param d3 - D3モジュール
- * @returns カラースケール名と補間関数のマッピング
+ * @param colorScheme - カラースキーム名（例: "interpolateYlOrRd"）
+ * @param fallback - フォールバックのスキーム名（デフォルト: "interpolateBlues"）
+ * @returns 補間関数 (t: number) => string
  */
-export function createColorSchemes(d3: D3Module): Record<string, (t: number) => string> {
-  return {
-    // Sequential (単色グラデーション)
-    interpolateBlues: d3.interpolateBlues,
-    interpolateGreens: d3.interpolateGreens,
-    interpolateGreys: d3.interpolateGreys,
-    interpolateOranges: d3.interpolateOranges,
-    interpolatePurples: d3.interpolatePurples,
-    interpolateReds: d3.interpolateReds,
-
-    // Sequential (多色)
-    interpolateViridis: d3.interpolateViridis,
-    interpolatePlasma: d3.interpolatePlasma,
-    interpolateInferno: d3.interpolateInferno,
-    interpolateMagma: d3.interpolateMagma,
-    interpolateTurbo: d3.interpolateTurbo,
-    interpolateCool: d3.interpolateCool,
-    interpolateWarm: d3.interpolateWarm,
-
-    // Diverging (発散カラースケール)
-    interpolateBrBG: d3.interpolateBrBG,
-    interpolatePRGn: d3.interpolatePRGn,
-    interpolatePiYG: d3.interpolatePiYG,
-    interpolatePuOr: d3.interpolatePuOr,
-    interpolateRdBu: d3.interpolateRdBu,
-    interpolateRdGy: d3.interpolateRdGy,
-    interpolateRdYlBu: d3.interpolateRdYlBu,
-    interpolateRdYlGn: d3.interpolateRdYlGn,
-    interpolateSpectral: d3.interpolateSpectral,
-  };
+export function resolveColorInterpolator(
+  d3: D3Module,
+  colorScheme: string,
+  fallback = "interpolateBlues",
+): (t: number) => string {
+  const d3Key = D3_NAME_OVERRIDES[colorScheme] ?? colorScheme;
+  const fn = (d3 as Record<string, unknown>)[d3Key];
+  if (typeof fn === "function") {
+    // 関数が (t) => string ではなくファクトリの可能性を検証
+    const test = (fn as (t: number) => unknown)(0.5);
+    if (typeof test === "string") {
+      return fn as (t: number) => string;
+    }
+  }
+  return (d3 as Record<string, unknown>)[fallback] as (t: number) => string;
 }

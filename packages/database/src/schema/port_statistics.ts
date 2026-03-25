@@ -84,14 +84,71 @@ export const portStatistics = sqliteTable(
   })
 );
 
+/**
+ * 港湾貿易明細 — 品種別×仕向国/仕出国/仕向港/仕出港のクロス集計
+ *
+ * 第2部/第3部の第3表(4)-(7)、品種別仕向国・仕出国・仕向港・仕出港データ。
+ */
+export const portTradeDetail = sqliteTable(
+  "port_trade_detail",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    portCode: text("port_code")
+      .notNull()
+      .references(() => ports.portCode, { onDelete: "cascade" }),
+    year: text("year").notNull(),
+    direction: text("direction").notNull(), // "export" | "import" | "coastal_out" | "coastal_in"
+    commodityCode: text("commodity_code").notNull(),
+    commodityName: text("commodity_name"),
+    destinationCode: text("destination_code").notNull(),
+    destinationName: text("destination_name"),
+    destinationType: text("destination_type").notNull(), // "country" | "port"
+    value: real("value").notNull(),
+    unit: text("unit").notNull().default("トン"),
+    createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => ({
+    unq: uniqueIndex("port_trade_detail_unq").on(
+      table.portCode,
+      table.year,
+      table.direction,
+      table.commodityCode,
+      table.destinationCode
+    ),
+    portYearIdx: index("idx_port_trade_port_year").on(
+      table.portCode,
+      table.year
+    ),
+    directionIdx: index("idx_port_trade_direction").on(
+      table.direction,
+      table.year
+    ),
+    commodityIdx: index("idx_port_trade_commodity").on(
+      table.commodityCode,
+      table.year
+    ),
+    destinationIdx: index("idx_port_trade_destination").on(
+      table.destinationCode,
+      table.year
+    ),
+  })
+);
+
 export type Port = typeof ports.$inferSelect;
 export type InsertPort = typeof ports.$inferInsert;
 
 export type PortStatistic = typeof portStatistics.$inferSelect;
 export type InsertPortStatistic = typeof portStatistics.$inferInsert;
 
+export type PortTradeDetail = typeof portTradeDetail.$inferSelect;
+export type InsertPortTradeDetail = typeof portTradeDetail.$inferInsert;
+
 export const insertPortSchema = createInsertSchema(ports);
 export const selectPortSchema = createSelectSchema(ports);
 
 export const insertPortStatisticSchema = createInsertSchema(portStatistics);
 export const selectPortStatisticSchema = createSelectSchema(portStatistics);
+
+export const insertPortTradeDetailSchema = createInsertSchema(portTradeDetail);
+export const selectPortTradeDetailSchema = createSelectSchema(portTradeDetail);

@@ -224,10 +224,12 @@ function PrefectureChoropleth({
         viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
         className="h-auto w-full"
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label="市区町村別人口増減率マップ"
       />
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 rounded-md border border-border bg-white px-2.5 py-1.5 text-xs text-foreground shadow-md transition-opacity duration-150"
+        className="pointer-events-none absolute z-10 rounded-md border border-border bg-card px-2.5 py-1.5 text-xs text-foreground shadow-sm transition-opacity duration-150"
         style={{ opacity: 0 }}
       />
     </div>

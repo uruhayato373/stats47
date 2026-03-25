@@ -68,20 +68,19 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
       {components.map((comp) => (
         <div key={comp.id} className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {regions.map((region) => (
-            <div key={`${comp.id}-${region.areaCode}`} className="relative overflow-hidden rounded-lg">
-              <div
-                className="absolute left-0 top-0 h-full w-1 rounded-l-lg"
-                style={{ backgroundColor: region.color }}
-              />
-              <div>
+            <div
+              key={`${comp.id}-${region.areaCode}`}
+              className="overflow-hidden rounded-lg border"
+              style={{ borderColor: `${region.color}33` }}
+            >
                 <Suspense fallback={<ChartSkeleton />}>
                   <DashboardComponentRenderer
                     component={toDashboardComponent(comp, { titlePrefix: region.areaName })}
                     area={toArea(region)}
                     sharedYDomain={yDomainMap.get(comp.id)}
+                    hideSource
                   />
                 </Suspense>
-              </div>
             </div>
           ))}
         </div>

@@ -44,7 +44,7 @@ export function MixedChart({
   const marginsByRatio = computeMarginsByRatio(width, height, {
     top: 20 / 500,
     right: 50 / 800, // 右Y軸分を広めに
-    bottom: 40 / 500,
+    bottom: 50 / 500,
     left: 50 / 800,
   });
 
@@ -56,7 +56,7 @@ export function MixedChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.02);
+  const baseFontSize = computeFontSize(width, height, 0.025);
 
   const allSeries = [...columns, ...lines];
 
@@ -192,7 +192,8 @@ export function MixedChart({
           .tickSizeOuter(0)
       )
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize));
+      .call((g) => g.selectAll(".tick line").remove())
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     // --- 左Y軸 ---
     svg
@@ -205,14 +206,11 @@ export function MixedChart({
           .tickFormat((v) => leftAxisFormatter(Number(v)))
       )
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", columns[0]?.color ?? "#666"))
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", innerWidth)
           .attr("stroke-opacity", 0.1)
-      );
+      )
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", columns[0]?.color ?? "#666").attr("dx", "-4"));
 
     // --- 右Y軸 ---
     svg
@@ -225,6 +223,7 @@ export function MixedChart({
           .tickFormat((v) => rightAxisFormatter(Number(v)))
       )
       .call((g) => g.selectAll(".domain").remove())
+      .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", lines[0]?.color ?? "#666"));
   }, [
     data, categoryKey, columns, lines, width, height,
@@ -236,6 +235,20 @@ export function MixedChart({
 
   return (
     <div className={cn("relative flex flex-col w-full", className)}>
+      {allSeries.length > 1 && (
+        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
+          {allSeries.map((s, i) => (
+            <div key={s.dataKey} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              {i < columns.length ? (
+                <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: s.color, opacity: 0.8 }} />
+              ) : (
+                <span className="inline-block h-[3px] w-4 rounded-full" style={{ backgroundColor: s.color }} />
+              )}
+              <span>{s.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
@@ -248,20 +261,6 @@ export function MixedChart({
           </div>
         )}
       </div>
-      {allSeries.length > 1 && (
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-1">
-          {allSeries.map((s, i) => (
-            <div key={s.dataKey} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              {i < columns.length ? (
-                <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: s.color, opacity: 0.8 }} />
-              ) : (
-                <span className="inline-block h-[3px] w-4 rounded-full" style={{ backgroundColor: s.color }} />
-              )}
-              <span>{s.name}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

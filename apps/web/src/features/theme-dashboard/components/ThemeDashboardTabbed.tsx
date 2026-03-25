@@ -219,15 +219,19 @@ export function ThemeDashboardTabbed({
   return (
     <div className="space-y-4 overflow-hidden">
       <div className="grid grid-cols-[1fr_380px] gap-4 items-start">
-        {/* 左カラム: タブ + 年度 + 地図 */}
+        {/* 左カラム: タブ + 年度 + 地図 + 指標一覧 */}
         <div className="space-y-3 min-w-0">
           {indicatorTabs}
           {yearSelector}
           <div className="sticky top-20">{mapSection}</div>
+          <IndicatorGrid
+            rankingKeys={themeConfig.rankingKeys}
+            indicatorDataMap={indicatorDataMap}
+          />
         </div>
 
         {/* 右カラム: KPI + チャート */}
-        <div className="max-h-[calc(100vh-6rem)] overflow-auto">
+        <div>
           <PrefectureStatsPanel
             selectedPrefectureCode={selectedPrefectureCode}
             indicatorDataMap={indicatorDataMap}
@@ -245,11 +249,6 @@ export function ThemeDashboardTabbed({
           selectedPrefectureCode={selectedPrefectureCode}
         />
       )}
-
-      <IndicatorGrid
-        rankingKeys={themeConfig.rankingKeys}
-        indicatorDataMap={indicatorDataMap}
-      />
     </div>
   );
 }

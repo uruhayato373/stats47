@@ -19,24 +19,24 @@ export function AreaTypeToggle({ value, onChange, disabled }: AreaTypeToggleProp
       onValueChange={(v) => {
         if (v) onChange(v as AreaType);
       }}
-      className="bg-muted p-0.5 rounded-md"
+      className="bg-muted p-0.5 rounded-xs h-6"
     >
       <ToggleGroupItem
         value="prefecture"
         disabled={disabled}
-        className="text-xs px-2 py-1 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-sm rounded-sm transition-all"
+        className="text-xs px-1.5 h-5 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-sm rounded-xs transition-all"
         aria-label="都道府県"
       >
-        <MapPin className="w-3.5 h-3.5" />
+        <MapPin className="w-3 h-3" />
         <span>都道府県</span>
       </ToggleGroupItem>
       <ToggleGroupItem
         value="city"
         disabled={disabled}
-        className="text-xs px-2 py-1 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-sm rounded-sm transition-all"
+        className="text-xs px-1.5 h-5 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-sm rounded-xs transition-all"
         aria-label="市区町村"
       >
-        <Building2 className="w-3.5 h-3.5" />
+        <Building2 className="w-3 h-3" />
         <span>市区町村</span>
       </ToggleGroupItem>
     </ToggleGroup>

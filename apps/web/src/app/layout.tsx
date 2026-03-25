@@ -38,6 +38,7 @@ import { Sidebar, SidebarSkeleton } from "@/components/organisms/Sidebar";
 
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
+import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
 import { getRequiredBaseUrl } from "@/lib/env";
 import { geistMono, inter, notoSansJP } from "@/lib/fonts";
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
@@ -124,6 +125,8 @@ export default function RootLayout({
           </div>
           {/* トースト通知（成功、エラー、警告などの通知を表示） */}
           <Toaster position="top-right" richColors />
+          {/* Cookie 同意バナー */}
+          <CookieConsentBanner />
         </ThemeProvider>
       </body>
     </html>

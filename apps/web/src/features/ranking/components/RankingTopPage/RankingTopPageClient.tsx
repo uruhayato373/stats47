@@ -37,7 +37,7 @@ export function RankingTopPageClient({
     return (
         <div className="container mx-auto px-4 py-6 text-foreground">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold mb-1">ランキング一覧</h1>
+                <h1 className="text-lg font-bold mb-1">ランキング一覧</h1>
                 <p className="text-sm text-muted-foreground">
                     都道府県の統計データをランキング形式で比較できます
                 </p>
@@ -45,7 +45,7 @@ export function RankingTopPageClient({
 
             {/* おすすめランキングセクション */}
             <section className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
                     <span className="text-amber-500">★</span>
                     <span>注目・おすすめのランキング</span>
                 </h2>
@@ -66,7 +66,7 @@ export function RankingTopPageClient({
                 </div>
             </section>
 
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
                 カテゴリから探す
             </h2>
 

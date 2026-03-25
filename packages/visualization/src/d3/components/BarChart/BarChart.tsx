@@ -56,7 +56,7 @@ export function BarChart({
     });
 
     const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-    const baseFontSize = computeFontSize(width, height, 0.02); // 12 / 600 or 16 / 800 = 0.02
+    const baseFontSize = computeFontSize(width, height, 0.025); // 12 / 600 or 16 / 800 = 0.02
 
     const hasKeys = keys && keys.length > 0;
 
@@ -270,6 +270,16 @@ export function BarChart({
     return (
         <div className={cn("relative flex flex-col w-full", className)}>
             {title && <h3 className="text-lg font-semibold mb-4 self-start">{title}</h3>}
+            {showLegend && hasKeys && keys && keys.length > 0 && (
+                <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
+                    {keys.map((key, i) => (
+                        <div key={key} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                            <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: (colors[i % colors.length] as string) ?? "#888" }} />
+                            <span>{key}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
             <div className="relative w-full overflow-hidden">
                 <svg
                     ref={svgRef}
@@ -282,16 +292,6 @@ export function BarChart({
                     </div>
                 )}
             </div>
-            {showLegend && hasKeys && keys && keys.length > 0 && (
-                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-1">
-                    {keys.map((key, i) => (
-                        <div key={key} className="flex items-center gap-1.5 text-xs @[400px]:text-sm text-muted-foreground">
-                            <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: (colors[i % colors.length] as string) ?? "#888" }} />
-                            <span>{key}</span>
-                        </div>
-                    ))}
-                </div>
-            )}
         </div>
     );
 }

@@ -193,7 +193,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         <CardContent className="p-6 sm:p-8 max-w-4xl">
                             {/* 記事ヘッダー */}
                             <header className="mb-8">
-                                <h1 className="mb-4 border-b-4 border-primary pb-3 text-2xl font-bold">{article.title}</h1>
+                                <h1 className="mb-4 border-b-4 border-primary pb-3 text-lg font-bold">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
                                     <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
                                 )}

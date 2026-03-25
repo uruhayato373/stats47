@@ -38,7 +38,7 @@ export default async function FishingPortsPage() {
       </Breadcrumb>
 
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">漁港マップ</h1>
+        <h1 className="text-lg font-bold">漁港マップ</h1>
         <p className="text-sm text-muted-foreground mt-1">
           全国 {stats.total.toLocaleString()}{" "}
           漁港の位置・種別を地図上に表示。色は種別を表します。

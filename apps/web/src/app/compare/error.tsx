@@ -21,7 +21,7 @@ export default function CompareError({
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-red-50 text-red-500">
                 <AlertCircle size={40} />
             </div>
-            <h1 className="mb-4 text-2xl font-bold text-foreground">
+            <h1 className="mb-4 text-lg font-bold text-foreground">
                 データの取得中にエラーが発生しました
             </h1>
             <p className="mb-8 max-w-md text-muted-foreground">

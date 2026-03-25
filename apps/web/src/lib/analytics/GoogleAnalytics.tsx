@@ -46,10 +46,24 @@ export function GoogleAnalytics(): React.ReactElement | null {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+          });
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}', {
             send_page_view: false,
           });
+          // localStorage から同意状態を復元
+          try {
+            var consent = localStorage.getItem('stats47_cookie_consent');
+            if (consent === 'granted') {
+              gtag('consent', 'update', {
+                analytics_storage: 'granted',
+                ad_storage: 'granted',
+              });
+            }
+          } catch(e) {}
         `}
       </Script>
     </>

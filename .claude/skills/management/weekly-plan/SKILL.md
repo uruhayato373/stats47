@@ -63,6 +63,11 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   → 最新の週次メトリクスファイルから PV・流入経路・検索クエリ等を参照
   → ファイルが存在しない場合は「計測データなし」と報告
 
+- SEO カバレッジ指標（DB `seo_tracking` テーブルから取得）
+  → `SELECT * FROM seo_tracking ORDER BY date DESC LIMIT 10` で直近の推移を確認
+  → `SELECT * FROM seo_actions WHERE status != 'done' ORDER BY priority` で未完了施策を確認
+  → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
+
 出力形式: 「直近のパフォーマンス概況」「成長/停滞の兆候」
 注: API 呼び出しは行わない（`/weekly-review` が取得済みのデータを参照する）。
 ```

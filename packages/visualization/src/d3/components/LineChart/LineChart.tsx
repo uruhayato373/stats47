@@ -52,7 +52,7 @@ export function LineChart({
   const marginsByRatio = computeMarginsByRatio(width, height, {
     top: 40 / 500,
     right: 20 / 800,
-    bottom: 40 / 500,
+    bottom: 50 / 500,
     left: 50 / 800,
   });
 
@@ -71,7 +71,7 @@ export function LineChart({
     marginRight,
     marginBottom,
   } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.02);
+  const baseFontSize = computeFontSize(width, height, 0.025);
 
   const isMultiSeries = !!(seriesConfig && seriesConfig.length > 0);
   const legendSeries = isMultiSeries
@@ -151,7 +151,8 @@ export function LineChart({
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(xAxis)
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize));
+      .call((g) => g.selectAll(".tick line").remove())
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     const yAxis = d3
       .axisLeft(y)
@@ -162,14 +163,11 @@ export function LineChart({
       .attr("transform", `translate(${marginLeft},0)`)
       .call(yAxis)
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize))
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
           .attr("stroke-opacity", 0.1)
-      );
+      )
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
     // データポイント（静的表示用）
     const pointRadius = 3;
@@ -307,6 +305,16 @@ export function LineChart({
       {title && (
         <h3 className="mb-2 self-start text-lg font-semibold">{title}</h3>
       )}
+      {showLegend && legendSeries.length > 0 && (
+        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
+          {legendSeries.map((s) => (
+            <div key={s.dataKey} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <span className="inline-block h-[3px] w-4 rounded-full" style={{ backgroundColor: s.color }} />
+              <span>{s.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
@@ -320,16 +328,6 @@ export function LineChart({
           </div>
         )}
       </div>
-      {showLegend && legendSeries.length > 0 && (
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-1">
-          {legendSeries.map((s) => (
-            <div key={s.dataKey} className="flex items-center gap-1.5 text-xs @[400px]:text-sm text-muted-foreground">
-              <span className="inline-block h-[3px] w-4 rounded-full" style={{ backgroundColor: s.color }} />
-              <span>{s.name}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

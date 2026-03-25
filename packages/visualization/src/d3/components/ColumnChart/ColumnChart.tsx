@@ -34,7 +34,7 @@ export function ColumnChart({
   const marginsByRatio = computeMarginsByRatio(width, height, {
     top: 10 / 500,     // 0.02
     right: 10 / 800,   // 0.0125
-    bottom: 20 / 500,  // 0.04
+    bottom: 50 / 500,  // 0.04
     left: 40 / 800,    // 0.05
   });
 
@@ -46,7 +46,7 @@ export function ColumnChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.02); // 16 / 800 = 0.02
+  const baseFontSize = computeFontSize(width, height, 0.025); // 16 / 800 = 0.02
 
   useEffect(() => {
     if (!svgRef.current || !data || data.length === 0) return;
@@ -104,7 +104,8 @@ export function ColumnChart({
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(d3.axisBottom(x).tickSizeOuter(0))
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize));
+      .call((g) => g.selectAll(".tick line").remove())
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     // Y Axis
     svg
@@ -112,14 +113,11 @@ export function ColumnChart({
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y).ticks(innerHeight / 40, "s"))
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize))
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
           .attr("stroke-opacity", 0.1)
-      );
+      )
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
   }, [data, indexBy, keys, width, height, yAxisFormatter, colors, marginTop, marginBottom, marginLeft, marginRight, baseFontSize, innerHeight, unit, showTooltip, hideTooltip, updateTooltipPosition]);
 

@@ -77,7 +77,7 @@ export function computeFontSize(
   width: number,
   height: number,
   ratio: number,
-  minFontSize: number = 8
+  minFontSize: number = 12
 ): number {
   const base = Math.min(width, height);
   return Math.max(minFontSize, Math.round(base * ratio));

@@ -138,7 +138,7 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
             {/* ヘッダー */}
             <div className="container mx-auto px-4 pt-6">
                 <div className="border-b pb-4">
-                    <h1 className="text-2xl font-bold">
+                    <h1 className="text-lg font-bold">
                         {city.areaName}の{category.categoryName}データ
                     </h1>
                     <p className="mt-2 text-muted-foreground">

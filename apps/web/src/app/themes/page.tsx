@@ -22,7 +22,7 @@ export function generateMetadata(): Metadata {
 export default function ThemesPage() {
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      <h1 className="text-2xl font-bold">テーマダッシュボード</h1>
+      <h1 className="text-lg font-bold">テーマダッシュボード</h1>
       <p className="text-sm text-muted-foreground mt-1 mb-6">
         テーマ別に複数の指標を横断して都道府県を比較できます
       </p>

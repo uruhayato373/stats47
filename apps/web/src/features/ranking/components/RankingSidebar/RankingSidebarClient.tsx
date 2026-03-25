@@ -27,6 +27,9 @@ export interface SidebarRankingItem {
     areaType: string;
     title: string;
     subtitle?: string | null;
+    demographicAttr?: string | null;
+    normalizationBasis?: string | null;
+    groupKey?: string | null;
 }
 
 /** 文字列の簡易ハッシュ（安定ソート用） */
@@ -60,7 +63,9 @@ export interface RankingSidebarClientProps {
 }
 
 /**
- * 現在ページを除外し、同タイトル優先・安定ソートで関連アイテムを選別
+ * 現在ページと同グループを除外し、各グループから代表1件のみ表示。
+ * 同タイトル優先・安定ソートで関連アイテムを選別する。
+ * 同グループのアイテムは RelatedGroupCard で表示するため、ここでは重複を避ける。
  */
 function selectSidebarItems(
     items: SidebarRankingItem[],
@@ -71,9 +76,44 @@ function selectSidebarItems(
     const currentItem = items.find(
         (i) => i.rankingKey === rankingKey && i.areaType === areaType
     );
-    const rest = items.filter(
-        (i) => !(i.rankingKey === rankingKey && i.areaType === areaType)
-    );
+    const currentGroupKey = currentItem?.groupKey;
+
+    // 現在ページ自身と、同グループのアイテムを除外
+    const filtered = items.filter((i) => {
+        if (i.rankingKey === rankingKey && i.areaType === areaType) return false;
+        if (currentGroupKey && i.groupKey === currentGroupKey) return false;
+        return true;
+    });
+
+    // 各グループから代表1件のみ残す（groupKey がないものはそのまま）
+    // 代表 = ranking_key が groupKey と一致するもの（総数）
+    // 代表がカテゴリ内に存在しない場合はグループごと非表示（別カテゴリに総数がある）
+    const groupMap = new Map<string, SidebarRankingItem>();
+    const rest: SidebarRankingItem[] = [];
+    for (const i of filtered) {
+        if (!i.groupKey) {
+            rest.push(i);
+            continue;
+        }
+        const existing = groupMap.get(i.groupKey);
+        if (!existing) {
+            groupMap.set(i.groupKey, i);
+        } else {
+            const iIsRepresentative = i.rankingKey === i.groupKey;
+            const existingIsRepresentative = existing.rankingKey === existing.groupKey;
+            if (iIsRepresentative && !existingIsRepresentative) {
+                groupMap.set(i.groupKey, i);
+            } else if (!existingIsRepresentative && !iIsRepresentative && !i.normalizationBasis && existing.normalizationBasis) {
+                groupMap.set(i.groupKey, i);
+            }
+        }
+    }
+    // 代表（normalizationBasis なし）のみ表示。非代表しかない場合は除外
+    for (const [, item] of groupMap) {
+        if (!item.normalizationBasis || item.rankingKey === item.groupKey) {
+            rest.push(item);
+        }
+    }
 
     const currentTitle = currentItem?.title;
     const sameTitle = currentTitle
@@ -145,11 +185,16 @@ export function RankingSidebarClient({
                         >
                             <span className="line-clamp-1 leading-snug">
                                 {item.title}
-                                {item.subtitle && (
-                                    <span className="text-muted-foreground">
-                                        {" "}({item.subtitle})
-                                    </span>
-                                )}
+                                {(() => {
+                                    const detail = item.subtitle
+                                        || [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・")
+                                        || null;
+                                    return detail ? (
+                                        <span className="text-muted-foreground">
+                                            {" "}({detail})
+                                        </span>
+                                    ) : null;
+                                })()}
                             </span>
                         </Link>
                     ))}

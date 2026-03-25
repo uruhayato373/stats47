@@ -22,7 +22,6 @@ import { fetchCorrelationPairAction, type CorrelationPairResult } from "../actio
 import { calculateRegression } from "../utils/calculate-regression";
 import { updateUrlParams } from "../utils/update-url-params";
 import { CorrelationRanking } from "./CorrelationRanking";
-import { CorrelationStats } from "./CorrelationStats";
 import { CorrelationExplanation } from "./CorrelationExplanation";
 import { PartialCorrelationDisplay } from "./PartialCorrelationDisplay";
 
@@ -58,8 +57,11 @@ export function CorrelationPageClient({
     initialY,
     initialData,
 }: CorrelationPageClientProps) {
-    const [selectedX, setSelectedX] = useState(initialX ?? "");
-    const [selectedY, setSelectedY] = useState(initialY ?? "");
+    // デフォルトでランキング1位を表示
+    const defaultX = initialX ?? topCorrelations[0]?.rankingKeyX ?? "";
+    const defaultY = initialY ?? topCorrelations[0]?.rankingKeyY ?? "";
+    const [selectedX, setSelectedX] = useState(defaultX);
+    const [selectedY, setSelectedY] = useState(defaultY);
     const [correlationData, setCorrelationData] = useState<CorrelationPairResult | null>(
         initialData ?? null
     );
@@ -118,60 +120,66 @@ export function CorrelationPageClient({
     return (
         <div className="container mx-auto px-4 py-6">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold mb-1">都道府県統計の相関分析</h1>
-                <p className="text-sm text-muted-foreground">
-                    {totalPairs.toLocaleString()}組の統計指標ペアから、相関の強い組み合わせを発見できます。
-                    指標を選んで散布図を表示したり、ランキングから面白い相関を探してみましょう。
-                </p>
+                <h1 className="text-lg font-bold">都道府県統計の相関分析</h1>
+            </div>
+
+            {/* 指標セレクター */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label className="text-sm font-medium text-muted-foreground mb-1.5 block">
+                        X軸の指標
+                    </label>
+                    <Select value={selectedX} onValueChange={(v) => {
+                        setSelectedX(v);
+                        updateUrlParams(v, selectedY);
+                    }}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="指標を選択..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {rankingOptions.map((opt) => (
+                                <SelectItem key={opt.rankingKey} value={opt.rankingKey}>
+                                    {formatLabel(opt)}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div>
+                    <label className="text-sm font-medium text-muted-foreground mb-1.5 block">
+                        Y軸の指標
+                    </label>
+                    <Select value={selectedY} onValueChange={(v) => {
+                        setSelectedY(v);
+                        updateUrlParams(selectedX, v);
+                    }}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="指標を選択..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {rankingOptions.map((opt) => (
+                                <SelectItem key={opt.rankingKey} value={opt.rankingKey}>
+                                    {formatLabel(opt)}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* モバイル: ランキングを散布図の上に表示 */}
+                <div className="lg:hidden">
+                    <CorrelationRanking
+                        topCorrelations={topCorrelations}
+                        totalPairs={totalPairs}
+                        strongCorrelationCount={strongCorrelationCount}
+                        onSelect={handleRankingSelect}
+                    />
+                </div>
+
                 {/* メインエリア */}
                 <div className="lg:col-span-8 space-y-6">
-                    {/* 指標セレクター */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="text-sm font-medium text-muted-foreground mb-1.5 block">
-                                X軸の指標
-                            </label>
-                            <Select value={selectedX} onValueChange={(v) => {
-                                setSelectedX(v);
-                                updateUrlParams(v, selectedY);
-                            }}>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="指標を選択..." />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {rankingOptions.map((opt) => (
-                                        <SelectItem key={opt.rankingKey} value={opt.rankingKey}>
-                                            {formatLabel(opt)}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div>
-                            <label className="text-sm font-medium text-muted-foreground mb-1.5 block">
-                                Y軸の指標
-                            </label>
-                            <Select value={selectedY} onValueChange={(v) => {
-                                setSelectedY(v);
-                                updateUrlParams(selectedX, v);
-                            }}>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="指標を選択..." />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {rankingOptions.map((opt) => (
-                                        <SelectItem key={opt.rankingKey} value={opt.rankingKey}>
-                                            {formatLabel(opt)}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-
                     {/* 散布図エリア */}
                     {isPending && (
                         <Card>
@@ -184,7 +192,7 @@ export function CorrelationPageClient({
                     {!isPending && selectedX && selectedY && selectedX !== selectedY && (
                         <Card>
                             <CardHeader>
-                                <CardTitle className="text-lg">
+                                <CardTitle className="text-base">
                                     {optionX && formatLabel(optionX)} vs{" "}
                                     {optionY && formatLabel(optionY)}
                                 </CardTitle>
@@ -192,22 +200,13 @@ export function CorrelationPageClient({
                             <CardContent>
                                 {correlationData ? (
                                     <div className="space-y-4">
-                                        <div className="flex flex-wrap items-center gap-4 text-sm">
-                                            <span>
-                                                相関係数 (r):{" "}
-                                                <span className="font-mono font-semibold">
-                                                    {correlationData.pearsonR >= 0 ? "+" : ""}
-                                                    {correlationData.pearsonR.toFixed(4)}
-                                                </span>
+                                        <div className="flex flex-wrap items-baseline gap-3 text-sm">
+                                            <span className="text-lg font-bold font-mono">
+                                                r = {correlationData.pearsonR >= 0 ? "+" : ""}
+                                                {correlationData.pearsonR.toFixed(4)}
                                             </span>
-                                            <span>
-                                                R²:{" "}
-                                                <span className="font-mono">
-                                                    {r2?.toFixed(4)}
-                                                </span>
-                                            </span>
-                                            <span className="text-muted-foreground">
-                                                データポイント: {correlationData.scatterData.length}
+                                            <span className="text-xs text-muted-foreground">
+                                                R² = {r2?.toFixed(4)} / n = {correlationData.scatterData.length}
                                             </span>
                                         </div>
                                         <PartialCorrelationDisplay data={correlationData} />
@@ -238,25 +237,15 @@ export function CorrelationPageClient({
                             </CardContent>
                         </Card>
                     )}
-
-                    {!selectedX && !selectedY && (
-                        <Card>
-                            <CardContent className="py-12 text-center text-sm text-muted-foreground">
-                                指標を選択するか、右のランキングからペアをクリックしてください
-                            </CardContent>
-                        </Card>
-                    )}
                 </div>
 
-                {/* サイドバー */}
-                <div className="lg:col-span-4 space-y-6">
+                {/* デスクトップ: サイドバー */}
+                <div className="hidden lg:block lg:col-span-4">
                     <CorrelationRanking
                         topCorrelations={topCorrelations}
-                        onSelect={handleRankingSelect}
-                    />
-                    <CorrelationStats
                         totalPairs={totalPairs}
                         strongCorrelationCount={strongCorrelationCount}
+                        onSelect={handleRankingSelect}
                     />
                 </div>
             </div>

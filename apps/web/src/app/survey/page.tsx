@@ -64,7 +64,7 @@ export default async function SurveyIndexPage() {
   return (
     <div className="container mx-auto px-4 py-6 text-foreground">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">調査別ランキング一覧</h1>
+        <h1 className="text-lg font-bold">調査別ランキング一覧</h1>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           政府統計調査ごとに、都道府県別ランキングを分類しています。各調査をクリックすると、その調査データに基づくランキングの一覧を閲覧できます。
         </p>

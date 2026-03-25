@@ -57,8 +57,8 @@ export function PopulationPyramidChart({ prefCode, prefName }: Props) {
   return (
     <>
       <PyramidChart chartData={data.pyramidData} height={450} />
-      <p className="text-[10px] text-muted-foreground mt-1">
-        {prefName}の人口ピラミッド（{data.yearName}）/ 出典: 社会・人口統計体系
+      <p className="text-[10px] text-muted-foreground mt-1 text-right">
+        出典: 社会・人口統計体系
       </p>
     </>
   );

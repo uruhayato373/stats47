@@ -11,7 +11,7 @@ export function AreaProfilePageClient({ profile }: Props) {
         <div className="container mx-auto px-4 pt-6">
             <div className="border-b pb-4">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <h1 className="text-2xl font-bold">
+                    <h1 className="text-lg font-bold">
                         {profile.areaName}の特徴
                     </h1>
                     <Link

@@ -38,7 +38,7 @@ export default async function PortsPage() {
       </Breadcrumb>
 
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">港湾統計マップ</h1>
+        <h1 className="text-lg font-bold">港湾統計マップ</h1>
         <p className="text-sm text-muted-foreground mt-1">
           甲種港湾 {ports.length} 港の海上出入貨物量・入港船舶隻数を地図上に表示。
           バブルの大きさは値に比例します。

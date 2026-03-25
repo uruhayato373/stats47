@@ -41,12 +41,7 @@ export function ThemePageLayout({ theme, data }: Props) {
       </Breadcrumb>
 
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">{theme.title}</h1>
-        {theme.description && (
-          <p className="text-sm text-muted-foreground mt-1">
-            {theme.description}
-          </p>
-        )}
+        <h1 className="text-lg font-bold">{theme.title}</h1>
       </div>
 
       <ThemeDashboardClient

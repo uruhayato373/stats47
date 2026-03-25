@@ -103,7 +103,7 @@ export default function PrivacyPage() {
     <main className="px-4 py-6 md:px-6 md:py-8">
       {/* ページヘッダー */}
       <div className="mb-6 md:mb-8">
-        <h1 className="text-2xl font-bold mb-4">プライバシーポリシー</h1>
+        <h1 className="text-lg font-bold mb-4">プライバシーポリシー</h1>
         <p className={`${TEXT_STYLE} text-muted-foreground`}>
           統計で見る都道府県（以下「当サービス」）は、ユーザーの個人情報の保護を重要視しています。本プライバシーポリシーは、当サービスがどのように個人情報を収集、使用、保護するかについて説明します。
         </p>

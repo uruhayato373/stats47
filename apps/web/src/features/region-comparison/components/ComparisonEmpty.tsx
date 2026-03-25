@@ -7,12 +7,12 @@ import { Lightbulb, MapPin, Users } from "lucide-react";
  */
 export function ComparisonEmpty() {
     return (
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-white py-16 px-4 text-center">
+        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-card py-16 px-4 text-center">
             <div className="relative mb-6">
                 <div className="h-24 w-24 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
                     <MapPin size={48} />
                 </div>
-                <div className="absolute -right-2 -top-2 flex h-8 w-8 animate-bounce items-center justify-center rounded-full bg-amber-400 text-white shadow-md">
+                <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-white shadow-sm">
                     <span className="text-xl font-bold">?</span>
                 </div>
             </div>

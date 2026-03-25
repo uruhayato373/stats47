@@ -58,6 +58,12 @@ const KEY_DIFF_TABLES: Record<
       return `DELETE FROM ranking_ai_content WHERE ranking_key = '${rk.replace(/'/g, "''")}' AND area_type = '${at.replace(/'/g, "''")}'`;
     },
   },
+  port_statistics: {
+    keyQuery: "SELECT DISTINCT metric_key AS key FROM port_statistics",
+    keyColumn: "metric_key",
+    deleteWhere: (key) =>
+      `DELETE FROM port_statistics WHERE metric_key = '${key.replace(/'/g, "''")}'`,
+  },
 };
 
 /** 少量テーブル（行数比較のみ、フル同期で対応） */
@@ -74,6 +80,9 @@ const SMALL_TABLES = [
   "estat_metainfo",
   "estat_stats_tables",
   "area_profile_rankings",
+  "ports",
+  "fishing_ports",
+  "port_trade_detail",
 ];
 
 const SYSTEM_TABLE_PATTERNS = [/^sqlite_/, /^_cf_/, /^__drizzle/, /^d1_/];

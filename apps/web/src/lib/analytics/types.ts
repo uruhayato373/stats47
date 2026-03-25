@@ -10,7 +10,7 @@
 declare global {
   interface Window {
     gtag?: (
-      command: "config" | "event" | "set" | "get",
+      command: "config" | "event" | "set" | "get" | "consent",
       targetId: string | object,
       config?: Record<string, unknown>
     ) => void;

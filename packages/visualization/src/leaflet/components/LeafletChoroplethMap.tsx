@@ -48,6 +48,12 @@ export interface LeafletChoroplethMapProps {
   borderColor?: string;
   /** CSS クラス */
   className?: string;
+  /** 凡例の値変換表示設定 */
+  valueDisplay?: {
+    conversionFactor?: number;
+    decimalPlaces?: number;
+    displayUnit?: string;
+  };
 }
 
 /** Feature から都道府県コード（XX000 形式）を抽出 */
@@ -97,6 +103,7 @@ export function LeafletChoroplethMap({
   onMunicipalityClick,
   borderColor = "#94a3b8",
   className,
+  valueDisplay,
 }: LeafletChoroplethMapProps) {
   const prefGeojson = useTopoJsonToGeoJson(topology);
 
@@ -191,6 +198,7 @@ export function LeafletChoroplethMap({
           colorConfig={legendConfig}
           data={legendData}
           unit={unit}
+          valueDisplay={valueDisplay}
         />
       </MapContainer>
     </div>

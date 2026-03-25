@@ -56,7 +56,6 @@ import {
   RankingItemsSidebar,
   RankingPageCardsContainer,
   RelatedArticlesCard,
-  RelatedGroupCard,
 } from "@/features/ranking/server";
 import { SurveyCard } from "@/features/ranking/components/RankingSidebar/SurveyCard";
 import { PortStatisticsMapCard } from "@/features/ranking/components/RankingSidebar/PortStatisticsMapCard";
@@ -66,7 +65,7 @@ import { RankingPageCardsSkeleton } from "@/features/ranking/components/RankingP
 import { findRankingAiContent } from "@stats47/ai-content/server";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import type { RankingValue } from "@stats47/ranking";
-import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys } from "@stats47/ranking/server";
+import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
 import { cachedFindRankingItem } from "@/features/ranking/server";
 import type { Metadata } from "next";
 
@@ -190,13 +189,21 @@ export default async function RankingKeyPage({
     : Promise.resolve(null);
   const allSurveysPromise = listSurveys().then((r) => isOk(r) ? r.data : []).catch(() => []);
 
-  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys] = await Promise.all([
+  // --- 3d. グループメンバー取得（normalization_basis トグル用） ---
+  const groupMembersPromise = rankingItem.groupKey
+    ? findRankingItemsByGroupKey(rankingItem.groupKey, areaType)
+        .then((r) => (isOk(r) && r.data.length > 1 ? r.data : []))
+        .catch(() => [] as GroupRankingItem[])
+    : Promise.resolve([] as GroupRankingItem[]);
+
+  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers] = await Promise.all([
     rankingValuesPromise,
     topologyPromise,
     aiContentPromise,
     cityRankingItemPromise,
     surveyNamePromise,
     allSurveysPromise,
+    groupMembersPromise,
   ]);
 
   // --- 6. SEO 構造化データ（JSON-LD）を生成 ---
@@ -259,18 +266,7 @@ export default async function RankingKeyPage({
         topology={topology}
         cityRankingItem={cityRankingItem?.isActive ? cityRankingItem : undefined}
         surveyName={surveyName ?? undefined}
-        // Server Component: 関連グループ（コンテンツ下部に表示）
-        relatedSection={
-          rankingItem.groupKey ? (
-            <Suspense fallback={<div className="h-64 bg-muted rounded-lg animate-pulse" />}>
-              <RelatedGroupCard
-                rankingKey={rankingKey}
-                areaType={areaType}
-                groupKey={rankingItem.groupKey}
-              />
-            </Suspense>
-          ) : undefined
-        }
+        groupMembers={groupMembers}
         // 右サイドバー: 関連ランキング・関連記事
         sidebarSection={
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>

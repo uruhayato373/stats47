@@ -106,8 +106,8 @@ export function NaturalSocialRateLineChart({ prefCode, prefName }: Props) {
           tooltipFormatter={(v) => `${v.toFixed(2)}‰`}
         />
       </div>
-      <p className="text-[10px] text-muted-foreground mt-1">
-        {prefName}の自然増減率・社会増減率の推移（人口千対） / 出典: 人口動態統計・住民基本台帳
+      <p className="text-[10px] text-muted-foreground mt-1 text-right">
+        出典: 人口動態統計・住民基本台帳
       </p>
     </>
   );
