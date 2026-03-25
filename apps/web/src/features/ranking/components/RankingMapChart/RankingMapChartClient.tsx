@@ -149,7 +149,7 @@ export function RankingMapChartClient({
   }, [onPrefectureClick, selectedPrefectureCode]);
 
   return (
-    <Card className="w-full border border-border shadow-sm rounded-sm">
+    <Card className="w-full">
       <CardHeader>
         <MapIcon className="h-4 w-4 text-muted-foreground" />
         <CardTitle className="flex-1">コロプレスマップ</CardTitle>

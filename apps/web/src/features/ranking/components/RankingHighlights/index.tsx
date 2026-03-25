@@ -61,7 +61,7 @@ export function RankingHighlights({
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
       {/* Top 3 Summary */}
-      <Card className="border border-border shadow-sm rounded-sm h-full">
+      <Card className="h-full">
         <CardHeader>
           <TrendingUp className="h-4 w-4 text-primary" />
           <CardTitle>Top 3 都道府県</CardTitle>
@@ -91,7 +91,7 @@ export function RankingHighlights({
 
       {/* Statistics Summary */}
       {stats && (
-        <Card className="border border-border shadow-sm rounded-sm h-full">
+        <Card className="h-full">
           <CardHeader>
             <div className="flex items-center gap-2">
               <Minus className="h-4 w-4 text-blue-500" />

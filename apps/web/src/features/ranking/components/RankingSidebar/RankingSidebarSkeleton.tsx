@@ -12,7 +12,7 @@ import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
  */
 export function RankingSidebarSkeleton() {
     return (
-        <Card className="h-full w-full border border-border shadow-sm rounded-sm overflow-hidden animate-in fade-in duration-500">
+        <Card className="h-full w-full overflow-hidden animate-in fade-in duration-500">
             <CardHeader className="py-4 px-4">
                 <Skeleton className="h-5 w-32" />
             </CardHeader>

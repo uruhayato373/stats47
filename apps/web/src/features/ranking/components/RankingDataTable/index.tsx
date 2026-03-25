@@ -141,7 +141,7 @@ export function RankingDataTable({
   }
 
   return (
-    <Card className={cn("w-full border border-border shadow-sm rounded-sm", className)}>
+    <Card className={cn("w-full", className)}>
       <CardHeader>
         <Table className="h-4 w-4 text-muted-foreground" />
         <CardTitle className="flex-1">都道府県別データ</CardTitle>

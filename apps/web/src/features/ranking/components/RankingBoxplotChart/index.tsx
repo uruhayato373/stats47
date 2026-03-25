@@ -36,7 +36,7 @@ export function RankingBoxplotChart({
   }));
 
   return (
-    <Card className="w-full border border-border shadow-sm rounded-sm">
+    <Card className="w-full">
       <CardHeader>
         <GitCompareArrows className="h-4 w-4 text-muted-foreground" />
         <CardTitle>地域別分布</CardTitle>

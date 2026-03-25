@@ -10,7 +10,7 @@ import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 export function RankingMapChartSkeleton() {
   return (
     <div className="w-full h-full">
-      <Card className="h-full border border-border shadow-sm rounded-sm">
+      <Card className="h-full">
         <CardHeader className="pb-2">
           <Skeleton className="h-5 w-48" />
         </CardHeader>

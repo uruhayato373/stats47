@@ -35,7 +35,7 @@ export function RankingSourceCard({
   source,
 }: RankingSourceCardProps) {
   return (
-    <Card className="w-full mt-8 border border-border shadow-sm rounded-sm bg-card">
+    <Card className="w-full mt-8 bg-card">
       <CardHeader>
         <Database className="h-4 w-4 text-muted-foreground" />
         <CardTitle>出典・データソース</CardTitle>

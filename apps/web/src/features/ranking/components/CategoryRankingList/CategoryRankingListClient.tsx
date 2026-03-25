@@ -78,7 +78,7 @@ interface CategoryRankingTableProps {
 
 export function CategoryRankingTable({ items }: CategoryRankingTableProps) {
   return (
-    <Card className="border border-border shadow-sm rounded-sm">
+    <Card>
       <CardHeader>
         <CardTitle>
           すべてのランキング

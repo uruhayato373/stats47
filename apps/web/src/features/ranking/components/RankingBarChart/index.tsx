@@ -26,7 +26,7 @@ export function RankingBarChart({ rankingValues }: Props) {
   }
 
   return (
-    <Card className="w-full h-full flex flex-col border border-border shadow-sm rounded-sm">
+    <Card className="w-full h-full flex flex-col">
       <CardHeader>
         <BarChart3 className="h-4 w-4 text-muted-foreground" />
         <CardTitle>ランキングチャート</CardTitle>

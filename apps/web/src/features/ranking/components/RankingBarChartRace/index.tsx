@@ -84,7 +84,7 @@ export function RankingBarChartRace({
   }
 
   return (
-    <Card className="w-full h-full flex flex-col border border-border shadow-sm rounded-sm">
+    <Card className="w-full h-full flex flex-col">
       <CardHeader>
         <PlayCircle className="h-4 w-4 text-muted-foreground" />
         <CardTitle>Bar Chart Race</CardTitle>

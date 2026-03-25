@@ -49,7 +49,7 @@ export function CorrelationSectionClient({
     correlatedItems,
 }: CorrelationSectionClientProps) {
     return (
-        <Card className="border border-border shadow-sm rounded-sm">
+        <Card>
             <CardHeader className="py-3 px-4">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     相関が高い指標
