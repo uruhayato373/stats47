@@ -29,17 +29,27 @@ const RETRY_DELAY_MS = 3000;
 /** キー単位で差分検知するテーブルとそのキー定義 */
 const KEY_DIFF_TABLES: Record<
   string,
-  { keyQuery: string; keyColumn: string; deleteWhere: (key: string) => string }
+  {
+    keyQuery: string;
+    keyColumn: string;
+    deleteWhere: (key: string) => string;
+    /** キーごとの MAX(updated_at) を返すクエリ。結果は { key, ts } */
+    timestampQuery?: string;
+  }
 > = {
   ranking_data: {
     keyQuery: "SELECT DISTINCT category_code AS key FROM ranking_data",
     keyColumn: "category_code",
     deleteWhere: (key) => `DELETE FROM ranking_data WHERE category_code = '${key.replace(/'/g, "''")}'`,
+    timestampQuery:
+      "SELECT category_code AS key, MAX(updated_at) AS ts FROM ranking_data GROUP BY category_code",
   },
   ranking_items: {
     keyQuery: "SELECT ranking_key AS key FROM ranking_items",
     keyColumn: "ranking_key",
     deleteWhere: (key) => `DELETE FROM ranking_items WHERE ranking_key = '${key.replace(/'/g, "''")}'`,
+    timestampQuery:
+      "SELECT ranking_key AS key, updated_at AS ts FROM ranking_items",
   },
   correlation_analysis: {
     keyQuery:
@@ -49,6 +59,7 @@ const KEY_DIFF_TABLES: Record<
       const [kx, ky] = key.split("|");
       return `DELETE FROM correlation_analysis WHERE ranking_key_x = '${kx.replace(/'/g, "''")}' AND ranking_key_y = '${ky.replace(/'/g, "''")}'`;
     },
+    // correlation_analysis は大量キー（58k+）のためタイムスタンプ比較はスキップ
   },
   ranking_ai_content: {
     keyQuery: "SELECT ranking_key || '|' || area_type AS key FROM ranking_ai_content",
@@ -57,12 +68,16 @@ const KEY_DIFF_TABLES: Record<
       const [rk, at] = key.split("|");
       return `DELETE FROM ranking_ai_content WHERE ranking_key = '${rk.replace(/'/g, "''")}' AND area_type = '${at.replace(/'/g, "''")}'`;
     },
+    timestampQuery:
+      "SELECT ranking_key || '|' || area_type AS key, updated_at AS ts FROM ranking_ai_content",
   },
   port_statistics: {
     keyQuery: "SELECT DISTINCT metric_key AS key FROM port_statistics",
     keyColumn: "metric_key",
     deleteWhere: (key) =>
       `DELETE FROM port_statistics WHERE metric_key = '${key.replace(/'/g, "''")}'`,
+    timestampQuery:
+      "SELECT metric_key AS key, MAX(updated_at) AS ts FROM port_statistics GROUP BY metric_key",
   },
 };
 
@@ -100,12 +115,20 @@ interface KeyDiff {
   localOnly: string[];
   remoteOnly: string[];
   common: number;
+  /** 共通キーのうち、ローカルの updated_at がリモートより新しいキー */
+  localNewer: string[];
+  /** 共通キーのうち、リモートの updated_at がローカルより新しいキー */
+  remoteNewer: string[];
 }
 
 interface CountDiff {
   table: string;
   local: number;
   remote: number;
+  /** ローカルの MAX(updated_at) */
+  localMaxTs?: string;
+  /** リモートの MAX(updated_at) */
+  remoteMaxTs?: string;
 }
 
 // ── CLI引数パース ──────────────────────────────────────
@@ -220,9 +243,43 @@ async function getKeyDiff(
 
   const localOnly = [...localKeys].filter((k) => !remoteKeys.has(k)).sort();
   const remoteOnly = [...remoteKeys].filter((k) => !localKeys.has(k)).sort();
-  const common = [...localKeys].filter((k) => remoteKeys.has(k)).length;
+  const commonKeys = [...localKeys].filter((k) => remoteKeys.has(k));
+  const common = commonKeys.length;
 
-  return { table, localOnly, remoteOnly, common };
+  // ── タイムスタンプ比較（共通キーの値レベル変更検知） ──
+  let localNewer: string[] = [];
+  let remoteNewer: string[] = [];
+
+  if (config.timestampQuery && commonKeys.length > 0) {
+    try {
+      // ローカルのタイムスタンプ取得
+      const localTsRows = db.prepare(config.timestampQuery).all() as { key: string; ts: string | null }[];
+      const localTsMap = new Map(localTsRows.map((r) => [r.key, r.ts ?? ""]));
+
+      // リモートのタイムスタンプ取得
+      const remoteTsRows = await executeRemoteQuery(config.timestampQuery);
+      const remoteTsMap = new Map(
+        remoteTsRows.map((r) => [r.key as string, (r.ts as string) ?? ""])
+      );
+
+      for (const key of commonKeys) {
+        const localTs = localTsMap.get(key) ?? "";
+        const remoteTs = remoteTsMap.get(key) ?? "";
+        if (localTs > remoteTs) {
+          localNewer.push(key);
+        } else if (remoteTs > localTs) {
+          remoteNewer.push(key);
+        }
+      }
+
+      localNewer.sort();
+      remoteNewer.sort();
+    } catch {
+      // タイムスタンプ取得に失敗しても、キー差分レポートは返す
+    }
+  }
+
+  return { table, localOnly, remoteOnly, common, localNewer, remoteNewer };
 }
 
 // ── 行数差分 ──────────────────────────────────────────
@@ -232,22 +289,40 @@ async function getCountDiff(
   table: string
 ): Promise<CountDiff | null> {
   let local: number;
+  let localMaxTs: string | undefined;
   try {
     const row = db.prepare(`SELECT COUNT(*) as c FROM "${table}"`).get() as { c: number };
     local = row.c;
+    // updated_at カラムが存在するか確認してから取得
+    const cols = db.prepare(`PRAGMA table_info("${table}")`).all() as { name: string }[];
+    const hasUpdatedAt = cols.some((c) => c.name === "updated_at");
+    if (hasUpdatedAt) {
+      const tsRow = db.prepare(`SELECT MAX(updated_at) as ts FROM "${table}"`).get() as { ts: string | null };
+      localMaxTs = tsRow.ts ?? undefined;
+    }
   } catch {
-    return null; // ローカルにテーブルなし
+    return null;
   }
 
   let remote: number;
+  let remoteMaxTs: string | undefined;
   try {
     const rows = await executeRemoteQuery(`SELECT COUNT(*) as c FROM "${table}"`);
     remote = (rows[0]?.c as number) ?? 0;
+    // ローカルに updated_at があるならリモートも取得
+    if (localMaxTs !== undefined) {
+      try {
+        const tsRows = await executeRemoteQuery(`SELECT MAX(updated_at) as ts FROM "${table}"`);
+        remoteMaxTs = (tsRows[0]?.ts as string) ?? undefined;
+      } catch {
+        // ignore
+      }
+    }
   } catch {
-    return null; // リモートにテーブルなし
+    return null;
   }
 
-  return { table, local, remote };
+  return { table, local, remote, localMaxTs, remoteMaxTs };
 }
 
 // ── push 実行（ローカル → リモート） ──────────────────
@@ -490,8 +565,17 @@ async function main() {
       const diff = await getKeyDiff(db, table);
       if (diff) {
         keyDiffs.push(diff);
-        const hasChanges = diff.localOnly.length > 0 || diff.remoteOnly.length > 0;
-        console.log(hasChanges ? " diff found" : " in sync");
+        const hasKeyChanges = diff.localOnly.length > 0 || diff.remoteOnly.length > 0;
+        const hasValueChanges = diff.localNewer.length > 0 || diff.remoteNewer.length > 0;
+        if (hasKeyChanges && hasValueChanges) {
+          console.log(` diff found (keys + values)`);
+        } else if (hasKeyChanges) {
+          console.log(` diff found`);
+        } else if (hasValueChanges) {
+          console.log(` values changed (${diff.localNewer.length} local newer, ${diff.remoteNewer.length} remote newer)`);
+        } else {
+          console.log(` in sync`);
+        }
       } else {
         console.log(" skipped");
       }
@@ -511,7 +595,11 @@ async function main() {
     let totalDelete = 0;
 
     for (const diff of keyDiffs) {
-      const hasChanges = diff.localOnly.length > 0 || diff.remoteOnly.length > 0;
+      const hasChanges =
+        diff.localOnly.length > 0 ||
+        diff.remoteOnly.length > 0 ||
+        diff.localNewer.length > 0 ||
+        diff.remoteNewer.length > 0;
       if (!hasChanges) {
         console.log(`${diff.table}: ✓ 同期済み (${diff.common} keys)`);
         continue;
@@ -538,6 +626,20 @@ async function main() {
         else totalInsert += diff.remoteOnly.length;
       }
 
+      if (diff.localNewer.length > 0) {
+        console.log(`  ローカルが新しい (${diff.localNewer.length} keys):`);
+        const show = diff.localNewer.slice(0, 10);
+        show.forEach((k) => console.log(`    ~ ${k}`));
+        if (diff.localNewer.length > 10) console.log(`    ... 他 ${diff.localNewer.length - 10} keys`);
+      }
+
+      if (diff.remoteNewer.length > 0) {
+        console.log(`  リモートが新しい (${diff.remoteNewer.length} keys):`);
+        const show = diff.remoteNewer.slice(0, 10);
+        show.forEach((k) => console.log(`    ~ ${k}`));
+        if (diff.remoteNewer.length > 10) console.log(`    ... 他 ${diff.remoteNewer.length - 10} keys`);
+      }
+
       console.log();
     }
 
@@ -545,13 +647,31 @@ async function main() {
 
     const smallDiffTables: CountDiff[] = [];
     for (const diff of countDiffs) {
-      const marker = diff.local !== diff.remote ? " *" : "";
-      console.log(`${diff.table}: local=${diff.local}, remote=${diff.remote}${marker}`);
-      if (diff.local !== diff.remote) smallDiffTables.push(diff);
+      const countDiffers = diff.local !== diff.remote;
+      const tsDiffers =
+        diff.localMaxTs !== undefined &&
+        diff.remoteMaxTs !== undefined &&
+        diff.localMaxTs !== diff.remoteMaxTs;
+      const hasAnyDiff = countDiffers || tsDiffers;
+      const markers: string[] = [];
+      if (countDiffers) markers.push("count");
+      if (tsDiffers) {
+        const dir = (diff.localMaxTs ?? "") > (diff.remoteMaxTs ?? "") ? "local newer" : "remote newer";
+        markers.push(dir);
+      }
+      const suffix = markers.length > 0 ? ` * (${markers.join(", ")})` : "";
+      console.log(`${diff.table}: local=${diff.local}, remote=${diff.remote}${suffix}`);
+      if (hasAnyDiff) smallDiffTables.push(diff);
     }
 
     // ── サマリー ──
-    const hasKeyChanges = keyDiffs.some((d) => d.localOnly.length > 0 || d.remoteOnly.length > 0);
+    const hasKeyChanges = keyDiffs.some(
+      (d) =>
+        d.localOnly.length > 0 ||
+        d.remoteOnly.length > 0 ||
+        d.localNewer.length > 0 ||
+        d.remoteNewer.length > 0
+    );
     const hasCountChanges = smallDiffTables.length > 0;
 
     if (!hasKeyChanges && !hasCountChanges) {
@@ -567,6 +687,10 @@ async function main() {
           console.log(`  INSERT → リモート: ${diff.table} × ${diff.localOnly.length} keys`);
         if (diff.remoteOnly.length > 0)
           console.log(`  DELETE ← リモート: ${diff.table} × ${diff.remoteOnly.length} keys`);
+        if (diff.localNewer.length > 0)
+          console.log(`  UPDATE → リモート: ${diff.table} × ${diff.localNewer.length} keys (ローカルが新しい)`);
+        if (diff.remoteNewer.length > 0)
+          console.log(`  SKIP (リモートが新しい): ${diff.table} × ${diff.remoteNewer.length} keys`);
       }
       for (const diff of smallDiffTables) {
         console.log(`  FULL SYNC → リモート: ${diff.table} (${diff.local} rows)`);
@@ -577,6 +701,10 @@ async function main() {
           console.log(`  INSERT → ローカル: ${diff.table} × ${diff.remoteOnly.length} keys`);
         if (diff.localOnly.length > 0)
           console.log(`  DELETE ← ローカル: ${diff.table} × ${diff.localOnly.length} keys`);
+        if (diff.remoteNewer.length > 0)
+          console.log(`  UPDATE → ローカル: ${diff.table} × ${diff.remoteNewer.length} keys (リモートが新しい)`);
+        if (diff.localNewer.length > 0)
+          console.log(`  SKIP (ローカルが新しい): ${diff.table} × ${diff.localNewer.length} keys`);
       }
       for (const diff of smallDiffTables) {
         console.log(`  FULL SYNC → ローカル: ${diff.table} (${diff.remote} rows)`);
@@ -601,6 +729,10 @@ async function main() {
         for (const key of diff.remoteOnly) {
           await executeDeleteRemoteKey(diff.table, key);
         }
+        // ローカルが新しい → リモートを UPDATE（DELETE + INSERT）
+        for (const key of diff.localNewer) {
+          await executePushKey(db, diff.table, key);
+        }
       } else {
         // リモートのみ → ローカルに INSERT
         for (const key of diff.remoteOnly) {
@@ -609,6 +741,10 @@ async function main() {
         // ローカルのみ → ローカルから DELETE
         for (const key of diff.localOnly) {
           await executeDeleteLocalKey(db, diff.table, key);
+        }
+        // リモートが新しい → ローカルを UPDATE（DELETE + INSERT）
+        for (const key of diff.remoteNewer) {
+          await executePullKey(db, diff.table, key);
         }
       }
     }

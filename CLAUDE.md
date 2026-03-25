@@ -164,6 +164,7 @@ packages/
 | `/post-tiktok` | TikTok 投稿用キャプションを生成 → ローカル保存 | `.claude/skills/sns/post-tiktok/SKILL.md` |
 | `/generate-utm-url` | SNS・note 記事の stats47.jp リンクに付与する UTM パラメータ生成ルール | `.claude/skills/sns/generate-utm-url/SKILL.md` |
 | `/render-sns-stills` | Remotion で SNS 用静止画・動画を生成 → ローカル保存（Chrome 必須） | `.claude/skills/sns/render-sns-stills/SKILL.md` |
+| `/find-quote-rt` | X のバズツイートを browser-use で検索し、stats47 データと照合して引用RT候補を提示 | `.claude/skills/sns/find-quote-rt/SKILL.md` |
 | `/publish-x` | browser-use CLI で X の予約投稿を自動設定（テキスト・画像・予約日時） | `.claude/skills/sns/publish-x/SKILL.md` |
 | `/publish-tiktok` | browser-use CLI で TikTok Studio の予約投稿を自動設定（動画・キャプション・予約日時） | `.claude/skills/sns/publish-tiktok/SKILL.md` |
 | `/publish-instagram` | browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定（カルーセル・リール） | `.claude/skills/sns/publish-instagram/SKILL.md` |

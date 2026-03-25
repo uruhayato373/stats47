@@ -5,7 +5,7 @@ argument-hint: [--execute] [--direction pull] [--table <table>]
 
 ローカル D1 とリモート D1 のデータ差分をキー単位で検知し、レポート表示または同期を実行する。
 
-大量テーブル（ranking_data, correlation_analysis 等）はキー単位で差分検知し、少量テーブルは行数比較でフル同期する。
+大量テーブル（ranking_data, ranking_items 等）はキー単位の存在差分 + `updated_at` タイムスタンプによる値レベル変更を検知する。少量テーブルは行数 + `MAX(updated_at)` 比較でフル同期する。
 
 ## 使い方
 
@@ -47,30 +47,47 @@ npm run diff:d1 --workspace=packages/database -- --table ranking_data --execute
 
 articles, affiliate_ads, categories, subcategories, data_sources, surveys, ranking_page_cards, ranking_tags, comparison_components, estat_metainfo, estat_stats_tables, area_profile_rankings
 
+## 検知レベル
+
+| レベル | 検知方法 | 記号 | 例 |
+|---|---|---|---|
+| キー存在差分 | キーの有無 | `+` / `-` | 新規ランキング追加、削除 |
+| 値レベル変更 | `updated_at` タイムスタンプ比較 | `~` | カラースキーム変更、データ修正 |
+
+`correlation_analysis` はキー数が 58k+ と多いためタイムスタンプ比較はスキップ（キー差分のみ）。
+
 ## 出力例
 
 ```
 ── キーベース差分 ──
 
 ranking_data:
-  共通: 1,100 keys
+  共通: 2,081 keys
   ローカルのみ (2 keys):
     + new-ranking-key-1
     + new-ranking-key-2
-  リモートのみ (1 key):
-    - old-removed-key
+  ローカルが新しい (3 keys):
+    ~ modified-key-1
+    ~ modified-key-2
+    ~ modified-key-3
 
 ── アクション (ローカル → リモート) ──
 
   INSERT → リモート: ranking_data × 2 keys
-  DELETE ← リモート: ranking_data × 1 key
+  UPDATE → リモート: ranking_data × 3 keys (ローカルが新しい)
+
+── 少量テーブル（行数比較） ──
+
+articles: local=143, remote=143
+surveys: local=41, remote=38 * (count)
+port_trade_detail: local=478448, remote=478448 * (remote newer)
 ```
 
 ## 制限事項
 
 - デフォルトはレポート表示のみ（`--execute` なしでは変更しない）
 - 削除を含む同期も `--execute` で自動実行される
-- 値レベルの変更（同じキー内のデータ修正）は検知しない。その場合は `/sync-remote-d1 --key <key>` を使うこと
+- `correlation_analysis` はキー数が 58k+ のためタイムスタンプ比較はスキップ（キー差分のみ）。値変更の反映は `/sync-remote-d1 --key <key>` を使うこと
 - **スキーマ差分は検知しない**。カラム追加・CHECK 制約変更・新規テーブル追加など、テーブル構造の違いはレポートに出ない。`[SKIP]` 表示のテーブルはローカルに存在しないテーブルを意味するので見逃さないこと
 
 ## スキーマ差分の手動確認
