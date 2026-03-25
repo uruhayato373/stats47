@@ -33,7 +33,7 @@ export function AreaSelectorMap() {
   );
 
   return (
-    <div className="max-w-md mx-auto [&_rect.pref-box]:opacity-50">
+    <div className="[&_rect.pref-box]:opacity-50">
       <TileGridMap
         data={mapData}
         colorConfig={colorConfig}

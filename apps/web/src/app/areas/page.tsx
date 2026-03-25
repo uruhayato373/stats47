@@ -41,18 +41,19 @@ export default function AreasPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            <div className="mb-4">
-                <h1 className="text-2xl font-bold">都道府県一覧</h1>
-                <p className="text-sm text-muted-foreground mt-1">
-                    地図をクリックして都道府県の特徴を見る
-                </p>
-            </div>
+            <h1 className="text-lg font-bold mb-1">都道府県一覧</h1>
+            <p className="text-sm text-muted-foreground mb-4">
+                地図をクリックして都道府県の特徴を見る
+            </p>
 
-            {/* タイルグリッドマップ */}
-            <AreaSelectorMap />
+            <div className="flex flex-col lg:flex-row lg:gap-8">
+              {/* 左: タイルグリッドマップ */}
+              <div className="lg:w-1/2">
+                <AreaSelectorMap />
+              </div>
 
-            {/* 地方ブロック別リンク（アクセシビリティ・SEO用） */}
-            <div className="mt-8 space-y-4">
+              {/* 右: 地方ブロック別リンク */}
+              <div className="mt-6 lg:mt-0 lg:w-1/2 space-y-4">
                 {REGIONS.map((region) => {
                     const regionPrefs = region.prefectures
                         .map((code) => prefMap.get(code))
@@ -84,6 +85,7 @@ export default function AreasPage() {
                         </section>
                     );
                 })}
+              </div>
             </div>
         </div>
     );
