@@ -234,29 +234,45 @@ export default async function HomePage() {
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {latestArticles.map((article) => (
-                  <Link
-                    key={article.slug}
-                    href={`/blog/${article.slug}`}
-                    className="group block"
-                  >
-                    <div className="rounded-lg border border-border bg-background p-5 h-full hover:border-primary/50 hover:shadow-md transition-all">
-                      {article.publishedAt && (
-                        <time className="text-xs text-muted-foreground">
-                          {article.publishedAt.slice(0, 10)}
-                        </time>
-                      )}
-                      <h3 className="text-base font-semibold mt-1 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        {article.title}
-                      </h3>
-                      {article.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {article.description}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                ))}
+                {latestArticles.map((article) => {
+                  const r2 = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+                  return (
+                    <Link
+                      key={article.slug}
+                      href={`/blog/${article.slug}`}
+                      className="group block rounded-lg border border-border overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
+                    >
+                      <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
+                        <Image
+                          src={`${r2}/blog/${article.slug}/thumbnail-light.webp`}
+                          alt={article.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300 dark:hidden"
+                          loading="lazy"
+                        />
+                        <Image
+                          src={`${r2}/blog/${article.slug}/thumbnail-dark.webp`}
+                          alt={article.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300 hidden dark:block"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="p-4">
+                        {article.publishedAt && (
+                          <time className="text-xs text-muted-foreground">
+                            {article.publishedAt.slice(0, 10)}
+                          </time>
+                        )}
+                        <h3 className="text-sm font-semibold mt-1 line-clamp-2 group-hover:text-primary transition-colors">
+                          {article.title}
+                        </h3>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>
