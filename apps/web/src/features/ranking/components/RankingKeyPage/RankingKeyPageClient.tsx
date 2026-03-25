@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useMemo, useState, useTransition } from "react";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
@@ -200,12 +201,15 @@ export function RankingKeyPageClient({
 
     // カードタイトル・サブタイトル・出典を構築
     const sourceName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
-    const footerParts: string[] = [];
-    if (sourceName) footerParts.push(`出典: ${sourceName}`);
-    if (surveyName) footerParts.push(`調査: ${surveyName}`);
-    const cardFooter = footerParts.length > 0
-        ? <span>{footerParts.join("　")}</span>
-        : undefined;
+    const cardFooter = (sourceName || surveyName) ? (
+        <span>
+            {sourceName && <>出典: {sourceName}</>}
+            {sourceName && surveyName && "　"}
+            {surveyName && rankingItem?.surveyId && (
+                <>調査: <Link href={`/survey/${rankingItem.surveyId}`} className="hover:text-primary hover:underline">{surveyName}</Link></>
+            )}
+        </span>
+    ) : undefined;
 
     const downloadButton = (
         <DataDownloadIconButton
