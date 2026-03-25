@@ -57,6 +57,7 @@ import {
   RankingPageCardsContainer,
   RelatedArticlesCard,
   RelatedGroupCard,
+  SurveyCard,
 } from "@/features/ranking/server";
 import { PortStatisticsMapCard } from "@/features/ranking/components/RankingSidebar/PortStatisticsMapCard";
 
@@ -273,6 +274,7 @@ export default async function RankingKeyPage({
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+            {rankingItem.surveyId && <SurveyCard surveyId={rankingItem.surveyId} />}
             <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
           </Suspense>
         }

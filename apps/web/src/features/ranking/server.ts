@@ -29,6 +29,7 @@ export { RankingItemsSidebar } from "./components/RankingSidebar";
 export { RankingPageCardsContainer } from "./components/RankingPageCards";
 export { SurveyBadge } from "./components/SurveyBadge/SurveyBadge";
 export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
+export { SurveyCard } from "./components/RankingSidebar/SurveyCard";
 export { RelatedGroupCard } from "./components/RankingSidebar/RelatedGroupCard";
 
 // サーバー専用ローダー
