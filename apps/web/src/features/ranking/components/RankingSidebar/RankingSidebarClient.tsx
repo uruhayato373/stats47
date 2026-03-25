@@ -12,6 +12,7 @@ import {
 
 import { cn } from "@stats47/components";
 
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import type { AreaType } from "@/features/area";
 
 
@@ -97,17 +98,19 @@ export function RankingSidebarClient({
     linkPrefix = "/ranking",
     categoryLinkPrefix,
 }: RankingSidebarClientProps) {
+    const isDesktop = useBreakpoint("aboveLg");
     const [isExpanded, setIsExpanded] = useState(false);
+    const effectiveExpanded = isDesktop || isExpanded;
 
     const others = useMemo(
         () => selectSidebarItems(items, rankingKey, areaType, MAX_EXPANDED_ITEMS),
         [items, rankingKey, areaType]
     );
 
-    const displayOthers = isExpanded
+    const displayOthers = effectiveExpanded
         ? others
         : others.slice(0, MAX_COLLAPSED_ITEMS);
-    const hasMore = others.length > MAX_COLLAPSED_ITEMS;
+    const hasMore = !isDesktop && others.length > MAX_COLLAPSED_ITEMS;
 
     if (others.length === 0) {
         return null;

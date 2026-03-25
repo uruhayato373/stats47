@@ -57,8 +57,8 @@ import {
   RankingPageCardsContainer,
   RelatedArticlesCard,
   RelatedGroupCard,
-  SurveyCard,
 } from "@/features/ranking/server";
+import { SurveyCard } from "@/features/ranking/components/RankingSidebar/SurveyCard";
 import { PortStatisticsMapCard } from "@/features/ranking/components/RankingSidebar/PortStatisticsMapCard";
 
 import { CorrelationSectionSkeleton } from "@/features/ranking/components/CorrelationSection/CorrelationSectionSkeleton";
@@ -66,7 +66,7 @@ import { RankingPageCardsSkeleton } from "@/features/ranking/components/RankingP
 import { findRankingAiContent } from "@stats47/ai-content/server";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import type { RankingValue } from "@stats47/ranking";
-import { listActiveRankingKeys, listRankingValues, findSurveyById } from "@stats47/ranking/server";
+import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys } from "@stats47/ranking/server";
 import { cachedFindRankingItem } from "@/features/ranking/server";
 import type { Metadata } from "next";
 
@@ -184,17 +184,19 @@ export default async function RankingKeyPage({
     .then((r) => (isOk(r) ? r.data : null))
     .catch(() => null);
 
-  // --- 3c. 調査名を取得 ---
+  // --- 3c. 調査名 + 全調査一覧を取得 ---
   const surveyNamePromise = rankingItem.surveyId
     ? findSurveyById(rankingItem.surveyId).then((r) => isOk(r) ? r.data?.name ?? null : null).catch(() => null)
     : Promise.resolve(null);
+  const allSurveysPromise = listSurveys().then((r) => isOk(r) ? r.data : []).catch(() => []);
 
-  const [rankingValues, topology, aiContent, cityRankingItem, surveyName] = await Promise.all([
+  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys] = await Promise.all([
     rankingValuesPromise,
     topologyPromise,
     aiContentPromise,
     cityRankingItemPromise,
     surveyNamePromise,
+    allSurveysPromise,
   ]);
 
   // --- 6. SEO 構造化データ（JSON-LD）を生成 ---
@@ -274,7 +276,7 @@ export default async function RankingKeyPage({
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
-            <SurveyCard currentSurveyId={rankingItem.surveyId ?? undefined} />
+            <SurveyCard surveys={allSurveys.map(s => ({ id: s.id, name: s.name }))} currentSurveyId={rankingItem.surveyId ?? undefined} />
             <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
           </Suspense>
         }
