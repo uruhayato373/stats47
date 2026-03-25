@@ -13,7 +13,7 @@ import { fetchAllYearsRankingValuesAction } from "@/features/ranking/actions/fet
 import { computeNationalAverage } from "../lib/compute-national-average";
 
 const D3MixedChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.D3MixedChart),
+  () => import("@stats47/visualization/d3").then((mod) => mod.MixedChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
 );
 

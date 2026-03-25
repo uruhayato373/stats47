@@ -55,6 +55,7 @@ export type {
   IndicatorSetUsage,
   ChartDefinition,
   DualLineChartDef,
+  MixedChartDef,
   DonutChartDef,
   ChartSeriesDef,
 } from "./indicator-set";
