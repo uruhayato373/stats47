@@ -14,4 +14,5 @@ export * from "./ranking_page_views";
 export * from "./note_content";
 export * from "./port_statistics";
 export * from "./fishing_ports";
+export * from "./sns_posts";
 export * from "./tags";

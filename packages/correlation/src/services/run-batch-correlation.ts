@@ -3,7 +3,7 @@ import "server-only";
 import type { RankingItem } from "@stats47/ranking";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { upsertCorrelation } from "../repositories/upsert-correlation";
-import { isExcludedCorrelationPair } from "../trivial-pairs";
+import { isExcludedCorrelationKey, isExcludedCorrelationPair } from "../trivial-pairs";
 import { buildScatterData, calculatePartialR, calculatePearsonR } from "../utils/calculate-pearson";
 
 const MIN_DATA_POINTS = 30;
@@ -204,10 +204,12 @@ export async function runBatchCorrelation(
       return;
     }
 
-    const items = itemsResult.data.filter((item) => item.latestYear?.yearCode);
+    const allItems = itemsResult.data.filter((item) => item.latestYear?.yearCode);
+    // 絶対値（総人口・出生数等）は相関ランキングで常にフィルタされるためバッチ対象外
+    const items = allItems.filter((item) => !isExcludedCorrelationKey(item.rankingKey));
     observer.onLog(
       "info",
-      `${items.length} 件のランキング項目を相関分析の対象とします`
+      `${items.length} 件のランキング項目を相関分析の対象とします（${allItems.length - items.length} 件は除外キー）`
     );
     if (items.length === 0) {
       observer.onLog(
@@ -218,14 +220,7 @@ export async function runBatchCorrelation(
       return;
     }
 
-    // 同一 yearCode でグルーピング（正規化して統一）
-    const byYear = new Map<string, typeof items>();
-    for (const item of items) {
-      const yc = normalizeYearCode(item.latestYear!.yearCode);
-      if (!byYear.has(yc)) byYear.set(yc, []);
-      byYear.get(yc)!.push(item);
-    }
-
+    // 全キー横断でペアを生成（各キーは自身の latestYear を使用）
     const pairs: {
       keyX: string;
       keyY: string;
@@ -233,22 +228,20 @@ export async function runBatchCorrelation(
       yearY: string;
     }[] = [];
     let trivialSkipped = 0;
-    for (const [, yearItems] of byYear) {
-      for (let i = 0; i < yearItems.length; i++) {
-        for (let j = i + 1; j < yearItems.length; j++) {
-          const a = yearItems[i];
-          const b = yearItems[j];
-          if (isTrivialPair(a, b)) {
-            trivialSkipped++;
-            continue;
-          }
-          pairs.push({
-            keyX: a.rankingKey,
-            keyY: b.rankingKey,
-            yearX: normalizeYearCode(a.latestYear!.yearCode),
-            yearY: normalizeYearCode(b.latestYear!.yearCode),
-          });
+    for (let i = 0; i < items.length; i++) {
+      for (let j = i + 1; j < items.length; j++) {
+        const a = items[i];
+        const b = items[j];
+        if (isTrivialPair(a, b)) {
+          trivialSkipped++;
+          continue;
         }
+        pairs.push({
+          keyX: a.rankingKey,
+          keyY: b.rankingKey,
+          yearX: normalizeYearCode(a.latestYear!.yearCode),
+          yearY: normalizeYearCode(b.latestYear!.yearCode),
+        });
       }
     }
     if (trivialSkipped > 0) {
@@ -295,7 +288,7 @@ export async function runBatchCorrelation(
     // 制御変数のデータ取得（全年コードで試行し、最もデータ数が多い年を代表として使う）
     // cvBestData: cvKey → Map<areaCode, value>（年をまたいで1つだけ保持）
     const cvBestData = new Map<string, Map<string, number>>();
-    const yearCodes = [...byYear.keys()];
+    const yearCodes = [...new Set(items.map((item) => normalizeYearCode(item.latestYear!.yearCode)))];
     for (const cv of CONTROL_VARIABLES) {
       let bestData: Map<string, number> | null = null;
       let bestSize = 0;

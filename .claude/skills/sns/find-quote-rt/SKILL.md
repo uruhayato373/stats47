@@ -81,19 +81,29 @@ sleep 5
 
 ### Phase 3: 検索結果のスクレイプ
 
+JavaScript eval でツイート情報を一括抽出する:
+
 ```bash
-$BU screenshot /tmp/x-search-results.png
+$BU eval "
+  const articles = document.querySelectorAll('article[role=article]');
+  const results = [];
+  articles.forEach((a, i) => {
+    const textEl = a.querySelector('[data-testid=tweetText]');
+    const text = textEl ? textEl.textContent.trim().substring(0, 120) : '(no text)';
+    const engEl = a.querySelector('[role=group]');
+    const eng = engEl ? engEl.getAttribute('aria-label') : '';
+    const linkEls = a.querySelectorAll('a[href*=\"/status/\"]');
+    let url = '';
+    linkEls.forEach(l => { if (l.href.includes('/status/') && !url) url = l.href; });
+    const userEl = a.querySelector('[data-testid=User-Name] a');
+    const user = userEl ? userEl.textContent : '';
+    results.push({i, user: user.substring(0,30), text, eng: eng.substring(0,80), url});
+  });
+  JSON.stringify(results, null, 2);
+"
 ```
 
-スクリーンショットを確認し、表示されたツイートから以下を抽出:
-- ツイート本文（テーマとの関連性を確認）
-- いいね数・RT数（エンゲージメントの高さ）
-- ツイートURL（引用RT用）
-- 投稿者アカウント
-
-**抽出方法**: `$BU state` で DOM を確認し、ツイート要素のテキストを取得。DOM 構造は頻繁に変わるため、毎回 `$BU state` で確認すること。
-
-代替方法: スクリーンショット画像を目視で確認し、手動でツイート情報を記録してもよい。
+これで各ツイートの本文・エンゲージメント・URL・投稿者が JSON で取得できる。
 
 ### Phase 4: ranking_items マッチング
 
@@ -151,31 +161,41 @@ TWEET_URL="https://x.com/xxx/status/123456"
 
 # 2. X コンポーザを開く
 $BU open "https://x.com/intent/post?url=$TWEET_URL"
-sleep 5
-$BU state
+sleep 6
+```
 
-# 3. テキスト入力（ClipboardEvent）
-TEXT_FILE=/tmp/x-quote-rt-text.txt
-echo "引用RTテキスト" > "$TEXT_FILE"
-ENCODED=$(node -e "process.stdout.write(encodeURIComponent(require('fs').readFileSync('$TEXT_FILE','utf8').trim()))")
-$BU eval "
-  const editor = document.querySelector('[contenteditable=true]');
-  if (editor) {
-    editor.focus();
-    const text = decodeURIComponent('$ENCODED');
-    const dt = new DataTransfer();
-    dt.setData('text/plain', text);
-    const event = new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true });
-    editor.dispatchEvent(event);
-  }
-"
-sleep 2
+#### テキスト入力
 
-# 4. 画像添付
-$BU state  # input[type=file] のインデックスを確認
-$BU upload <index> <画像の絶対パス>
+`$BU type` コマンドで入力する。ClipboardEvent は X の React で無視されるため使わない。
+
+```bash
+# 3. カーソルを末尾に移動してテキスト入力
+$BU keys End
+sleep 1
+$BU keys Enter
+sleep 1
+$BU type "引用RTテキスト本文"
+```
+
+URL を含める場合は追加で:
+```bash
+$BU keys Enter
+sleep 1
+$BU type "https://stats47.jp/ranking/<ranking_key>"
+```
+
+#### 画像添付
+
+```bash
+# 4. input[type=file] のインデックスを取得してアップロード
+IDX=$($BU state 2>&1 | grep 'input.*file' | head -1 | sed 's/.*\[\([0-9]*\)\].*/\1/')
+$BU upload "$IDX" "<画像の絶対パス>"
 sleep 3
+```
 
+#### 投稿確認 → 送信
+
+```bash
 # 5. スクリーンショットで確認
 $BU screenshot /tmp/x-quote-rt-preview.png
 ```
@@ -183,12 +203,20 @@ $BU screenshot /tmp/x-quote-rt-preview.png
 スクリーンショットをユーザーに提示し、投稿確認を取る。確認後:
 
 ```bash
-# 6. 投稿ボタンクリック
-$BU state  # 投稿ボタンのインデックスを確認
-$BU click <index>
-sleep 3
+# 6. ポストボタンのインデックスを特定してクリック
+#    「ポストする」テキストの直前の <button /> が正しいボタン
+BTN=$($BU state 2>&1 | grep -B1 'ポストする$' | head -1 | sed 's/.*\[\([0-9]*\)\].*/\1/')
+$BU click "$BTN"
+sleep 5
 $BU screenshot /tmp/x-quote-rt-done.png
 ```
+
+**注意**: X の DOM は頻繁に変わる。以下の方法は動作しない:
+- `$BU eval` で `btn.click()` / `dispatchEvent` → React のイベントハンドラが反応しない
+- `$BU keys "Ctrl+Enter"` / `"Meta+Enter"` → コンポーザでは効かない
+- `data-testid="tweetButton"` は `$BU state` に表示されない（shadow DOM 内）
+
+確実な方法は **`$BU state` の出力から `grep -B1 'ポストする$'` でインデックスを取得し `$BU click`** すること。
 
 ## 運用ルール
 

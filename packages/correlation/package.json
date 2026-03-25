@@ -17,6 +17,7 @@
     }
   },
   "scripts": {
+    "batch": "tsx -r ../ranking/src/scripts/setup-cli.js src/scripts/run-batch.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
