@@ -10,7 +10,8 @@ import type { Metadata } from "next";
 
 import { Suspense } from "react";
 import { isOk } from "@stats47/types";
-import { findRankingItemsByCategory, listSurveys } from "@stats47/ranking/server";
+import { findRankingItemsByCategory, listSurveys, listRankingValues, listTopRankingValuesBatch } from "@stats47/ranking/server";
+import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { findCategoryByKey } from "@/features/category/server";
 import { listLatestArticles } from "@/features/blog/server";
@@ -86,10 +87,6 @@ export default async function CategoryPage({ params }: PageProps) {
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
 
-  const r2PublicUrl =
-    process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
-    "https://storage.stats47.jp";
-
   // テーブル用データ
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
@@ -106,27 +103,50 @@ export default async function CategoryPage({ params }: PageProps) {
     };
   });
 
-  // 注目ランキング（カード用にサムネイルURL付き、rankingKey で重複排除）
+  // 注目ランキング（タイルマップSVG付き、rankingKey で重複排除）
   const seenKeys = new Set<string>();
-  const featuredItems = rankingItems
-    .filter((item) => {
-      if (!item.isFeatured) return false;
-      if (seenKeys.has(item.rankingKey)) return false;
-      seenKeys.add(item.rankingKey);
-      return true;
-    })
-    .map((item) => {
-      const latestYear = parseLatestYear(item.latestYear);
-      return {
-        rankingKey: item.rankingKey,
-        title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
-        latestYear,
-        unit: item.unit,
-        demographicAttr: item.demographicAttr,
-        normalizationBasis: item.normalizationBasis,
-        baseThumbnailUrl: `${r2PublicUrl}/ranking/prefecture/${item.rankingKey}/${latestYear}/thumbnails/thumbnail`,
-      };
-    });
+  const featuredRaw = rankingItems.filter((item) => {
+    if (!item.isFeatured) return false;
+    if (seenKeys.has(item.rankingKey)) return false;
+    seenKeys.add(item.rankingKey);
+    return true;
+  });
+
+  // 1位データ + 全47件データを並列取得
+  const batchItems = featuredRaw.map((item) => ({
+    rankingKey: item.rankingKey,
+    yearCode: parseLatestYear(item.latestYear),
+  }));
+  const [batchResult, ...allValuesResults] = await Promise.all([
+    listTopRankingValuesBatch(batchItems, "prefecture"),
+    ...featuredRaw.map((item) =>
+      listRankingValues(item.rankingKey, "prefecture", parseLatestYear(item.latestYear))
+    ),
+  ]);
+  const topMap = isOk(batchResult) ? batchResult.data : new Map();
+
+  const featuredItems = featuredRaw.map((item, idx) => {
+    const latestYear = parseLatestYear(item.latestYear);
+    const top = topMap.get(item.rankingKey);
+    const valuesResult = allValuesResults[idx];
+    let tileMapSvg: string | undefined;
+    if (isOk(valuesResult) && valuesResult.data.length > 0) {
+      tileMapSvg = generateMiniTileSvg(
+        valuesResult.data.map((v) => ({ areaCode: v.areaCode, value: v.value })),
+        item.visualization?.colorScheme,
+        item.visualization?.isReversed,
+      );
+    }
+    return {
+      rankingKey: item.rankingKey,
+      title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
+      latestYear,
+      unit: item.unit,
+      topAreaName: top?.areaName,
+      topValue: top ? top.value.toLocaleString("ja-JP") : undefined,
+      tileMapSvg,
+    };
+  });
 
   const r2Url = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
@@ -154,17 +174,17 @@ export default async function CategoryPage({ params }: PageProps) {
               {featuredItems.length > 0 && (
                 <section className="mb-8">
                   <h2 className="text-sm font-medium text-muted-foreground mb-3">注目のランキング</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {featuredItems.map((item) => (
                       <FeaturedRankingCard
                         key={item.rankingKey}
                         rankingKey={item.rankingKey}
                         title={item.title}
-                        baseThumbnailUrl={item.baseThumbnailUrl}
                         latestYear={item.latestYear}
                         unit={item.unit}
-                        demographicAttr={item.demographicAttr}
-                        normalizationBasis={item.normalizationBasis}
+                        topAreaName={item.topAreaName}
+                        topValue={item.topValue}
+                        tileMapSvg={item.tileMapSvg}
                       />
                     ))}
                   </div>
