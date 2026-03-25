@@ -1,5 +1,6 @@
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { AreaSelectorMap } from "@/features/area-profile/components/AreaSelectorMap";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -35,19 +36,23 @@ export default function AreasPage() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-6 text-foreground">
+        <div className="container mx-auto px-4 py-4 text-foreground">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            <div className="mb-8">
-                <h1 className="text-2xl font-bold mb-1">都道府県一覧</h1>
-                <p className="text-sm text-muted-foreground">
-                    47都道府県の統計プロファイルを閲覧できます。各都道府県をクリックして、地域の特性や強み・弱みを確認しましょう。
+            <div className="mb-4">
+                <h1 className="text-2xl font-bold">都道府県一覧</h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                    地図をクリックして都道府県の特徴を見る
                 </p>
             </div>
 
-            <div className="space-y-8">
+            {/* タイルグリッドマップ */}
+            <AreaSelectorMap />
+
+            {/* 地方ブロック別リンク（アクセシビリティ・SEO用） */}
+            <div className="mt-8 space-y-4">
                 {REGIONS.map((region) => {
                     const regionPrefs = region.prefectures
                         .map((code) => prefMap.get(code))
@@ -61,26 +66,18 @@ export default function AreasPage() {
                         >
                             <h2
                                 id={headingId}
-                                className="text-lg font-bold mb-3 pl-3 border-l-2"
-                                style={{ borderColor: region.color }}
+                                className="text-sm font-semibold text-muted-foreground mb-1"
                             >
                                 {region.regionName}
                             </h2>
-                            <div
-                                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
-                                role="list"
-                                aria-label={`${region.regionName}の都道府県`}
-                            >
+                            <div className="flex flex-wrap gap-x-3 gap-y-1">
                                 {regionPrefs.map((pref) => (
                                     <Link
                                         key={pref.prefCode}
                                         href={`/areas/${pref.prefCode}`}
-                                        role="listitem"
-                                        className="group block rounded-lg border border-border bg-card p-4 text-center transition-all duration-200 hover:shadow-md hover:-translate-y-1 hover:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                                        className="text-sm text-foreground hover:text-primary transition-colors"
                                     >
-                                        <span className="text-sm font-medium text-card-foreground group-hover:text-primary group-focus-visible:text-primary transition-colors">
-                                            {pref.prefName}
-                                        </span>
+                                        {pref.prefName}
                                     </Link>
                                 ))}
                             </div>
