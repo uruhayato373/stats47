@@ -28,6 +28,7 @@ export async function findRankingItemsBySurvey(
         description: rankingItems.description,
         demographicAttr: rankingItems.demographicAttr,
         normalizationBasis: rankingItems.normalizationBasis,
+        groupKey: rankingItems.groupKey,
         isFeatured: rankingItems.isFeatured,
       })
       .from(rankingItems)

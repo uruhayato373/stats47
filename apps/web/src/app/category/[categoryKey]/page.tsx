@@ -133,8 +133,6 @@ export default async function CategoryPage({ params }: PageProps) {
     if (isOk(valuesResult) && valuesResult.data.length > 0) {
       tileMapSvg = generateMiniTileSvg(
         valuesResult.data.map((v) => ({ areaCode: v.areaCode, value: v.value })),
-        item.visualization?.colorScheme,
-        item.visualization?.isReversed,
       );
     }
     return {

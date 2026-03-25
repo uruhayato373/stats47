@@ -190,7 +190,7 @@ export function RankingMapChartClient({
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                 borderColor={isDark ? "#475569" : "#94a3b8"}
                 className="h-[500px]"
-                valueDisplay={rankingItem.valueDisplay}
+                valueDisplay={rankingItem.valueDisplay ?? undefined}
               />
               <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
             </>
