@@ -64,6 +64,8 @@ interface RankingKeyPageClientProps {
     sidebarSection?: ReactNode;
     /** 市区町村ランキング定義（存在する場合にトグルを表示） */
     cityRankingItem?: RankingItem;
+    /** 調査名（surveys テーブルから取得） */
+    surveyName?: string;
 }
 
 export function RankingKeyPageClient({
@@ -83,6 +85,7 @@ export function RankingKeyPageClient({
     parentAreaCode,
     sidebarSection,
     cityRankingItem,
+    surveyName,
 }: RankingKeyPageClientProps) {
     const [rankingValues, setRankingValues] = useState<RankingValue[]>(initialRankingValues);
     const [currentYear, setCurrentYear] = useState(selectedYear ?? "");
@@ -207,8 +210,11 @@ export function RankingKeyPageClient({
     if (displayInfo.normalizationBasis) cardSubtitleParts.push(displayInfo.normalizationBasis);
     const cardSubtitle = cardSubtitleParts.length > 0 ? cardSubtitleParts.join(" / ") : undefined;
     const sourceName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
-    const cardFooter = sourceName
-        ? <span>出典: {sourceName}</span>
+    const footerParts: string[] = [];
+    if (sourceName) footerParts.push(`出典: ${sourceName}`);
+    if (surveyName) footerParts.push(`調査: ${surveyName}`);
+    const cardFooter = footerParts.length > 0
+        ? <span>{footerParts.join("　")}</span>
         : undefined;
 
     const downloadButton = (
