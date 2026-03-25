@@ -371,7 +371,7 @@ export function RankingKeyPageClient({
 
                 {/* 右サイドバー（lg以上） */}
                 {isAboveLg && sidebarSection && (
-                    <aside className="w-64 shrink-0 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
+                    <aside className="w-64 shrink-0 sticky top-20">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
                             <AdSenseAd
