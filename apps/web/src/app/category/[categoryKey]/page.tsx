@@ -226,6 +226,14 @@ export default async function CategoryPage({ params }: PageProps) {
           </div>
         </aside>
       </div>
+
+      {/* モバイルフォールバック: 広告 */}
+      <div className="lg:hidden mt-8 flex justify-center">
+        <AdSenseAd
+          format={RANKING_PAGE_FOOTER.format}
+          slotId={RANKING_PAGE_FOOTER.slotId}
+        />
+      </div>
     </div>
   );
 }

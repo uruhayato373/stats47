@@ -18,6 +18,7 @@ export interface CategoryRankingListItem {
   normalizationBasis: string | null;
 }
 
+/** モバイルではタイトル+年のみ、md以上で属性・基準・単位を表示 */
 const columns: ColumnDef<CategoryRankingListItem>[] = [
   {
     accessorKey: "title",
@@ -31,32 +32,6 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
       </Link>
     ),
     meta: { minWidth: "200px" },
-  },
-  {
-    accessorKey: "demographicAttr",
-    header: "属性",
-    cell: ({ getValue }) => {
-      const v = getValue<string | null>();
-      return v ? (
-        <span className="text-xs text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded whitespace-nowrap">
-          {v}
-        </span>
-      ) : "—";
-    },
-    meta: { width: "100px" },
-  },
-  {
-    accessorKey: "normalizationBasis",
-    header: "基準",
-    cell: ({ getValue }) => {
-      const v = getValue<string | null>();
-      return v ? (
-        <span className="text-xs text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded whitespace-nowrap">
-          {v}
-        </span>
-      ) : "—";
-    },
-    meta: { width: "120px" },
   },
   {
     accessorKey: "latestYear",
@@ -93,7 +68,7 @@ export function CategoryRankingTable({ items }: CategoryRankingTableProps) {
           data={items}
           emptyMessage="該当するランキングがありません"
           maxRows={20}
-          enableFiltering={false}
+          enableFiltering={true}
           enableSorting={true}
           showIndex={false}
           showBorder={false}
