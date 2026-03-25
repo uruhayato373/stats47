@@ -33,7 +33,7 @@ export function AreaSelectorMap() {
   );
 
   return (
-    <div className="[&_rect.pref-box]:opacity-50 [&_svg]:mt-[-10%]">
+    <div className="overflow-hidden [&_rect.pref-box]:opacity-50 [&_svg]:mt-[-16%] [&_svg]:mb-[-10%]">
       <TileGridMap
         data={mapData}
         colorConfig={colorConfig}
