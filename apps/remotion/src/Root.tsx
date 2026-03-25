@@ -27,6 +27,7 @@ import { RankingChartXPreview } from './features/ranking-x/previews/RankingChart
 // ranking-youtube
 import { ThumbnailPreview } from './features/ranking-youtube/previews/ThumbnailPreview';
 import { RankingNormalPreview } from './features/ranking-youtube/previews/RankingNormalPreview';
+import { RankingHorizontalBarPreview } from './features/ranking-youtube/previews/RankingHorizontalBarPreview';
 import { RankingCountdownPreview } from './features/ranking-youtube/previews/RankingCountdownPreview';
 import { RankingMigrationPreview } from './features/ranking-youtube/previews/RankingMigrationPreview';
 // OGP
@@ -266,6 +267,27 @@ export const RemotionRoot: React.FC = () => {
                 theme: 'dark' as const,
                 showSafeAreas: false,
                 framesPerPref: VIDEO_CONFIG.fps * 4,
+              }}
+            />
+
+            {/* YouTube 横棒グラフ動画 (16:9 Full HD 1920×1080) — 競合風スタイル */}
+            <Composition
+              id="RankingYouTube-HorizontalBar"
+              component={RankingHorizontalBarPreview}
+              width={CANVAS.youtube16x9.width}
+              height={CANVAS.youtube16x9.height}
+              fps={VIDEO_CONFIG.fps}
+              durationInFrames={120 + 150 * 47 + 120} // イントロ4秒 + 5秒*47県 + アウトロ4秒
+              schema={CommonPreviewSchema.extend({
+                framesPerPref: z.number().optional(),
+                precision: z.number().optional(),
+                musicPath: z.string().optional(),
+                hookText: z.string().optional(),
+              })}
+              defaultProps={{
+                theme: 'dark' as const,
+                showSafeAreas: false,
+                framesPerPref: 150,
               }}
             />
 

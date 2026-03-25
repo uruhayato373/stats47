@@ -49,8 +49,10 @@ export async function RankingSidebarContainer({
     }
 
     let categoryName: string | undefined;
+    let categoryIcon: string | undefined;
     if (isOk(catResult) && catResult.data) {
         categoryName = catResult.data.categoryName;
+        categoryIcon = catResult.data.icon ?? undefined;
     }
 
     // 4. areaType でフィルタリング
@@ -66,6 +68,7 @@ export async function RankingSidebarContainer({
         <RankingSidebarClient
             {...commonProps}
             categoryName={categoryName}
+            categoryIcon={categoryIcon}
             categoryKey={categoryKey}
             items={items.map((item) => ({
                 rankingKey: item.rankingKey,
