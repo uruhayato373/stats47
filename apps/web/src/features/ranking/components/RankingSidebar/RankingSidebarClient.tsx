@@ -114,7 +114,7 @@ export function RankingSidebarClient({
     }
 
     return (
-        <Card className="h-full w-full border border-border shadow-sm overflow-hidden animate-in fade-in duration-500">
+        <Card className="h-full w-full border border-border shadow-sm rounded-sm overflow-hidden animate-in fade-in duration-500">
             <CardHeader className="py-3 px-4">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     {categoryName ? `${categoryName}のランキング` : "同カテゴリのランキング"}
