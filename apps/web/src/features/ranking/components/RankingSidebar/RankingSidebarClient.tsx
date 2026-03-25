@@ -14,7 +14,7 @@ import { cn } from "@stats47/components";
 
 import type { AreaType } from "@/features/area";
 
-import { ChevronRight } from "lucide-react";
+
 
 const MAX_COLLAPSED_ITEMS = 7;
 const MAX_EXPANDED_ITEMS = 20;
@@ -120,7 +120,7 @@ export function RankingSidebarClient({
                     {categoryName ? `${categoryName}のランキング` : "同カテゴリのランキング"}
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-4 pb-4 pt-0 flex flex-col gap-0.5">
+            <CardContent className="px-4 pb-4 pt-2 flex flex-col gap-0.5">
                 {/* 関連ランキング: コンパクトリスト */}
                 <nav className="flex flex-col gap-0.5">
                     {displayOthers.map((item) => (
@@ -129,11 +129,10 @@ export function RankingSidebarClient({
                             href={`${linkPrefix}/${item.rankingKey}`}
                             title={item.title}
                             className={cn(
-                                "group flex items-center gap-2 px-2 py-1.5 rounded-md transition-colors",
-                                "text-sm hover:bg-accent/50"
+                                "group flex items-center py-1.5 transition-colors",
+                                "text-sm hover:text-primary"
                             )}
                         >
-                            <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0 group-hover:text-primary transition-colors" />
                             <span className="line-clamp-1 leading-snug">
                                 {item.title}
                                 {item.subtitle && (
