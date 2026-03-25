@@ -45,7 +45,7 @@ export function FeaturedRankingCard({
       <Link
         href={`/ranking/${rankingKey}`}
         title={title}
-        className="group block rounded-sm border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
+        className="group block rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
       >
         {tileMapSvg && (
           <div
@@ -77,11 +77,11 @@ export function FeaturedRankingCard({
     <Link
       href={`/ranking/${rankingKey}`}
       title={title}
-      className="group block rounded-sm border border-border hover:border-primary/50 hover:bg-accent/50 transition-colors overflow-hidden"
+      className="group block rounded-none border border-border hover:border-primary/50 hover:bg-accent/50 transition-colors overflow-hidden"
     >
       <div className="flex gap-3 p-2.5">
         {baseThumbnailUrl && (
-          <div className="flex-shrink-0 w-20 rounded-sm overflow-hidden bg-muted aspect-square">
+          <div className="flex-shrink-0 w-20 rounded-none overflow-hidden bg-muted aspect-square">
             <RankingThumbnail
               baseSrc={baseThumbnailUrl}
               alt={title}
