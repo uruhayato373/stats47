@@ -200,11 +200,16 @@ export function RankingKeyPageClient({
     }, [rankingValues, displayInfo.title]);
 
     // カードタイトル・サブタイトル・出典を構築
-    const sourceName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
-    const cardFooter = (sourceName || surveyName) ? (
+    const sourceObj = (rankingItem?.sourceConfig as Record<string, any>)?.source as { name?: string; url?: string } | undefined;
+    const cardFooter = (sourceObj?.name || surveyName) ? (
         <span>
-            {sourceName && <>出典: {sourceName}</>}
-            {sourceName && surveyName && "　"}
+            {sourceObj?.name && (
+                <>出典: {sourceObj.url
+                    ? <a href={sourceObj.url} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">{sourceObj.name}</a>
+                    : sourceObj.name
+                }</>
+            )}
+            {sourceObj?.name && surveyName && "　"}
             {surveyName && rankingItem?.surveyId && (
                 <>調査: <Link href={`/survey/${rankingItem.surveyId}`} className="hover:text-primary hover:underline">{surveyName}</Link></>
             )}
