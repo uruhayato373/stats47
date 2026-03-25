@@ -45,7 +45,7 @@ export async function RelatedArticlesCard({
   if (relatedArticles.length === 0) return null;
 
   return (
-    <Card>
+    <Card className="border border-border shadow-sm rounded-sm">
       <CardHeader className="py-3 px-4">
         <Newspaper className="h-4 w-4 text-muted-foreground" />
         <CardTitle className="text-sm font-medium text-muted-foreground">
