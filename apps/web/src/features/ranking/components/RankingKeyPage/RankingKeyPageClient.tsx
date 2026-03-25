@@ -206,15 +206,9 @@ export function RankingKeyPageClient({
     if (displayInfo.demographicAttr) cardSubtitleParts.push(displayInfo.demographicAttr);
     if (displayInfo.normalizationBasis) cardSubtitleParts.push(displayInfo.normalizationBasis);
     const cardSubtitle = cardSubtitleParts.length > 0 ? cardSubtitleParts.join(" / ") : undefined;
-    // sourceConfig.source.name = データベース名(例: 社会・人口統計体系)
-    // rankingItem.source.name = 調査名(例: 住宅・土地統計調査)
-    const dbName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
-    const surveyName = rankingItem?.source?.name;
-    const footerParts: string[] = [];
-    if (dbName) footerParts.push(`出典: ${dbName}`);
-    if (surveyName && surveyName !== dbName) footerParts.push(`調査: ${surveyName}`);
-    const cardFooter = footerParts.length > 0
-        ? <span>{footerParts.join("　")}</span>
+    const sourceName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
+    const cardFooter = sourceName
+        ? <span>出典: {sourceName}</span>
         : undefined;
 
     const downloadButton = (
