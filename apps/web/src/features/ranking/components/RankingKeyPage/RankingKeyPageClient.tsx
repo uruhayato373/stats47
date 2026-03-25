@@ -199,6 +199,17 @@ export function RankingKeyPageClient({
         return `${displayInfo.title}、1位は${top.areaName}！ あなたの県は何位？ #stats47`;
     }, [rankingValues, displayInfo.title]);
 
+    // カードタイトル・サブタイトル・出典を構築
+    const cardTitle = displayInfo.title;
+    const cardSubtitleParts: string[] = [];
+    if (displayInfo.subtitle) cardSubtitleParts.push(displayInfo.subtitle);
+    if (displayInfo.demographicAttr) cardSubtitleParts.push(displayInfo.demographicAttr);
+    if (displayInfo.normalizationBasis) cardSubtitleParts.push(displayInfo.normalizationBasis);
+    const cardSubtitle = cardSubtitleParts.length > 0 ? cardSubtitleParts.join(" / ") : undefined;
+    const cardFooter = rankingItem?.source?.surveyName
+        ? <span>出典: {rankingItem.source.surveyName}</span>
+        : undefined;
+
     const downloadButton = (
         <DataDownloadIconButton
             rankingKey={rankingKey}
@@ -282,6 +293,9 @@ export function RankingKeyPageClient({
                                     areaType={currentAreaType}
                                     topology={topology ?? null}
                                     headerActions={headerActions}
+                                    cardTitle={cardTitle}
+                                    cardSubtitle={cardSubtitle}
+                                    cardFooter={cardFooter}
                                 />
                             </TabsContent>
                             <TabsContent value="table" className="mt-4">
@@ -289,6 +303,9 @@ export function RankingKeyPageClient({
                                     rankingValues={rankingValues}
                                     rankingItem={rankingItem}
                                     headerActions={headerActions}
+                                    cardTitle={cardTitle}
+                                    cardSubtitle={cardSubtitle}
+                                    cardFooter={cardFooter}
                                 />
                             </TabsContent>
                         </Tabs>

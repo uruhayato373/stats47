@@ -32,6 +32,12 @@ interface Props {
   className?: string;
   /** CardHeader右側に表示するアクション要素 */
   headerActions?: React.ReactNode;
+  /** カードタイトル（省略時: 都道府県別データ） */
+  cardTitle?: string;
+  /** カードサブタイトル */
+  cardSubtitle?: string;
+  /** カード下部に表示するコンテンツ（出典等） */
+  cardFooter?: React.ReactNode;
 }
 
 type RankingDataRow = RankingValue & {
@@ -43,6 +49,9 @@ export function RankingDataTable({
   rankingItem,
   className,
   headerActions,
+  cardTitle,
+  cardSubtitle,
+  cardFooter,
 }: Props) {
   // 偏差値計算用の統計情報を計算
   const statistics = useMemo<RankingStats | null>(() => {
@@ -143,8 +152,10 @@ export function RankingDataTable({
   return (
     <Card className={cn("w-full", className)}>
       <CardHeader>
-        <Table className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="flex-1">都道府県別データ</CardTitle>
+        <div className="flex-1 min-w-0">
+          <CardTitle>{cardTitle ?? "都道府県別データ"}</CardTitle>
+          {cardSubtitle && <p className="text-xs text-muted-foreground mt-0.5">{cardSubtitle}</p>}
+        </div>
         {headerActions}
       </CardHeader>
       <CardContent className="p-4">
@@ -159,6 +170,9 @@ export function RankingDataTable({
           getRowId={(row) => row.areaCode}
         />
       </CardContent>
+      {cardFooter && (
+        <div className="px-4 pb-3 text-xs text-muted-foreground">{cardFooter}</div>
+      )}
     </Card>
   );
 }

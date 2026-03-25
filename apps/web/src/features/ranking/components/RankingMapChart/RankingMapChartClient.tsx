@@ -52,6 +52,12 @@ export interface Props {
   onPrefectureClick?: (code: string | null) => void;
   /** CardHeader右側に表示するアクション要素 */
   headerActions?: React.ReactNode;
+  /** カードタイトル（省略時: コロプレスマップ） */
+  cardTitle?: string;
+  /** カードサブタイトル（出典等） */
+  cardSubtitle?: string;
+  /** カード下部に表示するコンテンツ（出典等） */
+  cardFooter?: React.ReactNode;
 }
 
 /**
@@ -66,6 +72,9 @@ export function RankingMapChartClient({
   areaType,
   topology,
   selectedPrefectureCode,
+  cardTitle,
+  cardSubtitle,
+  cardFooter,
   onPrefectureClick,
   headerActions,
 }: Props) {
@@ -151,8 +160,10 @@ export function RankingMapChartClient({
   return (
     <Card className="w-full">
       <CardHeader>
-        <MapIcon className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="flex-1">コロプレスマップ</CardTitle>
+        <div className="flex-1 min-w-0">
+          <CardTitle>{cardTitle ?? "コロプレスマップ"}</CardTitle>
+          {cardSubtitle && <p className="text-xs text-muted-foreground mt-0.5">{cardSubtitle}</p>}
+        </div>
         {headerActions}
       </CardHeader>
       <CardContent className="p-4">
@@ -189,6 +200,9 @@ export function RankingMapChartClient({
           )}
         </div>
       </CardContent>
+      {cardFooter && (
+        <div className="px-4 pb-3 text-xs text-muted-foreground">{cardFooter}</div>
+      )}
     </Card>
   );
 }
