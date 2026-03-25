@@ -12,3 +12,4 @@ export * from "./services/sync-ranking-export";
 export * from "./types";
 export type { RankingItemWithTags } from "./types/ranking-item-with-tags";
 export * from "./utils";
+export { resolveEstatParams } from "./utils/resolve-estat-params";

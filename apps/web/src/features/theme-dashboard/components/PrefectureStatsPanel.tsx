@@ -23,8 +23,7 @@ import { AgeCompositionChart } from "./AgeCompositionChart";
 import { PopulationPyramidChart } from "./PopulationPyramidChart";
 import { BirthDeathRateLineChart } from "./BirthDeathRateLineChart";
 import { NaturalSocialRateLineChart } from "./NaturalSocialRateLineChart";
-import { ConfigDrivenDualLineChart } from "./ConfigDrivenDualLineChart";
-import { ConfigDrivenMixedChart } from "./ConfigDrivenMixedChart";
+import { ThemeChartPanel } from "./ThemeChartPanel";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import type { ThemeConfig } from "../types";
 
@@ -258,16 +257,9 @@ export function PrefectureStatsPanel({
                   {tab.charts?.map((chart, i) => (
                     <div key={i}>
                       <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
-                      {chart.type === "dual-line" && (
-                        <ConfigDrivenDualLineChart
-                          config={chart}
-                          prefCode={selectedPrefectureCode ?? "00000"}
-                          prefName={areaName}
-                        />
-                      )}
-                      {chart.type === "mixed" && (
-                        <ConfigDrivenMixedChart
-                          config={chart}
+                      {(chart.type === "dual-line" || chart.type === "mixed") && (
+                        <ThemeChartPanel
+                          chartDef={chart}
                           prefCode={selectedPrefectureCode ?? "00000"}
                           prefName={areaName}
                         />
@@ -459,16 +451,9 @@ export function PrefectureStatsPanel({
         {themeConfig?.charts?.map((chart, i) => (
           <div key={i} className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
-            {chart.type === "dual-line" && (
-              <ConfigDrivenDualLineChart
-                config={chart}
-                prefCode={selectedPrefectureCode ?? "00000"}
-                prefName={areaName}
-              />
-            )}
-            {chart.type === "mixed" && (
-              <ConfigDrivenMixedChart
-                config={chart}
+            {(chart.type === "dual-line" || chart.type === "mixed") && (
+              <ThemeChartPanel
+                chartDef={chart}
                 prefCode={selectedPrefectureCode ?? "00000"}
                 prefName={areaName}
               />
