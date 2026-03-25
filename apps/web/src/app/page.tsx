@@ -2,15 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 
-import { isOk } from "@stats47/types";
-import { getDrizzle, rankingItems } from "@stats47/database/server";
 import { Button } from "@stats47/components/atoms/ui/button";
-import { eq, countDistinct } from "drizzle-orm";
 import { BarChart3, Search } from "lucide-react";
 
 import { FeaturedRankings } from "@/features/ranking/server";
-import { listCategories } from "@/features/category/server";
-import { CategoryGrid } from "@/features/category";
 import { listLatestArticles } from "@/features/blog/server";
 import { CountUp } from "@/components/atoms/CountUp";
 import { ScrollReveal } from "@/components/atoms/ScrollReveal";
@@ -81,38 +76,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** カテゴリ + ランキング件数を取得（1クエリで集計） */
-async function getCategoriesWithCounts() {
-  try {
-    const catResult = await listCategories();
-    if (!isOk(catResult)) return [];
-    const categories = catResult.data;
-
-    const db = getDrizzle();
-    const counts = await db
-      .select({
-        categoryKey: rankingItems.categoryKey,
-        count: countDistinct(rankingItems.rankingKey),
-      })
-      .from(rankingItems)
-      .where(eq(rankingItems.isActive, true))
-      .groupBy(rankingItems.categoryKey);
-
-    const countMap = new Map(counts.map((c) => [c.categoryKey, c.count] as [string, number]));
-
-    return categories
-      .map((cat) => ({ ...cat, itemCount: countMap.get(cat.categoryKey) ?? 0 }))
-      .filter((c) => c.itemCount > 0);
-  } catch {
-    return [];
-  }
-}
-
 export default async function HomePage() {
-  const [categories, latestArticles] = await Promise.all([
-    getCategoriesWithCounts(),
-    listLatestArticles(4).catch(() => []),
-  ]);
+  const latestArticles = await listLatestArticles(4).catch(() => []);
 
   return (
     <div className="w-full" suppressHydrationWarning>
@@ -155,22 +120,7 @@ export default async function HomePage() {
         <FeaturedRankings limit={8} />
       </ScrollReveal>
 
-      {/* ③ カテゴリから探す */}
-      {categories.length > 0 && (
-        <ScrollReveal>
-          <section className="py-10 px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-bold">カテゴリから探す</h2>
-                <Link href="/ranking" className="text-sm text-primary hover:underline font-medium">
-                  ランキング一覧 &rarr;
-                </Link>
-              </div>
-              <CategoryGrid categories={categories} />
-            </div>
-          </section>
-        </ScrollReveal>
-      )}
+
 
       {/* ④ 3つの切り口でデータを探す（旧「できること」） */}
       <ScrollReveal>
