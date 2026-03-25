@@ -26,7 +26,7 @@ import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
 
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
-  { ssr: false, loading: () => <Skeleton className="h-[400px] w-full rounded-md" /> }
+  { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-md" /> }
 );
 
 const TileSwitcher = dynamic(
@@ -158,7 +158,7 @@ export function RankingMapChartClient({
       <CardContent className="p-4">
         <div className="relative w-full overflow-hidden rounded-md">
           {isMapLoading ? (
-            <Skeleton className="h-[400px] w-full rounded-md" />
+            <Skeleton className="h-[500px] w-full rounded-md" />
           ) : activeTopology === null ? (
             <div
               className="flex items-center justify-center min-h-[200px] rounded-md bg-muted/50 text-muted-foreground text-sm"
@@ -182,7 +182,7 @@ export function RankingMapChartClient({
                 onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                 borderColor={isDark ? "#475569" : "#94a3b8"}
-                className="h-[400px]"
+                className="h-[500px]"
               />
               <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
             </>
