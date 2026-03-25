@@ -130,7 +130,7 @@ export function RankingSidebarClient({
                             title={item.title}
                             className={cn(
                                 "group flex items-center py-1.5 transition-colors",
-                                "text-sm hover:text-primary"
+                                "text-xs hover:text-primary"
                             )}
                         >
                             <span className="line-clamp-1 leading-snug">

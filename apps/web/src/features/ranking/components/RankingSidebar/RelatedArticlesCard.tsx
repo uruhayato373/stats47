@@ -58,7 +58,7 @@ export async function RelatedArticlesCard({
             <Link
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="group flex items-center py-1.5 transition-colors text-sm hover:text-primary"
+              className="group flex items-center py-1.5 transition-colors text-xs hover:text-primary"
             >
               <span className="line-clamp-2 leading-snug">
                 {article.title}
