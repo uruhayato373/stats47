@@ -12,11 +12,13 @@ import metaInfoPrefecture0003457854 from "./meta-info/0003457854.json";
 // Meta Info - City
 import metaInfoCity0000020201 from "./meta-info/0000020201.json";
 
-// Stats Data - Prefecture
-import statsDataPrefecture0000010101A1101 from "./stats-data/0000010101.json";
-
-// Stats Data - City
-import statsDataCity0000020201A1101 from "./stats-data/0000020201.json";
+// Stats Data - Prefecture & City
+// stats-data/*.json は gitignore（各20MB超）のため、CI では存在しない。
+// require で読み込み、存在しなければ空オブジェクトを返す。
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const statsDataPrefecture0000010101A1101 = (() => { try { return require("./stats-data/0000010101.json"); } catch { return {}; } })();
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const statsDataCity0000020201A1101 = (() => { try { return require("./stats-data/0000020201.json"); } catch { return {}; } })();
 
 export const metaInfo = {
   prefecture: {
