@@ -159,16 +159,6 @@ export function RankingSidebarClient({
                     </button>
                 )}
 
-                {/* カテゴリページへのリンク */}
-                {categoryKey && (
-                    <Link
-                        href={categoryLinkPrefix ? `${categoryLinkPrefix}` : `/category/${categoryKey}`}
-                        className="flex items-center justify-center gap-1 text-xs text-muted-foreground hover:text-primary font-medium py-1.5 border-t border-border mt-1 transition-colors"
-                    >
-                        すべてのランキングを見る
-                        <ChevronRight className="w-3 h-3" />
-                    </Link>
-                )}
             </CardContent>
         </Card>
     );
