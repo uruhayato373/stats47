@@ -35,7 +35,7 @@ export default async function RankingTopPage() {
           1,800以上の統計で47都道府県を比較
         </p>
       </div>
-      <FeaturedRankings limit={12} showHeader={false} />
+      <FeaturedRankings limit={20} showHeader={false} />
     </div>
   );
 }
