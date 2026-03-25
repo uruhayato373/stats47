@@ -260,16 +260,6 @@ export default async function HomePage() {
                           loading="lazy"
                         />
                       </div>
-                      <div className="p-4">
-                        {article.publishedAt && (
-                          <time className="text-xs text-muted-foreground">
-                            {article.publishedAt.slice(0, 10)}
-                          </time>
-                        )}
-                        <h3 className="text-sm font-semibold mt-1 line-clamp-2 group-hover:text-primary transition-colors">
-                          {article.title}
-                        </h3>
-                      </div>
                     </Link>
                   );
                 })}
