@@ -149,7 +149,7 @@ export default async function HomePage() {
                 },
               ].map((card, i) => (
                 <ScrollReveal key={card.href} delay={i * 100}>
-                  <Link href={card.href} className="group block rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden h-full">
+                  <Link href={card.href} className="group block rounded-sm border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden h-full">
                     <div className="overflow-hidden">
                       <Image
                         src={card.image}
@@ -190,7 +190,7 @@ export default async function HomePage() {
                     <Link
                       key={article.slug}
                       href={`/blog/${article.slug}`}
-                      className="group block rounded-lg border border-border overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
+                      className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
                     >
                       <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
                         <Image
