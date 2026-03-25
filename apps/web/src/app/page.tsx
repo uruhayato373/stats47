@@ -111,7 +111,7 @@ async function getCategoriesWithCounts() {
 export default async function HomePage() {
   const [categories, latestArticles] = await Promise.all([
     getCategoriesWithCounts(),
-    listLatestArticles(3).catch(() => []),
+    listLatestArticles(4).catch(() => []),
   ]);
 
   return (
@@ -233,7 +233,7 @@ export default async function HomePage() {
                   すべての記事 &rarr;
                 </Link>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {latestArticles.map((article) => {
                   const r2 = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
                   return (
