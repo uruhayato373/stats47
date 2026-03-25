@@ -18,8 +18,7 @@ import type { AreaType } from "@/features/area";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
 import type { MapVisualizationConfig } from "@stats47/visualization/d3";
-import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK } from "@stats47/visualization/leaflet";
-import type { TileProvider } from "@stats47/visualization/leaflet";
+import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK, type TileProvider } from "@stats47/visualization/leaflet/constants";
 import dynamic from "next/dynamic";
 
 import { useTheme } from "@/hooks/useTheme";
