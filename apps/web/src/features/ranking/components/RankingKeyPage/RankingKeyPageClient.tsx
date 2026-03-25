@@ -316,8 +316,7 @@ export function RankingKeyPageClient({
                     )}
 
                     {/* シェアボタン（テーブル直下） */}
-                    <div className="flex items-center justify-center gap-2 py-2">
-                        <p className="text-xs text-muted-foreground">シェア</p>
+                    <div className="flex justify-center py-2">
                         <ShareButtons
                             title={displayInfo.title}
                             shareText={shareText}
