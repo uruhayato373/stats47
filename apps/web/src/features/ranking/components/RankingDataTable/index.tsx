@@ -5,7 +5,7 @@
 import { Table } from "lucide-react";
 import { useMemo } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTable } from "@stats47/components";
@@ -152,10 +152,6 @@ export function RankingDataTable({
   return (
     <Card className={cn("w-full", className)}>
       <CardHeader>
-        <div className="flex-1 min-w-0">
-          <CardTitle>{cardTitle ?? "都道府県別データ"}</CardTitle>
-          {cardSubtitle && <p className="text-xs text-muted-foreground mt-0.5">{cardSubtitle}</p>}
-        </div>
         {headerActions}
       </CardHeader>
       <CardContent className="p-4">

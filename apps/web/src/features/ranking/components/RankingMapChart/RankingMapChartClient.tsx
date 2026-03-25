@@ -11,7 +11,7 @@
 import { Map as MapIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
 import type { AreaType } from "@/features/area";
@@ -160,10 +160,6 @@ export function RankingMapChartClient({
   return (
     <Card className="w-full">
       <CardHeader>
-        <div className="flex-1 min-w-0">
-          <CardTitle>{cardTitle ?? "コロプレスマップ"}</CardTitle>
-          {cardSubtitle && <p className="text-xs text-muted-foreground mt-0.5">{cardSubtitle}</p>}
-        </div>
         {headerActions}
       </CardHeader>
       <CardContent className="p-4">

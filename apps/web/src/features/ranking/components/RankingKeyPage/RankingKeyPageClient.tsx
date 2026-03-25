@@ -199,12 +199,6 @@ export function RankingKeyPageClient({
     }, [rankingValues, displayInfo.title]);
 
     // カードタイトル・サブタイトル・出典を構築
-    const cardTitle = displayInfo.title;
-    const cardSubtitleParts: string[] = [];
-    if (displayInfo.subtitle) cardSubtitleParts.push(displayInfo.subtitle);
-    if (displayInfo.demographicAttr) cardSubtitleParts.push(displayInfo.demographicAttr);
-    if (displayInfo.normalizationBasis) cardSubtitleParts.push(displayInfo.normalizationBasis);
-    const cardSubtitle = cardSubtitleParts.length > 0 ? cardSubtitleParts.join(" / ") : undefined;
     const sourceName = (rankingItem?.sourceConfig as Record<string, any>)?.source?.name as string | undefined;
     const footerParts: string[] = [];
     if (sourceName) footerParts.push(`出典: ${sourceName}`);
@@ -288,8 +282,6 @@ export function RankingKeyPageClient({
                                     areaType={currentAreaType}
                                     topology={topology ?? null}
                                     headerActions={headerActions}
-                                    cardTitle={cardTitle}
-                                    cardSubtitle={cardSubtitle}
                                     cardFooter={cardFooter}
                                 />
                             </TabsContent>
@@ -298,8 +290,6 @@ export function RankingKeyPageClient({
                                     rankingValues={rankingValues}
                                     rankingItem={rankingItem}
                                     headerActions={headerActions}
-                                    cardTitle={cardTitle}
-                                    cardSubtitle={cardSubtitle}
                                     cardFooter={cardFooter}
                                 />
                             </TabsContent>
@@ -318,16 +308,12 @@ export function RankingKeyPageClient({
                                 areaType={currentAreaType}
                                 topology={topology ?? null}
                                 headerActions={headerActions}
-                                cardTitle={cardTitle}
-                                cardSubtitle={cardSubtitle}
                                 cardFooter={cardFooter}
                             />
                             <RankingDataTable
                                 rankingValues={rankingValues}
                                 rankingItem={rankingItem}
                                 headerActions={headerActions}
-                                cardTitle={cardTitle}
-                                cardSubtitle={cardSubtitle}
                                 cardFooter={cardFooter}
                             />
                         </div>
