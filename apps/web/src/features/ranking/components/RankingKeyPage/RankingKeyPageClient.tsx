@@ -206,8 +206,8 @@ export function RankingKeyPageClient({
     if (displayInfo.demographicAttr) cardSubtitleParts.push(displayInfo.demographicAttr);
     if (displayInfo.normalizationBasis) cardSubtitleParts.push(displayInfo.normalizationBasis);
     const cardSubtitle = cardSubtitleParts.length > 0 ? cardSubtitleParts.join(" / ") : undefined;
-    const cardFooter = rankingItem?.source?.surveyName
-        ? <span>出典: {rankingItem.source.surveyName}</span>
+    const cardFooter = rankingItem?.source?.name
+        ? <span>出典: {rankingItem.source.name}</span>
         : undefined;
 
     const downloadButton = (
