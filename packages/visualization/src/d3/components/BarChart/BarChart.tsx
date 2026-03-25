@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ChartDataNode } from "../../types/base";
 import type { BarChartProps } from "./types";
@@ -41,12 +42,7 @@ export function BarChart({
     const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
     // --- レイアウト計算 ---
-    const margins = computeMarginsByRatio(width, height, {
-        top: 30 / 500,     // 0.06
-        right: 30 / 800,   // 0.0375
-        bottom: 30 / 500,  // 0.06
-        left: 100 / 800,   // 0.125
-    });
+    const margins = computeMarginsByRatio(width, height, CHART_STYLES.margin.horizontal);
 
     const layout = computeChartLayout(width, height, {
         marginTop: propsMarginTop ?? margins.marginTop,
@@ -56,7 +52,7 @@ export function BarChart({
     });
 
     const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-    const baseFontSize = computeFontSize(width, height, 0.025); // 12 / 600 or 16 / 800 = 0.02
+    const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
     const hasKeys = keys && keys.length > 0;
 

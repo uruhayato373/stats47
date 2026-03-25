@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ScatterplotProps } from "./types";
 
@@ -61,7 +62,7 @@ export function Scatterplot({
     });
 
     const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-    const baseFontSize = computeFontSize(width, height, 0.01875); // 12 / 640 = 0.01875
+    const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
@@ -110,13 +111,13 @@ export function Scatterplot({
             svg.append("g")
                 .attr("transform", `translate(0,${height - marginBottom})`)
                 .attr("class", "grid")
-                .style("stroke-opacity", 0.1)
+                .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
                 .call(d3.axisBottom(xScale).ticks(width / 80).tickSize(-height + marginTop + marginBottom).tickFormat(() => ""));
 
             svg.append("g")
                 .attr("transform", `translate(${marginLeft},0)`)
                 .attr("class", "grid")
-                .style("stroke-opacity", 0.1)
+                .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
                 .call(d3.axisLeft(yScale).ticks(height / 50).tickSize(-width + marginLeft + marginRight).tickFormat(() => ""));
         }
 

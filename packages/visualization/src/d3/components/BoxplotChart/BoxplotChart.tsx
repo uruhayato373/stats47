@@ -5,6 +5,7 @@ import { cn } from "@stats47/components";
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import { computeAxisDomain } from "../../../shared";
+import { CHART_STYLES } from "../../constants";
 import { getThemeColors } from "../../utils/get-theme-colors";
 import type { BoxplotChartProps, PrefectureData } from "./types";
 
@@ -122,7 +123,7 @@ export function BoxplotChart({
     g.append("g")
       .call(d3.axisLeft(yScale).tickSize(-chartWidth).tickFormat(() => ""))
       .style("stroke", BORDER)
-      .style("stroke-opacity", 0.3);
+      .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity);
 
     // 箱ひげ図
     const boxWidth = xScale.bandwidth() * CONFIG.boxWidthRatio;

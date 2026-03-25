@@ -5,6 +5,7 @@ import { cn } from "@stats47/components";
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ColumnChartProps } from "./types";
 
@@ -31,12 +32,7 @@ export function ColumnChart({
   const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   // --- レイアウト計算 ---
-  const marginsByRatio = computeMarginsByRatio(width, height, {
-    top: 10 / 500,     // 0.02
-    right: 10 / 800,   // 0.0125
-    bottom: 50 / 500,  // 0.04
-    left: 40 / 800,    // 0.05
-  });
+  const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.compact);
 
   const layout = computeChartLayout(width, height, {
     marginTop: propsMarginTop ?? marginsByRatio.marginTop,
@@ -46,7 +42,7 @@ export function ColumnChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.025); // 16 / 800 = 0.02
+  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
   useEffect(() => {
     if (!svgRef.current || !data || data.length === 0) return;
@@ -115,7 +111,7 @@ export function ColumnChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
-          .attr("stroke-opacity", 0.1)
+          .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 

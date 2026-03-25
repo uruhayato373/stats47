@@ -8,6 +8,7 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { MixedChartProps } from "./types";
 
@@ -41,12 +42,7 @@ export function MixedChart({
   const svgRef = useRef<SVGSVGElement>(null);
   const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
-  const marginsByRatio = computeMarginsByRatio(width, height, {
-    top: 20 / 500,
-    right: 50 / 800, // 右Y軸分を広めに
-    bottom: 50 / 500,
-    left: 50 / 800,
-  });
+  const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.dualAxis);
 
   const layout = computeChartLayout(width, height, {
     marginTop: propsMarginTop ?? marginsByRatio.marginTop,
@@ -56,7 +52,7 @@ export function MixedChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.025);
+  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
   const allSeries = [...columns, ...lines];
 
@@ -208,7 +204,7 @@ export function MixedChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", innerWidth)
-          .attr("stroke-opacity", 0.1)
+          .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", columns[0]?.color ?? "#666").attr("dx", "-4"));
 

@@ -8,6 +8,8 @@ export type { TileGridCell } from "./tile-grid-layout";
 
 export { CHANGE_COLORS, CHART_COLORS, GENDER_COLORS, getChartColor } from "./chart-colors";
 
+export { CHART_STYLES, GRID, FONT, MARGIN, AXIS, LINE, POINT, CROSSHAIR } from "./chart-styles";
+
 export {
     DEFAULT_MAP_PROJECTION, DEFAULT_MAP_STYLE, DEFAULT_PREFECTURE_MAP_PROPS, MAP_PADDING, MOBILE_BREAKPOINT,
     MOBILE_SCALE_FACTOR, TOOLTIP_OFFSET_X,

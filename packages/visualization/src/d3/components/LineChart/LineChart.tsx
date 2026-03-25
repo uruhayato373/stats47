@@ -8,6 +8,7 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
 
@@ -49,12 +50,7 @@ export function LineChart({
   const svgRef = useRef<SVGSVGElement>(null);
   const { showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
-  const marginsByRatio = computeMarginsByRatio(width, height, {
-    top: 40 / 500,
-    right: 20 / 800,
-    bottom: 50 / 500,
-    left: 50 / 800,
-  });
+  const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.timeSeries);
 
   const layout = computeChartLayout(width, height, {
     marginTop: propsMarginTop ?? marginsByRatio.marginTop,
@@ -71,7 +67,7 @@ export function LineChart({
     marginRight,
     marginBottom,
   } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.025);
+  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
   const isMultiSeries = !!(seriesConfig && seriesConfig.length > 0);
   const legendSeries = isMultiSeries
@@ -165,7 +161,7 @@ export function LineChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
-          .attr("stroke-opacity", 0.1)
+          .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 

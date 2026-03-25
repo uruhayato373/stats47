@@ -8,6 +8,7 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
+import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { DivergingBarChartProps } from "./types";
 
@@ -62,7 +63,7 @@ export function DivergingBarChart({
     marginRight,
     marginBottom,
   } = layout;
-  const baseFontSize = computeFontSize(width, height, 0.025);
+  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
   const defaultFormatter = (d: number) => {
     const abs = Math.abs(d);
@@ -196,7 +197,7 @@ export function DivergingBarChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", innerWidth)
-          .attr("stroke-opacity", 0.06)
+          .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
   }, [
