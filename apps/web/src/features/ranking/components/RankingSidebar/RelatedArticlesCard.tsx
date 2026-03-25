@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Newspaper, ChevronRight } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -52,16 +52,15 @@ export async function RelatedArticlesCard({
           関連記事
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
-        <nav className="flex flex-col gap-1">
+      <CardContent className="px-4 pb-4 pt-2">
+        <nav className="flex flex-col gap-0.5">
           {relatedArticles.map((article) => (
             <Link
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="group flex items-start gap-2 px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors"
+              className="group flex items-center py-1.5 transition-colors text-sm hover:text-primary"
             >
-              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0 mt-0.5 group-hover:text-primary transition-colors" />
-              <span className="text-sm line-clamp-2 leading-snug">
+              <span className="line-clamp-2 leading-snug">
                 {article.title}
               </span>
             </Link>
