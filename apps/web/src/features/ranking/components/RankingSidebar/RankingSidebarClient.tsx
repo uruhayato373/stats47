@@ -13,6 +13,7 @@ import {
 import { cn } from "@stats47/components";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { CategoryIcon } from "@/features/category/components/CategoryIcon";
 import type { AreaType } from "@/features/area";
 
 
@@ -48,6 +49,8 @@ export interface RankingSidebarClientProps {
     areaType: AreaType;
     /** カテゴリ名 */
     categoryName?: string;
+    /** カテゴリアイコン（lucideアイコン名） */
+    categoryIcon?: string;
     /** カテゴリキー */
     categoryKey?: string;
     /** リンクのベースパス（デフォルト: "/ranking"） */
@@ -94,6 +97,7 @@ export function RankingSidebarClient({
     rankingKey,
     areaType,
     categoryName,
+    categoryIcon,
     categoryKey,
     linkPrefix = "/ranking",
     categoryLinkPrefix,
@@ -119,8 +123,11 @@ export function RankingSidebarClient({
     return (
         <Card className="h-full w-full overflow-hidden animate-in fade-in duration-500">
             <CardHeader className="py-3 px-4">
+                {categoryIcon && (
+                    <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
+                )}
                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                    {categoryName ? `${categoryName}のランキング` : "同カテゴリのランキング"}
+                    {categoryName ?? "同カテゴリ"}
                 </CardTitle>
             </CardHeader>
             <CardContent className="px-4 pb-4 pt-2 flex flex-col gap-0.5">
