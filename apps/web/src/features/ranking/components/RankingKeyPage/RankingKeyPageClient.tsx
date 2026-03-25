@@ -323,11 +323,17 @@ export function RankingKeyPageClient({
                                 areaType={currentAreaType}
                                 topology={topology ?? null}
                                 headerActions={headerActions}
+                                cardTitle={cardTitle}
+                                cardSubtitle={cardSubtitle}
+                                cardFooter={cardFooter}
                             />
                             <RankingDataTable
                                 rankingValues={rankingValues}
                                 rankingItem={rankingItem}
                                 headerActions={headerActions}
+                                cardTitle={cardTitle}
+                                cardSubtitle={cardSubtitle}
+                                cardFooter={cardFooter}
                             />
                         </div>
                     )}
