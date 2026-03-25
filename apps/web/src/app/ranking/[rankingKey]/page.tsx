@@ -280,7 +280,6 @@ export default async function RankingKeyPage({
           <Suspense fallback={<CorrelationSectionSkeleton />}>
             <CorrelationSectionContainer
               rankingKey={rankingKey}
-              rankingItem={rankingItem}
             />
           </Suspense>
         }
