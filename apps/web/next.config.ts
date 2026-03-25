@@ -86,7 +86,7 @@ const nextConfig: NextConfig = {
     "@stats47/estat-api",
     "@stats47/gis",
     "@stats47/logger",
-    "@stats47/mock",
+    // "@stats47/mock", // テスト専用、本番ビルドには不要（stats-data/*.json が gitignore のため CI で失敗する）
     "@stats47/r2-storage",
     "@stats47/ranking",
     "@stats47/types",
