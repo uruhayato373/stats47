@@ -17,7 +17,9 @@ $ARGUMENTS — チェック対象の記事ファイルパスまたは slug
 ### 引数の解決ルール
 
 1. URL が渡された場合: `/blog/{slug}` から slug を抽出
-2. slug のみの場合: `.local/r2/blog/{slug}/article.md` を参照
+2. slug のみの場合: 以下の優先順で探索
+   - `docs/21_ブログ記事原稿/{slug}/article.md`（下書き）
+   - `.local/r2/blog/{slug}/article.md`（公開済み）
 3. フルパスの場合: そのまま使用
 
 ## 概要

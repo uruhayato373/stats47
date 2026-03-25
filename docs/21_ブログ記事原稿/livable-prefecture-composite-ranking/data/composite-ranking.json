@@ -1,0 +1,754 @@
+[
+  {
+    "rank": 1,
+    "area_code": "18",
+    "area_name": "福井県",
+    "composite": 79.9,
+    "scores": {
+      "income": 95.7,
+      "safety": 78.3,
+      "medical": 69.6,
+      "homeOwnership": 87,
+      "rent": 63,
+      "fertility": 89.1,
+      "unemployment": 97.8,
+      "climate": 58.7
+    }
+  },
+  {
+    "rank": 2,
+    "area_code": "16",
+    "area_name": "富山県",
+    "composite": 78,
+    "scores": {
+      "income": 91.3,
+      "safety": 47.8,
+      "medical": 76.1,
+      "homeOwnership": 95.7,
+      "rent": 71.7,
+      "fertility": 69.6,
+      "unemployment": 93.5,
+      "climate": 78.3
+    }
+  },
+  {
+    "rank": 3,
+    "area_code": "32",
+    "area_name": "島根県",
+    "composite": 71.8,
+    "scores": {
+      "income": 43.5,
+      "safety": 95.7,
+      "medical": 43.5,
+      "homeOwnership": 69.6,
+      "rent": 67.4,
+      "fertility": 89.1,
+      "unemployment": 100,
+      "climate": 65.2
+    }
+  },
+  {
+    "rank": 4,
+    "area_code": "36",
+    "area_name": "徳島県",
+    "composite": 68.2,
+    "scores": {
+      "income": 82.6,
+      "safety": 97.8,
+      "medical": 97.8,
+      "homeOwnership": 54.3,
+      "rent": 91.3,
+      "fertility": 71.7,
+      "unemployment": 10.9,
+      "climate": 39.1
+    }
+  },
+  {
+    "rank": 5,
+    "area_code": "20",
+    "area_name": "長野県",
+    "composite": 66.3,
+    "scores": {
+      "income": 50,
+      "safety": 54.3,
+      "medical": 37,
+      "homeOwnership": 80.4,
+      "rent": 69.6,
+      "fertility": 67.4,
+      "unemployment": 87,
+      "climate": 84.8
+    }
+  },
+  {
+    "rank": 6,
+    "area_code": "17",
+    "area_name": "石川県",
+    "composite": 66.1,
+    "scores": {
+      "income": 45.7,
+      "safety": 67.4,
+      "medical": 58.7,
+      "homeOwnership": 50,
+      "rent": 82.6,
+      "fertility": 67.4,
+      "unemployment": 78.3,
+      "climate": 78.3
+    }
+  },
+  {
+    "rank": 7,
+    "area_code": "35",
+    "area_name": "山口県",
+    "composite": 65,
+    "scores": {
+      "income": 71.7,
+      "safety": 76.1,
+      "medical": 78.3,
+      "homeOwnership": 45.7,
+      "rent": 93.5,
+      "fertility": 80.4,
+      "unemployment": 71.7,
+      "climate": 2.2
+    }
+  },
+  {
+    "rank": 8,
+    "area_code": "41",
+    "area_name": "佐賀県",
+    "composite": 62.5,
+    "scores": {
+      "income": 19.6,
+      "safety": 82.6,
+      "medical": 89.1,
+      "homeOwnership": 52.2,
+      "rent": 97.8,
+      "fertility": 89.1,
+      "unemployment": 63,
+      "climate": 6.5
+    }
+  },
+  {
+    "rank": 9,
+    "area_code": "30",
+    "area_name": "和歌山県",
+    "composite": 62.2,
+    "scores": {
+      "income": 39.1,
+      "safety": 65.2,
+      "medical": 73.9,
+      "homeOwnership": 91.3,
+      "rent": 100,
+      "fertility": 63,
+      "unemployment": 39.1,
+      "climate": 26.1
+    }
+  },
+  {
+    "rank": 10,
+    "area_code": "06",
+    "area_name": "山形県",
+    "composite": 62.2,
+    "scores": {
+      "income": 58.7,
+      "safety": 63,
+      "medical": 26.1,
+      "homeOwnership": 97.8,
+      "rent": 65.2,
+      "fertility": 30.4,
+      "unemployment": 78.3,
+      "climate": 78.3
+    }
+  },
+  {
+    "rank": 11,
+    "area_code": "31",
+    "area_name": "鳥取県",
+    "composite": 61.7,
+    "scores": {
+      "income": 4.3,
+      "safety": 91.3,
+      "medical": 63,
+      "homeOwnership": 69.6,
+      "rent": 80.4,
+      "fertility": 82.6,
+      "unemployment": 71.7,
+      "climate": 30.4
+    }
+  },
+  {
+    "rank": 12,
+    "area_code": "45",
+    "area_name": "宮崎県",
+    "composite": 60.3,
+    "scores": {
+      "income": 2.2,
+      "safety": 80.4,
+      "medical": 91.3,
+      "homeOwnership": 41.3,
+      "rent": 84.8,
+      "fertility": 97.8,
+      "unemployment": 30.4,
+      "climate": 54.3
+    }
+  },
+  {
+    "rank": 13,
+    "area_code": "19",
+    "area_name": "山梨県",
+    "composite": 57.9,
+    "scores": {
+      "income": 78.3,
+      "safety": 93.5,
+      "medical": 56.5,
+      "homeOwnership": 58.7,
+      "rent": 47.8,
+      "fertility": 58.7,
+      "unemployment": 39.1,
+      "climate": 30.4
+    }
+  },
+  {
+    "rank": 14,
+    "area_code": "03",
+    "area_name": "岩手県",
+    "composite": 57.6,
+    "scores": {
+      "income": 32.6,
+      "safety": 89.1,
+      "medical": 56.5,
+      "homeOwnership": 71.7,
+      "rent": 54.3,
+      "fertility": 17.4,
+      "unemployment": 47.8,
+      "climate": 91.3
+    }
+  },
+  {
+    "rank": 15,
+    "area_code": "24",
+    "area_name": "三重県",
+    "composite": 57.3,
+    "scores": {
+      "income": 69.6,
+      "safety": 45.7,
+      "medical": 21.7,
+      "homeOwnership": 82.6,
+      "rent": 39.1,
+      "fertility": 47.8,
+      "unemployment": 93.5,
+      "climate": 58.7
+    }
+  },
+  {
+    "rank": 16,
+    "area_code": "02",
+    "area_name": "青森県",
+    "composite": 56.8,
+    "scores": {
+      "income": 28.3,
+      "safety": 71.7,
+      "medical": 52.2,
+      "homeOwnership": 78.3,
+      "rent": 89.1,
+      "fertility": 34.8,
+      "unemployment": 2.2,
+      "climate": 97.8
+    }
+  },
+  {
+    "rank": 17,
+    "area_code": "25",
+    "area_name": "滋賀県",
+    "composite": 56.3,
+    "scores": {
+      "income": 84.8,
+      "safety": 43.5,
+      "medical": 2.2,
+      "homeOwnership": 73.9,
+      "rent": 43.5,
+      "fertility": 73.9,
+      "unemployment": 78.3,
+      "climate": 50
+    }
+  },
+  {
+    "rank": 18,
+    "area_code": "44",
+    "area_name": "大分県",
+    "composite": 56.3,
+    "scores": {
+      "income": 23.9,
+      "safety": 84.8,
+      "medical": 93.5,
+      "homeOwnership": 21.7,
+      "rent": 95.7,
+      "fertility": 76.1,
+      "unemployment": 10.9,
+      "climate": 43.5
+    }
+  },
+  {
+    "rank": 19,
+    "area_code": "15",
+    "area_name": "新潟県",
+    "composite": 56,
+    "scores": {
+      "income": 47.8,
+      "safety": 39.1,
+      "medical": 21.7,
+      "homeOwnership": 93.5,
+      "rent": 58.7,
+      "fertility": 34.8,
+      "unemployment": 63,
+      "climate": 89.1
+    }
+  },
+  {
+    "rank": 20,
+    "area_code": "37",
+    "area_name": "香川県",
+    "composite": 54.9,
+    "scores": {
+      "income": 41.3,
+      "safety": 60.9,
+      "medical": 71.7,
+      "homeOwnership": 65.2,
+      "rent": 34.8,
+      "fertility": 80.4,
+      "unemployment": 71.7,
+      "climate": 13
+    }
+  },
+  {
+    "rank": 21,
+    "area_code": "38",
+    "area_name": "愛媛県",
+    "composite": 53.5,
+    "scores": {
+      "income": 8.7,
+      "safety": 69.6,
+      "medical": 84.8,
+      "homeOwnership": 34.8,
+      "rent": 87,
+      "fertility": 54.3,
+      "unemployment": 58.7,
+      "climate": 30.4
+    }
+  },
+  {
+    "rank": 22,
+    "area_code": "08",
+    "area_name": "茨城県",
+    "composite": 53.5,
+    "scores": {
+      "income": 87,
+      "safety": 21.7,
+      "medical": 37,
+      "homeOwnership": 65.2,
+      "rent": 60.9,
+      "fertility": 30.4,
+      "unemployment": 39.1,
+      "climate": 87
+    }
+  },
+  {
+    "rank": 23,
+    "area_code": "42",
+    "area_name": "長崎県",
+    "composite": 53.3,
+    "scores": {
+      "income": 10.9,
+      "safety": 73.9,
+      "medical": 82.6,
+      "homeOwnership": 32.6,
+      "rent": 21.7,
+      "fertility": 97.8,
+      "unemployment": 47.8,
+      "climate": 58.7
+    }
+  },
+  {
+    "rank": 24,
+    "area_code": "10",
+    "area_name": "群馬県",
+    "composite": 53,
+    "scores": {
+      "income": 67.4,
+      "safety": 26.1,
+      "medical": 50,
+      "homeOwnership": 76.1,
+      "rent": 73.9,
+      "fertility": 39.1,
+      "unemployment": 47.8,
+      "climate": 43.5
+    }
+  },
+  {
+    "rank": 25,
+    "area_code": "05",
+    "area_name": "秋田県",
+    "composite": 52.7,
+    "scores": {
+      "income": 21.7,
+      "safety": 100,
+      "medical": 32.6,
+      "homeOwnership": 100,
+      "rent": 52.2,
+      "fertility": 6.5,
+      "unemployment": 17.4,
+      "climate": 91.3
+    }
+  },
+  {
+    "rank": 26,
+    "area_code": "21",
+    "area_name": "岐阜県",
+    "composite": 52.5,
+    "scores": {
+      "income": 60.9,
+      "safety": 28.3,
+      "medical": 15.2,
+      "homeOwnership": 89.1,
+      "rent": 78.3,
+      "fertility": 54.3,
+      "unemployment": 87,
+      "climate": 6.5
+    }
+  },
+  {
+    "rank": 27,
+    "area_code": "39",
+    "area_name": "高知県",
+    "composite": 51.1,
+    "scores": {
+      "income": 13,
+      "safety": 87,
+      "medical": 100,
+      "homeOwnership": 43.5,
+      "rent": 50,
+      "fertility": 50,
+      "unemployment": 17.4,
+      "climate": 47.8
+    }
+  },
+  {
+    "rank": 28,
+    "area_code": "07",
+    "area_name": "福島県",
+    "composite": 48.4,
+    "scores": {
+      "income": 56.5,
+      "safety": 58.7,
+      "medical": 41.3,
+      "homeOwnership": 56.5,
+      "rent": 56.5,
+      "fertility": 26.1,
+      "unemployment": 17.4,
+      "climate": 73.9
+    }
+  },
+  {
+    "rank": 29,
+    "area_code": "09",
+    "area_name": "栃木県",
+    "composite": 47,
+    "scores": {
+      "income": 93.5,
+      "safety": 50,
+      "medical": 21.7,
+      "homeOwnership": 60.9,
+      "rent": 37,
+      "fertility": 21.7,
+      "unemployment": 17.4,
+      "climate": 73.9
+    }
+  },
+  {
+    "rank": 30,
+    "area_code": "34",
+    "area_name": "広島県",
+    "composite": 46.5,
+    "scores": {
+      "income": 76.1,
+      "safety": 23.9,
+      "medical": 63,
+      "homeOwnership": 19.6,
+      "rent": 32.6,
+      "fertility": 63,
+      "unemployment": 78.3,
+      "climate": 15.2
+    }
+  },
+  {
+    "rank": 31,
+    "area_code": "43",
+    "area_name": "熊本県",
+    "composite": 46.5,
+    "scores": {
+      "income": 15.2,
+      "safety": 41.3,
+      "medical": 87,
+      "homeOwnership": 23.9,
+      "rent": 73.9,
+      "fertility": 91.3,
+      "unemployment": 39.1,
+      "climate": 0
+    }
+  },
+  {
+    "rank": 32,
+    "area_code": "46",
+    "area_name": "鹿児島県",
+    "composite": 45.4,
+    "scores": {
+      "income": 6.5,
+      "safety": 54.3,
+      "medical": 95.7,
+      "homeOwnership": 26.1,
+      "rent": 30.4,
+      "fertility": 93.5,
+      "unemployment": 30.4,
+      "climate": 26.1
+    }
+  },
+  {
+    "rank": 33,
+    "area_code": "33",
+    "area_name": "岡山県",
+    "composite": 43.5,
+    "scores": {
+      "income": 30.4,
+      "safety": 34.8,
+      "medical": 69.6,
+      "homeOwnership": 39.1,
+      "rent": 45.7,
+      "fertility": 58.7,
+      "unemployment": 63,
+      "climate": 6.5
+    }
+  },
+  {
+    "rank": 34,
+    "area_code": "22",
+    "area_name": "静岡県",
+    "composite": 41,
+    "scores": {
+      "income": 89.1,
+      "safety": 19.6,
+      "medical": 6.5,
+      "homeOwnership": 47.8,
+      "rent": 28.3,
+      "fertility": 39.1,
+      "unemployment": 47.8,
+      "climate": 50
+    }
+  },
+  {
+    "rank": 35,
+    "area_code": "12",
+    "area_name": "千葉県",
+    "composite": 36.9,
+    "scores": {
+      "income": 80.4,
+      "safety": 17.4,
+      "medical": 10.9,
+      "homeOwnership": 32.6,
+      "rent": 19.6,
+      "fertility": 15.2,
+      "unemployment": 47.8,
+      "climate": 71.7
+    }
+  },
+  {
+    "rank": 36,
+    "area_code": "01",
+    "area_name": "北海道",
+    "composite": 35.9,
+    "scores": {
+      "income": 34.8,
+      "safety": 8.7,
+      "medical": 80.4,
+      "homeOwnership": 8.7,
+      "rent": 41.3,
+      "fertility": 2.2,
+      "unemployment": 10.9,
+      "climate": 100
+    }
+  },
+  {
+    "rank": 37,
+    "area_code": "23",
+    "area_name": "愛知県",
+    "composite": 34.5,
+    "scores": {
+      "income": 97.8,
+      "safety": 6.5,
+      "medical": 4.3,
+      "homeOwnership": 13,
+      "rent": 15.2,
+      "fertility": 47.8,
+      "unemployment": 87,
+      "climate": 4.3
+    }
+  },
+  {
+    "rank": 38,
+    "area_code": "29",
+    "area_name": "奈良県",
+    "composite": 34.5,
+    "scores": {
+      "income": 17.4,
+      "safety": 52.2,
+      "medical": 39.1,
+      "homeOwnership": 84.8,
+      "rent": 17.4,
+      "fertility": 26.1,
+      "unemployment": 17.4,
+      "climate": 21.7
+    }
+  },
+  {
+    "rank": 39,
+    "area_code": "28",
+    "area_name": "兵庫県",
+    "composite": 34,
+    "scores": {
+      "income": 63,
+      "safety": 4.3,
+      "medical": 45.7,
+      "homeOwnership": 28.3,
+      "rent": 10.9,
+      "fertility": 47.8,
+      "unemployment": 30.4,
+      "climate": 41.3
+    }
+  },
+  {
+    "rank": 40,
+    "area_code": "13",
+    "area_name": "東京都",
+    "composite": 31.3,
+    "scores": {
+      "income": 100,
+      "safety": 0,
+      "medical": 15.2,
+      "homeOwnership": 2.2,
+      "rent": 0,
+      "fertility": 0,
+      "unemployment": 63,
+      "climate": 69.6
+    }
+  },
+  {
+    "rank": 41,
+    "area_code": "04",
+    "area_name": "宮城県",
+    "composite": 30.7,
+    "scores": {
+      "income": 52.2,
+      "safety": 37,
+      "medical": 23.9,
+      "homeOwnership": 15.2,
+      "rent": 13,
+      "fertility": 4.3,
+      "unemployment": 8.7,
+      "climate": 91.3
+    }
+  },
+  {
+    "rank": 42,
+    "area_code": "47",
+    "area_name": "沖縄県",
+    "composite": 29.9,
+    "scores": {
+      "income": 0,
+      "safety": 30.4,
+      "medical": 28.3,
+      "homeOwnership": 0,
+      "rent": 26.1,
+      "fertility": 100,
+      "unemployment": 0,
+      "climate": 54.3
+    }
+  },
+  {
+    "rank": 43,
+    "area_code": "14",
+    "area_name": "神奈川県",
+    "composite": 29.6,
+    "scores": {
+      "income": 73.9,
+      "safety": 15.2,
+      "medical": 0,
+      "homeOwnership": 10.9,
+      "rent": 2.2,
+      "fertility": 10.9,
+      "unemployment": 58.7,
+      "climate": 65.2
+    }
+  },
+  {
+    "rank": 44,
+    "area_code": "40",
+    "area_name": "福岡県",
+    "composite": 25.8,
+    "scores": {
+      "income": 26.1,
+      "safety": 13,
+      "medical": 65.2,
+      "homeOwnership": 4.3,
+      "rent": 23.9,
+      "fertility": 41.3,
+      "unemployment": 2.2,
+      "climate": 30.4
+    }
+  },
+  {
+    "rank": 45,
+    "area_code": "11",
+    "area_name": "埼玉県",
+    "composite": 24.7,
+    "scores": {
+      "income": 65.2,
+      "safety": 10.9,
+      "medical": 8.7,
+      "homeOwnership": 37,
+      "rent": 8.7,
+      "fertility": 15.2,
+      "unemployment": 30.4,
+      "climate": 21.7
+    }
+  },
+  {
+    "rank": 46,
+    "area_code": "26",
+    "area_name": "京都府",
+    "composite": 22.8,
+    "scores": {
+      "income": 37,
+      "safety": 32.6,
+      "medical": 47.8,
+      "homeOwnership": 17.4,
+      "rent": 6.5,
+      "fertility": 8.7,
+      "unemployment": 17.4,
+      "climate": 15.2
+    }
+  },
+  {
+    "rank": 47,
+    "area_code": "27",
+    "area_name": "大阪府",
+    "composite": 18.5,
+    "scores": {
+      "income": 54.3,
+      "safety": 2.2,
+      "medical": 32.6,
+      "homeOwnership": 6.5,
+      "rent": 4.3,
+      "fertility": 21.7,
+      "unemployment": 6.5,
+      "climate": 19.6
+    }
+  }
+]

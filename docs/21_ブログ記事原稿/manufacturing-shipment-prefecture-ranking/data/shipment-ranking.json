@@ -1,0 +1,284 @@
+[
+  {
+    "area_name": "愛知県",
+    "value": 58021789,
+    "rank": 1,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "静岡県",
+    "value": 19773249,
+    "rank": 2,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "大阪府",
+    "value": 19343010,
+    "rank": 3,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "神奈川県",
+    "value": 18479457,
+    "rank": 4,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "兵庫県",
+    "value": 18461711,
+    "rank": 5,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "埼玉県",
+    "value": 15329652,
+    "rank": 6,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "千葉県",
+    "value": 15293153,
+    "rank": 7,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "茨城県",
+    "value": 15006703,
+    "rank": 8,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "三重県",
+    "value": 12311360,
+    "rank": 9,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "福岡県",
+    "value": 11616732,
+    "rank": 10,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "広島県",
+    "value": 11476455,
+    "rank": 11,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "群馬県",
+    "value": 10148522,
+    "rank": 12,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "栃木県",
+    "value": 9889543,
+    "rank": 13,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "岡山県",
+    "value": 9603957,
+    "rank": 14,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "滋賀県",
+    "value": 9179393,
+    "rank": 15,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "東京都",
+    "value": 8552651,
+    "rank": 16,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "山口県",
+    "value": 7781751,
+    "rank": 17,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "長野県",
+    "value": 7008768,
+    "rank": 18,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "北海道",
+    "value": 6774675,
+    "rank": 19,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "岐阜県",
+    "value": 6720192,
+    "rank": 20,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "京都府",
+    "value": 6459958,
+    "rank": 21,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "大分県",
+    "value": 5683829,
+    "rank": 22,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "福島県",
+    "value": 5655367,
+    "rank": 23,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "愛媛県",
+    "value": 5593086,
+    "rank": 24,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "宮城県",
+    "value": 5469261,
+    "rank": 25,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "新潟県",
+    "value": 5466666,
+    "rank": 26,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "富山県",
+    "value": 4133758,
+    "rank": 27,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "熊本県",
+    "value": 3486265,
+    "rank": 28,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "山形県",
+    "value": 3355548,
+    "rank": 29,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "石川県",
+    "value": 3206413,
+    "rank": 30,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "岩手県",
+    "value": 3124685,
+    "rank": 31,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "香川県",
+    "value": 3080769,
+    "rank": 32,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "和歌山県",
+    "value": 2891542,
+    "rank": 33,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "山梨県",
+    "value": 2719360,
+    "rank": 34,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "福井県",
+    "value": 2649650,
+    "rank": 35,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "鹿児島県",
+    "value": 2415019,
+    "rank": 36,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "徳島県",
+    "value": 2333664,
+    "rank": 37,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "佐賀県",
+    "value": 2319201,
+    "rank": 38,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "奈良県",
+    "value": 2022684,
+    "rank": 39,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "長崎県",
+    "value": 1851736,
+    "rank": 40,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "宮崎県",
+    "value": 1836509,
+    "rank": 41,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "青森県",
+    "value": 1716305,
+    "rank": 42,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "秋田県",
+    "value": 1563610,
+    "rank": 43,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "島根県",
+    "value": 1383834,
+    "rank": 44,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "鳥取県",
+    "value": 886730,
+    "rank": 45,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "高知県",
+    "value": 653960,
+    "rank": 46,
+    "unit": "百万円"
+  },
+  {
+    "area_name": "沖縄県",
+    "value": 506700,
+    "rank": 47,
+    "unit": "百万円"
+  }
+]

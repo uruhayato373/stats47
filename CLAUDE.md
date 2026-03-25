@@ -60,6 +60,7 @@ packages/
 
 | エージェント | スキル数 | 担当ドメイン |
 |---|---|---|
+| `theme-designer` | 6 | テーマダッシュボード設計（データ発見→指標選定→IndicatorSet 生成） |
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
 | `blog-editor` | 17 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
@@ -81,6 +82,7 @@ packages/
 | note 記事制作→投稿 | note-manager → browser-publisher |
 | 週次 PDCA | strategy-advisor（内部で5並列サブエージェント） |
 | コード変更→レビュー→デプロイ | code-reviewer → devops-runner |
+| テーマダッシュボード設計 | theme-designer → data-pipeline（未登録指標登録）→ ui-reviewer |
 
 ## スキル一覧
 

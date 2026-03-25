@@ -1,0 +1,237 @@
+[
+  {
+    "area_name": "東京都",
+    "value": 113685917,
+    "rank": 1
+  },
+  {
+    "area_name": "大阪府",
+    "value": 41320372,
+    "rank": 2
+  },
+  {
+    "area_name": "愛知県",
+    "value": 40585984,
+    "rank": 3
+  },
+  {
+    "area_name": "神奈川県",
+    "value": 35287752,
+    "rank": 4
+  },
+  {
+    "area_name": "埼玉県",
+    "value": 23733625,
+    "rank": 5
+  },
+  {
+    "area_name": "兵庫県",
+    "value": 22506291,
+    "rank": 6
+  },
+  {
+    "area_name": "千葉県",
+    "value": 20806993,
+    "rank": 7
+  },
+  {
+    "area_name": "北海道",
+    "value": 20540923,
+    "rank": 8
+  },
+  {
+    "area_name": "福岡県",
+    "value": 19457117,
+    "rank": 9
+  },
+  {
+    "area_name": "静岡県",
+    "value": 17530625,
+    "rank": 10
+  },
+  {
+    "area_name": "茨城県",
+    "value": 14539129,
+    "rank": 11
+  },
+  {
+    "area_name": "広島県",
+    "value": 12128058,
+    "rank": 12
+  },
+  {
+    "area_name": "京都府",
+    "value": 10905246,
+    "rank": 13
+  },
+  {
+    "area_name": "宮城県",
+    "value": 9649597,
+    "rank": 14
+  },
+  {
+    "area_name": "栃木県",
+    "value": 9179132,
+    "rank": 15
+  },
+  {
+    "area_name": "群馬県",
+    "value": 9140951,
+    "rank": 16
+  },
+  {
+    "area_name": "新潟県",
+    "value": 8973506,
+    "rank": 17
+  },
+  {
+    "area_name": "長野県",
+    "value": 8624321,
+    "rank": 18
+  },
+  {
+    "area_name": "三重県",
+    "value": 8505160,
+    "rank": 19
+  },
+  {
+    "area_name": "岐阜県",
+    "value": 8010977,
+    "rank": 20
+  },
+  {
+    "area_name": "福島県",
+    "value": 7844733,
+    "rank": 21
+  },
+  {
+    "area_name": "岡山県",
+    "value": 7652694,
+    "rank": 22
+  },
+  {
+    "area_name": "滋賀県",
+    "value": 6863734,
+    "rank": 23
+  },
+  {
+    "area_name": "熊本県",
+    "value": 6417343,
+    "rank": 24
+  },
+  {
+    "area_name": "山口県",
+    "value": 6236572,
+    "rank": 25
+  },
+  {
+    "area_name": "鹿児島県",
+    "value": 5921471,
+    "rank": 26
+  },
+  {
+    "area_name": "愛媛県",
+    "value": 5089931,
+    "rank": 27
+  },
+  {
+    "area_name": "富山県",
+    "value": 4881063,
+    "rank": 28
+  },
+  {
+    "area_name": "岩手県",
+    "value": 4701411,
+    "rank": 29
+  },
+  {
+    "area_name": "大分県",
+    "value": 4683887,
+    "rank": 30
+  },
+  {
+    "area_name": "石川県",
+    "value": 4680069,
+    "rank": 31
+  },
+  {
+    "area_name": "長崎県",
+    "value": 4620708,
+    "rank": 32
+  },
+  {
+    "area_name": "青森県",
+    "value": 4464610,
+    "rank": 33
+  },
+  {
+    "area_name": "沖縄県",
+    "value": 4373909,
+    "rank": 34
+  },
+  {
+    "area_name": "山形県",
+    "value": 4282525,
+    "rank": 35
+  },
+  {
+    "area_name": "香川県",
+    "value": 3863785,
+    "rank": 36
+  },
+  {
+    "area_name": "奈良県",
+    "value": 3767068,
+    "rank": 37
+  },
+  {
+    "area_name": "和歌山県",
+    "value": 3765051,
+    "rank": 38
+  },
+  {
+    "area_name": "宮崎県",
+    "value": 3706513,
+    "rank": 39
+  },
+  {
+    "area_name": "山梨県",
+    "value": 3702855,
+    "rank": 40
+  },
+  {
+    "area_name": "福井県",
+    "value": 3681511,
+    "rank": 41
+  },
+  {
+    "area_name": "秋田県",
+    "value": 3545316,
+    "rank": 42
+  },
+  {
+    "area_name": "徳島県",
+    "value": 3340186,
+    "rank": 43
+  },
+  {
+    "area_name": "佐賀県",
+    "value": 3179197,
+    "rank": 44
+  },
+  {
+    "area_name": "島根県",
+    "value": 2670688,
+    "rank": 45
+  },
+  {
+    "area_name": "高知県",
+    "value": 2376443,
+    "rank": 46
+  },
+  {
+    "area_name": "鳥取県",
+    "value": 1926339,
+    "rank": 47
+  }
+]

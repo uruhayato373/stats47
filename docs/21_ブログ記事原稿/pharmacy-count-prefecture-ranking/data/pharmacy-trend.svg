@@ -1,0 +1,53 @@
+<svg width="780" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="人口10万人あたり薬局数の推移（全国平均）">
+  <title>人口10万人あたり薬局数の推移（全国平均）</title>
+  <rect width="680" height="420" fill="#fafafa" rx="8"/>
+  <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">人口10万人あたり薬局数の推移（全国平均）</text>
+  <rect x="60" y="50" width="590" height="310" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="60" y1="360" x2="650" y2="360" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="364" text-anchor="end" font-size="9" fill="#6b7280">25</text>
+  <line x1="60" y1="308.3333333333333" x2="650" y2="308.3333333333333" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="312.3333333333333" text-anchor="end" font-size="9" fill="#6b7280">30</text>
+  <line x1="60" y1="256.6666666666667" x2="650" y2="256.6666666666667" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="260.6666666666667" text-anchor="end" font-size="9" fill="#6b7280">35</text>
+  <line x1="60" y1="205" x2="650" y2="205" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="209" text-anchor="end" font-size="9" fill="#6b7280">40</text>
+  <line x1="60" y1="153.33333333333334" x2="650" y2="153.33333333333334" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="157.33333333333334" text-anchor="end" font-size="9" fill="#6b7280">45</text>
+  <line x1="60" y1="101.66666666666663" x2="650" y2="101.66666666666663" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="105.66666666666663" text-anchor="end" font-size="9" fill="#6b7280">50</text>
+  <line x1="60" y1="50" x2="650" y2="50" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="54" text-anchor="end" font-size="9" fill="#6b7280">55</text>
+
+  <text x="60" y="380" text-anchor="middle" font-size="9" fill="#6b7280">1982年</text>
+  <text x="133.75" y="380" text-anchor="middle" font-size="9" fill="#6b7280">1985年</text>
+  <text x="207.5" y="380" text-anchor="middle" font-size="9" fill="#6b7280">1990年</text>
+  <text x="281.25" y="380" text-anchor="middle" font-size="9" fill="#6b7280">1995年</text>
+  <text x="355" y="380" text-anchor="middle" font-size="9" fill="#6b7280">2000年</text>
+  <text x="428.75" y="380" text-anchor="middle" font-size="9" fill="#6b7280">2005年</text>
+  <text x="502.5" y="380" text-anchor="middle" font-size="9" fill="#6b7280">2009年</text>
+  <text x="576.25" y="380" text-anchor="middle" font-size="9" fill="#6b7280">2012年</text>
+  <text x="650" y="380" text-anchor="middle" font-size="9" fill="#6b7280">2023年</text>
+
+  <line x1="60" y1="50" x2="60" y2="360" stroke="#999"/>
+  <line x1="60" y1="360" x2="650" y2="360" stroke="#999"/>
+  <text x="15" y="205" text-anchor="middle" font-size="10" fill="#6b7280" transform="rotate(-90,15,205)">薬局数（所/10万人）</text>
+  <polyline points="60,343.46666666666664 133.75,331.06666666666666 207.5,319.70000000000005 281.25,300.06666666666666 355,239.09999999999997 428.75,200.86666666666667 502.5,176.0666666666667 576.25,156.4333333333333" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="60" cy="343.46666666666664" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="60" y="333.46666666666664" text-anchor="start" font-size="10" font-weight="bold" fill="#2e7d32">26.6</text>
+  <circle cx="133.75" cy="331.06666666666666" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <circle cx="207.5" cy="319.70000000000005" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="207.5" y="309.70000000000005" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">28.9</text>
+  <circle cx="281.25" cy="300.06666666666666" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <circle cx="355" cy="239.09999999999997" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="355" y="229.09999999999997" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">36.7</text>
+  <circle cx="428.75" cy="200.86666666666667" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <circle cx="502.5" cy="176.0666666666667" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="502.5" y="166.0666666666667" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">42.8</text>
+  <circle cx="576.25" cy="156.4333333333333" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="576.25" y="146.4333333333333" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">44.7</text>
+  <circle cx="650" cy="77.90000000000003" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="650" y="67.90000000000003" text-anchor="end" font-size="10" font-weight="bold" fill="#2e7d32">52.3</text>
+
+  <line x1="576.25" y1="156.4333333333333" x2="650" y2="77.90000000000003" stroke="#2e7d32" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+  <text x="613.125" y="410" text-anchor="middle" font-size="8" fill="#999">※2013-2022年はデータ未収録</text>
+</svg>

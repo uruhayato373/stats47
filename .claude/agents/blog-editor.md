@@ -50,5 +50,18 @@
 
 ## 出力先
 
-- `.local/r2/blog/<slug>/` — 公開記事
+- `docs/21_ブログ記事原稿/<slug>/` — **下書き記事**（article.md + data/）
+- `.local/r2/blog/<slug>/` — 公開記事（`/publish-article` でコピー）
 - `docs/10_ブログ企画/` — 企画ファイル
+
+## 記事ライフサイクル
+
+```
+docs/21_ブログ記事原稿/<slug>/  ← 下書き作成・チャート生成・レビューはここで行う
+        ↓ /publish-article
+.local/r2/blog/<slug>/          ← 公開記事（publishedAt 設定）
+        ↓ /sync-articles
+DB (articles テーブル)           ← サイトに反映
+```
+
+**重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/blog/` に直接書かない。

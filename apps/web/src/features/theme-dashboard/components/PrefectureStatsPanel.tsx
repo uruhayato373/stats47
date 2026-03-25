@@ -24,6 +24,7 @@ import { PopulationPyramidChart } from "./PopulationPyramidChart";
 import { BirthDeathRateLineChart } from "./BirthDeathRateLineChart";
 import { NaturalSocialRateLineChart } from "./NaturalSocialRateLineChart";
 import { ConfigDrivenDualLineChart } from "./ConfigDrivenDualLineChart";
+import { ConfigDrivenMixedChart } from "./ConfigDrivenMixedChart";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import type { ThemeConfig } from "../types";
 
@@ -264,6 +265,13 @@ export function PrefectureStatsPanel({
                           prefName={areaName}
                         />
                       )}
+                      {chart.type === "mixed" && (
+                        <ConfigDrivenMixedChart
+                          config={chart}
+                          prefCode={selectedPrefectureCode ?? "00000"}
+                          prefName={areaName}
+                        />
+                      )}
                       {chart.type === "donut-action" && selectedPrefectureCode && (
                         <ConfigDrivenDonutChart
                           config={chart}
@@ -453,6 +461,13 @@ export function PrefectureStatsPanel({
             <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
             {chart.type === "dual-line" && (
               <ConfigDrivenDualLineChart
+                config={chart}
+                prefCode={selectedPrefectureCode ?? "00000"}
+                prefName={areaName}
+              />
+            )}
+            {chart.type === "mixed" && (
+              <ConfigDrivenMixedChart
                 config={chart}
                 prefCode={selectedPrefectureCode ?? "00000"}
                 prefName={areaName}

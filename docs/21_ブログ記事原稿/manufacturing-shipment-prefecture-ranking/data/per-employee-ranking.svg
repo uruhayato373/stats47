@@ -1,0 +1,44 @@
+<svg width="780" height="405" viewBox="0 0 780 405" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans JP',sans-serif" role="img" aria-label="従業者1人当たり製造品出荷額 上位10都道府県">
+  <rect width="780" height="405" fill="#fafafa" rx="8"/>
+  <text x="390" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">従業者1人当たり製造品出荷額 上位10都道府県（2023年）</text>
+  <line x1="80" y1="45" x2="80" y2="395" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="80" y="405" text-anchor="middle" font-size="9" fill="#6b7280">0万円</text>
+  <line x1="218.05367714158692" y1="45" x2="218.05367714158692" y2="395" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="218.05367714158692" y="405" text-anchor="middle" font-size="9" fill="#6b7280">2,000万円</text>
+  <line x1="356.10735428317383" y1="45" x2="356.10735428317383" y2="395" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="356.10735428317383" y="405" text-anchor="middle" font-size="9" fill="#6b7280">4,000万円</text>
+  <line x1="494.1610314247607" y1="45" x2="494.1610314247607" y2="395" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="494.1610314247607" y="405" text-anchor="middle" font-size="9" fill="#6b7280">6,000万円</text>
+  <line x1="632.2147085663477" y1="45" x2="632.2147085663477" y2="395" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="632.2147085663477" y="405" text-anchor="middle" font-size="9" fill="#6b7280">8,000万円</text>
+  <text x="72" y="64.04" text-anchor="end" font-size="12" fill="#374151" font-weight="bold">大分</text>
+  <rect x="80" y="45" width="590" height="28" rx="3" fill="#065f46" opacity="0.85"/>
+  <text x="676" y="64.04" font-size="11" fill="#374151">8,547.4万円</text>
+  <text x="72" y="98.04" text-anchor="end" font-size="12" fill="#374151" font-weight="bold">山口</text>
+  <rect x="80" y="79" width="546.4647729134006" height="28" rx="3" fill="#065f46" opacity="0.85"/>
+  <text x="632.4647729134006" y="98.04" font-size="11" fill="#374151">7,916.7万円</text>
+  <text x="72" y="132.04" text-anchor="end" font-size="12" fill="#374151" font-weight="bold">千葉</text>
+  <rect x="80" y="113" width="500.7275896763929" height="28" rx="3" fill="#047857" opacity="0.85"/>
+  <text x="586.7275896763929" y="132.04" font-size="11" fill="#374151">7,254.1万円</text>
+  <text x="72" y="166.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">愛知</text>
+  <rect x="80" y="147" width="471.20481081966443" height="28" rx="3" fill="#059669" opacity="0.85"/>
+  <text x="557.2048108196644" y="166.04" font-size="11" fill="#374151">6,826.4万円</text>
+  <text x="72" y="200.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">愛媛</text>
+  <rect x="80" y="181" width="468.14001918712125" height="28" rx="3" fill="#059669" opacity="0.85"/>
+  <text x="554.1400191871212" y="200.04" font-size="11" fill="#374151">6,782万円</text>
+  <text x="72" y="234.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">岡山</text>
+  <rect x="80" y="215" width="442.47584060650024" height="28" rx="3" fill="#10b981" opacity="0.85"/>
+  <text x="528.4758406065002" y="234.04" font-size="11" fill="#374151">6,410.2万円</text>
+  <text x="72" y="268.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">三重</text>
+  <rect x="80" y="249" width="415.0928937454665" height="28" rx="3" fill="#10b981" opacity="0.85"/>
+  <text x="501.0928937454665" y="268.04" font-size="11" fill="#374151">6,013.5万円</text>
+  <text x="72" y="302.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">和歌山</text>
+  <rect x="80" y="283" width="378.5017666190888" height="28" rx="3" fill="#34d399" opacity="0.85"/>
+  <text x="464.5017666190888" y="302.04" font-size="11" fill="#374151">5,483.4万円</text>
+  <text x="72" y="336.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">茨城</text>
+  <rect x="80" y="317" width="373.1383812621382" height="28" rx="3" fill="#34d399" opacity="0.85"/>
+  <text x="459.1383812621382" y="336.04" font-size="11" fill="#374151">5,405.7万円</text>
+  <text x="72" y="370.04" text-anchor="end" font-size="12" fill="#374151" font-weight="normal">滋賀</text>
+  <rect x="80" y="351" width="371.88209280014974" height="28" rx="3" fill="#6ee7b7" opacity="0.85"/>
+  <text x="457.88209280014974" y="370.04" font-size="11" fill="#374151">5,387.5万円</text>
+</svg>

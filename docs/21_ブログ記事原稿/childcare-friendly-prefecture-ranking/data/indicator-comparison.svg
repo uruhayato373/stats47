@@ -1,0 +1,75 @@
+<svg width="680" height="616" viewBox="0 0 680 616" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="上位3県の指標別パーセンタイル比較">
+  <title>上位3県の指標別パーセンタイル比較</title>
+  <rect width="680" height="616" fill="#fafafa" rx="8"/>
+  <text x="340" y="28" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="bold" fill="#333">上位3県の指標別パーセンタイル比較</text>
+  <text x="340" y="48" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#888">各指標0〜100点（パーセンタイル順位）</text>
+  <line x1="100" y1="80" x2="100" y2="556" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="100" y="75" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">0</text>
+  <line x1="235" y1="80" x2="235" y2="556" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="235" y="75" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">25</text>
+  <line x1="370" y1="80" x2="370" y2="556" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="370" y="75" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">50</text>
+  <line x1="505" y1="80" x2="505" y2="556" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="505" y="75" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">75</text>
+  <line x1="640" y1="80" x2="640" y2="556" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="640" y="75" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">100</text>
+  <rect x="0" y="80" width="680" height="68" fill="#f9fafb"/>
+  <text x="92" y="118" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">出生率</text>
+  <rect x="100" y="90" width="469.8" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="573.8" y="101" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">87</text>
+  <rect x="100" y="106" width="493.0" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="597.02" y="117" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">91</text>
+  <rect x="100" y="122" width="504.9" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="608.9000000000001" y="133" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">94</text>
+  <text x="92" y="186" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">保育利用率</text>
+  <rect x="100" y="158" width="516.8" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="620.7800000000001" y="169" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">96</text>
+  <rect x="100" y="174" width="446.0" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="550.04" y="185" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">83</text>
+  <rect x="100" y="190" width="540.0" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="644" y="201" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">100</text>
+  <rect x="0" y="216" width="680" height="68" fill="#f9fafb"/>
+  <text x="92" y="254" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">乳児死亡率</text>
+  <rect x="100" y="226" width="58.9" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="162.86" y="237" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">11</text>
+  <rect x="100" y="242" width="387.2" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="491.18000000000006" y="253" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">72</text>
+  <rect x="100" y="258" width="135.0" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="239" y="269" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">25</text>
+  <text x="92" y="322" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">医師数</text>
+  <rect x="100" y="294" width="434.2" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="538.1600000000001" y="305" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">80</text>
+  <rect x="100" y="310" width="422.8" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="526.8199999999999" y="321" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">78</text>
+  <rect x="100" y="326" width="375.8" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="479.84" y="337" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">70</text>
+  <rect x="0" y="352" width="680" height="68" fill="#f9fafb"/>
+  <text x="92" y="390" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">児童福祉費</text>
+  <rect x="100" y="362" width="469.8" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="573.8" y="373" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">87</text>
+  <rect x="100" y="378" width="410.9" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="514.9399999999999" y="389" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">76</text>
+  <rect x="100" y="394" width="481.1" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="585.1399999999999" y="405" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">89</text>
+  <text x="92" y="458" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">育児就業率</text>
+  <rect x="100" y="430" width="516.8" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="620.7800000000001" y="441" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">96</text>
+  <rect x="100" y="446" width="446.0" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="550.04" y="457" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">83</text>
+  <rect x="100" y="462" width="364.0" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="467.96000000000004" y="473" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">67</text>
+  <rect x="0" y="488" width="680" height="68" fill="#f9fafb"/>
+  <text x="92" y="526" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#444">公園面積</text>
+  <rect x="100" y="498" width="457.9" height="14" rx="3" fill="#66bb6a" opacity="0.85"/>
+  <text x="561.92" y="509" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">85</text>
+  <rect x="100" y="514" width="105.8" height="14" rx="3" fill="#42a5f5" opacity="0.85"/>
+  <text x="209.84" y="525" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">20</text>
+  <rect x="100" y="530" width="293.2" height="14" rx="3" fill="#ff9800" opacity="0.85"/>
+  <text x="397.21999999999997" y="541" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#555">54</text>
+  <rect x="175" y="580" width="14" height="10" rx="2" fill="#66bb6a" opacity="0.85"/>
+  <text x="193" y="589" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#444">1位 島根県</text>
+  <rect x="285" y="580" width="14" height="10" rx="2" fill="#42a5f5" opacity="0.85"/>
+  <text x="303" y="589" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#444">2位 熊本県</text>
+  <rect x="395" y="580" width="14" height="10" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="413" y="589" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#444">3位 鹿児島県</text>
+</svg>

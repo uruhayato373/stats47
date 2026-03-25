@@ -1,0 +1,312 @@
+[
+  {
+    "year": "1982",
+    "year_name": "1982年度",
+    "average": 26.6,
+    "max": 46.3,
+    "min": 17,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "新潟県",
+    "count": 47
+  },
+  {
+    "year": "1983",
+    "year_name": "1983年度",
+    "average": 27,
+    "max": 46.2,
+    "min": 17.5,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "新潟県",
+    "count": 47
+  },
+  {
+    "year": "1984",
+    "year_name": "1984年度",
+    "average": 27.5,
+    "max": 46.3,
+    "min": 17.2,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "新潟県",
+    "count": 47
+  },
+  {
+    "year": "1985",
+    "year_name": "1985年度",
+    "average": 27.8,
+    "max": 45.6,
+    "min": 18.1,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "新潟県",
+    "count": 47
+  },
+  {
+    "year": "1986",
+    "year_name": "1986年度",
+    "average": 28.1,
+    "max": 46.1,
+    "min": 18.9,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "新潟県",
+    "count": 47
+  },
+  {
+    "year": "1987",
+    "year_name": "1987年度",
+    "average": 28.2,
+    "max": 45.4,
+    "min": 19.2,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "山形県",
+    "count": 47
+  },
+  {
+    "year": "1988",
+    "year_name": "1988年度",
+    "average": 28.3,
+    "max": 44.1,
+    "min": 19.1,
+    "maxPrefecture": "沖縄県",
+    "minPrefecture": "山形県",
+    "count": 47
+  },
+  {
+    "year": "1989",
+    "year_name": "1989年度",
+    "average": 28.7,
+    "max": 44.5,
+    "min": 19.1,
+    "maxPrefecture": "広島県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1990",
+    "year_name": "1990年度",
+    "average": 28.9,
+    "max": 45.5,
+    "min": 19.3,
+    "maxPrefecture": "広島県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1991",
+    "year_name": "1991年度",
+    "average": 29,
+    "max": 44.1,
+    "min": 19.6,
+    "maxPrefecture": "広島県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1992",
+    "year_name": "1992年度",
+    "average": 29.4,
+    "max": 44.7,
+    "min": 20.1,
+    "maxPrefecture": "広島県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1993",
+    "year_name": "1993年度",
+    "average": 29.8,
+    "max": 45.9,
+    "min": 20.1,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1994",
+    "year_name": "1994年度",
+    "average": 30.3,
+    "max": 46.1,
+    "min": 20.9,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1995",
+    "year_name": "1995年度",
+    "average": 30.8,
+    "max": 46.6,
+    "min": 21.2,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1996",
+    "year_name": "1996年度",
+    "average": 31.4,
+    "max": 47.4,
+    "min": 20.7,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "富山県",
+    "count": 47
+  },
+  {
+    "year": "1997",
+    "year_name": "1997年度",
+    "average": 33,
+    "max": 50.1,
+    "min": 20.8,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "石川県",
+    "count": 47
+  },
+  {
+    "year": "1998",
+    "year_name": "1998年度",
+    "average": 34.5,
+    "max": 52.8,
+    "min": 20.9,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "石川県",
+    "count": 47
+  },
+  {
+    "year": "1999",
+    "year_name": "1999年度",
+    "average": 35.5,
+    "max": 54,
+    "min": 22.6,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "石川県",
+    "count": 47
+  },
+  {
+    "year": "2000",
+    "year_name": "2000年度",
+    "average": 36.7,
+    "max": 55,
+    "min": 23.6,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "石川県",
+    "count": 47
+  },
+  {
+    "year": "2001",
+    "year_name": "2001年度",
+    "average": 37.9,
+    "max": 57,
+    "min": 26.9,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "石川県",
+    "count": 47
+  },
+  {
+    "year": "2002",
+    "year_name": "2002年度",
+    "average": 38.8,
+    "max": 57.1,
+    "min": 28.4,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2003",
+    "year_name": "2003年度",
+    "average": 39.3,
+    "max": 57.7,
+    "min": 29,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2004",
+    "year_name": "2004年度",
+    "average": 39.8,
+    "max": 58.9,
+    "min": 29.8,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2005",
+    "year_name": "2005年度",
+    "average": 40.4,
+    "max": 58.8,
+    "min": 29.5,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2006",
+    "year_name": "2006年度",
+    "average": 41,
+    "max": 60.3,
+    "min": 28.7,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2007",
+    "year_name": "2007年度",
+    "average": 41.7,
+    "max": 61.4,
+    "min": 28.6,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2008",
+    "year_name": "2008年度",
+    "average": 42.4,
+    "max": 61.6,
+    "min": 29.1,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2009",
+    "year_name": "2009年度",
+    "average": 42.8,
+    "max": 61.1,
+    "min": 30.1,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2011",
+    "year_name": "2011年度",
+    "average": 43.8,
+    "max": 62.1,
+    "min": 30.9,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2012",
+    "year_name": "2012年度",
+    "average": 44.7,
+    "max": 62,
+    "min": 32.5,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "福井県",
+    "count": 47
+  },
+  {
+    "year": "2023",
+    "year_name": "2023年度",
+    "average": 52.3,
+    "max": 64.5,
+    "min": 39.4,
+    "maxPrefecture": "佐賀県",
+    "minPrefecture": "沖縄県",
+    "count": 47
+  }
+]

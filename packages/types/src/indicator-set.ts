@@ -26,6 +26,19 @@ export interface DualLineChartDef {
   source?: string;
 }
 
+/** 棒グラフ（左Y軸）+ 折れ線（右Y軸）の2軸チャート */
+export interface MixedChartDef {
+  type: "mixed";
+  label: string;
+  /** 棒グラフ系列（左Y軸） */
+  columns: [ChartSeriesDef];
+  /** 折れ線系列（右Y軸） */
+  lines: [ChartSeriesDef];
+  leftUnit?: string;
+  rightUnit?: string;
+  source?: string;
+}
+
 /** Server Action で取得するドーナツチャート */
 export interface DonutChartDef {
   type: "donut-action";
@@ -35,7 +48,7 @@ export interface DonutChartDef {
 }
 
 /** チャート定義のユニオン型 */
-export type ChartDefinition = DualLineChartDef | DonutChartDef;
+export type ChartDefinition = DualLineChartDef | MixedChartDef | DonutChartDef;
 
 // ============================================================================
 // 指標エントリ
