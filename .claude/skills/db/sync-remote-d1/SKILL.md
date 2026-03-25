@@ -194,17 +194,30 @@ npx wrangler d1 execute stats47_static --remote --env production \
 2. **手順は 3a と同じ**（ただし ranking 固有の処理は不要）
 3. **ID 競合がある場合**: リモートの MAX(id) を取得してリナンバリング
 
+## D1 REST API（推奨）
+
+`/diff-d1 --execute` の push 処理は D1 REST API を直接呼ぶ方式に移行済み。wrangler CLI の毎回のプロセス起動オーバーヘッドを排除し、5並列で送信する。
+
+| 方式 | 速度 | 用途 |
+|---|---|---|
+| D1 REST API（5並列） | ~130,000行/分 | `--execute` による push/fullsync |
+| wrangler CLI | ~2,000行/分 | クエリ（diff レポート生成）のみ使用 |
+
+実装: `packages/database/scripts/d1-rest-api.ts`
+
+必要な環境変数: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_STATIC_DATABASE_ID_PRODUCTION`, `CLOUDFLARE_API_TOKEN`
+
 ## D1 リモートの制約・ハマりポイント
 
 ### PRAGMA defer_foreign_keys=TRUE は効かない
 
 D1 リモートでは `PRAGMA defer_foreign_keys=TRUE` が無視される。FK 制約のあるテーブルへの INSERT が失敗する場合は `PRAGMA foreign_keys=OFF;` をファイル先頭に記述する。
 
-### 大きなテーブルはチャンク分割が必要
+### チャンク分割
 
-`wrangler d1 execute --file` にはサイズ・時間制限がある。目安：
-- **テキスト/JSON が少ないテーブル**: 500 行/チャンク（ranking_data 等）
-- **大きな JSON カラムがあるテーブル**: 50 行/チャンク（ranking_ai_content 等）
+REST API でも1リクエストあたりのサイズ制限がある。目安：
+- **500 行/チャンク**（ranking_data, ranking_items, area_profile_rankings 等）
+- 大きな JSON カラム（scatter_data 等）があっても 500 行で問題なし
 
 ### JSON/テキスト値に改行が含まれる場合
 

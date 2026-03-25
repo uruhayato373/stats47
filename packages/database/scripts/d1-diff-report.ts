@@ -15,6 +15,11 @@ import { execSync } from "child_process";
 import path from "path";
 import Database from "better-sqlite3";
 import { LOCAL_DB_PATHS } from "../src/config/local-db-paths";
+import {
+  buildInsertChunks,
+  executeRemoteBulkSQL,
+  executeRemoteSQL,
+} from "./d1-rest-api";
 
 // ── 定数 ──────────────────────────────────────────────
 
@@ -335,12 +340,8 @@ async function executePushKey(
   const config = KEY_DIFF_TABLES[table];
   if (!config) return;
 
-  // リモートから既存データを削除
-  try {
-    await executeRemoteCommand(config.deleteWhere(key));
-  } catch {
-    // 存在しない場合は無視
-  }
+  // リモートから既存データを削除（REST API）
+  await executeRemoteSQL(`PRAGMA foreign_keys=OFF; ${config.deleteWhere(key)}`);
 
   // ローカルからデータをエクスポート
   let whereClause: string;
@@ -354,6 +355,8 @@ async function executePushKey(
   } else if (table === "ranking_ai_content") {
     const [rk, at] = key.split("|");
     whereClause = `ranking_key = '${rk.replace(/'/g, "''")}' AND area_type = '${at.replace(/'/g, "''")}'`;
+  } else if (table === "port_statistics") {
+    whereClause = `metric_key = '${key.replace(/'/g, "''")}'`;
   } else {
     return;
   }
@@ -361,50 +364,19 @@ async function executePushKey(
   const rows = db.prepare(`SELECT * FROM "${table}" WHERE ${whereClause}`).all() as Record<string, unknown>[];
   if (rows.length === 0) return;
 
-  // SQL生成
   const cols = Object.keys(rows[0]);
-  const lines = ["PRAGMA foreign_keys=OFF;"];
-  for (const row of rows) {
-    const vals = cols.map((c) => {
-      const v = row[c];
-      if (v === null || v === undefined) return "NULL";
-      const s = String(v).replace(/'/g, "''");
-      // 改行を含む場合は char(10) 連結に変換
-      if (s.includes("\n")) {
-        return s.split("\n").map((p) => `'${p}'`).join(" || char(10) || ");
-      }
-      return `'${s}'`;
-    });
-    lines.push(`INSERT INTO "${table}" (${cols.map((c) => `"${c}"`).join(", ")}) VALUES (${vals.join(", ")});`);
-  }
+  const CHUNK_SIZE = 500;
+  const chunks = buildInsertChunks(rows, table, cols, CHUNK_SIZE);
+  const { ok, failed } = await executeRemoteBulkSQL(chunks, 5);
 
-  // チャンク分割して投入（500行ずつ）
-  const CHUNK_SIZE = table === "correlation_analysis" ? 50 : 500;
-  const sqlLines = lines.slice(1); // PRAGMA除外
-  for (let i = 0; i < sqlLines.length; i += CHUNK_SIZE) {
-    const chunk = ["PRAGMA foreign_keys=OFF;", ...sqlLines.slice(i, i + CHUNK_SIZE)];
-    const tmpFile = `/tmp/d1-diff-push-${table}-${i}.sql`;
-    require("fs").writeFileSync(tmpFile, chunk.join("\n"));
-
-    const cmd = `npx wrangler d1 execute ${REMOTE_DB_NAME} --remote --env ${REMOTE_ENV} --file ${tmpFile} -y`;
-    execSync(cmd, {
-      cwd: WEB_APP_DIR,
-      maxBuffer: MAX_BUFFER,
-      encoding: "utf-8",
-      stdio: ["pipe", "pipe", "pipe"],
-    });
-
-    require("fs").unlinkSync(tmpFile);
-  }
-
-  console.log(`    Pushed ${rows.length} rows for key: ${key}`);
+  console.log(`    Pushed ${rows.length} rows for key: ${key}${failed > 0 ? ` (${failed} chunks failed)` : ""}`);
 }
 
 async function executeDeleteRemoteKey(table: string, key: string): Promise<void> {
   const config = KEY_DIFF_TABLES[table];
   if (!config) return;
 
-  await executeRemoteCommand(config.deleteWhere(key));
+  await executeRemoteSQL(`PRAGMA foreign_keys=OFF; ${config.deleteWhere(key)}`);
   console.log(`    Deleted remote key: ${key}`);
 }
 
@@ -497,8 +469,8 @@ async function fullSyncPush(
   db: Database.Database,
   table: string
 ): Promise<void> {
-  // リモート DELETE
-  await executeRemoteCommand(`DELETE FROM "${table}"`);
+  // リモート DELETE（REST API）
+  await executeRemoteSQL(`PRAGMA foreign_keys=OFF; DELETE FROM "${table}"`);
 
   // ローカルからエクスポート
   const rows = db.prepare(`SELECT * FROM "${table}"`).all() as Record<string, unknown>[];
@@ -508,33 +480,14 @@ async function fullSyncPush(
   }
 
   const cols = Object.keys(rows[0]);
-  const lines = ["PRAGMA foreign_keys=OFF;"];
-  for (const row of rows) {
-    const vals = cols.map((c) => {
-      const v = row[c];
-      if (v === null || v === undefined) return "NULL";
-      const s = String(v).replace(/'/g, "''");
-      if (s.includes("\n")) {
-        return s.split("\n").map((p) => `'${p}'`).join(" || char(10) || ");
-      }
-      return `'${s}'`;
-    });
-    lines.push(`INSERT INTO "${table}" (${cols.map((c) => `"${c}"`).join(", ")}) VALUES (${vals.join(", ")});`);
-  }
-
-  const tmpFile = `/tmp/d1-diff-fullsync-${table}.sql`;
-  require("fs").writeFileSync(tmpFile, lines.join("\n"));
-
-  const cmd = `npx wrangler d1 execute ${REMOTE_DB_NAME} --remote --env ${REMOTE_ENV} --file ${tmpFile} -y`;
-  execSync(cmd, {
-    cwd: WEB_APP_DIR,
-    maxBuffer: MAX_BUFFER,
-    encoding: "utf-8",
-    stdio: ["pipe", "pipe", "pipe"],
+  const chunks = buildInsertChunks(rows, table, cols, 500);
+  const { ok, failed } = await executeRemoteBulkSQL(chunks, 5, (c, f, t) => {
+    if (rows.length > 5000 && (c + f) % 20 === 0) {
+      console.log(`    ${table}: ${c + f}/${t} chunks...`);
+    }
   });
 
-  require("fs").unlinkSync(tmpFile);
-  console.log(`    Pushed ${rows.length} rows (full sync)`);
+  console.log(`    Pushed ${rows.length} rows (full sync)${failed > 0 ? ` — ${failed} chunks failed` : ""}`);
 }
 
 // ── メイン ──────────────────────────────────────────
