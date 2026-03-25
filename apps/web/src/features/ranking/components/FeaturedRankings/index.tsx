@@ -16,6 +16,8 @@ import { FeaturedRankingCard } from "../FeaturedRankingCard";
 interface FeaturedRankingsProps {
   /** 取得件数（デフォルト: 6） */
   limit?: number;
+  /** ヘッダー（見出し+もっと見るリンク）を表示するか（デフォルト: true） */
+  showHeader?: boolean;
 }
 
 /**
@@ -24,7 +26,7 @@ interface FeaturedRankingsProps {
  * おすすめランキングをカード形式で表示するサーバーコンポーネント。
  * 各ランキングの1位データとタイルマップSVGを生成してカードに表示する。
  */
-export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
+export async function FeaturedRankings({ limit = 6, showHeader = true }: FeaturedRankingsProps) {
   let items: {
     rankingKey: string;
     title: string;
@@ -108,12 +110,14 @@ export async function FeaturedRankings({ limit = 6 }: FeaturedRankingsProps) {
   return (
     <section className="py-8 px-4 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-lg font-bold">注目のランキング</h2>
-          <Link href="/ranking" className="text-sm text-primary hover:underline font-medium" aria-label="注目のランキングをもっと見る">
-            もっと見る &rarr;
-          </Link>
-        </div>
+        {showHeader && (
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-lg font-bold">注目のランキング</h2>
+            <Link href="/ranking" className="text-sm text-primary hover:underline font-medium" aria-label="注目のランキングをもっと見る">
+              もっと見る &rarr;
+            </Link>
+          </div>
+        )}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {items.map((item, idx) => (
             <FeaturedRankingCard

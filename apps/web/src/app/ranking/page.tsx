@@ -1,14 +1,14 @@
 /**
  * ランキングトップページ
  *
- * すべてのカテゴリのランキングをカテゴリごとのカードで表示するページです。
- * データ取得・変換ロジックは ranking-top-page-loader.ts に集約。
+ * 注目のランキングをタイルマップ付きカードで表示するページ。
+ * カテゴリ導線はサイドバーに委譲。
  */
 
 import { Metadata } from "next";
 
-import { RankingTopPageClient, generateRankingTopPageStructuredData } from "@/features/ranking";
-import { loadRankingTopPageData, type RankingTopPageData } from "@/features/ranking/server";
+import { generateRankingTopPageStructuredData } from "@/features/ranking";
+import { FeaturedRankings } from "@/features/ranking/server";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 export const revalidate = 86400;
@@ -26,33 +26,16 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** CI ビルド時など DB 利用不可時のフォールバック */
-const EMPTY_DATA: RankingTopPageData = {
-  featuredItems: [],
-  categories: [],
-};
-
 export default async function RankingTopPage() {
-  let data: RankingTopPageData;
-  try {
-    data = await loadRankingTopPageData();
-  } catch {
-    // CI ビルド時など D1 が利用できない場合は空データで SSG し、ISR で再生成
-    data = EMPTY_DATA;
-  }
-
-  const structuredData = generateRankingTopPageStructuredData({ featuredItems: data.featuredItems });
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <RankingTopPageClient
-        featuredItems={data.featuredItems}
-        categories={data.categories}
-      />
-    </>
+    <div className="py-4 px-4">
+      <div className="max-w-6xl mx-auto mb-4">
+        <h1 className="text-2xl font-bold">ランキング一覧</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          1,800以上の統計で47都道府県を比較
+        </p>
+      </div>
+      <FeaturedRankings limit={12} showHeader={false} />
+    </div>
   );
 }
