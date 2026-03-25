@@ -4,12 +4,6 @@ import { ReactNode, useEffect, useMemo, useState, useTransition } from "react";
 
 import { usePathname } from "next/navigation";
 
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
     Tabs,
@@ -97,7 +91,7 @@ export function RankingKeyPageClient({
     const [isPending, startTransition] = useTransition();
     const pathname = usePathname();
     const isBelowLg = useBreakpoint("belowLg");
-    const isAboveXl = useBreakpoint("aboveXl");
+    const isAboveLg = useBreakpoint("aboveLg");
 
     // 現在の areaType に応じたランキング定義
     const activeRankingItem = currentAreaType === "city" && cityRankingItem
@@ -265,7 +259,7 @@ export function RankingKeyPageClient({
                 />
 
             {/* メインコンテンツ + 右サイドバー */}
-            <div className={isAboveXl && sidebarSection ? "flex gap-4 mt-4 items-start" : "mt-4"}>
+            <div className={isAboveLg && sidebarSection ? "flex gap-4 mt-4 items-start" : "mt-4"}>
             <main className="flex flex-col gap-4 min-w-0 flex-1">
                     {/* 地図＋データテーブル */}
                     {isBelowLg ? (
@@ -299,29 +293,25 @@ export function RankingKeyPageClient({
                             </TabsContent>
                         </Tabs>
                     ) : (
-                        /* デスクトップ: 2カラム + sticky地図 */
-                        <div className="grid grid-cols-2 gap-4 relative items-start">
+                        /* デスクトップ: 縦並び（地図→テーブル） */
+                        <div className="flex flex-col gap-4 relative">
                             {isPending && (
                                 <div className="absolute inset-0 z-10 bg-background/50 flex items-center justify-center backdrop-blur-[1px]">
                                     <Skeleton className="w-full h-full opacity-50" />
                                 </div>
                             )}
-                            <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-auto">
-                                <RankingMapChartClient
-                                    rankingItem={activeRankingItem}
-                                    rankingValues={rankingValues}
-                                    areaType={currentAreaType}
-                                    topology={topology ?? null}
-                                    headerActions={headerActions}
-                                />
-                            </div>
-                            <div>
-                                <RankingDataTable
-                                    rankingValues={rankingValues}
-                                    rankingItem={rankingItem}
-                                    headerActions={headerActions}
-                                />
-                            </div>
+                            <RankingMapChartClient
+                                rankingItem={activeRankingItem}
+                                rankingValues={rankingValues}
+                                areaType={currentAreaType}
+                                topology={topology ?? null}
+                                headerActions={headerActions}
+                            />
+                            <RankingDataTable
+                                rankingValues={rankingValues}
+                                rankingItem={rankingItem}
+                                headerActions={headerActions}
+                            />
                         </div>
                     )}
 
@@ -339,22 +329,6 @@ export function RankingKeyPageClient({
 
                     {/* 地域別の傾向（折りたたみ） */}
                     {regionalAnalysisSection}
-
-                    {/* 広告 */}
-                    <Card className="h-fit overflow-hidden">
-                        <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-medium text-muted-foreground">
-                                広告
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="flex justify-center">
-                            <AdSenseAd
-                                format={RANKING_PAGE_TABLE_SIDE.format}
-                                slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                                showLabel={false}
-                            />
-                        </CardContent>
-                    </Card>
 
                     {/* 相関分析セクション */}
                     {correlationSection}
@@ -395,18 +369,22 @@ export function RankingKeyPageClient({
 
                 </main>
 
-                {/* 右サイドバー（xl以上） */}
-                {isAboveXl && sidebarSection && (
+                {/* 右サイドバー（lg以上） */}
+                {isAboveLg && sidebarSection && (
                     <aside className="w-64 shrink-0 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
+                            <AdSenseAd
+                                format={RANKING_PAGE_TABLE_SIDE.format}
+                                slotId={RANKING_PAGE_TABLE_SIDE.slotId}
+                            />
                         </div>
                     </aside>
                 )}
             </div>
 
-            {/* 右サイドバーの内容をモバイル・タブレットではページ下部に表示 */}
-            {!isAboveXl && sidebarSection && (
+            {/* サイドバーの内容をモバイル・タブレットではページ下部に表示 */}
+            {!isAboveLg && sidebarSection && (
                 <div className="mt-4">
                     {sidebarSection}
                 </div>
