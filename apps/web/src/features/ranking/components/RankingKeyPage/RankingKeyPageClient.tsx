@@ -216,21 +216,23 @@ export function RankingKeyPageClient({
     );
 
     const headerActions = (
-        <div className="flex items-center gap-1.5">
-            {activeRankingItem.availableYears && (
-                <RankingYearSelector
-                    times={activeRankingItem.availableYears}
-                    value={currentYear}
-                    onChange={handleYearChange}
-                />
-            )}
-            {cityRankingItem && (
-                <AreaTypeToggle
-                    value={currentAreaType}
-                    onChange={handleAreaTypeChange}
-                    disabled={isPending}
-                />
-            )}
+        <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-1.5">
+                {activeRankingItem.availableYears && (
+                    <RankingYearSelector
+                        times={activeRankingItem.availableYears}
+                        value={currentYear}
+                        onChange={handleYearChange}
+                    />
+                )}
+                {cityRankingItem && (
+                    <AreaTypeToggle
+                        value={currentAreaType}
+                        onChange={handleAreaTypeChange}
+                        disabled={isPending}
+                    />
+                )}
+            </div>
             {downloadButton}
         </div>
     );
