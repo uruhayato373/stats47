@@ -30,7 +30,6 @@ import {
     RankingDataTable,
     RankingDefinitionCard,
     RankingMapChartClient,
-    RankingPageHeader,
     RankingSourceCard,
     RankingYearSelector
 } from "@/features/ranking";
@@ -56,8 +55,6 @@ interface RankingKeyPageClientProps {
     insightsSection?: ReactNode;
     regionalAnalysisSection?: ReactNode;
     faqSection?: ReactNode;
-    /** 調査名バッジ（Server Component から注入） */
-    surveyBadge?: ReactNode;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
     parentAreaCode?: string;
     /** 右サイドバーに表示するコンテンツ（Server Component を注入） */
@@ -81,7 +78,6 @@ export function RankingKeyPageClient({
     insightsSection,
     regionalAnalysisSection,
     faqSection,
-    surveyBadge,
     parentAreaCode,
     sidebarSection,
     cityRankingItem,
@@ -266,15 +262,7 @@ export function RankingKeyPageClient({
 
     return (
         <div className="container mx-auto px-4 py-4">
-            {/* ページヘッダー */}
-            <RankingPageHeader
-                        rankingName={displayInfo.title}
-                        subtitle={displayInfo.subtitle}
-                        demographicAttr={displayInfo.demographicAttr}
-                        normalizationBasis={displayInfo.normalizationBasis}
-                        annotation={displayInfo.annotation}
-                    surveyBadge={surveyBadge}
-                />
+            <h1 className="text-lg font-bold">{displayInfo.title}</h1>
 
             {/* メインコンテンツ + 右サイドバー */}
             <div className={isAboveLg && sidebarSection ? "flex gap-4 mt-4 items-start" : "mt-4"}>

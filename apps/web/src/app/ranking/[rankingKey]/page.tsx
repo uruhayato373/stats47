@@ -55,7 +55,6 @@ import {
   CorrelationSectionContainer,
   RankingItemsSidebar,
   RankingPageCardsContainer,
-  SurveyBadge,
   RelatedArticlesCard,
   RelatedGroupCard,
 } from "@/features/ranking/server";
@@ -257,11 +256,6 @@ export default async function RankingKeyPage({
         topology={topology}
         cityRankingItem={cityRankingItem?.isActive ? cityRankingItem : undefined}
         surveyName={surveyName ?? undefined}
-        surveyBadge={
-          rankingItem.surveyId
-            ? <SurveyBadge surveyId={rankingItem.surveyId} />
-            : undefined
-        }
         // Server Component: 関連グループ（コンテンツ下部に表示）
         relatedSection={
           rankingItem.groupKey ? (
