@@ -87,9 +87,9 @@ export function CorrelationSectionClient({
     correlatedItems,
 }: CorrelationSectionClientProps) {
     return (
-        <Card>
+        <Card className="border border-border shadow-sm rounded-sm">
             <CardHeader>
-                <CardTitle className="text-lg">相関が高い指標</CardTitle>
+                <CardTitle>相関が高い指標</CardTitle>
             </CardHeader>
             <CardContent>
                 <ul className="divide-y">
