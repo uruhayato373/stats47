@@ -224,11 +224,19 @@ $BU screenshot /tmp/x-publish-<contentKey>.png
 $BU close
 ```
 
-### Phase 7: 投稿管理テーブル更新
+### Phase 7: DB 投稿記録
 
-`docs/11_SNS投稿管理/posts/<contentType>.md` のテーブルを更新:
-- X 列を `scheduled` に変更
-- 予約日時をコメントとして記録
+`sns_posts` テーブルに投稿記録を INSERT する:
+
+```bash
+sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
+  "INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, media_path, has_link, status, scheduled_at)
+   VALUES ('x', 'original', '<domain>', '<contentKey>', '<caption先頭100文字>', '<media_path>', <0or1>, 'scheduled', '<YYYY-MM-DD HH:MM>')"
+```
+
+- `post_type`: `original`（通常投稿）
+- `status`: `scheduled`（予約投稿の場合）。即時投稿なら `posted` + `posted_at` をセット
+- `has_link`: stats47.jp の URL を含む場合は `1`
 
 ## エラーハンドリング
 
@@ -251,4 +259,4 @@ $BU close
 - キャプション生成: `/post-x` スキル
 - 画像生成: `/render-sns-stills` スキル
 - browser-use CLI: `browser-use --help`
-- 投稿管理: `docs/11_SNS投稿管理/posts/ranking.md`
+- 投稿管理: `sns_posts` テーブル（`packages/database/src/schema/sns_posts.ts`）

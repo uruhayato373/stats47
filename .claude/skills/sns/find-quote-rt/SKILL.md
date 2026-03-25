@@ -218,6 +218,16 @@ $BU screenshot /tmp/x-quote-rt-done.png
 
 確実な方法は **`$BU state` の出力から `grep -B1 'ポストする$'` でインデックスを取得し `$BU click`** すること。
 
+#### DB 投稿記録
+
+投稿成功後、`sns_posts` テーブルに記録する:
+
+```bash
+sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
+  "INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, quote_url, has_link, status, posted_at)
+   VALUES ('x', 'quote_rt', 'ranking', '<content_key>', '<caption先頭100文字>', '<引用元URL>', <0or1>, 'posted', datetime('now', 'localtime'))"
+```
+
 ## 運用ルール
 
 | 項目 | ルール |

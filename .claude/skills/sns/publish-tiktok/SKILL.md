@@ -179,9 +179,15 @@ $BU screenshot /tmp/tiktok-publish-<contentKey>.png
 
 **ブラウザは閉じない**（バッチ実行時にセッションを維持するため）。
 
-### Phase 7: 投稿管理テーブル更新
+### Phase 7: DB 投稿記録
 
-`docs/11_SNS投稿管理/posts/ranking.md` の TT 列を `scheduled` に更新。
+`sns_posts` テーブルに投稿記録を INSERT する:
+
+```bash
+sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
+  "INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, media_path, has_link, status, scheduled_at)
+   VALUES ('tiktok', 'original', '<domain>', '<contentKey>', '<caption先頭100文字>', '<media_path>', <0or1>, 'scheduled', '<YYYY-MM-DD HH:MM>')"
+```
 
 ## バッチ実行時の注意
 

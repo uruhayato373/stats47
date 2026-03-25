@@ -71,6 +71,13 @@
       "when": 1774416626914,
       "tag": "0009_port_trade_detail",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1774430318717,
+      "tag": "0010_stale_quentin_quire",
+      "breakpoints": true
     }
   ]
 }
