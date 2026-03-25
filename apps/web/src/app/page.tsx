@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 
 import { isOk } from "@stats47/types";
 import { getDrizzle, rankingItems } from "@stats47/database/server";
 import { Button } from "@stats47/components/atoms/ui/button";
 import { eq, countDistinct } from "drizzle-orm";
-import { BarChart3, Map as MapIcon, GitCompareArrows, Search } from "lucide-react";
+import { BarChart3, Search } from "lucide-react";
 
 import { FeaturedRankings } from "@/features/ranking/server";
 import { listCategories } from "@/features/category/server";
@@ -177,39 +178,45 @@ export default async function HomePage() {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-lg font-bold mb-8">3つの切り口でデータを探す</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <ScrollReveal delay={0}>
-                <Link href="/ranking" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
-                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
-                    <BarChart3 className="h-7 w-7" />
-                  </div>
-                  <h3 className="font-semibold mb-2">1,800以上のランキング</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    年収・人口・消費量から教育・医療・環境まで。身近な雑学から社会課題まで、幅広い統計をランキングで楽しめます。
-                  </p>
-                </Link>
-              </ScrollReveal>
-              <ScrollReveal delay={100}>
-                <Link href="/areas" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
-                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
-                    <MapIcon className="h-7 w-7" />
-                  </div>
-                  <h3 className="font-semibold mb-2">地元の「強み」を発見</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    地図・偏差値で、あなたの都道府県の全国での立ち位置をひと目で把握。意外な強みや特徴が見つかります。
-                  </p>
-                </Link>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
-                <Link href="/correlation" className="group text-center p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all block h-full">
-                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
-                    <GitCompareArrows className="h-7 w-7" />
-                  </div>
-                  <h3 className="font-semibold mb-2">データの「なぜ？」を探る</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    2つの指標を掛け合わせて関係性を可視化。「年収が高い県は何が違う？」など、数字の裏にあるストーリーを探れます。
-                  </p>
-                </Link>
-              </ScrollReveal>
+              {[
+                {
+                  href: "/ranking",
+                  image: "/images/features/ranking.webp",
+                  title: "1,800以上のランキング",
+                  description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。",
+                },
+                {
+                  href: "/areas",
+                  image: "/images/features/area-profile.webp",
+                  title: "地元の「強み」を発見",
+                  description: "KPI・チャートで、あなたの都道府県の全国での立ち位置をひと目で把握。",
+                },
+                {
+                  href: "/correlation",
+                  image: "/images/features/correlation.webp",
+                  title: "データの「なぜ？」を探る",
+                  description: "2つの指標の関係性を散布図で可視化。数字の裏にあるストーリーを探れます。",
+                },
+              ].map((card, i) => (
+                <ScrollReveal key={card.href} delay={i * 100}>
+                  <Link href={card.href} className="group block rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden h-full">
+                    <div className="overflow-hidden">
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        width={800}
+                        height={460}
+                        className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-1">{card.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{card.description}</p>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              ))}
             </div>
           </div>
         </section>
