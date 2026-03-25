@@ -315,6 +315,14 @@ export function RankingKeyPageClient({
                         </div>
                     )}
 
+                    {/* シェアボタン（テーブル直下） */}
+                    <div className="flex items-center justify-center gap-2 py-2">
+                        <p className="text-xs text-muted-foreground">シェア</p>
+                        <ShareButtons
+                            title={displayInfo.title}
+                            shareText={shareText}
+                        />
+                    </div>
 
                     {/* データの考察（折りたたみ） */}
                     {insightsSection}
@@ -346,18 +354,6 @@ export function RankingKeyPageClient({
                             itemDetail={rankingItem}
                         />
                     )}
-
-                    {/* フッターシェアボタン */}
-                    <div className="flex flex-col items-center gap-2 mt-12 mb-4">
-                        <p className="text-sm text-muted-foreground">
-                            このランキングをシェアする
-                        </p>
-                        <ShareButtons
-                            title={displayInfo.title}
-                            shareText={shareText}
-                            variant="prominent"
-                        />
-                    </div>
 
                     {/* 関連セクション（関連記事・関連グループ等） */}
                     {relatedSection}
