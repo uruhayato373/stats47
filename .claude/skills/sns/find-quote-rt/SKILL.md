@@ -105,7 +105,9 @@ $BU eval "
 
 これで各ツイートの本文・エンゲージメント・URL・投稿者が JSON で取得できる。
 
-### Phase 4: ranking_items マッチング
+### Phase 4: データマッチング
+
+#### 4a. ローカル DB（ranking_items）で検索
 
 ツイート内容のキーワードから、関連する ranking_items を D1 で検索:
 
@@ -118,6 +120,22 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 ```
 
 キーワードはツイート内容に応じて動的に変更する。
+
+#### 4b. e-Stat API で追加データを検索（DB にない場合）
+
+DB にピッタリの指標がない場合、e-Stat API で直接データを探す。特に以下の統計は都道府県別×詳細分類のデータが豊富:
+
+| 統計 | statsDataId 例 | 内容 |
+|---|---|---|
+| 賃金構造基本統計調査（職種別） | `0003445758` | 130超の職種別賃金（都道府県別） |
+| 社会・人口統計体系 | `0000010101`〜`0000010111` | 人口・経済・治安・教育 etc. |
+
+```bash
+# e-Stat 検索例
+curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=$ESTAT_KEY&searchWord=職種+賃金&limit=5"
+```
+
+e-Stat で良いデータが見つかった場合は `/register-ranking` でランキングアイテムに登録することを提案する。
 
 ### Phase 5: 候補リスト提示
 
@@ -146,10 +164,23 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 - stats47 URL は3回に1回程度（毎回付けない）
 - ハッシュタグは不要
 
-**添付画像の選定:**
-- コロプレスマップ（地図）を最優先 — タイムラインで目を引く
-- 既存の SNS 画像があればそれを使用: `.local/r2/sns/ranking/<key>/x/stills/`
-- なければ `/render-sns-stills` で生成を提案
+**添付画像の選定（優先順）:**
+1. 既存の SNS 画像があればそれを使用: `.local/r2/sns/ranking/<key>/x/stills/`
+2. 都道府県別データ → Remotion `RankingX-Chart` で生成（`--props` で JSON を渡す）
+3. 全国レベルの比較データ → SVG 棒グラフを手書き → `sharp` で PNG 変換
+4. なければ `/render-sns-stills` で生成を提案
+
+**SVG→PNG 変換（Remotion 不要の場合）:**
+```bash
+node -e "
+const sharp = require('sharp');
+const fs = require('fs');
+const svg = fs.readFileSync('/tmp/chart.svg', 'utf8');
+sharp(Buffer.from(svg), { density: 72 }).png().toFile('/tmp/chart.png');
+"
+```
+- X 画像サイズ: 1200×630
+- `stats47.jp` ブランディングを右下に入れる
 
 ### Phase 6: 投稿（--post 指定時のみ）
 
@@ -193,7 +224,7 @@ $BU upload "$IDX" "<画像の絶対パス>"
 sleep 3
 ```
 
-#### 投稿確認 → 送信
+#### 投稿確認 → 送信（即時投稿の場合）
 
 ```bash
 # 5. スクリーンショットで確認
@@ -204,11 +235,25 @@ $BU screenshot /tmp/x-quote-rt-preview.png
 
 ```bash
 # 6. ポストボタンのインデックスを特定してクリック
-#    「ポストする」テキストの直前の <button /> が正しいボタン
 BTN=$($BU state 2>&1 | grep -B1 'ポストする$' | head -1 | sed 's/.*\[\([0-9]*\)\].*/\1/')
 $BU click "$BTN"
 sleep 5
 $BU screenshot /tmp/x-quote-rt-done.png
+```
+
+#### 予約投稿の場合
+
+予約投稿する場合は `/publish-x` スキルの Phase 4-5 に従う。
+
+**⚠ 重要**: 予約ダイアログには「確認する」と「予約投稿ポスト」の2つのボタンがある。
+- 「確認する」 → 日時バリデーションのみ（クリック不要）
+- 「予約投稿ポスト」 → **こちらをクリック**してスケジュール確定
+
+「確認する」だけ押してダイアログを閉じると、スケジュール未設定のまま「ポストする」=即時投稿になるので注意。
+
+```bash
+$BU state | grep -B1 '予約投稿ポスト$'
+$BU click <予約投稿ポストのindex>
 ```
 
 **注意**: X の DOM は頻繁に変わる。以下の方法は動作しない:
@@ -216,7 +261,7 @@ $BU screenshot /tmp/x-quote-rt-done.png
 - `$BU keys "Ctrl+Enter"` / `"Meta+Enter"` → コンポーザでは効かない
 - `data-testid="tweetButton"` は `$BU state` に表示されない（shadow DOM 内）
 
-確実な方法は **`$BU state` の出力から `grep -B1 'ポストする$'` でインデックスを取得し `$BU click`** すること。
+確実な方法は **`$BU state` の出力から `grep -B1` でインデックスを取得し `$BU click`** すること。
 
 #### DB 投稿記録
 

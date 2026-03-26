@@ -14,10 +14,26 @@ export interface DonutChartItem {
   color: string;
 }
 
+/** CPI プロファイル用データ */
+export interface CpiProfileItem {
+  label: string;
+  value: number;
+  code: string;
+}
+
+/** CPI ヒートマップ用データ */
+export interface CpiHeatmapItem {
+  x: string;
+  y: string;
+  value: number;
+}
+
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
   | { type: "donut"; data: DonutChartItem[] }
+  | { type: "cpi-profile"; data: CpiProfileItem[] }
+  | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
   | null;
 
 /**
@@ -43,6 +59,12 @@ export async function fetchDbChartDataAction(
   }
   if (componentType === "donut-chart") {
     return fetchDonutData(componentProps, prefCode, isNational);
+  }
+  if (componentType === "cpi-profile") {
+    return fetchCpiProfileData(componentProps, prefCode);
+  }
+  if (componentType === "cpi-heatmap") {
+    return fetchCpiHeatmapData(componentProps, prefCode);
   }
   return null;
 }
@@ -222,4 +244,89 @@ async function fetchSeriesDataForDonut(
   const result = await fetchEstatData(prefCode, params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
   if ("error" in result) return null;
   return result.data;
+}
+
+/**
+ * CPI プロファイル（10大費目別 消費者物価地域差指数）
+ *
+ * componentProps:
+ * - statsDataId: string (例: "0003441258")
+ * - excludeCodes?: string[] (除外コード)
+ * - year?: string (年コード、省略時は最新)
+ */
+async function fetchCpiProfileData(
+  props: Record<string, unknown>,
+  prefCode: string
+): Promise<{ type: "cpi-profile"; data: CpiProfileItem[] } | null> {
+  const statsDataId = props.statsDataId as string;
+  const excludeCodes = new Set((props.excludeCodes as string[]) ?? ["00010", "00120"]);
+  const year = props.year as string | undefined;
+
+  if (!statsDataId) return null;
+
+  try {
+    const { fetchFormattedStats } = await import("@stats47/estat-api/server");
+    const params = {
+      statsDataId,
+      cdArea: prefCode,
+      ...(year && { cdTime: year }),
+    };
+
+    const rawData = await fetchFormattedStats(params as import("@stats47/estat-api/server").GetStatsDataParams);
+    if (rawData.length === 0) return null;
+
+    // 年指定なしの場合は最新年のみフィルタ
+    let filtered = rawData.filter((d) => !excludeCodes.has(d.categoryCode));
+    if (!year) {
+      const latestYear = filtered.reduce((max, d) => d.yearCode > max ? d.yearCode : max, "");
+      filtered = filtered.filter((d) => d.yearCode === latestYear);
+    }
+
+    const result: CpiProfileItem[] = filtered.map((d) => ({
+      label: d.categoryName,
+      value: d.value,
+      code: d.categoryCode,
+    }));
+
+    return result.length > 0 ? { type: "cpi-profile", data: result } : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * CPI ヒートマップ（年×品目の地域差指数推移）
+ *
+ * componentProps:
+ * - statsDataId: string
+ * - excludeCodes?: string[]
+ */
+async function fetchCpiHeatmapData(
+  props: Record<string, unknown>,
+  prefCode: string
+): Promise<{ type: "cpi-heatmap"; data: CpiHeatmapItem[] } | null> {
+  const statsDataId = props.statsDataId as string;
+  const excludeCodes = new Set((props.excludeCodes as string[]) ?? ["00010", "00120"]);
+
+  if (!statsDataId) return null;
+
+  try {
+    const { fetchFormattedStats } = await import("@stats47/estat-api/server");
+    const params = {
+      statsDataId,
+      cdArea: prefCode,
+    };
+
+    const rawData = await fetchFormattedStats(params as import("@stats47/estat-api/server").GetStatsDataParams);
+    if (rawData.length === 0) return null;
+
+    const result: CpiHeatmapItem[] = rawData
+      .filter((d) => !excludeCodes.has(d.categoryCode))
+      .map((d) => ({ x: d.yearName, y: d.categoryName, value: d.value }))
+      .sort((a, b) => a.x.localeCompare(b.x));
+
+    return result.length > 0 ? { type: "cpi-heatmap", data: result } : null;
+  } catch {
+    return null;
+  }
 }

@@ -15,21 +15,9 @@ import { MapPin } from "lucide-react";
 
 import { fetchAllYearsRankingValuesAction } from "@/features/ranking/actions/fetch-all-years-ranking-values";
 import type { ThemeIndicatorData } from "../types";
-import { fetchCpiCategoriesAction, fetchCpiAllYearsAction, type CpiCategoryData, type CpiHeatmapCell } from "../actions/fetch-cpi-categories";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
-import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import { KpiCardClient } from "@/features/stat-charts/components/cards/KpiCard/KpiCardClient";
 import type { ThemeConfig } from "../types";
-
-const HorizontalDivergingBarChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.HorizontalDivergingBarChart),
-  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> }
-);
-
-const CategoryHeatmap = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.CategoryHeatmap),
-  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> }
-);
 
 const D3LineChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
@@ -71,29 +59,6 @@ export function PrefectureStatsPanel({
 }: Props) {
   const [timeSeriesData, setTimeSeriesData] = useState<RankingValue[]>([]);
   const [isPending, startTransition] = useTransition();
-  const [cpiData, setCpiData] = useState<CpiCategoryData[] | null>(null);
-  const [cpiHeatmapData, setCpiHeatmapData] = useState<CpiHeatmapCell[] | null>(null);
-  const [isCpiPending, startCpiTransition] = useTransition();
-
-  const isConsumerPricesTheme = themeKey === "consumer-prices";
-
-  // CPI 品目別データ取得（最新年 + 全年分ヒートマップ）
-  useEffect(() => {
-    if (!isConsumerPricesTheme || !selectedPrefectureCode) {
-      setCpiData(null);
-      setCpiHeatmapData(null);
-      return;
-    }
-    startCpiTransition(async () => {
-      const [latest, allYears] = await Promise.all([
-        fetchCpiCategoriesAction(selectedPrefectureCode),
-        fetchCpiAllYearsAction(selectedPrefectureCode),
-      ]);
-      setCpiData(latest);
-      setCpiHeatmapData(allYears);
-    });
-  }, [isConsumerPricesTheme, selectedPrefectureCode]);
-
   const areaName = useMemo(() => {
     if (!selectedPrefectureCode) return "全国";
     return lookupArea(selectedPrefectureCode)?.areaName ?? "不明";
@@ -241,56 +206,6 @@ export function PrefectureStatsPanel({
           <KpiGrid items={kpiItems} selectedPrefectureCode={selectedPrefectureCode} indicatorDataMap={indicatorDataMap} />
         ) : (
           <KpiGrid items={kpiItems} selectedPrefectureCode={null} indicatorDataMap={indicatorDataMap} />
-        )}
-
-        {/* CPI 品目別プロファイル（consumer-prices テーマのみ） */}
-        {isConsumerPricesTheme && selectedPrefectureCode && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">物価プロファイル</h3>
-            {isCpiPending ? (
-              <Skeleton className="h-[250px] w-full rounded-md" />
-            ) : cpiData && cpiData.length > 0 ? (
-              <>
-                <HorizontalDivergingBarChart
-                  data={cpiData}
-                  baseline={100}
-                  height={Math.max(250, cpiData.length * 30 + 40)}
-                />
-                <p className="text-[10px] text-muted-foreground mt-1">
-                  全国平均=100 / 出典: 小売物価統計調査（構造編）
-                </p>
-              </>
-            ) : (
-              <div className="h-[100px] flex items-center justify-center text-sm text-muted-foreground">
-                物価プロファイルデータがありません
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* CPI 年×品目ヒートマップ（consumer-prices テーマのみ） */}
-        {isConsumerPricesTheme && selectedPrefectureCode && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">物価推移ヒートマップ</h3>
-            {isCpiPending ? (
-              <Skeleton className="h-[280px] w-full rounded-md" />
-            ) : cpiHeatmapData && cpiHeatmapData.length > 0 ? (
-              <>
-                <CategoryHeatmap
-                  data={cpiHeatmapData}
-                  baseline={100}
-                  height={300}
-                />
-                <p className="text-[10px] text-muted-foreground mt-1">
-                  青=全国平均より高い / オレンジ=低い（全国平均=100）
-                </p>
-              </>
-            ) : (
-              <div className="h-[80px] flex items-center justify-center text-sm text-muted-foreground">
-                ヒートマップデータがありません
-              </div>
-            )}
-          </div>
         )}
 
         {/* DB 管理チャート（section が null = トップレベル） */}
