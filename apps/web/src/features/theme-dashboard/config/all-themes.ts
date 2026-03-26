@@ -11,6 +11,7 @@ import {
   TOURISM_SET,
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
+  OCCUPATION_SALARY_SET,
 } from "@stats47/types";
 
 import type { ThemeConfig } from "../types";
@@ -30,4 +31,5 @@ export const ALL_THEMES: ThemeConfig[] = [
   toThemeConfig(TOURISM_SET),
   toThemeConfig(CONSUMER_PRICES_SET),
   toThemeConfig(FOREIGN_RESIDENTS_SET),
+  toThemeConfig(OCCUPATION_SALARY_SET),
 ];

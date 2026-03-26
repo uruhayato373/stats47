@@ -12,6 +12,7 @@ import { EDUCATION_CULTURE_SET } from "./education-culture";
 import { TOURISM_SET } from "./tourism";
 import { CONSUMER_PRICES_SET } from "./consumer-prices";
 import { FOREIGN_RESIDENTS_SET } from "./foreign-residents";
+import { OCCUPATION_SALARY_SET } from "./occupation-salary";
 import { COMPARE_FISCAL_SET } from "./compare-fiscal";
 import { COMPARE_SALARY_SET } from "./compare-salary";
 import { COMPARE_SPENDING_SET } from "./compare-spending";
@@ -35,6 +36,7 @@ export {
   TOURISM_SET,
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
+  OCCUPATION_SALARY_SET,
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
   COMPARE_SPENDING_SET,
@@ -59,6 +61,7 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   TOURISM_SET,
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
+  OCCUPATION_SALARY_SET,
 ];
 
 // ============================================================================

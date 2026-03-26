@@ -126,6 +126,63 @@ const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=${KEY
 
 survey_id は `wage-structure-survey`（surveys テーブル登録済み）を設定すること。
 
+## 年次推移データ（旧テーブル: 2009-2019）
+
+statsDataId: `0003084962`（令和元年以前 都道府県×職種DB）で **2009-2019年** のデータが取得可能。
+現在登録済みの `0003445758`（2020-2023）と合わせると **最大15年間の推移** が描ける。
+
+### 旧テーブルのデータ構造の違い
+
+| 項目 | 新テーブル(0003445758) | 旧テーブル(0003084962) |
+|---|---|---|
+| 性別指定 | `cdCat01` で分離 (01=男女計) | **職種コードに性別が含まれる** (例: 0134=医師男女計) |
+| 職種指定 | `cdCat02` | `cdCat01` |
+| 職種コード体系 | 1031〜9999 | 0001〜0228 |
+| time コード | `2023000000` (10桁) | `20190000000` (11桁、2019年のみ)、他は10桁 |
+| 表章項目(tab) | 同じ (40=月給, 44=賞与) | 同じ |
+
+### 旧 → 新 職種コード対応表（男女計）
+
+| 旧コード | 新コード | 職種名 | ranking_key |
+|---|---|---|---|
+| 0134 | 1121 | 医師 | `doctor-annual-income` |
+| 0135 | 1122 | 歯科医師 | `dentist-annual-income` |
+| 0137 | 1124 | 薬剤師 | `pharmacist-annual-income` |
+| 0138 | 1133 | 看護師 | `nurse-annual-income` |
+| 0139 | 1134 | 准看護師 | `practical-nurse-annual-income` |
+| 0144 | 1163 | 保育士 | `nursery-teacher-annual-income` |
+| 0228 | 1361 | 福祉施設介護員 → 介護職員 | `care-worker-annual-income` |
+| 0226 | 1168 | 介護支援専門員 | （未登録） |
+| 0133 | 1104 | プログラマー → ソフトウェア作成者 | `software-engineer-annual-income` |
+| 0151 | 1196 | 大学教授 | `university-professor-annual-income` |
+| 0150 | 1194 | 高等学校教員 | （未登録） |
+| 0155 | 1224 | デザイナー | `designer-annual-income` |
+| 0165 | 1391 | 調理士 → 飲食物調理従事者 | `cook-annual-income` |
+| 0168 | 1453 | 警備員 | `security-guard-annual-income` |
+| 0172 | 1612 | タクシー運転者 | `taxi-driver-annual-income` |
+| 0213 | 1661 | 大工 | `carpenter-annual-income` |
+
+**注意:** 旧テーブルの職種名と新テーブルの職種名が微妙に異なる場合がある（例: 「福祉施設介護員」→「介護職員（医療・福祉施設等）」）。時系列の連続性は担保されるが、厳密な同一母集団ではない点に留意。
+
+### マージ手順
+
+```javascript
+// 1. 旧テーブルからデータ取得（cat01 に旧職種コードを指定）
+const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=${KEY}&statsDataId=0003084962&cdCat01=0134&limit=100000`;
+// 2. tab:40(月給) × 12 + tab:44(賞与) で年収計算（計算式は新テーブルと同じ）
+// 3. 既存の ranking_data に INSERT（category_code は同じ ranking_key を使用）
+// 4. ranking_items の available_years を更新
+```
+
+### テーマページへの活用案
+
+「職業別年収」テーマページを作成する場合、15年推移チャートが最大の差別化要素になる:
+- 医師年収の推移（2009-2023）— コロナ前後の変化
+- 看護師 vs 介護職員の年収格差推移 — 処遇改善の効果検証
+- IT人材（SE）の年収推移 — DX需要との相関
+- トラック運転手の年収推移 — 2024年問題の文脈
+- 保育士年収の推移 — 処遇改善加算の効果
+
 ## 活用シーン
 
 | シーン | 使い方 |
