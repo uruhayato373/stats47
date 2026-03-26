@@ -7,19 +7,32 @@ import { toLineChartData } from "@/features/stat-charts/adapters/toLineChartData
 import { toMixedChartData } from "@/features/stat-charts/adapters/toMixedChartData";
 import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
 
+/** ドーナツチャート用データ */
+export interface DonutChartItem {
+  name: string;
+  value: number;
+  color: string;
+}
+
+type ChartResult =
+  | { type: "line"; data: LineChartData }
+  | { type: "mixed"; data: MixedChartData }
+  | { type: "donut"; data: DonutChartItem[] }
+  | null;
+
 /**
  * DB 管理チャート用 Server Action
  *
- * chart_definitions.component_props をそのまま受け取り、
+ * page_components.component_props をそのまま受け取り、
  * stat-charts パイプラインでデータを取得・変換する。
  *
- * Single Source of Truth: chart_definitions テーブルの component_props
+ * Single Source of Truth: page_components テーブルの component_props
  */
 export async function fetchDbChartDataAction(
   componentType: string,
   componentProps: Record<string, unknown>,
   prefCode: string
-): Promise<{ type: "line"; data: LineChartData } | { type: "mixed"; data: MixedChartData } | null> {
+): Promise<ChartResult> {
   const isNational = prefCode === "00000";
 
   if (componentType === "line-chart") {
@@ -27,6 +40,9 @@ export async function fetchDbChartDataAction(
   }
   if (componentType === "mixed-chart") {
     return fetchMixedData(componentProps, prefCode, isNational);
+  }
+  if (componentType === "donut-chart") {
+    return fetchDonutData(componentProps, prefCode, isNational);
   }
   return null;
 }
@@ -144,4 +160,66 @@ async function fetchAllAndAverage(
   } catch {
     return null;
   }
+}
+
+/**
+ * 汎用ドーナツチャートデータ取得
+ *
+ * componentProps:
+ * - categories: Array<{ code: string; label: string; color: string }>
+ *   各カテゴリの e-Stat cdCat01 コード、表示名、色
+ * - statsDataId: string
+ * - topN?: number (デフォルト 9 — 上位N件 + その他)
+ */
+async function fetchDonutData(
+  props: Record<string, unknown>,
+  prefCode: string,
+  isNational: boolean
+): Promise<{ type: "donut"; data: DonutChartItem[] } | null> {
+  const categories = props.categories as Array<{ code: string; label: string; color: string }> | undefined;
+  const statsDataId = props.statsDataId as string | undefined;
+  const topN = (props.topN as number) ?? 9;
+
+  if (!categories || !statsDataId) return null;
+
+  // 各カテゴリの値を並列取得
+  const results = await Promise.all(
+    categories.map(async (cat) => {
+      const data = isNational
+        ? await fetchAllAndAverage({ statsDataId, cdCat01: cat.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
+        : await fetchSeriesDataForDonut({ statsDataId, cdCat01: cat.code }, prefCode);
+      if (!data || data.length === 0) return null;
+
+      // 最新年度の値を取得
+      const sorted = [...data].sort((a, b) => b.yearCode.localeCompare(a.yearCode));
+      return {
+        name: cat.label,
+        value: sorted[0].value,
+        color: cat.color,
+      };
+    })
+  );
+
+  const valid = results.filter((r): r is DonutChartItem => r !== null && r.value > 0);
+  if (valid.length === 0) return null;
+
+  // 降順ソート → 上位N + その他
+  valid.sort((a, b) => b.value - a.value);
+  if (valid.length <= topN + 1) {
+    return { type: "donut", data: valid };
+  }
+
+  const top = valid.slice(0, topN);
+  const otherValue = valid.slice(topN).reduce((sum, i) => sum + i.value, 0);
+  top.push({ name: "その他", value: otherValue, color: "#d4d4d4" });
+  return { type: "donut", data: top };
+}
+
+async function fetchSeriesDataForDonut(
+  params: { statsDataId: string; cdCat01: string },
+  prefCode: string
+): Promise<StatsSchema[] | null> {
+  const result = await fetchEstatData(prefCode, params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+  if ("error" in result) return null;
+  return result.data;
 }

@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import type { PageComponent } from "@/features/stat-charts/services/load-page-components";
-import { fetchDbChartDataAction } from "../actions/fetch-db-chart-data";
+import { fetchDbChartDataAction, type DonutChartItem } from "../actions/fetch-db-chart-data";
 import { fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions/fetch-population-pyramid";
 import { fetchPopulationCompositionAction, type AgeCompositionResult } from "../actions/fetch-population-composition";
 import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
@@ -18,6 +18,11 @@ const D3LineChart = dynamic(
 
 const D3MixedChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.MixedChart),
+  { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
+);
+
+const DonutChart = dynamic(
+  () => import("@stats47/visualization/d3").then((mod) => mod.DonutChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
 );
 
@@ -41,6 +46,7 @@ interface Props {
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
+  | { type: "donut"; data: DonutChartItem[] }
   | { type: "pyramid"; data: PopulationPyramidResult }
   | { type: "composition"; data: AgeCompositionResult }
   | null;
@@ -60,7 +66,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     startTransition(async () => {
       const { componentType } = chart;
 
-      if (componentType === "line-chart" || componentType === "mixed-chart") {
+      if (componentType === "line-chart" || componentType === "mixed-chart" || componentType === "donut-chart") {
         const result = await fetchDbChartDataAction(componentType, chart.componentProps, prefCode);
         setChartResult(result);
       } else if (componentType === "pyramid-chart") {
@@ -119,6 +125,32 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
             leftUnit={data.leftUnit ?? ""}
             rightUnit={data.rightUnit ?? ""}
           />
+        </div>
+        {source}
+      </>
+    );
+  }
+
+  if (chartResult.type === "donut") {
+    const { data } = chartResult;
+    if (data.length === 0) {
+      return <NoData message="構成データがありません" />;
+    }
+    const total = data.reduce((sum, d) => sum + d.value, 0);
+    const topItem = data[0];
+    const topPct = total > 0 ? ((topItem.value / total) * 100).toFixed(1) : "0";
+    return (
+      <>
+        <div className="h-[200px]">
+          <DonutChart data={data.map((d) => ({ ...d }))} centerText={`${topPct}%`} />
+        </div>
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-2">
+          {data.slice(0, 5).map((d) => (
+            <div key={d.name} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
+              {d.name} {total > 0 ? ((d.value / total) * 100).toFixed(1) : 0}%
+            </div>
+          ))}
         </div>
         {source}
       </>
