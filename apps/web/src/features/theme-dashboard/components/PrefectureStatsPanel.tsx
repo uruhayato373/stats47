@@ -18,11 +18,6 @@ import type { ThemeIndicatorData } from "../types";
 import { fetchCpiCategoriesAction, fetchCpiAllYearsAction, type CpiCategoryData, type CpiHeatmapCell } from "../actions/fetch-cpi-categories";
 import { fetchIndustryStructureAction, type IndustryStructureData } from "../actions/fetch-industry-structure";
 import { fetchWorkstyleDataAction, type WorkstyleBarItem } from "../actions/fetch-workstyle-data";
-import { fetchPopulationCompositionAction, type AgeCompositionResult } from "../actions/fetch-population-composition";
-import { AgeCompositionChart } from "./AgeCompositionChart";
-import { PopulationPyramidChart } from "./PopulationPyramidChart";
-import { BirthDeathRateLineChart } from "./BirthDeathRateLineChart";
-import { NaturalSocialRateLineChart } from "./NaturalSocialRateLineChart";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import { KpiCardClient } from "@/features/stat-charts/components/cards/KpiCard/KpiCardClient";
@@ -89,7 +84,6 @@ export function PrefectureStatsPanel({
 
   const isConsumerPricesTheme = themeKey === "consumer-prices";
   const isLocalEconomyTheme = themeKey === "local-economy";
-  const isPopulationDynamicsTheme = themeKey === "population-dynamics" || themeKey === "aging-society";
 
   // 産業構造ドーナツチャート（local-economy テーマのみ）
   const [industryData, setIndustryData] = useState<IndustryStructureData[] | null>(null);
@@ -105,21 +99,6 @@ export function PrefectureStatsPanel({
       setIndustryData(result);
     });
   }, [isLocalEconomyTheme, selectedPrefectureCode]);
-
-  // 人口構成チャート（population-dynamics / aging-society テーマのみ）
-  const [popCompositionResult, setPopCompositionResult] = useState<AgeCompositionResult | null>(null);
-  const [isPopCompositionPending, startPopCompositionTransition] = useTransition();
-
-  useEffect(() => {
-    if (!isPopulationDynamicsTheme) {
-      setPopCompositionResult(null);
-      return;
-    }
-    startPopCompositionTransition(async () => {
-      const result = await fetchPopulationCompositionAction(selectedPrefectureCode);
-      setPopCompositionResult(result);
-    });
-  }, [isPopulationDynamicsTheme, selectedPrefectureCode]);
 
   // 働き方チャート（local-economy テーマのみ）
   const [workstyleData, setWorkstyleData] = useState<WorkstyleBarItem[] | null>(null);
@@ -420,52 +399,6 @@ export function PrefectureStatsPanel({
           </div>
         )}
 
-        {/* 人口構成チャート（population-dynamics / aging-society テーマのみ） */}
-        {isPopulationDynamicsTheme && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">年齢3区分人口構成の推移</h3>
-            <AgeCompositionChart
-              prefData={popCompositionResult?.prefData ?? null}
-              nationalData={popCompositionResult?.nationalData ?? null}
-              prefName={selectedPrefectureCode ? areaName : undefined}
-              loading={isPopCompositionPending}
-            />
-          </div>
-        )}
-
-        {/* 人口ピラミッド（population-dynamics / aging-society テーマ） */}
-        {isPopulationDynamicsTheme && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">人口ピラミッド</h3>
-            <PopulationPyramidChart
-              prefCode={selectedPrefectureCode ?? "00000"}
-              prefName={areaName}
-            />
-          </div>
-        )}
-
-        {/* 出生率・死亡率の推移チャート（population-dynamics / aging-society テーマ） */}
-        {isPopulationDynamicsTheme && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">出生率・死亡率の推移</h3>
-            <BirthDeathRateLineChart
-              prefCode={selectedPrefectureCode ?? "00000"}
-              prefName={areaName}
-            />
-          </div>
-        )}
-
-        {/* 自然増減率・社会増減率の推移チャート（population-dynamics / aging-society テーマ） */}
-        {isPopulationDynamicsTheme && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">自然増減率・社会増減率の推移</h3>
-            <NaturalSocialRateLineChart
-              prefCode={selectedPrefectureCode ?? "00000"}
-              prefName={areaName}
-            />
-          </div>
-        )}
-
         {/* DB 管理チャート（section が null = トップレベル） */}
         {pageCharts
           ?.filter((c) => c.section === null)
@@ -480,8 +413,8 @@ export function PrefectureStatsPanel({
             </div>
           ))}
 
-        {/* 推移チャート（population-dynamics / aging-society テーマでは専用チャートがあるのでスキップ） */}
-        {selectedPrefectureCode && !isPopulationDynamicsTheme && (
+        {/* 推移チャート（DB チャートがトップレベルにある場合はスキップ） */}
+        {selectedPrefectureCode && (!pageCharts || pageCharts.filter(c => c.section === null).length === 0) && (
           <div className="border-t border-border pt-3">
             <h3 className="text-sm font-medium mb-2">
               {currentIndicator?.rankingItem.title}の推移
