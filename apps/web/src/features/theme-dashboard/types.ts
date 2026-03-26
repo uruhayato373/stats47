@@ -74,8 +74,8 @@ export interface ThemeDashboardClientProps {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** TopoJSON */
   topology: TopoJSONTopology | null;
-  /** DB 管理チャート（chart_definitions + page_chart_assignments） */
-  pageCharts?: import("@/features/stat-charts/services/load-page-charts").PageChart[];
+  /** DB 管理チャート（page_components + page_component_assignments） */
+  pageCharts?: import("@/features/stat-charts/services/load-page-components").PageComponent[];
 }
 
 // ============================================================================

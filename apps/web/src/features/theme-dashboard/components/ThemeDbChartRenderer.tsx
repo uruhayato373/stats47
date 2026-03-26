@@ -5,7 +5,7 @@ import { useEffect, useState, useTransition } from "react";
 import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import type { PageChart } from "@/features/stat-charts/services/load-page-charts";
+import type { PageComponent } from "@/features/stat-charts/services/load-page-components";
 import { fetchDbChartDataAction } from "../actions/fetch-db-chart-data";
 import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
 
@@ -20,7 +20,7 @@ const D3MixedChart = dynamic(
 );
 
 interface Props {
-  chart: PageChart;
+  chart: PageComponent;
   prefCode: string;
   prefName: string;
 }
@@ -44,7 +44,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
       const result = await fetchDbChartDataAction(chart.componentType, chart.componentProps, prefCode);
       setChartResult(result);
     });
-  }, [chart.chartKey, chart.componentType, prefCode]);
+  }, [chart.componentKey, chart.componentType, prefCode]);
 
   if (isPending || !chartResult) {
     return <Skeleton className="h-[200px] w-full rounded-md" />;

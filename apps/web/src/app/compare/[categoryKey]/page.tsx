@@ -10,7 +10,6 @@ import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { fetchPrefectures } from "@stats47/area";
 import { listCategories } from "@/features/category/server";
-import { getComparisonRepository } from "@stats47/database/server";
 import { unwrap } from "@stats47/types";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -109,25 +108,45 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
     // 市区町村コロプレスマップデータ（population カテゴリ）
     const choroplethMapData = await fetchChoroplethMapData(categoryKey, areaCodes);
 
-    // DB 駆動の比較コンポーネント
-    // KPI は comparison_components、チャートは chart_definitions (Single Source of Truth)
-    const rawComponents = areaCodes.length === 2
-        ? unwrap(await getComparisonRepository().listComponentsByCategory(categoryKey, "prefecture"))
+    // loadPageComponents で全コンポーネントを一括取得（KPI + チャート）
+    const { loadPageComponents } = await import("@/features/stat-charts/services/load-page-components");
+    const allPageComponents = areaCodes.length === 2
+        ? await loadPageComponents("area-category", categoryKey)
         : [];
 
-    // chart_definitions からチャートを取得
-    const { loadPageCharts } = await import("@/features/stat-charts/services/load-page-charts");
-    const pageCharts = areaCodes.length === 2
-        ? await loadPageCharts("area-category", categoryKey)
-        : [];
+    // KPI とチャートを分離
+    const kpiPageComponents = allPageComponents.filter(
+        (c) => c.componentType === "kpi-card" || c.componentType === "attribute-matrix"
+    );
+    const chartPageComponents = allPageComponents.filter(
+        (c) => c.componentType !== "kpi-card" && c.componentType !== "attribute-matrix"
+    );
 
-    // KPI 等（チャート以外）は comparison_components から
-    const CHART_TYPES = new Set(["line-chart", "mixed-chart", "stacked-area", "bar-chart", "bar-chart-race", "diverging-bar-chart", "radar-chart", "pyramid-chart", "composition-chart", "ranking-chart"]);
-    const kpiComponents = rawComponents.filter((c) => !CHART_TYPES.has(c.componentType));
+    // KPI → page_components 形式に変換
+    const kpiComponents = kpiPageComponents.map((c) => ({
+        id: c.componentKey,
+        categoryKey,
+        componentType: c.componentType,
+        displayOrder: c.sortOrder,
+        gridColumnSpan: c.gridColumnSpan,
+        gridColumnSpanTablet: c.gridColumnSpanTablet,
+        gridColumnSpanSm: c.gridColumnSpanSm,
+        title: c.title,
+        componentProps: JSON.stringify(c.componentProps),
+        rankingLink: c.rankingLink,
+        sectionLabel: c.section,
+        isActive: true,
+        sourceLink: c.sourceLink,
+        sourceName: c.sourceName,
+        areaType: "prefecture" as const,
+        dataSource: c.dataSource,
+        createdAt: null,
+        updatedAt: null,
+    }));
 
-    // chart_definitions → comparison_components 形式に変換
-    const chartComponents = pageCharts.map((c) => ({
-        id: c.chartKey,
+    // チャート → page_components 形式に変換
+    const chartComponents = chartPageComponents.map((c) => ({
+        id: c.componentKey,
         categoryKey,
         componentType: c.componentType,
         displayOrder: c.sortOrder,

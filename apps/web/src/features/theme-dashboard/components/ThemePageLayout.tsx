@@ -12,7 +12,7 @@ import {
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
-import { loadPageCharts } from "@/features/stat-charts/services/load-page-charts";
+import { loadPageComponents } from "@/features/stat-charts/services/load-page-components";
 
 interface Props {
   theme: ThemeConfig;
@@ -26,7 +26,7 @@ interface Props {
  * chart_definitions から DB 管理チャートを取得してクライアントに渡す。
  */
 export async function ThemePageLayout({ theme, data }: Props) {
-  const pageCharts = await loadPageCharts("theme", theme.themeKey);
+  const pageCharts = await loadPageComponents("theme", theme.themeKey);
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
       <Breadcrumb className="mb-4">

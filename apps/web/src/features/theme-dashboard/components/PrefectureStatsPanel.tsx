@@ -61,8 +61,8 @@ interface Props {
   themeKey?: string;
   /** テーマ設定（config-driven チャート用） */
   themeConfig?: ThemeConfig;
-  /** DB 管理チャート（chart_definitions） */
-  pageCharts?: import("@/features/stat-charts/services/load-page-charts").PageChart[];
+  /** DB 管理チャート（page_components） */
+  pageCharts?: import("@/features/stat-charts/services/load-page-components").PageComponent[];
 }
 
 /**
@@ -261,7 +261,7 @@ export function PrefectureStatsPanel({
                   {pageCharts
                     ?.filter((c) => c.section === tab.label)
                     .map((chart) => (
-                      <div key={chart.chartKey}>
+                      <div key={chart.componentKey}>
                         <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
                         <ThemeDbChartRenderer
                           chart={chart}
@@ -448,7 +448,7 @@ export function PrefectureStatsPanel({
         {pageCharts
           ?.filter((c) => c.section === null)
           .map((chart) => (
-            <div key={chart.chartKey} className="border-t border-border pt-3">
+            <div key={chart.componentKey} className="border-t border-border pt-3">
               <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
               <ThemeDbChartRenderer
                 chart={chart}

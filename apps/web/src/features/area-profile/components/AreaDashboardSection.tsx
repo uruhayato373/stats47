@@ -1,11 +1,7 @@
 import type { Area } from "@stats47/area";
 import type { Category } from "@stats47/category";
-import { getComparisonRepository } from "@stats47/database/server";
-import { isOk } from "@stats47/types";
-import { logger } from "@/lib/logger";
 import { DashboardGridLayout } from "@/features/stat-charts";
-import { toDashboardComponent } from "@/features/stat-charts/server";
-import { loadPageCharts } from "@/features/stat-charts/services/load-page-charts";
+import { loadPageComponents, type PageComponent } from "@/features/stat-charts/services/load-page-components";
 import type { DashboardComponent } from "@/features/stat-charts/types";
 import { Suspense } from "react";
 import { CityRankingPreview } from "./CityRankingPreview";
@@ -19,53 +15,43 @@ interface Props {
 }
 
 export async function AreaDashboardSection({ area, categoryKey, categories, basePath, selectedRankingKey }: Props) {
-  const result = await getComparisonRepository().listComponentsByCategory(
-    categoryKey,
-    area.areaType === "national" ? undefined : area.areaType
+  // loadPageComponents で KPI もチャートも一括取得
+  const allComponents = await loadPageComponents("area-category", categoryKey);
+
+  // KPI とチャートを分離
+  const kpiPageComponents = allComponents.filter(
+    (c) => c.componentType === "kpi-card" || c.componentType === "attribute-matrix"
   );
-  if (!isOk(result)) {
-    logger.error({ error: result.error, categoryKey, areaType: area.areaType }, "AreaDashboardSection: コンポーネント取得失敗");
-    return (
-      <section className="space-y-6">
-        <div className="bg-muted/50 rounded-lg p-8 text-center">
-          <p className="text-muted-foreground">
-            データの読み込みに失敗しました。時間を置いて再度お試しください。
-          </p>
-        </div>
-      </section>
-    );
-  }
-  const components = result.data;
+  const chartPageComponents = allComponents.filter(
+    (c) => c.componentType !== "kpi-card" && c.componentType !== "attribute-matrix"
+  );
 
-  // KPI は comparison_components から取得（変更なし）
-  const kpiComponents = components
-    .filter((c) => c.componentType === "kpi-card" || c.componentType === "multi-stats-card" || c.componentType === "stats-table" || c.componentType === "definitions-card" || c.componentType === "slide-presentation")
-    .map((c) => toDashboardComponent(c));
+  const pageComponentToDashboard = (c: PageComponent, propsOverride?: Record<string, unknown>): DashboardComponent => ({
+    id: c.componentKey,
+    componentType: c.componentType,
+    componentProps: JSON.stringify(propsOverride ?? c.componentProps),
+    title: c.title,
+    sortOrder: c.sortOrder,
+    gridColumnSpan: c.gridColumnSpan,
+    gridColumnSpanTablet: c.gridColumnSpanTablet,
+    gridColumnSpanSm: c.gridColumnSpanSm,
+    gridColumnSpanMobile: null,
+    sourceName: c.sourceName,
+    sourceLink: c.sourceLink,
+    rankingLink: c.rankingLink,
+    dataSource: c.dataSource,
+  });
 
-  // チャートは chart_definitions (Single Source of Truth) から取得
-  const pageCharts = await loadPageCharts("area-category", categoryKey);
-  const dashboardComponents: DashboardComponent[] = pageCharts.map((c) => {
+  const kpiComponents = kpiPageComponents.map((c) => pageComponentToDashboard(c));
+
+  const dashboardComponents: DashboardComponent[] = chartPageComponents.map((c) => {
     // エリア単独ページでは sync モードを auto に切替
     const props = { ...c.componentProps };
     const yAxisConfig = props.yAxisConfig as { mode?: string } | undefined;
     if (yAxisConfig?.mode === "sync") {
       props.yAxisConfig = { ...yAxisConfig, mode: "auto" };
     }
-    return {
-      id: c.chartKey,
-      componentType: c.componentType,
-      componentProps: JSON.stringify(props),
-      title: c.title,
-      sortOrder: c.sortOrder,
-      gridColumnSpan: c.gridColumnSpan,
-      gridColumnSpanTablet: c.gridColumnSpanTablet,
-      gridColumnSpanSm: c.gridColumnSpanSm,
-      gridColumnSpanMobile: null,
-      sourceName: c.sourceName,
-      sourceLink: c.sourceLink,
-      rankingLink: c.rankingLink,
-      dataSource: c.dataSource,
-    };
+    return pageComponentToDashboard(c, props);
   });
 
   return (

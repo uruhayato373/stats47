@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { BarChart3 } from "lucide-react";
 
-import { loadPageCharts, type PageChart } from "@/features/stat-charts/services/load-page-charts";
+import { loadPageComponents, type PageComponent } from "@/features/stat-charts/services/load-page-components";
 import { DashboardComponentRenderer } from "@/features/stat-charts/components/DashboardComponentRenderer";
 
 interface Props {
@@ -12,15 +12,15 @@ interface Props {
 /**
  * エリアページのチャートセクション
  *
- * chart_definitions + page_chart_assignments から DB 管理されたチャートを取得し、
+ * page_components + page_component_assignments から DB 管理されたチャートを取得し、
  * DashboardComponentRenderer で描画する。
  */
 export async function AreaChartSection({ areaCode, areaName }: Props) {
-  const charts = await loadPageCharts("area", areaCode);
+  const charts = await loadPageComponents("area", areaCode);
   if (charts.length === 0) return null;
 
   // section でグルーピング
-  const sections = new Map<string, PageChart[]>();
+  const sections = new Map<string, PageComponent[]>();
   for (const chart of charts) {
     const key = chart.section ?? "その他";
     const list = sections.get(key) ?? [];
@@ -42,11 +42,11 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
           </CardHeader>
           <CardContent className="space-y-4">
             {sectionCharts.map((chart) => (
-              <div key={chart.chartKey}>
+              <div key={chart.componentKey}>
                 <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
                 <DashboardComponentRenderer
                   component={{
-                    id: chart.chartKey,
+                    id: chart.componentKey,
                     componentType: chart.componentType,
                     componentProps: JSON.stringify(chart.componentProps),
                     title: chart.title,

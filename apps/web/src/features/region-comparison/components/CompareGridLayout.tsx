@@ -33,7 +33,7 @@ interface CompareGridLayoutProps {
 
 /**
  * 比較コンポーネントを地域ごとに左右に並べて描画するサーバーコンポーネント。
- * DB の comparison_components → DashboardComponentRenderer パイプラインで描画。
+ * DB の page_components → DashboardComponentRenderer パイプラインで描画。
  *
  * チャート系コンポーネントは選択中の全地域データから共有 Y 軸ドメインを事前算出し、
  * 東京と大阪など異なるスケールの地域でもグラフのスケールが揃う。

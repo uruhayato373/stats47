@@ -4,7 +4,7 @@ export * from "./area_profile_rankings";
 export * from "./article_tags";
 export * from "./articles";
 export * from "./categories";
-export * from "./chart_definitions";
+export * from "./page_components";
 export * from "./comparison";
 export * from "./correlation_analysis";
 export * from "./estat_metainfo";
