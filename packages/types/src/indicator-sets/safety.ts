@@ -57,10 +57,10 @@ export const SAFETY_SET: IndicatorSet = {
           type: "mixed",
           label: "刑法犯認知件数と検挙率の推移",
           columns: [
-            { rankingKey: "criminal-recognition-count", name: "認知件数", color: "#ef4444" },
+            { rankingKey: "criminal-recognition-count", name: "認知件数", color: "#f59e0b" },
           ],
           lines: [
-            { rankingKey: "criminal-arrest-rate", name: "検挙率", color: "#3b82f6" },
+            { rankingKey: "criminal-arrest-rate", name: "検挙率", color: "#22c55e" },
           ],
           leftUnit: "件",
           rightUnit: "%",
