@@ -85,7 +85,7 @@ async function fetchAllSeries(
       if (isNational) {
         return fetchAllAndAverage(params as import("@stats47/estat-api/server").GetStatsDataParams);
       }
-      const result = await fetchEstatData(prefCode, params as import("@stats47/estat-api/server").GetStatsDataParams);
+      const result = await fetchEstatData(prefCode, params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       if ("error" in result) return null;
       return result.data;
     })
