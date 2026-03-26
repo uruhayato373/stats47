@@ -31,7 +31,7 @@ export const MARGIN = {
   /** 時系列チャート（折れ線・積み上げ面等） */
   timeSeries: { top: 40 / 500, right: 20 / 800, bottom: 50 / 500, left: 55 / 800 },
   /** 2軸チャート（MixedChart — 左右Y軸のラベル領域を広めに） */
-  dualAxis: { top: 20 / 500, right: 60 / 800, bottom: 50 / 500, left: 60 / 800 },
+  dualAxis: { top: 20 / 500, right: 70 / 800, bottom: 50 / 500, left: 70 / 800 },
   /** 横棒グラフ（左にラベル領域が広い） */
   horizontal: { top: 30 / 500, right: 30 / 800, bottom: 30 / 500, left: 100 / 800 },
   /** コンパクト（縦棒グラフ等） */
