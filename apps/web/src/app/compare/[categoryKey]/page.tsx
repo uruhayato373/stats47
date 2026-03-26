@@ -110,9 +110,44 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
     const choroplethMapData = await fetchChoroplethMapData(categoryKey, areaCodes);
 
     // DB 駆動の比較コンポーネント
-    const comparisonComponents = areaCodes.length === 2
+    // KPI は comparison_components、チャートは chart_definitions (Single Source of Truth)
+    const rawComponents = areaCodes.length === 2
         ? unwrap(await getComparisonRepository().listComponentsByCategory(categoryKey, "prefecture"))
         : [];
+
+    // chart_definitions からチャートを取得
+    const { loadPageCharts } = await import("@/features/stat-charts/services/load-page-charts");
+    const pageCharts = areaCodes.length === 2
+        ? await loadPageCharts("area-category", categoryKey)
+        : [];
+
+    // KPI 等（チャート以外）は comparison_components から
+    const CHART_TYPES = new Set(["line-chart", "mixed-chart", "stacked-area", "bar-chart", "bar-chart-race", "diverging-bar-chart", "radar-chart", "pyramid-chart", "composition-chart", "ranking-chart"]);
+    const kpiComponents = rawComponents.filter((c) => !CHART_TYPES.has(c.componentType));
+
+    // chart_definitions → comparison_components 形式に変換
+    const chartComponents = pageCharts.map((c) => ({
+        id: c.chartKey,
+        categoryKey,
+        componentType: c.componentType,
+        displayOrder: c.sortOrder,
+        gridColumnSpan: c.gridColumnSpan,
+        gridColumnSpanTablet: c.gridColumnSpanTablet,
+        gridColumnSpanSm: c.gridColumnSpanSm,
+        title: c.title,
+        componentProps: JSON.stringify(c.componentProps),
+        rankingLink: c.rankingLink,
+        sectionLabel: c.section,
+        isActive: true,
+        sourceLink: c.sourceLink,
+        sourceName: c.sourceName,
+        areaType: "prefecture" as const,
+        dataSource: c.dataSource,
+        createdAt: null,
+        updatedAt: null,
+    }));
+
+    const comparisonComponents = [...kpiComponents, ...chartComponents];
 
     return (
         <div className="container mx-auto px-4 py-6">
