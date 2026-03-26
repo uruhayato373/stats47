@@ -16,7 +16,9 @@ interface Props {
 
 export async function AreaDashboardSection({ area, categoryKey, categories, basePath, selectedRankingKey }: Props) {
   // loadPageComponents で KPI もチャートも一括取得
-  const allComponents = await loadPageComponents("area-category", categoryKey);
+  // city の場合は city-category、prefecture の場合は area-category から取得
+  const pageType = area.areaType === "city" ? "city-category" : "area-category";
+  const allComponents = await loadPageComponents(pageType, categoryKey);
 
   // KPI とチャートを分離
   const kpiPageComponents = allComponents.filter(
