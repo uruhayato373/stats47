@@ -15,7 +15,7 @@ import type { Metadata } from "next";
 import { CategorySelect } from "@/features/area-profile";
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard } from "@/features/ads";
+import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -190,7 +190,8 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                         selectedRankingKey={ranking}
                     />
 
-                    {/* ふるさと納税 */}
+                    {/* アフィリエイト */}
+                    <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
                 </main>
             </div>

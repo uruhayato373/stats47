@@ -21,7 +21,7 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard } from "@/features/ads";
+import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
 import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
 import {
     Breadcrumb,
@@ -194,6 +194,7 @@ export default async function AreaCategoryPage({ params, searchParams }: PagePro
 
                     {/* 関連エリア + ふるさと納税 */}
                     <RelatedAreas areaCode={areaCode} />
+                    <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
                 </main>
             </div>

@@ -2,6 +2,7 @@
 export { AdSenseAdWrapper } from "./components/AdSenseAdWrapper";
 export { BannerAd } from "./components/BannerAd";
 export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
+export { AreaBannerAd } from "./components/AreaBannerAd";
 export { TrackedAffiliateLink } from "./components/tracked-affiliate-link";
 
 // Constants & Types

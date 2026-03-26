@@ -12,7 +12,7 @@ import {
 } from "@/features/area-profile";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 import { getAreaProfileAction } from "@/features/area-profile/server";
-import { FurusatoNozeiCard } from "@/features/ads";
+import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -199,7 +199,8 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     {/* 関連エリア */}
                     <RelatedAreas areaCode={areaCode} />
 
-                    {/* ふるさと納税 */}
+                    {/* アフィリエイト */}
+                    <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
                 </main>
             </div>

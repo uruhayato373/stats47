@@ -7,5 +7,6 @@ export type AffiliateLocationCode =
   | "sidebar-bottom"
   | "sidebar-sticky"
   | "sidebar-inline"
+  | "area-sidebar"
   | "blog-bottom"
   | "footer";
