@@ -15,7 +15,8 @@ import type { Metadata } from "next";
 import { CategorySelect } from "@/features/area-profile";
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
 import {
     Breadcrumb,
     BreadcrumbItem,

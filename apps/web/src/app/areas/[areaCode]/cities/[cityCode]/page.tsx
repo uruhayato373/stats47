@@ -17,7 +17,8 @@ import {
 
 import { CategoryNavGrid } from "@/features/area-profile";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
 import {
     Breadcrumb,
     BreadcrumbItem,

@@ -2,7 +2,8 @@
 export { AdSenseAdWrapper } from "./components/AdSenseAdWrapper";
 export { BannerAd } from "./components/BannerAd";
 export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
-export { AreaBannerAd } from "./components/AreaBannerAd";
+// AreaBannerAd は server-only 依存のため barrel export しない
+// 各ページから直接インポートすること: @/features/ads/components/AreaBannerAd
 export { TrackedAffiliateLink } from "./components/tracked-affiliate-link";
 
 // Constants & Types

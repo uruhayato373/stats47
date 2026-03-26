@@ -21,7 +21,8 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard, AreaBannerAd } from "@/features/ads";
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
 import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
 import {
     Breadcrumb,
