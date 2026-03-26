@@ -5,6 +5,8 @@ import { isOk } from "@stats47/types";
 import { logger } from "@/lib/logger";
 import { DashboardGridLayout } from "@/features/stat-charts";
 import { toDashboardComponent } from "@/features/stat-charts/server";
+import { loadPageCharts } from "@/features/stat-charts/services/load-page-charts";
+import type { DashboardComponent } from "@/features/stat-charts/types";
 import { Suspense } from "react";
 import { CityRankingPreview } from "./CityRankingPreview";
 
@@ -35,22 +37,36 @@ export async function AreaDashboardSection({ area, categoryKey, categories, base
   }
   const components = result.data;
 
-  // エリア単独ページでは sync モード（全都道府県スケール）を auto（自エリアスケール）に切替
-  const allComponents = components.map((comp) => {
-    if (comp.componentProps) {
-      try {
-        const props = JSON.parse(comp.componentProps) as Record<string, unknown>;
-        const yAxisConfig = props.yAxisConfig as { mode?: string } | undefined;
-        if (yAxisConfig?.mode === "sync") {
-          props.yAxisConfig = { ...yAxisConfig, mode: "auto" };
-          return toDashboardComponent({ ...comp, componentProps: JSON.stringify(props) });
-        }
-      } catch { /* ignore parse errors */ }
+  // KPI は comparison_components から取得（変更なし）
+  const kpiComponents = components
+    .filter((c) => c.componentType === "kpi-card" || c.componentType === "multi-stats-card" || c.componentType === "stats-table" || c.componentType === "definitions-card" || c.componentType === "slide-presentation")
+    .map((c) => toDashboardComponent(c));
+
+  // チャートは chart_definitions (Single Source of Truth) から取得
+  const pageCharts = await loadPageCharts("area-category", categoryKey);
+  const dashboardComponents: DashboardComponent[] = pageCharts.map((c) => {
+    // エリア単独ページでは sync モードを auto に切替
+    const props = { ...c.componentProps };
+    const yAxisConfig = props.yAxisConfig as { mode?: string } | undefined;
+    if (yAxisConfig?.mode === "sync") {
+      props.yAxisConfig = { ...yAxisConfig, mode: "auto" };
     }
-    return toDashboardComponent(comp);
+    return {
+      id: c.chartKey,
+      componentType: c.componentType,
+      componentProps: JSON.stringify(props),
+      title: c.title,
+      sortOrder: c.sortOrder,
+      gridColumnSpan: c.gridColumnSpan,
+      gridColumnSpanTablet: c.gridColumnSpanTablet,
+      gridColumnSpanSm: c.gridColumnSpanSm,
+      gridColumnSpanMobile: null,
+      sourceName: c.sourceName,
+      sourceLink: c.sourceLink,
+      rankingLink: c.rankingLink,
+      dataSource: c.dataSource,
+    };
   });
-  const kpiComponents = allComponents.filter((c) => c.componentType === "kpi-card");
-  const dashboardComponents = allComponents.filter((c) => c.componentType !== "kpi-card");
 
   return (
     <section className="space-y-6">

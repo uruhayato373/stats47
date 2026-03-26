@@ -13,6 +13,9 @@ export interface PageChart {
   sourceLink: string | null;
   rankingLink: string | null;
   gridColumnSpan: number;
+  gridColumnSpanTablet: number | null;
+  gridColumnSpanSm: number | null;
+  dataSource: string | null;
   section: string | null;
   sortOrder: number;
 }
@@ -43,6 +46,9 @@ export async function loadPageCharts(
         sourceLink: chartDefinitions.sourceLink,
         rankingLink: chartDefinitions.rankingLink,
         gridColumnSpan: chartDefinitions.gridColumnSpan,
+        gridColumnSpanTablet: chartDefinitions.gridColumnSpanTablet,
+        gridColumnSpanSm: chartDefinitions.gridColumnSpanSm,
+        dataSource: chartDefinitions.dataSource,
         section: pageChartAssignments.section,
         sortOrder: pageChartAssignments.sortOrder,
       })

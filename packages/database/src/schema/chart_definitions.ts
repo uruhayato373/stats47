@@ -34,6 +34,12 @@ export const chartDefinitions = sqliteTable(
     tags:           text("tags"),
     /** グリッド幅（12カラムグリッド中の占有数） */
     gridColumnSpan: integer("grid_column_span").default(12),
+    /** タブレット時グリッド幅 */
+    gridColumnSpanTablet: integer("grid_column_span_tablet"),
+    /** モバイル時グリッド幅 */
+    gridColumnSpanSm: integer("grid_column_span_sm"),
+    /** データソース種別 */
+    dataSource:     text("data_source").default("ranking"),
     /** 有効フラグ */
     isActive:       integer("is_active", { mode: "boolean" }).default(true),
     createdAt:      text("created_at").default(sql`CURRENT_TIMESTAMP`),
