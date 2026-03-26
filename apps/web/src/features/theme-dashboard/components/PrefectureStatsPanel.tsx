@@ -16,8 +16,6 @@ import { MapPin } from "lucide-react";
 import { fetchAllYearsRankingValuesAction } from "@/features/ranking/actions/fetch-all-years-ranking-values";
 import type { ThemeIndicatorData } from "../types";
 import { fetchCpiCategoriesAction, fetchCpiAllYearsAction, type CpiCategoryData, type CpiHeatmapCell } from "../actions/fetch-cpi-categories";
-import { fetchIndustryStructureAction, type IndustryStructureData } from "../actions/fetch-industry-structure";
-import { fetchWorkstyleDataAction, type WorkstyleBarItem } from "../actions/fetch-workstyle-data";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import { KpiCardClient } from "@/features/stat-charts/components/cards/KpiCard/KpiCardClient";
@@ -31,11 +29,6 @@ const HorizontalDivergingBarChart = dynamic(
 const CategoryHeatmap = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.CategoryHeatmap),
   { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> }
-);
-
-const DonutChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.DonutChart),
-  { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> }
 );
 
 const D3LineChart = dynamic(
@@ -83,37 +76,6 @@ export function PrefectureStatsPanel({
   const [isCpiPending, startCpiTransition] = useTransition();
 
   const isConsumerPricesTheme = themeKey === "consumer-prices";
-  const isLocalEconomyTheme = themeKey === "local-economy";
-
-  // 産業構造ドーナツチャート（local-economy テーマのみ）
-  const [industryData, setIndustryData] = useState<IndustryStructureData[] | null>(null);
-  const [isIndustryPending, startIndustryTransition] = useTransition();
-
-  useEffect(() => {
-    if (!isLocalEconomyTheme || !selectedPrefectureCode) {
-      setIndustryData(null);
-      return;
-    }
-    startIndustryTransition(async () => {
-      const result = await fetchIndustryStructureAction(selectedPrefectureCode);
-      setIndustryData(result);
-    });
-  }, [isLocalEconomyTheme, selectedPrefectureCode]);
-
-  // 働き方チャート（local-economy テーマのみ）
-  const [workstyleData, setWorkstyleData] = useState<WorkstyleBarItem[] | null>(null);
-  const [isWorkstylePending, startWorkstyleTransition] = useTransition();
-
-  useEffect(() => {
-    if (!isLocalEconomyTheme || !selectedPrefectureCode) {
-      setWorkstyleData(null);
-      return;
-    }
-    startWorkstyleTransition(async () => {
-      const result = await fetchWorkstyleDataAction(selectedPrefectureCode);
-      setWorkstyleData(result);
-    });
-  }, [isLocalEconomyTheme, selectedPrefectureCode]);
 
   // CPI 品目別データ取得（最新年 + 全年分ヒートマップ）
   useEffect(() => {
@@ -326,74 +288,6 @@ export function PrefectureStatsPanel({
             ) : (
               <div className="h-[80px] flex items-center justify-center text-sm text-muted-foreground">
                 ヒートマップデータがありません
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* 産業構造ドーナツチャート（local-economy テーマのみ） */}
-        {isLocalEconomyTheme && selectedPrefectureCode && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">産業構造</h3>
-            {isIndustryPending ? (
-              <Skeleton className="h-[200px] w-full rounded-md" />
-            ) : industryData && industryData.length === 3 ? (
-              <>
-                <div className="h-[200px]">
-                  <DonutChart
-                    data={industryData.map((d) => ({ ...d }))}
-                    centerText={`${industryData[2].value.toFixed(1)}%`}
-                  />
-                </div>
-                <div className="flex justify-center gap-4 mt-2">
-                  {industryData.map((d) => (
-                    <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.color }} />
-                      {d.name} {d.value.toFixed(1)}%
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="h-[80px] flex items-center justify-center text-sm text-muted-foreground">
-                産業構造データがありません
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* 新しい働き方チャート（local-economy テーマのみ） */}
-        {isLocalEconomyTheme && selectedPrefectureCode && (
-          <div className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">新しい働き方</h3>
-            {isWorkstylePending ? (
-              <Skeleton className="h-[180px] w-full rounded-md" />
-            ) : workstyleData && workstyleData.length > 0 ? (
-              <>
-                <HorizontalDivergingBarChart
-                  data={workstyleData.map((d) => ({
-                    label: d.label,
-                    value: d.value - d.nationalAvg,
-                  }))}
-                  baseline={0}
-                  unit="pt"
-                  height={Math.max(160, workstyleData.length * 35 + 40)}
-                />
-                <div className="mt-2 space-y-0.5">
-                  {workstyleData.map((d) => (
-                    <div key={d.label} className="flex justify-between text-[10px] text-muted-foreground">
-                      <span>{d.label}</span>
-                      <span>{d.value.toFixed(1)}%（全国 {d.nationalAvg.toFixed(1)}%）</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-[10px] text-muted-foreground mt-1">
-                  バー=全国平均との差（ポイント）
-                </p>
-              </>
-            ) : (
-              <div className="h-[80px] flex items-center justify-center text-sm text-muted-foreground">
-                働き方データがありません
               </div>
             )}
           </div>
