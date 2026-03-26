@@ -19,18 +19,18 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 - **Phase 2**: e-Stat API の未登録指標を探索（`/search-estat` + `/inspect-estat-meta`）
 - **Phase 3**: 他の政府データソース（国土数値情報、Japan Dashboard 等）も考慮
 
-### 2. チャート定義は chart_definitions テーブルが唯一の定義元
+### 2. コンポーネント定義は page_components テーブルが唯一の定義元（Single Source of Truth）
 
-**IndicatorSet にチャート定義を含めてはならない。** チャート（line-chart, mixed-chart 等）の定義は全て `chart_definitions` テーブルに格納し、`page_chart_assignments` でページに割り当てる。
+**IndicatorSet にチャート定義を含めてはならない。** 全ダッシュボードコンポーネント（KPI・チャート・属性マトリクス等）は `page_components` テーブルに格納し、`page_component_assignments` でページに割り当てる。
 
 - `IndicatorSet.charts` は廃止済み（型から削除）
 - `IndicatorSet.panelTabs[].charts` も廃止済み
-- `comparison_components` のチャート行も `chart_definitions` に移行中
-- テーマページ・エリアページ・比較ページが全て `loadPageCharts()` でチャートを取得する
+- `comparison_components` は廃止済み（`page_components` に統合完了）
+- テーマページ・エリアページ・比較ページが全て `loadPageComponents()` でコンポーネントを取得する
 
-**新しいチャートを追加するワークフロー:**
-1. `chart_definitions` に INSERT（chart_key, component_type, component_props）
-2. `page_chart_assignments` に INSERT（page_type, page_key, chart_key, section）
+**新しいコンポーネントを追加するワークフロー:**
+1. `page_components` に INSERT（componentKey, componentType, title, componentProps）
+2. `page_component_assignments` に INSERT（pageType, pageKey, componentKey, section, sortOrder）
 3. コード変更不要
 
 ### 3. ストーリードリブン
@@ -61,8 +61,7 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 
 **ルール:**
 - `IndicatorSet` の `ChartSeriesDef` には必ず `color` を明示する
-- `chart_definitions.component_props` の JSON には `seriesColors`（line-chart）/ `columnColors` + `lineColors`（mixed-chart）を含める
-- `comparison_components.component_props` にも同じ色を含める
+- `page_components.component_props` の JSON には `seriesColors`（line-chart）/ `columnColors` + `lineColors`（mixed-chart）を含める
 - 同じ指標は常に同じ色で表示する（例: 犯罪率は常に `#ef4444`）
 
 **予約カラー（変更禁止）:**
