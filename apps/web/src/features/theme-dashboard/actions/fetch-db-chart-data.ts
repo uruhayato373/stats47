@@ -83,7 +83,7 @@ async function fetchAllSeries(
   const results = await Promise.all(
     paramsList.map(async (params) => {
       if (isNational) {
-        return fetchAllAndAverage(params as import("@stats47/estat-api/server").GetStatsDataParams);
+        return fetchAllAndAverage(params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       }
       const result = await fetchEstatData(prefCode, params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       if ("error" in result) return null;
