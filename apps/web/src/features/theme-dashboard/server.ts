@@ -14,6 +14,8 @@ import {
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
   OCCUPATION_SALARY_SET,
+  REAL_INCOME_SET,
+  LABOR_MOBILITY_SET,
 } from "@stats47/types";
 
 import { toThemeConfig } from "./lib/to-theme-config";
@@ -33,3 +35,5 @@ export const TOURISM_THEME = toThemeConfig(TOURISM_SET);
 export const CONSUMER_PRICES_THEME = toThemeConfig(CONSUMER_PRICES_SET);
 export const FOREIGN_RESIDENTS_THEME = toThemeConfig(FOREIGN_RESIDENTS_SET);
 export const OCCUPATION_SALARY_THEME = toThemeConfig(OCCUPATION_SALARY_SET);
+export const REAL_INCOME_THEME = toThemeConfig(REAL_INCOME_SET);
+export const LABOR_MOBILITY_THEME = toThemeConfig(LABOR_MOBILITY_SET);

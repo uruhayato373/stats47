@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
-import { CONSUMER_PRICES_THEME } from "@/features/theme-dashboard/server";
+import { LABOR_MOBILITY_THEME } from "@/features/theme-dashboard/server";
 import { loadThemeData } from "@/features/theme-dashboard/lib/load-theme-data";
 import { ThemePageLayout } from "@/features/theme-dashboard/components/ThemePageLayout";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 export const revalidate = 86400;
 
-const theme = CONSUMER_PRICES_THEME;
+const theme = LABOR_MOBILITY_THEME;
 
 export function generateMetadata(): Metadata {
   const title = `${theme.title} | 統計で見る都道府県`;
@@ -20,7 +20,7 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function ConsumerPricesThemePage() {
+export default async function LaborMobilityThemePage() {
   const data = await loadThemeData(theme);
   if (!data) {
     return (

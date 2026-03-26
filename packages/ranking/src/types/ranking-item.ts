@@ -145,7 +145,7 @@ export interface CalculationConfig {
    * - ratio: 比率（分子÷分母）。パーセンテージ計算など。
    * - per_capita: 人口あたり（分子÷人口）。
    */
-  type?: "ratio" | "per_capita";
+  type?: "ratio" | "per_capita" | "subtraction";
   /** 分子となるランキングキー（ratio計算用） */
   numeratorKey?: string;
   /** 分母となるランキングキー（ratio計算用） */

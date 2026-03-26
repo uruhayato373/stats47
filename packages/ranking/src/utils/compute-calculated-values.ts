@@ -6,7 +6,7 @@ import type { RankingValue } from "../types";
  */
 export interface ComputeOptions {
   /** 計算タイプ */
-  type: "ratio" | "per_capita";
+  type: "ratio" | "per_capita" | "subtraction";
   /** 計算結果の項目名 */
   categoryName: string;
   /** 計算結果の項目コード */
@@ -55,12 +55,16 @@ export function computeCalculatedValues(
     const key = keyBy === "areaCode" ? (num.areaCode ?? "") : `${num.yearCode}_${num.areaCode}`;
     const den = denominatorMap.get(key);
 
-    // 両方のデータが揃っていない、または分母が0の場合はスキップ
-    if (!den || den.value === 0) {
-      continue;
-    }
+    if (!den) continue;
 
-    const calculatedValue = (num.value / den.value) * scaleFactor;
+    let calculatedValue: number;
+    if (options.type === "subtraction") {
+      calculatedValue = (num.value - den.value) * scaleFactor;
+    } else {
+      // ratio / per_capita: 分母0はスキップ
+      if (den.value === 0) continue;
+      calculatedValue = (num.value / den.value) * scaleFactor;
+    }
 
     // rankを除いたものをコピーし、新しい値を設定
     const { rank: _rank, ...baseData } = num;

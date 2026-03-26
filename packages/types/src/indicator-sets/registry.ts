@@ -18,6 +18,9 @@ import { COMPARE_SALARY_SET } from "./compare-salary";
 import { COMPARE_SPENDING_SET } from "./compare-spending";
 import { COMPARE_GOVERNOR_SET } from "./compare-governor";
 import { COMPARE_DEBT_SET } from "./compare-debt";
+import { COMPARE_PRIVATE_WAGE_SET } from "./compare-private-wage";
+import { REAL_INCOME_SET } from "./real-income";
+import { LABOR_MOBILITY_SET } from "./labor-mobility";
 
 // ============================================================================
 // 個別 export（直接参照用）
@@ -37,11 +40,14 @@ export {
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
   OCCUPATION_SALARY_SET,
+  REAL_INCOME_SET,
+  LABOR_MOBILITY_SET,
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
   COMPARE_SPENDING_SET,
   COMPARE_GOVERNOR_SET,
   COMPARE_DEBT_SET,
+  COMPARE_PRIVATE_WAGE_SET,
 };
 
 // ============================================================================
@@ -62,6 +68,8 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   CONSUMER_PRICES_SET,
   FOREIGN_RESIDENTS_SET,
   OCCUPATION_SALARY_SET,
+  REAL_INCOME_SET,
+  LABOR_MOBILITY_SET,
 ];
 
 // ============================================================================
@@ -71,6 +79,7 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
 export const COMPARE_INDICATOR_SETS: IndicatorSet[] = [
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
+  COMPARE_PRIVATE_WAGE_SET,
   COMPARE_SPENDING_SET,
   COMPARE_GOVERNOR_SET,
   COMPARE_DEBT_SET,

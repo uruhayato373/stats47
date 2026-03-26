@@ -4,7 +4,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
   key: "occupation-salary",
   title: "職業別年収",
   description:
-    "都道府県別の職業別平均年収を地図とランキングで比較。医師・看護師・保育士・SE・トラック運転手など39職種の年収データを47都道府県で確認できます。賃金構造基本統計調査（厚生労働省）に基づく2010年〜2023年の推移データ。",
+    "都道府県別の職業別平均年収を地図とランキングで比較。医師・看護師・保育士・SE・トラック運転手など47職種の年収データを47都道府県で確認できます。賃金構造基本統計調査（厚生労働省）に基づく2010年〜2023年の推移データ。",
   category: "economy",
   usage: "theme",
   indicators: [
@@ -19,14 +19,22 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     { rankingKey: "dental-hygienist-annual-income", shortLabel: "歯科衛生士", role: "context" },
     { rankingKey: "dietitian-annual-income", shortLabel: "栄養士", role: "context" },
     { rankingKey: "physical-therapist-annual-income", shortLabel: "理学療法士等", role: "context" },
+    { rankingKey: "public-health-nurse-annual-income", shortLabel: "保健師", role: "context" },
+    { rankingKey: "nursing-assistant-annual-income", shortLabel: "看護助手", role: "context" },
+    { rankingKey: "care-manager-annual-income", shortLabel: "ケアマネ", role: "context" },
+    { rankingKey: "home-care-worker-annual-income", shortLabel: "訪問介護", role: "context" },
     // IT・専門職
     { rankingKey: "system-consultant-annual-income", shortLabel: "SIer/コンサル", role: "secondary" },
     { rankingKey: "software-engineer-annual-income", shortLabel: "SE", role: "secondary" },
     { rankingKey: "accountant-annual-income", shortLabel: "会計士・税理士", role: "context" },
     { rankingKey: "designer-annual-income", shortLabel: "デザイナー", role: "context" },
+    { rankingKey: "researcher-annual-income", shortLabel: "研究者", role: "context" },
     // 教育
     { rankingKey: "school-teacher-annual-income", shortLabel: "小中学校教員", role: "secondary" },
     { rankingKey: "university-professor-annual-income", shortLabel: "大学教授", role: "context" },
+    { rankingKey: "associate-professor-annual-income", shortLabel: "大学准教授", role: "context" },
+    { rankingKey: "high-school-teacher-annual-income", shortLabel: "高校教員", role: "context" },
+    { rankingKey: "kindergarten-teacher-annual-income", shortLabel: "幼稚園教員", role: "context" },
     // 運輸・建設
     { rankingKey: "truck-driver-annual-income", shortLabel: "トラック運転手", role: "secondary" },
     { rankingKey: "taxi-driver-annual-income", shortLabel: "タクシー運転手", role: "secondary" },
@@ -59,6 +67,10 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
         "dental-hygienist-annual-income",
         "dietitian-annual-income",
         "physical-therapist-annual-income",
+        "public-health-nurse-annual-income",
+        "nursing-assistant-annual-income",
+        "care-manager-annual-income",
+        "home-care-worker-annual-income",
       ],
     },
     {
@@ -68,6 +80,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
         "software-engineer-annual-income",
         "accountant-annual-income",
         "designer-annual-income",
+        "researcher-annual-income",
         "manager-annual-income",
       ],
     },
@@ -76,6 +89,9 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
       rankingKeys: [
         "school-teacher-annual-income",
         "university-professor-annual-income",
+        "associate-professor-annual-income",
+        "high-school-teacher-annual-income",
+        "kindergarten-teacher-annual-income",
       ],
     },
     {

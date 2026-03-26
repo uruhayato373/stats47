@@ -38,6 +38,8 @@ export async function calculateRankingValues(
         return await calculatePerCapita(rankingItem, yearCode, nextVisited);
     } else if (calculation.type === "ratio") {
         return await calculateRatio(rankingItem, yearCode, nextVisited);
+    } else if (calculation.type === "subtraction") {
+        return await calculateSubtraction(rankingItem, yearCode, nextVisited);
     }
 
     return [];
@@ -118,6 +120,44 @@ async function calculateRatio(
 
     const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
         type: "ratio",
+        categoryCode: rankingKey,
+        categoryName: rankingItem.title,
+        unit: rankingItem.unit,
+        keyBy: "areaCode",
+    });
+    return rankByValue(computed) as RankingValue[];
+}
+
+/**
+ * 減算計算 (subtraction)
+ * 分子: numeratorRankingKey
+ * 分母: denominatorRankingKey
+ * 計算式: 分子 - 分母
+ */
+async function calculateSubtraction(
+  rankingItem: RankingItem,
+  yearCode: string,
+  visited: Set<string>
+): Promise<RankingValue[]> {
+    const { calculation, rankingKey } = rankingItem;
+    const numeratorKey = calculation?.numeratorKey;
+    const denominatorKey = calculation?.denominatorKey;
+
+    if (!numeratorKey || !denominatorKey) {
+        logger.warn({ rankingKey }, "calculateSubtraction: 分子または分母キーが設定されていません");
+        return [];
+    }
+
+    const numeratorValues = await getValues(numeratorKey, yearCode, visited);
+    const denominatorValues = await getValues(denominatorKey, yearCode, visited);
+
+    if (numeratorValues.length === 0 || denominatorValues.length === 0) {
+        logger.warn({ rankingKey, yearCode }, "calculateSubtraction: データ不足のため計算不可");
+        return [];
+    }
+
+    const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
+        type: "subtraction",
         categoryCode: rankingKey,
         categoryName: rankingItem.title,
         unit: rankingItem.unit,
