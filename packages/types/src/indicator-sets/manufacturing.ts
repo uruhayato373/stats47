@@ -35,24 +35,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
         "manufacturing-sales-private",
         "manufacturing-net-value-added-private",
       ],
-      charts: [
-        {
-          type: "donut-action",
-          label: "産業別出荷額構成",
-          actionId: "manufacturing-composition",
-          source: "経済センサス-活動調査（2020年）",
-        },
-        {
-          type: "dual-line",
-          label: "製造品出荷額と付加価値額の推移",
-          series: [
-            { rankingKey: "manufacturing-shipment-amount", name: "出荷額等", color: "#3b82f6" },
-            { rankingKey: "manufacturing-industry-added-value", name: "付加価値額", color: "#22c55e" },
-          ],
-          unit: "百万円",
-          source: "工業統計調査 / 経済センサス",
-        },
-      ],
     },
     {
       label: "事業所・雇用",
@@ -61,17 +43,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
         "manufacturing-employees",
         "manufacturing-establishment-site-area",
         "factory-establishment-count",
-      ],
-      charts: [
-        {
-          type: "dual-line",
-          label: "事業所数と従業者数の推移",
-          series: [
-            { rankingKey: "manufacturing-establishments", name: "事業所数", color: "#f59e0b" },
-            { rankingKey: "manufacturing-employees", name: "従業者数", color: "#8b5cf6" },
-          ],
-          source: "工業統計調査 / 経済センサス",
-        },
       ],
     },
     {

@@ -23,28 +23,6 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     { rankingKey: "dependent-population-index", shortLabel: "従属人口指数", role: "secondary" },
     { rankingKey: "household-ratio-with-65plus", shortLabel: "65歳以上世帯割合", role: "context" },
   ],
-  charts: [
-    {
-      type: "dual-line",
-      label: "出生率・高齢化率の推移",
-      series: [
-        { rankingKey: "crude-birth-rate", name: "粗出生率", color: "#3b82f6" },
-        { rankingKey: "ratio-65-plus", name: "高齢化率", color: "#ef4444" },
-      ],
-      unit: "%/‰",
-      source: "人口動態統計 / 国勢調査",
-    },
-    {
-      type: "dual-line",
-      label: "婚姻率・離婚率の推移",
-      series: [
-        { rankingKey: "marriages-per-total-population", name: "婚姻率", color: "#8b5cf6" },
-        { rankingKey: "divorces-per-total-population", name: "離婚率", color: "#f97316" },
-      ],
-      unit: "‰",
-      source: "人口動態統計",
-    },
-  ],
   keywords: [
     "少子高齢化",
     "高齢化率",

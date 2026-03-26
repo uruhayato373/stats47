@@ -23,7 +23,7 @@ import { AgeCompositionChart } from "./AgeCompositionChart";
 import { PopulationPyramidChart } from "./PopulationPyramidChart";
 import { BirthDeathRateLineChart } from "./BirthDeathRateLineChart";
 import { NaturalSocialRateLineChart } from "./NaturalSocialRateLineChart";
-import { ThemeChartPanel } from "./ThemeChartPanel";
+import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
 import type { ThemeConfig } from "../types";
 
@@ -61,6 +61,8 @@ interface Props {
   themeKey?: string;
   /** テーマ設定（config-driven チャート用） */
   themeConfig?: ThemeConfig;
+  /** DB 管理チャート（chart_definitions） */
+  pageCharts?: import("@/features/stat-charts/services/load-page-charts").PageChart[];
 }
 
 /**
@@ -76,6 +78,7 @@ export function PrefectureStatsPanel({
   selectedIndicatorKey,
   themeKey,
   themeConfig,
+  pageCharts,
 }: Props) {
   const [timeSeriesData, setTimeSeriesData] = useState<RankingValue[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -254,25 +257,19 @@ export function PrefectureStatsPanel({
                     selectedPrefectureCode={selectedPrefectureCode}
                     indicatorDataMap={indicatorDataMap}
                   />
-                  {tab.charts?.map((chart, i) => (
-                    <div key={i}>
-                      <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
-                      {(chart.type === "dual-line" || chart.type === "mixed") && (
-                        <ThemeChartPanel
-                          chartDef={chart}
+                  {/* DB 管理チャート（chart_definitions から section でマッチ） */}
+                  {pageCharts
+                    ?.filter((c) => c.section === tab.label)
+                    .map((chart) => (
+                      <div key={chart.chartKey}>
+                        <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
+                        <ThemeDbChartRenderer
+                          chart={chart}
                           prefCode={selectedPrefectureCode ?? "00000"}
                           prefName={areaName}
                         />
-                      )}
-                      {chart.type === "donut-action" && selectedPrefectureCode && (
-                        <ConfigDrivenDonutChart
-                          config={chart}
-                          prefCode={selectedPrefectureCode}
-                          prefName={areaName}
-                        />
-                      )}
-                    </div>
-                  ))}
+                      </div>
+                    ))}
                 </TabsContent>
               );
             })}
@@ -447,26 +444,19 @@ export function PrefectureStatsPanel({
           </div>
         )}
 
-        {/* Config-driven チャート */}
-        {themeConfig?.charts?.map((chart, i) => (
-          <div key={i} className="border-t border-border pt-3">
-            <h3 className="text-sm font-medium mb-2">{chart.label}</h3>
-            {(chart.type === "dual-line" || chart.type === "mixed") && (
-              <ThemeChartPanel
-                chartDef={chart}
+        {/* DB 管理チャート（section が null = トップレベル） */}
+        {pageCharts
+          ?.filter((c) => c.section === null)
+          .map((chart) => (
+            <div key={chart.chartKey} className="border-t border-border pt-3">
+              <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
+              <ThemeDbChartRenderer
+                chart={chart}
                 prefCode={selectedPrefectureCode ?? "00000"}
                 prefName={areaName}
               />
-            )}
-            {chart.type === "donut-action" && selectedPrefectureCode && (
-              <ConfigDrivenDonutChart
-                config={chart}
-                prefCode={selectedPrefectureCode}
-                prefName={areaName}
-              />
-            )}
-          </div>
-        ))}
+            </div>
+          ))}
 
         {/* 推移チャート（population-dynamics / aging-society テーマでは専用チャートがあるのでスキップ） */}
         {selectedPrefectureCode && !isPopulationDynamicsTheme && (

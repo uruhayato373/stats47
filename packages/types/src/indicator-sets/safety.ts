@@ -52,21 +52,6 @@ export const SAFETY_SET: IndicatorSet = {
         "drug-enforcement-arrest-count-per-population",
         "police-officer-count-per-population",
       ],
-      charts: [
-        {
-          type: "mixed",
-          label: "刑法犯認知件数と検挙率の推移",
-          columns: [
-            { rankingKey: "criminal-recognition-count", name: "認知件数", color: "#f59e0b" },
-          ],
-          lines: [
-            { rankingKey: "criminal-arrest-rate", name: "検挙率", color: "#22c55e" },
-          ],
-          leftUnit: "件",
-          rightUnit: "%",
-          source: "犯罪統計",
-        },
-      ],
     },
     {
       label: "交通",
@@ -78,17 +63,6 @@ export const SAFETY_SET: IndicatorSet = {
         "traffic-accident-injuries-per-100k",
         "traffic-accident-casualties-elderly-65plus",
       ],
-      charts: [
-        {
-          type: "dual-line",
-          label: "交通事故件数と死者数の推移",
-          series: [
-            { rankingKey: "traffic-accident-count", name: "事故件数", color: "#f59e0b" },
-            { rankingKey: "traffic-accident-deaths-per-100k", name: "死者数(10万人当たり)", color: "#ef4444" },
-          ],
-          source: "交通事故統計",
-        },
-      ],
     },
     {
       label: "火災・救急",
@@ -97,17 +71,6 @@ export const SAFETY_SET: IndicatorSet = {
         "fire-deaths-per-100k",
         "fire-damage-casualties-per-population",
         "annual-emergency-dispatches-per-1000",
-      ],
-      charts: [
-        {
-          type: "dual-line",
-          label: "火災出火件数と救急出動件数の推移",
-          series: [
-            { rankingKey: "building-fire-count-per-100-thousand-people", name: "出火件数(10万人当たり)", color: "#f59e0b" },
-            { rankingKey: "annual-emergency-dispatches-per-1000", name: "救急出動(千人当たり)", color: "#22c55e" },
-          ],
-          source: "消防統計",
-        },
       ],
     },
     {
@@ -122,17 +85,6 @@ export const SAFETY_SET: IndicatorSet = {
         "suicide-rate-per-100k",
         "suicides-per-100k",
         "accidental-deaths-per-100k",
-      ],
-      charts: [
-        {
-          type: "dual-line",
-          label: "自殺率と不慮の事故死亡率の推移",
-          series: [
-            { rankingKey: "suicide-rate-per-100k", name: "自殺率", color: "#8b5cf6" },
-            { rankingKey: "accidental-deaths-per-100k", name: "不慮の事故死亡率", color: "#6b7280" },
-          ],
-          source: "人口動態統計",
-        },
       ],
     },
   ],

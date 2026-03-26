@@ -26,28 +26,6 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     { rankingKey: "marriages", shortLabel: "婚姻件数", role: "context" },
     { rankingKey: "divorces", shortLabel: "離婚件数", role: "context" },
   ],
-  charts: [
-    {
-      type: "dual-line",
-      label: "空き家率と持ち家率の推移",
-      series: [
-        { rankingKey: "vacant-housing-ratio", name: "空き家率", color: "#ef4444" },
-        { rankingKey: "owner-occupied-housing-ratio", name: "持ち家率", color: "#3b82f6" },
-      ],
-      unit: "%",
-      source: "住宅・土地統計調査",
-    },
-    {
-      type: "dual-line",
-      label: "未婚率と高齢夫婦世帯率の推移",
-      series: [
-        { rankingKey: "ratio-never-married-15-plus", name: "未婚率", color: "#8b5cf6" },
-        { rankingKey: "elderly-couple-only-household-ratio", name: "高齢夫婦世帯率", color: "#f59e0b" },
-      ],
-      unit: "%",
-      source: "国勢調査 / 国民生活基礎調査",
-    },
-  ],
   keywords: [
     "空き家",
     "持ち家",

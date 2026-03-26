@@ -77,7 +77,8 @@ export interface IndicatorEntry {
 export interface IndicatorPanelTab {
   label: string;
   rankingKeys: string[];
-  charts?: ChartDefinition[];
+  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
+  // page_chart_assignments.section でタブに割り当て
 }
 
 // ============================================================================
@@ -118,8 +119,8 @@ export interface IndicatorSet {
   usage: IndicatorSetUsage;
   /** 含まれる指標（表示順） */
   indicators: IndicatorEntry[];
-  /** トップレベルのチャート定義 */
-  charts?: ChartDefinition[];
+  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
+  // IndicatorSet にはチャート定義を含めない
   /** パネルタブ（指標をサブグループ化する場合） */
   panelTabs?: IndicatorPanelTab[];
   /** SEO キーワード */

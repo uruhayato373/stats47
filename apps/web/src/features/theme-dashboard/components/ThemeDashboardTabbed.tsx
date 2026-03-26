@@ -35,6 +35,7 @@ export function ThemeDashboardTabbed({
   themeConfig,
   indicatorDataMap,
   topology,
+  pageCharts,
 }: ThemeDashboardClientProps) {
   const tabIndicators = themeConfig.tabIndicators;
   const isBelowLg = useBreakpoint("belowLg");
@@ -188,6 +189,7 @@ export function ThemeDashboardTabbed({
               selectedIndicatorKey={selectedTabKey}
               themeKey={themeConfig.themeKey}
               themeConfig={themeConfig}
+              pageCharts={pageCharts}
             />
           </TabsContent>
           <TabsContent value="table" className="mt-3">

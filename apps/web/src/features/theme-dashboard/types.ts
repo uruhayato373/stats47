@@ -38,8 +38,7 @@ export interface PanelTabGroup {
   label: string;
   /** このタブに表示する rankingKey 一覧 */
   rankingKeys: string[];
-  /** このタブ内に表示するチャート */
-  charts?: ThemeChartConfig[];
+  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
 }
 
 /** テーマ設定 */
@@ -55,8 +54,7 @@ export interface ThemeConfig {
   keywords: string[];
   /** タブ型指標セレクタの設定 */
   tabIndicators: TabIndicatorConfig[];
-  /** 統計パネルに表示するチャート設定 */
-  charts?: ThemeChartConfig[];
+  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
   /** 統計パネルの KPI をタブでグルーピング（未指定時はフラット表示） */
   panelTabs?: PanelTabGroup[];
 }
@@ -76,6 +74,8 @@ export interface ThemeDashboardClientProps {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** TopoJSON */
   topology: TopoJSONTopology | null;
+  /** DB 管理チャート（chart_definitions + page_chart_assignments） */
+  pageCharts?: import("@/features/stat-charts/services/load-page-charts").PageChart[];
 }
 
 // ============================================================================

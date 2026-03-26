@@ -20,27 +20,6 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     { rankingKey: "day-time-population-ratio", shortLabel: "昼夜間人口比率", role: "secondary" },
     { rankingKey: "total-population", shortLabel: "総人口", role: "context" },
   ],
-  charts: [
-    {
-      type: "dual-line",
-      label: "出生率・死亡率の推移",
-      series: [
-        { rankingKey: "crude-birth-rate", name: "出生率（人口千対）", color: "#3b82f6" },
-        { rankingKey: "crude-death-rate", name: "死亡率（人口千対）", color: "#ef4444" },
-      ],
-      source: "人口動態統計",
-    },
-    {
-      type: "dual-line",
-      label: "自然増減率・社会増減率の推移",
-      series: [
-        { rankingKey: "natural-increase-rate", name: "自然増減率", color: "#22c55e" },
-        { rankingKey: "social-increase-rate", name: "社会増減率", color: "#f59e0b" },
-      ],
-      unit: "‰",
-      source: "人口動態統計 / 住民基本台帳人口移動報告",
-    },
-  ],
   keywords: [
     "人口動態",
     "人口増減率",
