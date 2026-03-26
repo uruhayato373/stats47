@@ -1,24 +1,8 @@
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type {
-  ChartDefinition,
-  DualLineChartDef,
-  DonutChartDef,
   IndicatorPanelTab,
   TopoJSONTopology,
 } from "@stats47/types";
-
-// ============================================================================
-// チャート型は @stats47/types の ChartDefinition を re-export
-// ============================================================================
-
-/** 2指標の時系列比較チャート設定 */
-export type ThemeChartDualLine = DualLineChartDef;
-
-/** Server Action でデータ取得するドーナツチャート設定 */
-export type ThemeChartDonutAction = DonutChartDef;
-
-/** チャート設定のユニオン型 */
-export type ThemeChartConfig = ChartDefinition;
 
 // ============================================================================
 // テーマダッシュボード固有の型

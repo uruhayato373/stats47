@@ -115,6 +115,9 @@ e-Stat API 未登録指標の探索:
 - `/search-estat` でテーマ関連の統計表を検索
 - `/inspect-estat-meta` で有望な指標のメタデータを調査
 - **新規発見した指標は `/register-ranking` で登録を提案**
+- **リファレンス索引を先に確認**: `.claude/skills/estat/references/README.md`
+  - 特に `wage-structure-survey-occupations.md` — 145職種の都道府県別年収データ（39職種登録済み）
+  - laborwage / socialsecurity / educationsports / construction テーマで活用可能
 
 ### Step 3: 検索需要・トレンド調査
 
