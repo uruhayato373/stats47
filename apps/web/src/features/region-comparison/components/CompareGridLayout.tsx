@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 
 import { ChartSkeleton } from "@/features/stat-charts";
-import { DashboardComponentRenderer, computeSharedYDomain, toDashboardComponent } from "@/features/stat-charts/server";
+import { DashboardComponentRenderer, computeSharedYDomain } from "@/features/stat-charts/server";
 import type { Area } from "@stats47/area";
-import type { ComparisonComponent } from "@stats47/database/server";
-import type { DashboardComponentType } from "@/features/stat-charts";
+import type { PageComponent } from "@/features/stat-charts/services/load-page-components";
+import type { DashboardComponent, DashboardComponentType } from "@/features/stat-charts";
 
 import type { ComparisonRegion } from "../types";
 
@@ -13,6 +13,24 @@ function toArea(region: ComparisonRegion): Area {
     areaCode: region.areaCode,
     areaName: region.areaName,
     areaType: "prefecture",
+  };
+}
+
+function pageComponentToDashboard(comp: PageComponent, titlePrefix?: string): DashboardComponent {
+  return {
+    id: comp.componentKey,
+    componentType: comp.componentType,
+    title: titlePrefix ? `${titlePrefix}の${comp.title}` : comp.title,
+    componentProps: JSON.stringify(comp.componentProps),
+    rankingLink: comp.rankingLink,
+    sourceLink: comp.sourceLink,
+    sourceName: comp.sourceName,
+    dataSource: comp.dataSource,
+    gridColumnSpan: comp.gridColumnSpan,
+    gridColumnSpanTablet: comp.gridColumnSpanTablet,
+    gridColumnSpanSm: comp.gridColumnSpanSm,
+    gridColumnSpanMobile: null,
+    sortOrder: comp.sortOrder,
   };
 }
 
@@ -28,12 +46,12 @@ const CHART_TYPES_WITH_Y_AXIS = new Set<string>([
 
 interface CompareGridLayoutProps {
   regions: [ComparisonRegion, ComparisonRegion];
-  components: ComparisonComponent[];
+  components: PageComponent[];
 }
 
 /**
  * 比較コンポーネントを地域ごとに左右に並べて描画するサーバーコンポーネント。
- * DB の page_components → DashboardComponentRenderer パイプラインで描画。
+ * page_components → DashboardComponentRenderer パイプラインで描画。
  *
  * チャート系コンポーネントは選択中の全地域データから共有 Y 軸ドメインを事前算出し、
  * 東京と大阪など異なるスケールの地域でもグラフのスケールが揃う。
@@ -49,13 +67,12 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
 
   const domains = await Promise.all(
     chartComps.map(async (comp) => {
-      const config = comp.componentProps ? JSON.parse(comp.componentProps) as Record<string, unknown> : {};
       const domain = await computeSharedYDomain(
         comp.componentType as DashboardComponentType,
-        config,
+        comp.componentProps,
         areaCodes,
       );
-      return { id: comp.id, domain };
+      return { id: comp.componentKey, domain };
     }),
   );
 
@@ -66,18 +83,18 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
   return (
     <>
       {components.map((comp) => (
-        <div key={comp.id} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div key={comp.componentKey} className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {regions.map((region) => (
             <div
-              key={`${comp.id}-${region.areaCode}`}
+              key={`${comp.componentKey}-${region.areaCode}`}
               className="overflow-hidden rounded-lg border"
               style={{ borderColor: `${region.color}33` }}
             >
                 <Suspense fallback={<ChartSkeleton />}>
                   <DashboardComponentRenderer
-                    component={toDashboardComponent(comp, { titlePrefix: region.areaName })}
+                    component={pageComponentToDashboard(comp, region.areaName)}
                     area={toArea(region)}
-                    sharedYDomain={yDomainMap.get(comp.id)}
+                    sharedYDomain={yDomainMap.get(comp.componentKey)}
                     hideSource
                   />
                 </Suspense>

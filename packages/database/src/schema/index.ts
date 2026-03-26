@@ -5,7 +5,7 @@ export * from "./article_tags";
 export * from "./articles";
 export * from "./categories";
 export * from "./page_components";
-export * from "./comparison";
+
 export * from "./correlation_analysis";
 export * from "./estat_metainfo";
 export * from "./estat_stats_tables";

@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 import { fetchCities, lookupArea } from "@stats47/area";
 import { listCategories } from "@/features/category/server";
-import { getComparisonRepository } from "@stats47/database/server";
+import { getDrizzle, pageComponentAssignments } from "@stats47/database/server";
+import { eq } from "drizzle-orm";
 import { isOk } from "@stats47/types";
 import type { Metadata } from "next";
 
@@ -83,16 +84,20 @@ export default async function CityPage({ params }: PageProps) {
         notFound();
     }
 
-    const [categoriesResult, componentsResult] = await Promise.all([
-        listCategories(),
-        getComparisonRepository().listComponentsByAreaType("city"),
-    ]);
+    const categoriesResult = await listCategories();
     const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
-    const allComponents = isOk(componentsResult) ? componentsResult.data : [];
 
-    // データがあるカテゴリのみ抽出
-    const categoriesWithData = new Set(allComponents.map((c) => c.categoryKey));
-    const filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
+    // page_component_assignments から city-category のカテゴリを取得
+    let filteredCategories = allCategories;
+    try {
+        const db = getDrizzle();
+        const cityAssignments = await db
+            .select({ pageKey: pageComponentAssignments.pageKey })
+            .from(pageComponentAssignments)
+            .where(eq(pageComponentAssignments.pageType, "city-category"));
+        const categoriesWithData = new Set(cityAssignments.map((a) => a.pageKey));
+        filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
+    } catch { /* DB 未初期化時は全カテゴリ表示 */ }
 
     const cityBasePath = `/areas/${areaCode}/cities/${cityCode}`;
     const allCities = fetchCities().filter((c) => c.prefCode === areaCode);

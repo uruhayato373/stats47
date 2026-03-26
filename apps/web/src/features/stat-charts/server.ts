@@ -12,5 +12,5 @@ export { toKpiCardData } from "./adapters/toKpiCardData";
 // Server-only components
 export { DashboardComponentRenderer } from "./components/DashboardComponentRenderer";
 
-// Server-only utils (used by server components for DB → DashboardComponent conversion)
-export { toDashboardComponent } from "./utils/toDashboardComponent";
+// Server-only services (page_components)
+export { loadPageComponents, type PageComponent } from "./services/load-page-components";

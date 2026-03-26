@@ -110,63 +110,9 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
 
     // loadPageComponents で全コンポーネントを一括取得（KPI + チャート）
     const { loadPageComponents } = await import("@/features/stat-charts/services/load-page-components");
-    const allPageComponents = areaCodes.length === 2
+    const pageComponents = areaCodes.length === 2
         ? await loadPageComponents("area-category", categoryKey)
         : [];
-
-    // KPI とチャートを分離
-    const kpiPageComponents = allPageComponents.filter(
-        (c) => c.componentType === "kpi-card" || c.componentType === "attribute-matrix"
-    );
-    const chartPageComponents = allPageComponents.filter(
-        (c) => c.componentType !== "kpi-card" && c.componentType !== "attribute-matrix"
-    );
-
-    // KPI → page_components 形式に変換
-    const kpiComponents = kpiPageComponents.map((c) => ({
-        id: c.componentKey,
-        categoryKey,
-        componentType: c.componentType,
-        displayOrder: c.sortOrder,
-        gridColumnSpan: c.gridColumnSpan,
-        gridColumnSpanTablet: c.gridColumnSpanTablet,
-        gridColumnSpanSm: c.gridColumnSpanSm,
-        title: c.title,
-        componentProps: JSON.stringify(c.componentProps),
-        rankingLink: c.rankingLink,
-        sectionLabel: c.section,
-        isActive: true,
-        sourceLink: c.sourceLink,
-        sourceName: c.sourceName,
-        areaType: "prefecture" as const,
-        dataSource: c.dataSource,
-        createdAt: null,
-        updatedAt: null,
-    }));
-
-    // チャート → page_components 形式に変換
-    const chartComponents = chartPageComponents.map((c) => ({
-        id: c.componentKey,
-        categoryKey,
-        componentType: c.componentType,
-        displayOrder: c.sortOrder,
-        gridColumnSpan: c.gridColumnSpan,
-        gridColumnSpanTablet: c.gridColumnSpanTablet,
-        gridColumnSpanSm: c.gridColumnSpanSm,
-        title: c.title,
-        componentProps: JSON.stringify(c.componentProps),
-        rankingLink: c.rankingLink,
-        sectionLabel: c.section,
-        isActive: true,
-        sourceLink: c.sourceLink,
-        sourceName: c.sourceName,
-        areaType: "prefecture" as const,
-        dataSource: c.dataSource,
-        createdAt: null,
-        updatedAt: null,
-    }));
-
-    const comparisonComponents = [...kpiComponents, ...chartComponents];
 
     return (
         <div className="container mx-auto px-4 py-6">
@@ -177,8 +123,8 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                 selectedAreaCodes={areaCodes}
                 choroplethMapData={choroplethMapData}
             >
-                {regions && comparisonComponents.length > 0 && (
-                    <CompareGridLayout regions={regions} components={comparisonComponents} />
+                {regions && pageComponents.length > 0 && (
+                    <CompareGridLayout regions={regions} components={pageComponents} />
                 )}
             </RegionComparisonClient>
         </div>
