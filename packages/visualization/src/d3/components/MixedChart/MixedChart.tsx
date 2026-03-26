@@ -8,13 +8,9 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
-import { CHART_STYLES } from "../../constants";
+import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { MixedChartProps } from "./types";
-
-function defaultFormat(value: number): string {
-  return value.toLocaleString();
-}
 
 /**
  * MixedChart - 棒グラフ（左Y軸）+ 折れ線グラフ（右Y軸）の2軸チャート
@@ -32,8 +28,8 @@ export function MixedChart({
   marginLeft: propsMarginLeft,
   leftUnit = "",
   rightUnit = "",
-  leftAxisFormatter = defaultFormat,
-  rightAxisFormatter = defaultFormat,
+  leftAxisFormatter = compactAxisFormat,
+  rightAxisFormatter = compactAxisFormat,
   unit = "",
   colors = d3.schemeTableau10,
   isLoading = false,

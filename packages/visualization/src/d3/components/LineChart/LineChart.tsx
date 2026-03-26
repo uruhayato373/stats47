@@ -8,7 +8,7 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
-import { CHART_STYLES } from "../../constants";
+import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
 
@@ -43,7 +43,7 @@ export function LineChart({
   colors = DEFAULT_COLORS,
   isLoading = false,
   className,
-  yAxisFormatter = defaultFormat,
+  yAxisFormatter = compactAxisFormat,
   tooltipFormatter = defaultFormat,
   yDomain: yDomainProp,
 }: D3LineChartProps) {

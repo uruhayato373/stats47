@@ -73,6 +73,21 @@ export const CROSSHAIR = {
 } as const;
 
 /**
+ * Y軸ラベルの省略フォーマッター
+ *
+ * 大きな数値を「万」「千」で省略表示してラベルの幅を抑える。
+ * 小数値はそのまま表示。
+ */
+export function compactAxisFormat(value: number): string {
+  const abs = Math.abs(value);
+  if (abs >= 100_000_000) return `${(value / 100_000_000).toFixed(1)}億`;
+  if (abs >= 10_000) return `${(value / 10_000).toFixed(1)}万`;
+  if (abs >= 1_000) return `${(value / 1_000).toFixed(1)}千`;
+  if (Number.isInteger(value)) return value.toLocaleString();
+  return value.toFixed(1);
+}
+
+/**
  * 一括エクスポート
  *
  * 使用例:
