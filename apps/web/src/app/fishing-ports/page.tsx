@@ -12,6 +12,8 @@ import {
 import { loadFishingPortData } from "@/features/fishing-ports/lib/load-fishing-port-data";
 import { FishingPortMapClient } from "@/features/fishing-ports/components/FishingPortMapClient";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "漁港マップ | 統計で見る都道府県",
   description:
