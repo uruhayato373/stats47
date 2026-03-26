@@ -25,6 +25,7 @@ import { BirthDeathRateLineChart } from "./BirthDeathRateLineChart";
 import { NaturalSocialRateLineChart } from "./NaturalSocialRateLineChart";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 import { ConfigDrivenDonutChart } from "./ConfigDrivenDonutChart";
+import { KpiCardClient } from "@/features/stat-charts/components/cards/KpiCard/KpiCardClient";
 import type { ThemeConfig } from "../types";
 
 const HorizontalDivergingBarChart = dynamic(
@@ -157,21 +158,39 @@ export function PrefectureStatsPanel({
     return lookupArea(selectedPrefectureCode)?.areaName ?? "不明";
   }, [selectedPrefectureCode]);
 
-  // KPIカードデータ
+  // KPIカードデータ（前年比付き）
   const kpiItems = useMemo(() => {
     return rankingKeys
       .filter((key) => indicatorDataMap[key])
       .map((key) => {
         const data = indicatorDataMap[key];
+        const latestYear = data.rankingItem.latestYear;
+        const availableYears = data.rankingItem.availableYears ?? [];
         const value = selectedPrefectureCode
           ? data.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
           : null;
+
+        // 前年比計算
+        let changeRate: number | null = null;
+        let changeDirection: "increase" | "decrease" | "neutral" | null = null;
+        if (selectedPrefectureCode && latestYear && availableYears.length >= 2) {
+          const prevYearCode = availableYears[1]?.yearCode;
+          if (prevYearCode) {
+            // TODO: 前年度データは indicatorDataMap に含まれていない（最新年度のみ）
+            // フル対応には load-theme-data で全年度プリロードが必要
+            // 現時点では null のまま（前年比は Server Action 経由で後から取得）
+          }
+        }
+
         return {
           key,
           title: data.rankingItem.title,
           unit: data.rankingItem.unit,
           value: value?.value ?? null,
           rank: value?.rank ?? null,
+          changeRate,
+          changeDirection,
+          yearName: latestYear?.yearName ?? null,
         };
       });
   }, [selectedPrefectureCode, rankingKeys, indicatorDataMap]);
@@ -248,6 +267,9 @@ export function PrefectureStatsPanel({
                     unit: data.rankingItem.unit,
                     value: value?.value ?? null,
                     rank: value?.rank ?? null,
+                    changeRate: null as number | null,
+                    changeDirection: null as "increase" | "decrease" | "neutral" | null,
+                    yearName: data.rankingItem.latestYear?.yearName ?? null,
                   };
                 });
               return (
@@ -507,7 +529,7 @@ export function PrefectureStatsPanel({
   );
 }
 
-// --- KPI グリッド ---
+// --- KPI グリッド（KpiCardClient ベース — エリアページと統一デザイン） ---
 
 interface KpiItem {
   key: string;
@@ -515,6 +537,9 @@ interface KpiItem {
   unit: string;
   value: number | null;
   rank: number | null;
+  changeRate: number | null;
+  changeDirection: "increase" | "decrease" | "neutral" | null;
+  yearName: string | null;
 }
 
 function KpiGrid({
@@ -530,31 +555,22 @@ function KpiGrid({
     return (
       <div className="grid grid-cols-2 gap-2">
         {items.map((item) => (
-          <Link
-            key={item.key}
-            href={`/ranking/${item.key}`}
-            className="block p-2.5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
-          >
-            <div className="text-[11px] text-muted-foreground line-clamp-1 mb-1">
-              {item.title}
-            </div>
-            <div className="text-sm font-bold">
-              {item.value != null ? item.value.toLocaleString() : "-"}
-              <span className="text-[10px] font-normal text-muted-foreground ml-0.5">
-                {item.unit}
-              </span>
-            </div>
-            {item.rank != null && (
-              <div className="text-[10px] text-muted-foreground">
-                {item.rank}位 / 47
-              </div>
-            )}
+          <Link key={item.key} href={`/ranking/${item.key}`} className="block">
+            <KpiCardClient
+              title={item.title}
+              value={item.value}
+              unit={item.unit}
+              year={item.yearName}
+              changeRate={item.changeRate}
+              changeDirection={item.changeDirection}
+            />
           </Link>
         ))}
       </div>
     );
   }
 
+  // 全国（未選択）: 1位の都道府県を表示
   return (
     <div className="grid grid-cols-2 gap-2">
       {items.map((item) => {
@@ -562,27 +578,15 @@ function KpiGrid({
         const top1 = data?.rankingValues.find((v) => v.rank === 1);
         const top1Name = top1 ? lookupArea(top1.areaCode)?.areaName : null;
         return (
-          <Link
-            key={item.key}
-            href={`/ranking/${item.key}`}
-            className="block p-2.5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
-          >
-            <div className="text-[11px] text-muted-foreground line-clamp-1 mb-1">
-              {item.title}
-            </div>
-            {top1 && (
-              <>
-                <div className="text-sm font-bold">
-                  {top1.value.toLocaleString()}
-                  <span className="text-[10px] font-normal text-muted-foreground ml-0.5">
-                    {data.rankingItem.unit}
-                  </span>
-                </div>
-                <div className="text-[10px] text-muted-foreground">
-                  1位: {top1Name}
-                </div>
-              </>
-            )}
+          <Link key={item.key} href={`/ranking/${item.key}`} className="block">
+            <KpiCardClient
+              title={item.title}
+              value={top1?.value ?? null}
+              unit={data?.rankingItem.unit ?? item.unit}
+              year={top1Name ? `1位: ${top1Name}` : null}
+              changeRate={null}
+              changeDirection={null}
+            />
           </Link>
         );
       })}
