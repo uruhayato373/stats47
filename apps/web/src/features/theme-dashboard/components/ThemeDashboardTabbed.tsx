@@ -241,6 +241,7 @@ export function ThemeDashboardTabbed({
             selectedIndicatorKey={selectedTabKey}
             themeKey={themeConfig.themeKey}
             themeConfig={themeConfig}
+            pageCharts={pageCharts}
           />
         </div>
       </div>

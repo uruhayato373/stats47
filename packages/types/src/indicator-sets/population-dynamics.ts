@@ -4,7 +4,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   key: "population-dynamics",
   title: "人口動態",
   description:
-    "都道府県別の出生率・死亡率・自然増減率・社会増減率・高齢化率・人口密度を地図とランキングで比較。人口動態の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の出生率・死亡率・高齢化率・転入超過率を地図・チャート・ランキングで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
   category: "demographics",
   usage: "theme",
   indicators: [
@@ -19,6 +19,34 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     { rankingKey: "population-density-per-km2-inhabitable-area", shortLabel: "人口密度", role: "secondary" },
     { rankingKey: "day-time-population-ratio", shortLabel: "昼夜間人口比率", role: "secondary" },
     { rankingKey: "total-population", shortLabel: "総人口", role: "context" },
+  ],
+  panelTabs: [
+    {
+      label: "出生・死亡",
+      rankingKeys: [
+        "crude-birth-rate",
+        "total-fertility-rate",
+        "crude-death-rate",
+        "natural-increase-rate",
+      ],
+    },
+    {
+      label: "移動",
+      rankingKeys: [
+        "social-increase-rate",
+        "moving-in-excess-rate",
+        "day-time-population-ratio",
+      ],
+    },
+    {
+      label: "構造",
+      rankingKeys: [
+        "ratio-65-plus",
+        "young-population-ratio",
+        "population-density-per-km2-inhabitable-area",
+        "total-population",
+      ],
+    },
   ],
   keywords: [
     "人口動態",

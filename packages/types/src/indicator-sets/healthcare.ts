@@ -26,6 +26,36 @@ export const HEALTHCARE_SET: IndicatorSet = {
     { rankingKey: "psychiatric-hospital-count-per-100k", shortLabel: "精神科病院数", role: "context" },
     { rankingKey: "treatment-rate-mood-disorder-outpatient", shortLabel: "気分障害受療率", role: "context" },
   ],
+  panelTabs: [
+    {
+      label: "医療供給",
+      rankingKeys: [
+        "physicians-in-medical-facilities-per-100k",
+        "nurses-in-medical-facilities-per-100k",
+        "general-hospital-count-per-100k",
+        "general-hospital-bed-count-per-100k",
+        "pharmacy-count-per-100k",
+      ],
+    },
+    {
+      label: "医療利用",
+      rankingKeys: [
+        "national-medical-expense-per-person",
+        "general-hospital-avg-length-of-stay",
+        "general-hospital-bed-occupancy-rate",
+      ],
+    },
+    {
+      label: "健康",
+      rankingKeys: [
+        "deaths-lifestyle-diseases-per-100k",
+        "deaths-diabetes-per-100k",
+        "health-checkup-rate-lifestyle-diseases",
+        "psychiatric-hospital-count-per-100k",
+        "treatment-rate-mood-disorder-outpatient",
+      ],
+    },
+  ],
   keywords: [
     "医師数",
     "病院数",

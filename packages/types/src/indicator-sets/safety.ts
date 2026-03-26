@@ -4,7 +4,7 @@ export const SAFETY_SET: IndicatorSet = {
   key: "safety",
   title: "安全",
   description:
-    "都道府県別の犯罪率・交通事故死・火災・自殺率を地図とランキングで比較。治安と安全の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の犯罪率・検挙率・交通事故・火災件数・自殺率を地図・チャート・ランキングで比較。治安・交通・火災・災害・事故の25指標を47都道府県で確認できます。",
   category: "safety",
   usage: "theme",
   indicators: [

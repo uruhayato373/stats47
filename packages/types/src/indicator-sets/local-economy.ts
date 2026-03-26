@@ -13,6 +13,22 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
     { rankingKey: "active-job-opening-ratio", shortLabel: "有効求人倍率", role: "secondary" },
     { rankingKey: "unemployment-rate", shortLabel: "失業率", role: "secondary" },
   ],
+  panelTabs: [
+    {
+      label: "所得",
+      rankingKeys: [
+        "per-taxpayer-taxable-income",
+        "minimum-wage-by-region",
+      ],
+    },
+    {
+      label: "雇用",
+      rankingKeys: [
+        "active-job-opening-ratio",
+        "unemployment-rate",
+      ],
+    },
+  ],
   keywords: [
     "課税所得",
     "産業構造",

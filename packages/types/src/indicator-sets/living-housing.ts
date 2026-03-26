@@ -26,6 +26,36 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     { rankingKey: "marriages", shortLabel: "婚姻件数", role: "context" },
     { rankingKey: "divorces", shortLabel: "離婚件数", role: "context" },
   ],
+  panelTabs: [
+    {
+      label: "住宅",
+      rankingKeys: [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio",
+        "dwelling-per-floor-area",
+      ],
+    },
+    {
+      label: "世帯",
+      rankingKeys: [
+        "households",
+        "nuclear-family-households-ratio",
+        "elderly-couple-only-household-ratio",
+        "single-person-household-old-population-ratio",
+      ],
+    },
+    {
+      label: "人口・婚姻",
+      rankingKeys: [
+        "population-density-per-km2-inhabitable-area",
+        "habitable-area-ratio",
+        "densely-inhabited-district-population-density",
+        "ratio-never-married-15-plus",
+        "marriages",
+        "divorces",
+      ],
+    },
+  ],
   keywords: [
     "空き家",
     "持ち家",

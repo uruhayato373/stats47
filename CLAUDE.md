@@ -61,6 +61,7 @@ packages/
 | エージェント | スキル数 | 担当ドメイン |
 |---|---|---|
 | `theme-designer` | 6 | テーマダッシュボード設計（データ発見→指標選定→IndicatorSet 生成） |
+| `theme-enhancer` | 4 | テーマダッシュボード強化（最適化分析→監査→チャート設計→DB投入） |
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
 | `blog-editor` | 17 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
@@ -83,8 +84,18 @@ packages/
 | 週次 PDCA | strategy-advisor（内部で5並列サブエージェント） |
 | コード変更→レビュー→デプロイ | code-reviewer → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-pipeline（未登録指標登録）→ ui-reviewer |
+| テーマチャート強化 | theme-enhancer（audit→design→insert）→ ui-reviewer |
 
 ## スキル一覧
+
+### theme — テーマ強化
+
+| スキル | 用途 | 定義 |
+|---|---|---|
+| `/optimize-themes` | テーマダッシュボードの継続最適化（GSC/GA4 + 競合調査 + ギャップ分析 → 優先度付きアクション） | `.claude/skills/theme/optimize-themes/SKILL.md` |
+| `/audit-theme-components` | テーマダッシュボードの現状監査（page_components vs IndicatorSet ギャップ分析） | `.claude/skills/theme/audit-theme-components/SKILL.md` |
+| `/design-theme-charts` | テーマ用チャート設計（chart_key, componentType, componentProps JSON 生成） | `.claude/skills/theme/design-theme-charts/SKILL.md` |
+| `/insert-theme-components` | 設計済みチャートの page_components + assignments への INSERT 実行 | `.claude/skills/theme/insert-theme-components/SKILL.md` |
 
 ### db — データベース・ストレージ
 
