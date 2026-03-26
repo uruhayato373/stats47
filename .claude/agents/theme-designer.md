@@ -19,7 +19,21 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 - **Phase 2**: e-Stat API の未登録指標を探索（`/search-estat` + `/inspect-estat-meta`）
 - **Phase 3**: 他の政府データソース（国土数値情報、Japan Dashboard 等）も考慮
 
-### 2. ストーリードリブン
+### 2. チャート定義は chart_definitions テーブルが唯一の定義元
+
+**IndicatorSet にチャート定義を含めてはならない。** チャート（line-chart, mixed-chart 等）の定義は全て `chart_definitions` テーブルに格納し、`page_chart_assignments` でページに割り当てる。
+
+- `IndicatorSet.charts` は廃止済み（型から削除）
+- `IndicatorSet.panelTabs[].charts` も廃止済み
+- `comparison_components` のチャート行も `chart_definitions` に移行中
+- テーマページ・エリアページ・比較ページが全て `loadPageCharts()` でチャートを取得する
+
+**新しいチャートを追加するワークフロー:**
+1. `chart_definitions` に INSERT（chart_key, component_type, component_props）
+2. `page_chart_assignments` に INSERT（page_type, page_key, chart_key, section）
+3. コード変更不要
+
+### 3. ストーリードリブン
 
 「このテーマで最も驚く事実は何か」を軸に設計する。
 
