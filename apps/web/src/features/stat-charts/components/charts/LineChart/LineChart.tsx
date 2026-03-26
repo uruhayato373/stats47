@@ -19,7 +19,7 @@ export const LineChart = async ({
   config,
 }: DashboardItemProps<"line-chart">) => {
   const { title, area, rankingLink, sourceName, sourceLink, annotation, rankingLinks } = common;
-  const { estatParams, labels, description, yAxisConfig, sharedYDomain } = config as DashboardItemProps<"line-chart">["config"] & { sharedYDomain?: [number, number] };
+  const { estatParams, labels, description, yAxisConfig, sharedYDomain, seriesColors } = config as DashboardItemProps<"line-chart">["config"] & { sharedYDomain?: [number, number]; seriesColors?: string[] };
   const areaCode = area.areaCode;
   const paramsList = Array.isArray(estatParams) ? estatParams : [estatParams];
 
@@ -49,7 +49,7 @@ export const LineChart = async ({
       if (!hasAnyData) {
         fetchErrorMessage = "データがありません";
       } else {
-        chartData = toLineChartData(rawDataList, labels);
+        chartData = toLineChartData(rawDataList, labels, seriesColors);
       }
     }
   } catch (err) {

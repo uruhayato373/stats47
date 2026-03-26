@@ -41,7 +41,27 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 | 散布図（scatter） | 2指標の相関を見せる（例: 所得 vs 犯罪率） |
 | コロプレスマップ | 地域パターンを一目で見せる（primary 指標に必須） |
 
-### 4. 検索需要に応える
+### 4. 色は必ず指定する
+
+チャートの色はページ間で統一されなければならない。adapter のデフォルト色（CHART_COLORS パレット）に頼ると、テーマページとエリアページで色が異なる問題が発生する。
+
+**ルール:**
+- `IndicatorSet` の `ChartSeriesDef` には必ず `color` を明示する
+- `chart_definitions.component_props` の JSON には `seriesColors`（line-chart）/ `columnColors` + `lineColors`（mixed-chart）を含める
+- `comparison_components.component_props` にも同じ色を含める
+- 同じ指標は常に同じ色で表示する（例: 犯罪率は常に `#ef4444`）
+
+**推奨カラーマッピング:**
+| 意味 | 色 | Hex |
+|---|---|---|
+| 危険・高い（犯罪率、死者数等） | 赤 | `#ef4444` |
+| 安全・改善方向（検挙率等） | 青 | `#3b82f6` |
+| 件数・量（事故件数、出火件数等） | 橙 | `#f59e0b` |
+| 増加・プラス方向 | 緑 | `#22c55e` |
+| 中立・補助 | グレー | `#6b7280` |
+| 特殊（自殺率等） | 紫 | `#8b5cf6` |
+
+### 5. 検索需要に応える
 
 ダッシュボードはSEOランディングページでもある。
 

@@ -4,6 +4,9 @@ import type { MixedChartData } from "../types/visualization";
 
 /**
  * e-Stat 生データを棒+折れ線ミックスチャート用に変換
+ *
+ * @param columnColors - 棒系列の色指定（省略時は CHART_COLORS から自動割当）
+ * @param lineColors - 線系列の色指定（省略時は CHART_COLORS から自動割当）
  */
 export function toMixedChartData(
   columnDataList: StatsSchema[][],
@@ -11,7 +14,9 @@ export function toMixedChartData(
   columnLabels?: string[],
   lineLabels?: string[],
   leftUnit?: string,
-  rightUnit?: string
+  rightUnit?: string,
+  columnColors?: string[],
+  lineColors?: string[]
 ): MixedChartData {
   const colLabels =
     columnLabels ?? columnDataList.map((d) => d[0]?.categoryName ?? "");
@@ -49,12 +54,12 @@ export function toMixedChartData(
     columns: colLabels.map((label, i) => ({
       dataKey: label,
       name: label,
-      color: CHART_COLORS[i % CHART_COLORS.length],
+      color: columnColors?.[i] ?? CHART_COLORS[i % CHART_COLORS.length],
     })),
     lines: linLabels.map((label, i) => ({
       dataKey: label,
       name: label,
-      color: CHART_COLORS[(colLabels.length + i) % CHART_COLORS.length],
+      color: lineColors?.[i] ?? CHART_COLORS[(colLabels.length + i) % CHART_COLORS.length],
     })),
     leftUnit,
     rightUnit,

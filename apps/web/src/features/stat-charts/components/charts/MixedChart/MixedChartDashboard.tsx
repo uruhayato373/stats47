@@ -18,7 +18,7 @@ export const MixedChartDashboard = async ({
   config,
 }: DashboardItemProps<"mixed-chart">) => {
   const { title, area, rankingLink, sourceName, sourceLink } = common;
-  const { columnParams, lineParams, columnLabels, lineLabels, leftUnit, rightUnit, description } = config;
+  const { columnParams, lineParams, columnLabels, lineLabels, leftUnit, rightUnit, description, columnColors, lineColors } = config as typeof config & { columnColors?: string[]; lineColors?: string[] };
   const areaCode = area.areaCode;
 
   let chartData: MixedChartData | null = null;
@@ -41,7 +41,7 @@ export const MixedChartDashboard = async ({
       if (!hasAnyData) {
         fetchErrorMessage = "データがありません";
       } else {
-        chartData = toMixedChartData(colData, lineData, columnLabels, lineLabels, leftUnit, rightUnit);
+        chartData = toMixedChartData(colData, lineData, columnLabels, lineLabels, leftUnit, rightUnit, columnColors, lineColors);
       }
     }
   } catch (err) {

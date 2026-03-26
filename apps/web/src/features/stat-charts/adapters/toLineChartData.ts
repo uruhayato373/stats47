@@ -7,11 +7,13 @@ import type { LineChartData } from "../types/visualization";
  *
  * @param rawDataList - 各系列の e-Stat 生データ配列
  * @param seriesLabels - 系列ラベル配列（省略時は categoryName から導出）
+ * @param seriesColors - 系列ごとの色指定配列（省略時は CHART_COLORS から自動割当）
  * @returns LineChartData
  */
 export function toLineChartData(
   rawDataList: StatsSchema[][],
-  seriesLabels?: string[]
+  seriesLabels?: string[],
+  seriesColors?: string[]
 ): LineChartData {
   const labels =
     seriesLabels ?? rawDataList.map((d) => d[0]?.categoryName ?? "");
@@ -42,7 +44,7 @@ export function toLineChartData(
     lines: labels.map((label, i) => ({
       dataKey: label,
       name: label,
-      color: CHART_COLORS[i % CHART_COLORS.length],
+      color: seriesColors?.[i] ?? CHART_COLORS[i % CHART_COLORS.length],
     })),
     unit: rawDataList[0]?.[0]?.unit ?? undefined,
   };

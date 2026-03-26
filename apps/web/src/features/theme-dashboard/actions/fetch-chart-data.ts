@@ -50,11 +50,7 @@ async function fetchDualLineData(
   ]);
   if (!raw0 || !raw1) return null;
 
-  const chartData = toLineChartData([raw0, raw1], [s0.name, s1.name]);
-
-  // ChartDefinition の色を反映
-  if (chartData.lines[0]) chartData.lines[0].color = s0.color;
-  if (chartData.lines[1]) chartData.lines[1].color = s1.color;
+  const chartData = toLineChartData([raw0, raw1], [s0.name, s1.name], [s0.color, s1.color]);
 
   return { type: "line", data: chartData };
 }
@@ -83,12 +79,9 @@ async function fetchMixedData(
   const chartData = toMixedChartData(
     [colRaw], [lineRaw],
     [col.name], [line.name],
-    chartDef.leftUnit, chartDef.rightUnit
+    chartDef.leftUnit, chartDef.rightUnit,
+    [col.color], [line.color]
   );
-
-  // ChartDefinition の色を反映
-  if (chartData.columns[0]) chartData.columns[0].color = col.color;
-  if (chartData.lines[0]) chartData.lines[0].color = line.color;
 
   return { type: "mixed", data: chartData };
 }
