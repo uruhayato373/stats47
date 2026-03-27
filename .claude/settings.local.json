@@ -7,7 +7,12 @@
       "Bash(grep -r \"www\\\\|www\\\\.\" C:Usersm004195stats47 --include=*.ts --include=*.tsx --include=*.toml --include=*.json)",
       "Bash(find . -type f -name *.toml -o -name wrangler.json ! -path ./node_modules/* ! -path ./.next/* ! -path ./.open-next/* ! -path ./.git/*)",
       "Bash(xargs cat:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(nslookup www.stats47.jp)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(grep:*)",
+      "Bash(npx wrangler:*)"
     ]
   }
 }
