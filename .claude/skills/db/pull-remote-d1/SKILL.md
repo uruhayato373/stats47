@@ -42,6 +42,29 @@ npm run pull:d1 --workspace=packages/database -- --table categories
 npm run pull:d1 --workspace=packages/database -- --batch-size 1000
 ```
 
+### デフォルト除外テーブル
+
+以下のテーブルはデフォルトで同期対象外（ローカルに pull しない）:
+
+| テーブル | 理由 |
+|---|---|
+| `correlation_analysis` | 5GB+ の巨大テーブル。リモート D1 が正規ストア。相関分析は `/run-correlation-batch` で実行 |
+
+比較表（`--dry-run`）では除外テーブルも `[EXCL]` マーカー付きで行数が表示される。
+
+### 除外の上書き
+
+```bash
+# 全テーブル同期（デフォルト除外を無効化）
+npm run pull:d1 --workspace=packages/database -- --no-exclude
+
+# カスタム除外リスト
+npm run pull:d1 --workspace=packages/database -- --exclude correlation_analysis,ranking_ai_content
+
+# 特定テーブル指定は除外を無視（--table が優先）
+npm run pull:d1 --workspace=packages/database -- --table correlation_analysis
+```
+
 ## 同期フロー
 
 1. リモート/ローカルのテーブル一覧 + 行数を取得し比較表示
@@ -59,7 +82,7 @@ npm run pull:d1 --workspace=packages/database -- --batch-size 1000
 
 | テーブル | バッチサイズ | 理由 |
 |---|---|---|
-| `correlation_analysis` | 500 | scatter_data JSON が巨大 |
+| `correlation_analysis` | 500 | scatter_data JSON が巨大（デフォルト除外対象） |
 | `ranking_ai_content` | 100 | faq/insights 等の JSON が巨大 |
 | その他 | 5000 | デフォルト |
 

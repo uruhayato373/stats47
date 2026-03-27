@@ -111,6 +111,7 @@ packages/
 | `/purge-cache-r2` | R2 キャッシュバケット（stats47-cache）の全オブジェクト削除 | `.claude/skills/db/purge-cache-r2/SKILL.md` |
 | `/populate-all-rankings` | 全ランキングの全年度データを DB に一括投入（e-Stat API → ranking_data） | `.claude/skills/db/populate-all-rankings/SKILL.md` |
 | `/register-ranking` | 新規ランキングキーを ranking_items に登録し e-Stat API からデータ投入 | `.claude/skills/db/register-ranking/SKILL.md` |
+| `/run-correlation-batch` | 相関分析バッチを実行しリモート同期（ローカルに残さない） | `.claude/skills/db/run-correlation-batch/SKILL.md` |
 | `/reset-migrations` | Drizzle マイグレーションを1本にリセット（10本超 or 不整合時） | `.claude/skills/db/reset-migrations/SKILL.md` |
 
 ### estat — e-Stat API

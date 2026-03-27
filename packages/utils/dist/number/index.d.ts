@@ -1,4 +1,5 @@
 export { computeDescriptiveStats, type DescriptiveStats } from "./compute-descriptive-stats";
+export { computeDeviationScores } from "./compute-deviation-scores";
 export { formatNumber } from "./format-number";
 export { formatNumberForDisplay } from "./format-number-for-display";
 export { formatNumberJapanese, formatNumberWithDecimalPlaces } from "./format-number-japanese";
