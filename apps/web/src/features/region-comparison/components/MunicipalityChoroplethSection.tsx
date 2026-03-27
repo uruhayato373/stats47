@@ -292,6 +292,8 @@ function ChoroplethLegend({
         height={12}
         className="w-full rounded"
         style={{ maxWidth: 200 }}
+        role="img"
+        aria-label="人口増減率カラーレジェンド"
       />
       <div
         className="flex w-full justify-between text-[10px] text-muted-foreground"

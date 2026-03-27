@@ -1,7 +1,14 @@
-import { DefinitionWithMath } from "@/components/DefinitionWithMath";
+"use client";
+
+import dynamic from "next/dynamic";
 import { ExternalLink } from "lucide-react";
 
 import type { RankingItem } from "@stats47/ranking";
+
+const DefinitionWithMath = dynamic(
+  () => import("@/components/DefinitionWithMath").then((m) => m.DefinitionWithMath),
+  { ssr: false },
+);
 
 interface RankingDefinitionCardProps {
   definition: string;

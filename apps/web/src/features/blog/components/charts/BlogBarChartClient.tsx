@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { ChartDataNode, BarChartProps } from "@stats47/visualization";
+import type { ChartDataNode, BarChartProps } from "@stats47/visualization/d3";
 
 const BarChart = dynamic<BarChartProps>(
-  () => import("@stats47/visualization").then((mod) => mod.BarChart),
+  () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
   { ssr: false }
 );
 

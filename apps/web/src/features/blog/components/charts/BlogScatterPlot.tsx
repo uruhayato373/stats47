@@ -1,14 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { ScatterplotDataNode, ScatterplotProps } from "@stats47/visualization";
+import type { ScatterplotDataNode, ScatterplotProps } from "@stats47/visualization/d3";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { type ScatterPlotConfig } from "../../types/chart-config.types";
 import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const ScatterPlot = dynamic<ScatterplotProps>(
-    () => import("@stats47/visualization").then((mod) => mod.Scatterplot),
+    () => import("@stats47/visualization/d3/Scatterplot").then((mod) => mod.Scatterplot),
     { ssr: false }
 );
 

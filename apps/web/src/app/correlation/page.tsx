@@ -2,10 +2,9 @@ import { CorrelationPageClient } from "@/features/correlation";
 import { fetchCorrelationPairAction } from "@/features/correlation/server";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { isOk } from "@stats47/types";
-import { listRankingItems } from "@stats47/ranking/server";
+import { listRankingItemsLite } from "@stats47/ranking/server";
 import {
-    countCorrelationAnalysis,
-    countStrongCorrelations,
+    countCorrelationStats,
     listTopCorrelations,
 } from "@stats47/correlation/server";
 import type { Metadata } from "next";
@@ -35,22 +34,15 @@ interface PageProps {
 export default async function CorrelationPage({ searchParams }: PageProps) {
     const { x, y } = await searchParams;
 
-    const [itemsResult, topCorrelations, totalPairs, strongCount] =
+    const [itemsResult, topCorrelations, correlationCounts] =
         await Promise.all([
-            listRankingItems({ isActive: true, areaType: "prefecture" }),
+            listRankingItemsLite({ isActive: true, areaType: "prefecture" }),
             listTopCorrelations(20),
-            countCorrelationAnalysis(),
-            countStrongCorrelations(),
+            countCorrelationStats(),
         ]);
 
-    const items = isOk(itemsResult) ? itemsResult.data : [];
-
-    const rankingOptions = items.map((item) => ({
-        rankingKey: item.rankingKey,
-        title: item.title,
-        subtitle: item.subtitle ?? null,
-        unit: item.unit,
-    }));
+    const rankingOptions = isOk(itemsResult) ? itemsResult.data : [];
+    const { total: totalPairs, strong: strongCount } = correlationCounts;
 
     // URL パラメータ指定 or ランキング1位をデフォルト表示
     const defaultX = x ?? topCorrelations[0]?.rankingKeyX;

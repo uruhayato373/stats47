@@ -8,7 +8,7 @@ import type { HierarchyDataNode } from "@stats47/visualization/d3";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const SunburstChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.SunburstChart),
+  () => import("@stats47/visualization/d3/SunburstChart").then((mod) => mod.SunburstChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 

@@ -148,50 +148,55 @@ export function Scatterplot({
                 .attr("font-size", baseFontSize)
                 .text(yLabel || ""));
 
-        // Add points.
-        svg.append("g")
-            .attr("stroke", stroke)
-            .attr("stroke-width", strokeWidth)
-            .attr("stroke-opacity", strokeOpacity)
-            .attr("fill", fill)
-            .selectAll("circle")
-            .data(I)
-            .join("circle")
-            .attr("cx", (i) => xScale(X[i] as any))
-            .attr("cy", (i) => yScale(Y[i] as any))
-            .attr("r", r)
-            .style("cursor", "pointer")
-            .on("mouseenter", (event, i) => {
-                const d = data[i];
-                showTooltip(event, d.label || d.category || "Data Point", {
-                    value: typeof d.y === "number" ? d.y : null,
-                    unit: yLabel,
-                    categoryName: d.category,
+        // Defer interactive elements to next frame to reduce TBT
+        const rafId = requestAnimationFrame(() => {
+            // Add points.
+            svg.append("g")
+                .attr("stroke", stroke)
+                .attr("stroke-width", strokeWidth)
+                .attr("stroke-opacity", strokeOpacity)
+                .attr("fill", fill)
+                .selectAll("circle")
+                .data(I)
+                .join("circle")
+                .attr("cx", (i) => xScale(X[i] as any))
+                .attr("cy", (i) => yScale(Y[i] as any))
+                .attr("r", r)
+                .style("cursor", "pointer")
+                .on("mouseenter", (event, i) => {
+                    const d = data[i];
+                    showTooltip(event, d.label || d.category || "Data Point", {
+                        value: typeof d.y === "number" ? d.y : null,
+                        unit: yLabel,
+                        categoryName: d.category,
+                    });
+                })
+                .on("mousemove", (event) => {
+                    updateTooltipPosition(event);
+                })
+                .on("mouseleave", () => {
+                    hideTooltip();
                 });
-            })
-            .on("mousemove", (event) => {
-                updateTooltipPosition(event);
-            })
-            .on("mouseleave", () => {
-                hideTooltip();
-            });
 
-        // Draw regression line
-        if (regressionLine && xType === "linear" && yType === "linear") {
-            const [xMin, xMax] = xScale.domain() as [number, number];
-            const y1 = regressionLine.slope * xMin + regressionLine.intercept;
-            const y2 = regressionLine.slope * xMax + regressionLine.intercept;
+            // Draw regression line
+            if (regressionLine && xType === "linear" && yType === "linear") {
+                const [xMin, xMax] = xScale.domain() as [number, number];
+                const y1 = regressionLine.slope * xMin + regressionLine.intercept;
+                const y2 = regressionLine.slope * xMax + regressionLine.intercept;
 
-            svg.append("line")
-                .attr("x1", xScale(xMin))
-                .attr("y1", yScale(y1))
-                .attr("x2", xScale(xMax))
-                .attr("y2", yScale(y2))
-                .attr("stroke", "hsl(0, 70%, 50%)")
-                .attr("stroke-width", 1.5)
-                .attr("stroke-dasharray", "6,3")
-                .attr("opacity", 0.7);
-        }
+                svg.append("line")
+                    .attr("x1", xScale(xMin))
+                    .attr("y1", yScale(y1))
+                    .attr("x2", xScale(xMax))
+                    .attr("y2", yScale(y2))
+                    .attr("stroke", "hsl(0, 70%, 50%)")
+                    .attr("stroke-width", 1.5)
+                    .attr("stroke-dasharray", "6,3")
+                    .attr("opacity", 0.7);
+            }
+        });
+
+        return () => cancelAnimationFrame(rafId);
 
     }, [data, width, height, marginTop, marginRight, marginBottom, marginLeft, innerWidth, innerHeight, baseFontSize, xLabel, yLabel, xType, yType, xDomain, yDomain, xFormat, yFormat, grid, r, stroke, strokeWidth, strokeOpacity, fill, regressionLine, showTooltip, hideTooltip, updateTooltipPosition]);
 

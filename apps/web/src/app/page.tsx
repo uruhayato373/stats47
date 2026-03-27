@@ -9,6 +9,7 @@ import { FeaturedRankings } from "@/features/ranking/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { CountUp } from "@/components/atoms/CountUp";
 import { ScrollReveal } from "@/components/atoms/ScrollReveal";
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 export const revalidate = 86400;
@@ -157,7 +158,7 @@ export default async function HomePage() {
                         width={800}
                         height={460}
                         className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
+                        {...(i === 0 ? { priority: true } : { loading: "lazy" as const })}
                       />
                     </div>
                     <div className="p-4">
@@ -193,20 +194,13 @@ export default async function HomePage() {
                       className="group block rounded-none border border-border overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
                     >
                       <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
-                        <Image
-                          src={`${r2}/blog/${article.slug}/thumbnail-light.webp`}
+                        <ThemeAwareImage
+                          lightSrc={`${r2}/blog/${article.slug}/thumbnail-light.webp`}
+                          darkSrc={`${r2}/blog/${article.slug}/thumbnail-dark.webp`}
                           alt={article.title}
                           fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-300 dark:hidden"
-                          loading="lazy"
-                        />
-                        <Image
-                          src={`${r2}/blog/${article.slug}/thumbnail-dark.webp`}
-                          alt={article.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-300 hidden dark:block"
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
                         />
                       </div>

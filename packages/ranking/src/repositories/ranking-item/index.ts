@@ -13,6 +13,7 @@ export { listActiveKeysForSitemap } from "./list-active-keys-for-sitemap";
 export { listActiveRankingKeys } from "./list-active-ranking-keys";
 export { listFeaturedRankingItems } from "./list-featured-ranking-items";
 export { listRankingItems } from "./list-ranking-items";
+export { type RankingItemLite, listRankingItemsLite } from "./list-ranking-items-lite";
 export { listRankingItemsByAreaType } from "./list-ranking-items-by-area-type";
 export { listRankingItemsWithTags } from "./list-ranking-items-with-tags";
 export { updateRankingItem } from "./update-ranking-item";

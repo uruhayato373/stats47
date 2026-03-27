@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const DivergingBarChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.DivergingBarChart),
+  () => import("@stats47/visualization/d3/DivergingBarChart").then((mod) => mod.DivergingBarChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 

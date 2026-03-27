@@ -8,7 +8,7 @@ import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const MixedChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.MixedChart),
+  () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 

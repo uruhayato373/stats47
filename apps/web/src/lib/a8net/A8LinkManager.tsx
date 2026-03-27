@@ -18,18 +18,31 @@ const CONFIG_ID = "7aRTfRVSjj8e68htW4xW";
  */
 export function A8LinkManager() {
   useEffect(() => {
-    const existingScript = document.querySelector(
-      'script[src*="a8linkmgr.js"]'
-    );
-    if (existingScript) return;
+    const load = () => {
+      const existingScript = document.querySelector(
+        'script[src*="a8linkmgr.js"]'
+      );
+      if (existingScript) return;
 
-    const script = document.createElement("script");
-    script.src = "//statics.a8.net/a8link/a8linkmgr.js";
-    script.async = true;
-    script.onload = () => {
-      window.a8linkmgr?.({ config_id: CONFIG_ID });
+      const script = document.createElement("script");
+      script.src = "//statics.a8.net/a8link/a8linkmgr.js";
+      script.async = true;
+      script.onload = () => {
+        window.a8linkmgr?.({ config_id: CONFIG_ID });
+      };
+      document.head.appendChild(script);
     };
-    document.head.appendChild(script);
+
+    // メインコンテンツの描画を優先し、アイドル時にスクリプトを読み込む
+    const timer = setTimeout(() => {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(load);
+      } else {
+        load();
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return null;

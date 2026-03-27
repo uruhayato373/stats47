@@ -1,14 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { TimeSeriesDataNode, D3LineChartProps } from "@stats47/visualization";
+import type { TimeSeriesDataNode, D3LineChartProps } from "@stats47/visualization/d3";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { type LineChartConfig } from "../../types/chart-config.types";
 import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const LineChart = dynamic<D3LineChartProps>(
-    () => import("@stats47/visualization").then((mod) => mod.D3LineChart),
+    () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
     { ssr: false }
 );
 

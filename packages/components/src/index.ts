@@ -17,7 +17,8 @@ export * from "./atoms/ui/checkbox";
 export * from "./atoms/ui/dialog";
 export * from "./atoms/ui/dropdown-menu";
 export * from "./atoms/ui/form";
-export * from "./atoms/ui/icon";
+// icon は全アイコンマップ(679KB)を含むため barrel export しない
+// 必要な箇所で "@stats47/components/atoms/ui/icon" から直接 import すること
 export * from "./atoms/ui/input";
 export * from "./atoms/ui/label";
 export * from "./atoms/ui/pagination";

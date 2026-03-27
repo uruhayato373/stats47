@@ -5,10 +5,10 @@ import {
   getDrizzle,
   rankingItems,
 } from "@stats47/database/server";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, notInArray, sql } from "drizzle-orm";
 import {
+  EXCLUDED_CORRELATION_KEYS,
   isExcludedCorrelationPair,
-  isExcludedCorrelationKey,
 } from "../trivial-pairs";
 
 export interface TopCorrelation {
@@ -92,17 +92,21 @@ export async function listTopCorrelations(
     .from(correlationAnalysis)
     .innerJoin(riX, eq(correlationAnalysis.rankingKeyX, riX.rankingKey))
     .innerJoin(riY, eq(correlationAnalysis.rankingKeyY, riY.rankingKey))
-    .where(sql`ABS(${correlationAnalysis.pearsonR}) < 0.99`)
+    .where(
+      and(
+        sql`ABS(${correlationAnalysis.pearsonR}) < 0.99`,
+        // 個別キー除外を SQL 側で実行（JS 側の overfetch を削減）
+        notInArray(correlationAnalysis.rankingKeyX, EXCLUDED_CORRELATION_KEYS),
+        notInArray(correlationAnalysis.rankingKeyY, EXCLUDED_CORRELATION_KEYS),
+      ),
+    )
     .orderBy(sql`${effectiveAbsR} DESC`)
-    // 除外リスト（ペア＋個別キー）でフィルタされる分を見越して多めに取得
-    .limit(limit * 10);
+    // ペア除外のみ JS 側で処理するため overfetch を 3x に縮小（10x → 3x）
+    .limit(limit * 3);
 
   return rows
     .filter(
-      (r) =>
-        !isExcludedCorrelationKey(r.rankingKeyX) &&
-        !isExcludedCorrelationKey(r.rankingKeyY) &&
-        !isExcludedCorrelationPair(r.rankingKeyX, r.rankingKeyY)
+      (r) => !isExcludedCorrelationPair(r.rankingKeyX, r.rankingKeyY),
     )
     .slice(0, limit);
 }

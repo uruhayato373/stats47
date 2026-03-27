@@ -35,10 +35,7 @@ export function DashboardDataTable({
         rankingKey = parts[parts.length - 1] || parts[parts.length - 2];
     }
 
-    // デバッグ用ログ
-    if (!rankingKey) {
-        console.warn('DashboardDataTable: rankingKey not found', { title, props, rankingLink });
-    }
+    // rankingKey が特定できない場合は useEffect 内で error state に設定
 
     useEffect(() => {
         if (!rankingKey) {
@@ -65,7 +62,6 @@ export function DashboardDataTable({
             } catch (err) {
                 if (isMounted) {
                     setError("データの取得に失敗しました");
-                    console.error(err);
                 }
             } finally {
                 if (isMounted) {

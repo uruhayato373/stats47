@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { TimeSeriesDataNode, D3LineChartProps } from "@stats47/visualization";
+import type { TimeSeriesDataNode, D3LineChartProps } from "@stats47/visualization/d3";
 
 const LineChart = dynamic<D3LineChartProps>(
-  () => import("@stats47/visualization").then((mod) => mod.D3LineChart),
+  () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
   { ssr: false }
 );
 

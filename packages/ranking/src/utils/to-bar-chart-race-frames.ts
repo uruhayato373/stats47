@@ -1,4 +1,4 @@
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 import type { StatsSchema } from "@stats47/types";
 
 /**

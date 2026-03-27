@@ -163,25 +163,9 @@ export function ThemeDashboardTabbed({
         {indicatorTabs}
         {yearSelector}
 
-        <Tabs defaultValue="map" className="w-full">
-          <TabsList className="w-full grid grid-cols-3">
-            <TabsTrigger value="map" className="flex items-center gap-1">
-              <MapIcon className="w-3.5 h-3.5" />
-              地図
-            </TabsTrigger>
-            <TabsTrigger value="stats" className="flex items-center gap-1">
-              <BarChart3 className="w-3.5 h-3.5" />
-              統計
-            </TabsTrigger>
-            <TabsTrigger value="table" className="flex items-center gap-1">
-              <TableIcon className="w-3.5 h-3.5" />
-              テーブル
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="map" className="mt-3">
-            {mapSection}
-          </TabsContent>
-          <TabsContent value="stats" className="mt-3">
+        <DeferredTabs
+          mapSection={mapSection}
+          statsSection={
             <PrefectureStatsPanel
               selectedPrefectureCode={selectedPrefectureCode}
               indicatorDataMap={indicatorDataMap}
@@ -191,16 +175,16 @@ export function ThemeDashboardTabbed({
               themeConfig={themeConfig}
               pageCharts={pageCharts}
             />
-          </TabsContent>
-          <TabsContent value="table" className="mt-3">
-            {currentRankingItem && (
+          }
+          tableSection={
+            currentRankingItem ? (
               <RankingDataTable
                 rankingValues={currentValues}
                 rankingItem={currentRankingItem}
               />
-            )}
-          </TabsContent>
-        </Tabs>
+            ) : null
+          }
+        />
 
         {themeConfig.themeKey === "population-dynamics" && (
           <PopulationScatterSection
@@ -299,5 +283,60 @@ function IndicatorGrid({
           })}
       </div>
     </section>
+  );
+}
+
+/**
+ * 遅延マウント付きタブ — 選択されるまで stats/table タブのコンテンツをレンダリングしない。
+ * 一度表示したタブは mountedTabs で保持し、再マウントを防止する。
+ */
+function DeferredTabs({
+  mapSection,
+  statsSection,
+  tableSection,
+}: {
+  mapSection: React.ReactNode;
+  statsSection: React.ReactNode;
+  tableSection: React.ReactNode | null;
+}) {
+  const [activeTab, setActiveTab] = useState("map");
+  const [mountedTabs, setMountedTabs] = useState<Set<string>>(
+    () => new Set(["map"]),
+  );
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    setMountedTabs((prev) => {
+      if (prev.has(value)) return prev;
+      return new Set(prev).add(value);
+    });
+  };
+
+  return (
+    <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+      <TabsList className="w-full grid grid-cols-3">
+        <TabsTrigger value="map" className="flex items-center gap-1">
+          <MapIcon className="w-3.5 h-3.5" />
+          地図
+        </TabsTrigger>
+        <TabsTrigger value="stats" className="flex items-center gap-1">
+          <BarChart3 className="w-3.5 h-3.5" />
+          統計
+        </TabsTrigger>
+        <TabsTrigger value="table" className="flex items-center gap-1">
+          <TableIcon className="w-3.5 h-3.5" />
+          テーブル
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="map" className="mt-3">
+        {mountedTabs.has("map") && mapSection}
+      </TabsContent>
+      <TabsContent value="stats" className="mt-3">
+        {mountedTabs.has("stats") && statsSection}
+      </TabsContent>
+      <TabsContent value="table" className="mt-3">
+        {mountedTabs.has("table") && tableSection}
+      </TabsContent>
+    </Tabs>
   );
 }

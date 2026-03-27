@@ -73,7 +73,7 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
             const altText = typeof alt === "string" ? alt : "";
             const resolvedSrc =
                 slug && !src.startsWith("http") && !src.startsWith("/")
-                    ? `/api/blog-data/${slug}/${src}`
+                    ? `https://storage.stats47.jp/blog/${slug}/${src}`
                     : src;
             return (
                 <span className="block mt-2 -mx-6 sm:-mx-8 overflow-x-auto">

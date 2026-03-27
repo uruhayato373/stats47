@@ -21,42 +21,31 @@ export function AdSenseScript() {
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
 
   useEffect(() => {
-    // 開発環境またはAdSenseが無効な場合は何もしない
-    if (!isEnabled || !clientId) {
-      console.log("[AdSenseScript] Skipped:", { isEnabled, clientId: clientId ? "Set" : "Not Set" });
-      return;
-    }
+    if (!isEnabled || !clientId) return;
 
-    // 既にスクリプトが読み込まれている場合は何もしない
-    const existingScript = document.querySelector(
-      `script[src*="adsbygoogle.js?client=${clientId}"]`
-    );
-    if (existingScript) {
-      console.log("[AdSenseScript] Script already loaded");
-      return;
-    }
+    const load = () => {
+      const existingScript = document.querySelector(
+        `script[src*="adsbygoogle.js?client=${clientId}"]`
+      );
+      if (existingScript) return;
 
-    // AdSenseスクリプトを動的に追加
-    const script = document.createElement("script");
-    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    
-    script.onload = () => {
-      console.log("[AdSenseScript] Script loaded successfully");
+      const script = document.createElement("script");
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      document.head.appendChild(script);
     };
-    
-    script.onerror = (error) => {
-      console.error("[AdSenseScript] Failed to load script:", error);
-    };
-    
-    document.head.appendChild(script);
-    console.log("[AdSenseScript] Script added to head");
 
-    return () => {
-      // クリーンアップ時にスクリプトを削除（オプション）
-      // 通常、AdSenseスクリプトは一度読み込まれたら削除しない
-    };
+    // メインコンテンツの描画を優先し、アイドル時にスクリプトを読み込む
+    const timer = setTimeout(() => {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(load);
+      } else {
+        load();
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [clientId, isEnabled]);
 
   // このコンポーネントはUIをレンダリングしない

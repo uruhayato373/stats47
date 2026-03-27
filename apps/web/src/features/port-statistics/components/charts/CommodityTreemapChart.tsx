@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect, useTransition, useMemo } from "react";
-import { TreemapChart } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const TreemapChart = dynamic(
+  () => import("@stats47/visualization/d3/TreemapChart").then((m) => m.TreemapChart),
+  { ssr: false },
+);
 import {
   Select,
   SelectContent,
