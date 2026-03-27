@@ -8,8 +8,8 @@ import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import type { TopoJSONTopology } from "@stats47/types";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { MapVisualizationConfig, MapDataPoint } from "@stats47/visualization/d3";
-import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK } from "@stats47/visualization/leaflet";
-import { useTopoJsonToGeoJson } from "@stats47/visualization/leaflet";
+import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK } from "@stats47/visualization/leaflet/constants/tile-providers";
+import { useTopoJsonToGeoJson } from "@stats47/visualization/leaflet/hooks/useTopoJsonToGeoJson";
 
 const TileSwitcher = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.TileSwitcher),
