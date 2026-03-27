@@ -205,6 +205,8 @@ packages/
 | `/fetch-instagram-data` | Instagram Graph API からインサイトデータを取得（リーチ・エンゲージメント・投稿別分析） | `.claude/skills/analytics/fetch-instagram-data/SKILL.md` |
 | `/fetch-x-data` | X (Twitter) API v2 からツイートデータを取得（インプレッション・いいね・RT・投稿別分析） | `.claude/skills/analytics/fetch-x-data/SKILL.md` |
 | `/seo-audit` | SEO 総合監査（GSC/GA4 実データ + サイト構造 + DB → 優先度付きアクションリスト） | `.claude/skills/analytics/seo-audit/SKILL.md` |
+| `/lighthouse-audit` | Lighthouse CLI でパフォーマンス測定（スコア・CWV・リソース → DB 蓄積） | `.claude/skills/analytics/lighthouse-audit/SKILL.md` |
+| `/performance-report` | パフォーマンス総合レポート（トレンド・バジェット監査・ページ種別比較・改善提案） | `.claude/skills/analytics/performance-report/SKILL.md` |
 
 ### ads — 広告・アフィリエイト
 

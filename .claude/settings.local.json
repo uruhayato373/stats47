@@ -36,7 +36,14 @@
       "Bash(npx tsx:*)",
       "Bash(browser-use --headed --profile 'Profile 5' click 144)",
       "Bash(python3 /tmp/yt-schedule.py)",
-      "Bash(python3 /tmp/yt-schedule2.py)"
+      "Bash(python3 /tmp/yt-schedule2.py)",
+      "Bash(wc -l *.md)",
+      "Bash(find . -name \"*.md\" -exec grep -l \"^type:\" {})",
+      "Bash(xargs -I {} basename {})",
+      "WebFetch(domain:arxiv.org)",
+      "Bash(python3 -c \"import sqlite3; print\\(''sqlite3 OK''\\)\")",
+      "Bash(python3 -c \"import json; print\\(''json OK''\\)\")",
+      "Bash(npx drizzle-kit:*)"
     ]
   }
 }

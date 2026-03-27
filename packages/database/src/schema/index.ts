@@ -13,6 +13,7 @@ export * from "./ranking_items";
 export * from "./ranking_page_cards";
 export * from "./ranking_page_views";
 export * from "./note_content";
+export * from "./performance_metrics";
 export * from "./port_statistics";
 export * from "./fishing_ports";
 export * from "./sns_posts";
