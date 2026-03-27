@@ -5,10 +5,12 @@
  * テーブル単位でページネーション付き SELECT → ローカル INSERT で同期する。
  *
  * Usage:
- *   npm run pull:d1 --workspace=packages/database                          # 全テーブル同期
+ *   npm run pull:d1 --workspace=packages/database                          # 全テーブル同期（デフォルト除外あり）
  *   npm run pull:d1 --workspace=packages/database -- --dry-run             # 比較のみ
- *   npm run pull:d1 --workspace=packages/database -- --table ranking_data  # 特定テーブルのみ
+ *   npm run pull:d1 --workspace=packages/database -- --table ranking_data  # 特定テーブルのみ（除外を無視）
  *   npm run pull:d1 --workspace=packages/database -- --batch-size 1000     # バッチサイズ変更
+ *   npm run pull:d1 --workspace=packages/database -- --no-exclude          # デフォルト除外を無効化
+ *   npm run pull:d1 --workspace=packages/database -- --exclude a,b         # カスタム除外リスト
  */
 
 import { execSync } from "child_process";
@@ -30,6 +32,9 @@ const TABLE_BATCH_SIZES: Record<string, number> = {
 };
 const DEFAULT_BATCH_SIZE = 5000;
 
+/** デフォルト除外テーブル（巨大テーブルはリモートを正とする） */
+const DEFAULT_EXCLUDES: string[] = ["correlation_analysis"];
+
 /** 同期対象外のシステムテーブルパターン */
 const SYSTEM_TABLE_PATTERNS = [
   /^sqlite_/,
@@ -42,6 +47,7 @@ const SYSTEM_TABLE_PATTERNS = [
 
 interface Args {
   table?: string;
+  exclude: string[];
   dryRun: boolean;
   batchSize?: number;
   offset?: number;
@@ -65,7 +71,7 @@ interface SyncResult {
 
 function parseArgs(): Args {
   const args = process.argv.slice(2);
-  const result: Args = { dryRun: false };
+  const result: Args = { dryRun: false, exclude: DEFAULT_EXCLUDES };
 
   for (let i = 0; i < args.length; i++) {
     switch (args[i]) {
@@ -74,6 +80,12 @@ function parseArgs(): Args {
         break;
       case "--dry-run":
         result.dryRun = true;
+        break;
+      case "--exclude":
+        result.exclude = args[++i].split(",").map((s) => s.trim()).filter(Boolean);
+        break;
+      case "--no-exclude":
+        result.exclude = [];
         break;
       case "--batch-size":
         result.batchSize = parseInt(args[++i], 10);
@@ -92,7 +104,7 @@ function parseArgs(): Args {
       default:
         console.error(`Unknown argument: ${args[i]}`);
         console.error(
-          "Usage: tsx scripts/pull-remote-d1.ts [--table <name>] [--dry-run] [--batch-size <n>] [--offset <n>]"
+          "Usage: tsx scripts/pull-remote-d1.ts [--table <name>] [--dry-run] [--batch-size <n>] [--offset <n>] [--exclude <t1,t2>] [--no-exclude]"
         );
         process.exit(1);
     }
@@ -332,6 +344,11 @@ async function main() {
     const remoteTables = args.table ? [args.table] : await getRemoteTables();
     const localTables = getLocalTables(db);
     const localTableSet = new Set(localTables);
+    // --table 指定時は除外を無視（明示的な単一テーブル指定が最優先）
+    const excludeSet = new Set(args.table ? [] : args.exclude);
+    if (excludeSet.size > 0) {
+      console.log(`Excluded tables: ${[...excludeSet].join(", ")}`);
+    }
 
     // 比較表示
     console.log("\n┌─────────────────────────────────┬──────────┬──────────┬──────────┐");
@@ -357,14 +374,16 @@ async function main() {
 
       tableInfos.push({ name: table, remoteCount, localCount });
 
+      const isExcluded = excludeSet.has(table);
       const localStr =
         localCount === -1 ? "   (N/A)" : String(localCount).padStart(8);
       const diff =
         localCount === -1
           ? "     N/A"
           : String(remoteCount - localCount).padStart(8);
-      const marker =
-        localCount === -1
+      const marker = isExcluded
+        ? " [EXCL]"
+        : localCount === -1
           ? " [SKIP]"
           : remoteCount !== localCount
             ? " *"
@@ -386,6 +405,20 @@ async function main() {
     const results: SyncResult[] = [];
 
     for (const info of tableInfos) {
+      if (excludeSet.has(info.name)) {
+        console.log(
+          `\n  [EXCL] "${info.name}" はデフォルト除外対象です（--no-exclude で上書き可）`
+        );
+        results.push({
+          table: info.name,
+          success: true,
+          remoteCount: info.remoteCount,
+          localCount: info.localCount,
+          error: "除外対象",
+        });
+        continue;
+      }
+
       if (!localTableSet.has(info.name)) {
         console.log(
           `\n  [SKIP] "${info.name}" はローカルに存在しません`
