@@ -1,14 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { MapDataPoint, PrefectureMapProps } from "@stats47/visualization";
+import type { MapDataPoint, PrefectureMapProps } from "@stats47/visualization/d3";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { type ChoroplethMapConfig } from "../../types/chart-config.types";
 import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const ChoroplethMap = dynamic<PrefectureMapProps>(
-    () => import("@stats47/visualization").then((mod) => mod.PrefectureMapChart),
+    () => import("@stats47/visualization/d3").then((mod) => mod.PrefectureMapChart),
     { ssr: false }
 );
 

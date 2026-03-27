@@ -13,8 +13,13 @@ import {
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import { toBarChartRaceFrames } from "@stats47/ranking";
 import { isOk } from "@stats47/types";
-import type { BarChartRaceFrame } from "@stats47/visualization";
-import { BarChartRace } from "@stats47/visualization/d3";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const BarChartRace = dynamic(
+  () => import("@stats47/visualization/d3").then((m) => m.BarChartRace),
+  { ssr: false },
+);
 
 import type { AreaType } from "@/features/area";
 import { fetchAllYearsRankingValuesAction } from "../../actions/fetch-all-years-ranking-values";

@@ -92,7 +92,6 @@ const nextConfig: NextConfig = {
     "@stats47/types",
     "@stats47/utils",
     "@stats47/visualization",
-    "d3",
     "topojson-client",
     "react-leaflet",
     "leaflet",
@@ -274,7 +273,7 @@ const nextConfig: NextConfig = {
 
   // 静的ファイルの最適化
   experimental: {
-    optimizePackageImports: ["lucide-react"], // lucide-reactのインポート最適化（必要なアイコンのみバンドル）
+    optimizePackageImports: ["lucide-react", "d3"], // lucide-react/d3のインポート最適化（必要なモジュールのみバンドル）
     webpackBuildWorker: true, // 並列コンパイルを有効化（コンパイル速度向上）
     // Server Actionsのボディサイズ制限を緩和（デフォルト: 1MB -> 4MB）
     serverActions: {

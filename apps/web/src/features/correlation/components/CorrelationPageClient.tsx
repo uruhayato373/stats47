@@ -15,8 +15,13 @@ import {
 } from "@stats47/components/atoms/ui/select";
 import { Loader2 } from "lucide-react";
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";
-import { Scatterplot } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+
+const Scatterplot = dynamic(
+  () => import("@stats47/visualization/d3").then((m) => m.Scatterplot),
+  { ssr: false },
+);
 import type { TopCorrelation } from "@stats47/correlation/server";
 import { fetchCorrelationPairAction, type CorrelationPairResult } from "../actions";
 import { calculateRegression } from "../utils/calculate-regression";

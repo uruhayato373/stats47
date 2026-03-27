@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import type { RankingValue } from "@stats47/ranking";
-import { BoxplotChart } from "@stats47/visualization";
+import { BoxplotChart } from "@stats47/visualization/d3";
 import { GitCompareArrows } from "lucide-react";
 
 interface Props {

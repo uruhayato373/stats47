@@ -1,6 +1,7 @@
 "use client";
 
-import { icons, type LucideProps } from "lucide-react";
+import { useEffect, useState, type ComponentType } from "react";
+import type { LucideProps } from "lucide-react";
 import { cn } from "../../lib/cn";
 
 interface IconProps extends Omit<LucideProps, "name"> {
@@ -21,19 +22,33 @@ const ICON_ALIASES: Record<string, string> = {
 
 /**
  * Lucideアイコン名または絵文字を動的にレンダリングするコンポーネント
+ *
+ * icons マップ (679KB) を動的インポートで遅延読み込みする。
  */
 export function Icon({ name, className, ...props }: IconProps) {
-    if (!name) return null;
+    const [LucideIcon, setLucideIcon] = useState<ComponentType<LucideProps> | null>(null);
 
-    // 直接またはエイリアスでアイコンを取得
-    const iconName = ICON_ALIASES[name] || name;
-    const LucideIcon = (icons as any)[iconName];
+    const iconName = name ? (ICON_ALIASES[name] || name) : null;
+
+    useEffect(() => {
+        if (!iconName) return;
+
+        let cancelled = false;
+        import("lucide-react").then((mod) => {
+            if (cancelled) return;
+            const icon = (mod.icons as Record<string, ComponentType<LucideProps>>)[iconName];
+            if (icon) setLucideIcon(() => icon);
+        });
+        return () => { cancelled = true; };
+    }, [iconName]);
+
+    if (!name) return null;
 
     if (LucideIcon) {
         return <LucideIcon className={cn("h-4 w-4", className)} {...props} />;
     }
 
-    // 絵文字としてレンダリング
+    // フォールバック: 絵文字 or ローディング中のプレースホルダー
     return (
         <span
             className={cn("text-xl leading-none inline-block", className)}

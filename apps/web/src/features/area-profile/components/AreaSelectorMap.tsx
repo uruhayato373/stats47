@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 import { REGIONS } from "@stats47/area";
-import { TileGridMap } from "@stats47/visualization";
+import { TileGridMap } from "@stats47/visualization/d3";
 import type { MapDataPoint, SequentialMapVisualizationConfig } from "@stats47/visualization/d3";
 
 /** 各都道府県に地域インデックスを割り当て */
