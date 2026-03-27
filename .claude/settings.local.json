@@ -12,7 +12,9 @@
       "Bash(npx tsc:*)",
       "Bash(npm run:*)",
       "Bash(grep:*)",
-      "Bash(npx wrangler:*)"
+      "Bash(npx wrangler:*)",
+      "Bash(git stash:*)",
+      "Bash(git branch:*)"
     ]
   }
 }
