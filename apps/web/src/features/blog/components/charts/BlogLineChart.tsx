@@ -8,7 +8,7 @@ import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const LineChart = dynamic<D3LineChartProps>(
-    () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
+    () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
     { ssr: false }
 );
 

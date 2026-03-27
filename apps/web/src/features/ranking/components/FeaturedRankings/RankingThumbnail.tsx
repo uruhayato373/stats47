@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@stats47/components";
 import { useState } from "react";
 
@@ -40,31 +41,37 @@ export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, classNa
     if (resolvedDark && resolvedLight) {
         return (
             <>
-                <img
+                <Image
                     src={resolvedLight}
                     alt={alt}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className={cn(imgClassName, "dark:hidden")}
-                    loading="lazy"
                     onError={() => setError(true)}
+                    unoptimized
                 />
-                <img
+                <Image
                     src={resolvedDark}
                     alt={alt}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className={cn(imgClassName, "hidden dark:block")}
-                    loading="lazy"
                     onError={() => setError(true)}
+                    unoptimized
                 />
             </>
         );
     }
 
     return (
-        <img
+        <Image
             src={resolvedLight || resolvedDark || ""}
             alt={alt}
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
             className={imgClassName}
-            loading="lazy"
             onError={() => setError(true)}
+            unoptimized
         />
     );
 }

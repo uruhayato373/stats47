@@ -4,8 +4,13 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 import { REGIONS } from "@stats47/area";
-import { TileGridMap } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
 import type { MapDataPoint, SequentialMapVisualizationConfig } from "@stats47/visualization/d3";
+
+const TileGridMap = dynamic(
+  () => import("@stats47/visualization/d3/TileGridMapChart").then((m) => m.TileGridMap),
+  { ssr: false },
+);
 
 /** 各都道府県に地域インデックスを割り当て */
 const mapData: MapDataPoint[] = REGIONS.flatMap((region, idx) =>

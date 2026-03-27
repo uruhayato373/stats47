@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
-import { D3LineChart } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const D3LineChart = dynamic(
+  () => import("@stats47/visualization/d3/LineChart").then((m) => m.D3LineChart),
+  { ssr: false },
+);
 import { fetchPortTimeSeriesAction } from "../../actions/fetch-port-year-data";
 
 type MetricKey = "cargoTotal" | "shipsTotal" | "passengersTotal" | "containerTonnage";

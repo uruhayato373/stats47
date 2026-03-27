@@ -17,7 +17,12 @@ import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggl
 import { rankByValue } from "@stats47/ranking";
 import type { TopoJSONTopology } from "@stats47/types";
 import { computeDeviationScores } from "@stats47/utils";
-import { CityMapChart } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const CityMapChart = dynamic(
+  () => import("@stats47/visualization/d3/CityMapChart").then((m) => m.CityMapChart),
+  { ssr: false },
+);
 import type { ColumnDef } from "@tanstack/react-table";
 import { Loader2 } from "lucide-react";
 

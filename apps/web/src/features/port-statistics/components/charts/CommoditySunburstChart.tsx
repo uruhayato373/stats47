@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect, useTransition, useMemo } from "react";
-import { SunburstChart } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const SunburstChart = dynamic(
+  () => import("@stats47/visualization/d3/SunburstChart").then((m) => m.SunburstChart),
+  { ssr: false },
+);
 import {
   Select,
   SelectContent,

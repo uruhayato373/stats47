@@ -8,7 +8,7 @@ import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const ChoroplethMap = dynamic<PrefectureMapProps>(
-    () => import("@stats47/visualization/d3").then((mod) => mod.PrefectureMapChart),
+    () => import("@stats47/visualization/d3/PrefectureMapChart").then((mod) => mod.PrefectureMapChart),
     { ssr: false }
 );
 

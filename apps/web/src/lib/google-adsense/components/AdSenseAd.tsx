@@ -75,18 +75,14 @@ export function AdSenseAd({
 
     // 広告コンテナの幅をチェック
     const containerWidth = adRef.current.offsetWidth;
-    console.log("[AdSenseAd] Container width:", containerWidth, "slotId:", slotId);
 
     if (containerWidth === 0) {
-      console.warn("[AdSenseAd] Container width is 0, delaying ad push");
       // 幅が0の場合は少し待ってから再試行
       const retryTimer = setTimeout(() => {
         if (adRef.current && adRef.current.offsetWidth > 0) {
           try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
-            console.log("[AdSenseAd] Ad pushed after retry, slotId:", slotId);
           } catch (error) {
-            console.error("[AdSenseAd] Ad blocked or error (retry):", error);
             logger.warn({ error }, "AdSense ad blocked");
             setIsAdBlocked(true);
           }
@@ -96,18 +92,10 @@ export function AdSenseAd({
     }
 
     try {
-      // AdSense広告スクリプトの読み込みとプッシュ
       if (typeof window !== "undefined") {
-        console.log("[AdSenseAd] Attempting to push ad, window.adsbygoogle:", window.adsbygoogle ? "Available" : "Not Available");
-
-        // window.adsbygooleが存在しない場合でも配列として初期化して.push()を実行
-        // これはAdSenseの公式コードと同じパターン
         (window.adsbygoogle = window.adsbygoogle || []).push({});
-        console.log("[AdSenseAd] Ad pushed to queue, slotId:", slotId);
       }
     } catch (error) {
-      // AdBlockなどで広告がブロックされた場合
-      console.error("[AdSenseAd] Ad blocked or error:", error);
       logger.warn({ error }, "AdSense ad blocked");
       setIsAdBlocked(true);
     }
@@ -127,26 +115,8 @@ export function AdSenseAd({
 
     let isMounted = true;
 
-    const checkAdStatus = () => {
-      if (!isMounted || !adRef.current) return;
-
-      const insElement = adRef.current.querySelector('ins.adsbygoogle');
-      if (insElement) {
-        const dataAdStatus = insElement.getAttribute('data-ad-status');
-        console.log("[AdSenseAd] Ad status:", {
-          slotId,
-          dataAdStatus,
-          innerHTML: insElement.innerHTML ? "Has content" : "Empty",
-        });
-      }
-    };
-
-    // 3秒後に広告の状態を確認
-    const timer = setTimeout(checkAdStatus, 3000);
-
     return () => {
       isMounted = false;
-      clearTimeout(timer);
     };
   }, [isVisible, slotId]);
 

@@ -8,7 +8,7 @@ import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const ScatterPlot = dynamic<ScatterplotProps>(
-    () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),
+    () => import("@stats47/visualization/d3/Scatterplot").then((mod) => mod.Scatterplot),
     { ssr: false }
 );
 

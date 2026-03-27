@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import type { PrefectureMapProps } from "@stats47/visualization/d3";
 
 const PrefectureMapChart = dynamic<PrefectureMapProps>(
-  () => import("@stats47/visualization/d3").then((mod) => mod.PrefectureMapChart),
+  () => import("@stats47/visualization/d3/PrefectureMapChart").then((mod) => mod.PrefectureMapChart),
   { ssr: false }
 );
 

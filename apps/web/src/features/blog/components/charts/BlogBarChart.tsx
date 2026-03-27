@@ -8,7 +8,7 @@ import { useChartData } from "../../hooks/useChartData";
 import { ChartWithFallback } from "./ChartWithFallback";
 
 const BarChart = dynamic<BarChartProps>(
-    () => import("@stats47/visualization/d3").then((mod) => mod.BarChart),
+    () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
     { ssr: false }
 );
 

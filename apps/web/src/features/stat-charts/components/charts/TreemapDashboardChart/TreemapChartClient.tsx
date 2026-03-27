@@ -8,7 +8,7 @@ import type { HierarchyDataNode } from "@stats47/visualization/d3";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const TreemapChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.TreemapChart),
+  () => import("@stats47/visualization/d3/TreemapChart").then((mod) => mod.TreemapChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 

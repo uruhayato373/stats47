@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import type { ScatterplotDataNode, ScatterplotProps } from "@stats47/visualization/d3";
 
 const Scatterplot = dynamic<ScatterplotProps>(
-  () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),
+  () => import("@stats47/visualization/d3/Scatterplot").then((mod) => mod.Scatterplot),
   { ssr: false }
 );
 

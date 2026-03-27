@@ -261,6 +261,26 @@ const nextConfig: NextConfig = {
           resourceRegExp: /^(https-proxy-agent|agent-base)$/,
         })
       );
+
+      // D3 を専用 async chunk に分離（チャート間での重複を排除）
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization?.splitChunks,
+          cacheGroups: {
+            ...(typeof config.optimization?.splitChunks === "object"
+              ? config.optimization.splitChunks.cacheGroups
+              : {}),
+            d3Vendor: {
+              test: /[\\/]node_modules[\\/]d3/,
+              name: "vendor-d3",
+              chunks: "async" as const,
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
     }
 
     return config;
@@ -273,7 +293,7 @@ const nextConfig: NextConfig = {
 
   // 静的ファイルの最適化
   experimental: {
-    optimizePackageImports: ["lucide-react", "d3"], // lucide-react/d3のインポート最適化（必要なモジュールのみバンドル）
+    optimizePackageImports: ["lucide-react", "d3", "@stats47/visualization"], // barrel export の tree-shaking 強化
     webpackBuildWorker: true, // 並列コンパイルを有効化（コンパイル速度向上）
     // Server Actionsのボディサイズ制限を緩和（デフォルト: 1MB -> 4MB）
     serverActions: {

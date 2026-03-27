@@ -1,7 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
-import { DonutChart } from "@stats47/visualization/d3";
+import dynamic from "next/dynamic";
+
+const DonutChart = dynamic(
+  () => import("@stats47/visualization/d3/DonutChart").then((m) => m.DonutChart),
+  { ssr: false },
+);
 import type { PortWithStats } from "../../lib/load-port-data";
 
 type MetricKey = "cargoTotal" | "shipsTotal" | "passengersTotal" | "containerTonnage";

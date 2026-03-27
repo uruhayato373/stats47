@@ -19,7 +19,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
 const Scatterplot = dynamic(
-  () => import("@stats47/visualization/d3").then((m) => m.Scatterplot),
+  () => import("@stats47/visualization/d3/Scatterplot").then((m) => m.Scatterplot),
   { ssr: false },
 );
 import type { TopCorrelation } from "@stats47/correlation/server";

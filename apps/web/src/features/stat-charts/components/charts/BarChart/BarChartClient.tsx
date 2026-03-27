@@ -8,7 +8,7 @@ import type { ChartDataNode } from "@stats47/visualization/d3";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const BarChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.BarChart),
+  () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 

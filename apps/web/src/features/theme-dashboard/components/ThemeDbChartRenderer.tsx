@@ -12,32 +12,32 @@ import { fetchPopulationCompositionAction, type AgeCompositionResult } from "../
 import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
 
 const D3LineChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
+  () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
 );
 
 const D3MixedChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.MixedChart),
+  () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
 );
 
 const DonutChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.DonutChart),
+  () => import("@stats47/visualization/d3/DonutChart").then((mod) => mod.DonutChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
 );
 
 const HorizontalDivergingBarChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.HorizontalDivergingBarChart),
+  () => import("@stats47/visualization/d3/HorizontalDivergingBarChart").then((mod) => mod.HorizontalDivergingBarChart),
   { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> },
 );
 
 const CategoryHeatmap = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.CategoryHeatmap),
+  () => import("@stats47/visualization/d3/CategoryHeatmap").then((mod) => mod.CategoryHeatmap),
   { ssr: false, loading: () => <Skeleton className="h-[280px] w-full rounded-md" /> },
 );
 
 const PyramidChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.PyramidChart),
+  () => import("@stats47/visualization/d3/PyramidChart").then((mod) => mod.PyramidChart),
   { ssr: false, loading: () => <Skeleton className="h-[300px] w-full rounded-md" /> },
 );
 

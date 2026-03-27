@@ -61,7 +61,7 @@ export function RegionComparisonClient({
             地域間比較
           </h1>
           <Select value={currentCategoryKey} onValueChange={handleCategoryChange}>
-            <SelectTrigger className="h-10 w-40 rounded-lg border text-sm font-bold">
+            <SelectTrigger aria-label="比較カテゴリを選択" className="h-10 w-40 rounded-lg border text-sm font-bold">
               <SelectValue>
                 {currentCategory?.categoryName ?? "カテゴリ"}
               </SelectValue>
