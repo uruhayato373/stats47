@@ -13,7 +13,7 @@ import { expect, test } from "@playwright/test";
 test.describe("本番スモークテスト", () => {
   test("トップページが表示される", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    await expect(page).toHaveTitle(/stats47/i);
+    await expect(page).toHaveTitle(/統計で見る都道府県/i);
   });
 
   test("都道府県一覧が表示される", async ({ page }) => {
