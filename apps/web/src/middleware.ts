@@ -97,6 +97,14 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // --- www → 非www リダイレクト（301 Permanent） ---
+  const host = req.headers.get("host") || "";
+  if (host.startsWith("www.")) {
+    const url = new URL(pathname, "https://stats47.jp");
+    url.search = req.nextUrl.search;
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // --- Trailing slash の正規化（301 Permanent） ---
   if (pathname !== "/" && pathname.endsWith("/")) {
     const url = new URL(pathname.slice(0, -1), req.url);
