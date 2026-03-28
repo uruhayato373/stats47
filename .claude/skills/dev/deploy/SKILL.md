@@ -1,16 +1,19 @@
-変更を main に push してデプロイする。
+変更を develop → main へマージしてデプロイする。
+
+## ブランチ運用ルール
+
+```
+feature/* → develop → main（デプロイ）
+```
+
+- **develop**: 統合ブランチ。全ての変更はまず develop に入る
+- **main**: 本番デプロイブランチ。develop からのマージのみ
+- **feature/***: 機能ブランチ。develop から分岐し develop にマージ
+- main に直接コミット・push しない
 
 ## 前提
 
 - 変更がすべてコミット済みであること
-
-## ブランチ判定
-
-現在のブランチに応じて手順が異なる:
-
-- **`main` にいる場合** → Step 2 の後、直接 `git push origin main` → develop 同期
-- **`develop` にいる場合** → Step 2 の後、main へマージ → push → develop 同期
-- **feature ブランチにいる場合** → 従来の feature → develop → main フロー
 
 ## 手順
 
@@ -30,23 +33,25 @@ git status
 
 ```bash
 # 1. 型チェック
-npm run type-check
+npx tsc --noEmit -p apps/web/tsconfig.json
 
-# 2. ユニットテスト
-npm run test:run -w apps/web
+# 2. ESLint
+cd apps/web && npx eslint src/ --ext .ts,.tsx && cd ../..
 
-# 3. ビルド確認
-npm run build -w apps/web
+# 3. ユニットテスト
+cd apps/web && npx vitest run && cd ../..
 ```
 
 全パスしたら Step 3 へ進む。
 
-### Step 3: develop へマージ
+### Step 3: develop へマージ（feature ブランチの場合）
+
+`$CURRENT_BRANCH` が `develop` でも `main` でもない場合:
 
 ```bash
 git checkout develop
 git pull origin develop
-git merge $FEATURE_BRANCH
+git merge $CURRENT_BRANCH
 ```
 
 - **コンフリクトが発生した場合** → ユーザーに報告し、解決方法を相談する。自動解決しない。
@@ -55,6 +60,8 @@ git merge $FEATURE_BRANCH
 ```bash
 git push origin develop
 ```
+
+`$CURRENT_BRANCH` が既に `develop` の場合はこのステップをスキップ。
 
 ### Step 4: main へマージ
 
@@ -71,13 +78,9 @@ git merge develop
 git push origin main
 ```
 
-### Step 5: develop を同期し、元のブランチに戻る
+### Step 5: 元のブランチに戻る
 
 ```bash
-git checkout develop
-git pull origin develop
-git merge main
-git push origin develop
 git checkout $CURRENT_BRANCH
 ```
 
@@ -86,13 +89,13 @@ git checkout $CURRENT_BRANCH
 以下を報告する:
 
 - マージしたブランチ名
-- テスト・型チェック・ビルドの結果サマリ
+- テスト・型チェック・ESLint の結果サマリ
 - develop, main それぞれの push 結果
 - エラーがあった場合はその内容
 
 ## エラー時の方針
 
-- テスト/型チェック/ビルドの失敗 → ユーザーに確認し、続行 or 中止を判断
+- テスト/型チェック/ESLint の失敗 → ユーザーに確認し、続行 or 中止を判断
 - マージコンフリクト → **自動解決しない**。ユーザーに状況を報告し指示を仰ぐ
 - push 失敗 → ユーザーに報告し、リトライ or 手動対応を相談
 - いかなる場合も `--force` は使用しない
