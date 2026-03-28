@@ -68,3 +68,8 @@ jobs:
           name: smoke-test-report
           path: apps/web/playwright-smoke-report/
           retention-days: 7
+
+      - name: Warm cache (R2 ISR + Edge)
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://stats47.jp' }}
+        run: bash .github/scripts/warm-cache.sh "$BASE_URL"
