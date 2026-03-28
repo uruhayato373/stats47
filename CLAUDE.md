@@ -50,6 +50,12 @@ packages/
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
+### Tier 0: Dispatcher（自動振り分け）
+
+| スキル | 役割 |
+|---|---|
+| `task-router` | ユーザーの自然言語指示から最適なエージェント・スキルを自動判定（`user-invocable: false`、Claude が内部参照） |
+
 ### Tier 1: Orchestrator（統括）
 
 | エージェント | 役割 | 委譲先 |
@@ -186,6 +192,7 @@ packages/
 | `/publish-instagram` | browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定（カルーセル・リール） | `.claude/skills/sns/publish-instagram/SKILL.md` |
 | `/mark-sns-posted` | 投稿済み SNS コンテンツを Markdown 記録 → ローカル・リモート R2 から削除 | `.claude/skills/sns/mark-sns-posted/SKILL.md` |
 | `/publish-youtube-normal` | YouTube 通常動画の制作→アップロード→DB記録パイプライン | `.claude/skills/sns/publish-youtube-normal/SKILL.md` |
+| `/plan-youtube-normal` | YouTube 競合分析×自社データで通常動画の企画を自動生成 | `.claude/skills/sns/plan-youtube-normal/SKILL.md` |
 | `/update-sns-metrics` | 各 SNS API から指標取得 → DB (`sns_metrics`) 蓄積 + Markdown 更新 | `.claude/skills/sns/update-sns-metrics/SKILL.md` |
 | `/sns-weekly-report` | DB から週次パフォーマンスレポートを生成 | `.claude/skills/sns/sns-weekly-report/SKILL.md` |
 | `/preview-remotion` | 実データで Remotion Studio プレビューデータを上書き（ranking） | `.claude/skills/sns/preview-remotion/SKILL.md` |

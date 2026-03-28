@@ -92,12 +92,49 @@ cd apps/remotion && npx remotion render src/index.ts RankingYouTube-ScrollGes \
 
 ### Phase 4: YouTube メタデータ生成 + アップロード
 
-レンダリング完了後、タイトル・説明・タグを生成し、`scripts/youtube-upload.js` でアップロードする。
+レンダリング完了後、以下のテンプレートに沿ってメタデータを生成し、`scripts/youtube-upload.js` でアップロードする。
 
-- タイトル: 50文字以内、SEO キーワード先頭
-- 説明: 250文字以上、冒頭にハッシュタグ3-5個、TOP5/WORST5、UTM 付き URL、コメント誘導
-- タグ: カンマ区切り
-- `--privacy unlisted`（確認用）または `--schedule <ISO8601>`（予約公開）
+#### タイトル（50文字以内）
+
+SEO キーワードを先頭に配置。「都道府県別」＋指標名＋意外性のあるフック。
+
+#### 説明欄テンプレート（250文字以上）
+
+```
+#ハッシュタグ1 #ハッシュタグ2 #ハッシュタグ3 #stats47
+
+{動画の説明文 2〜3行。冒頭125文字にキーワード集中}
+
+■ ランキング TOP5
+1位 ○○県 ○○
+...
+
+■ ランキング WORST5
+43位 ○○県 ○○
+...
+
+データ出典: e-Stat 政府統計の総合窓口（{年度}）
+
+📊 全47都道府県ランキングはこちら
+https://stats47.jp/ranking/{rankingKey}?utm_source=youtube&utm_medium=social&utm_campaign=ranking&utm_content={rankingKey}
+
+あなたの県は何位だった？コメントで感想教えてください！
+
+━━━━━━━━━━━━━━━
+📊 統計で見る都道府県 | stats47
+🌐 https://stats47.jp?utm_source=youtube&utm_medium=social&utm_campaign=channel
+━━━━━━━━━━━━━━━
+
+📢 チャンネル登録で最新の都道府県ランキングを見逃さない！
+```
+
+**必須ルール**:
+- 個別ランキング URL を折りたたみ前（先頭3行以内）に近い位置に配置
+- UTM パラメータ必須（`utm_content={rankingKey}` でテーマ別計測）
+- チャンネル共通リンク（`stats47.jp?utm_campaign=channel`）は末尾に固定
+- 自殺率テーマは説明欄末尾に相談窓口（いのちの電話・よりそいホットライン等）を必ず記載
+
+#### アップロード
 
 ```bash
 node scripts/youtube-upload.js \

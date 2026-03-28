@@ -24,6 +24,9 @@
 3. blog-editor: /expert-review → /proofread-article → /publish-article
 4. db-manager: /sync-articles
 
+### YouTube 通常動画（ScrollGes）
+1. sns-producer: /publish-youtube-normal（data生成→レンダリング→API投稿→DB記録→mp4削除を一貫実行）
+
 ### note.com 記事制作
 1. note-manager: /validate-note-idea → /investigate-note-data → /design-note-structure → /write-note-section
 2. note-manager: /generate-note-charts → /edit-note-draft
