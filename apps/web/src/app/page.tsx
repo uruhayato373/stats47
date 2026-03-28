@@ -99,7 +99,7 @@ export default async function HomePage() {
             </span>
           </h1>
           <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-            <CountUp end={1800} className="font-semibold text-primary" suffix="以上の統計" />で47都道府県をランキング
+            <CountUp end={1800} duration={800} className="font-semibold text-primary" suffix="以上の統計" />で47都道府県をランキング
           </p>
           <div className="flex flex-wrap justify-center gap-3 mt-4">
             <Button asChild>
@@ -118,10 +118,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ② 注目のランキング */}
-      <ScrollReveal>
-        <FeaturedRankings limit={8} />
-      </ScrollReveal>
+      {/* ② 注目のランキング（LCP 要素 — ScrollReveal なしで即表示） */}
+      <FeaturedRankings limit={8} />
 
 
 

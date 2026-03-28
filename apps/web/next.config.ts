@@ -67,6 +67,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Cloudflare Edge Cache: ISR ページを Edge に 24h キャッシュ
+      {
+        source: "/((?!api|_next).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
     ];
   },
 

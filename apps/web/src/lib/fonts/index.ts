@@ -23,7 +23,7 @@ export const inter = Inter({
  * 日本語テキスト用のフォント（400, 500, 600, 700のウェイト）
  */
 export const notoSansJP = Noto_Sans_JP({
-  weight: ["400", "600", "700"],
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-noto-sans-jp",
   display: "swap",
