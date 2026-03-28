@@ -43,7 +43,9 @@
       "Bash(node -e \":*)",
       "Read(//Users/minamidaisuke/.claude/projects/-Users-minamidaisuke-stats47/ceb269dc-314c-4d16-99de-65ae79b64e04/subagents/**)",
       "Bash(grep -c '\"\"completed\"\"' /private/tmp/claude-501/-Users-minamidaisuke-stats47/ceb269dc-314c-4d16-99de-65ae79b64e04/tasks/a276ca958a460645f.output)",
-      "Bash(grep -c '\"\"completed\"\"' /private/tmp/claude-501/-Users-minamidaisuke-stats47/ceb269dc-314c-4d16-99de-65ae79b64e04/tasks/ae77bd45f6714aaba.output)"
+      "Bash(grep -c '\"\"completed\"\"' /private/tmp/claude-501/-Users-minamidaisuke-stats47/ceb269dc-314c-4d16-99de-65ae79b64e04/tasks/ae77bd45f6714aaba.output)",
+      "Bash(git rebase:*)",
+      "Bash(git remote:*)"
     ]
   },
   "hooks": {

@@ -1,9 +1,11 @@
-export * from './components/CityListSidebar';
-export * from './components/DashboardGridLayout';
+// CityListSidebar は server component → server.ts へ移動
+// DashboardGridLayout は server component（DashboardComponentRenderer に依存）→ server.ts へ移動
 export * from './components/layouts/DashboardPageHeader';
 export * from './components/ui/ScrollToTopButton';
 export * from "./types";
-export * from "./utils";
+// utils: client-safe のみ export（computeYAxisDomain は server.ts 経由）
+export { extractDashboardProps } from "./utils/extractDashboardProps";
+export * from "./utils/generate-dashboard-metadata";
 
 // Client-safe component exports
 export { DashboardCard } from "./components/shared/DashboardCard";
