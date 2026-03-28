@@ -24,13 +24,12 @@ describe("getRequiredBaseUrl", () => {
 
   it("NEXT_PUBLIC_BASE_URL が未設定で production 環境の場合にデフォルト URL を返す", () => {
     delete process.env.NEXT_PUBLIC_BASE_URL;
-    process.env.NODE_ENV = "production";
+    process.env.NEXT_PUBLIC_ENV = "production";
     expect(getRequiredBaseUrl()).toBe("https://stats47.jp");
   });
 
   it("NEXT_PUBLIC_BASE_URL が未設定で development 環境の場合にデフォルト URL を返す", () => {
     delete process.env.NEXT_PUBLIC_BASE_URL;
-    process.env.NODE_ENV = "development";
     delete process.env.NEXT_PUBLIC_ENV;
     expect(getRequiredBaseUrl()).toBe("http://localhost:3000");
   });

@@ -22,6 +22,7 @@ function makeRankingValue(
     categoryName: "人口",
     value,
     rank,
+    unit: "人",
   };
 }
 

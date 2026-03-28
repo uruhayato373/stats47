@@ -12,17 +12,12 @@ import type { Area } from "@stats47/area";
 const mockArea: Area = {
   areaCode: "13000",
   areaName: "東京都",
-  areaNameKana: "トウキョウト",
-  prefCode: "13",
-  regionCode: "03",
-  regionName: "関東",
+  areaType: "prefecture",
 };
 
 const baseComponent: DashboardComponent = {
   id: "comp-1",
-  pageKey: "test-page",
   componentType: "line-chart",
-  chartKey: "test-chart",
   title: "テストチャート",
   sortOrder: 1,
   componentProps: JSON.stringify({ annotation: "注釈テスト", rankingLinkLabel: "詳細" }),
@@ -30,6 +25,10 @@ const baseComponent: DashboardComponent = {
   sourceLink: "https://example.com",
   sourceName: "テストソース",
   dataSource: "estat",
+  gridColumnSpan: null,
+  gridColumnSpanTablet: null,
+  gridColumnSpanSm: null,
+  gridColumnSpanMobile: null,
 };
 
 describe("extractDashboardProps", () => {

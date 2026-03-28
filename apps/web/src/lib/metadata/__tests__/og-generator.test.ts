@@ -72,7 +72,7 @@ describe("generateOGMetadata", () => {
       type: "article",
     });
 
-    expect(result.openGraph?.type).toBe("article");
+    expect((result.openGraph as Record<string, unknown>)?.type).toBe("article");
   });
 
   it("url が指定された場合に og:url を含む", () => {
