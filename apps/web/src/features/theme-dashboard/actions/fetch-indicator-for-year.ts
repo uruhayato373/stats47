@@ -1,19 +1,20 @@
 "use server";
 
-import type { RankingValue } from "@stats47/ranking";
+import {
+  fetchFormattedStats,
+  type GetStatsDataParams,
+} from "@stats47/estat-api/server";
 import {
   findRankingItem,
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
 } from "@stats47/ranking/server";
-import {
-  fetchFormattedStats,
-  type GetStatsDataParams,
-} from "@stats47/estat-api/server";
 import { isOk } from "@stats47/types";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/services/get-estat-cache-storage";
+import { getEstatCacheStorage } from "@/features/stat-charts/server";
+
+import type { RankingValue } from "@stats47/ranking";
 
 /**
  * 指定指標・年度のランキングデータを取得するサーバーアクション

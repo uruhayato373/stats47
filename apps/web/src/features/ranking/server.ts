@@ -1,9 +1,11 @@
 import "server-only";
 
 import { cache } from "react";
-import { err, type Result } from "@stats47/types";
-import type { RankingItem } from "@stats47/ranking";
+
 import { listFeaturedRankingItems, findRankingItem as findRankingItemRaw } from "@stats47/ranking/server";
+import { err, type Result } from "@stats47/types";
+
+import type { RankingItem } from "@stats47/ranking";
 
 // cache() でリクエストレベル dedupe（generateMetadata + ページ本体の重複排除）
 export const cachedFindRankingItem = cache(findRankingItemRaw);
@@ -34,3 +36,6 @@ export { RelatedGroupCard } from "./components/RankingSidebar/RelatedGroupCard";
 // サーバー専用ローダー
 export { loadRankingTopPageData } from "./lib/ranking-top-page-loader";
 export type { RankingTopPageData, FeaturedRankingItemView } from "./lib/ranking-top-page-loader";
+
+// Server components (sidebar cards)
+export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";

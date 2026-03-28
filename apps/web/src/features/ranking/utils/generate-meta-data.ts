@@ -4,15 +4,18 @@
  * SEO対策のためのメタデータを生成
  */
 
-import type { AreaType } from "@/features/area";
 import {
     type RankingItem,
     type RankingValue,
     getRankingTitle,
 } from "@stats47/ranking";
-import type { Metadata } from "next";
+
+import type { AreaType } from "@/features/area";
 
 import { buildRankingSummary } from "./build-ranking-summary";
+
+import type { Metadata } from "next";
+
 
 /**
  * meta description を動的に構築する

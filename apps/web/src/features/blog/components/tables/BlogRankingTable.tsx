@@ -1,12 +1,15 @@
 "use client";
 
 import { useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
 import { DataTable } from "@stats47/components";
-import type { ColumnDef } from "@tanstack/react-table";
-import type { ChartDataNode } from "@stats47/visualization/d3";
+import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
 import { useChartData } from "../../hooks/useChartData";
+
 import type { RankingTableConfig } from "../../types/chart-config.types";
+import type { ChartDataNode } from "@stats47/visualization/d3";
+import type { ColumnDef } from "@tanstack/react-table";
 
 type RankingRow = {
   rank: number;

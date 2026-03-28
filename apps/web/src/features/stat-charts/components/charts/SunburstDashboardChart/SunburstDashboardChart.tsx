@@ -1,17 +1,15 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatDataWithCategories } from "../../../services";
 import { toSunburstData } from "../../../adapters";
+import { fetchEstatDataWithCategories } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { SunburstChartClient } from "./SunburstChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { HierarchyData } from "../../../types/visualization";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const SunburstDashboardChart = async ({
   common,

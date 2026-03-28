@@ -1,14 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { FileText } from "lucide-react";
+
+import Link from "next/link";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { FileText } from "lucide-react";
+
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 const MAX_COLLAPSED = 5;

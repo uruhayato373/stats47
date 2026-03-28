@@ -1,12 +1,13 @@
 "use client";
 
-import { Share2 } from "lucide-react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { Share2 } from "lucide-react";
+
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 interface SidebarShareCardProps {

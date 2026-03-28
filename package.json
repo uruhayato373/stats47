@@ -29,8 +29,7 @@
   ],
   "overrides": {
     "next": "15.1.7",
-    "jsdom": "25.0.1",
-    "ajv": "^8.17.1"
+    "jsdom": "25.0.1"
   },
   "packageManager": "npm@10.8.2",
   "dependencies": {

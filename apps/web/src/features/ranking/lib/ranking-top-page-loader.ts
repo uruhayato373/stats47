@@ -5,15 +5,17 @@ import "server-only";
  *
  * app/ranking/page.tsx から抽出。page.tsx を薄いラッパーに保つ。
  */
+import {
+  listFeaturedRankingItems,
+} from "@stats47/ranking/server";
+import { isOk, unwrap } from "@stats47/types";
+
+import type { CategoryGridItem } from "@/features/category";
 import { listCategories } from "@/features/category/server";
 import {
   normalizeRankingItemProperties,
   type RankingItem,
 } from "@/features/ranking";
-import {
-  listFeaturedRankingItems,
-} from "@stats47/ranking/server";
-import { isOk, unwrap } from "@stats47/types";
 
 /** おすすめランキングの表示用データ */
 export interface FeaturedRankingItemView {
@@ -28,8 +30,6 @@ export interface FeaturedRankingItemView {
   definition?: string | null;
   baseThumbnailUrl: string;
 }
-
-import type { CategoryGridItem } from "@/features/category";
 
 /** ランキングトップページの全データ */
 export interface RankingTopPageData {

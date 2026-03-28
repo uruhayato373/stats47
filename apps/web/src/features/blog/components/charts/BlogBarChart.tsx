@@ -1,11 +1,15 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { ChartDataNode, BarChartProps } from "@stats47/visualization/d3";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { type BarChartConfig } from "../../types/chart-config.types";
+
 import { useChartData } from "../../hooks/useChartData";
+import { type BarChartConfig } from "../../types/chart-config.types";
+
 import { ChartWithFallback } from "./ChartWithFallback";
+
+import type { ChartDataNode, BarChartProps } from "@stats47/visualization/d3";
 
 const BarChart = dynamic<BarChartProps>(
     () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),

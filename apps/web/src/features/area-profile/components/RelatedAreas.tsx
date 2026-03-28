@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 import {
     fetchPrefectures,
     PREFECTURE_TO_REGION_MAP,
     REGIONS,
 } from "@stats47/area";
-import Link from "next/link";
 import {
     Card,
     CardContent,

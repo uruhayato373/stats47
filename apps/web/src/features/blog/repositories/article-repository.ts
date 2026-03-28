@@ -1,8 +1,8 @@
 import "server-only";
 
-import { articleTags, articles, tags } from "@stats47/database/server";
-import { getDrizzle } from "@stats47/database/server";
+import { articleTags, articles, tags, getDrizzle } from "@stats47/database/server";
 import { and, desc, eq, inArray } from "drizzle-orm";
+
 import { type Article, type ArticleFrontmatter } from "../types/article.types";
 
 function toArticle(row: typeof articles.$inferSelect): Article {

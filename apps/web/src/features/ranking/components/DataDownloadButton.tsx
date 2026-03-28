@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Loader2 } from "lucide-react";
+
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Card, CardContent } from "@stats47/components/atoms/ui/card";
 import {
@@ -16,11 +16,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@stats47/components/atoms/ui/tooltip";
-import type { RankingValue } from "@stats47/ranking";
 import { isOk } from "@stats47/types";
+import { Download, Loader2 } from "lucide-react";
+
 import type { AreaType } from "@/features/area";
+
 import { trackCsvDownload } from "@/lib/analytics/events";
-import { fetchAllYearsRankingValuesAction } from "../actions/fetch-all-years-ranking-values";
+
+import { fetchAllYearsRankingValuesAction } from "../actions";
+
+import type { RankingValue } from "@stats47/ranking";
 
 interface DataDownloadButtonProps {
   rankingKey: string;

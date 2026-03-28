@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+
 import { ExternalLink } from "lucide-react";
 
 import type { RankingItem } from "@stats47/ranking";

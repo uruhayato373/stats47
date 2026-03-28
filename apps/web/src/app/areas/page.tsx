@@ -1,9 +1,13 @@
-import { fetchPrefectures, REGIONS } from "@stats47/area";
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
-import { AreaSelectorMap } from "@/features/area-profile/components/AreaSelectorMap";
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
-import type { Metadata } from "next";
 import Link from "next/link";
+
+import { fetchPrefectures, REGIONS } from "@stats47/area";
+
+import { AreaSelectorMap } from "@/features/area-profile";
+
+import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+import type { Metadata } from "next";
 
 const title = "都道府県一覧 | Stats47";
 const description =

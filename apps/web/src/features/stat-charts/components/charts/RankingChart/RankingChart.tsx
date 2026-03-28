@@ -1,24 +1,20 @@
-import React from "react";
-
 import { getDrizzle, rankingData as rankingDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
 import { findRankingItemByKeyAndAreaType } from "@stats47/ranking/server";
-import type { GetStatsDataParams } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
 import { and, eq, asc } from "drizzle-orm";
 
-import { fetchEstatData } from "../../../services";
-import { toLineChartData } from "../../../adapters/toLineChartData";
 import { toBarChartData } from "../../../adapters";
+import { toLineChartData } from "../../../adapters/toLineChartData";
+import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
 import { DashboardCard } from "../../shared/DashboardCard";
-
-import { LineChartClient } from "../LineChart/LineChartClient";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 import { BarChartClient } from "../BarChart/BarChartClient";
+import { LineChartClient } from "../LineChart/LineChartClient";
 
 import type { DashboardItemProps } from "../../../types";
-
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
+import type { GetStatsDataParams } from "@stats47/estat-api/server";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * ranking_data テーブルから時系列データを直接取得する。

@@ -1,23 +1,25 @@
 import "server-only";
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
+import {
+  fetchFormattedStats,
+  type GetStatsDataParams,
+} from "@stats47/estat-api/server";
+import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import {
   findRankingItem,
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
 } from "@stats47/ranking/server";
-import {
-  fetchFormattedStats,
-  type GetStatsDataParams,
-} from "@stats47/estat-api/server";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
-import { isOk } from "@stats47/types";
-import type { TopoJSONTopology } from "@stats47/types";
+import { isOk, type TopoJSONTopology } from "@stats47/types";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/services/get-estat-cache-storage";
+
+import { getEstatCacheStorage } from "@/features/stat-charts/server";
+
 import { logger } from "@/lib/logger";
+
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
+import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;

@@ -1,16 +1,14 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toPyramidChartData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { PyramidChartClient } from "./PyramidChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 /**
  * PyramidChartDashboard - 人口ピラミッド（ダッシュボード用）

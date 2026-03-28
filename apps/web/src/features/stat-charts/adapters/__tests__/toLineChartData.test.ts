@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
+
 import { toLineChartData } from "../toLineChartData";
+
 import type { StatsSchema } from "@stats47/types";
 
 const baseRow: StatsSchema = {

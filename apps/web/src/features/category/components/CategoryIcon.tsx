@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { getIcon } from "@/lib/icons";
 
 interface CategoryIconProps {
@@ -7,6 +9,7 @@ interface CategoryIconProps {
 }
 
 export function CategoryIcon({ lucideIconName, className }: CategoryIconProps) {
-  const Icon = getIcon(lucideIconName);
+  const Icon = useMemo(() => getIcon(lucideIconName), [lucideIconName]);
+  // eslint-disable-next-line react-hooks/static-components -- Icon is memoized via useMemo above
   return <Icon className={className} />;
 }

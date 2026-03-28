@@ -1,19 +1,21 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  CircleMarker,
-  Tooltip,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+
 import {
   TILE_PROVIDERS,
   JAPAN_CENTER,
   JAPAN_MIN_ZOOM,
   JAPAN_MAX_ZOOM,
 } from "@stats47/visualization/leaflet";
+import "leaflet/dist/leaflet.css";
+import {
+  MapContainer,
+  TileLayer,
+  CircleMarker,
+  Tooltip,
+} from "react-leaflet";
+
 import type { FishingPortData } from "../lib/load-fishing-port-data";
 
 const TYPE_COLORS: Record<string, { light: string; dark: string }> = {

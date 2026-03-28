@@ -1,15 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { TagBadge } from "@/features/blog";
-import { listAllUniqueTags, listArticleSummariesByTagKey } from "@/features/blog/server";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -18,8 +9,17 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@stats47/components/atoms/ui/card";
 import { getDrizzle, tags as tagsTable } from "@stats47/database/server";
 import { eq } from "drizzle-orm";
+
+import { listAllUniqueTags, listArticleSummariesByTagKey } from "@/features/blog/server";
+
 import type { Metadata } from "next";
 
 export const revalidate = 86400;

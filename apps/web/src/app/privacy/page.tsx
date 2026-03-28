@@ -22,14 +22,14 @@
 
 import { ReactNode } from "react";
 
+import { Badge } from "@stats47/components/atoms/ui/badge";
+import { Button } from "@stats47/components/atoms/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { Badge } from "@stats47/components/atoms/ui/badge";
-import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 

@@ -1,8 +1,10 @@
 "use client";
 
+import { useMemo, useTransition } from "react";
+
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useTransition } from "react";
 
 import {
   DataTable,
@@ -15,16 +17,16 @@ import {
 } from "@stats47/components/atoms/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
 import { rankByValue } from "@stats47/ranking";
-import type { TopoJSONTopology } from "@stats47/types";
 import { computeDeviationScores } from "@stats47/utils";
-import dynamic from "next/dynamic";
+import { Loader2 } from "lucide-react";
+
+import type { TopoJSONTopology } from "@stats47/types";
+import type { ColumnDef } from "@tanstack/react-table";
 
 const CityMapChart = dynamic(
   () => import("@stats47/visualization/d3/CityMapChart").then((m) => m.CityMapChart),
   { ssr: false },
 );
-import type { ColumnDef } from "@tanstack/react-table";
-import { Loader2 } from "lucide-react";
 
 interface CityRankingItem {
   rankingKey: string;

@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@stats47/components/atoms/ui/accordion";
 import { Loader2 } from "lucide-react";
+
 import { parseTitle } from "../../utils/parseTitle";
 
 export interface DashboardCardProps {

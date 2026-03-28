@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
+
 import Link from "next/link";
 
+import { cn } from "@stats47/components";
 import {
   Card,
   CardContent,
@@ -10,7 +12,6 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 import { Input } from "@stats47/components/atoms/ui/input";
-import { cn } from "@stats47/components";
 
 interface CityItem {
   cityCode: string;

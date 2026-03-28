@@ -1,6 +1,7 @@
 "use client";
 
 import Image, { type ImageProps } from "next/image";
+
 import { useTheme } from "next-themes";
 
 interface ThemeAwareImageProps extends Omit<ImageProps, "src"> {

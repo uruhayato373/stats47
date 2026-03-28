@@ -8,20 +8,22 @@ import "server-only";
  */
 import MiniSearch from "minisearch";
 
+import { buildSearchResponse, MINISEARCH_OPTIONS, STORE_FIELDS } from "./search-core";
+import { tokenize } from "./tokenize";
+
 import type {
   SearchDocument,
   SearchIndexMeta,
   SearchOptions,
   SearchResponse,
 } from "../types/search.types";
-import { buildSearchResponse, MINISEARCH_OPTIONS, STORE_FIELDS } from "./search-core";
-import { tokenize } from "./tokenize";
 
 // Static imports — bundled at build time
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const searchIndexJson = require("../../../../public/search-index.json");
+ 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const searchIndexMetaJson = require("../../../../public/search-index-meta.json");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const searchIndexJson = require("../../../../public/search-index.json");
 
 let cachedInstance: MiniSearch<SearchDocument> | null = null;
 

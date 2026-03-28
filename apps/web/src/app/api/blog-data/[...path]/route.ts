@@ -29,8 +29,7 @@ export async function GET(
       return await readFromLocal(key);
     }
     return await readFromR2(key);
-  } catch (e) {
-    console.error(`Failed to fetch blog data: ${key}`, e);
+  } catch {
     return NextResponse.json(
       { error: "データの取得に失敗しました" },
       { status: 500 }

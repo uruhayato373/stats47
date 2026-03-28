@@ -1,8 +1,8 @@
 import "server-only";
 
-import { getDrizzle } from "@stats47/database/server";
 import { ports, portStatistics } from "@stats47/database/schema";
-import { eq, and, desc } from "drizzle-orm";
+import { getDrizzle } from "@stats47/database/server";
+import { eq, desc } from "drizzle-orm";
 
 export interface PortWithStats {
   portCode: string;

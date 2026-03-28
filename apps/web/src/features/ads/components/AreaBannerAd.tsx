@@ -1,5 +1,6 @@
-import { findActiveBannersByLocation } from "../repositories/affiliate-ad-repository";
 import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
+import { findActiveBannersByLocation } from "../repositories/affiliate-ad-repository";
+
 import { BannerAd } from "./BannerAd";
 
 /**

@@ -1,7 +1,9 @@
 import { ranking } from "@stats47/mock";
-import type { RankingItem } from "@stats47/ranking";
 import { describe, expect, it } from "vitest";
+
 import { generateRankingPageMetaData } from "../generate-meta-data";
+
+import type { RankingItem } from "@stats47/ranking";
 
 describe("generateRankingPageMetaData", () => {
     const mockItem = ranking.annualSalesAmountPerEmployeeItem as unknown as RankingItem;

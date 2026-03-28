@@ -8,21 +8,26 @@
  * 都道府県マップと同じ日本地図上で切り替えて表示する。
  */
 
-import { Map as MapIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+
+import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK, type TileProvider } from "@stats47/visualization/leaflet/constants";
+
 
 import type { AreaType } from "@/features/area";
+
+import { useTheme } from "@/hooks/useTheme";
+
+import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
+
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
 import type { MapVisualizationConfig } from "@stats47/visualization/d3";
-import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK, type TileProvider } from "@stats47/visualization/leaflet/constants";
-import dynamic from "next/dynamic";
 
-import { useTheme } from "@/hooks/useTheme";
-import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
+
 
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
@@ -72,8 +77,6 @@ export function RankingMapChartClient({
   areaType,
   topology,
   selectedPrefectureCode,
-  cardTitle,
-  cardSubtitle,
   cardFooter,
   onPrefectureClick,
   headerActions,
@@ -82,7 +85,8 @@ export function RankingMapChartClient({
   const isDark = theme === "dark";
   const tileOptions = isDark ? TILE_OPTIONS_DARK : TILE_OPTIONS_LIGHT;
   const [currentTile, setCurrentTile] = useState<TileProvider>(tileOptions[0]);
-  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- sync tile on theme change
+  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark, tileOptions]);
 
   // RankingItemからMapVisualizationConfigへの変換
   const mapConfig: MapVisualizationConfig = useMemo(() => {

@@ -7,7 +7,9 @@
  */
 import { SearchPageClient, type ContentType } from "@/features/search";
 import { getSearchIndexMeta, searchDocumentsServer } from "@/features/search/server";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";

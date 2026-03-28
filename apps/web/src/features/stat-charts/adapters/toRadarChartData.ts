@@ -1,5 +1,6 @@
-import type { RadarAxis, RadarDataSeries } from "@stats47/visualization/d3";
 import { CHART_COLORS } from "../constants";
+
+import type { RadarAxis, RadarDataSeries } from "@stats47/visualization/d3";
 
 export interface RadarChartData {
   axes: RadarAxis[];

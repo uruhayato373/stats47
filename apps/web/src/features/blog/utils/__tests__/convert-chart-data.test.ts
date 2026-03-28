@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import type { StatsSchema } from "@stats47/types";
 
 import {
   convertToBarData,
@@ -8,6 +7,9 @@ import {
   convertToChoroplethData,
   convertToLineDataAuto,
 } from "../convert-chart-data";
+
+import type { StatsSchema } from "@stats47/types";
+
 
 const makeStat = (
   areaCode: string,

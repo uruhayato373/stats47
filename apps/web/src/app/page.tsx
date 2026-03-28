@@ -1,15 +1,17 @@
-import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
+import Link from "next/link";
 
 import { Button } from "@stats47/components/atoms/ui/button";
 import { BarChart3, Search } from "lucide-react";
+import { Metadata } from "next";
 
-import { FeaturedRankings } from "@/features/ranking/server";
-import { listLatestArticles } from "@/features/blog/server";
 import { CountUp } from "@/components/atoms/CountUp";
 import { ScrollReveal } from "@/components/atoms/ScrollReveal";
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
+
+import { listLatestArticles } from "@/features/blog/server";
+import { FeaturedRankings } from "@/features/ranking/server";
+
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 export const revalidate = 86400;

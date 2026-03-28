@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+import { cn } from "@stats47/components";
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Input } from "@stats47/components/atoms/ui/input";
 import {
@@ -18,7 +19,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { cn } from "@stats47/components";
 
 import { useTheme } from "@/hooks/useTheme";
 

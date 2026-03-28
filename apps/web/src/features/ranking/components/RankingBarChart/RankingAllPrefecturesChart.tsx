@@ -1,7 +1,5 @@
 "use client";
 
-import * as d3 from "d3";
-import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
@@ -9,8 +7,11 @@ import {
   type RankingValue,
   computeSortedRankings,
 } from "@stats47/ranking";
-import type { StatsSchema } from "@stats47/types";
 import { useD3Tooltip } from "@stats47/visualization/d3";
+import * as d3 from "d3";
+import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
+
+import type { StatsSchema } from "@stats47/types";
 
 interface RankingAllPrefecturesChartProps {
   rankingValues: (StatsSchema | RankingValue)[];

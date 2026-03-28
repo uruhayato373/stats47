@@ -1,9 +1,10 @@
 "use server";
 
+import { computeNormalization, fetchRankingValuesOnDemand, findRankingItem, listRankingValues } from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
+
 import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
-import { computeNormalization, fetchRankingValuesOnDemand, findRankingItem, listRankingValues } from "@stats47/ranking/server";
 
 /**
  * ランキングデータを取得する（正規化対応）

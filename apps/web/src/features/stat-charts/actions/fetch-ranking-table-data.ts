@@ -1,8 +1,8 @@
 "use server";
 
-import { err, ok, type Result } from "@stats47/types";
 import { RankingItem, RankingValue } from "@stats47/ranking";
 import { findRankingItemByKey, findLatestYear, listRankingValues } from "@stats47/ranking/server";
+import { err, ok, type Result } from "@stats47/types";
 
 export interface FetchRankingTableDataResult {
   rankingItem: RankingItem | null;
@@ -41,7 +41,7 @@ export async function fetchRankingTableDataAction(
 
              targetYearCode = latestYearObj.yearCode;
              targetYearName = latestYearObj.yearName;
-         } catch (e) {
+         } catch {
              // パースエラー等の場合はリポジトリから最新を探す
              const latest = await findLatestYear(rankingItem.areaType);
              if (latest.success && latest.data) {
@@ -85,8 +85,7 @@ export async function fetchRankingTableDataAction(
       yearName: targetYearName || `${targetYearCode}年度`
     });
 
-  } catch (error) {
-    console.error("fetchRankingTableDataAction error:", error);
+  } catch {
     return err("データの取得中にエラーが発生しました");
   }
 }

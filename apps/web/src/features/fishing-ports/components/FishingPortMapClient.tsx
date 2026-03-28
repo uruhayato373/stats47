@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
+
 import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
+
 import {
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -24,7 +26,8 @@ import {
   TableHeader,
   TableRow,
 } from "@stats47/components/atoms/ui/table";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { useTheme } from "next-themes";
+
 import type { FishingPortData } from "../lib/load-fishing-port-data";
 
 const FishingPortLeafletMap = dynamic(() => import("./FishingPortLeafletMap"), {

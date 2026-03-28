@@ -1,10 +1,10 @@
 "use server";
 
-import type { RankingValue } from "@stats47/ranking";
-import { listRankingValuesByPrefecture } from "@stats47/ranking/server";
 import { fetchMunicipalityTopology } from "@stats47/gis/geoshape";
-import { isOk } from "@stats47/types";
-import type { TopoJSONTopology } from "@stats47/types";
+import { listRankingValuesByPrefecture } from "@stats47/ranking/server";
+import { isOk, type TopoJSONTopology } from "@stats47/types";
+
+import type { RankingValue } from "@stats47/ranking";
 
 export interface MunicipalityDrilldownResult {
   topology: TopoJSONTopology;

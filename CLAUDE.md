@@ -44,6 +44,7 @@ packages/
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
 | テスト構成・追加指針 | `apps/web/tests/README.md` |
 | デザインシステム（melta-ui 準拠） | `.claude/design-system/README.md` |
+| コーディング標準（TypeScript/React/Next.js） | `.claude/rules/coding-standards.md` |
 
 ## エージェントチーム
 
@@ -70,9 +71,10 @@ packages/
 | `browser-publisher` | 4 | ブラウザ自動投稿（X, TikTok, Instagram, note） |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
 | `seo-auditor` | 7 | SEO 監査・アナリティクスデータ収集 |
-| `code-reviewer` | 7 | コード品質レビュー（feature, packages, types, tests） |
+| `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
 | `ui-reviewer` | 2 | melta-ui 準拠・UI/UX パネルレビュー |
 | `devops-runner` | 5 | テスト・デプロイ・Git 操作 |
+| `tdd-guide` | 2 | テスト駆動開発ガイド（Red-Green-Refactor・モック戦略） |
 
 ### チーム連携パターン
 
@@ -183,6 +185,7 @@ packages/
 | `/publish-tiktok` | browser-use CLI で TikTok Studio の予約投稿を自動設定（動画・キャプション・予約日時） | `.claude/skills/sns/publish-tiktok/SKILL.md` |
 | `/publish-instagram` | browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定（カルーセル・リール） | `.claude/skills/sns/publish-instagram/SKILL.md` |
 | `/mark-sns-posted` | 投稿済み SNS コンテンツを Markdown 記録 → ローカル・リモート R2 から削除 | `.claude/skills/sns/mark-sns-posted/SKILL.md` |
+| `/publish-youtube-normal` | YouTube 通常動画の制作→アップロード→DB記録パイプライン | `.claude/skills/sns/publish-youtube-normal/SKILL.md` |
 | `/update-sns-metrics` | 各 SNS API から指標取得 → DB (`sns_metrics`) 蓄積 + Markdown 更新 | `.claude/skills/sns/update-sns-metrics/SKILL.md` |
 | `/sns-weekly-report` | DB から週次パフォーマンスレポートを生成 | `.claude/skills/sns/sns-weekly-report/SKILL.md` |
 | `/preview-remotion` | 実データで Remotion Studio プレビューデータを上書き（ranking） | `.claude/skills/sns/preview-remotion/SKILL.md` |
@@ -247,6 +250,10 @@ packages/
 | `/review-ads` | ads ドメインのコードレビュー（収益最適化・法務・広告計測の専門パネリスト付き） | `.claude/skills/dev/review-ads/SKILL.md` |
 | `/review-app` | App Router 層（ルーティング・SEO・メタデータ・エラー境界）を7人の専門家パネルでレビュー | `.claude/skills/dev/review-app/SKILL.md` |
 | `create-skill` | スキル作成時の設計ガイド（自動参照・`user-invocable: false`） | `.claude/skills/dev/create-skill/SKILL.md` |
+| `/security-review` | セキュリティレビュー（OWASP Top 10 + D1/R2/Cloudflare 固有チェック） | `.claude/skills/dev/security-review/SKILL.md` |
+| `/verification-loop` | 6段階品質ゲート（ビルド→型→lint→テスト→セキュリティ→diff） | `.claude/skills/dev/verification-loop/SKILL.md` |
+| `/continuous-learning` | セッション中のパターン抽出・learned/ への自動保存 | `.claude/skills/dev/continuous-learning/SKILL.md` |
+| `/strategic-compact` | 長時間セッション向けコンテキスト管理ガイド | `.claude/skills/dev/strategic-compact/SKILL.md` |
 
 ## ローカル開発環境
 

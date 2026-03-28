@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { Button } from "@stats47/components/atoms/ui/button";
 
 const CONSENT_KEY = "stats47_cookie_consent";
@@ -21,12 +22,15 @@ export function CookieConsentBanner() {
       window.gtag?.("consent", "default", {
         analytics_storage: "denied",
         ad_storage: "denied",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync consent state from localStorage
       setVisible(true);
     } else if (stored === "granted") {
       window.gtag?.("consent", "update", {
         analytics_storage: "granted",
         ad_storage: "granted",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
     }
   }, []);
@@ -36,6 +40,7 @@ export function CookieConsentBanner() {
     window.gtag?.("consent", "update", {
       analytics_storage: "granted",
       ad_storage: "granted",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
     } as any);
     setVisible(false);
   };

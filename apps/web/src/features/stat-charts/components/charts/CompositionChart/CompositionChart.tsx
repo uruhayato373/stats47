@@ -1,9 +1,7 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
+import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
 
 import { CompositionChartClient } from "./CompositionChartClient";
@@ -15,7 +13,7 @@ export const CompositionChartDashboard = async ({
   config,
 }: DashboardItemProps<"composition-chart">) => {
   const { title, area, rankingLink, sourceName, sourceLink, annotation, rankingLinks } = common;
-  const { statsDataId, segments, unit, description } = config;
+  const { statsDataId, segments, description } = config;
   const areaCode = area.areaCode;
 
   if (!statsDataId || !segments?.length) {
@@ -31,6 +29,7 @@ export const CompositionChartDashboard = async ({
     );
   }
 
+  /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
   try {
     const { totalCode } = config;
 
@@ -116,4 +115,5 @@ export const CompositionChartDashboard = async ({
       </div>
     );
   }
+  /* eslint-enable react-hooks/error-boundaries */
 };

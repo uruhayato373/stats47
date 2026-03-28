@@ -2,27 +2,30 @@
 
 import { useCallback, useMemo, useState, useTransition } from "react";
 
-import { Map as MapIcon, Table as TableIcon, BarChart3 } from "lucide-react";
 import Link from "next/link";
 
+import { lookupArea } from "@stats47/area";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
-import type { RankingValue } from "@stats47/ranking";
-import { lookupArea } from "@stats47/area";
+import { Map as MapIcon, Table as TableIcon, BarChart3 } from "lucide-react";
 
-import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { RankingDataTable, RankingYearSelector } from "@/features/ranking";
 
-import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+
+import { fetchIndicatorForYearAction } from "../actions";
+
 import { PopulationScatterSection } from "./PopulationScatterSection";
+import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeLeafletMap } from "./ThemeLeafletMap";
-import { fetchIndicatorForYearAction } from "../actions/fetch-indicator-for-year";
+
 import type { ThemeDashboardClientProps } from "../types";
+import type { RankingValue } from "@stats47/ranking";
 
 /**
  * タブ型テーマダッシュボード Client Component
@@ -116,7 +119,8 @@ export function ThemeDashboardTabbed({
   );
 
   // 年度表示ラベル
-  const currentYearName = useMemo(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for future year label display
+  const _currentYearName = useMemo(() => {
     const year = currentAvailableYears.find((y) => y.yearCode === currentYear);
     return year?.yearName ?? currentYear;
   }, [currentAvailableYears, currentYear]);

@@ -7,8 +7,8 @@
 
 import { Metadata } from "next";
 
-import { generateRankingTopPageStructuredData } from "@/features/ranking";
 import { FeaturedRankings } from "@/features/ranking/server";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 export const revalidate = 86400;

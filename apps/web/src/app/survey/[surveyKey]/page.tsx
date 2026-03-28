@@ -6,21 +6,24 @@
  */
 
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 
-import { isOk } from "@stats47/types";
+
 import {
   findSurveyById,
   listSurveys,
   findRankingItemsBySurvey,
 } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
   type CategoryRankingListItem,
 } from "@/features/ranking";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+import type { Metadata } from "next";
 
 export const revalidate = 86400;
 

@@ -16,8 +16,8 @@ export function useClipboard(text: string) {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
+    } catch {
+      // Clipboard API may not be available in some browsers
     }
   };
 

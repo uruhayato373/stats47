@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { TrendingUp } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -9,11 +9,15 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import type { RankingValue } from "@stats47/ranking";
 import { isOk } from "@stats47/types";
 import { formatValueWithPrecision } from "@stats47/utils";
+import { TrendingUp } from "lucide-react";
+
 import type { AreaType } from "@/features/area";
+
 import { fetchAllYearsRankingValuesAction } from "../../actions/fetch-all-years-ranking-values";
+
+import type { RankingValue } from "@stats47/ranking";
 
 interface TrendSparklineCardProps {
   rankingKey: string;

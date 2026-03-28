@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
+
 import dynamic from "next/dynamic";
 
-import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
-
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
+
+import type { LineChartData } from "../../../types/visualization";
+import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
 
 const D3LineChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
-
-import type { LineChartData } from "../../../types/visualization";
 
 interface LineChartClientProps {
   chartData: LineChartData;

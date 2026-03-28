@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { type AffiliateProduct } from "../types/article.types";
+
+import { type AffiliateProduct } from "../types";
 
 export function AffiliateItem(props: AffiliateProduct) {
     return (

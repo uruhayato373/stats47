@@ -13,3 +13,9 @@ export { LineChartClient } from "./components/charts/LineChart/LineChartClient";
 // Client-safe adapter exports
 export { toLineChartData } from "./adapters/toLineChartData";
 
+// Client-safe card components
+export { KpiCardClient } from "./components/cards/KpiCard/KpiCardClient";
+
+// Re-export PageComponent type (type-only, safe for client components)
+export type { PageComponent } from "./services/load-page-components";
+

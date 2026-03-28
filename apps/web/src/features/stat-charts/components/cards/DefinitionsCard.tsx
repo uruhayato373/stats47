@@ -2,8 +2,7 @@
 
 import React from "react";
 
-import { InfoIcon } from "lucide-react";
-
+import { Table, TableBody, TableCell, TableRow } from "@stats47/components";
 import {
   Accordion,
   AccordionContent,
@@ -12,9 +11,10 @@ import {
 } from "@stats47/components/atoms/ui/accordion";
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Icon } from "@stats47/components/atoms/ui/icon";
-import { Table, TableBody, TableCell, TableRow } from "@stats47/components";
+import { InfoIcon } from "lucide-react";
 
 import { getDefinitionSet } from "../../data/definitions";
+
 import type { DashboardItemProps, DefinitionGroup } from "../../types";
 
 // ---------------------------------------------------------------------------

@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { TrendingDown, TrendingUp } from "lucide-react";
+
 import { cn } from "@stats47/components";
+import { Badge } from "@stats47/components/atoms/ui/badge";
 import {
   Card,
   CardDescription,
@@ -10,7 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { Badge } from "@stats47/components/atoms/ui/badge";
+import { TrendingDown, TrendingUp } from "lucide-react";
+
 import { parseTitle } from "../../../utils/parseTitle";
 
 export interface KpiCardClientProps {

@@ -1,5 +1,6 @@
 import { DashboardCard, LineChartClient, toLineChartData } from "@/features/stat-charts";
 import { fetchEstatData, toKpiCardData } from "@/features/stat-charts/server";
+
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
 
 interface StatsLineChartCardProps {

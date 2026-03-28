@@ -38,21 +38,29 @@
 ### 7. X（Twitter）引用RT戦略
 - `docs/90_課題管理/x_quote_rt_strategy.md` に企画段階の運用ルールを記録
 
+### 8. ScrollGes テンプレート作成・犯罪テーマ動画投稿（2026-03-28）
+- `RankingScrollGes` テンプレート新規作成（GES背景 + 右からスライドインするカード）
+- NormalIntro を画面中央・大フォントに改修
+- YouTube Data API アップロードスクリプト作成（`scripts/youtube-upload.js`）
+- OAuth スコープに `youtube.upload` 追加・再認証完了
+- 犯罪テーマ（`theft-offenses-recognized-per-1000`）を ScrollGes でレンダリング → YouTube に限定公開で投稿完了
+  - Video ID: `gzdSq-COcHM`
+  - URL: https://www.youtube.com/watch?v=gzdSq-COcHM
+- `/render-sns-stills` スキルの YouTube Normal テンプレートを `RankingYouTube-ScrollGes` に変更
+
 ## 次に行うこと
 
 ### 優先度: 高
-1. **横棒グラフテンプレートのStudioプレビュー確認** — `cd apps/remotion && npx remotion studio` → `RankingYouTube-HorizontalBar` を選択
-2. **テンプレートの調整** — プレビューを見て文字サイズ・バーの太さ・スクロール速度等を調整
-3. **Normal動画の再レンダリング** — ディスク容量を空けてから再実行
-4. **横棒グラフ版の動画レンダリング** — 5分版（47県 × 5秒）
+1. **犯罪テーマ動画の確認・公開設定** — YouTube Studio で限定公開→公開に変更、公開時間 JST 20:00 に予約
+2. **残り5テーマのdata.json生成・レンダリング・投稿** — 外国人人口 / 県民所得 / 生活保護 / 離婚率 / 自殺率
 
 ### 優先度: 中
-5. **残り5テーマのdata.json生成** — 外国人人口 / 県民所得 / 生活保護 / 離婚率 / 自殺率
-6. **render-sns-stills スキルに横棒グラフ版を追加** — `youtube-horizontal-bar` オプション
+3. **ScrollGes テンプレートの改善** — 都道府県コメント追加、TOP3 の演出強化
+4. **YouTube 自動投稿スキル作成** — `scripts/youtube-upload.js` をスキル化
 
 ### 優先度: 低
-7. **X引用RT用の検索パターン整理** — `x_quote_rt_strategy.md` のTODO
-8. **投稿済み動画の `/mark-sns-posted` 実行** — R2リモートからも削除
+5. **X引用RT用の検索パターン整理** — `x_quote_rt_strategy.md` のTODO
+6. **投稿済み動画の `/mark-sns-posted` 実行** — R2リモートからも削除
 
 ## レンダリングコマンド（再実行用）
 

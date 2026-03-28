@@ -1,15 +1,15 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
-
-import type { RankingItem, RankingValue } from "@stats47/ranking";
-
-vi.mock("@stats47/ranking/server");
-
-import { fetchRankingTableDataAction } from "../fetch-ranking-table-data";
 import {
   findRankingItemByKey,
   findLatestYear,
   listRankingValues,
 } from "@stats47/ranking/server";
+import { describe, expect, it, vi, beforeEach } from "vitest";
+
+vi.mock("@stats47/ranking/server");
+
+import { fetchRankingTableDataAction } from "../fetch-ranking-table-data";
+
+import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 const mockFindRankingItemByKey = vi.mocked(findRankingItemByKey);
 const mockFindLatestYear = vi.mocked(findLatestYear);

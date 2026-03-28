@@ -49,7 +49,7 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | X | `RankingX-ChoroplethMap` | `x/stills/choropleth-map-1200x630.png` |
 | YouTube Short A | `RankingYouTube-Short` | `youtube-short/shorts-a.mp4` |
 | YouTube Short B | `RankingYouTube-Short-Full` | `youtube-short/shorts-b.mp4` |
-| YouTube Normal | `RankingYouTube-Normal` | `youtube/normal.mp4` |
+| YouTube Normal | `RankingYouTube-ScrollGes` | `youtube/scroll-ges.mp4` |
 | YouTube Normal Thumb | `RankingYouTube-Thumb-Hero` | `youtube/stills/thumbnail-1280x720.png` |
 | TikTok | `RankingTikTok-Short` | `tiktok/stills/reel.mp4` |
 | note | `RankingNote-Cover` | `note/images/cover-1280x670.png` |
@@ -141,8 +141,8 @@ cd apps/remotion && npx remotion still src/index.ts RankingX-Chart \
 
 コマンド例（ranking ドメイン / YouTube Normal — 動画）:
 ```bash
-cd apps/remotion && npx remotion render src/index.ts RankingYouTube-Normal \
-  "../../<baseDir>/youtube/normal.mp4" \
+cd apps/remotion && npx remotion render src/index.ts RankingYouTube-ScrollGes \
+  "../../<baseDir>/youtube/scroll-ges.mp4" \
   --props /tmp/sns-props-yt.json
 ```
 
@@ -150,7 +150,7 @@ cd apps/remotion && npx remotion render src/index.ts RankingYouTube-Normal \
 - `sns=youtube` → YouTube Short A/B + YouTube Normal + サムネイルの **全て** をレンダリング
 - `sns=youtube-short` → YouTube Short A版（32秒 / 上位5件+全47件テーブル）+ B版（55秒 / 全47件高速・モーション無し）の両方
 - `sns=youtube-short-full` → YouTube Short B版のみ
-- `sns=youtube-normal` → YouTube Normal (`youtube/normal.mp4`) + サムネイル2種（Hero / VS）
+- `sns=youtube-normal` → YouTube Normal ScrollGes (`youtube/scroll-ges.mp4`) + サムネイル（Hero）
 
 **YouTube Short A/B テスト**:
 - A版 `RankingYouTube-Short`（variant: `youtube-short`）: 上位5件 RankCard → タイルマップ → 全47件テーブル → CTA（~32秒）
@@ -159,7 +159,7 @@ cd apps/remotion && npx remotion render src/index.ts RankingYouTube-Normal \
 - A版の props: `variant: "youtube-short"`、B版の props: `variant: "youtube-short-full"`
 - 出力: A版 → `youtube-short/shorts-a.mp4`、B版 → `youtube-short/shorts-b.mp4`
 
-**注意**: YouTube Normal は `remotion render`（動画）を使用する。`remotion still`（静止画）ではない。レンダリング時間が長い（47都道府県 × 4秒 ≒ 3分の動画）ため、他のレンダリングと並列実行を推奨。
+**注意**: YouTube Normal は `remotion render`（動画）を使用する。`remotion still`（静止画）ではない。ScrollGes はGES背景動画付きのためレンダリング時間が長い（約30分）。他のレンダリングと並列実行を推奨。レンダリング後のmp4は投稿完了後に削除してディスクを回収すること（~700MB）。
 
 コマンド例（YouTube Normal サムネイル — 静止画、動画レンダリングと並列実行可）:
 ```bash

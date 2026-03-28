@@ -1,5 +1,6 @@
-import { isOk } from "@stats47/types";
 import { findHighlyCorrelated } from "@stats47/correlation/server";
+import { isOk } from "@stats47/types";
+
 import { CorrelationSectionClient } from "./CorrelationSectionClient";
 
 interface CorrelationSectionContainerProps {

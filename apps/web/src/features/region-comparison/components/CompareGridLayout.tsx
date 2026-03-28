@@ -1,12 +1,10 @@
 import { Suspense } from "react";
 
-import { ChartSkeleton } from "@/features/stat-charts";
-import { DashboardComponentRenderer, computeSharedYDomain } from "@/features/stat-charts/server";
-import type { Area } from "@stats47/area";
-import type { PageComponent } from "@/features/stat-charts/services/load-page-components";
-import type { DashboardComponent, DashboardComponentType } from "@/features/stat-charts";
+import { ChartSkeleton, type DashboardComponent, type DashboardComponentType } from "@/features/stat-charts";
+import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/features/stat-charts/server";
 
 import type { ComparisonRegion } from "../types";
+import type { Area } from "@stats47/area";
 
 function toArea(region: ComparisonRegion): Area {
   return {

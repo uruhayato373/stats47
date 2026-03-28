@@ -1,18 +1,16 @@
-import React from "react";
-
 import { getDrizzle, rankingData as rankingDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
 import { and, eq, desc } from "drizzle-orm";
 
 import { toRadarChartData } from "../../../adapters";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { RadarChartDashboardClient } from "./RadarChartDashboardClient";
 
-import type { DashboardItemProps } from "../../../types";
 import type { RadarChartData } from "../../../adapters/toRadarChartData";
+import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 /**
  * レーダーチャートダッシュボードコンポーネント

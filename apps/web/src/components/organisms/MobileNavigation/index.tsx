@@ -1,15 +1,15 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { cn } from "@stats47/components";
 import {
     Home,
     Search,
     TrendingUp,
     type LucideIcon,
 } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { cn } from "@stats47/components";
 
 type NavItem = {
     label: string;

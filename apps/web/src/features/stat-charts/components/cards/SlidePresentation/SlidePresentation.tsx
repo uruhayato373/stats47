@@ -1,11 +1,13 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Card, CardContent } from "@stats47/components/atoms/ui/card";
 import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
 
 import { getSlideSet } from "../../../data/slides";
+
 import type { DashboardItemProps, SlideData } from "../../../types";
 
 export const SlidePresentation: React.FC<

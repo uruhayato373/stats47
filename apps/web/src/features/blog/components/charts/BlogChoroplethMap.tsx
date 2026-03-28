@@ -1,11 +1,15 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { MapDataPoint, PrefectureMapProps } from "@stats47/visualization/d3";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { type ChoroplethMapConfig } from "../../types/chart-config.types";
+
 import { useChartData } from "../../hooks/useChartData";
+import { type ChoroplethMapConfig } from "../../types/chart-config.types";
+
 import { ChartWithFallback } from "./ChartWithFallback";
+
+import type { MapDataPoint, PrefectureMapProps } from "@stats47/visualization/d3";
 
 const ChoroplethMap = dynamic<PrefectureMapProps>(
     () => import("@stats47/visualization/d3/PrefectureMapChart").then((mod) => mod.PrefectureMapChart),

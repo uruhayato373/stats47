@@ -1,18 +1,16 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toLineChartData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { LineChartClient } from "./LineChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { LineChartData } from "../../../types/visualization";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const LineChart = async ({
   common,

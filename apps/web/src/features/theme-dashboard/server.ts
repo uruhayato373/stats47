@@ -37,3 +37,10 @@ export const FOREIGN_RESIDENTS_THEME = toThemeConfig(FOREIGN_RESIDENTS_SET);
 export const OCCUPATION_SALARY_THEME = toThemeConfig(OCCUPATION_SALARY_SET);
 export const REAL_INCOME_THEME = toThemeConfig(REAL_INCOME_SET);
 export const LABOR_MOBILITY_THEME = toThemeConfig(LABOR_MOBILITY_SET);
+
+// Server Component
+export { ThemePageLayout } from "./components/ThemePageLayout";
+
+// Server-only loader
+export { loadThemeData } from "./lib/load-theme-data";
+export type { ThemePageData } from "./lib/load-theme-data";

@@ -2,22 +2,23 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@stats47/components/atoms/ui/tabs";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import type { RankingValue } from "@stats47/ranking";
-import { isOk } from "@stats47/types";
 import { lookupArea } from "@stats47/area";
+import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@stats47/components/atoms/ui/tabs";
+import { isOk } from "@stats47/types";
 import { MapPin } from "lucide-react";
 
 import { fetchAllYearsRankingValuesAction } from "@/features/ranking/actions/fetch-all-years-ranking-values";
-import type { ThemeIndicatorData } from "../types";
+import { KpiCardClient } from "@/features/stat-charts";
+
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
-import { KpiCardClient } from "@/features/stat-charts/components/cards/KpiCard/KpiCardClient";
-import type { ThemeConfig } from "../types";
+
+import type { ThemeIndicatorData, ThemeConfig } from "../types";
+import type { RankingValue } from "@stats47/ranking";
 
 const D3LineChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
@@ -53,7 +54,6 @@ export function PrefectureStatsPanel({
   indicatorDataMap,
   rankingKeys,
   selectedIndicatorKey,
-  themeKey,
   themeConfig,
   pageCharts,
 }: Props) {
@@ -105,6 +105,7 @@ export function PrefectureStatsPanel({
   useEffect(() => {
     const code = selectedPrefectureCode;
     if (!code) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset data when no prefecture selected
       setTimeSeriesData([]);
       return;
     }

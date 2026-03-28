@@ -5,26 +5,30 @@
  * 注目ランキング（コンパクトカード）+ 全件テーブルのハイブリッドレイアウト。
  */
 
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 
-import { Suspense } from "react";
-import { isOk } from "@stats47/types";
+
 import { findRankingItemsByCategory, listSurveys, listRankingValues, listTopRankingValuesBatch } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
-import { findCategoryByKey } from "@/features/category/server";
 import { listLatestArticles } from "@/features/blog/server";
+import { findCategoryByKey } from "@/features/category/server";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
+  SurveyCard,
   type CategoryRankingListItem,
 } from "@/features/ranking";
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
-import { SurveyCard } from "@/features/ranking/components/RankingSidebar/SurveyCard";
-import Link from "next/link";
-import Image from "next/image";
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+
+import type { Metadata } from "next";
+
 
 export const revalidate = 86400;
 

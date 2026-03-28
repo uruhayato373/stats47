@@ -5,13 +5,15 @@
  * サービス利用条件、禁止事項、免責事項などを説明します。
  */
 
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
 import type { Metadata } from "next";
 
 const title = "利用規約 | 統計で見る都道府県";

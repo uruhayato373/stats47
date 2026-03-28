@@ -13,6 +13,7 @@ export function useShareUrl(url?: string): string {
 
   useEffect(() => {
     if (!url && typeof window !== "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync browser URL on mount
       setShareUrl(window.location.href);
     }
   }, [url]);

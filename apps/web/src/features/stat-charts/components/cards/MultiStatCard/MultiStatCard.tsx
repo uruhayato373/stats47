@@ -1,15 +1,13 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toKpiCardData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { MultiStatCardClient } from "./MultiStatCardClient";
 
 import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const MultiStatCard = async ({
   common,

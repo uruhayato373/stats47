@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import type { Article } from "../types/article.types";
+
+import type { Article } from "../types";
 
 const R2_PUBLIC_URL =
     process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";

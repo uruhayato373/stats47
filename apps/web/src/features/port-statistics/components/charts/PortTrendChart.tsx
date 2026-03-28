@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
+
 import dynamic from "next/dynamic";
 
 const D3LineChart = dynamic(
@@ -45,6 +46,7 @@ export function PortTrendChart({ selectedPort, portName, metric }: Props) {
 
   useEffect(() => {
     if (!selectedPort) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset data when no port selected
       setTimeSeriesData([]);
       return;
     }

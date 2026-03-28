@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useMemo, useCallback, useTransition } from "react";
+
 import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
-import { Map as MapIcon, Table as TableIcon } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -11,18 +11,13 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@stats47/components/atoms/ui/tabs";
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -31,12 +26,22 @@ import {
   TableHeader,
   TableRow,
 } from "@stats47/components/atoms/ui/table";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@stats47/components/atoms/ui/tabs";
+import { Map as MapIcon, Table as TableIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
-import type { PortWithStats } from "../lib/load-port-data";
-import { fetchPortYearDataAction } from "../actions/fetch-port-year-data";
+
+import { fetchPortYearDataAction } from "../actions";
+
 import { PortChartsSection } from "./PortChartsSection";
+
+import type { PortWithStats } from "../lib/load-port-data";
 
 const PortLeafletMap = dynamic(() => import("./PortLeafletMap"), {
   ssr: false,

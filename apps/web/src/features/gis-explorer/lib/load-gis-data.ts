@@ -4,8 +4,8 @@ import {
   fetchKsjTopologyFromLocal,
   listDownloadedDatasets,
   getDatasetDef,
-  KSJ_REGISTRY,
 } from "@stats47/gis/mlit-ksj";
+
 import type { TopoJSONTopology } from "@stats47/types";
 
 export interface GisLayerData {

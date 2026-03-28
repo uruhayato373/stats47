@@ -1,6 +1,7 @@
-import type { StatsSchema } from "@stats47/types";
 import { CHART_COLORS } from "../constants";
+
 import type { MixedChartData } from "../types/visualization";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * e-Stat 生データを棒+折れ線ミックスチャート用に変換

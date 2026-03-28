@@ -1,5 +1,9 @@
 "use client";
 
+import { useTransition } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { type Category } from "@stats47/category";
 import {
   Select,
@@ -9,12 +13,12 @@ import {
   SelectValue,
 } from "@stats47/components";
 import { Loader2 } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTransition } from "react";
-import type { ComparisonRegion } from "../types";
+
 import { ComparisonEmpty } from "./ComparisonEmpty";
 import { type ChoroplethMapData, MunicipalityChoroplethSection } from "./MunicipalityChoroplethSection";
 import { RegionSelector } from "./RegionSelector";
+
+import type { ComparisonRegion } from "../types";
 
 interface RegionComparisonClientProps {
   regions: [ComparisonRegion, ComparisonRegion] | null;

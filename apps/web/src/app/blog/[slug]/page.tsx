@@ -1,6 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@stats47/components/atoms/ui/breadcrumb";
+import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { getDrizzle } from "@stats47/database/server";
+
+import { ShareButtons } from "@/components/molecules/ShareButtons";
+
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
@@ -12,19 +25,11 @@ import {
     getTagsForArticles,
     articleService,
 } from "@/features/blog/server";
-import { ShareButtons } from "@/components/molecules/ShareButtons";
+
 import { getRequiredBaseUrl } from "@/lib/env";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@stats47/components/atoms/ui/breadcrumb";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
-import { getDrizzle } from "@stats47/database/server";
+
+
 import type { Metadata } from "next";
 
 // ブログ記事はランタイムで動的レンダリング（R2バインディングが必要なため）

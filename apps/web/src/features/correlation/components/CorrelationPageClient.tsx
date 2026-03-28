@@ -1,5 +1,9 @@
 "use client";
 
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+
+import dynamic from "next/dynamic";
+
 import {
     Card,
     CardContent,
@@ -14,21 +18,21 @@ import {
     SelectValue,
 } from "@stats47/components/atoms/ui/select";
 import { Loader2 } from "lucide-react";
+
+import { fetchCorrelationPairAction, type CorrelationPairResult } from "../actions";
+import { calculateRegression, updateUrlParams } from "../utils";
+
+import { CorrelationExplanation } from "./CorrelationExplanation";
+import { CorrelationRanking } from "./CorrelationRanking";
+import { PartialCorrelationDisplay } from "./PartialCorrelationDisplay";
+
+import type { TopCorrelation } from "@stats47/correlation/server";
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";
-import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
 const Scatterplot = dynamic(
   () => import("@stats47/visualization/d3/Scatterplot").then((m) => m.Scatterplot),
   { ssr: false },
 );
-import type { TopCorrelation } from "@stats47/correlation/server";
-import { fetchCorrelationPairAction, type CorrelationPairResult } from "../actions";
-import { calculateRegression } from "../utils/calculate-regression";
-import { updateUrlParams } from "../utils/update-url-params";
-import { CorrelationRanking } from "./CorrelationRanking";
-import { CorrelationExplanation } from "./CorrelationExplanation";
-import { PartialCorrelationDisplay } from "./PartialCorrelationDisplay";
 
 interface RankingOption {
     rankingKey: string;
@@ -77,6 +81,7 @@ export function CorrelationPageClient({
 
     useEffect(() => {
         if (!selectedX || !selectedY || selectedX === selectedY) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- reset data when selection invalid
             setCorrelationData(null);
             return;
         }

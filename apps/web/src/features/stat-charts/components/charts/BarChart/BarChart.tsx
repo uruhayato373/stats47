@@ -1,18 +1,16 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toBarChartData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { BarChartClient } from "./BarChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { BarChartData } from "../../../types/visualization";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 /**
  * 汎用棒グラフ（ダッシュボード用）

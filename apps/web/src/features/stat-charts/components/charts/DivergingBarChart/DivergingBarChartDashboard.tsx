@@ -1,17 +1,15 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toStackedBarChartData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { DivergingBarChartClient } from "./DivergingBarChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 /**
  * DivergingBarChartDashboard - 上下対称の縦棒グラフ（ダッシュボード用）

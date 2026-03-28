@@ -1,9 +1,10 @@
-import { fetchFormattedStats } from "@stats47/estat-api/server";
-import type { GetStatsDataParams } from "@stats47/estat-api/server";
+import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
+
+import { getEstatCacheStorage } from "../services";
+
+import type { YAxisConfig } from "../types";
 import type { StatsSchema } from "@stats47/types";
 
-import { getEstatCacheStorage } from "../services/get-estat-cache-storage";
-import type { YAxisConfig } from "../types";
 
 interface ComputeYAxisDomainOptions {
   yAxisConfig?: YAxisConfig;

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { PlayCircle } from "lucide-react";
+import dynamic from "next/dynamic";
 
 import {
   Card,
@@ -10,11 +10,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import type { RankingItem, RankingValue } from "@stats47/ranking";
-import { toBarChartRaceFrames } from "@stats47/ranking";
+import { toBarChartRaceFrames, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { isOk } from "@stats47/types";
-import type { BarChartRaceFrame } from "@stats47/visualization/d3";
-import dynamic from "next/dynamic";
+import { PlayCircle } from "lucide-react";
+
+
 
 const BarChartRace = dynamic(
   () => import("@stats47/visualization/d3").then((m) => m.BarChartRace),
@@ -22,7 +22,10 @@ const BarChartRace = dynamic(
 );
 
 import type { AreaType } from "@/features/area";
+
 import { fetchAllYearsRankingValuesAction } from "../../actions/fetch-all-years-ranking-values";
+
+import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 
 interface RankingBarChartRaceProps {
   rankingKey: string;
@@ -66,6 +69,7 @@ export function RankingBarChartRace({
     if (!hasMultipleYears) return;
 
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sync loading state for async fetch
     setIsLoadingAllYears(true);
 
     fetchAllYearsRankingValuesAction(rankingKey, areaType, parentAreaCode).then((result) => {

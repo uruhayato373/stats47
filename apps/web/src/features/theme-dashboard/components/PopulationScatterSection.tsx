@@ -4,12 +4,13 @@ import { useMemo } from "react";
 
 import dynamic from "next/dynamic";
 
+import { lookupArea } from "@stats47/area";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import type { ScatterplotDataNode } from "@stats47/visualization/d3";
-import { lookupArea } from "@stats47/area";
 
 import type { ThemeIndicatorData } from "../types";
+import type { ScatterplotDataNode } from "@stats47/visualization/d3";
+
 
 const Scatterplot = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),

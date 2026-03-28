@@ -2,7 +2,8 @@
 
 import { ok, err } from "@stats47/types";
 
-import { resolveAffiliateAd } from "../services/resolve-affiliate-ad";
+import { resolveAffiliateAd } from "../services";
+
 import type { AffiliateLocationCode } from "../types";
 
 /**

@@ -1,5 +1,4 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";

@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import Link from "next/link";
+
+import { cn } from "@stats47/components";
 import {
     Card,
     CardContent,
@@ -10,11 +12,11 @@ import {
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
-import { cn } from "@stats47/components";
+
+import type { AreaType } from "@/features/area";
+import { CategoryIcon } from "@/features/category";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
-import { CategoryIcon } from "@/features/category/components/CategoryIcon";
-import type { AreaType } from "@/features/area";
 
 
 
@@ -140,7 +142,6 @@ export function RankingSidebarClient({
     categoryIcon,
     categoryKey,
     linkPrefix = "/ranking",
-    categoryLinkPrefix,
 }: RankingSidebarClientProps) {
     const isDesktop = useBreakpoint("aboveLg");
     const [isExpanded, setIsExpanded] = useState(false);

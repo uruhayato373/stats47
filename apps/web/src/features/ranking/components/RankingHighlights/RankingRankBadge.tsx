@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
+import { cn } from "@stats47/components";
 import { Medal } from "lucide-react";
 
-import { cn } from "@stats47/components";
 
 /**
  * ランクに応じたカラークラスを取得する (内部用)

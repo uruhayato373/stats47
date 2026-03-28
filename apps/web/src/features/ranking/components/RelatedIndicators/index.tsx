@@ -13,11 +13,8 @@ interface RelatedIndicatorsSectionWrapperProps {
  * 
  * DB接続依存を削除するため、現在は何も表示しません。
  */
-export function RelatedIndicatorsSectionWrapper({
-  rankingKey,
-  indicatorName,
-  itemDetail,
-}: RelatedIndicatorsSectionWrapperProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- interface kept for future re-enablement
+export function RelatedIndicatorsSectionWrapper(_props: RelatedIndicatorsSectionWrapperProps) {
   return null;
 }
 

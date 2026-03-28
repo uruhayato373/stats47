@@ -1,11 +1,12 @@
 "use server";
 
-import type { StatsSchema } from "@stats47/types";
 
-import { fetchEstatData } from "@/features/stat-charts/services/fetchEstatData";
 import { toLineChartData } from "@/features/stat-charts/adapters/toLineChartData";
 import { toMixedChartData } from "@/features/stat-charts/adapters/toMixedChartData";
+import { fetchEstatData } from "@/features/stat-charts/server";
 import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
+
+import type { StatsSchema } from "@stats47/types";
 
 /** ドーナツチャート用データ */
 export interface DonutChartItem {

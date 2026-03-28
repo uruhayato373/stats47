@@ -1,7 +1,6 @@
 "use client";
 
 import katex from "katex";
-import React from "react";
 
 import "katex/dist/katex.min.css";
 

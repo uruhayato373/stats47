@@ -1,18 +1,15 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 
-import { fetchEstatData } from "../../../services";
 import { toBarChartRaceData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { D3BarChartRaceClient } from "./D3BarChartRaceClient";
 
 import type { DashboardItemProps } from "../../../types";
-
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 
 export async function D3BarChartRaceDashboard({
   common,

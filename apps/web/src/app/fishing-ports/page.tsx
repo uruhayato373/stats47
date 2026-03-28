@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,8 +9,10 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
-import { loadFishingPortData } from "@/features/fishing-ports/lib/load-fishing-port-data";
-import { FishingPortMapClient } from "@/features/fishing-ports/components/FishingPortMapClient";
+import { FishingPortMapClient } from "@/features/fishing-ports";
+import { loadFishingPortData } from "@/features/fishing-ports/server";
+
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 

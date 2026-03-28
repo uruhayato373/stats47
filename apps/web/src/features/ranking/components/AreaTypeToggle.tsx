@@ -1,7 +1,7 @@
 "use client";
 
-import { Building2, MapPin } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
+import { Building2, MapPin } from "lucide-react";
 
 import type { AreaType } from "@/features/area";
 

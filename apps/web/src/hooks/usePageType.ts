@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 import { extractPageTypeFromPath } from "@/lib/page-type";
+
 import { usePageTypeStore } from "@/store/page-type-store";
 
 /**

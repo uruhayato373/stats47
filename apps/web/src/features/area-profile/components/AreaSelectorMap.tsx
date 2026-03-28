@@ -1,10 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
-import { REGIONS } from "@stats47/area";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+
+import { REGIONS } from "@stats47/area";
+
+
 import type { MapDataPoint, SequentialMapVisualizationConfig } from "@stats47/visualization/d3";
 
 const TileGridMap = dynamic(

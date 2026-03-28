@@ -1,5 +1,7 @@
 import Link from 'next/link';
+
 import { Button } from "@stats47/components";
+
 import { NotFoundTracker } from "@/lib/analytics/components/NotFoundTracker";
 
 export default function NotFound() {

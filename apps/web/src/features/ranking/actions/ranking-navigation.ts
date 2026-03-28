@@ -1,8 +1,9 @@
 "use server";
 
 
-import { logger } from "@/lib/logger";
 import { findFirstKeyByTag } from "@stats47/ranking/server";
+
+import { logger } from "@/lib/logger";
 
 /**
  * タグから最初のランキングキーを取得

@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { MapPin, ChevronRight } from "lucide-react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { MapPin, ChevronRight } from "lucide-react";
 
 const PORT_GROUP_KEY = "port-statistics-pref";
 

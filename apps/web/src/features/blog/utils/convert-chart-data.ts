@@ -1,5 +1,5 @@
-import type { ChartDataNode } from "@stats47/visualization/d3";
 import type { StatsSchema } from "@stats47/types";
+import type { ChartDataNode } from "@stats47/visualization/d3";
 
 /** ChoroplethMap 用: { areaCode, value } */
 export interface ChoroplethDataNode {

@@ -9,10 +9,12 @@
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 
 import type { AreaType } from "@/features/area";
+
+import { RankingMapChartClient } from "./RankingMapChartClient";
+
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
 
-import { RankingMapChartClient } from "./RankingMapChartClient";
 
 interface RankingMapChartContainerProps {
   /** ランキング項目情報（色スキーム設定を含む） */

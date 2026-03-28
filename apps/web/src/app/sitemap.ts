@@ -1,7 +1,9 @@
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
 import { eq, and, isNotNull } from "drizzle-orm";
-import type { MetadataRoute } from "next";
+
 import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
+
+import type { MetadataRoute } from "next";
 
 export const revalidate = 3600;
 

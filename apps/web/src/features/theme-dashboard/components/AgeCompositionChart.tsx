@@ -228,10 +228,11 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
         .call((g) => g.selectAll(".tick text").attr("font-size", 13));
     });
 
+    const container = containerRef.current;
     return () => {
       cancelled = true;
-      if (containerRef.current) {
-        d3Select(containerRef.current).selectAll(".age-tooltip").remove();
+      if (container) {
+        d3Select(container).selectAll(".age-tooltip").remove();
       }
     };
   }, [trendData, series]);
