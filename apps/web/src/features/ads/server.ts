@@ -6,3 +6,4 @@ export { fetchAffiliateAdAction } from "./actions/fetch-affiliate-ad";
 export { AffiliateAdSlot } from "./components/AffiliateAdSlot";
 export type { ResolvedAffiliateAd, ResolvedAffiliateBanner } from "./services/resolve-affiliate-ad";
 export type { AffiliateLocationCode } from "./types";
+export { AreaBannerAd } from "./components/AreaBannerAd";

@@ -1,5 +1,7 @@
-import { ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
+
+import { ArrowLeftRight } from "lucide-react";
+
 import type { AreaProfileData } from "../types";
 
 interface Props {

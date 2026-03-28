@@ -76,4 +76,5 @@ export { toThemeConfig } from "./lib/to-theme-config";
 
 // PanelTabGroup と IndicatorPanelTab の互換性を型レベルで保証
 type _AssertAssignable<A, B> = A extends B ? B extends A ? true : never : never;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type _PanelTabCompat = _AssertAssignable<PanelTabGroup, IndicatorPanelTab>;

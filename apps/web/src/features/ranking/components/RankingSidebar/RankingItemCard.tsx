@@ -1,8 +1,9 @@
 import Link from "next/link";
 
+import { cn } from "@stats47/components";
+
 import type { RankingItem } from "@stats47/ranking";
 
-import { cn } from "@stats47/components";
 
 
 /**

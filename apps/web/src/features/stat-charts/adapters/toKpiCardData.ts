@@ -1,6 +1,7 @@
 import { extractYearsFromStats } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
+
 import type { KpiCardData } from "../types/visualization";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * e-Stat 生データから最新値 + 前年比を抽出（KPI カード用）

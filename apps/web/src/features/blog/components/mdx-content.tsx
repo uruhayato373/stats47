@@ -1,4 +1,4 @@
-import { mdxRenderer } from "../services/mdx-renderer";
+import { mdxRenderer } from "../services";
 
 interface MDXContentProps {
     source: string;

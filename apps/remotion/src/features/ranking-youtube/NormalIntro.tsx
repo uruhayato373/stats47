@@ -97,7 +97,7 @@ export const NormalIntro: React.FC<NormalIntroProps> = ({
   const mainTitle = hookText || title;
   const lines = mainTitle.split(" ");
   const maxLineChars = Math.max(...lines.map((s) => s.length));
-  const titleFontSize = Math.min(100, Math.floor(1200 / maxLineChars));
+  const titleFontSize = Math.min(140, Math.floor(1600 / maxLineChars));
 
   // フェードアウト（最後の0.5秒）
   const fadeOut = interpolate(frame, [105, 120], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -134,147 +134,78 @@ export const NormalIntro: React.FC<NormalIntroProps> = ({
         opacity: fadeOut,
       }}
     >
-      {/* 背景装飾 */}
+      {/* 背景: タイルグリッドマップ（全画面・薄く） */}
       <AbsoluteFill style={{ opacity: 0.15 }}>
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `linear-gradient(to right, ${colors.muted}33 1px, transparent 1px), linear-gradient(to bottom, ${colors.muted}33 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }} />
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: `translate(-50%, -50%) scale(${interpolate(mapSpring, [0, 1], [0.9, 1])})`,
+          }}
+        >
+          <svg width={mapW * 2.5} height={mapH * 2.5} viewBox={`0 0 ${mapW} ${mapH}`}>
+            {INTRO_TILE_LAYOUT.map((cell, idx) => {
+              const tileSpr = spring({
+                frame: frame - 5 - idx * 0.6,
+                from: 0,
+                to: 1,
+                fps,
+                config: { damping: 12, mass: 0.4 },
+              });
+              const code = normalizePrefId(cell.id);
+              const entry = entryMap.get(code);
+              const w = (cell.w ?? 1) * cellSize;
+              const h = (cell.h ?? 1) * cellSize;
+              const tx = (cell.x - GRID_MIN_X) * cellSize;
+              const ty = cell.y * cellSize;
+              const fillColor = entry ? getColor(entry.value) : (isDark ? "#334155" : "#E2E8F0");
+
+              return (
+                <g key={cell.id} opacity={tileSpr} transform={`translate(${tx}, ${ty})`}>
+                  <rect
+                    width={w - 2}
+                    height={h - 2}
+                    x={1}
+                    y={1}
+                    rx={6}
+                    fill={fillColor}
+                    stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+                    strokeWidth={1}
+                  />
+                </g>
+              );
+            })}
+          </svg>
+        </div>
       </AbsoluteFill>
 
-      {/* 光のエフェクト */}
-      <div style={{
-        position: "absolute",
-        top: "40%",
-        left: "30%",
-        width: 800,
-        height: 600,
-        borderRadius: "50%",
-        background: `radial-gradient(circle, ${BRAND.primary}33 0%, transparent 70%)`,
-        transform: "translate(-50%, -50%)",
-        filter: "blur(120px)",
-        opacity: 0.5,
-      }} />
-
-      {/* 右: タイルグリッドマップ */}
-      <div
+      {/* メインコンテンツ: 画面中央に大きく */}
+      <AbsoluteFill
         style={{
-          position: "absolute",
-          right: 100,
-          top: "50%",
-          transform: `translateY(-50%) scale(${interpolate(mapSpring, [0, 1], [0.85, 1])})`,
-          opacity: mapSpring,
-        }}
-      >
-        <svg width={mapW} height={mapH} viewBox={`0 0 ${mapW} ${mapH}`}>
-          {INTRO_TILE_LAYOUT.map((cell, idx) => {
-            const tileSpr = spring({
-              frame: frame - 5 - idx * 0.6,
-              from: 0,
-              to: 1,
-              fps,
-              config: { damping: 12, mass: 0.4 },
-            });
-            const code = normalizePrefId(cell.id);
-            const entry = entryMap.get(code);
-            const w = (cell.w ?? 1) * cellSize;
-            const h = (cell.h ?? 1) * cellSize;
-            const tx = (cell.x - GRID_MIN_X) * cellSize;
-            const ty = cell.y * cellSize;
-            const fillColor = entry ? getColor(entry.value) : (isDark ? "#334155" : "#E2E8F0");
-            const textColor = entry ? getContrastTextColor(fillColor) : (isDark ? "#94A3B8" : "#64748B");
-            const nameFontSize = cell.name.length >= 3 ? 13 : 16;
-
-            return (
-              <g key={cell.id} opacity={tileSpr} transform={`translate(${tx}, ${ty})`}>
-                <rect
-                  width={w - 2}
-                  height={h - 2}
-                  x={1}
-                  y={1}
-                  rx={6}
-                  fill={fillColor}
-                  stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
-                  strokeWidth={1}
-                />
-                <text
-                  x={w / 2}
-                  y={h / 2}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill={textColor}
-                  fontSize={nameFontSize}
-                  fontWeight={700}
-                  fontFamily={FONT.family}
-                  opacity={0.95}
-                >
-                  {cell.name}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* 左: テキストコンテンツ */}
-      <div
-        style={{
-          position: "absolute",
-          left: 80,
-          top: 0,
-          bottom: 0,
-          width: 900,
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
+          alignItems: "center",
           justifyContent: "center",
-          gap: 24,
+          padding: "0 80px",
+          gap: 20,
         }}
       >
-        {/* stats47 ブランドバッジ */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          opacity: brandSpring,
-          transform: `translateY(${interpolate(brandSpring, [0, 1], [-20, 0])}px)`,
-        }}>
-          <div style={{
-            backgroundColor: BRAND.primary,
-            color: BRAND.white,
-            padding: "10px 28px",
-            borderRadius: 8,
-            fontSize: 32,
-            fontWeight: FONT.weight.black,
-            letterSpacing: 1,
-          }}>
-            stats47
-          </div>
-          <div style={{
-            fontSize: 30,
-            fontWeight: FONT.weight.bold,
-            color: colors.muted,
-          }}>
-            統計で見る都道府県
-          </div>
-        </div>
-
-        {/* メインタイトル */}
+        {/* メインタイトル（画面いっぱいに大きく） */}
         {lines.map((line, idx) => {
-          const lineSpr = spring({ frame: frame - 12 - idx * 5, from: 0, to: 1, ...sprConfig });
+          const lineSpr = spring({ frame: frame - 8 - idx * 5, from: 0, to: 1, ...sprConfig });
           return (
             <div key={idx} style={{
               fontSize: titleFontSize,
               fontWeight: FONT.weight.black,
-              lineHeight: 1.15,
+              lineHeight: 1.2,
               color: colors.foreground,
-              transform: `translateY(${interpolate(lineSpr, [0, 1], [30, 0])}px)`,
+              textAlign: "center",
+              transform: `translateY(${interpolate(lineSpr, [0, 1], [60, 0])}px)`,
               opacity: lineSpr,
               textShadow: isDark
-                ? "0 6px 24px rgba(0,0,0,0.8)"
-                : "0 4px 12px rgba(0,0,0,0.1)",
+                ? "0 8px 32px rgba(0,0,0,0.9)"
+                : "0 4px 12px rgba(0,0,0,0.15)",
             }}>
               {line}
             </div>
@@ -283,58 +214,78 @@ export const NormalIntro: React.FC<NormalIntroProps> = ({
 
         {/* アンダーライン */}
         <div style={{
-          width: interpolate(lineSpring, [0, 1], [0, 560]),
-          height: 4,
-          backgroundColor: BRAND.primary,
-          borderRadius: 2,
+          width: interpolate(lineSpring, [0, 1], [0, 800]),
+          height: 6,
+          backgroundColor: BRAND.secondary,
+          borderRadius: 3,
+          marginTop: 8,
         }} />
 
-        {/* サブタイトル: hookText 使用時は displayTitle、通常は subtitle */}
+        {/* サブタイトル */}
         <div style={{
-          fontSize: hookText ? 44 : 36,
+          fontSize: hookText ? 56 : 44,
           fontWeight: FONT.weight.bold,
           color: colors.muted,
-          letterSpacing: "0.1em",
+          textAlign: "center",
           opacity: subtitleSpring,
-          transform: `translateY(${interpolate(subtitleSpring, [0, 1], [15, 0])}px)`,
+          transform: `translateY(${interpolate(subtitleSpring, [0, 1], [20, 0])}px)`,
         }}>
           {hookText ? (displayTitle || title) : (subtitle || "都道府県ランキング")}
         </div>
 
-        {/* 年度バッジ */}
-        {yearName && (
-          <div style={{
-            marginTop: 8,
-            opacity: badgeSpring,
-            transform: `scale(${badgeSpring})`,
-          }}>
+        {/* 年度バッジ + カウントダウンテキスト */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 24,
+          marginTop: 16,
+          opacity: badgeSpring,
+          transform: `scale(${badgeSpring})`,
+        }}>
+          {yearName && (
             <span style={{
-              backgroundColor: isDark ? "rgba(30, 41, 59, 0.85)" : "rgba(255, 255, 255, 0.9)",
               color: BRAND.secondary,
               border: `2px solid ${BRAND.secondary}`,
               borderRadius: 50,
               padding: "8px 28px",
-              fontSize: 30,
+              fontSize: 36,
               fontWeight: FONT.weight.bold,
-              letterSpacing: "0.1em",
-              backdropFilter: "blur(10px)",
             }}>
               {yearName}
             </span>
-          </div>
-        )}
-
-        {/* 下部テキスト */}
-        <div style={{
-          marginTop: 24,
-          fontSize: 32,
-          fontWeight: FONT.weight.bold,
-          color: colors.muted,
-          letterSpacing: "0.1em",
-          opacity: interpolate(frame, [60, 80], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-        }}>
-          ▶ 47位からカウントダウン！
+          )}
+          <span style={{
+            fontSize: 36,
+            fontWeight: FONT.weight.bold,
+            color: colors.muted,
+            opacity: interpolate(frame, [60, 80], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+          }}>
+            ▶ 47位からカウントダウン！
+          </span>
         </div>
+      </AbsoluteFill>
+
+      {/* ウォーターマーク（左下に小さく） */}
+      <div style={{
+        position: "absolute",
+        bottom: 24,
+        left: 32,
+        opacity: brandSpring * 0.6,
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+      }}>
+        <div style={{
+          backgroundColor: BRAND.primary,
+          color: BRAND.white,
+          padding: "4px 12px",
+          borderRadius: 4,
+          fontSize: 18,
+          fontWeight: FONT.weight.black,
+        }}>
+          stats47
+        </div>
+        <span style={{ fontSize: 16, color: colors.muted }}>統計で見る都道府県</span>
       </div>
     </AbsoluteFill>
   );

@@ -1,4 +1,5 @@
-import { type Article } from "../types/article.types";
+import { type Article } from "../types";
+
 import { MDContent } from "./md-content";
 import { MDXContent } from "./mdx-content";
 

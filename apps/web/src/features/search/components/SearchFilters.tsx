@@ -19,7 +19,7 @@ import type {
     ContentType,
     SearchCategoryMeta,
     SearchTagMeta,
-} from "../types/search.types";
+} from "../types";
 
 interface SearchFiltersProps {
     selectedType: ContentType | "all";

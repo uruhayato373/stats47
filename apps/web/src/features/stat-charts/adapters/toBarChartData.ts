@@ -1,7 +1,9 @@
 import { extractYearsFromStats } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
+
 import { CHART_COLORS } from "../constants";
+
 import type { BarChartData } from "../types/visualization";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * e-Stat 生データを棒グラフ用に変換（統一関数）

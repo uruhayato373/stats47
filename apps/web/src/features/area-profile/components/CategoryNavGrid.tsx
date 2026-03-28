@@ -1,6 +1,8 @@
 import Link from "next/link";
-import type { Category } from "@stats47/category";
+
 import { CategoryIcon, getCategoryColor } from "@/features/category";
+
+import type { Category } from "@stats47/category";
 
 interface Props {
     categories: Category[];

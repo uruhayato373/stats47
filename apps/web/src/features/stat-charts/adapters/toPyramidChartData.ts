@@ -1,5 +1,5 @@
-import type { PyramidChartData } from "@stats47/visualization/d3";
 import type { StatsSchema } from "@stats47/types";
+import type { PyramidChartData } from "@stats47/visualization/d3";
 
 /**
  * e-Stat の年齢階級別人口データを PyramidChart 用データに変換する。

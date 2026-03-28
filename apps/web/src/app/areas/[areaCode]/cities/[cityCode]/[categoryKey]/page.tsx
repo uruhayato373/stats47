@@ -2,21 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchCities, lookupArea } from "@stats47/area";
-import { listCategories } from "@/features/category/server";
-import { isOk } from "@stats47/types";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-import type { Metadata } from "next";
-
-import { CategorySelect } from "@/features/area-profile";
-import { AreaDashboardSection } from "@/features/area-profile/server";
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -25,6 +10,27 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@stats47/components/atoms/ui/card";
+import { isOk } from "@stats47/types";
+
+import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
+
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/server";
+import { CategorySelect } from "@/features/area-profile";
+import { AreaDashboardSection } from "@/features/area-profile/server";
+import { listCategories } from "@/features/category/server";
+
+import type { Metadata } from "next";
+
+
+
+
 
 export const revalidate = 86400;
 

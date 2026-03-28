@@ -4,10 +4,11 @@ import {
   type GetStatsDataParams,
   fetchFormattedStats,
 } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
 import { logger } from "@stats47/logger";
 
 import { getEstatCacheStorage } from "./get-estat-cache-storage";
+
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * 同一リクエスト内で同じパラメータの重複フェッチを防ぐ。

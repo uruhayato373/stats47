@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { Newspaper } from "lucide-react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { isOk } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
 import { getTagsForItem } from "@stats47/ranking/server";
+import { isOk, type AreaType } from "@stats47/types";
+import { Newspaper } from "lucide-react";
+
 import { listArticleSummariesByTagKey } from "@/features/blog/server";
 
 interface RelatedArticlesCardProps {

@@ -4,7 +4,6 @@
  * データ取得エラー時の表示
  */
 
-import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -15,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components";
+import { AlertCircle } from "lucide-react";
 
 interface Props {
   title?: string;

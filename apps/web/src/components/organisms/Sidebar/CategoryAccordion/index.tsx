@@ -5,9 +5,10 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { cn } from "@stats47/components";
+
 import type { Category } from "@/features/category";
 
-import { cn } from "@stats47/components";
 import { getIcon } from "@/lib/icons";
 
 interface CategoryListProps {
@@ -65,6 +66,7 @@ function CategoryLinkItem({ category, isActive }: CategoryLinkItemProps) {
       )}
     >
       <div className="flex h-6 w-6 items-center justify-center rounded-md bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+        {/* eslint-disable-next-line react-hooks/static-components -- Icon is memoized via useMemo */}
         <IconComponent className="h-[15px] w-[15px]" />
       </div>
       <span>{category.categoryName}</span>

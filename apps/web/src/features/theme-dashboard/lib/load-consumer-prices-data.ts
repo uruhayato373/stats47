@@ -1,13 +1,15 @@
 import "server-only";
 
 import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
-import type { RankingItem, RankingValue } from "@stats47/ranking";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
-import type { StatsSchema } from "@stats47/types";
+
 
 import { logger } from "@/lib/logger";
+
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 import type { ThemePageData } from "./load-theme-data";
+import type { RankingItem, RankingValue } from "@stats47/ranking";
+import type { StatsSchema } from "@stats47/types";
 
 /** e-Stat statsDataId: 10大費目別消費者物価地域差指数（全国平均=100） */
 const STATS_DATA_ID = "0003441258";

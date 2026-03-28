@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import type { BlogChartDataFile, BlogChartMeta } from "@stats47/types";
 
 interface UseChartDataResult<T> {

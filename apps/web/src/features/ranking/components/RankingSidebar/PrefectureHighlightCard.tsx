@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MapPin } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -15,8 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
-import type { RankingValue } from "@stats47/ranking";
 import { formatValueWithPrecision } from "@stats47/utils";
+import { MapPin } from "lucide-react";
+
+import type { RankingValue } from "@stats47/ranking";
 
 interface PrefectureHighlightCardProps {
   rankingValues: RankingValue[];

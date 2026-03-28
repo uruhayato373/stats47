@@ -42,9 +42,10 @@
  * @module Sidebar
  */
 
-import { listCategories } from "@/features/category/server";
 import { unwrap } from "@stats47/types";
+
 import { type Category } from "@/features/category";
+import { listCategories } from "@/features/category/server";
 
 import { logger } from "@/lib/logger";
 

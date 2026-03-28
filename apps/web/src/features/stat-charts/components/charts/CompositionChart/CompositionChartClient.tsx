@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@stats47/components";
 
 import type { CompositionChartData } from "../../../adapters/toCompositionChartData";

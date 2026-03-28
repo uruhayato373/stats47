@@ -5,10 +5,12 @@
  * SEO、OGP、Twitter Cardsの設定を含みます。
  */
 
-import type { Metadata } from "next";
 
 import { getRequiredBaseUrl } from "@/lib/env";
+
 import { generateOGMetadata } from "./og-generator";
+
+import type { Metadata } from "next";
 
 /**
  * ルートレイアウト用のメタデータを生成

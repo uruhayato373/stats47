@@ -2,25 +2,21 @@
 
 
 
-import { Table } from "lucide-react";
 import { useMemo } from "react";
 
+
+import { DataTable, cn } from "@stats47/components";
 import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
-import { ColumnDef } from "@tanstack/react-table";
-
-import { DataTable } from "@stats47/components";
-
-import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { StatsSchema } from "@stats47/types";
-
-import { cn } from "@stats47/components";
-
 import {
   rankByValue,
   computeRankingStats,
+  type RankingItem,
+  type RankingValue,
+  type RankingStats,
 } from "@stats47/ranking";
+import { ColumnDef } from "@tanstack/react-table";
 
-import type { RankingStats } from "@stats47/ranking";
+import type { StatsSchema } from "@stats47/types";
 
 
 interface Props {
@@ -49,8 +45,6 @@ export function RankingDataTable({
   rankingItem,
   className,
   headerActions,
-  cardTitle,
-  cardSubtitle,
   cardFooter,
 }: Props) {
   // 偏差値計算用の統計情報を計算

@@ -4,9 +4,11 @@ import {
   fetchFormattedStats,
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
+
 import { toCompositionChartData } from "@/features/stat-charts/adapters/toCompositionChartData";
-import { getEstatCacheStorage } from "@/features/stat-charts/services/get-estat-cache-storage";
-import type { AgeCompositionData } from "../components/AgeCompositionChart";
+import { getEstatCacheStorage } from "@/features/stat-charts/server";
+
+import type { AgeCompositionData } from "../components";
 
 /**
  * 年齢3区分人口（実数）の年次推移データを取得

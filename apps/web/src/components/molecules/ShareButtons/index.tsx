@@ -9,10 +9,11 @@ import {
 } from "@stats47/components/atoms/ui/tooltip";
 import { Check, Facebook, Link as LinkIcon, Twitter } from "lucide-react";
 
+import { trackShare } from "@/lib/analytics/events";
+
 import { useClipboard } from "./hooks/use-clipboard";
 import { useShareUrl } from "./hooks/use-share-url";
 import { generateShareLinks } from "./utils/generate-share-links";
-import { trackShare } from "@/lib/analytics/events";
 
 interface ShareButtonsProps {
   title: string;

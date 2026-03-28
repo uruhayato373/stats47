@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TrendingDown, TrendingUp } from "lucide-react";
+
 import {
     Card,
     CardContent,
@@ -14,6 +14,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@stats47/components/atoms/ui/tooltip";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
 import type { StrengthWeaknessItem } from "../types";
 

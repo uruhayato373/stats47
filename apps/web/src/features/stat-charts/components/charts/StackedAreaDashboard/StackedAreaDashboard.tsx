@@ -1,18 +1,16 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toStackedAreaData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { StackedAreaDashboardClient } from "./StackedAreaDashboardClient";
 
-import type { DashboardItemProps } from "../../../types";
 import type { StackedAreaData } from "../../../adapters/toStackedAreaData";
+import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const StackedAreaDashboard = async ({
   common,

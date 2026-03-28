@@ -1,5 +1,6 @@
+import { detectSpuriousCorrelation } from "../utils";
+
 import type { CorrelationPairResult } from "../actions";
-import { detectSpuriousCorrelation } from "../utils/detect-spurious-correlation";
 
 interface PartialCorrelationDisplayProps {
   data: CorrelationPairResult;

@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { TabsList, TabsTrigger } from "@stats47/components/atoms/ui/tabs";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 import type { TabIndicatorConfig } from "../types";
 

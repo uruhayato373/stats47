@@ -1,8 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { cn } from "@stats47/components";
 import { useState } from "react";
+
+import Image from "next/image";
+
+import { cn } from "@stats47/components";
 
 interface RankingThumbnailProps {
     /** オプション: ベースとなる画像パス（拡張子とテーマサフィックスを除く） */

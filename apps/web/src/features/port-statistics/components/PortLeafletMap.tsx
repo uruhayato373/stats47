@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  CircleMarker,
-  Tooltip,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+
 import {
   TileSwitcher,
   TILE_OPTIONS_LIGHT,
@@ -15,8 +9,16 @@ import {
   JAPAN_CENTER,
   JAPAN_MIN_ZOOM,
   JAPAN_MAX_ZOOM,
+  type TileProvider,
 } from "@stats47/visualization/leaflet";
-import type { TileProvider } from "@stats47/visualization/leaflet";
+import "leaflet/dist/leaflet.css";
+import {
+  MapContainer,
+  TileLayer,
+  CircleMarker,
+  Tooltip,
+} from "react-leaflet";
+
 import type { PortWithStats } from "../lib/load-port-data";
 
 type MetricKey = "cargoTotal" | "shipsTotal" | "passengersTotal" | "containerTonnage";
@@ -52,7 +54,8 @@ export default function PortLeafletMap({
 }: Props) {
   const tileOptions = isDark ? TILE_OPTIONS_DARK : TILE_OPTIONS_LIGHT;
   const [currentTile, setCurrentTile] = useState<TileProvider>(tileOptions[0]);
-  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- sync tile on theme change
+  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark, tileOptions]);
   const metricInfo = METRIC_LABELS[metric];
 
   const { getRadius, getColor } = useMemo(() => {

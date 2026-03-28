@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { ArrowRightLeft, ChevronRight } from "lucide-react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { isOk } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
 import { findRankingItemsByGroupKey } from "@stats47/ranking/server";
+import { isOk, type AreaType } from "@stats47/types";
+import { ArrowRightLeft, ChevronRight } from "lucide-react";
+
 
 interface RelatedGroupCardProps {
   rankingKey: string;

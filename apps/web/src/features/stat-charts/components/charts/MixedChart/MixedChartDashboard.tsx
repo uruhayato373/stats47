@@ -1,17 +1,15 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toMixedChartData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { MixedChartClient } from "./MixedChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { MixedChartData } from "../../../types/visualization";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const MixedChartDashboard = async ({
   common,

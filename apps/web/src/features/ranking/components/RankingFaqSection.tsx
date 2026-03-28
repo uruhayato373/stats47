@@ -20,7 +20,7 @@ interface RankingFaqSectionProps {
  * JSON-LD（FAQPage）のみ出力する（視覚UIは非表示）。
  * faqJson が null の場合は何も出力しない。
  */
-export function RankingFaqSection({ faqJson, rankingName }: RankingFaqSectionProps) {
+export function RankingFaqSection({ faqJson }: RankingFaqSectionProps) {
   if (!faqJson) return null;
 
   let parsed: unknown;

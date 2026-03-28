@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 
-import { EDUCATION_CULTURE_THEME } from "@/features/theme-dashboard/server";
-import { loadThemeData } from "@/features/theme-dashboard/lib/load-theme-data";
-import { ThemePageLayout } from "@/features/theme-dashboard/components/ThemePageLayout";
+import { ThemePageLayout, loadThemeData, EDUCATION_CULTURE_THEME } from "@/features/theme-dashboard/server";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+import type { Metadata } from "next";
 
 export const revalidate = 86400;
 

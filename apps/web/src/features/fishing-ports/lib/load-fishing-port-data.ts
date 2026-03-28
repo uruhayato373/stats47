@@ -1,7 +1,7 @@
 import "server-only";
 
-import { getDrizzle } from "@stats47/database/server";
 import { fishingPorts } from "@stats47/database/schema";
+import { getDrizzle } from "@stats47/database/server";
 
 export interface FishingPortData {
   portCode: string;

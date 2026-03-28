@@ -1,6 +1,7 @@
 "use server";
 
 import { getAreaProfileByCode } from "@stats47/area-profile/server";
+
 import type { AreaProfileData } from "@stats47/area-profile";
 
 /**

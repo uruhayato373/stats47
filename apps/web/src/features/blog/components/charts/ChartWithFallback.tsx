@@ -1,6 +1,9 @@
 "use client";
 
 import React, { Suspense } from "react";
+
+import Image from "next/image";
+
 import { ErrorBoundary } from "react-error-boundary";
 
 interface ChartWithFallbackProps {
@@ -17,7 +20,7 @@ function FallbackImage({ src, alt }: { src?: string; alt?: string }) {
             </div>
         );
     }
-    return <img src={src} alt={alt || "チャート"} className="h-auto w-full max-w-full rounded-lg" />;
+    return <Image src={src} alt={alt || "チャート"} width={800} height={400} className="h-auto w-full max-w-full rounded-lg" />;
 }
 
 export function ChartWithFallback({

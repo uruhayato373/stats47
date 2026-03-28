@@ -16,8 +16,9 @@ import {
   LABOR_MOBILITY_SET,
 } from "@stats47/types";
 
-import type { ThemeConfig } from "../types";
 import { toThemeConfig } from "../lib/to-theme-config";
+
+import type { ThemeConfig } from "../types";
 
 /** 全テーマ一覧（表示順） */
 export const ALL_THEMES: ThemeConfig[] = [

@@ -1,4 +1,3 @@
-import type { Area } from "@stats47/area";
 import { logger } from "@stats47/logger";
 
 import type {
@@ -7,6 +6,7 @@ import type {
   DashboardConfigMap,
   DashboardComponentType,
 } from "../types";
+import type { Area } from "@stats47/area";
 
 /**
  * DashboardComponent (DB行) + Area を共通 props + 固有 config に分解する。

@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef } from "react";
 
-import { DashboardCard } from "@/features/stat-charts/components/shared/DashboardCard";
-
-import type { TopoJSONTopology } from "@stats47/types";
+import { DashboardCard } from "@/features/stat-charts";
 
 import type { ComparisonRegion } from "../types";
+import type { TopoJSONTopology } from "@stats47/types";
+
 
 /** 東京島嶼部の除外コード */
 const TOKYO_ISLAND_CODES = new Set([

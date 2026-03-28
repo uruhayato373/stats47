@@ -1,19 +1,19 @@
 "use client";
 
 import React from "react";
+
 import dynamic from "next/dynamic";
 
-import type { ChartDataNode } from "@stats47/visualization/d3";
-
+import { CHART_COLORS } from "../../../constants";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
+
+import type { BarChartData } from "../../../types/visualization";
+import type { ChartDataNode } from "@stats47/visualization/d3";
 
 const BarChart = dynamic(
   () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
-
-import { CHART_COLORS } from "../../../constants";
-import type { BarChartData } from "../../../types/visualization";
 
 interface BarChartClientProps {
   chartData: BarChartData;

@@ -1,8 +1,10 @@
 import MiniSearch from "minisearch";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { SearchDocument } from "../../types/search.types";
+
 import { MINISEARCH_OPTIONS, STORE_FIELDS } from "../search-core";
 import { tokenize } from "../tokenize";
+
+import type { SearchDocument } from "../../types/search.types";
 
 const mockDocuments: SearchDocument[] = [
   {

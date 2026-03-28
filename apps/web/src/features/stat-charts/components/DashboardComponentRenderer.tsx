@@ -19,12 +19,12 @@ import {
   CompositionChartDashboard,
 } from "./charts";
 
-import type { Area } from "@stats47/area";
 import type {
   DashboardComponent,
   DashboardComponentType,
   DashboardItemProps,
 } from "../types";
+import type { Area } from "@stats47/area";
 
 /**
  * componentType → React コンポーネントのレジストリ

@@ -1,11 +1,13 @@
 import MiniSearch from "minisearch";
+
+import { buildSearchResponse, MINISEARCH_OPTIONS, STORE_FIELDS } from "./search-core";
+import { tokenize } from "./tokenize";
+
 import type {
     SearchDocument,
     SearchOptions,
     SearchResponse,
 } from "../types/search.types";
-import { buildSearchResponse, MINISEARCH_OPTIONS, STORE_FIELDS } from "./search-core";
-import { tokenize } from "./tokenize";
 
 const SEARCH_INDEX_URL = "/search-index.json";
 

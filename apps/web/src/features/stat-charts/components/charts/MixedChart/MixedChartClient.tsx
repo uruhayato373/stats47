@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
+
 import dynamic from "next/dynamic";
 
-import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
-
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
+
+import type { MixedChartData } from "../../../types/visualization";
+import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
 
 const MixedChart = dynamic(
   () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
-
-import type { MixedChartData } from "../../../types/visualization";
 
 interface MixedChartClientProps {
   chartData: MixedChartData;

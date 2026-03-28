@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+
 import dynamic from "next/dynamic";
+
+import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 import type { HierarchyDataNode } from "@stats47/visualization/d3";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const SunburstChart = dynamic(
   () => import("@stats47/visualization/d3/SunburstChart").then((mod) => mod.SunburstChart),

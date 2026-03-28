@@ -1,8 +1,8 @@
 import { lookupArea } from "@stats47/area";
 import { fetchMunicipalityTopology } from "@stats47/gis/server";
 import { listRankingItemsByAreaType, listRankingValuesByPrefecture } from "@stats47/ranking/server";
-import type { TopoJSONTopology } from "@stats47/types";
-import { unwrap } from "@stats47/types";
+import { unwrap, type TopoJSONTopology } from "@stats47/types";
+
 import { CityRankingSection } from "./CityRankingSection";
 
 interface Props {

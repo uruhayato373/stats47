@@ -9,10 +9,12 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { loadPageComponents } from "@/features/stat-charts/server";
+
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
-import { loadPageComponents } from "@/features/stat-charts/services/load-page-components";
 
 interface Props {
   theme: ThemeConfig;

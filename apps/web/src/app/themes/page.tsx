@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
 
 import Link from "next/link";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+import type { Metadata } from "next";
 
 export const revalidate = 86400;
 

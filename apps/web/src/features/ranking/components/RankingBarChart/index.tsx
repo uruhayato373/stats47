@@ -1,13 +1,14 @@
 "use client";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { BarChart3 } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
+import { RankingAllPrefecturesChart } from "./RankingAllPrefecturesChart";
 
 import type { RankingValue } from "@stats47/ranking";
 import type { StatsSchema } from "@stats47/types";
 
-import { RankingAllPrefecturesChart } from "./RankingAllPrefecturesChart";
 
 interface Props {
   /** ランキングデータ（都道府県別の統計値） */

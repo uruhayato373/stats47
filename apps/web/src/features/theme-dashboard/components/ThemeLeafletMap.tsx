@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
-import dynamic from "next/dynamic";
-import type { FeatureCollection, Geometry } from "geojson";
 
+import dynamic from "next/dynamic";
+
+
+import { lookupArea } from "@stats47/area";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import type { TopoJSONTopology } from "@stats47/types";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
@@ -17,9 +19,14 @@ const TileSwitcher = dynamic(
 );
 
 import { useTheme } from "@/hooks/useTheme";
-import { lookupArea } from "@stats47/area";
 
-import { fetchMunicipalityDrilldownAction } from "../actions/fetch-municipality-data";
+import { fetchMunicipalityDrilldownAction } from "../actions";
+
+import type { RankingItem, RankingValue } from "@stats47/ranking";
+import type { TopoJSONTopology } from "@stats47/types";
+import type { MapVisualizationConfig, MapDataPoint } from "@stats47/visualization/d3";
+
+
 
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
@@ -57,7 +64,8 @@ export function ThemeLeafletMap({
   const isDark = theme === "dark";
   const tileOptions = isDark ? TILE_OPTIONS_DARK : TILE_OPTIONS_LIGHT;
   const [currentTile, setCurrentTile] = useState(tileOptions[0]);
-  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- sync tile on theme change
+  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark, tileOptions]);
 
   // RankingItem → MapVisualizationConfig 変換
   const colorConfig: MapVisualizationConfig = useMemo(() => {

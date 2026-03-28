@@ -14,3 +14,6 @@ export { DashboardComponentRenderer } from "./components/DashboardComponentRende
 
 // Server-only services (page_components)
 export { loadPageComponents, type PageComponent } from "./services/load-page-components";
+
+// Server-only services (R2 cache)
+export { getEstatCacheStorage } from "./services/get-estat-cache-storage";

@@ -1,7 +1,9 @@
-import type { AreaType } from "@/features/area";
-import { isOk } from "@stats47/types";
 import { findRankingItem, findRankingItemsByCategory } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
+
+import type { AreaType } from "@/features/area";
 import { findCategoryByKey } from "@/features/category/server";
+
 import { RankingSidebarClient } from "./RankingSidebarClient";
 
 /**

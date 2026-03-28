@@ -8,11 +8,13 @@
 import { Suspense } from "react";
 
 import type { AreaType } from "@/features/area";
-import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { StatsSchema } from "@stats47/types";
 
 import { RankingMapChartContainer } from "./RankingMapChartContainer";
 import { RankingMapChartSkeleton } from "./RankingMapChartSkeleton";
+
+import type { RankingItem, RankingValue } from "@stats47/ranking";
+import type { StatsSchema } from "@stats47/types";
+
 
 interface RankingMapChartProps {
   /** ランキング項目情報（色スキーム設定を含む） */

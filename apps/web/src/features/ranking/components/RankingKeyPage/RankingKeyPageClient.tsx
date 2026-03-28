@@ -17,15 +17,11 @@ import {
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
-import { isOk } from "@stats47/types";
-import { fetchRankingValuesAction } from "../../actions/fetch-ranking-values";
-
+import { isOk, type TopoJSONTopology } from "@stats47/types";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
-import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
-import { DataDownloadIconButton } from "@/features/ranking/components/DataDownloadButton";
-import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
+
 
 import type { AreaType } from "@/features/area";
 import {
@@ -33,16 +29,20 @@ import {
     RankingDefinitionCard,
     RankingMapChartClient,
     RankingSourceCard,
-    RankingYearSelector
+    RankingYearSelector,
+    AreaTypeToggle,
+    DataDownloadIconButton,
 } from "@/features/ranking";
-import { RankingBoxplotChart } from "@/features/ranking/components/RankingBoxplotChart";
-import { AreaTypeToggle } from "@/features/ranking/components/AreaTypeToggle";
-import type { TopoJSONTopology } from "@stats47/types";
 
+import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
 import {
     AdSenseAd,
     RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
+
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+
+import { fetchRankingValuesAction } from "../../actions/fetch-ranking-values";
 
 /** グループメンバー（normalization_basis トグル用） */
 interface GroupMember {
@@ -224,7 +224,7 @@ export function RankingKeyPageClient({
     }, [rankingValues, displayInfo.title]);
 
     // カードタイトル・サブタイトル・出典を構築
-    const sourceObj = (rankingItem?.sourceConfig as Record<string, any>)?.source as { name?: string; url?: string } | undefined;
+    const sourceObj = (rankingItem?.sourceConfig as Record<string, unknown>)?.source as { name?: string; url?: string } | undefined;
     const cardFooter = (sourceObj?.name || surveyName) ? (
         <span>
             {sourceObj?.name && (
@@ -270,7 +270,8 @@ export function RankingKeyPageClient({
         </div>
     );
 
-    const handleNormalizationChange = (value: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for future normalization toggle feature
+    const _handleNormalizationChange = (value: string) => {
         const nextType = value === "original" ? undefined : value;
         setNormalizationType(nextType);
 

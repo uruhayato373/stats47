@@ -1,10 +1,11 @@
-import { fetchFormattedStats } from "@stats47/estat-api/server";
-import type { GetStatsDataParams } from "@stats47/estat-api/server";
+import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
+
+import { getEstatCacheStorage } from "../services";
+
+import type { DashboardConfigMap, DashboardComponentType } from "../types";
 import type { R2Bucket } from "@stats47/r2-storage";
 import type { StatsSchema } from "@stats47/types";
 
-import { getEstatCacheStorage } from "../services/get-estat-cache-storage";
-import type { DashboardConfigMap, DashboardComponentType } from "../types";
 
 /**
  * 比較ページで選択中の複数地域に対し、同一コンポーネントの Y 軸ドメインを算出する。

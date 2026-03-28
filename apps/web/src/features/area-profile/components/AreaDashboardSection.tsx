@@ -1,10 +1,14 @@
+import { Suspense } from "react";
+
+import { DashboardGridLayout } from "@/features/stat-charts";
+import { loadPageComponents, type PageComponent } from "@/features/stat-charts/server";
+import type { DashboardComponent } from "@/features/stat-charts/types";
+
+
+import { CityRankingPreview } from "./CityRankingPreview";
+
 import type { Area } from "@stats47/area";
 import type { Category } from "@stats47/category";
-import { DashboardGridLayout } from "@/features/stat-charts";
-import { loadPageComponents, type PageComponent } from "@/features/stat-charts/services/load-page-components";
-import type { DashboardComponent } from "@/features/stat-charts/types";
-import { Suspense } from "react";
-import { CityRankingPreview } from "./CityRankingPreview";
 
 interface Props {
   area: Area;
@@ -14,7 +18,7 @@ interface Props {
   selectedRankingKey?: string;
 }
 
-export async function AreaDashboardSection({ area, categoryKey, categories, basePath, selectedRankingKey }: Props) {
+export async function AreaDashboardSection({ area, categoryKey, selectedRankingKey }: Props) {
   // loadPageComponents で KPI もチャートも一括取得
   // city の場合は city-category、prefecture の場合は area-category から取得
   const pageType = area.areaType === "city" ? "city-category" : "area-category";

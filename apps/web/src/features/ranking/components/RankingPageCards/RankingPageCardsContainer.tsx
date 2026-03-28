@@ -1,7 +1,10 @@
-import { isOk } from "@stats47/types";
 import { getRankingPageCardRepository } from "@stats47/database/server";
+import { isOk } from "@stats47/types";
+
 import { logger } from "@/lib/logger";
+
 import { StatsLineChartCard } from "./StatsLineChartCard";
+
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
 
 interface RankingPageCardsContainerProps {

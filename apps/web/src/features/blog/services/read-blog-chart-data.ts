@@ -17,7 +17,6 @@ export async function readBlogChartData(
     const path = await import("path");
     const filePath = path.resolve(process.cwd(), LOCAL_BLOG_DIR, dataPath);
     if (!fs.existsSync(filePath)) {
-      console.warn(`[readBlogChartData] File not found: ${filePath}`);
       return null;
     }
     return JSON.parse(fs.readFileSync(filePath, "utf-8")) as BlogChartDataFile;

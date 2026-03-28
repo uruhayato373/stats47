@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
+
 import { Badge } from "@stats47/components/atoms/ui/badge";
+import { Button } from "@stats47/components/atoms/ui/button";
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { Button } from "@stats47/components/atoms/ui/button";
+
 import type { TopCorrelation } from "@stats47/correlation/server";
 
 interface CorrelationRankingProps {

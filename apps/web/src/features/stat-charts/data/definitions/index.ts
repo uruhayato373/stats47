@@ -1,5 +1,6 @@
-import type { DefinitionSetData } from "../../types";
 import { revenueDefinition } from "./revenue";
+
+import type { DefinitionSetData } from "../../types";
 
 const DEFINITION_REGISTRY: Record<string, DefinitionSetData> = {
   revenue: revenueDefinition,

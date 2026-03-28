@@ -1,5 +1,6 @@
-import type { R2Bucket } from "@stats47/r2-storage";
 import { getR2Client } from "@stats47/r2-storage/server";
+
+import type { R2Bucket } from "@stats47/r2-storage";
 
 /**
  * e-Stat API キャッシュ用の R2 ストレージを取得する。

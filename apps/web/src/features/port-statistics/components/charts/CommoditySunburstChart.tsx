@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useTransition, useMemo } from "react";
+
 import dynamic from "next/dynamic";
 
 const SunburstChart = dynamic(
@@ -14,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
+
 import {
   fetchCommodityDataAction,
   type HierarchyNode,
@@ -44,6 +46,7 @@ export function CommoditySunburstChart({
 
   useEffect(() => {
     if (!prefectureCode) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset data when no prefecture selected
       setHierarchy(null);
       return;
     }

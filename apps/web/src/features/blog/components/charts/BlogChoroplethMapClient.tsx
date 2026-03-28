@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+
 import type { PrefectureMapProps } from "@stats47/visualization/d3";
 
 const PrefectureMapChart = dynamic<PrefectureMapProps>(

@@ -1,9 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
+
+import type { BarChartRaceFrame } from "@stats47/visualization/d3";
+
 
 const D3BarChartRace = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3BarChartRace),

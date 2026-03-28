@@ -5,11 +5,10 @@ import { useEffect, useState, useTransition } from "react";
 import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import type { PageComponent } from "@/features/stat-charts/services/load-page-components";
-import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem } from "../actions/fetch-db-chart-data";
-import { fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions/fetch-population-pyramid";
-import { fetchPopulationCompositionAction, type AgeCompositionResult } from "../actions/fetch-population-composition";
-import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
+
+import type { PageComponent, LineChartData, MixedChartData } from "@/features/stat-charts";
+
+import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationCompositionAction, type AgeCompositionResult, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
 const D3LineChart = dynamic(
   () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
@@ -89,6 +88,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
         if (result) setChartResult({ type: "composition", data: result });
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; only key/type determine fetch
   }, [chart.componentKey, chart.componentType, prefCode]);
 
   if (isPending || !chartResult) {

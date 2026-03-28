@@ -1,11 +1,12 @@
 "use server";
 
 import { cache } from "react";
-import { err, ok, type Result } from "@stats47/types";
+
+import { fetchAllYearsRankingValuesOnDemand, findRankingItem } from "@stats47/ranking/server";
+import { err, ok, isOk, type Result } from "@stats47/types";
+
 import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
-import { fetchAllYearsRankingValuesOnDemand, findRankingItem } from "@stats47/ranking/server";
-import { isOk } from "@stats47/types";
 
 /**
  * 全年分のランキングデータを取得する（内部キャッシュ付き）

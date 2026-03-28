@@ -1,7 +1,8 @@
 import Link from "next/link";
 
+import { getCategoryColor } from "../utils";
+
 import { CategoryIcon } from "./CategoryIcon";
-import { getCategoryColor } from "../utils/category-colors";
 
 export interface CategoryGridItem {
   categoryKey: string;

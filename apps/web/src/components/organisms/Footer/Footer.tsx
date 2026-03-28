@@ -5,8 +5,9 @@
 
 "use client";
 
-import { Instagram, Youtube, Twitter, PenLine } from "lucide-react";
 import Link from "next/link";
+
+import { Instagram, Youtube, Twitter, PenLine } from "lucide-react";
 
 /**
  * フッターリンクの型定義

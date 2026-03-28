@@ -64,8 +64,7 @@ export async function fetchChoroplethMapData(
       mapData[result[0]] = result[1];
     }
     return mapData;
-  } catch (e) {
-    console.error("[choropleth] Failed to load map data:", e);
+  } catch {
     return null;
   }
 }

@@ -1,15 +1,13 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toStatsTableData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { StatsTableClient } from "./StatsTableClient";
 
 import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const StatsTable = async ({
   common,
@@ -30,6 +28,7 @@ export const StatsTable = async ({
 
   let fetchErrorMessage: string | null = null;
 
+  /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
   try {
     const responses = await Promise.all(
       rowDefs.map((row) =>
@@ -65,6 +64,7 @@ export const StatsTable = async ({
     logger.error({ error: err }, "StatsTableのデータ取得に失敗しました");
     fetchErrorMessage = "データの取得に失敗しました";
   }
+  /* eslint-enable react-hooks/error-boundaries */
 
   return <ErrorDisplay title={title} message={fetchErrorMessage ?? "エラー"} />;
 };

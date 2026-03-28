@@ -4,9 +4,10 @@
  * SEO対策のための構造化データを生成
  */
 
+import { getRequiredBaseUrl } from "@/lib/env";
+
 import type { AreaProfileData } from "@stats47/area-profile";
 
-import { getRequiredBaseUrl } from "@/lib/env";
 
 /**
  * 地域プロファイルページのパンくずリスト構造化データ（BreadcrumbList）を生成

@@ -1,18 +1,25 @@
 "use client";
 
-import { ArrowLeftRight, BarChart3, BookOpen, Home, LayoutDashboard, MapPin, ScatterChart, Search } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { cn } from "@stats47/components";
+import { Separator } from "@stats47/components/atoms/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTitle,
 } from "@stats47/components/atoms/ui/sheet";
+import { ArrowLeftRight, BarChart3, BookOpen, Home, LayoutDashboard, MapPin, ScatterChart, Search } from "lucide-react";
+
+
 
 import type { Category } from "@/features/category";
+
+import { AdSenseAd, MAIN_SIDEBAR } from "@/lib/google-adsense";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { usePageType } from "@/hooks/usePageType";
@@ -20,9 +27,6 @@ import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
 
 import { useSidebarStore } from "@/store/sidebar-store";
 
-import { Separator } from "@stats47/components/atoms/ui/separator";
-import { AdSenseAd, MAIN_SIDEBAR } from "@/lib/google-adsense";
-import { cn } from "@stats47/components";
 
 import { CategoryAccordion } from "./CategoryAccordion";
 import { SidebarErrorState } from "./SidebarErrorState";
@@ -62,6 +66,7 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
   useEffect(() => {
     if (isMobile) {
       close();
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync responsive state
       setMobileReady(true);
     } else {
       setMobileReady(false);

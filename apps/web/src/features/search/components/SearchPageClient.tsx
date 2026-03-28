@@ -1,20 +1,25 @@
 "use client";
 
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 
-import { logger } from "@/lib/logger";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+
 import { trackSearch } from "@/lib/analytics/events";
+import { logger } from "@/lib/logger";
+
 import { SearchProvider, useSearch } from "../context/SearchContext";
+
+import { SearchFilters } from "./SearchFilters";
+import { SearchInput } from "./SearchInput";
+import { SearchResults } from "./SearchResults";
+
 import type {
   ContentType,
   SearchIndexMeta,
   SearchResult,
-} from "../types/search.types";
-import { SearchFilters } from "./SearchFilters";
-import { SearchInput } from "./SearchInput";
-import { SearchResults } from "./SearchResults";
+} from "../types";
 
 interface SearchPageClientProps {
   initialResults: SearchResult[];

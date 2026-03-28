@@ -4,10 +4,10 @@
  * SEO対策のための構造化データを生成
  */
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
+
+import { getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { getRankingTitle } from "@stats47/ranking";
 
 import { buildRankingSummary } from "./build-ranking-summary";
 

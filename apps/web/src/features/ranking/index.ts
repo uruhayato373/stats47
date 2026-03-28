@@ -57,3 +57,14 @@ export { RankingFaqSection } from "./components/RankingFaqSection";
 
 // export * from "./repositories"; // Removed
 export * from "./utils";
+
+// Additional client components
+export { AreaTypeToggle } from "./components/AreaTypeToggle";
+export { DataDownloadIconButton, DataDownloadFooterCard } from "./components/DataDownloadButton";
+
+// Skeleton components
+export { CorrelationSectionSkeleton } from "./components/CorrelationSection/CorrelationSectionSkeleton";
+export { RankingPageCardsSkeleton } from "./components/RankingPageCards/RankingPageCardsSkeleton";
+
+// Sidebar cards (client)
+export { SurveyCard } from "./components/RankingSidebar/SurveyCard";

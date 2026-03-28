@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import type { Metadata } from "next";
 import Link from "next/link";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,8 +11,10 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
-import { loadPortData } from "@/features/port-statistics/lib/load-port-data";
-import { PortMapClient } from "@/features/port-statistics/components/PortMapClient";
+import { PortMapClient } from "@/features/port-statistics";
+import { loadPortData } from "@/features/port-statistics/server";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "港湾統計マップ | 統計で見る都道府県",

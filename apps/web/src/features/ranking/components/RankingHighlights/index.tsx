@@ -11,12 +11,12 @@ import {
   getMaxDecimalPlacesFromRankings,
   type RankingValue
 } from "@stats47/ranking";
-import type { StatsSchema } from "@stats47/types";
+import { formatValueWithPrecision } from "@stats47/utils";
 import { Minus, TrendingUp } from "lucide-react";
 
-import { formatValueWithPrecision } from "@stats47/utils";
-
 import { RankingRankBadge } from "./RankingRankBadge";
+
+import type { StatsSchema } from "@stats47/types";
 
 interface Props {
   rankingValues: (StatsSchema | RankingValue)[];

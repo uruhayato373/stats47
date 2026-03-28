@@ -1,17 +1,15 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatDataWithCategories } from "../../../services";
 import { toTreemapData } from "../../../adapters";
+import { fetchEstatDataWithCategories } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { TreemapChartClient } from "./TreemapChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { HierarchyData } from "../../../types/visualization";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 /**
  * ダッシュボード用 Treemap（e-Stat 階層データを D3 treemap で表示）

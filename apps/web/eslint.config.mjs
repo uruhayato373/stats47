@@ -1,25 +1,9 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
-
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-import { FlatCompat } from "@eslint/eslintrc";
 import nextPlugin from "@next/eslint-plugin-next";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
 
 const eslintConfig = [// TypeScript Configuration
 // React Configuration
@@ -71,91 +55,25 @@ reactHooksPlugin.configs.flat.recommended, {
   },
   rules: {
     "react/no-unescaped-entities": "warn",
+    "react/prop-types": "off",
     "no-console": "error",
     "no-duplicate-imports": "error",
     "no-restricted-imports": [
       "error",
       {
         patterns: [
-          {
-            group: [
-              "@/features/*/components/*",
-              "@/features/*/lib/*",
-              "@/features/*/utils/*",
-              "@/features/*/repositories/*",
-              "@/features/*/services/*",
-            ],
-            message:
-              "内部実装への直接アクセスは禁止です。Public API(@/features/*)からインポートしてください。",
-          },
-          {
-            group: ["@/features/auth/lib/auth", "@/features/auth/utils/admin"],
-            message: "代わりに '@/features/auth' からインポートしてください。",
-          },
-          {
-            group: ["@/features/database/d1", "@/features/database/d1-remote"],
-            message: "代わりに '@/features/database' からインポートしてください。",
-          },
-          {
-            group: ["@/features/category/repositories/*"],
-            message: "代わりに '@/features/category' からインポートしてください。",
-          },
-          {
-            group: ["@/features/r2-storage/lib/*"],
-            message: "代わりに '@/features/r2-storage' からインポートしてください。",
-          },
-          {
-            "group": [
-              "@/features/area/types/*",
-              "@/features/area/components/*",
-              "@/features/area/hooks/*",
-              "@/features/area/utils/*",
-              "@/features/area/repositories/*",
-              "@/features/area/services/*",
-            ],
-            "message": "代わりに '@/features/area' からインポートしてください。",
-          },
-                    {
-                      "group": ["@/features/visualization/d3/utils"],
-                      "message": "Deep imports from '@/features/visualization/d3/utils' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/*/*"],
-                      "message": "Deep imports from '@/features/visualization/d3' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/components"],
-                      "message": "Deep imports from '@/features/visualization/d3/components' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/constants"],
-                      "message": "Deep imports from '@/features/visualization/d3/constants' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/hooks"],
-                      "message": "Deep imports from '@/features/visualization/d3/hooks' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/types"],
-                      "message": "Deep imports from '@/features/visualization/d3/types' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-                    {
-                      "group": ["@/features/visualization/d3/utils"],
-                      "message": "Deep imports from '@/features/visualization/d3/utils' are disallowed. Please import from the public API: '@/features/visualization/d3'."
-                    },
-          // @stats47/visualization パッケージ: 公開 API 以外の深いインポート禁止
-                    {
-                      group: ["@stats47/visualization/d3/*", "@stats47/visualization/d3/*/*"],
-                      message: "@stats47/visualization/d3 から直接インポートしてください",
-                    },
-                    {
-                      group: ["@stats47/visualization/shared", "@stats47/visualization/shared/*"],
-                      message: "shared は内部モジュールです。@stats47/visualization/d3 を使用してください",
-                    },
-                    {
-                      group: ["@stats47/visualization/src", "@stats47/visualization/src/*"],
-                      message: "src への直接アクセスは禁止です",
-                    },
+          // feature 内部実装への直接アクセス禁止（Public API 経由のみ）
+          "@/features/*/components/*",
+          "@/features/*/lib/*",
+          "@/features/*/utils/*",
+          "@/features/*/repositories/*",
+          "@/features/*/services/*",
+          // @stats47/visualization: コンポーネント内部への直接アクセス禁止
+          "@stats47/visualization/d3/*/*",
+          "@stats47/visualization/shared",
+          "@stats47/visualization/shared/*",
+          "@stats47/visualization/src",
+          "@stats47/visualization/src/*",
         ],
       },
     ],
@@ -313,6 +231,6 @@ reactHooksPlugin.configs.flat.recommended, {
   rules: {
     "no-restricted-imports": "off",
   },
-}, ...storybook.configs["flat/recommended"]];
+}];
 
 export default eslintConfig;

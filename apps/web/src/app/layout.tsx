@@ -33,15 +33,14 @@ import "./globals.css";
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import Header from "@/components/organisms/Header";
-
 import { Sidebar, SidebarSkeleton } from "@/components/organisms/Sidebar";
 
+import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
+import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
-import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
 import { getRequiredBaseUrl } from "@/lib/env";
 import { geistMono, inter, notoSansJP } from "@/lib/fonts";
-import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { AdSenseScript } from "@/lib/google-adsense";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { nextTopLoaderConfig } from "@/lib/next-top-loader/config";

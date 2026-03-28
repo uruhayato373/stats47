@@ -1,7 +1,9 @@
 import { ranking } from "@stats47/mock";
-import type { RankingItem, RankingValue } from "@stats47/ranking";
 import { describe, expect, it, vi } from "vitest";
+
 import { generateRankingPageStructuredData, generateRankingTopPageStructuredData } from "../generate-structured-data";
+
+import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 // getRequiredBaseUrl をモック化
 vi.mock("@/lib/env", () => ({

@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { logger } from "@/lib/logger";
 
-import { AD_SIZES, AdSlotProps } from "../types";
+import { AdSlotProps } from "../types";
 
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
 
@@ -25,7 +25,6 @@ export function AdSenseAd({
   showLabel = true,
   lazyLoad = true,
   rootMargin = 100,
-  fullWidthResponsive,
 }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -35,20 +34,9 @@ export function AdSenseAd({
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
   const isEnabled = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
 
-  // 開発環境またはAdSenseが無効な場合はプレースホルダーを表示
-  if (!isEnabled) {
-    return <AdSensePlaceholder format={format} className={className} />;
-  }
-
-  // クライアントIDが設定されていない場合はエラー
-  if (!clientId) {
-    logger.error({}, "NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID is not set");
-    return null;
-  }
-
   // 遅延ロードの実装
   useEffect(() => {
-    if (!lazyLoad || !adRef.current) return;
+    if (!isEnabled || !clientId || !lazyLoad || !adRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -67,11 +55,11 @@ export function AdSenseAd({
     return () => {
       observer.disconnect();
     };
-  }, [lazyLoad, rootMargin]);
+  }, [isEnabled, clientId, lazyLoad, rootMargin]);
 
   // AdSense広告の読み込み
   useEffect(() => {
-    if (!isVisible || !adRef.current) return;
+    if (!isEnabled || !clientId || !isVisible || !adRef.current) return;
 
     // 広告コンテナの幅をチェック
     const containerWidth = adRef.current.offsetWidth;
@@ -97,28 +85,26 @@ export function AdSenseAd({
       }
     } catch (error) {
       logger.warn({ error }, "AdSense ad blocked");
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- setting state in error handler callback
       setIsAdBlocked(true);
     }
-  }, [isVisible, slotId]);
+  }, [isEnabled, clientId, isVisible, slotId]);
+
+  // 開発環境またはAdSenseが無効な場合はプレースホルダーを表示
+  if (!isEnabled) {
+    return <AdSensePlaceholder format={format} className={className} />;
+  }
+
+  // クライアントIDが設定されていない場合はエラー
+  if (!clientId) {
+    logger.error({}, "NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID is not set");
+    return null;
+  }
 
   // AdBlockで広告がブロックされた場合は何も表示しない
   if (isAdBlocked) {
     return null;
   }
-
-  const size = AD_SIZES[format];
-  const isFlexible = format === "infeed" || format === "article";
-
-  // デバッグ: ins要素の状態を確認
-  useEffect(() => {
-    if (!isVisible || !adRef.current) return;
-
-    let isMounted = true;
-
-    return () => {
-      isMounted = false;
-    };
-  }, [isVisible, slotId]);
 
   return (
     <div

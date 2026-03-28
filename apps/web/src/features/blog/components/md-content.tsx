@@ -1,14 +1,17 @@
 "use client";
 
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { type ReactNode, useMemo } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-import { type ReactNode, useMemo } from "react";
+
+import { ArrowRight, ExternalLink } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
 import { BannerAd } from "@/features/ads";
+
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 import { preprocessCallouts } from "./md-preprocessor";

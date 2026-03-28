@@ -1,6 +1,7 @@
+import { CHART_COLORS } from "../constants";
+
 import type { StatsSchema } from "@stats47/types";
 import type { StackedAreaSeriesConfig } from "@stats47/visualization/d3";
-import { CHART_COLORS } from "../constants";
 
 export interface StackedAreaData {
   categoryKey: string;

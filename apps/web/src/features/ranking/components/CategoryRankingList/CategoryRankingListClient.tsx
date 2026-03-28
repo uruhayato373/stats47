@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import type { ColumnDef } from "@tanstack/react-table";
+
 
 import { DataTable } from "@stats47/components";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
+import type { ColumnDef } from "@tanstack/react-table";
 
 export interface CategoryRankingListItem {
   rankingKey: string;

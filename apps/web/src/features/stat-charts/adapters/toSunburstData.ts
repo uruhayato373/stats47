@@ -1,7 +1,8 @@
 import { extractYearsFromStats } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
-import type { HierarchyData } from "../types/visualization";
+
 import type { SunburstEstatParams } from "../types";
+import type { HierarchyData } from "../types/visualization";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * e-Stat 生データから Sunburst/Treemap 用階層データを構築

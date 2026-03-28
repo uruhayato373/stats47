@@ -11,6 +11,7 @@ import {
 import { logger } from "@/lib/logger";
 
 import { searchDocuments } from "../lib/search-client";
+
 import type {
     SearchOptions,
     SearchResponse,

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
 import { fetchEstatDataWithCategories } from "../../../services";

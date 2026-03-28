@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { cn, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stats47/components";
 
 import type { AttributeMatrixData } from "../../../types/visualization";

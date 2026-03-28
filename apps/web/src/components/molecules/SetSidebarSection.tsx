@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect } from "react";
+
 import { useSidebarSectionStore } from "@/store/sidebar-section-store";
 
 interface SetSidebarSectionProps {

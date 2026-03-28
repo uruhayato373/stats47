@@ -24,3 +24,6 @@ export {
   generateAreaProfileBreadcrumbStructuredData,
   generateAreaProfileStructuredData,
 } from "./utils/generate-structured-data";
+
+// Map component
+export { AreaSelectorMap } from "./components/AreaSelectorMap";

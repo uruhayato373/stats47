@@ -1,5 +1,4 @@
-import type { RankingValue } from "@stats47/ranking";
-import { computeTopRankings, filterOutNationalArea } from "@stats47/ranking";
+import { computeTopRankings, filterOutNationalArea, type RankingValue } from "@stats47/ranking";
 
 /**
  * ランキングデータの要約情報（meta description / JSON-LD description 共通）

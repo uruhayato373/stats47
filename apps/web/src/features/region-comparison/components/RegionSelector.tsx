@@ -1,5 +1,9 @@
 "use client";
 
+import type { TransitionStartFunction } from "react";
+
+import { useRouter } from "next/navigation";
+
 import { fetchPrefectures } from "@stats47/area";
 import {
   Select,
@@ -8,8 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components";
-import { useRouter } from "next/navigation";
-import type { TransitionStartFunction } from "react";
+
 import { REGION_A_COLOR, REGION_B_COLOR } from "../types";
 
 interface RegionSelectorProps {

@@ -11,7 +11,7 @@ import {
 } from "@stats47/components/atoms/ui/card";
 import { BarChart3, FileText } from "lucide-react";
 
-import type { ContentType, SearchResult } from "../types/search.types";
+import type { ContentType, SearchResult } from "../types";
 
 interface SearchResultsProps {
     results: SearchResult[];

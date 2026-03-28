@@ -3,8 +3,8 @@ import React, { Suspense } from "react";
 import { DashboardComponentRenderer } from "./DashboardComponentRenderer";
 import { ChartSkeleton } from "./shared/ChartSkeleton";
 
-import type { Area } from "@stats47/area";
 import type { DashboardComponent } from "../types";
+import type { Area } from "@stats47/area";
 
 /**
  * コンポーネントタイプ別のデフォルトグリッド幅

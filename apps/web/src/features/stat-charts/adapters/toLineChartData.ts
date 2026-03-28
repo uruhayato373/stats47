@@ -1,6 +1,7 @@
-import type { StatsSchema } from "@stats47/types";
 import { CHART_COLORS } from "../constants";
+
 import type { LineChartData } from "../types/visualization";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * e-Stat 生データを折れ線グラフ用に変換

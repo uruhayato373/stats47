@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@stats47/components";
+
 import { DashboardCard } from "../../shared/DashboardCard";
 
 import type { StatsTableRowData } from "../../../types/visualization";

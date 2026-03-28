@@ -1,15 +1,13 @@
-import React from "react";
-
 import { logger } from "@stats47/logger";
 
-import { fetchEstatData } from "../../../services";
 import { toKpiCardData } from "../../../adapters";
+import { fetchEstatData } from "../../../services";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { KpiCardClient } from "./KpiCardClient";
 
 import type { DashboardItemProps } from "../../../types";
 
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 export const KpiCard = async ({
   common,
@@ -28,6 +26,7 @@ export const KpiCard = async ({
     );
   }
 
+  /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
   try {
     const result = await fetchEstatData(areaCode, estatParams);
     if ("error" in result) {
@@ -49,4 +48,5 @@ export const KpiCard = async ({
     logger.error({ error: err }, "KpiCardのデータ取得に失敗しました");
     return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
   }
+  /* eslint-enable react-hooks/error-boundaries */
 };

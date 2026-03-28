@@ -53,13 +53,17 @@ const fetchCommodityMeta = unstable_cache(
     const res = await fetch(url);
     const json = await res.json();
     const classObjs = json.GET_META_INFO?.METADATA_INF?.CLASS_INF?.CLASS_OBJ;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- e-Stat API response is untyped
     const cat01 = classObjs?.find((c: any) => c["@id"] === "cat01");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- e-Stat API response is untyped
     const items: any[] = Array.isArray(cat01?.CLASS)
       ? cat01.CLASS
       : [cat01?.CLASS];
 
     return items
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- e-Stat API response is untyped
       .filter((it: any) => it["@code"] !== "00001") // 「計」を除外
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- e-Stat API response is untyped
       .map((it: any) => ({
         code: it["@code"],
         name: it["@name"],
@@ -180,6 +184,7 @@ function buildHierarchy(
 async function fetchCommodityRaw(
   areaCode: string,
   year: string
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- e-Stat API response is untyped
 ): Promise<any[]> {
   const params = new URLSearchParams({
     appId: API_KEY!,

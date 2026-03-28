@@ -30,6 +30,7 @@ import { RankingNormalPreview } from './features/ranking-youtube/previews/Rankin
 import { RankingHorizontalBarPreview } from './features/ranking-youtube/previews/RankingHorizontalBarPreview';
 import { RankingCountdownPreview } from './features/ranking-youtube/previews/RankingCountdownPreview';
 import { RankingMigrationPreview } from './features/ranking-youtube/previews/RankingMigrationPreview';
+import { RankingScrollGesPreview } from './features/ranking-youtube/previews/RankingScrollGesPreview';
 // OGP
 import { AreaProfileOgpPreview } from './features/ogp/previews/AreaProfileOgpPreview';
 import { BlogOgpPreview } from './features/ogp/previews/BlogOgpPreview';
@@ -288,6 +289,24 @@ export const RemotionRoot: React.FC = () => {
                 theme: 'dark' as const,
                 showSafeAreas: false,
                 framesPerPref: 150,
+              }}
+            />
+
+            {/* YouTube GES背景 横スクロール動画 (16:9 Full HD 1920×1080) */}
+            <Composition
+              id="RankingYouTube-ScrollGes"
+              component={RankingScrollGesPreview}
+              width={CANVAS.youtube16x9.width}
+              height={CANVAS.youtube16x9.height}
+              fps={VIDEO_CONFIG.fps}
+              durationInFrames={120 + (90 * 37 + 120 * 7 + 180 * 3) + 120}
+              schema={CommonPreviewSchema.extend({
+                precision: z.number().optional(),
+                musicPath: z.string().optional(),
+                hookText: z.string().optional(),
+              })}
+              defaultProps={{
+                theme: 'dark' as const,
               }}
             />
 

@@ -59,7 +59,7 @@ export function DashboardDataTable({
                 } else {
                     setError(result.error);
                 }
-            } catch (err) {
+            } catch {
                 if (isMounted) {
                     setError("データの取得に失敗しました");
                 }

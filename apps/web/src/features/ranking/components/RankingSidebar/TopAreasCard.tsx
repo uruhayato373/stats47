@@ -1,16 +1,20 @@
 "use client";
 
 import { useMemo } from "react";
+
 import Link from "next/link";
-import { Crown, ChevronRight } from "lucide-react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import type { RankingValue } from "@stats47/ranking";
 import { formatValueWithPrecision } from "@stats47/utils";
+import { Crown, ChevronRight } from "lucide-react";
+
+import type { RankingValue } from "@stats47/ranking";
+
 
 interface TopAreasCardProps {
   rankingValues: RankingValue[];

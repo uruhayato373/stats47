@@ -26,12 +26,14 @@
  * @see {@link RankingItemsSidebar} 関連ランキング一覧サイドバー（Server Component）
  */
 
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { logger } from "@/lib/logger";
-import { isOk } from "@stats47/types";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+
+
+import { findRankingAiContent } from "@stats47/ai-content/server";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -40,6 +42,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
+import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 
 import {
   generateRankingBreadcrumbStructuredData,
@@ -50,23 +55,22 @@ import {
   AiContentAccordion,
   AiMarkdownContent,
   RankingFaqSection,
+  CorrelationSectionSkeleton,
+  RankingPageCardsSkeleton,
+  SurveyCard,
 } from "@/features/ranking";
 import {
   CorrelationSectionContainer,
   RankingItemsSidebar,
   RankingPageCardsContainer,
   RelatedArticlesCard,
+  PortStatisticsMapCard,
+  cachedFindRankingItem,
 } from "@/features/ranking/server";
-import { SurveyCard } from "@/features/ranking/components/RankingSidebar/SurveyCard";
-import { PortStatisticsMapCard } from "@/features/ranking/components/RankingSidebar/PortStatisticsMapCard";
 
-import { CorrelationSectionSkeleton } from "@/features/ranking/components/CorrelationSection/CorrelationSectionSkeleton";
-import { RankingPageCardsSkeleton } from "@/features/ranking/components/RankingPageCards/RankingPageCardsSkeleton";
-import { findRankingAiContent } from "@stats47/ai-content/server";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
+import { logger } from "@/lib/logger";
+
 import type { RankingValue } from "@stats47/ranking";
-import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
-import { cachedFindRankingItem } from "@/features/ranking/server";
 import type { Metadata } from "next";
 
 /** 24時間 ISR */

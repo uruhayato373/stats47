@@ -1,12 +1,15 @@
 "use client";
 
 import { useMemo } from "react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { TrendingUp, BarChart3 } from "lucide-react";
-import type { ChartDataNode } from "@stats47/visualization/d3";
+
 import { RankingRankBadge } from "../../../ranking/components/RankingHighlights/RankingRankBadge";
 import { useChartData } from "../../hooks/useChartData";
+
 import type { BaseChartConfig } from "../../types/chart-config.types";
+import type { ChartDataNode } from "@stats47/visualization/d3";
 
 interface StatsHighlightConfig extends BaseChartConfig {
   displayUnit?: string;

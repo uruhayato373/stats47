@@ -1,5 +1,6 @@
-import type { SlideData } from "../../types";
 import { fiscalIndicatorsSlides } from "./fiscal-indicators";
+
+import type { SlideData } from "../../types";
 
 const SLIDE_REGISTRY: Record<string, SlideData[]> = {
   "fiscal-indicators": fiscalIndicatorsSlides,

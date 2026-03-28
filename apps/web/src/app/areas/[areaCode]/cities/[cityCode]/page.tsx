@@ -2,23 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchCities, lookupArea } from "@stats47/area";
-import { listCategories } from "@/features/category/server";
-import { getDrizzle, pageComponentAssignments } from "@stats47/database/server";
-import { eq } from "drizzle-orm";
-import { isOk } from "@stats47/types";
-import type { Metadata } from "next";
-
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-
-import { CategoryNavGrid } from "@/features/area-profile";
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -27,6 +10,28 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@stats47/components/atoms/ui/card";
+import { getDrizzle, pageComponentAssignments } from "@stats47/database/server";
+import { isOk } from "@stats47/types";
+import { eq } from "drizzle-orm";
+
+
+
+
+import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
+
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/server";
+import { CategoryNavGrid } from "@/features/area-profile";
+import { listCategories } from "@/features/category/server";
+
+import type { Metadata } from "next";
+
 
 export const revalidate = 86400;
 

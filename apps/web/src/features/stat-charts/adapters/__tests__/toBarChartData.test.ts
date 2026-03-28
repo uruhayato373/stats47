@@ -1,9 +1,10 @@
 import { describe, it, expect } from "vitest";
+
 import {
   toBarChartData,
   toStackedBarChartData,
-  toSimpleBarChartData,
 } from "../toBarChartData";
+
 import type { StatsSchema } from "@stats47/types";
 
 const baseRow: StatsSchema = {

@@ -5,16 +5,18 @@
  */
 
 import Link from "next/link";
-import type { Metadata } from "next";
 
-import { isOk } from "@stats47/types";
+
+import { getDrizzle, rankingItems } from "@stats47/database/server";
 import {
   listSurveys,
 } from "@stats47/ranking/server";
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { isOk } from "@stats47/types";
 import { eq, count } from "drizzle-orm";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
+import type { Metadata } from "next";
 
 export const revalidate = 86400;
 

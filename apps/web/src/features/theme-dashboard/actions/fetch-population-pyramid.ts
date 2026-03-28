@@ -4,9 +4,11 @@ import {
   fetchFormattedStats,
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
+
+import { getEstatCacheStorage } from "@/features/stat-charts/server";
+
 import type { PyramidChartData } from "@stats47/visualization/d3";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/services/get-estat-cache-storage";
 
 /**
  * 5歳階級別人口ピラミッドデータを取得

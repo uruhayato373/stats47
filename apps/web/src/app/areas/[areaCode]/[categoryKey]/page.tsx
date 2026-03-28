@@ -2,28 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchCities } from "@stats47/area";
-import { listCategories } from "@/features/category/server";
-import { isOk } from "@stats47/types";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-import type { Metadata } from "next";
-
-import {
-    AreaProfilePageClient,
-    CategorySelect,
-    RelatedAreas,
-    generateAreaProfileBreadcrumbStructuredData,
-    generateAreaProfileStructuredData,
-} from "@/features/area-profile";
-import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-import { FurusatoNozeiCard } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/components/AreaBannerAd";
-import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -32,6 +10,35 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@stats47/components/atoms/ui/card";
+import { isOk } from "@stats47/types";
+
+import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
+
+import { FurusatoNozeiCard } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/server";
+import {
+    AreaProfilePageClient,
+    CategorySelect,
+    RelatedAreas,
+    generateAreaProfileBreadcrumbStructuredData,
+    generateAreaProfileStructuredData,
+} from "@/features/area-profile";
+import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
+import { listCategories } from "@/features/category/server";
+
+import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
+
+import type { Metadata } from "next";
+
+
+
+
 
 export const revalidate = 86400;
 

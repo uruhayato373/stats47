@@ -1,4 +1,5 @@
 import { fetchCities, lookupArea } from "@stats47/area";
+
 import { CityListSidebarClient } from "./CityListSidebarClient";
 
 interface CityListSidebarProps {

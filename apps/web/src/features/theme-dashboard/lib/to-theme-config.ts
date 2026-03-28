@@ -1,6 +1,6 @@
+import type { PanelTabGroup, ThemeConfig } from "../types";
 import type { IndicatorSet } from "@stats47/types";
 
-import type { PanelTabGroup, ThemeConfig } from "../types";
 
 /**
  * IndicatorSet → ThemeConfig 変換

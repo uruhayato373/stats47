@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
+
 import { findArticleBySlug } from "../repositories/article-repository";
-import { type Article } from "../types/article.types";
+import { type Article } from "../types";
 
 const LOCAL_CONTENT_DIR = path.resolve(process.cwd(), "../../.local/r2/blog");
 
@@ -48,10 +49,8 @@ export class ArticleService {
         const raw = fs.readFileSync(contentPath, "utf-8");
         return this.stripFrontmatter(raw);
       }
-      console.warn(`Article file not found: ${contentPath}`);
       return "";
-    } catch (e) {
-      console.error("Failed to read local article file", e);
+    } catch {
       return "";
     }
   }
@@ -62,12 +61,10 @@ export class ArticleService {
       const key = resolveR2Key(slug, format);
       const content = await fetchFromR2AsString(key);
       if (!content) {
-        console.warn(`Article not found in R2: ${key}`);
         return "";
       }
       return this.stripFrontmatter(content);
-    } catch (e) {
-      console.error("Failed to fetch article from R2", e);
+    } catch {
       return "";
     }
   }

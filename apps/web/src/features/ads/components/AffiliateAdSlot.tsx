@@ -9,10 +9,12 @@ import {
   AFFILIATE_THEME,
   CATEGORY_AFFILIATE_MAP,
 } from "../constants/affiliate-category";
-import { resolveAffiliateAd } from "../services/resolve-affiliate-ad";
-import type { AffiliateLocationCode } from "../types";
+import { resolveAffiliateAd } from "../services";
+
 import { AdSenseAdWrapper } from "./AdSenseAdWrapper";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
+
+import type { AffiliateLocationCode } from "../types";
 
 interface AffiliateAdSlotProps {
   categoryKey: string;

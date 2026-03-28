@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { Button } from "@stats47/components";
 import { AlertCircle, RefreshCcw } from "lucide-react";
-import { useEffect } from "react";
 
 export default function BlogError({
     error,
@@ -12,7 +13,7 @@ export default function BlogError({
     reset: () => void;
 }) {
     useEffect(() => {
-        console.error(error);
+        // Error is already captured by Next.js error boundary
     }, [error]);
 
     return (

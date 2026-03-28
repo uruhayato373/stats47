@@ -1,3 +1,6 @@
+// ユーティリティ
+export { addLineBreaksAfterPeriod } from "./add-line-breaks";
+
 // メタデータ・構造化データ生成（Web 固有ロジック）
 export { buildRankingSummary } from "./build-ranking-summary";
 export { generateRankingPageMetaData } from "./generate-meta-data";

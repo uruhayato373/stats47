@@ -1,6 +1,8 @@
 import { ExternalLink } from "lucide-react";
+
 import { buildFurusatoNozeiUrl, getFurusatoNozeiLink } from "../constants/furusato-nozei";
 import { searchFurusatoItems } from "../lib/rakuten-api";
+
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 interface FurusatoNozeiCardProps {

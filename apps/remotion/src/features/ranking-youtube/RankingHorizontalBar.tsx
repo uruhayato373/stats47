@@ -28,8 +28,8 @@ import {
 // Constants
 // ---------------------------------------------------------------------------
 
-/** 各都道府県の表示フレーム数（デフォルト 5秒） */
-const DEFAULT_FRAMES_PER_PREF = 150; // 5s @ 30fps
+/** 各都道府県の表示フレーム数（デフォルト 3秒） */
+const DEFAULT_FRAMES_PER_PREF = 90; // 3s @ 30fps
 
 /** 1画面に表示する行数 */
 const VISIBLE_ROWS = 8;
@@ -90,6 +90,7 @@ interface RankingHorizontalBarProps {
 
 /** ヘッダー: タイトル + プログレス */
 const Header: React.FC<{
+  meta: RankingMeta;
   title: string;
   yearName?: string;
   unit: string;
@@ -97,7 +98,7 @@ const Header: React.FC<{
   totalEntries: number;
   colors: ColorScheme;
   isDark: boolean;
-}> = ({ title, yearName, unit, currentRank, totalEntries, colors, isDark }) => {
+}> = ({ meta, title, yearName, unit, currentRank, totalEntries, colors, isDark }) => {
   const progress = (totalEntries - currentRank + 1) / totalEntries;
 
   return (
@@ -161,7 +162,7 @@ const Header: React.FC<{
             </span>
           )}
           <span style={{ fontSize: 22, color: colors.muted, fontWeight: FONT.weight.bold }}>
-            単位: {unit}
+            {meta.normalizationBasis ? `${meta.normalizationBasis}（${unit}）` : `単位: ${unit}`}
           </span>
           <div
             style={{
@@ -406,6 +407,7 @@ const HorizontalBarBody: React.FC<{
       </AbsoluteFill>
 
       <Header
+        meta={meta}
         title={meta.title}
         yearName={meta.yearName}
         unit={meta.unit}
@@ -460,7 +462,7 @@ const HorizontalBarBody: React.FC<{
       </div>
 
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 20 }}>
-        <Footer source={meta.normalizationBasis} colors={colors} />
+        <Footer source="e-Stat 政府統計の総合窓口" colors={colors} />
       </div>
     </AbsoluteFill>
   );

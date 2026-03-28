@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeDashboardTabbed } from "./ThemeDashboardTabbed";
+
 import type { ThemeDashboardClientProps } from "../types";
 
 /**

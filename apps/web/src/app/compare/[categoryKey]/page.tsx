@@ -1,18 +1,22 @@
+import { notFound } from "next/navigation";
+
+import { fetchPrefectures } from "@stats47/area";
+import { unwrap } from "@stats47/types";
+import { type Metadata } from "next";
+
+import { listCategories } from "@/features/category/server";
 import {
     CompareGridLayout,
     RegionComparisonClient,
     REGION_A_COLOR,
     REGION_B_COLOR,
-    type ChoroplethMapData,
+    type ComparisonRegion,
 } from "@/features/region-comparison";
-import type { ComparisonRegion } from "@/features/region-comparison";
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
-import { fetchPrefectures } from "@stats47/area";
-import { listCategories } from "@/features/category/server";
-import { unwrap } from "@stats47/types";
-import { type Metadata } from "next";
-import { notFound } from "next/navigation";
+
+
 
 export const revalidate = 86400;
 

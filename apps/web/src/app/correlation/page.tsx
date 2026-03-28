@@ -1,12 +1,15 @@
-import { CorrelationPageClient } from "@/features/correlation";
-import { fetchCorrelationPairAction } from "@/features/correlation/server";
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
-import { isOk } from "@stats47/types";
-import { listRankingItemsLite } from "@stats47/ranking/server";
 import {
     countCorrelationStats,
     listTopCorrelations,
 } from "@stats47/correlation/server";
+import { listRankingItemsLite } from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
+
+import { CorrelationPageClient } from "@/features/correlation";
+import { fetchCorrelationPairAction } from "@/features/correlation/server";
+
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
+
 import type { Metadata } from "next";
 
 export const revalidate = 86400;

@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { BlogArticleGrid } from "@/features/blog";
-import { listLatestArticles } from "@/features/blog/server";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -11,6 +9,10 @@ import {
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { getDrizzle } from "@stats47/database/server";
+
+import { BlogArticleGrid } from "@/features/blog";
+import { listLatestArticles } from "@/features/blog/server";
+
 import type { Metadata } from "next";
 
 export const revalidate = 86400;
