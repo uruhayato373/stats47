@@ -1,24 +1,28 @@
-Feature ブランチを develop → main へ順にマージしてデプロイする。
+変更を main に push してデプロイする。
 
 ## 前提
 
-- 現在 feature ブランチにいること（`main`, `develop` 以外）
 - 変更がすべてコミット済みであること
+
+## ブランチ判定
+
+現在のブランチに応じて手順が異なる:
+
+- **`main` にいる場合** → Step 2 の後、直接 `git push origin main` → develop 同期
+- **`develop` にいる場合** → Step 2 の後、main へマージ → push → develop 同期
+- **feature ブランチにいる場合** → 従来の feature → develop → main フロー
 
 ## 手順
 
 ### Step 1: 事前チェック
 
 ```bash
-# 現在のブランチを確認（main/develop なら中止）
 git branch --show-current
 git status
 ```
 
 - 未コミットの変更がある場合 → ユーザーに確認して中止
-- `main` または `develop` にいる場合 → エラーを出して中止
-
-現在のブランチ名を `$FEATURE_BRANCH` として記憶する。
+- 現在のブランチ名を `$CURRENT_BRANCH` として記憶する
 
 ### Step 2: テスト・型チェック・ビルド
 
@@ -67,10 +71,14 @@ git merge develop
 git push origin main
 ```
 
-### Step 5: 元のブランチに戻る
+### Step 5: develop を同期し、元のブランチに戻る
 
 ```bash
-git checkout $FEATURE_BRANCH
+git checkout develop
+git pull origin develop
+git merge main
+git push origin develop
+git checkout $CURRENT_BRANCH
 ```
 
 ### Step 6: 完了報告

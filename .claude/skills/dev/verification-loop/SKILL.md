@@ -35,10 +35,10 @@ npx tsc --noEmit -p apps/web/tsconfig.json
 ### Phase 3: Lint
 
 ```bash
-npx eslint apps/web/src/ --ext .ts,.tsx --max-warnings 0 2>/dev/null || echo "ESLint not configured"
+cd apps/web && npx eslint src/ --ext .ts,.tsx --max-warnings 0
 ```
 
-ESLint 未設定の場合はスキップ（現状未設定の可能性あり）。
+ESLint config は `apps/web/eslint.config.mjs` にあるため、`apps/web` ディレクトリから実行すること。
 
 ### Phase 4: テスト実行
 
