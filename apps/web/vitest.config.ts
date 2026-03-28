@@ -29,6 +29,7 @@ export default defineConfig({
       "**/.open-next/**",
       "**/coverage/**",
       "**/tests/e2e/**", // E2E tests are handled by Playwright
+      "**/tests/smoke/**", // Smoke tests are handled by Playwright
       "**/tests/visual/**", // Visual regression tests are handled by Playwright
     ],
     coverage: {
