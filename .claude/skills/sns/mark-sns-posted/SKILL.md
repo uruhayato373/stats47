@@ -60,6 +60,31 @@ WHERE platform = '<platform>'
 - `post_url` は `--url` が指定されている場合のみ設定
 - 該当行が存在しない場合は WARNING を出力（先に `/post-sns-captions` 等でレコードが作成されている前提）
 
+### caption の保存
+
+各プラットフォームの `caption.txt` が存在すれば、その内容を `sns_posts.caption` に保存する。メトリクス収集時のマッチング精度に直結するため、必ず実行すること。
+
+```bash
+# 各プラットフォームの caption.txt パス
+CAPTION_FILE=".local/r2/sns/<contentType>/<contentKey>/<platform>/caption.txt"
+# youtube-short の場合
+CAPTION_FILE=".local/r2/sns/<contentType>/<contentKey>/youtube-short/shorts.txt"
+```
+
+caption.txt が存在する場合:
+
+```sql
+UPDATE sns_posts
+SET caption = '<caption.txt の内容>'
+WHERE platform = '<platform>'
+  AND content_key = '<contentKey>'
+  AND domain = '<contentType>'
+  AND post_type = 'original'
+  AND (caption IS NULL OR caption = '');
+```
+
+**注意**: 既に caption が設定済みの場合は上書きしない（`caption IS NULL OR caption = ''` 条件）。
+
 ### 4. リモート R2 からメディアファイルのみ削除
 
 **重要**: テキスト・JSON ファイルはリモート R2 に保持する。削除対象はメディアファイル（動画・画像）のみ。

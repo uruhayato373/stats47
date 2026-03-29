@@ -178,6 +178,32 @@ UPDATE sns_posts SET status = 'scheduled', scheduled_at = '<ISO 8601>'
 WHERE platform = '<platform>' AND content_key = '<contentKey>' AND domain = '<domain>' AND post_type = 'original';
 ```
 
+### post_url の保存
+
+投稿後に取得できる URL を `post_url` に保存する。メトリクス収集時の videoId/tweetId マッチングに必要。
+
+- **X**: 予約投稿確定後のツイート URL（`https://x.com/stats47jp373/status/<tweetId>`）が取得できれば保存
+- **TikTok**: 投稿後の動画 URL（`https://www.tiktok.com/@stats47jp/video/<videoId>`）
+- **Instagram**: Meta Business Suite から投稿パーマリンク
+- **YouTube**: アップロード後の `https://www.youtube.com/watch?v=<videoId>`
+
+```sql
+UPDATE sns_posts SET post_url = '<投稿URL>'
+WHERE platform = '<platform>' AND content_key = '<contentKey>' AND domain = '<domain>' AND post_type = 'original';
+```
+
+### caption の保存
+
+予約投稿時に使用したキャプションを `sns_posts.caption` に保存する。メトリクス収集時のマッチング精度（先頭80文字前方一致）に直結するため、必ず実行すること。
+
+`.local/r2/sns/<domain>/<contentKey>/<platform>/caption.txt`（YouTube は `youtube-short/shorts.txt`）の内容を読み込む:
+
+```sql
+UPDATE sns_posts SET caption = '<caption.txt の内容>'
+WHERE platform = '<platform>' AND content_key = '<contentKey>' AND domain = '<domain>' AND post_type = 'original'
+  AND (caption IS NULL OR caption = '');
+```
+
 ### note.com
 
 **プロファイル: `--profile Default`**（Profile 5 ではない）
