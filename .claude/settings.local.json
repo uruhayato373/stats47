@@ -124,14 +124,39 @@
       "Bash(sqlite3 \"$DBPATH\" \"SELECT title FROM ranking_items WHERE ranking_key = ''starting-salary-highschool'' AND area_type=''prefecture'';\")",
       "Bash(sqlite3 \"$DBPATH\" \"PRAGMA journal_mode=WAL; UPDATE ranking_items SET title = ''高卒初任給の都道府県別ランキング'' WHERE ranking_key = ''starting-salary-highschool'' AND area_type = ''prefecture'';\")",
       "Bash(sqlite3 \"$DBPATH\" \"UPDATE ranking_items SET title = ''大卒初任給の都道府県別ランキング'' WHERE ranking_key = ''starting-salary-university'' AND area_type = ''prefecture'';\")",
-      "Bash(sqlite3 \"$DBPATH\" \"SELECT ranking_key, title FROM ranking_items WHERE ranking_key IN \\(''starting-salary-highschool'',''starting-salary-university''\\) AND area_type=''prefecture'';\")"
+      "Bash(sqlite3 \"$DBPATH\" \"SELECT ranking_key, title FROM ranking_items WHERE ranking_key IN \\(''starting-salary-highschool'',''starting-salary-university''\\) AND area_type=''prefecture'';\")",
+      "Bash(cd:*)",
+      "Bash(kill 33918 34987 38035 38667)",
+      "Bash(pkill -f \"remotion studio\")",
+      "Bash(pkill -f \"remotion render\")",
+      "Bash(kill 39204 39668 40528 41714 42982)",
+      "Bash(sqlite3 \"$DBPATH\" \"SELECT slug, title, published FROM articles WHERE slug = ''electricity-bill-hike-impact'';\")",
+      "Bash(sqlite3 \"$DBPATH\" \"UPDATE ranking_items SET title = ''高卒初任給の都道府県別ランキング'' WHERE ranking_key = ''starting-salary-highschool'' AND area_type = ''prefecture'';\")",
+      "Bash(source ~/.zshrc)",
+      "Bash(alias cc:*)",
+      "Bash(export PATH=\"$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH\" browser-use --help)",
+      "Bash(browser-use profile:*)",
+      "Bash(DB_PATH=\".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite\")",
+      "Read(//Users/minamidaisuke/stats47/apps/web/**)",
+      "Bash(/tmp/browser_use_commands.txt:*)",
+      "Bash(browser-use doctor:*)",
+      "Bash(BU=\"browser-use --headed --profile ''Profile 5''\")",
+      "Bash(eval $BU open \"https://x.com/stats47_jp\")",
+      "Bash(eval $BU screenshot /tmp/x-profile.png)",
+      "Bash(__NEW_LINE_6a495fc03a1c34ab__ eval:*)",
+      "Bash(eval $BU screenshot /tmp/x-profile2.png)"
     ]
   },
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "hook": "node .claude/hooks/pre-bash-safety.js"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/pre-bash-safety.js"
+          }
+        ]
       }
     ]
   }
