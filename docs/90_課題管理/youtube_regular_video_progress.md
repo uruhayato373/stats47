@@ -5,9 +5,9 @@
 ## 完了した作業
 
 ### 1. 競合分析・戦略レポート
-- `docs/03_レビュー/youtube_regular_video_strategy_20260325.md` に記録
 - 5チャンネル（データは語る / 数字で巡る世界 / 世界ランキング図鑑 / そういうデータあるんすか / データ図鑑）を分析
-- 成功パターン7つを抽出（意外性、地元テーマ、教育学歴、ネガティブ訴求、時事×統計、タブー、尺4-6分）
+- 成功パターン7つを抽出 → `.claude/agents/sns-producer.md` に統合済み
+- 制作ルール（尺・構成・タイトル）→ `/post-youtube`, `/publish-youtube-normal` スキルに統合済み
 
 ### 2. 6テーマの動画企画書
 - `docs/90_課題管理/youtube_regular_video_plans.md` に記録

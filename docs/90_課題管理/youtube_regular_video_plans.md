@@ -1,17 +1,13 @@
 # YouTube 通常動画（16:9）企画書
 
 作成日: 2026-03-25
-関連: [戦略レポート](../03_レビュー/youtube_regular_video_strategy_20260325.md)
+関連: 制作ルールは `.claude/agents/sns-producer.md` および `/publish-youtube-normal` スキルを参照
 
 ## 共通仕様
 
-| 項目 | 仕様 |
-|---|---|
-| 尺 | 4:50〜5:00 |
-| 公開時間 | JST 20:00 |
-| 投稿頻度 | 週2本以上 |
-| タイトル型 | 「都道府県別 ○○ランキング｜意外性のある副題」 |
-| 構成テンプレート | フック(15秒) → 導入(15秒) → ランキング発表(2:30) → 深掘り(1:00) → まとめ+CTA(50秒) |
+制作ルールの詳細は以下を参照:
+- 構成テンプレート・公開時間 → `.claude/skills/sns/publish-youtube-normal/SKILL.md`
+- タイトル最適化・テーマ選定 → `.claude/agents/sns-producer.md`
 
 ---
 
