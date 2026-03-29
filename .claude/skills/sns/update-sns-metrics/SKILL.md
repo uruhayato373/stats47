@@ -28,13 +28,15 @@ disable-model-invocation: true
 
 ```bash
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
-DB_PATH=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+PROJECT_ROOT="$(pwd)"
+DB_PATH="$PROJECT_ROOT/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
 ```
 
 **重要ルール:**
 - `browser-use` コマンドは毎回フルで記述する（`$BU` 変数展開しない。zsh が解釈に失敗する）
 - JS はファイルに書き出してから `eval "$(cat /tmp/xxx.js)"` で渡す。インラインの複雑な JS はクォート問題で壊れる
 - Node.js スクリプトも `/tmp/*.js` にファイル書き出してから `node /tmp/xxx.js` で実行する
+- **Node.js の `require("better-sqlite3")` は `/tmp/` から実行すると解決に失敗する。** 絶対パス `require("${PROJECT_ROOT}/node_modules/better-sqlite3")` を使うこと。`googleapis` も同様
 
 ## マッチング優先順位（全プラットフォーム共通）
 
@@ -63,11 +65,11 @@ DB_PATH=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065
 `--skip-backfill` 指定時はスキップ。
 
 ```bash
-cat > /tmp/caption-backfill.js << 'JSEOF'
-const Database = require("better-sqlite3");
+cat > /tmp/caption-backfill.js << JSEOF
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
 const path = require("path");
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
 // caption が NULL のレコードを取得
@@ -202,10 +204,10 @@ node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/x-tweets-all.js
 Node.js スクリプトをファイルに書き出して実行する。
 
 ```bash
-cat > /tmp/x-match-db.js << 'JSEOF'
-const Database = require("better-sqlite3");
+cat > /tmp/x-match-db.js << JSEOF
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
 const tweets = JSON.parse(fs.readFileSync("/tmp/x-tweets-all.json", "utf8"));
@@ -303,7 +305,22 @@ rm -f /tmp/x-tweets-all.json /tmp/x-match-db.js
 
 ## Instagram
 
-プロフィールグリッドから投稿リンクを収集し、各投稿の OG description から likes/comments を抽出する。IG キャプションには stats47 URL がない（IG はリンク不可）ため、ranking_name でのマッチングに頼る。
+**2つの取得方式がある。** セッション状態に応じて使い分ける。
+
+### 方式A: Meta Business Suite（推奨）
+
+`https://business.facebook.com/latest/insights/content` で投稿一覧 + メトリクスを一括取得できる。
+IG プロフィールページのセッションが切れている場合はこちらを使う。
+
+1. `browser-use --headed --profile 'Profile 5' open "https://business.facebook.com/latest/insights/content"`
+2. `state` コマンドで DOM を確認し、投稿一覧テーブルからメトリクスを抽出
+3. DOM 構造は変わりやすいので、`state` 出力を見て JS を都度調整する
+
+### 方式B: プロフィールグリッド + OG description
+
+プロフィールグリッドから投稿リンクを収集し、各投稿の OG description から likes/comments を抽出する。
+
+**注意:** プロフィールグリッドの `a[href*="/p/"]` はスクロール先でおすすめ投稿（他アカウント）も拾う。`a[href*="/stats47jp/"]` で自アカウントに限定するか、`/reel/` も含めて取得すること。
 
 **マッチング優先順位（IG 固有）:**
 1. `post_url` の shortcode で完全一致
@@ -331,17 +348,27 @@ sleep 5
 
 プロフィールグリッドをスクロールしながら投稿リンクを収集する。
 
+**重要:** `a[href*="/p/"]` だけではおすすめ投稿（他アカウント）を拾う。リール（`/reel/`）も含め、`stats47jp` の投稿のみをフィルタする。
+
 ```bash
 cat > /tmp/ig-collect.js << 'JSEOF'
-var links = document.querySelectorAll('a[href*="/p/"]');
+var links = document.querySelectorAll('a[href*="/stats47jp/p/"], a[href*="/stats47jp/reel/"]');
 var urls = [];
 links.forEach(function(a) {
   var h = a.href;
-  if (h.includes('/stats47jp/') || h.includes('/p/')) {
-    var m = h.match(/\/p\/([A-Za-z0-9_-]+)/);
-    if (m && urls.indexOf(m[1]) === -1) urls.push(m[1]);
-  }
+  var m = h.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
+  if (m && urls.indexOf(m[1]) === -1) urls.push(m[1]);
 });
+if (urls.length === 0) {
+  var allLinks = document.querySelectorAll('a[href*="/p/"], a[href*="/reel/"]');
+  allLinks.forEach(function(a) {
+    var h = a.href;
+    if (h.includes('stats47jp')) {
+      var m = h.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
+      if (m && urls.indexOf(m[1]) === -1) urls.push(m[1]);
+    }
+  });
+}
 JSON.stringify(urls)
 JSEOF
 
@@ -463,10 +490,10 @@ node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/ig-metrics.json
 ### IG-4. DB マッチング + メトリクス記録
 
 ```bash
-cat > /tmp/ig-match-db.js << 'JSEOF'
-const Database = require("better-sqlite3");
+cat > /tmp/ig-match-db.js << JSEOF
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
 const metrics = JSON.parse(fs.readFileSync("/tmp/ig-metrics.json", "utf8"));
@@ -540,21 +567,23 @@ rm -f /tmp/ig-shortcodes.json /tmp/ig-urls.json /tmp/ig-metrics.json /tmp/ig-mat
 
 ## YouTube
 
-**API ベース（browser-use 不要）。** YouTube Data API v3 で全動画のメトリクスを効率的に取得する。`search.list` + `videos.list(statistics)` で views/likes/comments を一括取得。サービスアカウント認証で安定動作。
+**API ベース（browser-use 不要）。** YouTube Data API v3 で全動画（通常動画 + ショート）のメトリクスを取得する。`channels.list` → `playlistItems.list`（uploads プレイリスト）→ `videos.list(statistics)` で一括取得。サービスアカウント認証で安定動作。
+
+**注意:** `search.list` はショート動画を返さないことがある。必ず `playlistItems.list` を使うこと。
 
 ### YT-1. API で全動画メトリクスを取得 + DB マッチング
 
 ```bash
-cat > /tmp/yt-metrics.js << 'JSEOF'
-const { google } = require('googleapis');
-const Database = require("better-sqlite3");
+cat > /tmp/yt-metrics.js << JSEOF
+const { google } = require('${PROJECT_ROOT}/node_modules/googleapis');
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
 const path = require("path");
 
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const CHANNEL_ID = "UCdRiwDSX1aUd0dSd7Cs08Kg";
 const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
-const keyFile = KEY_CANDIDATES.map(f => path.resolve(f)).find(f => fs.existsSync(f));
+const keyFile = KEY_CANDIDATES.map(f => path.resolve('${PROJECT_ROOT}', f)).find(f => fs.existsSync(f));
 if (!keyFile) throw new Error('サービスアカウント鍵が見つかりません: ' + KEY_CANDIDATES.join(' / '));
 
 async function main() {
@@ -564,27 +593,30 @@ async function main() {
   });
   const youtube = google.youtube({ version: 'v3', auth });
 
-  // 1. Search API で動画ID一覧を取得（50件ずつページネーション）
-  let allItems = [];
+  // 1. チャンネルの uploads プレイリスト ID を取得
+  const ch = await youtube.channels.list({ id: CHANNEL_ID, part: 'contentDetails' });
+  const uploadsId = ch.data.items[0].contentDetails.relatedPlaylists.uploads;
+  console.log("Uploads playlist: " + uploadsId);
+
+  // 2. playlistItems.list で全動画ID を取得（ショート含む）
+  let allVideoIds = [];
   let nextPageToken = undefined;
   do {
-    const search = await youtube.search.list({
-      channelId: CHANNEL_ID,
-      part: 'snippet',
-      order: 'date',
+    const pl = await youtube.playlistItems.list({
+      playlistId: uploadsId,
+      part: 'contentDetails',
       maxResults: 50,
-      type: 'video',
       pageToken: nextPageToken,
     });
-    allItems = allItems.concat(search.data.items);
-    nextPageToken = search.data.nextPageToken;
+    allVideoIds = allVideoIds.concat(pl.data.items.map(i => i.contentDetails.videoId));
+    nextPageToken = pl.data.nextPageToken;
   } while (nextPageToken);
-  console.log("Total videos found: " + allItems.length);
+  console.log("Total videos found: " + allVideoIds.length);
 
-  // 2. Videos API で統計を取得（50件ずつバッチ）
+  // 3. Videos API で統計を取得（50件ずつバッチ）
   const allVideos = [];
-  for (let i = 0; i < allItems.length; i += 50) {
-    const ids = allItems.slice(i, i + 50).map(v => v.id.videoId).join(',');
+  for (let i = 0; i < allVideoIds.length; i += 50) {
+    const ids = allVideoIds.slice(i, i + 50).join(',');
     const videos = await youtube.videos.list({
       id: ids,
       part: 'snippet,statistics',
@@ -811,10 +843,10 @@ echo "$STATE" > /tmp/tt-state.txt
 プロフィールグリッドから収集した動画データ（views のみ）を DB にマッチングする。マッチした動画 URL を `/tmp/tt-matched-urls.txt` に書き出し、TT-2b で詳細取得する。
 
 ```bash
-cat > /tmp/tt-match-db.js << 'JSEOF'
-const Database = require("better-sqlite3");
+cat > /tmp/tt-match-db.js << JSEOF
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
 let videos;
@@ -916,9 +948,9 @@ rm -f /tmp/tt-videos.json /tmp/tt-state.txt /tmp/tt-collect.js /tmp/tt-detail-ex
 処理完了後、以下のクエリで結果を出力:
 
 ```bash
-cat > /tmp/sns-report.js << 'JSEOF'
-const Database = require("better-sqlite3");
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+cat > /tmp/sns-report.js << JSEOF
+const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
+const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
 console.log("\n=== プラットフォーム別更新件数（直近1時間） ===");
