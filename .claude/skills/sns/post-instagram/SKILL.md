@@ -145,11 +145,7 @@ template パラメータに応じて構造とトーンを切り替える。
    - correlation: hook + caption + 特徴的な3県 + CTA + ハッシュタグ
    ※ 全47都道府県データ・偏差値データは含めない
    ※ URL は `/generate-utm-url` スキルの UTM ルールに従う（platform=instagram）
-5. 投稿管理テーブルを更新する（`docs/11_SNS投稿管理/posts/<contentType>.md`）
-   - テーブル内で contentKey を含むリンク行を検索する（URL末尾の `/ranking/<key>` で特定）
-   - 行が存在する場合: IG 列を `generated` に更新
-   - 行が存在しない場合: テーブル末尾に新しい行を追加（IG 列のみ `generated`、他は `-`）
-6. 保存パスとキャプション内容を報告。画像が必要なら `/render-sns-stills` を案内
+5. 保存パスとキャプション内容を報告。画像が必要なら `/render-sns-stills` を案内
 
 ## 品質チェックリスト
 

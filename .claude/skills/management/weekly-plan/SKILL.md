@@ -34,8 +34,11 @@
 
 ```
 調査項目:
-- docs/11_SNS投稿管理/posts/ のテーブルファイルを読み込み、ステータス別集計
-  - generated / posted の件数（プラットフォーム別）
+- DB `sns_posts` テーブルからステータス別集計:
+  DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+  ```sql
+  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+  ```
 - .local/r2/blog/ 配下の記事数（公開済み / 下書き）
 - docs/90_課題管理/ブログ記事一括企画.md の未実行企画数
 
@@ -53,10 +56,11 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   SELECT COUNT(*) FROM articles WHERE published = 1;
   ```
 
-- SNS 投稿実績（docs/11_SNS投稿管理/posts/ の Markdown テーブルから集計）
-  → 各テーブルファイルの posted / generated 件数をプラットフォーム別に集計
-  → コンテンツ種別（Ranking / Bar Chart Race / Compare / Correlation）別の投稿率を算出
-  注: SNS データは DB（sns_posts / sns_metrics）ではなく Markdown テーブルで管理されている
+- SNS 投稿実績（DB `sns_posts` テーブルから集計）
+  ```sql
+  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+  SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
+  ```
 
 - GA4/GSC メトリクス（`docs/60_運用ログ/weekly-metrics/` から最新ファイルを読み込み）
   → `/weekly-review` が自動で GA4/GSC データを取得・保存済み
@@ -231,6 +235,6 @@ sprint: "Sprint N（ロードマップ上の位置）"
 - `docs/90_課題管理/` — 未解決タスク
 - `docs/03_レビュー/` — 過去の批判的指摘
 - `docs/03_レビュー/weekly/` — 過去の週次計画
-- `docs/11_SNS投稿管理/` — SNS コンテンツ状況
+- DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
 - `.claude/skills/blog/discover-trends-all/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案）

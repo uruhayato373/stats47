@@ -1,8 +1,8 @@
-投稿済み SNS コンテンツを Markdown に記録し、メディアファイルを削除する。テキスト/JSON はリモート R2 に保持する。
+投稿済み SNS コンテンツを DB に記録し、メディアファイルを削除する。テキスト/JSON はリモート R2 に保持する。
 
 ## 概要
 
-手動で各 SNS プラットフォームに投稿した後、`docs/11_SNS投稿管理/posts/` 配下のテーブルを更新し、メディアファイル（動画・画像）をローカル・リモート R2 から削除する。**テキスト・JSON ファイルはリモート R2 に保持する**（再生成コスト回避のため）。
+手動で各 SNS プラットフォームに投稿した後、`sns_posts` テーブルのステータスを `posted` に更新し、メディアファイル（動画・画像）をローカル・リモート R2 から削除する。**テキスト・JSON ファイルはリモート R2 に保持する**（再生成コスト回避のため）。
 
 ## 引数
 
@@ -39,12 +39,26 @@ contentType に応じたディレクトリを確認する:
 | `tiktok/` | `tiktok` |
 | `note/` | `note` |
 
-### 3. 投稿管理テーブル更新
+### 3. DB ステータス更新
 
-対象ファイル: `docs/11_SNS投稿管理/posts/<contentType>.md`
+ローカル D1 に `better-sqlite3` で接続し、`sns_posts` テーブルを更新する。
 
-テーブルの該当行で指定プラットフォーム列を `posted` に更新し、`postedAt` を当日（ISO 8601）に設定する。
-行が存在しない場合はテーブル末尾に新しい行を追加する。
+DB パス: `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite`
+
+各プラットフォームに対して以下を実行:
+
+```sql
+UPDATE sns_posts
+SET status = 'posted', posted_at = '<YYYY-MM-DD>', post_url = '<postUrl>'
+WHERE platform = '<platform>'
+  AND content_key = '<contentKey>'
+  AND domain = '<contentType>'
+  AND post_type = 'original';
+```
+
+- `posted_at` は当日（ISO 8601 日付）
+- `post_url` は `--url` が指定されている場合のみ設定
+- 該当行が存在しない場合は WARNING を出力（先に `/post-sns-captions` 等でレコードが作成されている前提）
 
 ### 4. リモート R2 からメディアファイルのみ削除
 
@@ -87,7 +101,7 @@ find .local/r2/sns/<contentType>/<contentKey> -type d -empty -delete
 
 | 項目 | 内容 |
 |---|---|
-| Markdown 更新 | 更新したプラットフォーム数と一覧 |
+| DB 更新 | 更新したプラットフォーム数と一覧 |
 | リモート R2 | 削除したメディアファイル数 / 保持したテキストファイル数 |
 | ローカル | 削除したメディアファイル数 / 保持したテキストファイル数 |
 
@@ -101,6 +115,5 @@ find .local/r2/sns/<contentType>/<contentKey> -type d -empty -delete
 
 ## 参照
 
-- `docs/11_SNS投稿管理/README.md` — SNS 投稿管理の全体設計
-- `docs/11_SNS投稿管理/posts/` — 投稿管理テーブル
+- `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義
 - `packages/r2-storage/src/scripts/delete-r2-prefix.ts` — R2 削除スクリプト

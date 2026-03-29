@@ -40,9 +40,16 @@
 調査項目:
 - .local/r2/blog/ 配下の記事一覧と最終更新日
   → 今週新規作成・更新された記事を特定
-- docs/11_SNS投稿管理/posts/ のテーブルファイルを読み込み
-  → posted かつ postedAt が今週の投稿を集計（プラットフォーム別）
-  → generated（投稿待ちコンテンツ数）
+- DB（sns_posts テーブル）から投稿実績を集計:
+  DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+  ```sql
+  -- 今週の投稿数（プラットフォーム別）
+  SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status='posted' AND posted_at >= '<monday>' GROUP BY domain, platform;
+  -- 投稿待ちコンテンツ数
+  SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status IN ('draft', 'scheduled') GROUP BY domain, platform;
+  -- 全体ステータス概況
+  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+  ```
 - .local/r2/sns/ 配下の新規生成コンテンツ
 
 出力形式:
@@ -62,11 +69,15 @@
    SELECT COUNT(*) FROM articles WHERE published = 1;
    ```
 
-2. SNS 投稿実績（docs/11_SNS投稿管理/posts/ の Markdown テーブルから集計）
-   → 各テーブルファイルの posted / generated 件数をプラットフォーム別に集計
-   → postedAt が今週の投稿を特定
-   → コンテンツ種別（Ranking / Bar Chart Race / Compare / Correlation）別の投稿率を算出
-   注: SNS データは DB（sns_posts / sns_metrics）ではなく Markdown テーブルで管理されている
+2. SNS 投稿実績（DB `sns_posts` テーブルから集計）
+   ```sql
+   -- プラットフォーム別ステータス集計
+   SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+   -- 今週の投稿
+   SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status='posted' AND posted_at >= '<monday>' GROUP BY domain, platform;
+   -- コンテンツ種別別の投稿率
+   SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
+   ```
 
 3. GA4 データ取得（API 呼び出し）
    `/fetch-ga4-data` スキルの手順に従い、以下の 3 レポートを取得:
@@ -173,7 +184,7 @@ sqlite3 "$DB" "
 
 - `.local/r2/sns/` 配下の画像・動画数（`find .local/r2/sns -name '*.png' -o -name '*.jpg' | wc -l` / `find .local/r2/sns -name '*.mp4' | wc -l`）
 - `.local/r2/note/` 配下の note 原稿数
-- SNS 投稿実績: `docs/11_SNS投稿管理/posts/` の Markdown テーブルから posted 件数を集計（プラットフォーム×コンテンツ種別）
+- SNS 投稿実績: DB `sns_posts` テーブルから posted 件数を集計（プラットフォーム×コンテンツ種別）
 - CLI スキル数: `.claude/skills/` 配下の `SKILL.md` の数
 
 #### 更新ルール
@@ -328,7 +339,7 @@ generatedAt: "YYYY-MM-DD"
 - DB `seo_tracking` テーブル — SEO カバレッジ指標の数値推移（crawled_not_indexed 等）
 - DB `seo_actions` テーブル — SEO 改善施策の管理（planned → in_progress → done）
 - `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
-- `docs/11_SNS投稿管理/` — SNS コンテンツ状況
+- DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画スキル（ペア運用）

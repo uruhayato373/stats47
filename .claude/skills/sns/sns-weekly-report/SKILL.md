@@ -50,9 +50,8 @@ LIMIT 10;
 
 ### 3. レポート生成
 
-`docs/11_SNS投稿管理/analytics/weekly/<YYYY-Www>.md` に出力する。
-
-テンプレート: `docs/11_SNS投稿管理/templates/analytics-weekly.md` をベースに、集計結果を埋め込む。
+`docs/03_レビュー/weekly/` の週次レビューファイル内に SNS パフォーマンスセクションとしてインライン出力する。
+独立ファイルとしての出力が必要な場合は `docs/03_レビュー/weekly/<YYYY-Www>-sns.md` に出力する。
 
 ### 4. 分析コメント
 
@@ -65,6 +64,5 @@ LIMIT 10;
 
 ## 参照
 
-- `packages/database/src/schema/sns_metrics.ts` — テーブル定義
-- `docs/11_SNS投稿管理/templates/analytics-weekly.md` — レポートテンプレート
-- `docs/11_SNS投稿管理/README.md` — SNS 投稿管理の全体設計
+- `packages/database/src/schema/sns_metrics.ts` — sns_metrics テーブル定義
+- `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義

@@ -16,5 +16,6 @@ export * from "./note_content";
 export * from "./performance_metrics";
 export * from "./port_statistics";
 export * from "./fishing_ports";
+export * from "./sns_metrics";
 export * from "./sns_posts";
 export * from "./tags";
