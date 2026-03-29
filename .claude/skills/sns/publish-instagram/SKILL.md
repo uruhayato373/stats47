@@ -112,35 +112,83 @@ $BU state  # Instagram アイコンまたはチェックボックスを特定
 **リール投稿の場合:**
 「リール」タブがある場合はクリック。なければ動画アップロード時に自動判定される。
 
-### Phase 3: メディアアップロード
+### Phase 3: メディアアップロード（Playwright CDP 方式）
 
-#### carousel の場合（複数画像）
+Meta Business Suite の「写真・動画を追加」ボタンはネイティブファイルダイアログを開くため、DOM に `<input type="file">` が現れない。`browser-use upload` は使えない。
+
+**解決策**: Playwright を browser-use の CDP WebSocket URL に接続し、`expect_file_chooser()` でファイルダイアログをインターセプトする。
+
+#### 3-1. CDP URL を取得
 
 ```bash
-$BU state  # 「写真/動画を追加」ボタン or input type=file を特定
+# browser-use のセッション情報から CDP URL を取得
+$BU python 'print(browser._session.cdp_client.url)'
 ```
 
-画像を1枚ずつアップロード:
+出力例: `ws://127.0.0.1:58114/devtools/browser/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+
+#### 3-2. Playwright でファイルアップロードを実行
+
+```python
+# /tmp/pw_upload.py として保存して実行
+import asyncio, os
+from playwright.async_api import async_playwright
+
+CDP_URL = "<上で取得した CDP URL>"
+BASE_DIR = "<baseDir>"
+
+async def upload_files(file_paths):
+    async with async_playwright() as p:
+        browser = await p.chromium.connect_over_cdp(CDP_URL)
+        context = browser.contexts[0]
+        # Meta Business Suite のページを取得
+        page = None
+        for pg in context.pages:
+            if "business.facebook.com" in pg.url:
+                page = pg
+                break
+        if not page:
+            raise Exception("Meta Business Suite page not found")
+
+        # 「写真・動画を追加」ボタンを見つけてクリック → ファイルダイアログをインターセプト
+        button = page.locator('div[role="button"]:has-text("写真・動画を追加")')
+        async with page.expect_file_chooser(timeout=10000) as fc_info:
+            await button.first.click()
+        file_chooser = await fc_info.value
+        await file_chooser.set_files(file_paths)
+        await asyncio.sleep(3)  # アップロード処理待ち
+        await page.screenshot(path="/tmp/ig-upload-result.png")
+        print(f"Uploaded {len(file_paths)} files")
+
+asyncio.run(upload_files(FILE_PATHS))
+```
+
+実行:
 ```bash
-$BU upload <file_inputのindex> <carousel_01.pngの絶対パス>
-sleep 3
-$BU upload <file_inputのindex> <carousel_02.pngの絶対パス>
-sleep 3
-$BU upload <file_inputのindex> <carousel_03.pngの絶対パス>
-sleep 3
+$HOME/.browser-use-env/bin/python3 /tmp/pw_upload.py
 ```
 
-**注意:** file input が複数ファイル対応（`multiple`属性）の場合は、1回のアップロードで3ファイルを渡せる可能性もある。`$BU state` で確認。
+#### carousel の場合
+
+```python
+FILE_PATHS = [
+    f"{BASE_DIR}/instagram/stills/carousel_01.png",
+    f"{BASE_DIR}/instagram/stills/carousel_02.png",
+    f"{BASE_DIR}/instagram/stills/carousel_03.png",
+]
+```
+
+Playwright の `set_files()` は複数ファイルを一括で渡せる。カルーセルの順序はファイルリストの順序に従う（実機検証済み）。
 
 #### reel の場合
 
-```bash
-$BU state  # input type=file を特定
-$BU upload <file_inputのindex> <reel.mp4の絶対パス>
-sleep 10  # 動画アップロードは時間がかかる
+```python
+FILE_PATHS = [f"{BASE_DIR}/instagram/stills/reel.mp4"]
 ```
 
-アップロード完了を確認（プレビュー表示またはプログレスバー消失）。
+動画アップロードは処理に時間がかかるため、`asyncio.sleep(10)` に延長する。
+
+**前提**: Playwright は browser-use 環境にインストール済み（`$HOME/.browser-use-env/bin/python3 -m pip install playwright`）。Chromium のダウンロードは不要（既存の Chrome に CDP 接続するため）。
 
 ### Phase 4: キャプション入力
 
@@ -276,54 +324,36 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 - **カレンダー月不一致**: 矢印ボタンで月を送る
 - **セッション切れ**: `$BU open` で再ナビゲート。ログインページなら停止
 
-## 既知の制約・未解決課題（2026-03-29 実機検証済み）
+## 実機検証済みの知見（2026-03-29）
 
-### ✅ 動作確認済み
+### 画像アップロード ✅ 解決済み
 
-- **ログイン確認**: `browser.eval("document.body.innerText")` で `@stats47jp` が確認できればログイン済み
-- **「投稿を作成」クリック**: index `[190]` をクリックすると投稿作成ダイアログが開く（Instagram stats47jp が自動選択される）
-- **ダイアログ構造**: 投稿先・メディア・テキスト・Schedule・共同投稿者・公開ボタンが確認済み
+Meta Business Suite は DOM に `<input type="file">` を生成しない。`browser-use upload` は使えない。
 
-### ❌ ブロック中：画像アップロード
+**解決策**: Playwright を browser-use の CDP WebSocket に `connect_over_cdp()` で接続し、`expect_file_chooser()` + `set_files()` でファイルを渡す。Phase 3 の手順を参照。
 
-**問題**: 「写真・動画を追加」ボタン（index `[3549]`）はネイティブ macOS ファイルダイアログを開く。DOM に `<input type="file">` が現れないため `browser-use upload` コマンドが使えない。
+**試みて失敗したアプローチ（再試行不要）**:
+- `browser-use upload` → file input が DOM にない
+- `JS eval` で `input[type=file]` 全探索 → 0件
+- `browser-use python` 内で CDP `Page.setInterceptFileChooserDialog` → `browser._run()` のイベントループ内で `browser.click()` がデッドロック
+- CDP `register.Page.fileChooserOpened` → `session_id` 引数非対応
+- CDP `Page.handleFileChooser` → このChromeバージョンでメソッド未実装
 
-```
-error: Element 3549 is not a file input. No file input found on the page.
-```
+### UI 要素の特定方法
 
-**試みた解決策**:
+インデックスはページロードごとに変わる。毎回 `$BU state` で確認すること。
 
-1. **`$BU upload <index> <path>`** → 失敗（file input が DOM にない）
-2. **`JS eval` で `input[type=file]` を探す** → 0件（Shadow DOM 含む全探索でも見つからない）
-3. **CDP `Page.setInterceptFileChooserDialog`** → イベントが届かない
-   - 原因: `browser._run(async_fn())` の中で `browser.click()` を呼ぶとデッドロック発生
-   - `browser.click()` は内部で `browser._run()` を呼ぶため、同一イベントループへの二重投入になる
-4. **CDP `register.Page.fileChooserOpened`** → `session_id` 引数不対応（`TypeError`）
-
-**未試みの解決策（次のアプローチ候補）**:
-
-A. `browser-use python` 内で `browser.click()` の代わりに `session.event_bus.dispatch(ClickElementEvent(node=node))` を使い、デッドロックを回避して CDP インターセプトを完成させる
-
-B. system Python に Playwright をインストール（`pip3 install playwright && playwright install chromium`）し、browser-use の CDP WebSocket URL（`ws://127.0.0.1:<port>/devtools/browser/<id>`）に直接接続して `expect_file_chooser()` を使う
-
-C. osascript で macOS のファイルダイアログを操作する（ボタンクリックと osascript を並列実行）
-
-**推奨**: アプローチ A（`event_bus.dispatch` でクリック）を試す。browser-use の Python 環境で完結するため最も安定している。
-
-### Meta Business Suite の UI 構造（実測）
-
-| 要素 | インデックス | 備考 |
+| 要素 | Playwright locator | 備考 |
 |---|---|---|
-| 「投稿を作成」ボタン | `[190]` | ホーム画面 |
-| 「写真・動画を追加」ボタン | `[3549]` | 投稿作成ダイアログ内 |
-| テキスト入力（contenteditable） | `[3576]` | `aria-label=投稿にテキストを含めるには...` |
-| 「日時を設定」トグル | `[3662]` | `type=checkbox` |
+| 「投稿を作成」ボタン | `div[role="button"]:has-text("投稿を作成")` | ホーム画面 |
+| 「写真・動画を追加」ボタン | `div[role="button"]:has-text("写真・動画を追加")` | Playwright で click → expect_file_chooser |
+| テキスト入力 | `[contenteditable=true]` or `[aria-label*="テキストを含める"]` | キャプション入力欄 |
+| 「日時を設定」トグル | `input[type="checkbox"]` near "Schedule" | 予約設定 |
 
-※ インデックスはページロードごとに変わる可能性あり。毎回 `$BU state` で確認すること。
+### その他の制約
 
-- Meta Business Suite の UI は頻繁に変更される — 要素パターンが変わった場合は `$BU state` で再調査し、この SKILL.md を更新すること
-- カルーセルの画像順序は Meta Business Suite が file input の順序を保持するか要検証
+- Meta Business Suite の UI は頻繁に変更される — locator が変わった場合は `$BU state` で再調査しこの SKILL.md を更新すること
+- カルーセルの画像順序は `set_files()` のリスト順序に従う（実機検証済み）
 - 予約投稿の最小単位（5分刻み等）は Meta Business Suite の UI に依存
 
 ## 参照
