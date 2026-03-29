@@ -194,10 +194,10 @@ packages/
 | `/publish-x` | browser-use CLI で X の予約投稿を自動設定（テキスト・画像・予約日時） | `.claude/skills/sns/publish-x/SKILL.md` |
 | `/publish-tiktok` | browser-use CLI で TikTok Studio の予約投稿を自動設定（動画・キャプション・予約日時） | `.claude/skills/sns/publish-tiktok/SKILL.md` |
 | `/publish-instagram` | browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定（カルーセル・リール） | `.claude/skills/sns/publish-instagram/SKILL.md` |
-| `/mark-sns-posted` | 投稿済み SNS コンテンツを Markdown 記録 → ローカル・リモート R2 から削除 | `.claude/skills/sns/mark-sns-posted/SKILL.md` |
+| `/mark-sns-posted` | 投稿済み SNS コンテンツの DB ステータス更新 → ローカル・リモート R2 から削除 | `.claude/skills/sns/mark-sns-posted/SKILL.md` |
 | `/publish-youtube-normal` | YouTube 通常動画の制作→アップロード→DB記録パイプライン | `.claude/skills/sns/publish-youtube-normal/SKILL.md` |
 | `/plan-youtube-normal` | YouTube 競合分析×自社データで通常動画の企画を自動生成 | `.claude/skills/sns/plan-youtube-normal/SKILL.md` |
-| `/update-sns-metrics` | 各 SNS API から指標取得 → DB (`sns_metrics`) 蓄積 + Markdown 更新 | `.claude/skills/sns/update-sns-metrics/SKILL.md` |
+| `/update-sns-metrics` | browser-use CLI (X/IG/TT) + YouTube API でメトリクスを一括取得 → DB (`sns_metrics`) 蓄積 | `.claude/skills/sns/update-sns-metrics/SKILL.md` |
 | `/sns-weekly-report` | DB から週次パフォーマンスレポートを生成 | `.claude/skills/sns/sns-weekly-report/SKILL.md` |
 | `/preview-remotion` | 実データで Remotion Studio プレビューデータを上書き（ranking） | `.claude/skills/sns/preview-remotion/SKILL.md` |
 | `/generate-bar-chart-race` | D1 → Bar Chart Race 用 config.json + data.json 生成（`.local/r2/sns/bar-chart-race/`） | `.claude/skills/sns/generate-bar-chart-race/SKILL.md` |

@@ -63,10 +63,27 @@ domain と template パラメータはすべてのスキルに引き継ぐ。
 **重要**: displayTitle は全プラットフォームで統一する（Instagram で生成した値を他でも使用）。
 **重要**: displayTitle に「ランキング」を含めないこと。Remotion テンプレートがサブタイトルに「都道府県ランキング」を自動表示するため重複する。
 
-### Step 3: 投稿管理 Markdown 更新
+### Step 3: DB に caption を保存
 
-各スキルがテーブルを更新するため追加対応不要。
-`docs/11_SNS投稿管理/posts/<contentType>.md` の対象行で全プラットフォームが `generated` であることを確認する。
+キャプション生成後、`sns_posts.caption` を UPDATE する。メトリクス収集時のマッチング精度（先頭80文字前方一致 + ranking_name）に直結するため、必ず実行すること。
+
+DB パス: `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite`
+
+各プラットフォームに対して、生成した caption.txt の内容を保存する:
+
+```sql
+UPDATE sns_posts
+SET caption = '<caption.txt の内容>'
+WHERE platform = '<platform>'
+  AND content_key = '<contentKey>'
+  AND domain = '<domain>'
+  AND post_type = 'original'
+  AND (caption IS NULL OR caption = '');
+```
+
+- `<platform>`: `instagram`, `x`, `youtube`, `tiktok`
+- YouTube の場合は `youtube-short/shorts.txt` の内容を使用
+- 既に caption が設定済みの場合は上書きしない
 
 ### Step 4: 完了報告
 
