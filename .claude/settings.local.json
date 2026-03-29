@@ -127,7 +127,15 @@
       "Bash(1 sleep:*)",
       "Bash(export PATH=\"$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH\" cat /tmp/note-state.txt)",
       "Bash(export PATH=$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH browser-use --headed --profile Default click 1220 2)",
-      "Bash(export PATH=$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH browser-use --headed --profile Default state 2 grep -n \"最高気温\\\\|大学数\\\\|人口密度\\\\|ランキング\\\\|予約\" /tmp/note-state.txt)"
+      "Bash(export PATH=$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH browser-use --headed --profile Default state 2 grep -n \"最高気温\\\\|大学数\\\\|人口密度\\\\|ランキング\\\\|予約\" /tmp/note-state.txt)",
+      "Bash(find /Users/minamidaisuke/stats47/.local/r2/sns -name *.json -type f)",
+      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/stats47jp/profilecard/\")",
+      "Bash(browser-use --headed --profile 'Profile 5' state)",
+      "Bash(browser-use --headed --profile 'Profile 5' click 189)",
+      "Bash(browser-use --headed --profile 'Profile 5' click 7092)",
+      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/accounts/insights/\")",
+      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/accounts/insights/?timeframe=30\")",
+      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/\")"
     ]
   },
   "hooks": {
