@@ -276,10 +276,53 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 - **カレンダー月不一致**: 矢印ボタンで月を送る
 - **セッション切れ**: `$BU open` で再ナビゲート。ログインページなら停止
 
-## 既知の制約
+## 既知の制約・未解決課題（2026-03-29 実機検証済み）
+
+### ✅ 動作確認済み
+
+- **ログイン確認**: `browser.eval("document.body.innerText")` で `@stats47jp` が確認できればログイン済み
+- **「投稿を作成」クリック**: index `[190]` をクリックすると投稿作成ダイアログが開く（Instagram stats47jp が自動選択される）
+- **ダイアログ構造**: 投稿先・メディア・テキスト・Schedule・共同投稿者・公開ボタンが確認済み
+
+### ❌ ブロック中：画像アップロード
+
+**問題**: 「写真・動画を追加」ボタン（index `[3549]`）はネイティブ macOS ファイルダイアログを開く。DOM に `<input type="file">` が現れないため `browser-use upload` コマンドが使えない。
+
+```
+error: Element 3549 is not a file input. No file input found on the page.
+```
+
+**試みた解決策**:
+
+1. **`$BU upload <index> <path>`** → 失敗（file input が DOM にない）
+2. **`JS eval` で `input[type=file]` を探す** → 0件（Shadow DOM 含む全探索でも見つからない）
+3. **CDP `Page.setInterceptFileChooserDialog`** → イベントが届かない
+   - 原因: `browser._run(async_fn())` の中で `browser.click()` を呼ぶとデッドロック発生
+   - `browser.click()` は内部で `browser._run()` を呼ぶため、同一イベントループへの二重投入になる
+4. **CDP `register.Page.fileChooserOpened`** → `session_id` 引数不対応（`TypeError`）
+
+**未試みの解決策（次のアプローチ候補）**:
+
+A. `browser-use python` 内で `browser.click()` の代わりに `session.event_bus.dispatch(ClickElementEvent(node=node))` を使い、デッドロックを回避して CDP インターセプトを完成させる
+
+B. system Python に Playwright をインストール（`pip3 install playwright && playwright install chromium`）し、browser-use の CDP WebSocket URL（`ws://127.0.0.1:<port>/devtools/browser/<id>`）に直接接続して `expect_file_chooser()` を使う
+
+C. osascript で macOS のファイルダイアログを操作する（ボタンクリックと osascript を並列実行）
+
+**推奨**: アプローチ A（`event_bus.dispatch` でクリック）を試す。browser-use の Python 環境で完結するため最も安定している。
+
+### Meta Business Suite の UI 構造（実測）
+
+| 要素 | インデックス | 備考 |
+|---|---|---|
+| 「投稿を作成」ボタン | `[190]` | ホーム画面 |
+| 「写真・動画を追加」ボタン | `[3549]` | 投稿作成ダイアログ内 |
+| テキスト入力（contenteditable） | `[3576]` | `aria-label=投稿にテキストを含めるには...` |
+| 「日時を設定」トグル | `[3662]` | `type=checkbox` |
+
+※ インデックスはページロードごとに変わる可能性あり。毎回 `$BU state` で確認すること。
 
 - Meta Business Suite の UI は頻繁に変更される — 要素パターンが変わった場合は `$BU state` で再調査し、この SKILL.md を更新すること
-- **初回実行時は必ず手動で Meta Business Suite の UI フローを確認**してから自動化する。要素パターンの「実証済み」マークは `/publish-x` や `/publish-tiktok` とは異なり未検証
 - カルーセルの画像順序は Meta Business Suite が file input の順序を保持するか要検証
 - 予約投稿の最小単位（5分刻み等）は Meta Business Suite の UI に依存
 
