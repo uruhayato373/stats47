@@ -28,13 +28,6 @@ binding = "STATS47_BUCKET"
 bucket_name = "stats47"
 preview_bucket_name = "stats47"
 
-# OpenNext インクリメンタルキャッシュ用R2バケット（ローカル開発用）
-
-# OpenNext インクリメンタルキャッシュ用R2バケット（ローカル開発用）
-[[r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "stats47-cache"
-preview_bucket_name = "stats47-cache"
 
 # Observability設定（デフォルト）
 [observability]
@@ -88,12 +81,6 @@ migrations_dir = "../../packages/database/drizzle"
 binding = "STATS47_BUCKET"
 bucket_name = "stats47"
 
-# OpenNext インクリメンタルキャッシュ用R2バケット
-
-# OpenNext インクリメンタルキャッシュ用R2バケット
-[[env.production.r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "stats47-cache"
 
 # Observability設定（Production）
 [env.production.observability]

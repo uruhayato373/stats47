@@ -6,7 +6,6 @@ declare module "@opennextjs/cloudflare" {
   export interface CloudflareEnv {
     STATS47_STATIC_DB: D1Database;
     STATS47_BUCKET: R2Bucket;
-    NEXT_INC_CACHE_R2_BUCKET: R2Bucket;
     // 他のバインディングがあれば追加
   }
 

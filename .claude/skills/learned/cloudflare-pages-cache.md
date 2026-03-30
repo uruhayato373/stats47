@@ -5,4 +5,4 @@
 **根拠**: Cloudflare Pages は Workers ランタイムで動作し、通常の CDN とは異なるキャッシュ挙動を持つ。Edge Cache を有効にするには Cache Rules（旧 Page Rules）での明示的な設定が必要。
 **確信度**: 0.8
 **発見日**: 2026-03-28
-**関連**: Cloudflare ダッシュボード → Caching → Cache Rules, `apps/web/open-next.config.ts`（R2 ISR は動作している）
+**関連**: Cloudflare ダッシュボード → Caching → Cache Rules。R2 ISR は 2026-03 に廃止済み（全ページ SSR 化）

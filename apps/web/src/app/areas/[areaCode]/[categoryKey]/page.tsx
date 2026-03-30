@@ -40,7 +40,6 @@ import type { Metadata } from "next";
 
 
 
-export const revalidate = 86400;
 
 /** インデックス対象カテゴリ（共通定数） */
 const INDEXABLE_CATEGORIES = INDEXABLE_AREA_CATEGORIES_SET;

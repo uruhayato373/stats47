@@ -34,7 +34,6 @@ import type { Metadata } from "next";
 
 // ブログ記事はランタイムで動的レンダリング（R2バインディングが必要なため）
 // ISR: 24時間キャッシュ（初回リクエスト時にR2から取得→以降キャッシュ）
-export const revalidate = 86400;
 
 interface PageProps {
     params: Promise<{ slug: string }>;

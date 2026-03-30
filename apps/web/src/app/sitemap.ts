@@ -5,7 +5,6 @@ import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
 
 import type { MetadataRoute } from "next";
 
-export const revalidate = 3600;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 

@@ -204,9 +204,7 @@ jobs:
           workingDirectory: apps/web
           command: deploy --env production
 
-      # ISR キャッシュは buildId がデプロイごとに変わるため全 purge 不要。
-      # 全 purge するとコールドスタートで D1 タイムアウト → エラーがキャッシュされる問題が発生する。
-      # 代わりにデプロイ直後にウォームして Worker + D1 接続を初期化する。
+      # デプロイ直後にウォームして Worker + D1 接続を初期化する（コールドスタート対策）。
       - name: Warm cache (Production)
         continue-on-error: true
         run: |

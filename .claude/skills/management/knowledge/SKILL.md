@@ -124,17 +124,19 @@
 
 **原因**: `latest_year` と `available_years` が e-Stat の生年コード形式 (`"2024000000"`, `["2024000000",...]`) で保存されていた。Zod スキーマは `{"yearCode":"...","yearName":"..."}` オブジェクト形式を期待する（`parseJsonColumn(z.object({yearCode: z.string(), yearName: z.string()}))`）。
 
-**対策**: (1) ランキング登録時（`/register-ranking`, `/populate-all-rankings`）は `latest_year` / `available_years` を必ず `{"yearCode":"2024000000","yearName":"2024年"}` 形式で保存する。(2) 修正 SQL: `UPDATE ranking_items SET latest_year = '{"yearCode":"<code>","yearName":"<year>年"}', available_years = '[{"yearCode":"<code>","yearName":"<year>年"},...]' WHERE ...`。(3) 修正後は R2 ISR キャッシュのパージが必要。
+**対策**: (1) ランキング登録時（`/register-ranking`, `/populate-all-rankings`）は `latest_year` / `available_years` を必ず `{"yearCode":"2024000000","yearName":"2024年"}` 形式で保存する。(2) 修正 SQL: `UPDATE ranking_items SET latest_year = '{"yearCode":"<code>","yearName":"<year>年"}', available_years = '[{"yearCode":"<code>","yearName":"<year>年"},...]' WHERE ...`。(3) ISR は 2026-03 に廃止済み（全ページ SSR）のため、キャッシュパージは不要。
 
 ---
 
 ## OpenNext R2 ISR キャッシュの正しいキー構造
 
-**問題**: R2 の ISR キャッシュを手動パージする際、`__incremental/ranking/xxx.cache` のようなキーを削除しても効かなかった。
+**[廃止] ISR は 2026-03 に廃止済み（全ページ SSR 化）。このナレッジは歴史的記録として残す。**
 
-**原因**: OpenNext の R2 キャッシュキーは `{prefix}/{buildId}/{sha256(pageKey)}.{cacheType}` 形式。デフォルト prefix は `incremental-cache`、pageKey は `/ranking/xxx` のようなパス（先頭スラッシュあり/なし両方試す必要あり）、cacheType は `cache` または `fetch`。Build ID は `https://stats47.jp/BUILD_ID` で取得可能。
+**問題**: R2 の ISR キャッシュを手動パージする際、キー構造が不明だった。
 
-**対策**: ISR キャッシュをパージするには以下の手順: (1) `curl -s https://stats47.jp/BUILD_ID` で Build ID 取得。(2) `node -e "console.log(require('crypto').createHash('sha256').update('/ranking/xxx').digest('hex'))"` でハッシュ計算。(3) `npx wrangler r2 object delete "stats47-cache/incremental-cache/{buildId}/{hash}.cache" --remote` で削除。`.fetch` タイプも同様に削除。(4) 大量パージ時は `/purge-cache-r2` スクリプトを使用（ただし企業プロキシでブロックされる場合あり）。
+**原因**: OpenNext の R2 キャッシュキーは `{prefix}/{buildId}/{sha256(pageKey)}.{cacheType}` 形式。
+
+**対策**: ISR 廃止により不要。D1 は 0.1ms で応答するため SSR で十分な性能。ISR を使うとビルド時に D1 が利用できない CI 環境でエラー状態がキャッシュされる問題があった。
 
 ---
 

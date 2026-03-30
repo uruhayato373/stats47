@@ -74,7 +74,6 @@ import type { RankingValue } from "@stats47/ranking";
 import type { Metadata } from "next";
 
 /** 24時間 ISR */
-export const revalidate = 86400;
 
 /** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
 export async function generateStaticParams() {

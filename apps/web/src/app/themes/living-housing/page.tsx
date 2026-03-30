@@ -5,7 +5,6 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-export const revalidate = 86400;
 
 const theme = LIVING_HOUSING_THEME;
 
