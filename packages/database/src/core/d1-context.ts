@@ -117,8 +117,13 @@ export function getStaticDbFromContext(): D1Database | undefined {
       return (env as any).STATS47_STATIC_DB;
     }
   } catch (e) {
-    // Cloudflareコンテキストが取得できない場合は無視（コンパイル時や開発環境では正常）
-    // エラーをログに記録しない（開発環境では頻繁に発生するため）
+    // 本番環境でのエラーはログに記録（D1 接続失敗の原因特定に必要）
+    if (process.env.NODE_ENV === "production") {
+      logger.error(
+        { error: e instanceof Error ? e.message : String(e) },
+        "[getStaticDbFromContext] getCloudflareContext failed"
+      );
+    }
   }
 
   // グローバルからのフォールバック
