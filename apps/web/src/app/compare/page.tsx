@@ -4,7 +4,6 @@ import { unwrap } from "@stats47/types";
 
 import { listCategories } from "@/features/category/server";
 
-export const revalidate = 86400;
 
 interface PageProps {
     searchParams: Promise<{

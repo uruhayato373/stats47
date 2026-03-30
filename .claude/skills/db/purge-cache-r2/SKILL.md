@@ -1,38 +1,15 @@
-R2 キャッシュバケット `stats47-cache` の全オブジェクトを削除（パージ）する。
+**[廃止] ISR キャッシュは 2026-03 に廃止済み。stats47-cache バケットは使用していない。**
 
-## 概要
+全ページ SSR 化に伴い、R2 ISR キャッシュ（stats47-cache）は不要となった。
+このスキルは過去に OpenNext R2 ISR キャッシュのパージに使用していた。
 
-OpenNext の ISR インクリメンタルキャッシュが `stats47-cache` バケットに蓄積して肥大化した際に使用する。
-キャッシュは次回アクセス時に自動再生成されるため、安全にパージできる。
+## 廃止の経緯
 
-## 手順
-
-1. ユーザーにパージ実行の意思を確認する
-2. 以下のスクリプトを実行:
-
-```bash
-npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts
-```
-
-3. 出力されるオブジェクト数・合計サイズを報告する
-4. パージ完了後、ISR キャッシュをウォームする:
-
-```bash
-bash .github/scripts/warm-cache.sh
-```
-
-主要27ページに順次アクセスし、ISR キャッシュを再生成する。初回訪問者の遅延を防ぐため、パージ後は必ず実行すること。
-
-## バケットの用途
-
-| バケット | 用途 | wrangler.toml バインディング |
-|---|---|---|
-| `stats47-cache` | OpenNext ISR キャッシュ | `NEXT_INC_CACHE_R2_BUCKET` |
-| `stats47` | メインストレージ（ランキング・ブログ等） | `STATS47_BUCKET` |
-
-`stats47-cache` は web / admin で共通使用。
+- ISR の前提（ビルド時に D1 で正しいページ生成）が CI 環境で成り立たなかった
+- D1 接続エラーが ISR キャッシュに保存され、全訪問者にエラーページが配信される問題が繰り返し発生
+- D1 クエリは 0.1ms で応答するため、SSR で十分な性能
 
 ## 参照
 
-- `packages/r2-storage/src/scripts/purge-cache-r2.ts` — スクリプト本体
-- `apps/web/wrangler.toml` — バケットバインディング定義
+- `apps/web/open-next.config.ts` — `r2IncrementalCache` 削除済み
+- `apps/web/wrangler.toml` — `NEXT_INC_CACHE_R2_BUCKET` バインディング削除済み

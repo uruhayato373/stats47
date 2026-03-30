@@ -7,7 +7,6 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-export const revalidate = 86400;
 
 export function generateMetadata(): Metadata {
   const title = "テーマダッシュボード一覧 - 統計で見る都道府県";

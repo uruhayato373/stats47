@@ -14,7 +14,6 @@ import { FeaturedRankings } from "@/features/ranking/server";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
-export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl =

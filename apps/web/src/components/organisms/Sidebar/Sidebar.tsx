@@ -74,8 +74,7 @@ export async function Sidebar() {
     if (process.env.NEXT_PHASE === "phase-production-build") {
       return <SidebarClient categories={[]} />;
     }
-    // ランタイムの D1 接続エラーは throw して ISR キャッシュを汚染しない
-    // try/catch で握り潰すとエラー状態がキャッシュされる問題が発生するため
+    // ランタイムの D1 接続エラーは throw して呼び出し元に伝播させる
     logger.error(
       { error: result.error.message },
       "カテゴリ取得エラー"

@@ -33,7 +33,6 @@ import { listCategories } from "@/features/category/server";
 import type { Metadata } from "next";
 
 
-export const revalidate = 86400;
 
 interface PageProps {
     params: Promise<{ areaCode: string; cityCode: string }>;

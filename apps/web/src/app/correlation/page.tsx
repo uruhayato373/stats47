@@ -12,7 +12,6 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-export const revalidate = 86400;
 
 const title = "都道府県統計の相関分析 | Stats47";
 const description =

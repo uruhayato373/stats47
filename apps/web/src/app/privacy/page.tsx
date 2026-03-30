@@ -62,7 +62,6 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
 }
 
 // 静的ページとして生成（24時間ごとに再検証）
-export const revalidate = 86400;
 
 // 最終更新日（静的ページなので定数化）
 const LAST_UPDATED_DATE = new Date("2026-01-25");

@@ -18,7 +18,6 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 
 
-export const revalidate = 86400;
 
 /** areas パラメータを検証・パースする（5桁数字のカンマ区切り、最大2件） */
 function parseAreaCodes(areas: string | undefined): string[] {

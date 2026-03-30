@@ -38,7 +38,6 @@ import { listCategories } from "@/features/category/server";
 
 import type { Metadata } from "next";
 
-export const revalidate = 86400;
 
 /** ビルド時に全47都道府県を事前生成（DB利用不可時はISRに委ねる） */
 export function generateStaticParams() {
