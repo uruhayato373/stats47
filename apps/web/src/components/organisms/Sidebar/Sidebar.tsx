@@ -67,17 +67,19 @@ import { SidebarClient } from "./SidebarClient";
  * ```
  */
 export async function Sidebar() {
-  // D1 接続エラー時は throw して Suspense fallback（SidebarSkeleton）を表示。
-  // try/catch で握り潰すと、エラー状態が ISR キャッシュに保存されて
-  // 全訪問者にエラーページが配信され続ける問題が発生するため。
   const result = await listCategories();
 
   if (!result.success) {
+    // ビルド時（CI）は D1 が利用できないため空配列で返す
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      return <SidebarClient categories={[]} />;
+    }
+    // ランタイムの D1 接続エラーは throw して ISR キャッシュを汚染しない
+    // try/catch で握り潰すとエラー状態がキャッシュされる問題が発生するため
     logger.error(
       { error: result.error.message },
       "カテゴリ取得エラー"
     );
-    // D1 接続エラーは throw して ISR キャッシュを汚染しない
     throw result.error;
   }
 
