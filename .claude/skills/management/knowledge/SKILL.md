@@ -145,3 +145,13 @@
 **原因**: 元データの品質問題。同一都道府県内の複数港に同じ座標が割り当てられていた。
 
 **対策**: (1) MLIT サイバーポート（cyport）API のバース施設座標の平均値で修正。cyport に無い港は Web 調査で補完。修正スクリプト: `packages/database/scripts/import-cyport-ports.ts`。(2) 港湾データ投入・更新時は `SELECT ... FROM ports a JOIN ports b ON a.latitude = b.latitude AND a.longitude = b.longitude AND a.port_code < b.port_code` で重複座標チェックを行う。
+
+---
+
+## OGP 画像 URL と noindex 漏れによる「クロール済み - インデックス未登録」1,453 件
+
+**問題**: GSC で「クロール済み - インデックス未登録」が 1,453 ページ繰り返し発生。主原因は (1) Next.js の opengraph-image.tsx が自動生成する `/areas/*/opengraph-image` URL が robots.txt で Disallow されておらず Google が全てクロール、(2) 市区町村ページ `cities/[cityCode]/page.tsx` に `robots: "noindex, follow"` が未設定（子ページには設定済み）。
+
+**原因**: (1) robots.ts 作成時に Next.js File Convention の自動生成ルート（opengraph-image 等）を考慮しなかった。(2) 子ページの noindex を親ページに適用する確認を怠った。
+
+**対策**: (1) robots.ts に `"/*/opengraph-image"` を全 userAgent の Disallow に追加。(2) 市区町村ページに `robots: "noindex, follow"` を追加。(3) 新規ページ作成時は `coding-standards.md` のインデックス制御チェックリストを実行。(4) `/seo-audit` に「2-7. インデックス制御チェック」を追加。

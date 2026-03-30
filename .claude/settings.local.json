@@ -138,7 +138,8 @@
       "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/\")",
       "Bash(find /c/Users/m004195/stats47/docs -name *categor*)",
       "WebFetch(domain:stats47.jp)",
-      "WebFetch(domain:www.cloudflarestatus.com)"
+      "WebFetch(domain:www.cloudflarestatus.com)",
+      "Bash(bash .github/scripts/warm-cache.sh)"
     ]
   },
   "hooks": {
