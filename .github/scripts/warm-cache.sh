@@ -36,6 +36,8 @@ PAGES=(
   "/compare"
   "/correlation"
   "/blog"
+  "/sitemap.xml"
+  "/robots.txt"
 )
 
 echo "🔥 Cache warming: ${BASE_URL}"

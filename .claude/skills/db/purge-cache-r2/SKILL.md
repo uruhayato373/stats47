@@ -15,6 +15,13 @@ npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts
 ```
 
 3. 出力されるオブジェクト数・合計サイズを報告する
+4. パージ完了後、ISR キャッシュをウォームする:
+
+```bash
+bash .github/scripts/warm-cache.sh
+```
+
+主要27ページに順次アクセスし、ISR キャッシュを再生成する。初回訪問者の遅延を防ぐため、パージ後は必ず実行すること。
 
 ## バケットの用途
 

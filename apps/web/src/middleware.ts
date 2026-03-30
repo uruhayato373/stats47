@@ -111,16 +111,14 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
-  // --- /blog/tags/{tagKey} or /blog/tag/{tagKey} → /tag/{tagKey} 301 リダイレクト ---
-  // 旧システムの日本語タグ名は 410 Gone（現行 DB は英語キーのみ）
+  // --- /blog/tags/{tagKey} or /blog/tag/{tagKey} → 410 Gone ---
+  // 旧パスは全て廃止。現行は /tag/{tagKey} のみ。
+  // 301 リダイレクトするとリダイレクト先が 404 のケース（記事0件タグ）で
+  // Google に「壊れたリダイレクト」と判定されるため、全て 410 で統一。
   {
     const tagMatch = pathname.match(/^\/blog\/tags?\/(.+)$/);
     if (tagMatch) {
-      const tagKey = decodeURIComponent(tagMatch[1]);
-      if (/[^\x00-\x7F]/.test(tagKey)) {
-        return new Response(null, { status: 410 });
-      }
-      return NextResponse.redirect(new URL(`/tag/${tagMatch[1]}`, req.url), { status: 301 });
+      return new Response(null, { status: 410 });
     }
   }
 

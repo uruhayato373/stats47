@@ -208,21 +208,74 @@ WHERE platform = '<platform>' AND content_key = '<contentKey>' AND domain = '<do
 
 **プロファイル: `--profile Default`**（Profile 5 ではない）
 
-| 要素 | 検索パターン | 備考 |
-|---|---|---|
-| タイトル入力 | `<textarea placeholder=記事タイトル>` | Shadow DOM 内 |
-| 本文エリア | `contenteditable=true role=textbox` | |
-| 下書き保存 | 「下書き保存」の `<button>` | |
-| 公開に進む | 「公開に進む」の `<button>` | |
-| ハッシュタグ | `placeholder=ハッシュタグを追加する` | Shadow DOM 内 |
-| 予約投稿 日時 | 「日時の設定」の `<button>` | |
+#### 安定した要素パターン（実証済み 2026-03-29）
 
-**注意（実証済み 2026-03-29）:**
-- 本文の ClipboardEvent ペーストは**最初の1回のみ**確実に動作する
-- URL カード埋め込みウィジェット生成後、ClipboardEvent が効かなくなる（フォーカスが外れるため）
-- カード後のテキスト入力は `type` コマンドを使うこと
-- URL カード変換: 空行に `type` でURL入力 → `Enter` → **4秒待機**で OGP カード化
-- 詳細手順は `/publish-note` スキル参照
+| 要素 | state 内テキスト | 備考 |
+|---|---|---|
+| タイトル入力 | `\|SHADOW(open)\|[N]<textarea placeholder=記事タイトル />` | Shadow DOM 内 |
+| 本文エリア | `[N]<div contenteditable=true role=textbox />` | |
+| 画像を追加ボタン | `[N]<button aria-label=画像を追加 />` | エディタ上部 |
+| 画像をアップロード | `<button />` の次行に「画像をアップロード」テキスト | ドロップダウン内 |
+| アイキャッチ file input | `\|SHADOW(open)\|<input id=note-editor-eyecatch-input type=file ...>` | Shadow DOM |
+| 挿絵 file input | `id=note-editor-image-upload-input type=file` | Shadow DOM |
+| 下書き保存 | 「下書き保存」テキストの `<button>` | |
+| 公開に進む | 「公開に進む」テキストの `<button>` | |
+| ハッシュタグ入力 | `\|SHADOW(open)\|<input placeholder=ハッシュタグを追加する role=combobox ...>` | Shadow DOM |
+| 日時の設定 | 「日時の設定」テキストの `<button>` | 公開設定画面 |
+| カレンダー日付 | `<div aria-label=Choose YYYY年M月D日... role=option />` | |
+| 時刻リスト | `<li role=option />` のテキスト（例: `08:00`） | 30分刻み |
+| 予約投稿ボタン | 「予約投稿」テキストの `<button>` | 公開設定画面右上 |
+| 完了ダイアログ | 「予約投稿が完了しました」+ 「閉じる」ボタン | |
+| 目次ボタン | `aria-label=目次` | 左サイドバー |
+| メニューボタン(+) | `aria-label=メニューを開く` | 空行にカーソル時 |
+
+#### grep ベースの要素検索パターン
+
+要素インデックスは操作のたびに変わる。state 出力をファイルに保存し grep で検索する:
+
+```bash
+browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+
+# テキストでインデックスを検索
+find_idx() {
+  grep -B1 "$1" /tmp/note-state.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]'
+}
+
+# 使用例
+TITLE_IDX=$(find_idx "placeholder=記事タイトル")
+BODY_IDX=$(find_idx "contenteditable=true role=textbox")
+```
+
+**1回の state で複数の find_idx を呼ぶ**ことで state 呼び出し回数を最小化する。
+
+#### ClipboardEvent ペーストの制約
+
+- **最初のテキストブロックのみ** ClipboardEvent ペーストが確実に動作する
+- URL カード埋め込みウィジェット生成後、contenteditable のフォーカスが外れ、ClipboardEvent は `None` を返す
+- **segment 0 以降は全て `type` コマンドを使う**（ClipboardEvent は使わない）
+- `type` コマンドはカード埋め込み後もフォーカスを維持して動作する
+
+#### URL カード埋め込みのタイミング
+
+```
+Enter → Enter → sleep 1 → type "URL" → Enter → sleep 4
+```
+
+- URL を空行に `type` で入力 → `Enter` → **4秒待機**で OGP カードに自動変換
+- 3秒だと不安定。4秒以上が必要
+- カード変換完了前に次の入力をするとレイアウトが壊れる
+
+#### state 呼び出し最小化
+
+`browser-use state` は 5-15 秒かかるボトルネック。以下の原則で最小化:
+
+- 1回の state で複数要素のインデックスを取得する
+- `type` / `keys` の連続実行の間に state は不要
+- state が必要: click の前、ページ遷移後、upload の前
+
+#### 詳細手順
+
+`/publish-note` スキル参照
 
 ## 参照スキル
 

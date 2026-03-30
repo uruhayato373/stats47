@@ -126,3 +126,13 @@ test("API キーが未設定の場合にエラーをスローする", () => {});
 test("動作する", () => {});
 test("テスト", () => {});
 ```
+
+## 新規ページ作成時のインデックス制御チェックリスト
+
+Next.js App Router でページを追加する際は、以下を必ず確認する。過去に OGP 画像 URL の Disallow 漏れと noindex 未設定で GSC 1,453 件の「クロール済み - インデックス未登録」が発生した教訓に基づく。
+
+1. **インデックス対象か?** — NO なら `generateMetadata` に `robots: "noindex, follow"` を追加
+2. **サイトマップに含めるか?** — YES なら `sitemap.ts` に追加。NO なら含めない
+3. **親/子ページと noindex 設定が一貫しているか?** — 子ページが noindex なら親も検討
+4. **opengraph-image.tsx を配置したか?** — `robots.ts` の `"/*/opengraph-image"` Disallow でカバーされていることを確認
+5. **middleware でのリダイレクト/410 が必要か?** — 旧 URL パターンや削除予定ページ

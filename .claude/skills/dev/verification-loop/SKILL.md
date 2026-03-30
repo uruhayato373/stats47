@@ -16,6 +16,12 @@
 
 ## 手順
 
+### Phase 0: 既知の問題参照（推奨）
+
+`.claude/skills/management/knowledge/SKILL.md` と `.claude/skills/learned/` を読み、今回の変更に関連する過去の失敗パターンがないか確認する。
+
+DB マイグレーション・デプロイ・API 連携に関わる変更時は必須。それ以外はスキップ可。
+
 ### Phase 1: ビルド検証（ゲーティング）
 
 ```bash
@@ -79,6 +85,7 @@ git diff --numstat HEAD | awk '{added+=$1; deleted+=$2} END {print "+" added " /
 
 | Phase | 項目 | 結果 | 詳細 |
 |---|---|---|---|
+| 0 | 既知問題 | CHECKED/SKIP | 関連パターン |
 | 1 | ビルド | PASS/FAIL | — |
 | 2 | 型チェック | PASS/WARN(N件) | エラー内容 |
 | 3 | Lint | PASS/SKIP/WARN | — |

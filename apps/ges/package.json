@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate": "tsx scripts/generate-projects.ts"
+    "generate": "tsx scripts/generate-projects.ts",
+    "generate-ports": "tsx scripts/generate-port-projects.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
     "tsx": "^4.19.0",
     "typescript": "^5.3.3"
   }

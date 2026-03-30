@@ -41,6 +41,7 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/*", // 管理画面
           "/api/auth/*", // 認証API
           "/profile/edit", // プロフィール編集
+          "/*/opengraph-image", // Next.js OGP 画像エンドポイント
         ],
       },
       {
@@ -50,6 +51,7 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/*", // 管理画面は除外
           "/api/auth/*", // 認証APIは除外
           "/profile/edit", // プロフィール編集は除外
+          "/*/opengraph-image", // Next.js OGP 画像エンドポイント
         ],
       },
       {
