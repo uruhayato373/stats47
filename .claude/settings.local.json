@@ -147,7 +147,14 @@
       "Bash(curl -o /dev/null -s -w %{http_code} https://stats47.jp/blog/tags/population)",
       "Bash(curl -s -I https://stats47.jp/blog/tags/population)",
       "Bash(curl:*)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "WebFetch(domain:storage.stats47.jp)",
+      "WebFetch(domain:arc.net)",
+      "Bash(bash /Users/minamidaisuke/stats47/.github/scripts/warm-cache.sh --full 2>&1)",
+      "Bash(find /Users/minamidaisuke/stats47 -name *.db -o -name wrangler.toml -o -name *.sqlite)",
+      "Bash(browser-use doctor:*)",
+      "Bash(BU=\"browser-use --headed --profile ''Profile 5''\")",
+      "Bash(__NEW_LINE_2892bb4b6e2758e7__ eval \"$BU eval \"\":*)"
     ]
   },
   "hooks": {

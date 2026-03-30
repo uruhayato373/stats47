@@ -4,10 +4,14 @@
 #
 # Usage: bash .github/scripts/warm-cache.sh [BASE_URL]
 
-BASE_URL="${1:-https://stats47.jp}"
+BASE_URL="https://stats47.jp"
 FULL_MODE=false
 for arg in "$@"; do
-  if [ "$arg" = "--full" ]; then FULL_MODE=true; fi
+  if [ "$arg" = "--full" ]; then
+    FULL_MODE=true
+  elif [[ "$arg" != --* ]]; then
+    BASE_URL="$arg"
+  fi
 done
 
 # --full: sitemap.xml から全 URL をウォーム

@@ -116,10 +116,10 @@ export default function Header() {
 
           <Link
             href="/"
-            className="font-bold text-xl flex items-center gap-2"
+            className="font-bold text-[15px] flex items-center gap-2"
           >
             <div className="bg-primary text-primary-foreground p-1 rounded">
-              <BarChart3 className="h-4 w-4" />
+              <BarChart3 className="h-3.5 w-3.5" />
             </div>
             統計で見る都道府県
           </Link>
