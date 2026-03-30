@@ -160,7 +160,7 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "ranking-table"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "ranking-table" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 <p className="my-3 leading-7" {...props}>
@@ -265,6 +265,21 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
                         paginated={paginated === "true"}
                         displayUnit={displayUnit as string | undefined}
                     />
+                </div>
+            );
+        },
+
+        "site-link": ({ category }: ComponentProps & { category?: string }) => {
+            if (!category) return null;
+            return (
+                <div className="my-6 not-prose">
+                    <Link
+                        href={`/category/${category}`}
+                        className="flex items-center justify-between rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                    >
+                        <span>このカテゴリの全ランキングを見る</span>
+                        <ArrowRight className="h-4 w-4 shrink-0" />
+                    </Link>
                 </div>
             );
         },
