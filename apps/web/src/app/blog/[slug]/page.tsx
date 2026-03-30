@@ -194,7 +194,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="container mx-auto px-4 py-8">
                 <main className="space-y-6">
                     <Card>
-                        <CardContent className="p-6 sm:p-8 max-w-4xl">
+                        <CardContent className="p-6 sm:p-8 max-w-4xl overflow-hidden">
                             {/* 記事ヘッダー */}
                             <header className="mb-8">
                                 <h1 className="mb-4 border-b-4 border-primary pb-3 text-lg font-bold">{article.title}</h1>
@@ -231,7 +231,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         <CardHeader className="pb-2">
                             <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
                         </CardHeader>
-                        <CardContent className="flex justify-center">
+                        <CardContent className="flex justify-center overflow-hidden">
                             <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
                         </CardContent>
                     </Card>
@@ -250,7 +250,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         <CardHeader className="pb-2">
                             <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
                         </CardHeader>
-                        <CardContent className="flex justify-center">
+                        <CardContent className="flex justify-center overflow-hidden">
                             <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
                         </CardContent>
                     </Card>
