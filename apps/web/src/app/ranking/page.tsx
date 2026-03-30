@@ -11,7 +11,7 @@ import { FeaturedRankings } from "@/features/ranking/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "ランキング一覧 - 統計で見る都道府県";

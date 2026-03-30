@@ -42,8 +42,6 @@
  * @module Sidebar
  */
 
-import { unwrap } from "@stats47/types";
-
 import { type Category } from "@/features/category";
 import { listCategories } from "@/features/category/server";
 
@@ -69,21 +67,19 @@ import { SidebarClient } from "./SidebarClient";
  * ```
  */
 export async function Sidebar() {
-  let categories: Category[] = [];
-  let errorMessage: string | undefined;
+  // D1 接続エラー時は throw して Suspense fallback（SidebarSkeleton）を表示。
+  // try/catch で握り潰すと、エラー状態が ISR キャッシュに保存されて
+  // 全訪問者にエラーページが配信され続ける問題が発生するため。
+  const result = await listCategories();
 
-  try {
-    categories = unwrap(await listCategories());
-  } catch (error) {
-    errorMessage = error instanceof Error ? error.message : String(error);
+  if (!result.success) {
     logger.error(
-      {
-        error: errorMessage,
-        errorStack: error instanceof Error ? error.stack : undefined,
-      },
+      { error: result.error.message },
       "カテゴリ取得エラー"
     );
+    // D1 接続エラーは throw して ISR キャッシュを汚染しない
+    throw result.error;
   }
 
-  return <SidebarClient categories={categories} error={errorMessage} />;
+  return <SidebarClient categories={result.data} />;
 }
