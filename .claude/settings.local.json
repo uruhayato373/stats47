@@ -135,7 +135,8 @@
       "Bash(browser-use --headed --profile 'Profile 5' click 7092)",
       "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/accounts/insights/\")",
       "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/accounts/insights/?timeframe=30\")",
-      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/\")"
+      "Bash(browser-use --headed --profile 'Profile 5' open \"https://www.instagram.com/\")",
+      "Bash(find /c/Users/m004195/stats47/docs -name *categor*)"
     ]
   },
   "hooks": {
