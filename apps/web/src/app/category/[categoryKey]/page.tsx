@@ -5,9 +5,10 @@
  * 注目ランキング（コンパクトカード）+ 全件テーブルのハイブリッドレイアウト。
  */
 
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
 
 import { findRankingItemsByCategory, listSurveys, listRankingValues, listTopRankingValuesBatch } from "@stats47/ranking/server";
@@ -213,23 +214,14 @@ export default async function CategoryPage({ params }: PageProps) {
                       className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
                     >
                       <div className="relative aspect-[1200/630] w-full bg-muted">
-                        <Image
-                          src={`${r2Url}/blog/${article.slug}/thumbnail-light.webp`}
+                        <ThemeAwareImage
+                          lightSrc={`${r2Url}/blog/${article.slug}/thumbnail-light.webp`}
+                          darkSrc={`${r2Url}/blog/${article.slug}/thumbnail-dark.webp`}
                           alt={article.title}
                           fill
                           sizes="256px"
-                          className="object-cover dark:hidden"
+                          className="object-cover"
                           loading="lazy"
-                          unoptimized
-                        />
-                        <Image
-                          src={`${r2Url}/blog/${article.slug}/thumbnail-dark.webp`}
-                          alt={article.title}
-                          fill
-                          sizes="256px"
-                          className="object-cover hidden dark:block"
-                          loading="lazy"
-                          unoptimized
                         />
                       </div>
                     </Link>
