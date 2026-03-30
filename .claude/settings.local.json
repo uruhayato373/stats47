@@ -170,7 +170,8 @@
       "Read(//Users/minamidaisuke/stats47/.local/r2/blog/**)",
       "Bash(done)",
       "Bash(echo \"✓ $slug\")",
-      "Bash(echo \"✗ $slug\" done)"
+      "Bash(echo \"✗ $slug\" done)",
+      "Bash(node -e \"require\\(''googleapis''\\)\")"
     ]
   },
   "hooks": {
