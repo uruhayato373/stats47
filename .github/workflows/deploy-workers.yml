@@ -204,10 +204,11 @@ jobs:
           workingDirectory: apps/web
           command: deploy --env production
 
-      - name: Purge ISR cache (Production)
+      # ISR キャッシュは buildId がデプロイごとに変わるため全 purge 不要。
+      # 全 purge するとコールドスタートで D1 タイムアウト → エラーがキャッシュされる問題が発生する。
+      # 代わりにデプロイ直後にウォームして Worker + D1 接続を初期化する。
+      - name: Warm cache (Production)
         continue-on-error: true
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
-          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
-        run: npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts
+        run: |
+          sleep 10
+          bash .github/scripts/warm-cache.sh
