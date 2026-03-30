@@ -15,6 +15,7 @@ import { BannerAd } from "@/features/ads";
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 import { preprocessCallouts } from "./md-preprocessor";
+import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
 interface MDContentProps {
     source: string;
@@ -159,7 +160,7 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "ranking-table"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 <p className="my-3 leading-7" {...props}>
@@ -250,6 +251,23 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
                 <span>{children}</span>
             </Link>
         ),
+
+        "ranking-table": ({ "ranking-key": rankingKey, title, "value-label": valueLabel, limit, order, paginated, "display-unit": displayUnit }: ComponentProps & { "ranking-key"?: string; "value-label"?: string; "display-unit"?: string }) => {
+            if (!rankingKey) return null;
+            return (
+                <div className="my-6 not-prose">
+                    <MarkdownRankingTable
+                        rankingKey={rankingKey as string}
+                        title={title as string | undefined}
+                        valueLabel={valueLabel as string | undefined}
+                        limit={limit != null ? Number(limit) : undefined}
+                        order={order as "top" | "bottom" | undefined}
+                        paginated={paginated === "true"}
+                        displayUnit={displayUnit as string | undefined}
+                    />
+                </div>
+            );
+        },
     };
 }
 
