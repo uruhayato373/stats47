@@ -1,6 +1,7 @@
 import {
     countCorrelationStats,
     listTopCorrelations,
+    type TopCorrelation,
 } from "@stats47/correlation/server";
 import { listRankingItemsLite } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -36,15 +37,25 @@ interface PageProps {
 export default async function CorrelationPage({ searchParams }: PageProps) {
     const { x, y } = await searchParams;
 
-    const [itemsResult, topCorrelations, correlationCounts] =
-        await Promise.all([
+    // DB エラー時は空データでフォールバック（blog/page.tsx と同様のパターン）
+    let rankingOptions: { rankingKey: string; title: string; subtitle: string | null | undefined; unit: string }[] = [];
+    let topCorrelations: TopCorrelation[] = [];
+    let totalPairs = 0;
+    let strongCount = 0;
+
+    try {
+        const [itemsResult, topCorrs, corrCounts] = await Promise.all([
             listRankingItemsLite({ isActive: true, areaType: "prefecture" }),
             listTopCorrelations(20),
             countCorrelationStats(),
         ]);
-
-    const rankingOptions = isOk(itemsResult) ? itemsResult.data : [];
-    const { total: totalPairs, strong: strongCount } = correlationCounts;
+        rankingOptions = isOk(itemsResult) ? itemsResult.data : [];
+        topCorrelations = topCorrs;
+        totalPairs = corrCounts.total;
+        strongCount = corrCounts.strong;
+    } catch {
+        // D1 接続エラー等の場合は空データで描画（500 を防ぐ）
+    }
 
     // URL パラメータ指定 or ランキング1位をデフォルト表示
     const defaultX = x ?? topCorrelations[0]?.rankingKeyX;

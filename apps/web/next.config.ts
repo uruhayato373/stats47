@@ -37,6 +37,9 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // Cloudflare Workers では /_next/image の画像最適化が利用不可（404/400）。
+    // 全 Image コンポーネントで元画像を直接配信する。
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
