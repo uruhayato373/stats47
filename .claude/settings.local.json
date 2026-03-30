@@ -139,7 +139,14 @@
       "Bash(find /c/Users/m004195/stats47/docs -name *categor*)",
       "WebFetch(domain:stats47.jp)",
       "WebFetch(domain:www.cloudflarestatus.com)",
-      "Bash(bash .github/scripts/warm-cache.sh)"
+      "Bash(bash .github/scripts/warm-cache.sh)",
+      "Bash(curl -o /dev/null -s -w \"%{http_code}\" \"https://stats47.jp/blog/tags/%E6%B6%88%E7%81%AB%E6%A0%93\")",
+      "Bash(curl -o /dev/null -s -w \"%{http_code}\" \"https://stats47.jp/ranking/cpi-change-rate-furniture\")",
+      "Bash(curl -o /dev/null -s -w \"%{http_code}\" \"https://stats47.jp/blog/tags/%E6%90%8D%E5%AE%B3%E9%A1%8D\")",
+      "Bash(curl -o /dev/null -s -w \"%{http_code}\" -L \"https://stats47.jp/blog/tags/population\")",
+      "Bash(curl -o /dev/null -s -w %{http_code} https://stats47.jp/blog/tags/population)",
+      "Bash(curl -s -I https://stats47.jp/blog/tags/population)",
+      "Bash(curl:*)"
     ]
   },
   "hooks": {
