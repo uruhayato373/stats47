@@ -220,6 +220,7 @@ export default async function CategoryPage({ params }: PageProps) {
                           sizes="256px"
                           className="object-cover dark:hidden"
                           loading="lazy"
+                          unoptimized
                         />
                         <Image
                           src={`${r2Url}/blog/${article.slug}/thumbnail-dark.webp`}
@@ -228,6 +229,7 @@ export default async function CategoryPage({ params }: PageProps) {
                           sizes="256px"
                           className="object-cover hidden dark:block"
                           loading="lazy"
+                          unoptimized
                         />
                       </div>
                     </Link>
