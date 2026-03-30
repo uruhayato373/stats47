@@ -154,7 +154,23 @@
       "Bash(find /Users/minamidaisuke/stats47 -name *.db -o -name wrangler.toml -o -name *.sqlite)",
       "Bash(browser-use doctor:*)",
       "Bash(BU=\"browser-use --headed --profile ''Profile 5''\")",
-      "Bash(__NEW_LINE_2892bb4b6e2758e7__ eval \"$BU eval \"\":*)"
+      "Bash(__NEW_LINE_2892bb4b6e2758e7__ eval \"$BU eval \"\":*)",
+      "Bash(__NEW_LINE_c2ce70aa24193672__ eval:*)",
+      "Bash(eval \"$BU keys Enter\")",
+      "Bash(eval \"$BU type ''1位 東京都 542万円 → 47位 秋田県 304万円''\")",
+      "Bash(eval \"$BU type ''約238万円の差があります。''\")",
+      "Bash(eval \"$BU type ''https://stats47.jp/ranking/per-taxpayer-taxable-income''\")",
+      "Bash(__NEW_LINE_3246465611345677__ eval:*)",
+      "Bash(__NEW_LINE_81a1222a2e026265__ eval:*)",
+      "Bash(__NEW_LINE_ed783dbcc51ab69b__ eval:*)",
+      "Bash(find /Users/minamidaisuke/stats47/.local/r2/blog -name thumbnail* -type f)",
+      "Bash(for dir:*)",
+      "Bash(find /Users/minamidaisuke/stats47 -name .env* -o -name drizzle.config*)",
+      "Bash(for d:*)",
+      "Read(//Users/minamidaisuke/stats47/.local/r2/blog/**)",
+      "Bash(done)",
+      "Bash(echo \"✓ $slug\")",
+      "Bash(echo \"✗ $slug\" done)"
     ]
   },
   "hooks": {
