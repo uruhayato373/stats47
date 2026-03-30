@@ -146,7 +146,8 @@
       "Bash(curl -o /dev/null -s -w \"%{http_code}\" -L \"https://stats47.jp/blog/tags/population\")",
       "Bash(curl -o /dev/null -s -w %{http_code} https://stats47.jp/blog/tags/population)",
       "Bash(curl -s -I https://stats47.jp/blog/tags/population)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Read(//tmp/**)"
     ]
   },
   "hooks": {
