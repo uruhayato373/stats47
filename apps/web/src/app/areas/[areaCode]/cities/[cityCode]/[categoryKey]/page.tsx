@@ -22,7 +22,6 @@ import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
-import { CategorySelect } from "@/features/area-profile";
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
@@ -153,16 +152,10 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                 </div>
             </div>
 
-            {/* 左サイドバーにカテゴリ選択 + 市区町村リストを注入 */}
+            {/* 左サイドバーに市区町村リストを注入 */}
             <SetSidebarSection>
-                <CategorySelect
-                    categories={categories}
-                    currentCategoryKey={categoryKey}
-                    areaCode={cityCode}
-                    basePath={cityBasePath}
-                />
                 {allCities.length > 0 && (
-                    <Card className="mt-4">
+                    <Card>
                         <CardHeader className="py-3 px-3">
                             <CardTitle className="text-base">{pref.areaName}の市区町村</CardTitle>
                         </CardHeader>

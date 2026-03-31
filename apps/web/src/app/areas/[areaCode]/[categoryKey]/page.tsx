@@ -24,7 +24,6 @@ import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import {
     AreaProfilePageClient,
-    CategorySelect,
     RelatedAreas,
     generateAreaProfileBreadcrumbStructuredData,
     generateAreaProfileStructuredData,
@@ -154,19 +153,13 @@ export default async function AreaCategoryPage({ params, searchParams }: PagePro
             {/* ヘッダー */}
             <AreaProfilePageClient profile={profile} />
 
-            {/* 左サイドバーにカテゴリ選択 + 市区町村リストを注入 */}
+            {/* 左サイドバーに市区町村リストを注入 */}
             <SetSidebarSection>
-                <CategorySelect
-                    categories={categories}
-                    currentCategoryKey={categoryKey}
-                    areaCode={areaCode}
-                    basePath={`/areas/${areaCode}`}
-                />
                 {(() => {
                     const cities = fetchCities().filter((c) => c.prefCode === areaCode);
                     if (cities.length === 0) return null;
                     return (
-                        <Card className="mt-4">
+                        <Card>
                             <CardHeader className="py-3 px-3">
                                 <CardTitle className="text-base">{profile.areaName}の市区町村</CardTitle>
                             </CardHeader>

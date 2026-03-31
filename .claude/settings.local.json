@@ -171,7 +171,17 @@
       "Bash(done)",
       "Bash(echo \"✓ $slug\")",
       "Bash(echo \"✗ $slug\" done)",
-      "Bash(node -e \"require\\(''googleapis''\\)\")"
+      "Bash(node -e \"require\\(''googleapis''\\)\")",
+      "Bash(DB=\".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite\")",
+      "Bash(__NEW_LINE_c95b14a08fe45d59__ node -e \":*)",
+      "Bash(__NEW_LINE_43fe34f06894fa21__ node -e \":*)",
+      "Bash(__NEW_LINE_25622e2f563f9ee4__ node -e \":*)",
+      "Bash(find /Users/minamidaisuke/stats47/src -type d -name *stat* -o -type d -name *chart*)",
+      "Bash(find /Users/minamidaisuke/stats47 -path *d1* -name *.sqlite*)",
+      "Bash(__NEW_LINE_636b5041e638d785__ node -e \":*)",
+      "Bash(__NEW_LINE_49238d0adfc916e5__ node -e \":*)",
+      "Bash(__NEW_LINE_6c9baba29cf6b253__ node -e \":*)",
+      "Bash(__NEW_LINE_3cae95c0ea94e315__ node -e \":*)"
     ]
   },
   "hooks": {

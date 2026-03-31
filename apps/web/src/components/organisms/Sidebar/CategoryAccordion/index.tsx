@@ -61,7 +61,7 @@ function CategoryLinkItem({ category, isActive }: CategoryLinkItemProps) {
       href={`/category/${category.categoryKey}`}
       prefetch={false}
       className={cn(
-        "flex items-center gap-2 px-3 py-1 text-sm font-normal text-foreground/80 rounded-lg transition-colors hover:bg-accent/50 active:bg-accent",
+        "flex items-center gap-2 px-3 py-1 text-xs font-normal text-foreground/80 rounded-lg transition-colors hover:bg-accent/50 active:bg-accent",
         isActive && "bg-accent text-accent-foreground"
       )}
     >

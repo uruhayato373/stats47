@@ -69,7 +69,7 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
         )}
       </CardHeader>
       <div className="px-4 pb-2">
-        <CardTitle className="text-2xl @[200px]/kpi:text-3xl tabular-nums">
+        <CardTitle className="text-lg @[200px]/kpi:text-xl tabular-nums">
           {formattedValue}
           {unit && (
             <span className="text-sm font-normal text-muted-foreground ml-1">

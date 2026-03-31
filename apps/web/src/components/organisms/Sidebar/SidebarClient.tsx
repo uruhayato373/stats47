@@ -90,7 +90,7 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
               href={href}
               prefetch={false}
               className={cn(
-                "flex items-center gap-2 px-3 py-1 text-sm font-normal text-foreground/80 rounded-lg transition-colors hover:bg-accent/50 active:bg-accent",
+                "flex items-center gap-2 px-3 py-1 text-xs font-normal text-foreground/80 rounded-lg transition-colors hover:bg-accent/50 active:bg-accent",
                 isActive && "bg-accent text-accent-foreground"
               )}
             >
@@ -154,8 +154,8 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
   }
 
   return (
-    <div className="hidden lg:block shrink-0">
-      <div className="w-60 min-w-[240px] shrink-0 sticky top-16 h-[calc(100vh-4rem)] bg-sidebar border-r border-border flex flex-col">
+    <div className="hidden lg:block shrink-0 h-full">
+      <div className="w-60 min-w-[240px] shrink-0 h-full bg-sidebar border-r border-border flex flex-col">
         {sidebarInner}
       </div>
     </div>
