@@ -237,7 +237,10 @@
       "Bash(cd:*)",
       "Bash(find /Users/minamidaisuke/stats47/packages/database -type f -name *.ts -o -name *.sql -o -name README.md)",
       "Bash(mkdir -p /Users/minamidaisuke/stats47/.claude/skills/db/populate-component-data)",
-      "Bash(mkdir -p /Users/minamidaisuke/stats47/.claude/skills/db/verify-component-data)"
+      "Bash(mkdir -p /Users/minamidaisuke/stats47/.claude/skills/db/verify-component-data)",
+      "Bash(set -a)",
+      "Bash(set +a)",
+      "Bash(xargs kill:*)"
     ]
   },
   "hooks": {
