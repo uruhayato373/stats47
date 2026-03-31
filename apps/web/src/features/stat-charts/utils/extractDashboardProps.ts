@@ -30,6 +30,7 @@ export function extractDashboardProps<T extends DashboardComponentType>(
 
   const common: DashboardCommonProps = {
     title: component.title ?? "",
+    componentKey: component.componentKey ?? component.id,
     area,
     rankingLink: component.rankingLink ?? undefined,
     rankingLinkLabel: (config.rankingLinkLabel as string) ?? undefined,

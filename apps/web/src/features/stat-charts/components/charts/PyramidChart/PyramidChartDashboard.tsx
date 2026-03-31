@@ -57,7 +57,7 @@ export const PyramidChartDashboard = async ({
 
     // 最新年度を取得（最初の男性データの最新レコードから）
     const latestMaleData = maleDataList[0];
-    const latestYear = latestMaleData?.[latestMaleData.length - 1]?.yearName?.replace(/年$/, "");
+    const latestYear = latestMaleData?.[latestMaleData.length - 1]?.yearName;
 
     return (
       <DashboardCard

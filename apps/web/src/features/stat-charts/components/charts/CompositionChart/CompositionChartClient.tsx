@@ -8,13 +8,15 @@ import type { CompositionChartData } from "../../../adapters/toCompositionChartD
 
 interface CompositionChartClientProps {
   chartData: CompositionChartData;
+  defaultTab?: "composition" | "trend";
 }
 
 export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
   chartData,
+  defaultTab = "composition",
 }) => {
   const [activeTab, setActiveTab] = useState<"composition" | "trend">(
-    "composition",
+    defaultTab,
   );
 
   return (
@@ -22,14 +24,19 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
       value={activeTab}
       onValueChange={(v) => setActiveTab(v as "composition" | "trend")}
     >
-      <TabsList className="mb-3">
-        <TabsTrigger value="composition">構成比</TabsTrigger>
-        <TabsTrigger value="trend">推移</TabsTrigger>
-      </TabsList>
-      <TabsContent value="composition">
-        <HorizontalBar chartData={chartData} />
+      <div className="flex items-center justify-between mb-3">
+        <TabsList className="h-7 p-0.5">
+          <TabsTrigger value="composition" className="text-xs h-6 px-2.5">構成比</TabsTrigger>
+          <TabsTrigger value="trend" className="text-xs h-6 px-2.5">推移</TabsTrigger>
+        </TabsList>
+        {activeTab === "composition" && chartData.latestYearLabel && (
+          <span className="text-xs text-muted-foreground">{chartData.latestYearLabel}</span>
+        )}
+      </div>
+      <TabsContent value="composition" className="mt-0">
+        <DonutChart chartData={chartData} />
       </TabsContent>
-      <TabsContent value="trend">
+      <TabsContent value="trend" className="mt-0">
         <VerticalStacked chartData={chartData} />
       </TabsContent>
     </Tabs>
@@ -37,18 +44,25 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
 };
 
 // ---------------------------------------------------------------------------
-// 横 100% 積み上げ棒グラフ（最新年の構成比）
+// ドーナツチャート（最新年の構成比）
 // ---------------------------------------------------------------------------
 
-function HorizontalBar({ chartData }: { chartData: CompositionChartData }) {
+function DonutChart({ chartData }: { chartData: CompositionChartData }) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const { trendData, series, unit, latestYearLabel } = chartData;
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const { trendData, series, unit } = chartData;
 
   const latest =
     trendData.length > 0 ? trendData[trendData.length - 1] : null;
 
+  const filteredSeries = series.filter((s) => s.label !== "その他");
+
+  const total = latest
+    ? filteredSeries.reduce((sum, s) => sum + (Number(latest[s.key]) || 0), 0)
+    : 0;
+
   useEffect(() => {
-    if (!svgRef.current || !latest) return;
+    if (!svgRef.current || !latest || total === 0) return;
     let cancelled = false;
 
     import("d3").then((d3) => {
@@ -57,115 +71,104 @@ function HorizontalBar({ chartData }: { chartData: CompositionChartData }) {
       const svg = d3.select(svgRef.current);
       svg.selectAll("*").remove();
 
-      const width = 800;
-      const barHeight = 36;
-      const marginLeft = 10;
-      const marginRight = 10;
-      const marginTop = 4;
-      const innerWidth = width - marginLeft - marginRight;
+      const size = 200;
+      const outerRadius = size / 2;
+      const innerRadius = outerRadius * 0.6;
 
-      // 値の合計を計算
-      const total = series.reduce(
-        (sum, s) => sum + (Number(latest[s.key]) || 0),
-        0,
-      );
-      if (total === 0) return;
+      const pieData = filteredSeries.map((s) => ({
+        ...s,
+        value: Number(latest[s.key]) || 0,
+        pct: total > 0 ? ((Number(latest[s.key]) || 0) / total * 100).toFixed(1) : "0.0",
+      }));
 
-      // 累積位置を計算
-      let cumX = marginLeft;
-      const segments = series.map((s) => {
-        const value = Number(latest[s.key]) || 0;
-        const pct = (value / total) * 100;
-        const segWidth = (value / total) * innerWidth;
-        const seg = { ...s, value, pct, x: cumX, width: segWidth };
-        cumX += segWidth;
-        return seg;
-      });
+      const pie = d3
+        .pie<(typeof pieData)[0]>()
+        .value((d) => d.value)
+        .sort(null)
+        .padAngle(0.02);
 
-      const g = svg.append("g").attr("transform", `translate(0,${marginTop})`);
+      const arc = d3
+        .arc<d3.PieArcDatum<(typeof pieData)[0]>>()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius)
+        .cornerRadius(2);
 
-      // 棒を描画
-      g.selectAll("rect")
-        .data(segments)
-        .join("rect")
-        .attr("x", (d) => d.x)
-        .attr("y", 0)
-        .attr("width", (d) => Math.max(0, d.width))
-        .attr("height", barHeight)
-        .attr("fill", (d) => d.color)
-        .attr("rx", (_, i) => (i === 0 ? 4 : 0))
-        .attr("ry", (_, i) => (i === 0 ? 4 : 0));
+      const g = svg
+        .append("g")
+        .attr("transform", `translate(${size / 2},${size / 2})`);
 
-      // 最後の要素に角丸を追加
-      if (segments.length > 1) {
-        const last = segments[segments.length - 1];
-        g.append("rect")
-          .attr("x", last.x + last.width - 4)
-          .attr("y", 0)
-          .attr("width", 4)
-          .attr("height", barHeight)
-          .attr("fill", last.color)
-          .attr("rx", 4)
-          .attr("ry", 4);
-      }
+      const tooltip = tooltipRef.current;
 
-      // セグメント内に %ラベル（幅が十分な場合のみ）
-      g.selectAll<SVGTextElement, (typeof segments)[0]>("text.pct")
-        .data(segments.filter((d) => d.width > 40))
-        .join("text")
-        .attr("class", "pct")
-        .attr("x", (d) => d.x + d.width / 2)
-        .attr("y", barHeight / 2)
-        .attr("dy", "0.35em")
-        .attr("text-anchor", "middle")
-        .attr("fill", "white")
-        .attr("font-size", 11)
-        .attr("font-weight", 600)
-        .text((d) => `${d.pct.toFixed(1)}%`);
+      g.selectAll("path")
+        .data(pie(pieData))
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d) => d.data.color)
+        .attr("cursor", "pointer")
+        .on("mouseenter", (event, d) => {
+          if (!tooltip) return;
+          d3.select(event.currentTarget).attr("opacity", 0.8);
+          const unitText = unit ? ` ${unit}` : "";
+          tooltip.innerHTML = `<span style="color:${d.data.color}">●</span> ${d.data.label}<br><strong>${d.data.value.toLocaleString()}${unitText}</strong>（${d.data.pct}%）`;
+          tooltip.style.opacity = "1";
+        })
+        .on("mousemove", (event) => {
+          if (!tooltip || !svgRef.current) return;
+          const rect = svgRef.current.getBoundingClientRect();
+          tooltip.style.left = `${event.clientX - rect.left}px`;
+          tooltip.style.top = `${event.clientY - rect.top - 40}px`;
+        })
+        .on("mouseleave", (event) => {
+          if (!tooltip) return;
+          d3.select(event.currentTarget).attr("opacity", 1);
+          tooltip.style.opacity = "0";
+        });
     });
 
     return () => { cancelled = true; };
-  }, [latest, series]);
+  }, [latest, filteredSeries, total, unit]);
 
   if (!latest) return null;
 
-  const total = series.reduce(
-    (sum, s) => sum + (Number(latest[s.key]) || 0),
-    0,
-  );
-
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-xs text-muted-foreground">{latestYearLabel}</div>
-      <svg
-        ref={svgRef}
-        viewBox="0 0 800 44"
-        className="w-full h-auto"
-        preserveAspectRatio="xMidYMid meet"
-        role="img"
-        aria-label="構成比チャート"
-      />
-      <div className="grid grid-cols-2 @sm:grid-cols-3 gap-x-4 gap-y-1.5">
-        {series.map((s, i) => {
-          const value = Number(latest[s.key]) || 0;
-          const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
-          return (
-            <div key={`${s.key}-${i}`} className="flex items-center gap-1.5 text-xs">
-              <span
-                className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
-                style={{ backgroundColor: s.color }}
-              />
-              <span className="text-muted-foreground truncate">{s.label}</span>
-              <span className="ml-auto tabular-nums font-medium">
-                {value.toLocaleString()}
-                {unit ? ` ${unit}` : ""}
-              </span>
-              <span className="text-muted-foreground tabular-nums">
-                ({pct}%)
-              </span>
-            </div>
-          );
-        })}
+    <div className="flex flex-col items-center gap-3">
+      <div className="relative">
+        <svg
+          ref={svgRef}
+          viewBox="0 0 200 200"
+          className="w-40 h-40"
+          role="img"
+          aria-label="構成比ドーナツチャート"
+        />
+        <div
+          ref={tooltipRef}
+          className="absolute pointer-events-none rounded bg-popover border border-border px-2 py-1 text-xs shadow-sm whitespace-nowrap transition-opacity duration-150"
+          style={{ opacity: 0 }}
+        />
+      </div>
+      <div className="w-full border-t pt-2">
+        <ul className="divide-y divide-border">
+          {filteredSeries.map((s, i) => {
+            const value = Number(latest[s.key]) || 0;
+            const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
+            return (
+              <li key={`${s.key}-${i}`} className="flex items-center gap-2 py-1.5 text-sm">
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
+                  style={{ backgroundColor: s.color }}
+                />
+                <span className="text-foreground/80">{s.label}</span>
+                <span className="ml-auto tabular-nums font-semibold">
+                  {value.toLocaleString()}
+                  {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{unit}</span> : null}
+                </span>
+                <span className="text-muted-foreground tabular-nums w-14 text-right">
+                  {pct}%
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
@@ -181,7 +184,7 @@ function VerticalStacked({
   chartData: CompositionChartData;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const { trendData, series, unit } = chartData;
+  const { trendData, series, unit, latestYearLabel } = chartData;
 
   useEffect(() => {
     if (!svgRef.current || trendData.length === 0) return;
@@ -288,6 +291,11 @@ function VerticalStacked({
     return () => { cancelled = true; };
   }, [trendData, series, unit]);
 
+  const latest = trendData.length > 0 ? trendData[trendData.length - 1] : null;
+  const total = latest
+    ? series.reduce((sum, s) => sum + (Number(latest[s.key]) || 0), 0)
+    : 0;
+
   return (
     <div className="flex flex-col gap-2">
       <svg
@@ -298,20 +306,35 @@ function VerticalStacked({
         role="img"
         aria-label="構成比推移チャート"
       />
-      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-1">
-        {series.map((s, i) => (
-          <div
-            key={`${s.key}-${i}`}
-            className="flex items-center gap-1.5 text-xs @[400px]:text-sm text-muted-foreground"
-          >
-            <span
-              className="inline-block h-3 w-3 rounded-sm"
-              style={{ backgroundColor: s.color }}
-            />
-            <span>{s.label}</span>
-          </div>
-        ))}
-      </div>
+      {latest && (
+        <div className="mt-3 pt-2 border-t">
+          <div className="text-xs text-muted-foreground mb-1.5">{latestYearLabel}</div>
+          <ul className="divide-y divide-border">
+            {series
+              .filter((s) => s.label !== "その他")
+              .map((s, i) => {
+                const value = Number(latest[s.key]) || 0;
+                const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
+                return (
+                  <li key={`${s.key}-${i}`} className="flex items-center gap-2 py-1.5 text-sm">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
+                      style={{ backgroundColor: s.color }}
+                    />
+                    <span className="text-foreground/80">{s.label}</span>
+                    <span className="ml-auto tabular-nums font-semibold">
+                      {value.toLocaleString()}
+                      {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{unit}</span> : null}
+                    </span>
+                    <span className="text-muted-foreground tabular-nums w-14 text-right">
+                      {pct}%
+                    </span>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

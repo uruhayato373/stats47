@@ -17,7 +17,7 @@ export const LineChart = async ({
   config,
 }: DashboardItemProps<"line-chart">) => {
   const { title, area, rankingLink, sourceName, sourceLink, annotation, rankingLinks } = common;
-  const { estatParams, labels, description, yAxisConfig, sharedYDomain, seriesColors } = config as DashboardItemProps<"line-chart">["config"] & { sharedYDomain?: [number, number]; seriesColors?: string[] };
+  const { estatParams, labels, description, yAxisConfig, sharedYDomain, seriesColors, showLatestValues } = config as DashboardItemProps<"line-chart">["config"] & { sharedYDomain?: [number, number]; seriesColors?: string[] };
   const areaCode = area.areaCode;
   const paramsList = Array.isArray(estatParams) ? estatParams : [estatParams];
 
@@ -76,7 +76,7 @@ export const LineChart = async ({
       error={null}
       empty={chartData.data.length === 0}
     >
-      <LineChartClient chartData={chartData} yDomain={yDomain} />
+      <LineChartClient chartData={chartData} yDomain={yDomain} showLatestValues={showLatestValues} />
     </DashboardCard>
   );
 };

@@ -10,6 +10,7 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { loadPageComponents } from "@/features/stat-charts/server";
+import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
 
@@ -29,6 +30,7 @@ interface Props {
  */
 export async function ThemePageLayout({ theme, data }: Props) {
   const pageCharts = await loadPageComponents("theme", theme.themeKey);
+  const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
       <Breadcrumb className="mb-4">
@@ -54,6 +56,7 @@ export async function ThemePageLayout({ theme, data }: Props) {
         indicatorDataMap={data.indicatorDataMap}
         topology={data.topology}
         pageCharts={pageCharts}
+        kpiDataByArea={kpiDataByArea}
       />
     </div>
   );

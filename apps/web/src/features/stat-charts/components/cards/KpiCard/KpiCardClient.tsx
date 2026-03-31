@@ -61,14 +61,8 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
             <span className="block text-xs text-muted-foreground/70 mt-0.5">{sub}</span>
           )}
         </CardDescription>
-        <div className="flex-1" />
-        {year && (
-          <Badge variant="outline" size="sm" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
-            {year}
-          </Badge>
-        )}
       </CardHeader>
-      <div className="px-4 pb-2">
+      <div className="px-4 pb-1.5">
         <CardTitle className="text-lg @[200px]/kpi:text-xl tabular-nums">
           {formattedValue}
           {unit && (
@@ -79,14 +73,19 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
         </CardTitle>
       </div>
       <CardFooter className="px-4 pb-3 pt-0">
-        {changeRate !== null && changeRate !== undefined && changeDirection ? (
-          <div className={cn("flex items-center gap-1 text-sm", trendColor)}>
-            {TrendIcon && <TrendIcon className="h-4 w-4" />}
-            <span className="font-medium">{changeRate > 0 ? "+" : ""}{changeRate}%</span>
-          </div>
-        ) : (
-          <div className="h-5" />
-        )}
+        <div className="flex items-center gap-2">
+          {year && (
+            <Badge variant="outline" size="sm" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
+              {year}
+            </Badge>
+          )}
+          {changeRate !== null && changeRate !== undefined && changeDirection ? (
+            <div className={cn("flex items-center gap-0.5 text-xs", trendColor)}>
+              {TrendIcon && <TrendIcon className="h-3 w-3" />}
+              <span className="font-medium">{changeRate > 0 ? "+" : ""}{changeRate}%</span>
+            </div>
+          ) : null}
+        </div>
       </CardFooter>
     </Card>
   );

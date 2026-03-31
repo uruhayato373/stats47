@@ -17,6 +17,7 @@ function toArea(region: ComparisonRegion): Area {
 function pageComponentToDashboard(comp: PageComponent, titlePrefix?: string): DashboardComponent {
   return {
     id: comp.componentKey,
+    componentKey: comp.componentKey,
     componentType: comp.componentType,
     title: titlePrefix ? `${titlePrefix}の${comp.title}` : comp.title,
     componentProps: JSON.stringify(comp.componentProps),

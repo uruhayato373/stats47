@@ -13,6 +13,20 @@ disable-model-invocation: true
 
 すべてのコマンドは `apps/web/` ディレクトリで実行する。
 
+## Tier B テーブル（リモートのみ管理 — sync 対象外）
+
+以下のテーブルはパイプラインがリモート D1 に直接書き込む。
+ローカルは**空テーブルのみ**存在。このスキルで push しないこと。
+
+| テーブル | 投入スキル |
+|---|---|
+| `component_data` | `/populate-component-data` |
+| `ranking_data` | `/populate-all-rankings` |
+| `ranking_ai_content` | `/generate-ai-content` |
+| `correlation_analysis` | `/run-correlation-batch` |
+
+フル同期（引数なし）の Step 2 でこれらのテーブルの件数差分が出ても、**リモートの DELETE は行わない**こと。
+
 ## 同期モード
 
 | モード | 引数 | 動作 | 用途 |

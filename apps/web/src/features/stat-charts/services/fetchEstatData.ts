@@ -67,6 +67,34 @@ export async function fetchEstatData(
 }
 
 /**
+ * e-Stat API から全都道府県データを取得（フィルタなし）
+ *
+ * テーマページなど、複数の都道府県データをクライアントに渡す場合に使用。
+ * areaCode ごとにグループ化された結果を返す。
+ */
+export async function fetchEstatDataAllAreas(
+  estatParams: GetStatsDataParams
+): Promise<{ data: StatsSchema[] } | { error: string }> {
+  try {
+    const params: GetStatsDataParams = { ...estatParams };
+    const paramsJson = JSON.stringify(params);
+    const rawData = await cachedFetchFormattedStats(paramsJson);
+
+    if (rawData.length === 0) {
+      return { error: "データが見つかりません" };
+    }
+
+    return { data: rawData };
+  } catch (err) {
+    logger.warn(
+      { error: err instanceof Error ? err.message : err, estatParams },
+      "e-Stat 全都道府県データ取得失敗"
+    );
+    return { error: "データの取得に失敗しました" };
+  }
+}
+
+/**
  * 階層データ用に複数カテゴリを一度に取得
  *
  * @param areaCode - 地域コード

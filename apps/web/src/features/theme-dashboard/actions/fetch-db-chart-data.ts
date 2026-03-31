@@ -1,6 +1,7 @@
 "use server";
 
 
+import { toCompositionChartData, type CompositionChartData } from "@/features/stat-charts/adapters/toCompositionChartData";
 import { toLineChartData } from "@/features/stat-charts/adapters/toLineChartData";
 import { toMixedChartData } from "@/features/stat-charts/adapters/toMixedChartData";
 import { fetchEstatData } from "@/features/stat-charts/server";
@@ -32,6 +33,7 @@ export interface CpiHeatmapItem {
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
+  | { type: "composition"; data: CompositionChartData }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
@@ -60,6 +62,9 @@ export async function fetchDbChartDataAction(
   }
   if (componentType === "donut-chart") {
     return fetchDonutData(componentProps, prefCode, isNational);
+  }
+  if (componentType === "composition-chart") {
+    return fetchCompositionData(componentProps, prefCode, isNational);
   }
   if (componentType === "cpi-profile") {
     return fetchCpiProfileData(componentProps, prefCode);
@@ -183,6 +188,46 @@ async function fetchAllAndAverage(
   } catch {
     return null;
   }
+}
+
+async function fetchCompositionData(
+  props: Record<string, unknown>,
+  prefCode: string,
+  isNational: boolean
+): Promise<{ type: "composition"; data: CompositionChartData } | null> {
+  const statsDataId = props.statsDataId as string;
+  const segments = props.segments as Array<{ code: string; label: string; color?: string }>;
+  const totalCode = props.totalCode as string | undefined;
+
+  if (!statsDataId || !segments?.length) return null;
+
+  const segmentData = await Promise.all(
+    segments.map(async (seg) => {
+      if (isNational) {
+        return await fetchAllAndAverage({ statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+      }
+      const result = await fetchEstatData(prefCode, { statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+      return "error" in result ? null : result.data;
+    })
+  );
+
+  if (segmentData.some((d) => d === null)) return null;
+
+  let totalData: StatsSchema[] | undefined;
+  if (totalCode) {
+    if (isNational) {
+      totalData = (await fetchAllAndAverage({ statsDataId, cdCat01: totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
+    } else {
+      const result = await fetchEstatData(prefCode, { statsDataId, cdCat01: totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+      totalData = "error" in result ? undefined : result.data;
+    }
+  }
+
+  const labels = segments.map((s) => s.label);
+  const colors = segments.map((s) => s.color).filter((c): c is string => !!c);
+  const chartData = toCompositionChartData(segmentData as StatsSchema[][], labels, colors, totalData);
+
+  return chartData.trendData.length > 0 ? { type: "composition", data: chartData } : null;
 }
 
 /**

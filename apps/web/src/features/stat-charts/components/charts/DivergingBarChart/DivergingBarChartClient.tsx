@@ -54,26 +54,38 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
   return (
     <div>
       {latestValues && (
-        <div className="flex items-center justify-center gap-6 mb-2">
-          <div className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: positiveColor }} />
-            <span className="text-sm text-muted-foreground">{latestValues.positiveName}</span>
-            <span className="text-xl font-bold tabular-nums">{latestValues.positive.toLocaleString()}</span>
-            <span className="text-sm text-muted-foreground">{latestValues.unit}</span>
-            {latestValues.positiveRate != null && (
-              <span className="text-xs text-muted-foreground">({latestValues.positiveRateLabel ?? ""} {latestValues.positiveRate}%)</span>
-            )}
+        <div className="mb-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: positiveColor }} />
+                <span className="text-xs text-muted-foreground">{latestValues.positiveName}</span>
+              </div>
+              <div className="tabular-nums">
+                <span className="text-lg font-bold">{latestValues.positive.toLocaleString()}</span>
+                <span className="text-xs font-normal text-muted-foreground ml-0.5">{latestValues.unit}</span>
+              </div>
+              {latestValues.positiveRate != null && (
+                <span className="text-xs text-muted-foreground">{latestValues.positiveRateLabel ?? ""} {latestValues.positiveRate}%</span>
+              )}
+            </div>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: negativeColor }} />
+                <span className="text-xs text-muted-foreground">{latestValues.negativeName}</span>
+              </div>
+              <div className="tabular-nums">
+                <span className="text-lg font-bold">{latestValues.negative.toLocaleString()}</span>
+                <span className="text-xs font-normal text-muted-foreground ml-0.5">{latestValues.unit}</span>
+              </div>
+              {latestValues.negativeRate != null && (
+                <span className="text-xs text-muted-foreground">{latestValues.negativeRateLabel ?? ""} {latestValues.negativeRate}%</span>
+              )}
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: negativeColor }} />
-            <span className="text-sm text-muted-foreground">{latestValues.negativeName}</span>
-            <span className="text-xl font-bold tabular-nums">{latestValues.negative.toLocaleString()}</span>
-            <span className="text-sm text-muted-foreground">{latestValues.unit}</span>
-            {latestValues.negativeRate != null && (
-              <span className="text-xs text-muted-foreground">({latestValues.negativeRateLabel ?? ""} {latestValues.negativeRate}%)</span>
-            )}
+          <div className="text-center mt-1">
+            <span className="text-xs text-muted-foreground">{latestValues.label}</span>
           </div>
-          <span className="text-xs text-muted-foreground">({latestValues.label})</span>
         </div>
       )}
       <DivergingBarChart

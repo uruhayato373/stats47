@@ -39,6 +39,7 @@ export function ThemeDashboardTabbed({
   indicatorDataMap,
   topology,
   pageCharts,
+  kpiDataByArea,
 }: ThemeDashboardClientProps) {
   const tabIndicators = themeConfig.tabIndicators;
   const isBelowLg = useBreakpoint("belowLg");
@@ -172,12 +173,10 @@ export function ThemeDashboardTabbed({
           statsSection={
             <PrefectureStatsPanel
               selectedPrefectureCode={selectedPrefectureCode}
-              indicatorDataMap={indicatorDataMap}
-              rankingKeys={themeConfig.rankingKeys}
               selectedIndicatorKey={selectedTabKey}
-              themeKey={themeConfig.themeKey}
               themeConfig={themeConfig}
               pageCharts={pageCharts}
+              kpiDataByArea={kpiDataByArea}
             />
           }
           tableSection={
@@ -224,12 +223,10 @@ export function ThemeDashboardTabbed({
         <div>
           <PrefectureStatsPanel
             selectedPrefectureCode={selectedPrefectureCode}
-            indicatorDataMap={indicatorDataMap}
-            rankingKeys={themeConfig.rankingKeys}
             selectedIndicatorKey={selectedTabKey}
-            themeKey={themeConfig.themeKey}
             themeConfig={themeConfig}
             pageCharts={pageCharts}
+            kpiDataByArea={kpiDataByArea}
           />
         </div>
       </div>

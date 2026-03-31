@@ -1,4 +1,5 @@
 export * from "./affiliate_ads";
+export * from "./component_data";
 export * from "./ai_content";
 export * from "./area_profile_rankings";
 export * from "./article_tags";

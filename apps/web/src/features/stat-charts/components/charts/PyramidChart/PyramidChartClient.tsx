@@ -27,7 +27,7 @@ export const PyramidChartClient: React.FC<PyramidChartClientProps> = ({
     <div>
       {year && (
         <div className="flex items-center justify-center mb-2">
-          <span className="text-sm text-muted-foreground">{year}年</span>
+          <span className="text-sm text-muted-foreground">{year}</span>
         </div>
       )}
       <PyramidChart chartData={chartData} height={400} />

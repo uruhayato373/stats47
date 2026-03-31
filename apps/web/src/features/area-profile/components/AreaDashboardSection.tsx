@@ -33,6 +33,7 @@ export async function AreaDashboardSection({ area, categoryKey, selectedRankingK
 
   const pageComponentToDashboard = (c: PageComponent, propsOverride?: Record<string, unknown>): DashboardComponent => ({
     id: c.componentKey,
+    componentKey: c.componentKey,
     componentType: c.componentType,
     componentProps: JSON.stringify(propsOverride ?? c.componentProps),
     title: c.title,

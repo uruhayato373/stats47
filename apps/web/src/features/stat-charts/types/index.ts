@@ -11,6 +11,8 @@ import type { GetStatsDataParams } from "@stats47/estat-api/server";
  */
 export interface DashboardComponent {
   id: string;
+  /** page_components.chart_key — D1 優先フェッチ用 */
+  componentKey?: string;
   componentType: string;
   title: string | null;
   componentProps: string | null;
@@ -38,6 +40,8 @@ export interface DashboardComponent {
 export interface DashboardCommonProps {
   /** コンポーネントタイトル */
   title: string;
+  /** page_components.chart_key — D1 優先フェッチ用 */
+  componentKey?: string;
   /** 地域情報（areaCode, areaName, areaType, parentAreaCode を含む） */
   area: Area;
   /** ランキング詳細ページへのリンク */
@@ -155,6 +159,8 @@ export type DashboardConfigMap = {
     labels?: string[];
     description?: string;
     yAxisConfig?: YAxisConfig;
+    /** チャート下に最新値リストを表示するか（デフォルト: false） */
+    showLatestValues?: boolean;
   };
   "bar-chart": {
     estatParams: GetStatsDataParams[];
@@ -257,14 +263,29 @@ export type DashboardConfigMap = {
     description?: string;
   };
   "composition-chart": {
-    /** 統計表ID（全セグメント共通） */
-    statsDataId: string;
+    /** 統計表ID（全セグメント共通・単一年用） */
+    statsDataId?: string;
+    /**
+     * 複数年データソース（各年が別 statsDataId のデータセット用）
+     * statsDataId の代わりに指定する。
+     */
+    multipleStatsSources?: Array<{
+      statsDataId: string;
+      /** 調査年（yearCode / yearName に使用） */
+      surveyYear: string;
+      /** JIS 2桁プレフィックスへのオフセット（例: 2 → 01000→03000） */
+      areaCodeOffset?: number;
+      /** cat01 の固定値（セグメントコードを cdCat02 で指定する場合） */
+      cdCat01Fixed?: string;
+    }>;
     /** 各セグメント定義 */
     segments: Array<{ code: string; label: string; color?: string }>;
     /** 総額コード（差分で「その他」を算出、省略時は合計値を算出） */
     totalCode?: string;
     unit?: string;
     description?: string;
+    /** デフォルトで表示するタブ（"composition" | "trend"、省略時は "composition"） */
+    defaultTab?: "composition" | "trend";
   };
 };
 

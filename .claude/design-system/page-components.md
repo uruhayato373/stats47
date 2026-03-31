@@ -17,11 +17,44 @@
 | area | 13000, 01000 | エリアトップページ |
 | area-category | safetyenvironment, economy | エリアカテゴリページ |
 
+### 1データ1コンポーネント原則
+
+同じ統計データは **1つのコンポーネント定義を共有**し、`page_component_assignments` で複数ページに割り当てる。
+
+- 都道府県用（`pref-` or テーマ共用）と市区町村用（`city-`）の **2レコードのみ** 作成
+- テーマページ・エリアページ・カテゴリページで同じ chart_key を共有
+- チャートタイプ・色・ラベルはコンポーネント定義で統一（ページごとに変えない）
+
+```
+例: 年齢3区分人口
+  theme-age-composition (composition-chart, sid=0000010101)
+    → theme/population-dynamics
+    → theme/aging-society
+    → area-category/population
+
+  city-pop-age (composition-chart, sid=0000020101)
+    → city-category/population
+```
+
+**禁止**: 同じデータに対してページごとに異なる chart_key・チャートタイプを作成すること。
+
+### 都道府県/市区町村の statsDataId 分離
+
+SSDSE は都道府県用と市区町村用で異なる `statsDataId` を使う。`page_components` にそれぞれのレコードを持たせ、`page_component_assignments` の `page_type` で正しい方を割り当てる。
+
+| page_type | 使用するコンポーネント |
+|---|---|
+| `theme`, `area`, `area-category` | 都道府県用（`statsDataId: 000001xxxx`） |
+| `city-category` | 市区町村用（`statsDataId: 000002xxxx`） |
+
+サービス層での statsDataId 自動変換は行わない。DB が正しいデータを持つ。
+
 ### コンポーネント追加手順
 
 1. `page_components` に INSERT（componentKey, componentType, title, componentProps）
-2. `page_component_assignments` に INSERT（pageType, pageKey, componentKey, section, sortOrder）
-3. コード変更不要
+2. 市区町村ページでも使う場合は `city-` 版も INSERT（statsDataId のみ差し替え）
+3. `page_component_assignments` に INSERT（pageType, pageKey, componentKey, section, sortOrder）
+4. コード変更不要
 
 ### 禁止事項
 

@@ -7,13 +7,11 @@ import dynamic from "next/dynamic";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
 import type { PageComponent, LineChartData, MixedChartData } from "@/features/stat-charts";
+import { CompositionChartClient } from "@/features/stat-charts/components/charts/CompositionChart/CompositionChartClient";
+import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
+import { PyramidChartClient } from "@/features/stat-charts/components/charts/PyramidChart/PyramidChartClient";
 
-import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationCompositionAction, type AgeCompositionResult, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
-
-const D3LineChart = dynamic(
-  () => import("@stats47/visualization/d3/LineChart").then((mod) => mod.D3LineChart),
-  { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
-);
+import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
 const D3MixedChart = dynamic(
   () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
@@ -35,16 +33,7 @@ const CategoryHeatmap = dynamic(
   { ssr: false, loading: () => <Skeleton className="h-[280px] w-full rounded-md" /> },
 );
 
-const PyramidChart = dynamic(
-  () => import("@stats47/visualization/d3/PyramidChart").then((mod) => mod.PyramidChart),
-  { ssr: false, loading: () => <Skeleton className="h-[300px] w-full rounded-md" /> },
-);
 
-// AgeCompositionChart は既存コンポーネントを dynamic import
-const AgeCompositionChart = dynamic(
-  () => import("./AgeCompositionChart").then((mod) => mod.AgeCompositionChart),
-  { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
-);
 
 interface Props {
   chart: PageComponent;
@@ -55,11 +44,11 @@ interface Props {
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
+  | { type: "composition"; data: import("@/features/stat-charts/adapters/toCompositionChartData").CompositionChartData }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
   | { type: "pyramid"; data: PopulationPyramidResult }
-  | { type: "composition"; data: AgeCompositionResult }
   | null;
 
 /**
@@ -77,15 +66,12 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     startTransition(async () => {
       const { componentType } = chart;
 
-      if (componentType === "line-chart" || componentType === "mixed-chart" || componentType === "donut-chart" || componentType === "cpi-profile" || componentType === "cpi-heatmap") {
+      if (componentType === "line-chart" || componentType === "mixed-chart" || componentType === "composition-chart" || componentType === "donut-chart" || componentType === "cpi-profile" || componentType === "cpi-heatmap") {
         const result = await fetchDbChartDataAction(componentType, chart.componentProps, prefCode);
         setChartResult(result);
       } else if (componentType === "pyramid-chart") {
         const result = await fetchPopulationPyramidAction(prefCode);
         if (result) setChartResult({ type: "pyramid", data: result });
-      } else if (componentType === "composition-chart") {
-        const result = await fetchPopulationCompositionAction(prefCode);
-        if (result) setChartResult({ type: "composition", data: result });
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; only key/type determine fetch
@@ -106,16 +92,10 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     if (data.data.length <= 1) {
       return <NoData />;
     }
+    const showLatestValues = (chart.componentProps as Record<string, unknown>)?.showLatestValues === true;
     return (
       <>
-        <div className="h-[200px]">
-          <D3LineChart
-            data={data.data as Array<Record<string, string | number | undefined>>}
-            categoryKey={data.xAxisKey}
-            series={data.lines}
-            showLegend
-          />
-        </div>
+        <LineChartClient chartData={data} showLatestValues={showLatestValues} />
         {source}
       </>
     );
@@ -206,7 +186,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     }
     return (
       <>
-        <PyramidChart chartData={data.pyramidData} height={450} />
+        <PyramidChartClient chartData={data.pyramidData} year={data.yearName} />
         {source}
       </>
     );
@@ -214,14 +194,10 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
 
   if (chartResult.type === "composition") {
     const { data } = chartResult;
+    const defaultTab = (chart.componentProps as Record<string, unknown>)?.defaultTab as "composition" | "trend" | undefined;
     return (
       <>
-        <AgeCompositionChart
-          prefData={data.prefData}
-          nationalData={data.nationalData}
-          prefName={prefCode !== "00000" ? prefName : undefined}
-          loading={false}
-        />
+        <CompositionChartClient chartData={data} defaultTab={defaultTab} />
         {source}
       </>
     );
