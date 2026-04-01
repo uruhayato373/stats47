@@ -1,8 +1,10 @@
+
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
 import { eq, and, isNotNull } from "drizzle-orm";
 
-import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+
+import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
 
 import type { MetadataRoute } from "next";
 

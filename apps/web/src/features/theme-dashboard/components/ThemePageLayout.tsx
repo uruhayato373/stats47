@@ -12,11 +12,12 @@ import {
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
-import { ThemeDashboardClient } from "./ThemeDashboardClient";
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
-} from "../utils/generate-structured-data";
+} from "../utils";
+
+import { ThemeDashboardClient } from "./ThemeDashboardClient";
 
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
