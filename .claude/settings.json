@@ -9,5 +9,10 @@
     "Grep",
     "WebFetch",
     "WebSearch"
-  ]
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(jobs -l)"
+    ]
+  }
 }
