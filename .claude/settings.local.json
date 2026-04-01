@@ -243,7 +243,8 @@
       "Bash(xargs kill:*)",
       "Bash(source /Users/minamidaisuke/stats47/.env.local)",
       "Bash(rclone lsf:*)",
-      "Bash(env)"
+      "Bash(env)",
+      "Bash(npx better-sqlite3:*)"
     ]
   },
   "hooks": {
