@@ -4,7 +4,7 @@ import { getDrizzle, rankingData } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { and, eq, like, or } from "drizzle-orm";
 import type { RankingValue } from "../../types";
 
 export async function listRankingValues(
@@ -15,6 +15,8 @@ export async function listRankingValues(
 ): Promise<Result<RankingValue[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
+    // yearCode は "2023" のような4桁形式だが、DBには "2023100000" のような
+    // e-Stat API 形式で保存されているケースがある。両方マッチさせる。
     const result = await drizzleDb
       .select()
       .from(rankingData)
@@ -22,7 +24,10 @@ export async function listRankingValues(
         and(
           eq(rankingData.categoryCode, rankingKey),
           eq(rankingData.areaType, areaType),
-          eq(rankingData.yearCode, yearCode)
+          or(
+            eq(rankingData.yearCode, yearCode),
+            like(rankingData.yearCode, `${yearCode}%`)
+          )
         )
       );
 

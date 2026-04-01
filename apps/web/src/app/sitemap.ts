@@ -2,6 +2,7 @@ import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } 
 import { eq, and, isNotNull } from "drizzle-orm";
 
 import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
+import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
 import type { MetadataRoute } from "next";
 
@@ -16,12 +17,19 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: "daily", priority: 1.0 },
   { url: `${BASE_URL}/ranking`, changeFrequency: "daily", priority: 0.9 },
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
+  { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/compare`, changeFrequency: "weekly", priority: 0.5 },
   { url: `${BASE_URL}/correlation`, changeFrequency: "weekly", priority: 0.6 },
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${BASE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },
 ];
+
+const THEME_PAGES: MetadataRoute.Sitemap = ALL_THEMES.map((theme) => ({
+  url: `${BASE_URL}/themes/${theme.themeKey}`,
+  changeFrequency: "weekly",
+  priority: 0.8,
+}));
 
 const AREA_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.map((code) => ({
   url: `${BASE_URL}/areas/${code}`,
@@ -131,9 +139,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     }));
 
-    return [...STATIC_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES, ...rankingPages, ...categoryPages, ...comparePages, ...blogPages, ...surveyPages, ...tagPages];
+    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES, ...rankingPages, ...categoryPages, ...comparePages, ...blogPages, ...surveyPages, ...tagPages];
   } catch {
     // ビルド時に D1 が利用できない場合は静的ページのみ返し、ISR で再生成する
-    return [...STATIC_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES];
+    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES];
   }
 }

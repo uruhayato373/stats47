@@ -243,7 +243,11 @@
       "Bash(xargs kill:*)",
       "Bash(source /Users/minamidaisuke/stats47/.env.local)",
       "Bash(rclone lsf:*)",
-      "Bash(env)"
+      "Bash(env)",
+      "Bash(NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx packages/ai-content/src/scripts/list-pending.ts)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'total={d[\\\\\"total\\\\\"]}, pending={d[\\\\\"pending\\\\\"]}'\\)\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/tmp/pending-list.json'\\)\\); print\\(f'pending={d[\\\\\"pending\\\\\"]}, total={d[\\\\\"total\\\\\"]}'\\)\")",
+      "Skill(update-config)"
     ]
   },
   "hooks": {
