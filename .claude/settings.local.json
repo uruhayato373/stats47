@@ -241,7 +241,9 @@
       "Bash(set -a)",
       "Bash(set +a)",
       "Bash(xargs kill:*)",
-      "Bash(source /Users/minamidaisuke/stats47/.env.local)"
+      "Bash(source /Users/minamidaisuke/stats47/.env.local)",
+      "Bash(rclone lsf:*)",
+      "Bash(env)"
     ]
   },
   "hooks": {
