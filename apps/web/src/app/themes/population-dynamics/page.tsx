@@ -15,7 +15,7 @@ export function generateMetadata(): Metadata {
     description: theme.description,
     keywords: theme.keywords,
     alternates: { canonical: `/themes/${theme.themeKey}` },
-    ...generateOGMetadata({ title, description: theme.description, imageUrl: "/og-image.jpg" }),
+    ...generateOGMetadata({ title, description: theme.description, imageUrl: `/themes/${theme.themeKey}/opengraph-image` }),
   };
 }
 

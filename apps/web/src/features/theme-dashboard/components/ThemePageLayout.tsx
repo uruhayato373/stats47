@@ -12,6 +12,11 @@ import {
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
+import {
+  generateThemeBreadcrumbStructuredData,
+  generateThemePageStructuredData,
+} from "../utils";
+
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
 
 import type { ThemePageData } from "../lib/load-theme-data";
@@ -31,8 +36,18 @@ interface Props {
 export async function ThemePageLayout({ theme, data }: Props) {
   const pageCharts = await loadPageComponents("theme", theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
+  const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
+  const pageData = generateThemePageStructuredData(theme);
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
+      />
       <Breadcrumb className="mb-4">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -48,7 +63,8 @@ export async function ThemePageLayout({ theme, data }: Props) {
       </Breadcrumb>
 
       <div className="mb-6">
-        <h1 className="text-lg font-bold">{theme.title}</h1>
+        <h1 className="text-2xl font-bold">{theme.title}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{theme.description}</p>
       </div>
 
       <ThemeDashboardClient
