@@ -23,6 +23,9 @@ const CONTENT_TYPE_MAP: Record<string, string> = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+  ".mp4": "video/mp4",
   ".json": "application/json",
   ".topojson": "application/json",
   ".csv": "text/csv; charset=utf-8",
@@ -64,6 +67,7 @@ function collectLocalFiles(
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
+  const force = args.includes("--force");
   const prefixIdx = args.indexOf("--prefix");
   const prefixArg = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() : undefined;
   const prefix = prefixArg ?? R2_PREFIX_DEFAULT;
@@ -84,6 +88,7 @@ async function main(): Promise<void> {
 
   console.log(".local/r2/ を R2 にアップロード（差分同期）");
   if (dryRun) console.log("【DRY RUN】実際にはアップロードしません");
+  if (force) console.log("【FORCE】サイズ一致ファイルも強制アップロード");
   if (prefix) console.log(`プレフィックス: ${prefix}`);
 
   const localFiles = collectLocalFiles(baseDir, baseDir, "");
@@ -106,7 +111,7 @@ async function main(): Promise<void> {
   for (const f of localFilesWithKey) {
     const localSize = fs.statSync(f.absolutePath).size;
     const remoteSize = remoteMap.get(f.key);
-    if (remoteSize !== undefined && remoteSize === localSize) continue;
+    if (!force && remoteSize !== undefined && remoteSize === localSize) continue;
     toUpload.push(f);
   }
 
