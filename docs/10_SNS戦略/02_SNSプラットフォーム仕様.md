@@ -2,9 +2,6 @@
 title: SNSプラットフォーム仕様リファレンス
 created: 2026-03-01
 updated: 2026-03-01
-tags:
-  - sns
-  - reference
 ---
 
 # SNSプラットフォーム仕様リファレンス
