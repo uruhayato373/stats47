@@ -87,9 +87,12 @@ function callAI(model: string, promptContent: string): Promise<string> {
       args = ["-p", "", "-o", "text"];
     }
 
-    // NODE_OPTIONS='--conditions react-server' を子プロセスに引き継がない
-    // （claude CLI が Bun ベースのため react-server 条件で詰まる）
-    const { NODE_OPTIONS: _stripped, ...childEnv } = process.env;
+    // NODE_OPTIONS と CLAUDECODE を子プロセスに引き継がない
+    // - NODE_OPTIONS='--conditions react-server': Bun ベースの claude CLI が誤動作する
+    // - CLAUDECODE=1: Claude Code セッション内では stdin 経由の長いプロンプトが詰まる
+    //   (Claude Code のサンドボックスが ~3KB 以上の stdin をブロックするため)
+    //   → このスクリプトは Claude Code の外（ユーザーの端末）で実行することを推奨
+    const { NODE_OPTIONS: _n, CLAUDECODE: _c, ...childEnv } = process.env;
 
     const proc = spawn(cmd, args, {
       stdio: ["pipe", "pipe", "pipe"],

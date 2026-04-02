@@ -254,7 +254,8 @@
       "Bash(python3 -c \"import sqlite3; print\\('python sqlite3 available'\\)\")",
       "Bash(python3:*)",
       "Bash(py:*)",
-      "Bash(read file:*)"
+      "Bash(read file:*)",
+      "Bash(python3 -c ':*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\m004195\\obsidian\\projects\\kazu-note",
