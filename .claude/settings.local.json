@@ -250,7 +250,10 @@
       "Skill(update-config)",
       "Bash(xargs -I {} basename {})",
       "Bash(npm list:*)",
-      "Read(//c/Users/m004195/AppData/Local/Temp/kazu-test/**)"
+      "Read(//c/Users/m004195/AppData/Local/Temp/kazu-test/**)",
+      "Bash(python3 -c \"import sqlite3; print\\('python sqlite3 available'\\)\")",
+      "Bash(python3:*)",
+      "Bash(py:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\m004195\\obsidian\\projects\\kazu-note",
