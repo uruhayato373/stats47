@@ -63,7 +63,11 @@ export default async function CorrelationPage({ searchParams }: PageProps) {
 
     let initialData: Awaited<ReturnType<typeof fetchCorrelationPairAction>> | undefined;
     if (defaultX && defaultY && defaultX !== defaultY) {
-        initialData = await fetchCorrelationPairAction(defaultX, defaultY);
+        try {
+            initialData = await fetchCorrelationPairAction(defaultX, defaultY);
+        } catch {
+            // D1接続エラー: initialData = undefined でフォールバック描画
+        }
     }
 
     return (

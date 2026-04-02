@@ -51,7 +51,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
-    const article = await findArticleBySlug(slug);
+    let article = null;
+    try {
+        article = await findArticleBySlug(slug);
+    } catch {
+        // D1接続エラー: フォールバックメタデータを返す
+    }
 
     if (!article) {
         return {
@@ -120,7 +125,13 @@ async function getRelatedArticles(tagKeys: string[], currentSlug: string) {
 
 export default async function BlogPostPage({ params }: PageProps) {
     const { slug } = await params;
-    const article = await articleService.getArticle(slug);
+    let article;
+    try {
+        article = await articleService.getArticle(slug);
+    } catch {
+        // D1接続エラー時は404として扱う（5xxより適切）
+        notFound();
+    }
 
     if (!article) {
         notFound();
