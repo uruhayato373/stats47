@@ -248,7 +248,13 @@
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'total={d[\\\\\"total\\\\\"]}, pending={d[\\\\\"pending\\\\\"]}'\\)\")",
       "Bash(python3 -c \"import json; d=json.load\\(open\\('/tmp/pending-list.json'\\)\\); print\\(f'pending={d[\\\\\"pending\\\\\"]}, total={d[\\\\\"total\\\\\"]}'\\)\")",
       "Skill(update-config)",
-      "Bash(xargs -I {} basename {})"
+      "Bash(xargs -I {} basename {})",
+      "Bash(npm list:*)",
+      "Read(//c/Users/m004195/AppData/Local/Temp/kazu-test/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\m004195\\obsidian\\projects\\kazu-note",
+      "c:\\Users\\m004195\\obsidian\\.claude\\agents"
     ]
   },
   "hooks": {
