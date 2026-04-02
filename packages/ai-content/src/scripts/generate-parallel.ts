@@ -81,7 +81,8 @@ function callAI(model: string, promptContent: string): Promise<string> {
 
     if (model === "claude") {
       cmd = "claude";
-      args = ["-p", "", "--output-format", "text"];
+      // Haiku は Sonnet より 5-10x 高速（~10-30s vs ~2-3min per item）
+      args = ["-p", "", "--output-format", "text", "--model", "claude-haiku-4-5-20251001"];
     } else {
       cmd = "gemini";
       args = ["-p", "", "-o", "text"];

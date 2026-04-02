@@ -98,7 +98,31 @@
    - top 10: 再生数上位 10 本（再生・いいね・コメント）
    → 前週データがある場合は増減を算出
 
-6. SEO 指標を DB に記録
+6. SNS パフォーマンス指標（DB `sns_metrics` テーブルから集計）
+   ※ `/update-sns-metrics` 実行後に D1 へ自動蓄積される。API 不要・直接クエリ可。
+   ```sql
+   -- 最新取得日を確認
+   SELECT MAX(fetched_at) FROM sns_metrics;
+   -- プラットフォーム別集計（最新バッチ）
+   SELECT p.platform,
+          COUNT(DISTINCT m.sns_post_id) as post_count,
+          SUM(m.impressions) as total_impressions,
+          SUM(m.views) as total_views,
+          SUM(m.likes) as total_likes,
+          SUM(m.comments) as total_comments
+   FROM sns_metrics m
+   JOIN sns_posts p ON m.sns_post_id = p.id
+   WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
+   GROUP BY p.platform;
+   -- インプレッション上位投稿（X）
+   SELECT p.ranking_key, m.impressions
+   FROM sns_metrics m
+   JOIN sns_posts p ON m.sns_post_id = p.id
+   WHERE p.platform = 'x' AND m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
+   ORDER BY m.impressions DESC LIMIT 5;
+   ```
+
+7. SEO 指標を DB に記録
    GSC カバレッジレポートの数値を `seo_tracking` テーブルに INSERT する:
    ```sql
    -- ローカル D1 に better-sqlite3 で接続
@@ -128,7 +152,17 @@
    - 登録者: N / 総再生: N / 動画数: N
    - 再生数 Top 10: ...
    ```
-   注: SEO カバレッジ指標（クロール済み未インデックス数等）は DB（seo_tracking）で管理。md には GA4/GSC/YouTube の詳細データのみ記録する。
+   ## SNS パフォーマンス（YYYY-MM-DD 取得、`sns_metrics` テーブル）
+   | プラットフォーム | 計測投稿数 | 主要指標 |
+   |---|---|---|
+   | X | N件 | インプレッション合計: N / いいね: N / シェア: N |
+   | TikTok | N件 | 再生数合計: N / いいね: N / コメント: N |
+   | YouTube | N件 | 再生数合計: N / いいね: N |
+   | Instagram | N件 | リーチ: N |
+   X 上位投稿: ranking_key — N imp, ...
+   注: データは `/update-sns-metrics` 実行後に D1 `sns_metrics` テーブルへ自動蓄積。ここには D1 から直接クエリした値を記載する。
+
+   注: SEO カバレッジ指標（クロール済み未インデックス数等）は DB（seo_tracking）で管理。md には GA4/GSC/YouTube/SNS の詳細データを記録する。
 
 出力形式:
 - 「パフォーマンス概況」（GA4/GSC/YouTube の主要指標を明記）
@@ -302,7 +336,23 @@ generatedAt: "YYYY-MM-DD"
 
 ### SNS パフォーマンス
 
-（`/update-sns-metrics` で取得した指標があれば記載。未取得の場合はその旨記載）
+※ データは D1 `sns_metrics` テーブルに蓄積済み（`/update-sns-metrics` 実行後）。以下のクエリで取得:
+```sql
+SELECT p.platform, COUNT(DISTINCT m.sns_post_id) as posts,
+       SUM(m.impressions) as impressions, SUM(m.views) as views, SUM(m.likes) as likes
+FROM sns_metrics m JOIN sns_posts p ON m.sns_post_id = p.id
+WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
+GROUP BY p.platform;
+```
+
+| プラットフォーム | 計測投稿数 | インプレッション / 再生数 | いいね |
+|---|---|---|---|
+| X | N | N imp | N |
+| TikTok | N | N views | N |
+| YouTube | N | N views | N |
+| Instagram | N | N reach | N |
+
+最終取得日: YYYY-MM-DD（未取得の場合は「`/update-sns-metrics` 未実行」と記載）
 
 ## 課題・ブロッカー
 
