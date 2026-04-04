@@ -1,6 +1,6 @@
 ---
 name: review-ads
-description: ads ドメイン（アフィリエイト・広告・収益化）のコードレビュー。収益最適化・法務コンプライアンス・広告計測の専門パネリスト付き。
+description: ads ドメインのコードレビュー（収益最適化・法務・広告計測の専門パネリスト付き）。Use when user says "広告レビュー", "review-ads", "ads レビュー". review-feature ads のショートカット.
 disable-model-invocation: true
 ---
 

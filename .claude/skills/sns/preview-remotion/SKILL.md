@@ -1,3 +1,9 @@
+---
+name: preview-remotion
+description: 実データで Remotion Studio ランキングプレビュー用データを上書きする。Use when user says "プレビュー", "Remotion プレビュー", "ランキングプレビュー". HMR で自動反映.
+disable-model-invocation: true
+---
+
 実データで Remotion Studio プレビュー用データを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

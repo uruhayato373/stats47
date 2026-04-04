@@ -1,3 +1,8 @@
+---
+name: run-tests
+description: テストを実行して結果を報告する。Use when user says "テスト実行", "run-tests", "テスト回して". Vitest ユニットテスト + Playwright E2E 対応.
+---
+
 テストを実行して結果を報告する。
 
 ## 概要

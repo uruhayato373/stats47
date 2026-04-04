@@ -1,6 +1,6 @@
 ---
 name: publish-x
-description: browser-use CLI で X (Twitter) の予約投稿を自動設定する（テキスト・画像・予約日時）
+description: browser-use CLI で X の予約投稿を自動設定する。Use when user says "X投稿", "X予約投稿", "ツイート予約". テキスト・画像・予約日時を自動操作.
 disable-model-invocation: true
 argument-hint: "<rankingKey> --schedule YYYY-MM-DD HH:MM [--domain ranking|compare|correlation]"
 ---

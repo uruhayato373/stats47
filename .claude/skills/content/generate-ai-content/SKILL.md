@@ -1,3 +1,9 @@
+---
+name: generate-ai-content
+description: ランキングページ向け AI コンテンツ（FAQ・分析）を Gemini CLI で生成し DB 保存する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成". Claude並列/Gemini逐次選択可.
+disable-model-invocation: true
+---
+
 ランキングページ向け AI コンテンツ（FAQ、地域分析、インサイト）を生成し、DB に保存する。
 
 Claude（並列・高速）と Gemini（逐次・デフォルト）を選択可能。

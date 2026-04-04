@@ -1,3 +1,9 @@
+---
+name: discover-trends-hatena
+description: はてなブックマーク Hot Entry からトレンドを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "はてブトレンド", "はてなトレンド". ネット議論ベースのテーマ発見.
+disable-model-invocation: true
+---
+
 はてなブックマーク Hot Entry RSS からトレンドを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
 
 ## 用途

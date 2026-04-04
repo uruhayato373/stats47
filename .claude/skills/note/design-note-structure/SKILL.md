@@ -1,3 +1,8 @@
+---
+name: design-note-structure
+description: note 記事（B/C/D シリーズ）の構成を設計する。Use when user says "note構成設計", "記事構成", "構成テンプレート". 章構成と stats47.jp 誘導設計を決定.
+---
+
 note 記事（B/C/D シリーズ）の構成を設計する。シリーズに応じた構成テンプレートを適用する。
 
 > **A シリーズ（ランキング記事・量産型）はこの4ステップワークフローの対象外です。** A シリーズは自動生成スキルで処理するため、validate → design → write → edit の手順は不要です。

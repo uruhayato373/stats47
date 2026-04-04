@@ -1,3 +1,9 @@
+---
+name: deploy
+description: develop ブランチを main にマージしてデプロイする。Use when user says "デプロイ", "deploy", "本番反映". テスト・型チェック・ビルド付き.
+disable-model-invocation: true
+---
+
 変更を develop → main へマージしてデプロイする。
 
 ## ブランチ運用ルール

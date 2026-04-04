@@ -1,3 +1,9 @@
+---
+name: discover-trends
+description: Google Trends のデイリートレンドを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "トレンド検索", "Google Trends", "トレンド発見". 検索急上昇起点のテーマ発見.
+disable-model-invocation: true
+---
+
 Google Trends のデイリートレンドを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
 
 ## 用途

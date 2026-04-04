@@ -1,3 +1,9 @@
+---
+name: preview-remotion-comparison
+description: 実データで Remotion Studio 2地域比較プレビューを上書きする。Use when user says "比較プレビュー", "compare プレビュー". 2地域の指標比較を視覚化.
+disable-model-invocation: true
+---
+
 実データで Remotion Studio の比較（Compare）プレビュー用データを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

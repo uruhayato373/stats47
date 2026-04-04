@@ -1,3 +1,9 @@
+---
+name: render-ranking-images
+description: 全ランキングの OGP・サムネイルを Remotion で一括生成しローカル R2 に保存する。Use when user says "OGP生成", "サムネイル一括生成", "ランキング画像". light/dark 4枚並列レンダリング.
+disable-model-invocation: true
+---
+
 全 active ランキング（約1,250件）の OGP 画像とサムネイルを一括生成する。
 
 ## 生成される画像

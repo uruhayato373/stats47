@@ -1,3 +1,9 @@
+---
+name: populate-city-rankings
+description: 市区町村ランキングのデータを e-Stat API から取得し ranking_data に投入する（area_type=city）。Use when user says "市区町村ランキング投入", "populate-city-rankings". コロプレスマップ切替用.
+disable-model-invocation: true
+---
+
 市区町村ランキングのデータを DB に投入する。
 
 ## 用途

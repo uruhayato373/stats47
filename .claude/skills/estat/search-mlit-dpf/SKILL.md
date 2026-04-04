@@ -1,3 +1,9 @@
+---
+name: search-mlit-dpf
+description: 国土交通データプラットフォーム MCP でデータを検索・取得する。Use when user says "国土交通データ", "search-mlit-dpf", "MLIT検索". 36カタログ対応の GIS/統計/インフラデータ.
+disable-model-invocation: true
+---
+
 国土交通データプラットフォーム MCP サーバー（mlit-dpf-mcp）を使ってデータを検索・取得する。
 
 ## 概要

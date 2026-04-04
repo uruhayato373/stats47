@@ -1,3 +1,9 @@
+---
+name: review-packages
+description: packages/ のコード品質を8人の専門家パネルでレビューする。Use when user says "パッケージレビュー", "review-packages", "packages レビュー". 単体/横断レビュー対応.
+disable-model-invocation: true
+---
+
 packages/ 配下のコードを、8人の専門家パネルで多角的にレビューする。
 アーキテクチャ・コード品質・テスト・パフォーマンスの観点から改善点を特定する。
 

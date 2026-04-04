@@ -1,6 +1,8 @@
 ---
-description: Edge Cache をウォームして初回アクセスの遅延を解消する
+name: warm-cache
+description: デプロイ後に Edge Cache をウォームして初回アクセスの遅延を解消する。Use when user says "キャッシュウォーム", "warm-cache", "デプロイ後のウォーム". --full で全ページ対応.
 argument-hint: [--full]
+disable-model-invocation: true
 ---
 
 デプロイ後に主要ページ（デフォルト）または全ページ（`--full`）にアクセスし、Cloudflare Edge Cache を事前にウォームする。

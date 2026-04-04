@@ -1,5 +1,7 @@
 ---
-description: YouTube 競合分析 × 自社データマッチングで通常動画の企画を自動生成する
+name: plan-youtube-normal
+description: YouTube 競合分析と自社データマッチングで通常動画の企画を自動生成する。Use when user says "YouTube企画", "動画企画". 再生数が伸びやすいテーマを優先度付きで提案.
+disable-model-invocation: true
 argument-hint: [件数（デフォルト5）]
 ---
 

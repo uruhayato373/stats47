@@ -1,6 +1,7 @@
 ---
 name: optimize-themes
-description: テーマダッシュボードをアクセス状況・競合分析・トレンド調査・ギャップ分析で継続的に最適化
+description: テーマダッシュボードを継続最適化する（GSC/GA4 + 競合調査 + ギャップ分析 → 優先度付きアクション）。Use when user says "テーマ最適化", "ダッシュボード改善". 4軸分析で改善アクション出力.
+disable-model-invocation: true
 argument-hint: "[theme-key] | --all"
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 ---

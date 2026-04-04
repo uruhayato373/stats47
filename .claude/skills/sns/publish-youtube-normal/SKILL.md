@@ -1,7 +1,8 @@
 ---
-description: YouTube 通常動画（ScrollGes）を制作・アップロード・DB記録する一貫パイプライン
-argument-hint: <rankingKey> [--schedule <ISO8601>]
+name: publish-youtube-normal
+description: YouTube 通常動画（ScrollGes）の制作からアップロード・DB 記録までを一貫実行する。Use when user says "YouTube動画投稿", "YouTube通常動画". レンダリング → アップロード → DB 記録.
 disable-model-invocation: true
+argument-hint: <rankingKey> [--schedule <ISO8601>]
 ---
 
 YouTube 通常動画（16:9 ScrollGes テンプレート）の制作からアップロード・DB 記録・ローカル削除までを一貫実行する。

@@ -100,171 +100,22 @@ packages/
 
 ## スキル一覧
 
-### theme — テーマ強化
+各スキルの詳細は SKILL.md の frontmatter description を参照。`/スキル名` で実行。
 
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/optimize-themes` | テーマダッシュボードの継続最適化（GSC/GA4 + 競合調査 + ギャップ分析 → 優先度付きアクション） | `.claude/skills/theme/optimize-themes/SKILL.md` |
-| `/audit-theme-components` | テーマダッシュボードの現状監査（page_components vs IndicatorSet ギャップ分析） | `.claude/skills/theme/audit-theme-components/SKILL.md` |
-| `/design-theme-charts` | テーマ用チャート設計（chart_key, componentType, componentProps JSON 生成） | `.claude/skills/theme/design-theme-charts/SKILL.md` |
-| `/insert-theme-components` | 設計済みチャートの page_components + assignments への INSERT 実行 | `.claude/skills/theme/insert-theme-components/SKILL.md` |
+### 自動有効（32個）
+| カテゴリ | スキル |
+|---|---|
+| analytics | fetch-gsc-data, fetch-ga4-data, fetch-youtube-data, fetch-instagram-data, fetch-x-data, seo-audit, performance-report |
+| blog | discover-trends-all, expert-review, panel-review, proofread-article, plan-blog-articles, plan-blog-trends, update-blog-plan, generate-article-charts, md-syntax |
+| dev | run-tests, review-tests, verification-loop, continuous-learning, strategic-compact |
+| estat | search-estat, inspect-estat-meta, fetch-estat-data |
+| management | critical-review, weekly-plan, weekly-review |
+| note | validate-note-idea, design-note-structure |
+| 背景知識 | knowledge, task-router, review-router |
 
-### db — データベース・ストレージ
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/sync-remote-d1` | ローカル D1 → リモート D1 同期（`--key` で差分同期対応） | `.claude/skills/db/sync-remote-d1/SKILL.md` |
-| `/pull-remote-d1` | リモート D1 → ローカル D1 同期（wrangler export + better-sqlite3） | `.claude/skills/db/pull-remote-d1/SKILL.md` |
-| `/diff-d1` | ローカル D1 とリモート D1 のキーベース差分検知・同期 | `.claude/skills/db/diff-d1/SKILL.md` |
-| `/sync-articles` | `.local/r2/blog/` の状態を DB に反映（削除済み記事を DB から除去） | `.claude/skills/db/sync-articles/SKILL.md` |
-| `/push-r2` | `.local/r2/` 全体をリモート R2 へアップロード | `.claude/skills/db/push-r2/SKILL.md` |
-| `/pull-r2` | リモート R2 から `.local/r2/` へダウンロード | `.claude/skills/db/pull-r2/SKILL.md` |
-| `/r2-du` | リモート R2 のディレクトリ別容量調査（du 相当） | `.claude/skills/db/r2-du/SKILL.md` |
-| `/purge-cache-r2` | R2 キャッシュバケット（stats47-cache）の全オブジェクト削除 | `.claude/skills/db/purge-cache-r2/SKILL.md` |
-| `/populate-all-rankings` | 全ランキングの全年度データを DB に一括投入（e-Stat API → ranking_data） | `.claude/skills/db/populate-all-rankings/SKILL.md` |
-| `/register-ranking` | 新規ランキングキーを ranking_items に登録し e-Stat API からデータ投入 | `.claude/skills/db/register-ranking/SKILL.md` |
-| `/run-correlation-batch` | 相関分析バッチを実行しリモート同期（ローカルに残さない） | `.claude/skills/db/run-correlation-batch/SKILL.md` |
-| `/reset-migrations` | Drizzle マイグレーションを1本にリセット（10本超 or 不整合時） | `.claude/skills/db/reset-migrations/SKILL.md` |
-
-### estat — e-Stat API
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/search-estat` | e-Stat API 統計表検索（statsDataId 特定） | `.claude/skills/estat/search-estat/SKILL.md` |
-| `/inspect-estat-meta` | e-Stat API メタデータ調査（カテゴリ・年・地域の構造把握） | `.claude/skills/estat/inspect-estat-meta/SKILL.md` |
-| `/fetch-estat-data` | e-Stat API からランキング形式データ取得 | `.claude/skills/estat/fetch-estat-data/SKILL.md` |
-
-### blog — ブログ記事
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/update-blog-plan` | ブログ記事の企画管理ファイルを最新状態に更新（公開記事数・企画進捗の反映） | `.claude/skills/blog/update-blog-plan/SKILL.md` |
-| `/plan-blog-articles` | カテゴリ別ブログ記事企画の自動生成（データインベントリ・トレンド調査・構成案） | `.claude/skills/blog/plan-blog-articles/SKILL.md` |
-| `/plan-blog-trends` | トレンド起点のブログ記事企画（トレンド検出→データマッチング→企画生成を一括実行） | `.claude/skills/blog/plan-blog-trends/SKILL.md` |
-| `/plan-blog-affiliate` | アフィリエイト収益直結のブログ記事企画（商材×統計データで行動喚起する記事設計） | `.claude/skills/blog/plan-blog-affiliate/SKILL.md` |
-| `/discover-trends` | Google Trends からトレンドキーワードを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案 | `.claude/skills/blog/discover-trends/SKILL.md` |
-| `/discover-trends-hatena` | はてなブックマーク Hot Entry からトレンドを取得し、stats47 の統計データとマッチング | `.claude/skills/blog/discover-trends-hatena/SKILL.md` |
-| `/discover-trends-news` | Google News RSS からニューストレンドを取得し、stats47 の統計データとマッチング | `.claude/skills/blog/discover-trends-news/SKILL.md` |
-| `/discover-trends-yahoo` | Yahoo!ニュース トピックス RSS からニューストレンドを取得し、stats47 の統計データとマッチング | `.claude/skills/blog/discover-trends-yahoo/SKILL.md` |
-| `/discover-trends-gsc` | Google Search Console の急上昇クエリを検出し、コンテンツギャップからブログ記事候補を提案 | `.claude/skills/blog/discover-trends-gsc/SKILL.md` |
-| `/discover-trends-note` | note.com のトレンド記事から話題のテーマを取得し、stats47 の統計データとマッチング | `.claude/skills/blog/discover-trends-note/SKILL.md` |
-| `/discover-trends-all` | 全トレンドソースを一括実行し統合レポート生成（クロスソースヒット優先） | `.claude/skills/blog/discover-trends-all/SKILL.md` |
-| `/generate-article-charts` | 記事用 JSON データから SVG チャートを生成（折れ線・タイルマップ・散布図等） | `.claude/skills/blog/generate-article-charts/SKILL.md` |
-| `/md-syntax` | ブログ記事で使えるマークダウン記法一覧（コールアウト・チャート等） | `.claude/skills/blog/md-syntax/SKILL.md` |
-| `/expert-review` | ブログ記事を専門家視点でレビュー（データ正確性・統計的妥当性・誤解リスク） | `.claude/skills/blog/expert-review/SKILL.md` |
-| `/panel-review` | ブログ記事企画を10人のパネリストとして評価 | `.claude/skills/blog/panel-review/SKILL.md` |
-| `/proofread-article` | ブログ記事の公開前チェック（フロントマター・チャート・データ注記・末尾サイト内リンク） | `.claude/skills/blog/proofread-article/SKILL.md` |
-| `/publish-article` | 下書き記事を公開フォルダへコピーし publishedAt を設定（→ `/sync-articles` で DB 反映） | `.claude/skills/blog/publish-article/SKILL.md` |
-
-### content — ランキングページ向けコンテンツ
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/generate-ai-content` | ランキングページ向け AI コンテンツ（FAQ・分析）を Gemini CLI で生成 → DB 保存 | `.claude/skills/content/generate-ai-content/SKILL.md` |
-| `/generate-csv` | ランキングデータ CSV を生成 → ローカル R2 に保存 | `.claude/skills/content/generate-csv/SKILL.md` |
-
-### note — note.com 記事
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/post-note-ranking` | note ランキング記事（A シリーズ）を DB から自動生成（量産型） | `.claude/skills/note/post-note-ranking/SKILL.md` |
-| `/validate-note-idea` | note 記事（B/C/D シリーズ）のアイデアを需要・独自性・信頼性の3軸で検証 | `.claude/skills/note/validate-note-idea/SKILL.md` |
-| `/investigate-note-data` | note 記事（B/C/D シリーズ）のデータ調査・分析（相関・地域パターン・チャート候補決定） | `.claude/skills/note/investigate-note-data/SKILL.md` |
-| `/design-note-structure` | note 記事の構成設計（B/C/D シリーズ別テンプレート適用・stats47誘導設計） | `.claude/skills/note/design-note-structure/SKILL.md` |
-| `/write-note-section` | note 記事を構成に沿って執筆（B/C/D シリーズ対応・一括執筆） | `.claude/skills/note/write-note-section/SKILL.md` |
-| `/edit-note-draft` | note 記事の原稿チェック・品質検証・公開準備（必ず別チャットで実行） | `.claude/skills/note/edit-note-draft/SKILL.md` |
-| `/generate-note-charts` | note 記事用チャートを SVG 生成→ PNG 変換（棒グラフ・タイルマップ・散布図等） | `.claude/skills/note/generate-note-charts/SKILL.md` |
-| `/generate-kakei-charts` | a-kakei 記事用チャート一括生成（大分類比率 + 特徴品目の横棒グラフ） | `.claude/skills/note/generate-kakei-charts/SKILL.md` |
-| `/publish-note` | browser-use CLI で note.com エディタを自動操作し下書き保存・予約投稿（テキスト・画像・タグ） | `.claude/skills/note/publish-note/SKILL.md` |
-
-### sns — SNS 投稿
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/generate-all-sns` | 指定ランキングキーの全 SNS コンテンツ（data.json → キャプション → 動画・画像）を一括生成 | `.claude/skills/sns/generate-all-sns/SKILL.md` |
-| `/post-sns-captions` | 全 SNS（Instagram/X/YouTube/TikTok）のキャプションを一括生成 → ローカル保存 | `.claude/skills/sns/post-sns-captions/SKILL.md` |
-| `/post-bar-chart-race-captions` | Bar Chart Race 動画の全 SNS キャプションを一括生成 → ローカル保存 | `.claude/skills/sns/post-bar-chart-race-captions/SKILL.md` |
-| `/post-x` | X (Twitter) 投稿用テキストを生成 → ローカル保存 | `.claude/skills/sns/post-x/SKILL.md` |
-| `/post-instagram` | Instagram 投稿用キャプションを生成 → ローカル保存（画像は `/render-sns-stills` で別途生成） | `.claude/skills/sns/post-instagram/SKILL.md` |
-| `/post-youtube` | YouTube 投稿用タイトル・説明を生成 → ローカル保存 | `.claude/skills/sns/post-youtube/SKILL.md` |
-| `/post-tiktok` | TikTok 投稿用キャプションを生成 → ローカル保存 | `.claude/skills/sns/post-tiktok/SKILL.md` |
-| `/generate-utm-url` | SNS・note 記事の stats47.jp リンクに付与する UTM パラメータ生成ルール | `.claude/skills/sns/generate-utm-url/SKILL.md` |
-| `/render-sns-stills` | Remotion で SNS 用静止画・動画を生成 → ローカル保存（Chrome 必須） | `.claude/skills/sns/render-sns-stills/SKILL.md` |
-| `/find-quote-rt` | X のバズツイートを browser-use で検索し、stats47 データと照合して引用RT候補を提示 | `.claude/skills/sns/find-quote-rt/SKILL.md` |
-| `/publish-x` | browser-use CLI で X の予約投稿を自動設定（テキスト・画像・予約日時） | `.claude/skills/sns/publish-x/SKILL.md` |
-| `/publish-tiktok` | browser-use CLI で TikTok Studio の予約投稿を自動設定（動画・キャプション・予約日時） | `.claude/skills/sns/publish-tiktok/SKILL.md` |
-| `/publish-instagram` | browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定（カルーセル・リール） | `.claude/skills/sns/publish-instagram/SKILL.md` |
-| `/mark-sns-posted` | 投稿済み SNS コンテンツの DB ステータス更新 → ローカル・リモート R2 から削除 | `.claude/skills/sns/mark-sns-posted/SKILL.md` |
-| `/publish-youtube-normal` | YouTube 通常動画の制作→アップロード→DB記録パイプライン | `.claude/skills/sns/publish-youtube-normal/SKILL.md` |
-| `/plan-youtube-normal` | YouTube 競合分析×自社データで通常動画の企画を自動生成 | `.claude/skills/sns/plan-youtube-normal/SKILL.md` |
-| `/update-sns-metrics` | browser-use CLI (X/IG/TT) + YouTube API でメトリクスを一括取得 → DB (`sns_metrics`) 蓄積 | `.claude/skills/sns/update-sns-metrics/SKILL.md` |
-| `/sns-weekly-report` | DB から週次パフォーマンスレポートを生成 | `.claude/skills/sns/sns-weekly-report/SKILL.md` |
-| `/preview-remotion` | 実データで Remotion Studio プレビューデータを上書き（ranking） | `.claude/skills/sns/preview-remotion/SKILL.md` |
-| `/generate-bar-chart-race` | D1 → Bar Chart Race 用 config.json + data.json 生成（`.local/r2/sns/bar-chart-race/`） | `.claude/skills/sns/generate-bar-chart-race/SKILL.md` |
-| `/generate-compare` | D1 → 2地域比較 data.json 生成（テーマプリセット対応） | `.claude/skills/sns/generate-compare/SKILL.md` |
-| `/post-compare-captions` | 2地域比較の全 SNS キャプションを一括生成 → ローカル保存 | `.claude/skills/sns/post-compare-captions/SKILL.md` |
-| `/preview-remotion-bar-chart-race` | Bar Chart Race の config.json + data.json → Remotion Studio プレビューを上書き | `.claude/skills/sns/preview-remotion-bar-chart-race/SKILL.md` |
-| `/render-bar-chart-race` | Bar Chart Race 動画を一括レンダリング（YouTube/Instagram/TikTok） | `.claude/skills/sns/render-bar-chart-race/SKILL.md` |
-| `/preview-remotion-comparison` | 実データで Remotion Studio 比較プレビューを上書き | `.claude/skills/sns/preview-remotion-comparison/SKILL.md` |
-| `/preview-remotion-correlation` | 実データで Remotion Studio 相関散布図プレビューを上書き | `.claude/skills/sns/preview-remotion-correlation/SKILL.md` |
-| `/preview-remotion-area-profile` | 実データで Remotion Studio 地域プロファイルプレビューを上書き | `.claude/skills/sns/preview-remotion-area-profile/SKILL.md` |
-| `/preview-remotion-blog` | 実データで Remotion Studio ブログ OGP プレビューを上書き | `.claude/skills/sns/preview-remotion-blog/SKILL.md` |
-
-### analytics — サイト分析
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/fetch-gsc-data` | Google Search Console API から検索パフォーマンスデータを取得（クエリ・ページ・デバイス別） | `.claude/skills/analytics/fetch-gsc-data/SKILL.md` |
-| `/fetch-ga4-data` | Google Analytics 4 Data API からアクセスデータを取得（PV・流入経路・デバイス別） | `.claude/skills/analytics/fetch-ga4-data/SKILL.md` |
-| `/fetch-youtube-data` | YouTube Data API v3 からチャンネル・動画の公開データを取得（再生数・いいね数等） | `.claude/skills/analytics/fetch-youtube-data/SKILL.md` |
-| `/fetch-instagram-data` | Instagram Graph API からインサイトデータを取得（リーチ・エンゲージメント・投稿別分析） | `.claude/skills/analytics/fetch-instagram-data/SKILL.md` |
-| `/fetch-x-data` | X (Twitter) API v2 からツイートデータを取得（インプレッション・いいね・RT・投稿別分析） | `.claude/skills/analytics/fetch-x-data/SKILL.md` |
-| `/seo-audit` | SEO 総合監査（GSC/GA4 実データ + サイト構造 + DB → 優先度付きアクションリスト） | `.claude/skills/analytics/seo-audit/SKILL.md` |
-| `/lighthouse-audit` | Lighthouse CLI でパフォーマンス測定（スコア・CWV・リソース → DB 蓄積） | `.claude/skills/analytics/lighthouse-audit/SKILL.md` |
-| `/performance-report` | パフォーマンス総合レポート（トレンド・バジェット監査・ページ種別比較・改善提案） | `.claude/skills/analytics/performance-report/SKILL.md` |
-
-### ads — 広告・アフィリエイト
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/register-affiliate-banner` | A8.net 等のバナー広告を登録（タグベース自動表示 / 記事内手動配置） | `.claude/skills/ads/register-affiliate-banner/SKILL.md` |
-
-### ui — UI/UX レビュー
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/design-review` | melta-ui デザインシステム準拠レビュー（7カテゴリ走査・重大度判定） | `.claude/skills/ui/design-review/SKILL.md` |
-| `/ui-panel-review` | Web ページの UI/UX を 10 人の専門家パネルとして評価（Playwright MCP 連携対応） | `.claude/skills/ui/panel-review/SKILL.md` |
-
-### ranking / management / dev
-
-| スキル | 用途 | 定義 |
-|---|---|---|
-| `/render-ranking-images` | 全ランキングの OGP・サムネイルを一括生成 → ローカル R2 に保存 | `.claude/skills/ranking/render-ranking-images/SKILL.md` |
-| `/knowledge` | 過去の失敗と学びを参照・追記（バグ解決時に実行） | `.claude/skills/management/knowledge/SKILL.md` |
-| `/critical-review` | 設計書・計画書に対する批判的レビューを作成（連続起業家・プロPM視点） | `.claude/skills/management/critical-review/SKILL.md` |
-| `/pre-mortem` | Pre-Mortem（事前検死）を実施。1年後に完全失敗した想定で具体的シナリオを生成 | `.claude/skills/management/pre-mortem/SKILL.md` |
-| `review-router` | 「レビューして」で文脈から適切なレビュースキルを自動選択（自動参照・非ユーザー呼出し） | `.claude/skills/management/review-router/SKILL.md` |
-| `/weekly-plan` | 週次計画を生成（並列サブエージェントで収集→戦略分析→批判的レビュー→計画出力） | `.claude/skills/management/weekly-plan/SKILL.md` |
-| `/weekly-review` | 週次レビューを生成（実績収集→計画差分分析→成果・課題・学びを記録） | `.claude/skills/management/weekly-review/SKILL.md` |
-| `/growth-loops` | 持続的成長ループ（フライホイール）を設計・評価 | `.claude/skills/management/growth-loops/SKILL.md` |
-| `/monetization-strategy` | 収益化戦略を 3-5 案ブレインストーム（適合度・リスク・検証実験） | `.claude/skills/management/monetization-strategy/SKILL.md` |
-| `/north-star-metric` | North Star Metric と Input Metrics を定義 | `.claude/skills/management/north-star-metric/SKILL.md` |
-| `/deploy` | Feature → develop → main マージ＆デプロイ（テスト・型チェック・ビルド付き） | `.claude/skills/dev/deploy/SKILL.md` |
-| `/reset-git-history` | Git 履歴リセット（`.git` 肥大化時に実行） | `.claude/skills/dev/reset-git-history/SKILL.md` |
-| `/run-tests` | テスト実行（ユニット / E2E / 型チェック） | `.claude/skills/dev/run-tests/SKILL.md` |
-| `/review-tests` | コード変更に対応するテストの確認・作成・更新 | `.claude/skills/dev/review-tests/SKILL.md` |
-| `/review-packages` | packages/ のコード品質を8人の専門家パネルでレビュー（単体/横断） | `.claude/skills/dev/review-packages/SKILL.md` |
-| `/review-types` | プロジェクト全体の型安全性レビュー（tsc エラー修正・any/as 検出・テスト型整合性） | `.claude/skills/dev/review-types/SKILL.md` |
-| `/review-ui-consistency` | ページ横断の UI 一貫性レビュー（アイコン・色・コンポーネント・レスポンシブ・状態パターン） | `.claude/skills/dev/review-ui-consistency/SKILL.md` |
-| `/review-feature` | features/ の feature ドメインコードを専門家パネルでレビュー（ドメイン固有パネリスト自動追加） | `.claude/skills/dev/review-feature/SKILL.md` |
-| `/review-ads` | ads ドメインのコードレビュー（収益最適化・法務・広告計測の専門パネリスト付き） | `.claude/skills/dev/review-ads/SKILL.md` |
-| `/review-app` | App Router 層（ルーティング・SEO・メタデータ・エラー境界）を7人の専門家パネルでレビュー | `.claude/skills/dev/review-app/SKILL.md` |
-| `create-skill` | スキル作成時の設計ガイド（自動参照・`user-invocable: false`） | `.claude/skills/dev/create-skill/SKILL.md` |
-| `/security-review` | セキュリティレビュー（OWASP Top 10 + D1/R2/Cloudflare 固有チェック） | `.claude/skills/dev/security-review/SKILL.md` |
-| `/verification-loop` | 6段階品質ゲート（ビルド→型→lint→テスト→セキュリティ→diff） | `.claude/skills/dev/verification-loop/SKILL.md` |
-| `/continuous-learning` | セッション中のパターン抽出・learned/ への自動保存 | `.claude/skills/dev/continuous-learning/SKILL.md` |
-| `/strategic-compact` | 長時間セッション向けコンテキスト管理ガイド | `.claude/skills/dev/strategic-compact/SKILL.md` |
+### ユーザー呼出し（88個）
+`/deploy`, `/publish-*`, `/generate-*`, `/render-*`, `/post-*`, `/register-*`, `/sync-*`, `/pull-*`, `/push-*` 等。
+全スキルの一覧は `.claude/skills/` 配下の各 SKILL.md frontmatter を参照。
 
 ## ローカル開発環境
 

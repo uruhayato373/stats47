@@ -1,3 +1,9 @@
+---
+name: r2-du
+description: リモート R2 のディレクトリ別容量を調査する（du 相当）。Use when user says "R2容量", "R2サイズ", "r2-du". プレフィックス・集計レベル指定可能.
+disable-model-invocation: true
+---
+
 リモート R2 のディレクトリ別容量を調査する（du 相当）。
 
 ## 概要

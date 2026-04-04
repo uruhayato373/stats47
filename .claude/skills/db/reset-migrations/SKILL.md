@@ -1,6 +1,6 @@
 ---
 name: reset-migrations
-description: Drizzle マイグレーションファイルを1本にリセット（ジャーナル・スナップショット・d1_migrations を再構築）
+description: Drizzle マイグレーションファイルを1本にリセットする。Use when user says "マイグレーションリセット", "reset-migrations", "マイグレーション整理". 10本超 or 不整合時に実行.
 disable-model-invocation: true
 ---
 

@@ -1,3 +1,9 @@
+---
+name: purge-cache-r2
+description: "[廃止] R2 ISR キャッシュパージ。ISR は 2026-03 に廃止済みのため本スキルは使用不要. Use when user says \"キャッシュパージ\", \"purge-cache-r2\"."
+disable-model-invocation: true
+---
+
 **[廃止] ISR キャッシュは 2026-03 に廃止済み。stats47-cache バケットは使用していない。**
 
 全ページ SSR 化に伴い、R2 ISR キャッシュ（stats47-cache）は不要となった。

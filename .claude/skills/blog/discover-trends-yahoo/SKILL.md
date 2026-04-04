@@ -1,3 +1,9 @@
+---
+name: discover-trends-yahoo
+description: Yahoo!ニュース トピックス RSS からトレンドを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "Yahooトレンド", "Yahoo!ニューストレンド". 国内・経済・地域ニュースに強い.
+disable-model-invocation: true
+---
+
 Yahoo!ニュース トピックス RSS から日本の主要ニューストレンドを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
 
 ## 用途

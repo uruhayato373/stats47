@@ -1,3 +1,8 @@
+---
+name: fetch-x-data
+description: X (Twitter) API v2 からツイートデータを取得する。Use when user says "Xデータ", "Twitter分析", "ツイート確認". インプレッション・いいね・RT分析対応.
+---
+
 X (Twitter) API v2 からアカウントのツイートデータ（インプレッション・いいね・リツイート等）を取得する。
 
 ## 用途

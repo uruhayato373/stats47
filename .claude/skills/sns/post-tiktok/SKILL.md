@@ -1,3 +1,9 @@
+---
+name: post-tiktok
+description: TikTok 投稿用キャプションを生成しローカルに保存する。Use when user says "TikTokキャプション", "TikTok作成". ランキングデータからキャプション自動生成.
+disable-model-invocation: true
+---
+
 TikTok 投稿用コンテンツ（キャプション）を生成してローカル R2 に保存する。
 
 ## 引数

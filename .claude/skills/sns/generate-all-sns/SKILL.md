@@ -1,5 +1,7 @@
 ---
-description: 指定ランキングキーの全 SNS コンテンツ（data.json → キャプション → 動画・画像）を一括生成
+name: generate-all-sns
+description: 指定ランキングキーの全 SNS コンテンツ（data.json → キャプション → 動画・画像）を一括生成する。Use when user says "SNS一括生成", "全SNS生成". data.json → キャプション → レンダリングをワンストップ実行.
+disable-model-invocation: true
 argument-hint: <rankingKey> [--skip-render] [--skip-captions]
 user-invocable: true
 ---

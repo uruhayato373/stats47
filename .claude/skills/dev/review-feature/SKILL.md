@@ -1,6 +1,6 @@
 ---
 name: review-feature
-description: apps/web/src/features/ 配下の feature ドメインコードを専門家パネルでレビュー。アーキテクチャ・型安全性・セキュリティ・テスト・パフォーマンスを多角評価。
+description: feature ドメインコードを専門家パネルでレビューする。Use when user says "feature レビュー", "review-feature", "ドメインレビュー". ドメイン固有パネリスト自動追加.
 disable-model-invocation: true
 argument-hint: "[feature-name]"
 ---

@@ -1,3 +1,9 @@
+---
+name: generate-utm-url
+description: SNS や note 記事の stats47.jp リンクに付与する UTM パラメータの生成ルールを提供する。Use when user says "UTM生成", "UTMパラメータ". 各 post-* スキルから参照される.
+disable-model-invocation: true
+---
+
 SNS 投稿・note 記事で使用する stats47.jp リンクの UTM パラメータ生成ルール。
 各 `/post-*` スキルから参照される。
 

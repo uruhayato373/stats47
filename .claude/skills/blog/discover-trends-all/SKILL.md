@@ -1,3 +1,8 @@
+---
+name: discover-trends-all
+description: 全トレンドソースを一括実行し統合レポートを生成する。Use when user says "トレンド全部", "全ソーストレンド", "トレンド一括". クロスソースヒットを優先的に検出.
+---
+
 全トレンドソース（Google Trends・はてブ・Google News・Yahoo!ニュース・GSC・note.com）を一括実行し、統合レポートを生成する。
 
 ## 用途

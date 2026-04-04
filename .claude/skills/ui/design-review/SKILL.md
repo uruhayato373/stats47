@@ -1,3 +1,9 @@
+---
+name: design-review
+description: melta-ui デザインシステム準拠レビューを実行する。Use when user says "デザインレビュー", "UI違反チェック", "デザインシステム確認". 7カテゴリ走査・重大度判定・修正提案.
+disable-model-invocation: true
+---
+
 React/TSX コンポーネントを melta-ui デザインシステムに照らしてレビューし、違反を検出・分類・修正提案する。
 
 ## 引数

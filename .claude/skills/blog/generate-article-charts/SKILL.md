@@ -1,3 +1,8 @@
+---
+name: generate-article-charts
+description: 記事用 JSON データから SVG チャートを生成し記事に埋め込む。Use when user says "チャート生成", "記事チャート", "グラフ生成". 折れ線・タイルマップ・散布図等に対応.
+---
+
 ブログ記事の `data/` ディレクトリにある JSON データから SVG チャートを生成し、記事の Markdown に埋め込む。
 
 ## 用途

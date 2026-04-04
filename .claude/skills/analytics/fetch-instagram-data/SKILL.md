@@ -1,3 +1,8 @@
+---
+name: fetch-instagram-data
+description: Instagram Graph API からインサイトデータを取得する。Use when user says "Instagram分析", "IG データ", "インスタ確認". リーチ・エンゲージメント・投稿別分析対応.
+---
+
 Instagram Graph API からビジネスアカウントのインサイトデータ（リーチ・インプレッション・エンゲージメント等）を取得する。
 
 ## 用途

@@ -1,6 +1,6 @@
 ---
 name: find-quote-rt
-description: X (Twitter) のバズツイートを browser-use CLI で検索し、stats47 データと照合して引用RT候補を提示する
+description: X のバズツイートを browser-use CLI で検索し stats47 データと照合して引用RT候補を提示する。Use when user says "引用RT", "バズツイート検索", "quote RT". データ画像付き引用RTでインプレッション獲得.
 disable-model-invocation: true
 argument-hint: "[テーマ] [--post]"
 ---

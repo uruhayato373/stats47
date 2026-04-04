@@ -1,3 +1,9 @@
+---
+name: post-sns-captions
+description: 全 SNS（Instagram/X/YouTube/TikTok）のキャプションを一括生成しローカルに保存する。Use when user says "キャプション一括生成", "全SNSキャプション". 各プラットフォーム別スキルに委譲.
+disable-model-invocation: true
+---
+
 全 SNS（Instagram / X / YouTube / TikTok）の投稿用キャプションを一括生成してローカルに保存する。
 各プラットフォームの個別スキルに委譲して順次実行する。
 

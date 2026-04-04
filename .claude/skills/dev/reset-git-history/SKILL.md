@@ -1,3 +1,9 @@
+---
+name: reset-git-history
+description: Git 履歴をリセットして .git を軽量化する。Use when user says "Git履歴リセット", "reset-git-history", ".gitが大きい". force push で新リポジトリに作り直し.
+disable-model-invocation: true
+---
+
 Git 履歴をリセットして `.git` を軽量化する。
 
 ## 概要

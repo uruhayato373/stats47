@@ -1,6 +1,6 @@
 ---
 name: publish-tiktok
-description: browser-use CLI で TikTok Studio の予約投稿を自動設定する（動画・キャプション・予約日時）
+description: browser-use CLI で TikTok Studio の予約投稿を自動設定する。Use when user says "TikTok投稿", "TikTok予約投稿". 動画・キャプション・予約日時を自動操作.
 disable-model-invocation: true
 argument-hint: "<rankingKey> --schedule YYYY-MM-DD HH:MM [--domain ranking]"
 ---

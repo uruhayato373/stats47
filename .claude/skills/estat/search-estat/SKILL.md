@@ -1,3 +1,8 @@
+---
+name: search-estat
+description: e-Stat API で統計表を検索し statsDataId を特定する。Use when user says "e-Stat検索", "統計データ探して", "statsDataId". キーワード・分野コード・政府統計コードで検索.
+---
+
 e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ## 事前確認

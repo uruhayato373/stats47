@@ -1,6 +1,7 @@
 ---
 name: review-types
-description: プロジェクト全体の型安全性をレビュー。tsc エラー修正、any/as キャスト検出、型推論改善、テスト型整合性チェック。
+description: プロジェクト全体の型安全性をレビューする。Use when user says "型レビュー", "review-types", "tsc エラー直して". any/as キャスト検出・型推論改善.
+disable-model-invocation: true
 ---
 
 プロジェクト全体を型ファーストの観点でレビューし、型エラーの修正と型安全性の改善を行う。

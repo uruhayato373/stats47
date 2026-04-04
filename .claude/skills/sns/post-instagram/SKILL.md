@@ -1,3 +1,9 @@
+---
+name: post-instagram
+description: Instagram 投稿用キャプションを生成しローカルに保存する。Use when user says "Instagramキャプション", "IG投稿作成". 画像は /render-sns-stills で別途生成.
+disable-model-invocation: true
+---
+
 Instagram 投稿用キャプションを生成してローカルに保存する。
 画像生成は `/render-sns-stills` スキルで別途実行する。
 

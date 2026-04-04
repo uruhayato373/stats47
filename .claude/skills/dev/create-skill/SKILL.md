@@ -1,7 +1,8 @@
 ---
 name: create-skill
-description: Claude Code スキルの作成・設計ガイド。新しいスキルを作成するとき、既存スキルを改善するときに自動で参照する背景知識。
+description: Claude Code スキルの作成・設計ガイド。新しいスキルを作成するとき、既存スキルを改善するときに自動参照する背景知識.
 user-invocable: false
+disable-model-invocation: true
 ---
 
 Claude Code スキルの設計・実装ガイド。公式ドキュメント（code.claude.com/docs/en/skills）とこのプロジェクトの規約を統合。

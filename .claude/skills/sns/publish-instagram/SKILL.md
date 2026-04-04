@@ -1,6 +1,6 @@
 ---
 name: publish-instagram
-description: browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定する（カルーセル・リール・キャプション・予約日時）
+description: browser-use CLI で Meta Business Suite から Instagram の予約投稿を自動設定する。Use when user says "Instagram投稿", "IG予約投稿". カルーセル・リール・キャプション・予約日時を自動操作.
 disable-model-invocation: true
 argument-hint: "<rankingKey> --schedule YYYY-MM-DD HH:MM [--type carousel|reel] [--domain ranking|compare|correlation]"
 ---

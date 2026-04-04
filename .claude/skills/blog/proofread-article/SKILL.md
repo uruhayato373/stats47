@@ -1,5 +1,6 @@
 ---
-description: ブログ記事の公開前校正チェック（フロントマター・本文・チャート・出典・リンク）。ユーザーが「校正して」「proofread」「チェックして」と言ったとき、または /blog/ URL を渡して校正を依頼したときに使用する。
+name: proofread-article
+description: ブログ記事の公開前校正チェックを実行する。Use when user says "校正して", "proofread", "チェックして", "公開前チェック". フロントマター・本文・チャート・出典・リンクを検証.
 argument-hint: <記事パスまたは slug>
 ---
 

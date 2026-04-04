@@ -1,3 +1,9 @@
+---
+name: render-bar-chart-race
+description: Bar Chart Race 動画を一括レンダリングする（YouTube/Instagram/TikTok）。Use when user says "バーチャートレースレンダリング", "BCR レンダリング". Chrome 必須.
+disable-model-invocation: true
+---
+
 `.local/r2/sns/bar-chart-race/` 配下の Bar Chart Race 動画を一括レンダリングする。
 
 ## 前提条件
