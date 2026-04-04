@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 540">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="600" height="540" fill="#fafafa"/>
+
+<!-- Title -->
+<text x="300" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">教育費の品目別 Q5/Q1倍率</text>
+<text x="300" y="50" text-anchor="middle" font-size="11" fill="#64748b">Q5（年収1,242万円）÷ Q1（年収262万円）の支出倍率 ── 2024年</text>
+
+<!-- Plot background -->
+<rect x="150" y="70" width="410" height="415" fill="white" stroke="#e2e8f0"/>
+
+<!-- Grid lines -->
+<line x1="150" y1="70" x2="150" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="150" y="503" text-anchor="middle" font-size="10" fill="#64748b">0倍</text>
+<line x1="218.33333333333331" y1="70" x2="218.33333333333331" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="218.33333333333331" y="503" text-anchor="middle" font-size="10" fill="#64748b">10倍</text>
+<line x1="286.66666666666663" y1="70" x2="286.66666666666663" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="286.66666666666663" y="503" text-anchor="middle" font-size="10" fill="#64748b">20倍</text>
+<line x1="355" y1="70" x2="355" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="355" y="503" text-anchor="middle" font-size="10" fill="#64748b">30倍</text>
+<line x1="423.3333333333333" y1="70" x2="423.3333333333333" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="423.3333333333333" y="503" text-anchor="middle" font-size="10" fill="#64748b">40倍</text>
+<line x1="491.6666666666667" y1="70" x2="491.6666666666667" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="491.6666666666667" y="503" text-anchor="middle" font-size="10" fill="#64748b">50倍</text>
+<line x1="560" y1="70" x2="560" y2="485" stroke="#f1f5f9" stroke-width="1"/>
+<text x="560" y="503" text-anchor="middle" font-size="10" fill="#64748b">60倍</text>
+<line x1="182.39" y1="70" x2="182.39" y2="485" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="188.39" y="475" text-anchor="start" font-size="9" fill="#64748b">年収格差</text>
+<text x="188.39" y="485" text-anchor="start" font-size="9" fill="#64748b" font-weight="bold">4.74倍</text>
+<text x="140" y="154.5" text-anchor="end" font-size="12" fill="#1e293b" font-weight="bold">補習教育</text>
+<rect x="150" y="129.5" width="383.35" height="40" fill="#dc2626" rx="4"/>
+<text x="541.35" y="154.5" text-anchor="start" font-size="14" font-weight="bold" fill="#dc2626">56.1倍</text>
+<text x="150" y="183.5" font-size="9" fill="#94a3b8">Q1: 月138円 → Q5: 月7,747円</text>
+<text x="140" y="218.5" text-anchor="end" font-size="12" fill="#1e293b" font-weight="normal">教育全体</text>
+<rect x="150" y="193.5" width="114.80000000000001" height="40" fill="#f97316" rx="4"/>
+<text x="272.8" y="218.5" text-anchor="start" font-size="14" font-weight="bold" fill="#f97316">16.8倍</text>
+<text x="140" y="282.5" text-anchor="end" font-size="12" fill="#1e293b" font-weight="normal">教科書・学習参考教材</text>
+<rect x="150" y="257.5" width="93.61666666666667" height="40" fill="#f59e0b" rx="4"/>
+<text x="251.61666666666667" y="282.5" text-anchor="start" font-size="14" font-weight="bold" fill="#f59e0b">13.7倍</text>
+<text x="140" y="346.5" text-anchor="end" font-size="12" fill="#1e293b" font-weight="normal">授業料等</text>
+<rect x="150" y="321.5" width="92.93333333333334" height="40" fill="#f59e0b" rx="4"/>
+<text x="250.93333333333334" y="346.5" text-anchor="start" font-size="14" font-weight="bold" fill="#f59e0b">13.6倍</text>
+<text x="140" y="410.5" text-anchor="end" font-size="12" fill="#1e293b" font-weight="normal">月謝類</text>
+<rect x="150" y="385.5" width="43.73333333333335" height="40" fill="#3b82f6" rx="4"/>
+<text x="201.73333333333335" y="410.5" text-anchor="start" font-size="14" font-weight="bold" fill="#3b82f6">6.4倍</text>
+<text x="300" y="530" text-anchor="middle" font-size="10" fill="#94a3b8">家計調査（2024年）二人以上の世帯・月額 ── stats47.jp</text>
+</svg>

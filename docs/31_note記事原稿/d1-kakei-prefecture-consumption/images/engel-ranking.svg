@@ -1,0 +1,75 @@
+<svg width="560" height="340" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif">
+  <rect width="560" height="340" fill="#f9fafb" rx="6"/>
+  <text x="280" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2937">エンゲル係数の都道府県ランキング</text>
+  <text x="280" y="42" text-anchor="middle" font-size="11" fill="#6b7280">食費 ÷ 消費支出（2024年）全国平均 30.0%</text>
+
+  <!-- High side -->
+  <rect x="20" y="56" width="250" height="28" rx="6" fill="#dc2626"/>
+  <text x="145" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">エンゲル係数が高い</text>
+
+  <!-- 1. 兵庫 33.4% -->
+  <rect x="20" y="92" width="250" height="40" rx="4" fill="#fef2f2"/>
+  <circle cx="42" cy="112" r="12" fill="#dc2626"/>
+  <text x="42" y="116" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">1</text>
+  <text x="60" y="116" font-size="13" font-weight="bold" fill="#1f2937">兵庫県</text>
+  <text x="260" y="116" text-anchor="end" font-size="16" font-weight="bold" fill="#dc2626">33.4%</text>
+
+  <!-- 2. 大阪 33.0% -->
+  <rect x="20" y="136" width="250" height="40" rx="4" fill="#ffffff"/>
+  <circle cx="42" cy="156" r="12" fill="#dc2626"/>
+  <text x="42" y="160" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">2</text>
+  <text x="60" y="160" font-size="13" font-weight="bold" fill="#1f2937">大阪府</text>
+  <text x="260" y="160" text-anchor="end" font-size="16" font-weight="bold" fill="#dc2626">33.0%</text>
+
+  <!-- 3. 青森 32.2% -->
+  <rect x="20" y="180" width="250" height="40" rx="4" fill="#fef2f2"/>
+  <circle cx="42" cy="200" r="12" fill="#ef4444"/>
+  <text x="42" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">3</text>
+  <text x="60" y="204" font-size="13" fill="#1f2937">青森県</text>
+  <text x="260" y="204" text-anchor="end" font-size="16" font-weight="bold" fill="#dc2626">32.2%</text>
+
+  <!-- 4. 岐阜 31.9% -->
+  <rect x="20" y="224" width="250" height="40" rx="4" fill="#ffffff"/>
+  <circle cx="42" cy="244" r="12" fill="#f87171"/>
+  <text x="42" y="248" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">4</text>
+  <text x="60" y="248" font-size="13" fill="#1f2937">岐阜県</text>
+  <text x="260" y="248" text-anchor="end" font-size="16" font-weight="bold" fill="#dc2626">31.9%</text>
+
+  <!-- Low side -->
+  <rect x="290" y="56" width="250" height="28" rx="6" fill="#16a34a"/>
+  <text x="415" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">エンゲル係数が低い</text>
+
+  <!-- 47. 栃木 26.8% -->
+  <rect x="290" y="92" width="250" height="40" rx="4" fill="#f0fdf4"/>
+  <circle cx="312" cy="112" r="12" fill="#16a34a"/>
+  <text x="312" y="116" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">47</text>
+  <text x="332" y="116" font-size="13" font-weight="bold" fill="#1f2937">栃木県</text>
+  <text x="530" y="116" text-anchor="end" font-size="16" font-weight="bold" fill="#16a34a">26.8%</text>
+
+  <!-- 46. 鳥取 27.3% -->
+  <rect x="290" y="136" width="250" height="40" rx="4" fill="#ffffff"/>
+  <circle cx="312" cy="156" r="12" fill="#16a34a"/>
+  <text x="312" y="160" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">46</text>
+  <text x="332" y="160" font-size="13" font-weight="bold" fill="#1f2937">鳥取県</text>
+  <text x="530" y="160" text-anchor="end" font-size="16" font-weight="bold" fill="#16a34a">27.3%</text>
+
+  <!-- 45. 長野 27.4% -->
+  <rect x="290" y="180" width="250" height="40" rx="4" fill="#f0fdf4"/>
+  <circle cx="312" cy="200" r="12" fill="#22c55e"/>
+  <text x="312" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">45</text>
+  <text x="332" y="204" font-size="13" fill="#1f2937">長野県</text>
+  <text x="530" y="204" text-anchor="end" font-size="16" font-weight="bold" fill="#16a34a">27.4%</text>
+
+  <!-- 44. 岩手 27.4% -->
+  <rect x="290" y="224" width="250" height="40" rx="4" fill="#ffffff"/>
+  <circle cx="312" cy="244" r="12" fill="#22c55e"/>
+  <text x="312" y="248" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">44</text>
+  <text x="332" y="248" font-size="13" fill="#1f2937">岩手県</text>
+  <text x="530" y="248" text-anchor="end" font-size="16" font-weight="bold" fill="#16a34a">27.4%</text>
+
+  <!-- Note -->
+  <rect x="60" y="280" width="440" height="32" rx="6" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+  <text x="280" y="301" text-anchor="middle" font-size="11" fill="#92400e">エンゲル係数が低い＝豊かとは限らない。支出の構成がどこに偏るかの指標。</text>
+
+  <text x="280" y="334" text-anchor="middle" font-size="9" fill="#9ca3af">家計調査（総務省）2024年</text>
+</svg>

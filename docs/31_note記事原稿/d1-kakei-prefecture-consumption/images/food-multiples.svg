@@ -1,0 +1,57 @@
+<svg width="560" height="420" viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif">
+  <rect width="560" height="420" fill="#f9fafb" rx="6"/>
+  <text x="280" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2937">名産品の消費額は全国平均の何倍？</text>
+  <text x="280" y="42" text-anchor="middle" font-size="11" fill="#6b7280">各品目1位の都道府県 × 全国平均との倍率</text>
+
+  <!-- Bar chart - horizontal bars with multiplier -->
+  <!-- 1. カステラ 長崎 7.3x -->
+  <text x="125" y="78" text-anchor="end" font-size="12" fill="#1f2937">カステラ <tspan font-weight="bold" fill="#EA580C">長崎</tspan></text>
+  <rect x="135" y="64" width="290" height="22" rx="4" fill="#EA580C"/>
+  <text x="431" y="80" font-size="12" font-weight="bold" fill="#EA580C">7.3倍</text>
+
+  <!-- 2. 桃 福島 6.3x -->
+  <text x="125" y="114" text-anchor="end" font-size="12" fill="#1f2937">桃 <tspan font-weight="bold" fill="#EA580C">福島</tspan></text>
+  <rect x="135" y="100" width="250" height="22" rx="4" fill="#f97316"/>
+  <text x="391" y="116" font-size="12" font-weight="bold" fill="#f97316">6.3倍</text>
+
+  <!-- 3. 梨 鳥取 4.7x -->
+  <text x="125" y="150" text-anchor="end" font-size="12" fill="#1f2937">梨 <tspan font-weight="bold" fill="#EA580C">鳥取</tspan></text>
+  <rect x="135" y="136" width="188" height="22" rx="4" fill="#fb923c"/>
+  <text x="329" y="152" font-size="12" font-weight="bold" fill="#fb923c">4.7倍</text>
+
+  <!-- 4. かつお 高知 4.5x -->
+  <text x="125" y="186" text-anchor="end" font-size="12" fill="#1f2937">かつお <tspan font-weight="bold" fill="#EA580C">高知</tspan></text>
+  <rect x="135" y="172" width="180" height="22" rx="4" fill="#fb923c"/>
+  <text x="321" y="188" font-size="12" font-weight="bold" fill="#fb923c">4.5倍</text>
+
+  <!-- 5. メロン 茨城 4.0x -->
+  <text x="125" y="222" text-anchor="end" font-size="12" fill="#1f2937">メロン <tspan font-weight="bold" fill="#EA580C">茨城</tspan></text>
+  <rect x="135" y="208" width="180" height="22" rx="4" fill="#fdba74"/>
+  <text x="321" y="224" font-size="12" font-weight="bold" fill="#92400e">4.0倍</text>
+
+  <!-- 6. かに 鳥取 3.1x -->
+  <text x="125" y="258" text-anchor="end" font-size="12" fill="#1f2937">かに <tspan font-weight="bold" fill="#EA580C">鳥取</tspan></text>
+  <rect x="135" y="244" width="140" height="22" rx="4" fill="#fdba74"/>
+  <text x="281" y="260" font-size="12" font-weight="bold" fill="#92400e">3.1倍</text>
+
+  <!-- 7. 中華そば 山形 2.6x -->
+  <text x="125" y="294" text-anchor="end" font-size="12" fill="#1f2937">中華そば <tspan font-weight="bold" fill="#EA580C">山形</tspan></text>
+  <rect x="135" y="280" width="117" height="22" rx="4" fill="#fed7aa"/>
+  <text x="258" y="296" font-size="12" font-weight="bold" fill="#92400e">2.6倍</text>
+
+  <!-- 8. しゅうまい 神奈川 2.5x -->
+  <text x="125" y="330" text-anchor="end" font-size="12" fill="#1f2937">しゅうまい <tspan font-weight="bold" fill="#EA580C">神奈川</tspan></text>
+  <rect x="135" y="316" width="113" height="22" rx="4" fill="#fed7aa"/>
+  <text x="254" y="332" font-size="12" font-weight="bold" fill="#92400e">2.5倍</text>
+
+  <!-- 9. ぶり 富山 2.5x -->
+  <text x="125" y="366" text-anchor="end" font-size="12" fill="#1f2937">ぶり <tspan font-weight="bold" fill="#EA580C">富山</tspan></text>
+  <rect x="135" y="352" width="113" height="22" rx="4" fill="#fed7aa"/>
+  <text x="254" y="368" font-size="12" font-weight="bold" fill="#92400e">2.5倍</text>
+
+  <!-- Baseline -->
+  <line x1="180" y1="58" x2="180" y2="382" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="180" y="400" text-anchor="middle" font-size="9" fill="#9ca3af">1倍（全国平均）</text>
+
+  <text x="280" y="414" text-anchor="middle" font-size="9" fill="#9ca3af">家計調査（総務省）2024年・年間支出額</text>
+</svg>

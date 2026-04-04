@@ -1,0 +1,45 @@
+<svg width="560" height="320" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif">
+  <rect width="560" height="320" fill="#f9fafb" rx="6"/>
+  <text x="280" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2937">教育費の都道府県格差</text>
+  <text x="280" y="42" text-anchor="middle" font-size="11" fill="#6b7280">二人以上の世帯・年間（2024年）</text>
+
+  <!-- Education total comparison -->
+  <g transform="translate(0, 60)">
+    <!-- Saitama -->
+    <rect x="30" y="0" width="230" height="100" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+    <text x="145" y="24" text-anchor="middle" font-size="11" font-weight="bold" fill="#2563eb">1位</text>
+    <text x="145" y="50" text-anchor="middle" font-size="24" font-weight="900" fill="#1f2937">埼玉県</text>
+    <text x="145" y="80" text-anchor="middle" font-size="28" font-weight="900" fill="#2563eb">25.8万円</text>
+  </g>
+
+  <g transform="translate(0, 60)">
+    <!-- Akita -->
+    <rect x="300" y="0" width="230" height="100" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+    <text x="415" y="24" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">47位</text>
+    <text x="415" y="50" text-anchor="middle" font-size="24" font-weight="900" fill="#1f2937">秋田県</text>
+    <text x="415" y="80" text-anchor="middle" font-size="28" font-weight="900" fill="#dc2626">3.0万円</text>
+  </g>
+
+  <!-- Arrow with multiplier -->
+  <text x="280" y="125" text-anchor="middle" font-size="32" font-weight="900" fill="#EA580C">8.7倍</text>
+
+  <!-- Juku comparison -->
+  <g transform="translate(0, 185)">
+    <text x="280" y="0" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">うち補習教育（塾・家庭教師）</text>
+
+    <!-- Saitama juku bar -->
+    <text x="95" y="30" text-anchor="end" font-size="12" fill="#1f2937">埼玉</text>
+    <rect x="105" y="18" width="350" height="20" rx="4" fill="#2563eb"/>
+    <text x="461" y="33" font-size="11" font-weight="bold" fill="#2563eb">71,550円</text>
+
+    <!-- Akita juku bar -->
+    <text x="95" y="60" text-anchor="end" font-size="12" fill="#1f2937">秋田</text>
+    <rect x="105" y="48" width="34" height="20" rx="4" fill="#dc2626"/>
+    <text x="145" y="63" font-size="11" font-weight="bold" fill="#dc2626">6,929円</text>
+
+    <text x="280" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#EA580C">10.3倍の格差</text>
+    <text x="280" y="108" text-anchor="middle" font-size="10" fill="#6b7280">秋田は学力テスト全国トップ級 ── 公教育の質が高く塾の必要性が低い</text>
+  </g>
+
+  <text x="280" y="312" text-anchor="middle" font-size="9" fill="#9ca3af">家計調査（総務省）2024年</text>
+</svg>
