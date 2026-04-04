@@ -8,12 +8,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-
-
 import { findRankingItemsByCategory, listSurveys, listRankingValues, listTopRankingValuesBatch } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
+
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -26,7 +25,6 @@ import {
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
-
 
 import type { Metadata } from "next";
 

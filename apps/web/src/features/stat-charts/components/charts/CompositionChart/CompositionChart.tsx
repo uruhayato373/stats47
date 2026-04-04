@@ -1,17 +1,15 @@
-import { and, asc, eq } from "drizzle-orm";
-
 import { getDrizzle, componentData as componentDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
+import { and, asc, eq } from "drizzle-orm";
 
-import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
+import { toCompositionChartData, type CompositionChartData } from "../../../adapters/toCompositionChartData";
 import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
 
 import { CompositionChartClient } from "./CompositionChartClient";
 
-import type { CompositionChartData } from "../../../adapters/toCompositionChartData";
-import type { StatsSchema } from "@stats47/types";
 import type { DashboardItemProps } from "../../../types";
+import type { StatsSchema } from "@stats47/types";
 
 /**
  * D1 の component_data テーブルから CompositionChartData を構築する。

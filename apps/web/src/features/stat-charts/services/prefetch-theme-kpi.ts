@@ -1,12 +1,12 @@
-import type { GetStatsDataParams } from "@stats47/estat-api/server";
 import { logger } from "@stats47/logger";
 
 import { toKpiCardData } from "../adapters";
 
 import { fetchEstatDataAllAreas } from "./fetchEstatData";
 
+import type { KpiCardClientProps } from "../components";
 import type { PageComponent } from "./load-page-components";
-import type { KpiCardClientProps } from "../components/cards/KpiCard/KpiCardClient";
+import type { GetStatsDataParams } from "@stats47/estat-api/server";
 
 /**
  * テーマページ用: KPI カードの e-Stat データを全都道府県分プリフェッチ
