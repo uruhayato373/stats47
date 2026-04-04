@@ -5,7 +5,7 @@
 タイムラインスクロール + `article[role=article]` の `aria-label` から一括抽出する。
 
 **マッチング注意点:**
-- 古いツイート（browser-publisher 以前の手動投稿）は stats47 URL を含まないものが多い → ranking_name 部分一致のみでマッチ（精度低い）
+- 古いツイート（自動投稿導入以前の手動投稿）は stats47 URL を含まないものが多い → ranking_name 部分一致のみでマッチ（精度低い）
 - caption backfill 後は caption prefix 先頭80文字マッチが有効化され、カバレッジが大幅に改善する
 - メトリクス収集時にツイートテキストを取得するので、caption が NULL のレコードはここで自動 backfill する
 

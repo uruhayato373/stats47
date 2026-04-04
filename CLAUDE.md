@@ -60,12 +60,13 @@ packages/
 |---|---|
 | `task-router` | ユーザーの自然言語指示から最適なエージェント・スキルを自動判定（`user-invocable: false`、Claude が内部参照） |
 
-### Tier 1: Orchestrator（統括）
+### Tier 1: 主力エージェント
 
-| エージェント | 役割 | 委譲先 |
+| エージェント | スキル数 | 担当 |
 |---|---|---|
-| `content-orchestrator` | コンテンツ制作ワークフローの統括 | blog-editor, sns-producer, sns-renderer, note-manager, browser-publisher, data-pipeline |
-| `strategy-advisor` | 戦略・PDCA・レビュールーティング | code-reviewer, ui-reviewer, seo-auditor |
+| `x-strategist` | 6 | X 投稿・分析・パフォーマンス最適化 |
+| `youtube-strategist` | 7 | YouTube 企画→制作→公開→分析の全工程 |
+| `seo-auditor` | 5 | サイト SEO・パフォーマンス・検索最適化 |
 
 ### Tier 2: Specialist（専門）
 
@@ -76,11 +77,8 @@ packages/
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
 | `blog-editor` | 17 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
-| `sns-producer` | 12 | SNS コンテンツ生成（data.json・キャプション・UTM） |
 | `sns-renderer` | 9 | Remotion レンダリング・プレビュー |
-| `browser-publisher` | 2 | ブラウザ自動投稿（X, note） |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
-| `seo-auditor` | 7 | SEO 監査・アナリティクスデータ収集 |
 | `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
 | `ui-reviewer` | 2 | melta-ui 準拠・UI/UX パネルレビュー |
 | `devops-runner` | 5 | テスト・デプロイ・Git 操作 |
@@ -90,13 +88,13 @@ packages/
 
 | シナリオ | エージェント連携 |
 |---|---|
-| ランキング追加→SNS一式 | data-pipeline → db-manager → sns-producer → sns-renderer → browser-publisher |
+| ランキング追加→SNS一式 | data-pipeline → db-manager → x-strategist + youtube-strategist |
+| トレンド→X投稿 | blog-editor(discover-trends) → x-strategist |
+| YouTube動画制作 | youtube-strategist → sns-renderer |
 | トレンド→ブログ記事 | blog-editor → db-manager(/sync-articles) |
-| note 記事制作→投稿 | note-manager → browser-publisher |
-| 週次 PDCA | strategy-advisor（内部で5並列サブエージェント） |
-| コード変更→レビュー→デプロイ | code-reviewer → devops-runner |
-| テーマダッシュボード設計 | theme-designer → data-pipeline（未登録指標登録）→ ui-reviewer |
-| テーマチャート強化 | theme-enhancer（audit→design→insert）→ ui-reviewer |
+| 週次 PDCA | strategy-advisor |
+| コード変更→デプロイ | code-reviewer → devops-runner |
+| テーマダッシュボード設計 | theme-designer → data-pipeline → ui-reviewer |
 
 ## スキル一覧
 

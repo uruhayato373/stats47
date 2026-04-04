@@ -1,11 +1,11 @@
 ---
 name: update-sns-metrics
-description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し D1 に記録する。Use when user says "メトリクス更新", "SNS数値取得". X/IG/TT は browser-use、YouTube は API.
+description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し D1 に記録する。Use when user says "メトリクス更新", "SNS数値取得". X は browser-use、YouTube は API.
 disable-model-invocation: true
-argument-hint: [--platform x|instagram|youtube|tiktok|all]
+argument-hint: [--platform x|youtube|all]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し D1 に記録する。X/Instagram/TikTok は browser-use CLI、YouTube は Data API v3 を使用する。
+各 SNS プラットフォームからメトリクスを取得し D1 に記録する。X は browser-use CLI、YouTube は Data API v3 を使用する。
 
 ### 期待カバレッジ
 
@@ -19,7 +19,7 @@ argument-hint: [--platform x|instagram|youtube|tiktok|all]
 ## 引数
 
 ```
-/update-sns-metrics [--platform x|instagram|youtube|tiktok|all] [--skip-backfill]
+/update-sns-metrics [--platform x|youtube|all] [--skip-backfill]
 ```
 
 - `--platform`（任意）: 取得対象（デフォルト: `all`）
@@ -74,21 +74,9 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 
 ---
 
-### Instagram
-
-`references/platform-instagram.md` の手順に従って実行する。
-
----
-
 ### YouTube
 
 `references/platform-youtube.md` の手順に従って実行する。
-
----
-
-### TikTok
-
-`references/platform-tiktok.md` の手順に従って実行する。
 
 ---
 
@@ -144,11 +132,8 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 
 - `references/phase0-caption-backfill.md` — Phase 0 Caption Backfill スクリプト
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
-- `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
 - `references/platform-youtube.md` — YouTube メトリクス取得手順（YT-1）
-- `references/platform-tiktok.md` — TikTok メトリクス取得手順（TT-1〜TT-4）
 - `packages/database/src/schema/sns_metrics.ts` — sns_metrics テーブル定義
 - `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義
 - `.claude/skills/analytics/fetch-youtube-data/SKILL.md` — YouTube API パターンの原典
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典
-- `.claude/agents/browser-publisher.md` — browser-use 共通設定・プロファイル情報

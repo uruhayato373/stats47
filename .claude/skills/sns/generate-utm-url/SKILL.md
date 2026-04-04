@@ -7,7 +7,7 @@ disable-model-invocation: true
 SNS 投稿・note 記事で使用する stats47.jp リンクの UTM パラメータ生成ルール。
 各 `/post-*` スキルから参照される。
 
-## SNS（X / Instagram / YouTube / TikTok）
+## SNS（X / YouTube）
 
 ### ベース URL
 
@@ -21,7 +21,7 @@ SNS 投稿・note 記事で使用する stats47.jp リンクの UTM パラメー
 
 | パラメータ | 値 |
 |---|---|
-| `utm_source` | `x` / `instagram` / `youtube` / `tiktok` |
+| `utm_source` | `x` / `youtube` |
 | `utm_medium` | `social` |
 | `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` |
 | `utm_content` | `<template>`（例: `shock`, `paradox`）。YouTube pinned_comment では `<template>-pinned` |

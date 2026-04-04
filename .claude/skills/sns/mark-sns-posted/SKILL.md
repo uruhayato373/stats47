@@ -39,10 +39,8 @@ contentType に応じたディレクトリを確認する:
 | ディレクトリ | platform 値 |
 |---|---|
 | `x/` | `x` |
-| `instagram/` | `instagram` |
 | `youtube/` | `youtube`（通常動画） |
 | `youtube-short/` | `youtube`（ショート動画） |
-| `tiktok/` | `tiktok` |
 | `note/` | `note` |
 
 ### 3. DB ステータス更新

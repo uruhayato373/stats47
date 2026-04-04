@@ -32,25 +32,6 @@ data.json 生成 → 全プラットフォームのキャプション生成 → 
 | `pinned_comment.txt` | ピン留めコメント |
 | `quizzes.txt` | YouTube Studio クイズ用 |
 
-### TikTok（tiktok/）
-
-| ファイル | 内容 |
-|---|---|
-| `reel.mp4` | 動画（110秒 / 全47件プログレッシブマップ、収益化対応） |
-| `caption.json` | キャプション・hookText・pinnedComment |
-| `caption.txt` | コピペ投稿用（全47都道府県データ付き） |
-
-### Instagram（instagram/）
-
-| ファイル | 内容 |
-|---|---|
-| `stills/reel.mp4` | リール動画（27秒 / 上位5件） |
-| `stills/carousel_01.png` | カバー画像 |
-| `stills/carousel_02.png` | テーブル画像 |
-| `stills/carousel_03.png` | CTA画像 |
-| `caption.json` | キャプション（hookText・displayTitle 含む。レンダリング時の props 生成にも使用） |
-| `caption.txt` | コピペ投稿用（top3のみ） |
-
 ## 手順
 
 ### Step 1: data.json の確認・生成
@@ -93,7 +74,7 @@ data.json を読み込み、以下を算出する:
 
 ### Step 3: キャプション一括生成
 
-以下の4プラットフォーム分を順次生成する。hookText と displayTitle は全プラットフォーム共通にする。
+以下の2プラットフォーム分を順次生成する。hookText と displayTitle は全プラットフォーム共通にする。
 
 **hookText のルール**（15文字以内）:
 - 常識の逆転・意外性を最優先（例:「年収1位は東京じゃない」「大阪の財政が危険水域」）
@@ -105,27 +86,26 @@ data.json を読み込み、以下を算出する:
 - subtitle に「年間」「二人以上世帯」等の注記がある場合は displayTitle に含める
 
 **生成順序**:
-1. **Instagram** `caption.json` + `caption.txt`（`/post-instagram` の仕様に従う）
-2. **TikTok** `caption.json` + `caption.txt`（`/post-tiktok` の仕様に従う）
-3. **YouTube** `shorts.json` + `shorts.txt` + `pinned_comment.txt` + `quizzes.txt`（`/post-youtube` の仕様に従う）
+1. **X** `caption.json` + `caption.txt`（`/post-x` の仕様に従う）
+2. **YouTube** `shorts.json` + `shorts.txt` + `pinned_comment.txt` + `quizzes.txt`（`/post-youtube` の仕様に従う）
 
 ### Step 4: レンダリング
 
-ディレクトリを作成し、props を生成して7コンポジションを並列レンダリングする。
+ディレクトリを作成し、props を生成して2コンポジションを並列レンダリングする。
 
 ```bash
 KEY="<rankingKey>"
 BASE=".local/r2/sns/ranking/$KEY"
-mkdir -p "$BASE/youtube-short" "$BASE/tiktok" "$BASE/instagram/stills"
+mkdir -p "$BASE/youtube-short" "$BASE/x/stills"
 ```
 
-**props 生成**（instagram/caption.json から hookText・displayTitle を読み込む）:
+**props 生成**（x/caption.json から hookText・displayTitle を読み込む）:
 
 ```bash
 node -e "
 const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('$BASE/data.json','utf8'));
-const caption = JSON.parse(fs.readFileSync('$BASE/instagram/caption.json','utf8'));
+const caption = JSON.parse(fs.readFileSync('$BASE/x/caption.json','utf8'));
 let itemMeta = {};
 try { itemMeta = JSON.parse(fs.readFileSync('$BASE/ranking_items.json','utf8')); } catch {}
 const meta = { title: itemMeta.title || data.categoryName, subtitle: itemMeta.subtitle, unit: itemMeta.unit || data.unit, yearName: data.yearName, demographicAttr: itemMeta.demographicAttr, normalizationBasis: itemMeta.normalizationBasis };
@@ -133,22 +113,15 @@ const allEntries = data.data.map(d => ({ rank: d.rank, areaCode: d.areaCode, are
 const base = { theme:'dark', hookText: caption.hookText||'', displayTitle: caption.displayTitle, meta, allEntries };
 fs.writeFileSync('/tmp/props-a.json', JSON.stringify({ ...base, variant:'youtube-short' }));
 fs.writeFileSync('/tmp/props-b.json', JSON.stringify({ ...base, variant:'youtube-short-full' }));
-fs.writeFileSync('/tmp/props-tt.json', JSON.stringify({ ...base, variant:'tiktok' }));
-fs.writeFileSync('/tmp/props-ig.json', JSON.stringify({ ...base, variant:'instagram' }));
 "
 ```
 
-**7並列レンダリング**（`apps/remotion/` で実行）:
+**2並列レンダリング**（`apps/remotion/` で実行）:
 
 ```bash
 cd apps/remotion
 npx remotion render src/index.ts RankingYouTube-Short "$BASE/youtube-short/shorts-a.mp4" --props /tmp/props-a.json &
 npx remotion render src/index.ts RankingYouTube-Short-Full "$BASE/youtube-short/shorts-b.mp4" --props /tmp/props-b.json &
-npx remotion render src/index.ts RankingTikTok-Short "$BASE/tiktok/reel.mp4" --props /tmp/props-tt.json &
-npx remotion render src/index.ts RankingInstagram-Reel "$BASE/instagram/stills/reel.mp4" --props /tmp/props-ig.json &
-npx remotion still src/index.ts RankingInstagram-Cover "$BASE/instagram/stills/carousel_01.png" --props /tmp/props-ig.json &
-npx remotion still src/index.ts RankingInstagram-Table "$BASE/instagram/stills/carousel_02.png" --props /tmp/props-ig.json &
-npx remotion still src/index.ts RankingInstagram-CTA "$BASE/instagram/stills/carousel_03.png" --props /tmp/props-ig.json &
 wait
 ```
 
@@ -168,13 +141,12 @@ find "$BASE" -name "*.mp4" -o -name "*.png" -o -name "shorts.json" -o -name "sho
 
 ## 注意事項
 
-- レンダリングは7並列で実行するため、マシンリソースを消費する。TikTok（110秒動画）が最も時間がかかる（約15-20分）
-- hookText は全プラットフォーム共通。Instagram の caption.json に定義し、他のプラットフォームでも同じ値を使う
+- hookText は全プラットフォーム共通。X の caption.json に定義し、YouTube でも同じ値を使う
 - 消費支出系のランキングは subtitle に「二人以上世帯・県庁所在市の年間消費支出額」等の注記があるため、キャプションに明記すること
 
 ## 参照
 
-- キャプション個別生成: `/post-instagram`, `/post-tiktok`, `/post-youtube`
+- キャプション個別生成: `/post-x`, `/post-youtube`
 - レンダリング詳細: `/render-sns-stills`
 - データプレビュー: `/preview-remotion`
 - UTM パラメータ: `/generate-utm-url`
