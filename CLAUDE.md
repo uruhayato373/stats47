@@ -31,7 +31,7 @@ packages/
 | 知りたいこと | 参照先 |
 |---|---|
 | docs 全体の構成・運用ルール | `docs/INDEX.md` |
-| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_概要/` |
+| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 実装ロードマップ・進捗管理 | `docs/02_実装計画/01_実装ロードマップ.md` |
 | システム構成・技術スタック | `docs/01_技術設計/` |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
@@ -78,7 +78,7 @@ packages/
 | `blog-editor` | 17 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
 | `sns-producer` | 12 | SNS コンテンツ生成（data.json・キャプション・UTM） |
 | `sns-renderer` | 9 | Remotion レンダリング・プレビュー |
-| `browser-publisher` | 4 | ブラウザ自動投稿（X, TikTok, Instagram, note） |
+| `browser-publisher` | 2 | ブラウザ自動投稿（X, note） |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
 | `seo-auditor` | 7 | SEO 監査・アナリティクスデータ収集 |
 | `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
@@ -102,10 +102,10 @@ packages/
 
 各スキルの詳細は SKILL.md の frontmatter description を参照。`/スキル名` で実行。
 
-### 自動有効（32個）
+### 自動有効（31個）
 | カテゴリ | スキル |
 |---|---|
-| analytics | fetch-gsc-data, fetch-ga4-data, fetch-youtube-data, fetch-instagram-data, fetch-x-data, seo-audit, performance-report |
+| analytics | fetch-gsc-data, fetch-ga4-data, fetch-youtube-data, fetch-x-data, seo-audit, performance-report |
 | blog | discover-trends-all, expert-review, panel-review, proofread-article, plan-blog-articles, plan-blog-trends, update-blog-plan, generate-article-charts, md-syntax |
 | dev | run-tests, review-tests, verification-loop, continuous-learning, strategic-compact |
 | estat | search-estat, inspect-estat-meta, fetch-estat-data |
