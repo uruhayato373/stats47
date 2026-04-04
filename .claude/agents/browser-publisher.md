@@ -35,6 +35,21 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 - **X / TikTok / Instagram**: `--profile "Profile 5"` を使用
 - **note.com**: `--profile Default` を使用（`/publish-note` スキル参照）
 
+### プロセスクリーンアップ（必須）
+
+browser-use で起動した Chrome/Python プロセスはセッション終了後もゾンビとして残ることがある。**スキル開始時と終了時に必ずクリーンアップを実行する。**
+
+```bash
+# スキル開始時（残存プロセスを掃除してから開始）
+bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
+
+# スキル終了時（正規 close → 残存プロセス掃除）
+browser-use --headed --profile 'Profile 5' close 2>/dev/null
+bash .claude/scripts/cleanup-browser.sh 2>/dev/null
+```
+
+手動でクリーンアップする場合: `bash .claude/scripts/cleanup-browser.sh --force`
+
 ### セッション管理
 
 - `--session` は指定しない（デフォルトセッション使用）

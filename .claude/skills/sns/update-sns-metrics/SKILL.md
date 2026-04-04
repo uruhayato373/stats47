@@ -30,6 +30,9 @@ disable-model-invocation: true
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 PROJECT_ROOT="$(pwd)"
 DB_PATH="$PROJECT_ROOT/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+
+# 開始時: 残存プロセスをクリーンアップ
+bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 ```
 
 **重要ルール:**
@@ -982,6 +985,14 @@ rm -f /tmp/sns-report.js
 | post_url 充足率 | プラットフォーム別 |
 | caption 充足率 | プラットフォーム別 |
 | マッチ失敗 | 件数（各プラットフォームの実行ログ参照） |
+
+## 終了時クリーンアップ
+
+全プラットフォームの処理完了後、結果報告の後に必ず実行:
+
+```bash
+bash .claude/scripts/cleanup-browser.sh 2>/dev/null
+```
 
 ## 参照
 
