@@ -42,6 +42,7 @@ export default function robots(): MetadataRoute.Robots {
           "/api/auth/*", // 認証API
           "/profile/edit", // プロフィール編集
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
+          "/areas/*/cities/*", // 市区町村ページ（noindex だがクロールバジェット浪費防止）
         ],
       },
       {
@@ -52,6 +53,7 @@ export default function robots(): MetadataRoute.Robots {
           "/api/auth/*", // 認証APIは除外
           "/profile/edit", // プロフィール編集は除外
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
+          "/areas/*/cities/*", // 市区町村ページ
         ],
       },
       {
