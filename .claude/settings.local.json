@@ -256,7 +256,12 @@
       "Bash(py:*)",
       "Bash(read file:*)",
       "Bash(python3 -c ':*)",
-      "Bash([ -f \".local/r2/blog/$slug/article.md\" ])"
+      "Bash([ -f \".local/r2/blog/$slug/article.md\" ])",
+      "Bash(find:*)",
+      "WebFetch(domain:trends.google.co.jp)",
+      "WebFetch(domain:b.hatena.ne.jp)",
+      "WebFetch(domain:news.yahoo.co.jp)",
+      "WebFetch(domain:news.google.com)"
     ],
     "additionalDirectories": [
       "c:\\Users\\m004195\\obsidian\\projects\\kazu-note",
