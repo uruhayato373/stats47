@@ -1,3 +1,9 @@
+---
+name: preview-remotion-area-profile
+description: 実データで Remotion Studio 地域プロファイルプレビューを上書きする。Use when user says "地域プロファイルプレビュー", "area profile プレビュー". 都道府県の強み弱みを視覚化.
+disable-model-invocation: true
+---
+
 実データで Remotion Studio の地域プロファイル（Area Profile）プレビュー用データを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

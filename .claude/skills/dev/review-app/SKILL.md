@@ -1,6 +1,6 @@
 ---
 name: review-app
-description: apps/web/src/app/ の Next.js App Router 層（ルーティング・SEO・メタデータ・レイアウト・エラー境界）を専門家パネルでレビュー。features/packages レビューとは異なり、統合層・公開インターフェースの品質を評価。
+description: App Router 層（ルーティング・SEO・メタデータ・エラー境界）を専門家パネルでレビューする。Use when user says "App Router レビュー", "review-app", "ルーティングレビュー". 統合層・公開インターフェースの品質評価.
 disable-model-invocation: true
 argument-hint: "[route-name|all]"
 ---

@@ -1,6 +1,8 @@
 ---
-description: GA4 PV データから注目ランキングを自動更新（ranking_page_views 蓄積 + is_featured 更新）
-argument-hint: [--days 7] [--limit 8] [--dry-run]
+name: update-featured-rankings
+description: GA4 PVデータから注目ランキングを自動更新する（ranking_page_views 蓄積 + is_featured 更新）。Use when user says "注目ランキング更新", "フィーチャー更新". PV上位を自動選出.
+disable-model-invocation: true
+argument-hint: "[--days 7] [--limit 8] [--dry-run]"
 ---
 
 GA4 API からランキングページの日次 PV を取得し、`ranking_page_views` テーブルに蓄積した上で、

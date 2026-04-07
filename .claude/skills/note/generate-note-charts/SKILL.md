@@ -1,6 +1,6 @@
 ---
 name: generate-note-charts
-description: note 記事用の SVG チャート（散布図・カバー画像・横棒グラフ等）を生成し PNG に変換する。記事本文完成後、編集前に実行する。
+description: note 記事用 SVG チャートを生成し PNG に変換する。Use when user says "noteチャート生成", "note画像生成". 散布図・カバー画像・横棒グラフ等に対応. 記事本文完成後に実行.
 disable-model-invocation: true
 ---
 

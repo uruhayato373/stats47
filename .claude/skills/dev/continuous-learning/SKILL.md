@@ -1,3 +1,8 @@
+---
+name: continuous-learning
+description: セッション中の再利用可能なパターンを抽出し learned/ に保存する。Use when user says "パターン記録", "continuous-learning", "学び保存". 同じエラーを2回解決した場合に自動適用.
+---
+
 セッション中に発見した再利用可能なパターン（エラー解決策・ワークアラウンド・ユーザー修正）を抽出し、`.claude/skills/learned/` に保存する。
 
 ## 用途

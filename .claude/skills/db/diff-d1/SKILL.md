@@ -1,6 +1,8 @@
 ---
-description: ローカル D1 とリモート D1 のキーベース差分を検知・同期する
+name: diff-d1
+description: ローカル D1 とリモート D1 のキーベース差分を検知・同期する。Use when user says "D1差分", "diff-d1", "ローカルとリモートの違い". --execute で同期実行.
 argument-hint: [--execute] [--direction pull] [--table <table>]
+disable-model-invocation: true
 ---
 
 ローカル D1 とリモート D1 のデータ差分をキー単位で検知し、レポート表示または同期を実行する。

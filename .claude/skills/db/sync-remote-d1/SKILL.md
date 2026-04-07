@@ -1,5 +1,6 @@
 ---
-description: ローカル D1 のデータをリモート D1（production）へ同期する
+name: sync-remote-d1
+description: ローカル D1 のデータをリモート D1（production）へ同期する。Use when user says "D1同期", "リモート反映", "sync-remote-d1". --key オプションで差分同期対応.
 argument-hint: [--key <ranking-key>] [--table <table> --where <条件>]
 disable-model-invocation: true
 ---

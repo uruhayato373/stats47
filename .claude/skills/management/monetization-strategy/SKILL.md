@@ -1,3 +1,9 @@
+---
+name: monetization-strategy
+description: 収益化戦略を 3-5 案ブレインストームし適合度・リスク・検証実験を設計する。Use when user says "収益化戦略", "マネタイズ検討". 広告・アフィリエイト等の収益モデル評価.
+disable-model-invocation: true
+---
+
 stats47 の収益化戦略を 3-5 案ブレインストームし、適合度・リスク・検証実験を設計する。
 
 原典: [phuryn/pm-skills](https://github.com/phuryn/pm-skills) (MIT License) の `monetization-strategy` を stats47 向けにカスタマイズ。

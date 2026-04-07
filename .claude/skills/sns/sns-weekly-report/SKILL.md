@@ -1,3 +1,9 @@
+---
+name: sns-weekly-report
+description: DB の sns_metrics から週次パフォーマンスレポートを Markdown で生成する。Use when user says "SNSレポート", "週次レポート", "SNS分析". プラットフォーム横断で集計.
+disable-model-invocation: true
+---
+
 DB (`sns_metrics`) のパフォーマンスデータを集計し、週次レポートを Markdown で生成する。
 
 ## 引数

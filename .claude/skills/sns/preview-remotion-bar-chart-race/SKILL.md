@@ -1,3 +1,9 @@
+---
+name: preview-remotion-bar-chart-race
+description: Bar Chart Race の config.json と data.json から Remotion Studio プレビューを上書きする。Use when user says "バーチャートレースプレビュー", "BCR プレビュー". HMR で自動反映.
+disable-model-invocation: true
+---
+
 `.local/r2/sns/bar-chart-race/<rankingKey>/` の config.json + data.json から Remotion Studio のプレビューファイルを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

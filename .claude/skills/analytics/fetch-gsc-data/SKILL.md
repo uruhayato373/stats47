@@ -1,3 +1,8 @@
+---
+name: fetch-gsc-data
+description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析". クエリ・ページ・デバイス・国別レポート対応.
+---
+
 Google Search Console API からサイトの検索パフォーマンスデータを取得する。
 
 ## 用途

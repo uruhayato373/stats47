@@ -1,6 +1,6 @@
 ---
 name: populate-component-data
-description: e-Stat API → component_data テーブルへデータ投入（composition-chart 対応）
+description: e-Stat API から component_data テーブルへデータ投入する（composition-chart 対応）。Use when user says "コンポーネントデータ投入", "populate-component-data". Tier B テーブルのためリモートのみ書き込み.
 argument-hint: "<chart-key> | --type composition-chart | --all"
 disable-model-invocation: true
 allowed-tools: Read, Bash

@@ -1,3 +1,9 @@
+---
+name: generate-bar-chart-race
+description: D1 から Bar Chart Race 用 config.json と data.json を生成しローカル R2 に保存する。Use when user says "バーチャートレース生成", "bar chart race 作成". 全年度データを取得してフレーム化.
+disable-model-invocation: true
+---
+
 D1 から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/bar-chart-race/<rankingKey>/` に config.json と data.json を保存する。
 
 ## ディレクトリ構造

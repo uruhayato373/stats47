@@ -1,6 +1,6 @@
 ---
 name: review-ui-consistency
-description: ページ横断で UI 実装の一貫性を検証し、不統一を検出する。アイコン・色・コンポーネント利用・レスポンシブ設計・状態パターンの整合性を7人の専門家パネルで多角評価。
+description: ページ横断の UI 一貫性を検証し不統一を検出する。Use when user says "UI一貫性レビュー", "review-ui-consistency", "見た目がバラバラ". 7人の専門家パネルで多角評価.
 disable-model-invocation: true
 argument-hint: "[scope] (all | category-name | route-path)"
 ---

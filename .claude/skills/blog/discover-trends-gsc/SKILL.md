@@ -1,3 +1,9 @@
+---
+name: discover-trends-gsc
+description: Google Search Console の急上昇クエリを検出しコンテンツギャップからブログ記事候補を提案する。Use when user says "GSCトレンド", "検索トレンド", "サーチコンソールトレンド". 自サイトデータ起点のテーマ発見.
+disable-model-invocation: true
+---
+
 Google Search Console の検索クエリから急上昇キーワードを検出し、stats47 のブログ記事候補を提案する。
 
 ## 用途

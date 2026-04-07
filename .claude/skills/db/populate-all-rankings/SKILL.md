@@ -1,3 +1,9 @@
+---
+name: populate-all-rankings
+description: 全ランキングの全年度データを e-Stat API から取得し ranking_data に一括投入する。Use when user says "全ランキング投入", "populate-all-rankings", "データ再投入". ドライラン対応.
+disable-model-invocation: true
+---
+
 全ランキングの全年度データを DB に一括投入する。
 
 ## 用途

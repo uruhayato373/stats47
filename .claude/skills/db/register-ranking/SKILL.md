@@ -1,3 +1,9 @@
+---
+name: register-ranking
+description: 新規ランキングキーを ranking_items に登録し e-Stat API からデータ投入する。Use when user says "ランキング登録", "register-ranking", "新しい指標を追加". search-estat/inspect-estat-meta と連携.
+disable-model-invocation: true
+---
+
 新しいランキングキーを ranking_items に登録し、e-Stat API からデータを取得して ranking_data に投入する。
 
 ## 用途

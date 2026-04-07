@@ -1,5 +1,6 @@
 ---
-description: 相関分析バッチを実行し、結果をリモート D1 に同期する（ローカルに correlation_analysis を残さない）
+name: run-correlation-batch
+description: 相関分析バッチを実行しリモート D1 に同期する（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
 ---

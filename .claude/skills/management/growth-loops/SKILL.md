@@ -1,3 +1,9 @@
+---
+name: growth-loops
+description: 持続的成長ループ（フライホイール）を設計・評価する。Use when user says "成長ループ", "フライホイール設計". viral/content/SEO等のループタイプ分析.
+disable-model-invocation: true
+---
+
 stats47 の持続的成長ループ（フライホイール）を設計・評価する。
 
 原典: [phuryn/pm-skills](https://github.com/phuryn/pm-skills) (MIT License) の `growth-loops` を stats47 向けにカスタマイズ。

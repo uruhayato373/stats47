@@ -1,6 +1,7 @@
 ---
 name: generate-kakei-charts
-description: a-kakei 記事（都道府県別家計調査）用の SVG チャートを chart-data.json から一括生成し、PNG 変換・note.md 挿入まで行う
+description: a-kakei 記事（都道府県別家計調査）用 SVG チャートを chart-data.json から一括生成し PNG 変換・note.md 挿入まで行う。Use when user says "家計チャート", "kakei チャート". 大分類比率 + 特徴品目の横棒グラフ.
+disable-model-invocation: true
 argument-hint: <slug> or --all
 ---
 

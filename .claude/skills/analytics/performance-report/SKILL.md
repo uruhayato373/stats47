@@ -1,6 +1,6 @@
 ---
 name: performance-report
-description: performance_metrics DB からパフォーマンス総合レポート生成（トレンド・バジェット監査・ページ種別比較・改善提案）
+description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". performance_metrics DBから分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
 ---

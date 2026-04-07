@@ -1,3 +1,9 @@
+---
+name: pull-r2
+description: リモート R2 バケットから .local/r2/ へファイルをダウンロードする。Use when user says "R2 pull", "R2ダウンロード", "pull-r2". 差分同期（サイズ判定でスキップ）.
+disable-model-invocation: true
+---
+
 リモート R2 から `.local/r2/` へファイルをダウンロードする。
 
 ## 概要

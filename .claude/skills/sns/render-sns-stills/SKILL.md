@@ -1,11 +1,17 @@
+---
+name: render-sns-stills
+description: Remotion で SNS 用静止画・動画をレンダリングしローカルに保存する。Use when user says "SNSレンダリング", "画像生成", "動画レンダリング". Chrome 必須. キャプション生成後に実行.
+disable-model-invocation: true
+---
+
 Remotion で SNS 用静止画・動画を生成してローカルに保存する。
-キャプション生成は各 SNS スキル（`/post-instagram` 等）で事前に実行すること。
+キャプション生成は各 SNS スキル（`/post-x` 等）で事前に実行すること。
 
 ## 前提条件
 
 - data.json が生成済みであること
 - ranking_items.json が生成済みであること（ranking ドメインのみ）
-- instagram/caption.json が生成済みであること（hookText を読み込むため）
+- x/caption.json が生成済みであること（hookText を読み込むため）
 - Chrome がインストールされていること
 
 ## クロスプラットフォーム注意事項
@@ -22,7 +28,7 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **domain** | - | `ranking` | `ranking` / `compare` / `correlation` |
-| **sns** | 必須 | - | `instagram` / `x` / `youtube` / `youtube-short` / `youtube-short-full` / `youtube-normal` / `tiktok` / `note` / `all` |
+| **sns** | 必須 | - | `x` / `youtube` / `youtube-short` / `youtube-short-full` / `youtube-normal` / `note` / `all` |
 
 ### ranking ドメイン
 - **rankingKey**: ランキングキー（必須）
@@ -41,17 +47,12 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 
 | SNS | コンポジション | 出力ファイル |
 |---|---|---|
-| Instagram | `RankingInstagram-Cover` | `instagram/stills/carousel_01.png` |
-| Instagram | `RankingInstagram-Table` | `instagram/stills/carousel_02.png` |
-| Instagram | `RankingInstagram-CTA` | `instagram/stills/carousel_03.png` |
-| Instagram | `RankingInstagram-Reel` | `instagram/stills/reel.mp4` |
 | X | `RankingX-Chart` | `x/stills/chart-x-1200x630.png` |
 | X | `RankingX-ChoroplethMap` | `x/stills/choropleth-map-1200x630.png` |
 | YouTube Short A | `RankingYouTube-Short` | `youtube-short/shorts-a.mp4` |
 | YouTube Short B | `RankingYouTube-Short-Full` | `youtube-short/shorts-b.mp4` |
 | YouTube Normal | `RankingYouTube-ScrollGes` | `youtube/scroll-ges.mp4` |
 | YouTube Normal Thumb | `RankingYouTube-Thumb-Hero` | `youtube/stills/thumbnail-1280x720.png` |
-| TikTok | `RankingTikTok-Short` | `tiktok/stills/reel.mp4` |
 | note | `RankingNote-Cover` | `note/images/cover-1280x670.png` |
 | note | `RankingNote-ChoroplethMap` | `note/images/choropleth-map-1080x1080.png` |
 | note | `RankingNote-Chart` | `note/images/chart-x-1200x630.png` |
@@ -62,7 +63,6 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | SNS | コンポジション | 出力ファイル |
 |---|---|---|
 | X | `CompareX-Post` | `x/stills/comparison-1200x630.png` |
-| Instagram | `CompareInstagram-Carousel` | `instagram/stills/carousel.png` |
 
 ### correlation ドメイン
 
@@ -85,7 +85,7 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 1. data.json と caption.json を読み込む
 2. stills ディレクトリを作成:
 ```bash
-mkdir -p <baseDir>/{instagram,x,youtube,youtube-short,tiktok}/stills <baseDir>/note/images
+mkdir -p <baseDir>/{x,youtube,youtube-short}/stills <baseDir>/note/images
 ```
 
 3. **props JSON ファイルを生成する**
@@ -95,7 +95,7 @@ mkdir -p <baseDir>/{instagram,x,youtube,youtube-short,tiktok}/stills <baseDir>/n
 node -e "
 const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('<baseDir>/data.json','utf8'));
-const caption = JSON.parse(fs.readFileSync('<baseDir>/instagram/caption.json','utf8'));
+const caption = JSON.parse(fs.readFileSync('<baseDir>/x/caption.json','utf8'));
 let itemMeta = {};
 try { itemMeta = JSON.parse(fs.readFileSync('<baseDir>/ranking_items.json','utf8')); } catch(e) {}
 const hookText = caption.hookText || '';
@@ -110,9 +110,7 @@ const meta = {
 };
 const allEntries = data.data.map(d => ({ rank: d.rank, areaCode: d.areaCode, areaName: d.areaName, value: d.value }));
 fs.writeFileSync('/tmp/sns-props.json', JSON.stringify({ theme:'light', hookText, displayTitle, meta, allEntries }));
-fs.writeFileSync('/tmp/sns-props-ig.json', JSON.stringify({ theme:'dark', hookText, displayTitle, meta, allEntries, variant:'instagram' }));
 fs.writeFileSync('/tmp/sns-props-yt.json', JSON.stringify({ theme:'dark', hookText, displayTitle, meta, allEntries, variant:'youtube' }));
-fs.writeFileSync('/tmp/sns-props-tt.json', JSON.stringify({ theme:'dark', hookText, displayTitle, meta, allEntries, variant:'tiktok' }));
 fs.writeFileSync('/tmp/sns-props-thumb.json', JSON.stringify({ theme:'dark', variant:'hero', hookText, displayTitle, meta, allEntries }));
 console.log('Props generated for:', meta.title);
 "
@@ -185,5 +183,5 @@ Remotion は `rankingKey` だけではデータを取得できない。必ず `-
 
 ## 参照
 
-- キャプション生成: `/post-sns-captions` / `/post-x` / `/post-instagram` / `/post-youtube` / `/post-tiktok`
+- キャプション生成: `/post-sns-captions` / `/post-x` / `/post-youtube`
 - Remotion 設定: `apps/remotion/remotion.config.js`

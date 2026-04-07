@@ -1,6 +1,7 @@
 ---
 name: lighthouse-audit
-description: Lighthouse CLI でパフォーマンス測定（スコア・CWV・リソース → DB 蓄積）
+description: Lighthouse CLI でパフォーマンス測定しDB蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測". スコア・CWV・リソース分析をページ種別一括実行.
+disable-model-invocation: true
 argument-hint: "[--url PATH] [--type TYPE] [--strategy mobile|desktop|both] [--dry-run]"
 allowed-tools: Read, Bash, Grep
 ---

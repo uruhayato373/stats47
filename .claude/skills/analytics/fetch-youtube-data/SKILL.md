@@ -1,3 +1,8 @@
+---
+name: fetch-youtube-data
+description: YouTube Data API v3 からチャンネル・動画の公開データを取得する。Use when user says "YouTube分析", "再生数確認", "動画データ". 再生数・いいね数・コメント数レポート対応.
+---
+
 YouTube Data API v3 からチャンネルの公開データ（動画一覧・再生数・いいね数等）を取得する。
 
 ## 用途

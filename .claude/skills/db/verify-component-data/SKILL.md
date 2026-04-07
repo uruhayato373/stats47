@@ -1,6 +1,6 @@
 ---
 name: verify-component-data
-description: component_data テーブルのデータ鮮度・完全性チェック
+description: component_data テーブルのデータ鮮度・完全性を検証する。Use when user says "コンポーネントデータ検証", "verify-component-data", "データ鮮度チェック". チャートキー個別 or 全件対応.
 argument-hint: "[chart-key] | --all"
 disable-model-invocation: true
 allowed-tools: Read, Bash

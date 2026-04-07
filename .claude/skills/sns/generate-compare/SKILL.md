@@ -1,3 +1,9 @@
+---
+name: generate-compare
+description: D1 から 2 地域比較の data.json を生成しローカル R2 に保存する。Use when user says "比較データ生成", "compare 生成", "2地域比較". テーマプリセット対応.
+disable-model-invocation: true
+---
+
 D1 から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA>-vs-<areaB>/` に data.json を保存する。
 
 ## ディレクトリ構造

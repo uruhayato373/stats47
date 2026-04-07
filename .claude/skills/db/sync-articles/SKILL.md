@@ -1,3 +1,9 @@
+---
+name: sync-articles
+description: .local/r2/blog/ の状態を DB articles テーブルに同期する。Use when user says "記事同期", "sync-articles", "ブログがDBに反映されない". 追加・更新・削除の3方向対応.
+disable-model-invocation: true
+---
+
 `.local/r2/blog/` の状態を正として、DB の articles テーブルを完全に同期する（追加・更新・削除の3方向対応）。
 
 記事を追加しても `localhost:3000/blog` に表示されない場合や、削除した記事が表示され続ける場合に実行する。

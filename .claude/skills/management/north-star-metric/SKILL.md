@@ -1,3 +1,9 @@
+---
+name: north-star-metric
+description: North Star Metric と Input Metrics を定義する。Use when user says "NSM定義", "最重要指標", "North Star". KPI体系の設計・見直し.
+disable-model-invocation: true
+---
+
 stats47 の North Star Metric（最重要指標）と 3-5 の Input Metrics を定義する。
 
 原典: [phuryn/pm-skills](https://github.com/phuryn/pm-skills) (MIT License) の `north-star-metric` を stats47 向けにカスタマイズ。

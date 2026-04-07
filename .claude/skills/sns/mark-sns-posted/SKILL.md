@@ -1,3 +1,9 @@
+---
+name: mark-sns-posted
+description: 投稿済み SNS コンテンツの DB ステータスを posted に更新しメディアファイルを削除する。Use when user says "投稿済みにする", "mark posted", "SNS投稿完了". テキスト/JSON はリモート R2 に保持.
+disable-model-invocation: true
+---
+
 投稿済み SNS コンテンツを DB に記録し、メディアファイルを削除する。テキスト/JSON はリモート R2 に保持する。
 
 ## 概要
@@ -33,10 +39,8 @@ contentType に応じたディレクトリを確認する:
 | ディレクトリ | platform 値 |
 |---|---|
 | `x/` | `x` |
-| `instagram/` | `instagram` |
 | `youtube/` | `youtube`（通常動画） |
 | `youtube-short/` | `youtube`（ショート動画） |
-| `tiktok/` | `tiktok` |
 | `note/` | `note` |
 
 ### 3. DB ステータス更新

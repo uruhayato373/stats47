@@ -1,5 +1,6 @@
 ---
-description: リモート D1 のデータをローカル D1 に反映する
+name: pull-remote-d1
+description: リモート D1 のデータをローカル D1 に反映する。Use when user says "D1 pull", "ローカル更新", "pull-remote-d1". ページネーション付き SELECT で OOM 回避.
 disable-model-invocation: true
 ---
 

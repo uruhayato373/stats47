@@ -1,3 +1,9 @@
+---
+name: preview-remotion-blog
+description: 実データで Remotion Studio ブログ OGP プレビューを上書きする。Use when user says "ブログOGPプレビュー", "blog OGP プレビュー". slug または title/subtitle 指定.
+disable-model-invocation: true
+---
+
 実データで Remotion Studio のブログ OGP プレビュー用データを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

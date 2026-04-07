@@ -1,3 +1,9 @@
+---
+name: discover-trends-note
+description: note.com のトレンド記事から話題テーマを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "noteトレンド", "note.comトレンド". クリエイター層の関心ベースのテーマ発見.
+disable-model-invocation: true
+---
+
 note.com のトレンド記事から話題のテーマを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
 
 ## 用途

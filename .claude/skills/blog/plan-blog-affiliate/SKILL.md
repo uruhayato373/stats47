@@ -1,3 +1,9 @@
+---
+name: plan-blog-affiliate
+description: アフィリエイト収益直結のブログ記事を企画する。Use when user says "アフィリエイト記事企画", "収益記事", "affiliate記事". 商材と統計データで行動喚起する記事を設計.
+disable-model-invocation: true
+---
+
 アフィリエイト収益に直結するブログ記事を企画する。`AFFILIATE_LINKS` の8カテゴリに対応する統計データを活用し、CVR（コンバージョン率）が高いテーマを優先的に企画する。
 
 ## 用途

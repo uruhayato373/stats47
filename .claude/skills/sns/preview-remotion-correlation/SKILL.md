@@ -1,3 +1,9 @@
+---
+name: preview-remotion-correlation
+description: 実データで Remotion Studio 相関散布図プレビューを上書きする。Use when user says "相関プレビュー", "correlation プレビュー", "散布図プレビュー". 2指標の相関を視覚化.
+disable-model-invocation: true
+---
+
 実データで Remotion Studio の相関散布図（Correlation）プレビュー用データを上書きする。
 Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
 

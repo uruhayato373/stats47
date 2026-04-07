@@ -1,3 +1,9 @@
+---
+name: investigate-note-data
+description: note 記事（B/C/D シリーズ）のデータ調査・分析を行う。Use when user says "noteデータ調査", "データ分析", "相関分析". 相関・地域パターン・チャート候補を定量化.
+disable-model-invocation: true
+---
+
 note 記事（B/C/D シリーズ）のデータ調査・分析。相関分析・地域パターン・強み弱みを定量化し、チャート候補を決定する。
 
 > **A シリーズ（ランキング記事・量産型）はこの4ステップワークフローの対象外です。** A シリーズは自動生成スキルで処理するため、validate → investigate → design → write → edit の手順は不要です。

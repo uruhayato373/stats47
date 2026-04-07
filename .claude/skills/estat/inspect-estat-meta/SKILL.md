@@ -1,3 +1,8 @@
+---
+name: inspect-estat-meta
+description: e-Stat API のメタデータ（カテゴリ・年・地域の構造）を調査する。Use when user says "メタデータ調査", "inspect-estat-meta", "統計構造を調べて". statsDataId のカテゴリ・年・地域を把握.
+---
+
 e-Stat API のメタデータ（カテゴリ・年・地域の構造）を調査する。
 
 ## 事前確認

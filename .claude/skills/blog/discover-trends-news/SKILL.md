@@ -1,3 +1,9 @@
+---
+name: discover-trends-news
+description: Google News RSS からニューストレンドを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "ニューストレンド", "Google Newsトレンド". メディア報道ベースのテーマ発見.
+disable-model-invocation: true
+---
+
 Google News RSS から日本のニューストレンドを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
 
 ## 用途

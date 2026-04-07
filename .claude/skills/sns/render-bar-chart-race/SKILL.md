@@ -1,3 +1,9 @@
+---
+name: render-bar-chart-race
+description: Bar Chart Race 動画を一括レンダリングする（YouTube/X）。Use when user says "バーチャートレースレンダリング", "BCR レンダリング". Chrome 必須.
+disable-model-invocation: true
+---
+
 `.local/r2/sns/bar-chart-race/` 配下の Bar Chart Race 動画を一括レンダリングする。
 
 ## 前提条件
@@ -10,7 +16,7 @@
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **key** | - | 全件 | 特定のランキングキーのみ処理 |
-| **platform** | - | 全プラットフォーム | `youtube` / `instagram` / `tiktok` / `x` |
+| **platform** | - | 全プラットフォーム | `youtube` / `x` |
 | **dry-run** | - | false | レンダリングせずジョブ一覧を表示 |
 
 ## 出力先
@@ -18,8 +24,6 @@
 ```
 .local/r2/sns/bar-chart-race/<rankingKey>/
   youtube/shorts.mp4
-  instagram/reel.mp4
-  tiktok/reel.mp4
   x/video.mp4
 ```
 
@@ -69,7 +73,7 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platf
 ## 所要時間の目安
 
 - 1動画: 50年 × 36fps = ~2,000フレーム → 約10〜20分
-- 26ランキング × 4プラットフォーム = 104動画 → 約17〜35時間
+- 26ランキング × 2プラットフォーム = 52動画 → 約9〜17時間
 - YouTube のみ（26動画）→ 約4〜9時間
 
 ## npm script

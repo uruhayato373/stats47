@@ -1,3 +1,8 @@
+---
+name: fetch-ga4-data
+description: Google Analytics 4 Data API からアクセスデータを取得する。Use when user says "GA4データ", "PV確認", "アクセス分析". PV・流入経路・デバイス別レポート対応.
+---
+
 Google Analytics 4 (GA4) Data API からサイトのアクセスデータを取得する。
 
 ## 用途

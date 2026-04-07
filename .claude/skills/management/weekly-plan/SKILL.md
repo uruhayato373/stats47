@@ -1,3 +1,8 @@
+---
+name: weekly-plan
+description: 週次計画を生成する（並列サブエージェントで収集→戦略分析→批判的レビュー→計画出力）。Use when user says "週次計画", "今週の計画", "来週の予定". 5並列収集でKPIベース優先順位決定.
+---
+
 プロジェクトの現状を多角的に調査し、戦略的な週次計画を生成する。
 
 ## 引数
@@ -60,6 +65,23 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   ```sql
   SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
   SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
+  ```
+
+- SNS パフォーマンス（DB `sns_metrics` テーブルから集計）
+  ※ `/update-sns-metrics` 実行後に自動蓄積。API 不要で直接クエリ可。
+  ```sql
+  -- 最新取得日の確認
+  SELECT MAX(fetched_at) FROM sns_metrics;
+  -- プラットフォーム別パフォーマンス（最新バッチ）
+  SELECT p.platform,
+         COUNT(DISTINCT m.sns_post_id) as post_count,
+         SUM(m.impressions) as impressions,
+         SUM(m.views) as views,
+         SUM(m.likes) as likes
+  FROM sns_metrics m
+  JOIN sns_posts p ON m.sns_post_id = p.id
+  WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
+  GROUP BY p.platform;
   ```
 
 - GA4/GSC メトリクス（`docs/60_運用ログ/weekly-metrics/` から最新ファイルを読み込み）

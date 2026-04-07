@@ -1,3 +1,9 @@
+---
+name: post-note-ranking
+description: note ランキング記事（A シリーズ）を DB から自動生成する。Use when user says "noteランキング記事", "A シリーズ生成", "note量産". テキスト + 画像を一括出力する量産型.
+disable-model-invocation: true
+---
+
 note ランキング記事（A シリーズ）を DB から自動生成する。テキスト + 画像を一括で出力する量産型スキル。
 
 ## 用途
