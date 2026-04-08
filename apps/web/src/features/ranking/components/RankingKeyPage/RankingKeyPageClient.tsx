@@ -398,6 +398,9 @@ export function RankingKeyPageClient({
                     {/* データの考察（折りたたみ） */}
                     {insightsSection}
 
+                    {/* よくある質問（折りたたみ）+ JSON-LD */}
+                    {faqSection}
+
                     {/* 箱ひげ図（地域別分布）— 現在非表示。コンポーネントは維持 */}
                     {/* <RankingBoxplotChart
                         rankingValues={rankingValues}
@@ -414,9 +417,6 @@ export function RankingKeyPageClient({
 
                     {/* ランキングページカード（補足チャート） */}
                     {rankingPageCards}
-
-                    {/* FAQ JSON-LD（非表示） */}
-                    {faqSection}
 
                     {/* 統計の定義 */}
                     {displayInfo.description && (
