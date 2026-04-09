@@ -21,6 +21,7 @@ const description =
 export const metadata: Metadata = {
     title,
     description,
+    robots: "noindex, follow",
     alternates: {
         canonical: "/correlation",
     },

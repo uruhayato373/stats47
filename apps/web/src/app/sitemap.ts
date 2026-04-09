@@ -22,7 +22,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/compare`, changeFrequency: "weekly", priority: 0.5 },
-  { url: `${BASE_URL}/correlation`, changeFrequency: "weekly", priority: 0.6 },
+  // correlation は除外: インタラクティブツールで検索流入なし（71表示/0クリック）、25秒の応答時間で5xx原因
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${BASE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },
