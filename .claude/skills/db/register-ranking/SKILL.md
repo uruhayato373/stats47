@@ -69,8 +69,8 @@ disable-model-invocation: true
        minValueType: "zero"
      }),
      calculation_config: JSON.stringify({ isCalculated: false }),
-     latest_year: "[]",   // Phase 3 で更新
-     available_years: "[]" // Phase 3 で更新
+     latest_year: null,    // Phase 3 で {"yearCode":"2023","yearName":"2023年度"} 形式に更新
+     available_years: null // Phase 3 で [{"yearCode":"2023","yearName":"2023年度"},...] 形式に更新
    }
    ```
 
@@ -121,7 +121,7 @@ disable-model-invocation: true
 
 ## 注意
 
-- **area_code 形式**: ranking_data の area_code は `01`〜`47`（2桁）。e-Stat の `01000`〜`47000` から末尾3桁を除去する
+- **area_code 形式**: ranking_data の area_code は `01000`〜`47000`（5桁）。e-Stat API の地域コードをそのまま使用する。2桁に変換しないこと（地図 TopoJSON の prefCode と一致させるため）
 - **ランク計算**: value 降順ソート、同値は同順位
 - **既存キーとの重複**: ranking_key が既に存在する場合は INSERT OR REPLACE で上書きされる。意図しない上書きに注意
 - **プロキシ**: 企業ネットワークでは populate スクリプトが失敗する場合がある。WebFetch フォールバックを使う

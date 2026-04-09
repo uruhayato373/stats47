@@ -230,7 +230,8 @@ async function processOccupation(def: OccupationDef): Promise<void> {
         const categoryName = def.occupationName;
 
         if (!isDryRun) {
-          upsertData.run(def.rankingKey, prefCode, areaName, year, yearName, categoryName, value, rank);
+          const areaCode5 = prefCode + "000"; // 5桁形式に変換（地図 TopoJSON と一致させる）
+          upsertData.run(def.rankingKey, areaCode5, areaName, year, yearName, categoryName, value, rank);
         }
         totalInserted++;
       }
@@ -238,8 +239,9 @@ async function processOccupation(def: OccupationDef): Promise<void> {
 
     // 5. latest_year / available_years 更新
     if (!isDryRun && years.length > 0) {
-      const latestYear = JSON.stringify([years[years.length - 1]]);
-      const availableYears = JSON.stringify(years);
+      const latestYearCode = years[years.length - 1];
+      const latestYear = JSON.stringify({ yearCode: latestYearCode, yearName: `${latestYearCode}年度` });
+      const availableYears = JSON.stringify(years.map(y => ({ yearCode: y, yearName: `${y}年度` })));
       updateYears.run(latestYear, availableYears, def.rankingKey);
     }
   });

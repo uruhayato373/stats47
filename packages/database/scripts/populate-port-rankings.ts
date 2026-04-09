@@ -328,9 +328,10 @@ async function processRanking(def: RankingDef): Promise<void> {
 
     // 5. latest_year / available_years 更新
     if (!isDryRun && years.length > 0) {
+      const latestYearCode = years[years.length - 1];
       updateYears.run(
-        JSON.stringify(years[years.length - 1]),
-        JSON.stringify(years),
+        JSON.stringify({ yearCode: latestYearCode, yearName: `${latestYearCode}年` }),
+        JSON.stringify(years.map(y => ({ yearCode: y, yearName: `${y}年` }))),
         def.rankingKey
       );
     }

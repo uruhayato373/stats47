@@ -124,13 +124,22 @@ user-invocable: false
 
 ---
 
-## ranking_items の latest_year / available_years フォーマット不一致で本番 404
+## ranking_items / ranking_data のフォーマット不一致で本番 404・地図グレー表示
 
-**問題**: 家計調査（kakei-chousa）系ランキング 675 件が本番で 404。`findRankingItem` の Zod パースエラーが `err()` を返し `notFound()` に到達。
+**問題**: 職種別年収ランキング 40 件が本番で 404（`findRankingItem` の Zod パースエラー）。さらにコロプレス地図が全都道府県グレー表示（TopoJSON の `prefCode` とマッチしない）。過去にも家計調査系 675 件で同じ 404 が発生。
 
-**原因**: `latest_year` と `available_years` が e-Stat の生年コード形式 (`"2024000000"`, `["2024000000",...]`) で保存されていた。Zod スキーマは `{"yearCode":"...","yearName":"..."}` オブジェクト形式を期待する（`parseJsonColumn(z.object({yearCode: z.string(), yearName: z.string()}))`）。
+**原因（2パターン）**:
+1. `latest_year` が `["2023"]`（配列）や `"2024000000"`（生コード）で保存。Zod は `{"yearCode":"...","yearName":"..."}` オブジェクトを期待。
+2. `ranking_data.area_code` が `"01"`（2桁）で保存。TopoJSON は `"01000"`（5桁）でマッチング。
 
-**対策**: (1) ランキング登録時（`/register-ranking`, `/populate-all-rankings`）は `latest_year` / `available_years` を必ず `{"yearCode":"2024000000","yearName":"2024年"}` 形式で保存する。(2) 修正 SQL: `UPDATE ranking_items SET latest_year = '{"yearCode":"<code>","yearName":"<year>年"}', available_years = '[{"yearCode":"<code>","yearName":"<year>年"},...]' WHERE ...`。(3) ISR は 2026-03 に廃止済み（全ページ SSR）のため、キャッシュパージは不要。
+**根本原因**: `packages/database/scripts/populate-occupation-income.ts` が正規パイプライン（`packages/ranking/src/repositories/`）を経由せず独自に INSERT し、フォーマット規約を満たさなかった。
+
+**対策**:
+1. `latest_year` は `{"yearCode":"2023","yearName":"2023年度"}` 形式で保存（配列・文字列禁止）
+2. `available_years` は `[{"yearCode":"2023","yearName":"2023年度"},...]` 形式で保存
+3. `ranking_data.area_code` は都道府県なら `"01000"`〜`"47000"` の5桁で保存（2桁禁止）
+4. 独自 populate スクリプト作成時は `populate-port-rankings.ts` をリファレンスとし、上記フォーマットに準拠する
+5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts`, `/register-ranking` SKILL.md
 
 ---
 

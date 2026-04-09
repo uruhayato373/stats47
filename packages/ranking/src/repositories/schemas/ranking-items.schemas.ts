@@ -58,7 +58,7 @@ const NormalizationOptionSchema = z.object({
 
 const CalculationConfigSchema = z.object({
   isCalculated: z.boolean().nullable().optional().transform(v => v ?? undefined),
-  type: z.enum(["ratio", "per_capita", "custom"]).nullable().optional().transform(v => (v === "custom" || v === null) ? undefined : v),
+  type: z.enum(["ratio", "per_capita", "subtraction", "custom"]).nullable().optional().transform(v => (v === "custom" || v === null) ? undefined : v),
   numeratorKey: z.string().nullable().optional().transform(v => v ?? undefined),
   denominatorKey: z.string().nullable().optional().transform(v => v ?? undefined),
   formula: z.string().nullable().optional().transform(v => v ?? undefined),
@@ -126,8 +126,11 @@ export const RankingItemDBSchema = z.object({
   value_display_config: parseJsonColumn(ValueDisplayConfigSchema),
   visualization_config: parseJsonColumn(VisualizationConfigSchema),
   calculation_config: parseJsonColumn(CalculationConfigSchema),
-  is_calculated: z.boolean().nullable().optional().transform(v => v ?? undefined),
-  calculation_type: z.enum(["ratio", "per_capita", "custom"]).nullable().optional().transform(v => (v === "custom" || v === null) ? undefined : v),
+  is_calculated: z.union([z.boolean(), z.number()]).nullable().optional().transform((val) => {
+    if (val === null || val === undefined) return undefined;
+    return typeof val === "number" ? val === 1 : val;
+  }),
+  calculation_type: z.enum(["ratio", "per_capita", "subtraction", "custom"]).nullable().optional().transform(v => (v === "custom" || v === null) ? undefined : v),
   numerator_ranking_key: z.string().nullable().optional().transform(v => v ?? undefined),
   denominator_ranking_key: z.string().nullable().optional().transform(v => v ?? undefined),
   calculation_formula: z.string().nullable().optional().transform(v => v ?? undefined),

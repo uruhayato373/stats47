@@ -54,6 +54,8 @@ export interface LeafletChoroplethMapProps {
     decimalPlaces?: number;
     displayUnit?: string;
   };
+  /** データなし（非公表）の凡例エントリを表示するか */
+  showNoDataLabel?: boolean;
 }
 
 /** Feature から都道府県コード（XX000 形式）を抽出 */
@@ -104,6 +106,7 @@ export function LeafletChoroplethMap({
   borderColor = "#94a3b8",
   className,
   valueDisplay,
+  showNoDataLabel = false,
 }: LeafletChoroplethMapProps) {
   const prefGeojson = useTopoJsonToGeoJson(topology);
 
@@ -120,7 +123,7 @@ export function LeafletChoroplethMap({
     (feature: Feature<Geometry>) => {
       const code = extractPrefCode(feature);
       const item = data.find((d) => d.areaCode === code);
-      if (item?.value == null) return "";
+      if (item?.value == null) return "非公表";
       return `${item.value.toLocaleString()}${unit ? ` ${unit}` : ""}`;
     },
     [data, unit]
@@ -199,6 +202,7 @@ export function LeafletChoroplethMap({
           data={legendData}
           unit={unit}
           valueDisplay={valueDisplay}
+          showNoDataLabel={showNoDataLabel}
         />
       </MapContainer>
     </div>

@@ -195,6 +195,7 @@ export function RankingMapChartClient({
                 borderColor={isDark ? "#475569" : "#94a3b8"}
                 className="h-[500px]"
                 valueDisplay={rankingItem.valueDisplay ?? undefined}
+                showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
               />
               <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
             </>

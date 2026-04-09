@@ -18,6 +18,8 @@ interface MapColorLegendProps {
     decimalPlaces?: number;
     displayUnit?: string;
   };
+  /** データなし（非公表）の凡例エントリを表示するか */
+  showNoDataLabel?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ export function MapColorLegend({
   unit = "",
   position = "bottomright",
   valueDisplay,
+  showNoDataLabel = false,
 }: MapColorLegendProps) {
   const map = useMap();
   const controlRef = useRef<L.Control | null>(null);
@@ -83,8 +86,11 @@ export function MapColorLegend({
 
         const gradientBar = `<div style="height:10px;border-radius:3px;background:linear-gradient(to right,${gradientParts.join(",")});margin:2px 0;"></div>`;
         const labels = `<div style="display:flex;justify-content:space-between;color:#64748b;"><span>${fmtMin}</span><span>${fmtMax}${displayUnit ? ` ${displayUnit}` : ""}</span></div>`;
+        const noDataEntry = showNoDataLabel
+          ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px;color:#64748b;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#e0e0e0;"></span><span>データなし</span></div>`
+          : "";
 
-        div.innerHTML = gradientBar + labels;
+        div.innerHTML = gradientBar + labels + noDataEntry;
         return div;
       };
 
