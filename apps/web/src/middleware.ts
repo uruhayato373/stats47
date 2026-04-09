@@ -152,6 +152,44 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // --- Fix 1: /correlation/{slug} → 410 Gone ---
+  // correlation ページは /correlation?x=...&y=... で動作。/correlation/xxx-and-yyy は存在しないルート。
+  // Google がクロールして 5xx（タイムアウト）を返していた。
+  if (pathname.startsWith("/correlation/")) {
+    return new Response(null, { status: 410 });
+  }
+
+  // --- Fix 2: /dashboard/* → 410 Gone ---
+  // 旧 URL 構造の亜種。tryLegacyRedirect がカバーしない /dashboard/00000/* 等を捕捉。
+  if (pathname.startsWith("/dashboard") || pathname.includes("/dashboard/")) {
+    return new Response(null, { status: 410 });
+  }
+
+  // --- Fix 4: /areas/{無効コード} → 410 Gone ---
+  // /areas/00000, /areas/14100 等の無効な都道府県コードが soft 404 を発生させていた。
+  {
+    const areaSegments = pathname.split("/").filter(Boolean);
+    if (areaSegments[0] === "areas" && areaSegments.length >= 2 && areaSegments[1] !== "cities") {
+      const code = areaSegments[1];
+      if (/^\d{5}$/.test(code)) {
+        const prefNum = parseInt(code.slice(0, 2), 10);
+        const suffix = code.slice(2);
+        if (prefNum < 1 || prefNum > 47 || suffix !== "000") {
+          return new Response(null, { status: 410 });
+        }
+      }
+    }
+  }
+
+  // --- Fix 5: /blog/{旧カテゴリ名} → 410 Gone ---
+  // /blog/construction, /blog/socialsecurity 等がブログスラッグとして解釈され soft 404。
+  if (pathname.startsWith("/blog/")) {
+    const blogSlug = pathname.slice("/blog/".length).split("/")[0];
+    if (OLD_CATEGORY_KEYS.has(blogSlug)) {
+      return new Response(null, { status: 410 });
+    }
+  }
+
   // --- 旧URL構造の 301 リダイレクト / 410 Gone ---
   const legacyResponse = tryLegacyRedirect(pathname, req.url);
   if (legacyResponse) return legacyResponse;

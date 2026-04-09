@@ -263,7 +263,19 @@
       "WebFetch(domain:news.yahoo.co.jp)",
       "WebFetch(domain:news.google.com)",
       "Bash(shuf)",
-      "Bash(xargs -P 10 -I '{}' sh -c 'code=$\\(curl -s -o /dev/null -w \"%{http_code}\" \"{}\"\\); path=$\\(echo \"{}\" | sed \"s|https://stats47.jp||\"\\); echo \"$code $path\"')"
+      "Bash(xargs -P 10 -I '{}' sh -c 'code=$\\(curl -s -o /dev/null -w \"%{http_code}\" \"{}\"\\); path=$\\(echo \"{}\" | sed \"s|https://stats47.jp||\"\\); echo \"$code $path\"')",
+      "Bash(xargs -I{} echo \"ranking: {}\")",
+      "Bash(xargs -I{} echo \"areas: {}\")",
+      "Bash(xargs -I{} echo \"blog: {}\")",
+      "Bash(xargs -I{} echo \"category: {}\")",
+      "Bash(xargs -I{} echo \"survey: {}\")",
+      "Bash(xargs -I{} echo \"themes: {}\")",
+      "Bash(xargs -I{} echo \"static: {}\")",
+      "Bash(xargs -P 10 -I '{}' sh -c 'code=$\\(curl -s -o /dev/null -w \"%{http_code}\" \"{}\"\\); echo \"$code {}\"')",
+      "Bash(awk '{print $1}' /tmp/check-results.txt)",
+      "Bash(sort wc:*)",
+      "Bash(echo \"Updated rows: $\\(sqlite3 \"/Users/minamidaisuke/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite\" \"SELECT changes\\(\\);\"\\)\")",
+      "Bash(xargs -P 5 -I '{}' sh -c 'code=$\\(curl -s -o /dev/null -w \"%{http_code}\" \"{}\" --max-time 15\\); path=$\\(echo \"{}\" | sed \"s|https://stats47.jp||\"\\); echo \"$code $path\"')"
     ],
     "additionalDirectories": [
       "c:\\Users\\m004195\\obsidian\\projects\\kazu-note",
