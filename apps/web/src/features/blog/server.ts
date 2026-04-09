@@ -34,3 +34,4 @@ export { articleService, ArticleService } from "./services/article-service";
 
 // サーバーコンポーネント
 export { ArticleAffiliateBanner } from "./components/article-affiliate-banner";
+export { RelatedRankingsSection } from "./components/RelatedRankingsSection";

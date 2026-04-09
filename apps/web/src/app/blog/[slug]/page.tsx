@@ -17,6 +17,7 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
+    RelatedRankingsSection,
     listLatestArticles,
     listArticlesByTagKey,
     findArticleBySlug,
@@ -26,7 +27,6 @@ import {
     articleService,
 } from "@/features/blog/server";
 
-import { RelatedRankingsSection } from "@/features/blog/components/RelatedRankingsSection";
 import { getRequiredBaseUrl } from "@/lib/env";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
 
