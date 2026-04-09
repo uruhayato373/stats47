@@ -165,6 +165,33 @@ user-invocable: false
 
 ---
 
+## X 予約投稿の正しいフロー（browser-use 自動化）
+
+**問題**: browser-use で X の予約投稿ダイアログの「予約投稿ポスト」ボタンをクリックしても予約が登録されない。ダイアログは閉じるが「予約済み」タブは空のまま。
+
+**原因**: 「予約投稿ポスト」ボタンはダイアログ内で直接予約を完了するボタンではない。正しいフローは「確認する」→ コンポーザに戻る（予約日時がセットされた状態）→「予約設定」ボタンをクリック。
+
+**対策**: X 予約投稿の正しい手順:
+1. コンポーザでテキスト入力 + 画像アップロード
+2. 「ポストを予約」（カレンダーアイコン）をクリック → ダイアログ表示
+3. select 要素で日時を設定
+4. **「確認する」をクリック** → ダイアログが閉じ、コンポーザに「YYYY年M月D日(曜)の午前/午後H:MMに送信されます」が表示される
+5. **「予約設定」ボタンをクリック** → 予約完了（「予約済み」タブに表示される）
+
+**注意**: `/publish-x` SKILL.md の記述は不正確（「確認する」はクリック不要と書いてあるが、実際はクリック必須）。SKILL.md の更新が必要。
+
+---
+
+## YouTube OAuth トークンは定期的に失効する
+
+**問題**: `scripts/youtube-upload.js` で `invalid_grant: Token has been expired or revoked` エラー。
+
+**原因**: Google OAuth の refresh token が失効（長期間未使用、パスワード変更、手動取り消し等）。
+
+**対策**: `node scripts/youtube-oauth-setup.js` を実行し、ブラウザで Google 認証を通す。新しい refresh token が `.env.local` に自動保存される。browser-use の Profile 5 で自動化可能。
+
+---
+
 ## OGP 画像 URL と noindex 漏れによる「クロール済み - インデックス未登録」1,453 件
 
 **問題**: GSC で「クロール済み - インデックス未登録」が 1,453 ページ繰り返し発生。主原因は (1) Next.js の opengraph-image.tsx が自動生成する `/areas/*/opengraph-image` URL が robots.txt で Disallow されておらず Google が全てクロール、(2) 市区町村ページ `cities/[cityCode]/page.tsx` に `robots: "noindex, follow"` が未設定（子ページには設定済み）。

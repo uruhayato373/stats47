@@ -2,6 +2,7 @@
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
 import { eq, and, isNotNull } from "drizzle-orm";
 
+import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
 import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
@@ -60,12 +61,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .from(rankingItems)
       .where(eq(rankingItems.isActive, true));
 
-    const rankingPages: MetadataRoute.Sitemap = rankingRows.map((row) => ({
-      url: `${BASE_URL}/ranking/${row.rankingKey}`,
-      lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    }));
+    const rankingPages: MetadataRoute.Sitemap = rankingRows
+      .filter((row) => !GONE_RANKING_KEYS.has(row.rankingKey))
+      .map((row) => ({
+        url: `${BASE_URL}/ranking/${row.rankingKey}`,
+        lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
+        changeFrequency: "monthly",
+        priority: 0.9,
+      }));
 
     // カテゴリページ
     const categoryRows = await db

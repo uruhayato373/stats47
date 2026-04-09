@@ -156,8 +156,9 @@ export default function middleware(req: NextRequest) {
   const legacyResponse = tryLegacyRedirect(pathname, req.url);
   if (legacyResponse) return legacyResponse;
 
-  // --- 市区町村 URL リダイレクト ---
-  // /areas/{areaCode}/{5桁cityCode}[/...] → /areas/{areaCode}/cities/{cityCode}
+  // --- 市区町村 URL → 410 Gone ---
+  // /areas/{areaCode}/{5桁cityCode}[/...] は市区町村ページ。robots.txt でブロック済みのため
+  // 301 リダイレクトではなく 410 Gone を返す（リダイレクト先がブロック済みだと GSC で二重問題になる）
   {
     const areaSegments = pathname.split("/").filter(Boolean);
     if (
@@ -167,12 +168,7 @@ export default function middleware(req: NextRequest) {
       /^\d{5}$/.test(areaSegments[2]) &&
       areaSegments[2] !== areaSegments[1] // cityCode !== areaCode（自分自身ではない）
     ) {
-      const areaCode = areaSegments[1];
-      const cityCode = areaSegments[2];
-      const newPath = `/areas/${areaCode}/cities/${cityCode}`;
-      const newUrl = new URL(newPath, req.url);
-      newUrl.search = req.nextUrl.search;
-      return NextResponse.redirect(newUrl, { status: 301 });
+      return new NextResponse(null, { status: 410 });
     }
   }
 

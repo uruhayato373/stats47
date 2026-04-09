@@ -84,7 +84,7 @@ bucket_name = "stats47"
 
 # Observability設定（Production）
 [env.production.observability]
-enabled = false
+enabled = true
 head_sampling_rate = 1
 
 [env.production.observability.logs]
