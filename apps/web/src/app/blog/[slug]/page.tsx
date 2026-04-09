@@ -26,6 +26,7 @@ import {
     articleService,
 } from "@/features/blog/server";
 
+import { RelatedRankingsSection } from "@/features/blog/components/RelatedRankingsSection";
 import { getRequiredBaseUrl } from "@/lib/env";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
 
@@ -252,6 +253,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     {/* 関連書籍（タグキーベース自動配置） */}
                     <ArticleRelatedBooks tagKeys={tagKeys} />
+
+                    {/* 関連ランキング（タグキーベース・ブログ→ランキング導線） */}
+                    <RelatedRankingsSection tagKeys={tagKeys} />
 
                     {/* 関連記事 */}
                     <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
