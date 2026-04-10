@@ -53,7 +53,7 @@ export async function RelatedArticlesCard({
           関連記事
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-2">
+      <CardContent className="px-4 pb-4 pt-0">
         <nav className="flex flex-col gap-0.5">
           {relatedArticles.map((article) => (
             <Link

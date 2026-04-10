@@ -38,7 +38,6 @@ describe("resolveAffiliateAd", () => {
       trackingPixelUrl: null,
       width: null,
       height: null,
-      adFileKey: null,
       createdAt: "2024-01-01",
       updatedAt: "2024-01-01",
     });
@@ -77,8 +76,7 @@ describe("resolveAffiliateBanners", () => {
         trackingPixelUrl: "https://example.com/pixel",
         width: 300,
         height: 250,
-        adFileKey: null,
-        createdAt: "2024-01-01",
+          createdAt: "2024-01-01",
         updatedAt: "2024-01-01",
       },
     ]);
@@ -119,8 +117,7 @@ describe("resolveAffiliateBanners", () => {
         trackingPixelUrl: null,
         width: null,
         height: null,
-        adFileKey: null,
-        createdAt: "2024-01-01",
+          createdAt: "2024-01-01",
         updatedAt: "2024-01-01",
       },
     ]);
@@ -148,8 +145,7 @@ describe("resolveAffiliateBanners", () => {
         trackingPixelUrl: "https://example.com/pixel",
         width: null,
         height: null,
-        adFileKey: null,
-        createdAt: "2024-01-01",
+          createdAt: "2024-01-01",
         updatedAt: "2024-01-01",
       },
     ]);

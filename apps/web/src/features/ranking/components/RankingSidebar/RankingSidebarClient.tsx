@@ -171,7 +171,7 @@ export function RankingSidebarClient({
                     {categoryName ?? "同カテゴリ"}
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-4 pb-4 pt-2 flex flex-col gap-0.5">
+            <CardContent className="px-4 pb-4 pt-0 flex flex-col gap-0.5">
                 {/* 関連ランキング: コンパクトリスト */}
                 <nav className="flex flex-col gap-0.5">
                     {displayOthers.map((item) => (

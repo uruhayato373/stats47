@@ -48,7 +48,14 @@
       "Skill(update-config)",
       "Bash(sqlite3:*)",
       "Bash(sort -k5 -rn)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(browser-use --headed --profile 'Profile 5' open \"http://localhost:3000/ranking/annual-sunshine-duration\")",
+      "Bash(browser-use --headed --profile 'Profile 5' eval \"window.resizeTo\\(375, 812\\); 'resized to 375x812'\")",
+      "Bash(browser-use --headed --profile 'Profile 5' eval \"window.scrollTo\\(0, document.body.scrollHeight\\); 'scrolled to bottom'\")",
+      "Bash(browser-use --headed --profile 'Profile 5' screenshot /tmp/ranking-mobile-bottom.png)",
+      "Bash(browser-use --headed --profile 'Profile 5' eval ':*)",
+      "Bash(browser-use --headed --profile 'Profile 5' close)",
+      "WebSearch"
     ],
     "defaultMode": "bypassPermissions"
   }

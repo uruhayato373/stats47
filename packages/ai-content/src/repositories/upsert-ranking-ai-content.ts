@@ -27,7 +27,6 @@ export async function upsertRankingAiContent(
         regionalAnalysis: data.regionalAnalysis,
         insights: data.insights,
         yearCode: data.yearCode,
-        dataHash: data.dataHash,
         aiModel: data.aiModel,
         promptVersion: data.promptVersion,
         generatedAt: data.generatedAt,

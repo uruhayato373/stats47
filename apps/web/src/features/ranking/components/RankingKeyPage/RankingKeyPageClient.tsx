@@ -449,7 +449,7 @@ export function RankingKeyPageClient({
 
             {/* サイドバーの内容をモバイル・タブレットではページ下部に表示 */}
             {!isAboveLg && sidebarSection && (
-                <div className="mt-4">
+                <div className="mt-4 flex flex-col gap-4">
                     {sidebarSection}
                 </div>
             )}

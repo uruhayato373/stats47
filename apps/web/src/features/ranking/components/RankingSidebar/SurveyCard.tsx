@@ -44,7 +44,7 @@ export function SurveyCard({ surveys, currentSurveyId }: SurveyCardProps) {
           調査から探す
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-2">
+      <CardContent className="px-4 pb-4 pt-0">
         <nav className="flex flex-col gap-0.5">
           {displaySurveys.map((survey) => (
             <Link

@@ -26,7 +26,6 @@ export const affiliateAds = sqliteTable(
     trackingPixelUrl: text("tracking_pixel_url"),
     width: integer("width"),
     height: integer("height"),
-    adFileKey: text("ad_file_key"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

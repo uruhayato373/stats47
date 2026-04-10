@@ -17,7 +17,6 @@ export const rankingAiContent = sqliteTable(
     regionalAnalysis: text("regional_analysis"),
     insights: text("insights"),
     yearCode: text("year_code").notNull(),
-    dataHash: text("data_hash"),
     aiModel: text("ai_model").notNull(),
     promptVersion: text("prompt_version").notNull(),
     generatedAt: text("generated_at").notNull(),

@@ -14,7 +14,6 @@ export const articles = sqliteTable(
     title:       text("title").notNull(),
     seoTitle:    text("seo_title"),
     description: text("description"),
-    tags:        text("tags"),
     filePath:    text("file_path").notNull(),
     format:      text("format").default("mdx"),
     hasCharts:   integer("has_charts", { mode: "boolean" }).default(false),

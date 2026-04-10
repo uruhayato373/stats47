@@ -59,11 +59,6 @@ export const rankingItems = sqliteTable(
     isActive: integer("is_active", { mode: "boolean" }).default(true),
     isFeatured: integer("is_featured", { mode: "boolean" }).default(false),
     featuredOrder: integer("featured_order").default(0),
-    isCalculated: integer("is_calculated", { mode: "boolean" }).default(false),
-    calculationType: text("calculation_type"), // "per_capita" | "ratio" | "custom"
-    numeratorRankingKey: text("numerator_ranking_key"),
-    denominatorRankingKey: text("denominator_ranking_key"),
-    calculationFormula: text("calculation_formula"), // JSON for custom formula
     dataSourceId: text("data_source_id")
       .default("estat")
       .notNull()
@@ -83,10 +78,6 @@ export const rankingItems = sqliteTable(
     isActiveIdx: index("idx_ranking_items_active").on(table.isActive),
     areaTypeIdx: index("idx_ranking_items_area_type").on(table.areaType),
     categoryKeyIdx: index("idx_ranking_items_category_key").on(table.categoryKey),
-    isCalculatedIdx: index("idx_ranking_items_is_calculated").on(table.isCalculated),
-    calculationTypeIdx: index("idx_ranking_items_calculation_type").on(table.calculationType),
-    numeratorIdx: index("idx_ranking_items_numerator").on(table.numeratorRankingKey),
-    denominatorIdx: index("idx_ranking_items_denominator").on(table.denominatorRankingKey),
     groupKeyIdx: index("idx_ranking_items_group_key").on(table.groupKey),
   })
 );

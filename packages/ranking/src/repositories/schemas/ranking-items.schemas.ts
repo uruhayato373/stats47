@@ -154,13 +154,13 @@ export const RankingItemDBSchema = z.object({
     ...data.visualization_config,
   } as RankingItem["visualization"];
 
-  // column優先、なければconfig(JSON)
+  // calculation_config JSON から計算設定を取得
   const calculation: RankingItem["calculation"] = {
-    isCalculated: data.is_calculated ?? data.calculation_config?.isCalculated ?? false,
-    type: data.calculation_type ?? data.calculation_config?.type,
-    numeratorKey: data.numerator_ranking_key ?? data.calculation_config?.numeratorKey,
-    denominatorKey: data.denominator_ranking_key ?? data.calculation_config?.denominatorKey,
-    formula: data.calculation_formula ?? data.calculation_config?.formula,
+    isCalculated: data.calculation_config?.isCalculated ?? false,
+    type: data.calculation_config?.type,
+    numeratorKey: data.calculation_config?.numeratorKey,
+    denominatorKey: data.calculation_config?.denominatorKey,
+    formula: data.calculation_config?.formula,
     normalizationOptions: data.calculation_config?.normalizationOptions,
   };
 

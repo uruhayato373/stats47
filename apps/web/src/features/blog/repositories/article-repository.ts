@@ -22,7 +22,6 @@ function toArticle(row: typeof articles.$inferSelect): Article {
     title: row.title,
     seoTitle: row.seoTitle,
     description: row.description,
-    tags: row.tags,
     filePath: row.filePath,
     published: row.published,
     publishedAt: row.publishedAt,
