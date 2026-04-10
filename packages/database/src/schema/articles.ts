@@ -20,8 +20,6 @@ export const articles = sqliteTable(
     published:   integer("published", { mode: "boolean" }).default(false),
     publishedAt: text("published_at"),
     ogImageType: text("og_image_type"),
-    ogpTitle:    text("ogp_title"),
-    ogpSubtitle: text("ogp_subtitle"),
     proofreadAt: text("proofread_at"),
     createdAt:   text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt:   text("updated_at").default(sql`CURRENT_TIMESTAMP`),

@@ -28,8 +28,6 @@ function toArticle(row: typeof articles.$inferSelect): Article {
     format: row.format,
     hasCharts: row.hasCharts,
     ogImageType: row.ogImageType,
-    ogpTitle: row.ogpTitle,
-    ogpSubtitle: row.ogpSubtitle,
     proofreadAt: row.proofreadAt,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
