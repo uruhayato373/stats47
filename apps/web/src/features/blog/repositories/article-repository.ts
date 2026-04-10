@@ -47,7 +47,7 @@ export async function findArticleBySlug(
   const result = await drizzleDb
     .select()
     .from(articles)
-    .where(eq(articles.slug, slug))
+    .where(and(eq(articles.slug, slug), eq(articles.published, true)))
     .limit(1);
 
   if (result.length === 0) return null;
