@@ -2,6 +2,7 @@
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
 import { eq, and, isNotNull } from "drizzle-orm";
 
+import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
@@ -102,9 +103,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .from(articles)
       .where(and(eq(articles.published, true), isNotNull(articles.publishedAt)));
 
+    const redirectedSlugs = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
     const blogPages: MetadataRoute.Sitemap = [
       { url: `${BASE_URL}/blog`, changeFrequency: "daily", priority: 0.8 },
-      ...articleRows.map((row) => ({
+      ...articleRows.filter((row) => !redirectedSlugs.has(row.slug)).map((row) => ({
         url: `${BASE_URL}/blog/${row.slug}`,
         lastModified: row.updatedAt
           ? new Date(row.updatedAt)
