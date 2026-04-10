@@ -12,6 +12,7 @@
 | ├ `pre-mortem/` | Pre-Mortem・対策書（`/pre-mortem`） | 四半期ごとに更新 |
 | ├ `performance/` | パフォーマンスレポート（`/performance-report`） | 月次で蓄積 |
 | └ `critical/` | 批判的レビュー・専門家レビュー・戦略評価（`/critical-review` `/expert-review` 等） | 蓄積 |
+| `youtube_experiments.md` | YouTube Shorts 実験ログ（`/record-youtube-experiment`） | 蓄積 |
 | `10_SNS戦略/` | SNS コンテンツ設計（X + YouTube に集中） | 内容更新が中心 |
 | `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | 蓄積 |
 | `21_ブログ記事原稿/` | ブログ記事の下書き原稿 | 蓄積 |

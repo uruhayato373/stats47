@@ -29,8 +29,10 @@ import { ThumbnailPreview } from './features/ranking-youtube/previews/ThumbnailP
 import { RankingNormalPreview } from './features/ranking-youtube/previews/RankingNormalPreview';
 import { RankingHorizontalBarPreview } from './features/ranking-youtube/previews/RankingHorizontalBarPreview';
 import { RankingCountdownPreview } from './features/ranking-youtube/previews/RankingCountdownPreview';
+import { StaticRankingPreview } from './features/ranking-youtube/previews/StaticRankingPreview';
 import { RankingMigrationPreview } from './features/ranking-youtube/previews/RankingMigrationPreview';
 import { RankingScrollGesPreview } from './features/ranking-youtube/previews/RankingScrollGesPreview';
+import { BarChartRaceNormalPreview } from './features/ranking-youtube/previews/BarChartRaceNormalPreview';
 // OGP
 import { AreaProfileOgpPreview } from './features/ogp/previews/AreaProfileOgpPreview';
 import { BlogOgpPreview } from './features/ogp/previews/BlogOgpPreview';
@@ -246,6 +248,21 @@ export const RemotionRoot: React.FC = () => {
                 displayTitle: '',
                 gesBackground: true,
               } as any}
+            />
+            {/* YouTube Shorts C: 6秒静止画ランキング TOP15（競合「ランクの森」フォーマット） */}
+            <Composition
+              id="RankingYouTube-Static"
+              component={StaticRankingPreview}
+              durationInFrames={180}
+              fps={VIDEO_CONFIG.fps}
+              width={VIDEO_CONFIG.width}
+              height={VIDEO_CONFIG.height}
+              schema={CommonPreviewSchema}
+              defaultProps={{
+                theme: "dark" as const,
+                showSafeAreas: false,
+                displayTitle: '',
+              }}
             />
           </Folder>
 
@@ -533,6 +550,27 @@ export const RemotionRoot: React.FC = () => {
             title: barChartRacePreviewData.title,
             unit: barChartRacePreviewData.unit,
             eventLabels: barChartRacePreviewData.eventLabels,
+          } as any}
+        />
+
+        {/* Bar Chart Race 通常動画 (16:9 Full HD 1920x1080) */}
+        <Composition
+          id="BarChartRace-Normal"
+          component={BarChartRaceNormalPreview}
+          durationInFrames={getBarChartRaceTimeline({ frameCount: barChartRacePreviewData.frames.length }).totalDuration}
+          fps={VIDEO_CONFIG.fps}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          schema={BarChartRaceShortSchema}
+          defaultProps={{
+            theme: "dark",
+            topN: 47,
+            frames: barChartRacePreviewData.frames,
+            title: barChartRacePreviewData.title,
+            unit: barChartRacePreviewData.unit,
+            hookText: barChartRacePreviewData.hookText,
+            eventLabels: barChartRacePreviewData.eventLabels,
+            enableSpoilerHook: barChartRacePreviewData.enableSpoilerHook,
           } as any}
         />
       </Folder>

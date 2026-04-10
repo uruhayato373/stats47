@@ -49,7 +49,7 @@ const DATE_FONT_SIZE = 100;
 // ---------------------------------------------------------------------------
 
 /** 全フレームの全名前をソートしてインデックス割当 → 色の安定性を確保 */
-function buildColorMap(frames: BarChartRaceFrame[]): Map<string, string> {
+export function buildColorMap(frames: BarChartRaceFrame[]): Map<string, string> {
   const allNames = new Set<string>();
   for (const frame of frames) {
     for (const item of frame.items) {
@@ -65,7 +65,7 @@ function buildColorMap(frames: BarChartRaceFrame[]): Map<string, string> {
 }
 
 /** 順位に応じた色を返す（1-3位はランクカラー、4位以下はカテゴリ色） */
-function getBarColor(item: InterpolatedBarItem, rank1Based: number, colorMap: Map<string, string>): string {
+export function getBarColor(item: InterpolatedBarItem, rank1Based: number, colorMap: Map<string, string>): string {
   if (rank1Based <= 3) {
     return RANK_COLORS[rank1Based as 1 | 2 | 3].from;
   }
@@ -415,12 +415,12 @@ export const BarChartRaceScene: React.FC<BarChartRaceSceneProps> = ({
 // ---------------------------------------------------------------------------
 
 /** "2020年" → 2020 のように年コードを抽出 */
-function parseYearFromDate(date: string): number {
+export function parseYearFromDate(date: string): number {
   const m = date.match(/(\d{4})/);
   return m ? parseInt(m[1], 10) : 0;
 }
 
 /** 2つの日付ラベルから t に応じたラベルを返す（前半は A、後半は B） */
-function blendDateLabel(dateA: string, dateB: string, t: number): string {
+export function blendDateLabel(dateA: string, dateB: string, t: number): string {
   return t < 0.5 ? dateA : dateB;
 }

@@ -160,6 +160,12 @@ const PLATFORM_CONFIG: Array<{
     compositionId: "BarChartRace-YouTubeShort",
     outputFile: "x/video.mp4",
   },
+  {
+    platform: "youtube-normal",
+    variant: "youtube",
+    compositionId: "BarChartRace-Normal",
+    outputFile: "youtube-normal/video.mp4",
+  },
 ];
 
 function buildJobs(
