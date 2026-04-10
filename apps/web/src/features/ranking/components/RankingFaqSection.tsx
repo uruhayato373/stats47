@@ -1,9 +1,3 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@stats47/components/atoms/ui/accordion";
 import { z } from "zod/v4";
 
 const faqItemSchema = z.object({
@@ -54,34 +48,9 @@ export function RankingFaqSection({ faqJson }: RankingFaqSectionProps) {
   };
 
   return (
-    <>
-      <div className="rounded-lg border bg-card shadow-sm">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="faq" className="border-none">
-            <AccordionTrigger className="px-6 py-4 hover:no-underline">
-              <h3 className="text-lg font-semibold">よくある質問</h3>
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <Accordion type="multiple">
-                {items.map((item, index) => (
-                  <AccordionItem key={index} value={`faq-${index}`}>
-                    <AccordionTrigger className="text-left text-sm font-medium">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replaceAll("<", "\\u003c") }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replaceAll("<", "\\u003c") }}
+    />
   );
 }
