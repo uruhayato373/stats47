@@ -14,6 +14,7 @@ import {
   OCCUPATION_SALARY_SET,
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
+  LOCAL_FINANCE_SET,
 } from "@stats47/types";
 
 import { toThemeConfig } from "../lib/to-theme-config";
@@ -37,4 +38,5 @@ export const ALL_THEMES: ThemeConfig[] = [
   toThemeConfig(OCCUPATION_SALARY_SET),
   toThemeConfig(REAL_INCOME_SET),
   toThemeConfig(LABOR_MOBILITY_SET),
+  toThemeConfig(LOCAL_FINANCE_SET),
 ];

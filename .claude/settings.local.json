@@ -55,7 +55,17 @@
       "Bash(browser-use --headed --profile 'Profile 5' screenshot /tmp/ranking-mobile-bottom.png)",
       "Bash(browser-use --headed --profile 'Profile 5' eval ':*)",
       "Bash(browser-use --headed --profile 'Profile 5' close)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(curl -s http://localhost:3000/ranking/annual-sunshine-duration)",
+      "Bash(xargs kill:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/ranking/annual-sunshine-duration)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/blog)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"turbo run dev\")",
+      "WebFetch(domain:shibutani.org)"
     ],
     "defaultMode": "bypassPermissions"
   }

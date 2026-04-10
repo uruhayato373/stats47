@@ -21,6 +21,7 @@ import { COMPARE_DEBT_SET } from "./compare-debt";
 import { COMPARE_PRIVATE_WAGE_SET } from "./compare-private-wage";
 import { REAL_INCOME_SET } from "./real-income";
 import { LABOR_MOBILITY_SET } from "./labor-mobility";
+import { LOCAL_FINANCE_SET } from "./local-finance";
 
 // ============================================================================
 // 個別 export（直接参照用）
@@ -42,6 +43,7 @@ export {
   OCCUPATION_SALARY_SET,
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
+  LOCAL_FINANCE_SET,
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
   COMPARE_SPENDING_SET,
@@ -70,6 +72,7 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   OCCUPATION_SALARY_SET,
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
+  LOCAL_FINANCE_SET,
 ];
 
 // ============================================================================

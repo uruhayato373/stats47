@@ -92,4 +92,5 @@ export {
   COMPARE_PRIVATE_WAGE_SET,
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
+  LOCAL_FINANCE_SET,
 } from "./indicator-sets/registry";
