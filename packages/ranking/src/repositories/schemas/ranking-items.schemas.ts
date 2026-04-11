@@ -135,6 +135,9 @@ export const RankingItemDBSchema = z.object({
   denominator_ranking_key: z.string().nullable().optional().transform(v => v ?? undefined),
   calculation_formula: z.string().nullable().optional().transform(v => v ?? undefined),
 
+  seo_title: z.string().nullable().optional().transform(v => v ?? undefined),
+  seo_description: z.string().nullable().optional().transform(v => v ?? undefined),
+
   created_at: z.string(),
   updated_at: z.string(),
 }).transform((data): RankingItem => {
@@ -191,6 +194,8 @@ export const RankingItemDBSchema = z.object({
     groupKey: data.group_key,
     annotation: data.annotation ?? undefined,
     description: data.description ?? undefined,
+    seoTitle: data.seo_title,
+    seoDescription: data.seo_description,
     latestYear,
     availableYears,
     isActive: data.is_active,

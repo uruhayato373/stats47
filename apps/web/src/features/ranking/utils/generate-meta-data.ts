@@ -80,11 +80,12 @@ export function generateRankingPageMetaData({
   const itemName = getRankingTitle(rankingItem);
   const unit = rankingItem.unit || "";
 
-  const title = areaType === "city"
+  const defaultTitle = areaType === "city"
     ? `${itemName} 市区町村ランキング`
     : `${itemName} 都道府県別ランキング`;
+  const title = rankingItem.seoTitle ?? defaultTitle;
 
-  const description = buildMetaDescription({
+  const description = rankingItem.seoDescription ?? buildMetaDescription({
     itemName,
     unit,
     rankingValues,

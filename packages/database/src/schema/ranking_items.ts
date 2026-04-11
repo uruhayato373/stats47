@@ -70,6 +70,8 @@ export const rankingItems = sqliteTable(
     calculationConfig: text("calculation_config"), // JSON
     groupKey: text("group_key"),
     additionalCategories: text("additional_categories"), // JSON array: '["infrastructure"]'
+    seoTitle: text("seo_title"),
+    seoDescription: text("seo_description"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

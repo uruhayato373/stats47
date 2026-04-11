@@ -26,6 +26,8 @@ export const rankingItemSelection = {
   value_display_config: rankingItems.valueDisplayConfig,
   visualization_config: rankingItems.visualizationConfig,
   calculation_config: rankingItems.calculationConfig,
+  seo_title: rankingItems.seoTitle,
+  seo_description: rankingItems.seoDescription,
   created_at: rankingItems.createdAt,
   updated_at: rankingItems.updatedAt,
 };

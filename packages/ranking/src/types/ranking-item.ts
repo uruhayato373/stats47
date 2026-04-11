@@ -254,6 +254,12 @@ export interface RankingItem {
   /** 出典情報（名前とURL） */
   source?: { name: string; url: string };
 
+  // === SEO ===
+  /** SEO 用タイトル（meta title のオーバーライド、未設定時は title を使用） */
+  seoTitle?: string | null;
+  /** SEO 用説明文（meta description のオーバーライド、未設定時は自動生成） */
+  seoDescription?: string | null;
+
   // === おすすめ情報 ===
   /** おすすめフラグ（Topページ等で表示） */
   isFeatured: boolean;
