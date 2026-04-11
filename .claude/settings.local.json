@@ -65,7 +65,23 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/blog)",
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"turbo run dev\")",
-      "WebFetch(domain:shibutani.org)"
+      "WebFetch(domain:shibutani.org)",
+      "Bash(npm install:*)",
+      "Bash(curl -s -o /tmp/youtube-thumb-mlfNXVBqmLs.jpg \"https://i.ytimg.com/vi/mlfNXVBqmLs/maxresdefault.jpg\")",
+      "Read(//tmp/**)",
+      "Bash(npx remotion:*)",
+      "Bash(npm list:*)",
+      "Bash(npx --help)",
+      "Bash(brew list:*)",
+      "Bash(npx playwright:*)",
+      "Bash(curl -s -o /tmp/youtube-thumb-Tzb3Jg53qYg.jpg \"https://i.ytimg.com/vi/Tzb3Jg53qYg/maxresdefault.jpg\")",
+      "Bash(npm ls:*)",
+      "Bash(curl:*)",
+      "Bash(git commit:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx vitest:*)",
+      "Bash([ -d \".local/r2/blog/$slug\" ])",
+      "Bash(awk '{print $6,$7,$8,$9}')"
     ],
     "defaultMode": "bypassPermissions"
   }

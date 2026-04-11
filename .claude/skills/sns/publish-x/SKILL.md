@@ -1,264 +1,155 @@
 ---
 name: publish-x
-description: browser-use CLI で X の予約投稿を自動設定する。Use when user says "X投稿", "X予約投稿", "ツイート予約". テキスト・画像・予約日時を自動操作.
+description: Playwright で X の予約投稿を自動実行する。Use when user says "X投稿", "X予約投稿", "ツイート予約". キャプション生成済みコンテンツをブラウザ自動操作で投稿.
 disable-model-invocation: true
-argument-hint: "<rankingKey> --schedule YYYY-MM-DD HH:MM [--domain ranking|compare|correlation]"
+argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking]"
 ---
 
-browser-use CLI（Chrome プロファイル経由）で X の投稿コンポーザを自動操作し、予約投稿を設定する。
+Playwright（永続プロファイル）で X のコンポーザを自動操作し、予約投稿を設定する。
 
 ## 用途
 
-- `/post-x` でキャプション生成済みのコンテンツを X に予約投稿したいとき
-- 手動コピペ＋画像添付の手間を省きたいとき
+- `/post-x` または `/post-sns-captions` でキャプション生成済みのコンテンツを X に予約投稿したいとき
+- scheduled 状態のストックをまとめて消化したいとき
 
 ## 引数
 
+```
+/publish-x <rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking|compare|correlation]
+```
+
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
-| **contentKey** | 必須 | - | ランキングキー / 比較キー / 相関キー |
-| **--schedule** | 必須 | - | 予約投稿日時（JST）— 例: `2026-03-25 12:00` |
+| **contentKey** | 必須 | - | ランキングキー（複数指定可） |
+| **date** | 必須 | - | 予約日時 JST（`2026-04-15T08:00` 形式） |
 | **--domain** | - | `ranking` | `ranking` / `compare` / `correlation` |
+| **--immediate** | - | - | 予約ではなく即時投稿 |
 
-## 前提条件（ハードブロック）
+**複数投稿の例:**
+```bash
+npx tsx .claude/skills/sns/publish-x/publish-x.ts \
+  annual-income-per-household 2026-04-12T08:00 \
+  divorces-per-total-population 2026-04-14T08:00 \
+  disposable-income-worker-households 2026-04-16T08:00
+```
 
-**以下をすべて確認してから開始する。条件を満たさない場合は停止。**
+## 前提条件
 
-1. browser-use CLI がインストール済み:
+1. **Playwright Chromium がインストール済み**:
    ```bash
-   export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
-   browser-use doctor
+   npx playwright install chromium
    ```
-2. キャプションファイルが存在する:
-   - `<baseDir>/x/caption.txt` — 投稿テキスト
-   - `<baseDir>/x/caption.json` — メタデータ（displayTitle 等）
-3. 画像ファイルが存在する（任意）:
-   - `<baseDir>/x/stills/choropleth-map-1200x630.png`（デフォルト — 地図は視認性が高くスクロール停止力がある）
-   - `<baseDir>/x/stills/chart-x-1200x630.png`（フォールバック）
-4. Chrome にログイン済みの X セッションがある（初回は手動ログインが必要）
+2. **キャプション・画像が生成済み**（`/post-x` or `/post-sns-captions` で生成）:
+   - `.local/r2/sns/<domain>/<contentKey>/x/caption.txt`
+   - `.local/r2/sns/<domain>/<contentKey>/x/stills/*.png`
+3. **永続プロファイル**: `.local/playwright-x-profile/` に X ログインセッションが保存されている
+   - 初回実行時はブラウザが開き、手動ログインが必要（5分以内）
+   - 2回目以降は自動的にログイン済み状態で起動
 
-### ベースディレクトリ
-
-| ドメイン | baseDir |
-|---|---|
-| ranking | `.local/r2/sns/ranking/<contentKey>/` |
-| compare | `.local/r2/sns/compare/<contentKey>/` |
-| correlation | `.local/r2/sns/correlation/<contentKey>/` |
-
-## browser-use 共通設定
-
-すべての `browser-use` コマンドに以下のオプションを付与する:
+## 実行
 
 ```bash
-export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
-BU="browser-use --headed --profile 'Profile 5'"
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <args>
 ```
 
-**重要:**
-- `--session` は指定しない（デフォルトセッション使用）
-- 各コマンドは同一セッションで逐次実行する
-- 要素インデックスは操作のたびに変わるため、必ず `$BU state` で都度確認すること
+スクリプトが自動で以下を実行する:
+1. Playwright で Chrome を起動（永続プロファイル使用）
+2. X.com のログイン状態を確認（未ログインなら手動ログイン待機）
+3. 各投稿について:
+   - `x.com/compose/post` を開く
+   - clipboard API でテキストを貼り付け（日本語対応）
+   - `primaryColumn` 内の `fileInput` で画像アップロード
+   - 予約ダイアログで日時設定
+   - 予約投稿ボタンをクリック
+4. DB（`sns_posts`）を自動更新（status → posted, caption 保存）
 
-## 実証済みの要素パターン
+## 実証済みの Playwright セレクタ
 
-| 要素 | 検索方法 | 備考 |
+X の compose ダイアログは `#layers` 内に生成されるため、一部の要素は `primaryColumn` スコープ外にある。
+
+| 操作 | セレクタ | 備考 |
 |---|---|---|
-| テキスト入力 | `aria-label=ポスト本文 contenteditable=true role=textbox` | |
-| 画像追加ボタン | `aria-label=画像や動画を追加` | |
-| 画像 file input | `input type=file accept=image/jpeg,...` | Shadow DOM 内 |
-| 予約ボタン | `aria-label=ポストを予約` | コンポーザ下部ツールバー |
-| 月セレクト | `select id=SELECTOR_1` | 予約ダイアログ内、Shadow DOM |
-| 日セレクト | `select id=SELECTOR_2` | 予約ダイアログ内、Shadow DOM |
-| 年セレクト | `select id=SELECTOR_3` | 予約ダイアログ内、Shadow DOM |
-| 時セレクト | `select id=SELECTOR_4` | 予約ダイアログ内、Shadow DOM |
-| 分セレクト | `select id=SELECTOR_5` | 予約ダイアログ内、Shadow DOM |
-| 確認するボタン | 「確認する」テキストの `<button>` | 予約ダイアログ内 |
-| ポストするボタン | 「ポストする」テキスト / 「予約設定」テキスト | 予約確認後に変わる |
-| 閉じるボタン | `aria-label=閉じる` | ダイアログ / コンポーザ |
+| テキスト入力 | `page.getByRole("textbox").first()` | clipboard API + Meta+V で入力 |
+| 画像アップロード | `page.locator('input[data-testid="fileInput"]').first()` | テキスト入力より先に実行すること |
+| 予約ボタン | `page.getByRole("button", { name: "ポストを予約" }).first()` | `force: true` 必須（layers が遮る） |
+| 月セレクト | `[data-testid="scheduledDatePickerMonths"]` | value: 1-12 |
+| 日セレクト | `[data-testid="scheduledDatePickerDays"]` | value: 1-31 |
+| 時セレクト | `[data-testid="scheduledDatePickerHours"]` | value: 1-12（12時間制） |
+| 分セレクト | `[data-testid="scheduledDatePickerMinutes"]` | value: "00"-"59"（ゼロパディング） |
+| AM/PM セレクト | `[data-testid="scheduledDatePickerMeridiem"]` | value: "AM" or "PM" |
+| 確認ボタン | `page.getByTestId("scheduledConfirmationPrimaryAction")` | クリック後、予約モード切替を待つ |
+| 予約モード検証 | `[data-testid="tweetButton"] span span:text-is("予約設定")` | 確認後にボタンテキストが変わる |
+| 投稿ボタン | `page.getByTestId("tweetButton").first()` | 予約モード確認後は `force` 不要 |
 
-## 手順
+## 実装上の注意点
 
-### Phase 0: データ読み込み
-
-1. `<baseDir>/x/caption.txt` を読み込む
-2. 画像ファイルの存在を確認（`stills/` ディレクトリ）
-3. `--schedule` の日時をパース（年・月・日・時・分）
-
-### Phase 1: ブラウザ起動 & ログイン確認
-
-```bash
-$BU open https://x.com/compose/post
+### clipboard API によるテキスト入力
+`pressSequentially` は日本語で不安定。`navigator.clipboard.write()` + `Meta+V` が確実:
+```typescript
+await page.evaluate(async (text: string) => {
+  const item = new ClipboardItem({
+    "text/plain": new Blob([text], { type: "text/plain" }),
+  });
+  await navigator.clipboard.write([item]);
+}, caption);
+await page.keyboard.press("Meta+v");
 ```
 
-`sleep 5` で読み込みを待ち、`$BU state` で確認:
-- `contenteditable=true role=textbox` があればログイン済み → Phase 2 へ
-- 「Sign in」「ログイン」が見える場合 → 未ログイン
+### `force: true` の使い分け
+compose ダイアログは `#layers` 内に生成され、背景のオーバーレイ div がポインタイベントを遮る。
 
-**未ログイン時:**
-ユーザーに「ブラウザ画面で手動ログインしてください」と案内して**停止**。ログイン完了後、ユーザーの指示で再開する。
+- **予約ボタン（カレンダーアイコン）**: `force: true` 必須（オーバーレイが遮る）
+- **投稿ボタン（予約設定後）**: `force: true` **不要**。まず通常クリックを試み、失敗時のみ `force` にフォールバック
 
-### Phase 2: 画像アップロード（テキストより先に実行）
+```typescript
+// 予約ボタン: force 必須
+await scheduleBtn.click({ force: true });
 
-画像ファイルが存在する場合、テキスト入力前にアップロードする。
-
-```bash
-$BU state  # input type=file の要素を特定
-$BU upload <file_inputのindex> <画像ファイルの絶対パス>
-sleep 3  # アップロード完了待ち
+// 投稿ボタン: 予約モード確認後は force 不要
+try {
+  await postBtn.click({ timeout: 5000 });
+} catch {
+  await postBtn.click({ force: true });
+}
 ```
 
-**画像の優先順位:** `choropleth-map-1200x630.png` → `chart-x-1200x630.png` の順で存在する方を1枚アップロードする。地図はタイムラインで視認性が高く、テキストの TOP3 データと情報が重複しない。
+### 予約モードの確認（重要）
+確認ボタン（`scheduledConfirmationPrimaryAction`）クリック後、ボタンテキストが「予約設定」に変わるのを待ってから投稿ボタンをクリックする。**この待機を省略すると即時投稿になる。**
 
-アップロード後に `$BU state` で画像プレビューが表示されていることを確認。
-
-### Phase 3: テキスト入力
-
-caption.txt の内容を入力する。
-
-```bash
-$BU state  # contenteditable=true role=textbox のインデックスを特定
-$BU click <テキスト入力のindex>
+```typescript
+await confirmBtn.click();
+await page.locator('[data-testid="tweetButton"] span span:text-is("予約設定")').waitFor({
+  state: "visible",
+  timeout: 5000,
+});
 ```
 
-テキストは `$BU type` で入力する:
+### 画像アップロードの待機
+画像アップロード後はサムネイル生成に時間がかかる。最低 5 秒の待機が必要。
 
-```bash
-$BU type "<caption.txt の内容>"
-```
+### 永続プロファイルのパス
+`.local/playwright-x-profile/` に Chrome プロファイルが保存される。このディレクトリを `.gitignore` に追加済み（`.local/` が対象）。
 
-**注意:**
-- テキストに改行が含まれる場合は `$BU keys Enter` で改行を挿入するか、`$BU eval` で ClipboardEvent ペーストを使う
-- URL は自動的にリンク化される
-- ハッシュタグも含めた完全なテキストを入力する
+## DB 更新
 
-**ClipboardEvent フォールバック（改行を含む場合）:**
+スクリプトが自動で `sns_posts` テーブルを更新する:
+- `status` → `posted`
+- `posted_at` → 予約日（YYYY-MM-DD）
+- `caption` → caption.txt の内容（未設定の場合のみ）
 
-```bash
-node -e "
-const fs = require('fs');
-const text = fs.readFileSync('<baseDir>/x/caption.txt', 'utf8').trim();
-fs.writeFileSync('/tmp/x-post-encoded.txt', encodeURIComponent(text));
-"
-ENCODED=$(cat /tmp/x-post-encoded.txt)
-$BU eval "
-  const editor = document.querySelector('[contenteditable=true][role=textbox]');
-  if (editor) {
-    editor.focus();
-    const text = decodeURIComponent('$ENCODED');
-    const dt = new DataTransfer();
-    dt.setData('text/plain', text);
-    const event = new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true });
-    editor.dispatchEvent(event);
-    'pasted ' + text.length + ' chars';
-  } else { 'editor not found'; }
-"
-```
-
-### Phase 4: 予約設定
-
-```bash
-$BU state  # aria-label=ポストを予約 のインデックスを特定
-$BU click <予約ボタンのindex>
-sleep 2
-```
-
-予約ダイアログが開いたら日時を設定:
-
-```bash
-$BU state  # select 要素のインデックスを確認
-
-# 月を設定（SELECTOR_1）
-$BU select <月セレクトのindex> <月の値>
-
-# 日を設定（SELECTOR_2）
-$BU select <日セレクトのindex> <日の値>
-
-# 年を設定（SELECTOR_3）
-$BU select <年セレクトのindex> <年の値>
-
-# 時を設定（SELECTOR_4）
-$BU select <時セレクトのindex> <時の値>
-
-# 分を設定（SELECTOR_5）
-$BU select <分セレクトのindex> <分の値>
-```
-
-**select の値について:**
-- 月: `1`〜`12`（数値文字列）
-- 日: `1`〜`31`
-- 年: `2026` 等（4桁）
-- 時: `0`〜`23`
-- 分: `00`〜`59`（2桁ゼロパディング）
-
-### Phase 5: 予約投稿を実行
-
-**重要**: 予約ダイアログ内には「確認する」と「予約投稿ポスト」の **2つのボタン** がある。
-
-```
-[ダイアログ上部] 「確認する」    — 日時のバリデーションのみ（クリック不要）
-[ダイアログ下部] 「予約投稿ポスト」 — 実際に予約をスケジュールするボタン（これをクリック）
-```
-
-**⚠ 「確認する」だけクリックするとダイアログが閉じてスケジュール未設定のままコンポーザに戻る。この状態で「ポストする」を押すと即時投稿になる。必ず「予約投稿ポスト」をクリックすること。**
-
-```bash
-# 日時設定後、「予約投稿ポスト」ボタンを特定してクリック
-$BU state | grep -B1 '予約投稿ポスト$'
-$BU click <予約投稿ポストのindex>
-sleep 3
-```
-
-成功すると下書き（予約済み）画面に遷移する。
-
-### Phase 6: 確認 & クリーンアップ
-
-```bash
-$BU screenshot /tmp/x-publish-<contentKey>.png
-```
-
-スクリーンショットをユーザーに提示し、結果を報告:
-- 予約投稿の成功/失敗
-- 投稿テキスト（先頭50文字）
-- 添付画像の有無
-- 予約日時
-
-```bash
-$BU close
-```
-
-### Phase 7: DB 投稿記録
-
-`sns_posts` テーブルに投稿記録を INSERT する:
-
-```bash
-sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, media_path, has_link, status, scheduled_at)
-   VALUES ('x', 'original', '<domain>', '<contentKey>', '<caption先頭100文字>', '<media_path>', <0or1>, 'scheduled', '<YYYY-MM-DD HH:MM>')"
-```
-
-- `post_type`: `original`（通常投稿）
-- `status`: `scheduled`（予約投稿の場合）。即時投稿なら `posted` + `posted_at` をセット
-- `has_link`: stats47.jp の URL を含む場合は `1`
+手動でメディアファイルを削除する場合は `/mark-sns-posted` を使用。
 
 ## エラーハンドリング
 
-- **ログインしていない場合**: ユーザーに手動ログインを案内して停止。認証情報をスクリプトで入力しない
-- **要素が見つからない場合**: `$BU state` を再取得し、要素インデックスを再特定。3回試行して失敗したら停止
-- **画像アップロード失敗**: テキストのみで予約投稿し、画像は手動添付を案内
-- **予約ダイアログが開かない場合**: `sleep 3` → 再度クリック。3回失敗で停止
-- **セッション切れ**: `$BU close` → 再起動。ログインページなら停止
-
-## 注意
-
-- **認証情報は扱わない**: Chrome プロファイルのセッションに依存
-- **要素インデックスは毎回変わる**: 操作のたびに `$BU state` で再取得すること（ハードコードしない）
-- **予約投稿のみ対応**: 即時投稿は対応しない（ボット検出リスク軽減のため）
-- **一時ファイルは `/tmp/` に作成**: `x-post-encoded.txt`, スクリーンショット等
-- **投稿間隔**: 連続で複数投稿を予約する場合も、予約時刻は最低1時間以上空けること
+- **未ログイン**: ブラウザが開き、手動ログイン待機（5分タイムアウト）
+- **要素不在**: `waitFor` で最大 10-15 秒待機後、エラーで停止
+- **画像なし**: 画像なしでテキストのみ投稿
+- **セレクタ変更**: X の UI 変更でセレクタが壊れた場合、本ファイルの「実証済みセレクタ」表を更新すること
 
 ## 参照
 
-- キャプション生成: `/post-x` スキル
-- 画像生成: `/render-sns-stills` スキル
-- browser-use CLI: `browser-use --help`
-- 投稿管理: `sns_posts` テーブル（`packages/database/src/schema/sns_posts.ts`）
+- キャプション生成: `.claude/skills/sns/post-x/SKILL.md`
+- 画像生成: `.claude/skills/sns/render-sns-stills/SKILL.md`
+- 投稿完了処理: `.claude/skills/sns/mark-sns-posted/SKILL.md`
+- 永続プロファイル: `.local/playwright-x-profile/`
+- スクリプト本体: `.claude/skills/sns/publish-x/publish-x.ts`
