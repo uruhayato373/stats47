@@ -161,6 +161,8 @@ WHERE tags LIKE '%賃金%' OR tags LIKE '%転職%' -- etc.
 - `stacked-bar`: 積み上げ棒グラフ
 - `summary-findings`: まとめ表
 
+> **⚠ 記事内テーブル禁止ルール:** マークダウンテーブルと `<ranking-table>` は原則使わない。データは SVG チャートか本文太字で表現し、全データは `<source-link>` でランキングページへ誘導する。例外: 採点方法・多次元スコア・相関係数のみ許可。
+
 ### Phase 4: 出力
 
 8. `docs/20_ブログ記事企画/affiliate-{affiliateCategory}.md` に保存（全カテゴリ実行時は `affiliate-all.md`）。ファイル冒頭に以下のヘッダー:

@@ -120,6 +120,8 @@ WHERE ri.is_active = 1 AND ri.area_type = 'prefecture'
 - `stacked-bar`: 積み上げ棒グラフ
 - `summary-findings`: まとめ表
 
+> **⚠ 記事内テーブル禁止ルール:** マークダウンテーブルと `<ranking-table>` は原則使わない。データは SVG チャートか本文太字で表現し、全データは `<source-link>` でランキングページへ誘導する。例外: 採点方法・多次元スコア・相関係数のみ許可。
+
 ### Phase 4: 出力
 
 9. `docs/20_ブログ記事企画/trends-{YYYY-MM-DD}.md` に保存。ファイル冒頭に以下のヘッダーを付与:
