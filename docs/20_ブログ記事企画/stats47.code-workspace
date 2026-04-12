@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Downloads/インデックス登録統計 2026年4月9日"
+		},
+		{
+			"path": "../../../Downloads/インデックス登録統計 2026年4月"
+		},
+		{
+			"path": "../../../Downloads/インデックス登録 2026年4月9日"
+		},
+		{
+			"path": "../../../Downloads/stats47.jp-Coverage-Drilldown-2026-04-09"
+		}
+	],
+	"settings": {
+		"typescript.tsserver.maxTsServerMemory": 4096,
+		"typescript.disableAutomaticTypeAcquisition": true,
+		"typescript.tsdk": "node_modules/typescript/lib",
+		"typescript.enablePromptUseWorkspaceTsdk": true
+	}
+}

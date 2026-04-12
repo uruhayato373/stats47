@@ -17,8 +17,6 @@ published: true
 
 <ad-slot></ad-slot>
 
-<ranking-table ranking-key="starting-salary-highschool"></ranking-table>
-
 <data-source url="https://www.e-stat.go.jp/dbview?sid=0003084610" label="e-Stat 賃金構造基本統計調査"></data-source>
 
 **1位は三重県**（20.8万円）。2位の京都府（20.2万円）、3位の神奈川県（20.1万円）と続きます。上位には製造業が盛んな県が目立ちます。
@@ -50,13 +48,6 @@ published: true
 ## 大卒初任給では順位が逆転する
 
 高卒と大卒で初任給ランキングを比較すると、驚くほど順位が異なります。
-
-| 順位 | 高卒初任給 | 大卒初任給 |
-|---:|---|---|
-| 1位 | 三重県 20.8万円 | **秋田県 26.8万円** |
-| 2位 | 京都府 20.2万円 | 山口県 25.8万円 |
-| 3位 | 神奈川県 20.1万円 | 静岡県 25.0万円 |
-| 最下位 | 沖縄県 16.5万円 | 鳥取県 20.2万円 |
 
 <data-source url="https://www.e-stat.go.jp/dbview?sid=0003084610" label="e-Stat 賃金構造基本統計調査"></data-source>
 
