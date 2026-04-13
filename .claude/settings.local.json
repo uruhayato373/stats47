@@ -83,7 +83,10 @@
       "Bash([ -d \".local/r2/blog/$slug\" ])",
       "Bash(awk '{print $6,$7,$8,$9}')",
       "Read(//private/tmp/**)",
-      "Bash(split -l 500 /tmp/d1-sync-ranking_items.sql /tmp/d1-sync-chunk-)"
+      "Bash(split -l 500 /tmp/d1-sync-ranking_items.sql /tmp/d1-sync-chunk-)",
+      "Bash(echo \"---exit: $?\")",
+      "Bash(echo \"---push exit: $?\")",
+      "Bash(git reset:*)"
     ],
     "defaultMode": "bypassPermissions"
   }
