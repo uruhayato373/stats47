@@ -1,6 +1,6 @@
 
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
-import { eq, and, isNotNull } from "drizzle-orm";
+import { eq, and, isNotNull, sql } from "drizzle-orm";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
@@ -22,7 +22,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/ranking`, changeFrequency: "daily", priority: 0.9 },
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
-  { url: `${BASE_URL}/compare`, changeFrequency: "weekly", priority: 0.5 },
+  // /compare は除外: インタラクティブツールで searchParams 膨張。/compare/* は noindex, follow 戦略
   // correlation は除外: インタラクティブツールで検索流入なし（71表示/0クリック）、25秒の応答時間で5xx原因
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
@@ -86,12 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     }));
 
-    const comparePages: MetadataRoute.Sitemap = categoryRows.map((row) => ({
-      url: `${BASE_URL}/compare/${row.categoryKey}`,
-      lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
-      changeFrequency: "weekly",
-      priority: 0.6,
-    }));
+    // /compare/* は noindex, follow 戦略。sitemap には含めない。
 
     // ブログ記事
     const articleRows = await db
@@ -133,12 +128,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
     ];
 
-    // タグページ（公開記事が存在するタグのみ）
+    // タグページ（公開記事が 2 本以上あるタグのみ）
+    // 1 本しかないタグは thin content と判定されやすいため sitemap から除外。
+    // page.tsx 側でも generateMetadata で noindex, follow を返す。
     const tagRows = await db
-      .selectDistinct({ tagKey: articleTags.tagKey })
+      .select({
+        tagKey: articleTags.tagKey,
+        count: sql<number>`count(*)`.as("count"),
+      })
       .from(articleTags)
       .innerJoin(articles, eq(articleTags.slug, articles.slug))
-      .where(eq(articles.published, true));
+      .where(eq(articles.published, true))
+      .groupBy(articleTags.tagKey)
+      .having(sql`count(*) >= 2`);
 
     const tagPages: MetadataRoute.Sitemap = tagRows.map((row) => ({
       url: `${BASE_URL}/tag/${row.tagKey}`,
@@ -146,7 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     }));
 
-    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES, ...rankingPages, ...categoryPages, ...comparePages, ...blogPages, ...surveyPages, ...tagPages];
+    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES, ...rankingPages, ...categoryPages, ...blogPages, ...surveyPages, ...tagPages];
   } catch {
     // ビルド時に D1 が利用できない場合は静的ページのみ返し、ISR で再生成する
     return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES];

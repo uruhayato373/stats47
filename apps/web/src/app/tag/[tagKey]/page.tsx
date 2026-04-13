@@ -55,6 +55,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { tagKey } = await params;
     const tagName = await getTagName(tagKey);
 
+    // 記事が 2 本未満のタグは thin content と判定されやすいため noindex。
+    // 0 本の場合はページ本体で notFound() が呼ばれる。
+    const articles = await listArticleSummariesByTagKey(tagKey, 2);
+    const indexable = articles.length >= 2;
+
     const title = `「${tagName}」の記事一覧 | ブログ | stats47`;
     const description = `「${tagName}」タグが付いた都道府県統計ブログの記事一覧。`;
 
@@ -64,6 +69,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         alternates: {
             canonical: `/tag/${tagKey}`,
         },
+        robots: indexable ? "index, follow" : "noindex, follow",
         openGraph: {
             title,
             description,

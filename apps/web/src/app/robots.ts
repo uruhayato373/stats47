@@ -39,7 +39,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: [
           "/admin/*", // 管理画面
-          "/api/auth/*", // 認証API
+          "/api/*", // 内部 route handler（blog-data, ranking-data 等）。フロントから fetch するだけで Googlebot に露出させない
           "/profile/edit", // プロフィール編集
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
           "/areas/*/cities/*", // 市区町村ページ（noindex だがクロールバジェット浪費防止）
@@ -50,7 +50,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/", // 明示的に全ページを許可
         disallow: [
           "/admin/*", // 管理画面は除外
-          "/api/auth/*", // 認証APIは除外
+          "/api/*", // 内部 route handler
           "/profile/edit", // プロフィール編集は除外
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
           "/areas/*/cities/*", // 市区町村ページ

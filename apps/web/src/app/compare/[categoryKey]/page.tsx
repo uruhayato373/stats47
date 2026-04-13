@@ -59,6 +59,7 @@ export async function generateMetadata({
             title,
             description,
             alternates: { canonical },
+            robots: "noindex, follow",
             ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
         };
     }
@@ -75,6 +76,7 @@ export async function generateMetadata({
         title,
         description,
         alternates: { canonical },
+        robots: "noindex, follow",
         ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
     };
 }

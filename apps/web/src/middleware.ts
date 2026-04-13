@@ -2,6 +2,29 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
+import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
+
+/**
+ * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
+ * Cloudflare Cache Rule が 4xx を誤ってキャッシュしても middleware 側で防ぐ defense in depth。
+ */
+function gone(): Response {
+  return new Response(null, {
+    status: 410,
+    headers: { "Cache-Control": "no-store, must-revalidate" },
+  });
+}
+
+/**
+ * 都道府県コード（01000〜47000）の妥当性判定。
+ * 5 桁数字かつ prefNum 01〜47、末尾 `000` のみ有効。
+ */
+export function isValidPrefCode(code: string): boolean {
+  if (!/^\d{5}$/.test(code)) return false;
+  const prefNum = parseInt(code.slice(0, 2), 10);
+  const suffix = code.slice(2);
+  return prefNum >= 1 && prefNum <= 47 && suffix === "000";
+}
 
 /**
  * 旧URL構造のカテゴリキー一覧
@@ -37,28 +60,30 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
 
   // /{cat}/{sub}/dashboard/{prefCode} → /areas/{prefCode}
   // /{cat}/{sub}/ranking/{rankingKey} → /ranking/{rankingKey}
+  // 無効 prefCode（例 /administrativefinancial/.../dashboard/00000）は 301→410 チェーンを避け直接 410 を返す。
   if (segments.length >= 4 && OLD_CATEGORY_KEYS.has(segments[0])) {
     const pageType = segments[2]; // "dashboard" or "ranking"
     const key = segments[3];
     if (pageType === "dashboard" && /^\d{5}$/.test(key)) {
+      if (!isValidPrefCode(key)) return gone();
       return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), { status: 301 });
     }
     if (pageType === "ranking" && key) {
-      if (GONE_RANKING_KEYS.has(key)) {
-        return new Response(null, { status: 410 });
-      }
+      if (GONE_RANKING_KEYS.has(key)) return gone();
       return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), { status: 301 });
     }
   }
 
   // /area-profile/{prefCode}[/...] → /areas/{prefCode}
   if (segments.length >= 2 && segments[0] === "area-profile" && /^\d{5}$/.test(segments[1])) {
+    if (!isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
   }
 
   // /dashboard/{prefCode}/{cat}/{sub} → /areas/{prefCode}
   // 旧URL構造のバリアント（セグメント順序が逆のパターン）
   if (segments.length >= 2 && segments[0] === "dashboard" && /^\d{5}$/.test(segments[1])) {
+    if (!isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
   }
 
@@ -69,7 +94,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     pathname.startsWith("/blog/prefecture-rank/") ||
     pathname.startsWith("/stats/prefecture-rank/")
   ) {
-    return new Response(null, { status: 410 });
+    return gone();
   }
 
   if (segments.length >= 2 && segments.length <= 3 && OLD_CATEGORY_KEYS.has(segments[0])) {
@@ -86,7 +111,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   ) {
     const hasPrefCode = segments.some((s) => /^\d{5}$/.test(s));
     if (hasPrefCode) {
-      return new Response(null, { status: 410 });
+      return gone();
     }
   }
 
@@ -118,18 +143,21 @@ export default function middleware(req: NextRequest) {
   {
     const tagMatch = pathname.match(/^\/blog\/tags?\/(.+)$/);
     if (tagMatch) {
-      return new Response(null, { status: 410 });
+      return gone();
     }
   }
 
-  // --- /tag/{日本語tagKey} への直接アクセス → 410 Gone ---
+  // --- /tag/{tagKey} への直接アクセスのうち廃止済みを 410 Gone ---
+  // - 日本語 tagKey（現行は英語 slug のみ有効）
+  // - GONE_TAG_KEYS に登録済みの廃止英語 slug
+  // 該当しない英語 tagKey は /tag/[tagKey] ルートに渡され、DB 照合後 notFound() で 404 を返す可能性がある。
+  // 繰り返し GSC に 404 が出る slug はその都度 GONE_TAG_KEYS に追加する。
   {
     const directTagMatch = pathname.match(/^\/tag\/(.+)$/);
     if (directTagMatch) {
       const tagKey = decodeURIComponent(directTagMatch[1]);
-      if (/[^\x00-\x7F]/.test(tagKey)) {
-        return new Response(null, { status: 410 });
-      }
+      if (/[^\x00-\x7F]/.test(tagKey)) return gone();
+      if (GONE_TAG_KEYS.has(tagKey)) return gone();
     }
   }
 
@@ -144,11 +172,21 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // --- /ranking/prefecture/{slug} → /ranking/{slug} リダイレクト or 410 ---
+  // 旧 URL 構造 /ranking/prefecture/xxx は Next.js の /ranking/[rankingKey] 単一セグメントに
+  // 一致せず 404 を返していた。GONE_RANKING_KEYS に該当すれば 410、それ以外は 301 で新 URL へ。
+  if (pathname.startsWith("/ranking/prefecture/")) {
+    const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
+    if (!slug) return gone();
+    if (GONE_RANKING_KEYS.has(slug)) return gone();
+    return NextResponse.redirect(new URL(`/ranking/${slug}`, req.url), { status: 301 });
+  }
+
   // --- 削除済みランキングキーへの直接アクセス → 410 Gone ---
   if (pathname.startsWith("/ranking/")) {
     const rankingKey = pathname.slice("/ranking/".length);
     if (GONE_RANKING_KEYS.has(rankingKey)) {
-      return new Response(null, { status: 410 });
+      return gone();
     }
   }
 
@@ -156,13 +194,13 @@ export default function middleware(req: NextRequest) {
   // correlation ページは /correlation?x=...&y=... で動作。/correlation/xxx-and-yyy は存在しないルート。
   // Google がクロールして 5xx（タイムアウト）を返していた。
   if (pathname.startsWith("/correlation/")) {
-    return new Response(null, { status: 410 });
+    return gone();
   }
 
   // --- Fix 2: /dashboard/* → 410 Gone ---
   // 旧 URL 構造の亜種。tryLegacyRedirect がカバーしない /dashboard/00000/* 等を捕捉。
   if (pathname.startsWith("/dashboard") || pathname.includes("/dashboard/")) {
-    return new Response(null, { status: 410 });
+    return gone();
   }
 
   // --- Fix 4: /areas/{無効コード} → 410 Gone ---
@@ -171,12 +209,8 @@ export default function middleware(req: NextRequest) {
     const areaSegments = pathname.split("/").filter(Boolean);
     if (areaSegments[0] === "areas" && areaSegments.length >= 2 && areaSegments[1] !== "cities") {
       const code = areaSegments[1];
-      if (/^\d{5}$/.test(code)) {
-        const prefNum = parseInt(code.slice(0, 2), 10);
-        const suffix = code.slice(2);
-        if (prefNum < 1 || prefNum > 47 || suffix !== "000") {
-          return new Response(null, { status: 410 });
-        }
+      if (/^\d{5}$/.test(code) && !isValidPrefCode(code)) {
+        return gone();
       }
     }
   }
@@ -186,7 +220,7 @@ export default function middleware(req: NextRequest) {
   if (pathname.startsWith("/blog/")) {
     const blogSlug = pathname.slice("/blog/".length).split("/")[0];
     if (OLD_CATEGORY_KEYS.has(blogSlug)) {
-      return new Response(null, { status: 410 });
+      return gone();
     }
   }
 
@@ -206,7 +240,7 @@ export default function middleware(req: NextRequest) {
       /^\d{5}$/.test(areaSegments[2]) &&
       areaSegments[2] !== areaSegments[1] // cityCode !== areaCode（自分自身ではない）
     ) {
-      return new NextResponse(null, { status: 410 });
+      return gone();
     }
   }
 

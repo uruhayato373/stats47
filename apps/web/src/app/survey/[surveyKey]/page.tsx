@@ -163,11 +163,7 @@ export default async function SurveyPage({ params }: PageProps) {
       </div>
 
       {rankingItems.length === 0 ? (
-        <div className="text-center py-20 bg-muted/30 rounded-lg">
-          <p className="text-muted-foreground text-lg">
-            該当するランキングが見つかりませんでした。
-          </p>
-        </div>
+        notFound()
       ) : (
         <>
           {featuredItems.length > 0 && (

@@ -31,8 +31,8 @@ export async function GET(
     return await readFromR2(key);
   } catch {
     return NextResponse.json(
-      { error: "データの取得に失敗しました" },
-      { status: 500 }
+      { error: "ファイルが見つかりません" },
+      { status: 404 }
     );
   }
 }

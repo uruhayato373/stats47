@@ -163,11 +163,7 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* メインコンテンツ */}
         <main className="flex-1 min-w-0">
           {rankingItems.length === 0 ? (
-            <div className="text-center py-20 bg-muted/30 rounded-lg">
-              <p className="text-muted-foreground text-lg">
-                該当するランキングが見つかりませんでした。
-              </p>
-            </div>
+            notFound()
           ) : (
             <>
               {/* 注目ランキング（コンパクトカード） */}
