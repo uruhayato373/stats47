@@ -15,7 +15,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("[global-error]", error);
+    // Error is already captured by Next.js error boundary
   }, [error]);
 
   return (

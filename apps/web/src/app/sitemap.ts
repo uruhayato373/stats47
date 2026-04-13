@@ -2,11 +2,13 @@
 import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
 import { eq, and, isNotNull, sql } from "drizzle-orm";
 
-import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
-import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
 import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
+
+import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
+import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
+
 
 import type { MetadataRoute } from "next";
 
