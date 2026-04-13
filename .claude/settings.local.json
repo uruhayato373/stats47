@@ -86,7 +86,8 @@
       "Bash(split -l 500 /tmp/d1-sync-ranking_items.sql /tmp/d1-sync-chunk-)",
       "Bash(echo \"---exit: $?\")",
       "Bash(echo \"---push exit: $?\")",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(find /Users/minamidaisuke/stats47/.claude/skills -name \"SKILL.md\" -exec grep -l \"reference/\" {} \\\\;)"
     ],
     "defaultMode": "bypassPermissions"
   }
