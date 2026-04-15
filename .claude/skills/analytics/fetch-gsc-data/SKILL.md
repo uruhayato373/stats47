@@ -1,9 +1,13 @@
 ---
 name: fetch-gsc-data
-description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析". クエリ・ページ・デバイス・国別レポート対応.
+description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析", "GSC snapshot". クエリ・ページ・デバイス・国別レポート対応。snapshot モードで週次 CSV を .claude/skills/analytics/gsc-improvement/reference/snapshots/ に全件保存.
 ---
 
 Google Search Console API からサイトの検索パフォーマンスデータを取得する。
+
+2 つのモードがある:
+- **ad hoc モード** (デフォルト) — 指定ディメンションを取得して結果を整形表示する
+- **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する。`/weekly-review` から呼ばれる
 
 ## 用途
 
@@ -11,14 +15,17 @@ Google Search Console API からサイトの検索パフォーマンスデータ
 - ページ別・デバイス別・国別のパフォーマンスを分析したいとき
 - ブログ記事やランキングページの SEO 効果を定量評価したいとき
 - トレンド分析（期間比較）を行いたいとき
+- **週次 snapshot として全クエリ・全ページの履歴を git で残したいとき**（snapshot モード）
 
 ## 引数
 
 ```
-$ARGUMENTS — [期間] [ディメンション] [フィルタ]
+$ARGUMENTS — [期間] [ディメンション] [フィルタ] [snapshot YYYY-Www]
              期間: last7d | last28d | last3m | last6m | YYYY-MM-DD:YYYY-MM-DD（デフォルト: last28d）
              ディメンション: query | page | device | country | date（カンマ区切りで複数可、デフォルト: query）
+                             snapshot モードでは無視され全ディメンションを取得
              フィルタ: 任意のURL/クエリフィルタ（例: page=/blog, query=ランキング）
+             snapshot YYYY-Www: ISO 週番号（例: snapshot 2026-W16）。指定時は snapshot モード
 ```
 
 ## 前提
@@ -42,7 +49,12 @@ node -e "require('googleapis')" 2>/dev/null && echo "OK" || echo "INSTALL NEEDED
 npm install -D googleapis
 ```
 
-### Step 2: データ取得スクリプト実行
+### Step 1.5: モード判定
+
+引数に `snapshot YYYY-Www` が含まれていれば **snapshot モード** に分岐する（Step 2s 参照）。
+それ以外は従来どおり ad hoc モード（Step 2）を実行する。
+
+### Step 2: データ取得スクリプト実行（ad hoc モード）
 
 以下の Node.js スクリプトをインラインで実行する（一時ファイル不要、`node -e` で直接実行）。
 
@@ -126,6 +138,140 @@ main();
 - **順位改善候補**: 11〜20位のクエリ（1ページ目に押し上げられる可能性）
 - **ページ別**: どのセクション（/ranking, /blog, /compare）が強いか
 - **期間比較**: 前期間との増減（指定された場合）
+
+## snapshot モード
+
+週次レビュー時に全ディメンションを全件取得し、`.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
+
+### 呼び出し例
+
+```
+/fetch-gsc-data last28d query snapshot 2026-W16
+```
+
+引数の `snapshot YYYY-Www` が検出されたら、ディメンション指定は無視して全ディメンションを順次取得する。
+
+### 実行スクリプト
+
+プロジェクトルートで以下を `node -e` で実行する:
+
+```javascript
+const { google } = require('googleapis');
+const path = require('path');
+const fs = require('fs');
+
+const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
+const KEY_FILE = KEY_CANDIDATES.map(f => path.resolve(f)).find(f => fs.existsSync(f));
+if (!KEY_FILE) throw new Error('サービスアカウント鍵が見つかりません');
+const SITE_URL = 'sc-domain:stats47.jp';
+
+// 期間 (last28d): GSC は 2 日遅延
+const today = new Date();
+const endDate = new Date(today); endDate.setDate(today.getDate() - 2);
+const startDate = new Date(endDate); startDate.setDate(endDate.getDate() - 27);
+const fmt = (d) => d.toISOString().slice(0, 10);
+
+// 保存先
+const WEEK = '<YYYY-Www>'; // 引数から受け取る
+const OUT_DIR = path.resolve(`.claude/skills/analytics/gsc-improvement/reference/snapshots/${WEEK}`);
+fs.mkdirSync(OUT_DIR, { recursive: true });
+
+// CSV ヘルパー: カンマ・改行・ダブルクォートを含む場合のみクォート
+const esc = (v) => {
+  if (v === null || v === undefined) return '';
+  const s = String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};
+const toCSV = (rows, headers) =>
+  [headers.join(','), ...rows.map(r => headers.map(h => esc(r[h])).join(','))].join('\n') + '\n';
+
+async function fetchAll(searchconsole, dimensions) {
+  const rows = [];
+  let startRow = 0;
+  const rowLimit = 25000;
+  while (true) {
+    const res = await searchconsole.searchanalytics.query({
+      siteUrl: SITE_URL,
+      requestBody: { startDate: fmt(startDate), endDate: fmt(endDate), dimensions, rowLimit, startRow },
+    });
+    const batch = res.data.rows || [];
+    rows.push(...batch);
+    if (batch.length < rowLimit) break;
+    startRow += rowLimit;
+  }
+  return rows;
+}
+
+function normalize(rows, dimName) {
+  return rows.map(r => ({
+    [dimName]: r.keys[0],
+    clicks: r.clicks,
+    impressions: r.impressions,
+    ctr: r.ctr.toFixed(4),
+    position: r.position.toFixed(2),
+  }));
+}
+
+async function main() {
+  const auth = new google.auth.GoogleAuth({
+    keyFile: KEY_FILE,
+    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
+  });
+  const searchconsole = google.searchconsole({ version: 'v1', auth });
+
+  const jobs = [
+    { name: 'queries', dim: 'query', file: 'queries.csv' },
+    { name: 'pages', dim: 'page', file: 'pages.csv' },
+    { name: 'devices', dim: 'device', file: 'devices.csv' },
+    { name: 'countries', dim: 'country', file: 'countries.csv' },
+    { name: 'daily', dim: 'date', file: 'daily.csv' },
+  ];
+
+  const summary = [];
+  for (const job of jobs) {
+    const raw = await fetchAll(searchconsole, [job.dim]);
+    const normalized = normalize(raw, job.dim);
+    const csv = toCSV(normalized, [job.dim, 'clicks', 'impressions', 'ctr', 'position']);
+    fs.writeFileSync(path.join(OUT_DIR, job.file), csv);
+    summary.push(`${job.file}: ${normalized.length} rows`);
+  }
+
+  // 手動エクスポート CSV (index coverage) のコピー
+  const manualSources = [
+    { src: 'gcsエラー/重大な問題.csv', dst: 'index-coverage.csv' },
+    { src: 'gcsエラー/平均読み込み時間のチャート.csv', dst: 'index-trend.csv' },
+  ];
+  for (const m of manualSources) {
+    const srcPath = path.resolve(m.src);
+    if (fs.existsSync(srcPath)) {
+      fs.copyFileSync(srcPath, path.join(OUT_DIR, m.dst));
+      summary.push(`${m.dst}: copied from ${m.src}`);
+    } else {
+      summary.push(`${m.dst}: SKIPPED (${m.src} not found — 手動エクスポート未配置)`);
+    }
+  }
+
+  console.log(`[gsc-snapshot] ${WEEK} saved to ${OUT_DIR}`);
+  console.log(summary.join('\n'));
+}
+
+main().catch(e => { console.error(e); process.exit(1); });
+```
+
+実行前に `<YYYY-Www>` を引数で受け取った値に置換すること。
+
+### 保存後の挙動
+
+スクリプト完了後、以下を報告する:
+
+- 保存先ディレクトリ: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
+- 各ファイルの行数（queries.csv N rows / pages.csv N rows 等）
+- 手動 CSV（index-coverage.csv / index-trend.csv）のコピー有無
+- 主要指標サマリー（queries.csv 上位 5 件の clicks 合計 vs 全体 clicks 等）
+
+### snapshot モード完了後の連携
+
+`/weekly-review` から呼ばれた場合は、続けて `/gsc-improvement observe` が実行されて Observation Log に追記される。ユーザーが単体で `/fetch-gsc-data snapshot` を呼んだ場合は、観測ログ追記は手動で `/gsc-improvement observe` を実行する必要がある。
 
 ## よく使うパターン
 

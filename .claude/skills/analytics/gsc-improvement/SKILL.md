@@ -41,13 +41,17 @@ $ARGUMENTS — [mode]
 
 ユーザーから最新 GSC データが共有される形は複数ある:
 
-1. **`gcsエラー/` ディレクトリ** (プロジェクトルート) — ユーザーが GSC からエクスポートした CSV を置く場所
+1. **`reference/snapshots/<YYYY-Www>/` ディレクトリ** — `/fetch-gsc-data snapshot <YYYY-Www>` が保存した週次 CSV
+   - `queries.csv` / `pages.csv` / `devices.csv` / `countries.csv` / `daily.csv` — API 経由の全件データ
+   - `index-coverage.csv` — 手動エクスポート（`gcsエラー/重大な問題.csv` のコピー）
+   - `index-trend.csv` — 手動エクスポート（`gcsエラー/平均読み込み時間のチャート.csv` のコピー）
+2. **`gcsエラー/` ディレクトリ** (プロジェクトルート) — GSC 画面から手動エクスポートした CSV の置き場（snapshot モード実行時に上記 snapshots 配下へコピーされる）
    - `重大な問題.csv` — 各カテゴリの件数（集計）
    - `重大ではない問題.csv` — 補助カテゴリ
    - `平均読み込み時間のチャート.csv` — 登録済み vs 未登録の日次トレンド
-   - `表.csv` — URL 単位のサンプル（存在する場合のみ。GSC レポート画面右上「エクスポート」から取得）
-2. **`/fetch-gsc-data` スキル** — API 経由で取得した検索パフォーマンスデータ（クエリ・ページ別クリック等）
-3. **Cloudflare Workers Logs** — 5xx 発生の URL pattern 特定用
+   - `表.csv` — URL 単位のサンプル（GSC レポート画面右上「エクスポート」から取得）
+3. **`/fetch-gsc-data` ad hoc モード** — 一時的な深掘り分析用
+4. **Cloudflare Workers Logs** — 5xx 発生の URL pattern 特定用
 
 ### Step 2: mode 別の処理
 
@@ -58,15 +62,20 @@ reference/improvement-log.md を Read し、以下を要約して返す:
 - 最新 Observation 日付と数値
 - Phase 1/2/... の完了状況
 - 次に提示すべき Next Action 候補（最大 3 件）
+- reference/snapshots/ 配下の最新 YYYY-Www ディレクトリから queries.csv 上位 5 件と index-coverage.csv サマリーを添える（存在すれば）
 ```
 
 #### mode = observe
 
 ```
-1. gcsエラー/ 配下のファイルがあれば Read して件数を抽出
-   （なければユーザーに「最新の数値を提供してください」と促す）
-2. improvement-log.md の Observation Log セクションに「日付 + 件数テーブル + 気づき」を追記
-3. Baseline との差分を計算して要約を返す（例: 404 が 5,661 → 5,120 で -541 改善）
+1. データソースを以下の優先順で探索:
+   a. reference/snapshots/ 配下で最も新しい YYYY-Www ディレクトリ → index-coverage.csv を Read
+   b. a. が無ければ gcsエラー/ 配下の手動エクスポート CSV を Read
+   c. どちらも無ければユーザーに「最新の数値を提供してください」と促す
+2. 件数を抽出（404 / 5xx / ソフト 404 / クロール済み未登録 / 検出未登録 / リダイレクト / 登録済み / 未登録）
+3. 同じディレクトリの queries.csv / pages.csv からも主要指標（合計クリック、合計表示、平均順位）を抽出
+4. improvement-log.md の Observation Log セクションに「日付 + 件数テーブル + 気づき」を追記
+5. Baseline または直前の Observation との差分を計算して要約を返す（例: 404 が 5,661 → 5,120 で -541 改善、Organic クリック +300）
 ```
 
 #### mode = action
@@ -93,9 +102,10 @@ Tier 区分（Tier 1=即効、Tier 2=戦略、Tier 3=要調査）に従う。
 
 - **ログは append-only** — 過去のエントリは改変しない（履歴性を保つ）
 - **日付は必ず絶対日付** (`2026-04-14` 形式)。相対日付（「先週」「昨日」）は使わない
-- **数値は必ずソース明示** — 「GSC 2026-04-10 時点 / `gcsエラー/重大な問題.csv`」等
+- **数値は必ずソース明示** — 「GSC 2026-04-15 取得 / `reference/snapshots/2026-W16/index-coverage.csv`」等
 - **施策とコミット hash をペアで残す** — 後から原因特定できるように
 - **長文レビューは月 1 回まで** — 週次は 1 行追記のみで十分。更新コストを抑える
+- **snapshot ディレクトリは improvement-log.md と一緒にコミット**する — PR レビューで施策 → 数値変化が一目で追えるように
 
 ## 関連スキル
 

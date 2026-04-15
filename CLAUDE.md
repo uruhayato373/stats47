@@ -39,6 +39,7 @@ packages/
 | Management スキルの使い方（NSM・成長ループ・収益化・週次運用） | `.claude/skills/management/README.md` |
 | 実装計画・課題・アイデア | `docs/90_課題管理/` |
 | 各 feature の設計 | 各 `apps/*/src/features/*/README.md` |
+| GSC/GA4 の週次メトリクス snapshot と改善施策記録 | `.claude/skills/analytics/{gsc,ga4}-improvement/reference/` ★週次レビュー時に全件 CSV を git で積む |
 | DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
 | R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
 | 国土数値情報 GIS データ（データセット一覧・パイプライン・ライセンス） | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
