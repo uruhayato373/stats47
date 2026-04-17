@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-17T11:10:00.000Z",
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "title": "GSC 問題の恒久対策 Phase 1+2 — 404/410/soft404/5xx/クロール予算の掃除",
+      "hypothesis": "GSC で 404=5,661件 / 5xx=2,047件 / クロール済み未登録=2,339件 / soft404=506件 という大量のインデックス問題が発生している。middleware で旧 URL を 410 Gone 化 + Sitemap/robots の整理 + 5xx 抑止で、クロール予算を現行ページに振り向け直し、有効な indexed 数を回復させる。",
+      "target_metric": "gsc_index_errors_total",
+      "target_delta": "4 週間で -50%（エラー合計 10,553 → 5,000 以下）。engagedSessions は副次指標として観測",
+      "rubric": {
+        "impact": 3,
+        "effort": 1,
+        "learning": 3,
+        "certainty": 2,
+        "weighted": 2.5
+      },
+      "baseline": {
+        "date": "2026-04-10",
+        "source": "GSC カバレッジレポート（手動エクスポート、.claude/skills/analytics/gsc-improvement/reference/snapshots/ 予定）",
+        "gsc_not_found_404": 5661,
+        "gsc_server_error_5xx": 2047,
+        "gsc_crawled_not_indexed": 2339,
+        "gsc_soft_404": 506,
+        "gsc_total_errors": 10553,
+        "ga4_weekly_engaged_sessions_2026_w15": 13,
+        "gsc_weekly_clicks_2026_w15": 98
+      },
+      "status": "running",
+      "created_at": "2026-04-14T00:00:00.000Z",
+      "started_at": "2026-04-14T00:00:00.000Z",
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [
+        "Phase 1 完了: middleware で旧 URL (/blog/old/*, ranking 別名等) を 410 Gone 化 (commit 0fdab9dd)",
+        "Phase 2 完了: soft404/5xx/クロール予算対策 — robots.ts, sitemap.ts, gone-tag-keys.ts の整備 (commit 2784b1d2)",
+        "次回観測: 2026-04-28 に GSC カバレッジレポート再エクスポート",
+        "（ユーザー作業）GSC UI で sitemap 再送信、カバレッジレポートの『修正をリクエスト』",
+        "28 日後に target_metric delta を measure"
+      ],
+      "pending_user_actions": [
+        "GSC UI で sitemap.xml を再送信",
+        "GSC カバレッジレポートの 404 / 5xx / soft404 カテゴリで『修正をリクエスト』"
+      ],
+      "next_check_date": "2026-04-28",
+      "history": [
+        {
+          "date": "2026-04-14T00:00:00.000Z",
+          "action": "proposed",
+          "summary": "GSC 問題を改善対象として確定（docs/90_課題管理/ の GSC 課題メモから）"
+        },
+        {
+          "date": "2026-04-14T00:00:00.000Z",
+          "action": "running",
+          "summary": "Phase 1 実装: middleware 410 Gone 対応 (0fdab9dd)"
+        },
+        {
+          "date": "2026-04-15T00:00:00.000Z",
+          "action": "progress",
+          "summary": "Phase 2 実装: soft404/5xx/クロール予算対策完了 (2784b1d2)"
+        },
+        {
+          "date": "2026-04-17T11:10:00.000Z",
+          "action": "imported_to_experiments",
+          "summary": "既存の GSC 改善作業を /nsm-experiment 仕組みに取り込み、以後は measure/close で PDCA を閉じる運用に移行"
+        }
+      ]
+    }
+  ]
+}
