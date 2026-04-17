@@ -21,8 +21,8 @@
 | `/fetch-gsc-data` | Google Search Console データ取得 |
 | `/fetch-ga4-data` | Google Analytics 4 データ取得 |
 | `/seo-audit` | SEO 総合監査（GSC/GA4 + サイト構造 + DB → アクションリスト） |
-| `/lighthouse-audit` | PageSpeed Insights で URL のパフォーマンス測定・DB 蓄積 |
-| `/performance-report` | performance_metrics DB からパフォーマンス総合レポート生成 |
+| `/lighthouse-audit` | Lighthouse CLI で URL のパフォーマンス測定・ファイル蓄積（`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv`） |
+| `/performance-report` | 計測 snapshot からパフォーマンス総合レポート生成（ファイルベース） |
 
 ## 担当外
 

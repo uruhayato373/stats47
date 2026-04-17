@@ -1,16 +1,18 @@
 ---
 name: performance-report
-description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". performance_metrics DBから分析.
+description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/skills/analytics/performance-improvement/snapshots 配下の CSV から分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
 ---
 
-`performance_metrics` テーブルに蓄積されたデータからパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
+`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積された Lighthouse / PSI 計測履歴からパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
+
+**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
 
 ## 前提条件
 
-- `/lighthouse-audit` が少なくとも1回実行済みであること（`performance_metrics` にデータが必要）
-- トレンド比較には2回以上の測定データが必要
+- `/lighthouse-audit` が少なくとも1回実行済みであること（`snapshots/YYYY-MM-DD/metrics.csv` にデータが必要）
+- トレンド比較には2回以上の測定データ（複数日の snapshot）が必要
 
 ## 引数
 
@@ -36,22 +38,22 @@ npx tsx packages/database/scripts/performance-report.ts $ARGUMENTS
 
 1. **データ取得**
 
-   ```sql
-   -- 期間内の全測定データ
-   SELECT * FROM performance_metrics
-   WHERE measured_at >= datetime('now', '-28 days')
-   ORDER BY measured_at DESC;
+   ```bash
+   # 期間内の全測定データを集約
+   # --period 28d なら直近 28 日分の snapshots ディレクトリを走査
+   ls -d .claude/skills/analytics/performance-improvement/snapshots/*/ | sort | tail -28
 
-   -- ページ種別の判定（URL パターン）
-   -- /              → homepage
-   -- /themes/*      → theme
-   -- /ranking/*     → ranking
-   -- /areas/*       → area
-   -- /blog/*        → blog
-   -- /correlation/* → correlation
-   -- /compare/*     → compare
-   -- その他         → other
+   # 各ディレクトリの metrics.csv を awk/csvkit 等で結合して分析
+   # 各行は page_type カラムを持つ（URL パターン依存の判定は不要）
    ```
+
+   CSV カラム定義:
+   - `url`, `page_type`, `strategy`, `date`
+   - `score_performance`, `score_accessibility`, `score_best_practices`, `score_seo`
+   - Lab data: `lcp_ms`, `cls`, `inp_ms`, `fcp_ms`, `si_ms`, `tbt_ms`, `tti_ms`, `ttfb_ms`
+   - Resources: `total_byte_weight`, `js_byte_weight`, `css_byte_weight`, `image_byte_weight`, `font_byte_weight`, `third_party_byte_weight`, `dom_size`, `request_count`
+   - CrUX field data: `crux_lcp_p75`, `crux_inp_p75`, `crux_cls_p75`, `crux_ttfb_p75`, `crux_fcp_p75`
+   - `source` (`lighthouse` or `psi`)
 
 2. **セクション別分析の実行**（後述の各セクション参照）
 
@@ -238,7 +240,9 @@ period: "YYYY-MM-DD ~ YYYY-MM-DD"
 
 - `.claude/skills/analytics/lighthouse-audit/SKILL.md` — PSI 測定・DB 蓄積
 - `.claude/skills/analytics/seo-audit/SKILL.md` — SEO 総合監査
-- `packages/database/src/schema/` — performance_metrics テーブル定義
+- `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
+- `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
+- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
 - `docs/03_レビュー/performance/` — 過去のレポート
 
 ## DB パス

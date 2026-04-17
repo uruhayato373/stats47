@@ -27,7 +27,7 @@ Phase 1 の並列エージェント起動より前に、NSM（週間エンゲー
 node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
-- 出力先: `docs/03_レビュー/weekly-metrics/YYYY-Www.json`
+- 出力先: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`
 - 内容: GA4 + GSC + PSI の今週/前週比較サマリ（`metrics-reader.mjs` 経由）
 - 既存ファイルがあればスキップ（上書きしたい場合は `--force`）
 - 続く Phase 1 Agent C と Agent E がこの JSON を参照する
@@ -164,7 +164,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    node .claude/scripts/lib/experiments-state.mjs pending
    ```
 
-2. 各 active 実験について、Phase 0 で生成された週次 snapshot JSON（`docs/03_レビュー/weekly-metrics/YYYY-Www.json`）を参照し、baseline と今週値の delta を計算
+2. 各 active 実験について、Phase 0 で生成された週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）を参照し、baseline と今週値の delta を計算
    - baseline → snapshot の該当メトリクス（例: `gsc_weekly_clicks`, `engagedSessions`, `gsc_total_errors`）
    - started_at から経過日数を計算（10 日未満なら「measure 判定はまだ早い」と注記）
 
@@ -306,7 +306,7 @@ generatedAt: "YYYY-MM-DD"
 
 ## NSM 実験進捗
 
-Phase 0 で生成された週次 snapshot（`docs/03_レビュー/weekly-metrics/YYYY-Www.json`）を参照。
+Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）を参照。
 
 ### active な実験
 

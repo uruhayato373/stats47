@@ -6,7 +6,9 @@ argument-hint: "[--url PATH] [--type TYPE] [--strategy mobile|desktop|both] [--d
 allowed-tools: Read, Bash, Grep
 ---
 
-Lighthouse CLI をローカル実行して stats47.jp の各ページのパフォーマンスを測定し、`performance_metrics` テーブルに蓄積する。API キー不要・レート制限なし。測定結果はマークダウンテーブルで出力する。
+Lighthouse CLI をローカル実行して stats47.jp の各ページのパフォーマンスを測定し、`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積する。閾値は同ディレクトリの `budgets.json` を参照。API キー不要・レート制限なし。測定結果はマークダウンテーブルで出力する。
+
+**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
 
 ## 引数
 
@@ -39,7 +41,8 @@ npx tsx packages/database/scripts/lighthouse-check.ts $ARGUMENTS
 
 このスクリプトは:
 - ローカルの Chrome で Lighthouse を実行（API キー不要・レート制限なし）
-- 結果を `performance_metrics` テーブルに自動 UPSERT
+- 結果を `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に自動 UPSERT（同日・同 URL・同 strategy は上書き）
+- `budgets.json` の閾値と突き合わせて違反をレポート
 - マークダウンテーブルで結果を出力
 
 **デフォルト測定対象:**
@@ -128,11 +131,15 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeedtest?url=http
 
 - `.claude/skills/analytics/performance-report/SKILL.md` — パフォーマンス総合レポート
 - `.claude/skills/analytics/seo-audit/SKILL.md` — SEO 総合監査（CWV セクションと連携）
-- `packages/database/src/schema/` — performance_metrics テーブル定義
+- `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値の設定
+- `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測結果の蓄積（日別）
+- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策の記録
 - PageSpeed Insights API: https://developers.google.com/speed/docs/insights/v5/get-started
 
-## DB パス
+## データ保存先
 
-```
-.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-```
+- **計測結果**: `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv`
+- **閾値**: `.claude/skills/analytics/performance-improvement/budgets.json`
+- PV 上位ページの抽出のみ D1 `ranking_page_views`（運用データ）を read-only で参照
+
+旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止。既存データは snapshots/2026-03-27/ および snapshots/2026-03-28/ に移行済み。

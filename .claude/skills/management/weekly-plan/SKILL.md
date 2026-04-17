@@ -97,7 +97,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   → running / measuring 中の実験と、pending_user_actions を把握
   → 次週の計画に「continue 実験」「measure 実行予定」を組み込む準備
 
-- NSM 週次 snapshot JSON（`docs/03_レビュー/weekly-metrics/YYYY-Www.json`）
+- NSM 週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（DB `seo_tracking` テーブルから取得）
@@ -162,7 +162,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 
 `/nsm-experiment propose` を呼んで、現状メトリクスから新規実験候補 3-5 件を rubric 付きで取得する。
 
-- 入力: `docs/03_レビュー/weekly-metrics/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
+- 入力: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
 - 出力: 候補リスト（impact / effort / learning / certainty の加重合計順）
 - 候補は Phase 3 の Must / Should の選択肢として検討する
 

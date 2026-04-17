@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "description": "PSI / Lighthouse スコアの合否判定閾値。page_type × strategy × metric_key の組で一意。旧 D1 performance_budgets テーブルを 2026-04-17 にファイル化。",
+  "source": "exported from D1 performance_budgets at 2026-04-17",
+  "schema": {
+    "page_type": "対象ページ種別 (all / homepage / ranking / area 等)",
+    "strategy": "mobile | desktop | both",
+    "metric_key": "score_performance | lcp_ms | cls | tbt_ms | ttfb_ms | fcp_ms 等",
+    "threshold": "閾値 (数値)",
+    "operator": "<= | >= | < | >",
+    "severity": "error | warning"
+  },
+  "budgets": [
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "score_performance",
+      "threshold": 80.0,
+      "operator": ">=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "lcp_ms",
+      "threshold": 2500.0,
+      "operator": "<=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "cls",
+      "threshold": 0.1,
+      "operator": "<=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "tbt_ms",
+      "threshold": 300.0,
+      "operator": "<=",
+      "severity": "warning"
+    },
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "fcp_ms",
+      "threshold": 1800.0,
+      "operator": "<=",
+      "severity": "warning"
+    },
+    {
+      "page_type": "all",
+      "strategy": "mobile",
+      "metric_key": "ttfb_ms",
+      "threshold": 800.0,
+      "operator": "<=",
+      "severity": "warning"
+    },
+    {
+      "page_type": "all",
+      "strategy": "desktop",
+      "metric_key": "score_performance",
+      "threshold": 90.0,
+      "operator": ">=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "desktop",
+      "metric_key": "lcp_ms",
+      "threshold": 2000.0,
+      "operator": "<=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "desktop",
+      "metric_key": "cls",
+      "threshold": 0.1,
+      "operator": "<=",
+      "severity": "error"
+    },
+    {
+      "page_type": "all",
+      "strategy": "desktop",
+      "metric_key": "tbt_ms",
+      "threshold": 200.0,
+      "operator": "<=",
+      "severity": "warning"
+    },
+    {
+      "page_type": "homepage",
+      "strategy": "mobile",
+      "metric_key": "score_performance",
+      "threshold": 90.0,
+      "operator": ">=",
+      "severity": "error"
+    },
+    {
+      "page_type": "homepage",
+      "strategy": "mobile",
+      "metric_key": "lcp_ms",
+      "threshold": 2000.0,
+      "operator": "<=",
+      "severity": "error"
+    }
+  ]
+}

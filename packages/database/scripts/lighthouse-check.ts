@@ -2,15 +2,21 @@
  * Lighthouse パフォーマンス計測スクリプト
  *
  * Lighthouse CLI をローカル実行し、主要ページのパフォーマンスを計測して
- * performance_metrics テーブルに UPSERT する。
+ * .claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv に追記する。
+ * 閾値は同ディレクトリの budgets.json を参照。
  * API キー不要・レート制限なし。
+ *
+ * 記録先の統一原則（CLAUDE.md §記録先の統一原則）:
+ *   - 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル
+ *   - D1 の performance_metrics / performance_budgets は 2026-04-17 に廃止済み
+ *   - PV 上位ページの抽出のみ D1 `ranking_page_views`（運用データ）を読む
  *
  * Usage:
  *   npx tsx scripts/lighthouse-check.ts                        # デフォルト URL をモバイルで計測
  *   npx tsx scripts/lighthouse-check.ts --strategy desktop     # デスクトップで計測
  *   npx tsx scripts/lighthouse-check.ts --url /                # 特定 URL のみ
  *   npx tsx scripts/lighthouse-check.ts --type theme           # 特定ページタイプのみ
- *   npx tsx scripts/lighthouse-check.ts --dry-run              # DB 書込みなし
+ *   npx tsx scripts/lighthouse-check.ts --dry-run              # ファイル書込みなし
  *   npx tsx scripts/lighthouse-check.ts --top-pv 5             # PV 上位 N ページも計測対象に追加
  */
 
@@ -21,10 +27,17 @@ import Database from "better-sqlite3";
 
 // ── 定数 ──────────────────────────────────────────────
 
-const LOCAL_D1_PATH = path.resolve(
-  __dirname,
-  "../../../.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+const REPO_ROOT = path.resolve(__dirname, "../../..");
+const LOCAL_D1_PATH = path.join(
+  REPO_ROOT,
+  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
 );
+const PERF_DIR = path.join(
+  REPO_ROOT,
+  ".claude/skills/analytics/performance-improvement"
+);
+const BUDGETS_PATH = path.join(PERF_DIR, "budgets.json");
+const SNAPSHOTS_DIR = path.join(PERF_DIR, "snapshots");
 
 const BASE_URL = "https://stats47.jp";
 
@@ -217,103 +230,150 @@ function parseLighthouseResult(
   };
 }
 
-// ── DB テーブル作成 ──────────────────────────────────────
+// ── CSV スナップショット I/O ─────────────────────────────
 
-function ensureTables(db: Database.Database): void {
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS performance_metrics (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      url TEXT NOT NULL, page_type TEXT NOT NULL, strategy TEXT NOT NULL, date TEXT NOT NULL,
-      score_performance INTEGER, score_accessibility INTEGER, score_best_practices INTEGER, score_seo INTEGER,
-      lcp_ms REAL, fid_ms REAL, cls REAL, inp_ms REAL,
-      fcp_ms REAL, si_ms REAL, tbt_ms REAL, tti_ms REAL, ttfb_ms REAL,
-      total_byte_weight INTEGER, js_byte_weight INTEGER, css_byte_weight INTEGER, image_byte_weight INTEGER,
-      font_byte_weight INTEGER, third_party_byte_weight INTEGER,
-      dom_size INTEGER, request_count INTEGER,
-      crux_lcp_p75 REAL, crux_inp_p75 REAL, crux_cls_p75 REAL, crux_ttfb_p75 REAL, crux_fcp_p75 REAL,
-      source TEXT DEFAULT 'lighthouse',
-      created_at TEXT DEFAULT CURRENT_TIMESTAMP, updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-    );
-    CREATE UNIQUE INDEX IF NOT EXISTS performance_metrics_url_strategy_date_source_unq ON performance_metrics(url, strategy, date, source);
-    CREATE INDEX IF NOT EXISTS idx_performance_metrics_date ON performance_metrics(date);
-    CREATE INDEX IF NOT EXISTS idx_performance_metrics_page_type ON performance_metrics(page_type);
-    CREATE TABLE IF NOT EXISTS performance_budgets (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      page_type TEXT NOT NULL, strategy TEXT NOT NULL, metric_key TEXT NOT NULL,
-      threshold REAL NOT NULL, operator TEXT NOT NULL DEFAULT '<=', severity TEXT NOT NULL DEFAULT 'warning',
-      created_at TEXT DEFAULT CURRENT_TIMESTAMP, updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-    );
-    CREATE UNIQUE INDEX IF NOT EXISTS performance_budgets_type_strategy_metric_unq ON performance_budgets(page_type, strategy, metric_key);
-  `);
+const CSV_COLUMNS = [
+  "url", "page_type", "strategy", "date",
+  "score_performance", "score_accessibility", "score_best_practices", "score_seo",
+  "lcp_ms", "fid_ms", "cls", "inp_ms", "fcp_ms", "si_ms", "tbt_ms", "tti_ms", "ttfb_ms",
+  "total_byte_weight", "js_byte_weight", "css_byte_weight", "image_byte_weight",
+  "font_byte_weight", "third_party_byte_weight", "dom_size", "request_count",
+  "crux_lcp_p75", "crux_inp_p75", "crux_cls_p75", "crux_ttfb_p75", "crux_fcp_p75",
+  "source",
+] as const;
+
+function escapeCsv(v: unknown): string {
+  if (v == null) return "";
+  const s = String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
-// ── UPSERT ──────────────────────────────────────────────
+function rowToCsvValues(r: MetricsRow): Record<string, unknown> {
+  return {
+    url: r.url, page_type: r.pageType, strategy: r.strategy, date: r.date,
+    score_performance: r.scorePerformance, score_accessibility: r.scoreAccessibility,
+    score_best_practices: r.scoreBestPractices, score_seo: r.scoreSeo,
+    lcp_ms: r.lcpMs, fid_ms: r.fidMs, cls: r.cls, inp_ms: r.inpMs, fcp_ms: r.fcpMs,
+    si_ms: r.siMs, tbt_ms: r.tbtMs, tti_ms: r.ttiMs, ttfb_ms: r.ttfbMs,
+    total_byte_weight: r.totalByteWeight, js_byte_weight: r.jsByteWeight,
+    css_byte_weight: r.cssByteWeight, image_byte_weight: r.imageByteWeight,
+    font_byte_weight: r.fontByteWeight, third_party_byte_weight: r.thirdPartyByteWeight,
+    dom_size: r.domSize, request_count: r.requestCount,
+    crux_lcp_p75: r.cruxLcpP75, crux_inp_p75: r.cruxInpP75, crux_cls_p75: r.cruxClsP75,
+    crux_ttfb_p75: r.cruxTtfbP75, crux_fcp_p75: r.cruxFcpP75,
+    source: r.source,
+  };
+}
 
-function upsertMetrics(db: Database.Database, row: MetricsRow): void {
-  db.prepare(`
-    INSERT INTO performance_metrics (
-      url, page_type, strategy, date,
-      score_performance, score_accessibility, score_best_practices, score_seo,
-      lcp_ms, fid_ms, cls, inp_ms, fcp_ms, si_ms, tbt_ms, tti_ms, ttfb_ms,
-      total_byte_weight, js_byte_weight, css_byte_weight, image_byte_weight,
-      font_byte_weight, third_party_byte_weight, dom_size, request_count,
-      crux_lcp_p75, crux_inp_p75, crux_cls_p75, crux_ttfb_p75, crux_fcp_p75,
-      source, updated_at
-    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
-    ON CONFLICT (url, strategy, date, source) DO UPDATE SET
-      score_performance=excluded.score_performance, score_accessibility=excluded.score_accessibility,
-      score_best_practices=excluded.score_best_practices, score_seo=excluded.score_seo,
-      lcp_ms=excluded.lcp_ms, fid_ms=excluded.fid_ms, cls=excluded.cls, inp_ms=excluded.inp_ms,
-      fcp_ms=excluded.fcp_ms, si_ms=excluded.si_ms, tbt_ms=excluded.tbt_ms, tti_ms=excluded.tti_ms, ttfb_ms=excluded.ttfb_ms,
-      total_byte_weight=excluded.total_byte_weight, js_byte_weight=excluded.js_byte_weight,
-      css_byte_weight=excluded.css_byte_weight, image_byte_weight=excluded.image_byte_weight,
-      font_byte_weight=excluded.font_byte_weight, third_party_byte_weight=excluded.third_party_byte_weight,
-      dom_size=excluded.dom_size, request_count=excluded.request_count, updated_at=datetime('now')
-  `).run(
-    row.url, row.pageType, row.strategy, row.date,
-    row.scorePerformance, row.scoreAccessibility, row.scoreBestPractices, row.scoreSeo,
-    row.lcpMs, row.fidMs, row.cls, row.inpMs, row.fcpMs, row.siMs, row.tbtMs, row.ttiMs, row.ttfbMs,
-    row.totalByteWeight, row.jsByteWeight, row.cssByteWeight, row.imageByteWeight,
-    row.fontByteWeight, row.thirdPartyByteWeight, row.domSize, row.requestCount,
-    row.cruxLcpP75, row.cruxInpP75, row.cruxClsP75, row.cruxTtfbP75, row.cruxFcpP75,
-    row.source
+function readSnapshotCsv(csvPath: string): Record<string, string>[] {
+  if (!fs.existsSync(csvPath)) return [];
+  const content = fs.readFileSync(csvPath, "utf-8").trim();
+  if (!content) return [];
+  const lines = content.split("\n");
+  const header = lines[0].split(",");
+  return lines.slice(1).filter(l => l.length > 0).map(line => {
+    // シンプルな CSV パーサ（本スクリプトの出力には引用符を含む値は基本出現しない）
+    const fields = parseCsvLine(line);
+    const obj: Record<string, string> = {};
+    header.forEach((h, i) => { obj[h] = fields[i] ?? ""; });
+    return obj;
+  });
+}
+
+function parseCsvLine(line: string): string[] {
+  const out: string[] = [];
+  let cur = ""; let inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (inQuote) {
+      if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+      else if (c === '"') inQuote = false;
+      else cur += c;
+    } else {
+      if (c === '"') inQuote = true;
+      else if (c === ",") { out.push(cur); cur = ""; }
+      else cur += c;
+    }
+  }
+  out.push(cur);
+  return out;
+}
+
+/**
+ * snapshots/YYYY-MM-DD/metrics.csv に UPSERT する。
+ * 既存行と url+strategy+source で衝突したら上書き。
+ */
+function upsertSnapshot(row: MetricsRow): void {
+  const dir = path.join(SNAPSHOTS_DIR, row.date);
+  const csvPath = path.join(dir, "metrics.csv");
+  fs.mkdirSync(dir, { recursive: true });
+
+  const existing = readSnapshotCsv(csvPath);
+  const newValues = rowToCsvValues(row);
+  const key = `${row.url}|${row.strategy}|${row.source}`;
+  const filtered = existing.filter(
+    r => `${r.url}|${r.strategy}|${r.source}` !== key,
   );
+  filtered.push(newValues as unknown as Record<string, string>);
+
+  // sort for deterministic output
+  filtered.sort((a, b) => {
+    const cmp = (a.url || "").localeCompare(b.url || "");
+    return cmp !== 0 ? cmp : (a.strategy || "").localeCompare(b.strategy || "");
+  });
+
+  const lines = [CSV_COLUMNS.join(",")];
+  for (const r of filtered) {
+    lines.push(CSV_COLUMNS.map(c => escapeCsv((r as Record<string, unknown>)[c])).join(","));
+  }
+  fs.writeFileSync(csvPath, lines.join("\n") + "\n", "utf-8");
 }
 
-// ── デフォルトバジェットシード ──────────────────────────────
+// ── Budgets（JSON から読み込み）──────────────────────────
 
-const DEFAULT_BUDGETS: BudgetRow[] = [
-  { pageType: "all", strategy: "mobile", metricKey: "score_performance", threshold: 80, operator: ">=", severity: "error" },
-  { pageType: "all", strategy: "mobile", metricKey: "lcp_ms", threshold: 2500, operator: "<=", severity: "error" },
-  { pageType: "all", strategy: "mobile", metricKey: "cls", threshold: 0.1, operator: "<=", severity: "error" },
-  { pageType: "all", strategy: "mobile", metricKey: "tbt_ms", threshold: 300, operator: "<=", severity: "warning" },
-  { pageType: "all", strategy: "mobile", metricKey: "fcp_ms", threshold: 1800, operator: "<=", severity: "warning" },
-  { pageType: "all", strategy: "mobile", metricKey: "ttfb_ms", threshold: 800, operator: "<=", severity: "warning" },
-  { pageType: "all", strategy: "desktop", metricKey: "score_performance", threshold: 90, operator: ">=", severity: "error" },
-  { pageType: "all", strategy: "desktop", metricKey: "lcp_ms", threshold: 2000, operator: "<=", severity: "error" },
-  { pageType: "all", strategy: "desktop", metricKey: "cls", threshold: 0.1, operator: "<=", severity: "error" },
-  { pageType: "all", strategy: "desktop", metricKey: "tbt_ms", threshold: 200, operator: "<=", severity: "warning" },
-  { pageType: "homepage", strategy: "mobile", metricKey: "score_performance", threshold: 90, operator: ">=", severity: "error" },
-  { pageType: "homepage", strategy: "mobile", metricKey: "lcp_ms", threshold: 2000, operator: "<=", severity: "error" },
-];
+interface BudgetsFile {
+  version: number;
+  description?: string;
+  budgets: {
+    page_type: string;
+    strategy: string;
+    metric_key: string;
+    threshold: number;
+    operator: string;
+    severity: string;
+  }[];
+}
 
-function seedDefaultBudgets(db: Database.Database): void {
-  const { cnt } = db.prepare("SELECT COUNT(*) as cnt FROM performance_budgets").get() as { cnt: number };
-  if (cnt > 0) return;
-  console.log("  Seeding default performance budgets...");
-  const stmt = db.prepare("INSERT OR IGNORE INTO performance_budgets (page_type, strategy, metric_key, threshold, operator, severity) VALUES (?,?,?,?,?,?)");
-  db.transaction(() => { for (const b of DEFAULT_BUDGETS) stmt.run(b.pageType, b.strategy, b.metricKey, b.threshold, b.operator, b.severity); })();
-  console.log(`  ${DEFAULT_BUDGETS.length} budgets seeded.`);
+function loadBudgets(): BudgetRow[] {
+  if (!fs.existsSync(BUDGETS_PATH)) {
+    console.warn(`  ⚠ budgets.json が見つかりません: ${BUDGETS_PATH}`);
+    return [];
+  }
+  const raw = JSON.parse(fs.readFileSync(BUDGETS_PATH, "utf-8")) as BudgetsFile;
+  return (raw.budgets || []).map(b => ({
+    pageType: b.page_type,
+    strategy: b.strategy,
+    metricKey: b.metric_key,
+    threshold: b.threshold,
+    operator: b.operator,
+    severity: b.severity,
+  }));
 }
 
 // ── バジェットチェック ──────────────────────────────────────
 
 interface BudgetViolation { url: string; metricKey: string; threshold: number; operator: string; actual: number; severity: string; }
 
-function checkBudgets(db: Database.Database, row: MetricsRow): BudgetViolation[] {
-  const budgets = db.prepare("SELECT * FROM performance_budgets WHERE (page_type = ? OR page_type = 'all') AND strategy = ?").all(row.pageType, row.strategy) as BudgetRow[];
+function checkBudgets(budgets: BudgetRow[], row: MetricsRow): BudgetViolation[] {
+  // 該当 page_type / strategy に絞る。page_type 個別が優先、なければ 'all'
+  const applicable = budgets.filter(
+    b => (b.pageType === row.pageType || b.pageType === "all") && b.strategy === row.strategy,
+  );
   const budgetMap = new Map<string, BudgetRow>();
-  for (const b of budgets) { const ex = budgetMap.get(b.metricKey); if (!ex || b.pageType !== "all") budgetMap.set(b.metricKey, b); }
+  for (const b of applicable) {
+    const ex = budgetMap.get(b.metricKey);
+    if (!ex || b.pageType !== "all") budgetMap.set(b.metricKey, b);
+  }
 
   const metrics: Record<string, number | null> = {
     score_performance: row.scorePerformance, lcp_ms: row.lcpMs, cls: row.cls,
@@ -375,18 +435,19 @@ async function main() {
     if (args.type) targets = targets.filter(t => t.pageType === args.type);
   }
 
-  // DB
-  let db: Database.Database | null = null;
-  if (fs.existsSync(LOCAL_D1_PATH)) {
-    db = new Database(LOCAL_D1_PATH);
-    ensureTables(db);
-    seedDefaultBudgets(db);
-  }
+  // 閾値をファイルから読む（.claude/skills/analytics/performance-improvement/budgets.json）
+  const budgets = loadBudgets();
+  if (budgets.length === 0) console.log("  (budgets.json 未配置 or 空 — 違反チェックをスキップ)");
 
-  if (args.topPv > 0 && db) {
+  // PV 上位ページは D1 `ranking_page_views`（運用データ）から取得
+  let db: Database.Database | null = null;
+  if (args.topPv > 0 && fs.existsSync(LOCAL_D1_PATH)) {
+    db = new Database(LOCAL_D1_PATH, { readonly: true });
     const topPages = getTopPvPages(db, args.topPv);
     const existing = new Set(targets.map(t => t.url));
     for (const p of topPages) { const u = `${BASE_URL}${p.url}`; if (!existing.has(u)) { targets.push({ url: u, pageType: p.pageType }); existing.add(u); } }
+    db.close();
+    db = null;
   }
 
   console.log(`  Targets (${targets.length}):`);
@@ -409,10 +470,10 @@ async function main() {
 
     console.log(`    Perf=${row.scorePerformance} A11y=${row.scoreAccessibility} LCP=${fmt(row.lcpMs)}ms CLS=${fmt(row.cls, 3)} TBT=${fmt(row.tbtMs)}ms`);
 
-    if (!args.dryRun && db) { upsertMetrics(db, row); console.log("    → DB saved"); }
+    if (!args.dryRun) { upsertSnapshot(row); console.log("    → snapshot 保存"); }
 
-    if (db) {
-      const v = checkBudgets(db, row);
+    if (budgets.length > 0) {
+      const v = checkBudgets(budgets, row);
       allViolations.push(...v);
       for (const vi of v) console.log(`    ${vi.severity === "error" ? "!!" : "!"} ${vi.metricKey}: ${vi.actual} (budget: ${vi.operator}${vi.threshold})`);
     }
@@ -447,7 +508,6 @@ async function main() {
     console.log(`Budget violations: ${e} error(s), ${w} warning(s)`);
   }
 
-  if (db) db.close();
 }
 
 main().catch(err => { console.error("Error:", err); process.exit(1); });

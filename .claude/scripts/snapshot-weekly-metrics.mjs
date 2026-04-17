@@ -3,8 +3,11 @@
  * Weekly Metrics Snapshot
  *
  * metrics-reader から週次 NSM メトリクスを取得して
- * docs/03_レビュー/weekly-metrics/YYYY-Www.json に保存する。
+ * .claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json に保存する。
  * index.json を追記して時系列トラッキング可能にする。
+ *
+ * 記録先の統一原則（CLAUDE.md §記録先の統一原則）:
+ *   計測蓄積は .claude/ 配下のファイル。旧パス docs/03_レビュー/weekly-metrics/ は 2026-04-17 に廃止。
  *
  * 参照: .claude/scripts/lib/metrics-reader.mjs
  *       .claude/skills/management/nsm-experiment/
@@ -29,7 +32,8 @@ import {
   formatNsmSection,
 } from "./lib/metrics-reader.mjs";
 
-const OUT_DIR = "docs/03_レビュー/weekly-metrics";
+const OUT_DIR =
+  ".claude/skills/management/nsm-experiment/reference/weekly-snapshots";
 const INDEX_PATH = join(OUT_DIR, "index.json");
 
 // ── ISO 8601 週番号計算 ────────────────────────────────────────
