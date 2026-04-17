@@ -1,8 +1,17 @@
 /**
- * D1 バックアップスクリプト
+ * D1 バックアップスクリプト（災害復旧用・単発利用）
  *
  * リモート D1 データベースを SQL ダンプとしてエクスポートし、R2 にアップロードする。
- * `/sync-remote-d1` の前に実行してリモートデータのバックアップを取る。
+ *
+ * ⚠️ 現状の制約:
+ *   - `r2-utils.ts` の `uploadToR2` は単一 PutObject で R2 の 2 GiB 上限に当たる
+ *   - 本番 static DB はすでに ~6 GB に達しており、本スクリプトはそのまま動かない
+ *   - 動かすには `@aws-sdk/lib-storage` の Upload を使った multipart 化が必要
+ *
+ * ルーチンのロールバックは Cloudflare D1 Time Travel（30 日 PITR）で賄っているため、
+ * 本スクリプトは CF アカウント障害等の災害復旧で一時退避が必要になった場合の叩き台。
+ * 利用時は multipart upload への改修と、`correlation_analysis` 等の Tier B テーブル除外
+ * を検討すること。
  *
  * Usage:
  *   npx tsx scripts/backup-d1-to-r2.ts --env production
