@@ -218,6 +218,62 @@ middleware は runtime で動作するため D1 非依存（git commit 静的 Se
 
 2026-04-17 本番 curl 検証で `/areas/13000/cities/13101` が 500、`/areas/11000/cities/11101` が 200、`/areas/01000/cities/01100` が 200 と挙動不一致を確認。middleware の既存ロジック（L231-245）は `areaSegments[2]` を cityCode として期待していたが、`cities` セグメントがあると条件をすり抜けていた。結果として page.tsx `areas/[areaCode]/cities/[cityCode]/page.tsx` に到達し、データ不整合で 500 になるケースや、robots.txt ブロック済みだが HTTP 200 を返すケースが混在していた。
 
+### [T0-CANON-01] 実装不要と判明（2026-04-18）
+
+**施策 ID**: `T0-CANON-01` / **Tier**: T0 / **結果**: ✅ NO-OP（既存実装が正しい、観測待ち）
+
+#### 調査結果
+
+2026-04-18 GSC から全カテゴリの URL 単位データ export を取得し、本番 curl で検証した結果:
+
+**重複 (user canonical 無し) 534 件の内訳**:
+- 97% が `/ranking/*` の素の URL（searchParams なし）
+- canonical タグは既に `<link rel="canonical" href="https://stats47.jp/ranking/{key}">` で正しく自分自身を指している
+- `<meta name="robots" content="index, follow">` も正常
+
+つまり **canonical の技術的問題ではない**。真の原因は:
+- 47 都道府県 × 1,899 ranking = 約 9 万通りの類似ページ
+- 各ページの差分が「ランキング数値のみ、独自文章薄い」
+- **Google の自動重複判定** で「別 URL を正規」扱い
+
+**T0-CANON-01 の修正は不要**。これは T2（コンテンツ品質）領域の課題であり、canonical タグ修正では解決しない。
+
+#### 2026-04-18 URL export 全カテゴリ分析
+
+| カテゴリ | GSC 件数 | 本番実態 | 対処 |
+|---|---|---|---|
+| 404 (1,000 サンプル/全 5,727) | `/blog/tags/日本語` 152、旧 `/dashboard/*` 多数、`/ranking/prefecture/*` 17 | 全て middleware で 410 化済 | ✅ 修正検証の自然減少待ち |
+| 5xx (1,000 サンプル/全 2,044) | **`/correlation/*` 968 (47%)** | middleware Fix 1 で 410 化済 | ✅ 修正検証待ち |
+| redirect (1,000 サンプル/全 2,305) | 旧 `/.../dashboard/*` 系多数 | tryLegacyRedirect で処理済 | ✅ 修正検証待ち |
+| soft-404 (500) | `/blog/tags/*` 153 (30%)、`/ranking/*` 33、`/areas/*` 26 | middleware で 410 化済 | ✅ 修正検証待ち |
+| 重複 user canonical 無し (534) | **`/ranking/*` 517 (97%)** | canonical 正しく設定済 | ⚠️ T2 領域（コンテンツ品質） |
+| 代替ページ canonical あり (885) | `/correlation?x=...&y=...` 他 | canonical 正常動作 | ✅ 正常 |
+
+**本番 curl 検証結果**:
+- `/correlation/foo-and-bar` → **410** ✅
+- `/blog/tags/介護老人福祉施設` → **410** ✅
+- `/dashboard/00000/dashboard/foo` → **410** ✅
+- `/population/commuting-school/dashboard/foo` → **410** ✅
+- `/ranking/commute-by-train` → **200** + canonical 正常 ✅
+- `/ranking/blanket-consumption-expenditure` → **200**（GSC 5xx は古い）✅
+- `storage.stats47.jp/ranking/prefecture/.../thumbnails/thumbnail` → **404**（別ドメイン 10 件、自然解消可）
+
+**GSC ステータス**: ユーザーが全カテゴリで「修正を検証」押下済 → ステータス「保留」。Google が数日で再認識して未登録 URL が大幅減少する見込み。
+
+#### 記録の永続化
+
+URL 単位 CSV を以下に保存:
+- `gcsエラー/404.csv`, `5xx.csv`, `redirect.csv`, `soft-404.csv`, `dup-no-canonical.csv`, `alt-canonical.csv`
+- `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W16/url-details/` に同ファイル配置（git 管理下の永続コピー）
+
+#### 次の方向性
+
+Tier 0 (URL 空間整理) は **本日時点で技術的に完了**。残る真の課題:
+- **T2 (コンテンツ品質)**: `/ranking/*` の独自文章追加、テンプレ量産の縮退判断
+- **T3 (外部シグナル)**: SNS 投稿再開、被リンク獲得
+
+観測フェーズに入る。2026-05-01 MID 判定で Tier 0 施策全体の効果を自動判定。
+
 ### [T2-CWV-01] AdSense CLS (0.732) 対策
 
 **施策 ID**: `T2-CWV-01` / **Tier**: T2 (UX) / **デプロイ日**: 2026-04-18 / **コミット**: `5e7ac037`
