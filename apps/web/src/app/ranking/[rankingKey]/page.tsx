@@ -43,8 +43,10 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
-import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
+import { listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
+
+import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 
 import {
   generateRankingBreadcrumbStructuredData,
@@ -75,16 +77,23 @@ import type { Metadata } from "next";
 
 /** 24時間 ISR */
 
-/** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
+/**
+ * generateStaticParams が返さないキーは即 404 を返す（Next.js App Router のデフォルト true を上書き）
+ *
+ * 2026-04 GSC 調査で `/ranking/任意キー` が常に 200 を返す問題を確認（クロール済み未登録 2,415 の主因）。
+ * middleware Fix 6 と組み合わせて、KNOWN_RANKING_KEYS に無いキーは 410 Gone を返す。
+ */
+export const dynamicParams = false;
+
+/**
+ * ビルド時に known-ranking-keys.ts から事前生成（D1 不依存）
+ *
+ * CI 環境（GitHub Actions Deploy to Cloudflare Workers）で D1 binding が無く
+ * listActiveRankingKeys が失敗する問題を回避するため、git commit された静的リストを使う。
+ * ranking 追加時は `/register-ranking` 実行後に `/generate-known-ranking-keys` で再生成。
+ */
 export async function generateStaticParams() {
-  try {
-    const result = await listActiveRankingKeys("prefecture");
-    if (!isOk(result)) return [];
-    return result.data.map(({ rankingKey }) => ({ rankingKey }));
-  } catch {
-    // CI ビルド時など D1 が利用できない場合は事前生成をスキップし、ISR で再生成
-    return [];
-  }
+  return Array.from(KNOWN_RANKING_KEYS).map((rankingKey) => ({ rankingKey }));
 }
 
 /** ページコンポーネントの Props 型 */

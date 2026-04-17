@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
+import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 
 /**
  * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
@@ -186,6 +187,18 @@ export default function middleware(req: NextRequest) {
   if (pathname.startsWith("/ranking/")) {
     const rankingKey = pathname.slice("/ranking/".length);
     if (GONE_RANKING_KEYS.has(rankingKey)) {
+      return gone();
+    }
+  }
+
+  // --- Fix 6: 未知の ranking キー → 410 Gone ---
+  // KNOWN_RANKING_KEYS (git commit 済みの静的 Set) に無いキーは Google に「完全削除」シグナル。
+  // 2026-04 GSC 調査で `/ranking/任意キー` が常に 200 を返す問題を確認（クロール済み未登録 2,415 の主因）。
+  // dynamicParams=false でも Next.js は 404 を返すが、middleware 先行で 410 の方が確定シグナル。
+  // /ranking (index) や /ranking/{key}/{sub} サブパスは対象外（{key}.split("/")[0] で最初のセグメントのみ判定）。
+  if (pathname.startsWith("/ranking/")) {
+    const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
+    if (rankingKey && !KNOWN_RANKING_KEYS.has(rankingKey) && !GONE_RANKING_KEYS.has(rankingKey)) {
       return gone();
     }
   }
