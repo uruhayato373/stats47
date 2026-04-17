@@ -67,22 +67,19 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
   ```
 
-- SNS パフォーマンス（DB `sns_metrics` テーブルから集計）
-  ※ `/update-sns-metrics` 実行後に自動蓄積。API 不要で直接クエリ可。
-  ```sql
-  -- 最新取得日の確認
-  SELECT MAX(fetched_at) FROM sns_metrics;
-  -- プラットフォーム別パフォーマンス（最新バッチ）
-  SELECT p.platform,
-         COUNT(DISTINCT m.sns_post_id) as post_count,
-         SUM(m.impressions) as impressions,
-         SUM(m.views) as views,
-         SUM(m.likes) as likes
-  FROM sns_metrics m
-  JOIN sns_posts p ON m.sns_post_id = p.id
-  WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
-  GROUP BY p.platform;
-  ```
+- SNS パフォーマンス
+  - **最新値**: D1 `sns_posts` のキャッシュカラムから取得（`/update-sns-metrics` 実行後に更新済み）
+    ```sql
+    SELECT platform,
+           COUNT(*) FILTER (WHERE status='posted') as posted_count,
+           SUM(COALESCE(impressions, 0)) as impressions,
+           SUM(COALESCE(likes, 0)) as likes,
+           SUM(COALESCE(replies, 0)) as replies
+    FROM sns_posts
+    WHERE status = 'posted'
+    GROUP BY platform;
+    ```
+  - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
 - GA4/GSC メトリクス（`.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/` から最新 snapshot を読み込み）
   → `/weekly-review` の Phase 1 Agent C で `/fetch-{ga4,gsc}-data ... snapshot` が自動実行され CSV が保存される

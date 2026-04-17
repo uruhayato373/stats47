@@ -64,8 +64,11 @@ async function main() {
   const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("youtube");
   const rankings = db.prepare("SELECT ranking_key, ranking_name FROM ranking_items").all();
 
+  // 時系列履歴は .claude/ 配下のファイルに蓄積（CLAUDE.md §記録先の統一原則）
+  const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
+
   const fetchedAt = new Date().toISOString();
-  const insMetric = db.prepare("INSERT OR REPLACE INTO sns_metrics (sns_post_id, views, likes, comments, fetched_at) VALUES (?, ?, ?, ?, ?)");
+  // sns_posts のキャッシュカラムは運用データとして D1 に残す
   const updCache = db.prepare("UPDATE sns_posts SET impressions=?, likes=?, replies=?, metrics_updated_at=? WHERE id=?");
   const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
   const updCaption = db.prepare("UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')");
@@ -112,14 +115,23 @@ async function main() {
         if (cr.changes > 0) capUp++;
       }
 
-      insMetric.run(post.id, views, likes, comments, fetchedAt);
+      snsStore.upsertMetric({
+        sns_post_id: post.id,
+        platform: "youtube",
+        domain: post.domain,
+        content_key: post.content_key,
+        fetched_at: fetchedAt,
+        views: views,
+        likes: likes,
+        comments: comments,
+      });
       updCache.run(views, likes, comments, fetchedAt, post.id);
     }
   });
   tx();
 
   console.log("Matched: " + matched + ", URLs updated: " + urlUp + ", Captions backfilled: " + capUp + ", Unmatched: " + unmatched);
-  console.log("sns_metrics rows: " + db.prepare("SELECT COUNT(*) as c FROM sns_metrics").get().c);
+  console.log("sns-metrics snapshot rows: " + snsStore.countAll());
   db.close();
 }
 

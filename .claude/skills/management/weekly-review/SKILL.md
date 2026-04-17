@@ -118,29 +118,32 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - top 10: 再生数上位 10 本（再生・いいね・コメント）
    → 前週データがある場合は増減を算出
 
-6. SNS パフォーマンス指標（DB `sns_metrics` テーブルから集計）
-   ※ `/update-sns-metrics` 実行後に D1 へ自動蓄積される。API 不要・直接クエリ可。
-   ```sql
-   -- 最新取得日を確認
-   SELECT MAX(fetched_at) FROM sns_metrics;
-   -- プラットフォーム別集計（最新バッチ）
-   SELECT p.platform,
-          COUNT(DISTINCT m.sns_post_id) as post_count,
-          SUM(m.impressions) as total_impressions,
-          SUM(m.views) as total_views,
-          SUM(m.likes) as total_likes,
-          SUM(m.comments) as total_comments
-   FROM sns_metrics m
-   JOIN sns_posts p ON m.sns_post_id = p.id
-   WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
-   GROUP BY p.platform;
-   -- インプレッション上位投稿（X）
-   SELECT p.ranking_key, m.impressions
-   FROM sns_metrics m
-   JOIN sns_posts p ON m.sns_post_id = p.id
-   WHERE p.platform = 'x' AND m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
-   ORDER BY m.impressions DESC LIMIT 5;
-   ```
+6. SNS パフォーマンス指標
+   - **最新値（プラットフォーム別集計）** は D1 `sns_posts` テーブルのキャッシュカラム（`impressions / likes / reposts / replies / bookmarks / metrics_updated_at`）から取得:
+     ```sql
+     -- 最新更新日を確認
+     SELECT MAX(metrics_updated_at) FROM sns_posts;
+     -- プラットフォーム別集計
+     SELECT platform,
+            COUNT(*) FILTER (WHERE status='posted') as posted_count,
+            SUM(COALESCE(impressions, 0)) as total_impressions,
+            SUM(COALESCE(likes, 0)) as total_likes,
+            SUM(COALESCE(replies, 0)) as total_comments,
+            SUM(COALESCE(reposts, 0)) as total_reposts
+     FROM sns_posts
+     WHERE status = 'posted'
+     GROUP BY platform;
+     -- インプレッション上位投稿（X）
+     SELECT content_key, impressions, likes, reposts
+     FROM sns_posts
+     WHERE platform='x' AND status='posted'
+     ORDER BY COALESCE(impressions, 0) DESC LIMIT 5;
+     ```
+   - **時系列履歴（週次トレンド）** は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から:
+     ```bash
+     # 直近 14 日分の snapshot を合算（sns-metrics-store.cjs の readByRange を使うと手軽）
+     node -e "const s=require('./.claude/scripts/lib/sns-metrics-store.cjs'); const d=new Date(); const end=d.toISOString().slice(0,10); d.setDate(d.getDate()-14); const start=d.toISOString().slice(0,10); console.log(JSON.stringify(s.readByRange(start,end).length+' rows'))"
+     ```
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
    SNS / YouTube の週次ハイライトは本レビュー本文（`docs/03_レビュー/weekly/YYYY-Www-review.md`）に直接記載する。
@@ -370,14 +373,7 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 
 ### SNS パフォーマンス
 
-※ データは D1 `sns_metrics` テーブルに蓄積済み（`/update-sns-metrics` 実行後）。以下のクエリで取得:
-```sql
-SELECT p.platform, COUNT(DISTINCT m.sns_post_id) as posts,
-       SUM(m.impressions) as impressions, SUM(m.views) as views, SUM(m.likes) as likes
-FROM sns_metrics m JOIN sns_posts p ON m.sns_post_id = p.id
-WHERE m.fetched_at = (SELECT MAX(fetched_at) FROM sns_metrics)
-GROUP BY p.platform;
-```
+※ 最新値は D1 `sns_posts` キャッシュカラムから、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Agent C 参照）。
 
 | プラットフォーム | 計測投稿数 | インプレッション / 再生数 | いいね |
 |---|---|---|---|

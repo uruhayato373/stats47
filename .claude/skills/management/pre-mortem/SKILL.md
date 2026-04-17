@@ -34,7 +34,6 @@ sqlite3 "$DB" "
   UNION ALL SELECT 'ranking_ai_content', COUNT(*) FROM ranking_ai_content
   UNION ALL SELECT 'articles', COUNT(*) FROM articles
   UNION ALL SELECT 'sns_posts', COUNT(*) FROM sns_posts
-  UNION ALL SELECT 'sns_metrics', COUNT(*) FROM sns_metrics
   UNION ALL SELECT 'correlation_analysis', COUNT(*) FROM correlation_analysis
 "
 ```

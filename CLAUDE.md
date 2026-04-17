@@ -129,7 +129,7 @@ packages/
 
 - `articles`, `ranking_items`, `ranking_data`, `ranking_ai_content`, `ranking_page_cards` — コンテンツ実体
 - `categories`, `subcategories`, `area_profiles` — マスタ
-- `sns_posts`, `sns_metrics` — SNS 投稿と定点観測（FK 結合の運用データ）
+- `sns_posts` — SNS 投稿本体（最新メトリクスの cache カラムも含む。時系列履歴はファイル側）
 - `correlation_analysis` — 相関分析バッチ結果
 - その他、ランキング・テーマダッシュボード・検索が依存するテーブル
 
@@ -141,8 +141,9 @@ packages/
 |---|---|
 | GSC 週次 snapshot (CSV) + 改善ログ | `.claude/skills/analytics/gsc-improvement/reference/` |
 | GA4 週次 snapshot (CSV) + 改善ログ | `.claude/skills/analytics/ga4-improvement/reference/` |
-| PSI / Lighthouse スコア履歴 | `.claude/skills/analytics/performance-improvement/reference/` |
+| PSI / Lighthouse スコア履歴 | `.claude/skills/analytics/performance-improvement/` |
 | PSI 閾値（budgets） | `.claude/skills/analytics/performance-improvement/budgets.json` |
+| SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |
 | RemoteTrigger 記録 | `.claude/state/triggers.json` |
@@ -183,7 +184,7 @@ packages/
 | `ranking_page_cards` | Gemini CLI（自宅PC） | AI コンテンツと同時生成 |
 | `articles` | Claude Code（どのPCでも） | `/sync-articles` で R2 から同期 |
 | `ranking_items`, `ranking_data` | Claude Code（どのPCでも） | `/register-ranking` で追加 |
-| `sns_posts`, `sns_metrics` | Claude Code（どのPCでも） | SNS スキルで更新 |
+| `sns_posts` | Claude Code（どのPCでも） | SNS スキルで更新。時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/` (git) へ |
 | `correlation_analysis` | Claude Code（どのPCでも） | 相関分析バッチ |
 | その他マスタ系 | 低頻度・どのPCでも | `categories`, `subcategories` 等 |
 

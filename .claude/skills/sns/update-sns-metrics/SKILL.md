@@ -1,11 +1,16 @@
 ---
 name: update-sns-metrics
-description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し D1 に記録する。Use when user says "メトリクス更新", "SNS数値取得". X は browser-use、YouTube は API.
+description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". X は browser-use、YouTube は API.
 disable-model-invocation: true
 argument-hint: [--platform x|youtube|all]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し D1 に記録する。X は browser-use CLI、YouTube は Data API v3 を使用する。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。X は browser-use CLI、YouTube は Data API v3 を使用する。
+
+**記録先の統一原則（CLAUDE.md §記録先の統一原則）**:
+- 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
+- 運用データ（最新値キャッシュ） → D1 `sns_posts` の cache カラム
+- 旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み
 
 ### 期待カバレッジ
 
@@ -87,6 +92,7 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 ```bash
 cat > /tmp/sns-report.js << JSEOF
 const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
+const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
 const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const db = new Database(DB_PATH);
 
@@ -94,8 +100,9 @@ console.log("\n=== プラットフォーム別更新件数（直近1時間） ==
 const updated = db.prepare("SELECT platform, COUNT(*) as cnt FROM sns_posts WHERE metrics_updated_at >= datetime('now', '-1 hour') GROUP BY platform").all();
 for (const r of updated) console.log(r.platform + ": " + r.cnt);
 
-console.log("\n=== sns_metrics 総件数 ===");
-console.log(db.prepare("SELECT COUNT(*) as c FROM sns_metrics").get().c);
+console.log("\n=== sns-metrics snapshot 総件数（全期間） ===");
+console.log(snsStore.countAll());
+console.log("最新 fetched_at: " + snsStore.maxFetchedAt());
 
 console.log("\n=== post_url 充足率 ===");
 const urlStats = db.prepare("SELECT platform, COUNT(*) as total, SUM(CASE WHEN post_url IS NOT NULL AND post_url != '' THEN 1 ELSE 0 END) as with_url FROM sns_posts GROUP BY platform").all();
@@ -133,7 +140,8 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 - `references/phase0-caption-backfill.md` — Phase 0 Caption Backfill スクリプト
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
 - `references/platform-youtube.md` — YouTube メトリクス取得手順（YT-1）
-- `packages/database/src/schema/sns_metrics.ts` — sns_metrics テーブル定義
-- `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義
+- `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
+- `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
+- `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義（キャッシュカラム含む運用データ）
 - `.claude/skills/analytics/fetch-youtube-data/SKILL.md` — YouTube API パターンの原典
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

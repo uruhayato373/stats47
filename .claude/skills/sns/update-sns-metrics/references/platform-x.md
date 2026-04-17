@@ -102,8 +102,11 @@ function parseEng(label) {
   return m;
 }
 
+// 時系列履歴は .claude/ 配下のファイルに蓄積（CLAUDE.md §記録先の統一原則）
+const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
+
 const fetchedAt = new Date().toISOString();
-const insMetric = db.prepare("INSERT OR REPLACE INTO sns_metrics (sns_post_id, impressions, likes, comments, shares, saves, fetched_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+// sns_posts のキャッシュカラムは運用データとして D1 に残す
 const updCache = db.prepare("UPDATE sns_posts SET impressions=?, likes=?, reposts=?, replies=?, bookmarks=?, metrics_updated_at=? WHERE id=?");
 const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
 const updCaption = db.prepare("UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')");
@@ -155,14 +158,26 @@ const tx = db.transaction(() => {
       if (cr.changes > 0) capUp++;
     }
 
-    insMetric.run(post.id, eng.impressions, eng.likes, eng.replies, eng.reposts, eng.bookmarks, fetchedAt);
+    // X は likes / replies / reposts / bookmarks を計測。comments=replies, shares=reposts, saves=bookmarks にマップ
+    snsStore.upsertMetric({
+      sns_post_id: post.id,
+      platform: "x",
+      domain: post.domain,
+      content_key: post.content_key,
+      fetched_at: fetchedAt,
+      impressions: eng.impressions,
+      likes: eng.likes,
+      comments: eng.replies,
+      shares: eng.reposts,
+      saves: eng.bookmarks,
+    });
     updCache.run(eng.impressions, eng.likes, eng.reposts, eng.replies, eng.bookmarks, fetchedAt, post.id);
   }
 });
 tx();
 
 console.log("Matched: " + matched + ", URLs updated: " + urlUp + ", Captions backfilled: " + capUp + ", Unmatched: " + unmatched);
-console.log("sns_metrics rows: " + db.prepare("SELECT COUNT(*) as c FROM sns_metrics").get().c);
+console.log("sns-metrics snapshot rows: " + snsStore.countAll());
 db.close();
 JSEOF
 
