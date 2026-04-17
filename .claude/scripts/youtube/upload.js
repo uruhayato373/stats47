@@ -3,10 +3,10 @@
  * YouTube Data API v3 で動画をアップロードするスクリプト
  *
  * 使い方:
- *   node scripts/youtube-upload.js <動画ファイル> [--title "タイトル"] [--description "説明"] [--tags "tag1,tag2"] [--thumbnail サムネイル.png] [--privacy unlisted|private|public]
+ *   node .claude/scripts/youtube/upload.js <動画ファイル> [--title "タイトル"] [--description "説明"] [--tags "tag1,tag2"] [--thumbnail サムネイル.png] [--privacy unlisted|private|public]
  *
  * 例:
- *   node scripts/youtube-upload.js .local/r2/sns/ranking/theft-offenses-recognized-per-1000/youtube/scroll-ges.mp4 \
+ *   node .claude/scripts/youtube/upload.js .local/r2/sns/ranking/theft-offenses-recognized-per-1000/youtube/scroll-ges.mp4 \
  *     --title "都道府県別「泥棒が多い県」ランキング" \
  *     --description "2023年の窃盗犯認知件数データ" \
  *     --tags "都道府県,ランキング,統計,犯罪" \
@@ -34,7 +34,7 @@ const REFRESH_TOKEN = envVars.GOOGLE_OAUTH_REFRESH_TOKEN;
 
 if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
   console.error("Error: .env.local に GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, GOOGLE_OAUTH_REFRESH_TOKEN が必要です");
-  console.error("  node scripts/youtube-oauth-setup.js で認証してください");
+  console.error("  node .claude/scripts/youtube/oauth-setup.js で認証してください");
   process.exit(1);
 }
 
@@ -43,7 +43,7 @@ if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
 function parseArgs() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args[0].startsWith("--")) {
-    console.error("Usage: node scripts/youtube-upload.js <video-file> [options]");
+    console.error("Usage: node .claude/scripts/youtube/upload.js <video-file> [options]");
     console.error("  --title       動画タイトル");
     console.error("  --description 動画説明文");
     console.error("  --tags        カンマ区切りタグ");

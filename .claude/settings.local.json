@@ -94,7 +94,10 @@
       "Bash(git remote *)",
       "Bash(mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots)",
       "Bash(rmdir \"docs/03_レビュー/weekly-metrics\")",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(npm run *)",
+      "Bash(NODE_PATH=/Users/minamidaisuke/stats47/node_modules node *)",
+      "Bash(git check-ignore *)"
     ],
     "defaultMode": "bypassPermissions"
   }

@@ -3,11 +3,11 @@
  * YouTube 動画の内容を詳細分析する（メタデータ + 字幕テキスト + サムネイル URL）。
  *
  * Usage:
- *   node scripts/youtube-analyze.mjs <url-or-videoId>
+ *   node .claude/scripts/youtube/analyze.mjs <url-or-videoId>
  *
  * Examples:
- *   node scripts/youtube-analyze.mjs https://www.youtube.com/shorts/mlfNXVBqmLs
- *   node scripts/youtube-analyze.mjs mlfNXVBqmLs
+ *   node .claude/scripts/youtube/analyze.mjs https://www.youtube.com/shorts/mlfNXVBqmLs
+ *   node .claude/scripts/youtube/analyze.mjs mlfNXVBqmLs
  *
  * 出力:
  *   - コンソール: メタデータテーブル + 字幕全文
@@ -122,7 +122,7 @@ function formatTimestamp(ms) {
 async function main() {
   const input = process.argv[2];
   if (!input) {
-    console.error("Usage: node scripts/youtube-analyze.mjs <url-or-videoId>");
+    console.error("Usage: node .claude/scripts/youtube/analyze.mjs <url-or-videoId>");
     process.exit(1);
   }
 

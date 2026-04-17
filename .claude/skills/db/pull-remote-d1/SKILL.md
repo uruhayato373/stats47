@@ -1,8 +1,16 @@
 ---
 name: pull-remote-d1
-description: リモート D1 のデータをローカル D1 に反映する。Use when user says "D1 pull", "ローカル更新", "pull-remote-d1". ページネーション付き SELECT で OOM 回避.
+description: リモート D1 を新規 PC セットアップ・PC 復旧・リモート直接編集の取り込み時にローカル D1 へ反映する復旧専用スキル。routine には実行しない。
 disable-model-invocation: true
 ---
+
+> ⚠ **単一 PC 運用前提では routine に実行しない。** ローカル D1 が常に編集元であるため、routine な pull は作業中のローカルデータを失うリスクがある。実行するのは以下の 3 ケースに限定:
+>
+> 1. 新規 PC のセットアップ
+> 2. PC 障害からの復旧
+> 3. Cloudflare ダッシュボード等でリモートを直接編集した場合の取り込み
+>
+> 差分の確認だけなら `/diff-d1` または `npm run pull:d1 -- --dry-run` を使う（変更なし）。
 
 リモート D1（production）のデータをテーブル単位でページネーション付き SELECT → ローカル INSERT で同期する。
 `wrangler d1 export` の OOM 問題を回避するため、`wrangler d1 execute --remote --json` でページごとに取得し `better-sqlite3` でローカルに書き込む。

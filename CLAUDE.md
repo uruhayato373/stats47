@@ -160,6 +160,41 @@ packages/
 - 計測データを D1 に入れるとテーブルが肥大化し、スキーマ変更コストが増える
 - エージェントが Read/Write/Grep で扱えるほうが、スキル横断の連携がしやすい
 
+## スキル利用コードの配置原則
+
+**スキル（SKILL.md）から呼ばれるユーティリティ・ヘルパースクリプトは `.claude/` 配下に置く**。`scripts/` 直下には置かない。
+
+### 配置ルール
+
+| 対象 | 置き場所 |
+|---|---|
+| 複数スキルから共有されるユーティリティ（YouTube / GA4 / GSC 等ドメイン単位） | `.claude/scripts/<domain>/` 例: `.claude/scripts/youtube/`, `.claude/scripts/lib/` |
+| 特定スキル専用の長大スクリプト | `.claude/skills/<skill>/scripts/` |
+| スキルが参照するデータ・テンプレ（非実行） | `.claude/skills/<skill>/reference/` |
+| launchd 等の OS 統合用シェルラッパー | `scripts/scheduled/`（唯一の例外、`.claude/` 外でよい） |
+| アプリのビルド・デプロイ用スクリプト | `packages/*/scripts/` or `apps/*/scripts/` |
+
+### `scripts/` 直下に置いてよいもの
+
+- `scripts/scheduled/` のような OS 統合（launchd plist から呼ばれる shell）のみ
+- 一時的な作業スクリプトは作らない（`/tmp/` で完結させる）
+
+### 判断フロー
+
+```
+スクリプトを新規作成する
+  ↓
+SKILL.md から `node <path>` で呼ばれる？
+  ├─ YES → .claude/scripts/<domain>/ または .claude/skills/<skill>/scripts/
+  └─ NO → OS から直接起動される？
+          ├─ YES → scripts/scheduled/
+          └─ NO → packages/*/scripts/ or /tmp/（使い捨て）
+```
+
+### 内部パス解決の注意
+
+`.claude/scripts/<domain>/` に置くスクリプトから project root を参照するときは `__dirname, "..", "..", ".."`（3 階層上）になる。`require("path").resolve(__dirname, "../../..")` を `PROJECT_ROOT` として冒頭で宣言すると保守性が上がる。
+
 ## ローカル開発環境
 
 - **ローカル D1/R2 は `.local/d1/` に統一。** `wrangler.toml` の `persist_to = "../../.local/d1"` と `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` で、`pull:d1` スクリプトと dev server が同じデータを参照する。**`apps/web/.wrangler/state/` は使わない。**
@@ -168,27 +203,33 @@ packages/
 - **プロキシ制約**: 企業ネットワークで S3 API が HTTP 407/503 でブロックされる場合あり。`/push-r2` スキルが wrangler CLI フォールバックを案内する
 - **新規テーブルの pull**: リモート D1 にあるがローカルにないテーブルは `/pull-remote-d1` でスキップされる。先にリモートの `CREATE TABLE` 文を取得し、ローカルに `better-sqlite3` でテーブルを作成してから pull すること
 
-## 複数 PC での DB 同期ルール
+## DB 同期フロー
 
-複数 PC で作業する場合、リモート D1 を **single source of truth** とする。
+**単一 PC 運用前提**。ローカル D1 が編集元、リモート D1 が本番配信先という一方向の関係。
 
-**原則**: 作業開始時に `/pull-remote-d1`、変更後に `/sync-remote-d1`。
+```
+ローカル D1（編集元）──/sync-remote-d1──▶ リモート D1（本番配信）
+```
 
-### テーブルオーナーシップ
+- 作業後は `/sync-remote-d1` でローカル → リモートに push
+- 差分確認は `/diff-d1`（変更なしで dry-run 可能）
+- **ロールバックは Cloudflare D1 Time Travel** を使う（過去 30 日の任意時点に復元可能、追加設定不要）:
+  ```bash
+  cd apps/web
+  # 現在のブックマークを取得（sync 前に控えておく）
+  npx wrangler d1 time-travel info stats47_static --env production
+  # ブックマーク指定で復元（精度が高い）
+  npx wrangler d1 time-travel restore stats47_static --env production --bookmark <bookmark-id>
+  # ブックマークがなければ ISO-8601 タイムスタンプで復元
+  npx wrangler d1 time-travel restore stats47_static --env production --timestamp <ISO-8601>
+  ```
+  R2 への手動バックアップ（`npm run backup:d1`）は sync フローに組み込まない。Time Travel で賄えない CF アカウント障害等の災害復旧が必要な場合にのみ、sync と切り離して実行する。
+- `/pull-remote-d1` は routine では実行しない。用途は以下の 3 ケースに限定:
+  1. 新規 PC のセットアップ
+  2. PC 障害からの復旧
+  3. Cloudflare ダッシュボード等でリモートを直接編集した場合の取り込み
 
-主な更新元を意識し、他 PC で更新されたテーブルを古いデータで上書きしないこと。
-
-| テーブル | 主な更新元 | 備考 |
-|---|---|---|
-| `ranking_ai_content` | Gemini CLI（自宅PC） | `/generate-ai-content` で一括生成 |
-| `ranking_page_cards` | Gemini CLI（自宅PC） | AI コンテンツと同時生成 |
-| `articles` | Claude Code（どのPCでも） | `/sync-articles` で R2 から同期 |
-| `ranking_items`, `ranking_data` | Claude Code（どのPCでも） | `/register-ranking` で追加 |
-| `sns_posts` | Claude Code（どのPCでも） | SNS スキルで更新。時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/` (git) へ |
-| `correlation_analysis` | Claude Code（どのPCでも） | 相関分析バッチ |
-| その他マスタ系 | 低頻度・どのPCでも | `categories`, `subcategories` 等 |
-
-`/sync-remote-d1` 実行前に、対象テーブルのオーナーシップを確認すること。自分が主管でないテーブルは push しない or `/pull-remote-d1` で最新化してから作業する。
+  routine な pull はローカルの作業中データを失うリスクがあるため行わない。
 
 ## ブランチ運用ルール
 

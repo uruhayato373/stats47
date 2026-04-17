@@ -181,8 +181,6 @@ cp docs/31_note記事原稿/$SLUG/images/*.png ".local/r2/note/$SLUG/images/" 2>
 rm -rf "docs/31_note記事原稿/$SLUG"
 ```
 
-`/push-r2` で R2 にアップロードすれば複数 PC で同期できる。
-
 ### 4. note.com への投稿手順
 
 1. `docs/31_note記事原稿/<slug>/note.md`（または `.local/r2/note/<slug>/note.md`）の内容を note エディタにペースト

@@ -108,8 +108,11 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    `/fetch-gsc-data last28d query snapshot <当週 YYYY-Www>` を実行する。
    保存先: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
    取得ファイル: queries.csv(全件) / pages.csv(全件) / devices.csv / countries.csv / daily.csv
-   さらに `gcsエラー/` 配下の手動エクスポート CSV があれば index-coverage.csv / index-trend.csv として同ディレクトリへコピーされる。
-   取得完了後、`/gsc-improvement observe` を実行して improvement-log.md の Observation Log に追記する。
+   実行時に以下が自動で連鎖する:
+   a. `~/Downloads/stats47.jp-Coverage-YYYY-MM-DD/` を検出し、`重大な問題.csv` と `平均読み込み時間のチャート.csv` を `gcsエラー/` に mtime 比較でコピー（最新日付 1 件のみ）
+   b. API で queries/pages/devices/countries/daily を取得して snapshots 配下に CSV 保存
+   c. `gcsエラー/` 配下の手動エクスポート CSV があれば index-coverage.csv / index-trend.csv として同ディレクトリへコピー
+   取得完了後、`/gsc-improvement observe` を実行して improvement-log.md の Observation Log に追記する。observe はアラート閾値（登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20%）を自動判定し、超過時は備考欄に ⚠️ ALERT を付与する。
    順位 11-20 位の「あと一押し」クエリは queries.csv から抽出する。
 
 5. YouTube データ取得（API 呼び出し）
@@ -359,6 +362,9 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 
 `snapshots/YYYY-Www/index-coverage.csv` が存在する場合は以下を 1 行で:
 - 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / 登録済みの前週差
+
+**GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
+- 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
 ### YouTube
 

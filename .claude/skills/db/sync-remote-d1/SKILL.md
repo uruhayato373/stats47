@@ -8,7 +8,7 @@ disable-model-invocation: true
 ローカル D1 のデータをリモート D1（production）へ同期する。
 `wrangler d1 export/execute` を使用し、seed スクリプトは使わない。
 
-> **⚠ 複数 PC で作業している場合**: push 前に必ず `/pull-remote-d1` でローカルを最新化すること。他の PC で更新されたテーブルを古いデータで上書きしてしまうリスクがある。CLAUDE.md の「テーブルオーナーシップ」も参照。
+本プロジェクトは単一 PC 運用前提のため、ローカル = 編集元・リモート = 本番配信先の一方向 push として扱う。ロールバックが必要になった場合は Cloudflare D1 Time Travel（過去 30 日の任意時点に復元可能・追加設定不要）を使う。詳細は本ファイル末尾の「ロールバック」セクション参照。
 
 > **💡 推奨**: push 前に `/diff-d1` で差分を確認すると安全。差分検知のみなら変更なしで実行できる。
 
@@ -49,17 +49,18 @@ disable-model-invocation: true
 
 ## 手順
 
-### 0. リモート D1 バックアップ（フル同期時のみ）
+### 0. ロールバック起点の確認（Time Travel）
 
-**フル同期**（DELETE + 全件 INSERT）の場合のみ、事前にバックアップする。差分同期（`--key` / `--table --where`）は新規行の追加のみでデータを壊すリスクが低いため、バックアップは不要。
+sync 前に Cloudflare D1 Time Travel のブックマークを取得しておく。push 後に問題が発生しても、このブックマークに復元すれば sync 直前の状態に戻せる。
 
 ```bash
-npm run backup:d1 --workspace=packages/database -- --env production
+cd apps/web
+npx wrangler d1 time-travel info stats47_static --env production
 ```
 
-- SQL ダンプが R2 の `backups/production/d1_static_<timestamp>.sql` に保存される
-- Static DB のみバックアップする場合は `--db static` を追加
-- バックアップ完了をユーザーに報告してから次のステップへ進む
+- 出力される `The current bookmark is '<bookmark-id>'` の値を控えておく（例: `00003758-00000000-00005050-...`）
+- ユーザーにブックマークを報告してから次のステップへ進む
+- R2 への SQL ダンプ（`npm run backup:d1`）は本フローでは行わない。D1 Time Travel が過去 30 日をカバーするため重複する。CF アカウント障害等の災害復旧が必要な場合にのみ、sync と切り離して別運用で実行する
 
 ### 1. マイグレーション確認（スキーマ同期）
 
@@ -287,6 +288,28 @@ db.close();
 複数テーブルを同期する場合は TABLE を変えて繰り返す。
 
 SQLite ファイルパスは `packages/database/drizzle.config.local.ts` の `dbCredentials.url` を参照。
+
+## ロールバック
+
+sync 後に問題が発覚した場合、Cloudflare D1 Time Travel で Step 0 で控えたブックマーク / タイムスタンプに復元する。
+
+```bash
+cd apps/web
+
+# 現在の状態を確認
+npx wrangler d1 time-travel info stats47_static --env production
+
+# Step 0 で取得したブックマークに復元（推奨・精度が高い）
+npx wrangler d1 time-travel restore stats47_static --env production \
+  --bookmark <bookmark-id>
+
+# ブックマークが失われた場合は ISO-8601 タイムスタンプで復元
+npx wrangler d1 time-travel restore stats47_static --env production \
+  --timestamp 2026-04-17T12:00:00Z
+```
+
+- 過去 30 日以内であれば任意時点に復元可能
+- 復元後は `/pull-remote-d1` でローカルも同期しておく（作業中データの保護は各自の責任）
 
 ## 注意
 

@@ -150,6 +150,54 @@ const res = await searchconsole.searchanalytics.query({
 });
 ```
 
+## GSC PDCA サイクル運用
+
+GSC インデックス問題の継続改善は本エージェントが主担当。週次で観測、月次で施策判断、緊急時はアラート発火。
+
+### 週次オペレーション（月曜）
+
+1. ユーザー作業: GSC → `sc-domain:stats47.jp` → インデックス作成 → ページ → エクスポート → zip を `~/Downloads/` で解凍（`stats47.jp-Coverage-YYYY-MM-DD/` が生成される）
+2. `/weekly-review` 実行（Phase 1 Agent C から自動チェーン）:
+   - `/fetch-gsc-data last28d query snapshot <YYYY-Www>` が Downloads 取り込み → API 全件取得 → snapshots 保存を一気に実行
+   - `/gsc-improvement observe` が Observation Log に新行追記 + アラート判定
+
+### 月次オペレーション（第 1 月曜）
+
+- Action Log の直近 4 週分を読み返し、効果が出た施策と未達の施策を仕分け
+- Next Actions の Tier 優先度を更新
+- Baseline の更新可否を判断（14 日経過 + 連続 2 週で傾向が固まった場合のみ）
+
+### ログ読み書きの排他ルール
+
+| 操作 | 経由するスキル |
+|---|---|
+| Observation Log への追記 | `/gsc-improvement observe` のみ |
+| Action Log への追記 | `/gsc-improvement action` のみ |
+| Baseline 改変 | 原則不可（月次オペで判断した場合のみ、改変履歴を Observation Log に記録） |
+| snapshots/ CSV の生成 | `/fetch-gsc-data snapshot` のみ |
+
+### アラート閾値（前週比、`/gsc-improvement observe` が自動判定）
+
+| 指標 | 閾値 | 対応 |
+|---|---|---|
+| 登録済みページ | ≤ -10% | 緊急: Cloudflare / sitemap / noindex を即座に確認 |
+| 404 | ≥ +5% | Tier 1 施策検討（middleware 410 追加等） |
+| 5xx | ≥ +20% | Workers Logs で pattern 特定 |
+
+### 観測ラベル規約
+
+- **MID**: 直近の Action Log エントリから 14 日未満の観測。SEO 効果未到達のため小幅悪化を異常扱いしない
+- **FINAL**: 14 日以上経過。施策の成否判定に使える
+
+### 関連ファイル
+
+| 用途 | パス |
+|---|---|
+| 改善ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` |
+| 週次 snapshots | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/` |
+| Downloads 取り込み元 | `~/Downloads/stats47.jp-Coverage-YYYY-MM-DD/` |
+| 中間バッファ | プロジェクトルート `gcsエラー/` |
+
 ## 過去の修正履歴
 
 ### 2026-03-30: クロール済み - インデックス未登録 修正（1,453ページ）

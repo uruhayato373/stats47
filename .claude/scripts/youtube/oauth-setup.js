@@ -10,7 +10,7 @@
  *   3. .env.local に GOOGLE_OAUTH_CLIENT_ID / GOOGLE_OAUTH_CLIENT_SECRET を設定
  *
  * 使い方:
- *   node scripts/youtube-oauth-setup.js
+ *   node .claude/scripts/youtube/oauth-setup.js
  */
 
 const { google } = require("googleapis");
@@ -86,7 +86,7 @@ const server = http.createServer(async (req, res) => {
 
     console.log("\n.env.local に GOOGLE_OAUTH_REFRESH_TOKEN を保存しました。");
     console.log("以下のコマンドでデータ取得できます:");
-    console.log("  node scripts/youtube-analytics.js overview");
+    console.log("  node .claude/scripts/youtube/analytics.js overview");
 
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.end("<h1>認証完了</h1><p>このタブを閉じてください。</p>");

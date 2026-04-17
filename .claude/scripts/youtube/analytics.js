@@ -3,7 +3,7 @@
  * YouTube Analytics API からチャンネルデータを取得する。
  *
  * Usage:
- *   node scripts/youtube-analytics.js [report] [options]
+ *   node .claude/scripts/youtube/analytics.js [report] [options]
  *
  * Reports:
  *   retention <videoId>  — 視聴維持率（相対的な離脱曲線）
@@ -14,10 +14,10 @@
  *   top [days]           — 再生数上位動画（デフォルト: 90日）
  *
  * Examples:
- *   node scripts/youtube-analytics.js retention VIDEO_ID
- *   node scripts/youtube-analytics.js traffic
- *   node scripts/youtube-analytics.js overview 90
- *   node scripts/youtube-analytics.js top 28
+ *   node .claude/scripts/youtube/analytics.js retention VIDEO_ID
+ *   node .claude/scripts/youtube/analytics.js traffic
+ *   node .claude/scripts/youtube/analytics.js overview 90
+ *   node .claude/scripts/youtube/analytics.js top 28
  *
  * 前提:
  *   .env.local に以下が設定済み:
@@ -45,7 +45,7 @@ const REFRESH_TOKEN = env.GOOGLE_OAUTH_REFRESH_TOKEN;
 
 if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
   console.error("Error: OAuth 認証情報が .env.local にありません。");
-  console.error("先に node scripts/youtube-oauth-setup.js を実行してください。");
+  console.error("先に node .claude/scripts/youtube/oauth-setup.js を実行してください。");
   process.exit(1);
 }
 
@@ -290,7 +290,7 @@ async function main() {
       break;
     default:
       console.log("YouTube Analytics レポート\n");
-      console.log("Usage: node scripts/youtube-analytics.js <report> [options]\n");
+      console.log("Usage: node .claude/scripts/youtube/analytics.js <report> [options]\n");
       console.log("Reports:");
       console.log("  retention <videoId>  視聴維持率（離脱曲線）");
       console.log("  traffic [days]       トラフィックソース（デフォルト: 28日）");
@@ -305,7 +305,7 @@ async function main() {
 main().catch((err) => {
   if (err.message?.includes("invalid_grant")) {
     console.error("Error: リフレッシュトークンが無効です。再認証してください:");
-    console.error("  node scripts/youtube-oauth-setup.js");
+    console.error("  node .claude/scripts/youtube/oauth-setup.js");
   } else {
     console.error("Error:", err.message);
   }

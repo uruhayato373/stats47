@@ -72,10 +72,18 @@ reference/improvement-log.md を Read し、以下を要約して返す:
    a. reference/snapshots/ 配下で最も新しい YYYY-Www ディレクトリ → index-coverage.csv を Read
    b. a. が無ければ gcsエラー/ 配下の手動エクスポート CSV を Read
    c. どちらも無ければユーザーに「最新の数値を提供してください」と促す
-2. 件数を抽出（404 / 5xx / ソフト 404 / クロール済み未登録 / 検出未登録 / リダイレクト / 登録済み / 未登録）
+2. 件数を抽出（必須カラム、欠損時は (未取得) と明記）:
+   404 / 5xx / ソフト 404 / クロール済み未登録 / 検出未登録 / リダイレクト / 登録済み / 未登録
 3. 同じディレクトリの queries.csv / pages.csv からも主要指標（合計クリック、合計表示、平均順位）を抽出
-4. improvement-log.md の Observation Log セクションに「日付 + 件数テーブル + 気づき」を追記
-5. Baseline または直前の Observation との差分を計算して要約を返す（例: 404 が 5,661 → 5,120 で -541 改善、Organic クリック +300）
+4. Observation Log テーブルに 1 行追記。備考欄には以下のラベルを付与:
+   - **MID**: 直近の Action Log エントリから 14 日未満（SEO 効果未到達期間）→ 小幅悪化も異常扱いしない
+   - **FINAL**: 14 日以上経過し効果が測定可能 → 施策の成否判定に使える
+5. アラート閾値を前週 Observation と比較して判定（超過時は備考に ⚠️ ALERT 付与）:
+   - 登録済みページ ≤ -10% → 緊急（Cloudflare / sitemap / noindex 確認）
+   - 404 ≥ +5% → Tier 1 施策検討（middleware 410 追加等）
+   - 5xx ≥ +20% → Workers Logs で pattern 特定
+6. Baseline または直前の Observation との差分を要約して返す
+   例: 404 が 5,661 → 5,120 で -541 改善、Organic クリック +300
 ```
 
 #### mode = action
@@ -83,12 +91,14 @@ reference/improvement-log.md を Read し、以下を要約して返す:
 ```
 1. ユーザーから「どの Phase / Tier / 変更内容 / コミット hash」を確認
 2. improvement-log.md の Action Log にエントリ追加:
-   - 日付
+   - 日付（デプロイ日）
    - Phase ラベル
    - 対応内容サマリ
    - 変更ファイルリスト
    - コミット hash
    - 想定効果（どの GSC カテゴリに効くか）
+   - **想定観測日**: デプロイ日 + 14 日（SEO 効果の測定可能日）
+3. 以後、同日以降の Observation Log エントリは MID（14 日未満）/ FINAL（14 日以上）ラベルを付与する基準として参照される
 ```
 
 #### mode = next

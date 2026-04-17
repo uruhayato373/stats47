@@ -143,6 +143,12 @@ main();
 
 週次レビュー時に全ディメンションを全件取得し、`.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
 
+**3 段階のコピーを自動で行う**:
+
+1. **Downloads → `gcsエラー/`**: `~/Downloads/stats47.jp-Coverage-YYYY-MM-DD/` を自動検出し、`重大な問題.csv` と `平均読み込み時間のチャート.csv` の 2 ファイルだけを `gcsエラー/` にコピー（mtime 比較で冪等、複数日付あれば最新 1 件のみ採用）。`重大ではない問題.csv` と `メタデータ.csv` は情報量が低いため保存しない
+2. **API 全件取得**: queries / pages / devices / countries / daily の 5 ディメンションを searchanalytics.query で全件取得
+3. **`gcsエラー/` → `snapshots/<YYYY-Www>/`**: 手動エクスポート CSV を `index-coverage.csv` と `index-trend.csv` に正規化してコピー
+
 ### 呼び出し例
 
 ```
@@ -234,6 +240,39 @@ async function main() {
     const csv = toCSV(normalized, [job.dim, 'clicks', 'impressions', 'ctr', 'position']);
     fs.writeFileSync(path.join(OUT_DIR, job.file), csv);
     summary.push(`${job.file}: ${normalized.length} rows`);
+  }
+
+  // Downloads から最新の GSC export を gcsエラー/ に自動コピー（冪等）
+  const DL_DIR = path.join(require('os').homedir(), 'Downloads');
+  const DL_PATTERN = /^stats47\.jp-Coverage-(\d{4}-\d{2}-\d{2})$/;
+  const GCS_ERR_DIR = path.resolve('gcsエラー');
+  const DL_TARGETS = ['重大な問題.csv', '平均読み込み時間のチャート.csv'];
+  if (fs.existsSync(DL_DIR)) {
+    const candidates = fs.readdirSync(DL_DIR)
+      .map(n => n.normalize('NFC'))
+      .filter(n => DL_PATTERN.test(n))
+      .sort((a, b) => b.localeCompare(a));
+    const latest = candidates[0];
+    if (latest) {
+      const srcDir = path.join(DL_DIR, latest);
+      fs.mkdirSync(GCS_ERR_DIR, { recursive: true });
+      for (const f of DL_TARGETS) {
+        const src = path.join(srcDir, f);
+        const dst = path.join(GCS_ERR_DIR, f);
+        if (fs.existsSync(src)) {
+          const srcMtime = fs.statSync(src).mtimeMs;
+          const dstMtime = fs.existsSync(dst) ? fs.statSync(dst).mtimeMs : 0;
+          if (srcMtime > dstMtime) {
+            fs.copyFileSync(src, dst);
+            summary.push(`[downloads] ${f} copied from ${latest}`);
+          } else {
+            summary.push(`[downloads] ${f} skipped (already up-to-date)`);
+          }
+        }
+      }
+    } else {
+      summary.push('[downloads] stats47.jp-Coverage-* not found in ~/Downloads, skipping');
+    }
   }
 
   // 手動エクスポート CSV (index coverage) のコピー
