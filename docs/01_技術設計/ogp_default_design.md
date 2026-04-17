@@ -7,6 +7,36 @@
 
 ---
 
+## 画像生成 3 方式の使い分け
+
+stats47 では用途別に 3 方式を並行運用する。**どれを使うかは「ユースケース」で決まる。1 方式への統一は各々の強みを捨てるため行わない。**
+
+| ケース | 方式 | 実装場所 | 選ぶ理由 |
+|---|---|---|---|
+| 記事別 OGP（動的テキスト・量産） | **Satori** (`next/og` の `ImageResponse`) | `apps/web/src/app/**/opengraph-image.tsx` | ランタイム生成、記事数スケール可、Cloudflare Pages 対応。現状 `areas/[areaCode]`, `themes/[themeSlug]` で稼働中 |
+| 固定 OGP（トップ・凝ったビジュアル） | **Remotion** TSX → `remotion still` で静止画書き出し | `apps/remotion/src/features/ogp/` | D3 / 3D / 複雑なアートワーク表現。Satori の CSS サブセットでは作れない Data Art / Dashboard / Glass 等をカバー |
+| note 表紙・X バナー・SNS 固定素材・ブランド写真 | **外部 AI 画像生成**（Midjourney 等） → `/image-prompt` スキルでプロンプト生成 | `.claude/skills/image-prompt/` | 写真的リアリティ・手描き風など表現力無制限。一枚単発、テキスト差し替え不要、運用コスト許容 |
+
+### 判断フローチャート
+
+```
+画像が必要になった
+  ↓
+その画像は「ページの OGP」か？
+  ├─ YES → 毎記事違うタイトルが入るか？
+  │       ├─ YES → Satori（ImageResponse）
+  │       └─ NO  → Remotion（静止画書き出し）
+  └─ NO → SNS/ブランド用の一枚画像 → /image-prompt でプロンプト生成
+```
+
+### やってはいけないこと
+
+- **記事別 OGP を Midjourney 等の静的画像で作る** — 119 記事に対して手動生成は破綻する。`ImageResponse` または Remotion 動的テキストを使う
+- **Satori で複雑な SVG / D3 描画を無理に実装する** — Satori の CSS サブセット制約に引きずられてコードが歪む。凝ったビジュアルは Remotion へ
+- **Remotion コンポーネントを OGP ランタイム生成に使う** — `remotion still` はビルド時書き出し専用。動的テキスト OGP は Satori で作る
+
+---
+
 ## 3つのデザインバリエーション
 `apps/remotion/src/features/ogp/` 配下に、汎用OGP用の3つの洗練されたデザインバリエーションを実装しています。目的に応じて画像を切り替えたり、ページごとに使い分けたりすることが可能です。
 

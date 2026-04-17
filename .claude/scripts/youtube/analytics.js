@@ -31,7 +31,7 @@ const fs = require("fs");
 const path = require("path");
 
 // --- 認証 ---
-const envPath = path.join(__dirname, "..", ".env.local");
+const envPath = path.join(__dirname, "..", "..", "..", ".env.local");
 const envContent = fs.readFileSync(envPath, "utf-8");
 const env = {};
 for (const line of envContent.split("\n")) {

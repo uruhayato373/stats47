@@ -248,7 +248,7 @@ SELECT slug, title, tags FROM articles;
 1. **最優先**: {クエリ} — {理由}
 ```
 
-13. `docs/21_ブログ記事原稿/trends-gsc-YYYY-MM-DD.md` に保存する。
+13. `.claude/skills/blog/trends-snapshots/trends-gsc-YYYY-MM-DD.md` に保存する。
 
 ## 注意
 

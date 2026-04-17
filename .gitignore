@@ -147,3 +147,7 @@ inspect-knip.js
 .cursorrules
 .cursorignore
 .memory-env/
+
+# Claude Code セッション管理（ローカル専用）
+.claude/scheduled_tasks.lock
+.claude/scheduled_tasks.json

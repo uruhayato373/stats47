@@ -163,3 +163,11 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 | 一括生成 | `/generate-all-sns`（X 部分）→ x-strategist（配信計画）→ `/publish-x`（予約投稿） |
 | パフォーマンス分析 | `/update-sns-metrics` → `/fetch-x-data` → x-strategist（分析・方針更新） |
 | ストック消化 | x-strategist（ストック棚卸し + 優先度付け）→ `/publish-x`（予約投稿）→ `/mark-sns-posted`（投稿済み記録） |
+
+## OGP・画像生成の役割分担
+
+- **X 投稿のデータ画像（ランキング・比較・BCR）** → sns-renderer の Remotion レンダリング
+- **X バナー・プロフィール固定画像・ブランド素材** → `/image-prompt` スキル（`--use-case x-banner` で 3:1 自動適用）
+- **stats47 サイトの OGP** → 本エージェントは触らない（blog-editor / seo-auditor の領分）
+
+詳細は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」、テンプレ一覧は `.claude/skills/image-prompt/reference/catalog.md`。

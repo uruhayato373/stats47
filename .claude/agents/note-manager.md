@@ -154,3 +154,15 @@ db.prepare("SELECT ranking_key, title, status FROM note_articles WHERE status !=
 - `~/.claude/projects/.../memory/project_note_published.md` — 公開済みリスト
 - `~/.claude/projects/.../memory/feedback_note_publish_delete.md` — docs 即削除ルール
 - `~/.claude/projects/.../memory/feedback_note_posting_pace.md` — 1日2〜3本上限
+
+## OGP・画像生成の役割分担
+
+note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で生成する:
+
+- 43 種のテンプレートから選択可能（`.claude/skills/image-prompt/reference/catalog.md`）
+- `--use-case note-header` で note 最適サイズ（1280×670 ≒ 1.91:1）が自動適用
+- fit=high の 10 種（51/54/55/66/69/75/77/82/85/88）が stats47 ブランド安全圏
+- 保存先: `docs/31_note記事原稿/<slug>/header.png`
+- 採用したテンプレ ID は記事 frontmatter に `ogp_template_id: <N>` として記録
+
+Satori / Remotion は note 記事の表紙には使わない（stats47 サイト内の OGP 専用）。詳細は `docs/01_技術設計/ogp_default_design.md` を参照。

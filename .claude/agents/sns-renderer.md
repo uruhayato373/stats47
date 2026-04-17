@@ -38,3 +38,16 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 ## 出力先
 
 - `.local/r2/sns/ranking/<rankingKey>/{youtube-short/,tiktok/,instagram/,x/}` — レンダリング済みメディア
+
+## OGP・画像生成の役割分担
+
+Remotion は以下 2 領域の担当。他方式と役割を混同しないこと:
+
+- **固定 OGP（複雑なビジュアル）** → `apps/remotion/src/features/ogp/DefaultOgp*.tsx`, `BlogOgp*.tsx` 等。`remotion still` で書き出し
+- **SNS 動画・静止画（動的データ入り）** → `RankingYouTube*`, `BarChartRace*` 等。本エージェントの主戦場
+
+**Remotion が担当しないもの**:
+- 記事別 OGP の動的テキスト生成 → Satori（`apps/web/src/app/**/opengraph-image.tsx`）
+- note 表紙・X バナー・ブランド素材の一枚画像 → `/image-prompt` スキル（外部 AI 画像生成）
+
+詳細は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」を参照。

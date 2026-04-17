@@ -197,3 +197,13 @@ const res = await searchconsole.searchanalytics.query({
 | エリアページ | `apps/web/src/app/areas/[areaCode]/page.tsx` |
 | GSC スキル | `.claude/skills/analytics/fetch-gsc-data/SKILL.md` |
 | SEO 監査スキル | `.claude/skills/analytics/seo-audit/SKILL.md` |
+
+## OGP・画像生成 3 方式の前提知識
+
+OGP 関連の robots / noindex 監査を行う際、サイト内の OGP は 2 方式併用である点に注意:
+
+- **Satori 動的生成** (`apps/web/src/app/**/opengraph-image.tsx`) — `areas/[areaCode]`, `themes/[themeSlug]` で稼働。`/*/opengraph-image` URL を `robots.ts` で Disallow 必須（過去に 1,453 件の「クロール済み - インデックス未登録」インシデント発生済み）
+- **Remotion 静止画書き出し** (`apps/remotion/src/features/ogp/`) — `apps/web/public/og-image*.jpg` に配置される固定ファイル。通常の robots 対象外だが、ファイル名衝突に注意
+- **外部 AI 画像生成** (`/image-prompt` スキル) — note 表紙等で使用。stats47 サイト内の OGP には使わない
+
+詳細方針は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」を参照。

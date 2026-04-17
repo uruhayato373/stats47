@@ -46,7 +46,7 @@ YouTube 通常動画（16:9 ScrollGes テンプレート）の制作からアッ
 
 - ローカル D1 に `ranking_data`, `ranking_items` が存在すること
 - OAuth 認証済み（`.env.local` に `GOOGLE_OAUTH_*` 3つ）
-- `scripts/youtube-upload.js` が存在すること
+- `.claude/scripts/youtube/upload.js` が存在すること
 - GES 背景動画が `apps/remotion/public/backgrounds/ges/landscape/` にあること
 
 ## 手順
@@ -119,7 +119,7 @@ cd apps/remotion && npx remotion render src/index.ts RankingYouTube-ScrollGes \
 
 ### Phase 4: YouTube メタデータ生成 + アップロード
 
-レンダリング完了後、以下のテンプレートに沿ってメタデータを生成し、`scripts/youtube-upload.js` でアップロードする。
+レンダリング完了後、以下のテンプレートに沿ってメタデータを生成し、`.claude/scripts/youtube/upload.js` でアップロードする。
 
 #### タイトル（50文字以内）
 
@@ -164,7 +164,7 @@ https://stats47.jp/ranking/{rankingKey}?utm_source=youtube&utm_medium=social&utm
 #### アップロード
 
 ```bash
-node scripts/youtube-upload.js \
+node .claude/scripts/youtube/upload.js \
   <BASE>/youtube/scroll-ges.mp4 \
   --title '<title>' \
   --description '<description>' \

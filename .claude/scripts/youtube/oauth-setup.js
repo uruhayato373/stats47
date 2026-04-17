@@ -20,7 +20,7 @@ const fs = require("fs");
 const path = require("path");
 
 // .env.local から読み込み
-const envPath = path.join(__dirname, "..", ".env.local");
+const envPath = path.join(__dirname, "..", "..", "..", ".env.local");
 const envContent = fs.readFileSync(envPath, "utf-8");
 const envVars = {};
 for (const line of envContent.split("\n")) {

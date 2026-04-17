@@ -41,7 +41,7 @@
 ### 8. ScrollGes テンプレート作成・犯罪テーマ動画投稿（2026-03-28）
 - `RankingScrollGes` テンプレート新規作成（GES背景 + 右からスライドインするカード）
 - NormalIntro を画面中央・大フォントに改修
-- YouTube Data API アップロードスクリプト作成（`scripts/youtube-upload.js`）
+- YouTube Data API アップロードスクリプト作成（`.claude/scripts/youtube/upload.js`）
 - OAuth スコープに `youtube.upload` 追加・再認証完了
 - 犯罪テーマ（`theft-offenses-recognized-per-1000`）を ScrollGes でレンダリング → YouTube に限定公開で投稿完了
   - Video ID: `gzdSq-COcHM`
@@ -56,7 +56,7 @@
 
 ### 優先度: 中
 3. **ScrollGes テンプレートの改善** — 都道府県コメント追加、TOP3 の演出強化
-4. **YouTube 自動投稿スキル作成** — `scripts/youtube-upload.js` をスキル化
+4. **YouTube 自動投稿スキル作成** — `.claude/scripts/youtube/upload.js` をスキル化
 
 ### 優先度: 低
 5. **X引用RT用の検索パターン整理** — `x_quote_rt_strategy.md` のTODO

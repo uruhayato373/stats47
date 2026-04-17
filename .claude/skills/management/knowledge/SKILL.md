@@ -184,11 +184,11 @@ user-invocable: false
 
 ## YouTube OAuth トークンは定期的に失効する
 
-**問題**: `scripts/youtube-upload.js` で `invalid_grant: Token has been expired or revoked` エラー。
+**問題**: `.claude/scripts/youtube/upload.js` で `invalid_grant: Token has been expired or revoked` エラー。
 
 **原因**: Google OAuth の refresh token が失効（長期間未使用、パスワード変更、手動取り消し等）。
 
-**対策**: `node scripts/youtube-oauth-setup.js` を実行し、ブラウザで Google 認証を通す。新しい refresh token が `.env.local` に自動保存される。browser-use の Profile 5 で自動化可能。
+**対策**: `node .claude/scripts/youtube/oauth-setup.js` を実行し、ブラウザで Google 認証を通す。新しい refresh token が `.env.local` に自動保存される。browser-use の Profile 5 で自動化可能。
 
 ---
 

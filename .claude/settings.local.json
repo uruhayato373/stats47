@@ -87,7 +87,14 @@
       "Bash(echo \"---exit: $?\")",
       "Bash(echo \"---push exit: $?\")",
       "Bash(git reset:*)",
-      "Bash(find /Users/minamidaisuke/stats47/.claude/skills -name \"SKILL.md\" -exec grep -l \"reference/\" {} \\\\;)"
+      "Bash(find /Users/minamidaisuke/stats47/.claude/skills -name \"SKILL.md\" -exec grep -l \"reference/\" {} \\\\;)",
+      "Bash(node *)",
+      "Bash(mkdir -p /Users/minamidaisuke/stats47/.claude/skills/blog/trends-snapshots)",
+      "Bash(git mv *)",
+      "Bash(git remote *)",
+      "Bash(mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots)",
+      "Bash(rmdir \"docs/03_レビュー/weekly-metrics\")",
+      "Bash(git rm *)"
     ],
     "defaultMode": "bypassPermissions"
   }

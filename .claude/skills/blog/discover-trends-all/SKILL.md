@@ -262,7 +262,7 @@ SELECT slug, title, tags FROM articles;
 3. **データ取得が必要**: {候補名} — `/fetch-estat-data` で {statsDataId} を取得
 ```
 
-13. `docs/21_ブログ記事原稿/trends-all-YYYY-MM-DD.md` に保存する。
+13. `.claude/skills/blog/trends-snapshots/trends-all-YYYY-MM-DD.md` に保存する。
 
 ## 注意
 

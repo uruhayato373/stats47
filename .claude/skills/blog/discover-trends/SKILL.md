@@ -200,13 +200,13 @@ SELECT slug, title, tags FROM articles;
 2. {次に推奨する候補}
 ```
 
-12. Phase 5 の候補詳細 + 上記サマリーを `docs/21_ブログ記事原稿/trends-YYYY-MM-DD.md` に保存する。同日に複数回実行した場合は `trends-YYYY-MM-DD-2.md` のように連番を付与する。
+12. Phase 5 の候補詳細 + 上記サマリーを `.claude/skills/blog/trends-snapshots/trends-YYYY-MM-DD.md` に保存する。同日に複数回実行した場合は `trends-YYYY-MM-DD-2.md` のように連番を付与する。
 
 13. 保存後、会話内でもサマリーを表示してユーザーに報告する。
 
 ## 注意
 
-- **出力先**: `docs/21_ブログ記事原稿/trends-YYYY-MM-DD.md` に保存。会話内でもサマリーを表示する
+- **出力先**: `.claude/skills/blog/trends-snapshots/trends-YYYY-MM-DD.md` に保存。会話内でもサマリーを表示する
 - **RSS フォーマット**: Google Trends RSS は XML 形式。WebFetch の結果から `<item>` 要素を正確にパースすること
 - **検索キーワードの拡張**: DB 検索時はトレンドキーワードそのままだけでなく、同義語・関連語・上位概念でも検索する。Claude の知識を活用して適切な検索語を生成すること
 - **マッチ度の判断**: 機械的なキーワード一致だけでなく、統計データとトレンドの「記事としての結びつきやすさ」をセマンティックに判断する

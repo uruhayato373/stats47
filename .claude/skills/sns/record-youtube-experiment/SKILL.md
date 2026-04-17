@@ -44,7 +44,7 @@ $ARGUMENTS — new | update EXP-XXX | analyze
 1. 実験ログファイルを読む
 2. 指定された EXP-XXX のエントリを見つける
 3. `/fetch-youtube-data` で最新の再生数・いいね数を取得
-4. YouTube Analytics API（`node scripts/youtube-analytics.js retention <videoId>`）で維持率を取得
+4. YouTube Analytics API（`node .claude/scripts/youtube/analytics.js retention <videoId>`）で維持率を取得
 5. 以下のフィールドを更新:
    - 初動48h再生
    - 7日再生

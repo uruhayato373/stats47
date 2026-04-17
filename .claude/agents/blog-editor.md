@@ -65,3 +65,13 @@ DB (articles テーブル)           ← サイトに反映
 ```
 
 **重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/blog/` に直接書かない。
+
+## OGP・画像生成の役割分担
+
+画像を生成するときは `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」に従う:
+
+- **記事別 OGP（動的タイトル・量産）** → Satori (`apps/web/src/app/**/opengraph-image.tsx`)。ブログ記事公開時に自動生成されるため原則触らない
+- **固定 OGP（凝ったビジュアル）** → Remotion (`apps/remotion/src/features/ogp/BlogOgp*.tsx`)
+- **ブログ記事の hero 画像・装飾素材** → `/image-prompt` スキル（43 テンプレ、`.claude/skills/image-prompt/reference/catalog.md`）
+
+記事別 OGP を Midjourney 画像で量産しようとしない（119 記事の再生成が破綻する）。

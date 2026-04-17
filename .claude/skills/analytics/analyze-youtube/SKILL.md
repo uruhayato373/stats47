@@ -26,7 +26,7 @@ $ARGUMENTS — YouTube 動画 URL または videoId
 ### Phase 1: データ取得
 
 ```bash
-node scripts/youtube-analyze.mjs $ARGUMENTS
+node .claude/scripts/youtube/analyze.mjs $ARGUMENTS
 ```
 
 出力 JSON（`/tmp/youtube-analysis-<videoId>.json`）を Read ツールで読み込む。

@@ -27,7 +27,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // youtube-transcript は package.json の設定不備で通常 import が壊れるため ESM ファイルを直接指定
-const ytPath = join(__dirname, "..", "node_modules/youtube-transcript/dist/youtube-transcript.esm.js");
+const ytPath = join(__dirname, "..", "..", "..", "node_modules/youtube-transcript/dist/youtube-transcript.esm.js");
 const { fetchTranscript } = await import(ytPath);
 const { google } = require("googleapis");
 const fs = require("fs");
@@ -45,7 +45,7 @@ function extractVideoId(input) {
 
 // --- 認証（サービスアカウント） ---
 function createYoutubeClient() {
-  const root = resolve(__dirname, "..");
+  const root = resolve(__dirname, "..", "..", "..");
   const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
   const keyFile = KEY_CANDIDATES.map((f) => join(root, f)).find((f) => fs.existsSync(f));
   if (!keyFile) {
