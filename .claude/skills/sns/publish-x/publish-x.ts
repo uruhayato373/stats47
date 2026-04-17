@@ -7,8 +7,16 @@
  *     divorces-per-total-population 2026-04-14T08:00
  *
  * 引数: <rankingKey> <scheduleDateTimeJST> のペアを繰り返し指定
- *   --domain ranking|compare|correlation (デフォルト: ranking)
- *   --immediate  予約ではなく即時投稿
+ *   --domain ranking|compare|correlation|blog (デフォルト: ranking)
+ *   --immediate  予約ではなく即時投稿（⚠️ 明示指定が必要、デフォルトは予約）
+ *   --dry-run    実投稿せずセレクタ検出まで確認（初回必須）
+ *
+ * 事故履歴（2026-04-18）:
+ *   Sprint 1 Day 2-5 を予約投稿したつもりが 4 件全て即時投稿された。
+ *   原因: 予約モード検出に失敗しても「投稿は継続」のフォールバックで
+ *         tweetButton を押下 → X UI 的には即時投稿ボタンが作動。
+ *   対策: fail-safe 化（予約モード未確認なら Escape で投稿中止）+
+ *         dry-run モード追加 + 失敗時 screenshot 保存。
  */
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
@@ -17,10 +25,32 @@ import * as fs from "fs";
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-profile");
+const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-debug");
 const DB_PATH = path.join(
   PROJECT_ROOT,
   ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
 );
+
+let IS_DRY_RUN = false;
+
+// 失敗時に screenshot を保存（後で人間が検証可能）
+async function saveScreenshot(
+  page: Page,
+  contentKey: string,
+  label: string
+): Promise<void> {
+  if (!fs.existsSync(DEBUG_DIR)) {
+    fs.mkdirSync(DEBUG_DIR, { recursive: true });
+  }
+  const ts = new Date().toISOString().replace(/[:.]/g, "-");
+  const filepath = path.join(DEBUG_DIR, `${ts}_${contentKey}_${label}.png`);
+  try {
+    await page.screenshot({ path: filepath, fullPage: true });
+    console.log(`📸 screenshot: ${filepath}`);
+  } catch (e) {
+    console.error(`screenshot 失敗: ${e}`);
+  }
+}
 
 interface PostConfig {
   contentKey: string;
@@ -43,6 +73,9 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       domain = args[++i];
     } else if (args[i] === "--immediate") {
       immediate = true;
+    } else if (args[i] === "--dry-run") {
+      IS_DRY_RUN = true;
+      console.log("🧪 DRY RUN モード: 実投稿はせず、セレクタ検出まで確認");
     } else {
       const key = args[i];
       const dateStr = !immediate && i + 1 < args.length && !args[i + 1].startsWith("-")
@@ -208,25 +241,77 @@ async function publishPost(
     const confirmBtn = page.getByTestId(
       "scheduledConfirmationPrimaryAction"
     );
-    if ((await confirmBtn.count()) > 0) {
-      await confirmBtn.click();
-      // 予約ダイアログが閉じてコンポーザに戻るのを待機
-      await page.waitForTimeout(2000);
+    if ((await confirmBtn.count()) === 0) {
+      console.error(`🚨 予約確認ボタンが見つかりません: ${post.contentKey}`);
+      await saveScreenshot(page, post.contentKey, "confirm-btn-missing");
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return false;
+    }
+    await confirmBtn.click();
+    await page.waitForTimeout(3000);
 
-      // tweetButton のテキストが予約モードに変わったことを確認
-      // X は予約設定後、ボタン内テキストが「予約設定」に変わる
-      try {
-        await page.locator('[data-testid="tweetButton"] span span:text-is("予約設定")').waitFor({
-          state: "visible",
-          timeout: 5000,
-        });
-        console.log("📅 予約モード確認OK");
-      } catch {
-        console.log("⚠️  予約モード切替を検出できず（投稿は継続）");
+    // ★★★ FAIL-SAFE: 予約モード検出 ★★★
+    // 2026-04-18 Sprint 1 事故（即時投稿）の再発防止。
+    // 複数 indicator で予約モードへの切り替わりを確認、未確認なら投稿中止。
+    const isScheduledMode = async (): Promise<boolean> => {
+      const indicators = [
+        page.locator('[data-testid="tweetButton"]:has-text("予約設定")'),
+        page.locator('[data-testid="tweetButton"]:has-text("Schedule")'),
+        page.locator('[data-testid="tweetButton"] span:text-is("予約設定")'),
+        page.locator('[data-testid="tweetButton"] span:text-is("Schedule")'),
+      ];
+      for (const ind of indicators) {
+        try {
+          if ((await ind.count()) > 0) return true;
+        } catch {
+          // ignore
+        }
       }
+      return false;
+    };
+
+    let scheduledModeConfirmed = false;
+    const confirmStart = Date.now();
+    while (Date.now() - confirmStart < 8000) {
+      if (await isScheduledMode()) {
+        scheduledModeConfirmed = true;
+        break;
+      }
+      await page.waitForTimeout(500);
     }
 
-    // 予約投稿ボタンをクリック（予約モード確認後なので force 不要を試み、失敗時は force）
+    if (!scheduledModeConfirmed) {
+      console.error(
+        `🚨 予約モード未確認、投稿中止（即時投稿を回避）: ${post.contentKey}`
+      );
+      console.error(
+        `   X の UI が変更された可能性。screenshot を確認してセレクタを更新してください。`
+      );
+      await saveScreenshot(page, post.contentKey, "schedule-mode-not-confirmed");
+      // コンポーザを閉じて次の投稿へ（即時投稿を絶対に発火させない）
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return false;
+    }
+
+    console.log("📅 予約モード確認OK");
+
+    // dry-run なら実投稿せず終了
+    if (IS_DRY_RUN) {
+      console.log(
+        `🧪 dry-run: 予約モードまで到達、投稿はスキップ: ${post.contentKey}`
+      );
+      await saveScreenshot(page, post.contentKey, "dry-run-scheduled-mode");
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return true;
+    }
+
+    // 予約投稿ボタンをクリック
     const postBtn = page.getByTestId("tweetButton").first();
     try {
       await postBtn.click({ timeout: 5000 });
@@ -239,6 +324,15 @@ async function publishPost(
   }
 
   // ── 即時投稿 ──
+  if (IS_DRY_RUN) {
+    console.log(
+      `🧪 dry-run: 即時投稿モード、投稿はスキップ: ${post.contentKey}`
+    );
+    await saveScreenshot(page, post.contentKey, "dry-run-immediate-mode");
+    await page.keyboard.press("Escape").catch(() => {});
+    await page.waitForTimeout(1000);
+    return true;
+  }
   const postBtn = page.getByTestId("tweetButton").first();
   if ((await postBtn.count()) > 0) {
     await postBtn.click({ force: true });
@@ -248,6 +342,7 @@ async function publishPost(
   }
 
   console.log("⚠️  投稿ボタンが見つかりません");
+  await saveScreenshot(page, post.contentKey, "post-btn-missing");
   return false;
 }
 
@@ -256,7 +351,7 @@ function updateDb(
   post: PostConfig,
   success: boolean
 ): void {
-  if (!success) return;
+  if (!success || IS_DRY_RUN) return;
 
   const status = post.scheduledDate ? "posted" : "posted";
   const postedAt = post.scheduledDate
