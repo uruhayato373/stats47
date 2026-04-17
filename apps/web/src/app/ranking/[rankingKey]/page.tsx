@@ -75,16 +75,31 @@ import type { Metadata } from "next";
 
 /** 24時間 ISR */
 
-/** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
+/**
+ * generateStaticParams が返さないキーは即 404 を返す（Next.js App Router のデフォルト true を上書き）
+ *
+ * 2026-04 GSC 調査で `/ranking/任意キー` が全て 200 を返す問題を確認（クロール済み未登録 2,415 の主因）。
+ * dynamicParams=false にすることで、ビルド時に listActiveRankingKeys で取得した有効キー以外は
+ * Next.js が自動的に 404 を返す。ISR で新規 ranking を露出させる必要がある場合は、
+ * `/register-ranking` 実行後に再デプロイするか、この値を true に戻して notFound() ロジックを信頼する。
+ */
+export const dynamicParams = false;
+
+/** ビルド時に全 rankingKey を事前生成（D1 アクセス失敗時は明示的に throw） */
 export async function generateStaticParams() {
-  try {
-    const result = await listActiveRankingKeys("prefecture");
-    if (!isOk(result)) return [];
-    return result.data.map(({ rankingKey }) => ({ rankingKey }));
-  } catch {
-    // CI ビルド時など D1 が利用できない場合は事前生成をスキップし、ISR で再生成
-    return [];
+  const result = await listActiveRankingKeys("prefecture");
+  if (!isOk(result)) {
+    // dynamicParams=false と組み合わせると空配列 = 全ページ 404 になるため throw
+    throw new Error(
+      `[ranking/[rankingKey]] listActiveRankingKeys failed. Build cannot proceed safely with dynamicParams=false.`
+    );
   }
+  if (result.data.length === 0) {
+    throw new Error(
+      `[ranking/[rankingKey]] active ranking keys is empty. Refusing to build.`
+    );
+  }
+  return result.data.map(({ rankingKey }) => ({ rankingKey }));
 }
 
 /** ページコンポーネントの Props 型 */

@@ -215,6 +215,23 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // --- Fix 4.5: /areas/{prefCode}/cities/{cityCode}[/...] → 410 Gone ---
+  // 2026-04 GSC 調査で `/areas/13000/cities/13101` が 500、`/areas/11000/cities/11101` が 200
+  // と挙動不一致を確認。robots.txt ブロック済みだが middleware で明示的に 410 を返して
+  // Google に「完全に削除」シグナルを送る。既存の L231-245 は旧 URL 構造（cities セグメントなし）
+  // 用のため、cities セグメントありのパターンは別途処理が必要だった。
+  {
+    const areaSegments = pathname.split("/").filter(Boolean);
+    if (
+      areaSegments.length >= 4 &&
+      areaSegments[0] === "areas" &&
+      areaSegments[2] === "cities" &&
+      /^\d{5}$/.test(areaSegments[3])
+    ) {
+      return gone();
+    }
+  }
+
   // --- Fix 5: /blog/{旧カテゴリ名} → 410 Gone ---
   // /blog/construction, /blog/socialsecurity 等がブログスラッグとして解釈され soft 404。
   if (pathname.startsWith("/blog/")) {

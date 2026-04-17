@@ -366,6 +366,16 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
+**施策効果サマリ** (improvement-log.md 3.2 セクションから抽出):
+
+| 施策ID | Tier | 経過日数 | ターゲット | 判定 |
+|---|---|---|---|---|
+
+最新観測日の行をコピー。以下のルールで整形:
+- 判定が **先週から変化** した施策は行末に `(変化)` マークを付与（PENDING→PARTIAL_EFFECT 等）
+- ADVERSE が含まれる場合は **このセクション冒頭で警告**
+- Tier 0 で着手待ち（PENDING）の施策は下部に「待機中 Tier 0」として別枠で列挙
+
 ### YouTube
 
 | 項目 | 値 | 前週比 |
