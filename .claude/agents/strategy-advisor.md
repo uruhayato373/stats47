@@ -15,12 +15,13 @@
 | スキル | 用途 |
 |---|---|
 | `/weekly-plan` | 週次計画の生成（5並列サブエージェント） |
-| `/weekly-review` | 週次レビューの生成（4並列サブエージェント） |
+| `/weekly-review` | 週次レビューの生成（5並列サブエージェント） |
 | `/critical-review` | 設計書・計画書の批判的レビュー |
 | `/pre-mortem` | Pre-Mortem 分析 |
 | `/growth-loops` | 成長ループの設計 |
 | `/monetization-strategy` | 収益化戦略のブレスト |
 | `/north-star-metric` | NSM + Input Metrics の定義 |
+| `/nsm-experiment` | NSM 改善実験のライフサイクル管理（propose → start → measure → close） |
 | `/knowledge` | 失敗と学びの参照・追記 |
 | `review-router` | レビューリクエストの自動ルーティング |
 

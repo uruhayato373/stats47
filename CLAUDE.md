@@ -84,6 +84,7 @@ packages/
 | `ui-reviewer` | 2 | melta-ui 準拠・UI/UX パネルレビュー |
 | `devops-runner` | 5 | テスト・デプロイ・Git 操作 |
 | `tdd-guide` | 2 | テスト駆動開発ガイド（Red-Green-Refactor・モック戦略） |
+| `strategy-advisor` | 9 | 週次 PDCA・戦略立案・NSM 実験管理・批判的レビュー |
 
 ### チーム連携パターン
 
@@ -108,7 +109,7 @@ packages/
 | blog | discover-trends-all, expert-review, panel-review, proofread-article, plan-blog-articles, plan-blog-trends, update-blog-plan, generate-article-charts, md-syntax |
 | dev | run-tests, review-tests, verification-loop, continuous-learning, strategic-compact |
 | estat | search-estat, inspect-estat-meta, fetch-estat-data |
-| management | critical-review, weekly-plan, weekly-review |
+| management | critical-review, weekly-plan, weekly-review, nsm-experiment |
 | note | validate-note-idea, design-note-structure |
 | 背景知識 | knowledge, task-router, review-router |
 

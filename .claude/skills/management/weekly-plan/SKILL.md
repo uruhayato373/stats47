@@ -84,10 +84,21 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   GROUP BY p.platform;
   ```
 
-- GA4/GSC メトリクス（`docs/60_運用ログ/weekly-metrics/` から最新ファイルを読み込み）
-  → `/weekly-review` が自動で GA4/GSC データを取得・保存済み
-  → 最新の週次メトリクスファイルから PV・流入経路・検索クエリ等を参照
-  → ファイルが存在しない場合は「計測データなし」と報告
+- GA4/GSC メトリクス（`.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/` から最新 snapshot を読み込み）
+  → `/weekly-review` の Phase 1 Agent C で `/fetch-{ga4,gsc}-data ... snapshot` が自動実行され CSV が保存される
+  → 直近の snapshot ディレクトリ（overview.csv / pages.csv / queries.csv 等）から PV・流入経路・検索クエリを参照
+  → snapshot が存在しない場合は「計測データなし」と報告
+
+- NSM 実験進捗（`.claude/state/experiments.json` から active 実験を取得）
+  ```bash
+  node .claude/scripts/lib/experiments-state.mjs active
+  node .claude/scripts/lib/experiments-state.mjs pending
+  ```
+  → running / measuring 中の実験と、pending_user_actions を把握
+  → 次週の計画に「continue 実験」「measure 実行予定」を組み込む準備
+
+- NSM 週次 snapshot JSON（`docs/03_レビュー/weekly-metrics/YYYY-Www.json`）
+  → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（DB `seo_tracking` テーブルから取得）
   → `SELECT * FROM seo_tracking ORDER BY date DESC LIMIT 10` で直近の推移を確認
@@ -146,6 +157,17 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 3. **機会**: Agent E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
 4. **リスク**: 放置すると悪化すること（技術的負債、トークン失効、コンテンツ枯渇）
 5. **タイミング**: 今週でなければ意味がないこと（季節性、ニュース連動）
+
+### Phase 2.5: NSM 実験候補の提案
+
+`/nsm-experiment propose` を呼んで、現状メトリクスから新規実験候補 3-5 件を rubric 付きで取得する。
+
+- 入力: `docs/03_レビュー/weekly-metrics/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
+- 出力: 候補リスト（impact / effort / learning / certainty の加重合計順）
+- 候補は Phase 3 の Must / Should の選択肢として検討する
+
+active な実験が既に 2 件以上あれば、新規候補の採用は抑制する（rubric 原則）。
+continue 中の実験の measure 実行予定は Must 候補に加える。
 
 ### Phase 3: 優先度提案
 
