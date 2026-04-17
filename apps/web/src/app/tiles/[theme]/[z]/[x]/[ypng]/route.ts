@@ -1,5 +1,5 @@
 /**
- * 地図タイルプロキシ (Cloudflare Workers edge cache 利用)
+ * 地図タイルプロキシ (Cloudflare edge cache 利用)
  *
  * Leaflet が fetch する CartoDB タイル (basemaps.cartocdn.com) を stats47.jp 経由で
  * プロキシし、Cloudflare エッジで長期キャッシュする。
@@ -13,11 +13,12 @@
  *   - z: ズームレベル (0-20)
  *   - x, y: タイル座標
  *   - ypng: "{y}.png" or "{y}@2x.png"
- * - fetch 時に Cloudflare edge に 30 日キャッシュ、ブラウザにも 30 日 immutable
- * - subdomain 分散は不要（Cloudflare CDN 経由で HTTP/2 多重化が効く）
+ * - Cache-Control ヘッダーで Cloudflare edge に 30 日キャッシュ（`s-maxage`）、
+ *   ブラウザにも 30 日 immutable（`max-age`）を指示。cf オプションは OpenNext で
+ *   サポートされない可能性があるため使わず、Cache-Control のみで制御する。
+ * - runtime = "edge" は OpenNext 非対応のため指定しない（デフォルト nodejs runtime で
+ *   OpenNext が Workers 用に wrap する）。
  */
-
-export const runtime = "edge";
 
 const ALLOWED_THEMES = new Set(["light_all", "dark_all"]);
 const Y_PNG_PATTERN = /^(\d+)(@2x)?\.png$/;
@@ -46,21 +47,14 @@ export async function GET(
   const upstreamUrl = `https://a.basemaps.cartocdn.com/${theme}/${z}/${x}/${ypng}`;
 
   try {
-    // Cloudflare Workers の fetch は cf オプションで edge cache を制御可能
-    // 型は @cloudflare/workers-types で定義されるが、ビルド時に吸収される
-    const upstream = await fetch(upstreamUrl, {
-      // @ts-expect-error -- Cloudflare-specific fetch options
-      cf: {
-        cacheTtl: 2592000, // 30 日
-        cacheEverything: true,
-      },
-    });
+    const upstream = await fetch(upstreamUrl);
 
     if (!upstream.ok) {
       return new Response(null, { status: upstream.status });
     }
 
-    // ブラウザキャッシュも 30 日 immutable（タイル内容は固定）
+    // ブラウザ 30 日 immutable / Cloudflare edge 30 日（s-maxage）
+    // Cloudflare Cache Rules が Workers レスポンスを自動でエッジキャッシュする
     return new Response(upstream.body, {
       status: 200,
       headers: {
