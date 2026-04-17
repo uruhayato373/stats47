@@ -112,7 +112,12 @@
       "Bash(echo \"exit=$?\")",
       "Bash(echo \"eslint_exit=$?\")",
       "Bash(git fetch *)",
-      "Bash(xargs -I {} gh run view {} --log-failed)"
+      "Bash(xargs -I {} gh run view {} --log-failed)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/val-jp-1/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-1/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-0/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/val-jp-2/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-2/表.csv)"
     ],
     "defaultMode": "bypassPermissions"
   }
