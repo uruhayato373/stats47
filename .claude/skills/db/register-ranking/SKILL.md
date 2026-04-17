@@ -111,11 +111,28 @@ disable-model-invocation: true
    - 相関分析に含めるには correlation バッチを再実行
    ```
 
-### Phase 5: 後処理
+### Phase 5: known-ranking-keys 再生成（**必須**）
 
-9. 一時スクリプトがあれば削除
-10. ユーザーに次のアクション候補を提示:
+9. `/generate-known-ranking-keys` を実行して `apps/web/src/config/known-ranking-keys.ts` を再生成
+   - または: `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
+10. 差分を確認（新規追加 rankingKey が含まれていること）:
+    ```bash
+    git diff apps/web/src/config/known-ranking-keys.ts | head -30
+    ```
+11. git add + commit:
+    ```bash
+    git add apps/web/src/config/known-ranking-keys.ts
+    git commit -m "chore: known-ranking-keys.ts 再生成（+N 件 <rankingKey>）"
+    ```
+
+**重要**: この手順を飛ばすと、新規追加した rankingKey が middleware Fix 6 で **410 Gone** になりサイトでアクセス不可になる。CI ビルド環境に D1 binding が無いため、middleware は git commit されたファイルのみを参照する設計。
+
+### Phase 6: 後処理
+
+12. 一時スクリプトがあれば削除
+13. ユーザーに次のアクション候補を提示:
     - `/sync-remote-d1` — リモート反映
+    - `/deploy` — known-ranking-keys.ts と合わせて本番デプロイ
     - 記事への `<source-link>` 追加
     - 相関分析バッチの再実行
 

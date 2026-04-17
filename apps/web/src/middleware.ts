@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
+import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 
 /**
  * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
@@ -186,6 +187,24 @@ export default function middleware(req: NextRequest) {
   if (pathname.startsWith("/ranking/")) {
     const rankingKey = pathname.slice("/ranking/".length);
     if (GONE_RANKING_KEYS.has(rankingKey)) {
+      return gone();
+    }
+  }
+
+  // --- Fix 6: 未知の ranking キー → 410 Gone（v3: middleware-only 設計）---
+  // 2026-04 GSC 調査で `/ranking/任意キー` が常に 200 を返す問題を確認（クロール済み未登録 2,415 の主因）。
+  // KNOWN_RANKING_KEYS は git commit された静的 Set（1,899 件）。GONE でも KNOWN でもないキーは
+  // 過去存在したことがない or まだ登録されていないキー → Google に「完全削除」シグナル（410）を送る。
+  //
+  // v1 (d30094c1) と v2 (73b1277b) は page.tsx の dynamicParams=false を併用したが、
+  // CI ビルド環境で D1 binding が無く全ページ SSG が notFound 化してサイト崩壊 (revert 0ba2b163)。
+  // v3 は page.tsx に触らず middleware だけで対応する設計。
+  //
+  // 注意: `/ranking` (index) や `/ranking/{key}/{sub}` サブパスは対象外。
+  //       split("/")[0] で最初のセグメントのみ判定。
+  if (pathname.startsWith("/ranking/")) {
+    const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
+    if (rankingKey && !KNOWN_RANKING_KEYS.has(rankingKey) && !GONE_RANKING_KEYS.has(rankingKey)) {
       return gone();
     }
   }
