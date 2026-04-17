@@ -1,11 +1,31 @@
 ---
 name: publish-x
-description: Playwright で X の予約投稿を自動実行する。Use when user says "X投稿", "X予約投稿", "ツイート予約". キャプション生成済みコンテンツをブラウザ自動操作で投稿.
+description: Playwright で X の予約投稿を自動実行する。Use when user says "X投稿", "X予約投稿", "ツイート予約". キャプション生成済みコンテンツをブラウザ自動操作で投稿. **初回実行時 or セレクタ更新後は必ず `--dry-run` で事前検証すること**.
 disable-model-invocation: true
-argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking]"
+argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking|blog] [--dry-run]"
 ---
 
 Playwright（永続プロファイル）で X のコンポーザを自動操作し、予約投稿を設定する。
+
+## ⚠️ 重要: 初回 / セレクタ更新後は `--dry-run` で事前検証
+
+X の UI は頻繁に変わるため、セレクタが壊れていると **予約投稿のつもりが即時投稿になる** 事故が発生する（2026-04-18 実際に発生、Sprint 1 Day 2-5 が 4 件同時即時投稿）。対策として:
+
+1. **初回投稿 or 前回から 1 週間以上空いた場合**:
+   必ず `--dry-run` で予約モード到達を確認してから実投稿する:
+   ```bash
+   npx tsx .claude/skills/sns/publish-x/publish-x.ts <rankingKey> 2026-04-20T21:00 --dry-run
+   ```
+   - Chromium で予約ダイアログまで到達し、予約モード（`tweetButton` に「予約設定」or「Schedule」）が検出できるか確認
+   - 成功: `.local/playwright-x-debug/<ts>_<key>_dry-run-scheduled-mode.png` に screenshot 保存
+   - 失敗: `schedule-mode-not-confirmed.png` を確認してセレクタ修正
+
+2. **dry-run が成功したら** 本番予約投稿を実行（`--dry-run` を外す）。
+
+3. **セレクタ検出失敗時の挙動**:
+   - 予約モード未確認なら `Escape` で投稿中止（fail-safe、即時投稿を絶対に発火させない）
+   - 失敗時 screenshot は `.local/playwright-x-debug/` に自動保存
+   - ログに `🚨 予約モード未確認、投稿中止` が出る → セレクタ更新が必要なサイン
 
 ## 用途
 

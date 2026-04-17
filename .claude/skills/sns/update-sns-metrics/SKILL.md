@@ -1,11 +1,11 @@
 ---
 name: update-sns-metrics
-description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". X は browser-use、YouTube は API.
+description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". X/Instagram/TikTok は browser-use、YouTube は API.
 disable-model-invocation: true
-argument-hint: [--platform x|youtube|all]
+argument-hint: [--platform x|instagram|youtube|tiktok|all]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。X は browser-use CLI、YouTube は Data API v3 を使用する。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。X/Instagram/TikTok は browser-use CLI、YouTube は Data API v3 を使用する。
 
 **記録先の統一原則（CLAUDE.md §記録先の統一原則）**:
 - 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
@@ -24,7 +24,7 @@ argument-hint: [--platform x|youtube|all]
 ## 引数
 
 ```
-/update-sns-metrics [--platform x|youtube|all] [--skip-backfill]
+/update-sns-metrics [--platform x|instagram|youtube|tiktok|all] [--skip-backfill]
 ```
 
 - `--platform`（任意）: 取得対象（デフォルト: `all`）
@@ -79,9 +79,21 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 
 ---
 
+### Instagram
+
+`references/platform-instagram.md` の手順に従って実行する。
+
+---
+
 ### YouTube
 
 `references/platform-youtube.md` の手順に従って実行する。
+
+---
+
+### TikTok
+
+`references/platform-tiktok.md` の手順に従って実行する。
 
 ---
 
@@ -139,7 +151,9 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 
 - `references/phase0-caption-backfill.md` — Phase 0 Caption Backfill スクリプト
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
+- `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
 - `references/platform-youtube.md` — YouTube メトリクス取得手順（YT-1）
+- `references/platform-tiktok.md` — TikTok メトリクス取得手順（TT-1〜TT-4）
 - `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
 - `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義（キャッシュカラム含む運用データ）

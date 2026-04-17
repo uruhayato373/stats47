@@ -94,10 +94,10 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
 
   // 旧URL で 410 Gone を返すパターン:
   // - /blog/prefecture-rank/...
-  // - /stats/prefecture-rank/...
+  // - /stats/* （配下のルートは全て削除済。サブドメイン storage.stats47.jp は本 middleware 対象外）
   if (
     pathname.startsWith("/blog/prefecture-rank/") ||
-    pathname.startsWith("/stats/prefecture-rank/")
+    pathname.startsWith("/stats/")
   ) {
     return gone();
   }

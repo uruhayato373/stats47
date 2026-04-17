@@ -171,3 +171,36 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 - **stats47 サイトの OGP** → 本エージェントは触らない（blog-editor / seo-auditor の領分）
 
 詳細は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」、テンプレ一覧は `.claude/skills/image-prompt/reference/catalog.md`。
+
+## ⚠️ 予約投稿の安全原則（2026-04-18 事故後の追加ルール）
+
+Sprint 1 Day 2-5 の X 予約投稿が `publish-x.ts` のセレクタ失敗で 4 件同時即時投稿になった事故の再発防止:
+
+### 必須プロトコル
+
+1. **publish-x 初回実行 or セレクタ更新後**: 必ず `--dry-run` で事前検証
+   ```bash
+   npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> 2026-MM-DDTHH:MM --dry-run
+   ```
+   `.local/playwright-x-debug/` に保存される screenshot で予約ダイアログ到達を目視確認。
+
+2. **dry-run が失敗した場合**: 実投稿を絶対に実行しない。セレクタ更新 → 再 dry-run → OK なら本番。
+
+3. **予約投稿と即時投稿の明示**:
+   - 予約: `publish-x <key> <date>` （date 必須）
+   - 即時: `publish-x <key> --immediate` （明示指定）
+   - デフォルト挙動は予約（date 必須、date 無しで `--immediate` も無しなら argparse エラー）
+
+4. **一括予約投稿 (2 件以上) の前には**: 必ず 1 件目で dry-run 検証。2-n 件目は続投で良い（1 件目で検証済みなら）。
+
+### 事故時の復旧
+
+- 誤って即時投稿されたら **即座にタイムライン削除**（時間が経つほどリーチが増え、フォロワー通知も確定する）
+- 復旧後、`publish-x.ts` の事故原因（予約モード検出失敗）を特定、SKILL.md 更新
+- `knowledge/SKILL.md` に失敗パターンを append
+
+### 関連
+
+- 事故記録: `.claude/skills/management/knowledge/SKILL.md`「X 予約投稿が即時投稿になる事故」節
+- fail-safe 実装: `.claude/skills/sns/publish-x/publish-x.ts` L220-260
+- dry-run 使用法: `.claude/skills/sns/publish-x/SKILL.md`

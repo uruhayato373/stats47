@@ -16,7 +16,7 @@
 <text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">家計に占める食費の割合が</text>
 
 <!-- Main catch: big number -->
-<text x="640" y="250" text-anchor="middle" font-size="180" font-weight="900" fill="#dc2626">28.6%</text>
+<text x="640" y="250" text-anchor="middle" font-size="130" font-weight="900" fill="#dc2626">28.6%</text>
 
 <!-- Era label -->
 <text x="640" y="300" text-anchor="middle" font-size="40" font-weight="bold" fill="#1e293b">食費28.6%時代</text>

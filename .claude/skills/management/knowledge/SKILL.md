@@ -216,6 +216,73 @@ user-invocable: false
 
 ---
 
+## GA4 の Script strategy を lazyOnload にすると PV が約 1/10 に収縮する
+
+**問題**: 2026-03-27 の perf 最適化コミット `c17ac68d` で `GoogleAnalytics.tsx` の `<Script strategy>` を `afterInteractive` → `lazyOnload` に変更した結果、3/28 以降 GA4 の PV が前日比 1/10 に急落。GSC clicks は健全だったため計測断絶。3 週間気付かず。
+
+**原因**: `lazyOnload` は window load + idle 後に発火するため、ファーストビューで離脱するユーザーや /ranking/* 等の重いページでは gtag.js 自体が読み込まれない。`PageViewTracker` の `window.gtag?.(...)` が no-op で終わり、SPA の `send_page_view: false` 運用と相まって PV が消失する。
+
+**対策**:
+1. **GA タグだけは `afterInteractive` 必須**（perf 最適化対象から除外）。他の重いライブラリ (lucide-react / D3 / KaTeX 等) は dynamic import で良い
+2. **検証ゲート**: `node .claude/scripts/lib/check-analytics-tag-strategy.cjs` で `GoogleAnalytics.tsx` に `lazyOnload`/`worker` が混入していないかチェック (exit 1 で失敗)
+3. デプロイ後の週次レビューで GSC clicks vs GA4 sessions の比率を見る (10 倍以上開いたら計測異常)
+
+---
+
+## SKILL.md からセクションを削除すると静かに機能が消える
+
+**問題**: 2026-04-04 の commit `5b8afc87` (エージェント再編 refactor) で `update-sns-metrics/SKILL.md` から Instagram / TikTok セクション + `--platform` 引数定義が一括削除された結果、4/10 以降の週次取得が YouTube のみに縮退。reference スクリプト本体は残っており、SKILL.md だけが要件を失った。誰も気付かないまま 2 週間データ欠損。
+
+**原因**: SKILL.md はエージェント実行のソース・オブ・トゥルース。本文セクションがなくなると Sonnet/Opus は「対象外」と解釈し reference スクリプトを呼ばなくなる。refactor で章を切り詰めるとき、SKILL.md の責務範囲を縮めていないか確認する仕組みが無かった。
+
+**対策**:
+1. **検証ゲート**: `node .claude/scripts/lib/check-skill-required-sections.cjs` で重要 SKILL.md の必須見出しが揃っているかチェック。新しい必須セクションを追加するときはスクリプトの `REQUIREMENTS` 配列に登録する
+2. SKILL.md の大幅編集 (refactor / 章削除) を伴う commit はレビュー時に「機能が消えていないか」を必ず確認
+3. 機能が消える可能性のある変更は、関連 reference ファイルへのリンク切れも検証
+
+---
+
+## GA4 の既知 bot フィルタは IAB リスト依存で独自スクレイパーを捕まえない
+
+**問題**: 2026-04 W16 で `/themes/population-dynamics` PV 141 / users 2 / avgDur 4,169s (≈69分) を検出。GA4 標準の「既知の bot 除外」を有効化したかったが、UI にトグル自体が存在しない (UA から GA4 で撤廃)。GA4 は IAB/ABC International Spiders and Bots List 登録の bot のみ常時自動除外で、独自 scraper / Playwright / headless Chrome / 個人 uptime checker は捕まえられない。
+
+**原因**: GA4 の「ボットフィルタリング」は仕様変更で UI から消え、IAB リスト常時参照のみ。リスト未登録 bot は GA4 KPI を歪め続ける (avgDur, engagementRate, top-page ranking)。
+
+**対策**:
+1. **検証ゲート**: `node .claude/scripts/lib/check-ga-bot-anomalies.cjs` を週次 snapshot 取得後に走らせ、`pv/user >= 20` または `avgDur >= 600s` の行を `pages_suspicious.csv` に隔離出力
+2. 隔離行は KPI 集計から差し引いた値を併記する (overview avgDur 136s も population-dynamics 1 行除けば実質 84s 付近)
+3. 確定 bot は (a) GA4 内部トラフィック除外フィルタに追加 (b) Cloudflare Dashboard → Security Events で UA 確認後 middleware で 403 化 — のいずれかで対処
+4. 「GA4 で bot フィルタを ON にする」案内は誤情報なので使わない
+
+---
+
+## X API Basic プラン (10K credit/月) は週次 fetch-x-data で枯渇する
+
+**問題**: 2026-04 後半に `/fetch-x-data` 実行で `CreditsDepleted` エラー。月初リセットまで API live 取得不可。
+
+**原因**: X API v2 Basic プランは 10,000 credit/月。`/fetch-x-data` のツイート取得 + メトリクス取得は 1 回あたり数百 credit を消費し、週次運用で月内に枯渇する。
+
+**対策**:
+1. **頻度を月 1 回に絞る**: 週次で必要な指標は `/update-sns-metrics` (browser-use ベース、API 不要) で取り、`/fetch-x-data` (API ベース) は月初の deeper analysis のみに限定
+2. **`/update-sns-metrics` と `/fetch-x-data` の役割を混同しない**: 前者はメトリクス時系列スナップショット、後者は API でしか取れない詳細ツイート分析。前者は X API クレジットに影響しない
+3. プラン変更検討時の比較: Basic Premium $200/月 (1M credit) は本プロジェクト規模では過剰。月次 fetch のままで十分
+
+---
+
+## note 記事 cover SVG で大きな数字テキストがリード文と重なる
+
+**問題**: B/C/D シリーズ note 記事の cover SVG (1280×670) で `font-size="180"` の big number を `y="250"` 前後に置くと、上の `y="110"` リード文と完全に重なる。8 ファイル一斉に同じレイアウト崩れを起こした。
+
+**原因**: SVG の `<text y="...">` は baseline 位置。CJK グリフは em-box ほぼ全体（baseline から上に `font-size × 0.88` まで）を埋める。font-size 180 のテキストは baseline が y=250 なら top が y=110 となり、同じ y=110 のリード文 (font 32) のベースラインに完全にかぶる。Latin 用の 70% cap-height 感覚で見積もると間違える。
+
+**対策**:
+1. **検証スクリプトを必ず通す**: cover SVG 生成・修正後は `node .claude/scripts/note/check-cover-overlap.cjs <svg>` で全 `<text>` 要素の bbox 重なりを自動検出する（`<g transform="translate()">` 追跡対応、4px 以下の接触は許容）。失敗時は exit 1。
+2. **geometry 規則**: CJK の `<text y=Y font-size=F>` は y 範囲 `[Y - 0.88F, Y + 0.12F]` を占有する。font 180 を中央に置く場合は上の要素との間に最低 30px の余白を確保し、下の要素は `y >= Y + 0.12F + 6` に置く。
+3. **font-size 180 は避ける**: cover で大きな数字を強調したい場合 font-size 130 までが安全（y=250 baseline で top y=136、上に y=110 リード文 font 32 があれば 22px gap）。
+4. SKILL.md の cover SVG テンプレ記述には font 180 の例を載せない（誤コピー防止）。
+
+---
+
 ## GSC 「クロール済み - インデックス未登録」は sitemap から除外しただけでは減らない
 
 **問題**: 2026-04 に `INDEXABLE_AREA_CATEGORIES` を 13 → 2 に削減して sitemap から 517 URL（47 × 11）を除外したが、GSC の「クロール済み - インデックス未登録」は期待ほど減らなかった（W15 2,339 → W16 2,415、+76）。
@@ -223,3 +290,23 @@ user-invocable: false
 **原因**: Google のインデックスは **sitemap から消したというシグナルだけでは除去トリガーにならない**。既にインデックスに入っている URL は、Googlebot が該当 URL を再クロールして 404 / 410 / noindex を受領することで初めて除去候補になる。sitemap は「新規 URL の発見」の案内であり、既存 URL の削除指示ではない。
 
 **対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
+
+---
+
+## X 予約投稿が即時投稿になる事故（publish-x.ts セレクタ失敗）
+
+**問題**: 2026-04-18 Sprint 1 Day 2-5 の X 予約投稿を `publish-x.ts` で実行したところ、4 件全てが **即時投稿** されてしまった。予約日時設定（2026-04-20 21:00 / 21 12:30 / 22 12:00 / 23 19:30）は全く反映されず、実行時刻 20:40 に 4 連投された。X プロファイルの predicted 通知スパム発生、Sprint 1 の UTM 日別効果測定が崩壊。
+
+**原因**: `publish-x.ts` の予約モード検出セレクタ `[data-testid="tweetButton"] span span:text-is("予約設定")` が X UI 側の変更で一致しなくなり、切替検出に失敗。しかし当時のコードは「検出失敗でも投稿は継続」する fail-dangerous 設計で、即時投稿ボタン相当の `tweetButton` を force click していた。ログには `✅ 予約投稿完了` と出るが実態は即時投稿。
+
+**対策**:
+1. **fail-safe 化**（2026-04-18 実装）: 予約モード検出失敗時は `Escape` キーでコンポーザを閉じて投稿中止。即時投稿を絶対に発火させない。`saveScreenshot` で `.local/playwright-x-debug/` に失敗時スクショを自動保存。
+2. **複数セレクタで OR 検出**: `:has-text("予約設定")` / `:has-text("Schedule")` / `span:text-is(...)` の 4 パターンで検出、どれか 1 つ一致すれば OK。8 秒ポーリング。
+3. **`--dry-run` モード追加**: 実投稿せず予約モード到達のみ確認。初回 or セレクタ更新後は必ず `--dry-run` で事前検証する運用に変更。SKILL.md に明記。
+4. **汎用原則**: ブラウザ自動化スキルで「失敗時の挙動」をデフォルトで危険側（投稿実行）に振らない。失敗 = 中止が基本。送信系操作には明示的な成功条件（セレクタ / URL / ログ）を定義する。
+5. **運用面の追加**: DB update (`sns_posts.status=posted`) も dry-run 時はスキップ。publish 成功と DB 記録の乖離を防ぐ。
+
+**関連ファイル**:
+- `.claude/skills/sns/publish-x/publish-x.ts` L220-260（fail-safe 予約モード検出）
+- `.claude/skills/sns/publish-x/SKILL.md`（初回 `--dry-run` 必須手順）
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録

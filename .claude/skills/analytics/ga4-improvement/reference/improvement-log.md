@@ -74,6 +74,50 @@ Google Analytics 4 のアクセス指標を時系列で追跡する記録簿。
 
 ---
 
+### Fix GA4-01 — gtag strategy を `lazyOnload` → `afterInteractive` に戻す（2026-04-18）
+
+**日付**: 2026-04-18
+**ファイル**: `apps/web/src/lib/analytics/GoogleAnalytics.tsx:43,45`
+
+#### 背景（RCA）
+
+W16 取得 (2026-04-18) で `2026-03-28 以降に PV が前日比 1/10 へ急落` を確認。GSC clicks は同期間 5〜77 で健全 → 真のトラフィック消失ではなく **計測断絶**。
+
+**原因コミット (確証)**: `c17ac68d 2026-03-27 21:17 perf: JS バンドル ~1,210KB 削減` で gtag.js の Script strategy を `afterInteractive` → `lazyOnload` に変更。`lazyOnload` は window load 後の idle 起動のため、ファーストビューで離脱するユーザーや /ranking/* 等の重いページでは gtag 自体が読まれず、`PageViewTracker` の `window.gtag?.(...)` が no-op で終わる (`apps/web/src/lib/analytics/pageview.ts:22`)。`send_page_view: false` 運用 (`GoogleAnalytics.tsx:55`) と組み合わさり PV/sessions が約 1/10 に収縮した。
+
+#### 観測値の比較
+
+| 日付 | GA4 PV | GSC clicks | 計測健全度 |
+|---|---|---|---|
+| 3/26 | 301 | 10 | OK |
+| 3/27 | 71 | 13 | デプロイ当日 |
+| 3/28 | **17** | 6 | 急落開始 |
+| 4/09 | 73 | **77** | GSC ↑でも GA4 横ばい (= 計測欠損) |
+| 4/15 | 0 | 18 | 完全断絶状態 |
+
+#### 変更内容
+
+```diff
+- <Script src={...} strategy="lazyOnload" />
+- <Script id="google-analytics" strategy="lazyOnload">
++ <Script src={...} strategy="afterInteractive" />
++ <Script id="google-analytics" strategy="afterInteractive">
+```
+
+JS バンドル削減目的の他のファイル (lucide-react / D3 / KaTeX dynamic import) は維持。GA タグだけは初期描画前に発火させる。
+
+#### 想定効果 (W17 取得時に検証)
+
+- PV / sessions / users が 3/27 以前の水準 (200-300 PV/日 規模) に回復
+- Baseline (W16: PV 2,163) は計測断絶後の値であり、修正デプロイ後に**再ベースライン取得**が必要
+
+#### 残課題 (確証外、別途検討)
+
+- `CookieConsentBanner.tsx:48-51` の `handleDecline` で `gtag('consent','update',{...denied})` を明示発火していない問題 (Consent Mode v2 のモデル化レポートが効かない)
+- 国内向けサイトとして `analytics_storage: 'granted'` をデフォルトにする選択肢
+
+---
+
 ## 3. Observation Log
 
 施策適用後の数値トレンドを時系列で記録する。**1 行追記でも OK**、長文は不要。
