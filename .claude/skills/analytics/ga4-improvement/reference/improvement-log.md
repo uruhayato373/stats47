@@ -11,33 +11,44 @@ Google Analytics 4 のアクセス指標を時系列で追跡する記録簿。
 
 ## 1. Baseline
 
-**取得日**: _（初回 `/weekly-review` 実行時に自動で記録される）_
-**ソース**: `reference/snapshots/<初回 YYYY-Www>/overview.csv` 他
+**取得日**: 2026-04-17
+**ソース**: `reference/snapshots/2026-W16/overview.csv`, `channels.csv`, `pages.csv`
 
-### overview（過去 28 日）
+### overview（過去 28 日 / 2026-03-20 〜 2026-04-16）
 
 | 指標 | 値 |
 |---|---|
-| screenPageViews (PV) | — |
-| activeUsers | — |
-| newUsers | — |
-| sessions | — |
-| averageSessionDuration (秒) | — |
-| bounceRate | — |
+| screenPageViews (PV) | 2,163 |
+| activeUsers | 689 |
+| newUsers | 681 |
+| sessions | 759 |
+| averageSessionDuration (秒) | 136.66 |
+| bounceRate | 42.42% |
 
 ### 流入経路（channels.csv、過去 28 日）
 
-| チャネル | セッション | 割合 |
-|---|---|---|
-| Organic Search | — | — |
-| Direct | — | — |
-| Social | — | — |
-| Referral | — | — |
-| その他 | — | — |
+| チャネル | セッション | ユーザー | PV | 直帰率 |
+|---|---|---|---|---|
+| Direct | 456 | 425 | 1,034 | 42.11% |
+| Organic Search | 115 | 95 | 558 | 33.04% |
+| Referral | 113 | 94 | 452 | 30.09% |
+| Organic Social | 72 | 72 | 90 | 79.17% |
+| Unassigned | 4 | 3 | 29 | 75.00% |
 
 ### 上位ページ（pages.csv、過去 28 日）
 
-_初回 observe 時に埋める_
+| # | ページ | PV | ユーザー | 平均滞在(秒) |
+|---|---|---|---|---|
+| 1 | / | 472 | 376 | 47.12 |
+| 2 | /themes/population-dynamics | 141 | 2 | 4169.34 |
+| 3 | /search | 86 | 7 | 62.82 |
+| 4 | /ranking | 84 | 16 | 253.40 |
+| 5 | /ranking/total-population | 84 | 10 | 142.46 |
+| 6 | /ranking/annual-sunshine-duration | 47 | 19 | 93.05 |
+| 7 | /correlation | 44 | 40 | 62.46 |
+| 8 | /themes | 42 | 3 | 354.58 |
+| 9 | /category/landweather | 37 | 5 | 78.86 |
+| 10 | /ports | 33 | 2 | 736.01 |
 
 ---
 
@@ -69,7 +80,7 @@ _初回 observe 時に埋める_
 
 | 日付 | PV | users | sessions | bounceRate | Organic | Direct | Social | 備考 |
 |---|---|---|---|---|---|---|---|---|
-| _（初回 observe 時に Baseline 行を追加）_ | — | — | — | — | — | — | — | — |
+| 2026-04-17 | 2,163 | 689 | 759 | 42.4% | 115 | 456 | 72 | **Baseline** (W16, last28d 2026-03-20〜2026-04-16). Direct が 60% を占有、Organic は 15% 程度 |
 
 ---
 

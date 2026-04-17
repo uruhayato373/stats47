@@ -97,7 +97,13 @@
       "Bash(git rm *)",
       "Bash(npm run *)",
       "Bash(NODE_PATH=/Users/minamidaisuke/stats47/node_modules node *)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(find /Users/minamidaisuke/stats47/.local/r2/blog -type f \\\\\\( -name \"*.md\" -o -name \"*.mdx\" \\\\\\) -exec stat -f \"%m%t%N\" {} \\\\;)",
+      "Bash(echo \"tsc_exit=$?\")",
+      "Bash(echo \"vitest_exit=$?\")",
+      "Bash(echo \"vitest=$?\")",
+      "Bash(gh run *)",
+      "Bash(git revert *)"
     ],
     "defaultMode": "bypassPermissions"
   }
