@@ -218,6 +218,39 @@ middleware は runtime で動作するため D1 非依存（git commit 静的 Se
 
 2026-04-17 本番 curl 検証で `/areas/13000/cities/13101` が 500、`/areas/11000/cities/11101` が 200、`/areas/01000/cities/01100` が 200 と挙動不一致を確認。middleware の既存ロジック（L231-245）は `areaSegments[2]` を cityCode として期待していたが、`cities` セグメントがあると条件をすり抜けていた。結果として page.tsx `areas/[areaCode]/cities/[cityCode]/page.tsx` に到達し、データ不整合で 500 になるケースや、robots.txt ブロック済みだが HTTP 200 を返すケースが混在していた。
 
+### [T1-OBS-01] Cloudflare 観測基盤（traces + Analytics Engine binding）
+
+**施策 ID**: `T1-OBS-01`
+**Tier**: T1 (technical SEO / 観測基盤)
+**デプロイ日**: 2026-04-18
+**コミット**: — （デプロイ時に追記）
+**ターゲット指標**: （間接的）5xx, クロール済み未登録、次回施策の検知速度
+**想定効果**:
+- 本番 5xx 発生時の URL / スタックトレースが Cloudflare Dashboard で即座に見られる
+- リクエスト traces により URL × status code の時系列集計が可能に
+- 次の失敗（v1/v2 のような事故）を数分で検知できる基盤が整う
+- 直接のインデックス改善効果は期待しない（Tier 0 施策の効果測定を高速化するための基盤）
+
+#### 変更内容
+
+- `apps/web/wrangler.toml`:
+  - `[env.production.observability.traces]` の `enabled` を `false` → `true`（リクエストトレース有効化）
+  - `[[env.production.analytics_engine_datasets]]` を新規追加（binding: `ANALYTICS`, dataset: `stats47_requests`）
+  - **middleware 変更なし**（最小変更、writeDataPoint 統合は次フェーズ）
+
+#### 根拠
+
+Sentry などの外部 SaaS を使わず Cloudflare 純正機能で観測基盤を構築する方針（ユーザー提案）。
+Workers Observability は本番で既に `enabled = true` だが traces が無効だったため、URL 別のリクエスト詳細が見えなかった。
+Analytics Engine dataset は binding 宣言のみで自動生成される。middleware から `env.ANALYTICS.writeDataPoint()` を呼ぶ実装は次フェーズ（T1-OBS-02）で追加予定。
+
+#### 使い方（デプロイ後）
+
+1. Cloudflare Dashboard → Workers & Pages → `stats47`（production）
+2. 上部タブ「**Logs**」: エラー・console.log が検索可能
+3. 上部タブ「**Metrics**」→ Invocations / Errors / CPU Time
+4. traces（有効化後）: URL 別のリクエスト詳細とレスポンス時間
+
 ### [T1-CF-01] Cloudflare キャッシュ設定（ユーザー実施）
 
 **施策 ID**: `T1-CF-01`

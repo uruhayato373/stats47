@@ -94,6 +94,14 @@ persist = true
 invocation_logs = true
 
 [env.production.observability.traces]
-enabled = false
+enabled = true
 persist = true
 head_sampling_rate = 1
+
+# Analytics Engine（Production）
+# カスタムメトリクス書き込み用。middleware から env.ANALYTICS.writeDataPoint() で URL×status×UA を記録可能。
+# Dashboard → Workers & Pages → Analytics → Analytics Engine の SQL で集計。
+# 未設定時は env.ANALYTICS が undefined になるため、呼び出し側で optional chaining を使うこと。
+[[env.production.analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "stats47_requests"
