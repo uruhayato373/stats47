@@ -22,6 +22,7 @@ type FooterLink = {
  */
 const FOOTER_LINKS: FooterLink[] = [
   { href: "/", label: "ホーム" },
+  { href: "/about", label: "このサイトについて" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/terms", label: "利用規約" },
 ] as const;
