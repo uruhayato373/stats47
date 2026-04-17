@@ -73,6 +73,29 @@ export default function RootLayout({
       className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/*
+         * 地図タイル CDN への preconnect / dns-prefetch
+         * Leaflet タイル画像が LCP 最大 19,888ms の主犯 (Cloudflare Web Analytics)。
+         * TLS/DNS の事前確立で初回 300-500ms 短縮。tile proxy (/tiles/*) 未配信時の
+         * fallback 用に cartocdn 自体にも接続予約。
+         */}
+        <link
+          rel="preconnect"
+          href="https://basemaps.cartocdn.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com" />
+        <link rel="dns-prefetch" href="https://b.basemaps.cartocdn.com" />
+        <link rel="dns-prefetch" href="https://c.basemaps.cartocdn.com" />
+        <link rel="dns-prefetch" href="https://d.basemaps.cartocdn.com" />
+        {/* R2 storage への preconnect（ブログ記事内の SVG/PNG） */}
+        <link
+          rel="preconnect"
+          href="https://storage.stats47.jp"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className="antialiased"
         suppressHydrationWarning

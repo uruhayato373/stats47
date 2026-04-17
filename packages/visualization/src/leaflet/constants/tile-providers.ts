@@ -10,13 +10,13 @@ export interface TileProvider {
 /** テーマ別デフォルトタイル（light/dark 自動切替用） */
 export const TILE_PROVIDERS = {
   light: {
-    url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    url: "/tiles/light_all/{z}/{x}/{y}{r}.png",
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     label: "CartoDB Light",
   },
   dark: {
-    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    url: "/tiles/dark_all/{z}/{x}/{y}{r}.png",
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     label: "CartoDB Dark",
@@ -26,7 +26,7 @@ export const TILE_PROVIDERS = {
 /** ユーザーが切り替え可能なタイルプロバイダー一覧（light / dark 各セット） */
 export const TILE_OPTIONS_LIGHT: TileProvider[] = [
   {
-    url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    url: "/tiles/light_all/{z}/{x}/{y}{r}.png",
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
     label: "CartoDB",
@@ -42,7 +42,7 @@ export const TILE_OPTIONS_LIGHT: TileProvider[] = [
 
 export const TILE_OPTIONS_DARK: TileProvider[] = [
   {
-    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    url: "/tiles/dark_all/{z}/{x}/{y}{r}.png",
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
     label: "CartoDB",

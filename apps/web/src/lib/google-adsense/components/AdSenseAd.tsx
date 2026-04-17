@@ -11,9 +11,22 @@ import { useEffect, useRef, useState } from "react";
 
 import { logger } from "@/lib/logger";
 
-import { AdSlotProps } from "../types";
+import { AD_SIZES, AdFormat, AdSlotProps } from "../types";
 
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
+
+/**
+ * 広告枠の最小高さを取得（CLS 0.732 対策）
+ *
+ * Cloudflare Web Analytics で `ins.adsbygoogle` の CLS が 0.732 と致命値（基準 0.1 の 7 倍）だったため、
+ * 広告読み込み前にレイアウト領域を予約する。desktop / mobile の大きい方を採用して予約不足を防ぐ。
+ * infeed / article は 0×0（フレキシブル）なので fallback 250px（rectangle mobile 相当）を使用。
+ */
+function getReservedMinHeight(format: AdFormat): number {
+  const size = AD_SIZES[format];
+  const h = Math.max(size.desktop.height, size.mobile.height);
+  return h > 0 ? h : 250;
+}
 
 /**
  * AdSense広告コンポーネント
@@ -106,10 +119,13 @@ export function AdSenseAd({
     return null;
   }
 
+  const reservedMinHeight = getReservedMinHeight(format);
+
   return (
     <div
       ref={adRef}
-      className={`ad-container w-full flex justify-center ${className}`}
+      className={`ad-container w-full flex flex-col items-center ${className}`}
+      style={{ minHeight: `${reservedMinHeight}px` }}
     >
       {showLabel && (
         <div className="text-xs text-muted-foreground text-center mb-1">
@@ -122,6 +138,7 @@ export function AdSenseAd({
           style={{
             display: "block",
             width: "100%",
+            minHeight: `${reservedMinHeight}px`,
           }}
           data-ad-client={clientId}
           data-ad-slot={slotId}
@@ -129,9 +146,9 @@ export function AdSenseAd({
           data-full-width-responsive="true"
         />
       ) : (
-        // 遅延ロード中のスペース確保（CLSの防止）
+        // 遅延ロード中のスペース確保（CLSの防止、最小値を広告サイズに合わせる）
         <div
-          style={{ width: "100%", minHeight: "100px" }}
+          style={{ width: "100%", minHeight: `${reservedMinHeight}px` }}
           className="bg-gray-100"
         />
       )}

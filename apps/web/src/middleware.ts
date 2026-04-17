@@ -1,12 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
+
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
-import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
 
 /**
  * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
