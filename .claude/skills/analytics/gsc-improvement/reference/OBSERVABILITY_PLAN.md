@@ -1,170 +1,276 @@
-# 観測基盤の導入計画（Sentry + Cloudflare Analytics Engine）
-
-本計画は、施策効果測定と 5xx 原因追跡のための観測基盤を stats47.jp に導入する手順をまとめる。Tier 0 施策（URL 空間整理）を進める上で、「何が起きているか」を見える化することが必須。
+# 観測基盤の導入計画（Cloudflare 完結版）
 
 ## 背景
 
 **現状の観測力の欠如**:
 - GSC は週次サンプル（最大 1,000 URL）しか取れない
-- Cloudflare Workers Logs は 24 時間保持、手動でしか見られない
-- 施策デプロイ後に「どこで 5xx が出ているか」リアルタイムで追えない
-- 効果測定は GSC のインデックス反映を 2-4 週間待つしかない
+- 本番 5xx の URL 別発生頻度・時刻・原因が追えない
+- 施策デプロイ後に「どこで何が起きているか」リアルタイムで見えない
+- 施策効果測定は GSC 反映を 2-4 週間待つしかない
 
 **目指す状態**:
-- 本番 5xx を URL パターン別・発生時刻別にダッシュボードで確認できる
+- 本番 5xx を URL パターン別・発生時刻別に Dashboard で確認
 - 施策デプロイ前後で 5xx 件数の変化を時系列で追える
-- Googlebot からのアクセスと一般ユーザーのアクセスを区別して計測
+- エラー閾値超過時に自動メール通知
+- すべて **Cloudflare 純正機能 + 追加コスト 0 円** で完結
 
-## A. Sentry 導入（エラートラッキング）
+## 設計方針
 
-### A-1. 対象
+Sentry などの外部 SaaS は使わず、Cloudflare の組み込み機能だけで完結する。stats47 は Cloudflare Workers 上で稼働しているため、追加契約なしで以下が利用可能:
 
-- 本番 `apps/web`（Next.js on Cloudflare Pages）
-- 5xx 応答、unhandled exception、critical な warning
+| 機能 | 種別 | 状態 |
+|---|---|---|
+| Workers Observability (Logs/Traces/Metrics) | 組み込み | ✅ T1-OBS-01 で有効化済 |
+| Analytics Engine | binding | ✅ T1-OBS-01 で宣言済（利用は将来） |
+| Cloudflare Web Analytics | 無料 | ⏳ Dashboard で有効化 |
+| Notifications (Email/Slack/Webhook) | 無料 | ⏳ Dashboard で設定 |
+| Speed Insights (Lighthouse) | 無料 | ⏳ Dashboard で有効化 |
+| Cache Analytics | 無料 | ✅ 既に有効（確認のみ） |
+| Security Analytics | 無料 | ✅ 既に有効（確認のみ） |
 
-### A-2. 必要な作業
+追加コスト: **$0**（全て Workers Paid / Pro プラン内に含まれる）。
 
-1. **Sentry プロジェクト作成**（ユーザー作業）
-   - sentry.io でプロジェクト作成（Platform: Next.js）
-   - DSN を取得して Cloudflare Pages の環境変数 `SENTRY_DSN` に設定
+## A. Workers Observability — 5xx 原因追跡の本命
 
-2. **パッケージ追加**
-   ```bash
-   npm install @sentry/nextjs --workspace=apps/web
-   ```
+### A-1. 何ができるか
 
-3. **設定ファイル**:
-   - `apps/web/sentry.client.config.ts` — Client Component のエラー捕捉
-   - `apps/web/sentry.server.config.ts` — Server Component / API ルートのエラー
-   - `apps/web/sentry.edge.config.ts` — Cloudflare Pages (Edge Runtime) 対応
-   - `apps/web/next.config.ts` に `withSentryConfig` でラップ
+- 本番の全リクエストの URL × status × duration が自動記録
+- エラー時のスタックトレースが見られる
+- URL フィルタ・期間指定で検索可能
+- 保持期間: 7 日（Workers Paid）
 
-4. **Cloudflare Workers 特殊対応**
-   - Cloudflare Pages は Edge Runtime なので `@sentry/nextjs` の `onRequestError` フックを使う
-   - Source Maps を Sentry にアップロード（`SENTRY_AUTH_TOKEN` を使った自動アップロード）
+### A-2. 現状
 
-5. **フィルタ設定**
-   - `beforeSend` フック: 404/410 は除外（既知の 404 は Sentry に送らない）
-   - Bot トラフィック（Googlebot 等）は別タグで区別
+✅ `apps/web/wrangler.toml` で本番 `observability.enabled = true`、`observability.traces.enabled = true`（T1-OBS-01 でデプロイ済）
 
-### A-3. 導入後に見えるもの
+### A-3. 使い方（ユーザー）
 
-- URL 別 5xx 発生件数（時系列グラフ）
-- スタックトレース付きのエラー詳細
-- Release（デプロイ）ごとの regression 検知
-- パフォーマンス（LCP, TTFB）の自動計測
+1. Cloudflare Dashboard → Workers & Pages → **stats47**
+2. 上部タブ「**Logs**」: エラー・console.log が検索可能
+3. 上部タブ「**Metrics**」: Invocations / Errors / CPU Time
+4. Traces ビュー: URL 別レスポンス時間、失敗パターン
 
-### A-4. コスト
+### A-4. ターミナルからのリアルタイム監視
 
-- Sentry Free: 5K error events/month。stats47.jp 規模なら初期は十分
-- Team: $26/mo（50K events/month）。将来必要に応じて移行
+```bash
+cd /Users/minamidaisuke/stats47/apps/web
+npx wrangler tail --env production
+```
 
-### A-5. 推定工数
+## B. Analytics Engine — カスタム集計（必要時のみ）
 
-**2〜3 時間**（初期セットアップ + デプロイ + 動作確認）
+### B-1. 何ができるか
 
-## B. Cloudflare Analytics Engine（本番リクエスト詳細）
+- 全リクエストの URL × status × UA × 応答時間を SQL で集計
+- デプロイ前後 24h 比較、Googlebot vs 一般ユーザー分離など
 
-### B-1. 対象
+### B-2. 現状
 
-- 全本番リクエスト（Googlebot / ユーザー / Bot の比率、status code 分布）
-- URL パターン × status の時系列集計
+✅ binding 宣言済（`stats47_requests`、T1-OBS-01）
+⏳ 書き込みコード未実装（将来 T1-OBS-02 で middleware or instrumentation.ts に統合）
 
-### B-2. 必要な作業
+### B-3. 使い方（現状では空データ）
 
-1. **Analytics Engine データセット作成**（Cloudflare Dashboard）
-   - Workers & Pages → Data Sources → Analytics Engine → 新規データセット `stats47_requests`
+```sql
+-- 過去 24h の URL 別 5xx 件数（書き込み実装後）
+SELECT blob1 AS url, COUNT() AS count
+FROM stats47_requests
+WHERE blob2 LIKE '5%' AND timestamp > NOW() - INTERVAL '24' HOUR
+GROUP BY url
+ORDER BY count DESC
+LIMIT 50;
+```
 
-2. **Worker binding 追加**
-   - `apps/web/wrangler.toml` に analytics_engine_datasets を追加:
-     ```toml
-     [[analytics_engine_datasets]]
-     binding = "ANALYTICS"
-     dataset = "stats47_requests"
-     ```
+### B-4. いつ必要になるか
 
-3. **middleware.ts で events 書き込み**
-   ```typescript
-   // 各リクエストで以下を記録:
-   env.ANALYTICS.writeDataPoint({
-     blobs: [request.url, request.headers.get('user-agent') || '', statusCode.toString()],
-     doubles: [responseTime],
-     indexes: [pathname],
-   });
-   ```
+Workers Observability で URL 別 5xx が十分見える場合、Analytics Engine 実装は不要。以下のケースで必要:
+- 30 日超の長期トレンド分析（Observability は 7 日保持のみ）
+- Googlebot/GPTBot 別のアクセスパターン分析
+- 特殊な集計軸（地域別、時間帯別など）
 
-4. **クエリ・ダッシュボード**
-   - Cloudflare Dashboard → Analytics Engine → SQL でクエリ（例: 過去 24h の 5xx を URL 別集計）
-   - Grafana Cloud 連携で可視化（optional）
+## C. Cloudflare Web Analytics — フロント RUM（無料・Cookie レス）
 
-### B-3. 導入後に見えるもの
+### C-1. 何ができるか
 
-- URL パターン別の status code 分布（5xx だけでなく全てのリクエスト）
-- 施策デプロイ前後 24 時間の比較
-- Googlebot vs 一般ユーザーの比率
-- リクエスト頻度の高い URL TOP 100
+- ページビュー、Core Web Vitals（LCP, FID, CLS）
+- 参照元、デバイス、国別
+- Cookie 不要、プライバシー重視（GDPR 準拠）
+- GA4 と併用可能（重複問題なし、補完的）
 
-### B-4. コスト
+### C-2. 有効化手順（ユーザー作業 2 分）
 
-- Analytics Engine: 10M data points/month 無料
-- Cloudflare Pro $20/mo に含まれる
+1. Cloudflare Dashboard → **Analytics & Logs** → **Web Analytics**
+2. 「**Add a site**」
+3. 設定:
+   - Hostname: `stats47.jp`
+   - Automatic setup: **Enabled**（Cloudflare 経由なので自動注入される）
+4. Save
 
-### B-5. 推定工数
+script tag を手動で追加する必要はない（Cloudflare Orange Cloud が自動注入）。
 
-**4〜6 時間**（binding 設定 + middleware 統合 + 初期ダッシュボード構築）
+### C-3. 見られるもの
 
-## C. 統合方針
+Dashboard → **Analytics & Logs** → **Web Analytics** → stats47.jp:
+- Total page views / Unique visitors（Cookie レスなので GA4 より正確）
+- Core Web Vitals の URL 別スコア
+- Referrers（stats47.jp への流入元）
+- Countries（どこからアクセスされているか）
 
-### C-1. 優先度
+## D. Notifications — 異常検知の自動アラート
 
-1. **Sentry 先**（A）: 即効性が高く、5xx の具体的な原因追跡に直結
-2. **Analytics Engine 後**（B）: 全体像の把握と長期的な施策効果測定に使う
+### D-1. 何ができるか
 
-### C-2. 導入順序
+- Workers Errors が閾値超過したら自動メール通知
+- Deploy 失敗時に通知
+- Slack Webhook 連携も可能
+- 「v1/v2 のような事故」を数分で検知
 
-**Week 1 (2026-W17)**:
-- Sentry プロジェクト作成（ユーザー作業）
-- パッケージ追加 + 設定ファイル作成（Claude）
-- デプロイ後、5xx 発生確認
+### D-2. 設定手順（ユーザー作業 5 分）
 
-**Week 2 (2026-W18)**:
-- Cloudflare Analytics Engine データセット作成（ユーザー作業）
-- middleware への書き込み統合（Claude）
-- Dashboard で過去 7d の URL × status を集計
+1. Cloudflare Dashboard → **Notifications**
+2. 「**Add**」→ 検索で「**Workers**」
 
-**Week 3-4 (2026-W19-W20)**:
-- Sentry の Source Maps 整備
-- Analytics Engine の運用 SQL テンプレ化
-- `.claude/skills/analytics/` に observability 系スキル追加
+推奨設定 A: **Workers Errors 閾値超過**
+- Product: `Workers`
+- Event: `Health Check (Worker Exceptions)`
+- Conditions: エラー率 > 5% または `error count > 100 / hour`
+- Notification type: **Email**
+- Send to: uruhayato373@gmail.com
 
-### C-3. improvement-log.md との連携
+推奨設定 B: **Deploy 失敗通知**
+- Product: `Workers` / `Pages`
+- Event: `Deployment Failed`
+- Notification type: **Email**
 
-- Sentry 導入後、新たに判明した 5xx パターンは **T0-5xx-02, T0-5xx-03** として Action Log に追加
-- Analytics Engine 導入後、`/gsc-improvement observe` を拡張して 5xx 実数を自動取得するフローを検討
+推奨設定 C: **Logpush 関連（任意）**
+- HTTP 5xx スパイク時に通知
 
-### C-4. 既存ツールとの重複回避
+### D-3. Slack Webhook 連携（任意）
 
-- **Cloudflare Workers Logs** は Sentry と役割分担（Workers Logs は 24h 保持のデバッグ用、Sentry は長期トラッキング）
-- **GA4** はフロントエンド計測（PV/CV）、Sentry はサーバー側エラー、Analytics Engine は生リクエスト、と役割が重ならない
+Slack で `Incoming Webhooks` を作成 → URL を Cloudflare Notifications の Webhook destination に登録。
 
-## D. リスクと緩和策
+## E. Speed Insights (Lighthouse 自動実行)
 
-| リスク | 緩和策 |
+### E-1. 何ができるか
+
+- 本番 URL の Lighthouse スコアを定期測定
+- Performance / Accessibility / SEO / Best Practices
+- PSI budgets との整合性チェック
+
+### E-2. 有効化手順（ユーザー作業 2 分）
+
+Cloudflare Workers の場合:
+1. Dashboard → Workers & Pages → **stats47** → **Settings**
+2. **Speed Insights** タブ
+3. 「**Enable Speed Insights**」
+4. サンプリング率: 100%（高トラフィック時は 10% に絞る）
+
+※ Workers で Speed Insights が未対応の場合、代替として:
+- PageSpeed Insights API を CI で定期実行
+- または `.claude/skills/analytics/performance-improvement/` で取得済の lighthouse-audit を継続利用
+
+### E-3. 既存仕組みとの関係
+
+`.claude/skills/analytics/performance-improvement/` に PSI 計測の仕組みは既存。Cloudflare Speed Insights は補完的に使う（Dashboard で視覚的に確認できるのが利点）。
+
+## F. Cache Analytics — キャッシュヒット率・帯域最適化
+
+### F-1. 何ができるか
+
+- エッジキャッシュのヒット/ミス率
+- データ転送量
+- Top キャッシュ URL
+
+### F-2. 現状
+
+✅ 既に有効。Dashboard で見るだけ。
+
+### F-3. 見る場所
+
+Cloudflare Dashboard → **Analytics & Logs** → **Traffic**:
+- Cached vs Uncached requests
+- Bandwidth saved
+
+キャッシュヒット率が低い URL があれば Cache Rules で TTL 調整。
+
+## G. Security Analytics — Bot / 攻撃検知
+
+### G-1. 何ができるか
+
+- Bot score 分布
+- Firewall events（Cloudflare Bot Fight Mode のブロック）
+- WAF ルールヒット
+
+### G-2. 現状
+
+✅ 既に有効。Dashboard で見るだけ。
+
+### G-3. 見る場所
+
+Cloudflare Dashboard → **Security** → **Events**:
+- Googlebot / GPTBot / Bingbot のアクセス数
+- 不審な Bot の特定
+- robots.txt 違反検知
+
+## H. 優先度と運用
+
+### H-1. 優先実施（ユーザー作業、合計 10 分）
+
+| 優先度 | 施策 | 所要 | 効果 |
+|---|---|---|---|
+| ★★★ | C. Web Analytics 有効化 | 2 分 | フロント RUM / CWV が見える |
+| ★★★ | D. Notifications Workers Errors | 5 分 | エラースパイクで自動メール |
+| ★★ | E. Speed Insights 有効化 | 2 分 | Lighthouse 定期測定 |
+
+### H-2. 週次運用（既存 weekly-review に統合）
+
+`/weekly-review` の Phase 1 Agent C に以下を追加（将来の改善）:
+- Web Analytics の今週 CWV 平均
+- Cache hit rate
+- Workers Errors 件数（前週比）
+
+### H-3. 月次運用
+
+- Notifications トリガー履歴をレビュー
+- 発生した 5xx パターンを T0-5xx-01 に追加
+- 不要なアラートは閾値調整
+
+## I. 既存ファイルとの関係
+
+| 既存 | 関係 |
 |---|---|
-| Sentry が Edge Runtime 非対応パターンに触れる | Next.js 14+ + @sentry/nextjs 7.x 以降で対応済み（公式サポート） |
-| Cloudflare Pages 環境変数の漏洩 | DSN は `NEXT_PUBLIC_` 付きで client 露出前提（Sentry DSN は公開前提） |
-| Analytics Engine の Data points 超過 | middleware でサンプリング（1% sampling 等）可能。初期は 100% で運用 |
-| 導入で本番が一時的に不安定化 | ステージング環境で 1 週間運用してから本番デプロイ |
+| `.claude/skills/analytics/performance-improvement/` | PSI 計測と継続改善ログ。Speed Insights と併用 |
+| `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 施策 ID ベースの PDCA。T1-OBS-* として追跡 |
+| `apps/web/wrangler.toml` | observability + analytics_engine binding 設定 |
 
-## E. 次のアクション
+## J. 追加コスト試算
 
-- ユーザーに Sentry プロジェクト作成を依頼
-- DSN 取得後、Claude 側で `@sentry/nextjs` セットアップを PR として準備
-- 並行して Cloudflare Analytics Engine のデータセット作成を依頼
+| 項目 | 料金 | 現在の契約 |
+|---|---|---|
+| Workers Paid | $5/mo | ✅ 契約済（T1-OBS-01 が動いている証明） |
+| Workers Observability | 無料（Paid に含む） | ✅ 含む |
+| Analytics Engine | 10M events/mo 無料 | ✅ 範囲内 |
+| Web Analytics | 無料 | - |
+| Notifications | 無料 | - |
+| Speed Insights | 無料 | - |
+| Cache / Security Analytics | 無料 | - |
+| **合計追加コスト** | **$0** | - |
+
+## K. Sentry は使わない判断
+
+外部 SaaS を使わないことで:
+- アカウント管理不要
+- DSN 漏洩リスクなし
+- データが Cloudflare 内に閉じる（プライバシー / コンプライアンス面で有利）
+- 月額コストゼロ
+
+将来 Cloudflare だけでは不足を感じたら（例: エラーの自動クラスタリング、Session Replay 等）、そのタイミングで Sentry を追加検討する。
 
 ## 参照
 
-- [@sentry/nextjs 公式ドキュメント](https://docs.sentry.io/platforms/javascript/guides/nextjs/)
+- `apps/web/wrangler.toml` — observability / analytics_engine 設定
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — T1-OBS-01 デプロイ記録
+- [Cloudflare Workers Observability](https://developers.cloudflare.com/workers/observability/)
 - [Cloudflare Analytics Engine](https://developers.cloudflare.com/analytics/analytics-engine/)
-- `.claude/skills/analytics/gsc-improvement/SKILL.md`
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`
+- [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/)
+- [Cloudflare Notifications](https://developers.cloudflare.com/notifications/)
