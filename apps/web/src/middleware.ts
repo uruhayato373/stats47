@@ -5,6 +5,8 @@ import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
+import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
+import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
 
 /**
  * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
@@ -279,6 +281,38 @@ export default function middleware(req: NextRequest) {
       areaSegments[1] !== "cities" &&
       /^\d{5}$/.test(areaSegments[2]) &&
       areaSegments[2] !== areaSegments[1] // cityCode !== areaCode（自分自身ではない）
+    ) {
+      return gone();
+    }
+  }
+
+  // --- Fix 7: /themes/{unknown-slug} → 410 Gone ---
+  // /themes/ 配下は静的に ALL_THEMES で定義された 16 slug のみ。動的ルート [themeSlug]/
+  // は page.tsx を持たず notFound（404）を返すが、middleware で 410 を返して
+  // Google に「完全削除」シグナルを送る。
+  if (pathname.startsWith("/themes/")) {
+    const slug = pathname.slice("/themes/".length).split("/")[0];
+    if (slug && !KNOWN_THEME_SLUGS.has(slug)) {
+      return gone();
+    }
+  }
+
+  // --- Fix 8: /areas/{prefCode}/{non-indexable-category} → 410 Gone ---
+  // 2026-04 に INDEXABLE_AREA_CATEGORIES を 13 → 2（population / economy）に削減した。
+  // 47 × 11 = 517 URL が「クロール済み - インデックス未登録」に残っているため、
+  // /areas/{prefCode}/{削除済みカテゴリ} を明示的に 410 化する。
+  // 既存の city-code 410（seg[2] が 5 桁数字）と cities 410 はそれぞれ先に処理されるので、
+  // ここでは数字 5 桁・cities・indexable カテゴリを除外した残りの sub を対象とする。
+  {
+    const seg = pathname.split("/").filter(Boolean);
+    if (
+      seg.length >= 3 &&
+      seg[0] === "areas" &&
+      /^\d{5}$/.test(seg[1]) &&
+      isValidPrefCode(seg[1]) &&
+      seg[2] !== "cities" &&
+      !/^\d{5}$/.test(seg[2]) &&
+      !INDEXABLE_AREA_CATEGORIES_SET.has(seg[2])
     ) {
       return gone();
     }

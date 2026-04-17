@@ -82,6 +82,32 @@ Google Analytics 4 のアクセス指標を時系列で追跡する記録簿。
 |---|---|---|---|---|---|---|---|---|
 | 2026-04-17 | 2,163 | 689 | 759 | 42.4% | 115 | 456 | 72 | **Baseline** (W16, last28d 2026-03-20〜2026-04-16). Direct が 60% を占有、Organic は 15% 程度 |
 
+### 2026-04-17 MID 観測 — `/themes/population-dynamics` 異常滞在調査
+
+W16 snapshot の pages.csv で `/themes/population-dynamics` に以下の異常値を確認:
+
+| 指標 | 実測 | 他 /themes/* 平均 | 備考 |
+|---|---|---|---|
+| PV | 141 | 20-30 | 最大 |
+| active users | 2 | 1-2 | — |
+| PV / user | **70.5** | **25 以下** | 異常（Bot 疑い） |
+| avg session duration | **4,169 秒（≈69 分）** | 700-1,500 秒 | 異常 |
+| engagement rate | 100% | 60-80% | 1.0 固定 = 人工的 |
+
+**仮説（確度順）**
+1. Bot traffic（60%）: PV/user 70.5 は自動クロールのシグネチャ。ページは D3 散布図 4 枚・Leaflet Map 等を動的ロードするため、クローラーのレンダリング時間が累積している可能性
+2. 放置タブ（30%）: GA4 engagement_time は visible タブで加算され続ける。2 user のうち片方が長時間放置の疑い
+3. ページ実装バグ（10%）: `apps/web/src/app/themes/population-dynamics/` に setInterval/setTimeout なし、polling 無し。コード変更は不要と判断
+
+**検証アクション（ユーザー作業）**
+- GA4 管理 → データフィルタで「既知の bot トラフィックを除外」を有効化
+- Cloudflare Analytics で `/themes/population-dynamics` の User-Agent 分布を確認
+- GA4 の当該ページで Device Category / Country ブレークダウンを確認
+
+**観測継続**
+- W17-W18 snapshot で PV/user が 25 以下に収束するか観測
+- 収束しない場合は middleware で UA 判定 + 410、または GA4 IP 除外で対処
+
 ---
 
 ## 4. Next Actions
