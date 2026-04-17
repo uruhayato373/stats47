@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#ffffff"/>
+
+<!-- Decorative background elements -->
+<circle cx="1080" cy="120" r="200" fill="#fef3c7" opacity="0.35"/>
+<circle cx="200" cy="580" r="160" fill="#eff6ff" opacity="0.25"/>
+<circle cx="640" cy="400" r="300" fill="#f8fafc" opacity="0.4"/>
+
+<!-- stats47 watermark -->
+<text x="1250" y="35" text-anchor="end" font-size="18" fill="#cbd5e1">stats47</text>
+
+<!-- Lead text -->
+<text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">年収トップ20% vs 底辺20% 補習教育費の差</text>
+
+<!-- Main catch: big number -->
+<text x="640" y="250" text-anchor="middle" font-size="130" font-weight="900" fill="#ea580c">56倍</text>
+
+<!-- Era label -->
+<text x="640" y="300" text-anchor="middle" font-size="40" font-weight="bold" fill="#1e293b">Q5 7,747円 / Q1 138円</text>
+
+<!-- Subtitle -->
+<text x="640" y="355" text-anchor="middle" font-size="26" fill="#94a3b8">── 家計調査・年間収入五分位階級別データ（2024） ──</text>
+
+<!-- Mini bar: Q5 vs Q1 補習教育費 -->
+<!-- Scale: 0 = 0px, 8000円 = 400px => 1000円 = 50px -->
+<!-- Q5 7,747 => 387 -->
+<text x="340" y="430" text-anchor="end" font-size="18" fill="#475569">Q5（年収1,242万円）</text>
+<rect x="360" y="412" width="387" height="28" fill="#ea580c" rx="4" opacity="0.8"/>
+<text x="757" y="432" font-size="18" font-weight="bold" fill="#ea580c">7,747円</text>
+
+<!-- Q1 138 => 7 -->
+<text x="340" y="478" text-anchor="end" font-size="18" fill="#475569">Q1（年収262万円）</text>
+<rect x="360" y="460" width="7" height="28" fill="#3b82f6" rx="4" opacity="0.8"/>
+<text x="377" y="480" font-size="18" font-weight="bold" fill="#3b82f6">138円</text>
+
+<!-- Separator -->
+<line x1="400" y1="565" x2="880" y2="565" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- Footer -->
+<text x="640" y="600" text-anchor="middle" font-size="18" fill="#94a3b8">光熱費は1.16倍、灯油は逆転 ── 格差の正体を解きほぐす</text>
+<text x="640" y="640" text-anchor="middle" font-size="16" fill="#cbd5e1">家計調査（2024年）── stats47.jp</text>
+</svg>

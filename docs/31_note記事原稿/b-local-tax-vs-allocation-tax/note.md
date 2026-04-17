@@ -3,6 +3,9 @@ title: "自力で稼ぐ県、国に頼る県｜「地方税」と「地方交付
 description: "東京都は歳入の63%が地方税で交付税ゼロ。高知県は交付税が37%を占め地方税は18%。47都道府県の財政自立度を2つの指標で比較します。"
 ---
 
+<!-- note投稿時: この画像行を削除し、images/cover-1280x670.png をアップロード -->
+![自力で稼ぐ県、国に頼る県｜「地方税」と「地方交付税」で見える47都道府県の自立度](images/cover-1280x670.png)
+
 都道府県の歳入には大きく2つの財源があります。「地方税」は自治体が自ら集める税金。「地方交付税」は国から配分されるお金です。
 
 この2つの割合を見ると、自治体の「自立度」がひと目でわかります。
@@ -97,6 +100,12 @@ description: "東京都は歳入の63%が地方税で交付税ゼロ。高知県
 
 ただしこれは「東京に税源が集中しすぎている」ことの裏返しでもあります。法人本社の東京集中が、地方の税収基盤を弱め、交付税への依存を高めるという構造的な問題を生み出しています。
 
+## 元県庁職員の視点から
+
+県庁で財政担当の近くにいた経験から補足すると、地方交付税依存度は「悪い数字」ではありません。交付税は、人口が少なくても住民サービスの水準を維持できるよう国が財源保障する仕組みです。つまり依存度が高い県は「国から必要と認められた額が配分されている」状態であり、住民にとってのマイナスではありません。
+
+ただし現場の感覚として、交付税算定の基礎になる「標準的な行政需要」は全国一律の計算式で決まるため、産業振興や観光投資のような攻めの歳出は交付税ではカバーされにくい。だからこそ、地方税を増やす努力（企業誘致・税源涵養）が、将来の財政の自由度を決めるという構造があります。
+
 ## まとめ
 
 地方税と交付税の割合は、自治体の自立度を映し出す鏡です。47都道府県を見渡すと、太平洋ベルト沿いの県は自立型、日本海側と地方圏は交付税依存型という構造が鮮明に浮かび上がります。
@@ -107,23 +116,23 @@ description: "東京都は歳入の63%が地方税で交付税ゼロ。高知県
 
 ### 地方税割合ランキング
 
-https://stats47.jp/ranking/local-tax-ratio-pref-finance?utm_source=note&utm_medium=referral&utm_campaign=b-local-tax-vs-allocation-tax&utm_content=cta
+https://stats47.jp/ranking/local-tax-ratio-pref-finance
 
 ### 地方交付税割合ランキング
 
-https://stats47.jp/ranking/local-allocation-tax-ratio-pref-finance?utm_source=note&utm_medium=referral&utm_campaign=b-local-tax-vs-allocation-tax&utm_content=cta
+https://stats47.jp/ranking/local-allocation-tax-ratio-pref-finance
 
 ### 財政力指数ランキング
 
-https://stats47.jp/ranking/fiscal-strength-index-prefecture?utm_source=note&utm_medium=referral&utm_campaign=b-local-tax-vs-allocation-tax&utm_content=cta
+https://stats47.jp/ranking/fiscal-strength-index-prefecture
 
 ### 一般財源割合ランキング
 
-https://stats47.jp/ranking/general-revenue-ratio-pref-finance?utm_source=note&utm_medium=referral&utm_campaign=b-local-tax-vs-allocation-tax&utm_content=cta
+https://stats47.jp/ranking/general-revenue-ratio-pref-finance
 
 ### 経常収支比率ランキング
 
-https://stats47.jp/ranking/current-balance-ratio?utm_source=note&utm_medium=referral&utm_campaign=b-local-tax-vs-allocation-tax&utm_content=cta
+https://stats47.jp/ranking/current-balance-ratio
 
 ---
 

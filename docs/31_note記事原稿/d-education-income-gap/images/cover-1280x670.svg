@@ -15,7 +15,7 @@
 <text x="640" y="120" text-anchor="middle" font-size="40" fill="#64748b">年収の差は4.74倍なのに</text>
 
 <!-- Main catch -->
-<text x="640" y="260" text-anchor="middle" font-size="180" font-weight="900" fill="#dc2626">56倍</text>
+<text x="640" y="260" text-anchor="middle" font-size="130" font-weight="900" fill="#dc2626">56倍</text>
 
 <!-- Subtitle -->
 <text x="640" y="320" text-anchor="middle" font-size="26" fill="#94a3b8">── 塾代にかける金額の差 ──</text>

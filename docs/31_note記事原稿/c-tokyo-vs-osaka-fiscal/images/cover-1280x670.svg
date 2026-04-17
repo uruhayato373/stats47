@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#ffffff"/>
+
+<!-- Decorative background elements -->
+<circle cx="1080" cy="120" r="200" fill="#eff6ff" opacity="0.35"/>
+<circle cx="200" cy="580" r="160" fill="#eef2ff" opacity="0.3"/>
+<circle cx="640" cy="400" r="300" fill="#f8fafc" opacity="0.4"/>
+
+<!-- stats47 watermark -->
+<text x="1250" y="35" text-anchor="end" font-size="18" fill="#cbd5e1">stats47</text>
+
+<!-- Lead text -->
+<text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">二大都市の財政構造は驚くほど違った</text>
+
+<!-- Main catch -->
+<text x="640" y="230" text-anchor="middle" font-size="120" font-weight="900" fill="#1e40af">東京 vs 大阪</text>
+
+<!-- Era label -->
+<text x="640" y="285" text-anchor="middle" font-size="36" font-weight="bold" fill="#1e293b">財政力指数 1.064 vs 0.742</text>
+
+<!-- Subtitle -->
+<text x="640" y="330" text-anchor="middle" font-size="22" fill="#94a3b8">── 「完全自立型」と「自立寄りの依存型」 ──</text>
+
+<!-- Two-column comparison: tax ratio -->
+<!-- Left: 東京 63.4% -->
+<text x="340" y="400" text-anchor="end" font-size="18" fill="#475569">東京都 地方税割合</text>
+<rect x="360" y="382" width="380" height="26" fill="#1e40af" rx="4" opacity="0.85"/>
+<text x="750" y="402" font-size="20" font-weight="bold" fill="#1e40af">63.4%（1位）</text>
+
+<!-- 大阪 36.9% -->
+<text x="340" y="445" text-anchor="end" font-size="18" fill="#475569">大阪府 地方税割合</text>
+<rect x="360" y="427" width="221" height="26" fill="#3b82f6" rx="4" opacity="0.85"/>
+<text x="591" y="447" font-size="20" font-weight="bold" fill="#3b82f6">36.9%（7位）</text>
+
+<!-- Gap annotation -->
+<text x="640" y="490" text-anchor="middle" font-size="18" fill="#64748b">自力で稼ぐ力は東京が1.72倍 ／ 大阪は交付税7.9%を受ける</text>
+
+<!-- Second row: 商工費割合 -->
+<text x="340" y="540" text-anchor="end" font-size="17" fill="#475569">東京 商工費</text>
+<rect x="360" y="525" width="101" height="22" fill="#94a3b8" rx="4" opacity="0.75"/>
+<text x="471" y="543" font-size="17" font-weight="bold" fill="#475569">8.4%（36位）</text>
+
+<text x="640" y="543" text-anchor="middle" font-size="17" fill="#475569">vs</text>
+
+<text x="700" y="540" text-anchor="start" font-size="17" fill="#475569">大阪 商工費</text>
+<rect x="820" y="525" width="274" height="22" fill="#dc2626" rx="4" opacity="0.7"/>
+<text x="1104" y="543" font-size="17" font-weight="bold" fill="#dc2626">22.8%（1位）</text>
+
+<!-- Separator -->
+<line x1="400" y1="595" x2="880" y2="595" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- Footer -->
+<text x="640" y="630" text-anchor="middle" font-size="17" fill="#94a3b8">地方財政状況調査（2022年度）── stats47.jp</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#ffffff"/>
+
+<!-- Decorative background elements -->
+<circle cx="1080" cy="120" r="200" fill="#eff6ff" opacity="0.35"/>
+<circle cx="200" cy="580" r="160" fill="#fef2f2" opacity="0.25"/>
+<circle cx="640" cy="400" r="300" fill="#f8fafc" opacity="0.4"/>
+
+<!-- stats47 watermark -->
+<text x="1250" y="35" text-anchor="end" font-size="18" fill="#cbd5e1">stats47</text>
+
+<!-- Lead text -->
+<text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">東京都の地方交付税は</text>
+
+<!-- Main catch: big number -->
+<text x="640" y="250" text-anchor="middle" font-size="130" font-weight="900" fill="#2563eb">0%</text>
+
+<!-- Era label -->
+<text x="640" y="300" text-anchor="middle" font-size="40" font-weight="bold" fill="#1e293b">地方税63.4%・交付税ゼロ</text>
+
+<!-- Subtitle -->
+<text x="640" y="355" text-anchor="middle" font-size="26" fill="#94a3b8">── 47都道府県の「自立度」を2つの財源で測る ──</text>
+
+<!-- Mini bar: 地方税割合 top/bottom -->
+<!-- Scale: 15% = 0px, 65% = 400px => 1% = 8px -->
+<!-- 1位 東京都 63.4 => (63.4-15)*8 = 387 -->
+<text x="340" y="430" text-anchor="end" font-size="18" fill="#475569">地方税1位 東京都</text>
+<rect x="360" y="412" width="387" height="28" fill="#2563eb" rx="4" opacity="0.8"/>
+<text x="757" y="432" font-size="18" font-weight="bold" fill="#2563eb">63.4%</text>
+
+<!-- 交付税1位 高知 37.4 => (37.4-15)*8 = 179 -->
+<text x="340" y="478" text-anchor="end" font-size="18" fill="#475569">交付税1位 高知県</text>
+<rect x="360" y="460" width="179" height="28" fill="#dc2626" rx="4" opacity="0.8"/>
+<text x="549" y="480" font-size="18" font-weight="bold" fill="#dc2626">37.4%</text>
+
+<!-- Separator -->
+<line x1="400" y1="565" x2="880" y2="565" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- Footer -->
+<text x="640" y="600" text-anchor="middle" font-size="18" fill="#94a3b8">太平洋ベルトは自立型、日本海側・地方圏は交付税依存型</text>
+<text x="640" y="640" text-anchor="middle" font-size="16" fill="#cbd5e1">地方財政状況調査（2022年度）── stats47.jp</text>
+</svg>

@@ -112,7 +112,17 @@
       "Bash(echo \"exit=$?\")",
       "Bash(echo \"eslint_exit=$?\")",
       "Bash(git fetch *)",
-      "Bash(xargs -I {} gh run view {} --log-failed)"
+      "Bash(xargs -I {} gh run view {} --log-failed)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/val-jp-1/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-1/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-0/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/val-jp-2/表.csv)",
+      "Bash(awk -F',' 'NR>1 {url=$1; gsub\\(/https?:\\\\/\\\\/[^\\\\/]+/,\"\",url\\); sub\\(/\\\\/[^\\\\/]*$/,\"/*\",url\\); print url}' /tmp/gsc-20260418/validation-2/表.csv)",
+      "Bash(gh pr create --base develop --head feature/workflow-refresh --title 'feat: 開発ワークフロー刷新（/purge-cdn + middleware E2E + PR ベース /deploy）' --body ' *)",
+      "Bash(awk -F',' '{print $1}')",
+      "Bash(gh pr create --base develop --head feature/dashboard-apis --title 'feat: GSC API スキル 2 本追加（/submit-sitemap + /inspect-url）' --body ' *)",
+      "Bash(find *)",
+      "Bash(echo \"eslint=$?\")"
     ],
     "defaultMode": "bypassPermissions"
   }

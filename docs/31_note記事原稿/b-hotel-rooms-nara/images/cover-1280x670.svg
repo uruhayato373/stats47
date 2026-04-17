@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#ffffff"/>
+
+<!-- Decorative background elements -->
+<circle cx="1080" cy="120" r="200" fill="#f3e8ff" opacity="0.35"/>
+<circle cx="200" cy="580" r="160" fill="#fef3c7" opacity="0.25"/>
+<circle cx="640" cy="400" r="300" fill="#f8fafc" opacity="0.4"/>
+
+<!-- stats47 watermark -->
+<text x="1250" y="35" text-anchor="end" font-size="18" fill="#cbd5e1">stats47</text>
+
+<!-- Lead text -->
+<text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">奈良と京都のホテル客室数の差は</text>
+
+<!-- Main catch: big number -->
+<text x="640" y="250" text-anchor="middle" font-size="130" font-weight="900" fill="#7c3aed">6倍</text>
+
+<!-- Era label -->
+<text x="640" y="300" text-anchor="middle" font-size="40" font-weight="bold" fill="#1e293b">奈良 4,409室 / 京都 27,038室</text>
+
+<!-- Subtitle -->
+<text x="640" y="355" text-anchor="middle" font-size="26" fill="#94a3b8">── なぜ奈良は「日帰り観光地」なのか ──</text>
+
+<!-- Mini bar chart: 奈良 vs 京都 -->
+<!-- Scale: 0 = 0px, 30000 = 480px => 1000室 = 16px -->
+<!-- 京都 27,038 => 432px -->
+<text x="340" y="430" text-anchor="end" font-size="18" fill="#475569">京都府</text>
+<rect x="360" y="412" width="432" height="28" fill="#7c3aed" rx="4" opacity="0.8"/>
+<text x="802" y="432" font-size="18" font-weight="bold" fill="#7c3aed">27,038室</text>
+
+<!-- 奈良 4,409 => 70px -->
+<text x="340" y="478" text-anchor="end" font-size="18" fill="#475569">奈良県</text>
+<rect x="360" y="460" width="70" height="28" fill="#f59e0b" rx="4" opacity="0.8"/>
+<text x="440" y="480" font-size="18" font-weight="bold" fill="#f59e0b">4,409室</text>
+
+<!-- Separator -->
+<line x1="400" y1="565" x2="880" y2="565" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- Footer -->
+<text x="640" y="600" text-anchor="middle" font-size="18" fill="#94a3b8">世界遺産を持つ古都が、客室数全国46位の理由</text>
+<text x="640" y="640" text-anchor="middle" font-size="16" fill="#cbd5e1">宿泊旅行統計調査 ── stats47.jp</text>
+</svg>

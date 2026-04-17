@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
+<style>
+  text { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; }
+</style>
+<rect width="1280" height="670" fill="#ffffff"/>
+
+<!-- Decorative background elements -->
+<circle cx="1080" cy="120" r="200" fill="#ecfdf5" opacity="0.4"/>
+<circle cx="200" cy="580" r="160" fill="#eff6ff" opacity="0.25"/>
+<circle cx="640" cy="400" r="300" fill="#f8fafc" opacity="0.4"/>
+
+<!-- stats47 watermark -->
+<text x="1250" y="35" text-anchor="end" font-size="18" fill="#cbd5e1">stats47</text>
+
+<!-- Lead text -->
+<text x="640" y="110" text-anchor="middle" font-size="32" fill="#64748b">人口10万人あたりの薬局数は</text>
+
+<!-- Main catch: big number -->
+<text x="640" y="250" text-anchor="middle" font-size="130" font-weight="900" fill="#059669">64.5</text>
+
+<!-- Era label -->
+<text x="640" y="300" text-anchor="middle" font-size="40" font-weight="bold" fill="#1e293b">佐賀県が全国1位（軒／10万人）</text>
+
+<!-- Subtitle -->
+<text x="640" y="355" text-anchor="middle" font-size="26" fill="#94a3b8">── 「薬局密度」で見える地方医療の実態 ──</text>
+
+<!-- Mini bar chart: top and bottom -->
+<!-- Scale: 35 = 0px, 70 = 420px => 1軒 = 12px -->
+<!-- 1位 佐賀 64.5 => (64.5-35)*12 = 354 -->
+<text x="340" y="430" text-anchor="end" font-size="18" fill="#475569">1位 佐賀県</text>
+<rect x="360" y="412" width="354" height="28" fill="#059669" rx="4" opacity="0.8"/>
+<text x="724" y="432" font-size="18" font-weight="bold" fill="#059669">64.5軒</text>
+
+<!-- 47位 沖縄 39.4 => (39.4-35)*12 = 53 -->
+<text x="340" y="478" text-anchor="end" font-size="18" fill="#475569">47位 沖縄県</text>
+<rect x="360" y="460" width="53" height="28" fill="#3b82f6" rx="4" opacity="0.8"/>
+<text x="423" y="480" font-size="18" font-weight="bold" fill="#3b82f6">39.4軒</text>
+
+<!-- Gap annotation -->
+<line x1="724" y1="408" x2="724" y2="494" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="744" y="456" font-size="16" fill="#475569" font-weight="bold">差 1.6倍</text>
+
+<!-- Separator -->
+<line x1="400" y1="565" x2="880" y2="565" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- Footer -->
+<text x="640" y="600" text-anchor="middle" font-size="18" fill="#94a3b8">「地方ほど多く、都市圏ほど少ない」── 意外な分布の理由</text>
+<text x="640" y="640" text-anchor="middle" font-size="16" fill="#cbd5e1">衛生行政報告例（2023年）── stats47.jp</text>
+</svg>

@@ -216,6 +216,20 @@ user-invocable: false
 
 ---
 
+## note 記事 cover SVG で大きな数字テキストがリード文と重なる
+
+**問題**: B/C/D シリーズ note 記事の cover SVG (1280×670) で `font-size="180"` の big number を `y="250"` 前後に置くと、上の `y="110"` リード文と完全に重なる。8 ファイル一斉に同じレイアウト崩れを起こした。
+
+**原因**: SVG の `<text y="...">` は baseline 位置。CJK グリフは em-box ほぼ全体（baseline から上に `font-size × 0.88` まで）を埋める。font-size 180 のテキストは baseline が y=250 なら top が y=110 となり、同じ y=110 のリード文 (font 32) のベースラインに完全にかぶる。Latin 用の 70% cap-height 感覚で見積もると間違える。
+
+**対策**:
+1. **検証スクリプトを必ず通す**: cover SVG 生成・修正後は `node .claude/scripts/note/check-cover-overlap.cjs <svg>` で全 `<text>` 要素の bbox 重なりを自動検出する（`<g transform="translate()">` 追跡対応、4px 以下の接触は許容）。失敗時は exit 1。
+2. **geometry 規則**: CJK の `<text y=Y font-size=F>` は y 範囲 `[Y - 0.88F, Y + 0.12F]` を占有する。font 180 を中央に置く場合は上の要素との間に最低 30px の余白を確保し、下の要素は `y >= Y + 0.12F + 6` に置く。
+3. **font-size 180 は避ける**: cover で大きな数字を強調したい場合 font-size 130 までが安全（y=250 baseline で top y=136、上に y=110 リード文 font 32 があれば 22px gap）。
+4. SKILL.md の cover SVG テンプレ記述には font 180 の例を載せない（誤コピー防止）。
+
+---
+
 ## GSC 「クロール済み - インデックス未登録」は sitemap から除外しただけでは減らない
 
 **問題**: 2026-04 に `INDEXABLE_AREA_CATEGORIES` を 13 → 2 に削減して sitemap から 517 URL（47 × 11）を除外したが、GSC の「クロール済み - インデックス未登録」は期待ほど減らなかった（W15 2,339 → W16 2,415、+76）。
