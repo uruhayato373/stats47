@@ -1,0 +1,200 @@
+{
+  "week_id": "2026-W16",
+  "year": 2026,
+  "week": 16,
+  "generated_at": "2026-04-17T11:15:12.201Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-04-10",
+        "end": "2026-04-16"
+      },
+      "prev": {
+        "start": "2026-04-03",
+        "end": "2026-04-09"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-04-08",
+        "end": "2026-04-14"
+      },
+      "prev": {
+        "start": "2026-04-01",
+        "end": "2026-04-07"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Direct",
+        "thisUsers": 5,
+        "prevUsers": 3,
+        "userDelta": 2,
+        "userDeltaPct": 66.66666666666666,
+        "thisSessions": 6,
+        "prevSessions": 5,
+        "thisEngagedSessions": 5,
+        "prevEngagedSessions": 3,
+        "thisEngagementRate": 0.8333333333333334
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 4,
+        "prevUsers": 13,
+        "userDelta": -9,
+        "userDeltaPct": -69.23076923076923,
+        "thisSessions": 8,
+        "prevSessions": 17,
+        "thisEngagedSessions": 4,
+        "prevEngagedSessions": 13,
+        "thisEngagementRate": 0.5
+      },
+      {
+        "channel": "Organic Search",
+        "thisUsers": 3,
+        "prevUsers": 9,
+        "userDelta": -6,
+        "userDeltaPct": -66.66666666666666,
+        "thisSessions": 4,
+        "prevSessions": 11,
+        "thisEngagedSessions": 3,
+        "prevEngagedSessions": 6,
+        "thisEngagementRate": 0.75
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 1,
+        "prevUsers": 1,
+        "userDelta": 0,
+        "userDeltaPct": 0,
+        "thisSessions": 1,
+        "prevSessions": 1,
+        "thisEngagedSessions": 1,
+        "prevEngagedSessions": 1,
+        "thisEngagementRate": 1
+      }
+    ],
+    "total": {
+      "thisUsers": 13,
+      "prevUsers": 26,
+      "thisSessions": 19,
+      "prevSessions": 34,
+      "thisEngagedSessions": 13,
+      "prevEngagedSessions": 23,
+      "userDelta": -13,
+      "userDeltaPct": -50,
+      "engagedSessionDelta": -10,
+      "engagedSessionDeltaPct": -43.47826086956522
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 3,
+      "prevUsers": 9,
+      "userDelta": -6,
+      "userDeltaPct": -66.66666666666666,
+      "thisSessions": 4,
+      "prevSessions": 11,
+      "thisEngagedSessions": 3,
+      "prevEngagedSessions": 6,
+      "thisEngagementRate": 0.75
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 135,
+      "prevClicks": 98,
+      "clickDelta": 37,
+      "clickDeltaPct": 37.755102040816325,
+      "thisImpressions": 3411,
+      "prevImpressions": 2632,
+      "impressionDelta": 779,
+      "thisCtr": 0.0395778364116095,
+      "prevCtr": 0.03723404255319149,
+      "thisPosition": 9.17854001759015,
+      "prevPosition": 9.96048632218845
+    },
+    "topQueries": [
+      {
+        "query": "一般病床の病床利用率が最も高い都道府県",
+        "clicks": 1,
+        "impressions": 6,
+        "ctr": 0.16666666666666666,
+        "position": 5.166666666666667
+      },
+      {
+        "query": "地方債残高 ランキング",
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14285714285714285,
+        "position": 4.857142857142858
+      },
+      {
+        "query": "昆布 消費量 ランキング",
+        "clicks": 1,
+        "impressions": 10,
+        "ctr": 0.1,
+        "position": 7.3
+      },
+      {
+        "query": "昆布消費量ランキング",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 7
+      },
+      {
+        "query": "猛暑日日数 都 道府県",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 11
+      },
+      {
+        "query": "2040年 介護人材 不足 69万人",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5.333333333333333
+      },
+      {
+        "query": "お酒消費量 都道府県",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 16
+      },
+      {
+        "query": "じゃがいも 消費量",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 13
+      },
+      {
+        "query": "アルコール消費量 都道府県",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8.5
+      },
+      {
+        "query": "エンゲル係数 日本 ランキング",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-04-08 〜 2026-04-14 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/03_レビュー/critical/north-star-metric.md"
+  ]
+}
