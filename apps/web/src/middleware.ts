@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
+import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
@@ -162,14 +163,17 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // --- ブログ slug 変更の 301 リダイレクト ---
+  // --- ブログ slug 変更の 301 リダイレクト / 完全削除 slug の 410 ---
   if (pathname.startsWith("/blog/")) {
-    const slug = pathname.slice("/blog/".length);
+    const slug = pathname.slice("/blog/".length).split("/")[0];
     const newSlug = BLOG_SLUG_REDIRECTS[slug];
     if (newSlug) {
       return NextResponse.redirect(new URL(`/blog/${newSlug}`, req.url), {
         status: 301,
       });
+    }
+    if (GONE_BLOG_SLUGS.has(slug)) {
+      return gone();
     }
   }
 

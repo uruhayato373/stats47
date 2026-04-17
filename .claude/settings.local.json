@@ -103,7 +103,8 @@
       "Bash(echo \"vitest_exit=$?\")",
       "Bash(echo \"vitest=$?\")",
       "Bash(gh run *)",
-      "Bash(git revert *)"
+      "Bash(git revert *)",
+      "Bash(echo \"tsc=$?\")"
     ],
     "defaultMode": "bypassPermissions"
   }
