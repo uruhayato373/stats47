@@ -218,6 +218,61 @@ middleware は runtime で動作するため D1 非依存（git commit 静的 Se
 
 2026-04-17 本番 curl 検証で `/areas/13000/cities/13101` が 500、`/areas/11000/cities/11101` が 200、`/areas/01000/cities/01100` が 200 と挙動不一致を確認。middleware の既存ロジック（L231-245）は `areaSegments[2]` を cityCode として期待していたが、`cities` セグメントがあると条件をすり抜けていた。結果として page.tsx `areas/[areaCode]/cities/[cityCode]/page.tsx` に到達し、データ不整合で 500 になるケースや、robots.txt ブロック済みだが HTTP 200 を返すケースが混在していた。
 
+### [T2-CWV-01] AdSense CLS (0.732) 対策
+
+**施策 ID**: `T2-CWV-01` / **Tier**: T2 (UX) / **デプロイ日**: 2026-04-18 / **コミット**: `5e7ac037`
+**ターゲット指標**: CLS（Core Web Vitals）
+**想定効果**: CLS 悪い率 2% → 0% 付近、Google ページ体験評価向上
+**実測効果**:
+| 観測日 | CLS 悪い率 | CLS P75 | 判定 |
+|---|---|---|---|
+| 2026-04-18 (deploy直後) | — | — | DEPLOYED（ベースライン: ins.adsbygoogle CLS 0.732）|
+
+#### 変更内容
+- `apps/web/src/lib/google-adsense/components/AdSenseAd.tsx`:
+  - `getReservedMinHeight(format)` ヘルパー追加。placeholder / `<ins>` / 親 container の 3 箇所に minHeight 予約
+  - rectangle 280px / banner 90px / skyscraper 600px / infeed/article 250px fallback
+
+### [T2-CWV-02] Leaflet タイル Cloudflare edge cache 化
+
+**施策 ID**: `T2-CWV-02` / **Tier**: T2 / **デプロイ日**: 2026-04-18 / **コミット**: `5e7ac037`
+**ターゲット指標**: LCP（Core Web Vitals）
+**想定効果**:
+- LCP 悪い率: 36% → 15% 目標
+- LCP P75: 5,792ms → 2,500ms 目標（Good 判定）
+**実測効果**:
+| 観測日 | LCP 悪い率 | LCP P75 | 判定 |
+|---|---|---|---|
+| 2026-04-18 (deploy直後) | — | — | DEPLOYED（ベースライン: cartocdn tile 最大 19,888ms） |
+
+本番 curl 検証 OK: `/tiles/light_all/5/28/12.png` → 200 `X-Tile-Source: cartocdn-proxy` `s-maxage=86400`
+
+#### 変更内容
+- **新規**: `apps/web/src/app/tiles/[theme]/[z]/[x]/[ypng]/route.ts`
+  - `/tiles/{light_all,dark_all}/{z}/{x}/{y}{@2x}.png` で cartocdn をプロキシ
+  - `Cache-Control: max-age=2592000, immutable` 指定（OpenNext 側で s-maxage=86400 に短縮される）
+  - validation: theme allowlist、zoom 0-20、x/y 数値、png pattern
+- **編集**: `packages/visualization/src/leaflet/constants/tile-providers.ts`
+  - TileLayer URL を `/tiles/{theme}/{z}/{x}/{y}{r}.png` に変更
+  - RankingMapChart / PortLeafletMap / FishingPortLeafletMap 全てが自動で恩恵
+- **編集**: `apps/web/src/app/layout.tsx`
+  - `<head>` に cartocdn の preconnect / dns-prefetch、storage.stats47.jp の preconnect 追加
+
+#### v1 失敗の記録 (commit 5fb9aa5d → revert 5e7ac037)
+`export const runtime = "edge"` を指定したら OpenNext が build 失敗（"edge runtime must be defined in separate function"）。runtime 指定と cf オプションを削除して v2 で成功。
+
+### [T2-CWV-03] ブログ内 SVG CLS 対策
+
+**施策 ID**: `T2-CWV-03` / **Tier**: T2 / **デプロイ日**: 2026-04-18 / **コミット**: `5e7ac037`
+**ターゲット指標**: CLS / LCP
+**想定効果**: ブログ記事の SVG 要改善 9% の一部を解消
+**実測効果**: 2026-04-18 DEPLOYED
+
+#### 変更内容
+- `apps/web/src/features/blog/components/md-content.tsx`:
+  - SVG に対して `<span>` 親に `aspect-ratio: 16/9` を予約（レイアウト確定を高速化）
+  - `<Image>` に `sizes` / `decoding="async"` / `loading="lazy"` 明示
+
 ### [T1-OBS-01] Cloudflare 観測基盤（traces + Analytics Engine binding）
 
 **施策 ID**: `T1-OBS-01`
