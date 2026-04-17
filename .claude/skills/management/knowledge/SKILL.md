@@ -199,3 +199,27 @@ user-invocable: false
 **原因**: (1) robots.ts 作成時に Next.js File Convention の自動生成ルート（opengraph-image 等）を考慮しなかった。(2) 子ページの noindex を親ページに適用する確認を怠った。
 
 **対策**: (1) robots.ts に `"/*/opengraph-image"` を全 userAgent の Disallow に追加。(2) 市区町村ページに `robots: "noindex, follow"` を追加。(3) 新規ページ作成時は `coding-standards.md` のインデックス制御チェックリストを実行。(4) `/seo-audit` に「2-7. インデックス制御チェック」を追加。
+
+---
+
+## GA4 の「既知の bot 除外」は常時オンで UI トグル無し
+
+**問題**: `/themes/population-dynamics` で PV/user = 70.5（他 /themes/* は 25 以下）、avg session 4,169 秒（≈69 分）という異常値を検知。「GA4 管理画面で『既知の bot トラフィックを除外』を有効化」と案内しようとしたが、実際には UI にそのようなトグルは存在しない。UA（旧 Google アナリティクス）の「ボットとスパイダーをすべて除外」チェックボックスは GA4 では撤廃された。
+
+**原因**: GA4 の既知 bot フィルタは IAB/ABC International Spiders and Bots List を常時参照して **自動除外する仕様**。ユーザーが手動でオン/オフを切り替える設計ではない。したがって「GA4 で bot フィルタを有効化してもらう」提案は無効。IAB リスト未登録のクローラー（独自 scraper / headless Chrome / Playwright 等）は GA4 既定では検知されない。
+
+**対策**: bot 疑いの異常値を GA4 側で除外したい場合、以下を検討する:
+1. **内部トラフィック除外フィルタ**（管理 → データストリーム → タグ設定 → 内部トラフィックを定義 → データフィルタで有効化）: 自オフィス IP を除外
+2. **Cloudflare Bot Analytics**: Cloudflare ダッシュボード → Security → Bots で該当ページの bot スコア / UA を確認。GA4 より粒度が細かい
+3. **middleware レベルでの 410**: Cloudflare `cf.botManagement.score`（enterprise）or User-Agent 文字列判定（無料）で不要 bot を弾く
+4. ユーザーに案内する際は「GA4 UI の bot フィルタ有効化」ではなく上記を提示する
+
+---
+
+## GSC 「クロール済み - インデックス未登録」は sitemap から除外しただけでは減らない
+
+**問題**: 2026-04 に `INDEXABLE_AREA_CATEGORIES` を 13 → 2 に削減して sitemap から 517 URL（47 × 11）を除外したが、GSC の「クロール済み - インデックス未登録」は期待ほど減らなかった（W15 2,339 → W16 2,415、+76）。
+
+**原因**: Google のインデックスは **sitemap から消したというシグナルだけでは除去トリガーにならない**。既にインデックスに入っている URL は、Googlebot が該当 URL を再クロールして 404 / 410 / noindex を受領することで初めて除去候補になる。sitemap は「新規 URL の発見」の案内であり、既存 URL の削除指示ではない。
+
+**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。

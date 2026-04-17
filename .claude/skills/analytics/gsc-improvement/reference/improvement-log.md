@@ -251,6 +251,60 @@ Analytics Engine dataset は binding 宣言のみで自動生成される。midd
 3. 上部タブ「**Metrics**」→ Invocations / Errors / CPU Time
 4. traces（有効化後）: URL 別のリクエスト詳細とレスポンス時間
 
+### [T0-THEME-01] `/themes/{unknown-slug}` の 410 化（Fix 7）
+
+**施策 ID**: `T0-THEME-01`
+**Tier**: T0 (URL 空間整理)
+**デプロイ日**: 2026-04-18
+**コミット**: `1c085bc5` (dev `5fb9aa5d` ESLint fix 込み、main merge 済み)
+**ターゲット指標**: クロール済み未登録, 404
+**想定効果値**:
+- クロール済み未登録: **-50 ~ -200**（過去動線の /themes/* alias や旧 slug）
+- 404: **-30 ~ -150**（404 → 410 への明示化、数値的には 404 カテゴリから移動）
+**観測予定日**: 2026-05-02 (+14d MID), 2026-05-16 (+28d FINAL)
+**実測効果** (observe で自動追記):
+| 観測日 | 経過日数 | クロール未登録 delta | 404 delta | 判定 |
+|---|---|---|---|---|
+| 2026-04-18 (deploy直後) | 0d | — | — | **DEPLOYED** |
+
+#### 変更内容
+
+- **新規**: `apps/web/src/config/known-theme-slugs.ts` — `ALL_THEMES` から themeKey を Set 化（16 件、静的、all-themes.ts 更新で自動追従）
+- **編集**: `apps/web/src/middleware.ts` Fix 7 ブロック追加:
+  - `/themes/{slug}` で `!KNOWN_THEME_SLUGS.has(slug)` なら 410 Gone
+
+#### 根拠
+
+themes の動的ルート `[themeSlug]/` は `opengraph-image.tsx` のみで page.tsx を持たず、未知 slug は現状 404。Google の「削除を検出」カテゴリに滞留してインデックス除去まで時間がかかるため、middleware で明示 410 に切り替えて除去シグナルを強める。
+
+### [T0-AREA-SUB-01] `/areas/{prefCode}/{non-indexable-sub}` の 410 化（Fix 8）
+
+**施策 ID**: `T0-AREA-SUB-01`
+**Tier**: T0 (URL 空間整理)
+**デプロイ日**: 2026-04-18
+**コミット**: `1c085bc5` (`5fb9aa5d` 込み、main merge 済み)
+**ターゲット指標**: クロール済み未登録, 登録済み, ソフト404
+**想定効果値**:
+- クロール済み未登録: **-300 ~ -500**（T1-CRAWL-01 で sitemap から外した 47 × 11 = 517 URL のうち、まだ Google インデックスに残っている分）
+- ソフト404: **-50 ~ -150**（indexable 外の /areas/{pref}/{sub} が 200 notFound で返していたケースを 410 化）
+- 登録済み: **+100 ~ +300**（クロール予算がトップ導線に集中する副次効果）
+**観測予定日**: 2026-05-02 (+14d MID), 2026-05-16 (+28d FINAL)
+**実測効果** (observe で自動追記):
+| 観測日 | 経過日数 | クロール未登録 delta | ソフト404 delta | 登録済み delta | 判定 |
+|---|---|---|---|---|---|
+| 2026-04-18 (deploy直後) | 0d | — | — | — | **DEPLOYED** |
+
+#### 変更内容
+
+- **編集**: `apps/web/src/middleware.ts` Fix 8 ブロック追加:
+  - `/areas/{prefCode}/{sub}` で、prefCode が有効 5 桁・sub が `cities` 以外・sub が 5 桁数字以外・`INDEXABLE_AREA_CATEGORIES_SET` に含まれない場合 410
+  - 既存 Fix 4（無効 prefCode）、Fix 4.5（cities 410）、L276 の city-code 410 と並ばず、これらが先に処理された後で残る alphabetic sub をカバー
+- **新規 import**: `INDEXABLE_AREA_CATEGORIES_SET` を middleware に
+
+#### 根拠
+
+2026-04 の T1-CRAWL-01 で INDEXABLE_AREA_CATEGORIES を 13 → 2 に削減、sitemap から 517 URL を除外したが、**既に Google インデックスに残っている URL は sitemap から消しただけでは削除されない**。これらへの直接アクセス（Googlebot の再クロール、既存バックリンク）に対し 410 を返すことで「完全削除」を明示する。Fix 7 と同系統の対処。
+
 ### [T1-CF-01] Cloudflare キャッシュ設定（ユーザー実施）
 
 **施策 ID**: `T1-CF-01`
