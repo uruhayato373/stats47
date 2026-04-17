@@ -11,7 +11,7 @@
  * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-04-17
- * 件数: 1899
+ * 件数: 1901
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -675,6 +675,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "health-insurance-premium-consumption-expenditure",
   "health-physical-education-expenses-prefecture",
   "healthcare-expenditure-ratio-multi-person-households",
+  "healthy-life-expectancy-female",
+  "healthy-life-expectancy-male",
   "heater-consumption-expenditure",
   "heater-consumption-quantity",
   "high-school-advancement-rate",
