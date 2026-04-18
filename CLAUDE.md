@@ -234,13 +234,13 @@ SKILL.md から `node <path>` で呼ばれる？
 ## ブランチ運用ルール
 
 ```
-feature/* → develop → main（デプロイ）
+feature/* ──(PR 必須)──▶ develop ──(直接 merge)──▶ main（デプロイ）
 ```
 
-- **main**: 本番デプロイブランチ。develop からのマージのみ。直接コミットしない
-- **develop**: 統合ブランチ。feature ブランチからのマージを受け入れる
-- **feature/***: 機能ブランチ。develop から分岐し develop にマージ後削除
-- デプロイは `/deploy` スキルで実行（develop → main マージ + push）
+- **feature/***: 機能ブランチ。develop から分岐し、**PR 経由でのみ develop にマージ**する。マージ後は削除
+- **develop**: 統合ブランチ。feature/* からの PR を受け入れる。**develop 直接 push は禁止**。`gh pr create --base develop` で PR を出し、`.github/workflows/pr-quality-check.yml` の CI が pass してからマージ
+- **main**: 本番デプロイブランチ。develop からの直接 merge のみ（Cloudflare Pages トリガー）。直接コミット・push しない
+- デプロイは `/deploy` スキルで実行（feature push → PR → develop → main マージ + push → 必要なら `/purge-cdn`）
 
 ## 行動原則
 
