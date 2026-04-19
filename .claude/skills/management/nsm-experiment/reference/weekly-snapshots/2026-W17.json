@@ -1,0 +1,213 @@
+{
+  "week_id": "2026-W17",
+  "year": 2026,
+  "week": 17,
+  "generated_at": "2026-04-19T22:20:59.006Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-04-12",
+        "end": "2026-04-18"
+      },
+      "prev": {
+        "start": "2026-04-05",
+        "end": "2026-04-11"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-04-10",
+        "end": "2026-04-16"
+      },
+      "prev": {
+        "start": "2026-04-03",
+        "end": "2026-04-09"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Referral",
+        "thisUsers": 10,
+        "prevUsers": 12,
+        "userDelta": -2,
+        "userDeltaPct": -16.666666666666664,
+        "thisSessions": 16,
+        "prevSessions": 16,
+        "thisEngagedSessions": 11,
+        "prevEngagedSessions": 12,
+        "thisEngagementRate": 0.6875
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 3,
+        "prevUsers": 4,
+        "userDelta": -1,
+        "userDeltaPct": -25,
+        "thisSessions": 4,
+        "prevSessions": 7,
+        "thisEngagedSessions": 3,
+        "prevEngagedSessions": 5,
+        "thisEngagementRate": 0.75
+      },
+      {
+        "channel": "Organic Search",
+        "thisUsers": 3,
+        "prevUsers": 9,
+        "userDelta": -6,
+        "userDeltaPct": -66.66666666666666,
+        "thisSessions": 3,
+        "prevSessions": 10,
+        "thisEngagedSessions": 3,
+        "prevEngagedSessions": 7,
+        "thisEngagementRate": 1
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 1,
+        "prevUsers": 1,
+        "userDelta": 0,
+        "userDeltaPct": 0,
+        "thisSessions": 1,
+        "prevSessions": 1,
+        "thisEngagedSessions": 1,
+        "prevEngagedSessions": 1,
+        "thisEngagementRate": 1
+      }
+    ],
+    "total": {
+      "thisUsers": 17,
+      "prevUsers": 26,
+      "thisSessions": 24,
+      "prevSessions": 34,
+      "thisEngagedSessions": 18,
+      "prevEngagedSessions": 25,
+      "userDelta": -9,
+      "userDeltaPct": -34.61538461538461,
+      "engagedSessionDelta": -7,
+      "engagedSessionDeltaPct": -28.000000000000004
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 3,
+      "prevUsers": 9,
+      "userDelta": -6,
+      "userDeltaPct": -66.66666666666666,
+      "thisSessions": 3,
+      "prevSessions": 10,
+      "thisEngagedSessions": 3,
+      "prevEngagedSessions": 7,
+      "thisEngagementRate": 1
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 86,
+      "prevClicks": 164,
+      "clickDelta": -78,
+      "clickDeltaPct": -47.5609756097561,
+      "thisImpressions": 3730,
+      "prevImpressions": 3023,
+      "impressionDelta": 707,
+      "thisCtr": 0.023056300268096516,
+      "prevCtr": 0.05425074429374793,
+      "thisPosition": 9.672117962466489,
+      "prevPosition": 8.595765795567317
+    },
+    "topQueries": [
+      {
+        "query": "昆布 消費量 ランキング",
+        "clicks": 2,
+        "impressions": 10,
+        "ctr": 0.2,
+        "position": 7.4
+      },
+      {
+        "query": "エンゲル係数 都道府県",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 6.5
+      },
+      {
+        "query": "公園が多い県",
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14285714285714285,
+        "position": 7.142857142857143
+      },
+      {
+        "query": "地方債残高 ランキング",
+        "clicks": 1,
+        "impressions": 8,
+        "ctr": 0.125,
+        "position": 5
+      },
+      {
+        "query": "大学進学率 都道府県",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 10
+      },
+      {
+        "query": "昆布消費量ランキング",
+        "clicks": 1,
+        "impressions": 4,
+        "ctr": 0.25,
+        "position": 7.25
+      },
+      {
+        "query": "猛暑日日数 都 道府県",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 11
+      },
+      {
+        "query": "\"出生数 全都道府県で減少\"",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10
+      },
+      {
+        "query": "2040年 介護人材 不足 69万人",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5.333333333333333
+      },
+      {
+        "query": "お酒消費量 都道府県",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 16
+      }
+    ]
+  },
+  "psi": {
+    "url": "https://stats47.jp/",
+    "strategy": "mobile",
+    "scores": {
+      "performance": 55,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100
+    },
+    "lab_data": {
+      "LCP_ms": 9453.652191576162,
+      "TBT_ms": 632,
+      "CLS": 0.000185,
+      "FCP_ms": 1351.3043498530028,
+      "TTI_ms": 14861.623317207457
+    }
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-04-10 〜 2026-04-16 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/03_レビュー/critical/north-star-metric.md"
+  ]
+}
