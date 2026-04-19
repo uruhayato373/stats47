@@ -83,23 +83,21 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <args>
    - 予約投稿ボタンをクリック
 4. DB（`sns_posts`）を自動更新（status → posted, caption 保存）
 
-## 実証済みの Playwright セレクタ
+## 実証済みの Playwright セレクタ（2026-04-20 更新）
 
-X の compose ダイアログは `#layers` 内に生成されるため、一部の要素は `primaryColumn` スコープ外にある。
+X の compose ダイアログは `#layers` 内の `[role="dialog"]` に生成される。**2026-04 に UI が刷新され、date picker が 12時間制 + data-testid → 24時間制 + testid なしに変更された。**
 
 | 操作 | セレクタ | 備考 |
 |---|---|---|
 | テキスト入力 | `page.getByRole("textbox").first()` | clipboard API + Meta+V で入力 |
 | 画像アップロード | `page.locator('input[data-testid="fileInput"]').first()` | テキスト入力より先に実行すること |
-| 予約ボタン | `page.getByRole("button", { name: "ポストを予約" }).first()` | `force: true` 必須（layers が遮る） |
-| 月セレクト | `[data-testid="scheduledDatePickerMonths"]` | value: 1-12 |
-| 日セレクト | `[data-testid="scheduledDatePickerDays"]` | value: 1-31 |
-| 時セレクト | `[data-testid="scheduledDatePickerHours"]` | value: 1-12（12時間制） |
-| 分セレクト | `[data-testid="scheduledDatePickerMinutes"]` | value: "00"-"59"（ゼロパディング） |
-| AM/PM セレクト | `[data-testid="scheduledDatePickerMeridiem"]` | value: "AM" or "PM" |
-| 確認ボタン | `page.getByTestId("scheduledConfirmationPrimaryAction")` | クリック後、予約モード切替を待つ |
-| 予約モード検証 | `[data-testid="tweetButton"] span span:text-is("予約設定")` | 確認後にボタンテキストが変わる |
+| 予約ボタン | `page.locator('[role="dialog"] [data-testid="scheduleOption"]').first()` | modal dialog 内に scope（inline composer 側の誤クリック回避）。**DOM レベル `el.click()` で呼ぶ**（Playwright click は画像添付時に intercept されて silently 失敗する） |
+| 日時セレクト (5個) | `page.locator('[role="dialog"] select')` | dialog 内に scope。**`options` 内容からロール判定**（month: "1月"〜 と max=12、year: `/^20\d{2}$/` の text、day: max=28-31（月により可変）、hour: max=23、minute: max=59）。インデックス順に依存しない |
+| 確認ボタン | `page.getByTestId("scheduledConfirmationPrimaryAction")` | text="確認する"、クリック後に予約モード切替を待つ |
+| 予約モード検証 | `[data-testid="tweetButton"]:has-text("予約設定")` | 確認後にボタンテキストが "ポストする" → "予約設定" に変わる |
 | 投稿ボタン | `page.getByTestId("tweetButton").first()` | 予約モード確認後は `force` 不要 |
+
+**堅牢化の狙い**: select のインデックス順、要素の個数、ロケール（"月" vs "Month"）、選択中月の日数（28/29/30/31）に依存しない形でロールを判定している。X が UI を更新しても、options 内容が同パターンなら動作する。
 
 ## 実装上の注意点
 
@@ -115,15 +113,15 @@ await page.evaluate(async (text: string) => {
 await page.keyboard.press("Meta+v");
 ```
 
-### `force: true` の使い分け
-compose ダイアログは `#layers` 内に生成され、背景のオーバーレイ div がポインタイベントを遮る。
+### クリック方法の使い分け
+compose ダイアログは `#layers` 内に生成され、画像添付時にポインタイベントが別要素に intercept される。
 
-- **予約ボタン（カレンダーアイコン）**: `force: true` 必須（オーバーレイが遮る）
+- **予約ボタン（カレンダーアイコン）**: **DOM レベル `el.click()` 必須**。Playwright の `click({force:true})` は silently 成功するが date picker が開かない（intercept 先が別要素のため）
 - **投稿ボタン（予約設定後）**: `force: true` **不要**。まず通常クリックを試み、失敗時のみ `force` にフォールバック
 
 ```typescript
-// 予約ボタン: force 必須
-await scheduleBtn.click({ force: true });
+// 予約ボタン: DOM 直 click（画像添付時の pointer intercept を回避）
+await scheduleBtn.evaluate((el: HTMLElement) => el.click());
 
 // 投稿ボタン: 予約モード確認後は force 不要
 try {

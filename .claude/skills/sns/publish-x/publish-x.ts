@@ -207,35 +207,102 @@ async function publishPost(
     const d = post.scheduledDate;
     const month = d.getMonth() + 1;
     const day = d.getDate();
-    const hour = d.getHours();
-    const ampm = hour >= 12 ? "PM" : "AM";
-    const hour12 = hour % 12 || 12;
+    const year = d.getFullYear();
+    const hour = d.getHours(); // 24時間制
     const minute = d.getMinutes();
 
-    // 予約ボタンクリック（layers のオーバーレイを force で突破）
-    const scheduleBtn = page
-      .getByRole("button", { name: "ポストを予約" })
-      .first();
-    await scheduleBtn.waitFor({ state: "visible", timeout: 10000 });
-    await scheduleBtn.click({ force: true });
-    await page.waitForTimeout(2000);
-
-    // 日時セレクト設定
-    const setSelect = async (testId: string, value: string) => {
-      const el = page.locator(`[data-testid="${testId}"]`);
-      if ((await el.count()) > 0) {
-        await el.selectOption({ value });
-        await page.waitForTimeout(300);
-      }
-    };
-    await setSelect("scheduledDatePickerMonths", String(month));
-    await setSelect("scheduledDatePickerDays", String(day));
-    await setSelect("scheduledDatePickerHours", String(hour12));
-    await setSelect(
-      "scheduledDatePickerMinutes",
-      String(minute).padStart(2, "0")
+    // 予約ボタンクリック
+    // 堅牢化: modal dialog 内に scope。inline composer の scheduleOption を誤クリックしない
+    // 画像添付時に pointer event が別要素に intercept されるため DOM レベル .click() を使う
+    // （Playwright の click({force:true}) は silently 失敗して date picker が開かない）
+    const dialogScheduleBtn = page.locator(
+      '[role="dialog"] [data-testid="scheduleOption"]'
     );
-    await setSelect("scheduledDatePickerMeridiem", ampm);
+    const fallbackScheduleBtn = page
+      .locator('[data-testid="scheduleOption"]')
+      .first();
+    const scheduleBtn =
+      (await dialogScheduleBtn.count()) > 0
+        ? dialogScheduleBtn.first()
+        : fallbackScheduleBtn;
+    await scheduleBtn.waitFor({ state: "visible", timeout: 10000 });
+    await scheduleBtn.evaluate((el: HTMLElement) => el.click());
+    await page.waitForTimeout(2500);
+
+    // 日時セレクト設定（2026-04 以降 X UI が刷新され、data-testid なし）
+    // 堅牢化: select の options 内容から「月/日/年/時/分」のロールを判定する
+    // （インデックス順序は X UI 変更で将来変わる可能性があるため）
+    const dialogSelects = page.locator('[role="dialog"] select');
+    const allSelects =
+      (await dialogSelects.count()) > 0 ? dialogSelects : page.locator("select");
+    const selectCount = await allSelects.count();
+    if (selectCount < 5) {
+      console.error(
+        `🚨 日時セレクトが想定(5)未満: ${selectCount} — UI 変更の可能性 (${post.contentKey})`
+      );
+      await saveScreenshot(page, post.contentKey, "date-selects-missing");
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return false;
+    }
+
+    // 各 select の options を抽出してロールを判定
+    type SelectRole = "month" | "day" | "year" | "hour" | "minute";
+    const selectMeta: { i: number; role: SelectRole | null }[] = [];
+    for (let i = 0; i < selectCount; i++) {
+      const opts = await allSelects.nth(i).evaluate((el: HTMLSelectElement) =>
+        Array.from(el.options).map((o) => ({ value: o.value, text: o.text }))
+      );
+      const texts = opts.map((o) => o.text);
+      const values = opts.map((o) => o.value).filter((v) => v !== "");
+      const maxVal = Math.max(...values.map((v) => Number(v)).filter((n) => !isNaN(n)), 0);
+      let role: SelectRole | null = null;
+      // day select の max は選択中の月に依存（28-31 の範囲で変動）
+      if (texts.some((t) => t.includes("月")) && maxVal === 12) role = "month";
+      else if (texts.some((t) => /^20\d{2}$/.test(t))) role = "year";
+      else if (maxVal >= 28 && maxVal <= 31) role = "day";
+      else if (maxVal === 23) role = "hour";
+      else if (maxVal === 59) role = "minute";
+      selectMeta.push({ i, role });
+    }
+
+    const findByRole = (role: SelectRole): number => {
+      const hit = selectMeta.find((m) => m.role === role);
+      return hit ? hit.i : -1;
+    };
+    const idx = {
+      month: findByRole("month"),
+      day: findByRole("day"),
+      year: findByRole("year"),
+      hour: findByRole("hour"),
+      minute: findByRole("minute"),
+    };
+    const missing = Object.entries(idx)
+      .filter(([, v]) => v < 0)
+      .map(([k]) => k);
+    if (missing.length > 0) {
+      console.error(
+        `🚨 日時セレクトのロール判定失敗 (${missing.join(",")}): ${post.contentKey}`
+      );
+      console.error("   selectMeta:", JSON.stringify(selectMeta));
+      await saveScreenshot(page, post.contentKey, "date-select-role-unknown");
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return false;
+    }
+
+    await allSelects.nth(idx.month).selectOption({ value: String(month) });
+    await page.waitForTimeout(200);
+    await allSelects.nth(idx.day).selectOption({ value: String(day) });
+    await page.waitForTimeout(200);
+    await allSelects.nth(idx.year).selectOption({ value: String(year) });
+    await page.waitForTimeout(200);
+    await allSelects.nth(idx.hour).selectOption({ value: String(hour) });
+    await page.waitForTimeout(200);
+    await allSelects.nth(idx.minute).selectOption({ value: String(minute) });
+    await page.waitForTimeout(300);
 
     // 確認ボタンをクリック → 予約モードに切り替わるのを待つ
     const confirmBtn = page.getByTestId(
@@ -354,9 +421,14 @@ function updateDb(
   if (!success || IS_DRY_RUN) return;
 
   const status = post.scheduledDate ? "posted" : "posted";
+  // JST カレンダー日付で保存（toISOString だと UTC になり 23:00 JST 以降は前日になる）
+  const formatJstDate = (d: Date): string => {
+    const jst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+    return jst.toISOString().split("T")[0];
+  };
   const postedAt = post.scheduledDate
-    ? post.scheduledDate.toISOString().split("T")[0]
-    : new Date().toISOString().split("T")[0];
+    ? formatJstDate(post.scheduledDate)
+    : formatJstDate(new Date());
 
   const caption = fs
     .readFileSync(post.captionPath, "utf-8")

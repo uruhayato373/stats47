@@ -36,15 +36,16 @@ async function main() {
     console.log(`予約投稿: ${items.length} 件`);
 
     // ページ全体のテキストから予約日時を抽出
+    // 2026-04 以降 X UI が 24時間制に刷新されたため「午前/午後」は表示されない
+    // 予約日時は "2026/4/21 08:00" 形式や「X曜日」などで表示される
     const bodyText = await page.evaluate(() => document.body.innerText);
     const scheduled = bodyText
       .split("\n")
       .filter(
         (l) =>
-          l.includes("午前") ||
-          l.includes("午後") ||
           l.includes("予約") ||
-          /2026/.test(l)
+          /2026|2027/.test(l) ||
+          /\d{1,2}:\d{2}/.test(l)
       );
     console.log("予約日時行候補:");
     scheduled.slice(0, 20).forEach((l) => console.log("  " + l));
