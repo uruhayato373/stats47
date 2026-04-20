@@ -122,7 +122,15 @@
       "Bash(awk -F',' '{print $1}')",
       "Bash(gh pr create --base develop --head feature/dashboard-apis --title 'feat: GSC API スキル 2 本追加（/submit-sitemap + /inspect-url）' --body ' *)",
       "Bash(find *)",
-      "Bash(echo \"eslint=$?\")"
+      "Bash(echo \"eslint=$?\")",
+      "Bash(tee /tmp/build-bisect1.log)",
+      "Bash(ANALYZE=true npm run build --workspace=apps/web)",
+      "Bash(tee /tmp/build-clean.log)",
+      "Bash(tee /tmp/build-zod-free.log)",
+      "Bash(xargs -I {} sh -c 'echo \"$\\(wc -c < \"{}\"\\) {}\"')",
+      "Bash(gh pr create --base develop --head feature/w17-tracking-psi --title 'perf\\(web\\): homepage First Load JS 614KB → 358KB \\(-42%\\) + W17 tracking' --body ' *)",
+      "Bash(claude mcp *)",
+      "Bash(gh pr *)"
     ],
     "defaultMode": "bypassPermissions"
   }
