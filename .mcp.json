@@ -25,14 +25,30 @@
     },
     "mlit-dpf-mcp": {
       "command": "/Users/minamidaisuke/mlit-dpf-mcp/.venv/bin/python",
-      "args": ["-m", "src.server"],
-      "cwd": "/Users/minamidaisuke/mlit-dpf-mcp",
+      "args": [
+        "-m",
+        "src.server"
+      ],
       "env": {
         "MLIT_API_KEY": "A6m3-g1F1RAyau2jqRrjRiC6ehxo.Hrc",
         "MLIT_BASE_URL": "https://www.mlit-data.jp/api/v1/",
         "PYTHONUNBUFFERED": "1",
         "LOG_LEVEL": "WARNING"
       }
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "git": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/minamidaisuke/stats47"
+      ],
+      "env": {}
     }
   }
 }
