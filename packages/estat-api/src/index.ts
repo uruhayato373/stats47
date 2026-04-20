@@ -1,7 +1,7 @@
 export * from "./utils/index";
 
 export { ESTAT_STATS_DEFINITIONS } from "./meta-info/constants/definitions";
-export * from "./stats-data/schemas/stats-data-form.schema";
+export type { StatsDataFormValues } from "./stats-data/schemas/stats-data-form.schema";
 export {
     convertToStatsSchema, formatStatsData
 } from "./stats-data/utils/index";

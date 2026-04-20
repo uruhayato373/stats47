@@ -8,6 +8,8 @@
  * category-repository.tsと同様のパターンで実装されています。
  */
 
+import "server-only";
+
 import { logger } from "@stats47/logger/server";
 import type { AreaType } from "@stats47/types";
 import { z } from "zod";
