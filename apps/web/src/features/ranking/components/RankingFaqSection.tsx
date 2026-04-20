@@ -1,18 +1,30 @@
-import { z } from "zod/v4";
-
-const faqItemSchema = z.object({
-  question: z.string().min(1),
-  answer: z.string().min(1),
-  type: z.string(),
-});
-
-const faqContentSchema = z.object({
-  items: z.array(faqItemSchema).min(1),
-});
+interface FaqItem {
+  question: string;
+  answer: string;
+  type: string;
+}
 
 interface RankingFaqSectionProps {
   faqJson: string | null;
   rankingName: string;
+}
+
+function isValidFaqItem(v: unknown): v is FaqItem {
+  if (!v || typeof v !== "object") return false;
+  const o = v as Record<string, unknown>;
+  return (
+    typeof o.question === "string" && o.question.length > 0 &&
+    typeof o.answer === "string" && o.answer.length > 0 &&
+    typeof o.type === "string"
+  );
+}
+
+function parseFaqContent(raw: unknown): FaqItem[] | null {
+  if (!raw || typeof raw !== "object") return null;
+  const items = (raw as { items?: unknown }).items;
+  if (!Array.isArray(items) || items.length === 0) return null;
+  const valid = items.filter(isValidFaqItem);
+  return valid.length > 0 ? valid : null;
 }
 
 /**
@@ -29,10 +41,8 @@ export function RankingFaqSection({ faqJson }: RankingFaqSectionProps) {
     return null;
   }
 
-  const result = faqContentSchema.safeParse(parsed);
-  if (!result.success) return null;
-
-  const { items } = result.data;
+  const items = parseFaqContent(parsed);
+  if (!items) return null;
 
   const jsonLd = {
     "@context": "https://schema.org",

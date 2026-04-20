@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-17T11:10:00.000Z",
+  "updated_at": "2026-04-20T00:00:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -39,10 +39,7 @@
         "（ユーザー作業）GSC UI で sitemap 再送信、カバレッジレポートの『修正をリクエスト』",
         "28 日後に target_metric delta を measure"
       ],
-      "pending_user_actions": [
-        "GSC UI で sitemap.xml を再送信",
-        "GSC カバレッジレポートの 404 / 5xx / soft404 カテゴリで『修正をリクエスト』"
-      ],
+      "pending_user_actions": [],
       "next_check_date": "2026-04-28",
       "history": [
         {
@@ -64,6 +61,11 @@
           "date": "2026-04-17T11:10:00.000Z",
           "action": "imported_to_experiments",
           "summary": "既存の GSC 改善作業を /nsm-experiment 仕組みに取り込み、以後は measure/close で PDCA を閉じる運用に移行"
+        },
+        {
+          "date": "2026-04-20T00:00:00.000Z",
+          "action": "pending_actions_completed",
+          "summary": "GSC UI 手動作業 2 件（sitemap.xml 再送信 / カバレッジ『修正をリクエスト』）をユーザーが完了。4/28 の FINAL 観測を待つ状態に移行"
         }
       ]
     }

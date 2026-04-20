@@ -1,4 +1,4 @@
-import { StatsDataFormValues } from "../schemas/stats-data-form.schema";
+import type { StatsDataFormValues } from "../schemas/stats-data-form.schema";
 
 /**
  * フォームデータからURLパラメータを構築

@@ -2,32 +2,47 @@
  * ミニタイルグリッドSVG生成（サーバーサイド専用）
  *
  * 47都道府県のタイルグリッドを軽量SVG文字列として生成する。
- * D3の interpolate* 関数を動的解決し、DB登録済みの全カラースキームに対応する。
+ * DB に登録された色スキームを named import で解決する（d3 barrel 回避）。
  */
 
-import * as d3 from "d3";
+import {
+  interpolateBlues,
+  interpolateGreens,
+  interpolateOranges,
+  interpolatePiYG,
+  interpolatePurples,
+  interpolateRdBu,
+  interpolateRdYlBu,
+  interpolateRdYlGn,
+  interpolateReds,
+} from "d3-scale-chromatic";
 
 import { TILE_GRID_LAYOUT } from "../d3/constants/tile-grid-layout";
-import { resolveColorInterpolator } from "../d3/utils/color-scale/create-color-schemes";
+
+const INTERPOLATORS: Record<string, (t: number) => string> = {
+  interpolateBlues,
+  interpolateGreens,
+  interpolateOranges,
+  interpolatePiYG,
+  interpolatePurples,
+  interpolateRdBu,
+  interpolateRdYlBu,
+  interpolateRdYlGn,
+  interpolateReds,
+};
 
 const NO_DATA_COLOR = "#e5e7eb";
 
-// ─── SVG 生成 ───────────────────────────────────────────────────
-
 /**
  * ミニタイルグリッドSVGを生成
- *
- * @param data - 47都道府県の値データ（areaCode: "01000"形式）
- * @param colorScheme - D3カラースキーム名（省略時: interpolateBlues）
- * @param isReversed - カラースケールを反転するか
- * @returns SVG文字列
  */
 export function generateMiniTileSvg(
   data: Array<{ areaCode: string; value: number }>,
   colorScheme?: string,
   isReversed?: boolean,
 ): string {
-  const interpolator = resolveColorInterpolator(d3, colorScheme ?? "interpolateBlues");
+  const interpolator =
+    INTERPOLATORS[colorScheme ?? "interpolateBlues"] ?? INTERPOLATORS.interpolateBlues;
 
   // areaCode "01000" → prefCode 1
   const valueMap = new Map<number, number>();

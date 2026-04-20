@@ -1,13 +1,44 @@
-import * as Icons from "lucide-react";
+import {
+  Building2,
+  Construction,
+  Droplets,
+  Factory,
+  Globe,
+  GraduationCap,
+  Home,
+  Hospital,
+  MapPin,
+  PieChart,
+  Plane,
+  ShieldCheck,
+  Sprout,
+  Store,
+  TrendingUp,
+  Users,
+  Wifi,
+  type LucideIcon,
+} from "lucide-react";
 
-import type { LucideIcon } from "lucide-react";
+const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
+  Building2,
+  Construction,
+  Droplets,
+  Factory,
+  Globe,
+  GraduationCap,
+  Home,
+  Hospital,
+  MapPin,
+  PieChart,
+  Plane,
+  ShieldCheck,
+  Sprout,
+  Store,
+  TrendingUp,
+  Users,
+  Wifi,
+};
 
-/**
- * アイコン名からLucideアイコンコンポーネントを取得
- *
- * @param name - アイコン名（例: "Users", "Briefcase"）
- * @returns アイコンコンポーネント。見つからない場合はMapPin
- */
 export function getIcon(name: string): LucideIcon {
-  return (Icons[name as keyof typeof Icons] as LucideIcon) ?? Icons.MapPin;
+  return CATEGORY_ICON_MAP[name] ?? MapPin;
 }

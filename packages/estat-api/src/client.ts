@@ -17,7 +17,7 @@ export type {
     EstatMetaInfoResponse,
     MetaInfoCacheDataR2, TableInfo as MetaTableInfo, ParsedMetaInfo, SaveEstatMetaInfoInput, SavedEstatMetaInfo, TableInfo, TimeAxisInfo
 } from "./meta-info/types";
-export * from "./stats-data/schemas/stats-data-form.schema";
+export type { StatsDataFormValues } from "./stats-data/schemas/stats-data-form.schema";
 export type {
     DataNote,
     EstatStatsDataResponse,
