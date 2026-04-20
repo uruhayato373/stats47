@@ -1,8 +1,13 @@
 import path from "path";
+import bundleAnalyzer from "@next/bundle-analyzer";
 import { config } from "dotenv";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import type { NextConfig } from "next";
 import webpack from "webpack";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 // モノレポルートの .env.local を明示ロード（アプリ内 .env.local 不要）
 config({ path: path.resolve(__dirname, "../../.env.local") });
@@ -354,4 +359,4 @@ const nextConfig: NextConfig = {
   // turbopack設定は不要（webpackを使用するため）
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
