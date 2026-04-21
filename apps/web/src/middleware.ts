@@ -7,6 +7,7 @@ import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
+import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 
 /**
@@ -152,17 +153,20 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // --- /tag/{tagKey} への直接アクセスのうち廃止済みを 410 Gone ---
-  // - 日本語 tagKey（現行は英語 slug のみ有効）
-  // - GONE_TAG_KEYS に登録済みの廃止英語 slug
-  // 該当しない英語 tagKey は /tag/[tagKey] ルートに渡され、DB 照合後 notFound() で 404 を返す可能性がある。
-  // 繰り返し GSC に 404 が出る slug はその都度 GONE_TAG_KEYS に追加する。
+  // --- Fix 9: /tag/{tagKey} 直接アクセスのうち廃止済み or 未登録を 410 Gone ---
+  // 判定順:
+  //   1. 日本語 tagKey（現行は英語 slug のみ有効）→ 410
+  //   2. GONE_TAG_KEYS に登録済みの廃止英語 slug → 410
+  //   3. KNOWN_TAG_KEYS に存在しない英語 slug → 410（DB に無いタグは notFound になるため事前に 410 化）
+  // KNOWN_TAG_KEYS は git commit された静的 Set（tags テーブル全件）。Ranking Fix 6 と同じ allowlist 設計。
+  // page.tsx は触らない（SSG は従来どおり）。
   {
-    const directTagMatch = pathname.match(/^\/tag\/(.+)$/);
+    const directTagMatch = pathname.match(/^\/tag\/([^/]+)\/?$/);
     if (directTagMatch) {
       const tagKey = decodeURIComponent(directTagMatch[1]);
       if (/[^\x00-\x7F]/.test(tagKey)) return gone();
       if (GONE_TAG_KEYS.has(tagKey)) return gone();
+      if (!KNOWN_TAG_KEYS.has(tagKey)) return gone();
     }
   }
 
