@@ -6,13 +6,17 @@ export const alt = "地域の特徴";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// ISR 7 日: OGP 画像は 47 都道府県 × 表示機会が限定的。Satori レンダリングは CPU 重いため長期キャッシュで Workers CPU ms を削減。
+export const revalidate = 604800;
+
 export default async function OGImage({
     params,
 }: {
     params: Promise<{ areaCode: string }>;
 }) {
     const { areaCode } = await params;
-    const profile = await getAreaProfileAction(areaCode);
+    // ビルド時 D1 未接続でも失敗させない（ISR で後から再生成）
+    const profile = await getAreaProfileAction(areaCode).catch(() => null);
 
     const areaName = profile?.areaName ?? "地域の特徴";
     const topStrengths = (profile?.strengths ?? []).slice(0, 3);

@@ -1,4 +1,6 @@
-export const dynamic = "force-dynamic";
+// ISR 24h: 港湾統計は年次データのため頻繁な更新は不要。
+// force-dynamic を避けることで毎リクエストの ports + portStatistics 全行スキャンを削減。
+export const revalidate = 86400;
 
 import Link from "next/link";
 
@@ -23,7 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PortsPage() {
-  const { ports, years } = await loadPortData();
+  // ビルド時に D1 が利用できない場合は空データでレンダリング、ISR で再生成する
+  const { ports, years } = await loadPortData().catch(() => ({ ports: [], years: [] }));
 
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
