@@ -49,13 +49,36 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - 例: 「DB レコード数」→ better-sqlite3 で直接 COUNT する
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
-5. `docs/03_レビュー/critical/{対象名}_批判的レビュー.md` に保存
-6. 保存先のパスを報告
+5. GitHub Issue を作成。テンプレは `.github/ISSUE_TEMPLATE/critical-review.md` に準拠:
+   ```bash
+   # 本文を /tmp/critical-review-body.md に書き出し後:
+   gh issue create \
+     --title "[Critical Review] {対象名}" \
+     --label "critical-review" \
+     --body-file /tmp/critical-review-body.md
+   ```
+6. 作成した Issue 番号と URL を報告
 
 ## 出力先
 
-`docs/03_レビュー/critical/{対象名}_批判的レビュー.md`
+GitHub Issue（`[Critical Review] {対象名}` タイトル、`critical-review` ラベル）。
+
+本文には以下の順でセクションを含める（テンプレ準拠）:
+- 対象（関連ドキュメントのリンク）
+- Status（Draft / Published / Decided / Archived）
+- Executive Summary（総評）
+- 検証観点（前提 / 代替案 / 実行可能性 / リスク / 機会費用）
+- 処方箋 / 決定事項（個別批判と処方箋を対で記載）
+- 観測 / 次アクション（チェックボックス）
+- 関連 Issue（#番号参照）
+
+## Issue ラベル
+
+- `critical-review` — 本スキルが作成する Issue のラベル
+- weekly-plan / weekly-review / pre-mortem / 各改善施策 Issue からクロスリファレンスされる
 
 ## 参照
 
-- `docs/03_レビュー/critical/` — 過去のレビュー（トーンやフォーマットの参考）
+- `gh issue list --label critical-review --state all` — 過去のレビュー（トーンやフォーマットの参考）
+- `gh issue list --label critical-review --state open` — 意思決定待ちのレビュー
+- `.github/ISSUE_TEMPLATE/critical-review.md` — Issue テンプレ

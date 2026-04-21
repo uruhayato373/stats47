@@ -98,10 +98,6 @@ MLIT zip ダウンロード → /tmp/ に保存
 プロパティマッピングは `packages/gis/src/mlit-ksj/property-map.ts` に追加。
 参照: https://nlftp.mlit.go.jp/ksj/gml/codelist/shape_property_table2.xlsx
 
-## 計画書
-
-詳細な全体計画は `docs/90_課題管理/mlit-ksj-gis-integration.md` を参照。
-
 ## 留意事項
 
 - 非商用データも取得するが、公開時はライセンスを確認すること

@@ -146,22 +146,24 @@ CWV の 3 指標（LCP, CLS, INP）を評価する:
 
 ### 保存先
 
-```
-docs/03_レビュー/performance/YYYY-MM.md
+GitHub Issue として作成する。テンプレは `.github/ISSUE_TEMPLATE/performance-report.md` に準拠。
+
+```bash
+# 本文を /tmp/performance-report-body.md に書き出し後:
+gh issue create \
+  --title "[Performance Report] YYYY-MM" \
+  --label "performance-report" \
+  --body-file /tmp/performance-report-body.md
 ```
 
-ディレクトリが存在しない場合は作成する。
+作成後、Issue 番号と URL を報告する。関連する Core Web Vitals 系の施策 Issue や、同月の weekly-review Issue は本文の「関連 Issue」セクションに `#番号` で参照する。
 
-### 出力フォーマット
+### 出力フォーマット（Issue 本文）
 
 ```markdown
----
-title: パフォーマンスレポート
-date: "YYYY-MM-DD"
-period: "YYYY-MM-DD ~ YYYY-MM-DD"
----
-
-# パフォーマンスレポート（YYYY年MM月）
+## 対象月
+- **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
+- **計測元**: `.claude/skills/analytics/performance-improvement/snapshots/`
 
 ## エグゼクティブサマリー
 
@@ -221,6 +223,10 @@ period: "YYYY-MM-DD ~ YYYY-MM-DD"
 - 注視すべきページ
 - 改善後の再測定予定
 - ベースライン数値
+
+## 関連 Issue
+
+<!-- CWV 系の施策 Issue、同月の weekly-review、バジェット違反 Issue 等を #番号で列挙 -->
 ```
 
 ## 注意事項
@@ -236,6 +242,11 @@ period: "YYYY-MM-DD ~ YYYY-MM-DD"
 - **四半期**: 長期トレンド（`--period 3m --compare`）
 - **SEO 監査時**: `/seo-audit` の CWV セクションのデータソースとして利用
 
+## Issue ラベル
+
+- `performance-report` — 本スキルが作成する Issue のラベル
+- パフォーマンス改善施策の Issue（Tier 別）からクロスリファレンスされる
+
 ## 参照
 
 - `.claude/skills/analytics/lighthouse-audit/SKILL.md` — PSI 測定・DB 蓄積
@@ -243,7 +254,8 @@ period: "YYYY-MM-DD ~ YYYY-MM-DD"
 - `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
-- `docs/03_レビュー/performance/` — 過去のレポート
+- `gh issue list --label performance-report --state all` — 過去のレポート
+- `.github/ISSUE_TEMPLATE/performance-report.md` — Issue テンプレ
 
 ## DB パス
 

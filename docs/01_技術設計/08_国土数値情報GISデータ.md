@@ -4,7 +4,6 @@
 
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
-- **計画書**: `docs/90_課題管理/mlit-ksj-gis-integration.md`
 
 ## 使い方
 

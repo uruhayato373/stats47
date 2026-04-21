@@ -169,7 +169,7 @@ abandoned  abandoned  running (re-measure)
 
 ## 担当外
 
-- **NSM 定義の変更**: `docs/03_レビュー/critical/north-star-metric.md` の更新は `/north-star-metric` スキルの担当
+- **NSM 定義の変更**: `[Critical Review] North Star Metric` Issue（`critical-review` ラベル）の更新は `/north-star-metric` スキルの担当
 - **コンテンツそのものの編集**: blog-editor / theme-enhancer 配下のスキルが担当
 - **週次レポート生成**: `/weekly-review` の担当（本スキルは experiments-state を提供するのみ）
 
@@ -184,7 +184,7 @@ abandoned  abandoned  running (re-measure)
 | **`.claude/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
 | **`references/playbook.md`** | 実験パターンカタログ |
 | **`references/rubric.md`** | 優先順位評価軸 |
-| **`references/definition.md`** | NSM 定義（詳細は `docs/03_レビュー/critical/north-star-metric.md` 参照） |
+| **`references/definition.md`** | NSM 定義（詳細は `[Critical Review] North Star Metric` Issue を参照） |
 
 ## 使い方の例
 
@@ -214,6 +214,6 @@ abandoned  abandoned  running (re-measure)
 - `references/definition.md` — NSM 定義と目標値のサマリ
 - `references/playbook.md` — 実験パターンカタログ
 - `references/rubric.md` — 優先順位評価軸
-- `docs/03_レビュー/critical/north-star-metric.md` — NSM の完全な定義
+- `[Critical Review] North Star Metric` Issue（`critical-review` ラベル） — NSM の完全な定義。`gh issue list --label critical-review --search "North Star Metric"` で検索
 - `.claude/scripts/lib/experiments-state.mjs` — state 実装
 - `.claude/scripts/lib/metrics-reader.mjs` — 計測実装
