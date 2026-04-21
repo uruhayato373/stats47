@@ -49,6 +49,14 @@
         "/Users/minamidaisuke/stats47"
       ],
       "env": {}
+    },
+    "cloudflare-observability": {
+      "type": "sse",
+      "url": "https://observability.mcp.cloudflare.com/sse"
+    },
+    "cloudflare-graphql": {
+      "type": "sse",
+      "url": "https://graphql.mcp.cloudflare.com/sse"
     }
   }
 }
