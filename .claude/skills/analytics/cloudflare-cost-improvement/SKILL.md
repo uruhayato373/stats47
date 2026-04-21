@@ -1,36 +1,39 @@
 ---
 name: cloudflare-cost-improvement
-description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を追跡し、budget 超過を検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
+description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を GitHub Issues で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
 ---
 
-Cloudflare の月次コスト・リソース使用量を **時系列で追跡**し、打った施策と効果を記録するスキル。
+Cloudflare の月次コスト・リソース使用量を **GitHub Issues で時系列追跡**し、打った施策と効果を記録するスキル。
 
 Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日請求）。施策効果の測定は「デプロイから 14 日以上経過した観測値」で判定する。
 
-## 用途
+## データの保管場所
 
-- 月次請求額と主要メトリクスを継続的に記録したい
-- budget（無料枠・警告・エラー閾値）を超過した指標を検知したい
-- 打った施策（ISR 追加、キャッシュ調整等）の効果を測定したい
-- 次に着手すべき改善候補を参照したい
-- Cloudflare 請求書を受領したら数値をスナップショットとして残したい
+| データ | 保管先 | 理由 |
+|---|---|---|
+| 生メトリクス・請求書 snapshot | git: `reference/weekly-snapshots/YYYY-Www.json` | immutable、diff 比較、オフライン可 |
+| budget しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
+| 施策（1 施策 1 Issue） | GitHub Issues ラベル `cost-improvement` | タイムライン・PR リンク・通知・検索 |
+| 月次スナップショット（議論用） | GitHub Issues ラベル `cost-snapshot` | 施策 Issue との相互参照、Web UI |
+| 観測値の時系列・効果判定 | 各施策 Issue へのコメント + `effect/*` ラベル切替 | 自然なスレッド構造 |
 
-## 管理ファイル
+## ラベル体系
 
-- **`reference/improvement-log.md`** — メイン成果物（Baseline / Action Log / Observation Log / Next Actions）
-- **`reference/budgets.json`** — メトリクス別の budget（無料枠・警告・エラー閾値）
-- **`reference/weekly-snapshots/YYYY-Www.json`** — 月次（または臨時）スナップショット
+- **分類**: `cost-improvement` / `cost-snapshot`
+- **Tier**: `tier-1`（即効）/ `tier-2`（戦略）/ `tier-3`（要調査）
+- **対象メトリクス**: `metric/d1-read` / `metric/d1-write` / `metric/d1-storage` / `metric/cpu-ms` / `metric/r2` / `metric/requests`
+- **効果判定**: `effect/pending` → `effect/full` / `effect/partial` / `effect/none` / `effect/adverse`
 
 ## 引数
 
 ```
 $ARGUMENTS — [mode]
              mode:
-               - status  (デフォルト) : improvement-log.md を読んで現状を要約
-               - observe : 最新メトリクスをスナップショットとして記録 + budget 判定
-               - action  : 新しい施策を Action Log に追加
-               - next    : Next Actions から次の候補を提示
-               - invoice : 請求書 PDF から月次スナップショットを作成
+               - status  (デフォルト) : 直近スナップショット + 進行中施策を要約
+               - observe : 新 snapshot 作成 + budget 判定 + 施策効果追記
+               - action  : 新しい施策 Issue を作成
+               - next    : 次に着手すべき改善候補を提示
+               - invoice : 請求書 PDF から snapshot Issue を作成
 ```
 
 ## 手順
@@ -39,157 +42,190 @@ $ARGUMENTS — [mode]
 
 Cloudflare メトリクス取得の優先順:
 
-1. **Cloudflare Observability MCP** (`cloudflare-observability`) — Workers logs / analytics 取得に利用
-2. **Cloudflare GraphQL MCP** (`cloudflare-graphql`) — より柔軟な分析クエリ（D1 query-level, Workers by route）
-3. **Cloudflare Dashboard（ユーザー手動共有）** — MCP 未接続時のフォールバック。ユーザーにスクショ or CSV 提供を依頼
-4. **月次請求書 PDF** — `~/Downloads/*.pdf` 内。`invoice` モードで処理
-
-MCP 接続状況の確認:
-- `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` の 2 つが登録済み
-- 初回利用時はブラウザで OAuth 認可が必要
-- 接続失敗時は手動データ提供を促す
+1. **Cloudflare Observability MCP** (`cloudflare-observability`) — Workers logs / analytics
+2. **Cloudflare GraphQL MCP** (`cloudflare-graphql`) — 柔軟な分析クエリ
+3. **Cloudflare Dashboard（ユーザー手動共有）** — MCP 未接続時
+4. **月次請求書 PDF** — `~/Downloads/*.pdf` 内、`invoice` モードで処理
 
 ### Step 2: mode 別の処理
 
 #### mode = status（デフォルト）
 
 ```
-reference/improvement-log.md を Read し、以下を要約:
-- 最新スナップショット（3.1 月次メトリクス履歴の最終行）
-- 現在進行中の施策（Action Log で実測効果が PENDING のもの）
-- budget 超過中のメトリクス
-- 次に観測すべき日付（Next Actions の監視タスク）
+以下を並列に実行して要約:
+1. reference/weekly-snapshots/ 配下の最新 YYYY-Www.json を Read
+2. gh issue list --label cost-snapshot --state open --limit 3 で直近スナップショット Issue
+3. gh issue list --label cost-improvement --state open で進行中施策一覧
+4. gh issue list --label "effect/pending" で効果測定待ちの施策
+5. gh issue list --label "effect/adverse" で逆効果検出済み（あれば警告強調）
+
+出力:
+- 最新 snapshot の合計額 + budget 超過メトリクス
+- 進行中施策を「デプロイ日 - 経過日数 - ターゲット - effect ラベル」形式で列挙
+- 次観測予定日（最も近いもの）
 ```
 
 #### mode = observe
 
 ```
 1. データ取得:
-   a. MCP 利用可能なら cloudflare-graphql で月次メトリクス取得
-      （clause: "zone/accounts analytics for last N days"）
-   b. MCP 未接続ならユーザーに Dashboard Analytics のスクショ or CSV を依頼
-   c. 請求書到着後なら invoice モードを案内
+   a. cloudflare-graphql MCP で月次メトリクス（D1 rows read/written、CPU ms、storage、requests）
+   b. MCP 未接続ならユーザーに Dashboard スクショ or CSV を依頼
+   c. 請求書が手元にあるなら invoice モードへ誘導
 
-2. 必須メトリクス:
-   - d1_rows_read (月次合計)
-   - d1_rows_written
-   - d1_storage_gb (最新値 = GB-month)
-   - workers_cpu_ms (月次合計)
-   - workers_requests_standard
-
-3. reference/weekly-snapshots/YYYY-Www.json に保存:
+2. reference/weekly-snapshots/YYYY-Www.json として JSON 保存:
    - 命名: ISO Week（2026-W20 等）
-   - period_start / period_end を明記
-   - source: "Cloudflare GraphQL API via MCP" or "manual entry from dashboard"
+   - source: "Cloudflare GraphQL API via MCP" or "manual entry"
+   - period_start / period_end 必須
 
-4. budgets.json としきい値比較:
+3. budgets.json 判定:
    - warning_threshold <= 値 < error_threshold → WARNING
    - 値 >= error_threshold → ERROR
    - alerts 配列に記録
 
-5. improvement-log.md 更新:
-   - 3.1 月次メトリクス履歴 に 1 行追記
-   - 施策効果サマリの自動計算（gsc-improvement Step 2.observe.7 と同じロジック）:
-     * 経過日数 < 14 → PENDING
-     * 経過日数 >= 14 かつ |実測/想定| >= 80% → FULL_EFFECT ✅
-     * 20% <= ... < 80% → PARTIAL_EFFECT ⚠️
-     * < 20% → NO_EFFECT ❌
-     * 逆方向 → ADVERSE 🚨
-   - Action Log 各施策の「実測効果」テーブルにも同じ行を追記
+4. snapshot Issue 作成 or 更新:
+   gh issue create --label cost-snapshot --title "[Cost Snapshot] YYYY-MM (...)" \
+     --body "<template 埋め>"
+   前月比セクションに前月 snapshot Issue の数値を引き算して記載
+
+5. 進行中施策 Issue の効果判定（最重要）:
+   gh issue list --label cost-improvement --label "effect/pending" で対象取得。
+   各 Issue に対して:
+   - 経過日数 = observe 実行日 - デプロイ日
+   - 実測 delta = 最新値 - デプロイ時点の値（前月 snapshot から読む）
+   - 判定:
+     * 経過 < 14 日 → effect/pending 維持
+     * 経過 ≥ 14 かつ |実測/想定| ≥ 80% → effect/full
+     * 経過 ≥ 14 かつ 20-80% → effect/partial
+     * 経過 ≥ 14 かつ < 20% → effect/none
+     * 逆方向 → effect/adverse
+   - 判定結果を施策 Issue にコメントとして追記:
+     ```
+     ## 📊 効果観測 (YYYY-MM-DD)
+     - 経過日数: N 日
+     - snapshot: #XX (参照)
+     - 想定 delta: -50%
+     - 実測 delta: -42%
+     - 判定: **effect/partial** ⚠️
+     ```
+   - ラベル差し替え: gh issue edit $ISSUE --remove-label "effect/pending" --add-label "effect/XXX"
 
 6. 出力:
    - budget 超過アラートを先頭で強調
-   - 判定変化（PENDING → FULL/PARTIAL 等）をハイライト
-   - ADVERSE があれば注意喚起
+   - 判定変化（pending → full/partial/none/adverse）した施策をハイライト
+   - adverse があれば注意喚起
 ```
 
 #### mode = action
 
 ```
 1. 必須フィールド確認（欠落時は追加質問）:
-   - **施策 ID**: `T{Tier}-{Category}-{連番}`
-     - Tier: T1（即効）/ T2（戦略）/ T3（要調査）
-     - Category: D1READ / D1WRITE / D1STORAGE / CPUMS / REQUESTS / R2 / CACHE など
-   - **ターゲット指標**: d1_rows_read / workers_cpu_ms など
-   - **想定効果値**: 削減率 or 絶対値 delta
-   - **デプロイ日**: YYYY-MM-DD
-   - **PR / コミット hash**
-   - **変更内容サマリ**
-   - **変更ファイルリスト**
+   - 施策 ID: `T{Tier}-{Category}-{連番}` 形式
+     - Tier: T1 / T2 / T3
+     - Category: D1READ / D1WRITE / D1STORAGE / CPUMS / REQUESTS / R2 / CACHE
+   - ターゲット指標（複数可）
+   - 想定効果値（デプロイ前に明文化、後付けバイアス防止）
+   - デプロイ日 / PR 番号 / コミット hash
+   - 変更内容サマリ / 変更ファイル
 
-2. improvement-log.md の Action Log に追加（gsc-improvement と同じフォーマット）
+2. .github/ISSUE_TEMPLATE/cost-improvement.md を雛形として gh issue create 実行:
+   gh issue create \
+     --title "[T{Tier}-{Cat}-{NN}] 施策名" \
+     --label "cost-improvement,tier-{N},metric/{kind},effect/pending" \
+     --body "<template 埋め>"
 
-3. 「実測効果」テーブル初期化（observe で自動追記される）
+3. 作成した Issue 番号を返す。
+   snapshot Issue に「アクティブな施策」として追記（gh issue edit --body）。
+
+4. 次の観測日（デプロイ + 14 / 28 日、次回請求日）を計算して提示
 ```
 
 #### mode = next
 
 ```
-improvement-log.md の Next Actions セクションから優先度上位 3 件を提示。
-Tier 順（Tier 1 → 2 → 3）で消化する原則。
+gh issue list --label cost-improvement --state open の中で effect/pending を除いた
+（=未着手提案）枠 + 現状分析から次の改善候補を提示。
+
+優先度: tier-1 > tier-2 > tier-3
+同 tier 内は想定効果額の大きい順。
 ```
 
 #### mode = invoice
 
 ```
 1. 引数で PDF パス指定、または ~/Downloads/*.pdf の最新から自動検出
-2. PDF を Read（Read tool は PDF 対応）
-3. 以下を抽出:
-   - Invoice number / Date of issue / Date due
-   - Period（Mar 15 – Apr 14, 2026 のような表記）
+2. PDF を Read で開き以下を抽出:
+   - Invoice number / Date of issue
+   - Period (Mar 15 – Apr 14, 2026 等)
    - 各 line item の Qty（超過量）と Amount
-   - Total / Tax rate / Total in JPY（Tax Addendum ページ）
-4. weekly-snapshots/YYYY-Www.json として保存:
-   - source: "Cloudflare invoice IN-XXXXXX"
-   - period_start / period_end
-   - metrics 各項目に billable_overage と billable_amount_usd を記録
-   - cost_summary に subtotal / tax / total / exchange_rate_jpy
-5. budget 判定 + improvement-log.md に 1 行追記
-6. 請求額・超過指標をユーザーに報告
+   - Total / Tax / Total JPY（Tax Addendum ページ）
+3. reference/weekly-snapshots/YYYY-Www.json として git 保存
+4. budgets.json 判定
+5. .github/ISSUE_TEMPLATE/cost-snapshot.md を雛形として snapshot Issue 作成:
+   gh issue create \
+     --title "[Cost Snapshot] YYYY-MM (Invoice IN-XXXXXXXX)" \
+     --label "cost-snapshot" \
+     --body "<metrics + budget 判定 + 前月比 + アラート>"
+6. 前月 snapshot Issue を gh issue view で取得し「前月比」セクションを埋める
+7. Step 2-observe-5 と同じ施策効果判定を実行
+8. 合計額・超過指標をユーザーに報告
 ```
 
 ### Step 3: 共通ルール
 
-- **ログは append-only** — 過去エントリは改変しない
-- **日付は絶対日付**（`2026-05-05`）。「今月」「先月」は使わない
-- **数値はソース明示** — "invoice IN-62466340" or "Cloudflare GraphQL API at 2026-04-21"
-- **施策は 1 PR 1 ID** — 複数目的の PR は分割
-- **想定効果値はデプロイ前に明記** — 後付けバイアス防止
-- **月次請求到着時は必ず invoice モード実行** — 14 日の集計ギャップがあるため、この記録を起点に判定
+- **Issue は append-only** — 編集ではなくコメント追記で履歴を残す
+- **weekly-snapshots/*.json も append-only** — 過去の JSON は改変しない
+- **日付は絶対日付** — 「今月」「先月」は使わない
+- **数値はソース明示** — "invoice IN-62466340" or "GraphQL API at 2026-04-21 JST"
+- **施策は 1 PR 1 Issue** — 複数目的の PR は分割
+- **想定効果値はデプロイ前に Issue 本文に書く** — 後付けバイアス防止
+- **月次請求到着時は必ず invoice モード実行** — この記録を起点に効果判定
 
-## MCP の使い方（参考）
+## GitHub Issues 参照パターン
 
-### observability MCP で Workers logs / analytics を取得
+```bash
+# 直近スナップショット
+gh issue list --label cost-snapshot --state all --limit 6
 
-Claude 内で自然文で呼び出し可能:
-- 「過去 24h の Workers errors を取得」→ `mcp__cloudflare-observability__workers_logs_search` 等
-- 「特定 route の CPU time を取得」→ analytics クエリ
+# 効果測定待ちの施策
+gh issue list --label cost-improvement --label "effect/pending"
 
-### graphql MCP で詳細メトリクス
+# 逆効果検出済み（要対処）
+gh issue list --label "effect/adverse"
 
-Cloudflare GraphQL Analytics API を直接叩ける。D1 query レベルの分析にも対応:
-- 「月次の d1AnalyticsAdaptive の集計を取得」
-- 「workersInvocationsAdaptive by scriptName」
+# 特定カテゴリの施策
+gh issue list --label "metric/d1-read"
 
-### 初回利用時の OAuth
-
+# クロージング済みを含む Tier 1 施策
+gh issue list --label tier-1 --state all
 ```
-ブラウザで https://dash.cloudflare.com にログイン済みであること
-MCP 接続時に Cloudflare の認可画面が開く → Allow
-成功すると Claude が MCP ツールを呼べるようになる
-```
+
+## MCP の使い方
+
+### observability MCP（Workers logs / analytics）
+- 「過去 24h の Workers errors」→ `mcp__cloudflare-observability__workers_logs_search` 等
+- 「route 別 CPU time」→ analytics クエリ
+
+### graphql MCP（GraphQL Analytics API）
+- 月次 d1AnalyticsAdaptive 集計
+- workersInvocationsAdaptive by scriptName
+- D1 query-level の rows read 分析
+
+初回利用時は Cloudflare の OAuth 認可画面が開く（ブラウザで Allow）。
 
 ## 関連スキル
 
-- `/performance-improvement` — PSI / Lighthouse（速度系）の改善ログ
-- `/gsc-improvement` — GSC（SEO 系）の改善ログ
-- `/ga4-improvement` — GA4（行動分析）の改善ログ
-- `/knowledge` — 恒久的な学び（本 skill は進行中、knowledge は確定した学び）
-- `/sync-remote-d1` — ローカル D1 → 本番 D1 の push
-- `/r2-du` — R2 ディスク使用量
+- `/performance-improvement` — PSI / Lighthouse（速度系）
+- `/gsc-improvement` — GSC（SEO 系）
+- `/ga4-improvement` — GA4（行動分析）
+- `/knowledge` — 恒久的な学び
+- `/sync-remote-d1` — D1 push
+- `/r2-du` — R2 使用量
 
 ## 前提
 
-- `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` が登録済み
-- Cloudflare アカウントへのブラウザログイン済み（OAuth 認可用）
-- `reference/budgets.json` / `reference/improvement-log.md` が初期化済み
+- `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` 登録済
+- Cloudflare アカウントへのブラウザログイン済（OAuth 認可用）
+- `.github/ISSUE_TEMPLATE/cost-improvement.md` と `cost-snapshot.md` が存在
+- ラベル体系（`cost-improvement` / `cost-snapshot` / `tier-1/2/3` / `metric/*` / `effect/*`）が作成済
+- `reference/budgets.json` / `reference/weekly-snapshots/` 初期化済
