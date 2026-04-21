@@ -130,7 +130,9 @@
       "Bash(xargs -I {} sh -c 'echo \"$\\(wc -c < \"{}\"\\) {}\"')",
       "Bash(gh pr create --base develop --head feature/w17-tracking-psi --title 'perf\\(web\\): homepage First Load JS 614KB → 358KB \\(-42%\\) + W17 tracking' --body ' *)",
       "Bash(claude mcp *)",
-      "Bash(gh pr *)"
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(gh label *)"
     ],
     "defaultMode": "bypassPermissions"
   }
