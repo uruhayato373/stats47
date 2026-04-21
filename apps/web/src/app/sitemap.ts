@@ -12,6 +12,8 @@ import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 
 import type { MetadataRoute } from "next";
 
+// ISR 24h キャッシュ: Googlebot の sitemap.xml 取得のたびに D1 全テーブルスキャンが走るのを防ぐ
+export const revalidate = 86400;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 
