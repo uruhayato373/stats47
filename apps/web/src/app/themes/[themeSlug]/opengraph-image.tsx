@@ -6,6 +6,14 @@ export const alt = "テーマダッシュボード";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// ISR 30 日: テーマ OGP は ALL_THEMES 設定のみを参照し内容が変わらない。最長キャッシュで Workers CPU ms を削減。
+export const revalidate = 2592000;
+
+// ALL_THEMES にある全テーマを静的生成（DB 依存なし）
+export function generateStaticParams() {
+  return ALL_THEMES.map((t) => ({ themeSlug: t.themeKey }));
+}
+
 export default async function OGImage({
   params,
 }: {
