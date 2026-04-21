@@ -240,8 +240,11 @@ node .claude/scripts/youtube/analytics.js demographics 28
 
 ### 分析レポート
 
-- 離脱分析レポート: `docs/03_レビュー/youtube_retention_analysis_20260319.md`
-- 動画候補選定: `docs/03_レビュー/youtube_video_candidates_20260320.md`
+過去の YouTube 実験・レビュー Issue は以下で参照できる:
+
+```bash
+gh issue list --label youtube-experiment --state all
+```
 
 ## 参照
 

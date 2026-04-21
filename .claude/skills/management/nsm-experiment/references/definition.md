@@ -1,6 +1,6 @@
 # NSM 定義と計測指標（サマリ）
 
-`/nsm-experiment` および関連スキル（`/weekly-plan`, `/weekly-review`）が参照する **NSM の計測側の実装サマリ**。戦略的な定義の真実源は `docs/03_レビュー/critical/north-star-metric.md`。本ファイルはそれを計測実装と繋ぐリファレンス。
+`/nsm-experiment` および関連スキル（`/weekly-plan`, `/weekly-review`）が参照する **NSM の計測側の実装サマリ**。戦略的な定義の真実源は `[Critical Review] North Star Metric` Issue（`critical-review` ラベル、`gh issue list --label critical-review --search "North Star Metric"` で検索）。本ファイルはそれを計測実装と繋ぐリファレンス。
 
 **progressive disclosure**: 本ファイルは必要時のみ skill から読み込まれる。
 
@@ -15,7 +15,7 @@
 | **定義** | GA4 の `engagedSessions` 全チャネル合計（週次） |
 | **実装** | `.claude/scripts/lib/metrics-reader.mjs` の `ga4.total.thisEngagedSessions` |
 | **3 ヶ月目標** | 週 2,000 セッション |
-| **判断根拠** | `docs/03_レビュー/critical/north-star-metric.md` §North Star Metric |
+| **判断根拠** | `[Critical Review] North Star Metric` Issue §North Star Metric |
 
 ### 採用理由
 
@@ -95,7 +95,7 @@ NSM（週間エンゲージドセッション数）
 
 ## 関連ドキュメント
 
-- `docs/03_レビュー/critical/north-star-metric.md` — NSM の完全な定義（戦略側の真実源）
-- `docs/03_レビュー/critical/growth-loops.md` — 成長ループ設計
+- `[Critical Review] North Star Metric` Issue（`critical-review` ラベル） — NSM の完全な定義（戦略側の真実源）
+- `[Critical Review] Growth Loops` Issue（`critical-review` ラベル） — 成長ループ設計
 - `.claude/skills/management/nsm-experiment/references/playbook.md` — 実験パターンカタログ
 - `.claude/skills/management/nsm-experiment/references/rubric.md` — 優先順位評価軸
