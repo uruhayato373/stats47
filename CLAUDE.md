@@ -40,7 +40,7 @@ packages/
 | 実装計画・課題・アイデア | `docs/90_課題管理/` |
 | 各 feature の設計 | 各 `apps/*/src/features/*/README.md` |
 | GSC/GA4 の週次メトリクス snapshot と改善施策記録 | `.claude/skills/analytics/{gsc,ga4}-improvement/reference/` ★週次レビュー時に全件 CSV を git で積む |
-| Cloudflare 月次コスト・メトリクス snapshot と改善施策記録 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/` ★請求書到着時に `/cloudflare-cost-improvement invoice` で snapshot を積む |
+| Cloudflare 月次コスト・施策の蓄積（計測と改善） | GitHub Issues（ラベル `cost-snapshot` / `cost-improvement`）★請求書到着時に `/cloudflare-cost-improvement invoice`、snapshot と施策は Issue、生データ JSON は `.claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/` |
 | DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
 | R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
 | 国土数値情報 GIS データ（データセット一覧・パイプライン・ライセンス） | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
@@ -144,7 +144,7 @@ packages/
 | GA4 週次 snapshot (CSV) + 改善ログ | `.claude/skills/analytics/ga4-improvement/reference/` |
 | PSI / Lighthouse スコア履歴 | `.claude/skills/analytics/performance-improvement/` |
 | PSI 閾値（budgets） | `.claude/skills/analytics/performance-improvement/budgets.json` |
-| Cloudflare 月次 snapshot + 改善ログ + budget | `.claude/skills/analytics/cloudflare-cost-improvement/reference/` |
+| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（※施策・観測ログは GitHub Issues `cost-*` ラベル側） |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |
