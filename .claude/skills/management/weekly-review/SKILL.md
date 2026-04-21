@@ -97,14 +97,17 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
    ```
 
-3. GA4 snapshot 取得（全件、週次 CSV 保存）
+3. GA4 snapshot 取得 → snapshot Issue 作成
    `/fetch-ga4-data last28d snapshot <当週 YYYY-Www>` を実行する。
    保存先: `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/`
    取得ファイル: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
-   取得完了後、`/ga4-improvement observe` を実行して improvement-log.md の Observation Log に追記する。
-   前週の snapshots ディレクトリが存在すれば主要指標の増減を算出する。
+   取得完了後、`/ga4-improvement observe` を実行する。observe は以下を行う:
+   - 新しい `[GA4 Snapshot] YYYY-Www` Issue を `ga4-snapshot` ラベルで作成
+   - budgets.json で閾値判定
+   - 進行中施策 Issue（`ga4-improvement` + `effect/pending`）の経過日数 × 想定/実測 delta から効果判定し、該当 Issue にコメント追記 + ラベル差し替え
+   - 前週 snapshot Issue のクローズ判定
 
-4. GSC snapshot 取得（全件、週次 CSV 保存）
+4. GSC snapshot 取得 → snapshot Issue 作成
    `/fetch-gsc-data last28d query snapshot <当週 YYYY-Www>` を実行する。
    保存先: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
    取得ファイル: queries.csv(全件) / pages.csv(全件) / devices.csv / countries.csv / daily.csv
@@ -112,8 +115,20 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    a. `~/Downloads/stats47.jp-Coverage-YYYY-MM-DD/` を検出し、`重大な問題.csv` と `平均読み込み時間のチャート.csv` を `gcsエラー/` に mtime 比較でコピー（最新日付 1 件のみ）
    b. API で queries/pages/devices/countries/daily を取得して snapshots 配下に CSV 保存
    c. `gcsエラー/` 配下の手動エクスポート CSV があれば index-coverage.csv / index-trend.csv として同ディレクトリへコピー
-   取得完了後、`/gsc-improvement observe` を実行して improvement-log.md の Observation Log に追記する。observe はアラート閾値（登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20%）を自動判定し、超過時は備考欄に ⚠️ ALERT を付与する。
+   取得完了後、`/gsc-improvement observe` を実行する。observe は以下を行う:
+   - 新しい `[GSC Snapshot] YYYY-Www` Issue を `gsc-snapshot` ラベルで作成
+   - budgets.json で閾値判定（登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20%）
+   - 進行中施策 Issue（`gsc-improvement` + `effect/pending`）の効果判定
+   - 前週 snapshot Issue のクローズ判定
    順位 11-20 位の「あと一押し」クエリは queries.csv から抽出する。
+
+4.5. AdSense snapshot 取得 → snapshot Issue 作成
+   `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
+   `/fetch-adsense-data snapshot <当週 YYYY-Www>` を実行する。
+   保存先: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
+   取得ファイル: overview.csv / pages.csv / units.csv / devices.csv / daily.csv
+   取得完了後、`/adsense-improvement observe` を実行して `[AdSense Snapshot] YYYY-Www` Issue を作成し、進行中施策の効果判定を行う。
+   **クレデンシャル未設定時はこのステップをスキップし、レビュー本文に「AdSense OAuth 未設定」と 1 行記載する**。
 
 5. YouTube データ取得（API 呼び出し）
    `/fetch-youtube-data` スキルの手順に従い、以下を取得:
@@ -153,10 +168,11 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    GA4/GSC の詳細データは snapshot CSV と improvement-log.md に分離済みなので、レビュー本文では「主要指標の前週差 + snapshot へのリンク参照」のみに圧縮する。
 
 出力形式:
-- 「パフォーマンス概況」（overview.csv / GSC サマリー + YouTube + SNS の主要指標を 1 行で明記）
-- 「注目すべきトレンド」（流入経路の変化、上昇/下降クエリ、再生数の伸び）
+- 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
+- 「注目すべきトレンド」（流入経路の変化、上昇/下降クエリ、再生数の伸び、RPM 変化）
 - 「改善候補」（CTR が低い高表示クエリ、順位 11-20 位のクエリ — queries.csv から抽出）
-- 「snapshot 参照」（`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/YYYY-Www/` へのリンク）
+- 「snapshot 参照」（`.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` と snapshot Issue 番号）
+- 「施策効果判定」（`gh issue list --label "{gsc,ga4,adsense}-improvement" --state open` で pending → full/partial/none/adverse に変化した施策）
 ```
 
 #### Agent E: NSM 実験進捗
@@ -330,9 +346,9 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 
 ## パフォーマンス
 
-詳細データは snapshot CSV と improvement-log.md を参照（レビュー本文では主要指標の前週差のみを記載）。
+詳細データは snapshot CSV と GitHub Issues を参照（レビュー本文では主要指標の前週差と Issue 番号のみを記載）。
 
-### GA4（過去 28 日） — snapshot: `.claude/skills/analytics/ga4-improvement/reference/snapshots/YYYY-Www/`
+### GA4（過去 28 日） — snapshot CSV: `.claude/skills/analytics/ga4-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`ga4-snapshot`)
 
 | 指標 | 今週 | 前週 | 差分 |
 |---|---|---|---|
@@ -345,7 +361,7 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 - Organic Search: N → N (+N)
 - 上位ページの変化: pages.csv の Top 3 を 1 行ずつ
 
-### GSC（過去 28 日） — snapshot: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/`
+### GSC（過去 28 日） — snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`gsc-snapshot`)
 
 | 指標 | 今週 | 前週 | 差分 |
 |---|---|---|---|
@@ -366,15 +382,30 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
-**施策効果サマリ** (improvement-log.md 3.2 セクションから抽出):
+**施策効果サマリ** (`gh issue list --label gsc-improvement --state open --json number,title,labels` から抽出):
 
-| 施策ID | Tier | 経過日数 | ターゲット | 判定 |
+| Issue | Tier | 経過日数 | ターゲット | 判定 |
 |---|---|---|---|---|
 
-最新観測日の行をコピー。以下のルールで整形:
-- 判定が **先週から変化** した施策は行末に `(変化)` マークを付与（PENDING→PARTIAL_EFFECT 等）
-- ADVERSE が含まれる場合は **このセクション冒頭で警告**
-- Tier 0 で着手待ち（PENDING）の施策は下部に「待機中 Tier 0」として別枠で列挙
+observe モードがこの週に判定変化を起こした施策のみを列挙。以下のルールで整形:
+- 判定が **先週から変化** した施策は行末に `(変化)` マークを付与（pending→partial 等）
+- `effect/adverse` が含まれる場合は **このセクション冒頭で警告**
+- 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
+
+### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`adsense-snapshot`)
+
+`.env.local` に AdSense OAuth 未設定の場合は本節を省略し「AdSense OAuth 未設定」と 1 行記載。
+
+| 指標 | 今週 | 前週 | 差分 |
+|---|---|---|---|
+| Earnings | ¥N | ¥N | +¥N |
+| Page RPM | ¥N | ¥N | +¥N |
+| CTR | N% | N% | — |
+| Viewability | N% | N% | — |
+
+主要な動き:
+- 収益 Top 3 ページ（pages.csv から抽出）
+- 広告ユニット別 RPM の変化
 
 ### YouTube
 
@@ -431,17 +462,21 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 ## 参照
 
 - `docs/03_レビュー/weekly/` — 週次計画・レビューの蓄積先
-- `.claude/skills/analytics/gsc-improvement/reference/` — GSC 週次 snapshot CSV と施策記録
-- `.claude/skills/analytics/ga4-improvement/reference/` — GA4 週次 snapshot CSV と施策記録
+- `.claude/skills/analytics/gsc-improvement/reference/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
+- `.claude/skills/analytics/ga4-improvement/reference/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
+- `.claude/skills/analytics/adsense-improvement/reference/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
 - `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順（snapshot モード）
-- `.claude/skills/analytics/ga4-improvement/SKILL.md` — GA4 改善記録スキル
-- `.claude/skills/analytics/gsc-improvement/SKILL.md` — GSC 改善記録スキル
+- `.claude/skills/analytics/fetch-adsense-data/SKILL.md` — AdSense データ取得手順（snapshot モード）
+- `.claude/skills/analytics/ga4-improvement/SKILL.md` — GA4 改善記録スキル（Issues ベース）
+- `.claude/skills/analytics/gsc-improvement/SKILL.md` — GSC 改善記録スキル（Issues ベース）
+- `.claude/skills/analytics/adsense-improvement/SKILL.md` — AdSense 改善記録スキル（Issues ベース）
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画スキル（ペア運用）
 - `.claude/skills/management/knowledge/SKILL.md` — ナレッジ記録
 
 注: 2026-04-15 以降、以下は廃止:
 - `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（過去分も 2026-04-17 削除済み）
-- DB `seo_tracking` / `seo_actions` テーブル — improvement-log.md で代替
+- DB `seo_tracking` / `seo_actions` テーブル — GitHub Issues で代替
+- `.claude/skills/analytics/{gsc,ga4}-improvement/reference/improvement-log.md` — 2026-04-21 に GitHub Issues にマイグレーション済み。過去ログは `reference/archive/` に保存
