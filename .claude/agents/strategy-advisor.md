@@ -62,6 +62,5 @@
 
 ## 出力先
 
-- `docs/03_レビュー/weekly/` — 週次計画・レビュー
-- `docs/03_レビュー/` — 批判的レビュー
+- GitHub Issues — 週次計画 (`weekly-plan`) / 週次レビュー (`weekly-review`) / 批判的レビュー (`critical-review`) / Pre-Mortem (`pre-mortem`) 等
 - `.claude/projects/*/memory/` — ナレッジ記録

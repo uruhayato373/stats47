@@ -64,7 +64,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: `docs/03_レビュー/`
+**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] North Star Metric`）
 
 ### `/growth-loops`
 
@@ -91,7 +91,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: `docs/03_レビュー/`
+**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] Growth Loops`）
 
 ### `/monetization-strategy`
 
@@ -114,7 +114,7 @@
 - 低コスト検証実験の設計
 - 実装ロードマップ
 
-**保存先**: `docs/03_レビュー/`
+**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] Monetization Strategy`）
 
 ### `/weekly-plan`, `/weekly-review`
 
@@ -123,17 +123,17 @@
 - `/weekly-review`: 4つのサブエージェントで実績データを並列収集し、計画との差分を分析
 - `/weekly-plan`: 4つのサブエージェントでコンテキスト収集 → 戦略分析 → セルフ批判レビュー → 計画出力
 
-**保存先**: `docs/03_レビュー/weekly/`
+**保存先**: GitHub Issue（`weekly-review` / `weekly-plan` ラベル、タイトル `[Weekly Review] YYYY-Www` / `[Weekly Plan] YYYY-Www`）
 
 ### `/critical-review`
 
 設計書・計画書に対して連続起業家・プロ PM 視点で批判的レビューを実施。
 
 ```
-/critical-review docs/90_課題管理/xxx.md
+/critical-review <対象>  # GitHub Issue 番号 / スキル名 / PR 番号 等
 ```
 
-**保存先**: `docs/03_レビュー/`
+**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] {対象名}`）
 
 ### `/knowledge`
 
@@ -145,3 +145,18 @@
 ```
 
 **保存先**: `.claude/skills/management/knowledge/` 内
+
+## 出力先の Issue ラベル早見表
+
+Management 系スキルの出力はすべて GitHub Issues に統一されている。過去分は `gh issue list --label <ラベル> --state all` で参照できる。
+
+| スキル | 出力タイトル | ラベル |
+|---|---|---|
+| `/weekly-plan` | `[Weekly Plan] YYYY-Www` | `weekly-plan` |
+| `/weekly-review` | `[Weekly Review] YYYY-Www` | `weekly-review` |
+| `/critical-review` | `[Critical Review] {対象名}` | `critical-review` |
+| `/north-star-metric` | `[Critical Review] North Star Metric` | `critical-review` |
+| `/growth-loops` | `[Critical Review] Growth Loops` | `critical-review` |
+| `/monetization-strategy` | `[Critical Review] Monetization Strategy` | `critical-review` |
+| `/pre-mortem` | `[Pre-Mortem] YYYY-MM` | `pre-mortem` |
+| `/performance-report` | `[Performance Report] YYYY-MM-DD` | `performance-report` |

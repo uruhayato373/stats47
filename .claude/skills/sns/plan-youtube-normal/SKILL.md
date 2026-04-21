@@ -115,5 +115,5 @@ const videos = await youtube.videos.list({ id: videoIds, part: 'snippet,statisti
 ## 参照
 
 - 動画制作: `/publish-youtube-normal`
-- 競合分析レポート: `docs/03_レビュー/youtube_regular_video_strategy_20260325.md`
+- 競合分析・YouTube 実験レポート: `gh issue list --label youtube-experiment --state all`
 - YouTube データ取得: `/fetch-youtube-data`

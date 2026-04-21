@@ -132,7 +132,8 @@
       "Bash(claude mcp *)",
       "Bash(gh pr *)",
       "Bash(gh issue *)",
-      "Bash(gh label *)"
+      "Bash(gh label *)",
+      "Bash(python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\(f'Total: {len\\(data\\)} Issues'\\); [print\\(f\\\\\"  #{i['number']} [{i['state']}] {i['title']}\\\\\"\\) for i in data]\")"
     ],
     "defaultMode": "bypassPermissions"
   }

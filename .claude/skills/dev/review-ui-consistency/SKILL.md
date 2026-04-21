@@ -223,8 +223,15 @@ Phase 1 の結果をページ種別ごとに整理する。
 - 全パネリストが同じ結論を出してはならない。意見の対立・矛盾を恐れない
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
 - CLAUDE.md の UI コンポーネント規約・レスポンシブ規約を基準とする
-- 出力は `docs/03_レビュー/critical/ui_consistency_レビュー.md` に保存する
-- 保存先のパスを報告する
+- 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] ui-consistency / YYYY-MM-DD`）として作成する:
+  ```bash
+  # 本文を /tmp/review-ui-consistency-body.md に書き出し後:
+  gh issue create \
+    --title "[Dev Review] ui-consistency / YYYY-MM-DD" \
+    --label "dev-review" \
+    --body-file /tmp/review-ui-consistency-body.md
+  ```
+- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
 
 ## 関連スキル
 
