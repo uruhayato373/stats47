@@ -1,173 +1,209 @@
 ---
 name: gsc-improvement
-description: Google Search Console のインデックス問題（404/ソフト404/5xx/クロール予算）を継続的に追跡・改善する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gcsエラー/ CSV files. 各カテゴリのベースライン→対応履歴→観測ログ→次アクションを reference/improvement-log.md で管理.
+description: Google Search Console の検索パフォーマンスとインデックス問題を GitHub Issues で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
 ---
 
-Google Search Console（GSC）のインデックス系問題を**時系列で追跡**し、打った施策と効果を記録するスキル。
+GSC の週次メトリクス（Clicks / Impressions / CTR / Position / Index Coverage）を **GitHub Issues で時系列追跡**し、打った施策と効果を記録するスキル。
 
-施策の効果は 2〜4 週間遅延するため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を忘れないように improvement-log.md で管理する。
+検索パフォーマンスとインデックス状態の効果は 2〜4 週間遅延するため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を Issue に記録する。
 
-## 用途
+## データの保管場所
 
-- GSC から最新の「ページインデックス登録」レポートを取得して件数を記録したい
-- Phase ごとに打った対応（middleware 修正、noindex 追加、sitemap 削減 等）を履歴として残したい
-- 2〜4 週間後の効果測定で「どの施策が効いたか」を判断したい
-- 次に着手すべき Tier を参照したい
-- 新しい Claude Code セッションで過去の経緯を即座に把握したい
+| データ | 保管先 | 理由 |
+|---|---|---|
+| 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
+| 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
+| 施策（1 施策 1 Issue） | GitHub Issues ラベル `gsc-improvement` | タイムライン・PR リンク・通知・検索 |
+| 週次スナップショット（議論用） | GitHub Issues ラベル `gsc-snapshot` | 施策 Issue との相互参照、Web UI |
+| 観測値の時系列・効果判定 | 各施策 Issue へのコメント + `effect/*` ラベル切替 | 自然なスレッド構造 |
 
-## 管理ファイル
+## ラベル体系
 
-**`reference/improvement-log.md`** — この skill のメイン成果物。以下の 4 セクションで構成される:
-
-1. **Baseline** — 最初に記録した GSC の状態（全カテゴリの件数スナップショット）
-2. **Action Log** — Phase ごとに実施した対応の一覧（変更ファイル / コミット / デプロイ日）
-3. **Observation Log** — 日付付きの観測スナップショット + 気づき（1 行でも OK）
-4. **Next Actions** — 未着手の Tier / 判断待ち項目
+- **分類**: `gsc-improvement` / `gsc-snapshot`
+- **Tier**: `tier-1`（即効）/ `tier-2`（戦略）/ `tier-3`（要調査）
+- **対象メトリクス**: `metric/gsc-clicks` / `metric/gsc-impressions` / `metric/gsc-ctr` / `metric/gsc-position` / `metric/gsc-index-coverage`
+- **効果判定**: `effect/pending` → `effect/full` / `effect/partial` / `effect/none` / `effect/adverse`
 
 ## 引数
 
 ```
 $ARGUMENTS — [mode]
              mode:
-               - status  (デフォルト) : improvement-log.md を読んで現状を要約する
-               - observe : 最新の gcsエラー/ CSV または GSC の数値を Observation Log に追記する
-               - action  : 新しい対応を実施したので Action Log にエントリ追加する
-               - next    : Next Actions セクションから次に着手すべき候補を提示する
+               - status  (デフォルト) : 直近スナップショット + 進行中施策を要約
+               - observe : 新 snapshot Issue 作成 + 目標判定 + 施策効果追記
+               - action  : 新しい施策 Issue を作成
+               - next    : 次に着手すべき改善候補を提示
 ```
 
 ## 手順
 
 ### Step 1: データソースの特定
 
-ユーザーから最新 GSC データが共有される形は複数ある:
+GSC メトリクス取得の優先順:
 
-1. **`reference/snapshots/<YYYY-Www>/` ディレクトリ** — `/fetch-gsc-data snapshot <YYYY-Www>` が保存した週次 CSV
-   - `queries.csv` / `pages.csv` / `devices.csv` / `countries.csv` / `daily.csv` — API 経由の全件データ
-   - `index-coverage.csv` — 手動エクスポート（`gcsエラー/重大な問題.csv` のコピー）
-   - `index-trend.csv` — 手動エクスポート（`gcsエラー/平均読み込み時間のチャート.csv` のコピー）
-2. **`gcsエラー/` ディレクトリ** (プロジェクトルート) — GSC 画面から手動エクスポートした CSV の置き場（snapshot モード実行時に上記 snapshots 配下へコピーされる）
-   - `重大な問題.csv` — 各カテゴリの件数（集計）
-   - `重大ではない問題.csv` — 補助カテゴリ
-   - `平均読み込み時間のチャート.csv` — 登録済み vs 未登録の日次トレンド
-   - `表.csv` — URL 単位のサンプル（GSC レポート画面右上「エクスポート」から取得）
-3. **`/fetch-gsc-data` ad hoc モード** — 一時的な深掘り分析用
-4. **Cloudflare Workers Logs** — 5xx 発生の URL pattern 特定用
+1. **`/fetch-gsc-data` スキル** — API 経由で `reference/snapshots/YYYY-Www/` に CSV を保存
+2. **`reference/snapshots/` 配下の既存 CSV** — 既に取得済みの週次データ
+3. **GSC 画面からの手動エクスポート** — API で取れない index-coverage 詳細等
 
 ### Step 2: mode 別の処理
 
 #### mode = status（デフォルト）
 
 ```
-reference/improvement-log.md を Read し、以下を要約して返す:
-- 最新 Observation 日付と数値
-- Phase 1/2/... の完了状況
-- 次に提示すべき Next Action 候補（最大 3 件）
-- reference/snapshots/ 配下の最新 YYYY-Www ディレクトリから queries.csv 上位 5 件と index-coverage.csv サマリーを添える（存在すれば）
+以下を並列に実行して要約:
+1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
+2. gh issue list --label gsc-snapshot --state open --limit 3 で直近スナップショット Issue
+3. gh issue list --label gsc-improvement --state open で進行中施策一覧
+4. gh issue list --label gsc-improvement --label "effect/pending" で効果測定待ちの施策
+5. gh issue list --label gsc-improvement --label "effect/adverse" で逆効果検出済み（あれば警告強調）
+
+出力:
+- 最新 snapshot の主要指標 + 目標超過メトリクス
+- 進行中施策を「デプロイ日 - 経過日数 - ターゲット - effect ラベル」形式で列挙
+- 次観測予定日（最も近いもの）
 ```
 
 #### mode = observe
 
 ```
-1. データソースを以下の優先順で探索:
-   a. reference/snapshots/ 配下で最も新しい YYYY-Www ディレクトリ → index-coverage.csv を Read
-   b. a. が無ければ gcsエラー/ 配下の手動エクスポート CSV を Read
-   c. どちらも無ければユーザーに「最新の数値を提供してください」と促す
-2. 件数を抽出（必須カラム、欠損時は (未取得) と明記）:
-   404 / 5xx / ソフト 404 / クロール済み未登録 / 検出未登録 / リダイレクト / 登録済み / 未登録
-3. 同じディレクトリの queries.csv / pages.csv からも主要指標（合計クリック、合計表示、平均順位）を抽出
-4. Observation Log の 3.1 カテゴリ指標表 に 1 行追記。備考欄には以下のラベルを付与:
-   - **MID**: 直近の Action Log エントリから 14 日未満（SEO 効果未到達期間）→ 小幅悪化も異常扱いしない
-   - **FINAL**: 14 日以上経過し効果が測定可能 → 施策の成否判定に使える
-5. アラート閾値を前週 Observation と比較して判定（超過時は備考に ⚠️ ALERT 付与）:
-   - 登録済みページ ≤ -10% → 緊急（Cloudflare / sitemap / noindex 確認）
-   - 404 ≥ +5% → Tier 1 施策検討（middleware 410 追加等）
-   - 5xx ≥ +20% → Workers Logs で pattern 特定
-6. Baseline または直前の Observation との差分を要約して返す
-   例: 404 が 5,661 → 5,120 で -541 改善、Organic クリック +300
-7. **施策効果サマリの自動追記（必須）**:
-   Action Log の全施策エントリ（見出しが `### [T{Tier}-{Cat}-{NN}]` で始まるもの）を走査し、各施策について以下を計算:
-   - `経過日数 = observe 実行日 - 施策のデプロイ日`
-   - `実測 delta = 最新観測値 - 施策デプロイ時点値`（ターゲット指標ごとに計算。デプロイ時点値は Baseline or デプロイ直前の Observation）
-   - 判定ロジック:
-     - 経過日数 < 14 → `PENDING`
-     - 経過日数 ≥ 14 かつ `|実測 delta| / |想定 delta の中央値|` ≥ 80% → `FULL_EFFECT ✅`
-     - 経過日数 ≥ 14 かつ 20% ≤ `|実測 delta| / |想定 delta の中央値|` < 80% → `PARTIAL_EFFECT ⚠️`
-     - 経過日数 ≥ 14 かつ `|実測 delta| / |想定 delta の中央値|` < 20% → `NO_EFFECT ❌`
-     - 経過日数 ≥ 14 かつ 実測 delta が想定と逆方向 → `ADVERSE 🚨`
-   - Observation Log の 3.2 施策効果サマリ テーブルに 1 行追記:
-     `| 観測日 | 施策ID | Tier | 経過日数 | ターゲット | 想定 delta | 実測 delta | 判定 |`
-   - 各施策の「実測効果」テーブル（Action Log 内）にも同じ行を追記
-8. ターミナル出力:
-   - 今回判定が変化した施策（PENDING → FULL/PARTIAL/NO/ADVERSE）をハイライト
-   - ADVERSE がある場合は注意喚起のサマリ
+1. データ取得:
+   a. /fetch-gsc-data snapshot <YYYY-Www> を呼び reference/snapshots/YYYY-Www/ に CSV 保存
+   b. 既に存在するなら既存 CSV を読む
+   c. 手動エクスポートが必要な index-coverage 詳細はユーザーに依頼
+
+2. 主要指標を抽出:
+   - queries.csv: 合計 clicks / impressions / ctr / position
+   - pages.csv: 合計 + 上位 10 ページ
+   - daily.csv: 日次トレンド
+   - index-coverage.csv: 登録済み / 除外理由別件数
+   - devices.csv, countries.csv: 参考
+
+3. budgets.json 判定:
+   - warning_threshold <= 値 < error_threshold → WARNING
+   - 値 >= error_threshold → ERROR
+   - alerts 配列に記録
+
+4. 前週 snapshot Issue を取得して前週比を計算:
+   gh issue list --label gsc-snapshot --state all --limit 2 --json number,title,body
+
+5. snapshot Issue 作成:
+   gh issue create --label gsc-snapshot --title "[GSC Snapshot] YYYY-Www" \
+     --body "<template 埋め>"
+   前週比セクションに前週 snapshot Issue の数値を引き算して記載
+
+6. 進行中施策 Issue の効果判定（最重要）:
+   gh issue list --label gsc-improvement --label "effect/pending" で対象取得。
+   各 Issue に対して:
+   - 経過日数 = observe 実行日 - デプロイ日
+   - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
+   - 判定:
+     * 経過 < 14 日 → effect/pending 維持
+     * 経過 ≥ 14 かつ |実測/想定| ≥ 80% → effect/full
+     * 経過 ≥ 14 かつ 20-80% → effect/partial
+     * 経過 ≥ 14 かつ < 20% → effect/none
+     * 逆方向 → effect/adverse
+   - 判定結果を施策 Issue にコメントとして追記:
+     ```
+     ## 📊 効果観測 (YYYY-MM-DD)
+     - 経過日数: N 日
+     - snapshot: #XX (参照)
+     - 想定 delta: CTR +1.5pt
+     - 実測 delta: CTR +1.2pt
+     - 判定: **effect/partial** ⚠️
+     ```
+   - ラベル差し替え: gh issue edit $ISSUE --remove-label "effect/pending" --add-label "effect/XXX"
+
+7. 前週 snapshot Issue のクローズ判定:
+   - 前週 Issue 本体の「次のアクション」が全て完了 or 関連施策 Issue が全て effect/pending を脱している
+     → gh issue close <prev-number> --comment "次週 snapshot #NNN で継続追跡"
+   - 未完了アクションがある場合は open のまま残す
+
+8. 出力:
+   - 目標超過アラートを先頭で強調
+   - 判定変化（pending → full/partial/none/adverse）した施策をハイライト
+   - adverse があれば注意喚起
 ```
 
 #### mode = action
 
 ```
-1. ユーザーから以下の必須フィールドを確認（欠落があれば追加質問）:
-   - **施策 ID**: `T{Tier}-{Category}-{連番}` 形式
-     - Tier: T0 (URL 空間整理) / T1 (technical SEO) / T2 (コンテンツ品質) / T3 (外部シグナル)
-     - Category: MW / SRC / CRAWL / CF / 404 / 5xx / RDR / CANON / CONTENT / SNS など
-     - 連番: 同一 Tier-Category 内で 01, 02, ...
-   - **ターゲット指標**: 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / リダイレクト / 登録済み のいずれか（複数可）
-   - **想定効果値**: 指標ごとの delta 値（例: `404: -200~-500`、範囲指定を推奨）
-   - **デプロイ日**: YYYY-MM-DD
-   - **コミット hash**: `git log` から取得（手動デプロイ時は `—`）
-   - **変更内容サマリ**: 何をしたか
-   - **変更ファイルリスト**: git diff --name-only の結果
-2. improvement-log.md の Action Log に以下の形式で追加:
-   ```
-   ### [施策ID] 施策名
-   
-   **施策 ID**: `T1-XXX-01`
-   **Tier**: T1
-   **デプロイ日**: 2026-MM-DD
-   **コミット**: `abcdef12`
-   **ターゲット指標**: XXX
-   **想定効果値**: XXX: -N ~ -M
-   **観測予定日**: {デプロイ日+14d} (MID), {デプロイ日+28d} (FINAL)
-   **実測効果** (observe で自動追記):
-   | 観測日 | 経過日数 | {指標} delta | 判定 |
-   |---|---|---|---|
-   
-   #### 変更内容
-   - ...
-   ```
-3. 追加後、施策の重要ポイントを 1 行で要約して返す
-```
+1. 必須フィールド確認（欠落時は追加質問）:
+   - 施策 ID: `T{Tier}-{Category}-{連番}` 形式
+     - Tier: T1 / T2 / T3
+     - Category: CTR / IMPRESSIONS / POSITION / INDEX / TITLE / DESCRIPTION / INTERNAL-LINK / SITEMAP / SCHEMA / CONTENT
+   - ターゲット指標（複数可）
+   - 対象ページ / クエリ
+   - 想定効果値（デプロイ前に明文化、後付けバイアス防止）
+   - デプロイ日 / PR 番号 / コミット hash
+   - 変更内容サマリ / 変更ファイル
 
-**施策追加ルール**:
-- 1 施策 1 ID。複数目的が混在する場合は分割する
-- デプロイ前に想定効果値を明文化（後付けの後方バイアスを防ぐ）
-- Tier 0 を Tier 1 より必ず先に消化する
-- Tier 2/3 は Tier 0-1 が落ち着くまで着手しない
+2. .github/ISSUE_TEMPLATE/gsc-improvement.md を雛形として gh issue create 実行:
+   gh issue create \
+     --title "[T{Tier}-{Cat}-{NN}] 施策名" \
+     --label "gsc-improvement,tier-{N},metric/gsc-{kind},effect/pending" \
+     --body "<template 埋め>"
+
+3. 作成した Issue 番号を返す。
+   最新 snapshot Issue に「アクティブな施策」として追記（gh issue edit --body）。
+
+4. 次の観測日（デプロイ + 14 / 28 日）を計算して提示
+```
 
 #### mode = next
 
 ```
-improvement-log.md の Next Actions セクションを Read し、優先度上位 3 件を提示。
-Tier 区分（Tier 1=即効、Tier 2=戦略、Tier 3=要調査）に従う。
+gh issue list --label gsc-improvement --state open --json number,title,labels の中で
+effect/pending を除いた（=未着手提案）枠 + 現状分析から次の改善候補を提示。
+
+優先度: tier-1 > tier-2 > tier-3
+同 tier 内は想定効果の大きい順。
+
+未着手候補が不足する場合は、最新 snapshot の「次のアクション」セクションからも候補を抽出。
 ```
 
 ### Step 3: 共通ルール
 
-- **ログは append-only** — 過去のエントリは改変しない（履歴性を保つ）
-- **日付は必ず絶対日付** (`2026-04-14` 形式)。相対日付（「先週」「昨日」）は使わない
-- **数値は必ずソース明示** — 「GSC 2026-04-15 取得 / `reference/snapshots/2026-W16/index-coverage.csv`」等
-- **施策とコミット hash をペアで残す** — 後から原因特定できるように
-- **長文レビューは月 1 回まで** — 週次は 1 行追記のみで十分。更新コストを抑える
-- **snapshot ディレクトリは improvement-log.md と一緒にコミット**する — PR レビューで施策 → 数値変化が一目で追えるように
+- **Issue は append-only** — 編集ではなくコメント追記で履歴を残す
+- **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
+- **日付は絶対日付** — 「今週」「先週」は使わない
+- **数値はソース明示** — "snapshot #XX" or "snapshots/2026-W17/queries.csv"
+- **施策は 1 PR 1 Issue** — 複数目的の PR は分割
+- **想定効果値はデプロイ前に Issue 本文に書く** — 後付けバイアス防止
+- **週次 /weekly-review から observe モードが自動呼び出し** される想定
+
+## GitHub Issues 参照パターン
+
+```bash
+# 直近スナップショット
+gh issue list --label gsc-snapshot --state all --limit 6
+
+# 効果測定待ちの施策
+gh issue list --label gsc-improvement --label "effect/pending"
+
+# 逆効果検出済み（要対処）
+gh issue list --label gsc-improvement --label "effect/adverse"
+
+# 特定メトリクスの施策
+gh issue list --label "metric/gsc-ctr"
+
+# クロージング済みを含む Tier 1 施策
+gh issue list --label gsc-improvement --label tier-1 --state all
+```
 
 ## 関連スキル
 
 - `/fetch-gsc-data` — GSC API から生データを取得（本 skill の入力ソース）
-- `/seo-audit` — サイト全体の SEO 監査（本 skill と連動して原因分析）
+- `/ga4-improvement` — GA4（行動分析）
+- `/adsense-improvement` — AdSense（収益）
+- `/cloudflare-cost-improvement` — Cloudflare コスト
+- `/seo-audit` — サイト全体の SEO 監査
 - `/performance-report` — Lighthouse + Core Web Vitals 監査
-- `/knowledge` — 恒久的な教訓を記録（本 skill は「進行中」、knowledge は「確定した学び」）
+- `/knowledge` — 恒久的な教訓を記録
 
 ## 前提
 
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` が存在する（初回起動時に作成済み）
-- GSC のプロパティ: `sc-domain:stats47.jp`
+- `.github/ISSUE_TEMPLATE/gsc-snapshot.md` と `gsc-improvement.md` が存在
+- ラベル体系（`gsc-improvement` / `gsc-snapshot` / `tier-1/2/3` / `metric/gsc-*` / `effect/*`）が作成済
+- `reference/budgets.json` / `reference/snapshots/` 初期化済
+- GSC プロパティ: `sc-domain:stats47.jp`
 - 本番 URL: `https://stats47.jp`

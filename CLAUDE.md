@@ -39,7 +39,7 @@ packages/
 | Management スキルの使い方（NSM・成長ループ・収益化・週次運用） | `.claude/skills/management/README.md` |
 | 実装計画・課題・アイデア | `docs/90_課題管理/` |
 | 各 feature の設計 | 各 `apps/*/src/features/*/README.md` |
-| GSC/GA4 の週次メトリクス snapshot と改善施策記録 | `.claude/skills/analytics/{gsc,ga4}-improvement/reference/` ★週次レビュー時に全件 CSV を git で積む |
+| GSC / GA4 / AdSense の週次 snapshot と施策の蓄積（計測と改善） | GitHub Issues（ラベル `{gsc,ga4,adsense}-snapshot` / `{gsc,ga4,adsense}-improvement`）★週次レビュー時に `/{gsc,ga4,adsense}-improvement observe`、生データ CSV は `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` |
 | Cloudflare 月次コスト・施策の蓄積（計測と改善） | GitHub Issues（ラベル `cost-snapshot` / `cost-improvement`）★請求書到着時に `/cloudflare-cost-improvement invoice`、snapshot と施策は Issue、生データ JSON は `.claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/` |
 | DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
 | R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
@@ -140,8 +140,9 @@ packages/
 
 | データ | 保存先 |
 |---|---|
-| GSC 週次 snapshot (CSV) + 改善ログ | `.claude/skills/analytics/gsc-improvement/reference/` |
-| GA4 週次 snapshot (CSV) + 改善ログ | `.claude/skills/analytics/ga4-improvement/reference/` |
+| GSC 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/gsc-improvement/reference/`（※施策・観測ログは GitHub Issues `gsc-*` ラベル側） |
+| GA4 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/ga4-improvement/reference/`（※施策・観測ログは GitHub Issues `ga4-*` ラベル側） |
+| AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/adsense-improvement/reference/`（※施策・観測ログは GitHub Issues `adsense-*` ラベル側） |
 | PSI / Lighthouse スコア履歴 | `.claude/skills/analytics/performance-improvement/` |
 | PSI 閾値（budgets） | `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（※施策・観測ログは GitHub Issues `cost-*` ラベル側） |

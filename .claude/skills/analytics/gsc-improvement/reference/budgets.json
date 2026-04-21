@@ -1,0 +1,37 @@
+{
+  "description": "GSC 週次メトリクスの目標しきい値。observe モードで判定に使う。",
+  "updated_at": "2026-04-21",
+  "thresholds": {
+    "clicks_weekly": {
+      "target": 500,
+      "warning_threshold": 300,
+      "error_threshold": 150,
+      "direction": "higher_is_better"
+    },
+    "impressions_weekly": {
+      "target": 20000,
+      "warning_threshold": 10000,
+      "error_threshold": 5000,
+      "direction": "higher_is_better"
+    },
+    "ctr_percent": {
+      "target": 3.0,
+      "warning_threshold": 2.0,
+      "error_threshold": 1.0,
+      "direction": "higher_is_better"
+    },
+    "avg_position": {
+      "target": 20,
+      "warning_threshold": 40,
+      "error_threshold": 60,
+      "direction": "lower_is_better"
+    },
+    "not_indexed_count": {
+      "target": 200,
+      "warning_threshold": 500,
+      "error_threshold": 1000,
+      "direction": "lower_is_better",
+      "note": "クロール済み未登録 + 検出未登録の合計"
+    }
+  }
+}
