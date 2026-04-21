@@ -67,8 +67,24 @@ node /tmp/sns-weekly-agg.js <monday> <sunday>
 
 ### 3. レポート生成
 
-`docs/03_レビュー/weekly/` の週次レビューファイル内に SNS パフォーマンスセクションとしてインライン出力する。
-独立ファイルとしての出力が必要な場合は `docs/03_レビュー/weekly/<YYYY-Www>-sns.md` に出力する。
+GitHub Issue に出力する（`sns-weekly-report` ラベル、タイトル `[SNS Weekly Report] YYYY-Www`）。
+
+```bash
+# 本文を /tmp/sns-weekly-report-body.md に書き出し後:
+gh issue create \
+  --title "[SNS Weekly Report] YYYY-Www" \
+  --label "sns-weekly-report" \
+  --body-file /tmp/sns-weekly-report-body.md
+```
+
+同週の `[Weekly Review] YYYY-Www` Issue が既にある場合、作成した SNS Weekly Report Issue から `#<number>` でリンクし、Weekly Review 側にも SNS レポートの Issue 番号をコメント追記して相互参照する:
+
+```bash
+# 例: Weekly Review Issue #42 に SNS レポート #50 をリンク
+gh issue comment 42 --body "SNS 週次レポート: #50"
+```
+
+過去のレポートは `gh issue list --label sns-weekly-report --state all` で参照できる。
 
 ### 4. 分析コメント
 

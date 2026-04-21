@@ -113,7 +113,28 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 
 ---
 
+## 出力先
+
+GitHub Issue に出力する（`dev-review` ラベル）。
+
+```bash
+# 本文を /tmp/review-app-body.md に書き出し後:
+gh issue create \
+  --title "[Dev Review] app / YYYY-MM-DD" \
+  --label "dev-review" \
+  --body-file /tmp/review-app-body.md
+```
+
+複数ルート指定時のタイトル例:
+- 単一ルート: `[Dev Review] app:ranking / YYYY-MM-DD`
+- 複数ルート: `[Dev Review] app:ranking+areas / YYYY-MM-DD`
+- 横断: `[Dev Review] app / YYYY-MM-DD`
+
+`gh issue list --label dev-review --state all` で過去のレビューを参照できる。
+
 ## 出力フォーマット
+
+Issue 本文に以下を含める:
 
 ````
 ## App Router レビュー: {ルート名 or "横断レビュー"}
@@ -181,5 +202,5 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - features / packages の内部品質は `/review-feature` `/review-packages` の責務。app 層は統合・公開インターフェースに集中する
-- 出力は `docs/03_レビュー/critical/app_{対象名}_レビュー.md` に保存する
-- 保存先のパスを報告する
+- 出力は GitHub Issue（`dev-review` ラベル）に作成する
+- 作成した Issue の番号・URL を報告する

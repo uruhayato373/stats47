@@ -138,5 +138,12 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - ドメイン固有パネリストは、汎用パネリストと異なる視点を提供すること（重複回避）
-- 出力は `docs/03_レビュー/critical/feature_{feature名}_レビュー.md` に保存する
-- 保存先のパスを報告する
+- 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] feature:{feature名} / YYYY-MM-DD`）として作成する:
+  ```bash
+  # 本文を /tmp/review-feature-body.md に書き出し後:
+  gh issue create \
+    --title "[Dev Review] feature:{feature名} / YYYY-MM-DD" \
+    --label "dev-review" \
+    --body-file /tmp/review-feature-body.md
+  ```
+- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる

@@ -5,7 +5,7 @@
  * 組み込むためのサマリ + 差分を計算する。`/weekly-review` スキル Phase 1 から呼ばれる。
  *
  * stats47 の NSM は「週間エンゲージドセッション数」(GA4 engagedSessions)。
- * 定義は docs/03_レビュー/critical/north-star-metric.md を参照。
+ * 定義は `[Critical Review] North Star Metric` Issue を参照（`gh issue list --label critical-review`）。
  *
  * 必要な資源:
  *   - stats47-*.json サービスアカウント鍵（リポジトリルート、gitignored）
@@ -348,7 +348,7 @@ export async function fetchWeeklyNsmMetrics() {
     notes: [
       `GSC データは 3 日遅延のため、直近期間は ${ranges.gsc.this.start} 〜 ${ranges.gsc.this.end} を採用`,
       "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
-      "NSM 定義: docs/03_レビュー/critical/north-star-metric.md",
+      "NSM 定義: [Critical Review] North Star Metric Issue (gh issue list --label critical-review)",
     ],
   };
 }

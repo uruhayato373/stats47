@@ -71,7 +71,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
-既存の週次計画（`docs/03_レビュー/weekly/`）から追跡中の KPI を確認する。
+既存の週次計画（`gh issue list --label weekly-plan --state all --limit 5`）から追跡中の KPI を確認する。
 
 ### Step 3: NSM 候補の検討
 
@@ -158,7 +158,23 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 `/weekly-plan` の「現状サマリー」テーブルに NSM と Input Metrics を追加する方法を提案。
 ```
 
-`docs/03_レビュー/critical/` に保存する。
+GitHub Issue に出力する（`critical-review` ラベル、タイトル `[Critical Review] North Star Metric`）。
+
+既存の `[Critical Review] North Star Metric` Issue が既にある場合は、それを更新する（新規作成ではなくコメント追記 or 本文編集）。初回のみ新規作成する:
+
+```bash
+# 本文を /tmp/north-star-metric-body.md に書き出し後:
+# 初回:
+gh issue create \
+  --title "[Critical Review] North Star Metric" \
+  --label "critical-review" \
+  --body-file /tmp/north-star-metric-body.md
+
+# 既存 Issue（例: #NN）に追記する場合:
+gh issue comment NN --body-file /tmp/north-star-metric-body.md
+```
+
+過去の定義変遷は `gh issue view <number> --comments` で参照できる。
 
 ## 参照
 

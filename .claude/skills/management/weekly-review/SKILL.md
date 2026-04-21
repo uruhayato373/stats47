@@ -164,8 +164,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      ```
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
-   SNS / YouTube の週次ハイライトは本レビュー本文（`docs/03_レビュー/weekly/YYYY-Www-review.md`）に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV と improvement-log.md に分離済みなので、レビュー本文では「主要指標の前週差 + snapshot へのリンク参照」のみに圧縮する。
+   SNS / YouTube の週次ハイライトは本レビュー Issue `[Weekly Review] YYYY-Www` 本文に直接記載する。
+   GA4/GSC の詳細データは snapshot CSV と improvement Issue（`gsc-improvement` / `ga4-improvement` ラベル）に分離済みなので、レビュー本文では「主要指標の前週差 + snapshot Issue 番号」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
@@ -205,11 +205,15 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ```
 調査項目:
-- docs/03_レビュー/weekly/ の当週ファイル（YYYY-Www.md）を読み込み
-  → 計画されていたタスクの一覧を抽出
+- 当週の計画 Issue を取得
+  gh issue list --label weekly-plan --state all --limit 1 --json number,title,body
+  → タイトルに当週の ISO 週番号を含む Issue を特定
+  → gh issue view <番号> で本文を取得し、計画されていたタスク（Must / Should / Could のチェックボックス）の一覧を抽出
   → git log と照合して完了/未達を判定
-- docs/90_課題管理/ 配下の変更（今週追加・削除されたファイル）
-- docs/03_レビュー/ の今週追加されたレビュー
+- 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`）
+- 今週追加された各種レビュー Issue
+  gh issue list --label critical-review --state all --search "created:>=<today-7d>" --json number,title
+  gh issue list --label pre-mortem --state all --search "created:>=<today-7d>" --json number,title
 
 出力形式:
 - 「計画タスク vs 実績」の対照表
@@ -270,26 +274,46 @@ sqlite3 "$DB" "
 
 ### Phase 4: 出力
 
-`docs/03_レビュー/weekly/YYYY-Www-review.md` に保存する。
+GitHub Issue として作成する。テンプレは `.github/ISSUE_TEMPLATE/weekly-review.md` に準拠。
+
+```bash
+# 本文を /tmp/review-body.md に書き出し後:
+gh issue create \
+  --title "[Weekly Review] YYYY-Www" \
+  --label "weekly-review" \
+  --body-file /tmp/review-body.md
+```
+
+作成後、Issue 番号を標準出力で報告する。関連する各種 snapshot Issue（GA4/GSC/AdSense）や施策 Issue は本文の「関連 Issue」セクションに `#番号` で参照を含める。
+
+### Phase 4.5: 当週の計画 Issue をクローズ
+
+レビュー Issue 作成完了後、ペアとなる同週の `[Weekly Plan] YYYY-Www` Issue をクローズする。
+
+```bash
+# 当週の計画 Issue 番号を取得（タイトルに "YYYY-Www" を含むもの）
+PLAN_NUM=$(gh issue list --label weekly-plan --state open --search "YYYY-Www in:title" --json number --jq '.[0].number')
+# レビュー Issue 番号をコメントに含めてクローズ
+gh issue close "$PLAN_NUM" --comment "対応する [Weekly Review] Issue: #<REVIEW_NUM> で振り返り完了"
+```
+
+対象 Issue が見つからない場合（稀）はスキップし、報告に明記する。
 
 ### Phase 5: 週次計画の自動生成
 
-レビューファイルの保存完了後、**自動的に `/weekly-plan` を実行**して来週の計画を生成する。
+計画 Issue のクローズ完了後、**自動的に `/weekly-plan` を実行**して来週の計画を生成する。
 
 - 対象週: レビュー対象週の翌週（例: W11 レビュー → W12 計画）
 - レビュー結果の「来週への申し送り」が計画の入力になる
 - ユーザーへの確認は不要（レビューと計画はセットで実行する）
 
-## 出力フォーマット
+## 出力フォーマット（Issue 本文）
 
 ```markdown
----
-week: "YYYY-Www"
-type: review
-generatedAt: "YYYY-MM-DD"
----
-
-# 週次レビュー YYYY-Www
+## 週
+- **ISO Week**: YYYY-Www
+- **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
+- **計画 Issue**: #NNN（[Weekly Plan] YYYY-Www）
 
 ## サマリー
 
@@ -449,22 +473,35 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 
 - 未達タスクの引き継ぎ
 - 来週注意すべきこと
-- `/weekly-plan` への入力として使用
+<!-- 来週の [Weekly Plan] Issue に引き継がれる -->
+
+## 関連 Issue
+
+<!-- GA4/GSC/AdSense snapshot Issue、施策 Issue、critical-review / pre-mortem Issue を #番号で列挙 -->
 ```
 
 ## 運用ルール
 
 - **毎週日曜〜月曜に実行**する想定（レビュー完了後に自動で `/weekly-plan` が実行される）
-- 当週の計画ファイル（`YYYY-Www.md`）が存在しない場合でも、git log ベースで実績を収集する
-- レビューファイルは蓄積する（削除しない）。傾向分析に使用
-- `/weekly-plan` の Phase 1 Agent D がこのレビューファイルを参照する
+- 当週の計画 Issue `[Weekly Plan] YYYY-Www` が存在しない場合でも、git log ベースで実績を収集する
+- レビュー Issue は蓄積する（クローズせず open のままでもよい。古い週の Issue は傾向分析に使用）
+- `/weekly-plan` の Phase 1 Agent D が前週の `[Weekly Review]` Issue を参照する
+
+## Issue ラベル
+
+- `weekly-review` — 本スキルが作成する Issue のラベル
+- `weekly-plan` — ペアの週次計画 Issue。Phase 4.5 でクローズ対象
+- `gsc-snapshot` / `ga4-snapshot` / `adsense-snapshot` — Phase 1 Agent C が observe モードで作成する snapshot Issue
+- `gsc-improvement` / `ga4-improvement` / `adsense-improvement` — 施策 Issue（effect 判定は各 observe が担当）
+- `critical-review` / `pre-mortem` — 今週追加されたレビュー Issue の検出用
 
 ## 参照
 
-- `docs/03_レビュー/weekly/` — 週次計画・レビューの蓄積先
-- `.claude/skills/analytics/gsc-improvement/reference/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
-- `.claude/skills/analytics/ga4-improvement/reference/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
-- `.claude/skills/analytics/adsense-improvement/reference/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
+- `gh issue list --label weekly-review --state all` / `gh issue list --label weekly-plan --state all` — 週次計画・レビューの蓄積先
+- `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
+- `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
+- `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
+- `.github/ISSUE_TEMPLATE/weekly-review.md` — 本スキルの Issue テンプレ
 - `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
@@ -480,3 +517,4 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 - `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（過去分も 2026-04-17 削除済み）
 - DB `seo_tracking` / `seo_actions` テーブル — GitHub Issues で代替
 - `.claude/skills/analytics/{gsc,ga4}-improvement/reference/improvement-log.md` — 2026-04-21 に GitHub Issues にマイグレーション済み。過去ログは `reference/archive/` に保存
+- 週次計画・週次レビューのマークダウン保存先 — 2026-04-21 に GitHub Issues（`weekly-plan` / `weekly-review` ラベル）へマイグレーション済み

@@ -7,11 +7,7 @@
 | `00_プロジェクト管理/` | プロジェクトの基盤文書（概要・要件・統合計画） | **ファイル追加禁止。既存ファイルの内容更新のみ。** |
 | `01_技術設計/` | システム構成・DDD 分類・ドメイン設計・フロントエンド設計 | 内容更新が中心。構成変更時のみファイル追加可 |
 | `02_実装計画/` | 実装ロードマップ・フェーズ計画 | 内容更新が中心 |
-| `03_レビュー/` | 全レビュー・振り返りの統合ディレクトリ | サブディレクトリ別に蓄積 |
-| ├ `weekly/` | 週次計画・振り返り（`/weekly-plan` `/weekly-review`） | 蓄積する（削除しない） |
-| ├ `pre-mortem/` | Pre-Mortem・対策書（`/pre-mortem`） | 四半期ごとに更新 |
-| ├ `performance/` | パフォーマンスレポート（`/performance-report`） | 月次で蓄積 |
-| └ `critical/` | 批判的レビュー・専門家レビュー・戦略評価（`/critical-review` `/expert-review` 等） | 蓄積 |
+| ~~`03_レビュー/`~~ | **廃止**（2026-04-21 移行）。週次レビュー・Pre-Mortem・パフォーマンス・批判的レビュー等は **GitHub Issues** へ（ラベル `weekly-plan` / `weekly-review` / `pre-mortem` / `performance-report` / `critical-review` 等） | — |
 | `youtube_experiments.md` | YouTube Shorts 実験ログ（`/record-youtube-experiment`） | 蓄積 |
 | `10_SNS戦略/` | SNS コンテンツ設計（X + YouTube に集中） | 内容更新が中心 |
 | `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | 蓄積 |
@@ -19,7 +15,7 @@
 | `30_note記事企画/` | note 記事の企画・戦略 | 蓄積 |
 | `31_note記事原稿/` | note 記事の下書き原稿 | 公開後 `.local/r2/note/` へ移動し削除 |
 | `80_参考資料/` | 白書 PDF 等の外部資料 | 追加のみ |
-| `90_課題管理/` | 実装計画・調査・アイデア・タスク。**実装完了後は削除する。** | 自由に追加。完了したら削除 |
+| ~~`90_課題管理/`~~ | **廃止**（2026-04 移行）。実装計画・課題・アイデアは **GitHub Issues** へ | — |
 
 ## 00_プロジェクト管理/ の固定構成
 
@@ -48,14 +44,20 @@
 
 ### 新しい機能・計画の追加先
 
-`90_課題管理/` に作成する。`00_プロジェクト管理/` には追加しない。
+**GitHub Issues** に作成する（`gh issue create --label enhancement ...`）。`00_プロジェクト管理/` や `docs/` 配下には追加しない。
+
+粒度の目安:
+- ブログ記事 / note 記事 1 本 = 1 issue（ラベル `content/blog` or `content/note`）
+- YouTube 通常動画 1 本 = 1 issue（ラベル `content/youtube-regular`）
+- YouTube Shorts は候補プール 1 issue を維持し、着手時に個別 issue 化（ラベル `content/youtube-shorts`）
+- 技術改修・DX 改善 = 1 issue（ラベル `enhancement`）
 
 ### lifecycle
 
 ```
-新規作成 → 90_課題管理/ に配置
+新規作成 → GitHub Issue
   ↓ 実装完了
-削除（コードと各パッケージの README.md が証跡）
+Issue を close（コードと各パッケージの README.md が証跡）
 ```
 
 ### docs 外のドキュメント

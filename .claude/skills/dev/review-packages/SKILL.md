@@ -163,5 +163,15 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する（テストエンジニアがパフォーマンスを語る等は NG）
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - 「all」モードでは、個別パッケージの深掘りよりも**横断的な問題の発見**を優先する
-- 出力は `docs/03_レビュー/critical/packages_{対象名}_レビュー.md` に保存する
-- 保存先のパスを報告する
+- 出力は GitHub Issue（`dev-review` ラベル）として作成する。タイトル例:
+  - 単一: `[Dev Review] packages:r2-storage / YYYY-MM-DD`
+  - 複数: `[Dev Review] packages:r2-storage+ranking / YYYY-MM-DD`
+  - 横断: `[Dev Review] packages / YYYY-MM-DD`
+  ```bash
+  # 本文を /tmp/review-packages-body.md に書き出し後:
+  gh issue create \
+    --title "[Dev Review] packages:{対象名} / YYYY-MM-DD" \
+    --label "dev-review" \
+    --body-file /tmp/review-packages-body.md
+  ```
+- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
