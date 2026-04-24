@@ -29,6 +29,8 @@ import {
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
+import { buildPersonAsAuthor } from "@/lib/structured-data/person";
+import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
 
 import type { Metadata } from "next";
@@ -152,6 +154,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     const baseUrl = getRequiredBaseUrl();
     const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+    // E-E-A-T 強化（#76）: author を Person に変更、publisher に logo 追加。
+    // frontmatter.author / reviewedBy で記事ごとの上書きも可能。
     const articleJsonLd = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -161,16 +165,23 @@ export default async function BlogPostPage({ params }: PageProps) {
         url: `${baseUrl}/blog/${slug}`,
         datePublished: article.publishedAt ?? undefined,
         dateModified: article.updatedAt ?? article.publishedAt ?? undefined,
-        author: {
-            "@type": "Organization",
-            name: "Stats47",
-            url: baseUrl,
-        },
-        publisher: {
-            "@type": "Organization",
-            name: "Stats47",
-            url: baseUrl,
-        },
+        author: article.frontmatter.author
+            ? {
+                "@type": "Person",
+                name: article.frontmatter.author,
+                url: `${baseUrl}/about`,
+            }
+            : buildPersonAsAuthor(baseUrl),
+        ...(article.frontmatter.reviewedBy
+            ? {
+                reviewedBy: {
+                    "@type": "Person",
+                    name: article.frontmatter.reviewedBy,
+                    url: `${baseUrl}/about`,
+                },
+            }
+            : {}),
+        publisher: buildPublisherOrganization(baseUrl),
     };
 
     return (
