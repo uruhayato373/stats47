@@ -45,6 +45,7 @@ import {
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
+import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
 import {
   generateRankingBreadcrumbStructuredData,
@@ -225,6 +226,12 @@ export default async function RankingKeyPage({
   //     この Server Component 内でレンダリングし ReactNode として注入する。
   //   - RankingKeyPageClient 内の Client Component（RankingHighlights 等）は
   //     Client Component 同士なので直接 import して使用している。
+  // LCP 対策（#101 EXP-003）:
+  // ランキング詳細ページの LCP 要素は Leaflet map の中心 tile。
+  // Leaflet JS 実行後に tile URL が判明すると resourceLoadDelay が 4.3s と支配的なため、
+  // 初期ビュー (日本中心・zoom 5) の 4 タイルを SSR で preload して LCP を短縮する。
+  const initialTileUrls = getInitialMapTileUrls({ theme: "light_all", retina: true });
+
   return (
     <>
       {/* 構造化データ */}
@@ -236,6 +243,15 @@ export default async function RankingKeyPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
+      {initialTileUrls.map((url, idx) => (
+        <link
+          key={url}
+          rel="preload"
+          as="image"
+          href={url}
+          fetchPriority={idx === 0 ? "high" : "auto"}
+        />
+      ))}
 
       {/* パンくずナビゲーション */}
       <div className="container mx-auto px-4 pt-4">
