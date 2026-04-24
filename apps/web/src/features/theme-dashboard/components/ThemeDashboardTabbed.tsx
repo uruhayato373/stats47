@@ -37,10 +37,10 @@ import type { RankingValue } from "@stats47/ranking";
 export function ThemeDashboardTabbed({
   themeConfig,
   indicatorDataMap,
+  topology,
   pageCharts,
   kpiDataByArea,
 }: ThemeDashboardClientProps) {
-  // topology は ThemeLeafletMap 内で client-side 取得するように変更済（#74 同パターン）
   const tabIndicators = themeConfig.tabIndicators;
   const isBelowLg = useBreakpoint("belowLg");
 
@@ -153,6 +153,7 @@ export function ThemeDashboardTabbed({
     <ThemeLeafletMap
       rankingItem={currentRankingItem}
       rankingValues={currentValues}
+      topology={topology}
       selectedPrefectureCode={selectedPrefectureCode}
       onPrefectureClick={setSelectedPrefectureCode}
       yearCode={currentYear}

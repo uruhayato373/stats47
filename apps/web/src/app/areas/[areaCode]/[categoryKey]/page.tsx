@@ -64,11 +64,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         return { title: "ページが見つかりません" };
     }
 
-    // title / description 差別化（#77 Phase 5）
-    // 47 × N カテゴリで同一テンプレートだった title に「県名」「カテゴリ」「全国ランキング」を
-    // 組み合わせて多少でも重複を減らす。
-    const title = `${profile.areaName}の${category.categoryName}データ｜47都道府県ランキング比較`;
-    const description = `${profile.areaName}の${category.categoryName}分野の統計データ一覧。全国 47 都道府県で${profile.areaName}は何位か、グラフと地図で比較できます。`;
+    const title = `${profile.areaName}の${category.categoryName}データ`;
+    const description = `${profile.areaName}の${category.categoryName}に関する統計データ。全国ランキングで比較。`;
     const indexable = INDEXABLE_CATEGORIES.has(categoryKey);
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";

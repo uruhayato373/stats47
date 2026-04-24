@@ -22,7 +22,6 @@ import type { AreaType } from "@/features/area";
 import { useTheme } from "@/hooks/useTheme";
 
 import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
-import { fetchPrefectureTopologyAction } from "../../actions/fetch-prefecture-topology";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
@@ -50,6 +49,8 @@ export interface Props {
   rankingValues: (StatsSchema | RankingValue)[];
   /** 地域タイプ */
   areaType: AreaType;
+  /** TopoJSONトポロジーデータ（都道府県）。取得失敗時は null */
+  topology: TopoJSONTopology | null;
   /** 選択中の都道府県コード */
   selectedPrefectureCode?: string | null;
   /** 都道府県クリック時のコールバック */
@@ -74,6 +75,7 @@ export function RankingMapChartClient({
   rankingItem,
   rankingValues,
   areaType,
+  topology,
   selectedPrefectureCode,
   cardFooter,
   onPrefectureClick,
@@ -132,36 +134,6 @@ export function RankingMapChartClient({
     return rankingValues.filter((item) => item.areaCode !== "00000");
   }, [rankingValues]);
 
-  // --- 都道府県 TopoJSON のクライアントフェッチ（LCP 改善、T1-PSI-LCP-01 / EXP-002）---
-  // 以前は Server Component で取得して HTML に prop として埋め込んでいたが、
-  // 1 ページあたり ~1.2MB の HTML が配信され mobile LCP が 12s になっていたため
-  // クライアント初期化時に非同期取得する方式に変更。Skeleton → 地図描画の 2 段階。
-  const [prefTopology, setPrefTopology] = useState<TopoJSONTopology | null>(null);
-  const [isPrefTopologyLoading, setIsPrefTopologyLoading] = useState(true);
-  const [prefTopologyError, setPrefTopologyError] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchPrefectureTopologyAction()
-      .then((result) => {
-        if (cancelled) return;
-        if (result) {
-          setPrefTopology(result);
-        } else {
-          setPrefTopologyError(true);
-        }
-        setIsPrefTopologyLoading(false);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setPrefTopologyError(true);
-        setIsPrefTopologyLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   // --- 市区町村 TopoJSON のオンデマンド取得・キャッシュ ---
   const [cityTopology, setCityTopology] = useState<TopoJSONTopology | null>(null);
   const [isCityTopologyLoading, startCityTopologyTransition] = useTransition();
@@ -181,12 +153,8 @@ export function RankingMapChartClient({
   }, [areaType, cityTopology, cityTopologyError]);
 
   // 現在の areaType に応じた TopoJSON を選択
-  const activeTopology = areaType === "city" ? cityTopology : prefTopology;
-  const isMapLoading =
-    (areaType === "city" && isCityTopologyLoading) ||
-    (areaType === "prefecture" && isPrefTopologyLoading);
-  const hasTopologyError =
-    areaType === "city" ? cityTopologyError : prefTopologyError;
+  const activeTopology = areaType === "city" ? cityTopology : topology;
+  const isMapLoading = areaType === "city" && isCityTopologyLoading;
 
   // 都道府県クリック時のトグル動作
   const handlePrefectureClick = useCallback((code: string) => {
@@ -202,13 +170,13 @@ export function RankingMapChartClient({
         <div className="relative w-full overflow-hidden rounded-md">
           {isMapLoading ? (
             <Skeleton className="h-[500px] w-full rounded-md" />
-          ) : activeTopology === null || hasTopologyError ? (
+          ) : activeTopology === null ? (
             <div
               className="flex items-center justify-center min-h-[200px] rounded-md bg-muted/50 text-muted-foreground text-sm"
               role="status"
               aria-live="polite"
             >
-              {areaType === "city"
+              {areaType === "city" && cityTopologyError
                 ? "市区町村の地図データを読み込めませんでした"
                 : "地図を読み込めませんでした"}
             </div>

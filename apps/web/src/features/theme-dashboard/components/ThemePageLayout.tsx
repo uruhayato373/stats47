@@ -70,6 +70,7 @@ export async function ThemePageLayout({ theme, data }: Props) {
       <ThemeDashboardClient
         themeConfig={theme}
         indicatorDataMap={data.indicatorDataMap}
+        topology={data.topology}
         pageCharts={pageCharts}
         kpiDataByArea={kpiDataByArea}
       />
