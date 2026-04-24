@@ -194,9 +194,10 @@ function SearchPageClientInner({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, isInitializing]);
 
-  if (isInitializing && !initialResults.length) {
-    return <SearchPageSkeleton />;
-  }
+  // Note: 旧実装の `if (isInitializing && !initialResults.length) return <SearchPageSkeleton />`
+  // は事実上 dead code（useSearch().isLoading は初期 false、SSR で initialResults が揃うため）
+  // かつ skeleton → 実レイアウトへの遷移で CLS を発生させるため削除した。
+  // T2-CWV-04 / #79 Phase 1B。実ロードは `isSearching` 側で handle される。
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -211,7 +212,7 @@ function SearchPageClientInner({
             defaultValue={query}
           />
 
-          <div className="mt-8">
+          <div className="mt-8 min-h-[400px]">
             {isSearching ? (
               <div className="space-y-4">
                 <Skeleton className="h-24 w-full" />
