@@ -1,5 +1,4 @@
-"use client";
-
+// Server Component — 静的コンテンツのみ（Link / SVG 描画）。Client hydration 不要でバンドル削減。
 import Link from "next/link";
 
 import { RankingThumbnail } from "../FeaturedRankings/RankingThumbnail";
