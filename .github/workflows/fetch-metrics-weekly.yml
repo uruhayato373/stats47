@@ -101,6 +101,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # working tree の変更は /tmp/metrics-publish に退避済。branch 切替前にリセット。
+          git reset --hard HEAD
+          git clean -fd
+
           git fetch origin develop
           git checkout develop
           git pull --rebase origin develop
