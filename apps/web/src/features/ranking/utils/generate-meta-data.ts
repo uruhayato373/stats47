@@ -77,16 +77,18 @@ export function generateRankingPageMetaData({
   const unit = rankingItem.unit || "";
 
   // title 差別化（T1-CANONICAL-01 / #77）
-  // 同一テンプレート title での Google 重複判定を防ぐため、1 位県名と単位付き値を含める。
+  // 同一テンプレート title での Google 重複判定を防ぐため、1 位県名と年度を含める。
+  // 「最新」「徹底比較」等の訴求語で CTR も向上狙い。
   // seoTitle が DB に明示的に設定されていればそちらを優先。
   const summary = buildRankingSummary(rankingValues, unit);
   const fallbackTitle = areaType === "city"
     ? `${itemName} 市区町村ランキング`
     : `${itemName} 都道府県別ランキング`;
+  const yearTag = displayYear ? `【${displayYear}年最新】` : "";
   const differentiatedTitle = summary?.top1Name
     ? areaType === "city"
-      ? `${itemName}ランキング｜1位 ${summary.top1Name} | 市区町村比較`
-      : `${itemName}ランキング｜1位 ${summary.top1Name} | 47都道府県比較`
+      ? `${itemName}ランキング${yearTag}1位 ${summary.top1Name}｜市区町村を徹底比較`
+      : `${itemName}ランキング${yearTag}1位 ${summary.top1Name}｜47都道府県を徹底比較`
     : fallbackTitle;
   const title = rankingItem.seoTitle ?? differentiatedTitle;
 
