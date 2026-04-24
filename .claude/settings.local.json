@@ -134,7 +134,8 @@
       "Bash(gh issue *)",
       "Bash(gh label *)",
       "Bash(python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\(f'Total: {len\\(data\\)} Issues'\\); [print\\(f\\\\\"  #{i['number']} [{i['state']}] {i['title']}\\\\\"\\) for i in data]\")",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(gh secret *)"
     ],
     "defaultMode": "bypassPermissions"
   }

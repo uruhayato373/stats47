@@ -15,7 +15,11 @@
     "r2:ges-portrait": "tsx packages/r2-storage/src/scripts/generate-portrait-videos.ts",
     "fetch-psi-audit": "node .claude/scripts/psi/fetch-psi-audit.mjs",
     "psi-audit:check": "node .claude/scripts/psi/psi-threshold-check.mjs",
-    "psi-audit:digest": "node .claude/scripts/psi/psi-update-digest.mjs"
+    "psi-audit:digest": "node .claude/scripts/psi/psi-update-digest.mjs",
+    "fetch-gsc-snapshot": "node .claude/scripts/metrics/fetch-gsc-snapshot.mjs",
+    "fetch-ga4-snapshot": "node .claude/scripts/metrics/fetch-ga4-snapshot.mjs",
+    "fetch-adsense-snapshot": "node .claude/scripts/metrics/fetch-adsense-snapshot.mjs",
+    "metrics:digest": "node .claude/scripts/metrics/update-history-csv.mjs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",
