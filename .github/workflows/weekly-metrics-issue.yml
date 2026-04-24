@@ -48,6 +48,8 @@ jobs:
 
       - name: 📝 Generate issue body
         id: body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/wm
           node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs \

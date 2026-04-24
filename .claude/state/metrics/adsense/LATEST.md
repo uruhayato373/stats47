@@ -2,12 +2,12 @@
 
 | Metric | 今週 | 前週比 |
 |---|---|---|
-| Earnings | 18.00 |  |
-| Page Views | 702 |  |
-| RPM | 25.000 | |
-| Impressions | 433 |  |
-| Clicks | 3 |  |
-| CTR | 0.69% | |
-| Viewability | 58.9% | |
+| Earnings | 32.00 |  |
+| Page Views | 965 |  |
+| RPM | 33.000 | |
+| Impressions | 551 |  |
+| Clicks | 8 |  |
+| CTR | 1.45% | |
+| Viewability | 61.5% | |
 
 履歴: [`history.csv`](./history.csv)

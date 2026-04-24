@@ -2,11 +2,11 @@
 
 | Metric | 今週 | 前週比 |
 |---|---|---|
-| Active Users | 458 ▼ |  (-33.5%) |
-| New Users | 451 ▼ |  (-33.8%) |
-| Sessions | 505 ▼ |  (-33.5%) |
-| Pageviews | 1715 ▼ |  (-20.7%) |
-| Avg Session (sec) | 155.3 ▲ | |
-| Bounce Rate | 37.23% ▲ | |
+| Active Users | 146 ▼ |  (-78.8%) |
+| New Users | 138 ▼ |  (-79.7%) |
+| Sessions | 183 ▼ |  (-75.9%) |
+| Pageviews | 839 ▼ |  (-61.2%) |
+| Avg Session (sec) | 132.9 ▼ | |
+| Bounce Rate | 27.32% ▲ | |
 
 履歴: [`history.csv`](./history.csv)
