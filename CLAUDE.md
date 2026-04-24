@@ -39,7 +39,7 @@ packages/
 | Management スキルの使い方（NSM・成長ループ・収益化・週次運用） | `.claude/skills/management/README.md` |
 | 実装計画・課題・アイデア | **GitHub Issues**（粒度: 記事 1 本・動画企画 1 本 = 1 issue。ラベル: `content/note` `content/youtube-regular` `content/youtube-shorts` `enhancement` 等。過去: `docs/90_課題管理/` は 2026-04 に Issues へ全移行して廃止） |
 | 各 feature の設計 | 各 `apps/*/src/features/*/README.md` |
-| GSC / GA4 / AdSense の週次 snapshot と施策の蓄積（計測と改善） | GitHub Issues（ラベル `{gsc,ga4,adsense}-snapshot` / `{gsc,ga4,adsense}-improvement`）★週次レビュー時に `/{gsc,ga4,adsense}-improvement observe`、生データ CSV は `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` |
+| PSI / GSC / GA4 / AdSense の計測と改善（2026-04-24 以降 GitHub Actions 化） | **[Weekly Metrics] YYYY-Www** Issue に週次集約（ラベル `weekly-metrics` / `auto-generated`）+ 施策 Issue は `{gsc,ga4,adsense,psi}-improvement` ラベルを継続使用。PSI の閾値違反時のみ `[PSI Alert] YYYY-MM-DD` Issue を日次自動起票（`psi-snapshot,auto-generated`）。生データ: `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/*.csv` + `.claude/state/metrics/{psi,gsc,ga4,adsense}/{history.csv,LATEST.md}`。★過去: 個別 `[GSC/GA4/AdSense Snapshot]` Issue と `{gsc,ga4,adsense}-snapshot` ラベルは 2026-04-24 に `[Weekly Metrics]` へ統合して廃止 |
 | Cloudflare 月次コスト・施策の蓄積（計測と改善） | GitHub Issues（ラベル `cost-snapshot` / `cost-improvement`）★請求書到着時に `/cloudflare-cost-improvement invoice`、snapshot と施策は Issue、生データ JSON は `.claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/` |
 | DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
 | R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
@@ -140,11 +140,9 @@ packages/
 
 | データ | 保存先 |
 |---|---|
-| GSC 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/gsc-improvement/reference/`（※施策・観測ログは GitHub Issues `gsc-*` ラベル側） |
-| GA4 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/ga4-improvement/reference/`（※施策・観測ログは GitHub Issues `ga4-*` ラベル側） |
-| AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/adsense-improvement/reference/`（※施策・観測ログは GitHub Issues `adsense-*` ラベル側） |
-| PSI / Lighthouse スコア履歴 | `.claude/skills/analytics/performance-improvement/` |
-| PSI 閾値（budgets） | `.claude/skills/analytics/performance-improvement/budgets.json` |
+| GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
+| GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
+| PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` 自動起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（※施策・観測ログは GitHub Issues `cost-*` ラベル側） |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
