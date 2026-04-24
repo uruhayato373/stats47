@@ -46,6 +46,7 @@ packages/
 | 国土数値情報 GIS データ（データセット一覧・パイプライン・ライセンス） | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
 | 国土交通データプラットフォーム（MCP・カタログ一覧・ツール） | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |
+| 自動化インベントリ（GitHub Actions / launchd / Claude Routine の全一覧） | `docs/01_技術設計/10_自動化インベントリ.md` ★新規追加・削除時は必ず更新 |
 | Pre-commit フック | `.husky/README.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
 | テスト構成・追加指針 | `apps/web/tests/README.md` |
