@@ -1,11 +1,11 @@
 ---
 name: update-sns-metrics
-description: browser-use CLI と YouTube API で全 SNS メトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". X/Instagram/TikTok は browser-use、YouTube は API.
+description: 各 SNS プラットフォームからメトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram/YouTube は公式 API、X/TikTok は browser-use CLI.
 disable-model-invocation: true
 argument-hint: [--platform x|instagram|youtube|tiktok|all]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。X/Instagram/TikTok は browser-use CLI、YouTube は Data API v3 を使用する。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。Instagram は Graph API v21、YouTube は Data API v3、X/TikTok は browser-use CLI を使用する。
 
 **記録先の統一原則（CLAUDE.md §記録先の統一原則）**:
 - 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）

@@ -71,6 +71,7 @@ packages/
 |---|---|---|
 | `x-strategist` | 6 | X 投稿・分析・パフォーマンス最適化 |
 | `youtube-strategist` | 7 | YouTube 企画→制作→公開→分析の全工程 |
+| `instagram-strategist` | 7 | Instagram 投稿・分析（Graph API 経由、画像/カルーセル/リール） |
 | `seo-auditor` | 5 | サイト SEO・パフォーマンス・検索最適化 |
 
 ### Tier 2: Specialist（専門）
@@ -94,9 +95,11 @@ packages/
 
 | シナリオ | エージェント連携 |
 |---|---|
-| ランキング追加→SNS一式 | data-pipeline → db-manager → x-strategist + youtube-strategist |
+| ランキング追加→SNS一式 | data-pipeline → db-manager → x-strategist + youtube-strategist + instagram-strategist |
 | トレンド→X投稿 | blog-editor(discover-trends) → x-strategist |
+| トレンド→Instagram投稿 | blog-editor(discover-trends) → sns-renderer(/render-sns-stills) → instagram-strategist(/push-r2 + /post-instagram) |
 | YouTube動画制作 | youtube-strategist → sns-renderer |
+| bar-chart-race → リール | sns-renderer(/render-bar-chart-race) → instagram-strategist(/post-instagram --type reels) |
 | トレンド→ブログ記事 | blog-editor → db-manager(/sync-articles) |
 | 週次 PDCA | strategy-advisor |
 | コード変更→デプロイ | code-reviewer → devops-runner |
