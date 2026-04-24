@@ -15,10 +15,7 @@ const TileSwitcher = dynamic(
   { ssr: false }
 );
 
-import { fetchPrefectureTopologyAction } from "@/features/ranking/actions/fetch-prefecture-topology";
-
 import { useTheme } from "@/hooks/useTheme";
-
 
 import { fetchMunicipalityDrilldownAction } from "../actions";
 
@@ -38,6 +35,7 @@ const LeafletChoroplethMap = dynamic(
 interface ThemeLeafletMapProps {
   rankingItem: RankingItem;
   rankingValues: RankingValue[];
+  topology: TopoJSONTopology | null;
   selectedPrefectureCode: string | null;
   onPrefectureClick: (code: string | null) => void;
   /** ドリルダウン時に使用する年度コード（省略時: rankingItem.latestYear.yearCode） */
@@ -49,14 +47,11 @@ interface ThemeLeafletMapProps {
  *
  * - light/dark テーマ対応
  * - 都道府県クリック → 市区町村ドリルダウン
- *
- * TopoJSON はクライアント側で fetchPrefectureTopologyAction で取得する
- * （Server Component で fetch して prop として渡すと 1.2MB HTML が発生、
- *  T1-PSI-LCP-01 / #74 と同じパターン）
  */
 export function ThemeLeafletMap({
   rankingItem,
   rankingValues,
+  topology,
   selectedPrefectureCode,
   onPrefectureClick,
   yearCode,
@@ -67,16 +62,6 @@ export function ThemeLeafletMap({
   const [currentTile, setCurrentTile] = useState(tileOptions[0]);
   // eslint-disable-next-line react-hooks/set-state-in-effect -- sync tile on theme change
   useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark, tileOptions]);
-
-  // Client fetch topology (LCP 改善)
-  const [topology, setTopology] = useState<TopoJSONTopology | null>(null);
-  useEffect(() => {
-    let cancelled = false;
-    fetchPrefectureTopologyAction()
-      .then((result) => { if (!cancelled) setTopology(result); })
-      .catch(() => { if (!cancelled) setTopology(null); });
-    return () => { cancelled = true; };
-  }, []);
 
   // RankingItem → MapVisualizationConfig 変換
   const colorConfig: MapVisualizationConfig = useMemo(() => {

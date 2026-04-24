@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-24T11:50:00.000Z",
+  "updated_at": "2026-04-25T06:35:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -92,19 +92,25 @@
         "psi_lcp_mobile_ranking_avg": 12451,
         "html_size_bytes": 1233215
       },
-      "status": "running",
+      "status": "done",
       "created_at": "2026-04-24T11:50:00.000Z",
       "started_at": "2026-04-24T11:50:00.000Z",
-      "result": null,
-      "learnings": null,
-      "closed_at": null,
+      "result": "ADVERSE",
+      "learnings": [
+        "TopoJSON (1.2MB) を Server → Client prop 伝播から Client fetch (Server Action) に変更した結果、HTML は 1,233KB → 206KB (-83%) で削減成功。しかし LCP は悪化した（/ranking/agricultural-output mobile 12,526ms → 20,326ms、/themes/local-economy 未実装 → 16,208ms）。",
+        "原因: LCP 要素が地図（Leaflet）のため、topology を非同期 fetch にすると描画タイミングが JS load + Server Action network round-trip + Leaflet hydration の合計に延びる。mobile の throttled 環境では HTML 削減のメリットより追加 network call のペナルティの方が大きい。",
+        "教訓: 「HTML 削減 = LCP 改善」は常に成り立つわけではない。LCP 要素が何か（テキスト / 画像 / SVG / 外部 fetch 必要な動的要素）を先に特定し、その要素の描画を最短化する対策を打つべき。HTML サイズは LCP 候補が HTML に入っている場合のみ効く。",
+        "次の試みの方向性: 地図を LCP 要素から外す（Server Component で大きなテキスト要素を page 上部に配置）、または単純にこのまま（12s を受け入れて、別の観点で SEO を改善）。EXP-003 として再計画する価値はあるが、時間投資対効果は低そう。"
+      ],
+      "closed_at": "2026-04-25T06:35:00.000Z",
       "actions": [
         "fetch-prefecture-topology.ts Server Action 新設 (commit 2ea10372)",
         "RankingMapChartClient を prop → useEffect fetch 化 (PR #75)",
         "RankingMapChartContainer / RankingMapChart wrapper を削除（デッドコード）",
         "PR #75 を develop + main に merge → Cloudflare Pages auto deploy",
         "デプロイ直後に curl で HTML size 検証、次の PSI cron で LCP 再計測",
-        "28 日後に target_delta を measure"
+        "28 日後に target_delta を measure",
+        "LCP 測定 4 run で悪化確認 (12,526→20,326ms)、PR #96 で revert、/areas category title と Dataset schema Person/Org 改善のみ re-apply"
       ],
       "pending_user_actions": [],
       "next_check_date": "2026-05-08",
@@ -118,6 +124,11 @@
           "date": "2026-04-24T11:50:00.000Z",
           "action": "started",
           "summary": "PR #75 を main に merge、Cloudflare Pages auto deploy 中"
+        },
+        {
+          "date": "2026-04-25T06:35:00.000Z",
+          "action": "closed",
+          "summary": "ADVERSE。TopoJSON HTML 埋込の LCP 利点が上回ったため revert。HTML -83% は実測したが LCP は 12s → 17-20s に悪化。"
         }
       ]
     }

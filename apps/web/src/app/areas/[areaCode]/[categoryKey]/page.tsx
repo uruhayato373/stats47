@@ -65,8 +65,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     // title / description 差別化（#77 Phase 5）
-    // 47 × N カテゴリで同一テンプレートだった title に「県名」「カテゴリ」「全国ランキング」を
-    // 組み合わせて多少でも重複を減らす。
+    // 47 × N カテゴリで同一テンプレートだった title に「47 都道府県ランキング比較」を
+    // 追加して GSC の duplicate canonical を回避。
     const title = `${profile.areaName}の${category.categoryName}データ｜47都道府県ランキング比較`;
     const description = `${profile.areaName}の${category.categoryName}分野の統計データ一覧。全国 47 都道府県で${profile.areaName}は何位か、グラフと地図で比較できます。`;
     const indexable = INDEXABLE_CATEGORIES.has(categoryKey);
