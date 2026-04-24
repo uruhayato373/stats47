@@ -41,7 +41,9 @@ export function AreaSelectorMap() {
   );
 
   return (
-    <div className="overflow-hidden [&_rect.pref-box]:opacity-50 [&_svg]:mt-[-16%] [&_svg]:mb-[-10%]">
+    // aspect-[5/6] = 0.833 (height/width) ≒ TileGridMap の DEFAULT_ASPECT_RATIO 1.2 の逆数
+    // SSR 時点で正しい高さを予約して CLS を防ぐ（T2-CWV-04 / #79）
+    <div className="aspect-[5/6] overflow-hidden [&_rect.pref-box]:opacity-50 [&_svg]:mt-[-16%] [&_svg]:mb-[-10%]">
       <TileGridMap
         data={mapData}
         colorConfig={colorConfig}
