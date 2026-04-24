@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-20T00:00:00.000Z",
+  "updated_at": "2026-04-24T11:50:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -66,6 +66,58 @@
           "date": "2026-04-20T00:00:00.000Z",
           "action": "pending_actions_completed",
           "summary": "GSC UI 手動作業 2 件（sitemap.xml 再送信 / カバレッジ『修正をリクエスト』）をユーザーが完了。4/28 の FINAL 観測を待つ状態に移行"
+        }
+      ]
+    },
+    {
+      "id": "EXP-002",
+      "title": "ランキング詳細の LCP 改善 — TopoJSON を client fetch 化",
+      "hypothesis": "ランキング詳細ページで Server Component が fetch した TopoJSON (1.2MB) が Client Component に prop で渡され HTML に埋め込まれていた。Client 側で Server Action 経由で非同期取得する方式に変えれば HTML サイズが -92% になり、mobile LCP が 12s → <5s に改善するはず。",
+      "target_metric": "psi_lcp_mobile_ranking_avg",
+      "target_delta": "4 週間で LCP (mobile) を /ranking/* 4 URL 平均で <5,000ms まで改善（baseline 12,451ms → -60% 以上）",
+      "rubric": {
+        "impact": 3,
+        "effort": 1,
+        "learning": 2,
+        "certainty": 3,
+        "weighted": 2.7
+      },
+      "baseline": {
+        "date": "2026-04-24",
+        "source": "PSI 初回自動計測 Issue #73",
+        "psi_lcp_future_population_2050_mobile": 12976,
+        "psi_lcp_agricultural_output_mobile": 12526,
+        "psi_lcp_annual_sunshine_mobile": 12376,
+        "psi_lcp_total_population_mobile": 11926,
+        "psi_lcp_mobile_ranking_avg": 12451,
+        "html_size_bytes": 1233215
+      },
+      "status": "running",
+      "created_at": "2026-04-24T11:50:00.000Z",
+      "started_at": "2026-04-24T11:50:00.000Z",
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [
+        "fetch-prefecture-topology.ts Server Action 新設 (commit 2ea10372)",
+        "RankingMapChartClient を prop → useEffect fetch 化 (PR #75)",
+        "RankingMapChartContainer / RankingMapChart wrapper を削除（デッドコード）",
+        "PR #75 を develop + main に merge → Cloudflare Pages auto deploy",
+        "デプロイ直後に curl で HTML size 検証、次の PSI cron で LCP 再計測",
+        "28 日後に target_delta を measure"
+      ],
+      "pending_user_actions": [],
+      "next_check_date": "2026-05-08",
+      "history": [
+        {
+          "date": "2026-04-24T11:50:00.000Z",
+          "action": "proposed",
+          "summary": "PSI 自動計測 #73 で LCP 12s 判明、RCA 完了（HTML 99.2% が TopoJSON）"
+        },
+        {
+          "date": "2026-04-24T11:50:00.000Z",
+          "action": "started",
+          "summary": "PR #75 を main に merge、Cloudflare Pages auto deploy 中"
         }
       ]
     }
