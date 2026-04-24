@@ -25,6 +25,10 @@ import {
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
+import { getRequiredBaseUrl } from "@/lib/env";
+import { buildOperatorPersonSchema } from "@/lib/structured-data/person";
+import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
+
 import type { Metadata } from "next";
 
 interface AboutSectionProps {
@@ -72,8 +76,44 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const baseUrl = getRequiredBaseUrl();
+  // E-E-A-T 構造化データ（#76 T3-EEAT-02）
+  const personSchema = buildOperatorPersonSchema(baseUrl);
+  const organizationSchema = buildOrganizationSchema(baseUrl);
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "このサイトについて | 統計で見る都道府県",
+    url: `${baseUrl}/about`,
+    mainEntity: {
+      "@type": "Person",
+      name: "KAZU",
+      url: `${baseUrl}/about`,
+    },
+    about: {
+      "@type": "Organization",
+      name: "統計で見る都道府県",
+      url: baseUrl,
+    },
+    inLanguage: "ja",
+  };
+
   return (
     <main className="px-4 py-6 md:px-6 md:py-8">
+      {/* 構造化データ: Person (運営者) / Organization / AboutPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+
       {/* ページヘッダー */}
       <div className="mb-6 md:mb-8">
         <h1 className="text-2xl font-bold mb-4">このサイトについて</h1>
