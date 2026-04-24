@@ -336,22 +336,33 @@ user-invocable: false
 
 ---
 
-## Server Component で fetch した大きなデータを Client Component に prop で渡すと HTML に JSON シリアライズされる
+## 「HTML 削減 = LCP 改善」は成り立たない — LCP 要素の特定が先
 
-**問題**: ランキング詳細 (`/ranking/[key]`) とテーマダッシュボード (`/themes/*`) で、モバイル LCP が 12 秒前後と異常値。`curl | wc -c` で本番 HTML を見ると 1.2MB、そのうち 99% が TopoJSON (`arcs` データ) だった。
+**問題**: ランキング詳細 (`/ranking/[key]`) とテーマダッシュボード (`/themes/*`) で mobile LCP が 12 秒前後。`curl | wc -c` で本番 HTML が 1.2MB、99% が TopoJSON (`arcs` データ) だった → 「HTML を削減すれば LCP が改善するはず」と判断し、topology を Server Component fetch → Client Component prop から Server Action 経由 client fetch に変更（PR #75 / #86）。
 
-**原因**: Next.js App Router で Server Component が `await fetchPrefectureTopology()` したデータを、そのまま Client Component の prop として渡していた。React Server Component の境界で prop が **JSON シリアライズされて HTML に埋め込まれる** ため、1.2MB の TopoJSON が全ページに配信される → パース時間・hydration 時間を食って LCP を悪化。
+**結果（EXP-002 ADVERSE、2026-04-25）**:
+- HTML: 1,233KB → 206KB（**-83% 達成**）
+- LCP (mobile): 12,526ms → **20,326ms（+62% 悪化）**
+- PR #96 で revert
 
-**対策**:
-- 大きなデータ (>100KB) は **Client Component 内で useEffect + Server Action 経由で取得** する
-- Skeleton → 実コンポーネントの 2 段階描画。LCP 要素がテキストになる
-- 実装例: `apps/web/src/features/ranking/actions/fetch-prefecture-topology.ts`（Server Action）+ `RankingMapChartClient` / `ThemeLeafletMap` の `useState + useEffect` 経由取得
+**原因**: LCP 要素は**地図（Leaflet でレンダリング）**だった。topology 有無で地図描画タイミングが変わる:
+- Before (SSR prop): HTML に topology が埋め込まれている → JS hydrate 直後に Leaflet が即描画 → LCP ≈ JS load + hydrate + Leaflet init
+- After (client fetch): topology が HTML に無い → JS hydrate 後に Server Action 呼び出し → topology 取得 → Leaflet 描画 → LCP ≈ JS load + hydrate + network round-trip + Leaflet init
 
-**判断基準**:
-- prop として渡すデータが **同じセッション中に一度しか使わない + 100KB 以上** なら client fetch 化
-- 逆に頻繁に更新される小さい状態（ユーザー選択値等）は SSR で埋め込んで良い
+mobile の throttled 環境では HTML 削減のメリット（~数百 ms）より追加 network call のペナルティ（2-5 秒）の方が大きい。
+
+**教訓**:
+1. **LCP 改善は LCP 要素を先に特定**してから対策を打つ。Chrome DevTools Performance / PSI の `largest-contentful-paint` audit で LCP 候補要素を確認する
+2. **HTML サイズ削減は「LCP 要素が HTML に含まれている」場合のみ効く**。動的に描画される要素（地図 / チャート / 遅延画像）が LCP 候補なら、HTML 削減は無関係または逆効果になりうる
+3. **小さな HTML + 遅い描画 < 大きな HTML + 早い描画** の場合がある
+4. **推測で変更しない**。EXP として計測前後を比較できる形で実施する
+
+**対策が必要な場合のアプローチ**:
+- LCP 要素が動的な地図/チャート → SSR されるテキスト要素（タイトル + 1位情報等）を page 上部の大きなフォントで配置し、LCP 候補を差し替える
+- 外部 API 依存の要素 → `<link rel="preload">` や DNS prefetch で RTT を短縮
+- JS 重い → bundle 分析 + dynamic import 見直し（これは HTML 削減と独立して効く）
 
 **関連**:
-- Issue #74 (ranking), #86 の /themes 対応
-- PR #75 #86
+- Issue #74, PR #75 (ranking 誤った LCP 改善), #86 (themes 同じ誤り), **#96 revert**
+- EXP-002 (`.claude/state/experiments.json`、ADVERSE close)
 

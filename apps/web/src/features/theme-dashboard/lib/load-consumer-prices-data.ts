@@ -1,6 +1,7 @@
 import "server-only";
 
 import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
+import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 
 
 import { logger } from "@/lib/logger";
@@ -43,11 +44,16 @@ export async function loadConsumerPricesData(
       cdTime: "2024000000",
     };
 
-    // topology はクライアント側で取得（#74 同パターン）
-    const rawData = await fetchFormattedStats(params).catch((error) => {
-      logger.error({ error }, "CPI テーマ: e-Stat データ取得失敗");
-      return [] as StatsSchema[];
-    });
+    const [rawData, topology] = await Promise.all([
+      fetchFormattedStats(params).catch((error) => {
+        logger.error({ error }, "CPI テーマ: e-Stat データ取得失敗");
+        return [] as StatsSchema[];
+      }),
+      fetchPrefectureTopology().catch((error) => {
+        logger.error({ error }, "CPI テーマ: topology取得失敗");
+        return null;
+      }),
+    ]);
 
     if (rawData.length === 0) return null;
 
@@ -112,7 +118,7 @@ export async function loadConsumerPricesData(
 
     if (Object.keys(indicatorDataMap).length === 0) return null;
 
-    return { indicatorDataMap };
+    return { indicatorDataMap, topology };
   } catch (error) {
     logger.error({ error }, "CPI テーマ: データ構築失敗");
     return null;

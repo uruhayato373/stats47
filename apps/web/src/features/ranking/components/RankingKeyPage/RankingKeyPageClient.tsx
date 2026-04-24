@@ -17,7 +17,7 @@ import {
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
-import { isOk } from "@stats47/types";
+import { isOk, type TopoJSONTopology } from "@stats47/types";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
@@ -59,6 +59,7 @@ interface RankingKeyPageClientProps {
     rankingValues: RankingValue[];
     areaType?: AreaType;
     selectedYear?: string;
+    topology?: TopoJSONTopology | null;
     correlationSection?: ReactNode;
     rankingPageCards?: ReactNode;
     insightsSection?: ReactNode;
@@ -82,6 +83,7 @@ export function RankingKeyPageClient({
     rankingValues: initialRankingValues,
     areaType = "prefecture",
     selectedYear,
+    topology,
     correlationSection,
     rankingPageCards,
     insightsSection,
@@ -346,6 +348,7 @@ export function RankingKeyPageClient({
                                     rankingItem={activeRankingItem}
                                     rankingValues={rankingValues}
                                     areaType={currentAreaType}
+                                    topology={topology ?? null}
                                     headerActions={headerActions}
                                     cardFooter={cardFooter}
                                 />
@@ -371,6 +374,7 @@ export function RankingKeyPageClient({
                                 rankingItem={activeRankingItem}
                                 rankingValues={rankingValues}
                                 areaType={currentAreaType}
+                                topology={topology ?? null}
                                 headerActions={headerActions}
                                 cardFooter={cardFooter}
                             />
