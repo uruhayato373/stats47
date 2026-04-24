@@ -1,0 +1,129 @@
+name: 📈 Fetch weekly metrics (GSC + GA4 + AdSense)
+
+on:
+  schedule:
+    - cron: "0 11 * * 0" # JST 20:00 Sunday (UTC 11:00)
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "ISO week (YYYY-Www). Empty = current week"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-metrics-weekly
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📅 Resolve target week
+        id: week
+        run: |
+          INPUT_WEEK="${{ inputs.week }}"
+          if [ -n "$INPUT_WEEK" ]; then
+            echo "week=$INPUT_WEEK" >> $GITHUB_OUTPUT
+          else
+            # GitHub Actions ubuntu-latest は UTC。JST 20:00 日曜 = UTC 11:00 日曜。
+            # ISO 週は ISO-8601 基準（月曜始まり）。日曜の UTC 時点で前週扱いになる場合があるため、
+            # JST の日曜日でない可能性も考慮する。ここは UTC の date で ISO 週を取る。
+            WEEK=$(date -u +%G-W%V)
+            echo "week=$WEEK" >> $GITHUB_OUTPUT
+          fi
+          echo "Week: $(cat $GITHUB_OUTPUT)"
+
+      - name: 🔍 Fetch GSC snapshot
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+        run: npm run fetch-gsc-snapshot -- ${{ steps.week.outputs.week }}
+
+      - name: 📊 Fetch GA4 snapshot
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: npm run fetch-ga4-snapshot -- ${{ steps.week.outputs.week }}
+
+      - name: 💰 Fetch AdSense snapshot
+        env:
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
+          GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+        continue-on-error: true # OAuth refresh token が切れていても他の計測は進める
+        run: npm run fetch-adsense-snapshot -- ${{ steps.week.outputs.week }}
+
+      - name: 📝 Update history.csv and LATEST.md
+        run: npm run metrics:digest -- ${{ steps.week.outputs.week }}
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          echo "# Weekly Metrics Snapshot — ${{ steps.week.outputs.week }}" >> $GITHUB_STEP_SUMMARY
+          for src in gsc ga4 adsense; do
+            LATEST=".claude/state/metrics/$src/LATEST.md"
+            if [ -f "$LATEST" ]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              cat "$LATEST" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+      - name: 📦 Stage metrics outputs
+        run: |
+          mkdir -p /tmp/metrics-publish/snapshots /tmp/metrics-publish/state
+          cp -r .claude/skills/analytics/gsc-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/gsc 2>/dev/null || true
+          cp -r .claude/skills/analytics/ga4-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/ga4 2>/dev/null || true
+          cp -r .claude/skills/analytics/adsense-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/adsense 2>/dev/null || true
+          cp -r .claude/state/metrics/. /tmp/metrics-publish/state 2>/dev/null || true
+          find /tmp/metrics-publish -maxdepth 4 -type f | head -40
+
+      - name: 📤 Publish to develop branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          mkdir -p .claude/skills/analytics/gsc-improvement/reference/snapshots
+          mkdir -p .claude/skills/analytics/ga4-improvement/reference/snapshots
+          mkdir -p .claude/skills/analytics/adsense-improvement/reference/snapshots
+          mkdir -p .claude/state/metrics
+
+          cp -r /tmp/metrics-publish/snapshots/gsc/. .claude/skills/analytics/gsc-improvement/reference/snapshots/ 2>/dev/null || true
+          cp -r /tmp/metrics-publish/snapshots/ga4/. .claude/skills/analytics/ga4-improvement/reference/snapshots/ 2>/dev/null || true
+          cp -r /tmp/metrics-publish/snapshots/adsense/. .claude/skills/analytics/adsense-improvement/reference/snapshots/ 2>/dev/null || true
+          cp -r /tmp/metrics-publish/state/. .claude/state/metrics/ 2>/dev/null || true
+
+          git add .claude/skills/analytics/gsc-improvement/reference/snapshots
+          git add .claude/skills/analytics/ga4-improvement/reference/snapshots
+          git add .claude/skills/analytics/adsense-improvement/reference/snapshots
+          git add .claude/state/metrics
+
+          if git diff --cached --quiet; then
+            echo "No metrics changes to publish"
+            exit 0
+          fi
+
+          git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} [skip ci]"
+          git push origin develop

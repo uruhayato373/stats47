@@ -1,0 +1,99 @@
+name: 📊 PSI Audit (daily)
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # JST 02:00 daily (UTC 17:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: psi-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🚀 Run PSI audit (mobile + desktop)
+        env:
+          PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+        run: npm run fetch-psi-audit
+
+      - name: 📝 Update history.csv and LATEST.md
+        run: npm run psi-audit:digest
+
+      - name: 🔍 Threshold check
+        id: check
+        continue-on-error: true
+        run: |
+          mkdir -p /tmp/psi-report
+          npm run psi-audit:check -- --output /tmp/psi-report/report.md
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f /tmp/psi-report/report.md ]; then
+            cat /tmp/psi-report/report.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "PSI report not generated" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 📦 Stage metrics outputs
+        run: |
+          mkdir -p /tmp/psi-publish
+          cp -r .claude/state/metrics/psi/* /tmp/psi-publish/ 2>/dev/null || true
+          ls -la /tmp/psi-publish
+
+      - name: 📤 Publish to develop branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          mkdir -p .claude/state/metrics/psi
+          cp -r /tmp/psi-publish/* .claude/state/metrics/psi/ 2>/dev/null || true
+
+          git add .claude/state/metrics/psi
+          if git diff --cached --quiet; then
+            echo "No PSI changes to publish"
+            exit 0
+          fi
+
+          git commit -m "chore(metrics): psi daily audit $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open issue on threshold violations
+        if: steps.check.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[PSI Alert] しきい値割れ検知 ${DATE}"
+          BODY_FILE=/tmp/psi-report/report.md
+          gh issue create \
+            --title "$TITLE" \
+            --label "psi-snapshot,auto-generated" \
+            --body-file "$BODY_FILE"

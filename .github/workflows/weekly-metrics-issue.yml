@@ -1,0 +1,84 @@
+name: 📦 Weekly Metrics Issue
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # Monday JST 09:00 (UTC Mon 00:00)
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Target ISO week (YYYY-Www). Empty = last week (recommended)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: weekly-metrics-issue
+  cancel-in-progress: false
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop (latest metrics data)
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 📅 Resolve target week
+        id: week
+        run: |
+          INPUT_WEEK="${{ inputs.week }}"
+          if [ -n "$INPUT_WEEK" ]; then
+            echo "week=$INPUT_WEEK" >> $GITHUB_OUTPUT
+          else
+            # 月曜朝に回すと「昨日 = 前週の日曜」でその ISO 週を取る
+            WEEK=$(date -u -d "1 day ago" +%G-W%V)
+            echo "week=$WEEK" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📝 Generate issue body
+        id: body
+        run: |
+          mkdir -p /tmp/wm
+          node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs \
+            --week ${{ steps.week.outputs.week }} > /tmp/wm/body.md
+          echo "--- preview ---"
+          head -30 /tmp/wm/body.md
+
+      - name: 📄 Copy to GitHub Step Summary
+        run: cat /tmp/wm/body.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 🚦 Check duplicate
+        id: dup
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[Weekly Metrics] ${{ steps.week.outputs.week }}"
+          EXISTING=$(gh issue list --search "$TITLE in:title" --state all --json number --jq '.[0].number' 2>/dev/null)
+          if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
+            echo "Issue already exists: #$EXISTING"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🆕 Create Weekly Metrics issue
+        if: steps.dup.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[Weekly Metrics] ${{ steps.week.outputs.week }}"
+          gh issue create \
+            --title "$TITLE" \
+            --label "weekly-metrics,auto-generated" \
+            --body-file /tmp/wm/body.md
