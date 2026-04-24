@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "港湾統計マップ | 統計で見る都道府県",
   description:
     "日本の甲種港湾171港の海上出入貨物量・入港船舶隻数を地図上で可視化。港湾別ランキングと年度推移。国土交通省 港湾調査（港湾統計年報）のデータを使用。",
+  alternates: {
+    canonical: "/ports",
+  },
 };
 
 export default async function PortsPage() {

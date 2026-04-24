@@ -27,17 +27,13 @@ import type { Metadata } from "next";
  */
 function buildMetaDescription({
   itemName,
-  unit,
-  rankingValues,
+  summary,
   selectedYear,
 }: {
   itemName: string;
-  unit: string;
-  rankingValues: RankingValue[];
+  summary: ReturnType<typeof buildRankingSummary>;
   selectedYear?: string;
 }): string {
-  const summary = buildRankingSummary(rankingValues, unit);
-
   if (!summary) {
     return selectedYear
       ? `${itemName}の${selectedYear}年度都道府県別ランキング。地図やグラフで47都道府県を比較できます。`
@@ -80,15 +76,23 @@ export function generateRankingPageMetaData({
   const itemName = getRankingTitle(rankingItem);
   const unit = rankingItem.unit || "";
 
-  const defaultTitle = areaType === "city"
+  // title 差別化（T1-CANONICAL-01 / #77）
+  // 同一テンプレート title での Google 重複判定を防ぐため、1 位県名と単位付き値を含める。
+  // seoTitle が DB に明示的に設定されていればそちらを優先。
+  const summary = buildRankingSummary(rankingValues, unit);
+  const fallbackTitle = areaType === "city"
     ? `${itemName} 市区町村ランキング`
     : `${itemName} 都道府県別ランキング`;
-  const title = rankingItem.seoTitle ?? defaultTitle;
+  const differentiatedTitle = summary?.top1Name
+    ? areaType === "city"
+      ? `${itemName}ランキング｜1位 ${summary.top1Name} | 市区町村比較`
+      : `${itemName}ランキング｜1位 ${summary.top1Name} | 47都道府県比較`
+    : fallbackTitle;
+  const title = rankingItem.seoTitle ?? differentiatedTitle;
 
   const description = rankingItem.seoDescription ?? buildMetaDescription({
     itemName,
-    unit,
-    rankingValues,
+    summary,
     selectedYear,
   });
 
