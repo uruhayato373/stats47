@@ -66,9 +66,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TITLE="[Weekly Metrics] ${{ steps.week.outputs.week }}"
-          EXISTING=$(gh issue list --search "$TITLE in:title" --state all --json number --jq '.[0].number' 2>/dev/null)
+          # open Issue だけをチェック。closed な過去 Issue は再生成を阻害しない。
+          EXISTING=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number' 2>/dev/null)
           if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
-            echo "Issue already exists: #$EXISTING"
+            echo "Open issue already exists: #$EXISTING — skipping"
             echo "skip=true" >> $GITHUB_OUTPUT
           else
             echo "skip=false" >> $GITHUB_OUTPUT
