@@ -1,7 +1,6 @@
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type {
   IndicatorPanelTab,
-  TopoJSONTopology,
 } from "@stats47/types";
 
 // ============================================================================
@@ -56,9 +55,10 @@ export interface ThemeDashboardClientProps {
   themeConfig: ThemeConfig;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  /** TopoJSON */
-  topology: TopoJSONTopology | null;
-  /** DB 管理チャート（page_components + page_component_assignments） */
+  /**
+   * DB 管理チャート（page_components + page_component_assignments）
+   * TopoJSON は ThemeLeafletMap 内で client-side 取得するため prop から除外（#74 パターン）
+   */
   pageCharts?: import("@/features/stat-charts/services/load-page-components").PageComponent[];
   /** KPI カードの全都道府県データ（chartKey → areaCode → KpiCardClientProps） */
   kpiDataByArea?: Record<string, Record<string, import("@/features/stat-charts/components/cards/KpiCard/KpiCardClient").KpiCardClientProps>>;
