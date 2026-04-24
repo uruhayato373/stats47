@@ -92,6 +92,13 @@ function parseArgs() {
 // ── メイン ──
 
 async function main() {
+  // 投稿ガード（停止期間中 / 週 3 本上限）。シャドウバン対応中の誤投稿を防ぐ
+  const { spawnSync } = require("child_process");
+  const guard = spawnSync("node", [path.join(__dirname, "..", "lib", "check-youtube-post-budget.cjs")], {
+    stdio: "inherit",
+  });
+  if (guard.status !== 0) process.exit(guard.status ?? 1);
+
   const opts = parseArgs();
 
   // ファイル存在チェック
