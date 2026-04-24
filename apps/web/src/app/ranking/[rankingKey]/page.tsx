@@ -42,7 +42,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -169,10 +168,10 @@ export default async function RankingKeyPage({
       )
     : Promise.resolve([] as RankingValue[]);
 
-  const topologyPromise = fetchPrefectureTopology().catch((error) => {
-    logger.error({ error }, "RankingKeyPage: topology 取得失敗");
-    return null;
-  });
+  // NOTE: TopoJSON の取得はクライアント側 (RankingMapChartClient の useEffect) に
+  // 移譲した。Server Component で取得 → Client Component に prop で渡すと HTML に
+  // JSON シリアライズされて ~1.2MB/ページになり mobile LCP が 12s になるため。
+  // T1-PSI-LCP-01 / EXP-002 (issue #74) 参照。
 
   const aiContentPromise = findRankingAiContent(rankingKey, areaType).catch(
     (error) => {
@@ -199,9 +198,8 @@ export default async function RankingKeyPage({
         .catch(() => [] as GroupRankingItem[])
     : Promise.resolve([] as GroupRankingItem[]);
 
-  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers] = await Promise.all([
+  const [rankingValues, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers] = await Promise.all([
     rankingValuesPromise,
-    topologyPromise,
     aiContentPromise,
     cityRankingItemPromise,
     surveyNamePromise,
@@ -266,7 +264,6 @@ export default async function RankingKeyPage({
         rankingValues={rankingValues}
         areaType={areaType}
         selectedYear={selectedYear}
-        topology={topology}
         cityRankingItem={cityRankingItem?.isActive ? cityRankingItem : undefined}
         surveyName={surveyName ?? undefined}
         groupMembers={groupMembers}
