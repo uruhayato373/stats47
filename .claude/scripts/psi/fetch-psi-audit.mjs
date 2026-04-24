@@ -57,6 +57,50 @@ async function fetchPsi(url, strategy) {
   return res.json();
 }
 
+function extractLcpElement(audits) {
+  // 2026-04 時点の Lighthouse v13 では lcp-breakdown-insight の details.items
+  // が [subpart-table, node-info, ...] の配列になる（item に type:"node" が含まれる）。
+  const audit = audits["lcp-breakdown-insight"] || audits["largest-contentful-paint-element"];
+  if (!audit) return null;
+  const items = audit.details?.items || [];
+  const nodeItem = items.find((it) => it?.type === "node" || it?.nodeLabel || it?.selector);
+  if (!nodeItem) return null;
+  const breakdown = {};
+  const tableItem = items.find((it) => it?.type === "table" && Array.isArray(it?.items));
+  if (tableItem) {
+    for (const row of tableItem.items) {
+      if (row?.subpart && row?.duration != null) {
+        breakdown[row.subpart] = Math.round(row.duration);
+      }
+    }
+  }
+  return {
+    selector: nodeItem.selector || null,
+    node_label: nodeItem.nodeLabel || null,
+    snippet:
+      typeof nodeItem.snippet === "string" ? nodeItem.snippet.slice(0, 300) : null,
+    breakdown_ms: Object.keys(breakdown).length > 0 ? breakdown : null,
+  };
+}
+
+function extractLayoutShiftContributors(audits) {
+  const audit = audits["layout-shifts"] || audits["layout-shift-elements"];
+  if (!audit) return [];
+  const items = audit.details?.items || [];
+  return items.slice(0, 5).map((item) => {
+    const node = item?.node || {};
+    const causes = (item?.subItems?.items || [])
+      .map((s) => s?.cause)
+      .filter(Boolean);
+    return {
+      selector: node.selector || null,
+      node_label: node.nodeLabel || null,
+      score: item?.score ?? null,
+      causes: causes.length > 0 ? [...new Set(causes)] : [],
+    };
+  });
+}
+
 function extractSummary(data, url, strategy) {
   const lighthouse = data.lighthouseResult || {};
   const categories = lighthouse.categories || {};
@@ -99,6 +143,8 @@ function extractSummary(data, url, strategy) {
       FCP: field("FIRST_CONTENTFUL_PAINT_MS"),
       TTFB: field("EXPERIMENTAL_TIME_TO_FIRST_BYTE"),
     },
+    lcp_element: extractLcpElement(audits),
+    cls_contributors: extractLayoutShiftContributors(audits),
     analysis_utc: lighthouse.fetchTime || null,
     final_url: lighthouse.finalUrl || url,
   };
