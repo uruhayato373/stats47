@@ -65,8 +65,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         };
     }
 
-    const title = `${profile.areaName}の統計データ`;
-    const description = `${profile.areaName}の特徴を統計データから分析。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`;
+    // title / description 差別化（#77 Phase 4）
+    // 47 都道府県全てで同一テンプレートだった title を「県の top 強み指標」で差別化。
+    // 例: "東京都の統計データ" → "東京都の統計データ｜卸売業年間商品販売額 全国1位 | 47都道府県比較"
+    const topStrength = profile.strengths[0];
+    const title = topStrength
+      ? `${profile.areaName}の統計データ｜${topStrength.indicator} 全国${topStrength.rank}位｜47都道府県比較`
+      : `${profile.areaName}の統計データ｜47都道府県比較`;
+    const descriptionHighlights = profile.strengths
+      .slice(0, 3)
+      .map((s) => `${s.indicator} 全国${s.rank}位`)
+      .join("、");
+    const description = descriptionHighlights
+      ? `${profile.areaName}の統計プロファイル。${descriptionHighlights}。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`
+      : `${profile.areaName}の特徴を統計データから分析。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`;
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
     const imageUrl = `${baseUrl}/areas/${areaCode}/opengraph-image`;
