@@ -28,7 +28,7 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **domain** | - | `ranking` | `ranking` / `compare` / `correlation` |
-| **sns** | 必須 | - | `x` / `youtube` / `youtube-short` / `youtube-short-full` / `youtube-normal` / `note` / `all` |
+| **sns** | 必須 | - | `x` / `youtube` / `youtube-short` / `youtube-short-full` / `youtube-normal` / `note` / `instagram` / `all` |
 
 ### ranking ドメイン
 - **rankingKey**: ランキングキー（必須）
@@ -57,6 +57,10 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | note | `RankingNote-ChoroplethMap` | `note/images/choropleth-map-1080x1080.png` |
 | note | `RankingNote-Chart` | `note/images/chart-x-1200x630.png` |
 | note | `RankingNote-Boxplot` | `note/images/boxplot-1200x630.png` |
+| Instagram（カルーセル表紙） | `RankingInstagram-Cover` | `instagram/stills/slide-1-cover-1080x1350.png` |
+| Instagram（全47位テーブル） | `RankingInstagram-Table` | `instagram/stills/slide-2-table-1080x1350.png` |
+| Instagram（CTA） | `RankingInstagram-CTA` | `instagram/stills/slide-3-cta-1080x1350.png` |
+| Instagram（リール動画） | `RankingInstagram-Reel` | `instagram/reel.mp4` |
 
 ### compare ドメイン
 
@@ -164,6 +168,60 @@ cd apps/remotion && npx remotion render src/index.ts RankingYouTube-ScrollGes \
 cd apps/remotion && npx remotion still src/index.ts RankingYouTube-Thumb-Hero \
   "../../<baseDir>/youtube/stills/thumbnail-1280x720.png" \
   --props /tmp/sns-props-thumb.json
+```
+
+**Instagram の命名規約**:
+- `instagram/stills/slide-<N>-<role>-1080x1350.png` — カルーセルは**ファイル名の辞書順にスライドされる**ため、先頭の番号で順序を固定する
+- `instagram/reel.mp4` — リール（`/post-instagram` はこのファイル存在でリール投稿に自動切替）
+- **単発画像**投稿の場合は `slide-1-*.png` のみ配置（`/post-instagram` の自動判定が image になる）
+
+**Instagram 用 props 生成**（既存 ranking props に Instagram 固有の slide/variant を追加）:
+
+```bash
+node -e "
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync('<baseDir>/data.json','utf8'));
+const caption = JSON.parse(fs.readFileSync('<baseDir>/x/caption.json','utf8'));
+let itemMeta = {};
+try { itemMeta = JSON.parse(fs.readFileSync('<baseDir>/ranking_items.json','utf8')); } catch(e) {}
+const meta = {
+  title: itemMeta.title || data.categoryName,
+  subtitle: itemMeta.subtitle,
+  unit: itemMeta.unit || data.unit,
+  yearName: data.yearName,
+  demographicAttr: itemMeta.demographicAttr,
+  normalizationBasis: itemMeta.normalizationBasis,
+};
+const allEntries = data.data.map(d => ({ rank: d.rank, areaCode: d.areaCode, areaName: d.areaName, value: d.value }));
+const base = { theme: 'light', hookText: caption.hookText || '', displayTitle: caption.displayTitle, meta, allEntries };
+fs.writeFileSync('/tmp/ig-props-cover.json', JSON.stringify({ ...base, slide: 'cover' }));
+fs.writeFileSync('/tmp/ig-props-table.json', JSON.stringify(base));
+fs.writeFileSync('/tmp/ig-props-cta.json',   JSON.stringify({ ...base, slide: 'cta' }));
+fs.writeFileSync('/tmp/ig-props-reel.json',  JSON.stringify({ ...base, theme: 'dark', variant: 'instagram' }));
+"
+```
+
+**Instagram 3 並列 still レンダリング + リール**:
+
+```bash
+mkdir -p "<baseDir>/instagram/stills"
+cd apps/remotion
+# 静止画 3 種類を並列
+npx remotion still src/index.ts RankingInstagram-Cover \
+  "../../<baseDir>/instagram/stills/slide-1-cover-1080x1350.png" \
+  --props /tmp/ig-props-cover.json &
+npx remotion still src/index.ts RankingInstagram-Table \
+  "../../<baseDir>/instagram/stills/slide-2-table-1080x1350.png" \
+  --props /tmp/ig-props-table.json &
+npx remotion still src/index.ts RankingInstagram-CTA \
+  "../../<baseDir>/instagram/stills/slide-3-cta-1080x1350.png" \
+  --props /tmp/ig-props-cta.json &
+wait
+
+# リールは必要な時だけ（動画レンダは数分かかる）
+# npx remotion render src/index.ts RankingInstagram-Reel \
+#   "../../<baseDir>/instagram/reel.mp4" \
+#   --props /tmp/ig-props-reel.json
 ```
 
 ### Step 2: 生成結果を報告

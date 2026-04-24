@@ -32,6 +32,17 @@ data.json 生成 → 全プラットフォームのキャプション生成 → 
 | `pinned_comment.txt` | ピン留めコメント |
 | `quizzes.txt` | YouTube Studio クイズ用 |
 
+### Instagram（instagram/）
+
+| ファイル | 内容 |
+|---|---|
+| `caption.txt` | Instagram キャプション（2200字以内、ハッシュタグ含む、`/post-instagram` が読み込む） |
+| `caption.json` | メタデータ（hookText / displayTitle / ハッシュタグ配列） |
+| `stills/slide-1-cover-1080x1350.png` | カルーセル 1 枚目（表紙） |
+| `stills/slide-2-table-1080x1350.png` | カルーセル 2 枚目（全47位テーブル） |
+| `stills/slide-3-cta-1080x1350.png` | カルーセル 3 枚目（CTA） |
+| `reel.mp4` | リール動画（オプション、存在すればリール優先で投稿） |
+
 ## 手順
 
 ### Step 1: data.json の確認・生成
@@ -88,6 +99,44 @@ data.json を読み込み、以下を算出する:
 **生成順序**:
 1. **X** `caption.json` + `caption.txt`（`/post-x` の仕様に従う）
 2. **YouTube** `shorts.json` + `shorts.txt` + `pinned_comment.txt` + `quizzes.txt`（`/post-youtube` の仕様に従う）
+3. **Instagram** `caption.txt` + `caption.json`（詳細は下記 "Instagram キャプション規約"）
+
+#### Instagram キャプション規約
+
+Instagram は 2200 字まで許容される。X の短いキャプションを拡張し、Instagram 特有の CTA を添える。
+
+**テンプレート** (`.local/r2/sns/ranking/<key>/instagram/caption.txt` の内容):
+
+```
+【都道府県ランキング】<displayTitle>（<yearName>）
+
+📊 1位: <top1県> <top1値><unit>
+📊 47位: <last1県> <last1値><unit>
+
+<3-4 行の気づき・補足>
+
+📱 詳しい全国 47 位ランキングは👇
+　 @stats47jp のプロフィールリンクから
+
+🔖 保存して後から見返してね
+❤️ いいねでもっとランキング見たい!
+
+#統計 #都道府県 #ランキング #日本地図 #データ可視化
+#<テーマ関連タグ1> #<テーマ関連タグ2> #<テーマ関連タグ3>
+#stats47
+```
+
+**caption.json の構造**:
+
+```json
+{
+  "hookText": "<X と共通の 15 字以内フック>",
+  "displayTitle": "<X と共通の 20 字以内タイトル>",
+  "hashtags": ["統計", "都道府県", "ランキング", "日本地図", "データ可視化", "stats47", ...]
+}
+```
+
+**hookText / displayTitle は X の caption.json と同一**（全プラットフォーム共通ルール）。Instagram では caption.txt 内で使うのみでレンダリング props にも渡される。
 
 ### Step 4: レンダリング
 
@@ -124,6 +173,34 @@ npx remotion render src/index.ts RankingYouTube-Short "$BASE/youtube-short/short
 npx remotion render src/index.ts RankingYouTube-Short-Full "$BASE/youtube-short/shorts-b.mp4" --props /tmp/props-b.json &
 wait
 ```
+
+**Instagram カルーセル 3 スライドのレンダリング**（still、並列で高速）:
+
+```bash
+# props 準備（Instagram 固有の slide 指定）
+node -e "
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync('$BASE/data.json','utf8'));
+const caption = JSON.parse(fs.readFileSync('$BASE/x/caption.json','utf8'));
+let itemMeta = {};
+try { itemMeta = JSON.parse(fs.readFileSync('$BASE/ranking_items.json','utf8')); } catch {}
+const meta = { title: itemMeta.title || data.categoryName, subtitle: itemMeta.subtitle, unit: itemMeta.unit || data.unit, yearName: data.yearName, demographicAttr: itemMeta.demographicAttr, normalizationBasis: itemMeta.normalizationBasis };
+const allEntries = data.data.map(d => ({ rank: d.rank, areaCode: d.areaCode, areaName: d.areaName, value: d.value }));
+const base = { theme: 'light', hookText: caption.hookText || '', displayTitle: caption.displayTitle, meta, allEntries };
+fs.writeFileSync('/tmp/ig-props-cover.json', JSON.stringify({ ...base, slide: 'cover' }));
+fs.writeFileSync('/tmp/ig-props-table.json', JSON.stringify(base));
+fs.writeFileSync('/tmp/ig-props-cta.json',   JSON.stringify({ ...base, slide: 'cta' }));
+"
+
+mkdir -p "$BASE/instagram/stills"
+cd apps/remotion
+npx remotion still src/index.ts RankingInstagram-Cover "$BASE/instagram/stills/slide-1-cover-1080x1350.png" --props /tmp/ig-props-cover.json &
+npx remotion still src/index.ts RankingInstagram-Table "$BASE/instagram/stills/slide-2-table-1080x1350.png" --props /tmp/ig-props-table.json &
+npx remotion still src/index.ts RankingInstagram-CTA   "$BASE/instagram/stills/slide-3-cta-1080x1350.png"   --props /tmp/ig-props-cta.json &
+wait
+```
+
+> Instagram リール動画（`reel.mp4`）は `/render-sns-stills --sns instagram --include-reel` など別途指定が必要な場合に生成する（`RankingInstagram-Reel` コンポジション）。リール生成はデフォルトではスキップしてカルーセル 3 枚のみ。
 
 ### Step 5: 完了報告
 

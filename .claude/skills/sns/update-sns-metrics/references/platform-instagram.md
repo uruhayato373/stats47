@@ -1,242 +1,216 @@
-# Instagram メトリクス取得手順
+# Instagram メトリクス取得手順（Graph API 版）
 
 > このファイルは `update-sns-metrics` スキルの詳細手順です。概要は [SKILL.md](../SKILL.md) を参照。
 
-**2つの取得方式がある。** セッション状態に応じて使い分ける。
+**Instagram Graph API（Instagram Login 新フロー）で純 API 実装**。browser-use スクレイピングは廃止。API が使えない場合の fallback もなし（トークン切れ等は例外として処理）。
 
-### 方式A: Meta Business Suite（推奨）
+## 前提
 
-`https://business.facebook.com/latest/insights/content` で投稿一覧 + メトリクスを一括取得できる。
-IG プロフィールページのセッションが切れている場合はこちらを使う。
+- `.env.local` に以下:
+  - `INSTAGRAM_ACCESS_TOKEN` — 長期トークン（60 日有効）
+  - `INSTAGRAM_BUSINESS_ACCOUNT_ID` — IG User ID
+- 権限: `instagram_business_manage_insights`, `instagram_business_basic` が有効
+- Graph API ベース URL: `https://graph.instagram.com/v21.0/`
 
-1. `browser-use --headed --profile 'Profile 5' open "https://business.facebook.com/latest/insights/content"`
-2. `state` コマンドで DOM を確認し、投稿一覧テーブルからメトリクスを抽出
-3. DOM 構造は変わりやすいので、`state` 出力を見て JS を都度調整する
+## API で取得できるメトリクス
 
-### 方式B: プロフィールグリッド + OG description
+browser-use 時代の `likes` / `comments` に加えて以下も取れる:
 
-プロフィールグリッドから投稿リンクを収集し、各投稿の OG description から likes/comments を抽出する。
+| メトリクス | 説明 | エンドポイント |
+|---|---|---|
+| `like_count` | いいね数 | `/media?fields=like_count` |
+| `comments_count` | コメント数 | `/media?fields=comments_count` |
+| `reach` | リーチ（ユニーク） | `/{media-id}/insights?metric=reach` |
+| `views` | 閲覧数（VIDEO/REELS） | `/{media-id}/insights?metric=views` |
+| `saves` | 保存数 | `/{media-id}/insights?metric=saves` |
+| `shares` | シェア数 | `/{media-id}/insights?metric=shares` |
+| `total_interactions` | 総インタラクション | `/{media-id}/insights?metric=total_interactions` |
 
-**注意:** プロフィールグリッドの `a[href*="/p/"]` はスクロール先でおすすめ投稿（他アカウント）も拾う。`a[href*="/stats47jp/"]` で自アカウントに限定するか、`/reel/` も含めて取得すること。
+## 手順
 
-**マッチング優先順位（IG 固有）:**
-1. `post_url` の shortcode で完全一致
-2. ranking_name in OG description/title
-3. caption prefix 先頭80文字（backfill 後に有効化）
-
-**OG description のフォーマット（実測値）:**
-- 英語: `"<date>、<N> likes, <N> comments - <username>: \"<caption>\""`
-- 日本語: `"「いいね！」<N>件、コメント<N>件 - <username>のInstagramの写真: \"<caption>\""`
-- likes の数値はカンマ区切りの場合あり（例: `1,234 likes`）
-- likes が 0 の投稿は OG description に likes 記述がないことがある
-
-**メトリクス収集時に OG description のキャプション部分から caption を自動 backfill する。**
-
-### IG-1. ブラウザを開く
+### IG-1. API 到達確認
 
 ```bash
-browser-use --headed --profile 'Profile 5' close 2>/dev/null
-sleep 1
-browser-use --headed --profile 'Profile 5' open "https://www.instagram.com/stats47jp/"
-sleep 5
+set -a; source .env.local; set +a
+curl -s "https://graph.instagram.com/v21.0/me?access_token=${INSTAGRAM_ACCESS_TOKEN}" | python3 -m json.tool
 ```
 
-### IG-2. 投稿リンクを収集
-
-プロフィールグリッドをスクロールしながら投稿リンクを収集する。
-
-**重要:** `a[href*="/p/"]` だけではおすすめ投稿（他アカウント）を拾う。リール（`/reel/`）も含め、`stats47jp` の投稿のみをフィルタする。
+`{"id": "...", "username": "stats47jp", ...}` が返れば疎通 OK。トークン切れの場合は以下で延長:
 
 ```bash
-cat > /tmp/ig-collect.js << 'JSEOF'
-var links = document.querySelectorAll('a[href*="/stats47jp/p/"], a[href*="/stats47jp/reel/"]');
-var urls = [];
-links.forEach(function(a) {
-  var h = a.href;
-  var m = h.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
-  if (m && urls.indexOf(m[1]) === -1) urls.push(m[1]);
+curl -s "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${INSTAGRAM_ACCESS_TOKEN}"
+```
+
+### IG-2. media 一覧取得（ページネーション対応）
+
+```bash
+cat > /tmp/ig-fetch-media.cjs << 'JSEOF'
+require("dotenv").config({ path: ".env.local" });
+const fs = require("fs");
+const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
+const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
+if (!TOKEN || !IG_USER_ID) { console.error("env missing"); process.exit(1); }
+
+async function fetchAll() {
+  const all = [];
+  let url = `https://graph.instagram.com/v21.0/${IG_USER_ID}/media?fields=id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count&limit=100&access_token=${TOKEN}`;
+  while (url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.error) { console.error("API Error:", data.error.message); process.exit(1); }
+    all.push(...(data.data || []));
+    url = data.paging?.next ?? null;
+  }
+  return all;
+}
+
+fetchAll().then((media) => {
+  fs.writeFileSync("/tmp/ig-media.json", JSON.stringify(media, null, 2));
+  console.log(`Fetched ${media.length} media`);
 });
-if (urls.length === 0) {
-  var allLinks = document.querySelectorAll('a[href*="/p/"], a[href*="/reel/"]');
-  allLinks.forEach(function(a) {
-    var h = a.href;
-    if (h.includes('stats47jp')) {
-      var m = h.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
-      if (m && urls.indexOf(m[1]) === -1) urls.push(m[1]);
-    }
-  });
-}
-JSON.stringify(urls)
 JSEOF
 
-echo "[]" > /tmp/ig-shortcodes.json
-PREV_COUNT=0
-NO_NEW=0
-
-for i in $(seq 1 30); do
-  browser-use --headed --profile 'Profile 5' eval "$(cat /tmp/ig-collect.js)" 2>&1 > /tmp/ig-raw-$i.txt
-
-  COUNT=$(node -e "
-    const fs = require('fs');
-    const existing = JSON.parse(fs.readFileSync('/tmp/ig-shortcodes.json','utf8'));
-    const s = new Set(existing);
-    try {
-      const raw = fs.readFileSync('/tmp/ig-raw-$i.txt','utf8').replace(/^result: /,'');
-      const codes = JSON.parse(raw);
-      for (const c of codes) { if (!s.has(c)) { existing.push(c); s.add(c); } }
-      fs.writeFileSync('/tmp/ig-shortcodes.json', JSON.stringify(existing));
-      console.log(existing.length);
-    } catch(e) { console.log(existing.length); }
-  ")
-
-  echo "Scroll $i: shortcodes=$COUNT"
-
-  if [ "$COUNT" = "$PREV_COUNT" ]; then
-    NO_NEW=$((NO_NEW + 1))
-    if [ "$NO_NEW" -ge 3 ]; then
-      echo "No new posts for 3 scrolls, done"
-      break
-    fi
-  else
-    NO_NEW=0
-  fi
-  PREV_COUNT=$COUNT
-
-  browser-use --headed --profile 'Profile 5' eval 'window.scrollBy(0, 1500);"ok"' 2>&1 > /dev/null
-  sleep 3
-done
-
-rm -f /tmp/ig-raw-*.txt /tmp/ig-collect.js
-echo "=== Collected ==="
-node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/ig-shortcodes.json','utf8')).length + ' shortcodes')"
+node /tmp/ig-fetch-media.cjs
 ```
 
-### IG-3. 各投稿の OG description から likes/comments を取得
+### IG-3. 各 media の insights 取得
 
-各投稿ページを開いて OG description から数値を抽出する。
+`like_count` / `comments_count` は `/media` の list で取れているので、insights から `reach` / `views` / `saves` / `shares` を追加取得する。**過去 24 時間以内の投稿は insights が未確定なので NULL 許容**。
 
 ```bash
-cat > /tmp/ig-fetch-og.js << 'JSEOF'
-const fs = require('fs');
-const shortcodes = JSON.parse(fs.readFileSync('/tmp/ig-shortcodes.json', 'utf8'));
-const results = [];
+cat > /tmp/ig-fetch-insights.cjs << 'JSEOF'
+require("dotenv").config({ path: ".env.local" });
+const fs = require("fs");
+const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
+const media = JSON.parse(fs.readFileSync("/tmp/ig-media.json", "utf8"));
 
-// OG description をフェッチする関数を生成
-// 各shortcodeに対して https://www.instagram.com/p/<shortcode>/ の OG を取得
-for (const sc of shortcodes) {
-  results.push({ shortcode: sc, url: 'https://www.instagram.com/p/' + sc + '/' });
+// media_product_type 別に利用可能なメトリクスが異なる
+const METRICS_BY_TYPE = {
+  FEED: "reach,saves,shares,total_interactions",
+  REELS: "reach,views,saves,shares,total_interactions",
+  STORY: "reach,replies",
+  AD: "reach,saves,shares",
+};
+
+async function fetchOne(m) {
+  const metrics = METRICS_BY_TYPE[m.media_product_type] ?? "reach,saves,shares";
+  const url = `https://graph.instagram.com/v21.0/${m.id}/insights?metric=${metrics}&access_token=${TOKEN}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.error) {
+    // 取得不可（24h 未満 or 権限外）は空で返す
+    return { id: m.id, error: data.error.message };
+  }
+  const out = { id: m.id };
+  for (const item of data.data || []) {
+    const v = item.values?.[0]?.value ?? 0;
+    out[item.name] = typeof v === "number" ? v : 0;
+  }
+  return out;
 }
-fs.writeFileSync('/tmp/ig-urls.json', JSON.stringify(results));
-console.log(results.length + ' URLs to fetch');
+
+(async () => {
+  const results = [];
+  for (let i = 0; i < media.length; i++) {
+    const r = await fetchOne(media[i]);
+    results.push(r);
+    if ((i + 1) % 20 === 0) console.log(`  ${i + 1}/${media.length} insights fetched`);
+    // レート制限対策: 200 req/h なので 200ms 間隔で余裕を持つ
+    await new Promise((r) => setTimeout(r, 200));
+  }
+  fs.writeFileSync("/tmp/ig-insights.json", JSON.stringify(results, null, 2));
+  console.log(`Fetched insights for ${results.length} media`);
+})();
 JSEOF
 
-node /tmp/ig-fetch-og.js
-```
-
-各投稿を browser-use で開いて OG description を取得する:
-
-```bash
-cat > /tmp/ig-extract-og.js << 'JSEOF'
-var meta = document.querySelector('meta[property="og:description"]');
-var title = document.querySelector('meta[property="og:title"]');
-JSON.stringify({
-  desc: meta ? meta.content : '',
-  title: title ? title.content : ''
-})
-JSEOF
-
-echo "[]" > /tmp/ig-metrics.json
-
-URLS=$(node -e "const d=JSON.parse(require('fs').readFileSync('/tmp/ig-urls.json','utf8'));d.forEach(u=>console.log(u.shortcode+'|'+u.url))")
-
-echo "$URLS" | while IFS='|' read -r SC URL; do
-  browser-use --headed --profile 'Profile 5' open "$URL" 2>&1 > /dev/null
-  sleep 3
-  browser-use --headed --profile 'Profile 5' eval "$(cat /tmp/ig-extract-og.js)" 2>&1 > /tmp/ig-og-raw.txt
-
-  node -e "
-    const fs = require('fs');
-    const existing = JSON.parse(fs.readFileSync('/tmp/ig-metrics.json','utf8'));
-    try {
-      const raw = fs.readFileSync('/tmp/ig-og-raw.txt','utf8').replace(/^result: /,'');
-      const og = JSON.parse(raw);
-      // OG description format examples:
-      //   English: '2026-03-15、1,234 likes, 56 comments - stats47jp: \"caption text\"'
-      //   Japanese: '「いいね！」1,234件、コメント56件 - stats47jpのInstagramの写真: \"caption text\"'
-      //   No likes: '0 likes, 3 comments - stats47jp: \"caption text\"'
-      let likes = 0, comments = 0, caption = '';
-      const mLikes = og.desc.match(/([\\d,]+)\\s*likes?/i) || og.desc.match(/「いいね！」([\\d,]+)件/);
-      const mComments = og.desc.match(/([\\d,]+)\\s*comments?/i) || og.desc.match(/コメント([\\d,]+)件/);
-      if (mLikes) likes = parseInt(mLikes[1].replace(/,/g, ''));
-      if (mComments) comments = parseInt(mComments[1].replace(/,/g, ''));
-      // Extract caption from OG description (after last colon + quote)
-      const capM = og.desc.match(/:\\s*[\"\\u201c](.+?)[\"\\u201d]\\s*$/);
-      if (capM) caption = capM[1].trim();
-      existing.push({ shortcode: '$SC', likes, comments, desc: og.desc.slice(0, 300), title: og.title, caption });
-      fs.writeFileSync('/tmp/ig-metrics.json', JSON.stringify(existing));
-      console.log('$SC: likes=' + likes + ' comments=' + comments + ' cap=' + caption.slice(0,40));
-    } catch(e) { console.log('$SC: parse error'); }
-  "
-done
-
-rm -f /tmp/ig-og-raw.txt /tmp/ig-extract-og.js
-echo "=== Fetched ==="
-node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/ig-metrics.json','utf8')).length + ' posts with metrics')"
+node /tmp/ig-fetch-insights.cjs
 ```
 
 ### IG-4. DB マッチング + メトリクス記録
 
+media の `permalink` から shortcode を抽出して `sns_posts.post_url` とマッチング。未マッチは `caption` 先頭一致 or `ranking_name` 含有でフォールバック。
+
 ```bash
-cat > /tmp/ig-match-db.js << JSEOF
-const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
+cat > /tmp/ig-match-db.cjs << 'JSEOF'
+const Database = require("better-sqlite3");
+const path = require("path");
 const fs = require("fs");
-const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+
+const PROJECT_ROOT = process.cwd();
+const DB_PATH = path.join(
+  PROJECT_ROOT,
+  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+);
 const db = new Database(DB_PATH);
 
-const metrics = JSON.parse(fs.readFileSync("/tmp/ig-metrics.json", "utf8"));
-const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("instagram");
+const media = JSON.parse(fs.readFileSync("/tmp/ig-media.json", "utf8"));
+const insights = JSON.parse(fs.readFileSync("/tmp/ig-insights.json", "utf8"));
+const insightsById = Object.fromEntries(insights.map((i) => [i.id, i]));
+
+const posts = db
+  .prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?")
+  .all("instagram");
 const rankings = db.prepare("SELECT ranking_key, ranking_name FROM ranking_items").all();
 
-// 時系列履歴は .claude/ 配下のファイルに蓄積（CLAUDE.md §記録先の統一原則）
-const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
-
+const snsStore = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-metrics-store.cjs"));
 const fetchedAt = new Date().toISOString();
-// sns_posts のキャッシュカラムは運用データとして D1 に残す
-const updCache = db.prepare("UPDATE sns_posts SET likes=?, replies=?, metrics_updated_at=? WHERE id=?");
+
+// sns_posts のキャッシュ列マッピング（IG のメトリクス → 既存カラム）:
+//   likes       ← like_count
+//   replies     ← comments_count（X と同じ「返信」枠を流用）
+//   bookmarks   ← saves（保存数）
+//   reposts     ← shares（シェア数）
+//   impressions ← reach（ユニーク到達数。IG には厳密な impressions はないので reach で代用）
+const updCache = db.prepare(
+  "UPDATE sns_posts SET likes=?, replies=?, bookmarks=?, reposts=?, impressions=?, metrics_updated_at=? WHERE id=?"
+);
 const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
-const updCaption = db.prepare("UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')");
+const updCaption = db.prepare(
+  "UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')"
+);
+
+function shortcodeFromPermalink(url) {
+  const m = url?.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
+  return m ? m[1] : null;
+}
 
 let matched = 0, urlUp = 0, capUp = 0, unmatched = 0;
 const tx = db.transaction(() => {
-  for (const m of metrics) {
+  for (const m of media) {
+    const sc = shortcodeFromPermalink(m.permalink);
+    const ins = insightsById[m.id] ?? {};
+
     let post = null;
-    const igUrl = "https://www.instagram.com/p/" + m.shortcode + "/";
 
-    // Strategy 1: post_url の shortcode で完全一致
-    post = posts.find(p => p.post_url && p.post_url.includes(m.shortcode));
+    // Strategy 1: post_url の shortcode 完全一致
+    if (sc) post = posts.find((p) => p.post_url && p.post_url.includes(sc));
 
-    // Strategy 2: ranking_name in OG description/title（stats47 URL は IG に存在しない）
-    if (!post) {
+    // Strategy 2: ranking_name を caption に含む
+    if (!post && m.caption) {
       for (const r of rankings) {
-        if ((m.desc && m.desc.includes(r.ranking_name)) || (m.title && m.title.includes(r.ranking_name))) {
-          post = posts.find(p => p.content_key === r.ranking_key);
-          break;
+        if (r.ranking_name && m.caption.includes(r.ranking_name)) {
+          post = posts.find((p) => p.content_key === r.ranking_key);
+          if (post) break;
         }
       }
     }
 
-    // Strategy 3: caption prefix 先頭80文字（backfill 後に有効化）
+    // Strategy 3: caption 先頭 80 字一致
     if (!post && m.caption && m.caption.length > 10) {
       const prefix = m.caption.slice(0, 80);
-      post = posts.find(p => p.caption && p.caption.startsWith(prefix));
+      post = posts.find((p) => p.caption && p.caption.startsWith(prefix));
     }
 
-    if (!post) { unmatched++; continue; }
+    if (!post) {
+      unmatched++;
+      continue;
+    }
     matched++;
-    const r = updUrl.run(igUrl, post.id);
-    if (r.changes > 0) urlUp++;
 
-    // OG description から抽出した caption で自動 backfill（NULL の場合のみ）
+    if (sc) {
+      const r = updUrl.run(m.permalink, post.id);
+      if (r.changes > 0) urlUp++;
+    }
     if (m.caption && m.caption.length > 10) {
       const cr = updCaption.run(m.caption, post.id);
       if (cr.changes > 0) capUp++;
@@ -248,25 +222,57 @@ const tx = db.transaction(() => {
       domain: post.domain,
       content_key: post.content_key,
       fetched_at: fetchedAt,
-      likes: m.likes,
-      comments: m.comments,
+      likes: m.like_count ?? 0,
+      comments: m.comments_count ?? 0,
+      reach: ins.reach ?? null,
+      views: ins.views ?? null,
+      saves: ins.saves ?? null,
+      shares: ins.shares ?? null,
     });
-    updCache.run(m.likes, m.comments, fetchedAt, post.id);
+
+    updCache.run(
+      m.like_count ?? 0,
+      m.comments_count ?? 0,
+      ins.saves ?? null,
+      ins.shares ?? null,
+      ins.reach ?? null,
+      fetchedAt,
+      post.id
+    );
   }
 });
 tx();
 
-console.log("Matched: " + matched + ", URLs updated: " + urlUp + ", Captions backfilled: " + capUp + ", Unmatched: " + unmatched);
-console.log("sns-metrics snapshot rows: " + snsStore.countAll());
+console.log(
+  `Matched: ${matched}, URLs updated: ${urlUp}, Captions backfilled: ${capUp}, Unmatched: ${unmatched}`
+);
+console.log(`sns-metrics snapshot rows: ${snsStore.countAll()}`);
 db.close();
 JSEOF
 
-node /tmp/ig-match-db.js
+node /tmp/ig-match-db.cjs
 ```
 
-### IG-5. ブラウザを閉じる
+### IG-5. クリーンアップ
 
 ```bash
-browser-use --headed --profile 'Profile 5' close 2>/dev/null
-rm -f /tmp/ig-shortcodes.json /tmp/ig-urls.json /tmp/ig-metrics.json /tmp/ig-match-db.js
+rm -f /tmp/ig-media.json /tmp/ig-insights.json /tmp/ig-fetch-media.cjs /tmp/ig-fetch-insights.cjs /tmp/ig-match-db.cjs
 ```
+
+## 制約
+
+- **新フローでは `business_discovery` が使えない**。他アカウントの閲覧不可。自 `stats47jp` のみ取得対象
+- **過去 24 時間未満の投稿は insights が未確定**。reach / views が 0 や未取得になることがある
+- **トークン期限 60 日**。失効時は `refresh_access_token` で延長
+- **`media_product_type` 別に利用可能メトリクスが異なる**。STORY は reach / replies のみ、FEED に views はない等
+- **レート制限**: 200 req / 1h / user。media 150 件程度なら 1 回の取得で収まる
+
+## マッチング優先順位（IG 固有）
+
+1. `permalink` の shortcode → `post_url` 完全一致（最も確実）
+2. `ranking_name` が caption に含まれる（`/post-instagram` で生成した caption は ranking_name を含む）
+3. caption 先頭 80 字完全一致（caption backfill 後に有効）
+
+## sns-metrics-store.cjs の使用
+
+時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積される（CLAUDE.md §記録先の統一原則に従い `.claude/` 配下）。sns_posts のキャッシュ列（likes / replies / reach / views / metrics_updated_at）は D1 の運用データとして別途 UPDATE。
