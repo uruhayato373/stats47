@@ -8,6 +8,8 @@
 import { getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 
 import { getRequiredBaseUrl } from "@/lib/env";
+import { buildPersonAsAuthor } from "@/lib/structured-data/person";
+import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
 import { buildRankingSummary } from "./build-ranking-summary";
 
@@ -151,16 +153,10 @@ export function generateRankingPageStructuredData({
       itemName,
       selectedYear || "",
     ].filter(Boolean),
-    creator: {
-      "@type": "Organization",
-      name: "統計で見る都道府県",
-      url: baseUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "統計で見る都道府県",
-      url: baseUrl,
-    },
+    // creator は統計を整理・公開した運営者 (Person)
+    creator: buildPersonAsAuthor(baseUrl),
+    // publisher は組織主体 (logo + sameAs 付き)
+    publisher: buildPublisherOrganization(baseUrl),
     license: {
       "@type": "CreativeWork",
       "@id": "https://www.stat.go.jp/info/riyou.html",
