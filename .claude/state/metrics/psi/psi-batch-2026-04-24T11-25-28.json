@@ -1,0 +1,1240 @@
+{
+  "version": 1,
+  "generated_at": "2026-04-24T11:25:28.919Z",
+  "results": [
+    {
+      "url": "https://stats47.jp/",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:05:35.126Z",
+      "scores": {
+        "performance": 47,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 8405.562932462655,
+        "TBT_ms": 632.5,
+        "CLS": 0.000983,
+        "FCP_ms": 3602.8589724847843,
+        "TTI_ms": 11256.208008275607,
+        "SI_ms": 6121.124530986821,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:05:01.207Z",
+      "final_url": "https://stats47.jp/"
+    },
+    {
+      "url": "https://stats47.jp/",
+      "strategy": "desktop",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/ranking",
+      "strategy": "mobile",
+      "error": "PSI API 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Lighthouse returned error: FAILED_DOCUMENT_REQUEST. Lighthouse was unable to reliably load the page you requested. Make sure you are testin"
+    },
+    {
+      "url": "https://stats47.jp/ranking",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:06:46.896Z",
+      "scores": {
+        "performance": 51,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2086.571211573484,
+        "TBT_ms": 4301,
+        "CLS": 0.0009170000000000001,
+        "FCP_ms": 681.1424231469686,
+        "TTI_ms": 8424.687979505858,
+        "SI_ms": 4135.6655561152775,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:06:05.914Z",
+      "final_url": "https://stats47.jp/ranking"
+    },
+    {
+      "url": "https://stats47.jp/areas",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:07:16.996Z",
+      "scores": {
+        "performance": 30,
+        "accessibility": 100,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 7355.145673833315,
+        "TBT_ms": 841,
+        "CLS": 0.32466599999999995,
+        "FCP_ms": 3604.004357964528,
+        "TTI_ms": 15813.599092131346,
+        "SI_ms": 4768.295592034086,
+        "TTFB_ms": 3
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:06:50.680Z",
+      "final_url": "https://stats47.jp/areas"
+    },
+    {
+      "url": "https://stats47.jp/areas",
+      "strategy": "desktop",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/themes",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:07:40.340Z",
+      "scores": {
+        "performance": 55,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 6906.43338455656,
+        "TBT_ms": 478.5,
+        "CLS": 0,
+        "FCP_ms": 4054.087150316229,
+        "TTI_ms": 11561.147206071159,
+        "SI_ms": 4054.087150316229,
+        "TTFB_ms": 2
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:07:21.086Z",
+      "final_url": "https://stats47.jp/themes"
+    },
+    {
+      "url": "https://stats47.jp/themes",
+      "strategy": "desktop",
+      "error": "PSI API 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Lighthouse returned error: FAILED_DOCUMENT_REQUEST. Lighthouse was unable to reliably load the page you requested. Make sure you are testin"
+    },
+    {
+      "url": "https://stats47.jp/search",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:08:24.211Z",
+      "scores": {
+        "performance": 71,
+        "accessibility": 92,
+        "best_practices": 100,
+        "seo": 66
+      },
+      "lab_data": {
+        "LCP_ms": 4205.555202364456,
+        "TBT_ms": 188,
+        "CLS": 0.000937,
+        "FCP_ms": 2253.777601182228,
+        "TTI_ms": 6110.922587889247,
+        "SI_ms": 14757.037995342305,
+        "TTFB_ms": 9296
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:08:04.078Z",
+      "final_url": "https://stats47.jp/search"
+    },
+    {
+      "url": "https://stats47.jp/search",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:08:37.595Z",
+      "scores": {
+        "performance": 98,
+        "accessibility": 92,
+        "best_practices": 100,
+        "seo": 66
+      },
+      "lab_data": {
+        "LCP_ms": 1082.3043699406533,
+        "TBT_ms": 35,
+        "CLS": 0.001155,
+        "FCP_ms": 682.182621964392,
+        "TTI_ms": 1898.536908575312,
+        "SI_ms": 682.182621964392,
+        "TTFB_ms": 101
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:08:26.800Z",
+      "final_url": "https://stats47.jp/search"
+    },
+    {
+      "url": "https://stats47.jp/themes/population-dynamics",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:09:07.368Z",
+      "scores": {
+        "performance": 35,
+        "accessibility": 90,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 11016.514457928659,
+        "TBT_ms": 1009.9632628291401,
+        "CLS": 0,
+        "FCP_ms": 5551.007177695082,
+        "TTI_ms": 16981.4534600384,
+        "SI_ms": 8803.403020570828,
+        "TTFB_ms": 43
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:08:40.997Z",
+      "final_url": "https://stats47.jp/themes/population-dynamics"
+    },
+    {
+      "url": "https://stats47.jp/themes/population-dynamics",
+      "strategy": "desktop",
+      "error": "PSI API 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Lighthouse returned error: FAILED_DOCUMENT_REQUEST. Lighthouse was unable to reliably load the page you requested. Make sure you are testin"
+    },
+    {
+      "url": "https://stats47.jp/themes/local-economy",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:10:03.164Z",
+      "scores": {
+        "performance": 29,
+        "accessibility": 90,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 11339.003796239558,
+        "TBT_ms": 1819.999999999999,
+        "CLS": 0,
+        "FCP_ms": 5101.001687217583,
+        "TTI_ms": 15276.258787182824,
+        "SI_ms": 11581.364933446348,
+        "TTFB_ms": 65
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:09:31.507Z",
+      "final_url": "https://stats47.jp/themes/local-economy"
+    },
+    {
+      "url": "https://stats47.jp/themes/local-economy",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:10:43.133Z",
+      "scores": {
+        "performance": 54,
+        "accessibility": 91,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2156.402342653596,
+        "TBT_ms": 938.4761636917051,
+        "CLS": 0.006865,
+        "FCP_ms": 1001.0355883802744,
+        "TTI_ms": 3886.365407854501,
+        "SI_ms": 2393.9501025174154,
+        "TTFB_ms": 50
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:10:06.995Z",
+      "final_url": "https://stats47.jp/themes/local-economy"
+    },
+    {
+      "url": "https://stats47.jp/themes/labor-wages",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:11:19.987Z",
+      "scores": {
+        "performance": 28,
+        "accessibility": 90,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 10936.5,
+        "TBT_ms": 2634.847653838051,
+        "CLS": 0.004167,
+        "FCP_ms": 5251,
+        "TTI_ms": 18477.276998198427,
+        "SI_ms": 9176.534793112058,
+        "TTFB_ms": 52
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:10:47.849Z",
+      "final_url": "https://stats47.jp/themes/labor-wages"
+    },
+    {
+      "url": "https://stats47.jp/themes/labor-wages",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:11:49.148Z",
+      "scores": {
+        "performance": 58,
+        "accessibility": 91,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2107.900517400587,
+        "TBT_ms": 602.5000000000009,
+        "CLS": 0.007649,
+        "FCP_ms": 1001.1652094473116,
+        "TTI_ms": 3746.2212850383803,
+        "SI_ms": 2757.5706919047807,
+        "TTFB_ms": 54
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:11:23.017Z",
+      "final_url": "https://stats47.jp/themes/labor-wages"
+    },
+    {
+      "url": "https://stats47.jp/ranking/total-population",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:12:22.978Z",
+      "scores": {
+        "performance": 29,
+        "accessibility": 94,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 11776.107363233408,
+        "TBT_ms": 2049.499999999998,
+        "CLS": 0,
+        "FCP_ms": 5551.049120433585,
+        "TTI_ms": 17367.43135681736,
+        "SI_ms": 9091.136005908636,
+        "TTFB_ms": 50
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:11:53.136Z",
+      "final_url": "https://stats47.jp/ranking/total-population"
+    },
+    {
+      "url": "https://stats47.jp/ranking/total-population",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:13:16.284Z",
+      "scores": {
+        "performance": 35,
+        "accessibility": 94,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 3149.654476983137,
+        "TBT_ms": 2620.919083485022,
+        "CLS": 0.15309699999999998,
+        "FCP_ms": 961.1618330299539,
+        "TTI_ms": 6807.980916514976,
+        "SI_ms": 5885.7088686784755,
+        "TTFB_ms": 72
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:12:29.391Z",
+      "final_url": "https://stats47.jp/ranking/total-population"
+    },
+    {
+      "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:13:41.351Z",
+      "scores": {
+        "performance": 39,
+        "accessibility": 94,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 12239.531564465993,
+        "TBT_ms": 776.5,
+        "CLS": 0,
+        "FCP_ms": 6001.254081128396,
+        "TTI_ms": 17884.999752555206,
+        "SI_ms": 8433.357232322025,
+        "TTFB_ms": 43
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:13:19.530Z",
+      "final_url": "https://stats47.jp/ranking/annual-sunshine-duration"
+    },
+    {
+      "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:14:25.192Z",
+      "scores": {
+        "performance": 46,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2620.845528485762,
+        "TBT_ms": 1113.4876596969368,
+        "CLS": 0.079375,
+        "FCP_ms": 1081.205671717716,
+        "TTI_ms": 3627.576195344298,
+        "SI_ms": 3222.2084314753647,
+        "TTFB_ms": 63
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:13:44.870Z",
+      "final_url": "https://stats47.jp/ranking/annual-sunshine-duration"
+    },
+    {
+      "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:15:06.739Z",
+      "scores": {
+        "performance": 27,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 12826.000415224291,
+        "TBT_ms": 2376.999999999999,
+        "CLS": 0.000004,
+        "FCP_ms": 6151.000193937092,
+        "TTI_ms": 15931.549155607638,
+        "SI_ms": 10957.1561112542,
+        "TTFB_ms": 74
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:14:30.180Z",
+      "final_url": "https://stats47.jp/ranking/future-population-change-rate-2050"
+    },
+    {
+      "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+      "strategy": "desktop",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/ranking/agricultural-output",
+      "strategy": "mobile",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/ranking/agricultural-output",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:15:47.130Z",
+      "scores": {
+        "performance": 46,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2529.5456251593896,
+        "TBT_ms": 1176.9999999999993,
+        "CLS": 0.077612,
+        "FCP_ms": 1121.0244588483329,
+        "TTI_ms": 4086.987299743707,
+        "SI_ms": 3396.9376014738245,
+        "TTFB_ms": 42
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:15:10.980Z",
+      "final_url": "https://stats47.jp/ranking/agricultural-output"
+    },
+    {
+      "url": "https://stats47.jp/areas/13000",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:16:19.756Z",
+      "scores": {
+        "performance": 41,
+        "accessibility": 93,
+        "best_practices": 81,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 8551.152437525117,
+        "TBT_ms": 934.0000000000009,
+        "CLS": 0.012036,
+        "FCP_ms": 4201.07206137551,
+        "TTI_ms": 16808.952165400908,
+        "SI_ms": 5686.154290950478,
+        "TTFB_ms": 10
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:15:50.974Z",
+      "final_url": "https://stats47.jp/areas/13000"
+    },
+    {
+      "url": "https://stats47.jp/areas/13000",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:16:49.755Z",
+      "scores": {
+        "performance": 60,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1808.5733315801904,
+        "TBT_ms": 1241.267084045548,
+        "CLS": 0.003894,
+        "FCP_ms": 801.3224990138564,
+        "TTI_ms": 4168.307706048907,
+        "SI_ms": 1749.0965828002445,
+        "TTFB_ms": 10
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:16:23.260Z",
+      "final_url": "https://stats47.jp/areas/13000"
+    },
+    {
+      "url": "https://stats47.jp/areas/27000",
+      "strategy": "mobile",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/areas/27000",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:18:20.671Z",
+      "scores": {
+        "performance": 37,
+        "accessibility": 96,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 3441.0060719877292,
+        "TBT_ms": 9308.5,
+        "CLS": 0.000489,
+        "FCP_ms": 1594.0060719877297,
+        "TTI_ms": 15346.884301227843,
+        "SI_ms": 5019.003867196553,
+        "TTFB_ms": 7
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:17:16.274Z",
+      "final_url": "https://stats47.jp/areas/27000"
+    },
+    {
+      "url": "https://stats47.jp/areas/01000",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:19:09.610Z",
+      "scores": {
+        "performance": 57,
+        "accessibility": 96,
+        "best_practices": 77,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 7351.041151280558,
+        "TBT_ms": 408.5,
+        "CLS": 0.000199,
+        "FCP_ms": 3751.0201378606985,
+        "TTI_ms": 15535.530553956869,
+        "SI_ms": 3751.0201378606985,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:18:45.864Z",
+      "final_url": "https://stats47.jp/areas/01000"
+    },
+    {
+      "url": "https://stats47.jp/areas/01000",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:19:38.757Z",
+      "scores": {
+        "performance": 66,
+        "accessibility": 96,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1459.3918080035041,
+        "TBT_ms": 733.0000000000013,
+        "CLS": 0.000153,
+        "FCP_ms": 561.1843802369432,
+        "TTI_ms": 3571.0740793952014,
+        "SI_ms": 1852.3041806778244,
+        "TTFB_ms": 9
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:19:13.233Z",
+      "final_url": "https://stats47.jp/areas/01000"
+    },
+    {
+      "url": "https://stats47.jp/areas/47000",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:19:56.719Z",
+      "scores": {
+        "performance": 63,
+        "accessibility": 96,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 7651.482867075703,
+        "TBT_ms": 237,
+        "CLS": 0.000199,
+        "FCP_ms": 3601.2167974625613,
+        "TTI_ms": 11369.57618342308,
+        "SI_ms": 3601.2167974625613,
+        "TTFB_ms": 7
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:19:41.667Z",
+      "final_url": "https://stats47.jp/areas/47000"
+    },
+    {
+      "url": "https://stats47.jp/areas/47000",
+      "strategy": "desktop",
+      "error": "PSI API 500: {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Lighthouse returned error: Something went wrong.\",\n    \"errors\": [\n      {\n        \"message\": \"Lighthouse returned error: Something went wr"
+    },
+    {
+      "url": "https://stats47.jp/blog",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:22:24.563Z",
+      "scores": {
+        "performance": 53,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 9602.207885832924,
+        "TBT_ms": 321.0000000000018,
+        "CLS": 0,
+        "FCP_ms": 4836.097236921852,
+        "TTI_ms": 12123.238389121754,
+        "SI_ms": 6216.6666035011185,
+        "TTFB_ms": 5
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:22:01.441Z",
+      "final_url": "https://stats47.jp/blog"
+    },
+    {
+      "url": "https://stats47.jp/blog",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:22:54.557Z",
+      "scores": {
+        "performance": 87,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1630.6087683667902,
+        "TBT_ms": 184.98783986683202,
+        "CLS": 0.000642,
+        "FCP_ms": 681.0423772857625,
+        "TTI_ms": 3047.815610990763,
+        "SI_ms": 1600.9266008124662,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:22:27.937Z",
+      "final_url": "https://stats47.jp/blog"
+    },
+    {
+      "url": "https://stats47.jp/blog/telework-gap-tokyo-6x",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:24:30.382Z",
+      "scores": {
+        "performance": 40,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 7280.916313917917,
+        "TBT_ms": 3889.5000000000014,
+        "CLS": 0,
+        "FCP_ms": 1202.505330828118,
+        "TTI_ms": 14446.906828211606,
+        "SI_ms": 6650.463332698141,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:23:54.560Z",
+      "final_url": "https://stats47.jp/blog/telework-gap-tokyo-6x"
+    },
+    {
+      "url": "https://stats47.jp/blog/telework-gap-tokyo-6x",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:24:57.144Z",
+      "scores": {
+        "performance": 68,
+        "accessibility": 97,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1351.2266471767475,
+        "TBT_ms": 525,
+        "CLS": 0.073722,
+        "FCP_ms": 922.9483162796543,
+        "TTI_ms": 3072.0044945051322,
+        "SI_ms": 1931.7730553918072,
+        "TTFB_ms": 3
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:24:34.367Z",
+      "final_url": "https://stats47.jp/blog/telework-gap-tokyo-6x"
+    },
+    {
+      "url": "https://stats47.jp/about",
+      "strategy": "mobile",
+      "fetched_at": "2026-04-24T11:25:13.246Z",
+      "scores": {
+        "performance": 54,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 8851.58359751505,
+        "TBT_ms": 287.5,
+        "CLS": 0,
+        "FCP_ms": 6234.39930356293,
+        "TTI_ms": 11237.124317335267,
+        "SI_ms": 6234.39930356293,
+        "TTFB_ms": 3
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4330,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 3003,
+          "category": "SLOW"
+        },
+        "TTFB": {
+          "percentile": 2376,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:25:00.381Z",
+      "final_url": "https://stats47.jp/about"
+    },
+    {
+      "url": "https://stats47.jp/about",
+      "strategy": "desktop",
+      "fetched_at": "2026-04-24T11:25:28.919Z",
+      "scores": {
+        "performance": 95,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1321.4292234729269,
+        "TBT_ms": 102,
+        "CLS": 0.029797,
+        "FCP_ms": 801.249226532667,
+        "TTI_ms": 2338.4712446167523,
+        "SI_ms": 824.1922765137665,
+        "TTFB_ms": 2
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 4415,
+          "category": "SLOW"
+        },
+        "INP": null,
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2820,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2486,
+          "category": "SLOW"
+        }
+      },
+      "analysis_utc": "2026-04-24T11:25:15.671Z",
+      "final_url": "https://stats47.jp/about"
+    }
+  ]
+}
