@@ -6,6 +6,16 @@ disable-model-invocation: true
 
 YouTube Shorts 投稿用コンテンツ（タイトル・説明）を生成してローカル R2 に保存する。
 
+## 事前チェック（必須）
+
+実行前に投稿ガードを通す。停止期間中 or 週 3 本上限到達時は exit 1 で即停止する:
+
+```bash
+node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
+```
+
+ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。
+
 ## 引数
 
 ユーザーから以下を確認すること:

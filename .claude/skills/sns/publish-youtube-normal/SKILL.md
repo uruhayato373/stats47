@@ -7,6 +7,16 @@ argument-hint: <rankingKey> [--schedule <ISO8601>]
 
 YouTube 通常動画（16:9 ScrollGes テンプレート）の制作からアップロード・DB 記録・ローカル削除までを一貫実行する。
 
+## 事前チェック（必須）
+
+実行前に投稿ガードを通す。停止期間中 or 週 3 本上限到達時は exit 1 で即停止する:
+
+```bash
+node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
+```
+
+ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。
+
 ## 引数
 
 | パラメータ | 必須 | デフォルト | 説明 |

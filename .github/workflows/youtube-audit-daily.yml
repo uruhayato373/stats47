@@ -1,0 +1,88 @@
+name: 📺 YouTube Audit (daily)
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # JST 09:00 daily (UTC 00:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: youtube-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔑 Compose .env.local from secrets
+        run: |
+          cat > .env.local <<EOF
+          GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN=${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          EOF
+
+      - name: 🚀 Run YouTube daily audit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .claude/scripts/youtube/youtube-daily-audit.mjs
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f .claude/state/metrics/youtube/LATEST.md ]; then
+            cat .claude/state/metrics/youtube/LATEST.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "YouTube LATEST.md not generated" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 📦 Stage metrics outputs
+        run: |
+          mkdir -p /tmp/youtube-publish
+          cp -r .claude/state/metrics/youtube/* /tmp/youtube-publish/ 2>/dev/null || true
+          ls -la /tmp/youtube-publish
+
+      - name: 📤 Publish to develop branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # .env.local は削除、working tree は /tmp/youtube-publish に退避済なのでリセット
+          rm -f .env.local
+          git reset --hard HEAD
+          git clean -fd
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          mkdir -p .claude/state/metrics/youtube
+          cp -r /tmp/youtube-publish/* .claude/state/metrics/youtube/ 2>/dev/null || true
+
+          git add .claude/state/metrics/youtube
+          if git diff --cached --quiet; then
+            echo "No YouTube metrics changes to publish"
+            exit 0
+          fi
+
+          git commit -m "chore(metrics): youtube daily audit $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git push origin develop
