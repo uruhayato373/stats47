@@ -4,14 +4,13 @@ import {
   fetchFormattedStats,
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import {
   findRankingItem,
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
 } from "@stats47/ranking/server";
-import { isOk, type TopoJSONTopology } from "@stats47/types";
+import { isOk } from "@stats47/types";
 
 
 import { getEstatCacheStorage } from "@/features/stat-charts/server";
@@ -23,7 +22,7 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  topology: TopoJSONTopology | null;
+  // topology はクライアント側で取得（LCP 改善、#74 同パターン）
 }
 
 /**
@@ -93,12 +92,7 @@ export async function loadThemeData(
 
   if (validItems.length === 0) return null;
 
-  // 2. 全指標のデータ + TopoJSON を並列取得
-  const topologyPromise = fetchPrefectureTopology().catch((error) => {
-    logger.error({ error }, "テーマダッシュボード: topology取得失敗");
-    return null;
-  });
-
+  // 2. 全指標のデータを並列取得（topology はクライアント側で fetch、#74 同パターン）
   const valuesPromises = validItems.map(({ key, item }) => {
     const yearCode = item.latestYear?.yearCode;
     if (!yearCode)
@@ -111,10 +105,7 @@ export async function loadThemeData(
       });
   });
 
-  const [topology, ...valuesResults] = await Promise.all([
-    topologyPromise,
-    ...valuesPromises,
-  ]);
+  const valuesResults = await Promise.all(valuesPromises);
 
   // 3. indicatorDataMap を構築（availableYears を含む）
   const indicatorDataMap: Record<string, ThemeIndicatorData> = {};
@@ -132,5 +123,5 @@ export async function loadThemeData(
 
   if (Object.keys(indicatorDataMap).length === 0) return null;
 
-  return { indicatorDataMap, topology };
+  return { indicatorDataMap };
 }
