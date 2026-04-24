@@ -12,7 +12,10 @@
     "db:studio": "cd packages/database && cross-env DB_LOCAL=true npx drizzle-kit studio",
     "r2:upload": "tsx packages/r2-storage/src/scripts/sync-upload.ts",
     "r2:download": "tsx packages/r2-storage/src/scripts/sync-download.ts",
-    "r2:ges-portrait": "tsx packages/r2-storage/src/scripts/generate-portrait-videos.ts"
+    "r2:ges-portrait": "tsx packages/r2-storage/src/scripts/generate-portrait-videos.ts",
+    "fetch-psi-audit": "node .claude/scripts/psi/fetch-psi-audit.mjs",
+    "psi-audit:check": "node .claude/scripts/psi/psi-threshold-check.mjs",
+    "psi-audit:digest": "node .claude/scripts/psi/psi-update-digest.mjs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

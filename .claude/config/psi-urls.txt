@@ -1,0 +1,41 @@
+# PageSpeed Insights 計測対象 URL リスト
+#
+# 運用方針: レンダリングパス × ページ種別の代表ページを測定する。同テンプレの 47 都道府県ページは性能がほぼ同じ前提。
+# 追加・削除する時は以下のルールに従う:
+#   - ページ種別ごとに 1-3 URL に絞る（同じテンプレを 10 本測らない）
+#   - # で始まる行はコメントとして無視される
+#   - 空行も無視される
+#
+# 全ページ対象にしない理由: PSI API は 1 URL あたり 20-40 秒かかり、数千ページ × mobile+desktop は非現実的。
+# 代表 URL でテンプレ単位の性能デグレを捕捉する設計。
+
+# ── サイト主要ハブ ──
+https://stats47.jp/
+https://stats47.jp/ranking
+https://stats47.jp/areas
+https://stats47.jp/themes
+https://stats47.jp/search
+
+# ── テーマダッシュボード（D3 チャート+D1 クエリの重いレンダリング） ──
+https://stats47.jp/themes/population-dynamics
+https://stats47.jp/themes/local-economy
+https://stats47.jp/themes/labor-wages
+
+# ── ランキング詳細（PV 上位・SSR+地図+チャートの代表テンプレ） ──
+https://stats47.jp/ranking/total-population
+https://stats47.jp/ranking/annual-sunshine-duration
+https://stats47.jp/ranking/future-population-change-rate-2050
+https://stats47.jp/ranking/agricultural-output
+
+# ── エリアプロファイル（人口規模の両端で代表） ──
+https://stats47.jp/areas/13000
+https://stats47.jp/areas/27000
+https://stats47.jp/areas/01000
+https://stats47.jp/areas/47000
+
+# ── ブログ（記事ページの代表テンプレ） ──
+https://stats47.jp/blog
+https://stats47.jp/blog/telework-gap-tokyo-6x
+
+# ── 固定ページ ──
+https://stats47.jp/about
