@@ -18,4 +18,8 @@ export interface ArticleFrontmatter {
   published?: boolean;
   rankingKey?: string;
   affiliate?: AffiliateProduct;
+  /** 執筆者。Article JSON-LD の author Person.name に使われる。未指定時は運営者 (KAZU) */
+  author?: string;
+  /** 校閲者。Article JSON-LD の reviewedBy Person.name に使われる（任意） */
+  reviewedBy?: string;
 }
