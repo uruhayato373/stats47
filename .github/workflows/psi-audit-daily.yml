@@ -43,11 +43,15 @@ jobs:
 
       - name: 🔍 Threshold check
         id: check
-        continue-on-error: true
         run: |
           mkdir -p /tmp/psi-report
+          # bash -e で npm run の非ゼロ終了が即 exit する問題を回避し、exit code を変数に保存
+          set +e
           npm run psi-audit:check -- --output /tmp/psi-report/report.md
-          echo "exit_code=$?" >> $GITHUB_OUTPUT
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=${EXIT_CODE}" >> $GITHUB_OUTPUT
+          echo "Threshold check exit code: ${EXIT_CODE}"
 
       - name: 📄 Write GitHub Step Summary
         if: always()
