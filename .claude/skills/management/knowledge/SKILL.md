@@ -310,3 +310,48 @@ user-invocable: false
 - `.claude/skills/sns/publish-x/publish-x.ts` L220-260（fail-safe 予約モード検出）
 - `.claude/skills/sns/publish-x/SKILL.md`（初回 `--dry-run` 必須手順）
 - `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
+
+---
+
+## Indexing API は `siteOwner` 権限必須（`siteFullUser` では 403）
+
+**問題**: Google Search Console でサービスアカウントを「フルユーザー」として追加しても、Indexing API (`urlNotifications.getMetadata` / `publish`) が `403 PERMISSION_DENIED: Failed to verify the URL ownership` を返す。
+
+**原因**: Indexing API は公式に「Owner-level access」を要求する（[公式ドキュメント](https://developers.google.com/search/apis/indexing-api/v3/prereqs)）。GSC の UI では「フルユーザー」「所有者」の 2 種類を選べるが、Indexing API が受け入れるのは「所有者」のみ。公式エラーメッセージが "URL ownership" という表現で紛らわしい。
+
+**対策**:
+- GSC の「設定 → ユーザーと権限」で該当 SA の行を **削除 → 再度追加（所有者として）**
+- 昇格直後 5 分〜1 日は反映待ちの場合あり
+- 疎通確認コマンド:
+  ```js
+  const sites = await sc.sites.list();  // permissionLevel が siteOwner になっていること
+  await indexing.urlNotifications.publish({
+    requestBody: { url: 'https://example.com/', type: 'URL_UPDATED' }
+  });  // 200 が返れば疎通 OK
+  ```
+
+**関連**:
+- Issue #45（stats47 の調査記録）
+- `.claude/skills/analytics/indexing-api-submit/SKILL.md`
+
+---
+
+## Server Component で fetch した大きなデータを Client Component に prop で渡すと HTML に JSON シリアライズされる
+
+**問題**: ランキング詳細 (`/ranking/[key]`) とテーマダッシュボード (`/themes/*`) で、モバイル LCP が 12 秒前後と異常値。`curl | wc -c` で本番 HTML を見ると 1.2MB、そのうち 99% が TopoJSON (`arcs` データ) だった。
+
+**原因**: Next.js App Router で Server Component が `await fetchPrefectureTopology()` したデータを、そのまま Client Component の prop として渡していた。React Server Component の境界で prop が **JSON シリアライズされて HTML に埋め込まれる** ため、1.2MB の TopoJSON が全ページに配信される → パース時間・hydration 時間を食って LCP を悪化。
+
+**対策**:
+- 大きなデータ (>100KB) は **Client Component 内で useEffect + Server Action 経由で取得** する
+- Skeleton → 実コンポーネントの 2 段階描画。LCP 要素がテキストになる
+- 実装例: `apps/web/src/features/ranking/actions/fetch-prefecture-topology.ts`（Server Action）+ `RankingMapChartClient` / `ThemeLeafletMap` の `useState + useEffect` 経由取得
+
+**判断基準**:
+- prop として渡すデータが **同じセッション中に一度しか使わない + 100KB 以上** なら client fetch 化
+- 逆に頻繁に更新される小さい状態（ユーザー選択値等）は SSR で埋め込んで良い
+
+**関連**:
+- Issue #74 (ranking), #86 の /themes 対応
+- PR #75 #86
+
