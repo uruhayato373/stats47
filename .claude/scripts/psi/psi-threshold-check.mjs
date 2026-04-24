@@ -231,6 +231,62 @@ function formatMarkdown(results, violations) {
       }
       lines.push("");
     }
+
+    const lcpViolated = new Set(
+      violations
+        .filter((v) => v.metric_key === "lcp_ms")
+        .map((v) => `${v.url}::${v.strategy}`)
+    );
+    const clsViolated = new Set(
+      violations
+        .filter((v) => v.metric_key === "cls")
+        .map((v) => `${v.url}::${v.strategy}`)
+    );
+
+    const lcpRows = results.filter(
+      (r) => !r.error && lcpViolated.has(`${r.url}::${r.strategy}`) && r.lcp_element
+    );
+    if (lcpRows.length > 0) {
+      lines.push("## LCP 要素（違反ページのみ）");
+      lines.push("");
+      lines.push("| URL | Strategy | LCP element | selector |");
+      lines.push("|---|---|---|---|");
+      for (const r of lcpRows) {
+        const path = r.url.replace(/^https?:\/\/[^/]+/, "") || "/";
+        const label = r.lcp_element.node_label || "-";
+        const selector = r.lcp_element.selector || "-";
+        lines.push(
+          `| ${path} | ${r.strategy} | ${label.slice(0, 60)} | \`${selector.slice(0, 80)}\` |`
+        );
+      }
+      lines.push("");
+    }
+
+    const clsRows = results.filter(
+      (r) =>
+        !r.error &&
+        clsViolated.has(`${r.url}::${r.strategy}`) &&
+        Array.isArray(r.cls_contributors) &&
+        r.cls_contributors.length > 0
+    );
+    if (clsRows.length > 0) {
+      lines.push("## CLS 主要レイアウトシフト（違反ページのみ）");
+      lines.push("");
+      for (const r of clsRows) {
+        const path = r.url.replace(/^https?:\/\/[^/]+/, "") || "/";
+        lines.push(`### ${path} (${r.strategy})`);
+        lines.push("");
+        lines.push("| # | score | element | selector |");
+        lines.push("|---|---|---|---|");
+        r.cls_contributors.forEach((c, i) => {
+          const label = (c.node_label || "-").slice(0, 60);
+          const selector = (c.selector || "-").slice(0, 80);
+          const score = c.score != null ? c.score.toFixed(4) : "-";
+          lines.push(`| ${i + 1} | ${score} | ${label} | \`${selector}\` |`);
+        });
+        lines.push("");
+      }
+    }
   } else {
     lines.push("## しきい値違反");
     lines.push("");
