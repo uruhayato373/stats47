@@ -122,14 +122,15 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - 前週 snapshot Issue のクローズ判定
    順位 11-20 位の「あと一押し」クエリは queries.csv から抽出する。
 
-   **続けて Coverage Drilldown 継続記録（Phase 7、2026-04-26 追加）**:
+   **続けて Coverage Drilldown 継続記録（Phase 7、2026-04-26 追加・v2）**:
    ```bash
    node .claude/scripts/gsc/parse-coverage-drilldown.cjs
    ```
-   - 入力: `~/Downloads/stats47.jp-Coverage-Drilldown-YYYY-MM-DD*.zip`（v2、未対応）または `gcsエラー/{category}.csv`（v1）
+   - 入力: `~/Downloads/stats47.jp-Coverage-Drilldown-YYYY-MM-DD*.zip`（複数 zip 直接読む、中継ディレクトリ不要）
    - 出力: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/` + `LATEST.md` + `history.csv`
+   - **取り込み後**: Downloads の zip は自動削除
    - 失敗時: stderr に「GSC UI export 手順」が出るのでユーザーに依頼。レビュー本文に「Coverage Drilldown 取得失敗」と 1 行記載
-   - 成功時: `LATEST.md` の表（6 カテゴリ × 件数 × 前週比）をレビュー本文「パフォーマンス → GSC」セクションに埋め込む
+   - 成功時: `LATEST.md` の表（カテゴリ × 件数 × 前週比）をレビュー本文「パフォーマンス → GSC」セクションに埋め込む
    - 関連 issue: #43（[T0-DECAY-01] Coverage Drilldown 週次記録）
 
 4.5. AdSense snapshot 取得 → snapshot Issue 作成
