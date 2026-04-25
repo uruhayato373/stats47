@@ -46,20 +46,25 @@ export function GoogleAnalytics(): React.ReactElement | null {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+          // 国内向けサイトとして analytics_storage は granted デフォルト
+          // ad_storage のみ denied で広告領域は同意 opt-in。Issue #37
           gtag('consent', 'default', {
-            analytics_storage: 'denied',
+            analytics_storage: 'granted',
             ad_storage: 'denied',
           });
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}', {
             send_page_view: false,
           });
-          // localStorage から同意状態を復元
+          // localStorage の同意状態が denied なら analytics も off に降格
           try {
             var consent = localStorage.getItem('stats47_cookie_consent');
-            if (consent === 'granted') {
+            if (consent === 'denied') {
               gtag('consent', 'update', {
-                analytics_storage: 'granted',
+                analytics_storage: 'denied',
+              });
+            } else if (consent === 'granted') {
+              gtag('consent', 'update', {
                 ad_storage: 'granted',
               });
             }
