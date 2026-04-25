@@ -33,8 +33,11 @@ mkdir -p "$SNAPSHOT_DIR"
 cleanup() {
   rm -f "$RAW" 2>/dev/null
   browser-use close >/dev/null 2>&1 || true
+  # browser-use close は page を閉じるが daemon を止めない → 累積防止のため明示停止
+  pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null || true
+  pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null || true
 }
-trap cleanup EXIT
+trap cleanup EXIT INT TERM
 
 echo "[fetch-note-metrics] opening dashboard..."
 browser-use close >/dev/null 2>&1 || true

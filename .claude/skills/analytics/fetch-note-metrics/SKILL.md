@@ -80,6 +80,22 @@ bash .claude/scripts/note/fetch-note-metrics.sh
 - `3`: browser-use 実行エラー
 - それ以外: python/bash のエラー
 
+## ⚠️ 必須: 終了時クリーンアップ
+
+`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。スクリプト末尾と `trap` で必ず以下を実行する:
+
+```bash
+trap '
+  browser-use --headed --profile "Profile 1" close 2>/dev/null || true
+  pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
+  pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+' EXIT INT TERM
+
+# ... メイン処理 ...
+```
+
+trap を入れずに 1 日に何度も実行すると Chrome / Python daemon が累積する（2026-04-25 検証で 6 個残存を確認）。
+
 ## ログイン切れの対応
 
 Exit 2 が出た場合:
