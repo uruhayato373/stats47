@@ -18,18 +18,21 @@ export function CookieConsentBanner() {
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);
     if (!stored) {
-      // 未回答：デフォルト denied で初期化
-      window.gtag?.("consent", "default", {
-        analytics_storage: "denied",
-        ad_storage: "denied",
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
-      } as any);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync consent state from localStorage
+      // 未回答: GoogleAnalytics.tsx 側で analytics_storage=granted がデフォルト適用済。
+      // バナーは表示するが消極的 opt-out として運用（Issue #37）。
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- show banner
       setVisible(true);
     } else if (stored === "granted") {
+      // 広告領域も同意済の場合のみ ad_storage を granted へ
       window.gtag?.("consent", "update", {
-        analytics_storage: "granted",
         ad_storage: "granted",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
+      } as any);
+    } else if (stored === "denied") {
+      // ユーザー明示拒否: analytics / ad 両方 denied に降格
+      window.gtag?.("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
     }
@@ -47,6 +50,12 @@ export function CookieConsentBanner() {
 
   const handleDecline = () => {
     localStorage.setItem(CONSENT_KEY, "denied");
+    // 拒否時は明示的に analytics / ad 両方を denied に降格（Issue #37 残課題）
+    window.gtag?.("consent", "update", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
+    } as any);
     setVisible(false);
   };
 
