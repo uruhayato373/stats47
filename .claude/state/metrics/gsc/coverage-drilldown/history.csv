@@ -1,0 +1,2 @@
+week,total_count,count_404,count_5xx,count_redirect,count_alt_canonical,count_dup_no_canonical,count_soft_404,full_count_estimate_total,source,fetched_at
+2026-W17,4919,1000,1000,1000,885,534,500,,gcsエラー,2026-04-25T22:48:40.429Z

@@ -213,6 +213,21 @@ gh issue list --label tier-1 --state all
 
 初回利用時は Cloudflare の OAuth 認可画面が開く（ブラウザで Allow）。
 
+## 実証チェックリスト（effect/* ラベルを付ける前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか:
+  - Cloudflare 月次実測: `/cloudflare-cost-improvement` で snapshot 取得 → reference/weekly-snapshots/ に保存
+  - GraphQL Analytics API: workers / R2 / D1 別の利用量を直接クエリ
+- [ ] Cloudflare 仕様（Workers CPU/メモリ制限・R2 操作課金）を主張するなら公式ドキュメント URL を引用したか（`developers.cloudflare.com/...`）
+- [ ] 比較対象（before / after / baseline）が明確か
+- [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
+- [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
+- [ ] **コスト削減施策の前後比較は「同月内のリクエスト数で正規化」したか**（リクエスト数増減と施策効果が混ざる）
+
+このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
+
 ## 関連スキル
 
 - `/performance-improvement` — PSI / Lighthouse（速度系）

@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# GSC export 一時キャッシュ（継続記録は .claude/state/metrics/gsc/coverage-drilldown/ に集約）
+gcsエラー/
+
 # dependencies
 node_modules/
 /.pnp

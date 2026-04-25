@@ -198,6 +198,21 @@ gh issue list --label "metric/adsense-rpm"
 gh issue list --label adsense-improvement --label tier-1 --state all
 ```
 
+## 実証チェックリスト（effect/* ラベルを付ける前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか:
+  - AdSense 実測: `/fetch-adsense-data last28d` で RPM / impressions / clicks を取得
+  - 広告枠単位の比較: ad_unit dimension で配置別 RPM 差を確認
+- [ ] AdSense 仕様（CLS 影響・自動広告挙動）を主張するなら公式ドキュメント URL を引用したか（`support.google.com/adsense/...`）
+- [ ] 比較対象（before / after / baseline）が明確か
+- [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
+- [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
+- [ ] **CLS 対策と RPM 改善の因果は PSI 実測 + AdSense 比較の両方で確認したか**（片方だけでは判定不能）
+
+このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
+
 ## 関連スキル
 
 - `/fetch-adsense-data` — AdSense Management API から生データを取得（本 skill の入力ソース）

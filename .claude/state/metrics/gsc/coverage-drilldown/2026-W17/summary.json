@@ -1,0 +1,17 @@
+{
+  "week": "2026-W17",
+  "source": "gcsエラー",
+  "source_mtime": "2026-04-25T10:41:09.776Z",
+  "fetched_at": "2026-04-25T22:48:40.428Z",
+  "counts": {
+    "404": 1000,
+    "5xx": 1000,
+    "redirect": 1000,
+    "alt-canonical": 885,
+    "dup-no-canonical": 534,
+    "soft-404": 500
+  },
+  "sample_limit_per_category": 1000,
+  "full_count_estimate_total": null,
+  "full_count_estimate_note": "GSC UI のカバレッジレポート集計値を手入力。例: 404=5919, 5xx=2041 など"
+}

@@ -1,0 +1,90 @@
+name: 🔎 GSC URL Inspection (daily)
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # JST 06:00 = UTC 21:00 (前日)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Limit URLs (empty = full ~300)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: gsc-url-inspection-daily
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔎 Run URL Inspection
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+        run: |
+          if [ -n "${{ inputs.limit }}" ]; then
+            node .claude/scripts/gsc/url-inspection-daily.cjs --limit ${{ inputs.limit }}
+          else
+            node .claude/scripts/gsc/url-inspection-daily.cjs
+          fi
+
+      - name: 📅 Resolve date
+        id: date
+        run: echo "date=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/gsc/url-inspection/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(gsc): URL Inspection daily snapshot ${{ steps.date.outputs.date }}"
+            git push origin main
+          fi
+
+      - name: 💬 Comment summary on parent issue #115
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = '.claude/state/metrics/gsc/url-inspection/LATEST.md';
+            if (!fs.existsSync(path)) {
+              core.warning('LATEST.md not found, skipping comment');
+              return;
+            }
+            const body = fs.readFileSync(path, 'utf-8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 115,
+              body: body,
+            });
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          if [ -f .claude/state/metrics/gsc/url-inspection/LATEST.md ]; then
+            cat .claude/state/metrics/gsc/url-inspection/LATEST.md >> $GITHUB_STEP_SUMMARY
+          fi

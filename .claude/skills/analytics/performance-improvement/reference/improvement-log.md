@@ -2,12 +2,29 @@
 
 パフォーマンス指標（PSI スコア・Lab data・CrUX 実ユーザー計測）の継続的追跡と改善施策の記録。
 
-**運用ルール（gsc/ga4-improvement と同じ）:**
+> **2026-04-25 確認**: 推測ベース判定の根絶ルール（`.claude/rules/evidence-based-judgment.md`）に基づき本ファイルを点検。NG ワード（「のはず」「兆候」「浸透待ち」等）残存なし。新規エントリは下記テンプレに従うこと。
+
+**運用ルール:**
 - Append-only。過去エントリは改変しない
 - 日付は絶対日付（YYYY-MM-DD）
 - 数値はソース明示（「PSI 2026-03-28 取得 / snapshots/2026-03-28/metrics.csv」）
 - 施策とコミット hash をペアで記録
 - snapshot ディレクトリは本ログと一緒にコミット
+- **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
+- **実測値は取得コマンドへのリンク併記**
+
+## 新規エントリテンプレ（必ず参照: `.claude/rules/evidence-based-judgment.md`）
+
+```markdown
+### [EXP-NNN] タイトル
+- **デプロイ日**: YYYY-MM-DD / コミット: <hash>
+- **想定効果**: <定量値> [根拠: <PSI 過去事例 / web.dev URL>]
+- **検証コマンド**: `curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/<path>&strategy=mobile"`
+- **実測 (before)**: LCP X ms / CLS Y / 取得日 / `snapshots/<date>/metrics.csv`
+- **実測 (after)**: LCP X ms / CLS Y / 取得日 / `snapshots/<date>/metrics.csv`
+- **判定**: effect/* [根拠: 実測 / 想定 = X%、経過 N 日]
+- **未確定 / 仮説**: <あれば「[仮説] 〜 / 検証期日 YYYY-MM-DD」形式>
+```
 
 ---
 

@@ -190,6 +190,34 @@ gh issue list --label "metric/gsc-ctr"
 gh issue list --label gsc-improvement --label tier-1 --state all
 ```
 
+## 実証チェックリスト（effect/* ラベルを付ける前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか:
+  - URL 単位の Google 認識: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 10`（pageFetchState / coverageState / lastCrawlTime を取得）
+  - 本番 HTTP 挙動: `curl -A "Mozilla/5.0 (compatible; Googlebot/2.1)" -o /dev/null -w "%{http_code}\n" https://stats47.jp/<path>`
+  - GSC 全体 snapshot: `/fetch-gsc-data last28d page snapshot YYYY-Www`
+- [ ] Google 仕様を主張するなら公式ドキュメント URL を引用したか（`developers.google.com/search/...`）
+- [ ] 比較対象（before / after / baseline）が明確か
+- [ ] NG ワード（「のはず」「Google の仕様」「クロール予算枯渇」「兆候」「浸透待ち」）を使っていないか
+- [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
+- [ ] **「Google が再クロールしているか」を URL Inspection API の lastCrawlTime 推移で確認したか**（GSC export の「サーバーエラー」レポートは古いスナップショットなので根拠にならない）
+
+このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
+
+### 早期警戒トリガー（cutoff 日を絶対視しない）
+
+ルーブリックの cutoff 日（暫定 21 日）を待たず、日次観測で以下に達したら早期 action:
+
+| 警戒レベル | 条件 | アクション |
+|---|---|---|
+| 緑 | 再クロール件数 / 日 > 50 | 観測継続 |
+| 黄 | 経過 7 日後で再クロール件数 / 日 < 5 | 案 B 準備（GSC URL 削除リクエスト下書き） |
+| 赤 | 経過 14 日後で再クロール件数 / 日 < 5 | cutoff を待たず案 B フル発動 |
+
+詳細根拠: `reference/rubric-rationale.md`
+
 ## 関連スキル
 
 - `/fetch-gsc-data` — GSC API から生データを取得（本 skill の入力ソース）

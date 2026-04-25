@@ -8,6 +8,7 @@ import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
+import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
 
 
 import type { MetadataRoute } from "next";
@@ -46,8 +47,16 @@ const AREA_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.map((code) => ({
   priority: 0.8,
 }));
 
+// 2026-04-25: sitemap に出すサブカテゴリは population のみに絞る（クロール予算節約）。
+// middleware/page.tsx は INDEXABLE_AREA_CATEGORIES_SET をそのまま使い続けるため、
+// /areas/{prefCode}/economy など既存インデックス済みページは引き続き 200 を返す。
+// Google は sitemap で発見しなくなるが既存インデックスは保持される設計。
+const SITEMAP_AREA_CATEGORIES = INDEXABLE_AREA_CATEGORIES.filter(
+  (cat) => cat === "population"
+);
+
 const AREA_CATEGORY_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.flatMap((code) =>
-  INDEXABLE_AREA_CATEGORIES.map((cat) => ({
+  SITEMAP_AREA_CATEGORIES.map((cat) => ({
     url: `${BASE_URL}/areas/${code}/${cat}`,
     changeFrequency: "weekly" as const,
     priority: 0.7,
@@ -67,8 +76,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .from(rankingItems)
       .where(eq(rankingItems.isActive, true));
 
+    // 2026-04-25: sitemap には GSC で実際に Impressions ≥ 1 が出ている ranking のみ載せる。
+    // 残りの ranking は middleware で 200 を返し続けるが sitemap で発見させない。
+    // 元データ生成: node .claude/scripts/gsc/build-indexable-ranking-keys.cjs
     const rankingPages: MetadataRoute.Sitemap = rankingRows
       .filter((row) => !GONE_RANKING_KEYS.has(row.rankingKey))
+      .filter((row) => INDEXABLE_RANKING_KEYS.has(row.rankingKey))
       .map((row) => ({
         url: `${BASE_URL}/ranking/${row.rankingKey}`,
         lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
@@ -133,8 +146,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
     ];
 
-    // タグページ（公開記事が 2 本以上あるタグのみ）
-    // 1 本しかないタグは thin content と判定されやすいため sitemap から除外。
+    // タグページ（公開記事が 5 本以上あるタグのみ）
+    // 2026-04-25: 閾値 2 → 5 に厳格化（クロール予算節約）。
+    // 1-4 本のタグは thin content と判定されやすいため sitemap から除外。
     // page.tsx 側でも generateMetadata で noindex, follow を返す。
     const tagRows = await db
       .select({
@@ -145,7 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .innerJoin(articles, eq(articleTags.slug, articles.slug))
       .where(eq(articles.published, true))
       .groupBy(articleTags.tagKey)
-      .having(sql`count(*) >= 2`);
+      .having(sql`count(*) >= 5`);
 
     const tagPages: MetadataRoute.Sitemap = tagRows.map((row) => ({
       url: `${BASE_URL}/tag/${row.tagKey}`,

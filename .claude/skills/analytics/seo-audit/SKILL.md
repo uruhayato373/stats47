@@ -440,6 +440,22 @@ VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, dat
 - **隔週**: キーワード分析のみ（`--focus keywords`）
 - **四半期**: `/pre-mortem` と合わせて実施
 
+## 実証チェックリスト（監査結果を Issue/レポートに confirmed と書く前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか:
+  - インデックス状況: `node .claude/scripts/gsc/url-inspection-daily.cjs` で URL 単位の coverageState / lastCrawlTime を取得（GSC impressions だけで「インデックス済み」と判定しない）
+  - 本番 HTTP: `curl -A "Mozilla/5.0 (compatible; Googlebot/2.1)" -o /dev/null -w "%{http_code}\n" https://stats47.jp/<path>`
+  - 構造化データ: 公式 Rich Results テスト（`https://search.google.com/test/rich-results?url=<URL>`）
+- [ ] Google 検索仕様の主張は公式 URL（`developers.google.com/search/...`）を併記したか
+- [ ] 「Low-Hanging Fruit（順位 4-20 位、imp 高）」の改善見込み計算に過去類似改善の実績を引用したか
+- [ ] NG ワード（「のはず」「と思われる」「兆候」）を使っていないか
+- [ ] 推奨アクションごとに「効果が出る検証コマンド + 検証期日」をセットで書いたか
+- [ ] **「クロール済み未登録 / 検出未登録」を判断するときは GSC UI スナップショットだけでなく URL Inspection API の最新 lastCrawlTime を確認したか**
+
+このチェック未満なら confirmed / done と書かない。draft / pending のままにすること。
+
 ## 参照
 
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得
