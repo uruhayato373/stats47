@@ -156,21 +156,37 @@ browser-use --headed --profile Default click $TITLE_IDX
 browser-use --headed --profile Default type "<タイトルテキスト>"
 ```
 
-## Phase 4: 本文入力（セグメント方式）
+## Phase 4: 本文入力（一括 paste 方式）
 
-### 4-1. 最初のテキストセグメントを ClipboardEvent でペースト
+**確定原則**（2026-04-25 検証）:
+- ClipboardEvent paste は **同一エディタで 1 回しか機能しない**（2 回目以降の eval は `result: None` で失敗）
+- `type` コマンドは note エディタの markdown shortcut（`##` / `###` / `**bold**`）を **発動しない** → literal 文字列として残る
+
+→ 最善策は **「全セグメントを 1 つの markdown 文字列に連結 → 1 回だけ ClipboardEvent paste」**。
+これにより H2 / H3 / 太字すべて正しく変換される。トレードオフ: URL は plain text のまま貼られて OGP カード化しない。
+
+### 4-1. 本文エリアにフォーカス
 
 ```bash
 BODY_IDX=$(find_idx "contenteditable=true role=textbox")
 browser-use --headed --profile Default click $BODY_IDX
 ```
 
+### 4-2. 全本文を 1 回 paste
+
 ```bash
-# segment 0 のテキストを encodeURIComponent で準備
-ENCODED=$(node -e "
+# 全セグメントを連結して /tmp/note-body-<slug>.txt に保存
+node -e "
 const data = JSON.parse(require('fs').readFileSync('/tmp/note-data-<slug>.json','utf8'));
-process.stdout.write(encodeURIComponent(data.segments[0].content));
-")
+const body = data.segments
+  .map(s => s.type === 'url' ? '\n\n' + s.content + '\n\n' : s.content)
+  .join('')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();
+require('fs').writeFileSync('/tmp/note-body-<slug>.txt', body);
+"
+
+ENCODED=$(node -e "process.stdout.write(encodeURIComponent(require('fs').readFileSync('/tmp/note-body-<slug>.txt','utf8')))")
 browser-use --headed --profile Default eval "
   const editor = document.querySelector('[contenteditable=true]');
   if (editor) {
@@ -183,44 +199,23 @@ browser-use --headed --profile Default eval "
     'pasted ' + text.length + ' chars';
   } else { 'editor not found'; }
 "
-sleep 2
+sleep 3
 ```
 
-note エディタは `## ` を自動的に見出しに、`**太字**` を太字に変換する。
+### 4-3. URL カード化（手動仕上げ）
 
-### 4-2. 残りのセグメント（segment 1〜）を type で入力
+一括 paste では URL は plain text のまま。OGP カードに変換するには以下のいずれか:
 
-**segment 0 以降は全て `type` を使う。ClipboardEvent は使わない。**（ClipboardEvent は最初の1回目のみ確実に動作する制約あり）
+**人間が手動で**（推奨）: エディタ上で各 URL 行をクリック → 行末で Enter → 4 秒待つ → カード化
 
-各セグメントをループで処理する。`/tmp/note-data-<slug>.json` の segments 配列を Node.js で読み、セグメントごとに Bash コマンドを実行する。
+**または別 Phase で自動化（未実装、TODO）**: paste 後に各 URL の text node を eval で発見 → Selection API でカーソルを行末に置く → Enter キーを dispatch して note の URL→card 変換をトリガする実装を将来追加する余地あり。
 
-**URL セグメント:**
-
-```bash
-browser-use --headed --profile Default keys Enter
-browser-use --headed --profile Default keys Enter
-sleep 1
-browser-use --headed --profile Default type "<URL>"
-browser-use --headed --profile Default keys Enter
-sleep 4  # OGP カード変換待ち（4秒必須）
-```
-
-**テキストセグメント（URL 間のテキスト）:**
-
-テキストを行単位に分割し、1行ずつ `type` + `Enter` で入力する:
-
-```bash
-browser-use --headed --profile Default keys Enter
-browser-use --headed --profile Default type "<行テキスト>"
-browser-use --headed --profile Default keys Enter
-```
-
-`### ` プレフィックスは `type` でも h3 に変換される。
+---
 
 **重要:**
-- URL 入力後は **4秒待機**で OGP カード変換を待つ
-- カード変換完了前に次の入力をするとレイアウトが壊れる
-- テキストセグメントは `sleep 1` で十分
+- 必ず ClipboardEvent paste を使う（type は markdown 変換が効かない）
+- 連続 paste は不可 → 全本文を 1 つの string に連結する
+- URL カード化は paste 後の手動 / 別 Phase の責務
 
 ## Phase 5: 挿絵の挿入
 
