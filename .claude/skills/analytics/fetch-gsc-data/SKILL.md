@@ -310,7 +310,18 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ### snapshot モード完了後の連携
 
-`/weekly-review` から呼ばれた場合は、続けて `/gsc-improvement observe` が実行されて Observation Log に追記される。ユーザーが単体で `/fetch-gsc-data snapshot` を呼んだ場合は、観測ログ追記は手動で `/gsc-improvement observe` を実行する必要がある。
+1. `/weekly-review` から呼ばれた場合は、続けて `/gsc-improvement observe` が実行されて Observation Log に追記される。ユーザーが単体で `/fetch-gsc-data snapshot` を呼んだ場合は、観測ログ追記は手動で `/gsc-improvement observe` を実行する必要がある。
+
+2. **Coverage Drilldown 継続記録の自動連鎖（Phase 7、2026-04-26 追加）**:
+   snapshot モード末尾で以下を必ず実行:
+   ```bash
+   node .claude/scripts/gsc/parse-coverage-drilldown.cjs
+   ```
+   - 入力: `~/Downloads/stats47.jp-Coverage-Drilldown-YYYY-MM-DD*.zip` (v2、現在は未対応) または `gcsエラー/{category}.csv` (v1)
+   - 出力: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv` + `LATEST.md` + `history.csv`
+   - 冪等性: 同じ入力なら 2 回実行で skip
+   - 失敗時: stderr にユーザー手順案内、exit 1
+   - 詳細: 親 issue #115 / #43 / `.claude/scripts/gsc/parse-coverage-drilldown.cjs` のヘッダコメント参照
 
 ## よく使うパターン
 
