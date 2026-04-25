@@ -77,6 +77,23 @@ GitHub Issue（`[Critical Review] {対象名}` タイトル、`critical-review` 
 - `critical-review` — 本スキルが作成する Issue のラベル
 - weekly-plan / weekly-review / pre-mortem / 各改善施策 Issue からクロスリファレンスされる
 
+## 実証チェックリスト（批判的指摘を Issue にまとめる前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 「実態データを直接検証する」を文字通り実行したか:
+  - 主張する事象の実証コマンド（curl / GSC API / GA4 API / D1 query 等）を最低 1 つ実行
+  - 結果を Issue 本文に「検証コマンド + 実測値 + 取得日」として記載
+- [ ] 仮説 / 証拠 / 反証可能性を 3 点セットで書いたか
+  - 仮説: 「〜が原因で X が起きている」
+  - 証拠: 実測コマンド結果、ログ、API レスポンス
+  - 反証: 「もし〜なら本仮説は棄却される」の検証期日
+- [ ] NG ワード（「のはず」「と思われる」「兆候」「だろう」）を批判の論拠に使っていないか
+- [ ] 過去 close 済の関連 Issue を最低 3 件読み返したか（同じ批判の繰り返しでないか確認）
+- [ ] **「過去施策が効かなかった」と批判するときは、その施策の effect ラベル根拠（実測コマンド）を確認したか**（推測ベース判定で effect/none が付いていた可能性）
+
+このチェック未満の批判は draft / ペンディングのまま。論拠が固まるまで Decided にしない。
+
 ## 参照
 
 - `gh issue list --label critical-review --state all` — 過去のレビュー（トーンやフォーマットの参考）

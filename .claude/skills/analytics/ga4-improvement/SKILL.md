@@ -186,6 +186,21 @@ gh issue list --label "metric/ga4-engagement"
 gh issue list --label ga4-improvement --label tier-1 --state all
 ```
 
+## 実証チェックリスト（effect/* ラベルを付ける前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか:
+  - GA4 任意 dimension の実測: `/fetch-ga4-data last28d eventName,pagePath`（または該当する dimension）
+  - 比較期間取得: 同じコマンドで `last7d / last28d / last3m` を取って前期間との差分を確認
+- [ ] GA4 仕様（consent mode / event 定義）を主張するなら公式ドキュメント URL を引用したか（`developers.google.com/analytics/...`）
+- [ ] 比較対象（before / after / baseline）が明確か
+- [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
+- [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
+- [ ] **対象指標が「event 定義変更による表面的な数値変動」ではないか**（consent mode・GTM 設定変更時は計測断絶を疑う）
+
+このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
+
 ## 関連スキル
 
 - `/fetch-ga4-data` — GA4 Data API から生データを取得（本 skill の入力ソース）

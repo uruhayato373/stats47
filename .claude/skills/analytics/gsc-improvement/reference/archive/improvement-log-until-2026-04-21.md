@@ -1,4 +1,6 @@
-# GSC 改善記録
+# GSC 改善記録（archived）
+
+> **2026-04-25 注記**: 本ファイルは 2026-04-21 に archive 化され、施策管理は GitHub Issues（`gsc-improvement` ラベル）に移行済み。本ファイル内の effect 判定・原因推定・想定効果値には推測ベース判定が混在している（Agent 調査で約 65-70%）。後追い参照する場合は `.claude/rules/evidence-based-judgment.md` の基準で再評価すること。新規施策は `gsc-improvement` Issue で管理し、本ファイルへ追記しない。
 
 Google Search Console のインデックス問題を時系列で追跡する記録簿。
 更新ルールは `../SKILL.md` を参照。

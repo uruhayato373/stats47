@@ -52,6 +52,7 @@ packages/
 | テスト構成・追加指針 | `apps/web/tests/README.md` |
 | デザインシステム（melta-ui 準拠） | `.claude/design-system/README.md` |
 | コーディング標準（TypeScript/React/Next.js） | `.claude/rules/coding-standards.md` |
+| **実証ベース判定ルール（推測判定の禁止・effect 判定の必須要件）** | `.claude/rules/evidence-based-judgment.md` ★improvement / 判定系スキルでは必読 |
 | 画像生成 3 方式の使い分け（Satori / Remotion / 外部 AI） | `docs/01_技術設計/ogp_default_design.md` |
 | note / X / ブログ hero の画像プロンプトテンプレート（43 種） | `.claude/skills/image-prompt/reference/catalog.md` ★`/image-prompt` で呼び出し |
 
