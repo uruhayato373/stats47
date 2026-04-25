@@ -2,12 +2,29 @@
 
 X / YouTube / Instagram / TikTok の投稿パフォーマンス（impressions / views / engagement）の継続追跡と改善施策の記録。
 
-**運用ルール（gsc/ga4-improvement と同じ）:**
+> **2026-04-25 確認**: 推測ベース判定の根絶ルール（`.claude/rules/evidence-based-judgment.md`）に基づき本ファイルを点検。NG ワード（「のはず」「兆候」「浸透待ち」等）残存なし。新規エントリは下記テンプレに従うこと。
+
+**運用ルール:**
 - Append-only。過去エントリは改変しない
 - 日付は絶対日付（YYYY-MM-DD）
 - 数値はソース明示（「snapshots/2026-04-10/metrics.csv より」）
 - 施策とコミット hash をペアで記録
 - snapshot ディレクトリは本ログと一緒にコミット
+- **想定効果は必ず根拠を併記**（過去投稿実績 / プラットフォーム公式ガイド）
+- **実測値は `snapshots/<date>/metrics.csv` 行へのリンク併記**
+
+## 新規エントリテンプレ（必ず参照: `.claude/rules/evidence-based-judgment.md`）
+
+```markdown
+### [POST-XX or CAMPAIGN-XX] タイトル
+- **投稿日**: YYYY-MM-DD / プラットフォーム: X / YT / IG / TT
+- **想定効果**: <定量値> [根拠: 過去投稿 ID 平均 / プラットフォーム公式ベンチマーク URL]
+- **検証コマンド**: `/update-sns-metrics --platform <x|youtube|instagram|tiktok> --post-id <id>`
+- **実測 (24h)**: impressions / views / likes / shares / 取得日 / `snapshots/<date>/metrics.csv`
+- **実測 (7d)**: 同上
+- **判定**: effect/* [根拠: 実測 / 想定 = X%、経過 N 日]
+- **未確定 / 仮説**: <あれば「[仮説] 〜 / 検証期日 YYYY-MM-DD」形式>
+```
 
 ## データソース
 

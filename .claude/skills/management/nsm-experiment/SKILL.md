@@ -209,6 +209,22 @@ abandoned  abandoned  running (re-measure)
 # 次週の /weekly-plan で自動的に次の候補提案へループ
 ```
 
+## 実証チェックリスト（measure / close で effect を判定する前に必須）
+
+参照: `.claude/rules/evidence-based-judgment.md`
+
+- [ ] 検証コマンドを実行したか（実験のメトリクス取得元 API を直接叩く）:
+  - 該当する `/fetch-{gsc,ga4,adsense}-data` でメトリクスを取得
+  - `.claude/scripts/lib/metrics-reader.mjs` で statefile から取得
+  - 比較期間（before / experiment 中 / after）を明確に CSV に
+- [ ] 想定効果値の根拠（過去類似実験 / 計算式 / 参照論文）を `propose` 段階で書いたか
+- [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
+- [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
+- [ ] **「10 日経過」の閾値の根拠**（`references/playbook.md` or `references/rubric.md`）を引用したか。閾値が根拠なしなら 14 → 21 日に保守化
+- [ ] 同時並行で動いている他施策の影響を切り分けたか（A/B 比較が無理なら少なくとも「他施策デプロイ日と被っていないか」を記録）
+
+このチェック未満なら effect/full / effect/partial を付けて close しない。状態を running のままにすること。
+
 ## 参照
 
 - `references/definition.md` — NSM 定義と目標値のサマリ
