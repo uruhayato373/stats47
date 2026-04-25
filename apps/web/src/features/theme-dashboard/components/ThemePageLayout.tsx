@@ -18,6 +18,7 @@ import {
 } from "../utils";
 
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
@@ -74,6 +75,10 @@ export async function ThemePageLayout({ theme, data }: Props) {
         pageCharts={pageCharts}
         kpiDataByArea={kpiDataByArea}
       />
+
+      {theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0 && (
+        <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
+      )}
     </div>
   );
 }

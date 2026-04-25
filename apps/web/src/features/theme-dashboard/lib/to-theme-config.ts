@@ -36,5 +36,6 @@ export function toThemeConfig(set: IndicatorSet): ThemeConfig {
     keywords: set.keywords ?? [],
     tabIndicators,
     panelTabs: set.panelTabs as PanelTabGroup[] | undefined,
+    relatedArticleTagKeys: set.relatedArticleTagKeys,
   };
 }
