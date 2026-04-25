@@ -10,8 +10,8 @@
  *           `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
  * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-04-17
- * 件数: 1901
+ * 最終生成日: 2026-04-25
+ * 件数: 1920
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -60,6 +60,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "apparel-retail-store-count-per-1000",
   "apple-consumption-expenditure",
   "apple-consumption-quantity",
+  "aquaculture-harvest",
   "aquarium-count",
   "architect-annual-income",
   "art-museum-count",
@@ -531,6 +532,18 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "fish-pickled-consumption-expenditure",
   "fish-tsukudani-type2-consumption-expenditure",
   "fishery-output-value",
+  "fishery-species-catch-bonito",
+  "fishery-species-catch-japanese-squid",
+  "fishery-species-catch-kelp",
+  "fishery-species-catch-mackerel",
+  "fishery-species-catch-pacific-saury",
+  "fishery-species-catch-pollock",
+  "fishery-species-catch-sardine",
+  "fishery-species-catch-scallop",
+  "fishery-species-catch-sea-bream",
+  "fishery-species-catch-snow-crab",
+  "fishery-species-catch-tuna",
+  "fishery-species-catch-yellowtail",
   "fishery-workers",
   "fishing-port-count-ksj",
   "flavor-seasoning-consumption-expenditure",
@@ -764,6 +777,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "infant-deaths",
   "infant-mortality-rate-per-1000-births",
   "inflow-population-ratio",
+  "inland-aquaculture-harvest",
+  "inland-fishery-catch",
   "inpatient-rate-per-100k",
   "inpatients-per-fulltime-physician-per-day",
   "inpatients-per-nurse-per-day",
@@ -921,6 +936,10 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "manufacturing-shipment-amount-per-establishment",
   "margarine-consumption-expenditure",
   "margarine-consumption-quantity",
+  "marine-aquaculture-harvest",
+  "marine-fishery-aquaculture-output-value",
+  "marine-fishery-catch",
+  "marine-fishery-output-value",
   "maritime-import-export-cargo",
   "marriages",
   "marriages-per-total-population",

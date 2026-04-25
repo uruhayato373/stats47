@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: tags テーブルに新規 tag を追加した後。必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-04-21
- * 件数: 322
+ * 最終生成日: 2026-04-25
+ * 件数: 327
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "2024-problem",
@@ -111,6 +111,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "fish-catch",
   "fisheries-industry",
   "fishery",
+  "fishery-species-catch",
   "food-culture",
   "food-expenditure",
   "food-products",
@@ -212,6 +213,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "outing-disparity",
   "overseas-travel",
   "overtourism",
+  "pacific-saury",
   "park-area",
   "parks",
   "per-capita",
@@ -219,6 +221,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "pharmaceuticals",
   "physique",
   "polarization",
+  "pollock-fishing",
   "pollution",
   "population",
   "population-decline",
@@ -257,8 +260,10 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "ryokan",
   "sales-volume",
   "salmon-farming",
+  "sardine-fishing",
   "savings",
   "savings-rate",
+  "scallop-fishing",
   "school-education",
   "school-health-statistics",
   "school-refusal",
