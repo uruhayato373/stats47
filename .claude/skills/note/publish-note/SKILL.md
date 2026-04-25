@@ -46,22 +46,33 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 
 ### ⚠️ 必須: 終了時クリーンアップ
 
-`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。複数回実行すると `browser_use.skill_cli.daemon` が累積して Chrome / Python プロセスが残り続ける（2026-04-25 検証で 6 個残存を確認）。
+`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに `--profile "Profile 1"` で起動した場合は **ユーザーの実 Chrome 内にタブを開く**ため、daemon を kill してもエディタタブが残ってしまう（2026-04-25 検証で daemon 6 個 + note エディタタブ 5 個残存を確認）。
 
-**スキル完了時 / エラーで中断時に必ず以下を実行**:
+**スキル完了時 / エラーで中断時に必ず以下 3 段すべてを実行**:
 
 ```bash
-# Chrome ページを閉じる（best effort）
+# 1. Chrome ページを閉じる（best effort）
 browser-use --headed --profile Default close 2>/dev/null || true
 
-# daemon と紐付く chromium インスタンスを完全停止
+# 2. daemon と紐付く chromium インスタンスを完全停止
 pkill -TERM -f "browser_use.skill_cli.daemon" 2>/dev/null
 sleep 2
 pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
 pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+
+# 3. ユーザーの実 Chrome から残存 note エディタタブを閉じる（macOS 限定）
+osascript -e 'tell application "Google Chrome"
+  repeat with w in windows
+    repeat with t in tabs of w
+      if URL of t contains "editor.note.com" or URL of t contains "note.com/notes/" then
+        close t
+      end if
+    end repeat
+  end repeat
+end tell' 2>/dev/null || true
 ```
 
-エラー / 中断時の自動クリーンアップ確実化のため、Node.js orchestrator では `process.on('exit')` / `process.on('SIGINT')` 等で上記 pkill を必ず叩くこと。
+エラー / 中断時の自動クリーンアップ確実化のため、Node.js orchestrator では `process.on('exit')` / `process.on('SIGINT')` 等で上記 3 段を必ず叩くこと。bash スクリプトでは `trap` で同じ。
 
 ## 実行フロー概要
 
