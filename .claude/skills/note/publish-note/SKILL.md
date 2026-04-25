@@ -44,6 +44,25 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 - `$BU` 変数は使わない。毎回フルコマンドを書く
 - バッチ実行中はブラウザを閉じない（最後に1回だけ `close`）
 
+### ⚠️ 必須: 終了時クリーンアップ
+
+`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。複数回実行すると `browser_use.skill_cli.daemon` が累積して Chrome / Python プロセスが残り続ける（2026-04-25 検証で 6 個残存を確認）。
+
+**スキル完了時 / エラーで中断時に必ず以下を実行**:
+
+```bash
+# Chrome ページを閉じる（best effort）
+browser-use --headed --profile Default close 2>/dev/null || true
+
+# daemon と紐付く chromium インスタンスを完全停止
+pkill -TERM -f "browser_use.skill_cli.daemon" 2>/dev/null
+sleep 2
+pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
+pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+```
+
+エラー / 中断時の自動クリーンアップ確実化のため、Node.js orchestrator では `process.on('exit')` / `process.on('SIGINT')` 等で上記 pkill を必ず叩くこと。
+
 ## 実行フロー概要
 
 ```
@@ -52,12 +71,12 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
   Phase 1: ブラウザ起動 & エディタ表示
   Phase 2: アイキャッチ画像（※必ず本文入力前に実行）
   Phase 3: タイトル入力
-  Phase 4: 本文入力（ClipboardEvent + type）
-  Phase 5: 挿絵の挿入（目次経由）
+  Phase 4: 本文入力（一括 ClipboardEvent paste、URL は plain text）
+  Phase 5: 挿絵の挿入（目次経由、画像が揃っている場合）
   Phase 6: 下書き保存
   Phase 7: 公開設定（タグ・予約投稿）
   Phase 8: 確認スクリーンショット
-→ 全記事完了後にブラウザを閉じる
+→ 全記事完了後にブラウザを閉じる + 必須クリーンアップ（pkill daemon）
 ```
 
 ### Phase 0-6, 8: エディタ操作
