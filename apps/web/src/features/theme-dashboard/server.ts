@@ -17,6 +17,7 @@ import {
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
+  FISHERY_MARINE_SET,
 } from "@stats47/types";
 
 import { toThemeConfig } from "./lib/to-theme-config";
@@ -39,6 +40,7 @@ export const OCCUPATION_SALARY_THEME = toThemeConfig(OCCUPATION_SALARY_SET);
 export const REAL_INCOME_THEME = toThemeConfig(REAL_INCOME_SET);
 export const LABOR_MOBILITY_THEME = toThemeConfig(LABOR_MOBILITY_SET);
 export const LOCAL_FINANCE_THEME = toThemeConfig(LOCAL_FINANCE_SET);
+export const FISHERY_MARINE_THEME = toThemeConfig(FISHERY_MARINE_SET);
 
 // Server Component
 export { ThemePageLayout } from "./components/ThemePageLayout";

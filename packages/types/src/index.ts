@@ -93,4 +93,5 @@ export {
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
+  FISHERY_MARINE_SET,
 } from "./indicator-sets/registry";
