@@ -36,6 +36,16 @@ cleanup() {
   # browser-use close は page を閉じるが daemon を止めない → 累積防止のため明示停止
   pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null || true
   pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null || true
+  # ユーザーの実 Chrome に開いた note dashboard タブを閉じる（macOS 限定）
+  osascript -e 'tell application "Google Chrome"
+    repeat with w in windows
+      repeat with t in tabs of w
+        if URL of t contains "note.com/sitesettings" or URL of t contains "note.com/login" then
+          close t
+        end if
+      end repeat
+    end repeat
+  end tell' 2>/dev/null || true
 }
 trap cleanup EXIT INT TERM
 
