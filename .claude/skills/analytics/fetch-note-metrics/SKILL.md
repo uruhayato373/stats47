@@ -82,19 +82,28 @@ bash .claude/scripts/note/fetch-note-metrics.sh
 
 ## ⚠️ 必須: 終了時クリーンアップ
 
-`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。スクリプト末尾と `trap` で必ず以下を実行する:
+`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに `--profile "Profile 1"` で起動した場合は **ユーザーの実 Chrome 内にタブを開く** ため、daemon を kill してもタブが残る。スクリプト末尾と `trap` で必ず以下 3 段すべてを実行する:
 
 ```bash
 trap '
   browser-use --headed --profile "Profile 1" close 2>/dev/null || true
   pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
   pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+  osascript -e "tell application \"Google Chrome\"
+    repeat with w in windows
+      repeat with t in tabs of w
+        if URL of t contains \"note.com/sitesettings\" or URL of t contains \"note.com/login\" then
+          close t
+        end if
+      end repeat
+    end repeat
+  end tell" 2>/dev/null || true
 ' EXIT INT TERM
 
 # ... メイン処理 ...
 ```
 
-trap を入れずに 1 日に何度も実行すると Chrome / Python daemon が累積する（2026-04-25 検証で 6 個残存を確認）。
+trap を入れずに 1 日に何度も実行すると Chrome / Python daemon + note タブが累積する（2026-04-25 検証で daemon 6 個 + タブ 5 個残存を確認）。
 
 ## ログイン切れの対応
 
