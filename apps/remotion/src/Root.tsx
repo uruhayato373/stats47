@@ -1236,7 +1236,7 @@ export const RemotionRoot: React.FC = () => {
           width={CANVAS.youtube16x9.width}
           height={CANVAS.youtube16x9.height}
           fps={VIDEO_CONFIG.fps}
-          durationInFrames={1170}
+          durationInFrames={1440}
           schema={z.object({
             bgmPath: z.string().optional(),
           })}
