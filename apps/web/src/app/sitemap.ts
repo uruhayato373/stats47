@@ -79,9 +79,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 2026-04-25: sitemap には GSC で実際に Impressions ≥ 1 が出ている ranking のみ載せる。
     // 残りの ranking は middleware で 200 を返し続けるが sitemap で発見させない。
     // 元データ生成: node .claude/scripts/gsc/build-indexable-ranking-keys.cjs
+    //
+    // Phase 9 (2026-04-26): ranking_items は (ranking_key, area_type) 複合主キーのため
+    // 同じ ranking_key が複数 area_type で存在しうる。重複排除しないと sitemap.xml
+    // に同 URL が複数回出現し、Google が soft 404 / 重複コンテンツと判定するリスク。
+    const seenRankingKeys = new Set<string>();
     const rankingPages: MetadataRoute.Sitemap = rankingRows
       .filter((row) => !GONE_RANKING_KEYS.has(row.rankingKey))
       .filter((row) => INDEXABLE_RANKING_KEYS.has(row.rankingKey))
+      .filter((row) => {
+        if (seenRankingKeys.has(row.rankingKey)) return false;
+        seenRankingKeys.add(row.rankingKey);
+        return true;
+      })
       .map((row) => ({
         url: `${BASE_URL}/ranking/${row.rankingKey}`,
         lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,

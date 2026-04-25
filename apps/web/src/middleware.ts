@@ -11,13 +11,21 @@ import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 
 /**
- * 410 Gone 応答。Cloudflare エッジやブラウザでキャッシュされないよう no-store を付与する。
- * Cloudflare Cache Rule が 4xx を誤ってキャッシュしても middleware 側で防ぐ defense in depth。
+ * 410 Gone 応答。
+ *
+ * Phase 9 (2026-04-26): no-store を撤廃して CDN キャッシュ可能化。
+ * - 旧: no-store, must-revalidate → Google が毎回 origin に再確認 → クロール予算枯渇
+ * - 新: public, max-age=86400, s-maxage=604800 → Google が「永続削除」と認識して再確認頻度低下
+ * - X-Robots-Tag: noindex を併用して削除シグナル強化
+ * 公式根拠: https://developers.google.com/search/docs/crawling-indexing/http-caching
  */
 function gone(): Response {
   return new Response(null, {
     status: 410,
-    headers: { "Cache-Control": "no-store, must-revalidate" },
+    headers: {
+      "Cache-Control": "public, max-age=86400, s-maxage=604800",
+      "X-Robots-Tag": "noindex",
+    },
   });
 }
 
