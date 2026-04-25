@@ -125,4 +125,10 @@ export interface IndicatorSet {
   panelTabs?: IndicatorPanelTab[];
   /** SEO キーワード */
   keywords?: string[];
+  /**
+   * テーマに紐付く関連記事を取得するタグキー一覧。
+   * theme-dashboard ページの末尾に「関連記事」セクションとして表示される。
+   * `article_tags.tag_key` で記事を検索し、重複を除いて最大件数まで表示。
+   */
+  relatedArticleTagKeys?: string[];
 }

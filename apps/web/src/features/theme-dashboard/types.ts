@@ -41,6 +41,11 @@ export interface ThemeConfig {
   // チャートは chart_definitions テーブルで管理（Single Source of Truth）
   /** 統計パネルの KPI をタブでグルーピング（未指定時はフラット表示） */
   panelTabs?: PanelTabGroup[];
+  /**
+   * テーマに紐付く関連記事を取得するタグキー一覧。
+   * 未指定 or 空配列の場合、ThemePageLayout は関連記事セクションを描画しない。
+   */
+  relatedArticleTagKeys?: string[];
 }
 
 /** 指標ごとのプリロード済みデータ */
