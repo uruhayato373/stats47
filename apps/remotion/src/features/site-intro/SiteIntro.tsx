@@ -1,8 +1,8 @@
 /**
- * stats47 サイト紹介動画
+ * stats47 サイト紹介動画 — 縦スクロール構成版
  *
- * スクリーンショット画像を Ken Burns エフェクト + テキストオーバーレイで
- * アニメーションする 16:9 動画コンポジション。
+ * 詳細ページのフルページスクショを縦に流し、各機能の「中身の濃さ」を見せる。
+ * 個別ランキング → 地域ダッシュボード → 比較 → 相関 → テーマ → 個別ブログ。
  */
 import React from "react";
 import {
@@ -16,107 +16,121 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { BRAND, COLOR_SCHEMES, FONT, SPACING } from "@/shared/themes/brand";
+import { BRAND, FONT } from "@/shared/themes/brand";
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
-interface Scene {
-  /** スクリーンショット画像のパス (public/ 相対) */
+interface ScrollScene {
+  /** スクショパス (public/ 相対) */
   image: string;
-  /** メインタイトル */
+  /** スクショの native 高さ (px) — 2560 幅前提 */
+  imageHeight: number;
+  /** スクロール対象として使う最大高さ (native px)。これより下は見せない */
+  maxScrollHeight?: number;
   title: string;
-  /** サブテキスト */
   subtitle?: string;
-  /** Ken Burns: zoom 方向 */
-  zoom?: "in" | "out";
-  /** Ken Burns: pan 方向 */
-  pan?: "left" | "right" | "up" | "down" | "none";
-  /** シーンの長さ (フレーム数) */
   durationInFrames: number;
 }
 
-export interface SiteIntroProps {
-  scenes?: Scene[];
-  bgmPath?: string;
-}
-
 // ---------------------------------------------------------------------------
-// Default scenes
+// Constants
 // ---------------------------------------------------------------------------
 
-const DEFAULT_SCENES: Scene[] = [
+const CANVAS_W = 1920;
+const CANVAS_H = 1080;
+const IMG_W_NATIVE = 2560;
+
+const TITLE_DURATION = 120; // 4s
+const STATS_DURATION = 90; // 3s 数字モンタージュ
+const CTA_DURATION = 120; // 4s
+
+const SCROLL_SCENES: ScrollScene[] = [
   {
-    image: "images/site-intro/01-top.png",
-    title: "統計で見る都道府県",
-    subtitle: "800+の統計指標で47都道府県を可視化",
-    zoom: "in",
-    pan: "none",
+    image: "images/site-intro/scroll/ranking-detail.png",
+    imageHeight: 5056,
+    maxScrollHeight: 3500,
+    title: "ランキング詳細",
+    subtitle: "地図 → ランキング → 解説まで 1 画面に集約",
+    durationInFrames: 180, // 6s
+  },
+  {
+    image: "images/site-intro/scroll/area-dashboard.png",
+    imageHeight: 25308,
+    maxScrollHeight: 8000,
+    title: "地域ダッシュボード",
+    subtitle: "東京都の全カテゴリを 1 ページで俯瞰",
+    durationInFrames: 240, // 8s
+  },
+  {
+    image: "images/site-intro/scroll/compare.png",
+    imageHeight: 5914,
+    title: "地域間比較",
+    subtitle: "2 県を選んで全カテゴリを並列で比較",
+    durationInFrames: 180,
+  },
+  {
+    image: "images/site-intro/scroll/correlation.png",
+    imageHeight: 3230,
+    title: "相関分析",
+    subtitle: "1,477,364 ペアから意外な関係を発見",
     durationInFrames: 150, // 5s
   },
   {
-    image: "images/site-intro/02-ranking-list.png",
-    title: "ランキング",
-    subtitle: "あらゆる統計を都道府県別に比較",
-    zoom: "out",
-    pan: "down",
-    durationInFrames: 120, // 4s
+    image: "images/site-intro/scroll/theme-detail.png",
+    imageHeight: 3230,
+    title: "テーマダッシュボード",
+    subtitle: "16 のテーマで複数指標を横断分析",
+    durationInFrames: 150,
   },
   {
-    image: "images/site-intro/03-ranking-detail.png",
-    title: "詳細データ",
-    subtitle: "地図・グラフ・テーブルで多角的に分析",
-    zoom: "in",
-    pan: "left",
-    durationInFrames: 120,
-  },
-  {
-    image: "images/site-intro/04-ranking-map.png",
-    title: "コロプレスマップ",
-    subtitle: "地域差がひと目でわかる",
-    zoom: "in",
-    pan: "right",
-    durationInFrames: 120,
-  },
-  {
-    image: "images/site-intro/05-area-profile.png",
-    title: "地域プロファイル",
-    subtitle: "あなたの県の全体像を把握",
-    zoom: "out",
-    pan: "none",
-    durationInFrames: 120,
-  },
-  {
-    image: "images/site-intro/07-correlation.png",
-    title: "相関分析",
-    subtitle: "指標同士の意外な関係を発見",
-    zoom: "in",
-    pan: "left",
-    durationInFrames: 120,
-  },
-  {
-    image: "images/site-intro/09-blog.png",
-    title: "ブログ",
-    subtitle: "データの裏側を読み解く記事",
-    zoom: "out",
-    pan: "down",
-    durationInFrames: 120,
+    image: "images/site-intro/scroll/blog-article.png",
+    imageHeight: 10332,
+    title: "統計ブログ",
+    subtitle: "「最低賃金、全県 1000 円突破の衝撃」",
+    durationInFrames: 210, // 7s
   },
 ];
 
 // ---------------------------------------------------------------------------
-// Scene Component
+// Helpers
 // ---------------------------------------------------------------------------
 
-const SceneSlide: React.FC<{ scene: Scene }> = ({ scene }) => {
-  const frame = useCurrentFrame();
-  const { fps, width, height } = useVideoConfig();
+function easeInOutCubic(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
-  // --- Fade in/out ---
-  const fadeIn = interpolate(frame, [0, 15], [0, 1], {
-    extrapolateRight: "clamp",
-  });
+// ---------------------------------------------------------------------------
+// Vertical scroll scene
+// ---------------------------------------------------------------------------
+
+const VerticalScrollSlide: React.FC<{ scene: ScrollScene }> = ({ scene }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // 画像を canvas 幅にフィットさせるスケール
+  const imgScale = CANVAS_W / IMG_W_NATIVE;
+  // 表示対象の高さ (maxScrollHeight があれば clip)
+  const visibleNativeH = Math.min(
+    scene.imageHeight,
+    scene.maxScrollHeight ?? scene.imageHeight
+  );
+  const renderedH = scene.imageHeight * imgScale; // 画像全体のレンダ高さ
+  const visibleH = visibleNativeH * imgScale; // スクロール対象のレンダ高さ
+  const scrollDistance = Math.max(0, visibleH - CANVAS_H);
+
+  // 進行: 0-0.05 はトップ静止、0.05-0.85 でスクロール、0.85-1 はボトム静止
+  const t = frame / scene.durationInFrames;
+  let progress: number;
+  if (t < 0.05) progress = 0;
+  else if (t > 0.85) progress = 1;
+  else progress = (t - 0.05) / 0.8;
+  progress = easeInOutCubic(progress);
+  const translateY = -scrollDistance * progress;
+
+  // フェード
+  const fadeIn = interpolate(frame, [0, 12], [0, 1], { extrapolateRight: "clamp" });
   const fadeOut = interpolate(
     frame,
     [scene.durationInFrames - 15, scene.durationInFrames],
@@ -125,82 +139,99 @@ const SceneSlide: React.FC<{ scene: Scene }> = ({ scene }) => {
   );
   const opacity = Math.min(fadeIn, fadeOut);
 
-  // --- Ken Burns ---
-  const progress = frame / scene.durationInFrames;
-  const baseScale = scene.zoom === "in" ? 1.0 : 1.15;
-  const endScale = scene.zoom === "in" ? 1.15 : 1.0;
-  const scale = interpolate(progress, [0, 1], [baseScale, endScale]);
-
-  let translateX = 0;
-  let translateY = 0;
-  const panAmount = 30; // px
-  if (scene.pan === "left") translateX = interpolate(progress, [0, 1], [0, -panAmount]);
-  if (scene.pan === "right") translateX = interpolate(progress, [0, 1], [0, panAmount]);
-  if (scene.pan === "up") translateY = interpolate(progress, [0, 1], [0, -panAmount]);
-  if (scene.pan === "down") translateY = interpolate(progress, [0, 1], [0, panAmount]);
-
-  // --- Text spring ---
-  const textSpring = spring({
-    frame: frame - 10,
+  // タイトルチップは bottom-left に表示
+  const chipSpring = spring({
+    frame: frame - 8,
     fps,
-    config: { damping: 15, stiffness: 80 },
+    config: { damping: 16, stiffness: 80 },
   });
-  const textY = interpolate(textSpring, [0, 1], [40, 0]);
-  const textOpacity = interpolate(textSpring, [0, 1], [0, 1]);
+  const chipY = interpolate(chipSpring, [0, 1], [40, 0]);
+  const chipOpacity = interpolate(chipSpring, [0, 1], [0, 1]);
+  // シーン終盤は薄くする
+  const chipFadeOutEnd = interpolate(
+    frame,
+    [scene.durationInFrames - 30, scene.durationInFrames - 10],
+    [1, 0.35],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // 進行バー
+  const barProgress = progress;
 
   return (
-    <AbsoluteFill style={{ opacity }}>
-      {/* Background image with Ken Burns */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          overflow: "hidden",
-        }}
-      >
+    <AbsoluteFill style={{ opacity, backgroundColor: "#FFFFFF" }}>
+      {/* スクロールする画像 */}
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
         <Img
           src={staticFile(scene.image)}
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)`,
+            position: "absolute",
+            top: translateY,
+            left: 0,
+            width: CANVAS_W,
+            height: renderedH,
           }}
         />
       </div>
 
-      {/* Dark gradient overlay at bottom */}
+      {/* 進行バー (canvas 上端) */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 6,
+          background: "rgba(15,23,42,0.08)",
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${barProgress * 100}%`,
+            background: BRAND.primary,
+            transition: "width 0.1s linear",
+          }}
+        />
+      </div>
+
+      {/* 下のグラデーションでチップを読みやすく */}
       <div
         style={{
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
-          height: "45%",
+          height: 220,
           background:
-            "linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 50%, transparent 100%)",
+            "linear-gradient(to top, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0) 100%)",
+          opacity: chipOpacity * chipFadeOutEnd,
         }}
       />
 
-      {/* Text overlay */}
+      {/* タイトルチップ (bottom-left) */}
       <div
         style={{
           position: "absolute",
-          bottom: 80,
-          left: 80,
-          right: 80,
-          transform: `translateY(${textY}px)`,
-          opacity: textOpacity,
+          bottom: 60,
+          left: 60,
+          transform: `translateY(${chipY}px)`,
+          opacity: chipOpacity * chipFadeOutEnd,
+          background: "rgba(255,255,255,0.97)",
+          padding: "20px 32px",
+          borderRadius: 14,
+          boxShadow: "0 14px 32px rgba(15,23,42,0.4)",
+          maxWidth: 900,
         }}
       >
         <div
           style={{
             fontFamily: FONT.family,
             fontWeight: FONT.weight.black,
-            fontSize: 56,
-            color: "#FFFFFF",
-            lineHeight: 1.2,
-            textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+            fontSize: 44,
+            color: BRAND.primary,
+            lineHeight: 1.15,
+            letterSpacing: "0.01em",
           }}
         >
           {scene.title}
@@ -210,10 +241,10 @@ const SceneSlide: React.FC<{ scene: Scene }> = ({ scene }) => {
             style={{
               fontFamily: FONT.family,
               fontWeight: FONT.weight.medium,
-              fontSize: 28,
-              color: "rgba(255,255,255,0.85)",
-              marginTop: 12,
-              textShadow: "0 1px 4px rgba(0,0,0,0.5)",
+              fontSize: 24,
+              color: "#475569",
+              marginTop: 10,
+              lineHeight: 1.4,
             }}
           >
             {scene.subtitle}
@@ -225,10 +256,10 @@ const SceneSlide: React.FC<{ scene: Scene }> = ({ scene }) => {
 };
 
 // ---------------------------------------------------------------------------
-// Title Scene
+// Title scene
 // ---------------------------------------------------------------------------
 
-const TitleScene: React.FC = () => {
+const TitleScene: React.FC<{ duration: number }> = ({ duration }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -238,12 +269,12 @@ const TitleScene: React.FC = () => {
     config: { damping: 12, stiffness: 80 },
   });
   const subtitleSpring = spring({
-    frame: frame - 20,
+    frame: frame - 18,
     fps,
     config: { damping: 15, stiffness: 60 },
   });
 
-  const fadeOut = interpolate(frame, [120, 150], [1, 0], {
+  const fadeOut = interpolate(frame, [duration - 25, duration], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -263,10 +294,11 @@ const TitleScene: React.FC = () => {
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight.black,
-          fontSize: 72,
+          fontSize: 88,
           color: "#FFFFFF",
-          transform: `scale(${interpolate(logoSpring, [0, 1], [0.8, 1])})`,
+          transform: `scale(${interpolate(logoSpring, [0, 1], [0.85, 1])})`,
           opacity: logoSpring,
+          letterSpacing: "0.02em",
         }}
       >
         stats47
@@ -275,9 +307,9 @@ const TitleScene: React.FC = () => {
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight.medium,
-          fontSize: 32,
-          color: "rgba(255,255,255,0.8)",
-          marginTop: 16,
+          fontSize: 36,
+          color: "rgba(255,255,255,0.85)",
+          marginTop: 18,
           opacity: subtitleSpring,
           transform: `translateY(${interpolate(subtitleSpring, [0, 1], [20, 0])}px)`,
         }}
@@ -289,16 +321,96 @@ const TitleScene: React.FC = () => {
 };
 
 // ---------------------------------------------------------------------------
-// CTA Scene (ending)
+// Stats montage (規模感)
+// ---------------------------------------------------------------------------
+
+const STATS_ITEMS = [
+  { value: "1,800+", label: "ランキング" },
+  { value: "119+", label: "データ解説記事" },
+  { value: "16", label: "テーマダッシュボード" },
+];
+
+const StatsMontage: React.FC<{ duration: number }> = ({ duration }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const fadeIn = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: "clamp" });
+  const fadeOut = interpolate(frame, [duration - 15, duration], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const opacity = Math.min(fadeIn, fadeOut);
+
+  return (
+    <AbsoluteFill
+      style={{
+        background: `linear-gradient(135deg, ${BRAND.primary} 0%, #1E3A8A 100%)`,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 100,
+        opacity,
+      }}
+    >
+      {STATS_ITEMS.map((item, i) => {
+        const sp = spring({
+          frame: frame - i * 8,
+          fps,
+          config: { damping: 14, stiffness: 90 },
+        });
+        const itemOpacity = interpolate(sp, [0, 1], [0, 1]);
+        const itemY = interpolate(sp, [0, 1], [30, 0]);
+        return (
+          <div
+            key={item.label}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              opacity: itemOpacity,
+              transform: `translateY(${itemY}px)`,
+            }}
+          >
+            <div
+              style={{
+                fontFamily: FONT.family,
+                fontWeight: FONT.weight.black,
+                fontSize: 120,
+                color: "#FFFFFF",
+                lineHeight: 1,
+                letterSpacing: "0.01em",
+              }}
+            >
+              {item.value}
+            </div>
+            <div
+              style={{
+                fontFamily: FONT.family,
+                fontWeight: FONT.weight.medium,
+                fontSize: 26,
+                color: "rgba(255,255,255,0.85)",
+                marginTop: 12,
+              }}
+            >
+              {item.label}
+            </div>
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// CTA scene
 // ---------------------------------------------------------------------------
 
 const CTAScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const fadeIn = interpolate(frame, [0, 15], [0, 1], {
-    extrapolateRight: "clamp",
-  });
+  const fadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: "clamp" });
   const urlSpring = spring({
     frame: frame - 15,
     fps,
@@ -314,15 +426,15 @@ const CTAScene: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         opacity: fadeIn,
-        gap: 24,
+        gap: 28,
       }}
     >
       <div
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight.bold,
-          fontSize: 36,
-          color: "rgba(255,255,255,0.8)",
+          fontSize: 40,
+          color: "rgba(255,255,255,0.85)",
         }}
       >
         データで地域の違いを探索しよう
@@ -331,10 +443,11 @@ const CTAScene: React.FC = () => {
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight.black,
-          fontSize: 64,
+          fontSize: 80,
           color: "#FFFFFF",
           opacity: urlSpring,
           transform: `scale(${interpolate(urlSpring, [0, 1], [0.9, 1])})`,
+          letterSpacing: "0.02em",
         }}
       >
         stats47.jp
@@ -344,57 +457,57 @@ const CTAScene: React.FC = () => {
 };
 
 // ---------------------------------------------------------------------------
-// Main Composition
+// Main composition
 // ---------------------------------------------------------------------------
 
-export const SiteIntro: React.FC<SiteIntroProps> = ({
-  scenes = DEFAULT_SCENES,
-  bgmPath,
-}) => {
-  const TITLE_DURATION = 150; // 5s
-  const CTA_DURATION = 150; // 5s
+export interface SiteIntroProps {
+  bgmPath?: string;
+}
 
-  // Calculate start frames for each scene
-  let currentFrame = TITLE_DURATION;
-  const sceneStarts = scenes.map((scene) => {
-    const start = currentFrame;
-    currentFrame += scene.durationInFrames;
+export const SiteIntro: React.FC<SiteIntroProps> = ({ bgmPath }) => {
+  let cursor = TITLE_DURATION;
+  const sceneStarts = SCROLL_SCENES.map((scene) => {
+    const start = cursor;
+    cursor += scene.durationInFrames;
     return start;
   });
+  const statsStart = cursor;
+  cursor += STATS_DURATION;
+  const ctaStart = cursor;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#0F172A" }}>
-      {/* BGM */}
-      <Audio
-        src={staticFile(bgmPath || "music/Morning.mp3")}
-        volume={0.3}
-      />
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF" }}>
+      <Audio src={staticFile(bgmPath || "music/Morning.mp3")} volume={0.3} />
 
-      {/* Title */}
       <Sequence from={0} durationInFrames={TITLE_DURATION} name="Title">
-        <TitleScene />
+        <TitleScene duration={TITLE_DURATION} />
       </Sequence>
 
-      {/* Feature scenes */}
-      {scenes.map((scene, i) => (
+      {SCROLL_SCENES.map((scene, i) => (
         <Sequence
           key={scene.image}
           from={sceneStarts[i]}
           durationInFrames={scene.durationInFrames}
           name={scene.title}
         >
-          <SceneSlide scene={scene} />
+          <VerticalScrollSlide scene={scene} />
         </Sequence>
       ))}
 
-      {/* CTA */}
-      <Sequence
-        from={currentFrame}
-        durationInFrames={CTA_DURATION}
-        name="CTA"
-      >
+      <Sequence from={statsStart} durationInFrames={STATS_DURATION} name="Stats">
+        <StatsMontage duration={STATS_DURATION} />
+      </Sequence>
+
+      <Sequence from={ctaStart} durationInFrames={CTA_DURATION} name="CTA">
         <CTAScene />
       </Sequence>
     </AbsoluteFill>
   );
 };
+
+/** SiteIntro 全体の総フレーム数 */
+export const SITE_INTRO_TOTAL_FRAMES =
+  TITLE_DURATION +
+  SCROLL_SCENES.reduce((sum, s) => sum + s.durationInFrames, 0) +
+  STATS_DURATION +
+  CTA_DURATION;
