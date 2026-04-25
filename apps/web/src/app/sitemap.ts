@@ -1,15 +1,18 @@
-
-import { getDrizzle, rankingItems, categories, articles, surveys, articleTags } from "@stats47/database/server";
+import {
+  getDrizzle,
+  rankingItems,
+  categories,
+  articles,
+  surveys,
+  articleTags,
+} from "@stats47/database/server";
 import { eq, and, isNotNull, sql } from "drizzle-orm";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
-import { INDEXABLE_AREA_CATEGORIES } from "@/lib/indexable-area-categories";
+import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
-import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
-import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
-
 
 import type { MetadataRoute } from "next";
 
@@ -19,9 +22,19 @@ export const revalidate = 86400;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 
 const PREFECTURE_CODES = Array.from({ length: 47 }, (_, i) =>
-  String(i + 1).padStart(2, "0") + "000"
+  String(i + 1).padStart(2, "0") + "000",
 );
 
+/**
+ * Phase 9 (2026-04-26) lastmod 戦略:
+ * - 静的ページ / 集約ページ（ranking, areas, themes, surveys 等）は lastmod 省略
+ *   → bulk timestamp が「全件 100% 同一」状態を作り、Google が lastmod 信号を
+ *     完全無視する事象を回避（公式推奨「不正確な lastmod を出すぐらいなら省略」）
+ * - blog のみ published_at を固定使用（記事公開日として安定）
+ * - tag は含有記事の最新 published_at を集計
+ *
+ * 参考: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+ */
 const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: "daily", priority: 1.0 },
   { url: `${BASE_URL}/ranking`, changeFrequency: "daily", priority: 0.9 },
@@ -47,20 +60,16 @@ const AREA_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.map((code) => ({
   priority: 0.8,
 }));
 
-// 2026-04-25: sitemap に出すサブカテゴリは population のみに絞る（クロール予算節約）。
-// middleware/page.tsx は INDEXABLE_AREA_CATEGORIES_SET をそのまま使い続けるため、
-// /areas/{prefCode}/economy など既存インデックス済みページは引き続き 200 を返す。
-// Google は sitemap で発見しなくなるが既存インデックスは保持される設計。
-const SITEMAP_AREA_CATEGORIES = INDEXABLE_AREA_CATEGORIES.filter(
-  (cat) => cat === "population"
-);
-
-const AREA_CATEGORY_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.flatMap((code) =>
-  SITEMAP_AREA_CATEGORIES.map((cat) => ({
-    url: `${BASE_URL}/areas/${code}/${cat}`,
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }))
+// Phase 9 (2026-04-26): UrlPolicy 経由で indexable category を引く（middleware と完全一致）。
+// 過去事故（2026-04-26 批判レビュー）: middleware は [population, economy] 両方を 200 で返すが
+// sitemap は population のみという乖離があり /areas/{prefCode}/economy が orphan page 化していた。
+const AREA_CATEGORY_PAGES: MetadataRoute.Sitemap = PREFECTURE_CODES.flatMap(
+  (code) =>
+    UrlPolicy.area.indexableCategories.map((cat) => ({
+      url: `${BASE_URL}/areas/${code}/${cat}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
 );
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -68,25 +77,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const db = getDrizzle();
 
     // ランキング詳細ページ
+    // Phase 9: lastmod は省略。ranking_items.updated_at は bulk update で同一 timestamp が
+    // 大量発生するため、Google が信号として使えない。「無いほうが良い」という公式推奨に従う。
     const rankingRows = await db
-      .select({
-        rankingKey: rankingItems.rankingKey,
-        updatedAt: rankingItems.updatedAt,
-      })
+      .select({ rankingKey: rankingItems.rankingKey })
       .from(rankingItems)
       .where(eq(rankingItems.isActive, true));
 
-    // 2026-04-25: sitemap には GSC で実際に Impressions ≥ 1 が出ている ranking のみ載せる。
-    // 残りの ranking は middleware で 200 を返し続けるが sitemap で発見させない。
-    // 元データ生成: node .claude/scripts/gsc/build-indexable-ranking-keys.cjs
-    //
-    // Phase 9 (2026-04-26): ranking_items は (ranking_key, area_type) 複合主キーのため
-    // 同じ ranking_key が複数 area_type で存在しうる。重複排除しないと sitemap.xml
-    // に同 URL が複数回出現し、Google が soft 404 / 重複コンテンツと判定するリスク。
+    // ranking_items は (ranking_key, area_type) 複合主キーのため重複排除必須
     const seenRankingKeys = new Set<string>();
     const rankingPages: MetadataRoute.Sitemap = rankingRows
-      .filter((row) => !GONE_RANKING_KEYS.has(row.rankingKey))
-      .filter((row) => INDEXABLE_RANKING_KEYS.has(row.rankingKey))
+      .filter((row) => UrlPolicy.ranking.shouldIncludeInSitemap(row.rankingKey))
       .filter((row) => {
         if (seenRankingKeys.has(row.rankingKey)) return false;
         seenRankingKeys.add(row.rankingKey);
@@ -94,34 +95,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
       .map((row) => ({
         url: `${BASE_URL}/ranking/${row.rankingKey}`,
-        lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
-        changeFrequency: "monthly",
+        changeFrequency: "monthly" as const,
         priority: 0.9,
       }));
 
-    // カテゴリページ
+    // カテゴリページ — lastmod 省略（集約ページのため updated_at の信頼性低い）
     const categoryRows = await db
-      .select({
-        categoryKey: categories.categoryKey,
-        updatedAt: categories.updatedAt,
-      })
+      .select({ categoryKey: categories.categoryKey })
       .from(categories);
 
     const categoryPages: MetadataRoute.Sitemap = categoryRows.map((row) => ({
       url: `${BASE_URL}/category/${row.categoryKey}`,
-      lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
       changeFrequency: "weekly",
       priority: 0.5,
     }));
 
     // /compare/* は noindex, follow 戦略。sitemap には含めない。
 
-    // ブログ記事
+    // ブログ記事 — published_at を固定使用（updated_at は安易な編集で動くため信頼性低い）
     const articleRows = await db
       .select({
         slug: articles.slug,
         publishedAt: articles.publishedAt,
-        updatedAt: articles.updatedAt,
       })
       .from(articles)
       .where(and(eq(articles.published, true), isNotNull(articles.publishedAt)));
@@ -129,41 +124,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const redirectedSlugs = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
     const blogPages: MetadataRoute.Sitemap = [
       { url: `${BASE_URL}/blog`, changeFrequency: "daily", priority: 0.8 },
-      ...articleRows.filter((row) => !redirectedSlugs.has(row.slug)).map((row) => ({
-        url: `${BASE_URL}/blog/${row.slug}`,
-        lastModified: row.updatedAt
-          ? new Date(row.updatedAt)
-          : row.publishedAt
-            ? new Date(row.publishedAt)
-            : undefined,
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      })),
+      ...articleRows
+        .filter((row) => !redirectedSlugs.has(row.slug))
+        .map((row) => ({
+          url: `${BASE_URL}/blog/${row.slug}`,
+          lastModified: row.publishedAt ? new Date(row.publishedAt) : undefined,
+          changeFrequency: "monthly" as const,
+          priority: 0.7,
+        })),
     ];
 
-    // 調査ページ
-    const surveyRows = await db
-      .select({ id: surveys.id, updatedAt: surveys.updatedAt })
-      .from(surveys);
+    // 調査ページ — lastmod 省略
+    const surveyRows = await db.select({ id: surveys.id }).from(surveys);
 
     const surveyPages: MetadataRoute.Sitemap = [
       { url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 },
       ...surveyRows.map((row) => ({
         url: `${BASE_URL}/survey/${row.id}`,
-        lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
         changeFrequency: "monthly" as const,
         priority: 0.5,
       })),
     ];
 
     // タグページ（公開記事が 5 本以上あるタグのみ）
-    // 2026-04-25: 閾値 2 → 5 に厳格化（クロール予算節約）。
-    // 1-4 本のタグは thin content と判定されやすいため sitemap から除外。
-    // page.tsx 側でも generateMetadata で noindex, follow を返す。
+    // lastmod は含有記事の最新 published_at（aggregate page として正しい挙動）
     const tagRows = await db
       .select({
         tagKey: articleTags.tagKey,
-        count: sql<number>`count(*)`.as("count"),
+        latestPublishedAt: sql<string | null>`max(${articles.publishedAt})`.as(
+          "latestPublishedAt",
+        ),
       })
       .from(articleTags)
       .innerJoin(articles, eq(articleTags.slug, articles.slug))
@@ -173,13 +163,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const tagPages: MetadataRoute.Sitemap = tagRows.map((row) => ({
       url: `${BASE_URL}/tag/${row.tagKey}`,
+      lastModified: row.latestPublishedAt
+        ? new Date(row.latestPublishedAt)
+        : undefined,
       changeFrequency: "weekly" as const,
       priority: 0.4,
     }));
 
-    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES, ...rankingPages, ...categoryPages, ...blogPages, ...surveyPages, ...tagPages];
+    return [
+      ...STATIC_PAGES,
+      ...THEME_PAGES,
+      ...AREA_PAGES,
+      ...AREA_CATEGORY_PAGES,
+      ...rankingPages,
+      ...categoryPages,
+      ...blogPages,
+      ...surveyPages,
+      ...tagPages,
+    ];
   } catch {
     // ビルド時に D1 が利用できない場合は静的ページのみ返し、ISR で再生成する
-    return [...STATIC_PAGES, ...THEME_PAGES, ...AREA_PAGES, ...AREA_CATEGORY_PAGES];
+    return [
+      ...STATIC_PAGES,
+      ...THEME_PAGES,
+      ...AREA_PAGES,
+      ...AREA_CATEGORY_PAGES,
+    ];
   }
 }

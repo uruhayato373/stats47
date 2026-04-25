@@ -1,22 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { INDEXABLE_AREA_CATEGORIES_SET } from "@/lib/indexable-area-categories";
+import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
-import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
-import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
-import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
-import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
-import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
-import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 
 /**
- * 410 Gone 応答。
+ * 410 Gone 応答（CDN cacheable + noindex 強化）。
  *
- * Phase 9 (2026-04-26): no-store を撤廃して CDN キャッシュ可能化。
- * - 旧: no-store, must-revalidate → Google が毎回 origin に再確認 → クロール予算枯渇
- * - 新: public, max-age=86400, s-maxage=604800 → Google が「永続削除」と認識して再確認頻度低下
- * - X-Robots-Tag: noindex を併用して削除シグナル強化
+ * Phase 9 (2026-04-26) で `no-store, must-revalidate` から変更。
+ * - 旧設定では Google が毎回 origin に再確認し、クロール予算を 410 URL 群に吸収させていた
+ * - CDN キャッシュ可能化により Google の再確認頻度が下がり、新コンテンツへ予算が回る
+ * - X-Robots-Tag: noindex も併用して削除シグナル強化
+ *
  * 公式根拠: https://developers.google.com/search/docs/crawling-indexing/http-caching
  */
 function gone(): Response {
@@ -30,20 +25,8 @@ function gone(): Response {
 }
 
 /**
- * 都道府県コード（01000〜47000）の妥当性判定。
- * 5 桁数字かつ prefNum 01〜47、末尾 `000` のみ有効。
- */
-export function isValidPrefCode(code: string): boolean {
-  if (!/^\d{5}$/.test(code)) return false;
-  const prefNum = parseInt(code.slice(0, 2), 10);
-  const suffix = code.slice(2);
-  return prefNum >= 1 && prefNum <= 47 && suffix === "000";
-}
-
-/**
- * 旧URL構造のカテゴリキー一覧
- * /{categoryKey}/{subcategoryKey}/ranking/{rankingKey} や
- * /{categoryKey}/{subcategoryKey}/dashboard/{prefCode} の判定に使用
+ * 旧URL構造のカテゴリキー一覧。
+ * /{cat}/{sub}/dashboard|ranking/{x} などのレガシーパス判定に使用。
  */
 const OLD_CATEGORY_KEYS = new Set([
   "administrativefinancial",
@@ -66,44 +49,48 @@ const OLD_CATEGORY_KEYS = new Set([
 ]);
 
 /**
- * 旧URL → 新URL の 301 リダイレクトを試行する。
- * マッチしなければ null を返す。
+ * `isValidPrefCode` は UrlPolicy から再 export（既存テスト互換のため）。
  */
+export const isValidPrefCode = UrlPolicy.area.isValidPrefCode;
+
+// ============================================================================
+// Section 1: 旧 URL 構造の 301 リダイレクト / 410 Gone
+// ============================================================================
+// Phase 9 (2026-04-26): リダイレクト先が unknown / gone なら 301 ではなく直接 410
+// （301→410 チェーン解消で Google の「壊れたリダイレクト」判定を回避）。
+
 function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   const segments = pathname.split("/").filter(Boolean);
 
   // /{cat}/{sub}/dashboard/{prefCode} → /areas/{prefCode}
   // /{cat}/{sub}/ranking/{rankingKey} → /ranking/{rankingKey}
-  // 無効 prefCode（例 /administrativefinancial/.../dashboard/00000）は 301→410 チェーンを避け直接 410 を返す。
   if (segments.length >= 4 && OLD_CATEGORY_KEYS.has(segments[0])) {
-    const pageType = segments[2]; // "dashboard" or "ranking"
+    const pageType = segments[2];
     const key = segments[3];
     if (pageType === "dashboard" && /^\d{5}$/.test(key)) {
-      if (!isValidPrefCode(key)) return gone();
+      if (!UrlPolicy.area.isValidPrefCode(key)) return gone();
       return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), { status: 301 });
     }
     if (pageType === "ranking" && key) {
-      if (GONE_RANKING_KEYS.has(key)) return gone();
+      // 301→410 チェーン解消: KNOWN にない or GONE なら直接 410
+      if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key)) return gone();
       return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), { status: 301 });
     }
   }
 
-  // /area-profile/{prefCode}[/...] → /areas/{prefCode}
+  // /area-profile/{prefCode} → /areas/{prefCode}
   if (segments.length >= 2 && segments[0] === "area-profile" && /^\d{5}$/.test(segments[1])) {
-    if (!isValidPrefCode(segments[1])) return gone();
+    if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
   }
 
-  // /dashboard/{prefCode}/{cat}/{sub} → /areas/{prefCode}
-  // 旧URL構造のバリアント（セグメント順序が逆のパターン）
+  // /dashboard/{prefCode}/... → /areas/{prefCode}（旧 URL のセグメント順序違いバリアント）
   if (segments.length >= 2 && segments[0] === "dashboard" && /^\d{5}$/.test(segments[1])) {
-    if (!isValidPrefCode(segments[1])) return gone();
+    if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
   }
 
-  // 旧URL で 410 Gone を返すパターン:
-  // - /blog/prefecture-rank/...
-  // - /stats/* （配下のルートは全て削除済。サブドメイン storage.stats47.jp は本 middleware 対象外）
+  // 完全廃止のパスは 410 Gone
   if (
     pathname.startsWith("/blog/prefecture-rank/") ||
     pathname.startsWith("/stats/")
@@ -111,20 +98,17 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     return gone();
   }
 
+  // /{cat}/{sub}[/dashboard|/ranking] → /category/{cat} に集約 301
   if (segments.length >= 2 && segments.length <= 3 && OLD_CATEGORY_KEYS.has(segments[0])) {
-    // /{cat}/{sub} or /{cat}/{sub}/dashboard or /{cat}/{sub}/ranking
-    // → /category/{cat} カテゴリランキング一覧へ 301 リダイレクト
     return NextResponse.redirect(new URL(`/category/${segments[0]}`, baseUrl), { status: 301 });
   }
 
-  // OLD_CATEGORY_KEYS にマッチしない旧URL構造（サブカテゴリ先頭等）
-  // /econohousehold-economy/... のようなパターンに 410 Gone を返す
+  // OLD_CATEGORY_KEYS にマッチしない旧URL構造（subcategory 先頭等）+ dashboard/ranking + prefCode
   if (
     segments.length >= 3 &&
     (segments.includes("dashboard") || segments.includes("ranking"))
   ) {
-    const hasPrefCode = segments.some((s) => /^\d{5}$/.test(s));
-    if (hasPrefCode) {
+    if (segments.some((s) => /^\d{5}$/.test(s))) {
       return gone();
     }
   }
@@ -132,10 +116,143 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   return null;
 }
 
+// ============================================================================
+// Section 2: コンテンツタイプ別 Allowlist 判定
+// ============================================================================
+// 各コンテンツタイプの未登録 / 削除済 key を 410 化して Google に削除シグナル送信。
+// Phase 9 で Fix 6 / Fix 7 / Fix 9 / 旧 ranking ロジック等の重複を 1 関数に集約。
+
+function checkContentTypePolicy(pathname: string): Response | null {
+  // /ranking/prefecture/{slug} → /ranking/{slug} へ 301（known なら）/ 直接 410（unknown なら）
+  if (pathname.startsWith("/ranking/prefecture/")) {
+    const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
+    if (!slug) return gone();
+    // 301→410 チェーン解消: KNOWN にない or GONE なら直接 410
+    if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug)) return gone();
+    return NextResponse.redirect(new URL(`/ranking/${slug}`, "https://stats47.jp"), { status: 301 });
+  }
+
+  // /ranking/{key}: GONE または unknown は 410（一括判定で重複削除）
+  if (pathname.startsWith("/ranking/")) {
+    const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
+    if (rankingKey) {
+      if (UrlPolicy.ranking.isGone(rankingKey) || !UrlPolicy.ranking.isKnown(rankingKey)) {
+        return gone();
+      }
+    }
+  }
+
+  // /tag/{tagKey}: 日本語 tagKey / GONE / 未登録 すべて 410
+  {
+    const directTagMatch = pathname.match(/^\/tag\/([^/]+)\/?$/);
+    if (directTagMatch) {
+      const tagKey = decodeURIComponent(directTagMatch[1]);
+      if (/[^\x00-\x7F]/.test(tagKey)) return gone();
+      if (UrlPolicy.tag.isGone(tagKey) || !UrlPolicy.tag.isKnown(tagKey)) return gone();
+    }
+  }
+
+  // /blog/tags?/{key}: 旧パス完全廃止 → 410
+  if (/^\/blog\/tags?\/.+/.test(pathname)) {
+    return gone();
+  }
+
+  // /blog/{slug}: redirect → 301、GONE → 410、旧カテゴリ名 → 410
+  if (pathname.startsWith("/blog/")) {
+    const slug = pathname.slice("/blog/".length).split("/")[0];
+    if (slug) {
+      const newSlug = BLOG_SLUG_REDIRECTS[slug];
+      if (newSlug) {
+        return NextResponse.redirect(
+          new URL(`/blog/${newSlug}`, "https://stats47.jp"),
+          { status: 301 },
+        );
+      }
+      if (UrlPolicy.blog.isGone(slug)) return gone();
+      // 旧カテゴリ名が blog slug として解釈されるパターン
+      if (OLD_CATEGORY_KEYS.has(slug)) return gone();
+    }
+  }
+
+  // /correlation/{slug}: 存在しないルート → 410（query 版 /correlation?x=... のみ有効）
+  if (pathname.startsWith("/correlation/")) {
+    return gone();
+  }
+
+  // /dashboard/* (legacy redirect でカバーされない亜種を捕捉)
+  if (pathname.startsWith("/dashboard") || pathname.includes("/dashboard/")) {
+    return gone();
+  }
+
+  // /themes/{unknown-slug} → 410
+  if (pathname.startsWith("/themes/")) {
+    const slug = pathname.slice("/themes/".length).split("/")[0];
+    if (slug && !UrlPolicy.theme.isKnown(slug)) {
+      return gone();
+    }
+  }
+
+  return null;
+}
+
+// ============================================================================
+// Section 3: /areas/* の判定（無効 prefCode / cities / 非 indexable category）
+// ============================================================================
+
+function checkAreasPolicy(pathname: string): Response | null {
+  const seg = pathname.split("/").filter(Boolean);
+  if (seg[0] !== "areas") return null;
+
+  // /areas/{無効5桁コード}: cities セグメント以外は 410
+  if (seg.length >= 2 && seg[1] !== "cities") {
+    if (/^\d{5}$/.test(seg[1]) && !UrlPolicy.area.isValidPrefCode(seg[1])) {
+      return gone();
+    }
+  }
+
+  // /areas/{prefCode}/cities/{cityCode}[/...] → 410（市区町村ページは廃止）
+  if (
+    seg.length >= 4 &&
+    seg[2] === "cities" &&
+    /^\d{5}$/.test(seg[3])
+  ) {
+    return gone();
+  }
+
+  // /areas/{prefCode}/{5桁数字} → 410（cityCode が areaCode 直下にきた異常パターン）
+  if (
+    seg.length >= 3 &&
+    seg[1] !== "cities" &&
+    /^\d{5}$/.test(seg[2]) &&
+    seg[2] !== seg[1]
+  ) {
+    return gone();
+  }
+
+  // /areas/{prefCode}/{non-indexable-category} → 410
+  // INDEXABLE_AREA_CATEGORIES = [population, economy] のみ通す
+  if (
+    seg.length >= 3 &&
+    /^\d{5}$/.test(seg[1]) &&
+    UrlPolicy.area.isValidPrefCode(seg[1]) &&
+    seg[2] !== "cities" &&
+    !/^\d{5}$/.test(seg[2]) &&
+    !UrlPolicy.area.isIndexableCategory(seg[2])
+  ) {
+    return gone();
+  }
+
+  return null;
+}
+
+// ============================================================================
+// Middleware Entry Point
+// ============================================================================
+
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // --- www → 非www リダイレクト（301 Permanent） ---
+  // --- ホスト正規化: www → 非 www（301）---
   const host = req.headers.get("host") || "";
   if (host.startsWith("www.")) {
     const url = new URL(pathname, "https://stats47.jp");
@@ -143,228 +260,57 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
-  // --- Trailing slash の正規化（301 Permanent） ---
+  // --- Trailing slash 正規化（301）---
   if (pathname !== "/" && pathname.endsWith("/")) {
     const url = new URL(pathname.slice(0, -1), req.url);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }
 
-  // --- /blog/tags/{tagKey} or /blog/tag/{tagKey} → 410 Gone ---
-  // 旧パスは全て廃止。現行は /tag/{tagKey} のみ。
-  // 301 リダイレクトするとリダイレクト先が 404 のケース（記事0件タグ）で
-  // Google に「壊れたリダイレクト」と判定されるため、全て 410 で統一。
-  {
-    const tagMatch = pathname.match(/^\/blog\/tags?\/(.+)$/);
-    if (tagMatch) {
-      return gone();
-    }
-  }
+  // --- Section 2: コンテンツタイプ別 Allowlist 判定 ---
+  const contentResponse = checkContentTypePolicy(pathname);
+  if (contentResponse) return contentResponse;
 
-  // --- Fix 9: /tag/{tagKey} 直接アクセスのうち廃止済み or 未登録を 410 Gone ---
-  // 判定順:
-  //   1. 日本語 tagKey（現行は英語 slug のみ有効）→ 410
-  //   2. GONE_TAG_KEYS に登録済みの廃止英語 slug → 410
-  //   3. KNOWN_TAG_KEYS に存在しない英語 slug → 410（DB に無いタグは notFound になるため事前に 410 化）
-  // KNOWN_TAG_KEYS は git commit された静的 Set（tags テーブル全件）。Ranking Fix 6 と同じ allowlist 設計。
-  // page.tsx は触らない（SSG は従来どおり）。
-  {
-    const directTagMatch = pathname.match(/^\/tag\/([^/]+)\/?$/);
-    if (directTagMatch) {
-      const tagKey = decodeURIComponent(directTagMatch[1]);
-      if (/[^\x00-\x7F]/.test(tagKey)) return gone();
-      if (GONE_TAG_KEYS.has(tagKey)) return gone();
-      if (!KNOWN_TAG_KEYS.has(tagKey)) return gone();
-    }
-  }
-
-  // --- ブログ slug 変更の 301 リダイレクト / 完全削除 slug の 410 ---
-  if (pathname.startsWith("/blog/")) {
-    const slug = pathname.slice("/blog/".length).split("/")[0];
-    const newSlug = BLOG_SLUG_REDIRECTS[slug];
-    if (newSlug) {
-      return NextResponse.redirect(new URL(`/blog/${newSlug}`, req.url), {
-        status: 301,
-      });
-    }
-    if (GONE_BLOG_SLUGS.has(slug)) {
-      return gone();
-    }
-  }
-
-  // --- /ranking/prefecture/{slug} → /ranking/{slug} リダイレクト or 410 ---
-  // 旧 URL 構造 /ranking/prefecture/xxx は Next.js の /ranking/[rankingKey] 単一セグメントに
-  // 一致せず 404 を返していた。GONE_RANKING_KEYS に該当すれば 410、それ以外は 301 で新 URL へ。
-  if (pathname.startsWith("/ranking/prefecture/")) {
-    const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
-    if (!slug) return gone();
-    if (GONE_RANKING_KEYS.has(slug)) return gone();
-    return NextResponse.redirect(new URL(`/ranking/${slug}`, req.url), { status: 301 });
-  }
-
-  // --- 削除済みランキングキーへの直接アクセス → 410 Gone ---
-  if (pathname.startsWith("/ranking/")) {
-    const rankingKey = pathname.slice("/ranking/".length);
-    if (GONE_RANKING_KEYS.has(rankingKey)) {
-      return gone();
-    }
-  }
-
-  // --- Fix 6: 未知の ranking キー → 410 Gone（v3: middleware-only 設計）---
-  // 2026-04 GSC 調査で `/ranking/任意キー` が常に 200 を返す問題を確認（クロール済み未登録 2,415 の主因）。
-  // KNOWN_RANKING_KEYS は git commit された静的 Set（1,899 件）。GONE でも KNOWN でもないキーは
-  // 過去存在したことがない or まだ登録されていないキー → Google に「完全削除」シグナル（410）を送る。
-  //
-  // v1 (d30094c1) と v2 (73b1277b) は page.tsx の dynamicParams=false を併用したが、
-  // CI ビルド環境で D1 binding が無く全ページ SSG が notFound 化してサイト崩壊 (revert 0ba2b163)。
-  // v3 は page.tsx に触らず middleware だけで対応する設計。
-  //
-  // 注意: `/ranking` (index) や `/ranking/{key}/{sub}` サブパスは対象外。
-  //       split("/")[0] で最初のセグメントのみ判定。
-  if (pathname.startsWith("/ranking/")) {
-    const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
-    if (rankingKey && !KNOWN_RANKING_KEYS.has(rankingKey) && !GONE_RANKING_KEYS.has(rankingKey)) {
-      return gone();
-    }
-  }
-
-  // --- Fix 1: /correlation/{slug} → 410 Gone ---
-  // correlation ページは /correlation?x=...&y=... で動作。/correlation/xxx-and-yyy は存在しないルート。
-  // Google がクロールして 5xx（タイムアウト）を返していた。
-  if (pathname.startsWith("/correlation/")) {
-    return gone();
-  }
-
-  // --- Fix 2: /dashboard/* → 410 Gone ---
-  // 旧 URL 構造の亜種。tryLegacyRedirect がカバーしない /dashboard/00000/* 等を捕捉。
-  if (pathname.startsWith("/dashboard") || pathname.includes("/dashboard/")) {
-    return gone();
-  }
-
-  // --- Fix 4: /areas/{無効コード} → 410 Gone ---
-  // /areas/00000, /areas/14100 等の無効な都道府県コードが soft 404 を発生させていた。
-  {
-    const areaSegments = pathname.split("/").filter(Boolean);
-    if (areaSegments[0] === "areas" && areaSegments.length >= 2 && areaSegments[1] !== "cities") {
-      const code = areaSegments[1];
-      if (/^\d{5}$/.test(code) && !isValidPrefCode(code)) {
-        return gone();
-      }
-    }
-  }
-
-  // --- Fix 4.5: /areas/{prefCode}/cities/{cityCode}[/...] → 410 Gone ---
-  // 2026-04 GSC 調査で `/areas/13000/cities/13101` が 500、`/areas/11000/cities/11101` が 200
-  // と挙動不一致を確認。robots.txt ブロック済みだが middleware で明示的に 410 を返して
-  // Google に「完全に削除」シグナルを送る。既存の L231-245 は旧 URL 構造（cities セグメントなし）
-  // 用のため、cities セグメントありのパターンは別途処理が必要だった。
-  {
-    const areaSegments = pathname.split("/").filter(Boolean);
-    if (
-      areaSegments.length >= 4 &&
-      areaSegments[0] === "areas" &&
-      areaSegments[2] === "cities" &&
-      /^\d{5}$/.test(areaSegments[3])
-    ) {
-      return gone();
-    }
-  }
-
-  // --- Fix 5: /blog/{旧カテゴリ名} → 410 Gone ---
-  // /blog/construction, /blog/socialsecurity 等がブログスラッグとして解釈され soft 404。
-  if (pathname.startsWith("/blog/")) {
-    const blogSlug = pathname.slice("/blog/".length).split("/")[0];
-    if (OLD_CATEGORY_KEYS.has(blogSlug)) {
-      return gone();
-    }
-  }
-
-  // --- 旧URL構造の 301 リダイレクト / 410 Gone ---
+  // --- Section 1: 旧 URL 構造の 301/410 ---
   const legacyResponse = tryLegacyRedirect(pathname, req.url);
   if (legacyResponse) return legacyResponse;
 
-  // --- 市区町村 URL → 410 Gone ---
-  // /areas/{areaCode}/{5桁cityCode}[/...] は市区町村ページ。robots.txt でブロック済みのため
-  // 301 リダイレクトではなく 410 Gone を返す（リダイレクト先がブロック済みだと GSC で二重問題になる）
-  {
-    const areaSegments = pathname.split("/").filter(Boolean);
-    if (
-      areaSegments.length >= 3 &&
-      areaSegments[0] === "areas" &&
-      areaSegments[1] !== "cities" &&
-      /^\d{5}$/.test(areaSegments[2]) &&
-      areaSegments[2] !== areaSegments[1] // cityCode !== areaCode（自分自身ではない）
-    ) {
-      return gone();
-    }
-  }
+  // --- Section 3: /areas/* の判定 ---
+  const areasResponse = checkAreasPolicy(pathname);
+  if (areasResponse) return areasResponse;
 
-  // --- Fix 7: /themes/{unknown-slug} → 410 Gone ---
-  // /themes/ 配下は静的に ALL_THEMES で定義された 16 slug のみ。動的ルート [themeSlug]/
-  // は page.tsx を持たず notFound（404）を返すが、middleware で 410 を返して
-  // Google に「完全削除」シグナルを送る。
-  if (pathname.startsWith("/themes/")) {
-    const slug = pathname.slice("/themes/".length).split("/")[0];
-    if (slug && !KNOWN_THEME_SLUGS.has(slug)) {
-      return gone();
-    }
-  }
-
-  // --- Fix 8: /areas/{prefCode}/{non-indexable-category} → 410 Gone ---
-  // 2026-04 に INDEXABLE_AREA_CATEGORIES を 13 → 2（population / economy）に削減した。
-  // 47 × 11 = 517 URL が「クロール済み - インデックス未登録」に残っているため、
-  // /areas/{prefCode}/{削除済みカテゴリ} を明示的に 410 化する。
-  // 既存の city-code 410（seg[2] が 5 桁数字）と cities 410 はそれぞれ先に処理されるので、
-  // ここでは数字 5 桁・cities・indexable カテゴリを除外した残りの sub を対象とする。
-  {
-    const seg = pathname.split("/").filter(Boolean);
-    if (
-      seg.length >= 3 &&
-      seg[0] === "areas" &&
-      /^\d{5}$/.test(seg[1]) &&
-      isValidPrefCode(seg[1]) &&
-      seg[2] !== "cities" &&
-      !/^\d{5}$/.test(seg[2]) &&
-      !INDEXABLE_AREA_CATEGORIES_SET.has(seg[2])
-    ) {
-      return gone();
-    }
-  }
-
-  // --- カテゴリ URL リダイレクト ---
+  // --- 既存ルートへの query → path 正規化 301 ---
   // /{categoryKey} → /category/{categoryKey}
   {
     const segments = pathname.split("/").filter(Boolean);
     if (segments.length === 1 && OLD_CATEGORY_KEYS.has(segments[0])) {
-      return NextResponse.redirect(new URL(`/category/${segments[0]}`, req.url), { status: 301 });
+      return NextResponse.redirect(
+        new URL(`/category/${segments[0]}`, req.url),
+        { status: 301 },
+      );
     }
   }
 
-  // /areas/{areaCode}?category={key} → /areas/{areaCode}/{key} へ 301 リダイレクト
+  // /areas/{areaCode}?category={key} → /areas/{areaCode}/{key}
   if (pathname.startsWith("/areas/") && req.nextUrl.searchParams.has("category")) {
     const pathSegments = pathname.split("/").filter(Boolean);
-    // /areas/{areaCode} or /areas/{areaCode}/{cityCode} のパターンに対応
     if (pathSegments.length >= 2) {
       const categoryKey = req.nextUrl.searchParams.get("category");
       if (categoryKey) {
         const newUrl = new URL(`${pathname}/${categoryKey}`, req.url);
-        // ranking パラメータは維持
         const ranking = req.nextUrl.searchParams.get("ranking");
-        if (ranking) {
-          newUrl.searchParams.set("ranking", ranking);
-        }
+        if (ranking) newUrl.searchParams.set("ranking", ranking);
         return NextResponse.redirect(newUrl, { status: 301 });
       }
     }
   }
 
-  // /ranking?subcategory=xxx → /ranking へ 301 リダイレクト（旧URL互換）
+  // /ranking?subcategory=... → /ranking
   if (pathname === "/ranking" && req.nextUrl.searchParams.has("subcategory")) {
-    const url = new URL("/ranking", req.url);
-    return NextResponse.redirect(url, { status: 301 });
+    return NextResponse.redirect(new URL("/ranking", req.url), { status: 301 });
   }
 
-  // /blog?q=xxx 等 → /search?type=blog&... へ 301 リダイレクト
+  // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {
     const sp = req.nextUrl.searchParams;
     const blogParamKeys = ["q", "tags", "year", "month"];
@@ -379,26 +325,22 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // パス名ヘッダーの追加
+  // パス名ヘッダーの追加（page.tsx 側で利用）
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-pathname", pathname);
 
   return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
+    request: { headers: requestHeaders },
   });
 }
 
 export const config = {
   matcher: [
     /*
-     * すべてのパスにマッチするが、以下を除外:
-     * - _next/static (静的ファイル)
-     * - _next/image (画像最適化ファイル)
-     * - favicon.ico (ファビコン)
-     * - static assets
+     * すべてのパスにマッチ。除外:
+     * - _next/static / _next/image / favicon / 静的アセット
+     * - api/ ルート（middleware を通す必要なし、Phase 9 で明示）
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)).*)",
+    "/((?!_next/static|_next/image|api/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)).*)",
   ],
 };
