@@ -88,17 +88,21 @@ jobs:
           git add apps/web/src/config/known-ranking-keys.ts apps/web/src/config/known-tag-keys.ts
           git commit -m "chore(seo): sync KNOWN_*_KEYS from remote D1 (${{ steps.date.outputs.date }})"
           git push origin "$BRANCH"
+          PR_BODY=$(cat <<EOF
+          Automated daily sync of \`KNOWN_RANKING_KEYS\` / \`KNOWN_TAG_KEYS\` from remote D1.
+
+          Phase 9 P2-A: prevent middleware Allowlist from going stale (was 28 days old as of 2026-04-26).
+
+          Diff source: \`apps/web/scripts/generate-known-{ranking,tag}-keys.ts\` against remote D1 production state.
+
+          ⚠ Review the diff carefully — accidental removals would cause real pages to 410.
+          EOF
+          )
           gh pr create \
             --base develop \
             --head "$BRANCH" \
             --title "chore(seo): sync KNOWN_*_KEYS (${{ steps.date.outputs.date }})" \
-            --body "Automated daily sync of \`KNOWN_RANKING_KEYS\` / \`KNOWN_TAG_KEYS\` from remote D1.
-
-Phase 9 P2-A: prevent middleware Allowlist from going stale (was 28 days old as of 2026-04-26).
-
-Diff source: \`apps/web/scripts/generate-known-{ranking,tag}-keys.ts\` against remote D1 production state.
-
-⚠ Review the diff carefully — accidental removals would cause real pages to 410."
+            --body "$PR_BODY"
 
       - name: 📄 Step Summary
         if: always()
