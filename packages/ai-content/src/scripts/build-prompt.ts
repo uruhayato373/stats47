@@ -16,10 +16,16 @@
 
 import "dotenv/config";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
+import { findHighlyCorrelated } from "@stats47/correlation/server";
+import { isExcludedCorrelationKey } from "@stats47/correlation";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
-import type { RankingContentInput } from "../services/prompts/ranking-content-prompt";
+import type {
+  CorrelationInputItem,
+  RankingContentInput,
+} from "../services/prompts/ranking-content-prompt";
 
 const AREA_TYPE = "prefecture";
+const CORRELATION_TOP_N = 10;
 
 function parseArgs(): { key: string } {
   const argv = process.argv.slice(2);
@@ -84,6 +90,25 @@ async function main() {
     value: v.value ?? 0,
   }));
 
+  // 相関データ取得（v3.0）
+  const isExcluded = isExcludedCorrelationKey(key);
+  let correlations: CorrelationInputItem[] = [];
+  if (!isExcluded) {
+    const corrResult = await findHighlyCorrelated(key, CORRELATION_TOP_N);
+    if (corrResult.success) {
+      correlations = corrResult.data
+        .filter((c) => !isExcludedCorrelationKey(c.rankingKey))
+        .map((c) => ({
+          title: c.subtitle ? `${c.title}（${c.subtitle}）` : c.title,
+          pearsonR: c.pearsonR,
+          partialRPopulation: c.partialRPopulation,
+          partialRArea: c.partialRArea,
+          partialRAging: c.partialRAging,
+          partialRDensity: c.partialRDensity,
+        }));
+    }
+  }
+
   const input: RankingContentInput = {
     rankingName: item.title ?? item.rankingName,
     unit: item.unit,
@@ -95,6 +120,8 @@ async function main() {
     min,
     max,
     totalCount: sorted.length,
+    correlations,
+    isExcludedFromCorrelation: isExcluded,
   };
 
   const prompt = buildRankingContentPrompt(input);
