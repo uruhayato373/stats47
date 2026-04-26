@@ -1,0 +1,52 @@
+name: 📸 Instagram scheduled post (daily)
+
+# Phase 9 後続 (2026-04-26): IG Graph API は scheduled_publish_time 非対応のため、
+# GitHub Actions cron で post-instagram (即時 API) を毎朝発火する形で予約投稿を代替。
+# 投稿対象は .claude/state/instagram-w18-schedule.json の today (JST) エントリのみ、
+# 該当なしなら exit 0 で何もしない。
+
+on:
+  schedule:
+    - cron: "3 0 * * *" # 09:03 JST (UTC 00:03)
+  workflow_dispatch:
+    inputs:
+      force_date:
+        description: "JST 日付を強制指定 (YYYY-MM-DD)、空なら今日"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: post-instagram-scheduled
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 📸 Post to Instagram (if today is scheduled)
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+          IG_FORCE_DATE: ${{ inputs.force_date }}
+        run: node .claude/scripts/instagram/post-from-schedule.cjs
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          echo "# Instagram Scheduled Post — $(TZ=Asia/Tokyo date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Schedule file: \`.claude/state/instagram-w18-schedule.json\`" >> $GITHUB_STEP_SUMMARY
