@@ -17,13 +17,17 @@
 import "dotenv/config";
 import { spawn } from "child_process";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
+import { findHighlyCorrelated } from "@stats47/correlation/server";
+import { isExcludedCorrelationKey } from "@stats47/correlation";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
+import type { CorrelationInputItem } from "../services/prompts/ranking-content-prompt";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
 import { getDrizzle, rankingAiContent } from "@stats47/database/server";
 import type { FaqContent } from "../types";
 
 const AREA_TYPE = "prefecture";
-const PROMPT_VERSION = "1.0.0";
+const PROMPT_VERSION = "3.0.0";
+const CORRELATION_TOP_N = 10;
 
 // ============================================================
 // 引数パース
@@ -162,6 +166,25 @@ async function processOne(
         ? numericValues.reduce((s, v) => s + v, 0) / numericValues.length
         : 0;
 
+    // 相関データ取得（v3.0）。EXCLUDED キーは空配列で扱い、プロンプト側で除外説明を挿入
+    const isExcluded = isExcludedCorrelationKey(rankingKey);
+    let correlations: CorrelationInputItem[] = [];
+    if (!isExcluded) {
+      const corrResult = await findHighlyCorrelated(rankingKey, CORRELATION_TOP_N);
+      if (corrResult.success) {
+        correlations = corrResult.data
+          .filter((c) => !isExcludedCorrelationKey(c.rankingKey))
+          .map((c) => ({
+            title: c.subtitle ? `${c.title}（${c.subtitle}）` : c.title,
+            pearsonR: c.pearsonR,
+            partialRPopulation: c.partialRPopulation,
+            partialRArea: c.partialRArea,
+            partialRAging: c.partialRAging,
+            partialRDensity: c.partialRDensity,
+          }));
+      }
+    }
+
     const prompt = buildRankingContentPrompt({
       rankingName,
       unit,
@@ -185,6 +208,8 @@ async function processOne(
       min: numericValues.length > 0 ? Math.min(...numericValues) : 0,
       max: numericValues.length > 0 ? Math.max(...numericValues) : 0,
       totalCount: sorted.length,
+      correlations,
+      isExcludedFromCorrelation: isExcluded,
     });
 
     // AI 呼び出し
