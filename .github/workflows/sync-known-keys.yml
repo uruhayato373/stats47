@@ -47,19 +47,13 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 📥 Pull remote D1 (ranking/tag のみ最小同期)
+      - name: 🔧 Regenerate KNOWN_*_KEYS from remote D1
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          npm run pull:d1 --workspace=packages/database -- --table ranking_items
-          npm run pull:d1 --workspace=packages/database -- --table article_tags
-
-      - name: 🔧 Regenerate KNOWN_*_KEYS
-        run: |
           cd apps/web
-          npx tsx scripts/generate-known-ranking-keys.ts
-          npx tsx scripts/generate-known-tag-keys.ts
+          npx tsx scripts/sync-known-keys-from-remote.ts
 
       - name: 📅 Resolve date
         id: date
