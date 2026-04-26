@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-25T06:35:00.000Z",
+  "updated_at": "2026-04-26T00:00:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -129,6 +129,51 @@
           "date": "2026-04-25T06:35:00.000Z",
           "action": "closed",
           "summary": "ADVERSE。TopoJSON HTML 埋込の LCP 利点が上回ったため revert。HTML -83% は実測したが LCP は 12s → 17-20s に悪化。"
+        }
+      ]
+    },
+    {
+      "id": "EXP-003",
+      "title": "Cookie 同意バナーを LCP 候補から外す — setVisible を 4s 遅延",
+      "hypothesis": "PSI 2026-04-25 で stats47.jp/ mobile の LCP 要素が cookie 同意バナー（body.fixed > div.container > p）と判明。useState(false) → useEffect で setVisible(true) されるため hydration 完了直後にバナーが挿入され、render delay 3,075ms が LCP を 8,251ms に押し上げている。setVisible を setTimeout 4s で遅延させれば LCP 計測ウィンドウ後にバナーが挿入され、本来意図された FeaturedRankings が LCP になり 2,500ms 以下に改善するはず。",
+      "target_metric": "psi_lcp_homepage_mobile",
+      "target_delta": "stats47.jp/ mobile の LCP 8,251ms → 2,500ms 以下 (-69%)。/themes /ranking 詳細ページの LCP も同 banner が起点なら同程度改善するか確認。",
+      "rubric": {
+        "impact": 3,
+        "effort": 1,
+        "learning": 2,
+        "certainty": 2,
+        "weighted": 2.4
+      },
+      "baseline": {
+        "date": "2026-04-25",
+        "source": ".claude/state/metrics/psi/psi-batch-2026-04-25T17-39-06.json",
+        "psi_lcp_home_mobile": 8251,
+        "psi_lcp_home_desktop": 1593,
+        "psi_fcp_home_mobile": 3751,
+        "psi_tbt_home_mobile": 353,
+        "psi_perf_score_home_mobile": 57,
+        "lcp_element": "body.antialiased > div.fixed > div.container > p (CookieConsentBanner)",
+        "crux_lcp_p75": 4406,
+        "crux_ttfb_p75": 2390
+      },
+      "status": "in_progress",
+      "created_at": "2026-04-26T00:00:00.000Z",
+      "started_at": "2026-04-26T00:00:00.000Z",
+      "verification_command": "curl 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/&strategy=mobile&category=performance' | jq '.lighthouseResult.audits[\"largest-contentful-paint\"].numericValue, .lighthouseResult.audits[\"largest-contentful-paint-element\"].details.items[0].node.snippet'",
+      "actions": [
+        "CookieConsentBanner.tsx の setVisible(true) を setTimeout 4s でラップ",
+        "feature/lcp-defer-cookie-banner で PR → develop → main",
+        "デプロイ後 PSI 自動計測 (.claude/state/metrics/psi/LATEST.md) で実測"
+      ],
+      "pending_user_actions": [],
+      "next_check_date": "2026-04-27",
+      "fail_criteria": "LCP > 5,000ms または lcp_element が banner 以外の意図しない要素になっている場合 → 仮説棄却。banner 削除や hero 要素の強化を検討。",
+      "history": [
+        {
+          "date": "2026-04-26T00:00:00.000Z",
+          "action": "proposed",
+          "summary": "PSI batch 2026-04-25 で cookie 同意バナーが LCP 要素と特定。setVisible 遅延で banner を LCP 候補から外す。"
         }
       ]
     }
