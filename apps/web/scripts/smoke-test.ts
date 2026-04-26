@@ -45,8 +45,8 @@ const testCases: SmokeTestCase[] = [
     expectedTexts: ["北海道"],
   },
   {
-    name: "都道府県ダッシュボード（北海道・気象）",
-    path: "/areas/01000/landweather",
+    name: "都道府県ダッシュボード（北海道・人口）",
+    path: "/areas/01000/population",
     expectedStatus: 200,
     expectedTexts: ["北海道"],
   },
@@ -55,6 +55,13 @@ const testCases: SmokeTestCase[] = [
     path: "/areas/01000/economy",
     expectedStatus: 200,
     expectedTexts: ["北海道"],
+  },
+  {
+    // Phase 9 (2026-04-26): non-indexable category は middleware で 410 化される
+    // INDEXABLE_AREA_CATEGORIES = ["population", "economy"] 以外は意図的に 410
+    name: "都道府県ダッシュボード（北海道・気象）— 410 期待",
+    path: "/areas/01000/landweather",
+    expectedStatus: 410,
   },
   {
     name: "ランキング一覧",
