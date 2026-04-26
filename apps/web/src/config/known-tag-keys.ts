@@ -3,13 +3,11 @@
  *
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
- * middleware.ts の Fix 9 が参照する。CI ビルド環境では D1 binding が使えないため、
- * 静的ファイルとして git commit する。page.tsx は触らない（SSG は従来どおり）。
+ * 更新方法:
+ *   - 手動: `cd apps/web && npx tsx scripts/sync-known-keys-from-remote.ts`
+ *   - 自動: GitHub Actions `.github/workflows/sync-known-keys.yml` (毎日 JST 07:00)
  *
- * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
- * 更新タイミング: tags テーブルに新規 tag を追加した後。必ず git commit してからデプロイ。
- *
- * 最終生成日: 2026-04-25
+ * 最終生成日: 2026-04-26
  * 件数: 327
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
