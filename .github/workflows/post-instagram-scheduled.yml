@@ -4,6 +4,7 @@ name: 📸 Instagram scheduled post (daily)
 # GitHub Actions cron で post-instagram (即時 API) を毎朝発火する形で予約投稿を代替。
 # 投稿対象は .claude/state/instagram-w18-schedule.json の today (JST) エントリのみ、
 # 該当なしなら exit 0 で何もしない。
+# 投稿成功時は #127 (W18 Plan) に結果コメント投稿。
 
 on:
   schedule:
@@ -16,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: post-instagram-scheduled
@@ -38,15 +40,66 @@ jobs:
           node-version: "20"
 
       - name: 📸 Post to Instagram (if today is scheduled)
+        id: post
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
           IG_FORCE_DATE: ${{ inputs.force_date }}
-        run: node .claude/scripts/instagram/post-from-schedule.cjs
+        run: |
+          set -o pipefail
+          node .claude/scripts/instagram/post-from-schedule.cjs 2>&1 | tee /tmp/post-output.log
+          PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
+          KEY=$(grep -oE '投稿対象: \{[^}]+\}' /tmp/post-output.log | grep -oE '"content_key":"[^"]+"' | cut -d'"' -f4 || echo "")
+          DATE=$(grep -oE 'today \(JST\): [0-9-]+' /tmp/post-output.log | awk '{print $3}' || echo "")
+          SKIP=$(grep -c "今日の予定なし、skip" /tmp/post-output.log || echo "0")
+          {
+            echo "permalink=${PERMALINK}"
+            echo "content_key=${KEY}"
+            echo "post_date=${DATE}"
+            echo "skipped=${SKIP}"
+          } >> $GITHUB_OUTPUT
+
+      - name: 💬 Comment posting result on issue #127
+        if: success() && steps.post.outputs.permalink != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = "${{ steps.post.outputs.post_date }}";
+            const key = "${{ steps.post.outputs.content_key }}";
+            const permalink = "${{ steps.post.outputs.permalink }}";
+            const body = `## 📸 IG 投稿成功 — ${date}\n\n- **content_key**: \`${key}\`\n- **permalink**: ${permalink}\n- **workflow run**: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n_自動 post by post-instagram-scheduled.yml_`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 127,
+              body,
+            });
+
+      - name: 💬 Comment skipped on issue #127 (skip 時はサイレント)
+        if: success() && steps.post.outputs.skipped != '0'
+        run: echo "今日は投稿予定なし、issue コメントはスキップ"
+
+      - name: 💬 Comment failure on issue #127
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = process.env.IG_FORCE_DATE || new Date(Date.now() + 9*3600*1000).toISOString().slice(0, 10);
+            const body = `## ❌ IG 投稿失敗 — ${date}\n\n- **workflow run**: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n- ログを確認して手動 post-instagram で復旧してください\n\n_自動 post by post-instagram-scheduled.yml_`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 127,
+              body,
+            });
+        env:
+          IG_FORCE_DATE: ${{ inputs.force_date }}
 
       - name: 📄 Step Summary
         if: always()
         run: |
           echo "# Instagram Scheduled Post — $(TZ=Asia/Tokyo date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Schedule file: \`.claude/state/instagram-w18-schedule.json\`" >> $GITHUB_STEP_SUMMARY
+          echo "- content_key: ${{ steps.post.outputs.content_key }}" >> $GITHUB_STEP_SUMMARY
+          echo "- permalink: ${{ steps.post.outputs.permalink }}" >> $GITHUB_STEP_SUMMARY
+          echo "- skipped: ${{ steps.post.outputs.skipped }}" >> $GITHUB_STEP_SUMMARY

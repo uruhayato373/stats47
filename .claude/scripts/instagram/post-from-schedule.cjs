@@ -122,8 +122,22 @@ async function postReels({ contentKey, caption, videoUrl }) {
     throw new Error(`publish 失敗: ${JSON.stringify(publishJson)}`);
   }
 
+  const permalink = await fetchPermalink(publishJson.id);
   console.log(`✅ 投稿完了 media id: ${publishJson.id}`);
-  return publishJson.id;
+  console.log(`PERMALINK=${permalink}`);
+  return { mediaId: publishJson.id, permalink };
+}
+
+async function fetchPermalink(mediaId) {
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/${mediaId}?fields=permalink&access_token=${TOKEN}`,
+    );
+    const json = await res.json();
+    return json.permalink || `https://www.instagram.com/p/${mediaId}/`;
+  } catch {
+    return `https://www.instagram.com/p/${mediaId}/`;
+  }
 }
 
 async function postImage({ contentKey, caption, imageUrl }) {
@@ -161,8 +175,10 @@ async function postImage({ contentKey, caption, imageUrl }) {
   const publishJson = await publishRes.json();
   if (!publishJson.id) throw new Error(`publish 失敗: ${JSON.stringify(publishJson)}`);
 
+  const permalink = await fetchPermalink(publishJson.id);
   console.log(`✅ 投稿完了 media id: ${publishJson.id}`);
-  return publishJson.id;
+  console.log(`PERMALINK=${permalink}`);
+  return { mediaId: publishJson.id, permalink };
 }
 
 async function main() {
