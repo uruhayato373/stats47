@@ -1,16 +1,44 @@
 [
   {
+    "date": "2026-04-28",
+    "content_key": "divorces-per-total-population",
+    "domain": "bar-chart-race",
+    "type": "reels",
+    "note": "W18 Day 2 — 沖縄47年連続1位、離婚率の地図"
+  },
+  {
+    "date": "2026-04-29",
+    "content_key": "total-population",
+    "domain": "bar-chart-race",
+    "type": "reels",
+    "note": "W18 Day 3 — 大阪府2位陥落、人口地図50年"
+  },
+  {
     "date": "2026-04-30",
     "content_key": "local-tax-ratio-pref-finance",
     "domain": "bar-chart-race",
     "type": "reels",
-    "note": "W18 Day 4 — 自力で稼ぐ県は？地方税割合バーチャートレース"
+    "note": "W18 Day 4 — 自力で稼ぐ県は？地方税割合"
+  },
+  {
+    "date": "2026-05-01",
+    "content_key": "criminal-arrest-rate",
+    "domain": "bar-chart-race",
+    "type": "reels",
+    "note": "W18 Day 5 — 島根72.7%、人口少ない県の検挙率"
+  },
+  {
+    "date": "2026-05-02",
+    "content_key": "traffic-accident-deaths-per-100k",
+    "domain": "bar-chart-race",
+    "type": "reels",
+    "note": "W18 Day 6 — 交通事故死、50年で4分の1以下"
   },
   {
     "date": "2026-05-03",
     "content_key": "welfare-expenditure-ratio-pref-finance",
     "domain": "bar-chart-race",
     "type": "reels",
-    "note": "W18 Day 7 — 民生費割合の50年間推移"
+    "note": "W18 Day 7 — 民生費割合の50年推移"
   }
 ]
