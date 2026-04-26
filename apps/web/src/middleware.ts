@@ -329,9 +329,23 @@ export default function middleware(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-pathname", pathname);
 
-  return NextResponse.next({
+  const response = NextResponse.next({
     request: { headers: requestHeaders },
   });
+
+  // Phase 9 P2-B (2026-04-26): Vary ヘッダ最小化
+  // Next.js は RSC 用に `Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch,
+  // Next-Router-Segment-Prefetch` を全レスポンスに付与する。
+  // Google は `Vary: Accept-Encoding` 以外を無視する仕様だが、Cloudflare 等の CDN は
+  // Vary ヘッダごとにキャッシュ variant を保持するため、不要な Vary はキャッシュ効率を悪化させる。
+  // RSC navigation は req に `RSC: 1` ヘッダが付くのでその場合のみ Next.js デフォルトを尊重し、
+  // 通常リクエスト（Googlebot / 初回 HTML 取得）は Accept-Encoding のみに固定する。
+  const isRscRequest = req.headers.get("RSC") === "1";
+  if (!isRscRequest) {
+    response.headers.set("Vary", "Accept-Encoding");
+  }
+
+  return response;
 }
 
 export const config = {
