@@ -315,6 +315,12 @@ export default async function RankingKeyPage({
             ? <AiContentAccordion title="データの考察"><AiMarkdownContent content={aiContent.insights} /></AiContentAccordion>
             : null
         }
+        // AI生成コンテンツ: 地域別の傾向（折りたたみ）
+        regionalAnalysisSection={
+          aiContent?.regionalAnalysis
+            ? <AiContentAccordion title="地域別の傾向"><AiMarkdownContent content={aiContent.regionalAnalysis} /></AiContentAccordion>
+            : null
+        }
         // AI生成コンテンツ: FAQ JSON-LD（非表示 script）
         faqSection={
           aiContent?.faq
