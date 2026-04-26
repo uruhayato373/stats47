@@ -1,0 +1,111 @@
+name: 🔑 Sync KNOWN_*_KEYS from remote D1 (daily)
+
+# Phase 9 P2-A (2026-04-26): KNOWN_RANKING_KEYS / KNOWN_TAG_KEYS の同期を自動化。
+# middleware の Allowlist が古いと「実在するページが 410 化される」逆事故が発生するため、
+# remote D1 から定期的に再生成して PR を作る。
+#
+# 必要な GitHub secrets:
+# - CLOUDFLARE_API_TOKEN: D1 Read 権限を持つ token（pull:d1 用）
+# - CLOUDFLARE_ACCOUNT_ID: stats47 アカウント ID
+#
+# 動作:
+# 1. develop branch を checkout
+# 2. wrangler 経由で remote D1 → local SQLite に pull
+# 3. apps/web/scripts/generate-known-{ranking,tag}-keys.ts を実行
+# 4. diff があれば feature/sync-known-keys-YYYY-MM-DD ブランチで PR を自動起票
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # JST 07:00 (UTC 22:00 前日)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-known-keys
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📥 Pull remote D1 (ranking/tag のみ最小同期)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm run pull:d1 --workspace=packages/database -- --table ranking_items
+          npm run pull:d1 --workspace=packages/database -- --table article_tags
+
+      - name: 🔧 Regenerate KNOWN_*_KEYS
+        run: |
+          cd apps/web
+          npx tsx scripts/generate-known-ranking-keys.ts
+          npx tsx scripts/generate-known-tag-keys.ts
+
+      - name: 📅 Resolve date
+        id: date
+        run: echo "date=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: 🔍 Detect diff
+        id: diff
+        run: |
+          if git diff --quiet apps/web/src/config/known-ranking-keys.ts apps/web/src/config/known-tag-keys.ts; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            git diff --stat apps/web/src/config/known-ranking-keys.ts apps/web/src/config/known-tag-keys.ts
+          fi
+
+      - name: 🌿 Create PR with diffs
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="feature/sync-known-keys-${{ steps.date.outputs.date }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add apps/web/src/config/known-ranking-keys.ts apps/web/src/config/known-tag-keys.ts
+          git commit -m "chore(seo): sync KNOWN_*_KEYS from remote D1 (${{ steps.date.outputs.date }})"
+          git push origin "$BRANCH"
+          gh pr create \
+            --base develop \
+            --head "$BRANCH" \
+            --title "chore(seo): sync KNOWN_*_KEYS (${{ steps.date.outputs.date }})" \
+            --body "Automated daily sync of \`KNOWN_RANKING_KEYS\` / \`KNOWN_TAG_KEYS\` from remote D1.
+
+Phase 9 P2-A: prevent middleware Allowlist from going stale (was 28 days old as of 2026-04-26).
+
+Diff source: \`apps/web/scripts/generate-known-{ranking,tag}-keys.ts\` against remote D1 production state.
+
+⚠ Review the diff carefully — accidental removals would cause real pages to 410."
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          echo "# Sync KNOWN_*_KEYS — ${{ steps.date.outputs.date }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.diff.outputs.changed }}" = "true" ]; then
+            echo "✅ Diff detected, PR created on branch \`feature/sync-known-keys-${{ steps.date.outputs.date }}\`" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ No diff — KNOWN_*_KEYS already in sync." >> $GITHUB_STEP_SUMMARY
+          fi
