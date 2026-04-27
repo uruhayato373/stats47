@@ -2,11 +2,11 @@
 
 | Metric | 今週 | 前週比 |
 |---|---|---|
-| Clicks | 424 ▲ |  (+19.8%) |
-| Impressions | 14373 ▲ |  (+11.7%) |
-| CTR | 2.95% · | |
-| Avg Position | 10.50 ▲ | |
-| Queries rows | 787 | |
-| Pages rows | 977 | |
+| Clicks | 401 ▲ |  (+13.3%) |
+| Impressions | 13086 ▲ |  (+1.7%) |
+| CTR | 3.06% · | |
+| Avg Position | 9.49 ▲ | |
+| Queries rows | 527 | |
+| Pages rows | 845 | |
 
 履歴: [`history.csv`](./history.csv) (GitHub が表形式でレンダリング)
