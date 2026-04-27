@@ -7,7 +7,7 @@
  *   - 手動: `cd apps/web && npx tsx scripts/sync-known-keys-from-remote.ts`
  *   - 自動: GitHub Actions `.github/workflows/sync-known-keys.yml` (毎日 JST 07:00)
  *
- * 最終生成日: 2026-04-26
+ * 最終生成日: 2026-04-27
  * 件数: 327
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
