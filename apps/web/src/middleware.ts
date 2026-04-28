@@ -174,8 +174,10 @@ function checkContentTypePolicy(pathname: string): Response | null {
     }
   }
 
-  // /correlation/{slug}: 存在しないルート → 410（query 版 /correlation?x=... のみ有効）
-  if (pathname.startsWith("/correlation/")) {
+  // /correlation: 探索 UI は廃止し、各ランキングページの「相関が高い指標」セクションに
+  // 内部リンクで誘導する設計に移行（CorrelationSection 経由）。
+  // /correlation 本体・配下パス・query 版すべて 410。
+  if (pathname === "/correlation" || pathname.startsWith("/correlation/")) {
     return gone();
   }
 

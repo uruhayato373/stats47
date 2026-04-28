@@ -41,12 +41,10 @@ function rColor(r: number): string {
 }
 
 interface CorrelationSectionClientProps {
-    rankingKey: string;
     correlatedItems: CorrelatedItem[];
 }
 
 export function CorrelationSectionClient({
-    rankingKey,
     correlatedItems,
 }: CorrelationSectionClientProps) {
     return (
@@ -71,14 +69,6 @@ export function CorrelationSectionClient({
                         </Link>
                     ))}
                 </nav>
-                <div className="mt-2 pt-2 border-t">
-                    <Link
-                        href={`/correlation?x=${rankingKey}`}
-                        className="text-xs text-muted-foreground hover:text-primary transition-colors"
-                    >
-                        相関分析の詳細 →
-                    </Link>
-                </div>
             </CardContent>
         </Card>
     );

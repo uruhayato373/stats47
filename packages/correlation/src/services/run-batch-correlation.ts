@@ -3,6 +3,7 @@ import "server-only";
 import type { RankingItem } from "@stats47/ranking";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { exportCorrelationSnapshot } from "../exporters/correlation-snapshot";
+import { exportCorrelationPerKeySnapshots } from "../exporters/per-key-snapshot";
 import { upsertCorrelation } from "../repositories/upsert-correlation";
 import { isExcludedCorrelationKey, isExcludedCorrelationPair } from "../trivial-pairs";
 import { buildScatterData, calculatePartialR, calculatePearsonR } from "../utils/calculate-pearson";
@@ -446,12 +447,24 @@ export async function runBatchCorrelation(
 
     let snapshotStatus: "ok" | "failed" = "ok";
     let snapshotErrorMessage: string | null = null;
+
+    // Phase 0: 既存 top-pairs / stats snapshot（/correlation page 用、Phase 1 で /correlation 削除時に exporter ごと撤去予定）
+    // Phase 1: per-ranking-key snapshot（CorrelationSection 用、本番 D1 read を完全消滅させる）
     try {
-      const snapshotResult = await exportCorrelationSnapshot();
+      const [snapshotResult, perKeyResult] = await Promise.all([
+        exportCorrelationSnapshot(),
+        exportCorrelationPerKeySnapshots(),
+      ]);
       observer.onLog(
         "info",
-        `R2 snapshot を更新しました（pairs=${snapshotResult.topPairs.pairCount}, ${snapshotResult.durationMs}ms）`,
+        `R2 snapshot を更新しました（top-pairs=${snapshotResult.topPairs.pairCount}, per-key=${perKeyResult.succeeded}/${perKeyResult.totalKeys}, ${snapshotResult.durationMs}+${perKeyResult.durationMs}ms）`,
       );
+      if (perKeyResult.failed > 0) {
+        observer.onLog(
+          "warn",
+          `per-key snapshot のうち ${perKeyResult.failed} 件で書込失敗。再実行を推奨`,
+        );
+      }
     } catch (snapshotErr) {
       snapshotStatus = "failed";
       snapshotErrorMessage = snapshotErr instanceof Error ? snapshotErr.message : String(snapshotErr);
