@@ -9,9 +9,9 @@ import { notFound } from "next/navigation";
 
 
 import {
-  findSurveyById,
-  listSurveys,
-  findRankingItemsBySurvey,
+  readRankingItemsBySurveyFromR2,
+  readSurveyByIdFromR2,
+  readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -42,7 +42,7 @@ function parseLatestYear(latestYear: unknown): string {
 }
 
 export async function generateStaticParams() {
-  const result = await listSurveys();
+  const result = await readSurveysFromR2();
   if (!isOk(result)) return [];
   return result.data.map((s) => ({ surveyKey: s.id }));
 }
@@ -53,7 +53,7 @@ export async function generateMetadata({
   const { surveyKey } = await params;
 
   try {
-    const result = await findSurveyById(surveyKey);
+    const result = await readSurveyByIdFromR2(surveyKey);
     const survey = isOk(result) ? result.data : null;
 
     if (!survey) {
@@ -79,14 +79,14 @@ export async function generateMetadata({
 export default async function SurveyPage({ params }: PageProps) {
   const { surveyKey } = await params;
 
-  const surveyResult = await findSurveyById(surveyKey);
+  const surveyResult = await readSurveyByIdFromR2(surveyKey);
   const survey = isOk(surveyResult) ? surveyResult.data : null;
 
   if (!survey) {
     notFound();
   }
 
-  const rankingResult = await findRankingItemsBySurvey(surveyKey);
+  const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
 
   const r2PublicUrl =

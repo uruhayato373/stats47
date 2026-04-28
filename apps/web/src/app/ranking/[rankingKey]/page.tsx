@@ -43,7 +43,14 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
-import { listActiveRankingKeys, listRankingValues, findSurveyById, listSurveys, findRankingItemsByGroupKey, type GroupRankingItem } from "@stats47/ranking/server";
+import {
+  listRankingValues,
+  readActiveRankingKeysFromR2,
+  readRankingItemsByGroupKeyFromR2,
+  readSurveyByIdFromR2,
+  readSurveysFromR2,
+  type GroupRankingItem,
+} from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
@@ -79,7 +86,7 @@ import type { Metadata } from "next";
 /** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
 export async function generateStaticParams() {
   try {
-    const result = await listActiveRankingKeys("prefecture");
+    const result = await readActiveRankingKeysFromR2("prefecture");
     if (!isOk(result)) return [];
     return result.data.map(({ rankingKey }) => ({ rankingKey }));
   } catch {
@@ -189,13 +196,13 @@ export default async function RankingKeyPage({
 
   // --- 3c. 調査名 + 全調査一覧を取得 ---
   const surveyNamePromise = rankingItem.surveyId
-    ? findSurveyById(rankingItem.surveyId).then((r) => isOk(r) ? r.data?.name ?? null : null).catch(() => null)
+    ? readSurveyByIdFromR2(rankingItem.surveyId).then((r) => isOk(r) ? r.data?.name ?? null : null).catch(() => null)
     : Promise.resolve(null);
-  const allSurveysPromise = listSurveys().then((r) => isOk(r) ? r.data : []).catch(() => []);
+  const allSurveysPromise = readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []);
 
   // --- 3d. グループメンバー取得（normalization_basis トグル用） ---
   const groupMembersPromise = rankingItem.groupKey
-    ? findRankingItemsByGroupKey(rankingItem.groupKey, areaType)
+    ? readRankingItemsByGroupKeyFromR2(rankingItem.groupKey, areaType)
         .then((r) => (isOk(r) && r.data.length > 1 ? r.data : []))
         .catch(() => [] as GroupRankingItem[])
     : Promise.resolve([] as GroupRankingItem[]);

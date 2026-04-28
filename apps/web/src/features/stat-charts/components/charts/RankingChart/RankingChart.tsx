@@ -1,6 +1,6 @@
 import { getDrizzle, rankingData as rankingDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { findRankingItemByKeyAndAreaType } from "@stats47/ranking/server";
+import { readRankingItemByKeyAndAreaTypeFromR2 } from "@stats47/ranking/server";
 import { and, eq, asc } from "drizzle-orm";
 
 import { toBarChartData } from "../../../adapters";
@@ -81,7 +81,7 @@ export const RankingChartDashboard = async ({
 
     for (let i = 0; i < rankingKeys.length; i++) {
       const key = rankingKeys[i];
-      const result = await findRankingItemByKeyAndAreaType(key, "prefecture");
+      const result = await readRankingItemByKeyAndAreaTypeFromR2(key, "prefecture");
 
       if (!result.success || result.data.length === 0) {
         logger.warn({ rankingKey: key }, "RankingChart: ranking_item not found");

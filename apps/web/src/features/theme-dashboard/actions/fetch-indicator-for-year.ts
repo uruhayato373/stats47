@@ -5,10 +5,10 @@ import {
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
 import {
-  findRankingItem,
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
+  readRankingItemFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -26,7 +26,7 @@ export async function fetchIndicatorForYearAction(
   rankingKey: string,
   yearCode: string,
 ): Promise<RankingValue[]> {
-  const result = await findRankingItem(rankingKey, "prefecture");
+  const result = await readRankingItemFromR2(rankingKey, "prefecture");
   if (!result || !isOk(result) || !result.data) return [];
 
   const rankingItem = result.data;

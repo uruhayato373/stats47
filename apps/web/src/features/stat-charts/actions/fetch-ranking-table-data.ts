@@ -1,7 +1,7 @@
 "use server";
 
 import { RankingItem, RankingValue } from "@stats47/ranking";
-import { findRankingItemByKey, findLatestYear, listRankingValues } from "@stats47/ranking/server";
+import { findLatestYear, listRankingValues, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
 import { err, ok, type Result } from "@stats47/types";
 
 export interface FetchRankingTableDataResult {
@@ -20,7 +20,7 @@ export async function fetchRankingTableDataAction(
 ): Promise<Result<FetchRankingTableDataResult, string>> {
   try {
     // 1. ランキング項目を取得
-    const itemResult = await findRankingItemByKey(rankingKey);
+    const itemResult = await readRankingItemByKeyFromR2(rankingKey);
     if (!itemResult.success || !itemResult.data) {
       return err("ランキング項目が見つかりませんでした");
     }

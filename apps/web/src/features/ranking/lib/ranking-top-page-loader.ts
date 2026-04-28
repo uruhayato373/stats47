@@ -6,7 +6,7 @@ import "server-only";
  * app/ranking/page.tsx から抽出。page.tsx を薄いラッパーに保つ。
  */
 import {
-  listFeaturedRankingItems,
+  readFeaturedRankingItemsFromR2,
 } from "@stats47/ranking/server";
 import { isOk, unwrap } from "@stats47/types";
 
@@ -42,7 +42,7 @@ export interface RankingTopPageData {
  */
 export async function loadRankingTopPageData(): Promise<RankingTopPageData> {
   // 並列でデータ取得
-  const featuredTask = listFeaturedRankingItems(6).then((r) =>
+  const featuredTask = readFeaturedRankingItemsFromR2(6).then((r) =>
     isOk(r) ? r.data : []
   );
   const allCategories = unwrap(await listCategories());

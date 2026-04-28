@@ -1,4 +1,7 @@
-import { findRankingItem, findRankingItemsByCategory } from "@stats47/ranking/server";
+import {
+  readRankingItemFromR2,
+  readRankingItemsByCategoryFromR2,
+} from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 import type { AreaType } from "@/features/area";
@@ -33,7 +36,7 @@ export async function RankingSidebarContainer({
     // categoryKey が渡されていない場合のみ DB から取得（後方互換）
     let categoryKey = categoryKeyProp;
     if (!categoryKey) {
-        const itemResult = await findRankingItem(rankingKey, areaType);
+        const itemResult = await readRankingItemFromR2(rankingKey, areaType);
         if (!isOk(itemResult) || !itemResult.data?.categoryKey) {
             return null;
         }
@@ -43,7 +46,7 @@ export async function RankingSidebarContainer({
     // 2. カテゴリ名とランキングアイテムを並列取得
     const [catResult, result] = await Promise.all([
         findCategoryByKey(categoryKey),
-        findRankingItemsByCategory(categoryKey),
+        readRankingItemsByCategoryFromR2(categoryKey),
     ]);
 
     if (!isOk(result)) {
