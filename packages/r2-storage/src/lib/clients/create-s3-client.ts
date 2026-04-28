@@ -1,6 +1,19 @@
 import { S3Client } from "@aws-sdk/client-s3";
 import { logger } from "@stats47/logger";
-import { HttpsProxyAgent } from "https-proxy-agent";
+
+// https-proxy-agent は ESM-only で `"exports": { "import": ... }` のみ。
+// tsx + setup-cli.js の CJS 経路で静的 import すると ERR_PACKAGE_PATH_NOT_EXPORTED
+// で失敗するため、プロキシが必要なときのみ require する遅延ロードに切替。
+type HttpsProxyAgentCtor = new (proxy: string) => unknown;
+function loadHttpsProxyAgent(): HttpsProxyAgentCtor | null {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const mod = require("https-proxy-agent") as { HttpsProxyAgent: HttpsProxyAgentCtor };
+    return mod.HttpsProxyAgent;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * R2エンドポイントがNO_PROXYに含まれているか確認
@@ -58,20 +71,28 @@ export function createS3Client(): S3Client {
   const bypassProxy = shouldBypassProxy(r2Endpoint, noProxy);
 
   // プロキシエージェントの設定
-  let httpAgent: HttpsProxyAgent<string> | undefined;
-  let httpsAgent: HttpsProxyAgent<string> | undefined;
+  let httpAgent: unknown | undefined;
+  let httpsAgent: unknown | undefined;
 
   if (httpsProxy && !bypassProxy) {
-    try {
-      const proxyAgent = new HttpsProxyAgent<string>(httpsProxy);
-      httpAgent = proxyAgent;
-      httpsAgent = proxyAgent;
-    } catch (error) {
+    const HttpsProxyAgentClass = loadHttpsProxyAgent();
+    if (HttpsProxyAgentClass) {
+      try {
+        const proxyAgent = new HttpsProxyAgentClass(httpsProxy);
+        httpAgent = proxyAgent;
+        httpsAgent = proxyAgent;
+      } catch (error) {
+        logger.warn(
+          {
+            error: error instanceof Error ? error.message : String(error),
+          },
+          "S3クライアント: プロキシエージェントの作成に失敗、プロキシなしで続行"
+        );
+      }
+    } else {
       logger.warn(
-        {
-          error: error instanceof Error ? error.message : String(error),
-        },
-        "S3クライアント: プロキシエージェントの作成に失敗、プロキシなしで続行"
+        { httpsProxy },
+        "https-proxy-agent を遅延ロードできませんでした。プロキシなしで続行します",
       );
     }
   }

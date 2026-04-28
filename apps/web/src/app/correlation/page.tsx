@@ -1,6 +1,6 @@
 import {
-    countCorrelationStats,
-    listTopCorrelations,
+    readCorrelationStatsFromR2,
+    readTopCorrelationsFromR2,
     type TopCorrelation,
 } from "@stats47/correlation/server";
 import { listRankingItemsLite } from "@stats47/ranking/server";
@@ -9,10 +9,14 @@ import { isOk } from "@stats47/types";
 import { CorrelationPageClient } from "@/features/correlation";
 import { fetchCorrelationPairAction } from "@/features/correlation/server";
 
+import { logger } from "@/lib/logger";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
+// correlation_analysis (1.5M rows) への full scan を防ぐため、
+// 集計済み snapshot を R2 経由で fetch する。Next.js Data Cache に乗せて二重防御。
+export const revalidate = 86400;
 
 const title = "都道府県統計の相関分析 | Stats47";
 const description =
@@ -47,15 +51,20 @@ export default async function CorrelationPage({ searchParams }: PageProps) {
     try {
         const [itemsResult, topCorrs, corrCounts] = await Promise.all([
             listRankingItemsLite({ isActive: true, areaType: "prefecture" }),
-            listTopCorrelations(20),
-            countCorrelationStats(),
+            readTopCorrelationsFromR2(20),
+            readCorrelationStatsFromR2(),
         ]);
         rankingOptions = isOk(itemsResult) ? itemsResult.data : [];
         topCorrelations = topCorrs;
         totalPairs = corrCounts.total;
         strongCount = corrCounts.strong;
-    } catch {
-        // D1 接続エラー等の場合は空データで描画（500 を防ぐ）
+    } catch (error) {
+        // R2 fetch / D1 接続エラー等の場合は空データで描画（500 を防ぐ）。
+        // ただしサイレント failure を避けるため必ずログには残す。
+        logger.error(
+            { error: error instanceof Error ? error.message : String(error) },
+            "CorrelationPage: 初期データ取得に失敗。空表示にフォールバック",
+        );
     }
 
     // URL パラメータ指定 or ランキング1位をデフォルト表示
