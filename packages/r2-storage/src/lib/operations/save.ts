@@ -5,14 +5,63 @@ import { createS3Client } from "../clients/create-s3-client";
 import { getR2Client } from "../clients/get-r2-client";
 import { handleR2Error } from "../errors/handle-r2-error";
 import { calculateBodySize } from "../utils/calculate-body-size";
-import { convertBodyForR2 } from "../utils/convert-body-for-r2"; // This file was marked for deletion, checking if I need to inline it or keep it. Plan said delete, but save logic uses it. I should inline or keep. Plan said delete convert-body.ts, but valid code uses convertBodyForR2. Ah, convert-body.ts was separate from convert-body-for-r2.ts. Checking if convert-body-for-r2.ts exists.
-
-// Checking imports in save-to-r2.ts: import { convertBodyForR2 } from "../utils/convert-body-for-r2";
-// My plan deleted `packages/r2-storage/src/lib/utils/convert-body.ts`.
-// I should check if `convert-body-for-r2.ts` exists.
-// Assuming it does based on import.
-
+import { convertBodyForR2 } from "../utils/convert-body-for-r2";
 import { detectEnvironment } from "../utils/detect-environment";
+
+/**
+ * Cloudflare REST API 経由でオブジェクトを保存
+ * S3 API がプロキシ / 認証エラーで失敗するときの汎用フォールバック
+ * （fetchFromCloudflareApi の write 版。AWS SDK / https-proxy-agent を経由しない）
+ */
+async function saveToCloudflareApi(
+  key: string,
+  body: string | ArrayBuffer | Buffer | Uint8Array,
+  options?: { contentType?: string },
+): Promise<void> {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+
+  if (!accountId || !apiToken) {
+    throw new Error(
+      "Cloudflare REST API 経由の保存に必要な環境変数が未設定です: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN",
+    );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { ProxyAgent, fetch: undiciFetch } = require("undici");
+  const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
+
+  let payload: Buffer | Uint8Array | string;
+  if (Buffer.isBuffer(body)) {
+    payload = body;
+  } else if (body instanceof ArrayBuffer) {
+    payload = Buffer.from(body);
+  } else if (body instanceof Uint8Array) {
+    payload = body;
+  } else {
+    payload = String(body);
+  }
+
+  const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${encodeURIComponent(key)}`;
+  const response = await undiciFetch(url, {
+    method: "PUT",
+    dispatcher,
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+      "Content-Type": options?.contentType || "application/json",
+    },
+    body: payload,
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(
+      `Cloudflare REST API での保存に失敗: ${response.status} ${text} for key=${key}`,
+    );
+  }
+}
 
 /**
  * オブジェクトを R2 に保存
@@ -61,12 +110,22 @@ export async function saveToR2(
       };
 
       await s3Client.send(new PutObjectCommand(input));
-      
+
       logger.info({ key, size }, "S3クライアント経由でオブジェクト保存完了");
       return { key, size };
     } catch (error) {
-      logger.error({ key, error }, "S3クライアント経由でのオブジェクト保存に失敗しました");
-      throw error;
+      logger.warn(
+        { key, error: error instanceof Error ? error.message : String(error) },
+        "S3クライアント経由での保存に失敗、Cloudflare REST API にフォールバックします",
+      );
+      try {
+        await saveToCloudflareApi(key, body, options);
+        logger.info({ key, size }, "Cloudflare REST API 経由でオブジェクト保存完了");
+        return { key, size };
+      } catch (cfError) {
+        logger.error({ key, s3Error: error, cfError }, "S3・Cloudflare REST API 両方で保存に失敗しました");
+        throw cfError;
+      }
     }
   }
 

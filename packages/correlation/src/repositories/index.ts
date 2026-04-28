@@ -12,6 +12,10 @@ export {
   listTopCorrelations,
 } from "./list-top-correlations";
 export {
+  readCorrelationStatsFromR2,
+  readTopCorrelationsFromR2,
+} from "./read-correlation-snapshot";
+export {
   type UpsertCorrelationParams,
   upsertCorrelation,
 } from "./upsert-correlation";

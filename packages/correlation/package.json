@@ -18,6 +18,7 @@
   },
   "scripts": {
     "batch": "tsx -r ../ranking/src/scripts/setup-cli.js src/scripts/run-batch.ts",
+    "export-snapshot": "tsx -r ../ranking/src/scripts/setup-cli.js src/scripts/export-snapshot.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -26,6 +27,7 @@
   "dependencies": {
     "@stats47/database": "*",
     "@stats47/logger": "*",
+    "@stats47/r2-storage": "*",
     "@stats47/ranking": "*",
     "@stats47/types": "*",
     "drizzle-orm": "^0.45.1",

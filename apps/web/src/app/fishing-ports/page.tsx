@@ -14,7 +14,8 @@ import { loadFishingPortData } from "@/features/fishing-ports/server";
 
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+// 漁港データ（2,896 港）は年次更新で十分。ISR 24h でクローラ毎の D1 全件スキャンを回避。
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "漁港マップ | 統計で見る都道府県",
