@@ -9,14 +9,17 @@
  * SEGMENTS の順序を変えると URL（数字 id）が変わるため、追加時は末尾に追記すること。
  */
 
+import { readCategoriesFromR2 } from "@stats47/category/server";
 import {
-  getDrizzle,
-  rankingItems,
-  categories,
-  articles,
-  surveys,
   articleTags,
+  articles,
+  getDrizzle,
 } from "@stats47/database/server";
+import {
+  readActiveKeysForSitemapFromR2,
+  readSurveysFromR2,
+} from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 import { eq, and, isNotNull, sql } from "drizzle-orm";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
@@ -96,15 +99,12 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
 ];
 
 async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
-  const db = getDrizzle();
-  const rows = await db
-    .select({ rankingKey: rankingItems.rankingKey })
-    .from(rankingItems)
-    .where(eq(rankingItems.isActive, true));
+  const result = await readActiveKeysForSitemapFromR2();
+  if (!isOk(result)) return [];
 
   // ranking_items は (ranking_key, area_type) 複合主キーのため重複排除必須
   const seen = new Set<string>();
-  return rows
+  return result.data
     .filter((row) => UrlPolicy.ranking.shouldIncludeInSitemap(row.rankingKey))
     .filter((row) => {
       if (seen.has(row.rankingKey)) return false;
@@ -140,24 +140,24 @@ async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function getCategoryPages(): Promise<MetadataRoute.Sitemap> {
-  const db = getDrizzle();
-  const rows = await db
-    .select({ categoryKey: categories.categoryKey })
-    .from(categories);
-  return rows.map((row) => ({
-    url: `${BASE_URL}/category/${row.categoryKey}`,
+  const result = await readCategoriesFromR2();
+  if (!isOk(result)) return [];
+  return result.data.map((c) => ({
+    url: `${BASE_URL}/category/${c.categoryKey}`,
     changeFrequency: "weekly",
     priority: 0.5,
   }));
 }
 
 async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
-  const db = getDrizzle();
-  const rows = await db.select({ id: surveys.id }).from(surveys);
+  const result = await readSurveysFromR2();
+  if (!isOk(result)) {
+    return [{ url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 }];
+  }
   return [
     { url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 },
-    ...rows.map((row) => ({
-      url: `${BASE_URL}/survey/${row.id}`,
+    ...result.data.map((s) => ({
+      url: `${BASE_URL}/survey/${s.id}`,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),

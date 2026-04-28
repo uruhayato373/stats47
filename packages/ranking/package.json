@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@stats47/area": "*",
+    "@stats47/category": "*",
     "@stats47/database": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",

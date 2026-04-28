@@ -8,7 +8,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { findRankingItemsByCategory, listSurveys, listRankingValues, listTopRankingValuesBatch } from "@stats47/ranking/server";
+import {
+  listRankingValues,
+  listTopRankingValuesBatch,
+  readRankingItemsByCategoryFromR2,
+  readSurveysFromR2,
+} from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
@@ -83,9 +88,9 @@ export default async function CategoryPage({ params }: PageProps) {
   }
 
   const [rankingResult, latestArticles, surveysResult] = await Promise.all([
-    findRankingItemsByCategory(categoryKey),
+    readRankingItemsByCategoryFromR2(categoryKey),
     listLatestArticles(4).catch(() => []),
-    listSurveys().then((r) => isOk(r) ? r.data : []).catch(() => []),
+    readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
 

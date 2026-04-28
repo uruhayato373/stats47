@@ -6,10 +6,10 @@ import {
 } from "@stats47/estat-api/server";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import {
-  findRankingItem,
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
+  readRankingItemFromR2,
 } from "@stats47/ranking/server";
 import { isOk, type TopoJSONTopology } from "@stats47/types";
 
@@ -76,7 +76,7 @@ export async function loadThemeData(
   // 1. 全指標の RankingItem 定義を並列取得
   const rankingItemResults = await Promise.all(
     allKeys.map((key) =>
-      findRankingItem(key, "prefecture").catch((error) => {
+      readRankingItemFromR2(key, "prefecture").catch((error) => {
         logger.error({ error, key }, "テーマダッシュボード: RankingItem取得失敗");
         return null;
       })

@@ -1,6 +1,11 @@
 "use server";
 
-import { computeNormalization, fetchRankingValuesOnDemand, findRankingItem, listRankingValues } from "@stats47/ranking/server";
+import {
+  computeNormalization,
+  fetchRankingValuesOnDemand,
+  listRankingValues,
+  readRankingItemFromR2,
+} from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
 
 import type { AreaType } from "@stats47/area";
@@ -20,7 +25,7 @@ export async function fetchRankingValuesAction(
 ): Promise<Result<RankingValue[], Error>> {
   try {
     // アイテム情報を取得
-    const itemResult = await findRankingItem(rankingKey, areaType);
+    const itemResult = await readRankingItemFromR2(rankingKey, areaType);
     if (!isOk(itemResult) || !itemResult.data) {
       return err(new Error("Ranking item not found"));
     }

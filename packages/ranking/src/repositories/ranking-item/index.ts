@@ -18,3 +18,14 @@ export { listRankingItemsByAreaType } from "./list-ranking-items-by-area-type";
 export { listRankingItemsWithTags } from "./list-ranking-items-with-tags";
 export { updateRankingItem } from "./update-ranking-item";
 export { upsertRankingItem } from "./upsert-ranking-item";
+export {
+  readActiveKeysForSitemapFromR2,
+  readActiveRankingKeysFromR2,
+  readFeaturedRankingItemsFromR2,
+  readRankingItemByKeyAndAreaTypeFromR2,
+  readRankingItemByKeyFromR2,
+  readRankingItemFromR2,
+  readRankingItemsByCategoryFromR2,
+  readRankingItemsByGroupKeyFromR2,
+  readRankingItemsBySurveyFromR2,
+} from "./read-ranking-items-snapshot";

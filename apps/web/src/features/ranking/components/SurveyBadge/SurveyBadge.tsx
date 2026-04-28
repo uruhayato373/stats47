@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { findSurveyById } from "@stats47/ranking/server";
+import { readSurveyByIdFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 interface SurveyBadgeProps {
@@ -8,7 +8,7 @@ interface SurveyBadgeProps {
 }
 
 export async function SurveyBadge({ surveyId }: SurveyBadgeProps) {
-  const result = await findSurveyById(surveyId);
+  const result = await readSurveyByIdFromR2(surveyId);
   const survey = isOk(result) ? result.data : null;
 
   if (!survey) return null;

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { findRankingItem, listRankingValues } from "@stats47/ranking/server";
+import { listRankingValues, readRankingItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 /**
@@ -21,7 +21,7 @@ export async function GET(
   try {
     let yearCode = year;
     if (!yearCode) {
-      const itemResult = await findRankingItem(rankingKey, "prefecture");
+      const itemResult = await readRankingItemFromR2(rankingKey, "prefecture");
       const item = isOk(itemResult) ? itemResult.data : null;
       yearCode = item?.latestYear?.yearCode ?? "2024";
     }
