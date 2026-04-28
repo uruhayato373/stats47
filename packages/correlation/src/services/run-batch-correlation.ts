@@ -2,6 +2,7 @@ import "server-only";
 
 import type { RankingItem } from "@stats47/ranking";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
+import { exportCorrelationSnapshot } from "../exporters/correlation-snapshot";
 import { upsertCorrelation } from "../repositories/upsert-correlation";
 import { isExcludedCorrelationKey, isExcludedCorrelationPair } from "../trivial-pairs";
 import { buildScatterData, calculatePartialR, calculatePearsonR } from "../utils/calculate-pearson";
@@ -442,6 +443,20 @@ export async function runBatchCorrelation(
     }
 
     const wasAborted = observer.isAborted();
+
+    try {
+      const snapshotResult = await exportCorrelationSnapshot();
+      observer.onLog(
+        "info",
+        `R2 snapshot を更新しました（pairs=${snapshotResult.topPairs.pairCount}, ${snapshotResult.durationMs}ms）`,
+      );
+    } catch (snapshotErr) {
+      observer.onLog(
+        "warn",
+        `R2 snapshot 更新に失敗（DB upsert は完了済み）: ${snapshotErr instanceof Error ? snapshotErr.message : String(snapshotErr)}`,
+      );
+    }
+
     observer.onComplete({
       success: true,
       message: wasAborted
