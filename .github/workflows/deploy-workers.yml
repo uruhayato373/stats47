@@ -96,6 +96,15 @@ jobs:
           NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED: "true"
           NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG: "stats47-22"
           NODE_OPTIONS: "--max-old-space-size=4096"
+          # Phase 2 (D1→R2 移行): generateStaticParams / generateMetadata / sitemap が
+          # build 時に R2 snapshot を fetch するため、S3 互換 API の credentials を build env に渡す。
+          # CF Workers binding は build 時 (no runtime context) で sync error になるが、
+          # fetchFromR2 が S3 fallback に落ちて成功するようにする。
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          CLOUDFLARE_R2_BUCKET_NAME: ${{ secrets.CLOUDFLARE_R2_BUCKET_NAME }}
         run: npm run workers:build
 
       - name: Verify OpenNext build
