@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { findRankingItemsByGroupKey } from "@stats47/ranking/server";
+import { readRankingItemsByGroupKeyFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRightLeft, ChevronRight } from "lucide-react";
 
@@ -22,7 +22,7 @@ export async function RelatedGroupCard({
   areaType,
   groupKey,
 }: RelatedGroupCardProps) {
-  const result = await findRankingItemsByGroupKey(groupKey, areaType);
+  const result = await readRankingItemsByGroupKeyFromR2(groupKey, areaType);
   if (!isOk(result) || result.data.length <= 1) return null;
 
   return (

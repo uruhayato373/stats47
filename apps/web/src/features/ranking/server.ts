@@ -2,13 +2,17 @@ import "server-only";
 
 import { cache } from "react";
 
-import { listFeaturedRankingItems, findRankingItem as findRankingItemRaw } from "@stats47/ranking/server";
+import {
+  readFeaturedRankingItemsFromR2,
+  readRankingItemFromR2,
+} from "@stats47/ranking/server";
 import { err, type Result } from "@stats47/types";
 
 import type { RankingItem } from "@stats47/ranking";
 
-// cache() でリクエストレベル dedupe（generateMetadata + ページ本体の重複排除）
-export const cachedFindRankingItem = cache(findRankingItemRaw);
+// cache() でリクエストレベル dedupe（generateMetadata + ページ本体の重複排除）。
+// R2 snapshot 経由なので D1 read は発生しない。reader 内部にも module-level cache あり。
+export const cachedFindRankingItem = cache(readRankingItemFromR2);
 
 /**
  * おすすめランキングを取得する
@@ -17,8 +21,7 @@ export const cachedFindRankingItem = cache(findRankingItemRaw);
  */
 export async function getFeaturedRankings(limit: number = 20): Promise<Result<RankingItem[], Error>> {
   try {
-    const results = await listFeaturedRankingItems(limit);
-    return results; // Result型で返ってくるはず
+    return await readFeaturedRankingItemsFromR2(limit);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));
   }

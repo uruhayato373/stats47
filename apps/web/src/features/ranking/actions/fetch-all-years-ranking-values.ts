@@ -2,7 +2,7 @@
 
 import { cache } from "react";
 
-import { fetchAllYearsRankingValuesOnDemand, findRankingItem } from "@stats47/ranking/server";
+import { fetchAllYearsRankingValuesOnDemand, readRankingItemFromR2 } from "@stats47/ranking/server";
 import { err, ok, isOk, type Result } from "@stats47/types";
 
 import type { AreaType } from "@stats47/area";
@@ -20,7 +20,7 @@ const fetchAllYearsCore = cache(async (
   areaType: AreaType,
 ): Promise<Result<RankingValue[], Error>> => {
   try {
-    const itemResult = await findRankingItem(rankingKey, areaType);
+    const itemResult = await readRankingItemFromR2(rankingKey, areaType);
     if (!isOk(itemResult) || !itemResult.data) {
       return err(new Error("Ranking item not found"));
     }

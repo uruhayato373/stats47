@@ -7,12 +7,12 @@
 import Link from "next/link";
 
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
 import {
-  listSurveys,
+  readActiveRankingKeysFromR2,
+  readRankingItemFromR2,
+  readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
-import { eq, count } from "drizzle-orm";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -33,27 +33,23 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function SurveyIndexPage() {
-  const surveysResult = await listSurveys();
+  const surveysResult = await readSurveysFromR2();
   const surveys = isOk(surveysResult) ? surveysResult.data : [];
 
-  // 各調査のランキング件数を取得
-  let countMap = new Map<string, number>();
-  try {
-    const db = getDrizzle();
-    const countRows = await db
-      .select({
-        surveyId: rankingItems.surveyId,
-        count: count(),
-      })
-      .from(rankingItems)
-      .where(eq(rankingItems.isActive, true))
-      .groupBy(rankingItems.surveyId);
-
-    countMap = new Map(
-      countRows.filter((r) => r.surveyId !== null).map((r) => [r.surveyId!, r.count])
-    );
-  } catch {
-    // D1 バインディングが利用できない場合（ビルド時等）は空のマップで続行
+  // 各調査のランキング件数を ranking_items snapshot から集計（D1 read 不要）
+  const countMap = new Map<string, number>();
+  const keysResult = await readActiveRankingKeysFromR2("prefecture");
+  if (isOk(keysResult)) {
+    for (const { rankingKey, areaType } of keysResult.data) {
+      const itemResult = await readRankingItemFromR2(
+        rankingKey,
+        areaType as "prefecture" | "city" | "national",
+      );
+      if (!isOk(itemResult) || !itemResult.data) continue;
+      const sid = itemResult.data.surveyId;
+      if (!sid) continue;
+      countMap.set(sid, (countMap.get(sid) ?? 0) + 1);
+    }
   }
 
   // ssds は件数が多いが実質「分類不明」なので末尾に移動
