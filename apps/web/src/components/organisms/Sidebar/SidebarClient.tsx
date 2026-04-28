@@ -13,7 +13,7 @@ import {
   SheetDescription,
   SheetTitle,
 } from "@stats47/components/atoms/ui/sheet";
-import { ArrowLeftRight, BarChart3, BookOpen, Home, LayoutDashboard, MapPin, ScatterChart, Search } from "lucide-react";
+import { ArrowLeftRight, BarChart3, BookOpen, Home, LayoutDashboard, MapPin, Search } from "lucide-react";
 
 
 
@@ -41,7 +41,6 @@ const NAV_LINKS = [
   { href: "/", label: "ホーム", icon: Home, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
   { href: "/ranking", label: "ランキング", icon: BarChart3, color: "bg-orange-100 text-orange-600 dark:bg-orange-950 dark:text-orange-400" },
   { href: "/blog", label: "ブログ", icon: BookOpen, color: "bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
-  { href: "/correlation", label: "相関分析", icon: ScatterChart, color: "bg-purple-100 text-purple-600 dark:bg-purple-950 dark:text-purple-400" },
   { href: "/compare", label: "地域間比較", icon: ArrowLeftRight, color: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
   { href: "/areas", label: "地域の特徴", icon: MapPin, color: "bg-green-100 text-green-600 dark:bg-green-950 dark:text-green-400" },
   { href: "/themes", label: "テーマ", icon: LayoutDashboard, color: "bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400" },
