@@ -15,6 +15,7 @@ export {
   readCorrelationStatsFromR2,
   readTopCorrelationsFromR2,
 } from "./read-correlation-snapshot";
+export { readHighlyCorrelatedFromR2 } from "./read-correlation-by-key";
 export {
   type UpsertCorrelationParams,
   upsertCorrelation,

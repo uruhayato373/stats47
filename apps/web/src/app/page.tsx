@@ -127,25 +127,19 @@ export default async function HomePage() {
         <section className="py-10 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-lg font-bold mb-8">3つの切り口でデータを探す</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   href: "/ranking",
                   image: "/images/features/ranking.webp",
                   title: "1,800以上のランキング",
-                  description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。",
+                  description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。各ランキングで関連指標との相関も確認できます。",
                 },
                 {
                   href: "/areas",
                   image: "/images/features/area-profile.webp",
                   title: "地元の「強み」を発見",
                   description: "KPI・チャートで、あなたの都道府県の全国での立ち位置をひと目で把握。",
-                },
-                {
-                  href: "/correlation",
-                  image: "/images/features/correlation.webp",
-                  title: "データの「なぜ？」を探る",
-                  description: "2つの指標の関係性を散布図で可視化。数字の裏にあるストーリーを探れます。",
                 },
               ].map((card, i) => (
                 <ScrollReveal key={card.href} delay={i * 100}>

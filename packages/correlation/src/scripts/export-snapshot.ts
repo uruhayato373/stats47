@@ -11,17 +11,39 @@
  */
 
 import { exportCorrelationSnapshot } from "../exporters/correlation-snapshot";
+import { exportCorrelationPerKeySnapshots } from "../exporters/per-key-snapshot";
 
 async function main() {
   console.log("correlation snapshot を R2 に書き出します…");
-  const result = await exportCorrelationSnapshot();
-  console.log(`✅ 完了 (${result.durationMs}ms)`);
+
+  const [snapshotResult, perKeyResult] = await Promise.all([
+    exportCorrelationSnapshot(),
+    exportCorrelationPerKeySnapshots(),
+  ]);
+
   console.log(
-    `  ${result.topPairs.key} : ${result.topPairs.pairCount} pairs / ${result.topPairs.sizeBytes} bytes`,
+    `✅ top-pairs / stats 完了 (${snapshotResult.durationMs}ms)`,
   );
   console.log(
-    `  ${result.stats.key} : ${result.stats.sizeBytes} bytes`,
+    `  ${snapshotResult.topPairs.key} : ${snapshotResult.topPairs.pairCount} pairs / ${snapshotResult.topPairs.sizeBytes} bytes`,
   );
+  console.log(
+    `  ${snapshotResult.stats.key} : ${snapshotResult.stats.sizeBytes} bytes`,
+  );
+
+  console.log(
+    `✅ per-ranking-key 完了 (${perKeyResult.durationMs}ms): ${perKeyResult.succeeded} 件成功 / ${perKeyResult.failed} 件失敗 / ${perKeyResult.totalKeys} 件中`,
+  );
+  console.log(
+    `  snapshots/correlation/by-ranking-key/ : 合計 ${perKeyResult.totalBytes} bytes`,
+  );
+
+  if (perKeyResult.failed > 0) {
+    console.error(
+      `⚠️  per-key snapshot の ${perKeyResult.failed} 件で失敗。再実行を推奨`,
+    );
+    process.exitCode = 1;
+  }
 }
 
 main().catch((err) => {
