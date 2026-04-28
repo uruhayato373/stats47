@@ -5,13 +5,7 @@ import { createS3Client } from "../clients/create-s3-client";
 import { getR2Client } from "../clients/get-r2-client";
 import { handleR2Error } from "../errors/handle-r2-error";
 import { calculateBodySize } from "../utils/calculate-body-size";
-import { convertBodyForR2 } from "../utils/convert-body-for-r2"; // This file was marked for deletion, checking if I need to inline it or keep it. Plan said delete, but save logic uses it. I should inline or keep. Plan said delete convert-body.ts, but valid code uses convertBodyForR2. Ah, convert-body.ts was separate from convert-body-for-r2.ts. Checking if convert-body-for-r2.ts exists.
-
-// Checking imports in save-to-r2.ts: import { convertBodyForR2 } from "../utils/convert-body-for-r2";
-// My plan deleted `packages/r2-storage/src/lib/utils/convert-body.ts`.
-// I should check if `convert-body-for-r2.ts` exists.
-// Assuming it does based on import.
-
+import { convertBodyForR2 } from "../utils/convert-body-for-r2";
 import { detectEnvironment } from "../utils/detect-environment";
 
 /**

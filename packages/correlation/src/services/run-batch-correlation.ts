@@ -444,6 +444,8 @@ export async function runBatchCorrelation(
 
     const wasAborted = observer.isAborted();
 
+    let snapshotStatus: "ok" | "failed" = "ok";
+    let snapshotErrorMessage: string | null = null;
     try {
       const snapshotResult = await exportCorrelationSnapshot();
       observer.onLog(
@@ -451,17 +453,26 @@ export async function runBatchCorrelation(
         `R2 snapshot を更新しました（pairs=${snapshotResult.topPairs.pairCount}, ${snapshotResult.durationMs}ms）`,
       );
     } catch (snapshotErr) {
+      snapshotStatus = "failed";
+      snapshotErrorMessage = snapshotErr instanceof Error ? snapshotErr.message : String(snapshotErr);
+      // DB は更新済みだが Web で見えるデータは古い snapshot のまま、というズレが起きるため error 扱い。
       observer.onLog(
-        "warn",
-        `R2 snapshot 更新に失敗（DB upsert は完了済み）: ${snapshotErr instanceof Error ? snapshotErr.message : String(snapshotErr)}`,
+        "error",
+        `R2 snapshot 更新失敗: DB upsert は成功したが Web 反映が古い。要再実行 (npm run export-snapshot --workspace=packages/correlation)。原因: ${snapshotErrorMessage}`,
       );
     }
 
+    const baseMessage = wasAborted
+      ? `中断しました: 完了 ${completed}件, スキップ ${skipped}件, 失敗 ${failed}件`
+      : `完了 ${completed}件, スキップ ${skipped}件, 失敗 ${failed}件`;
+    const fullMessage =
+      snapshotStatus === "ok"
+        ? `${baseMessage} / R2 snapshot 更新済`
+        : `${baseMessage} / ⚠️ R2 snapshot 更新失敗 (Web は旧 snapshot を表示中)`;
+
     observer.onComplete({
       success: true,
-      message: wasAborted
-        ? `中断しました: 完了 ${completed}件, スキップ ${skipped}件, 失敗 ${failed}件`
-        : `完了 ${completed}件, スキップ ${skipped}件, 失敗 ${failed}件`,
+      message: fullMessage,
     });
   } catch (e) {
     observer.onLog(

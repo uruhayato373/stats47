@@ -9,6 +9,7 @@ import { isOk } from "@stats47/types";
 import { CorrelationPageClient } from "@/features/correlation";
 import { fetchCorrelationPairAction } from "@/features/correlation/server";
 
+import { logger } from "@/lib/logger";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -57,8 +58,13 @@ export default async function CorrelationPage({ searchParams }: PageProps) {
         topCorrelations = topCorrs;
         totalPairs = corrCounts.total;
         strongCount = corrCounts.strong;
-    } catch {
-        // R2 fetch / D1 接続エラー等の場合は空データで描画（500 を防ぐ）
+    } catch (error) {
+        // R2 fetch / D1 接続エラー等の場合は空データで描画（500 を防ぐ）。
+        // ただしサイレント failure を避けるため必ずログには残す。
+        logger.error(
+            { error: error instanceof Error ? error.message : String(error) },
+            "CorrelationPage: 初期データ取得に失敗。空表示にフォールバック",
+        );
     }
 
     // URL パラメータ指定 or ランキング1位をデフォルト表示
