@@ -2,6 +2,7 @@ import "server-only";
 
 import type { D1Database } from "@cloudflare/workers-types";
 import { logger } from "@stats47/logger";
+import { createNoopAdapter } from "../adapters/noop-adapter";
 import { createDatabaseClient } from "../client";
 import {
   getCachedStaticDb,
@@ -60,13 +61,29 @@ export function getStaticDatabase(): D1Database {
 
   // 4. クライアント作成
   // createDatabaseClientは binding があればそれを使い、なければ条件に応じてローカルアダプタを使う
-  const db = createDatabaseClient({
-    binding: contextDb, // undefined here, but standard pattern
-    localDbPath: localPath,
-    // アプリ固有の条件: 開発環境かつサーバーサイドならローカルアダプタを試行
-    // (createDatabaseClient内部のデフォルト判定と同じだが明示的に渡すことも可能)
-    useLocalAdapter: isDevelopmentEnv() && isServerSide()
-  });
+  let db: D1Database;
+  try {
+    db = createDatabaseClient({
+      binding: contextDb, // undefined here, but standard pattern
+      localDbPath: localPath,
+      // アプリ固有の条件: 開発環境かつサーバーサイドならローカルアダプタを試行
+      // (createDatabaseClient内部のデフォルト判定と同じだが明示的に渡すことも可能)
+      useLocalAdapter: isDevelopmentEnv() && isServerSide()
+    });
+  } catch (error) {
+    // build 時 (NEXT_PHASE=phase-production-build) は D1 binding も local DB も
+    // 利用不可 → throw すると静的生成が中断する。空アダプタで degrade する。
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      logger.warn(
+        { error: error instanceof Error ? error.message : String(error) },
+        "[getStaticDatabase] build 時に D1 binding 不在のため noop アダプタを使用",
+      );
+      db = createNoopAdapter();
+      // ビルド中はキャッシュしない (実 binding が来たときに切替えるため)
+      return db;
+    }
+    throw error;
+  }
 
   // 結果をキャッシュ
   setCachedStaticDb(db);
