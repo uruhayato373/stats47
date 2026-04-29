@@ -33,7 +33,7 @@ import { notFound } from "next/navigation";
 
 
 
-import { findRankingAiContent } from "@stats47/ai-content/server";
+import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -182,7 +182,7 @@ export default async function RankingKeyPage({
     return null;
   });
 
-  const aiContentPromise = findRankingAiContent(rankingKey, areaType).catch(
+  const aiContentPromise = readRankingAiContentFromR2(rankingKey, areaType).catch(
     (error) => {
       logger.error({ error }, "RankingKeyPage: AI content 取得失敗");
       return null;

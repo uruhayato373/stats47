@@ -24,6 +24,8 @@
   "dependencies": {
     "@stats47/area": "*",
     "@stats47/database": "*",
+    "@stats47/logger": "*",
+    "@stats47/r2-storage": "*",
     "@stats47/ranking": "*",
     "drizzle-orm": "^0.45.1",
     "server-only": "^0.0.1"
