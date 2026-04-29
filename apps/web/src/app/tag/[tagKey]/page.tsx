@@ -15,21 +15,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { getDrizzle, tags as tagsTable } from "@stats47/database/server";
-import { eq } from "drizzle-orm";
 
-import { listAllUniqueTags, listArticleSummariesByTagKey } from "@/features/blog/server";
+import {
+    listAllTagsWithCount,
+    listAllUniqueTags,
+    listArticleSummariesByTagKey,
+} from "@/features/blog/server";
 
 import type { Metadata } from "next";
 
 
 export async function generateStaticParams() {
-    try {
-        getDrizzle();
-    } catch {
-        return [];
-    }
-    const tagKeys = await listAllUniqueTags();
+    const tagKeys = await listAllUniqueTags().catch(() => []);
     return tagKeys.map((tagKey) => ({ tagKey }));
 }
 
@@ -38,17 +35,8 @@ interface PageProps {
 }
 
 async function getTagName(tagKey: string): Promise<string> {
-    try {
-        const db = getDrizzle();
-        const result = await db
-            .select({ tagName: tagsTable.tagName })
-            .from(tagsTable)
-            .where(eq(tagsTable.tagKey, tagKey))
-            .limit(1);
-        return result[0]?.tagName ?? tagKey;
-    } catch {
-        return tagKey;
-    }
+    const tags = await listAllTagsWithCount().catch(() => []);
+    return tags.find((t) => t.tagKey === tagKey)?.tag ?? tagKey;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

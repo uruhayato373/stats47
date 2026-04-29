@@ -8,7 +8,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { getDrizzle } from "@stats47/database/server";
 
 import { TagCloud } from "@/features/blog";
 import { listAllTagsWithCount } from "@/features/blog/server";
@@ -25,13 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TagsIndexPage() {
-    let tags: Awaited<ReturnType<typeof listAllTagsWithCount>> = [];
-    try {
-        getDrizzle();
-        tags = await listAllTagsWithCount();
-    } catch {
-        // CI ビルド時など D1 が利用できない場合は空データで SSG し、ISR で再生成
-    }
+    const tags = await listAllTagsWithCount().catch(() => []);
 
     return (
         <>

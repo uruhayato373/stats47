@@ -11,16 +11,15 @@
 
 import { readCategoriesFromR2 } from "@stats47/category/server";
 import {
-  articleTags,
-  articles,
-  getDrizzle,
-} from "@stats47/database/server";
-import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
-import { eq, and, isNotNull, sql } from "drizzle-orm";
+
+import {
+  listLatestArticles,
+  listAllTagsWithCount,
+} from "@/features/blog/server";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 
@@ -119,17 +118,13 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
-  const db = getDrizzle();
-  const rows = await db
-    .select({ slug: articles.slug, publishedAt: articles.publishedAt })
-    .from(articles)
-    .where(and(eq(articles.published, true), isNotNull(articles.publishedAt)));
+  const rows = await listLatestArticles(10000).catch(() => []);
 
   const redirected = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
   return [
     { url: `${BASE_URL}/blog`, changeFrequency: "daily", priority: 0.8 },
     ...rows
-      .filter((row) => !redirected.has(row.slug))
+      .filter((row) => row.publishedAt && !redirected.has(row.slug))
       .map((row) => ({
         url: `${BASE_URL}/blog/${row.slug}`,
         lastModified: row.publishedAt ? new Date(row.publishedAt) : undefined,
@@ -165,24 +160,36 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function getTagPages(): Promise<MetadataRoute.Sitemap> {
-  const db = getDrizzle();
-  const rows = await db
-    .select({
-      tagKey: articleTags.tagKey,
-      latestPublishedAt: sql<string | null>`max(${articles.publishedAt})`.as(
-        "latestPublishedAt",
-      ),
-    })
-    .from(articleTags)
-    .innerJoin(articles, eq(articleTags.slug, articles.slug))
-    .where(eq(articles.published, true))
-    .groupBy(articleTags.tagKey)
-    .having(sql`count(*) >= 5`);
+  const tagMeta = await listAllTagsWithCount().catch(() => []);
+  // 旧クエリで count >= 5 を要求していたため踏襲
+  const eligible = tagMeta.filter((t) => t.count >= 5);
+  if (eligible.length === 0) return [];
 
-  return rows.map((row) => ({
+  const articlesAll = await listLatestArticles(10000).catch(() => []);
+  // 各 tag の最新 publishedAt を slug→tags リレーション無しで安価に解決するため、
+  // 全 article から tagKey 別の max(publishedAt) を組み立てる。
+  // 全 article 取得は snapshot in-memory cache 経由なので追加 fetch は発生しない。
+  const { readBlogSnapshotMetaFromR2: _unused, readTagsForArticlesFromR2 } =
+    await import("@/features/blog/repositories/blog-snapshot-reader");
+  const slugTagMap = await readTagsForArticlesFromR2(
+    articlesAll.map((a) => a.slug),
+  );
+  const latestByTag = new Map<string, string>();
+  for (const article of articlesAll) {
+    if (!article.published || !article.publishedAt) continue;
+    const tags = slugTagMap.get(article.slug) ?? [];
+    for (const t of tags) {
+      const prev = latestByTag.get(t.tagKey);
+      if (!prev || article.publishedAt > prev) {
+        latestByTag.set(t.tagKey, article.publishedAt);
+      }
+    }
+  }
+
+  return eligible.map((row) => ({
     url: `${BASE_URL}/tag/${row.tagKey}`,
-    lastModified: row.latestPublishedAt
-      ? new Date(row.latestPublishedAt)
+    lastModified: latestByTag.get(row.tagKey)
+      ? new Date(latestByTag.get(row.tagKey) as string)
       : undefined,
     changeFrequency: "weekly" as const,
     priority: 0.4,

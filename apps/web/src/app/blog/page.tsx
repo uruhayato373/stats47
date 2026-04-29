@@ -8,7 +8,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { getDrizzle } from "@stats47/database/server";
 
 import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles } from "@/features/blog/server";
@@ -25,13 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogIndexPage() {
-    let articles: Awaited<ReturnType<typeof listLatestArticles>> = [];
-    try {
-        getDrizzle();
-        articles = await listLatestArticles(200);
-    } catch {
-        // CI ビルド時など D1 が利用できない場合は空データで SSG し、ISR で再生成
-    }
+    const articles = await listLatestArticles(200).catch(() => []);
 
     return (
         <>
