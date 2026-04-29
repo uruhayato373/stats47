@@ -36,6 +36,22 @@ jobs:
         run: npm run lint
         continue-on-error: false # Lintエラーで失敗させる
 
+      - name: 🚫 D1 Import Gate (Phase 7)
+        run: |
+          # apps/web から runtime D1 import (getDrizzle / @stats47/database/server) が
+          # 0 件であることを担保。型のみ import (@stats47/database/schema) は許可。
+          # Phase 0-6 で R2 snapshot 化が完了しており、ここに新規追加すると
+          # Phase 8 (D1 binding 削除) と Phase 10 (D1 解約) を阻害する。
+          set +e
+          MATCHES=$(grep -rln 'getDrizzle\|@stats47/database/server' apps/web/src/ 2>/dev/null)
+          if [ -n "$MATCHES" ]; then
+            echo "::error::apps/web/src から D1 runtime import が検出されました。R2 snapshot 経由に切替えてください。"
+            echo "$MATCHES"
+            exit 1
+          fi
+          echo "✅ apps/web/src に D1 runtime import なし"
+        continue-on-error: false
+
       - name: 📐 Type Check
         run: npm run type-check
         env:
