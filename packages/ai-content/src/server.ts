@@ -22,6 +22,9 @@ export {
   upsertRankingAiContent,
 } from "./repositories";
 
+export { readRankingAiContentFromR2 } from "./repositories/read-ranking-ai-content-snapshot";
+export { exportRankingAiContentSnapshot } from "./exporters/ranking-ai-content-snapshot";
+
 // プロンプト
 export { buildRankingContentPrompt } from "./services/prompts/ranking-content-prompt";
 export type { RankingContentInput } from "./services/prompts/ranking-content-prompt";
