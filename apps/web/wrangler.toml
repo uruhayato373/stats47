@@ -70,12 +70,12 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "true"
 # Amazon アソシエイト
 NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
 
-# Static DB (Production)
-[[env.production.d1_databases]]
-binding = "STATS47_STATIC_DB"
-database_name = "stats47_static"
-database_id = "6cea2d7a-87c2-408b-9de3-72b1bc240478"
-migrations_dir = "../../packages/database/drizzle"
+# Phase 8 (2026-04-29): production の D1 binding を削除。
+# apps/web の全 D1 read は R2 snapshot に移行済み (Phase 0-7、PR #149/#163/#167-175)。
+# CI gate (.github/workflows/pr-quality-check.yml の D1 Import Gate) で再発を防ぐ。
+# ローカル開発用の binding (上の [[d1_databases]]) は残置 (バッチ実行に必要)。
+# ロールバック: この diff を revert + redeploy で 1 commit 復元可。
+# Phase 10 で D1 解約予定 (Time Travel ロールバック窓 30 日後)。
 
 [[env.production.r2_buckets]]
 binding = "STATS47_BUCKET"
