@@ -34,6 +34,13 @@ export async function readHighlyCorrelatedFromR2(
   rankingKey: string,
   limit = 10,
 ): Promise<Result<CorrelatedItem[], Error>> {
+  // build 時 (NEXT_PHASE=phase-production-build): 1,920 ranking_key 各々に R2 fetch すると
+  // build が 30 分超 に伸びる。ここで空配列を返し、ISR (revalidate=86400) で初回リクエスト時に
+  // 生 fetch する。CorrelationSection は空のとき非表示なので first request の品質低下のみ。
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return ok([]);
+  }
+
   try {
     const path = correlationByKeyPath(rankingKey);
     const snapshot = await fetchFromR2AsJson<CorrelationByKeySnapshot>(path);
