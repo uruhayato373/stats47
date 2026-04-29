@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { getTagsForItem } from "@stats47/ranking/server";
+import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { Newspaper } from "lucide-react";
 
@@ -21,10 +21,10 @@ export async function RelatedArticlesCard({
   rankingKey,
   areaType,
 }: RelatedArticlesCardProps) {
-  const tagsResult = await getTagsForItem(rankingKey, areaType);
+  const tagsResult = await readTagsForItemFromR2(rankingKey, areaType);
   if (!isOk(tagsResult) || tagsResult.data.length === 0) return null;
 
-  const tagKeys = tagsResult.data.map((t) => t.tagKey);
+  const tagKeys = tagsResult.data;
 
   // 全タグの記事を並列取得し、重複を除去して最大3件
   const allResults = await Promise.all(
