@@ -1,0 +1,165 @@
+{
+  "channel": {
+    "id": "UCdRiwDSX1aUd0dSd7Cs08Kg",
+    "title": "統計で見る都道府県 | stats47",
+    "subscriberCount": 31,
+    "viewCount": 78320,
+    "videoCount": 139
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-04-15",
+    "recentEnd": "2026-04-29",
+    "priorStart": "2026-04-01",
+    "priorEnd": "2026-04-15"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [
+    {
+      "videoId": "-vWIGHRp3IA",
+      "title": "都道府県別 離婚率ランキングの推移（1975-2022）｜離婚が多い県は？",
+      "publishedAt": "2026-04-22T22:00:00Z",
+      "ageHours": 147,
+      "views": 4,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "TetaXT1QUu0",
+      "title": "都道府県別 刑法犯認知件数ランキング49年の変遷 大阪が2002年に3.8倍へ激増",
+      "publishedAt": "2026-04-22T10:00:58Z",
+      "ageHours": 159,
+      "views": 2,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "VuKbNthRv2c",
+      "title": "都道府県別 合計特殊出生率ランキング 東京都が初の1.0割れ。沖縄は47年連続1位",
+      "publishedAt": "2026-04-21T11:00:49Z",
+      "ageHours": 182,
+      "views": 1,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "ud8SAbW6U9g",
+      "title": "都道府県別 犯罪率ランキングの推移（1975-2023）｜治安は本当に悪化した？",
+      "publishedAt": "2026-04-19T22:01:03Z",
+      "ageHours": 219,
+      "views": 1,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "t-sSgDzRQUs",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-04-19T21:52:10Z",
+      "ageHours": 219.1,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "kuE5eNbxLZI",
+      "title": "都道府県別 刑法犯検挙率ランキング49年の変遷 治安の王者は島根72.7%",
+      "publishedAt": "2026-04-19T21:50:29Z",
+      "ageHours": 219.2,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "I2ABefP2UY4",
+      "title": "都道府県別 製造品出荷額ランキング 愛知県が圧倒的1位。沖縄との差は115倍",
+      "publishedAt": "2026-04-18T11:00:24Z",
+      "ageHours": 254,
+      "views": 3,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "XVGw0GkR4p8",
+      "title": "高校生の体重が重い都道府県ランキング｜1位は意外な県！ #shorts",
+      "publishedAt": "2026-04-17T22:00:40Z",
+      "ageHours": 267,
+      "views": 6,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "8DEeU9f5UOs",
+      "title": "都道府県別 図書館数ランキング 1位は山梨県。神奈川は最下位【人口あたり】",
+      "publishedAt": "2026-04-16T11:00:13Z",
+      "ageHours": 302,
+      "views": 1,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "cvdQrkEj5J8",
+      "title": "大卒が多い都道府県ランキング｜1位は東京の31.6% #shorts",
+      "publishedAt": "2026-04-15T22:00:47Z",
+      "ageHours": 315,
+      "views": 7,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "0rHnuKSLIDI",
+      "title": "都道府県別 交通事故死者数ランキングの推移（1975-2024）｜交通戦争から半世紀",
+      "publishedAt": "2026-04-15T22:00:01Z",
+      "ageHours": 315,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    }
+  ],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_SEARCH": 62,
+      "SHORTS": 12,
+      "EXT_URL": 11,
+      "SUBSCRIBER": 6,
+      "NOTIFICATION": 3,
+      "YT_OTHER_PAGE": 2,
+      "YT_CHANNEL": 1
+    },
+    "prior": {
+      "YT_SEARCH": 149,
+      "YT_CHANNEL": 36,
+      "EXT_URL": 17,
+      "SHORTS": 16,
+      "NOTIFICATION": 9,
+      "SUBSCRIBER": 3,
+      "NO_LINK_OTHER": 0
+    }
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 98
+    },
+    "prior": {
+      "gained": 1,
+      "lost": 0,
+      "net": 1,
+      "views": 228
+    }
+  },
+  "viewsDelta": {
+    "recent": 98,
+    "prior": 228,
+    "changePct": -57.01754385964912
+  },
+  "verdict": "likely-shadowban",
+  "verdictReasons": [
+    "suspect videos = 11 (views < 50 after 48h)",
+    "total views -57.0% (soft drop)"
+  ]
+}
