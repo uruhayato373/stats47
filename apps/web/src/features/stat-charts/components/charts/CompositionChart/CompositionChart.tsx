@@ -1,8 +1,6 @@
-import { getDrizzle, componentData as componentDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { and, asc, eq } from "drizzle-orm";
 
-import { toCompositionChartData, type CompositionChartData } from "../../../adapters/toCompositionChartData";
+import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
 import { fetchEstatData } from "../../../services";
 import { DashboardCard } from "../../shared/DashboardCard";
 
@@ -10,72 +8,6 @@ import { CompositionChartClient } from "./CompositionChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { StatsSchema } from "@stats47/types";
-
-/**
- * D1 の component_data テーブルから CompositionChartData を構築する。
- * データがない場合は null を返し、呼び出し元が R2/API フォールバックに切り替える。
- */
-async function fetchCompositionDataFromD1(
-  chartKey: string,
-  areaCode: string,
-  segments: Array<{ code: string; label: string; color?: string }>,
-  totalCode?: string,
-): Promise<CompositionChartData | null> {
-  try {
-    const db = getDrizzle();
-    const rows = await db
-      .select()
-      .from(componentDataTable)
-      .where(
-        and(
-          eq(componentDataTable.chartKey, chartKey),
-          eq(componentDataTable.areaCode, areaCode),
-        ),
-      )
-      .orderBy(asc(componentDataTable.yearCode), asc(componentDataTable.categoryKey));
-
-    if (rows.length === 0) return null;
-
-    const labels = segments.map((s) => s.label);
-    const colors = segments.map((s) => s.color).filter((c): c is string => !!c);
-
-    const rawDataList: StatsSchema[][] = segments.map((seg) =>
-      rows
-        .filter((r) => r.categoryKey === seg.label)
-        .map((r) => ({
-          areaCode: r.areaCode,
-          areaName: "",
-          yearCode: r.yearCode,
-          yearName: `${r.yearCode}年`,
-          categoryCode: seg.code,
-          categoryName: seg.label,
-          value: r.value ?? 0,
-          unit: r.unit ?? "",
-        })),
-    );
-
-    const totalData: StatsSchema[] | undefined = totalCode
-      ? rows
-          .filter((r) => r.categoryKey === "__total__")
-          .map((r) => ({
-            areaCode: r.areaCode,
-            areaName: "",
-            yearCode: r.yearCode,
-            yearName: `${r.yearCode}年`,
-            categoryCode: totalCode,
-            categoryName: "__total__",
-            value: r.value ?? 0,
-            unit: r.unit ?? "",
-          }))
-      : undefined;
-
-    const chartData = toCompositionChartData(rawDataList, labels, colors, totalData);
-    return chartData.trendData.length > 0 ? chartData : null;
-  } catch {
-    // D1 unavailable (e.g. local dev with empty table) — fall through to API
-    return null;
-  }
-}
 
 /**
  * JIS 地域コード（01000-47000）をデータセット固有コードに変換
@@ -110,34 +42,9 @@ export const CompositionChartDashboard = async ({
   const labels = segments.map((s) => s.label);
   const colors = segments.map((s) => s.color).filter((c): c is string => !!c);
 
-  // D1 優先: component_data にデータがあれば e-Stat API を呼ばずに描画
-  if (componentKey) {
-    const d1ChartData = await fetchCompositionDataFromD1(
-      componentKey,
-      areaCode,
-      segments,
-      config.totalCode,
-    );
-
-    if (d1ChartData) {
-      return (
-        <DashboardCard
-          title={title}
-          rankingLink={rankingLink}
-          description={description}
-          source={sourceName ?? undefined}
-          sourceLink={sourceLink}
-          annotation={annotation}
-          rankingLinks={rankingLinks}
-          loading={false}
-          error={null}
-          empty={false}
-        >
-          <CompositionChartClient chartData={d1ChartData} defaultTab={defaultTab} />
-        </DashboardCard>
-      );
-    }
-  }
+  // componentKey は将来 R2 snapshot 経由で同等データを返す予定 (Phase 6)。
+  // 現状 component_data テーブルは空なので、e-Stat API 直接 fetch のみ。
+  void componentKey;
 
   /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
   try {

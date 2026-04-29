@@ -2,7 +2,10 @@ import {
   CATEGORY_AFFILIATE_MAP,
   TAG_AFFILIATE_MAP,
 } from "../constants/affiliate-category";
-import { findActiveAdByCategory, findActiveBannersByCategoryKeys } from "../repositories/affiliate-ad-repository";
+import {
+  readActiveAdByCategoryFromR2 as findActiveAdByCategory,
+  readActiveBannersByCategoryKeysFromR2 as findActiveBannersByCategoryKeys,
+} from "../repositories/affiliate-ad-snapshot";
 
 import type { AffiliateLocationCode } from "../types";
 

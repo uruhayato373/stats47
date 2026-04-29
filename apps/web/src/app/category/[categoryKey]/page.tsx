@@ -9,8 +9,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import {
-  listRankingValues,
-  listTopRankingValuesBatch,
+  readRankingValuesFromR2,
+  readTopRankingValuesBatchFromR2,
   readRankingItemsByCategoryFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
@@ -125,9 +125,9 @@ export default async function CategoryPage({ params }: PageProps) {
     yearCode: parseLatestYear(item.latestYear),
   }));
   const [batchResult, ...allValuesResults] = await Promise.all([
-    listTopRankingValuesBatch(batchItems, "prefecture"),
+    readTopRankingValuesBatchFromR2(batchItems, "prefecture"),
     ...featuredRaw.map((item) =>
-      listRankingValues(item.rankingKey, "prefecture", parseLatestYear(item.latestYear))
+      readRankingValuesFromR2(item.rankingKey, "prefecture", parseLatestYear(item.latestYear))
     ),
   ]);
   const topMap = isOk(batchResult) ? batchResult.data : new Map();

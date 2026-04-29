@@ -1,8 +1,6 @@
-import { getRankingPageCardRepository } from "@stats47/database/server";
-import { isOk } from "@stats47/types";
-
 import { logger } from "@/lib/logger";
 
+import { readRankingPageCardsFromR2 } from "./snapshot-reader";
 import { StatsLineChartCard } from "./StatsLineChartCard";
 
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
@@ -14,22 +12,21 @@ interface RankingPageCardsContainerProps {
 /**
  * ランキングページ用カードコンテナ（Server Component）
  *
- * DB からカード定義を取得し、componentType に応じて適切なコンポーネントを描画する。
+ * R2 snapshot からカード定義を取得し、componentType に応じて適切なコンポーネントを描画する。
  * カードが 0 件の場合は null を返す。
  */
 export async function RankingPageCardsContainer({
   rankingKey,
 }: RankingPageCardsContainerProps) {
-  const repo = getRankingPageCardRepository();
-  const result = await repo.listCardsByRankingKey(rankingKey);
+  const cards = await readRankingPageCardsFromR2(rankingKey);
 
-  if (!isOk(result) || result.data.length === 0) {
+  if (cards.length === 0) {
     return null;
   }
 
   return (
     <div className="flex flex-col gap-6">
-      {result.data.map((card) => {
+      {cards.map((card) => {
         const title = card.title ?? "";
 
         switch (card.componentType) {

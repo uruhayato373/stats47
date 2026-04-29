@@ -1,7 +1,7 @@
 "use server";
 
 import { RankingItem, RankingValue } from "@stats47/ranking";
-import { findLatestYear, listRankingValues, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
+import { findLatestYear, readRankingValuesFromR2, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
 import { err, ok, type Result } from "@stats47/types";
 
 export interface FetchRankingTableDataResult {
@@ -68,7 +68,7 @@ export async function fetchRankingTableDataAction(
     }
 
     // 3. ランキング値を取得
-    const valuesResult = await listRankingValues(
+    const valuesResult = await readRankingValuesFromR2(
       rankingKey,
       rankingItem.areaType,
       targetYearCode
