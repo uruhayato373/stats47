@@ -11,10 +11,13 @@ Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日
 
 | データ | 保管先 | 理由 |
 |---|---|---|
-| 生メトリクス・請求書 snapshot | git: `reference/weekly-snapshots/YYYY-Www.json` | immutable、diff 比較、オフライン可 |
-| budget しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
+| 月次 snapshot・請求書 | git: `reference/weekly-snapshots/YYYY-Www.json` | immutable、diff 比較、オフライン可 |
+| 日次 usage snapshot（自動） | git: `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}` | `.github/workflows/cloudflare-usage-daily.yml` が日次 02:30 JST 自動更新 |
+| budget しきい値（月次） | git: `reference/budgets.json` | 月次レビュー用 |
+| budget しきい値（日次） | git: `reference/budgets-daily.json` | 日次自動アラート用、cloudflare-usage-daily.yml が参照 |
 | 施策（1 施策 1 Issue） | GitHub Issues ラベル `cost-improvement` | タイムライン・PR リンク・通知・検索 |
 | 月次スナップショット（議論用） | GitHub Issues ラベル `cost-snapshot` | 施策 Issue との相互参照、Web UI |
+| 日次アラート（自動起票） | GitHub Issues ラベル `cost-snapshot,auto-generated` タイトル `[Cloudflare Alert] ...` | 閾値違反時のみ起票・既存 issue へは comment 追記 |
 | 観測値の時系列・効果判定 | 各施策 Issue へのコメント + `effect/*` ラベル切替 | 自然なスレッド構造 |
 
 ## ラベル体系
