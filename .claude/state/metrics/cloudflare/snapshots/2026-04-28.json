@@ -1,6 +1,6 @@
 {
   "date": "2026-04-28",
-  "fetched_at": "2026-04-29T22:03:39.553Z",
+  "fetched_at": "2026-04-29T22:10:33.108Z",
   "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
   "d1": {
     "readQueries": 95079,
@@ -28,10 +28,10 @@
     }
   },
   "r2_operations": {
-    "classA": 3870,
-    "classB": 15907,
+    "classA": 3865,
+    "classB": 15911,
     "otherOps": 1,
-    "totalEgressBytes": 8776783352,
+    "totalEgressBytes": 8917845537,
     "byBucket": {
       "unknown": {
         "classA": 1,
@@ -40,16 +40,16 @@
         "egressBytes": 0
       },
       "stats47": {
-        "classA": 3869,
-        "classB": 14040,
+        "classA": 3864,
+        "classB": 14044,
         "other": 1,
-        "egressBytes": 8752725210
+        "egressBytes": 8893802147
       },
       "doboku-note": {
         "classA": 0,
         "classB": 1867,
         "other": 0,
-        "egressBytes": 24058142
+        "egressBytes": 24043390
       }
     }
   },
