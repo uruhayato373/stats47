@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { findRankingItemsByTag, getRankingTitle } from "@stats47/ranking/server";
+import { readRankingItemsByTagFromR2, getRankingTitle } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
 
@@ -20,7 +20,7 @@ export async function RelatedRankingsSection({
   if (tagKeys.length === 0) return null;
 
   const allResults = await Promise.all(
-    tagKeys.map((tagKey) => findRankingItemsByTag(tagKey))
+    tagKeys.map((tagKey) => readRankingItemsByTagFromR2(tagKey))
   );
 
   const seen = new Set<string>();

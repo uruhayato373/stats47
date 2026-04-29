@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { getDrizzle, rankingItems, rankingTags } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
@@ -26,13 +26,34 @@ export async function exportRankingItemsSnapshot(
   const startedAt = Date.now();
   const drizzleDb = db ?? getDrizzle();
 
-  const rows = await drizzleDb.select(rankingItemSelection).from(rankingItems);
+  const [rows, tagRows] = await Promise.all([
+    drizzleDb.select(rankingItemSelection).from(rankingItems),
+    drizzleDb
+      .select({
+        rankingKey: rankingTags.rankingKey,
+        areaType: rankingTags.areaType,
+        tagKey: rankingTags.tagKey,
+      })
+      .from(rankingTags),
+  ]);
+
+  const tagsByItem = new Map<string, { tagKey: string }[]>();
+  for (const t of tagRows) {
+    const key = `${t.rankingKey}|${t.areaType}`;
+    const list = tagsByItem.get(key) ?? [];
+    list.push({ tagKey: t.tagKey });
+    tagsByItem.set(key, list);
+  }
 
   const items: RankingItem[] = [];
   let parseFailures = 0;
   for (const row of rows) {
     try {
-      items.push(parseRankingItemDB(row));
+      const parsed = parseRankingItemDB(row);
+      const tagKey = `${parsed.rankingKey}|${parsed.areaType}`;
+      const tags = tagsByItem.get(tagKey);
+      if (tags && tags.length > 0) parsed.tags = tags;
+      items.push(parsed);
     } catch (error) {
       parseFailures++;
       logger.warn(
