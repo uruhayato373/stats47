@@ -113,6 +113,14 @@ export interface Logger {
 export async function fetchPrefectureTopology(
   logger?: Logger
 ): Promise<TopoJSONTopology> {
+  // build 時 (NEXT_PHASE=phase-production-build): 2,000 超のランキングページが
+  // 各々 topology を fetch すると build が 30 分超 に伸びる (1 fetch ~数 MB)。
+  // ここで throw → ページ側は catch して null を渡し、ISR で初回リクエスト時に
+  // 生 fetch する。
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    throw new Error("topology fetch skipped at build phase");
+  }
+
   const startTime = startPerformanceMeasurement();
 
   try {
@@ -219,6 +227,10 @@ export async function fetchMunicipalityTopology(
   wardMode: DesignatedCityWardMode = "merged",
   logger?: Logger
 ): Promise<TopoJSONTopology> {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    throw new Error("topology fetch skipped at build phase");
+  }
+
   const startTime = startPerformanceMeasurement();
 
   try {
@@ -310,6 +322,10 @@ export async function fetchMunicipalityTopology(
 export async function fetchAllCitiesTopology(
   logger?: Logger
 ): Promise<TopoJSONTopology> {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    throw new Error("topology fetch skipped at build phase");
+  }
+
   const startTime = startPerformanceMeasurement();
 
   try {
