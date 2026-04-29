@@ -10,7 +10,6 @@ import {
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { getDrizzle } from "@stats47/database/server";
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
@@ -43,12 +42,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-    try {
-        getDrizzle();
-    } catch {
-        return [];
-    }
-    const articles = await listLatestArticles(1000);
+    const articles = await listLatestArticles(1000).catch(() => []);
     return articles.map((a) => ({ slug: a.slug }));
 }
 
