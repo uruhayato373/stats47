@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "description": "Cloudflare 日次 usage 閾値。月次無料枠を 30 日で割った値 + 異常検知用の前日比閾値。違反時は cloudflare-usage-daily.yml で [Cloudflare Alert] Issue を起票する。",
+  "source": "Workers Paid plan free tier (https://developers.cloudflare.com/workers/platform/pricing/)",
+  "context_2026_04_29": {
+    "phase_10_completed": "production D1 (stats47_static) を削除。daily D1 = 0 を期待",
+    "r2_migration": "Phase 0-7 で 33,500 ファイル / ~836MB を R2 に push 済。安定運用後の class A ops は通常 < 100/日",
+    "expected_workers_requests_per_day": "~10,000 (本番 traffic ベース)"
+  },
+  "rules": [
+    {
+      "rule_id": "d1-databases-detected",
+      "metric_key": "d1_databases",
+      "operator": ">",
+      "threshold": 0,
+      "severity": "critical",
+      "title": "D1 database が再出現",
+      "note": "Phase 10 で削除済。0 以外なら誰かが再作成した。即調査"
+    },
+    {
+      "rule_id": "d1-rows-read-anomaly",
+      "metric_key": "d1_rows_read",
+      "operator": ">",
+      "threshold": 1000,
+      "severity": "warning",
+      "title": "D1 rows read が想定外に発生",
+      "note": "Phase 10 後は 0 を期待。1000 以上なら未削除 DB or 復活している"
+    },
+    {
+      "rule_id": "workers-requests-spike",
+      "metric_key": "workers_requests",
+      "operator": ">",
+      "threshold": 1000000,
+      "severity": "warning",
+      "title": "Workers requests が 1M/日を超過",
+      "note": "Workers Paid 無料枠 10M req/月 = ~333K/日。1M/日は anomaly"
+    },
+    {
+      "rule_id": "workers-error-rate",
+      "metric_key": "workers_error_rate_pct",
+      "operator": ">",
+      "threshold": 1.0,
+      "severity": "warning",
+      "title": "Workers error rate > 1%",
+      "note": "通常 < 0.1%。1% 超は障害の可能性"
+    },
+    {
+      "rule_id": "r2-class-a-spike",
+      "metric_key": "r2_class_a_ops",
+      "operator": ">",
+      "threshold": 100000,
+      "severity": "warning",
+      "title": "R2 Class A ops > 100K/日",
+      "note": "無料枠 1M/月 = ~33K/日。100K/日は spike (例: snapshot 一斉再生成)"
+    },
+    {
+      "rule_id": "r2-class-b-spike",
+      "metric_key": "r2_class_b_ops",
+      "operator": ">",
+      "threshold": 1000000,
+      "severity": "warning",
+      "title": "R2 Class B ops > 1M/日",
+      "note": "無料枠 10M/月 = ~333K/日。1M/日は spike (例: cache miss 多発)"
+    },
+    {
+      "rule_id": "r2-storage-growth",
+      "metric_key": "r2_storage_gb",
+      "operator": ">",
+      "threshold": 50,
+      "severity": "warning",
+      "title": "R2 storage > 50GB",
+      "note": "無料枠 10GB/月。50GB 到達時点で月額 $0.6/GB-month 課金開始 → 要確認"
+    },
+    {
+      "rule_id": "r2-egress-spike",
+      "metric_key": "r2_egress_mb",
+      "operator": ">",
+      "threshold": 5000,
+      "severity": "info",
+      "title": "R2 egress > 5GB/日",
+      "note": "R2 egress は無料だが 5GB/日 超は異常 traffic の可能性"
+    }
+  ]
+}

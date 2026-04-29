@@ -1,0 +1,115 @@
+name: 💸 Cloudflare Usage (daily)
+
+on:
+  schedule:
+    - cron: "30 17 * * *" # JST 02:30 daily (UTC 17:30) — PSI と被らないようずらす
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: cloudflare-usage
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🚀 Fetch Cloudflare usage (yesterday UTC)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run cloudflare-usage:fetch
+
+      - name: 📝 Update history.csv and LATEST.md
+        run: npm run cloudflare-usage:digest
+
+      - name: 🔍 Threshold check
+        id: check
+        run: |
+          mkdir -p /tmp/cf-report
+          set +e
+          npm run cloudflare-usage:check -- --output /tmp/cf-report/report.md
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=${EXIT_CODE}" >> $GITHUB_OUTPUT
+          echo "Threshold check exit code: ${EXIT_CODE}"
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f /tmp/cf-report/report.md ]; then
+            cat /tmp/cf-report/report.md >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 📦 Stage metrics outputs
+        run: |
+          mkdir -p /tmp/cf-publish
+          cp -r .claude/state/metrics/cloudflare/* /tmp/cf-publish/ 2>/dev/null || true
+
+      - name: 📤 Publish to develop branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git reset --hard HEAD
+          git clean -fd
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          mkdir -p .claude/state/metrics/cloudflare
+          cp -r /tmp/cf-publish/* .claude/state/metrics/cloudflare/ 2>/dev/null || true
+
+          git add .claude/state/metrics/cloudflare
+          if git diff --cached --quiet; then
+            echo "No Cloudflare changes to publish"
+            exit 0
+          fi
+
+          git commit -m "chore(metrics): cloudflare daily usage $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open issue on threshold violations
+        if: steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          if [ "${{ steps.check.outputs.exit_code }}" = "2" ]; then
+            SEVERITY="🔴 Critical"
+          else
+            SEVERITY="⚠️ Warning"
+          fi
+          TITLE="[Cloudflare Alert] ${SEVERITY} しきい値割れ ${DATE}"
+          BODY_FILE=/tmp/cf-report/report.md
+
+          EXISTING=$(gh issue list --state open --label cost-snapshot --search "\"[Cloudflare Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment instead of creating duplicate"
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "cost-snapshot,auto-generated" \
+              --body-file "$BODY_FILE"
+          fi
