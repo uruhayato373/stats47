@@ -1,7 +1,7 @@
 import {
-  findRankingItemByKey,
-  findLatestYear,
-  listRankingValues,
+  readRankingItemByKeyFromR2,
+  readLatestYearForAreaTypeFromR2,
+  readRankingValuesFromR2,
 } from "@stats47/ranking/server";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
@@ -11,9 +11,9 @@ import { fetchRankingTableDataAction } from "../fetch-ranking-table-data";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
-const mockFindRankingItemByKey = vi.mocked(findRankingItemByKey);
-const mockFindLatestYear = vi.mocked(findLatestYear);
-const mockListRankingValues = vi.mocked(listRankingValues);
+const mockReadRankingItemByKey = vi.mocked(readRankingItemByKeyFromR2);
+const mockReadLatestYear = vi.mocked(readLatestYearForAreaTypeFromR2);
+const mockReadRankingValues = vi.mocked(readRankingValuesFromR2);
 
 const mockRankingItem = {
   rankingKey: "population",
@@ -33,11 +33,11 @@ describe("fetchRankingTableDataAction", () => {
   });
 
   it("yearCode 指定ありで正常にデータを取得できる", async () => {
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: mockRankingItem,
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: true,
       data: mockValues,
     });
@@ -50,15 +50,15 @@ describe("fetchRankingTableDataAction", () => {
       expect(result.data.rankingValues).toEqual(mockValues);
       expect(result.data.rankingItem).toEqual(mockRankingItem);
     }
-    expect(mockFindLatestYear).not.toHaveBeenCalled();
+    expect(mockReadLatestYear).not.toHaveBeenCalled();
   });
 
   it("yearCode 未指定時は latestYear オブジェクトから年度を取得する", async () => {
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: mockRankingItem,
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: true,
       data: mockValues,
     });
@@ -77,11 +77,11 @@ describe("fetchRankingTableDataAction", () => {
       ...mockRankingItem,
       latestYear: JSON.stringify({ yearCode: "2022", yearName: "2022年度" }),
     } as unknown as RankingItem;
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: itemWithStringYear,
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: true,
       data: mockValues,
     });
@@ -94,20 +94,20 @@ describe("fetchRankingTableDataAction", () => {
     }
   });
 
-  it("latestYear が不正な JSON の場合は findLatestYear にフォールバックする", async () => {
+  it("latestYear が不正な JSON の場合は readLatestYearForAreaTypeFromR2 にフォールバックする", async () => {
     const itemWithBadYear = {
       ...mockRankingItem,
       latestYear: "invalid-json",
     } as unknown as RankingItem;
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: itemWithBadYear,
     });
-    mockFindLatestYear.mockResolvedValue({
+    mockReadLatestYear.mockResolvedValue({
       success: true,
       data: "2021",
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: true,
       data: mockValues,
     });
@@ -118,19 +118,19 @@ describe("fetchRankingTableDataAction", () => {
     if (result.success) {
       expect(result.data.yearCode).toBe("2021");
     }
-    expect(mockFindLatestYear).toHaveBeenCalledWith("prefecture");
+    expect(mockReadLatestYear).toHaveBeenCalledWith("prefecture");
   });
 
-  it("latestYear が null で findLatestYear も失敗する場合は空の結果を返す", async () => {
+  it("latestYear が null で readLatestYearForAreaTypeFromR2 も失敗する場合は空の結果を返す", async () => {
     const itemWithoutYear = {
       ...mockRankingItem,
       latestYear: null,
     } as RankingItem;
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: itemWithoutYear,
     });
-    mockFindLatestYear.mockResolvedValue({
+    mockReadLatestYear.mockResolvedValue({
       success: false,
       error: new Error("not found"),
     });
@@ -146,7 +146,7 @@ describe("fetchRankingTableDataAction", () => {
   });
 
   it("ランキング項目が見つからない場合はエラーを返す", async () => {
-    mockFindRankingItemByKey.mockResolvedValue({
+    mockReadRankingItemByKey.mockResolvedValue({
       success: false,
       error: new Error("not found"),
     });
@@ -159,26 +159,26 @@ describe("fetchRankingTableDataAction", () => {
     }
   });
 
-  it("listRankingValues が失敗した場合はエラーを返す", async () => {
-    mockFindRankingItemByKey.mockResolvedValue({
+  it("readRankingValuesFromR2 が失敗した場合はエラーを返す", async () => {
+    mockReadRankingItemByKey.mockResolvedValue({
       success: true,
       data: mockRankingItem,
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: false,
-      error: new Error("DB error"),
+      error: new Error("R2 error"),
     });
 
     const result = await fetchRankingTableDataAction("population", "2024");
 
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error).toBe("DB error");
+      expect(result.error).toBe("R2 error");
     }
   });
 
   it("予期しない例外が発生した場合はエラーを返す", async () => {
-    mockFindRankingItemByKey.mockRejectedValue(new Error("unexpected"));
+    mockReadRankingItemByKey.mockRejectedValue(new Error("unexpected"));
 
     const result = await fetchRankingTableDataAction("population");
 

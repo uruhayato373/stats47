@@ -1,7 +1,7 @@
 "use server";
 
 
-import { findFirstKeyByTag } from "@stats47/ranking/server";
+import { readFirstKeyByTagFromR2 } from "@stats47/ranking/server";
 
 import { logger } from "@/lib/logger";
 
@@ -17,7 +17,7 @@ export async function findFirstRankingKeyByTag(
   tag: string
 ): Promise<string | null> {
   try {
-    const result = await findFirstKeyByTag(tag);
+    const result = await readFirstKeyByTagFromR2(tag);
 
     if (result.success === false) {
        if (result.error.message.includes("not found")) {

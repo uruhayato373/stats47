@@ -1,6 +1,6 @@
 import { lookupArea } from "@stats47/area";
 import { fetchMunicipalityTopology } from "@stats47/gis/server";
-import { listRankingItemsByAreaType, listRankingValuesByPrefecture } from "@stats47/ranking/server";
+import { readRankingItemsByAreaTypeFromR2, readRankingValuesByPrefectureFromR2 } from "@stats47/ranking/server";
 import { unwrap, type TopoJSONTopology } from "@stats47/types";
 
 import { CityRankingSection } from "./CityRankingSection";
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export async function CityRankingPreview({ areaCode, prefName, categoryKey, selectedRankingKey }: Props) {
-    const categoryItems = unwrap(await listRankingItemsByAreaType("city", { categoryKey }));
+    const categoryItems = unwrap(await readRankingItemsByAreaTypeFromR2("city", { categoryKey }));
 
     if (categoryItems.length === 0) return null;
 
@@ -28,7 +28,7 @@ export async function CityRankingPreview({ areaCode, prefName, categoryKey, sele
     // DB レベルで都道府県フィルタ + TopoJSON 取得を並列実行
     const prefCode2 = areaCode.slice(0, 2);
     const [prefValuesResult, topology] = await Promise.all([
-        listRankingValuesByPrefecture(activeItem.rankingKey, latestYear, areaCode),
+        readRankingValuesByPrefectureFromR2(activeItem.rankingKey, latestYear, areaCode),
         fetchMunicipalityTopology(prefCode2).catch(() => null as TopoJSONTopology | null),
     ]);
 

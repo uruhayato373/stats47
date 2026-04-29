@@ -50,6 +50,18 @@ jobs:
             exit 1
           fi
           echo "✅ apps/web/src に D1 runtime import なし"
+
+          # apps/web/src から @stats47/<pkg>/server 経由で D1 を叩く known-bad シンボルを
+          # import していないか確認 (Phase 7 強化、2026-04-29 に Phase 8 ブロッカーを発見した教訓)。
+          # 各シンボルは package 内で getDrizzle を呼ぶため、間接的に D1 read を発生させる。
+          BAD_SYMBOLS='findFirstKeyByTag|findRankingItemsByTag|findLatestYear\b|listRankingItemsByAreaType\b|listRankingValuesByPrefecture\b'
+          MATCHES2=$(grep -rEn "$BAD_SYMBOLS" apps/web/src/ --include='*.ts' --include='*.tsx' 2>/dev/null | grep -v '__tests__')
+          if [ -n "$MATCHES2" ]; then
+            echo "::error::apps/web/src から D1 を叩く間接的シンボル import が検出されました。R2 reader (read*FromR2) に切替えてください。"
+            echo "$MATCHES2"
+            exit 1
+          fi
+          echo "✅ apps/web/src に D1 間接的 import なし"
         continue-on-error: false
 
       - name: 📐 Type Check
