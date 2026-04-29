@@ -16,7 +16,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { getDrizzle } from "@stats47/database/server";
 import { isOk } from "@stats47/types";
 
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
@@ -39,13 +38,8 @@ import { listCategories } from "@/features/category/server";
 import type { Metadata } from "next";
 
 
-/** ビルド時に全47都道府県を事前生成（DB利用不可時はISRに委ねる） */
+/** ビルド時に全47都道府県を事前生成 */
 export function generateStaticParams() {
-    try {
-        getDrizzle();
-    } catch {
-        return [];
-    }
     const prefectures = fetchPrefectures();
     return prefectures.map((p) => ({ areaCode: p.prefCode }));
 }

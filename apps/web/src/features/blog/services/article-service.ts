@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { findArticleBySlug } from "../repositories/article-repository";
+import { readArticleBySlugFromR2 as findArticleBySlug } from "../repositories/blog-snapshot-reader";
 import { type Article } from "../types";
 
 const LOCAL_CONTENT_DIR = path.resolve(process.cwd(), "../../.local/r2/blog");
