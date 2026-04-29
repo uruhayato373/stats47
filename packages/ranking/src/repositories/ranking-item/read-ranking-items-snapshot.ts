@@ -12,6 +12,7 @@ import {
 } from "../../types/snapshot";
 import type { CategoryRankingItem } from "./find-ranking-items-by-category";
 import type { GroupRankingItem } from "./find-ranking-items-by-group-key";
+import type { RankingConfigResponse } from "../../types/ranking-config-response";
 
 const STALE_AFTER_DAYS = 7;
 
@@ -241,6 +242,134 @@ export async function readActiveKeysForSitemapFromR2(): Promise<
     return ok(rows);
   } catch (error) {
     logger.error({ error }, "readActiveKeysForSitemapFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+export async function readFirstKeyByTagFromR2(
+  tagKey: string,
+): Promise<Result<string, Error>> {
+  try {
+    const items = await loadAll();
+    const matched = items
+      .filter(
+        (it) =>
+          it.isActive &&
+          it.areaType === "prefecture" &&
+          (it.tags ?? []).some((t) => t.tagKey === tagKey),
+      )
+      .sort((a, b) => (b.updatedAt ?? "").localeCompare(a.updatedAt ?? ""));
+    if (matched.length === 0) {
+      return err(new Error(`First ranking key not found for tagKey: ${tagKey}`));
+    }
+    return ok(matched[0].rankingKey);
+  } catch (error) {
+    logger.error({ error, tagKey }, "readFirstKeyByTagFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+export async function readRankingItemsByTagFromR2(
+  tagKey: string,
+  categoryNameLookup?: (categoryKey: string) => Promise<string | null>,
+): Promise<Result<RankingConfigResponse, Error>> {
+  try {
+    const items = await loadAll();
+    const matched = items
+      .filter(
+        (it) =>
+          it.isActive && (it.tags ?? []).some((t) => t.tagKey === tagKey),
+      )
+      .sort((a, b) => {
+        const fa = a.featuredOrder ?? 0;
+        const fb = b.featuredOrder ?? 0;
+        if (fa !== fb) return fa - fb;
+        return (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "");
+      });
+
+    if (matched.length === 0) {
+      return err(new Error(`No ranking items found for tagKey: ${tagKey}`));
+    }
+
+    const firstItem = matched[0];
+    let categoryName = firstItem.categoryKey ?? "";
+    if (firstItem.categoryKey && categoryNameLookup) {
+      const looked = await categoryNameLookup(firstItem.categoryKey);
+      if (looked) categoryName = looked;
+    }
+
+    return ok({
+      category: {
+        categoryKey: firstItem.categoryKey ?? "",
+        categoryName,
+        defaultRankingKey: firstItem.rankingKey,
+      },
+      rankingItems: matched,
+    });
+  } catch (error) {
+    logger.error({ error, tagKey }, "readRankingItemsByTagFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+export async function readTagsForItemFromR2(
+  rankingKey: string,
+  areaType: AreaType,
+): Promise<Result<string[], Error>> {
+  try {
+    const items = await loadAll();
+    const found = items.find(
+      (it) => it.rankingKey === rankingKey && it.areaType === areaType,
+    );
+    return ok((found?.tags ?? []).map((t) => t.tagKey));
+  } catch (error) {
+    logger.error(
+      { error, rankingKey, areaType },
+      "readTagsForItemFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+export async function readRankingItemsByAreaTypeFromR2(
+  areaType: AreaType,
+  options?: { dataSourceId?: string; categoryKey?: string },
+): Promise<Result<RankingItem[], Error>> {
+  try {
+    const all = await loadAll();
+    const matched = all.filter((it) => {
+      if (it.areaType !== areaType || !it.isActive) return false;
+      if (options?.dataSourceId && it.dataSourceId !== options.dataSourceId)
+        return false;
+      if (options?.categoryKey && it.categoryKey !== options.categoryKey)
+        return false;
+      return true;
+    });
+    matched.sort((a, b) => a.title.localeCompare(b.title));
+    return ok(matched);
+  } catch (error) {
+    logger.error(
+      { error, areaType, options },
+      "readRankingItemsByAreaTypeFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+export async function readLatestYearForAreaTypeFromR2(
+  areaType: AreaType,
+): Promise<Result<string | null, Error>> {
+  try {
+    const all = await loadAll();
+    let max: string | null = null;
+    for (const it of all) {
+      if (it.areaType !== areaType) continue;
+      const yc = it.latestYear?.yearCode;
+      if (yc && (max === null || yc > max)) max = yc;
+    }
+    return ok(max);
+  } catch (error) {
+    logger.error({ error, areaType }, "readLatestYearForAreaTypeFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }

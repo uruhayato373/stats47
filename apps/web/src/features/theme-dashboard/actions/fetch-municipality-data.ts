@@ -1,7 +1,7 @@
 "use server";
 
 import { fetchMunicipalityTopology } from "@stats47/gis/geoshape";
-import { listRankingValuesByPrefecture } from "@stats47/ranking/server";
+import { readRankingValuesByPrefectureFromR2 } from "@stats47/ranking/server";
 import { isOk, type TopoJSONTopology } from "@stats47/types";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -27,7 +27,7 @@ export async function fetchMunicipalityDrilldownAction(
 
     const [topology, valuesResult] = await Promise.all([
       fetchMunicipalityTopology(prefCodeShort).catch(() => null),
-      listRankingValuesByPrefecture(rankingKey, yearCode, prefCode),
+      readRankingValuesByPrefectureFromR2(rankingKey, yearCode, prefCode),
     ]);
 
     if (!topology) return null;

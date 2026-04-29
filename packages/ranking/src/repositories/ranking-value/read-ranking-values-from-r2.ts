@@ -76,3 +76,20 @@ export async function readRankingValuesFromR2(
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }
+
+/**
+ * 指定都道府県の市区町村ランキング値を partition snapshot から取得。
+ *
+ * `listRankingValuesByPrefecture` (D1) のドロップイン代替。
+ * city partition から areaCode の先頭 2 桁が prefCode と一致する行をフィルタ。
+ */
+export async function readRankingValuesByPrefectureFromR2(
+  rankingKey: string,
+  yearCode: string,
+  prefCode: string,
+): Promise<Result<RankingValue[], Error>> {
+  const result = await readRankingValuesFromR2(rankingKey, "city", yearCode);
+  if (!result.success) return result;
+  const prefPrefix = prefCode.slice(0, 2);
+  return ok(result.data.filter((v) => v.areaCode.startsWith(prefPrefix)));
+}

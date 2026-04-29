@@ -1,7 +1,7 @@
 "use server";
 
 import { RankingItem, RankingValue } from "@stats47/ranking";
-import { findLatestYear, readRankingValuesFromR2, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
+import { readLatestYearForAreaTypeFromR2, readRankingValuesFromR2, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
 import { err, ok, type Result } from "@stats47/types";
 
 export interface FetchRankingTableDataResult {
@@ -43,7 +43,7 @@ export async function fetchRankingTableDataAction(
              targetYearName = latestYearObj.yearName;
          } catch {
              // パースエラー等の場合はリポジトリから最新を探す
-             const latest = await findLatestYear(rankingItem.areaType);
+             const latest = await readLatestYearForAreaTypeFromR2(rankingItem.areaType);
              if (latest.success && latest.data) {
                  targetYearCode = latest.data;
              }
@@ -51,7 +51,7 @@ export async function fetchRankingTableDataAction(
       }
 
       if (!targetYearCode) {
-           const latest = await findLatestYear(rankingItem.areaType);
+           const latest = await readLatestYearForAreaTypeFromR2(rankingItem.areaType);
            if (latest.success && latest.data) {
                targetYearCode = latest.data;
            }

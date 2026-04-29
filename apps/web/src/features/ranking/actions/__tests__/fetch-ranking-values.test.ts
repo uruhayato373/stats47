@@ -1,6 +1,6 @@
 import {
-  findRankingItem,
-  listRankingValues,
+  readRankingItemFromR2,
+  readRankingValuesFromR2,
   computeNormalization,
 } from "@stats47/ranking/server";
 import { describe, expect, it, vi, beforeEach } from "vitest";
@@ -11,8 +11,8 @@ import { fetchRankingValuesAction } from "../fetch-ranking-values";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
-const mockFindRankingItem = vi.mocked(findRankingItem);
-const mockListRankingValues = vi.mocked(listRankingValues);
+const mockReadRankingItem = vi.mocked(readRankingItemFromR2);
+const mockReadRankingValues = vi.mocked(readRankingValuesFromR2);
 const mockComputeNormalization = vi.mocked(computeNormalization);
 
 const mockRankingItem = {
@@ -33,11 +33,11 @@ describe("fetchRankingValuesAction", () => {
   });
 
   it("通常のランキング値を取得できる", async () => {
-    mockFindRankingItem.mockResolvedValue({
+    mockReadRankingItem.mockResolvedValue({
       success: true,
       data: mockRankingItem,
     });
-    mockListRankingValues.mockResolvedValue({
+    mockReadRankingValues.mockResolvedValue({
       success: true,
       data: mockValues,
     });
@@ -49,8 +49,8 @@ describe("fetchRankingValuesAction", () => {
     );
 
     expect(result.success).toBe(true);
-    expect(mockFindRankingItem).toHaveBeenCalledWith("population", "prefecture");
-    expect(mockListRankingValues).toHaveBeenCalledWith(
+    expect(mockReadRankingItem).toHaveBeenCalledWith("population", "prefecture");
+    expect(mockReadRankingValues).toHaveBeenCalledWith(
       "population",
       "prefecture",
       "2024"
@@ -59,7 +59,7 @@ describe("fetchRankingValuesAction", () => {
   });
 
   it("正規化タイプ指定時は computeNormalization を呼ぶ", async () => {
-    mockFindRankingItem.mockResolvedValue({
+    mockReadRankingItem.mockResolvedValue({
       success: true,
       data: mockRankingItem,
     });
@@ -81,11 +81,11 @@ describe("fetchRankingValuesAction", () => {
       "2024",
       "per_population"
     );
-    expect(mockListRankingValues).not.toHaveBeenCalled();
+    expect(mockReadRankingValues).not.toHaveBeenCalled();
   });
 
   it("ランキング項目が見つからない場合はエラーを返す", async () => {
-    mockFindRankingItem.mockResolvedValue({
+    mockReadRankingItem.mockResolvedValue({
       success: false,
       error: new Error("not found"),
     });
@@ -102,8 +102,8 @@ describe("fetchRankingValuesAction", () => {
     }
   });
 
-  it("findRankingItem が success だが data が null の場合はエラーを返す", async () => {
-    mockFindRankingItem.mockResolvedValue({
+  it("readRankingItemFromR2 が success だが data が null の場合はエラーを返す", async () => {
+    mockReadRankingItem.mockResolvedValue({
       success: true,
       data: null,
     });
@@ -121,7 +121,7 @@ describe("fetchRankingValuesAction", () => {
   });
 
   it("予期しない例外が発生した場合はエラーを返す", async () => {
-    mockFindRankingItem.mockRejectedValue(new Error("DB connection failed"));
+    mockReadRankingItem.mockRejectedValue(new Error("DB connection failed"));
 
     const result = await fetchRankingValuesAction(
       "population",
@@ -136,7 +136,7 @@ describe("fetchRankingValuesAction", () => {
   });
 
   it("非 Error オブジェクトの例外も処理する", async () => {
-    mockFindRankingItem.mockRejectedValue("string error");
+    mockReadRankingItem.mockRejectedValue("string error");
 
     const result = await fetchRankingValuesAction(
       "population",
