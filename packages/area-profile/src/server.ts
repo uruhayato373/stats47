@@ -27,3 +27,6 @@ export {
 
 export { runBatchAreaProfile } from "./services";
 export type { BatchCallbacks } from "./services";
+
+export { readAreaProfileFromR2 } from "./repositories/read-area-profile-snapshot";
+export { exportAreaProfileSnapshot } from "./exporters/area-profile-snapshot";
