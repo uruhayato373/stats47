@@ -113,8 +113,10 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
     // 市区町村コロプレスマップデータ（population カテゴリ）
     const choroplethMapData = await fetchChoroplethMapData(categoryKey, areaCodes);
 
-    // loadPageComponents で全コンポーネントを一括取得（KPI + チャート）
-    const { loadPageComponents } = await import("@/features/stat-charts/services/load-page-components");
+    // loadPageComponents で全コンポーネントを一括取得（R2 snapshot 経由）
+    const { loadPageComponents } = await import("@/features/stat-charts/services/page-components-snapshot").then(
+        (m) => ({ loadPageComponents: m.readPageComponentsFromR2 }),
+    );
     const pageComponents = areaCodes.length === 2
         ? await loadPageComponents("area-category", categoryKey)
         : [];
