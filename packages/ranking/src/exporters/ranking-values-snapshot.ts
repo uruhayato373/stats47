@@ -3,7 +3,7 @@ import "server-only";
 import { getDrizzle, rankingData } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import type { RankingValue } from "../types";
 import {
@@ -48,50 +48,22 @@ async function writePartition(
   return result.size;
 }
 
-/**
- * ranking_data 全件を partition ごとに分割して R2 に保存する。
- *
- * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
- * - 全 partition は約 33K (2026-04 時点)
- * - 並列度: PARALLELISM (default 24)。R2 rate limit を考慮しつつ高速化
- * - メモリは全行を 1 回ロード (~1GB) するためローカル CLI 用途を想定
- *
- * @param options.parallelism partition 並列書き込み数 (default 24)
- * @param options.rankingKeyFilter 特定 ranking_key だけ更新したい場合 (差分書き出し用)
- */
-export async function exportRankingValuesSnapshots(
-  options: {
-    db?: ReturnType<typeof getDrizzle>;
-    parallelism?: number;
-    rankingKeyFilter?: string;
-  } = {},
-): Promise<ExportRankingValuesSnapshotResult> {
-  const startedAt = Date.now();
-  const drizzleDb = options.db ?? getDrizzle();
-  const parallelism = options.parallelism ?? 24;
-
-  logger.info(
-    { parallelism, rankingKeyFilter: options.rankingKeyFilter ?? "(all)" },
-    "ranking_values 全件取得を開始…",
-  );
-
-  const rows = options.rankingKeyFilter
-    ? await drizzleDb
-        .select()
-        .from(rankingData)
-        .where(eq(rankingData.categoryCode, options.rankingKeyFilter))
-    : await drizzleDb.select().from(rankingData);
-
-  logger.info({ rowCount: rows.length }, "ranking_data ロード完了。partition に分割中…");
+async function processRankingKey(
+  drizzleDb: ReturnType<typeof getDrizzle>,
+  rankingKey: string,
+  parallelism: number,
+): Promise<{ partitions: number; rows: number; sizeBytes: number }> {
+  const rows = await drizzleDb
+    .select()
+    .from(rankingData)
+    .where(eq(rankingData.categoryCode, rankingKey));
 
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
-
   for (const row of rows) {
     const r = row as unknown as Record<string, unknown>;
-    const rankingKey = String(r.categoryCode ?? "");
     const areaType = String(r.areaType ?? "");
     const yearCode = String(r.yearCode ?? "");
-    if (!rankingKey || !areaType || !yearCode) continue;
+    if (!areaType || !yearCode) continue;
 
     const pk: PartitionKey = { rankingKey, areaType, yearCode };
     const key = pkString(pk);
@@ -114,44 +86,107 @@ export async function exportRankingValuesSnapshots(
     });
   }
 
-  logger.info(
-    { partitionCount: groups.size },
-    "partition 分割完了。R2 に並列書き込みを開始…",
-  );
-
-  let written = 0;
-  let totalSizeBytes = 0;
+  let sizeBytes = 0;
   const partitionList = [...groups.values()];
   for (let i = 0; i < partitionList.length; i += parallelism) {
     const batch = partitionList.slice(i, i + parallelism);
     const sizes = await Promise.all(
       batch.map((g) => writePartition(g.pk, g.values)),
     );
-    written += batch.length;
-    totalSizeBytes += sizes.reduce((s, n) => s + n, 0);
-    if (written % 200 === 0 || written === partitionList.length) {
+    sizeBytes += sizes.reduce((s, n) => s + n, 0);
+  }
+
+  return { partitions: groups.size, rows: rows.length, sizeBytes };
+}
+
+/**
+ * ranking_data 全件を partition ごとに分割して R2 に保存する。
+ *
+ * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
+ * - 全 partition は約 33K (2026-04 時点)
+ * - メモリ制約: 全行 (~1GB) を 1 回でロードすると OOM する。ranking_key 毎にチャンク処理。
+ * - 並列度: PARALLELISM (default 24) は 1 ranking_key 内の partition 並列度。
+ *
+ * @param options.parallelism partition 並列書き込み数 (default 24)
+ * @param options.rankingKeyFilter 特定 ranking_key だけ更新したい場合 (差分書き出し用)
+ */
+export async function exportRankingValuesSnapshots(
+  options: {
+    db?: ReturnType<typeof getDrizzle>;
+    parallelism?: number;
+    rankingKeyFilter?: string;
+  } = {},
+): Promise<ExportRankingValuesSnapshotResult> {
+  const startedAt = Date.now();
+  const drizzleDb = options.db ?? getDrizzle();
+  const parallelism = options.parallelism ?? 24;
+
+  logger.info(
+    { parallelism, rankingKeyFilter: options.rankingKeyFilter ?? "(all)" },
+    "ranking_values export を開始…",
+  );
+
+  // 1. distinct ranking_key を取得 (チャンク単位)
+  const rankingKeys = options.rankingKeyFilter
+    ? [options.rankingKeyFilter]
+    : (
+        await drizzleDb
+          .selectDistinct({ rk: rankingData.categoryCode })
+          .from(rankingData)
+      )
+          .map((r) => r.rk)
+          .filter((rk): rk is string => Boolean(rk));
+
+  logger.info(
+    { rankingKeyCount: rankingKeys.length },
+    "対象 ranking_key 数を確定",
+  );
+
+  let totalPartitions = 0;
+  let totalRows = 0;
+  let totalSizeBytes = 0;
+
+  for (let i = 0; i < rankingKeys.length; i++) {
+    const rk = rankingKeys[i];
+    try {
+      const result = await processRankingKey(drizzleDb, rk, parallelism);
+      totalPartitions += result.partitions;
+      totalRows += result.rows;
+      totalSizeBytes += result.sizeBytes;
+    } catch (error) {
+      logger.error(
+        { rankingKey: rk, error: error instanceof Error ? error.message : String(error) },
+        "ranking_key 処理失敗。スキップ",
+      );
+    }
+
+    if ((i + 1) % 25 === 0 || i === rankingKeys.length - 1) {
       logger.info(
-        { written, total: partitionList.length, totalSizeBytes },
-        "ranking_values 書き込み進捗",
+        {
+          processed: i + 1,
+          total: rankingKeys.length,
+          totalPartitions,
+          totalRows,
+          totalSizeBytes,
+        },
+        "ranking_values 進捗",
       );
     }
   }
 
   const durationMs = Date.now() - startedAt;
   logger.info(
-    {
-      partitions: groups.size,
-      rows: rows.length,
-      totalSizeBytes,
-      durationMs,
-    },
+    { partitions: totalPartitions, rows: totalRows, totalSizeBytes, durationMs },
     "ranking_values snapshot 全 partition を R2 に保存しました",
   );
 
   return {
-    partitions: groups.size,
-    rows: rows.length,
+    partitions: totalPartitions,
+    rows: totalRows,
     totalSizeBytes,
     durationMs,
   };
 }
+
+// suppress unused import warning when sql isn't referenced
+void sql;
