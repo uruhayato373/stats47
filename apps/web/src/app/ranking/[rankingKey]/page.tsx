@@ -44,7 +44,7 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import {
-  listRankingValues,
+  readRankingValuesFromR2,
   readActiveRankingKeysFromR2,
   readRankingItemsByGroupKeyFromR2,
   readSurveyByIdFromR2,
@@ -128,7 +128,7 @@ export async function generateMetadata({
 
     let rankingValues: RankingValue[] = [];
     if (selectedYear) {
-      const rankingValueResult = await listRankingValues(rankingKey, areaType, selectedYear);
+      const rankingValueResult = await readRankingValuesFromR2(rankingKey, areaType, selectedYear);
       rankingValues = isOk(rankingValueResult) ? rankingValueResult.data : [];
     }
 
@@ -172,7 +172,7 @@ export default async function RankingKeyPage({
 
   // --- 3. ランキングデータ・TopoJSON・AIコンテンツを並列取得 ---
   const rankingValuesPromise = selectedYear
-    ? listRankingValues(rankingKey, areaType, selectedYear).then(
+    ? readRankingValuesFromR2(rankingKey, areaType, selectedYear).then(
         (r) => (isOk(r) ? r.data : [])
       )
     : Promise.resolve([] as RankingValue[]);

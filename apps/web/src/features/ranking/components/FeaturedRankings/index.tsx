@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { buildRankingDisplayInfo } from "@stats47/ranking";
-import { listTopRankingValuesBatch, listRankingValues } from "@stats47/ranking/server";
+import { readTopRankingValuesBatchFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
@@ -56,10 +56,10 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
       }));
 
       const [batchResult, ...allValuesResults] = await Promise.all([
-        listTopRankingValuesBatch(batchItems, "prefecture"),
+        readTopRankingValuesBatchFromR2(batchItems, "prefecture"),
         ...uniqueItems.map((item) => {
           const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
-          return listRankingValues(item.rankingKey, "prefecture", yearCode);
+          return readRankingValuesFromR2(item.rankingKey, "prefecture", yearCode);
         }),
       ]);
       const topMap = isOk(batchResult) ? batchResult.data : new Map();
