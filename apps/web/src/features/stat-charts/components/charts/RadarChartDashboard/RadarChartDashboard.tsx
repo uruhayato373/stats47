@@ -1,6 +1,9 @@
-import { getDrizzle, rankingData as rankingDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { and, eq, desc } from "drizzle-orm";
+import {
+  readRankingItemFromR2,
+  readRankingValuesFromR2,
+} from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
 
 import { toRadarChartData } from "../../../adapters";
 import { DashboardCard } from "../../shared/DashboardCard";
@@ -15,7 +18,7 @@ import type { DashboardItemProps } from "../../../types";
 /**
  * レーダーチャートダッシュボードコンポーネント
  *
- * 各軸に対応するランキングキーのデータを取得し、
+ * 各軸に対応するランキングキーのデータを R2 partition snapshot から取得し、
  * 順位ベースのスコア（47 中の順位を 0-100 にスケール）で描画する。
  */
 export const RadarChartDashboard = async ({
@@ -30,8 +33,6 @@ export const RadarChartDashboard = async ({
   let fetchErrorMessage: string | null = null;
 
   try {
-    const db = getDrizzle();
-
     // 各軸のランキングデータを取得
     const axisValues: Record<string, number> = {};
     const resolvedAxes: { key: string; label: string; max: number }[] = [];
@@ -39,21 +40,24 @@ export const RadarChartDashboard = async ({
     for (const axisDef of axesDef) {
       const rankingKey = axisDef.rankingKey ?? axisDef.key;
 
-      // 最新年度の当該地域データを取得
-      const rows = await db
-        .select()
-        .from(rankingDataTable)
-        .where(
-          and(
-            eq(rankingDataTable.categoryCode, rankingKey),
-            eq(rankingDataTable.areaCode, areaCode),
-            eq(rankingDataTable.areaType, area.areaType)
-          )
-        )
-        .orderBy(desc(rankingDataTable.yearCode))
-        .limit(1);
+      // 最新年度を ranking_items snapshot から解決
+      const itemResult = await readRankingItemFromR2(rankingKey, area.areaType);
+      const latestYear = isOk(itemResult)
+        ? itemResult.data?.latestYear?.yearCode ?? null
+        : null;
 
-      const foundRow = rows.length > 0 ? rows[0] : null;
+      let foundRow: { rank: number | null } | null = null;
+      if (latestYear) {
+        const valuesResult = await readRankingValuesFromR2(
+          rankingKey,
+          area.areaType,
+          latestYear,
+        );
+        if (isOk(valuesResult)) {
+          const match = valuesResult.data.find((v) => v.areaCode === areaCode);
+          foundRow = match ? { rank: match.rank } : null;
+        }
+      }
 
       if (foundRow) {
         // 順位ベースのスコア: 1位=100, 47位≈0 (都道府県47件前提)

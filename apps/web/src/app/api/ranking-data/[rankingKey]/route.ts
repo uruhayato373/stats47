@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { listRankingValues, readRankingItemFromR2 } from "@stats47/ranking/server";
+import { readRankingValuesFromR2, readRankingItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 /**
@@ -26,7 +26,7 @@ export async function GET(
       yearCode = item?.latestYear?.yearCode ?? "2024";
     }
 
-    const valuesResult = await listRankingValues(rankingKey, "prefecture", yearCode);
+    const valuesResult = await readRankingValuesFromR2(rankingKey, "prefecture", yearCode);
     if (!isOk(valuesResult) || valuesResult.data.length === 0) {
       return NextResponse.json([], { status: 200 });
     }

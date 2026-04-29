@@ -16,9 +16,14 @@ import {
     CardHeader,
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { getDrizzle, pageComponentAssignments } from "@stats47/database/server";
 import { isOk } from "@stats47/types";
-import { eq } from "drizzle-orm";
+
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+
+import {
+    PAGE_COMPONENTS_SNAPSHOT_KEY,
+    type PageComponentsSnapshot,
+} from "@/features/stat-charts/services/page-components-snapshot";
 
 
 
@@ -93,17 +98,23 @@ export default async function CityPage({ params }: PageProps) {
     const categoriesResult = await listCategories();
     const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
 
-    // page_component_assignments から city-category のカテゴリを取得
+    // page_component_assignments から city-category のカテゴリを取得 (R2 snapshot 経由)
     let filteredCategories = allCategories;
     try {
-        const db = getDrizzle();
-        const cityAssignments = await db
-            .select({ pageKey: pageComponentAssignments.pageKey })
-            .from(pageComponentAssignments)
-            .where(eq(pageComponentAssignments.pageType, "city-category"));
-        const categoriesWithData = new Set(cityAssignments.map((a) => a.pageKey));
-        filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
-    } catch { /* DB 未初期化時は全カテゴリ表示 */ }
+        const snapshot = await fetchFromR2AsJson<PageComponentsSnapshot>(
+            PAGE_COMPONENTS_SNAPSHOT_KEY,
+        );
+        if (snapshot) {
+            const categoriesWithData = new Set<string>();
+            for (const key of Object.keys(snapshot.byPage)) {
+                const [pageType, pageKey] = key.split("|");
+                if (pageType === "city-category" && pageKey) {
+                    categoriesWithData.add(pageKey);
+                }
+            }
+            filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
+        }
+    } catch { /* snapshot 不在時は全カテゴリ表示 */ }
 
     const cityBasePath = `/areas/${areaCode}/cities/${cityCode}`;
     const allCities = fetchCities().filter((c) => c.prefCode === areaCode);

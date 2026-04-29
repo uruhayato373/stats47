@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "@stats47/database": "*",
+    "@stats47/logger": "*",
+    "@stats47/r2-storage": "*",
     "@stats47/ranking": "*",
     "@stats47/types": "*",
     "drizzle-orm": "^0.45.1",

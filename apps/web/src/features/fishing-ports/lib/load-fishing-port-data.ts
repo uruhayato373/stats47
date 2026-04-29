@@ -1,7 +1,7 @@
 import "server-only";
 
-import { fishingPorts } from "@stats47/database/schema";
-import { getDrizzle } from "@stats47/database/server";
+import { logger } from "@stats47/logger/server";
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 export interface FishingPortData {
   portCode: string;
@@ -15,6 +15,42 @@ export interface FishingPortData {
   longitude: number;
 }
 
+export const FISHING_PORTS_SNAPSHOT_KEY = "snapshots/fishing-ports/all.json";
+
+export interface FishingPortsSnapshot {
+  generatedAt: string;
+  ports: FishingPortData[];
+}
+
+const STALE_AFTER_DAYS = 90;
+
+let cached: FishingPortsSnapshot | null = null;
+
+function warnIfStale(generatedAt: string): void {
+  const ageDays =
+    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
+  if (ageDays > STALE_AFTER_DAYS) {
+    logger.warn(
+      { generatedAt, ageDays: Math.round(ageDays) },
+      `fishing-ports snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
+    );
+  }
+}
+
+async function loadSnapshot(): Promise<FishingPortsSnapshot> {
+  if (cached) return cached;
+  const snapshot = await fetchFromR2AsJson<FishingPortsSnapshot>(
+    FISHING_PORTS_SNAPSHOT_KEY,
+  );
+  if (!snapshot) {
+    cached = { generatedAt: new Date(0).toISOString(), ports: [] };
+    return cached;
+  }
+  warnIfStale(snapshot.generatedAt);
+  cached = snapshot;
+  return snapshot;
+}
+
 export async function loadFishingPortData(): Promise<{
   ports: FishingPortData[];
   stats: {
@@ -23,21 +59,18 @@ export async function loadFishingPortData(): Promise<{
     byPrefecture: Array<{ prefectureName: string; count: number }>;
   };
 }> {
-  const db = getDrizzle();
-
-  const allPorts = await db.select().from(fishingPorts);
-
-  const ports: FishingPortData[] = allPorts.map((p) => ({
-    portCode: p.portCode,
-    portName: p.portName,
-    prefectureCode: p.prefectureCode,
-    prefectureName: p.prefectureName,
-    portType: p.portType,
-    portTypeName: p.portTypeName,
-    administratorName: p.administratorName,
-    latitude: p.latitude,
-    longitude: p.longitude,
-  }));
+  let ports: FishingPortData[] = [];
+  if (process.env.NEXT_PHASE !== "phase-production-build") {
+    try {
+      const snapshot = await loadSnapshot();
+      ports = snapshot.ports;
+    } catch (error) {
+      logger.error(
+        { error: error instanceof Error ? error.message : String(error) },
+        "loadFishingPortData: snapshot fetch failed",
+      );
+    }
+  }
 
   // 種別集計
   const typeMap = new Map<string, number>();

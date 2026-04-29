@@ -3,7 +3,7 @@
 import {
   computeNormalization,
   fetchRankingValuesOnDemand,
-  listRankingValues,
+  readRankingValuesFromR2,
   readRankingItemFromR2,
 } from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
@@ -42,7 +42,7 @@ export async function fetchRankingValuesAction(
       );
     } else {
       // DB から取得（なければ e-Stat API からオンデマンド取得 + キャッシュ）
-      const result = await listRankingValues(rankingKey, areaType, yearCode);
+      const result = await readRankingValuesFromR2(rankingKey, areaType, yearCode);
       if (!isOk(result)) return result;
       values = result.data;
 

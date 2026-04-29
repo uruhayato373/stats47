@@ -1,7 +1,11 @@
-import { getDrizzle, rankingData as rankingDataTable } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { readRankingItemByKeyAndAreaTypeFromR2 } from "@stats47/ranking/server";
-import { and, eq, asc } from "drizzle-orm";
+import {
+  readRankingItemByKeyAndAreaTypeFromR2,
+  readRankingItemFromR2,
+  readRankingValuesFromR2,
+} from "@stats47/ranking/server";
+import { isOk } from "@stats47/types";
+import type { AreaType } from "@stats47/types";
 
 import { toBarChartData } from "../../../adapters";
 import { toLineChartData } from "../../../adapters/toLineChartData";
@@ -17,38 +21,47 @@ import type { GetStatsDataParams } from "@stats47/estat-api/server";
 import type { StatsSchema } from "@stats47/types";
 
 /**
- * ranking_data テーブルから時系列データを直接取得する。
- * soumu データなど e-Stat API 経由でない ranking_items 向けのフォールバック。
+ * R2 partition snapshot から (rankingKey, areaCode) の時系列を再構築する。
+ * 各年 partition (~13KB) を並列 fetch し、areaCode で 1 行抽出して連結する。
+ * soumu データ等で e-Stat 直接 fetch ができない場合のフォールバック。
  */
 async function fetchRankingDataDirect(
   areaCode: string,
   categoryCode: string,
   areaType: string,
 ): Promise<StatsSchema[]> {
-  const db = getDrizzle();
+  const itemResult = await readRankingItemFromR2(
+    categoryCode,
+    areaType as AreaType,
+  );
+  if (!isOk(itemResult) || !itemResult.data) return [];
+  const yearCodes = (itemResult.data.availableYears ?? []).map((y) => y.yearCode);
+  if (yearCodes.length === 0) return [];
 
-  const rows = await db
-    .select()
-    .from(rankingDataTable)
-    .where(
-      and(
-        eq(rankingDataTable.categoryCode, categoryCode),
-        eq(rankingDataTable.areaCode, areaCode),
-        eq(rankingDataTable.areaType, areaType),
-      ),
-    )
-    .orderBy(asc(rankingDataTable.yearCode));
+  const responses = await Promise.all(
+    yearCodes.map((y) =>
+      readRankingValuesFromR2(categoryCode, areaType as AreaType, y),
+    ),
+  );
 
-  return rows.map((row) => ({
-    areaCode: row.areaCode,
-    areaName: row.areaName,
-    yearCode: row.yearCode,
-    yearName: row.yearName ?? `${row.yearCode}年`,
-    categoryCode: row.categoryCode,
-    categoryName: row.categoryName ?? "",
-    value: row.value,
-    unit: row.unit ?? "",
-  }));
+  const points: StatsSchema[] = [];
+  for (let i = 0; i < responses.length; i++) {
+    const r = responses[i];
+    if (!isOk(r)) continue;
+    const match = r.data.find((v) => v.areaCode === areaCode);
+    if (!match) continue;
+    points.push({
+      areaCode: match.areaCode,
+      areaName: match.areaName,
+      yearCode: match.yearCode,
+      yearName: match.yearName,
+      categoryCode: match.categoryCode,
+      categoryName: match.categoryName,
+      value: match.value,
+      unit: match.unit,
+    });
+  }
+  return points.sort((a, b) => (a.yearCode < b.yearCode ? -1 : 1));
 }
 
 /**

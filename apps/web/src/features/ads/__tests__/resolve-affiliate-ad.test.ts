@@ -1,13 +1,16 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-// Mock the repository before importing the service
-vi.mock("../repositories/affiliate-ad-repository");
+// Mock the snapshot reader before importing the service
+vi.mock("../repositories/affiliate-ad-snapshot");
 
-import { findActiveAdByCategory, findActiveBannersByCategoryKeys } from "../repositories/affiliate-ad-repository";
+import {
+  readActiveAdByCategoryFromR2,
+  readActiveBannersByCategoryKeysFromR2,
+} from "../repositories/affiliate-ad-snapshot";
 import { resolveAffiliateAd, resolveAffiliateBanners } from "../services/resolve-affiliate-ad";
 
-const mockFindActiveAd = vi.mocked(findActiveAdByCategory);
-const mockFindBanners = vi.mocked(findActiveBannersByCategoryKeys);
+const mockFindActiveAd = vi.mocked(readActiveAdByCategoryFromR2);
+const mockFindBanners = vi.mocked(readActiveBannersByCategoryKeysFromR2);
 
 beforeEach(() => {
   vi.clearAllMocks();
