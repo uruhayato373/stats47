@@ -1,6 +1,6 @@
 ---
-name: sync-articles
-description: .local/r2/blog/ の状態を DB articles テーブルに同期する。Use when user says "記事同期", "sync-articles", "ブログがDBに反映されない". 追加・更新・削除の3方向対応.
+name: import-blog-articles
+description: .local/r2/blog/ の MD ファイルをローカル D1 articles テーブルに取り込む。Use when user says "記事同期", "import-blog-articles", "ブログがDBに反映されない". 追加・更新・削除の3方向対応.
 disable-model-invocation: true
 ---
 

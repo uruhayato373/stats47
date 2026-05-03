@@ -103,7 +103,7 @@ packages/
 | トレンド→Instagram投稿 | blog-editor(discover-trends) → sns-renderer(/render-sns-stills) → instagram-strategist(/push-r2 + /post-instagram) |
 | YouTube動画制作 | youtube-strategist → sns-renderer |
 | bar-chart-race → リール | sns-renderer(/render-bar-chart-race) → instagram-strategist(/post-instagram --type reels) |
-| トレンド→ブログ記事 | blog-editor → db-manager(/sync-articles) |
+| トレンド→ブログ記事 | blog-editor → db-manager(/import-blog-articles) |
 | 週次 PDCA | strategy-advisor |
 | コード変更→デプロイ | code-reviewer → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-pipeline → ui-reviewer |

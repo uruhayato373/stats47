@@ -87,7 +87,7 @@ find .local/r2 -type f -newermt "24 hours ago" 2>/dev/null | head -10
 
 #### ローカル D1 編集セッションの検知
 
-`/register-ranking`・`/populate-*`・`/publish-article`・`/sync-articles`・`/run-correlation-batch` 等
+`/register-ranking`・`/populate-*`・`/publish-article`・`/import-blog-articles`・`/compute-correlation` 等
 ローカル D1 を編集するスキルを使ったセッションでは、`/export-snapshots` を実行したかをユーザーに確認する。
 未実行なら snapshot が古いまま残り `.local/r2/` 差分チェックでも検知できない。
 

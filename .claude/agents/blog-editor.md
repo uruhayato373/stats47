@@ -60,7 +60,7 @@
 docs/21_ブログ記事原稿/<slug>/  ← 下書き作成・チャート生成・レビューはここで行う
         ↓ /publish-article
 .local/r2/blog/<slug>/          ← 公開記事（publishedAt 設定）
-        ↓ /sync-articles
+        ↓ /import-blog-articles
 DB (articles テーブル)           ← サイトに反映
 ```
 

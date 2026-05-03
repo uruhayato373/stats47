@@ -2,7 +2,7 @@
 /**
  * ranking_items / surveys / categories の master snapshot を R2 に書き出す。
  *
- * 通常はバッチ完了時 (/populate-all-rankings, /register-ranking, /sync-articles) に
+ * 通常はバッチ完了時 (/populate-all-rankings, /register-ranking, /import-blog-articles) に
  * 自動で呼ばれるが、手動で最新化したいときにも単独実行できる。
  *
  * Usage:

@@ -29,7 +29,7 @@ user-invocable: false
 | ランキングを登録したい | `/register-ranking` | 「出生率のランキング登録して」 |
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
 | 本番に反映したい | `/export-snapshots` → `/push-r2` | 「本番に反映して」「DBを最新にして」 |
-| 相関分析を実行 | `/run-correlation-batch` | 「相関分析やり直して」 |
+| 相関分析を実行 | `/compute-correlation` | 「相関分析やり直して」 |
 | R2 にアップロード | `/push-r2` | 「R2にpushして」 |
 | AI コンテンツ生成 | `/generate-ai-content` | 「AIコンテンツ作って」 |
 

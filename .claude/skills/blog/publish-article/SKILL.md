@@ -1,6 +1,6 @@
 ---
 name: publish-article
-description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". /sync-articles で DB 反映.
+description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". /import-blog-articles で DB 反映.
 disable-model-invocation: true
 ---
 
@@ -96,7 +96,7 @@ date +%Y-%m-%d
 #### 5-3. `published` フィールドの確認
 
 `published: false` または `published` フィールドがない場合: **そのまま放置**。
-`/sync-articles` 実行時に `publishedAt` の日付に基づいて公開状態が制御されるため、明示的な変更は不要。
+`/import-blog-articles` 実行時に `publishedAt` の日付に基づいて公開状態が制御されるため、明示的な変更は不要。
 
 ### 6. 下書きフォルダを削除する
 
@@ -116,7 +116,7 @@ rm -rf "docs/21_ブログ記事原稿/<slug>"
   publishedAt: <設定した日付>
 
 次のステップ:
-  1. /sync-articles  →  DB を更新（ローカル確認）
+  1. /import-blog-articles  →  DB を更新（ローカル確認）
   2. localhost:3000/blog/<slug> でプレビュー確認
   3. /push-r2        →  リモート R2 へアップロード
   4. /export-snapshots --only blog → /push-r2 で本番反映

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sync-snapshots: ローカル D1 から全 R2 snapshot を順次 export する
+# export-snapshots: ローカル D1 から全 R2 snapshot を順次 export する
 # Phase 0-6 で R2 化した 13 種類の snapshot を 1 コマンドで更新
 
 set -e

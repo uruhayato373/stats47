@@ -10,7 +10,7 @@
 - テーブル操作（CREATE, seed, ALTER TABLE, データ投入）
 - ローカル D1 → R2 snapshot export のオーケストレーション（`/export-snapshots`）
 - ローカル R2 → リモート R2 push（`/push-r2`）
-- 相関分析バッチの実行と R2 snapshot 出力（`/run-correlation-batch`）
+- 相関分析バッチの実行と R2 snapshot 出力（`/compute-correlation`）
 - component_data テーブルへのデータ投入・検証（`/populate-component-data`, `/verify-component-data`）
 
 ## データ配信フロー（重要）
@@ -30,8 +30,8 @@
 | `ranking_items`, `surveys`, `categories` | `snapshots/{ranking-items,surveys,categories}/all.json` | `/register-ranking` | `/export-snapshots`（master） |
 | `ranking_data` (旧) / `observations` (新) | `snapshots/ranking-values/<rk>/<area>/<year>.json` | `/populate-all-rankings`, `/populate-city-rankings` | `/export-snapshots`（ranking-values） |
 | `ranking_ai_content` | `snapshots/ai-content/all.json` | `/generate-ai-content` | `/export-snapshots`（ai-content） |
-| `correlation_analysis` (一時) | `snapshots/correlation/...` | `/run-correlation-batch` | 同 batch 内で export |
-| `articles` + `tags` + `article_tags` | `snapshots/blog/all.json` | `/sync-articles` | `/export-snapshots`（blog） |
+| `correlation_analysis` (一時) | `snapshots/correlation/...` | `/compute-correlation` | 同 batch 内で export |
+| `articles` + `tags` + `article_tags` | `snapshots/blog/all.json` | `/import-blog-articles` | `/export-snapshots`（blog） |
 | `page_components` + 割当 | `snapshots/page-components/all.json` | `/populate-component-data` | `/export-snapshots`（page-components） |
 | `area_profile_rankings` | `snapshots/area-profile/all.json` | （バッチ） | `/export-snapshots`（area-profile） |
 | その他 (affiliate_ads, ranking_page_cards, fishing_ports, ports, port_statistics) | 各 `snapshots/<domain>/...` | 各スキル | `/export-snapshots`（各 task） |
@@ -40,7 +40,7 @@
 
 - ランキングデータの登録（`/register-ranking`）
 - AI コンテンツの生成（`/generate-ai-content`）
-- ブログ記事の DB 反映（`/sync-articles`）
+- ブログ記事の DB 反映（`/import-blog-articles`）
 - note 記事のライフサイクル管理（note-manager エージェント）
 - R2 ストレージ操作（`/push-r2`, `/pull-r2`, `/r2-du`）
 

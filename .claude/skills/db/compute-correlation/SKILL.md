@@ -1,6 +1,6 @@
 ---
-name: run-correlation-batch
-description: 相関分析バッチを実行し R2 snapshot に export する（ローカル D1 には残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
+name: compute-correlation
+description: 相関分析を計算し R2 snapshot に export する（ローカル D1 には残さない）。Use when user says "相関分析", "compute-correlation", "相関バッチ". ドライラン・件数制限対応.
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
 ---
