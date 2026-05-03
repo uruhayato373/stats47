@@ -1,20 +1,16 @@
 import "server-only";
 
 import { getDrizzle, rankingAiContent } from "@stats47/database/server";
-import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 
 import {
   AI_CONTENT_SNAPSHOT_KEY,
   type AiContentSnapshot,
 } from "../types/snapshot";
 
-export interface ExportRankingAiContentSnapshotResult {
-  key: string;
-  count: number;
-  sizeBytes: number;
-  durationMs: number;
-}
+import type { JsonSnapshotResult } from "@stats47/r2-storage/server";
+
+export type ExportRankingAiContentSnapshotResult = JsonSnapshotResult;
 
 export async function exportRankingAiContentSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -30,21 +26,11 @@ export async function exportRankingAiContentSnapshot(
     rows,
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(AI_CONTENT_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
-
-  const durationMs = Date.now() - startedAt;
-  logger.info(
-    { key: result.key, count: rows.length, sizeBytes: result.size, durationMs },
-    "ranking_ai_content snapshot を R2 に保存しました",
-  );
-
-  return {
-    key: result.key,
+  return saveJsonSnapshot({
+    key: AI_CONTENT_SNAPSHOT_KEY,
+    data: snapshot,
     count: rows.length,
-    sizeBytes: result.size,
-    durationMs,
-  };
+    label: "ai_content",
+    startedAt,
+  });
 }

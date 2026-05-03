@@ -11,12 +11,11 @@ import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq } from "drizzle-orm";
 import fs from "fs";
-import path from "path";
 import BetterSqlite3 from "better-sqlite3";
 
 import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-paths";
 import * as schema from "../../../packages/database/src/schema";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 
 import {
   BLOG_SNAPSHOT_KEY,
@@ -40,6 +39,7 @@ function resolveDatabasePath(): string {
 }
 
 async function main() {
+  const startedAt = Date.now();
   const dbPath = resolveDatabasePath();
   console.log(`📁 DB: ${dbPath}`);
 
@@ -104,13 +104,16 @@ async function main() {
     tagMeta,
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(BLOG_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
+  const result = await saveJsonSnapshot({
+    key: BLOG_SNAPSHOT_KEY,
+    data: snapshot,
+    count: snapshot.articles.length,
+    label: "blog",
+    startedAt,
   });
 
   console.log(
-    `✅ blog snapshot: articles=${snapshot.articles.length} tags=${snapshot.tagMeta.length} bytes=${result.size} key=${result.key}`,
+    `✅ blog snapshot: articles=${snapshot.articles.length} tags=${snapshot.tagMeta.length} bytes=${result.sizeBytes} key=${result.key}`,
   );
 
   sqlite.close();

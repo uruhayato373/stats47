@@ -16,3 +16,12 @@ export {
 export {
     getR2BucketUsage
 } from "./services";
+
+export {
+    saveJsonSnapshot
+} from "./snapshot";
+
+export type {
+    JsonSnapshotResult,
+    SaveJsonSnapshotOptions
+} from "./snapshot";

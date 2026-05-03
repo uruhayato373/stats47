@@ -1,8 +1,7 @@
 import "server-only";
 
 import { areaProfileRankings, getDrizzle } from "@stats47/database/server";
-import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
 import {
@@ -10,12 +9,11 @@ import {
   type AreaProfileSnapshot,
 } from "../types/snapshot";
 
-export interface ExportAreaProfileSnapshotResult {
-  key: string;
+import type { JsonSnapshotResult } from "@stats47/r2-storage/server";
+
+export interface ExportAreaProfileSnapshotResult extends JsonSnapshotResult {
   areaCount: number;
   rowCount: number;
-  sizeBytes: number;
-  durationMs: number;
 }
 
 export async function exportAreaProfileSnapshot(
@@ -61,28 +59,17 @@ export async function exportAreaProfileSnapshot(
     byAreaCode,
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(AREA_PROFILE_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
+  const result = await saveJsonSnapshot({
+    key: AREA_PROFILE_SNAPSHOT_KEY,
+    data: snapshot,
+    count: rows.length,
+    label: "area-profile",
+    startedAt,
   });
 
-  const durationMs = Date.now() - startedAt;
-  logger.info(
-    {
-      key: result.key,
-      areaCount: Object.keys(byAreaCode).length,
-      rowCount: rows.length,
-      sizeBytes: result.size,
-      durationMs,
-    },
-    "area-profile snapshot を R2 に保存しました",
-  );
-
   return {
-    key: result.key,
+    ...result,
     areaCount: Object.keys(byAreaCode).length,
     rowCount: rows.length,
-    sizeBytes: result.size,
-    durationMs,
   };
 }

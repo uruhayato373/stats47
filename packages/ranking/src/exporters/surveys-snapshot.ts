@@ -1,8 +1,7 @@
 import "server-only";
 
 import { getDrizzle, surveys } from "@stats47/database/server";
-import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 import { asc } from "drizzle-orm";
 
 import {
@@ -10,12 +9,9 @@ import {
   type SurveysSnapshot,
 } from "../types/snapshot";
 
-export interface ExportSurveysSnapshotResult {
-  key: string;
-  count: number;
-  sizeBytes: number;
-  durationMs: number;
-}
+import type { JsonSnapshotResult } from "@stats47/r2-storage/server";
+
+export type ExportSurveysSnapshotResult = JsonSnapshotResult;
 
 export async function exportSurveysSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -34,26 +30,11 @@ export async function exportSurveysSnapshot(
     surveys: rows,
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(SURVEYS_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
-
-  const durationMs = Date.now() - startedAt;
-  logger.info(
-    {
-      key: result.key,
-      count: rows.length,
-      sizeBytes: result.size,
-      durationMs,
-    },
-    "surveys snapshot を R2 に保存しました",
-  );
-
-  return {
-    key: result.key,
+  return saveJsonSnapshot({
+    key: SURVEYS_SNAPSHOT_KEY,
+    data: snapshot,
     count: rows.length,
-    sizeBytes: result.size,
-    durationMs,
-  };
+    label: "surveys",
+    startedAt,
+  });
 }

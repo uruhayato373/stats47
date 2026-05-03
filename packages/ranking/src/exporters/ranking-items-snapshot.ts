@@ -2,7 +2,7 @@ import "server-only";
 
 import { getDrizzle, rankingItems, rankingTags } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
 import { rankingItemSelection } from "../repositories/shared/ranking-item-selection";
@@ -12,12 +12,10 @@ import {
   type RankingItemsSnapshot,
 } from "../types/snapshot";
 
-export interface ExportRankingItemsSnapshotResult {
-  key: string;
-  count: number;
+import type { JsonSnapshotResult } from "@stats47/r2-storage/server";
+
+export interface ExportRankingItemsSnapshotResult extends JsonSnapshotResult {
   parseFailures: number;
-  sizeBytes: number;
-  durationMs: number;
 }
 
 export async function exportRankingItemsSnapshot(
@@ -73,28 +71,13 @@ export async function exportRankingItemsSnapshot(
     items,
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
+  const result = await saveJsonSnapshot({
+    key: RANKING_ITEMS_SNAPSHOT_KEY,
+    data: snapshot,
+    count: items.length,
+    label: "ranking_items",
+    startedAt,
   });
 
-  const durationMs = Date.now() - startedAt;
-  logger.info(
-    {
-      key: result.key,
-      count: items.length,
-      parseFailures,
-      sizeBytes: result.size,
-      durationMs,
-    },
-    "ranking_items snapshot を R2 に保存しました",
-  );
-
-  return {
-    key: result.key,
-    count: items.length,
-    parseFailures,
-    sizeBytes: result.size,
-    durationMs,
-  };
+  return { ...result, parseFailures };
 }

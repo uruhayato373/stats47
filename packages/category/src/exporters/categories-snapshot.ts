@@ -1,8 +1,7 @@
 import "server-only";
 
 import { categories, getDrizzle } from "@stats47/database/server";
-import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { saveJsonSnapshot } from "@stats47/r2-storage/server";
 import { asc } from "drizzle-orm";
 
 import { convertCategoryFromDB } from "../repositories/convert-category-from-db";
@@ -11,12 +10,9 @@ import {
   type CategoriesSnapshot,
 } from "../types/snapshot";
 
-export interface ExportCategoriesSnapshotResult {
-  key: string;
-  count: number;
-  sizeBytes: number;
-  durationMs: number;
-}
+import type { JsonSnapshotResult } from "@stats47/r2-storage/server";
+
+export type ExportCategoriesSnapshotResult = JsonSnapshotResult;
 
 export async function exportCategoriesSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -35,26 +31,11 @@ export async function exportCategoriesSnapshot(
     categories: rows.map(convertCategoryFromDB),
   };
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(CATEGORIES_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
-
-  const durationMs = Date.now() - startedAt;
-  logger.info(
-    {
-      key: result.key,
-      count: rows.length,
-      sizeBytes: result.size,
-      durationMs,
-    },
-    "categories snapshot を R2 に保存しました",
-  );
-
-  return {
-    key: result.key,
+  return saveJsonSnapshot({
+    key: CATEGORIES_SNAPSHOT_KEY,
+    data: snapshot,
     count: rows.length,
-    sizeBytes: result.size,
-    durationMs,
-  };
+    label: "categories",
+    startedAt,
+  });
 }
