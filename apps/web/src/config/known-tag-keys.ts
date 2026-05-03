@@ -4,8 +4,8 @@
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
  * 更新方法:
- *   - 手動: `cd apps/web && npx tsx scripts/sync-known-keys-from-remote.ts`
- *   - 自動: GitHub Actions `.github/workflows/sync-known-keys.yml` (毎日 JST 07:00)
+ *   `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
+ *   （ローカル D1 を読む。tags 追加後に手動で回す）
  *
  * 最終生成日: 2026-04-26
  * 件数: 327
