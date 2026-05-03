@@ -76,5 +76,5 @@ page_component_assignments.section が IndicatorSet.panelTabs[].label と1文字
 - IndicatorSet の設計・指標選定（theme-designer）
 - e-Stat API からの指標登録（data-pipeline）
 - UI/UX レビュー（ui-reviewer）
-- リモート DB への同期（db-manager: `/sync-remote-d1`）
+- 本番反映（db-manager: `/export-snapshots` → `/push-r2`）
 - 新規 componentType の追加（コード変更 → code-reviewer と協議）

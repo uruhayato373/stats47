@@ -28,7 +28,7 @@ user-invocable: false
 |---|---|---|
 | ランキングを登録したい | `/register-ranking` | 「出生率のランキング登録して」 |
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
-| DB を同期したい | `/pull-remote-d1` / `/sync-remote-d1` | 「DBを最新にして」 |
+| 本番に反映したい | `/export-snapshots` → `/push-r2` | 「本番に反映して」「DBを最新にして」 |
 | 相関分析を実行 | `/run-correlation-batch` | 「相関分析やり直して」 |
 | R2 にアップロード | `/push-r2` | 「R2にpushして」 |
 | AI コンテンツ生成 | `/generate-ai-content` | 「AIコンテンツ作って」 |
@@ -71,7 +71,7 @@ user-invocable: false
 
 例: 「新しいランキングを登録してSNS投稿まで全部やって」
 1. data-pipeline: `/register-ranking`
-2. db-manager: `/sync-remote-d1 --key <key>`
+2. db-manager: `/export-snapshots --only ranking-values` → `/push-r2`
 3. sns-producer: `/generate-all-sns`
 4. sns-renderer: `/render-sns-stills`
 5. sns-producer: `/publish-youtube-normal`

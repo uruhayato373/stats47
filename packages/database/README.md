@@ -194,14 +194,15 @@ await db
 
 ## 環境別データベース
 
-| 環境 | D1 Database Name | 接続方法 | 備考 |
-|------|-----------------|---------|------|
-| Local | `stats47_local_static` | better-sqlite3 | 開発用。自由に破壊・再構築可能 |
-| Staging | `stats47_static` | Cloudflare API | **Production と共有** |
-| Production | `stats47_static` | Cloudflare API | 本番データ |
+| 環境 | D1 binding | データソース | 備考 |
+|------|-----------|--------------|------|
+| Local | `STATS47_STATIC_DB` (`stats47_local_static`) | better-sqlite3 直アクセス | 開発用、source of truth、8.4 GB |
+| Staging | （無し） | （未使用） | staging 環境は現在運用していない |
+| Production | **無し**（Phase 8 で削除） | リモート R2 (`stats47` bucket) | D1 binding なし、R2 snapshot のみを fetch |
 
-> [!WARNING]
-> Staging と Production は **同じ Static DB** を参照。どちらの環境で同期しても本番データが更新される。
+> [!IMPORTANT]
+> 本番ランタイムは D1 を使わない。**ローカル D1 → exporter → R2 snapshot → 本番配信** が唯一の経路。
+> 詳細フローは **`docs/01_技術設計/11_データ基盤設計.md`** を参照。リモート D1 (`stats47_static`) は Phase 10 (2026-04-29) で完全撤廃済み。
 
 ---
 

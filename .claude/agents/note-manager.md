@@ -135,7 +135,7 @@ db.prepare("SELECT ranking_key, title, status FROM note_articles WHERE status !=
 
 - **1日2〜3本上限**（feedback_note_posting_pace.md）。一気投稿 NG
 - 各記事について Step 1-4 を順次実行
-- リモート DB 同期（`/sync-remote-d1`）は全記事完了後に1回
+- 本番反映（`/export-snapshots` → `/push-r2`）は全記事完了後に1回
 
 ## 既存スキルとの連携
 

@@ -45,9 +45,11 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
   "SELECT category_code, COUNT(DISTINCT year_code) as years FROM ranking_data GROUP BY category_code ORDER BY years DESC LIMIT 20;"
 ```
 
-### 4. リモート反映
+### 4. 本番反映
 
-`/sync-remote-d1` でリモート D1 に同期する。
+`/export-snapshots --only ranking-values` で R2 snapshot を出力 → `/push-r2 --prefix snapshots/ranking-values/` でリモート R2 に push。
+
+> リモート D1 は撤廃済 (Phase 10) のため、本番配信は R2 snapshot のみ。詳細: `docs/01_技術設計/11_データ基盤設計.md`
 
 ## オプション
 

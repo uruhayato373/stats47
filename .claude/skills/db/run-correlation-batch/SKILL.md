@@ -1,18 +1,19 @@
 ---
 name: run-correlation-batch
-description: 相関分析バッチを実行しリモート D1 に同期する（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
+description: 相関分析バッチを実行し R2 snapshot に export する（ローカル D1 には残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
 ---
 
-相関分析バッチを実行し、結果をリモート D1 に同期する。
-ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlation_analysis` テーブルを DROP + VACUUM する。
+相関分析バッチを実行し、結果を R2 snapshot として export する。
+ローカル D1 の容量を節約するため、export 完了後にローカルの `correlation_analysis` テーブルを DROP + VACUUM する。
+
+> **設計**: リモート D1 は Phase 10 (2026-04-29) で撤廃済み。本番配信は R2 snapshot のみ。詳細: `docs/01_技術設計/11_データ基盤設計.md`
 
 ## 前提
 
-- ローカル D1 に `ranking_data`, `ranking_items` が存在すること（`/pull-remote-d1` 済み）
-- Cloudflare 認証済み（`wrangler login`）
-- 環境変数: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_STATIC_DATABASE_ID_PRODUCTION`, `CLOUDFLARE_API_TOKEN`
+- ローカル D1 に `ranking_data` (or `observations`), `ranking_items` が存在すること（`/register-ranking` + `/populate-all-rankings` 済み）
+- R2 認証済み（`.env.local` に `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_R2_BUCKET_NAME=stats47`）
 
 ## 手順
 
@@ -26,7 +27,7 @@ disable-model-invocation: true
 ```bash
 node -e "
 const Database = require('better-sqlite3');
-const DB_PATH = '$(pwd)/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
+const DB_PATH = '/Users/minamidaisuke/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
 const db = new Database(DB_PATH);
 const exists = db.prepare(\"SELECT name FROM sqlite_master WHERE type='table' AND name='correlation_analysis'\").get();
 if (!exists) {
@@ -77,19 +78,23 @@ npm run batch --workspace=packages/correlation
 
 完了メッセージを確認してから次のフェーズへ進む。バッチは 20-30 分かかる（約 8-9 万ペア）。
 
-### Phase 3: リモート D1 への同期
+### Phase 3: R2 snapshot への export
 
 **Phase 2 が成功した場合のみ実行する。**
 
-1. リモートの現在行数を確認:
-   ```bash
-   cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-     --command "SELECT COUNT(*) as cnt FROM correlation_analysis;" --json -y
-   ```
+```bash
+npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/export-snapshot.ts
+```
 
-2. `/sync-remote-d1 --table correlation_analysis` を実行してローカルの結果をリモートに push する。
+これにより以下の R2 path に snapshot が出力される:
+- `snapshots/correlation/top-pairs.json`（上位ペア）
+- `snapshots/correlation/stats.json`（統計サマリ）
+- `snapshots/correlation/by-ranking-key/<rk>.json`（key 別、約 1,830 ファイル）
 
-3. 同期後のリモート行数を確認し、ユーザーに報告する。
+push まで一括するには:
+```bash
+/push-r2 --prefix snapshots/correlation/
+```
 
 ### Phase 4: ローカルの correlation_analysis を削除
 
@@ -100,7 +105,7 @@ npm run batch --workspace=packages/correlation
 ```bash
 node -e "
 const Database = require('better-sqlite3');
-const DB_PATH = '$(pwd)/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
+const DB_PATH = '/Users/minamidaisuke/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
 const db = new Database(DB_PATH);
 db.exec('DROP TABLE IF EXISTS correlation_analysis');
 console.log('correlation_analysis テーブルを DROP しました');
@@ -112,19 +117,18 @@ db.close();
 
 ### Phase 5: 検証
 
-リモートの行数とローカル DB のサイズを確認し、ユーザーに報告する。
+R2 snapshot のサイズとローカル DB のサイズを確認し、ユーザーに報告する。
 
 ```bash
-cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-  --command "SELECT COUNT(*) as cnt FROM correlation_analysis;" --json -y
+/r2-du snapshots/correlation/
 ```
 
 ```bash
-ls -lh .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+ls -lh /Users/minamidaisuke/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
 ```
 
 報告内容:
-- リモート行数
+- R2 `snapshots/correlation/` 配下のファイル数とサイズ
 - ローカル DB サイズ（VACUUM 後、~1.8GB 想定）
 
 ## 注意
@@ -132,4 +136,3 @@ ls -lh .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bc
 - バッチは冪等（upsert）。途中で失敗しても再実行可能
 - `--dry-run` の場合は Phase 1 の存在確認 + Phase 2 のドライランのみ実行
 - VACUUM は DB サイズの一時的な倍増が必要。ディスク空き容量を確認すること
-- `pull-remote-d1` はデフォルトで `correlation_analysis` を除外する（`--no-exclude` で上書き可）

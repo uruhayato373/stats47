@@ -96,7 +96,7 @@
 1. `/search-estat` で e-Stat 側の統計 ID を特定
 2. `/register-ranking` でランキングを登録（ranking_items + ranking_data 投入）
 3. `/generate-ai-content` で AI 解説生成
-4. `/sync-remote-d1` でリモートへ反映
+4. `/export-snapshots` → `/push-r2` で本番反映
 5. デプロイ → 21-28 日待機（インデックスから評価まで）
 
 **効果判定の期間**: 21-28 日
