@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
-# export-snapshots: ローカル D1 から全 R2 snapshot を順次 export する
-# Phase 0-6 で R2 化した 13 種類の snapshot を 1 コマンドで更新
+# export-snapshots: ローカル D1 から R2 snapshot を一括 export する
+# 設定は snapshots.config.json を参照（追加・削除はそちらを編集）
 
 set -e
 
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)/.."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)/.."
+CONFIG="$SCRIPT_DIR/snapshots.config.json"
 cd "$PROJECT_ROOT"
 
-# Args
+if [ ! -f "$CONFIG" ]; then
+  echo "❌ 設定ファイルが見つかりません: $CONFIG"
+  exit 1
+fi
+
 ONLY=""
 DRY_RUN=0
 while [[ $# -gt 0 ]]; do
@@ -18,27 +24,19 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Setup CLI で server-only バイパス + .env.local ロード
 TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 
-# (label, script_path) のペアで定義
-declare -a TASKS=(
-  "master|packages/ranking/src/scripts/export-master-snapshots.ts"
-  "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
-  "correlation|packages/correlation/src/scripts/export-snapshot.ts"
-  "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
-  "blog|apps/web/scripts/export-blog-snapshot.ts"
-  "page-components|apps/web/scripts/export-page-components-snapshot.ts"
-  "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
-  "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
-  "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
-  "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
-)
-
-# ranking-values は重いので SKIP_VALUES で制御
-if [ -z "$SKIP_VALUES" ] || [ "$SKIP_VALUES" = "0" ]; then
-  TASKS+=("ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts")
-fi
+# JSON config から (label|script|skipBy) のレコードを抽出
+# macOS bash 3.2 互換のため mapfile を使わず while-read 方式
+ENTRIES=()
+while IFS= read -r line; do
+  ENTRIES+=("$line")
+done < <(node -e "
+  const cfg = require('$CONFIG');
+  for (const s of cfg.snapshots) {
+    process.stdout.write(\`\${s.label}|\${s.script}|\${s.skipBy ?? ''}\n\`);
+  }
+")
 
 run_task() {
   local label="$1"
@@ -60,12 +58,20 @@ run_task() {
 }
 
 FAILED=()
-for task in "${TASKS[@]}"; do
-  label="${task%|*}"
-  script="${task##*|}"
+for entry in "${ENTRIES[@]}"; do
+  IFS='|' read -r label script skipBy <<< "$entry"
 
   if [ -n "$ONLY" ] && [ "$ONLY" != "$label" ]; then
     continue
+  fi
+
+  # skipBy が設定されていて、その環境変数が truthy なら skip
+  if [ -n "$skipBy" ]; then
+    skipVal="${!skipBy:-}"
+    if [ -n "$skipVal" ] && [ "$skipVal" != "0" ]; then
+      echo "⏭  $label skipped ($skipBy=$skipVal)"
+      continue
+    fi
   fi
 
   if ! run_task "$label" "$script"; then

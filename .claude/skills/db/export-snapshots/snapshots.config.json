@@ -1,0 +1,92 @@
+{
+  "$schema": "./snapshots.schema.json",
+  "_doc": "ローカル D1 → R2 snapshot exporter のレジストリ。run.sh と PR-6 freshness-check が共通参照する。",
+  "_keys": {
+    "label": "識別子。--only <label> で個別実行。一意",
+    "script": "実行する tsx スクリプトの相対パス（プロジェクトルート基準）",
+    "r2Prefix": "出力 R2 prefix。snapshot-freshness-check で listFromR2 する対象",
+    "sizeHint": "おおよそのサイズ。大きいものは skip ロジックの対象",
+    "skipBy": "true 時に skip する環境変数名。未指定なら常に実行",
+    "maxAgeDays": "freshness check で stale 判定する日数 (PR-6 で参照)"
+  },
+  "snapshots": [
+    {
+      "label": "master",
+      "script": "packages/ranking/src/scripts/export-master-snapshots.ts",
+      "r2Prefix": "snapshots/ranking-items/",
+      "sizeHint": "small",
+      "maxAgeDays": 7
+    },
+    {
+      "label": "ai-content",
+      "script": "packages/ai-content/src/scripts/export-snapshot.ts",
+      "r2Prefix": "snapshots/ai-content/",
+      "sizeHint": "medium",
+      "maxAgeDays": 14
+    },
+    {
+      "label": "correlation",
+      "script": "packages/correlation/src/scripts/export-snapshot.ts",
+      "r2Prefix": "snapshots/correlation/",
+      "sizeHint": "medium",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "area-profile",
+      "script": "packages/area-profile/src/scripts/export-snapshot.ts",
+      "r2Prefix": "snapshots/area-profile/",
+      "sizeHint": "small",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "blog",
+      "script": "apps/web/scripts/export-blog-snapshot.ts",
+      "r2Prefix": "snapshots/blog/",
+      "sizeHint": "small",
+      "maxAgeDays": 1
+    },
+    {
+      "label": "page-components",
+      "script": "apps/web/scripts/export-page-components-snapshot.ts",
+      "r2Prefix": "snapshots/page-components/",
+      "sizeHint": "small",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "affiliate-ads",
+      "script": "apps/web/scripts/export-affiliate-ads-snapshot.ts",
+      "r2Prefix": "snapshots/affiliate-ads/",
+      "sizeHint": "small",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "ranking-page-cards",
+      "script": "apps/web/scripts/export-ranking-page-cards-snapshot.ts",
+      "r2Prefix": "snapshots/ranking-page-cards/",
+      "sizeHint": "small",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "fishing-ports",
+      "script": "apps/web/scripts/export-fishing-ports-snapshot.ts",
+      "r2Prefix": "snapshots/fishing-ports/",
+      "sizeHint": "small",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "port-statistics",
+      "script": "apps/web/scripts/export-port-statistics-snapshot.ts",
+      "r2Prefix": "snapshots/ports/",
+      "sizeHint": "large",
+      "maxAgeDays": 30
+    },
+    {
+      "label": "ranking-values",
+      "script": "packages/ranking/src/scripts/export-ranking-values-snapshots.ts",
+      "r2Prefix": "snapshots/ranking-values/",
+      "sizeHint": "huge",
+      "skipBy": "SKIP_VALUES",
+      "maxAgeDays": 7
+    }
+  ]
+}

@@ -14,9 +14,12 @@ disable-model-invocation: true
 
 ## 実行する snapshot 一覧
 
+設定ファイル: `.claude/skills/db/export-snapshots/snapshots.config.json`
+（追加・削除はそちらを編集。run.sh はそれを読むだけ）。
+
 | Snapshot | スクリプト | サイズ目安 |
 |---|---|---|
-| ranking-items / surveys / categories | `packages/ranking/src/scripts/export-master-snapshots.ts` | < 1MB |
+| master (ranking-items + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | < 1MB |
 | ai-content | `packages/ai-content/src/scripts/export-snapshot.ts` | ~11MB |
 | correlation by-key | `packages/correlation/src/scripts/export-snapshot.ts` | ~5MB (1,830 files) |
 | ranking-values partition | `packages/ranking/src/scripts/export-ranking-values-snapshots.ts` | ~800MB (29K files、`SKIP_VALUES=1` で skip) |
@@ -27,6 +30,9 @@ disable-model-invocation: true
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | ~16KB |
 | fishing-ports | `apps/web/scripts/export-fishing-ports-snapshot.ts` | ~620KB |
 | ports + port-statistics | `apps/web/scripts/export-port-statistics-snapshot.ts` | ~50MB (715 files) |
+
+各エントリには `r2Prefix` と `maxAgeDays` も含まれる。
+freshness check (PR-6) が同じ config を参照して stale 判定する。
 
 ## 使い方
 

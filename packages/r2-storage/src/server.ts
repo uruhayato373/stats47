@@ -18,10 +18,14 @@ export {
 } from "./services";
 
 export {
-    saveJsonSnapshot
+    saveJsonSnapshot,
+    savePartitionedJsonSnapshots
 } from "./snapshot";
 
 export type {
     JsonSnapshotResult,
-    SaveJsonSnapshotOptions
+    PartitionTask,
+    PartitionedSnapshotResult,
+    SaveJsonSnapshotOptions,
+    SavePartitionedSnapshotsOptions
 } from "./snapshot";
