@@ -92,7 +92,7 @@ const SMALL_TABLES = [
   "affiliate_ads",
   "categories",
   "subcategories",
-  "data_sources",
+  "sources",
   "surveys",
   "ranking_page_cards",
   "ranking_tags",
@@ -102,7 +102,6 @@ const SMALL_TABLES = [
   "area_profile_rankings",
   "ports",
   "fishing_ports",
-  "port_trade_detail",
 ];
 
 const SYSTEM_TABLE_PATTERNS = [/^sqlite_/, /^_cf_/, /^__drizzle/, /^d1_/];
