@@ -1,0 +1,71 @@
+name: 📦 Snapshot Freshness (weekly)
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Sunday 09:00 JST (UTC Sun 00:00)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: snapshot-freshness
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 🔍 Run freshness check (markdown)
+        id: check
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          mkdir -p /tmp/snapshot-report
+          set +e
+          node .claude/scripts/snapshots/check-freshness.mjs --markdown > /tmp/snapshot-report/report.md
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=${EXIT_CODE}" >> $GITHUB_OUTPUT
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f /tmp/snapshot-report/report.md ]; then
+            cat /tmp/snapshot-report/report.md >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 🚨 Open or update issue when stale
+        if: steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          if [ "${{ steps.check.outputs.exit_code }}" = "2" ]; then
+            TITLE="[Snapshot Stale] 💥 R2 list error ${DATE}"
+          else
+            TITLE="[Snapshot Stale] ⚠️ snapshot 古い ${DATE}"
+          fi
+          BODY_FILE=/tmp/snapshot-report/report.md
+
+          EXISTING=$(gh issue list --state open --label snapshot-stale --search "\"[Snapshot Stale]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment"
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "snapshot-stale,auto-generated" \
+              --body-file "$BODY_FILE"
+          fi

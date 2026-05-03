@@ -43,7 +43,7 @@
       "script": "apps/web/scripts/export-blog-snapshot.ts",
       "r2Prefix": "snapshots/blog/",
       "sizeHint": "small",
-      "maxAgeDays": 1
+      "maxAgeDays": 7
     },
     {
       "label": "page-components",
