@@ -237,7 +237,6 @@ gh issue list --label tier-1 --state all
 - `/gsc-improvement` — GSC（SEO 系）
 - `/ga4-improvement` — GA4（行動分析）
 - `/knowledge` — 恒久的な学び
-- `/sync-remote-d1` — D1 push
 - `/r2-du` — R2 使用量
 
 ## 前提

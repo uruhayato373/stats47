@@ -112,7 +112,7 @@ tags[]
 
 ## 広告の追加・更新
 
-ローカル D1 SQLite を直接操作し、`/sync-remote-d1` でリモートに反映する。
+ローカル D1 SQLite を直接操作し、`/export-snapshots --only affiliate-ads` → `/push-r2 --prefix snapshots/affiliate-ads/` で本番反映する。
 
 ### バナー広告の追加例
 

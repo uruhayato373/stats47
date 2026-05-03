@@ -89,4 +89,3 @@ curl -sI https://storage.stats47.jp/<key> | grep -iE 'cf-cache-status'
 
 - `/deploy` — middleware / sitemap / robots 系変更後に Step 7 で本スキルの実行を推奨
 - `packages/r2-storage/src/scripts/purge-cache.ts` — Purge API 実装本体
-- `.claude/skills/db/purge-cache-r2/SKILL.md` — R2 オブジェクト自体の削除（混同しない。こちらはキャッシュのみ）

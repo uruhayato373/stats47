@@ -43,9 +43,14 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
   "SELECT ranking_key, COUNT(*) as rows, COUNT(DISTINCT year_code) as years FROM ranking_data WHERE area_type='city' GROUP BY ranking_key ORDER BY rows DESC;"
 ```
 
-### 4. リモート反映
+### 4. R2 snapshot 反映
 
-`/sync-remote-d1` でリモート D1 に同期する。
+```bash
+/export-snapshots --only ranking-items,ranking-values
+/push-r2 --prefix snapshots/ranking-items/ snapshots/ranking-values/
+```
+
+ローカル D1 → R2 snapshot → リモート R2 の順で本番反映する。リモート D1 は撤廃済み（2026-04-29 Phase 10）のため、このフローが本番反映の唯一経路。
 
 ## オプション
 

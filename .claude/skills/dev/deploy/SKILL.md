@@ -65,40 +65,43 @@ cd apps/web && npx vitest run && cd ../..
 
 全パスしたら Step 2.5 へ進む。
 
-### Step 2.5: ローカル D1 / R2 の差分チェック（sync 忘れ防止）
+### Step 2.5: R2 snapshot / アセットの sync 忘れ防止
 
-ローカルで DB データ（ranking・sns_posts 等）や R2 アセット（記事・画像）を編集していた場合、
-本番デプロイ後にコードと DB/R2 がずれてエラーになる事故を防ぐため、push 前に差分を検知する。
+リモート D1 は撤廃済み（2026-04-29 Phase 10）。本番配信は **R2 snapshot のみ** が経路。
+ローカル D1 を編集した場合は `/export-snapshots` で R2 snapshot を更新してから `/push-r2` で本番反映する必要がある。
+ここでは未 push 変更を検知する。
 
-#### D1 差分チェック
+#### .local/r2/ 差分チェック（変更時刻ベース）
 
-```bash
-npm run diff:d1 --workspace=packages/database
-```
-
-- **出力に「✓ すべて同期済みです。」が含まれる** → D1 は OK。次へ
-- **「アクション (push)」セクションが出る** → ローカルに未 push の変更あり
-  - ユーザーに確認: 「ローカル D1 に未 push の変更が N テーブルあります。`/sync-remote-d1` を先に実行しますか？（y/n）」
-  - **y**: `/sync-remote-d1` を呼んで push 完了を待ってから Step 3 へ
-  - **n**: 理由を記録（例: 「別 PR で同期予定」）、Step 3 へ進む
-
-#### R2 差分チェック（簡易: ローカル変更時刻ベース）
-
-`.local/r2/` 配下に直近 24 時間で変更されたファイルがあれば、push 漏れの可能性がある。
+`.local/r2/` 配下に直近 24 時間で変更されたファイルがあれば、`/export-snapshots` 後に `/push-r2` 漏れがある可能性。
 
 ```bash
-find .local/r2 -type f -newermt "24 hours ago" 2>/dev/null | head -5
+find .local/r2 -type f -newermt "24 hours ago" 2>/dev/null | head -10
 ```
 
 - **出力が空** → R2 は OK。Step 3 へ
 - **ファイルが出る** → 該当ファイルを表示してユーザーに確認:
-  - 「`.local/r2/` に直近 24h で変更された N ファイルがあります（例: XXX）。`/push-r2` で反映しますか？（y/n）」
+  - 「`.local/r2/` に直近 24h で変更された N ファイルがあります（例: XXX）。`/push-r2` で本番反映しますか？（y/n）」
   - **y**: `/push-r2` を呼んで完了を待ってから Step 3 へ
-  - **n**: 理由を記録、Step 3 へ進む
+  - **n**: 理由を記録（例: 「次 PR でまとめて push」）、Step 3 へ進む
+
+#### ローカル D1 編集セッションの検知
+
+`/register-ranking`・`/populate-*`・`/publish-article`・`/sync-articles`・`/run-correlation-batch` 等
+ローカル D1 を編集するスキルを使ったセッションでは、`/export-snapshots` を実行したかをユーザーに確認する。
+未実行なら snapshot が古いまま残り `.local/r2/` 差分チェックでも検知できない。
+
+```bash
+# ローカル D1 の最終更新時刻を確認
+stat -f "%Sm" .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+```
+
+- D1 ファイルが直近で更新されていて、かつ `.local/r2/` 差分が空 → snapshot 未更新の可能性大
+- ユーザーに確認: 「ローカル D1 が更新されていますが R2 snapshot 差分なし。`/export-snapshots` を実行しますか？（y/n）」
 
 **判断のコツ**:
-- コード変更だけで DB/R2 は触っていないセッション → D1/R2 どちらも「✓」になるはず、スキップ可
-- `/register-ranking`・`/populate-*`・`/publish-article`・`/sync-articles` 等を使ったセッション → ほぼ確実に sync が必要
+- コード変更だけで DB/R2 は触っていないセッション → スキップ可
+- ローカル D1 編集系スキルを使ったセッション → ほぼ確実に `/export-snapshots` → `/push-r2` が必要
 - 判断が付かない場合は常に sync を推奨（空同期でも失敗はしない）
 
 ### Step 3: feature ブランチを push + PR 作成
@@ -121,8 +124,7 @@ gh pr create --base develop --head $CURRENT_BRANCH --title "feat: <短い要約>
 - [x] tsc --noEmit pass
 - [x] eslint pass
 - [x] vitest run pass
-- [x] D1 sync OK（ローカルに未 push 差分なし / 別 PR で同期予定）
-- [x] R2 sync OK（.local/r2/ に 24h 以内の未 push ファイルなし）
+- [x] R2 snapshot 反映済み（/export-snapshots → /push-r2、または該当変更なし）
 - [ ] Playwright E2E（該当なら）
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)

@@ -40,19 +40,19 @@ src/schema/*.ts  →  drizzle-kit generate  →  drizzle/*.sql  →  D1/SQLite
 
 ### データ同期フロー（wrangler ベース）
 
-wrangler CLI と better-sqlite3 を使用して D1 間のデータを同期する。seed スクリプトは使わない。
+**リモート D1 は Phase 10 (2026-04-29) で撤廃済み**。ローカル D1 → R2 snapshot → 本番配信が唯一の経路。
 
 ```
-ローカル → リモート: /sync-remote-d1 スキル
-リモート → ローカル: /pull-remote-d1 スキル
+ローカル D1（編集元）── /export-snapshots ──▶ ローカル R2 ── /push-r2 ──▶ リモート R2（本番）
 ```
 
-| 方向 | スキル | 方式 |
+| 操作 | スキル | 用途 |
 |---|---|---|
-| ローカル → リモート | `/sync-remote-d1` | wrangler export + execute |
-| リモート → ローカル | `/pull-remote-d1` | wrangler export + better-sqlite3 |
+| ローカル D1 → R2 snapshot 出力 | `/export-snapshots` | 全 11 exporter を順次実行 |
+| ローカル R2 → リモート R2 push | `/push-r2` | snapshot を本番反映 |
+| リモート R2 → ローカル R2 pull | `/pull-r2` | 本番 snapshot をローカルに取り込み |
 
-詳細は各スキルの SKILL.md を参照。
+詳細は **`docs/01_技術設計/11_データ基盤設計.md`** を参照（唯一の真実源）。
 
 ### 直接操作の例
 
@@ -221,7 +221,7 @@ cat drizzle/meta/*_snapshot.json | grep prevId
 
 ### ローカル D1 が空 / テーブルが存在しない
 
-`/pull-remote-d1` スキルでリモート D1 からローカルにデータを反映する。
+ローカル D1 はメイン PC からファイル転送で取得する（リモート D1 撤廃済みのため pull 不可）。詳細は `docs/01_技術設計/11_データ基盤設計.md` §3.1 / §6 参照。
 
 ### スキーマと DB の不整合
 

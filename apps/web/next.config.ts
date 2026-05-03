@@ -14,7 +14,7 @@ config({ path: path.resolve(__dirname, "../../.env.local") });
 
 // 最初に初期化を呼び出す（開発環境で必須）
 // persist.path を wrangler.toml の persist_to と一致させ、
-// pull:d1 スクリプトと dev server が同じ D1/R2 データを参照するようにする
+// dev server が同じローカル D1/R2 データを参照するようにする
 try {
   initOpenNextCloudflareForDev({
     persist: { path: "../../.local/d1" },

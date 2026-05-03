@@ -25,7 +25,7 @@ const OUT_PATH = path.resolve(__dirname, "../src/config/known-ranking-keys.ts");
 
 if (!fs.existsSync(D1_PATH)) {
   console.error(`[generate-known-ranking-keys] D1 not found at ${D1_PATH}`);
-  console.error("ローカル D1 を作成するには `/pull-remote-d1` を実行してください。");
+  console.error("ローカル D1 はメイン PC からファイル転送で取得してください（リモート D1 撤廃済みのため pull 不可）。");
   process.exit(1);
 }
 

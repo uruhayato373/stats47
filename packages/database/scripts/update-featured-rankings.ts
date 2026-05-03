@@ -306,8 +306,8 @@ async function main() {
 
   const updated = updateTransaction();
   console.log(`\n✅ ${updated} 件の注目ランキングを更新しました。`);
-  console.log(`   → /sync-remote-d1 --key ranking_items でリモートに反映してください。`);
-  console.log(`   → /sync-remote-d1 --table ranking_page_views で PV データも反映できます。`);
+  console.log(`   → /export-snapshots --only ranking-items で R2 snapshot 再生成`);
+  console.log(`   → /push-r2 --prefix snapshots/ranking-items/ で本番反映`);
 
   db.close();
 }

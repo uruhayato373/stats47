@@ -55,12 +55,15 @@ npx tsx packages/database/scripts/update-featured-rankings.ts --dry-run
 6. カテゴリ分散フィルタ適用（同カテゴリ最大 2 枠）
 7. `ranking_items` の `is_featured` / `featured_order` を更新
 
-### Phase 2: リモート反映
+### Phase 2: R2 snapshot 反映
 
 ```bash
-/sync-remote-d1 --key ranking_items
-/sync-remote-d1 --table ranking_page_views
+/export-snapshots --only ranking-items
+/push-r2 --prefix snapshots/ranking-items/
 ```
+
+`ranking_page_views` はローカル D1 のみで保持する内部集計テーブル（本番 reader 非依存）のため snapshot 不要。
+`is_featured` / `featured_order` の変更は ranking-items snapshot 経由で本番反映される。
 
 ## 注意
 
@@ -77,6 +80,7 @@ npx tsx packages/database/scripts/update-featured-rankings.ts --dry-run
 ## 参照
 
 - `/fetch-ga4-data` — GA4 データ手動取得スキル
-- `/sync-remote-d1` — リモート D1 反映
+- `/export-snapshots` — ローカル D1 → R2 snapshot 更新
+- `/push-r2` — ローカル R2 → リモート R2 反映
 - `packages/database/src/schema/ranking_page_views.ts` — テーブルスキーマ
 - `packages/database/scripts/update-featured-rankings.ts` — バッチスクリプト

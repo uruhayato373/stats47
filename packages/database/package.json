@@ -49,10 +49,7 @@
     "test": "vitest run",
     "test:unit": "vitest run --config vitest.config.ts",
     "test:integration": "vitest run --config vitest.config.integration.ts",
-    "articles:sync-from-r2": "tsx scripts/sync-articles-from-r2.ts",
-    "backup:d1": "tsx scripts/backup-d1-to-r2.ts",
-    "pull:d1": "tsx scripts/pull-remote-d1.ts",
-    "diff:d1": "tsx scripts/d1-diff-report.ts"
+    "articles:sync-from-r2": "tsx scripts/sync-articles-from-r2.ts"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250830.0",
