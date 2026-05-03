@@ -170,7 +170,7 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 - **X バナー・プロフィール固定画像・ブランド素材** → `/image-prompt` スキル（`--use-case x-banner` で 3:1 自動適用）
 - **stats47 サイトの OGP** → 本エージェントは触らない（blog-editor / seo-auditor の領分）
 
-詳細は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」、テンプレ一覧は `.claude/skills/image-prompt/reference/catalog.md`。
+テンプレ一覧は `.claude/skills/image-prompt/reference/catalog.md`。Remotion 製 OGP / 動画素材の手順は `apps/remotion/src/features/ogp/README.md` を参照。
 
 ## ⚠️ 予約投稿の安全原則（2026-04-18 事故後の追加ルール）
 

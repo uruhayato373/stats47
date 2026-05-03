@@ -68,10 +68,11 @@ DB (articles テーブル)           ← サイトに反映
 
 ## OGP・画像生成の役割分担
 
-画像を生成するときは `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」に従う:
+このエージェントが扱う画像の方式割当:
 
 - **記事別 OGP（動的タイトル・量産）** → Satori (`apps/web/src/app/**/opengraph-image.tsx`)。ブログ記事公開時に自動生成されるため原則触らない
-- **固定 OGP（凝ったビジュアル）** → Remotion (`apps/remotion/src/features/ogp/BlogOgp*.tsx`)
-- **ブログ記事の hero 画像・装飾素材** → `/image-prompt` スキル（43 テンプレ、`.claude/skills/image-prompt/reference/catalog.md`）
+- **固定 OGP（凝ったビジュアル）** → Remotion (`apps/remotion/src/features/ogp/BlogOgp*.tsx`)。手順は同ディレクトリ `README.md`
+- **ブログ記事の hero 画像・装飾素材** → `/image-prompt`（テンプレ一覧 `.claude/skills/image-prompt/reference/catalog.md`）→ 外部 AI 画像生成
+- **記事内チャート** → `/generate-article-charts`（Remotion ベース）
 
-記事別 OGP を Midjourney 画像で量産しようとしない（119 記事の再生成が破綻する）。
+NG パターン: 記事別 OGP を Midjourney 等の AI 画像で量産しようとしない（記事数が増えると再生成が破綻する）。Satori の CSS サブセットで作れない凝ったビジュアルが必要なケースは Remotion 側に倒す。

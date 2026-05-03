@@ -165,4 +165,8 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - 保存先: `docs/31_note記事原稿/<slug>/header.png`
 - 採用したテンプレ ID は記事 frontmatter に `ogp_template_id: <N>` として記録
 
-Satori / Remotion は note 記事の表紙には使わない（stats47 サイト内の OGP 専用）。詳細は `docs/01_技術設計/ogp_default_design.md` を参照。
+このエージェントが扱う画像の方式割当（補足）:
+
+- **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
+- **note 内チャート** → `/generate-note-charts` または `/generate-kakei-charts`（Remotion ベース）
+- Satori / Remotion 製の OGP コンポネントは stats47 サイト内 OGP 専用で、note 記事には使わない
