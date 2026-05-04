@@ -15,7 +15,7 @@ export type { ComparisonIndicator } from "@/shared/types/comparison";
 interface ComparisonOgpProps {
   areaNameA: string;
   areaNameB: string;
-  indicators: ComparisonIndicator[];
+  metrics: ComparisonIndicator[];
   theme?: ThemeName;
   showGuides?: boolean;
 }
@@ -29,7 +29,7 @@ interface ComparisonOgpProps {
 export const ComparisonOgp: React.FC<ComparisonOgpProps> = ({
   areaNameA,
   areaNameB,
-  indicators,
+  metrics,
   theme = "dark",
   showGuides = false,
 }) => {
@@ -162,7 +162,7 @@ export const ComparisonOgp: React.FC<ComparisonOgpProps> = ({
               gap: SPACING.xs,
             }}
           >
-            {indicators.slice(0, 4).map((indicator) => {
+            {metrics.slice(0, 4).map((indicator) => {
               const aWins = indicator.rankA < indicator.rankB;
               const bWins = indicator.rankB < indicator.rankA;
 

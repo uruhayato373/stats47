@@ -7,7 +7,7 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     "都道府県別の財政力指数・経常収支比率・実質公債費比率・歳出構造をランキングとコロプレス地図で比較。地方税割合、交付税依存度、将来負担比率など主要財政指標の推移を47都道府県のデータで確認できます。",
   category: "economy",
   usage: "theme",
-  indicators: [
+  metrics: [
     { rankingKey: "fiscal-strength-index-prefecture", shortLabel: "財政力指数", role: "primary" },
     { rankingKey: "current-balance-ratio", shortLabel: "経常収支比率", role: "secondary" },
     { rankingKey: "real-public-debt-service-ratio", shortLabel: "実質公債費比率", role: "secondary" },

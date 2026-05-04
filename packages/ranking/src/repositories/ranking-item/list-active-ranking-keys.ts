@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -13,9 +13,9 @@ export async function listActiveRankingKeys(
   try {
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
-      .select({ rankingKey: indicators.key, areaType: indicators.areaType })
-      .from(indicators)
-      .where(and(eq(indicators.areaType, areaType), eq(indicators.isActive, true)));
+      .select({ rankingKey: metrics.key, areaType: metrics.areaType })
+      .from(metrics)
+      .where(and(eq(metrics.areaType, areaType), eq(metrics.isActive, true)));
     return ok(results);
   } catch (error) {
     logger.error({ error, areaType }, "listActiveRankingKeys: failed");

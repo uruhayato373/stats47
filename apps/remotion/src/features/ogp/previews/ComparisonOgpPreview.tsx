@@ -8,7 +8,7 @@ interface ComparisonOgpPreviewProps {
   showGuides?: boolean;
   areaNameA?: string;
   areaNameB?: string;
-  indicators?: ComparisonIndicator[];
+  metrics?: ComparisonIndicator[];
 }
 
 /**
@@ -22,13 +22,13 @@ export const ComparisonOgpPreview: React.FC<ComparisonOgpPreviewProps> = ({
   showGuides = false,
   areaNameA = previewDataComparison.areaNameA,
   areaNameB = previewDataComparison.areaNameB,
-  indicators = previewDataComparison.indicators,
+  metrics = previewDataComparison.metrics,
 }) => {
   return (
     <ComparisonOgp
       areaNameA={areaNameA}
       areaNameB={areaNameB}
-      indicators={indicators}
+      metrics={metrics}
       theme={theme}
       showGuides={showGuides}
     />

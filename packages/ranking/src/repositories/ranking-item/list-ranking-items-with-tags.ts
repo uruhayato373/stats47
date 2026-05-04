@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -22,16 +22,16 @@ export async function listRankingItemsWithTags(
 
     const allTags = await drizzleDb
       .select({
-        rankingKey: indicators.key,
-        areaType: indicators.areaType,
+        rankingKey: metrics.key,
+        areaType: metrics.areaType,
         tagKey: taggings.tagKey,
       })
       .from(taggings)
       .innerJoin(
-        indicators,
-        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+        metrics,
+        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
       )
-      .where(eq(taggings.taggableType, "indicator"));
+      .where(eq(taggings.taggableType, "metric"));
 
     const itemsWithTags = items.map((item) => {
       const itemTags = allTags

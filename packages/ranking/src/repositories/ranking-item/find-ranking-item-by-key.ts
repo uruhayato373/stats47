@@ -1,11 +1,11 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
-import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
-import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
+import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
+import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
 export async function findRankingItemByKey(
   rankingKey: string,
@@ -14,13 +14,13 @@ export async function findRankingItemByKey(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select(indicatorAsRankingItemSelection)
-      .from(indicators)
-      .where(eq(indicators.key, rankingKey))
+      .select(metricAsRankingItemSelection)
+      .from(metrics)
+      .where(eq(metrics.key, rankingKey))
       .limit(1);
 
     if (result.length === 0) return ok(null);
-    return ok(parseIndicatorAsRankingItem(result[0]));
+    return ok(parseMetricAsRankingItem(result[0]));
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));
   }

@@ -2,7 +2,7 @@
  * observations の非正規化列 (entity_name / unit / category_name) をマスタから再同期する
  *
  * 用途:
- * - prefectures.name や indicators.unit を更新したあとに整合性を回復する
+ * - prefectures.name や metrics.unit を更新したあとに整合性を回復する
  * - year_name は e-Stat ラベルそのままを保持するため対象外
  *
  * 実行方法:
@@ -51,12 +51,12 @@ function syncEntityName(): number {
 }
 
 function syncUnit(): number {
-  // observations.unit を indicators.unit と一致させる
+  // observations.unit を metrics.unit と一致させる
   // 注: observations 側が e-Stat の真値を持つケース (126K 行差) はあえて触らない設計だが、
   // マスタを直したい場合は forceUnit=true 等で別途実施
   const sql = `
     UPDATE observations
-    SET unit = (SELECT unit FROM indicators WHERE indicators.id = observations.indicator_id)
+    SET unit = (SELECT unit FROM metrics WHERE metrics.id = observations.metric_id)
     WHERE unit IS NULL
   `;
   if (isDryRun) {

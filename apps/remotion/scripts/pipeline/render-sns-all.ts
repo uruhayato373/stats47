@@ -76,7 +76,7 @@ async function findD1Database(): Promise<string> {
       const db = new Database(dbPath, { readonly: true });
       const result = db
         .prepare(
-          "SELECT name FROM sqlite_master WHERE type='table' AND name='indicators'"
+          "SELECT name FROM sqlite_master WHERE type='table' AND name='metrics'"
         )
         .get();
       db.close();
@@ -86,7 +86,7 @@ async function findD1Database(): Promise<string> {
     }
   }
 
-  throw new Error("indicators テーブルを含む D1 SQLite が見つかりません");
+  throw new Error("metrics テーブルを含む D1 SQLite が見つかりません");
 }
 
 function loadVizConfigMap(dbPath: string): Map<string, VizConfig> {
@@ -94,7 +94,7 @@ function loadVizConfigMap(dbPath: string): Map<string, VizConfig> {
   const rows = db
     .prepare(
       `SELECT key AS ranking_key, visualization_config_json AS visualization_config
-       FROM indicators
+       FROM metrics
        WHERE visualization_config_json IS NOT NULL`
     )
     .all() as Array<{ ranking_key: string; visualization_config: string }>;

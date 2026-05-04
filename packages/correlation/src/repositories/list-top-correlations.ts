@@ -3,7 +3,7 @@ import "server-only";
 import {
   correlations,
   getDrizzle,
-  indicators,
+  metrics,
 } from "@stats47/database/server";
 import { aliasedTable, and, eq, sql } from "drizzle-orm";
 import {
@@ -35,8 +35,8 @@ export async function listTopCorrelations(
 ): Promise<TopCorrelation[]> {
   const d = db ?? getDrizzle();
 
-  const ix = aliasedTable(indicators, "ix");
-  const iy = aliasedTable(indicators, "iy");
+  const ix = aliasedTable(metrics, "ix");
+  const iy = aliasedTable(metrics, "iy");
 
   const effectiveAbsR = sql<number>`MIN(
     COALESCE(ABS(${correlations.partialRPopulation}), ABS(${correlations.pearsonR})),
@@ -61,8 +61,8 @@ export async function listTopCorrelations(
       normalizationBasisY: iy.normalizationBasis,
     })
     .from(correlations)
-    .innerJoin(ix, and(eq(correlations.indicatorXId, ix.id), eq(ix.areaType, "prefecture")))
-    .innerJoin(iy, and(eq(correlations.indicatorYId, iy.id), eq(iy.areaType, "prefecture")))
+    .innerJoin(ix, and(eq(correlations.metricXId, ix.id), eq(ix.areaType, "prefecture")))
+    .innerJoin(iy, and(eq(correlations.metricYId, iy.id), eq(iy.areaType, "prefecture")))
     .where(sql`ABS(${correlations.pearsonR}) < 0.99`)
     .orderBy(sql`${effectiveAbsR} DESC`)
     .limit(limit * 10);

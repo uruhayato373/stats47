@@ -118,7 +118,7 @@ export interface IndicatorSet {
   /** 用途（theme / compare / both） */
   usage: IndicatorSetUsage;
   /** 含まれる指標（表示順） */
-  indicators: IndicatorEntry[];
+  metrics: IndicatorEntry[];
   // チャートは chart_definitions テーブルで管理（Single Source of Truth）
   // IndicatorSet にはチャート定義を含めない
   /** パネルタブ（指標をサブグループ化する場合） */

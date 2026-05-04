@@ -3,7 +3,7 @@ import "server-only";
 import {
   categories,
   getDrizzle,
-  indicators,
+  metrics,
   taggings,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
@@ -11,8 +11,8 @@ import { err, ok, type Result } from "@stats47/types";
 import { and, asc, desc, eq, sql } from "drizzle-orm";
 
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
-import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
-import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
+import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
+import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
 export async function findRankingItemsByTag(
   tagKey: string,
@@ -22,26 +22,26 @@ export async function findRankingItemsByTag(
     const drizzleDb = db ?? getDrizzle();
 
     const rows = await drizzleDb
-      .select(indicatorAsRankingItemSelection)
+      .select(metricAsRankingItemSelection)
       .from(taggings)
       .innerJoin(
-        indicators,
-        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+        metrics,
+        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
       )
       .where(
         and(
-          eq(taggings.taggableType, "indicator"),
+          eq(taggings.taggableType, "metric"),
           eq(taggings.tagKey, tagKey),
-          eq(indicators.isActive, true)
+          eq(metrics.isActive, true)
         )
       )
-      .orderBy(asc(indicators.featuredOrder), desc(indicators.updatedAt));
+      .orderBy(asc(metrics.featuredOrder), desc(metrics.updatedAt));
 
     if (rows.length === 0) {
       return err(new Error(`No ranking items found for tagKey: ${tagKey}`));
     }
 
-    const items = rows.map((row) => parseIndicatorAsRankingItem(row));
+    const items = rows.map((row) => parseMetricAsRankingItem(row));
 
     const firstItem = items[0];
     let categoryName = firstItem.categoryKey ?? "";

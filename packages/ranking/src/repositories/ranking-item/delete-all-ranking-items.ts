@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 
 export async function deleteAllRankingItems(
@@ -8,7 +8,7 @@ export async function deleteAllRankingItems(
 ): Promise<Result<number, Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    const result = await drizzleDb.delete(indicators).returning();
+    const result = await drizzleDb.delete(metrics).returning();
     return ok(result.length);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));

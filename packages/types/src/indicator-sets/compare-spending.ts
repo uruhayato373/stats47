@@ -6,7 +6,7 @@ export const COMPARE_SPENDING_SET: IndicatorSet = {
   description: "住民一人あたり教育費・福祉費等の歳出構造で2地域を比較",
   category: "finance",
   usage: "compare",
-  indicators: [
+  metrics: [
     { rankingKey: "per-capita-education-expenditure-pref-municipal", shortLabel: "教育費/人", role: "primary" },
     { rankingKey: "per-capita-welfare-expenditure-pref-municipal", shortLabel: "民生費/人", role: "secondary" },
     { rankingKey: "personnel-expenditure-ratio-pref-finance", shortLabel: "人件費率", role: "secondary" },

@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * KSJ データから都道府県別施設数を集計し、indicators + observations に登録
+ * KSJ データから都道府県別施設数を集計し、metrics + observations に登録
  */
 
 import * as fs from "node:fs";
@@ -335,7 +335,7 @@ async function main() {
   const now = new Date().toISOString();
 
   const insertItem = db.prepare(`
-    INSERT INTO indicators (
+    INSERT INTO metrics (
       key, area_type, title, unit, category_key, source_id,
       source_config_json, is_active, is_featured, created_at, updated_at
     ) VALUES (?, 'prefecture', ?, ?, ?, 'mlit_ksj', ?, 1, 0, ?, ?)
@@ -343,18 +343,18 @@ async function main() {
 
   const insertData = db.prepare(`
     INSERT OR REPLACE INTO observations (
-      indicator_id, entity_type, entity_code, entity_name,
+      metric_id, entity_type, entity_code, entity_name,
       year_code, year_name, category_name,
       value_numeric, unit, rank, created_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const checkExisting = db.prepare(
-    "SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'"
+    "SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'"
   );
 
   const findIndicatorId = db.prepare(
-    "SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'"
+    "SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'"
   );
 
   let created = 0;
@@ -382,7 +382,7 @@ async function main() {
       description: def.description || def.rankingName,
     });
 
-    // indicators 登録
+    // metrics 登録
     insertItem.run(
       def.rankingKey,
       def.rankingName,
@@ -398,7 +398,7 @@ async function main() {
       console.warn(`[WARN] indicator が登録されませんでした: ${def.rankingKey}`);
       continue;
     }
-    const indicatorId = indicatorRow.id;
+    const metricId = indicatorRow.id;
 
     // observations 登録（順位付き）
     const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
@@ -410,7 +410,7 @@ async function main() {
       const areaCode = prefCode + "000";
       const areaName = PREF_NAMES[prefCode] || "";
       insertData.run(
-        indicatorId,
+        metricId,
         "prefecture",
         areaCode,
         areaName,

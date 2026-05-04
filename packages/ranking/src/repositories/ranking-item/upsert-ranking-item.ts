@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { sql } from "drizzle-orm";
@@ -28,18 +28,16 @@ export async function upsertRankingItem(
       valueDisplayConfigJson: JSON.stringify(item.valueDisplay),
       visualizationConfigJson: JSON.stringify(item.visualization),
       calculationConfigJson: JSON.stringify(item.calculation),
-      latestYear: item.latestYear ? JSON.stringify(item.latestYear) : null,
-      availableYearsJson: item.availableYears ? JSON.stringify(item.availableYears) : null,
       createdAt: sql`CURRENT_TIMESTAMP`,
       updatedAt: sql`CURRENT_TIMESTAMP`,
     };
 
     const drizzleDb = db ?? getDrizzle();
     await drizzleDb
-      .insert(indicators)
+      .insert(metrics)
       .values(dbItem)
       .onConflictDoUpdate({
-        target: [indicators.key, indicators.areaType],
+        target: [metrics.key, metrics.areaType],
         set: {
           title: dbItem.title,
           unit: dbItem.unit,
@@ -51,8 +49,6 @@ export async function upsertRankingItem(
           valueDisplayConfigJson: dbItem.valueDisplayConfigJson,
           visualizationConfigJson: dbItem.visualizationConfigJson,
           calculationConfigJson: dbItem.calculationConfigJson,
-          latestYear: dbItem.latestYear,
-          availableYearsJson: dbItem.availableYearsJson,
           updatedAt: sql`CURRENT_TIMESTAMP`,
           isFeatured: dbItem.isFeatured,
           isActive: dbItem.isActive,

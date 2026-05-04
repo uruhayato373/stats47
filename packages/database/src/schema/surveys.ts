@@ -4,7 +4,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 /**
  * surveys テーブル — 旧 ranking_items.ts に同居していた survey マスタ。
  *
- * indicators.surveyId が参照するため本ファイルに残す。
+ * metrics.surveyId が参照するため本ファイルに残す。
  * (旧 ranking_items / ranking_data / ranking_tags は PR-5 で DROP した)
  */
 export const surveys = sqliteTable("surveys", {

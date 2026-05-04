@@ -130,10 +130,10 @@ export function getRankingKeys(
   set: IndicatorSet,
   excludeContext = false,
 ): string[] {
-  const indicators = excludeContext
-    ? set.indicators.filter((i) => i.role !== "context")
-    : set.indicators;
-  return indicators.map((i) => i.rankingKey);
+  const metrics = excludeContext
+    ? set.metrics.filter((i) => i.role !== "context")
+    : set.metrics;
+  return metrics.map((i) => i.rankingKey);
 }
 
 /**
@@ -141,6 +141,6 @@ export function getRankingKeys(
  * primary がなければ先頭の指標を返す
  */
 export function getPrimaryRankingKey(set: IndicatorSet): string {
-  const primary = set.indicators.find((i) => i.role === "primary");
-  return primary?.rankingKey ?? set.indicators[0].rankingKey;
+  const primary = set.metrics.find((i) => i.role === "primary");
+  return primary?.rankingKey ?? set.metrics[0].rankingKey;
 }

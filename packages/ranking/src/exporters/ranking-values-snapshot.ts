@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
@@ -44,7 +44,7 @@ async function processIndicator(
   const rows = await drizzleDb
     .select()
     .from(observations)
-    .where(eq(observations.indicatorId, indicator.id));
+    .where(eq(observations.metricId, indicator.id));
 
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
   for (const row of rows) {
@@ -143,12 +143,12 @@ export async function exportRankingValuesSnapshots(
 
   const indicatorRowsRaw = options.rankingKeyFilter
     ? await drizzleDb
-        .select({ id: indicators.id, key: indicators.key })
-        .from(indicators)
-        .where(eq(indicators.key, options.rankingKeyFilter))
+        .select({ id: metrics.id, key: metrics.key })
+        .from(metrics)
+        .where(eq(metrics.key, options.rankingKeyFilter))
     : await drizzleDb
-        .select({ id: indicators.id, key: indicators.key })
-        .from(indicators);
+        .select({ id: metrics.id, key: metrics.key })
+        .from(metrics);
 
   logger.info(
     { indicatorCount: indicatorRowsRaw.length, dryRun, parallelism },
@@ -169,7 +169,7 @@ export async function exportRankingValuesSnapshots(
     } catch (error) {
       logger.error(
         {
-          indicatorId: ind.id,
+          metricId: ind.id,
           indicatorKey: ind.key,
           error: error instanceof Error ? error.message : String(error),
         },

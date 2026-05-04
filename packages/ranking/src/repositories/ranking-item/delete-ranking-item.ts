@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -14,11 +14,11 @@ export async function deleteRankingItem(
   try {
     const drizzleDb = db ?? getDrizzle();
     await drizzleDb
-      .delete(indicators)
+      .delete(metrics)
       .where(
         and(
-          eq(indicators.key, rankingKey),
-          eq(indicators.areaType, areaType)
+          eq(metrics.key, rankingKey),
+          eq(metrics.areaType, areaType)
         )
       );
     return ok(true);

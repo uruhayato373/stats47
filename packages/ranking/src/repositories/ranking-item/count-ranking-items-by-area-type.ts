@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { count, eq } from "drizzle-orm";
@@ -13,8 +13,8 @@ export async function countRankingItemsByAreaType(
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
       .select({ count: count() })
-      .from(indicators)
-      .where(eq(indicators.areaType, areaType));
+      .from(metrics)
+      .where(eq(metrics.areaType, areaType));
     return ok(result[0]?.count || 0);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));

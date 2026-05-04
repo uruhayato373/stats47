@@ -1,6 +1,6 @@
 import "server-only";
 
-import { correlations, getDrizzle, indicators } from "@stats47/database/server";
+import { correlations, getDrizzle, metrics } from "@stats47/database/server";
 import { aliasedTable, and, asc, desc, eq, sql } from "drizzle-orm";
 
 export interface ListCorrelationAnalysisOptions {
@@ -28,7 +28,7 @@ export interface CorrelationAnalysisWithTitles {
 }
 
 /**
- * 相関分析結果の一覧を取得 (PR-5: 新 correlations 経由 + indicators JOIN)
+ * 相関分析結果の一覧を取得 (PR-5: 新 correlations 経由 + metrics JOIN)
  */
 export async function listCorrelationAnalysis(
   options?: ListCorrelationAnalysisOptions
@@ -44,8 +44,8 @@ export async function listCorrelationAnalysis(
         ? desc(correlations.pearsonR)
         : desc(correlations.calculatedAt);
 
-  const ix = aliasedTable(indicators, "ix");
-  const iy = aliasedTable(indicators, "iy");
+  const ix = aliasedTable(metrics, "ix");
+  const iy = aliasedTable(metrics, "iy");
 
   const rows = await db
     .select({
@@ -65,8 +65,8 @@ export async function listCorrelationAnalysis(
       titleY: sql<string | null>`${iy.title}`,
     })
     .from(correlations)
-    .innerJoin(ix, and(eq(correlations.indicatorXId, ix.id), eq(ix.areaType, "prefecture")))
-    .innerJoin(iy, and(eq(correlations.indicatorYId, iy.id), eq(iy.areaType, "prefecture")))
+    .innerJoin(ix, and(eq(correlations.metricXId, ix.id), eq(ix.areaType, "prefecture")))
+    .innerJoin(iy, and(eq(correlations.metricYId, iy.id), eq(iy.areaType, "prefecture")))
     .orderBy(orderByColumn)
     .limit(limit)
     .offset(offset);

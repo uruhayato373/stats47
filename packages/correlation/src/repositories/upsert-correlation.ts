@@ -1,6 +1,6 @@
 import "server-only";
 
-import { correlations, getDrizzle, indicators } from "@stats47/database/server";
+import { correlations, getDrizzle, metrics } from "@stats47/database/server";
 import { and, eq, inArray } from "drizzle-orm";
 
 import type { ScatterDataPoint } from "../utils/calculate-pearson";
@@ -21,9 +21,9 @@ export interface UpsertCorrelationParams {
 /**
  * 相関分析結果を 1 件 upsert する (PR-5: 新 correlations 経由)
  *
- * 入力は旧 (rankingKeyX, rankingKeyY) ベース。indicators (prefecture) を
- * ルックアップして indicator_id を取得し、新 correlations に UPSERT する。
- * UNIQUE: (indicator_x_id, indicator_y_id, year_x, year_y)
+ * 入力は旧 (rankingKeyX, rankingKeyY) ベース。metrics (prefecture) を
+ * ルックアップして metric_id を取得し、新 correlations に UPSERT する。
+ * UNIQUE: (metric_x_id, metric_y_id, year_x, year_y)
  */
 export async function upsertCorrelation(
   params: UpsertCorrelationParams
@@ -32,12 +32,12 @@ export async function upsertCorrelation(
   const calculatedAt = new Date().toISOString();
 
   const indRows = await db
-    .select({ id: indicators.id, key: indicators.key })
-    .from(indicators)
+    .select({ id: metrics.id, key: metrics.key })
+    .from(metrics)
     .where(
       and(
-        inArray(indicators.key, [params.rankingKeyX, params.rankingKeyY]),
-        eq(indicators.areaType, "prefecture")
+        inArray(metrics.key, [params.rankingKeyX, params.rankingKeyY]),
+        eq(metrics.areaType, "prefecture")
       )
     );
   const idByKey = new Map(indRows.map((r) => [r.key, r.id]));
@@ -56,8 +56,8 @@ export async function upsertCorrelation(
   await db
     .insert(correlations)
     .values({
-      indicatorXId: xId,
-      indicatorYId: yId,
+      metricXId: xId,
+      metricYId: yId,
       yearX,
       yearY,
       pearsonR: params.pearsonR,
@@ -70,8 +70,8 @@ export async function upsertCorrelation(
     })
     .onConflictDoUpdate({
       target: [
-        correlations.indicatorXId,
-        correlations.indicatorYId,
+        correlations.metricXId,
+        correlations.metricYId,
         correlations.yearX,
         correlations.yearY,
       ],

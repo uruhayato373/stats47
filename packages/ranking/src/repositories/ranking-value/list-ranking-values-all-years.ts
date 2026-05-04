@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -26,18 +26,18 @@ export async function listRankingValuesAllYears(
         areaName: observations.entityName,
         yearCode: observations.yearCode,
         yearName: observations.yearName,
-        categoryCode: indicators.key,
+        categoryCode: metrics.key,
         categoryName: observations.categoryName,
         value: observations.valueNumeric,
         unit: observations.unit,
         rank: observations.rank,
       })
       .from(observations)
-      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
+      .innerJoin(metrics, eq(observations.metricId, metrics.id))
       .where(
         and(
-          eq(indicators.key, rankingKey),
-          eq(indicators.areaType, areaType),
+          eq(metrics.key, rankingKey),
+          eq(metrics.areaType, areaType),
           ne(observations.entityCode, "00000")
         )
       );

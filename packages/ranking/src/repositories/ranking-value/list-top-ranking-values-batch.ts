@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -33,18 +33,18 @@ export async function listTopRankingValuesBatch(
         areaName: observations.entityName,
         yearCode: observations.yearCode,
         yearName: observations.yearName,
-        categoryCode: indicators.key,
+        categoryCode: metrics.key,
         categoryName: observations.categoryName,
         value: observations.valueNumeric,
         unit: observations.unit,
         rank: observations.rank,
       })
       .from(observations)
-      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
+      .innerJoin(metrics, eq(observations.metricId, metrics.id))
       .where(
         and(
-          inArray(indicators.key, rankingKeys),
-          eq(indicators.areaType, areaType),
+          inArray(metrics.key, rankingKeys),
+          eq(metrics.areaType, areaType),
           eq(observations.rank, 1)
         )
       );

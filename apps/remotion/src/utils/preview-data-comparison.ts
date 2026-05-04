@@ -6,7 +6,7 @@ export interface ComparisonPreviewData {
   areaCodeA: string;
   areaCodeB: string;
   hookText: string;
-  indicators: ComparisonIndicator[];
+  metrics: ComparisonIndicator[];
 }
 
 export const previewDataComparison: ComparisonPreviewData = {
@@ -15,7 +15,7 @@ export const previewDataComparison: ComparisonPreviewData = {
   areaCodeA: "27000",
   areaCodeB: "23000",
   hookText: "経済力どっちが上？",
-  indicators: [
+  metrics: [
     { label: "県内総生産額", unit: "百万円", valueA: 41320372, valueB: 40585984, rankA: 2, rankB: 3 },
     { label: "1人当たり県民所得", unit: "千円", valueA: 3013, valueB: 3527, rankA: 13, rankB: 2 },
     { label: "製造品出荷額等（1事業所あたり）", unit: "百万円", valueA: 1039.7, valueB: 3134.8, rankA: 37, rankB: 4 },

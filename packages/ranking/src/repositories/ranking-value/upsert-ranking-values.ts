@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, eq, sql } from "drizzle-orm";
@@ -20,13 +20,13 @@ export async function upsertRankingValues(
     const drizzleDb = db ?? getDrizzle();
 
     const indicatorRow = await drizzleDb
-      .select({ id: indicators.id, unit: indicators.unit })
-      .from(indicators)
+      .select({ id: metrics.id, unit: metrics.unit })
+      .from(metrics)
       .where(
         and(
-          eq(indicators.key, rankingKey),
+          eq(metrics.key, rankingKey),
           eq(
-            indicators.areaType,
+            metrics.areaType,
             areaType as "prefecture" | "city" | "national" | "port" | "fishing_port"
           )
         )
@@ -38,7 +38,7 @@ export async function upsertRankingValues(
         new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
       );
     }
-    const indicatorId = indicatorRow[0].id;
+    const metricId = indicatorRow[0].id;
     const indicatorUnit = indicatorRow[0].unit;
 
     const entityType = (areaType === "national" ? "prefecture" : areaType) as
@@ -48,7 +48,7 @@ export async function upsertRankingValues(
       | "fishing_port";
 
     const rows = values.map((v) => ({
-      indicatorId,
+      metricId,
       entityType: (v.areaType === "national"
         ? "prefecture"
         : v.areaType ?? entityType) as
@@ -71,7 +71,7 @@ export async function upsertRankingValues(
       .values(rows)
       .onConflictDoUpdate({
         target: [
-          observations.indicatorId,
+          observations.metricId,
           observations.entityType,
           observations.entityCode,
           observations.yearCode,

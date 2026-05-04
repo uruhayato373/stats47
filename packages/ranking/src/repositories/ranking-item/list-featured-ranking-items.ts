@@ -1,12 +1,12 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
-import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
-import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
+import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
+import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
 export async function listFeaturedRankingItems(
   limit: number = 20,
@@ -15,14 +15,14 @@ export async function listFeaturedRankingItems(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select(indicatorAsRankingItemSelection)
-      .from(indicators)
-      .where(and(eq(indicators.isFeatured, true), eq(indicators.areaType, "prefecture")))
-      .orderBy(asc(indicators.featuredOrder))
+      .select(metricAsRankingItemSelection)
+      .from(metrics)
+      .where(and(eq(metrics.isFeatured, true), eq(metrics.areaType, "prefecture")))
+      .orderBy(asc(metrics.featuredOrder))
       .limit(limit);
 
     const items = result
-      .map((row) => { try { return parseIndicatorAsRankingItem(row); } catch { return null; } })
+      .map((row) => { try { return parseMetricAsRankingItem(row); } catch { return null; } })
       .filter((item): item is RankingItem => item !== null);
 
     return ok(items);

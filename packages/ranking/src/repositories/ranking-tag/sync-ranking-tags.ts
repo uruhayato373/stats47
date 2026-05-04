@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, eq } from "drizzle-orm";
@@ -15,13 +15,13 @@ export async function syncRankingTags(
     const drizzleDb = db ?? getDrizzle();
 
     const indicatorRow = await drizzleDb
-      .select({ id: indicators.id })
-      .from(indicators)
+      .select({ id: metrics.id })
+      .from(metrics)
       .where(
         and(
-          eq(indicators.key, rankingKey),
+          eq(metrics.key, rankingKey),
           eq(
-            indicators.areaType,
+            metrics.areaType,
             areaType as "prefecture" | "city" | "national" | "port" | "fishing_port"
           )
         )
@@ -33,22 +33,22 @@ export async function syncRankingTags(
         new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
       );
     }
-    const indicatorId = String(indicatorRow[0].id);
+    const metricId = String(indicatorRow[0].id);
 
     await drizzleDb
       .delete(taggings)
       .where(
         and(
-          eq(taggings.taggableType, "indicator"),
-          eq(taggings.taggableId, indicatorId)
+          eq(taggings.taggableType, "metric"),
+          eq(taggings.taggableId, metricId)
         )
       );
 
     if (tagKeys.length > 0) {
       await drizzleDb.insert(taggings).values(
         tagKeys.map((tagKey) => ({
-          taggableType: "indicator" as const,
-          taggableId: indicatorId,
+          taggableType: "metric" as const,
+          taggableId: metricId,
           tagKey,
           createdAt: new Date().toISOString(),
         }))
