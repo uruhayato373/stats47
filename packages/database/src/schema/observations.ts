@@ -37,7 +37,6 @@ export const observations = sqliteTable(
     yearCode: text("year_code").notNull(),
     value: real("value"),
     rank: integer("rank"),
-    percentile: real("percentile"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
