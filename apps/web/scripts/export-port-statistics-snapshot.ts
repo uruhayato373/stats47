@@ -1,5 +1,5 @@
 /**
- * ports + port_statistics を R2 snapshot 化する (Phase 6)。
+ * ports + observations(entity_type=port) を R2 snapshot 化する (Phase 6, PR-6)。
  *
  * Outputs:
  *   - snapshots/ports/all.json (全 port メタ)
@@ -108,8 +108,37 @@ async function main() {
   });
   console.log(`✅ ports: ${portsMeta.length} 件`);
 
-  // 2. port_statistics 全件読み込み + group by year / portCode
-  const allStats = await db.select().from(schema.portStatistics);
+  // 2. observations(entity_type=port) を indicators JOIN で読み込み (PR-6)
+  // indicators.key 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
+  const { eq, and } = await import("drizzle-orm");
+  const observationRows = await db
+    .select({
+      portCode: schema.observations.entityCode,
+      year: schema.observations.yearCode,
+      indicatorKey: schema.indicators.key,
+      value: schema.observations.valueNumeric,
+      unit: schema.observations.unit,
+    })
+    .from(schema.observations)
+    .innerJoin(
+      schema.indicators,
+      and(
+        eq(schema.observations.indicatorId, schema.indicators.id),
+        eq(schema.indicators.areaType, "port")
+      )
+    )
+    .where(eq(schema.observations.entityType, "port"));
+
+  // R2 snapshot は旧 metric_key 形式 (snake_case) を維持する → 後方互換
+  const allStats = observationRows
+    .filter((r) => r.value !== null)
+    .map((r) => ({
+      portCode: r.portCode,
+      year: r.year,
+      metricKey: r.indicatorKey.replace(/^port-/, "").replace(/-/g, "_"),
+      value: Number(r.value),
+      unit: r.unit ?? "",
+    }));
 
   const byYear = new Map<string, PortStatRow[]>();
   const byPort = new Map<string, Array<{ year: string; metricKey: string; value: number; unit: string }>>();
