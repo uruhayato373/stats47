@@ -1,5 +1,7 @@
 /**
- * ranking_page_cards を R2 snapshot 化する (Phase 6)。
+ * ranking page cards を R2 snapshot 化する (Phase 6, PR-7)。
+ *
+ * データソース: page_components + page_component_assignments(page_type='ranking') 経由 (PR-7 で統合)
  *
  * Usage:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
@@ -12,13 +14,13 @@ import { and, asc, eq } from "drizzle-orm";
 import fs from "fs";
 import BetterSqlite3 from "better-sqlite3";
 
-import type { RankingPageCard } from "../../../packages/database/src/schema";
 import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-paths";
 import * as schema from "../../../packages/database/src/schema";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import {
   RANKING_PAGE_CARDS_SNAPSHOT_KEY,
+  type RankingPageCard,
   type RankingPageCardsSnapshot,
 } from "../src/features/ranking/components/RankingPageCards/snapshot-reader";
 
@@ -40,17 +42,49 @@ async function main() {
   const sqlite = new BetterSqlite3(dbPath, { readonly: true });
   const db = drizzle(sqlite, { schema });
 
+  // page_component_assignments(page_type='ranking') + page_components JOIN
   const rows = await db
-    .select()
-    .from(schema.rankingPageCards)
-    .where(eq(schema.rankingPageCards.isActive, true))
-    .orderBy(asc(schema.rankingPageCards.displayOrder));
-  void and; // unused
+    .select({
+      id: schema.pageComponents.componentKey,
+      rankingKey: schema.pageComponentAssignments.pageKey,
+      componentType: schema.pageComponents.componentType,
+      title: schema.pageComponents.title,
+      componentProps: schema.pageComponents.componentProps,
+      displayOrder: schema.pageComponentAssignments.sortOrder,
+      isActive: schema.pageComponents.isActive,
+      createdAt: schema.pageComponents.createdAt,
+      updatedAt: schema.pageComponents.updatedAt,
+    })
+    .from(schema.pageComponentAssignments)
+    .innerJoin(
+      schema.pageComponents,
+      eq(schema.pageComponents.componentKey, schema.pageComponentAssignments.componentKey)
+    )
+    .where(
+      and(
+        eq(schema.pageComponentAssignments.pageType, "ranking"),
+        eq(schema.pageComponents.isActive, true)
+      )
+    )
+    .orderBy(
+      asc(schema.pageComponentAssignments.pageKey),
+      asc(schema.pageComponentAssignments.sortOrder)
+    );
 
   const byRankingKey: Record<string, RankingPageCard[]> = {};
-  for (const card of rows) {
-    if (!byRankingKey[card.rankingKey]) byRankingKey[card.rankingKey] = [];
-    byRankingKey[card.rankingKey].push(card);
+  for (const row of rows) {
+    if (!byRankingKey[row.rankingKey]) byRankingKey[row.rankingKey] = [];
+    byRankingKey[row.rankingKey].push({
+      id: row.id,
+      rankingKey: row.rankingKey,
+      componentType: row.componentType,
+      title: row.title,
+      componentProps: row.componentProps,
+      displayOrder: row.displayOrder ?? 0,
+      isActive: row.isActive ?? true,
+      createdAt: row.createdAt ?? null,
+      updatedAt: row.updatedAt ?? null,
+    });
   }
 
   const snapshot: RankingPageCardsSnapshot = {
