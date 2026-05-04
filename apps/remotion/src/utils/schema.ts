@@ -105,7 +105,7 @@ export const AreaProfileOgpSchema = CommonPreviewSchema.extend({
 export const ComparisonOgpSchema = CommonPreviewSchema.extend({
   areaNameA: z.string().optional(),
   areaNameB: z.string().optional(),
-  indicators: z.array(z.object({
+  metrics: z.array(z.object({
     label: z.string(),
     unit: z.string(),
     valueA: z.number(),
@@ -158,7 +158,7 @@ export const ComparisonCarouselSchema = CommonPreviewSchema.extend({
   slide: z.enum(["cover", "detail", "cta"]).optional(),
   areaNameA: z.string().optional(),
   areaNameB: z.string().optional(),
-  indicators: z.array(z.object({
+  metrics: z.array(z.object({
     label: z.string(),
     unit: z.string(),
     valueA: z.number(),
@@ -242,7 +242,7 @@ export const ComparisonShortSchema = z.object({
   areaNameB: z.string().optional(),
   areaCodeA: z.string().optional(),
   areaCodeB: z.string().optional(),
-  indicators: z.array(z.object({
+  metrics: z.array(z.object({
     label: z.string(),
     unit: z.string(),
     valueA: z.number(),

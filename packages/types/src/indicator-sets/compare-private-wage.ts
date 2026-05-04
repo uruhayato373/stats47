@@ -7,7 +7,7 @@ export const COMPARE_PRIVATE_WAGE_SET: IndicatorSet = {
     "民間の所定内給与・初任給・男女格差・パート時給・可処分所得で2地域の待遇を比較",
   category: "economy",
   usage: "compare",
-  indicators: [
+  metrics: [
     { rankingKey: "disposable-income-worker-households", shortLabel: "可処分所得", role: "primary" },
     { rankingKey: "scheduled-salary-male", shortLabel: "所定内給与(男)", role: "secondary" },
     { rankingKey: "gender-wage-gap", shortLabel: "男女賃金格差", role: "secondary" },

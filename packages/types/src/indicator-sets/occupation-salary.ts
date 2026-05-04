@@ -7,7 +7,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     "都道府県別の職業別平均年収を地図とランキングで比較。医師・看護師・保育士・SE・トラック運転手など47職種の年収データを47都道府県で確認できます。賃金構造基本統計調査（厚生労働省）に基づく2010年〜2023年の推移データ。",
   category: "economy",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 医療・福祉
     { rankingKey: "doctor-annual-income", shortLabel: "医師", role: "primary" },
     { rankingKey: "nurse-annual-income", shortLabel: "看護師", role: "secondary" },

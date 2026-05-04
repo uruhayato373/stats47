@@ -9,24 +9,24 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { indicators } from "./indicators";
+import { metrics } from "./metrics";
 
 /**
- * 相関分析 — 旧 correlation_analysis の置換 (PR-5)
+ * 相関分析
  *
- * ranking_key_x / ranking_key_y (TEXT) → indicator_x_id / indicator_y_id (INTEGER FK)
- * 旧テーブルは area_type なし (全データ prefecture 想定) → indicator FK が prefecture 用
+ * metric_x_id × metric_y_id の組み合わせで相関係数 (Pearson r) と部分相関を保持。
+ * 旧テーブルは prefecture 想定 (entity_type 列なし)。
  */
 export const correlations = sqliteTable(
   "correlations",
   {
     id: integer("id").primaryKey({ autoIncrement: true }),
-    indicatorXId: integer("indicator_x_id")
+    metricXId: integer("metric_x_id")
       .notNull()
-      .references(() => indicators.id),
-    indicatorYId: integer("indicator_y_id")
+      .references(() => metrics.id),
+    metricYId: integer("metric_y_id")
       .notNull()
-      .references(() => indicators.id),
+      .references(() => metrics.id),
     yearX: text("year_x").notNull(),
     yearY: text("year_y").notNull(),
     pearsonR: real("pearson_r").notNull(),
@@ -39,13 +39,13 @@ export const correlations = sqliteTable(
   },
   (table) => ({
     unq: uniqueIndex("idx_correlations_pair_year").on(
-      table.indicatorXId,
-      table.indicatorYId,
+      table.metricXId,
+      table.metricYId,
       table.yearX,
       table.yearY
     ),
-    indicatorXIdx: index("idx_correlations_indicator_x").on(table.indicatorXId),
-    indicatorYIdx: index("idx_correlations_indicator_y").on(table.indicatorYId),
+    metricXIdx: index("idx_correlations_metric_x").on(table.metricXId),
+    metricYIdx: index("idx_correlations_metric_y").on(table.metricYId),
     yearXIdx: index("idx_correlations_year_x").on(table.yearX),
     yearYIdx: index("idx_correlations_year_y").on(table.yearY),
   })

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { areaProfiles, getDrizzle, indicators } from "@stats47/database/server";
+import { areaProfiles, getDrizzle, metrics } from "@stats47/database/server";
 import { and, asc, eq } from "drizzle-orm";
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
 
@@ -21,11 +21,11 @@ export async function getAreaProfileByCode(
       valueNumeric: areaProfiles.valueNumeric,
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
-      rankingKey: indicators.key,
-      indicator: indicators.title,
+      rankingKey: metrics.key,
+      indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(indicators, eq(areaProfiles.indicatorId, indicators.id))
+    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
     .where(
       and(
         eq(areaProfiles.entityType, "prefecture"),

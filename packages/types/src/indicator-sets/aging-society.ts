@@ -7,7 +7,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     "都道府県別の合計特殊出生率・高齢化率・人口増減率を地図とランキングで比較。少子高齢化の実態を47都道府県のデータで確認できます。",
   category: "demographics",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 高齢化
     { rankingKey: "ratio-65-plus", shortLabel: "高齢化率", role: "primary" },
     { rankingKey: "aging-index", shortLabel: "老年化指数", role: "secondary" },

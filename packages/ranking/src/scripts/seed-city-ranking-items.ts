@@ -1,9 +1,9 @@
 #!/usr/bin/env tsx
 /**
- * 市区町村 indicators 一括登録スクリプト
+ * 市区町村 metrics 一括登録スクリプト
  *
  * 既存の都道府県 SSDS ランキング (area_type='prefecture') を参照し、
- * 対応する市区町村版 (area_type='city') を自動生成して indicators に INSERT する。
+ * 対応する市区町村版 (area_type='city') を自動生成して metrics に INSERT する。
  *
  * statsDataId のマッピング:
  *   都道府県 000001xxxx → 市区町村 000002xxxx
@@ -62,7 +62,7 @@ function main() {
            value_display_config_json, visualization_config_json, calculation_config_json,
            category_key, survey_id, group_key, additional_categories_json,
            seo_title, seo_description
-    FROM indicators
+    FROM metrics
     WHERE area_type = 'prefecture'
       AND is_active = 1
       AND source_config_json LIKE '%000001%'
@@ -76,7 +76,7 @@ function main() {
   console.log(`都道府県 SSDS ランキング（非計算型）: ${prefItems.length}件`);
 
   const existingCityKeys = new Set(
-    (db.prepare(`SELECT key FROM indicators WHERE area_type = 'city'`).all() as { key: string }[])
+    (db.prepare(`SELECT key FROM metrics WHERE area_type = 'city'`).all() as { key: string }[])
       .map(r => r.key)
   );
   console.log(`既存 city keys: ${existingCityKeys.size}件`);
@@ -122,7 +122,7 @@ function main() {
   }
 
   const insertStmt = db.prepare(`
-    INSERT INTO indicators (
+    INSERT INTO metrics (
       key, area_type, title, unit, subtitle, demographic_attr,
       normalization_basis, description, source_id, source_config_json,
       value_display_config_json, visualization_config_json, calculation_config_json,
@@ -157,10 +157,10 @@ function main() {
   });
 
   const inserted = insertMany(toInsert);
-  console.log(`\n${inserted}件を indicators (area_type='city') に INSERT しました`);
+  console.log(`\n${inserted}件を metrics (area_type='city') に INSERT しました`);
 
-  const total = db.prepare(`SELECT COUNT(*) as c FROM indicators WHERE area_type = 'city' AND is_active = 1`).get() as { c: number };
-  console.log(`アクティブ city indicators 合計: ${total.c}件`);
+  const total = db.prepare(`SELECT COUNT(*) as c FROM metrics WHERE area_type = 'city' AND is_active = 1`).get() as { c: number };
+  console.log(`アクティブ city metrics 合計: ${total.c}件`);
 
   db.close();
 }

@@ -6,7 +6,7 @@ export const COMPARE_DEBT_SET: IndicatorSet = {
   description: "将来負担比率・実質公債費比率等の債務指標で2地域を比較",
   category: "finance",
   usage: "compare",
-  indicators: [
+  metrics: [
     { rankingKey: "future-burden-ratio", shortLabel: "将来負担比率", role: "primary" },
     { rankingKey: "real-public-debt-service-ratio", shortLabel: "実質公債費比率", role: "secondary" },
     { rankingKey: "current-balance-ratio", shortLabel: "経常収支比率", role: "secondary" },

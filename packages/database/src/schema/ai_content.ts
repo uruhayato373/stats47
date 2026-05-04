@@ -7,21 +7,20 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { indicators } from "./indicators";
+import { metrics } from "./metrics";
 
 /**
- * AI 生成コンテンツ — 旧 ranking_ai_content の置換 (PR-5)
+ * AI 生成コンテンツ
  *
- * PK は indicator_id 単独。旧 (ranking_key, area_type) 複合 PK は indicator_id が
- * (key, area_type) を一意に表すため不要。1,943 行全て area_type='prefecture' だった
- * ため、PK 変更時のデータ衝突なし。
+ * PK は metric_id 単独 (旧 ranking_ai_content の (ranking_key, area_type) 複合 PK は
+ * metric_id が (key, area_type) を一意に表すため不要)。
  */
 export const aiContent = sqliteTable(
   "ai_content",
   {
-    indicatorId: integer("indicator_id")
+    metricId: integer("metric_id")
       .primaryKey()
-      .references(() => indicators.id),
+      .references(() => metrics.id),
     yearCode: text("year_code").notNull(),
     faq: text("faq"),
     regionalAnalysis: text("regional_analysis"),

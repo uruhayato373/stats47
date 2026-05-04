@@ -46,7 +46,7 @@ async function findD1Database(): Promise<string> {
       const db = new Database(dbPath, { readonly: true });
       const result = db
         .prepare(
-          "SELECT name FROM sqlite_master WHERE type='table' AND name='indicators'"
+          "SELECT name FROM sqlite_master WHERE type='table' AND name='metrics'"
         )
         .get();
       db.close();
@@ -56,7 +56,7 @@ async function findD1Database(): Promise<string> {
     }
   }
 
-  throw new Error("indicators テーブルを含む D1 SQLite が見つかりません");
+  throw new Error("metrics テーブルを含む D1 SQLite が見つかりません");
 }
 
 interface RankingItemRow {
@@ -106,7 +106,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
       `SELECT id, key AS ranking_key, title, subtitle, unit, latest_year,
               demographic_attr, normalization_basis,
               visualization_config_json AS visualization_config
-       FROM indicators
+       FROM metrics
        WHERE area_type = 'prefecture' AND is_active = 1
        ORDER BY key`
     )
@@ -117,7 +117,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
             value_numeric AS value, rank
      FROM observations
      WHERE entity_type = 'prefecture'
-       AND indicator_id = ?
+       AND metric_id = ?
        AND year_code = ?
      ORDER BY rank ASC`
   );

@@ -17,7 +17,7 @@
 
 import "dotenv/config";
 import { listRankingItems } from "@stats47/ranking/server";
-import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
 import { and, eq } from "drizzle-orm";
 
 const AREA_TYPE = "prefecture";
@@ -43,11 +43,11 @@ async function main() {
   // DB から既存レコードの rankingKey 一覧を取得（1クエリ）
   const db = getDrizzle();
   const existingRows = await db
-    .select({ rankingKey: indicators.key })
+    .select({ rankingKey: metrics.key })
     .from(aiContent)
     .innerJoin(
-      indicators,
-      and(eq(indicators.id, aiContent.indicatorId), eq(indicators.areaType, "prefecture"))
+      metrics,
+      and(eq(metrics.id, aiContent.metricId), eq(metrics.areaType, "prefecture"))
     );
   const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 

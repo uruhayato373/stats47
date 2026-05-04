@@ -6,7 +6,7 @@ export const COMPARE_FISCAL_SET: IndicatorSet = {
   description: "財政力指数・経常収支比率等の財政健全性指標で2地域を比較",
   category: "finance",
   usage: "compare",
-  indicators: [
+  metrics: [
     { rankingKey: "fiscal-strength-index-prefecture", shortLabel: "財政力指数", role: "primary" },
     { rankingKey: "current-balance-ratio", shortLabel: "経常収支比率", role: "secondary" },
     { rankingKey: "real-public-debt-service-ratio", shortLabel: "実質公債費比率", role: "secondary" },

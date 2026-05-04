@@ -1,6 +1,6 @@
 import "server-only";
 
-import { areaProfiles, getDrizzle, indicators } from "@stats47/database/server";
+import { areaProfiles, getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
@@ -20,10 +20,10 @@ export interface ExportAreaProfileSnapshotResult {
 }
 
 /**
- * area_profiles + indicators を JOIN して旧 AreaProfileSnapshot 形式の R2 に出す (PR-5)
+ * area_profiles + metrics を JOIN して旧 AreaProfileSnapshot 形式の R2 に出す (PR-5)
  *
  * snapshot の rankingKey / indicator(=title) は frontend reader との後方互換性のため
- * indicators から復元して出力する。
+ * metrics から復元して出力する。
  */
 export async function exportAreaProfileSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -41,11 +41,11 @@ export async function exportAreaProfileSnapshot(
       valueNumeric: areaProfiles.valueNumeric,
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
-      rankingKey: indicators.key,
-      indicator: indicators.title,
+      rankingKey: metrics.key,
+      indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(indicators, eq(areaProfiles.indicatorId, indicators.id))
+    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
     .where(eq(areaProfiles.entityType, "prefecture"));
 
   const byAreaCode: Record<string, AreaProfileData> = {};

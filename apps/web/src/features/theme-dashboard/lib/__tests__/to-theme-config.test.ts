@@ -8,7 +8,7 @@ const makeIndicatorSet = (overrides: Partial<IndicatorSet> = {}): IndicatorSet =
   key: "test-theme",
   title: "テストテーマ",
   description: "テーマの説明",
-  indicators: [
+  metrics: [
     { rankingKey: "primary-key", shortLabel: "主指標", role: "primary" },
     { rankingKey: "secondary-key", shortLabel: "副指標", role: "secondary" },
     { rankingKey: "context-key", shortLabel: "コンテキスト", role: "context" },
@@ -47,10 +47,10 @@ describe("toThemeConfig", () => {
 
   it("primary がない場合は先頭の指標を defaultRankingKey にする", () => {
     const set = makeIndicatorSet({
-      indicators: [
+      metrics: [
         { rankingKey: "first-key", shortLabel: "1番目", role: "secondary" },
         { rankingKey: "second-key", shortLabel: "2番目", role: "secondary" },
-      ] as IndicatorSet["indicators"],
+      ] as IndicatorSet["metrics"],
     });
     const config = toThemeConfig(set);
 

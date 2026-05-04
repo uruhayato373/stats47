@@ -7,7 +7,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     "都道府県別の出生率・死亡率・高齢化率・転入超過率を地図・チャート・ランキングで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
   category: "demographics",
   usage: "theme",
-  indicators: [
+  metrics: [
     { rankingKey: "crude-birth-rate", shortLabel: "粗出生率", role: "primary" },
     { rankingKey: "total-fertility-rate", shortLabel: "合計特殊出生率", role: "secondary" },
     { rankingKey: "crude-death-rate", shortLabel: "死亡率", role: "secondary" },

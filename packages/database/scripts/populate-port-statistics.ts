@@ -333,24 +333,24 @@ const knownPorts = new Map<string, string>(
 );
 console.log(`既知の港: ${knownPorts.size} 件`);
 
-// metric_key → indicator_id の lookup map (3 層 schema、PR-6)
-// indicators.key は "port-{metric_key}" 形式 (e.g. ships_total → port-ships-total)
+// metric_key → metric_id の lookup map (3 層 schema、PR-6)
+// metrics.key は "port-{metric_key}" 形式 (e.g. ships_total → port-ships-total)
 const metricToIndicatorId = new Map<string, number>();
 for (const r of db
-  .prepare("SELECT id, key FROM indicators WHERE area_type = 'port'")
+  .prepare("SELECT id, key FROM metrics WHERE area_type = 'port'")
   .all() as { id: number; key: string }[]) {
   const metricKey = r.key.replace(/^port-/, "").replace(/-/g, "_");
   metricToIndicatorId.set(metricKey, r.id);
 }
-console.log(`port indicators: ${metricToIndicatorId.size} 件`);
+console.log(`port metrics: ${metricToIndicatorId.size} 件`);
 
 const upsertStmt = db.prepare(`
   INSERT INTO observations (
-    indicator_id, entity_type, entity_code, entity_name,
+    metric_id, entity_type, entity_code, entity_name,
     year_code, year_name, unit, value_numeric
   )
   VALUES (?, 'port', ?, ?, ?, ?, ?, ?)
-  ON CONFLICT (indicator_id, entity_type, entity_code, year_code) DO UPDATE SET
+  ON CONFLICT (metric_id, entity_type, entity_code, year_code) DO UPDATE SET
     value_numeric = excluded.value_numeric,
     entity_name = excluded.entity_name,
     year_name = excluded.year_name,
@@ -409,14 +409,14 @@ function isIndividualPort(code: string): boolean {
 async function processMetric(metric: MetricDef): Promise<number> {
   console.log(`\n--- ${metric.key}: ${metric.label} ---`);
 
-  const indicatorId = metricToIndicatorId.get(metric.key);
-  if (!indicatorId) {
+  const metricId = metricToIndicatorId.get(metric.key);
+  if (!metricId) {
     console.warn(`  WARN: indicator が未登録 (key=port-${metric.key.replace(/_/g, "-")})、スキップ`);
     return 0;
   }
 
   if (metric.needsAggregation) {
-    return processAggregateMetric(metric, indicatorId);
+    return processAggregateMetric(metric, metricId);
   }
 
   const rawData = await fetchEstatData(metric.statsDataId, metric.filters);
@@ -439,7 +439,7 @@ async function processMetric(metric: MetricDef): Promise<number> {
       const year = timeCode.substring(0, 4);
 
       if (!isDryRun) {
-        upsertStmt.run(indicatorId, portCode, portName, year, `${year}年`, metric.unit, value);
+        upsertStmt.run(metricId, portCode, portName, year, `${year}年`, metric.unit, value);
       }
       inserted++;
     }
@@ -453,7 +453,7 @@ async function processMetric(metric: MetricDef): Promise<number> {
 /** 同一 port+year の複数行を合算して投入 */
 async function processAggregateMetric(
   metric: MetricDef,
-  indicatorId: number
+  metricId: number
 ): Promise<number> {
   const portDimKey = `@${metric.portDimension}`;
 
@@ -485,7 +485,7 @@ async function processAggregateMetric(
       const portName = knownPorts.get(portCode);
       if (!portName) continue;
       if (!isDryRun) {
-        upsertStmt.run(indicatorId, portCode, portName, year, `${year}年`, metric.unit, value);
+        upsertStmt.run(metricId, portCode, portName, year, `${year}年`, metric.unit, value);
       }
       inserted++;
     }
@@ -524,7 +524,7 @@ async function main() {
     .prepare(
       `SELECT i.key, COUNT(*) as cnt
        FROM observations o
-       INNER JOIN indicators i ON i.id = o.indicator_id
+       INNER JOIN metrics i ON i.id = o.metric_id
        WHERE i.area_type = 'port'
        GROUP BY i.key
        ORDER BY i.key`

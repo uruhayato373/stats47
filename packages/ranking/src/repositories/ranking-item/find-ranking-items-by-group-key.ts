@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -23,21 +23,21 @@ export async function findRankingItemsByGroupKey(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select({
-        rankingKey: indicators.key,
-        title: indicators.title,
-        subtitle: indicators.subtitle,
-        unit: indicators.unit,
-        normalizationBasis: indicators.normalizationBasis,
+        rankingKey: metrics.key,
+        title: metrics.title,
+        subtitle: metrics.subtitle,
+        unit: metrics.unit,
+        normalizationBasis: metrics.normalizationBasis,
       })
-      .from(indicators)
+      .from(metrics)
       .where(
         and(
-          eq(indicators.groupKey, groupKey),
-          eq(indicators.areaType, areaType),
-          eq(indicators.isActive, true)
+          eq(metrics.groupKey, groupKey),
+          eq(metrics.areaType, areaType),
+          eq(metrics.isActive, true)
         )
       )
-      .orderBy(asc(indicators.featuredOrder));
+      .orderBy(asc(metrics.featuredOrder));
 
     return ok(rows);
   } catch (error) {

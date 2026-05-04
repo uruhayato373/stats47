@@ -23,7 +23,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     "都道府県別の漁獲量・養殖収獲量・漁業就業者数・漁業産出額・漁港数を地図とランキングで比較。北海道が全国漁獲量の約2割を占める一方、半世紀で就業者は7割減・漁獲量はほぼ半減。「捕る漁業」から「育てる漁業」へのシフトを47都道府県のデータで確認できます。",
   category: "industry",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 漁獲（捕る漁業）
     { rankingKey: "fish-catch", shortLabel: "漁獲量", role: "primary" },
     { rankingKey: "marine-fishery-catch", shortLabel: "海面漁獲量", role: "secondary" },

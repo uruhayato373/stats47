@@ -7,7 +7,7 @@ export const REAL_INCOME_SET: IndicatorSet = {
     "都道府県別の名目収入を消費者物価地域差指数で補正し、実質的な購買力を比較。可処分所得・県民所得・家賃控除後手残りで「本当に豊かな県」を47都道府県のデータで確認できます。",
   category: "economy",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 名目収入
     { rankingKey: "disposable-income-worker-households", shortLabel: "可処分所得", role: "primary" },
     { rankingKey: "actual-income-worker-households-per-month", shortLabel: "実収入", role: "secondary" },

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
 import { and, eq } from "drizzle-orm";
 
 import type { AiContentSnapshotRow } from "../types/snapshot";
@@ -8,7 +8,7 @@ import type { AiContentSnapshotRow } from "../types/snapshot";
 /**
  * AI コンテンツを (rankingKey, areaType) で取得 (PR-5: 新 ai_content 経由)
  *
- * indicators をルックアップして indicator_id を取得し、新 ai_content から
+ * metrics をルックアップして metric_id を取得し、新 ai_content から
  * SELECT する。出力 shape は AiContentSnapshotRow (R2 snapshot と同じ shape)。
  */
 export async function findRankingAiContent(
@@ -20,8 +20,8 @@ export async function findRankingAiContent(
 
   const rows = await drizzleDb
     .select({
-      rankingKey: indicators.key,
-      areaType: indicators.areaType,
+      rankingKey: metrics.key,
+      areaType: metrics.areaType,
       faq: aiContent.faq,
       regionalAnalysis: aiContent.regionalAnalysis,
       insights: aiContent.insights,
@@ -38,11 +38,11 @@ export async function findRankingAiContent(
       updatedAt: aiContent.updatedAt,
     })
     .from(aiContent)
-    .innerJoin(indicators, eq(aiContent.indicatorId, indicators.id))
+    .innerJoin(metrics, eq(aiContent.metricId, metrics.id))
     .where(
       and(
-        eq(indicators.key, rankingKey),
-        eq(indicators.areaType, areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
+        eq(metrics.key, rankingKey),
+        eq(metrics.areaType, areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
       )
     )
     .limit(1);

@@ -14,7 +14,7 @@ interface ComparisonDetailSlideProps {
   areaNameA: string;
   areaNameB: string;
   /** このスライドで表示する指標（最大5件） */
-  indicators: ComparisonIndicator[];
+  metrics: ComparisonIndicator[];
   /** スライド番号（2枚目以降） */
   slideIndex?: number;
   theme?: ThemeName;
@@ -28,7 +28,7 @@ interface ComparisonDetailSlideProps {
 export const ComparisonDetailSlide: React.FC<ComparisonDetailSlideProps> = ({
   areaNameA,
   areaNameB,
-  indicators,
+  metrics,
   theme = "dark",
 }) => {
   const colors = COLOR_SCHEMES[theme];
@@ -100,7 +100,7 @@ export const ComparisonDetailSlide: React.FC<ComparisonDetailSlideProps> = ({
           gap: SPACING.sm,
         }}
       >
-        {indicators.slice(0, 5).map((indicator) => {
+        {metrics.slice(0, 5).map((indicator) => {
           const aWins = indicator.rankA < indicator.rankB;
           const bWins = indicator.rankB < indicator.rankA;
 

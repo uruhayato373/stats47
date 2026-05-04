@@ -14,19 +14,19 @@ import { tags } from "./tags";
  * Polymorphic タグ M:N — 旧 article_tags + indicator_tags の統合 (2026-05-04)
  *
  * taggable_type で entity 種別を区別、taggable_id で対象 ID (TEXT で article slug /
- * indicator id 両対応) を保持。
+ * metric id 両対応) を保持。
  *
  * - article: taggable_id = articles.slug
- * - indicator: taggable_id = CAST(indicators.id AS TEXT)
+ * - metric:  taggable_id = CAST(metrics.id AS TEXT)
  *
- * FK CASCADE は polymorphic のため articles(slug) / indicators(id) には張れない。
+ * FK CASCADE は polymorphic のため articles(slug) / metrics(id) には張れない。
  * tag_key への FK のみ維持。entity 削除時はアプリ側で明示的に taggings から DELETE する。
  */
 export const taggings = sqliteTable(
   "taggings",
   {
     taggableType: text("taggable_type", {
-      enum: ["article", "indicator"],
+      enum: ["article", "metric"],
     }).notNull(),
     taggableId: text("taggable_id").notNull(),
     tagKey: text("tag_key")
@@ -40,7 +40,7 @@ export const taggings = sqliteTable(
     }),
     typeCheck: check(
       "taggings_type_check",
-      sql`${table.taggableType} IN ('article', 'indicator')`
+      sql`${table.taggableType} IN ('article', 'metric')`
     ),
     tagKeyIdx: index("idx_taggings_tag_key").on(table.tagKey),
     entityIdx: index("idx_taggings_entity").on(

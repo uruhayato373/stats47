@@ -3,7 +3,7 @@ import "server-only";
 import {
   correlations,
   getDrizzle,
-  indicators,
+  metrics,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
@@ -35,17 +35,17 @@ export async function findHighlyCorrelated(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    // まず rankingKey から indicator_id を取得 (prefecture 仮定)
+    // まず rankingKey から metric_id を取得 (prefecture 仮定)
     const subjectRows = await drizzleDb
-      .select({ id: indicators.id })
-      .from(indicators)
-      .where(and(eq(indicators.key, rankingKey), eq(indicators.areaType, "prefecture")))
+      .select({ id: metrics.id })
+      .from(metrics)
+      .where(and(eq(metrics.key, rankingKey), eq(metrics.areaType, "prefecture")))
       .limit(1);
     const subjectId = subjectRows[0]?.id;
     if (!subjectId) return ok([]);
 
-    const ix = aliasedTable(indicators, "ix");
-    const iy = aliasedTable(indicators, "iy");
+    const ix = aliasedTable(metrics, "ix");
+    const iy = aliasedTable(metrics, "iy");
 
     const FETCH_MULTIPLIER = 3;
     const rawRows = await drizzleDb
@@ -60,12 +60,12 @@ export async function findHighlyCorrelated(
         scatterData: correlations.scatterDataJson,
       })
       .from(correlations)
-      .innerJoin(ix, eq(correlations.indicatorXId, ix.id))
-      .innerJoin(iy, eq(correlations.indicatorYId, iy.id))
+      .innerJoin(ix, eq(correlations.metricXId, ix.id))
+      .innerJoin(iy, eq(correlations.metricYId, iy.id))
       .where(
         or(
-          eq(correlations.indicatorXId, subjectId),
-          eq(correlations.indicatorYId, subjectId)
+          eq(correlations.metricXId, subjectId),
+          eq(correlations.metricYId, subjectId)
         )
       )
       .orderBy(sql`ABS(${correlations.pearsonR}) DESC`)
@@ -88,14 +88,14 @@ export async function findHighlyCorrelated(
 
     const itemRows = await drizzleDb
       .select({
-        ranking_key: indicators.key,
-        title: indicators.title,
-        subtitle: indicators.subtitle,
-        unit: indicators.unit,
+        ranking_key: metrics.key,
+        title: metrics.title,
+        subtitle: metrics.subtitle,
+        unit: metrics.unit,
       })
-      .from(indicators)
+      .from(metrics)
       .where(
-        and(inArray(indicators.key, counterpartKeys), eq(indicators.areaType, "prefecture"))
+        and(inArray(metrics.key, counterpartKeys), eq(metrics.areaType, "prefecture"))
       );
 
     const itemMap = new Map(itemRows.map((item) => [item.ranking_key, item]));

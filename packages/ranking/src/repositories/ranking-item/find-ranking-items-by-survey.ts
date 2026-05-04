@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, desc, eq } from "drizzle-orm";
@@ -16,22 +16,22 @@ export async function findRankingItemsBySurvey(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select({
-        rankingKey: indicators.key,
-        areaType: indicators.areaType,
-        title: indicators.title,
-        subtitle: indicators.subtitle,
-        unit: indicators.unit,
+        rankingKey: metrics.key,
+        areaType: metrics.areaType,
+        title: metrics.title,
+        subtitle: metrics.subtitle,
+        unit: metrics.unit,
         latestYear: latestYearSql,
         availableYears: availableYearsSql,
-        description: indicators.description,
-        demographicAttr: indicators.demographicAttr,
-        normalizationBasis: indicators.normalizationBasis,
-        groupKey: indicators.groupKey,
-        isFeatured: indicators.isFeatured,
+        description: metrics.description,
+        demographicAttr: metrics.demographicAttr,
+        normalizationBasis: metrics.normalizationBasis,
+        groupKey: metrics.groupKey,
+        isFeatured: metrics.isFeatured,
       })
-      .from(indicators)
-      .where(and(eq(indicators.surveyId, surveyId), eq(indicators.isActive, true)))
-      .orderBy(asc(indicators.featuredOrder), desc(indicators.updatedAt));
+      .from(metrics)
+      .where(and(eq(metrics.surveyId, surveyId), eq(metrics.isActive, true)))
+      .orderBy(asc(metrics.featuredOrder), desc(metrics.updatedAt));
 
     return ok(rows.map((r) => ({ ...r, isFeatured: r.isFeatured ?? false })));
   } catch (error) {

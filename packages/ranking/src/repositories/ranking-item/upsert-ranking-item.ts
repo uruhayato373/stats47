@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { sql } from "drizzle-orm";
@@ -34,10 +34,10 @@ export async function upsertRankingItem(
 
     const drizzleDb = db ?? getDrizzle();
     await drizzleDb
-      .insert(indicators)
+      .insert(metrics)
       .values(dbItem)
       .onConflictDoUpdate({
-        target: [indicators.key, indicators.areaType],
+        target: [metrics.key, metrics.areaType],
         set: {
           title: dbItem.title,
           unit: dbItem.unit,

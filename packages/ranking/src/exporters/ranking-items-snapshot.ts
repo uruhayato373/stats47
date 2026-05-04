@@ -1,12 +1,12 @@
 import "server-only";
 
-import { getDrizzle, indicators, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq, sql } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
-import { indicatorAsRankingItemSelection } from "../repositories/shared/indicator-as-ranking-item-selection";
+import { metricAsRankingItemSelection } from "../repositories/shared/metric-as-ranking-item-selection";
 import type { RankingItem } from "../types/ranking-item";
 import {
   RANKING_ITEMS_SNAPSHOT_KEY,
@@ -22,10 +22,10 @@ export interface ExportRankingItemsSnapshotResult {
 }
 
 /**
- * indicators テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
+ * metrics テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
  *
  * 出力形式: snapshots/ranking-items/all.json
- * tags: taggings (taggable_type='indicator') を indicator.id で join
+ * tags: taggings (taggable_type='metric') を indicator.id で join
  *
  * dryRun=true の場合は R2 に書かず、JSON body と count のみ返す。
  */
@@ -40,19 +40,19 @@ export async function exportRankingItemsSnapshot(
   const dryRun = options.dryRun ?? false;
 
   const [rows, tagRows] = await Promise.all([
-    drizzleDb.select(indicatorAsRankingItemSelection).from(indicators),
+    drizzleDb.select(metricAsRankingItemSelection).from(metrics),
     drizzleDb
       .select({
-        rankingKey: indicators.key,
-        areaType: indicators.areaType,
+        rankingKey: metrics.key,
+        areaType: metrics.areaType,
         tagKey: taggings.tagKey,
       })
       .from(taggings)
       .innerJoin(
-        indicators,
-        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+        metrics,
+        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
       )
-      .where(eq(taggings.taggableType, "indicator")),
+      .where(eq(taggings.taggableType, "metric")),
   ]);
 
   const tagsByItem = new Map<string, { tagKey: string }[]>();
@@ -83,7 +83,7 @@ export async function exportRankingItemsSnapshot(
           areaType: row.area_type,
           error: error instanceof Error ? error.message : String(error),
         },
-        "indicators: parseRankingItemDB が失敗。スキップ",
+        "metrics: parseRankingItemDB が失敗。スキップ",
       );
     }
   }

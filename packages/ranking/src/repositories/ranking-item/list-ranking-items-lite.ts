@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -15,7 +15,7 @@ export interface RankingItemLite {
 
 /**
  * ランキング項目の軽量版リスト（4 列のみ SELECT）
- * 相関分析ページのドロップダウン等、メタデータ不要な場面用。(PR-5: 新 indicators)
+ * 相関分析ページのドロップダウン等、メタデータ不要な場面用。(PR-5: 新 metrics)
  */
 export async function listRankingItemsLite(
   options?: {
@@ -27,20 +27,20 @@ export async function listRankingItemsLite(
   try {
     const drizzleDb = db ?? getDrizzle();
     const conditions = [];
-    if (options?.areaType) conditions.push(eq(indicators.areaType, options.areaType));
+    if (options?.areaType) conditions.push(eq(metrics.areaType, options.areaType));
     if (options?.isActive !== undefined)
-      conditions.push(eq(indicators.isActive, options.isActive));
+      conditions.push(eq(metrics.isActive, options.isActive));
 
     const result = await drizzleDb
       .select({
-        rankingKey: indicators.key,
-        title: indicators.title,
-        subtitle: indicators.subtitle,
-        unit: indicators.unit,
+        rankingKey: metrics.key,
+        title: metrics.title,
+        subtitle: metrics.subtitle,
+        unit: metrics.unit,
       })
-      .from(indicators)
+      .from(metrics)
       .where(and(...conditions))
-      .orderBy(asc(indicators.key));
+      .orderBy(asc(metrics.key));
 
     return ok(result);
   } catch (error) {

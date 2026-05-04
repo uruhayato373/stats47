@@ -1,6 +1,6 @@
 import "server-only";
 
-import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
@@ -19,10 +19,10 @@ export interface ExportRankingAiContentSnapshotResult {
 }
 
 /**
- * ai_content + indicators を JOIN して旧 RankingAiContent shape の R2 snapshot を出す。
+ * ai_content + metrics を JOIN して旧 RankingAiContent shape の R2 snapshot を出す。
  *
  * R2 snapshot の rankingKey / areaType フィールドは frontend (read-ranking-ai-content-snapshot)
- * との後方互換性のため引き続き indicators から復元して出力する。
+ * との後方互換性のため引き続き metrics から復元して出力する。
  */
 export async function exportRankingAiContentSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -32,8 +32,8 @@ export async function exportRankingAiContentSnapshot(
 
   const rows = await drizzleDb
     .select({
-      rankingKey: indicators.key,
-      areaType: indicators.areaType,
+      rankingKey: metrics.key,
+      areaType: metrics.areaType,
       faq: aiContent.faq,
       regionalAnalysis: aiContent.regionalAnalysis,
       insights: aiContent.insights,
@@ -50,7 +50,7 @@ export async function exportRankingAiContentSnapshot(
       updatedAt: aiContent.updatedAt,
     })
     .from(aiContent)
-    .innerJoin(indicators, eq(aiContent.indicatorId, indicators.id));
+    .innerJoin(metrics, eq(aiContent.metricId, metrics.id));
 
   const snapshotRows: AiContentSnapshotRow[] = rows.map((r) => ({
     rankingKey: r.rankingKey,

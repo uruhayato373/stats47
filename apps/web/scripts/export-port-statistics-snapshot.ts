@@ -108,23 +108,23 @@ async function main() {
   });
   console.log(`✅ ports: ${portsMeta.length} 件`);
 
-  // 2. observations(entity_type=port) を indicators JOIN で読み込み (PR-6)
-  // indicators.key 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
+  // 2. observations(entity_type=port) を metrics JOIN で読み込み (PR-6)
+  // metrics.key 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
   const { eq, and } = await import("drizzle-orm");
   const observationRows = await db
     .select({
       portCode: schema.observations.entityCode,
       year: schema.observations.yearCode,
-      indicatorKey: schema.indicators.key,
+      indicatorKey: schema.metrics.key,
       value: schema.observations.valueNumeric,
       unit: schema.observations.unit,
     })
     .from(schema.observations)
     .innerJoin(
-      schema.indicators,
+      schema.metrics,
       and(
-        eq(schema.observations.indicatorId, schema.indicators.id),
-        eq(schema.indicators.areaType, "port")
+        eq(schema.observations.metricId, schema.metrics.id),
+        eq(schema.metrics.areaType, "port")
       )
     )
     .where(eq(schema.observations.entityType, "port"));
