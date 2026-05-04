@@ -52,6 +52,11 @@ export const metrics = sqliteTable(
     featuredOrder: integer("featured_order").default(0),
     seoTitle: text("seo_title"),
     seoDescription: text("seo_description"),
+    yearFormat: text("year_format", {
+      enum: ["fiscal", "calendar", "plain"],
+    })
+      .notNull()
+      .default("fiscal"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },
