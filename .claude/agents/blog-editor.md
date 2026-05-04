@@ -77,3 +77,15 @@ DB (articles テーブル)           ← サイトに反映
 - **記事内チャート** → `/generate-article-charts`（Remotion ベース）
 
 NG パターン: 記事別 OGP を Midjourney 等の AI 画像で量産しようとしない（記事数が増えると再生成が破綻する）。Satori の CSS サブセットで作れない凝ったビジュアルが必要なケースは Remotion 側に倒す。
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Trend/Topic | Source | Volume | Recommendation`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 個別記事のレビュー総括や戦略提案 (1 記事 = 1 段落)

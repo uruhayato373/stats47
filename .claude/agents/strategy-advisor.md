@@ -64,3 +64,15 @@
 
 - GitHub Issues — 週次計画 (`weekly-plan`) / 週次レビュー (`weekly-review`) / 批判的レビュー (`critical-review`) / Pre-Mortem (`pre-mortem`) 等
 - `.claude/projects/*/memory/` — ナレッジ記録
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Topic | Finding | Action | Owner`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 週次 PDCA / 批判的レビュー / NSM 実験総括 — このエージェントは Template C 中心 (定性分析が本質)

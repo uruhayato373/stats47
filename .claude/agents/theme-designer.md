@@ -222,3 +222,15 @@ export const <THEME>_SET: IndicatorSet = {
 | 新規テーマ作成 | theme-designer → data-pipeline（未登録指標登録）→ code-reviewer（IndicatorSet レビュー） |
 | 既存テーマ改善 | seo-auditor（GSC 分析）→ theme-designer（指標追加・チャート変更）→ ui-reviewer |
 | トレンド起点 | blog-editor（トレンド検出）→ theme-designer（関連テーマの強化） |
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Step | Decision | Rationale`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- テーマ採否判定の総合レビュー

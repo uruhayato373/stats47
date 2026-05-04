@@ -204,3 +204,15 @@ Sprint 1 Day 2-5 の X 予約投稿が `publish-x.ts` のセレクタ失敗で 4
 - 事故記録: `.claude/skills/management/knowledge/SKILL.md`「X 予約投稿が即時投稿になる事故」節
 - fail-safe 実装: `.claude/skills/sns/publish-x/publish-x.ts` L220-260
 - dry-run 使用法: `.claude/skills/sns/publish-x/SKILL.md`
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Post/Metric | Date | Value | Action`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 週次パフォーマンス総括

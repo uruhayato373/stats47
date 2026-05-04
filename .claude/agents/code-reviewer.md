@@ -48,3 +48,15 @@
 - SEO 監査（seo-auditor）
 - ブログ記事のレビュー（blog-editor）
 - デプロイ・テスト実行（devops-runner）
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `File:Line | Issue | Severity (P0-P3) | Suggestion`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- アーキテクチャ全体のレビュー総括 (find が多すぎて表が冗長になる場合)
