@@ -54,7 +54,7 @@ $ARGUMENTS — [maxArticles]
 ```sql
 -- キーワードに関連する指標を検索
 SELECT ri.ranking_key, ri.ranking_name, ri.unit, ri.category_key
-FROM ranking_items ri
+FROM indicators ri
 WHERE ri.is_active = 1 AND ri.area_type = 'prefecture'
   AND (ri.ranking_name LIKE '%{keyword}%' OR ri.title LIKE '%{keyword}%');
 ```

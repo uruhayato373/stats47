@@ -87,7 +87,7 @@ const db = new Database(DB_PATH);
 
 const tweets = JSON.parse(fs.readFileSync("/tmp/x-tweets-all.json", "utf8"));
 const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("x");
-const rankings = db.prepare("SELECT ranking_key, ranking_name FROM ranking_items").all();
+const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
 
 function parseEng(label) {
   const m = { impressions: 0, replies: 0, reposts: 0, likes: 0, bookmarks: 0 };

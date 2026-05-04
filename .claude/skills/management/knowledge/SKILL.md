@@ -113,10 +113,10 @@ user-invocable: false
 
 - `articles`: リモートに `seo_title` カラムが追加されていた → `has no column named seo_title`
 - `comparison_components`: リモートの CHECK 制約に `composition-chart` が追加されていた → `CHECK constraint failed`
-- `ranking_tags`: リモートでカラム名が `tag` → `tag_key` に変更、`tags` テーブルへの FK 追加 → `has no column named tag_key`
+- `indicator_tags`: リモートでカラム名が `tag` → `tag_key` に変更、`tags` テーブルへの FK 追加 → `has no column named tag_key`
 - `tags`, `article_tags`: リモートにのみ存在する新テーブル → `[SKIP]` で無視されたが、pull 後に ranking_tags の FK 先がなく問題に
-- `correlation_analysis`: 58,511 行中 33,500 行で企業ネットワークのタイムアウト → 手動 `--offset` で再開
-- `ranking_data`: 3,084,967 行中 1,005,000 行で同上
+- `correlations`: 58,511 行中 33,500 行で企業ネットワークのタイムアウト → 手動 `--offset` で再開
+- `observations`: 3,084,967 行中 1,005,000 行で同上
 
 **原因**: `/diff-d1` がデータ差分のみ比較しスキーマ差分を検知しなかった。別 PC でスキーマ変更（マイグレーション適用）されていたが、ローカルにはその変更が反映されていなかった。
 

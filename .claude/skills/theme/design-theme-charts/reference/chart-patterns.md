@@ -75,7 +75,7 @@ ranking_items.source_config に格納されている JSON から statsDataId / c
 
 ```sql
 SELECT ranking_key, source_config
-FROM ranking_items
+FROM indicators
 WHERE ranking_key = 'nurse-annual-income'
   AND area_type = 'prefecture';
 -- source_config: {"statsDataId":"0003445758","cdCat01":"...","cdCat02":"..."}

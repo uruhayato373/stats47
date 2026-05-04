@@ -51,7 +51,7 @@ $ARGUMENTS — categoryKey [articleCount]
 ```sql
 -- カテゴリの全統計表カタログ
 SELECT stats_data_id, title, gov_org, status, class_inf
-FROM estat_stats_tables
+FROM estat_metainfo
 WHERE category_key = '<categoryKey>'
 ORDER BY status, title;
 ```
@@ -64,7 +64,7 @@ ORDER BY status, title;
 
 ```sql
 SELECT ri.ranking_key, ri.ranking_name, ri.unit, ri.source_config
-FROM ranking_items ri
+FROM indicators ri
 WHERE ri.category_key = '<categoryKey>' AND ri.is_active = 1
   AND ri.area_type = 'prefecture';
 ```
@@ -250,7 +250,7 @@ docs/21_ブログ記事原稿/<slug>/
 ## 注意
 
 - **レートリミット**: e-Stat API は 60req/min。Phase 1 の API 検索は最小限に
-- **estat_stats_tables の活用**: DB の `estat_stats_tables` テーブルに全カタログ（~8,400件）が格納済み。e-Stat API を叩く代わりにこのテーブルを優先して使う
+- **estat_stats_tables の活用**: DB の `estat_metainfo` テーブルに全カタログ（~8,400件）が格納済み。e-Stat API を叩く代わりにこのテーブルを優先して使う
 - **季節フックは無理に入れない**: 該当しない場合は空欄で良い
 
 ## 関連スキル

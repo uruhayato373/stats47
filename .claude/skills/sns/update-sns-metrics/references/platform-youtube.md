@@ -62,7 +62,7 @@ async function main() {
   // 3. DB マッチング + 記録
   const db = new Database(DB_PATH);
   const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("youtube");
-  const rankings = db.prepare("SELECT ranking_key, ranking_name FROM ranking_items").all();
+  const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
 
   // 時系列履歴は .claude/ 配下のファイルに蓄積（CLAUDE.md §記録先の統一原則）
   const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");

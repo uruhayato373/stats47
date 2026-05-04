@@ -150,7 +150,7 @@ const insightsById = Object.fromEntries(insights.map((i) => [i.id, i]));
 const posts = db
   .prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?")
   .all("instagram");
-const rankings = db.prepare("SELECT ranking_key, ranking_name FROM ranking_items").all();
+const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
 
 const snsStore = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-metrics-store.cjs"));
 const fetchedAt = new Date().toISOString();

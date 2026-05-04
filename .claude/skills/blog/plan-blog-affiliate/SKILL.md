@@ -64,7 +64,7 @@ apps/web/src/features/ads/constants/affiliate-category.ts
 
 ```sql
 SELECT ri.ranking_key, ri.ranking_name, ri.unit, ri.category_key, ri.source_config
-FROM ranking_items ri
+FROM indicators ri
 WHERE ri.is_active = 1 AND ri.area_type = 'prefecture'
   AND ri.category_key IN ({対象 category_key のリスト});
 ```
@@ -209,7 +209,7 @@ WHERE tags LIKE '%賃金%' OR tags LIKE '%転職%' -- etc.
 - **記事の価値を最優先**: アフィリエイトはあくまで補助導線。データ分析記事としての価値が第一
 - **押し売りしない**: 記事本文にアフィリエイトリンクは入れない。`ArticleAffiliateSections` コンポーネントがタグベースで自動配置する
 - **TAG_AFFILIATE_MAP を意識**: 記事の `tags` にマッピング対象のタグを含めれば、アフィリエイトが自動表示される
-- **DB + e-Stat API の両面で探索**: `estat_stats_tables` を出発点としつつ、e-Stat API（`/search-estat`）で DB にない関連データも積極的に探す
+- **DB + e-Stat API の両面で探索**: `estat_metainfo` を出発点としつつ、e-Stat API（`/search-estat`）で DB にない関連データも積極的に探す
 - **時系列データの活用**: `/fetch-article-data` で `cdArea: "00000"` を使えば、ランキング用と同じ statsDataId + cdCat01 で全国時系列が取得できる。別の statsDataId を探す必要がないケースが多い
 - **ランキングだけの記事にしない**: 時系列トレンド・構造分析・内訳比較を必ず含め、読者に「なぜ」を伝える記事にする
 

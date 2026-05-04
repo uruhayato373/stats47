@@ -175,22 +175,22 @@ $ARGUMENTS — チェック対象の記事ファイルパスまたは slug
   - 修正方針: リンク先の `/ranking/{key}` が本文のどのセクションで使われているかを特定し、該当セクション末尾に移動する
   - `### 関連記事` セクションには `/blog/...` リンクのみを残す
 - **リンク先の DB 存在確認**: `<source-link>` や `### 関連記事` のリンク先がローカル DB に存在するか確認する
-  - 検出方法: 記事内の `/ranking/{key}` を抽出し、`ranking_items` テーブルに `ranking_key` が存在するか照会する
+  - 検出方法: 記事内の `/ranking/{key}` を抽出し、`indicators` テーブルに `ranking_key` が存在するか照会する
   - `/blog/{slug}` リンクは `.local/r2/blog/{slug}/article.md` の存在を確認する
-  - `/correlation?x={key1}&y={key2}` リンクは両方の `ranking_key` が `ranking_items` に存在するか確認する
+  - `/correlation?x={key1}&y={key2}` リンクは両方の `ranking_key` が `indicators` に存在するか確認する
   - 存在しないキーが見つかった場合の **類似キー検索**（必須）:
     1. `<source-link>` のリンクテキスト（例: `ゴルフ行動者率ランキング`）からキーワードを抽出する
     2. ローカル D1 で以下のクエリを実行し、類似キーの候補を検索する:
        ```sql
        -- リンクテキストのキーワードで ranking_name を部分一致検索
-       SELECT ranking_key, ranking_name FROM ranking_items
+       SELECT ranking_key, ranking_name FROM indicators
        WHERE ranking_name LIKE '%ゴルフ%' OR ranking_name LIKE '%行動者率%'
        LIMIT 10;
        ```
     3. 存在しないキーの一部をキーワードとしても検索する:
        ```sql
        -- キーの一部で部分一致検索（例: ssdse-d-mc09 → 'golf', 'sports' 等は不要だが、意味的に近いキーを探す）
-       SELECT ranking_key, ranking_name FROM ranking_items
+       SELECT ranking_key, ranking_name FROM indicators
        WHERE ranking_key LIKE '%golf%' OR ranking_key LIKE '%sports%participation%'
        LIMIT 10;
        ```

@@ -183,7 +183,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
   ```bash
   # 本番 D1 の現値確認
   cd apps/web && npx wrangler d1 execute stats47_static --remote --env production --json -y \
-    --command "SELECT ranking_key, seo_title FROM ranking_items WHERE ranking_key IN ('starting-salary-highschool','inpatient-rate-per-100k','roadside-station-count') AND area_type = 'prefecture';"
+    --command "SELECT ranking_key, seo_title FROM indicators WHERE ranking_key IN ('starting-salary-highschool','inpatient-rate-per-100k','roadside-station-count') AND area_type = 'prefecture';"
   
   # 本番 origin の <title> 確認 (Googlebot UA)
   for url in https://stats47.jp/ranking/inpatient-rate-per-100k \

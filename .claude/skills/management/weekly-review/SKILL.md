@@ -250,9 +250,9 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
 sqlite3 "$DB" "
   SELECT 'articles' as item, COUNT(*) as cnt FROM articles WHERE published = 1
-  UNION ALL SELECT 'ranking_items_pref', COUNT(*) FROM ranking_items WHERE area_type='prefecture'
-  UNION ALL SELECT 'correlation_analysis', COUNT(*) FROM correlation_analysis
-  UNION ALL SELECT 'ranking_ai_content', COUNT(*) FROM ranking_ai_content
+  UNION ALL SELECT 'ranking_items_pref', COUNT(*) FROM indicators WHERE area_type='prefecture'
+  UNION ALL SELECT 'correlation_analysis', COUNT(*) FROM correlations
+  UNION ALL SELECT 'ranking_ai_content', COUNT(*) FROM ai_content
   UNION ALL SELECT 'area_profiles', COUNT(*) FROM area_profiles
   UNION ALL SELECT 'categories', COUNT(*) FROM categories
   UNION ALL SELECT 'subcategories', COUNT(*) FROM subcategories
