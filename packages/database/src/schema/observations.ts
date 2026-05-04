@@ -12,18 +12,17 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { metrics } from "./metrics";
 
 /**
- * 観測値 — metric × entity × year の値
+ * 観測値 — metric × area × year の値 (最小設計)
  *
- * (metric_id, entity_type, entity_code, year_code) の複合 PK で一意。
- * entity_type は 4 種: prefecture / city / port / fishing_port
+ * (metric_id, area_type, area_code, year_code) の複合 PK で一意。
+ * area_type は 4 種: prefecture / city / port / fishing_port
  *
- * 値カラム:
- * - value_numeric: 数値の本体
- * - value_text: 「未公表」等の non-numeric ラベル
- *
- * 非正規化列 (entity_name / year_name / unit / category_name):
- * R2 export 時に使用。マスタ (prefectures.name 等) を書き換えた場合は
- * scripts/sync-observations-denormalized.ts で再同期する。
+ * 表示用フィールド (area_name / year_name / unit / category_name) は
+ * Repository 層で JOIN して計算する (denorm は持たない)。
+ * - area_name: prefectures / cities / ports / fishing_ports を JOIN
+ * - year_name: metrics.year_format + year_code から formatYearName() で計算
+ * - unit:      metrics.unit を参照
+ * - category_name: metrics.title を参照
  */
 export const observations = sqliteTable(
   "observations",
@@ -31,33 +30,28 @@ export const observations = sqliteTable(
     metricId: integer("metric_id")
       .notNull()
       .references(() => metrics.id),
-    entityType: text("entity_type", {
+    areaType: text("area_type", {
       enum: ["prefecture", "city", "port", "fishing_port"],
     }).notNull(),
-    entityCode: text("entity_code").notNull(),
+    areaCode: text("area_code").notNull(),
     yearCode: text("year_code").notNull(),
-    valueNumeric: real("value_numeric"),
-    valueText: text("value_text"),
+    value: real("value"),
     rank: integer("rank"),
     percentile: real("percentile"),
-    entityName: text("entity_name"),
-    yearName: text("year_name"),
-    unit: text("unit"),
-    categoryName: text("category_name"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
     pk: primaryKey({
       columns: [
         table.metricId,
-        table.entityType,
-        table.entityCode,
+        table.areaType,
+        table.areaCode,
         table.yearCode,
       ],
     }),
     entityIdx: index("idx_observations_entity").on(
-      table.entityType,
-      table.entityCode,
+      table.areaType,
+      table.areaCode,
       table.yearCode
     ),
     metricYearIdx: index("idx_observations_metric_year").on(
