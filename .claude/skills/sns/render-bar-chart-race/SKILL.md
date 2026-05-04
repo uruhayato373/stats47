@@ -91,4 +91,4 @@ npm run pipeline:bar-chart-race --workspace remotion -- --platform youtube --dry
 - `.local/r2/sns/bar-chart-race/<key>/data.json` — フレームデータ
 - `/generate-bar-chart-race` — データ生成スキル
 - `/post-bar-chart-race-captions` — キャプション生成スキル
-- `/preview-remotion-bar-chart-race` — プレビュースキル
+- `/preview-remotion --type bar-chart-race` — プレビュースキル

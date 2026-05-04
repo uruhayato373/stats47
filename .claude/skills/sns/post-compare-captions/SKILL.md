@@ -252,5 +252,5 @@ data.json を読み込み、上記の算出値をすべて計算する。
 ## 参照
 
 - データ生成: `/generate-compare`
-- プレビュー: `/preview-remotion-comparison`
+- プレビュー: `/preview-remotion --type comparison`
 - UTM ルール: `/generate-utm-url`

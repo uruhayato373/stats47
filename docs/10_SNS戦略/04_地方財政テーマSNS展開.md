@@ -43,7 +43,7 @@
 | BCR-4 | personnel-expenditure-ratio-pref-finance | 人件費割合の推移 | 行政改革・定員削減の効果 |
 | BCR-5 | laspeyres-index-prefecture | ラスパイレス指数の推移 | 2012-2013年に全県が急上昇→急降下する「震災スパイク」が最大の見どころ。国家公務員給与の臨時削減で相対的に地方が高く出た構造を可視化 |
 
-### Compare（2地域比較）— `/preview-remotion-comparison`
+### Compare（2地域比較）— `/preview-remotion --type comparison`
 
 **方針**: 対決ペアと指標テーマを独立管理し、ペア × テーマの組み合わせで動画を量産する。各テーマ5指標を順に比較し、勝敗を積み上げる60〜90秒のショート動画。
 
@@ -69,7 +69,7 @@
 | CMP-6 | 兵庫県 vs 福岡県 | 地方中核対決 | 兵庫の将来負担比率313%の衝撃 |
 | CMP-7 | 石川県 vs 富山県 | 隣県対決 | 能登地震で石川の時間外手当が全国1位 |
 
-### Correlation（相関散布図）— `/preview-remotion-correlation`
+### Correlation（相関散布図）— `/preview-remotion --type correlation`
 
 2指標の関係性を散布図で見せる。
 

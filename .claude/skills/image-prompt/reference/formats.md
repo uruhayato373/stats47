@@ -58,7 +58,7 @@
 
 ## OGP セーフエリアとの関係
 
-**本スキルは OGP を直接生成しない**（`docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」参照）。
+**本スキルは OGP を直接生成しない**。サイト内 OGP は Satori (`apps/web/src/app/**/opengraph-image.tsx`) または Remotion (`apps/remotion/src/features/ogp/`) で作る。
 
 ただし、`/image-prompt` で生成したヘッダー画像を **OGP の背景として再利用**するケースでは、中央 630×630 に重要情報が収まっている必要がある。カタログの 2.5:1 プロンプトから 1.91:1 に変換するとき、タイトルが中央セーフエリア外に出ないか確認すること。
 

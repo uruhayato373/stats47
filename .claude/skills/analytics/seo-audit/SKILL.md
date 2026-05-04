@@ -460,7 +460,7 @@ VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, dat
 
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得
-- `.claude/skills/blog/discover-trends-gsc/SKILL.md` — GSC トレンド検出
+- `.claude/skills/blog/discover-trends/sources/gsc.md` — GSC トレンド検出（`/discover-trends --source gsc`）
 - `apps/web/src/app/sitemap.ts` — サイトマップ生成
 - `apps/web/src/lib/structured-data/` — 構造化データ実装
 - `apps/web/src/middleware.ts` — リダイレクト設定
