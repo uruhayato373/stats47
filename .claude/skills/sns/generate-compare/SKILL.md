@@ -112,5 +112,5 @@ ORDER BY value DESC;
 
 - 比較テーマ定義: `docs/10_SNS戦略/04_地方財政テーマSNS展開.md`
 - キャプション生成: `/post-sns-captions --domain compare`
-- Remotion プレビュー: `/preview-remotion-comparison`
+- Remotion プレビュー: `/preview-remotion --type comparison`
 - UTM ルール: `/generate-utm-url`

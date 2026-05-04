@@ -15,12 +15,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 |---|---|
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成 |
 | `/render-bar-chart-race` | BCR 動画を一括レンダリング（YouTube/Instagram/TikTok） |
-| `/preview-remotion` | ランキングプレビューを Remotion Studio に設定 |
-| `/preview-remotion-bar-chart-race` | BCR プレビューを設定 |
-| `/preview-remotion-comparison` | 比較プレビューを設定 |
-| `/preview-remotion-correlation` | 相関散布図プレビューを設定 |
-| `/preview-remotion-area-profile` | 地域プロファイルプレビューを設定 |
-| `/preview-remotion-blog` | ブログ OGP プレビューを設定 |
+| `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog） |
 | `/sns-weekly-report` | DB から週次パフォーマンスレポート生成 |
 
 ## 前提条件

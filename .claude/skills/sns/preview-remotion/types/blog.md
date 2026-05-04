@@ -1,23 +1,17 @@
----
-name: preview-remotion-blog
-description: 実データで Remotion Studio ブログ OGP プレビューを上書きする。Use when user says "ブログOGPプレビュー", "blog OGP プレビュー". slug または title/subtitle 指定.
-disable-model-invocation: true
----
+# Type: blog（ブログ OGP）
 
-実データで Remotion Studio のブログ OGP プレビュー用データを上書きする。
-Studio が HMR で自動反映するため、リアルタイムにプレビューを確認できる。
+ブログ記事の OGP プレビュー用データを上書きする。
 
-## 引数
+## 引数（いずれか）
 
-ユーザーから以下のいずれかを指定:
 - **slug**: ブログ記事のスラッグ（`.local/r2/blog/` 配下のディレクトリ名）
-- または **title** / **subtitle** を直接指定
+- **title** / **subtitle** を直接指定
 
 ## 手順
 
 ### Step 1: データ取得
 
-slug が指定された場合、以下の優先順位でデータを取得する:
+slug 指定時は以下の優先順位:
 
 1. `.local/r2/blog/<slug>/ogp/ogp.json` が存在すればそのまま使用
 2. なければ `.local/r2/blog/<slug>/article.md` のフロントマターから生成
@@ -27,9 +21,7 @@ slug が指定された場合、以下の優先順位でデータを取得する
 - `｜` がある場合: 前半を `title`、後半を `subtitle`
 - どちらもない場合: 全体を `title`（subtitle なし）
 
-### Step 2: preview-data-blog.ts を上書き
-
-`apps/remotion/src/utils/preview-data-blog.ts` を以下の形式で上書きする。
+### Step 2: `apps/remotion/src/utils/preview-data-blog.ts` を上書き
 
 ```typescript
 export interface BlogPreviewData {
@@ -43,14 +35,12 @@ export const previewDataBlog: BlogPreviewData = {
 };
 ```
 
-注意:
-- `subtitle` が不要な場合はフィールドを省略する
+注意: `subtitle` が不要な場合はフィールドを省略する
 
-### Step 3: 確認
+### Step 3: 確認・報告
 
-上書き後、ユーザーに以下を報告する:
-- 対象のスラッグ（slug 指定の場合）
-- title / subtitle の内容
+- 対象スラッグ（slug 指定の場合）
+- title / subtitle
 
 ## ogp.json の管理
 
@@ -125,11 +115,10 @@ for (const slug of dirs) {
 
 ## 対象コンポジション
 
-この preview-data を参照するコンポジション:
-- `BlogOgp`（OGP 画像 1200x630）
+- `BlogOgp` (1200x630)
 
 ## 参照
 
-- `apps/remotion/src/utils/preview-data-blog.ts` — 上書き対象ファイル
-- `apps/remotion/src/features/ogp/BlogOgp.tsx` — コンポーネント
-- `.local/r2/blog/<slug>/ogp/ogp.json` — 記事別 OGP 設定
+- `apps/remotion/src/utils/preview-data-blog.ts`
+- `apps/remotion/src/features/ogp/BlogOgp.tsx`
+- `.local/r2/blog/<slug>/ogp/ogp.json`

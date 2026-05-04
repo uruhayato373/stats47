@@ -83,7 +83,7 @@ packages/
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
 | `blog-editor` | 11 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
-| `sns-renderer` | 9 | Remotion レンダリング・プレビュー |
+| `sns-renderer` | 4 | Remotion レンダリング・プレビュー |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
 | `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
 | `ui-reviewer` | 2 | melta-ui 準拠・UI/UX パネルレビュー |
