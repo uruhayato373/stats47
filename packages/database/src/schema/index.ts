@@ -12,6 +12,7 @@ export * from "./indicator_tags";
 // マスタ
 export * from "./categories";
 export * from "./tags";
+export * from "./taggings"; // polymorphic M:N: article_tags + indicator_tags の統合
 export * from "./surveys"; // 旧 ranking_items.ts を 2026-05-04 にリネーム
 export * from "./ports"; // 旧 port_statistics.ts を 2026-05-04 にリネーム
 export * from "./fishing_ports";
