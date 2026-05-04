@@ -3,6 +3,13 @@
  *
  * アプリケーション全体のデフォルトメタデータを生成します。
  * SEO、OGP、Twitter Cardsの設定を含みます。
+ *
+ * デフォルト OGP 画像 (`/og-image.jpg`) は本ファイルおよび og-generator.ts が
+ * 一律で参照するため、Remotion 側で別バリエーションを書き出して上書きするだけで
+ * サイト全体のデフォルト OGP が即座に切り替わる。
+ *
+ * 詳細・3 つのバリエーション (Data Art / Minimal / Dashboard) は
+ * apps/remotion/src/features/ogp/README.md を参照。
  */
 
 

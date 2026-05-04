@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingData } from "@stats47/database/server";
+import { getDrizzle, indicators, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -20,18 +20,30 @@ export async function listRankingValuesAllYears(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select()
-      .from(rankingData)
+      .select({
+        areaType: observations.entityType,
+        areaCode: observations.entityCode,
+        areaName: observations.entityName,
+        yearCode: observations.yearCode,
+        yearName: observations.yearName,
+        categoryCode: indicators.key,
+        categoryName: observations.categoryName,
+        value: observations.valueNumeric,
+        unit: observations.unit,
+        rank: observations.rank,
+      })
+      .from(observations)
+      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
       .where(
         and(
-          eq(rankingData.categoryCode, rankingKey),
-          eq(rankingData.areaType, areaType),
-          ne(rankingData.areaCode, "00000")
+          eq(indicators.key, rankingKey),
+          eq(indicators.areaType, areaType),
+          ne(observations.entityCode, "00000")
         )
       );
 
-    const values: RankingValue[] = result.map((row: any) => ({
-      areaType: row.areaType,
+    const values: RankingValue[] = result.map((row) => ({
+      areaType: row.areaType as AreaType,
       areaCode: row.areaCode || "",
       areaName: row.areaName || "",
       yearCode: row.yearCode ? String(row.yearCode) : "",

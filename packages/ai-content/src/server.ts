@@ -14,13 +14,15 @@ export type {
 } from "./types";
 
 export type {
-  InsertRankingAiContent,
-} from "@stats47/database/schema";
+  AiContentSnapshotRow,
+  AiContentSnapshot,
+} from "./types/snapshot";
 
 export {
   findRankingAiContent,
   upsertRankingAiContent,
 } from "./repositories";
+export type { UpsertRankingAiContentInput } from "./repositories/upsert-ranking-ai-content";
 
 export { readRankingAiContentFromR2 } from "./repositories/read-ranking-ai-content-snapshot";
 export { exportRankingAiContentSnapshot } from "./exporters/ranking-ai-content-snapshot";

@@ -1,13 +1,13 @@
 import "server-only";
 
 import {
-  correlationAnalysis,
+  correlations,
   getDrizzle,
-  rankingItems,
+  indicators,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { eq, or, sql } from "drizzle-orm";
+import { aliasedTable, and, eq, inArray, or, sql } from "drizzle-orm";
 
 export interface CorrelatedItem {
   rankingKey: string;
@@ -34,34 +34,47 @@ export async function findHighlyCorrelated(
 ): Promise<Result<CorrelatedItem[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    // 年コードフォーマット違いで同一ペアが複数行存在しうるため、多めに取得して重複排除する
+
+    // まず rankingKey から indicator_id を取得 (prefecture 仮定)
+    const subjectRows = await drizzleDb
+      .select({ id: indicators.id })
+      .from(indicators)
+      .where(and(eq(indicators.key, rankingKey), eq(indicators.areaType, "prefecture")))
+      .limit(1);
+    const subjectId = subjectRows[0]?.id;
+    if (!subjectId) return ok([]);
+
+    const ix = aliasedTable(indicators, "ix");
+    const iy = aliasedTable(indicators, "iy");
+
     const FETCH_MULTIPLIER = 3;
     const rawRows = await drizzleDb
       .select({
-        rankingKeyX: correlationAnalysis.rankingKeyX,
-        rankingKeyY: correlationAnalysis.rankingKeyY,
-        pearsonR: correlationAnalysis.pearsonR,
-        partialRPopulation: correlationAnalysis.partialRPopulation,
-        partialRArea: correlationAnalysis.partialRArea,
-        partialRAging: correlationAnalysis.partialRAging,
-        partialRDensity: correlationAnalysis.partialRDensity,
-        scatterData: correlationAnalysis.scatterData,
+        rankingKeyX: ix.key,
+        rankingKeyY: iy.key,
+        pearsonR: correlations.pearsonR,
+        partialRPopulation: correlations.partialRPopulation,
+        partialRArea: correlations.partialRArea,
+        partialRAging: correlations.partialRAging,
+        partialRDensity: correlations.partialRDensity,
+        scatterData: correlations.scatterDataJson,
       })
-      .from(correlationAnalysis)
+      .from(correlations)
+      .innerJoin(ix, eq(correlations.indicatorXId, ix.id))
+      .innerJoin(iy, eq(correlations.indicatorYId, iy.id))
       .where(
         or(
-          eq(correlationAnalysis.rankingKeyX, rankingKey),
-          eq(correlationAnalysis.rankingKeyY, rankingKey)
+          eq(correlations.indicatorXId, subjectId),
+          eq(correlations.indicatorYId, subjectId)
         )
       )
-      .orderBy(sql`ABS(${correlationAnalysis.pearsonR}) DESC`)
+      .orderBy(sql`ABS(${correlations.pearsonR}) DESC`)
       .limit(limit * FETCH_MULTIPLIER);
 
-    // counterpart key で重複排除（ABS(pearsonR) DESC ソート済みなので最初の出現が最強相関）
+    // counterpart key で重複排除
     const seen = new Set<string>();
     const rows = rawRows.filter((row) => {
-      const key =
-        row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+      const key = row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -75,13 +88,15 @@ export async function findHighlyCorrelated(
 
     const itemRows = await drizzleDb
       .select({
-        ranking_key: rankingItems.rankingKey,
-        title: rankingItems.title,
-        subtitle: rankingItems.subtitle,
-        unit: rankingItems.unit,
+        ranking_key: indicators.key,
+        title: indicators.title,
+        subtitle: indicators.subtitle,
+        unit: indicators.unit,
       })
-      .from(rankingItems)
-      .where(or(...counterpartKeys.map((key) => eq(rankingItems.rankingKey, key))));
+      .from(indicators)
+      .where(
+        and(inArray(indicators.key, counterpartKeys), eq(indicators.areaType, "prefecture"))
+      );
 
     const itemMap = new Map(itemRows.map((item) => [item.ranking_key, item]));
 

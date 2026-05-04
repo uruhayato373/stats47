@@ -17,8 +17,8 @@ user-invocable: false
 | 記事を公開前にチェック | `/proofread-article` | 「公開前チェックして」 |
 | 設計書・計画書・ロードマップ | `/critical-review` | 「この計画をレビューして」 |
 | Web ページの URL | `/ui-panel-review` | 「このページのUIをレビューして」 |
-| UIの整合性・一貫性 | `/review-ui-consistency` | 「UIの整合性をレビューして」「画面がバラバラ」 |
-| packages/ のコード | `/review-packages` | 「パッケージをレビューして」 |
+| UIの整合性・一貫性 | `/review-feature --scope ui-consistency` | 「UIの整合性をレビューして」「画面がバラバラ」 |
+| packages/ のコード | `/review-feature --scope packages` | 「パッケージをレビューして」 |
 | コード変更に対するテスト | `/review-tests` | 「テストを確認して」 |
 | SEO・検索流入 | `/seo-audit` | 「SEOをレビューして」「検索順位を確認して」 |
 
@@ -85,11 +85,12 @@ user-invocable: false
 | `/proofread-article` | 記事公開前チェック | 公開前 | stdout |
 | `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | GitHub Issue (`critical-review` ラベル) |
 | `/ui-panel-review` | Web ページ UI/UX | URL 指定 | stdout |
-| `/review-app` | App Router 層の品質 | ルート指定 or all | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature` | feature ドメイン品質 | feature 名指定 | GitHub Issue (`dev-review` ラベル) |
-| `/review-ads` | ads ドメイン品質 | 随時 | GitHub Issue (`dev-review` ラベル) |
-| `/review-ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | GitHub Issue (`dev-review` ラベル) |
-| `/review-packages` | packages/ コード品質 | コード変更後 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope feature <name>` | feature ドメイン品質 | feature 名指定 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope feature ads` | ads ドメイン品質 | 随時 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope types` | 型安全性 | tsc エラー時 | GitHub Issue (`dev-review` ラベル) |
 | `/review-tests` | テストの確認・作成 | コード変更後 | stdout |
 | `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | GitHub Issue (`sns-weekly-report` ラベル) |
 

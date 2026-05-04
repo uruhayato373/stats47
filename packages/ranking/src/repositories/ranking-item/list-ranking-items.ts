@@ -1,13 +1,13 @@
 import "server-only";
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, asc, eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
-import { parseRankingItemDB } from "../schemas/ranking-items.schemas";
-import { rankingItemSelection } from "../shared/ranking-item-selection";
+import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
+import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
 
 export async function listRankingItems(
   options?: {
@@ -21,14 +21,14 @@ export async function listRankingItems(
   try {
     const drizzleDb = db ?? getDrizzle();
     const conditions = [];
-    if (options?.areaType) conditions.push(eq(rankingItems.areaType, options.areaType));
-    if (options?.isActive !== undefined) conditions.push(eq(rankingItems.isActive, options.isActive));
+    if (options?.areaType) conditions.push(eq(indicators.areaType, options.areaType));
+    if (options?.isActive !== undefined) conditions.push(eq(indicators.isActive, options.isActive));
 
     let query = drizzleDb
-      .select(rankingItemSelection)
-      .from(rankingItems)
+      .select(indicatorAsRankingItemSelection)
+      .from(indicators)
       .where(and(...conditions))
-      .orderBy(asc(rankingItems.rankingKey))
+      .orderBy(asc(indicators.key))
       .$dynamic();
 
     if (options?.limit) query = query.limit(options.limit);
@@ -37,7 +37,7 @@ export async function listRankingItems(
     const result = await query;
     const items = result
       .map((row) => {
-        try { return parseRankingItemDB(row); } catch (e) {
+        try { return parseIndicatorAsRankingItem(row); } catch (e) {
           logger.warn({ error: e }, "listRankingItems: failed to parse item");
           return null;
         }

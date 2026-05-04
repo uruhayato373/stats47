@@ -1,9 +1,10 @@
 import "server-only";
 
-import { getDrizzle, rankingTags } from "@stats47/database/server";
+import { getDrizzle, indicatorTags, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
+import { eq } from "drizzle-orm";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import { listRankingItems } from "./list-ranking-items";
 
@@ -19,13 +20,15 @@ export async function listRankingItemsWithTags(
     const items = itemsResult.data;
     if (items.length === 0) return ok([]);
 
+    // 新 indicator_tags を indicators と JOIN して旧 (rankingKey, areaType) → tagKey を復元
     const allTags = await drizzleDb
       .select({
-        rankingKey: rankingTags.rankingKey,
-        areaType: rankingTags.areaType,
-        tagKey: rankingTags.tagKey,
+        rankingKey: indicators.key,
+        areaType: indicators.areaType,
+        tagKey: indicatorTags.tagKey,
       })
-      .from(rankingTags);
+      .from(indicatorTags)
+      .innerJoin(indicators, eq(indicatorTags.indicatorId, indicators.id));
 
     const itemsWithTags = items.map((item) => {
       const itemTags = allTags

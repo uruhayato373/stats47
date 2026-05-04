@@ -149,7 +149,7 @@ ORDER BY year_code, value DESC;
 - **hookText**（既存 or 自動生成）
 - **eventLabels**
 
-プレビューが必要な場合は `/preview-remotion-bar-chart-race` スキルの実行を案内する。
+プレビューが必要な場合は `/preview-remotion --type bar-chart-race` スキルの実行を案内する。
 
 ## 参照
 

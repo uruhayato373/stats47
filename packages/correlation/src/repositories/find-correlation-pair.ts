@@ -1,9 +1,9 @@
 import "server-only";
 
-import { correlationAnalysis, getDrizzle } from "@stats47/database/server";
+import { correlations, getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, eq, or } from "drizzle-orm";
+import { and, eq, inArray, or } from "drizzle-orm";
 
 export async function findCorrelationPair(
   rankingKeyX: string,
@@ -21,28 +21,37 @@ export async function findCorrelationPair(
 > {
   try {
     const drizzleDb = db ?? getDrizzle();
+
+    const indRows = await drizzleDb
+      .select({ id: indicators.id, key: indicators.key })
+      .from(indicators)
+      .where(
+        and(
+          inArray(indicators.key, [rankingKeyX, rankingKeyY]),
+          eq(indicators.areaType, "prefecture")
+        )
+      );
+    const idByKey = new Map(indRows.map((r) => [r.key, r.id]));
+    const xId = idByKey.get(rankingKeyX);
+    const yId = idByKey.get(rankingKeyY);
+    if (!xId || !yId) return ok(null);
+
     const rows = await drizzleDb
       .select({
-        rankingKeyX: correlationAnalysis.rankingKeyX,
-        rankingKeyY: correlationAnalysis.rankingKeyY,
-        pearsonR: correlationAnalysis.pearsonR,
-        partialRPopulation: correlationAnalysis.partialRPopulation,
-        partialRArea: correlationAnalysis.partialRArea,
-        partialRAging: correlationAnalysis.partialRAging,
-        partialRDensity: correlationAnalysis.partialRDensity,
-        scatterData: correlationAnalysis.scatterData,
+        indicatorXId: correlations.indicatorXId,
+        indicatorYId: correlations.indicatorYId,
+        pearsonR: correlations.pearsonR,
+        partialRPopulation: correlations.partialRPopulation,
+        partialRArea: correlations.partialRArea,
+        partialRAging: correlations.partialRAging,
+        partialRDensity: correlations.partialRDensity,
+        scatterData: correlations.scatterDataJson,
       })
-      .from(correlationAnalysis)
+      .from(correlations)
       .where(
         or(
-          and(
-            eq(correlationAnalysis.rankingKeyX, rankingKeyX),
-            eq(correlationAnalysis.rankingKeyY, rankingKeyY)
-          ),
-          and(
-            eq(correlationAnalysis.rankingKeyX, rankingKeyY),
-            eq(correlationAnalysis.rankingKeyY, rankingKeyX)
-          )
+          and(eq(correlations.indicatorXId, xId), eq(correlations.indicatorYId, yId)),
+          and(eq(correlations.indicatorXId, yId), eq(correlations.indicatorYId, xId))
         )
       )
       .limit(1);
@@ -53,7 +62,7 @@ export async function findCorrelationPair(
     let scatter: Array<{ areaCode: string; areaName: string; x: number; y: number }>;
     try {
       const parsed = JSON.parse(row.scatterData);
-      if (row.rankingKeyX === rankingKeyX) {
+      if (row.indicatorXId === xId) {
         scatter = parsed;
       } else {
         scatter = parsed.map((p: { areaCode: string; areaName: string; x: number; y: number }) => ({

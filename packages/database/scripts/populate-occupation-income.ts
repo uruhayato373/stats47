@@ -2,7 +2,7 @@
  * 賃金構造基本統計調査 — 職種別年収データ投入スクリプト
  *
  * statsDataId=0003445758 から月給(tab:40)と賞与(tab:44)を取得し、
- * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して ranking_data に INSERT する。
+ * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して observations に INSERT する。
  *
  * Usage:
  *   npx tsx packages/database/scripts/populate-occupation-income.ts
@@ -67,21 +67,30 @@ if (isDryRun) console.log("【DRY RUN】");
 
 // Prepared statements
 const upsertData = db.prepare(`
-  INSERT INTO ranking_data (area_type, category_code, area_code, area_name, year_code, year_name, category_name, value, unit, rank)
-  VALUES ('prefecture', ?, ?, ?, ?, ?, ?, ?, '万円', ?)
-  ON CONFLICT(area_type, category_code, year_code, area_code) DO UPDATE SET
-    value = excluded.value,
+  INSERT INTO observations (
+    indicator_id, entity_type, entity_code, entity_name,
+    year_code, year_name, category_name, value_numeric, unit, rank
+  )
+  VALUES (?, 'prefecture', ?, ?, ?, ?, ?, ?, '万円', ?)
+  ON CONFLICT(indicator_id, entity_type, entity_code, year_code) DO UPDATE SET
+    value_numeric = excluded.value_numeric,
     rank = excluded.rank,
     unit = excluded.unit,
-    updated_at = CURRENT_TIMESTAMP
+    entity_name = excluded.entity_name,
+    year_name = excluded.year_name,
+    category_name = excluded.category_name
 `);
 
 const updateYears = db.prepare(`
-  UPDATE ranking_items SET
+  UPDATE indicators SET
     latest_year = ?,
-    available_years = ?,
+    available_years_json = ?,
     updated_at = CURRENT_TIMESTAMP
-  WHERE ranking_key = ? AND area_type = 'prefecture'
+  WHERE key = ? AND area_type = 'prefecture'
+`);
+
+const findIndicatorId = db.prepare(`
+  SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'
 `);
 
 /** プロキシ対応 fetch */
@@ -205,12 +214,18 @@ async function processOccupation(def: OccupationDef): Promise<void> {
   }
   console.log(`  年度: ${years[0]}〜${years[years.length - 1]} (${years.length}年)`);
 
-  // 4. ranking_data 投入
+  // 4. observations 投入
   let totalInserted = 0;
+
+  const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
+  if (!indicatorRow) {
+    console.warn(`  WARN: indicators に key=${def.rankingKey} が無いためスキップ`);
+    return;
+  }
+  const indicatorId = indicatorRow.id;
 
   const txn = db.transaction(() => {
     for (const [year, prefMap] of byYear) {
-      // ランク計算（降順 — 年収が高い方が上位）
       const sorted = [...prefMap.entries()].sort((a, b) => b[1] - a[1]);
       let rank = 0;
       let prevValue = -1;
@@ -230,14 +245,13 @@ async function processOccupation(def: OccupationDef): Promise<void> {
         const categoryName = def.occupationName;
 
         if (!isDryRun) {
-          const areaCode5 = prefCode + "000"; // 5桁形式に変換（地図 TopoJSON と一致させる）
-          upsertData.run(def.rankingKey, areaCode5, areaName, year, yearName, categoryName, value, rank);
+          const areaCode5 = prefCode + "000";
+          upsertData.run(indicatorId, areaCode5, areaName, year, yearName, categoryName, value, rank);
         }
         totalInserted++;
       }
     }
 
-    // 5. latest_year / available_years 更新
     if (!isDryRun && years.length > 0) {
       const latestYearCode = years[years.length - 1];
       const latestYear = JSON.stringify({ yearCode: latestYearCode, yearName: `${latestYearCode}年度` });
@@ -258,9 +272,11 @@ async function processOccupation(def: OccupationDef): Promise<void> {
     const latestYear = years[years.length - 1];
     const top = db
       .prepare(
-        `SELECT area_name, value, rank FROM ranking_data
-         WHERE category_code = ? AND year_code = ?
-         ORDER BY rank LIMIT 3`
+        `SELECT o.entity_name AS area_name, o.value_numeric AS value, o.rank
+         FROM observations o
+         INNER JOIN indicators i ON i.id = o.indicator_id
+         WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
+         ORDER BY o.rank LIMIT 3`
       )
       .all(def.rankingKey, latestYear) as any[];
     console.log(`  Top 3 (${latestYear}年):`);
@@ -289,10 +305,14 @@ async function main() {
   // 投入結果サマリ
   for (const def of targets) {
     const count = db
-      .prepare("SELECT COUNT(*) as c FROM ranking_data WHERE category_code = ?")
+      .prepare(
+        `SELECT COUNT(*) as c FROM observations o
+         INNER JOIN indicators i ON i.id = o.indicator_id
+         WHERE i.key = ? AND i.area_type = 'prefecture'`
+      )
       .get(def.rankingKey) as any;
     const item = db
-      .prepare("SELECT latest_year, available_years FROM ranking_items WHERE ranking_key = ?")
+      .prepare("SELECT latest_year, available_years_json AS available_years FROM indicators WHERE key = ? AND area_type = 'prefecture'")
       .get(def.rankingKey) as any;
     console.log(
       `  ${def.rankingKey}: ${count.c}件, latest=${item?.latest_year}, years=${item?.available_years}`

@@ -1,9 +1,9 @@
 import "server-only";
 
-import { getDrizzle, rankingData } from "@stats47/database/server";
+import { getDrizzle, indicators, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import type { RankingValue } from "../types";
 import {
@@ -16,6 +16,12 @@ export interface ExportRankingValuesSnapshotResult {
   rows: number;
   totalSizeBytes: number;
   durationMs: number;
+  dryRunPartitions?: Array<{
+    rankingKey: string;
+    areaType: string;
+    yearCode: string;
+    body: string;
+  }>;
 }
 
 interface PartitionKey {
@@ -28,70 +34,80 @@ function pkString(p: PartitionKey): string {
   return `${p.rankingKey}|${p.areaType}|${p.yearCode}`;
 }
 
-async function writePartition(
-  pk: PartitionKey,
-  values: RankingValue[],
-): Promise<number> {
-  const snapshot: RankingValuesPartitionSnapshot = {
-    generatedAt: new Date().toISOString(),
-    rankingKey: pk.rankingKey,
-    areaType: pk.areaType,
-    yearCode: pk.yearCode,
-    count: values.length,
-    values,
-  };
-  const body = JSON.stringify(snapshot);
-  const path = rankingValuesPartitionPath(pk.rankingKey, pk.areaType, pk.yearCode);
-  const result = await saveToR2(path, body, {
-    contentType: "application/json; charset=utf-8",
-  });
-  return result.size;
-}
-
-async function processRankingKey(
+async function processIndicator(
   drizzleDb: ReturnType<typeof getDrizzle>,
-  rankingKey: string,
+  indicator: { id: number; key: string },
   parallelism: number,
+  dryRun: boolean,
+  dryRunSink?: ExportRankingValuesSnapshotResult["dryRunPartitions"],
 ): Promise<{ partitions: number; rows: number; sizeBytes: number }> {
   const rows = await drizzleDb
     .select()
-    .from(rankingData)
-    .where(eq(rankingData.categoryCode, rankingKey));
+    .from(observations)
+    .where(eq(observations.indicatorId, indicator.id));
 
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
   for (const row of rows) {
     const r = row as unknown as Record<string, unknown>;
-    const areaType = String(r.areaType ?? "");
+    const areaType = String(r.entityType ?? "");
     const yearCode = String(r.yearCode ?? "");
     if (!areaType || !yearCode) continue;
 
-    const pk: PartitionKey = { rankingKey, areaType, yearCode };
-    const key = pkString(pk);
-    let group = groups.get(key);
+    const pk: PartitionKey = { rankingKey: indicator.key, areaType, yearCode };
+    const k = pkString(pk);
+    let group = groups.get(k);
     if (!group) {
       group = { pk, values: [] };
-      groups.set(key, group);
+      groups.set(k, group);
     }
+    const valueNumeric = r.valueNumeric;
     group.values.push({
       areaType: areaType as RankingValue["areaType"],
-      areaCode: String(r.areaCode ?? ""),
-      areaName: String(r.areaName ?? ""),
+      areaCode: String(r.entityCode ?? ""),
+      areaName: String(r.entityName ?? ""),
       yearCode,
       yearName: String(r.yearName ?? `${yearCode}年度`),
-      categoryCode: rankingKey,
+      categoryCode: indicator.key,
       categoryName: String(r.categoryName ?? ""),
-      value: r.value !== null && r.value !== undefined ? Number(r.value) : 0,
+      value: valueNumeric !== null && valueNumeric !== undefined ? Number(valueNumeric) : 0,
       unit: String(r.unit ?? ""),
       rank: r.rank !== null && r.rank !== undefined ? Number(r.rank) : 0,
     });
   }
 
+  for (const g of groups.values()) {
+    g.values.sort((a, b) => {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      return a.areaCode < b.areaCode ? -1 : a.areaCode > b.areaCode ? 1 : 0;
+    });
+  }
+
   let sizeBytes = 0;
   const partitionList = [...groups.values()];
+
   for (let i = 0; i < partitionList.length; i += parallelism) {
     const batch = partitionList.slice(i, i + parallelism);
     const sizes = await Promise.all(
-      batch.map((g) => writePartition(g.pk, g.values)),
+      batch.map(async (g) => {
+        const snapshot: RankingValuesPartitionSnapshot = {
+          generatedAt: new Date().toISOString(),
+          rankingKey: g.pk.rankingKey,
+          areaType: g.pk.areaType,
+          yearCode: g.pk.yearCode,
+          count: g.values.length,
+          values: g.values,
+        };
+        const body = JSON.stringify(snapshot);
+        if (dryRun) {
+          dryRunSink?.push({ ...g.pk, body });
+          return Buffer.byteLength(body, "utf8");
+        }
+        const path = rankingValuesPartitionPath(g.pk.rankingKey, g.pk.areaType, g.pk.yearCode);
+        const result = await saveToR2(path, body, {
+          contentType: "application/json; charset=utf-8",
+        });
+        return result.size;
+      }),
     );
     sizeBytes += sizes.reduce((s, n) => s + n, 0);
   }
@@ -100,71 +116,72 @@ async function processRankingKey(
 }
 
 /**
- * ranking_data 全件を partition ごとに分割して R2 に保存する。
+ * observations 全件を partition ごとに分割して R2 に保存する (PR-5)
  *
  * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
- * - 全 partition は約 33K (2026-04 時点)
- * - メモリ制約: 全行 (~1GB) を 1 回でロードすると OOM する。ranking_key 毎にチャンク処理。
- * - 並列度: PARALLELISM (default 24) は 1 ranking_key 内の partition 並列度。
+ * - 並列度: PARALLELISM (default 24) は 1 indicator 内の partition 並列度
+ * - dryRun=true の場合は R2 に書かず body を返す（diff 用）
  *
  * @param options.parallelism partition 並列書き込み数 (default 24)
- * @param options.rankingKeyFilter 特定 ranking_key だけ更新したい場合 (差分書き出し用)
+ * @param options.rankingKeyFilter 特定 indicator key だけ更新したい場合 (差分書き出し用)
  */
 export async function exportRankingValuesSnapshots(
   options: {
     db?: ReturnType<typeof getDrizzle>;
     parallelism?: number;
     rankingKeyFilter?: string;
+    dryRun?: boolean;
   } = {},
 ): Promise<ExportRankingValuesSnapshotResult> {
   const startedAt = Date.now();
   const drizzleDb = options.db ?? getDrizzle();
   const parallelism = options.parallelism ?? 24;
+  const dryRun = options.dryRun ?? false;
+  const dryRunSink = dryRun
+    ? ([] as NonNullable<ExportRankingValuesSnapshotResult["dryRunPartitions"]>)
+    : undefined;
+
+  const indicatorRowsRaw = options.rankingKeyFilter
+    ? await drizzleDb
+        .select({ id: indicators.id, key: indicators.key })
+        .from(indicators)
+        .where(eq(indicators.key, options.rankingKeyFilter))
+    : await drizzleDb
+        .select({ id: indicators.id, key: indicators.key })
+        .from(indicators);
 
   logger.info(
-    { parallelism, rankingKeyFilter: options.rankingKeyFilter ?? "(all)" },
+    { indicatorCount: indicatorRowsRaw.length, dryRun, parallelism },
     "ranking_values export を開始…",
-  );
-
-  // 1. distinct ranking_key を取得 (チャンク単位)
-  const rankingKeys = options.rankingKeyFilter
-    ? [options.rankingKeyFilter]
-    : (
-        await drizzleDb
-          .selectDistinct({ rk: rankingData.categoryCode })
-          .from(rankingData)
-      )
-          .map((r) => r.rk)
-          .filter((rk): rk is string => Boolean(rk));
-
-  logger.info(
-    { rankingKeyCount: rankingKeys.length },
-    "対象 ranking_key 数を確定",
   );
 
   let totalPartitions = 0;
   let totalRows = 0;
   let totalSizeBytes = 0;
 
-  for (let i = 0; i < rankingKeys.length; i++) {
-    const rk = rankingKeys[i];
+  for (let i = 0; i < indicatorRowsRaw.length; i++) {
+    const ind = indicatorRowsRaw[i];
     try {
-      const result = await processRankingKey(drizzleDb, rk, parallelism);
+      const result = await processIndicator(drizzleDb, ind, parallelism, dryRun, dryRunSink);
       totalPartitions += result.partitions;
       totalRows += result.rows;
       totalSizeBytes += result.sizeBytes;
     } catch (error) {
       logger.error(
-        { rankingKey: rk, error: error instanceof Error ? error.message : String(error) },
-        "ranking_key 処理失敗。スキップ",
+        {
+          indicatorId: ind.id,
+          indicatorKey: ind.key,
+          error: error instanceof Error ? error.message : String(error),
+        },
+        "indicator 処理失敗。スキップ",
       );
     }
 
-    if ((i + 1) % 25 === 0 || i === rankingKeys.length - 1) {
+    if ((i + 1) % 100 === 0 || i === indicatorRowsRaw.length - 1) {
       logger.info(
         {
           processed: i + 1,
-          total: rankingKeys.length,
+          total: indicatorRowsRaw.length,
           totalPartitions,
           totalRows,
           totalSizeBytes,
@@ -176,8 +193,8 @@ export async function exportRankingValuesSnapshots(
 
   const durationMs = Date.now() - startedAt;
   logger.info(
-    { partitions: totalPartitions, rows: totalRows, totalSizeBytes, durationMs },
-    "ranking_values snapshot 全 partition を R2 に保存しました",
+    { partitions: totalPartitions, rows: totalRows, totalSizeBytes, durationMs, dryRun },
+    "ranking_values snapshot を R2 に保存しました",
   );
 
   return {
@@ -185,8 +202,6 @@ export async function exportRankingValuesSnapshots(
     rows: totalRows,
     totalSizeBytes,
     durationMs,
+    dryRunPartitions: dryRunSink,
   };
 }
-
-// suppress unused import warning when sql isn't referenced
-void sql;

@@ -17,9 +17,7 @@ disable-model-invocation: true
 
 **担当外（別ルート）**:
 - 記事別 OGP（動的タイトル差し込み） → Satori `apps/web/src/app/**/opengraph-image.tsx`
-- 固定 OGP（凝ったビジュアル） → Remotion `apps/remotion/src/features/ogp/`
-
-詳細は `docs/01_技術設計/ogp_default_design.md` の「画像生成 3 方式の使い分け」を参照。
+- 固定 OGP（凝ったビジュアル） → Remotion `apps/remotion/src/features/ogp/`（手順は同ディレクトリ `README.md`）
 
 ## 引数
 
@@ -125,4 +123,4 @@ use-case に応じて以下の推奨パスを出力する:
 
 - `reference/catalog.md` — 全 43 テンプレートのカタログ
 - `reference/formats.md` — 用途別のサイズ・セーフエリア・制約
-- `docs/01_技術設計/ogp_default_design.md` — 画像生成 3 方式の使い分け規約
+- `apps/remotion/src/features/ogp/README.md` — Remotion 製 OGP の実装一覧と書き出し手順

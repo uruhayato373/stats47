@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingTags } from "@stats47/database/server";
+import { getDrizzle, indicators, indicatorTags } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -14,12 +14,13 @@ export async function getItemsByTag(
   try {
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
-      .select({ rankingKey: rankingTags.rankingKey, areaType: rankingTags.areaType })
-      .from(rankingTags)
+      .select({ rankingKey: indicators.key, areaType: indicators.areaType })
+      .from(indicatorTags)
+      .innerJoin(indicators, eq(indicators.id, indicatorTags.indicatorId))
       .where(
         and(
-          eq(rankingTags.tagKey, tagKey),
-          eq(rankingTags.areaType, areaType)
+          eq(indicatorTags.tagKey, tagKey),
+          eq(indicators.areaType, areaType)
         )
       );
 

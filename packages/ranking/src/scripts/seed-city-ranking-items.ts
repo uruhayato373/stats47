@@ -1,9 +1,9 @@
 #!/usr/bin/env tsx
 /**
- * 市区町村 ranking_items 一括登録スクリプト
+ * 市区町村 indicators 一括登録スクリプト
  *
  * 既存の都道府県 SSDS ランキング (area_type='prefecture') を参照し、
- * 対応する市区町村版 (area_type='city') を自動生成して ranking_items に INSERT する。
+ * 対応する市区町村版 (area_type='city') を自動生成して indicators に INSERT する。
  *
  * statsDataId のマッピング:
  *   都道府県 000001xxxx → 市区町村 000002xxxx
@@ -27,92 +27,71 @@ function parseArgs() {
   return { dryRun: args.includes("--dry-run") };
 }
 
-/**
- * 都道府県 statsDataId → 市区町村 statsDataId に変換
- * 000001xxxx → 000002xxxx
- */
 function mapStatsDataId(prefStatsDataId: string): string {
   return prefStatsDataId.replace("000001", "000002");
 }
 
-interface PrefRankingRow {
-  ranking_key: string;
+interface PrefIndicatorRow {
+  key: string;
   title: string;
-  ranking_name: string;
   unit: string;
   subtitle: string | null;
   demographic_attr: string | null;
   normalization_basis: string | null;
   description: string | null;
-  data_source_id: string;
-  source_config: string;
-  value_display_config: string | null;
-  visualization_config: string | null;
-  calculation_config: string | null;
+  source_id: string | null;
+  source_config_json: string | null;
+  value_display_config_json: string | null;
+  visualization_config_json: string | null;
+  calculation_config_json: string | null;
   category_key: string | null;
   survey_id: string | null;
   group_key: string | null;
-  additional_categories: string | null;
-  is_calculated: number;
+  additional_categories_json: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
 }
 
 function main() {
   const { dryRun } = parseArgs();
   const db = new Database(DB_PATH);
 
-  // 1. アクティブな都道府県 SSDS ランキングを取得（計算型は除外）
   const prefItems = db.prepare(`
-    SELECT ranking_key, title, ranking_name, unit, subtitle, demographic_attr,
-           normalization_basis, description, data_source_id, source_config,
-           value_display_config, visualization_config, calculation_config,
-           category_key, survey_id, group_key, additional_categories, is_calculated
-    FROM ranking_items
+    SELECT key, title, unit, subtitle, demographic_attr,
+           normalization_basis, description, source_id, source_config_json,
+           value_display_config_json, visualization_config_json, calculation_config_json,
+           category_key, survey_id, group_key, additional_categories_json,
+           seo_title, seo_description
+    FROM indicators
     WHERE area_type = 'prefecture'
       AND is_active = 1
-      AND source_config LIKE '%000001%'
-      AND (is_calculated = 0 OR is_calculated IS NULL)
-    ORDER BY ranking_key
-  `).all() as PrefRankingRow[];
+      AND source_config_json LIKE '%000001%'
+      AND (
+        calculation_config_json IS NULL
+        OR json_extract(calculation_config_json, '$.isCalculated') IS NOT 1
+      )
+    ORDER BY key
+  `).all() as PrefIndicatorRow[];
 
   console.log(`都道府県 SSDS ランキング（非計算型）: ${prefItems.length}件`);
 
-  // 2. 既存の city ranking_key を取得（重複防止）
   const existingCityKeys = new Set(
-    (db.prepare(`SELECT ranking_key FROM ranking_items WHERE area_type = 'city'`).all() as { ranking_key: string }[])
-      .map(r => r.ranking_key)
+    (db.prepare(`SELECT key FROM indicators WHERE area_type = 'city'`).all() as { key: string }[])
+      .map(r => r.key)
   );
-  console.log(`既存 city ranking_keys: ${existingCityKeys.size}件`);
+  console.log(`既存 city keys: ${existingCityKeys.size}件`);
 
-  // 3. 新規追加対象を決定
-  const toInsert: Array<{
-    ranking_key: string;
-    title: string;
-    ranking_name: string;
-    unit: string;
-    subtitle: string | null;
-    demographic_attr: string | null;
-    normalization_basis: string | null;
-    description: string | null;
-    data_source_id: string;
-    source_config: string;
-    value_display_config: string | null;
-    visualization_config: string | null;
-    calculation_config: string | null;
-    category_key: string | null;
-    survey_id: string | null;
-    group_key: string | null;
-    additional_categories: string | null;
-  }> = [];
+  const toInsert: PrefIndicatorRow[] = [];
 
   for (const pref of prefItems) {
-    if (existingCityKeys.has(pref.ranking_key)) continue;
+    if (existingCityKeys.has(pref.key)) continue;
+    if (!pref.source_config_json) continue;
 
-    // source_config の statsDataId をマッピング
     let sourceConfig: Record<string, unknown>;
     try {
-      sourceConfig = JSON.parse(pref.source_config);
+      sourceConfig = JSON.parse(pref.source_config_json);
     } catch {
-      console.warn(`  SKIP ${pref.ranking_key}: invalid source_config`);
+      console.warn(`  SKIP ${pref.key}: invalid source_config_json`);
       continue;
     }
 
@@ -125,23 +104,8 @@ function main() {
     const citySourceConfig = { ...sourceConfig, statsDataId: cityStatsDataId };
 
     toInsert.push({
-      ranking_key: pref.ranking_key,
-      title: pref.title,
-      ranking_name: pref.ranking_name,
-      unit: pref.unit,
-      subtitle: pref.subtitle,
-      demographic_attr: pref.demographic_attr,
-      normalization_basis: pref.normalization_basis,
-      description: pref.description,
-      data_source_id: pref.data_source_id,
-      source_config: JSON.stringify(citySourceConfig),
-      value_display_config: pref.value_display_config,
-      visualization_config: pref.visualization_config,
-      calculation_config: pref.calculation_config,
-      category_key: pref.category_key,
-      survey_id: pref.survey_id,
-      group_key: pref.group_key,
-      additional_categories: pref.additional_categories,
+      ...pref,
+      source_config_json: JSON.stringify(citySourceConfig),
     });
   }
 
@@ -149,41 +113,43 @@ function main() {
 
   if (dryRun) {
     for (const item of toInsert) {
-      const sc = JSON.parse(item.source_config);
-      console.log(`  ${item.ranking_key} — ${item.title} (${sc.statsDataId} / ${sc.cdCat01})`);
+      const sc = item.source_config_json ? JSON.parse(item.source_config_json) : {};
+      console.log(`  ${item.key} — ${item.title} (${sc.statsDataId} / ${sc.cdCat01})`);
     }
     console.log("\n--dry-run: 実際の INSERT は行いません");
     db.close();
     return;
   }
 
-  // 4. 一括 INSERT
   const insertStmt = db.prepare(`
-    INSERT INTO ranking_items (
-      ranking_key, area_type, title, ranking_name, unit,
-      subtitle, demographic_attr, normalization_basis, description,
-      data_source_id, source_config, value_display_config, visualization_config,
-      calculation_config, category_key, survey_id, group_key, additional_categories,
-      is_active, is_featured, featured_order, is_calculated,
+    INSERT INTO indicators (
+      key, area_type, title, unit, subtitle, demographic_attr,
+      normalization_basis, description, source_id, source_config_json,
+      value_display_config_json, visualization_config_json, calculation_config_json,
+      category_key, survey_id, group_key, additional_categories_json,
+      seo_title, seo_description,
+      is_active, is_featured, featured_order,
       created_at, updated_at
     ) VALUES (
-      ?, 'city', ?, ?, ?,
+      ?, 'city', ?, ?, ?, ?,
       ?, ?, ?, ?,
+      ?, ?, ?,
       ?, ?, ?, ?,
-      ?, ?, ?, ?, ?,
-      1, 0, 0, 0,
+      ?, ?,
+      1, 0, 0,
       datetime('now'), datetime('now')
     )
   `);
 
-  const insertMany = db.transaction((items: typeof toInsert) => {
+  const insertMany = db.transaction((items: PrefIndicatorRow[]) => {
     let count = 0;
     for (const item of items) {
       insertStmt.run(
-        item.ranking_key, item.title, item.ranking_name, item.unit,
-        item.subtitle, item.demographic_attr, item.normalization_basis, item.description,
-        item.data_source_id, item.source_config, item.value_display_config, item.visualization_config,
-        item.calculation_config, item.category_key, item.survey_id, item.group_key, item.additional_categories,
+        item.key, item.title, item.unit, item.subtitle, item.demographic_attr,
+        item.normalization_basis, item.description, item.source_id, item.source_config_json,
+        item.value_display_config_json, item.visualization_config_json, item.calculation_config_json,
+        item.category_key, item.survey_id, item.group_key, item.additional_categories_json,
+        item.seo_title, item.seo_description,
       );
       count++;
     }
@@ -191,11 +157,10 @@ function main() {
   });
 
   const inserted = insertMany(toInsert);
-  console.log(`\n${inserted}件を ranking_items (area_type='city') に INSERT しました`);
+  console.log(`\n${inserted}件を indicators (area_type='city') に INSERT しました`);
 
-  // 5. 確認
-  const total = db.prepare(`SELECT COUNT(*) as c FROM ranking_items WHERE area_type = 'city' AND is_active = 1`).get() as { c: number };
-  console.log(`アクティブ city ranking_items 合計: ${total.c}件`);
+  const total = db.prepare(`SELECT COUNT(*) as c FROM indicators WHERE area_type = 'city' AND is_active = 1`).get() as { c: number };
+  console.log(`アクティブ city indicators 合計: ${total.c}件`);
 
   db.close();
 }

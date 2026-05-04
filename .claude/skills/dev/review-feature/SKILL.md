@@ -1,115 +1,94 @@
 ---
 name: review-feature
-description: feature ドメインコードを専門家パネルでレビューする。Use when user says "feature レビュー", "review-feature", "ドメインレビュー". ドメイン固有パネリスト自動追加.
+description: コード品質を専門家パネルで多角的にレビューする。--scope で対象を選ぶ（feature / app / packages / types / ui-consistency）。Use when user says "feature レビュー", "ドメインレビュー", "App Router レビュー", "ルーティングレビュー", "パッケージレビュー", "型レビュー", "tsc エラー直して", "UI一貫性レビュー", "見た目がバラバラ", "ads レビュー", "広告レビュー" 等. dev-review Issue に出力.
 disable-model-invocation: true
-argument-hint: "[feature-name]"
+argument-hint: "--scope <feature|app|packages|types|ui-consistency> [scope-specific args]"
 ---
 
-`apps/web/src/features/` 配下の feature ドメインコードを、専門家パネルで多角的にレビューする。
-ドメイン固有のパネリスト定義がある場合は自動で追加読込する。
+コード品質を専門家パネルで多角的にレビューする。`--scope` で対象を選ぶことで、対象固有のパネリスト・メソドロジー・出力フォーマットを使い分ける。
 
 ## 引数
 
 ```
-$ARGUMENTS — レビュー対象（以下のいずれか）
-  - feature 名: "ads" → apps/web/src/features/ads/ をレビュー
-  - 複数指定:   "ads,blog" → 並列レビュー
-  - 省略時:     エラー（feature 名を指定すること）
+$ARGUMENTS — --scope <name> [scope-specific args]
+             --scope: 対象。省略時は feature
+                      feature          : apps/web/src/features/* レビュー（ドメイン固有パネリスト追加）
+                      app              : Next.js App Router 層レビュー（SEO / メタデータ / キャッシュ）
+                      packages         : packages/ レビュー（パッケージ境界・依存・テスト）
+                      types            : 型安全性レビュー（any / as キャスト・型推論）
+                      ui-consistency   : UI 一貫性レビュー（ページ横断の見た目統一）
+             scope-specific args: scope ごとの追加引数（feature 名・route 名・パッケージ名・"all" 等）
 ```
 
-## 手順
+ショートカット例:
+- `/review-feature --scope feature ads` — feature ads ドメインのレビュー
+- `/review-feature --scope app ranking` — App Router の /ranking ルートレビュー
+- `/review-feature --scope packages all` — 全パッケージ横断レビュー
+- `/review-feature --scope types` — 型安全性のグローバルレビュー
+- `/review-feature --scope ui-consistency` — UI 一貫性レビュー
 
-### Phase 1: 対象の把握
+## scope 別ガイドの参照
 
-1. `apps/web/src/features/{name}/` の全ソースコードを読み込む
-2. ディレクトリ構成・ファイル数・行数を把握する
-3. `README.md` があれば読む
-4. `index.ts` / `server.ts` のエクスポート構造を確認する
-5. 既存テスト（`*.test.ts`, `__tests__/`）を確認する
+`--scope` 値に応じて `.claude/skills/dev/review-feature/scopes/<name>.md` を読み、その手順に従ってレビューを実行する:
 
-### Phase 2: 依存関係の把握
+| --scope 値 | 参照ファイル | 主なパネリスト数 | 対象 |
+|---|---|---|---|
+| `feature` | `scopes/feature.md` | 6 + ドメイン固有 | apps/web/src/features/* |
+| `app` | `scopes/app.md` | 7 | apps/web/src/app/* |
+| `packages` | `scopes/packages.md` | 8 | packages/* |
+| `types` | `scopes/types.md` | — (静的解析中心) | プロジェクト全体 |
+| `ui-consistency` | `scopes/ui-consistency.md` | 7 | ページ横断 |
 
-1. この feature が使用している外部パッケージ・他 feature・packages/ を特定
-2. この feature を使用している側（app ページ、他 feature）を Grep で特定
-3. DB スキーマとの接続（repository 層）を確認
+各 scope 別ガイドにはパネリストのキャラクター定義・関心領域・出力フォーマット・横断レビュー時の追加分析が含まれている。**dispatcher（本 SKILL.md）はメソドロジーを定義しない**。各 scope ファイルの内容に従うこと。
 
-### Phase 3: ドメイン固有パネリストの読込
+## 共通ルール（全 scope で守る）
 
-1. `${CLAUDE_SKILL_DIR}/reference/domains/{feature-name}.md` が存在するか確認
-2. 存在する場合、ドメイン固有のパネリスト定義を読み込み、汎用パネリストに追加する
-3. 存在しない場合、汎用パネリスト6人のみでレビューする
+### パネルレビューの原則
 
-### Phase 4: パネルレビュー実施
+- 全員が同じ結論を出してはならない。意見の対立・矛盾を恐れない
+- 褒めるだけのパネリストを作ってはならない。**全員が最低 1 つ批判する**
+- パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
+- **コードを実際に読んでからレビューする**。推測でレビューしない
 
-汎用パネリスト6人（+ ドメイン固有パネリスト）として、それぞれ独立した視点で評価する。
+### 出力先（GitHub Issue）
 
-### Phase 5: 総括
+すべてのレビューは GitHub Issue に出力する。`dev-review` ラベルを付与する。
 
-パネル総括を作成し、ファイルに保存する。
+```bash
+# 本文を /tmp/review-body.md に書き出し後:
+gh issue create \
+  --title "[Dev Review] {scope}:{target} / YYYY-MM-DD" \
+  --label "dev-review" \
+  --body-file /tmp/review-body.md
+```
 
-## 汎用パネリスト定義
+タイトル例:
+- `[Dev Review] feature:ads / 2026-05-04`
+- `[Dev Review] app:ranking / 2026-05-04`
+- `[Dev Review] packages:all / 2026-05-04`
+- `[Dev Review] types / 2026-05-04`
+- `[Dev Review] ui-consistency / 2026-05-04`
 
-各パネリストは独自の関心・価値観・語り口を持つ。キャラクターを崩さないこと。
+過去のレビューは `gh issue list --label dev-review --state all` で参照できる。
 
----
+### 出力フォーマット（共通骨格）
 
-### 1. ソフトウェアアーキテクト
-- 肩書: DDD/クリーンアーキテクチャ実践者・大規模モノレポ設計歴 10 年
-- 関心: feature 境界・責務分離・依存方向・repository/service/component の層構造・凝集度と結合度・feature 内ロジックの packages/ 移譲判断
-- 語り口: 原則に基づく。「この feature の責務は一文で説明できるか？」
-- よく言うこと: 「この関数、ここにあるべき？」「依存が逆転している」「server.ts と index.ts の境界が曖昧」「この純粋関数、packages/utils に移動すべきでは？」「他の feature でも使うなら package に昇格」
+各 scope ガイドが指定する詳細フォーマットに従いつつ、最低限以下のセクションを含める:
 
-### 2. パフォーマンスエンジニア
-- 肩書: Next.js / Cloudflare Workers のパフォーマンス最適化歴 8 年
-- 関心: Server Component vs Client Component の適切さ・バンドルサイズ・N+1 クエリ・ISR/キャッシュ戦略・CLS
-- 語り口: 数値で語る。「計測したか？」が口癖
-- よく言うこと: 「この client component、server component でよくない？」「DB クエリが N+1 になっている」「この画像、width/height が未指定で CLS を起こす」
+```
+## {Scope名} レビュー: {対象}
 
-### 3. テストエンジニア
-- 肩書: TDD 実践者・テスト設計の専門家
-- 関心: テストの有無・テストの質・エッジケース・テストしやすい設計・ビジネスロジックのテスト優先度
-- 語り口: 「このコード、テストなしでリファクタできる？」が判断基準
-- よく言うこと: 「このビジネスロジック、テストがない」「service 層を純粋関数に切り出せばテストしやすくなる」
-
-### 4. TypeScript 型システム専門家
-- 肩書: TypeScript コンパイラに精通・型レベルプログラミングの実践者
-- 関心: 型安全性・any/as の使用・型推論の活用・nullable の扱い・discriminated union
-- 語り口: 「型が正しければ実行時エラーは起きない」
-- よく言うこと: 「この any は型安全性を壊している」「nullable を ! で握りつぶすな」「as キャストが多い」
-
-### 5. セキュリティエンジニア
-- 肩書: OWASP Top 10 に精通・サーバーサイド/クライアントサイド両方
-- 関心: インジェクション・認証/認可・秘密情報の扱い・入力バリデーション・XSS・オープンリダイレクト
-- 語り口: 「この入力、信頼していいのか？」が口癖
-- よく言うこと: 「この値、サニタイズされているか」「環境変数がクライアントに漏れないか」「外部 URL をそのまま href に渡すな」
-
-### 6. リファクタリング専門家
-- 肩書: レガシーコード改善の専門家・Martin Fowler のリファクタリングカタログを熟知
-- 関心: コード重複・命名の不整合・長すぎる関数・未使用コード・Primitive Obsession
-- 語り口: 「このコード、3ヶ月後の自分が理解できるか？」
-- よく言うこと: 「このカラム名 htmlContent、実際は URL では？」「同じパターンが複数箇所にある」「この定数、半分しか埋まっていない」
+対象: {パス・規模}
 
 ---
 
-## 出力フォーマット
-
-````
-## Feature レビュー: {feature 名}
-
-対象: apps/web/src/features/{name}/
-コード規模: {行数} 行 / {ファイル数} ファイル / テスト {テスト数} 個
-依存先: {packages/, 他 feature}
-使用元: {app ページ, 他 feature}
-
----
-
-### ソフトウェアアーキテクト
+### {パネリスト1}
 （2〜4文。語り口に沿って）
 
-### パフォーマンスエンジニア
+### {パネリスト2}
 （2〜4文）
 
-... （汎用6人 + ドメイン固有パネリスト分）
+... （scope に応じた人数分）
 
 ---
 
@@ -121,29 +100,23 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 ### 改善提案（優先度順）
 1. ...（想定工数: S/M/L）
 2. ...
-3. ...
 
 ### 良い点（維持すべき）
 - ...
 
 ### 次のアクション
 - [ ] ...
-- [ ] ...
-````
+```
+
+横断レビュー（all 指定）の場合、scope ファイルが指示するクロスカット分析セクションを追加する。
+
+## 関連スキル
+
+- `/review-tests` — テスト網羅性の確認・追加（独立スキル。本スキルとは別系統で使う）
+- `/run-tests` — テスト実行
+- `/security-review` — セキュリティ専門レビュー
 
 ## 注意
 
-- 全員が同じ結論を出してはならない。意見の対立・矛盾を恐れない
-- 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
-- パネリストのキャラクターを維持する
-- **コードを実際に読んでからレビューする。推測でレビューしない**
-- ドメイン固有パネリストは、汎用パネリストと異なる視点を提供すること（重複回避）
-- 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] feature:{feature名} / YYYY-MM-DD`）として作成する:
-  ```bash
-  # 本文を /tmp/review-feature-body.md に書き出し後:
-  gh issue create \
-    --title "[Dev Review] feature:{feature名} / YYYY-MM-DD" \
-    --label "dev-review" \
-    --body-file /tmp/review-feature-body.md
-  ```
-- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
+- **review-tests は本スキルから独立**。テスト確認は `/review-tests` を使う
+- 過去には scope ごとに別スキル（review-app, review-packages, review-types, review-ui-consistency, review-ads）が存在したが、`--scope` 引数化で本スキルに統合済み

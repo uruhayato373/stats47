@@ -6,7 +6,7 @@
  *
  * Phase 1: GA4 API → 日次 PV データ取得
  * Phase 2: ranking_page_views に UPSERT 保存
- * Phase 3: ranking_page_views から集計 → カテゴリ分散 → ranking_items 更新
+ * Phase 3: ranking_page_views から集計 → カテゴリ分散 → indicators 更新
  *
  * Usage:
  *   npx tsx scripts/update-featured-rankings.ts
@@ -254,10 +254,10 @@ async function main() {
     console.log(`   ${String(i + 1).padStart(2)}. ${item.rankingKey} (${item.pv} PV)`);
   });
 
-  // ranking_items からカテゴリ情報を取得
+  // indicators からカテゴリ情報を取得
   const itemRows = db
     .prepare(
-      `SELECT ranking_key, category_key FROM ranking_items WHERE area_type = 'prefecture' AND is_active = 1`
+      `SELECT key AS ranking_key, category_key FROM indicators WHERE area_type = 'prefecture' AND is_active = 1`
     )
     .all() as { ranking_key: string; category_key: string | null }[];
 
@@ -279,21 +279,19 @@ async function main() {
   });
 
   if (dryRun) {
-    console.log("\n🔍 --dry-run: ranking_items の更新をスキップしました（PV データは保存済み）。");
+    console.log("\n🔍 --dry-run: indicators の更新をスキップしました（PV データは保存済み）。");
     db.close();
     return;
   }
 
-  // ranking_items 更新（トランザクション）
+  // indicators 更新（トランザクション）
   const updateTransaction = db.transaction(() => {
-    // 全件の is_featured をリセット
     db.prepare(
-      `UPDATE ranking_items SET is_featured = 0, featured_order = 0 WHERE area_type = 'prefecture'`
+      `UPDATE indicators SET is_featured = 0, featured_order = 0 WHERE area_type = 'prefecture'`
     ).run();
 
-    // 選ばれたキーに is_featured と featured_order をセット
     const updateStmt = db.prepare(
-      `UPDATE ranking_items SET is_featured = 1, featured_order = ?, updated_at = datetime('now') WHERE ranking_key = ? AND area_type = 'prefecture'`
+      `UPDATE indicators SET is_featured = 1, featured_order = ?, updated_at = datetime('now') WHERE key = ? AND area_type = 'prefecture'`
     );
     let order = 1;
     for (const item of featured) {
@@ -306,8 +304,7 @@ async function main() {
 
   const updated = updateTransaction();
   console.log(`\n✅ ${updated} 件の注目ランキングを更新しました。`);
-  console.log(`   → /sync-remote-d1 --key ranking_items でリモートに反映してください。`);
-  console.log(`   → /sync-remote-d1 --table ranking_page_views で PV データも反映できます。`);
+  console.log(`   → /export-snapshots → /push-r2 で本番反映してください。`);
 
   db.close();
 }

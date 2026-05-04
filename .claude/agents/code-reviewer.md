@@ -14,15 +14,14 @@
 
 ## 担当スキル
 
-| スキル | 用途 |
+| 呼び出し例 | 用途 |
 |---|---|
-| `/review-feature` | feature ドメインコードレビュー |
-| `/review-packages` | packages/ コード品質レビュー |
-| `/review-types` | 型安全性レビュー |
-| `/review-tests` | テスト確認・作成・更新 |
-| `/review-ui-consistency` | ページ横断 UI 一貫性 |
-| `/review-app` | App Router 層レビュー |
-| `/review-ads` | 広告ドメインレビュー |
+| `/review-feature --scope feature <feature名>` | feature ドメインコードレビュー（例: `--scope feature ads`） |
+| `/review-feature --scope packages` | packages/ コード品質レビュー |
+| `/review-feature --scope types` | 型安全性レビュー |
+| `/review-feature --scope ui-consistency` | ページ横断 UI 一貫性 |
+| `/review-feature --scope app <route|all>` | App Router 層レビュー |
+| `/review-tests` | テスト確認・作成・更新（独立スキル） |
 | `/security-review` | セキュリティレビュー（OWASP Top 10 + stats47 固有） |
 
 ## レビュー重大度基準（ECC Code Reviewer 準拠）
@@ -38,10 +37,10 @@
 
 ## レビュー実行パターン
 
-1. **機能追加後**: `/review-feature` → `/review-tests` → `/review-types`
-2. **リファクタリング後**: `/review-packages` → `/review-types`
-3. **UI 変更後**: `/review-ui-consistency` → `/review-app`
-4. **広告機能変更後**: `/review-ads`
+1. **機能追加後**: `/review-feature --scope feature <name>` → `/review-tests` → `/review-feature --scope types`
+2. **リファクタリング後**: `/review-feature --scope packages` → `/review-feature --scope types`
+3. **UI 変更後**: `/review-feature --scope ui-consistency` → `/review-feature --scope app`
+4. **広告機能変更後**: `/review-feature --scope feature ads`
 
 ## 担当外
 

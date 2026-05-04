@@ -1,8 +1,10 @@
 import "server-only";
 
-import type { InsertAreaProfileRanking } from "@stats47/database/server";
 import { listRankingItemsWithTags, listRankingValues } from "@stats47/ranking/server";
-import { replaceAreaProfileRankings } from "../repositories/replace-area-profile-rankings";
+import {
+  replaceAreaProfileRankings,
+  type AreaProfileWriteRow,
+} from "../repositories/replace-area-profile-rankings";
 import { buildAreaProfileRows, type AreaRankingData } from "../utils/build-area-profile-rows";
 import type { BatchLog } from "../types";
 
@@ -148,7 +150,7 @@ export async function runBatchAreaProfile(callbacks: BatchCallbacks): Promise<vo
       try {
         const now = new Date().toISOString();
         const areaName = dataList[0].areaName;
-        const rows = buildAreaProfileRows(areaCode, areaName, dataList, now) as InsertAreaProfileRanking[];
+        const rows = buildAreaProfileRows(areaCode, areaName, dataList, now) as AreaProfileWriteRow[];
 
         await replaceAreaProfileRankings(areaCode, rows);
         completed++;

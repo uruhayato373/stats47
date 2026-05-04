@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { getDrizzle, indicators } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { count, sql } from "drizzle-orm";
 import type { RankingItemCounts } from "../../types";
@@ -12,13 +12,13 @@ export async function getRankingItemStats(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select({
-        areaType: rankingItems.areaType,
+        areaType: indicators.areaType,
         total: count(),
-        active: sql<number>`SUM(CASE WHEN ${rankingItems.isActive} = 1 THEN 1 ELSE 0 END)`,
-        inactive: sql<number>`SUM(CASE WHEN ${rankingItems.isActive} = 0 THEN 1 ELSE 0 END)`,
+        active: sql<number>`SUM(CASE WHEN ${indicators.isActive} = 1 THEN 1 ELSE 0 END)`,
+        inactive: sql<number>`SUM(CASE WHEN ${indicators.isActive} = 0 THEN 1 ELSE 0 END)`,
       })
-      .from(rankingItems)
-      .groupBy(rankingItems.areaType);
+      .from(indicators)
+      .groupBy(indicators.areaType);
 
     return ok(
       rows.map((row) => ({

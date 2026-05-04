@@ -144,11 +144,11 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 
 出力形式:
 - 「今週のトレンド機会」（stats47 データとマッチするもの）
-- 「要調査」（マッチ不明だが需要がありそうなもの → `/discover-trends-all` の実行を提案）
+- 「要調査」（マッチ不明だが需要がありそうなもの → `/discover-trends --source all` の実行を提案）
 - 「関連なし」はスキップ
 
 注: フルスキャン（6ソース統合）が必要な場合は、
-計画タスクとして「/discover-trends-all 実行」を Should/Could に提案する。
+計画タスクとして「/discover-trends --source all 実行」を Should/Could に提案する。
 ```
 
 ### Phase 2: 戦略分析
@@ -306,4 +306,4 @@ gh issue create \
 - `.github/ISSUE_TEMPLATE/weekly-plan.md` — Issue テンプレ
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
-- `.claude/skills/blog/discover-trends-all/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案）
+- `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案、`--source all` で全 6 ソース統合）

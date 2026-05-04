@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingTags } from "@stats47/database/server";
+import { getDrizzle, indicators, indicatorTags } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, eq } from "drizzle-orm";
@@ -13,20 +13,36 @@ export async function syncRankingTags(
 ): Promise<Result<boolean, Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    await drizzleDb
-      .delete(rankingTags)
+
+    const indicatorRow = await drizzleDb
+      .select({ id: indicators.id })
+      .from(indicators)
       .where(
         and(
-          eq(rankingTags.rankingKey, rankingKey),
-          eq(rankingTags.areaType, areaType)
+          eq(indicators.key, rankingKey),
+          eq(
+            indicators.areaType,
+            areaType as "prefecture" | "city" | "national" | "port" | "fishing_port"
+          )
         )
+      )
+      .limit(1);
+
+    if (indicatorRow.length === 0) {
+      return err(
+        new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
       );
+    }
+    const indicatorId = indicatorRow[0].id;
+
+    await drizzleDb
+      .delete(indicatorTags)
+      .where(eq(indicatorTags.indicatorId, indicatorId));
 
     if (tagKeys.length > 0) {
-      await drizzleDb.insert(rankingTags).values(
+      await drizzleDb.insert(indicatorTags).values(
         tagKeys.map((tagKey) => ({
-          rankingKey,
-          areaType,
+          indicatorId,
           tagKey,
           createdAt: new Date().toISOString(),
         }))

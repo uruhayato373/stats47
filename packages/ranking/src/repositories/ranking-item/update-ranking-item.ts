@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -22,7 +22,9 @@ export async function updateRankingItem(
     const mappedUpdates: Record<string, unknown> = {};
 
     if (updates.title !== undefined) mappedUpdates.title = updates.title;
-    if (updates.rankingName !== undefined) mappedUpdates.rankingName = updates.rankingName;
+    if (updates.rankingName !== undefined && updates.title === undefined) {
+      mappedUpdates.title = updates.rankingName;
+    }
     if (updates.unit !== undefined) mappedUpdates.unit = updates.unit;
     if (updates.subtitle !== undefined) mappedUpdates.subtitle = updates.subtitle ?? null;
     if (updates.description !== undefined) mappedUpdates.description = updates.description ?? null;
@@ -32,12 +34,12 @@ export async function updateRankingItem(
     if (updates.isActive !== undefined) mappedUpdates.isActive = updates.isActive;
     if (updates.isFeatured !== undefined) mappedUpdates.isFeatured = updates.isFeatured;
     if (updates.featuredOrder !== undefined) mappedUpdates.featuredOrder = updates.featuredOrder;
-    if (updates.sourceConfig !== undefined) mappedUpdates.sourceConfig = JSON.stringify(updates.sourceConfig);
-    if (updates.valueDisplay !== undefined) mappedUpdates.valueDisplayConfig = JSON.stringify(updates.valueDisplay);
-    if (updates.visualization !== undefined) mappedUpdates.visualizationConfig = JSON.stringify(updates.visualization);
-    if (updates.calculation !== undefined) mappedUpdates.calculationConfig = JSON.stringify(updates.calculation);
+    if (updates.sourceConfig !== undefined) mappedUpdates.sourceConfigJson = JSON.stringify(updates.sourceConfig);
+    if (updates.valueDisplay !== undefined) mappedUpdates.valueDisplayConfigJson = JSON.stringify(updates.valueDisplay);
+    if (updates.visualization !== undefined) mappedUpdates.visualizationConfigJson = JSON.stringify(updates.visualization);
+    if (updates.calculation !== undefined) mappedUpdates.calculationConfigJson = JSON.stringify(updates.calculation);
     if (updates.latestYear !== undefined) mappedUpdates.latestYear = updates.latestYear ? JSON.stringify(updates.latestYear) : null;
-    if (updates.availableYears !== undefined) mappedUpdates.availableYears = updates.availableYears ? JSON.stringify(updates.availableYears) : null;
+    if (updates.availableYears !== undefined) mappedUpdates.availableYearsJson = updates.availableYears ? JSON.stringify(updates.availableYears) : null;
 
     if (Object.keys(mappedUpdates).length === 0) {
       return err(new Error("No fields to update"));
@@ -47,12 +49,12 @@ export async function updateRankingItem(
 
     const drizzleDb = db ?? getDrizzle();
     await drizzleDb
-      .update(rankingItems)
+      .update(indicators)
       .set(mappedUpdates)
       .where(
         and(
-          eq(rankingItems.rankingKey, rankingKey),
-          eq(rankingItems.areaType, areaType)
+          eq(indicators.key, rankingKey),
+          eq(indicators.areaType, areaType)
         )
       );
 
