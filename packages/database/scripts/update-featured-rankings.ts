@@ -2,11 +2,10 @@
  * 注目のランキング自動更新スクリプト
  *
  * GA4 API から過去N日間のランキングページ日次 PV を取得し、
- * ranking_page_views テーブルに蓄積した上で、PV 上位を注目ランキングに設定する。
+ * PV 上位 + カテゴリ分散で indicators の is_featured / featured_order を更新する。
  *
  * Phase 1: GA4 API → 日次 PV データ取得
- * Phase 2: ranking_page_views に UPSERT 保存
- * Phase 3: ranking_page_views から集計 → カテゴリ分散 → indicators 更新
+ * Phase 2: in-memory で集計 → カテゴリ分散 → indicators 更新
  *
  * Usage:
  *   npx tsx scripts/update-featured-rankings.ts
@@ -145,46 +144,13 @@ async function fetchRankingDailyPageViews(days: number): Promise<DailyPV[]> {
   return [...dailyMap.values()];
 }
 
-// ── Phase 2: ranking_page_views に UPSERT 保存 ──────────
-function savePageViewsToDB(db: Database.Database, dailyPVs: DailyPV[]): number {
-  const upsertStmt = db.prepare(`
-    INSERT INTO ranking_page_views (ranking_key, date, page_views, active_users, updated_at)
-    VALUES (?, ?, ?, ?, datetime('now'))
-    ON CONFLICT (ranking_key, date) DO UPDATE SET
-      page_views = excluded.page_views,
-      active_users = excluded.active_users,
-      updated_at = datetime('now')
-  `);
-
-  const transaction = db.transaction(() => {
-    let count = 0;
-    for (const pv of dailyPVs) {
-      upsertStmt.run(pv.rankingKey, pv.date, pv.pageViews, pv.activeUsers);
-      count++;
-    }
-    return count;
-  });
-
-  return transaction();
-}
-
-// ── Phase 3: DB から集計して featured 更新 ────────────────
-function aggregatePageViews(db: Database.Database, days: number): Map<string, number> {
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - days - 1);
-  const dateStr = startDate.toISOString().slice(0, 10);
-
-  const rows = db
-    .prepare(
-      `SELECT ranking_key, SUM(page_views) as total_pv
-       FROM ranking_page_views
-       WHERE date >= ?
-       GROUP BY ranking_key
-       ORDER BY total_pv DESC`
-    )
-    .all(dateStr) as { ranking_key: string; total_pv: number }[];
-
-  return new Map(rows.map((r) => [r.ranking_key, r.total_pv]));
+// ── Phase 2: in-memory で集計 ────────────────────────────
+function aggregatePageViews(dailyPVs: DailyPV[]): Map<string, number> {
+  const map = new Map<string, number>();
+  for (const d of dailyPVs) {
+    map.set(d.rankingKey, (map.get(d.rankingKey) ?? 0) + d.pageViews);
+  }
+  return map;
 }
 
 // ── カテゴリ分散フィルタ ──────────────────────────────────
@@ -233,16 +199,10 @@ async function main() {
   }
   const db = new Database(LOCAL_D1_PATH);
 
-  // ── Phase 2: ranking_page_views に保存 ──
-  console.log(`\n💾 Phase 2: ranking_page_views に UPSERT 保存中...`);
-  const savedCount = savePageViewsToDB(db, dailyPVs);
-  console.log(`   ${savedCount} 件を保存しました。`);
+  // ── Phase 2: 集計して featured 更新 ──
+  console.log(`\n🏆 Phase 2: PV 集計 → 注目ランキング更新`);
 
-  // ── Phase 3: 集計して featured 更新 ──
-  console.log(`\n🏆 Phase 3: PV 集計 → 注目ランキング更新`);
-
-  // DB から集計
-  const pvMap = aggregatePageViews(db, days);
+  const pvMap = aggregatePageViews(dailyPVs);
 
   // PV 降順でソート
   const ranked = [...pvMap.entries()]
@@ -279,7 +239,7 @@ async function main() {
   });
 
   if (dryRun) {
-    console.log("\n🔍 --dry-run: indicators の更新をスキップしました（PV データは保存済み）。");
+    console.log("\n🔍 --dry-run: indicators の更新をスキップしました。");
     db.close();
     return;
   }

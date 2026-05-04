@@ -17,7 +17,7 @@ export * from "./estat_metainfo";
 // surveys マスタのみ (旧 ranking_items / ranking_data / ranking_tags は PR-5 で DROP)
 export * from "./ranking_items";
 // ranking_page_cards は PR-7 で page_components に統合し DROP 済み
-export * from "./ranking_page_views";
+// ranking_page_views は 2026-05-04 に廃止 (GA4 pages.csv で代替)
 export * from "./note_content";
 export * from "./performance_metrics";
 export * from "./port_statistics";
