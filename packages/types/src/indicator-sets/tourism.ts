@@ -7,7 +7,7 @@ export const TOURISM_SET: IndicatorSet = {
     "都道府県別の宿泊者数・外国人宿泊者数・客室稼働率を地図とランキングで比較。観光需要の地域差を47都道府県のデータで確認できます。",
   category: "tourism",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 宿泊
     { rankingKey: "total-overnight-guests", shortLabel: "宿泊者数", role: "primary" },
     { rankingKey: "total-overnight-guests-foreign", shortLabel: "外国人宿泊", role: "secondary" },

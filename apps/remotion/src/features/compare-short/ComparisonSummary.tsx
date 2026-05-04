@@ -9,7 +9,7 @@ interface ComparisonSummaryProps {
   areaNameB: string;
   areaCodeA: string;
   areaCodeB: string;
-  indicators: ComparisonIndicator[];
+  metrics: ComparisonIndicator[];
   theme?: ThemeName;
 }
 
@@ -23,7 +23,7 @@ export const ComparisonSummary: React.FC<ComparisonSummaryProps> = ({
   areaNameB,
   areaCodeA,
   areaCodeB,
-  indicators,
+  metrics,
   theme = "dark",
 }) => {
   const frame = useCurrentFrame();
@@ -34,9 +34,9 @@ export const ComparisonSummary: React.FC<ComparisonSummaryProps> = ({
   const videoSrcA = getGesVideoPath(areaCodeA, "portrait");
   const videoSrcB = getGesVideoPath(areaCodeB, "portrait");
 
-  const winsA = indicators.filter((i) => i.rankA < i.rankB).length;
-  const winsB = indicators.filter((i) => i.rankB < i.rankA).length;
-  const draws = indicators.length - winsA - winsB;
+  const winsA = metrics.filter((i) => i.rankA < i.rankB).length;
+  const winsB = metrics.filter((i) => i.rankB < i.rankA).length;
+  const draws = metrics.length - winsA - winsB;
 
   const headerSpring = spring({ frame, from: 0, to: 1, fps, config: { damping: 12, mass: 0.8 } });
   const scoreSpring = spring({ frame: frame - 20, from: 0, to: 1, fps, config: { damping: 10, mass: 1.2 } });
@@ -225,7 +225,7 @@ export const ComparisonSummary: React.FC<ComparisonSummaryProps> = ({
           opacity: listSpring,
           transform: `translateY(${interpolate(listSpring, [0, 1], [40, 0])}px)`,
         }}>
-          {indicators.map((indicator) => {
+          {metrics.map((indicator) => {
             const aWin = indicator.rankA < indicator.rankB;
             const bWin = indicator.rankB < indicator.rankA;
             return (

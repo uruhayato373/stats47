@@ -11,7 +11,7 @@ interface ComparisonCarouselPreviewProps {
   theme?: ThemeName;
   areaNameA?: string;
   areaNameB?: string;
-  indicators?: ComparisonIndicator[];
+  metrics?: ComparisonIndicator[];
 }
 
 /**
@@ -27,7 +27,7 @@ export const ComparisonCarouselPreview: React.FC<
   theme = "dark",
   areaNameA = previewDataComparison.areaNameA,
   areaNameB = previewDataComparison.areaNameB,
-  indicators = previewDataComparison.indicators,
+  metrics = previewDataComparison.metrics,
 }) => {
   switch (slide) {
     case "cover":
@@ -35,7 +35,7 @@ export const ComparisonCarouselPreview: React.FC<
         <ComparisonCoverSlide
           areaNameA={areaNameA}
           areaNameB={areaNameB}
-          indicatorCount={indicators.length}
+          indicatorCount={metrics.length}
           theme={theme}
         />
       );
@@ -44,7 +44,7 @@ export const ComparisonCarouselPreview: React.FC<
         <ComparisonDetailSlide
           areaNameA={areaNameA}
           areaNameB={areaNameB}
-          indicators={indicators}
+          metrics={metrics}
           theme={theme}
         />
       );
@@ -55,7 +55,7 @@ export const ComparisonCarouselPreview: React.FC<
         <ComparisonCoverSlide
           areaNameA={areaNameA}
           areaNameB={areaNameB}
-          indicatorCount={indicators.length}
+          indicatorCount={metrics.length}
           theme={theme}
         />
       );

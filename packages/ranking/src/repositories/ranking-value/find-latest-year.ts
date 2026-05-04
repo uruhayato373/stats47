@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { eq, sql } from "drizzle-orm";
@@ -14,8 +14,8 @@ export async function findLatestYear(
     const result = await drizzleDb
       .select({ maxYear: sql<string>`MAX(${observations.yearCode})` })
       .from(observations)
-      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
-      .where(eq(indicators.areaType, areaType));
+      .innerJoin(metrics, eq(observations.metricId, metrics.id))
+      .where(eq(metrics.areaType, areaType));
     return ok(result[0]?.maxYear || null);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));

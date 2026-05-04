@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, desc, eq, sql } from "drizzle-orm";
 
@@ -11,21 +11,21 @@ export async function findFirstKeyByTag(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select({ rankingKey: indicators.key })
-      .from(indicators)
+      .select({ rankingKey: metrics.key })
+      .from(metrics)
       .innerJoin(
         taggings,
-        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
       )
       .where(
         and(
-          eq(taggings.taggableType, "indicator"),
+          eq(taggings.taggableType, "metric"),
           eq(taggings.tagKey, tagKey),
-          eq(indicators.isActive, true),
-          eq(indicators.areaType, "prefecture")
+          eq(metrics.isActive, true),
+          eq(metrics.areaType, "prefecture")
         )
       )
-      .orderBy(desc(indicators.updatedAt))
+      .orderBy(desc(metrics.updatedAt))
       .limit(1);
 
     if (result.length === 0) {

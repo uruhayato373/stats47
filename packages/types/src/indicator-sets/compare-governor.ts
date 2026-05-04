@@ -6,7 +6,7 @@ export const COMPARE_GOVERNOR_SET: IndicatorSet = {
   description: "知事給与・警察職給与・一般行政職給与等で2地域を比較",
   category: "finance",
   usage: "compare",
-  indicators: [
+  metrics: [
     { rankingKey: "governor-salary-prefecture", shortLabel: "知事給与", role: "primary" },
     { rankingKey: "avg-salary-police-prefecture", shortLabel: "警察職給与", role: "secondary" },
     { rankingKey: "avg-salary-admin-prefecture", shortLabel: "一般行政職給与", role: "secondary" },

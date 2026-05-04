@@ -9,12 +9,12 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { indicators } from "./indicators";
+import { metrics } from "./metrics";
 
 /**
- * 観測値 — 旧 ranking_data + port_statistics の統一テーブル (PR-3)
+ * 観測値 — metric × entity × year の値
  *
- * (indicator_id, entity_type, entity_code, year_code) の複合 PK で一意。
+ * (metric_id, entity_type, entity_code, year_code) の複合 PK で一意。
  * entity_type は 4 種: prefecture / city / port / fishing_port
  *
  * 値カラム:
@@ -24,18 +24,13 @@ import { indicators } from "./indicators";
  * 非正規化列 (entity_name / year_name / unit / category_name):
  * R2 export 時に使用。マスタ (prefectures.name 等) を書き換えた場合は
  * scripts/sync-observations-denormalized.ts で再同期する。
- *
- * 並行運用フェーズ:
- * - PR-3: 本テーブル + 並行 reader 追加。旧 ranking_data は維持
- * - PR-5: 旧 reader 切替後、旧 ranking_data を DROP
- * - PR-6: port_statistics を本テーブルに統合し DROP
  */
 export const observations = sqliteTable(
   "observations",
   {
-    indicatorId: integer("indicator_id")
+    metricId: integer("metric_id")
       .notNull()
-      .references(() => indicators.id),
+      .references(() => metrics.id),
     entityType: text("entity_type", {
       enum: ["prefecture", "city", "port", "fishing_port"],
     }).notNull(),
@@ -54,7 +49,7 @@ export const observations = sqliteTable(
   (table) => ({
     pk: primaryKey({
       columns: [
-        table.indicatorId,
+        table.metricId,
         table.entityType,
         table.entityCode,
         table.yearCode,
@@ -65,8 +60,8 @@ export const observations = sqliteTable(
       table.entityCode,
       table.yearCode
     ),
-    indicatorYearIdx: index("idx_observations_indicator_year").on(
-      table.indicatorId,
+    metricYearIdx: index("idx_observations_metric_year").on(
+      table.metricId,
       table.yearCode
     ),
   })

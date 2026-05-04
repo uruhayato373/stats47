@@ -7,7 +7,7 @@ export const HEALTHCARE_SET: IndicatorSet = {
     "都道府県別の医師数・病院数・病床数・国民医療費を地図とランキングで比較。医療体制の地域差を47都道府県のデータで確認できます。",
   category: "welfare",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 医療供給
     { rankingKey: "physicians-in-medical-facilities-per-100k", shortLabel: "医師数", role: "primary" },
     { rankingKey: "nurses-in-medical-facilities-per-100k", shortLabel: "看護師数", role: "secondary" },

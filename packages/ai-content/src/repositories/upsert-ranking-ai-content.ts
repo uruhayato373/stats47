@@ -1,13 +1,13 @@
 import "server-only";
 
-import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
 import { and, eq } from "drizzle-orm";
 
 /**
  * AI コンテンツを UPSERT (PR-5: 新 ai_content 経由)
  *
- * 入力は旧 (rankingKey, areaType) ベース。indicators をルックアップして
- * indicator_id を取得し、新 ai_content (PK: indicator_id) に UPSERT する。
+ * 入力は旧 (rankingKey, areaType) ベース。metrics をルックアップして
+ * metric_id を取得し、新 ai_content (PK: metric_id) に UPSERT する。
  */
 export interface UpsertRankingAiContentInput {
   rankingKey: string;
@@ -33,12 +33,12 @@ export async function upsertRankingAiContent(
   const drizzleDb = db ?? getDrizzle();
 
   const indicatorRows = await drizzleDb
-    .select({ id: indicators.id })
-    .from(indicators)
+    .select({ id: metrics.id })
+    .from(metrics)
     .where(
       and(
-        eq(indicators.key, data.rankingKey),
-        eq(indicators.areaType, data.areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
+        eq(metrics.key, data.rankingKey),
+        eq(metrics.areaType, data.areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
       )
     )
     .limit(1);
@@ -54,7 +54,7 @@ export async function upsertRankingAiContent(
   await drizzleDb
     .insert(aiContent)
     .values({
-      indicatorId: indicator.id,
+      metricId: indicator.id,
       faq: data.faq ?? null,
       regionalAnalysis: data.regionalAnalysis ?? null,
       insights: data.insights ?? null,
@@ -70,7 +70,7 @@ export async function upsertRankingAiContent(
       updatedAt: now,
     })
     .onConflictDoUpdate({
-      target: aiContent.indicatorId,
+      target: aiContent.metricId,
       set: {
         faq: data.faq ?? null,
         regionalAnalysis: data.regionalAnalysis ?? null,

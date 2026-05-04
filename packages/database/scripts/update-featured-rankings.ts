@@ -2,10 +2,10 @@
  * 注目のランキング自動更新スクリプト
  *
  * GA4 API から過去N日間のランキングページ日次 PV を取得し、
- * PV 上位 + カテゴリ分散で indicators の is_featured / featured_order を更新する。
+ * PV 上位 + カテゴリ分散で metrics の is_featured / featured_order を更新する。
  *
  * Phase 1: GA4 API → 日次 PV データ取得
- * Phase 2: in-memory で集計 → カテゴリ分散 → indicators 更新
+ * Phase 2: in-memory で集計 → カテゴリ分散 → metrics 更新
  *
  * Usage:
  *   npx tsx scripts/update-featured-rankings.ts
@@ -214,10 +214,10 @@ async function main() {
     console.log(`   ${String(i + 1).padStart(2)}. ${item.rankingKey} (${item.pv} PV)`);
   });
 
-  // indicators からカテゴリ情報を取得
+  // metrics からカテゴリ情報を取得
   const itemRows = db
     .prepare(
-      `SELECT key AS ranking_key, category_key FROM indicators WHERE area_type = 'prefecture' AND is_active = 1`
+      `SELECT key AS ranking_key, category_key FROM metrics WHERE area_type = 'prefecture' AND is_active = 1`
     )
     .all() as { ranking_key: string; category_key: string | null }[];
 
@@ -239,19 +239,19 @@ async function main() {
   });
 
   if (dryRun) {
-    console.log("\n🔍 --dry-run: indicators の更新をスキップしました。");
+    console.log("\n🔍 --dry-run: metrics の更新をスキップしました。");
     db.close();
     return;
   }
 
-  // indicators 更新（トランザクション）
+  // metrics 更新（トランザクション）
   const updateTransaction = db.transaction(() => {
     db.prepare(
-      `UPDATE indicators SET is_featured = 0, featured_order = 0 WHERE area_type = 'prefecture'`
+      `UPDATE metrics SET is_featured = 0, featured_order = 0 WHERE area_type = 'prefecture'`
     ).run();
 
     const updateStmt = db.prepare(
-      `UPDATE indicators SET is_featured = 1, featured_order = ?, updated_at = datetime('now') WHERE key = ? AND area_type = 'prefecture'`
+      `UPDATE metrics SET is_featured = 1, featured_order = ?, updated_at = datetime('now') WHERE key = ? AND area_type = 'prefecture'`
     );
     let order = 1;
     for (const item of featured) {

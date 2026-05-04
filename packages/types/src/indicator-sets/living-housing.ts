@@ -7,7 +7,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     "都道府県別の空き家比率・持ち家比率・世帯構造・人口密度を地図とランキングで比較。暮らしの地域差を47都道府県のデータで確認できます。",
   category: "lifestyle",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 住宅
     { rankingKey: "vacant-housing-ratio", shortLabel: "空き家率", role: "primary" },
     { rankingKey: "owner-occupied-housing-ratio", shortLabel: "持ち家率", role: "secondary" },

@@ -1,7 +1,7 @@
 /**
  * 検索インデックス生成スクリプト
  *
- * D1 の indicators / articles と categories から
+ * D1 の metrics / articles と categories から
  * MiniSearch 用の search-index.json と
  * フィルタ用の search-index-meta.json を生成する。
  *
@@ -121,33 +121,33 @@ async function main() {
 
   const documents: SearchDocument[] = [];
 
-  // 1. ランキング項目（indicators LEFT JOIN categories）
+  // 1. ランキング項目（metrics LEFT JOIN categories）
   try {
     const rankingRows = await db
       .select({
-        rankingKey: schema.indicators.key,
-        areaType: schema.indicators.areaType,
-        title: schema.indicators.title,
-        subtitle: schema.indicators.subtitle,
-        rankingDescription: schema.indicators.description,
-        demographicAttr: schema.indicators.demographicAttr,
-        normalizationBasis: schema.indicators.normalizationBasis,
-        availableYears: schema.indicators.availableYearsJson,
-        categoryKey: schema.indicators.categoryKey,
+        rankingKey: schema.metrics.key,
+        areaType: schema.metrics.areaType,
+        title: schema.metrics.title,
+        subtitle: schema.metrics.subtitle,
+        rankingDescription: schema.metrics.description,
+        demographicAttr: schema.metrics.demographicAttr,
+        normalizationBasis: schema.metrics.normalizationBasis,
+        availableYears: schema.metrics.availableYearsJson,
+        categoryKey: schema.metrics.categoryKey,
         categoryName: schema.categories.categoryName,
       })
-      .from(schema.indicators)
+      .from(schema.metrics)
       .leftJoin(
         schema.categories,
-        eq(schema.indicators.categoryKey, schema.categories.categoryKey)
+        eq(schema.metrics.categoryKey, schema.categories.categoryKey)
       )
       .where(
         and(
-          eq(schema.indicators.isActive, true),
-          eq(schema.indicators.areaType, "prefecture")
+          eq(schema.metrics.isActive, true),
+          eq(schema.metrics.areaType, "prefecture")
         )
       )
-      .orderBy(asc(schema.indicators.key));
+      .orderBy(asc(schema.metrics.key));
 
     for (const row of rankingRows) {
       let latestYear: string | undefined;

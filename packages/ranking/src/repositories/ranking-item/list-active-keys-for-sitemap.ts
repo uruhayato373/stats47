@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { eq } from "drizzle-orm";
 
@@ -10,9 +10,9 @@ export async function listActiveKeysForSitemap(
   try {
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
-      .select({ rankingKey: indicators.key, updatedAt: indicators.updatedAt })
-      .from(indicators)
-      .where(eq(indicators.isActive, true));
+      .select({ rankingKey: metrics.key, updatedAt: metrics.updatedAt })
+      .from(metrics)
+      .where(eq(metrics.isActive, true));
     return ok(results);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));

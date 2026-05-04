@@ -14,7 +14,7 @@ export interface ComparisonShortProps {
   /** 地域B のコード (5桁, 例: "23000") */
   areaCodeB: string;
   /** 比較指標 */
-  indicators: ComparisonIndicator[];
+  metrics: ComparisonIndicator[];
   /** テーマ */
   theme?: ThemeName;
   /** フックテキスト */
@@ -64,14 +64,14 @@ export const ComparisonShort: React.FC<ComparisonShortProps> = ({
   areaNameB,
   areaCodeA,
   areaCodeB,
-  indicators,
+  metrics,
   theme = "dark",
   hookText = "どっちが上？",
   showSafeAreas = false,
   musicPath,
 }) => {
   const bgmPath = musicPath || staticFile("music/bgm.mp3");
-  const timeline = getComparisonShortTimeline(indicators.length);
+  const timeline = getComparisonShortTimeline(metrics.length);
 
   return (
     <>
@@ -90,12 +90,12 @@ export const ComparisonShort: React.FC<ComparisonShortProps> = ({
       </Sequence>
 
       {/* 2. 各指標の比較 */}
-      {indicators.map((indicator, i) => (
+      {metrics.map((indicator, i) => (
         <Sequence
           key={indicator.label}
           from={timeline.indicatorStart + i * DURATION.indicator}
           durationInFrames={DURATION.indicator}
-          name={`Indicator-${i + 1}`}
+          name={`Metric-${i + 1}`}
         >
           <ComparisonSlide
             areaNameA={areaNameA}
@@ -104,7 +104,7 @@ export const ComparisonShort: React.FC<ComparisonShortProps> = ({
             areaCodeB={areaCodeB}
             indicator={indicator}
             indicatorIndex={i + 1}
-            totalIndicators={indicators.length}
+            totalIndicators={metrics.length}
             theme={theme}
           />
         </Sequence>
@@ -121,7 +121,7 @@ export const ComparisonShort: React.FC<ComparisonShortProps> = ({
           areaNameB={areaNameB}
           areaCodeA={areaCodeA}
           areaCodeB={areaCodeB}
-          indicators={indicators}
+          metrics={metrics}
           theme={theme}
         />
       </Sequence>

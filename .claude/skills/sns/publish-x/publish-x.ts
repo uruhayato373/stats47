@@ -323,13 +323,13 @@ async function publishPost(
     // 2026-04-18 Sprint 1 事故（即時投稿）の再発防止。
     // 複数 indicator で予約モードへの切り替わりを確認、未確認なら投稿中止。
     const isScheduledMode = async (): Promise<boolean> => {
-      const indicators = [
+      const metrics = [
         page.locator('[data-testid="tweetButton"]:has-text("予約設定")'),
         page.locator('[data-testid="tweetButton"]:has-text("Schedule")'),
         page.locator('[data-testid="tweetButton"] span:text-is("予約設定")'),
         page.locator('[data-testid="tweetButton"] span:text-is("Schedule")'),
       ];
-      for (const ind of indicators) {
+      for (const ind of metrics) {
         try {
           if ((await ind.count()) > 0) return true;
         } catch {

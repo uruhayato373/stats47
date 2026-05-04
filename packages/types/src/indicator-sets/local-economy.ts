@@ -7,7 +7,7 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
     "都道府県別のGDP・県民所得・産業構造・雇用・財政を地図とランキングで比較。県内総生産、有効求人倍率、製造品出荷額、財政力指数など主要経済指標の推移を47都道府県のデータで確認できます。",
   category: "economy",
   usage: "theme",
-  indicators: [
+  metrics: [
     { rankingKey: "per-taxpayer-taxable-income", shortLabel: "課税所得", role: "primary" },
     { rankingKey: "prefectural-income-per-capita", shortLabel: "1人当たり県民所得", role: "secondary" },
     { rankingKey: "minimum-wage-by-region", shortLabel: "最低賃金", role: "secondary" },

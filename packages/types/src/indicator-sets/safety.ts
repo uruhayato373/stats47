@@ -7,7 +7,7 @@ export const SAFETY_SET: IndicatorSet = {
     "都道府県別の犯罪率・検挙率・交通事故・火災件数・自殺率を地図・チャート・ランキングで比較。治安・交通・火災・災害・事故の25指標を47都道府県で確認できます。",
   category: "safety",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 治安
     { rankingKey: "penal-code-offenses-recognized-per-1000", shortLabel: "犯罪率", role: "primary" },
     { rankingKey: "serious-crime-per-100k", shortLabel: "凶悪犯", role: "primary" },

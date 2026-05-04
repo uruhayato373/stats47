@@ -7,7 +7,7 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
     "都道府県別の消費者物価地域差指数を食料・住居・光熱水道など品目別に地図・チャート・ランキングで比較。物価プロファイル・ヒートマップで生活コストの地域差を47都道府県で確認できます。",
   category: "economy",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 総合
     { rankingKey: "consumer-price-difference-index-overall", shortLabel: "総合", role: "primary" },
     { rankingKey: "consumer-price-difference-index-overall-excl-rent", shortLabel: "家賃除く総合", role: "secondary" },

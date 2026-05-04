@@ -7,7 +7,7 @@ export const MANUFACTURING_SET: IndicatorSet = {
     "都道府県別の製造品出荷額・付加価値額・事業所数・従業者数を地図とランキングで比較。製造業の地域差を47都道府県のデータで確認できます。",
   category: "industry",
   usage: "theme",
-  indicators: [
+  metrics: [
     // 生産規模
     { rankingKey: "manufacturing-shipment-amount", shortLabel: "出荷額", role: "primary" },
     { rankingKey: "manufacturing-industry-added-value", shortLabel: "付加価値額", role: "secondary" },

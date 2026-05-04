@@ -2,7 +2,7 @@ import "server-only";
 
 import { and, eq } from "drizzle-orm";
 
-import { areaProfiles, getDrizzle, indicators } from "@stats47/database/server";
+import { areaProfiles, getDrizzle, metrics } from "@stats47/database/server";
 
 /**
  * 指定地域 (prefecture) の生データ行を取得（admin 管理画面用）(PR-5)
@@ -37,11 +37,11 @@ export async function listAreaProfileRankings(
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
       createdAt: areaProfiles.createdAt,
-      rankingKey: indicators.key,
-      indicator: indicators.title,
+      rankingKey: metrics.key,
+      indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(indicators, eq(areaProfiles.indicatorId, indicators.id))
+    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
     .where(
       and(
         eq(areaProfiles.entityType, "prefecture"),

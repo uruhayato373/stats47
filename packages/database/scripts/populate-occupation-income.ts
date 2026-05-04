@@ -68,11 +68,11 @@ if (isDryRun) console.log("【DRY RUN】");
 // Prepared statements
 const upsertData = db.prepare(`
   INSERT INTO observations (
-    indicator_id, entity_type, entity_code, entity_name,
+    metric_id, entity_type, entity_code, entity_name,
     year_code, year_name, category_name, value_numeric, unit, rank
   )
   VALUES (?, 'prefecture', ?, ?, ?, ?, ?, ?, '万円', ?)
-  ON CONFLICT(indicator_id, entity_type, entity_code, year_code) DO UPDATE SET
+  ON CONFLICT(metric_id, entity_type, entity_code, year_code) DO UPDATE SET
     value_numeric = excluded.value_numeric,
     rank = excluded.rank,
     unit = excluded.unit,
@@ -82,7 +82,7 @@ const upsertData = db.prepare(`
 `);
 
 const updateYears = db.prepare(`
-  UPDATE indicators SET
+  UPDATE metrics SET
     latest_year = ?,
     available_years_json = ?,
     updated_at = CURRENT_TIMESTAMP
@@ -90,7 +90,7 @@ const updateYears = db.prepare(`
 `);
 
 const findIndicatorId = db.prepare(`
-  SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'
+  SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'
 `);
 
 /** プロキシ対応 fetch */
@@ -219,10 +219,10 @@ async function processOccupation(def: OccupationDef): Promise<void> {
 
   const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
   if (!indicatorRow) {
-    console.warn(`  WARN: indicators に key=${def.rankingKey} が無いためスキップ`);
+    console.warn(`  WARN: metrics に key=${def.rankingKey} が無いためスキップ`);
     return;
   }
-  const indicatorId = indicatorRow.id;
+  const metricId = indicatorRow.id;
 
   const txn = db.transaction(() => {
     for (const [year, prefMap] of byYear) {
@@ -246,7 +246,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
 
         if (!isDryRun) {
           const areaCode5 = prefCode + "000";
-          upsertData.run(indicatorId, areaCode5, areaName, year, yearName, categoryName, value, rank);
+          upsertData.run(metricId, areaCode5, areaName, year, yearName, categoryName, value, rank);
         }
         totalInserted++;
       }
@@ -274,7 +274,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
       .prepare(
         `SELECT o.entity_name AS area_name, o.value_numeric AS value, o.rank
          FROM observations o
-         INNER JOIN indicators i ON i.id = o.indicator_id
+         INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
          ORDER BY o.rank LIMIT 3`
       )
@@ -307,12 +307,12 @@ async function main() {
     const count = db
       .prepare(
         `SELECT COUNT(*) as c FROM observations o
-         INNER JOIN indicators i ON i.id = o.indicator_id
+         INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture'`
       )
       .get(def.rankingKey) as any;
     const item = db
-      .prepare("SELECT latest_year, available_years_json AS available_years FROM indicators WHERE key = ? AND area_type = 'prefecture'")
+      .prepare("SELECT latest_year, available_years_json AS available_years FROM metrics WHERE key = ? AND area_type = 'prefecture'")
       .get(def.rankingKey) as any;
     console.log(
       `  ${def.rankingKey}: ${count.c}件, latest=${item?.latest_year}, years=${item?.available_years}`
