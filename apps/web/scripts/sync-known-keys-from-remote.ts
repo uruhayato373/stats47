@@ -22,7 +22,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RANKING_QUERY =
-  "SELECT DISTINCT ranking_key FROM ranking_items WHERE is_active = 1 AND area_type = 'prefecture' ORDER BY ranking_key";
+  "SELECT DISTINCT key AS ranking_key FROM indicators WHERE is_active = 1 AND area_type = 'prefecture' ORDER BY key";
 const TAG_QUERY = "SELECT tag_key FROM tags ORDER BY tag_key";
 
 const RANKING_OUT = path.resolve(

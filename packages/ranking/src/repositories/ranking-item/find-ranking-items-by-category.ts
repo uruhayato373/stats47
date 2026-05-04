@@ -1,9 +1,6 @@
 import "server-only";
 
-import {
-  getDrizzle,
-  rankingItems,
-} from "@stats47/database/server";
+import { getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, desc, eq, like, or } from "drizzle-orm";
@@ -31,30 +28,30 @@ export async function findRankingItemsByCategory(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select({
-        rankingKey: rankingItems.rankingKey,
-        areaType: rankingItems.areaType,
-        title: rankingItems.title,
-        subtitle: rankingItems.subtitle,
-        unit: rankingItems.unit,
-        latestYear: rankingItems.latestYear,
-        availableYears: rankingItems.availableYears,
-        description: rankingItems.description,
-        demographicAttr: rankingItems.demographicAttr,
-        normalizationBasis: rankingItems.normalizationBasis,
-        groupKey: rankingItems.groupKey,
-        isFeatured: rankingItems.isFeatured,
+        rankingKey: indicators.key,
+        areaType: indicators.areaType,
+        title: indicators.title,
+        subtitle: indicators.subtitle,
+        unit: indicators.unit,
+        latestYear: indicators.latestYear,
+        availableYears: indicators.availableYearsJson,
+        description: indicators.description,
+        demographicAttr: indicators.demographicAttr,
+        normalizationBasis: indicators.normalizationBasis,
+        groupKey: indicators.groupKey,
+        isFeatured: indicators.isFeatured,
       })
-      .from(rankingItems)
+      .from(indicators)
       .where(
         and(
           or(
-            eq(rankingItems.categoryKey, categoryKey),
-            like(rankingItems.additionalCategories, `%"${categoryKey}"%`)
+            eq(indicators.categoryKey, categoryKey),
+            like(indicators.additionalCategoriesJson, `%"${categoryKey}"%`)
           ),
-          eq(rankingItems.isActive, true)
+          eq(indicators.isActive, true)
         )
       )
-      .orderBy(asc(rankingItems.featuredOrder), desc(rankingItems.updatedAt));
+      .orderBy(asc(indicators.featuredOrder), desc(indicators.updatedAt));
 
     return ok(rows.map((r) => ({ ...r, isFeatured: r.isFeatured ?? false })));
   } catch (error) {

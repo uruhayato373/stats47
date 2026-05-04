@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingData } from "@stats47/database/server";
+import { getDrizzle, indicators, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -27,24 +27,34 @@ export async function listTopRankingValuesBatch(
     const rankingKeys = items.map((i) => i.rankingKey);
 
     const result = await drizzleDb
-      .select()
-      .from(rankingData)
+      .select({
+        areaType: observations.entityType,
+        areaCode: observations.entityCode,
+        areaName: observations.entityName,
+        yearCode: observations.yearCode,
+        yearName: observations.yearName,
+        categoryCode: indicators.key,
+        categoryName: observations.categoryName,
+        value: observations.valueNumeric,
+        unit: observations.unit,
+        rank: observations.rank,
+      })
+      .from(observations)
+      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
       .where(
         and(
-          inArray(rankingData.categoryCode, rankingKeys),
-          eq(rankingData.areaType, areaType),
-          eq(rankingData.rank, 1)
+          inArray(indicators.key, rankingKeys),
+          eq(indicators.areaType, areaType),
+          eq(observations.rank, 1)
         )
       );
 
-    // rankingKey + yearCode で引けるようにマッピング
     const yearByKey = new Map(items.map((i) => [i.rankingKey, i.yearCode]));
     const topMap = new Map<string, RankingValue>();
 
     for (const row of result) {
       const key = row.categoryCode || "";
       const expectedYear = yearByKey.get(key);
-      // 指定年度のデータのみ採用
       if (expectedYear && String(row.yearCode) === expectedYear) {
         topMap.set(key, {
           areaType: row.areaType as AreaType,

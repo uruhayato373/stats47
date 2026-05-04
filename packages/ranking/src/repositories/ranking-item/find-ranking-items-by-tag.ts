@@ -3,17 +3,16 @@ import "server-only";
 import {
   categories,
   getDrizzle,
-  rankingItems,
-  rankingTags,
+  indicatorTags,
+  indicators,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, desc, eq } from "drizzle-orm";
+
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
-import {
-  parseRankingItemDB,
-} from "../schemas/ranking-items.schemas";
-import { rankingItemSelection } from "../shared/ranking-item-selection";
+import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
+import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
 
 export async function findRankingItemsByTag(
   tagKey: string,
@@ -22,32 +21,20 @@ export async function findRankingItemsByTag(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    // Find ranking items with this tag
+    // 新 indicator_tags + indicators の JOIN
     const rows = await drizzleDb
-      .select(rankingItemSelection)
-      .from(rankingTags)
-      .innerJoin(
-        rankingItems,
-        and(
-          eq(rankingTags.rankingKey, rankingItems.rankingKey),
-          eq(rankingTags.areaType, rankingItems.areaType)
-        )
-      )
-      .where(
-        and(
-          eq(rankingTags.tagKey, tagKey),
-          eq(rankingItems.isActive, true)
-        )
-      )
-      .orderBy(asc(rankingItems.featuredOrder), desc(rankingItems.updatedAt));
+      .select(indicatorAsRankingItemSelection)
+      .from(indicatorTags)
+      .innerJoin(indicators, eq(indicatorTags.indicatorId, indicators.id))
+      .where(and(eq(indicatorTags.tagKey, tagKey), eq(indicators.isActive, true)))
+      .orderBy(asc(indicators.featuredOrder), desc(indicators.updatedAt));
 
     if (rows.length === 0) {
       return err(new Error(`No ranking items found for tagKey: ${tagKey}`));
     }
 
-    const items = rows.map((row) => parseRankingItemDB(row));
+    const items = rows.map((row) => parseIndicatorAsRankingItem(row));
 
-    // Get category info from the first item
     const firstItem = items[0];
     let categoryName = firstItem.categoryKey ?? "";
     if (firstItem.categoryKey) {
