@@ -1,13 +1,13 @@
 import "server-only";
 
-import { getDrizzle, rankingItems } from "@stats47/database/server";
+import { getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
-import { parseRankingItemDB } from "../schemas/ranking-items.schemas";
-import { rankingItemSelection } from "../shared/ranking-item-selection";
+import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
+import { parseIndicatorAsRankingItem } from "../shared/parse-indicator-as-ranking-item";
 
 export async function findRankingItem(
   rankingKey: string,
@@ -17,18 +17,13 @@ export async function findRankingItem(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select(rankingItemSelection)
-      .from(rankingItems)
-      .where(
-        and(
-          eq(rankingItems.rankingKey, rankingKey),
-          eq(rankingItems.areaType, areaType)
-        )
-      )
+      .select(indicatorAsRankingItemSelection)
+      .from(indicators)
+      .where(and(eq(indicators.key, rankingKey), eq(indicators.areaType, areaType)))
       .limit(1);
 
     if (result.length === 0) return ok(null);
-    return ok(parseRankingItemDB(result[0]));
+    return ok(parseIndicatorAsRankingItem(result[0]));
   } catch (error) {
     logger.error({ error, rankingKey, areaType }, "findRankingItem: failed");
     return err(error instanceof Error ? error : new Error(String(error)));

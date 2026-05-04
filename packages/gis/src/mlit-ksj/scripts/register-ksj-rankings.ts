@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * KSJ データから都道府県別施設数を集計し、ranking_items + ranking_data に登録
+ * KSJ データから都道府県別施設数を集計し、indicators + observations に登録
  */
 
 import * as fs from "node:fs";
@@ -335,21 +335,26 @@ async function main() {
   const now = new Date().toISOString();
 
   const insertItem = db.prepare(`
-    INSERT INTO ranking_items (
-      ranking_key, area_type, ranking_name, title, unit, category_key, data_source_id,
-      source_config, is_active, is_featured, created_at, updated_at
-    ) VALUES (?, 'prefecture', ?, ?, ?, ?, 'mlit_ksj', ?, 1, 0, ?, ?)
+    INSERT INTO indicators (
+      key, area_type, title, unit, category_key, source_id,
+      source_config_json, is_active, is_featured, created_at, updated_at
+    ) VALUES (?, 'prefecture', ?, ?, ?, 'mlit_ksj', ?, 1, 0, ?, ?)
   `);
 
   const insertData = db.prepare(`
-    INSERT OR REPLACE INTO ranking_data (
-      area_type, area_code, area_name, year_code, year_name,
-      category_code, category_name, value, unit, rank, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT OR REPLACE INTO observations (
+      indicator_id, entity_type, entity_code, entity_name,
+      year_code, year_name, category_name,
+      value_numeric, unit, rank, created_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const checkExisting = db.prepare(
-    "SELECT ranking_key FROM ranking_items WHERE ranking_key = ?"
+    "SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'"
+  );
+
+  const findIndicatorId = db.prepare(
+    "SELECT id FROM indicators WHERE key = ? AND area_type = 'prefecture'"
   );
 
   let created = 0;
@@ -377,10 +382,9 @@ async function main() {
       description: def.description || def.rankingName,
     });
 
-    // ranking_items 登録
+    // indicators 登録
     insertItem.run(
       def.rankingKey,
-      def.rankingName,
       def.rankingName,
       def.unit,
       def.categoryKey,
@@ -389,7 +393,14 @@ async function main() {
       now
     );
 
-    // ranking_data 登録（順位付き）
+    const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
+    if (!indicatorRow) {
+      console.warn(`[WARN] indicator が登録されませんでした: ${def.rankingKey}`);
+      continue;
+    }
+    const indicatorId = indicatorRow.id;
+
+    // observations 登録（順位付き）
     const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
     let rank = 0;
     let prevVal = -1;
@@ -399,17 +410,16 @@ async function main() {
       const areaCode = prefCode + "000";
       const areaName = PREF_NAMES[prefCode] || "";
       insertData.run(
+        indicatorId,
         "prefecture",
         areaCode,
         areaName,
         def.yearCode,
         def.yearCode + "年",
-        def.rankingKey,
         def.rankingName,
         count,
         def.unit,
         rank,
-        now,
         now
       );
       dataRows++;
@@ -428,7 +438,7 @@ async function main() {
   console.log(`\n=== 完了 ===`);
   console.log(`  作成: ${created} ランキング`);
   console.log(`  スキップ: ${skipped}`);
-  console.log(`  ranking_data: ${dataRows} 行`);
+  console.log(`  observations: ${dataRows} 行`);
 
   db.close();
 }

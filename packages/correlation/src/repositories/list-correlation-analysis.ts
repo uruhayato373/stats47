@@ -1,12 +1,7 @@
 import "server-only";
 
-import {
-  correlationAnalysis,
-  getDrizzle,
-  rankingItems,
-  type CorrelationAnalysis,
-} from "@stats47/database/server";
-import { and, asc, desc, eq, sql } from "drizzle-orm";
+import { correlations, getDrizzle, indicators } from "@stats47/database/server";
+import { aliasedTable, and, asc, desc, eq, sql } from "drizzle-orm";
 
 export interface ListCorrelationAnalysisOptions {
   limit?: number;
@@ -14,14 +9,26 @@ export interface ListCorrelationAnalysisOptions {
   orderBy?: "pearsonR_asc" | "pearsonR_desc" | "calculatedAt_desc";
 }
 
-/** 相関分析結果 + ランキングタイトル */
-export interface CorrelationAnalysisWithTitles extends CorrelationAnalysis {
+/** 相関分析結果 + ランキングタイトル (旧 CorrelationAnalysisWithTitles 型と互換) */
+export interface CorrelationAnalysisWithTitles {
+  id: number;
+  rankingKeyX: string;
+  rankingKeyY: string;
+  yearX: string;
+  yearY: string;
+  pearsonR: number;
+  partialRPopulation: number | null;
+  partialRArea: number | null;
+  partialRAging: number | null;
+  partialRDensity: number | null;
+  scatterData: string;
+  calculatedAt: string;
   titleX: string | null;
   titleY: string | null;
 }
 
 /**
- * 相関分析結果の一覧を取得する（ランキングタイトル付き）
+ * 相関分析結果の一覧を取得 (PR-5: 新 correlations 経由 + indicators JOIN)
  */
 export async function listCorrelationAnalysis(
   options?: ListCorrelationAnalysisOptions
@@ -32,50 +39,34 @@ export async function listCorrelationAnalysis(
 
   const orderByColumn =
     options?.orderBy === "pearsonR_asc"
-      ? asc(correlationAnalysis.pearsonR)
+      ? asc(correlations.pearsonR)
       : options?.orderBy === "pearsonR_desc"
-        ? desc(correlationAnalysis.pearsonR)
-        : desc(correlationAnalysis.calculatedAt);
+        ? desc(correlations.pearsonR)
+        : desc(correlations.calculatedAt);
 
-  // ranking_items を X/Y それぞれ LEFT JOIN してタイトルを取得
-  const riX = db
-    .select({
-      rankingKey: rankingItems.rankingKey,
-      title: rankingItems.title,
-    })
-    .from(rankingItems)
-    .where(eq(rankingItems.areaType, "prefecture"))
-    .as("ri_x");
-
-  const riY = db
-    .select({
-      rankingKey: rankingItems.rankingKey,
-      title: rankingItems.title,
-    })
-    .from(rankingItems)
-    .where(eq(rankingItems.areaType, "prefecture"))
-    .as("ri_y");
+  const ix = aliasedTable(indicators, "ix");
+  const iy = aliasedTable(indicators, "iy");
 
   const rows = await db
     .select({
-      id: correlationAnalysis.id,
-      rankingKeyX: correlationAnalysis.rankingKeyX,
-      rankingKeyY: correlationAnalysis.rankingKeyY,
-      yearX: correlationAnalysis.yearX,
-      yearY: correlationAnalysis.yearY,
-      pearsonR: correlationAnalysis.pearsonR,
-      partialRPopulation: correlationAnalysis.partialRPopulation,
-      partialRArea: correlationAnalysis.partialRArea,
-      partialRAging: correlationAnalysis.partialRAging,
-      partialRDensity: correlationAnalysis.partialRDensity,
-      scatterData: correlationAnalysis.scatterData,
-      calculatedAt: correlationAnalysis.calculatedAt,
-      titleX: sql<string | null>`${riX.title}`,
-      titleY: sql<string | null>`${riY.title}`,
+      id: correlations.id,
+      rankingKeyX: ix.key,
+      rankingKeyY: iy.key,
+      yearX: correlations.yearX,
+      yearY: correlations.yearY,
+      pearsonR: correlations.pearsonR,
+      partialRPopulation: correlations.partialRPopulation,
+      partialRArea: correlations.partialRArea,
+      partialRAging: correlations.partialRAging,
+      partialRDensity: correlations.partialRDensity,
+      scatterData: correlations.scatterDataJson,
+      calculatedAt: correlations.calculatedAt,
+      titleX: sql<string | null>`${ix.title}`,
+      titleY: sql<string | null>`${iy.title}`,
     })
-    .from(correlationAnalysis)
-    .leftJoin(riX, eq(correlationAnalysis.rankingKeyX, riX.rankingKey))
-    .leftJoin(riY, eq(correlationAnalysis.rankingKeyY, riY.rankingKey))
+    .from(correlations)
+    .innerJoin(ix, and(eq(correlations.indicatorXId, ix.id), eq(ix.areaType, "prefecture")))
+    .innerJoin(iy, and(eq(correlations.indicatorYId, iy.id), eq(iy.areaType, "prefecture")))
     .orderBy(orderByColumn)
     .limit(limit)
     .offset(offset);

@@ -1,11 +1,12 @@
 import "server-only";
 
-import { getDrizzle, rankingItems, rankingTags } from "@stats47/database/server";
+import { getDrizzle, indicators, indicatorTags } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
+import { eq } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
-import { rankingItemSelection } from "../repositories/shared/ranking-item-selection";
+import { indicatorAsRankingItemSelection } from "../repositories/shared/indicator-as-ranking-item-selection";
 import type { RankingItem } from "../types/ranking-item";
 import {
   RANKING_ITEMS_SNAPSHOT_KEY,
@@ -20,21 +21,34 @@ export interface ExportRankingItemsSnapshotResult {
   durationMs: number;
 }
 
+/**
+ * indicators テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
+ *
+ * 出力形式: snapshots/ranking-items/all.json
+ * tags: indicator_tags を indicator_id で join
+ *
+ * dryRun=true の場合は R2 に書かず、JSON body と count のみ返す。
+ */
 export async function exportRankingItemsSnapshot(
-  db?: ReturnType<typeof getDrizzle>,
-): Promise<ExportRankingItemsSnapshotResult> {
+  options: {
+    db?: ReturnType<typeof getDrizzle>;
+    dryRun?: boolean;
+  } = {},
+): Promise<ExportRankingItemsSnapshotResult & { body?: string }> {
   const startedAt = Date.now();
-  const drizzleDb = db ?? getDrizzle();
+  const drizzleDb = options.db ?? getDrizzle();
+  const dryRun = options.dryRun ?? false;
 
   const [rows, tagRows] = await Promise.all([
-    drizzleDb.select(rankingItemSelection).from(rankingItems),
+    drizzleDb.select(indicatorAsRankingItemSelection).from(indicators),
     drizzleDb
       .select({
-        rankingKey: rankingTags.rankingKey,
-        areaType: rankingTags.areaType,
-        tagKey: rankingTags.tagKey,
+        rankingKey: indicators.key,
+        areaType: indicators.areaType,
+        tagKey: indicatorTags.tagKey,
       })
-      .from(rankingTags),
+      .from(indicatorTags)
+      .innerJoin(indicators, eq(indicators.id, indicatorTags.indicatorId)),
   ]);
 
   const tagsByItem = new Map<string, { tagKey: string }[]>();
@@ -49,7 +63,10 @@ export async function exportRankingItemsSnapshot(
   let parseFailures = 0;
   for (const row of rows) {
     try {
-      const parsed = parseRankingItemDB(row);
+      const parsed = parseRankingItemDB({
+        ...row,
+        data_source_id: "estat",
+      });
       const tagKey = `${parsed.rankingKey}|${parsed.areaType}`;
       const tags = tagsByItem.get(tagKey);
       if (tags && tags.length > 0) parsed.tags = tags;
@@ -62,10 +79,15 @@ export async function exportRankingItemsSnapshot(
           areaType: row.area_type,
           error: error instanceof Error ? error.message : String(error),
         },
-        "ranking_items: parseRankingItemDB が失敗。スキップ",
+        "indicators: parseRankingItemDB が失敗。スキップ",
       );
     }
   }
+
+  items.sort((a, b) => {
+    if (a.rankingKey !== b.rankingKey) return a.rankingKey < b.rankingKey ? -1 : 1;
+    return a.areaType < b.areaType ? -1 : a.areaType > b.areaType ? 1 : 0;
+  });
 
   const snapshot: RankingItemsSnapshot = {
     generatedAt: new Date().toISOString(),
@@ -74,6 +96,18 @@ export async function exportRankingItemsSnapshot(
   };
 
   const body = JSON.stringify(snapshot);
+
+  if (dryRun) {
+    return {
+      key: RANKING_ITEMS_SNAPSHOT_KEY,
+      count: items.length,
+      parseFailures,
+      sizeBytes: Buffer.byteLength(body, "utf8"),
+      durationMs: Date.now() - startedAt,
+      body,
+    };
+  }
+
   const result = await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, body, {
     contentType: "application/json; charset=utf-8",
   });

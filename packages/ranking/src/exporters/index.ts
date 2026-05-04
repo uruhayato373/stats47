@@ -3,13 +3,9 @@ export {
   exportRankingItemsSnapshot,
 } from "./ranking-items-snapshot";
 export {
-  type ExportRankingItemsFromIndicatorsResult,
-  exportRankingItemsFromIndicatorsSnapshot,
-} from "./ranking-items-from-indicators-snapshot";
-export {
-  type ExportRankingValuesFromObservationsResult,
-  exportRankingValuesFromObservationsSnapshot,
-} from "./ranking-values-from-observations-snapshot";
+  type ExportRankingValuesSnapshotResult,
+  exportRankingValuesSnapshots,
+} from "./ranking-values-snapshot";
 export {
   type ExportSurveysSnapshotResult,
   exportSurveysSnapshot,

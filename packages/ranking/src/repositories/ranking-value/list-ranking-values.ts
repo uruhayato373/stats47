@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, rankingData } from "@stats47/database/server";
+import { getDrizzle, indicators, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -15,24 +15,34 @@ export async function listRankingValues(
 ): Promise<Result<RankingValue[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    // yearCode は "2023" のような4桁形式だが、DBには "2023100000" のような
-    // e-Stat API 形式で保存されているケースがある。両方マッチさせる。
     const result = await drizzleDb
-      .select()
-      .from(rankingData)
+      .select({
+        areaType: observations.entityType,
+        areaCode: observations.entityCode,
+        areaName: observations.entityName,
+        yearCode: observations.yearCode,
+        yearName: observations.yearName,
+        categoryCode: indicators.key,
+        categoryName: observations.categoryName,
+        value: observations.valueNumeric,
+        unit: observations.unit,
+        rank: observations.rank,
+      })
+      .from(observations)
+      .innerJoin(indicators, eq(observations.indicatorId, indicators.id))
       .where(
         and(
-          eq(rankingData.categoryCode, rankingKey),
-          eq(rankingData.areaType, areaType),
+          eq(indicators.key, rankingKey),
+          eq(indicators.areaType, areaType),
           or(
-            eq(rankingData.yearCode, yearCode),
-            like(rankingData.yearCode, `${yearCode}%`)
+            eq(observations.yearCode, yearCode),
+            like(observations.yearCode, `${yearCode}%`)
           )
         )
       );
 
-    const values: RankingValue[] = result.map((row: any) => ({
-      areaType: row.areaType,
+    const values: RankingValue[] = result.map((row) => ({
+      areaType: row.areaType as AreaType,
       areaCode: row.areaCode || "",
       areaName: row.areaName || "",
       yearCode: row.yearCode ? String(row.yearCode) : "",

@@ -1,11 +1,11 @@
 import "server-only";
 
-import { areaProfileRankings, getDrizzle } from "@stats47/database/server";
-import { asc, eq } from "drizzle-orm";
+import { areaProfiles, getDrizzle, indicators } from "@stats47/database/server";
+import { and, asc, eq } from "drizzle-orm";
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
 
 /**
- * 指定地域コードのプロファイルデータを取得する
+ * 指定地域のプロフィールを取得 (PR-5: 新 area_profiles 経由)
  */
 export async function getAreaProfileByCode(
   areaCode: string
@@ -13,21 +13,37 @@ export async function getAreaProfileByCode(
   const db = getDrizzle();
 
   const rows = await db
-    .select()
-    .from(areaProfileRankings)
-    .where(eq(areaProfileRankings.areaCode, areaCode))
-    .orderBy(asc(areaProfileRankings.rank));
+    .select({
+      entityName: areaProfiles.entityName,
+      yearCode: areaProfiles.yearCode,
+      type: areaProfiles.type,
+      rank: areaProfiles.rank,
+      valueNumeric: areaProfiles.valueNumeric,
+      unit: areaProfiles.unit,
+      percentile: areaProfiles.percentile,
+      rankingKey: indicators.key,
+      indicator: indicators.title,
+    })
+    .from(areaProfiles)
+    .innerJoin(indicators, eq(areaProfiles.indicatorId, indicators.id))
+    .where(
+      and(
+        eq(areaProfiles.entityType, "prefecture"),
+        eq(areaProfiles.entityCode, areaCode)
+      )
+    )
+    .orderBy(asc(areaProfiles.rank));
 
   if (rows.length === 0) return null;
 
   const toItem = (row: (typeof rows)[0]): StrengthWeaknessItem => ({
     indicator: row.indicator,
     rankingKey: row.rankingKey,
-    year: row.year,
+    year: row.yearCode,
     rank: row.rank,
-    value: row.value,
+    value: row.valueNumeric,
     unit: row.unit,
-    percentile: row.percentile ?? undefined,
+    percentile: row.percentile,
   });
 
   const strengths = rows
@@ -42,7 +58,7 @@ export async function getAreaProfileByCode(
 
   return {
     areaCode,
-    areaName: rows[0].areaName,
+    areaName: rows[0].entityName,
     strengths,
     weaknesses,
   };

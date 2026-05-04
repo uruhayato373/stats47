@@ -1,7 +1,7 @@
 /**
  * 検索インデックス生成スクリプト
  *
- * D1 の ranking_items / articles と categories から
+ * D1 の indicators / articles と categories から
  * MiniSearch 用の search-index.json と
  * フィルタ用の search-index-meta.json を生成する。
  *
@@ -121,37 +121,35 @@ async function main() {
 
   const documents: SearchDocument[] = [];
 
-  // 1. ランキング項目（ranking_items LEFT JOIN categories）
+  // 1. ランキング項目（indicators LEFT JOIN categories）
   try {
     const rankingRows = await db
       .select({
-        rankingKey: schema.rankingItems.rankingKey,
-        areaType: schema.rankingItems.areaType,
-        title: schema.rankingItems.title,
-        subtitle: schema.rankingItems.subtitle,
-        rankingName: schema.rankingItems.rankingName,
-        rankingDescription: schema.rankingItems.description,
-        demographicAttr: schema.rankingItems.demographicAttr,
-        normalizationBasis: schema.rankingItems.normalizationBasis,
-        availableYears: schema.rankingItems.availableYears,
-        categoryKey: schema.rankingItems.categoryKey,
+        rankingKey: schema.indicators.key,
+        areaType: schema.indicators.areaType,
+        title: schema.indicators.title,
+        subtitle: schema.indicators.subtitle,
+        rankingDescription: schema.indicators.description,
+        demographicAttr: schema.indicators.demographicAttr,
+        normalizationBasis: schema.indicators.normalizationBasis,
+        availableYears: schema.indicators.availableYearsJson,
+        categoryKey: schema.indicators.categoryKey,
         categoryName: schema.categories.categoryName,
       })
-      .from(schema.rankingItems)
+      .from(schema.indicators)
       .leftJoin(
         schema.categories,
-        eq(schema.rankingItems.categoryKey, schema.categories.categoryKey)
+        eq(schema.indicators.categoryKey, schema.categories.categoryKey)
       )
       .where(
         and(
-          eq(schema.rankingItems.isActive, true),
-          eq(schema.rankingItems.areaType, "prefecture")
+          eq(schema.indicators.isActive, true),
+          eq(schema.indicators.areaType, "prefecture")
         )
       )
-      .orderBy(asc(schema.rankingItems.rankingKey));
+      .orderBy(asc(schema.indicators.key));
 
     for (const row of rankingRows) {
-      // availableYears から最新年を取得
       let latestYear: string | undefined;
       try {
         const years = row.availableYears
@@ -165,7 +163,7 @@ async function main() {
         // JSON parse 失敗時は無視
       }
 
-      const description = [row.subtitle, row.rankingName, row.rankingDescription]
+      const description = [row.subtitle, row.rankingDescription]
         .filter(Boolean)
         .join(" ");
       documents.push({

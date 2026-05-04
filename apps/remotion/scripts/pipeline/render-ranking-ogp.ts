@@ -35,7 +35,7 @@ const D1_DIR = path.join(MONOREPO_ROOT, ".local", "d1", "v3", "d1", "miniflare-D
 // D1 アクセス
 // ---------------------------------------------------------
 
-/** ローカル D1 の SQLite ファイルを探す（ranking_items テーブルがあるもの） */
+/** ローカル D1 の SQLite ファイルを探す（indicators テーブルがあるもの） */
 async function findD1Database(): Promise<string> {
   const files = await fs.readdir(D1_DIR);
   const sqliteFiles = files.filter((f) => f.endsWith(".sqlite"));
@@ -46,7 +46,7 @@ async function findD1Database(): Promise<string> {
       const db = new Database(dbPath, { readonly: true });
       const result = db
         .prepare(
-          "SELECT name FROM sqlite_master WHERE type='table' AND name='ranking_items'"
+          "SELECT name FROM sqlite_master WHERE type='table' AND name='indicators'"
         )
         .get();
       db.close();
@@ -56,10 +56,11 @@ async function findD1Database(): Promise<string> {
     }
   }
 
-  throw new Error("ranking_items テーブルを含む D1 SQLite が見つかりません");
+  throw new Error("indicators テーブルを含む D1 SQLite が見つかりません");
 }
 
 interface RankingItemRow {
+  id: number;
   ranking_key: string;
   title: string;
   subtitle: string | null;
@@ -104,20 +105,22 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
   // isActive=true の prefecture ランキング一覧
   const items = db
     .prepare(
-      `SELECT ranking_key, title, subtitle, unit, latest_year,
-              demographic_attr, normalization_basis, visualization_config
-       FROM ranking_items
+      `SELECT id, key AS ranking_key, title, subtitle, unit, latest_year,
+              demographic_attr, normalization_basis,
+              visualization_config_json AS visualization_config
+       FROM indicators
        WHERE area_type = 'prefecture' AND is_active = 1
-       ORDER BY ranking_key`
+       ORDER BY key`
     )
     .all() as RankingItemRow[];
 
   // 各ランキングの最新年データを一括取得するための prepared statement
   const dataStmt = db.prepare(
-    `SELECT area_code, area_name, value, rank
-     FROM ranking_data
-     WHERE area_type = 'prefecture'
-       AND category_code = ?
+    `SELECT entity_code AS area_code, entity_name AS area_name,
+            value_numeric AS value, rank
+     FROM observations
+     WHERE entity_type = 'prefecture'
+       AND indicator_id = ?
        AND year_code = ?
      ORDER BY rank ASC`
   );
@@ -143,8 +146,8 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
 
     if (!yearCode) continue;
 
-    // ranking_data から最新年の47都道府県データを取得
-    const rows = dataStmt.all(item.ranking_key, yearCode) as RankingDataRow[];
+    // observations から最新年の47都道府県データを取得
+    const rows = dataStmt.all(item.id, yearCode) as RankingDataRow[];
     if (rows.length === 0) continue;
 
     // visualizationConfig をパース

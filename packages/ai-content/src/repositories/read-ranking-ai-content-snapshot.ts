@@ -1,17 +1,17 @@
 import "server-only";
 
-import { type RankingAiContentRow } from "@stats47/database/schema";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 import {
   AI_CONTENT_SNAPSHOT_KEY,
   type AiContentSnapshot,
+  type AiContentSnapshotRow,
 } from "../types/snapshot";
 
 const STALE_AFTER_DAYS = 30;
 
-let cached: Map<string, RankingAiContentRow> | null = null;
+let cached: Map<string, AiContentSnapshotRow> | null = null;
 
 function compositeKey(rankingKey: string, areaType: string): string {
   return `${rankingKey}|${areaType}`;
@@ -28,7 +28,7 @@ function warnIfStale(generatedAt: string): void {
   }
 }
 
-async function loadIndex(): Promise<Map<string, RankingAiContentRow>> {
+async function loadIndex(): Promise<Map<string, AiContentSnapshotRow>> {
   if (cached) return cached;
   const snapshot = await fetchFromR2AsJson<AiContentSnapshot>(
     AI_CONTENT_SNAPSHOT_KEY,
@@ -42,7 +42,7 @@ async function loadIndex(): Promise<Map<string, RankingAiContentRow>> {
     return cached;
   }
   warnIfStale(snapshot.generatedAt);
-  const map = new Map<string, RankingAiContentRow>();
+  const map = new Map<string, AiContentSnapshotRow>();
   for (const row of snapshot.rows) {
     map.set(compositeKey(row.rankingKey, row.areaType), row);
   }
@@ -62,7 +62,7 @@ async function loadIndex(): Promise<Map<string, RankingAiContentRow>> {
 export async function readRankingAiContentFromR2(
   rankingKey: string,
   areaType: string,
-): Promise<RankingAiContentRow | null> {
+): Promise<AiContentSnapshotRow | null> {
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return null;
   }

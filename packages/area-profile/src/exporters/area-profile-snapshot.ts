@@ -1,8 +1,9 @@
 import "server-only";
 
-import { areaProfileRankings, getDrizzle } from "@stats47/database/server";
+import { areaProfiles, getDrizzle, indicators } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
+import { eq } from "drizzle-orm";
 
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
 import {
@@ -18,34 +19,55 @@ export interface ExportAreaProfileSnapshotResult {
   durationMs: number;
 }
 
+/**
+ * area_profiles + indicators を JOIN して旧 AreaProfileSnapshot 形式の R2 に出す (PR-5)
+ *
+ * snapshot の rankingKey / indicator(=title) は frontend reader との後方互換性のため
+ * indicators から復元して出力する。
+ */
 export async function exportAreaProfileSnapshot(
   db?: ReturnType<typeof getDrizzle>,
 ): Promise<ExportAreaProfileSnapshotResult> {
   const startedAt = Date.now();
   const drizzleDb = db ?? getDrizzle();
 
-  const rows = await drizzleDb.select().from(areaProfileRankings);
+  const rows = await drizzleDb
+    .select({
+      entityCode: areaProfiles.entityCode,
+      entityName: areaProfiles.entityName,
+      yearCode: areaProfiles.yearCode,
+      type: areaProfiles.type,
+      rank: areaProfiles.rank,
+      valueNumeric: areaProfiles.valueNumeric,
+      unit: areaProfiles.unit,
+      percentile: areaProfiles.percentile,
+      rankingKey: indicators.key,
+      indicator: indicators.title,
+    })
+    .from(areaProfiles)
+    .innerJoin(indicators, eq(areaProfiles.indicatorId, indicators.id))
+    .where(eq(areaProfiles.entityType, "prefecture"));
 
   const byAreaCode: Record<string, AreaProfileData> = {};
   for (const row of rows) {
-    let bucket = byAreaCode[row.areaCode];
+    let bucket = byAreaCode[row.entityCode];
     if (!bucket) {
       bucket = {
-        areaCode: row.areaCode,
-        areaName: row.areaName,
+        areaCode: row.entityCode,
+        areaName: row.entityName,
         strengths: [],
         weaknesses: [],
       };
-      byAreaCode[row.areaCode] = bucket;
+      byAreaCode[row.entityCode] = bucket;
     }
     const item: StrengthWeaknessItem = {
       indicator: row.indicator,
       rankingKey: row.rankingKey,
-      year: row.year,
+      year: row.yearCode,
       rank: row.rank,
-      value: row.value,
+      value: row.valueNumeric,
       unit: row.unit,
-      percentile: row.percentile ?? undefined,
+      percentile: row.percentile,
     };
     if (row.type === "strength") bucket.strengths.push(item);
     else if (row.type === "weakness") bucket.weaknesses.push(item);
@@ -75,7 +97,7 @@ export async function exportAreaProfileSnapshot(
       sizeBytes: result.size,
       durationMs,
     },
-    "area-profile snapshot を R2 に保存しました",
+    "area_profiles snapshot を R2 に保存しました",
   );
 
   return {
