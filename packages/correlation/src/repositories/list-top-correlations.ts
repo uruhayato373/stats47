@@ -1,11 +1,11 @@
 import "server-only";
 
 import {
-  correlationAnalysis,
+  correlations,
   getDrizzle,
-  rankingItems,
+  indicators,
 } from "@stats47/database/server";
-import { and, eq, sql } from "drizzle-orm";
+import { aliasedTable, and, eq, sql } from "drizzle-orm";
 import {
   isExcludedCorrelationKey,
   isExcludedCorrelationPair,
@@ -27,7 +27,7 @@ export interface TopCorrelation {
 }
 
 /**
- * 相関係数の絶対値が高い上位N件を取得する（ランキングタイトル付き）
+ * 相関係数の絶対値が高い上位 N 件を取得する (PR-5: 新 correlations 経由)
  */
 export async function listTopCorrelations(
   limit = 20,
@@ -35,66 +35,36 @@ export async function listTopCorrelations(
 ): Promise<TopCorrelation[]> {
   const d = db ?? getDrizzle();
 
-  const riX = d
-    .select({
-      rankingKey: rankingItems.rankingKey,
-      title: rankingItems.title,
-      normalizationBasis: rankingItems.normalizationBasis,
-    })
-    .from(rankingItems)
-    .where(
-      and(
-        eq(rankingItems.areaType, "prefecture"),
-        eq(rankingItems.isActive, true)
-      )
-    )
-    .as("ri_x");
+  const ix = aliasedTable(indicators, "ix");
+  const iy = aliasedTable(indicators, "iy");
 
-  const riY = d
-    .select({
-      rankingKey: rankingItems.rankingKey,
-      title: rankingItems.title,
-      normalizationBasis: rankingItems.normalizationBasis,
-    })
-    .from(rankingItems)
-    .where(
-      and(
-        eq(rankingItems.areaType, "prefecture"),
-        eq(rankingItems.isActive, true)
-      )
-    )
-    .as("ri_y");
-
-  // 偏相関係数の最小絶対値（交絡変数を除外しても残る相関の強さ）
-  // NULL の偏相関はピアソン r で補完し、全 NULL 時はピアソン r にフォールバック
   const effectiveAbsR = sql<number>`MIN(
-    COALESCE(ABS(${correlationAnalysis.partialRPopulation}), ABS(${correlationAnalysis.pearsonR})),
-    COALESCE(ABS(${correlationAnalysis.partialRArea}), ABS(${correlationAnalysis.pearsonR})),
-    COALESCE(ABS(${correlationAnalysis.partialRAging}), ABS(${correlationAnalysis.pearsonR})),
-    COALESCE(ABS(${correlationAnalysis.partialRDensity}), ABS(${correlationAnalysis.pearsonR}))
+    COALESCE(ABS(${correlations.partialRPopulation}), ABS(${correlations.pearsonR})),
+    COALESCE(ABS(${correlations.partialRArea}), ABS(${correlations.pearsonR})),
+    COALESCE(ABS(${correlations.partialRAging}), ABS(${correlations.pearsonR})),
+    COALESCE(ABS(${correlations.partialRDensity}), ABS(${correlations.pearsonR}))
   )`;
 
   const rows = await d
     .select({
-      rankingKeyX: correlationAnalysis.rankingKeyX,
-      rankingKeyY: correlationAnalysis.rankingKeyY,
-      pearsonR: correlationAnalysis.pearsonR,
-      effectiveR: sql<number>`CASE WHEN ${correlationAnalysis.pearsonR} >= 0 THEN 1 ELSE -1 END * ${effectiveAbsR}`,
-      partialRPopulation: correlationAnalysis.partialRPopulation,
-      partialRArea: correlationAnalysis.partialRArea,
-      partialRAging: correlationAnalysis.partialRAging,
-      partialRDensity: correlationAnalysis.partialRDensity,
-      titleX: sql<string | null>`${riX.title}`,
-      titleY: sql<string | null>`${riY.title}`,
-      normalizationBasisX: sql<string | null>`${riX.normalizationBasis}`,
-      normalizationBasisY: sql<string | null>`${riY.normalizationBasis}`,
+      rankingKeyX: ix.key,
+      rankingKeyY: iy.key,
+      pearsonR: correlations.pearsonR,
+      effectiveR: sql<number>`CASE WHEN ${correlations.pearsonR} >= 0 THEN 1 ELSE -1 END * ${effectiveAbsR}`,
+      partialRPopulation: correlations.partialRPopulation,
+      partialRArea: correlations.partialRArea,
+      partialRAging: correlations.partialRAging,
+      partialRDensity: correlations.partialRDensity,
+      titleX: ix.title,
+      titleY: iy.title,
+      normalizationBasisX: ix.normalizationBasis,
+      normalizationBasisY: iy.normalizationBasis,
     })
-    .from(correlationAnalysis)
-    .innerJoin(riX, eq(correlationAnalysis.rankingKeyX, riX.rankingKey))
-    .innerJoin(riY, eq(correlationAnalysis.rankingKeyY, riY.rankingKey))
-    .where(sql`ABS(${correlationAnalysis.pearsonR}) < 0.99`)
+    .from(correlations)
+    .innerJoin(ix, and(eq(correlations.indicatorXId, ix.id), eq(ix.areaType, "prefecture")))
+    .innerJoin(iy, and(eq(correlations.indicatorYId, iy.id), eq(iy.areaType, "prefecture")))
+    .where(sql`ABS(${correlations.pearsonR}) < 0.99`)
     .orderBy(sql`${effectiveAbsR} DESC`)
-    // 除外リスト（ペア＋個別キー）でフィルタされる分を見越して多めに取得
     .limit(limit * 10);
 
   return rows

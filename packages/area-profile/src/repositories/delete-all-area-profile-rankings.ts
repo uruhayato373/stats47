@@ -1,11 +1,11 @@
 import "server-only";
 
-import { areaProfileRankings, getDrizzle } from "@stats47/database/server";
+import { areaProfiles, getDrizzle } from "@stats47/database/server";
 
 /**
- * 全件削除（再計算やメンテナンス用）
+ * 全件削除（再計算・メンテナンス用）(PR-5)
  */
 export async function deleteAllAreaProfileRankings(): Promise<void> {
   const db = getDrizzle();
-  await db.delete(areaProfileRankings);
+  await db.delete(areaProfiles);
 }
