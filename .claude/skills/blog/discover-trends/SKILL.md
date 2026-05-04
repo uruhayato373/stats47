@@ -4,7 +4,7 @@ description: 指定したソース（Google Trends / GSC / はてブ / Google Ne
 disable-model-invocation: true
 ---
 
-複数のトレンドソースから急上昇トピックを取得し、stats47 の統計データ（`ranking_items` / `ranking_tags` / `estat_stats_tables`）とマッチングしてブログ記事候補を提案する。
+複数のトレンドソースから急上昇トピックを取得し、stats47 の統計データ（`indicators` / `indicator_tags` + `tags` / `estat_metainfo`）とマッチングしてブログ記事候補を提案する。
 
 ## 用途
 
@@ -102,47 +102,52 @@ $ARGUMENTS — [--source <name>] [--limit N] [--youtube]
 
 4. 採用した各トレンドについて、ローカル D1 に対して以下のクエリを実行し関連データを検索する。
 
-**4a. ranking_tags でタグ検索:**
+**4a. indicator_tags + tags でタグ検索:**
 
 ```sql
-SELECT DISTINCT ri.ranking_key, ri.title, ri.unit, ri.latest_year, rt.tag
-FROM ranking_tags rt
-JOIN ranking_items ri ON rt.ranking_key = ri.ranking_key AND rt.area_type = ri.area_type
-WHERE rt.tag LIKE '%{keyword}%'
-  AND ri.area_type = 'prefecture'
-ORDER BY ri.latest_year DESC;
+SELECT DISTINCT i.key AS ranking_key, i.title, i.unit, i.latest_year, t.tag_key, t.tag_name
+FROM indicator_tags it
+JOIN indicators i ON it.indicator_id = i.id
+JOIN tags t ON it.tag_key = t.tag_key
+WHERE (t.tag_key LIKE '%{keyword}%' OR t.tag_name LIKE '%{keyword}%')
+  AND i.area_type = 'prefecture'
+  AND i.is_active = 1
+ORDER BY i.latest_year DESC;
 ```
 
 ※ キーワードは元のトレンドワードだけでなく、関連語・上位概念も含めて複数パターンで検索する。例: 「猛暑」→ `%猛暑%`, `%気温%`, `%熱中症%`
 
-**4b. ranking_items でタイトル検索:**
+**4b. indicators でタイトル検索:**
 
 ```sql
-SELECT DISTINCT ranking_key, title, unit, latest_year
-FROM ranking_items
+SELECT DISTINCT key AS ranking_key, title, unit, latest_year
+FROM indicators
 WHERE title LIKE '%{keyword}%'
   AND area_type = 'prefecture'
+  AND is_active = 1
 ORDER BY latest_year DESC;
 ```
 
-**4c. estat_stats_tables で統計表カタログ検索:**
+**4c. estat_metainfo で統計表カタログ検索 (registered + candidate):**
 
 ```sql
-SELECT stats_data_id, title, gov_org, status, category_key
-FROM estat_stats_tables
+SELECT stats_data_id, title, gov_org, status, category_key, stats_field
+FROM estat_metainfo
 WHERE title LIKE '%{keyword}%'
-ORDER BY status, title;
+ORDER BY
+  CASE status WHEN 'registered' THEN 0 ELSE 1 END,
+  title;
 ```
 
-- `status = 'registered'` → 既存データあり、すぐ使える
-- `status = 'candidate'` → 未登録候補、`/fetch-estat-data` で取得が必要
+- `status = 'registered'` → 既に indicators に登録済み (`indicators.source_id` で参照される運用マスタ)
+- `status = 'candidate'` → e-Stat 統計表カタログとして 8,399 件保持。未登録だが ID + メタは既知。新規ランキング候補として `/fetch-estat-data <statsDataId>` で取得 → `/register-ranking` で indicators 登録できる
 
 5. マッチ結果をもとに、各トレンドのマッチ度を判定:
 
 | マッチ度 | 基準 |
 |---|---|
-| ★★★ | ranking_items に直接関連するデータあり（記事すぐ書ける） |
-| ★★☆ | estat_stats_tables に候補あり、または ranking_items に間接的な関連データあり |
+| ★★★ | indicators に直接関連するデータあり（記事すぐ書ける） |
+| ★★☆ | estat_metainfo (status='candidate') に候補あり、または indicators に間接的な関連データあり |
 | ★☆☆ | カテゴリ的に関連するが、直接マッチするデータなし（新規データ取得が必要） |
 
 ### Phase 4: 重複チェック

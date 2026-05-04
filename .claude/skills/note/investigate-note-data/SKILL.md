@@ -42,32 +42,32 @@ const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b01
 
 ### Phase 1: メインデータ収集
 
-1. `ranking_items` からメタデータを取得:
+1. `indicators` からメタデータを取得:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const items = db.prepare(\"SELECT ranking_key, title, subtitle, unit, category_key, latest_year, available_years FROM ranking_items WHERE ranking_key IN ('<KEY1>', '<KEY2>') AND area_type = 'prefecture'\").all();
+const items = db.prepare(\"SELECT ranking_key, title, subtitle, unit, category_key, latest_year, available_years FROM indicators WHERE ranking_key IN ('<KEY1>', '<KEY2>') AND area_type = 'prefecture'\").all();
 console.log(JSON.stringify(items, null, 2));
 db.close();
 "
 ```
 
-2. `ranking_data` から全47都道府県データを取得（最新年を使用）:
+2. `observations` から全47都道府県データを取得（最新年を使用）:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT area_code, area_name, year_code, value, rank FROM ranking_data WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>' ORDER BY value DESC\").all();
+const rows = db.prepare(\"SELECT area_code, area_name, year_code, value, rank FROM observations WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>' ORDER BY value DESC\").all();
 console.log(JSON.stringify(rows, null, 2));
 console.log('Count:', rows.length);
 db.close();
 "
 ```
 
-**注意**: `ranking_data` テーブルでは `category_code` カラムが `ranking_key` に対応する。
+**注意**: `observations` テーブルでは `category_code` カラムが `ranking_key` に対応する。
 
 3. 同カテゴリの関連ランキングを検索:
 
@@ -75,7 +75,7 @@ db.close();
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const related = db.prepare(\"SELECT ranking_key, title, unit, latest_year FROM ranking_items WHERE category_key = '<CATEGORY_KEY>' AND area_type = 'prefecture' AND is_active = 1 AND ranking_key != '<MAIN_KEY>' ORDER BY ranking_key LIMIT 30\").all();
+const related = db.prepare(\"SELECT ranking_key, title, unit, latest_year FROM indicators WHERE category_key = '<CATEGORY_KEY>' AND area_type = 'prefecture' AND is_active = 1 AND ranking_key != '<MAIN_KEY>' ORDER BY ranking_key LIMIT 30\").all();
 console.log(JSON.stringify(related, null, 2));
 db.close();
 "
@@ -85,21 +85,21 @@ db.close();
 
 #### 2-1. 既存の相関データを確認
 
-`correlation_analysis` テーブル（82,000件超）に事前計算済みのピアソン相関係数がある。まず既存データを確認する:
+`correlations` テーブル（82,000件超）に事前計算済みのピアソン相関係数がある。まず既存データを確認する:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 // メインキーとの相関が強い指標を検索（|r| > 0.5）
-const corrs = db.prepare(\"SELECT ranking_key_x, ranking_key_y, year_x, year_y, pearson_r, partial_r_population, partial_r_area, partial_r_aging, partial_r_density FROM correlation_analysis WHERE (ranking_key_x = '<MAIN_KEY>' OR ranking_key_y = '<MAIN_KEY>') AND ABS(pearson_r) > 0.5 ORDER BY ABS(pearson_r) DESC LIMIT 30\").all();
+const corrs = db.prepare(\"SELECT ranking_key_x, ranking_key_y, year_x, year_y, pearson_r, partial_r_population, partial_r_area, partial_r_aging, partial_r_density FROM correlations WHERE (ranking_key_x = '<MAIN_KEY>' OR ranking_key_y = '<MAIN_KEY>') AND ABS(pearson_r) > 0.5 ORDER BY ABS(pearson_r) DESC LIMIT 30\").all();
 console.log(JSON.stringify(corrs, null, 2));
 console.log('Strong correlations found:', corrs.length);
 db.close();
 "
 ```
 
-`correlation_analysis` テーブルのカラム:
+`correlations` テーブルのカラム:
 - `ranking_key_x`, `ranking_key_y`: 2指標のランキングキー
 - `year_x`, `year_y`: 各指標のデータ年
 - `pearson_r`: ピアソン相関係数
@@ -136,8 +136,8 @@ const keyY = '<KEY_Y>';
 const yearX = '<YEAR_X>';
 const yearY = '<YEAR_Y>';
 
-const dataX = db.prepare('SELECT area_code, value FROM ranking_data WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyX, 'prefecture', yearX);
-const dataY = db.prepare('SELECT area_code, value FROM ranking_data WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyY, 'prefecture', yearY);
+const dataX = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyX, 'prefecture', yearX);
+const dataY = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyY, 'prefecture', yearY);
 
 // area_code でマッチング
 const mapY = new Map(dataY.map(r => [r.area_code, r.value]));
@@ -202,7 +202,7 @@ const regionMap = {
   '40000': '九州沖縄', '41000': '九州沖縄', '42000': '九州沖縄', '43000': '九州沖縄', '44000': '九州沖縄', '45000': '九州沖縄', '46000': '九州沖縄', '47000': '九州沖縄',
 };
 
-const rows = db.prepare(\"SELECT area_code, area_name, value FROM ranking_data WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>'\").all();
+const rows = db.prepare(\"SELECT area_code, area_name, value FROM observations WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>'\").all();
 
 // 地方別集計
 const regionStats = {};
@@ -257,7 +257,7 @@ const years = ['<YEAR1>', '<YEAR2>', '<YEAR3>', '<YEAR4>', '<YEAR5>'];
 
 const results = [];
 for (let i = 0; i < keys.length; i++) {
-  const rows = db.prepare('SELECT area_code, value FROM ranking_data WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keys[i], 'prefecture', years[i]);
+  const rows = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keys[i], 'prefecture', years[i]);
   const values = rows.map(r => r.value);
   const n = values.length;
   const mean = values.reduce((a, b) => a + b, 0) / n;
@@ -267,7 +267,7 @@ for (let i = 0; i < keys.length; i++) {
   if (!target) { console.log(keys[i] + ': データなし'); continue; }
 
   const deviation = stddev === 0 ? 50 : 50 + 10 * (target.value - mean) / stddev;
-  const item = db.prepare('SELECT title, unit FROM ranking_items WHERE ranking_key = ? AND area_type = ?').get(keys[i], 'prefecture');
+  const item = db.prepare('SELECT title, unit FROM indicators WHERE ranking_key = ? AND area_type = ?').get(keys[i], 'prefecture');
   results.push({ key: keys[i], title: item?.title || keys[i], value: target.value, unit: item?.unit || '', deviation: deviation.toFixed(1), rank: rows.sort((a, b) => b.value - a.value).findIndex(r => r.area_code === targetAreaCode) + 1 });
 }
 

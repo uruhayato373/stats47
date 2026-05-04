@@ -57,7 +57,7 @@ npm run pull:d1 --workspace=packages/database -- --batch-size 1000
 
 | テーブル | 理由 |
 |---|---|
-| `correlation_analysis` | 5GB+ の巨大テーブル。リモート D1 が正規ストア。相関分析は `/run-correlation-batch` で実行 |
+| `correlations` | 5GB+ の巨大テーブル。リモート D1 が正規ストア。相関分析は `/run-correlation-batch` で実行 |
 
 比較表（`--dry-run`）では除外テーブルも `[EXCL]` マーカー付きで行数が表示される。
 
@@ -91,8 +91,8 @@ npm run pull:d1 --workspace=packages/database -- --table correlation_analysis
 
 | テーブル | バッチサイズ | 理由 |
 |---|---|---|
-| `correlation_analysis` | 500 | scatter_data JSON が巨大（デフォルト除外対象） |
-| `ranking_ai_content` | 100 | faq/insights 等の JSON が巨大 |
+| `correlations` | 500 | scatter_data JSON が巨大（デフォルト除外対象） |
+| `ai_content` | 100 | faq/insights 等の JSON が巨大 |
 | その他 | 5000 | デフォルト |
 
 `--batch-size` で全テーブル一律のバッチサイズを指定可能。

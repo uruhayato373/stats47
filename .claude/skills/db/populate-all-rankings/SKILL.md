@@ -42,7 +42,7 @@ npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scri
 
 ```bash
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT category_code, COUNT(DISTINCT year_code) as years FROM ranking_data GROUP BY category_code ORDER BY years DESC LIMIT 20;"
+  "SELECT category_code, COUNT(DISTINCT year_code) as years FROM observations GROUP BY category_code ORDER BY years DESC LIMIT 20;"
 ```
 
 ### 4. リモート反映

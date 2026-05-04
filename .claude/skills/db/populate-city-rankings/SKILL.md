@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 - ローカル D1 が利用可能であること（`.local/d1/` 配下）
 - `.env.local` に `NEXT_PUBLIC_ESTAT_APP_ID` が設定されていること
-- `ranking_items` テーブルに `area_type='city'` のレコードが登録済みであること
+- `indicators` テーブルに `area_type='city'` のレコードが登録済みであること
 
 ## 手順
 
@@ -40,7 +40,7 @@ npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scri
 
 ```bash
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ranking_key, COUNT(*) as rows, COUNT(DISTINCT year_code) as years FROM ranking_data WHERE area_type='city' GROUP BY ranking_key ORDER BY rows DESC;"
+  "SELECT ranking_key, COUNT(*) as rows, COUNT(DISTINCT year_code) as years FROM observations WHERE area_type='city' GROUP BY ranking_key ORDER BY rows DESC;"
 ```
 
 ### 4. リモート反映
@@ -98,7 +98,7 @@ npx tsx packages/ranking/src/scripts/seed-city-ranking-items.ts
 データが取得できなかった ranking_items（`latest_year IS NULL`）は無効化する：
 
 ```sql
-UPDATE ranking_items SET is_active = 0
+UPDATE indicators SET is_active = 0
 WHERE area_type = 'city' AND is_active = 1 AND latest_year IS NULL;
 ```
 

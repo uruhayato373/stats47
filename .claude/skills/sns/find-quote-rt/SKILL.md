@@ -156,7 +156,7 @@ score = engagement * (0.4 + 0.6 * freshness)  # 鮮度ボーナス 60%
 ```bash
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
   "SELECT ri.category_key FROM sns_posts sp
-   LEFT JOIN ranking_items ri ON ri.ranking_key = sp.content_key
+   LEFT JOIN indicators ri ON ri.ranking_key = sp.content_key
    WHERE sp.post_type='quote_rt' AND sp.platform='x'
    ORDER BY sp.posted_at DESC LIMIT 2"
 ```
@@ -169,7 +169,7 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 
 ```bash
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ranking_key, ranking_name, category_key FROM ranking_items
+  "SELECT ranking_key, ranking_name, category_key FROM indicators
    WHERE area_type='prefecture' AND is_active=1
    AND (ranking_name LIKE '%出生%' OR ranking_name LIKE '%少子%' OR ranking_name LIKE '%人口%')
    ORDER BY ranking_name LIMIT 20"
@@ -189,7 +189,7 @@ sqlite3 ... "SELECT content_key FROM sns_posts WHERE post_type='quote_rt' AND po
 
 ```bash
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ranking_key, ranking_name, category_key FROM ranking_items
+  "SELECT ranking_key, ranking_name, category_key FROM indicators
    WHERE area_type='prefecture' AND is_active=1
    AND (ranking_name LIKE '%出生%' OR ranking_name LIKE '%少子%' OR ranking_name LIKE '%人口%')
    ORDER BY ranking_name LIMIT 20"

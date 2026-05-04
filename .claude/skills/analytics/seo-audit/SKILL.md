@@ -120,20 +120,20 @@ DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 sqlite3 "$DB" "
   SELECT '公開記事' as item, COUNT(*) as cnt FROM articles WHERE published = 1
   UNION ALL SELECT '下書き記事', COUNT(*) FROM articles WHERE published = 0
-  UNION ALL SELECT 'ランキング項目(都道府県)', COUNT(*) FROM ranking_items WHERE area_type='prefecture'
-  UNION ALL SELECT 'ランキング項目(市区町村)', COUNT(*) FROM ranking_items WHERE area_type='city'
+  UNION ALL SELECT 'ランキング項目(都道府県)', COUNT(*) FROM indicators WHERE area_type='prefecture'
+  UNION ALL SELECT 'ランキング項目(市区町村)', COUNT(*) FROM indicators WHERE area_type='city'
   UNION ALL SELECT 'カテゴリ', COUNT(*) FROM categories
   UNION ALL SELECT 'サブカテゴリ', COUNT(*) FROM subcategories
-  UNION ALL SELECT 'AI コンテンツ', COUNT(*) FROM ranking_ai_content
-  UNION ALL SELECT '相関分析ペア', COUNT(*) FROM correlation_analysis
+  UNION ALL SELECT 'AI コンテンツ', COUNT(*) FROM ai_content
+  UNION ALL SELECT '相関分析ペア', COUNT(*) FROM correlations
   UNION ALL SELECT '地域プロファイル', COUNT(*) FROM area_profiles
 "
 
 # ranking_items で ranking_data が 0 件のもの（データ未投入）
 sqlite3 "$DB" "
   SELECT ri.ranking_key, ri.title
-  FROM ranking_items ri
-  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM ranking_data GROUP BY ranking_key) rd
+  FROM indicators ri
+  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM observations GROUP BY ranking_key) rd
     ON ri.ranking_key = rd.ranking_key
   WHERE ri.area_type = 'prefecture' AND (rd.cnt IS NULL OR rd.cnt = 0)
   LIMIT 20;
@@ -142,8 +142,8 @@ sqlite3 "$DB" "
 # AI コンテンツ未生成のランキング
 sqlite3 "$DB" "
   SELECT ri.ranking_key, ri.title
-  FROM ranking_items ri
-  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM ranking_ai_content GROUP BY ranking_key) rac
+  FROM indicators ri
+  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM ai_content GROUP BY ranking_key) rac
     ON ri.ranking_key = rac.ranking_key
   WHERE ri.area_type = 'prefecture' AND (rac.cnt IS NULL OR rac.cnt = 0)
   LIMIT 20;

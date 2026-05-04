@@ -58,7 +58,7 @@ done
 ```sql
 SELECT ri.category_key
 FROM sns_posts sp
-LEFT JOIN ranking_items ri ON ri.ranking_key = sp.content_key
+LEFT JOIN indicators ri ON ri.ranking_key = sp.content_key
 WHERE sp.post_type = 'quote_rt' AND sp.platform = 'x'
 ORDER BY sp.posted_at DESC
 LIMIT 2;

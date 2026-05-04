@@ -42,7 +42,7 @@ D1 から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA
 ローカル D1 から地域名を取得する:
 
 ```sql
-SELECT area_name FROM ranking_data
+SELECT area_name FROM observations
 WHERE area_code = '<areaCode>' AND area_type = 'prefecture'
 LIMIT 1;
 ```
@@ -55,12 +55,12 @@ LIMIT 1;
 -- 最新年度のデータを取得
 SELECT area_code, area_name, value, year_code, year_name,
        category_name, unit
-FROM ranking_data
+FROM observations
 WHERE category_code = '<rankingKey>'
   AND area_type = 'prefecture'
   AND area_code <> '00000'
   AND year_code = (
-    SELECT MAX(year_code) FROM ranking_data
+    SELECT MAX(year_code) FROM observations
     WHERE category_code = '<rankingKey>'
       AND area_type = 'prefecture'
       AND area_code <> '00000'

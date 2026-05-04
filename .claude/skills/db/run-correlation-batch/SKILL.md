@@ -6,11 +6,11 @@ disable-model-invocation: true
 ---
 
 相関分析バッチを実行し、結果をリモート D1 に同期する。
-ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlation_analysis` テーブルを DROP + VACUUM する。
+ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlations` テーブルを DROP + VACUUM する。
 
 ## 前提
 
-- ローカル D1 に `ranking_data`, `ranking_items` が存在すること（`/pull-remote-d1` 済み）
+- ローカル D1 に `observations`, `indicators` が存在すること（`/pull-remote-d1` 済み）
 - Cloudflare 認証済み（`wrangler login`）
 - 環境変数: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_STATIC_DATABASE_ID_PRODUCTION`, `CLOUDFLARE_API_TOKEN`
 
@@ -18,7 +18,7 @@ disable-model-invocation: true
 
 ### Phase 1: ローカル correlation_analysis テーブルの準備
 
-`correlation_analysis` テーブルがローカルに存在しない場合、空テーブルを作成する。
+`correlations` テーブルがローカルに存在しない場合、空テーブルを作成する。
 存在する場合はそのまま使用する。
 
 > **注意**: CREATE TABLE の定義は `packages/database/src/schema/correlation_analysis.ts` と同期すること。スキーマ変更時は両方を更新する。
@@ -58,7 +58,7 @@ if (!exists) {
   \`);
   console.log('correlation_analysis テーブルを作成しました');
 } else {
-  const count = db.prepare('SELECT COUNT(*) as cnt FROM correlation_analysis').get();
+  const count = db.prepare('SELECT COUNT(*) as cnt FROM correlations').get();
   console.log('correlation_analysis テーブルは既に存在します（' + count.cnt + ' 行）');
 }
 db.close();
@@ -84,7 +84,7 @@ npm run batch --workspace=packages/correlation
 1. リモートの現在行数を確認:
    ```bash
    cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-     --command "SELECT COUNT(*) as cnt FROM correlation_analysis;" --json -y
+     --command "SELECT COUNT(*) as cnt FROM correlations;" --json -y
    ```
 
 2. `/sync-remote-d1 --table correlation_analysis` を実行してローカルの結果をリモートに push する。
@@ -116,7 +116,7 @@ db.close();
 
 ```bash
 cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-  --command "SELECT COUNT(*) as cnt FROM correlation_analysis;" --json -y
+  --command "SELECT COUNT(*) as cnt FROM correlations;" --json -y
 ```
 
 ```bash
@@ -132,4 +132,4 @@ ls -lh .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bc
 - バッチは冪等（upsert）。途中で失敗しても再実行可能
 - `--dry-run` の場合は Phase 1 の存在確認 + Phase 2 のドライランのみ実行
 - VACUUM は DB サイズの一時的な倍増が必要。ディスク空き容量を確認すること
-- `pull-remote-d1` はデフォルトで `correlation_analysis` を除外する（`--no-exclude` で上書き可）
+- `pull-remote-d1` はデフォルトで `correlations` を除外する（`--no-exclude` で上書き可）
