@@ -1,47 +1,69 @@
 ---
 name: discover-trends
-description: Google Trends のデイリートレンドを取得し stats47 データとマッチングしてブログ記事候補を提案する。Use when user says "トレンド検索", "Google Trends", "トレンド発見". 検索急上昇起点のテーマ発見.
+description: 指定したソース（Google Trends / GSC / はてブ / Google News / Yahoo / note.com）から急上昇トピックを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "はてブトレンド", "Yahooトレンド", "ニューストレンド", "noteトレンド", "トレンド全部". 検索急上昇・自サイト需要・ネット議論・ニュース報道など複数視点で記事ネタを発見.
 disable-model-invocation: true
 ---
 
-Google Trends のデイリートレンドを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。
+複数のトレンドソースから急上昇トピックを取得し、stats47 の統計データ（`ranking_items` / `ranking_tags` / `estat_stats_tables`）とマッチングしてブログ記事候補を提案する。
 
 ## 用途
 
 - トレンド起点でタイムリーな記事テーマを発見したいとき
-- 既存の統計データと時事ネタを結びつけた記事企画が欲しいとき
+- 複数ソースで同時に話題になっているテーマ（クロスソースヒット）を探したいとき
 - `/plan-blog-articles`（カテゴリ起点）と補完的に使う
 
 ## 引数
 
 ```
-$ARGUMENTS — [--youtube]
-             --youtube: YouTube トレンドも WebSearch で補助取得（任意）
+$ARGUMENTS — [--source <name>] [--limit N] [--youtube]
+             --source: 取得元ソース。省略時は all
+                       trends:  Google Trends デイリー（検索急上昇）
+                       gsc:     Google Search Console（自サイト需要）
+                       hatena:  はてなブックマーク Hot Entry（ネット議論）
+                       news:    Google News RSS（メディア報道・複数トピック）
+                       yahoo:   Yahoo!ニュース トピックス（国内・地域に強い）
+                       note:    note.com 注目記事（クリエイター層の関心）
+                       all:     上記 6 ソース全部 + クロスソースヒット集計
+             --limit:  候補出力件数の上限（デフォルト: 20）
+             --youtube: trends 選択時のみ、YouTube トレンドも WebSearch で補助取得（任意）
 ```
 
 ## 手順
 
-### Phase 1: トレンド取得
+### Phase 1: ソース別データ取得
 
-1. Google Trends RSS を WebFetch で取得:
+`--source` の値に応じて、`.claude/skills/blog/discover-trends/sources/` 配下の該当 markdown を読み、その手順に従って **そのソース固有のデータ取得** を行う。
+
+| --source 値 | 参照ファイル | 取得元 |
+|---|---|---|
+| `trends` | `sources/trends.md` | Google Trends RSS (`trends.google.co.jp`) |
+| `gsc` | `sources/gsc.md` | Search Console API（要サービスアカウント鍵） |
+| `hatena` | `sources/hatena.md` | はてブ Hot Entry RSS（5 カテゴリ） |
+| `news` | `sources/news.md` | Google News RSS（5 トピック） |
+| `yahoo` | `sources/yahoo.md` | Yahoo!ニュース RSS（6 カテゴリ） |
+| `note` | `sources/note.md` | note.com WebSearch + WebFetch |
+| `all` | `sources/all.md` | 上記 6 ソースを並列実行し統合 |
+
+各 sources/*.md では「Phase 1 の取得結果」として以下の共通フォーマットでトレンドキーワード一覧を整える:
 
 ```
-URL: https://trends.google.co.jp/trending/rss?geo=JP
+[
+  { keyword, sourceLabel, popularity, relatedUrls[], pubDate? },
+  ...
+]
 ```
 
-- 各 `<item>` から以下を抽出:
-  - `<title>` — トレンドキーワード
-  - `<ht:approx_traffic>` — 検索ボリューム（例: "200,000+"）
-  - `<ht:news_item>` 内の `<ht:news_item_title>` — 関連ニュースタイトル
-  - `<ht:news_item_url>` — 関連ニュース URL
+- `keyword`: トレンドキーワード
+- `sourceLabel`: `google-trends` / `gsc` / `hatena` / `google-news` / `yahoo` / `note` / 複数（all モードで複数ソースから出てきた場合）
+- `popularity`: 検索ボリューム / ブクマ数 / スキ数 / impressions など、ソース固有の注目度指標
+- `relatedUrls`: 関連記事 / 出典 URL
+- `pubDate`: 公開日時（ある場合のみ）
 
-2. `--youtube` オプションが指定された場合、WebSearch で「YouTube トレンド 日本 今日」を検索し、上位の話題を補助情報として収集する。
+`all` の場合は最後にキーワードで集約し、複数ソースから出ているものを **クロスソースヒット** として優先する。
 
 ### Phase 2: フィルタリング
 
-3. 以下のカテゴリキーワードマップを使い、各トレンドを stats47 の 16 カテゴリに分類する。マップに完全一致しなくても、Claude のセマンティック推論でカテゴリとの関連性を判断すること。
-
-**カテゴリキーワードマップ:**
+1. 以下のカテゴリキーワードマップで、各トレンドを stats47 の 16 カテゴリに分類する。完全一致しなくても Claude のセマンティック推論でカテゴリとの関連性を判断する。
 
 | category_key | カテゴリ名 | 関連キーワード |
 |---|---|---|
@@ -62,23 +84,25 @@ URL: https://trends.google.co.jp/trending/rss?geo=JP
 | socialsecurity | 社会保障・衛生 | 医療, 病院, 医師, 看護師, 介護, 年金, 生活保護, 健康, 平均寿命, 感染症, ワクチン, 福祉 |
 | international | 国際 | 貿易, 輸出, 輸入, 外国人, 在留, 国際交流, 姉妹都市, 外資 |
 
-4. **除外するトレンド** — 以下に該当するトレンドは統計記事化が困難なため除外:
+2. **除外するトレンド** — 以下に該当するものは統計記事化が困難なため除外:
    - 芸能人・有名人の個人ニュース（スキャンダル、結婚、引退等）
    - スポーツの試合結果・選手個人ニュース
    - ゲーム・アニメ・漫画の新作リリース・キャラクター話題
    - TV 番組・映画の放送・上映情報
    - 政治家個人のスキャンダル・発言（政策関連は除外しない）
    - 商品・サービスの単発プロモーション
+   - 海外ニュース（日本の都道府県データと結びつかないもの）
+   - 事件・事故の個別速報（統計化が困難なもの）
 
-5. フィルタリング結果をまとめる:
+3. フィルタリング結果をまとめる:
    - **採用**: カテゴリ分類できたトレンド → Phase 3 へ
    - **除外**: 理由を簡潔に記録（Phase 6 のサマリーで報告）
 
 ### Phase 3: DB マッチング
 
-6. 採用した各トレンドについて、ローカル D1 で以下のクエリを実行し関連データを検索する。SQLite ファイルは `.local/d1/` 配下にある。
+4. 採用した各トレンドについて、ローカル D1 に対して以下のクエリを実行し関連データを検索する。
 
-**6a. ranking_tags でタグ検索:**
+**4a. ranking_tags でタグ検索:**
 
 ```sql
 SELECT DISTINCT ri.ranking_key, ri.title, ri.unit, ri.latest_year, rt.tag
@@ -89,9 +113,9 @@ WHERE rt.tag LIKE '%{keyword}%'
 ORDER BY ri.latest_year DESC;
 ```
 
-※ キーワードは元のトレンドワードだけでなく、関連語・上位概念も含めて複数パターンで検索する。例: トレンド「猛暑」→ `%猛暑%`, `%気温%`, `%熱中症%`
+※ キーワードは元のトレンドワードだけでなく、関連語・上位概念も含めて複数パターンで検索する。例: 「猛暑」→ `%猛暑%`, `%気温%`, `%熱中症%`
 
-**6b. ranking_items でタイトル検索:**
+**4b. ranking_items でタイトル検索:**
 
 ```sql
 SELECT DISTINCT ranking_key, title, unit, latest_year
@@ -101,7 +125,7 @@ WHERE title LIKE '%{keyword}%'
 ORDER BY latest_year DESC;
 ```
 
-**6c. estat_stats_tables で統計表カタログ検索:**
+**4c. estat_stats_tables で統計表カタログ検索:**
 
 ```sql
 SELECT stats_data_id, title, gov_org, status, category_key
@@ -113,7 +137,7 @@ ORDER BY status, title;
 - `status = 'registered'` → 既存データあり、すぐ使える
 - `status = 'candidate'` → 未登録候補、`/fetch-estat-data` で取得が必要
 
-7. マッチ結果をもとに、各トレンドのマッチ度を判定:
+5. マッチ結果をもとに、各トレンドのマッチ度を判定:
 
 | マッチ度 | 基準 |
 |---|---|
@@ -123,7 +147,7 @@ ORDER BY status, title;
 
 ### Phase 4: 重複チェック
 
-8. 既存記事との重複を確認:
+6. 既存記事との重複を確認:
 
 ```sql
 SELECT slug, title, tags FROM articles;
@@ -133,13 +157,13 @@ SELECT slug, title, tags FROM articles;
 
 ### Phase 5: 候補生成
 
-9. マッチ度 ★★☆ 以上の候補について、以下の形式で記事候補を生成する:
+7. マッチ度 ★★☆ 以上の候補について、以下の形式で記事候補を生成する:
 
 ```
-## 候補: {トレンドキーワード}（マッチ度: ★★★）
+## 候補: {トレンドキーワード}（マッチ度: ★★★ / ソース: {sourceLabel}）
 
-- **トレンド概要**: {関連ニュースの要約}
-- **検索ボリューム**: {approx_traffic}
+- **トレンド概要**: {関連情報の要約}
+- **注目度**: {popularity}
 - **分類カテゴリ**: {category_key}（{カテゴリ名}）
 - **タイミング**: なぜ今このテーマが注目されているか
 
@@ -166,33 +190,34 @@ SELECT slug, title, tags FROM articles;
 - [ ] 記事執筆
 ```
 
-10. ★☆☆ の候補は簡易リストのみ（詳細な構成案は不要）。
+8. ★☆☆ の候補は簡易リストのみ（詳細な構成案は不要）。
+
+9. `--source all` の場合は **クロスソースヒット**（複数ソースから出ているキーワード）を優先表示する。同じキーワードが 3 ソース以上で出ていれば最優先候補として扱う。
 
 ### Phase 6: サマリー・保存
 
-11. 全結果を以下の形式でまとめる:
+10. 全結果を以下の形式でまとめる:
 
 ```markdown
-# トレンド × stats47 マッチング結果
+# トレンド × stats47 マッチング結果（source: {selected-source}）
 
 > 調査日時: YYYY-MM-DD HH:MM
-> トレンド総数: N件
-> 採用: M件 / 除外: L件
+> ソース: {selected-source}
+> トレンド総数: N件 / 採用: M件 / 除外: L件
+{ all モード時のみ: > クロスソースヒット: K件 }
 
 ## 候補一覧
 
-| # | トレンド | マッチ度 | カテゴリ | 記事の切り口 | 必要アクション |
-|---|---|---|---|---|---|
-| 1 | ... | ★★★ | ... | ... | すぐ執筆可 |
-| 2 | ... | ★★☆ | ... | ... | データ取得必要 |
-| ... | | | | | |
+| # | トレンド | ソース | マッチ度 | カテゴリ | 記事の切り口 | 必要アクション |
+|---|---|---|---|---|---|---|
+| 1 | ... | ... | ★★★ | ... | ... | すぐ執筆可 |
+| 2 | ... | ... | ★★☆ | ... | ... | データ取得必要 |
 
 ## 除外トレンド
 
 | トレンド | 除外理由 |
 |---|---|
 | ... | 芸能人個人ニュース |
-| ... | ゲーム新作リリース |
 
 ## 推奨アクション
 
@@ -200,16 +225,24 @@ SELECT slug, title, tags FROM articles;
 2. {次に推奨する候補}
 ```
 
-12. Phase 5 の候補詳細 + 上記サマリーを `.claude/skills/blog/trends-snapshots/trends-YYYY-MM-DD.md` に保存する。同日に複数回実行した場合は `trends-YYYY-MM-DD-2.md` のように連番を付与する。
+11. Phase 5 の候補詳細 + 上記サマリーを以下に保存:
 
-13. 保存後、会話内でもサマリーを表示してユーザーに報告する。
+```
+.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md
+```
+
+- `{source}` は実行時の `--source` 値（`all` / `gsc` / `trends` 等）
+- 同日に複数回実行した場合は `-2.md`, `-3.md` のように連番
+
+12. 保存後、会話内でもサマリーを表示してユーザーに報告する。
 
 ## 注意
 
-- **出力先**: `.claude/skills/blog/trends-snapshots/trends-YYYY-MM-DD.md` に保存。会話内でもサマリーを表示する
-- **RSS フォーマット**: Google Trends RSS は XML 形式。WebFetch の結果から `<item>` 要素を正確にパースすること
-- **検索キーワードの拡張**: DB 検索時はトレンドキーワードそのままだけでなく、同義語・関連語・上位概念でも検索する。Claude の知識を活用して適切な検索語を生成すること
+- **キーワードの拡張検索**: DB 検索時はトレンドキーワードそのままだけでなく、同義語・関連語・上位概念でも検索する
 - **マッチ度の判断**: 機械的なキーワード一致だけでなく、統計データとトレンドの「記事としての結びつきやすさ」をセマンティックに判断する
+- **`gsc` ソース固有**: 過去 7-28 日間の比較データを取るため、サービスアカウント鍵が必要。詳細は `sources/gsc.md`
+- **`note` ソース固有**: 公式 RSS が無いため WebSearch + WebFetch の組み合わせ。精度は他ソースより低め
+- **保存先**: 出力は必ず `.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md`。会話内でもサマリーを表示
 
 ## 関連スキル
 

@@ -12,16 +12,17 @@
 
 ## 担当スキル
 
-### トレンド発見（7スキル）
-| スキル | ソース |
+### トレンド発見（1 スキル + ソース引数）
+| 呼び出し例 | ソース |
 |---|---|
-| `/discover-trends` | Google Trends |
-| `/discover-trends-all` | 全ソース一括 |
-| `/discover-trends-gsc` | Google Search Console |
-| `/discover-trends-hatena` | はてなブックマーク |
-| `/discover-trends-news` | Google News RSS |
-| `/discover-trends-note` | note.com |
-| `/discover-trends-yahoo` | Yahoo! ニュース |
+| `/discover-trends` | デフォルト (= `--source all`) |
+| `/discover-trends --source trends` | Google Trends |
+| `/discover-trends --source all` | 全ソース一括 + クロスソースヒット集計 |
+| `/discover-trends --source gsc` | Google Search Console |
+| `/discover-trends --source hatena` | はてなブックマーク |
+| `/discover-trends --source news` | Google News RSS |
+| `/discover-trends --source note` | note.com |
+| `/discover-trends --source yahoo` | Yahoo! ニュース |
 
 ### 企画・管理（4スキル）
 | スキル | 用途 |

@@ -3,7 +3,7 @@ name: plan-blog-trends
 description: トレンド起点でブログ記事企画を生成する。Use when user says "トレンド記事企画", "旬の記事", "トレンドから企画". トレンド検出から企画フォーマット出力まで1スキルで完結.
 ---
 
-トレンド起点でブログ記事企画を生成する。`/discover-trends-all` のトレンド検出から企画フォーマット出力までを1スキルで完結させる。
+トレンド起点でブログ記事企画を生成する。`/discover-trends --source all` のトレンド検出から企画フォーマット出力までを1スキルで完結させる。
 
 ## 用途
 
@@ -167,7 +167,7 @@ WHERE ri.is_active = 1 AND ri.area_type = 'prefecture'
 
 ## 関連スキル
 
-- `/discover-trends-all` — 個別にトレンド検出だけ実行したい場合
+- `/discover-trends --source all` — 個別にトレンド検出だけ実行したい場合
 - `/plan-blog-articles` — カテゴリ起点の汎用企画
 - `/fetch-article-data` — 企画確定後のデータ一括取得
 - `/generate-article-charts` — チャート SVG 生成

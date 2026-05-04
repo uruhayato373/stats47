@@ -82,7 +82,7 @@ packages/
 | `theme-enhancer` | 4 | テーマダッシュボード強化（最適化分析→監査→チャート設計→DB投入） |
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
-| `blog-editor` | 17 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
+| `blog-editor` | 11 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
 | `sns-renderer` | 9 | Remotion レンダリング・プレビュー |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
 | `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
@@ -113,7 +113,7 @@ packages/
 | カテゴリ | スキル |
 |---|---|
 | analytics | fetch-gsc-data, fetch-ga4-data, fetch-youtube-data, fetch-x-data, seo-audit, performance-report |
-| blog | discover-trends-all, expert-review, panel-review, proofread-article, plan-blog-articles, plan-blog-trends, update-blog-plan, generate-article-charts, md-syntax |
+| blog | discover-trends, expert-review, panel-review, proofread-article, plan-blog-articles, plan-blog-trends, update-blog-plan, generate-article-charts, md-syntax |
 | dev | run-tests, review-tests, verification-loop, continuous-learning, strategic-compact |
 | estat | search-estat, inspect-estat-meta, fetch-estat-data |
 | management | critical-review, weekly-plan, weekly-review, nsm-experiment |
