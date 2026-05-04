@@ -12,8 +12,8 @@ export * from "./articles";
 export * from "./categories";
 export * from "./page_components";
 
+// estat_metainfo は estat_stats_tables を吸収 (2026-05-04 unify): status='candidate'/'registered' で表現
 export * from "./estat_metainfo";
-export * from "./estat_stats_tables";
 // surveys マスタのみ (旧 ranking_items / ranking_data / ranking_tags は PR-5 で DROP)
 export * from "./ranking_items";
 // ranking_page_cards は PR-7 で page_components に統合し DROP 済み

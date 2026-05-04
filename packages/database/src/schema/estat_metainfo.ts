@@ -28,16 +28,33 @@ export const estatMetainfo = sqliteTable(
     memo: text("memo"),
     isActive: integer("is_active", { mode: "boolean" }).default(true),
     categoryFilters: text("category_filters"), // JSON
+    govOrg: text("gov_org"),
+    categoryKey: text("category_key"),
+    statsField: text("stats_field"),
+    classInf: text("class_inf"),
+    updatedDate: text("updated_date"),
+    status: text("status", { enum: ["candidate", "registered"] })
+      .notNull()
+      .default("registered"),
   },
   (table) => ({
     areaTypeCheck: check(
       "estat_metainfo_area_type_check",
       sql`${table.areaType} IN ('national', 'prefecture', 'city')`
     ),
+    statusCheck: check(
+      "estat_metainfo_status_check",
+      sql`${table.status} IN ('candidate', 'registered')`
+    ),
     statNameIdx: index("idx_estat_metainfo_stat_name").on(table.statName),
     titleIdx: index("idx_estat_metainfo_title").on(table.title),
     areaTypeIdx: index("idx_estat_metainfo_area_type").on(table.areaType),
     updatedAtIdx: index("idx_estat_metainfo_updated_at").on(table.updatedAt),
+    statusIdx: index("idx_estat_metainfo_status").on(table.status),
+    categoryKeyIdx: index("idx_estat_metainfo_category_key").on(
+      table.categoryKey
+    ),
+    statsFieldIdx: index("idx_estat_metainfo_stats_field").on(table.statsField),
   })
 );
 

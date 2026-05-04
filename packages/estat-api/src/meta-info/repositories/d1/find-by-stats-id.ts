@@ -1,6 +1,6 @@
 import { estatMetainfo, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { MetaInfoCacheDataR2 } from "../../types";
 
 /**
@@ -27,7 +27,12 @@ export async function findMetaInfoByStatsId(
         updatedAt: estatMetainfo.updatedAt,
       })
       .from(estatMetainfo)
-      .where(eq(estatMetainfo.statsDataId, statsDataId))
+      .where(
+        and(
+          eq(estatMetainfo.statsDataId, statsDataId),
+          eq(estatMetainfo.status, "registered")
+        )
+      )
       .limit(1);
 
     const row = result[0];
