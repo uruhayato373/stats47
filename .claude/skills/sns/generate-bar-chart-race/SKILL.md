@@ -38,7 +38,7 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 
 ```sql
 SELECT category_name, unit
-FROM ranking_data
+FROM observations
 WHERE category_code = '<rankingKey>'
   AND area_type = 'prefecture'
 LIMIT 1;
@@ -48,7 +48,7 @@ LIMIT 1;
 
 ```sql
 SELECT DISTINCT year_code, year_name
-FROM ranking_data
+FROM observations
 WHERE category_code = '<rankingKey>'
   AND area_type = 'prefecture'
   AND area_code <> '00000'
@@ -59,7 +59,7 @@ ORDER BY year_code;
 
 ```sql
 SELECT year_code, year_name, area_name, CAST(value AS INTEGER) as value
-FROM ranking_data
+FROM observations
 WHERE category_code = '<rankingKey>'
   AND area_type = 'prefecture'
   AND area_code <> '00000'

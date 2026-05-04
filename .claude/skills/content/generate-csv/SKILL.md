@@ -26,12 +26,12 @@ disable-model-invocation: true
 ```sql
 -- ランキングアイテムの確認
 SELECT ranking_key, title, unit, latest_year
-FROM ranking_items
+FROM indicators
 WHERE ranking_key = '<rankingKey>' AND is_active = 1;
 
 -- ランキングデータ取得（年度指定）
 SELECT rd.area_code, rd.area_name, rd.value, rd.unit, rd.year_code, rd.rank
-FROM ranking_data rd
+FROM observations rd
 WHERE rd.ranking_key = '<rankingKey>'
   AND rd.year_code = '<yearCode>'
   AND rd.area_type = 'prefecture'

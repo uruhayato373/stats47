@@ -87,7 +87,7 @@
 
 **適用条件**:
 - GSC 未対応だが関連キーワードで impressions が出ている
-- 既存 `ranking_items` に対応ランキングが存在しない
+- 既存 `indicators` に対応ランキングが存在しない
 - e-Stat API で取得可能な統計
 
 **計測指標**: `gsc_impressions`（新規クエリ）、`ga4_engagedSessions`
@@ -210,7 +210,7 @@
 
 **アクション**:
 1. 対象ページ種別の末尾コンポーネントを確認（RelatedRankings / RelatedArticles 等）
-2. DB `correlation_analysis` から関連指標を引き、関連カードの内容を改善
+2. DB `correlations` から関連指標を引き、関連カードの内容を改善
 3. ブログ記事 → 関連ランキングへのインライン リンク追加
 4. デプロイ → 7-14 日待機
 

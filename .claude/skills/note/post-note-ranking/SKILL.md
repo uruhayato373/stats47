@@ -48,7 +48,7 @@ docs/31_note記事原稿/a-<rankingKey>/
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const item = db.prepare(\"SELECT ranking_key, title, unit, category_key, demographic_attr, normalization_basis FROM ranking_items WHERE ranking_key = '<RANKING_KEY>' AND is_active = 1\").get();
+const item = db.prepare(\"SELECT ranking_key, title, unit, category_key, demographic_attr, normalization_basis FROM indicators WHERE ranking_key = '<RANKING_KEY>' AND is_active = 1\").get();
 console.log(JSON.stringify(item, null, 2));
 db.close();
 "
@@ -60,7 +60,7 @@ db.close();
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT area_code, area_name, year, value FROM ranking_data WHERE ranking_key = '<RANKING_KEY>' AND year = <YEAR> ORDER BY value DESC\").all();
+const rows = db.prepare(\"SELECT area_code, area_name, year, value FROM observations WHERE ranking_key = '<RANKING_KEY>' AND year = <YEAR> ORDER BY value DESC\").all();
 
 // 偏差値・統計量を算出
 const values = rows.map(r => r.value);
@@ -89,7 +89,7 @@ db.close();
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT ri.ranking_key, ri.title FROM ranking_items ri WHERE ri.category_key = '<CATEGORY_KEY>' AND ri.is_active = 1 AND ri.ranking_key != '<RANKING_KEY>' AND EXISTS (SELECT 1 FROM ranking_data rd WHERE rd.category_code = ri.ranking_key) LIMIT 10\").all();
+const rows = db.prepare(\"SELECT ri.ranking_key, ri.title FROM indicators ri WHERE ri.category_key = '<CATEGORY_KEY>' AND ri.is_active = 1 AND ri.ranking_key != '<RANKING_KEY>' AND EXISTS (SELECT 1 FROM observations rd WHERE rd.category_code = ri.ranking_key) LIMIT 10\").all();
 console.log(JSON.stringify(rows, null, 2));
 db.close();
 "
@@ -357,8 +357,8 @@ const fs = require('fs');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 
 const rankingKey = '<RANKING_KEY>';
-const item = db.prepare('SELECT title, unit, category_key, demographic_attr, normalization_basis FROM ranking_items WHERE ranking_key = ? AND is_active = 1').get(rankingKey);
-const rows = db.prepare('SELECT area_code, area_name, year, value FROM ranking_data WHERE ranking_key = ? AND year = <YEAR> ORDER BY value DESC').all(rankingKey);
+const item = db.prepare('SELECT title, unit, category_key, demographic_attr, normalization_basis FROM indicators WHERE ranking_key = ? AND is_active = 1').get(rankingKey);
+const rows = db.prepare('SELECT area_code, area_name, year, value FROM observations WHERE ranking_key = ? AND year = <YEAR> ORDER BY value DESC').all(rankingKey);
 
 const dir = '.local/r2/sns/ranking/' + rankingKey;
 fs.mkdirSync(dir + '/instagram', { recursive: true });

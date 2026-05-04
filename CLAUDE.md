@@ -132,10 +132,10 @@ packages/
 
 **判定軸**: `apps/web` / 投稿スキルが CRUD する、ドメインモデルの主要エンティティ。
 
-- `articles`, `ranking_items`, `ranking_data`, `ranking_ai_content`, `ranking_page_cards` — コンテンツ実体
+- `articles`, `indicators`, `observations`, `ai_content`, `page_components` — コンテンツ実体
 - `categories`, `subcategories`, `area_profiles` — マスタ
 - `sns_posts` — SNS 投稿本体（最新メトリクスの cache カラムも含む。時系列履歴はファイル側）
-- `correlation_analysis` — 相関分析バッチ結果
+- `correlations` — 相関分析バッチ結果
 - その他、ランキング・テーマダッシュボード・検索が依存するテーブル
 
 ### `.claude/` 配下のファイルに置くもの — 「計測・改善の蓄積」

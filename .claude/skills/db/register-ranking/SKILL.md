@@ -35,7 +35,7 @@ disable-model-invocation: true
 
 1. ローカル DB で同名キーが既に存在しないか確認:
    ```js
-   db.prepare("SELECT ranking_key FROM ranking_items WHERE ranking_key = ?").get(rankingKey)
+   db.prepare("SELECT ranking_key FROM indicators WHERE ranking_key = ?").get(rankingKey)
    ```
 2. 既に存在する場合はユーザーに報告し、上書きするか確認
 

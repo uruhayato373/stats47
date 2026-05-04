@@ -40,10 +40,10 @@ npm run diff:d1 --workspace=packages/database -- --table ranking_data --execute
 
 | テーブル | 差分キー | 説明 |
 |---|---|---|
-| `ranking_data` | `category_code`（= ranking_key） | ランキング単位で差分検知 |
-| `ranking_items` | `ranking_key` | ランキング定義の差分 |
-| `correlation_analysis` | `ranking_key_x \| ranking_key_y` | キーペア単位 |
-| `ranking_ai_content` | `ranking_key \| area_type` | AI コンテンツ単位 |
+| `observations` | `category_code`（= ranking_key） | ランキング単位で差分検知 |
+| `indicators` | `ranking_key` | ランキング定義の差分 |
+| `correlations` | `ranking_key_x \| ranking_key_y` | キーペア単位 |
+| `ai_content` | `ranking_key \| area_type` | AI コンテンツ単位 |
 
 ## 少量テーブル（行数比較 → フル同期）
 
@@ -56,7 +56,7 @@ articles, affiliate_ads, categories, subcategories, data_sources, surveys, ranki
 | キー存在差分 | キーの有無 | `+` / `-` | 新規ランキング追加、削除 |
 | 値レベル変更 | `updated_at` タイムスタンプ比較 | `~` | カラースキーム変更、データ修正 |
 
-`correlation_analysis` はキー数が 58k+ と多いためタイムスタンプ比較はスキップ（キー差分のみ）。
+`correlations` はキー数が 58k+ と多いためタイムスタンプ比較はスキップ（キー差分のみ）。
 
 ## 出力例
 
@@ -89,7 +89,7 @@ port_trade_detail: local=478448, remote=478448 * (remote newer)
 
 - デフォルトはレポート表示のみ（`--execute` なしでは変更しない）
 - 削除を含む同期も `--execute` で自動実行される
-- `correlation_analysis` はキー数が 58k+ のためタイムスタンプ比較はスキップ（キー差分のみ）。値変更の反映は `/sync-remote-d1 --key <key>` を使うこと
+- `correlations` はキー数が 58k+ のためタイムスタンプ比較はスキップ（キー差分のみ）。値変更の反映は `/sync-remote-d1 --key <key>` を使うこと
 - **スキーマ差分は検知しない**。カラム追加・CHECK 制約変更・新規テーブル追加など、テーブル構造の違いはレポートに出ない。`[SKIP]` 表示のテーブルはローカルに存在しないテーブルを意味するので見逃さないこと
 
 ## スキーマ差分の手動確認

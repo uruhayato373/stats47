@@ -54,7 +54,7 @@ node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
 
 ## 前提
 
-- ローカル D1 に `ranking_data`, `ranking_items` が存在すること
+- ローカル D1 に `observations`, `indicators` が存在すること
 - OAuth 認証済み（`.env.local` に `GOOGLE_OAUTH_*` 3つ）
 - `.claude/scripts/youtube/upload.js` が存在すること
 - GES 背景動画が `apps/remotion/public/backgrounds/ges/landscape/` にあること
@@ -76,10 +76,10 @@ const BASE = '.local/r2/sns/ranking/' + KEY;
 fs.mkdirSync(BASE + '/youtube/stills', { recursive: true });
 
 const db = new Database(DB_PATH, { readonly: true });
-const item = db.prepare('SELECT * FROM ranking_items WHERE ranking_key = ?').get(KEY);
-const years = db.prepare('SELECT DISTINCT year_code FROM ranking_data WHERE category_code = ? ORDER BY year_code DESC').all(KEY);
+const item = db.prepare('SELECT * FROM indicators WHERE ranking_key = ?').get(KEY);
+const years = db.prepare('SELECT DISTINCT year_code FROM observations WHERE category_code = ? ORDER BY year_code DESC').all(KEY);
 const latestYear = years[0].year_code;
-const rows = db.prepare('SELECT area_code, area_name, CAST(value AS REAL) as value, year_name FROM ranking_data WHERE category_code = ? AND year_code = ? ORDER BY CAST(value AS REAL) DESC').all(KEY, latestYear);
+const rows = db.prepare('SELECT area_code, area_name, CAST(value AS REAL) as value, year_name FROM observations WHERE category_code = ? AND year_code = ? ORDER BY CAST(value AS REAL) DESC').all(KEY, latestYear);
 const yearName = rows[0].year_name || latestYear + '年度';
 
 const ranked = rows.map((r, i) => ({ rank: i + 1, areaCode: r.area_code, areaName: r.area_name, value: parseFloat(r.value.toFixed(2)) }));

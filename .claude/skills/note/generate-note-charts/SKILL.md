@@ -47,7 +47,7 @@ docs/31_note記事原稿/<slug>/images/
 ```js
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare("SELECT area_code, area_name, value, rank FROM ranking_data WHERE category_code = ? AND year_code = ? ORDER BY rank").all(key, year);
+const rows = db.prepare("SELECT area_code, area_name, value, rank FROM observations WHERE category_code = ? AND year_code = ? ORDER BY rank").all(key, year);
 ```
 
 ### Phase 3: SVG 生成
