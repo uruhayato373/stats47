@@ -1,9 +1,3 @@
----
-name: review-app
-description: App Router 層（ルーティング・SEO・メタデータ・エラー境界）を専門家パネルでレビューする。Use when user says "App Router レビュー", "review-app", "ルーティングレビュー". 統合層・公開インターフェースの品質評価.
-disable-model-invocation: true
-argument-hint: "[route-name|all]"
----
 
 `apps/web/src/app/` 配下の Next.js App Router 層を、専門家パネルで多角的にレビューする。
 features / packages レビューとは異なり、ルーティング設計・SEO・メタデータ・キャッシュ戦略・アクセシビリティなど**統合層・公開インターフェース**固有の品質を評価する。
@@ -201,6 +195,6 @@ Issue 本文に以下を含める:
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
 - パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
 - **コードを実際に読んでからレビューする。推測でレビューしない**
-- features / packages の内部品質は `/review-feature` `/review-packages` の責務。app 層は統合・公開インターフェースに集中する
+- features / packages の内部品質は `/review-feature --scope feature` `/review-feature --scope packages` の責務。app 層は統合・公開インターフェースに集中する
 - 出力は GitHub Issue（`dev-review` ラベル）に作成する
 - 作成した Issue の番号・URL を報告する

@@ -47,7 +47,7 @@ user-invocable: false
 |---|---|---|
 | テスト実行 | `/run-tests` | 「テスト走らせて」 |
 | デプロイ | `/deploy` | 「デプロイして」 |
-| コードレビュー | `/review-packages` / `/review-feature` | 「このコードレビューして」 |
+| コードレビュー | `/review-feature` (`--scope` で対象指定) | 「このコードレビューして」 |
 
 ### 分析系 → seo-auditor
 

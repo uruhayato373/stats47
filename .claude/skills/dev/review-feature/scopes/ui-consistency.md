@@ -1,9 +1,3 @@
----
-name: review-ui-consistency
-description: ページ横断の UI 一貫性を検証し不統一を検出する。Use when user says "UI一貫性レビュー", "review-ui-consistency", "見た目がバラバラ". 7人の専門家パネルで多角評価.
-disable-model-invocation: true
-argument-hint: "[scope] (all | category-name | route-path)"
----
 
 ページ横断で UI 実装の一貫性を検証し、「技術的に動くが見た目がバラバラ」な問題を検出する。
 
@@ -236,6 +230,6 @@ Phase 1 の結果をページ種別ごとに整理する。
 ## 関連スキル
 
 - `/ui-panel-review` — 個別ページの UI/UX 詳細評価（本スキルから委任先）
-- `/review-feature` — feature 内部のコード品質
-- `/review-app` — App Router 層のSEO・ルーティング
-- `/review-packages` — packages/ のコード品質
+- `/review-feature --scope feature <name>` — feature 内部のコード品質
+- `/review-feature --scope app <route>` — App Router 層のSEO・ルーティング
+- `/review-feature --scope packages` — packages/ のコード品質

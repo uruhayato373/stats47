@@ -85,7 +85,7 @@ packages/
 | `blog-editor` | 11 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
 | `sns-renderer` | 4 | Remotion レンダリング・プレビュー |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
-| `code-reviewer` | 8 | コード品質レビュー（feature, packages, types, tests, security） |
+| `code-reviewer` | 3 | コード品質レビュー（review-feature の `--scope` で feature/app/packages/types/ui-consistency 切替、tests, security） |
 | `ui-reviewer` | 2 | melta-ui 準拠・UI/UX パネルレビュー |
 | `devops-runner` | 5 | テスト・デプロイ・Git 操作 |
 | `tdd-guide` | 2 | テスト駆動開発ガイド（Red-Green-Refactor・モック戦略） |
