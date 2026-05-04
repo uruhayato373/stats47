@@ -10,7 +10,7 @@
  *
  * 追加ルール:
  * - GSC「見つかりませんでした」レポートに `/tag/{英語slug}` が出てきたらここに追加
- * - DB の `articleTags.tagKey` に戻った場合はここから削除
+ * - DB の `taggings.tagKey` (taggable_type='article') に戻った場合はここから削除
  */
 export const GONE_TAG_KEYS = new Set<string>([
   // 今後 GSC 404 レポートから抽出した死 slug をここに追加する

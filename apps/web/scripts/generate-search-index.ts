@@ -187,7 +187,7 @@ async function main() {
 
   const rankingCount = documents.length;
 
-  // 2. ブログ記事（articles + article_tags + tags）
+  // 2. ブログ記事（articles + taggings + tags）
   try {
     const articleRows = await db
       .select({
@@ -200,14 +200,15 @@ async function main() {
       .from(schema.articles)
       .where(eq(schema.articles.published, true));
 
-    // article_tags + tags からタグ名を取得
+    // taggings (taggable_type='article') + tags からタグ名を取得
     const tagRows = await db
       .select({
-        slug: schema.articleTags.slug,
+        slug: schema.taggings.taggableId,
         tagName: schema.tags.tagName,
       })
-      .from(schema.articleTags)
-      .innerJoin(schema.tags, eq(schema.articleTags.tagKey, schema.tags.tagKey));
+      .from(schema.taggings)
+      .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
+      .where(eq(schema.taggings.taggableType, "article"));
 
     const tagsBySlug = new Map<string, string[]>();
     for (const row of tagRows) {

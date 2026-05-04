@@ -34,7 +34,7 @@ interface ArticleSummary {
  * - 各タグごとの結果は DB 側で `published_at DESC` ソート済みのため、
  *   ここでは単純に重複除去 + 上限カットのみ行う
  * - tagKeys が空 or マッチ記事ゼロのときは何も描画しない（return null）
- * - 既存の `article_tags` テーブルをそのまま利用するため DB スキーマ変更不要
+ * - `taggings (taggable_type='article')` を経由してタグ→記事を引く
  */
 export async function ThemeRelatedArticles({
   tagKeys,

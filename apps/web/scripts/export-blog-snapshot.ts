@@ -1,7 +1,7 @@
 /**
  * Blog snapshot exporter
  *
- * D1 articles / article_tags / tags をローカル SQLite から読み、
+ * D1 articles / taggings / tags をローカル SQLite から読み、
  * `snapshots/blog/all.json` を R2 に書き出す。
  *
  * 使用方法: npx tsx scripts/export-blog-snapshot.ts
@@ -49,12 +49,13 @@ async function main() {
   const articleRows = await db.select().from(schema.articles);
   const articleTagRows = await db
     .select({
-      slug: schema.articleTags.slug,
-      tagKey: schema.articleTags.tagKey,
+      slug: schema.taggings.taggableId,
+      tagKey: schema.taggings.tagKey,
       tagName: schema.tags.tagName,
     })
-    .from(schema.articleTags)
-    .innerJoin(schema.tags, eq(schema.articleTags.tagKey, schema.tags.tagKey));
+    .from(schema.taggings)
+    .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
+    .where(eq(schema.taggings.taggableType, "article"));
 
   const tagsBySlug = new Map<string, Array<{ tagKey: string; tagName: string }>>();
   for (const row of articleTagRows) {
