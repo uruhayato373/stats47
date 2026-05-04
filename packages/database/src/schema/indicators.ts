@@ -9,7 +9,7 @@ import {
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { sources } from "./sources";
-import { surveys } from "./ranking_items";
+import { surveys } from "./surveys";
 
 /**
  * 指標定義 — 旧 ranking_items の置換 (PR-3)
