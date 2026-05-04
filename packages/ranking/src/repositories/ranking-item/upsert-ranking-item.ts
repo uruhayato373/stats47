@@ -28,8 +28,6 @@ export async function upsertRankingItem(
       valueDisplayConfigJson: JSON.stringify(item.valueDisplay),
       visualizationConfigJson: JSON.stringify(item.visualization),
       calculationConfigJson: JSON.stringify(item.calculation),
-      latestYear: item.latestYear ? JSON.stringify(item.latestYear) : null,
-      availableYearsJson: item.availableYears ? JSON.stringify(item.availableYears) : null,
       createdAt: sql`CURRENT_TIMESTAMP`,
       updatedAt: sql`CURRENT_TIMESTAMP`,
     };
@@ -51,8 +49,6 @@ export async function upsertRankingItem(
           valueDisplayConfigJson: dbItem.valueDisplayConfigJson,
           visualizationConfigJson: dbItem.visualizationConfigJson,
           calculationConfigJson: dbItem.calculationConfigJson,
-          latestYear: dbItem.latestYear,
-          availableYearsJson: dbItem.availableYearsJson,
           updatedAt: sql`CURRENT_TIMESTAMP`,
           isFeatured: dbItem.isFeatured,
           isActive: dbItem.isActive,

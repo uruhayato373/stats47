@@ -5,6 +5,7 @@ import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, desc, eq } from "drizzle-orm";
 
+import { availableYearsSql, latestYearSql } from "../shared/derive-years-sql";
 import type { CategoryRankingItem } from "./find-ranking-items-by-category";
 
 export async function findRankingItemsBySurvey(
@@ -20,8 +21,8 @@ export async function findRankingItemsBySurvey(
         title: indicators.title,
         subtitle: indicators.subtitle,
         unit: indicators.unit,
-        latestYear: indicators.latestYear,
-        availableYears: indicators.availableYearsJson,
+        latestYear: latestYearSql,
+        availableYears: availableYearsSql,
         description: indicators.description,
         demographicAttr: indicators.demographicAttr,
         normalizationBasis: indicators.normalizationBasis,

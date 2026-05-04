@@ -49,8 +49,6 @@ export const indicators = sqliteTable(
     additionalCategoriesJson: text("additional_categories_json"),
     demographicAttr: text("demographic_attr"),
     normalizationBasis: text("normalization_basis"),
-    latestYear: text("latest_year"),
-    availableYearsJson: text("available_years_json"),
     isActive: integer("is_active", { mode: "boolean" }).default(true),
     isFeatured: integer("is_featured", { mode: "boolean" }).default(false),
     featuredOrder: integer("featured_order").default(0),

@@ -2,14 +2,14 @@ import "server-only";
 
 import { indicators } from "@stats47/database/server";
 
+import { availableYearsSql, latestYearSql } from "./derive-years-sql";
+
 /**
- * indicators テーブルから RankingItemDB 互換形式で取り出すための SELECT (PR-4)
+ * indicators テーブルから RankingItemDB 互換形式で取り出すための SELECT
  *
- * 旧 ranking_items との差分:
- * - ranking_name は seo_title に migrate 済みのため title fallback で出す
- * - data_source_id は廃止 → "estat" 固定 (旧スキーマの default を踏襲)
- * - JSON 列は _json サフィックスから 旧名にマッピング
- *
+ * latest_year / available_years は cache 列ではなく observations から動的計算
+ * (`derive-years-sql.ts` 参照、yearName format は "年度" 統一)。
+ * data_source_id は廃止 → "estat" 固定 (旧スキーマの default を踏襲)。
  * parseRankingItemDB ではこのオブジェクトをそのまま流せる。
  */
 export const indicatorAsRankingItemSelection = {
@@ -25,8 +25,8 @@ export const indicatorAsRankingItemSelection = {
   group_key: indicators.groupKey,
   additional_categories: indicators.additionalCategoriesJson,
   description: indicators.description,
-  latest_year: indicators.latestYear,
-  available_years: indicators.availableYearsJson,
+  latest_year: latestYearSql.as("latest_year"),
+  available_years: availableYearsSql.as("available_years"),
   is_active: indicators.isActive,
   is_featured: indicators.isFeatured,
   featured_order: indicators.featuredOrder,
