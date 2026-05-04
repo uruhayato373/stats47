@@ -6,6 +6,7 @@
 
 export type { AreaType } from "./area";
 export type { StatsSchema } from "./stats-schema";
+export { type YearFormat, formatYearName } from "./year-format";
 
 
 export type {
