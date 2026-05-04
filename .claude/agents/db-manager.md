@@ -188,3 +188,15 @@ db.close();
 
 - **note_articles テーブル消失（2026-03）**: スキーマファイル削除後にマイグレーションリセットを実行し、テーブル定義が永久消失。Phase 1.5 のスキーマ完全性チェックで再発防止。
 - **.local パス認識不能（2026-03）**: 相対パスが Windows + Git Bash で解決できず `.local` が見つからない事象。絶対パスの使用で解決。
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Operation | Target | Affected Rows | Result`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- migration 設計の比較検討 (3 案中の選定理由) — 例外的にのみ

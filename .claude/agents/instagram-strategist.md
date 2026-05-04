@@ -218,3 +218,15 @@ Content Publishing API は即時投稿のみ。予約したい場合：
 - [Instagram Insights](https://developers.facebook.com/docs/instagram-platform/api-reference/instagram-user/insights)
 - 関連エージェント: `x-strategist`, `youtube-strategist`, `sns-renderer`, `blog-editor`
 - 環境変数: `.env.local`
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Post/Metric | Date | Value | Action`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 週次パフォーマンス総括 (定性的考察を含む場合のみ)

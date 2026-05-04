@@ -170,3 +170,15 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
 - **note 内チャート** → `/generate-note-charts` または `/generate-kakei-charts`（Remotion ベース）
 - Satori / Remotion 製の OGP コンポネントは stats47 サイト内 OGP 専用で、note 記事には使わない
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Article | Step | Status | Notes`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 記事の構成案・edit 提案の一括レビュー

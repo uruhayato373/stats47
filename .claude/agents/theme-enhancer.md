@@ -78,3 +78,15 @@ page_component_assignments.section が IndicatorSet.panelTabs[].label と1文字
 - UI/UX レビュー（ui-reviewer）
 - リモート DB への同期（db-manager: `/sync-remote-d1`）
 - 新規 componentType の追加（コード変更 → code-reviewer と協議）
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Theme | Issue | Severity | Recommendation`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- ダッシュボード強化案の比較検討

@@ -42,3 +42,15 @@ e-Stat API からのデータ取得・ランキング登録・AI コンテンツ
 
 - e-Stat API リファレンス: `.claude/skills/estat/references/`
 - DB スキーマ: `packages/database/src/schema/ranking_items.ts`
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Step | Target | Rows | Result`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- e-Stat 統計表の探索結果まとめ (該当 / 非該当の判断)
