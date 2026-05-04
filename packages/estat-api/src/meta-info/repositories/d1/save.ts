@@ -32,6 +32,7 @@ export async function save(
         createdAt: now,
         updatedAt: now,
         isActive: true, // 新規作成時は有効
+        status: "registered",
       })
       .onConflictDoUpdate({
         target: estatMetainfo.statsDataId,
@@ -51,6 +52,8 @@ export async function save(
           memo: sql`COALESCE(excluded.memo, ${estatMetainfo.memo})`,
           categoryFilters: sql`COALESCE(excluded.category_filters, ${estatMetainfo.categoryFilters})`,
           updatedAt: sql`excluded.updated_at`,
+          status: sql`'registered'`,
+          isActive: sql`1`,
         },
       });
 
