@@ -43,7 +43,7 @@ export const CompositionChartDashboard = async ({
   const colors = segments.map((s) => s.color).filter((c): c is string => !!c);
 
   // componentKey は将来 R2 snapshot 経由で同等データを返す予定 (Phase 6)。
-  // 現状 component_data テーブルは空なので、e-Stat API 直接 fetch のみ。
+  // 現状は e-Stat API 直接 fetch のみ。
   void componentKey;
 
   /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
