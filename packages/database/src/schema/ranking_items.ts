@@ -9,6 +9,8 @@ import {
     uniqueIndex,
 } from "drizzle-orm/sqlite-core";
 
+import { sources } from "./sources";
+
 export const surveys = sqliteTable("surveys", {
   id: text("id").primaryKey(),
   organization: text("organization").notNull(),
@@ -22,22 +24,6 @@ export const surveys = sqliteTable("surveys", {
 
 export type Survey = typeof surveys.$inferSelect;
 export type InsertSurvey = typeof surveys.$inferInsert;
-
-export const dataSources = sqliteTable("data_sources", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  description: text("description"),
-  adapterType: text("adapter_type").notNull(),
-  configSchema: text("config_schema"),
-  isActive: integer("is_active", { mode: "boolean" }).default(true),
-  baseUrl: text("base_url"),
-  linkTemplate: text("link_template"),
-  attributionText: text("attribution_text"),
-  license: text("license"),
-  licenseUrl: text("license_url"),
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
-});
 
 export const rankingItems = sqliteTable(
   "ranking_items",
@@ -62,7 +48,7 @@ export const rankingItems = sqliteTable(
     dataSourceId: text("data_source_id")
       .default("estat")
       .notNull()
-      .references(() => dataSources.id),
+      .references(() => sources.id),
     surveyId: text("survey_id").references(() => surveys.id),
     sourceConfig: text("source_config"), // JSON
     valueDisplayConfig: text("value_display_config"), // JSON
@@ -113,9 +99,6 @@ export const rankingData = sqliteTable("ranking_data", {
   areaIdx: index("idx_ranking_data_area").on(table.areaCode, table.yearCode),
 }));
 
-export type DataSource = typeof dataSources.$inferSelect;
-export type InsertDataSource = typeof dataSources.$inferInsert;
-
 export type RankingItem = typeof rankingItems.$inferSelect;
 export type InsertRankingItem = typeof rankingItems.$inferInsert;
 
@@ -152,9 +135,6 @@ export const rankingTags = sqliteTable(
 );
 
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-
-export const insertDataSourceSchema = createInsertSchema(dataSources);
-export const selectDataSourceSchema = createSelectSchema(dataSources);
 
 export const insertRankingItemSchema = createInsertSchema(rankingItems);
 export const selectRankingItemSchema = createSelectSchema(rankingItems);
