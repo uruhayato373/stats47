@@ -2,7 +2,7 @@ import "server-only";
 
 import { estatMetainfo, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 /**
  * 更新入力の型定義
@@ -48,7 +48,12 @@ export async function updateMetaInfoAttributes(
       .update(estatMetainfo)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .set(updateData as any)
-      .where(eq(estatMetainfo.statsDataId, input.statsDataId));
+      .where(
+        and(
+          eq(estatMetainfo.statsDataId, input.statsDataId),
+          eq(estatMetainfo.status, "registered")
+        )
+      );
 
     return true;
   } catch (error) {

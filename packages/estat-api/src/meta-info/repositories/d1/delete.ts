@@ -2,7 +2,7 @@ import "server-only";
 
 import { estatMetainfo, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 /**
  * メタ情報のキャッシュ（D1側の基本情報）を削除
@@ -16,7 +16,12 @@ export async function deleteMetaInfoCache(statsDataId: string): Promise<boolean>
   try {
     await db
       .delete(estatMetainfo)
-      .where(eq(estatMetainfo.statsDataId, statsDataId));
+      .where(
+        and(
+          eq(estatMetainfo.statsDataId, statsDataId),
+          eq(estatMetainfo.status, "registered")
+        )
+      );
 
     return true;
   } catch (error) {

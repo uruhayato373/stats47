@@ -2,7 +2,7 @@ import "server-only";
 
 import { estatMetainfo, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 /**
  * メタ情報のステータスを更新
@@ -24,7 +24,12 @@ export async function updateMetaInfoStatus(
         isActive: isActive,
         updatedAt: new Date().toISOString(),
       })
-      .where(eq(estatMetainfo.statsDataId, statsDataId));
+      .where(
+        and(
+          eq(estatMetainfo.statsDataId, statsDataId),
+          eq(estatMetainfo.status, "registered")
+        )
+      );
 
     // D1のupdate結果から変更行数を取得するのはドライバの実装によるが、
     // エラーが出なければ成功とみなす
