@@ -2,7 +2,7 @@
 /**
  * AI コンテンツ生成が必要なランキング一覧を出力する。
  *
- * DB に ranking_ai_content レコードが存在しないものを列挙する。
+ * DB に ai_content レコードが存在しないものを列挙する。
  *
  * Usage:
  *   npx tsx packages/ai-content/src/scripts/list-pending.ts
@@ -17,7 +17,8 @@
 
 import "dotenv/config";
 import { listRankingItems } from "@stats47/ranking/server";
-import { getDrizzle, rankingAiContent } from "@stats47/database/server";
+import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { and, eq } from "drizzle-orm";
 
 const AREA_TYPE = "prefecture";
 
@@ -42,8 +43,12 @@ async function main() {
   // DB から既存レコードの rankingKey 一覧を取得（1クエリ）
   const db = getDrizzle();
   const existingRows = await db
-    .select({ rankingKey: rankingAiContent.rankingKey })
-    .from(rankingAiContent);
+    .select({ rankingKey: indicators.key })
+    .from(aiContent)
+    .innerJoin(
+      indicators,
+      and(eq(indicators.id, aiContent.indicatorId), eq(indicators.areaType, "prefecture"))
+    );
   const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
   const pending: Array<{

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { correlationAnalysis, getDrizzle } from "@stats47/database/server";
+import { correlations, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { count, sql } from "drizzle-orm";
@@ -21,7 +21,7 @@ export interface ExportCorrelationSnapshotResult {
 }
 
 /**
- * correlation_analysis の集計を 1 回だけクエリし、
+ * correlations の集計を 1 回だけクエリし、
  * 上位ペアと統計値を R2 に snapshot として保存する。
  *
  * Web の /correlation ページはこの snapshot を fetch するだけになり、
@@ -38,9 +38,9 @@ export async function exportCorrelationSnapshot(
     drizzleDb
       .select({
         total: count(),
-        strong: sql<number>`SUM(CASE WHEN ABS(${correlationAnalysis.pearsonR}) >= 0.7 THEN 1 ELSE 0 END)`,
+        strong: sql<number>`SUM(CASE WHEN ABS(${correlations.pearsonR}) >= 0.7 THEN 1 ELSE 0 END)`,
       })
-      .from(correlationAnalysis),
+      .from(correlations),
   ]);
 
   const generatedAt = new Date().toISOString();

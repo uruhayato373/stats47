@@ -19,7 +19,8 @@ import { spawn } from "child_process";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
-import { getDrizzle, rankingAiContent } from "@stats47/database/server";
+import { aiContent, getDrizzle, indicators } from "@stats47/database/server";
+import { and, eq } from "drizzle-orm";
 import type { FaqContent } from "../types";
 
 const AREA_TYPE = "prefecture";
@@ -262,8 +263,12 @@ async function main() {
   } else {
     const db = getDrizzle();
     const existingRows = await db
-      .select({ rankingKey: rankingAiContent.rankingKey })
-      .from(rankingAiContent);
+      .select({ rankingKey: indicators.key })
+      .from(aiContent)
+      .innerJoin(
+        indicators,
+        and(eq(indicators.id, aiContent.indicatorId), eq(indicators.areaType, "prefecture"))
+      );
     const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
     pendingItems = allItems
