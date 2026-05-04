@@ -9,6 +9,8 @@ export * from "./area_profiles";
 export * from "./correlations";
 
 // マスタ
+export * from "./prefectures";
+export * from "./cities";
 export * from "./categories";
 export * from "./tags";
 export * from "./taggings"; // polymorphic M:N: article + metric → tag_key

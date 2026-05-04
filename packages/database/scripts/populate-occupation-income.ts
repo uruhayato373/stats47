@@ -68,25 +68,14 @@ if (isDryRun) console.log("【DRY RUN】");
 // Prepared statements
 const upsertData = db.prepare(`
   INSERT INTO observations (
-    metric_id, entity_type, entity_code, entity_name,
-    year_code, year_name, category_name, value_numeric, unit, rank
+    metric_id, area_type, area_code,
+    year_code, value, rank
   )
-  VALUES (?, 'prefecture', ?, ?, ?, ?, ?, ?, '万円', ?)
-  ON CONFLICT(metric_id, entity_type, entity_code, year_code) DO UPDATE SET
-    value_numeric = excluded.value_numeric,
-    rank = excluded.rank,
-    unit = excluded.unit,
-    entity_name = excluded.entity_name,
-    year_name = excluded.year_name,
-    category_name = excluded.category_name
-`);
-
-const updateYears = db.prepare(`
-  UPDATE metrics SET
-    latest_year = ?,
-    available_years_json = ?,
-    updated_at = CURRENT_TIMESTAMP
-  WHERE key = ? AND area_type = 'prefecture'
+  VALUES (?, 'prefecture', ?,
+    ?, ?, ?)
+  ON CONFLICT(metric_id, area_type, area_code, year_code) DO UPDATE SET
+    value = excluded.value,
+    rank = excluded.rank
 `);
 
 const findIndicatorId = db.prepare(`
@@ -240,23 +229,12 @@ async function processOccupation(def: OccupationDef): Promise<void> {
           sameCount++;
         }
 
-        const areaName = PREF_NAMES[prefCode] ?? prefCode;
-        const yearName = `${year}年`;
-        const categoryName = def.occupationName;
-
         if (!isDryRun) {
           const areaCode5 = prefCode + "000";
-          upsertData.run(metricId, areaCode5, areaName, year, yearName, categoryName, value, rank);
+          upsertData.run(metricId, areaCode5, year, value, rank);
         }
         totalInserted++;
       }
-    }
-
-    if (!isDryRun && years.length > 0) {
-      const latestYearCode = years[years.length - 1];
-      const latestYear = JSON.stringify({ yearCode: latestYearCode, yearName: `${latestYearCode}年度` });
-      const availableYears = JSON.stringify(years.map(y => ({ yearCode: y, yearName: `${y}年度` })));
-      updateYears.run(latestYear, availableYears, def.rankingKey);
     }
   });
 
@@ -272,7 +250,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
     const latestYear = years[years.length - 1];
     const top = db
       .prepare(
-        `SELECT o.entity_name AS area_name, o.value_numeric AS value, o.rank
+        `SELECT o.area_code AS area_name, o.value, o.rank
          FROM observations o
          INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
@@ -311,11 +289,8 @@ async function main() {
          WHERE i.key = ? AND i.area_type = 'prefecture'`
       )
       .get(def.rankingKey) as any;
-    const item = db
-      .prepare("SELECT latest_year, available_years_json AS available_years FROM metrics WHERE key = ? AND area_type = 'prefecture'")
-      .get(def.rankingKey) as any;
     console.log(
-      `  ${def.rankingKey}: ${count.c}件, latest=${item?.latest_year}, years=${item?.available_years}`
+      `  ${def.rankingKey}: ${count.c}件`
     );
   }
 

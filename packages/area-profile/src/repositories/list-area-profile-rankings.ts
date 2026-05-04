@@ -28,12 +28,12 @@ export async function listAreaProfileRankings(
 
   const rows = await db
     .select({
-      entityCode: areaProfiles.entityCode,
-      entityName: areaProfiles.entityName,
+      areaCode: areaProfiles.areaCode,
+      areaName: areaProfiles.areaName,
       yearCode: areaProfiles.yearCode,
       type: areaProfiles.type,
       rank: areaProfiles.rank,
-      valueNumeric: areaProfiles.valueNumeric,
+      value: areaProfiles.value,
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
       createdAt: areaProfiles.createdAt,
@@ -44,21 +44,21 @@ export async function listAreaProfileRankings(
     .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
     .where(
       and(
-        eq(areaProfiles.entityType, "prefecture"),
-        eq(areaProfiles.entityCode, areaCode)
+        eq(areaProfiles.areaType, "prefecture"),
+        eq(areaProfiles.areaCode, areaCode)
       )
     )
     .orderBy(areaProfiles.type, areaProfiles.rank);
 
   return rows.map((r) => ({
-    areaCode: r.entityCode,
-    areaName: r.entityName,
+    areaCode: r.areaCode,
+    areaName: r.areaName,
     year: r.yearCode,
     indicator: r.indicator,
     rankingKey: r.rankingKey,
     type: r.type,
     rank: r.rank,
-    value: r.valueNumeric,
+    value: r.value,
     unit: r.unit,
     percentile: r.percentile,
     createdAt: r.createdAt,

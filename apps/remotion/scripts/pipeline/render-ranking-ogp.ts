@@ -116,13 +116,14 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
 
   // 各ランキングの最新年データを一括取得するための prepared statement
   const dataStmt = db.prepare(
-    `SELECT entity_code AS area_code, entity_name AS area_name,
-            value_numeric AS value, rank
-     FROM observations
-     WHERE entity_type = 'prefecture'
-       AND metric_id = ?
-       AND year_code = ?
-     ORDER BY rank ASC`
+    `SELECT o.area_code, COALESCE(p.name, o.area_code) AS area_name,
+            o.value, o.rank
+     FROM observations o
+     LEFT JOIN prefectures p ON p.code = o.area_code
+     WHERE o.area_type = 'prefecture'
+       AND o.metric_id = ?
+       AND o.year_code = ?
+     ORDER BY o.rank ASC`
   );
 
   const targets: RankingTarget[] = [];

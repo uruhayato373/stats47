@@ -18,3 +18,4 @@ export { createDrizzleClient, getDrizzle, type DrizzleClient } from "./drizzle";
 export * from "./schema";
 export type { ColumnInfo, TableInfo } from "./types/stats";
 export { getSchemaTableInfo } from "./utils/schema-introspection";
+export { getAreaNameMap } from "./utils/area-master";

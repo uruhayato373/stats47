@@ -1,8 +1,9 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, getAreaNameMap, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
+import { formatYearName } from "@stats47/types";
 import { eq } from "drizzle-orm";
 
 import type { RankingValue } from "../types";
@@ -36,7 +37,7 @@ function pkString(p: PartitionKey): string {
 
 async function processIndicator(
   drizzleDb: ReturnType<typeof getDrizzle>,
-  indicator: { id: number; key: string },
+  indicator: { id: number; key: string; title: string; unit: string; yearFormat: "fiscal" | "calendar" | "plain" },
   parallelism: number,
   dryRun: boolean,
   dryRunSink?: ExportRankingValuesSnapshotResult["dryRunPartitions"],
@@ -46,11 +47,16 @@ async function processIndicator(
     .from(observations)
     .where(eq(observations.metricId, indicator.id));
 
+  if (rows.length === 0) return { partitions: 0, rows: 0, sizeBytes: 0 };
+
+  // Determine area type from first row (all rows for one metric share the same area_type)
+  const firstAreaType = rows[0].areaType as import("@stats47/types").AreaType;
+  const areaNameMap = await getAreaNameMap(firstAreaType, drizzleDb);
+
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
   for (const row of rows) {
-    const r = row as unknown as Record<string, unknown>;
-    const areaType = String(r.entityType ?? "");
-    const yearCode = String(r.yearCode ?? "");
+    const areaType = row.areaType;
+    const yearCode = String(row.yearCode ?? "");
     if (!areaType || !yearCode) continue;
 
     const pk: PartitionKey = { rankingKey: indicator.key, areaType, yearCode };
@@ -60,18 +66,17 @@ async function processIndicator(
       group = { pk, values: [] };
       groups.set(k, group);
     }
-    const valueNumeric = r.valueNumeric;
     group.values.push({
       areaType: areaType as RankingValue["areaType"],
-      areaCode: String(r.entityCode ?? ""),
-      areaName: String(r.entityName ?? ""),
+      areaCode: row.areaCode,
+      areaName: areaNameMap.get(row.areaCode) ?? row.areaCode,
       yearCode,
-      yearName: String(r.yearName ?? `${yearCode}年度`),
+      yearName: formatYearName(yearCode, indicator.yearFormat),
       categoryCode: indicator.key,
-      categoryName: String(r.categoryName ?? ""),
-      value: valueNumeric !== null && valueNumeric !== undefined ? Number(valueNumeric) : 0,
-      unit: String(r.unit ?? ""),
-      rank: r.rank !== null && r.rank !== undefined ? Number(r.rank) : 0,
+      categoryName: indicator.title,
+      value: row.value !== null && row.value !== undefined ? Number(row.value) : 0,
+      unit: indicator.unit,
+      rank: row.rank !== null && row.rank !== undefined ? Number(row.rank) : 0,
     });
   }
 
@@ -143,11 +148,23 @@ export async function exportRankingValuesSnapshots(
 
   const indicatorRowsRaw = options.rankingKeyFilter
     ? await drizzleDb
-        .select({ id: metrics.id, key: metrics.key })
+        .select({
+          id: metrics.id,
+          key: metrics.key,
+          title: metrics.title,
+          unit: metrics.unit,
+          yearFormat: metrics.yearFormat,
+        })
         .from(metrics)
         .where(eq(metrics.key, options.rankingKeyFilter))
     : await drizzleDb
-        .select({ id: metrics.id, key: metrics.key })
+        .select({
+          id: metrics.id,
+          key: metrics.key,
+          title: metrics.title,
+          unit: metrics.unit,
+          yearFormat: metrics.yearFormat,
+        })
         .from(metrics);
 
   logger.info(
@@ -162,7 +179,13 @@ export async function exportRankingValuesSnapshots(
   for (let i = 0; i < indicatorRowsRaw.length; i++) {
     const ind = indicatorRowsRaw[i];
     try {
-      const result = await processIndicator(drizzleDb, ind, parallelism, dryRun, dryRunSink);
+      const result = await processIndicator(drizzleDb, {
+        id: ind.id,
+        key: ind.key,
+        title: ind.title,
+        unit: ind.unit,
+        yearFormat: ind.yearFormat ?? "fiscal",
+      }, parallelism, dryRun, dryRunSink);
       totalPartitions += result.partitions;
       totalRows += result.rows;
       totalSizeBytes += result.sizeBytes;

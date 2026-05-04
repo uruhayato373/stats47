@@ -113,11 +113,11 @@ async function main() {
   const { eq, and } = await import("drizzle-orm");
   const observationRows = await db
     .select({
-      portCode: schema.observations.entityCode,
+      portCode: schema.observations.areaCode,
       year: schema.observations.yearCode,
       indicatorKey: schema.metrics.key,
-      value: schema.observations.valueNumeric,
-      unit: schema.observations.unit,
+      value: schema.observations.value,
+      unit: schema.metrics.unit,
     })
     .from(schema.observations)
     .innerJoin(
@@ -127,7 +127,7 @@ async function main() {
         eq(schema.metrics.areaType, "port")
       )
     )
-    .where(eq(schema.observations.entityType, "port"));
+    .where(eq(schema.observations.areaType, "port"));
 
   // R2 snapshot は旧 metric_key 形式 (snake_case) を維持する → 後方互換
   const allStats = observationRows

@@ -35,8 +35,8 @@ export async function replaceAreaProfileRankings(
     .delete(areaProfiles)
     .where(
       and(
-        eq(areaProfiles.entityType, "prefecture"),
-        eq(areaProfiles.entityCode, areaCode)
+        eq(areaProfiles.areaType, "prefecture"),
+        eq(areaProfiles.areaCode, areaCode)
       )
     );
 
@@ -65,14 +65,14 @@ export async function replaceAreaProfileRankings(
         r.type === "strength" ? "strength" : r.type === "weakness" ? "weakness" : null;
       if (!t) return null;
       return {
-        entityType: "prefecture" as const,
-        entityCode: r.areaCode,
-        entityName: r.areaName,
+        areaType: "prefecture" as const,
+        areaCode: r.areaCode,
+        areaName: r.areaName,
         metricId: id,
         yearCode: r.year,
         type: t,
         rank: r.rank,
-        valueNumeric: r.value,
+        value: r.value,
         unit: r.unit,
         percentile: r.percentile,
         createdAt: r.createdAt,

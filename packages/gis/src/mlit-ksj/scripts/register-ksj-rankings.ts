@@ -343,10 +343,10 @@ async function main() {
 
   const insertData = db.prepare(`
     INSERT OR REPLACE INTO observations (
-      metric_id, entity_type, entity_code, entity_name,
-      year_code, year_name, category_name,
-      value_numeric, unit, rank, created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      metric_id, area_type, area_code,
+      year_code, value, rank, created_at
+    ) VALUES (?, ?, ?,
+      ?, ?, ?, ?)
   `);
 
   const checkExisting = db.prepare(
@@ -413,12 +413,8 @@ async function main() {
         metricId,
         "prefecture",
         areaCode,
-        areaName,
         def.yearCode,
-        def.yearCode + "年",
-        def.rankingName,
         count,
-        def.unit,
         rank,
         now
       );

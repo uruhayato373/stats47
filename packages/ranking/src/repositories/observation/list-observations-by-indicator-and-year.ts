@@ -30,7 +30,7 @@ export async function listObservationsByIndicatorAndYear(
           or(
             eq(observations.yearCode, yearCode),
             like(observations.yearCode, `${yearCode}%`)
-          )
+          ),
         )
       );
 

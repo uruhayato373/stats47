@@ -10,8 +10,6 @@ export async function upsertRankingValues(
   rankingKey: string,
   areaType: string,
   yearCode: string,
-  yearName: string | undefined,
-  categoryName: string,
   values: RankingValue[],
   db?: ReturnType<typeof getDrizzle>
 ): Promise<Result<number, Error>> {
@@ -20,7 +18,7 @@ export async function upsertRankingValues(
     const drizzleDb = db ?? getDrizzle();
 
     const indicatorRow = await drizzleDb
-      .select({ id: metrics.id, unit: metrics.unit })
+      .select({ id: metrics.id })
       .from(metrics)
       .where(
         and(
@@ -35,11 +33,10 @@ export async function upsertRankingValues(
 
     if (indicatorRow.length === 0) {
       return err(
-        new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
+        new Error(`metric not found: key=${rankingKey} areaType=${areaType}`)
       );
     }
     const metricId = indicatorRow[0].id;
-    const indicatorUnit = indicatorRow[0].unit;
 
     const entityType = (areaType === "national" ? "prefecture" : areaType) as
       | "prefecture"
@@ -49,20 +46,16 @@ export async function upsertRankingValues(
 
     const rows = values.map((v) => ({
       metricId,
-      entityType: (v.areaType === "national"
+      areaType: (v.areaType === "national"
         ? "prefecture"
         : v.areaType ?? entityType) as
         | "prefecture"
         | "city"
         | "port"
         | "fishing_port",
-      entityCode: v.areaCode,
+      areaCode: v.areaCode,
       yearCode: v.yearCode ?? yearCode,
-      yearName: v.yearName ?? yearName ?? null,
-      entityName: v.areaName,
-      categoryName: v.categoryName ?? categoryName,
-      valueNumeric: v.value,
-      unit: v.unit ?? indicatorUnit ?? null,
+      value: v.value,
       rank: typeof v.rank === "number" ? v.rank : null,
     }));
 
@@ -72,16 +65,12 @@ export async function upsertRankingValues(
       .onConflictDoUpdate({
         target: [
           observations.metricId,
-          observations.entityType,
-          observations.entityCode,
+          observations.areaType,
+          observations.areaCode,
           observations.yearCode,
         ],
         set: {
-          entityName: sql.raw("excluded.entity_name"),
-          yearName: sql.raw("excluded.year_name"),
-          categoryName: sql.raw("excluded.category_name"),
-          valueNumeric: sql.raw("excluded.value_numeric"),
-          unit: sql.raw("excluded.unit"),
+          value: sql.raw("excluded.value"),
           rank: sql.raw("excluded.rank"),
         },
       });

@@ -33,12 +33,12 @@ export async function exportAreaProfileSnapshot(
 
   const rows = await drizzleDb
     .select({
-      entityCode: areaProfiles.entityCode,
-      entityName: areaProfiles.entityName,
+      areaCode: areaProfiles.areaCode,
+      areaName: areaProfiles.areaName,
       yearCode: areaProfiles.yearCode,
       type: areaProfiles.type,
       rank: areaProfiles.rank,
-      valueNumeric: areaProfiles.valueNumeric,
+      value: areaProfiles.value,
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
       rankingKey: metrics.key,
@@ -46,26 +46,26 @@ export async function exportAreaProfileSnapshot(
     })
     .from(areaProfiles)
     .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
-    .where(eq(areaProfiles.entityType, "prefecture"));
+    .where(eq(areaProfiles.areaType, "prefecture"));
 
   const byAreaCode: Record<string, AreaProfileData> = {};
   for (const row of rows) {
-    let bucket = byAreaCode[row.entityCode];
+    let bucket = byAreaCode[row.areaCode];
     if (!bucket) {
       bucket = {
-        areaCode: row.entityCode,
-        areaName: row.entityName,
+        areaCode: row.areaCode,
+        areaName: row.areaName,
         strengths: [],
         weaknesses: [],
       };
-      byAreaCode[row.entityCode] = bucket;
+      byAreaCode[row.areaCode] = bucket;
     }
     const item: StrengthWeaknessItem = {
       indicator: row.indicator,
       rankingKey: row.rankingKey,
       year: row.yearCode,
       rank: row.rank,
-      value: row.valueNumeric,
+      value: row.value,
       unit: row.unit,
       percentile: row.percentile,
     };
