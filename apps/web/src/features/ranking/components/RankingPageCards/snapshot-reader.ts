@@ -1,12 +1,30 @@
 import "server-only";
 
-import { type RankingPageCard } from "@stats47/database/schema";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "snapshots/ranking-page-cards/all.json";
 
 const STALE_AFTER_DAYS = 30;
+
+/**
+ * R2 snapshot に保存される ranking page card 1 件分の構造。
+ *
+ * PR-7 で page_components + page_component_assignments への移行に伴い、
+ * 旧 ranking_page_cards テーブル schema への依存を切り離して独立型として定義する。
+ * snapshot 形式は完全互換 (フロント reader への影響なし)。
+ */
+export interface RankingPageCard {
+  id: string;
+  rankingKey: string;
+  componentType: string;
+  title: string | null;
+  componentProps: string | null;
+  displayOrder: number;
+  isActive: boolean;
+  createdAt: string | null;
+  updatedAt: string | null;
+}
 
 export interface RankingPageCardsSnapshot {
   generatedAt: string;

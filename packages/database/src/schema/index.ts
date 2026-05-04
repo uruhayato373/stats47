@@ -16,7 +16,7 @@ export * from "./estat_metainfo";
 export * from "./estat_stats_tables";
 // surveys マスタのみ (旧 ranking_items / ranking_data / ranking_tags は PR-5 で DROP)
 export * from "./ranking_items";
-export * from "./ranking_page_cards";
+// ranking_page_cards は PR-7 で page_components に統合し DROP 済み
 export * from "./ranking_page_views";
 export * from "./note_content";
 export * from "./performance_metrics";

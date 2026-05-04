@@ -6,9 +6,6 @@ export * from "./index";
 // ============================================================================
 // サーバー専用
 // ============================================================================
-import { getStaticDatabase } from "./core";
-import { RankingPageCardRepository } from "./repositories/ranking-page-card-repository";
-
 export {
     checkD1Available, clearAllDbCache, clearCachedStaticDb, getCachedStaticDb, getCloudflareEnv,
     getStaticDatabase,
@@ -21,19 +18,3 @@ export { createDrizzleClient, getDrizzle, type DrizzleClient } from "./drizzle";
 export * from "./schema";
 export type { ColumnInfo, TableInfo } from "./types/stats";
 export { getSchemaTableInfo } from "./utils/schema-introspection";
-
-// Repositories
-export { RankingPageCardRepository } from "./repositories/ranking-page-card-repository";
-
-let _rankingPageCardRepositoryInstance: RankingPageCardRepository | null = null;
-
-/**
- * RankingPageCardRepository のインスタンスを取得（シングルトン）
- */
-export function getRankingPageCardRepository(): RankingPageCardRepository {
-  if (!_rankingPageCardRepositoryInstance) {
-    const db = getStaticDatabase();
-    _rankingPageCardRepositoryInstance = new RankingPageCardRepository(db);
-  }
-  return _rankingPageCardRepositoryInstance;
-}
