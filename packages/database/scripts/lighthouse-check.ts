@@ -9,7 +9,7 @@
  * 記録先の統一原則（CLAUDE.md §記録先の統一原則）:
  *   - 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル
  *   - D1 の performance_metrics / performance_budgets は 2026-04-17 に廃止済み
- *   - PV 上位ページの抽出のみ D1 `ranking_page_views`（運用データ）を読む
+ *   - PV 上位ページの抽出は `.claude/skills/analytics/ga4-improvement/reference/snapshots/<week>/pages.csv`
  *
  * Usage:
  *   npx tsx scripts/lighthouse-check.ts                        # デフォルト URL をモバイルで計測
@@ -23,18 +23,17 @@
 import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
-import Database from "better-sqlite3";
 
 // ── 定数 ──────────────────────────────────────────────
 
 const REPO_ROOT = path.resolve(__dirname, "../../..");
-const LOCAL_D1_PATH = path.join(
-  REPO_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
 const PERF_DIR = path.join(
   REPO_ROOT,
   ".claude/skills/analytics/performance-improvement"
+);
+const GA4_SNAPSHOTS_DIR = path.join(
+  REPO_ROOT,
+  ".claude/skills/analytics/ga4-improvement/reference/snapshots"
 );
 const BUDGETS_PATH = path.join(PERF_DIR, "budgets.json");
 const SNAPSHOTS_DIR = path.join(PERF_DIR, "snapshots");
@@ -391,12 +390,37 @@ function checkBudgets(budgets: BudgetRow[], row: MetricsRow): BudgetViolation[] 
 }
 
 // ── PV 上位ページ取得 ──────────────────────────────────────
+// 最新週の GA4 pages.csv から /ranking/<key> パスを top-N 抽出する。
+// (2026-05-04 以前は D1 ranking_page_views を参照していたが、同テーブルを廃止)
 
-function getTopPvPages(db: Database.Database, limit: number): SampleUrl[] {
-  const hasTable = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='ranking_page_views'").get();
-  if (!hasTable) return [];
-  const rows = db.prepare("SELECT ranking_key, SUM(page_views) as total_pv FROM ranking_page_views WHERE date >= date('now', '-7 days') GROUP BY ranking_key ORDER BY total_pv DESC LIMIT ?").all(limit) as { ranking_key: string }[];
-  return rows.map(r => ({ url: `/ranking/${r.ranking_key}`, pageType: "ranking" }));
+function getTopPvPages(limit: number): SampleUrl[] {
+  if (!fs.existsSync(GA4_SNAPSHOTS_DIR)) return [];
+  const weeks = fs
+    .readdirSync(GA4_SNAPSHOTS_DIR)
+    .filter((d) => /^\d{4}-W\d{2}$/.test(d))
+    .sort()
+    .reverse();
+
+  for (const week of weeks) {
+    const pagesCsv = path.join(GA4_SNAPSHOTS_DIR, week, "pages.csv");
+    if (!fs.existsSync(pagesCsv)) continue;
+    const lines = fs.readFileSync(pagesCsv, "utf-8").trim().split("\n");
+    if (lines.length <= 1) continue;
+    // header: pagePath,screenPageViews,activeUsers,...
+    const rows: { pagePath: string; pv: number }[] = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split(",");
+      const pagePath = cols[0];
+      const pv = parseInt(cols[1] || "0", 10);
+      if (!pagePath || pv === 0) continue;
+      const m = pagePath.match(/^\/ranking\/([^/?#]+)$/);
+      if (!m) continue;
+      rows.push({ pagePath, pv });
+    }
+    rows.sort((a, b) => b.pv - a.pv);
+    return rows.slice(0, limit).map((r) => ({ url: r.pagePath, pageType: "ranking" }));
+  }
+  return [];
 }
 
 // ── ユーティリティ ──────────────────────────────────────────
@@ -439,15 +463,11 @@ async function main() {
   const budgets = loadBudgets();
   if (budgets.length === 0) console.log("  (budgets.json 未配置 or 空 — 違反チェックをスキップ)");
 
-  // PV 上位ページは D1 `ranking_page_views`（運用データ）から取得
-  let db: Database.Database | null = null;
-  if (args.topPv > 0 && fs.existsSync(LOCAL_D1_PATH)) {
-    db = new Database(LOCAL_D1_PATH, { readonly: true });
-    const topPages = getTopPvPages(db, args.topPv);
+  // PV 上位ページは GA4 週次 snapshot (pages.csv) から取得
+  if (args.topPv > 0) {
+    const topPages = getTopPvPages(args.topPv);
     const existing = new Set(targets.map(t => t.url));
     for (const p of topPages) { const u = `${BASE_URL}${p.url}`; if (!existing.has(u)) { targets.push({ url: u, pageType: p.pageType }); existing.add(u); } }
-    db.close();
-    db = null;
   }
 
   console.log(`  Targets (${targets.length}):`);
