@@ -1,9 +1,9 @@
 import "server-only";
 
-import { getDrizzle, indicators, indicatorTags } from "@stats47/database/server";
+import { getDrizzle, indicators, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
 import { indicatorAsRankingItemSelection } from "../repositories/shared/indicator-as-ranking-item-selection";
@@ -25,7 +25,7 @@ export interface ExportRankingItemsSnapshotResult {
  * indicators テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
  *
  * 出力形式: snapshots/ranking-items/all.json
- * tags: indicator_tags を indicator_id で join
+ * tags: taggings (taggable_type='indicator') を indicator.id で join
  *
  * dryRun=true の場合は R2 に書かず、JSON body と count のみ返す。
  */
@@ -45,10 +45,14 @@ export async function exportRankingItemsSnapshot(
       .select({
         rankingKey: indicators.key,
         areaType: indicators.areaType,
-        tagKey: indicatorTags.tagKey,
+        tagKey: taggings.tagKey,
       })
-      .from(indicatorTags)
-      .innerJoin(indicators, eq(indicators.id, indicatorTags.indicatorId)),
+      .from(taggings)
+      .innerJoin(
+        indicators,
+        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+      )
+      .where(eq(taggings.taggableType, "indicator")),
   ]);
 
   const tagsByItem = new Map<string, { tagKey: string }[]>();

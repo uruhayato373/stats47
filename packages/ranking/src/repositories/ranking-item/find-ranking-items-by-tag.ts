@@ -3,12 +3,12 @@ import "server-only";
 import {
   categories,
   getDrizzle,
-  indicatorTags,
   indicators,
+  taggings,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, sql } from "drizzle-orm";
 
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
 import { indicatorAsRankingItemSelection } from "../shared/indicator-as-ranking-item-selection";
@@ -21,12 +21,20 @@ export async function findRankingItemsByTag(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    // 新 indicator_tags + indicators の JOIN
     const rows = await drizzleDb
       .select(indicatorAsRankingItemSelection)
-      .from(indicatorTags)
-      .innerJoin(indicators, eq(indicatorTags.indicatorId, indicators.id))
-      .where(and(eq(indicatorTags.tagKey, tagKey), eq(indicators.isActive, true)))
+      .from(taggings)
+      .innerJoin(
+        indicators,
+        eq(taggings.taggableId, sql`CAST(${indicators.id} AS TEXT)`)
+      )
+      .where(
+        and(
+          eq(taggings.taggableType, "indicator"),
+          eq(taggings.tagKey, tagKey),
+          eq(indicators.isActive, true)
+        )
+      )
       .orderBy(asc(indicators.featuredOrder), desc(indicators.updatedAt));
 
     if (rows.length === 0) {

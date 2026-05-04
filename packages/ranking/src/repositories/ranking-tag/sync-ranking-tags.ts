@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, indicators, indicatorTags } from "@stats47/database/server";
+import { getDrizzle, indicators, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, eq } from "drizzle-orm";
@@ -33,16 +33,22 @@ export async function syncRankingTags(
         new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
       );
     }
-    const indicatorId = indicatorRow[0].id;
+    const indicatorId = String(indicatorRow[0].id);
 
     await drizzleDb
-      .delete(indicatorTags)
-      .where(eq(indicatorTags.indicatorId, indicatorId));
+      .delete(taggings)
+      .where(
+        and(
+          eq(taggings.taggableType, "indicator"),
+          eq(taggings.taggableId, indicatorId)
+        )
+      );
 
     if (tagKeys.length > 0) {
-      await drizzleDb.insert(indicatorTags).values(
+      await drizzleDb.insert(taggings).values(
         tagKeys.map((tagKey) => ({
-          indicatorId,
+          taggableType: "indicator" as const,
+          taggableId: indicatorId,
           tagKey,
           createdAt: new Date().toISOString(),
         }))
