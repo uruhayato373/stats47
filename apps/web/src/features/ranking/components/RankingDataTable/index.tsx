@@ -71,7 +71,7 @@ export function RankingDataTable({
       if (statistics && statistics.hasVariation) {
         deviationValue =
           50 +
-          (10 * (item.value - statistics.mean)) / statistics.standardDeviation;
+          (10 * ((item.value ?? 0) - statistics.mean)) / statistics.standardDeviation;
       } else if (statistics) {
         deviationValue = 50;
       }

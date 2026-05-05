@@ -33,14 +33,15 @@ export async function CityRankingPreview({ areaCode, prefName, categoryKey, sele
     ]);
 
     const prefValues = unwrap(prefValuesResult)
-        .map((v) => {
+        .flatMap((v) => {
+            if (v.value === null) return [];
             const cityArea = lookupArea(v.areaCode);
-            return {
+            return [{
                 areaCode: v.areaCode,
                 areaName: cityArea?.areaName ?? v.areaName,
                 value: v.value,
                 unit: v.unit,
-            };
+            }];
         });
 
     if (prefValues.length === 0) return null;

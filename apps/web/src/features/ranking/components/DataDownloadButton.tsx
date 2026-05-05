@@ -78,7 +78,7 @@ function generateCsvContent(rankingValues: RankingValue[]): string {
       };
       areaMap.set(v.areaCode, entry);
     }
-    entry.values.set(v.yearCode, v.value);
+    if (v.value !== null) entry.values.set(v.yearCode, v.value);
   }
 
   const escapeCsv = (val: string | number): string => {
@@ -218,7 +218,7 @@ export function DataDownloadFooterCard({
   // 上位5件をプレビュー表示
   const sorted = [...rankingValues]
     .filter((v) => v.areaCode !== "00000")
-    .sort((a, b) => b.value - a.value);
+    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   const preview = sorted.slice(0, 5);
   const remaining = sorted.length - 5;
   const unit = displayInfo.normalizationBasis
@@ -245,7 +245,7 @@ export function DataDownloadFooterCard({
                     <td className="py-1.5 px-3 text-muted-foreground">{i + 1}</td>
                     <td className="py-1.5 px-3">{v.areaName}</td>
                     <td className="py-1.5 px-3 text-right font-mono tabular-nums">
-                      {v.value.toLocaleString("ja-JP")}
+                      {(v.value ?? 0).toLocaleString("ja-JP")}
                       {unit && <span className="text-xs text-muted-foreground ml-1">{unit}</span>}
                     </td>
                   </tr>

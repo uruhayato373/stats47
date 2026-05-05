@@ -9,8 +9,7 @@ const baseRow: StatsSchema = {
   areaName: "東京都",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A1101",
-  categoryName: "人口",
+  metricKey: "A1101",
   value: 100,
   unit: "人",
 };

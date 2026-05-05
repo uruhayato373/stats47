@@ -12,8 +12,7 @@ const baseRow: StatsSchema = {
   areaName: "東京都",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A1101",
-  categoryName: "人口",
+  metricKey: "A1101",
   value: 100,
   unit: "人",
 };
@@ -60,30 +59,14 @@ describe("toBarChartData", () => {
     expect(result.series).toHaveLength(0);
   });
 
-  it("labels 省略時に categoryName からラベルを導出する", () => {
+  it("labels 省略時に空ラベルを使用する", () => {
     const rawDataList: StatsSchema[][] = [
-      [
-        {
-          ...baseRow,
-          categoryName: "持ち家",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 100,
-        },
-      ],
-      [
-        {
-          ...baseRow,
-          categoryName: "借家",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 200,
-        },
-      ],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 100 }],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 200 }],
     ];
     const result = toBarChartData(rawDataList, undefined, "stacked-bar");
     expect(result.series).toHaveLength(2);
-    expect(result.series[0].name).toBe("持ち家");
-    expect(result.series[1].name).toBe("借家");
+    expect(result.series[0].name).toBe("");
+    expect(result.series[1].name).toBe("");
   });
 });

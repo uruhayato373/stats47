@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, stats } from "@stats47/database/server";
+import { getDrizzle, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { sql } from "drizzle-orm";
@@ -17,21 +17,8 @@ export async function upsertRankingValues(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    const entityType = (areaType === "national" ? "prefecture" : areaType) as
-      | "prefecture"
-      | "city"
-      | "port"
-      | "fishing_port";
-
     const rows = values.map((v) => ({
       metricKey: rankingKey,
-      areaType: (v.areaType === "national"
-        ? "prefecture"
-        : v.areaType ?? entityType) as
-        | "prefecture"
-        | "city"
-        | "port"
-        | "fishing_port",
       areaCode: v.areaCode,
       areaName: v.areaName,
       yearCode: v.yearCode ?? yearCode,
@@ -42,14 +29,13 @@ export async function upsertRankingValues(
     }));
 
     await drizzleDb
-      .insert(stats)
+      .insert(statsPrefecture)
       .values(rows)
       .onConflictDoUpdate({
         target: [
-          stats.metricKey,
-          stats.areaType,
-          stats.areaCode,
-          stats.yearCode,
+          statsPrefecture.metricKey,
+          statsPrefecture.areaCode,
+          statsPrefecture.yearCode,
         ],
         set: {
           areaName: sql.raw("excluded.area_name"),

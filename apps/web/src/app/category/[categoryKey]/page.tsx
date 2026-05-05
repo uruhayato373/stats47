@@ -99,7 +99,7 @@ export default async function CategoryPage({ params }: PageProps) {
     const latestYear = parseLatestYear(item.latestYear);
     return {
       rankingKey: item.rankingKey,
-      areaType: item.areaType,
+      areaType: "prefecture",
       title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
       subtitle: item.subtitle,
       latestYear,
@@ -139,7 +139,7 @@ export default async function CategoryPage({ params }: PageProps) {
     let tileMapSvg: string | undefined;
     if (isOk(valuesResult) && valuesResult.data.length > 0) {
       tileMapSvg = generateMiniTileSvg(
-        valuesResult.data.map((v) => ({ areaCode: v.areaCode, value: v.value })),
+        valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value }] : []),
       );
     }
     return {

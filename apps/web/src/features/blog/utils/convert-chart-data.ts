@@ -17,8 +17,8 @@ export function convertToBarData(stats: StatsSchema[]): ChartDataNode[] {
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter((s) => s.yearCode === latestYear && s.areaCode !== "00000")
-    .map((s) => ({ name: s.areaName, value: s.value, code: s.areaCode }));
+    .filter((s) => s.yearCode === latestYear && s.areaCode !== "00000" && s.value !== null)
+    .map((s) => ({ name: s.areaName, value: s.value as number, code: s.areaCode }));
 }
 
 /** LineChart 用（単一系列）: 全国データ優先、年度昇順 */
@@ -45,7 +45,7 @@ export function convertToMultiAreaLineData(
       label: stats.find((s) => s.yearCode === yc)?.yearName ?? yc,
     };
     stats.filter((s) => s.yearCode === yc).forEach((s) => {
-      row[s.areaName] = s.value;
+      row[s.areaName] = s.value ?? 0;
     });
     return row;
   });
@@ -56,8 +56,8 @@ export function convertToChoroplethData(stats: StatsSchema[]): ChoroplethDataNod
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter((s) => s.yearCode === latestYear && s.areaCode !== "00000")
-    .map((s) => ({ areaCode: s.areaCode, value: s.value }));
+    .filter((s) => s.yearCode === latestYear && s.areaCode !== "00000" && s.value !== null)
+    .map((s) => ({ areaCode: s.areaCode, value: s.value as number }));
 }
 
 /**

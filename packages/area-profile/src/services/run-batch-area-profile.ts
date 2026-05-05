@@ -90,6 +90,7 @@ export async function runBatchAreaProfile(callbacks: BatchCallbacks): Promise<vo
       if (valuesResult.success && valuesResult.data.length > 0) {
         for (const rv of valuesResult.data) {
           const list = areaDataMap.get(rv.areaCode) ?? [];
+          if (rv.value === null) continue;
           list.push({
             rankingKey: item.rankingKey,
             indicator: item.title,

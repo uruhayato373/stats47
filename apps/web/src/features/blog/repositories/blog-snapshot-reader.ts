@@ -66,6 +66,7 @@ function toArticle(row: SnapshotArticle): Article {
     proofreadAt: row.proofreadAt,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
+    tags: JSON.stringify(row.tags ?? []),
     content: "",
     frontmatter,
   };

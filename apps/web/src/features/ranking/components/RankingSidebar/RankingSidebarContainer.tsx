@@ -60,10 +60,8 @@ export async function RankingSidebarContainer({
         categoryIcon = catResult.data.icon ?? undefined;
     }
 
-    // 4. areaType でフィルタリング
-    const items = result.data.filter(
-        (item) => item.areaType === areaType
-    );
+    // areaType は metrics から削除済み（全件 prefecture 相当）
+    const items = result.data;
 
     if (items.length === 0) {
         return null;
@@ -77,7 +75,7 @@ export async function RankingSidebarContainer({
             categoryKey={categoryKey}
             items={items.map((item) => ({
                 rankingKey: item.rankingKey,
-                areaType: item.areaType,
+                areaType: "prefecture" as const,
                 title: item.title,
                 subtitle: item.subtitle,
                 demographicAttr: item.demographicAttr,

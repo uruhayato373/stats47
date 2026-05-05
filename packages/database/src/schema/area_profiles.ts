@@ -15,7 +15,7 @@ import { metrics } from "./metrics";
  * 地域プロフィールの強み・弱み
  *
  * - metric_key (TEXT FK → metrics.key) PR #211: metric_id (INTEGER) から変更
- * - area_type で 4 種 (prefecture / city / port / fishing_port) 対応
+ * - area_type で 3 種 (prefecture / city / port) 対応
  * - area_name は snapshot export 用 denorm (JOIN より速い)
  * - unit は snapshot export 用 denorm (metrics.unit と同値)
  */
@@ -24,7 +24,7 @@ export const areaProfiles = sqliteTable(
   {
     id: integer("id").primaryKey({ autoIncrement: true }),
     areaType: text("area_type", {
-      enum: ["prefecture", "city", "port", "fishing_port"],
+      enum: ["prefecture", "city", "port"],
     }).notNull(),
     areaCode: text("area_code").notNull(),
     areaName: text("area_name").notNull(),

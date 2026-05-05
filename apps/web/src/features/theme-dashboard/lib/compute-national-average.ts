@@ -12,6 +12,7 @@ export function computeNationalAverage(
   // yearCode ごとにグルーピング
   const byYear = new Map<string, { values: number[]; yearName: string }>();
   for (const v of allData) {
+    if (v.value === null) continue;
     const entry = byYear.get(v.yearCode);
     if (entry) {
       entry.values.push(v.value);
