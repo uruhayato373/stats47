@@ -11,7 +11,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 ## 設計原則
 
 - **1データ1コンポーネント**: 同じ指標は1つの chart_key を areas / theme で共有
-- **既存コンポーネント再利用優先**: areas にあるチャートは assignments で割り当てるだけ
+- **既存コンポーネント再利用優先**: areas にあるチャートは page_components に同じ chart_key を別行 INSERT するだけ
 - **e-Stat API 起点**: DB にデータがなくても e-Stat API から取得可能なら追加候補
 - **KPI は e-Stat API ベース**: kpiDataByArea でプリフェッチ、ranking_data ベースの KPI は使わない
 
@@ -99,15 +99,14 @@ node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
 const existing = db.prepare(\`
-  SELECT pc.chart_key, pc.title, pc.component_type,
-         GROUP_CONCAT(DISTINCT pca.page_type || '/' || pca.page_key) as pages
-  FROM page_components pc
-  JOIN page_component_assignments pca ON pc.chart_key = pca.chart_key
-  WHERE pc.is_active = 1
-    AND pc.chart_key NOT IN (
-      SELECT chart_key FROM page_component_assignments WHERE page_type = 'theme' AND page_key = ?
+  SELECT chart_key, title, component_type,
+         GROUP_CONCAT(DISTINCT page_type || '/' || page_key) as pages
+  FROM page_components
+  WHERE is_active = 1
+    AND chart_key NOT IN (
+      SELECT chart_key FROM page_components WHERE page_type = 'theme' AND page_key = ?
     )
-  GROUP BY pc.chart_key
+  GROUP BY chart_key
 \`).all('THEME_KEY');
 // テーマ関連キーワードでフィルタして出力
 "
