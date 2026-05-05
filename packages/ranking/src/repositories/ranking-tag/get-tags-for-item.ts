@@ -1,10 +1,10 @@
 import "server-only";
 
-import { getDrizzle, metrics, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function getTagsForItem(
   rankingKey: string,
@@ -13,21 +13,14 @@ export async function getTagsForItem(
 ): Promise<Result<Array<{ tagKey: string }>, Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    const results = await drizzleDb
-      .select({ tagKey: taggings.tagKey })
-      .from(taggings)
-      .innerJoin(
-        metrics,
-        eq(taggings.taggableId, metrics.key)
-      )
-      .where(
-        and(
-          eq(taggings.taggableType, "metric"),
-          eq(metrics.key, rankingKey)
-        )
-      );
+    const rows = await drizzleDb
+      .select({ tags: metrics.tags })
+      .from(metrics)
+      .where(eq(metrics.key, rankingKey))
+      .limit(1);
 
-    return ok(results.map((row) => ({ tagKey: row.tagKey })));
+    const tagKeys = JSON.parse(rows[0]?.tags ?? "[]") as string[];
+    return ok(tagKeys.map((tagKey) => ({ tagKey })));
   } catch (error) {
     logger.error({ error, rankingKey, areaType }, "getTagsForItem: failed");
     return err(error instanceof Error ? error : new Error(String(error)));

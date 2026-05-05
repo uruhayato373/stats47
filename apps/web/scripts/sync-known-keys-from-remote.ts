@@ -23,7 +23,7 @@ import path from "node:path";
 
 const RANKING_QUERY =
   "SELECT DISTINCT key AS ranking_key FROM metrics WHERE is_active = 1 AND area_type = 'prefecture' ORDER BY key";
-const TAG_QUERY = "SELECT DISTINCT tag_key FROM taggings WHERE taggable_type='article' ORDER BY tag_key";
+const TAG_QUERY = "SELECT DISTINCT value AS tag_key FROM articles, json_each(articles.tags) ORDER BY value";
 
 const RANKING_OUT = path.resolve(
   __dirname,

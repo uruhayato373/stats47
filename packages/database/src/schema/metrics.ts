@@ -50,6 +50,7 @@ export const metrics = sqliteTable(
     })
       .notNull()
       .default("fiscal"),
+    tags: text("tags").default("[]").notNull(),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

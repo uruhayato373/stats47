@@ -12,7 +12,6 @@ export * from "./correlations";
 export * from "./prefectures";
 export * from "./cities";
 export * from "./categories";
-export * from "./taggings"; // polymorphic M:N: article + metric → tag_key (日本語直格納)
 export * from "./ports"; // 旧 port_statistics.ts を 2026-05-04 にリネーム
 export * from "./fishing_ports";
 
@@ -48,3 +47,4 @@ export * from "./sns_posts";
 // - ai_content → metric_texts リネーム (PR #213, 2026-05-05)
 // - tags テーブル廃止、taggings.tag_key を日本語に統一 (PR #214, 2026-05-05)
 //   旧英語スラグ URL は middleware で 301 リダイレクト
+// - taggings → articles.tags / metrics.tags (JSON列に直接格納, PR #215, 2026-05-05)

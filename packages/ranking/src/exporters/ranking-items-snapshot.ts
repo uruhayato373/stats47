@@ -1,9 +1,8 @@
 import "server-only";
 
-import { getDrizzle, metrics, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
 import { metricAsRankingItemSelection } from "../repositories/shared/metric-as-ranking-item-selection";
@@ -25,7 +24,7 @@ export interface ExportRankingItemsSnapshotResult {
  * metrics テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
  *
  * 出力形式: snapshots/ranking-items/all.json
- * tags: taggings (taggable_type='metric') を indicator.id で join
+ * tags: metrics.tags (JSON配列) を直接使用
  *
  * dryRun=true の場合は R2 に書かず、JSON body と count のみ返す。
  */
@@ -39,27 +38,9 @@ export async function exportRankingItemsSnapshot(
   const drizzleDb = options.db ?? getDrizzle();
   const dryRun = options.dryRun ?? false;
 
-  const [rows, tagRows] = await Promise.all([
-    drizzleDb.select(metricAsRankingItemSelection).from(metrics),
-    drizzleDb
-      .select({
-        rankingKey: metrics.key,
-        tagKey: taggings.tagKey,
-      })
-      .from(taggings)
-      .innerJoin(
-        metrics,
-        eq(taggings.taggableId, metrics.key)
-      )
-      .where(eq(taggings.taggableType, "metric")),
-  ]);
-
-  const tagsByItem = new Map<string, { tagKey: string }[]>();
-  for (const t of tagRows) {
-    const list = tagsByItem.get(t.rankingKey) ?? [];
-    list.push({ tagKey: t.tagKey });
-    tagsByItem.set(t.rankingKey, list);
-  }
+  const rows = await drizzleDb
+    .select({ ...metricAsRankingItemSelection, tags: metrics.tags })
+    .from(metrics);
 
   const items: RankingItem[] = [];
   let parseFailures = 0;
@@ -69,8 +50,10 @@ export async function exportRankingItemsSnapshot(
         ...row,
         data_source_id: "estat",
       });
-      const tags = tagsByItem.get(parsed.rankingKey);
-      if (tags && tags.length > 0) parsed.tags = tags;
+      const tagKeys = JSON.parse(row.tags ?? "[]") as string[];
+      if (tagKeys.length > 0) {
+        parsed.tags = tagKeys.map((tagKey) => ({ tagKey }));
+      }
       items.push(parsed);
     } catch (error) {
       parseFailures++;

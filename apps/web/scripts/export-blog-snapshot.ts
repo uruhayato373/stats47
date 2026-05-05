@@ -1,7 +1,7 @@
 /**
  * Blog snapshot exporter
  *
- * D1 articles / taggings / tags をローカル SQLite から読み、
+ * D1 articles をローカル SQLite から読み、
  * `snapshots/blog/all.json` を R2 に書き出す。
  *
  * 使用方法: npx tsx scripts/export-blog-snapshot.ts
@@ -9,7 +9,6 @@
 
 import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/better-sqlite3";
-import { eq } from "drizzle-orm";
 import fs from "fs";
 import path from "path";
 import BetterSqlite3 from "better-sqlite3";
@@ -47,28 +46,10 @@ async function main() {
   const db = drizzle(sqlite, { schema });
 
   const articleRows = await db.select().from(schema.articles);
-  const articleTagRows = await db
-    .select({
-      slug: schema.taggings.taggableId,
-      tagKey: schema.taggings.tagKey,
-    })
-    .from(schema.taggings)
-    .where(eq(schema.taggings.taggableType, "article"));
-
-  const tagsBySlug = new Map<string, Array<{ tagKey: string }>>();
-  for (const row of articleTagRows) {
-    const list = tagsBySlug.get(row.slug);
-    const entry = { tagKey: row.tagKey };
-    if (list) {
-      list.push(entry);
-    } else {
-      tagsBySlug.set(row.slug, [entry]);
-    }
-  }
 
   const snapshotArticles: SnapshotArticle[] = articleRows.map((a) => ({
     ...a,
-    tags: tagsBySlug.get(a.slug) ?? [],
+    tags: (JSON.parse(a.tags ?? "[]") as string[]).map((tagKey) => ({ tagKey })),
   }));
 
   const tagMetaCounter = new Map<string, number>();
