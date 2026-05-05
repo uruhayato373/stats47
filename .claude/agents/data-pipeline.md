@@ -30,7 +30,7 @@ e-Stat API からのデータ取得・ランキング登録・AI コンテンツ
 3. `/fetch-estat-data` — データを JSON で取得・確認
 4. `/register-ranking` — ranking_items に登録 + ranking_data にデータ投入
 5. `/populate-all-rankings` — 過去全年度のデータを一括投入
-6. → db-manager の `/sync-remote-d1` でリモート反映
+6. `/sync-snapshots` — R2 スナップショット更新・本番反映
 
 ## 担当外
 

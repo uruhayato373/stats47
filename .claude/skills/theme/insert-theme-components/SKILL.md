@@ -140,8 +140,7 @@ rows.forEach(r => console.log('[' + r.section + ']', r.chart_key, '|', r.title, 
 ```
 次のステップ:
 1. npm run dev → http://localhost:3000/themes/{themeKey} で表示確認
-2. (任意) /sync-remote-d1 --key page_components
-3. (任意) /sync-remote-d1 --key page_component_assignments
+2. /sync-snapshots で page-components スナップショットを更新・本番反映
 ```
 
 ## 注意

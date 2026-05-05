@@ -43,9 +43,9 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
   "SELECT ranking_key, COUNT(*) as rows, COUNT(DISTINCT year_code) as years FROM observations WHERE area_type='city' GROUP BY ranking_key ORDER BY rows DESC;"
 ```
 
-### 4. リモート反映
+### 4. スナップショット更新
 
-`/sync-remote-d1` でリモート D1 に同期する。
+`/sync-snapshots` で R2 スナップショットを再生成し本番に反映する。
 
 ## オプション
 

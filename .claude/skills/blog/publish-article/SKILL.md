@@ -119,5 +119,5 @@ rm -rf "docs/21_ブログ記事原稿/<slug>"
   1. /sync-articles  →  DB を更新（ローカル確認）
   2. localhost:3000/blog/<slug> でプレビュー確認
   3. /push-r2        →  リモート R2 へアップロード
-  4. /sync-remote-d1 →  リモート D1 へ反映（production）
+  4. /sync-snapshots →  blog スナップショット更新・本番反映
 ```

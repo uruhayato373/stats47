@@ -45,9 +45,9 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
   "SELECT category_code, COUNT(DISTINCT year_code) as years FROM observations GROUP BY category_code ORDER BY years DESC LIMIT 20;"
 ```
 
-### 4. リモート反映
+### 4. スナップショット更新
 
-`/sync-remote-d1` でリモート D1 に同期する。
+`/sync-snapshots` で R2 スナップショットを再生成し本番に反映する。
 
 ## オプション
 

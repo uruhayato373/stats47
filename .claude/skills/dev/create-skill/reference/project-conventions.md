@@ -30,7 +30,7 @@
 
 ## 命名規則
 
-- ケバブケース: `generate-note-charts`, `sync-remote-d1`
+- ケバブケース: `generate-note-charts`, `sync-snapshots`
 - 動詞始まり: `generate-`, `fetch-`, `sync-`, `render-`, `publish-`, `validate-`
 - 対象を含める: `-note-`, `-blog-`, `-estat-`
 
@@ -54,7 +54,7 @@ const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 ```
 
-リモート D1 への反映は別スキル (`/sync-remote-d1`) で行う。
+R2 スナップショットの更新は `/sync-snapshots` で行う。
 
 ## 一時スクリプトの扱い
 

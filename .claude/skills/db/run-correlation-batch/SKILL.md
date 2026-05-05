@@ -1,18 +1,18 @@
 ---
 name: run-correlation-batch
-description: 相関分析バッチを実行しリモート D1 に同期する（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
+description: 相関分析バッチを実行し R2 スナップショットに書き出す（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
 ---
 
-相関分析バッチを実行し、結果をリモート D1 に同期する。
+相関分析バッチを実行し、結果を R2 スナップショット（`snapshots/correlation/`）に書き出す。
 ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlations` テーブルを DROP + VACUUM する。
 
 ## 前提
 
-- ローカル D1 に `observations`, `indicators` が存在すること（`/pull-remote-d1` 済み）
+- ローカル D1 に `observations`, `metrics` が存在すること
 - Cloudflare 認証済み（`wrangler login`）
-- 環境変数: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_STATIC_DATABASE_ID_PRODUCTION`, `CLOUDFLARE_API_TOKEN`
+- 環境変数: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_R2_BUCKET_NAME`
 
 ## 手順
 
@@ -77,19 +77,15 @@ npm run batch --workspace=packages/correlation
 
 完了メッセージを確認してから次のフェーズへ進む。バッチは 20-30 分かかる（約 8-9 万ペア）。
 
-### Phase 3: リモート D1 への同期
+### Phase 3: R2 スナップショット書き出し
 
 **Phase 2 が成功した場合のみ実行する。**
 
-1. リモートの現在行数を確認:
-   ```bash
-   cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-     --command "SELECT COUNT(*) as cnt FROM correlations;" --json -y
-   ```
+```bash
+bash .claude/skills/db/sync-snapshots/run.sh --only correlation
+```
 
-2. `/sync-remote-d1 --table correlation_analysis` を実行してローカルの結果をリモートに push する。
-
-3. 同期後のリモート行数を確認し、ユーザーに報告する。
+完了後、`snapshots/correlation/by-ranking-key/` に JSON ファイルが生成されたことを確認する。
 
 ### Phase 4: ローカルの correlation_analysis を削除
 
@@ -112,19 +108,20 @@ db.close();
 
 ### Phase 5: 検証
 
-リモートの行数とローカル DB のサイズを確認し、ユーザーに報告する。
+R2 スナップショットのファイル数とローカル DB のサイズを確認し、ユーザーに報告する。
 
 ```bash
-cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \
-  --command "SELECT COUNT(*) as cnt FROM correlations;" --json -y
+# R2 のスナップショットファイル数を確認
+ls .local/r2/snapshots/correlation/by-ranking-key/ | wc -l
 ```
 
 ```bash
+# ローカル DB サイズ確認（VACUUM 後）
 ls -lh .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
 ```
 
 報告内容:
-- リモート行数
+- R2 スナップショットファイル数（~1,830 files 想定）
 - ローカル DB サイズ（VACUUM 後、~1.8GB 想定）
 
 ## 注意
@@ -132,4 +129,3 @@ ls -lh .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bc
 - バッチは冪等（upsert）。途中で失敗しても再実行可能
 - `--dry-run` の場合は Phase 1 の存在確認 + Phase 2 のドライランのみ実行
 - VACUUM は DB サイズの一時的な倍増が必要。ディスク空き容量を確認すること
-- `pull-remote-d1` はデフォルトで `correlations` を除外する（`--no-exclude` で上書き可）

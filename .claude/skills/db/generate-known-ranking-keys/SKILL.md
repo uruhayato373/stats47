@@ -46,15 +46,7 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
 
 ### `D1 not found` エラー
 
-ローカル D1 が未配置。`/pull-remote-d1` で解決。
-
-### 件数が期待と違う
-
-ローカル D1 が古い可能性。他 PC で更新された ranking がある場合:
-```
-/pull-remote-d1
-```
-で最新化してから再実行。
+ローカル D1 が未配置。`.local/d1/` のパスを確認し、CLAUDE.md 記載の固定パスを使うこと。
 
 ### 更新を忘れてデプロイした場合
 
@@ -65,5 +57,5 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
 - 生成スクリプト本体: `apps/web/scripts/generate-known-ranking-keys.ts`
 - 出力先: `apps/web/src/config/known-ranking-keys.ts`
 - middleware 参照箇所: `apps/web/src/middleware.ts` の Fix 6
-- 関連スキル: `/register-ranking`, `/pull-remote-d1`, `/deploy`
+- 関連スキル: `/register-ranking`, `/deploy`
 - 背景・v1/v2 失敗の教訓: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T0-RKG-200-01-v3
