@@ -175,7 +175,7 @@ export function RadarChart({
           .on("mouseenter", (event) => {
             showTooltip(event, `${axis.label}`, {
               value: val,
-              categoryName: series.label,
+              metricTitle: series.label,
               unit: "",
             });
           })

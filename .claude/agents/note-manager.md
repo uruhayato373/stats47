@@ -135,7 +135,7 @@ db.prepare("SELECT ranking_key, title, status FROM note_articles WHERE status !=
 
 - **1日2〜3本上限**（feedback_note_posting_pace.md）。一気投稿 NG
 - 各記事について Step 1-4 を順次実行
-- リモート DB 同期（`/sync-remote-d1`）は全記事完了後に1回
+- R2 スナップショット更新（`/sync-snapshots`）は全記事完了後に1回
 
 ## 既存スキルとの連携
 
@@ -170,3 +170,15 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
 - **note 内チャート** → `/generate-note-charts` または `/generate-kakei-charts`（Remotion ベース）
 - Satori / Remotion 製の OGP コンポネントは stats47 サイト内 OGP 専用で、note 記事には使わない
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Article | Step | Status | Notes`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- 記事の構成案・edit 提案の一括レビュー

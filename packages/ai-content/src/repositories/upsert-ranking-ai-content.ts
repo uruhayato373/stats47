@@ -1,29 +1,14 @@
 import "server-only";
 
-import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
-import { and, eq } from "drizzle-orm";
+import { metrics, getDrizzle } from "@stats47/database/server";
+import { eq } from "drizzle-orm";
 
-/**
- * AI コンテンツを UPSERT (PR-5: 新 ai_content 経由)
- *
- * 入力は旧 (rankingKey, areaType) ベース。metrics をルックアップして
- * metric_id を取得し、新 ai_content (PK: metric_id) に UPSERT する。
- */
 export interface UpsertRankingAiContentInput {
   rankingKey: string;
-  areaType: string;
   faq?: string | null;
   regionalAnalysis?: string | null;
   insights?: string | null;
   yearCode: string;
-  aiModel: string;
-  promptVersion: string;
-  generatedAt: string;
-  isActive?: boolean;
-  isProofread?: boolean;
-  proofreadAt?: string | null;
-  editorialSource?: string;
-  reviewedBy?: string | null;
 }
 
 export async function upsertRankingAiContent(
@@ -32,55 +17,15 @@ export async function upsertRankingAiContent(
 ): Promise<void> {
   const drizzleDb = db ?? getDrizzle();
 
-  const indicatorRows = await drizzleDb
-    .select({ id: metrics.id })
-    .from(metrics)
-    .where(
-      and(
-        eq(metrics.key, data.rankingKey),
-        eq(metrics.areaType, data.areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
-      )
-    )
-    .limit(1);
-
-  const indicator = indicatorRows[0];
-  if (!indicator) {
-    throw new Error(
-      `upsertRankingAiContent: indicator not found for (${data.rankingKey}, ${data.areaType})`
-    );
-  }
-
   const now = new Date().toISOString();
   await drizzleDb
-    .insert(aiContent)
-    .values({
-      metricId: indicator.id,
+    .update(metrics)
+    .set({
       faq: data.faq ?? null,
       regionalAnalysis: data.regionalAnalysis ?? null,
       insights: data.insights ?? null,
       yearCode: data.yearCode,
-      aiModel: data.aiModel,
-      promptVersion: data.promptVersion,
-      generatedAt: data.generatedAt,
-      isActive: data.isActive ?? true,
-      isProofread: data.isProofread ?? false,
-      proofreadAt: data.proofreadAt ?? null,
-      editorialSource: data.editorialSource ?? "ai-generated",
-      reviewedBy: data.reviewedBy ?? null,
       updatedAt: now,
     })
-    .onConflictDoUpdate({
-      target: aiContent.metricId,
-      set: {
-        faq: data.faq ?? null,
-        regionalAnalysis: data.regionalAnalysis ?? null,
-        insights: data.insights ?? null,
-        yearCode: data.yearCode,
-        aiModel: data.aiModel,
-        promptVersion: data.promptVersion,
-        generatedAt: data.generatedAt,
-        isActive: data.isActive ?? true,
-        updatedAt: now,
-      },
-    });
+    .where(eq(metrics.key, data.rankingKey));
 }

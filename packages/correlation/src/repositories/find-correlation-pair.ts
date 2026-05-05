@@ -1,9 +1,9 @@
 import "server-only";
 
-import { correlations, getDrizzle, metrics } from "@stats47/database/server";
+import { correlations, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, eq, inArray, or } from "drizzle-orm";
+import { and, eq, or } from "drizzle-orm";
 
 export async function findCorrelationPair(
   rankingKeyX: string,
@@ -22,24 +22,10 @@ export async function findCorrelationPair(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    const indRows = await drizzleDb
-      .select({ id: metrics.id, key: metrics.key })
-      .from(metrics)
-      .where(
-        and(
-          inArray(metrics.key, [rankingKeyX, rankingKeyY]),
-          eq(metrics.areaType, "prefecture")
-        )
-      );
-    const idByKey = new Map(indRows.map((r) => [r.key, r.id]));
-    const xId = idByKey.get(rankingKeyX);
-    const yId = idByKey.get(rankingKeyY);
-    if (!xId || !yId) return ok(null);
-
     const rows = await drizzleDb
       .select({
-        metricXId: correlations.metricXId,
-        metricYId: correlations.metricYId,
+        metricKeyX: correlations.metricKeyX,
+        metricKeyY: correlations.metricKeyY,
         pearsonR: correlations.pearsonR,
         partialRPopulation: correlations.partialRPopulation,
         partialRArea: correlations.partialRArea,
@@ -50,8 +36,8 @@ export async function findCorrelationPair(
       .from(correlations)
       .where(
         or(
-          and(eq(correlations.metricXId, xId), eq(correlations.metricYId, yId)),
-          and(eq(correlations.metricXId, yId), eq(correlations.metricYId, xId))
+          and(eq(correlations.metricKeyX, rankingKeyX), eq(correlations.metricKeyY, rankingKeyY)),
+          and(eq(correlations.metricKeyX, rankingKeyY), eq(correlations.metricKeyY, rankingKeyX))
         )
       )
       .limit(1);
@@ -62,7 +48,7 @@ export async function findCorrelationPair(
     let scatter: Array<{ areaCode: string; areaName: string; x: number; y: number }>;
     try {
       const parsed = JSON.parse(row.scatterData);
-      if (row.metricXId === xId) {
+      if (row.metricKeyX === rankingKeyX) {
         scatter = parsed;
       } else {
         scatter = parsed.map((p: { areaCode: string; areaName: string; x: number; y: number }) => ({

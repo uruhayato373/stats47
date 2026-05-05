@@ -154,7 +154,7 @@ export function StackedAreaChart({
         d3.select(this).attr("fill-opacity", 0.9);
         const seriesLabel = labelMap.get(d.key) ?? d.key;
         showTooltip(event, seriesLabel, {
-          categoryName: seriesLabel,
+          metricTitle: seriesLabel,
           unit: normalize ? "%" : unit,
         });
       })

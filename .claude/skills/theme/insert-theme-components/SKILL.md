@@ -1,6 +1,6 @@
 ---
 name: insert-theme-components
-description: 設計済みチャートの DB 投入 — 既存コンポーネント再利用（assignments のみ）+ 新規作成
+description: 設計済みチャートの DB 投入 — 既存コンポーネント再利用（別ページへの割り当て）+ 新規作成
 argument-hint: "<theme-key>"
 disable-model-invocation: true
 allowed-tools: Read, Bash
@@ -10,10 +10,10 @@ allowed-tools: Read, Bash
 
 ## 設計原則
 
-- **既存コンポーネント再利用**: chart_key が既に `page_components` にある場合、`page_component_assignments` のみ追加
-- **新規コンポーネント**: chart_key が存在しない場合のみ `page_components` に INSERT
-- **重複禁止**: 同じ page_type + page_key + chart_key の assignment は INSERT OR IGNORE
-- **areas との共有**: テーマ用に作成したチャートは、関連する area-category にも割り当てることを検討
+- **1テーブル**: `page_components` のみ。`page_component_assignments` テーブルは廃止済み (PR #216)
+- **再利用**: 他ページで使っている chart_key を同じテーマページにも載せたい場合、同じ chart_key + 同じ props で新しい行を INSERT
+- **重複禁止**: 同じ `(page_type, page_key, chart_key)` は INSERT OR IGNORE
+- **areas との共有**: テーマ用に作成したチャートは、関連する area-category にも INSERT することを検討
 
 ## 引数
 
@@ -29,21 +29,45 @@ allowed-tools: Read, Bash
 ### Phase 1: 事前チェック
 
 1. DB パスの存在確認
-2. 設計された chart_key が既に page_components に存在するか確認（再利用 vs 新規を判定）
+2. 同じ chart_key が別ページで既に使われているか確認（component_props を再利用できる）
 
-### Phase 2: 既存コンポーネント再利用（assignments のみ）
+```bash
+node -e "
+const Database = require('better-sqlite3');
+const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
+// 確認したい chart_key のリスト
+const keys = ['<chart_key1>', '<chart_key2>'];
+for (const key of keys) {
+  const rows = db.prepare('SELECT page_type, page_key FROM page_components WHERE chart_key = ?').all(key);
+  console.log(key, '→', rows.length === 0 ? '新規' : '既存: ' + rows.map(r => r.page_type + '/' + r.page_key).join(', '));
+}
+db.close();
+"
+```
 
-3. 既に `page_components` にある chart_key → `page_component_assignments` のみ INSERT:
+### Phase 2: 既存チャートの別ページへの追加（再利用）
+
+3. 他ページで既に使われている chart_key → 同じ props で新しい行を INSERT:
 
 ```bash
 node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 
-const insertAssignment = db.prepare(\`
-  INSERT OR IGNORE INTO page_component_assignments
-  (page_type, page_key, chart_key, section, sort_order)
-  VALUES ('theme', ?, ?, ?, ?)
+// 再利用元ページから props を取得して新ページに INSERT
+const stmt = db.prepare(\`
+  INSERT OR IGNORE INTO page_components
+  (page_type, page_key, chart_key, section, sort_order,
+   component_type, title, component_props, source_name, source_link,
+   ranking_link, tags, grid_column_span, grid_column_span_tablet,
+   grid_column_span_sm, data_source, source_id, is_active)
+  SELECT 'theme', ?, chart_key, ?, ?,
+         component_type, title, component_props, source_name, source_link,
+         ranking_link, tags, grid_column_span, grid_column_span_tablet,
+         grid_column_span_sm, data_source, source_id, is_active
+  FROM page_components
+  WHERE chart_key = ?
+  LIMIT 1
 \`);
 
 const reuse = [
@@ -52,55 +76,54 @@ const reuse = [
 
 const tx = db.transaction(() => {
   for (const r of reuse) {
-    insertAssignment.run('$ARGUMENTS', r.chartKey, r.section, r.sortOrder);
+    stmt.run('$ARGUMENTS', r.section, r.sortOrder, r.chartKey);
   }
 });
 tx();
 console.log('再利用:', reuse.length, '件');
+db.close();
 "
 ```
 
 ### Phase 3: 新規コンポーネント作成
 
-4. `page_components` にない chart_key → INSERT + assignments:
+4. 新規 chart_key → `page_components` に 1 行 INSERT（page_type='theme', page_key='$ARGUMENTS'）:
 
 ```bash
 node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 
-const insertComponent = db.prepare(\`
+const insert = db.prepare(\`
   INSERT OR IGNORE INTO page_components
-  (chart_key, component_type, title, component_props, source_name, source_link, grid_column_span, is_active)
-  VALUES (?, ?, ?, ?, ?, ?, 12, 1)
-\`);
-
-const insertAssignment = db.prepare(\`
-  INSERT OR IGNORE INTO page_component_assignments
-  (page_type, page_key, chart_key, section, sort_order)
-  VALUES ('theme', ?, ?, ?, ?)
+  (page_type, page_key, chart_key, section, sort_order,
+   component_type, title, component_props, source_name, source_link,
+   grid_column_span, is_active)
+  VALUES ('theme', ?, ?, ?, ?, ?, ?, ?, ?, ?, 12, 1)
 \`);
 
 const newComponents = [
-  // { chartKey, componentType, title, componentProps, sourceName, sourceLink, section, sortOrder }
+  // { chartKey, section, sortOrder, componentType, title, componentProps, sourceName, sourceLink }
 ];
 
 const tx = db.transaction(() => {
   for (const c of newComponents) {
-    insertComponent.run(c.chartKey, c.componentType, c.title, JSON.stringify(c.componentProps), c.sourceName, c.sourceLink);
-    insertAssignment.run('$ARGUMENTS', c.chartKey, c.section, c.sortOrder);
+    insert.run('$ARGUMENTS', c.chartKey, c.section, c.sortOrder,
+      c.componentType, c.title, JSON.stringify(c.componentProps),
+      c.sourceName ?? null, c.sourceLink ?? null);
   }
 });
 tx();
 console.log('新規:', newComponents.length, '件');
+db.close();
 "
 ```
 
 ### Phase 4: KPI カード追加
 
-5. テーマの panelTabs 用 KPI カードを追加。既存の KPI カードがあれば再利用:
+5. テーマの panelTabs 用 KPI カードを追加（Phase 3 と同じ INSERT で `component_type='kpi-card'`）
 
-### Phase 5: component_data への事前投入
+### Phase 5: composition-chart データ投入
 
 6. **新規作成した** `composition-chart` チャートのデータをリモート D1 に投入:
 
@@ -108,44 +131,37 @@ console.log('新規:', newComponents.length, '件');
 /populate-component-data <chart_key1> <chart_key2> ...
 ```
 
-- 既存チャートへの `assignment` のみ追加した場合はスキップ可
 - 新規 `composition-chart` の `multipleStatsSources` または `statsDataId` が設定されていることを確認してから実行
 
+### Phase 6: 検証
 
-
-- `kpiDataByArea` でプリフェッチされるため、`estatParams` が必須
-- 他テーマ・areas と同じ指標なら同じ chart_key を共有
-
-### Phase 5: 検証
-
-6. 投入結果を確認:
+7. 投入結果を確認:
 
 ```bash
 node -e "
 const Database = require('better-sqlite3');
-const db = new Database('...', {readonly: true});
+const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
 const rows = db.prepare(\`
-  SELECT pc.chart_key, pc.title, pc.component_type, pca.section
-  FROM page_component_assignments pca
-  JOIN page_components pc ON pc.chart_key = pca.chart_key
-  WHERE pca.page_type = 'theme' AND pca.page_key = ?
-  ORDER BY pca.section, pca.sort_order
+  SELECT chart_key, title, component_type, section, sort_order
+  FROM page_components
+  WHERE page_type = 'theme' AND page_key = ?
+  ORDER BY section, sort_order
 \`).all('$ARGUMENTS');
 rows.forEach(r => console.log('[' + r.section + ']', r.chart_key, '|', r.title, '|', r.component_type));
+db.close();
 "
 ```
 
-7. ユーザーに次のステップを案内:
+8. ユーザーに次のステップを案内:
 
 ```
 次のステップ:
 1. npm run dev → http://localhost:3000/themes/{themeKey} で表示確認
-2. (任意) /sync-remote-d1 --key page_components
-3. (任意) /sync-remote-d1 --key page_component_assignments
+2. /sync-snapshots で page-components スナップショットを更新・本番反映
 ```
 
 ## 注意
 
-- INSERT OR IGNORE を使用（既存は上書きしない）
+- INSERT OR IGNORE を使用（同一 page_type + page_key + chart_key は上書きしない）
 - トランザクション内で実行
 - DB パスは固定値を使用（CLAUDE.md 参照）

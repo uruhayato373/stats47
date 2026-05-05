@@ -14,19 +14,19 @@ import { metrics } from "./metrics";
 /**
  * 相関分析
  *
- * metric_x_id × metric_y_id の組み合わせで相関係数 (Pearson r) と部分相関を保持。
- * 旧テーブルは prefecture 想定 (entity_type 列なし)。
+ * metric_key_x × metric_key_y の組み合わせで相関係数 (Pearson r) と部分相関を保持。
+ * PR #211: metric_x_id/y_id (INTEGER) → metric_key_x/y (TEXT) に変更。
  */
 export const correlations = sqliteTable(
   "correlations",
   {
     id: integer("id").primaryKey({ autoIncrement: true }),
-    metricXId: integer("metric_x_id")
+    metricKeyX: text("metric_key_x")
       .notNull()
-      .references(() => metrics.id),
-    metricYId: integer("metric_y_id")
+      .references(() => metrics.key),
+    metricKeyY: text("metric_key_y")
       .notNull()
-      .references(() => metrics.id),
+      .references(() => metrics.key),
     yearX: text("year_x").notNull(),
     yearY: text("year_y").notNull(),
     pearsonR: real("pearson_r").notNull(),
@@ -39,13 +39,13 @@ export const correlations = sqliteTable(
   },
   (table) => ({
     unq: uniqueIndex("idx_correlations_pair_year").on(
-      table.metricXId,
-      table.metricYId,
+      table.metricKeyX,
+      table.metricKeyY,
       table.yearX,
       table.yearY
     ),
-    metricXIdx: index("idx_correlations_metric_x").on(table.metricXId),
-    metricYIdx: index("idx_correlations_metric_y").on(table.metricYId),
+    metricXIdx: index("idx_correlations_metric_x").on(table.metricKeyX),
+    metricYIdx: index("idx_correlations_metric_y").on(table.metricKeyY),
     yearXIdx: index("idx_correlations_year_x").on(table.yearX),
     yearYIdx: index("idx_correlations_year_y").on(table.yearY),
   })

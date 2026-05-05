@@ -2,7 +2,7 @@
  * 賃金構造基本統計調査 — 職種別年収データ投入スクリプト
  *
  * statsDataId=0003445758 から月給(tab:40)と賞与(tab:44)を取得し、
- * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して observations に INSERT する。
+ * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して stats に INSERT する。
  *
  * Usage:
  *   npx tsx packages/database/scripts/populate-occupation-income.ts
@@ -67,26 +67,15 @@ if (isDryRun) console.log("【DRY RUN】");
 
 // Prepared statements
 const upsertData = db.prepare(`
-  INSERT INTO observations (
-    metric_id, entity_type, entity_code, entity_name,
-    year_code, year_name, category_name, value_numeric, unit, rank
+  INSERT INTO stats (
+    metric_id, area_type, area_code,
+    year_code, value, rank
   )
-  VALUES (?, 'prefecture', ?, ?, ?, ?, ?, ?, '万円', ?)
-  ON CONFLICT(metric_id, entity_type, entity_code, year_code) DO UPDATE SET
-    value_numeric = excluded.value_numeric,
-    rank = excluded.rank,
-    unit = excluded.unit,
-    entity_name = excluded.entity_name,
-    year_name = excluded.year_name,
-    category_name = excluded.category_name
-`);
-
-const updateYears = db.prepare(`
-  UPDATE metrics SET
-    latest_year = ?,
-    available_years_json = ?,
-    updated_at = CURRENT_TIMESTAMP
-  WHERE key = ? AND area_type = 'prefecture'
+  VALUES (?, 'prefecture', ?,
+    ?, ?, ?)
+  ON CONFLICT(metric_id, area_type, area_code, year_code) DO UPDATE SET
+    value = excluded.value,
+    rank = excluded.rank
 `);
 
 const findIndicatorId = db.prepare(`
@@ -214,7 +203,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
   }
   console.log(`  年度: ${years[0]}〜${years[years.length - 1]} (${years.length}年)`);
 
-  // 4. observations 投入
+  // 4. stats 投入
   let totalInserted = 0;
 
   const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
@@ -240,23 +229,12 @@ async function processOccupation(def: OccupationDef): Promise<void> {
           sameCount++;
         }
 
-        const areaName = PREF_NAMES[prefCode] ?? prefCode;
-        const yearName = `${year}年`;
-        const categoryName = def.occupationName;
-
         if (!isDryRun) {
           const areaCode5 = prefCode + "000";
-          upsertData.run(metricId, areaCode5, areaName, year, yearName, categoryName, value, rank);
+          upsertData.run(metricId, areaCode5, year, value, rank);
         }
         totalInserted++;
       }
-    }
-
-    if (!isDryRun && years.length > 0) {
-      const latestYearCode = years[years.length - 1];
-      const latestYear = JSON.stringify({ yearCode: latestYearCode, yearName: `${latestYearCode}年度` });
-      const availableYears = JSON.stringify(years.map(y => ({ yearCode: y, yearName: `${y}年度` })));
-      updateYears.run(latestYear, availableYears, def.rankingKey);
     }
   });
 
@@ -272,8 +250,8 @@ async function processOccupation(def: OccupationDef): Promise<void> {
     const latestYear = years[years.length - 1];
     const top = db
       .prepare(
-        `SELECT o.entity_name AS area_name, o.value_numeric AS value, o.rank
-         FROM observations o
+        `SELECT o.area_code AS area_name, o.value, o.rank
+         FROM stats o
          INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
          ORDER BY o.rank LIMIT 3`
@@ -306,16 +284,13 @@ async function main() {
   for (const def of targets) {
     const count = db
       .prepare(
-        `SELECT COUNT(*) as c FROM observations o
+        `SELECT COUNT(*) as c FROM stats o
          INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture'`
       )
       .get(def.rankingKey) as any;
-    const item = db
-      .prepare("SELECT latest_year, available_years_json AS available_years FROM metrics WHERE key = ? AND area_type = 'prefecture'")
-      .get(def.rankingKey) as any;
     console.log(
-      `  ${def.rankingKey}: ${count.c}件, latest=${item?.latest_year}, years=${item?.available_years}`
+      `  ${def.rankingKey}: ${count.c}件`
     );
   }
 

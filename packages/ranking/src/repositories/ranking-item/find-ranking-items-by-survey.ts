@@ -17,7 +17,6 @@ export async function findRankingItemsBySurvey(
     const rows = await drizzleDb
       .select({
         rankingKey: metrics.key,
-        areaType: metrics.areaType,
         title: metrics.title,
         subtitle: metrics.subtitle,
         unit: metrics.unit,

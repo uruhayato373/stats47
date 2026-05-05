@@ -27,7 +27,7 @@ allowed-tools: Read, Grep, Glob, Bash
 
 ### Phase 2: 既存コンポーネント取得
 
-2. テーマの page_components + assignments を DB から取得（readonly）
+2. テーマの page_components を DB から取得（readonly）。`page_component_assignments` は廃止済み (PR #216)
 
 ### Phase 3: 重複チェック
 
@@ -44,7 +44,25 @@ const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b01
 
 ### Phase 4: 共有状況チェック
 
-5. テーマのチャートのうち、areas ページでも使われているもの（共有済み）と、テーマ専用のものを分類
+5. テーマのチャートのうち、areas ページでも使われているもの（共有済み）と、テーマ専用のものを分類:
+
+```bash
+node -e "
+const Database = require('better-sqlite3');
+const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
+const rows = db.prepare(\`
+  SELECT chart_key, title, component_type, section, sort_order
+  FROM page_components
+  WHERE page_type = 'theme' AND page_key = ?
+  ORDER BY section, sort_order
+\`).all('$ARGUMENTS');
+rows.forEach(r => {
+  const shared = db.prepare('SELECT COUNT(*) as cnt FROM page_components WHERE chart_key=? AND page_type != ?').get(r.chart_key, 'theme');
+  console.log((shared.cnt > 0 ? '[共有]' : '[専用]'), '[' + r.section + ']', r.chart_key, '|', r.component_type);
+});
+db.close();
+"
+```
 
 ### Phase 5: ギャップ分析
 

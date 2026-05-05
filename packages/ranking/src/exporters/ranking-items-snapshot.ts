@@ -1,9 +1,8 @@
 import "server-only";
 
-import { getDrizzle, metrics, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq, sql } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
 import { metricAsRankingItemSelection } from "../repositories/shared/metric-as-ranking-item-selection";
@@ -25,7 +24,7 @@ export interface ExportRankingItemsSnapshotResult {
  * metrics テーブルから RankingItemsSnapshot 形式で R2 に保存する (PR-5)
  *
  * 出力形式: snapshots/ranking-items/all.json
- * tags: taggings (taggable_type='metric') を indicator.id で join
+ * tags: metrics.tags (JSON配列) を直接使用
  *
  * dryRun=true の場合は R2 に書かず、JSON body と count のみ返す。
  */
@@ -39,29 +38,9 @@ export async function exportRankingItemsSnapshot(
   const drizzleDb = options.db ?? getDrizzle();
   const dryRun = options.dryRun ?? false;
 
-  const [rows, tagRows] = await Promise.all([
-    drizzleDb.select(metricAsRankingItemSelection).from(metrics),
-    drizzleDb
-      .select({
-        rankingKey: metrics.key,
-        areaType: metrics.areaType,
-        tagKey: taggings.tagKey,
-      })
-      .from(taggings)
-      .innerJoin(
-        metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
-      )
-      .where(eq(taggings.taggableType, "metric")),
-  ]);
-
-  const tagsByItem = new Map<string, { tagKey: string }[]>();
-  for (const t of tagRows) {
-    const key = `${t.rankingKey}|${t.areaType}`;
-    const list = tagsByItem.get(key) ?? [];
-    list.push({ tagKey: t.tagKey });
-    tagsByItem.set(key, list);
-  }
+  const rows = await drizzleDb
+    .select({ ...metricAsRankingItemSelection, tags: metrics.tags })
+    .from(metrics);
 
   const items: RankingItem[] = [];
   let parseFailures = 0;
@@ -71,16 +50,16 @@ export async function exportRankingItemsSnapshot(
         ...row,
         data_source_id: "estat",
       });
-      const tagKey = `${parsed.rankingKey}|${parsed.areaType}`;
-      const tags = tagsByItem.get(tagKey);
-      if (tags && tags.length > 0) parsed.tags = tags;
+      const tagKeys = JSON.parse(row.tags ?? "[]") as string[];
+      if (tagKeys.length > 0) {
+        parsed.tags = tagKeys.map((tagKey) => ({ tagKey }));
+      }
       items.push(parsed);
     } catch (error) {
       parseFailures++;
       logger.warn(
         {
           rankingKey: row.ranking_key,
-          areaType: row.area_type,
           error: error instanceof Error ? error.message : String(error),
         },
         "metrics: parseRankingItemDB が失敗。スキップ",
@@ -88,10 +67,7 @@ export async function exportRankingItemsSnapshot(
     }
   }
 
-  items.sort((a, b) => {
-    if (a.rankingKey !== b.rankingKey) return a.rankingKey < b.rankingKey ? -1 : 1;
-    return a.areaType < b.areaType ? -1 : a.areaType > b.areaType ? 1 : 0;
-  });
+  items.sort((a, b) => a.rankingKey < b.rankingKey ? -1 : a.rankingKey > b.rankingKey ? 1 : 0);
 
   const snapshot: RankingItemsSnapshot = {
     generatedAt: new Date().toISOString(),

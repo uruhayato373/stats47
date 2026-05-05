@@ -1,7 +1,7 @@
 /**
  * Blog snapshot exporter
  *
- * D1 articles / taggings / tags をローカル SQLite から読み、
+ * D1 articles をローカル SQLite から読み、
  * `snapshots/blog/all.json` を R2 に書き出す。
  *
  * 使用方法: npx tsx scripts/export-blog-snapshot.ts
@@ -9,7 +9,6 @@
 
 import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/better-sqlite3";
-import { eq } from "drizzle-orm";
 import fs from "fs";
 import path from "path";
 import BetterSqlite3 from "better-sqlite3";
@@ -47,56 +46,21 @@ async function main() {
   const db = drizzle(sqlite, { schema });
 
   const articleRows = await db.select().from(schema.articles);
-  const articleTagRows = await db
-    .select({
-      slug: schema.taggings.taggableId,
-      tagKey: schema.taggings.tagKey,
-      tagName: schema.tags.tagName,
-    })
-    .from(schema.taggings)
-    .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
-    .where(eq(schema.taggings.taggableType, "article"));
-
-  const tagsBySlug = new Map<string, Array<{ tagKey: string; tagName: string }>>();
-  for (const row of articleTagRows) {
-    const list = tagsBySlug.get(row.slug);
-    const entry = { tagKey: row.tagKey, tagName: row.tagName };
-    if (list) {
-      list.push(entry);
-    } else {
-      tagsBySlug.set(row.slug, [entry]);
-    }
-  }
 
   const snapshotArticles: SnapshotArticle[] = articleRows.map((a) => ({
     ...a,
-    tags: tagsBySlug.get(a.slug) ?? [],
+    tags: (JSON.parse(a.tags ?? "[]") as string[]).map((tagKey) => ({ tagKey })),
   }));
 
-  const tagMetaCounter = new Map<
-    string,
-    { tagName: string; articleCount: number }
-  >();
+  const tagMetaCounter = new Map<string, number>();
   for (const a of snapshotArticles) {
     if (!a.published) continue;
     for (const t of a.tags) {
-      const existing = tagMetaCounter.get(t.tagKey);
-      if (existing) {
-        existing.articleCount++;
-      } else {
-        tagMetaCounter.set(t.tagKey, {
-          tagName: t.tagName,
-          articleCount: 1,
-        });
-      }
+      tagMetaCounter.set(t.tagKey, (tagMetaCounter.get(t.tagKey) ?? 0) + 1);
     }
   }
   const tagMeta: SnapshotTagMeta[] = [...tagMetaCounter.entries()]
-    .map(([tagKey, { tagName, articleCount }]) => ({
-      tagKey,
-      tagName,
-      articleCount,
-    }))
+    .map(([tagKey, articleCount]) => ({ tagKey, articleCount }))
     .sort((a, b) => b.articleCount - a.articleCount);
 
   const snapshot: BlogSnapshot = {

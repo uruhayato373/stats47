@@ -93,3 +93,15 @@ npx vitest run --reporter=verbose 2>&1 | tail -5
 
 - `apps/web/tests/README.md` — テスト構成・追加指針
 - `.claude/rules/coding-standards.md` — AAA パターン・命名規則
+
+## Output Contract
+
+呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+
+通常: **Template A** (table-only)
+- 列: `Test | Phase (Red/Green/Refactor) | Status | Next Step`
+- Reason / Notes 列で 8 words 以内の根拠を許容
+- prose / section header / 前置き文 はすべて禁止
+
+例外: **Template C** (report) を使う場面
+- テスト戦略の設計総括 (モック方針など)

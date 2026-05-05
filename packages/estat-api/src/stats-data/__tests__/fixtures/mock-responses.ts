@@ -35,8 +35,7 @@ export const mockStatsSchemas: StatsSchema[] = [
     yearCode: '2024',
     yearName: '2024年',
 
-    categoryCode: 'A01',
-    categoryName: '総人口',
+    metricKey: 'A01',
     value: 14000000,
     unit: '人',
   },
@@ -46,8 +45,7 @@ export const mockStatsSchemas: StatsSchema[] = [
     yearCode: '2024',
     yearName: '2024年',
 
-    categoryCode: 'A01',
-    categoryName: '総人口',
+    metricKey: 'A01',
     value: 9200000,
     unit: '人',
   },

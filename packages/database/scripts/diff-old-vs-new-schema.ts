@@ -1,7 +1,7 @@
 /**
  * 3 層化スキーマ移行 (PR-3) の並行運用検証スクリプト
  *
- * 旧 ranking_items / ranking_data と新 indicators / observations の整合性を
+ * 旧 ranking_items / ranking_data と新 indicators / stats の整合性を
  * 行数 + サンプル値の両面で確認する。
  *
  * 実行方法:
@@ -10,7 +10,7 @@
  * 検証項目:
  * 1. ranking_items 行数 vs indicators 行数（ranking_items が indicators の subset であること）
  * 2. ranking_items の (key, area_type) が全て indicators に存在すること
- * 3. ranking_data 100 サンプルが observations と数値一致すること
+ * 3. ranking_data 100 サンプルが stats と数値一致すること
  */
 
 import Database from "better-sqlite3";
@@ -62,7 +62,7 @@ function run(): CheckResult[] {
     detail: `missing=${missing}`,
   });
 
-  // 3. ranking_data vs observations の値一致 (sample 100)
+  // 3. ranking_data vs stats の値一致 (sample 100)
   const sample = db
     .prepare(
       `SELECT
@@ -76,7 +76,7 @@ function run(): CheckResult[] {
          ON ri.ranking_key = rd.category_code AND ri.area_type = rd.area_type
        JOIN indicators i
          ON i.key = ri.ranking_key AND i.area_type = ri.area_type
-       JOIN observations o
+       JOIN stats o
          ON o.indicator_id = i.id
         AND o.entity_type = rd.area_type
         AND o.entity_code = rd.area_code
@@ -95,7 +95,7 @@ function run(): CheckResult[] {
     (r) => Math.abs((r.old_v ?? 0) - (r.new_v ?? 0)) > 0.0001
   );
   results.push({
-    name: "value parity (sample 100 ranking_data vs observations)",
+    name: "value parity (sample 100 ranking_data vs stats)",
     pass: mismatches.length === 0,
     detail: `sampled=${sample.length} mismatches=${mismatches.length}`,
   });

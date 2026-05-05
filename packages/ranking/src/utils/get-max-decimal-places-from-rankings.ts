@@ -24,6 +24,6 @@ export function getMaxDecimalPlacesFromRankings(
 ): number {
   if (data.length === 0) return 0;
 
-  const values = data.map((item) => item.value);
+  const values = data.map((item) => item.value).filter((v): v is number => v !== null);
   return getMaxDecimalPlaces(values);
 }

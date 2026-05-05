@@ -4,7 +4,7 @@ import { metrics } from "@stats47/database/server";
 import { sql, type SQL } from "drizzle-orm";
 
 /**
- * metrics.id を受け取り、observations から
+ * metrics.key を使い、stats から
  * latest_year / available_years JSON を動的計算する SQL fragment を返す。
  *
  * yearName は "年度" で統一。10-char e-Stat 生コード ("2023100000") は
@@ -17,7 +17,7 @@ export const latestYearSql: SQL<string | null> = sql<string | null>`(
     'yearCode', substr(MAX(year_code), 1, 4),
     'yearName', substr(MAX(year_code), 1, 4) || '年度'
   ) END
-  FROM observations WHERE metric_id = ${metrics.id}
+  FROM stats WHERE metric_key = ${metrics.key}
 )`;
 
 export const availableYearsSql: SQL<string | null> = sql<string | null>`(
@@ -27,7 +27,7 @@ export const availableYearsSql: SQL<string | null> = sql<string | null>`(
   ))
   FROM (
     SELECT DISTINCT substr(year_code, 1, 4) AS year_code_4
-    FROM observations WHERE metric_id = ${metrics.id}
+    FROM stats WHERE metric_key = ${metrics.key}
     ORDER BY year_code_4 DESC
   )
 )`;

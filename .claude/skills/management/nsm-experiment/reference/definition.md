@@ -97,5 +97,5 @@ NSM（週間エンゲージドセッション数）
 
 - `[Critical Review] North Star Metric` Issue（`critical-review` ラベル） — NSM の完全な定義（戦略側の真実源）
 - `[Critical Review] Growth Loops` Issue（`critical-review` ラベル） — 成長ループ設計
-- `.claude/skills/management/nsm-experiment/references/playbook.md` — 実験パターンカタログ
-- `.claude/skills/management/nsm-experiment/references/rubric.md` — 優先順位評価軸
+- `.claude/skills/management/nsm-experiment/reference/playbook.md` — 実験パターンカタログ
+- `.claude/skills/management/nsm-experiment/reference/rubric.md` — 優先順位評価軸

@@ -1,0 +1,79 @@
+{
+  "date": "2026-05-03",
+  "fetched_at": "2026-05-04T18:02:38.285Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 13738,
+    "totalErrors": 6,
+    "totalSubrequests": 5610,
+    "byScript": {
+      "stats47": {
+        "requests": 13738,
+        "errors": 6,
+        "subrequests": 5610,
+        "cpu_p50_us": 42761,
+        "cpu_p99_us": 3076288,
+        "wall_p50_us": 226411,
+        "wall_p99_us": 7626492
+      }
+    }
+  },
+  "r2_operations": {
+    "classA": 325,
+    "classB": 55734,
+    "otherOps": 0,
+    "totalEgressBytes": 48185066072,
+    "byBucket": {
+      "stats47": {
+        "classA": 325,
+        "classB": 53982,
+        "other": 0,
+        "egressBytes": 48162654446
+      },
+      "doboku-note": {
+        "classA": 0,
+        "classB": 1752,
+        "other": 0,
+        "egressBytes": 22411626
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 13063370336,
+    "totalObjects": 59254,
+    "byBucket": {
+      "stats47": {
+        "bytes": 11881321297,
+        "objects": 50233,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 657249967,
+        "objects": 6390,
+        "uploads": 0
+      },
+      "kakkom": {
+        "bytes": 524799072,
+        "objects": 2631,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "obsidian-pdf": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
+import { getDrizzle, metrics, stats } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
-import { count, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import type { RankingItemCounts } from "../../types";
 
 export async function getRankingItemStats(
@@ -12,13 +12,14 @@ export async function getRankingItemStats(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select({
-        areaType: metrics.areaType,
-        total: count(),
-        active: sql<number>`SUM(CASE WHEN ${metrics.isActive} = 1 THEN 1 ELSE 0 END)`,
-        inactive: sql<number>`SUM(CASE WHEN ${metrics.isActive} = 0 THEN 1 ELSE 0 END)`,
+        areaType: stats.areaType,
+        total: sql<number>`COUNT(DISTINCT ${stats.metricKey})`,
+        active: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 1 THEN ${stats.metricKey} END)`,
+        inactive: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 0 THEN ${stats.metricKey} END)`,
       })
-      .from(metrics)
-      .groupBy(metrics.areaType);
+      .from(stats)
+      .innerJoin(metrics, eq(stats.metricKey, metrics.key))
+      .groupBy(stats.areaType);
 
     return ok(
       rows.map((row) => ({

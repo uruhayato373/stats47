@@ -1,14 +1,21 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { RankingItem, RankingValue } from "../../types";
-import { computeNormalization } from "../compute-normalization";
 
+vi.mock("server-only", () => ({}));
+vi.mock("@stats47/logger/server", () => ({
+  logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
+}));
 vi.mock("../../repositories/ranking-item", () => ({
   findRankingItemByKey: vi.fn(),
 }));
-
 vi.mock("../../repositories/ranking-value", () => ({
   listRankingValues: vi.fn(),
 }));
+vi.mock("../fetch-ranking-values-on-demand", () => ({
+  fetchRankingValuesOnDemand: vi.fn().mockResolvedValue([]),
+}));
+
+import type { RankingItem, RankingValue } from "../../types";
+import { computeNormalization } from "../compute-normalization";
 
 import { findRankingItemByKey } from "../../repositories/ranking-item";
 import { listRankingValues } from "../../repositories/ranking-value";
@@ -19,8 +26,7 @@ const makeValue = (areaCode: string, value: number): RankingValue => ({
   areaType: "prefecture",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "test",
-  categoryName: "テスト",
+  metricKey: "test",
   value,
   unit: "人",
   rank: 1,

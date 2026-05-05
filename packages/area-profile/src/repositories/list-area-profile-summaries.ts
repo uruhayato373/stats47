@@ -12,15 +12,15 @@ export async function listAreaProfileSummaries(): Promise<AreaProfileSummary[]> 
 
   const rows = await db
     .select({
-      areaCode: areaProfiles.entityCode,
-      areaName: areaProfiles.entityName,
+      areaCode: areaProfiles.areaCode,
+      areaName: areaProfiles.areaName,
       strengthCount: sql<number>`SUM(CASE WHEN ${areaProfiles.type} = 'strength' THEN 1 ELSE 0 END)`,
       weaknessCount: sql<number>`SUM(CASE WHEN ${areaProfiles.type} = 'weakness' THEN 1 ELSE 0 END)`,
     })
     .from(areaProfiles)
-    .where(eq(areaProfiles.entityType, "prefecture"))
-    .groupBy(areaProfiles.entityCode, areaProfiles.entityName)
-    .orderBy(areaProfiles.entityCode);
+    .where(eq(areaProfiles.areaType, "prefecture"))
+    .groupBy(areaProfiles.areaCode, areaProfiles.areaName)
+    .orderBy(areaProfiles.areaCode);
 
   return rows.map((r) => ({
     areaCode: r.areaCode,

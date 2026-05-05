@@ -19,28 +19,26 @@
  */
 
 export interface StatsSchema {
+  metricKey: string;
   areaCode: string;
   areaName: string;
   yearCode: string;
   yearName: string;
-  categoryCode: string;
-  categoryName: string;
-  value: number;
+  value: number | null;
   unit: string;
 }
 
-/** StatsSchema の次元キー */
-export type DimensionKey = "areaCode" | "yearCode" | "categoryCode";
+/** StatsSchema の次元キー（メトリクスキーはファセット軸として使わないため除外） */
+export type DimensionKey = "areaCode" | "yearCode";
 
 interface LabeledItem {
   code: string;
   name: string;
 }
 
-const NAME_KEY: Record<DimensionKey, "areaName" | "yearName" | "categoryName"> = {
+const NAME_KEY: Record<DimensionKey, "areaName" | "yearName"> = {
   areaCode: "areaName",
   yearCode: "yearName",
-  categoryCode: "categoryName",
 };
 
 /**
@@ -64,6 +62,7 @@ export function buildValueMap(
 ): Map<string, Map<string, number>> {
   const map = new Map<string, Map<string, number>>();
   for (const d of data) {
+    if (d.value === null) continue;
     if (!map.has(d[xKey])) map.set(d[xKey], new Map());
     map.get(d[xKey])!.set(d[seriesKey], d.value);
   }
@@ -79,10 +78,10 @@ export function toWorstItems(
   data: StatsSchema[],
   n = 10,
 ): { label: string; value: number }[] {
-  return data.slice(0, n).map((d, i) => ({
-    label: `${i + 1}位 ${d.areaName}`,
-    value: d.value,
-  }));
+  return data
+    .filter((d): d is StatsSchema & { value: number } => d.value !== null)
+    .slice(0, n)
+    .map((d, i) => ({ label: `${i + 1}位 ${d.areaName}`, value: d.value }));
 }
 
 /**
@@ -92,13 +91,11 @@ export function toBestItems(
   data: StatsSchema[],
   n = 10,
 ): { label: string; value: number }[] {
-  return [...data]
+  const nonNull = data.filter((d): d is StatsSchema & { value: number } => d.value !== null);
+  return [...nonNull]
     .slice(-n)
     .reverse()
-    .map((d, i) => ({
-      label: `${i + 1}位 ${d.areaName}`,
-      value: d.value,
-    }));
+    .map((d, i) => ({ label: `${i + 1}位 ${d.areaName}`, value: d.value }));
 }
 
 /**
@@ -122,11 +119,9 @@ export function toSplitItems(
 export function toChoroplethItems(
   data: StatsSchema[],
 ): { code: string; name: string; value: number }[] {
-  return data.map((d) => ({
-    code: d.areaCode,
-    name: d.areaName,
-    value: d.value,
-  }));
+  return data
+    .filter((d): d is StatsSchema & { value: number } => d.value !== null)
+    .map((d) => ({ code: d.areaCode, name: d.areaName, value: d.value }));
 }
 
 /**
@@ -137,8 +132,9 @@ export function joinStats(
   xData: StatsSchema[],
   yData: StatsSchema[],
 ): { name: string; code: string; x: number; y: number }[] {
-  const yMap = new Map(yData.map((d) => [d.areaCode, d.value]));
+  const yMap = new Map(yData.filter((d) => d.value !== null).map((d) => [d.areaCode, d.value as number]));
   return xData
-    .map((d) => ({ name: d.areaName, code: d.areaCode, x: d.value, y: yMap.get(d.areaCode) }))
+    .filter((d) => d.value !== null)
+    .map((d) => ({ name: d.areaName, code: d.areaCode, x: d.value as number, y: yMap.get(d.areaCode) }))
     .filter((p): p is { name: string; code: string; x: number; y: number } => p.y !== undefined);
 }

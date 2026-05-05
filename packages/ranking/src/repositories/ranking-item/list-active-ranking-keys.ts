@@ -1,10 +1,12 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
+import { getDrizzle, metrics, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { and, eq, exists } from "drizzle-orm";
+
+type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
 export async function listActiveRankingKeys(
   areaType: AreaType,
@@ -13,10 +15,22 @@ export async function listActiveRankingKeys(
   try {
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
-      .select({ rankingKey: metrics.key, areaType: metrics.areaType })
+      .select({ rankingKey: metrics.key })
       .from(metrics)
-      .where(and(eq(metrics.areaType, areaType), eq(metrics.isActive, true)));
-    return ok(results);
+      .where(
+        and(
+          exists(
+            drizzleDb.select({ metricKey: stats.metricKey })
+              .from(stats)
+              .where(and(
+                eq(stats.metricKey, metrics.key),
+                eq(stats.areaType, areaType as ValidAreaType)
+              ))
+          ),
+          eq(metrics.isActive, true)
+        )
+      );
+    return ok(results.map((r) => ({ rankingKey: r.rankingKey, areaType })));
   } catch (error) {
     logger.error({ error, areaType }, "listActiveRankingKeys: failed");
     return err(error instanceof Error ? error : new Error(String(error)));

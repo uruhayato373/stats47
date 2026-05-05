@@ -71,8 +71,6 @@ export async function syncRankingExport(
             rankingKey,
             areaType,
             latestYear.yearCode,
-            latestYear.yearName,
-            rankingItem.title,
             latestValues
           );
           if (upsertResult.success) {

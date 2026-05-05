@@ -13,7 +13,6 @@ export async function upsertRankingItem(
   try {
     const dbItem = {
       key: item.rankingKey,
-      areaType: item.areaType,
       title: item.title,
       unit: item.unit,
       subtitle: item.subtitle ?? null,
@@ -37,7 +36,7 @@ export async function upsertRankingItem(
       .insert(metrics)
       .values(dbItem)
       .onConflictDoUpdate({
-        target: [metrics.key, metrics.areaType],
+        target: [metrics.key],
         set: {
           title: dbItem.title,
           unit: dbItem.unit,

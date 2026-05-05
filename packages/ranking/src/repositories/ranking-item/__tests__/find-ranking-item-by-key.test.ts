@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  rankingItems: {},
+  metrics: {},
 }));
 vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
@@ -13,6 +13,12 @@ vi.mock("../../schemas/ranking-items.schemas", () => ({
 }));
 vi.mock("../../shared/ranking-item-selection", () => ({
   rankingItemSelection: {},
+}));
+vi.mock("../../shared/parse-metric-as-ranking-item", () => ({
+  parseMetricAsRankingItem: vi.fn((row: any) => row),
+}));
+vi.mock("../../shared/metric-as-ranking-item-selection", () => ({
+  metricAsRankingItemSelection: {},
 }));
 
 import { findRankingItemByKey } from "../find-ranking-item-by-key";

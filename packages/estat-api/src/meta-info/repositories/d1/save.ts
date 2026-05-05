@@ -29,9 +29,15 @@ export async function save(
         itemNamePrefix: input.itemNamePrefix,
         memo: input.memo,
         categoryFilters: input.categoryFilters,
+        govOrg: input.govOrg,
+        statsField: input.statsField,
+        cycle: input.cycle,
+        surveyDate: input.surveyDate,
+        categoryKey: input.categoryKey,
+        classInf: input.classInf,
         createdAt: now,
         updatedAt: now,
-        isActive: true, // 新規作成時は有効
+        isActive: true,
         status: "registered",
       })
       .onConflictDoUpdate({
@@ -41,16 +47,15 @@ export async function save(
           title: sql`excluded.title`,
           areaType: sql`excluded.area_type`,
           description: sql`excluded.description`,
-          // COALESCE(excluded.x, x) は Drizzle では set 句で値を指定しない場合更新されないので、
-          // 明示的に更新したい項目のみ指定するか、下記のように記述する。
-          // 元のSQLは COALESCE(excluded.prefix, prefix) なので、入力がnullなら元の値を維持、入力があれば更新という意味。
-          // しかし insert values には input の値を入れているので excluded には必ず input の値が入る。
-          // inputの値が undefined/null の場合、valuesにnullが入る。
-          // Drizzleのvalues()でundefinedは無視される挙動ではないので、明示的に sql`` を使う。
-
           itemNamePrefix: sql`COALESCE(excluded.item_name_prefix, ${estatMetainfo.itemNamePrefix})`,
           memo: sql`COALESCE(excluded.memo, ${estatMetainfo.memo})`,
           categoryFilters: sql`COALESCE(excluded.category_filters, ${estatMetainfo.categoryFilters})`,
+          govOrg: sql`COALESCE(excluded.gov_org, ${estatMetainfo.govOrg})`,
+          statsField: sql`COALESCE(excluded.stats_field, ${estatMetainfo.statsField})`,
+          cycle: sql`COALESCE(excluded.cycle, ${estatMetainfo.cycle})`,
+          surveyDate: sql`COALESCE(excluded.survey_date, ${estatMetainfo.surveyDate})`,
+          categoryKey: sql`COALESCE(excluded.category_key, ${estatMetainfo.categoryKey})`,
+          classInf: sql`COALESCE(excluded.class_inf, ${estatMetainfo.classInf})`,
           updatedAt: sql`excluded.updated_at`,
           status: sql`'registered'`,
           isActive: sql`1`,

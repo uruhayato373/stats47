@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -17,40 +17,36 @@ export async function listRankingValues(
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
       .select({
-        areaType: observations.entityType,
-        areaCode: observations.entityCode,
-        areaName: observations.entityName,
-        yearCode: observations.yearCode,
-        yearName: observations.yearName,
-        categoryCode: metrics.key,
-        categoryName: observations.categoryName,
-        value: observations.valueNumeric,
-        unit: observations.unit,
-        rank: observations.rank,
+        areaCode: stats.areaCode,
+        areaName: stats.areaName,
+        yearCode: stats.yearCode,
+        yearName: stats.yearName,
+        metricKey: stats.metricKey,
+        value: stats.value,
+        unit: stats.unit,
+        rank: stats.rank,
       })
-      .from(observations)
-      .innerJoin(metrics, eq(observations.metricId, metrics.id))
+      .from(stats)
       .where(
         and(
-          eq(metrics.key, rankingKey),
-          eq(metrics.areaType, areaType),
+          eq(stats.metricKey, rankingKey),
+          eq(stats.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"),
           or(
-            eq(observations.yearCode, yearCode),
-            like(observations.yearCode, `${yearCode}%`)
+            eq(stats.yearCode, yearCode),
+            like(stats.yearCode, `${yearCode}%`)
           )
         )
       );
 
     const values: RankingValue[] = result.map((row) => ({
-      areaType: row.areaType as AreaType,
-      areaCode: row.areaCode || "",
-      areaName: row.areaName || "",
-      yearCode: row.yearCode ? String(row.yearCode) : "",
-      yearName: row.yearName || `${row.yearCode}年度`,
-      categoryCode: row.categoryCode || "",
-      categoryName: row.categoryName || "",
-      value: row.value !== null ? Number(row.value) : 0,
-      unit: row.unit || "",
+      areaType,
+      areaCode: row.areaCode ?? "",
+      areaName: row.areaName ?? "",
+      yearCode: String(row.yearCode ?? ""),
+      yearName: row.yearName ?? "",
+      metricKey: row.metricKey ?? "",
+      value: row.value != null ? Number(row.value) : 0,
+      unit: row.unit ?? "",
       rank: row.rank != null ? Number(row.rank) : 0,
     }));
 

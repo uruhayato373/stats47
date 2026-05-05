@@ -9,7 +9,6 @@ import { availableYearsSql, latestYearSql } from "../shared/derive-years-sql";
 
 export interface CategoryRankingItem {
   rankingKey: string;
-  areaType: string;
   title: string;
   subtitle: string | null;
   unit: string;
@@ -31,7 +30,6 @@ export async function findRankingItemsByCategory(
     const rows = await drizzleDb
       .select({
         rankingKey: metrics.key,
-        areaType: metrics.areaType,
         title: metrics.title,
         subtitle: metrics.subtitle,
         unit: metrics.unit,

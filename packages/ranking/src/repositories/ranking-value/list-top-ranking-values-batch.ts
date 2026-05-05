@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -28,24 +28,21 @@ export async function listTopRankingValuesBatch(
 
     const result = await drizzleDb
       .select({
-        areaType: observations.entityType,
-        areaCode: observations.entityCode,
-        areaName: observations.entityName,
-        yearCode: observations.yearCode,
-        yearName: observations.yearName,
-        categoryCode: metrics.key,
-        categoryName: observations.categoryName,
-        value: observations.valueNumeric,
-        unit: observations.unit,
-        rank: observations.rank,
+        areaCode: stats.areaCode,
+        areaName: stats.areaName,
+        yearCode: stats.yearCode,
+        yearName: stats.yearName,
+        metricKey: stats.metricKey,
+        value: stats.value,
+        unit: stats.unit,
+        rank: stats.rank,
       })
-      .from(observations)
-      .innerJoin(metrics, eq(observations.metricId, metrics.id))
+      .from(stats)
       .where(
         and(
-          inArray(metrics.key, rankingKeys),
-          eq(metrics.areaType, areaType),
-          eq(observations.rank, 1)
+          inArray(stats.metricKey, rankingKeys),
+          eq(stats.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"),
+          eq(stats.rank, 1)
         )
       );
 
@@ -53,19 +50,18 @@ export async function listTopRankingValuesBatch(
     const topMap = new Map<string, RankingValue>();
 
     for (const row of result) {
-      const key = row.categoryCode || "";
+      const key = row.metricKey;
       const expectedYear = yearByKey.get(key);
       if (expectedYear && String(row.yearCode) === expectedYear) {
         topMap.set(key, {
-          areaType: row.areaType as AreaType,
-          areaCode: row.areaCode || "",
-          areaName: row.areaName || "",
-          yearCode: row.yearCode ? String(row.yearCode) : "",
-          yearName: row.yearName || `${row.yearCode}年度`,
-          categoryCode: key,
-          categoryName: row.categoryName || "",
+          areaType,
+          areaCode: row.areaCode,
+          areaName: row.areaName,
+          yearCode: String(row.yearCode),
+          yearName: row.yearName,
+          metricKey: key,
           value: row.value !== null ? Number(row.value) : 0,
-          unit: row.unit || "",
+          unit: row.unit,
           rank: row.rank != null ? Number(row.rank) : 0,
         });
       }

@@ -106,7 +106,7 @@ disable-model-invocation: true
       47位: 沖縄県 (105,380 人泊)
 
    次のステップ:
-   - /sync-remote-d1 でリモート D1 に反映
+   - /sync-snapshots でスナップショット更新・本番反映
    - 記事に <source-link href="/ranking/total-overnight-guests-ryokan"> を追加
    - 相関分析に含めるには correlation バッチを再実行
    ```
@@ -131,7 +131,7 @@ disable-model-invocation: true
 
 12. 一時スクリプトがあれば削除
 13. ユーザーに次のアクション候補を提示:
-    - `/sync-remote-d1` — リモート反映
+    - `/sync-snapshots` — スナップショット更新・本番反映
     - `/deploy` — known-ranking-keys.ts と合わせて本番デプロイ
     - 記事への `<source-link>` 追加
     - 相関分析バッチの再実行
@@ -150,4 +150,4 @@ disable-model-invocation: true
 - `/inspect-estat-meta` — メタデータ調査（cdCat01 を特定）
 - `/fetch-estat-data` — ランキング形式データの手動取得
 - `/populate-all-rankings` — 全キー一括投入
-- `/sync-remote-d1` — リモート D1 へ反映
+- `/sync-snapshots` — R2 スナップショット更新・本番反映

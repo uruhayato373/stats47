@@ -107,23 +107,6 @@ user-invocable: false
 
 ---
 
-## pull-remote-d1 はスキーマ差分で大量失敗する
-
-**問題**: `/pull-remote-d1` で全テーブル pull したところ、3 テーブルがスキーマ差分でエラー、1 テーブルがネットワーク中断で部分 INSERT のまま停止した。修復に手作業が多く発生し、同期作業全体に数時間を要した。
-
-- `articles`: リモートに `seo_title` カラムが追加されていた → `has no column named seo_title`
-- `comparison_components`: リモートの CHECK 制約に `composition-chart` が追加されていた → `CHECK constraint failed`
-- `indicator_tags`: リモートでカラム名が `tag` → `tag_key` に変更、`tags` テーブルへの FK 追加 → `has no column named tag_key`
-- `tags`, `article_tags`: リモートにのみ存在する新テーブル → `[SKIP]` で無視されたが、pull 後に ranking_tags の FK 先がなく問題に
-- `correlations`: 58,511 行中 33,500 行で企業ネットワークのタイムアウト → 手動 `--offset` で再開
-- `observations`: 3,084,967 行中 1,005,000 行で同上
-
-**原因**: `/diff-d1` がデータ差分のみ比較しスキーマ差分を検知しなかった。別 PC でスキーマ変更（マイグレーション適用）されていたが、ローカルにはその変更が反映されていなかった。
-
-**対策**: (1) **pull 前にスキーマ比較を行う**（`/pull-remote-d1` SKILL.md に手順を追加済み）。リモートとローカルの `CREATE TABLE` 文を比較し、差分があれば `ALTER TABLE` やテーブル再作成で先に解消する。(2) `/diff-d1` SKILL.md にスキーマ差分は検知できない旨を明記済み。(3) 大量テーブルの中断時は `--offset` で再開できる。
-
----
-
 ## ranking_items / ranking_data のフォーマット不一致で本番 404・地図グレー表示
 
 **問題**: 職種別年収ランキング 40 件が本番で 404（`findRankingItem` の Zod パースエラー）。さらにコロプレス地図が全都道府県グレー表示（TopoJSON の `prefCode` とマッチしない）。過去にも家計調査系 675 件で同じ 404 が発生。

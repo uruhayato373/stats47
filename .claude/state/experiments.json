@@ -26,7 +26,7 @@
         "ga4_weekly_engaged_sessions_2026_w15": 13,
         "gsc_weekly_clicks_2026_w15": 98
       },
-      "status": "running",
+      "status": "measuring",
       "created_at": "2026-04-14T00:00:00.000Z",
       "started_at": "2026-04-14T00:00:00.000Z",
       "result": null,
@@ -39,8 +39,26 @@
         "（ユーザー作業）GSC UI で sitemap 再送信、カバレッジレポートの『修正をリクエスト』",
         "28 日後に target_metric delta を measure"
       ],
-      "pending_user_actions": [],
-      "next_check_date": "2026-04-28",
+      "pending_user_actions": [
+        {
+          "action": "GSC カバレッジレポート W18/W19 を手動エクスポートして full_count_estimate を記録",
+          "reference": ".claude/state/metrics/gsc/coverage-drilldown/history.csv の full_count_estimate_total カラムに手入力",
+          "description": "GSC UI → 検索パフォーマンス → インデックス → カバレッジ → 各エラーカテゴリのドリルダウン → エクスポート。実数（404, 5xx, crawled-not-indexed, soft-404）を取得して baseline 10,553 との delta を確定すること"
+        }
+      ],
+      "next_check_date": "2026-05-12",
+      "measuring_observations": {
+        "date": "2026-05-05",
+        "elapsed_days": 21,
+        "gsc_weekly_clicks_w18": 589,
+        "gsc_weekly_clicks_baseline_w15": 98,
+        "clicks_delta_pct": 501,
+        "ga4_engaged_sessions_w19_partial": 427,
+        "ga4_engaged_sessions_baseline_w15": 13,
+        "coverage_errors_current": null,
+        "coverage_errors_note": "W17 export (2026-04-25) では各カテゴリ 1000 件上限サンプルのため実数不明。GSC UI から W18/W19 の実数エクスポートが必要。",
+        "secondary_indicators": "clicks +501% (W15 baseline 98 → W18 589) は強い正の反応。coverage error 実数は未確定のため effect/* ラベル保留"
+      },
       "history": [
         {
           "date": "2026-04-14T00:00:00.000Z",
@@ -66,6 +84,11 @@
           "date": "2026-04-20T00:00:00.000Z",
           "action": "pending_actions_completed",
           "summary": "GSC UI 手動作業 2 件（sitemap.xml 再送信 / カバレッジ『修正をリクエスト』）をユーザーが完了。4/28 の FINAL 観測を待つ状態に移行"
+        },
+        {
+          "date": "2026-05-05T00:00:00.000Z",
+          "action": "measuring",
+          "summary": "21 日経過で measuring へ遷移。clicks +501% (W15→W18) と engaged sessions +3184% の急回復を観測。ただし coverage error 実数（gsc_index_errors_total の現在値）は W17 エクスポートが上限 1000 サンプルのため未確定。GSC UI から W18/W19 実数エクスポート後に effect/* ラベルを確定する。"
         }
       ]
     },
@@ -157,7 +180,7 @@
         "crux_lcp_p75": 4406,
         "crux_ttfb_p75": 2390
       },
-      "status": "in_progress",
+      "status": "measuring",
       "created_at": "2026-04-26T00:00:00.000Z",
       "started_at": "2026-04-26T00:00:00.000Z",
       "verification_command": "curl 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/&strategy=mobile&category=performance' | jq '.lighthouseResult.audits[\"largest-contentful-paint\"].numericValue, .lighthouseResult.audits[\"largest-contentful-paint-element\"].details.items[0].node.snippet'",
@@ -167,13 +190,29 @@
         "デプロイ後 PSI 自動計測 (.claude/state/metrics/psi/LATEST.md) で実測"
       ],
       "pending_user_actions": [],
-      "next_check_date": "2026-04-27",
+      "next_check_date": "2026-05-12",
       "fail_criteria": "LCP > 5,000ms または lcp_element が banner 以外の意図しない要素になっている場合 → 仮説棄却。banner 削除や hero 要素の強化を検討。",
+      "measuring_observations": {
+        "date": "2026-05-05",
+        "elapsed_days": 9,
+        "psi_lcp_home_mobile_current": 14557,
+        "psi_lcp_home_mobile_baseline": 8251,
+        "lcp_delta_ms": 6306,
+        "lcp_delta_pct": 76.4,
+        "verdict_preliminary": "ADVERSE candidate",
+        "confounding_factor": "D1→R2 移行 (2026-04-27〜05-03、PR 12 件) が同時期に実施されており、LCP 悪化が EXP-003 か migration 副作用かの切り分けが必要。PSI 実測で LCP 要素を確認し、banner が LCP でなくなっているかを検証すること",
+        "verification_needed": "curl 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/&strategy=mobile&category=performance' | jq '.lighthouseResult.audits[\"largest-contentful-paint-element\"].details.items[0].node.snippet'"
+      },
       "history": [
         {
           "date": "2026-04-26T00:00:00.000Z",
           "action": "proposed",
           "summary": "PSI batch 2026-04-25 で cookie 同意バナーが LCP 要素と特定。setVisible 遅延で banner を LCP 候補から外す。"
+        },
+        {
+          "date": "2026-05-05T00:00:00.000Z",
+          "action": "measuring",
+          "summary": "9 日経過で measuring へ遷移（PR #139 はデプロイ済）。現在 LCP 14,557ms（baseline 8,251ms から +76%悪化）。ただし D1→R2 移行（W18）との混在効果があるため、PSI API で LCP 要素確認後に effect/* 判定。2026-05-12 を次回確認日とする。"
         }
       ]
     }

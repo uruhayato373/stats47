@@ -119,7 +119,7 @@ export function HorizontalDivergingBarChart({
         const sign = diff >= 0 ? "+" : "";
         showTooltip(event, d.label, {
           value: d.value,
-          categoryName: `全国平均比: ${sign}${diff.toFixed(1)}`,
+          metricTitle: `全国平均比: ${sign}${diff.toFixed(1)}`,
           unit,
         });
       })

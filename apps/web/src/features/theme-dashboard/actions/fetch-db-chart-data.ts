@@ -153,17 +153,16 @@ async function fetchAllAndAverage(
       /^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(d.areaCode)
     );
 
-    const byYear = new Map<string, { values: number[]; yearName: string; categoryCode: string; categoryName: string; unit: string }>();
+    const byYear = new Map<string, { values: number[]; yearName: string; metricKey: string; unit: string }>();
     for (const d of prefData) {
       const entry = byYear.get(d.yearCode);
       if (entry) {
-        entry.values.push(d.value);
+        entry.values.push(d.value ?? 0);
       } else {
         byYear.set(d.yearCode, {
-          values: [d.value],
+          values: [d.value ?? 0],
           yearName: d.yearName,
-          categoryCode: d.categoryCode,
-          categoryName: d.categoryName,
+          metricKey: d.metricKey,
           unit: d.unit,
         });
       }
@@ -177,8 +176,7 @@ async function fetchAllAndAverage(
         areaName: "全国平均",
         yearCode,
         yearName: entry.yearName,
-        categoryCode: entry.categoryCode,
-        categoryName: entry.categoryName,
+        metricKey: entry.metricKey,
         value: Math.round(avg * 100) / 100,
         unit: entry.unit,
       });
@@ -262,7 +260,7 @@ async function fetchDonutData(
       const sorted = [...data].sort((a, b) => b.yearCode.localeCompare(a.yearCode));
       return {
         name: cat.label,
-        value: sorted[0].value,
+        value: sorted[0].value ?? 0,
         color: cat.color,
       };
     })
@@ -322,16 +320,16 @@ async function fetchCpiProfileData(
     if (rawData.length === 0) return null;
 
     // 年指定なしの場合は最新年のみフィルタ
-    let filtered = rawData.filter((d) => !excludeCodes.has(d.categoryCode));
+    let filtered = rawData.filter((d) => !excludeCodes.has(d.metricKey));
     if (!year) {
       const latestYear = filtered.reduce((max, d) => d.yearCode > max ? d.yearCode : max, "");
       filtered = filtered.filter((d) => d.yearCode === latestYear);
     }
 
     const result: CpiProfileItem[] = filtered.map((d) => ({
-      label: d.categoryName,
-      value: d.value,
-      code: d.categoryCode,
+      label: d.metricKey,
+      value: d.value ?? 0,
+      code: d.metricKey,
     }));
 
     return result.length > 0 ? { type: "cpi-profile", data: result } : null;
@@ -367,8 +365,8 @@ async function fetchCpiHeatmapData(
     if (rawData.length === 0) return null;
 
     const result: CpiHeatmapItem[] = rawData
-      .filter((d) => !excludeCodes.has(d.categoryCode))
-      .map((d) => ({ x: d.yearName, y: d.categoryName, value: d.value }))
+      .filter((d) => !excludeCodes.has(d.metricKey))
+      .map((d) => ({ x: d.yearName, y: d.metricKey, value: d.value ?? 0 }))
       .sort((a, b) => a.x.localeCompare(b.x));
 
     return result.length > 0 ? { type: "cpi-heatmap", data: result } : null;

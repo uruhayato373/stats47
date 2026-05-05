@@ -188,6 +188,12 @@ export interface SaveEstatMetaInfoInput {
   itemNamePrefix?: string | null;
   memo?: string | null;
   categoryFilters?: string | null;
+  govOrg?: string | null;
+  statsField?: string | null;
+  cycle?: string | null;
+  surveyDate?: string | null;
+  categoryKey?: string | null;
+  classInf?: string | null;
 }
 export interface EstatMetaDefinition {
   statName: string;

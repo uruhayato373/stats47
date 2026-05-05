@@ -13,19 +13,14 @@ import "dotenv/config";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
 import type { FaqContent } from "../types";
 
-const AREA_TYPE = "prefecture";
-const PROMPT_VERSION = "1.0.0";
-
-function parseArgs(): { key: string; year: string; model: string } {
+function parseArgs(): { key: string; year: string } {
   const argv = process.argv.slice(2);
   let key = "";
   let year = "";
-  let model = "gemini";
 
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--key" && argv[i + 1]) key = argv[++i];
     else if (argv[i] === "--year" && argv[i + 1]) year = argv[++i];
-    else if (argv[i] === "--model" && argv[i + 1]) model = argv[++i];
   }
 
   if (!key || !year) {
@@ -33,7 +28,7 @@ function parseArgs(): { key: string; year: string; model: string } {
     process.exit(1);
   }
 
-  return { key, year, model };
+  return { key, year };
 }
 
 function stripCodeFence(text: string): string {
@@ -52,7 +47,7 @@ async function readStdin(): Promise<string> {
 }
 
 async function main() {
-  const { key, year, model } = parseArgs();
+  const { key, year } = parseArgs();
 
   const raw = await readStdin();
   if (!raw) {
@@ -73,15 +68,10 @@ async function main() {
 
   await upsertRankingAiContent({
     rankingKey: key,
-    areaType: AREA_TYPE,
     faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
     regionalAnalysis: parsed.regionalAnalysis ?? null,
     insights: parsed.insights ?? null,
     yearCode: year,
-    aiModel: model,
-    promptVersion: PROMPT_VERSION,
-    generatedAt: new Date().toISOString(),
-    isActive: true,
   });
 
   process.stdout.write(`[OK] Saved AI content for ${key} (${year})\n`);

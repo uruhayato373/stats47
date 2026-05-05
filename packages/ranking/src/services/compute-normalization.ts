@@ -63,8 +63,7 @@ export async function computeNormalization(
   // 3. 計算実行
   const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
     type: "ratio",
-    categoryCode: rankingItem.rankingKey,
-    categoryName: rankingItem.title,
+    metricKey: rankingItem.rankingKey,
     unit: option.unit,
     keyBy: "areaCode",
     scaleFactor: option.scaleFactor,

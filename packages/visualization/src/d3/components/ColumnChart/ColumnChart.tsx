@@ -88,7 +88,7 @@ export function ColumnChart({
         showTooltip(event, String(d.data[indexBy]), {
           value: d[1] - d[0],
           unit,
-          categoryName: d.key ?? keys[0],
+          metricTitle: d.key ?? keys[0],
         });
       })
       .on("mousemove", (event) => updateTooltipPosition(event))

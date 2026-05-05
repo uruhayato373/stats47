@@ -118,7 +118,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
   const dataStmt = db.prepare(
     `SELECT entity_code AS area_code, entity_name AS area_name,
             value_numeric AS value, rank
-     FROM observations
+     FROM stats
      WHERE entity_type = 'prefecture'
        AND metric_id = ?
        AND year_code = ?

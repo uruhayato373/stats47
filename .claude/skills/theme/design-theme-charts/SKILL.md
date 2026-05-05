@@ -11,7 +11,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 ## 設計原則
 
 1. **1データ1コンポーネント**: 同じ指標は1つの chart_key を areas / theme で共有する
-2. **既存コンポーネント再利用優先**: areas ページに既にあるチャートは `page_component_assignments` で割り当てるだけ
+2. **既存コンポーネント再利用優先**: areas ページに既にあるチャートは `page_components` に同じ chart_key を別行 INSERT するだけ
 3. **e-Stat API 起点**: DB にデータがなくても e-Stat API から取得可能なら新規設計の対象
 4. **共通コンポーネント使用**: LineChartClient, CompositionChartClient 等の共通 UI を使う
 5. **都道府県/市区町村分離**: 都道府県用と市区町村用は別レコード（statsDataId が異なる）
@@ -25,7 +25,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 ### Phase 1: 現状把握
 
 1. IndicatorSet を読み込む（panelTabs, indicators）
-2. 既存の page_component_assignments（theme + area-category）を DB から取得
+2. 既存の page_components（theme + area-category）を DB から取得
 3. panelTab 別のチャート有無を確認
 
 ### Phase 2: 既存コンポーネント再利用調査
@@ -38,22 +38,21 @@ const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
 // テーマに未割り当ての既存チャートを検索
 const existing = db.prepare(\`
-  SELECT pc.chart_key, pc.title, pc.component_type, pc.component_props,
-         GROUP_CONCAT(DISTINCT pca.page_type || '/' || pca.page_key) as current_pages
-  FROM page_components pc
-  JOIN page_component_assignments pca ON pc.chart_key = pca.chart_key
-  WHERE pc.is_active = 1 AND pc.component_type != 'kpi-card'
-    AND pc.chart_key NOT IN (
-      SELECT chart_key FROM page_component_assignments WHERE page_type = 'theme' AND page_key = ?
+  SELECT chart_key, title, component_type,
+         GROUP_CONCAT(DISTINCT page_type || '/' || page_key) as current_pages
+  FROM page_components
+  WHERE is_active = 1 AND component_type != 'kpi-card'
+    AND chart_key NOT IN (
+      SELECT chart_key FROM page_components WHERE page_type = 'theme' AND page_key = ?
     )
-  GROUP BY pc.chart_key
+  GROUP BY chart_key
 \`).all('THEME_KEY');
 // キーワードでフィルタ
 existing.forEach(r => console.log(r.chart_key, '|', r.title, '|', r.component_type, '|', r.current_pages));
 "
 ```
 
-再利用可能なチャートは `page_component_assignments` の INSERT のみで追加する。
+再利用可能なチャートは `page_components` に同じ chart_key + 別 (page_type, page_key) で新しい行を INSERT する。
 
 ### Phase 3: e-Stat API データ調査
 
