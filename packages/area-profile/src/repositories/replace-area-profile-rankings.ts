@@ -47,12 +47,7 @@ export async function replaceAreaProfileRankings(
   const indicatorRows = await db
     .select({ id: metrics.id, key: metrics.key })
     .from(metrics)
-    .where(
-      and(
-        inArray(metrics.key, uniqueKeys),
-        eq(metrics.areaType, "prefecture")
-      )
-    );
+    .where(inArray(metrics.key, uniqueKeys));
   const idByKey = new Map(indicatorRows.map((i) => [i.key, i.id]));
 
   // 3. INSERT 用に変換 (metric_id が見つからない行は skip)

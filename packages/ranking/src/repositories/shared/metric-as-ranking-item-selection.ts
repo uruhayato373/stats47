@@ -14,7 +14,6 @@ import { availableYearsSql, latestYearSql } from "./derive-years-sql";
  */
 export const metricAsRankingItemSelection = {
   ranking_key: metrics.key,
-  area_type: metrics.areaType,
   ranking_name: metrics.title,
   title: metrics.title,
   subtitle: metrics.subtitle,

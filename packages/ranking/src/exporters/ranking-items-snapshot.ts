@@ -44,7 +44,6 @@ export async function exportRankingItemsSnapshot(
     drizzleDb
       .select({
         rankingKey: metrics.key,
-        areaType: metrics.areaType,
         tagKey: taggings.tagKey,
       })
       .from(taggings)
@@ -57,10 +56,9 @@ export async function exportRankingItemsSnapshot(
 
   const tagsByItem = new Map<string, { tagKey: string }[]>();
   for (const t of tagRows) {
-    const key = `${t.rankingKey}|${t.areaType}`;
-    const list = tagsByItem.get(key) ?? [];
+    const list = tagsByItem.get(t.rankingKey) ?? [];
     list.push({ tagKey: t.tagKey });
-    tagsByItem.set(key, list);
+    tagsByItem.set(t.rankingKey, list);
   }
 
   const items: RankingItem[] = [];
@@ -71,8 +69,7 @@ export async function exportRankingItemsSnapshot(
         ...row,
         data_source_id: "estat",
       });
-      const tagKey = `${parsed.rankingKey}|${parsed.areaType}`;
-      const tags = tagsByItem.get(tagKey);
+      const tags = tagsByItem.get(parsed.rankingKey);
       if (tags && tags.length > 0) parsed.tags = tags;
       items.push(parsed);
     } catch (error) {
@@ -80,7 +77,6 @@ export async function exportRankingItemsSnapshot(
       logger.warn(
         {
           rankingKey: row.ranking_key,
-          areaType: row.area_type,
           error: error instanceof Error ? error.message : String(error),
         },
         "metrics: parseRankingItemDB が失敗。スキップ",
@@ -88,10 +84,7 @@ export async function exportRankingItemsSnapshot(
     }
   }
 
-  items.sort((a, b) => {
-    if (a.rankingKey !== b.rankingKey) return a.rankingKey < b.rankingKey ? -1 : 1;
-    return a.areaType < b.areaType ? -1 : a.areaType > b.areaType ? 1 : 0;
-  });
+  items.sort((a, b) => a.rankingKey < b.rankingKey ? -1 : a.rankingKey > b.rankingKey ? 1 : 0);
 
   const snapshot: RankingItemsSnapshot = {
     generatedAt: new Date().toISOString(),

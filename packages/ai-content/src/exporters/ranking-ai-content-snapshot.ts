@@ -30,10 +30,9 @@ export async function exportRankingAiContentSnapshot(
   const startedAt = Date.now();
   const drizzleDb = db ?? getDrizzle();
 
-  const rows = await drizzleDb
+  const rawRows = await drizzleDb
     .select({
       rankingKey: metrics.key,
-      areaType: metrics.areaType,
       faq: aiContent.faq,
       regionalAnalysis: aiContent.regionalAnalysis,
       insights: aiContent.insights,
@@ -52,6 +51,7 @@ export async function exportRankingAiContentSnapshot(
     .from(aiContent)
     .innerJoin(metrics, eq(aiContent.metricId, metrics.id));
 
+  const rows = rawRows.map((r) => ({ ...r, areaType: "prefecture" as const }));
   const snapshotRows: AiContentSnapshotRow[] = rows.map((r) => ({
     rankingKey: r.rankingKey,
     areaType: r.areaType,

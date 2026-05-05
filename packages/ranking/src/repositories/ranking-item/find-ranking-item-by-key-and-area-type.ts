@@ -2,15 +2,14 @@ import "server-only";
 
 import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
 export async function findRankingItemByKeyAndAreaType(
   rankingKey: string,
-  areaType: AreaType,
+  _areaType?: string,
   db?: ReturnType<typeof getDrizzle>
 ): Promise<Result<RankingItem[], Error>> {
   try {
@@ -18,7 +17,7 @@ export async function findRankingItemByKeyAndAreaType(
     const result = await drizzleDb
       .select(metricAsRankingItemSelection)
       .from(metrics)
-      .where(and(eq(metrics.key, rankingKey), eq(metrics.areaType, areaType)));
+      .where(eq(metrics.key, rankingKey));
 
     const items = result
       .map((row) => { try { return parseMetricAsRankingItem(row); } catch { return null; } })

@@ -1,7 +1,7 @@
 import "server-only";
 
 import { correlations, getDrizzle, metrics } from "@stats47/database/server";
-import { and, eq, inArray } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
 
 import type { ScatterDataPoint } from "../utils/calculate-pearson";
 
@@ -34,12 +34,7 @@ export async function upsertCorrelation(
   const indRows = await db
     .select({ id: metrics.id, key: metrics.key })
     .from(metrics)
-    .where(
-      and(
-        inArray(metrics.key, [params.rankingKeyX, params.rankingKeyY]),
-        eq(metrics.areaType, "prefecture")
-      )
-    );
+    .where(inArray(metrics.key, [params.rankingKeyX, params.rankingKeyY]));
   const idByKey = new Map(indRows.map((r) => [r.key, r.id]));
   const xId = idByKey.get(params.rankingKeyX);
   const yId = idByKey.get(params.rankingKeyY);

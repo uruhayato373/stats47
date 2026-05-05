@@ -23,8 +23,7 @@ export async function getTagsForItem(
       .where(
         and(
           eq(taggings.taggableType, "metric"),
-          eq(metrics.key, rankingKey),
-          eq(metrics.areaType, areaType)
+          eq(metrics.key, rankingKey)
         )
       );
 

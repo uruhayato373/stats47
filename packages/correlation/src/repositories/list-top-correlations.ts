@@ -5,7 +5,7 @@ import {
   getDrizzle,
   metrics,
 } from "@stats47/database/server";
-import { aliasedTable, and, eq, sql } from "drizzle-orm";
+import { aliasedTable, eq, sql } from "drizzle-orm";
 import {
   isExcludedCorrelationKey,
   isExcludedCorrelationPair,
@@ -61,8 +61,8 @@ export async function listTopCorrelations(
       normalizationBasisY: iy.normalizationBasis,
     })
     .from(correlations)
-    .innerJoin(ix, and(eq(correlations.metricXId, ix.id), eq(ix.areaType, "prefecture")))
-    .innerJoin(iy, and(eq(correlations.metricYId, iy.id), eq(iy.areaType, "prefecture")))
+    .innerJoin(ix, eq(correlations.metricXId, ix.id))
+    .innerJoin(iy, eq(correlations.metricYId, iy.id))
     .where(sql`ABS(${correlations.pearsonR}) < 0.99`)
     .orderBy(sql`${effectiveAbsR} DESC`)
     .limit(limit * 10);

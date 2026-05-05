@@ -1,12 +1,14 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { and, eq, exists } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
+
+type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
 export async function listRankingItemsByAreaType(
   areaType: AreaType,
@@ -15,10 +17,17 @@ export async function listRankingItemsByAreaType(
 ): Promise<Result<RankingItem[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    const conditions = [eq(metrics.areaType, areaType), eq(metrics.isActive, true)];
-    // dataSourceId は metrics.sourceId に対応するが旧 API と意味が異なる。
-    // 後方互換: dataSourceId が "estat" など platform 名なら、sources.parent_source_id で
-    // フィルタする必要があるが現状の用途では限定的なので無視する (PR-5 移行措置)。
+    const conditions = [
+      exists(
+        drizzleDb.select({ metricKey: observations.metricKey })
+          .from(observations)
+          .where(and(
+            eq(observations.metricKey, metrics.key),
+            eq(observations.areaType, areaType as ValidAreaType)
+          ))
+      ),
+      eq(metrics.isActive, true),
+    ];
     if (options?.categoryKey) conditions.push(eq(metrics.categoryKey, options.categoryKey));
 
     const result = await drizzleDb

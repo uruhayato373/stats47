@@ -3,19 +3,18 @@ import "server-only";
 import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 
 export async function updateRankingItem(
   rankingKey: string,
-  areaType: AreaType,
+  _areaType: string,
   updates: Partial<RankingItem>,
   db?: ReturnType<typeof getDrizzle>
 ): Promise<Result<boolean, Error>> {
   try {
     logger.debug(
-      { rankingKey, areaType, updatedFields: Object.keys(updates) },
+      { rankingKey, updatedFields: Object.keys(updates) },
       "updateRankingItem: start"
     );
 
@@ -38,8 +37,6 @@ export async function updateRankingItem(
     if (updates.valueDisplay !== undefined) mappedUpdates.valueDisplayConfigJson = JSON.stringify(updates.valueDisplay);
     if (updates.visualization !== undefined) mappedUpdates.visualizationConfigJson = JSON.stringify(updates.visualization);
     if (updates.calculation !== undefined) mappedUpdates.calculationConfigJson = JSON.stringify(updates.calculation);
-    if (updates.latestYear !== undefined) mappedUpdates.latestYear = updates.latestYear ? JSON.stringify(updates.latestYear) : null;
-    if (updates.availableYears !== undefined) mappedUpdates.availableYearsJson = updates.availableYears ? JSON.stringify(updates.availableYears) : null;
 
     if (Object.keys(mappedUpdates).length === 0) {
       return err(new Error("No fields to update"));
@@ -51,16 +48,11 @@ export async function updateRankingItem(
     await drizzleDb
       .update(metrics)
       .set(mappedUpdates)
-      .where(
-        and(
-          eq(metrics.key, rankingKey),
-          eq(metrics.areaType, areaType)
-        )
-      );
+      .where(eq(metrics.key, rankingKey));
 
     return ok(true);
   } catch (error) {
-    logger.error({ error, rankingKey, areaType }, "updateRankingItem: failed");
+    logger.error({ error, rankingKey }, "updateRankingItem: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }

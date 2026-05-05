@@ -16,7 +16,7 @@ import { metrics } from "./metrics";
  * 観測値 — metric × area × year の値
  *
  * PK: (metric_key, area_type, area_code, year_code)
- * FK: (metric_key, area_type) → metrics(key, area_type)
+ * FK: metric_key → metrics(key)  ← 単独キー（area_type は observations が保持）
  *
  * area_name / year_name / unit は書き込み時に一回計算して denorm 保存。
  * 変更が稀なため JOIN コストを排除する設計。
@@ -47,8 +47,8 @@ export const observations = sqliteTable(
       ],
     }),
     fk: foreignKey({
-      columns: [table.metricKey, table.areaType],
-      foreignColumns: [metrics.key, metrics.areaType],
+      columns: [table.metricKey],
+      foreignColumns: [metrics.key],
     }),
     entityIdx: index("idx_observations_entity").on(
       table.areaType,
@@ -58,6 +58,10 @@ export const observations = sqliteTable(
     metricYearIdx: index("idx_observations_metric_year").on(
       table.metricKey,
       table.yearCode
+    ),
+    metricAreaTypeIdx: index("idx_observations_metric_atype").on(
+      table.metricKey,
+      table.areaType
     ),
   })
 );

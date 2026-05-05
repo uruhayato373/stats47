@@ -4,7 +4,8 @@ vi.mock("server-only", () => ({}));
 
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  correlationAnalysis: { pearsonR: { name: "pearson_r" } },
+  correlations: { pearsonR: { name: "pearson_r" } },
+  metrics: {},
 }));
 
 vi.mock("@stats47/logger/server", () => ({

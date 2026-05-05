@@ -1,7 +1,7 @@
 import "server-only";
 
 import { correlations, getDrizzle, metrics } from "@stats47/database/server";
-import { aliasedTable, and, asc, desc, eq, sql } from "drizzle-orm";
+import { aliasedTable, asc, desc, eq, sql } from "drizzle-orm";
 
 export interface ListCorrelationAnalysisOptions {
   limit?: number;
@@ -65,8 +65,8 @@ export async function listCorrelationAnalysis(
       titleY: sql<string | null>`${iy.title}`,
     })
     .from(correlations)
-    .innerJoin(ix, and(eq(correlations.metricXId, ix.id), eq(ix.areaType, "prefecture")))
-    .innerJoin(iy, and(eq(correlations.metricYId, iy.id), eq(iy.areaType, "prefecture")))
+    .innerJoin(ix, eq(correlations.metricXId, ix.id))
+    .innerJoin(iy, eq(correlations.metricYId, iy.id))
     .orderBy(orderByColumn)
     .limit(limit)
     .offset(offset);

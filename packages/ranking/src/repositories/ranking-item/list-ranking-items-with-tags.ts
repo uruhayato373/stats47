@@ -4,7 +4,7 @@ import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import { listRankingItems } from "./list-ranking-items";
 
@@ -23,7 +23,6 @@ export async function listRankingItemsWithTags(
     const allTags = await drizzleDb
       .select({
         rankingKey: metrics.key,
-        areaType: metrics.areaType,
         tagKey: taggings.tagKey,
       })
       .from(taggings)
@@ -35,7 +34,7 @@ export async function listRankingItemsWithTags(
 
     const itemsWithTags = items.map((item) => {
       const itemTags = allTags
-        .filter((t) => t.rankingKey === item.rankingKey && t.areaType === item.areaType)
+        .filter((t) => t.rankingKey === item.rankingKey)
         .map((t) => ({ tagKey: t.tagKey }));
       return { ...item, tags: itemTags };
     });

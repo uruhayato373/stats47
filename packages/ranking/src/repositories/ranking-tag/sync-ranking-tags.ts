@@ -17,20 +17,12 @@ export async function syncRankingTags(
     const indicatorRow = await drizzleDb
       .select({ id: metrics.id })
       .from(metrics)
-      .where(
-        and(
-          eq(metrics.key, rankingKey),
-          eq(
-            metrics.areaType,
-            areaType as "prefecture" | "city" | "national" | "port" | "fishing_port"
-          )
-        )
-      )
+      .where(eq(metrics.key, rankingKey))
       .limit(1);
 
     if (indicatorRow.length === 0) {
       return err(
-        new Error(`indicator not found: key=${rankingKey} areaType=${areaType}`)
+        new Error(`indicator not found: key=${rankingKey}`)
       );
     }
     const metricId = String(indicatorRow[0].id);

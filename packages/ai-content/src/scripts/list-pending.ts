@@ -18,7 +18,7 @@
 import "dotenv/config";
 import { listRankingItems } from "@stats47/ranking/server";
 import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 const AREA_TYPE = "prefecture";
 
@@ -45,10 +45,7 @@ async function main() {
   const existingRows = await db
     .select({ rankingKey: metrics.key })
     .from(aiContent)
-    .innerJoin(
-      metrics,
-      and(eq(metrics.id, aiContent.metricId), eq(metrics.areaType, "prefecture"))
-    );
+    .innerJoin(metrics, eq(metrics.id, aiContent.metricId));
   const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
   const pending: Array<{

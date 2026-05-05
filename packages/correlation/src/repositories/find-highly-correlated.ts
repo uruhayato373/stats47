@@ -7,7 +7,7 @@ import {
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { aliasedTable, and, eq, inArray, or, sql } from "drizzle-orm";
+import { aliasedTable, eq, inArray, or, sql } from "drizzle-orm";
 
 export interface CorrelatedItem {
   rankingKey: string;
@@ -39,7 +39,7 @@ export async function findHighlyCorrelated(
     const subjectRows = await drizzleDb
       .select({ id: metrics.id })
       .from(metrics)
-      .where(and(eq(metrics.key, rankingKey), eq(metrics.areaType, "prefecture")))
+      .where(eq(metrics.key, rankingKey))
       .limit(1);
     const subjectId = subjectRows[0]?.id;
     if (!subjectId) return ok([]);
@@ -94,9 +94,7 @@ export async function findHighlyCorrelated(
         unit: metrics.unit,
       })
       .from(metrics)
-      .where(
-        and(inArray(metrics.key, counterpartKeys), eq(metrics.areaType, "prefecture"))
-      );
+      .where(inArray(metrics.key, counterpartKeys));
 
     const itemMap = new Map(itemRows.map((item) => [item.ranking_key, item]));
 

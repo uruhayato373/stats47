@@ -3,8 +3,8 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  correlationAnalysis: {},
-  rankingItems: {},
+  correlations: {},
+  metrics: {},
 }));
 vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
@@ -24,6 +24,10 @@ describe("findHighlyCorrelated", () => {
       rankingKeyX: "targetKey",
       rankingKeyY: "otherKey",
       pearsonR: 0.95,
+      partialRPopulation: null,
+      partialRArea: null,
+      partialRAging: null,
+      partialRDensity: null,
       scatterData: JSON.stringify(scatterData),
     }];
     const itemRows = [{
@@ -33,13 +37,26 @@ describe("findHighlyCorrelated", () => {
       unit: "件",
     }];
 
-    // Need to support two separate select() calls (correlations then items)
+    // Query 1: get subject metric ID
+    // Query 2: JOIN query for correlated pairs
+    // Query 3: get counterpart item metadata
     const selectCall = vi.fn()
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            orderBy: vi.fn().mockReturnValue({
-              limit: vi.fn().mockResolvedValue(corrRows),
+            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
+          }),
+        }),
+      })
+      .mockReturnValueOnce({
+        from: vi.fn().mockReturnValue({
+          innerJoin: vi.fn().mockReturnValue({
+            innerJoin: vi.fn().mockReturnValue({
+              where: vi.fn().mockReturnValue({
+                orderBy: vi.fn().mockReturnValue({
+                  limit: vi.fn().mockResolvedValue(corrRows),
+                }),
+              }),
             }),
           }),
         }),
@@ -69,6 +86,10 @@ describe("findHighlyCorrelated", () => {
       rankingKeyX: "otherKey",
       rankingKeyY: "targetKey",
       pearsonR: -0.8,
+      partialRPopulation: null,
+      partialRArea: null,
+      partialRAging: null,
+      partialRDensity: null,
       scatterData: JSON.stringify(scatterData),
     }];
     const itemRows = [{
@@ -82,8 +103,19 @@ describe("findHighlyCorrelated", () => {
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            orderBy: vi.fn().mockReturnValue({
-              limit: vi.fn().mockResolvedValue(corrRows),
+            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
+          }),
+        }),
+      })
+      .mockReturnValueOnce({
+        from: vi.fn().mockReturnValue({
+          innerJoin: vi.fn().mockReturnValue({
+            innerJoin: vi.fn().mockReturnValue({
+              where: vi.fn().mockReturnValue({
+                orderBy: vi.fn().mockReturnValue({
+                  limit: vi.fn().mockResolvedValue(corrRows),
+                }),
+              }),
             }),
           }),
         }),
@@ -105,18 +137,29 @@ describe("findHighlyCorrelated", () => {
   });
 
   it("should return empty array when no correlations found", async () => {
-    const mockDb = {
-      select: vi.fn().mockReturnValue({
+    const selectCall = vi.fn()
+      .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            orderBy: vi.fn().mockReturnValue({
-              limit: vi.fn().mockResolvedValue([]),
+            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
+          }),
+        }),
+      })
+      .mockReturnValueOnce({
+        from: vi.fn().mockReturnValue({
+          innerJoin: vi.fn().mockReturnValue({
+            innerJoin: vi.fn().mockReturnValue({
+              where: vi.fn().mockReturnValue({
+                orderBy: vi.fn().mockReturnValue({
+                  limit: vi.fn().mockResolvedValue([]),
+                }),
+              }),
             }),
           }),
         }),
-      }),
-    } as any;
+      });
 
+    const mockDb = { select: selectCall } as any;
     const result = await findHighlyCorrelated("targetKey", 5, mockDb);
 
     expect(result.success).toBe(true);
@@ -126,18 +169,29 @@ describe("findHighlyCorrelated", () => {
   });
 
   it("should return error on DB failure", async () => {
-    const mockDb = {
-      select: vi.fn().mockReturnValue({
+    const selectCall = vi.fn()
+      .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            orderBy: vi.fn().mockReturnValue({
-              limit: vi.fn().mockRejectedValue(new Error("connection error")),
+            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
+          }),
+        }),
+      })
+      .mockReturnValueOnce({
+        from: vi.fn().mockReturnValue({
+          innerJoin: vi.fn().mockReturnValue({
+            innerJoin: vi.fn().mockReturnValue({
+              where: vi.fn().mockReturnValue({
+                orderBy: vi.fn().mockReturnValue({
+                  limit: vi.fn().mockRejectedValue(new Error("connection error")),
+                }),
+              }),
             }),
           }),
         }),
-      }),
-    } as any;
+      });
 
+    const mockDb = { select: selectCall } as any;
     const result = await findHighlyCorrelated("targetKey", 5, mockDb);
 
     expect(result.success).toBe(false);

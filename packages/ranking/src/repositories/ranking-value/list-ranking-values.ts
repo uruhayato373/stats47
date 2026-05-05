@@ -40,13 +40,13 @@ export async function listRankingValues(
 
     const values: RankingValue[] = result.map((row) => ({
       areaType,
-      areaCode: row.areaCode,
-      areaName: row.areaName,
-      yearCode: String(row.yearCode),
-      yearName: row.yearName,
-      metricKey: row.metricKey,
-      value: row.value !== null ? Number(row.value) : 0,
-      unit: row.unit,
+      areaCode: row.areaCode ?? "",
+      areaName: row.areaName ?? "",
+      yearCode: String(row.yearCode ?? ""),
+      yearName: row.yearName ?? "",
+      metricKey: row.metricKey ?? "",
+      value: row.value != null ? Number(row.value) : 0,
+      unit: row.unit ?? "",
       rank: row.rank != null ? Number(row.rank) : 0,
     }));
 

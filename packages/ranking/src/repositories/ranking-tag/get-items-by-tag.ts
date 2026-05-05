@@ -1,10 +1,12 @@
 import "server-only";
 
-import { getDrizzle, metrics, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, observations, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, exists, sql } from "drizzle-orm";
+
+type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
 export async function getItemsByTag(
   tagKey: string,
@@ -14,7 +16,7 @@ export async function getItemsByTag(
   try {
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
-      .select({ rankingKey: metrics.key, areaType: metrics.areaType })
+      .select({ rankingKey: metrics.key })
       .from(taggings)
       .innerJoin(
         metrics,
@@ -24,11 +26,18 @@ export async function getItemsByTag(
         and(
           eq(taggings.taggableType, "metric"),
           eq(taggings.tagKey, tagKey),
-          eq(metrics.areaType, areaType)
+          exists(
+            drizzleDb.select({ metricKey: observations.metricKey })
+              .from(observations)
+              .where(and(
+                eq(observations.metricKey, metrics.key),
+                eq(observations.areaType, areaType as ValidAreaType)
+              ))
+          )
         )
       );
 
-    return ok(results.map((r) => ({ rankingKey: r.rankingKey, areaType: r.areaType })));
+    return ok(results.map((r) => ({ rankingKey: r.rankingKey, areaType })));
   } catch (error) {
     logger.error({ error, tagKey, areaType }, "getItemsByTag: failed");
     return err(error instanceof Error ? error : new Error(String(error)));

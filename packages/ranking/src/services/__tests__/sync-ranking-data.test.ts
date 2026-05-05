@@ -37,7 +37,12 @@ import { listRankingValues, upsertRankingValues } from "../../repositories/ranki
 import { fetchRankingData as fetchLatestRankingData } from "../fetch-ranking-data";
 import { syncRankingExport } from "../sync-ranking-export";
 
-const mockEstatData: StatsSchema[] = [];
+const mockEstatData: StatsSchema[] = [
+  { metricKey: "test-ranking", areaCode: "01", areaName: "北海道", yearCode: "2021", yearName: "2021年", value: 100, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "13", areaName: "東京都", yearCode: "2021", yearName: "2021年", value: 200, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "01", areaName: "北海道", yearCode: "2022", yearName: "2022年", value: 110, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "13", areaName: "東京都", yearCode: "2022", yearName: "2022年", value: 210, unit: "件" },
+];
 
 const baseItem: RankingItem = {
   rankingKey: "test-ranking",

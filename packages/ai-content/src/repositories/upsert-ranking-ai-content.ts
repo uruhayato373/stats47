@@ -1,7 +1,7 @@
 import "server-only";
 
 import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 /**
  * AI コンテンツを UPSERT (PR-5: 新 ai_content 経由)
@@ -35,18 +35,13 @@ export async function upsertRankingAiContent(
   const indicatorRows = await drizzleDb
     .select({ id: metrics.id })
     .from(metrics)
-    .where(
-      and(
-        eq(metrics.key, data.rankingKey),
-        eq(metrics.areaType, data.areaType as "prefecture" | "city" | "national" | "port" | "fishing_port")
-      )
-    )
+    .where(eq(metrics.key, data.rankingKey))
     .limit(1);
 
   const indicator = indicatorRows[0];
   if (!indicator) {
     throw new Error(
-      `upsertRankingAiContent: indicator not found for (${data.rankingKey}, ${data.areaType})`
+      `upsertRankingAiContent: indicator not found for key=${data.rankingKey}`
     );
   }
 

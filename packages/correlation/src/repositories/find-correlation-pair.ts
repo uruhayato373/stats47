@@ -25,12 +25,7 @@ export async function findCorrelationPair(
     const indRows = await drizzleDb
       .select({ id: metrics.id, key: metrics.key })
       .from(metrics)
-      .where(
-        and(
-          inArray(metrics.key, [rankingKeyX, rankingKeyY]),
-          eq(metrics.areaType, "prefecture")
-        )
-      );
+      .where(inArray(metrics.key, [rankingKeyX, rankingKeyY]));
     const idByKey = new Map(indRows.map((r) => [r.key, r.id]));
     const xId = idByKey.get(rankingKeyX);
     const yId = idByKey.get(rankingKeyY);
