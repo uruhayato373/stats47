@@ -17,9 +17,9 @@ import { tags } from "./tags";
  * metric id 両対応) を保持。
  *
  * - article: taggable_id = articles.slug
- * - metric:  taggable_id = CAST(metrics.id AS TEXT)
+ * - metric:  taggable_id = metrics.key (PR #211: 旧 CAST(metrics.id AS TEXT) から変更)
  *
- * FK CASCADE は polymorphic のため articles(slug) / metrics(id) には張れない。
+ * FK CASCADE は polymorphic のため articles(slug) / metrics(key) には張れない。
  * tag_key への FK のみ維持。entity 削除時はアプリ側で明示的に taggings から DELETE する。
  */
 export const taggings = sqliteTable(

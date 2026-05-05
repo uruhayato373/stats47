@@ -265,7 +265,7 @@ async function main() {
     const existingRows = await db
       .select({ rankingKey: metrics.key })
       .from(aiContent)
-      .innerJoin(metrics, eq(metrics.id, aiContent.metricId));
+      .innerJoin(metrics, eq(metrics.key, aiContent.metricKey));
     const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
     pendingItems = allItems

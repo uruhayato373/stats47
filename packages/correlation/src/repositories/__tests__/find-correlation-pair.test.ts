@@ -35,8 +35,8 @@ describe("findCorrelationPair", () => {
 
   it("should return pair when found in forward direction", async () => {
     const rows = [{
-      rankingKeyX: "keyA",
-      rankingKeyY: "keyB",
+      metricKeyX: "keyA",
+      metricKeyY: "keyB",
       pearsonR: 0.85,
       scatterData: JSON.stringify(scatterData),
     }];
@@ -54,8 +54,8 @@ describe("findCorrelationPair", () => {
 
   it("should swap x/y when found in reverse direction", async () => {
     const rows = [{
-      rankingKeyX: "keyB",
-      rankingKeyY: "keyA",
+      metricKeyX: "keyB",
+      metricKeyY: "keyA",
       pearsonR: 0.85,
       scatterData: JSON.stringify(scatterData),
     }];
@@ -83,8 +83,8 @@ describe("findCorrelationPair", () => {
 
   it("should handle invalid JSON scatter data gracefully", async () => {
     const rows = [{
-      rankingKeyX: "keyA",
-      rankingKeyY: "keyB",
+      metricKeyX: "keyA",
+      metricKeyY: "keyB",
       pearsonR: 0.5,
       scatterData: "invalid json",
     }];

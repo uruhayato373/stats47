@@ -2,7 +2,7 @@ import "server-only";
 
 import { getDrizzle, metrics, stats, taggings } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, desc, eq, exists, sql } from "drizzle-orm";
+import { and, desc, eq, exists } from "drizzle-orm";
 
 export async function findFirstKeyByTag(
   tagKey: string,
@@ -15,7 +15,7 @@ export async function findFirstKeyByTag(
       .from(metrics)
       .innerJoin(
         taggings,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
+        eq(taggings.taggableId, metrics.key)
       )
       .where(
         and(

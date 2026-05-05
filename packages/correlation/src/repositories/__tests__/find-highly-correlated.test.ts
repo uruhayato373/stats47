@@ -37,26 +37,14 @@ describe("findHighlyCorrelated", () => {
       unit: "件",
     }];
 
-    // Query 1: get subject metric ID
-    // Query 2: JOIN query for correlated pairs
-    // Query 3: get counterpart item metadata
+    // Query 1: correlations direct key lookup (no subject ID lookup needed)
+    // Query 2: get counterpart item metadata
     const selectCall = vi.fn()
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
-          }),
-        }),
-      })
-      .mockReturnValueOnce({
-        from: vi.fn().mockReturnValue({
-          innerJoin: vi.fn().mockReturnValue({
-            innerJoin: vi.fn().mockReturnValue({
-              where: vi.fn().mockReturnValue({
-                orderBy: vi.fn().mockReturnValue({
-                  limit: vi.fn().mockResolvedValue(corrRows),
-                }),
-              }),
+            orderBy: vi.fn().mockReturnValue({
+              limit: vi.fn().mockResolvedValue(corrRows),
             }),
           }),
         }),
@@ -103,19 +91,8 @@ describe("findHighlyCorrelated", () => {
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
-          }),
-        }),
-      })
-      .mockReturnValueOnce({
-        from: vi.fn().mockReturnValue({
-          innerJoin: vi.fn().mockReturnValue({
-            innerJoin: vi.fn().mockReturnValue({
-              where: vi.fn().mockReturnValue({
-                orderBy: vi.fn().mockReturnValue({
-                  limit: vi.fn().mockResolvedValue(corrRows),
-                }),
-              }),
+            orderBy: vi.fn().mockReturnValue({
+              limit: vi.fn().mockResolvedValue(corrRows),
             }),
           }),
         }),
@@ -141,19 +118,8 @@ describe("findHighlyCorrelated", () => {
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
-          }),
-        }),
-      })
-      .mockReturnValueOnce({
-        from: vi.fn().mockReturnValue({
-          innerJoin: vi.fn().mockReturnValue({
-            innerJoin: vi.fn().mockReturnValue({
-              where: vi.fn().mockReturnValue({
-                orderBy: vi.fn().mockReturnValue({
-                  limit: vi.fn().mockResolvedValue([]),
-                }),
-              }),
+            orderBy: vi.fn().mockReturnValue({
+              limit: vi.fn().mockResolvedValue([]),
             }),
           }),
         }),
@@ -173,19 +139,8 @@ describe("findHighlyCorrelated", () => {
       .mockReturnValueOnce({
         from: vi.fn().mockReturnValue({
           where: vi.fn().mockReturnValue({
-            limit: vi.fn().mockResolvedValue([{ id: 1 }]),
-          }),
-        }),
-      })
-      .mockReturnValueOnce({
-        from: vi.fn().mockReturnValue({
-          innerJoin: vi.fn().mockReturnValue({
-            innerJoin: vi.fn().mockReturnValue({
-              where: vi.fn().mockReturnValue({
-                orderBy: vi.fn().mockReturnValue({
-                  limit: vi.fn().mockRejectedValue(new Error("connection error")),
-                }),
-              }),
+            orderBy: vi.fn().mockReturnValue({
+              limit: vi.fn().mockRejectedValue(new Error("connection error")),
             }),
           }),
         }),

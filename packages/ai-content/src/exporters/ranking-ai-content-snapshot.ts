@@ -49,7 +49,7 @@ export async function exportRankingAiContentSnapshot(
       updatedAt: aiContent.updatedAt,
     })
     .from(aiContent)
-    .innerJoin(metrics, eq(aiContent.metricId, metrics.id));
+    .innerJoin(metrics, eq(aiContent.metricKey, metrics.key));
 
   const rows = rawRows.map((r) => ({ ...r, areaType: "prefecture" as const }));
   const snapshotRows: AiContentSnapshotRow[] = rows.map((r) => ({

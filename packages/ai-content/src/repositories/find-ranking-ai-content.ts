@@ -37,7 +37,7 @@ export async function findRankingAiContent(
       updatedAt: aiContent.updatedAt,
     })
     .from(aiContent)
-    .innerJoin(metrics, eq(aiContent.metricId, metrics.id))
+    .innerJoin(metrics, eq(aiContent.metricKey, metrics.key))
     .where(eq(metrics.key, rankingKey))
     .limit(1);
 

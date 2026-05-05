@@ -40,3 +40,8 @@ export * from "./sns_posts";
 // - article_tags + indicator_tags → taggings (polymorphic M:N, PR #209)
 // - indicators テーブル → metrics リネーム (FK: indicator_id → metric_id, PR #210)
 //   旧 indicators.latest_year + available_years_json も削除 (stats から動的計算)
+// - metrics.id (INTEGER autoincrement) 削除、key を PRIMARY KEY に昇格 (PR #211)
+//   correlations: metric_x_id/y_id → metric_key_x/y (TEXT FK)
+//   ai_content: metric_id → metric_key (TEXT PK)
+//   area_profiles: metric_id → metric_key (TEXT FK)
+//   taggings: taggable_id の metric 行は CAST(id AS TEXT) → key 直参照

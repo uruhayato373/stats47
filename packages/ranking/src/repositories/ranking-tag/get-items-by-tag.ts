@@ -4,7 +4,7 @@ import { getDrizzle, metrics, stats, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq, exists, sql } from "drizzle-orm";
+import { and, eq, exists } from "drizzle-orm";
 
 type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
@@ -20,7 +20,7 @@ export async function getItemsByTag(
       .from(taggings)
       .innerJoin(
         metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
+        eq(taggings.taggableId, metrics.key)
       )
       .where(
         and(
