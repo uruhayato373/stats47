@@ -1,6 +1,6 @@
 import "server-only";
 
-import { metricTexts, getDrizzle, metrics } from "@stats47/database/server";
+import { metrics, getDrizzle } from "@stats47/database/server";
 import { eq } from "drizzle-orm";
 
 import type { AiContentSnapshotRow } from "../types/snapshot";
@@ -14,17 +14,18 @@ export async function findRankingAiContent(
   const rows = await drizzleDb
     .select({
       rankingKey: metrics.key,
-      yearCode: metricTexts.yearCode,
-      faq: metricTexts.faq,
-      regionalAnalysis: metricTexts.regionalAnalysis,
-      insights: metricTexts.insights,
-      createdAt: metricTexts.createdAt,
-      updatedAt: metricTexts.updatedAt,
+      yearCode: metrics.yearCode,
+      faq: metrics.faq,
+      regionalAnalysis: metrics.regionalAnalysis,
+      insights: metrics.insights,
+      createdAt: metrics.createdAt,
+      updatedAt: metrics.updatedAt,
     })
-    .from(metricTexts)
-    .innerJoin(metrics, eq(metricTexts.metricKey, metrics.key))
+    .from(metrics)
     .where(eq(metrics.key, rankingKey))
     .limit(1);
 
-  return rows[0] ?? null;
+  const row = rows[0];
+  if (!row || !row.yearCode) return null;
+  return row as AiContentSnapshotRow;
 }

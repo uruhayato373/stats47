@@ -2,7 +2,7 @@
 /**
  * AI コンテンツ生成が必要なランキング一覧を出力する。
  *
- * DB に ai_content レコードが存在しないものを列挙する。
+ * metrics.year_code が NULL のものを列挙する。
  *
  * Usage:
  *   npx tsx packages/ai-content/src/scripts/list-pending.ts
@@ -17,8 +17,8 @@
 
 import "dotenv/config";
 import { listRankingItems } from "@stats47/ranking/server";
-import { metricTexts, getDrizzle, metrics } from "@stats47/database/server";
-import { eq } from "drizzle-orm";
+import { metrics, getDrizzle } from "@stats47/database/server";
+import { isNotNull } from "drizzle-orm";
 
 const AREA_TYPE = "prefecture";
 
@@ -40,13 +40,13 @@ async function main() {
   const items = itemsResult.data.filter((item) => item.latestYear?.yearCode);
   const total = items.length;
 
-  // DB から既存レコードの rankingKey 一覧を取得（1クエリ）
+  // AI テキスト生成済みの key 一覧 (year_code IS NOT NULL)
   const db = getDrizzle();
   const existingRows = await db
-    .select({ rankingKey: metrics.key })
-    .from(metricTexts)
-    .innerJoin(metrics, eq(metrics.key, metricTexts.metricKey));
-  const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
+    .select({ key: metrics.key })
+    .from(metrics)
+    .where(isNotNull(metrics.yearCode));
+  const existingKeys = new Set(existingRows.map((r) => r.key));
 
   const pending: Array<{
     rankingKey: string;

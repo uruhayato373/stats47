@@ -51,6 +51,11 @@ export const metrics = sqliteTable(
       .notNull()
       .default("fiscal"),
     tags: text("tags").default("[]").notNull(),
+    // AI 生成テキスト (旧 metric_texts テーブル, PR #217)
+    yearCode: text("year_code"),
+    faq: text("faq"),
+    regionalAnalysis: text("regional_analysis"),
+    insights: text("insights"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

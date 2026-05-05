@@ -1,6 +1,7 @@
 import "server-only";
 
-import { metricTexts, getDrizzle } from "@stats47/database/server";
+import { metrics, getDrizzle } from "@stats47/database/server";
+import { eq } from "drizzle-orm";
 
 export interface UpsertRankingAiContentInput {
   rankingKey: string;
@@ -18,23 +19,13 @@ export async function upsertRankingAiContent(
 
   const now = new Date().toISOString();
   await drizzleDb
-    .insert(metricTexts)
-    .values({
-      metricKey: data.rankingKey,
+    .update(metrics)
+    .set({
       faq: data.faq ?? null,
       regionalAnalysis: data.regionalAnalysis ?? null,
       insights: data.insights ?? null,
       yearCode: data.yearCode,
       updatedAt: now,
     })
-    .onConflictDoUpdate({
-      target: metricTexts.metricKey,
-      set: {
-        faq: data.faq ?? null,
-        regionalAnalysis: data.regionalAnalysis ?? null,
-        insights: data.insights ?? null,
-        yearCode: data.yearCode,
-        updatedAt: now,
-      },
-    });
+    .where(eq(metrics.key, data.rankingKey));
 }

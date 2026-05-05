@@ -4,7 +4,6 @@ export * from "./metrics"; // 旧 indicators (2026-05-04 リネーム)
 export * from "./stats"; // 旧 observations (2026-05-05 リネーム)
 
 // 派生 (3 層から計算で生成、R2 snapshot で公開)
-export * from "./metric_texts"; // 旧 ai_content (2026-05-05 リネーム)
 export * from "./area_profiles";
 export * from "./correlations";
 
@@ -49,3 +48,4 @@ export * from "./sns_posts";
 //   旧英語スラグ URL は middleware で 301 リダイレクト
 // - taggings → articles.tags / metrics.tags (JSON列に直接格納, PR #215, 2026-05-05)
 // - page_component_assignments → page_components に統合 (page_type/page_key/sort_order を統合, PR #216, 2026-05-05)
+// - metric_texts → metrics に統合 (year_code/faq/regional_analysis/insights を metrics に移動, PR #217, 2026-05-05)

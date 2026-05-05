@@ -1,9 +1,9 @@
 import "server-only";
 
-import { metricTexts, getDrizzle, metrics } from "@stats47/database/server";
+import { metrics, getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq } from "drizzle-orm";
+import { isNotNull } from "drizzle-orm";
 
 import {
   AI_CONTENT_SNAPSHOT_KEY,
@@ -27,17 +27,17 @@ export async function exportRankingAiContentSnapshot(
   const rows = await drizzleDb
     .select({
       rankingKey: metrics.key,
-      yearCode: metricTexts.yearCode,
-      faq: metricTexts.faq,
-      regionalAnalysis: metricTexts.regionalAnalysis,
-      insights: metricTexts.insights,
-      createdAt: metricTexts.createdAt,
-      updatedAt: metricTexts.updatedAt,
+      yearCode: metrics.yearCode,
+      faq: metrics.faq,
+      regionalAnalysis: metrics.regionalAnalysis,
+      insights: metrics.insights,
+      createdAt: metrics.createdAt,
+      updatedAt: metrics.updatedAt,
     })
-    .from(metricTexts)
-    .innerJoin(metrics, eq(metricTexts.metricKey, metrics.key));
+    .from(metrics)
+    .where(isNotNull(metrics.yearCode));
 
-  const snapshotRows: AiContentSnapshotRow[] = rows;
+  const snapshotRows = rows as AiContentSnapshotRow[];
 
   const snapshot: AiContentSnapshot = {
     generatedAt: new Date().toISOString(),
