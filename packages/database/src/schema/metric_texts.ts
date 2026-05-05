@@ -10,13 +10,13 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { metrics } from "./metrics";
 
 /**
- * AI 生成コンテンツ
+ * metrics に紐づく AI 生成テキストコンテンツ
  *
  * PK は metric_key (TEXT)。
- * PR #211: metric_id (INTEGER FK) → metric_key (TEXT FK) に変更。
+ * 旧テーブル名: ai_content (2026-05-05 に metric_texts へリネーム)
  */
-export const aiContent = sqliteTable(
-  "ai_content",
+export const metricTexts = sqliteTable(
+  "metric_texts",
   {
     metricKey: text("metric_key")
       .primaryKey()
@@ -42,13 +42,13 @@ export const aiContent = sqliteTable(
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
-    isActiveIdx: index("idx_ai_content_is_active").on(table.isActive),
-    isProofreadIdx: index("idx_ai_content_is_proofread").on(table.isProofread),
+    isActiveIdx: index("idx_metric_texts_is_active").on(table.isActive),
+    isProofreadIdx: index("idx_metric_texts_is_proofread").on(table.isProofread),
   })
 );
 
-export type AiContent = typeof aiContent.$inferSelect;
-export type InsertAiContent = typeof aiContent.$inferInsert;
+export type MetricText = typeof metricTexts.$inferSelect;
+export type InsertMetricText = typeof metricTexts.$inferInsert;
 
-export const insertAiContentSchema = createInsertSchema(aiContent);
-export const selectAiContentSchema = createSelectSchema(aiContent);
+export const insertMetricTextSchema = createInsertSchema(metricTexts);
+export const selectMetricTextSchema = createSelectSchema(metricTexts);

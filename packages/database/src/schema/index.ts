@@ -4,7 +4,7 @@ export * from "./metrics"; // 旧 indicators (2026-05-04 リネーム)
 export * from "./stats"; // 旧 observations (2026-05-05 リネーム)
 
 // 派生 (3 層から計算で生成、R2 snapshot で公開)
-export * from "./ai_content";
+export * from "./metric_texts"; // 旧 ai_content (2026-05-05 リネーム)
 export * from "./area_profiles";
 export * from "./correlations";
 
@@ -46,3 +46,4 @@ export * from "./sns_posts";
 //   ai_content: metric_id → metric_key (TEXT PK)
 //   area_profiles: metric_id → metric_key (TEXT FK)
 //   taggings: taggable_id の metric 行は CAST(id AS TEXT) → key 直参照
+// - ai_content → metric_texts リネーム (PR #213, 2026-05-05)

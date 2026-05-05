@@ -1,6 +1,6 @@
 import "server-only";
 
-import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
+import { metricTexts, getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
@@ -33,23 +33,23 @@ export async function exportRankingAiContentSnapshot(
   const rawRows = await drizzleDb
     .select({
       rankingKey: metrics.key,
-      faq: aiContent.faq,
-      regionalAnalysis: aiContent.regionalAnalysis,
-      insights: aiContent.insights,
-      yearCode: aiContent.yearCode,
-      aiModel: aiContent.aiModel,
-      promptVersion: aiContent.promptVersion,
-      generatedAt: aiContent.generatedAt,
-      isActive: aiContent.isActive,
-      isProofread: aiContent.isProofread,
-      proofreadAt: aiContent.proofreadAt,
-      editorialSource: aiContent.editorialSource,
-      reviewedBy: aiContent.reviewedBy,
-      createdAt: aiContent.createdAt,
-      updatedAt: aiContent.updatedAt,
+      faq: metricTexts.faq,
+      regionalAnalysis: metricTexts.regionalAnalysis,
+      insights: metricTexts.insights,
+      yearCode: metricTexts.yearCode,
+      aiModel: metricTexts.aiModel,
+      promptVersion: metricTexts.promptVersion,
+      generatedAt: metricTexts.generatedAt,
+      isActive: metricTexts.isActive,
+      isProofread: metricTexts.isProofread,
+      proofreadAt: metricTexts.proofreadAt,
+      editorialSource: metricTexts.editorialSource,
+      reviewedBy: metricTexts.reviewedBy,
+      createdAt: metricTexts.createdAt,
+      updatedAt: metricTexts.updatedAt,
     })
-    .from(aiContent)
-    .innerJoin(metrics, eq(aiContent.metricKey, metrics.key));
+    .from(metricTexts)
+    .innerJoin(metrics, eq(metricTexts.metricKey, metrics.key));
 
   const rows = rawRows.map((r) => ({ ...r, areaType: "prefecture" as const }));
   const snapshotRows: AiContentSnapshotRow[] = rows.map((r) => ({

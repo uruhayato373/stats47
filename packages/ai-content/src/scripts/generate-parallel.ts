@@ -19,7 +19,7 @@ import { spawn } from "child_process";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
-import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
+import { metricTexts, getDrizzle, metrics } from "@stats47/database/server";
 import { eq } from "drizzle-orm";
 import type { FaqContent } from "../types";
 
@@ -264,8 +264,8 @@ async function main() {
     const db = getDrizzle();
     const existingRows = await db
       .select({ rankingKey: metrics.key })
-      .from(aiContent)
-      .innerJoin(metrics, eq(metrics.key, aiContent.metricKey));
+      .from(metricTexts)
+      .innerJoin(metrics, eq(metrics.key, metricTexts.metricKey));
     const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
     pendingItems = allItems

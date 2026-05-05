@@ -1,6 +1,6 @@
 import "server-only";
 
-import { aiContent, getDrizzle } from "@stats47/database/server";
+import { metricTexts, getDrizzle } from "@stats47/database/server";
 
 export interface UpsertRankingAiContentInput {
   rankingKey: string;
@@ -27,7 +27,7 @@ export async function upsertRankingAiContent(
 
   const now = new Date().toISOString();
   await drizzleDb
-    .insert(aiContent)
+    .insert(metricTexts)
     .values({
       metricKey: data.rankingKey,
       faq: data.faq ?? null,
@@ -45,7 +45,7 @@ export async function upsertRankingAiContent(
       updatedAt: now,
     })
     .onConflictDoUpdate({
-      target: aiContent.metricKey,
+      target: metricTexts.metricKey,
       set: {
         faq: data.faq ?? null,
         regionalAnalysis: data.regionalAnalysis ?? null,
