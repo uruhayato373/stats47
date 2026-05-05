@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title,
         description,
         alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}/${categoryKey}` },
-        robots: "noindex, follow",
+        robots: "index, follow",
         openGraph: { title, description, type: "website" },
         twitter: { card: "summary", title, description },
     };

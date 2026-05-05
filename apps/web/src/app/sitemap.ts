@@ -9,6 +9,7 @@
  * SEGMENTS の順序を変えると URL（数字 id）が変わるため、追加時は末尾に追記すること。
  */
 
+import { fetchCities } from "@stats47/area";
 import { readCategoriesFromR2 } from "@stats47/category/server";
 import {
   readActiveKeysForSitemapFromR2,
@@ -51,6 +52,7 @@ const SEGMENTS = [
   "categories",
   "surveys",
   "tags",
+  "cities",
 ] as const;
 
 type Segment = (typeof SEGMENTS)[number];
@@ -158,6 +160,43 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
   ];
 }
 
+// city-category の page_key 一覧（page_components テーブルの city-category 行に対応）
+const CITY_CATEGORY_KEYS = [
+  "administrativefinancial",
+  "agriculture",
+  "commercial",
+  "construction",
+  "economy",
+  "educationsports",
+  "international",
+  "laborwage",
+  "landweather",
+  "miningindustry",
+  "population",
+  "safetyenvironment",
+  "socialsecurity",
+  "tourism",
+] as const;
+
+function getCityPages(): MetadataRoute.Sitemap {
+  // level="3" の政令市区は prefCode が市コード（例: "01100"）のため /areas/{pref}/cities/{city} の
+  // ルート構造と合わず middleware 410 になる。level="2" のみを対象とする。
+  const cities = fetchCities().filter((c) => c.level === "2");
+  const entries: MetadataRoute.Sitemap = [];
+  for (const city of cities) {
+    const cityUrl = `${BASE_URL}/areas/${city.prefCode}/cities/${city.cityCode}`;
+    entries.push({ url: cityUrl, changeFrequency: "monthly", priority: 0.5 });
+    for (const cat of CITY_CATEGORY_KEYS) {
+      entries.push({
+        url: `${cityUrl}/${cat}`,
+        changeFrequency: "monthly",
+        priority: 0.4,
+      });
+    }
+  }
+  return entries;
+}
+
 async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   const tagMeta = await listAllTagsWithCount().catch(() => []);
   // 旧クエリで count >= 5 を要求していたため踏襲
@@ -227,6 +266,8 @@ export default async function sitemap({
         return await getSurveyPages();
       case "tags":
         return await getTagPages();
+      case "cities":
+        return getCityPages();
     }
   } catch {
     // ビルド時に D1 が利用できない場合は空配列で fallback（ISR で再生成）

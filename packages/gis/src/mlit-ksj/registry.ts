@@ -68,8 +68,9 @@ export const KSJ_REGISTRY = new Map<string, KsjDatasetDef>([
   ["G04-a", {
     dataId: "G04-a", name: "標高・傾斜度3次メッシュ", nameEn: "Elevation 3rd Mesh",
     category: "land", geometryType: "mesh", coverage: "mesh",
-    license: "commercial-ok", latestVersion: "10",
-    downloadUrlPattern: `${BASE}/G04-a/G04-a-{VERSION}/{PREF}_GML.zip`,
+    license: "commercial-ok", latestVersion: "11",
+    // 3次メッシュコード別配布（例: G04-a-11_3036-jgd_GML.zip）。{PREF}不可・専用ダウンローダ必要
+    downloadUrlPattern: `${BASE}/G04-a/G04-a-{VERSION}/G04-a-{VERSION}_{MESHCODE}-jgd_GML.zip`,
     geojsonDirInZip: "", propertyMap: {}, simplifyOptions: SIMPLIFY_MESH,
     estimatedSize: "~100MB",
   }],
@@ -79,7 +80,8 @@ export const KSJ_REGISTRY = new Map<string, KsjDatasetDef>([
     dataId: "L03-a", name: "土地利用3次メッシュ", nameEn: "Land Use 3rd Mesh",
     category: "land", geometryType: "mesh", coverage: "mesh",
     license: "cc-by-4.0", latestVersion: "21",
-    downloadUrlPattern: `${BASE}/L03-a/L03-a-21/{PREF}_GML.zip`,
+    // 3次メッシュコード別配布（例: L03-a-21_3036-jgd2011_GML.zip）。{PREF}不可・専用ダウンローダ必要
+    downloadUrlPattern: `${BASE}/L03-a/L03-a-21/L03-a-21_{MESHCODE}-jgd2011_GML.zip`,
     geojsonDirInZip: "", propertyMap: {}, simplifyOptions: SIMPLIFY_MESH,
     estimatedSize: "~30MB",
   }],
@@ -393,7 +395,8 @@ export const KSJ_REGISTRY = new Map<string, KsjDatasetDef>([
     dataId: "mesh1000r6", name: "1kmメッシュ将来推計人口(R6)", nameEn: "Future Population 1km Mesh (R6)",
     category: "statistics", geometryType: "mesh", coverage: "prefecture",
     license: "cc-by-4.0", latestVersion: "24",
-    downloadUrlPattern: `${BASE}/mesh1000r6/mesh1000r6-24/{PREF}_GML.zip`,
+    // 実URL: /ksj/gml/data/m1kr6/m1kr6-24/1km_mesh_2024_{PREF}_GML.zip
+    downloadUrlPattern: `${BASE}/m1kr6/m1kr6-24/1km_mesh_2024_{PREF}_GML.zip`,
     geojsonDirInZip: "", propertyMap: {}, simplifyOptions: SIMPLIFY_MESH,
     estimatedSize: "~50MB/全国", stats47Category: "population",
   }],
