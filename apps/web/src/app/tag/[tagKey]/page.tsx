@@ -17,7 +17,6 @@ import {
 } from "@stats47/components/atoms/ui/card";
 
 import {
-    listAllTagsWithCount,
     listAllUniqueTags,
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
@@ -34,22 +33,17 @@ interface PageProps {
     params: Promise<{ tagKey: string }>;
 }
 
-async function getTagName(tagKey: string): Promise<string> {
-    const tags = await listAllTagsWithCount().catch(() => []);
-    return tags.find((t) => t.tagKey === tagKey)?.tag ?? tagKey;
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { tagKey } = await params;
-    const tagName = await getTagName(tagKey);
+    const tag = decodeURIComponent(tagKey);
 
     // 記事が 2 本未満のタグは thin content と判定されやすいため noindex。
     // 0 本の場合はページ本体で notFound() が呼ばれる。
     const articles = await listArticleSummariesByTagKey(tagKey, 2);
     const indexable = articles.length >= 2;
 
-    const title = `「${tagName}」の記事一覧 | ブログ | stats47`;
-    const description = `「${tagName}」タグが付いた都道府県統計ブログの記事一覧。`;
+    const title = `「${tag}」の記事一覧 | ブログ | stats47`;
+    const description = `「${tag}」タグが付いた都道府県統計ブログの記事一覧。`;
 
     return {
         title,
@@ -73,7 +67,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function TagArticlesPage({ params }: PageProps) {
     const { tagKey } = await params;
-    const tagName = await getTagName(tagKey);
+    const tag = decodeURIComponent(tagKey);
     const articles = await listArticleSummariesByTagKey(tagKey, 50);
 
     return (
@@ -100,14 +94,14 @@ export default async function TagArticlesPage({ params }: PageProps) {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <BreadcrumbPage>{tagName}</BreadcrumbPage>
+                            <BreadcrumbPage>{tag}</BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
             </div>
 
             <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-2 text-lg font-bold">「{tagName}」の記事一覧</h1>
+                <h1 className="mb-2 text-lg font-bold">「{tag}」の記事一覧</h1>
                 <p className="mb-8 text-muted-foreground">
                     {articles.length} 件の記事
                 </p>

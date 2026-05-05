@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { filterOutNationalArea } from "../filter-out-national-area";
 
 describe("filterOutNationalArea", () => {
-  const base = { value: 100, yearCode: "2020", yearName: "2020", categoryCode: "C", categoryName: "C", unit: "U" };
+  const base = { value: 100, yearCode: "2020", yearName: "2020", metricKey: "C", unit: "U" };
 
   it("5桁コード: 全国 (00000) を除外し都道府県 (XX000) を残すこと", () => {
     const data: StatsSchema[] = [

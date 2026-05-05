@@ -345,16 +345,14 @@ for (const r of db
 console.log(`port metrics: ${metricToIndicatorId.size} 件`);
 
 const upsertStmt = db.prepare(`
-  INSERT INTO observations (
-    metric_id, entity_type, entity_code, entity_name,
-    year_code, year_name, unit, value_numeric
+  INSERT INTO stats (
+    metric_id, area_type, area_code,
+    year_code, value
   )
-  VALUES (?, 'port', ?, ?, ?, ?, ?, ?)
-  ON CONFLICT (metric_id, entity_type, entity_code, year_code) DO UPDATE SET
-    value_numeric = excluded.value_numeric,
-    entity_name = excluded.entity_name,
-    year_name = excluded.year_name,
-    unit = excluded.unit
+  VALUES (?, 'port', ?,
+    ?, ?)
+  ON CONFLICT (metric_id, area_type, area_code, year_code) DO UPDATE SET
+    value = excluded.value
 `);
 
 /** プロキシ対応 fetch */
@@ -439,7 +437,7 @@ async function processMetric(metric: MetricDef): Promise<number> {
       const year = timeCode.substring(0, 4);
 
       if (!isDryRun) {
-        upsertStmt.run(metricId, portCode, portName, year, `${year}年`, metric.unit, value);
+        upsertStmt.run(metricId, portCode, year, value);
       }
       inserted++;
     }
@@ -485,7 +483,7 @@ async function processAggregateMetric(
       const portName = knownPorts.get(portCode);
       if (!portName) continue;
       if (!isDryRun) {
-        upsertStmt.run(metricId, portCode, portName, year, `${year}年`, metric.unit, value);
+        upsertStmt.run(metricId, portCode, year, value);
       }
       inserted++;
     }
@@ -512,18 +510,18 @@ async function main() {
   // 最終サマリー
   const totalRows = db
     .prepare(
-      "SELECT COUNT(*) as cnt FROM observations WHERE entity_type = 'port'"
+      "SELECT COUNT(*) as cnt FROM stats WHERE area_type = 'port'"
     )
     .get() as any;
   console.log(`\n=== 完了 ===`);
   console.log(`投入合計: ${totalInserted} 件`);
-  console.log(`observations(entity_type=port) 総行数: ${totalRows.cnt}`);
+  console.log(`stats(area_type=port) 総行数: ${totalRows.cnt}`);
 
   // indicator 別の行数
   const byIndicator = db
     .prepare(
       `SELECT i.key, COUNT(*) as cnt
-       FROM observations o
+       FROM stats o
        INNER JOIN metrics i ON i.id = o.metric_id
        WHERE i.area_type = 'port'
        GROUP BY i.key

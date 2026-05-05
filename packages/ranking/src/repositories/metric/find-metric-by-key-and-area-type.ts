@@ -2,17 +2,16 @@ import "server-only";
 
 import { getDrizzle, metrics } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import type { Metric } from "@stats47/database/server";
 
 /**
- * metrics を (key, area_type) で取得する reader
+ * metrics を key で取得する reader (area_type は metrics から削除済み)
  */
 export async function findMetricByKeyAndAreaType(
   key: string,
-  areaType: AreaType,
+  _areaType?: string,
   db?: ReturnType<typeof getDrizzle>
 ): Promise<Result<Metric | null, Error>> {
   try {
@@ -20,7 +19,7 @@ export async function findMetricByKeyAndAreaType(
     const rows = await drizzleDb
       .select()
       .from(metrics)
-      .where(and(eq(metrics.key, key), eq(metrics.areaType, areaType)))
+      .where(eq(metrics.key, key))
       .limit(1);
 
     return ok(rows[0] ?? null);

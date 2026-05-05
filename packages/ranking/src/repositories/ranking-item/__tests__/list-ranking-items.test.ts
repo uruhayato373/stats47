@@ -3,7 +3,8 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  rankingItems: {},
+  metrics: {},
+  stats: {},
 }));
 vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },

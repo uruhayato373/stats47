@@ -51,8 +51,8 @@ describe("createTooltipContent", () => {
     expect(html).toContain("2023年");
   });
 
-  it("should include categoryName when provided", () => {
-    const html = createTooltipContent({ prefName: "埼玉県", value: 30, categoryName: "男性" });
+  it("should include metricTitle when provided", () => {
+    const html = createTooltipContent({ prefName: "埼玉県", value: 30, metricTitle: "男性" });
     expect(html).toContain("男性");
   });
 

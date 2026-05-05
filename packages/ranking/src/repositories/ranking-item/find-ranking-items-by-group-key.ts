@@ -1,10 +1,10 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
+import { getDrizzle, metrics, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, eq, exists } from "drizzle-orm";
 
 export interface GroupRankingItem {
   rankingKey: string;
@@ -13,6 +13,8 @@ export interface GroupRankingItem {
   unit: string;
   normalizationBasis: string | null;
 }
+
+type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
 export async function findRankingItemsByGroupKey(
   groupKey: string,
@@ -33,7 +35,14 @@ export async function findRankingItemsByGroupKey(
       .where(
         and(
           eq(metrics.groupKey, groupKey),
-          eq(metrics.areaType, areaType),
+          exists(
+            drizzleDb.select({ metricKey: stats.metricKey })
+              .from(stats)
+              .where(and(
+                eq(stats.metricKey, metrics.key),
+                eq(stats.areaType, areaType as ValidAreaType)
+              ))
+          ),
           eq(metrics.isActive, true)
         )
       )

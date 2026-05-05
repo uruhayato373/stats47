@@ -19,12 +19,11 @@ import { spawn } from "child_process";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
-import { aiContent, getDrizzle, metrics } from "@stats47/database/server";
-import { and, eq } from "drizzle-orm";
+import { metrics, getDrizzle } from "@stats47/database/server";
+import { eq, isNotNull } from "drizzle-orm";
 import type { FaqContent } from "../types";
 
 const AREA_TYPE = "prefecture";
-const PROMPT_VERSION = "1.0.0";
 
 // ============================================================
 // 引数パース
@@ -204,15 +203,10 @@ async function processOne(
     // DB 保存
     await upsertRankingAiContent({
       rankingKey,
-      areaType: AREA_TYPE,
       faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
       regionalAnalysis: parsed.regionalAnalysis ?? null,
       insights: parsed.insights ?? null,
       yearCode,
-      aiModel: model,
-      promptVersion: PROMPT_VERSION,
-      generatedAt: new Date().toISOString(),
-      isActive: true,
     });
 
     process.stdout.write(`[OK] ${label} (${yearCode})\n`);
@@ -264,11 +258,8 @@ async function main() {
     const db = getDrizzle();
     const existingRows = await db
       .select({ rankingKey: metrics.key })
-      .from(aiContent)
-      .innerJoin(
-        metrics,
-        and(eq(metrics.id, aiContent.metricId), eq(metrics.areaType, "prefecture"))
-      );
+      .from(metrics)
+      .where(isNotNull(metrics.yearCode));
     const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
 
     pendingItems = allItems

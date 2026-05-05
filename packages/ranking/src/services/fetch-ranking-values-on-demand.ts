@@ -58,15 +58,12 @@ export async function cacheRankingValues(
   yearCode: string,
   values: RankingValue[]
 ): Promise<void> {
-  const { rankingKey, areaType, title, availableYears } = rankingItem;
+  const { rankingKey, areaType } = rankingItem;
   try {
-    const yearEntry = availableYears?.find((y) => y.yearCode === yearCode);
     await upsertRankingValues(
       rankingKey,
       areaType,
       yearCode,
-      yearEntry?.yearName,
-      title,
       values
     );
   } catch (error) {

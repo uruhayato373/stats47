@@ -7,7 +7,7 @@ export function toDisplayEntry(rv: RankingValue): RankingDisplayEntry {
     rank: rv.rank,
     areaCode: rv.areaCode,
     areaName: rv.areaName,
-    value: rv.value,
+    value: rv.value ?? 0,
   };
 }
 

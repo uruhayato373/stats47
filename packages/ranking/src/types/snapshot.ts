@@ -1,4 +1,4 @@
-import type { Survey } from "@stats47/database/server";
+import type { Source } from "@stats47/database/server";
 
 import type { RankingItem } from "./ranking-item";
 import type { RankingValue } from "./ranking-value";
@@ -15,7 +15,7 @@ export interface RankingItemsSnapshot {
 export interface SurveysSnapshot {
   generatedAt: string;
   count: number;
-  surveys: Survey[];
+  surveys: Source[];
 }
 
 /**

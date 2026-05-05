@@ -14,22 +14,22 @@ export async function getAreaProfileByCode(
 
   const rows = await db
     .select({
-      entityName: areaProfiles.entityName,
+      areaName: areaProfiles.areaName,
       yearCode: areaProfiles.yearCode,
       type: areaProfiles.type,
       rank: areaProfiles.rank,
-      valueNumeric: areaProfiles.valueNumeric,
+      value: areaProfiles.value,
       unit: areaProfiles.unit,
       percentile: areaProfiles.percentile,
       rankingKey: metrics.key,
       indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
+    .innerJoin(metrics, eq(areaProfiles.metricKey, metrics.key))
     .where(
       and(
-        eq(areaProfiles.entityType, "prefecture"),
-        eq(areaProfiles.entityCode, areaCode)
+        eq(areaProfiles.areaType, "prefecture"),
+        eq(areaProfiles.areaCode, areaCode)
       )
     )
     .orderBy(asc(areaProfiles.rank));
@@ -41,7 +41,7 @@ export async function getAreaProfileByCode(
     rankingKey: row.rankingKey,
     year: row.yearCode,
     rank: row.rank,
-    value: row.valueNumeric,
+    value: row.value,
     unit: row.unit,
     percentile: row.percentile,
   });
@@ -58,7 +58,7 @@ export async function getAreaProfileByCode(
 
   return {
     areaCode,
-    areaName: rows[0].entityName,
+    areaName: rows[0].areaName,
     strengths,
     weaknesses,
   };

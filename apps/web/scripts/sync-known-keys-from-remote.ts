@@ -23,7 +23,7 @@ import path from "node:path";
 
 const RANKING_QUERY =
   "SELECT DISTINCT key AS ranking_key FROM metrics WHERE is_active = 1 AND area_type = 'prefecture' ORDER BY key";
-const TAG_QUERY = "SELECT tag_key FROM tags ORDER BY tag_key";
+const TAG_QUERY = "SELECT DISTINCT value AS tag_key FROM articles, json_each(articles.tags) ORDER BY value";
 
 const RANKING_OUT = path.resolve(
   __dirname,
@@ -100,7 +100,7 @@ function main(): void {
   writeKnownKeys(
     TAG_OUT,
     "KNOWN_TAG_KEYS",
-    "有効な tag キー一覧（tags テーブル全件）",
+    "有効な tag キー一覧（taggings.tag_key 日本語、article のみ）",
     tagRows.map((r) => r.tag_key),
   );
 }

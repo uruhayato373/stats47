@@ -4,39 +4,32 @@ import {
   integer,
   sqliteTable,
   text,
-  uniqueIndex,
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { sources } from "./sources";
-import { surveys } from "./surveys";
 
 /**
- * メトリクス定義 — 統計指標の定義 (key + area_type + 表示メタ)
+ * メトリクス定義 — 統計指標の定義 (key が PRIMARY KEY)
  *
- * (key, area_type) で一意。area_type は 5 種:
- * prefecture / city / national / port / fishing_port
- *
+ * area_type は stats に持つ属性のため metrics からは削除済み。
  * - source_id: sources.id への FK
  * - JSON 列はすべて _json サフィックス
- * - 値は observations(metric_id) に格納、年度は observations から動的計算
+ * - 値は stats(metric_key) に格納、年度は stats から動的計算
  *
  * 旧名 indicators (PR #210, 2026-05-04 リネーム — "indicators" は汎用的すぎたため)。
+ * PR #211: id (INTEGER autoincrement) 削除、key を PRIMARY KEY に昇格。
  */
 export const metrics = sqliteTable(
   "metrics",
   {
-    id: integer("id").primaryKey(),
-    key: text("key").notNull(),
-    areaType: text("area_type", {
-      enum: ["prefecture", "city", "national", "port", "fishing_port"],
-    }).notNull(),
+    key: text("key").primaryKey(),
     title: text("title").notNull(),
     subtitle: text("subtitle"),
     description: text("description"),
     unit: text("unit").notNull(),
     sourceId: text("source_id").references(() => sources.id),
-    surveyId: text("survey_id").references(() => surveys.id),
+    surveyId: text("survey_id").references(() => sources.id),
     categoryKey: text("category_key"),
     visualizationPreset: text("visualization_preset"),
     visualizationConfigJson: text("visualization_config_json"),
@@ -52,16 +45,21 @@ export const metrics = sqliteTable(
     featuredOrder: integer("featured_order").default(0),
     seoTitle: text("seo_title"),
     seoDescription: text("seo_description"),
+    yearFormat: text("year_format", {
+      enum: ["fiscal", "calendar", "plain"],
+    })
+      .notNull()
+      .default("fiscal"),
+    tags: text("tags").default("[]").notNull(),
+    // AI 生成テキスト (旧 metric_texts テーブル, PR #217)
+    yearCode: text("year_code"),
+    faq: text("faq"),
+    regionalAnalysis: text("regional_analysis"),
+    insights: text("insights"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
-    naturalKeyIdx: uniqueIndex("idx_metrics_natural_key").on(
-      table.key,
-      table.areaType
-    ),
-    keyIdx: index("idx_metrics_key").on(table.key),
-    areaTypeIdx: index("idx_metrics_area_type").on(table.areaType),
     sourceIdx: index("idx_metrics_source_id").on(table.sourceId),
     categoryIdx: index("idx_metrics_category_key").on(table.categoryKey),
     activeIdx: index("idx_metrics_active").on(table.isActive),

@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
+import { REDIRECT_TAG_KEYS } from "@/config/redirect-tag-keys";
 
 /**
  * 410 Gone 応答（CDN cacheable + noindex 強化）。
@@ -142,12 +143,19 @@ function checkContentTypePolicy(pathname: string): Response | null {
     }
   }
 
-  // /tag/{tagKey}: 日本語 tagKey / GONE / 未登録 すべて 410
+  // /tag/{tagKey}: 英語スラグ → 日本語キーへ 301、GONE / 未登録 → 410
   {
     const directTagMatch = pathname.match(/^\/tag\/([^/]+)\/?$/);
     if (directTagMatch) {
       const tagKey = decodeURIComponent(directTagMatch[1]);
-      if (/[^\x00-\x7F]/.test(tagKey)) return gone();
+      // 旧英語スラグを日本語キーへリダイレクト
+      const jaKey = REDIRECT_TAG_KEYS.get(tagKey);
+      if (jaKey) {
+        return NextResponse.redirect(
+          new URL(`/tag/${encodeURIComponent(jaKey)}`, "https://stats47.jp"),
+          { status: 301 },
+        );
+      }
       if (UrlPolicy.tag.isGone(tagKey) || !UrlPolicy.tag.isKnown(tagKey)) return gone();
     }
   }

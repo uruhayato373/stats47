@@ -1,3 +1,4 @@
+import type { StatsSchema } from "@stats47/types";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
@@ -36,11 +37,11 @@ import { listRankingValues, upsertRankingValues } from "../../repositories/ranki
 import { fetchRankingData as fetchLatestRankingData } from "../fetch-ranking-data";
 import { syncRankingExport } from "../sync-ranking-export";
 
-const mockEstatData = [
-  { yearCode: "2021", yearName: "2021年", areaCode: "01000", areaName: "北海道", value: 100, unit: "件", categoryCode: "cat1", categoryName: "catName1" },
-  { yearCode: "2021", yearName: "2021年", areaCode: "13000", areaName: "東京都", value: 200, unit: "件", categoryCode: "cat1", categoryName: "catName1" },
-  { yearCode: "2022", yearName: "2022年", areaCode: "01000", areaName: "北海道", value: 110, unit: "件", categoryCode: "cat1", categoryName: "catName1" },
-  { yearCode: "2022", yearName: "2022年", areaCode: "13000", areaName: "東京都", value: 220, unit: "件", categoryCode: "cat1", categoryName: "catName1" },
+const mockEstatData: StatsSchema[] = [
+  { metricKey: "test-ranking", areaCode: "01", areaName: "北海道", yearCode: "2021", yearName: "2021年", value: 100, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "13", areaName: "東京都", yearCode: "2021", yearName: "2021年", value: 200, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "01", areaName: "北海道", yearCode: "2022", yearName: "2022年", value: 110, unit: "件" },
+  { metricKey: "test-ranking", areaCode: "13", areaName: "東京都", yearCode: "2022", yearName: "2022年", value: 210, unit: "件" },
 ];
 
 const baseItem: RankingItem = {

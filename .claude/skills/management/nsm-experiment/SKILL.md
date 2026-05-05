@@ -24,7 +24,7 @@ Check      : measure で前後比較
 Act        : close で learnings 記録 → 次施策へフィードバック
 ```
 
-詳細は `references/definition.md` を参照。
+詳細は `reference/definition.md` を参照。
 
 ## 引数
 
@@ -97,8 +97,8 @@ abandoned  abandoned  running (re-measure)
 ### propose: 候補提案
 
 1. `node .claude/scripts/lib/metrics-reader.mjs --json` で現状取得（今週 vs 前週、チャネル別、トップクエリ）
-2. `references/playbook.md` を Read してパターンカタログを読み込む
-3. `references/rubric.md` を Read して評価軸を読み込む
+2. `reference/playbook.md` を Read してパターンカタログを読み込む
+3. `reference/rubric.md` を Read して評価軸を読み込む
 4. 現状メトリクスと playbook を突き合わせ、適用可能な実験を洗い出す
 5. 各候補を rubric で採点（インパクト 40% / 工数 30% / 学習価値 20% / 確実性 10%）
 6. 加重合計降順で上位 3-5 件を表示
@@ -147,7 +147,7 @@ abandoned  abandoned  running (re-measure)
 4. learnings をユーザーに記述してもらう
 5. `updateExperiment(id, { result, learnings })` 相当の更新
 6. `transitionStatus(id, 'done')`
-7. **playbook フィードバック提案**: 成功パターンなら `references/playbook.md` の「履歴（学んだこと）」セクションへの追記を提案
+7. **playbook フィードバック提案**: 成功パターンなら `reference/playbook.md` の「履歴（学んだこと）」セクションへの追記を提案
 
 ### abandon: 中止
 
@@ -182,9 +182,9 @@ abandoned  abandoned  running (re-measure)
 | **`.claude/scripts/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
 | **`.claude/skills/management/weekly-plan/SKILL.md`** | Phase で実験提案を自動化 |
 | **`.claude/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
-| **`references/playbook.md`** | 実験パターンカタログ |
-| **`references/rubric.md`** | 優先順位評価軸 |
-| **`references/definition.md`** | NSM 定義（詳細は `[Critical Review] North Star Metric` Issue を参照） |
+| **`reference/playbook.md`** | 実験パターンカタログ |
+| **`reference/rubric.md`** | 優先順位評価軸 |
+| **`reference/definition.md`** | NSM 定義（詳細は `[Critical Review] North Star Metric` Issue を参照） |
 
 ## 使い方の例
 
@@ -220,16 +220,16 @@ abandoned  abandoned  running (re-measure)
 - [ ] 想定効果値の根拠（過去類似実験 / 計算式 / 参照論文）を `propose` 段階で書いたか
 - [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
 - [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
-- [ ] **「10 日経過」の閾値の根拠**（`references/playbook.md` or `references/rubric.md`）を引用したか。閾値が根拠なしなら 14 → 21 日に保守化
+- [ ] **「10 日経過」の閾値の根拠**（`reference/playbook.md` or `reference/rubric.md`）を引用したか。閾値が根拠なしなら 14 → 21 日に保守化
 - [ ] 同時並行で動いている他施策の影響を切り分けたか（A/B 比較が無理なら少なくとも「他施策デプロイ日と被っていないか」を記録）
 
 このチェック未満なら effect/full / effect/partial を付けて close しない。状態を running のままにすること。
 
 ## 参照
 
-- `references/definition.md` — NSM 定義と目標値のサマリ
-- `references/playbook.md` — 実験パターンカタログ
-- `references/rubric.md` — 優先順位評価軸
+- `reference/definition.md` — NSM 定義と目標値のサマリ
+- `reference/playbook.md` — 実験パターンカタログ
+- `reference/rubric.md` — 優先順位評価軸
 - `[Critical Review] North Star Metric` Issue（`critical-review` ラベル） — NSM の完全な定義。`gh issue list --label critical-review --search "North Star Metric"` で検索
 - `.claude/scripts/lib/experiments-state.mjs` — state 実装
 - `.claude/scripts/lib/metrics-reader.mjs` — 計測実装

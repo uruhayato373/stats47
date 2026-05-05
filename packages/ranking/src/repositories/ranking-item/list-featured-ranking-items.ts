@@ -1,9 +1,9 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
+import { getDrizzle, metrics, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, eq, exists } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
@@ -17,7 +17,19 @@ export async function listFeaturedRankingItems(
     const result = await drizzleDb
       .select(metricAsRankingItemSelection)
       .from(metrics)
-      .where(and(eq(metrics.isFeatured, true), eq(metrics.areaType, "prefecture")))
+      .where(
+        and(
+          eq(metrics.isFeatured, true),
+          exists(
+            drizzleDb.select({ metricKey: stats.metricKey })
+              .from(stats)
+              .where(and(
+                eq(stats.metricKey, metrics.key),
+                eq(stats.areaType, "prefecture")
+              ))
+          )
+        )
+      )
       .orderBy(asc(metrics.featuredOrder))
       .limit(limit);
 

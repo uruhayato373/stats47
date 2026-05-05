@@ -1,4 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("server-only", () => ({}));
+vi.mock("@stats47/logger/server", () => ({
+  logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
+}));
+
 import {
   RankingItemDBSchema,
   parseRankingItemDBArray,
@@ -97,25 +103,25 @@ describe("RankingItemDBSchema", () => {
     });
   });
 
-  describe("flat列 vs JSON列の優先度", () => {
-    it("is_calculated（flat）が calculation_config.isCalculated より優先される", () => {
+  describe("calculation_config JSON列の優先度", () => {
+    it("calculation_config.isCalculated が is_calculated flat列より優先される", () => {
       const result = RankingItemDBSchema.parse({
         ...baseMockData,
-        is_calculated: true, // flat列: true
+        is_calculated: true, // flat列: true（metrics テーブルには存在しない）
         calculation_config: JSON.stringify({ isCalculated: false }), // JSON列: false
       });
-      // flat列が優先されるため true
-      expect(result.calculation?.isCalculated).toBe(true);
+      // metrics 移行後は calculation_config_json が正
+      expect(result.calculation?.isCalculated).toBe(false);
     });
 
-    it("calculation_type（flat）が calculation_config.type より優先される", () => {
+    it("calculation_config.type が calculation_type flat列より優先される", () => {
       const result = RankingItemDBSchema.parse({
         ...baseMockData,
-        calculation_type: "per_capita", // flat列
+        calculation_type: "per_capita", // flat列（metrics テーブルには存在しない）
         calculation_config: JSON.stringify({ isCalculated: true, type: "ratio" }), // JSON列
       });
-      // flat列が優先されるため per_capita
-      expect(result.calculation?.type).toBe("per_capita");
+      // metrics 移行後は calculation_config_json が正
+      expect(result.calculation?.type).toBe("ratio");
     });
 
     it("is_calculated が null の場合は calculation_config.isCalculated を使う", () => {

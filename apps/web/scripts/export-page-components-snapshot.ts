@@ -1,16 +1,14 @@
 /**
- * page_components / page_component_assignments を R2 snapshot 化する。
+ * page_components を R2 snapshot 化する。
  *
  * 使用方法:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
  *     apps/web/scripts/export-page-components-snapshot.ts
- *
- * Phase 5b D1→R2 移行用。
  */
 
 import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/better-sqlite3";
-import { and, asc, eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import fs from "fs";
 import BetterSqlite3 from "better-sqlite3";
 
@@ -51,32 +49,27 @@ async function main() {
   const sqlite = new BetterSqlite3(dbPath, { readonly: true });
   const db = drizzle(sqlite, { schema });
 
-  // page_component_assignments + page_components を JOIN
   const rows = await db
     .select({
-      pageType: schema.pageComponentAssignments.pageType,
-      pageKey: schema.pageComponentAssignments.pageKey,
-      componentKey: schema.pageComponents.componentKey,
-      componentType: schema.pageComponents.componentType,
-      title: schema.pageComponents.title,
-      componentProps: schema.pageComponents.componentProps,
-      sourceName: schema.pageComponents.sourceName,
-      sourceLink: schema.pageComponents.sourceLink,
-      rankingLink: schema.pageComponents.rankingLink,
-      gridColumnSpan: schema.pageComponents.gridColumnSpan,
+      pageType:             schema.pageComponents.pageType,
+      pageKey:              schema.pageComponents.pageKey,
+      componentKey:         schema.pageComponents.componentKey,
+      componentType:        schema.pageComponents.componentType,
+      title:                schema.pageComponents.title,
+      componentProps:       schema.pageComponents.componentProps,
+      sourceName:           schema.pageComponents.sourceName,
+      sourceLink:           schema.pageComponents.sourceLink,
+      rankingLink:          schema.pageComponents.rankingLink,
+      gridColumnSpan:       schema.pageComponents.gridColumnSpan,
       gridColumnSpanTablet: schema.pageComponents.gridColumnSpanTablet,
-      gridColumnSpanSm: schema.pageComponents.gridColumnSpanSm,
-      dataSource: schema.pageComponents.dataSource,
-      section: schema.pageComponentAssignments.section,
-      sortOrder: schema.pageComponentAssignments.sortOrder,
+      gridColumnSpanSm:     schema.pageComponents.gridColumnSpanSm,
+      dataSource:           schema.pageComponents.dataSource,
+      section:              schema.pageComponents.section,
+      sortOrder:            schema.pageComponents.sortOrder,
     })
-    .from(schema.pageComponentAssignments)
-    .innerJoin(
-      schema.pageComponents,
-      eq(schema.pageComponentAssignments.componentKey, schema.pageComponents.componentKey),
-    )
-    .where(and(eq(schema.pageComponents.isActive, true)))
-    .orderBy(asc(schema.pageComponentAssignments.sortOrder));
+    .from(schema.pageComponents)
+    .where(eq(schema.pageComponents.isActive, true))
+    .orderBy(asc(schema.pageComponents.sortOrder));
 
   const byPage: Record<string, PageComponent[]> = {};
   for (const row of rows) {

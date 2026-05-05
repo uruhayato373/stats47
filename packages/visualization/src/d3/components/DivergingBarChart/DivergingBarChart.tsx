@@ -117,7 +117,7 @@ export function DivergingBarChart({
       .on("mouseenter", (event, d) => {
         showTooltip(event, String(d[categoryKey]), {
           value: Number(d[positiveKey]),
-          categoryName: positiveName,
+          metricTitle: positiveName,
           unit,
         });
       })
@@ -140,7 +140,7 @@ export function DivergingBarChart({
       .on("mouseenter", (event, d) => {
         showTooltip(event, String(d[categoryKey]), {
           value: Number(d[negativeKey]),
-          categoryName: negativeName,
+          metricTitle: negativeName,
           unit,
         });
       })

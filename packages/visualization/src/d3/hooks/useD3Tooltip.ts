@@ -76,7 +76,7 @@ export const TOOLTIP_CLASSNAMES =
  * @param params.prefName - 都道府県名
  * @param params.value - 数値データ
  * @param params.year - 年度（オプション）
- * @param params.categoryName - カテゴリ名（オプション）
+ * @param params.metricTitle - カテゴリ名（オプション）
  * @param params.unit - 単位（オプション）
  * @returns ツールチップのHTML文字列
  */
@@ -84,10 +84,10 @@ export function createTooltipContent(params: {
   prefName: string;
   value?: number | null;
   year?: string;
-  categoryName?: string;
+  metricTitle?: string;
   unit?: string;
 }): string {
-  const { prefName, value, year, categoryName, unit = "" } = params;
+  const { prefName, value, year, metricTitle, unit = "" } = params;
   const formattedValue = typeof value === "number" ? formatNumber(value) : "-";
   
   return `
@@ -96,7 +96,7 @@ export function createTooltipContent(params: {
         ${prefName}
       </div>
       ${year ? `<div style="font-size: 0.6875rem; color: hsl(var(--muted-foreground));">${year}</div>` : ""}
-      ${categoryName ? `<div style="font-size: 0.6875rem; font-weight: 500;">${categoryName}</div>` : ""}
+      ${metricTitle ? `<div style="font-size: 0.6875rem; font-weight: 500;">${metricTitle}</div>` : ""}
       <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-top: 0.125rem;">
         <span style="font-family: ui-monospace, monospace; font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.8125rem;">
           ${formattedValue}
@@ -159,7 +159,7 @@ export interface UseD3TooltipReturn {
     data: {
       value?: number | null;
       year?: string;
-      categoryName?: string;
+      metricTitle?: string;
       unit?: string;
     }
   ) => void;
@@ -207,7 +207,7 @@ export function useD3Tooltip(): UseD3TooltipReturn {
       data: {
         value?: number | null;
         year?: string;
-        categoryName?: string;
+        metricTitle?: string;
         unit?: string;
       }
     ) => {
@@ -218,7 +218,7 @@ export function useD3Tooltip(): UseD3TooltipReturn {
         prefName,
         value: data.value,
         year: data.year,
-        categoryName: data.categoryName,
+        metricTitle: data.metricTitle,
         unit: data.unit,
       });
 

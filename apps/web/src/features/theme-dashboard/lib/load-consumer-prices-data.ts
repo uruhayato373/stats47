@@ -70,19 +70,18 @@ export async function loadConsumerPricesData(
     for (const indicator of CPI_INDICATORS) {
       if (!theme.rankingKeys.includes(indicator.key)) continue;
 
-      const categoryData = prefData.filter((d) => d.categoryCode === indicator.catCode);
+      const categoryData = prefData.filter((d) => d.metricKey === indicator.catCode);
       if (categoryData.length === 0) continue;
 
       // 値の降順でソートし rank を割り当て
-      const sorted = [...categoryData].sort((a, b) => b.value - a.value);
+      const sorted = [...categoryData].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
       const rankingValues: RankingValue[] = sorted.map((d, i) => ({
         areaType: "prefecture" as const,
         areaCode: d.areaCode,
         areaName: d.areaName,
         yearCode: d.yearCode,
         yearName: d.yearName,
-        categoryCode: indicator.key,
-        categoryName: indicator.title,
+        metricKey: indicator.key,
         value: d.value,
         unit: "",
         rank: i + 1,

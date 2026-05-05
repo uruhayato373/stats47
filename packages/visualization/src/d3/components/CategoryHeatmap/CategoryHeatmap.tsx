@@ -119,7 +119,7 @@ export function CategoryHeatmap({
         const sign = diff >= 0 ? "+" : "";
         showTooltip(event, d.y, {
           value: d.value,
-          categoryName: `${d.x} / 全国平均比: ${sign}${diff.toFixed(1)}`,
+          metricTitle: `${d.x} / 全国平均比: ${sign}${diff.toFixed(1)}`,
           unit,
         });
       })

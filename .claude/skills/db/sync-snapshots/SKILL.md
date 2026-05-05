@@ -70,12 +70,11 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 
 ## 注意
 
-- **ローカル D1 が編集済みであること**: snapshot は ローカル SQLite を読むため、まず DB を更新してから本スキルを実行する。リモート D1 とローカル D1 の整合は `/sync-remote-d1` を別途実行。
+- **ローカル D1 が編集済みであること**: snapshot は ローカル SQLite を読むため、まず DB を更新してから本スキルを実行する。
 - **CF REST API rate limit (429/504)**: 大量 snapshot (ranking-values, port-statistics by-port) は retry + parallelism=1 で守られているが、複数 export を同時に走らせると衝突する。本スキルは順次実行する。
 - **NEXT_PHASE skip パターン**: 本番 worker build 時は各 reader が空配列/null を返し ISR で初回 fetch する。snapshot 更新後の最初のリクエストで反映される (24h ISR 後にキャッシュ満了)。
 
 ## 関連スキル
 
-- `/pull-remote-d1` — リモート D1 → ローカル D1 (新規 PC 等)
-- `/sync-remote-d1` — ローカル D1 → リモート D1 (本スキルとは目的が違う; D1 ↔ R2 整合用)
-- `/diff-d1` — ローカル / リモート D1 差分検知
+- `/populate-all-rankings` — ローカル D1 にデータ投入（本スキルの前処理）
+- `/push-r2` — R2 への手動アップロード（個別ファイル）

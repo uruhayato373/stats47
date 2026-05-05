@@ -21,6 +21,7 @@ export const articles = sqliteTable(
     publishedAt: text("published_at"),
     ogImageType: text("og_image_type"),
     proofreadAt: text("proofread_at"),
+    tags:        text("tags").default("[]").notNull(),
     createdAt:   text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt:   text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

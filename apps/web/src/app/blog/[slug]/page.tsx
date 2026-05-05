@@ -220,7 +220,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 )}
                                 <div className="flex flex-wrap items-center gap-2">
                                     {articleTagData.map((t) => (
-                                        <TagBadge key={t.tagKey} tag={t.tagName} tagKey={t.tagKey} />
+                                        <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
                                     ))}
                                     {article.publishedAt && (
                                         <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
@@ -287,7 +287,7 @@ function BlogRelatedArticlesSection({
 }: {
     articles: Article[];
     currentSlug: string;
-    articleTagsMap: Map<string, Array<{ tagKey: string; tagName: string }>>;
+    articleTagsMap: Map<string, Array<{ tagKey: string }>>;
 }) {
     const filtered = articles.filter((a) => a.slug !== currentSlug);
     if (filtered.length === 0) return null;
@@ -315,7 +315,7 @@ function BlogRelatedArticlesSection({
                                 return (
                                     <div className="mt-1.5 flex flex-wrap gap-1">
                                         {tagData.slice(0, 2).map((t) => (
-                                            <TagBadge key={t.tagKey} tag={t.tagName} static />
+                                            <TagBadge key={t.tagKey} tag={t.tagKey} static />
                                         ))}
                                     </div>
                                 );

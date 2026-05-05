@@ -13,10 +13,6 @@ const STALE_AFTER_DAYS = 30;
 
 let cached: Map<string, AiContentSnapshotRow> | null = null;
 
-function compositeKey(rankingKey: string, areaType: string): string {
-  return `${rankingKey}|${areaType}`;
-}
-
 function warnIfStale(generatedAt: string): void {
   const ageDays =
     (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
@@ -44,24 +40,15 @@ async function loadIndex(): Promise<Map<string, AiContentSnapshotRow>> {
   warnIfStale(snapshot.generatedAt);
   const map = new Map<string, AiContentSnapshotRow>();
   for (const row of snapshot.rows) {
-    map.set(compositeKey(row.rankingKey, row.areaType), row);
+    map.set(row.rankingKey, row);
   }
   cached = map;
   return map;
 }
 
-/**
- * R2 上の ai-content snapshot から (rankingKey, areaType) で取得。
- *
- * findRankingAiContent (D1) のドロップイン代替。
- *
- * build 時 (NEXT_PHASE=phase-production-build) は null を返し、ISR で初回 fetch。
- * 1,943 行 (~5MB) を 1 fetch で全ページ供給するため、build worker でも 1 回の
- * R2 fetch + JSON.parse で済む。ただし、build hang 防止のため安全側で skip。
- */
 export async function readRankingAiContentFromR2(
   rankingKey: string,
-  areaType: string,
+  _areaType?: string,
 ): Promise<AiContentSnapshotRow | null> {
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return null;
@@ -69,14 +56,10 @@ export async function readRankingAiContentFromR2(
 
   try {
     const map = await loadIndex();
-    return map.get(compositeKey(rankingKey, areaType)) ?? null;
+    return map.get(rankingKey) ?? null;
   } catch (error) {
     logger.error(
-      {
-        rankingKey,
-        areaType,
-        error: error instanceof Error ? error.message : String(error),
-      },
+      { rankingKey, error: error instanceof Error ? error.message : String(error) },
       "readRankingAiContentFromR2: failed",
     );
     return null;

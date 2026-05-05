@@ -187,41 +187,22 @@ async function main() {
 
   const rankingCount = documents.length;
 
-  // 2. ブログ記事（articles + taggings + tags）
+  // 2. ブログ記事（articles）
   try {
     const articleRows = await db
       .select({
         slug: schema.articles.slug,
         title: schema.articles.title,
         description: schema.articles.description,
+        tags: schema.articles.tags,
         publishedAt: schema.articles.publishedAt,
         updatedAt: schema.articles.updatedAt,
       })
       .from(schema.articles)
       .where(eq(schema.articles.published, true));
 
-    // taggings (taggable_type='article') + tags からタグ名を取得
-    const tagRows = await db
-      .select({
-        slug: schema.taggings.taggableId,
-        tagName: schema.tags.tagName,
-      })
-      .from(schema.taggings)
-      .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
-      .where(eq(schema.taggings.taggableType, "article"));
-
-    const tagsBySlug = new Map<string, string[]>();
-    for (const row of tagRows) {
-      const existing = tagsBySlug.get(row.slug);
-      if (existing) {
-        existing.push(row.tagName);
-      } else {
-        tagsBySlug.set(row.slug, [row.tagName]);
-      }
-    }
-
     for (const row of articleRows) {
-      const tags = tagsBySlug.get(row.slug) ?? [];
+      const tags = JSON.parse(row.tags ?? "[]") as string[];
       const tagsStr = tags.join(", ");
       const description = [row.description, tagsStr].filter(Boolean).join(" ");
       const category = tags[0] || "ブログ";

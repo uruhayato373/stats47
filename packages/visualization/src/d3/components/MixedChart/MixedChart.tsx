@@ -108,7 +108,7 @@ export function MixedChart({
           const label = (d.label as string) ?? String(d[categoryKey]);
           showTooltip(event, label, {
             value: Number(d[col.dataKey]),
-            categoryName: col.name,
+            metricTitle: col.name,
             unit: leftUnit || unit,
           });
         })
@@ -153,7 +153,7 @@ export function MixedChart({
           const label = (d.label as string) ?? String(d[categoryKey]);
           showTooltip(event, label, {
             value: Number(d[s.dataKey]),
-            categoryName: s.name,
+            metricTitle: s.name,
             unit: rightUnit || unit,
           });
         })

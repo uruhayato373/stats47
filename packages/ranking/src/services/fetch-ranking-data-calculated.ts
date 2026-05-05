@@ -142,8 +142,7 @@ async function fetchCalculatedRankingDataInner(
     // 計算実行
     const calculated = computeCalculatedValues(numValues, denValues, {
       type: calculation.type || "ratio",
-      categoryName: title,
-      categoryCode: rankingKey,
+      metricKey: rankingKey,
       unit: unit,
     });
 

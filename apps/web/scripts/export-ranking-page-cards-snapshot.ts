@@ -1,7 +1,7 @@
 /**
  * ranking page cards を R2 snapshot 化する (Phase 6, PR-7)。
  *
- * データソース: page_components + page_component_assignments(page_type='ranking') 経由 (PR-7 で統合)
+ * データソース: page_components (page_type='ranking')
  *
  * Usage:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
@@ -42,33 +42,28 @@ async function main() {
   const sqlite = new BetterSqlite3(dbPath, { readonly: true });
   const db = drizzle(sqlite, { schema });
 
-  // page_component_assignments(page_type='ranking') + page_components JOIN
   const rows = await db
     .select({
-      id: schema.pageComponents.componentKey,
-      rankingKey: schema.pageComponentAssignments.pageKey,
+      id:           schema.pageComponents.componentKey,
+      rankingKey:   schema.pageComponents.pageKey,
       componentType: schema.pageComponents.componentType,
-      title: schema.pageComponents.title,
+      title:        schema.pageComponents.title,
       componentProps: schema.pageComponents.componentProps,
-      displayOrder: schema.pageComponentAssignments.sortOrder,
-      isActive: schema.pageComponents.isActive,
-      createdAt: schema.pageComponents.createdAt,
-      updatedAt: schema.pageComponents.updatedAt,
+      displayOrder: schema.pageComponents.sortOrder,
+      isActive:     schema.pageComponents.isActive,
+      createdAt:    schema.pageComponents.createdAt,
+      updatedAt:    schema.pageComponents.updatedAt,
     })
-    .from(schema.pageComponentAssignments)
-    .innerJoin(
-      schema.pageComponents,
-      eq(schema.pageComponents.componentKey, schema.pageComponentAssignments.componentKey)
-    )
+    .from(schema.pageComponents)
     .where(
       and(
-        eq(schema.pageComponentAssignments.pageType, "ranking"),
+        eq(schema.pageComponents.pageType, "ranking"),
         eq(schema.pageComponents.isActive, true)
       )
     )
     .orderBy(
-      asc(schema.pageComponentAssignments.pageKey),
-      asc(schema.pageComponentAssignments.sortOrder)
+      asc(schema.pageComponents.pageKey),
+      asc(schema.pageComponents.sortOrder)
     );
 
   const byRankingKey: Record<string, RankingPageCard[]> = {};

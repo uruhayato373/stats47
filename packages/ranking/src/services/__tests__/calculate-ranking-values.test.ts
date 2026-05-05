@@ -41,8 +41,7 @@ describe("calculateRankingValues", () => {
     yearCode: "2020",
     yearName: "2020年度",
     rank: 1,
-    categoryCode: key,
-    categoryName: "Category",
+    metricKey: key,
     value: val,
     unit: "unit",
   });
@@ -69,7 +68,7 @@ describe("calculateRankingValues", () => {
         const result = await calculateRankingValues(baseItem, "2020");
         expect(result).toHaveLength(1);
         expect(result[0].value).toBe(0.5); // 50 / 100
-        expect(result[0].categoryCode).toBe("test-calculated");
+        expect(result[0].metricKey).toBe("test-calculated");
     });
   });
 

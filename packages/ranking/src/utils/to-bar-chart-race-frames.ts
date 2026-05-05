@@ -15,6 +15,7 @@ export function toBarChartRaceFrames(stats: StatsSchema[]): BarChartRaceFrame[] 
       group = { yearName: s.yearName, items: [] };
       grouped.set(s.yearCode, group);
     }
+    if (s.value === null) continue;
     group.items.push({ name: s.areaName, value: s.value });
   }
 

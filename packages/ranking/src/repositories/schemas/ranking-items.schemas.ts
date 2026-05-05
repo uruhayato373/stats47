@@ -89,7 +89,7 @@ const SourceConfigSchema = z.object({
  */
 export const RankingItemDBSchema = z.object({
   ranking_key: z.string(),
-  area_type: z.string(),
+  area_type: z.string().optional().default("prefecture"),
   ranking_name: z.string(),
   title: z.string(),
   subtitle: z.preprocess(normalizeNull, z.string().nullable()),

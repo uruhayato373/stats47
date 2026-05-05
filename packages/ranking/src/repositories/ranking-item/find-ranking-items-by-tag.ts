@@ -4,7 +4,6 @@ import {
   categories,
   getDrizzle,
   metrics,
-  taggings,
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
@@ -23,15 +22,10 @@ export async function findRankingItemsByTag(
 
     const rows = await drizzleDb
       .select(metricAsRankingItemSelection)
-      .from(taggings)
-      .innerJoin(
-        metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
-      )
+      .from(metrics)
       .where(
         and(
-          eq(taggings.taggableType, "metric"),
-          eq(taggings.tagKey, tagKey),
+          sql`EXISTS (SELECT 1 FROM json_each(${metrics.tags}) WHERE value = ${tagKey})`,
           eq(metrics.isActive, true)
         )
       )

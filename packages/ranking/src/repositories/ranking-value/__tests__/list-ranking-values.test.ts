@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  rankingData: {},
+  stats: {},
 }));
 vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
@@ -35,8 +35,7 @@ describe("listRankingValues", () => {
         areaName: "北海道",
         yearCode: "2022",
         yearName: "2022年",
-        categoryCode: "gdp",
-        categoryName: "GDP",
+        metricKey: "gdp",
         value: 100,
         unit: "億円",
         rank: 1,
@@ -47,8 +46,7 @@ describe("listRankingValues", () => {
         areaName: "東京都",
         yearCode: "2022",
         yearName: "2022年",
-        categoryCode: "gdp",
-        categoryName: "GDP",
+        metricKey: "gdp",
         value: 200,
         unit: "億円",
         rank: 2,
@@ -86,8 +84,7 @@ describe("listRankingValues", () => {
         areaName: null,
         yearCode: null,
         yearName: null,
-        categoryCode: null,
-        categoryName: null,
+        metricKey: null,
         value: null,
         unit: null,
         rank: null,

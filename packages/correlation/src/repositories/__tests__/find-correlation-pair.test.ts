@@ -3,7 +3,8 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
-  correlationAnalysis: {},
+  correlations: {},
+  metrics: {},
 }));
 vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
@@ -34,8 +35,8 @@ describe("findCorrelationPair", () => {
 
   it("should return pair when found in forward direction", async () => {
     const rows = [{
-      rankingKeyX: "keyA",
-      rankingKeyY: "keyB",
+      metricKeyX: "keyA",
+      metricKeyY: "keyB",
       pearsonR: 0.85,
       scatterData: JSON.stringify(scatterData),
     }];
@@ -53,8 +54,8 @@ describe("findCorrelationPair", () => {
 
   it("should swap x/y when found in reverse direction", async () => {
     const rows = [{
-      rankingKeyX: "keyB",
-      rankingKeyY: "keyA",
+      metricKeyX: "keyB",
+      metricKeyY: "keyA",
       pearsonR: 0.85,
       scatterData: JSON.stringify(scatterData),
     }];
@@ -82,8 +83,8 @@ describe("findCorrelationPair", () => {
 
   it("should handle invalid JSON scatter data gracefully", async () => {
     const rows = [{
-      rankingKeyX: "keyA",
-      rankingKeyY: "keyB",
+      metricKeyX: "keyA",
+      metricKeyY: "keyB",
       pearsonR: 0.5,
       scatterData: "invalid json",
     }];

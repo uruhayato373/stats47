@@ -3,15 +3,14 @@ import "server-only";
 import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
 export async function findRankingItem(
   rankingKey: string,
-  areaType: AreaType,
+  _areaType?: string,
   db?: ReturnType<typeof getDrizzle>
 ): Promise<Result<RankingItem | null, Error>> {
   try {
@@ -19,13 +18,13 @@ export async function findRankingItem(
     const result = await drizzleDb
       .select(metricAsRankingItemSelection)
       .from(metrics)
-      .where(and(eq(metrics.key, rankingKey), eq(metrics.areaType, areaType)))
+      .where(eq(metrics.key, rankingKey))
       .limit(1);
 
     if (result.length === 0) return ok(null);
     return ok(parseMetricAsRankingItem(result[0]));
   } catch (error) {
-    logger.error({ error, rankingKey, areaType }, "findRankingItem: failed");
+    logger.error({ error, rankingKey }, "findRankingItem: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }

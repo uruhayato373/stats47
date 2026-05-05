@@ -4,8 +4,7 @@ import {
   readRankingItemFromR2,
   readRankingValuesFromR2,
 } from "@stats47/ranking/server";
-import { isOk } from "@stats47/types";
-import type { AreaType } from "@stats47/types";
+import { isOk, type AreaType, type StatsSchema } from "@stats47/types";
 
 import { toBarChartData } from "../../../adapters";
 import { toLineChartData } from "../../../adapters/toLineChartData";
@@ -18,7 +17,6 @@ import { LineChartClient } from "../LineChart/LineChartClient";
 
 import type { DashboardItemProps } from "../../../types";
 import type { GetStatsDataParams } from "@stats47/estat-api/server";
-import type { StatsSchema } from "@stats47/types";
 
 /**
  * R2 partition snapshot から (rankingKey, areaCode) の時系列を再構築する。
@@ -55,8 +53,7 @@ async function fetchRankingDataDirect(
       areaName: match.areaName,
       yearCode: match.yearCode,
       yearName: match.yearName,
-      categoryCode: match.categoryCode,
-      categoryName: match.categoryName,
+      metricKey: match.metricKey,
       value: match.value,
       unit: match.unit,
     });

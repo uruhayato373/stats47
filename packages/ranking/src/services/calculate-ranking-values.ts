@@ -83,8 +83,8 @@ async function calculatePerCapita(
 
     const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
         type: "per_capita",
-        categoryCode: rankingKey,
-        categoryName: rankingItem.title,
+        metricKey: rankingKey,
+
         unit: rankingItem.unit,
         keyBy: "areaCode",
     });
@@ -120,8 +120,8 @@ async function calculateRatio(
 
     const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
         type: "ratio",
-        categoryCode: rankingKey,
-        categoryName: rankingItem.title,
+        metricKey: rankingKey,
+
         unit: rankingItem.unit,
         keyBy: "areaCode",
     });
@@ -158,8 +158,8 @@ async function calculateSubtraction(
 
     const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
         type: "subtraction",
-        categoryCode: rankingKey,
-        categoryName: rankingItem.title,
+        metricKey: rankingKey,
+
         unit: rankingItem.unit,
         keyBy: "areaCode",
     });

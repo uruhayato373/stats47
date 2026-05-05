@@ -20,8 +20,7 @@ export function computeRankingStats(
   const filteredData = filterOutNationalArea(data);
   if (filteredData.length === 0) return null;
 
-  // 値の配列を取得
-  const values = filteredData.map((item) => item.value);
+  const values = filteredData.map((item) => item.value).filter((v): v is number => v !== null);
 
   // 汎用統計計算関数を使用
   // Note: @stats47/utils は monorepo 内のパッケージとして解決される前提

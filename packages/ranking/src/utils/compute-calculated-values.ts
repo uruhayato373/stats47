@@ -7,10 +7,8 @@ import type { RankingValue } from "../types";
 export interface ComputeOptions {
   /** 計算タイプ */
   type: "ratio" | "per_capita" | "subtraction";
-  /** 計算結果の項目名 */
-  categoryName: string;
-  /** 計算結果の項目コード */
-  categoryCode: string;
+  /** 計算結果の指標キー */
+  metricKey: string;
   /** 計算結果の単位 */
   unit: string;
   /**
@@ -57,6 +55,8 @@ export function computeCalculatedValues(
 
     if (!den) continue;
 
+    if (num.value === null || den.value === null) continue;
+
     let calculatedValue: number;
     if (options.type === "subtraction") {
       calculatedValue = (num.value - den.value) * scaleFactor;
@@ -66,13 +66,11 @@ export function computeCalculatedValues(
       calculatedValue = (num.value / den.value) * scaleFactor;
     }
 
-    // rankを除いたものをコピーし、新しい値を設定
     const { rank: _rank, ...baseData } = num;
 
     result.push({
       ...baseData,
-      categoryCode: options.categoryCode,
-      categoryName: options.categoryName,
+      metricKey: options.metricKey,
       value: calculatedValue,
       unit: options.unit,
     });

@@ -53,8 +53,8 @@ export function convertToBarData(stats: StatsSchema[]): BarDataNode[] {
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000')
-    .map(s => ({ name: s.areaName, value: s.value, code: s.areaCode }));
+    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000' && s.value !== null)
+    .map(s => ({ name: s.areaName, value: s.value as number, code: s.areaCode }));
 }
 
 /**
@@ -105,8 +105,8 @@ export function convertToChoroplethData(stats: StatsSchema[]): ChoroplethDataNod
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000')
-    .map(s => ({ areaCode: s.areaCode, value: s.value }));
+    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000' && s.value !== null)
+    .map(s => ({ areaCode: s.areaCode, value: s.value as number }));
 }
 
 /**

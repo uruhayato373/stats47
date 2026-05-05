@@ -8,8 +8,7 @@ const makeValue = (areaCode: string, value: number, yearCode = "2020"): RankingV
   areaType: "prefecture",
   yearCode,
   yearName: `${yearCode}年`,
-  categoryCode: "test",
-  categoryName: "テスト",
+  metricKey: "test",
   value,
   unit: "人",
   rank: 1,
@@ -17,8 +16,7 @@ const makeValue = (areaCode: string, value: number, yearCode = "2020"): RankingV
 
 const baseOptions = {
   type: "ratio" as const,
-  categoryCode: "result",
-  categoryName: "結果",
+  metricKey: "result",
   unit: "%",
 };
 
@@ -33,8 +31,7 @@ describe("computeCalculatedValues", () => {
       expect(result).toHaveLength(1); // 02は分母0なので除外
       expect(result[0].areaCode).toBe("01000");
       expect(result[0].value).toBe(2); // 100 / 50
-      expect(result[0].categoryCode).toBe("result");
-      expect(result[0].categoryName).toBe("結果");
+      expect(result[0].metricKey).toBe("result");
       expect(result[0].unit).toBe("%");
     });
 
