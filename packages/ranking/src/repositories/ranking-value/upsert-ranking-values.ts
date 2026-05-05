@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, observations } from "@stats47/database/server";
+import { getDrizzle, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { sql } from "drizzle-orm";
@@ -42,14 +42,14 @@ export async function upsertRankingValues(
     }));
 
     await drizzleDb
-      .insert(observations)
+      .insert(stats)
       .values(rows)
       .onConflictDoUpdate({
         target: [
-          observations.metricKey,
-          observations.areaType,
-          observations.areaCode,
-          observations.yearCode,
+          stats.metricKey,
+          stats.areaType,
+          stats.areaCode,
+          stats.yearCode,
         ],
         set: {
           areaName: sql.raw("excluded.area_name"),

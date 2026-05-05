@@ -2,7 +2,7 @@
  * 賃金構造基本統計調査 — 職種別年収データ投入スクリプト
  *
  * statsDataId=0003445758 から月給(tab:40)と賞与(tab:44)を取得し、
- * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して observations に INSERT する。
+ * 年収(万円) = (月給 × 12 + 賞与) ÷ 10 を計算して stats に INSERT する。
  *
  * Usage:
  *   npx tsx packages/database/scripts/populate-occupation-income.ts
@@ -67,7 +67,7 @@ if (isDryRun) console.log("【DRY RUN】");
 
 // Prepared statements
 const upsertData = db.prepare(`
-  INSERT INTO observations (
+  INSERT INTO stats (
     metric_id, area_type, area_code,
     year_code, value, rank
   )
@@ -203,7 +203,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
   }
   console.log(`  年度: ${years[0]}〜${years[years.length - 1]} (${years.length}年)`);
 
-  // 4. observations 投入
+  // 4. stats 投入
   let totalInserted = 0;
 
   const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
@@ -251,7 +251,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
     const top = db
       .prepare(
         `SELECT o.area_code AS area_name, o.value, o.rank
-         FROM observations o
+         FROM stats o
          INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
          ORDER BY o.rank LIMIT 3`
@@ -284,7 +284,7 @@ async function main() {
   for (const def of targets) {
     const count = db
       .prepare(
-        `SELECT COUNT(*) as c FROM observations o
+        `SELECT COUNT(*) as c FROM stats o
          INNER JOIN metrics i ON i.id = o.metric_id
          WHERE i.key = ? AND i.area_type = 'prefecture'`
       )

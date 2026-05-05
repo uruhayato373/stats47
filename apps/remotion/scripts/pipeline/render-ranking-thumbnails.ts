@@ -115,7 +115,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
   const dataStmt = db.prepare(
     `SELECT o.area_code, COALESCE(p.name, o.area_code) AS area_name,
             o.value, o.rank
-     FROM observations o
+     FROM stats o
      LEFT JOIN prefectures p ON p.code = o.area_code
      WHERE o.area_type = 'prefecture'
        AND o.metric_id = ?

@@ -28,7 +28,8 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     { rankingKey: "fish-catch", shortLabel: "漁獲量", role: "primary" },
     { rankingKey: "marine-fishery-catch", shortLabel: "海面漁獲量", role: "secondary" },
     { rankingKey: "inland-fishery-catch", shortLabel: "内水面漁獲量", role: "secondary" },
-    { rankingKey: "fishing-port-count-ksj", shortLabel: "漁港数", role: "context" },
+    { rankingKey: "fishing-port-count",     shortLabel: "漁港数",       role: "context" },
+    { rankingKey: "fishing-port-count-ksj", shortLabel: "漁港数(KSJ)", role: "context" },
     // 養殖（育てる漁業）
     { rankingKey: "aquaculture-harvest", shortLabel: "養殖収獲量", role: "secondary" },
     { rankingKey: "marine-aquaculture-harvest", shortLabel: "海面養殖", role: "secondary" },
@@ -76,6 +77,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
         "fish-catch",
         "marine-fishery-catch",
         "inland-fishery-catch",
+        "fishing-port-count",
         "fishing-port-count-ksj",
       ],
     },

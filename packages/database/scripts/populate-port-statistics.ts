@@ -345,7 +345,7 @@ for (const r of db
 console.log(`port metrics: ${metricToIndicatorId.size} 件`);
 
 const upsertStmt = db.prepare(`
-  INSERT INTO observations (
+  INSERT INTO stats (
     metric_id, area_type, area_code,
     year_code, value
   )
@@ -510,18 +510,18 @@ async function main() {
   // 最終サマリー
   const totalRows = db
     .prepare(
-      "SELECT COUNT(*) as cnt FROM observations WHERE area_type = 'port'"
+      "SELECT COUNT(*) as cnt FROM stats WHERE area_type = 'port'"
     )
     .get() as any;
   console.log(`\n=== 完了 ===`);
   console.log(`投入合計: ${totalInserted} 件`);
-  console.log(`observations(area_type=port) 総行数: ${totalRows.cnt}`);
+  console.log(`stats(area_type=port) 総行数: ${totalRows.cnt}`);
 
   // indicator 別の行数
   const byIndicator = db
     .prepare(
       `SELECT i.key, COUNT(*) as cnt
-       FROM observations o
+       FROM stats o
        INNER JOIN metrics i ON i.id = o.metric_id
        WHERE i.area_type = 'port'
        GROUP BY i.key

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, stats } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, count, eq, exists } from "drizzle-orm";
@@ -18,11 +18,11 @@ export async function countRankingItemsByAreaType(
       .from(metrics)
       .where(
         exists(
-          drizzleDb.select({ metricKey: observations.metricKey })
-            .from(observations)
+          drizzleDb.select({ metricKey: stats.metricKey })
+            .from(stats)
             .where(and(
-              eq(observations.metricKey, metrics.key),
-              eq(observations.areaType, areaType as ValidAreaType)
+              eq(stats.metricKey, metrics.key),
+              eq(stats.areaType, areaType as ValidAreaType)
             ))
         )
       );

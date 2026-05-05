@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, observations } from "@stats47/database/server";
+import { getDrizzle, stats } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -21,21 +21,21 @@ export async function listRankingValuesAllYears(
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
       .select({
-        areaCode: observations.areaCode,
-        areaName: observations.areaName,
-        yearCode: observations.yearCode,
-        yearName: observations.yearName,
-        metricKey: observations.metricKey,
-        value: observations.value,
-        unit: observations.unit,
-        rank: observations.rank,
+        areaCode: stats.areaCode,
+        areaName: stats.areaName,
+        yearCode: stats.yearCode,
+        yearName: stats.yearName,
+        metricKey: stats.metricKey,
+        value: stats.value,
+        unit: stats.unit,
+        rank: stats.rank,
       })
-      .from(observations)
+      .from(stats)
       .where(
         and(
-          eq(observations.metricKey, rankingKey),
-          eq(observations.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"),
-          ne(observations.areaCode, "00000")
+          eq(stats.metricKey, rankingKey),
+          eq(stats.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"),
+          ne(stats.areaCode, "00000")
         )
       );
 

@@ -3,7 +3,7 @@ import { AreaType } from "./area";
 /**
  * 統計データのスキーマ
  *
- * observations テーブルの行と 1:1 対応。
+ * stats テーブルの行と 1:1 対応。
  * 指標のタイトル（旧 categoryName）は metrics.title から別途取得する。
  */
 export interface StatsSchema {

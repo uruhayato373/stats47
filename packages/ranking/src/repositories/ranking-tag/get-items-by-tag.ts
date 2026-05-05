@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, stats, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -27,11 +27,11 @@ export async function getItemsByTag(
           eq(taggings.taggableType, "metric"),
           eq(taggings.tagKey, tagKey),
           exists(
-            drizzleDb.select({ metricKey: observations.metricKey })
-              .from(observations)
+            drizzleDb.select({ metricKey: stats.metricKey })
+              .from(stats)
               .where(and(
-                eq(observations.metricKey, metrics.key),
-                eq(observations.areaType, areaType as ValidAreaType)
+                eq(stats.metricKey, metrics.key),
+                eq(stats.areaType, areaType as ValidAreaType)
               ))
           )
         )

@@ -14,10 +14,10 @@ import { surveys } from "./surveys";
 /**
  * メトリクス定義 — 統計指標の定義 (key が単独一意キー)
  *
- * area_type は observations に持つ属性のため metrics からは削除済み。
+ * area_type は stats に持つ属性のため metrics からは削除済み。
  * - source_id: sources.id への FK
  * - JSON 列はすべて _json サフィックス
- * - 値は observations(metric_key) に格納、年度は observations から動的計算
+ * - 値は stats(metric_key) に格納、年度は stats から動的計算
  *
  * 旧名 indicators (PR #210, 2026-05-04 リネーム — "indicators" は汎用的すぎたため)。
  */

@@ -12,8 +12,8 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
  * 港湾マスタ — 甲種港湾 171港
  * コード体系: 都道府県コード2桁 + 連番3桁（例: 01001 = 北海道_稚内）
  *
- * 旧 portStatistics は PR-6 で observations(entity_type='port') に統合し DROP した。
- * port 別の時系列値を取得する場合は observations テーブルを参照すること。
+ * 旧 portStatistics は PR-6 で stats(entity_type='port') に統合し DROP した。
+ * port 別の時系列値を取得する場合は stats テーブルを参照すること。
  */
 export const ports = sqliteTable(
   "ports",

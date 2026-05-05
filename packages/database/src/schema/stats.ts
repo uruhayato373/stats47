@@ -13,16 +13,16 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { metrics } from "./metrics";
 
 /**
- * 観測値 — metric × area × year の値
+ * 統計値 — metric × area × year の値
  *
  * PK: (metric_key, area_type, area_code, year_code)
- * FK: metric_key → metrics(key)  ← 単独キー（area_type は observations が保持）
+ * FK: metric_key → metrics(key)  ← 単独キー（area_type は stats が保持）
  *
  * area_name / year_name / unit は書き込み時に一回計算して denorm 保存。
  * 変更が稀なため JOIN コストを排除する設計。
  */
-export const observations = sqliteTable(
-  "observations",
+export const stats = sqliteTable(
+  "stats",
   {
     metricKey: text("metric_key").notNull(),
     areaType: text("area_type", {
@@ -50,24 +50,24 @@ export const observations = sqliteTable(
       columns: [table.metricKey],
       foreignColumns: [metrics.key],
     }),
-    entityIdx: index("idx_observations_entity").on(
+    entityIdx: index("idx_stats_entity").on(
       table.areaType,
       table.areaCode,
       table.yearCode
     ),
-    metricYearIdx: index("idx_observations_metric_year").on(
+    metricYearIdx: index("idx_stats_metric_year").on(
       table.metricKey,
       table.yearCode
     ),
-    metricAreaTypeIdx: index("idx_observations_metric_atype").on(
+    metricAreaTypeIdx: index("idx_stats_metric_atype").on(
       table.metricKey,
       table.areaType
     ),
   })
 );
 
-export type Observation = typeof observations.$inferSelect;
-export type InsertObservation = typeof observations.$inferInsert;
+export type Observation = typeof stats.$inferSelect;
+export type InsertObservation = typeof stats.$inferInsert;
 
-export const insertObservationSchema = createInsertSchema(observations);
-export const selectObservationSchema = createSelectSchema(observations);
+export const insertObservationSchema = createInsertSchema(stats);
+export const selectObservationSchema = createSelectSchema(stats);

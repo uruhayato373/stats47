@@ -7,7 +7,7 @@ import { availableYearsSql, latestYearSql } from "./derive-years-sql";
 /**
  * metrics テーブルから RankingItemDB 互換形式で取り出すための SELECT
  *
- * latest_year / available_years は cache 列ではなく observations から動的計算
+ * latest_year / available_years は cache 列ではなく stats から動的計算
  * (`derive-years-sql.ts` 参照、yearName format は "年度" 統一)。
  * data_source_id は廃止 → "estat" 固定 (旧スキーマの default を踏襲)。
  * parseRankingItemDB ではこのオブジェクトをそのまま流せる。

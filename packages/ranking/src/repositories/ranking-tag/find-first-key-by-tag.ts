@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations, taggings } from "@stats47/database/server";
+import { getDrizzle, metrics, stats, taggings } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, desc, eq, exists, sql } from "drizzle-orm";
 
@@ -23,11 +23,11 @@ export async function findFirstKeyByTag(
           eq(taggings.tagKey, tagKey),
           eq(metrics.isActive, true),
           exists(
-            drizzleDb.select({ metricKey: observations.metricKey })
-              .from(observations)
+            drizzleDb.select({ metricKey: stats.metricKey })
+              .from(stats)
               .where(and(
-                eq(observations.metricKey, metrics.key),
-                eq(observations.areaType, "prefecture")
+                eq(stats.metricKey, metrics.key),
+                eq(stats.areaType, "prefecture")
               ))
           )
         )

@@ -118,7 +118,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
   const dataStmt = db.prepare(
     `SELECT o.area_code, COALESCE(p.name, o.area_code) AS area_name,
             o.value, o.rank
-     FROM observations o
+     FROM stats o
      LEFT JOIN prefectures p ON p.code = o.area_code
      WHERE o.area_type = 'prefecture'
        AND o.metric_id = ?
@@ -147,7 +147,7 @@ function loadAllRankingsFromD1(dbPath: string): RankingTarget[] {
 
     if (!yearCode) continue;
 
-    // observations から最新年の47都道府県データを取得
+    // stats から最新年の47都道府県データを取得
     const rows = dataStmt.all(item.id, yearCode) as RankingDataRow[];
     if (rows.length === 0) continue;
 

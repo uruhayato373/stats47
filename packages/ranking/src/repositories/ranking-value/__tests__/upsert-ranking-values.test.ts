@@ -4,7 +4,7 @@ vi.mock("server-only", () => ({}));
 vi.mock("@stats47/database/server", () => ({
   getDrizzle: vi.fn(),
   metrics: {},
-  observations: {
+  stats: {
     metricId: "metric_id",
     areaType: "area_type",
     areaCode: "area_code",

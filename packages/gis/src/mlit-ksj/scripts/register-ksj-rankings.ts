@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * KSJ データから都道府県別施設数を集計し、metrics + observations に登録
+ * KSJ データから都道府県別施設数を集計し、metrics + stats に登録
  */
 
 import * as fs from "node:fs";
@@ -336,25 +336,25 @@ async function main() {
 
   const insertItem = db.prepare(`
     INSERT INTO metrics (
-      key, area_type, title, unit, category_key, source_id,
-      source_config_json, is_active, is_featured, created_at, updated_at
-    ) VALUES (?, 'prefecture', ?, ?, ?, 'mlit_ksj', ?, 1, 0, ?, ?)
+      key, title, unit, category_key, source_id,
+      source_config_json, is_active, is_featured, year_format, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, 'mlit_ksj', ?, 1, 0, 'plain', ?, ?)
   `);
 
   const insertData = db.prepare(`
-    INSERT OR REPLACE INTO observations (
-      metric_id, area_type, area_code,
-      year_code, value, rank, created_at
-    ) VALUES (?, ?, ?,
-      ?, ?, ?, ?)
+    INSERT OR REPLACE INTO stats (
+      metric_key, area_type, area_code, area_name,
+      year_code, year_name, value, unit, rank
+    ) VALUES (?, 'prefecture', ?, ?,
+      ?, ?, ?, ?, ?)
   `);
 
   const checkExisting = db.prepare(
-    "SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'"
+    "SELECT key FROM metrics WHERE key = ?"
   );
 
-  const findIndicatorId = db.prepare(
-    "SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'"
+  const findIndicatorKey = db.prepare(
+    "SELECT key FROM metrics WHERE key = ?"
   );
 
   let created = 0;
@@ -393,14 +393,13 @@ async function main() {
       now
     );
 
-    const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
+    const indicatorRow = findIndicatorKey.get(def.rankingKey) as { key: string } | undefined;
     if (!indicatorRow) {
-      console.warn(`[WARN] indicator が登録されませんでした: ${def.rankingKey}`);
+      console.warn(`[WARN] metric が登録されませんでした: ${def.rankingKey}`);
       continue;
     }
-    const metricId = indicatorRow.id;
 
-    // observations 登録（順位付き）
+    // stats 登録（順位付き）
     const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
     let rank = 0;
     let prevVal = -1;
@@ -409,14 +408,16 @@ async function main() {
       if (count !== prevVal) { rank = i + 1; prevVal = count; }
       const areaCode = prefCode + "000";
       const areaName = PREF_NAMES[prefCode] || "";
+      const yearName = `${def.yearCode}年`;
       insertData.run(
-        metricId,
-        "prefecture",
+        def.rankingKey,
         areaCode,
+        areaName,
         def.yearCode,
+        yearName,
         count,
-        rank,
-        now
+        def.unit,
+        rank
       );
       dataRows++;
     }
@@ -434,7 +435,7 @@ async function main() {
   console.log(`\n=== 完了 ===`);
   console.log(`  作成: ${created} ランキング`);
   console.log(`  スキップ: ${skipped}`);
-  console.log(`  observations: ${dataRows} 行`);
+  console.log(`  stats: ${dataRows} 行`);
 
   db.close();
 }

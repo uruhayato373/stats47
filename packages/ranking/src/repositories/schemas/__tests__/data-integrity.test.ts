@@ -1,7 +1,7 @@
 /**
  * データ整合性テスト
  *
- * ローカル D1 の metrics / observations が Zod スキーマでパースできるかを検証する。
+ * ローカル D1 の metrics / stats が Zod スキーマでパースできるかを検証する。
  * 本番で 404 を引き起こすフォーマット不整合を事前に検出する。
  *
  * 背景: latest_year が配列形式 ["2023"] で保存された、area_code が 2 桁 "01" で
@@ -77,13 +77,13 @@ describe("metrics データ整合性", () => {
     }
   });
 
-  test("observations の area_code が全て5桁形式", () => {
+  test("stats の area_code が全て5桁形式", () => {
     const db = new Database(DB_PATH, { readonly: true });
     try {
       const bad = db
         .prepare(
           `SELECT DISTINCT metric_key, area_code
-           FROM observations
+           FROM stats
            WHERE LENGTH(area_code) != 5
              AND area_code != '0'
            LIMIT 20`

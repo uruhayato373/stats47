@@ -204,7 +204,7 @@ export interface RankingItem {
   /**
    * 地域タイプ（都道府県、市区町村など）
    * metrics テーブルから area_type が削除されたため、常に "prefecture" がデフォルトとなる。
-   * 実際の観測粒度は observations.area_type が保持する。
+   * 実際の観測粒度は stats.area_type が保持する。
    */
   areaType: AreaType;
 
