@@ -24,7 +24,6 @@ import { eq } from "drizzle-orm";
 import type { FaqContent } from "../types";
 
 const AREA_TYPE = "prefecture";
-const PROMPT_VERSION = "1.0.0";
 
 // ============================================================
 // 引数パース
@@ -204,15 +203,10 @@ async function processOne(
     // DB 保存
     await upsertRankingAiContent({
       rankingKey,
-      areaType: AREA_TYPE,
       faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
       regionalAnalysis: parsed.regionalAnalysis ?? null,
       insights: parsed.insights ?? null,
       yearCode,
-      aiModel: model,
-      promptVersion: PROMPT_VERSION,
-      generatedAt: new Date().toISOString(),
-      isActive: true,
     });
 
     process.stdout.write(`[OK] ${label} (${yearCode})\n`);
