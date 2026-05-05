@@ -9,8 +9,7 @@ const createMockRankingValue = (value: number): RankingValue => ({
   areaName: "北海道",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A",
-  categoryName: "テスト",
+  metricKey: "A",
   value,
   unit: "人",
 });

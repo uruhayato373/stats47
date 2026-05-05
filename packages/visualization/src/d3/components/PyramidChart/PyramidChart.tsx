@@ -217,7 +217,7 @@ export function PyramidChart({
         const category = d.key;
         showTooltip(event, name, {
           value: Math.abs(value),
-          categoryName: category,
+          metricTitle: category,
           unit,
         });
       })

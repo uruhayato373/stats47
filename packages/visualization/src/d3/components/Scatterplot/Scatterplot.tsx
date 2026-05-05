@@ -168,7 +168,7 @@ export function Scatterplot({
                     showTooltip(event, d.label || d.category || "Data Point", {
                         value: typeof d.y === "number" ? d.y : null,
                         unit: yLabel,
-                        categoryName: d.category,
+                        metricTitle: d.category,
                     });
                 })
                 .on("mousemove", (event) => {

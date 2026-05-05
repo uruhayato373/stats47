@@ -33,23 +33,15 @@ export function convertToStatsSchema(
   const yearCode = extractYearCode(fullTimeCode);
   const yearName = extractYearName(time.name);
 
-  // categoryNameからcategoryCodeのプレフィックスを削除（例: A1101_総人口 → 総人口）
-  let categoryName = cat01.name;
-  const categoryCodePrefix = cat01.code + "_";
-  if (categoryName.startsWith(categoryCodePrefix)) {
-    categoryName = categoryName.substring(categoryCodePrefix.length);
-  }
-
   const areaCode = area.code;
 
   return {
+    metricKey: cat01.code,
     areaCode,
     areaName: area.name,
     yearCode,
     yearName,
-    categoryCode: cat01.code,
-    categoryName: categoryName,
-    value: formattedValue.value ?? 0, // nullの場合は0
+    value: formattedValue.value ?? null,
     unit: formattedValue.unit || "",
   };
 }

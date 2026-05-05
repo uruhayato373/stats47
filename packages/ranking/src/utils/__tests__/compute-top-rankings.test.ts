@@ -20,8 +20,7 @@ function createTestData(
     value,
     yearCode: '2020',
     yearName: '2020年',
-    categoryCode: '001',
-    categoryName: 'テスト',
+    metricKey: '001',
     unit: '人',
   };
 }

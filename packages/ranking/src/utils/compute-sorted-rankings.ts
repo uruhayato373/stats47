@@ -26,7 +26,9 @@ export function computeSortedRankings<T extends StatsSchema>(
   let processed = excludeNational ? (filterOutNationalArea(data) as T[]) : [...data];
 
   processed.sort((a, b) => {
-    return order === "desc" ? b.value - a.value : a.value - b.value;
+    const av = a.value ?? -Infinity;
+    const bv = b.value ?? -Infinity;
+    return order === "desc" ? bv - av : av - bv;
   });
 
   return limit ? processed.slice(0, limit) : processed;

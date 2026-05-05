@@ -106,7 +106,7 @@ export function BarChart({
                     showTooltip(event, d.category, {
                         value: d.value,
                         unit,
-                        categoryName: d.key,
+                        metricTitle: d.key,
                     });
                 })
                 .on("mousemove", (event) => updateTooltipPosition(event))
@@ -164,7 +164,7 @@ export function BarChart({
                     showTooltip(event, d.data[indexBy] as string, {
                         value: d[1] - d[0],
                         unit,
-                        categoryName: d.key,
+                        metricTitle: d.key,
                     });
                 })
                 .on("mousemove", (event) => updateTooltipPosition(event))
@@ -227,7 +227,7 @@ export function BarChart({
                     showTooltip(event, String(d[indexBy]), {
                         value: Number(d[valueKey]),
                         unit,
-                        categoryName: "",
+                        metricTitle: "",
                     });
                 })
                 .on("mousemove", (event) => updateTooltipPosition(event))

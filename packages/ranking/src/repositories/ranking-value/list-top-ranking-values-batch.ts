@@ -32,8 +32,7 @@ export async function listTopRankingValuesBatch(
         .select({
           areaCode: observations.areaCode,
           yearCode: observations.yearCode,
-          categoryCode: metrics.key,
-          categoryName: metrics.title,
+          metricKey: metrics.key,
           value: observations.value,
           unit: metrics.unit,
           rank: observations.rank,
@@ -55,7 +54,7 @@ export async function listTopRankingValuesBatch(
     const topMap = new Map<string, RankingValue>();
 
     for (const row of result) {
-      const key = row.categoryCode;
+      const key = row.metricKey;
       const expectedYear = yearByKey.get(key);
       if (expectedYear && String(row.yearCode) === expectedYear) {
         topMap.set(key, {
@@ -64,8 +63,7 @@ export async function listTopRankingValuesBatch(
           areaName: areaNameMap.get(row.areaCode) ?? row.areaCode,
           yearCode: String(row.yearCode),
           yearName: formatYearName(String(row.yearCode), row.yearFormat ?? "fiscal"),
-          categoryCode: key,
-          categoryName: row.categoryName ?? "",
+          metricKey: key,
           value: row.value !== null ? Number(row.value) : 0,
           unit: row.unit ?? "",
           rank: row.rank != null ? Number(row.rank) : 0,

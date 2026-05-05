@@ -84,7 +84,7 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const plot = makePlotArea(W, H, { top: 58, right: 14 + legendW, bottom: 60 + legendBottomH, left: 55 });
 
   // Y 軸範囲
-  const allValues = data.map((d) => d.value);
+  const allValues = data.map((d) => d.value).filter((v): v is number => v !== null);
   const yLo = Math.min(yMin, Math.min(...allValues));
   const yHi = Math.max(...allValues);
   const yTicks = niceTicks(yLo, yHi, 5);
