@@ -28,7 +28,54 @@ e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ## 手順
 
-### Phase 1: 検索実行
+### Phase 0: ローカルカタログ検索（API より先に実行）
+
+e-Stat API を叩く前に、ローカル D1 の `estat_metainfo` カタログを検索する。
+8,000+ 件の候補（`status='candidate'`）が `category_key` / `gov_org` / `title` で整理済みのため、
+多くの場合 API 不要で statsDataId を特定できる。
+
+```ts
+// scripts/temp-search-catalog.mts
+import BetterSqlite3 from "better-sqlite3";
+import { drizzle } from "drizzle-orm/better-sqlite3";
+import { and, like, eq } from "drizzle-orm";
+import * as schema from "../packages/database/src/schema";
+
+const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+const sqlite = new BetterSqlite3(DB_PATH, { readonly: true });
+const db = drizzle(sqlite, { schema });
+
+const rows = await db.select({
+  statsDataId: schema.estatMetainfo.statsDataId,
+  title: schema.estatMetainfo.title,
+  govOrg: schema.estatMetainfo.govOrg,
+  cycle: schema.estatMetainfo.cycle,
+  surveyDate: schema.estatMetainfo.surveyDate,
+  categoryKey: schema.estatMetainfo.categoryKey,
+  status: schema.estatMetainfo.status,
+}).from(schema.estatMetainfo)
+  .where(and(
+    like(schema.estatMetainfo.title, "%<KEYWORD>%"),
+    // eq(schema.estatMetainfo.categoryKey, "<CATEGORY_KEY>"),  // 絞り込む場合
+    // eq(schema.estatMetainfo.govOrg, "<GOV_ORG>"),            // 省庁で絞る場合
+  ))
+  .limit(30);
+
+for (const r of rows) {
+  console.log(`[${r.statsDataId}] (${r.status}) ${r.title}`);
+  console.log(`  機関: ${r.govOrg} | 周期: ${r.cycle} | 調査: ${r.surveyDate} | カテゴリ: ${r.categoryKey}`);
+}
+sqlite.close();
+```
+
+```bash
+npx tsx scripts/temp-search-catalog.mts
+```
+
+**カタログで見つかった場合**: そのまま `/inspect-estat-meta` へ進む（Phase 1 をスキップ）。
+**カタログにない場合**: Phase 1 の API 検索へ進む。
+
+### Phase 1: e-Stat API 検索（カタログにない場合のみ）
 
 1. 一時スクリプトを作成して検索を実行:
 
