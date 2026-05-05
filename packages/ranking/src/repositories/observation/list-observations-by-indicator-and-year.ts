@@ -1,11 +1,11 @@
 import "server-only";
 
-import { getDrizzle, stats } from "@stats47/database/server";
+import { getDrizzle, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, eq, like, or } from "drizzle-orm";
 
-import type { Observation } from "@stats47/database/server";
+import type { StatsPrefecture as Observation } from "@stats47/database/server";
 
 /**
  * stats を (metric_key, year_code) で取得する並行 reader
@@ -19,13 +19,13 @@ export async function listObservationsByIndicatorAndYear(
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select()
-      .from(stats)
+      .from(statsPrefecture)
       .where(
         and(
-          eq(stats.metricKey, metricKey),
+          eq(statsPrefecture.metricKey, metricKey),
           or(
-            eq(stats.yearCode, yearCode),
-            like(stats.yearCode, `${yearCode}%`)
+            eq(statsPrefecture.yearCode, yearCode),
+            like(statsPrefecture.yearCode, `${yearCode}%`)
           ),
         )
       );

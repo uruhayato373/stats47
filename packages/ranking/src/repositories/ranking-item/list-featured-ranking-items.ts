@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import { and, asc, eq, exists } from "drizzle-orm";
@@ -21,11 +21,10 @@ export async function listFeaturedRankingItems(
         and(
           eq(metrics.isFeatured, true),
           exists(
-            drizzleDb.select({ metricKey: stats.metricKey })
-              .from(stats)
+            drizzleDb.select({ metricKey: statsPrefecture.metricKey })
+              .from(statsPrefecture)
               .where(and(
-                eq(stats.metricKey, metrics.key),
-                eq(stats.areaType, "prefecture")
+                eq(statsPrefecture.metricKey, metrics.key),
               ))
           )
         )

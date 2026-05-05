@@ -6,7 +6,7 @@ export interface SnapshotArticleTag {
   tagKey: string;
 }
 
-export interface SnapshotArticle extends ArticleRow {
+export interface SnapshotArticle extends Omit<ArticleRow, "tags"> {
   tags: SnapshotArticleTag[];
 }
 

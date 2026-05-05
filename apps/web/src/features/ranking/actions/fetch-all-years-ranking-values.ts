@@ -61,7 +61,7 @@ export async function fetchAllYearsRankingValuesAction(
   }
   const reranked: RankingValue[] = [];
   for (const vals of byYear.values()) {
-    vals.sort((a, b) => b.value - a.value);
+    vals.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
     for (let i = 0; i < vals.length; i++) {
       reranked.push({ ...vals[i], rank: i + 1 });
     }

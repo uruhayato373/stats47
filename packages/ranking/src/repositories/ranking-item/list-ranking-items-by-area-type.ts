@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, eq, exists } from "drizzle-orm";
@@ -8,7 +8,7 @@ import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
 
-type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
+type ValidAreaType = "prefecture" | "city" | "port";
 
 export async function listRankingItemsByAreaType(
   areaType: AreaType,
@@ -19,11 +19,10 @@ export async function listRankingItemsByAreaType(
     const drizzleDb = db ?? getDrizzle();
     const conditions = [
       exists(
-        drizzleDb.select({ metricKey: stats.metricKey })
-          .from(stats)
+        drizzleDb.select({ metricKey: statsPrefecture.metricKey })
+          .from(statsPrefecture)
           .where(and(
-            eq(stats.metricKey, metrics.key),
-            eq(stats.areaType, areaType as ValidAreaType)
+            eq(statsPrefecture.metricKey, metrics.key),
           ))
       ),
       eq(metrics.isActive, true),

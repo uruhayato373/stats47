@@ -62,7 +62,7 @@ export function TopAreasCard({
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <span className="text-xs tabular-nums text-muted-foreground">
-                  {formatValueWithPrecision(v.value, decimalPlaces)}
+                  {formatValueWithPrecision(v.value ?? 0, decimalPlaces)}
                   <span className="ml-0.5">{unit}</span>
                 </span>
                 <ChevronRight className="w-3 h-3 text-muted-foreground/40 group-hover:text-primary transition-colors" />

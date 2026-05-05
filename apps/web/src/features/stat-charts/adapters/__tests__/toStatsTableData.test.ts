@@ -9,8 +9,7 @@ const baseRow: StatsSchema = {
   areaName: "東京都",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A1101",
-  categoryName: "人口",
+  metricKey: "A1101",
   value: 100,
   unit: "人",
 };
@@ -29,7 +28,6 @@ describe("toStatsTableData", () => {
           yearName: "2020年",
           value: 84,
           unit: "万人",
-          categoryName: "出生数",
         },
         {
           ...baseRow,
@@ -37,7 +35,6 @@ describe("toStatsTableData", () => {
           yearName: "2021年",
           value: 81,
           unit: "万人",
-          categoryName: "出生数",
         },
       ],
     ];

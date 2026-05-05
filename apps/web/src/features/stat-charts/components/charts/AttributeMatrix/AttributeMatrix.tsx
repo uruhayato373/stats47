@@ -39,7 +39,7 @@ export const AttributeMatrixDashboard = async ({
       // Build matrix from response data
       const dataByCode = new Map<string, number>();
       for (const item of response.data) {
-        dataByCode.set(item.categoryCode, item.value);
+        dataByCode.set(item.metricKey, item.value ?? 0);
       }
 
       const matrixRows = rows.map((row) => ({

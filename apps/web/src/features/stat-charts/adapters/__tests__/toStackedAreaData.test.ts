@@ -5,12 +5,11 @@ import { toStackedAreaData } from "../toStackedAreaData";
 import type { StatsSchema } from "@stats47/types";
 
 const baseRow: StatsSchema = {
+  metricKey: "A1101",
   areaCode: "13000",
   areaName: "東京都",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A1101",
-  categoryName: "人口",
   value: 100,
   unit: "人",
 };
@@ -53,33 +52,17 @@ describe("toStackedAreaData", () => {
     expect(result.series).toHaveLength(0);
   });
 
-  it("labels 省略時に categoryName からラベルを導出する", () => {
+  it("labels 省略時に空ラベルを使用する", () => {
     const rawDataList: StatsSchema[][] = [
-      [
-        {
-          ...baseRow,
-          categoryName: "農業",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 100,
-        },
-      ],
-      [
-        {
-          ...baseRow,
-          categoryName: "工業",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 200,
-        },
-      ],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 100 }],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 200 }],
     ];
 
     const result = toStackedAreaData(rawDataList);
 
     expect(result.series).toHaveLength(2);
-    expect(result.series[0].key).toBe("農業");
-    expect(result.series[1].key).toBe("工業");
+    expect(result.series[0].key).toBe("");
+    expect(result.series[1].key).toBe("");
   });
 
   it("年度コードで昇順ソートされる", () => {

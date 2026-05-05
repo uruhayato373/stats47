@@ -333,26 +333,25 @@ const knownPorts = new Map<string, string>(
 );
 console.log(`既知の港: ${knownPorts.size} 件`);
 
-// metric_key → metric_id の lookup map (3 層 schema、PR-6)
-// metrics.key は "port-{metric_key}" 形式 (e.g. ships_total → port-ships-total)
-const metricToIndicatorId = new Map<string, number>();
+// localKey → metrics.key の lookup map (e.g. ships_total → port-ships-total)
+const metricToKey = new Map<string, string>();
 for (const r of db
-  .prepare("SELECT id, key FROM metrics WHERE area_type = 'port'")
-  .all() as { id: number; key: string }[]) {
-  const metricKey = r.key.replace(/^port-/, "").replace(/-/g, "_");
-  metricToIndicatorId.set(metricKey, r.id);
+  .prepare("SELECT key FROM metrics WHERE key LIKE 'port-%'")
+  .all() as { key: string }[]) {
+  const localKey = r.key.replace(/^port-/, "").replace(/-/g, "_");
+  metricToKey.set(localKey, r.key);
 }
-console.log(`port metrics: ${metricToIndicatorId.size} 件`);
+console.log(`port metrics: ${metricToKey.size} 件`);
 
 const upsertStmt = db.prepare(`
-  INSERT INTO stats (
-    metric_id, area_type, area_code,
-    year_code, value
-  )
-  VALUES (?, 'port', ?,
-    ?, ?)
-  ON CONFLICT (metric_id, area_type, area_code, year_code) DO UPDATE SET
-    value = excluded.value
+  INSERT INTO stats_port
+    (metric_key, area_code, area_name, year_code, year_name, value, unit)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+  ON CONFLICT (metric_key, area_code, year_code) DO UPDATE SET
+    area_name = excluded.area_name,
+    year_name = excluded.year_name,
+    value     = excluded.value,
+    unit      = excluded.unit
 `);
 
 /** プロキシ対応 fetch */
@@ -407,14 +406,14 @@ function isIndividualPort(code: string): boolean {
 async function processMetric(metric: MetricDef): Promise<number> {
   console.log(`\n--- ${metric.key}: ${metric.label} ---`);
 
-  const metricId = metricToIndicatorId.get(metric.key);
-  if (!metricId) {
+  const metricKey = metricToKey.get(metric.key);
+  if (!metricKey) {
     console.warn(`  WARN: indicator が未登録 (key=port-${metric.key.replace(/_/g, "-")})、スキップ`);
     return 0;
   }
 
   if (metric.needsAggregation) {
-    return processAggregateMetric(metric, metricId);
+    return processAggregateMetric(metric, metricKey);
   }
 
   const rawData = await fetchEstatData(metric.statsDataId, metric.filters);
@@ -437,7 +436,7 @@ async function processMetric(metric: MetricDef): Promise<number> {
       const year = timeCode.substring(0, 4);
 
       if (!isDryRun) {
-        upsertStmt.run(metricId, portCode, year, value);
+        upsertStmt.run(metricKey, portCode, portName, year, `${year}年`, value, metric.unit);
       }
       inserted++;
     }
@@ -451,7 +450,7 @@ async function processMetric(metric: MetricDef): Promise<number> {
 /** 同一 port+year の複数行を合算して投入 */
 async function processAggregateMetric(
   metric: MetricDef,
-  metricId: number
+  metricKey: string
 ): Promise<number> {
   const portDimKey = `@${metric.portDimension}`;
 
@@ -483,7 +482,7 @@ async function processAggregateMetric(
       const portName = knownPorts.get(portCode);
       if (!portName) continue;
       if (!isDryRun) {
-        upsertStmt.run(metricId, portCode, year, value);
+        upsertStmt.run(metricKey, portCode, portName, year, `${year}年`, value, metric.unit);
       }
       inserted++;
     }
@@ -509,28 +508,21 @@ async function main() {
 
   // 最終サマリー
   const totalRows = db
-    .prepare(
-      "SELECT COUNT(*) as cnt FROM stats WHERE area_type = 'port'"
-    )
+    .prepare("SELECT COUNT(*) as cnt FROM stats_port")
     .get() as any;
   console.log(`\n=== 完了 ===`);
   console.log(`投入合計: ${totalInserted} 件`);
-  console.log(`stats(area_type=port) 総行数: ${totalRows.cnt}`);
+  console.log(`stats_port 総行数: ${totalRows.cnt}`);
 
-  // indicator 別の行数
-  const byIndicator = db
+  // metric 別の行数
+  const byMetric = db
     .prepare(
-      `SELECT i.key, COUNT(*) as cnt
-       FROM stats o
-       INNER JOIN metrics i ON i.id = o.metric_id
-       WHERE i.area_type = 'port'
-       GROUP BY i.key
-       ORDER BY i.key`
+      `SELECT metric_key, COUNT(*) as cnt FROM stats_port GROUP BY metric_key ORDER BY metric_key`
     )
     .all() as any[];
   console.log("\n指標別行数:");
-  for (const row of byIndicator) {
-    console.log(`  ${row.key}: ${row.cnt}`);
+  for (const row of byMetric) {
+    console.log(`  ${row.metric_key}: ${row.cnt}`);
   }
 
   db.close();

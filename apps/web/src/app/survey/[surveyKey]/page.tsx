@@ -96,7 +96,7 @@ export default async function SurveyPage({ params }: PageProps) {
     const latestYear = parseLatestYear(item.latestYear);
     return {
       rankingKey: item.rankingKey,
-      areaType: item.areaType,
+      areaType: "prefecture",
       title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
       subtitle: item.subtitle,
       latestYear,

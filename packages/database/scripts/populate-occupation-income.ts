@@ -67,19 +67,17 @@ if (isDryRun) console.log("【DRY RUN】");
 
 // Prepared statements
 const upsertData = db.prepare(`
-  INSERT INTO stats (
-    metric_id, area_type, area_code,
-    year_code, value, rank
-  )
-  VALUES (?, 'prefecture', ?,
-    ?, ?, ?)
-  ON CONFLICT(metric_id, area_type, area_code, year_code) DO UPDATE SET
-    value = excluded.value,
-    rank = excluded.rank
+  INSERT INTO stats_prefecture
+    (metric_key, area_code, year_code, year_name, value, rank)
+  VALUES (?, ?, ?, ?, ?, ?)
+  ON CONFLICT(metric_key, area_code, year_code) DO UPDATE SET
+    year_name = excluded.year_name,
+    value     = excluded.value,
+    rank      = excluded.rank
 `);
 
-const findIndicatorId = db.prepare(`
-  SELECT id FROM metrics WHERE key = ? AND area_type = 'prefecture'
+const findMetric = db.prepare(`
+  SELECT key FROM metrics WHERE key = ?
 `);
 
 /** プロキシ対応 fetch */
@@ -206,12 +204,12 @@ async function processOccupation(def: OccupationDef): Promise<void> {
   // 4. stats 投入
   let totalInserted = 0;
 
-  const indicatorRow = findIndicatorId.get(def.rankingKey) as { id: number } | undefined;
-  if (!indicatorRow) {
+  const metricRow = findMetric.get(def.rankingKey) as { key: string } | undefined;
+  if (!metricRow) {
     console.warn(`  WARN: metrics に key=${def.rankingKey} が無いためスキップ`);
     return;
   }
-  const metricId = indicatorRow.id;
+  const metricKey = metricRow.key;
 
   const txn = db.transaction(() => {
     for (const [year, prefMap] of byYear) {
@@ -231,7 +229,7 @@ async function processOccupation(def: OccupationDef): Promise<void> {
 
         if (!isDryRun) {
           const areaCode5 = prefCode + "000";
-          upsertData.run(metricId, areaCode5, year, value, rank);
+          upsertData.run(metricKey, areaCode5, year, `${year}年度`, value, rank);
         }
         totalInserted++;
       }
@@ -250,11 +248,10 @@ async function processOccupation(def: OccupationDef): Promise<void> {
     const latestYear = years[years.length - 1];
     const top = db
       .prepare(
-        `SELECT o.area_code AS area_name, o.value, o.rank
-         FROM stats o
-         INNER JOIN metrics i ON i.id = o.metric_id
-         WHERE i.key = ? AND i.area_type = 'prefecture' AND o.year_code = ?
-         ORDER BY o.rank LIMIT 3`
+        `SELECT area_code AS area_name, value, rank
+         FROM stats_prefecture
+         WHERE metric_key = ? AND year_code = ?
+         ORDER BY rank LIMIT 3`
       )
       .all(def.rankingKey, latestYear) as any[];
     console.log(`  Top 3 (${latestYear}年):`);
@@ -284,9 +281,7 @@ async function main() {
   for (const def of targets) {
     const count = db
       .prepare(
-        `SELECT COUNT(*) as c FROM stats o
-         INNER JOIN metrics i ON i.id = o.metric_id
-         WHERE i.key = ? AND i.area_type = 'prefecture'`
+        `SELECT COUNT(*) as c FROM stats_prefecture WHERE metric_key = ?`
       )
       .get(def.rankingKey) as any;
     console.log(

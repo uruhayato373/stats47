@@ -102,7 +102,6 @@ export function RankingKeyPageClient({
     const [isPending, startTransition] = useTransition();
     const pathname = usePathname();
     const isBelowLg = useBreakpoint("belowLg");
-    const isAboveLg = useBreakpoint("aboveLg");
 
     // ランキングページ閲覧イベント
     useEffect(() => {
@@ -326,13 +325,13 @@ export function RankingKeyPageClient({
                 </div>
             )}
 
-            {/* メインコンテンツ + 右サイドバー */}
-            <div className={isAboveLg && sidebarSection ? "flex gap-4 mt-4 items-start" : "mt-4"}>
+            {/* メインコンテンツ + 右サイドバー (CSS のみで切替: JS ハイドレーション由来の CLS を防ぐ) */}
+            <div className="mt-4 lg:flex lg:gap-4 lg:items-start">
             <main className="flex flex-col gap-4 min-w-0 flex-1">
                     {/* 地図＋データテーブル */}
                     {isBelowLg ? (
-                        /* モバイル: タブ切替 */
-                        <Tabs defaultValue="map" className="w-full">
+                        /* モバイル: タブ切替（デフォルト table: Leaflet タイルを LCP 要素から除外） */
+                        <Tabs defaultValue="table" className="w-full">
                             <TabsList className="w-full grid grid-cols-2">
                                 <TabsTrigger value="map" className="flex items-center gap-1.5">
                                     <MapIcon className="w-4 h-4" />
@@ -433,9 +432,9 @@ export function RankingKeyPageClient({
 
                 </main>
 
-                {/* 右サイドバー（lg以上） */}
-                {isAboveLg && sidebarSection && (
-                    <aside className="w-64 shrink-0 sticky top-20">
+                {/* 右サイドバー: CSS で lg 以上のみ表示 (JS 判定廃止 → CLS 防止) */}
+                {sidebarSection && (
+                    <aside className="hidden lg:block lg:w-64 lg:shrink-0 lg:sticky lg:top-20">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
                             <AdSenseAd
@@ -447,9 +446,9 @@ export function RankingKeyPageClient({
                 )}
             </div>
 
-            {/* サイドバーの内容をモバイル・タブレットではページ下部に表示 */}
-            {!isAboveLg && sidebarSection && (
-                <div className="mt-4 flex flex-col gap-4">
+            {/* サイドバーの内容をモバイル・タブレットではページ下部に表示 (CSS で lg 未満のみ) */}
+            {sidebarSection && (
+                <div className="mt-4 flex flex-col gap-4 lg:hidden">
                     {sidebarSection}
                 </div>
             )}

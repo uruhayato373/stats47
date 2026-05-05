@@ -14,12 +14,11 @@ function makeRankingValue(
   rank: number,
 ): RankingValue {
   return {
+    metricKey: "A01",
     areaCode,
     areaName,
     yearCode: "2023",
     yearName: "2023年",
-    categoryCode: "A01",
-    categoryName: "人口",
     value,
     rank,
     unit: "人",

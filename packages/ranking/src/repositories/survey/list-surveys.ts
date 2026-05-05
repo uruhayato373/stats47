@@ -1,20 +1,21 @@
 import "server-only";
 
-import { getDrizzle, surveys } from "@stats47/database/server";
+import { getDrizzle, sources } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { asc } from "drizzle-orm";
-import type { Survey } from "@stats47/database/server";
+import { asc, eq } from "drizzle-orm";
+import type { Source } from "@stats47/database/server";
 
 export async function listSurveys(
   db?: ReturnType<typeof getDrizzle>
-): Promise<Result<Survey[], Error>> {
+): Promise<Result<Source[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
     const rows = await drizzleDb
       .select()
-      .from(surveys)
-      .orderBy(asc(surveys.displayOrder));
+      .from(sources)
+      .where(eq(sources.sourceKind, "survey"))
+      .orderBy(asc(sources.displayOrder));
 
     return ok(rows);
   } catch (error) {

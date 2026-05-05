@@ -28,10 +28,7 @@ export function toPyramidChartData(
 
     if (!latestMale || !latestFemale) continue;
 
-    // ageGroup ラベル: 指定があればそれを使用、なければカテゴリ名から抽出
-    const ageGroup =
-      ageGroups?.[i] ??
-      extractAgeGroup(latestMale.categoryName ?? latestFemale.categoryName ?? `${i}`);
+    const ageGroup = ageGroups?.[i] ?? `${i}`;
 
     result.push({
       ageGroup,

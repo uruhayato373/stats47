@@ -220,15 +220,6 @@ function checkAreasPolicy(pathname: string): Response | null {
     }
   }
 
-  // /areas/{prefCode}/cities/{cityCode}[/...] → 410（市区町村ページは廃止）
-  if (
-    seg.length >= 4 &&
-    seg[2] === "cities" &&
-    /^\d{5}$/.test(seg[3])
-  ) {
-    return gone();
-  }
-
   // /areas/{prefCode}/{5桁数字} → 410（cityCode が areaCode 直下にきた異常パターン）
   if (
     seg.length >= 3 &&

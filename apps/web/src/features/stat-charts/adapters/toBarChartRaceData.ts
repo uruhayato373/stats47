@@ -25,8 +25,8 @@ export function toBarChartRaceData(
       timeMap.set(timeCode, { date: timeName, items: [] });
     }
     timeMap.get(timeCode)!.items.push({
-      name: item.categoryName,
-      value: item.value,
+      name: item.areaName,
+      value: item.value as number,
     });
   }
 

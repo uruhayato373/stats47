@@ -35,7 +35,7 @@ interface YearlyAverage {
 function computeYearlyAverages(values: RankingValue[]): YearlyAverage[] {
   const byYear = new Map<string, { yearName: string; sum: number; count: number }>();
   for (const v of values) {
-    if (v.areaCode === "00000") continue;
+    if (v.areaCode === "00000" || v.value === null) continue;
     const entry = byYear.get(v.yearCode);
     if (entry) {
       entry.sum += v.value;

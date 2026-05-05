@@ -19,10 +19,8 @@ export function toMixedChartData(
   columnColors?: string[],
   lineColors?: string[]
 ): MixedChartData {
-  const colLabels =
-    columnLabels ?? columnDataList.map((d) => d[0]?.categoryName ?? "");
-  const linLabels =
-    lineLabels ?? lineDataList.map((d) => d[0]?.categoryName ?? "");
+  const colLabels = columnLabels ?? columnDataList.map(() => "");
+  const linLabels = lineLabels ?? lineDataList.map(() => "");
 
   const yearMap = new Map<string, Record<string, string | number>>();
 
@@ -37,7 +35,7 @@ export function toMixedChartData(
             yearCode: item.yearCode,
           });
         }
-        yearMap.get(key)![label] = item.value;
+        yearMap.get(key)![label] = item.value ?? 0;
       });
     });
   };

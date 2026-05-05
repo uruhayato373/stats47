@@ -1,7 +1,10 @@
 // 3 層モデル
 export * from "./sources";
 export * from "./metrics"; // 旧 indicators (2026-05-04 リネーム)
-export * from "./stats"; // 旧 observations (2026-05-05 リネーム)
+// stats は area 種別ごとに分割 (2026-05-05)
+export * from "./stats-prefecture";
+export * from "./stats-city";
+export * from "./stats-port";
 
 // 派生 (3 層から計算で生成、R2 snapshot で公開)
 export * from "./area_profiles";
@@ -27,7 +30,12 @@ export * from "./estat_catalog";
 export * from "./affiliate_ads";
 export * from "./sns_posts";
 
+// GIS データセットインベントリ
+export * from "./gis_datasets";
+
 // ─── 廃止履歴 (2026-05-04 時点) ─────────────────────────────────
+// - stats (area_type 列で 4 種を識別) → stats_prefecture / stats_city / stats_port (2026-05-05)
+//   stats_fishing_port は漁港別時系列統計データ未整備のため削除 (2026-05-06)
 // - ranking_items / ranking_data / ranking_tags → metrics / stats / taggings (PR-5)
 // - port_statistics → stats(entity_type='port') (PR-6)
 // - ranking_page_cards → page_components + page_component_assignments (PR-7)

@@ -79,9 +79,11 @@ export function ThemeLeafletMap({
     return { ...base, colorSchemeType: "sequential" as const, minValueType: vis.minValueType ?? "data-min" };
   }, [rankingItem]);
 
-  // 全国合計を除外
+  // 全国合計・値なしを除外
   const data: MapDataPoint[] = useMemo(
-    () => rankingValues.filter((v) => v.areaCode !== "00000"),
+    () => rankingValues.filter(
+      (v): v is typeof v & { value: number } => v.areaCode !== "00000" && v.value !== null
+    ),
     [rankingValues]
   );
 
@@ -94,7 +96,9 @@ export function ThemeLeafletMap({
   const municipalityGeojson = useTopoJsonToGeoJson(municipalityTopology);
 
   const municipalityData: MapDataPoint[] = useMemo(
-    () => municipalityValues.filter((v) => v.areaCode !== "00000"),
+    () => municipalityValues.filter(
+      (v): v is typeof v & { value: number } => v.areaCode !== "00000" && v.value !== null
+    ),
     [municipalityValues]
   );
 

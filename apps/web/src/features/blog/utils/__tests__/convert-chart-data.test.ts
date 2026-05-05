@@ -17,14 +17,13 @@ const makeStat = (
   yearCode: string,
   value: number,
 ): StatsSchema => ({
+  metricKey: "C01",
   areaCode,
   areaName,
   yearCode,
   yearName: `${yearCode}年`,
   value,
   unit: "人",
-  categoryCode: "C01",
-  categoryName: "人口",
 });
 
 const sampleData: StatsSchema[] = [

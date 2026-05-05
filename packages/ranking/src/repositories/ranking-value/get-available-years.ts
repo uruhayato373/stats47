@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, stats } from "@stats47/database/server";
+import { getDrizzle, statsPrefecture } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, desc, eq } from "drizzle-orm";
@@ -14,17 +14,16 @@ export async function getAvailableYears(
     const drizzleDb = db ?? getDrizzle();
     const results = await drizzleDb
       .selectDistinct({
-        yearCode: stats.yearCode,
-        yearName: stats.yearName,
+        yearCode: statsPrefecture.yearCode,
+        yearName: statsPrefecture.yearName,
       })
-      .from(stats)
+      .from(statsPrefecture)
       .where(
         and(
-          eq(stats.metricKey, rankingKey),
-          eq(stats.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port")
+          eq(statsPrefecture.metricKey, rankingKey),
         )
       )
-      .orderBy(desc(stats.yearCode));
+      .orderBy(desc(statsPrefecture.yearCode));
 
     return ok(
       results.map((r) => ({
