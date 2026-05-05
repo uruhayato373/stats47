@@ -26,9 +26,6 @@ export interface TopCorrelation {
   partialRDensity: number | null;
 }
 
-/**
- * 相関係数の絶対値が高い上位 N 件を取得する (PR-5: 新 correlations 経由)
- */
 export async function listTopCorrelations(
   limit = 20,
   db?: ReturnType<typeof getDrizzle>
@@ -47,8 +44,8 @@ export async function listTopCorrelations(
 
   const rows = await d
     .select({
-      rankingKeyX: ix.key,
-      rankingKeyY: iy.key,
+      rankingKeyX: correlations.metricKeyX,
+      rankingKeyY: correlations.metricKeyY,
       pearsonR: correlations.pearsonR,
       effectiveR: sql<number>`CASE WHEN ${correlations.pearsonR} >= 0 THEN 1 ELSE -1 END * ${effectiveAbsR}`,
       partialRPopulation: correlations.partialRPopulation,
@@ -61,8 +58,8 @@ export async function listTopCorrelations(
       normalizationBasisY: iy.normalizationBasis,
     })
     .from(correlations)
-    .innerJoin(ix, eq(correlations.metricXId, ix.id))
-    .innerJoin(iy, eq(correlations.metricYId, iy.id))
+    .innerJoin(ix, eq(correlations.metricKeyX, ix.key))
+    .innerJoin(iy, eq(correlations.metricKeyY, iy.key))
     .where(sql`ABS(${correlations.pearsonR}) < 0.99`)
     .orderBy(sql`${effectiveAbsR} DESC`)
     .limit(limit * 10);

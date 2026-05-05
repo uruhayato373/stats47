@@ -8,7 +8,7 @@ import {
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, asc, desc, eq, sql } from "drizzle-orm";
+import { and, asc, desc, eq } from "drizzle-orm";
 
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
@@ -26,7 +26,7 @@ export async function findRankingItemsByTag(
       .from(taggings)
       .innerJoin(
         metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
+        eq(taggings.taggableId, metrics.key)
       )
       .where(
         and(

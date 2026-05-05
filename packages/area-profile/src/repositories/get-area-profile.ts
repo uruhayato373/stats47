@@ -25,7 +25,7 @@ export async function getAreaProfileByCode(
       indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
+    .innerJoin(metrics, eq(areaProfiles.metricKey, metrics.key))
     .where(
       and(
         eq(areaProfiles.areaType, "prefecture"),

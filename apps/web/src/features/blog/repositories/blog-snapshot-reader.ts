@@ -9,6 +9,7 @@ import {
   type SnapshotArticle,
   type SnapshotTagMeta,
 } from "../types/snapshot";
+
 import type { Article, ArticleFrontmatter } from "../types/article.types";
 
 const STALE_AFTER_DAYS = 30;

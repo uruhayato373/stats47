@@ -3,7 +3,7 @@ import "server-only";
 import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
 import { metricAsRankingItemSelection } from "../repositories/shared/metric-as-ranking-item-selection";
@@ -49,7 +49,7 @@ export async function exportRankingItemsSnapshot(
       .from(taggings)
       .innerJoin(
         metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
+        eq(taggings.taggableId, metrics.key)
       )
       .where(eq(taggings.taggableType, "metric")),
   ]);

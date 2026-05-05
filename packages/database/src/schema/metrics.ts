@@ -4,7 +4,6 @@ import {
   integer,
   sqliteTable,
   text,
-  uniqueIndex,
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
@@ -12,7 +11,7 @@ import { sources } from "./sources";
 import { surveys } from "./surveys";
 
 /**
- * メトリクス定義 — 統計指標の定義 (key が単独一意キー)
+ * メトリクス定義 — 統計指標の定義 (key が PRIMARY KEY)
  *
  * area_type は stats に持つ属性のため metrics からは削除済み。
  * - source_id: sources.id への FK
@@ -20,12 +19,12 @@ import { surveys } from "./surveys";
  * - 値は stats(metric_key) に格納、年度は stats から動的計算
  *
  * 旧名 indicators (PR #210, 2026-05-04 リネーム — "indicators" は汎用的すぎたため)。
+ * PR #211: id (INTEGER autoincrement) 削除、key を PRIMARY KEY に昇格。
  */
 export const metrics = sqliteTable(
   "metrics",
   {
-    id: integer("id").primaryKey(),
-    key: text("key").notNull(),
+    key: text("key").primaryKey(),
     title: text("title").notNull(),
     subtitle: text("subtitle"),
     description: text("description"),
@@ -56,8 +55,6 @@ export const metrics = sqliteTable(
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
-    naturalKeyIdx: uniqueIndex("idx_metrics_natural_key").on(table.key),
-    keyIdx: index("idx_metrics_key").on(table.key),
     sourceIdx: index("idx_metrics_source_id").on(table.sourceId),
     categoryIdx: index("idx_metrics_category_key").on(table.categoryKey),
     activeIdx: index("idx_metrics_active").on(table.isActive),

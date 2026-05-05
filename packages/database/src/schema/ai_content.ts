@@ -12,15 +12,15 @@ import { metrics } from "./metrics";
 /**
  * AI 生成コンテンツ
  *
- * PK は metric_id 単独 (旧 ranking_ai_content の (ranking_key, area_type) 複合 PK は
- * metric_id が (key, area_type) を一意に表すため不要)。
+ * PK は metric_key (TEXT)。
+ * PR #211: metric_id (INTEGER FK) → metric_key (TEXT FK) に変更。
  */
 export const aiContent = sqliteTable(
   "ai_content",
   {
-    metricId: integer("metric_id")
+    metricKey: text("metric_key")
       .primaryKey()
-      .references(() => metrics.id),
+      .references(() => metrics.key),
     yearCode: text("year_code").notNull(),
     faq: text("faq"),
     regionalAnalysis: text("regional_analysis"),

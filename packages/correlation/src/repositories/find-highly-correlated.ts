@@ -7,7 +7,7 @@ import {
 } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { aliasedTable, eq, inArray, or, sql } from "drizzle-orm";
+import { inArray, or, eq, sql } from "drizzle-orm";
 
 export interface CorrelatedItem {
   rankingKey: string;
@@ -35,23 +35,11 @@ export async function findHighlyCorrelated(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    // まず rankingKey から metric_id を取得 (prefecture 仮定)
-    const subjectRows = await drizzleDb
-      .select({ id: metrics.id })
-      .from(metrics)
-      .where(eq(metrics.key, rankingKey))
-      .limit(1);
-    const subjectId = subjectRows[0]?.id;
-    if (!subjectId) return ok([]);
-
-    const ix = aliasedTable(metrics, "ix");
-    const iy = aliasedTable(metrics, "iy");
-
     const FETCH_MULTIPLIER = 3;
     const rawRows = await drizzleDb
       .select({
-        rankingKeyX: ix.key,
-        rankingKeyY: iy.key,
+        rankingKeyX: correlations.metricKeyX,
+        rankingKeyY: correlations.metricKeyY,
         pearsonR: correlations.pearsonR,
         partialRPopulation: correlations.partialRPopulation,
         partialRArea: correlations.partialRArea,
@@ -60,12 +48,10 @@ export async function findHighlyCorrelated(
         scatterData: correlations.scatterDataJson,
       })
       .from(correlations)
-      .innerJoin(ix, eq(correlations.metricXId, ix.id))
-      .innerJoin(iy, eq(correlations.metricYId, iy.id))
       .where(
         or(
-          eq(correlations.metricXId, subjectId),
-          eq(correlations.metricYId, subjectId)
+          eq(correlations.metricKeyX, rankingKey),
+          eq(correlations.metricKeyY, rankingKey)
         )
       )
       .orderBy(sql`ABS(${correlations.pearsonR}) DESC`)

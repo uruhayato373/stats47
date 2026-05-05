@@ -16,14 +16,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { isOk } from "@stats47/types";
 
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
-
-import {
-    PAGE_COMPONENTS_SNAPSHOT_KEY,
-    type PageComponentsSnapshot,
-} from "@/features/stat-charts/services/page-components-snapshot";
 
 
 
@@ -34,6 +29,10 @@ import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import { CategoryNavGrid } from "@/features/area-profile";
 import { listCategories } from "@/features/category/server";
+import {
+    PAGE_COMPONENTS_SNAPSHOT_KEY,
+    type PageComponentsSnapshot,
+} from "@/features/stat-charts/server";
 
 import type { Metadata } from "next";
 

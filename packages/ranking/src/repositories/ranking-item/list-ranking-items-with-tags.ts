@@ -4,7 +4,7 @@ import { getDrizzle, metrics, taggings } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import { listRankingItems } from "./list-ranking-items";
 
@@ -28,7 +28,7 @@ export async function listRankingItemsWithTags(
       .from(taggings)
       .innerJoin(
         metrics,
-        eq(taggings.taggableId, sql`CAST(${metrics.id} AS TEXT)`)
+        eq(taggings.taggableId, metrics.key)
       )
       .where(eq(taggings.taggableType, "metric"));
 

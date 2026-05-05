@@ -9,7 +9,6 @@ export interface ListCorrelationAnalysisOptions {
   orderBy?: "pearsonR_asc" | "pearsonR_desc" | "calculatedAt_desc";
 }
 
-/** 相関分析結果 + ランキングタイトル (旧 CorrelationAnalysisWithTitles 型と互換) */
 export interface CorrelationAnalysisWithTitles {
   id: number;
   rankingKeyX: string;
@@ -27,9 +26,6 @@ export interface CorrelationAnalysisWithTitles {
   titleY: string | null;
 }
 
-/**
- * 相関分析結果の一覧を取得 (PR-5: 新 correlations 経由 + metrics JOIN)
- */
 export async function listCorrelationAnalysis(
   options?: ListCorrelationAnalysisOptions
 ): Promise<CorrelationAnalysisWithTitles[]> {
@@ -50,8 +46,8 @@ export async function listCorrelationAnalysis(
   const rows = await db
     .select({
       id: correlations.id,
-      rankingKeyX: ix.key,
-      rankingKeyY: iy.key,
+      rankingKeyX: correlations.metricKeyX,
+      rankingKeyY: correlations.metricKeyY,
       yearX: correlations.yearX,
       yearY: correlations.yearY,
       pearsonR: correlations.pearsonR,
@@ -65,8 +61,8 @@ export async function listCorrelationAnalysis(
       titleY: sql<string | null>`${iy.title}`,
     })
     .from(correlations)
-    .innerJoin(ix, eq(correlations.metricXId, ix.id))
-    .innerJoin(iy, eq(correlations.metricYId, iy.id))
+    .innerJoin(ix, eq(correlations.metricKeyX, ix.key))
+    .innerJoin(iy, eq(correlations.metricKeyY, iy.key))
     .orderBy(orderByColumn)
     .limit(limit)
     .offset(offset);

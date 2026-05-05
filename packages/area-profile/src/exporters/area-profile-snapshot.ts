@@ -45,7 +45,7 @@ export async function exportAreaProfileSnapshot(
       indicator: metrics.title,
     })
     .from(areaProfiles)
-    .innerJoin(metrics, eq(areaProfiles.metricId, metrics.id))
+    .innerJoin(metrics, eq(areaProfiles.metricKey, metrics.key))
     .where(eq(areaProfiles.areaType, "prefecture"));
 
   const byAreaCode: Record<string, AreaProfileData> = {};
