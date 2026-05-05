@@ -1,0 +1,13 @@
+{
+  "week": "2026-W19",
+  "source": "url-inspection-api (Phase 8 自動)",
+  "fetched_at": "2026-05-05T08:08:00.394Z",
+  "counts": {
+    "indexed-submitted": 23,
+    "redirect": 2,
+    "crawled-not-indexed": 5
+  },
+  "sample_limit_per_category": null,
+  "sample_note": "URL Inspection API で自分が指定した URL の coverageState 集計。GSC UI Drilldown と異なり 1000 件上限なし、ただし「自分が把握する URL」に限定（未把握 URL は対象外）",
+  "inspected_url_count": 30
+}

@@ -20,6 +20,8 @@ export * from "./page_components";
 
 // e-Stat 統合カタログ (status='candidate'/'registered' で旧 estat_stats_tables を吸収)
 export * from "./estat_metainfo";
+// e-Stat 1行1ランキング候補カタログ (is_active で登録管理)
+export * from "./estat_catalog";
 
 // 運用
 export * from "./affiliate_ads";

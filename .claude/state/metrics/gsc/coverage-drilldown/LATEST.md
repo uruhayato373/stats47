@@ -1,27 +1,26 @@
-# GSC Coverage Drilldown — 2026-W17
+# GSC Coverage Drilldown — 2026-W19
 
-**取得日**: 2026-04-25 / **ソース**: gcsエラー
+**取得日**: 2026-05-05 / **ソース**: URL Inspection API (Phase 8 自動)
+**inspect 件数**: 30 URL
 
 ## カテゴリ別件数（前週比）
 
 | カテゴリ | 今週 | 前週 | 変化 |
 |---|---:|---:|---|
-| 見つかりませんでした (404) | 1000 | — | — |
-| サーバーエラー (5xx) | 1000 | — | — |
-| ページにリダイレクトがあります | 1000 | — | — |
-| 代替ページ (canonical 適切) | 885 | — | — |
-| 重複 (user canonical なし) | 534 | — | — |
-| ソフト 404 | 500 | — | — |
-| **合計** | **4919** | — | — |
+| ページにリダイレクトがあります | 2 | 1000 | ▼ -998 |
+| クロール済み - インデックス未登録 | 5 | 0 | ▲ +5 |
+| 登録済み (送信) | 23 | 0 | ▲ +23 |
+| **合計** | **30** | 4919 | ▼ -4889 |
 
 ## 注意
 
-- 各カテゴリの件数は **GSC export の上限 1000 件サンプル**。実数（GSC UI 集計値）は `summary.json.full_count_estimate_total` に手入力で併記する
-- 「前回のクロール」が古い URL は Google が再クロールしていない兆候。Phase 6 の URL Inspection API（個別 URL 観測）と併読
+- 本データは URL Inspection API で **自分が指定した URL（sitemap + KNOWN + GONE）** の coverageState を集計したもの
+- GSC UI Coverage Report の Drilldown とは「対象 URL 集合」が異なる（GSC UI は Google 独自視点で発見した URL も含む、API は自分視点のみ）
+- 「未把握 URL」（古い旧 URL 等）は API では取得不能。GSC UI 集計値（例: 全 404 件数）と合わせて読む
 
 ## 詳細
 
-- 今週の URL リスト: `2026-W17/` 配下 6 CSV
+- 今週の URL リスト: `2026-W19/` 配下
 - 時系列集約: `history.csv`
-- 取得手順: GSC UI → カバレッジ → エラーカテゴリ → ドリルダウン → エクスポート
-- 解析コマンド: `node .claude/scripts/gsc/parse-coverage-drilldown.cjs`
+- 自動取得スクリプト: `node .claude/scripts/gsc/url-inspection-daily.cjs`
+- GitHub Actions: `.github/workflows/gsc-url-inspection-daily.yml` (毎朝 JST 06:00)

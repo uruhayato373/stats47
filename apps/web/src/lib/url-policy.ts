@@ -58,10 +58,12 @@ export const UrlPolicy = {
     isGone: (key: string): boolean => GONE_RANKING_KEYS.has(key),
     isIndexable: (key: string): boolean => INDEXABLE_RANKING_KEYS.has(key),
     /**
-     * sitemap 出力対象判定: 削除済みでなく、かつ Impressions ≥ 1 がある ranking のみ。
+     * sitemap 出力対象判定: 削除済みでなく、かつ known（200 を返す）ranking すべて。
+     * INDEXABLE_RANKING_KEYS（Impressions ≥ 1）に絞ると 1,584 件がサイトマップから消えて
+     * 大量インデックス削除が起きたため KNOWN_RANKING_KEYS に戻す（2026-05-05 修正）。
      */
     shouldIncludeInSitemap: (key: string): boolean =>
-      !GONE_RANKING_KEYS.has(key) && INDEXABLE_RANKING_KEYS.has(key),
+      !GONE_RANKING_KEYS.has(key) && KNOWN_RANKING_KEYS.has(key),
   },
   tag: {
     isKnown: (key: string): boolean => KNOWN_TAG_KEYS.has(key),
