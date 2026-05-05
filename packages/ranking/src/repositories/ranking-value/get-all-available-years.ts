@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, observations } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { desc, eq } from "drizzle-orm";
@@ -17,8 +17,7 @@ export async function getAllAvailableYears(
         yearName: observations.yearName,
       })
       .from(observations)
-      .innerJoin(metrics, eq(observations.metricId, metrics.id))
-      .where(eq(metrics.areaType, areaType))
+      .where(eq(observations.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"))
       .orderBy(desc(observations.yearCode));
 
     return ok(

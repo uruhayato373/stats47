@@ -1,9 +1,9 @@
 import "server-only";
 
-import { getDrizzle, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
-import { and, eq, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import type { RankingValue } from "../../types";
 
 export async function upsertRankingValues(
@@ -17,27 +17,6 @@ export async function upsertRankingValues(
   try {
     const drizzleDb = db ?? getDrizzle();
 
-    const indicatorRow = await drizzleDb
-      .select({ id: metrics.id })
-      .from(metrics)
-      .where(
-        and(
-          eq(metrics.key, rankingKey),
-          eq(
-            metrics.areaType,
-            areaType as "prefecture" | "city" | "national" | "port" | "fishing_port"
-          )
-        )
-      )
-      .limit(1);
-
-    if (indicatorRow.length === 0) {
-      return err(
-        new Error(`metric not found: key=${rankingKey} areaType=${areaType}`)
-      );
-    }
-    const metricId = indicatorRow[0].id;
-
     const entityType = (areaType === "national" ? "prefecture" : areaType) as
       | "prefecture"
       | "city"
@@ -45,7 +24,7 @@ export async function upsertRankingValues(
       | "fishing_port";
 
     const rows = values.map((v) => ({
-      metricId,
+      metricKey: rankingKey,
       areaType: (v.areaType === "national"
         ? "prefecture"
         : v.areaType ?? entityType) as
@@ -54,8 +33,11 @@ export async function upsertRankingValues(
         | "port"
         | "fishing_port",
       areaCode: v.areaCode,
+      areaName: v.areaName,
       yearCode: v.yearCode ?? yearCode,
+      yearName: v.yearName,
       value: v.value,
+      unit: v.unit,
       rank: typeof v.rank === "number" ? v.rank : null,
     }));
 
@@ -64,13 +46,16 @@ export async function upsertRankingValues(
       .values(rows)
       .onConflictDoUpdate({
         target: [
-          observations.metricId,
+          observations.metricKey,
           observations.areaType,
           observations.areaCode,
           observations.yearCode,
         ],
         set: {
+          areaName: sql.raw("excluded.area_name"),
+          yearName: sql.raw("excluded.year_name"),
           value: sql.raw("excluded.value"),
+          unit: sql.raw("excluded.unit"),
           rank: sql.raw("excluded.rank"),
         },
       });

@@ -1,9 +1,8 @@
 import "server-only";
 
-import { getDrizzle, getAreaNameMap, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, metrics, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { formatYearName } from "@stats47/types";
 import { eq } from "drizzle-orm";
 
 import type { RankingValue } from "../types";
@@ -37,7 +36,7 @@ function pkString(p: PartitionKey): string {
 
 async function processIndicator(
   drizzleDb: ReturnType<typeof getDrizzle>,
-  indicator: { id: number; key: string; title: string; unit: string; yearFormat: "fiscal" | "calendar" | "plain" },
+  metricKey: string,
   parallelism: number,
   dryRun: boolean,
   dryRunSink?: ExportRankingValuesSnapshotResult["dryRunPartitions"],
@@ -45,13 +44,9 @@ async function processIndicator(
   const rows = await drizzleDb
     .select()
     .from(observations)
-    .where(eq(observations.metricId, indicator.id));
+    .where(eq(observations.metricKey, metricKey));
 
   if (rows.length === 0) return { partitions: 0, rows: 0, sizeBytes: 0 };
-
-  // Determine area type from first row (all rows for one metric share the same area_type)
-  const firstAreaType = rows[0].areaType as import("@stats47/types").AreaType;
-  const areaNameMap = await getAreaNameMap(firstAreaType, drizzleDb);
 
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
   for (const row of rows) {
@@ -59,7 +54,7 @@ async function processIndicator(
     const yearCode = String(row.yearCode ?? "");
     if (!areaType || !yearCode) continue;
 
-    const pk: PartitionKey = { rankingKey: indicator.key, areaType, yearCode };
+    const pk: PartitionKey = { rankingKey: metricKey, areaType, yearCode };
     const k = pkString(pk);
     let group = groups.get(k);
     if (!group) {
@@ -69,12 +64,12 @@ async function processIndicator(
     group.values.push({
       areaType: areaType as RankingValue["areaType"],
       areaCode: row.areaCode,
-      areaName: areaNameMap.get(row.areaCode) ?? row.areaCode,
+      areaName: row.areaName,
       yearCode,
-      yearName: formatYearName(yearCode, indicator.yearFormat),
-      metricKey: indicator.key,
+      yearName: row.yearName,
+      metricKey,
       value: row.value !== null && row.value !== undefined ? Number(row.value) : 0,
-      unit: indicator.unit,
+      unit: row.unit,
       rank: row.rank !== null && row.rank !== undefined ? Number(row.rank) : 0,
     });
   }
@@ -120,14 +115,11 @@ async function processIndicator(
 }
 
 /**
- * observations 全件を partition ごとに分割して R2 に保存する (PR-5)
+ * observations 全件を partition ごとに分割して R2 に保存する
  *
  * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
  * - 並列度: PARALLELISM (default 24) は 1 indicator 内の partition 並列度
  * - dryRun=true の場合は R2 に書かず body を返す（diff 用）
- *
- * @param options.parallelism partition 並列書き込み数 (default 24)
- * @param options.rankingKeyFilter 特定 indicator key だけ更新したい場合 (差分書き出し用)
  */
 export async function exportRankingValuesSnapshots(
   options: {
@@ -145,29 +137,17 @@ export async function exportRankingValuesSnapshots(
     ? ([] as NonNullable<ExportRankingValuesSnapshotResult["dryRunPartitions"]>)
     : undefined;
 
-  const indicatorRowsRaw = options.rankingKeyFilter
+  const indicatorRows = options.rankingKeyFilter
     ? await drizzleDb
-        .select({
-          id: metrics.id,
-          key: metrics.key,
-          title: metrics.title,
-          unit: metrics.unit,
-          yearFormat: metrics.yearFormat,
-        })
+        .selectDistinct({ key: metrics.key })
         .from(metrics)
         .where(eq(metrics.key, options.rankingKeyFilter))
     : await drizzleDb
-        .select({
-          id: metrics.id,
-          key: metrics.key,
-          title: metrics.title,
-          unit: metrics.unit,
-          yearFormat: metrics.yearFormat,
-        })
+        .selectDistinct({ key: metrics.key })
         .from(metrics);
 
   logger.info(
-    { indicatorCount: indicatorRowsRaw.length, dryRun, parallelism },
+    { indicatorCount: indicatorRows.length, dryRun, parallelism },
     "ranking_values export を開始…",
   );
 
@@ -175,35 +155,28 @@ export async function exportRankingValuesSnapshots(
   let totalRows = 0;
   let totalSizeBytes = 0;
 
-  for (let i = 0; i < indicatorRowsRaw.length; i++) {
-    const ind = indicatorRowsRaw[i];
+  for (let i = 0; i < indicatorRows.length; i++) {
+    const { key } = indicatorRows[i];
     try {
-      const result = await processIndicator(drizzleDb, {
-        id: ind.id,
-        key: ind.key,
-        title: ind.title,
-        unit: ind.unit,
-        yearFormat: ind.yearFormat ?? "fiscal",
-      }, parallelism, dryRun, dryRunSink);
+      const result = await processIndicator(drizzleDb, key, parallelism, dryRun, dryRunSink);
       totalPartitions += result.partitions;
       totalRows += result.rows;
       totalSizeBytes += result.sizeBytes;
     } catch (error) {
       logger.error(
         {
-          metricId: ind.id,
-          indicatorKey: ind.key,
+          indicatorKey: key,
           error: error instanceof Error ? error.message : String(error),
         },
         "indicator 処理失敗。スキップ",
       );
     }
 
-    if ((i + 1) % 100 === 0 || i === indicatorRowsRaw.length - 1) {
+    if ((i + 1) % 100 === 0 || i === indicatorRows.length - 1) {
       logger.info(
         {
           processed: i + 1,
-          total: indicatorRowsRaw.length,
+          total: indicatorRows.length,
           totalPartitions,
           totalRows,
           totalSizeBytes,

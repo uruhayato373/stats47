@@ -1,10 +1,9 @@
 import "server-only";
 
-import { getDrizzle, getAreaNameMap, metrics, observations } from "@stats47/database/server";
+import { getDrizzle, observations } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { formatYearName } from "@stats47/types";
 import { and, eq, inArray } from "drizzle-orm";
 import type { RankingValue } from "../../types";
 
@@ -27,28 +26,25 @@ export async function listTopRankingValuesBatch(
     const drizzleDb = db ?? getDrizzle();
     const rankingKeys = items.map((i) => i.rankingKey);
 
-    const [result, areaNameMap] = await Promise.all([
-      drizzleDb
-        .select({
-          areaCode: observations.areaCode,
-          yearCode: observations.yearCode,
-          metricKey: metrics.key,
-          value: observations.value,
-          unit: metrics.unit,
-          rank: observations.rank,
-          yearFormat: metrics.yearFormat,
-        })
-        .from(observations)
-        .innerJoin(metrics, eq(observations.metricId, metrics.id))
-        .where(
-          and(
-            inArray(metrics.key, rankingKeys),
-            eq(metrics.areaType, areaType),
-            eq(observations.rank, 1)
-          )
-        ),
-      getAreaNameMap(areaType, drizzleDb),
-    ]);
+    const result = await drizzleDb
+      .select({
+        areaCode: observations.areaCode,
+        areaName: observations.areaName,
+        yearCode: observations.yearCode,
+        yearName: observations.yearName,
+        metricKey: observations.metricKey,
+        value: observations.value,
+        unit: observations.unit,
+        rank: observations.rank,
+      })
+      .from(observations)
+      .where(
+        and(
+          inArray(observations.metricKey, rankingKeys),
+          eq(observations.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"),
+          eq(observations.rank, 1)
+        )
+      );
 
     const yearByKey = new Map(items.map((i) => [i.rankingKey, i.yearCode]));
     const topMap = new Map<string, RankingValue>();
@@ -60,12 +56,12 @@ export async function listTopRankingValuesBatch(
         topMap.set(key, {
           areaType,
           areaCode: row.areaCode,
-          areaName: areaNameMap.get(row.areaCode) ?? row.areaCode,
+          areaName: row.areaName,
           yearCode: String(row.yearCode),
-          yearName: formatYearName(String(row.yearCode), row.yearFormat ?? "fiscal"),
+          yearName: row.yearName,
           metricKey: key,
           value: row.value !== null ? Number(row.value) : 0,
-          unit: row.unit ?? "",
+          unit: row.unit,
           rank: row.rank != null ? Number(row.rank) : 0,
         });
       }
