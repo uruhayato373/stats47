@@ -200,23 +200,21 @@ async function main() {
       .from(schema.articles)
       .where(eq(schema.articles.published, true));
 
-    // taggings (taggable_type='article') + tags からタグ名を取得
     const tagRows = await db
       .select({
         slug: schema.taggings.taggableId,
-        tagName: schema.tags.tagName,
+        tagKey: schema.taggings.tagKey,
       })
       .from(schema.taggings)
-      .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
       .where(eq(schema.taggings.taggableType, "article"));
 
     const tagsBySlug = new Map<string, string[]>();
     for (const row of tagRows) {
       const existing = tagsBySlug.get(row.slug);
       if (existing) {
-        existing.push(row.tagName);
+        existing.push(row.tagKey);
       } else {
-        tagsBySlug.set(row.slug, [row.tagName]);
+        tagsBySlug.set(row.slug, [row.tagKey]);
       }
     }
 

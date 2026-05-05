@@ -115,13 +115,10 @@ export async function readArticlesByTagKeyFromR2(
 }
 
 export async function readArticlesByTagFromR2(
-  tagName: string,
+  tagKey: string,
   limit = 10,
   offset = 0,
 ): Promise<Article[]> {
-  const snapshot = await loadSnapshot();
-  const tagKey = snapshot.tagMeta.find((t) => t.tagName === tagName)?.tagKey;
-  if (!tagKey) return [];
   return readArticlesByTagKeyFromR2(tagKey, limit, offset);
 }
 
@@ -130,7 +127,7 @@ export async function readAllTagsWithCountFromR2(): Promise<
 > {
   const snapshot = await loadSnapshot();
   return snapshot.tagMeta
-    .map((t) => ({ tag: t.tagName, tagKey: t.tagKey, count: t.articleCount }))
+    .map((t) => ({ tag: t.tagKey, tagKey: t.tagKey, count: t.articleCount }))
     .sort((a, b) => b.count - a.count);
 }
 
@@ -152,22 +149,22 @@ export async function readArticleTitlesBySlugsFromR2(
 
 export async function readTagKeysForArticleFromR2(
   slug: string,
-): Promise<Array<{ tagKey: string; tagName: string }>> {
+): Promise<Array<{ tagKey: string }>> {
   const snapshot = await loadSnapshot();
   const article = snapshot.articles.find((a) => a.slug === slug);
-  return article ? article.tags.map((t) => ({ ...t })) : [];
+  return article ? article.tags.map((t) => ({ tagKey: t.tagKey })) : [];
 }
 
 export async function readTagsForArticlesFromR2(
   slugs: string[],
-): Promise<Map<string, Array<{ tagKey: string; tagName: string }>>> {
+): Promise<Map<string, Array<{ tagKey: string }>>> {
   if (slugs.length === 0) return new Map();
   const snapshot = await loadSnapshot();
   const set = new Set(slugs);
-  const result = new Map<string, Array<{ tagKey: string; tagName: string }>>();
+  const result = new Map<string, Array<{ tagKey: string }>>();
   for (const a of snapshot.articles) {
     if (!set.has(a.slug)) continue;
-    result.set(a.slug, a.tags.map((t) => ({ ...t })));
+    result.set(a.slug, a.tags.map((t) => ({ tagKey: t.tagKey })));
   }
   return result;
 }

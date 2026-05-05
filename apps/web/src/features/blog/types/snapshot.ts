@@ -4,7 +4,6 @@ export const BLOG_SNAPSHOT_KEY = "snapshots/blog/all.json";
 
 export interface SnapshotArticleTag {
   tagKey: string;
-  tagName: string;
 }
 
 export interface SnapshotArticle extends ArticleRow {
@@ -13,7 +12,6 @@ export interface SnapshotArticle extends ArticleRow {
 
 export interface SnapshotTagMeta {
   tagKey: string;
-  tagName: string;
   articleCount: number;
 }
 

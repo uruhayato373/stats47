@@ -8,19 +8,17 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { tags } from "./tags";
-
 /**
  * Polymorphic タグ M:N — 旧 article_tags + indicator_tags の統合 (2026-05-04)
  *
  * taggable_type で entity 種別を区別、taggable_id で対象 ID (TEXT で article slug /
- * metric id 両対応) を保持。
+ * metric key 両対応) を保持。
  *
  * - article: taggable_id = articles.slug
- * - metric:  taggable_id = metrics.key (PR #211: 旧 CAST(metrics.id AS TEXT) から変更)
+ * - metric:  taggable_id = metrics.key
  *
- * FK CASCADE は polymorphic のため articles(slug) / metrics(key) には張れない。
- * tag_key への FK のみ維持。entity 削除時はアプリ側で明示的に taggings から DELETE する。
+ * tag_key は日本語文字列を直接格納（旧 tags テーブルの tag_name を統合、PR #214）。
+ * FK なし — entity 削除時はアプリ側で明示的に taggings から DELETE する。
  */
 export const taggings = sqliteTable(
   "taggings",
@@ -29,9 +27,7 @@ export const taggings = sqliteTable(
       enum: ["article", "metric"],
     }).notNull(),
     taggableId: text("taggable_id").notNull(),
-    tagKey: text("tag_key")
-      .notNull()
-      .references(() => tags.tagKey),
+    tagKey: text("tag_key").notNull(),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({

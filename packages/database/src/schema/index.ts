@@ -12,8 +12,7 @@ export * from "./correlations";
 export * from "./prefectures";
 export * from "./cities";
 export * from "./categories";
-export * from "./tags";
-export * from "./taggings"; // polymorphic M:N: article + metric → tag_key
+export * from "./taggings"; // polymorphic M:N: article + metric → tag_key (日本語直格納)
 export * from "./ports"; // 旧 port_statistics.ts を 2026-05-04 にリネーム
 export * from "./fishing_ports";
 
@@ -47,3 +46,5 @@ export * from "./sns_posts";
 //   area_profiles: metric_id → metric_key (TEXT FK)
 //   taggings: taggable_id の metric 行は CAST(id AS TEXT) → key 直参照
 // - ai_content → metric_texts リネーム (PR #213, 2026-05-05)
+// - tags テーブル廃止、taggings.tag_key を日本語に統一 (PR #214, 2026-05-05)
+//   旧英語スラグ URL は middleware で 301 リダイレクト

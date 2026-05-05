@@ -51,16 +51,14 @@ async function main() {
     .select({
       slug: schema.taggings.taggableId,
       tagKey: schema.taggings.tagKey,
-      tagName: schema.tags.tagName,
     })
     .from(schema.taggings)
-    .innerJoin(schema.tags, eq(schema.taggings.tagKey, schema.tags.tagKey))
     .where(eq(schema.taggings.taggableType, "article"));
 
-  const tagsBySlug = new Map<string, Array<{ tagKey: string; tagName: string }>>();
+  const tagsBySlug = new Map<string, Array<{ tagKey: string }>>();
   for (const row of articleTagRows) {
     const list = tagsBySlug.get(row.slug);
-    const entry = { tagKey: row.tagKey, tagName: row.tagName };
+    const entry = { tagKey: row.tagKey };
     if (list) {
       list.push(entry);
     } else {
@@ -73,30 +71,15 @@ async function main() {
     tags: tagsBySlug.get(a.slug) ?? [],
   }));
 
-  const tagMetaCounter = new Map<
-    string,
-    { tagName: string; articleCount: number }
-  >();
+  const tagMetaCounter = new Map<string, number>();
   for (const a of snapshotArticles) {
     if (!a.published) continue;
     for (const t of a.tags) {
-      const existing = tagMetaCounter.get(t.tagKey);
-      if (existing) {
-        existing.articleCount++;
-      } else {
-        tagMetaCounter.set(t.tagKey, {
-          tagName: t.tagName,
-          articleCount: 1,
-        });
-      }
+      tagMetaCounter.set(t.tagKey, (tagMetaCounter.get(t.tagKey) ?? 0) + 1);
     }
   }
   const tagMeta: SnapshotTagMeta[] = [...tagMetaCounter.entries()]
-    .map(([tagKey, { tagName, articleCount }]) => ({
-      tagKey,
-      tagName,
-      articleCount,
-    }))
+    .map(([tagKey, articleCount]) => ({ tagKey, articleCount }))
     .sort((a, b) => b.articleCount - a.articleCount);
 
   const snapshot: BlogSnapshot = {
