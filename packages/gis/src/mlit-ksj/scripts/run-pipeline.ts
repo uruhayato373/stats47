@@ -123,9 +123,9 @@ async function runCategory(category: string) {
 
 async function runAllPrefs(dataId: string, skipDownload: boolean) {
   const def = getDatasetDef(dataId);
-  if (def.coverage !== "prefecture") {
+  if (def.coverage !== "prefecture" && def.coverage !== "mesh") {
     console.error(
-      `${dataId} は全国データセットです。--all-prefs は県別データのみ対応。`
+      `${dataId} は全国データセットです。--all-prefs は県別・メッシュデータのみ対応。`
     );
     process.exit(1);
   }

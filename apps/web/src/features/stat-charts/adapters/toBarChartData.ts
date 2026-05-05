@@ -19,7 +19,7 @@ export function toBarChartData(
   chartType: "bar" | "stacked-bar" | "grouped" = "stacked-bar"
 ): BarChartData {
   const labels =
-    seriesLabels ?? rawDataList.map((d) => d[0]?.categoryName ?? "");
+    seriesLabels ?? rawDataList.map(() => "");
   if (chartType === "bar") {
     return toSimpleBarChartData(rawDataList, labels);
   }
@@ -47,7 +47,7 @@ export function toStackedBarChartData(
         });
       }
       const row = yearMap.get(key)!;
-      row[label] = ((row[label] as number) ?? 0) + item.value;
+      row[label] = ((row[label] as number) ?? 0) + (item.value ?? 0);
     });
   });
 
@@ -88,7 +88,7 @@ export function toSimpleBarChartData(
 
       return {
         name: label,
-        value: item.value,
+        value: item.value ?? 0,
         unit: item.unit ?? "",
         date: latestYear.yearName || latestYear.yearCode,
       };

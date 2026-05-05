@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
@@ -43,16 +43,16 @@ async function processIndicator(
 ): Promise<{ partitions: number; rows: number; sizeBytes: number }> {
   const rows = await drizzleDb
     .select()
-    .from(stats)
-    .where(eq(stats.metricKey, metricKey));
+    .from(statsPrefecture)
+    .where(eq(statsPrefecture.metricKey, metricKey));
 
   if (rows.length === 0) return { partitions: 0, rows: 0, sizeBytes: 0 };
 
   const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
   for (const row of rows) {
-    const areaType = row.areaType;
+    const areaType = "prefecture" as const;
     const yearCode = String(row.yearCode ?? "");
-    if (!areaType || !yearCode) continue;
+    if (!yearCode) continue;
 
     const pk: PartitionKey = { rankingKey: metricKey, areaType, yearCode };
     const k = pkString(pk);
@@ -115,7 +115,7 @@ async function processIndicator(
 }
 
 /**
- * stats 全件を partition ごとに分割して R2 に保存する
+ * statsPrefecture 全件を partition ごとに分割して R2 に保存する
  *
  * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
  * - 並列度: PARALLELISM (default 24) は 1 indicator 内の partition 並列度

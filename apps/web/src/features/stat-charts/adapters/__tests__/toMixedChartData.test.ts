@@ -5,12 +5,11 @@ import { toMixedChartData } from "../toMixedChartData";
 import type { StatsSchema } from "@stats47/types";
 
 const baseRow: StatsSchema = {
+  metricKey: "A1101",
   areaCode: "13000",
   areaName: "東京都",
   yearCode: "2020",
   yearName: "2020年",
-  categoryCode: "A1101",
-  categoryName: "人口",
   value: 100,
   unit: "人",
 };
@@ -62,35 +61,18 @@ describe("toMixedChartData", () => {
     expect(result.lines).toHaveLength(0);
   });
 
-  it("labels 省略時に categoryName からラベルを導出する", () => {
+  it("labels 省略時に空ラベルを使用する", () => {
     const columnDataList: StatsSchema[][] = [
-      [
-        {
-          ...baseRow,
-          categoryName: "婚姻件数",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 500,
-        },
-      ],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 500 }],
     ];
     const lineDataList: StatsSchema[][] = [
-      [
-        {
-          ...baseRow,
-          categoryName: "婚姻率",
-          yearCode: "2020",
-          yearName: "2020年",
-          value: 4.3,
-        },
-      ],
+      [{ ...baseRow, yearCode: "2020", yearName: "2020年", value: 4.3 }],
     ];
 
     const result = toMixedChartData(columnDataList, lineDataList);
 
-    expect(result.columns[0].name).toBe("婚姻件数");
-    expect(result.lines[0].name).toBe("婚姻率");
-    expect(result.data[0]).toMatchObject({ 婚姻件数: 500, 婚姻率: 4.3 });
+    expect(result.columns[0].name).toBe("");
+    expect(result.lines[0].name).toBe("");
   });
 
   it("年度コードで昇順ソートされる", () => {

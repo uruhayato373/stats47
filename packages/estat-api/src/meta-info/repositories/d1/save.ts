@@ -24,7 +24,7 @@ export async function save(
         statsDataId: input.statsDataId,
         statName: input.statName,
         title: input.title,
-        areaType: input.areaType || "national",
+        areaType: (input.areaType || "national") as "national" | "prefecture" | "city",
         description: input.description,
         itemNamePrefix: input.itemNamePrefix,
         memo: input.memo,

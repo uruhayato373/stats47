@@ -10,19 +10,11 @@ export interface StackedAreaData {
   unit?: string;
 }
 
-/**
- * e-Stat 生データを積み上げ面グラフ用に変換
- *
- * @param rawDataList - 各系列の e-Stat 生データ配列
- * @param seriesLabels - 系列ラベル配列（省略時は categoryName から導出）
- * @returns StackedAreaData
- */
 export function toStackedAreaData(
   rawDataList: StatsSchema[][],
   seriesLabels?: string[]
 ): StackedAreaData {
-  const labels =
-    seriesLabels ?? rawDataList.map((d) => d[0]?.categoryName ?? "");
+  const labels = seriesLabels ?? rawDataList.map(() => "");
   const yearMap = new Map<string, Record<string, string | number>>();
 
   labels.forEach((label, idx) => {
@@ -36,7 +28,7 @@ export function toStackedAreaData(
         });
       }
       const row = yearMap.get(key)!;
-      row[label] = item.value;
+      row[label] = item.value ?? 0;
     });
   });
 

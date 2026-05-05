@@ -86,7 +86,7 @@ export function PrefectureHighlightCard({
               )}
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              {formatValueWithPrecision(selected.value, decimalPlaces)}
+              {formatValueWithPrecision(selected.value ?? 0, decimalPlaces)}
               <span className="ml-0.5">{unit}</span>
             </p>
           </div>

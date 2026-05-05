@@ -77,13 +77,13 @@ describe("metrics データ整合性", () => {
     }
   });
 
-  test("stats の area_code が全て5桁形式", () => {
+  test("stats_prefecture の area_code が全て5桁形式", () => {
     const db = new Database(DB_PATH, { readonly: true });
     try {
       const bad = db
         .prepare(
           `SELECT DISTINCT metric_key, area_code
-           FROM stats
+           FROM stats_prefecture
            WHERE LENGTH(area_code) != 5
              AND area_code != '0'
            LIMIT 20`

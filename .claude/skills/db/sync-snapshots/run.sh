@@ -33,6 +33,7 @@ declare -a TASKS=(
   "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
   "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
   "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
+  "gis-datasets|apps/web/scripts/export-gis-datasets-snapshot.ts"
 )
 
 # ranking-values は重いので SKIP_VALUES で制御

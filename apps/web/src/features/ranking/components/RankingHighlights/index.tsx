@@ -79,7 +79,7 @@ export function RankingHighlights({
                 </div>
                 <div className="text-right">
                   <span className="font-bold text-lg">
-                    {formatStatsValue(item.value)}
+                    {formatStatsValue(item.value ?? 0)}
                   </span>
                   <span className="text-sm font-normal text-muted-foreground ml-1">{unit}</span>
                 </div>

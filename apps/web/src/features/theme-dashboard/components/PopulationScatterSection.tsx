@@ -91,7 +91,7 @@ export function PopulationScatterSection({
       const points: ScatterplotDataNode[] = [];
       for (const [areaCode, xValue] of xMap) {
         const yValue = yMap.get(areaCode);
-        if (yValue == null) continue;
+        if (xValue == null || yValue == null) continue;
         const areaName = lookupArea(areaCode)?.areaName ?? areaCode;
         points.push({
           x: xValue,

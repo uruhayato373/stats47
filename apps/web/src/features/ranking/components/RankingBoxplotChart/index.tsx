@@ -29,12 +29,9 @@ export function RankingBoxplotChart({
   }
 
   // RankingValue → PrefectureData 変換（unit を付与）
-  const data = rankingValues.map((v) => ({
-    areaCode: v.areaCode,
-    areaName: v.areaName,
-    value: v.value,
-    unit: unit || v.unit,
-  }));
+  const data = rankingValues.flatMap((v) =>
+    v.value !== null ? [{ areaCode: v.areaCode, areaName: v.areaName, value: v.value, unit: unit || v.unit }] : []
+  );
 
   return (
     <Card className="w-full">

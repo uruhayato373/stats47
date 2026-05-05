@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Survey } from "@stats47/database/server";
+import type { Source } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
@@ -12,7 +12,7 @@ import {
 
 const STALE_AFTER_DAYS = 30;
 
-let cached: { fetchedAt: number; surveys: Survey[] } | null = null;
+let cached: { fetchedAt: number; surveys: Source[] } | null = null;
 
 function warnIfStale(generatedAt: string): void {
   const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
@@ -24,7 +24,7 @@ function warnIfStale(generatedAt: string): void {
   }
 }
 
-async function loadAll(): Promise<Survey[]> {
+async function loadAll(): Promise<Source[]> {
   if (cached) return cached.surveys;
   const snapshot = await fetchFromR2AsJson<SurveysSnapshot>(
     SURVEYS_SNAPSHOT_KEY,
@@ -42,7 +42,7 @@ async function loadAll(): Promise<Survey[]> {
   return snapshot.surveys;
 }
 
-export async function readSurveysFromR2(): Promise<Result<Survey[], Error>> {
+export async function readSurveysFromR2(): Promise<Result<Source[], Error>> {
   try {
     return ok(await loadAll());
   } catch (error) {
@@ -53,7 +53,7 @@ export async function readSurveysFromR2(): Promise<Result<Survey[], Error>> {
 
 export async function readSurveyByIdFromR2(
   surveyId: string,
-): Promise<Result<Survey | null, Error>> {
+): Promise<Result<Source | null, Error>> {
   try {
     const all = await loadAll();
     return ok(all.find((s) => s.id === surveyId) ?? null);

@@ -17,7 +17,7 @@ export const latestYearSql: SQL<string | null> = sql<string | null>`(
     'yearCode', substr(MAX(year_code), 1, 4),
     'yearName', substr(MAX(year_code), 1, 4) || '年度'
   ) END
-  FROM stats WHERE metric_key = ${metrics.key}
+  FROM stats_prefecture WHERE metric_key = ${metrics.key}
 )`;
 
 export const availableYearsSql: SQL<string | null> = sql<string | null>`(
@@ -27,7 +27,7 @@ export const availableYearsSql: SQL<string | null> = sql<string | null>`(
   ))
   FROM (
     SELECT DISTINCT substr(year_code, 1, 4) AS year_code_4
-    FROM stats WHERE metric_key = ${metrics.key}
+    FROM stats_prefecture WHERE metric_key = ${metrics.key}
     ORDER BY year_code_4 DESC
   )
 )`;

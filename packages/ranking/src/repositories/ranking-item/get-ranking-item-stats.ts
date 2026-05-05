@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import { eq, sql } from "drizzle-orm";
 import type { RankingItemCounts } from "../../types";
@@ -10,25 +10,24 @@ export async function getRankingItemStats(
 ): Promise<Result<RankingItemCounts[], Error>> {
   try {
     const drizzleDb = db ?? getDrizzle();
-    const rows = await drizzleDb
+    const row = await drizzleDb
       .select({
-        areaType: stats.areaType,
-        total: sql<number>`COUNT(DISTINCT ${stats.metricKey})`,
-        active: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 1 THEN ${stats.metricKey} END)`,
-        inactive: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 0 THEN ${stats.metricKey} END)`,
+        total: sql<number>`COUNT(DISTINCT ${statsPrefecture.metricKey})`,
+        active: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 1 THEN ${statsPrefecture.metricKey} END)`,
+        inactive: sql<number>`COUNT(DISTINCT CASE WHEN ${metrics.isActive} = 0 THEN ${statsPrefecture.metricKey} END)`,
       })
-      .from(stats)
-      .innerJoin(metrics, eq(stats.metricKey, metrics.key))
-      .groupBy(stats.areaType);
+      .from(statsPrefecture)
+      .innerJoin(metrics, eq(statsPrefecture.metricKey, metrics.key))
+      .then((rows) => rows[0]);
 
-    return ok(
-      rows.map((row) => ({
-        areaType: row.areaType,
-        total: Number(row.total),
-        active: Number(row.active),
-        inactive: Number(row.inactive),
-      }))
-    );
+    return ok([
+      {
+        areaType: "prefecture" as const,
+        total: Number(row?.total ?? 0),
+        active: Number(row?.active ?? 0),
+        inactive: Number(row?.inactive ?? 0),
+      },
+    ]);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));
   }

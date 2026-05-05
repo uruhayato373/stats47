@@ -15,7 +15,7 @@ type JsonLd = Record<string, unknown>;
 
 describe("generateRankingPageStructuredData", () => {
     const mockItem = ranking.annualSalesAmountPerEmployeeItem as unknown as RankingItem;
-    const mockValues = ranking.annualSalesAmountPerEmployeeData as RankingValue[];
+    const mockValues = ranking.annualSalesAmountPerEmployeeData as unknown as RankingValue[];
 
     it("Dataset形式の構造化データを生成すること", () => {
         const result = generateRankingPageStructuredData({

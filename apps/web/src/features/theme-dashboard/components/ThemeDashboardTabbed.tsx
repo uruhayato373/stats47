@@ -300,9 +300,10 @@ function DeferredTabs({
   statsSection: React.ReactNode;
   tableSection: React.ReactNode | null;
 }) {
-  const [activeTab, setActiveTab] = useState("map");
+  // デフォルト stats: Leaflet タイルを LCP 要素から除外し、モバイル LCP を改善
+  const [activeTab, setActiveTab] = useState("stats");
   const [mountedTabs, setMountedTabs] = useState<Set<string>>(
-    () => new Set(["map"]),
+    () => new Set(["stats"]),
   );
 
   const handleTabChange = (value: string) => {

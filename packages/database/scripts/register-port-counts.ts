@@ -121,9 +121,15 @@ const upsertMetric = db.prepare(`
 `);
 
 const upsertObservation = db.prepare(`
-  INSERT OR REPLACE INTO stats
-    (metric_key, area_type, area_code, area_name, year_code, year_name, value, unit, rank)
-  VALUES (?, 'prefecture', ?, ?, ?, ?, ?, ?, ?)
+  INSERT INTO stats_prefecture
+    (metric_key, area_code, area_name, year_code, year_name, value, unit, rank)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  ON CONFLICT(metric_key, area_code, year_code) DO UPDATE SET
+    area_name = excluded.area_name,
+    year_name = excluded.year_name,
+    value     = excluded.value,
+    unit      = excluded.unit,
+    rank      = excluded.rank
 `);
 
 for (const def of targets) {

@@ -1,11 +1,9 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, count, eq, exists } from "drizzle-orm";
-
-type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
 
 export async function countRankingItemsByAreaType(
   areaType: AreaType,
@@ -18,12 +16,11 @@ export async function countRankingItemsByAreaType(
       .from(metrics)
       .where(
         exists(
-          drizzleDb.select({ metricKey: stats.metricKey })
-            .from(stats)
-            .where(and(
-              eq(stats.metricKey, metrics.key),
-              eq(stats.areaType, areaType as ValidAreaType)
-            ))
+          drizzleDb.select({ metricKey: statsPrefecture.metricKey })
+            .from(statsPrefecture)
+            .where(
+              eq(statsPrefecture.metricKey, metrics.key)
+            )
         )
       );
     return ok(result[0]?.count || 0);

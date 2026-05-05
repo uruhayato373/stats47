@@ -23,13 +23,13 @@ export function toSunburstData(
   const latestYear = years[0];
   const yearData = rawData.filter((d) => d.yearCode === latestYear.yearCode);
 
-  const rootItem = yearData.find((d) => d.categoryCode === config.rootCode);
+  const rootItem = yearData.find((d) => d.metricKey === config.rootCode);
   if (!rootItem) return null;
 
   const children = buildHierarchyChildren(yearData, config);
 
   return {
-    name: rootItem.categoryName || "総額",
+    name: config.rootCode,
     children: children.length > 0 ? children : undefined,
   };
 }
@@ -53,11 +53,11 @@ function buildHierarchyChildren(
         name: group.name,
         children: group.childCodes
           .map((code) => {
-            const item = yearData.find((d) => d.categoryCode === code);
-            if (!item || item.value <= 0) return null;
+            const item = yearData.find((d) => d.metricKey === code);
+            if (!item || (item.value ?? 0) <= 0) return null;
             return {
-              name: item.categoryName || code,
-              value: item.value,
+              name: code,
+              value: item.value ?? 0,
             } as HierarchyData;
           })
           .filter((child): child is HierarchyData => child !== null),
@@ -67,11 +67,11 @@ function buildHierarchyChildren(
     const standaloneNodes: HierarchyData[] = childCodes
       .filter((code) => !groupedCodes.has(code))
       .map((code) => {
-        const item = yearData.find((d) => d.categoryCode === code);
-        if (!item || item.value <= 0) return null;
+        const item = yearData.find((d) => d.metricKey === code);
+        if (!item || (item.value ?? 0) <= 0) return null;
         return {
-          name: item.categoryName || code,
-          value: item.value,
+          name: code,
+          value: item.value ?? 0,
         } as HierarchyData;
       })
       .filter((child): child is HierarchyData => child !== null);
@@ -81,11 +81,11 @@ function buildHierarchyChildren(
 
   return childCodes
     .map((code) => {
-      const item = yearData.find((d) => d.categoryCode === code);
-      if (!item || item.value <= 0) return null;
+      const item = yearData.find((d) => d.metricKey === code);
+      if (!item || (item.value ?? 0) <= 0) return null;
       return {
-        name: item.categoryName || code,
-        value: item.value,
+        name: code,
+        value: item.value ?? 0,
       } as HierarchyData;
     })
     .filter((child): child is HierarchyData => child !== null);

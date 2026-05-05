@@ -1,12 +1,12 @@
 import "server-only";
 
-import { getDrizzle, metrics, stats } from "@stats47/database/server";
+import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { and, eq, exists } from "drizzle-orm";
 
-type ValidAreaType = "prefecture" | "city" | "port" | "fishing_port";
+type ValidAreaType = "prefecture" | "city" | "port";
 
 export async function listActiveRankingKeys(
   areaType: AreaType,
@@ -20,11 +20,10 @@ export async function listActiveRankingKeys(
       .where(
         and(
           exists(
-            drizzleDb.select({ metricKey: stats.metricKey })
-              .from(stats)
+            drizzleDb.select({ metricKey: statsPrefecture.metricKey })
+              .from(statsPrefecture)
               .where(and(
-                eq(stats.metricKey, metrics.key),
-                eq(stats.areaType, areaType as ValidAreaType)
+                eq(statsPrefecture.metricKey, metrics.key),
               ))
           ),
           eq(metrics.isActive, true)

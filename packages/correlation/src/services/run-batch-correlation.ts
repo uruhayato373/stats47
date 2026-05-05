@@ -279,6 +279,7 @@ export async function runBatchCorrelation(
       const valueMap = new Map<string, number>();
       const rows: CachedRankingData["rows"] = [];
       for (const v of result.data) {
+        if (v.value === null) continue;
         valueMap.set(v.areaCode, v.value);
         rows.push({ areaCode: v.areaCode, areaName: v.areaName, value: v.value });
       }

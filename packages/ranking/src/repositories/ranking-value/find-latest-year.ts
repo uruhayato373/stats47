@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getDrizzle, stats } from "@stats47/database/server";
+import { getDrizzle, statsPrefecture } from "@stats47/database/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { eq, sql } from "drizzle-orm";
@@ -12,9 +12,8 @@ export async function findLatestYear(
   try {
     const drizzleDb = db ?? getDrizzle();
     const result = await drizzleDb
-      .select({ maxYear: sql<string>`MAX(${stats.yearCode})` })
-      .from(stats)
-      .where(eq(stats.areaType, areaType as "prefecture" | "city" | "port" | "fishing_port"));
+      .select({ maxYear: sql<string>`MAX(${statsPrefecture.yearCode})` })
+      .from(statsPrefecture)
     return ok(result[0]?.maxYear || null);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));

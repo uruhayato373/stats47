@@ -129,9 +129,12 @@ export function RankingMapChartClient({
     }
   }, [rankingItem]);
 
-  // areaCode=00000（全国合計）のデータを除外
+  // areaCode=00000（全国合計）と value=null を除外（型ガードで MapDataPoint[] に絞り込む）
   const filteredData = useMemo(() => {
-    return rankingValues.filter((item) => item.areaCode !== "00000");
+    return rankingValues.filter(
+      (item): item is typeof item & { value: number } =>
+        item.areaCode !== "00000" && item.value !== null
+    );
   }, [rankingValues]);
 
   // --- 市区町村 TopoJSON のオンデマンド取得・キャッシュ ---

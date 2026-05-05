@@ -55,7 +55,7 @@ export async function fetchRankingValuesAction(
     if (parentAreaCode) {
       const prefPrefix = parentAreaCode.slice(0, 2);
       values = values.filter((v) => v.areaCode.startsWith(prefPrefix));
-      values.sort((a, b) => b.value - a.value);
+      values.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
       values = values.map((v, i) => ({ ...v, rank: i + 1 }));
     }
 

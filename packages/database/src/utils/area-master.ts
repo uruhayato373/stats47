@@ -3,16 +3,15 @@ import "server-only";
 import type { AreaType } from "@stats47/types";
 
 import { getDrizzle } from "../drizzle";
-import { cities, fishingPorts, ports, prefectures } from "../schema";
+import { cities, ports, prefectures } from "../schema";
 
 /**
  * area_type × area_code → area_name のバルク lookup マップを返す
  *
  * テーブル:
- *   prefecture   → prefectures.code / prefectures.name
- *   city         → cities.code / cities.name
- *   port         → ports.port_code / ports.port_name
- *   fishing_port → fishing_ports.port_code / fishing_ports.port_name
+ *   prefecture → prefectures.code / prefectures.name
+ *   city       → cities.code / cities.name
+ *   port       → ports.port_code / ports.port_name
  */
 export async function getAreaNameMap(
   areaType: AreaType,
@@ -37,12 +36,6 @@ export async function getAreaNameMap(
       const rows = await drizzleDb
         .select({ code: ports.portCode, name: ports.portName })
         .from(ports);
-      return new Map(rows.map((r) => [r.code, r.name]));
-    }
-    case "fishing_port": {
-      const rows = await drizzleDb
-        .select({ code: fishingPorts.portCode, name: fishingPorts.portName })
-        .from(fishingPorts);
       return new Map(rows.map((r) => [r.code, r.name]));
     }
     default:

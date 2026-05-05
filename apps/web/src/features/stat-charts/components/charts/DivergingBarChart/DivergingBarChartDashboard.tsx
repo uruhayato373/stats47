@@ -54,7 +54,7 @@ export const DivergingBarChartDashboard = async ({
     }
 
     const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
-    const seriesLabels = labels ?? rawDataList.map((d) => d[0]?.categoryName ?? "");
+    const seriesLabels = labels ?? rawDataList.map(() => "");
     const chartData = toStackedBarChartData(rawDataList, seriesLabels);
 
     if (chartData.data.length === 0) {
