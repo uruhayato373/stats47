@@ -1,9 +1,9 @@
 import "server-only";
 
-import { getDrizzle, surveys } from "@stats47/database/server";
+import { getDrizzle, sources } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 import {
   SURVEYS_SNAPSHOT_KEY,
@@ -25,8 +25,9 @@ export async function exportSurveysSnapshot(
 
   const rows = await drizzleDb
     .select()
-    .from(surveys)
-    .orderBy(asc(surveys.displayOrder));
+    .from(sources)
+    .where(eq(sources.sourceKind, "survey"))
+    .orderBy(asc(sources.displayOrder));
 
   const snapshot: SurveysSnapshot = {
     generatedAt: new Date().toISOString(),

@@ -14,7 +14,6 @@ export * from "./cities";
 export * from "./categories";
 export * from "./tags";
 export * from "./taggings"; // polymorphic M:N: article + metric → tag_key
-export * from "./surveys"; // 旧 ranking_items.ts を 2026-05-04 にリネーム
 export * from "./ports"; // 旧 port_statistics.ts を 2026-05-04 にリネーム
 export * from "./fishing_ports";
 
@@ -40,6 +39,8 @@ export * from "./sns_posts";
 // - article_tags + indicator_tags → taggings (polymorphic M:N, PR #209)
 // - indicators テーブル → metrics リネーム (FK: indicator_id → metric_id, PR #210)
 //   旧 indicators.latest_year + available_years_json も削除 (stats から動的計算)
+// - surveys → sources(source_kind='survey') に統合 (PR #212, 41件完全一致)
+//   metrics.survey_id FK 先を sources に変更
 // - metrics.id (INTEGER autoincrement) 削除、key を PRIMARY KEY に昇格 (PR #211)
 //   correlations: metric_x_id/y_id → metric_key_x/y (TEXT FK)
 //   ai_content: metric_id → metric_key (TEXT PK)

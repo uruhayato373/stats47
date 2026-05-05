@@ -8,7 +8,6 @@ import {
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { sources } from "./sources";
-import { surveys } from "./surveys";
 
 /**
  * メトリクス定義 — 統計指標の定義 (key が PRIMARY KEY)
@@ -30,7 +29,7 @@ export const metrics = sqliteTable(
     description: text("description"),
     unit: text("unit").notNull(),
     sourceId: text("source_id").references(() => sources.id),
-    surveyId: text("survey_id").references(() => surveys.id),
+    surveyId: text("survey_id").references(() => sources.id),
     categoryKey: text("category_key"),
     visualizationPreset: text("visualization_preset"),
     visualizationConfigJson: text("visualization_config_json"),
