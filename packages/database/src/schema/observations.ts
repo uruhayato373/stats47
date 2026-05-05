@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  foreignKey,
   index,
   integer,
   primaryKey,
@@ -12,41 +13,42 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { metrics } from "./metrics";
 
 /**
- * 観測値 — metric × area × year の値 (最小設計)
+ * 観測値 — metric × area × year の値
  *
- * (metric_id, area_type, area_code, year_code) の複合 PK で一意。
- * area_type は 4 種: prefecture / city / port / fishing_port
+ * PK: (metric_key, area_type, area_code, year_code)
+ * FK: (metric_key, area_type) → metrics(key, area_type)
  *
- * 表示用フィールド (area_name / year_name / unit / category_name) は
- * Repository 層で JOIN して計算する (denorm は持たない)。
- * - area_name: prefectures / cities / ports / fishing_ports を JOIN
- * - year_name: metrics.year_format + year_code から formatYearName() で計算
- * - unit:      metrics.unit を参照
- * - category_name: metrics.title を参照
+ * area_name / year_name / unit は書き込み時に一回計算して denorm 保存。
+ * 変更が稀なため JOIN コストを排除する設計。
  */
 export const observations = sqliteTable(
   "observations",
   {
-    metricId: integer("metric_id")
-      .notNull()
-      .references(() => metrics.id),
+    metricKey: text("metric_key").notNull(),
     areaType: text("area_type", {
       enum: ["prefecture", "city", "port", "fishing_port"],
     }).notNull(),
     areaCode: text("area_code").notNull(),
+    areaName: text("area_name").notNull().default(""),
     yearCode: text("year_code").notNull(),
+    yearName: text("year_name").notNull().default(""),
     value: real("value"),
+    unit: text("unit").notNull().default(""),
     rank: integer("rank"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => ({
     pk: primaryKey({
       columns: [
-        table.metricId,
+        table.metricKey,
         table.areaType,
         table.areaCode,
         table.yearCode,
       ],
+    }),
+    fk: foreignKey({
+      columns: [table.metricKey, table.areaType],
+      foreignColumns: [metrics.key, metrics.areaType],
     }),
     entityIdx: index("idx_observations_entity").on(
       table.areaType,
@@ -54,7 +56,7 @@ export const observations = sqliteTable(
       table.yearCode
     ),
     metricYearIdx: index("idx_observations_metric_year").on(
-      table.metricId,
+      table.metricKey,
       table.yearCode
     ),
   })
