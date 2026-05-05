@@ -13,7 +13,7 @@ import type { AreaType } from "@/features/area";
  * 統計データのスキーマ
  *
  * e-Stat APIやその他の統計データソースから取得した統計データの基本構造を表す。
- * 地域、時間、カテゴリ、値と単位の情報を含む。
+ * 地域、時間、指標キー、値と単位の情報を含む。
  *
  * @example
  * ```typescript
@@ -23,8 +23,7 @@ import type { AreaType } from "@/features/area";
  *   areaName: "北海道",
  *   yearCode: "2020",
  *   yearName: "2020年",
- *   categoryCode: "010",
- *   categoryName: "総人口",
+ *   metricKey: "population",
  *   value: 5242000,
  *   unit: "人"
  * };
@@ -41,12 +40,10 @@ export interface StatsSchema {
   yearCode: string;
   /** 年度名（例: "2020年"） */
   yearName: string;
-  /** カテゴリコード（統計項目を表すコード） */
-  categoryCode: string;
-  /** カテゴリ名（統計項目名） */
-  categoryName: string;
-  /** 統計値（数値） */
-  value: number;
+  /** 指標キー（統計項目を表す自然キー） */
+  metricKey: string;
+  /** 統計値（数値、null = 欠損） */
+  value: number | null;
   /** 単位（例: "人", "千円", "%"） */
   unit: string;
   /** ランキング順位（ランキングデータの場合のみ） */
