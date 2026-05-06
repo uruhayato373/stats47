@@ -3,7 +3,7 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
-export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "snapshots/ranking-page-cards/all.json";
+export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "ranking-page-cards/all.json";
 
 const STALE_AFTER_DAYS = 30;
 

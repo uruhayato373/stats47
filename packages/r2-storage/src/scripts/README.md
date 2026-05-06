@@ -14,11 +14,8 @@
 実行前に `.env.local`（ルートまたはアプリ配下）に R2 認証情報を設定してください。
 
 - `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_R2_ACCESS_KEY_ID`
-- `CLOUDFLARE_R2_SECRET_ACCESS_KEY`
+- `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_R2_BUCKET_NAME`（任意、デフォルト: stats47）
-
-社内プロキシ環境で 407 や XML パースエラーが出る場合は、R2 用にプロキシをバイパスしてください。例: `NO_PROXY=*.r2.cloudflarestorage.com` を設定してからスクリプトを実行する。
 
 ## 使い方
 

@@ -174,12 +174,10 @@ try {
 ## 環境変数
 
 ```env
-# Cloudflare R2 設定
-R2_ACCOUNT_ID=your-account-id
-R2_ACCESS_KEY_ID=your-access-key
-R2_SECRET_ACCESS_KEY=your-secret-key
-R2_BUCKET_NAME=stats47
-R2_BUCKET_NAME_BLOG=stats47-blog
+# Cloudflare R2 設定（REST API 経由）
+CLOUDFLARE_ACCOUNT_ID=your-account-id
+CLOUDFLARE_API_TOKEN=your-api-token
+CLOUDFLARE_R2_BUCKET_NAME=stats47
 ```
 
 ## テスト

@@ -108,26 +108,17 @@ async function main() {
   });
   console.log(`✅ ports: ${portsMeta.length} 件`);
 
-  // 2. stats(entity_type=port) を metrics JOIN で読み込み (PR-6)
-  // metrics.key 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
-  const { eq, and } = await import("drizzle-orm");
+  // 2. stats_port を読み込み (schema split 後: stats → stats_port)
+  // metricKey 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
   const observationRows = await db
     .select({
-      portCode: schema.stats.areaCode,
-      year: schema.stats.yearCode,
-      indicatorKey: schema.metrics.key,
-      value: schema.stats.value,
-      unit: schema.metrics.unit,
+      portCode: schema.statsPort.areaCode,
+      year: schema.statsPort.yearCode,
+      indicatorKey: schema.statsPort.metricKey,
+      value: schema.statsPort.value,
+      unit: schema.statsPort.unit,
     })
-    .from(schema.stats)
-    .innerJoin(
-      schema.metrics,
-      and(
-        eq(schema.stats.metricId, schema.metrics.id),
-        eq(schema.metrics.areaType, "port")
-      )
-    )
-    .where(eq(schema.stats.areaType, "port"));
+    .from(schema.statsPort);
 
   // R2 snapshot は旧 metric_key 形式 (snake_case) を維持する → 後方互換
   const allStats = observationRows

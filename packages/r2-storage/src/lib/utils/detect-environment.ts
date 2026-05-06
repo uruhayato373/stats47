@@ -1,19 +1,13 @@
 
 /**
  * 実行環境を判定する
- *
- * S3認証情報がある場合はS3クライアントを優先し、
- * ない場合はCloudflare Workers R2バインディングにフォールバックする。
- *
- * @returns 判定結果
  */
 export function detectEnvironment() {
   const isDevelopment = process.env.NODE_ENV === "development";
 
-  const hasS3Credentials = !!(
+  const hasCloudflareApi = !!(
     process.env.CLOUDFLARE_ACCOUNT_ID &&
-    process.env.CLOUDFLARE_R2_ACCESS_KEY_ID &&
-    process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY
+    process.env.CLOUDFLARE_API_TOKEN
   );
 
   // 本番環境では常にCloudflare Workers R2バインディングを使用
@@ -21,8 +15,7 @@ export function detectEnvironment() {
 
   return {
     isDevelopment,
-    hasS3Credentials,
+    hasCloudflareApi,
     isCloudflareWorkers,
   };
 }
-

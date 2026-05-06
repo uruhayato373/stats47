@@ -7,37 +7,51 @@ import type { AreaType } from "@stats47/types";
 
 import type { RankingValue } from "../../types";
 import {
-  rankingValuesPartitionPath,
-  type RankingValuesPartitionSnapshot,
+  rankingValuesKeyPath,
+  type RankingValuesKeySnapshot,
 } from "../../types/snapshot";
 
 const STALE_AFTER_DAYS = 90;
 
-function warnIfStale(
-  generatedAt: string,
-  rankingKey: string,
-  areaType: string,
-  yearCode: string,
-): void {
-  const ageDays =
-    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
+const keyCache = new Map<string, RankingValuesKeySnapshot | null>();
+
+function warnIfStale(generatedAt: string, rankingKey: string, areaType: string): void {
+  const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
   if (ageDays > STALE_AFTER_DAYS) {
     logger.warn(
-      { rankingKey, areaType, yearCode, generatedAt, ageDays: Math.round(ageDays) },
-      `ranking-values partition snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
+      { rankingKey, areaType, generatedAt, ageDays: Math.round(ageDays) },
+      `ranking-values snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
     );
   }
 }
 
+async function loadRankingValuesForKey(
+  rankingKey: string,
+  areaType: string,
+): Promise<RankingValuesKeySnapshot | null> {
+  const cacheKey = `${rankingKey}|${areaType}`;
+  if (keyCache.has(cacheKey)) return keyCache.get(cacheKey) ?? null;
+
+  const path = rankingValuesKeyPath(rankingKey, areaType);
+  const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
+
+  if (!snapshot) {
+    logger.warn({ rankingKey, areaType, path }, "ranking-values snapshot が R2 に存在しません");
+    keyCache.set(cacheKey, null);
+    return null;
+  }
+
+  warnIfStale(snapshot.generatedAt, rankingKey, areaType);
+  keyCache.set(cacheKey, snapshot);
+  return snapshot;
+}
+
 /**
- * R2 上の partition snapshot から ranking_values を取得。
+ * R2 snapshot から ranking_values を取得。
  *
- * listRankingValues (D1) のドロップイン代替 (Result 型シグネチャ一致)。
- *
- * - 1 ranking_key × area_type × year_code = 1 R2 fetch
- * - prefecture: ~13KB / fetch、city: ~550KB / fetch
- * - build 時 (NEXT_PHASE=phase-production-build) は ok([]) を返し ISR で初回 fetch
- *   (2,000 超のページ × 同時 fetch で build hang を防ぐ)
+ * - 1 fetch per (rankingKey, areaType) — yearCode は in-memory filter
+ * - module-level cache により同一キーの複数年度アクセスは 1 R2 fetch で済む
+ * - build 時 (NEXT_PHASE=phase-production-build) は ok([]) を返す
  */
 export async function readRankingValuesFromR2(
   rankingKey: string,
@@ -49,28 +63,22 @@ export async function readRankingValuesFromR2(
   }
 
   try {
-    const path = rankingValuesPartitionPath(rankingKey, areaType, yearCode);
-    const snapshot =
-      await fetchFromR2AsJson<RankingValuesPartitionSnapshot>(path);
+    const snapshot = await loadRankingValuesForKey(rankingKey, areaType);
+    if (!snapshot) return ok([]);
 
-    if (!snapshot) {
+    const partition = snapshot.partitions.find((p) => p.yearCode === yearCode);
+    if (!partition) {
       logger.warn(
-        { rankingKey, areaType, yearCode, path },
-        "ranking-values partition snapshot が R2 に存在しません。空配列を返します",
+        { rankingKey, areaType, yearCode },
+        "ranking-values: 指定 yearCode の partition が存在しません",
       );
       return ok([]);
     }
 
-    warnIfStale(snapshot.generatedAt, rankingKey, areaType, yearCode);
-    return ok(snapshot.values);
+    return ok(partition.values);
   } catch (error) {
     logger.error(
-      {
-        rankingKey,
-        areaType,
-        yearCode,
-        error: error instanceof Error ? error.message : String(error),
-      },
+      { rankingKey, areaType, yearCode, error: error instanceof Error ? error.message : String(error) },
       "readRankingValuesFromR2: failed",
     );
     return err(error instanceof Error ? error : new Error(String(error)));
@@ -78,9 +86,7 @@ export async function readRankingValuesFromR2(
 }
 
 /**
- * 指定都道府県の市区町村ランキング値を partition snapshot から取得。
- *
- * `listRankingValuesByPrefecture` (D1) のドロップイン代替。
+ * 指定都道府県の市区町村ランキング値を取得。
  * city partition から areaCode の先頭 2 桁が prefCode と一致する行をフィルタ。
  */
 export async function readRankingValuesByPrefectureFromR2(

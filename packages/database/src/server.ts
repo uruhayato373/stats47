@@ -12,8 +12,6 @@ export {
     runQuery, type D1Database
 } from "./core";
 
-export { createRemoteD1 } from "./adapters/remote-adapter";
-
 export { createDrizzleClient, getDrizzle, type DrizzleClient } from "./drizzle";
 export * from "./schema";
 export type { ColumnInfo, TableInfo } from "./types/stats";

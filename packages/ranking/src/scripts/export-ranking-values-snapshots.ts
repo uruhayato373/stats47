@@ -25,7 +25,7 @@ async function main() {
     rankingKeyFilter,
   });
   console.log(
-    `✅ ranking_values: partitions=${result.partitions} rows=${result.rows} bytes=${result.totalSizeBytes} duration=${result.durationMs}ms`,
+    `✅ ranking_values: files=${result.files} rows=${result.rows} bytes=${result.totalSizeBytes} duration=${result.durationMs}ms`,
   );
 }
 
