@@ -16,6 +16,9 @@ interface PageProps {
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return [];
+  }
   try {
     const datasets = await fetchGisDatasets();
     return datasets
