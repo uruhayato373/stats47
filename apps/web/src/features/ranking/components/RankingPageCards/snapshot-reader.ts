@@ -3,9 +3,12 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
-export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "ranking-page-cards/all.json";
+export function rankingPageCardsKeyPath(rankingKey: string): string {
+  return `app/ranking/${encodeURIComponent(rankingKey)}/page-cards.json`;
+}
 
-const STALE_AFTER_DAYS = 30;
+/** @deprecated rankingPageCardsKeyPath を使用してください */
+export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "app/ranking-page-cards/all.json";
 
 /**
  * R2 snapshot に保存される ranking page card 1 件分の構造。
@@ -32,32 +35,7 @@ export interface RankingPageCardsSnapshot {
   byRankingKey: Record<string, RankingPageCard[]>;
 }
 
-let cached: RankingPageCardsSnapshot | null = null;
-
-function warnIfStale(generatedAt: string): void {
-  const ageDays =
-    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { generatedAt, ageDays: Math.round(ageDays) },
-      `ranking-page-cards snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
-async function loadSnapshot(): Promise<RankingPageCardsSnapshot> {
-  if (cached) return cached;
-  const snapshot = await fetchFromR2AsJson<RankingPageCardsSnapshot>(
-    RANKING_PAGE_CARDS_SNAPSHOT_KEY,
-  );
-  if (!snapshot) {
-    cached = { generatedAt: new Date(0).toISOString(), byRankingKey: {} };
-    return cached;
-  }
-  warnIfStale(snapshot.generatedAt);
-  cached = snapshot;
-  return snapshot;
-}
+const cache = new Map<string, RankingPageCard[]>();
 
 export async function readRankingPageCardsFromR2(
   rankingKey: string,
@@ -65,9 +43,12 @@ export async function readRankingPageCardsFromR2(
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return [];
   }
+  if (cache.has(rankingKey)) return cache.get(rankingKey)!;
   try {
-    const snapshot = await loadSnapshot();
-    return snapshot.byRankingKey[rankingKey] ?? [];
+    const data = await fetchFromR2AsJson<RankingPageCard[]>(rankingPageCardsKeyPath(rankingKey));
+    const result = data ?? [];
+    cache.set(rankingKey, result);
+    return result;
   } catch (error) {
     logger.error(
       { rankingKey, error: error instanceof Error ? error.message : String(error) },

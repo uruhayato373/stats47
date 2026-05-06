@@ -1,13 +1,13 @@
-import { geoshape, ranking } from "@stats47/mock";
 import type { TopoJSONTopology } from "@stats47/types";
 import { render, waitFor } from "@testing-library/react";
 import { describe, it } from "vitest";
+import jpPrefecturesData from "../../../../__tests__/fixtures/jp-prefectures.json";
+import rankingData from "../../../../__tests__/fixtures/ranking-data.json";
 import { compareWithGolden } from "../../../../shared/__tests__/helpers/golden-compare";
 import { svgToPng } from "../../../../shared/__tests__/helpers/svg-to-png";
 import { PrefectureMapChart } from "../index";
 
-const jpPrefecturesData = geoshape.jpPrefectures as unknown as TopoJSONTopology;
-const mockData = ranking.annualSalesAmountPerEmployeeData;
+const topology = jpPrefecturesData as unknown as TopoJSONTopology;
 
 describe("PrefectureMapChart PNG Golden Test", () => {
     it("standard (600x900)", async () => {
@@ -16,15 +16,14 @@ describe("PrefectureMapChart PNG Golden Test", () => {
 
         const { container } = render(
             <PrefectureMapChart
-                data={mockData as any}
-                topology={jpPrefecturesData}
+                data={rankingData as any}
+                topology={topology}
                 width={width}
                 height={height}
                 colorConfig={{ colorSchemeType: "sequential", colorScheme: "interpolatePurples" }}
             />
         );
 
-        // 非同期ロードを待機
         await waitFor(() => {
             const svg = container.querySelector("svg");
             if (!svg || svg.querySelectorAll("path").length < 47) throw new Error("Loading...");

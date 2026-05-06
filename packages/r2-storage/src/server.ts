@@ -12,7 +12,3 @@ export {
     listFromR2WithSize,
     saveToR2
 } from "./lib";
-
-export {
-    getR2BucketUsage
-} from "./services";

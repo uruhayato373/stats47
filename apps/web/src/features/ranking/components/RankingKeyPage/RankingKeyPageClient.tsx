@@ -291,7 +291,7 @@ export function RankingKeyPageClient({
 
     return (
         <div className="container mx-auto px-4 py-4">
-            <h1 className="text-lg font-bold">
+            <h1 className="text-2xl font-bold">
                 {displayInfo.title}
                 {(() => {
                     const detail = [displayInfo.subtitle, displayInfo.demographicAttr].filter(Boolean).join("・");

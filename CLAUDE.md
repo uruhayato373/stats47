@@ -99,6 +99,7 @@ packages/
 | Cloudflare 月次コスト・施策の蓄積（計測と改善） | GitHub Issues（ラベル `cost-snapshot` / `cost-improvement`）★請求書到着時に `/cloudflare-cost-improvement invoice`、snapshot と施策は Issue、生データ JSON は `.claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/` |
 | DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
 | R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
+| **R2 キーパス設計（URL = ディレクトリ構造の原則）** | `.claude/rules/r2-storage-design.md` ★snapshot 追加・変更時は必読 |
 | 国土数値情報 GIS データ（データセット一覧・パイプライン・ライセンス） | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
 | 国土交通データプラットフォーム（MCP・カタログ一覧・ツール） | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |

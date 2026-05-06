@@ -19,7 +19,7 @@ import path from "path";
 // ---------------------------------------------------------
 
 const MONOREPO_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const BLOG_ROOT = path.join(MONOREPO_ROOT, ".local", "r2", "blog");
+const BLOG_ROOT = path.join(MONOREPO_ROOT, ".local", "r2", "app", "blog");
 const COMPOSITION_ID = "BlogThumbnail";
 
 // ---------------------------------------------------------

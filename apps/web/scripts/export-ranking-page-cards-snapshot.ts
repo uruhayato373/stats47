@@ -1,7 +1,8 @@
 /**
- * ranking page cards を R2 snapshot 化する (Phase 6, PR-7)。
+ * ranking page cards を R2 snapshot 化する。
  *
- * データソース: page_components (page_type='ranking')
+ * 旧: ranking-page-cards/all.json (全件一括)
+ * 新: ranking-page-cards/{rankingKey}.json × rankingKey 数
  *
  * Usage:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
@@ -19,9 +20,8 @@ import * as schema from "../../../packages/database/src/schema";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import {
-  RANKING_PAGE_CARDS_SNAPSHOT_KEY,
+  rankingPageCardsKeyPath,
   type RankingPageCard,
-  type RankingPageCardsSnapshot,
 } from "../src/features/ranking/components/RankingPageCards/snapshot-reader";
 
 dotenv.config({ path: ".env.local" });
@@ -44,32 +44,28 @@ async function main() {
 
   const rows = await db
     .select({
-      id:           schema.pageComponents.componentKey,
-      rankingKey:   schema.pageComponents.pageKey,
+      id:            schema.pageComponents.componentKey,
+      rankingKey:    schema.pageComponents.pageKey,
       componentType: schema.pageComponents.componentType,
-      title:        schema.pageComponents.title,
+      title:         schema.pageComponents.title,
       componentProps: schema.pageComponents.componentProps,
-      displayOrder: schema.pageComponents.sortOrder,
-      isActive:     schema.pageComponents.isActive,
-      createdAt:    schema.pageComponents.createdAt,
-      updatedAt:    schema.pageComponents.updatedAt,
+      displayOrder:  schema.pageComponents.sortOrder,
+      isActive:      schema.pageComponents.isActive,
+      createdAt:     schema.pageComponents.createdAt,
+      updatedAt:     schema.pageComponents.updatedAt,
     })
     .from(schema.pageComponents)
-    .where(
-      and(
-        eq(schema.pageComponents.pageType, "ranking"),
-        eq(schema.pageComponents.isActive, true)
-      )
-    )
-    .orderBy(
-      asc(schema.pageComponents.pageKey),
-      asc(schema.pageComponents.sortOrder)
-    );
+    .where(and(
+      eq(schema.pageComponents.pageType, "ranking"),
+      eq(schema.pageComponents.isActive, true),
+    ))
+    .orderBy(asc(schema.pageComponents.pageKey), asc(schema.pageComponents.sortOrder));
 
-  const byRankingKey: Record<string, RankingPageCard[]> = {};
+  const byKey = new Map<string, RankingPageCard[]>();
   for (const row of rows) {
-    if (!byRankingKey[row.rankingKey]) byRankingKey[row.rankingKey] = [];
-    byRankingKey[row.rankingKey].push({
+    let cards = byKey.get(row.rankingKey);
+    if (!cards) { cards = []; byKey.set(row.rankingKey, cards); }
+    cards.push({
       id: row.id,
       rankingKey: row.rankingKey,
       componentType: row.componentType,
@@ -82,19 +78,24 @@ async function main() {
     });
   }
 
-  const snapshot: RankingPageCardsSnapshot = {
-    generatedAt: new Date().toISOString(),
-    byRankingKey,
-  };
+  const CONCURRENCY = 16;
+  const entries = [...byKey.entries()];
+  let files = 0;
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(RANKING_PAGE_CARDS_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  for (let i = 0; i < entries.length; i += CONCURRENCY) {
+    const batch = entries.slice(i, i + CONCURRENCY);
+    await Promise.all(
+      batch.map(async ([rankingKey, cards]) => {
+        const body = JSON.stringify(cards);
+        await saveToR2(rankingPageCardsKeyPath(rankingKey), body, {
+          contentType: "application/json; charset=utf-8",
+        });
+        files++;
+      }),
+    );
+  }
 
-  console.log(
-    `✅ ranking-page-cards: rankings=${Object.keys(byRankingKey).length} cards=${rows.length} bytes=${result.size}`,
-  );
+  console.log(`✅ ranking-page-cards: files=${files} cards=${rows.length}`);
   sqlite.close();
 }
 

@@ -1,21 +1,17 @@
-
-/**
- * 実行環境を判定する
- */
 export function detectEnvironment() {
   const isDevelopment = process.env.NODE_ENV === "development";
 
-  const hasCloudflareApi = !!(
-    process.env.CLOUDFLARE_ACCOUNT_ID &&
-    process.env.CLOUDFLARE_API_TOKEN
+  const hasS3Credentials = !!(
+    process.env.R2_ACCESS_KEY_ID &&
+    process.env.R2_SECRET_ACCESS_KEY &&
+    process.env.R2_S3_ENDPOINT
   );
 
-  // 本番環境では常にCloudflare Workers R2バインディングを使用
-  const isCloudflareWorkers = !isDevelopment;
+  const isCloudflareWorkers = !isDevelopment && !hasS3Credentials;
 
   return {
     isDevelopment,
-    hasCloudflareApi,
+    hasS3Credentials,
     isCloudflareWorkers,
   };
 }

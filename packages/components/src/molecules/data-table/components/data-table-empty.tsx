@@ -14,7 +14,7 @@ export function DataTableEmpty({ message, colSpan }: DataTableEmptyProps) {
             <tr className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                 <td
                     colSpan={colSpan}
-                    className="h-10 px-1 py-1 text-xs align-middle [&:has([role=checkbox])]:pr-0 text-center"
+                    className="h-10 px-3 py-2 text-sm align-middle [&:has([role=checkbox])]:pr-0 text-center"
                 >
                     {message}
                 </td>

@@ -5,19 +5,19 @@ import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { isNotNull } from "drizzle-orm";
 
-import {
-  AI_CONTENT_SNAPSHOT_KEY,
-  type AiContentSnapshot,
-  type AiContentSnapshotRow,
-} from "../types/snapshot";
+import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 
 export interface ExportRankingAiContentSnapshotResult {
-  key: string;
-  count: number;
-  sizeBytes: number;
+  files: number;
   durationMs: number;
 }
 
+/**
+ * metrics テーブルの AI コンテンツを ranking_key 単位で R2 に保存する。
+ *
+ * 旧: ai-content/all.json (全件一括)
+ * 新: ai-content/{key}.json × ranking_key 数
+ */
 export async function exportRankingAiContentSnapshot(
   db?: ReturnType<typeof getDrizzle>,
 ): Promise<ExportRankingAiContentSnapshotResult> {
@@ -37,29 +37,23 @@ export async function exportRankingAiContentSnapshot(
     .from(metrics)
     .where(isNotNull(metrics.yearCode));
 
-  const snapshotRows = rows as AiContentSnapshotRow[];
+  const CONCURRENCY = 16;
+  let files = 0;
 
-  const snapshot: AiContentSnapshot = {
-    generatedAt: new Date().toISOString(),
-    count: snapshotRows.length,
-    rows: snapshotRows,
-  };
-
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(AI_CONTENT_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  for (let i = 0; i < rows.length; i += CONCURRENCY) {
+    const batch = rows.slice(i, i + CONCURRENCY) as AiContentSnapshotRow[];
+    await Promise.all(
+      batch.map(async (row) => {
+        const body = JSON.stringify(row);
+        await saveToR2(aiContentKeyPath(row.rankingKey), body, {
+          contentType: "application/json; charset=utf-8",
+        });
+        files++;
+      }),
+    );
+  }
 
   const durationMs = Date.now() - startedAt;
-  logger.info(
-    { key: result.key, count: snapshotRows.length, sizeBytes: result.size, durationMs },
-    "ai_content snapshot を R2 に保存しました",
-  );
-
-  return {
-    key: result.key,
-    count: snapshotRows.length,
-    sizeBytes: result.size,
-    durationMs,
-  };
+  logger.info({ files, durationMs }, "ai_content snapshot を R2 に保存しました");
+  return { files, durationMs };
 }

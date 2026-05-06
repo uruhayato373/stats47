@@ -15,9 +15,7 @@ import { exportRankingAiContentSnapshot } from "../exporters/ranking-ai-content-
 async function main() {
   console.log("ai-content snapshot を R2 に書き出します…");
   const result = await exportRankingAiContentSnapshot();
-  console.log(
-    `✅ ai_content: ${result.count} 件 / ${result.sizeBytes} bytes / ${result.durationMs}ms key=${result.key}`,
-  );
+  console.log(`✅ ai_content: files=${result.files} / ${result.durationMs}ms`);
 }
 
 main().catch((err) => {

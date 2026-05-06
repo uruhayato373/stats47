@@ -264,10 +264,10 @@ async function main() {
       );
 
       const ogpDir = path.join(
-        R2_ROOT, "ranking", "prefecture", target.rankingKey, target.yearCode, "ogp"
+        R2_ROOT, "app", "ranking", "prefecture", target.rankingKey, target.yearCode, "ogp"
       );
       const thumbDir = path.join(
-        R2_ROOT, "ranking", "prefecture", target.rankingKey, target.yearCode, "thumbnails"
+        R2_ROOT, "app", "ranking", "prefecture", target.rankingKey, target.yearCode, "thumbnails"
       );
       await Promise.all([
         fs.mkdir(ogpDir, { recursive: true }),

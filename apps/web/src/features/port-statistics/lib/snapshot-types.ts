@@ -1,6 +1,6 @@
 import "server-only";
 
-export const PORTS_SNAPSHOT_KEY = "ports/all.json";
+export const PORTS_SNAPSHOT_KEY = "app/ports/all.json";
 
 export interface PortMetaRow {
   portCode: string;
@@ -47,12 +47,12 @@ export interface PortStatsYearsSnapshot {
   years: string[];
 }
 
-export const PORT_STATS_YEARS_KEY = "port-statistics/years.json";
+export const PORT_STATS_YEARS_KEY = "app/port-statistics/years.json";
 
 export function portStatsByYearKey(year: string): string {
-  return `port-statistics/by-year/${encodeURIComponent(year)}.json`;
+  return `app/port-statistics/by-year/${encodeURIComponent(year)}.json`;
 }
 
 export function portStatsByPortKey(portCode: string): string {
-  return `port-statistics/by-port/${encodeURIComponent(portCode)}.json`;
+  return `app/port-statistics/by-port/${encodeURIComponent(portCode)}.json`;
 }

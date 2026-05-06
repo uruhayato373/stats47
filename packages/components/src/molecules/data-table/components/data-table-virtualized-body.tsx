@@ -49,7 +49,7 @@ export const DataTableVirtualizedBody = React.forwardRef<
                                                 <TableCell
                                                     key={cell.id}
                                                     style={{ width }}
-                                                    className="text-xs"
+                                                    className="text-sm"
                                                 >
                                                     {flexRender(
                                                         cell.column.columnDef.cell,
