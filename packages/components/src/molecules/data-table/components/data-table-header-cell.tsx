@@ -26,7 +26,7 @@ export function DataTableHeaderCell<TData, TValue>({
         return (
             <th
                 style={{ width, minWidth }}
-                className="h-10 px-1 py-1 text-xs text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+                className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             />
         );
     }
@@ -35,7 +35,7 @@ export function DataTableHeaderCell<TData, TValue>({
         return (
             <th
                 style={{ width, minWidth }}
-                className="h-10 px-1 py-1 text-xs text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+                className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             >
                 {flexRender(header.column.columnDef.header, header.getContext())}
             </th>
@@ -45,7 +45,7 @@ export function DataTableHeaderCell<TData, TValue>({
     return (
         <th
             style={{ width, minWidth }}
-            className="h-10 px-1 py-1 text-xs text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+            className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
         >
             <Button
                 variant="ghost"
