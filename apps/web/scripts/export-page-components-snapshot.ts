@@ -1,6 +1,9 @@
 /**
  * page_components を R2 snapshot 化する。
  *
+ * 旧: page-components/all.json (全件一括)
+ * 新: page-components/{pageType}/{encodeURIComponent(pageKey)}.json × ページ数
+ *
  * 使用方法:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
  *     apps/web/scripts/export-page-components-snapshot.ts
@@ -16,10 +19,7 @@ import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-p
 import * as schema from "../../../packages/database/src/schema";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
-import {
-  PAGE_COMPONENTS_SNAPSHOT_KEY,
-  type PageComponentsSnapshot,
-} from "../src/features/stat-charts/services/page-components-snapshot";
+import { pageComponentsKeyPath } from "../src/features/stat-charts/services/page-components-snapshot";
 import type { PageComponent } from "../src/features/stat-charts/services/load-page-components";
 
 dotenv.config({ path: ".env.local" });
@@ -35,11 +35,7 @@ function resolveDatabasePath(): string {
 
 function parseJson(json: string | null): Record<string, unknown> {
   if (!json) return {};
-  try {
-    return JSON.parse(json);
-  } catch {
-    return {};
-  }
+  try { return JSON.parse(json); } catch { return {}; }
 }
 
 async function main() {
@@ -71,10 +67,15 @@ async function main() {
     .where(eq(schema.pageComponents.isActive, true))
     .orderBy(asc(schema.pageComponents.sortOrder));
 
-  const byPage: Record<string, PageComponent[]> = {};
+  const byPage = new Map<string, { pageType: string; pageKey: string; components: PageComponent[] }>();
   for (const row of rows) {
-    const key = `${row.pageType}|${row.pageKey}`;
-    const component: PageComponent = {
+    const mapKey = `${row.pageType}|${row.pageKey}`;
+    let entry = byPage.get(mapKey);
+    if (!entry) {
+      entry = { pageType: row.pageType, pageKey: row.pageKey, components: [] };
+      byPage.set(mapKey, entry);
+    }
+    entry.components.push({
       componentKey: row.componentKey,
       componentType: row.componentType,
       title: row.title,
@@ -88,25 +89,27 @@ async function main() {
       dataSource: row.dataSource,
       section: row.section,
       sortOrder: row.sortOrder ?? 0,
-    };
-    if (!byPage[key]) byPage[key] = [];
-    byPage[key].push(component);
+    });
   }
 
-  const snapshot: PageComponentsSnapshot = {
-    generatedAt: new Date().toISOString(),
-    byPage,
-  };
+  const CONCURRENCY = 16;
+  const entries = [...byPage.values()];
+  let files = 0;
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(PAGE_COMPONENTS_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  for (let i = 0; i < entries.length; i += CONCURRENCY) {
+    const batch = entries.slice(i, i + CONCURRENCY);
+    await Promise.all(
+      batch.map(async ({ pageType, pageKey, components }) => {
+        const body = JSON.stringify(components);
+        await saveToR2(pageComponentsKeyPath(pageType, pageKey), body, {
+          contentType: "application/json; charset=utf-8",
+        });
+        files++;
+      }),
+    );
+  }
 
-  console.log(
-    `✅ page-components: pages=${Object.keys(byPage).length} components=${rows.length} bytes=${result.size}`,
-  );
-
+  console.log(`✅ page-components: files=${files} components=${rows.length}`);
   sqlite.close();
 }
 

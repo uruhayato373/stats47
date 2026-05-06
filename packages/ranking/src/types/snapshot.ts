@@ -3,8 +3,21 @@ import type { Source } from "@stats47/database/server";
 import type { RankingItem } from "./ranking-item";
 import type { RankingValue } from "./ranking-value";
 
-export const RANKING_ITEMS_SNAPSHOT_KEY = "ranking-items/all.json";
-export const SURVEYS_SNAPSHOT_KEY = "surveys/all.json";
+export const RANKING_ITEMS_SNAPSHOT_KEY = "app/ranking-items/all.json";
+export const SURVEYS_SNAPSHOT_KEY = "app/survey/all.json";
+
+export function homeFeaturedKeyPath(): string {
+  return "app/home/featured.json";
+}
+export function categoryItemsKeyPath(categoryKey: string): string {
+  return `app/category/${encodeURIComponent(categoryKey)}/items.json`;
+}
+export function rankingItemKeyPath(rankingKey: string): string {
+  return `app/ranking/${encodeURIComponent(rankingKey)}/item.json`;
+}
+export function surveyItemsKeyPath(surveyId: string): string {
+  return `app/survey/${encodeURIComponent(surveyId)}/items.json`;
+}
 
 export interface RankingItemsSnapshot {
   generatedAt: string;
@@ -38,9 +51,9 @@ export interface RankingValuesKeySnapshot {
 
 export function rankingValuesKeyPath(
   rankingKey: string,
-  areaType: string,
+  _areaType?: string,
 ): string {
-  return `ranking-values/${encodeURIComponent(rankingKey)}/${encodeURIComponent(areaType)}.json`;
+  return `app/ranking/${encodeURIComponent(rankingKey)}/values.json`;
 }
 
 /** @deprecated rankingValuesKeyPath を使用してください */

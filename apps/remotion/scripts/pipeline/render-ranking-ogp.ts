@@ -257,6 +257,7 @@ async function main() {
 
       const outputDir = path.join(
         R2_ROOT,
+        "app",
         "ranking",
         "prefecture",
         target.rankingKey,

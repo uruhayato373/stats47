@@ -26,7 +26,6 @@ const CONCURRENCY = 8;
 /** ローカル開発で必要なプレフィックス */
 const DEFAULT_PREFIXES = [
   "ranking",
-  "seeds",
   "area",
   "categories",
 ];

@@ -33,36 +33,17 @@ import { StaticRankingPreview } from './features/ranking-youtube/previews/Static
 import { RankingMigrationPreview } from './features/ranking-youtube/previews/RankingMigrationPreview';
 import { RankingScrollGesPreview } from './features/ranking-youtube/previews/RankingScrollGesPreview';
 import { BarChartRaceNormalPreview } from './features/ranking-youtube/previews/BarChartRaceNormalPreview';
-// OGP
-import { AreaProfileOgpPreview } from './features/ogp/previews/AreaProfileOgpPreview';
-import { BlogOgpPreview } from './features/ogp/previews/BlogOgpPreview';
-import { BlogOgpGlassPreview } from './features/ogp/previews/BlogOgpGlassPreview';
-import { BlogOgpEditorialPreview } from './features/ogp/previews/BlogOgpEditorialPreview';
-import { ComparisonOgpPreview as OgpComparisonOgpPreview } from './features/ogp/previews/ComparisonOgpPreview';
-import { CorrelationScatterOgpPreview as OgpCorrelationScatterOgpPreview } from './features/ogp/previews/CorrelationScatterOgpPreview';
-import { RankingHeroOgpPreview } from './features/ogp/previews/RankingHeroOgpPreview';
-import { RankingHeroDataArtOgpPreview } from './features/ogp/previews/RankingHeroDataArtOgpPreview';
-import { RankingHeroEditorialOgpPreview } from './features/ogp/previews/RankingHeroEditorialOgpPreview';
-import { DefaultOgpDataArtPreview } from './features/ogp/previews/DefaultOgpDataArtPreview';
-import { DefaultOgpMinimalPreview } from './features/ogp/previews/DefaultOgpMinimalPreview';
-import { DefaultOgpDashboardPreview } from './features/ogp/previews/DefaultOgpDashboardPreview';
 // ranking-note
 import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPreview';
 // kazu-note
 import { KazuNoteCoverPreview } from './features/kazu-note/previews/KazuNoteCoverPreview';
-// compare-x
-import { ComparisonOgpPreview } from './features/compare-x/previews/ComparisonOgpPreview';
 // compare-instagram
 import { ComparisonCarouselPreview } from './features/compare-instagram/previews/ComparisonCarouselPreview';
 // compare-short
 import { ComparisonShortPreview } from './features/compare-short/previews/ComparisonShortPreview';
 import { getComparisonShortTimeline } from './features/compare-short/ComparisonShort';
-// correlation-x
-import { CorrelationScatterOgpPreview } from './features/correlation-x/previews/CorrelationScatterOgpPreview';
 // area-profile-instagram
 import { AreaProfileCarouselPreview } from './features/area-profile-instagram/previews/AreaProfileCarouselPreview';
-// thumbnail
-import { RankingThumbnailPreview } from './features/thumbnail/previews/RankingThumbnailPreview';
 // population-choropleth
 import { CompareChoroplethStillPreview } from './features/population-choropleth/previews/CompareChoroplethStillPreview';
 import { ChoroplethProgressiveReelPreview } from './features/population-choropleth/previews/ChoroplethProgressiveReelPreview';
@@ -78,18 +59,13 @@ import { barChartRacePreviewData } from './utils/preview-data-bar-chart-race';
 import {
   KazuNoteCoverSchema,
   AreaProfileCarouselSchema,
-  AreaProfileOgpSchema,
   BarChartRaceShortSchema,
   CarouselPreviewSchema,
   CommonPreviewSchema,
   ComparisonCarouselSchema,
-  ComparisonOgpSchema,
   ComparisonShortSchema,
-  CorrelationScatterOgpSchema,
   PopulationChoroplethSchema,
-  RankingHeroOgpSchema,
   LayoutPreviewSchema,
-  MapThumbnailPreviewSchema,
   RankCardPreviewSchema,
   RankingShortSchema,
   RankingTablePreviewSchema,
@@ -643,24 +619,6 @@ export const RemotionRoot: React.FC = () => {
 
 
       <Folder name="Compare">
-        <Folder name="X">
-          {/* 地域比較 X投稿用 (1200x630) */}
-          <Composition
-            id="CompareX-Post"
-            component={ComparisonOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={ComparisonOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-
         <Folder name="Instagram">
           {/* 比較カルーセル (1080x1350) */}
           <Composition
@@ -699,24 +657,6 @@ export const RemotionRoot: React.FC = () => {
         </Folder>
       </Folder>
 
-      <Folder name="correlation-x">
-        {/* 相関散布図 X投稿用 (1200x630) */}
-        <Composition
-          id="CorrelationX-Scatter"
-          component={CorrelationScatterOgpPreview}
-          width={CANVAS.ogp.width}
-          height={CANVAS.ogp.height}
-          fps={1}
-          durationInFrames={1}
-          schema={CorrelationScatterOgpSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-            showGuides: false,
-            showSafeAreas: false,
-          }}
-        />
-      </Folder>
-
       <Folder name="AreaProfile">
         <Folder name="Instagram">
           {/* 地域プロファイル カルーセル (1080x1350) */}
@@ -737,264 +677,6 @@ export const RemotionRoot: React.FC = () => {
           />
         </Folder>
       </Folder>
-
-      <Folder name="OGP">
-        <Folder name="Default">
-          <Composition
-            id="DefaultOgp-DataArt"
-            component={DefaultOgpDataArtPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-            })}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-          <Composition
-            id="DefaultOgp-Minimal"
-            component={DefaultOgpMinimalPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              description: z.string().optional(),
-              urlText: z.string().optional(),
-            })}
-            defaultProps={{
-              theme: 'light' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-          <Composition
-            id="DefaultOgp-Dashboard"
-            component={DefaultOgpDashboardPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-            })}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-
-        <Folder name="Ranking">
-
-          <Composition
-            id="RankingHeroOgp"
-            component={RankingHeroOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={RankingHeroOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          <Composition
-            id="RankingHeroDataArtOgp"
-            component={RankingHeroDataArtOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={RankingHeroOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          <Composition
-            id="RankingHeroEditorialOgp"
-            component={RankingHeroEditorialOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={RankingHeroOgpSchema}
-            defaultProps={{
-              theme: 'light' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          {/* ランキングサムネイル (240x240) */}
-          <Composition
-            id="RankingThumbnail"
-            component={RankingThumbnailPreview}
-            width={CANVAS.thumbnail.width}
-            height={CANVAS.thumbnail.height}
-            fps={1}
-            durationInFrames={1}
-            schema={MapThumbnailPreviewSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              rotation: 5,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-
-        <Folder name="Blog">
-          {/* ブログ OGP (1200x630) */}
-          <Composition
-            id="BlogOgp"
-            component={BlogOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-              hideWatermark: z.boolean().optional(),
-            })}
-            defaultProps={{
-              theme: 'light' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          <Composition
-            id="BlogOgp-Glass"
-            component={BlogOgpGlassPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-              hideWatermark: z.boolean().optional(),
-            })}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          <Composition
-            id="BlogOgp-Editorial"
-            component={BlogOgpEditorialPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-              hideWatermark: z.boolean().optional(),
-            })}
-            defaultProps={{
-              theme: 'light' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-
-          <Composition
-            id="BlogThumbnail"
-            component={BlogOgpEditorialPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CommonPreviewSchema.extend({
-              title: z.string().optional(),
-              subtitle: z.string().optional(),
-              hideWatermark: z.boolean().optional(),
-            })}
-            defaultProps={{
-              theme: 'light' as const,
-              showGuides: false,
-              showSafeAreas: false,
-              hideWatermark: true,
-            }}
-          />
-        </Folder>
-
-        <Folder name="Profile">
-          {/* 地域プロファイル OGP (1200x630) */}
-          <Composition
-            id="AreaProfileOgp"
-            component={AreaProfileOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={AreaProfileOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-
-        <Folder name="Compare">
-          {/* 地域比較 OGP (1200x630) */}
-          <Composition
-            id="ComparisonOgp"
-            component={OgpComparisonOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={ComparisonOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-
-        <Folder name="Correlation">
-          {/* 相関散布図 OGP (1200x630) */}
-          <Composition
-            id="CorrelationScatterOgp"
-            component={OgpCorrelationScatterOgpPreview}
-            width={CANVAS.ogp.width}
-            height={CANVAS.ogp.height}
-            fps={1}
-            durationInFrames={1}
-            schema={CorrelationScatterOgpSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
-      </Folder>
-
-
 
       <Folder name="KazuNote">
           {/* kazu-note カバー画像 (1280x670) */}

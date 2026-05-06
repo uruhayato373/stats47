@@ -32,7 +32,7 @@ export function DataTableRow<TData>({ row, onClick, className }: DataTableRowPro
                     <td
                         key={cell.id}
                         style={{ width, minWidth }}
-                        className="px-1 py-1 text-xs align-middle [&:has([role=checkbox])]:pr-0"
+                        className="px-3 py-2 text-sm align-middle [&:has([role=checkbox])]:pr-0"
                     >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>

@@ -14,16 +14,16 @@ disable-model-invocation: true
 ## 手順
 
 1. ユーザーにアップロード対象を確認（全体 or 特定プレフィックス: blog, ranking, area, categories, csv）
-2. まず S3 API 経由のアップロードを試行:
+2. Cloudflare REST API 経由のアップロードを試行:
    - 全体: `npm run r2:upload`（リポジトリルートで実行）
    - プレフィックス指定: `npx tsx packages/r2-storage/src/scripts/sync-upload.ts --prefix <prefix>`
    - dry-run で事前確認も可: `npx tsx packages/r2-storage/src/scripts/sync-upload.ts --dry-run`
+   - S3 credentials（R2_ACCESS_KEY_ID/R2_SECRET_ACCESS_KEY）は不要。`CLOUDFLARE_API_TOKEN` のみ使用
 3. 成功したら結果を報告して終了（CDN キャッシュパージは不要）
 4. 失敗した場合（プロキシ環境での HTTP 407/503 等）:
-   - `npx wrangler r2 object put` で個別にアップロードして回避
-   - コマンド形式: `npx wrangler r2 object put "stats47/<r2-key>" --file ".local/r2/<local-path>" --remote`
-   - 対象ディレクトリ内のファイルを走査して1ファイルずつ実行
-   - 各ファイルの成功/失敗を報告
+   - `diff-push-r2.ts` で wrangler CLI フォールバックを使用
+   - コマンド形式: `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix>`
+   - マニフェストベースで差分のみ push するため大量ファイルにも対応
 
 ## R2 キーのマッピング
 

@@ -1,7 +1,7 @@
 import {
     rankingData,
     rankingItems
-} from "@stats47/mock/ranking";
+} from "../fixtures/ranking";
 import type {
     RankingEntry,
     RankingInput,

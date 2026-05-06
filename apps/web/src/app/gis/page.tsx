@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
+import { GisCatalogTable } from "@/features/gis-catalog/components";
 import { fetchGisDatasets } from "@/features/gis-catalog/repository/gis-datasets-reader";
-import { GisCatalogTable } from "@/features/gis-catalog/components/GisCatalogTable";
+
+import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "GIS データカタログ | stats47",

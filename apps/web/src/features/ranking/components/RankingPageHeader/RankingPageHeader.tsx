@@ -41,7 +41,7 @@ export function RankingPageHeader({
         <div>
             <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-lg font-bold">{rankingName}</h1>
+                    <h1 className="text-2xl font-bold">{rankingName}</h1>
                     {metaParts.length > 0 && (
                         <span className="text-xs text-muted-foreground">
                             {metaParts.join(" / ")}

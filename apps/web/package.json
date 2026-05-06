@@ -85,9 +85,11 @@
     "@alloc/quick-lru": "^5.2.0",
     "@aws-sdk/client-s3": "^3.958.0",
     "@cloudflare/workers-types": "^4.20250830.0",
+    "@expo-google-fonts/noto-sans-jp": "^0.4.3",
+    "@fontsource/noto-sans-jp": "^5.2.9",
     "@next/bundle-analyzer": "^16.2.4",
     "@opennextjs/cloudflare": "^1.12.0",
-    "@stats47/mock": "*",
+
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -130,6 +132,7 @@
     "playwright": "^1.58.2",
     "postcss": "^8.5.6",
     "rimraf": "^6.1.0",
+    "satori": "^0.26.0",
     "size-limit": "^11.2.0",
     "tailwindcss": "^3.4.1",
     "typescript": "5.9.3"

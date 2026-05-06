@@ -22,7 +22,7 @@ export async function GET(
     return NextResponse.json({ error: "不正なパスです" }, { status: 400 });
   }
 
-  const key = `blog/${segments.join("/")}`;
+  const key = `app/blog/${segments.join("/")}`;
 
   try {
     if (isDev) {

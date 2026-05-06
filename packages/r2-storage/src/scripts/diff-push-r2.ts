@@ -1,9 +1,8 @@
 /**
- * R2 差分同期スクリプト（wrangler CLI フォールバック対応）
+ * R2 差分同期スクリプト（S3 API）
  *
  * push 成功したファイルの key:size をマニフェストファイルに記録し、
  * 次回実行時はマニフェストと比較して差分のみ push する。
- * プロキシ環境でも動作する（リモート API 不要）。
  *
  * 使い方:
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix blog
@@ -14,14 +13,28 @@
 import { config } from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
-import { execSync } from "child_process";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
-const BUCKET = "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 const OUTPUT_BASE = ".local/r2";
 const MANIFEST_DIR = ".local/r2-manifest";
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
+const CONCURRENCY = 8;
+
+const CONTENT_TYPE_MAP: Record<string, string> = {
+  ".json": "application/json",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".txt": "text/plain",
+  ".html": "text/html",
+  ".css": "text/css",
+  ".js": "application/javascript",
+};
 
 interface ManifestEntry {
   size: number;
@@ -29,6 +42,11 @@ interface ManifestEntry {
 }
 
 type Manifest = Record<string, ManifestEntry>;
+
+function getContentType(key: string): string {
+  const ext = path.extname(key).toLowerCase();
+  return CONTENT_TYPE_MAP[ext] ?? "application/octet-stream";
+}
 
 function getManifestPath(prefix: string): string {
   const name = prefix || "_all";
@@ -74,7 +92,7 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
   const prefixIdx = args.indexOf("--prefix");
-  const prefix = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() : "";
+  const prefix = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() ?? "" : "";
 
   const outputDir = path.join(PROJECT_ROOT, OUTPUT_BASE);
   const localDir = prefix ? path.join(outputDir, prefix) : outputDir;
@@ -84,29 +102,25 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  console.log("=== R2 差分同期（マニフェストベース） ===");
+  console.log("=== R2 差分同期（S3 API） ===");
   if (dryRun) console.log("【DRY RUN】実際にはアップロードしません");
   if (prefix) console.log(`プレフィックス: ${prefix}`);
 
-  // ローカルファイル収集
   const localFiles = collectLocalFiles(localDir, outputDir);
   console.log(`ローカルファイル: ${localFiles.length}`);
 
-  // マニフェスト読み込み
   const manifest = loadManifest(prefix);
   const manifestKeys = new Set(Object.keys(manifest));
   console.log(`マニフェスト記録済み: ${manifestKeys.size}`);
 
-  // 差分計算: サイズまたは mtime が変わったファイル、または未記録のファイル
   const toUpload = localFiles.filter((f) => {
     const entry = manifest[f.key];
-    if (!entry) return true; // 新規
-    if (entry.size !== f.size) return true; // サイズ変更
-    if (entry.mtime < f.mtime) return true; // 更新
+    if (!entry) return true;
+    if (entry.size !== f.size) return true;
+    if (entry.mtime < f.mtime) return true;
     return false;
   });
 
-  // マニフェストにあるがローカルにないファイル（削除候補）
   const localKeySet = new Set(localFiles.map((f) => f.key));
   const removed = [...manifestKeys].filter((k) => !localKeySet.has(k));
 
@@ -137,34 +151,48 @@ async function main(): Promise<void> {
     return;
   }
 
-  // wrangler r2 object put で差分アップロード
+  const endpoint = process.env.R2_S3_ENDPOINT;
+  const accessKeyId = process.env.R2_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
+  if (!endpoint || !accessKeyId || !secretAccessKey) {
+    console.error("エラー: R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が未設定です");
+    process.exit(1);
+  }
+  const s3 = new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+
   let success = 0;
   let errors = 0;
   const updatedManifest = { ...manifest };
 
-  for (let i = 0; i < toUpload.length; i++) {
-    const f = toUpload[i];
-    const localPath = path.relative(PROJECT_ROOT, f.absolutePath).split(path.sep).join("/");
-    try {
-      execSync(
-        `npx wrangler r2 object put "${BUCKET}/${f.key}" --file "${localPath}" --remote`,
-        { cwd: PROJECT_ROOT, stdio: "pipe", timeout: 30000 }
-      );
-      success++;
-      updatedManifest[f.key] = { size: f.size, mtime: f.mtime };
+  for (let i = 0; i < toUpload.length; i += CONCURRENCY) {
+    const chunk = toUpload.slice(i, i + CONCURRENCY);
+    await Promise.all(
+      chunk.map(async (f) => {
+        try {
+          const body = fs.readFileSync(f.absolutePath);
+          await s3.send(new PutObjectCommand({
+            Bucket: BUCKET,
+            Key: f.key,
+            Body: body,
+            ContentType: getContentType(f.key),
+          }));
+          success++;
+          updatedManifest[f.key] = { size: f.size, mtime: f.mtime };
+        } catch (e: unknown) {
+          errors++;
+          const msg = e instanceof Error ? e.message.split("\n")[0] : String(e);
+          console.error(`FAIL: ${f.key} - ${msg}`);
+        }
+      })
+    );
 
-      if ((i + 1) % 50 === 0 || i + 1 === toUpload.length) {
-        console.log(`Progress: ${i + 1} / ${toUpload.length} (success: ${success}, errors: ${errors})`);
-        // 途中経過もマニフェストに保存（中断に備える）
-        saveManifest(prefix, updatedManifest);
-      }
-    } catch (e: any) {
-      errors++;
-      console.error(`FAIL: ${f.key} - ${e.message?.split("\n")[0]}`);
+    const processed = Math.min(i + CONCURRENCY, toUpload.length);
+    if (processed === toUpload.length || i % 48 === 0) {
+      console.log(`Progress: ${processed} / ${toUpload.length} (success: ${success}, errors: ${errors})`);
+      saveManifest(prefix, updatedManifest);
     }
   }
 
-  // 削除済みファイルをマニフェストから除去
   for (const k of removed) {
     delete updatedManifest[k];
   }
