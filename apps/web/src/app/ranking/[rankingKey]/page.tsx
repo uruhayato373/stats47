@@ -126,15 +126,8 @@ export async function generateMetadata({
     const availableYears = rankingItem.availableYears || [];
     const selectedYear = availableYears[0]?.yearCode || "";
 
-    let rankingValues: RankingValue[] = [];
-    if (selectedYear) {
-      const rankingValueResult = await readRankingValuesFromR2(rankingKey, areaType, selectedYear);
-      rankingValues = isOk(rankingValueResult) ? rankingValueResult.data : [];
-    }
-
     return generateRankingPageMetaData({
       rankingItem,
-      rankingValues,
       selectedYear,
       areaType,
     });
