@@ -165,7 +165,6 @@ try {
 ├── d1/        # D1データ（wrangler persist先）
 └── r2/        # R2同期データ
     ├── ranking/prefecture/   # ランキング画像
-    ├── seeds/                # シードデータ（*.json）
     └── ...
 ```
 

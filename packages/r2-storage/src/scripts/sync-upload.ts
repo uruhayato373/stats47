@@ -68,6 +68,7 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
   const force = args.includes("--force");
+  const skipList = args.includes("--skip-list");
   const prefixIdx = args.indexOf("--prefix");
   const prefixArg = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() : undefined;
   const prefix = prefixArg ?? R2_PREFIX_DEFAULT;
@@ -101,7 +102,7 @@ async function main(): Promise<void> {
   console.log(`ローカル対象: ${localFilesWithKey.length} ファイル`);
 
   let remoteMap = new Map<string, number>();
-  if (!dryRun && localFilesWithKey.length > 0) {
+  if (!dryRun && !skipList && localFilesWithKey.length > 0) {
     const listPrefix = prefix || undefined;
     const remote = await listFromR2WithSize(listPrefix);
     remoteMap = new Map(remote.map((r) => [r.key, r.size]));
@@ -128,6 +129,10 @@ async function main(): Promise<void> {
     return;
   }
 
+  const slowMode = args.includes("--slow");
+  const batchSize = slowMode ? 2 : CONCURRENCY;
+  const batchDelayMs = slowMode ? 500 : 0;
+
   let uploaded = 0;
   let errors = 0;
 
@@ -146,10 +151,13 @@ async function main(): Promise<void> {
     }
   }
 
-  for (let i = 0; i < toUpload.length; i += CONCURRENCY) {
-    const chunk = toUpload.slice(i, i + CONCURRENCY);
+  for (let i = 0; i < toUpload.length; i += batchSize) {
+    const chunk = toUpload.slice(i, i + batchSize);
     const results = await Promise.all(chunk.map(uploadOne));
     for (const r of results) (r.ok ? uploaded++ : errors++);
+    if (batchDelayMs > 0 && i + batchSize < toUpload.length) {
+      await new Promise((r) => setTimeout(r, batchDelayMs));
+    }
   }
 
   console.log("--- アップロード完了 ---");
