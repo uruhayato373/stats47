@@ -8,7 +8,7 @@ import type { AffiliateLocationCode } from "../types";
 
 export type AffiliateAdRow = typeof affiliateAds.$inferSelect;
 
-export const AFFILIATE_ADS_SNAPSHOT_KEY = "snapshots/affiliate-ads/all.json";
+export const AFFILIATE_ADS_SNAPSHOT_KEY = "affiliate-ads/all.json";
 
 const STALE_AFTER_DAYS = 30;
 

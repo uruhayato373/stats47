@@ -1,2 +1,2 @@
 
-export * from './create-s3-client';
+export * from './get-r2-client';

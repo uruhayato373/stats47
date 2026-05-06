@@ -1,6 +1,6 @@
 import { type ArticleRow } from "@stats47/database/schema";
 
-export const BLOG_SNAPSHOT_KEY = "snapshots/blog/all.json";
+export const BLOG_SNAPSHOT_KEY = "blog/all.json";
 
 export interface SnapshotArticleTag {
   tagKey: string;

@@ -5,7 +5,7 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 import type { PageComponent } from "./load-page-components";
 
-export const PAGE_COMPONENTS_SNAPSHOT_KEY = "snapshots/page-components/all.json";
+export const PAGE_COMPONENTS_SNAPSHOT_KEY = "page-components/all.json";
 
 const STALE_AFTER_DAYS = 30;
 

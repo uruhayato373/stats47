@@ -1,14 +1,42 @@
 
-import { ListObjectsV2Command, type ListObjectsV2CommandOutput } from "@aws-sdk/client-s3";
 import type { R2ListOptions } from "@cloudflare/workers-types";
 import { logger } from "@stats47/logger";
-import { createS3Client } from "../clients/create-s3-client";
 import { getR2Client } from "../clients/get-r2-client";
 import { detectEnvironment } from "../utils/detect-environment";
+import { findLocalR2Root } from "../utils/find-local-r2-root";
+
+/**
+ * dev モード: ローカルファイルシステム (.local/r2/) から一覧取得
+ */
+function listFromLocalFs(prefix?: string): Array<{ key: string; size: number }> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("fs") as typeof import("fs");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("path") as typeof import("path");
+  const root = findLocalR2Root() ?? path.join(process.cwd(), ".local/r2");
+  const dirPath = prefix ? path.join(root, prefix) : root;
+  if (!fs.existsSync(dirPath)) return [];
+
+  const results: Array<{ key: string; size: number }> = [];
+  function walk(dir: string) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else {
+        results.push({
+          key: path.relative(root, fullPath),
+          size: fs.statSync(fullPath).size,
+        });
+      }
+    }
+  }
+  walk(dirPath);
+  return results;
+}
 
 /**
  * Cloudflare REST API 経由でR2オブジェクト一覧を取得
- * S3 APIがプロキシでブロックされる場合のフォールバック
  */
 async function listFromCloudflareApi(
   prefix?: string
@@ -21,7 +49,6 @@ async function listFromCloudflareApi(
     throw new Error("CLOUDFLARE_ACCOUNT_ID または CLOUDFLARE_API_TOKEN が未設定です");
   }
 
-  // undici の ProxyAgent でプロキシを通す（wrangler と同じ HTTP クライアント）
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { ProxyAgent, fetch: undiciFetch } = require("undici");
   const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
@@ -41,9 +68,7 @@ async function listFromCloudflareApi(
       headers: { Authorization: `Bearer ${apiToken}` },
     });
 
-    if (!response.ok) {
-      throw new Error(`Cloudflare API エラー: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Cloudflare API エラー: ${response.status}`);
 
     const json = await response.json() as {
       success: boolean;
@@ -51,9 +76,7 @@ async function listFromCloudflareApi(
       result_info?: { cursor?: string; is_truncated?: boolean };
     };
 
-    if (!json.success) {
-      throw new Error("Cloudflare API レスポンスが失敗");
-    }
+    if (!json.success) throw new Error("Cloudflare API レスポンスが失敗");
 
     allObjects.push(...(json.result || []).filter((o) => o.key));
     cursor = json.result_info?.is_truncated ? json.result_info.cursor : undefined;
@@ -65,13 +88,9 @@ async function listFromCloudflareApi(
 /**
  * オブジェクト一覧を R2 から取得（ページネーション対応）
  *
- * 優先順位:
- * 1. S3互換API（環境変数が設定されている場合）
- * 2. R2バインディング（Cloudflare Workers環境）
- *
- * @param prefix - プレフィックス（オプション）
- * @param options - オプション
- * @returns オブジェクトキーの配列
+ * dev 環境:              ローカルFS (.local/r2/)
+ * Cloudflare Workers:   R2バインディング
+ * スクリプト環境:        Cloudflare REST API
  */
 export async function listFromR2(
   prefix?: string,
@@ -79,40 +98,24 @@ export async function listFromR2(
 ): Promise<string[]> {
   const env = detectEnvironment();
 
-  // 1. S3互換APIが使用可能な場合
-  if (env.hasS3Credentials) {
+  // 1. dev環境 -> ローカルファイルシステム
+  if (env.isDevelopment) {
+    return listFromLocalFs(prefix).map((o) => o.key);
+  }
+
+  // 2. スクリプト環境 -> Cloudflare REST API
+  if (env.hasCloudflareApi) {
     try {
-      logger.info({ prefix }, "S3互換APIを使用してR2からオブジェクト一覧を取得");
-      const client = createS3Client();
-      const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-      
-      const allKeys: string[] = [];
-      let continuationToken: string | undefined = undefined;
-
-      do {
-        const command: ListObjectsV2Command = new ListObjectsV2Command({
-          Bucket: bucketName,
-          Prefix: prefix,
-          ContinuationToken: continuationToken,
-        });
-
-        const response: ListObjectsV2CommandOutput = await client.send(command);
-        if (response.Contents) {
-          const keys = response.Contents.map((obj: { Key?: string }) => obj.Key || "").filter(Boolean);
-          allKeys.push(...keys);
-        }
-
-        continuationToken = response.IsTruncated ? response.NextContinuationToken : undefined;
-      } while (continuationToken);
-
-      logger.info({ prefix, keyCount: allKeys.length }, "S3互換API経由でオブジェクト一覧を取得完了");
-      return allKeys;
+      const objects = await listFromCloudflareApi(prefix);
+      logger.info({ prefix, keyCount: objects.length }, "Cloudflare REST API経由でオブジェクト一覧を取得完了");
+      return objects.map((o) => o.key);
     } catch (error) {
-      logger.error({ prefix, error }, "S3互換APIでの取得に失敗、R2バインディングにフォールバックを試行します");
+      logger.error({ prefix, error }, "Cloudflare REST APIでの取得に失敗しました");
+      throw error;
     }
   }
 
-  // 2. R2バインディングを使用
+  // 3. Cloudflare Workers環境 -> R2バインディング
   try {
     const client = await getR2Client(options);
     const allKeys: string[] = [];
@@ -121,12 +124,7 @@ export async function listFromR2(
     do {
       const listOptions: R2ListOptions = prefix ? { prefix, cursor } : { cursor };
       const result = await client.list(listOptions);
-
-      if (result.objects) {
-        const keys = result.objects.map((obj) => obj.key).filter(Boolean);
-        allKeys.push(...keys);
-      }
-
+      if (result.objects) allKeys.push(...result.objects.map((obj) => obj.key).filter(Boolean));
       cursor = result.truncated ? result.cursor : undefined;
     } while (cursor);
 
@@ -140,10 +138,6 @@ export async function listFromR2(
 
 /**
  * オブジェクト一覧を R2 から取得（サイズ情報付き、ページネーション対応）
- *
- * @param prefix - プレフィックス（オプション）
- * @param options - オプション
- * @returns オブジェクトのキーとサイズ情報の配列
  */
 export async function listFromR2WithSize(
   prefix?: string,
@@ -151,50 +145,24 @@ export async function listFromR2WithSize(
 ): Promise<Array<{ key: string; size: number }>> {
   const env = detectEnvironment();
 
-  // 1. S3認証情報あり -> S3クライアントを使用して取得
-  //    失敗時は Cloudflare REST API にフォールバック（企業プロキシで S3 がブロックされる場合に対応）
-  if (env.hasS3Credentials) {
+  // 1. dev環境 -> ローカルファイルシステム
+  if (env.isDevelopment) {
+    return listFromLocalFs(prefix);
+  }
+
+  // 2. スクリプト環境 -> Cloudflare REST API
+  if (env.hasCloudflareApi) {
     try {
-      const client = createS3Client();
-      const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-
-      const allObjects: Array<{ key: string; size: number }> = [];
-      let continuationToken: string | undefined = undefined;
-
-      do {
-        const command: ListObjectsV2Command = new ListObjectsV2Command({
-          Bucket: bucketName,
-          Prefix: prefix,
-          ContinuationToken: continuationToken,
-        });
-
-        const response: ListObjectsV2CommandOutput = await client.send(command);
-        if (response.Contents) {
-          const objects = response.Contents.map((obj: { Key?: string; Size?: number }) => ({
-            key: obj.Key || "",
-            size: obj.Size || 0,
-          })).filter((obj: { key: string }) => obj.key);
-          allObjects.push(...objects);
-        }
-
-        continuationToken = response.IsTruncated ? response.NextContinuationToken : undefined;
-      } while (continuationToken);
-
-      return allObjects;
-    } catch (s3Error) {
-      logger.warn({ prefix, error: s3Error }, "S3クライアントでの取得に失敗。Cloudflare REST APIにフォールバックします");
-      try {
-        const objects = await listFromCloudflareApi(prefix);
-        logger.info({ prefix, count: objects.length }, "Cloudflare REST API経由でオブジェクト一覧を取得");
-        return objects;
-      } catch (cfError) {
-        logger.error({ prefix, s3Error, cfError }, "S3・Cloudflare API 両方で取得に失敗しました");
-        throw cfError;
-      }
+      const objects = await listFromCloudflareApi(prefix);
+      logger.info({ prefix, count: objects.length }, "Cloudflare REST API経由でオブジェクト一覧（サイズ付き）を取得");
+      return objects;
+    } catch (error) {
+      logger.error({ prefix, error }, "Cloudflare REST APIでの取得に失敗しました");
+      throw error;
     }
   }
 
-  // 2. R2バインディングを使用して取得
+  // 3. Cloudflare Workers環境 -> R2バインディング
   try {
     const client = await getR2Client(options);
     const allObjects: Array<{ key: string; size: number }> = [];
@@ -203,15 +171,9 @@ export async function listFromR2WithSize(
     do {
       const listOptions: R2ListOptions = prefix ? { prefix, cursor } : { cursor };
       const result = await client.list(listOptions);
-
       if (result.objects) {
-        const objects = result.objects.map((obj) => ({
-          key: obj.key,
-          size: obj.size || 0,
-        }));
-        allObjects.push(...objects);
+        allObjects.push(...result.objects.map((obj) => ({ key: obj.key, size: obj.size || 0 })));
       }
-
       cursor = result.truncated ? result.cursor : undefined;
     } while (cursor);
 

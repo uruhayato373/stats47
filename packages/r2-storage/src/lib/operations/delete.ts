@@ -1,52 +1,87 @@
 
-import { DeleteObjectCommand, DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { logger } from "@stats47/logger";
-import { createS3Client } from "../clients/create-s3-client";
 import { getR2Client } from "../clients/get-r2-client";
 import { detectEnvironment } from "../utils/detect-environment";
+import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { listFromR2 } from "./list";
+
+/**
+ * dev モード: ローカルファイルシステム (.local/r2/) から削除
+ */
+function deleteFromLocalFs(key: string): void {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("fs") as typeof import("fs");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("path") as typeof import("path");
+  const r2Root = findLocalR2Root() ?? path.join(process.cwd(), ".local/r2");
+  const filePath = path.join(r2Root, key);
+  if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+}
+
+/**
+ * Cloudflare REST API 経由で単一オブジェクトを削除
+ */
+async function deleteFromCloudflareApi(
+  key: string,
+  bucketName: string,
+): Promise<void> {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+
+  if (!accountId || !apiToken) {
+    throw new Error("CLOUDFLARE_ACCOUNT_ID または CLOUDFLARE_API_TOKEN が未設定です");
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { ProxyAgent, fetch: undiciFetch } = require("undici");
+  const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
+
+  const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${encodeURIComponent(key)}`;
+  const response = await undiciFetch(url, {
+    method: "DELETE",
+    dispatcher,
+    headers: { Authorization: `Bearer ${apiToken}` },
+  });
+
+  if (!response.ok && response.status !== 404) {
+    throw new Error(`Cloudflare REST API での削除に失敗: ${response.status} for key=${key}`);
+  }
+}
 
 /**
  * オブジェクトを R2 から削除
  *
- * @param key - オブジェクトキー
- * @param options - オプション
+ * dev 環境:              ローカルFS (.local/r2/)
+ * Cloudflare Workers:   R2バインディング
+ * スクリプト環境:        Cloudflare REST API
  */
 export async function deleteFromR2(
   key: string,
   options?: { async?: boolean }
 ): Promise<void> {
   const env = detectEnvironment();
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 
-  // 1. S3互換APIが使用可能な場合
-  if (env.hasS3Credentials) {
-    try {
-      const client = createS3Client();
-      const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-      
-      const command = new DeleteObjectCommand({
-        Bucket: bucketName,
-        Key: key,
-      });
-
-      await client.send(command);
-      return;
-    } catch (error) {
-      logger.error({ key, error }, "S3互換APIでの削除に失敗、R2バインディングにフォールバックを試行します");
-    }
+  // 1. dev環境 -> ローカルファイルシステム
+  if (env.isDevelopment) {
+    deleteFromLocalFs(key);
+    return;
   }
 
-  // 2. R2バインディングを使用
+  // 2. スクリプト環境 -> Cloudflare REST API
+  if (env.hasCloudflareApi) {
+    await deleteFromCloudflareApi(key, bucketName);
+    return;
+  }
+
+  // 3. Cloudflare Workers環境 -> R2バインディング
   const client = await getR2Client(options);
   await client.delete(key);
 }
 
 /**
- * 複数のオブジェクトを R2 から一括削除（最大1000件）
- *
- * @param keys - オブジェクトキーの配列（最大1000件）
- * @param options - オプション
- * @returns 削除されたキーの配列とエラーの配列
+ * 複数のオブジェクトを R2 から一括削除
  */
 export async function deleteMultipleFromR2(
   keys: string[],
@@ -55,93 +90,60 @@ export async function deleteMultipleFromR2(
   deleted: string[];
   errors: Array<{ key: string; code: string; message: string }>;
 }> {
-  if (keys.length === 0) {
-    return { deleted: [], errors: [] };
-  }
+  if (keys.length === 0) return { deleted: [], errors: [] };
 
   const env = detectEnvironment();
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
   const deleted: string[] = [];
   const errors: Array<{ key: string; code: string; message: string }> = [];
 
-  // 1. S3互換APIが使用可能な場合（一括削除が可能）
-  if (env.hasS3Credentials) {
-    try {
-      const client = createS3Client();
-      const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-
-      // 最大1000件の制限があるため、分割して処理（呼び出し側で通常制御されるが念のため）
-      const chunkSize = 1000;
-      for (let i = 0; i < keys.length; i += chunkSize) {
-        const chunk = keys.slice(i, i + chunkSize);
-        
-        try {
-          const command = new DeleteObjectsCommand({
-            Bucket: bucketName,
-            Delete: {
-              Objects: chunk.map((key) => ({ Key: key })),
-              Quiet: false,
-            },
-          });
-
-          const response = await client.send(command);
-          
-          if (response.Deleted) {
-            deleted.push(...response.Deleted.map((d) => d.Key || "").filter(Boolean));
-          }
-          
-          if (response.Errors) {
-            errors.push(
-              ...response.Errors.map((e) => ({
-                key: e.Key || "unknown",
-                code: e.Code || "UnknownError",
-                message: e.Message || "Unknown error occurred",
-              }))
-            );
-          }
-        } catch (error) {
-          // チャンク単位のエラー
-          chunk.forEach((key) => {
-            errors.push({
-              key,
-              code: "ChunkDeleteError",
-              message: error instanceof Error ? error.message : String(error),
-            });
-          });
-        }
+  // 1. dev環境 -> ローカルファイルシステム
+  if (env.isDevelopment) {
+    for (const key of keys) {
+      try {
+        deleteFromLocalFs(key);
+        deleted.push(key);
+      } catch (error) {
+        errors.push({ key, code: "DeleteError", message: error instanceof Error ? error.message : String(error) });
       }
-      
-      return { deleted, errors };
-    } catch (error) {
-      logger.error({ error }, "S3互換APIでの一括削除に失敗、R2バインディングにフォールバックを試行します");
     }
+    return { deleted, errors };
   }
 
-  // 2. R2バインディングを使用
-  const client = await getR2Client(options);
+  // 2. スクリプト環境 -> Cloudflare REST API (並列削除)
+  if (env.hasCloudflareApi) {
+    const CONCURRENCY = 10;
+    for (let i = 0; i < keys.length; i += CONCURRENCY) {
+      const chunk = keys.slice(i, i + CONCURRENCY);
+      await Promise.all(
+        chunk.map(async (key) => {
+          try {
+            await deleteFromCloudflareApi(key, bucketName);
+            deleted.push(key);
+          } catch (error) {
+            errors.push({ key, code: "DeleteError", message: error instanceof Error ? error.message : String(error) });
+          }
+        })
+      );
+    }
+    return { deleted, errors };
+  }
 
-  // R2 バインディングは一括削除をサポートしていないため、個別に削除
+  // 3. Cloudflare Workers環境 -> R2バインディング
+  const client = await getR2Client(options);
   for (const key of keys) {
     try {
       await client.delete(key);
       deleted.push(key);
     } catch (error) {
-      errors.push({
-        key,
-        code: "DeleteError",
-        message: error instanceof Error ? error.message : String(error),
-      });
+      errors.push({ key, code: "DeleteError", message: error instanceof Error ? error.message : String(error) });
     }
   }
-
   return { deleted, errors };
 }
 
 /**
  * 指定されたプレフィックスを持つオブジェクトを R2 から一括削除
- *
- * @param prefix - 削除するプレフィックス
- * @param options - オプション
- * @returns 削除結果
  */
 export async function deletePrefixFromR2(
   prefix: string,
@@ -150,14 +152,11 @@ export async function deletePrefixFromR2(
   deleted: string[];
   errors: Array<{ key: string; code: string; message: string }>;
 }> {
-  if (!prefix) {
-    throw new Error("Prefix is required for deletePrefixFromR2");
-  }
+  if (!prefix) throw new Error("Prefix is required for deletePrefixFromR2");
 
   logger.info({ prefix }, "R2からプレフィックス指定でオブジェクトを一括削除開始");
 
   const keys = await listFromR2(prefix, options);
-
   if (keys.length === 0) {
     logger.info({ prefix }, "削除対象のオブジェクトが見つかりませんでした");
     return { deleted: [], errors: [] };
@@ -170,6 +169,5 @@ export async function deletePrefixFromR2(
     { prefix, deletedCount: result.deleted.length, errorCount: result.errors.length },
     "一括削除が完了しました"
   );
-
   return result;
 }

@@ -1,40 +1,52 @@
-const { S3Client, ListObjectsV2Command, DeleteObjectsCommand } = require('@aws-sdk/client-s3');
+const { ProxyAgent, fetch: undiciFetch } = require('undici');
 require('dotenv').config({ path: '.env.local' });
 
-const client = new S3Client({
-  region: 'auto',
-  endpoint: 'https://' + process.env.CLOUDFLARE_ACCOUNT_ID + '.r2.cloudflarestorage.com',
-  credentials: {
-    accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
-    secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
-  },
-});
+const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
+const BUCKET = 'stats47';
+const CONCURRENCY = 20;
+
+if (!ACCOUNT_ID || !API_TOKEN) {
+  console.error('Missing: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN');
+  process.exit(1);
+}
+
+const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
+const headers = { Authorization: `Bearer ${API_TOKEN}` };
 
 async function collectKeys(prefix, filter) {
   const keys = [];
-  let token;
+  let cursor;
   do {
-    const res = await client.send(new ListObjectsV2Command({ Bucket: 'stats47', Prefix: prefix, ContinuationToken: token, MaxKeys: 1000 }));
-    for (const obj of res.Contents || []) {
-      if (filter(obj.Key)) keys.push(obj.Key);
+    const params = new URLSearchParams({ limit: '1000' });
+    if (prefix) params.set('prefix', prefix);
+    if (cursor) params.set('cursor', cursor);
+    const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/r2/buckets/${BUCKET}/objects?${params}`;
+    const res = await undiciFetch(url, { dispatcher, headers });
+    if (!res.ok) throw new Error(`API エラー: ${res.status}`);
+    const json = await res.json();
+    for (const obj of json.result || []) {
+      if (obj.key && filter(obj.key)) keys.push(obj.key);
     }
-    token = res.NextContinuationToken;
-  } while (token);
+    cursor = json.result_info?.is_truncated ? json.result_info.cursor : undefined;
+  } while (cursor);
   return keys;
 }
 
 async function deleteKeys(keys, label) {
   if (keys.length === 0) { console.log(label + ': 0 files'); return; }
   console.log(label + ': ' + keys.length + ' files to delete...');
-  // DeleteObjects max 1000 per batch
-  for (let i = 0; i < keys.length; i += 1000) {
-    const batch = keys.slice(i, i + 1000);
-    await client.send(new DeleteObjectsCommand({
-      Bucket: 'stats47',
-      Delete: { Objects: batch.map(k => ({ Key: k })) },
+  let deleted = 0;
+  for (let i = 0; i < keys.length; i += CONCURRENCY) {
+    const chunk = keys.slice(i, i + CONCURRENCY);
+    await Promise.all(chunk.map(async (key) => {
+      const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/r2/buckets/${BUCKET}/objects/${encodeURIComponent(key)}`;
+      const res = await undiciFetch(url, { method: 'DELETE', dispatcher, headers });
+      if (res.ok || res.status === 404) deleted++;
     }));
-    console.log('  deleted ' + Math.min(i + 1000, keys.length) + '/' + keys.length);
   }
+  console.log('  deleted ' + deleted + '/' + keys.length);
 }
 
 async function main() {
@@ -45,7 +57,7 @@ async function main() {
     collectKeys('ranking/', k => k.includes('ogp-dark.png')),
     collectKeys('ranking/', k => k.endsWith('.json')),
     collectKeys('ranking/', k => k.endsWith('.csv')),
-    collectKeys('blog/', k => /^blog\/[^\/]+\/ogp\.png$/.test(k)),
+    collectKeys('blog/', k => /^blog\/[^/]+\/ogp\.png$/.test(k)),
   ]);
 
   console.log('ogp-light.png: ' + ogpLight.length);

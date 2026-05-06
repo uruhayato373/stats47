@@ -1,15 +1,33 @@
 
-import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { logger } from "@stats47/logger";
-import { createS3Client } from "../clients/create-s3-client";
 import { getR2Client } from "../clients/get-r2-client";
 import { detectEnvironment } from "../utils/detect-environment";
+import { findLocalR2Root } from "../utils/find-local-r2-root";
 
 /**
- * Cloudflare REST API 経由でオブジェクト内容を取得
- * S3 API がプロキシでブロックされる場合のフォールバック
+ * ローカルファイルシステム (.local/r2/) から読み込む
+ * seeded data / 手動配置ファイルがある場合に API 呼び出しをスキップする
  */
-async function fetchFromCloudflareApi(key: string): Promise<Buffer | null> {
+function fetchFromLocalFs(key: string): Buffer | null {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("fs") as typeof import("fs");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path") as typeof import("path");
+    const r2Root = findLocalR2Root();
+    if (!r2Root) return null;
+    const filePath = path.join(r2Root, key);
+    if (!fs.existsSync(filePath)) return null;
+    return fs.readFileSync(filePath);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Cloudflare REST API 経由でオブジェクト内容を取得（429 リトライ付き）
+ */
+async function fetchFromCloudflareApi(key: string, retryCount = 0): Promise<Buffer | null> {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
   const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
@@ -28,6 +46,14 @@ async function fetchFromCloudflareApi(key: string): Promise<Buffer | null> {
   });
 
   if (response.status === 404) return null;
+
+  if (response.status === 429 && retryCount < 3) {
+    const retryAfter = parseInt(response.headers.get("Retry-After") || "5", 10);
+    logger.warn({ key, retryCount, retryAfter }, "Cloudflare API rate limited (429)、リトライします");
+    await new Promise((r) => setTimeout(r, retryAfter * 1000));
+    return fetchFromCloudflareApi(key, retryCount + 1);
+  }
+
   if (!response.ok) {
     throw new Error(`Cloudflare API エラー: ${response.status} for key=${key}`);
   }
@@ -39,120 +65,69 @@ async function fetchFromCloudflareApi(key: string): Promise<Buffer | null> {
 /**
  * オブジェクトを R2 から取得（Buffer形式）
  *
- * @param key - オブジェクトキー
- * @param options - オプション
- * @returns オブジェクトのBuffer（存在しない場合はnull）
+ * 優先順位:
+ *   1. ローカルFS (.local/r2/) — seeded / 手動配置ファイル（API 呼び出し不要）
+ *   2. Cloudflare Workers R2バインディング
+ *   3. Cloudflare REST API（429 リトライ付き）
  */
 export async function fetchFromR2(
   key: string,
   options?: { async?: boolean }
 ): Promise<Buffer | null> {
+  // 1. ローカルFS優先（環境問わず）— 存在すれば API 呼び出しをスキップ
+  const localData = fetchFromLocalFs(key);
+  if (localData !== null) return localData;
+
   const env = detectEnvironment();
 
-  // 1. Cloudflare Workers環境 -> R2バインディングを優先使用
-  //    失敗時はフォールバック（スクリプト実行時に isCloudflareWorkers=true でも S3/CF API へ続ける）
+  // 2. Cloudflare Workers環境 -> R2バインディング
   if (env.isCloudflareWorkers) {
     try {
       const r2Client = await getR2Client(options);
       const object = await r2Client.get(key);
-
-      if (!object) {
-        return null;
-      }
-
+      if (!object) return null;
       const arrayBuffer = await object.arrayBuffer();
       return Buffer.from(arrayBuffer);
     } catch (error) {
-      logger.warn({ key, error }, "R2バインディング経由での取得に失敗。S3/Cloudflare APIにフォールバックします");
-      // fall through to S3 / Cloudflare API
+      logger.warn({ key, error }, "R2バインディング経由での取得に失敗。Cloudflare APIにフォールバックします");
     }
   }
 
-  // 2. ローカル開発環境 -> S3クライアントを使用して取得
-  //    失敗時は Cloudflare REST API にフォールバック（企業プロキシで S3 がブロックされる場合に対応）
-  if (env.hasS3Credentials) {
+  // 3. Cloudflare REST API（スクリプト環境 / Workers フォールバック）
+  if (env.hasCloudflareApi) {
     try {
-      const s3Client = createS3Client();
-      const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-
-      const command = new GetObjectCommand({
-        Bucket: bucketName,
-        Key: key,
-      });
-
-      const response = await s3Client.send(command);
-      if (!response.Body) {
-        return null;
-      }
-
-      const byteArray = await response.Body.transformToByteArray();
-      return Buffer.from(byteArray);
-    } catch (error: any) {
-      if (error.name === "NoSuchKey" || error.$metadata?.httpStatusCode === 404) {
-        return null;
-      }
-      logger.warn({ key, error }, "S3クライアントでの取得に失敗。Cloudflare REST APIにフォールバックします");
-      try {
-        return await fetchFromCloudflareApi(key);
-      } catch (cfError) {
-        logger.error({ key, s3Error: error, cfError }, "S3・Cloudflare API 両方での取得に失敗しました");
-        throw cfError;
-      }
+      return await fetchFromCloudflareApi(key);
+    } catch (error) {
+      logger.error({ key, error }, "Cloudflare REST API での取得に失敗しました");
+      throw error;
     }
   }
 
-  // 3. その他の環境
-  const errorMessage = "R2クライアントを取得できませんでした。S3互換APIの環境変数 (CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_R2_ACCESS_KEY_ID, CLOUDFLARE_R2_SECRET_ACCESS_KEY) が設定されているか確認してください。";
-
+  const errorMessage = "R2クライアントを取得できませんでした。環境変数 CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN が設定されているか確認してください。";
   logger.error({ key, ...env }, errorMessage);
   throw new Error(errorMessage);
 }
 
 /**
  * オブジェクトを R2 から取得（文字列形式）
- *
- * @param key - オブジェクトキー
- * @param encoding - 文字エンコーディング（デフォルト: utf-8）
- * @param options - オプション
- * @returns オブジェクトの文字列（存在しない場合はnull）
  */
 export async function fetchFromR2AsString(
   key: string,
-  encoding: BufferEncoding = "utf-8",
   options?: { async?: boolean }
 ): Promise<string | null> {
   const buffer = await fetchFromR2(key, options);
-  if (!buffer) {
-    return null;
-  }
-  return buffer.toString(encoding);
+  if (!buffer) return null;
+  return buffer.toString("utf-8");
 }
 
 /**
- * オブジェクトを R2 から取得（JSON形式）
- *
- * @param key - オブジェクトキー
- * @param options - オプション
- * @returns パースされたオブジェクト（存在しない場合はnull）
+ * オブジェクトを R2 から取得してJSONとしてパース
  */
 export async function fetchFromR2AsJson<T>(
   key: string,
   options?: { async?: boolean }
 ): Promise<T | null> {
-  const text = await fetchFromR2AsString(key, "utf-8", options);
-  if (!text) {
-    return null;
-  }
-  try {
-    return JSON.parse(text) as T;
-  } catch (error) {
-    logger.error(
-      {
-        key,
-        error: error instanceof Error ? error.message : String(error),
-      },
-      "JSONのパースに失敗しました"
-    );
-    return null;
-  }
+  const str = await fetchFromR2AsString(key, options);
+  if (!str) return null;
+  return JSON.parse(str) as T;
 }

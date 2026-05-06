@@ -13,10 +13,12 @@
 import { config as dotenvConfig } from "dotenv";
 import Database from "better-sqlite3";
 import path from "path";
-import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 
 // モノレポルートの .env.local を明示的にロード（他の import より先に実行）
 dotenvConfig({ path: path.resolve(__dirname, "../../../../.env.local") });
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { ProxyAgent, fetch: undiciFetch } = require("undici");
 
 import type { GetStatsDataParams } from "../stats-data/types";
 
@@ -36,22 +38,20 @@ function parseArgs() {
   return { dryRun, concurrency };
 }
 
-function createR2S3Client(): S3Client {
+function getApiConfig() {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-  const accessKeyId = process.env.CLOUDFLARE_R2_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 
-  if (!accountId || !accessKeyId || !secretAccessKey) {
-    throw new Error(
-      "R2 S3互換API用の環境変数が不足: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_R2_ACCESS_KEY_ID, CLOUDFLARE_R2_SECRET_ACCESS_KEY"
-    );
+  if (!accountId || !apiToken) {
+    throw new Error("環境変数が不足: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN");
   }
 
-  return new S3Client({
-    region: "auto",
-    endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  return { accountId, apiToken, bucket };
+}
+
+function r2ObjectUrl(accountId: string, bucket: string, key: string) {
+  return `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucket}/objects/${encodeURIComponent(key)}`;
 }
 
 /** comparison_components から全ユニークな estatParams を抽出 */
@@ -143,8 +143,10 @@ async function main() {
     return;
   }
 
-  const s3 = createR2S3Client();
-  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const { accountId, apiToken, bucket } = getApiConfig();
+  const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
+  const authHeaders = { Authorization: `Bearer ${apiToken}` };
 
   let cached = 0;
   let fetched = 0;
@@ -156,18 +158,17 @@ async function main() {
 
     try {
       // R2 キャッシュ確認
-      try {
-        const existing = await s3.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
-        if (existing.Body) {
-          console.log(`  CACHED  ${label}`);
-          cached++;
-          return;
-        }
-      } catch (err: any) {
-        if (err.name !== "NoSuchKey" && err.$metadata?.httpStatusCode !== 404) {
-          throw err;
-        }
-        // 404 = キャッシュミス → 次のステップで取得
+      const checkRes = await undiciFetch(r2ObjectUrl(accountId, bucket, key), {
+        dispatcher,
+        headers: authHeaders,
+      });
+      if (checkRes.ok) {
+        console.log(`  CACHED  ${label}`);
+        cached++;
+        return;
+      }
+      if (checkRes.status !== 404) {
+        throw new Error(`R2 check failed: ${checkRes.status}`);
       }
 
       // e-Stat API から取得
@@ -179,18 +180,18 @@ async function main() {
         cachedAt: new Date().toISOString(),
         response: data,
       };
-      await s3.send(
-        new PutObjectCommand({
-          Bucket: bucket,
-          Key: key,
-          Body: JSON.stringify(envelope),
-          ContentType: "application/json",
-          Metadata: {
-            "stats-data-id": p.statsDataId,
-            "saved-at": envelope.cachedAt,
-          },
-        })
-      );
+      const putRes = await undiciFetch(r2ObjectUrl(accountId, bucket, key), {
+        method: "PUT",
+        dispatcher,
+        headers: {
+          ...authHeaders,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(envelope),
+      });
+      if (!putRes.ok) {
+        throw new Error(`R2 PUT failed: ${putRes.status}`);
+      }
 
       fetched++;
       // e-Stat API レートリミット対策
