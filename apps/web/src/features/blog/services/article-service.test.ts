@@ -20,8 +20,8 @@ const { mockFindArticle } = vi.hoisted(() => ({
   mockFindArticle: vi.fn(),
 }));
 
-vi.mock("../repositories/article-repository", () => ({
-  findArticleBySlug: mockFindArticle,
+vi.mock("../repositories/blog-snapshot-reader", () => ({
+  readArticleBySlugFromR2: mockFindArticle,
 }));
 
 class TestArticleService extends ArticleService {
