@@ -6,60 +6,18 @@
 
 import {
     type RankingItem,
-    type RankingValue,
-    getRankingTitle,
 } from "@stats47/ranking";
 
 import type { AreaType } from "@/features/area";
 
-import { buildRankingSummary } from "./build-ranking-summary";
-
 import type { Metadata } from "next";
-
-
-/**
- * meta description を動的に構築する
- *
- * ランキングデータがある場合は具体値（1位・上位3位・平均値）を含め、
- * ない場合はフォールバックのテンプレートを使用する。
- *
- * 文字数目安: 120〜160文字（Google の表示上限）
- */
-function buildMetaDescription({
-  itemName,
-  summary,
-  selectedYear,
-}: {
-  itemName: string;
-  summary: ReturnType<typeof buildRankingSummary>;
-  selectedYear?: string;
-}): string {
-  if (!summary) {
-    return selectedYear
-      ? `${itemName}の${selectedYear}年度都道府県別ランキング。地図やグラフで47都道府県を比較できます。`
-      : `${itemName}の都道府県別ランキング。地図やグラフで分かりやすく表示し、年度別の推移も確認できます。`;
-  }
-
-  const yearPrefix = selectedYear ? `${selectedYear}年度` : "";
-  const parts = [
-    `${itemName}の${yearPrefix}都道府県別ランキング`,
-    `1位は${summary.top1Name}${summary.top1ValueText ? `（${summary.top1ValueText}）` : ""}`,
-    summary.top3Names ? `上位は${summary.top3Names}` : "",
-    summary.avgText,
-    "地図やグラフで47都道府県を比較できます",
-  ].filter(Boolean);
-
-  return `${parts.join("。")}。`;
-}
 
 export function generateRankingPageMetaData({
   rankingItem,
-  rankingValues = [],
   selectedYear,
   areaType,
 }: {
   rankingItem: RankingItem;
-  rankingValues?: RankingValue[];
   selectedYear?: string;
   areaType: AreaType;
 }): Metadata {
@@ -73,30 +31,9 @@ export function generateRankingPageMetaData({
   const latestYear = rankingItem.latestYear?.yearCode;
   const availableYears = rankingItem.availableYears || [];
   const displayYear = selectedYear ?? availableYears[0]?.yearCode ?? latestYear ?? "2024";
-  const itemName = getRankingTitle(rankingItem);
-  const unit = rankingItem.unit || "";
 
-  // title 差別化（T1-CANONICAL-01 / #77）
-  // 同一テンプレート title での Google 重複判定を防ぐため、1 位県名と年度を含める。
-  // 「最新」「徹底比較」等の訴求語で CTR も向上狙い。
-  // seoTitle が DB に明示的に設定されていればそちらを優先。
-  const summary = buildRankingSummary(rankingValues, unit);
-  const fallbackTitle = areaType === "city"
-    ? `${itemName} 市区町村ランキング`
-    : `${itemName} 都道府県別ランキング`;
-  const yearTag = displayYear ? `【${displayYear}年最新】` : "";
-  const differentiatedTitle = summary?.top1Name
-    ? areaType === "city"
-      ? `${itemName}ランキング${yearTag}1位 ${summary.top1Name}｜市区町村を徹底比較`
-      : `${itemName}ランキング${yearTag}1位 ${summary.top1Name}｜47都道府県を徹底比較`
-    : fallbackTitle;
-  const title = rankingItem.seoTitle ?? differentiatedTitle;
-
-  const description = rankingItem.seoDescription ?? buildMetaDescription({
-    itemName,
-    summary,
-    selectedYear,
-  });
+  const title = rankingItem.seoTitle ?? rankingItem.title;
+  const description = rankingItem.seoDescription ?? "";
 
   // R2ストレージのOGP画像URLを構築
   // 形式: {R2_PUBLIC_URL}/ranking/{areaType}/{rankingKey}/{yearCode}/ogp/ogp.png
