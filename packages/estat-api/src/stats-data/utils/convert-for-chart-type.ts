@@ -91,7 +91,7 @@ export function convertToMultiAreaLineData(
       label: stats.find(s => s.yearCode === yc)?.yearName ?? yc,
     };
     stats.filter(s => s.yearCode === yc).forEach(s => {
-      row[s.areaName] = s.value;
+      row[s.areaName] = s.value ?? 0;
     });
     return row;
   });
