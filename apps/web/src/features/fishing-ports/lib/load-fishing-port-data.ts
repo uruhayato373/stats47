@@ -15,7 +15,7 @@ export interface FishingPortData {
   longitude: number;
 }
 
-export const FISHING_PORTS_SNAPSHOT_KEY = "snapshots/fishing-ports/all.json";
+export const FISHING_PORTS_SNAPSHOT_KEY = "fishing-ports/all.json";
 
 export interface FishingPortsSnapshot {
   generatedAt: string;

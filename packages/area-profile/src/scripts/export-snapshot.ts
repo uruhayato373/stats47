@@ -13,7 +13,7 @@ async function main() {
   console.log("area-profile snapshot を R2 に書き出します…");
   const result = await exportAreaProfileSnapshot();
   console.log(
-    `✅ area-profile: areas=${result.areaCount} rows=${result.rowCount} bytes=${result.sizeBytes} duration=${result.durationMs}ms key=${result.key}`,
+    `✅ area-profile: files=${result.files} rows=${result.rowCount} bytes=${result.totalSizeBytes} duration=${result.durationMs}ms`,
   );
 }
 

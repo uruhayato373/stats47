@@ -17,3 +17,9 @@ export {
   JAPAN_MAX_ZOOM,
 } from "./constants/tile-providers";
 export type { TileProvider } from "./constants/tile-providers";
+// KSJ 汎用ビューア（dynamic import / ssr:false で使用すること）
+export { KsjGeoJsonLayer } from "./components/KsjGeoJsonLayer";
+export type { KsjGeometryType } from "./components/KsjGeoJsonLayer";
+export { KsjLeafletMap } from "./components/KsjLeafletMap";
+export type { KsjLeafletMapProps, KsjLayer } from "./components/KsjLeafletMap";
+export { KsjClusterLayer } from "./components/KsjClusterLayer";

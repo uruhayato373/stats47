@@ -6,24 +6,20 @@ import { saveToR2 } from "@stats47/r2-storage/server";
 import { eq } from "drizzle-orm";
 
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
-import {
-  AREA_PROFILE_SNAPSHOT_KEY,
-  type AreaProfileSnapshot,
-} from "../types/snapshot";
+import { areaProfileKeyPath } from "../types/snapshot";
 
 export interface ExportAreaProfileSnapshotResult {
-  key: string;
-  areaCount: number;
+  files: number;
   rowCount: number;
-  sizeBytes: number;
+  totalSizeBytes: number;
   durationMs: number;
 }
 
 /**
- * area_profiles + metrics を JOIN して旧 AreaProfileSnapshot 形式の R2 に出す (PR-5)
+ * area_profiles + metrics を area_code 単位で R2 に保存する。
  *
- * snapshot の rankingKey / indicator(=title) は frontend reader との後方互換性のため
- * metrics から復元して出力する。
+ * 旧: area-profile/all.json (3.8MB, 47都道府県一括)
+ * 新: area-profile/{areaCode}.json × 47 (~85KB/file)
  */
 export async function exportAreaProfileSnapshot(
   db?: ReturnType<typeof getDrizzle>,
@@ -52,12 +48,7 @@ export async function exportAreaProfileSnapshot(
   for (const row of rows) {
     let bucket = byAreaCode[row.areaCode];
     if (!bucket) {
-      bucket = {
-        areaCode: row.areaCode,
-        areaName: row.areaName,
-        strengths: [],
-        weaknesses: [],
-      };
+      bucket = { areaCode: row.areaCode, areaName: row.areaName, strengths: [], weaknesses: [] };
       byAreaCode[row.areaCode] = bucket;
     }
     const item: StrengthWeaknessItem = {
@@ -78,33 +69,24 @@ export async function exportAreaProfileSnapshot(
     profile.weaknesses.sort((a, b) => b.rank - a.rank);
   }
 
-  const snapshot: AreaProfileSnapshot = {
-    generatedAt: new Date().toISOString(),
-    byAreaCode,
-  };
+  let totalSizeBytes = 0;
+  const entries = Object.values(byAreaCode);
 
-  const body = JSON.stringify(snapshot);
-  const result = await saveToR2(AREA_PROFILE_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
-  });
+  await Promise.all(
+    entries.map(async (profile) => {
+      const body = JSON.stringify(profile);
+      const result = await saveToR2(areaProfileKeyPath(profile.areaCode), body, {
+        contentType: "application/json; charset=utf-8",
+      });
+      totalSizeBytes += result.size;
+    }),
+  );
 
   const durationMs = Date.now() - startedAt;
   logger.info(
-    {
-      key: result.key,
-      areaCount: Object.keys(byAreaCode).length,
-      rowCount: rows.length,
-      sizeBytes: result.size,
-      durationMs,
-    },
+    { files: entries.length, rowCount: rows.length, totalSizeBytes, durationMs },
     "area_profiles snapshot を R2 に保存しました",
   );
 
-  return {
-    key: result.key,
-    areaCount: Object.keys(byAreaCode).length,
-    rowCount: rows.length,
-    sizeBytes: result.size,
-    durationMs,
-  };
+  return { files: entries.length, rowCount: rows.length, totalSizeBytes, durationMs };
 }

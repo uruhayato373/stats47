@@ -1,4 +1,4 @@
-export const AI_CONTENT_SNAPSHOT_KEY = "snapshots/ai-content/all.json";
+export const AI_CONTENT_SNAPSHOT_KEY = "ai-content/all.json";
 
 export interface AiContentSnapshotRow {
   rankingKey: string;

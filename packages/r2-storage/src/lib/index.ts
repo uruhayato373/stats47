@@ -1,5 +1,4 @@
 // clients
-export { createS3Client } from "./clients/create-s3-client";
 export { getR2Client } from "./clients/get-r2-client";
 
 // operations

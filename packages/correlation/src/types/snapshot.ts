@@ -1,7 +1,7 @@
 import type { CorrelatedItem } from "../repositories/find-highly-correlated";
 import type { TopCorrelation } from "../repositories/list-top-correlations";
 
-export const CORRELATION_SNAPSHOT_PREFIX = "snapshots/correlation";
+export const CORRELATION_SNAPSHOT_PREFIX = "correlation";
 export const CORRELATION_TOP_PAIRS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/top-pairs.json`;
 export const CORRELATION_STATS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/stats.json`;
 export const CORRELATION_BY_KEY_PREFIX = `${CORRELATION_SNAPSHOT_PREFIX}/by-ranking-key`;

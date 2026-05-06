@@ -7,62 +7,46 @@ import { eq } from "drizzle-orm";
 
 import type { RankingValue } from "../types";
 import {
-  rankingValuesPartitionPath,
-  type RankingValuesPartitionSnapshot,
+  rankingValuesKeyPath,
+  type RankingValuesKeySnapshot,
 } from "../types/snapshot";
 
 export interface ExportRankingValuesSnapshotResult {
-  partitions: number;
+  files: number;
   rows: number;
   totalSizeBytes: number;
   durationMs: number;
-  dryRunPartitions?: Array<{
-    rankingKey: string;
-    areaType: string;
-    yearCode: string;
-    body: string;
-  }>;
 }
 
-interface PartitionKey {
-  rankingKey: string;
-  areaType: string;
+interface PartitionData {
   yearCode: string;
-}
-
-function pkString(p: PartitionKey): string {
-  return `${p.rankingKey}|${p.areaType}|${p.yearCode}`;
+  values: RankingValue[];
 }
 
 async function processIndicator(
   drizzleDb: ReturnType<typeof getDrizzle>,
   metricKey: string,
-  parallelism: number,
   dryRun: boolean,
-  dryRunSink?: ExportRankingValuesSnapshotResult["dryRunPartitions"],
-): Promise<{ partitions: number; rows: number; sizeBytes: number }> {
+): Promise<{ files: number; rows: number; sizeBytes: number }> {
   const rows = await drizzleDb
     .select()
     .from(statsPrefecture)
     .where(eq(statsPrefecture.metricKey, metricKey));
 
-  if (rows.length === 0) return { partitions: 0, rows: 0, sizeBytes: 0 };
+  if (rows.length === 0) return { files: 0, rows: 0, sizeBytes: 0 };
 
-  const groups = new Map<string, { pk: PartitionKey; values: RankingValue[] }>();
+  const partitionMap = new Map<string, PartitionData>();
   for (const row of rows) {
-    const areaType = "prefecture" as const;
     const yearCode = String(row.yearCode ?? "");
     if (!yearCode) continue;
 
-    const pk: PartitionKey = { rankingKey: metricKey, areaType, yearCode };
-    const k = pkString(pk);
-    let group = groups.get(k);
-    if (!group) {
-      group = { pk, values: [] };
-      groups.set(k, group);
+    let partition = partitionMap.get(yearCode);
+    if (!partition) {
+      partition = { yearCode, values: [] };
+      partitionMap.set(yearCode, partition);
     }
-    group.values.push({
-      areaType: areaType as RankingValue["areaType"],
+    partition.values.push({
+      areaType: "prefecture" as RankingValue["areaType"],
       areaCode: row.areaCode,
       areaName: row.areaName,
       yearCode,
@@ -74,52 +58,38 @@ async function processIndicator(
     });
   }
 
-  for (const g of groups.values()) {
-    g.values.sort((a, b) => {
+  for (const partition of partitionMap.values()) {
+    partition.values.sort((a, b) => {
       if (a.rank !== b.rank) return a.rank - b.rank;
       return a.areaCode < b.areaCode ? -1 : a.areaCode > b.areaCode ? 1 : 0;
     });
   }
 
-  let sizeBytes = 0;
-  const partitionList = [...groups.values()];
+  const snapshot: RankingValuesKeySnapshot = {
+    generatedAt: new Date().toISOString(),
+    rankingKey: metricKey,
+    areaType: "prefecture",
+    partitions: [...partitionMap.values()].map((p) => ({
+      yearCode: p.yearCode,
+      count: p.values.length,
+      values: p.values,
+    })),
+  };
+  const body = JSON.stringify(snapshot);
 
-  for (let i = 0; i < partitionList.length; i += parallelism) {
-    const batch = partitionList.slice(i, i + parallelism);
-    const sizes = await Promise.all(
-      batch.map(async (g) => {
-        const snapshot: RankingValuesPartitionSnapshot = {
-          generatedAt: new Date().toISOString(),
-          rankingKey: g.pk.rankingKey,
-          areaType: g.pk.areaType,
-          yearCode: g.pk.yearCode,
-          count: g.values.length,
-          values: g.values,
-        };
-        const body = JSON.stringify(snapshot);
-        if (dryRun) {
-          dryRunSink?.push({ ...g.pk, body });
-          return Buffer.byteLength(body, "utf8");
-        }
-        const path = rankingValuesPartitionPath(g.pk.rankingKey, g.pk.areaType, g.pk.yearCode);
-        const result = await saveToR2(path, body, {
-          contentType: "application/json; charset=utf-8",
-        });
-        return result.size;
-      }),
-    );
-    sizeBytes += sizes.reduce((s, n) => s + n, 0);
+  if (!dryRun) {
+    const path = rankingValuesKeyPath(metricKey, "prefecture");
+    await saveToR2(path, body, { contentType: "application/json; charset=utf-8" });
   }
 
-  return { partitions: groups.size, rows: rows.length, sizeBytes };
+  return { files: 1, rows: rows.length, sizeBytes: Buffer.byteLength(body, "utf8") };
 }
 
 /**
- * statsPrefecture 全件を partition ごとに分割して R2 に保存する
+ * statsPrefecture 全件を ranking_key 単位で 1 ファイルに集約して R2 に保存する。
  *
- * - 1 partition = (rankingKey, areaType, yearCode) の組合せ = 1 ファイル
- * - 並列度: PARALLELISM (default 24) は 1 indicator 内の partition 並列度
- * - dryRun=true の場合は R2 に書かず body を返す（diff 用）
+ * 旧: ranking-values/{key}/prefecture/{yearCode}.json × 30K
+ * 新: ranking-values/{key}/prefecture.json × 2,151 (全年度を partitions 配列に統合)
  */
 export async function exportRankingValuesSnapshots(
   options: {
@@ -131,56 +101,50 @@ export async function exportRankingValuesSnapshots(
 ): Promise<ExportRankingValuesSnapshotResult> {
   const startedAt = Date.now();
   const drizzleDb = options.db ?? getDrizzle();
-  const parallelism = options.parallelism ?? 24;
+  const parallelism = options.parallelism ?? 8;
   const dryRun = options.dryRun ?? false;
-  const dryRunSink = dryRun
-    ? ([] as NonNullable<ExportRankingValuesSnapshotResult["dryRunPartitions"]>)
-    : undefined;
 
   const indicatorRows = options.rankingKeyFilter
     ? await drizzleDb
         .selectDistinct({ key: metrics.key })
         .from(metrics)
         .where(eq(metrics.key, options.rankingKeyFilter))
-    : await drizzleDb
-        .selectDistinct({ key: metrics.key })
-        .from(metrics);
+    : await drizzleDb.selectDistinct({ key: metrics.key }).from(metrics);
 
   logger.info(
     { indicatorCount: indicatorRows.length, dryRun, parallelism },
     "ranking_values export を開始…",
   );
 
-  let totalPartitions = 0;
+  let totalFiles = 0;
   let totalRows = 0;
   let totalSizeBytes = 0;
 
-  for (let i = 0; i < indicatorRows.length; i++) {
-    const { key } = indicatorRows[i];
-    try {
-      const result = await processIndicator(drizzleDb, key, parallelism, dryRun, dryRunSink);
-      totalPartitions += result.partitions;
-      totalRows += result.rows;
-      totalSizeBytes += result.sizeBytes;
-    } catch (error) {
-      logger.error(
-        {
-          indicatorKey: key,
-          error: error instanceof Error ? error.message : String(error),
-        },
-        "indicator 処理失敗。スキップ",
-      );
+  for (let i = 0; i < indicatorRows.length; i += parallelism) {
+    const batch = indicatorRows.slice(i, i + parallelism);
+    const results = await Promise.all(
+      batch.map(async ({ key }) => {
+        try {
+          return await processIndicator(drizzleDb, key, dryRun);
+        } catch (error) {
+          logger.error(
+            { indicatorKey: key, error: error instanceof Error ? error.message : String(error) },
+            "indicator 処理失敗。スキップ",
+          );
+          return { files: 0, rows: 0, sizeBytes: 0 };
+        }
+      }),
+    );
+
+    for (const r of results) {
+      totalFiles += r.files;
+      totalRows += r.rows;
+      totalSizeBytes += r.sizeBytes;
     }
 
-    if ((i + 1) % 100 === 0 || i === indicatorRows.length - 1) {
+    if ((i + batch.length) % 100 === 0 || i + batch.length >= indicatorRows.length) {
       logger.info(
-        {
-          processed: i + 1,
-          total: indicatorRows.length,
-          totalPartitions,
-          totalRows,
-          totalSizeBytes,
-        },
+        { processed: i + batch.length, total: indicatorRows.length, totalFiles, totalRows },
         "ranking_values 進捗",
       );
     }
@@ -188,15 +152,9 @@ export async function exportRankingValuesSnapshots(
 
   const durationMs = Date.now() - startedAt;
   logger.info(
-    { partitions: totalPartitions, rows: totalRows, totalSizeBytes, durationMs, dryRun },
+    { files: totalFiles, rows: totalRows, totalSizeBytes, durationMs, dryRun },
     "ranking_values snapshot を R2 に保存しました",
   );
 
-  return {
-    partitions: totalPartitions,
-    rows: totalRows,
-    totalSizeBytes,
-    durationMs,
-    dryRunPartitions: dryRunSink,
-  };
+  return { files: totalFiles, rows: totalRows, totalSizeBytes, durationMs };
 }
