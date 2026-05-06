@@ -10,8 +10,11 @@ export const revalidate = 2592000; // 30d
 export const dynamic = 'force-dynamic';
 
 export default async function OGImage() {
-  return new ImageResponse(<DefaultOgp />, {
-    ...size,
-    fonts: await loadOgpFonts(),
-  });
+  const fonts = await loadOgpFonts();
+  try {
+    return new ImageResponse(<DefaultOgp />, { ...size, fonts });
+  } catch {
+    // Font data may be invalid in non-Cloudflare environments — retry without fonts
+    return new ImageResponse(<DefaultOgp />, { ...size });
+  }
 }
