@@ -1,6 +1,6 @@
 import type { BlogChartDataFile } from "@stats47/types";
 
-const LOCAL_BLOG_DIR = "../../.local/r2/blog";
+const LOCAL_BLOG_DIR = "../../.local/r2/app/blog";
 
 /**
  * dataPath からブログチャートデータを読み込む（Server Component 専用）
@@ -23,6 +23,6 @@ export async function readBlogChartData(
   }
 
   const { fetchFromR2AsJson } = await import("@stats47/r2-storage/server");
-  const data = await fetchFromR2AsJson(`blog/${dataPath}`);
+  const data = await fetchFromR2AsJson(`app/blog/${dataPath}`);
   return (data as BlogChartDataFile | null);
 }

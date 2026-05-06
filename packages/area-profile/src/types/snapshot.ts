@@ -1,7 +1,7 @@
 import type { AreaProfileData } from "./index";
 
 export function areaProfileKeyPath(areaCode: string): string {
-  return `area-profile/${areaCode}.json`;
+  return `app/areas/${areaCode}/profile.json`;
 }
 
 /** @deprecated areaProfileKeyPath を使用してください */

@@ -21,8 +21,7 @@
       "@stats47/r2-storage/*": ["../r2-storage/src/*"],
       "@stats47/types": ["../types/src"],
       "@stats47/types/*": ["../types/src/*"],
-      "@stats47/mock": ["../mock/src"],
-      "@stats47/mock/*": ["../mock/src/*"],
+
       "@/*": ["src/*"]
     },
     "rootDirs": [

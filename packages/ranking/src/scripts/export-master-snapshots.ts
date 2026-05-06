@@ -13,19 +13,24 @@
 import { exportCategoriesSnapshot } from "@stats47/category/server";
 
 import { exportRankingItemsSnapshot } from "../exporters/ranking-items-snapshot";
+import { exportRankingItemsPerUrl } from "../exporters/ranking-items-per-url-snapshot";
 import { exportSurveysSnapshot } from "../exporters/surveys-snapshot";
 
 async function main() {
   console.log("master snapshots を R2 に書き出します…");
 
-  const [items, surveys, categories] = await Promise.all([
+  const [items, itemsPerUrl, surveys, categories] = await Promise.all([
     exportRankingItemsSnapshot(),
+    exportRankingItemsPerUrl(),
     exportSurveysSnapshot(),
     exportCategoriesSnapshot(),
   ]);
 
   console.log(
     `✅ ranking_items: ${items.count} 件 / ${items.sizeBytes} bytes / ${items.durationMs}ms (parseFailures=${items.parseFailures})`,
+  );
+  console.log(
+    `✅ ranking_items_per_url: home=${itemsPerUrl.home.count} / categories=${itemsPerUrl.categories.files} files / items=${itemsPerUrl.items.files} files / surveys=${itemsPerUrl.surveys.files} files / ${itemsPerUrl.totalSizeBytes} bytes / ${itemsPerUrl.durationMs}ms`,
   );
   console.log(
     `✅ surveys: ${surveys.count} 件 / ${surveys.sizeBytes} bytes / ${surveys.durationMs}ms`,

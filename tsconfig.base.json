@@ -19,7 +19,7 @@
       "@stats47/estat-api": ["packages/estat-api/src"],
       "@stats47/gis": ["packages/gis/src"],
       "@stats47/logger": ["packages/logger/src"],
-      "@stats47/mock": ["packages/mock/src"],
+
       "@stats47/r2-storage": ["packages/r2-storage/src"],
       "@stats47/ranking": ["packages/ranking/src"],
       "@stats47/types": ["packages/types/src"],

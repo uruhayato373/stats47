@@ -26,6 +26,7 @@ declare -a TASKS=(
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
   "correlation|packages/correlation/src/scripts/export-snapshot.ts"
+  "ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
@@ -35,11 +36,6 @@ declare -a TASKS=(
   "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
   "gis-datasets|apps/web/scripts/export-gis-datasets-snapshot.ts"
 )
-
-# ranking-values は重いので SKIP_VALUES で制御
-if [ -z "$SKIP_VALUES" ] || [ "$SKIP_VALUES" = "0" ]; then
-  TASKS+=("ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts")
-fi
 
 run_task() {
   local label="$1"
@@ -76,9 +72,20 @@ done
 
 echo ""
 echo "════════════════════════════════════════"
-if [ ${#FAILED[@]} -eq 0 ]; then
-  echo "✅ 全 snapshot を R2 に push 完了"
-else
+if [ ${#FAILED[@]} -ne 0 ]; then
   echo "❌ 失敗: ${FAILED[*]}"
   exit 1
+fi
+
+if [ "$DRY_RUN" = "0" ]; then
+  echo ""
+  echo "════ R2 push ════"
+  if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
+    echo "✅ 全 snapshot を R2 に push 完了"
+  else
+    echo "❌ R2 push 失敗"
+    exit 1
+  fi
+else
+  echo "✅ 全 snapshot export 完了（dry-run のため R2 push はスキップ）"
 fi

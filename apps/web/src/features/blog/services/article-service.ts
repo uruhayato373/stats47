@@ -4,11 +4,11 @@ import path from "path";
 import { readArticleBySlugFromR2 as findArticleBySlug } from "../repositories/blog-snapshot-reader";
 import { type Article } from "../types";
 
-const LOCAL_CONTENT_DIR = path.resolve(process.cwd(), "../../.local/r2/blog");
+const LOCAL_CONTENT_DIR = path.resolve(process.cwd(), "../../.local/r2/app/blog");
 
 function resolveR2Key(slug: string, format: string): string {
   const filename = format === "mdx" ? "article.mdx" : "article.md";
-  return `blog/${slug}/${filename}`;
+  return `app/blog/${slug}/${filename}`;
 }
 
 export class ArticleService {

@@ -1,11 +1,9 @@
-import { ranking } from "@stats47/mock";
 import { render, waitFor } from "@testing-library/react";
 import { describe, it } from "vitest";
+import rankingData from "../../../../__tests__/fixtures/ranking-data.json";
 import { compareWithGolden } from "../../../../shared/__tests__/helpers/golden-compare";
 import { svgToPng } from "../../../../shared/__tests__/helpers/svg-to-png";
 import { TileGridMap } from "../index";
-
-const mockData = ranking.annualSalesAmountPerEmployeeData;
 
 describe("TileGridMap PNG Golden Test", () => {
     it("standard (600x900)", async () => {
@@ -14,7 +12,7 @@ describe("TileGridMap PNG Golden Test", () => {
 
         const { container } = render(
             <TileGridMap
-                data={mockData as any}
+                data={rankingData as any}
                 width={width}
                 height={height}
                 colorConfig={{ colorSchemeType: "sequential", colorScheme: "interpolatePurples" }}

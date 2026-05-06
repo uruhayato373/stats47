@@ -1,10 +1,6 @@
-
 import { calculateBodySize } from "../utils/calculate-body-size";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 
-/**
- * dev モード: ローカルファイルシステム (.local/r2/) に保存
- */
 function saveToLocalFs(
   key: string,
   body: string | ArrayBuffer | Buffer | Uint8Array,
@@ -32,8 +28,7 @@ function saveToLocalFs(
 
 /**
  * オブジェクトをローカルファイルシステム (.local/r2/) に保存する。
- *
- * リモート R2 への反映は sync-upload.ts で行う。
+ * リモート R2 への反映は diff-push-r2.ts（S3 API）で行う。
  */
 export async function saveToR2(
   key: string,

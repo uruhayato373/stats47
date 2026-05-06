@@ -1,4 +1,6 @@
-export const AI_CONTENT_SNAPSHOT_KEY = "ai-content/all.json";
+export function aiContentKeyPath(rankingKey: string): string {
+  return `ranking/${encodeURIComponent(rankingKey)}/ai-content.json`;
+}
 
 export interface AiContentSnapshotRow {
   rankingKey: string;
@@ -10,6 +12,10 @@ export interface AiContentSnapshotRow {
   updatedAt: string | null;
 }
 
+/** @deprecated aiContentKeyPath を使用してください */
+export const AI_CONTENT_SNAPSHOT_KEY = "ai-content/all.json";
+
+/** @deprecated aiContentKeyPath を使用してください */
 export interface AiContentSnapshot {
   generatedAt: string;
   count: number;

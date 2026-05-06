@@ -8,9 +8,4 @@ export { listFromR2, listFromR2WithSize } from "./operations/list";
 export { saveToR2 } from "./operations/save";
 
 // utils
-export { calculateBodySize } from "./utils/calculate-body-size";
-export { convertBodyForR2 } from "./utils/convert-body-for-r2";
-export { detectEnvironment } from "./utils/detect-environment";
-
-// errors
-export { handleR2Error } from "./errors/handle-r2-error";
+export { formatBytes } from "./utils/format-bytes";

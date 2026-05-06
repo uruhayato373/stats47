@@ -39,7 +39,6 @@ async function main(): Promise<void> {
   if (showFiles) {
     // ファイル個別表示（サイズ降順）
     const sorted = [...files].sort((a, b) => b.size - a.size);
-    const longestKey = Math.min(Math.max(...sorted.map((f) => f.key.length)), 80);
     for (const f of sorted) {
       console.log(`${formatBytes(f.size).padStart(12)}\t${f.key}`);
     }

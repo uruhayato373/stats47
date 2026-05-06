@@ -1,13 +1,12 @@
 
+import { DeleteObjectCommand, DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { logger } from "@stats47/logger";
 import { getR2Client } from "../clients/get-r2-client";
+import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { listFromR2 } from "./list";
 
-/**
- * dev モード: ローカルファイルシステム (.local/r2/) から削除
- */
 function deleteFromLocalFs(key: string): void {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs") as typeof import("fs");
@@ -18,35 +17,30 @@ function deleteFromLocalFs(key: string): void {
   if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 }
 
-/**
- * Cloudflare REST API 経由で単一オブジェクトを削除
- */
-async function deleteFromCloudflareApi(
-  key: string,
-  bucketName: string,
-): Promise<void> {
-  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+async function deleteMultipleFromS3(keys: string[]): Promise<{
+  deleted: string[];
+  errors: Array<{ key: string; code: string; message: string }>;
+}> {
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const s3 = getS3Client();
+  const deleted: string[] = [];
+  const errors: Array<{ key: string; code: string; message: string }> = [];
+  const CHUNK = 1000;
 
-  if (!accountId || !apiToken) {
-    throw new Error("CLOUDFLARE_ACCOUNT_ID または CLOUDFLARE_API_TOKEN が未設定です");
+  for (let i = 0; i < keys.length; i += CHUNK) {
+    const chunk = keys.slice(i, i + CHUNK);
+    const response = await s3.send(new DeleteObjectsCommand({
+      Bucket: bucketName,
+      Delete: { Objects: chunk.map((k) => ({ Key: k })), Quiet: false },
+    }));
+    for (const d of response.Deleted ?? []) {
+      if (d.Key) deleted.push(d.Key);
+    }
+    for (const e of response.Errors ?? []) {
+      errors.push({ key: e.Key ?? "", code: e.Code ?? "DeleteError", message: e.Message ?? "" });
+    }
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { ProxyAgent, fetch: undiciFetch } = require("undici");
-  const proxy = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-  const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
-
-  const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${encodeURIComponent(key)}`;
-  const response = await undiciFetch(url, {
-    method: "DELETE",
-    dispatcher,
-    headers: { Authorization: `Bearer ${apiToken}` },
-  });
-
-  if (!response.ok && response.status !== 404) {
-    throw new Error(`Cloudflare REST API での削除に失敗: ${response.status} for key=${key}`);
-  }
+  return { deleted, errors };
 }
 
 /**
@@ -54,7 +48,7 @@ async function deleteFromCloudflareApi(
  *
  * dev 環境:              ローカルFS (.local/r2/)
  * Cloudflare Workers:   R2バインディング
- * スクリプト環境:        Cloudflare REST API
+ * スクリプト環境:        S3 API
  */
 export async function deleteFromR2(
   key: string,
@@ -63,25 +57,22 @@ export async function deleteFromR2(
   const env = detectEnvironment();
   const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 
-  // 1. dev環境 -> ローカルファイルシステム
   if (env.isDevelopment) {
     deleteFromLocalFs(key);
     return;
   }
 
-  // 2. スクリプト環境 -> Cloudflare REST API
-  if (env.hasCloudflareApi) {
-    await deleteFromCloudflareApi(key, bucketName);
+  if (env.hasS3Credentials) {
+    await getS3Client().send(new DeleteObjectCommand({ Bucket: bucketName, Key: key }));
     return;
   }
 
-  // 3. Cloudflare Workers環境 -> R2バインディング
   const client = await getR2Client(options);
   await client.delete(key);
 }
 
 /**
- * 複数のオブジェクトを R2 から一括削除
+ * 複数のオブジェクトを R2 から一括削除（S3 DeleteObjects で最大1000件/リクエスト）
  */
 export async function deleteMultipleFromR2(
   keys: string[],
@@ -93,11 +84,9 @@ export async function deleteMultipleFromR2(
   if (keys.length === 0) return { deleted: [], errors: [] };
 
   const env = detectEnvironment();
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
   const deleted: string[] = [];
   const errors: Array<{ key: string; code: string; message: string }> = [];
 
-  // 1. dev環境 -> ローカルファイルシステム
   if (env.isDevelopment) {
     for (const key of keys) {
       try {
@@ -110,26 +99,11 @@ export async function deleteMultipleFromR2(
     return { deleted, errors };
   }
 
-  // 2. スクリプト環境 -> Cloudflare REST API (並列削除)
-  if (env.hasCloudflareApi) {
-    const CONCURRENCY = 10;
-    for (let i = 0; i < keys.length; i += CONCURRENCY) {
-      const chunk = keys.slice(i, i + CONCURRENCY);
-      await Promise.all(
-        chunk.map(async (key) => {
-          try {
-            await deleteFromCloudflareApi(key, bucketName);
-            deleted.push(key);
-          } catch (error) {
-            errors.push({ key, code: "DeleteError", message: error instanceof Error ? error.message : String(error) });
-          }
-        })
-      );
-    }
-    return { deleted, errors };
+  if (env.hasS3Credentials) {
+    return deleteMultipleFromS3(keys);
   }
 
-  // 3. Cloudflare Workers環境 -> R2バインディング
+  // Cloudflare Workers
   const client = await getR2Client(options);
   for (const key of keys) {
     try {

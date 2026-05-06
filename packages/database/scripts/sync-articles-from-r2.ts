@@ -107,7 +107,7 @@ async function sync() {
   }
   console.log(`DB: ${dbPath}`);
 
-  const blogDir = path.resolve(__dirname, "../../../.local/r2/blog");
+  const blogDir = path.resolve(__dirname, "../../../.local/r2/app/blog");
   const r2Slugs = getR2Slugs(blogDir);
   console.log(
     `\nR2 に存在する記事 (${r2Slugs.length}件): ${r2Slugs.join(", ") || "(なし)"}`
