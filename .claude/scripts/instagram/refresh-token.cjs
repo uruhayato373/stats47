@@ -57,12 +57,30 @@ async function main() {
     process.exit(1);
   }
 
-  const url =
-    "https://graph.instagram.com/refresh_access_token" +
-    "?grant_type=ig_refresh_token" +
-    `&access_token=${encodeURIComponent(current)}`;
+  // EAA トークン（Facebook Graph 形式）は fb_exchange_token で refresh
+  // IGAA トークン（Instagram Login 形式）は ig_refresh_token で refresh
+  const isEAA = current.startsWith("EAA");
+  const appId = env.META_APP_ID;
+  const appSecret = env.META_APP_SECRET;
+  let url;
+  if (isEAA) {
+    if (!appId || !appSecret) {
+      console.error("❌ EAA トークンの refresh には META_APP_ID と META_APP_SECRET が必要（.env.local に未設定）");
+      process.exit(1);
+    }
+    url =
+      "https://graph.facebook.com/v22.0/oauth/access_token" +
+      `?grant_type=fb_exchange_token&client_id=${appId}&client_secret=${appSecret}` +
+      `&fb_exchange_token=${encodeURIComponent(current)}`;
+  } else {
+    url =
+      "https://graph.instagram.com/refresh_access_token" +
+      "?grant_type=ig_refresh_token" +
+      `&access_token=${encodeURIComponent(current)}`;
+  }
 
   console.log("🔄 Instagram long-lived token を refresh");
+  console.log(`  token type: ${isEAA ? "EAA (fb_exchange_token)" : "IGAA (ig_refresh_token)"}`);
   console.log(`  current (先頭10): ${current.slice(0, 10)}...`);
   if (DRY_RUN) {
     console.log("  🧪 DRY RUN: API 呼び出しスキップ");

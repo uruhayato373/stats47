@@ -37,6 +37,17 @@ function checkPause() {
   const until = new Date(pause.until);
   if (Number.isNaN(until.getTime())) return;
   if (until.getTime() <= Date.now()) return;
+
+  // --schedule が pause.until より後なら「pause 期間中の予約仕込み」として許可
+  const scheduleIdx = process.argv.indexOf("--schedule");
+  if (scheduleIdx !== -1) {
+    const publishAt = new Date(process.argv[scheduleIdx + 1] ?? "");
+    if (!Number.isNaN(publishAt.getTime()) && publishAt.getTime() > until.getTime()) {
+      console.log(`[check-youtube-post-budget] pause 中だが publishAt(${process.argv[scheduleIdx + 1]}) > until(${pause.until}) のため予約仕込みを許可`);
+      return;
+    }
+  }
+
   const untilDate = pause.until.slice(0, 10);
   const issue = pause.issue ? ` (issue #${pause.issue})` : "";
   const reason = pause.reason ? ` / reason: ${pause.reason}` : "";

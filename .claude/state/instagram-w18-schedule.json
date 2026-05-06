@@ -1,0 +1,16 @@
+[
+  { "date": "2026-05-07", "domain": "ranking", "content_key": "gyoza-frozen-consumption-expenditure", "type": "image" },
+  { "date": "2026-05-08", "domain": "ranking", "content_key": "icecream-consumption-expenditure", "type": "image" },
+  { "date": "2026-05-09", "domain": "ranking", "content_key": "ramen-dining-consumption-expenditure", "type": "image" },
+  { "date": "2026-05-10", "domain": "ranking", "content_key": "maximum-temperature", "type": "image" },
+  { "date": "2026-05-11", "domain": "ranking", "content_key": "convenience-store-count-per-100k", "type": "image" },
+  { "date": "2026-05-12", "domain": "ranking", "content_key": "university-count-per-100k", "type": "image" },
+  { "date": "2026-05-13", "domain": "ranking", "content_key": "annual-income-per-household", "type": "image" },
+  { "date": "2026-05-14", "domain": "ranking", "content_key": "private-rental-housing-rent-per-3-3m2", "type": "image" },
+  { "date": "2026-05-15", "domain": "ranking", "content_key": "number-of-hotel-rooms", "type": "image" },
+  { "date": "2026-05-16", "domain": "ranking", "content_key": "foreign-resident-count", "type": "image" },
+  { "date": "2026-05-17", "domain": "ranking", "content_key": "divorces-per-total-population", "type": "image" },
+  { "date": "2026-05-18", "domain": "ranking", "content_key": "total-fertility-rate", "type": "image" },
+  { "date": "2026-05-19", "domain": "ranking", "content_key": "traffic-accident-deaths-per-100k", "type": "image" },
+  { "date": "2026-05-20", "domain": "ranking", "content_key": "suicide-rate-per-100k", "type": "image" }
+]
