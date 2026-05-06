@@ -13,11 +13,17 @@ interface PageProps {
   params: Promise<{ dataId: string }>;
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  const datasets = await fetchGisDatasets();
-  return datasets
-    .filter((d) => d.isDownloaded && d.r2Prefix)
-    .map((d) => ({ dataId: d.dataId }));
+  try {
+    const datasets = await fetchGisDatasets();
+    return datasets
+      .filter((d) => d.isDownloaded && d.r2Prefix)
+      .map((d) => ({ dataId: d.dataId }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
