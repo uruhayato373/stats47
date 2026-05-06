@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchGisDataset, fetchGisDatasets } from "@/features/gis-catalog/repository/gis-datasets-reader";
+
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
-import { GisViewerClient } from "@/features/gis-catalog/components/GisViewerClient";
+
+import { GisViewerClient } from "@/features/gis-catalog/components";
+import { fetchGisDataset, fetchGisDatasets } from "@/features/gis-catalog/repository/gis-datasets-reader";
 import type { KsjMeta } from "@/features/gis-catalog/types";
+
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ dataId: string }>;
@@ -50,7 +54,7 @@ export default async function GisDatasetViewerPage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6">
         <p className="text-sm text-muted-foreground mb-1">
-          <a href="/gis" className="hover:underline">GIS データカタログ</a>
+          <Link href="/gis" className="hover:underline">GIS データカタログ</Link>
           {" / "}
           <span>{dataset.dataId}</span>
         </p>

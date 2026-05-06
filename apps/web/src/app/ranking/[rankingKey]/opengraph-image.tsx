@@ -3,8 +3,8 @@ import { ImageResponse } from 'next/og';
 import { readRankingItemFromR2, readRankingValuesFromR2 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
 
-import { RankingOgp, type RankingOgpData } from '@/features/ogp/RankingOgp';
 import { loadOgpFonts } from '@/features/ogp/font-loader';
+import { RankingOgp, type RankingOgpData } from '@/features/ogp/RankingOgp';
 
 export const alt = 'ランキング';
 export const size = { width: 1200, height: 630 };

@@ -3,9 +3,9 @@ import { ImageResponse } from "next/og";
 import { isOk } from "@stats47/types";
 
 import { getAreaProfileAction } from "@/features/area-profile/server";
+import { findCategoryByKey } from "@/features/category/server";
 import { AreaCatOgp, type AreaCatOgpData } from "@/features/ogp/AreaCatOgp";
 import { loadOgpFonts } from "@/features/ogp/font-loader";
-import { findCategoryByKey } from "@/features/category/server";
 
 export const alt = "地域×カテゴリ";
 export const size = { width: 1200, height: 630 };

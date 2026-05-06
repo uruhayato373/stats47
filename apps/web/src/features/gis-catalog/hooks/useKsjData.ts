@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import * as topojsonClient from "topojson-client";
+
 import type { FeatureCollection, Geometry } from "geojson";
 import type { Topology } from "topojson-specification";
 
@@ -69,17 +71,16 @@ export function useKsjData(
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    if (!r2Prefix || !filename) {
-      setState({ geojson: null, loading: false, error: null, featureCount: 0 });
-      return;
-    }
+    if (!r2Prefix || !filename) return;
 
     const url = buildUrl(r2Prefix, filename);
 
-    // L3 キャッシュヒット
+    // L3 キャッシュヒット（queueMicrotask で遅延して effect 内同期 setState を回避）
     if (topoCache.has(url)) {
       const cached = topoCache.get(url)!;
-      setState({ geojson: cached, loading: false, error: null, featureCount: cached.features.length });
+      queueMicrotask(() =>
+        setState({ geojson: cached, loading: false, error: null, featureCount: cached.features.length })
+      );
       return;
     }
 
@@ -87,7 +88,7 @@ export function useKsjData(
     const controller = new AbortController();
     abortRef.current = controller;
 
-    setState((prev) => ({ ...prev, loading: true, error: null }));
+    queueMicrotask(() => setState((prev) => ({ ...prev, loading: true, error: null })));
 
     fetchAndConvert(url, controller.signal)
       .then((geojson) => {

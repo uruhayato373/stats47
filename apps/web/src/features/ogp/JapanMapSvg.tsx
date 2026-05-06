@@ -91,8 +91,8 @@ export function JapanMapSvg({
             points={p.pts}
             fill={fill}
             stroke={strokeColor}
-            stroke-width={String(strokeWidth)}
-            stroke-linejoin="round"
+            strokeWidth={String(strokeWidth)}
+            strokeLinejoin="round"
           />
         );
       })}

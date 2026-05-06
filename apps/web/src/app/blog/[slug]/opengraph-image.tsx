@@ -1,8 +1,8 @@
 import { ImageResponse } from 'next/og';
 
+import { findArticleBySlug } from '@/features/blog/server';
 import { BlogOgp, type BlogOgpData } from '@/features/ogp/BlogOgp';
 import { loadOgpFonts } from '@/features/ogp/font-loader';
-import { findArticleBySlug } from '@/features/blog/server';
 
 export const alt = 'ブログ記事';
 export const size = { width: 1200, height: 630 };
