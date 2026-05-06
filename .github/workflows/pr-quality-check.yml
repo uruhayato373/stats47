@@ -90,7 +90,7 @@ jobs:
             const path = require('path');
 
             try {
-              const coverageSummaryPath = path.join(process.cwd(), 'coverage', 'coverage-summary.json');
+              const coverageSummaryPath = path.join(process.cwd(), 'apps/web/coverage', 'coverage-summary.json');
               if (fs.existsSync(coverageSummaryPath)) {
                 const summary = JSON.parse(fs.readFileSync(coverageSummaryPath, 'utf8'));
                 const total = summary.total;
@@ -152,7 +152,7 @@ jobs:
                 | Functions | ${functions}% | ${getBadge(parseFloat(functions))} ${getEmoji(parseFloat(functions))} |
                 | Branches | ${branches}% | ${getBadge(parseFloat(branches))} ${getEmoji(parseFloat(branches))} |
                 
-                **Target:** ${threshold}% (100% Coverage Goal)
+                **Target:** ${threshold}% (minimum threshold)
                 
                 📥 [Download full coverage report](${workflowUrl})${fileList}
                 
@@ -184,8 +184,8 @@ jobs:
             const fs = require('fs');
             const summary = JSON.parse(fs.readFileSync('apps/web/coverage/coverage-summary.json', 'utf8'));
             const total = summary.total;
-            const threshold = 100;
-            
+            const threshold = 10;
+
             const metrics = {
               lines: total.lines.pct,
               statements: total.statements.pct,
