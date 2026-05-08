@@ -32,7 +32,7 @@ if (!fs.existsSync(D1_PATH)) {
 const db = new Database(D1_PATH, { readonly: true });
 const rows = db
   .prepare(
-    "SELECT DISTINCT key AS ranking_key FROM metrics WHERE is_active = 1 AND area_type = 'prefecture' ORDER BY key"
+    "SELECT DISTINCT m.key AS ranking_key FROM metrics m WHERE m.is_active = 1 AND EXISTS (SELECT 1 FROM stats_prefecture sp WHERE sp.metric_key = m.key) ORDER BY m.key"
   )
   .all() as { ranking_key: string }[];
 db.close();

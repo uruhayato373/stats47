@@ -1,5 +1,6 @@
 export * from "./CorrelationSection";
 export * from "./FeaturedRankings";
+export * from "./NormalizationToggle";
 export * from "./RankingBarChartRace";
 export * from "./RankingBoxplotChart";
 export * from "./RankingDataTable";
