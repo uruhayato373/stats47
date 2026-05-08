@@ -22,7 +22,6 @@ import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
-import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
@@ -34,6 +33,8 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
+
+import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
 
 import type { Metadata } from "next";
