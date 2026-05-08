@@ -38,6 +38,7 @@ import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/an
 import {
     AdSenseAd,
     RANKING_PAGE_TABLE_SIDE,
+    RANKING_PAGE_FOOTER,
 } from "@/lib/google-adsense";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
@@ -393,6 +394,12 @@ export function RankingKeyPageClient({
                             shareText={shareText}
                         />
                     </div>
+
+                    {/* 広告: テーブル読了後 */}
+                    <AdSenseAd
+                        format={RANKING_PAGE_FOOTER.format}
+                        slotId={RANKING_PAGE_FOOTER.slotId}
+                    />
 
                     {/* データの考察（折りたたみ） */}
                     {insightsSection}

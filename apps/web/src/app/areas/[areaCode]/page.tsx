@@ -34,6 +34,8 @@ import {
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+
 
 import type { Metadata } from "next";
 
@@ -200,6 +202,12 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         areaName={profile.areaName}
                     />
 
+                    {/* 広告①: チャート読了後 */}
+                    <AdSenseAd
+                        format={RANKING_SIDEBAR_TOP.format}
+                        slotId={RANKING_SIDEBAR_TOP.slotId}
+                    />
+
                     {/* カテゴリナビゲーション */}
                     <CategoryNavGrid
                         categories={categories}
@@ -208,6 +216,12 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
                     {/* 関連エリア */}
                     <RelatedAreas areaCode={areaCode} />
+
+                    {/* 広告②: アフィリエイト直前 */}
+                    <AdSenseAd
+                        format={RANKING_SIDEBAR_TOP.format}
+                        slotId={RANKING_SIDEBAR_TOP.slotId}
+                    />
 
                     {/* アフィリエイト */}
                     <AreaBannerAd />
