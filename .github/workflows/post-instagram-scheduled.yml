@@ -51,7 +51,7 @@ jobs:
           PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
           KEY=$(grep -oE '投稿対象: \{[^}]+\}' /tmp/post-output.log | grep -oE '"content_key":"[^"]+"' | cut -d'"' -f4 || echo "")
           DATE=$(grep -oE 'today \(JST\): [0-9-]+' /tmp/post-output.log | awk '{print $3}' || echo "")
-          SKIP=$(grep -c "今日の予定なし、skip" /tmp/post-output.log || echo "0")
+          SKIP=$(grep -c "今日の予定なし、skip" /tmp/post-output.log || true)
           {
             echo "permalink=${PERMALINK}"
             echo "content_key=${KEY}"
