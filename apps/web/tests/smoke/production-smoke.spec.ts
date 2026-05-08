@@ -29,10 +29,10 @@ test.describe("本番スモークテスト", () => {
     await expect(heading).toContainText("北海道");
   });
 
-  test("都道府県ダッシュボード（気象）が500エラーにならない", async ({
+  test("都道府県ダッシュボード（人口）が500エラーにならない", async ({
     page,
   }) => {
-    const response = await page.goto("/areas/01000/landweather", {
+    const response = await page.goto("/areas/01000/population", {
       waitUntil: "domcontentloaded",
     });
     expect(response?.status()).toBe(200);
