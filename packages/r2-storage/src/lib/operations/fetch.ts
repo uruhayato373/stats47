@@ -47,7 +47,6 @@ async function fetchFromS3(key: string): Promise<Buffer | null> {
  */
 export async function fetchFromR2(
   key: string,
-  options?: { async?: boolean }
 ): Promise<Buffer | null> {
   const localData = fetchFromLocalFs(key);
   if (localData !== null) return localData;
@@ -56,7 +55,7 @@ export async function fetchFromR2(
 
   if (env.isCloudflareWorkers) {
     try {
-      const r2Client = await getR2Client(options);
+      const r2Client = await getR2Client();
       const object = await r2Client.get(key);
       if (!object) return null;
       const arrayBuffer = await object.arrayBuffer();
@@ -85,9 +84,8 @@ export async function fetchFromR2(
  */
 export async function fetchFromR2AsString(
   key: string,
-  options?: { async?: boolean }
 ): Promise<string | null> {
-  const buffer = await fetchFromR2(key, options);
+  const buffer = await fetchFromR2(key);
   if (!buffer) return null;
   return buffer.toString("utf-8");
 }
@@ -97,9 +95,8 @@ export async function fetchFromR2AsString(
  */
 export async function fetchFromR2AsJson<T>(
   key: string,
-  options?: { async?: boolean }
 ): Promise<T | null> {
-  const str = await fetchFromR2AsString(key, options);
+  const str = await fetchFromR2AsString(key);
   if (!str) return null;
   return JSON.parse(str) as T;
 }

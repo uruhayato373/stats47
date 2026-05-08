@@ -86,7 +86,7 @@ export async function listFromR2(
 
   // Cloudflare Workers
   try {
-    const client = await getR2Client(options);
+    const client = await getR2Client();
     const allKeys: string[] = [];
     let cursor: string | undefined;
 
@@ -131,7 +131,7 @@ export async function listFromR2WithSize(
 
   // Cloudflare Workers
   try {
-    const client = await getR2Client(options);
+    const client = await getR2Client();
     const allObjects: Array<{ key: string; size: number }> = [];
     let cursor: string | undefined;
 

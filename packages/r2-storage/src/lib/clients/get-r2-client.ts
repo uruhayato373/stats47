@@ -9,13 +9,9 @@ import { logger } from "@stats47/logger";
  * @returns R2 バインディング
  * @throws {Error} R2 バインディングが見つからない場合
  */
-export async function getR2Client(options?: {
-  async?: boolean;
-}): Promise<R2Bucket> {
+export async function getR2Client(): Promise<R2Bucket> {
   try {
-    const context = options?.async
-      ? await getCloudflareContext({ async: true })
-      : getCloudflareContext();
+    const context = await getCloudflareContext({ async: true });
 
     const { env } = context;
 

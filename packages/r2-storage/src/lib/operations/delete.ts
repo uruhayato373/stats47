@@ -67,7 +67,7 @@ export async function deleteFromR2(
     return;
   }
 
-  const client = await getR2Client(options);
+  const client = await getR2Client();
   await client.delete(key);
 }
 
@@ -104,7 +104,7 @@ export async function deleteMultipleFromR2(
   }
 
   // Cloudflare Workers
-  const client = await getR2Client(options);
+  const client = await getR2Client();
   for (const key of keys) {
     try {
       await client.delete(key);
