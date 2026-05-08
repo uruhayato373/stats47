@@ -37,7 +37,7 @@ async function processIndicator(
 
   const partitionMap = new Map<string, PartitionData>();
   for (const row of rows) {
-    const yearCode = String(row.yearCode ?? "");
+    const yearCode = String(row.yearCode ?? "").slice(0, 4);
     if (!yearCode) continue;
 
     let partition = partitionMap.get(yearCode);

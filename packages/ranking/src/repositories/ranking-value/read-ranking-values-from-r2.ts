@@ -66,7 +66,8 @@ export async function readRankingValuesFromR2(
     const snapshot = await loadRankingValuesForKey(rankingKey, areaType);
     if (!snapshot) return ok([]);
 
-    const partition = snapshot.partitions.find((p) => p.yearCode === yearCode);
+    const normalizedYear = yearCode.slice(0, 4);
+    const partition = snapshot.partitions.find((p) => p.yearCode.slice(0, 4) === normalizedYear);
     if (!partition) {
       logger.warn(
         { rankingKey, areaType, yearCode },
