@@ -32,6 +32,7 @@ import {
     RankingYearSelector,
     AreaTypeToggle,
     DataDownloadIconButton,
+    NormalizationToggle,
 } from "@/features/ranking";
 
 import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
@@ -194,11 +195,16 @@ export function RankingKeyPageClient({
         });
     };
 
-    // ブックマーク・共有URL対応: ?year= / ?areaType= パラメータからデータ取得
+    // ブックマーク・共有URL対応: ?year= / ?areaType= / ?norm= パラメータからデータ取得
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const urlYear = params.get("year");
         const urlAreaType = params.get("areaType") as AreaType | null;
+        const urlNorm = params.get("norm") ?? undefined;
+
+        if (urlNorm) {
+            setNormalizationType(urlNorm);
+        }
 
         if (urlAreaType === "city" && cityRankingItem) {
             setCurrentAreaType("city");
@@ -207,12 +213,18 @@ export function RankingKeyPageClient({
             if (year !== selectedYear || urlAreaType !== areaType) {
                 setCurrentYear(year);
                 startTransition(async () => {
-                    const result = await fetchRankingValuesAction(rankingKey, "city", year, normalizationType, parentAreaCode);
+                    const result = await fetchRankingValuesAction(rankingKey, "city", year, urlNorm, parentAreaCode);
                     if (isOk(result)) setRankingValues(result.data);
                 });
             }
         } else if (urlYear && urlYear !== selectedYear) {
             handleYearChange(urlYear);
+        } else if (urlNorm) {
+            startTransition(async () => {
+                if (!currentYear) return;
+                const result = await fetchRankingValuesAction(rankingKey, currentAreaType, currentYear, urlNorm, parentAreaCode);
+                if (isOk(result)) setRankingValues(result.data);
+            });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -270,10 +282,18 @@ export function RankingKeyPageClient({
         </div>
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for future normalization toggle feature
-    const _handleNormalizationChange = (value: string) => {
+    const handleNormalizationChange = (value: string) => {
         const nextType = value === "original" ? undefined : value;
         setNormalizationType(nextType);
+
+        const params = new URLSearchParams(window.location.search);
+        if (nextType) {
+            params.set("norm", nextType);
+        } else {
+            params.delete("norm");
+        }
+        const qs = params.toString();
+        window.history.replaceState(null, "", qs ? `${pathname}?${qs}` : pathname);
 
         startTransition(async () => {
             if (!currentYear) return;
@@ -300,7 +320,7 @@ export function RankingKeyPageClient({
                 })()}
             </h1>
 
-            {/* normalization_basis グループトグル */}
+            {/* normalization_basis グループトグル（別URL切替）*/}
             {groupMembers.length > 1 && (
                 <div className="flex items-center gap-0.5 mt-2 w-fit">
                     {[...groupMembers].sort((a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)).map((member) => {
@@ -323,6 +343,18 @@ export function RankingKeyPageClient({
                             </Link>
                         );
                     })}
+                </div>
+            )}
+
+            {/* 正規化トグル（同一ページ内で per_population / per_area に切替） */}
+            {rankingItem.calculation?.normalizationOptions && rankingItem.calculation.normalizationOptions.length > 0 && (
+                <div className="mt-2">
+                    <NormalizationToggle
+                        options={rankingItem.calculation.normalizationOptions}
+                        value={normalizationType ?? "original"}
+                        onChange={handleNormalizationChange}
+                        disabled={isPending}
+                    />
                 </div>
             )}
 
