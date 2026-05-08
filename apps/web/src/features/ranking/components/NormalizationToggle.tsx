@@ -1,6 +1,7 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
+
 import type { NormalizationOption } from "@stats47/ranking";
 
 interface NormalizationToggleProps {
