@@ -31,21 +31,26 @@ export function useChoroplethStyle(
 
     let cancelled = false;
 
-    createChoroplethColorMapper(colorConfig, data).then((colorMapper) => {
-      if (cancelled) return;
-      setStyleFactory(() => (feature?: Feature<Geometry>): PathOptions => {
-        if (!feature) {
-          return { fillColor: "#e0e0e0", fillOpacity: 0.95, color: borderColor, weight: 0.5 };
-        }
-        const code = codeExtractor(feature);
-        return {
-          fillColor: colorMapper(code),
-          fillOpacity: 0.95,
-          color: borderColor,
-          weight: 0.5,
-        };
+    createChoroplethColorMapper(colorConfig, data)
+      .then((colorMapper) => {
+        if (cancelled) return;
+        setStyleFactory(() => (feature?: Feature<Geometry>): PathOptions => {
+          if (!feature) {
+            return { fillColor: "#e0e0e0", fillOpacity: 0.95, color: borderColor, weight: 0.5 };
+          }
+          const code = codeExtractor(feature);
+          return {
+            fillColor: colorMapper(code),
+            fillOpacity: 0.95,
+            color: borderColor,
+            weight: 0.5,
+          };
+        });
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setStyleFactory(null);
       });
-    });
 
     return () => { cancelled = true; };
   }, [colorConfig, data, codeExtractor, borderColor]);
