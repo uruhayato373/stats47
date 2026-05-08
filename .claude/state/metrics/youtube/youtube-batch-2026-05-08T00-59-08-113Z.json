@@ -1,0 +1,69 @@
+{
+  "channel": {
+    "id": "UCb7Ro4vLygUFQDQRKXAvltw",
+    "title": "uruhayato373",
+    "subscriberCount": 0,
+    "viewCount": 9,
+    "videoCount": 1
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-04-24",
+    "recentEnd": "2026-05-08",
+    "priorStart": "2026-04-10",
+    "priorEnd": "2026-04-24"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [
+    {
+      "videoId": "P1Llv6u9Crw",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-05-06T00:38:45Z",
+      "ageHours": 48.3,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "YL6MRuZmadM",
+      "title": "Instagramリール動画",
+      "publishedAt": "2026-04-28T20:47:44Z",
+      "ageHours": 220.2,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    }
+  ],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_CHANNEL": 1
+    },
+    "prior": {}
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 1
+    },
+    "prior": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 0
+    }
+  },
+  "viewsDelta": {
+    "recent": 1,
+    "prior": 0,
+    "changePct": null
+  },
+  "verdict": "watch",
+  "verdictReasons": [
+    "suspect videos = 2 (views < 50 after 48h)"
+  ]
+}

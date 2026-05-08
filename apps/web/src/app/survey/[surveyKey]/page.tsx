@@ -21,6 +21,7 @@ import {
   type CategoryRankingListItem,
 } from "@/features/ranking";
 
+import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -187,6 +188,13 @@ export default async function SurveyPage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          {/* 広告: 注目カード後・テーブル前 */}
+          <AdSenseAd
+            format={RANKING_PAGE_FOOTER.format}
+            slotId={RANKING_PAGE_FOOTER.slotId}
+            className="mb-6"
+          />
 
           <CategoryRankingTable items={allItems} />
         </>
