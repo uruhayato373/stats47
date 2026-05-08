@@ -3,12 +3,15 @@
  *
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
- * 更新方法:
- *   - 手動: `cd apps/web && npx tsx scripts/sync-known-keys-from-remote.ts`
- *   - 自動: GitHub Actions `.github/workflows/sync-known-keys.yml` (毎日 JST 07:00)
+ * middleware.ts の Fix 6 が参照する。CI ビルド環境では D1 binding が使えないため、
+ * 静的ファイルとして git commit する。page.tsx は触らない（SSG は従来どおり）。
  *
- * 最終生成日: 2026-04-26
- * 件数: 1920
+ * 更新方法: `/generate-known-ranking-keys` スキル or
+ *           `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
+ * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
+ *
+ * 最終生成日: 2026-05-08
+ * 件数: 1925
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -767,8 +770,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "independent-revenue-prefecture",
   "industrial-and-semi-industrial-area-ratio",
   "industrial-exclusive-area-ratio",
-  "industrial-land-price",
-  "industrial-land-price-change-rate",
   "industrial-water-usage",
   "infant-clothes-consumption-expenditure",
   "infant-clothes-consumption-quantity",
@@ -927,8 +928,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "manufacturing-establishment-site-area",
   "manufacturing-establishments",
   "manufacturing-industry-added-value",
-  "manufacturing-net-value-added-private",
-  "manufacturing-sales-private",
   "manufacturing-shipment-amount",
   "manufacturing-shipment-amount-per-employee",
   "manufacturing-shipment-amount-per-establishment",
@@ -1076,6 +1075,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "non-car-vehicle-insurance-consumption-expenditure",
   "non-car-vehicle-maintenance-consumption-expenditure",
   "non-car-vehicle-purchase-consumption-expenditure",
+  "non-regular-employment-rate",
   "notebooks-paper-consumption-expenditure",
   "nuclear-family-households-ratio",
   "nuclear-power-plant-count",
@@ -1461,7 +1461,13 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "repair-materials-consumption-expenditure",
   "researcher-annual-income",
   "reserve-funds-prefecture",
+  "resident-foreigner-asia",
+  "resident-foreigner-china",
+  "resident-foreigner-europe",
+  "resident-foreigner-korea",
+  "resident-foreigner-north-america",
   "resident-foreigner-population",
+  "resident-foreigner-south-america",
   "residential-and-mixed-area-ratio",
   "residential-area-ratio",
   "residential-building-construction-cost",
