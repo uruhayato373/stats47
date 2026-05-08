@@ -9,6 +9,7 @@ import { Metadata } from "next";
 
 import { FeaturedRankings } from "@/features/ranking/server";
 
+import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 
@@ -35,6 +36,12 @@ export default async function RankingTopPage() {
         </p>
       </div>
       <FeaturedRankings limit={20} showHeader={false} />
+      <div className="max-w-6xl mx-auto mt-6">
+        <AdSenseAd
+          format={RANKING_PAGE_FOOTER.format}
+          slotId={RANKING_PAGE_FOOTER.slotId}
+        />
+      </div>
     </div>
   );
 }
