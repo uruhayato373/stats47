@@ -14,6 +14,7 @@ import {
 } from "@/features/region-comparison";
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
+import { AdSenseAd, COMPARE_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 
@@ -134,6 +135,11 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                     <CompareGridLayout regions={regions} components={pageComponents} />
                 )}
             </RegionComparisonClient>
+            <AdSenseAd
+                format={COMPARE_PAGE_SIDEBAR.format}
+                slotId={COMPARE_PAGE_SIDEBAR.slotId}
+                className="mt-6"
+            />
         </div>
     );
 }
