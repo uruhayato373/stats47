@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-26T00:00:00.000Z",
+  "updated_at": "2026-05-10T08:00:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -26,38 +26,41 @@
         "ga4_weekly_engaged_sessions_2026_w15": 13,
         "gsc_weekly_clicks_2026_w15": 98
       },
-      "status": "measuring",
+      "status": "done",
       "created_at": "2026-04-14T00:00:00.000Z",
       "started_at": "2026-04-14T00:00:00.000Z",
-      "result": null,
-      "learnings": null,
-      "closed_at": null,
+      "result": "NONE",
+      "learnings": [
+        "一次指標（gsc_total_errors）: baseline 10,553 → 実測 12,437（+17.8%）。目標 -50% に対して逆行。ただし W19 に市区町村ページ 25,785 URL を追加したことで Google が新 URL を大量クロールし始め、crawled_not_indexed(+1,162)と 404(+866) が膨らんだ可能性が高い。baseline との単純比較は適切でない可能性あり。",
+        "カテゴリ別実数（2026-05-10 GSC UIエクスポート）: 404=6,527 / 5xx=2,040 / crawled_not_indexed=3,501 / soft404=369。soft404は -27%（506→369）改善した。5xx は -0.3%（ほぼ変化なし）。410 Gone 施策の効果は soft404 削減に現れた可能性あり。",
+        "二次指標（GSC clicks）: 98(W15)→205(W19)で +109%。施策そのものよりも、コンテンツ改善・市区町村ページ追加・インデックス品質向上が clicks を押し上げた可能性。",
+        "教訓: URL 大量追加の週に GSC エラーを観測すると、施策効果と拡張効果が混在する。次回は『既存 URL のみ』を対象にベースライン比較を行うか、新 URL 追加前後を別期間として管理する。",
+        "推奨次ステップ: 市区町村ページが Google にインデックスされ落ち着く W24 頃（4週後）に GSC エラー再エクスポートし、実質的な改善/悪化を再判定する（EXP-004 相当）。"
+      ],
+      "closed_at": "2026-05-10T00:00:00.000Z",
       "actions": [
         "Phase 1 完了: middleware で旧 URL (/blog/old/*, ranking 別名等) を 410 Gone 化 (commit 0fdab9dd)",
         "Phase 2 完了: soft404/5xx/クロール予算対策 — robots.ts, sitemap.ts, gone-tag-keys.ts の整備 (commit 2784b1d2)",
-        "次回観測: 2026-04-28 に GSC カバレッジレポート再エクスポート",
         "（ユーザー作業）GSC UI で sitemap 再送信、カバレッジレポートの『修正をリクエスト』",
-        "28 日後に target_metric delta を measure"
+        "measure 完了: GSC UI エクスポート 2026-05-10 で実数確定。result=NONE（confounding あり）"
       ],
-      "pending_user_actions": [
-        {
-          "action": "GSC カバレッジレポート W18/W19 を手動エクスポートして full_count_estimate を記録",
-          "reference": ".claude/state/metrics/gsc/coverage-drilldown/history.csv の full_count_estimate_total カラムに手入力",
-          "description": "GSC UI → 検索パフォーマンス → インデックス → カバレッジ → 各エラーカテゴリのドリルダウン → エクスポート。実数（404, 5xx, crawled-not-indexed, soft-404）を取得して baseline 10,553 との delta を確定すること"
-        }
-      ],
-      "next_check_date": "2026-05-12",
+      "pending_user_actions": [],
+      "next_check_date": null,
       "measuring_observations": {
-        "date": "2026-05-05",
-        "elapsed_days": 21,
-        "gsc_weekly_clicks_w18": 589,
+        "date": "2026-05-10",
+        "elapsed_days": 26,
+        "gsc_not_found_404_current": 6527,
+        "gsc_server_error_5xx_current": 2040,
+        "gsc_crawled_not_indexed_current": 3501,
+        "gsc_soft_404_current": 369,
+        "gsc_total_errors_current": 12437,
+        "gsc_total_errors_baseline": 10553,
+        "total_errors_delta_pct": 17.8,
+        "gsc_weekly_clicks_w19": 205,
         "gsc_weekly_clicks_baseline_w15": 98,
-        "clicks_delta_pct": 501,
-        "ga4_engaged_sessions_w19_partial": 427,
-        "ga4_engaged_sessions_baseline_w15": 13,
-        "coverage_errors_current": null,
-        "coverage_errors_note": "W17 export (2026-04-25) では各カテゴリ 1000 件上限サンプルのため実数不明。GSC UI から W18/W19 の実数エクスポートが必要。",
-        "secondary_indicators": "clicks +501% (W15 baseline 98 → W18 589) は強い正の反応。coverage error 実数は未確定のため effect/* ラベル保留"
+        "clicks_delta_pct": 109,
+        "source": "GSC UIエクスポート ~/Downloads/stats47.jp-Coverage-2026-05-10.zip",
+        "confounding_note": "W19 に市区町村ページ 25,785 URL 追加。crawled_not_indexed +1,162 / 404 +866 はこの拡張に起因する可能性大。soft404 -137(-27%) は施策効果の可能性あり。"
       },
       "history": [
         {
@@ -88,7 +91,12 @@
         {
           "date": "2026-05-05T00:00:00.000Z",
           "action": "measuring",
-          "summary": "21 日経過で measuring へ遷移。clicks +501% (W15→W18) と engaged sessions +3184% の急回復を観測。ただし coverage error 実数（gsc_index_errors_total の現在値）は W17 エクスポートが上限 1000 サンプルのため未確定。GSC UI から W18/W19 実数エクスポート後に effect/* ラベルを確定する。"
+          "summary": "21 日経過で measuring へ遷移。clicks +501% (W15→W18) と engaged sessions 急回復を観測。coverage error 実数は未確定のため effect/* ラベル保留"
+        },
+        {
+          "date": "2026-05-10T00:00:00.000Z",
+          "action": "closed",
+          "summary": "measure 完了。result=NONE。gsc_total_errors 10,553→12,437(+17.8%)で目標-50%未達。ただし市区町村25,785URL追加による confounding あり。soft404 -27%(-137件)は改善。clicks +109%(98→205)は強い二次指標。W24頃に再観測を推奨。"
         }
       ]
     },
@@ -180,28 +188,38 @@
         "crux_lcp_p75": 4406,
         "crux_ttfb_p75": 2390
       },
-      "status": "measuring",
+      "status": "done",
       "created_at": "2026-04-26T00:00:00.000Z",
       "started_at": "2026-04-26T00:00:00.000Z",
       "verification_command": "curl 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/&strategy=mobile&category=performance' | jq '.lighthouseResult.audits[\"largest-contentful-paint\"].numericValue, .lighthouseResult.audits[\"largest-contentful-paint-element\"].details.items[0].node.snippet'",
       "actions": [
         "CookieConsentBanner.tsx の setVisible(true) を setTimeout 4s でラップ",
         "feature/lcp-defer-cookie-banner で PR → develop → main",
-        "デプロイ後 PSI 自動計測 (.claude/state/metrics/psi/LATEST.md) で実測"
+        "デプロイ後 PSI 自動計測 (.claude/state/metrics/psi/LATEST.md) で実測",
+        "measure 完了: ADVERSE 確定。EXP-003 のロールバック（setTimeout 削除）を W20 で実施予定"
       ],
       "pending_user_actions": [],
-      "next_check_date": "2026-05-12",
+      "next_check_date": null,
       "fail_criteria": "LCP > 5,000ms または lcp_element が banner 以外の意図しない要素になっている場合 → 仮説棄却。banner 削除や hero 要素の強化を検討。",
+      "result": "ADVERSE",
+      "learnings": [
+        "LCP: 8,251ms(baseline) → 16,426ms(2026-05-09 PSI batch) = +99%悪化。目標 ≤2,500ms に対して大幅に逆行。fail_criteria（LCP > 5,000ms）に該当。",
+        "PSI 2026-05-09 で全 19 URL × mobile が一斉に Perf スコア -40〜-69 pt と大幅悪化。EXP-003 固有の問題ではなくシステム全体の性能劣化が発生している。",
+        "LCP 要素の確認: PSI API quota 超過（2026-05-10）により当日直接検証不可。バナー 4s 遅延後に LCP 要素が何になったかは未確認だが、全ページ共通の LCP 悪化はバナー遅延の副作用（新しい LCP 候補が登場）と D1→R2 migration の JS bundle 増大の複合と推測される。",
+        "教訓: EXP-002（HTML 削減）と同じく『LCP 要素を特定してから施策を打つ』原則を守らなかった結果、仮説が外れた。Cookie バナーが LCP だった根拠は 1 回の PSI 計測のみ。施策前に 3 回計測して安定確認すべきだった。",
+        "次ステップ: (1) setTimeout 4s のロールバック PR を W20 で実施。(2) PSI batch で全ページ LCP を安定計測後に真の LCP 要素を再特定。(3) EXP-004 として新しい仮説を立て直す。"
+      ],
+      "closed_at": "2026-05-10T00:00:00.000Z",
       "measuring_observations": {
-        "date": "2026-05-05",
-        "elapsed_days": 9,
-        "psi_lcp_home_mobile_current": 14557,
+        "date": "2026-05-09",
+        "elapsed_days": 14,
+        "psi_lcp_home_mobile_current": 16426,
         "psi_lcp_home_mobile_baseline": 8251,
-        "lcp_delta_ms": 6306,
-        "lcp_delta_pct": 76.4,
-        "verdict_preliminary": "ADVERSE candidate",
-        "confounding_factor": "D1→R2 移行 (2026-04-27〜05-03、PR 12 件) が同時期に実施されており、LCP 悪化が EXP-003 か migration 副作用かの切り分けが必要。PSI 実測で LCP 要素を確認し、banner が LCP でなくなっているかを検証すること",
-        "verification_needed": "curl 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/&strategy=mobile&category=performance' | jq '.lighthouseResult.audits[\"largest-contentful-paint-element\"].details.items[0].node.snippet'"
+        "lcp_delta_ms": 8175,
+        "lcp_delta_pct": 99.1,
+        "source": ".claude/state/metrics/psi/LATEST.md (2026-05-09 PSI batch)",
+        "systemwide_degradation": "全 19 URL × mobile で Perf スコアが -27〜-69 pt 悪化。EXP-003 固有ではない。",
+        "psi_api_status": "quota exceeded 2026-05-10。LCP element snippet の直接確認不可。"
       },
       "history": [
         {
@@ -212,7 +230,12 @@
         {
           "date": "2026-05-05T00:00:00.000Z",
           "action": "measuring",
-          "summary": "9 日経過で measuring へ遷移（PR #139 はデプロイ済）。現在 LCP 14,557ms（baseline 8,251ms から +76%悪化）。ただし D1→R2 移行（W18）との混在効果があるため、PSI API で LCP 要素確認後に effect/* 判定。2026-05-12 を次回確認日とする。"
+          "summary": "9 日経過で measuring へ遷移。LCP 14,557ms（baseline +76%悪化）。D1→R2 移行との混在効果のため判定保留。"
+        },
+        {
+          "date": "2026-05-10T00:00:00.000Z",
+          "action": "closed",
+          "summary": "result=ADVERSE。LCP 8,251ms→16,426ms(+99%)。全ページ Perf -27〜-69pt。fail_criteria 該当。EXP-003 ロールバック（setTimeout削除）をW20で実施予定。"
         }
       ]
     }
