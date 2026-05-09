@@ -160,6 +160,22 @@ async function postImage({ contentKey, caption, imageUrl }) {
   }
   const containerId = containerJson.id;
 
+  // 画像でも container が FINISHED になるまで待つ (reels より短い間隔で最大 30 回)
+  console.log(`⏳ image 処理 polling...`);
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 3000));
+    const statusRes = await fetch(
+      `https://graph.instagram.com/v21.0/${containerId}?fields=status_code&access_token=${TOKEN}`,
+    );
+    const statusJson = await statusRes.json();
+    console.log(`  status (${i + 1}/30): ${statusJson.status_code}`);
+    if (statusJson.status_code === "FINISHED") break;
+    if (statusJson.status_code === "ERROR") {
+      throw new Error(`container 処理失敗: ${JSON.stringify(statusJson)}`);
+    }
+    if (i === 29) throw new Error(`image 処理 timeout (90 秒)`);
+  }
+
   console.log(`🚀 publish...`);
   const publishRes = await fetch(
     `https://graph.instagram.com/v21.0/${IG_USER_ID}/media_publish`,
