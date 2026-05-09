@@ -4,40 +4,59 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
 
-const CONSENT_KEY = "stats47_cookie_consent";
+const CONSENT_COOKIE_NAME = "stats47_consent";
+const CONSENT_LS_KEY = "stats47_cookie_consent";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+function setConsentCookie(value: string) {
+  document.cookie = `${CONSENT_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
+interface Props {
+  /** サーバーサイドで読み取った consent 状態。null = 未設定（新規ユーザー） */
+  serverConsent: "granted" | "denied" | null;
+}
 
 /**
- * Cookie 同意バナー
+ * Cookie 同意バナー（SSR 対応版）
  *
- * 初回訪問時に表示し、同意/拒否を localStorage に保存。
- * GA4 の consent mode を連携して制御する。
+ * serverConsent が null（新規ユーザー）の場合は SSR 時点からバナーを表示し、
+ * LCP element がバナー出現で遅延しないようにする（EXP-004）。
+ * 既存ユーザーは localStorage → cookie マイグレーションを初回ロード時に実行。
  */
-export function CookieConsentBanner() {
-  const [visible, setVisible] = useState(false);
+export function CookieConsentBanner({ serverConsent }: Props) {
+  const [visible, setVisible] = useState(serverConsent === null);
 
   useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (!stored) {
-      const timer = setTimeout(() => setVisible(true), 0);
-      return () => clearTimeout(timer);
-    } else if (stored === "granted") {
-      // 広告領域も同意済の場合のみ ad_storage を granted へ
+    const stored = localStorage.getItem(CONSENT_LS_KEY);
+    const effective = serverConsent ?? stored;
+
+    // gtag consent 同期
+    if (effective === "granted") {
       window.gtag?.("consent", "update", {
         ad_storage: "granted",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
-    } else if (stored === "denied") {
-      // ユーザー明示拒否: analytics / ad 両方 denied に降格
+    } else if (effective === "denied") {
       window.gtag?.("consent", "update", {
         analytics_storage: "denied",
         ad_storage: "denied",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
     }
-  }, []);
+
+    // 後方互換マイグレーション: localStorage に consent があるが cookie が未設定の場合
+    // （既存ユーザーの初回ロード時に一度だけ実行）
+    if (!serverConsent && stored) {
+      setConsentCookie(stored);
+      const timer = setTimeout(() => setVisible(false), 0);
+      return () => clearTimeout(timer);
+    }
+  }, [serverConsent]);
 
   const handleAccept = () => {
-    localStorage.setItem(CONSENT_KEY, "granted");
+    setConsentCookie("granted");
+    localStorage.setItem(CONSENT_LS_KEY, "granted");
     window.gtag?.("consent", "update", {
       analytics_storage: "granted",
       ad_storage: "granted",
@@ -47,8 +66,8 @@ export function CookieConsentBanner() {
   };
 
   const handleDecline = () => {
-    localStorage.setItem(CONSENT_KEY, "denied");
-    // 拒否時は明示的に analytics / ad 両方を denied に降格（Issue #37 残課題）
+    setConsentCookie("denied");
+    localStorage.setItem(CONSENT_LS_KEY, "denied");
     window.gtag?.("consent", "update", {
       analytics_storage: "denied",
       ad_storage: "denied",
