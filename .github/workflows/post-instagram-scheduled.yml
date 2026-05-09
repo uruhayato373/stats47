@@ -2,7 +2,7 @@ name: 📸 Instagram scheduled post (daily)
 
 # Phase 9 後続 (2026-04-26): IG Graph API は scheduled_publish_time 非対応のため、
 # GitHub Actions cron で post-instagram (即時 API) を毎朝発火する形で予約投稿を代替。
-# 投稿対象は .claude/state/instagram-w18-schedule.json の today (JST) エントリのみ、
+# 投稿対象は .claude/state/instagram-w19-schedule.json の today (JST) エントリのみ、
 # 該当なしなら exit 0 で何もしない。
 # 投稿成功時は #127 (W18 Plan) に結果コメント投稿。
 

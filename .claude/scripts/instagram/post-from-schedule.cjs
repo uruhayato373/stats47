@@ -25,7 +25,7 @@ const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
 const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || "https://storage.stats47.jp";
 const SCHEDULE_FILE =
-  process.env.IG_SCHEDULE_FILE || ".claude/state/instagram-w18-schedule.json";
+  process.env.IG_SCHEDULE_FILE || ".claude/state/instagram-w19-schedule.json";
 const FORCE_DATE = process.env.IG_FORCE_DATE; // YYYY-MM-DD
 
 if (!TOKEN || !IG_USER_ID) {
