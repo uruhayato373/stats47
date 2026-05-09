@@ -18,11 +18,7 @@ export function CookieConsentBanner() {
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);
     if (!stored) {
-      // LCP 計測ウィンドウ（First Input or 5s idle）後にバナーを挿入し、
-      // バナー自身が LCP 要素にならないようにする（EXP-003）。
-      // 同意有無は GoogleAnalytics.tsx 側で analytics_storage=granted がデフォルト。
-      const timer = setTimeout(() => setVisible(true), 4000);
-      return () => clearTimeout(timer);
+      setVisible(true);
     } else if (stored === "granted") {
       // 広告領域も同意済の場合のみ ad_storage を granted へ
       window.gtag?.("consent", "update", {
