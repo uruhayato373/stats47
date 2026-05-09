@@ -24,6 +24,7 @@ import {
   renderMedia,
   selectComposition,
 } from "@remotion/renderer";
+import { execSync } from "child_process";
 import fs from "fs/promises";
 import path from "path";
 
@@ -319,6 +320,22 @@ async function main() {
           codec: "h264",
           puppeteerInstance: browser,
         });
+
+        // instagram reel のみ: 末尾 3 秒前のフレームをカバー画像として抽出
+        if (job.outputPath.includes("instagram/reel.mp4")) {
+          const coverDir = path.join(path.dirname(job.outputPath), "stills");
+          const coverPath = path.join(coverDir, "cover.png");
+          await fs.mkdir(coverDir, { recursive: true });
+          try {
+            execSync(
+              `ffmpeg -y -sseof -3 -i "${job.outputPath}" -vframes 1 -q:v 2 "${coverPath}"`,
+              { stdio: "pipe" }
+            );
+            console.log(`   🖼️  cover → stills/cover.png\n`);
+          } catch {
+            console.log(`   ⚠️  cover 生成スキップ (ffmpeg エラー)\n`);
+          }
+        }
 
         const elapsed = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
         console.log(`   ✅ 完了 (経過: ${elapsed}min)\n`);
