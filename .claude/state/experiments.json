@@ -238,6 +238,45 @@
           "summary": "result=ADVERSE。LCP 8,251ms→16,426ms(+99%)。全ページ Perf -27〜-69pt。fail_criteria 該当。EXP-003 ロールバック（setTimeout削除）をW20で実施予定。"
         }
       ]
+    },
+    {
+      "id": "EXP-004",
+      "title": "CookieConsentBanner SSR 化 — HTTP cookie でサーバー側 consent 検知",
+      "hypothesis": "CookieConsentBanner が 'use client' + localStorage 依存で hydration 後にしか表示できず、hydration 完了タイミング（mobile ≈ 8〜12s）が LCP になっている。HTTP cookie に consent を保存してサーバー側で読み取り、バナーを SSR HTML に含めることで、新規ユーザーは TTFB 時点でバナーが描画されるためバナー自体がもはや LCP の遅延要因にならない。既存ユーザーは localStorage→cookie のワンタイムマイグレーションを実施。",
+      "target_metric": "psi_lcp_ms_homepage_mobile",
+      "target_delta": "mobile LCP < 3,000ms（baseline 8,251ms から -64%）",
+      "rubric": {
+        "impact": 4,
+        "effort": 1,
+        "learning": 3,
+        "certainty": 3,
+        "weighted": 3.0
+      },
+      "baseline": {
+        "date": "2026-04-25",
+        "source": ".claude/state/metrics/psi/history.csv（EXP-003 前の最後の計測）",
+        "psi_lcp_ms_homepage_mobile": 8251,
+        "psi_perf_homepage_mobile": 100,
+        "note": "EXP-003 ADVERSE 後の現在値は 16,426ms。rollback 後のベースライン再確定が先行必要"
+      },
+      "success_criteria": "homepage mobile LCP < 3,000ms（PSI API 実測 2 回以上の中央値）",
+      "fail_criteria": "LCP が 8,251ms（EXP-003 前ベースライン）を超えて悪化した場合",
+      "status": "measuring",
+      "next_check": "2026-05-14",
+      "deployed_at": "2026-05-10T00:00:00.000Z",
+      "created_at": "2026-05-10T00:00:00.000Z",
+      "evidence": {
+        "root_cause_analysis": "TTFB 2-12ms（edge cache 正常）に対して Mobile LCP 6,905-19,052ms（Desktop 1-3.6s）。5-10x 格差 = CPU 4x throttle 下の JS 実行時間。EXP-003（setTimeout+4s）→ LCP +8s の対応から、バナー出現タイミングが LCP に直結することを確認。バナー面積（375×60px=22,500px²）＞ SVG tile（185×92px≈17,000px²）のため hydration 後出現でバナーが LCP element になる。",
+        "implementation": "layout.tsx: cookies() でサーバー側 consent 読み取り → CookieConsentBanner に serverConsent prop 渡し。CookieConsentBanner: useState(serverConsent === null) で SSR から表示制御。既存 localStorage → cookie マイグレーション実装済み。",
+        "psi_quota_note": "2026-05-10 PSI API quota 超過。次回計測: 2026-05-11 02:00 JST の自動バッチ"
+      },
+      "history": [
+        {
+          "date": "2026-05-10T00:00:00.000Z",
+          "action": "created_and_deployed",
+          "summary": "EXP-004 設計・実装・deploy 完了。root cause: CookieConsentBanner が hydration 後に出現 → LCP element になる。SSR 化により新規ユーザーも TTFB 時点でバナー表示 → バナーが LCP 遅延要因でなくなる。"
+        }
+      ]
     }
   ]
 }

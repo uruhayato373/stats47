@@ -26,6 +26,8 @@
 
 import { Suspense } from "react";
 
+import { cookies } from "next/headers";
+
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 
@@ -60,12 +62,16 @@ export const metadata = generateRootMetadata();
  * @param children - レイアウト内に表示するコンテンツ（各ページのコンポーネント）
  * @returns ルートレイアウトのJSX要素
  */
-export default function RootLayout({
+const CONSENT_COOKIE_NAME = "stats47_consent";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const baseUrl = getRequiredBaseUrl();
+  const cookieStore = await cookies();
+  const serverConsent = (cookieStore.get(CONSENT_COOKIE_NAME)?.value ?? null) as "granted" | "denied" | null;
 
   return (
     <html
@@ -147,8 +153,8 @@ export default function RootLayout({
           </div>
           {/* トースト通知（成功、エラー、警告などの通知を表示） */}
           <Toaster position="top-right" richColors />
-          {/* Cookie 同意バナー */}
-          <CookieConsentBanner />
+          {/* Cookie 同意バナー（SSR 対応: consent cookie を server で確認） */}
+          <CookieConsentBanner serverConsent={serverConsent} />
         </ThemeProvider>
       </body>
     </html>
