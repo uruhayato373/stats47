@@ -68,19 +68,32 @@ function mediaUrlFor(type, domain, contentKey) {
   return `${PUBLIC_R2_BASE}/sns/${domain}/${contentKey}/instagram/stills/slide-1-cover-1080x1350.png`;
 }
 
-async function postReels({ contentKey, caption, videoUrl }) {
+async function postReels({ contentKey, caption, videoUrl, domain }) {
+  // カバー画像が R2 に存在するか確認（存在すれば cover_url で指定）
+  const coverUrl = `${PUBLIC_R2_BASE}/sns/${domain}/${contentKey}/instagram/stills/cover.png`;
+  let useCoverUrl = false;
+  try {
+    const headRes = await fetch(coverUrl, { method: "HEAD" });
+    useCoverUrl = headRes.ok;
+    console.log(`🖼️  cover_url: ${useCoverUrl ? coverUrl : "なし（先頭フレーム使用）"}`);
+  } catch {
+    // cover なしで続行
+  }
+
   console.log(`📦 reels container 作成...`);
+  const containerParams = {
+    media_type: "REELS",
+    video_url: videoUrl,
+    caption,
+    access_token: TOKEN,
+    ...(useCoverUrl && { cover_url: coverUrl }),
+  };
   const containerRes = await fetch(
     `https://graph.instagram.com/v21.0/${IG_USER_ID}/media`,
     {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        media_type: "REELS",
-        video_url: videoUrl,
-        caption,
-        access_token: TOKEN,
-      }),
+      body: new URLSearchParams(containerParams),
     },
   );
   const containerJson = await containerRes.json();
@@ -218,7 +231,7 @@ async function main() {
   console.log(`✅ media URL OK: ${mediaUrl}`);
 
   if (entry.type === "reels") {
-    await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl });
+    await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl, domain: entry.domain });
   } else {
     await postImage({ contentKey: entry.content_key, caption, imageUrl: mediaUrl });
   }
