@@ -18,7 +18,8 @@ export function CookieConsentBanner() {
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);
     if (!stored) {
-      setVisible(true);
+      const timer = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(timer);
     } else if (stored === "granted") {
       // 広告領域も同意済の場合のみ ad_storage を granted へ
       window.gtag?.("consent", "update", {
