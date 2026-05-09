@@ -16,7 +16,7 @@ on:
         required: false
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 concurrency:
@@ -51,6 +51,7 @@ jobs:
           PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
           KEY=$(grep -oE 'content_key":"[^"]+' /tmp/post-output.log | head -1 | cut -d'"' -f3 || echo "")
           DATE=$(grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' /tmp/post-output.log | head -1 || echo "")
+          DOMAIN=$(grep -oE 'DOMAIN=[a-z0-9-]+' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")
           # SKIP: PERMALINK が取れていれば投稿あり(0)、なければスキップ(1)。
           # grep -c で日本語パターンを使うと Ubuntu runner (C locale) でマルチライン出力になり
           # GITHUB_OUTPUT に bare '0' が書き込まれて Invalid format エラーになる。
@@ -58,7 +59,20 @@ jobs:
           echo "permalink=${PERMALINK}" >> "$GITHUB_OUTPUT"
           echo "content_key=${KEY}" >> "$GITHUB_OUTPUT"
           echo "post_date=${DATE}" >> "$GITHUB_OUTPUT"
+          echo "domain=${DOMAIN}" >> "$GITHUB_OUTPUT"
           echo "skipped=${SKIP}" >> "$GITHUB_OUTPUT"
+
+      - name: 📝 Append to ig-posted-log
+        if: success() && steps.post.outputs.permalink != ''
+        run: |
+          POSTED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "{\"date\":\"${{ steps.post.outputs.post_date }}\",\"domain\":\"${{ steps.post.outputs.domain }}\",\"content_key\":\"${{ steps.post.outputs.content_key }}\",\"permalink\":\"${{ steps.post.outputs.permalink }}\",\"posted_at\":\"${POSTED_AT}\"}" \
+            >> .claude/state/ig-posted-log.jsonl
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add .claude/state/ig-posted-log.jsonl
+          git commit -m "chore(ig): mark ${{ steps.post.outputs.content_key }} as posted [skip ci]"
+          git push origin main
 
       - name: 💬 Comment posting result on issue #127
         if: success() && steps.post.outputs.permalink != ''

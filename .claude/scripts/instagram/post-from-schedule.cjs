@@ -218,6 +218,8 @@ async function main() {
   }
 
   console.log(`[post-from-schedule] 投稿対象: ${JSON.stringify(entry)}`);
+  // GHA が grep で取得できるよう構造化ログを出力
+  console.log(`DOMAIN=${entry.domain}`);
 
   const caption = await fetchCaption(entry.domain, entry.content_key);
   console.log(`📝 caption (先頭 80): ${caption.slice(0, 80)}...`);
