@@ -28,7 +28,7 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
                     href={`/blog/${article.slug}`}
                     className="group block overflow-hidden rounded-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
                 >
-                    <div className="relative aspect-[1200/630] w-full bg-muted">
+                    <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
                         <ThemeAwareImage
                             lightSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-light.webp`}
                             darkSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-dark.webp`}
