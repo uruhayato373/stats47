@@ -78,4 +78,32 @@ test.describe("本番スモークテスト", () => {
     });
     expect(response?.status()).toBe(404);
   });
+
+  test("ブログ一覧ページが表示され、サムネイル画像が読み込まれる", async ({
+    page,
+  }) => {
+    await page.goto("/blog", { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible({
+      timeout: 10_000,
+    });
+    const img = page.locator("img[src*='blog']").first();
+    if (await img.isVisible({ timeout: 5_000 }).catch(() => false)) {
+      // naturalWidth === 0 は画像読み込み失敗（404 / R2パス誤り）を示す
+      const naturalWidth = await img.evaluate(
+        (el: HTMLImageElement) => el.naturalWidth
+      );
+      expect(naturalWidth).toBeGreaterThan(0);
+    }
+  });
+
+  test("ブログ記事ページが500エラーにならない", async ({ page }) => {
+    const response = await page.goto(
+      "/blog/noodle-consumption-prefecture-character",
+      { waitUntil: "domcontentloaded" }
+    );
+    expect(response?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible({
+      timeout: 10_000,
+    });
+  });
 });
