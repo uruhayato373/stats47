@@ -8,7 +8,7 @@ import { computeCalculatedValues } from "../utils/compute-calculated-values";
 import { rankByValue } from "../utils/rank-by-value";
 
 // Well-known keys mapping
-const WELL_KNOWN_DENOMINATORS: Record<string, Record<string, string>> = {
+export const WELL_KNOWN_DENOMINATORS: Record<string, Record<string, string>> = {
   per_population: {
     prefecture: "total-population",
     city: "total-population",

@@ -3,6 +3,7 @@ export { getAllAvailableYears } from "./get-all-available-years";
 export { getAvailableYears } from "./get-available-years";
 export { listRankingValues } from "./list-ranking-values";
 export {
+  readNormalizedRankingValuesFromR2,
   readRankingValuesByPrefectureFromR2,
   readRankingValuesFromR2,
 } from "./read-ranking-values-from-r2";

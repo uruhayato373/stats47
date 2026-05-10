@@ -141,10 +141,11 @@ export function RankingKeyPageClient({
         return baseInfo;
     }, [rankingItem, normalizationType]);
 
-    const buildUrl = (year: string, area: AreaType) => {
+    const buildUrl = (year: string, area: AreaType, norm?: string) => {
         const params = new URLSearchParams();
         if (year) params.set("year", year);
         if (area !== "prefecture") params.set("areaType", area);
+        if (norm) params.set("norm", norm);
         const qs = params.toString();
         return qs ? `${pathname}?${qs}` : pathname;
     };
@@ -152,7 +153,7 @@ export function RankingKeyPageClient({
     const handleYearChange = (newYear: string) => {
         trackYearChange({ rankingKey, fromYear: currentYear, toYear: newYear });
         setCurrentYear(newYear);
-        window.history.replaceState(null, "", buildUrl(newYear, currentAreaType));
+        window.history.replaceState(null, "", buildUrl(newYear, currentAreaType, normalizationType));
         startTransition(async () => {
             const result = await fetchRankingValuesAction(
                 rankingKey,
@@ -219,7 +220,19 @@ export function RankingKeyPageClient({
                 });
             }
         } else if (urlYear && urlYear !== selectedYear) {
-            handleYearChange(urlYear);
+            // year と norm が同時に指定されている場合、両方を一度のリクエストで処理する
+            setCurrentYear(urlYear);
+            window.history.replaceState(null, "", buildUrl(urlYear, currentAreaType, urlNorm));
+            startTransition(async () => {
+                const result = await fetchRankingValuesAction(
+                    rankingKey,
+                    currentAreaType,
+                    urlYear,
+                    urlNorm,
+                    parentAreaCode,
+                );
+                if (isOk(result)) setRankingValues(result.data);
+            });
         } else if (urlNorm) {
             startTransition(async () => {
                 if (!currentYear) return;

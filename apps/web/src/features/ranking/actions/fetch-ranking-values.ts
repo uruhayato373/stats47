@@ -3,6 +3,7 @@
 import {
   computeNormalization,
   fetchRankingValuesOnDemand,
+  readNormalizedRankingValuesFromR2,
   readRankingValuesFromR2,
   readRankingItemFromR2,
 } from "@stats47/ranking/server";
@@ -35,11 +36,19 @@ export async function fetchRankingValuesAction(
 
     // 正規化が指定されている場合
     if (normalizationType) {
-      values = await computeNormalization(
-        rankingItem,
+      // 事前計算済み R2 スナップショットを優先使用
+      const normResult = await readNormalizedRankingValuesFromR2(
+        rankingKey,
+        areaType,
         yearCode,
-        normalizationType
+        normalizationType,
       );
+      if (isOk(normResult) && normResult.data.length > 0) {
+        values = normResult.data;
+      } else {
+        // フォールバック: 実行時計算（カスタム denominatorKey 等）
+        values = await computeNormalization(rankingItem, yearCode, normalizationType);
+      }
     } else {
       // DB から取得（なければ e-Stat API からオンデマンド取得 + キャッシュ）
       const result = await readRankingValuesFromR2(rankingKey, areaType, yearCode);
