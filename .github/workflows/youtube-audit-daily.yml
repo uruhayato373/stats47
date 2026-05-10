@@ -46,6 +46,30 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .claude/scripts/youtube/youtube-daily-audit.mjs
 
+      - name: 🔒 Auto-close issue #88 if verdict=healthy
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERDICT=$(tail -1 .claude/state/metrics/youtube/history.csv | cut -d, -f2)
+          STATE=$(gh issue view 88 --json state -q .state 2>/dev/null || echo "")
+          echo "verdict=${VERDICT} / issue state=${STATE}"
+          if [ "$VERDICT" = "healthy" ] && [ "$STATE" = "OPEN" ]; then
+            gh issue close 88 --comment "$(cat <<'COMMENT'
+## ✅ シャドウバン回復確認 — 自動クローズ
+
+daily audit verdict: `healthy`
+
+17本のプライベート動画は 2026-05-10 に公開復元済み。OAuth チャンネル誤認証も修正済み。
+
+_youtube-audit-daily.yml による自動判定_
+COMMENT
+)"
+            echo "issue #88 をクローズしました"
+          else
+            echo "クローズ条件未達 (verdict=${VERDICT}, state=${STATE}) — スキップ"
+          fi
+
       - name: 📄 Write GitHub Step Summary
         if: always()
         run: |
