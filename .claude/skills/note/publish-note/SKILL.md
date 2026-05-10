@@ -13,6 +13,16 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - `/post-note-ranking` で生成した A シリーズ記事を投稿
 - 複数記事をバッチで一括予約投稿
 
+## 記事ディレクトリの運用ルール
+
+| 状態 | 置き場所 |
+|---|---|
+| 下書き（未公開） | `docs/31_note記事原稿/<slug>/` |
+| 公開済み | `.local/r2/note/<slug>/` |
+
+**公開後は `docs/31_note記事原稿/<slug>/` を `.local/r2/note/<slug>/` に移動すること。**
+Phase 0 のデータ読み込みは両方のパスを検索するため、移動後も `/publish-note` の参照は正常に動作する。
+
 ## 引数（バッチ対応）
 
 カンマ区切りで複数記事を指定可能:
@@ -30,7 +40,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 1. browser-use CLI がインストール済み
 2. 記事ファイルが存在する: `docs/31_note記事原稿/<slug>/note.md` または `.local/r2/note/<slug>/note.md`
-3. Chrome Default プロファイルで note.com にログイン済み
+3. Chrome Profile 1 で note.com にログイン済み
 
 ## browser-use 共通設定
 
@@ -38,7 +48,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 ```
 
-**全コマンド**: `browser-use --headed --profile Default <command>`
+**全コマンド**: `browser-use --headed --profile "Profile 1" <command>`
 
 - `--session` 指定しない（デフォルトセッション）
 - `$BU` 変数は使わない。毎回フルコマンドを書く
@@ -52,7 +62,7 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 
 ```bash
 # 1. Chrome ページを閉じる（best effort）
-browser-use --headed --profile Default close 2>/dev/null || true
+browser-use --headed --profile "Profile 1" close 2>/dev/null || true
 
 # 2. daemon と紐付く chromium インスタンスを完全停止
 pkill -TERM -f "browser_use.skill_cli.daemon" 2>/dev/null
@@ -97,7 +107,7 @@ end tell' 2>/dev/null || true
 主なポイント:
 - **Phase 0**: Node.js スクリプトで note.md を読み込み、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
-- **Phase 4**: 最初のセグメントのみ ClipboardEvent でペースト。残りは全て `type` コマンドで入力（ClipboardEvent は最初の1回のみ確実に動作する制約あり）
+- **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。URL は plain text のまま貼られる（カード化は手動）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
 
 ### Phase 7: 公開設定
@@ -106,7 +116,8 @@ end tell' 2>/dev/null || true
 
 主なポイント:
 - 「公開に進む」→ ハッシュタグ入力 → 日時設定 → 予約投稿
-- 予約日時が指定されていない場合は Phase 7 をスキップ（下書き保存のみ）
+- 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
+- 日時も即時公開も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 
 ## 重要な注意事項
 

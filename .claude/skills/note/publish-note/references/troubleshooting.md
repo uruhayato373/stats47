@@ -8,7 +8,7 @@
 
 ```bash
 # state を1回取得して /tmp/note-state.txt に保存
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 
 # テキストでインデックスを検索する関数
 find_idx() {
@@ -25,12 +25,12 @@ find_idx_retry() {
   local IDX=$(find_idx "$TARGET")
   if [ -z "$IDX" ]; then
     sleep 3
-    browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+    browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
     IDX=$(find_idx "$TARGET")
   fi
   if [ -z "$IDX" ]; then
     sleep 3
-    browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+    browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
     IDX=$(find_idx "$TARGET")
   fi
   echo "$IDX"
@@ -83,14 +83,14 @@ find_idx_retry() {
 - **要素が見つからない場合**: `find_idx_retry` で最大2回リトライ（sleep 3 + state 再取得）。それでも見つからない場合はそのステップをスキップして続行
 - **ログインしていない場合**: 停止してユーザーに手動ログインを案内
 - **画像アップロード失敗**: テキストのみで下書き保存し、画像挿入はスキップ
-- **セッション切れ**: `browser-use close` → `browser-use --headed --profile Default open` で再起動
+- **セッション切れ**: `browser-use close` → `browser-use --headed --profile "Profile 1" open` で再起動
 - **DOM が Empty**: `sleep 3` → state 再取得
 
 ## 注意
 
-- **認証情報は扱わない**: Chrome Default プロファイルのセッションに依存
+- **認証情報は扱わない**: Chrome Profile 1 のセッションに依存（note.com ログイン済み）
 - **要素インデックスは毎回変わる**: state で都度確認。ハードコードしない
 - **一時ファイルは `/tmp/` に作成**: `note-data-<slug>.json`, `note-state.txt`, スクリーンショット等
-- **$BU 変数を使わない**: 毎回 `browser-use --headed --profile Default` をフルで書く
+- **$BU 変数を使わない**: 毎回 `browser-use --headed --profile "Profile 1"` をフルで書く
 - **`--session` は指定しない**: デフォルトセッション使用
 - **B/C/D シリーズ**: 画像配置が異なる場合あり。note.md の `![...](...)` 行を参照して挿入先を判断
