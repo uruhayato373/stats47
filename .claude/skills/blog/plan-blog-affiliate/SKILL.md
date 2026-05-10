@@ -207,7 +207,7 @@ WHERE tags LIKE '%賃金%' OR tags LIKE '%転職%' -- etc.
 ## 注意
 
 - **記事の価値を最優先**: アフィリエイトはあくまで補助導線。データ分析記事としての価値が第一
-- **押し売りしない**: 記事本文にアフィリエイトリンクは入れない。`ArticleAffiliateSections` コンポーネントがタグベースで自動配置する
+- **押し売りしない**: 記事本文への `<affiliate-banner>` 配置は 1 箇所まで。配置ルールと記法は `/monetize-article` と `md-syntax` を参照。`ArticleAffiliateSections` コンポーネントによるタグベース自動配置も引き続き機能する
 - **TAG_AFFILIATE_MAP を意識**: 記事の `tags` にマッピング対象のタグを含めれば、アフィリエイトが自動表示される
 - **DB + e-Stat API の両面で探索**: `estat_metainfo` を出発点としつつ、e-Stat API（`/search-estat`）で DB にない関連データも積極的に探す
 - **時系列データの活用**: `/fetch-article-data` で `cdArea: "00000"` を使えば、ランキング用と同じ statsDataId + cdCat01 で全国時系列が取得できる。別の statsDataId を探す必要がないケースが多い

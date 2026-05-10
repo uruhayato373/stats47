@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
+import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
@@ -136,7 +137,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     const articleTagData = await getTagKeysForArticle(slug);
     const tagKeys = articleTagData.map((t) => t.tagKey);
-    const relatedArticles = await getRelatedArticles(tagKeys, slug);
+    const [relatedArticles, affiliateBannersByCategory] = await Promise.all([
+        getRelatedArticles(tagKeys, slug),
+        resolveAffiliateBannersByCategory(),
+    ]);
 
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
@@ -237,7 +241,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 </header>
 
                                 {/* 記事本文 */}
-                                <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} />
+                                <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
 
                                 {/* SNSシェアボタン */}
                                 <div className="mt-8 pt-6 border-t flex justify-center">

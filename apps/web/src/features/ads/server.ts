@@ -6,7 +6,7 @@ export {
   readActiveBannersByCategoryKeysFromR2 as findActiveBannersByCategoryKeys,
   readActiveBannersByLocationFromR2 as findActiveBannersByLocation,
 } from "./repositories/affiliate-ad-snapshot";
-export { resolveAffiliateAd, resolveAffiliateBanners } from "./services/resolve-affiliate-ad";
+export { resolveAffiliateAd, resolveAffiliateBanners, resolveAffiliateBannersByCategory } from "./services/resolve-affiliate-ad";
 export { fetchAffiliateAdAction } from "./actions/fetch-affiliate-ad";
 export { AffiliateAdSlot } from "./components/AffiliateAdSlot";
 export type { ResolvedAffiliateAd, ResolvedAffiliateBanner } from "./services/resolve-affiliate-ad";

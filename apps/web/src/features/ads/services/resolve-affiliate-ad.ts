@@ -1,6 +1,7 @@
 import {
   CATEGORY_AFFILIATE_MAP,
   TAG_AFFILIATE_MAP,
+  type AffiliateCategory,
 } from "../constants/affiliate-category";
 import {
   readActiveAdByCategoryFromR2 as findActiveAdByCategory,
@@ -78,4 +79,31 @@ export async function resolveAffiliateBanners(
       width: b.width ?? 300,
       height: b.height ?? 250,
     }));
+}
+
+/**
+ * すべての AffiliateCategory に対してバナーを一括解決する。
+ * category prop で affiliate-banner を宣言的に配置する際のサーバー側解決に使う。
+ */
+export async function resolveAffiliateBannersByCategory(): Promise<Partial<Record<AffiliateCategory, ResolvedAffiliateBanner>>> {
+  const allCategoryKeys = Object.keys(CATEGORY_AFFILIATE_MAP);
+  const banners = await findActiveBannersByCategoryKeys(allCategoryKeys, 100);
+
+  const result: Partial<Record<AffiliateCategory, ResolvedAffiliateBanner>> = {};
+
+  for (const b of banners) {
+    if (!b.imageUrl || !b.trackingPixelUrl || !b.categoryKey) continue;
+    const affiliateCategory = CATEGORY_AFFILIATE_MAP[b.categoryKey];
+    if (!affiliateCategory || result[affiliateCategory]) continue;
+    result[affiliateCategory] = {
+      title: b.title,
+      href: b.htmlContent,
+      imageUrl: b.imageUrl,
+      trackingPixelUrl: b.trackingPixelUrl,
+      width: b.width ?? 300,
+      height: b.height ?? 250,
+    };
+  }
+
+  return result;
 }
