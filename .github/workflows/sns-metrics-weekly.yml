@@ -1,0 +1,99 @@
+name: 📊 SNS Metrics Weekly (Instagram + YouTube)
+
+# X は API 従量課金のため収集対象外。Instagram (Graph API) + YouTube (Data API v3) のみ。
+# 毎週日曜 JST 20:30 に実行（fetch-metrics-weekly の 30 分後）。
+
+on:
+  schedule:
+    - cron: "30 11 * * 0" # JST 20:30 Sunday (UTC 11:30)
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "対象プラットフォーム (instagram / youtube / all)"
+        required: false
+        default: "all"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sns-metrics-weekly
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔑 Compose .env.local (YouTube OAuth)
+        run: |
+          cat > .env.local <<EOF
+          GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN=${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          EOF
+
+      - name: 📸 Instagram metrics
+        if: inputs.platform == '' || inputs.platform == 'all' || inputs.platform == 'instagram'
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: node .claude/scripts/instagram/fetch-metrics-ci.cjs
+
+      - name: 📺 YouTube metrics
+        if: inputs.platform == '' || inputs.platform == 'all' || inputs.platform == 'youtube'
+        run: node .claude/scripts/youtube/fetch-metrics-ci.cjs
+
+      - name: 📤 Commit snapshot to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          SNAPSHOT_DIR=".claude/skills/analytics/sns-metrics-improvement/snapshots"
+          git add "$SNAPSHOT_DIR"
+
+          if git diff --cached --quiet; then
+            echo "変更なし、コミットをスキップ"
+            exit 0
+          fi
+
+          DATE=$(date -u +%Y-%m-%d)
+          git commit -m "chore(sns-metrics): weekly snapshot ${DATE} (instagram + youtube) [skip ci]"
+          git push origin develop
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          SNAPSHOT=".claude/skills/analytics/sns-metrics-improvement/snapshots/${DATE}/metrics.csv"
+          echo "# SNS Metrics Weekly — ${DATE}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "$SNAPSHOT" ]; then
+            COUNT=$(wc -l < "$SNAPSHOT")
+            echo "- 記録件数: $((COUNT - 1)) 行" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            head -6 "$SNAPSHOT" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "スナップショットファイルが見つかりません" >> $GITHUB_STEP_SUMMARY
+          fi
