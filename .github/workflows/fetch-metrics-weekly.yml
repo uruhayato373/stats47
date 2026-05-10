@@ -75,6 +75,9 @@ jobs:
       - name: 📝 Update history.csv and LATEST.md
         run: npm run metrics:digest -- ${{ steps.week.outputs.week }}
 
+      - name: 📋 Generate blog brushup priority queue
+        run: node .claude/scripts/blog/generate-brushup-queue.cjs ${{ steps.week.outputs.week }}
+
       - name: 📄 Write GitHub Step Summary
         if: always()
         run: |
@@ -89,11 +92,12 @@ jobs:
 
       - name: 📦 Stage metrics outputs
         run: |
-          mkdir -p /tmp/metrics-publish/snapshots /tmp/metrics-publish/state
+          mkdir -p /tmp/metrics-publish/snapshots /tmp/metrics-publish/state /tmp/metrics-publish/blog-queue
           cp -r .claude/skills/analytics/gsc-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/gsc 2>/dev/null || true
           cp -r .claude/skills/analytics/ga4-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/ga4 2>/dev/null || true
           cp -r .claude/skills/analytics/adsense-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/adsense 2>/dev/null || true
           cp -r .claude/state/metrics/. /tmp/metrics-publish/state 2>/dev/null || true
+          cp docs/20_ブログ記事企画/brushup-queue.md /tmp/metrics-publish/blog-queue/ 2>/dev/null || true
           find /tmp/metrics-publish -maxdepth 4 -type f | head -40
 
       - name: 📤 Publish to develop branch
@@ -118,11 +122,14 @@ jobs:
           cp -r /tmp/metrics-publish/snapshots/ga4/. .claude/skills/analytics/ga4-improvement/reference/snapshots/ 2>/dev/null || true
           cp -r /tmp/metrics-publish/snapshots/adsense/. .claude/skills/analytics/adsense-improvement/reference/snapshots/ 2>/dev/null || true
           cp -r /tmp/metrics-publish/state/. .claude/state/metrics/ 2>/dev/null || true
+          mkdir -p "docs/20_ブログ記事企画"
+          cp /tmp/metrics-publish/blog-queue/brushup-queue.md "docs/20_ブログ記事企画/" 2>/dev/null || true
 
           git add .claude/skills/analytics/gsc-improvement/reference/snapshots
           git add .claude/skills/analytics/ga4-improvement/reference/snapshots
           git add .claude/skills/analytics/adsense-improvement/reference/snapshots
           git add .claude/state/metrics
+          git add "docs/20_ブログ記事企画/brushup-queue.md" 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No metrics changes to publish"
