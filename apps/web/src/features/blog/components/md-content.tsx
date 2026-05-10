@@ -12,7 +12,7 @@ import remarkGfm from "remark-gfm";
 
 import { BannerAd } from "@/features/ads";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
@@ -199,10 +199,11 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
         ),
 
         "ad-slot": () => (
-            <div className="my-8 flex justify-center not-prose">
+            <div className="my-8 not-prose">
                 <AdSenseAd
-                    format={RANKING_PAGE_FOOTER.format}
-                    slotId={RANKING_PAGE_FOOTER.slotId}
+                    format={BLOG_ARTICLE_INLINE.format}
+                    slotId={BLOG_ARTICLE_INLINE.slotId}
+                    showLabel={false}
                 />
             </div>
         ),
