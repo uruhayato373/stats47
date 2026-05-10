@@ -33,6 +33,8 @@ let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
 body = body.replace(/<!-- note投稿時:.*?-->\n?/g, '');
 body = body.replace(/!\[.*?\]\(.*?\)\n?/g, '');
 body = body.replace(/^---$/gm, '');
+// ハッシュタグセクション除去（「## 公開時にコピーするハッシュタグ」以降を削除）
+body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, '');
 body = body.trim();
 
 // セグメント分割（URL vs テキスト）
