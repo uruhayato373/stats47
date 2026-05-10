@@ -119,13 +119,14 @@ export function AdSenseAd({
     return null;
   }
 
-  const reservedMinHeight = getReservedMinHeight(format);
+  const isArticleFormat = format === "article";
+  const reservedMinHeight = isArticleFormat ? 0 : getReservedMinHeight(format);
 
   return (
     <div
       ref={adRef}
       className={`ad-container w-full flex flex-col items-center ${className}`}
-      style={{ minHeight: `${reservedMinHeight}px` }}
+      style={reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
     >
       {showLabel && (
         <div className="text-xs text-muted-foreground text-center mb-1">
@@ -133,20 +134,32 @@ export function AdSenseAd({
         </div>
       )}
       {isVisible ? (
-        <ins
-          className="adsbygoogle"
-          style={{
-            display: "block",
-            width: "100%",
-            minHeight: `${reservedMinHeight}px`,
-          }}
-          data-ad-client={clientId}
-          data-ad-slot={slotId}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
+        isArticleFormat ? (
+          // 記事内広告（fluid / in-article）: Google 推奨の属性構成
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", textAlign: "center" }}
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client={clientId}
+            data-ad-slot={slotId}
+          />
+        ) : (
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: "block",
+              width: "100%",
+              minHeight: `${reservedMinHeight}px`,
+            }}
+            data-ad-client={clientId}
+            data-ad-slot={slotId}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        )
       ) : (
-        // 遅延ロード中のスペース確保（CLSの防止、最小値を広告サイズに合わせる）
+        // 遅延ロード中のスペース確保（CLSの防止）
         <div
           style={{ width: "100%", minHeight: `${reservedMinHeight}px` }}
           className="bg-gray-100"

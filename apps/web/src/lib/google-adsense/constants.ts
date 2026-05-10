@@ -44,6 +44,12 @@ export const RANKING_PAGE_FOOTER: AdSlotConfig = {
   format: "rectangle",
 };
 
+/** ブログ記事内インライン広告（記事内 / fluid） */
+export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
+  slotId: "5610987738",
+  format: "article",
+};
+
 /** 比較ページ: 右サイドバー */
 export const COMPARE_PAGE_SIDEBAR: AdSlotConfig = {
   slotId: "6180558947",
