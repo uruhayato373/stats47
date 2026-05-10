@@ -35,7 +35,7 @@ export function BlogOgp({ data }: Props) {
           top: 0,
           width: 285,
           height: 630,
-          background: BRAND.paper,
+          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, #fff 20px 40px)`,
         }}
       />
       <div
@@ -45,7 +45,20 @@ export function BlogOgp({ data }: Props) {
           top: 0,
           width: 285,
           height: 630,
-          background: BRAND.paper,
+          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, #fff 20px 40px)`,
+        }}
+      />
+
+      {/* 中央パネル */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 285,
+          top: 0,
+          width: 630,
+          height: 630,
+          background: '#fff',
+          boxShadow: '0 0 40px rgba(15,23,42,0.08)',
         }}
       />
 
@@ -97,9 +110,10 @@ export function BlogOgp({ data }: Props) {
             style={{
               fontFamily: FONT.sansJP,
               fontWeight: 900,
-              fontSize: 42,
+              fontSize: 46,
               color: BRAND.ink,
-              lineHeight: 1.3,
+              lineHeight: 1.25,
+              letterSpacing: -1,
             }}
           >
             {data.title}
@@ -109,15 +123,14 @@ export function BlogOgp({ data }: Props) {
               width: 60,
               height: 3,
               background: BRAND.vermilion,
-              marginTop: 20,
-              marginBottom: 16,
+              margin: '20px 0',
             }}
           />
           {data.subtitle && (
             <div
               style={{
                 fontFamily: FONT.sansJP,
-                fontSize: 17,
+                fontSize: 18,
                 color: BRAND.muted,
                 fontWeight: 500,
               }}

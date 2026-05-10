@@ -1,17 +1,18 @@
 #!/usr/bin/env tsx
 /**
- * ブログ記事サムネイル一括生成 (Satori + sharp)
+ * ブログ記事サムネイル・OGP PNG 一括生成 (Satori + sharp)
  *
  * Usage:
  *   npx tsx apps/web/scripts/generate-blog-thumbnails.ts
  *   npx tsx apps/web/scripts/generate-blog-thumbnails.ts --force
  *   npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug noodle-consumption-prefecture-character
  *
- * 出力: .local/r2/blog/{slug}/thumbnail-light.webp
- *       .local/r2/blog/{slug}/thumbnail-dark.webp
+ * 出力: .local/r2/app/blog/{slug}/thumbnail-light.webp
+ *       .local/r2/app/blog/{slug}/thumbnail-dark.webp
+ *       .local/r2/app/blog/{slug}/ogp/ogp.png
  */
 
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createElement } from "react";
 
@@ -77,6 +78,10 @@ function buildElement(data: OgpData, dark: boolean) {
   const FONT_JP = '"Noto Sans JP", sans-serif';
   const FONT_MONO = '"JetBrains Mono", monospace';
 
+  const stripePattern = dark
+    ? `repeating-linear-gradient(135deg, ${panel} 0 20px, ${bg} 20px 40px)`
+    : `repeating-linear-gradient(135deg, ${panel} 0 20px, #fff 20px 40px)`;
+
   return createElement(
     "div",
     {
@@ -98,7 +103,7 @@ function buildElement(data: OgpData, dark: boolean) {
         top: 0,
         width: 285,
         height: 630,
-        background: panel,
+        background: stripePattern,
       },
     }),
     // right stripe
@@ -109,9 +114,23 @@ function buildElement(data: OgpData, dark: boolean) {
         top: 0,
         width: 285,
         height: 630,
-        background: panel,
+        background: stripePattern,
       },
     }),
+    // center panel (light only - shadow not supported in Satori)
+    !dark
+      ? createElement("div", {
+          style: {
+            position: "absolute",
+            left: 285,
+            top: 0,
+            width: 630,
+            height: 630,
+            background: "#fff",
+            boxShadow: "0 0 40px rgba(15,23,42,0.08)",
+          },
+        })
+      : null,
     // content
     createElement(
       "div",
@@ -170,9 +189,10 @@ function buildElement(data: OgpData, dark: boolean) {
             style: {
               fontFamily: FONT_JP,
               fontWeight: 900,
-              fontSize: 42,
+              fontSize: 46,
               color: titleColor,
-              lineHeight: 1.3,
+              lineHeight: 1.25,
+              letterSpacing: -1,
             },
           },
           data.title,
@@ -192,7 +212,7 @@ function buildElement(data: OgpData, dark: boolean) {
               {
                 style: {
                   fontFamily: FONT_JP,
-                  fontSize: 17,
+                  fontSize: 18,
                   color: mutedColor,
                   fontWeight: 500,
                 },
@@ -269,6 +289,15 @@ async function renderToWebP(
   await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(outputPath);
 }
 
+async function renderToPng(
+  element: ReturnType<typeof createElement>,
+  fonts: SatoriFont[],
+  outputPath: string,
+) {
+  const svg = await satori(element, { width: 1200, height: 630, fonts });
+  await sharp(Buffer.from(svg)).png().toFile(outputPath);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const force = args.includes("--force");
@@ -295,13 +324,15 @@ async function main() {
     const ogpJson = join(dir, "ogp/ogp.json");
     const lightOut = join(dir, "thumbnail-light.webp");
     const darkOut = join(dir, "thumbnail-dark.webp");
+    const ogpDir = join(dir, "ogp");
+    const ogpPng = join(ogpDir, "ogp.png");
 
     if (!existsSync(ogpJson)) {
       skipped++;
       continue;
     }
 
-    if (!force && existsSync(lightOut) && existsSync(darkOut)) {
+    if (!force && existsSync(lightOut) && existsSync(darkOut) && existsSync(ogpPng)) {
       skipped++;
       continue;
     }
@@ -315,6 +346,8 @@ async function main() {
 
     await renderToWebP(buildElement(data, false), fonts, lightOut);
     await renderToWebP(buildElement(data, true), fonts, darkOut);
+    mkdirSync(ogpDir, { recursive: true });
+    await renderToPng(buildElement(data, false), fonts, ogpPng);
 
     console.log("ok");
     generated++;

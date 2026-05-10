@@ -85,7 +85,7 @@ export function AreaCatOgp({ data }: Props) {
           <div
             style={{
               fontFamily: FONT.sansJP,
-              fontSize: 20,
+              fontSize: 22,
               color: BRAND.muted,
               marginTop: 6,
             }}
@@ -96,9 +96,10 @@ export function AreaCatOgp({ data }: Props) {
             style={{
               fontFamily: FONT.sansJP,
               fontWeight: 900,
-              fontSize: 80,
+              fontSize: 88,
               color: BRAND.ink,
               lineHeight: 1,
+              letterSpacing: -2,
               marginTop: -2,
             }}
           >
@@ -113,6 +114,7 @@ export function AreaCatOgp({ data }: Props) {
               width: '100%',
               background: '#fff',
               padding: 16,
+              boxShadow: '0 8px 24px rgba(15,23,42,0.08)',
               display: 'flex',
               flexWrap: 'wrap',
               gap: 10,
@@ -150,7 +152,7 @@ export function AreaCatOgp({ data }: Props) {
                   <div
                     style={{
                       fontFamily: FONT.mono,
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 800,
                       color: BRAND.ink,
                       marginTop: 2,

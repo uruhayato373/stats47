@@ -28,30 +28,22 @@ function syncGtag(value: "granted" | "denied") {
   }
 }
 
-// SSR は false（ハイドレーション一致）。クライアントは document.cookie を同期読み取り。
-// React 18 は hydration mismatch を同期 re-render で解決するため、
-// useEffect + setTimeout より早いタイミングでバナーが表示される。
-function getInitialVisible(): boolean {
-  if (typeof document === "undefined") return false;
-  return !document.cookie.includes(`${CONSENT_COOKIE_NAME}=`);
-}
-
 /**
  * Cookie 同意バナー
  *
- * EXP-004b: document.cookie を初期 useState で同期読み取りし、setTimeout を排除。
- * layout.tsx は非 async のまま維持するため SSG ページの破壊なし。
- * gtag consent 同期は useEffect で行う（LCP に影響しない）。
+ * 初期値は false（サーバーと一致させてハイドレーションミスマッチを防ぐ）。
+ * マウント後に document.cookie を確認してバナー表示・gtag 同期を行う。
  */
 export function CookieConsentBanner() {
-  const [visible, setVisible] = useState(getInitialVisible);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // 既存ユーザー（cookie あり）の gtag consent 同期
     const cookieMatch = document.cookie.match(new RegExp(`${CONSENT_COOKIE_NAME}=([^;]+)`));
     const consent = cookieMatch?.[1];
     if (consent === "granted" || consent === "denied") {
       syncGtag(consent);
+    } else {
+      setVisible(true);
     }
   }, []);
 

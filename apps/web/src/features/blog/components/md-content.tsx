@@ -89,15 +89,9 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                 slug && !src.startsWith("http") && !src.startsWith("/")
                     ? `https://storage.stats47.jp/app/blog/${slug}/${src}`
                     : src;
-            // SVG はファイル名で判定してアスペクト比予約 (CLS 対策)。
-            // 2026-04 Web Analytics で spending-ranking.svg が LCP 5,496ms、CLS 原因の 1 つ。
-            // 実サイズは frontmatter 未導入のため 16:9 (800:450) を予約し、CSS の aspect-ratio で
-            // レンダリング前にレイアウト確定させる。
-            const isSvg = resolvedSrc.toLowerCase().endsWith(".svg");
             return (
                 <span
-                    className="block mt-2 -mx-6 sm:-mx-8 overflow-x-hidden"
-                    style={{ aspectRatio: isSvg ? "16 / 9" : undefined }}
+                    className="block mt-2 -mx-6 sm:-mx-8 overflow-x-hidden not-prose"
                 >
                     <Image
                         src={resolvedSrc}

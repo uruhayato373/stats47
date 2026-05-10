@@ -83,9 +83,10 @@ export function RankingOgp({ data }: Props) {
             style={{
               fontFamily: FONT.sansJP,
               fontWeight: 900,
-              fontSize: 40,
+              fontSize: 44,
               color: BRAND.ink,
               lineHeight: 1.15,
+              letterSpacing: -1,
             }}
           >
             {data.title}
@@ -107,6 +108,7 @@ export function RankingOgp({ data }: Props) {
           style={{
             background: '#fff',
             padding: '18px 22px',
+            boxShadow: '0 10px 32px rgba(15,23,42,0.10)',
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -137,7 +139,8 @@ export function RankingOgp({ data }: Props) {
               <span
                 style={{
                   fontFamily: FONT.display,
-                  fontSize: 28,
+                  fontStyle: 'italic',
+                  fontSize: 30,
                   fontWeight: 900,
                   color: BRAND.ink,
                   minWidth: 48,
@@ -148,7 +151,7 @@ export function RankingOgp({ data }: Props) {
               <span
                 style={{
                   fontFamily: FONT.sansJP,
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: 700,
                   color: BRAND.ink,
                   flex: 1,
@@ -157,7 +160,7 @@ export function RankingOgp({ data }: Props) {
                 {p.name}
               </span>
               <span
-                style={{ fontFamily: FONT.mono, fontSize: 20, fontWeight: 800, color: BRAND.ink }}
+                style={{ fontFamily: FONT.mono, fontSize: 22, fontWeight: 800, color: BRAND.ink }}
               >
                 {p.value}
                 <span style={{ fontSize: 11, color: BRAND.muted, marginLeft: 2 }}>{data.unit}</span>
@@ -172,6 +175,7 @@ export function RankingOgp({ data }: Props) {
             style={{
               background: '#fff',
               padding: '14px 22px',
+              boxShadow: '0 6px 20px rgba(15,23,42,0.06)',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -192,7 +196,8 @@ export function RankingOgp({ data }: Props) {
               <span
                 style={{
                   fontFamily: FONT.display,
-                  fontSize: 20,
+                  fontStyle: 'italic',
+                  fontSize: 22,
                   fontWeight: 900,
                   color: BRAND.vermilion,
                   minWidth: 48,
@@ -203,7 +208,7 @@ export function RankingOgp({ data }: Props) {
               <span
                 style={{
                   fontFamily: FONT.sansJP,
-                  fontSize: 15,
+                  fontSize: 16,
                   fontWeight: 700,
                   color: BRAND.ink,
                   flex: 1,
@@ -212,7 +217,7 @@ export function RankingOgp({ data }: Props) {
                 {data.last.name}
               </span>
               <span
-                style={{ fontFamily: FONT.mono, fontSize: 17, fontWeight: 800, color: BRAND.vermilion }}
+                style={{ fontFamily: FONT.mono, fontSize: 18, fontWeight: 800, color: BRAND.vermilion }}
               >
                 {data.last.value}
               </span>

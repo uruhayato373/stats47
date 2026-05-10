@@ -100,7 +100,21 @@ nlm cross query --notebooks "<ノートブック名>" \
 
 Edit ツールで最小限の変更を適用する。
 
-### Step 5: 完了レポート
+### Step 5: bold+括弧レンダリングバグ検出・修正（必須）
+
+```bash
+node .claude/scripts/blog/lint-article.cjs <slug>
+```
+
+exit 1（問題あり）の場合は、検出行を Edit ツールで修正する。
+
+修正パターン:
+- `**text（内側）**` → `**text**（内側）` （括弧をボールドの外へ移動）
+- `**text（内側）**:` → `**text**（内側）:` （コロン前も同様）
+
+修正後に再度 lint を実行して exit 0 を確認してから次へ進む。
+
+### Step 6: 完了レポート
 
 ```
 === /brushup-blog-article: <slug> 完了 ===
@@ -108,6 +122,7 @@ Edit ツールで最小限の変更を適用する。
 D1 クエリ結果: <件数> 件
 補強したセクション: <H2 名>
 変更内容: <1-2 行で要約>
+bold lint: ✅ exit 0
 ```
 
 ## 参照

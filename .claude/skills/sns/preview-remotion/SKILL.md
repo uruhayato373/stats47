@@ -1,6 +1,6 @@
 ---
 name: preview-remotion
-description: 実データで Remotion Studio のプレビュー用データファイルを上書きする。--type で対象を選ぶ（ranking / area-profile / bar-chart-race / blog / comparison / correlation）。Use when user says "プレビュー", "Remotion プレビュー", "ランキングプレビュー", "BCR プレビュー", "ブログ OGP プレビュー", "比較プレビュー", "相関プレビュー", "地域プロファイルプレビュー". HMR で自動反映.
+description: 実データで Remotion Studio のプレビュー用データファイルを上書きする。--type で対象を選ぶ（ranking / area-profile / bar-chart-race / comparison / correlation）。Use when user says "プレビュー", "Remotion プレビュー", "ランキングプレビュー", "BCR プレビュー", "比較プレビュー", "相関プレビュー", "地域プロファイルプレビュー". HMR で自動反映.
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,6 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
                      ranking         : ランキング 47 都道府県（既定）
                      area-profile    : 地域プロファイル（強み弱み）
                      bar-chart-race  : Bar Chart Race アニメーション
-                     blog            : ブログ OGP（title/subtitle）
                      comparison      : 2 地域比較
                      correlation     : 相関散布図
 ```
@@ -30,7 +29,6 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
 | `ranking` | `types/ranking.md` | `apps/remotion/src/utils/preview-data.ts` | RankingX-Post / RankingInstagram-Carousel / RankingYouTube-Short |
 | `area-profile` | `types/area-profile.md` | `apps/remotion/src/utils/preview-data-area-profile.ts` | AreaProfileInstagram-Carousel / AreaProfileOgp |
 | `bar-chart-race` | `types/bar-chart-race.md` | `apps/remotion/src/utils/preview-data-bar-chart-race.ts` | BarChartRace 系 |
-| `blog` | `types/blog.md` | `apps/remotion/src/utils/preview-data-blog.ts` | BlogOgp |
 | `comparison` | `types/comparison.md` | `apps/remotion/src/utils/preview-data-comparison.ts` | CompareX-Post / CompareInstagram-Carousel / ComparisonOgp |
 | `correlation` | `types/correlation.md` | `apps/remotion/src/utils/preview-data-correlation.ts` | CorrelationX-Scatter / CorrelationScatterOgp |
 
@@ -66,4 +64,3 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
 - `/generate-compare` — 比較データ生成
 - `/render-sns-stills` — SNS 静止画一括レンダリング
 - `/render-bar-chart-race` — Bar Chart Race 動画レンダリング
-- `/preview-remotion --type blog` 経由のブログ OGP は `/import-blog-articles` の後で確認するのが定石

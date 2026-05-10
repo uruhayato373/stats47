@@ -46,7 +46,8 @@ export function DefaultOgp() {
           top: 0,
           width: 630,
           height: 630,
-          background: 'rgba(248,250,252,0.95)',
+          background: 'rgba(248,250,252,0.92)',
+          backdropFilter: 'blur(2px)',
           display: 'flex',
         }}
       />
@@ -83,11 +84,12 @@ export function DefaultOgp() {
         <div
           style={{
             fontFamily: FONT.display,
-            fontSize: 160,
+            fontSize: 200,
             fontWeight: 900,
             color: BRAND.ink,
             lineHeight: 0.9,
             letterSpacing: -8,
+            fontStyle: 'italic',
             display: 'flex',
           }}
         >
@@ -108,11 +110,11 @@ export function DefaultOgp() {
         <div
           style={{
             fontFamily: FONT.sansJP,
-            fontSize: 26,
+            fontSize: 28,
             fontWeight: 700,
             color: BRAND.ink,
             textAlign: 'center',
-            lineHeight: 1.4,
+            lineHeight: 1.35,
           }}
         >
           47都道府県をデータで読み解く

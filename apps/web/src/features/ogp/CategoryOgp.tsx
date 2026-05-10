@@ -58,7 +58,7 @@ export function CategoryOgp({ data }: Props) {
           top: 0,
           width: 630,
           height: 630,
-          background: 'rgba(255,255,255,0.88)',
+          background: 'rgba(255,255,255,0.85)',
           display: 'flex',
         }}
       />
@@ -96,9 +96,10 @@ export function CategoryOgp({ data }: Props) {
           style={{
             fontFamily: FONT.sansJP,
             fontWeight: 900,
-            fontSize: 200,
+            fontSize: 260,
             color: BRAND.ink,
             lineHeight: 0.9,
+            letterSpacing: -10,
           }}
         >
           {data.title}
@@ -114,18 +115,18 @@ export function CategoryOgp({ data }: Props) {
           }}
         />
 
-        <div style={{ fontFamily: FONT.sansJP, fontSize: 20, color: BRAND.muted, display: 'flex', alignItems: 'baseline', gap: 4 }}>
+        <div style={{ fontFamily: FONT.sansJP, fontSize: 22, color: BRAND.muted, display: 'flex', alignItems: 'baseline', gap: 4 }}>
           {indicatorCount > 0 && (
             <>
               <span
-                style={{ color: BRAND.primary, fontWeight: 900, fontSize: 26 }}
+                style={{ color: BRAND.primary, fontWeight: 900, fontSize: 28 }}
               >
                 {indicatorCount}
               </span>
               <span>指標 × </span>
             </>
           )}
-          <span style={{ color: BRAND.primary, fontWeight: 900, fontSize: 26 }}>47</span>
+          <span style={{ color: BRAND.primary, fontWeight: 900, fontSize: 28 }}>47</span>
           <span>都道府県</span>
         </div>
       </div>

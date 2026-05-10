@@ -24,7 +24,7 @@ Agent tool 経由で subagent を呼ぶ際は prompt の **冒頭** に Output F
 ```
 apps/
   web/       Next.js (Cloudflare Pages) — 公開サイト
-  remotion/  Remotion — 動画・OGP・サムネイル生成
+  remotion/  Remotion — 動画・SNS 投稿画像生成（YouTube/Instagram/X/note）
   ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
 packages/
   database/  Drizzle ORM + Cloudflare D1 スキーマ・シード

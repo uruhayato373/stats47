@@ -5,12 +5,6 @@
     "start": "remotion studio --port 3002",
     "build": "remotion render",
     "render": "remotion render src/index.ts RankingShort out/video.mp4",
-    "pipeline:ranking-thumbnails": "tsx scripts/pipeline/render-ranking-thumbnails.ts",
-    "pipeline:ranking-ogp": "tsx scripts/pipeline/render-ranking-ogp.ts",
-    "pipeline:all": "tsx scripts/pipeline/render-ranking-all.ts",
-    "pipeline:blog-ogp": "tsx scripts/pipeline/render-blog-ogp.ts",
-    "pipeline:blog-thumbnails": "tsx scripts/pipeline/render-blog-thumbnails.ts",
-    "pipeline:blog-assets": "tsx scripts/pipeline/render-blog-assets.ts",
     "pipeline:sns": "tsx scripts/pipeline/render-sns-all.ts",
     "pipeline:bar-chart-race": "tsx scripts/pipeline/render-bar-chart-race.ts"
   },

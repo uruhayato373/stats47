@@ -4,6 +4,7 @@ import { JapanMapSvg } from './JapanMapSvg';
 export interface AreaOgpData {
   prefCode: number;
   areaName: string;
+  reading?: string | null;
   strengths?: Array<{ rank: number; indicator: string }>;
   weaknesses?: Array<{ rank: number; indicator: string }>;
 }
@@ -82,6 +83,18 @@ export function AreaOgp({ data }: Props) {
           >
             AREA #{String(data.prefCode).padStart(2, '0')}
           </div>
+          {data.reading && (
+            <div
+              style={{
+                fontFamily: FONT.mono,
+                fontSize: 13,
+                color: BRAND.muted,
+                letterSpacing: 6,
+              }}
+            >
+              {data.reading}
+            </div>
+          )}
         </div>
 
         {/* 都道府県名 */}
@@ -89,9 +102,10 @@ export function AreaOgp({ data }: Props) {
           style={{
             fontFamily: FONT.sansJP,
             fontWeight: 900,
-            fontSize: 110,
+            fontSize: 140,
             color: BRAND.ink,
             lineHeight: 1,
+            letterSpacing: -3,
           }}
         >
           {data.areaName}
@@ -104,6 +118,7 @@ export function AreaOgp({ data }: Props) {
               width: '100%',
               background: '#fff',
               padding: 18,
+              boxShadow: '0 8px 28px rgba(15,23,42,0.1)',
               display: 'flex',
               gap: 16,
             }}
@@ -128,7 +143,7 @@ export function AreaOgp({ data }: Props) {
                     fontFamily: FONT.sansJP,
                     fontSize: 13,
                     paddingBottom: 3,
-                    borderBottom: `1px solid ${BRAND.line}`,
+                    borderBottom: `1px dotted ${BRAND.line}`,
                     marginBottom: 3,
                   }}
                 >
@@ -167,7 +182,7 @@ export function AreaOgp({ data }: Props) {
                     fontFamily: FONT.sansJP,
                     fontSize: 13,
                     paddingBottom: 3,
-                    borderBottom: `1px solid ${BRAND.line}`,
+                    borderBottom: `1px dotted ${BRAND.line}`,
                     marginBottom: 3,
                   }}
                 >
