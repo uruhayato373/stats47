@@ -30,8 +30,8 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
                 >
                     <div className="relative aspect-[1200/630] w-full bg-muted">
                         <ThemeAwareImage
-                            lightSrc={`${R2_PUBLIC_URL}/blog/${article.slug}/thumbnail-light.webp`}
-                            darkSrc={`${R2_PUBLIC_URL}/blog/${article.slug}/thumbnail-dark.webp`}
+                            lightSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-light.webp`}
+                            darkSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-dark.webp`}
                             alt={article.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
