@@ -212,7 +212,7 @@ export default async function CategoryPage({ params }: PageProps) {
                       href={`/blog/${article.slug}`}
                       className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
                     >
-                      <div className="relative aspect-[1200/630] w-full bg-muted">
+                      <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
                         <ThemeAwareImage
                           lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
                           darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}
