@@ -24,8 +24,8 @@ export function CookieConsentBanner() {
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_LS_KEY);
     if (!stored) {
-      setVisible(true);
-      return;
+      const timer = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(timer);
     }
 
     // gtag consent 同期
