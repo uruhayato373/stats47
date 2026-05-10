@@ -46,6 +46,16 @@ describe("generateRankingPageMetaData", () => {
         expect((result.twitter as Record<string, unknown>)?.card).toBe("summary_large_image");
     });
 
+    it("openGraph.images を設定しない（opengraph-image.tsx に委ねる）", () => {
+        const result = generateRankingPageMetaData({
+            rankingItem: mockItem as RankingItem,
+            areaType: "prefecture",
+        });
+
+        expect((result.openGraph as Record<string, unknown>)?.images).toBeUndefined();
+        expect((result.twitter as Record<string, unknown>)?.images).toBeUndefined();
+    });
+
     it("canonical URLが正しく設定されていること", () => {
         const result = generateRankingPageMetaData({
             rankingItem: mockItem as RankingItem,

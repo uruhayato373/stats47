@@ -27,6 +27,8 @@ import {
     articleService,
 } from "@/features/blog/server";
 
+import { generateBlogMetadata } from "@/features/blog/utils/generate-blog-metadata";
+
 import { getRequiredBaseUrl } from "@/lib/env";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
@@ -65,35 +67,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const title = article.frontmatter.seoTitle ?? article.title;
     const description = article.frontmatter.description ?? `${article.title} | stats47 ブログ`;
-    const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
-    const imageUrl = `${R2_PUBLIC_URL}/app/blog/${slug}/ogp/ogp.png`;
 
-    return {
-        title,
-        description,
-        alternates: {
-            canonical: `/blog/${slug}`,
-        },
-        openGraph: {
-            title,
-            description,
-            type: "article",
-            images: [
-                {
-                    url: imageUrl,
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title,
-            description,
-            images: [imageUrl],
-        },
-    };
+    return generateBlogMetadata({ title, description, slug });
 }
 
 async function getRelatedArticles(tagKeys: string[], currentSlug: string) {

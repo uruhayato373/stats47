@@ -34,6 +34,8 @@ import {
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { generateAreaMetadata } from "@/features/area-profile/utils/generate-area-metadata";
+
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
 
@@ -76,35 +78,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? `${profile.areaName}の統計プロファイル。${descriptionHighlights}。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`
       : `${profile.areaName}の特徴を統計データから分析。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`;
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
-    const imageUrl = `${baseUrl}/areas/${areaCode}/opengraph-image`;
-
-    return {
-        title,
-        description,
-        alternates: {
-            canonical: `/areas/${areaCode}`,
-        },
-        openGraph: {
-            title,
-            description,
-            type: "website",
-            images: [
-                {
-                    url: imageUrl,
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title,
-            description,
-            images: [imageUrl],
-        },
-    };
+    return generateAreaMetadata({ title, description, areaCode });
 }
 
 export default async function AreaProfilePage({ params }: PageProps) {

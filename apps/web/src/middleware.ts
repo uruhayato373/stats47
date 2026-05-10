@@ -213,6 +213,9 @@ function checkAreasPolicy(pathname: string): Response | null {
   const seg = pathname.split("/").filter(Boolean);
   if (seg[0] !== "areas") return null;
 
+  // Next.js 内部ルート（opengraph-image 等）は 410 対象外
+  if (seg[2] === "opengraph-image") return null;
+
   // /areas/{無効5桁コード}: cities セグメント以外は 410
   if (seg.length >= 2 && seg[1] !== "cities") {
     if (/^\d{5}$/.test(seg[1]) && !UrlPolicy.area.isValidPrefCode(seg[1])) {

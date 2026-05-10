@@ -31,6 +31,8 @@ import {
 import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { generateAreaCategoryMetadata } from "@/features/area-profile/utils/generate-area-metadata";
+
 import { UrlPolicy } from "@/lib/url-policy";
 
 import type { Metadata } from "next";
@@ -68,24 +70,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const description = `${profile.areaName}の${category.categoryName}分野の統計データ一覧。全国 47 都道府県で${profile.areaName}は何位か、グラフと地図で比較できます。`;
     const indexable = UrlPolicy.area.isIndexableCategory(categoryKey);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
-    const imageUrl = `${baseUrl}/areas/${areaCode}/opengraph-image`;
-
-    return {
-        title,
-        description,
-        alternates: {
-            canonical: `/areas/${areaCode}/${categoryKey}`,
-        },
-        robots: indexable ? "index, follow" : "noindex, follow",
-        openGraph: {
-            title,
-            description,
-            type: "website",
-            images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
-        },
-        twitter: { card: "summary_large_image", title, description, images: [imageUrl] },
-    };
+    return generateAreaCategoryMetadata({ title, description, areaCode, categoryKey, indexable });
 }
 
 // ---------------------------------------------------------------------------
