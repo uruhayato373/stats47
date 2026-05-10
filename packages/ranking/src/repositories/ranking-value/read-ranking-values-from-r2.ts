@@ -7,6 +7,7 @@ import type { AreaType } from "@stats47/types";
 
 import type { RankingValue } from "../../types";
 import {
+  rankingNormalizedValuesKeyPath,
   rankingValuesKeyPath,
   type RankingValuesKeySnapshot,
 } from "../../types/snapshot";
@@ -81,6 +82,39 @@ export async function readRankingValuesFromR2(
     logger.error(
       { rankingKey, areaType, yearCode, error: error instanceof Error ? error.message : String(error) },
       "readRankingValuesFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
+ * 正規化済み R2 snapshot から ranking_values を取得。
+ *
+ * normType: "per_population" → app/ranking/{key}/values-per-population.json
+ * normType: "per_area"       → app/ranking/{key}/values-per-area.json
+ *
+ * ファイルが存在しない場合は ok([]) を返す（computeNormalization フォールバック用）。
+ */
+export async function readNormalizedRankingValuesFromR2(
+  rankingKey: string,
+  _areaType: AreaType,
+  yearCode: string,
+  normType: string,
+): Promise<Result<RankingValue[], Error>> {
+  try {
+    const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
+    const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
+    if (!snapshot) return ok([]);
+
+    const normalizedYear = yearCode.slice(0, 4);
+    const partition = snapshot.partitions.find((p) => p.yearCode.slice(0, 4) === normalizedYear);
+    if (!partition) return ok([]);
+
+    return ok(partition.values);
+  } catch (error) {
+    logger.error(
+      { rankingKey, yearCode, normType, error: error instanceof Error ? error.message : String(error) },
+      "readNormalizedRankingValuesFromR2: failed",
     );
     return err(error instanceof Error ? error : new Error(String(error)));
   }

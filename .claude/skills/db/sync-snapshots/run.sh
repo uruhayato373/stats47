@@ -27,6 +27,7 @@ declare -a TASKS=(
   "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
   "correlation|packages/correlation/src/scripts/export-snapshot.ts"
   "ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts"
+  "ranking-normalized-values|packages/ranking/src/scripts/export-ranking-normalized-values-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"

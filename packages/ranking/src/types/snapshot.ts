@@ -56,6 +56,20 @@ export function rankingValuesKeyPath(
   return `app/ranking/${encodeURIComponent(rankingKey)}/values.json`;
 }
 
+/**
+ * 正規化済みランキング値スナップショットの R2 キーパスを返す。
+ *
+ * normType: "per_population" → `app/ranking/{key}/values-per-population.json`
+ * normType: "per_area"       → `app/ranking/{key}/values-per-area.json`
+ */
+export function rankingNormalizedValuesKeyPath(
+  rankingKey: string,
+  normType: string,
+): string {
+  const suffix = normType.replace(/_/g, "-");
+  return `app/ranking/${encodeURIComponent(rankingKey)}/values-${suffix}.json`;
+}
+
 /** @deprecated rankingValuesKeyPath を使用してください */
 export interface RankingValuesPartitionSnapshot {
   generatedAt: string;
