@@ -12,10 +12,12 @@ import { BarChart3 } from "lucide-react";
 
 interface RelatedRankingsSectionProps {
   tagKeys: string[];
+  compact?: boolean;
 }
 
 export async function RelatedRankingsSection({
   tagKeys,
+  compact = false,
 }: RelatedRankingsSectionProps) {
   if (tagKeys.length === 0) return null;
 
@@ -51,7 +53,7 @@ export async function RelatedRankingsSection({
         <CardTitle className="text-base">関連ランキング</CardTitle>
       </CardHeader>
       <CardContent className="p-4 pt-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
           {rankings.map((ranking) => (
             <Link
               key={ranking.rankingKey}

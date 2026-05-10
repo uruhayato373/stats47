@@ -261,14 +261,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* バナー広告（タグキーベース・ランダム表示） */}
                         <ArticleAffiliateBanner tagKeys={tagKeys} />
 
-                        {/* 関連書籍（タグキーベース自動配置） */}
-                        <ArticleRelatedBooks tagKeys={tagKeys} />
+                        {/* 関連書籍・関連ランキング・関連記事: xl+ ではサイドバーに表示するため非表示 */}
+                        <div className="xl:hidden">
+                            <ArticleRelatedBooks tagKeys={tagKeys} />
+                        </div>
 
-                        {/* 関連ランキング（タグキーベース・ブログ→ランキング導線） */}
-                        <RelatedRankingsSection tagKeys={tagKeys} />
+                        <div className="xl:hidden">
+                            <RelatedRankingsSection tagKeys={tagKeys} />
+                        </div>
 
-                        {/* 関連記事 */}
-                        <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
+                        <div className="xl:hidden">
+                            <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
+                        </div>
 
                         {/* 広告（関連記事後）: xl+ ではサイドバーに表示するため非表示 */}
                         <div className="xl:hidden">
@@ -285,6 +289,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     {/* 右スティッキーサイドバー: xl+ のみ表示 */}
                     <aside className="hidden xl:flex xl:w-72 xl:shrink-0 xl:flex-col xl:gap-4 xl:sticky xl:top-20">
+                        {/* コンテンツ（優先度順） */}
+                        <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
+                        <RelatedRankingsSection tagKeys={tagKeys} compact />
+                        <Card>
+                            <CardHeader className="py-3 px-4">
+                                <CardTitle className="text-base">関連書籍</CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-4 pt-0">
+                                <ArticleRelatedBooks tagKeys={tagKeys} compact />
+                            </CardContent>
+                        </Card>
+                        {/* 末尾広告（サイドバーが空にならないよう常時表示） */}
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
@@ -313,10 +329,12 @@ function BlogRelatedArticlesSection({
     articles,
     currentSlug,
     articleTagsMap,
+    compact = false,
 }: {
     articles: Article[];
     currentSlug: string;
     articleTagsMap: Map<string, Array<{ tagKey: string }>>;
+    compact?: boolean;
 }) {
     const filtered = articles.filter((a) => a.slug !== currentSlug);
     if (filtered.length === 0) return null;
@@ -327,7 +345,7 @@ function BlogRelatedArticlesSection({
                 <CardTitle className="text-base">関連記事</CardTitle>
             </CardHeader>
             <CardContent className="p-4 pt-0">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
                     {filtered.map((article) => (
                         <Link
                             key={article.slug}
