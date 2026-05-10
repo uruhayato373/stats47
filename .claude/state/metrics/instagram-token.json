@@ -1,7 +1,7 @@
 {
-  "refreshed_at": "2026-05-06T00:48:30.809Z",
-  "expires_at": "2026-07-05T00:47:34.807Z",
-  "expires_in_sec": 5183944,
-  "token_prefix": "EAAZCsLu8k",
-  "token_suffix": "qXOIeo"
+  "refreshed_at": "2026-05-10T09:33:53.787636",
+  "expires_at": "2026-07-09T09:33:23.787624",
+  "expires_in_sec": 5183970,
+  "token_type": "IGAA",
+  "note": "Restored from IGAA backup (bak.1778028128187). May-6 refresh had incorrectly used EAA token."
 }
