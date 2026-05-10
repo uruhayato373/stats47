@@ -109,9 +109,9 @@ node /tmp/note-prepare-<slug>.js
 ## Phase 1: ブラウザ起動 & エディタ表示
 
 ```bash
-browser-use --headed --profile Default open "https://editor.note.com/new"
+browser-use --headed --profile "Profile 1" open "https://editor.note.com/new"
 sleep 4
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 ```
 
 `/tmp/note-state.txt` に `contenteditable=true` が含まれていればログイン済み。含まれていなければ「ログイン」等を確認。
@@ -125,23 +125,23 @@ browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
 ```bash
 # Phase 1 の state から取得済みの IMG_BTN を使用
 ADD_IMG_IDX=$(grep -oE '\[[0-9]+\]<button aria-label=画像を追加' /tmp/note-state.txt | grep -oE '[0-9]+')
-browser-use --headed --profile Default click $ADD_IMG_IDX
+browser-use --headed --profile "Profile 1" click $ADD_IMG_IDX
 sleep 2
 
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 UPLOAD_IDX=$(grep -B1 '画像をアップロード' /tmp/note-state.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
-browser-use --headed --profile Default click $UPLOAD_IDX
+browser-use --headed --profile "Profile 1" click $UPLOAD_IDX
 sleep 2
 
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 FILE_IDX=$(grep -oE '\[[0-9]+\]<input id=note-editor-eyecatch-input' /tmp/note-state.txt | grep -oE '[0-9]+')
-browser-use --headed --profile Default upload $FILE_IDX <articleDir>/images/cover-1280x670.png
+browser-use --headed --profile "Profile 1" upload $FILE_IDX <articleDir>/images/cover-1280x670.png
 sleep 3
 
 # トリミングダイアログの「保存」ボタン（「下書き保存」と区別）
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 SAVE_IDX=$(grep -B1 '	保存$' /tmp/note-state.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
-browser-use --headed --profile Default click $SAVE_IDX
+browser-use --headed --profile "Profile 1" click $SAVE_IDX
 sleep 3
 ```
 
@@ -151,11 +151,11 @@ sleep 3
 
 ```bash
 # アイキャッチ設定後に state を再取得（インデックスが変わっている）
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 TITLE_IDX=$(grep -oE '\[[0-9]+\]<textarea placeholder=記事タイトル' /tmp/note-state.txt | grep -oE '[0-9]+')
 BODY_IDX=$(grep -oE '\[[0-9]+\]<div contenteditable=true role=textbox' /tmp/note-state.txt | grep -oE '[0-9]+')
-browser-use --headed --profile Default click $TITLE_IDX
-browser-use --headed --profile Default type "<タイトルテキスト>"
+browser-use --headed --profile "Profile 1" click $TITLE_IDX
+browser-use --headed --profile "Profile 1" type "<タイトルテキスト>"
 ```
 
 ## Phase 4: 本文入力（一括 paste 方式）
@@ -171,7 +171,7 @@ browser-use --headed --profile Default type "<タイトルテキスト>"
 
 ```bash
 BODY_IDX=$(find_idx "contenteditable=true role=textbox")
-browser-use --headed --profile Default click $BODY_IDX
+browser-use --headed --profile "Profile 1" click $BODY_IDX
 ```
 
 ### 4-2. 全本文を 1 回 paste
@@ -189,7 +189,7 @@ require('fs').writeFileSync('/tmp/note-body-<slug>.txt', body);
 "
 
 ENCODED=$(node -e "process.stdout.write(encodeURIComponent(require('fs').readFileSync('/tmp/note-body-<slug>.txt','utf8')))")
-browser-use --headed --profile Default eval "
+browser-use --headed --profile "Profile 1" eval "
   const editor = document.querySelector('[contenteditable=true]');
   if (editor) {
     editor.focus();
@@ -235,13 +235,13 @@ A シリーズ記事の標準画像配置（存在する画像のみ挿入）:
 ### 5-1. 目次からセクションにジャンプ
 
 ```bash
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 TOC_IDX=$(find_idx "aria-label=目次")
-browser-use --headed --profile Default click $TOC_IDX
+browser-use --headed --profile "Profile 1" click $TOC_IDX
 sleep 1
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 SEC_IDX=$(find_idx "<セクション名の一部>")
-browser-use --headed --profile Default click $SEC_IDX
+browser-use --headed --profile "Profile 1" click $SEC_IDX
 sleep 1
 ```
 
@@ -249,28 +249,28 @@ sleep 1
 
 ```bash
 # 見出し直後の段落にカーソルを置く
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 # 見出し直後の <p> をクリック
-browser-use --headed --profile Default click <段落のindex>
-browser-use --headed --profile Default keys Home
-browser-use --headed --profile Default keys Enter
-browser-use --headed --profile Default keys Up
+browser-use --headed --profile "Profile 1" click <段落のindex>
+browser-use --headed --profile "Profile 1" keys Home
+browser-use --headed --profile "Profile 1" keys Enter
+browser-use --headed --profile "Profile 1" keys Up
 sleep 1
 
 # メニューを開く → 画像を選択
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 MENU_IDX=$(find_idx "aria-label=メニューを開く")
-browser-use --headed --profile Default click $MENU_IDX
+browser-use --headed --profile "Profile 1" click $MENU_IDX
 sleep 1
 
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 IMG_BTN_IDX=$(grep -B1 '画像' /tmp/note-state.txt | grep '<button' | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
-browser-use --headed --profile Default click $IMG_BTN_IDX
+browser-use --headed --profile "Profile 1" click $IMG_BTN_IDX
 sleep 1
 
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 IMG_FILE_IDX=$(find_idx "note-editor-image-upload-input")
-browser-use --headed --profile Default upload $IMG_FILE_IDX <画像ファイルの絶対パス>
+browser-use --headed --profile "Profile 1" upload $IMG_FILE_IDX <画像ファイルの絶対パス>
 sleep 3
 ```
 
@@ -279,9 +279,9 @@ sleep 3
 ## Phase 6: 下書き保存
 
 ```bash
-browser-use --headed --profile Default state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
 DRAFT_IDX=$(find_idx "下書き保存")
-browser-use --headed --profile Default click $DRAFT_IDX
+browser-use --headed --profile "Profile 1" click $DRAFT_IDX
 sleep 3
 ```
 
@@ -290,17 +290,17 @@ sleep 3
 ## Phase 8: 確認スクリーンショット
 
 ```bash
-browser-use --headed --profile Default screenshot /tmp/note-publish-<slug>.png
+browser-use --headed --profile "Profile 1" screenshot /tmp/note-publish-<slug>.png
 ```
 
 結果を報告（下書き保存 or 予約投稿、タイトル、タグ数、画像数、予約日時）。
 
 ## バッチ実行時: 次の記事へ
 
-バッチの場合はブラウザを閉じずに Phase 1 に戻り、`browser-use --headed --profile Default open "https://editor.note.com/new"` で新しいエディタを開く。
+バッチの場合はブラウザを閉じずに Phase 1 に戻り、`browser-use --headed --profile "Profile 1" open "https://editor.note.com/new"` で新しいエディタを開く。
 
 ## 全記事完了後
 
 ```bash
-browser-use --headed --profile Default close
+browser-use --headed --profile "Profile 1" close
 ```
