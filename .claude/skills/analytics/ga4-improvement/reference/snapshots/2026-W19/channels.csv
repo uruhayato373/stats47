@@ -1,6 +1,6 @@
-sessionDefaultChannelGroup,sessions,activeUsers,screenPageViews,bounceRate,conversions
-Organic Search,800,710,2810,0.355,0
-Direct,441,416,2444,0.82766439909297052,0
-Referral,199,172,690,0.29648241206030151,0
-Unassigned,36,35,63,0.66666666666666663,0
-Organic Social,2,2,10,0,0
+sessionDefaultChannelGroup,sessions,activeUsers,screenPageViews,bounceRate
+Organic Search,865,766,2991,0.35491329479768785
+Direct,443,418,2440,0.82844243792325056
+Referral,215,187,742,0.29767441860465116
+Unassigned,41,40,71,0.63414634146341464
+Organic Social,2,2,10,0
