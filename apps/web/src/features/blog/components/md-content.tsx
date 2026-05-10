@@ -17,10 +17,20 @@ import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
+interface AffiliateBannerData {
+    href: string;
+    imageUrl: string;
+    trackingPixelUrl?: string | null;
+    width?: number | null;
+    height?: number | null;
+    title?: string;
+}
+
 interface MDContentProps {
     source: string;
     slug?: string;
     relatedArticleTitles?: Record<string, string>;
+    affiliateBannersByCategory?: Record<string, AffiliateBannerData>;
 }
 
 interface ComponentProps {
@@ -28,7 +38,7 @@ interface ComponentProps {
     [key: string]: unknown;
 }
 
-function makeMdComponents(slug?: string): Record<string, React.ComponentType<ComponentProps>> {
+function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<string, AffiliateBannerData>): Record<string, React.ComponentType<ComponentProps>> {
     return {
         h2: ({ children, ...props }: ComponentProps) => (
             <h2
@@ -230,19 +240,37 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
             </span>
         ),
 
-        "affiliate-banner": ({ src, href, tracking, width, height, label }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string }) => (
-            <div className="my-8 not-prose">
-                <BannerAd
-                    href={href ?? "#"}
-                    imageUrl={src ?? ""}
-                    trackingPixelUrl={tracking}
-                    width={Number(width) || null}
-                    height={Number(height) || null}
-                    label={label ?? ""}
-                    position="article-inline"
-                />
-            </div>
-        ),
+        "affiliate-banner": ({ src, href, tracking, width, height, label, category }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string }) => {
+            if (category && affiliateBannersByCategory?.[category]) {
+                const b = affiliateBannersByCategory[category];
+                return (
+                    <div className="my-8 not-prose">
+                        <BannerAd
+                            href={b.href}
+                            imageUrl={b.imageUrl}
+                            trackingPixelUrl={b.trackingPixelUrl}
+                            width={b.width ?? null}
+                            height={b.height ?? null}
+                            label={b.title ?? ""}
+                            position="article-inline"
+                        />
+                    </div>
+                );
+            }
+            return (
+                <div className="my-8 not-prose">
+                    <BannerAd
+                        href={href ?? "#"}
+                        imageUrl={src ?? ""}
+                        trackingPixelUrl={tracking}
+                        width={Number(width) || null}
+                        height={Number(height) || null}
+                        label={label ?? ""}
+                        position="article-inline"
+                    />
+                </div>
+            );
+        },
 
         "related-articles": ({ children }: ComponentProps) => (
             <div className="my-8 not-prose overflow-hidden rounded-lg border-2 border-primary/30">
@@ -297,8 +325,8 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
     };
 }
 
-export function MDContent({ source, slug, relatedArticleTitles }: MDContentProps) {
-    const mdComponents = useMemo(() => makeMdComponents(slug), [slug]);
+export function MDContent({ source, slug, relatedArticleTitles, affiliateBannersByCategory }: MDContentProps) {
+    const mdComponents = useMemo(() => makeMdComponents(slug, affiliateBannersByCategory), [slug, affiliateBannersByCategory]);
     const processed = useMemo(() => preprocessCallouts(source, relatedArticleTitles), [source, relatedArticleTitles]);
     return (
         <article className="prose prose-zinc dark:prose-invert max-w-none" suppressHydrationWarning>

@@ -99,10 +99,60 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 
 ### 広告スロット
 
-記事中盤に1つ配置する。
+記事の**セクション末尾**（次の `##` の直前）に配置する。H2 直下への配置は禁止。
+
+**配置ルール（H2セクション数による）:**
+
+| H2 数 | ad-slot 数 | 推奨配置位置 |
+|---|---|---|
+| 3 以下 | 1 箇所 | セクション 2 の末尾 |
+| 4〜5 | 2 箇所 | セクション 2・4 の末尾 |
+| 6 以上 | 3 箇所 | セクション 2・4・6 の末尾 |
+
+「セクション末尾」= そのセクションの最後の非空行と次の `## ` の間。`<data-source>` や `<source-link>` がある場合はその後に配置。まとめ（`## まとめ` 等）セクションには置かない。
 
 ```html
+<!-- ✅ 正しい配置（セクション末尾） -->
+（セクション2の本文...）
+
 <ad-slot></ad-slot>
+
+## 次のセクション見出し
+```
+
+```html
+<!-- ❌ 禁止パターン（H2直下） -->
+## 見出し
+
+<ad-slot></ad-slot>
+
+（本文...）
+```
+
+### アフィリエイトバナー（記事内）
+
+記事のテーマと最も関連するセクションの末尾に 1 箇所配置する。`<ad-slot>` と同じセクション末尾には置かず、隣接セクションに配置する。
+
+**category ベース（推奨）:** カテゴリを指定するとコードが適切なバナーを自動解決する。
+
+```html
+<affiliate-banner category="labor">
+<affiliate-banner category="housing">
+<affiliate-banner category="economy">
+```
+
+利用可能カテゴリ: `labor` / `housing` / `population` / `economy` / `health` / `energy` / `tourism` / `furusato`
+
+**URL 直書き（後方互換・特殊バナー用）:**
+
+```html
+<affiliate-banner
+  src="https://storage.stats47.jp/app/ads/XXX.png"
+  href="https://..."
+  tracking="https://..."
+  width="300"
+  height="250"
+  label="バナー説明文">
 ```
 
 ### データ出典
