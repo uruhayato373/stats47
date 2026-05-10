@@ -1,0 +1,65 @@
+{
+  "channel": {
+    "id": "UCdRiwDSX1aUd0dSd7Cs08Kg",
+    "title": "統計で見る都道府県 | stats47",
+    "subscriberCount": 31,
+    "viewCount": 78364,
+    "videoCount": 157
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-04-26",
+    "recentEnd": "2026-05-10",
+    "priorStart": "2026-04-12",
+    "priorEnd": "2026-04-26"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_SEARCH": 38,
+      "EXT_URL": 3,
+      "SHORTS": 2,
+      "SUBSCRIBER": 1,
+      "PLAYLIST": 1,
+      "YT_CHANNEL": 0
+    },
+    "prior": {
+      "YT_SEARCH": 99,
+      "SHORTS": 17,
+      "EXT_URL": 16,
+      "SUBSCRIBER": 6,
+      "NOTIFICATION": 6,
+      "YT_OTHER_PAGE": 2,
+      "YT_CHANNEL": 1,
+      "NO_LINK_OTHER": 0
+    }
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 45
+    },
+    "prior": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 147
+    }
+  },
+  "viewsDelta": {
+    "recent": 45,
+    "prior": 147,
+    "changePct": -69.38775510204081
+  },
+  "verdict": "likely-shadowban",
+  "verdictReasons": [
+    "total views -69.4% (soft drop)",
+    "suggested-video traffic -100.0% (prior 2 → recent 0)"
+  ]
+}

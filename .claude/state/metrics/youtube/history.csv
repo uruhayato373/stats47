@@ -10,3 +10,4 @@ date,verdict,suspectCount,recentViews,priorViews,viewsDeltaPct,searchViews,short
 2026-05-06,healthy,1,1,0,,0,0,0,0,0
 2026-05-08,watch,2,1,0,,0,0,0,0,0
 2026-05-09,healthy,1,1,1,0.00,0,0,0,0,0
+2026-05-10,likely-shadowban,0,45,147,-69.39,38,2,0,0,0
