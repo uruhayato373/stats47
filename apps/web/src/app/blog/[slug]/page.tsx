@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
+import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
@@ -25,8 +26,6 @@ import {
     getTagsForArticles,
     articleService,
 } from "@/features/blog/server";
-
-import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";

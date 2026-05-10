@@ -1,8 +1,8 @@
 import {
   CATEGORY_AFFILIATE_MAP,
   TAG_AFFILIATE_MAP,
+  type AffiliateCategory,
 } from "../constants/affiliate-category";
-import type { AffiliateCategory } from "../constants/affiliate-category";
 import {
   readActiveAdByCategoryFromR2 as findActiveAdByCategory,
   readActiveBannersByCategoryKeysFromR2 as findActiveBannersByCategoryKeys,
