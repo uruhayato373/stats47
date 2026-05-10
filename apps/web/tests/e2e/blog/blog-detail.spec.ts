@@ -48,4 +48,18 @@ test.describe("ブログ記事詳細ページ", () => {
     // 一覧ページに戻ったことを確認
     await expect(page).toHaveURL(/\/blog$/);
   });
+
+  test("記事内の画像が壊れていない", async ({ page }) => {
+    await page.waitForLoadState("networkidle");
+    const images = page.locator("article img, [class*='prose'] img");
+    const count = await images.count();
+    if (count === 0) return; // 画像なし記事はスキップ
+    const img = images.first();
+    if (!(await img.isVisible({ timeout: 5_000 }).catch(() => false))) return;
+    // naturalWidth === 0 は画像読み込み失敗（404 / パス誤り）を示す
+    const naturalWidth = await img.evaluate(
+      (el: HTMLImageElement) => el.naturalWidth
+    );
+    expect(naturalWidth).toBeGreaterThan(0);
+  });
 });

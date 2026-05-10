@@ -201,6 +201,21 @@ async function publishCarousel(spec: PostSpec): Promise<string> {
   });
   console.log(`  📦 carousel container: ${containerId}`);
 
+  // container が FINISHED になるまで polling（最大 2 分）
+  const maxAttempts = 12;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    await new Promise((r) => setTimeout(r, 10_000));
+    const { status_code } = await igGet(containerId, { fields: "status_code" });
+    console.log(`  ⏳ carousel status (${attempt}/${maxAttempts}): ${status_code}`);
+    if (status_code === "FINISHED") break;
+    if (status_code === "ERROR" || status_code === "EXPIRED") {
+      throw new Error(`carousel 処理失敗: status=${status_code}`);
+    }
+    if (attempt === maxAttempts) {
+      throw new Error(`carousel 処理タイムアウト（2 分経過）`);
+    }
+  }
+
   const { id: mediaId } = await igPost(`${IG_USER_ID}/media_publish`, {
     creation_id: containerId,
   });
