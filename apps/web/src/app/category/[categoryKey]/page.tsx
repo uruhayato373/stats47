@@ -214,8 +214,8 @@ export default async function CategoryPage({ params }: PageProps) {
                     >
                       <div className="relative aspect-[1200/630] w-full bg-muted">
                         <ThemeAwareImage
-                          lightSrc={`${r2Url}/blog/${article.slug}/thumbnail-light.webp`}
-                          darkSrc={`${r2Url}/blog/${article.slug}/thumbnail-dark.webp`}
+                          lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
+                          darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}
                           alt={article.title}
                           fill
                           sizes="256px"

@@ -77,7 +77,7 @@ function makeMdComponents(slug?: string): Record<string, React.ComponentType<Com
             const altText = typeof alt === "string" ? alt : "";
             const resolvedSrc =
                 slug && !src.startsWith("http") && !src.startsWith("/")
-                    ? `https://storage.stats47.jp/blog/${slug}/${src}`
+                    ? `https://storage.stats47.jp/app/blog/${slug}/${src}`
                     : src;
             // SVG はファイル名で判定してアスペクト比予約 (CLS 対策)。
             // 2026-04 Web Analytics で spending-ranking.svg が LCP 5,496ms、CLS 原因の 1 つ。

@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const title = article.frontmatter.seoTitle ?? article.title;
     const description = article.frontmatter.description ?? `${article.title} | stats47 ブログ`;
     const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
-    const imageUrl = `${R2_PUBLIC_URL}/blog/${slug}/ogp/ogp.png`;
+    const imageUrl = `${R2_PUBLIC_URL}/app/blog/${slug}/ogp/ogp.png`;
 
     return {
         title,
@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         "@type": "Article",
         headline: article.title,
         description: article.frontmatter.description ?? "",
-        image: `${R2_PUBLIC_URL}/blog/${slug}/ogp/ogp.png`,
+        image: `${R2_PUBLIC_URL}/app/blog/${slug}/ogp/ogp.png`,
         url: `${baseUrl}/blog/${slug}`,
         datePublished: article.publishedAt ?? undefined,
         dateModified: article.updatedAt ?? article.publishedAt ?? undefined,

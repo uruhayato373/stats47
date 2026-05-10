@@ -188,8 +188,8 @@ export default async function HomePage() {
                     >
                       <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
                         <ThemeAwareImage
-                          lightSrc={`${r2}/blog/${article.slug}/thumbnail-light.webp`}
-                          darkSrc={`${r2}/blog/${article.slug}/thumbnail-dark.webp`}
+                          lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
+                          darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
                           alt={article.title}
                           fill
                           sizes="(max-width: 768px) 50vw, 25vw"
