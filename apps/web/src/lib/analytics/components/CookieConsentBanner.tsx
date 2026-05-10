@@ -12,47 +12,36 @@ function setConsentCookie(value: string) {
   document.cookie = `${CONSENT_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
-interface Props {
-  /** サーバーサイドで読み取った consent 状態。null = 未設定（新規ユーザー） */
-  serverConsent: "granted" | "denied" | null;
-}
-
 /**
- * Cookie 同意バナー（SSR 対応版）
+ * Cookie 同意バナー（クライアントサイド）
  *
- * serverConsent が null（新規ユーザー）の場合は SSR 時点からバナーを表示し、
- * LCP element がバナー出現で遅延しないようにする（EXP-004）。
- * 既存ユーザーは localStorage → cookie マイグレーションを初回ロード時に実行。
+ * localStorage に consent が保存済みの場合は非表示。
+ * 未設定の新規ユーザーにのみバナーを表示する。
  */
-export function CookieConsentBanner({ serverConsent }: Props) {
-  const [visible, setVisible] = useState(serverConsent === null);
+export function CookieConsentBanner() {
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_LS_KEY);
-    const effective = serverConsent ?? stored;
+    if (!stored) {
+      const timer = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(timer);
+    }
 
     // gtag consent 同期
-    if (effective === "granted") {
+    if (stored === "granted") {
       window.gtag?.("consent", "update", {
         ad_storage: "granted",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
-    } else if (effective === "denied") {
+    } else if (stored === "denied") {
       window.gtag?.("consent", "update", {
         analytics_storage: "denied",
         ad_storage: "denied",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
       } as any);
     }
-
-    // 後方互換マイグレーション: localStorage に consent があるが cookie が未設定の場合
-    // （既存ユーザーの初回ロード時に一度だけ実行）
-    if (!serverConsent && stored) {
-      setConsentCookie(stored);
-      const timer = setTimeout(() => setVisible(false), 0);
-      return () => clearTimeout(timer);
-    }
-  }, [serverConsent]);
+  }, []);
 
   const handleAccept = () => {
     setConsentCookie("granted");
