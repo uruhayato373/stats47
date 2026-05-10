@@ -104,6 +104,7 @@ export function RankingKeyPageClient({
     const [isPending, startTransition] = useTransition();
     const pathname = usePathname();
     const isBelowLg = useBreakpoint("belowLg");
+    const isAboveXl = useBreakpoint("aboveXl");
 
     // ランキングページ閲覧イベント
     useEffect(() => {
@@ -395,8 +396,8 @@ export function RankingKeyPageClient({
                             </TabsContent>
                         </Tabs>
                     ) : (
-                        /* デスクトップ: 縦並び（地図→テーブル） */
-                        <div className="flex flex-col gap-4 relative">
+                        /* デスクトップ: xl以上は地図+テーブル2列、lg〜xl未満は縦並び */
+                        <div className={`relative ${isAboveXl ? "grid grid-cols-2 gap-4 items-start" : "flex flex-col gap-4"}`}>
                             {isPending && (
                                 <div className="absolute inset-0 z-10 bg-background/50 flex items-center justify-center backdrop-blur-[1px]">
                                     <Skeleton className="w-full h-full opacity-50" />
