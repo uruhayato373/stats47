@@ -1,5 +1,5 @@
 export function aiContentKeyPath(rankingKey: string): string {
-  return `ranking/${encodeURIComponent(rankingKey)}/ai-content.json`;
+  return `app/ranking/${encodeURIComponent(rankingKey)}/ai-content.json`;
 }
 
 export interface AiContentSnapshotRow {
