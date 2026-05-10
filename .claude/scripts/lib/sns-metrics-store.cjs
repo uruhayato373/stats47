@@ -111,17 +111,23 @@ function writeCsv(file, rows) {
 }
 
 /**
- * 1 件のメトリクスを UPSERT する。キーは (sns_post_id, fetched_at)。
+ * 1 件のメトリクスを UPSERT する。
+ * sns_post_id がある場合は (sns_post_id, fetched_at) をキーに、
+ * ない場合は (platform, content_key, fetched_at) をキーにする（CI 用フォールバック）。
  */
 function upsertMetric(metric) {
-  if (metric.sns_post_id == null) throw new Error("sns_post_id is required");
   if (!metric.fetched_at) throw new Error("fetched_at is required");
   const file = csvPathFor(metric.fetched_at);
   const rows = readCsv(file);
-  const key = `${metric.sns_post_id}|${metric.fetched_at}`;
-  const filtered = rows.filter(
-    (r) => `${r.sns_post_id}|${r.fetched_at}` !== key,
-  );
+  const key = metric.sns_post_id != null
+    ? `${metric.sns_post_id}|${metric.fetched_at}`
+    : `${metric.platform}|${metric.content_key}|${metric.fetched_at}`;
+  const filtered = rows.filter((r) => {
+    const rKey = r.sns_post_id
+      ? `${r.sns_post_id}|${r.fetched_at}`
+      : `${r.platform}|${r.content_key}|${r.fetched_at}`;
+    return rKey !== key;
+  });
   const normalized = {};
   for (const c of COLUMNS) normalized[c] = metric[c] ?? "";
   filtered.push(normalized);
