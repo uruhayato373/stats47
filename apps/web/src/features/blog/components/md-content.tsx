@@ -96,7 +96,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             const isSvg = resolvedSrc.toLowerCase().endsWith(".svg");
             return (
                 <span
-                    className="block mt-2 -mx-6 sm:-mx-8 overflow-x-auto"
+                    className="block mt-2 -mx-6 sm:-mx-8 overflow-x-hidden"
                     style={{ aspectRatio: isSvg ? "16 / 9" : undefined }}
                 >
                     <Image
