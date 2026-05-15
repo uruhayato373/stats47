@@ -23,7 +23,10 @@ export function AdSenseScript() {
   useEffect(() => {
     if (!isEnabled || !clientId) return;
 
+    let loaded = false;
     const load = () => {
+      if (loaded) return;
+      loaded = true;
       const existingScript = document.querySelector(
         `script[src*="adsbygoogle.js?client=${clientId}"]`
       );
@@ -36,16 +39,32 @@ export function AdSenseScript() {
       document.head.appendChild(script);
     };
 
-    // メインコンテンツの描画を優先し、アイドル時にスクリプトを読み込む
-    const timer = setTimeout(() => {
+    const loadOnIdle = () => {
       if ("requestIdleCallback" in window) {
         requestIdleCallback(load);
       } else {
         load();
       }
-    }, 3000);
+    };
 
-    return () => clearTimeout(timer);
+    // メインコンテンツの描画を優先し、5s 経過 or 初回ユーザー操作のいずれか先で読み込む。
+    // LCP 計測ウィンドウ (主要 URL で ~3-5s) より後にずらして hydration コストを LCP から外す。
+    const timer = setTimeout(loadOnIdle, 5000);
+    const onInteract = () => {
+      clearTimeout(timer);
+      loadOnIdle();
+    };
+    const opts = { once: true, passive: true } as AddEventListenerOptions;
+    window.addEventListener("scroll", onInteract, opts);
+    window.addEventListener("touchstart", onInteract, opts);
+    window.addEventListener("click", onInteract, opts);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onInteract);
+      window.removeEventListener("touchstart", onInteract);
+      window.removeEventListener("click", onInteract);
+    };
   }, [clientId, isEnabled]);
 
   // このコンポーネントはUIをレンダリングしない

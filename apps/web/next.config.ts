@@ -281,6 +281,7 @@ const nextConfig: NextConfig = {
       );
 
       // D3 を専用 async chunk に分離（チャート間での重複を排除）
+      // AdSense 関連コードも別 chunk に分離（メイン chunk から切り出して parse 時間を短縮）
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -295,6 +296,14 @@ const nextConfig: NextConfig = {
               chunks: "async" as const,
               priority: 20,
               reuseExistingChunk: true,
+            },
+            adsenseVendor: {
+              test: /[\\/]lib[\\/]google-adsense[\\/]/,
+              name: "vendor-adsense",
+              chunks: "all" as const,
+              priority: 19,
+              reuseExistingChunk: true,
+              enforce: true,
             },
           },
         },

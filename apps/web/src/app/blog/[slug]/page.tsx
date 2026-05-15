@@ -30,7 +30,7 @@ import {
 import { generateBlogMetadata } from "@/features/blog/utils/generate-blog-metadata";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
+import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -252,18 +252,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                         <div className="xl:hidden">
                             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
                         </div>
-
-                        {/* 広告（関連記事後）: xl+ ではサイドバーに表示するため非表示 */}
-                        <div className="xl:hidden">
-                            <Card>
-                                <CardHeader className="pb-2">
-                                    <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex justify-center overflow-hidden">
-                                    <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
-                                </CardContent>
-                            </Card>
-                        </div>
                     </main>
 
                     {/* 右スティッキーサイドバー: xl+ のみ表示 */}
@@ -286,14 +274,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                             </CardHeader>
                             <CardContent className="flex justify-center overflow-hidden">
                                 <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex justify-center overflow-hidden">
-                                <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
                             </CardContent>
                         </Card>
                     </aside>
