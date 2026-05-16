@@ -28,13 +28,13 @@ import {
     AreaChartSection,
     RelatedAreas,
     CategoryNavGrid,
+    generateAreaMetadata,
     generateAreaProfileBreadcrumbStructuredData,
     generateAreaProfileStructuredData,
 } from "@/features/area-profile";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
-import { generateAreaMetadata } from "@/features/area-profile/utils/generate-area-metadata";
 
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
