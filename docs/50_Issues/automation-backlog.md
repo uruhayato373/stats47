@@ -223,3 +223,51 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 - `.claude/scripts/gsc/url-inspection-daily.cjs`
 - `.claude/skills/analytics/gsc-improvement/SKILL.md`
 - 親 issue: #115（GSC 未登録 1.6 万件打開）
+
+---
+
+## #290 /fetch-ga4-data snapshot に bot 除外クリーン値併記
+
+## 背景
+
+2026-05-16 の W20 監査で、GA4 snapshot に **bot / overseas / `(not set)/(not set)` の混入** を検出（W20 raw sessions 1,119 のうち 206 が overseas, 92 が完全情報欠落 = 合計 ~27% inflated）。週次レビューの絶対値（Sessions / Active Users / Bounce Rate）が水増しされており、前週比の信頼度が下がる。engagedSessions ベース判定は bot 影響軽微（overseas 206 中 engaged 25）だが、UI/レポートで両者を並べた方が判定ミスを減らせる。
+
+詳細: `docs/03_週次運用/週次レビュー/2026-W20.md#ga4-bot-混入監査-2026-05-16`
+
+## ゴール
+
+`/fetch-ga4-data snapshot YYYY-Www` 実行時に **Japan-only クリーン値の CSV も自動併記** することで、レビュー時に raw / clean を両見できる。GA4 Admin 側の bot フィルタ設定とは独立の二重チェック。
+
+## 提案実装
+
+1. `.claude/skills/analytics/fetch-ga4-data/SKILL.md` snapshot モードスクリプトに以下を追加:
+   - `overview-clean.csv` — `dimensionFilter: country=Japan` 適用
+   - `channels-clean.csv` — 同上
+   - `pollution-summary.csv` — overseas_sessions / notSet_sessions / direct_bounce100_landing_sessions の集計 1 行
+2. observe モード（`/ga4-improvement observe`）が clean 値 と raw 値 両方を Issue コメントに記載
+3. `/weekly-review` Phase 1 Agent C のドキュメント記述更新: 「Japan only クリーン値を併記して判定」
+
+## 想定難度・工数
+
+- S（30-60min）
+- スクリプトに dimensionFilter 数行追加 + CSV 出力 + SKILL.md 文言調整
+
+## 制約・前提
+
+- `country=Japan` フィルタは「日本人実ユーザー」近似値。海外在住の日本人読者やモバイル VPN 利用者は除外される副作用あり（影響は小さいと想定）
+- GA4 Admin の Internal Traffic / IAB Bot 除外設定が ON ならクリーン値とほぼ一致するはず → 二重チェックの意味で残す
+
+## 受入基準
+
+- [ ] snapshot 実行で overview-clean.csv / channels-clean.csv / pollution-summary.csv が生成される
+- [ ] W20 で再実行し、本文記載の clean 値（W20 6d: sessions 911, engaged 513）と一致
+- [ ] observe モードが raw / clean 両方を Issue コメントに記載
+- [ ] レビュー本文テンプレに「クリーン値」表が追加される
+
+## 関連
+
+- `.claude/skills/analytics/fetch-ga4-data/SKILL.md`
+- `.claude/skills/analytics/ga4-improvement/SKILL.md`
+- `.claude/skills/management/weekly-review/SKILL.md` Phase 1 Agent C
+- 検証スクリプト原型: `/tmp/ga4-pollution-check.cjs` / `/tmp/ga4-clean-compare.cjs`（W20 監査で使用）
+- 監査詳細: `docs/03_週次運用/週次レビュー/2026-W20.md#ga4-bot-混入監査-2026-05-16`

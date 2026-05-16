@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-10T08:00:00.000Z",
+  "updated_at": "2026-05-16T00:00:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -250,7 +250,7 @@
         "effort": 1,
         "learning": 3,
         "certainty": 3,
-        "weighted": 3.0
+        "weighted": 3
       },
       "baseline": {
         "date": "2026-04-25",
@@ -261,7 +261,7 @@
       },
       "success_criteria": "homepage mobile LCP < 3,000ms（PSI API 実測 2 回以上の中央値）",
       "fail_criteria": "LCP が 8,251ms（EXP-003 前ベースライン）を超えて悪化した場合",
-      "status": "measuring",
+      "status": "done",
       "next_check": "2026-05-14",
       "deployed_at": "2026-05-10T00:00:00.000Z",
       "created_at": "2026-05-10T00:00:00.000Z",
@@ -275,6 +275,83 @@
           "date": "2026-05-10T00:00:00.000Z",
           "action": "created_and_deployed",
           "summary": "EXP-004 設計・実装・deploy 完了。root cause: CookieConsentBanner が hydration 後に出現 → LCP element になる。SSR 化により新規ユーザーも TTFB 時点でバナー表示 → バナーが LCP 遅延要因でなくなる。"
+        },
+        {
+          "date": "2026-05-16T00:00:00.000Z",
+          "action": "closed",
+          "summary": "result=NONE。LCP 8,476ms (5/15) で目標 <3,000ms 未達。baseline 8,251ms とほぼ同水準。SSR 化は EXP-003 ADVERSE からの rollback としては成功したが、LCP 改善には至らなかった。CookieConsent は LCP 要素ではなかった。EXP-005 (LCP 要素特定) を立案へ。"
+        }
+      ],
+      "result": "NONE",
+      "closed_at": "2026-05-16T00:00:00.000Z",
+      "learnings": [
+        "目標 LCP < 3,000ms に対し実測 8,476ms (5/15 計測、baseline 8,251ms と同水準)。SSR 化で EXP-003 ADVERSE 状態 (16,000ms+) からは復帰したが、改善には至らなかった。",
+        "CookieConsent SSR 化は LCP 要素ではなかった可能性が高い。仮説 \"バナー hydration 遅延が LCP\" は誤り。",
+        "教訓: LCP 改善は (1) LCP 要素そのものの特定 → (2) その要素の preload/dimension/font 対策 が王道。要素未特定での \"hydration 遅延仮説\" 起点の改修は効かない。",
+        "auto memory feedback_lcp_optimization.md (EXP-002 ADVERSE / EXP-003 PARTIAL から学んだ \"LCP 要素特定が先\") が再度実証された。EXP-005 はこれを起点に組む。"
+      ],
+      "actions": [
+        "2026-05-16: PSI history.csv 確認で effect/none と判定。5/10 deploy 前 (5/9: 16,426ms) → 5/15 (8,476ms) で -48% 回復だが baseline 比 +2.7% で目標未達",
+        "2026-05-16: rollback は実施しない (baseline 水準まで戻っているため許容)"
+      ],
+      "measuring_observations": {
+        "date": "2026-05-15",
+        "elapsed_days": 5,
+        "psi_lcp_ms_homepage_mobile_current": 8476,
+        "psi_lcp_ms_homepage_mobile_baseline": 8251,
+        "lcp_delta_pct": 2.7,
+        "source": ".claude/state/metrics/psi/history.csv (5/15 計測)",
+        "variance_note": "5/15 1 回計測のみ。lab data variance あり (5/7 に 785ms の異常値あり)。明日以降の PSI quota リセット後に 2 回追加計測推奨だが、effect/none 判定は十分強固"
+      }
+    },
+    {
+      "id": "EXP-005",
+      "title": "LCP 要素特定 + ターゲット最適化 (Phase 1: 調査)",
+      "hypothesis": "EXP-002/003/004 で複数の hydration 関連改修を試したが、いずれも LCP < 3,000ms に到達せず。LCP 要素を Lighthouse Trace / PSI レスポンスで特定せずに hydration 仮説のみで改修してきたのが根本原因。Phase 1 で全主要ページの LCP 要素を実証ベースで特定し、要素タイプ別 (image / text / video / iframe / SSR-deferred) の対策を Phase 2 で別実験として立案する。",
+      "target_metric": "lcp_element_identified",
+      "target_delta": "主要 5 URL (homepage / ranking / blog / search / areas) で LCP 要素を特定し、要素タイプ・サイズ・遅延理由を明文化。Phase 2 候補施策を 3 件以上立案",
+      "rubric": {
+        "impact": 3,
+        "effort": 1,
+        "learning": 3,
+        "certainty": 3,
+        "weighted": 2.5
+      },
+      "baseline": {
+        "date": "2026-05-15",
+        "source": ".claude/state/metrics/psi/LATEST.md (mobile)",
+        "psi_lcp_ms_homepage_mobile": 8476,
+        "psi_lcp_ms_ranking_mobile": 8101,
+        "psi_lcp_ms_blog_mobile": 5928,
+        "psi_lcp_ms_search_mobile": 5113,
+        "psi_lcp_ms_areas_mobile": 7504,
+        "note": "EXP-004 close 後の baseline。lab data, 1 回計測"
+      },
+      "status": "proposed",
+      "created_at": "2026-05-16T00:00:00.000Z",
+      "started_at": null,
+      "result": null,
+      "learnings": [],
+      "closed_at": null,
+      "actions": [
+        "(予定) PSI API quota リセット後に 5 URL × mobile/desktop で 3 回ずつ計測 (中央値)",
+        "(予定) PSI レスポンスの lighthouseResult.audits[\"largest-contentful-paint-element\"].details で要素特定",
+        "(予定) 各 LCP 要素について type/size/loading 属性/preload/font 関係を表に整理",
+        "(予定) 要素タイプ別の Phase 2 施策候補を立案 (image なら width/height/preload, font なら font-display:optional, SSR-deferred なら server prefetch 等)",
+        "(予定) Phase 2 施策を EXP-006/007 として個別に PDCA"
+      ],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "related_experiments": [
+        "EXP-002",
+        "EXP-003",
+        "EXP-004"
+      ],
+      "history": [
+        {
+          "date": "2026-05-16T00:00:00.000Z",
+          "action": "proposed",
+          "summary": "EXP-004 close (result=NONE) を受けて立案。LCP 要素特定を先行させる調査 phase。Phase 2 では要素タイプ別の対策を別実験で行う。"
         }
       ]
     }
