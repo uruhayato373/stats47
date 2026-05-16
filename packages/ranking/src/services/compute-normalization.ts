@@ -17,6 +17,10 @@ export const WELL_KNOWN_DENOMINATORS: Record<string, Record<string, string>> = {
     prefecture: "total-area-including-northern-territories-and-takeshima",
     city: "total-area", // Assume total-area if exists
   },
+  per_household: {
+    prefecture: "households",
+    city: "households",
+  },
 };
 
 /**

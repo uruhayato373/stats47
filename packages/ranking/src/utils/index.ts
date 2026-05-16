@@ -10,6 +10,7 @@ export * from "./filter-to-national";
 export * from "./filter-to-prefectures";
 export * from "./get-max-decimal-places-from-rankings";
 export * from "./get-ranking-title";
+export * from "./is-base-metric";
 export * from "./normalize-ranking-item-properties";
 export * from "./prepare-hierarchical-rankings";
 export * from "./rank-by-value";
