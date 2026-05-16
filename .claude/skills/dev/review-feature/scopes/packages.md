@@ -158,15 +158,17 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する（テストエンジニアがパフォーマンスを語る等は NG）
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - 「all」モードでは、個別パッケージの深掘りよりも**横断的な問題の発見**を優先する
-- 出力は GitHub Issue（`dev-review` ラベル）として作成する。タイトル例:
-  - 単一: `[Dev Review] packages:r2-storage / YYYY-MM-DD`
-  - 複数: `[Dev Review] packages:r2-storage+ranking / YYYY-MM-DD`
-  - 横断: `[Dev Review] packages / YYYY-MM-DD`
-  ```bash
-  # 本文を /tmp/review-packages-body.md に書き出し後:
-  gh issue create \
-    --title "[Dev Review] packages:{対象名} / YYYY-MM-DD" \
-    --label "dev-review" \
-    --body-file /tmp/review-packages-body.md
+- 出力は `docs/04_レビュー/dev-review/packages-{対象名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+  ```yaml
+  ---
+  type: dev-review
+  scope: packages-{対象名}
+  date: 2026-MM-DD
+  status: active
+  ---
   ```
-- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
+  ファイル名例:
+  - 単一: `packages-r2-storage-2026-05-04.md`
+  - 複数: `packages-r2-storage-ranking-2026-05-04.md`
+  - 横断: `packages-all-2026-05-04.md`
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる

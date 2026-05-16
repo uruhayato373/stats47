@@ -212,15 +212,18 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ```
 調査項目:
-- 当週の計画 Issue を取得
-  gh issue list --label weekly-plan --state all --limit 1 --json number,title,body
-  → タイトルに当週の ISO 週番号を含む Issue を特定
-  → gh issue view <番号> で本文を取得し、計画されていたタスク（Must / Should / Could のチェックボックス）の一覧を抽出
+- 当週の計画ドキュメントを取得
+  ls -t docs/03_週次運用/週次計画/*.md | head -5
+  → ファイル名から当週の ISO 週番号を含むファイル（YYYY-Www.md）を特定
+  → Read tool で本文を取得し、計画されていたタスク（Must / Should / Could のチェックボックス）の一覧を抽出
   → git log と照合して完了/未達を判定
-- 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`）
-- 今週追加された各種レビュー Issue
-  gh issue list --label critical-review --state all --search "created:>=<today-7d>" --json number,title
-  gh issue list --label pre-mortem --state all --search "created:>=<today-7d>" --json number,title
+- 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`、enhancement / auto-generated ラベル等）
+- 今週追加された各種レビュー ドキュメント
+  ls -t docs/04_レビュー/critical-review/*.md | head -5
+  ls -t docs/04_レビュー/pre-mortem/*.md | head -3
+  → ファイル名の日付（YYYY-MM-DD-{topic}.md）で当週分を抽出
+
+「前週からの引き継ぎ」: 前週計画 `docs/03_週次運用/週次計画/YYYY-W(n-1).md` の Must / Should / Could 未達チェックボックスを Read tool で取得し、本レビューの「計画 vs 実績」セクションで「継続」「持ち越し」と判定する。
 
 出力形式:
 - 「計画タスク vs 実績」の対照表
@@ -281,30 +284,30 @@ sqlite3 "$DB" "
 
 ### Phase 4: 出力
 
-GitHub Issue として作成する。テンプレは `.github/ISSUE_TEMPLATE/weekly-review.md` に準拠。
+Write tool で `docs/03_週次運用/週次レビュー/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
 
-```bash
-# 本文を /tmp/review-body.md に書き出し後:
-gh issue create \
-  --title "[Weekly Review] YYYY-Www" \
-  --label "weekly-review" \
-  --body-file /tmp/review-body.md
+```yaml
+---
+type: weekly-review
+week: 2026-Www
+date: 2026-MM-DD
+status: active
+tags: []
+---
 ```
 
-作成後、Issue 番号を標準出力で報告する。関連する各種 snapshot Issue（GA4/GSC/AdSense）や施策 Issue は本文の「関連 Issue」セクションに `#番号` で参照を含める。
+作成後、ファイルパスを報告する。関連する各種 snapshot Issue（GA4/GSC/AdSense）や施策 Issue は本文の「関連 Issue」セクションに `#番号` で参照を含める（auto-generated / enhancement / cloudflare-alert / psi-alert ラベルは存続）。
 
-### Phase 4.5: 当週の計画 Issue をクローズ
+### Phase 4.5: 当週の計画ドキュメントを archived 化
 
-レビュー Issue 作成完了後、ペアとなる同週の `[Weekly Plan] YYYY-Www` Issue をクローズする。
+レビュードキュメント作成完了後、ペアとなる同週の `docs/03_週次運用/週次計画/YYYY-Www.md` の frontmatter を `status: archived` に書き換える。
 
-```bash
-# 当週の計画 Issue 番号を取得（タイトルに "YYYY-Www" を含むもの）
-PLAN_NUM=$(gh issue list --label weekly-plan --state open --search "YYYY-Www in:title" --json number --jq '.[0].number')
-# レビュー Issue 番号をコメントに含めてクローズ
-gh issue close "$PLAN_NUM" --comment "対応する [Weekly Review] Issue: #<REVIEW_NUM> で振り返り完了"
+```
+Edit tool で対象ファイルを開き、frontmatter の "status: active" を "status: archived" に変更する。
+末尾に「対応する週次レビュー: ../週次レビュー/YYYY-Www.md で振り返り完了」を追記する。
 ```
 
-対象 Issue が見つからない場合（稀）はスキップし、報告に明記する。
+対象ファイルが見つからない場合（稀）はスキップし、報告に明記する。
 
 ### Phase 5: 週次計画の自動生成
 
@@ -314,13 +317,23 @@ gh issue close "$PLAN_NUM" --comment "対応する [Weekly Review] Issue: #<REVI
 - レビュー結果の「来週への申し送り」が計画の入力になる
 - ユーザーへの確認は不要（レビューと計画はセットで実行する）
 
-## 出力フォーマット（Issue 本文）
+## 出力フォーマット（ファイル本文）
 
 ```markdown
+---
+type: weekly-review
+week: YYYY-Www
+date: YYYY-MM-DD
+status: active
+tags: []
+---
+
+# Weekly Review YYYY-Www
+
 ## 週
 - **ISO Week**: YYYY-Www
 - **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
-- **計画 Issue**: #NNN（[Weekly Plan] YYYY-Www）
+- **計画ドキュメント**: `../週次計画/YYYY-Www.md`
 
 ## サマリー
 
@@ -480,27 +493,29 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 
 - 未達タスクの引き継ぎ
 - 来週注意すべきこと
-<!-- 来週の [Weekly Plan] Issue に引き継がれる -->
+<!-- 来週の docs/03_週次運用/週次計画/YYYY-W(n+1).md に引き継がれる -->
 
-## 関連 Issue
+## 関連ドキュメント・Issue
 
-<!-- GA4/GSC/AdSense snapshot Issue、施策 Issue、critical-review / pre-mortem Issue を #番号で列挙 -->
+<!-- GA4/GSC/AdSense snapshot Issue（auto-generated ラベル）や施策 Issue（enhancement ラベル）は #番号で参照 -->
+<!-- critical-review / pre-mortem は `../../04_レビュー/{critical-review,pre-mortem}/<file>.md` で相対リンク参照 -->
 ```
 
 ## 運用ルール
 
 - **毎週日曜〜月曜に実行**する想定（レビュー完了後に自動で `/weekly-plan` が実行される）
-- 当週の計画 Issue `[Weekly Plan] YYYY-Www` が存在しない場合でも、git log ベースで実績を収集する
-- レビュー Issue は蓄積する（クローズせず open のままでもよい。古い週の Issue は傾向分析に使用）
-- `/weekly-plan` の Phase 1 Agent D が前週の `[Weekly Review]` Issue を参照する
+- 当週の計画ドキュメント `docs/03_週次運用/週次計画/YYYY-Www.md` が存在しない場合でも、git log ベースで実績を収集する
+- レビュードキュメントは蓄積する（`status: active` のままでもよい。古い週は傾向分析に使用）
+- `/weekly-plan` の Phase 1 Agent D が前週の `docs/03_週次運用/週次レビュー/YYYY-W(n-1).md` を参照する
 
-## Issue ラベル
+## 保存先 / Issue ラベル
 
-- `weekly-review` — 本スキルが作成する Issue のラベル
-- `weekly-plan` — ペアの週次計画 Issue。Phase 4.5 でクローズ対象
-- `gsc-snapshot` / `ga4-snapshot` / `adsense-snapshot` — Phase 1 Agent C が observe モードで作成する snapshot Issue
-- `gsc-improvement` / `ga4-improvement` / `adsense-improvement` — 施策 Issue（effect 判定は各 observe が担当）
-- `critical-review` / `pre-mortem` — 今週追加されたレビュー Issue の検出用
+- 本スキル出力: `docs/03_週次運用/週次レビュー/YYYY-Www.md`
+- ペアの週次計画: `docs/03_週次運用/週次計画/YYYY-Www.md`（Phase 4.5 で `status: archived` に書き換え）
+- `gsc-snapshot` / `ga4-snapshot` / `adsense-snapshot` — Phase 1 Agent C が observe モードで作成する snapshot Issue（auto-generated 系として存続）
+- `gsc-improvement` / `ga4-improvement` / `adsense-improvement` — 施策 Issue（enhancement ラベルで存続、effect 判定は各 observe が担当）
+- 当週分の critical-review: `docs/04_レビュー/critical-review/YYYY-MM-DD-*.md`
+- 当週分の pre-mortem: `docs/04_レビュー/pre-mortem/YYYY-MM-DD-*.md`
 
 ## 実証チェックリスト（observe で effect ラベル変更 / Issue コメント post する前に必須）
 
@@ -531,11 +546,10 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 
 ## 参照
 
-- `gh issue list --label weekly-review --state all` / `gh issue list --label weekly-plan --state all` — 週次計画・レビューの蓄積先
+- `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` / `ls -t docs/03_週次運用/週次計画/*.md | head -5` — 週次計画・レビューの蓄積先
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
 - `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
-- `.github/ISSUE_TEMPLATE/weekly-review.md` — 本スキルの Issue テンプレ
 - `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
@@ -547,8 +561,8 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画スキル（ペア運用）
 - `.claude/skills/management/knowledge/SKILL.md` — ナレッジ記録
 
-注: 2026-04-15 以降、以下は廃止:
-- `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（過去分も 2026-04-17 削除済み）
-- DB `seo_tracking` / `seo_actions` テーブル — GitHub Issues で代替
-- `.claude/skills/analytics/{gsc,ga4}-improvement/reference/improvement-log.md` — 2026-04-21 に GitHub Issues にマイグレーション済み。過去ログは `reference/archive/` に保存
-- 週次計画・週次レビューのマークダウン保存先 — 2026-04-21 に GitHub Issues（`weekly-plan` / `weekly-review` ラベル）へマイグレーション済み
+注: 廃止履歴
+- `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（2026-04-17 削除）
+- DB `seo_tracking` / `seo_actions` テーブル — GitHub Issues で代替（2026-04-15）
+- `.claude/skills/analytics/{gsc,ga4}-improvement/reference/improvement-log.md` — GitHub Issues に移行（2026-04-21、過去ログは `reference/archive/`）
+- GitHub Issues `weekly-plan` / `weekly-review` ラベル — `docs/03_週次運用/` に再移行（2026-05-16）。過去 Issue は close + 本ディレクトリへ転記済み

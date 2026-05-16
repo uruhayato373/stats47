@@ -49,33 +49,35 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - 例: 「DB レコード数」→ better-sqlite3 で直接 COUNT する
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
-5. GitHub Issue を作成。テンプレは `.github/ISSUE_TEMPLATE/critical-review.md` に準拠:
-   ```bash
-   # 本文を /tmp/critical-review-body.md に書き出し後:
-   gh issue create \
-     --title "[Critical Review] {対象名}" \
-     --label "critical-review" \
-     --body-file /tmp/critical-review-body.md
+5. Write tool で `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` を作成（topic は対象ドキュメントから推測した短い slug、例 `nsm` / `monetization` / `growth-loops`）。frontmatter:
+   ```yaml
+   ---
+   type: critical-review
+   topic: <slug>
+   target: <レビュー対象の docs パス>
+   date: YYYY-MM-DD
+   status: draft | published | decided | archived
+   tags: []
+   ---
    ```
-6. 作成した Issue 番号と URL を報告
+6. 作成したファイルパスを報告
 
 ## 出力先
 
-GitHub Issue（`[Critical Review] {対象名}` タイトル、`critical-review` ラベル）。
+`docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md`
 
-本文には以下の順でセクションを含める（テンプレ準拠）:
-- 対象（関連ドキュメントのリンク）
+本文には以下の順でセクションを含める:
+- 対象（関連ドキュメントの相対リンク）
 - Status（Draft / Published / Decided / Archived）
 - Executive Summary（総評）
 - 検証観点（前提 / 代替案 / 実行可能性 / リスク / 機会費用）
 - 処方箋 / 決定事項（個別批判と処方箋を対で記載）
 - 観測 / 次アクション（チェックボックス）
-- 関連 Issue（#番号参照）
+- 関連ドキュメント（相対リンクで参照。残存 Issue は `#番号` で参照）
 
-## Issue ラベル
+## 関連
 
-- `critical-review` — 本スキルが作成する Issue のラベル
-- weekly-plan / weekly-review / pre-mortem / 各改善施策 Issue からクロスリファレンスされる
+- 出力先 docs と weekly-plan / weekly-review / pre-mortem / 改善ログ 各ドキュメントからクロスリファレンスされる
 
 ## 実証チェックリスト（批判的指摘を Issue にまとめる前に必須）
 
@@ -96,6 +98,6 @@ GitHub Issue（`[Critical Review] {対象名}` タイトル、`critical-review` 
 
 ## 参照
 
-- `gh issue list --label critical-review --state all` — 過去のレビュー（トーンやフォーマットの参考）
-- `gh issue list --label critical-review --state open` — 意思決定待ちのレビュー
-- `.github/ISSUE_TEMPLATE/critical-review.md` — Issue テンプレ
+- `ls -t docs/04_レビュー/critical-review/*.md | head -5` — 過去のレビュー（トーンやフォーマットの参考）
+- `grep -l "status: draft\|status: published" docs/04_レビュー/critical-review/*.md` — 意思決定待ちのレビュー
+- `docs/04_レビュー/critical-review/` — 出力先ディレクトリ

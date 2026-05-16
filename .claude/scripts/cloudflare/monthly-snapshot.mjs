@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Cloudflare 月次 snapshot — 日次 snapshot を集計して月次 Issue を起票。
+ * Cloudflare 月次 snapshot — 日次 snapshot を集計して月次 Markdown を docs/ に書き出し。
  *
  * 入力: `.claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json`（日次 GraphQL 取得結果）
  * 出力:
  *   - `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots/YYYY-MM.json`
- *   - `[Cloudflare Cost Snapshot] YYYY-MM` Issue（ラベル `cost-snapshot, auto-generated`）
+ *   - `docs/04_レビュー/cloudflare-cost/YYYY-MM.md`（人間向け要約、frontmatter 付き）
  *
  * 集計対象: 「請求月」= 前月の 15 日から当月の 14 日（Cloudflare の請求サイクル）
  *   - 当 script が JST 09:00 of 15th に走るので、当月の請求サイクルが直前で締まる想定
@@ -15,11 +15,10 @@
  *   node .claude/scripts/cloudflare/monthly-snapshot.mjs              # 直近の請求サイクル
  *   node .claude/scripts/cloudflare/monthly-snapshot.mjs --cycle 2026-04
  *   node .claude/scripts/cloudflare/monthly-snapshot.mjs --dry-run
- *   node .claude/scripts/cloudflare/monthly-snapshot.mjs --no-issue
+ *   node .claude/scripts/cloudflare/monthly-snapshot.mjs --no-write   # JSON のみ書く（Markdown スキップ）
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, unlinkSync } from "node:fs";
-import { execSync } from "node:child_process";
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -29,11 +28,12 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOTS_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/cloudflare/snapshots");
 const MONTHLY_DIR = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots");
+const DOCS_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー/cloudflare-cost");
 const BUDGETS_PATH = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets.json");
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes("--dry-run");
-const NO_ISSUE = args.includes("--no-issue");
+const NO_WRITE = args.includes("--no-write") || args.includes("--no-issue");
 const CYCLE_ARG = (() => {
   const i = args.indexOf("--cycle");
   return i >= 0 && args[i + 1] ? args[i + 1] : null;
@@ -217,16 +217,21 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
   return lines.join("\n");
 }
 
-function ghIssueExists(title) {
-  try {
-    const out = execSync(
-      `gh issue list --search "${title} in:title" --state all --json number --jq '.[0].number'`,
-      { encoding: "utf-8" }
-    ).trim();
-    return out && out !== "null" ? parseInt(out, 10) : null;
-  } catch {
-    return null;
-  }
+function buildDocsMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody) {
+  const lines = [];
+  lines.push("---");
+  lines.push(`type: cloudflare-cost-snapshot`);
+  lines.push(`month: ${cycle}`);
+  lines.push(`period_start: ${range.start}`);
+  lines.push(`period_end: ${range.end}`);
+  lines.push(`generated_at: ${new Date().toISOString().slice(0, 10)}`);
+  const hasError = comparisons.some((c) => c.status === "error");
+  const hasWarn = comparisons.some((c) => c.status === "warning");
+  lines.push(`status: ${hasError ? "error" : hasWarn ? "warning" : "ok"}`);
+  lines.push("---");
+  lines.push("");
+  lines.push(snapshotBody);
+  return lines.join("\n");
 }
 
 function main() {
@@ -269,31 +274,23 @@ function main() {
     console.log(JSON.stringify(snapshot, null, 2));
   }
 
-  const title = `[Cloudflare Cost Snapshot] ${cycle}`;
-  const body = buildIssueBody(cycle, range, agg, comparisons, prevAgg);
+  const snapshotBody = buildIssueBody(cycle, range, agg, comparisons, prevAgg);
+  const docsMarkdown = buildDocsMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody);
 
-  if (NO_ISSUE || DRY_RUN) {
-    console.log("\n--- Issue body preview ---");
-    console.log(body);
+  if (NO_WRITE || DRY_RUN) {
+    console.log("\n--- docs/ markdown preview ---");
+    console.log(docsMarkdown);
     return;
   }
 
-  if (ghIssueExists(title)) {
-    console.log(`Issue already exists: ${title}. Skip.`);
+  mkdirSync(DOCS_DIR, { recursive: true });
+  const docsOut = path.join(DOCS_DIR, `${cycle}.md`);
+  if (existsSync(docsOut)) {
+    console.log(`Already exists: ${docsOut}. Skip.`);
     return;
   }
-
-  const tmp = `/tmp/cloudflare-monthly-${cycle}.md`;
-  writeFileSync(tmp, body);
-  try {
-    const out = execSync(
-      `gh issue create --title "${title}" --body-file "${tmp}" --label "cost-snapshot,auto-generated"`,
-      { encoding: "utf-8" }
-    );
-    console.log(`✓ Created issue: ${out.trim()}`);
-  } finally {
-    try { unlinkSync(tmp); } catch {}
-  }
+  writeFileSync(docsOut, docsMarkdown);
+  console.log(`✓ Wrote ${docsOut}`);
 }
 
 main();

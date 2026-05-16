@@ -132,12 +132,13 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - ドメイン固有パネリストは、汎用パネリストと異なる視点を提供すること（重複回避）
-- 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] feature:{feature名} / YYYY-MM-DD`）として作成する:
-  ```bash
-  # 本文を /tmp/review-feature-body.md に書き出し後:
-  gh issue create \
-    --title "[Dev Review] feature:{feature名} / YYYY-MM-DD" \
-    --label "dev-review" \
-    --body-file /tmp/review-feature-body.md
+- 出力は `docs/04_レビュー/dev-review/feature-{feature名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+  ```yaml
+  ---
+  type: dev-review
+  scope: feature-{feature名}
+  date: 2026-MM-DD
+  status: active
+  ---
   ```
-- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる

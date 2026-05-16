@@ -1,9 +1,9 @@
 ---
 name: diagnose-youtube-shadowban
-description: YouTube チャンネルのシャドウバン疑いを事実ベースで診断し、GitHub Issue に集約する。Use when user says "シャドウバン確認", "YouTube診断", "動画再生されない", or detects views-drop. 新規投稿の 48h 再生数・トラフィックソース・登録者増減から判定し、疑い動画リストを Issue 化する。
+description: YouTube チャンネルのシャドウバン疑いを事実ベースで診断し、docs/15_実験ログ/youtube/ に診断記録を出力する。Use when user says "シャドウバン確認", "YouTube診断", "動画再生されない", or detects views-drop. 新規投稿の 48h 再生数・トラフィックソース・登録者増減から判定し、疑い動画リストを Markdown で記録する。
 ---
 
-YouTube チャンネル `UCdRiwDSX1aUd0dSd7Cs08Kg`（stats47jp）のシャドウバン疑いを事実ベースで診断し、回復アクションの起点となる GitHub Issue を起票する。
+YouTube チャンネル `UCdRiwDSX1aUd0dSd7Cs08Kg`（stats47jp）のシャドウバン疑いを事実ベースで診断し、回復アクションの起点となる診断レポートを `docs/15_実験ログ/youtube/recovery-{YYYY-MM-DD}.md` に出力する。
 
 ## 用途
 
@@ -34,14 +34,33 @@ node .claude/scripts/youtube/diagnose-shadowban.js > /tmp/youtube-diag/report.js
 - `subscriberDelta`: 直近 14 日の登録者増減
 - `viewsDelta.changePct`: 直近 14 日 vs その前 14 日の views 変化率
 
-### 2. Issue 起票
+### 2. 診断レポートを docs/ に出力
 
 ```bash
 TODAY=$(date +%F)
 VERDICT=$(jq -r .verdict /tmp/youtube-diag/report.json)
 SUSPECT_N=$(jq '.suspectVideos | length' /tmp/youtube-diag/report.json)
 
-cat > /tmp/youtube-diag/issue-body.md <<EOF
+# verdict から status を決定: healthy → resolved、それ以外 → monitoring
+if [ "$VERDICT" = "healthy" ]; then
+  STATUS="resolved"
+else
+  STATUS="monitoring"
+fi
+
+OUT_DIR="docs/15_実験ログ/youtube"
+OUT_FILE="${OUT_DIR}/recovery-${TODAY}.md"
+mkdir -p "$OUT_DIR"
+
+cat > "$OUT_FILE" <<EOF
+---
+type: youtube-recovery
+date: ${TODAY}
+status: ${STATUS}
+---
+
+# YouTube Recovery 診断 ${TODAY}
+
 ## 診断サマリー
 
 - **日付**: ${TODAY}
@@ -69,15 +88,12 @@ $(cat /tmp/youtube-diag/report.txt)
 - 戦略メモ: \`.claude/agents/youtube-strategist.md\` のシャドウバン関連セクション
 EOF
 
-gh issue create \
-  --title "[YouTube Recovery] ${TODAY}" \
-  --label "youtube-experiment" \
-  --body-file /tmp/youtube-diag/issue-body.md
+echo "✓ Wrote ${OUT_FILE}"
 ```
 
 ### 3. 結果報告
 
-Issue 番号と verdict、suspect 数をユーザーに報告する。`likely-shadowban` のときは続けて `/recover-youtube-shadowban` の実行を促す。
+出力ファイルパス、verdict、suspect 数をユーザーに報告する。`likely-shadowban` のときは続けて `/recover-youtube-shadowban` の実行を促す。`status: resolved` まで復帰したら同名ファイルを上書き更新する（同日 = 1 ファイル）。
 
 ## オプション
 

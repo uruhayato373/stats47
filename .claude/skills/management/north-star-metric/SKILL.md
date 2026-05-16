@@ -158,23 +158,34 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 `/weekly-plan` の「現状サマリー」テーブルに NSM と Input Metrics を追加する方法を提案。
 ```
 
-GitHub Issue に出力する（`critical-review` ラベル、タイトル `[Critical Review] North Star Metric`）。
+### Step 6: critical-review レポートを Write する
 
-既存の `[Critical Review] North Star Metric` Issue が既にある場合は、それを更新する（新規作成ではなくコメント追記 or 本文編集）。初回のみ新規作成する:
+レビュー本文（NSM 定義・7 基準評価・Input Metrics）を `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
 
-```bash
-# 本文を /tmp/north-star-metric-body.md に書き出し後:
-# 初回:
-gh issue create \
-  --title "[Critical Review] North Star Metric" \
-  --label "critical-review" \
-  --body-file /tmp/north-star-metric-body.md
+frontmatter は以下を必ず含める:
 
-# 既存 Issue（例: #NN）に追記する場合:
-gh issue comment NN --body-file /tmp/north-star-metric-body.md
+```yaml
+---
+type: critical-review
+topic: nsm
+date: 2026-MM-DD
+status: active
+---
 ```
 
-過去の定義変遷は `gh issue view <number> --comments` で参照できる。
+本文は上記「出力フォーマット」のテンプレートをそのまま続ける。
+
+**注意**: NSM の週次 snapshot（JSON）の保存先は変更なし。引き続き `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/{YYYY-Www}.json` に保存する。docs/ には critical-review の結果（NSM 再定義・基準評価・Input Metrics の見直し）のみを出力する。
+
+### Step 7: 過去レビューの参照
+
+過去の NSM 定義変遷は以下で確認:
+
+```bash
+ls -t docs/04_レビュー/critical-review/*.md | head -5
+```
+
+旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/critical-review/` に蓄積する。
 
 ## 参照
 
