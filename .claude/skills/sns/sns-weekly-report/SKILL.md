@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`/update-sns-metrics` が蓄積）を集計し、週次レポートを Markdown で生成する。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: SNS メトリクスの時系列履歴は `.claude/` 配下のファイル。旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み。
+**記録先の統一原則（.claude/rules/data-storage.md）**: SNS メトリクスの時系列履歴は `.claude/` 配下のファイル。旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み。
 
 ## 引数
 

@@ -69,7 +69,7 @@
 ### 2026-04-17: 計測データを D1 → ファイルへ移行
 
 - 旧 D1 テーブル `performance_metrics` / `performance_budgets` を `.claude/skills/analytics/performance-improvement/` 配下のファイルに移行
-- 理由: 「計測蓄積は .claude/ 配下のファイル」という記録先統一原則（CLAUDE.md §記録先の統一原則）
+- 理由: 「計測蓄積は .claude/ 配下のファイル」という記録先統一原則（.claude/rules/data-storage.md）
 - 旧データは snapshots/YYYY-MM-DD/metrics.csv として保存、閾値は budgets.json に集約
 - コミット: (本コミットで確定)
 

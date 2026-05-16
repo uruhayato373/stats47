@@ -6,7 +6,7 @@
  * .claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json に保存する。
  * index.json を追記して時系列トラッキング可能にする。
  *
- * 記録先の統一原則（CLAUDE.md §記録先の統一原則）:
+ * 記録先の統一原則（.claude/rules/data-storage.md）:
  *   計測蓄積は .claude/ 配下のファイル。旧パス docs/03_レビュー/weekly-metrics/ は 2026-04-17 に廃止。
  *
  * 参照: .claude/scripts/lib/metrics-reader.mjs

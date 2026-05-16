@@ -7,7 +7,7 @@ allowed-tools: Read, Bash, Grep
 
 `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積された Lighthouse / PSI 計測履歴からパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
+**記録先の統一原則（.claude/rules/data-storage.md）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
 
 ## 前提条件
 

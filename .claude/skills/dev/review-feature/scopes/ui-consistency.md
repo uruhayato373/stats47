@@ -216,7 +216,7 @@ Phase 1 の結果をページ種別ごとに整理する。
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - 全パネリストが同じ結論を出してはならない。意見の対立・矛盾を恐れない
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
-- CLAUDE.md の UI コンポーネント規約・レスポンシブ規約を基準とする
+- `.claude/rules/ui-components.md` の UI コンポーネント規約・レスポンシブ規約を基準とする
 - 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] ui-consistency / YYYY-MM-DD`）として作成する:
   ```bash
   # 本文を /tmp/review-ui-consistency-body.md に書き出し後:

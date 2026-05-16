@@ -4,7 +4,7 @@
  * 旧 D1 テーブル `sns_metrics` を置き換えるファイル永続化レイヤ。
  * 保存先: .claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv
  *
- * 記録先の統一原則（CLAUDE.md §記録先の統一原則）:
+ * 記録先の統一原則（.claude/rules/data-storage.md）:
  *   計測蓄積は .claude/ 配下のファイル。`sns_posts` テーブルのキャッシュカラム
  *   (impressions, likes, reposts, replies, bookmarks, metrics_updated_at) は運用データ
  *   として D1 に残し、本 store は時系列履歴のみを扱う。

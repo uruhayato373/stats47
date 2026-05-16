@@ -65,7 +65,7 @@ X / YouTube / Instagram / TikTok の投稿パフォーマンス（impressions / 
 ### 2026-04-17: D1 `sns_metrics` → ファイルへ移行
 
 - 旧 D1 テーブル `sns_metrics` を `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に移行
-- 理由: 「計測蓄積は .claude/ 配下のファイル」という記録先統一原則（CLAUDE.md §記録先の統一原則）を徹底。sns_metrics だけ D1 に残す例外を解消
+- 理由: 「計測蓄積は .claude/ 配下のファイル」という記録先統一原則（.claude/rules/data-storage.md）を徹底。sns_metrics だけ D1 に残す例外を解消
 - 書き込みヘルパ `.claude/scripts/lib/sns-metrics-store.cjs` を新設（`/update-sns-metrics` の各プラットフォーム reference から require）
 - 最新値キャッシュ用の `sns_posts.impressions / likes / reposts / replies / bookmarks / metrics_updated_at` カラムはそのまま D1 に残す（運用データ）
 - 既存 275 行のデータは日付別 CSV に移行済み

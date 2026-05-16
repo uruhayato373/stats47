@@ -8,7 +8,7 @@ allowed-tools: Read, Bash, Grep
 
 Lighthouse CLI をローカル実行して stats47.jp の各ページのパフォーマンスを測定し、`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積する。閾値は同ディレクトリの `budgets.json` を参照。API キー不要・レート制限なし。測定結果はマークダウンテーブルで出力する。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
+**記録先の統一原則（.claude/rules/data-storage.md）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
 
 ## 引数
 
