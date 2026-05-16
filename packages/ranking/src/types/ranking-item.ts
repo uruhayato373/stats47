@@ -96,8 +96,9 @@ export interface NormalizationOption {
    * 正規化の種類
    * - per_population: 総人口あたり
    * - per_area:       総面積あたり
+   * - per_household:  総世帯数あたり
    */
-  type: "per_population" | "per_area";
+  type: "per_population" | "per_area" | "per_household";
 
   /**
    * UI上の表示ラベル
