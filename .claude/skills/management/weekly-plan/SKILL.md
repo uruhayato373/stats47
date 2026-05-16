@@ -111,7 +111,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 ```
 調査項目:
 - docs/02_実装計画/01_実装ロードマップ.md の現在のスプリント・未完了タスク
-- 未着手の Issue 一覧と優先度（`gh issue list --state open --label enhancement` を tier ラベルで優先度判定）
+- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/50_Issues/feature-backlog.md の section ごとの `tier:` で優先度判定
 - 直近の批判的レビュー・Pre-Mortem ドキュメント
   ls -t docs/04_レビュー/critical-review/*.md | head -5
   ls -t docs/04_レビュー/pre-mortem/*.md | head -3

@@ -71,7 +71,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
-既存の週次計画（`gh issue list --label weekly-plan --state all --limit 5`）から追跡中の KPI を確認する。
+既存の週次計画（`ls -t docs/03_週次運用/週次計画/*.md | head -5` を Read）から追跡中の KPI を確認する。
 
 ### Step 3: NSM 候補の検討
 

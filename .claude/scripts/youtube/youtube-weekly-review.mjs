@@ -146,7 +146,7 @@ function upsertWeeklySection(latest, weekId, summary) {
 function findOpenRecoveryIssue() {
   try {
     const json = execSync(
-      `gh issue list --label youtube-experiment --state open --search "Recovery in:title" --json number,title --limit 5`,
+      `gh issue list --label youtube-alert --state open --search "Recovery in:title" --json number,title --limit 5`,
       { encoding: "utf-8" }
     );
     const arr = JSON.parse(json);

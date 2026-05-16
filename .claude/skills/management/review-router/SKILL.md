@@ -38,7 +38,7 @@ user-invocable: false
 
 - 3月・6月・9月・12月の **15日以降** → `/pre-mortem` を追加実行
 - それ以外 → `/weekly-review` のみ
-- 前回の pre-mortem が同月に既に存在する場合（`gh issue list --label pre-mortem --search "[Pre-Mortem] {YYYY-MM}"` でヒットする）→ スキップ
+- 前回の pre-mortem が同月に既に存在する場合（`ls docs/04_レビュー/pre-mortem/{YYYY-MM}-*.md 2>/dev/null` でヒットする）→ スキップ
 
 ### 3. 複合的な依頼の場合
 
@@ -71,29 +71,29 @@ user-invocable: false
 
 | スキル | 対象 | 周期 | 出力先 |
 |---|---|---|---|
-| `/weekly-review` | プロジェクト進捗 | 毎週 | GitHub Issue (`weekly-review` ラベル) |
-| `/weekly-plan` | 来週の計画 | 毎週 | GitHub Issue (`weekly-plan` ラベル) |
-| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | GitHub Issue (`pre-mortem` ラベル) |
-| `/seo-audit` | SEO 総合監査 | 月次 | GitHub Issue (`seo-audit` ラベル) |
+| `/weekly-review` | プロジェクト進捗 | 毎週 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
+| `/weekly-plan` | 来週の計画 | 毎週 | `docs/03_週次運用/週次計画/YYYY-Www.md` |
+| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | `docs/04_レビュー/pre-mortem/YYYY-MM-DD-{topic}.md` |
+| `/seo-audit` | SEO 総合監査 | 月次 | `docs/04_レビュー/seo-audit/YYYY-MM-DD.md` |
 
 ### 随時レビュー
 
 | スキル | 対象 | トリガー | 出力先 |
 |---|---|---|---|
-| `/expert-review` | ブログ記事（データ正確性） | 記事パス指定 | GitHub Issue (`blog-review` ラベル) |
+| `/expert-review` | ブログ記事（データ正確性） | 記事パス指定 | `docs/04_レビュー/expert-review/{slug}.md` |
 | `/panel-review` | ブログ記事企画 | 企画・アイデア | stdout |
 | `/proofread-article` | 記事公開前チェック | 公開前 | stdout |
-| `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | GitHub Issue (`critical-review` ラベル) |
+| `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | `docs/04_レビュー/critical-review/YYYY-MM-DD-{topic}.md` |
 | `/ui-panel-review` | Web ページ UI/UX | URL 指定 | stdout |
-| `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature --scope feature <name>` | feature ドメイン品質 | feature 名指定 | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature --scope feature ads` | ads ドメイン品質 | 随時 | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature --scope ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | GitHub Issue (`dev-review` ラベル) |
-| `/review-feature --scope types` | 型安全性 | tsc エラー時 | GitHub Issue (`dev-review` ラベル) |
+| `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | `docs/04_レビュー/dev-review/app-YYYY-MM-DD.md` |
+| `/review-feature --scope feature <name>` | feature ドメイン品質 | feature 名指定 | `docs/04_レビュー/dev-review/feature-YYYY-MM-DD.md` |
+| `/review-feature --scope feature ads` | ads ドメイン品質 | 随時 | `docs/04_レビュー/dev-review/feature-ads-YYYY-MM-DD.md` |
+| `/review-feature --scope ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | `docs/04_レビュー/dev-review/ui-consistency-YYYY-MM-DD.md` |
+| `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | `docs/04_レビュー/dev-review/packages-YYYY-MM-DD.md` |
+| `/review-feature --scope types` | 型安全性 | tsc エラー時 | `docs/04_レビュー/dev-review/types-YYYY-MM-DD.md` |
 | `/review-tests` | テストの確認・作成 | コード変更後 | stdout |
-| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | GitHub Issue (`sns-weekly-report` ラベル) |
+| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | `docs/04_レビュー/sns-weekly-report/YYYY-Www.md` |
 
 ### 過去分の参照
 
-出力先が Issue のスキルは `gh issue list --label <ラベル> --state all` で参照できる。ラベル一覧: `weekly-review`, `weekly-plan`, `pre-mortem`, `seo-audit`, `critical-review`, `dev-review`, `blog-review`, `sns-weekly-report`, `performance-report`, `youtube-experiment`。
+出力先が docs/ のスキルは `ls -t docs/<path>/*.md | head -5` または Obsidian で参照できる。詳細は [`../../rules/docs-vs-issues.md`](../../rules/docs-vs-issues.md)。

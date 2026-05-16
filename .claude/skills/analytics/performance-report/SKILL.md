@@ -255,8 +255,7 @@ status: active
 - `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
-- `gh issue list --label performance-report --state all` — 過去のレポート
-- `.github/ISSUE_TEMPLATE/performance-report.md` — Issue テンプレ
+- `ls -t docs/04_レビュー/performance-report/*.md` — 過去のレポート
 
 ## DB パス
 

@@ -240,10 +240,11 @@ node .claude/scripts/youtube/analytics.js demographics 28
 
 ### 分析レポート
 
-過去の YouTube 実験・レビュー Issue は以下で参照できる:
+過去の YouTube 実験・レビュー記録は以下で参照できる:
 
 ```bash
-gh issue list --label youtube-experiment --state all
+ls -t docs/15_実験ログ/youtube/EXP-*.md       # 実験ログ
+ls -t docs/04_レビュー/sns-weekly-report/*.md # 週次レポート
 ```
 
 ## 参照

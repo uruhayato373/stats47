@@ -171,8 +171,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      ```
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
-   SNS / YouTube の週次ハイライトは本レビュー Issue `[Weekly Review] YYYY-Www` 本文に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV と improvement Issue（`gsc-improvement` / `ga4-improvement` ラベル）に分離済みなので、レビュー本文では「主要指標の前週差 + snapshot Issue 番号」のみに圧縮する。
+   SNS / YouTube の週次ハイライトは本レビュードキュメント `docs/03_週次運用/週次レビュー/YYYY-Www.md` 本文に直接記載する。
+   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/05_改善ログ/{gsc,ga4}.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
@@ -311,7 +311,7 @@ Edit tool で対象ファイルを開き、frontmatter の "status: active" を 
 
 ### Phase 5: 週次計画の自動生成
 
-計画 Issue のクローズ完了後、**自動的に `/weekly-plan` を実行**して来週の計画を生成する。
+当週計画ドキュメントの archived 化完了後、**自動的に `/weekly-plan` を実行**して来週の計画を生成する。
 
 - 対象週: レビュー対象週の翌週（例: W11 レビュー → W12 計画）
 - レビュー結果の「来週への申し送り」が計画の入力になる
@@ -426,13 +426,13 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
-**施策効果サマリ** (`gh issue list --label gsc-improvement --state open --json number,title,labels` から抽出):
+**施策効果サマリ** (`docs/05_改善ログ/gsc.md` を Read し `status: pending` 以外の section を抽出):
 
-| Issue | Tier | 経過日数 | ターゲット | 判定 |
+| Section | Tier | 経過日数 | ターゲット | status |
 |---|---|---|---|---|
 
 observe モードがこの週に判定変化を起こした施策のみを列挙。以下のルールで整形:
-- 判定が **先週から変化** した施策は行末に `(変化)` マークを付与（pending→partial 等）
+- status が **先週から変化** した施策は行末に `(変化)` マークを付与（pending→partial 等）
 - `effect/adverse` が含まれる場合は **このセクション冒頭で警告**
 - 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
 
