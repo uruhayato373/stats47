@@ -24,7 +24,7 @@
 - **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **計画・課題は GitHub Issues**: `docs/90_課題管理/` は廃止 (2026-04)
+- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
 - **DB 変更はローカル D1 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **ローカル D1 パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない):
@@ -41,8 +41,14 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
-| 改善施策デプロイ | `.claude/skills/analytics/{gsc,ga4,performance,sns-metrics}-improvement/reference/improvement-log.md` |
-| 週次計画進捗 | `[Weekly Plan] YYYY-Www` Issue の TODO チェックボックス |
+| 改善施策デプロイ (人間向け要約) | `docs/05_改善ログ/{gsc,ga4,adsense,psi,cloudflare-cost}.md` |
+| 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
+| 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
+| 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
+| 批判的レビュー / 事前検死 | `docs/04_レビュー/{critical-review,pre-mortem}/YYYY-MM-DD-<topic>.md` |
+| YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
+| コンテンツ backlog | `docs/22_YouTube企画/backlog/` / `docs/30_note記事企画/backlog/` |
+| 未着手の機能・自動化バックログ | `docs/50_Issues/{feature-backlog,automation-backlog,ui-improvements}.md` |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory (`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`) |
 
@@ -55,12 +61,13 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | ルール | 適用場面 |
 |---|---|
 | `coding-standards.md` | TypeScript / React / Next.js コード全般 |
-| `evidence-based-judgment.md` | improvement / 判定系スキル (effect ラベル付与時必読) |
+| `evidence-based-judgment.md` | improvement / 判定系スキル (status: effect/* 更新時必読) |
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
 | `r2-storage-design.md` | snapshot 追加・変更 |
 | `estat-api.md` | e-Stat API 利用スキル |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
-| `data-storage.md` | スキル設計時 (D1 vs `.claude/` 判定) |
+| `data-storage.md` | スキル設計時 (D1 vs `.claude/` vs `docs/` 判定) |
+| `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 |
@@ -97,9 +104,15 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 
 ### GitHub Issues 運用 (主要ラベル)
 
-- 週次運用: `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `performance-report`
-- 計測・改善: `weekly-metrics` (集約) / `{gsc,ga4,adsense,psi}-improvement` (施策) / `auto-generated`
-- Cloudflare コスト: `cost-snapshot` / `cost-improvement`
-- その他: `youtube-experiment` / `dev-review` / `blog-review` / `sns-weekly-report` / `seo-audit` / `competitor-research` / `archive`
+Issues は「PR で close される機能改修・バグ」と「日次アラート」だけに絞っている (詳細: `.claude/rules/docs-vs-issues.md`)。
 
-過去: `docs/03_レビュー/` (2026-04-21 廃止)・`docs/90_課題管理/` (2026-04 廃止) は GitHub Issues に全移行済み。
+- `enhancement` — 機能改修・改善（PR で `Closes #N` で close）
+- `bug` — バグ修正（同上）
+- `auto-generated` — Bot 生成の自動アラート
+- `cloudflare-alert` — Cloudflare 日次 usage 閾値違反 (`cloudflare-usage-daily.yml`)
+- `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
+
+過去の移行履歴:
+- `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05)
+- `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
+- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/05_改善ログ/`
