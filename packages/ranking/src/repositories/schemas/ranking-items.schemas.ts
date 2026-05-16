@@ -50,7 +50,7 @@ const VisualizationConfigSchema = z.object({
 });
 
 const NormalizationOptionSchema = z.object({
-  type: z.enum(["per_population", "per_area"]),
+  type: z.enum(["per_population", "per_area", "per_household"]),
   label: z.string(),
   unit: z.string(),
   scaleFactor: z.number().optional(),
