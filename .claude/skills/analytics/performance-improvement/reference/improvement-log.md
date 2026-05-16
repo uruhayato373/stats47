@@ -139,7 +139,58 @@
 
 ## Observation Log
 
-_（次回 `/lighthouse-audit` 実行後に追記）_
+### 2026-05-16: 5/15 PSI 悪化 3 URL の原因切り分け
+
+EXP-004b の [仮説] (未確定) として「`/themes` 系・`/ranking/future-pop-change-rate-2050` の悪化は別経路」と記録した件を、5/9-5/15 の daily PSI で検証した結果。
+
+**検証コマンド**:
+```bash
+# 1. 各日の LCP/FCP/TBT 推移
+node -e "..."  # 上記 improvement-log の EXP-004b entry に記載
+
+# 2. 検証期間中のコード commit
+git log --since=2026-05-09 --until=2026-05-15 --oneline -- apps/web/
+```
+
+**結論 (実証ベース)**:
+
+#### 1. `/themes` (mobile) — **PSI 計測ノイズと判定**
+- 5/9-5/15 LCP 範囲: 6,003-9,546ms (range 60%)
+- LCP element: 全期間で `div.grid > a.block > p.mt-1` (SSR `<p>`、同一)
+- 5/10 直後は **改善** (6905→6003)、その後振動。トレンドなし
+- 結論: 単発 5/9 vs 5/15 比較は不適切。**effect 判定の baseline には期間平均 (~7,400ms) を使うべき**
+
+#### 2. `/themes/population-dynamics` (mobile) — **5/9→5/10 で実ステップ regression、原因未特定**
+- 5/9 LCP=5,105 → 5/10 LCP=8,176 (+3,071ms / +60%)
+- LCP element: 全期間で `main.flex-1 > div.container > div.mb-6 > p.mt-2` (SSR `<p>`、同一)
+- 5/10-5/15 の LCP 範囲: 7,126-8,176ms (安定的に高位)
+- breakdown: FCP +1,946ms (3605→5551) + elementRenderDelay +1,241ms (1500→2625)
+- **FCP regression が支配**。Cookie banner は LCP element ではない (この page では別の SSR `<p>` が LCP)
+- **[仮説]** 5/10 デプロイ群のうち以下のいずれか:
+  - (a) EXP-004 → 004b の hydration コスト追加が cascade で他要素の paint を遅延
+  - (b) `e30c117f` OGP refactor の generateMetadata 副作用 (テーマページの head が肥大化 or render-blocking 追加)
+  - (c) `f6a7497f` ranking R2 snapshot 移行で D1 query が削除 → 想定外の bundle 変化
+- **検証期日**: 2026-05-23 (PR #283 デプロイ後)。Cycle 1 後の PSI で同 URL の LCP/FCP が下がれば仮説 (a) 支持、変わらなければ (b)/(c) を個別検証
+- **検証コマンド**: `git diff e30c117f^..e30c117f -- apps/web/src/app/themes/ apps/web/src/features/theme-detail/ | head -100` で head 関連変更を確認
+
+#### 3. `/ranking/future-population-change-rate-2050` (mobile) — **PSI ノイズと判定 (高確度)**
+- 5/9-5/11 LCP: 7,128-8,701ms、LCP element=`h1.text-2`
+- 5/12-5/15 LCP: 12,276-12,902ms、LCP element=`img.leaflet-tile` ← element shift
+- **5/11 18:05 (PSI run) と 5/12 18:06 (PSI run) の間にコードコミット 0 件** (`git log --since="2026-05-11 17:00" --until="2026-05-12 18:30" --oneline` で `chore(metrics)` 系のみ確認)
+- コード変更なしで LCP element + 値が急変 → **PSI / Cloudflare edge / Lighthouse runner の外部変動**が原因
+- 結論: 本 URL の 5/15 値は EXP-004 / 004b の影響ではない。effect 判定の対象外
+- **検証コマンド**: 同一 URL を 24h 内に 3 回 PSI 連続実行して variance 観測
+  ```bash
+  for i in 1 2 3; do curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/ranking/future-population-change-rate-2050&strategy=mobile&category=performance" | jq '.lighthouseResult.audits["largest-contentful-paint"].numericValue, .lighthouseResult.audits["largest-contentful-paint-element"].details.items[0].node.snippet'; sleep 60; done
+  ```
+
+### 共通教訓
+
+- **PSI 単発比較は危険**: mobile PSI は run-to-run variance が大きい (±20-40%)。effect 判定には期間平均か中央値を使う
+- **LCP element の安定性が前提**: element shift があるとき、その shift 自体が真のメッセージ (例: ranking 詳細では Leaflet が依然不安定なリスク要素)
+- **コード変更無しの regression は外部要因**: コミット 0 件期間の変動は PSI / CDN / runner の外部 noise として扱う
+
+_(次回 `/fetch-psi-audit` 実行後に追記)_
 
 ---
 
