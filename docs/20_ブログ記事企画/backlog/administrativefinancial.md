@@ -175,3 +175,18 @@
 4. セクション3: 収入 vs 納税義務者割合──稼ぐ人が多い県
 5. セクション4: 実収入の長期推移──伸びている県・停滞する県
 6. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| fiscal-strength-deep-dive | 財政力指数 詳細分析 県別5階層 | P3 | 財政力 都道府県 | none | S |
+| furusato-tax-net-balance | ふるさと納税 流入流出 県別 | P1/P3 | ふるさと納税 都道府県 | さとふる/楽天 | S |
+| koumuin-salary-by-pref | 公務員平均給与 県別 ラスパイレス | P3 | 公務員 給与 都道府県 | 公務員予備校 | S |
+| municipal-merger-history | 市町村合併進捗 県別 30年史 | P3 | 市町村合併 | none | A |
+| local-tax-revenue-shock | 地方税減収ショック 県別 コロナ前後 | P3 | 地方税 減収 | none | A |
+| public-debt-future-burden | 将来負担比率 県別 危険水準 | P3 | 将来負担比率 | none | A |
+| ai-koumuin-rpa-pref | RPA導入率 県別自治体 業務効率化 | P3 | RPA 自治体 | RPA系教材 | A |
+| dx-municipal-readiness | 自治体DX進捗 県別ランキング | P3 | 自治体 DX | DX教材 | A |

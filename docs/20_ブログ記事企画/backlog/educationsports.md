@@ -175,3 +175,19 @@
 3. セクション2: 中学校・高校費──学校段階で変わる格差構造
 4. セクション3: 小学校費 vs 中学校費──一貫して教育投資する県
 5. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| education-cost-53x-gap | 教育費53倍格差 県別塾+習い事 | P1/P3 | 教育費 都道府県 | スタディサプリ/Z会 | S |
+| university-deviation-pref | 大学偏差値ランキング 県別最高峰 | P1 | 大学 偏差値 都道府県 | スタディサプリ/河合塾 | S |
+| ronin-rate-prefecture | 浪人率ランキング 県別 5年推移 | P1 | 浪人 都道府県 | 予備校系 | A |
+| public-vs-private-tuition | 私立中学進学率 県別 教育費比較 | P1 | 私立中学 都道府県 | 中学受験塾 | A |
+| junior-sports-club-pref | スポーツ少年団加入率 県別 | P1 | スポーツ少年団 都道府県 | none | A |
+| school-teacher-burnout | 教員病休率 県別 多忙化指標 | P3 | 教員 病休 | none | A |
+| eiken-rate-prefecture | 英検取得率ランキング 県別中学生 | P1 | 英検 都道府県 | 英検塾 | B |
+| pe-fitness-test-pref | 体力テスト得点 県別 児童生徒 | P1 | 体力テスト 都道府県 | none | B |
+| school-bus-decline-pref | 通学距離が長い県 統廃合の影響 | P3 | 学校 統廃合 | none | B |

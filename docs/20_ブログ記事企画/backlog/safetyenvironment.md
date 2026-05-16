@@ -212,3 +212,18 @@
 5. セクション4: 工業施設数と苦情件数の相関—「工場が多い＝苦情が多い」は本当か
 6. データ出典
 7. 関連ランキングリンク
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| disaster-resilience-index | 災害レジリエンス総合 県別比較 | P3/P5 | 防災 都道府県 | none | S |
+| earthquake-insurance-gap | 地震保険加入率ランキング 都道府県 | P1 | 地震保険 都道府県 | 損保各社 | S |
+| traffic-accident-fatality | 交通事故死者数 県別 高齢者比率 | P3 | 交通事故 都道府県 | none | A |
+| domestic-violence-consult | DV相談件数 県別 5年推移 | P3 | DV 都道府県 | none | A |
+| co2-emission-prefecture | CO2排出量 県別 産業構造別 | P3 | 排出量 都道府県 | none | A |
+| renewable-energy-share | 再エネ比率ランキング 県別電源構成 | P3 | 再生エネルギー 都道府県 | none | A |
+| forest-coverage-vs-urban | 森林被覆率と都市化のトレードオフ | P3 | 森林率 都道府県 | none | B |
+| heat-stroke-emergency-pref | 熱中症搬送 県別 高齢化との関連 | P1 | 熱中症 都道府県 | none | B |

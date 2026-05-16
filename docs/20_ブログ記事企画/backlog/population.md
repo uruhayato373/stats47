@@ -177,3 +177,20 @@
 3. セクション2: 共働き世帯マップ──北陸・東北が上位
 4. セクション3: 単独世帯 vs 共働き──家族のかたちの地域差
 5. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| pop-decline-2030-prediction | 2030 人口減少シミュレーション 県別 | P1/P3 | 人口予測 2030 | none | S |
+| pop-pyramid-collapse-2040 | 2040 人口ピラミッド崩壊 県別マップ | P3 | 人口構成 高齢化 | none | S |
+| tokyo-concentration-30y-deep | 東京一極集中30年データ深掘り | P1/P3 | 東京一極集中 | none | S |
+| migration-net-inflow-pref | 県別 社会動態（転入超過）ランキング | P1 | 移住 都道府県 | 移住エージェント | A |
+| young-population-outflow-pref | 若年人口流出ランキング 大学進学+就職 | P1/P3 | 県外流出 若者 | none | A |
+| solo-aged-household-2040 | 単独高齢者世帯予測 2040年県別 | P3 | 高齢単身 | none | A |
+| birth-rate-okinawa-paradox | 沖縄出生率の構造分析 全国TOPの背景 | P1 | 沖縄 出生率 | none | A |
+| inbound-foreigner-prefecture | 在留外国人ランキング 5年推移 | P3 | 外国人 都道府県 | none | B |
+| chukyo-vs-kansai-population | 中京圏 vs 関西圏 人口動態比較 | P3 | 名古屋 大阪 人口 | none | B |
+| pop-density-100x-deep | 人口密度100倍格差の構造分析 | P1 | 人口密度 ランキング | none | B |

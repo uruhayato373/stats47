@@ -173,3 +173,15 @@
 3. セクション2: 事業所当たり販売額──規模の経済が効く県
 4. セクション3: 飲食料品小売の密度──食のインフラ格差
 5. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| ec-penetration-prefecture | EC利用率ランキング 県別 楽天/Amazon | P1 | EC 都道府県 | 楽天/Amazon | A |
+| shutter-shopping-district | シャッター商店街率 県別 | P3 | 商店街 衰退 | none | B |
+| franchise-density-pref | フランチャイズ密度 県別 飲食・小売 | P3 | フランチャイズ 都道府県 | フランチャイズ系 | B |
+| restaurant-density-night | 夜間人口当たり飲食店 県別 | P1 | 飲食店 数 都道府県 | none | B |
+| ai-retail-data-pref | AI×小売POSデータ活用 公務員向け | P3 | AI 小売 自治体 | AI教材 | B |

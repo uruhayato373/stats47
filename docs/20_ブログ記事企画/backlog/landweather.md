@@ -186,3 +186,17 @@
 3. セクション2: 都市公園密度──東京・大阪は身近な緑で補完
 4. セクション3: 自然公園 vs 都市公園──2つの「緑」の地域差
 5. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| heat-island-pref-deep | ヒートアイランド 県別 30年推移 | P3 | ヒートアイランド | none | A |
+| coastline-erosion-pref | 海岸侵食ランキング 県別 海岸線変化 | P3/P5 | 海岸 侵食 | none | A |
+| flood-risk-river-basin | 洪水リスク 県別 河川流域別 | P1/P5 | 洪水 都道府県 | 火災保険 | A |
+| landslide-risk-prefecture | 土砂災害警戒区域 県別ランキング | P1/P5 | 土砂災害 都道府県 | none | A |
+| typhoon-route-frequency | 台風通過頻度 県別 30年データ | P1 | 台風 都道府県 | none | B |
+| sea-temperature-fishery | 海水温上昇と漁獲量 県別 | P3 | 海水温 都道府県 | none | B |
+| onsen-spring-density-pref | 温泉源泉数ランキング 県別密度 | P1 | 温泉 都道府県 | じゃらん/楽天トラベル | B |

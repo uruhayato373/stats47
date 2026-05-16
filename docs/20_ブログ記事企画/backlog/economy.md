@@ -175,3 +175,18 @@
 3. セクション2: エンゲル係数マップ──食費比率の地域パターン
 4. セクション3: 支出総額 vs 食費比率──豊かさの指標
 5. まとめ
+
+---
+
+## 新規追加企画（2026-05-16）
+
+| slug | 想定タイトル | ターゲット | 検索意図/仮説 | アフィ | 優先 |
+|---|---|---|---|---|---|
+| gdp-prefecture-structure | 県内総生産（GRP）ランキングと産業構造 | P1/P3 | 都道府県別GDP | none | A |
+| financial-assets-balance-gap | 金融資産残高ランキング 1人あたり預貯金+有価証券 | P1/P3 | 金融資産 都道府県 | 楽天証券/SBI | S |
+| service-industry-share-trend | 第3次産業比率の30年推移と東京一極集中 | P3 | サービス業 比率 | none | A |
+| corporate-tax-revenue-prefecture | 法人事業税収入ランキング 県財政の柱 | P3 | 法人税 都道府県 | none | A |
+| disposable-income-real-purchasing | 可処分所得を物価で割った「実質購買力」県別マップ | P1 | 実質購買力 都道府県 | none | S |
+| household-savings-investment-shift | NISA時代の県別投資信託シフト | P1/P2 | NISA 都道府県 | SBI/マネックス | S |
+| minimum-wage-prefecture-effect-2026 | 最低賃金引上げ後の県別実質賃金推移 | P1/P3 | 最低賃金 都道府県 2026 | none | A |
+| consumer-confidence-regional | 消費者態度指数の地域差 | P1 | 消費者マインド 地域 | none | B |
