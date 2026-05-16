@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -219,3 +224,50 @@ jobs:
         run: |
           sleep 10
           bash .github/scripts/warm-cache.sh
+
+      # commit message に施策 ID (EXP-NNN / T0-T3-XXX-NN) があれば improvement-log に stub を追記。
+      # 詳細: .claude/scripts/lib/append-improvement-log.mjs / .claude/rules/evidence-based-judgment.md
+      - name: 📝 Append improvement-log stub
+        continue-on-error: true
+        run: |
+          MSG=$(git log -1 --pretty=%s%n%n%b "$GITHUB_SHA")
+          SHA="${GITHUB_SHA:0:7}"
+          DATE=$(date -u +%Y-%m-%d)
+          node .claude/scripts/lib/append-improvement-log.mjs \
+            --message "$MSG" \
+            --sha "$SHA" \
+            --date "$DATE"
+
+      - name: 💾 Commit improvement-log changes to develop
+        continue-on-error: true
+        run: |
+          if git diff --quiet .claude/skills/analytics/; then
+            echo "No improvement-log changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # main ブランチに居る — 改変を退避して develop に切り替え
+          mkdir -p /tmp/improvement-log-stash
+          git diff --name-only .claude/skills/analytics/ | while read f; do
+            mkdir -p "/tmp/improvement-log-stash/$(dirname "$f")"
+            cp "$f" "/tmp/improvement-log-stash/$f"
+          done
+          git checkout -- .claude/skills/analytics/
+
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+
+          cp -r /tmp/improvement-log-stash/.claude/* .claude/ 2>/dev/null || true
+          git add .claude/skills/analytics/
+
+          if git diff --cached --quiet; then
+            echo "No actual diff after merge."
+            exit 0
+          fi
+
+          SHORTSHA="${GITHUB_SHA:0:7}"
+          git commit -m "docs(improvement-log): auto-stub for deploy ${SHORTSHA} [skip ci]"
+          git push origin develop

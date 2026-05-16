@@ -46,6 +46,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .claude/scripts/youtube/youtube-daily-audit.mjs
 
+      - name: ⏰ Check pause expiry / recovery judgment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+        continue-on-error: true
+        run: node .claude/scripts/youtube/check-pause-events.mjs
+
       - name: 📄 Write GitHub Step Summary
         if: always()
         run: |
@@ -57,9 +66,11 @@ jobs:
 
       - name: 📦 Stage metrics outputs
         run: |
-          mkdir -p /tmp/youtube-publish
+          mkdir -p /tmp/youtube-publish /tmp/youtube-state
           cp -r .claude/state/metrics/youtube/* /tmp/youtube-publish/ 2>/dev/null || true
-          ls -la /tmp/youtube-publish
+          cp .claude/state/youtube-pause.json /tmp/youtube-state/ 2>/dev/null || true
+          cp .claude/state/youtube-recovery-test.json /tmp/youtube-state/ 2>/dev/null || true
+          ls -la /tmp/youtube-publish /tmp/youtube-state 2>/dev/null
 
       - name: 📤 Publish to develop branch
         run: |
@@ -75,10 +86,20 @@ jobs:
           git checkout develop
           git pull --rebase origin develop
 
-          mkdir -p .claude/state/metrics/youtube
+          mkdir -p .claude/state/metrics/youtube .claude/state
           cp -r /tmp/youtube-publish/* .claude/state/metrics/youtube/ 2>/dev/null || true
+          cp /tmp/youtube-state/youtube-pause.json .claude/state/ 2>/dev/null || true
+          cp /tmp/youtube-state/youtube-recovery-test.json .claude/state/ 2>/dev/null || true
+          # pause.json / recovery-test.json は判定で削除される場合がある — 元 develop に存在し /tmp に無ければ削除を反映
+          if [ ! -f /tmp/youtube-state/youtube-pause.json ] && [ -f .claude/state/youtube-pause.json ]; then
+            rm .claude/state/youtube-pause.json
+          fi
+          if [ ! -f /tmp/youtube-state/youtube-recovery-test.json ] && [ -f .claude/state/youtube-recovery-test.json ]; then
+            rm .claude/state/youtube-recovery-test.json
+          fi
 
           git add .claude/state/metrics/youtube
+          git add -A .claude/state/youtube-pause.json .claude/state/youtube-recovery-test.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No YouTube metrics changes to publish"
             exit 0

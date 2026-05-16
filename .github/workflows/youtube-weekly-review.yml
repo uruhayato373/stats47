@@ -1,0 +1,64 @@
+name: 📺 YouTube Weekly Review
+
+on:
+  schedule:
+    - cron: "15 0 * * 1" # JST 月曜 09:15 (UTC 月曜 00:15)
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Target ISO week (YYYY-Www). Empty = current week"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: youtube-weekly-review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop (latest history.csv)
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 🌅 Run YouTube weekly review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -n "${{ inputs.week }}" ]; then
+            node .claude/scripts/youtube/youtube-weekly-review.mjs --week ${{ inputs.week }}
+          else
+            node .claude/scripts/youtube/youtube-weekly-review.mjs
+          fi
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          if [ -f .claude/state/metrics/youtube/LATEST.md ]; then
+            cat .claude/state/metrics/youtube/LATEST.md >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 💾 Commit LATEST.md updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/youtube/LATEST.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(youtube): weekly review summary [skip ci]"
+            git push origin develop
+          fi

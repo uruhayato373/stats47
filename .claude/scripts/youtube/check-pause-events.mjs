@@ -1,0 +1,251 @@
+#!/usr/bin/env node
+/**
+ * YouTube Pause Expiry Reminder + Recovery Judgment
+ *
+ * `docs/10_SNS戦略/06_YouTube運用Playbook.md` の 2 つの routine を統合実装。
+ *
+ * - `.claude/state/youtube-pause.json` を読み、`until` の前日なら
+ *   `[YouTube Pause Expiry Reminder] YYYY-MM-DD` issue を起票（重複回避）
+ * - `until` が今日以前 + `.claude/state/youtube-recovery-test.json` に
+ *   復帰テスト動画情報 (videoId, publishedAt) があれば、48h 後の views を YouTube Data API で取得して判定
+ *   - views ≥ 100 → pause 解除 + Recovery Issue close
+ *   - views < 50 → pause 7 日延長
+ *   - 50 ≤ views < 100 → 48h 追加延長
+ *
+ * youtube-audit-daily.yml から日次で呼ばれる。pause.json が無ければ即終了。
+ *
+ * Usage:
+ *   node .claude/scripts/youtube/check-pause-events.mjs
+ *   node .claude/scripts/youtube/check-pause-events.mjs --dry-run
+ */
+
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from "node:fs";
+import { execSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { google } from "googleapis";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+
+const PAUSE_JSON = path.join(PROJECT_ROOT, ".claude/state/youtube-pause.json");
+const RECOVERY_TEST_JSON = path.join(PROJECT_ROOT, ".claude/state/youtube-recovery-test.json");
+
+const args = process.argv.slice(2);
+const DRY_RUN = args.includes("--dry-run");
+
+function log(msg) {
+  console.error(`[check-pause-events] ${msg}`);
+}
+
+function todayJST() {
+  return new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+function addDays(isoDate, n) {
+  const d = new Date(isoDate);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+function hoursSince(isoTimestamp) {
+  return (Date.now() - new Date(isoTimestamp).getTime()) / (1000 * 60 * 60);
+}
+
+function ghIssueExists(titlePrefix) {
+  try {
+    const out = execSync(
+      `gh issue list --search "${titlePrefix} in:title" --state open --json number --jq '.[0].number'`,
+      { encoding: "utf-8" }
+    ).trim();
+    return out && out !== "null" ? parseInt(out, 10) : null;
+  } catch {
+    return null;
+  }
+}
+
+function ghIssueCreate(title, body, labels) {
+  if (DRY_RUN) {
+    log(`[dry-run] would create issue: ${title}`);
+    return null;
+  }
+  const tmp = path.join("/tmp", `issue-body-${Date.now()}.md`);
+  writeFileSync(tmp, body);
+  try {
+    const out = execSync(
+      `gh issue create --title "${title}" --body-file "${tmp}" --label "${labels.join(",")}"`,
+      { encoding: "utf-8" }
+    );
+    log(`Created: ${out.trim()}`);
+    return out.trim();
+  } finally {
+    try { unlinkSync(tmp); } catch {}
+  }
+}
+
+function ghIssueClose(number, comment) {
+  if (DRY_RUN) {
+    log(`[dry-run] would close #${number}`);
+    return;
+  }
+  execSync(`gh issue close ${number} --comment ${JSON.stringify(comment)}`, {
+    encoding: "utf-8",
+  });
+  log(`Closed #${number}`);
+}
+
+function findOpenRecoveryIssue() {
+  try {
+    const out = execSync(
+      `gh issue list --label youtube-experiment --state open --search "Recovery in:title" --json number --jq '.[0].number'`,
+      { encoding: "utf-8" }
+    ).trim();
+    return out && out !== "null" ? parseInt(out, 10) : null;
+  } catch {
+    return null;
+  }
+}
+
+async function getYoutubeClient() {
+  const auth = new google.auth.OAuth2(
+    process.env.GOOGLE_OAUTH_CLIENT_ID,
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET
+  );
+  auth.setCredentials({ refresh_token: process.env.GOOGLE_OAUTH_REFRESH_TOKEN });
+  return google.youtube({ version: "v3", auth });
+}
+
+async function fetchVideoViews(videoId) {
+  const yt = await getYoutubeClient();
+  const res = await yt.videos.list({ part: ["statistics"], id: [videoId] });
+  const item = res.data.items?.[0];
+  if (!item) throw new Error(`video not found: ${videoId}`);
+  return parseInt(item.statistics?.viewCount ?? "0", 10);
+}
+
+function handlePauseExpiryReminder(pause) {
+  const today = todayJST();
+  const expiry = pause.until.slice(0, 10);
+  const dayBefore = addDays(expiry, -1);
+  if (today !== dayBefore) {
+    log(`Today (${today}) is not the day before pause expiry (${dayBefore}). Skip reminder.`);
+    return;
+  }
+
+  const title = `[YouTube Pause Expiry Reminder] ${expiry}`;
+  if (ghIssueExists(title)) {
+    log(`Reminder issue already open. Skip.`);
+    return;
+  }
+
+  const body = [
+    `# YouTube Pause Expiry Reminder`,
+    ``,
+    `**Pause until**: \`${expiry}\` (JST 翌日に解除予定)`,
+    pause.issue ? `**Recovery Issue**: #${pause.issue}` : "",
+    pause.reason ? `**Reason**: ${pause.reason}` : "",
+    ``,
+    `## 復帰テスト準備チェック`,
+    `- [ ] Bar Chart Race 1 本を準備（28 秒厳守、テーマは Playbook 参照）`,
+    `- [ ] 公開時刻 JST 20:00 にスケジュール`,
+    `- [ ] \`.claude/state/youtube-recovery-test.json\` に \`{videoId, publishedAt}\` を記録（48h 後の判定で使用）`,
+    ``,
+    `参照: [docs/10_SNS戦略/06_YouTube運用Playbook.md](../blob/develop/docs/10_SNS戦略/06_YouTube運用Playbook.md)`,
+    ``,
+    `_Auto-generated by \`.claude/scripts/youtube/check-pause-events.mjs\`_`,
+  ].filter(Boolean).join("\n");
+
+  ghIssueCreate(title, body, ["youtube-experiment", "auto-generated"]);
+}
+
+async function handleRecoveryJudgment(pause) {
+  if (!existsSync(RECOVERY_TEST_JSON)) {
+    log(`No recovery-test.json. Skip judgment.`);
+    return;
+  }
+  const test = JSON.parse(readFileSync(RECOVERY_TEST_JSON, "utf-8"));
+  if (!test.videoId || !test.publishedAt) {
+    log(`recovery-test.json missing videoId/publishedAt. Skip.`);
+    return;
+  }
+  const hours = hoursSince(test.publishedAt);
+  if (hours < 48) {
+    log(`Recovery test only ${hours.toFixed(1)}h old, need ≥ 48h. Skip judgment.`);
+    return;
+  }
+  if (test.judged) {
+    log(`Already judged on ${test.judged}. Skip.`);
+    return;
+  }
+
+  const views = await fetchVideoViews(test.videoId);
+  const today = todayJST();
+  let verdict, action, newUntil = null;
+  if (views >= 100) {
+    verdict = "PASS";
+    action = `pause 解除、週 2 本運用で再開`;
+  } else if (views < 50) {
+    verdict = "FAIL";
+    newUntil = addDays(pause.until.slice(0, 10), 7);
+    action = `pause を 7 日延長 (${newUntil} まで)、別テーマで再テスト`;
+  } else {
+    verdict = "EXTEND";
+    newUntil = addDays(today, 2);
+    action = `48h 追加延長 (${newUntil} まで)、72h 再判定`;
+  }
+
+  const title = `[YouTube Recovery Judgment] ${today}`;
+  const recoveryNum = pause.issue || findOpenRecoveryIssue();
+  const body = [
+    `# YouTube Recovery Judgment`,
+    ``,
+    `**復帰テスト動画**: \`${test.videoId}\``,
+    `**公開**: ${test.publishedAt} (経過 ${hours.toFixed(1)}h)`,
+    `**48h views**: **${views}**`,
+    `**判定**: \`${verdict}\` — ${action}`,
+    ``,
+    recoveryNum ? `関連 Recovery Issue: #${recoveryNum}` : "",
+    ``,
+    `参照: [docs/10_SNS戦略/06_YouTube運用Playbook.md](../blob/develop/docs/10_SNS戦略/06_YouTube運用Playbook.md)`,
+    ``,
+    `_Auto-generated by \`.claude/scripts/youtube/check-pause-events.mjs\`_`,
+  ].filter(Boolean).join("\n");
+
+  if (!DRY_RUN) {
+    ghIssueCreate(title, body, ["youtube-experiment", "auto-generated"]);
+    if (verdict === "PASS") {
+      unlinkSync(PAUSE_JSON);
+      unlinkSync(RECOVERY_TEST_JSON);
+      log(`Removed pause.json and recovery-test.json`);
+      if (recoveryNum) ghIssueClose(recoveryNum, `Recovery 完了。48h views = ${views}。`);
+    } else {
+      const updatedPause = { ...pause, until: new Date(newUntil + "T00:00:00Z").toISOString() };
+      writeFileSync(PAUSE_JSON, JSON.stringify(updatedPause, null, 2));
+      const updatedTest = { ...test, judged: today, judgedViews: views, judgedVerdict: verdict };
+      writeFileSync(RECOVERY_TEST_JSON, JSON.stringify(updatedTest, null, 2));
+      log(`Updated pause.json (until ${newUntil}) and recovery-test.json (judged)`);
+    }
+  } else {
+    log(`[dry-run] verdict=${verdict}, views=${views}`);
+  }
+}
+
+async function main() {
+  if (!existsSync(PAUSE_JSON)) {
+    log(`No pause.json. Nothing to do.`);
+    return;
+  }
+  const pause = JSON.parse(readFileSync(PAUSE_JSON, "utf-8"));
+  if (!pause.until) {
+    log(`pause.json missing 'until'. Skip.`);
+    return;
+  }
+  handlePauseExpiryReminder(pause);
+  await handleRecoveryJudgment(pause);
+}
+
+main().catch((err) => {
+  log(`Fatal: ${err.message}`);
+  process.exit(1);
+});
