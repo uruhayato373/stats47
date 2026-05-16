@@ -90,3 +90,17 @@ Baseline のデータから以下を優先候補として検討:
 3. **TTFB 改善**: `/areas/13000` で 22,082ms という異常値あり（計測時のコールドスタートか恒常的か要判定）
 
 次回アクション決定時に `/nsm-experiment propose` から EXP-NNN として登録する想定。
+
+---
+
+### [EXP-004] Merge pull request #290 from uruhayato373/feature/w20-review-w21-plan
+
+- **デプロイ日**: 2026-05-16 / コミット: `4a6a427`
+- **想定効果**: (未記入 — `.claude/rules/evidence-based-judgment.md` に従って記入)
+- **検証コマンド**: (未記入)
+- **実測 (before)**: (未記入)
+- **実測 (after)**: (未記入)
+- **判定**: `effect/pending` — 自動 stub。判定は次の週次レビューで埋める
+- **未確定 / 仮説**: 自動 stub。Append-only ルールに従い、後続で更新する場合は新エントリを追加
+
+_Auto-stub by `.claude/scripts/lib/append-improvement-log.mjs`_
