@@ -165,7 +165,7 @@ WHERE tags LIKE '%賃金%' OR tags LIKE '%転職%' -- etc.
 
 ### Phase 4: 出力
 
-8. `docs/20_ブログ記事企画/affiliate-{affiliateCategory}.md` に保存（全カテゴリ実行時は `affiliate-all.md`）。ファイル冒頭に以下のヘッダー:
+8. `docs/20_ブログ記事企画/backlog/affiliate-{affiliateCategory}.md` に保存（全カテゴリ実行時は `affiliate-all.md`）。ファイル冒頭に以下のヘッダー:
 
 ```markdown
 # アフィリエイト起点ブログ記事企画

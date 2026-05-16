@@ -6,7 +6,7 @@
 
 | ディレクトリ | 役割 | 運用 |
 |---|---|---|
-| `00_プロジェクト管理/` | プロジェクトの基盤文書（定義・収益化・マーケ・ペルソナ） | 内容更新が中心。固定 4 ファイル |
+| `00_プロジェクト管理/` | プロジェクトの基盤文書（定義・収益化・マーケ・ペルソナ）+ コンテンツ企画マスター | 内容更新が中心。固定 4 ファイル + 集計ダッシュボード 1 (`05_コンテンツ企画マスター.md`) |
 | `01_技術設計/` | システム構成・DDD 分類・ドメイン設計・フロントエンド設計 | 内容更新が中心。構成変更時のみファイル追加可 |
 | `02_実装計画/` | 実装ロードマップ・フェーズ計画 | 内容更新が中心。完了した設計書は `archive/` へ |
 | `03_週次運用/` | 週次計画・週次レビュー・週次メトリクス | `週次計画/YYYY-Www.md` / `週次レビュー/YYYY-Www.md` / `メトリクス/YYYY-Www.md` を週次 append |
@@ -14,7 +14,7 @@
 | `05_改善ログ/` | gsc / ga4 / adsense / psi / cloudflare-cost 改善施策の人間向け要約 | 1 metric = 1 ファイル append-only。frontmatter `status:` で施策の進捗管理 |
 | `10_SNS戦略/` | SNS コンテンツ設計 | 内容更新が中心 |
 | `15_実験ログ/` | YouTube 実験ファイル群 (1 実験 1 ファイル) | `youtube/EXP-NNN.md` |
-| `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | 蓄積 |
+| `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | `backlog/` 配下に蓄積。直下は INDEX/運用ファイル (`01_ブログ記事一括企画.md` / `brushup-queue.md`) のみ |
 | `21_ブログ記事原稿/` | ブログ記事の下書き原稿 | 蓄積 |
 | `22_YouTube企画/` | YouTube 通常動画の企画 | `backlog/<theme>.md` 蓄積 |
 | `30_note記事企画/` | note 記事の企画・戦略 (+ backlog) | 蓄積 |
@@ -30,10 +30,13 @@
 ├── 01_プロジェクト定義.md
 ├── 02_収益化戦略.md
 ├── 03_マーケティング戦略.md
-└── 04_ターゲットペルソナ.md
+├── 04_ターゲットペルソナ.md
+└── 05_コンテンツ企画マスター.md  ← 集計ダッシュボード (戦略文書ではなく、backlog 全体を集約)
 ```
 
-戦略文書はここに統合管理。日付サフィックス付きファイル (`-YYYY-MM-DD.md`) は禁止。更新は同名ファイルへの上書きで行う。
+戦略文書 (01〜04) はここに統合管理。日付サフィックス付きファイル (`-YYYY-MM-DD.md`) は禁止。更新は同名ファイルへの上書きで行う。
+
+> 例外: `05_コンテンツ企画マスター.md` は集計ダッシュボードのため許容（戦略文書ではない）。`docs/{20,30,22}_*/backlog/` を読み取り、企画状況の俯瞰ビューを提供する。新たな戦略文書を追加するときは別途検討すること。
 
 ## 配置の判断基準（docs/ vs .claude/ vs Issues）
 
@@ -84,7 +87,7 @@ docs/: status: archived に変更 / Issues: PR で close
 
 ### やってはいけないこと
 
-- `00_プロジェクト管理/` にファイルを追加する (4 ファイル固定)
+- `00_プロジェクト管理/` に戦略文書を追加する (01〜04 + 集計ダッシュボード 05 で固定。新規戦略は既存 4 ファイルへの Edit で対応)
 - 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` `05_/` の上書き型ディレクトリに置く (週次・レビュー系の `YYYY-Www.md` / `YYYY-MM-DD.md` は OK)
 - 実装完了した計画書を `02_実装計画/` 直下に残す (`archive/` へ移動)
 - weekly / review / improvement 系スキルから `gh issue create` する (`docs/` 配下に Write すること)
@@ -95,13 +98,18 @@ docs/: status: archived に変更 / Issues: PR で close
 
 ```yaml
 ---
-type: weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log | youtube-experiment | ...
+type: weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log | youtube-experiment |
+      blog-plan | note-plan | youtube-plan | sns-frames | content-plan-index | content-plan-master | ...
 week: 2026-Www       # 週次系のみ
 date: 2026-MM-DD
 status: draft | active | pending | completed | archived | effect/full | effect/partial | ...
 tier: 1 | 2 | 3      # 改善施策のみ
 target_metric: <metric>  # 改善施策のみ
 related_issue: 274   # 元 Issue がある場合のみ
+category: economy | population | ... | cross-cutting    # コンテンツ企画系のみ
+content_type: blog-normal | note-a | youtube-normal | sns-frames | ...  # コンテンツ企画系のみ
+series: A | B | C | D                                   # note 系のみ
+plan_count: 8                                           # コンテンツ企画系のみ
 tags: []
 ---
 ```

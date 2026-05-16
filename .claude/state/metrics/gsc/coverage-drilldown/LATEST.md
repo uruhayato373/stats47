@@ -1,16 +1,14 @@
-# GSC Coverage Drilldown — 2026-W19
+# GSC Coverage Drilldown — 2026-W20
 
-**取得日**: 2026-05-10 / **ソース**: URL Inspection API (Phase 8 自動)
-**inspect 件数**: 100 URL
+**取得日**: 2026-05-16 / **ソース**: URL Inspection API (Phase 8 自動)
+**inspect 件数**: 10 URL
 
 ## カテゴリ別件数（前週比）
 
 | カテゴリ | 今週 | 前週 | 変化 |
 |---|---:|---:|---|
-| ページにリダイレクトがあります | 1 | 1000 | ▼ -999 |
-| クロール済み - インデックス未登録 | 8 | 0 | ▲ +8 |
-| 登録済み (送信) | 91 | 0 | ▲ +91 |
-| **合計** | **100** | 4919 | ▼ -4819 |
+| 登録済み (送信) | 10 | 91 | ▼ -81 |
+| **合計** | **10** | 100 | ▼ -90 |
 
 ## 注意
 
@@ -20,7 +18,7 @@
 
 ## 詳細
 
-- 今週の URL リスト: `2026-W19/` 配下
+- 今週の URL リスト: `2026-W20/` 配下
 - 時系列集約: `history.csv`
 - 自動取得スクリプト: `node .claude/scripts/gsc/url-inspection-daily.cjs`
 - GitHub Actions: `.github/workflows/gsc-url-inspection-daily.yml` (毎朝 JST 06:00)

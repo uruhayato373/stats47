@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>stats47 プロジェクト構成俯瞰 — 2026-05-16</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+    --text: #0f172a; --muted: #64748b; --accent: #2563eb;
+    --s: #dc2626; --a: #ea580c; --b: #ca8a04; --c: #16a34a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: var(--bg); color: var(--text); margin: 0;
+    line-height: 1.6; font-size: 14px;
+  }
+  header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: white; padding: 24px 32px;
+  }
+  header h1 { margin: 0 0 4px; font-size: 22px; }
+  header .sub { opacity: 0.85; font-size: 13px; }
+  nav {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 0 32px; position: sticky; top: 0; z-index: 10;
+    overflow-x: auto; white-space: nowrap;
+  }
+  nav button {
+    background: none; border: none; color: var(--muted);
+    padding: 14px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+    border-bottom: 2px solid transparent;
+  }
+  nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  main { padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
+  section { display: none; }
+  section.active { display: block; }
+  h2 { font-size: 18px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; margin: 24px 0 12px; color: var(--accent); }
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px;
+  }
+  .card.kpi { text-align: center; }
+  .card.kpi .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .card.kpi .label { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .card h4 { margin: 0 0 8px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+  th { background: #f1f5f9; font-weight: 600; font-size: 12px; color: var(--muted); text-transform: uppercase; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge.S { background: #fee2e2; color: var(--s); }
+  .badge.A { background: #ffedd5; color: var(--a); }
+  .badge.B { background: #fef9c3; color: var(--b); }
+  .badge.C { background: #dcfce7; color: var(--c); }
+  .tag {
+    display: inline-block; background: #e2e8f0; color: var(--text);
+    padding: 2px 8px; border-radius: 12px; font-size: 11px; margin: 2px;
+  }
+  .persona { padding: 12px; background: #f1f5f9; border-radius: 6px; margin: 8px 0; }
+  .persona strong { color: var(--accent); }
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; margin: 8px 0; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details[open] summary { margin-bottom: 12px; }
+  .file-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 4px 12px; font-size: 12px; }
+  .file-list code { background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+  .roadmap-item { border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; background: var(--card); border-radius: 0 6px 6px 0; }
+  .roadmap-item .period { font-size: 12px; color: var(--muted); }
+  .roadmap-item h4 { margin: 4px 0 8px; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  .note { background: #fef3c7; border-left: 3px solid var(--b); padding: 12px; border-radius: 4px; margin: 12px 0; font-size: 13px; }
+  footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px; }
+  @media (max-width: 640px) {
+    header, nav, main { padding-left: 16px; padding-right: 16px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>stats47 プロジェクト構成俯瞰</h1>
+  <div class="sub">統計で見る都道府県 / 2026-05-16 スナップショット / stats47.jp</div>
+</header>
+
+<nav>
+  <button data-tab="overview" class="active">概要</button>
+  <button data-tab="tech">技術構成</button>
+  <button data-tab="content">コンテンツ戦略</button>
+  <button data-tab="matrix">企画マトリクス</button>
+  <button data-tab="sns">SNS運用枠</button>
+  <button data-tab="files">ファイル一覧</button>
+  <button data-tab="roadmap">ロードマップ</button>
+  <button data-tab="docs">docs構成</button>
+</nav>
+
+<main>
+  <!-- 概要 -->
+  <section id="overview" class="active">
+    <h2>プロジェクト概要</h2>
+    <div class="grid grid-4">
+      <div class="card kpi"><div class="num">223</div><div class="label">ブログ企画</div></div>
+      <div class="card kpi"><div class="num">146</div><div class="label">note企画</div></div>
+      <div class="card kpi"><div class="num">22</div><div class="label">YouTube企画</div></div>
+      <div class="card kpi"><div class="num">180/月</div><div class="label">SNS投稿枠</div></div>
+    </div>
+
+    <h3>ミッション</h3>
+    <div class="card">統計をもっと身近に。探す手間・加工する苦労をなくし、誰もがデータを「使える」社会をつくる</div>
+
+    <h3>差別化軸</h3>
+    <div class="card">元県庁職員20年の経験知をデータ翻訳者として活用 + モダンUI/UX + 自動化パイプライン (Remotion/Satori) + 「データの読み方」注釈で統計リテラシー習得支援</div>
+
+    <h3>北極星指標 (NSM)</h3>
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>指標</h4>
+        週間Engagedセッション数
+        <div style="margin-top: 8px;">
+          現在 (W20): <strong>276</strong> → 目標 <strong style="color: var(--accent)">500+</strong>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Input Metrics</h4>
+        <span class="tag">公務員系タグページのインデックス率</span>
+        <span class="tag">アフィリエイト月収益</span>
+        <span class="tag">ブログCTR改善</span>
+      </div>
+    </div>
+
+    <h3>ターゲットペルソナ</h3>
+    <div class="persona"><strong>P1 雑学・エンタメ層</strong> — PV/AdSense基盤</div>
+    <div class="persona"><strong>P2 学生・研究者</strong> — リテラシー学習</div>
+    <div class="persona"><strong>P3 行政・自治体関係者 (主軸)</strong> — 公務員/議会事務局/シンクタンク</div>
+    <div class="persona"><strong>P4 教育関係者・保護者</strong> — 進学・教育判断</div>
+    <div class="persona"><strong>P5 防災・福祉実務層</strong> — リスク参照</div>
+
+    <h3>収益化優先順</h3>
+    <table>
+      <thead><tr><th>#</th><th>チャネル</th><th>想定収益/月</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>アフィリエイト</td><td>¥10K〜30K</td><td>本格化フェーズ</td></tr>
+        <tr><td>2</td><td>AI×統計実務記事</td><td>¥3K〜15K</td><td>立ち上げ</td></tr>
+        <tr><td>3</td><td>AdSense最適化</td><td>¥1K〜3K</td><td>改善中</td></tr>
+        <tr><td>4</td><td>データ販売API</td><td>¥10K〜100K</td><td>検証フェーズ</td></tr>
+      </tbody>
+    </table>
+    <div class="note">前提条件: PSI LCP 5秒 → 2.5秒 改善が必須</div>
+  </section>
+
+  <!-- 技術構成 -->
+  <section id="tech">
+    <h2>技術構成</h2>
+
+    <h3>モノレポ - apps/</h3>
+    <div class="grid grid-3">
+      <div class="card"><h4>web</h4>Next.js (Cloudflare Pages)<br><span class="tag">公開サイト</span></div>
+      <div class="card"><h4>remotion</h4>Remotion<br><span class="tag">動画・SNS画像生成</span></div>
+      <div class="card"><h4>ges</h4>Google Earth Studio<br><span class="tag">47県旋回動画</span></div>
+    </div>
+
+    <h3>モノレポ - packages/</h3>
+    <div class="grid grid-4">
+      <div class="card"><h4>database</h4>Drizzle ORM + D1</div>
+      <div class="card"><h4>visualization</h4>D3.js チャート</div>
+      <div class="card"><h4>components</h4>shadcn/ui ベース</div>
+      <div class="card"><h4>estat-api</h4>e-Stat APIクライアント</div>
+      <div class="card"><h4>ranking</h4>ランキング計算</div>
+      <div class="card"><h4>r2-storage</h4>Cloudflare R2</div>
+      <div class="card"><h4>ai-content</h4>AI生成コンテンツ</div>
+      <div class="card"><h4>area / area-profile</h4>都道府県メタ</div>
+      <div class="card"><h4>category</h4>カテゴリ管理</div>
+      <div class="card"><h4>correlation</h4>相関分析</div>
+      <div class="card"><h4>gis</h4>GISデータ</div>
+      <div class="card"><h4>svg-builder</h4>SVG構築</div>
+      <div class="card"><h4>types / utils / logger</h4>共通基盤</div>
+    </div>
+
+    <h3>インフラ</h3>
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>ホスティング</h4>
+        Cloudflare Pages<br><br>
+        <h4>DB</h4>
+        Cloudflare D1 (ローカルのみ source of truth、リモートD1は2026-04解約)<br><br>
+        <h4>ストレージ</h4>
+        Cloudflare R2 (本番配信)
+      </div>
+      <div class="card">
+        <h4>同期フロー</h4>
+        <code style="display:block; padding:8px; background:#f1f5f9; border-radius:4px; margin-top:8px;">
+          ローカルD1 (source of truth)<br>
+          ↓ /sync-snapshots<br>
+          R2 snapshot<br>
+          ↓ 本番配信<br>
+          Cloudflare Pages
+        </code>
+        <h4 style="margin-top: 12px;">データソース</h4>
+        <span class="tag">e-Stat API (~8,461表)</span>
+        <span class="tag">国土数値情報GIS</span>
+        <span class="tag">国土交通データプラットフォーム</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- コンテンツ戦略 -->
+  <section id="content">
+    <h2>コンテンツ戦略</h2>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>ブログ (stats47.jp/blog/)</h4>
+        目的: SEO・PV基盤 + 記事内アフィリエイト<br>
+        ターゲット: P1/P2/P4<br>
+        フォーマット: SVGチャート 5枚以上 / FAQスキーマ<br>
+        KPI: 月PV10K, CTR 3%+
+      </div>
+      <div class="card">
+        <h4>note (A〜D 4シリーズ)</h4>
+        A系: ランキング自動量産 (月5本+)<br>
+        B系: 読み物 1,500〜2,500字 (月1〜2本)<br>
+        C系: 統計調査ガイド (2K〜5K字)<br>
+        D系: 深掘り分析 (3K〜5K字、有料候補)
+      </div>
+      <div class="card">
+        <h4>YouTube</h4>
+        通常動画 22本企画 (tier-1/2/3)<br>
+        Shorts 17本制作済<br>
+        週2本上限 (1日3本以上で配信停止リスク)
+      </div>
+      <div class="card">
+        <h4>SNS (X/IG/TikTok)</h4>
+        5プラットフォーム × 9フォーマット<br>
+        テーマ × カテゴリ × 月次本数の枠定義<br>
+        個別企画化はせず、ランキング流用
+      </div>
+    </div>
+
+    <h3>アフィリエイト商材マッピング</h3>
+    <table>
+      <thead><tr><th>商材</th><th>商品</th><th>対象カテゴリ</th><th>CVR目標</th></tr></thead>
+      <tbody>
+        <tr><td>ふるさと納税</td><td>さとふる / 楽天</td><td>tourism, agriculture, administrativefinancial</td><td>0.5%</td></tr>
+        <tr><td>AIツール</td><td>SHIFT AI / Aidemy / Udemy</td><td>ict, administrativefinancial</td><td>0.8%</td></tr>
+        <tr><td>移住支援</td><td>移住エージェント</td><td>population, tourism</td><td>0.3%</td></tr>
+        <tr><td>FP・投資</td><td>お金の相談所 / マネキャリ</td><td>economy</td><td>0.4%</td></tr>
+        <tr><td>防災用品</td><td>Amazon</td><td>safetyenvironment, landweather</td><td>0.3%</td></tr>
+        <tr><td>教育サービス</td><td>スタディサプリ / 英会話</td><td>educationsports</td><td>0.5%</td></tr>
+        <tr><td>転職・求人</td><td>doda / リクナビ</td><td>laborwage</td><td>0.4%</td></tr>
+        <tr><td>旅行</td><td>じゃらん / 楽天トラベル</td><td>tourism</td><td>0.6%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 企画マトリクス -->
+  <section id="matrix">
+    <h2>16カテゴリ × コンテンツ種別 マトリクス</h2>
+    <div class="card">
+      <table id="matrixTable">
+        <thead>
+          <tr>
+            <th>カテゴリ</th>
+            <th class="num">Blog通常</th>
+            <th class="num">アフィ</th>
+            <th class="num">AI×統計</th>
+            <th class="num">note A</th>
+            <th class="num">note B</th>
+            <th class="num">note C</th>
+            <th class="num">note D</th>
+            <th class="num">YT通常</th>
+            <th>優先</th>
+          </tr>
+        </thead>
+        <tbody id="matrixBody"></tbody>
+      </table>
+    </div>
+    <p style="color: var(--muted); margin-top: 12px; font-size: 12px;">
+      優先度: <span class="badge S">S</span> 即着手 (収益×NSM×制作容易性すべて高)
+      <span class="badge A">A</span> 2つ高い or P3公務員直撃
+      <span class="badge B">B</span> 1つ高い or P1雑学安定流入
+      <span class="badge C">C</span> ニッチ補完
+    </p>
+  </section>
+
+  <!-- SNS運用枠 -->
+  <section id="sns">
+    <h2>SNS 月次運用枠定義</h2>
+    <div class="card">
+      <p>5プラットフォーム × 9フォーマット × 16カテゴリ = <strong style="color: var(--accent); font-size: 18px;">月180本</strong></p>
+    </div>
+
+    <h3>プラットフォーム別 月次本数</h3>
+    <table>
+      <thead><tr><th>プラットフォーム</th><th>フォーマット</th><th class="num">月次</th><th class="num">週次</th><th>サイズ</th></tr></thead>
+      <tbody>
+        <tr><td>YouTube Shorts</td><td>9:16動画</td><td class="num">34</td><td class="num">6</td><td>1080×1920</td></tr>
+        <tr><td>Instagram Reel</td><td>9:16動画</td><td class="num">34</td><td class="num">3</td><td>1080×1920</td></tr>
+        <tr><td>Instagram Carousel</td><td>静止画 3枚</td><td class="num">19</td><td class="num">4</td><td>1080×1350</td></tr>
+        <tr><td>X (Chart)</td><td>静止画 OGP</td><td class="num">34</td><td class="num">6</td><td>1200×630</td></tr>
+        <tr><td>X (Choropleth Map)</td><td>地図</td><td class="num">13</td><td class="num">—</td><td>1080×1080</td></tr>
+        <tr><td>X (Compare)</td><td>比較</td><td class="num">5</td><td class="num">—</td><td>1200×630</td></tr>
+        <tr><td>X (Correlation)</td><td>散布図</td><td class="num">5</td><td class="num">—</td><td>1200×630</td></tr>
+        <tr><td>TikTok</td><td>9:16動画</td><td class="num">34</td><td class="num">6</td><td>1080×1920</td></tr>
+        <tr><td>Bar Chart Race</td><td>50年アニメ</td><td class="num">2.5</td><td class="num">—</td><td>多目的</td></tr>
+      </tbody>
+    </table>
+
+    <h3>週次カレンダー (曜日固定)</h3>
+    <table>
+      <thead><tr><th>曜日</th><th>YT Shorts</th><th>IG Reel</th><th>IG Carousel</th><th>X</th><th>TikTok</th></tr></thead>
+      <tbody>
+        <tr><td>月</td><td>1本 (8時)</td><td>—</td><td>1本</td><td>1本</td><td>1本</td></tr>
+        <tr><td>火</td><td>1本 (12時)</td><td>1本</td><td>—</td><td>1本 (correlation)</td><td>1本</td></tr>
+        <tr><td>水</td><td>1本 (20時)</td><td>—</td><td>1本</td><td>1本</td><td>1本</td></tr>
+        <tr><td>木</td><td>1本</td><td>1本</td><td>—</td><td>1本 (compare)</td><td>1本</td></tr>
+        <tr><td>金</td><td>1本</td><td>—</td><td>1本</td><td>1本</td><td>1本</td></tr>
+        <tr><td>土</td><td>1本</td><td>1本</td><td>—</td><td>1本 (ranking)</td><td>1本</td></tr>
+        <tr><td>日</td><td>—</td><td>—</td><td>1本</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ファイル一覧 -->
+  <section id="files">
+    <h2>backlog ファイル一覧</h2>
+
+    <details open>
+      <summary>📝 ブログ backlog (37 ファイル)</summary>
+      <h4>カテゴリ別 (16)</h4>
+      <div class="file-list" id="blogCatList"></div>
+      <h4 style="margin-top: 16px;">横串特集 (10)</h4>
+      <div class="file-list" id="blogHorList"></div>
+      <h4 style="margin-top: 16px;">アフィリエイト (4)</h4>
+      <div class="file-list" id="blogAffList"></div>
+      <h4 style="margin-top: 16px;">AI × 統計 (4)</h4>
+      <div class="file-list" id="blogAiList"></div>
+    </details>
+
+    <details>
+      <summary>📓 note backlog (51 ファイル)</summary>
+      <p>A系 16 / B系 16 / C系 1 (集約) / D系 16 / 既存 1 (消費支出格差) / INDEX</p>
+      <h4>A系 (ランキング自動量産)</h4>
+      <div class="file-list" id="noteAList"></div>
+      <h4 style="margin-top: 16px;">B系 (読み物)</h4>
+      <div class="file-list" id="noteBList"></div>
+      <h4 style="margin-top: 16px;">C系 (統計調査ガイド)</h4>
+      <div class="file-list"><code>C-survey-guides.md</code></div>
+      <h4 style="margin-top: 16px;">D系 (深掘り分析)</h4>
+      <div class="file-list" id="noteDList"></div>
+    </details>
+
+    <details>
+      <summary>📺 YouTube backlog (24 ファイル)</summary>
+      <h4>既存 (6)</h4>
+      <div class="file-list" id="ytExistList"></div>
+      <h4 style="margin-top: 16px;">新規 (16)</h4>
+      <div class="file-list" id="ytNewList"></div>
+      <h4 style="margin-top: 16px;">SNS マスター枠</h4>
+      <div class="file-list"><code>SNS-FRAMES.md</code> <code>INDEX.md</code></div>
+    </details>
+  </section>
+
+  <!-- ロードマップ -->
+  <section id="roadmap">
+    <h2>制作優先順位ロードマップ</h2>
+
+    <div class="roadmap-item">
+      <div class="period">2026-Q2 (5月-7月)</div>
+      <h4>Phase A: 優先S集中 / 即執筆可</h4>
+      <p>ブログ 22本 / note 28本 / YouTube 6本</p>
+      <ul>
+        <li>AI×統計: ai-estat-chatgpt-7steps, ai-claude-code-pref-analysis</li>
+        <li>アフィ: affiliate-ai-tools-koumuin, migration-attractiveness-ranking</li>
+        <li>note A 優先S: A-economy, A-population, A-tourism, A-administrativefinancial, A-laborwage</li>
+        <li>note B 優先S: B-economy, B-population, B-educationsports</li>
+        <li>YouTube tier-1: 平均年収, 合計特殊出生率, 高齢化率</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="period">2026-Q3 (8月-10月)</div>
+      <h4>Phase B: 優先A拡大</h4>
+      <ul>
+        <li>横串特集 6本 (population-tokyo-concentration-deep, 2030-population-prediction 等)</li>
+        <li>note B/D 優先A 17本</li>
+        <li>note C 優先S 2本 (C-4 地方財政, C-9 賃金構造基本)</li>
+        <li>YouTube tier-2 8〜10本</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="period">2026-Q4 (11月-12月)</div>
+      <h4>Phase C: 優先B / 補完</h4>
+      <ul>
+        <li>note D系 残り (D-school-shrinkage, D-aging-finance-burden 等)</li>
+        <li>ブログ優先B カテゴリ補完 (ict, energy, agriculture, miningindustry, commercial, construction)</li>
+        <li>YouTube tier-3 (通勤時間, 経常収支比率, 豪雪, 生活保護)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- docs構成 -->
+  <section id="docs">
+    <h2>docs/ ディレクトリ構成</h2>
+    <table>
+      <thead><tr><th>ディレクトリ</th><th>役割</th></tr></thead>
+      <tbody>
+        <tr><td><code>00_プロジェクト管理/</code></td><td>戦略4ファイル + 集計ダッシュボード (05_コンテンツ企画マスター, 06_プロジェクト構成)</td></tr>
+        <tr><td><code>01_技術設計/</code></td><td>システム構成・DDD分類・エラーハンドリング</td></tr>
+        <tr><td><code>02_実装計画/</code></td><td>実装ロードマップ</td></tr>
+        <tr><td><code>03_週次運用/</code></td><td>週次計画・レビュー・メトリクス (YYYY-Www)</td></tr>
+        <tr><td><code>04_レビュー/</code></td><td>批判的レビュー・事前検死・SEO監査・SNS週報</td></tr>
+        <tr><td><code>05_改善ログ/</code></td><td>gsc/ga4/adsense/psi/cloudflare-cost (append-only)</td></tr>
+        <tr><td><code>10_SNS戦略/</code></td><td>SNSコンテンツ設計</td></tr>
+        <tr><td><code>15_実験ログ/youtube/</code></td><td>EXP-NNN.md (1実験1ファイル)</td></tr>
+        <tr><td><code>20_ブログ記事企画/backlog/</code></td><td>ブログ企画 37ファイル</td></tr>
+        <tr><td><code>21_ブログ記事原稿/</code></td><td>下書き原稿</td></tr>
+        <tr><td><code>22_YouTube企画/backlog/</code></td><td>YouTube + SNS枠定義 24ファイル</td></tr>
+        <tr><td><code>30_note記事企画/backlog/</code></td><td>note A/B/C/D系 51ファイル</td></tr>
+        <tr><td><code>31_note記事原稿/</code></td><td>下書き原稿</td></tr>
+        <tr><td><code>40_アフィリエイト管理/</code></td><td>商材・配置管理</td></tr>
+        <tr><td><code>50_Issues/</code></td><td>feature/automation/UI改善 backlog</td></tr>
+        <tr><td><code>80_参考資料/</code></td><td>白書PDF等</td></tr>
+      </tbody>
+    </table>
+
+    <h3>データ配置原則</h3>
+    <table>
+      <thead><tr><th>データ性質</th><th>配置先</th></tr></thead>
+      <tbody>
+        <tr><td>アプリ運用データ</td><td>Cloudflare D1</td></tr>
+        <tr><td>人間が読む文書</td><td>docs/</td></tr>
+        <tr><td>エージェント詳細ログ</td><td>.claude/skills/&lt;skill&gt;/reference/</td></tr>
+        <tr><td>計測snapshot</td><td>.claude/state/metrics/&lt;service&gt;/</td></tr>
+        <tr><td>PR連動チケット</td><td>GitHub Issues (enhancement/bug)</td></tr>
+        <tr><td>日次アラート</td><td>GitHub Issues (cloudflare-alert/psi-alert)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>ブランチフロー</h3>
+    <div class="card">
+      <code>feature/* → PR → develop → main (Cloudflare Pages トリガー)</code><br><br>
+      <strong>DB データ反映</strong>: ローカルD1 (source of truth) → <code>/sync-snapshots</code> → R2 → 本番
+    </div>
+  </section>
+</main>
+
+<footer>
+  生成: 2026-05-16 / データ源: <code>06_プロジェクト構成.json</code> / 関連: <code>05_コンテンツ企画マスター.md</code>
+</footer>
+
+<script>
+// プロジェクト構成データ (JSON 同期)
+const DATA = {
+  matrix: [
+    { c: "economy",                bn: 13, ba: 0, bi: 0, na: 5, nb: 2, nc: 0, nd: 1, y: 2, p: "S" },
+    { c: "population",             bn: 15, ba: 0, bi: 0, na: 5, nb: 2, nc: 0, nd: 2, y: 2, p: "S" },
+    { c: "ict",                    bn: 11, ba: 0, bi: 2, na: 3, nb: 1, nc: 0, nd: 1, y: 1, p: "B" },
+    { c: "infrastructure",         bn: 11, ba: 0, bi: 0, na: 3, nb: 1, nc: 0, nd: 1, y: 1, p: "B" },
+    { c: "energy",                 bn: 10, ba: 0, bi: 0, na: 3, nb: 1, nc: 0, nd: 1, y: 1, p: "B" },
+    { c: "tourism",                bn: 13, ba: 1, bi: 0, na: 4, nb: 2, nc: 0, nd: 1, y: 2, p: "A" },
+    { c: "agriculture",            bn: 12, ba: 0, bi: 0, na: 4, nb: 2, nc: 1, nd: 1, y: 1, p: "B" },
+    { c: "miningindustry",         bn: 10, ba: 0, bi: 0, na: 3, nb: 1, nc: 0, nd: 1, y: 0, p: "C" },
+    { c: "safetyenvironment",      bn: 13, ba: 0, bi: 0, na: 4, nb: 2, nc: 0, nd: 1, y: 1, p: "A" },
+    { c: "educationsports",        bn: 14, ba: 0, bi: 0, na: 5, nb: 2, nc: 1, nd: 2, y: 2, p: "A" },
+    { c: "commercial",             bn: 10, ba: 0, bi: 0, na: 3, nb: 1, nc: 0, nd: 0, y: 0, p: "B" },
+    { c: "landweather",            bn: 12, ba: 0, bi: 0, na: 4, nb: 1, nc: 0, nd: 1, y: 1, p: "A" },
+    { c: "administrativefinancial",bn: 13, ba: 0, bi: 1, na: 5, nb: 2, nc: 1, nd: 2, y: 2, p: "A" },
+    { c: "laborwage",              bn: 15, ba: 0, bi: 0, na: 5, nb: 2, nc: 1, nd: 2, y: 2, p: "S" },
+    { c: "construction",           bn: 6,  ba: 0, bi: 0, na: 3, nb: 1, nc: 0, nd: 1, y: 0, p: "B" },
+    { c: "socialsecurity",         bn: 8,  ba: 0, bi: 0, na: 5, nb: 2, nc: 1, nd: 2, y: 2, p: "A" }
+  ],
+  blogCat: ["economy", "population", "ict", "infrastructure", "energy", "tourism", "agriculture", "miningindustry", "safetyenvironment", "educationsports", "commercial", "landweather", "administrativefinancial", "laborwage", "construction", "socialsecurity"],
+  blogHor: ["population-tokyo-concentration-deep", "2030-population-prediction", "aging-2040-collapse-frontier", "wage-vs-cost-real-living-index", "disaster-resilience-comparison", "migration-attractiveness-ranking", "kakei-chousa", "economy-food", "money-theme", "population-future"],
+  blogAff: ["affiliate-furusato", "affiliate-ai-tools-koumuin", "affiliate-iju-shien", "affiliate-fp-investment-pref"],
+  blogAi: ["ai-estat-chatgpt-7steps", "ai-claude-code-pref-analysis", "ai-excel-stat-formatting", "ai-rag-municipal-data"],
+  noteA: ["economy", "population", "ict", "infrastructure", "energy", "tourism", "agriculture", "miningindustry", "safetyenvironment", "educationsports", "commercial", "landweather", "administrativefinancial", "laborwage", "construction", "socialsecurity"].map(c => "A-" + c),
+  noteB: ["economy", "population", "ict", "infrastructure", "energy", "tourism", "agriculture", "miningindustry", "safetyenvironment", "educationsports", "commercial", "landweather", "administrativefinancial", "laborwage", "construction", "socialsecurity"].map(c => "B-" + c),
+  noteD: ["D-tokyo-concentration", "D-marriage-collapse", "D-fiscal-strength-deep", "D-aging-solo-crisis", "D-tokyo-wage-paradox", "D-education-cost-gap-53x", "D-rural-shrinkage-2040", "D-disaster-economy-2025", "D-immigrant-economy", "D-koumuin-shigoto-kakaku", "D-care-collapse-2040", "D-school-shrinkage", "D-aging-finance-burden", "D-ict-municipal-divide", "D-women-work-trade-off", "D-koumuin-ai-shift"],
+  ytExist: ["県民所得", "犯罪治安", "外国人人口", "離婚率", "生活保護率", "自殺率"],
+  ytNew: ["大学進学率", "平均年収", "初任給", "通勤時間", "合計特殊出生率", "高齢化率", "物価地域差", "貯蓄率", "インバウンド", "温泉", "寄附金受入", "経常収支比率", "豪雪", "地震頻度", "半導体", "生活保護"]
+};
+
+// タブ切替
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+    window.scrollTo(0, 0);
+  });
+});
+
+// マトリクステーブル描画
+const matrixBody = document.getElementById("matrixBody");
+DATA.matrix.forEach(r => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${r.c}</td><td class="num">${r.bn}</td><td class="num">${r.ba}</td><td class="num">${r.bi}</td><td class="num">${r.na}</td><td class="num">${r.nb}</td><td class="num">${r.nc}</td><td class="num">${r.nd}</td><td class="num">${r.y}</td><td><span class="badge ${r.p}">${r.p}</span></td>`;
+  matrixBody.appendChild(tr);
+});
+
+// ファイル一覧描画
+function renderList(id, items, suffix = ".md") {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = items.map(f => `<code>${f}${suffix}</code>`).join("");
+}
+renderList("blogCatList", DATA.blogCat);
+renderList("blogHorList", DATA.blogHor);
+renderList("blogAffList", DATA.blogAff);
+renderList("blogAiList", DATA.blogAi);
+renderList("noteAList", DATA.noteA);
+renderList("noteBList", DATA.noteB);
+renderList("noteDList", DATA.noteD);
+renderList("ytExistList", DATA.ytExist);
+renderList("ytNewList", DATA.ytNew);
+</script>
+</body>
+</html>
