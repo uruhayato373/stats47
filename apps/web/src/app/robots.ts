@@ -36,7 +36,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        // ranking の派生指標 toggle URL (?norm=per_population / per_area / per_household) を明示的に許可
+        allow: ["/", "/ranking/*?norm=*"],
         disallow: [
           "/admin/*", // 管理画面
           "/api/*", // 内部 route handler（blog-data, ranking-data 等）。フロントから fetch するだけで Googlebot に露出させない
@@ -47,7 +48,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Google-Extended", // Google Gemini
-        allow: "/", // 明示的に全ページを許可
+        allow: ["/", "/ranking/*?norm=*"], // 明示的に全ページ + 派生指標 URL を許可
         disallow: [
           "/admin/*", // 管理画面は除外
           "/api/*", // 内部 route handler

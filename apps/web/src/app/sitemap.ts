@@ -198,12 +198,27 @@ function getCityPages(): MetadataRoute.Sitemap {
 }
 
 async function getTagPages(): Promise<MetadataRoute.Sitemap> {
-  const tagMeta = await listAllTagsWithCount().catch(() => []);
+  let tagMeta: Awaited<ReturnType<typeof listAllTagsWithCount>>;
+  try {
+    tagMeta = await listAllTagsWithCount();
+  } catch (error) {
+    console.error("[sitemap/getTagPages] listAllTagsWithCount failed", { error });
+    return [];
+  }
   // 旧クエリで count >= 5 を要求していたため踏襲
   const eligible = tagMeta.filter((t) => t.count >= 5);
-  if (eligible.length === 0) return [];
+  if (eligible.length === 0) {
+    console.warn("[sitemap/getTagPages] no eligible tags (count>=5)", { totalTags: tagMeta.length });
+    return [];
+  }
 
-  const articlesAll = await listLatestArticles(10000).catch(() => []);
+  let articlesAll: Awaited<ReturnType<typeof listLatestArticles>>;
+  try {
+    articlesAll = await listLatestArticles(10000);
+  } catch (error) {
+    console.error("[sitemap/getTagPages] listLatestArticles failed", { error });
+    return [];
+  }
   // 各 tag の最新 publishedAt を slug→tags リレーション無しで安価に解決するため、
   // 全 article から tagKey 別の max(publishedAt) を組み立てる。
   // 全 article 取得は snapshot in-memory cache 経由なので追加 fetch は発生しない。
