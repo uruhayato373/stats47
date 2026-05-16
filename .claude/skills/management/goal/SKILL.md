@@ -30,7 +30,7 @@ stats47 には改善ループスキル(performance-improvement / gsc-improvement
 
 施策実体・計測コマンド・improvement-log は各 improvement スキルに**委譲**する(車輪の再発明禁止)。本スキルはサイクル全体の制御・記録に集中する。
 
-詳細設計は `docs/02_実装計画/goal-skill-design-2026-05-16.md` を参照。
+詳細設計は `docs/02_実装計画/archive/goal-skill-design.md` を参照。
 
 ---
 
@@ -319,4 +319,4 @@ If verdict needs justification, add a Reason column with ≤ 8 words.
 - `.claude/rules/agent-output-contract.md` — Agent 出力契約
 - `.claude/skills/management/knowledge/SKILL.md` — 教訓の蓄積
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
-- `docs/02_実装計画/goal-skill-design-2026-05-16.md` — 本スキルの設計プラン(承認済)
+- `docs/02_実装計画/archive/goal-skill-design.md` — 本スキルの設計プラン(承認済)
