@@ -9,6 +9,53 @@ updated: 2026-05-16
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-CTR-01] manufacturing-aichi-dominance seoTitle/description 改訂 (W20)
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: blog-ctr
+- **deployed_at**: 2026-05-16
+- **related_plan**: `docs/03_週次運用/週次計画/2026-W21.md` Should「ブログ CTR 改善 30分1本」
+
+### 背景
+- W19 GSC: `manufacturing-aichi-dominance` impressions 280 / clicks 0 / CTR 0% / position 7.5
+- 上位クエリ (位置 6-12): 「愛知県 製造品出荷額」「愛知県 工業 一位」「愛知県 製造品出荷額 ランキング」など愛知県起点が多数
+- 旧 seoTitle「都道府県別・製造品出荷額ランキング｜愛知58兆円一強の製造業地図」は generic キーワード「都道府県別」が先頭で検索意図とミスマッチ
+
+### 施策
+- seoTitle: 「製造品出荷額ランキング2023｜愛知58兆円・全国1位、沖縄と115倍差」
+  - 検索意図上位の「製造品出荷額ランキング」を先頭配置
+  - 「2023」で recency signal 追加
+  - 「愛知58兆円」「全国1位」「沖縄と115倍差」で具体性 + 差別化
+- description: 「2023年最新版・47都道府県の製造品出荷額ランキング。1位は愛知58兆円、2位静岡17兆円、最下位沖縄0.5兆円で格差は115倍。工業地帯・産業別の集積構造も地図と表で可視化します。」
+  - 冒頭に「2023年最新版」+ 具体数字 (58→17→0.5) で SERP プレビュー時の目を引きやすく
+
+### 想定効果
+- **想定 CTR**: 1-3% (position 7-10 帯の業界平均 2-5% / 過去 CTR 0% からの引き上げ)
+- **根拠**: position 7.5 で同帯クエリの industry CTR (Backlinko 2023 ~3.3%) を参考。0% → 2% 達成すれば clicks +5-6/月。
+
+### 検証
+- **検証コマンド**: `NODE_PATH=/Users/minamidaisuke/stats47/node_modules node /tmp/gsc-page-queries.cjs`
+  ```
+  → manufacturing-aichi-dominance のクエリ別 CTR (last 28d) を取得
+  ```
+- **検証期日**: 2026-06-13 (W24, 4 週後)
+- **期日後の判定**:
+  - CTR ≥ 2% → effect/full
+  - CTR 1-2% → effect/partial
+  - CTR < 1% → effect/none。次の検証: 本文 H1 / hero 画像見直し or 別記事へ展開判断
+
+### デプロイ手順 (記録)
+1. `.local/r2/app/blog/manufacturing-aichi-dominance/article.md` の frontmatter を編集
+2. R2 push: `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog/manufacturing-aichi-dominance`
+3. **重要**: ブログメタデータの source of truth は `app/blog/all.json` snapshot。`.claude/skills/db/sync-snapshots/run.sh --only blog` で D1 → all.json 再生成 + R2 push 必須
+4. Cloudflare Pages 再デプロイ (build 時に新 all.json を fetch して prerendered HTML に焼き込む)
+
+### 学び / 次のスキル改善候補
+- ブログ記事のメタデータ更新は **article.md 編集 → R2 push だけでは反映されない**。`/sync-snapshots --only blog` + 再デプロイが必須
+- `brushup-blog-article` スキルに meta description / seoTitle の編集が含まれていないため、CTR 改善時は別フロー
+- TODO: blog metadata 更新を 1 コマンドで完結する skill（仮: `/brushup-blog-meta`）を提案 → automation-backlog に追加候補
+
 ## GSC 未登録 1.6 万件打開 — 観測短サイクル化 + sitemap 第 2 段階削減 (W17-W18)
 
 - **status**: in-progress
