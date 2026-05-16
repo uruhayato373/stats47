@@ -102,7 +102,7 @@ function parseEng(label) {
   return m;
 }
 
-// 時系列履歴は .claude/ 配下のファイルに蓄積（CLAUDE.md §記録先の統一原則）
+// 時系列履歴は .claude/ 配下のファイルに蓄積（.claude/rules/data-storage.md）
 const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
 
 const fetchedAt = new Date().toISOString();

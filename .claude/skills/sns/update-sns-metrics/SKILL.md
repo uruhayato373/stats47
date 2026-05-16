@@ -7,7 +7,7 @@ argument-hint: [--platform x|instagram|youtube|tiktok|all]
 
 各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。Instagram は Graph API v21、YouTube は Data API v3、X/TikTok は browser-use CLI を使用する。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**:
+**記録先の統一原則（.claude/rules/data-storage.md）**:
 - 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
 - 運用データ（最新値キャッシュ） → D1 `sns_posts` の cache カラム
 - 旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み

@@ -1,4 +1,4 @@
-name: 📦 Weekly Metrics Issue
+name: 📦 Weekly Metrics Commit
 
 on:
   schedule:
@@ -11,15 +11,14 @@ on:
         default: ""
 
 permissions:
-  contents: read
-  issues: write
+  contents: write
 
 concurrency:
-  group: weekly-metrics-issue
+  group: weekly-metrics-commit
   cancel-in-progress: false
 
 jobs:
-  create:
+  commit:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -28,6 +27,7 @@ jobs:
         with:
           ref: develop
           fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
@@ -46,42 +46,57 @@ jobs:
             echo "week=$WEEK" >> $GITHUB_OUTPUT
           fi
 
-      - name: 📝 Generate issue body
+      - name: 📝 Generate weekly metrics markdown
         id: body
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p /tmp/wm
-          node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs \
-            --week ${{ steps.week.outputs.week }} > /tmp/wm/body.md
+          WEEK="${{ steps.week.outputs.week }}"
+          OUT_DIR="docs/03_週次運用/メトリクス"
+          OUT_FILE="$OUT_DIR/${WEEK}.md"
+          mkdir -p "$OUT_DIR"
+
+          # frontmatter
+          {
+            echo "---"
+            echo "type: weekly-metrics"
+            echo "week: ${WEEK}"
+            echo "date: $(date -u +%Y-%m-%d)"
+            echo "status: auto-generated"
+            echo "---"
+            echo
+            node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week "${WEEK}"
+          } > "$OUT_FILE"
+
+          echo "out_file=$OUT_FILE" >> $GITHUB_OUTPUT
           echo "--- preview ---"
-          head -30 /tmp/wm/body.md
+          head -30 "$OUT_FILE"
 
       - name: 📄 Copy to GitHub Step Summary
-        run: cat /tmp/wm/body.md >> $GITHUB_STEP_SUMMARY
+        run: cat "${{ steps.body.outputs.out_file }}" >> $GITHUB_STEP_SUMMARY
 
-      - name: 🚦 Check duplicate
+      - name: 🚦 Skip if unchanged
         id: dup
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TITLE="[Weekly Metrics] ${{ steps.week.outputs.week }}"
-          # open Issue だけをチェック。closed な過去 Issue は再生成を阻害しない。
-          EXISTING=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number' 2>/dev/null)
-          if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
-            echo "Open issue already exists: #$EXISTING — skipping"
-            echo "skip=true" >> $GITHUB_OUTPUT
+          if git diff --quiet "${{ steps.body.outputs.out_file }}" 2>/dev/null; then
+            # ファイルが既に commit 済みで変更なし → skip
+            if [ -z "$(git status --porcelain ${{ steps.body.outputs.out_file }})" ]; then
+              echo "No changes — skipping commit"
+              echo "skip=true" >> $GITHUB_OUTPUT
+            else
+              echo "skip=false" >> $GITHUB_OUTPUT
+            fi
           else
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🆕 Create Weekly Metrics issue
+      - name: 🆕 Commit & push weekly metrics markdown
         if: steps.dup.outputs.skip == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TITLE="[Weekly Metrics] ${{ steps.week.outputs.week }}"
-          gh issue create \
-            --title "$TITLE" \
-            --label "weekly-metrics,auto-generated" \
-            --body-file /tmp/wm/body.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ steps.body.outputs.out_file }}"
+          git commit -m "metrics: weekly snapshot ${{ steps.week.outputs.week }} (auto-generated)"
+          git push origin develop

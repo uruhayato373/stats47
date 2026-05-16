@@ -1,28 +1,21 @@
 ---
 name: gsc-improvement
-description: Google Search Console の検索パフォーマンスとインデックス問題を GitHub Issues で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
+description: Google Search Console の検索パフォーマンスとインデックス問題を docs/05_改善ログ/gsc.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
 ---
 
-GSC の週次メトリクス（Clicks / Impressions / CTR / Position / Index Coverage）を **GitHub Issues で時系列追跡**し、打った施策と効果を記録するスキル。
+GSC の週次メトリクス（Clicks / Impressions / CTR / Position / Index Coverage）を **docs/05_改善ログ/gsc.md (人間向け要約) + reference/improvement-log.md (agent 詳細)** の 2 層で時系列追跡し、打った施策と効果を記録するスキル。
 
-検索パフォーマンスとインデックス状態の効果は 2〜4 週間遅延するため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を Issue に記録する。
+検索パフォーマンスとインデックス状態の効果は 2〜4 週間遅延するため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を append-only で記録する。
 
 ## データの保管場所
 
 | データ | 保管先 | 理由 |
 |---|---|---|
-| 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
-| 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
-| 施策（1 施策 1 Issue） | GitHub Issues ラベル `gsc-improvement` | タイムライン・PR リンク・通知・検索 |
-| 週次スナップショット（議論用） | GitHub Issues ラベル `gsc-snapshot` | 施策 Issue との相互参照、Web UI |
-| 観測値の時系列・効果判定 | 各施策 Issue へのコメント + `effect/*` ラベル切替 | 自然なスレッド構造 |
-
-## ラベル体系
-
-- **分類**: `gsc-improvement` / `gsc-snapshot`
-- **Tier**: `tier-1`（即効）/ `tier-2`（戦略）/ `tier-3`（要調査）
-- **対象メトリクス**: `metric/gsc-clicks` / `metric/gsc-impressions` / `metric/gsc-ctr` / `metric/gsc-position` / `metric/gsc-index-coverage`
-- **効果判定**: `effect/pending` → `effect/full` / `effect/partial` / `effect/none` / `effect/adverse`
+| 生メトリクス CSV | git: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
+| 目標しきい値設定 | git: `.claude/skills/analytics/gsc-improvement/reference/budgets.json` | プロジェクト設定 |
+| 詳細ログ (agent 用) | git: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
+| 要約 (人間向け) | git: `docs/05_改善ログ/gsc.md` | 施策一覧・status・想定/実測/判定を 1 ファイルで俯瞰 |
+| 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が日曜 JST 20:00 に自動更新 |
 
 ## 引数
 
@@ -30,8 +23,8 @@ GSC の週次メトリクス（Clicks / Impressions / CTR / Position / Index Cov
 $ARGUMENTS — [mode]
              mode:
                - status  (デフォルト) : 直近スナップショット + 進行中施策を要約
-               - observe : 新 snapshot Issue 作成 + 目標判定 + 施策効果追記
-               - action  : 新しい施策 Issue を作成
+               - observe : 新 snapshot 取り込み + 目標判定 + 施策効果追記
+               - action  : 新しい施策 section を docs/05_改善ログ/gsc.md に追加
                - next    : 次に着手すべき改善候補を提示
 ```
 
@@ -52,14 +45,13 @@ GSC メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. gh issue list --label gsc-snapshot --state open --limit 3 で直近スナップショット Issue
-3. gh issue list --label gsc-improvement --state open で進行中施策一覧
-4. gh issue list --label gsc-improvement --label "effect/pending" で効果測定待ちの施策
-5. gh issue list --label gsc-improvement --label "effect/adverse" で逆効果検出済み（あれば警告強調）
+2. docs/05_改善ログ/gsc.md を Read し status: pending / in-progress の section を抽出
+3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
+4. .claude/state/metrics/gsc/LATEST.md を Read し週次推移を取得
 
 出力:
 - 最新 snapshot の主要指標 + 目標超過メトリクス
-- 進行中施策を「デプロイ日 - 経過日数 - ターゲット - effect ラベル」形式で列挙
+- 進行中施策を「デプロイ日 - 経過日数 - ターゲット - status」形式で列挙
 - 次観測予定日（最も近いもの）
 ```
 
@@ -83,42 +75,36 @@ GSC メトリクス取得の優先順:
    - 値 >= error_threshold → ERROR
    - alerts 配列に記録
 
-4. 前週 snapshot Issue を取得して前週比を計算:
-   gh issue list --label gsc-snapshot --state all --limit 2 --json number,title,body
+4. 前週 snapshot との前週比を計算:
+   - reference/snapshots/ の直近 2 週分を比較
+   - .claude/state/metrics/gsc/history.csv から取得しても可
 
-5. snapshot Issue 作成:
-   gh issue create --label gsc-snapshot --title "[GSC Snapshot] YYYY-Www" \
-     --body "<template 埋め>"
-   前週比セクションに前週 snapshot Issue の数値を引き算して記載
-
-6. 進行中施策 Issue の効果判定（最重要）:
-   gh issue list --label gsc-improvement --label "effect/pending" で対象取得。
-   各 Issue に対して:
-   - 経過日数 = observe 実行日 - デプロイ日
+5. 進行中施策の効果判定（最重要）:
+   docs/05_改善ログ/gsc.md を Read し status: pending の section を抽出。
+   各施策に対して:
+   - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
    - 判定:
-     * 経過 < 14 日 → effect/pending 維持
-     * 経過 ≥ 14 かつ |実測/想定| ≥ 80% → effect/full
-     * 経過 ≥ 14 かつ 20-80% → effect/partial
-     * 経過 ≥ 14 かつ < 20% → effect/none
-     * 逆方向 → effect/adverse
-   - 判定結果を施策 Issue にコメントとして追記:
+     * 経過 < 14 日 → status: pending 維持
+     * 経過 ≥ 14 かつ |実測/想定| ≥ 80% → status: effect/full
+     * 経過 ≥ 14 かつ 20-80% → status: effect/partial
+     * 経過 ≥ 14 かつ < 20% → status: effect/none
+     * 逆方向 → status: effect/adverse
+   - 判定結果を docs/05_改善ログ/gsc.md の該当 section の「実測」「判定」欄に Edit insert:
      ```
-     ## 📊 効果観測 (YYYY-MM-DD)
+     ### 実測
      - 経過日数: N 日
-     - snapshot: #XX (参照)
-     - 想定 delta: CTR +1.5pt
-     - 実測 delta: CTR +1.2pt
-     - 判定: **effect/partial** ⚠️
+     - snapshot: reference/snapshots/YYYY-Www/
+     - 実測 delta: CTR +1.2pt（想定 CTR +1.5pt の 80%）
+
+     ### 判定
+     - status: effect/partial
+     - 判定日: YYYY-MM-DD
      ```
-   - ラベル差し替え: gh issue edit $ISSUE --remove-label "effect/pending" --add-label "effect/XXX"
+   - section 冒頭の `status: pending` を `status: effect/XXX` に Edit 更新
+   - 詳細な検証ログ（仮説・検証コマンド・期日後の判定根拠）は reference/improvement-log.md に追記
 
-7. 前週 snapshot Issue のクローズ判定:
-   - 前週 Issue 本体の「次のアクション」が全て完了 or 関連施策 Issue が全て effect/pending を脱している
-     → gh issue close <prev-number> --comment "次週 snapshot #NNN で継続追跡"
-   - 未完了アクションがある場合は open のまま残す
-
-8. 出力:
+6. 出力:
    - 目標超過アラートを先頭で強調
    - 判定変化（pending → full/partial/none/adverse）した施策をハイライト
    - adverse があれば注意喚起
@@ -128,69 +114,81 @@ GSC メトリクス取得の優先順:
 
 ```
 1. 必須フィールド確認（欠落時は追加質問）:
-   - 施策 ID: `T{Tier}-{Category}-{連番}` 形式
-     - Tier: T1 / T2 / T3
-     - Category: CTR / IMPRESSIONS / POSITION / INDEX / TITLE / DESCRIPTION / INTERNAL-LINK / SITEMAP / SCHEMA / CONTENT
-   - ターゲット指標（複数可）
+   - 施策タイトル
+   - tier: 1 (即効) / 2 (戦略) / 3 (要調査)
+   - target_metric: gsc-clicks / gsc-impressions / gsc-ctr / gsc-position / gsc-index-coverage
    - 対象ページ / クエリ
    - 想定効果値（デプロイ前に明文化、後付けバイアス防止）
-   - デプロイ日 / PR 番号 / コミット hash
+   - deployed_at / PR 番号 / コミット hash
    - 変更内容サマリ / 変更ファイル
+   - verification_command（copy-pasteable な curl / API / script）
 
-2. .github/ISSUE_TEMPLATE/gsc-improvement.md を雛形として gh issue create 実行:
-   gh issue create \
-     --title "[T{Tier}-{Cat}-{NN}] 施策名" \
-     --label "gsc-improvement,tier-{N},metric/gsc-{kind},effect/pending" \
-     --body "<template 埋め>"
+2. docs/05_改善ログ/gsc.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
 
-3. 作成した Issue 番号を返す。
-   最新 snapshot Issue に「アクティブな施策」として追記（gh issue edit --body）。
+   ```markdown
+   ## <施策タイトル>
 
-4. 次の観測日（デプロイ + 14 / 28 日）を計算して提示
+   - **status**: pending
+   - **tier**: <1|2|3>
+   - **target_metric**: gsc-<sub>
+   - **deployed_at**: YYYY-MM-DD
+   - **verification_command**: <copy-pasteable curl/jq/script>
+
+   ### 想定効果
+   <+xxx, 根拠>
+
+   ### 実測
+   （pending）
+
+   ### 判定
+   （pending）
+   ```
+
+3. front-matter の `updated:` を本日日付に更新。
+4. 詳細な検証コマンド・仮説・参照リンクは reference/improvement-log.md にも append（agent が後で深掘り参照する）。
+5. 次の観測日（デプロイ + 14 / 28 日）を計算して提示。
 ```
 
 #### mode = next
 
 ```
-gh issue list --label gsc-improvement --state open --json number,title,labels の中で
-effect/pending を除いた（=未着手提案）枠 + 現状分析から次の改善候補を提示。
+1. docs/05_改善ログ/gsc.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
+2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
+3. 最新 snapshot の「次のアクション」候補も合わせる
 
 優先度: tier-1 > tier-2 > tier-3
 同 tier 内は想定効果の大きい順。
-
-未着手候補が不足する場合は、最新 snapshot の「次のアクション」セクションからも候補を抽出。
 ```
 
 ### Step 3: 共通ルール
 
-- **Issue は append-only** — 編集ではなくコメント追記で履歴を残す
+- **docs/05_改善ログ/gsc.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
-- **数値はソース明示** — "snapshot #XX" or "snapshots/2026-W17/queries.csv"
-- **施策は 1 PR 1 Issue** — 複数目的の PR は分割
-- **想定効果値はデプロイ前に Issue 本文に書く** — 後付けバイアス防止
+- **数値はソース明示** — "snapshots/2026-W17/queries.csv" のような相対パス
+- **施策は 1 PR 1 section** — 複数目的の PR は分割
+- **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
+- **2 層構造を維持** — docs/ は人間が眺める要約、reference/improvement-log.md は agent が深掘りする詳細
 
-## GitHub Issues 参照パターン
+## 参照パターン
 
 ```bash
 # 直近スナップショット
-gh issue list --label gsc-snapshot --state all --limit 6
+ls -t .claude/skills/analytics/gsc-improvement/reference/snapshots/ | head -3
+cat .claude/state/metrics/gsc/LATEST.md
 
-# 効果測定待ちの施策
-gh issue list --label gsc-improvement --label "effect/pending"
+# 進行中（pending）施策
+cat docs/05_改善ログ/gsc.md | grep -B1 -A4 'status.*pending'
 
-# 逆効果検出済み（要対処）
-gh issue list --label gsc-improvement --label "effect/adverse"
+# 効果測定済み施策
+cat docs/05_改善ログ/gsc.md | grep -B1 'status.*effect/'
 
-# 特定メトリクスの施策
-gh issue list --label "metric/gsc-ctr"
-
-# クロージング済みを含む Tier 1 施策
-gh issue list --label gsc-improvement --label tier-1 --state all
+# 詳細ログ
+cat .claude/skills/analytics/gsc-improvement/reference/improvement-log.md
 ```
 
-## 実証チェックリスト（effect/* ラベルを付ける前に必須）
+## 実証チェックリスト（status: effect/* に更新する前に必須）
 
 参照: `.claude/rules/evidence-based-judgment.md`
 
@@ -204,7 +202,7 @@ gh issue list --label gsc-improvement --label tier-1 --state all
 - [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
 - [ ] **「Google が再クロールしているか」を URL Inspection API の lastCrawlTime 推移で確認したか**（GSC export の「サーバーエラー」レポートは古いスナップショットなので根拠にならない）
 
-このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
+このチェック未満なら status を effect/full / effect/partial に更新しない。pending のままにすること。
 
 ### 早期警戒トリガー（cutoff 日を絶対視しない）
 
@@ -230,8 +228,7 @@ gh issue list --label gsc-improvement --label tier-1 --state all
 
 ## 前提
 
-- `.github/ISSUE_TEMPLATE/gsc-snapshot.md` と `gsc-improvement.md` が存在
-- ラベル体系（`gsc-improvement` / `gsc-snapshot` / `tier-1/2/3` / `metric/gsc-*` / `effect/*`）が作成済
-- `reference/budgets.json` / `reference/snapshots/` 初期化済
+- `docs/05_改善ログ/gsc.md` が存在（front-matter `type: improvement-log` / `metric: gsc`）
+- `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - GSC プロパティ: `sc-domain:stats47.jp`
 - 本番 URL: `https://stats47.jp`

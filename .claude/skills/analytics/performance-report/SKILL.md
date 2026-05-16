@@ -7,7 +7,7 @@ allowed-tools: Read, Bash, Grep
 
 `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積された Lighthouse / PSI 計測履歴からパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
+**記録先の統一原則（.claude/rules/data-storage.md）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
 
 ## 前提条件
 
@@ -146,19 +146,20 @@ CWV の 3 指標（LCP, CLS, INP）を評価する:
 
 ### 保存先
 
-GitHub Issue として作成する。テンプレは `.github/ISSUE_TEMPLATE/performance-report.md` に準拠。
+`docs/04_レビュー/performance-report/{YYYY-Www}.md` に Write tool で書き出す。frontmatter:
 
-```bash
-# 本文を /tmp/performance-report-body.md に書き出し後:
-gh issue create \
-  --title "[Performance Report] YYYY-MM" \
-  --label "performance-report" \
-  --body-file /tmp/performance-report-body.md
+```yaml
+---
+type: performance-report
+week: 2026-Www
+date: 2026-MM-DD
+status: active
+---
 ```
 
-作成後、Issue 番号と URL を報告する。関連する Core Web Vitals 系の施策 Issue や、同月の weekly-review Issue は本文の「関連 Issue」セクションに `#番号` で参照する。
+書き出し後、ファイルパスを報告する。関連する Core Web Vitals 系の改善ログや、同週の weekly-review ファイルは本文の「関連リンク」セクションに相対パスで参照する。
 
-### 出力フォーマット（Issue 本文）
+### 出力フォーマット（本文）
 
 ```markdown
 ## 対象月
@@ -224,9 +225,9 @@ gh issue create \
 - 改善後の再測定予定
 - ベースライン数値
 
-## 関連 Issue
+## 関連リンク
 
-<!-- CWV 系の施策 Issue、同月の weekly-review、バジェット違反 Issue 等を #番号で列挙 -->
+<!-- CWV 系の改善ログ、同週の weekly-review、バジェット違反対応の docs/ 等を相対パスで列挙 -->
 ```
 
 ## 注意事項
@@ -254,8 +255,7 @@ gh issue create \
 - `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
-- `gh issue list --label performance-report --state all` — 過去のレポート
-- `.github/ISSUE_TEMPLATE/performance-report.md` — Issue テンプレ
+- `ls -t docs/04_レビュー/performance-report/*.md` — 過去のレポート
 
 ## DB パス
 

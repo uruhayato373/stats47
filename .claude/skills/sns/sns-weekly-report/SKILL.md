@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`/update-sns-metrics` が蓄積）を集計し、週次レポートを Markdown で生成する。
 
-**記録先の統一原則（CLAUDE.md §記録先の統一原則）**: SNS メトリクスの時系列履歴は `.claude/` 配下のファイル。旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み。
+**記録先の統一原則（.claude/rules/data-storage.md）**: SNS メトリクスの時系列履歴は `.claude/` 配下のファイル。旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み。
 
 ## 引数
 
@@ -67,24 +67,20 @@ node /tmp/sns-weekly-agg.js <monday> <sunday>
 
 ### 3. レポート生成
 
-GitHub Issue に出力する（`sns-weekly-report` ラベル、タイトル `[SNS Weekly Report] YYYY-Www`）。
+`docs/04_レビュー/sns-weekly-report/{YYYY-Www}.md` に Write tool で書き出す。frontmatter:
 
-```bash
-# 本文を /tmp/sns-weekly-report-body.md に書き出し後:
-gh issue create \
-  --title "[SNS Weekly Report] YYYY-Www" \
-  --label "sns-weekly-report" \
-  --body-file /tmp/sns-weekly-report-body.md
+```yaml
+---
+type: sns-weekly-report
+week: 2026-Www
+date: 2026-MM-DD
+status: active
+---
 ```
 
-同週の `[Weekly Review] YYYY-Www` Issue が既にある場合、作成した SNS Weekly Report Issue から `#<number>` でリンクし、Weekly Review 側にも SNS レポートの Issue 番号をコメント追記して相互参照する:
+同週の Weekly Review ファイル（`docs/03_週次運用/weekly-review/{YYYY-Www}.md` 等）が既にある場合、本文の冒頭で相対リンクし、Weekly Review 側にも SNS レポートへのリンクを追記して相互参照する。
 
-```bash
-# 例: Weekly Review Issue #42 に SNS レポート #50 をリンク
-gh issue comment 42 --body "SNS 週次レポート: #50"
-```
-
-過去のレポートは `gh issue list --label sns-weekly-report --state all` で参照できる。
+過去のレポートは `ls -t docs/04_レビュー/sns-weekly-report/*.md | head -5` で参照できる。
 
 ### 4. 分析コメント
 

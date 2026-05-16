@@ -109,22 +109,23 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 
 ## 出力先
 
-GitHub Issue に出力する（`dev-review` ラベル）。
+`docs/04_レビュー/dev-review/app-{ルート名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
 
-```bash
-# 本文を /tmp/review-app-body.md に書き出し後:
-gh issue create \
-  --title "[Dev Review] app / YYYY-MM-DD" \
-  --label "dev-review" \
-  --body-file /tmp/review-app-body.md
+```yaml
+---
+type: dev-review
+scope: app-{ルート名}
+date: 2026-MM-DD
+status: active
+---
 ```
 
-複数ルート指定時のタイトル例:
-- 単一ルート: `[Dev Review] app:ranking / YYYY-MM-DD`
-- 複数ルート: `[Dev Review] app:ranking+areas / YYYY-MM-DD`
-- 横断: `[Dev Review] app / YYYY-MM-DD`
+複数ルート指定時のファイル名例:
+- 単一ルート: `app-ranking-2026-05-04.md`
+- 複数ルート: `app-ranking-areas-2026-05-04.md`
+- 横断: `app-2026-05-04.md`
 
-`gh issue list --label dev-review --state all` で過去のレビューを参照できる。
+`ls -t docs/04_レビュー/dev-review/*.md | head -5` で過去のレビューを参照できる。
 
 ## 出力フォーマット
 

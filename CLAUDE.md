@@ -1,265 +1,118 @@
 # stats47 - 統計で見る都道府県
 
-都道府県統計データの可視化 Web アプリケーション。e-Stat API から 47 都道府県の統計を取得し、ランキング・ダッシュボード・チャートで表示する。
+都道府県統計データの可視化 Web アプリケーション。e-Stat API から 47 都道府県の統計を取得し、ランキング・ダッシュボード・チャートで表示する。モノレポ構成: `apps/{web,remotion,ges}` + `packages/*`（詳細は `.claude/rules/local-environment.md`）。
 
-## 大原則
+## 行動原則 (12軸)
 
-すべての作業に適用する不変の原則。他のいかなる指示より優先する。
+すべての作業に適用する。優先順位順。他のいかなる指示より優先する。
 
-1. **始める前に目標を定める** — 何を達成するか1文で言えるまで着手しない
-2. **コーディングの前にまず考える** — 実装より設計を先に。手が動くのは目標が明確になってから
-3. **とにかくシンプルに** — 最もシンプルな解を選ぶ。複雑さは常に疑う
-4. **必要な部分だけ外科的に編集する** — 変更は最小限。関係ないファイルを巻き込まない
+1. **考えてから書く** — 不確かな前提で進めず、前提・解釈・不明点を明示する
+2. **シンプル最優先** — 必要最小限のコードで解決する。不要な機能・抽象化を加えない
+3. **外科的変更** — 必要な箇所だけ触る。周辺コードを勝手に改善しない
+4. **ゴール駆動** — 手順より成功条件を定義し、検証できるまで反復する
+5. **モデルは判断時のみ** — ルーティング・リトライ・ステータス処理など決定的なものはコードで処理する
+6. **トークン予算を守る** — 一定量を超えそうなら要約して切り替える
+7. **混在しない** — 複数パターンが共存する場合、どちらを採用するか明示する
+8. **書く前に読む** — 既存 exports・呼び出し元・共通ユーティリティを確認してから書く
+9. **テストは意図を検証する** — 「動くか」だけでなく「なぜ必要か」まで検証する
+10. **チェックポイントを置く** — 完了したこと・検証したこと・残ったことを節目で整理する
+11. **コードベースの規約を優先** — 自分の好みより既存の命名・構成・設計思想に合わせる
+12. **失敗を隠さない** — 未検証部分・スキップ箇所は「完了」と言わず明示する
 
-## エージェント実行モード
+## 致命的オペレーション規約
 
-Agent tool でサブエージェントを起動する際は `mode: "bypassPermissions"` をデフォルトとする。ユーザーへの確認なしで最後まで処理を完了すること。
-
-## Agent 起動時の出力契約
-
-Agent tool 経由で subagent を呼ぶ際は prompt の **冒頭** に Output Format テンプレ (A/B/C) を必ず含める。制約は冒頭に書く（末尾は無視される）。テンプレ詳細・悪い例/良い例は `.claude/rules/agent-output-contract.md` 参照。
-
-## モノレポ構成
-
-```
-apps/
-  web/       Next.js (Cloudflare Pages) — 公開サイト
-  remotion/  Remotion — 動画・SNS 投稿画像生成（YouTube/Instagram/X/note）
-  ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
-packages/
-  database/  Drizzle ORM + Cloudflare D1 スキーマ・シード
-  types/     共通型定義
-  visualization/  D3.js チャートコンポーネント
-  components/     shadcn/ui ベース共通 UI
-  estat-api/      e-Stat API クライアント
-  ranking/        ランキング計算ロジック
-  r2-storage/     Cloudflare R2 アクセス
-  utils/          汎用ユーティリティ
-```
-
-## ドキュメント参照ガイド
-
-状況に応じて以下を参照すること。CLAUDE.md 内に詳細を複製しない。
-
-| 知りたいこと | 参照先 |
-|---|---|
-| docs 全体の構成・運用ルール | `docs/INDEX.md` |
-| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
-| 実装ロードマップ・進捗管理 | `docs/02_実装計画/01_実装ロードマップ.md` |
-| システム構成・技術スタック | `docs/01_技術設計/` |
-| DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
-| 週次計画・レビュー・批判的レビュー・Pre-Mortem・月次レポート等 | GitHub Issues（ラベル `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `performance-report` / `youtube-experiment` / `dev-review` / `blog-review` / `sns-weekly-report` / `seo-audit` / `archive`）★過去: `docs/03_レビュー/` は 2026-04-21 に Issues へ全移行して廃止 |
-| Management スキルの使い方（NSM・成長ループ・収益化・週次運用） | `.claude/skills/management/README.md` |
-| 実装計画・課題・アイデア | **GitHub Issues**（粒度: 記事 1 本・動画企画 1 本 = 1 issue。ラベル: `content/note` `content/youtube-regular` `content/youtube-shorts` `enhancement` 等。過去: `docs/90_課題管理/` は 2026-04 に Issues へ全移行して廃止） |
-| 各 feature の設計 | 各 `apps/*/src/features/*/README.md` |
-| PSI / GSC / GA4 / AdSense の計測と改善（2026-04-24 以降 GitHub Actions 化） | **[Weekly Metrics] YYYY-Www** Issue に週次集約（ラベル `weekly-metrics` / `auto-generated`）+ 施策 Issue は `{gsc,ga4,adsense,psi}-improvement` ラベルを継続使用。PSI の閾値違反時のみ `[PSI Alert] YYYY-MM-DD` Issue を日次自動起票（`psi-snapshot,auto-generated`）。生データ: `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/*.csv` + `.claude/state/metrics/{psi,gsc,ga4,adsense}/{history.csv,LATEST.md}`。★過去: 個別 `[GSC/GA4/AdSense Snapshot]` Issue と `{gsc,ga4,adsense}-snapshot` ラベルは 2026-04-24 に `[Weekly Metrics]` へ統合して廃止 |
-| Cloudflare 月次コスト・施策の蓄積（計測と改善） | GitHub Issues（ラベル `cost-snapshot` / `cost-improvement`）★請求書到着時に `/cloudflare-cost-improvement invoice`、snapshot と施策は Issue、生データ JSON は `.claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/` |
-| DB 操作全般（スキーマ・データ変更・シード） | `packages/database/README.md` ★DB操作時は必ず参照 |
-| R2 ストレージ・同期 | `packages/r2-storage/src/scripts/README.md` |
-| **R2 キーパス設計（URL = ディレクトリ構造の原則）** | `.claude/rules/r2-storage-design.md` ★snapshot 追加・変更時は必読 |
-| 国土数値情報 GIS データ（データセット一覧・パイプライン・ライセンス） | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
-| 国土交通データプラットフォーム（MCP・カタログ一覧・ツール） | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
-| CI/CD・デプロイ | `.github/workflows/README.md` |
-| 自動化インベントリ（GitHub Actions / launchd / Claude Routine の全一覧） | `docs/01_技術設計/10_自動化インベントリ.md` ★新規追加・削除時は必ず更新 |
-| Pre-commit フック | `.husky/README.md` |
-| エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
-| テスト構成・追加指針 | `apps/web/tests/README.md` |
-| デザインシステム（melta-ui 準拠） | `.claude/design-system/README.md` |
-| コーディング標準（TypeScript/React/Next.js） | `.claude/rules/coding-standards.md` |
-| **実証ベース判定ルール（推測判定の禁止・effect 判定の必須要件）** | `.claude/rules/evidence-based-judgment.md` ★improvement / 判定系スキルでは必読 |
-| note / X / ブログ hero の画像プロンプトテンプレート（43 種） | `.claude/skills/image-prompt/reference/catalog.md` ★`/image-prompt` で呼び出し |
-
-## エージェントチーム
-
-`.claude/agents/` 配下に定義。Tier 0（task-router）/ Tier 1（x-strategist, youtube-strategist, instagram-strategist, seo-auditor）/ Tier 2（12専門エージェント）の構成。詳細・連携パターンは `.claude/agents/README.md` 参照。
-
-## 記録先の統一原則（D1 vs .claude/）
-
-データの性質で保存先を厳格に分ける。**スキル実装・エージェントは以下の分類に従うこと**。
-
-### D1（Cloudflare D1 SQLite）に置くもの — 「運用データ」
-
-**判定軸**: `apps/web` / 投稿スキルが CRUD する、ドメインモデルの主要エンティティ。
-
-- `articles`, `indicators`, `observations`, `ai_content`, `page_components` — コンテンツ実体
-- `categories`, `subcategories`, `area_profiles` — マスタ
-- `sns_posts` — SNS 投稿本体（最新メトリクスの cache カラムも含む。時系列履歴はファイル側）
-- `correlations` — 相関分析バッチ結果
-- その他、ランキング・テーマダッシュボード・検索が依存するテーブル
-
-### `.claude/` 配下のファイルに置くもの — 「計測・改善の蓄積」
-
-**判定軸**: アプリは読まない。人間とエージェントが時系列で振り返るためのログ・スナップショット・実験状態。
-
-| データ | 保存先 |
-|---|---|
-| GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
-| GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
-| PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` 自動起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
-| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（※施策・観測ログは GitHub Issues `cost-*` ラベル側） |
-| Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` 自動起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
-| SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
-| NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
-| 実験 state（PDCA） | `.claude/state/experiments.json` |
-| RemoteTrigger 記録 | `.claude/state/triggers.json` |
-
-### 新規スキル設計時の判断
-
-- 「アプリが読む or 1 行あたりの FK 結合が本質的か？」 → **YES なら D1**
-- 「append-only の時系列ログ／設定／実験記録か？」 → **NO なら `.claude/` 配下のファイル**
-- 迷う場合は `.claude/` を優先。D1 は本当に必要な時だけ追加する
-
-### 本原則の根拠
-
-- `.claude/` は git 管理されるため、履歴が自動的に残る（改善サイクルと相性が良い）
-- 計測データを D1 に入れるとテーブルが肥大化し、スキーマ変更コストが増える
-- エージェントが Read/Write/Grep で扱えるほうが、スキル横断の連携がしやすい
-
-## スキル利用コードの配置原則
-
-**スキル（SKILL.md）から呼ばれるユーティリティ・ヘルパースクリプトは `.claude/` 配下に置く**。`scripts/` 直下には置かない。
-
-### 配置ルール
-
-| 対象 | 置き場所 |
-|---|---|
-| 複数スキルから共有されるユーティリティ（YouTube / GA4 / GSC 等ドメイン単位） | `.claude/scripts/<domain>/` 例: `.claude/scripts/youtube/`, `.claude/scripts/lib/` |
-| 特定スキル専用の長大スクリプト | `.claude/skills/<skill>/scripts/` |
-| スキルが参照するデータ・テンプレ（非実行） | `.claude/skills/<skill>/reference/` |
-| launchd 等の OS 統合用シェルラッパー | `scripts/scheduled/`（唯一の例外、`.claude/` 外でよい） |
-| アプリのビルド・デプロイ用スクリプト | `packages/*/scripts/` or `apps/*/scripts/` |
-
-### 判断フロー
-
-```
-スクリプトを新規作成する
-  ↓
-SKILL.md から `node <path>` で呼ばれる？
-  ├─ YES → .claude/scripts/<domain>/ または .claude/skills/<skill>/scripts/
-  └─ NO → OS から直接起動される？
-          ├─ YES → scripts/scheduled/
-          └─ NO → packages/*/scripts/ or /tmp/（使い捨て）
-```
-
-`.claude/scripts/<domain>/` に置くスクリプトから project root を参照するときは `require("path").resolve(__dirname, "../../..")` を `PROJECT_ROOT` として冒頭で宣言する。
-
-## ローカル開発環境
-
-- **ローカル D1/R2 は `.local/d1/` に統一。** `wrangler.toml` の `persist_to = "../../.local/d1"` と `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` で、`pull:d1` スクリプトと dev server が同じデータを参照する。**`apps/web/.wrangler/state/` は使わない。**
-- **ローカル D1**: `.local/d1/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite`（wrangler/miniflare が自動生成する長いハッシュ名）。**`.local/d1/*.sqlite`（ルート直下）は 0 バイトのダミーファイルなので参照しないこと。**
-- **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。R2 キャッシュ（e-Stat API レスポンス等）も `.local/d1/v3/r2/` 配下に保存される
-- **プロキシ制約**: 企業ネットワークで S3 API が HTTP 407/503 でブロックされる場合あり。`/push-r2` スキルが wrangler CLI フォールバックを案内する
-
-## DB データ反映フロー
-
-**リモート D1 は 2026-04-29 に解約済み（D1 残数 = 0）。** 本番は R2 スナップショット配信のみ。
-
-```
-ローカル D1（source of truth）──/sync-snapshots──▶ R2 snapshot──▶ 本番配信
-```
-
-- データ変更後は `/sync-snapshots` で R2 スナップショットを再生成・push する
-- ranking-values（~30K files）の更新は時間がかかるため `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
-- ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
-
-## ブランチ運用ルール
-
-```
-feature/* ──(PR 必須)──▶ develop ──(直接 merge)──▶ main（デプロイ）
-```
-
-- **feature/***: 機能ブランチ。develop から分岐し、**PR 経由でのみ develop にマージ**する。マージ後は削除
-- **develop**: 統合ブランチ。feature/* からの PR を受け入れる。**develop 直接 push は禁止**。`gh pr create --base develop` で PR を出し、`.github/workflows/pr-quality-check.yml` の CI が pass してからマージ
-- **main**: 本番デプロイブランチ。develop からの直接 merge のみ（Cloudflare Pages トリガー）。直接コミット・push しない
-- デプロイは `/deploy` スキルで実行（feature push → PR → develop → main マージ + push → 必要なら `/purge-cdn`）
-
-## 行動原則
-
-以下の原則をすべての作業で適用する。
-
-### 1. 考えてから動く
-- 非自明なタスクは実装前にアプローチを 2-3 案比較し、最もシンプルな案を選ぶ
-- ハック的修正（TODO付き一時回避策、型を `any` にする等）は禁止。今の知識で一番きれいな解を選ぶ
-- 既存パターンの拡張を優先し、新しい抽象化は最終手段。ただし過剰設計も NG
-
-### 2. 検証してから完了
-- 変更は必要最小限。無関係なファイルを巻き込まない
-- 作業完了前に `/verification-loop` の Phase 1-2（ビルド＋型チェック）を実行する
-- 一時的な誤魔化し（テストの skip、エラーの握りつぶし等）は禁止
-
-### 3. ミスから学ぶ
-- バグ修正完了時は `/knowledge` で教訓を記録する
-- 同じエラーを 2 回解決した場合は `/continuous-learning` でパターン化する
-- DB マイグレーション・デプロイ・API 連携の作業開始時は `/knowledge` の関連エントリを確認する
-
-### 4. 記録してから終える
-次セッション / 他エージェントが文脈をゼロから再構築しなくて済むよう、作業完了時に以下を更新する。
-
-| 記録対象 | 置き場所 |
-|---|---|
-| SEO / GSC / GA4 / PSI / SNS-metrics の施策デプロイ | `.claude/skills/analytics/{gsc,ga4,performance,sns-metrics}-improvement/reference/improvement-log.md` に施策 ID 付きで追記 |
-| 週次計画の進捗（完了済タスク・残タスク） | `[Weekly Plan] YYYY-Www` Issue の TODO チェックボックスをチェック、または `gh issue comment` で実績を追記 |
-| 非自明な API 仕様・制約（誤解の種になる挙動） | `/knowledge` に「問題・原因・対策」3 項目で追記 |
-| 本プロジェクト固有の恒常事実（DB パス・採用アーキテクチャ等） | auto memory（`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`） |
-
-**原則**: 作業完了時に 1 セッションで複数の改修・議論が起きた場合、**最重要な判断理由・デプロイ結果・残ブロッカーを必ず上記のいずれかに固定化してから終わる**。コミットメッセージ・セッション内メモリだけに閉じ込めない（次エージェントは git log と上記ファイルしか見られない）。
-
-## 作業規約
-
-- **一時ファイルはプロジェクトルートではなく `/tmp/` に作成すること。** やむを得ずルートに作成した場合は作業完了時に必ず削除する。pre-commit フックが `tmp_*`, `*.db` 等を自動削除するが、スキル側でも責任を持つ
-- 計画書・課題・アイデアは **GitHub Issues** に書く。**`docs/90_課題管理/` ディレクトリは廃止**（2026-04 移行）。過去参照がドキュメント内に残っていることがあるが新規作成はしない
-- **browser-use を使うスキル / スクリプトは終了時に必ず daemon 停止 + Chrome タブクローズすること。** 詳細は `.claude/rules/browser-use-cleanup.md` 参照。
-- **DB データを変更する場合はローカル D1 SQLite を直接操作すること。** 本番への反映は `/sync-snapshots` でR2スナップショットを再生成する。
-- **ローカル D1 のパスは以下の固定値を使うこと。推測してパスを作らない。**
+- **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
+- **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
+- **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
+- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
+- **DB 変更はローカル D1 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
+- **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
+- **ローカル D1 パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない):
   ```
   .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
   ```
-  `better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**ため、パスを間違えると `.local/d1/` にゴミファイルが増殖する。絶対に上記の正しいパス以外で D1 を開かないこと。
 
-## e-Stat API データ取得規約
+## 作業の節目で記録する
 
-- **`cdTimeFrom`/`cdTimeTo`（年度範囲指定）を使わない。** 全年度を一括取得し、必要な年度はメモリ上で `yearCode` フィルタする。理由:
-  - R2 キャッシュキーが `statsDataId` + `cdCat01` 等で決まるため、年度範囲パラメータの違いでキャッシュが分断され、同じデータが複数キャッシュされる
-  - 全年度取得→メモリフィルタの方がキャッシュヒット率が高く、API 呼び出し回数を最小化できる
-- **`cdArea`（地域コード指定）を使わない。** 全都道府県を一括取得し、`areaCode` でフィルタする。理由は同上（47都道府県でキャッシュを共有）
-- **地域コードは5桁（`01000`〜`47000`）に統一。** 2桁→5桁の正規化は不要な設計とする
+完了時に以下を更新する。コミットメッセージ・セッション内メモリだけに閉じ込めない (次エージェントは git log と下記ファイルしか見られない)。
 
-## UI コンポーネント規約
+| 種別 | 記録先 |
+|---|---|
+| 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
+| バグ修正の教訓 | `/knowledge` |
+| 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
+| 改善施策デプロイ (人間向け要約) | `docs/05_改善ログ/{gsc,ga4,adsense,psi,cloudflare-cost}.md` |
+| 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
+| 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
+| 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
+| 批判的レビュー / 事前検死 | `docs/04_レビュー/{critical-review,pre-mortem}/YYYY-MM-DD-<topic>.md` |
+| YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
+| コンテンツ backlog | `docs/22_YouTube企画/backlog/` / `docs/30_note記事企画/backlog/` |
+| 未着手の機能・自動化バックログ | `docs/50_Issues/{feature-backlog,automation-backlog,ui-improvements}.md` |
+| 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
+| プロジェクト固有の恒常事実 | auto memory (`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`) |
 
-- **`@stats47/components` の shadcn ベースコンポーネントを優先使用する。**
-  Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
+## ドキュメント参照ガイド
 
-- **ページ見出し（h1）は `text-2xl font-bold` に統一する。** `text-3xl` 以上は使わない。
+CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 
-- **melta-ui デザインシステム準拠（主要禁止パターン）：**
-  詳細は `.claude/design-system/prohibited.md` を参照。以下は特に重要な項目:
-  - `text-black` 禁止 → `text-slate-900` or `text-foreground`
-  - `shadow-lg` / `shadow-2xl` 禁止 → `shadow-sm`（デフォルト）/ `shadow-md`（hover）
-  - `tracking-tight` 禁止 → 日本語の可読性低下のため削除
-  - カラーバー（`border-t-4`, `border-l-4` + 色付き）禁止 → 全周 `border` で統一
-  - `text-gray-400` を本文に使用禁止 → `text-muted-foreground` or `text-slate-500`
-  - カード hover: `hover:shadow-md` まで（`hover:shadow-lg` 禁止）
-  - デザインレビュー: `/design-review` スキルで違反チェック可能
+### 規約・ルール (`.claude/rules/`)
 
-- **レスポンシブブレイクポイントの使い分け：**
+| ルール | 適用場面 |
+|---|---|
+| `coding-standards.md` | TypeScript / React / Next.js コード全般 |
+| `evidence-based-judgment.md` | improvement / 判定系スキル (status: effect/* 更新時必読) |
+| `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
+| `r2-storage-design.md` | snapshot 追加・変更 |
+| `estat-api.md` | e-Stat API 利用スキル |
+| `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
+| `data-storage.md` | スキル設計時 (D1 vs `.claude/` vs `docs/` 判定) |
+| `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
+| `skill-code-placement.md` | スクリプト新規作成 |
+| `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
+| `agent-output-contract.md` | Agent tool 起動時の prompt 設計 |
+| `browser-use-cleanup.md` | browser-use を使うスキル |
 
-  | 対象 | 使うべきブレイクポイント | 理由 |
-  |---|---|---|
-  | ページレイアウト（2カラム/1カラム、サイドバー表示） | `lg:` (ビューポート 1024px) | サイドバーの有無はビューポート依存 |
-  | テキスト・ボタンのサイズ調整 | `sm:` / `md:` (ビューポート) | デバイスサイズで決まる |
-  | ダッシュボードカードグリッド | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（サイドバー有無で変動）のため |
+### コアドキュメント
 
-  コンテナクエリのブレイクポイントは `tailwind.config.ts` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。プラグインのデフォルト値とは異なるので注意。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えるとサイドバーあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
+| 知りたいこと | 参照先 |
+|---|---|
+| docs 全体構成・運用ルール | `docs/INDEX.md` |
+| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
+| 実装ロードマップ | `docs/02_実装計画/01_実装ロードマップ.md` |
+| システム構成・技術スタック | `docs/01_技術設計/` |
+| DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
+| エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
+| 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/10_自動化インベントリ.md` |
+| 国土数値情報 GIS データ | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
+| 国土交通データプラットフォーム | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
+| Pre-commit フック | `.husky/README.md` |
+| CI/CD・デプロイ | `.github/workflows/README.md` |
+| テスト構成・追加指針 | `apps/web/tests/README.md` |
+| 各 feature の設計 | `apps/*/src/features/*/README.md` |
+| デザインシステム | `.claude/design-system/README.md` |
+| DB 操作全般 ★DB操作時は必ず参照 | `packages/database/README.md` |
+| R2 ストレージ操作 | `packages/r2-storage/src/scripts/README.md` |
 
-- **ダッシュボードコンポーネント（KPI・チャート等）は `page_components` テーブルで管理する。** コード内にチャート定義をハードコードしない。新規追加は DB への INSERT のみ。詳細は `.claude/design-system/page-components.md` を参照。
+### スキル・エージェント
 
-## 頻用コマンド
+| 知りたいこと | 参照先 |
+|---|---|
+| Management スキル群 | `.claude/skills/management/README.md` |
+| エージェントチーム構成 (Tier 0/1/2) | `.claude/agents/README.md` |
+| 画像プロンプトカタログ (43 種) | `.claude/skills/image-prompt/reference/catalog.md` |
 
-```bash
-# 型チェック（ワークスペース別）
-npx tsc --noEmit -p apps/web/tsconfig.json
-cd apps/remotion && npx tsc --noEmit
+### GitHub Issues 運用 (主要ラベル)
 
-# D1 バックアップ（リモート D1 → R2）
-npm run backup:d1 --workspace=packages/database -- --env production
-```
+Issues は「PR で close される機能改修・バグ」と「日次アラート」だけに絞っている (詳細: `.claude/rules/docs-vs-issues.md`)。
+
+- `enhancement` — 機能改修・改善（PR で `Closes #N` で close）
+- `bug` — バグ修正（同上）
+- `auto-generated` — Bot 生成の自動アラート
+- `cloudflare-alert` — Cloudflare 日次 usage 閾値違反 (`cloudflare-usage-daily.yml`)
+- `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
+
+過去の移行履歴:
+- `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05)
+- `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
+- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/05_改善ログ/`

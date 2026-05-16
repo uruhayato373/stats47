@@ -1,0 +1,341 @@
+---
+type: improvement-log
+metric: gsc
+created: 2026-05-16
+updated: 2026-05-16
+---
+
+# GSC 改善ログ
+
+施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## GSC 未登録 1.6 万件打開 — 観測短サイクル化 + sitemap 第 2 段階削減 (W17-W18)
+
+- **status**: in-progress
+- **tier**: 1
+- **target_metric**: gsc-index-coverage
+- **deployed_at**: 2026-04-25
+- **related_issue**: #115 (closed)
+
+## 背景・問題
+
+stats47.jp の GSC インデックス状況が悪化し続けている。
+
+- **登録済み**: 1,808 (4/10) → 1,860 (4/13)、ほぼ横ばい
+- **未登録**: **16,628 件**、3 ヶ月で登録済み -60% / 未登録 +59% の急落
+- ユーザー認識: 「対策しても効果がない、ブログ量産も意味がない」と判断停止寸前
+
+## 真因の再診断（GSC 5 export と過去ログから判明）
+
+1. **GSC export データの 5xx 972/1000 (97%) は `/correlation/` で、4/14 の middleware 410 化で対策済み** — Google の反映待ち（通常 2-4 週間）であり、施策は効いている可能性が高い
+2. 404 1000 件、リダイレクト 1000 件、代替 canonical 880 件はほぼ **意図された 410/301 の進行中状態**で、新規対応不要
+3. **クロール済み未登録 1000 件のうち /ranking 453 + /dashboard 199** が未解決の本丸。`KNOWN_RANKING_KEYS` middleware 対策（4/17 デプロイ）の効果測定が 5/01 中間判定で出る予定
+4. 過去 2 週間の **Clicks +19.8% / CTR +0.20pt / Avg Position -2.46（改善）** は Tier 0/1 施策が効き始めている兆候
+
+### 結論
+**「効果ゼロ」感の正体は施策の失敗ではなく観測の遅延**。打ち手は (1) 観測サイクルを 2 週間 → 日次に縮める、(2) sitemap を 2,284 → 600 に第 2 段階削減してクロール予算をさらに絞る、(3) 上位 100 ranking のコンテンツ品質強化を裏で準備、の 3 本立て。
+
+## 採用戦略
+
+**案 A（観測短サイクル化）を土台に、案 B の sitemap 第 2 段階削減のみ即実行、案 C（コンテンツ品質）は準備のみ。**
+
+## 既デプロイ施策の効果測定タイムライン
+
+| 日付 | 中間判定 |
+|---|---|
+| 2026-04-28 | T1-CRAWL-01（FINAL） |
+| 2026-05-01 | T0-RKG-200-01-v3, T0-CITY-500-01 |
+| 2026-05-02 | T0-STATS-01, T0-THEME-01, T0-AREA-SUB-01 |
+| 2026-05-15 | 全施策の Google 反映完了見込み |
+
+## W17-W18 ロードマップ
+
+### Phase 1: Issue 再構成（W17 月曜まで）
+- 既存 26 件棚卸し完了（OPEN 5 / CLOSED 21）。CLOSED 21 件は適切に整理済み、再ラベル不要
+- 本 issue で全体戦略を集約
+
+### Phase 2: 観測短サイクル化（W17 内、案 A）
+- URL Inspection API 日次測定スクリプト実装（`.claude/scripts/gsc/url-inspection-daily.cjs`）
+  - 対象: GSC queries.csv の Impressions 上位 200 + KNOWN_RANKING_KEYS 上位 100 = 約 300 URL
+  - 出力: `.claude/state/metrics/gsc/url-inspection/YYYY-MM-DD.csv` + `LATEST.md`
+- GitHub Actions で毎朝 JST 06:00 に実行、本 issue へ bot コメントで日次 post
+- → 関連 issue: #43
+
+### Phase 3: sitemap 第 2 段階削減（W17 内、案 B 一部）
+- `apps/web/src/app/sitemap.ts` を 2,284 → 600 URL に削減:
+  - ranking 1,899 → 約 300（GSC Impressions ≥ 1 のキーのみ、新規 `INDEXABLE_RANKING_KEYS.ts`）
+  - tag 閾値を 5+ に厳格化
+  - INDEXABLE_AREA_CATEGORIES を population のみ 1 つに
+- ranking 抽出スクリプト: `.claude/scripts/gsc/build-indexable-ranking-keys.cjs`
+
+### Phase 4: コンテンツ品質強化の準備（W18 着手、案 C 準備）
+- 上位 100 ranking キー抽出 → `.claude/skills/analytics/gsc-improvement/reference/priority-100-ranking-keys.csv`
+- 校正テンプレ雛形: 「47 都道府県の一言コメント + 内部リンク 5 本 + FAQ 3 問 + Dataset 構造化データ」
+- 着手判断: W18 中間判定で登録済み 2,300 以上なら C 着手 OK、横ばいなら B フル発動（GSC URL 削除リクエスト）に切替
+- → 関連 issue: #76, #26
+
+### Phase 5: 検証
+
+| 指標 | Baseline (4/13) | W17 終 (5/02) 目標 | W18 終 (5/09) 目標 |
+|---|---|---|---|
+| 登録済み | 1,860 | 2,000 | 2,300 |
+| 未登録 | 16,628 | 14,500 | 12,000 |
+| 5xx | 2,047 | < 500 | < 200 |
+| クロール済み未登録 | 2,339 | < 1,500 | < 1,000 |
+| Clicks（週次） | 424 | 500 | 600 |
+
+### ロールバック条件
+- sitemap 削減後、登録済みが 1 週間で 1,500 以下に凹んだら sitemap を元に戻す
+- URL Inspection API が API quota 超過したら対象 URL を 100 に縮小
+
+## やってはいけないこと（落とし穴）
+
+1. **5/01 までは新規 SEO 施策を投入しない** — 既存 Tier 0/1 と効果が混ざる
+2. **Indexing API を URL deletion に転用しない** — 公式は job posting / livestream 用途のみ
+3. **sitemap を 100 以下まで絞らない** — 登録済みも壊滅。300-600 が安全圏
+4. **C 案を全 1,901 ranking キーに展開しない** — 上位 100 のみ
+5. **ブログ量産と C 案の同時並行禁止**
+6. **GSC URL 削除ツールは 6 ヶ月で復活する一時施策** — middleware 410 が前提
+
+## 関連 OPEN issue
+
+- #77 [T1-CANONICAL-01] 重複 user canonical 無し 534 URL の根本対策 — Tier 2 領域、本 issue で再評価
+- #76 [T3-EEAT-02] 構造化データ拡充 — Phase 4 で扱う
+- #43 [T0-DECAY-01] 404/5xx/soft-404 収束観測 — Phase 2 の URL Inspection API でこの観測を自動化
+- #26 [T2-RANK-EDIT-01] ranking_ai_content schema 拡張 — Phase 4 の人間校正で実利用
+- #24 [T3-SNS-01] SNS 投稿再開 — 独立軸、維持のみ
+
+## 参照ドキュメント
+
+- 計画ファイル: `/Users/minamidaisuke/.claude/plans/issue-gsc-1-6-modular-goblet.md`
+- 過去施策ログ: `.claude/skills/analytics/gsc-improvement/archive/improvement-log-until-2026-04-21.md`
+- GSC export 5 件分析（2026-04-25）: `/Users/minamidaisuke/Downloads/stats47.jp-Coverage-Drilldown-2026-04-25*.zip`
+
+---
+
+## Phase 6: 推測ベース判定の根絶（追加・2026-04-25 完了）
+
+### 経緯
+本 issue 本文に当初書いていた「Google の反映待ち（通常 2-4 週間）」「効き始めている兆候」などは、URL Inspection API で実証したところ **Google が 2026-03-09 以降ほぼ再クロールしていない**（lastCrawlTime 確認）ことが判明し、推測判定だったと撤回。詳細は本 issue 直前のコメント参照。
+
+### 実装内容（完了）
+1. **共通ルール `.claude/rules/evidence-based-judgment.md`** 新設（212 行、5 状況・NG ワード・検証コマンド集）
+2. **CLAUDE.md 参照ガイド** に 1 行追加
+3. **8 SKILL.md に「実証チェックリスト」追記**: `gsc-improvement` / `ga4-improvement` / `adsense-improvement` / `cloudflare-cost-improvement` / `seo-audit` / `weekly-review` / `critical-review` / `nsm-experiment`
+4. **improvement-log 4 ファイル更新**: performance / sns-metrics に新規エントリテンプレ追加、gsc / ga4 archive に廃止注記
+5. **計画ファイル + 親 issue 本文の推測表現訂正**
+
+### 5/01 中間判定の指標を更新
+| 指標 | Baseline (4/13) | W17 終 (5/02) 目標 | 取得方法 |
+|---|---|---|---|
+| 登録済み | 1,860 | 2,000 | URL Inspection API LATEST.md |
+| 未登録 | 16,628 | 14,500 | GSC snapshot |
+| 5xx | 2,047 | < 500 | GSC snapshot |
+| **再クロール件数 / 日** (新規) | 不明（要計測開始） | > 50 / 日 | URL Inspection API lastCrawlTime の前日比 |
+| 5xx URL の coverageState 移行率 (新規) | 0% | > 30% | URL Inspection API |
+
+### URL Inspection API Baseline (2026-04-25 取得)
+- 対象 URL 数: 301
+- PASS（送信して登録されました）: **206 (68%)**
+- クロール済み - インデックス未登録: 27
+- 検出 - インデックス未登録: 16
+- 見つかりませんでした (404): 40
+- ページにリダイレクトがあります: 4
+- URL が Google に認識されていません: 5
+- 重複（user canonical 無し）: 3
+
+### 関連
+- ルール: `.claude/rules/evidence-based-judgment.md`
+- 検証スクリプト: `.claude/scripts/gsc/url-inspection-daily.cjs`
+- 日次バッチ: `.github/workflows/gsc-url-inspection-daily.yml`
+- 関連 issue: #43 (T0-DECAY-01)
+
+---
+
+## T0-DECAY-01: Coverage Drilldown 週次記録 + 収束観測 + Indexing API URL_DELETED
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-index-coverage
+- **deployed_at**: 2026-04-21
+- **related_issue**: #43 (closed)
+
+### 施策 ID
+- **Tier**: T1（最優先、計測指標）
+- **Category**: DECAY（収束観測）
+- **連番**: 01
+
+### 目的
+
+既存の 404/5xx 対策（middleware 410 化群）が Google の再クロールを経て実際に GSC 報告値を減少させるかを**週次で実測**し、予測カーブとの乖離を検知する。
+
+### 背景
+
+2026-04-21 時点の curl 検証で、以下のパターンは本番で正しく **410** を返している:
+- `/blog/tags/*`, `/dashboard/*`, `/areas/{invalid}`, `/areas/{prefCode}/cities/*`, `/themes/{unknown}`, `/ranking/{unknown}`, `/stats/*`, `/correlation/{slug}`
+
+それでも GSC 報告値が下がらないのは **Google の再クロール遅延（1-2 週間+α）** が原因。本 Issue では以下で加速 + 観測する:
+1. `/indexing-api-submit` スキルで `URL_DELETED` を能動送信
+2. 毎週 `/gsc-improvement observe` 時に本 Issue へ実測値コメント
+
+関連施策 Issue:
+- #16 T1-MW-01 middleware 404/410（effect/full、close 済）
+- #17 T1-SRC-01 ソフト404/5xx 発生源除去（effect/partial）
+- #18 T1-CRAWL-01 クロール予算回復（effect/partial）
+- #21 T0-RKG-200-01-v3 未知 ranking 410（effect/pending、2026-04-17 デプロイ）
+- #22 #31 #32 #34（全て effect/full、close 済）
+- #36 T0-TAG-UNKNOWN-01（Phase 1 で known-tag-keys 新設）
+
+### ターゲット指標
+
+- [x] Index Coverage（404 / 5xx / soft-404 / crawled-not-indexed の合算）
+- [x] Clicks（間接的指標、インデックス除外による影響）
+- [x] Impressions
+
+### ベースライン（2026-W17, 2026-04-21 取得）
+
+| 指標 | W17 ベースライン | 目標 (W24) |
+|---|---|---|
+| 404 (見つかりませんでした) | **5,919** | ≤ 600 (-90%) |
+| 5xx (サーバーエラー) | **2,041** | ≤ 200 (-90%) |
+| soft-404 | **497** | ≤ 100 (-80%) |
+| crawled-not-indexed | **2,322** | ≤ 500 (-80%) |
+| **非インデックス合計** | **10,779** | ≤ 1,400 |
+
+詳細: #38 の「インデックス状況」および drilldowns/ 参照。
+
+### 予測収束カーブ
+
+Indexing API 導入（本 Issue 作成時）＋自然再クロールを仮定:
+
+| 週 | 404 予測 | 5xx 予測 | soft-404 予測 | crawled-not-indexed 予測 | 合計 |
+|---|---|---|---|---|---|
+| W17 (ベースライン) | 5,919 | 2,041 | 497 | 2,322 | 10,779 |
+| W18 (-10%) | 5,327 | 1,837 | 447 | 2,090 | 9,701 |
+| W19 (-30%) | 4,143 | 1,429 | 348 | 1,625 | 7,545 |
+| W20 (-50%) | 2,960 | 1,021 | 249 | 1,161 | 5,391 |
+| W22 (-75%) | 1,480 | 510 | 124 | 580 | 2,694 |
+| W24 (-90%) | 592 | 204 | 50 | 232 | 1,078 |
+
+**根拠**:
+- Indexing API で日次 180 URL を送信 → 7 週間で約 1,260 URL（主に 404 の上位）
+- 自然クロールで残り 3,500 URL 前後が W20-W24 にかけて逐次消化
+- soft-404 は Google 側の再判定で W19-W21 に急減する傾向
+
+### 運用ルール
+
+#### 毎週の観測（`/gsc-improvement observe` 実行時に自動 + 手動コメント）
+
+1. その週の snapshot Issue（#38 以降）で最新値を取得
+2. 本 Issue にコメント追記:
+   ```
+   ## W{N} 実測 (YYYY-MM-DD)
+   - 404: X (予測 Y / 差 ±Z)
+   - 5xx: ...
+   - 非インデックス合計: ...
+   - 今週の /indexing-api-submit 送信件数: N 件
+   - 乖離判定: OK / WARNING / CRITICAL
+   ```
+
+#### 乖離判定ルール
+
+- **OK**: 予測の ±20% 以内
+- **WARNING**: 予測の +20% 超過 → 送信対象 URL を見直し（drilldown の別カテゴリを追加）
+- **CRITICAL**: W20 で -30% 未満 → 深層調査（新規 404 発生源の特定、sitemap の再点検）
+
+### 想定効果値
+
+- 非インデックス URL **10,779 → 1,400 (-87%)** を 7 週間（W17→W24）で達成
+- Organic Clicks は **第二段階効果** として W22 以降に回復見込み（直接関係は弱い）
+
+### デプロイ情報
+
+- **ベースライン確定日**: 2026-04-21
+- **Indexing API 初回送信日**: 本 Issue 作成後、`/indexing-api-submit batch-from-drilldown 404` で開始予定
+- **関連 PR**: (Phase 1+2 の PR 番号を後から追記)
+- **コミット**: (後から追記)
+
+### 観測予定日
+
+- **W18 観測**: 2026-04-28 (初回判定)
+- **W20 MID 判定**: 2026-05-12 (-50% 必達)
+- **W22**: 2026-05-26
+- **W24 FINAL 判定**: 2026-06-09 (-90% 目標)
+
+### 非対象
+
+- 新規発生する 404（アプリケーションの新しいバグ）は別 Issue
+- ブログ記事削除 or 統計データ更新に伴う意図的な URL 廃止は、本 Issue と独立して行う
+
+---
+
+## T3-SNS-01: SNS 投稿再開 (Sprint 1)
+
+- **status**: pending
+- **tier**: 3
+- **target_metric**: gsc-clicks
+- **deployed_at**: 2026-04-18
+- **related_issue**: #24 (closed)
+
+### 施策 ID
+- **Tier**: T3 (外部シグナル)
+- **Category**: SNS
+- **連番**: 01
+
+### ターゲット指標
+- [x] Clicks
+- [x] Impressions
+
+### 対象ページ / クエリ
+- `/blog/health-life-expectancy-structure` 他 5 記事（Day 1-5）
+
+### 想定効果値
+- Sprint 1 終了時 Social 流入 +30%
+- Day 1 単体の目標: 48h で X impressions 1,000+、RT 3+
+
+### デプロイ情報
+- **デプロイ日**: 2026-04-18 18:28 JST（Day 1）
+- **PR**: -
+- **コミット**: -（Playwright `publish-x.ts` 経由投稿）/ 対策 commit: `4b55c2d3`
+- **本番反映**: [x] デプロイ済
+
+### Day 1 投稿内容
+**コマンド**: `npx tsx .claude/skills/sns/publish-x/publish-x.ts --domain blog --immediate health-life-expectancy-structure`
+**投稿本文**:
+```
+日本の医師は47年で2.6倍に増えた。でも男性の"不健康な期間"は8.7年のまま縮まっていない。
+健康寿命1位は大分（73.72歳）、47位は岩手（71.39歳）──その差2.33歳。医師数と健康寿命の
+相関は意外にも弱い。データで見る日本の寿命の構造
+[URL] #健康寿命 #統計
+```
+**画像**: 既存 OGP (`ogp.png` 62KB)
+**UTM**: `utm_source=x&utm_medium=social&utm_campaign=sprint1_day1&utm_content=paradox`
+
+### Day 2-5 即時投稿事故（2026-04-18 20:40 JST）
+予約投稿の意図だったが `publish-x.ts` の予約モード検出セレクタが X UI 変更で壊れており、4 件全て即時投稿されてしまった。ユーザー判断で残置。Sprint 1 の UTM 日別分析は崩れたが、UTM `content` 別（paradox/shock/question）の A/B 比較は可能。
+
+| Day | 意図 | 実投稿日時 | rankingKey | UTM content |
+|---|---|---|---|---|
+| Day 2 | 2026-04-20 21:00 | **2026-04-18 20:36 頃** | sports-spectating-consumption-expenditure | shock |
+| Day 3 | 2026-04-21 12:30 | **2026-04-18 20:37 頃** | general-hospital-bed-occupancy-rate | question |
+| Day 4 | 2026-04-22 12:00 | **2026-04-18 20:38 頃** | price-index-high-low-prefecture | question |
+| Day 5 | 2026-04-23 19:30 | **2026-04-18 20:39 頃** | konbu-consumption-quantity | paradox |
+
+### 対策（commit `4b55c2d3`）
+- `publish-x.ts` を fail-safe 化（予約モード未確認なら Escape で投稿中止）
+- `--dry-run` モード追加（初回 / セレクタ更新後の事前検証必須化）
+- 失敗時 `.local/playwright-x-debug/` に screenshot 保存
+- `knowledge/SKILL.md` に事故記録 + 汎用原則「ブラウザ自動化は fail-safe デフォルト」
+- `x-strategist.md` に安全プロトコル追記
+
+### 観測予定日
+- **MID** (デプロイ + 14 日): 2026-05-02
+- **FINAL** (デプロイ + 28 日): 2026-05-16
+
+### 実測効果
+| 観測日 | X impressions | X RT | Social 流入 (GA4) | 判定 |
+|---|---|---|---|---|
+| 2026-04-20 (+48h) | — | — | — | 観測予定 |
+
+### マイグレーション元
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` (git commit `5cbcadd3`, 2026-04-21 時点)

@@ -275,4 +275,4 @@ rm -f /tmp/ig-media.json /tmp/ig-insights.json /tmp/ig-fetch-media.cjs /tmp/ig-f
 
 ## sns-metrics-store.cjs の使用
 
-時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積される（CLAUDE.md §記録先の統一原則に従い `.claude/` 配下）。sns_posts のキャッシュ列（likes / replies / reach / views / metrics_updated_at）は D1 の運用データとして別途 UPDATE。
+時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積される（.claude/rules/data-storage.mdに従い `.claude/` 配下）。sns_posts のキャッシュ列（likes / replies / reach / views / metrics_updated_at）は D1 の運用データとして別途 UPDATE。

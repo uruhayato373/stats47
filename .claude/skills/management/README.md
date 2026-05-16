@@ -64,7 +64,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] North Star Metric`）
+**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` (frontmatter `type: critical-review` / `topic: nsm`)
 
 ### `/growth-loops`
 
@@ -91,7 +91,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] Growth Loops`）
+**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-growth-loops.md` (frontmatter `type: critical-review` / `topic: growth-loops`)
 
 ### `/monetization-strategy`
 
@@ -114,7 +114,7 @@
 - 低コスト検証実験の設計
 - 実装ロードマップ
 
-**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] Monetization Strategy`）
+**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-monetization.md` + 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md` を Edit で反映
 
 ### `/weekly-plan`, `/weekly-review`
 
@@ -123,17 +123,17 @@
 - `/weekly-review`: 4つのサブエージェントで実績データを並列収集し、計画との差分を分析
 - `/weekly-plan`: 4つのサブエージェントでコンテキスト収集 → 戦略分析 → セルフ批判レビュー → 計画出力
 
-**保存先**: GitHub Issue（`weekly-review` / `weekly-plan` ラベル、タイトル `[Weekly Review] YYYY-Www` / `[Weekly Plan] YYYY-Www`）
+**保存先**: `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` (frontmatter `type: weekly-plan` / `weekly-review`、`week: YYYY-Www`)
 
 ### `/critical-review`
 
 設計書・計画書に対して連続起業家・プロ PM 視点で批判的レビューを実施。
 
 ```
-/critical-review <対象>  # GitHub Issue 番号 / スキル名 / PR 番号 等
+/critical-review <対象>  # ファイルパス / スキル名 / PR 番号 等
 ```
 
-**保存先**: GitHub Issue（`critical-review` ラベル、タイトル `[Critical Review] {対象名}`）
+**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` (frontmatter `type: critical-review`)
 
 ### `/knowledge`
 
@@ -146,17 +146,17 @@
 
 **保存先**: `.claude/skills/management/knowledge/` 内
 
-## 出力先の Issue ラベル早見表
+## 出力先早見表 (2026-05-16 以降は docs/ 配下)
 
-Management 系スキルの出力はすべて GitHub Issues に統一されている。過去分は `gh issue list --label <ラベル> --state all` で参照できる。
+Management 系スキルの出力はすべて `docs/` 配下に統一されている。過去分は `ls -t docs/<path>/*.md | head -5` または Obsidian で参照。
 
-| スキル | 出力タイトル | ラベル |
+| スキル | 出力先 | frontmatter type |
 |---|---|---|
-| `/weekly-plan` | `[Weekly Plan] YYYY-Www` | `weekly-plan` |
-| `/weekly-review` | `[Weekly Review] YYYY-Www` | `weekly-review` |
-| `/critical-review` | `[Critical Review] {対象名}` | `critical-review` |
-| `/north-star-metric` | `[Critical Review] North Star Metric` | `critical-review` |
-| `/growth-loops` | `[Critical Review] Growth Loops` | `critical-review` |
-| `/monetization-strategy` | `[Critical Review] Monetization Strategy` | `critical-review` |
-| `/pre-mortem` | `[Pre-Mortem] YYYY-MM` | `pre-mortem` |
-| `/performance-report` | `[Performance Report] YYYY-MM-DD` | `performance-report` |
+| `/weekly-plan` | `docs/03_週次運用/週次計画/YYYY-Www.md` | `weekly-plan` |
+| `/weekly-review` | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | `weekly-review` |
+| `/critical-review` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` | `critical-review` |
+| `/north-star-metric` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` | `critical-review` (topic: nsm) |
+| `/growth-loops` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-growth-loops.md` | `critical-review` (topic: growth-loops) |
+| `/monetization-strategy` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-monetization.md` + 決定は `docs/00_プロジェクト管理/02_収益化戦略.md` 更新 | `critical-review` (topic: monetization) |
+| `/pre-mortem` | `docs/04_レビュー/pre-mortem/{YYYY-MM-DD}-{topic}.md` | `pre-mortem` |
+| `/performance-report` | `docs/04_レビュー/performance-report/YYYY-Www.md` | `performance-report` |

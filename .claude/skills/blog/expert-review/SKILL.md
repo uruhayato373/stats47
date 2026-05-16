@@ -58,18 +58,20 @@ $ARGUMENTS — レビュー対象の記事ファイルパス
 2. frontmatter の `tags` と本文の見出しからテーマを把握し、ペルソナを設定する
 3. 記事本文・チャート説明・データ出典を確認する
 4. 上記の構造・観点に従いレビューを作成する
-5. GitHub Issue を作成する（`blog-review` ラベル、タイトル `[Blog Review] {slug}`）:
-   ```bash
-   # 本文を /tmp/expert-review-body.md に書き出し後:
-   gh issue create \
-     --title "[Blog Review] {slug}" \
-     --label "blog-review" \
-     --body-file /tmp/expert-review-body.md
+5. レビュー結果を `docs/04_レビュー/expert-review/{slug}.md` に Write tool で書き出す。frontmatter は以下:
+   ```yaml
+   ---
+   type: blog-review
+   slug: {blog-slug}
+   date: 2026-MM-DD
+   status: active
+   ---
    ```
-6. 作成した Issue の番号・URL と総評を報告する
+   本文の冒頭に対象記事へのリンク（`docs/21_ブログ記事原稿/{slug}/article.md`）を含め、ペルソナ・総評・指摘・修正提案・スコアの順で記述する。
+6. 書き出したファイルパスと総評を報告する
 
 ## 出力先
 
-GitHub Issue（`blog-review` ラベル、タイトル `[Blog Review] {slug}`）。
+`docs/04_レビュー/expert-review/{slug}.md`（slug は blog 記事の slug と一致させる）。
 
-本文の冒頭に対象記事へのリンク（`docs/21_ブログ記事原稿/{slug}/article.md` などのファイルパス）を含め、ペルソナ・総評・指摘・修正提案・スコアの順で記述する。過去のレビューは `gh issue list --label blog-review --state all` で参照できる。
+過去のレビューは `ls -t docs/04_レビュー/expert-review/*.md | head -5` で参照できる。

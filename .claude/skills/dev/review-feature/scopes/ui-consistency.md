@@ -216,16 +216,17 @@ Phase 1 の結果をページ種別ごとに整理する。
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - 全パネリストが同じ結論を出してはならない。意見の対立・矛盾を恐れない
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
-- CLAUDE.md の UI コンポーネント規約・レスポンシブ規約を基準とする
-- 出力は GitHub Issue（`dev-review` ラベル、タイトル `[Dev Review] ui-consistency / YYYY-MM-DD`）として作成する:
-  ```bash
-  # 本文を /tmp/review-ui-consistency-body.md に書き出し後:
-  gh issue create \
-    --title "[Dev Review] ui-consistency / YYYY-MM-DD" \
-    --label "dev-review" \
-    --body-file /tmp/review-ui-consistency-body.md
+- `.claude/rules/ui-components.md` の UI コンポーネント規約・レスポンシブ規約を基準とする
+- 出力は `docs/04_レビュー/dev-review/ui-consistency-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+  ```yaml
+  ---
+  type: dev-review
+  scope: ui-consistency
+  date: 2026-MM-DD
+  status: active
+  ---
   ```
-- 作成した Issue の番号・URL を報告する。過去のレビューは `gh issue list --label dev-review --state all` で参照できる
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる
 
 ## 関連スキル
 

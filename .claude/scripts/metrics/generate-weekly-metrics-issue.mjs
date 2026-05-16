@@ -1,16 +1,17 @@
 /**
- * 週次統合 Issue [Weekly Metrics] YYYY-Www の本文を生成する
+ * 週次統合メトリクス Markdown 本文を生成する
+ * (docs/03_週次運用/メトリクス/YYYY-Www.md に書き込む workflow 側で利用)
  *
  * 引数:
  *   --week YYYY-Www (省略時は今日の 1 日前の ISO 週 = 月曜朝に回すと先週)
  *
  * 生成物:
- *   - stdout に markdown body を出力
- *   - workflow 側で gh issue create --body-file でそのまま使える
+ *   - stdout に markdown body を出力（frontmatter は呼び出し元 workflow が付与）
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - gh issue list --label auto-generated / effect/pending (gh CLI 経由)
+ *   - docs/05_改善ログ/*.md の status: pending を抽出（pending 施策一覧）
+ *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
 import { readFileSync, existsSync } from "node:fs";
@@ -247,18 +248,35 @@ function alertsSection(week) {
 }
 
 function pendingSection() {
-  const pending = ghIssueList(`--label effect/pending --state open`);
-  if (pending.length === 0) return "なし（全施策が効果判定済み）\n";
+  // docs/05_改善ログ/*.md の status: pending section を集計
+  const metrics = ["gsc", "ga4", "adsense", "psi", "cloudflare-cost"];
   const lines = [];
-  const now = Date.now();
-  const sorted = pending.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-  for (const p of sorted) {
-    const created = new Date(p.createdAt);
-    const days = Math.floor((now - created.getTime()) / 86400000);
-    const typeLabel = p.labels.find((l) => /-improvement$/.test(l.name))?.name ?? "";
-    const marker = days >= 14 ? " 👀" : "";
-    lines.push(`- #${p.number} ${p.title} — ${days}日経過${marker} _(${typeLabel})_`);
+  for (const metric of metrics) {
+    const file = join(PROJECT_ROOT, "docs/05_改善ログ", `${metric}.md`);
+    if (!existsSync(file)) continue;
+    const content = readFileSync(file, "utf-8");
+    // 各 section（## で開始）を分割し、status: pending を含むものを抽出
+    const sections = content.split(/\n(?=## )/);
+    for (const section of sections) {
+      if (!/\*\*status\*\*:\s*pending/.test(section)) continue;
+      const titleMatch = section.match(/^## (.+)$/m);
+      const deployedMatch = section.match(/\*\*deployed_at\*\*:\s*(\d{4}-\d{2}-\d{2})/);
+      const tierMatch = section.match(/\*\*tier\*\*:\s*(\d)/);
+      if (!titleMatch) continue;
+      const title = titleMatch[1];
+      const deployedAt = deployedMatch?.[1];
+      const tier = tierMatch?.[1] ?? "?";
+      let daysStr = "";
+      let marker = "";
+      if (deployedAt) {
+        const days = Math.floor((Date.now() - new Date(deployedAt).getTime()) / 86400000);
+        daysStr = ` — ${days}日経過`;
+        if (days >= 14) marker = " 👀";
+      }
+      lines.push(`- [${metric} T${tier}] ${title}${daysStr}${marker}`);
+    }
   }
+  if (lines.length === 0) return "なし（全施策が効果判定済み、または docs/05_改善ログ/ 未整備）\n";
   return lines.join("\n") + "\n";
 }
 

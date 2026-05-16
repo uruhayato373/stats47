@@ -1,63 +1,71 @@
 # docs ディレクトリ INDEX
 
+> **方針 (2026-05-16 以降)**: 計画・レビュー・改善ログ・コンテンツ backlog は **すべて docs/ 配下に集約** し Obsidian で振り返る運用。GitHub Issues は (a) PR で close される `enhancement`/`bug`、(b) 日次アラート (`cloudflare-alert`/`psi-alert`) のみ残す。詳細: [`../.claude/rules/docs-vs-issues.md`](../.claude/rules/docs-vs-issues.md)
+
 ## ドキュメント分類
 
 | ディレクトリ | 役割 | 運用 |
 |---|---|---|
-| `00_プロジェクト管理/` | プロジェクトの基盤文書（概要・要件・統合計画） | **ファイル追加禁止。既存ファイルの内容更新のみ。** |
+| `00_プロジェクト管理/` | プロジェクトの基盤文書（定義・収益化・マーケ・ペルソナ） | 内容更新が中心。固定 4 ファイル |
 | `01_技術設計/` | システム構成・DDD 分類・ドメイン設計・フロントエンド設計 | 内容更新が中心。構成変更時のみファイル追加可 |
-| `02_実装計画/` | 実装ロードマップ・フェーズ計画 | 内容更新が中心 |
-| ~~`03_レビュー/`~~ | **廃止**（2026-04-21 移行）。週次レビュー・Pre-Mortem・パフォーマンス・批判的レビュー等は **GitHub Issues** へ（ラベル `weekly-plan` / `weekly-review` / `pre-mortem` / `performance-report` / `critical-review` 等） | — |
-| `youtube_experiments.md` | YouTube Shorts 実験ログ（`/record-youtube-experiment`） | 蓄積 |
-| `10_SNS戦略/` | SNS コンテンツ設計（X + YouTube に集中） | 内容更新が中心 |
+| `02_実装計画/` | 実装ロードマップ・フェーズ計画 | 内容更新が中心。完了した設計書は `archive/` へ |
+| `03_週次運用/` | 週次計画・週次レビュー・週次メトリクス | `週次計画/YYYY-Www.md` / `週次レビュー/YYYY-Www.md` / `メトリクス/YYYY-Www.md` を週次 append |
+| `04_レビュー/` | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | カテゴリ別サブディレクトリで蓄積 |
+| `05_改善ログ/` | gsc / ga4 / adsense / psi / cloudflare-cost 改善施策の人間向け要約 | 1 metric = 1 ファイル append-only。frontmatter `status:` で施策の進捗管理 |
+| `10_SNS戦略/` | SNS コンテンツ設計 | 内容更新が中心 |
+| `15_実験ログ/` | YouTube 実験ファイル群 (1 実験 1 ファイル) | `youtube/EXP-NNN.md` |
 | `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | 蓄積 |
 | `21_ブログ記事原稿/` | ブログ記事の下書き原稿 | 蓄積 |
-| `30_note記事企画/` | note 記事の企画・戦略 | 蓄積 |
+| `22_YouTube企画/` | YouTube 通常動画の企画 | `backlog/<theme>.md` 蓄積 |
+| `30_note記事企画/` | note 記事の企画・戦略 (+ backlog) | 蓄積 |
 | `31_note記事原稿/` | note 記事の下書き原稿 | 公開後 `.local/r2/note/` へ移動し削除 |
+| `40_アフィリエイト管理/` | アフィリエイト商材・配置管理 | 内容更新 |
+| `50_Issues/` | 未着手の機能・自動化・UI 改善 backlog | `feature-backlog.md` / `automation-backlog.md` / `ui-improvements.md` |
 | `80_参考資料/` | 白書 PDF 等の外部資料 | 追加のみ |
-| ~~`90_課題管理/`~~ | **廃止**（2026-04 移行）。実装計画・課題・アイデアは **GitHub Issues** へ | — |
 
 ## 00_プロジェクト管理/ の固定構成
-
-新規ファイル・ディレクトリの追加は行わない。内容は随時更新する。
 
 ```
 00_プロジェクト管理/
 ├── 01_プロジェクト定義.md
 ├── 02_収益化戦略.md
-└── 03_マーケティング戦略.md
+├── 03_マーケティング戦略.md
+└── 04_ターゲットペルソナ.md
 ```
 
-## 配置の判断基準（docs/ vs .claude/）
+戦略文書はここに統合管理。日付サフィックス付きファイル (`-YYYY-MM-DD.md`) は禁止。更新は同名ファイルへの上書きで行う。
+
+## 配置の判断基準（docs/ vs .claude/ vs Issues）
 
 | 対象 | 置き場所 | 例 |
 |---|---|---|
-| 人間が意思決定・振り返りに使う文書 | `docs/` | プロジェクト定義、週次レビュー、実装ロードマップ、pre-mortem |
-| 人間が編集する原稿・企画 | `docs/` | ブログ企画・note 原稿・参考資料 |
-| スキルが生成する機械的ログ・スナップショット | `.claude/skills/<skill>/reference/` | GSC/GA4 週次 snapshot CSV、改善ログ |
-| スキルが生成する発見・調査の一時ファイル | `.claude/skills/blog/trends-snapshots/` | トレンド発見系 7 スキルの出力 |
-| Claude 実行時ログ（launchd） | `~/Library/Logs/stats47/` | scheduled ジョブの stdout/stderr |
+| 人間が意思決定・振り返りに使う文書 | `docs/` | プロジェクト定義、週次レビュー、批判的レビュー、改善ログ、コンテンツ backlog |
+| 人間が編集する原稿・企画 | `docs/` | ブログ企画・note 原稿・参考資料・YouTube 企画 |
+| エージェントが深掘りする詳細ログ・スナップショット | `.claude/skills/<skill>/reference/` | GSC/GA4 週次 snapshot CSV、improvement-log.md (agent 用) |
+| エージェント実行時の一時データ・state | `.claude/state/` | experiments.json、metrics/*/LATEST.md |
+| 自動化系の生 CSV / JSON snapshot | `.claude/state/metrics/<service>/` | psi-batch-*.json、cloudflare/snapshots/ |
+| PR で close する機能改修 / バグ | GitHub Issues (`enhancement` / `bug`) | UI バグ、API 追加、リファクタ |
+| 日次自動アラート | GitHub Issues (`cloudflare-alert` / `psi-alert` + `auto-generated`) | 閾値違反通知のみ |
 
-迷ったら「**これは人間が直接読むか？** 読まないなら `.claude/` 配下」。
+迷ったら判定フロー (`../.claude/rules/docs-vs-issues.md#判定フロー`) を参照。
 
 ## ドキュメント運用ルール
 
-### 新しい機能・計画の追加先
+### 新規記録の追加先
 
-**GitHub Issues** に作成する（`gh issue create --label enhancement ...`）。`00_プロジェクト管理/` や `docs/` 配下には追加しない。
-
-粒度の目安:
-- ブログ記事 / note 記事 1 本 = 1 issue（ラベル `content/blog` or `content/note`）
-- YouTube 通常動画 1 本 = 1 issue（ラベル `content/youtube-regular`）
-- YouTube Shorts は候補プール 1 issue を維持し、着手時に個別 issue 化（ラベル `content/youtube-shorts`）
-- 技術改修・DX 改善 = 1 issue（ラベル `enhancement`）
+1. **戦略・要件の変更** → `00_プロジェクト管理/` 該当ファイルを Edit (新規ファイル追加禁止)
+2. **週次計画・レビュー** → `/weekly-plan` / `/weekly-review` スキルが `03_週次運用/` に自動生成
+3. **改善施策の記録** → `/{gsc,ga4,adsense,cloudflare-cost,performance}-improvement action` が `05_改善ログ/` に append
+4. **コンテンツ backlog** → 該当 `*企画/backlog/` に Write
+5. **未着手の機能・自動化バックログ** → `50_Issues/{feature,automation}-backlog.md` に section 追加
+6. **機能改修 / バグ** → `gh issue create --label enhancement` で Issues 起票
 
 ### lifecycle
 
 ```
-新規作成 → GitHub Issue
+新規作成 → docs/<適切なパス> または Issues (enhancement/bug)
   ↓ 実装完了
-Issue を close（コードと各パッケージの README.md が証跡）
+docs/: status: archived に変更 / Issues: PR で close
 ```
 
 ### docs 外のドキュメント
@@ -76,7 +84,26 @@ Issue を close（コードと各パッケージの README.md が証跡）
 
 ### やってはいけないこと
 
-- `00_プロジェクト管理/` にファイルを追加する
-- 実装完了した計画書を残す（陳腐化の原因）
-- docs 内にコードの使い方を書く（各パッケージの README.md に書く）
-- CLAUDE.md にドキュメントの内容を複製する（CLAUDE.md はリンク集に徹する）
+- `00_プロジェクト管理/` にファイルを追加する (4 ファイル固定)
+- 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` `05_/` の上書き型ディレクトリに置く (週次・レビュー系の `YYYY-Www.md` / `YYYY-MM-DD.md` は OK)
+- 実装完了した計画書を `02_実装計画/` 直下に残す (`archive/` へ移動)
+- weekly / review / improvement 系スキルから `gh issue create` する (`docs/` 配下に Write すること)
+
+## frontmatter 規約
+
+自動生成ファイルは frontmatter を付与し、Obsidian Bases で絞り込み可能にする:
+
+```yaml
+---
+type: weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log | youtube-experiment | ...
+week: 2026-Www       # 週次系のみ
+date: 2026-MM-DD
+status: draft | active | pending | completed | archived | effect/full | effect/partial | ...
+tier: 1 | 2 | 3      # 改善施策のみ
+target_metric: <metric>  # 改善施策のみ
+related_issue: 274   # 元 Issue がある場合のみ
+tags: []
+---
+```
+
+詳細: [`../.claude/rules/docs-vs-issues.md`](../.claude/rules/docs-vs-issues.md)

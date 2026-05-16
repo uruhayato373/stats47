@@ -102,13 +102,13 @@ jobs:
           TITLE="[PSI Alert] しきい値割れ検知 ${DATE}"
           BODY_FILE=/tmp/psi-report/report.md
 
-          EXISTING=$(gh issue list --state open --label psi-snapshot --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          EXISTING=$(gh issue list --state open --label psi-alert --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             echo "Existing open issue #$EXISTING — appending comment instead of creating duplicate"
             gh issue comment "$EXISTING" --body-file "$BODY_FILE"
           else
             gh issue create \
               --title "$TITLE" \
-              --label "psi-snapshot,auto-generated" \
+              --label "psi-alert,auto-generated" \
               --body-file "$BODY_FILE"
           fi

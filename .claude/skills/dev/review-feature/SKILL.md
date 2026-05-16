@@ -50,26 +50,27 @@ $ARGUMENTS — --scope <name> [scope-specific args]
 - パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
 - **コードを実際に読んでからレビューする**。推測でレビューしない
 
-### 出力先（GitHub Issue）
+### 出力先（docs/04_レビュー/dev-review/）
 
-すべてのレビューは GitHub Issue に出力する。`dev-review` ラベルを付与する。
+すべてのレビューは `docs/04_レビュー/dev-review/{scope}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter は以下:
 
-```bash
-# 本文を /tmp/review-body.md に書き出し後:
-gh issue create \
-  --title "[Dev Review] {scope}:{target} / YYYY-MM-DD" \
-  --label "dev-review" \
-  --body-file /tmp/review-body.md
+```yaml
+---
+type: dev-review
+scope: {scope-name}
+date: 2026-MM-DD
+status: active
+---
 ```
 
-タイトル例:
-- `[Dev Review] feature:ads / 2026-05-04`
-- `[Dev Review] app:ranking / 2026-05-04`
-- `[Dev Review] packages:all / 2026-05-04`
-- `[Dev Review] types / 2026-05-04`
-- `[Dev Review] ui-consistency / 2026-05-04`
+ファイル名例:
+- `feature-ads-2026-05-04.md`
+- `app-ranking-2026-05-04.md`
+- `packages-all-2026-05-04.md`
+- `types-2026-05-04.md`
+- `ui-consistency-2026-05-04.md`
 
-過去のレビューは `gh issue list --label dev-review --state all` で参照できる。
+過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる。
 
 ### 出力フォーマット（共通骨格）
 

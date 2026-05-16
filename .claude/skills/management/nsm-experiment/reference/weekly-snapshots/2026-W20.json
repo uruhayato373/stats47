@@ -1,0 +1,212 @@
+{
+  "week_id": "2026-W20",
+  "year": 2026,
+  "week": 20,
+  "generated_at": "2026-05-10T23:07:38.158Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-05-03",
+        "end": "2026-05-09"
+      },
+      "prev": {
+        "start": "2026-04-26",
+        "end": "2026-05-02"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-05-01",
+        "end": "2026-05-07"
+      },
+      "prev": {
+        "start": "2026-04-24",
+        "end": "2026-04-30"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 283,
+        "prevUsers": 462,
+        "userDelta": -179,
+        "userDeltaPct": -38.74458874458874,
+        "thisSessions": 309,
+        "prevSessions": 527,
+        "thisEngagedSessions": 203,
+        "prevEngagedSessions": 338,
+        "thisEngagementRate": 0.656957928802589
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 147,
+        "prevUsers": 260,
+        "userDelta": -113,
+        "userDeltaPct": -43.46153846153846,
+        "thisSessions": 149,
+        "prevSessions": 281,
+        "thisEngagedSessions": 14,
+        "prevEngagedSessions": 54,
+        "thisEngagementRate": 0.09395973154362416
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 66,
+        "prevUsers": 77,
+        "userDelta": -11,
+        "userDeltaPct": -14.285714285714285,
+        "thisSessions": 73,
+        "prevSessions": 90,
+        "thisEngagedSessions": 49,
+        "prevEngagedSessions": 61,
+        "thisEngagementRate": 0.6712328767123288
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 20,
+        "prevUsers": 16,
+        "userDelta": 4,
+        "userDeltaPct": 25,
+        "thisSessions": 20,
+        "prevSessions": 17,
+        "thisEngagedSessions": 10,
+        "prevEngagedSessions": 5,
+        "thisEngagementRate": 0.5
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 0,
+        "prevUsers": 1,
+        "userDelta": -1,
+        "userDeltaPct": -100,
+        "thisSessions": 0,
+        "prevSessions": 1,
+        "thisEngagedSessions": 0,
+        "prevEngagedSessions": 1,
+        "thisEngagementRate": 0
+      }
+    ],
+    "total": {
+      "thisUsers": 516,
+      "prevUsers": 816,
+      "thisSessions": 551,
+      "prevSessions": 916,
+      "thisEngagedSessions": 276,
+      "prevEngagedSessions": 459,
+      "userDelta": -300,
+      "userDeltaPct": -36.76470588235294,
+      "engagedSessionDelta": -183,
+      "engagedSessionDeltaPct": -39.869281045751634
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 283,
+      "prevUsers": 462,
+      "userDelta": -179,
+      "userDeltaPct": -38.74458874458874,
+      "thisSessions": 309,
+      "prevSessions": 527,
+      "thisEngagedSessions": 203,
+      "prevEngagedSessions": 338,
+      "thisEngagementRate": 0.656957928802589
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 214,
+      "prevClicks": 196,
+      "clickDelta": 18,
+      "clickDeltaPct": 9.183673469387756,
+      "thisImpressions": 10044,
+      "prevImpressions": 7343,
+      "impressionDelta": 2701,
+      "thisCtr": 0.02130625248904819,
+      "prevCtr": 0.02669208770257388,
+      "thisPosition": 8.431700517722023,
+      "prevPosition": 8.706523219392619
+    },
+    "topQueries": [
+      {
+        "query": "健康寿命 都 道府県 ランキング 2026",
+        "clicks": 6,
+        "impressions": 26,
+        "ctr": 0.23076923076923078,
+        "position": 2.6153846153846154
+      },
+      {
+        "query": "新潟 平均身長",
+        "clicks": 2,
+        "impressions": 9,
+        "ctr": 0.2222222222222222,
+        "position": 7.888888888888889
+      },
+      {
+        "query": "鶏肉 消費量 都道府県",
+        "clicks": 2,
+        "impressions": 11,
+        "ctr": 0.18181818181818182,
+        "position": 7.454545454545454
+      },
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 1,
+        "impressions": 12,
+        "ctr": 0.08333333333333333,
+        "position": 8.25
+      },
+      {
+        "query": "うどん 消費量 都道府県",
+        "clicks": 1,
+        "impressions": 13,
+        "ctr": 0.07692307692307693,
+        "position": 9.076923076923077
+      },
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 1,
+        "impressions": 21,
+        "ctr": 0.047619047619047616,
+        "position": 9.857142857142858
+      },
+      {
+        "query": "ガソリン消費量 ランキング",
+        "clicks": 1,
+        "impressions": 4,
+        "ctr": 0.25,
+        "position": 5
+      },
+      {
+        "query": "バナナ 消費量 都道府県",
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 7
+      },
+      {
+        "query": "パスタ消費量 都道府県",
+        "clicks": 1,
+        "impressions": 8,
+        "ctr": 0.125,
+        "position": 4.5
+      },
+      {
+        "query": "パン消費量ランキング",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1,
+        "position": 10
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-05-01 〜 2026-05-07 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: [Critical Review] North Star Metric Issue (gh issue list --label critical-review)"
+  ]
+}
