@@ -103,13 +103,13 @@ jobs:
           TITLE="[Cloudflare Alert] ${SEVERITY} しきい値割れ ${DATE}"
           BODY_FILE=/tmp/cf-report/report.md
 
-          EXISTING=$(gh issue list --state open --label cost-snapshot --search "\"[Cloudflare Alert]\" in:title" --json number --jq '.[0].number // empty')
+          EXISTING=$(gh issue list --state open --label cloudflare-alert --search "\"[Cloudflare Alert]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             echo "Existing open issue #$EXISTING — appending comment instead of creating duplicate"
             gh issue comment "$EXISTING" --body-file "$BODY_FILE"
           else
             gh issue create \
               --title "$TITLE" \
-              --label "cost-snapshot,auto-generated" \
+              --label "cloudflare-alert,auto-generated" \
               --body-file "$BODY_FILE"
           fi
