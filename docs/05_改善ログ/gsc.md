@@ -39,11 +39,17 @@ updated: 2026-05-16
   ```
   → manufacturing-aichi-dominance のクエリ別 CTR (last 28d) を取得
   ```
+- **追加検証コマンド**: `node .claude/scripts/gsc/url-inspection-daily.cjs --slug manufacturing-aichi-dominance`
 - **検証期日**: 2026-06-13 (W24, 4 週後)
 - **期日後の判定**:
   - CTR ≥ 2% → effect/full
   - CTR 1-2% → effect/partial
   - CTR < 1% → effect/none。次の検証: 本文 H1 / hero 画像見直し or 別記事へ展開判断
+
+### verification at 2026-05-16 deploy day
+- **deploy 確認**: 2026-05-16 commit `63221bae` で seoTitle/description 改訂を D1 反映、R2 push、`/sync-snapshots --only blog` 実行済み
+- **Google 反映タイムライン**: 全施策の Google 反映完了見込みは 5/15 (W19-W18 ロードマップ Phase 5 既定)、本施策は 5/16 deploy のため実測値取得は **2026-06-13 (W24, 4 週後)** 期日に従う
+- **status**: pending（実測未取得のため effect 判定なし）
 
 ### デプロイ手順 (記録)
 1. `.local/r2/app/blog/manufacturing-aichi-dominance/article.md` の frontmatter を編集

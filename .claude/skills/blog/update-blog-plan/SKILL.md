@@ -31,12 +31,12 @@ done | sort
 
 ### Step 2: 企画ファイルの状態確認（3アプローチ分）
 
-`docs/20_ブログ記事企画/` 配下の企画ファイルを種類別にスキャンする:
+`docs/20_ブログ記事企画/backlog/` 配下の企画ファイルを種類別にスキャンする:
 
 ```bash
-for f in docs/20_ブログ記事企画/*.md; do
+for f in docs/20_ブログ記事企画/backlog/*.md; do
   name=$(basename "$f" .md)
-  [ "$name" = "01_ブログ記事一括企画" ] && continue
+  [ "$name" = "INDEX" ] && continue
   echo "$name"
 done
 ```
@@ -79,7 +79,7 @@ done
 #### 3-4. バッチ1〜3 の進捗テーブル
 各カテゴリの状態を以下のいずれかに設定:
 - `未着手`: 企画ファイルなし・公開記事なし
-- `企画生成済み`: `docs/20_ブログ記事企画/{categoryKey}.md` が存在
+- `企画生成済み`: `docs/20_ブログ記事企画/backlog/{categoryKey}.md` が存在
 - `執筆中`: 企画ファイルあり＋一部記事が公開済み
 - `追加企画で対応`: 企画なしだが公開記事が多数ある（economy, population 等）
 

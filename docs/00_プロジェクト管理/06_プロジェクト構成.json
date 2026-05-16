@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "generated": "2026-05-16",
+    "purpose": "stats47 プロジェクト全体構成のスナップショット (戦略・技術・コンテンツ企画)",
+    "related": [
+      "docs/00_プロジェクト管理/01_プロジェクト定義.md",
+      "docs/00_プロジェクト管理/05_コンテンツ企画マスター.md",
+      "docs/INDEX.md"
+    ]
+  },
+  "project": {
+    "name": "stats47",
+    "title": "統計で見る都道府県",
+    "url": "https://stats47.jp",
+    "mission": "統計をもっと身近に。探す手間・加工する苦労をなくし、誰もがデータを「使える」社会をつくる",
+    "differentiation": "元県庁職員20年の経験知をデータ翻訳者として活用 + モダンUI/UX + 自動化パイプライン",
+    "northStarMetric": {
+      "name": "週間Engagedセッション数",
+      "currentW20": 276,
+      "target": 500,
+      "inputMetrics": ["公務員系タグページのインデックス率", "アフィリエイト月収益", "ブログCTR改善"]
+    },
+    "personas": [
+      { "id": "P1", "name": "雑学・エンタメ層", "role": "PV/AdSense基盤" },
+      { "id": "P2", "name": "学生・研究者", "role": "リテラシー学習" },
+      { "id": "P3", "name": "行政・自治体関係者", "role": "主軸ターゲット (公務員/議会事務局/シンクタンク)" },
+      { "id": "P4", "name": "教育関係者・保護者", "role": "進学・教育判断" },
+      { "id": "P5", "name": "防災・福祉実務層", "role": "リスク参照" }
+    ],
+    "monetization": {
+      "priority": [
+        { "rank": 1, "channel": "アフィリエイト", "expected": "¥10K〜30K/月", "status": "本格化フェーズ" },
+        { "rank": 2, "channel": "AI×統計実務記事", "expected": "¥3K〜15K/月", "status": "立ち上げ" },
+        { "rank": 3, "channel": "AdSense最適化", "expected": "¥1K〜3K/月", "status": "改善中" },
+        { "rank": 4, "channel": "データ販売API", "expected": "¥10K〜100K/月", "status": "検証フェーズ" }
+      ],
+      "blockers": ["PSI LCP 5秒→2.5秒改善が前提条件"]
+    }
+  },
+  "tech": {
+    "monorepo": {
+      "apps": [
+        { "name": "web", "framework": "Next.js (Cloudflare Pages)", "role": "公開サイト" },
+        { "name": "remotion", "framework": "Remotion", "role": "動画・SNS投稿画像生成 (YouTube/Instagram/X/note)" },
+        { "name": "ges", "framework": "Google Earth Studio", "role": "47都道府県旋回動画の自動化" }
+      ],
+      "packages": [
+        { "name": "database", "purpose": "Drizzle ORM + Cloudflare D1 スキーマ・シード" },
+        { "name": "types", "purpose": "共通型定義" },
+        { "name": "visualization", "purpose": "D3.js チャート" },
+        { "name": "components", "purpose": "shadcn/ui ベース共通UI" },
+        { "name": "estat-api", "purpose": "e-Stat APIクライアント" },
+        { "name": "ranking", "purpose": "ランキング計算ロジック" },
+        { "name": "r2-storage", "purpose": "Cloudflare R2アクセス" },
+        { "name": "utils", "purpose": "汎用ユーティリティ" },
+        { "name": "ai-content", "purpose": "AI生成コンテンツ" },
+        { "name": "area", "purpose": "47都道府県メタ" },
+        { "name": "area-profile", "purpose": "都道府県プロフィール" },
+        { "name": "category", "purpose": "カテゴリ管理" },
+        { "name": "correlation", "purpose": "相関分析" },
+        { "name": "gis", "purpose": "GISデータ" },
+        { "name": "logger", "purpose": "ロガー" },
+        { "name": "svg-builder", "purpose": "SVG構築" }
+      ]
+    },
+    "infra": {
+      "hosting": "Cloudflare Pages",
+      "db": "Cloudflare D1 (ローカルのみ source of truth、リモートD1は2026-04解約)",
+      "storage": "Cloudflare R2 (本番配信)",
+      "syncFlow": "ローカルD1 → /sync-snapshots → R2 → 本番"
+    },
+    "dataSources": ["e-Stat API (~8,461表)", "国土数値情報GIS", "国土交通データプラットフォーム"]
+  },
+  "docs": {
+    "structure": [
+      { "dir": "00_プロジェクト管理", "role": "戦略4ファイル + 集計ダッシュボード", "files": 6 },
+      { "dir": "01_技術設計", "role": "システム構成・DDD・エラーハンドリング" },
+      { "dir": "02_実装計画", "role": "実装ロードマップ" },
+      { "dir": "03_週次運用", "role": "週次計画・レビュー・メトリクス" },
+      { "dir": "04_レビュー", "role": "批判的レビュー・事前検死・監査" },
+      { "dir": "05_改善ログ", "role": "gsc/ga4/adsense/psi/cloudflare-cost (append-only)" },
+      { "dir": "10_SNS戦略", "role": "SNSコンテンツ設計" },
+      { "dir": "15_実験ログ", "role": "YouTube実験 (EXP-NNN)" },
+      { "dir": "20_ブログ記事企画", "role": "ブログ企画 (backlog/ 配下)" },
+      { "dir": "21_ブログ記事原稿", "role": "下書き原稿" },
+      { "dir": "22_YouTube企画", "role": "YouTube企画 + SNS枠定義 (backlog/)" },
+      { "dir": "30_note記事企画", "role": "note企画 (backlog/、A〜D系)" },
+      { "dir": "31_note記事原稿", "role": "下書き原稿" },
+      { "dir": "40_アフィリエイト管理", "role": "アフィリエイト商材管理" },
+      { "dir": "50_Issues", "role": "feature/automation/UI改善 backlog" },
+      { "dir": "80_参考資料", "role": "白書PDF等" }
+    ]
+  },
+  "contentStrategy": {
+    "summary": {
+      "blog": { "existing": 88, "newAdded": 135, "total": 223, "published": 124 },
+      "note": { "existing": 40, "newAdded": 117, "total": 146, "published": 20 },
+      "youtube": { "existing": 6, "newAdded": 16, "total": 22, "published": 17, "note": "publishedはShorts" },
+      "snsFramesPerMonth": 180
+    },
+    "categories": [
+      "economy", "population", "ict", "infrastructure", "energy", "tourism",
+      "agriculture", "miningindustry", "safetyenvironment", "educationsports",
+      "commercial", "landweather", "administrativefinancial", "laborwage",
+      "construction", "socialsecurity"
+    ],
+    "matrix": [
+      { "category": "economy",                "blogNormal": 13, "blogAffiliate": 0, "blogAi": 0, "noteA": 5, "noteB": 2, "noteC": 0, "noteD": 1, "youtube": 2, "priority": "S" },
+      { "category": "population",             "blogNormal": 15, "blogAffiliate": 0, "blogAi": 0, "noteA": 5, "noteB": 2, "noteC": 0, "noteD": 2, "youtube": 2, "priority": "S" },
+      { "category": "ict",                    "blogNormal": 11, "blogAffiliate": 0, "blogAi": 2, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 1, "priority": "B" },
+      { "category": "infrastructure",         "blogNormal": 11, "blogAffiliate": 0, "blogAi": 0, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 1, "priority": "B" },
+      { "category": "energy",                 "blogNormal": 10, "blogAffiliate": 0, "blogAi": 0, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 1, "priority": "B" },
+      { "category": "tourism",                "blogNormal": 13, "blogAffiliate": 1, "blogAi": 0, "noteA": 4, "noteB": 2, "noteC": 0, "noteD": 1, "youtube": 2, "priority": "A" },
+      { "category": "agriculture",            "blogNormal": 12, "blogAffiliate": 0, "blogAi": 0, "noteA": 4, "noteB": 2, "noteC": 1, "noteD": 1, "youtube": 1, "priority": "B" },
+      { "category": "miningindustry",         "blogNormal": 10, "blogAffiliate": 0, "blogAi": 0, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 0, "priority": "C" },
+      { "category": "safetyenvironment",      "blogNormal": 13, "blogAffiliate": 0, "blogAi": 0, "noteA": 4, "noteB": 2, "noteC": 0, "noteD": 1, "youtube": 1, "priority": "A" },
+      { "category": "educationsports",        "blogNormal": 14, "blogAffiliate": 0, "blogAi": 0, "noteA": 5, "noteB": 2, "noteC": 1, "noteD": 2, "youtube": 2, "priority": "A" },
+      { "category": "commercial",             "blogNormal": 10, "blogAffiliate": 0, "blogAi": 0, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 0, "youtube": 0, "priority": "B" },
+      { "category": "landweather",            "blogNormal": 12, "blogAffiliate": 0, "blogAi": 0, "noteA": 4, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 1, "priority": "A" },
+      { "category": "administrativefinancial","blogNormal": 13, "blogAffiliate": 0, "blogAi": 1, "noteA": 5, "noteB": 2, "noteC": 1, "noteD": 2, "youtube": 2, "priority": "A" },
+      { "category": "laborwage",              "blogNormal": 15, "blogAffiliate": 0, "blogAi": 0, "noteA": 5, "noteB": 2, "noteC": 1, "noteD": 2, "youtube": 2, "priority": "S" },
+      { "category": "construction",           "blogNormal": 6,  "blogAffiliate": 0, "blogAi": 0, "noteA": 3, "noteB": 1, "noteC": 0, "noteD": 1, "youtube": 0, "priority": "B" },
+      { "category": "socialsecurity",         "blogNormal": 8,  "blogAffiliate": 0, "blogAi": 0, "noteA": 5, "noteB": 2, "noteC": 1, "noteD": 2, "youtube": 2, "priority": "A" }
+    ],
+    "snsFrames": {
+      "platforms": [
+        { "id": "youtube-shorts", "monthly": 34, "weekly": 6, "format": "9:16動画" },
+        { "id": "instagram-reel", "monthly": 34, "weekly": 3, "format": "9:16動画" },
+        { "id": "instagram-carousel", "monthly": 19, "weekly": 4, "format": "1080×1350" },
+        { "id": "x-chart", "monthly": 34, "weekly": 6, "format": "1200×630" },
+        { "id": "x-choropleth-map", "monthly": 13, "weekly": "—", "format": "1080×1080" },
+        { "id": "x-compare", "monthly": 5, "weekly": "—", "format": "1200×630" },
+        { "id": "x-correlation", "monthly": 5, "weekly": "—", "format": "1200×630" },
+        { "id": "tiktok", "monthly": 34, "weekly": 6, "format": "9:16動画" },
+        { "id": "bar-chart-race", "monthly": 2.5, "weekly": "—", "format": "50年アニメ" }
+      ],
+      "totalPerMonth": 180,
+      "weeklyCalendar": {
+        "monday": ["YT Shorts 8時", "IG Carousel", "X", "TikTok"],
+        "tuesday": ["YT Shorts 12時", "IG Reel", "X (correlation)", "TikTok"],
+        "wednesday": ["YT Shorts 20時", "IG Carousel", "X", "TikTok"],
+        "thursday": ["YT Shorts", "IG Reel", "X (compare)", "TikTok"],
+        "friday": ["YT Shorts", "IG Carousel", "X", "TikTok"],
+        "saturday": ["YT Shorts", "IG Reel", "X (ranking)", "TikTok"],
+        "sunday": ["IG Carousel"]
+      }
+    },
+    "affiliateMap": [
+      { "category": "ふるさと納税", "products": ["さとふる", "楽天ふるさと納税"], "targetCategories": ["tourism", "agriculture", "administrativefinancial"], "cvr": "0.5%" },
+      { "category": "AIツール", "products": ["SHIFT AI", "Aidemy", "Udemy"], "targetCategories": ["ict", "administrativefinancial"], "cvr": "0.8%" },
+      { "category": "移住支援", "products": ["移住エージェント"], "targetCategories": ["population", "tourism"], "cvr": "0.3%" },
+      { "category": "FP・投資", "products": ["お金の相談所", "マネキャリ"], "targetCategories": ["economy"], "cvr": "0.4%" },
+      { "category": "防災用品", "products": ["Amazon"], "targetCategories": ["safetyenvironment", "landweather"], "cvr": "0.3%" },
+      { "category": "教育サービス", "products": ["スタディサプリ", "英会話スクール"], "targetCategories": ["educationsports"], "cvr": "0.5%" },
+      { "category": "転職・求人", "products": ["doda", "リクナビ"], "targetCategories": ["laborwage"], "cvr": "0.4%" },
+      { "category": "旅行", "products": ["じゃらん", "楽天トラベル"], "targetCategories": ["tourism"], "cvr": "0.6%" }
+    ]
+  },
+  "files": {
+    "blog_backlog": {
+      "path": "docs/20_ブログ記事企画/backlog/",
+      "total": 37,
+      "categoryFiles": [
+        "economy.md", "population.md", "ict.md", "infrastructure.md", "energy.md",
+        "tourism.md", "agriculture.md", "miningindustry.md", "safetyenvironment.md",
+        "educationsports.md", "commercial.md", "landweather.md", "administrativefinancial.md",
+        "laborwage.md", "construction.md", "socialsecurity.md"
+      ],
+      "horizontalFiles": [
+        "population-tokyo-concentration-deep.md", "2030-population-prediction.md",
+        "aging-2040-collapse-frontier.md", "wage-vs-cost-real-living-index.md",
+        "disaster-resilience-comparison.md", "migration-attractiveness-ranking.md",
+        "kakei-chousa.md", "economy-food.md", "money-theme.md", "population-future.md"
+      ],
+      "affiliateFiles": [
+        "affiliate-furusato.md", "affiliate-ai-tools-koumuin.md",
+        "affiliate-iju-shien.md", "affiliate-fp-investment-pref.md"
+      ],
+      "aiStatFiles": [
+        "ai-estat-chatgpt-7steps.md", "ai-claude-code-pref-analysis.md",
+        "ai-excel-stat-formatting.md", "ai-rag-municipal-data.md"
+      ],
+      "batchFiles": ["30-batch-2026-05-16.md", "trends-2026-04-27.md"],
+      "index": "INDEX.md"
+    },
+    "note_backlog": {
+      "path": "docs/30_note記事企画/backlog/",
+      "total": 51,
+      "seriesA_count": 16,
+      "seriesB_count": 16,
+      "seriesC_count": 1,
+      "seriesD_count": 16,
+      "existing": ["消費支出格差.md"],
+      "index": "INDEX.md"
+    },
+    "youtube_backlog": {
+      "path": "docs/22_YouTube企画/backlog/",
+      "total": 24,
+      "existingFiles": ["県民所得.md", "犯罪治安.md", "外国人人口.md", "離婚率.md", "生活保護率.md", "自殺率.md"],
+      "newFiles": [
+        "大学進学率.md", "平均年収.md", "初任給.md", "通勤時間.md", "合計特殊出生率.md",
+        "高齢化率.md", "物価地域差.md", "貯蓄率.md", "インバウンド.md", "温泉.md",
+        "寄附金受入.md", "経常収支比率.md", "豪雪.md", "地震頻度.md", "半導体.md", "生活保護.md"
+      ],
+      "snsFrames": "SNS-FRAMES.md",
+      "index": "INDEX.md"
+    },
+    "masterIndex": "docs/00_プロジェクト管理/05_コンテンツ企画マスター.md"
+  },
+  "roadmap": {
+    "phaseA": {
+      "period": "2026-Q2 (5月-7月)",
+      "focus": "優先S集中 / 即執筆可",
+      "blogTargets": 22,
+      "noteTargets": 28,
+      "youtubeTargets": 6,
+      "deliverables": [
+        "AI×統計: ai-estat-chatgpt-7steps, ai-claude-code-pref-analysis",
+        "アフィ: affiliate-ai-tools-koumuin, migration-attractiveness-ranking",
+        "note A: A-economy, A-population, A-tourism, A-administrativefinancial, A-laborwage",
+        "YouTube tier-1: 平均年収, 合計特殊出生率, 高齢化率"
+      ]
+    },
+    "phaseB": {
+      "period": "2026-Q3 (8月-10月)",
+      "focus": "優先A拡大",
+      "deliverables": [
+        "横串特集 6本",
+        "note B/D 優先A 17本",
+        "note C 優先S 2本 (C-4地方財政, C-9賃金構造基本)",
+        "YouTube tier-2 8〜10本"
+      ]
+    },
+    "phaseC": {
+      "period": "2026-Q4 (11月-12月)",
+      "focus": "優先B / 補完",
+      "deliverables": ["note D系残り", "ブログ優先B補完", "YouTube tier-3"]
+    }
+  },
+  "rules": {
+    "dataStorage": [
+      { "type": "アプリ運用データ", "location": "Cloudflare D1" },
+      { "type": "人間が読む文書", "location": "docs/" },
+      { "type": "エージェント詳細ログ", "location": ".claude/skills/<skill>/reference/" },
+      { "type": "計測snapshot", "location": ".claude/state/metrics/<service>/" },
+      { "type": "PR連動チケット", "location": "GitHub Issues (enhancement/bug)" },
+      { "type": "日次アラート", "location": "GitHub Issues (cloudflare-alert/psi-alert)" }
+    ],
+    "branchFlow": "feature/* → PR → develop → main (Cloudflare Pages トリガー)",
+    "deploymentFlow": "ローカルD1 (source of truth) → /sync-snapshots → R2 → 本番"
+  }
+}

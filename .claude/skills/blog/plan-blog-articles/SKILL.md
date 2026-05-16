@@ -154,7 +154,7 @@ SELECT slug, title, tags FROM articles;
 
 ### Phase 4: 出力
 
-9. `docs/20_ブログ記事企画/<categoryKey>.md` に保存。ファイル冒頭に以下のヘッダーを付与:
+9. `docs/20_ブログ記事企画/backlog/<categoryKey>.md` に保存。ファイル冒頭に以下のヘッダーを付与:
 
 ```markdown
 # {カテゴリ名}（{categoryKey}）— ブログ記事企画
@@ -244,7 +244,7 @@ docs/21_ブログ記事原稿/<slug>/
 └── data/            # JSON データ・SVG チャート
 ```
 
-- 企画の `.md` ファイル（`docs/20_ブログ記事企画/`）は原稿完成後に削除する（ライフサイクルルール）
+- 企画の `.md` ファイル（`docs/20_ブログ記事企画/backlog/`）は原稿完成後に削除する（ライフサイクルルール）
 - データ取得は `/fetch-article-data`、チャート生成は `/generate-article-charts` を使用
 
 ## 注意
