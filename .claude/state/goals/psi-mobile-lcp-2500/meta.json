@@ -1,0 +1,78 @@
+{
+  "slug": "psi-mobile-lcp-2500",
+  "title": "全 URL Mobile LCP < 2,500ms かつ Performance ≥ 80 達成",
+  "metric": "psi",
+  "improvement_skill": "performance-improvement",
+  "status": "ACTIVE",
+  "created_at": "2026-05-15T22:53:43.240Z",
+  "updated_at": "2026-05-15T22:53:56.983Z",
+  "closed_at": null,
+  "close_reason": null,
+  "success_criteria": "全 19 URL で Mobile LCP < 2,500ms かつ Performance ≥ 80",
+  "abort_criteria": "6 cycles or 累計 40h 経過で未達",
+  "max_cycles": 6,
+  "baseline": {
+    "date": "2026-05-09",
+    "value": "Mobile LCP 平均 10,500ms / Performance 平均 49 / 全 URL 違反",
+    "source": ".claude/state/metrics/psi/psi-batch-2026-05-09T17-40-53.json"
+  },
+  "md_path": "docs/04_レビュー/goals/psi-mobile-lcp-2500-2026-05-15.md",
+  "cycles": [
+    {
+      "number": 1,
+      "status": "proposed",
+      "hypothesis_ids": [
+        "A1",
+        "B1",
+        "B5"
+      ],
+      "expected_effect": "Mobile LCP 主要 8 URL で 16,000ms → 4,000ms 以下",
+      "expected_rationale": "EXP-003 で 2026-05-07 に 785ms 達成実績、改善策カタログ §3.A.A1 / §3.B.B1+B5",
+      "proposed_at": "2026-05-15T22:53:56.982Z",
+      "pr": null,
+      "commit_hash": null,
+      "deployed_at": null,
+      "measurement_path": null,
+      "measured_value": null,
+      "measured_at": null,
+      "effect": null,
+      "judgment_rationale": null,
+      "judged_at": null,
+      "next_action": null
+    }
+  ],
+  "current_cycle": {
+    "number": 1,
+    "status": "proposed",
+    "hypothesis_ids": [
+      "A1",
+      "B1",
+      "B5"
+    ],
+    "expected_effect": "Mobile LCP 主要 8 URL で 16,000ms → 4,000ms 以下",
+    "expected_rationale": "EXP-003 で 2026-05-07 に 785ms 達成実績、改善策カタログ §3.A.A1 / §3.B.B1+B5",
+    "proposed_at": "2026-05-15T22:53:56.982Z",
+    "pr": null,
+    "commit_hash": null,
+    "deployed_at": null,
+    "measurement_path": null,
+    "measured_value": null,
+    "measured_at": null,
+    "effect": null,
+    "judgment_rationale": null,
+    "judged_at": null,
+    "next_action": null
+  },
+  "hypothesis_pool": [
+    "A1: Cookie banner SSR 化",
+    "A2: Cookie banner Portal 化",
+    "B1: AdSense JS chunk 分離",
+    "B5: AdSense 広告密度削減",
+    "B4: AdSense Consent 後ロード",
+    "C1: FeaturedRankings を LCP に",
+    "E1: Cloudflare Image Resizing 有効化",
+    "E5: KaTeX lazy chunk 化",
+    "D4: Leaflet を below-the-fold へ",
+    "F1: Mobile で重い D3/Leaflet 簡易化"
+  ]
+}
