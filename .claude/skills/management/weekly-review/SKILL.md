@@ -100,7 +100,11 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 3. GA4 snapshot 取得 → snapshot Issue 作成
    `/fetch-ga4-data last28d snapshot <当週 YYYY-Www>` を実行する。
    保存先: `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/`
-   取得ファイル: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
+   取得ファイル:
+   - raw: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
+   - clean: overview-clean.csv / channels-clean.csv (country=Japan only, engagedSessions/engagementRate 含む)
+   - pollution-summary.csv (overseas_sessions / notSet_sessions の bot 推定 1 行)
+   レビュー本文には **raw と clean の両方を併記**し、bot 影響を視覚化する（詳細: `docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md`）。
    取得完了後、`/ga4-improvement observe` を実行する。observe は以下を行う:
    - 新しい `[GA4 Snapshot] YYYY-Www` Issue を `ga4-snapshot` ラベルで作成
    - budgets.json で閾値判定
@@ -394,6 +398,8 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 
 ### GA4（過去 28 日） — snapshot CSV: `.claude/skills/analytics/ga4-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`ga4-snapshot`)
 
+raw（bot 込み, overview.csv）:
+
 | 指標 | 今週 | 前週 | 差分 |
 |---|---|---|---|
 | PV | N | N | +N |
@@ -401,8 +407,23 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 | セッション | N | N | +N |
 | 直帰率 | N% | N% | — |
 
+Japan-only クリーン値（overview-clean.csv, country=Japan のみ）:
+
+| 指標 | 今週 | 前週 | 差分 |
+|---|---|---|---|
+| sessions | N | N | +N |
+| engagedSessions | N | N | +N |
+| activeUsers | N | N | +N |
+| engagementRate | N% | N% | — |
+
+pollution 監査（pollution-summary.csv, raw - clean の差分）:
+
+- overseas_sessions: N（前週 N, +N% 増減）
+- notSet_sessions: N（前週 N, +N% 増減）
+- ⚠️ overseas / notSet が前週比 +30% 超で増えた場合は GA4 Admin の bot filter 設定確認 + Cloudflare WAF rule 追加を `docs/04_レビュー/critical-review/` に起票
+
 主要な動き:
-- Organic Search: N → N (+N)
+- Organic Search (clean): N → N (+N) ※ clean ベースで評価
 - 上位ページの変化: pages.csv の Top 3 を 1 行ずつ
 
 ### GSC（過去 28 日） — snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`gsc-snapshot`)

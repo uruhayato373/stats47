@@ -212,7 +212,13 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 /fetch-ga4-data last28d snapshot 2026-W16
 ```
 
-引数の `snapshot YYYY-Www` が検出されたら、レポート種類指定は無視して 5 レポート (`overview` / `pages` / `channels` / `devices` / `daily`) を順次取得する。
+引数の `snapshot YYYY-Www` が検出されたら、レポート種類指定は無視して以下を順次取得する:
+
+- `overview.csv` / `pages.csv` / `channels.csv` / `devices.csv` / `daily.csv` — raw 値 (bot 込み)
+- `overview-clean.csv` / `channels-clean.csv` — country=Japan only クリーン値（engagedSessions / engagementRate を含む）
+- `pollution-summary.csv` — bot/spam 推定 (overseas_sessions / overseas_engagedSessions / notSet_sessions) の集計 1 行
+
+クリーン値併記の背景: `docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md` で W20 の bot 混入監査と対処方針を整理。
 
 ### 実行スクリプト
 
@@ -283,6 +289,12 @@ function toRow(row, dimNames, metricNames) {
   return r;
 }
 
+// クリーン値フィルタ: country=Japan のセッションのみ抽出
+// 詳細: docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md
+const JAPAN_FILTER = {
+  filter: { fieldName: 'country', stringFilter: { value: 'Japan' } },
+};
+
 async function main() {
   const summary = [];
 
@@ -296,6 +308,19 @@ async function main() {
     const rows = raw.map(r => toRow(r, [], metrics));
     fs.writeFileSync(path.join(OUT_DIR, 'overview.csv'), toCSV(rows, metrics));
     summary.push(`overview.csv: ${rows.length} rows`);
+  }
+
+  // overview-clean (country=Japan only, engagedSessions も追加)
+  {
+    const metrics = ['activeUsers', 'sessions', 'engagedSessions', 'screenPageViews', 'averageSessionDuration', 'bounceRate', 'engagementRate'];
+    const raw = await runReport({
+      dateRanges,
+      metrics: metrics.map(n => ({ name: n })),
+      dimensionFilter: JAPAN_FILTER,
+    });
+    const rows = raw.map(r => toRow(r, [], metrics));
+    fs.writeFileSync(path.join(OUT_DIR, 'overview-clean.csv'), toCSV(rows, metrics));
+    summary.push(`overview-clean.csv: ${rows.length} rows (country=Japan)`);
   }
 
   // pages (paginated, 全件)
@@ -328,6 +353,22 @@ async function main() {
     summary.push(`channels.csv: ${rows.length} rows`);
   }
 
+  // channels-clean (country=Japan only, engagedSessions も追加)
+  {
+    const dims = ['sessionDefaultChannelGroup'];
+    const metrics = ['sessions', 'engagedSessions', 'activeUsers', 'screenPageViews', 'engagementRate'];
+    const raw = await runReport({
+      dateRanges,
+      dimensions: dims.map(n => ({ name: n })),
+      metrics: metrics.map(n => ({ name: n })),
+      dimensionFilter: JAPAN_FILTER,
+      orderBys: [{ metric: { metricName: 'engagedSessions' }, desc: true }],
+    });
+    const rows = raw.map(r => toRow(r, dims, metrics));
+    fs.writeFileSync(path.join(OUT_DIR, 'channels-clean.csv'), toCSV(rows, [...dims, ...metrics]));
+    summary.push(`channels-clean.csv: ${rows.length} rows (country=Japan)`);
+  }
+
   // devices
   {
     const dims = ['deviceCategory'];
@@ -355,6 +396,37 @@ async function main() {
     const rows = raw.map(r => toRow(r, dims, metrics));
     fs.writeFileSync(path.join(OUT_DIR, 'daily.csv'), toCSV(rows, [...dims, ...metrics]));
     summary.push(`daily.csv: ${rows.length} rows`);
+  }
+
+  // pollution-summary: bot/spam 推定値の集計 1 行 (raw - clean の差分を可視化)
+  {
+    const overseasRes = await runReport({
+      dateRanges,
+      metrics: [{ name: 'sessions' }, { name: 'engagedSessions' }],
+      dimensionFilter: { notExpression: JAPAN_FILTER },
+    });
+    const overseas = overseasRes[0] || { metricValues: [{ value: 0 }, { value: 0 }] };
+
+    const notSetRes = await runReport({
+      dateRanges,
+      metrics: [{ name: 'sessions' }],
+      dimensionFilter: {
+        andGroup: { expressions: [
+          { filter: { fieldName: 'sessionSource', stringFilter: { value: '(not set)' } } },
+          { filter: { fieldName: 'sessionMedium', stringFilter: { value: '(not set)' } } },
+        ]},
+      },
+    });
+    const notSetSessions = parseInt(notSetRes[0]?.metricValues?.[0]?.value || '0', 10);
+
+    const headers = ['overseas_sessions', 'overseas_engagedSessions', 'notSet_sessions'];
+    const row = {
+      overseas_sessions: overseas.metricValues[0].value,
+      overseas_engagedSessions: overseas.metricValues[1].value,
+      notSet_sessions: notSetSessions,
+    };
+    fs.writeFileSync(path.join(OUT_DIR, 'pollution-summary.csv'), toCSV([row], headers));
+    summary.push(`pollution-summary.csv: overseas=${row.overseas_sessions} notSet=${notSetSessions}`);
   }
 
   console.log(`[ga4-snapshot] ${WEEK} saved to ${OUT_DIR}`);

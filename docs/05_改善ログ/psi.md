@@ -177,3 +177,79 @@ JS 依存のレンダリング経路のため、HTML サイズを削減しても
 - #74 EXP-002（ADVERSE、教訓: LCP 要素を先に特定してから施策を設計する）
 - PSI batch `.claude/state/metrics/psi/psi-batch-2026-04-24T22-39-36.json`（現在の baseline）
 - `.claude/skills/management/knowledge/SKILL.md` — 「HTML 削減 ≠ LCP 改善」教訓
+
+---
+
+## T1-PSI-LCP-03: CookieConsentBanner SSR 化 (EXP-004)
+
+- **status**: effect/none
+- **tier**: 1
+- **target_metric**: psi_lcp_ms_homepage_mobile
+- **deployed_at**: 2026-05-10
+- **closed_at**: 2026-05-16
+
+### 想定効果（baseline 8,251ms → < 3,000ms = -64%）
+CookieConsentBanner が `'use client'` + localStorage 依存で hydration 後に表示 → hydration 完了が LCP になっているという仮説。HTTP cookie でサーバー側 consent 検知し SSR HTML に含めることで、TTFB 時点でバナー描画 → バナーが LCP 遅延要因でなくなる。
+
+### 実測（2026-05-15、PSI history.csv）
+- ホーム mobile LCP: **8,476ms**（baseline 8,251ms 比 +2.7%）
+- EXP-003 ADVERSE 状態 (16,426ms) からは **-48% 改善** = rollback としては成功
+- 改善目標 (<3,000ms) には大幅未達
+
+### 判定根拠
+- 経過 5 日（5/10 deploy → 5/15 計測）
+- 1 回計測（lab data variance あり、5/7 に 785ms の異常値も）
+- 想定 -64% に対し実測 +2.7%（目標達成率 0%）
+
+### 学び（実証ベース判定ルール準拠）
+- **[判定]** CookieConsent SSR 化は LCP 要素ではなかった。仮説「バナー hydration 遅延が LCP」は誤り
+- **[教訓]** EXP-002/003/004 と 3 連続で「LCP 要素を特定せずに hydration 仮説で改修」→ 全て effect/none or partial に終わった。auto memory `feedback_lcp_optimization.md` と完全一致
+- **[次施策の起点]** LCP 要素を `lighthouseResult.audits["largest-contentful-paint-element"]` で実証ベースで特定する Phase 1 (EXP-005) を proposed 状態で立案
+
+### 検証コマンド
+```bash
+grep -E ",https://stats47.jp/,mobile,homepage" .claude/state/metrics/psi/history.csv | tail -10
+# quota リセット後の追加計測:
+curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fstats47.jp%2F&strategy=mobile&category=performance"
+```
+
+### rollback 判断
+- 実施しない（baseline 水準まで戻っているため許容、EXP-003 ADVERSE よりはマシ）
+- EXP-005 で LCP 要素を特定してから次の対策を組む
+
+### 参照
+- experiments.json EXP-004
+- 関連 close 教訓: `docs/03_週次運用/週次レビュー/2026-W20.md` 課題2
+- 次実験: EXP-005 (LCP 要素特定 Phase 1, proposed)
+
+---
+
+## T1-PSI-LCP-04: LCP 要素特定 Phase 1 (EXP-005) — proposed
+
+- **status**: proposed
+- **tier**: 1
+- **target_metric**: lcp_element_identified
+- **proposed_at**: 2026-05-16
+
+### 背景
+EXP-002 (HTML 削減・ADVERSE) / EXP-003 (Leaflet tile preload・PARTIAL) / EXP-004 (CookieConsent SSR・NONE) と 3 連続で LCP 改善が未達。共通の問題: **LCP 要素を特定せず hydration 仮説で改修** している。
+
+### 目的
+主要 5 URL (homepage / ranking / blog / search / areas) で LCP 要素を実証ベースで特定し、要素タイプ別の Phase 2 施策候補 (EXP-006/007) を立案する。改修は行わない調査 phase。
+
+### 想定アウトプット
+- 各 URL の LCP 要素 type / size / loading 属性 / preload 状況 / font dependencies を表で整理
+- Phase 2 候補施策 3 件以上（要素タイプ別: image なら width/height/preload, font なら font-display:optional, SSR-deferred なら server prefetch 等）
+
+### 実装手順
+1. PSI API quota リセット後、5 URL × mobile/desktop × 3 回計測（中央値、JSON フル保存）
+2. レスポンスの `lighthouseResult.audits["largest-contentful-paint-element"].details.items[0].node` から要素特定
+3. 表で整理 → `docs/05_改善ログ/psi.md` に section 追加
+4. EXP-006/007 を experiments.json に proposed 状態で追加
+
+### 着手期日
+W21 中（PSI quota リセット = 翌日以降）。状態 `proposed` → `running` に遷移。
+
+### 参照
+- experiments.json EXP-005
+- W21 計画 `docs/03_週次運用/週次計画/2026-W21.md` Could セクション
