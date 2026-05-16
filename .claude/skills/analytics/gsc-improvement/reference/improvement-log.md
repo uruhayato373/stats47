@@ -42,6 +42,15 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ## Action Log
 
+### [URL-INSP-2026-05-16] URL Inspection 日次測定（--limit 10 実行）
+- **実行日**: 2026-05-16
+- **実行コマンド**: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 10`
+- **結果**: PASS 10 / NEUTRAL 0、coverageState は全件「送信して登録されました」(10/10)
+- **生データ**: `.claude/state/metrics/gsc/url-inspection/2026-05-16.csv`
+- **LATEST.md**: `.claude/state/metrics/gsc/url-inspection/LATEST.md`
+- **前日比 (5/10 → 5/16)**: PASS -81、NEUTRAL -9、対象 URL 数 -90（前日 100 件 → 今回 10 件のサンプル縮小による）
+- **判定**: 実証値のみ記録。effect ラベル付与なし（サンプルサイズ小、未登録 1.6 万件への影響判定には次回 1,500 URL full run が必要）
+
 ### [PHASE-9] middleware + sitemap ゼロベース再構築
 
 - **デプロイ日**: 2026-04-26 / コミット: `b4b7a31c` (P0) + `bb4303e9` (P1) + `4dec30e5` (P2-A) + `0ec26659` (P2-B+C) + `e97b6db7` (smoke-test fix)
