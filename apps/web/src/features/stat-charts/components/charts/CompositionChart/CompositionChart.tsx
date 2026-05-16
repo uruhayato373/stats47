@@ -46,7 +46,7 @@ export const CompositionChartDashboard = async ({
   // 現状は e-Stat API 直接 fetch のみ。
   void componentKey;
 
-  /* eslint-disable react-hooks/error-boundaries -- server component data fetch pattern */
+   
   try {
     let rawDataList: StatsSchema[][];
     let totalData: StatsSchema[] | undefined;
@@ -180,5 +180,5 @@ export const CompositionChartDashboard = async ({
       </div>
     );
   }
-  /* eslint-enable react-hooks/error-boundaries */
+   
 };
