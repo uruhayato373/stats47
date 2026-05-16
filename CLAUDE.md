@@ -67,6 +67,7 @@ packages/
 | デザインシステム（melta-ui 準拠） | `.claude/design-system/README.md` |
 | コーディング標準（TypeScript/React/Next.js） | `.claude/rules/coding-standards.md` |
 | **実証ベース判定ルール（推測判定の禁止・effect 判定の必須要件）** | `.claude/rules/evidence-based-judgment.md` ★improvement / 判定系スキルでは必読 |
+| **Next.js App Router SSG 保全（layout / Server Component に cookies()/headers() 禁止）** | `.claude/rules/nextjs-ssg-preservation.md` ★layout 配下に Server Component を追加する前に必読（2026-05-10 EXP-004 で 500 障害発生） |
 | note / X / ブログ hero の画像プロンプトテンプレート（43 種） | `.claude/skills/image-prompt/reference/catalog.md` ★`/image-prompt` で呼び出し |
 
 ## エージェントチーム

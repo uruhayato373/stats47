@@ -38,7 +38,6 @@ import {
 import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
 import {
     AdSenseAd,
-    RANKING_PAGE_TABLE_SIDE,
     RANKING_PAGE_FOOTER,
 } from "@/lib/google-adsense";
 
@@ -490,10 +489,6 @@ export function RankingKeyPageClient({
                     <aside className="hidden lg:block lg:w-64 lg:shrink-0 lg:sticky lg:top-20">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
-                            <AdSenseAd
-                                format={RANKING_PAGE_TABLE_SIDE.format}
-                                slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                            />
                         </div>
                     </aside>
                 )}

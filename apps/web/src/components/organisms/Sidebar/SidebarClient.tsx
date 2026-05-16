@@ -19,8 +19,6 @@ import { ArrowLeftRight, BarChart3, BookOpen, Home, LayoutDashboard, MapPin, Sea
 
 import type { Category } from "@/features/category";
 
-import { AdSenseAd, MAIN_SIDEBAR } from "@/lib/google-adsense";
-
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { usePageType } from "@/hooks/usePageType";
 import { useSidebarNavigation } from "@/hooks/useSidebarNavigation";
@@ -118,17 +116,6 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
 
       {/* ページ固有セクション */}
       <SidebarPageSection />
-
-      <Separator className="my-1.5" />
-
-      {/* 広告エリア */}
-      <div className="px-2 mt-2">
-        <AdSenseAd
-          format={MAIN_SIDEBAR.format}
-          slotId={MAIN_SIDEBAR.slotId}
-          showLabel={false}
-        />
-      </div>
     </div>
   );
 
