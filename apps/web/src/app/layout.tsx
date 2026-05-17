@@ -144,24 +144,22 @@ export default function RootLayout({
         {/* テーマプロバイダー（ダークモード対応） */}
         <ThemeProvider>
           {/* メインレイアウトコンテナ */}
-          <div className="relative flex flex-col h-screen overflow-hidden" suppressHydrationWarning>
+          <div className="relative flex flex-col" suppressHydrationWarning>
             {/* ヘッダー（全ページ共通） */}
             <Header />
             {/* コンテンツエリア（サイドバー + メインコンテンツ） */}
-            <div className="flex flex-1 min-h-0">
+            <div className="flex flex-1">
               {/* サイドバーナビゲーション */}
               <Suspense fallback={<SidebarSkeleton />}>
                 <Sidebar />
               </Suspense>
               {/* メインコンテンツエリア（各ページのコンテンツがここに表示される） */}
-              <main className="flex-1 min-h-0 overflow-y-auto">
+              <main className="flex-1 min-w-0">
                 {children}
               </main>
             </div>
             {/* フッター（全ページ共通） */}
-            <div className="flex-shrink-0">
-              <Footer />
-            </div>
+            <Footer />
           </div>
           {/* トースト通知（成功、エラー、警告などの通知を表示） */}
           <Toaster position="top-right" richColors />

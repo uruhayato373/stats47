@@ -153,7 +153,7 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
   }
 
   return (
-    <div className="hidden lg:block shrink-0 h-full">
+    <div className="hidden lg:block shrink-0 sticky top-16 self-start h-[calc(100vh-4rem)]">
       <div className="w-60 min-w-[240px] shrink-0 h-full bg-sidebar border-r border-border flex flex-col">
         {sidebarInner}
       </div>
