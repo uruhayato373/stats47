@@ -24,15 +24,16 @@
 | `/discover-trends --source note` | note.com |
 | `/discover-trends --source yahoo` | Yahoo! ニュース |
 
-### 企画・管理（4スキル）
+### 企画・管理（5スキル）
 | スキル | 用途 |
 |---|---|
 | `/plan-blog-articles` | カテゴリ別企画生成 |
 | `/plan-blog-trends` | トレンド起点企画 |
 | `/plan-blog-affiliate` | アフィリエイト起点企画 |
+| `/plan-blog-from-gsc` | **GSC 中位クエリ起点企画 (順位 11-30 を新規記事化)** |
 | `/update-blog-plan` | 企画管理ファイル更新 |
 
-### 制作・レビュー（6スキル）
+### 制作・レビュー（7スキル）
 | スキル | 用途 |
 |---|---|
 | `/generate-article-charts` | 記事用 SVG チャート生成 |
@@ -40,7 +41,13 @@
 | `/expert-review` | 専門家視点レビュー |
 | `/panel-review` | 10人パネリストによる評価 |
 | `/proofread-article` | 公開前チェック |
-| `/publish-article` | 下書き → 公開フォルダへコピー |
+| `/publish-article` | 下書き → 公開フォルダへコピー (1 本ずつ) |
+| `/publish-bulk-articles` | **複数記事を一括公開 (D1 INSERT + R2 sync + HTTP 検証 + ISR 404 リトライ)** |
+
+### サブエージェント連携
+| エージェント | 用途 |
+|---|---|
+| `article-writer` | **metric 1 つ → 記事 1 本を完結。並列起動で量産可能** |
 
 ## 担当外
 

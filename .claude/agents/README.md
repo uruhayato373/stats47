@@ -25,7 +25,7 @@
 | `theme-enhancer` | 4 | テーマダッシュボード強化（最適化分析→監査→チャート設計→DB投入） |
 | `data-pipeline` | 8 | e-Stat API → ランキング登録 → AI コンテンツ |
 | `db-manager` | 10 | DB/R2 インフラ（同期・マイグレーション・バックアップ） |
-| `blog-editor` | 11 | ブログ記事ライフサイクル（トレンド発見→企画→レビュー→公開） |
+| `blog-editor` | 13 | ブログ記事ライフサイクル（トレンド/GSC→企画→レビュー→公開／一括公開） |
 | `sns-renderer` | 4 | Remotion レンダリング・プレビュー |
 | `note-manager` | 8 | note.com 記事制作（企画→執筆→編集→チャート） |
 | `code-reviewer` | 3 | コード品質レビュー（review-feature の `--scope` で feature/app/packages/types/ui-consistency 切替、tests, security） |
@@ -33,6 +33,12 @@
 | `devops-runner` | 5 | テスト・デプロイ・Git 操作 |
 | `tdd-guide` | 2 | テスト駆動開発ガイド（Red-Green-Refactor・モック戦略） |
 | `strategy-advisor` | 9 | 週次 PDCA・戦略立案・NSM 実験管理・批判的レビュー |
+
+## Tier 3: Worker（単機能・並列起動向き）
+
+| エージェント | 役割 |
+|---|---|
+| `article-writer` | 1 metric × 1 記事を完結（並列起動で量産。`Agent(subagent_type="article-writer")` × N） |
 
 ## チーム連携パターン
 
@@ -44,6 +50,7 @@
 | YouTube動画制作 | youtube-strategist → sns-renderer |
 | bar-chart-race → リール | sns-renderer(/render-bar-chart-race) → instagram-strategist(/post-instagram --type reels) |
 | トレンド→ブログ記事 | blog-editor → db-manager(/sync-articles) |
+| **GSC 中位クエリ→量産** | blog-editor(/plan-blog-from-gsc) → article-writer × N 並列 → blog-editor(/publish-bulk-articles) |
 | 週次 PDCA | strategy-advisor |
 | コード変更→デプロイ | code-reviewer → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-pipeline → ui-reviewer |
