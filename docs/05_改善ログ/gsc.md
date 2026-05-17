@@ -2,12 +2,62 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-05-17
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## [BLOG-CTR-02] SEO タイトル改修 10 件 + 新規記事 6 本 (2026-W19 → 2026-W21)
+
+- **status**: pending (要 2026-W21 以降の継続観測)
+- **tier**: 2
+- **target_metric**: blog-ctr / ranking-ctr
+- **deployed_at**: 2026-05-17
+- **before**: 2026-W19 / **after**: 2026-W21
+
+### SEO タイトル改修 10 件 (検索クエリ別集計)
+
+| metric_key | クエリ含むテーマ | impressions | clicks | CTR | position |
+|---|---|---|---|---|---|
+| `wheat-flour-consumption-quantity` | 小麦粉 | 357→366 (+9) | 2→2 (+0) | 0.6%→0.5% (-0.01pp) | 6.4→6.5 (+0.0) |
+| `starting-salary-highschool` | 高卒初任給 | 108→138 (+30) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.9→8.0 (+0.1) |
+| `post-office-count` | 郵便局数 | 0→0 (+0) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 0.0→0.0 (+0.0) |
+| `inpatient-rate-per-100k` | 入院受療率 | 12→8 (-4) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 4.6→3.7 (-0.8) |
+| `total-fertility-rate` | 合計特殊出生率 | 64→49 (-15) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 12.3→14.6 (+2.3) |
+| `sake-consumption-quantity` | 清酒/日本酒 | 43→47 (+4) | 1→1 (+0) | 2.3%→2.1% (-0.20pp) | 8.8→8.9 (+0.1) |
+| `fresh-udon-soba-consumption-quantity` | うどん | 104→288 (+184) | 4→8 (+4) | 3.8%→2.8% (-1.07pp) | 8.6→7.7 (-0.9) |
+| `konbu-consumption-quantity` | 昆布 | 120→128 (+8) | 6→4 (-2) | 5.0%→3.1% (-1.88pp) | 7.4→7.3 (-0.2) |
+| `outpatient-rate-per-100k` | 外来受療率 | 17→15 (-2) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.2→9.3 (+0.0) |
+| `chicken-consumption-quantity` | 鶏肉 | 53→97 (+44) | 2→4 (+2) | 3.8%→4.1% (+0.35pp) | 8.4→8.6 (+0.2) |
+
+**SEO 10 件合計**: clicks 15 → 19 (+4)
+
+### 新規記事 6 本 (ページ別集計)
+
+| slug | クエリ含むテーマ | クエリ集計 impressions | ページ集計 impressions/clicks |
+|---|---|---|---|
+| `healthy-life-expectancy-male-female-gap` | 健康寿命 | 223 (33 クエリ) | 0 / 0 clicks |
+| `prefectural-height-male-female-gap` | 平均身長 | 305 (68 クエリ) | 0 / 0 clicks |
+| `roadside-station-prefecture-gap` | 道の駅 | 27 (8 クエリ) | 0 / 0 clicks |
+| `sugar-consumption-prefecture-gap` | 砂糖消費量 | 26 (1 クエリ) | 0 / 0 clicks |
+| `self-financing-ratio-prefecture-gap` | 自主財源 | 14 (3 クエリ) | 0 / 0 clicks |
+| `abortion-rate-prefecture-gap` | 中絶/人工妊娠 | 31 (9 クエリ) | 0 / 0 clicks |
+
+**新規 6 本合計**: ページ集計 clicks 0
+
+### 判定
+
+- 想定: SEO 改修 +200 clicks/月、新規記事 6 本で +50-100 clicks/月
+- 実測: SEO 4 clicks 差、新規記事 0 clicks
+- **[判定] effect/pending** — 2026-W21 は集計 1 週分のみ、最低 2-4 週連続観測してから effect/full または effect/partial を確定する (.claude/rules/evidence-based-judgment.md 準拠)
+
+### 検証コマンド
+
+```
+node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W19 <新しい週>
+```
 
 ## [BLOG-CTR-01] manufacturing-aichi-dominance seoTitle/description 改訂 (W20)
 
