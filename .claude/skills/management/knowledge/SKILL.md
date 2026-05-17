@@ -165,13 +165,32 @@ user-invocable: false
 
 ---
 
-## YouTube OAuth トークンは定期的に失効する
+## YouTube OAuth トークン失効（→ 2026-05-03 Production publish で恒久対策済み）
 
-**問題**: `.claude/scripts/youtube/upload.js` で `invalid_grant: Token has been expired or revoked` エラー。
+**問題**: `youtube-audit-daily.yml` 等で `invalid_grant: Token has been expired or revoked` エラー。2026-04 以前に複数回再発。
 
-**原因**: Google OAuth の refresh token が失効（長期間未使用、パスワード変更、手動取り消し等）。
+**根本原因**: Google Cloud Console の OAuth client が **Testing publishing status** だと refresh token が **7 日で auto-expire** する Google 仕様。これを「定期的に失効する」と誤認して再認証で対症療法していた。実際は Production publish で 6 ヶ月有効になる。
 
-**対策**: `node .claude/scripts/youtube/oauth-setup.js` を実行し、ブラウザで Google 認証を通す。新しい refresh token が `.env.local` に自動保存される。browser-use の Profile 5 で自動化可能。
+**恒久対策（2026-05-03 適用、Issue #184）**:
+1. **OAuth client を "In production" に publish 済み**（YouTube + AdSense の両 client）→ 7 日 → 6 ヶ月化
+2. **`.github/workflows/oauth-token-health-check.yml`** が週次（月曜 09:00 JST）で `youtube.channels.list` を叩いて健康確認、失効検知時に `[OAuth Alert]` Issue 自動起票（重複起票なし）
+3. **`youtube-daily-audit.mjs`** は `invalid_grant` を検知したら exit 0 で静かに止まる（連日 failure 量産防止）
+
+**失効時の復旧手順（runbook）**:
+```bash
+node .claude/scripts/youtube/oauth-setup.js   # ブラウザで Google 再認証 → .env.local 更新
+# ⚠️ チャンネル選択画面で stats47 (UCdRiwDSX1aUd0dSd7Cs08Kg) を必ず選ぶ（2026-05-03 個人ch 誤認証事故）
+gh secret set GOOGLE_OAUTH_REFRESH_TOKEN -b "$(grep '^GOOGLE_OAUTH_REFRESH_TOKEN=' .env.local | cut -d= -f2-)"
+gh workflow run youtube-audit-daily.yml       # 復旧確認
+gh workflow run oauth-token-health-check.yml  # 復旧確認
+```
+
+**注意**: もし再び 7 日サイクルで失効する場合は、Google Cloud Console で publishing status が「テスト」に戻っていないか確認すること。OAuth client の scope を変更すると Testing 扱いに戻ることがある。
+
+**関連ファイル**:
+- 健康確認: `.claude/scripts/youtube/oauth-health-check.mjs`
+- 再認証: `.claude/scripts/youtube/oauth-setup.js`
+- 監視 workflow: `.github/workflows/oauth-token-health-check.yml`
 
 ---
 

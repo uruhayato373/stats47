@@ -61,6 +61,10 @@ function runDiagnose() {
     maxBuffer: 10 * 1024 * 1024,
   });
   if (res.status !== 0) {
+    if (res.stderr?.includes("invalid_grant")) {
+      log("OAuth refresh token expired — exiting cleanly. oauth-token-health-check.yml が週次で Issue 起票するので連日 failure ノイズを出さない");
+      process.exit(0);
+    }
     log(`diagnose-shadowban.js failed (exit ${res.status}): ${res.stderr}`);
     process.exit(1);
   }
