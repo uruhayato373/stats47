@@ -59,8 +59,8 @@ describe("RankingFaqSection", () => {
     });
 
     const html = renderFaq(faqJson);
-    // script タグ内のコンテンツを抽出
-    const match = html.match(/<script[^>]*>([\s\S]*?)<\/script>/);
+    // script タグ内のコンテンツを抽出 (case-insensitive で大文字も拾う)
+    const match = html.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
     expect(match).not.toBeNull();
     const scriptContent = match![1];
 
