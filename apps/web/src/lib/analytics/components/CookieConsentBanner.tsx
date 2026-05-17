@@ -33,6 +33,9 @@ function syncGtag(value: "granted" | "denied") {
  *
  * 初期値は false（サーバーと一致させてハイドレーションミスマッチを防ぐ）。
  * マウント後に document.cookie を確認してバナー表示・gtag 同期を行う。
+ *
+ * useEffect 内の setState 連鎖を避けるため、表示判定は別 effect として
+ * 分離 (react-hooks/set-state-in-effect 警告回避)。
  */
 export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -42,9 +45,11 @@ export function CookieConsentBanner() {
     const consent = cookieMatch?.[1];
     if (consent === "granted" || consent === "denied") {
       syncGtag(consent);
-    } else {
-      setVisible(true);
+      return;
     }
+    // consent 未設定: 次フレームでバナー表示 (cascading render 回避)
+    const timerId = window.setTimeout(() => setVisible(true), 0);
+    return () => window.clearTimeout(timerId);
   }, []);
 
   const handleAccept = () => {

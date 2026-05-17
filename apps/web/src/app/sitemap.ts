@@ -202,12 +202,14 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   try {
     tagMeta = await listAllTagsWithCount();
   } catch (error) {
+    // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、ビルド失敗の真因観測のため console を使用
     console.error("[sitemap/getTagPages] listAllTagsWithCount failed", { error });
     return [];
   }
   // 旧クエリで count >= 5 を要求していたため踏襲
   const eligible = tagMeta.filter((t) => t.count >= 5);
   if (eligible.length === 0) {
+    // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、空 0 検出のため console を使用
     console.warn("[sitemap/getTagPages] no eligible tags (count>=5)", { totalTags: tagMeta.length });
     return [];
   }
@@ -216,6 +218,7 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   try {
     articlesAll = await listLatestArticles(10000);
   } catch (error) {
+    // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、ビルド失敗の真因観測のため console を使用
     console.error("[sitemap/getTagPages] listLatestArticles failed", { error });
     return [];
   }

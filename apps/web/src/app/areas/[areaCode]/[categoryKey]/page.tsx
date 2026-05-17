@@ -25,13 +25,13 @@ import { AreaBannerAd } from "@/features/ads/server";
 import {
     AreaProfilePageClient,
     RelatedAreas,
+    generateAreaCategoryMetadata,
     generateAreaProfileBreadcrumbStructuredData,
     generateAreaProfileStructuredData,
 } from "@/features/area-profile";
 import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
-import { generateAreaCategoryMetadata } from "@/features/area-profile/utils/generate-area-metadata";
 
 import { UrlPolicy } from "@/lib/url-policy";
 
