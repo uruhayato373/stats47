@@ -77,9 +77,9 @@ export function RankingFaqSection({ faqJson, rankingName }: RankingFaqSectionPro
       >
         <details open className="group">
           <summary className="flex cursor-pointer items-center justify-between px-6 py-4 font-semibold text-slate-900">
-            <h3 id="ranking-faq-heading" className="text-lg">
+            <h2 id="ranking-faq-heading" className="text-lg">
               {rankingName} についてよくある質問
-            </h3>
+            </h2>
             <span aria-hidden className="text-muted-foreground transition-transform group-open:rotate-180">
               ▼
             </span>

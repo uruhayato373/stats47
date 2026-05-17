@@ -21,7 +21,7 @@ export function AiContentAccordion({ title, children }: AiContentAccordionProps)
       <Accordion type="single" collapsible>
         <AccordionItem value="content" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">
-            <h3 className="text-lg font-semibold">{title}</h3>
+            <h2 className="text-lg font-semibold">{title}</h2>
           </AccordionTrigger>
           <AccordionContent className="px-6 pb-6 pt-0">
             {children}
