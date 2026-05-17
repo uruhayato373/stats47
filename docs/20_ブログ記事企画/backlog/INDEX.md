@@ -1,9 +1,9 @@
 ---
 type: content-plan-index
 scope: blog
-total_files: 30
-total_articles: 163
-updated: 2026-05-16
+total_files: 31
+total_articles: 203
+updated: 2026-05-17
 ---
 
 # ブログ backlog INDEX
@@ -57,6 +57,7 @@ updated: 2026-05-16
 | ファイル | 件数 | 用途 |
 |---|---:|---|
 | [30-batch-2026-05-16.md](./30-batch-2026-05-16.md) | 30 | 30本batch |
+| [gsc-driven-2026-05-17.md](./gsc-driven-2026-05-17.md) | 40 | GSC順位11-30クエリ起点（W17-W21 5週集計） |
 | [trends-2026-04-27.md](./trends-2026-04-27.md) | （既存） | トレンド起点 |
 
 ## 関連
