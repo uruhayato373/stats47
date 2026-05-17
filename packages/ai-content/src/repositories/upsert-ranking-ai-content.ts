@@ -8,6 +8,7 @@ export interface UpsertRankingAiContentInput {
   faq?: string | null;
   regionalAnalysis?: string | null;
   insights?: string | null;
+  prefectureCommentary?: string | null;
   yearCode: string;
 }
 
@@ -24,6 +25,7 @@ export async function upsertRankingAiContent(
       faq: data.faq ?? null,
       regionalAnalysis: data.regionalAnalysis ?? null,
       insights: data.insights ?? null,
+      prefectureCommentary: data.prefectureCommentary ?? null,
       yearCode: data.yearCode,
       updatedAt: now,
     })

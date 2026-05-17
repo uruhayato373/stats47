@@ -8,6 +8,8 @@ export interface AiContentSnapshotRow {
   faq: string | null;
   regionalAnalysis: string | null;
   insights: string | null;
+  /** 47 都道府県別解説 (PrefectureCommentaryContent を JSON 化した文字列) */
+  prefectureCommentary: string | null;
   createdAt: string | null;
   updatedAt: string | null;
 }

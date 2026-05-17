@@ -59,7 +59,32 @@ describe("RankingFaqSection", () => {
     });
 
     const html = renderFaq(faqJson);
-    expect(html).not.toContain("</script><");
-    expect(html).toContain("\\u003c");
+    // script タグ内のコンテンツを抽出。
+    // regex は CodeQL js/bad-tag-filter が「adversarial input への防御に
+    // 弱い」と過剰警告するため、test 用途では String API ベースで素直に抽出する。
+    const startTagIdx = html.toLowerCase().indexOf("<script");
+    expect(startTagIdx).toBeGreaterThanOrEqual(0);
+    const openTagEnd = html.indexOf(">", startTagIdx) + 1;
+    const endTagIdx = html.toLowerCase().indexOf("</script", openTagEnd);
+    expect(endTagIdx).toBeGreaterThan(openTagEnd);
+    const scriptContent = html.slice(openTagEnd, endTagIdx);
+
+    // script コンテンツ内に生の "<" が無いこと (全て < に escape されている)
+    expect(scriptContent).not.toContain("<");
+    expect(scriptContent).toContain("\\u003c");
+  });
+
+  it("可視 FAQ アコーディオン UI を出力する (Google FAQPage richresult 要件)", () => {
+    const faqJson = JSON.stringify({
+      items: [
+        { question: "1位の県は？", answer: "東京都です。", type: "top_ranking" },
+      ],
+    });
+
+    const html = renderFaq(faqJson, "人口ランキング");
+    // 可視アコーディオン: 質問と回答がページ上に表示される
+    expect(html).toContain("人口ランキング についてよくある質問");
+    expect(html).toContain("Q. 1位の県は？");
+    expect(html).toContain("A. 東京都です。");
   });
 });

@@ -54,6 +54,7 @@ export { RankingTopPageClient } from "./components/RankingTopPage";
 export { AiContentAccordion } from "./components/AiContentAccordion";
 export { AiMarkdownContent } from "./components/AiMarkdownContent";
 export { RankingFaqSection } from "./components/RankingFaqSection";
+export { RankingPrefectureCommentarySection } from "./components/RankingPrefectureCommentarySection";
 
 // export * from "./repositories"; // Removed
 export * from "./utils";

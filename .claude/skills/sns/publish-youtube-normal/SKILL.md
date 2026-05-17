@@ -54,7 +54,7 @@ node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
 
 ## 前提
 
-- ローカル D1 に `observations`, `indicators` が存在すること
+- ローカル D1 に `stats_prefecture` (`metric_key` 別 47 都道府県データ) と `metrics` (`key`, `title`, `unit`, `subtitle`, `normalization_basis` 等) が存在すること
 - OAuth 認証済み（`.env.local` に `GOOGLE_OAUTH_*` 3つ）
 - `.claude/scripts/youtube/upload.js` が存在すること
 - GES 背景動画が `apps/remotion/public/backgrounds/ges/landscape/` にあること
@@ -64,6 +64,8 @@ node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
 ### Phase 1: データ生成
 
 DB から rankingKey の最新年データを取得し、`data.json` + `ranking_items.json` を生成する。
+
+スキーマ参照: `metrics` (旧 `indicators`) + `stats_prefecture` (旧 `observations`)。`stats_prefecture.metric_key` で結合する (DDD migration 後の名称、2026-04 〜)。
 
 ```bash
 node -e "
@@ -76,10 +78,12 @@ const BASE = '.local/r2/sns/ranking/' + KEY;
 fs.mkdirSync(BASE + '/youtube/stills', { recursive: true });
 
 const db = new Database(DB_PATH, { readonly: true });
-const item = db.prepare('SELECT * FROM indicators WHERE ranking_key = ?').get(KEY);
-const years = db.prepare('SELECT DISTINCT year_code FROM observations WHERE category_code = ? ORDER BY year_code DESC').all(KEY);
+const item = db.prepare('SELECT key, title, subtitle, unit, normalization_basis FROM metrics WHERE key = ?').get(KEY);
+if (!item) { console.error('metric not found: ' + KEY); process.exit(1); }
+const years = db.prepare('SELECT DISTINCT year_code FROM stats_prefecture WHERE metric_key = ? ORDER BY year_code DESC').all(KEY);
+if (!years.length) { console.error('no data for metric: ' + KEY); process.exit(1); }
 const latestYear = years[0].year_code;
-const rows = db.prepare('SELECT area_code, area_name, CAST(value AS REAL) as value, year_name FROM observations WHERE category_code = ? AND year_code = ? ORDER BY CAST(value AS REAL) DESC').all(KEY, latestYear);
+const rows = db.prepare('SELECT area_code, area_name, CAST(value AS REAL) as value, year_name FROM stats_prefecture WHERE metric_key = ? AND year_code = ? ORDER BY CAST(value AS REAL) DESC').all(KEY, latestYear);
 const yearName = rows[0].year_name || latestYear + '年度';
 
 const ranked = rows.map((r, i) => ({ rank: i + 1, areaCode: r.area_code, areaName: r.area_name, value: parseFloat(r.value.toFixed(2)) }));
@@ -90,6 +94,8 @@ console.log('Generated: ' + ranked.length + ' entries, year=' + latestYear);
 db.close();
 "
 ```
+
+**事前チェック推奨**: rankingKey は `metrics.key` に存在する必要がある。backlog 企画 (`docs/22_YouTube企画/backlog/*.md`) の `関連 ranking_key` が古い名称のまま残っているケースがあるので、実行前に `sqlite3 ... "SELECT key FROM metrics WHERE key='<KEY>'"` で確認すること。
 
 ### Phase 2: Props 生成 + サムネイル レンダリング
 

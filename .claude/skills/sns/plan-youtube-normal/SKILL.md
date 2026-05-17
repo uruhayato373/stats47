@@ -11,7 +11,7 @@ YouTube の都道府県ランキング系動画の競合分析を行い、再生
 
 - サービスアカウント鍵: `stats47-*.json`（リポジトリルート）
 - `googleapis` パッケージがインストール済み
-- ローカル D1 に `indicators` が存在すること
+- ローカル D1 に `metrics` (旧 `indicators`、DDD migration 後の名称) が存在すること
 
 ## 手順
 
@@ -66,9 +66,9 @@ const videos = await youtube.videos.list({ id: videoIds, part: 'snippet,statisti
 
 ### Phase 3: 自社データとのマッチング
 
-ローカル D1 の `indicators`（`area_type='prefecture'`）から、投稿済みキーを除外した候補を取得。
+ローカル D1 の `metrics` テーブルから、投稿済みキーを除外した候補を取得（`SELECT key, title FROM metrics WHERE is_active = 1 AND key NOT IN (SELECT content_key FROM sns_posts WHERE platform = 'youtube' AND posted_at IS NOT NULL)`）。データ実体は `stats_prefecture` に `metric_key` で紐付く。
 
-各カテゴリの ranking_items を Phase 2 の再生数ランキングと照合し、以下のスコアで優先度を付ける:
+各カテゴリの metrics を Phase 2 の再生数ランキングと照合し、以下のスコアで優先度を付ける:
 
 ```
 スコア = 競合カテゴリ平均再生数 × データの鮮度（最新年が近いほど高い） × 意外性係数

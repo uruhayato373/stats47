@@ -45,38 +45,57 @@ function buildDescription({
  * ランキングページのパンくずリスト構造化データ（BreadcrumbList）を生成
  *
  * Google 検索結果にパンくずナビゲーションを表示するための JSON-LD を返す。
- * 構造: ホーム > ランキング > {ランキング名}
+ * 構造:
+ * - category 指定なし: ホーム > ランキング > {ランキング名}
+ * - category 指定あり: ホーム > ランキング > {カテゴリ名} > {ランキング名}
+ *
+ * category 階層を含めることで topical relationships を Google に伝え、
+ * 同カテゴリ内ランキングへの内部リンク評価を強める。
  */
 export function generateRankingBreadcrumbStructuredData({
   rankingItem,
+  category,
 }: {
   rankingItem: RankingItem;
+  category?: { key: string; name: string } | null;
 }): object {
   const baseUrl = getRequiredBaseUrl();
   const itemName = getRankingTitle(rankingItem);
 
+  const items: object[] = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "ホーム",
+      item: baseUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "ランキング",
+      item: `${baseUrl}/ranking`,
+    },
+  ];
+
+  if (category) {
+    items.push({
+      "@type": "ListItem",
+      position: items.length + 1,
+      name: category.name,
+      item: `${baseUrl}/category/${category.key}`,
+    });
+  }
+
+  items.push({
+    "@type": "ListItem",
+    position: items.length + 1,
+    name: itemName,
+  });
+
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "ホーム",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "ランキング",
-        item: `${baseUrl}/ranking`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: itemName,
-      },
-    ],
+    itemListElement: items,
   };
 }
 
@@ -115,6 +134,34 @@ export function generateRankingTopPageStructuredData({
   };
 }
 
+/**
+ * temporalCoverage 文字列を生成する。
+ *
+ * - selectedYear が単独 → そのまま返す
+ * - availableYears に複数年あり → ISO 8601 期間表記 "YYYY/YYYY" を返す (Schema.org 推奨)
+ * - 何も無い → undefined
+ */
+function buildTemporalCoverage(
+  selectedYear: string | undefined,
+  availableYears: { yearCode: string; yearName: string }[] | null | undefined,
+): string | undefined {
+  if (availableYears && availableYears.length >= 2) {
+    const years = availableYears
+      .map((y) => y.yearCode?.slice(0, 4))
+      .filter((y): y is string => /^\d{4}$/.test(y ?? ""))
+      .sort();
+    if (years.length >= 2) {
+      const earliest = years[0];
+      const latest = years[years.length - 1];
+      if (earliest !== latest) return `${earliest}/${latest}`;
+    }
+  }
+  if (selectedYear) {
+    return selectedYear.slice(0, 4);
+  }
+  return undefined;
+}
+
 export function generateRankingPageStructuredData({
   rankingItem,
   rankingValues,
@@ -140,6 +187,11 @@ export function generateRankingPageStructuredData({
     unit,
   });
 
+  const temporalCoverage = buildTemporalCoverage(
+    selectedYear,
+    rankingItem.availableYears,
+  );
+
   return {
     "@context": "https://schema.org",
     "@type": "Dataset",
@@ -151,12 +203,17 @@ export function generateRankingPageStructuredData({
       "都道府県",
       "ランキング",
       itemName,
+      rankingItem.categoryKey,
       selectedYear || "",
     ].filter(Boolean),
     // creator は統計を整理・公開した運営者 (Person)
     creator: buildPersonAsAuthor(baseUrl),
     // publisher は組織主体 (logo + sameAs 付き)
     publisher: buildPublisherOrganization(baseUrl),
+    // 更新日時 (Google freshness シグナル)
+    ...(rankingItem.updatedAt && {
+      dateModified: rankingItem.updatedAt,
+    }),
     license: {
       "@type": "CreativeWork",
       "@id": "https://www.stat.go.jp/info/riyou.html",
@@ -171,10 +228,14 @@ export function generateRankingPageStructuredData({
         url: rankingItem.source.url ,
         description: `${rankingItem.source.name || "e-Stat"}が提供する政府統計データセット。${rankingItem.source.name || "e-Stat"}は、日本の政府統計を統合的に提供するポータルサイトです。`,
       },
+      // E-E-A-T: 一次データの出典を明示
+      citation: {
+        "@type": "CreativeWork",
+        name: rankingItem.source.name,
+        url: rankingItem.source.url,
+      },
     }),
-    ...(selectedYear && {
-      temporalCoverage: `${selectedYear}`,
-    }),
+    ...(temporalCoverage && { temporalCoverage }),
     spatialCoverage: {
       "@type": "Place",
       name: "日本",

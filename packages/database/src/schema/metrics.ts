@@ -56,6 +56,8 @@ export const metrics = sqliteTable(
     faq: text("faq"),
     regionalAnalysis: text("regional_analysis"),
     insights: text("insights"),
+    /** 47 都道府県別解説 (PrefectureCommentaryContent を JSON 化した文字列) — SEO 長尾用 */
+    prefectureCommentary: text("prefecture_commentary"),
     createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },

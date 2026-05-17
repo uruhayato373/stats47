@@ -1,0 +1,103 @@
+{
+  "channel": {
+    "id": "UCdRiwDSX1aUd0dSd7Cs08Kg",
+    "title": "統計で見る都道府県 | stats47",
+    "subscriberCount": 31,
+    "viewCount": 78507,
+    "videoCount": 157
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-05-03",
+    "recentEnd": "2026-05-17",
+    "priorStart": "2026-04-19",
+    "priorEnd": "2026-05-03"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [
+    {
+      "videoId": "08no2ZRhTyo",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-05-10T00:48:39Z",
+      "ageHours": 168.3,
+      "views": 1,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "87gBJ3tZkeg",
+      "title": "都道府県別 大学数ランキングの推移（1975-2024）｜大学急増の50年",
+      "publishedAt": "2026-05-10T00:06:54Z",
+      "ageHours": 169,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "kuE5eNbxLZI",
+      "title": "都道府県別 刑法犯検挙率ランキング49年の変遷 治安の王者は島根72.7%",
+      "publishedAt": "2026-05-10T00:06:33Z",
+      "ageHours": 169,
+      "views": 4,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "t-sSgDzRQUs",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-05-10T00:06:32Z",
+      "ageHours": 169,
+      "views": 5,
+      "likes": 0,
+      "comments": 0
+    }
+  ],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_SEARCH": 71,
+      "SHORTS": 5,
+      "NOTIFICATION": 4,
+      "EXT_URL": 3,
+      "NO_LINK_OTHER": 1,
+      "SUBSCRIBER": 1,
+      "YT_CHANNEL": 0
+    },
+    "prior": {
+      "YT_SEARCH": 56,
+      "EXT_URL": 8,
+      "SHORTS": 5,
+      "SUBSCRIBER": 3,
+      "YT_CHANNEL": 1,
+      "YT_OTHER_PAGE": 1,
+      "PLAYLIST": 1,
+      "NOTIFICATION": 1
+    }
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 85
+    },
+    "prior": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 76
+    }
+  },
+  "viewsDelta": {
+    "recent": 85,
+    "prior": 76,
+    "changePct": 11.842105263157894
+  },
+  "verdict": "likely-shadowban",
+  "verdictReasons": [
+    "suspect videos = 4 (views < 50 after 48h)",
+    "suggested-video traffic -100.0% (prior 1 → recent 0)"
+  ]
+}

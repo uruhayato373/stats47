@@ -21,7 +21,7 @@ import { buildRankingContentPrompt } from "../services/prompts/ranking-content-p
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
 import { metrics, getDrizzle } from "@stats47/database/server";
 import { eq, isNotNull } from "drizzle-orm";
-import type { FaqContent } from "../types";
+import type { FaqContent, PrefectureCommentaryContent } from "../types";
 
 const AREA_TYPE = "prefecture";
 
@@ -191,7 +191,12 @@ async function processOne(
     const raw = await callAI(model, prompt);
     const stripped = stripCodeFence(raw.trim());
 
-    let parsed: { faq?: FaqContent; regionalAnalysis?: string; insights?: string };
+    let parsed: {
+      faq?: FaqContent;
+      regionalAnalysis?: string;
+      insights?: string;
+      prefectureCommentary?: PrefectureCommentaryContent;
+    };
     try {
       parsed = JSON.parse(stripped);
     } catch {
@@ -206,6 +211,9 @@ async function processOne(
       faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
       regionalAnalysis: parsed.regionalAnalysis ?? null,
       insights: parsed.insights ?? null,
+      prefectureCommentary: parsed.prefectureCommentary
+        ? JSON.stringify(parsed.prefectureCommentary)
+        : null,
       yearCode,
     });
 
