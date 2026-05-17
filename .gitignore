@@ -154,3 +154,6 @@ inspect-knip.js
 # Claude Code セッション管理（ローカル専用）
 .claude/scheduled_tasks.lock
 .claude/scheduled_tasks.json
+
+# e-Stat city meta cache (巨大ローカルキャッシュ、コミット不要)
+.claude/state/estat-city-meta-cache/
