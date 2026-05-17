@@ -59,8 +59,11 @@ describe("RankingFaqSection", () => {
     });
 
     const html = renderFaq(faqJson);
-    // script タグ内のコンテンツを抽出 (case-insensitive で大文字も拾う)
-    const match = html.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
+    // script タグ内のコンテンツを抽出。
+    // CodeQL js/bad-tag-filter 回避のため case-insensitive + \s* で whitespace 版にも対応:
+    //   - <SCRIPT>, <script type="">, <script foo bar>
+    //   - </script>, </script >, </SCRIPT>
+    const match = html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i);
     expect(match).not.toBeNull();
     const scriptContent = match![1];
 
