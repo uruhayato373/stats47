@@ -7,7 +7,7 @@
 
 export function SidebarSkeleton() {
   return (
-    <div className="w-60 h-full bg-sidebar border-r border-border flex flex-col">
+    <div className="hidden lg:flex w-60 shrink-0 sticky top-16 self-start h-[calc(100vh-4rem)] bg-sidebar border-r border-border flex-col">
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4">
         {/* Home Section */}
