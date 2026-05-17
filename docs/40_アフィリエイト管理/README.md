@@ -1,3 +1,9 @@
+---
+type: affiliate
+status: active
+tags: [banner, ssot]
+---
+
 # アフィリエイトバナー管理
 
 stats47 が掲載しているアフィリエイトバナーの単一情報源（SSOT）。

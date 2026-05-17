@@ -88,8 +88,7 @@
       { "dir": "30_note記事企画", "role": "note企画 (backlog/、A〜D系)" },
       { "dir": "31_note記事原稿", "role": "下書き原稿" },
       { "dir": "40_アフィリエイト管理", "role": "アフィリエイト商材管理" },
-      { "dir": "50_Issues", "role": "feature/automation/UI改善 backlog" },
-      { "dir": "80_参考資料", "role": "白書PDF等" }
+      { "dir": "50_Issues", "role": "feature/automation/UI改善 backlog" }
     ]
   },
   "contentStrategy": {

@@ -1,3 +1,9 @@
+---
+type: tech-design
+status: active
+tags: [seo, ogp, tooling]
+---
+
 # SEO / OGP 検証ツール
 
 本番環境の SEO 画像・メタ情報が正しく設定されているか確認するためのツール一覧。

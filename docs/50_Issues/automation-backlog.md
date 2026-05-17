@@ -271,3 +271,59 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 - `.claude/skills/management/weekly-review/SKILL.md` Phase 1 Agent C
 - 検証スクリプト原型: `/tmp/ga4-pollution-check.cjs` / `/tmp/ga4-clean-compare.cjs`（W20 監査で使用）
 - 監査詳細: `docs/03_週次運用/週次レビュー/2026-W20.md#ga4-bot-混入監査-2026-05-16`
+
+---
+
+## #291 Claude Code 利用品質改善 (Hooks / MCP D1 / safe-* スキル)
+
+## 背景
+
+2026-05-15 に 90 セッション・177 時間分の Claude Code 利用ログを分析した結果、以下の頻発課題を確認:
+
+- 誤診断ループ (修正失敗の繰り返し)
+- 環境起因の中断 (Cloudflare token 期限切れ / Cache Purge 権限不足 / DB スキーマドリフト)
+- Git 操作ミス (feature ブランチ経由せず develop に直 commit / 大量アセット誤 stage)
+- UI 修正の反復失敗 (仮説なき試行)
+- Issue 完了アウトカム記録漏れ
+
+## 提案実装 (4 件未着手)
+
+1. **Hooks ブランチチェック** — `.claude/settings.json` `PreToolUse` で Bash 時に現在ブランチ確認、`feature/*` 以外なら停止
+2. **MCP D1 サーバー追加** — `claude mcp add d1 -- npx -y @cloudflare/mcp-server-d1` で DB クエリ前にスキーマ自動インスペクト
+3. **`safe-commit` スキル** — `.claude/skills/dev/safe-commit/SKILL.md` でブランチチェック + `git status` 表示 + アセット除外確認 + commit & push
+4. **`safe-deploy` スキル** — ビルド + 型チェック + デプロイ + 本番 URL スモークテスト (5 URL × HTTP 200) + 失敗時自動診断
+
+CLAUDE.md への運用ルール追記 (Git ワークフロー / DB 操作 / Issue 追跡 / デプロイ前チェックリスト / UI 修正ルール) は別途 Edit で実施。
+
+## 想定難度・工数
+
+- 各 S 〜 M (合計 4-6h)
+
+## 関連
+
+- 元分析 (削除済み 2026-05-17): `docs/insights-action-plan.md` (git log で参照可)
+- `.claude/rules/evidence-based-judgment.md` — 効果検証ルール
+
+---
+
+## #292 e-Stat 以外データソース統合 (世界 / 国内追加)
+
+## 背景
+
+2026 年早期に「日本以外の統計データ」「気象庁・RESAS 等の国内追加データソース」統合計画を立てたが未着手。当面 stats47 のコア (e-Stat 47 都道府県) に注力するため、要件発生時に再評価する。
+
+## 提案実装
+
+要件発生時に以下を検討:
+
+- **世界統計**: World Bank Open Data API / OECD API / WHO データ — 日本の世界における位置付け・国別ランキング
+- **国内追加**: 気象庁 (天気予報 + 過去気象データ)、RESAS (地域経済分析システム)、国土交通省データプラットフォーム — 都道府県別の補完指標
+
+## 想定難度・工数
+
+- L 〜 XL (新規データソースごとに数日〜数週間)
+
+## 関連
+
+- 元計画 (削除済み 2026-05-17): `docs/80_参考資料/日本の統計.md` `docs/80_参考資料/世界の統計.md` (git log で参照可)
+- 既存: `docs/01_技術設計/09_国土交通データプラットフォーム.md`

@@ -5,10 +5,10 @@
  * Usage:
  *   NODE_ENV=development NODE_OPTIONS='--conditions react-server' \
  *     npx tsx packages/ai-content/src/scripts/generate-parallel.ts \
- *     [--model claude|gemini] [--concurrency N] [--limit N] [--force]
+ *     [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] [--limit N] [--force]
  *
  * Options:
- *   --model       AI モデル: claude (default) | gemini
+ *   --model       AI モデル: claude-haiku (default) | claude-sonnet | claude-opus | gemini
  *   --concurrency 並列数 (default: 5)
  *   --limit       処理件数上限 (default: 全件)
  *   --force       既存レコードも再生成
@@ -31,7 +31,7 @@ const AREA_TYPE = "prefecture";
 
 function parseArgs() {
   const argv = process.argv.slice(2);
-  let model = "claude";
+  let model = "claude-haiku";
   let concurrency = 5;
   let limit = Infinity;
   let force = false;
@@ -79,10 +79,16 @@ function callAI(model: string, promptContent: string): Promise<string> {
     let cmd: string;
     let args: string[];
 
-    if (model === "claude") {
+    if (model.startsWith("claude")) {
       cmd = "claude";
-      // Haiku は Sonnet より 5-10x 高速（~10-30s vs ~2-3min per item）
-      args = ["-p", "", "--output-format", "text", "--model", "claude-haiku-4-5-20251001"];
+      // モデルID マッピング:
+      //   claude-haiku   → Haiku 4.5 (~10-30s/件、最速)
+      //   claude-sonnet  → Sonnet 4.6 (~30-60s/件、高品質)
+      //   claude-opus    → Opus 4.7 (~60-120s/件、最高品質)
+      let modelId = "claude-haiku-4-5-20251001";
+      if (model === "claude-sonnet") modelId = "claude-sonnet-4-6";
+      else if (model === "claude-opus") modelId = "claude-opus-4-7";
+      args = ["-p", "", "--output-format", "text", "--model", modelId];
     } else {
       cmd = "gemini";
       args = ["-p", "", "-o", "text"];
@@ -263,15 +269,18 @@ async function main() {
       yearCode: item.latestYear!.yearCode.replace(/年度?$/, ""),
     }));
   } else {
+    // デフォルト: prefecture_commentary が NULL のものを再生成対象とする
+    // (faq/insights/regionalAnalysis が既にあっても、prefectureCommentary 不足なら 4 フィールド全部 regen)
+    // → 古い AI コンテンツも Claude で品質統一されるため意図的
     const db = getDrizzle();
-    const existingRows = await db
+    const completedRows = await db
       .select({ rankingKey: metrics.key })
       .from(metrics)
-      .where(isNotNull(metrics.yearCode));
-    const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
+      .where(isNotNull(metrics.prefectureCommentary));
+    const completedKeys = new Set(completedRows.map((r) => r.rankingKey));
 
     pendingItems = allItems
-      .filter((item) => !existingKeys.has(item.rankingKey))
+      .filter((item) => !completedKeys.has(item.rankingKey))
       .map((item) => ({
         rankingKey: item.rankingKey,
         rankingName: item.title ?? item.rankingName,

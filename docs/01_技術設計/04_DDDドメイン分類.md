@@ -1,3 +1,9 @@
+---
+type: tech-design
+status: active
+tags: [ddd, architecture]
+---
+
 # DDDドメイン分類
 
 stats47 のドメインを DDD の観点から分類する。

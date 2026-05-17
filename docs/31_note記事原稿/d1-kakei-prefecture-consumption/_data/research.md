@@ -1,3 +1,9 @@
+---
+type: note-research
+status: active
+tags: [kakei-chousa, consumption-profile]
+---
+
 # 家計調査 都道府県別消費プロファイル データ分析結果
 
 ## データソース

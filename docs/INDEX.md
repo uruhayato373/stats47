@@ -21,7 +21,6 @@
 | `31_note記事原稿/` | note 記事の下書き原稿 | 公開後 `.local/r2/note/` へ移動し削除 |
 | `40_アフィリエイト管理/` | アフィリエイト商材・配置管理 | 内容更新 |
 | `50_Issues/` | 未着手の機能・自動化・UI 改善 backlog | `feature-backlog.md` / `automation-backlog.md` / `ui-improvements.md` |
-| `80_参考資料/` | 白書 PDF 等の外部資料 | 追加のみ |
 
 ## 00_プロジェクト管理/ の固定構成
 
@@ -89,7 +88,7 @@ docs/: status: archived に変更 / Issues: PR で close
 
 - `00_プロジェクト管理/` に戦略文書を追加する (01〜04 + 集計ダッシュボード 05 で固定。新規戦略は既存 4 ファイルへの Edit で対応)
 - 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` `05_/` の上書き型ディレクトリに置く (週次・レビュー系の `YYYY-Www.md` / `YYYY-MM-DD.md` は OK)
-- 実装完了した計画書を `02_実装計画/` 直下に残す (`archive/` へ移動)
+- 実装完了した計画書を `02_実装計画/` `01_技術設計/` 直下に残す。各カテゴリ直下に `archive/` を作成して移動するか、git rm で完全削除して履歴に残す (`/Users/minamidaisuke/.claude/plans/docs-kind-bear.md` 2026-05-17 の整理方針)
 - weekly / review / improvement 系スキルから `gh issue create` する (`docs/` 配下に Write すること)
 
 ## frontmatter 規約
