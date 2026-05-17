@@ -60,12 +60,14 @@ describe("RankingFaqSection", () => {
 
     const html = renderFaq(faqJson);
     // script タグ内のコンテンツを抽出。
-    // CodeQL js/bad-tag-filter 回避のため case-insensitive + \s* で whitespace 版にも対応:
-    //   - <SCRIPT>, <script type="">, <script foo bar>
-    //   - </script>, </script >, </SCRIPT>
-    const match = html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i);
-    expect(match).not.toBeNull();
-    const scriptContent = match![1];
+    // regex は CodeQL js/bad-tag-filter が「adversarial input への防御に
+    // 弱い」と過剰警告するため、test 用途では String API ベースで素直に抽出する。
+    const startTagIdx = html.toLowerCase().indexOf("<script");
+    expect(startTagIdx).toBeGreaterThanOrEqual(0);
+    const openTagEnd = html.indexOf(">", startTagIdx) + 1;
+    const endTagIdx = html.toLowerCase().indexOf("</script", openTagEnd);
+    expect(endTagIdx).toBeGreaterThan(openTagEnd);
+    const scriptContent = html.slice(openTagEnd, endTagIdx);
 
     // script コンテンツ内に生の "<" が無いこと (全て < に escape されている)
     expect(scriptContent).not.toContain("<");
