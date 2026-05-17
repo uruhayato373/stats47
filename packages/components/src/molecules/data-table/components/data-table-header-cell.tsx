@@ -25,6 +25,7 @@ export function DataTableHeaderCell<TData, TValue>({
     if (header.isPlaceholder) {
         return (
             <th
+                scope="col"
                 style={{ width, minWidth }}
                 className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             />
@@ -34,6 +35,7 @@ export function DataTableHeaderCell<TData, TValue>({
     if (!canSort) {
         return (
             <th
+                scope="col"
                 style={{ width, minWidth }}
                 className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             >
@@ -44,6 +46,7 @@ export function DataTableHeaderCell<TData, TValue>({
 
     return (
         <th
+            scope="col"
             style={{ width, minWidth }}
             className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
         >

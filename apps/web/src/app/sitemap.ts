@@ -113,6 +113,7 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
     })
     .map((row) => ({
       url: `${BASE_URL}/ranking/${row.rankingKey}`,
+      lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
       changeFrequency: "monthly" as const,
       priority: 0.9,
     }));

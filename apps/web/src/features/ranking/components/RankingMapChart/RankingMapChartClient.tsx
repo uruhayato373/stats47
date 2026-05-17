@@ -185,21 +185,31 @@ export function RankingMapChartClient({
             </div>
           ) : (
             <>
-              <LeafletChoroplethMap
-                key={`${areaType}-${currentTile.url}`}
-                topology={activeTopology}
-                data={filteredData}
-                colorConfig={mapConfig}
-                tileUrl={currentTile.url}
-                attribution={currentTile.attribution}
-                unit={rankingItem.unit}
-                onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
-                selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
-                borderColor={isDark ? "#475569" : "#94a3b8"}
-                className="h-[500px]"
-                valueDisplay={rankingItem.valueDisplay ?? undefined}
-                showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
-              />
+              {/* SR-only summary: 地図の代替テキスト (a11y + SEO) */}
+              <p className="sr-only">
+                {rankingItem.title}の{areaType === "city" ? "市区町村別" : "都道府県別"}カラーマップ。
+                値が高いほど濃い色で表示されます。詳細データは下のテーブルを参照してください。
+              </p>
+              <div
+                role="img"
+                aria-label={`${rankingItem.title}の${areaType === "city" ? "市区町村" : "都道府県"}別カラーマップ`}
+              >
+                <LeafletChoroplethMap
+                  key={`${areaType}-${currentTile.url}`}
+                  topology={activeTopology}
+                  data={filteredData}
+                  colorConfig={mapConfig}
+                  tileUrl={currentTile.url}
+                  attribution={currentTile.attribution}
+                  unit={rankingItem.unit}
+                  onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
+                  selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
+                  borderColor={isDark ? "#475569" : "#94a3b8"}
+                  className="h-[500px]"
+                  valueDisplay={rankingItem.valueDisplay ?? undefined}
+                  showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
+                />
+              </div>
               <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
             </>
           )}

@@ -327,6 +327,22 @@ export function RankingKeyPageClient({
         });
     };
 
+    // 最終更新日とデータ年度の表示用 (SEO freshness)
+    const formattedUpdated = (() => {
+        if (!rankingItem.updatedAt) return null;
+        try {
+            const d = new Date(rankingItem.updatedAt);
+            if (Number.isNaN(d.getTime())) return null;
+            return d.toISOString().slice(0, 10);
+        } catch {
+            return null;
+        }
+    })();
+    const latestYearName =
+        rankingItem.availableYears?.find((y) => y.yearCode === currentYear)?.yearName ??
+        rankingItem.latestYear?.yearName ??
+        null;
+
     return (
         <div className="container mx-auto px-4 py-4">
             <h1 className="text-2xl font-bold">
@@ -336,6 +352,21 @@ export function RankingKeyPageClient({
                     return detail ? <span className="text-muted-foreground font-normal">（{detail}）</span> : null;
                 })()}
             </h1>
+
+            {/* データ年度 + 最終更新日 (SEO freshness + UX) */}
+            {(formattedUpdated || latestYearName) && (
+                <p className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                    {latestYearName && <span>データ年度: {latestYearName}</span>}
+                    {formattedUpdated && (
+                        <span>
+                            最終更新:{" "}
+                            <time dateTime={rankingItem.updatedAt ?? formattedUpdated}>
+                                {formattedUpdated}
+                            </time>
+                        </span>
+                    )}
+                </p>
+            )}
 
             {/* normalization_basis グループトグル（別URL切替）*/}
             {groupMembers.length > 1 && (

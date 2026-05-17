@@ -55,6 +55,24 @@ import { ThemeProvider } from "@/providers/theme-provider";
 export const metadata = generateRootMetadata();
 
 /**
+ * Viewport / themeColor (Next.js 15 の viewport export)
+ * - themeColor: iOS Safari ステータスバー / PWA タイル色
+ * - light/dark 両モード対応
+ *
+ * `import type { Viewport } from "next"` を使うと eslint import/order が
+ * `next` (bare) と他の external の並び順 + group 分離で恒久的に衝突するため、
+ * inline 型注釈 (`satisfies import("next").Viewport`) で代替する。
+ */
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+} satisfies import("next").Viewport;
+
+/**
  * ルートレイアウトコンポーネント
  *
  * @param children - レイアウト内に表示するコンテンツ（各ページのコンポーネント）
