@@ -1,3 +1,9 @@
+---
+type: tech-design
+status: active
+tags: [gis, mlit, data-source]
+---
+
 # MLIT KSJ（国土数値情報）モジュール
 
 国土交通省「国土数値情報ダウンロードサービス」の GIS データを、ダウンロード → TopoJSON 変換 → R2 保存するパイプライン。

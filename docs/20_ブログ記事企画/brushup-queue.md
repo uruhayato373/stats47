@@ -1,3 +1,9 @@
+---
+type: blog-plan
+status: active
+tags: [brushup, ctr-improvement]
+---
+
 # ブログ改善優先度キュー
 
 生成日: 2026-05-10 / GSC 参照週: 2026-W19 / ブログ記事数: 114 / 平均 CTR: 2.65%

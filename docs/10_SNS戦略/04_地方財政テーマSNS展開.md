@@ -1,3 +1,9 @@
+---
+type: sns-strategy
+status: active
+tags: [localfinance, sns]
+---
+
 # SNS 展開計画 — 地方財政テーマ（2026年3月）
 
 > 作成: 2026-03-12
