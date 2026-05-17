@@ -27,6 +27,10 @@ export interface DataTableProps<TData> {
   rowClassName?: (row: TData) => string | undefined;
   /** ページネーションの総件数ラベルを非表示にする */
   showRowCount?: boolean;
+  /** テーブルのアクセシブル名 (aria-label) — スクリーンリーダー向け */
+  ariaLabel?: string;
+  /** テーブルの caption (sr-only で SEO + a11y、視覚的には非表示) */
+  caption?: string;
 }
 
 export interface DataTableColumnMeta {

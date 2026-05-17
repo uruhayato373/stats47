@@ -12,6 +12,7 @@ const mockItem: Partial<RankingItem> = {
     unit: "万円",
     latestYear: { yearCode: "2021", yearName: "2021年度" },
     availableYears: [{ yearCode: "2021", yearName: "2021年度" }],
+    updatedAt: "2026-05-17T03:00:00.000Z",
 };
 
 describe("generateRankingPageMetaData", () => {
@@ -46,14 +47,45 @@ describe("generateRankingPageMetaData", () => {
         expect((result.twitter as Record<string, unknown>)?.card).toBe("summary_large_image");
     });
 
-    it("openGraph.images を設定しない（opengraph-image.tsx に委ねる）", () => {
+    it("openGraph.images / twitter.images を ranking 別動的画像 URL で明示設定する", () => {
         const result = generateRankingPageMetaData({
             rankingItem: mockItem as RankingItem,
             areaType: "prefecture",
         });
 
-        expect((result.openGraph as Record<string, unknown>)?.images).toBeUndefined();
-        expect((result.twitter as Record<string, unknown>)?.images).toBeUndefined();
+        const og = result.openGraph as Record<string, unknown>;
+        const ogImages = og.images as Array<Record<string, unknown>>;
+        expect(ogImages).toHaveLength(1);
+        expect(ogImages[0].url).toBe("/ranking/annual-sales-amount-per-employee/opengraph-image");
+        expect(ogImages[0].width).toBe(1200);
+        expect(ogImages[0].height).toBe(630);
+
+        const twitter = result.twitter as Record<string, unknown>;
+        const twImages = twitter.images as string[];
+        expect(twImages).toEqual(["/ranking/annual-sales-amount-per-employee/opengraph-image"]);
+    });
+
+    it("openGraph.url が canonical path を指すこと", () => {
+        const result = generateRankingPageMetaData({
+            rankingItem: mockItem as RankingItem,
+            areaType: "prefecture",
+        });
+
+        const og = result.openGraph as Record<string, unknown>;
+        expect(og.url).toBe("/ranking/annual-sales-amount-per-employee");
+    });
+
+    it("updatedAt があれば article:modified_time + openGraph.modifiedTime に出力される", () => {
+        const result = generateRankingPageMetaData({
+            rankingItem: mockItem as RankingItem,
+            areaType: "prefecture",
+        });
+
+        const og = result.openGraph as Record<string, unknown>;
+        expect(og.modifiedTime).toBe("2026-05-17T03:00:00.000Z");
+
+        const other = result.other as Record<string, unknown> | undefined;
+        expect(other?.["article:modified_time"]).toBe("2026-05-17T03:00:00.000Z");
     });
 
     it("canonical URLが正しく設定されていること", () => {

@@ -158,6 +158,8 @@ export function RankingDataTable({
           showRowCount={false}
           className="h-full flex flex-col"
           getRowId={(row) => row.areaCode}
+          ariaLabel={`${rankingItem?.title ?? "ランキング"}の都道府県別データ表`}
+          caption={`${rankingItem?.title ?? "ランキング"}の47都道府県別ランキング表。順位・都道府県名・値・偏差値の列。`}
         />
       </CardContent>
       {cardFooter && (

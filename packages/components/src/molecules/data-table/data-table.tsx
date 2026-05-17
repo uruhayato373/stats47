@@ -40,6 +40,8 @@ export function DataTable<TData>({
     onRowClick,
     rowClassName,
     showRowCount = true,
+    ariaLabel,
+    caption,
 }: DataTableProps<TData> & { className?: string }) {
     // インデックス・行選択カラムを追加
     const columnsWithExtras = useIndexColumn(columns, showIndex, enableRowSelection);
@@ -87,7 +89,13 @@ export function DataTable<TData>({
                     />
                 ) : (
                     <div className="flex-1 overflow-auto relative min-h-0">
-                        <table className="w-full caption-bottom text-sm table-fixed">
+                        <table
+                            className="w-full caption-bottom text-sm table-fixed"
+                            {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
+                        >
+                            {caption && (
+                                <caption className="sr-only">{caption}</caption>
+                            )}
                             <DataTableHeader table={table} enableSorting={enableSorting} />
                             <DataTableBody table={table} emptyMessage={emptyMessage} onRowClick={onRowClick} rowClassName={rowClassName} />
                         </table>

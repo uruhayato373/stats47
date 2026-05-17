@@ -74,12 +74,12 @@ export function RankingPrefectureCommentarySection({
       <Accordion type="single" collapsible>
         <AccordionItem value="root" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">
-            <h3
+            <h2
               id="prefecture-commentary-heading"
               className="text-lg font-semibold"
             >
               都道府県別の解説（全{sorted.length}県）
-            </h3>
+            </h2>
           </AccordionTrigger>
           <AccordionContent className="px-6 pb-6 pt-0">
             <p className="mb-3 text-sm text-muted-foreground">
