@@ -1,0 +1,128 @@
+[
+  {
+    "date": "2026-05-18",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "annual-precipitation-days"
+  },
+  {
+    "date": "2026-05-19",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "annual-sunshine-duration"
+  },
+  {
+    "date": "2026-05-20",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "disposable-income-worker-households"
+  },
+  {
+    "date": "2026-05-21",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "real-disposable-income"
+  },
+  {
+    "date": "2026-05-22",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-camping"
+  },
+  {
+    "date": "2026-05-23",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "criminal-arrest-rate"
+  },
+  {
+    "date": "2026-05-24",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-cinema"
+  },
+  {
+    "date": "2026-05-25",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-cooking"
+  },
+  {
+    "date": "2026-05-26",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-gardening"
+  },
+  {
+    "date": "2026-05-27",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-karaoke"
+  },
+  {
+    "date": "2026-05-28",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "local-tax-ratio-pref-finance"
+  },
+  {
+    "date": "2026-05-29",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-manga"
+  },
+  {
+    "date": "2026-05-30",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-photography"
+  },
+  {
+    "date": "2026-05-31",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-reading"
+  },
+  {
+    "date": "2026-06-01",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "hobby-participation-rate-video-games"
+  },
+  {
+    "date": "2026-06-02",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "traffic-accident-deaths-per-100k"
+  },
+  {
+    "date": "2026-06-03",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "per-capita-kenmin-shotoku-h27"
+  },
+  {
+    "date": "2026-06-04",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "annual-income-per-household"
+  },
+  {
+    "date": "2026-06-05",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "night-soil-treatment-population-ratio"
+  },
+  {
+    "date": "2026-06-06",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "suicide-rate-per-100k"
+  },
+  {
+    "date": "2026-06-07",
+    "type": "image",
+    "domain": "ranking",
+    "content_key": "number-of-hotel-rooms"
+  }
+]
