@@ -263,15 +263,18 @@ async function main() {
       yearCode: item.latestYear!.yearCode.replace(/年度?$/, ""),
     }));
   } else {
+    // デフォルト: prefecture_commentary が NULL のものを再生成対象とする
+    // (faq/insights/regionalAnalysis が既にあっても、prefectureCommentary 不足なら 4 フィールド全部 regen)
+    // → 古い AI コンテンツも Claude で品質統一されるため意図的
     const db = getDrizzle();
-    const existingRows = await db
+    const completedRows = await db
       .select({ rankingKey: metrics.key })
       .from(metrics)
-      .where(isNotNull(metrics.yearCode));
-    const existingKeys = new Set(existingRows.map((r) => r.rankingKey));
+      .where(isNotNull(metrics.prefectureCommentary));
+    const completedKeys = new Set(completedRows.map((r) => r.rankingKey));
 
     pendingItems = allItems
-      .filter((item) => !existingKeys.has(item.rankingKey))
+      .filter((item) => !completedKeys.has(item.rankingKey))
       .map((item) => ({
         rankingKey: item.rankingKey,
         rankingName: item.title ?? item.rankingName,
