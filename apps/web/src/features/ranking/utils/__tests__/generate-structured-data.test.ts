@@ -1,6 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { generateRankingPageStructuredData, generateRankingTopPageStructuredData } from "../generate-structured-data";
+import {
+    generateRankingBreadcrumbStructuredData,
+    generateRankingPageStructuredData,
+    generateRankingTopPageStructuredData,
+} from "../generate-structured-data";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
@@ -15,9 +19,15 @@ const mockItem: Partial<RankingItem> = {
     rankingKey: "annual-sales-amount-per-employee",
     title: "商業年間商品販売額",
     unit: "万円",
+    categoryKey: "economy",
     latestYear: { yearCode: "2021", yearName: "2021年度" },
-    availableYears: [{ yearCode: "2021", yearName: "2021年度" }],
+    availableYears: [
+        { yearCode: "2015", yearName: "2015年度" },
+        { yearCode: "2018", yearName: "2018年度" },
+        { yearCode: "2021", yearName: "2021年度" },
+    ],
     source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
+    updatedAt: "2026-05-17T01:23:45.000Z",
 };
 
 const mockValues: Partial<RankingValue>[] = [
@@ -88,6 +98,78 @@ describe("generateRankingPageStructuredData", () => {
         expect(result.name).toBe("商業年間商品販売額");
         expect(result.url).toBe("https://test.stats47.jp/ranking/annual-sales-amount-per-employee");
         expect(result.description).toContain("商業年間商品販売額の都道府県別ランキング");
+    });
+
+    it("dateModified が rankingItem.updatedAt から付与されること", () => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: mockItem as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+
+        expect(result.dateModified).toBe("2026-05-17T01:23:45.000Z");
+    });
+
+    it("citation が source URL を指し示すこと (E-E-A-T)", () => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: mockItem as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+
+        const citation = result.citation as JsonLd;
+        expect(citation["@type"]).toBe("CreativeWork");
+        expect(citation.name).toBe("社会・人口統計体系");
+        expect(citation.url).toBe("https://www.stat.go.jp/data/ssds/index.htm");
+    });
+
+    it("availableYears が複数年あれば temporalCoverage が ISO 期間表記になること", () => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: mockItem as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+
+        // 2015 〜 2021 の範囲
+        expect(result.temporalCoverage).toBe("2015/2021");
+    });
+
+    it("categoryKey が keywords に含まれること", () => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: mockItem as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+
+        expect(result.keywords as string[]).toContain("economy");
+    });
+});
+
+describe("generateRankingBreadcrumbStructuredData", () => {
+    it("category 指定なしでは 3 階層 (ホーム > ランキング > 名前)", () => {
+        const result = generateRankingBreadcrumbStructuredData({
+            rankingItem: mockItem as RankingItem,
+        }) as JsonLd;
+
+        const items = result.itemListElement as JsonLd[];
+        expect(items).toHaveLength(3);
+        expect(items[0].name).toBe("ホーム");
+        expect(items[1].name).toBe("ランキング");
+        expect(items[2].name).toBe("商業年間商品販売額");
+    });
+
+    it("category 指定ありで 4 階層 (ホーム > ランキング > カテゴリ > 名前)", () => {
+        const result = generateRankingBreadcrumbStructuredData({
+            rankingItem: mockItem as RankingItem,
+            category: { key: "economy", name: "経済" },
+        }) as JsonLd;
+
+        const items = result.itemListElement as JsonLd[];
+        expect(items).toHaveLength(4);
+        expect(items[2].name).toBe("経済");
+        expect(items[2].item).toBe("https://test.stats47.jp/category/economy");
+        expect(items[3].name).toBe("商業年間商品販売額");
+        expect(items[3].position).toBe(4);
     });
 });
 

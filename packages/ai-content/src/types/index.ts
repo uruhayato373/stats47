@@ -12,6 +12,28 @@ export interface FaqContent {
   items: FaqItem[];
 }
 
+// ------------------------------------------------------------
+// 都道府県別解説（SEO 長尾コンテンツ）
+// 各県の順位・値・短い解説を保持する。
+// ------------------------------------------------------------
+
+export interface PrefectureCommentaryItem {
+  /** 5桁の都道府県コード (例: "13000") */
+  areaCode: string;
+  /** 都道府県名 (例: "東京都") */
+  areaName: string;
+  /** 順位 (1-47) */
+  rank: number;
+  /** 値 (単位は ranking の unit と一致) */
+  value: number;
+  /** 60〜120 字の解説 (相対位置・地域内の位置づけ等) */
+  commentary: string;
+}
+
+export interface PrefectureCommentaryContent {
+  items: PrefectureCommentaryItem[];
+}
+
 // ============================================================
 // ダッシュボードページ向け型定義
 // ============================================================

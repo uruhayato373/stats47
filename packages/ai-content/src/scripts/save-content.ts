@@ -11,7 +11,7 @@
 
 import "dotenv/config";
 import { upsertRankingAiContent } from "../repositories/upsert-ranking-ai-content";
-import type { FaqContent } from "../types";
+import type { FaqContent, PrefectureCommentaryContent } from "../types";
 
 function parseArgs(): { key: string; year: string } {
   const argv = process.argv.slice(2);
@@ -57,7 +57,12 @@ async function main() {
 
   const stripped = stripCodeFence(raw);
 
-  let parsed: { faq?: FaqContent; regionalAnalysis?: string; insights?: string };
+  let parsed: {
+    faq?: FaqContent;
+    regionalAnalysis?: string;
+    insights?: string;
+    prefectureCommentary?: PrefectureCommentaryContent;
+  };
   try {
     parsed = JSON.parse(stripped);
   } catch {
@@ -71,6 +76,9 @@ async function main() {
     faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
     regionalAnalysis: parsed.regionalAnalysis ?? null,
     insights: parsed.insights ?? null,
+    prefectureCommentary: parsed.prefectureCommentary
+      ? JSON.stringify(parsed.prefectureCommentary)
+      : null,
     yearCode: year,
   });
 

@@ -18,6 +18,7 @@ export async function findRankingAiContent(
       faq: metrics.faq,
       regionalAnalysis: metrics.regionalAnalysis,
       insights: metrics.insights,
+      prefectureCommentary: metrics.prefectureCommentary,
       createdAt: metrics.createdAt,
       updatedAt: metrics.updatedAt,
     })

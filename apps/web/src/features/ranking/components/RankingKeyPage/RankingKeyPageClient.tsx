@@ -67,6 +67,8 @@ interface RankingKeyPageClientProps {
     insightsSection?: ReactNode;
     regionalAnalysisSection?: ReactNode;
     faqSection?: ReactNode;
+    /** 47 都道府県別の解説セクション (SEO 長尾) */
+    prefectureCommentarySection?: ReactNode;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
     parentAreaCode?: string;
     /** 右サイドバーに表示するコンテンツ（Server Component を注入） */
@@ -91,6 +93,7 @@ export function RankingKeyPageClient({
     insightsSection,
     regionalAnalysisSection,
     faqSection,
+    prefectureCommentarySection,
     parentAreaCode,
     sidebarSection,
     cityRankingItem,
@@ -463,6 +466,9 @@ export function RankingKeyPageClient({
 
                     {/* 地域別の傾向（折りたたみ） */}
                     {regionalAnalysisSection}
+
+                    {/* 都道府県別の解説（折りたたみ、47県、SEO 長尾） */}
+                    {prefectureCommentarySection}
 
                     {/* 相関分析セクション */}
                     {correlationSection}

@@ -54,6 +54,7 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
+import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
   generateRankingPageMetaData,
@@ -63,6 +64,7 @@ import {
   AiContentAccordion,
   AiMarkdownContent,
   RankingFaqSection,
+  RankingPrefectureCommentarySection,
   CorrelationSectionSkeleton,
   RankingPageCardsSkeleton,
   SurveyCard,
@@ -201,7 +203,14 @@ export default async function RankingKeyPage({
         .catch(() => [] as GroupRankingItem[])
     : Promise.resolve([] as GroupRankingItem[]);
 
-  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers] = await Promise.all([
+  // --- 3e. カテゴリメタ取得（breadcrumb 拡張用） ---
+  const categoryPromise = rankingItem.categoryKey
+    ? findCategoryByKey(rankingItem.categoryKey)
+        .then((r) => (isOk(r) ? r.data : null))
+        .catch(() => null)
+    : Promise.resolve(null);
+
+  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers, category] = await Promise.all([
     rankingValuesPromise,
     topologyPromise,
     aiContentPromise,
@@ -209,7 +218,12 @@ export default async function RankingKeyPage({
     surveyNamePromise,
     allSurveysPromise,
     groupMembersPromise,
+    categoryPromise,
   ]);
+
+  const breadcrumbCategory = category
+    ? { key: category.categoryKey, name: category.categoryName }
+    : null;
 
   // --- 6. SEO 構造化データ（JSON-LD）を生成 ---
   const structuredData = generateRankingPageStructuredData({
@@ -219,6 +233,7 @@ export default async function RankingKeyPage({
   });
   const breadcrumbStructuredData = generateRankingBreadcrumbStructuredData({
     rankingItem,
+    category: breadcrumbCategory,
   });
 
   // --- 5. レンダリング ---
@@ -254,7 +269,7 @@ export default async function RankingKeyPage({
         />
       ))}
 
-      {/* パンくずナビゲーション */}
+      {/* パンくずナビゲーション (category があれば階層に組み込み、内部リンク強化) */}
       <div className="container mx-auto px-4 pt-4">
         <Breadcrumb>
           <BreadcrumbList>
@@ -269,6 +284,18 @@ export default async function RankingKeyPage({
                 <Link href="/ranking">ランキング</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
+            {breadcrumbCategory && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href={`/category/${breadcrumbCategory.key}`}>
+                      {breadcrumbCategory.name}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            )}
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>{getRankingTitle(rankingItem)}</BreadcrumbPage>
@@ -323,10 +350,22 @@ export default async function RankingKeyPage({
             ? <AiContentAccordion title="地域別の傾向"><AiMarkdownContent content={aiContent.regionalAnalysis} /></AiContentAccordion>
             : null
         }
-        // AI生成コンテンツ: FAQ JSON-LD（非表示 script）
+        // AI生成コンテンツ: FAQ (可視アコーディオン + JSON-LD)
         faqSection={
           aiContent?.faq
             ? <RankingFaqSection faqJson={aiContent.faq} rankingName={getRankingTitle(rankingItem)} />
+            : null
+        }
+        // AI生成コンテンツ: 都道府県別解説 (47県、SEO 長尾)
+        prefectureCommentarySection={
+          aiContent?.prefectureCommentary
+            ? (
+              <RankingPrefectureCommentarySection
+                commentaryJson={aiContent.prefectureCommentary}
+                rankingName={getRankingTitle(rankingItem)}
+                unit={rankingItem.unit ?? ""}
+              />
+            )
             : null
         }
       />
