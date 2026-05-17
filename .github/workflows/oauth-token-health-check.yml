@@ -1,0 +1,55 @@
+name: 🔐 OAuth Token Health Check (weekly)
+
+# YouTube OAuth refresh token の生存確認。
+# Production publish で 6 ヶ月有効になっているはずだが、念のため週次で叩く。
+# 失効検知時は [OAuth Alert] Issue を自動起票（重複起票はしない）。
+# 詳細: Issue #184
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # 月曜 09:00 JST (UTC Mon 00:00)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: oauth-token-health-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔑 Compose .env.local from secrets
+        run: |
+          cat > .env.local <<EOF
+          GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN=${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          EOF
+
+      - name: 🔐 YouTube OAuth health check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .claude/scripts/youtube/oauth-health-check.mjs
+
+      - name: 🧹 Cleanup
+        if: always()
+        run: rm -f .env.local

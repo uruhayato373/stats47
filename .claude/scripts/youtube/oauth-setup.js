@@ -6,8 +6,13 @@
  *
  * 事前準備:
  *   1. Google Cloud Console → 認証情報 → OAuth 2.0 クライアント ID（デスクトップアプリ）
+ *      → OAuth 同意画面の publishing status を **"In production"** にすること
+ *      （Testing のままだと refresh token が 7 日で auto-expire する Google 仕様。Issue #184）
  *   2. YouTube Analytics API と YouTube Data API v3 を有効化
  *   3. .env.local に GOOGLE_OAUTH_CLIENT_ID / GOOGLE_OAUTH_CLIENT_SECRET を設定
+ *
+ * 注意: ブラウザのチャンネル選択画面で **stats47 (UCdRiwDSX1aUd0dSd7Cs08Kg)** を必ず選ぶ
+ *       （個人ch を選ぶと publish 系スキルが個人ch にアップしてしまう。2026-05-03 事故）
  *
  * 使い方:
  *   node .claude/scripts/youtube/oauth-setup.js
