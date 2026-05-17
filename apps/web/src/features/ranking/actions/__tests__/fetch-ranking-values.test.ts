@@ -1,6 +1,7 @@
 import {
   readRankingItemFromR2,
   readRankingValuesFromR2,
+  readNormalizedRankingValuesFromR2,
   computeNormalization,
 } from "@stats47/ranking/server";
 import { describe, expect, it, vi, beforeEach } from "vitest";
@@ -13,6 +14,7 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 const mockReadRankingItem = vi.mocked(readRankingItemFromR2);
 const mockReadRankingValues = vi.mocked(readRankingValuesFromR2);
+const mockReadNormalizedRankingValues = vi.mocked(readNormalizedRankingValuesFromR2);
 const mockComputeNormalization = vi.mocked(computeNormalization);
 
 const mockRankingItem = {
@@ -58,10 +60,15 @@ describe("fetchRankingValuesAction", () => {
     expect(mockComputeNormalization).not.toHaveBeenCalled();
   });
 
-  it("正規化タイプ指定時は computeNormalization を呼ぶ", async () => {
+  it("正規化タイプ指定時は R2 snapshot 不在で computeNormalization にフォールバック", async () => {
     mockReadRankingItem.mockResolvedValue({
       success: true,
       data: mockRankingItem,
+    });
+    // R2 snapshot 不在 (Phase A 以降の事前計算 snapshot が無いケース) → fallback ルート
+    mockReadNormalizedRankingValues.mockResolvedValue({
+      success: true,
+      data: [],
     });
     mockComputeNormalization.mockResolvedValue(mockValues);
 
