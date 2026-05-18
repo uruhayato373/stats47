@@ -35,8 +35,9 @@ updated: 2026-05-18
 Phase 2 前倒し実装で `.claude/skills/blog/draft-from-trend/SKILL.md` を作成 (既存 5 スキル orchestrator)。trend snapshot 読込 → 企画化 → article.md 雛形 → チャート生成までの 6 ステップを明記。
 
 残作業:
-- `fetch-article-data` SKILL.md が現状未実装 (orchestrator が前提とする 5 スキルのうち 1 つが欠落)。実装または既存スクリプトでの代替が必要
+- ✅ `fetch-article-data` SKILL.md を 2026-05-18 追加 (commit 5b0d0139) → orchestrator 5 スキル全揃え
 - Phase 3 で Claude Routine `stats47-daily-trend-pipeline` (triggers.json に `enabled: false` で追加済) を有効化してパイプライン稼働
+- 実スクリプト (D1 クエリ + e-Stat 取得の自動化) は Phase 3 着手時に作成 (現状は SKILL.md = 仕様文書のみ)
 
 ### 想定効果
 
