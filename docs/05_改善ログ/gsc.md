@@ -9,6 +9,30 @@ updated: 2026-05-17
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [CTR-AUTO-01] CTR 改善候補の月次自動抽出 (Phase 3 sprint)
+
+- **status**: in-progress
+- **tier**: 2
+- **target_metric**: blog-ctr / ranking-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-18
+- **due**: 2026-06-21 (W25, 初回 fire 後の判定)
+- **related_plan**: `docs/02_実装計画/seo-todo-unify-phase-1-3.md` Phase 3
+
+### 進捗 (2026-05-18)
+
+Phase 3 sprint で 2 ファイル追加:
+- `.claude/scripts/gsc/extract-low-ctr-queries.mjs` — 業界平均 CTR (Backlinko 2023) と比較し position 5-15 帯の改善候補抽出
+- `.github/workflows/ctr-improvement-monthly.yml` — 毎月 5 日 09:00 JST 自動 fire、`[CTR Improvement Candidates] YYYY-MM` Issue 起票
+
+最新 W21 snapshot で動作確認: 8 候補抽出 (小麦粉消費量関連クエリが上位)、期待 +Clicks 計算正常。
+
+### 残作業
+
+- ラベル作成: `gh label create ctr-improvement-candidate --color FFA500 --description "CTR 改善候補 (月次自動抽出)"`
+- 6/5 初回 fire 後、`[CTR Improvement Candidates] 2026-06` Issue を確認
+- 上位 3 候補に `/brushup-blog-article` で seoTitle 改訂案を作成 (人手)
+
 ## [BLOG-CTR-02] SEO タイトル改修 10 件 + 新規記事 6 本 (2026-W19 → 2026-W21)
 
 - **status**: pending (要 2026-W21 以降の継続観測)
