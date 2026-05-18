@@ -41,6 +41,7 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
+| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/05_改善ログ/{gsc,ga4,psi,adsense,cloudflare-cost,content,indexing}.md` — INDEX: `docs/05_改善ログ/INDEX.md` |
 | 改善施策デプロイ (人間向け要約) | `docs/05_改善ログ/{gsc,ga4,adsense,psi,cloudflare-cost}.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
 | 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
@@ -80,6 +81,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | docs 全体構成・運用ルール | `docs/INDEX.md` |
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 実装ロードマップ | `docs/02_実装計画/01_実装ロードマップ.md` |
+| SEO 向上 × TODO 一元化 × 自動化拡張プラン (W21-W26) | `docs/02_実装計画/seo-todo-unify-phase-1-3.md` |
+| 改善ログ INDEX (TODO 真実源、scan tool 使い方) | `docs/05_改善ログ/INDEX.md` ★施策追加時必読 |
 | システム構成・技術スタック | `docs/01_技術設計/` |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |

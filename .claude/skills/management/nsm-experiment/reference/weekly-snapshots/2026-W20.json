@@ -2,26 +2,26 @@
   "week_id": "2026-W20",
   "year": 2026,
   "week": 20,
-  "generated_at": "2026-05-10T23:07:38.158Z",
+  "generated_at": "2026-05-17T11:26:17.550Z",
   "ranges": {
     "ga4": {
       "this": {
-        "start": "2026-05-03",
-        "end": "2026-05-09"
+        "start": "2026-05-10",
+        "end": "2026-05-16"
       },
       "prev": {
-        "start": "2026-04-26",
-        "end": "2026-05-02"
+        "start": "2026-05-03",
+        "end": "2026-05-09"
       }
     },
     "gsc": {
       "this": {
-        "start": "2026-05-01",
-        "end": "2026-05-07"
+        "start": "2026-05-08",
+        "end": "2026-05-14"
       },
       "prev": {
-        "start": "2026-04-24",
-        "end": "2026-04-30"
+        "start": "2026-05-01",
+        "end": "2026-05-07"
       }
     }
   },
@@ -29,174 +29,174 @@
     "channels": [
       {
         "channel": "Organic Search",
-        "thisUsers": 283,
-        "prevUsers": 462,
-        "userDelta": -179,
-        "userDeltaPct": -38.74458874458874,
-        "thisSessions": 309,
-        "prevSessions": 527,
-        "thisEngagedSessions": 203,
-        "prevEngagedSessions": 338,
-        "thisEngagementRate": 0.656957928802589
+        "thisUsers": 667,
+        "prevUsers": 283,
+        "userDelta": 384,
+        "userDeltaPct": 135.68904593639576,
+        "thisSessions": 759,
+        "prevSessions": 309,
+        "thisEngagedSessions": 537,
+        "prevEngagedSessions": 203,
+        "thisEngagementRate": 0.7075098814229249
       },
       {
         "channel": "Direct",
-        "thisUsers": 147,
-        "prevUsers": 260,
-        "userDelta": -113,
-        "userDeltaPct": -43.46153846153846,
-        "thisSessions": 149,
-        "prevSessions": 281,
-        "thisEngagedSessions": 14,
-        "prevEngagedSessions": 54,
-        "thisEngagementRate": 0.09395973154362416
+        "thisUsers": 300,
+        "prevUsers": 147,
+        "userDelta": 153,
+        "userDeltaPct": 104.08163265306123,
+        "thisSessions": 315,
+        "prevSessions": 149,
+        "thisEngagedSessions": 73,
+        "prevEngagedSessions": 14,
+        "thisEngagementRate": 0.23174603174603176
       },
       {
         "channel": "Referral",
-        "thisUsers": 66,
-        "prevUsers": 77,
-        "userDelta": -11,
-        "userDeltaPct": -14.285714285714285,
-        "thisSessions": 73,
-        "prevSessions": 90,
-        "thisEngagedSessions": 49,
-        "prevEngagedSessions": 61,
-        "thisEngagementRate": 0.6712328767123288
+        "thisUsers": 90,
+        "prevUsers": 66,
+        "userDelta": 24,
+        "userDeltaPct": 36.36363636363637,
+        "thisSessions": 110,
+        "prevSessions": 73,
+        "thisEngagedSessions": 75,
+        "prevEngagedSessions": 49,
+        "thisEngagementRate": 0.6818181818181818
       },
       {
         "channel": "Unassigned",
-        "thisUsers": 20,
-        "prevUsers": 16,
-        "userDelta": 4,
-        "userDeltaPct": 25,
-        "thisSessions": 20,
-        "prevSessions": 17,
-        "thisEngagedSessions": 10,
-        "prevEngagedSessions": 5,
-        "thisEngagementRate": 0.5
+        "thisUsers": 40,
+        "prevUsers": 20,
+        "userDelta": 20,
+        "userDeltaPct": 100,
+        "thisSessions": 40,
+        "prevSessions": 20,
+        "thisEngagedSessions": 26,
+        "prevEngagedSessions": 10,
+        "thisEngagementRate": 0.65
       },
       {
         "channel": "Organic Social",
-        "thisUsers": 0,
-        "prevUsers": 1,
-        "userDelta": -1,
-        "userDeltaPct": -100,
-        "thisSessions": 0,
-        "prevSessions": 1,
-        "thisEngagedSessions": 0,
-        "prevEngagedSessions": 1,
-        "thisEngagementRate": 0
+        "thisUsers": 11,
+        "prevUsers": 0,
+        "userDelta": 11,
+        "userDeltaPct": null,
+        "thisSessions": 11,
+        "prevSessions": 0,
+        "thisEngagedSessions": 2,
+        "prevEngagedSessions": 0,
+        "thisEngagementRate": 0.18181818181818182
       }
     ],
     "total": {
-      "thisUsers": 516,
-      "prevUsers": 816,
-      "thisSessions": 551,
-      "prevSessions": 916,
-      "thisEngagedSessions": 276,
-      "prevEngagedSessions": 459,
-      "userDelta": -300,
-      "userDeltaPct": -36.76470588235294,
-      "engagedSessionDelta": -183,
-      "engagedSessionDeltaPct": -39.869281045751634
+      "thisUsers": 1108,
+      "prevUsers": 516,
+      "thisSessions": 1235,
+      "prevSessions": 551,
+      "thisEngagedSessions": 713,
+      "prevEngagedSessions": 276,
+      "userDelta": 592,
+      "userDeltaPct": 114.72868217054264,
+      "engagedSessionDelta": 437,
+      "engagedSessionDeltaPct": 158.33333333333331
     },
     "organic": {
       "channel": "Organic Search",
-      "thisUsers": 283,
-      "prevUsers": 462,
-      "userDelta": -179,
-      "userDeltaPct": -38.74458874458874,
-      "thisSessions": 309,
-      "prevSessions": 527,
-      "thisEngagedSessions": 203,
-      "prevEngagedSessions": 338,
-      "thisEngagementRate": 0.656957928802589
+      "thisUsers": 667,
+      "prevUsers": 283,
+      "userDelta": 384,
+      "userDeltaPct": 135.68904593639576,
+      "thisSessions": 759,
+      "prevSessions": 309,
+      "thisEngagedSessions": 537,
+      "prevEngagedSessions": 203,
+      "thisEngagementRate": 0.7075098814229249
     }
   },
   "gsc": {
     "total": {
-      "thisClicks": 214,
-      "prevClicks": 196,
-      "clickDelta": 18,
-      "clickDeltaPct": 9.183673469387756,
-      "thisImpressions": 10044,
-      "prevImpressions": 7343,
-      "impressionDelta": 2701,
-      "thisCtr": 0.02130625248904819,
-      "prevCtr": 0.02669208770257388,
-      "thisPosition": 8.431700517722023,
-      "prevPosition": 8.706523219392619
+      "thisClicks": 277,
+      "prevClicks": 214,
+      "clickDelta": 63,
+      "clickDeltaPct": 29.439252336448597,
+      "thisImpressions": 10649,
+      "prevImpressions": 10044,
+      "impressionDelta": 605,
+      "thisCtr": 0.02601183209691051,
+      "prevCtr": 0.02130625248904819,
+      "thisPosition": 8.610198140670486,
+      "prevPosition": 8.431700517722023
     },
     "topQueries": [
       {
         "query": "健康寿命 都 道府県 ランキング 2026",
-        "clicks": 6,
-        "impressions": 26,
-        "ctr": 0.23076923076923078,
-        "position": 2.6153846153846154
+        "clicks": 5,
+        "impressions": 24,
+        "ctr": 0.20833333333333334,
+        "position": 2.125
       },
       {
-        "query": "新潟 平均身長",
+        "query": "子育てしやすい都道府県",
         "clicks": 2,
-        "impressions": 9,
-        "ctr": 0.2222222222222222,
-        "position": 7.888888888888889
+        "impressions": 5,
+        "ctr": 0.4,
+        "position": 5.8
       },
       {
-        "query": "鶏肉 消費量 都道府県",
+        "query": "鶏肉消費量 ランキング",
         "clicks": 2,
-        "impressions": 11,
-        "ctr": 0.18181818181818182,
-        "position": 7.454545454545454
+        "impressions": 16,
+        "ctr": 0.125,
+        "position": 7.6875
       },
       {
-        "query": "うどん 消費量 ランキング",
+        "query": "47都道府県ランキング",
         "clicks": 1,
-        "impressions": 12,
-        "ctr": 0.08333333333333333,
-        "position": 8.25
+        "impressions": 1,
+        "ctr": 1,
+        "position": 2
       },
       {
-        "query": "うどん 消費量 都道府県",
+        "query": "うどん消費量",
         "clicks": 1,
-        "impressions": 13,
-        "ctr": 0.07692307692307693,
-        "position": 9.076923076923077
+        "impressions": 21,
+        "ctr": 0.047619047619047616,
+        "position": 8.333333333333332
+      },
+      {
+        "query": "うどん消費量 都道府県",
+        "clicks": 1,
+        "impressions": 15,
+        "ctr": 0.06666666666666667,
+        "position": 6.466666666666667
       },
       {
         "query": "うどん消費量ランキング",
         "clicks": 1,
-        "impressions": 21,
-        "ctr": 0.047619047619047616,
-        "position": 9.857142857142858
+        "impressions": 55,
+        "ctr": 0.01818181818181818,
+        "position": 6.872727272727273
       },
       {
-        "query": "ガソリン消費量 ランキング",
+        "query": "キャベツ消費量 都道府県",
+        "clicks": 1,
+        "impressions": 9,
+        "ctr": 0.1111111111111111,
+        "position": 9.88888888888889
+      },
+      {
+        "query": "中絶 率 日本 ランキング",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 21.5
+      },
+      {
+        "query": "健康寿命 ランキング 都道府県",
         "clicks": 1,
         "impressions": 4,
         "ctr": 0.25,
-        "position": 5
-      },
-      {
-        "query": "バナナ 消費量 都道府県",
-        "clicks": 1,
-        "impressions": 3,
-        "ctr": 0.3333333333333333,
-        "position": 7
-      },
-      {
-        "query": "パスタ消費量 都道府県",
-        "clicks": 1,
-        "impressions": 8,
-        "ctr": 0.125,
-        "position": 4.5
-      },
-      {
-        "query": "パン消費量ランキング",
-        "clicks": 1,
-        "impressions": 1,
-        "ctr": 1,
-        "position": 10
+        "position": 9
       }
     ]
   },
@@ -205,8 +205,8 @@
     "reason": "PSI_API_KEY 未設定"
   },
   "notes": [
-    "GSC データは 3 日遅延のため、直近期間は 2026-05-01 〜 2026-05-07 を採用",
+    "GSC データは 3 日遅延のため、直近期間は 2026-05-08 〜 2026-05-14 を採用",
     "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
-    "NSM 定義: [Critical Review] North Star Metric Issue (gh issue list --label critical-review)"
+    "NSM 定義: docs/04_レビュー/critical-review/*-nsm.md"
   ]
 }
