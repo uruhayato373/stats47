@@ -279,12 +279,6 @@ stats47.jp の GSC インデックス状況が悪化し続けている。
 
 ---
 
-## T0-DECAY-01: Coverage Drilldown 週次記録 + 収束観測 → [INDEXING-DRILLDOWN-01] に移行
-
-> **2026-05-18 移行**: 本施策は `docs/05_改善ログ/indexing.md` の `[INDEXING-DRILLDOWN-01]` に完全移行。以後の更新は indexing.md 側で行うこと。本 section は git log から復元可能なポインタとして 1 ヶ月程度残し、2026-06-末 に削除予定。
-
----
-
 ## T3-SNS-01: SNS 投稿再開 (Sprint 1)
 
 - **status**: pending
