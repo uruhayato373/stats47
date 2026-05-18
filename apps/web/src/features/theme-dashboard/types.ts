@@ -16,6 +16,29 @@ export interface TabIndicatorConfig {
   tabLabel: string;
 }
 
+/** Markdown セクションの出典情報 */
+export interface MarkdownSectionSource {
+  /** 表示するラベル（例: "総務省統計局 人口推計"） */
+  label: string;
+  /** リンク先 URL（省略時は label のみ表示） */
+  url?: string;
+}
+
+/**
+ * Markdown セクションコンポーネントの props
+ *
+ * page_components.componentProps に保存される構造。
+ * componentType="markdown-section" の場合に利用。
+ */
+export interface MarkdownSectionComponentProps {
+  /** 本文（Markdown 文字列） */
+  markdown: string;
+  /** サブタイトル（タイトル下の小さな説明文） */
+  subtitle?: string;
+  /** 出典リスト（末尾に「出典」見出し付きで表示） */
+  sources?: MarkdownSectionSource[];
+}
+
 /** 統計パネルのタブグルーピング設定 */
 export interface PanelTabGroup {
   /** タブラベル */

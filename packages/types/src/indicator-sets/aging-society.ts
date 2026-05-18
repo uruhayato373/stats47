@@ -49,6 +49,10 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
         "social-increase-rate",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "少子高齢化",

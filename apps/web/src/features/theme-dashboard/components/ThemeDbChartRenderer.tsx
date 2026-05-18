@@ -13,6 +13,10 @@ import { PyramidChartClient } from "@/features/stat-charts/components/charts/Pyr
 
 import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
+import { MarkdownSectionRenderer } from "./MarkdownSectionRenderer";
+
+import type { MarkdownSectionComponentProps } from "../types";
+
 const D3MixedChart = dynamic(
   () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
   { ssr: false, loading: () => <Skeleton className="h-[200px] w-full rounded-md" /> },
@@ -76,6 +80,21 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; only key/type determine fetch
   }, [chart.componentKey, chart.componentType, prefCode]);
+
+  // markdown-section は DB 取得不要。componentProps を直接 render する。
+  if (chart.componentType === "markdown-section") {
+    const props = chart.componentProps as unknown as MarkdownSectionComponentProps;
+    if (!props || typeof props.markdown !== "string") {
+      return <NoData message="markdown が未設定です" />;
+    }
+    return (
+      <MarkdownSectionRenderer
+        title={chart.title}
+        props={props}
+        fallbackSourceName={chart.sourceName}
+      />
+    );
+  }
 
   if (isPending || !chartResult) {
     return <Skeleton className="h-[200px] w-full rounded-md" />;
