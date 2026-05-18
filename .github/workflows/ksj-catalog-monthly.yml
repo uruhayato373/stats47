@@ -1,0 +1,141 @@
+name: 🗺️ KSJ Catalog (monthly)
+
+on:
+  schedule:
+    - cron: "0 18 1 * *" # 毎月 1 日 JST 03:00 (UTC 18:00 前日)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ksj-catalog
+  cancel-in-progress: false
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📥 Fetch jpksj-api catalog
+        id: fetch
+        run: |
+          mkdir -p /tmp/ksj
+          # 旧 snapshot を退避
+          cp packages/database/seed/ksj-catalog.json /tmp/ksj/old.json 2>/dev/null || echo "[]" > /tmp/ksj/old.json
+          # 新規取得 (失敗時はワークフロー失敗で異常を可視化)
+          curl -sS -m 30 -o /tmp/ksj/new.json \
+            -A "stats47-gha-ksj-catalog/1.0" \
+            "https://jpksj-api.kmproj.com/datasets.json"
+          # サニティチェック (空配列やゴミレスポンスを弾く)
+          NEW_COUNT=$(jq 'length' /tmp/ksj/new.json)
+          if [ "${NEW_COUNT}" = "null" ] || [ "${NEW_COUNT}" -lt 50 ]; then
+            echo "::error::jpksj-api response invalid (count=${NEW_COUNT})"
+            exit 1
+          fi
+          echo "new_count=${NEW_COUNT}" >> $GITHUB_OUTPUT
+          cp /tmp/ksj/new.json packages/database/seed/ksj-catalog.json
+
+      - name: 🔍 Diff old vs new
+        id: diff
+        run: |
+          OLD_IDS=$(jq -r '.[].id' /tmp/ksj/old.json | sort -u)
+          NEW_IDS=$(jq -r '.[].id' /tmp/ksj/new.json | sort -u)
+          ADDED=$(comm -13 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | wc -l | tr -d ' ')
+          REMOVED=$(comm -23 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | wc -l | tr -d ' ')
+          echo "added=${ADDED}" >> $GITHUB_OUTPUT
+          echo "removed=${REMOVED}" >> $GITHUB_OUTPUT
+          echo "## KSJ Catalog Diff" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Total: ${{ steps.fetch.outputs.new_count }} datasets" >> $GITHUB_STEP_SUMMARY
+          echo "- 追加: ${ADDED} 件" >> $GITHUB_STEP_SUMMARY
+          echo "- 削除: ${REMOVED} 件" >> $GITHUB_STEP_SUMMARY
+          if [ "${ADDED}" -gt 0 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 新規追加データセット" >> $GITHUB_STEP_SUMMARY
+            comm -13 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read ID; do
+              NAME=$(jq -r ".[] | select(.id == \"$ID\") | \"\\(.id) | \\(.name) | \\(.category1_name)\"" /tmp/ksj/new.json)
+              echo "- ${NAME}" >> $GITHUB_STEP_SUMMARY
+            done
+          fi
+          if [ "${REMOVED}" -gt 0 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 削除されたデータセット" >> $GITHUB_STEP_SUMMARY
+            comm -23 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read ID; do
+              echo "- ${ID}" >> $GITHUB_STEP_SUMMARY
+            done
+          fi
+          # 後段の Issue 作成用に diff body を保存
+          cp $GITHUB_STEP_SUMMARY /tmp/ksj/summary.md
+
+      - name: 📤 Commit updated snapshot
+        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/database/seed/ksj-catalog.json
+          if git diff --cached --quiet; then
+            echo "No file changes after diff detection (unexpected)"
+            exit 0
+          fi
+          git commit -m "chore(gis): KSJ catalog snapshot $(date -u +%Y-%m-%d) +${{ steps.diff.outputs.added }}/-${{ steps.diff.outputs.removed }} [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open Issue on new datasets
+        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[KSJ Catalog Update] ${DATE} +${{ steps.diff.outputs.added }}/-${{ steps.diff.outputs.removed }}"
+          BODY_FILE=/tmp/ksj/issue-body.md
+          cat > "$BODY_FILE" <<EOF
+          ## 国土数値情報カタログ更新検知
+
+          - **取得日**: ${DATE}
+          - **取得源**: https://jpksj-api.kmproj.com/datasets.json
+          - **総件数**: ${{ steps.fetch.outputs.new_count }}
+          - **追加**: ${{ steps.diff.outputs.added }} 件
+          - **削除**: ${{ steps.diff.outputs.removed }} 件
+
+          詳細: workflow run の Step Summary を参照。
+          コミット: \`packages/database/seed/ksj-catalog.json\` を develop に push 済み。
+
+          ### 反映手順 (ローカル)
+
+          \`\`\`bash
+          git pull origin develop
+          npx tsx packages/gis/src/mlit-ksj/scripts/seed-ksj-catalog.ts --offline
+          npx tsx packages/gis/src/mlit-ksj/scripts/generate-docs.ts
+          \`\`\`
+
+          新規 dataset は status='available' で D1 に登録されます。stats47 で取り込む場合は
+          1) registry.ts に code config 追加 2) D1 を status='registered' に UPDATE 3) pipeline 実行。
+
+          plan: \`~/.claude/plans/stateless-stargazing-teapot.md\`
+          EOF
+
+          # 既存の未 close issue があれば コメントで追記
+          EXISTING=$(gh issue list --state open --label ksj-catalog --search "\"[KSJ Catalog Update]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment"
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "ksj-catalog,auto-generated" \
+              --body-file "$BODY_FILE"
+          fi
