@@ -234,7 +234,7 @@ function main() {
   let files;
   try {
     files = readdirSync(LOG_DIR)
-      .filter((f) => f.endsWith(".md"))
+      .filter((f) => f.endsWith(".md") && f !== "INDEX.md")
       .map((f) => path.join(LOG_DIR, f));
   } catch (err) {
     console.error(`Cannot read ${LOG_DIR}: ${err.message}`);
