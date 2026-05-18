@@ -4,6 +4,12 @@
  *
  * Usage:
  *   npx tsx packages/ai-content/src/scripts/build-prompt.ts --key <rankingKey>
+ *     [--extra-context-file <path>]
+ *
+ * Options:
+ *   --key                  対象 ranking_key (必須)
+ *   --extra-context-file   /enhance-ranking-ai-content スキルで構築した extraContext
+ *                          (NotebookLM 出典) を読み込み prompt に prepend する
  *
  * Output (JSON to stdout):
  *   {
@@ -15,27 +21,31 @@
  */
 
 import "dotenv/config";
+import { readFileSync } from "node:fs";
 import { listRankingItems, listRankingValues } from "@stats47/ranking/server";
 import { buildRankingContentPrompt } from "../services/prompts/ranking-content-prompt";
 import type { RankingContentInput } from "../services/prompts/ranking-content-prompt";
 
 const AREA_TYPE = "prefecture";
 
-function parseArgs(): { key: string } {
+function parseArgs(): { key: string; extraContextFile: string | null } {
   const argv = process.argv.slice(2);
   let key = "";
+  let extraContextFile: string | null = null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--key" && argv[i + 1]) key = argv[++i];
+    else if (argv[i] === "--extra-context-file" && argv[i + 1])
+      extraContextFile = argv[++i];
   }
   if (!key) {
     process.stderr.write("Error: --key <rankingKey> is required\n");
     process.exit(1);
   }
-  return { key };
+  return { key, extraContextFile };
 }
 
 async function main() {
-  const { key } = parseArgs();
+  const { key, extraContextFile } = parseArgs();
 
   // ランキングメタ情報を取得
   const itemsResult = await listRankingItems({ isActive: true, areaType: AREA_TYPE });
@@ -97,12 +107,16 @@ async function main() {
     totalCount: sorted.length,
   };
 
-  const prompt = buildRankingContentPrompt(input);
+  const extraContext = extraContextFile
+    ? readFileSync(extraContextFile, "utf8")
+    : undefined;
+  const prompt = buildRankingContentPrompt(input, { extraContext });
 
   const output = {
     rankingKey: key,
     rankingName: input.rankingName,
     yearCode,
+    extraContextChars: extraContext?.length ?? 0,
     prompt,
   };
 
