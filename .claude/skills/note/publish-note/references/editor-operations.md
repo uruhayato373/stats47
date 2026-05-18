@@ -13,48 +13,86 @@ const path = require('path');
 
 const slug = '<SLUG>';
 const projectRoot = '/Users/minamidaisuke/stats47';
-const dirs = [
+
+// 探索順: docs/31_.../<slug>, docs/31_.../<vertical>/<slug>, .local/r2/note/<slug>
+// 各ディレクトリ内では note.md (旧規約) と draft.md (新規約) の両方をチェック
+const baseDirs = [
   path.join(projectRoot, 'docs/31_note記事原稿', slug),
   path.join(projectRoot, '.local/r2/note', slug),
 ];
+const verticalRoot = path.join(projectRoot, 'docs/31_note記事原稿');
+if (fs.existsSync(verticalRoot)) {
+  for (const v of fs.readdirSync(verticalRoot)) {
+    const vDir = path.join(verticalRoot, v, slug);
+    if (fs.existsSync(vDir)) baseDirs.push(vDir);
+  }
+}
 
-const articleDir = dirs.find(d => fs.existsSync(path.join(d, 'note.md')));
-if (!articleDir) { console.error('ERROR: note.md not found for ' + slug); process.exit(1); }
+let articleDir = null;
+let articleFile = null;
+outer: for (const d of baseDirs) {
+  for (const f of ['note.md', 'draft.md']) {
+    if (fs.existsSync(path.join(d, f))) {
+      articleDir = d;
+      articleFile = f;
+      break outer;
+    }
+  }
+}
+if (!articleDir) { console.error('ERROR: note.md / draft.md not found for ' + slug); process.exit(1); }
 
-const raw = fs.readFileSync(path.join(articleDir, 'note.md'), 'utf8');
+const raw = fs.readFileSync(path.join(articleDir, articleFile), 'utf8');
 
-// frontmatter からタイトル抽出
+// frontmatter 解析 (quote 任意)
 const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
-const titleMatch = fmMatch?.[1]?.match(/title:\s*"(.+?)"/);
-const title = titleMatch?.[1] ?? '';
+const fm = fmMatch?.[1] ?? '';
+const fmField = (key) => {
+  const m = fm.match(new RegExp('^' + key + ':\\s*(?:"(.+?)"|\'(.+?)\'|(.+?))\\s*$', 'm'));
+  return m ? (m[1] ?? m[2] ?? m[3] ?? '') : '';
+};
+const title = fmField('title');
+const isPaid = fmField('is_paid') === 'true';
+const priceJpy = parseInt(fmField('price_jpy') || '0', 10);
 
 // 本文準備
 let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
 body = body.replace(/<!-- note投稿時:.*?-->\n?/g, '');
 body = body.replace(/!\[.*?\]\(.*?\)\n?/g, '');
 body = body.replace(/^---$/gm, '');
-// ハッシュタグセクション除去（「## 公開時にコピーするハッシュタグ」以降を削除）
 body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, '');
 body = body.trim();
 
-// セグメント分割（URL vs テキスト）
-const lines = body.split('\n');
-const segments = [];
-let textBuf = [];
-for (const line of lines) {
-  if (/^https?:\/\/\S+$/.test(line.trim())) {
-    if (textBuf.length > 0) {
-      segments.push({ type: 'text', content: textBuf.join('\n') });
-      textBuf = [];
-    }
-    segments.push({ type: 'url', content: line.trim() });
-  } else {
-    textBuf.push(line);
+// 有料境界 ("ここから先は有料部分") で free / paid 分割
+let bodyFree = body;
+let bodyPaid = '';
+if (isPaid) {
+  const splitRe = /^ここから先は有料部分[:：][^\n]*$/m;
+  const splitMatch = body.match(splitRe);
+  if (splitMatch) {
+    const idx = body.indexOf(splitMatch[0]);
+    bodyFree = body.substring(0, idx).replace(/\n*---\s*\n*$/, '').trim();
+    bodyPaid = body.substring(idx + splitMatch[0].length).trim();
   }
 }
-if (textBuf.length > 0) {
-  segments.push({ type: 'text', content: textBuf.join('\n') });
+
+// セグメント分割 (URL vs テキスト)
+function splitSegments(text) {
+  const lines = text.split('\n');
+  const segs = [];
+  let buf = [];
+  for (const line of lines) {
+    if (/^https?:\/\/\S+$/.test(line.trim())) {
+      if (buf.length > 0) { segs.push({ type: 'text', content: buf.join('\n') }); buf = []; }
+      segs.push({ type: 'url', content: line.trim() });
+    } else { buf.push(line); }
+  }
+  if (buf.length > 0) segs.push({ type: 'text', content: buf.join('\n') });
+  return segs;
 }
+
+const segments = splitSegments(body);                       // 全文 (paste 用)
+const segmentsFree = isPaid ? splitSegments(bodyFree) : segments;
+const segmentsPaid = isPaid ? splitSegments(bodyPaid) : [];
 
 // タグファイル
 const tagsPath = path.join(articleDir, 'tags.txt');
@@ -64,12 +102,7 @@ const tags = fs.existsSync(tagsPath)
 
 // 画像ファイルの検出
 const imagesDir = path.join(articleDir, 'images');
-const images = {
-  eyecatch: null,
-  choropleth: null,
-  chart: null,
-  boxplot: null,
-};
+const images = { eyecatch: null, choropleth: null, chart: null, boxplot: null };
 if (fs.existsSync(imagesDir)) {
   const files = fs.readdirSync(imagesDir);
   images.eyecatch = files.find(f => f.startsWith('cover-')) || null;
@@ -82,11 +115,18 @@ if (fs.existsSync(imagesDir)) {
 const result = {
   slug,
   articleDir,
+  articleFile,
   title,
+  isPaid,
+  priceJpy,
   segments,
+  segmentsFree,
+  segmentsPaid,
   tags,
   images,
   segmentCount: segments.length,
+  freeSegmentCount: segmentsFree.length,
+  paidSegmentCount: segmentsPaid.length,
   urlCount: segments.filter(s => s.type === 'url').length,
 };
 
@@ -94,7 +134,11 @@ fs.writeFileSync('/tmp/note-data-' + slug + '.json', JSON.stringify(result, null
 console.log(JSON.stringify({
   slug,
   title: title.substring(0, 50),
+  isPaid,
+  priceJpy,
   segments: segments.length,
+  freeSegments: segmentsFree.length,
+  paidSegments: segmentsPaid.length,
   urls: segments.filter(s => s.type === 'url').length,
   tags: tags.length,
   images: Object.entries(images).filter(([,v]) => v).map(([k]) => k),
@@ -285,7 +329,8 @@ browser-use --headed --profile "Profile 1" click $DRAFT_IDX
 sleep 3
 ```
 
-**予約日時が指定されていない場合は Phase 8 へスキップ。**
+**予約日時 + 有料設定 が共に不要な場合は Phase 8 へスキップ。**
+**有料設定または予約投稿が必要なら Phase 7 へ進む（[scheduling.md](./scheduling.md) を参照）。**
 
 ## Phase 8: 確認スクリーンショット
 
