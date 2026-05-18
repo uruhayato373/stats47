@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">UserPromptSubmit hook による自動マスキング・自動ブロック</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">プロンプト送信前に正規表現マッチ + 辞書照合 → マスク or 中止 → ログ追記</text>
+
+  <defs>
+    <marker id="arr11a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arr11red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: User prompt -->
+  <g>
+    <rect x="20" y="100" width="130" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="85" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">プロンプト入力</text>
+    <text x="85" y="145" text-anchor="middle" font-size="11" fill="#64748B">user → Claude Code</text>
+  </g>
+  <line x1="150" y1="130" x2="178" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr11a)"/>
+
+  <!-- Step 2: UserPromptSubmit hook -->
+  <g>
+    <rect x="180" y="100" width="140" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="250" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">UserPromptSubmit</text>
+    <text x="250" y="143" text-anchor="middle" font-size="11" fill="#92400E">hook 発火</text>
+  </g>
+  <line x1="320" y1="130" x2="348" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr11a)"/>
+
+  <!-- Step 3: mask-pii.mjs -->
+  <g>
+    <rect x="350" y="100" width="170" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="435" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">mask-pii.mjs</text>
+    <text x="435" y="138" text-anchor="middle" font-size="10" fill="#1E40AF">正規表現 5 種 + 辞書照合</text>
+    <text x="435" y="152" text-anchor="middle" font-size="10" fill="#1E40AF">マイナンバー/TEL/Mail/〒/住所</text>
+  </g>
+
+  <!-- Branch: detect? -->
+  <g>
+    <polygon points="560,130 600,100 640,130 600,160" fill="#FFFFFF" stroke="#475569" stroke-width="1.5"/>
+    <text x="600" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E293B">検知?</text>
+  </g>
+  <line x1="520" y1="130" x2="558" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr11a)"/>
+
+  <!-- Yes branch: block (exit 1) -->
+  <line x1="600" y1="160" x2="600" y2="220" stroke="#DC2626" stroke-width="2" marker-end="url(#arr11red)"/>
+  <text x="612" y="195" font-size="11" fill="#DC2626" font-weight="bold">疑わしい</text>
+  <g>
+    <rect x="510" y="225" width="180" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" rx="6"/>
+    <text x="600" y="246" text-anchor="middle" font-size="13" font-weight="bold" fill="#7F1D1D">exit 1 で送信ブロック</text>
+    <text x="600" y="263" text-anchor="middle" font-size="10" fill="#7F1D1D">stderr で警告表示</text>
+  </g>
+
+  <!-- No branch: send masked -->
+  <line x1="640" y1="130" x2="678" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr11a)"/>
+  <text x="660" y="118" font-size="11" fill="#059669" font-weight="bold">OK</text>
+  <g>
+    <rect x="680" y="100" width="200" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="780" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">マスク済みプロンプト</text>
+    <text x="780" y="142" text-anchor="middle" font-size="11" fill="#0F766E">→ Anthropic API へ送信</text>
+  </g>
+
+  <!-- Log output (always) -->
+  <line x1="435" y1="160" x2="435" y2="240" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr11a)"/>
+  <text x="447" y="200" font-size="11" fill="#64748B">常に追記</text>
+  <g>
+    <rect x="320" y="245" width="230" height="50" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="435" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">.claude/logs/masking/</text>
+    <text x="435" y="283" text-anchor="middle" font-size="10" fill="#4338CA">YYYY-MM-DD.jsonl (検出メタのみ)</text>
+  </g>
+
+  <text x="450" y="312" text-anchor="middle" font-size="11" fill="#94A3B8">本文は保存せず、件数 / type / 文字数のみ記録 (ログ自体が漏洩源にならない設計)</text>
+</svg>

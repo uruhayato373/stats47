@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="430" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">Skills 化 ROI ゾーン判定</text>
+  <text x="400" y="56" text-anchor="middle" font-size="12" fill="#64748B">判定式: 作成時間 ÷ (月削減時間 × 12) ≤ 0.5 なら作る</text>
+
+  <!-- Axes -->
+  <line x1="100" y1="360" x2="720" y2="360" stroke="#475569" stroke-width="1.5"/>
+  <line x1="100" y1="100" x2="100" y2="360" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- X axis: 月削減時間 (0-240 分) -->
+  <g font-size="10" fill="#64748B" text-anchor="middle">
+    <text x="100" y="378">0</text>
+    <text x="203" y="378">30</text>
+    <text x="307" y="378">60</text>
+    <text x="410" y="378">120</text>
+    <text x="513" y="378">180</text>
+    <text x="617" y="378">240</text>
+    <text x="720" y="378">300</text>
+    <text x="410" y="402" font-size="11" fill="#475569">月削減時間 (分)</text>
+  </g>
+
+  <!-- Y axis: 作成時間 (0-10 時間) -->
+  <g font-size="10" fill="#64748B" text-anchor="end">
+    <text x="92" y="364">0</text>
+    <text x="92" y="312">2</text>
+    <text x="92" y="260">4</text>
+    <text x="92" y="208">6</text>
+    <text x="92" y="156">8</text>
+    <text x="92" y="104">10</text>
+    <text x="60" y="230" font-size="11" fill="#475569" transform="rotate(-90 60 230)">作成時間 (時間)</text>
+  </g>
+
+  <!-- Gridlines -->
+  <g stroke="#E2E8F0" stroke-width="0.5" stroke-dasharray="3,3">
+    <line x1="100" y1="312" x2="720" y2="312"/>
+    <line x1="100" y1="260" x2="720" y2="260"/>
+    <line x1="100" y1="208" x2="720" y2="208"/>
+    <line x1="100" y1="156" x2="720" y2="156"/>
+    <line x1="100" y1="104" x2="720" y2="104"/>
+  </g>
+
+  <!-- ROI zones (vertical bands based on month reduction) -->
+  <!-- 作る価値あり: 月削減 ≥ 60 min (上限 6 ヶ月回収) → 緑帯 -->
+  <rect x="307" y="100" width="413" height="260" fill="#CCFBF1" opacity="0.55"/>
+  <text x="513" y="135" text-anchor="middle" font-size="16" font-weight="bold" fill="#0F766E">作る価値あり</text>
+  <text x="513" y="155" text-anchor="middle" font-size="11" fill="#0F766E">回収 6 ヶ月以内</text>
+
+  <!-- 微妙: 月削減 30-60 min -->
+  <rect x="203" y="100" width="104" height="260" fill="#FEF3C7" opacity="0.6"/>
+  <text x="255" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400E">微妙</text>
+  <text x="255" y="155" text-anchor="middle" font-size="10" fill="#92400E">慎重に判定</text>
+
+  <!-- 作らない: 月削減 < 30 min -->
+  <rect x="100" y="100" width="103" height="260" fill="#FEE2E2" opacity="0.6"/>
+  <text x="151" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#7F1D1D">作らない</text>
+  <text x="151" y="155" text-anchor="middle" font-size="10" fill="#7F1D1D">ROI 出ない</text>
+
+  <!-- ROI boundary line: 作成時間 = 月削減 × 6 (6ヶ月回収境界) -->
+  <!-- slope: y = x * 6 (時間=分削減/60×6) -->
+  <!-- 月削減 60 min → 6 時間, 月削減 30 min → 3 時間 -->
+  <line x1="100" y1="360" x2="412" y2="204" stroke="#DC2626" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="380" y="225" font-size="10" fill="#7F1D1D" font-weight="bold">6 ヶ月回収境界</text>
+
+  <!-- Sample points -->
+  <circle cx="513" cy="260" r="6" fill="#2563EB"/>
+  <text x="523" y="256" font-size="11" fill="#1E3A8A" font-weight="bold">月次報告 (削減 180 分 / 作成 4 時間)</text>
+  <circle cx="307" cy="312" r="6" fill="#F59E0B"/>
+  <text x="317" y="308" font-size="11" fill="#92400E" font-weight="bold">議会照会 (削減 60 分 / 作成 2 時間)</text>
+  <circle cx="151" cy="338" r="5" fill="#DC2626"/>
+  <text x="161" y="334" font-size="11" fill="#7F1D1D" font-weight="bold">年 1 業務 (削減 10 分 / 作成 1 時間)</text>
+
+  <text x="400" y="425" text-anchor="middle" font-size="11" fill="#94A3B8">点は実例。境界線は作成時間 ÷ (月削減時間 × 12) = 0.5</text>
+</svg>

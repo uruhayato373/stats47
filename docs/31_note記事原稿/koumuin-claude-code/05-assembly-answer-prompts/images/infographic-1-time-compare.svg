@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="420" fill="#FAFAFA"/>
+  <text x="400" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">答弁作成時間: Before → After</text>
+  <text x="400" y="62" text-anchor="middle" font-size="12" fill="#64748B">「初稿作成 + 想定問答洗い出し」の比較 / 1 質問あたり</text>
+
+  <!-- Before label -->
+  <text x="60" y="125" font-size="16" fill="#7F1D1D" font-weight="bold">Before</text>
+  <text x="60" y="145" font-size="11" fill="#94A3B8">ゼロから手書き</text>
+
+  <!-- Before: 30min = 60px なので scale 1px = 0.5min, 480min = 480px だが画面サイズに合わせ 1px = 1min, 480min を 480px に -->
+  <!-- Use scale: 1px = 1min, max 480min, x base 140 -->
+  <rect x="140" y="100" width="240" height="56" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+  <text x="260" y="128" text-anchor="middle" font-size="14" fill="#FFFFFF" font-weight="bold">過去答弁調べ + 論点整理</text>
+  <text x="260" y="146" text-anchor="middle" font-size="13" fill="#FEE2E2">4 時間 (240 分)</text>
+
+  <rect x="380" y="100" width="180" height="56" fill="#EA580C" stroke="#7C2D12" stroke-width="1.5" rx="3"/>
+  <text x="470" y="128" text-anchor="middle" font-size="14" fill="#FFFFFF" font-weight="bold">初稿作成</text>
+  <text x="470" y="146" text-anchor="middle" font-size="13" fill="#FED7AA">3 時間 (180 分)</text>
+
+  <rect x="560" y="100" width="60" height="56" fill="#F59E0B" stroke="#78350F" stroke-width="1.5" rx="3"/>
+  <text x="590" y="128" text-anchor="middle" font-size="13" fill="#FFFFFF" font-weight="bold">問答準備</text>
+  <text x="590" y="146" text-anchor="middle" font-size="12" fill="#FEF3C7">60 分</text>
+
+  <text x="640" y="135" font-size="20" fill="#7F1D1D" font-weight="bold">計 8 時間</text>
+
+  <!-- Arrow + caption -->
+  <text x="400" y="220" text-anchor="middle" font-size="26" fill="#2563EB" font-weight="bold">↓ 5× faster</text>
+
+  <!-- After label -->
+  <text x="60" y="285" font-size="16" fill="#1E3A8A" font-weight="bold">After</text>
+  <text x="60" y="305" font-size="11" fill="#94A3B8">Claude Code + 3 案出力</text>
+
+  <!-- After bars (same scale 1px = 1min) -->
+  <rect x="140" y="260" width="20" height="56" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <rect x="160" y="260" width="60" height="56" fill="#0891B2" stroke="#164E63" stroke-width="1.5" rx="3"/>
+  <rect x="220" y="260" width="30" height="56" fill="#059669" stroke="#064E3B" stroke-width="1.5" rx="3"/>
+
+  <!-- Callouts -->
+  <line x1="150" y1="316" x2="150" y2="335" stroke="#475569" stroke-width="1"/>
+  <text x="150" y="349" text-anchor="middle" font-size="11" fill="#2563EB" font-weight="bold">/draft 20 分</text>
+
+  <line x1="190" y1="316" x2="190" y2="355" stroke="#475569" stroke-width="1"/>
+  <text x="190" y="369" text-anchor="middle" font-size="11" fill="#0891B2" font-weight="bold">人間が磨く 60 分</text>
+
+  <line x1="235" y1="316" x2="235" y2="375" stroke="#475569" stroke-width="1"/>
+  <text x="235" y="389" text-anchor="middle" font-size="11" fill="#059669" font-weight="bold">問答準備 30 分</text>
+
+  <text x="280" y="295" font-size="20" fill="#1E3A8A" font-weight="bold">計 約 2 時間</text>
+
+  <!-- Same scale guideline -->
+  <line x1="140" y1="405" x2="640" y2="405" stroke="#CBD5E1" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="400" y="418" text-anchor="middle" font-size="11" fill="#94A3B8">スケール: 1 px = 1 分 (Before / After 共通) / Day 2 が半日空く</text>
+</svg>

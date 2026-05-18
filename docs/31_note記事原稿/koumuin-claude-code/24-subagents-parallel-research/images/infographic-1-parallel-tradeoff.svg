@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="440" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">並列数と所要時間 / コストのトレードオフ</text>
+  <text x="400" y="56" text-anchor="middle" font-size="12" fill="#64748B">調査タスク 10 件想定 / Sonnet 4.5 単価ベース</text>
+
+  <!-- Axes -->
+  <line x1="100" y1="360" x2="720" y2="360" stroke="#475569" stroke-width="1.5"/>
+  <line x1="100" y1="100" x2="100" y2="360" stroke="#475569" stroke-width="1.5"/>
+  <line x1="720" y1="100" x2="720" y2="360" stroke="#DC2626" stroke-width="1.5"/>
+
+  <!-- X axis -->
+  <g font-size="11" fill="#64748B" text-anchor="middle">
+    <text x="100" y="380">1</text>
+    <text x="255" y="380">3</text>
+    <text x="410" y="380">5</text>
+    <text x="565" y="380">10</text>
+    <text x="720" y="380">47 (NG)</text>
+    <text x="410" y="405" font-size="12" fill="#475569" font-weight="bold">並列数</text>
+  </g>
+
+  <!-- Y axis (left): 所要時間 (分) -->
+  <g font-size="10" fill="#1E3A8A" text-anchor="end">
+    <text x="92" y="364">0</text>
+    <text x="92" y="312">25</text>
+    <text x="92" y="260">50</text>
+    <text x="92" y="208">75</text>
+    <text x="92" y="156">100</text>
+    <text x="92" y="104">125</text>
+    <text x="60" y="230" font-size="11" fill="#1E3A8A" font-weight="bold" transform="rotate(-90 60 230)">所要時間 (分)</text>
+  </g>
+
+  <!-- Y axis (right): コスト ($) -->
+  <g font-size="10" fill="#7F1D1D" text-anchor="start">
+    <text x="728" y="364">0</text>
+    <text x="728" y="312">2</text>
+    <text x="728" y="260">4</text>
+    <text x="728" y="208">6</text>
+    <text x="728" y="156">8</text>
+    <text x="728" y="104">10</text>
+    <text x="785" y="230" font-size="11" fill="#7F1D1D" font-weight="bold" transform="rotate(-90 785 230)">コスト ($)</text>
+  </g>
+
+  <!-- Gridlines -->
+  <g stroke="#E2E8F0" stroke-width="0.5" stroke-dasharray="3,3">
+    <line x1="100" y1="312" x2="720" y2="312"/>
+    <line x1="100" y1="260" x2="720" y2="260"/>
+    <line x1="100" y1="208" x2="720" y2="208"/>
+    <line x1="100" y1="156" x2="720" y2="156"/>
+    <line x1="100" y1="104" x2="720" y2="104"/>
+  </g>
+
+  <!-- 時間カーブ (青) -->
+  <!-- 1並列=125分 (y=104), 3=42(y=272), 5=25(y=312), 10=13(y=333), 47 不可 -->
+  <polyline points="100,104 255,272 410,312 565,333" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+  <circle cx="100" cy="104" r="5" fill="#2563EB"/>
+  <circle cx="255" cy="272" r="5" fill="#2563EB"/>
+  <circle cx="410" cy="312" r="5" fill="#2563EB"/>
+  <circle cx="565" cy="333" r="5" fill="#2563EB"/>
+
+  <text x="115" y="100" font-size="10" fill="#1E3A8A" font-weight="bold">125 分</text>
+  <text x="270" y="268" font-size="10" fill="#1E3A8A" font-weight="bold">42 分</text>
+  <text x="425" y="308" font-size="10" fill="#1E3A8A" font-weight="bold">25 分</text>
+  <text x="580" y="328" font-size="10" fill="#1E3A8A" font-weight="bold">13 分</text>
+
+  <!-- コストカーブ (赤) -->
+  <!-- 1=$1 (y=337), 3=$1.5(y=321), 5=$2.5(y=295), 10=$6.5(y=190) -->
+  <polyline points="100,337 255,321 410,295 565,190" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <circle cx="100" cy="337" r="5" fill="#DC2626"/>
+  <circle cx="255" cy="321" r="5" fill="#DC2626"/>
+  <circle cx="410" cy="295" r="5" fill="#DC2626"/>
+  <circle cx="565" cy="190" r="5" fill="#DC2626"/>
+
+  <text x="115" y="352" font-size="10" fill="#7F1D1D" font-weight="bold">$1</text>
+  <text x="270" y="338" font-size="10" fill="#7F1D1D" font-weight="bold">$1.5</text>
+  <text x="425" y="290" font-size="10" fill="#7F1D1D" font-weight="bold">$2.5</text>
+  <text x="580" y="185" font-size="10" fill="#7F1D1D" font-weight="bold">$6.5</text>
+
+  <!-- 47 NG ゾーン -->
+  <rect x="640" y="100" width="80" height="260" fill="#FEE2E2" opacity="0.6"/>
+  <text x="680" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">レート</text>
+  <text x="680" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">制限で</text>
+  <text x="680" y="236" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">失敗</text>
+
+  <!-- 推奨ゾーン (5-10) -->
+  <rect x="335" y="100" width="230" height="260" fill="#CCFBF1" opacity="0.35"/>
+  <text x="450" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#0F766E">実用上限ゾーン (5-10 並列)</text>
+
+  <!-- Legend -->
+  <rect x="120" y="425" width="14" height="3" fill="#2563EB"/>
+  <text x="140" y="429" font-size="11" fill="#1E3A8A">所要時間 (左軸)</text>
+  <line x1="270" y1="426" x2="290" y2="426" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <text x="295" y="429" font-size="11" fill="#7F1D1D">コスト (右軸)</text>
+</svg>

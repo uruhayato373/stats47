@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="380" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">経営会議資料作成: 従来 (半日) vs MCP 経由 (30 分)</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- 従来 行 -->
+  <text x="20" y="85" font-size="14" font-weight="bold" fill="#7F1D1D">従来運用</text>
+  <text x="20" y="102" font-size="10" fill="#64748B">LGWAN 系 ↔ USB ↔ インターネット系</text>
+
+  <!-- 従来 ステップ -->
+  <g>
+    <rect x="130" y="75" width="130" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="195" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">CSV エクスポート</text>
+    <text x="195" y="113" text-anchor="middle" font-size="10" fill="#7F1D1D">20 分</text>
+  </g>
+  <line x1="260" y1="100" x2="288" y2="100" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="290" y="75" width="130" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="355" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">USB 持ち出し申請</text>
+    <text x="355" y="113" text-anchor="middle" font-size="10" fill="#7F1D1D">半日 (3 段押印)</text>
+  </g>
+  <line x1="420" y1="100" x2="448" y2="100" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="450" y="75" width="130" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="515" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">ウイルスチェック</text>
+    <text x="515" y="113" text-anchor="middle" font-size="10" fill="#7F1D1D">15 分</text>
+  </g>
+  <line x1="580" y1="100" x2="608" y2="100" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="610" y="75" width="130" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="675" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">突合・グラフ</text>
+    <text x="675" y="113" text-anchor="middle" font-size="10" fill="#7F1D1D">2 時間</text>
+  </g>
+  <line x1="740" y1="100" x2="768" y2="100" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="770" y="75" width="110" height="50" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="825" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">資料化・決裁</text>
+    <text x="825" y="113" text-anchor="middle" font-size="10" fill="#7F1D1D">1 時間</text>
+  </g>
+
+  <!-- 従来 合計 -->
+  <rect x="130" y="150" width="750" height="28" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+  <text x="505" y="169" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold">合計: 半日 + α (約 4-5 時間)</text>
+
+  <!-- 分離線 -->
+  <line x1="20" y1="210" x2="880" y2="210" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- MCP 行 -->
+  <text x="20" y="245" font-size="14" font-weight="bold" fill="#0F766E">MCP 経由</text>
+  <text x="20" y="262" font-size="10" fill="#64748B">日次同期 CSV を Claude が直接参照</text>
+
+  <g>
+    <rect x="130" y="235" width="160" height="50" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="210" y="255" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">日次バッチ同期</text>
+    <text x="210" y="273" text-anchor="middle" font-size="10" fill="#0F766E">深夜自動 / 申請 1 日 1 回</text>
+  </g>
+  <line x1="290" y1="260" x2="318" y2="260" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="320" y="235" width="160" height="50" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="400" y="255" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">MCP server 経由</text>
+    <text x="400" y="273" text-anchor="middle" font-size="10" fill="#1E40AF">Claude が CSV 取得</text>
+  </g>
+  <line x1="480" y1="260" x2="508" y2="260" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="510" y="235" width="160" height="50" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="590" y="255" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">分析・要約・提案</text>
+    <text x="590" y="273" text-anchor="middle" font-size="10" fill="#4338CA">執行率算出 + 表整形</text>
+  </g>
+  <line x1="670" y1="260" x2="698" y2="260" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="700" y="235" width="160" height="50" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="780" y="255" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">人間確認 + 決裁</text>
+    <text x="780" y="273" text-anchor="middle" font-size="10" fill="#9D174D">10 分</text>
+  </g>
+
+  <!-- MCP 合計 -->
+  <rect x="130" y="310" width="92" height="28" fill="#059669" stroke="#064E3B" stroke-width="1.5" rx="3"/>
+  <text x="176" y="329" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold">30 分</text>
+  <text x="240" y="329" font-size="12" fill="#0F766E" font-weight="bold">約 8 倍の時短 (4 時間 → 30 分)</text>
+
+  <text x="450" y="365" text-anchor="middle" font-size="11" fill="#94A3B8">注: リアルタイム連携は諦め、日次バッチで割り切る現実解</text>
+</svg>

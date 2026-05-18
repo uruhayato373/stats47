@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="380" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">Windows / WSL2 / VS Code / Claude Code の階層関係</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">Remote-WSL 拡張で 1 つの IDE から両環境を扱う</text>
+
+  <defs>
+    <marker id="arrowws" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Windows host (outer) -->
+  <rect x="60" y="80" width="680" height="270" fill="#F1F5F9" stroke="#475569" stroke-width="2" rx="8"/>
+  <text x="80" y="105" font-size="13" fill="#1E293B" font-weight="bold">Windows 11 (ホスト OS)</text>
+
+  <!-- VS Code -->
+  <g>
+    <rect x="100" y="125" width="220" height="100" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="210" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E293B">VS Code (Windows)</text>
+    <text x="210" y="172" text-anchor="middle" font-size="11" fill="#1E40AF">Remote-WSL 拡張</text>
+    <text x="210" y="190" text-anchor="middle" font-size="10" fill="#1E40AF">UI は Windows 側で動作</text>
+    <text x="210" y="208" text-anchor="middle" font-size="10" fill="#1E40AF">ファイルは WSL 内を直接編集</text>
+  </g>
+
+  <!-- WSL2 (inner) -->
+  <rect x="350" y="125" width="370" height="200" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="8"/>
+  <text x="370" y="148" font-size="13" fill="#0F766E" font-weight="bold">WSL2 (Ubuntu 22.04)</text>
+
+  <!-- Node.js -->
+  <g>
+    <rect x="380" y="170" width="150" height="60" fill="#FEF3C7" stroke="#B45309" stroke-width="1.5" rx="6"/>
+    <text x="455" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Node.js v20</text>
+    <text x="455" y="214" text-anchor="middle" font-size="10" fill="#92400E">nvm 経由でインストール</text>
+  </g>
+
+  <!-- Claude Code -->
+  <g>
+    <rect x="550" y="170" width="150" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="625" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Claude Code CLI</text>
+    <text x="625" y="214" text-anchor="middle" font-size="10" fill="#4338CA">@anthropic-ai/claude-code</text>
+  </g>
+
+  <!-- ~/work/ -->
+  <g>
+    <rect x="380" y="250" width="320" height="55" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="540" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">~/work/  (プロジェクト)</text>
+    <text x="540" y="290" text-anchor="middle" font-size="10" fill="#9D174D">/mnt/c/ 経由で Windows ファイルもアクセス可</text>
+  </g>
+
+  <!-- Arrows: VS Code → WSL files -->
+  <line x1="320" y1="200" x2="375" y2="280" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowws)"/>
+  <text x="305" y="260" font-size="10" fill="#2563EB" font-weight="bold">編集</text>
+
+  <!-- Node → Claude -->
+  <line x1="530" y1="200" x2="548" y2="200" stroke="#64748B" stroke-width="1.5" marker-end="url(#arrowws)"/>
+
+  <!-- Footer -->
+  <text x="400" y="365" text-anchor="middle" font-size="11" fill="#94A3B8">long path / 改行コード / SSL 証明書の問題を回避でき、Mac と同じ Linux 体験になる</text>
+</svg>

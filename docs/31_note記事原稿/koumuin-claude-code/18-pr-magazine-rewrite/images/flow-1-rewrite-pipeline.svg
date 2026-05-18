@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">広報誌リライト パイプライン (各課原稿 → 入稿)</text>
+
+  <defs>
+    <marker id="arr18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 各課原稿 -->
+  <g>
+    <rect x="20" y="90" width="120" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="80" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">各課原稿</text>
+    <text x="80" y="134" text-anchor="middle" font-size="10" fill="#64748B">役所文体</text>
+  </g>
+  <line x1="140" y1="120" x2="168" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 2: 文字数チェック -->
+  <g>
+    <rect x="170" y="90" width="120" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="230" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">文字数チェック</text>
+    <text x="230" y="134" text-anchor="middle" font-size="10" fill="#92400E">本文 700 字</text>
+  </g>
+  <line x1="290" y1="120" x2="318" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 3: スコア算出 -->
+  <g>
+    <rect x="320" y="90" width="140" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="390" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">読みやすさスコア</text>
+    <text x="390" y="134" text-anchor="middle" font-size="10" fill="#1E40AF">/koho-score (4 指標)</text>
+  </g>
+  <line x1="460" y1="120" x2="488" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 4: 3 案生成 -->
+  <g>
+    <rect x="490" y="90" width="160" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="570" y="113" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">案 A / B / C 生成</text>
+    <text x="570" y="132" text-anchor="middle" font-size="10" fill="#0F766E">最小 / 中程度 / 大幅</text>
+  </g>
+  <line x1="650" y1="120" x2="678" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 5: 文字数調整 -->
+  <g>
+    <rect x="680" y="90" width="120" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="740" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">文字数調整</text>
+    <text x="740" y="134" text-anchor="middle" font-size="10" fill="#4338CA">700 字 ± 5</text>
+  </g>
+
+  <!-- Down arrow -->
+  <line x1="740" y1="150" x2="740" y2="195" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 6: 各課返却 -->
+  <g>
+    <rect x="600" y="200" width="180" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="690" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">各課返却テンプレ</text>
+    <text x="690" y="242" text-anchor="middle" font-size="10" fill="#9D174D">スコア表 + 3 案添付</text>
+  </g>
+  <line x1="600" y1="230" x2="528" y2="230" stroke="#64748B" stroke-width="2" marker-end="url(#arr18)"/>
+
+  <!-- Step 7: 入稿 -->
+  <g>
+    <rect x="380" y="200" width="140" height="60" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="450" y="223" text-anchor="middle" font-size="14" font-weight="bold" fill="#065F46">入稿</text>
+    <text x="450" y="244" text-anchor="middle" font-size="10" fill="#059669">作業時間 1/3 に短縮</text>
+  </g>
+
+  <!-- Caption -->
+  <rect x="40" y="280" width="820" height="28" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4,3" rx="4"/>
+  <text x="450" y="298" text-anchor="middle" font-size="11" fill="#475569">「主観の押し付け」が「客観基準の共有」に変わる → 議論が早い</text>
+</svg>

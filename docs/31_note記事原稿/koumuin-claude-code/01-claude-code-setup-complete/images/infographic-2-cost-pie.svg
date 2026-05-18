@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="380" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">月額コスト内訳: 私物 PC + テザリング運用</text>
+  <text x="400" y="58" text-anchor="middle" font-size="12" fill="#64748B">合計 約 ¥5,000 / 月 (端末償却含めると 月 ¥9,000 程度)</text>
+
+  <!-- Pie chart: 3 segments -->
+  <!-- Claude Pro 3000 (60%), Tether 1000 (20%), Other 1000 (20%) -->
+  <!-- Center 240,220, r 110 -->
+  <!-- Claude Pro: 0deg → 216deg (60%) -->
+  <path d="M 240 220 L 240 110 A 110 110 0 1 1 175.3 309.0 Z" fill="#2563EB" stroke="#FAFAFA" stroke-width="2"/>
+  <!-- Tether: 216deg → 288deg (20%) -->
+  <path d="M 240 220 L 175.3 309.0 A 110 110 0 0 1 134.0 188.4 Z" fill="#059669" stroke="#FAFAFA" stroke-width="2"/>
+  <!-- Other: 288deg → 360deg (20%) -->
+  <path d="M 240 220 L 134.0 188.4 A 110 110 0 0 1 240 110 Z" fill="#F59E0B" stroke="#FAFAFA" stroke-width="2"/>
+
+  <!-- Labels on pie -->
+  <text x="280" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">60%</text>
+  <text x="180" y="265" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">20%</text>
+  <text x="180" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">20%</text>
+
+  <!-- Legend -->
+  <g>
+    <rect x="450" y="120" width="20" height="20" fill="#2563EB" rx="3"/>
+    <text x="480" y="136" font-size="14" font-weight="bold" fill="#1E293B">Claude Pro プラン</text>
+    <text x="480" y="155" font-size="12" fill="#64748B">$20/月 ≒ ¥3,000</text>
+
+    <rect x="450" y="180" width="20" height="20" fill="#059669" rx="3"/>
+    <text x="480" y="196" font-size="14" font-weight="bold" fill="#1E293B">テザリング追加通信</text>
+    <text x="480" y="215" font-size="12" fill="#64748B">¥1,000 / 月 (大容量プラン差額)</text>
+
+    <rect x="450" y="240" width="20" height="20" fill="#F59E0B" rx="3"/>
+    <text x="480" y="256" font-size="14" font-weight="bold" fill="#1E293B">その他 (電気代等)</text>
+    <text x="480" y="275" font-size="12" fill="#64748B">¥1,000 / 月 (概算)</text>
+  </g>
+
+  <!-- Total -->
+  <line x1="450" y1="300" x2="770" y2="300" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="480" y="325" font-size="14" font-weight="bold" fill="#1E293B">合計</text>
+  <text x="770" y="325" text-anchor="end" font-size="18" font-weight="bold" fill="#1E3A8A">¥5,000 / 月</text>
+
+  <text x="400" y="365" text-anchor="middle" font-size="10" fill="#94A3B8">※ 私物 MacBook Air M2 (¥15 万) を 3 年償却すると + ¥4,000/月</text>
+</svg>

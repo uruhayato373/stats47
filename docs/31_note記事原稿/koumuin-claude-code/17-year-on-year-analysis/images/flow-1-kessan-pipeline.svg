@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="290" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">決算前年比較分析パイプライン (5 分で答弁案まで)</text>
+
+  <defs>
+    <marker id="arr17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 財務会計システム -->
+  <g>
+    <rect x="20" y="100" width="140" height="70" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="90" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">財務会計システム</text>
+    <text x="90" y="145" text-anchor="middle" font-size="10" fill="#64748B">富士通/NEC/内田洋行</text>
+    <text x="90" y="160" text-anchor="middle" font-size="10" fill="#64748B">款項目別決算</text>
+  </g>
+  <line x1="160" y1="135" x2="188" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arr17)"/>
+
+  <!-- Step 2: CSV -->
+  <g>
+    <rect x="190" y="100" width="120" height="70" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="250" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">CSV エクスポート</text>
+    <text x="250" y="143" text-anchor="middle" font-size="10" fill="#92400E">UTF-8</text>
+    <text x="250" y="158" text-anchor="middle" font-size="10" fill="#92400E">4 年分</text>
+  </g>
+  <line x1="310" y1="135" x2="338" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arr17)"/>
+
+  <!-- Step 3: Claude -->
+  <g>
+    <rect x="340" y="100" width="160" height="70" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="420" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Claude Code</text>
+    <text x="420" y="138" text-anchor="middle" font-size="11" fill="#0F766E">/kessan-bunseki</text>
+    <text x="420" y="155" text-anchor="middle" font-size="10" fill="#14B8A6">queries.sql 切り口 5 種</text>
+  </g>
+  <line x1="500" y1="135" x2="528" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arr17)"/>
+
+  <!-- Output 4 systems -->
+  <g>
+    <rect x="540" y="60" width="160" height="36" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="4"/>
+    <text x="620" y="83" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A8A">款別 3 年推移表</text>
+  </g>
+  <g>
+    <rect x="540" y="105" width="160" height="36" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="4"/>
+    <text x="620" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#4338CA">グラフ (増減率/不用額)</text>
+  </g>
+  <g>
+    <rect x="540" y="150" width="160" height="36" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="4"/>
+    <text x="620" y="173" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400E">要因コメント</text>
+  </g>
+  <g>
+    <rect x="540" y="195" width="160" height="36" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="4"/>
+    <text x="620" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#9D174D">想定問答 5 問</text>
+  </g>
+
+  <!-- Arrow to final -->
+  <line x1="700" y1="148" x2="728" y2="148" stroke="#64748B" stroke-width="2" marker-end="url(#arr17)"/>
+
+  <!-- Final: 議会答弁原稿 -->
+  <g>
+    <rect x="730" y="110" width="150" height="70" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="805" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#065F46">議会答弁原稿</text>
+    <text x="805" y="155" text-anchor="middle" font-size="10" fill="#059669">係長→課長→部長</text>
+    <text x="805" y="170" text-anchor="middle" font-size="10" fill="#059669">決裁が半分の時間に</text>
+  </g>
+
+  <!-- Bottom comparison -->
+  <rect x="180" y="240" width="540" height="40" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4,3" rx="4"/>
+  <text x="450" y="260" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">Before: Excel ピボット 30〜60 分 × 件数</text>
+  <text x="450" y="274" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">After: スキル一発 5 分 (入力整備込み)</text>
+</svg>

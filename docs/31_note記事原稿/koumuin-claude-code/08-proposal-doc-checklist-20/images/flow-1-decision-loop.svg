@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="420" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">起案差し戻し連鎖 vs Claude Code 一発通過</text>
+
+  <defs>
+    <marker id="arrow08f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow08r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <!-- Before: 連鎖差し戻し -->
+  <text x="40" y="85" font-size="15" fill="#7F1D1D" font-weight="bold">従来: 経路ごとに違う指摘で 5 回手戻り (決裁完了 14 日)</text>
+
+  <g>
+    <rect x="40" y="105" width="110" height="55" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="95" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">起案</text>
+  </g>
+  <line x1="150" y1="132" x2="173" y2="132" stroke="#64748B" stroke-width="2" marker-end="url(#arrow08f1)"/>
+
+  <g>
+    <rect x="175" y="105" width="100" height="55" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="225" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">上席</text>
+    <text x="225" y="142" text-anchor="middle" font-size="10" fill="#7F1D1D">件名 NG</text>
+  </g>
+  <line x1="275" y1="132" x2="298" y2="132" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow08r)"/>
+
+  <g>
+    <rect x="300" y="105" width="100" height="55" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="350" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">財政</text>
+    <text x="350" y="142" text-anchor="middle" font-size="10" fill="#7F1D1D">予算節 NG</text>
+  </g>
+  <line x1="400" y1="132" x2="423" y2="132" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow08r)"/>
+
+  <g>
+    <rect x="425" y="105" width="100" height="55" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="475" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">法務</text>
+    <text x="475" y="142" text-anchor="middle" font-size="10" fill="#7F1D1D">条文引用 NG</text>
+  </g>
+  <line x1="525" y1="132" x2="548" y2="132" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow08r)"/>
+
+  <g>
+    <rect x="550" y="105" width="100" height="55" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="600" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">総務</text>
+    <text x="600" y="142" text-anchor="middle" font-size="10" fill="#7F1D1D">公用文 NG</text>
+  </g>
+  <line x1="650" y1="132" x2="673" y2="132" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow08r)"/>
+
+  <g>
+    <rect x="675" y="105" width="100" height="55" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="725" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">副市長</text>
+    <text x="725" y="142" text-anchor="middle" font-size="10" fill="#7F1D1D">議会対応 NG</text>
+  </g>
+  <line x1="775" y1="132" x2="798" y2="132" stroke="#64748B" stroke-width="2" marker-end="url(#arrow08f1)"/>
+
+  <g>
+    <rect x="800" y="105" width="80" height="55" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="840" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">市長</text>
+    <text x="840" y="142" text-anchor="middle" font-size="10" fill="#92400E">14 日後</text>
+  </g>
+
+  <text x="450" y="195" text-anchor="middle" font-size="14" fill="#7F1D1D" font-weight="bold">提出 1 回 + 修正 5 回 = 月 8 件の差し戻し</text>
+
+  <text x="450" y="235" text-anchor="middle" font-size="22" fill="#2563EB" font-weight="bold">↓ 75% 削減</text>
+
+  <!-- After: Claude Code -->
+  <text x="40" y="270" font-size="15" fill="#0F766E" font-weight="bold">Claude Code: 提出前に 20 項目自己査読 (決裁完了 5 日)</text>
+
+  <g>
+    <rect x="60" y="290" width="140" height="65" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="130" y="313" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">起案</text>
+    <text x="130" y="333" text-anchor="middle" font-size="11" fill="#475569">draft.txt</text>
+  </g>
+  <line x1="200" y1="322" x2="228" y2="322" stroke="#64748B" stroke-width="2" marker-end="url(#arrow08f1)"/>
+
+  <g>
+    <rect x="230" y="290" width="200" height="65" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="330" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">/proposal-review</text>
+    <text x="330" y="330" text-anchor="middle" font-size="11" fill="#0F766E">20 項目を一括査読</text>
+    <text x="330" y="345" text-anchor="middle" font-size="10" fill="#14B8A6">欠落 / 要確認 を抽出</text>
+  </g>
+  <line x1="430" y1="322" x2="458" y2="322" stroke="#64748B" stroke-width="2" marker-end="url(#arrow08f1)"/>
+
+  <g>
+    <rect x="460" y="290" width="160" height="65" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="540" y="313" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">欠落を全て修正</text>
+    <text x="540" y="333" text-anchor="middle" font-size="11" fill="#1E3A8A">15 分</text>
+  </g>
+  <line x1="620" y1="322" x2="648" y2="322" stroke="#64748B" stroke-width="2" marker-end="url(#arrow08f1)"/>
+
+  <g>
+    <rect x="650" y="290" width="200" height="65" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="750" y="313" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">各経路スムーズ通過</text>
+    <text x="750" y="333" text-anchor="middle" font-size="11" fill="#92400E">差し戻し月 2 件</text>
+  </g>
+
+  <text x="450" y="395" text-anchor="middle" font-size="13" fill="#64748B">※ AI 査読は自己査読の精度向上。上席チェックは必ず通す前提</text>
+</svg>

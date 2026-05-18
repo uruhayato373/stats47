@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="280" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">よくあるつまずき 5 項目</text>
+
+  <!-- 1: 結合セル -->
+  <g>
+    <rect x="20" y="70" width="160" height="180" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="100" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#92400E">1</text>
+    <rect x="50" y="110" width="100" height="40" fill="none" stroke="#92400E" stroke-width="1.5" rx="3"/>
+    <line x1="100" y1="110" x2="100" y2="150" stroke="#92400E" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="100" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">結合セル</text>
+    <text x="100" y="195" text-anchor="middle" font-size="10" fill="#475569">openpyxl で</text>
+    <text x="100" y="210" text-anchor="middle" font-size="10" fill="#475569">unmerge 必須</text>
+    <text x="100" y="232" text-anchor="middle" font-size="10" fill="#92400E">data_only=True</text>
+  </g>
+
+  <!-- 2: PDF崩れ -->
+  <g>
+    <rect x="200" y="70" width="160" height="180" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="280" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#7F1D1D">2</text>
+    <rect x="240" y="115" width="80" height="35" fill="none" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+    <line x1="245" y1="125" x2="315" y2="125" stroke="#7F1D1D" stroke-width="1"/>
+    <line x1="245" y1="135" x2="305" y2="135" stroke="#7F1D1D" stroke-width="1"/>
+    <line x1="245" y1="145" x2="315" y2="145" stroke="#7F1D1D" stroke-width="1"/>
+    <text x="280" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">PDF 表崩れ</text>
+    <text x="280" y="195" text-anchor="middle" font-size="10" fill="#475569">pdftotext</text>
+    <text x="280" y="210" text-anchor="middle" font-size="10" fill="#475569">-layout 必須</text>
+    <text x="280" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">tabula で表抽出</text>
+  </g>
+
+  <!-- 3: 項目名変化 -->
+  <g>
+    <rect x="380" y="70" width="160" height="180" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="460" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#4338CA">3</text>
+    <text x="460" y="125" text-anchor="middle" font-size="11" fill="#4338CA">R7「事業実施期間」</text>
+    <text x="460" y="140" text-anchor="middle" font-size="11" fill="#4338CA">↓</text>
+    <text x="460" y="155" text-anchor="middle" font-size="11" fill="#4338CA">R8「補助対象期間」</text>
+    <text x="460" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">項目名変化</text>
+    <text x="460" y="205" text-anchor="middle" font-size="10" fill="#475569">aliases で</text>
+    <text x="460" y="220" text-anchor="middle" font-size="10" fill="#475569">過去表記も拾う</text>
+    <text x="460" y="240" text-anchor="middle" font-size="10" fill="#4338CA">年度別 yml 分離</text>
+  </g>
+
+  <!-- 4: 単位混在 -->
+  <g>
+    <rect x="560" y="70" width="160" height="180" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="640" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#0F766E">4</text>
+    <text x="640" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F766E">円 ≠ 千円 ≠ 百万円</text>
+    <text x="640" y="148" text-anchor="middle" font-size="10" fill="#475569">1,000 千円</text>
+    <text x="640" y="162" text-anchor="middle" font-size="10" fill="#475569">= 1,000,000 円</text>
+    <text x="640" y="183" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">単位混在</text>
+    <text x="640" y="208" text-anchor="middle" font-size="10" fill="#475569">円単位に</text>
+    <text x="640" y="222" text-anchor="middle" font-size="10" fill="#475569">必ず正規化</text>
+    <text x="640" y="242" text-anchor="middle" font-size="10" fill="#0F766E">プロンプト明示</text>
+  </g>
+
+  <!-- 5: 人間チェック -->
+  <g>
+    <rect x="740" y="70" width="140" height="180" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="810" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#9D174D">5</text>
+    <circle cx="810" cy="130" r="14" fill="none" stroke="#9D174D" stroke-width="1.5"/>
+    <text x="810" y="135" text-anchor="middle" font-size="14" fill="#9D174D">人</text>
+    <text x="810" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">人間チェック</text>
+    <text x="810" y="195" text-anchor="middle" font-size="10" fill="#475569">省略禁止</text>
+    <text x="810" y="210" text-anchor="middle" font-size="10" fill="#475569">担当者印必須</text>
+    <text x="810" y="232" text-anchor="middle" font-size="10" fill="#9D174D">差し戻し責任</text>
+  </g>
+</svg>

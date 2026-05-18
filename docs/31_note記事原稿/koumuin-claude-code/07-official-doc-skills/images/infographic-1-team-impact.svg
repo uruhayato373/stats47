@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="420" fill="#FAFAFA"/>
+  <text x="400" y="36" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">チーム展開効果: 3 指標の Before → After</text>
+  <text x="400" y="58" text-anchor="middle" font-size="12" fill="#64748B">.claude/skills/official-doc-review/ を git 共有した自治体での実測</text>
+
+  <!-- Indicator 1: 新人立ち上がり期間 -->
+  <text x="50" y="100" font-size="14" font-weight="bold" fill="#1E293B">① 新人立ち上がり期間 (公用文ルール定着まで)</text>
+
+  <!-- Before bar (3 months = 90 days, 1px = 5days?) -->
+  <text x="50" y="135" font-size="12" fill="#7F1D1D" font-weight="bold">Before</text>
+  <rect x="130" y="115" width="540" height="32" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+  <text x="400" y="136" text-anchor="middle" font-size="13" fill="#FFFFFF" font-weight="bold">3 か月</text>
+
+  <text x="50" y="170" font-size="12" fill="#1E3A8A" font-weight="bold">After</text>
+  <rect x="130" y="155" width="42" height="32" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="180" y="176" font-size="13" fill="#1E3A8A" font-weight="bold">1 週間 (12× 短縮)</text>
+
+  <!-- Indicator 2: 差し戻し率 -->
+  <text x="50" y="220" font-size="14" font-weight="bold" fill="#1E293B">② 月あたり差し戻し件数</text>
+
+  <text x="50" y="255" font-size="12" fill="#7F1D1D" font-weight="bold">Before</text>
+  <rect x="130" y="235" width="240" height="32" fill="#EA580C" stroke="#7C2D12" stroke-width="1.5" rx="3"/>
+  <text x="250" y="256" text-anchor="middle" font-size="13" fill="#FFFFFF" font-weight="bold">12 件 / 月</text>
+
+  <text x="50" y="290" font-size="12" fill="#1E3A8A" font-weight="bold">After</text>
+  <rect x="130" y="275" width="40" height="32" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="180" y="296" font-size="13" fill="#1E3A8A" font-weight="bold">2 件 / 月 (6× 削減)</text>
+
+  <!-- Indicator 3: 上席チェック時間 -->
+  <text x="50" y="340" font-size="14" font-weight="bold" fill="#1E293B">③ 上席チェック時間 (1 件あたり)</text>
+
+  <text x="50" y="375" font-size="12" fill="#7F1D1D" font-weight="bold">Before</text>
+  <rect x="130" y="355" width="180" height="28" fill="#F59E0B" stroke="#78350F" stroke-width="1.5" rx="3"/>
+  <text x="220" y="374" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold">30 分</text>
+
+  <text x="50" y="405" font-size="12" fill="#1E3A8A" font-weight="bold">After</text>
+  <rect x="130" y="390" width="30" height="20" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="170" y="405" font-size="12" fill="#1E3A8A" font-weight="bold">5 分 (6× 短縮)</text>
+
+  <!-- 注釈 -->
+  <line x1="130" y1="412" x2="670" y2="412" stroke="#CBD5E1" stroke-width="0.5" stroke-dasharray="3,3"/>
+</svg>

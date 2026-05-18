@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="320" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">不用額の定義 3 パターン比較</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">財政課の集計定義をプロンプトに明示しないと数字がズレる</text>
+
+  <!-- Pattern A: 執行残 -->
+  <g>
+    <rect x="40" y="90" width="230" height="200" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="8"/>
+    <circle cx="80" cy="120" r="18" fill="#2563EB"/>
+    <text x="80" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">A</text>
+    <text x="115" y="126" font-size="14" font-weight="bold" fill="#1E3A8A">執行残</text>
+    <text x="60" y="160" font-size="11" fill="#1E293B">式:</text>
+    <text x="60" y="178" font-size="12" font-weight="bold" fill="#1E3A8A">fuyou =</text>
+    <text x="60" y="196" font-size="12" font-weight="bold" fill="#1E3A8A">yosan − kessan</text>
+    <text x="60" y="226" font-size="11" fill="#475569">繰越額を含む</text>
+    <text x="60" y="244" font-size="11" fill="#475569">最も大きい数字</text>
+    <text x="60" y="270" font-size="10" fill="#1E40AF" font-style="italic">議会答弁向き</text>
+  </g>
+
+  <!-- Pattern B: 繰越除外 -->
+  <g>
+    <rect x="285" y="90" width="230" height="200" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="8"/>
+    <circle cx="325" cy="120" r="18" fill="#059669"/>
+    <text x="325" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">B</text>
+    <text x="360" y="126" font-size="14" font-weight="bold" fill="#0F766E">繰越除外</text>
+    <text x="305" y="160" font-size="11" fill="#1E293B">式:</text>
+    <text x="305" y="178" font-size="12" font-weight="bold" fill="#0F766E">fuyou =</text>
+    <text x="305" y="196" font-size="12" font-weight="bold" fill="#0F766E">yosan − kessan</text>
+    <text x="305" y="212" font-size="12" font-weight="bold" fill="#0F766E">− 繰越額</text>
+    <text x="305" y="238" font-size="11" fill="#475569">繰越事業を分離</text>
+    <text x="305" y="256" font-size="11" fill="#475569">事業比較向き</text>
+    <text x="305" y="278" font-size="10" fill="#065F46" font-style="italic">本記事の標準</text>
+  </g>
+
+  <!-- Pattern C: 支出済差 -->
+  <g>
+    <rect x="530" y="90" width="230" height="200" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="8"/>
+    <circle cx="570" cy="120" r="18" fill="#D97706"/>
+    <text x="570" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">C</text>
+    <text x="605" y="126" font-size="14" font-weight="bold" fill="#92400E">支出済差</text>
+    <text x="550" y="160" font-size="11" fill="#1E293B">式:</text>
+    <text x="550" y="178" font-size="12" font-weight="bold" fill="#92400E">fuyou =</text>
+    <text x="550" y="196" font-size="12" font-weight="bold" fill="#92400E">yosan − 支出済額</text>
+    <text x="550" y="226" font-size="11" fill="#475569">未払金等を含む</text>
+    <text x="550" y="244" font-size="11" fill="#475569">出納整理期間考慮</text>
+    <text x="550" y="270" font-size="10" fill="#78350F" font-style="italic">監査答弁向き</text>
+  </g>
+</svg>

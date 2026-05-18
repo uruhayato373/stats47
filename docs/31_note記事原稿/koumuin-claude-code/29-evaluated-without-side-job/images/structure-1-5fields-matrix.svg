@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="480" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">公務員の 5 つの評価の場 (4 象限マトリクス)</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">縦軸: 短期成果 ↔ 長期成果 / 横軸: 庁内 ↔ 庁外</text>
+
+  <!-- Axes -->
+  <line x1="400" y1="90" x2="400" y2="430" stroke="#94A3B8" stroke-width="1.5"/>
+  <line x1="80" y1="260" x2="720" y2="260" stroke="#94A3B8" stroke-width="1.5"/>
+
+  <!-- Axis labels -->
+  <text x="400" y="80" text-anchor="middle" font-size="11" fill="#64748B">短期成果 (~ 1 年)</text>
+  <text x="400" y="448" text-anchor="middle" font-size="11" fill="#64748B">長期成果 (3 年 ~)</text>
+  <text x="74" y="263" text-anchor="end" font-size="11" fill="#64748B">庁内</text>
+  <text x="726" y="263" text-anchor="start" font-size="11" fill="#64748B">庁外</text>
+
+  <!-- Q1: 上左 = 短期 × 庁内 → 人事考課 -->
+  <g>
+    <rect x="100" y="100" width="280" height="150" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="240" y="125" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E3A8A">① 人事考課</text>
+    <text x="240" y="143" text-anchor="middle" font-size="11" fill="#475569">直属上司による年 2 回評価</text>
+    <line x1="115" y1="155" x2="365" y2="155" stroke="#1E3A8A" stroke-width="0.5"/>
+    <text x="240" y="178" text-anchor="middle" font-size="11" fill="#1E293B">リターン: ボーナス + 1-3 万 / 年</text>
+    <text x="240" y="198" text-anchor="middle" font-size="11" fill="#1E293B">時間軸: 半年で結果が出る</text>
+    <text x="240" y="222" text-anchor="middle" font-size="10" fill="#1E3A8A">主因: 業務効率化の数値 (議事録 5 分等)</text>
+  </g>
+
+  <!-- Q2: 上右 = 短期 × 庁外 → 国派遣 -->
+  <g>
+    <rect x="420" y="100" width="280" height="150" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="560" y="125" text-anchor="middle" font-size="15" font-weight="bold" fill="#0F766E">② 国派遣 / 出張機会</text>
+    <text x="560" y="143" text-anchor="middle" font-size="11" fill="#475569">デジ庁 / 総務省への派遣</text>
+    <line x1="435" y1="155" x2="685" y2="155" stroke="#0F766E" stroke-width="0.5"/>
+    <text x="560" y="178" text-anchor="middle" font-size="11" fill="#1E293B">リターン: 月給アップ + 経験</text>
+    <text x="560" y="198" text-anchor="middle" font-size="11" fill="#1E293B">時間軸: 1-2 年で選ばれる</text>
+    <text x="560" y="222" text-anchor="middle" font-size="10" fill="#0F766E">主因: 庁内事例の対外発信</text>
+  </g>
+
+  <!-- Q3: 下左 = 長期 × 庁内 → 庁内講師 -->
+  <g>
+    <rect x="100" y="270" width="280" height="150" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="240" y="295" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400E">③ 庁内講師 / 人事課研修</text>
+    <text x="240" y="313" text-anchor="middle" font-size="11" fill="#475569">全庁向けの正規プログラム</text>
+    <line x1="115" y1="325" x2="365" y2="325" stroke="#92400E" stroke-width="0.5"/>
+    <text x="240" y="348" text-anchor="middle" font-size="11" fill="#1E293B">リターン: 信頼蓄積 + 課長昇格</text>
+    <text x="240" y="368" text-anchor="middle" font-size="11" fill="#1E293B">時間軸: 2-3 年の積み上げ</text>
+    <text x="240" y="392" text-anchor="middle" font-size="10" fill="#92400E">主因: 課内勉強会の継続実績</text>
+  </g>
+
+  <!-- Q4: 下右 = 長期 × 庁外 → 他自治体研修 + OB ネットワーク -->
+  <g>
+    <rect x="420" y="270" width="280" height="150" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="560" y="295" text-anchor="middle" font-size="15" font-weight="bold" fill="#9D174D">④ 他自治体研修</text>
+    <text x="560" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="#9D174D">⑤ OB ネットワーク</text>
+    <line x1="435" y1="325" x2="685" y2="325" stroke="#9D174D" stroke-width="0.5"/>
+    <text x="560" y="348" text-anchor="middle" font-size="11" fill="#1E293B">リターン: 退職後年収アップ</text>
+    <text x="560" y="368" text-anchor="middle" font-size="11" fill="#1E293B">時間軸: 5-10 年の信用構築</text>
+    <text x="560" y="392" text-anchor="middle" font-size="10" fill="#9D174D">主因: 庁外発信 + 国派遣後の縁</text>
+  </g>
+
+  <text x="400" y="468" text-anchor="middle" font-size="11" fill="#94A3B8">※ 副業ができなくても、5 つの場で「経験を貨幣化する」道がある</text>
+</svg>

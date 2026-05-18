@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="400" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">Claude Code Hook 6 ポイント: 取得可能なメタ情報と典型用途</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">セッション起動 → プロンプト → ツール実行 → 通知 → 終了 の時系列で俯瞰</text>
+
+  <!-- Timeline arrow -->
+  <defs>
+    <marker id="arr12b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <line x1="50" y1="110" x2="850" y2="110" stroke="#475569" stroke-width="2" marker-end="url(#arr12b)"/>
+  <text x="50" y="98" font-size="11" fill="#475569" font-weight="bold">起動</text>
+  <text x="840" y="98" text-anchor="end" font-size="11" fill="#475569" font-weight="bold">終了</text>
+
+  <!-- 6 nodes -->
+  <!-- 1 SessionStart -->
+  <circle cx="100" cy="110" r="9" fill="#0EA5E9" stroke="#0369A1" stroke-width="2"/>
+  <text x="100" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#0369A1">SessionStart</text>
+
+  <!-- 2 UserPromptSubmit -->
+  <circle cx="240" cy="110" r="9" fill="#2563EB" stroke="#1E3A8A" stroke-width="2"/>
+  <text x="240" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">UserPromptSubmit</text>
+
+  <!-- 3 PreToolUse -->
+  <circle cx="390" cy="110" r="9" fill="#F59E0B" stroke="#92400E" stroke-width="2"/>
+  <text x="390" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400E">PreToolUse</text>
+
+  <!-- 4 PostToolUse -->
+  <circle cx="540" cy="110" r="9" fill="#059669" stroke="#0F766E" stroke-width="2"/>
+  <text x="540" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#0F766E">PostToolUse</text>
+
+  <!-- 5 Notification -->
+  <circle cx="680" cy="110" r="9" fill="#9D174D" stroke="#831843" stroke-width="2"/>
+  <text x="680" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#9D174D">Notification</text>
+
+  <!-- 6 Stop -->
+  <circle cx="800" cy="110" r="9" fill="#4338CA" stroke="#312E81" stroke-width="2"/>
+  <text x="800" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#312E81">Stop</text>
+
+  <!-- Cards underneath -->
+  <!-- Card 1 -->
+  <g>
+    <rect x="40" y="155" width="120" height="220" fill="#E0F2FE" stroke="#0369A1" stroke-width="1.5" rx="6"/>
+    <text x="100" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#0369A1">SessionStart</text>
+    <line x1="50" y1="183" x2="150" y2="183" stroke="#0369A1" stroke-width="0.5"/>
+    <text x="50" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="50" y="216" font-size="10" fill="#475569">- session_id</text>
+    <text x="50" y="230" font-size="10" fill="#475569">- cwd / git branch</text>
+    <text x="50" y="244" font-size="10" fill="#475569">- user / host</text>
+    <text x="50" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="50" y="286" font-size="10" fill="#475569">- 起動メタ記録</text>
+    <text x="50" y="300" font-size="10" fill="#475569">- 環境チェック</text>
+    <text x="50" y="334" font-size="10" font-weight="bold" fill="#DC2626">書換 ×</text>
+    <text x="50" y="350" font-size="10" font-weight="bold" fill="#DC2626">ブロック ×</text>
+  </g>
+
+  <!-- Card 2 -->
+  <g>
+    <rect x="180" y="155" width="120" height="220" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="240" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A8A">UserPrompt</text>
+    <line x1="190" y1="183" x2="290" y2="183" stroke="#1E3A8A" stroke-width="0.5"/>
+    <text x="190" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="190" y="216" font-size="10" fill="#475569">- prompt 全文</text>
+    <text x="190" y="230" font-size="10" fill="#475569">- session_id</text>
+    <text x="190" y="244" font-size="10" fill="#475569">- cwd</text>
+    <text x="190" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="190" y="286" font-size="10" fill="#475569">- PII マスク</text>
+    <text x="190" y="300" font-size="10" fill="#475569">- 監査ログ追記</text>
+    <text x="190" y="334" font-size="10" font-weight="bold" fill="#059669">書換 ○</text>
+    <text x="190" y="350" font-size="10" font-weight="bold" fill="#059669">ブロック ○</text>
+  </g>
+
+  <!-- Card 3 -->
+  <g>
+    <rect x="330" y="155" width="120" height="220" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="390" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400E">PreToolUse</text>
+    <line x1="340" y1="183" x2="440" y2="183" stroke="#92400E" stroke-width="0.5"/>
+    <text x="340" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="340" y="216" font-size="10" fill="#475569">- tool_name</text>
+    <text x="340" y="230" font-size="10" fill="#475569">- tool_input</text>
+    <text x="340" y="244" font-size="10" fill="#475569">- matcher 適合</text>
+    <text x="340" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="340" y="286" font-size="10" fill="#475569">- 危険コマンド阻止</text>
+    <text x="340" y="300" font-size="10" fill="#475569">- 承認ゲート</text>
+    <text x="340" y="334" font-size="10" font-weight="bold" fill="#DC2626">書換 ×</text>
+    <text x="340" y="350" font-size="10" font-weight="bold" fill="#059669">ブロック ○</text>
+  </g>
+
+  <!-- Card 4 -->
+  <g>
+    <rect x="480" y="155" width="120" height="220" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="540" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F766E">PostToolUse</text>
+    <line x1="490" y1="183" x2="590" y2="183" stroke="#0F766E" stroke-width="0.5"/>
+    <text x="490" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="490" y="216" font-size="10" fill="#475569">- tool_name</text>
+    <text x="490" y="230" font-size="10" fill="#475569">- tool_output</text>
+    <text x="490" y="244" font-size="10" fill="#475569">- exit code</text>
+    <text x="490" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="490" y="286" font-size="10" fill="#475569">- Edit/Write 検知</text>
+    <text x="490" y="300" font-size="10" fill="#475569">- 変更ファイル記録</text>
+    <text x="490" y="334" font-size="10" font-weight="bold" fill="#DC2626">書換 ×</text>
+    <text x="490" y="350" font-size="10" font-weight="bold" fill="#DC2626">ブロック ×</text>
+  </g>
+
+  <!-- Card 5 -->
+  <g>
+    <rect x="620" y="155" width="120" height="220" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="680" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#9D174D">Notification</text>
+    <line x1="630" y1="183" x2="730" y2="183" stroke="#9D174D" stroke-width="0.5"/>
+    <text x="630" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="630" y="216" font-size="10" fill="#475569">- title / message</text>
+    <text x="630" y="230" font-size="10" fill="#475569">- session_id</text>
+    <text x="630" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="630" y="286" font-size="10" fill="#475569">- Slack 通知</text>
+    <text x="630" y="300" font-size="10" fill="#475569">- 承認依頼転送</text>
+    <text x="630" y="334" font-size="10" font-weight="bold" fill="#DC2626">書換 ×</text>
+    <text x="630" y="350" font-size="10" font-weight="bold" fill="#DC2626">ブロック ×</text>
+  </g>
+
+  <!-- Card 6 -->
+  <g>
+    <rect x="760" y="155" width="120" height="220" fill="#E0E7FF" stroke="#312E81" stroke-width="1.5" rx="6"/>
+    <text x="820" y="175" text-anchor="middle" font-size="12" font-weight="bold" fill="#312E81">Stop</text>
+    <line x1="770" y1="183" x2="870" y2="183" stroke="#312E81" stroke-width="0.5"/>
+    <text x="770" y="200" font-size="10" fill="#1E293B" font-weight="bold">取得:</text>
+    <text x="770" y="216" font-size="10" fill="#475569">- session_id</text>
+    <text x="770" y="230" font-size="10" fill="#475569">- 終了理由</text>
+    <text x="770" y="244" font-size="10" fill="#475569">- token 使用量</text>
+    <text x="770" y="270" font-size="10" fill="#1E293B" font-weight="bold">用途:</text>
+    <text x="770" y="286" font-size="10" fill="#475569">- セッション集計</text>
+    <text x="770" y="300" font-size="10" fill="#475569">- 終了ログ</text>
+    <text x="770" y="334" font-size="10" font-weight="bold" fill="#DC2626">書換 ×</text>
+    <text x="770" y="350" font-size="10" font-weight="bold" fill="#DC2626">ブロック ×</text>
+  </g>
+
+  <text x="450" y="392" text-anchor="middle" font-size="10" fill="#94A3B8">監査ログ用途は PostToolUse (file 変更検知) と Stop (セッション集計) を組み合わせる</text>
+</svg>

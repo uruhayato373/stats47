@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">監査ログ生成パイプライン (送信 → ハッシュ → 月次レポート → 提出)</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">チェーンハッシュで改ざん検知 / Markdown レポートで監査担当へ提出</text>
+
+  <defs>
+    <marker id="arr12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: User prompt submit -->
+  <g>
+    <rect x="20" y="100" width="120" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="80" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">プロンプト送信</text>
+    <text x="80" y="143" text-anchor="middle" font-size="11" fill="#64748B">user → Claude</text>
+  </g>
+  <line x1="140" y1="130" x2="168" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Step 2: UserPromptSubmit hook -->
+  <g>
+    <rect x="170" y="100" width="140" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="240" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">UserPromptSubmit</text>
+    <text x="240" y="143" text-anchor="middle" font-size="11" fill="#92400E">hook 発火</text>
+  </g>
+  <line x1="310" y1="130" x2="338" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Step 3: log-prompt.mjs -->
+  <g>
+    <rect x="340" y="100" width="170" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="425" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">log-prompt.mjs</text>
+    <text x="425" y="138" text-anchor="middle" font-size="10" fill="#1E40AF">SHA-256(prompt) + prev_hash</text>
+    <text x="425" y="152" text-anchor="middle" font-size="10" fill="#1E40AF">user / host / cwd 記録</text>
+  </g>
+  <line x1="510" y1="130" x2="538" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Step 4: JSONL log file -->
+  <g>
+    <rect x="540" y="100" width="170" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="625" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">audit/YYYY-MM-DD</text>
+    <text x="625" y="138" text-anchor="middle" font-size="10" fill="#4338CA">.jsonl 追記</text>
+    <text x="625" y="152" text-anchor="middle" font-size="10" fill="#6366F1">ハッシュチェーン構造</text>
+  </g>
+  <line x1="710" y1="130" x2="738" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Step 5: monthly aggregate -->
+  <g>
+    <rect x="740" y="100" width="140" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="810" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">audit-monthly</text>
+    <text x="810" y="138" text-anchor="middle" font-size="10" fill="#0F766E">月次集計</text>
+    <text x="810" y="152" text-anchor="middle" font-size="10" fill="#14B8A6">node script</text>
+  </g>
+
+  <!-- Step 6: audit-report.md -->
+  <g>
+    <rect x="350" y="220" width="200" height="55" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="450" y="242" text-anchor="middle" font-size="14" font-weight="bold" fill="#065F46">audit-report-YYYY-MM.md</text>
+    <text x="450" y="261" text-anchor="middle" font-size="11" fill="#059669">監査担当者向け Markdown</text>
+  </g>
+  <line x1="810" y1="160" x2="810" y2="190" stroke="#64748B" stroke-width="2"/>
+  <line x1="810" y1="190" x2="555" y2="190" stroke="#64748B" stroke-width="2"/>
+  <line x1="555" y1="190" x2="555" y2="215" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Step 7: 提出 -->
+  <g>
+    <rect x="600" y="220" width="200" height="55" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="700" y="242" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">監査担当者へ提出</text>
+    <text x="700" y="261" text-anchor="middle" font-size="11" fill="#9D174D">議会答弁・住民監査対応</text>
+  </g>
+  <line x1="550" y1="247" x2="598" y2="247" stroke="#64748B" stroke-width="2" marker-end="url(#arr12)"/>
+
+  <!-- Hash chain note -->
+  <text x="450" y="305" text-anchor="middle" font-size="11" fill="#94A3B8">本文ハッシュのみ保存 (ログ自体が個人情報の二次格納場所にならない設計)</text>
+</svg>
