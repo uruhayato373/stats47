@@ -47,6 +47,10 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
         "total-population",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "人口動態",

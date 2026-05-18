@@ -67,6 +67,10 @@ export const LABOR_WAGES_SET: IndicatorSet = {
         "turnover-rate",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "最低賃金",

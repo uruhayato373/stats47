@@ -55,6 +55,10 @@ export const HEALTHCARE_SET: IndicatorSet = {
         "treatment-rate-mood-disorder-outpatient",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "医師数",

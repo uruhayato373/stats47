@@ -55,6 +55,10 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
         "divorces",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "空き家",
