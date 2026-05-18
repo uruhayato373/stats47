@@ -9,13 +9,16 @@
  *   npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
  */
 
+import * as fs from "node:fs";
+import * as path from "node:path";
+import Database from "better-sqlite3";
+
 import { runKsjPipeline } from "../pipeline";
-import {
-  listDatasets,
-  listDatasetsByCategory,
-  getDatasetDef,
-} from "../registry";
+import { listDatasetsByCategory, getDatasetDef } from "../registry";
 import type { KsjPipelineResult } from "../types";
+
+const LOCAL_D1_PATH =
+  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 
 function printHelp() {
   console.log(`
@@ -42,22 +45,78 @@ KSJ データパイプライン
 }
 
 function printList() {
-  console.log("\n登録済みデータセット:\n");
+  // D1 gis_datasets を真実源とする。registry.ts 単独表示が必要な場合は別途
+  // --list-registry オプションを追加する想定 (Phase 2 以降)。
+  const projectRoot = findProjectRoot();
+  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
+  if (!fs.existsSync(dbPath)) {
+    console.error(`ローカル D1 SQLite が見つかりません: ${dbPath}`);
+    process.exit(1);
+  }
+
+  interface Row {
+    data_id: string;
+    name: string;
+    geometry_type: string;
+    coverage: string;
+    license: string;
+    status: string;
+    r2_version: string | null;
+  }
+
+  const db = new Database(dbPath, { readonly: true });
+  const rows = db
+    .prepare(
+      `SELECT data_id, name, geometry_type, coverage, license, status, r2_version
+       FROM gis_datasets
+       ORDER BY status, category, data_id`,
+    )
+    .all() as Row[];
+  db.close();
+
+  const statusCounts: Record<string, number> = {
+    available: 0,
+    registered: 0,
+    imported: 0,
+    deprecated: 0,
+  };
+  for (const r of rows) statusCounts[r.status] = (statusCounts[r.status] ?? 0) + 1;
+
+  console.log("\nKSJ データセット一覧 (D1: gis_datasets):\n");
+  console.log(
+    `  状態: available ${statusCounts.available} / registered ${statusCounts.registered} / imported ${statusCounts.imported} / deprecated ${statusCounts.deprecated} (計 ${rows.length})\n`,
+  );
   console.log(
     "  " +
+      "状態".padEnd(10) +
       "ID".padEnd(12) +
       "名前".padEnd(16) +
       "型".padEnd(10) +
       "範囲".padEnd(14) +
-      "ライセンス"
+      "Ver".padEnd(12) +
+      "ライセンス",
   );
-  console.log("  " + "-".repeat(70));
-  for (const def of listDatasets()) {
+  console.log("  " + "-".repeat(90));
+  for (const r of rows) {
     console.log(
-      `  ${def.dataId.padEnd(12)} ${def.name.padEnd(14)} ${def.geometryType.padEnd(10)} ${def.coverage.padEnd(14)} ${def.license}`
+      `  ${r.status.padEnd(10)} ${r.data_id.padEnd(12)} ${r.name.padEnd(14)} ${r.geometry_type.padEnd(10)} ${r.coverage.padEnd(14)} ${(r.r2_version ?? "—").padEnd(12)} ${r.license}`,
     );
   }
-  console.log(`\n  合計: ${listDatasets().length} データセット`);
+  console.log("");
+}
+
+function findProjectRoot(): string {
+  let dir = __dirname;
+  for (let i = 0; i < 10; i++) {
+    if (fs.existsSync(path.join(dir, "package.json"))) {
+      const pkg = JSON.parse(
+        fs.readFileSync(path.join(dir, "package.json"), "utf-8"),
+      );
+      if (pkg.workspaces || pkg.name === "stats47") return dir;
+    }
+    dir = path.dirname(dir);
+  }
+  throw new Error("Could not find project root");
 }
 
 function printResult(result: KsjPipelineResult) {

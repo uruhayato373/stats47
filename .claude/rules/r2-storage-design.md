@@ -35,7 +35,7 @@
 
 | ディレクトリ | 内容 | 理由 |
 |---|---|---|
-| `gis/` | 生 GIS ファイル・タイルセット・カタログ | web app の snapshot fetch 経路とは別 |
+| `gis/` | 生 GIS ファイル・タイルセット（mlit-ksj 等） | web app の snapshot fetch 経路とは別 |
 | `ges/` | Google Earth Studio 動画出力 | URL なし、非 Web アプリデータ |
 | `sns/` | SNS サムネイル | Web アプリの fetch 対象外 |
 
