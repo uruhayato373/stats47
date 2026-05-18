@@ -6,8 +6,8 @@ status: phase-2-deployed
 target_weeks: 2026-W21 - 2026-W26
 phases:
   - { id: 1, status: completed, week: W21, pr: 308 }
-  - { id: 2, status: completed, week: W21-pre, pr: pending, note: "本来 W23-W24 予定を agent 並列で W21 内に前倒し実装" }
-  - { id: 3, status: partial, week: W25-W26, note: "triggers.json に Routine entry 追加 (disabled)、billing 設定後に W25 で有効化" }
+  - { id: 2, status: completed, week: W21-pre, pr: 310, note: "本来 W23-W24 予定を agent 並列で W21 内に前倒し実装" }
+  - { id: 3, status: partial, week: W21-pre, pr: pending, note: "CTR 自動抽出 + fetch-article-data 実装 + CWV candidate スクリプトを agent 並列で前倒し実装。Routine 有効化と LLM PR 起票は別フェーズ" }
 related_files:
   - .claude/scripts/lib/scan-pending-improvements.mjs
   - .claude/scripts/lib/triage-matrix.mjs
