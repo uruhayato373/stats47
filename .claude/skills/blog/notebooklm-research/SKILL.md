@@ -21,32 +21,43 @@ description: >
 
 ### notebooklm CLI
 
-stats47 / doboku-note 共通の `~/bin/notebooklm` (Python venv ラッパー、v0.3.4)。
+stats47 / doboku-note 共通の `~/bin/notebooklm` (Python venv ラッパー、v0.4.1 以上)。
+
+**パッケージ名: `notebooklm-py`** (PyPI、teng-lin 製、unofficial Python API)。CLI バイナリ名は `notebooklm`。
 
 ```bash
-notebooklm --version   # 0.3.4 以上を確認
+notebooklm --version   # 0.4.1 以上を確認
 notebooklm login       # 認証期限切れ時はユーザーが手動実行 (インタラクティブ OAuth)
 notebooklm list --json | jq '.[] | {title, id}'  # 利用可能ノートブック確認
 ```
 
 **初回 setup (CLI 未 install の環境)**:
+
+Mac は 2026-05-18 のセッションで以下手順により setup 済 (`~/.notebooklm-venv` + `~/bin/notebooklm` wrapper、notebooklm-py 0.4.1)。
+
 ```bash
-# doboku-note 側で行った install を stats47 環境でも実施
-# 2026-05-18 時点で Mac 環境では未 install のため、最初に下記を実行
+# stats47 環境セットアップ (再現可能な手順)
 python3 -m venv ~/.notebooklm-venv
-~/.notebooklm-venv/bin/pip install notebooklm
+~/.notebooklm-venv/bin/pip install --upgrade pip
+~/.notebooklm-venv/bin/pip install notebooklm-py
+# (UI 操作機能まで使う場合は notebooklm-py[browser] + playwright install chromium)
+
 mkdir -p ~/bin
-cat > ~/bin/notebooklm << 'EOF'
+cat > ~/bin/notebooklm <<'EOF'
 #!/bin/bash
 source ~/.notebooklm-venv/bin/activate
 exec notebooklm "$@"
 EOF
 chmod +x ~/bin/notebooklm
-~/bin/notebooklm --version  # 0.3.4 以上を確認
-~/bin/notebooklm login      # 初回 OAuth 認証
+
+~/bin/notebooklm --version  # → NotebookLM CLI, version 0.4.1
+~/bin/notebooklm login      # 初回 OAuth 認証 (要ブラウザ)
 ```
 
-setup 後、`PATH` に `~/bin` が含まれていれば `notebooklm` コマンドが直接使える。
+`PATH` に `~/bin` がない場合は `~/.zshrc` に `export PATH="$HOME/bin:$PATH"` を追加。
+スキル経由 (notebooklm-cross-query.mjs) では絶対パス `~/bin/notebooklm` を呼ぶため PATH 追加不要。
+
+参考: https://github.com/teng-lin/notebooklm-py
 
 `nlm cross query` 相当のサブコマンドが現行 CLI にないため、本プロジェクトでは決定論的ラッパー `.claude/scripts/notebooklm-cross-query.mjs` を経由する。実態は `notebooklm list --json` で ID 解決 + `notebooklm ask -n <id> --json "..."` を逐次実行する形。
 
