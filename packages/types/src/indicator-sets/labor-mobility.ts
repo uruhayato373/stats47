@@ -44,6 +44,10 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
         "monthly-average-actual-working-hours-male",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "離職率",

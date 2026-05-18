@@ -39,8 +39,10 @@ Phase 0 のデータ読み込みは両方のパスを検索するため、移動
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<slug>/note.md` または `.local/r2/note/<slug>/note.md`
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<slug>/{note.md,draft.md}` / `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}` / `.local/r2/note/<slug>/{note.md,draft.md}` のいずれか
 3. Chrome Profile 1 で note.com にログイン済み
+4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
+5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
 
 ## browser-use 共通設定
 
@@ -105,19 +107,23 @@ end tell' 2>/dev/null || true
 詳細手順は **[references/editor-operations.md](references/editor-operations.md)** を参照。
 
 主なポイント:
-- **Phase 0**: Node.js スクリプトで note.md を読み込み、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
+- **Phase 0**: Node.js スクリプトで note.md / draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
 - **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。URL は plain text のまま貼られる（カード化は手動）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
 
-### Phase 7: 公開設定
+### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
 詳細手順は **[references/scheduling.md](references/scheduling.md)** を参照。
 
+実行順序: 公開に進む → **Phase 7-Pricing**（有料時のみ）→ Phase 7-Tags（ハッシュタグ）→ Phase 7-Schedule（予約 or 即時）
+
 主なポイント:
+- **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
+- 有料記事は最後のボタン label が「投稿する」→「有料エリア設定」に変化。**有料エリア境界選択画面は本検証では未到達 → 半自動（価格までは自動、境界設定以降は手動）が当面の運用**
 - 「公開に進む」→ ハッシュタグ入力 → 日時設定 → 予約投稿
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
-- 日時も即時公開も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
+- 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 
 ## 重要な注意事項
 

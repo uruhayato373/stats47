@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="360" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">.claude/skills/official-doc-review/ 構造</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">SKILL.md + reference/ + examples/ — git で共有可</text>
+
+  <defs>
+    <marker id="arrow07s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Skill root -->
+  <rect x="40" y="80" width="720" height="240" fill="none" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="6,4" rx="8"/>
+  <text x="60" y="103" font-size="12" fill="#64748B" font-weight="bold">.claude/skills/official-doc-review/  (スキルディレクトリ)</text>
+
+  <!-- SKILL.md -->
+  <g>
+    <rect x="80" y="130" width="220" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="190" y="155" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E293B">SKILL.md</text>
+    <text x="190" y="177" text-anchor="middle" font-size="11" fill="#0F766E">frontmatter + 実行手順</text>
+    <text x="190" y="194" text-anchor="middle" font-size="10" fill="#0F766E">10 観点チェック定義</text>
+  </g>
+
+  <!-- reference/ -->
+  <g>
+    <rect x="320" y="130" width="220" height="80" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="6"/>
+    <text x="430" y="153" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E293B">reference/</text>
+    <text x="430" y="172" text-anchor="middle" font-size="10" fill="#92400E">koyobun-2022.txt (国基準)</text>
+    <text x="430" y="187" text-anchor="middle" font-size="10" fill="#92400E">jichitai-rules.txt (自治体)</text>
+    <text x="430" y="202" text-anchor="middle" font-size="10" fill="#92400E">common-mistakes.md</text>
+  </g>
+
+  <!-- examples/ -->
+  <g>
+    <rect x="560" y="130" width="180" height="80" fill="#E0E7FF" stroke="#4338CA" stroke-width="2" rx="6"/>
+    <text x="650" y="153" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E293B">examples/</text>
+    <text x="650" y="175" text-anchor="middle" font-size="11" fill="#4338CA">before-after.md</text>
+    <text x="650" y="192" text-anchor="middle" font-size="10" fill="#475569">(精度向上用)</text>
+  </g>
+
+  <!-- 入力ファイル -->
+  <g>
+    <rect x="80" y="240" width="220" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="190" y="263" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">入力: draft/notice.txt</text>
+    <text x="190" y="282" text-anchor="middle" font-size="10" fill="#1E3A8A">起案文・通知文・要綱・要領</text>
+  </g>
+
+  <!-- 出力 -->
+  <g>
+    <rect x="500" y="240" width="240" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="620" y="263" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">出力: 4 列 markdown 表</text>
+    <text x="620" y="282" text-anchor="middle" font-size="10" fill="#9D174D">該当箇所 / 現状 / 修正案 / 根拠</text>
+  </g>
+
+  <!-- Arrows -->
+  <line x1="300" y1="170" x2="318" y2="170" stroke="#64748B" stroke-width="1.5" marker-end="url(#arrow07s1)"/>
+  <text x="305" y="163" font-size="9" fill="#64748B">参照</text>
+
+  <line x1="540" y1="170" x2="558" y2="170" stroke="#64748B" stroke-width="1.5" marker-end="url(#arrow07s1)"/>
+  <text x="545" y="163" font-size="9" fill="#64748B">参照</text>
+
+  <line x1="190" y1="240" x2="190" y2="215" stroke="#64748B" stroke-width="1.5" marker-end="url(#arrow07s1)"/>
+  <text x="200" y="232" font-size="9" fill="#64748B">読込</text>
+
+  <line x1="498" y1="270" x2="305" y2="210" stroke="#0F766E" stroke-width="1.5" marker-end="url(#arrow07s1)"/>
+  <text x="380" y="245" font-size="10" fill="#0F766E" font-weight="bold">SKILL.md が生成</text>
+
+  <text x="400" y="345" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">優先順位: 自治体規程 &gt; 公用文 2022 &gt; 一般慣習</text>
+</svg>

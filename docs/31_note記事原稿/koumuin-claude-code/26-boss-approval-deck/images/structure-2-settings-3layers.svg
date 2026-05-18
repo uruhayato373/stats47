@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="320" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">settings.json の 3 層構造で防げるリスク</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">permissions / hooks / env がそれぞれ異なる事故を防ぐ</text>
+
+  <!-- Container -->
+  <rect x="60" y="80" width="680" height="200" fill="none" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="6,4" rx="8"/>
+  <text x="80" y="103" font-size="12" fill="#64748B" font-weight="bold">.claude/settings.json</text>
+
+  <!-- Layer 1: permissions -->
+  <g>
+    <rect x="90" y="120" width="200" height="140" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="6"/>
+    <text x="190" y="148" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E3A8A">permissions</text>
+    <text x="190" y="170" text-anchor="middle" font-size="11" fill="#1E293B">allow / deny</text>
+    <line x1="105" y1="185" x2="275" y2="185" stroke="#1E3A8A" stroke-width="0.5"/>
+    <text x="190" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A8A">防げるリスク</text>
+    <text x="190" y="228" text-anchor="middle" font-size="11" fill="#1E293B">外部 API 誤送信</text>
+    <text x="190" y="246" text-anchor="middle" font-size="10" fill="#475569">curl / WebFetch 禁止</text>
+  </g>
+
+  <!-- Layer 2: hooks -->
+  <g>
+    <rect x="300" y="120" width="200" height="140" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="6"/>
+    <text x="400" y="148" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400E">hooks</text>
+    <text x="400" y="170" text-anchor="middle" font-size="11" fill="#1E293B">PreToolUse / PostToolUse</text>
+    <line x1="315" y1="185" x2="485" y2="185" stroke="#92400E" stroke-width="0.5"/>
+    <text x="400" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400E">防げるリスク</text>
+    <text x="400" y="228" text-anchor="middle" font-size="11" fill="#1E293B">PII 含む送信</text>
+    <text x="400" y="246" text-anchor="middle" font-size="10" fill="#475569">正規表現で検知 / block</text>
+  </g>
+
+  <!-- Layer 3: env -->
+  <g>
+    <rect x="510" y="120" width="200" height="140" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="610" y="148" text-anchor="middle" font-size="15" font-weight="bold" fill="#0F766E">env</text>
+    <text x="610" y="170" text-anchor="middle" font-size="11" fill="#1E293B">CLAUDE_LOG_DIR 等</text>
+    <line x1="525" y1="185" x2="695" y2="185" stroke="#0F766E" stroke-width="0.5"/>
+    <text x="610" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F766E">防げるリスク</text>
+    <text x="610" y="228" text-anchor="middle" font-size="11" fill="#1E293B">監査ログ欠落</text>
+    <text x="610" y="246" text-anchor="middle" font-size="10" fill="#475569">全実行を時系列で保存</text>
+  </g>
+
+  <text x="400" y="305" text-anchor="middle" font-size="11" fill="#64748B" font-style="italic">3 層を組み合わせて初めて「自治体に出せる」セキュリティ水準になる</text>
+</svg>

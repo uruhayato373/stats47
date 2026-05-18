@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="290" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">苦情メール返信パイプライン (受信 → 返信送付)</text>
+
+  <defs>
+    <marker id="arr20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 受信 -->
+  <g>
+    <rect x="20" y="100" width="110" height="60" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="75" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">苦情受信</text>
+    <text x="75" y="144" text-anchor="middle" font-size="10" fill="#7F1D1D">意見フォーム等</text>
+  </g>
+  <line x1="130" y1="130" x2="158" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 2: マスキング -->
+  <g>
+    <rect x="160" y="100" width="120" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="220" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">PII マスキング</text>
+    <text x="220" y="143" text-anchor="middle" font-size="10" fill="#92400E">Hooks 自動実行</text>
+  </g>
+  <line x1="280" y1="130" x2="308" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 3: 分類タグ付け -->
+  <g>
+    <rect x="310" y="100" width="130" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="375" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">分類タグ付け</text>
+    <text x="375" y="143" text-anchor="middle" font-size="10" fill="#1E40AF">主分類 A-E + 温度感</text>
+  </g>
+  <line x1="440" y1="130" x2="468" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 4: 5 案生成 -->
+  <g>
+    <rect x="470" y="100" width="130" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="535" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">5 案生成</text>
+    <text x="535" y="143" text-anchor="middle" font-size="10" fill="#0F766E">謝罪 / 説明 / 中庸 / 受容 / 毅然</text>
+  </g>
+  <line x1="600" y1="130" x2="628" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 5: 職員選択 -->
+  <g>
+    <rect x="630" y="100" width="130" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="695" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">職員選択+修正</text>
+    <text x="695" y="143" text-anchor="middle" font-size="10" fill="#4338CA">ハイブリッド統合</text>
+  </g>
+  <line x1="760" y1="130" x2="788" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 6: 決裁 -->
+  <g>
+    <rect x="790" y="100" width="100" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="840" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">決裁回議</text>
+    <text x="840" y="143" text-anchor="middle" font-size="10" fill="#9D174D">係長→課長→部長</text>
+  </g>
+
+  <!-- Down arrow -->
+  <line x1="840" y1="160" x2="840" y2="200" stroke="#64748B" stroke-width="2" marker-end="url(#arr20)"/>
+
+  <!-- Step 7: 返信 -->
+  <g>
+    <rect x="700" y="205" width="180" height="50" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="790" y="227" text-anchor="middle" font-size="13" font-weight="bold" fill="#065F46">返信送付</text>
+    <text x="790" y="245" text-anchor="middle" font-size="10" fill="#059669">AI 補助を起案文に明示</text>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="450" y="275" text-anchor="middle" font-size="11" fill="#64748B">1 通あたり作業時間 1/3 / 決裁の論点は「選んだ案の理由」に集約 → 議論が早い</text>
+</svg>

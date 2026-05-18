@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="280" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">議事録作成パイプライン (録音 → Claude Code → 完成)</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 会議 -->
+  <g>
+    <rect x="20" y="100" width="100" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="70" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">会議</text>
+    <text x="70" y="145" text-anchor="middle" font-size="11" fill="#64748B">60 分</text>
+  </g>
+  <line x1="120" y1="130" x2="148" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 録音 mp3 -->
+  <g>
+    <rect x="150" y="100" width="110" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="205" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">録音 mp3</text>
+    <text x="205" y="143" text-anchor="middle" font-size="11" fill="#92400E">IC/iPhone</text>
+  </g>
+  <line x1="260" y1="130" x2="288" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Whisper -->
+  <g>
+    <rect x="290" y="100" width="110" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="345" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Whisper API</text>
+    <text x="345" y="143" text-anchor="middle" font-size="11" fill="#1E40AF">5 分 / ¥30</text>
+  </g>
+  <line x1="400" y1="130" x2="428" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: transcript.json -->
+  <g>
+    <rect x="430" y="100" width="110" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="485" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">transcript</text>
+    <text x="485" y="140" text-anchor="middle" font-size="11" fill="#4338CA">.json</text>
+    <text x="485" y="154" text-anchor="middle" font-size="10" fill="#6366F1">(verbose)</text>
+  </g>
+  <line x1="540" y1="130" x2="568" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Claude Code (skill) -->
+  <g>
+    <rect x="570" y="100" width="130" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="635" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Claude Code</text>
+    <text x="635" y="138" text-anchor="middle" font-size="11" fill="#0F766E">/format-minutes</text>
+    <text x="635" y="152" text-anchor="middle" font-size="10" fill="#14B8A6">2 分</text>
+  </g>
+  <line x1="700" y1="130" x2="728" y2="130" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 6: 人間チェック -->
+  <g>
+    <rect x="730" y="100" width="110" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="785" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">人間チェック</text>
+    <text x="785" y="143" text-anchor="middle" font-size="11" fill="#9D174D">3 分</text>
+  </g>
+
+  <!-- Output -->
+  <g>
+    <rect x="370" y="200" width="160" height="50" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="450" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#065F46">議事録 draft.md</text>
+    <text x="450" y="240" text-anchor="middle" font-size="11" fill="#059669">完成 (実作業 10 分)</text>
+  </g>
+  <line x1="785" y1="160" x2="785" y2="180" stroke="#64748B" stroke-width="2"/>
+  <line x1="785" y1="180" x2="535" y2="180" stroke="#64748B" stroke-width="2"/>
+  <line x1="535" y1="180" x2="535" y2="195" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

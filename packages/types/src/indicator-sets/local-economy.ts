@@ -40,6 +40,10 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
         "fiscal-strength-index-prefecture",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "地域経済",

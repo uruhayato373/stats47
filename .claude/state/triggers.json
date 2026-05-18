@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-18T11:30:00.000Z",
+  "updated_at": "2026-05-18T12:36:00.000Z",
   "triggers": [
     {
       "id": "trig_01QBPsFMqaxHdfaSqsjuzCDW",
@@ -18,23 +18,48 @@
       ]
     },
     {
-      "id": "trig_seo_phase3_trend_pipeline_pending_registration",
+      "id": "trig_01RaPLqZrP4i7wAnCzQjifWJ",
       "name": "stats47 daily trend pipeline",
       "cron": "0 0 * * *",
-      "cron_note": "毎日 0:00 UTC = 9:00 JST。launchd の discover-trends 完了後に走るよう設計 (Phase 3)",
-      "created_at": "2026-05-18T11:30:00.000Z",
+      "cron_note": "毎日 0:00 UTC = 9:00 JST (ジッターで 9:08 頃発火)。launchd の discover-trends (07:23 JST) 完了後に走る設計 (Phase 3)",
+      "created_at": "2026-05-18T12:30:33.916Z",
       "purpose": "Phase 3: discover-trends → plan-blog-trends → draft-from-trend → PR 起票 を半自動化。GATE 1 = 人手 PR レビュー 1 回 (~15 min)、月 5-7 本ペース上限",
       "repo": "https://github.com/uruhayato373/stats47",
       "model": "claude-opus-4-7",
       "enabled": true,
-      "anthropic_registration_status": "pending_manual",
+      "environment_id": "env_01DyBoX8qdC86ZEdncmFwqx6",
+      "anthropic_registration_status": "registered",
       "notes": [
-        "2026-05-18: ユーザー billing 設定済み + enabled: true で記録。ただし RemoteTrigger create API が v2 仕様変更 (event_type 不明 / CreateSessionRequest validate fail) で失敗 (req_011Cb9zha6bwTTJdUDUcnZTF)。Anthropic 側登録は手動で claude.ai UI から行うか、API 仕様確認後に再試行が必要。",
+        "2026-05-18: /schedule skill 経由で Anthropic Cloud 登録成功 (trig_01RaPLqZrP4i7wAnCzQjifWJ)。初回発火 2026-05-19 09:08 JST。",
         "実装スキル: /discover-trends (launchd 07:23 既存) → /plan-blog-trends → /draft-from-trend → gh pr create",
         "下書き品質 < quality_score 70 は warning 表示のみ、close は人手 GATE 1",
-        "ラベル `trend-auto` は事前 `gh label create trend-auto --color 00CED1 --description \"トレンド記事自動生成 PR\"` で作成必須",
+        "ラベル `trend-auto` は事前 `gh label create trend-auto --color 00CED1 --description \"トレンド記事自動生成 PR\"` で作成済",
         "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Phase 3",
-        "登録後の id は trig_<...> に置換する必要あり"
+        "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01RaPLqZrP4i7wAnCzQjifWJ', body: {enabled: false}})",
+        "詳細確認: https://claude.ai/code/routines/trig_01RaPLqZrP4i7wAnCzQjifWJ"
+      ]
+    },
+    {
+      "id": "trig_01J26XQsDbdBM3ggTQ8gcBta",
+      "name": "stats47 weekly CWV PR",
+      "cron": "0 1 * * 1",
+      "cron_note": "毎週月曜 1:00 UTC = 10:00 JST (ジッターで 10:03 頃発火)。最新 [PSI Alert] Issue から違反 URL 1 件取得 → LCP 改修案 draft PR 起票",
+      "created_at": "2026-05-18T12:35:56.109Z",
+      "purpose": "Sprint 5: PSI alert → suggest-cwv-candidates → LCP 改修案 (Claude セッション推論) → draft PR 起票。週 1 本ペース、GATE 1 = 人手 PR レビュー必須",
+      "repo": "https://github.com/uruhayato373/stats47",
+      "model": "claude-opus-4-7",
+      "enabled": true,
+      "environment_id": "env_01DyBoX8qdC86ZEdncmFwqx6",
+      "anthropic_registration_status": "registered",
+      "notes": [
+        "2026-05-18: cwv-improvement-pr-weekly.yml (GitHub Actions + @anthropic-ai/sdk + GitHub Secrets ANTHROPIC_API_KEY) を廃止して Routine 化。API key 不要、Anthropic billing 内で完結",
+        "実装: PSI Alert Issue 抽出 → suggest-cwv-candidates.mjs (--format json) → Edit ツール直編集 → gh pr create",
+        "scope: LCP / dynamic import のみ (CLS/FCP は次フェーズ)",
+        "ラベル `cwv-auto` は既存 (FFD700)",
+        "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Sprint 5",
+        "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01J26XQsDbdBM3ggTQ8gcBta', body: {enabled: false}})",
+        "詳細確認: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta",
+        "ローカル開発用に .claude/scripts/psi/generate-cwv-pr.mjs (ANTHROPIC_API_KEY 必要) は残存 — 通常使用は Routine 経由"
       ]
     }
   ]

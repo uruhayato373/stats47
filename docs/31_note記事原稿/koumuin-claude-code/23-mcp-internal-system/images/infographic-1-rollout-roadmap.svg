@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">展開ロードマップ: PoC → 1 課展開 → 全庁展開</text>
+
+  <defs>
+    <marker id="arrow4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Phase 1: PoC -->
+  <g>
+    <rect x="40" y="80" width="250" height="200" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="8"/>
+    <circle cx="80" cy="115" r="20" fill="#2563EB"/>
+    <text x="80" y="121" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">1</text>
+    <text x="115" y="121" font-size="15" font-weight="bold" fill="#1E3A8A">PoC (個人検証)</text>
+
+    <text x="60" y="158" font-size="12" fill="#1E293B">対象: 自分の業務 1 つ</text>
+    <text x="60" y="178" font-size="12" fill="#1E293B">期間: 1-2 ヶ月</text>
+    <text x="60" y="198" font-size="12" fill="#1E293B">承認: 課長口頭 / 不要</text>
+    <text x="60" y="223" font-size="11" fill="#475569" font-style="italic">予算: 個人 Claude Code 月 $20</text>
+    <text x="60" y="243" font-size="11" fill="#475569" font-style="italic">リスク: 低 (テスト CSV)</text>
+    <text x="60" y="263" font-size="11" fill="#1E3A8A" font-weight="bold">読み取り専用 + 監査ログ</text>
+  </g>
+
+  <line x1="290" y1="180" x2="320" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow4)"/>
+
+  <!-- Phase 2: 1 課展開 -->
+  <g>
+    <rect x="325" y="80" width="250" height="200" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="8"/>
+    <circle cx="365" cy="115" r="20" fill="#D97706"/>
+    <text x="365" y="121" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">2</text>
+    <text x="400" y="121" font-size="15" font-weight="bold" fill="#92400E">1 課展開</text>
+
+    <text x="345" y="158" font-size="12" fill="#1E293B">対象: 同一課の係員</text>
+    <text x="345" y="178" font-size="12" fill="#1E293B">期間: 3-6 ヶ月</text>
+    <text x="345" y="198" font-size="12" fill="#1E293B">承認: 情シス係 + 課長</text>
+    <text x="345" y="223" font-size="11" fill="#475569" font-style="italic">予算: 課で予算化 (年 30 万)</text>
+    <text x="345" y="243" font-size="11" fill="#475569" font-style="italic">リスク: 中 (本番 CSV)</text>
+    <text x="345" y="263" font-size="11" fill="#92400E" font-weight="bold">権限フィルタ + マスキング</text>
+  </g>
+
+  <line x1="575" y1="180" x2="605" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow4)"/>
+
+  <!-- Phase 3: 全庁展開 -->
+  <g>
+    <rect x="610" y="80" width="250" height="200" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="8"/>
+    <circle cx="650" cy="115" r="20" fill="#059669"/>
+    <text x="650" y="121" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">3</text>
+    <text x="685" y="121" font-size="15" font-weight="bold" fill="#0F766E">全庁展開</text>
+
+    <text x="630" y="158" font-size="12" fill="#1E293B">対象: 全庁職員 (PoC 通過後)</text>
+    <text x="630" y="178" font-size="12" fill="#1E293B">期間: 6 ヶ月-1 年</text>
+    <text x="630" y="198" font-size="12" fill="#1E293B">承認: 情報セキュリティ委員会</text>
+    <text x="630" y="223" font-size="11" fill="#475569" font-style="italic">予算: 全庁予算 (年 200 万+)</text>
+    <text x="630" y="243" font-size="11" fill="#475569" font-style="italic">リスク: 高 (要規程整備)</text>
+    <text x="630" y="263" font-size="11" fill="#0F766E" font-weight="bold">ベンダー保守契約見直し</text>
+  </g>
+
+  <text x="450" y="305" text-anchor="middle" font-size="11" fill="#94A3B8">合計 1-2 年。Phase 1 をスキップして 2/3 に飛ぶと事故の元</text>
+</svg>

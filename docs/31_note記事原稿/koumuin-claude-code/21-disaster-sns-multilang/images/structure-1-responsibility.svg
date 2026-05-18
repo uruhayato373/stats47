@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="330" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">責任分界点: 生成自動化と投稿自動化を分離</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">Claude Code は「文章生成」だけに責任を持ち、誤投稿事故を防ぐ</text>
+
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Claude Code 領域 -->
+  <g>
+    <rect x="40" y="90" width="220" height="160" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="8"/>
+    <text x="150" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F766E">Claude Code (生成)</text>
+    <text x="150" y="148" text-anchor="middle" font-size="11" fill="#1E293B">/disaster-translate</text>
+    <text x="150" y="170" text-anchor="middle" font-size="11" fill="#1E293B">6 言語 + やさしい日本語</text>
+    <text x="150" y="200" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">責任: 翻訳品質</text>
+    <text x="150" y="220" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">自動化: 可</text>
+  </g>
+
+  <line x1="260" y1="170" x2="298" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- 人間チェック -->
+  <g>
+    <rect x="300" y="90" width="200" height="160" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="8"/>
+    <text x="400" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400E">人間 (3 点チェック)</text>
+    <text x="400" y="146" text-anchor="middle" font-size="11" fill="#1E293B">1. 数字・固有名詞</text>
+    <text x="400" y="164" text-anchor="middle" font-size="11" fill="#1E293B">2. 断定 / 推量</text>
+    <text x="400" y="182" text-anchor="middle" font-size="11" fill="#1E293B">3. 防災用語 glossary</text>
+    <text x="400" y="210" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">責任: 最終判断</text>
+    <text x="400" y="226" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">所要: 60 秒</text>
+  </g>
+
+  <line x1="500" y1="170" x2="538" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- SNS 投稿 -->
+  <g>
+    <rect x="540" y="90" width="220" height="160" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" rx="8"/>
+    <text x="650" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#7F1D1D">SNS 公式アプリ (投稿)</text>
+    <text x="650" y="148" text-anchor="middle" font-size="11" fill="#1E293B">X / Facebook / Instagram</text>
+    <text x="650" y="170" text-anchor="middle" font-size="11" fill="#1E293B">Buffer / Hootsuite で予約も可</text>
+    <text x="650" y="200" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">責任: 投稿実行</text>
+    <text x="650" y="220" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">自動化: しない</text>
+  </g>
+
+  <!-- Bottom note -->
+  <rect x="60" y="275" width="680" height="40" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5" rx="6"/>
+  <text x="400" y="293" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">投稿自動化は本稿の対象外</text>
+  <text x="400" y="308" text-anchor="middle" font-size="10" fill="#475569">誤投稿事故の前例が全国で複数あり、稟議が通る要素がない</text>
+</svg>

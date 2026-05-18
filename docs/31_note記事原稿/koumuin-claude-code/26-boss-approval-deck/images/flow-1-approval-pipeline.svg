@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="380" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">自治体稟議の 6 ステップ (差し戻し理由と事前根回しの論点)</text>
+
+  <defs>
+    <marker id="arr26-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 起案 -->
+  <g>
+    <rect x="20" y="80" width="130" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="85" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">起案</text>
+    <text x="85" y="125" text-anchor="middle" font-size="11" fill="#64748B">提案者作成</text>
+  </g>
+  <line x1="150" y1="110" x2="178" y2="110" stroke="#64748B" stroke-width="2" marker-end="url(#arr26-1)"/>
+
+  <!-- Step 2: 課内合議 -->
+  <g>
+    <rect x="180" y="80" width="130" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="245" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">課内合議</text>
+    <text x="245" y="125" text-anchor="middle" font-size="11" fill="#1E3A8A">課長 / 係長</text>
+  </g>
+  <line x1="310" y1="110" x2="338" y2="110" stroke="#64748B" stroke-width="2" marker-end="url(#arr26-1)"/>
+
+  <!-- Step 3: 情シス合議 -->
+  <g>
+    <rect x="340" y="80" width="130" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="405" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">情シス合議</text>
+    <text x="405" y="125" text-anchor="middle" font-size="11" fill="#4338CA">セキュリティ確認</text>
+  </g>
+  <line x1="470" y1="110" x2="498" y2="110" stroke="#64748B" stroke-width="2" marker-end="url(#arr26-1)"/>
+
+  <!-- Step 4: 法務合議 -->
+  <g>
+    <rect x="500" y="80" width="130" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="565" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">法務合議</text>
+    <text x="565" y="125" text-anchor="middle" font-size="11" fill="#92400E">個情 / 契約</text>
+  </g>
+  <line x1="630" y1="110" x2="658" y2="110" stroke="#64748B" stroke-width="2" marker-end="url(#arr26-1)"/>
+
+  <!-- Step 5: 部長決裁 -->
+  <g>
+    <rect x="660" y="80" width="120" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="720" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">部長決裁</text>
+    <text x="720" y="125" text-anchor="middle" font-size="11" fill="#9D174D">最終承認</text>
+  </g>
+  <line x1="780" y1="110" x2="808" y2="110" stroke="#64748B" stroke-width="2" marker-end="url(#arr26-1)"/>
+
+  <!-- Step 6: 試行開始 -->
+  <g>
+    <rect x="810" y="80" width="80" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="850" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">試行開始</text>
+    <text x="850" y="125" text-anchor="middle" font-size="11" fill="#0F766E">3 ヶ月</text>
+  </g>
+
+  <!-- Row label: 差し戻し理由 -->
+  <text x="20" y="180" font-size="12" font-weight="bold" fill="#7F1D1D">典型差し戻し理由</text>
+
+  <g>
+    <rect x="20" y="195" width="130" height="55" fill="#FEE2E2" stroke="#DC2626" stroke-width="1" rx="4"/>
+    <text x="85" y="215" text-anchor="middle" font-size="10" fill="#7F1D1D">論点整理不足</text>
+    <text x="85" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">前例なし</text>
+  </g>
+  <rect x="180" y="195" width="130" height="55" fill="#FEE2E2" stroke="#DC2626" stroke-width="1" rx="4"/>
+  <text x="245" y="215" text-anchor="middle" font-size="10" fill="#7F1D1D">業務必要性不明</text>
+  <text x="245" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">既存ツール代替可</text>
+
+  <rect x="340" y="195" width="130" height="55" fill="#FEE2E2" stroke="#DC2626" stroke-width="1" rx="4"/>
+  <text x="405" y="215" text-anchor="middle" font-size="10" fill="#7F1D1D">送信先 / ログ</text>
+  <text x="405" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">PII 流出懸念</text>
+
+  <rect x="500" y="195" width="130" height="55" fill="#FEE2E2" stroke="#DC2626" stroke-width="1" rx="4"/>
+  <text x="565" y="215" text-anchor="middle" font-size="10" fill="#7F1D1D">契約形態 / 規約</text>
+  <text x="565" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">個情整合不明</text>
+
+  <rect x="660" y="195" width="120" height="55" fill="#FEE2E2" stroke="#DC2626" stroke-width="1" rx="4"/>
+  <text x="720" y="215" text-anchor="middle" font-size="10" fill="#7F1D1D">費用負担根拠</text>
+  <text x="720" y="232" text-anchor="middle" font-size="10" fill="#7F1D1D">他自治体事例なし</text>
+
+  <!-- Row label: 事前根回し -->
+  <text x="20" y="285" font-size="12" font-weight="bold" fill="#0F766E">事前根回しで潰す論点</text>
+
+  <g>
+    <rect x="20" y="300" width="130" height="55" fill="#CCFBF1" stroke="#0F766E" stroke-width="1" rx="4"/>
+    <text x="85" y="320" text-anchor="middle" font-size="10" fill="#0F766E">2 段構え資料</text>
+    <text x="85" y="337" text-anchor="middle" font-size="10" fill="#0F766E">(1 枚 + 詳細)</text>
+  </g>
+  <rect x="180" y="300" width="130" height="55" fill="#CCFBF1" stroke="#0F766E" stroke-width="1" rx="4"/>
+  <text x="245" y="320" text-anchor="middle" font-size="10" fill="#0F766E">議事録 5 分化</text>
+  <text x="245" y="337" text-anchor="middle" font-size="10" fill="#0F766E">の金額換算 ROI</text>
+
+  <rect x="340" y="300" width="130" height="55" fill="#CCFBF1" stroke="#0F766E" stroke-width="1" rx="4"/>
+  <text x="405" y="320" text-anchor="middle" font-size="10" fill="#0F766E">deny ルール実物</text>
+  <text x="405" y="337" text-anchor="middle" font-size="10" fill="#0F766E">+ hooks 監査ログ</text>
+
+  <rect x="500" y="300" width="130" height="55" fill="#CCFBF1" stroke="#0F766E" stroke-width="1" rx="4"/>
+  <text x="565" y="320" text-anchor="middle" font-size="10" fill="#0F766E">国 / 他自治体引用</text>
+  <text x="565" y="337" text-anchor="middle" font-size="10" fill="#0F766E">個情ガイドライン</text>
+
+  <rect x="660" y="300" width="120" height="55" fill="#CCFBF1" stroke="#0F766E" stroke-width="1" rx="4"/>
+  <text x="720" y="320" text-anchor="middle" font-size="10" fill="#0F766E">個人決裁範囲</text>
+  <text x="720" y="337" text-anchor="middle" font-size="10" fill="#0F766E">月 ¥3000 試行</text>
+
+  <text x="850" y="335" text-anchor="middle" font-size="10" fill="#64748B" font-style="italic">→ 突破</text>
+</svg>

@@ -60,6 +60,19 @@ find_idx_retry() {
 | 時刻リスト | `role=option` のテキスト（例: `08:00`） | 30分刻み |
 | 予約投稿ボタン | 「予約投稿」テキストの `<button>` | 公開設定画面右上 |
 | 完了ダイアログ | 「予約投稿が完了しました」テキスト + 「閉じる」ボタン | |
+| 有料 ラジオ（記事タイプ） | `<span>有料</span>` の **親 `<div>`** をクリック | 公開設定画面、無料ラジオの直後に並ぶ |
+| 無料 ラジオ（記事タイプ） | `<span>無料</span>` の **親 `<div>`** をクリック | デフォルト選択 |
+| 価格 input | Shadow DOM 内 `<input type=text id=price placeholder=300 value=300 />` | 有料ラジオ選択後に出現。**type ではなく JS で value 上書き必須**（初期値 300 と連結されるため） |
+| 投稿する / 有料エリア設定 ボタン | 公開設定画面右上の primary button。**有料選択時に label が「投稿する」→「有料エリア設定」に変化** | 無料時 = 即時公開、有料時 = 次の境界設定画面へ遷移 |
+| キャンセル ボタン | 公開設定画面左上「キャンセル」テキストの `<button>` | 投稿せず編集画面に戻る |
+| 記事タイプセクション内のメニュー | `<h3 id=paid-setting>` の直後にラジオ群が並ぶ | id=paid-setting で位置特定可能 |
+
+## 価格設定の落とし穴
+
+1. **`#price` input は Shadow DOM 内** → `document.querySelector('#price')` では取得できない。`querySelectorAll('*')` で walk して `node.shadowRoot` を再帰探索
+2. **初期値 300 が既に入っている** → `type` で追加すると "3001200" になる。必ず value setter で上書き
+3. **input → change → blur の 3 イベント dispatch が必要** → input だけだと内部 state に反映されないケースを確認
+4. **「有料エリア設定」ボタン押下後の挙動は未確認** → Phase 7-Pricing は価格入力までで止め、boundary 設定は手動運用 (2026-05-18 時点)
 
 ## state 呼び出し最小化ガイドライン
 

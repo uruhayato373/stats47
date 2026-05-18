@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="300" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">月次定型業務 → Skills 化 → 2 時間が 5 分に</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 月次定型業務 -->
+  <g>
+    <rect x="20" y="110" width="120" height="60" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="80" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">月次定型業務</text>
+    <text x="80" y="155" text-anchor="middle" font-size="11" fill="#64748B">2 時間 × 月 1 回</text>
+  </g>
+  <line x1="140" y1="140" x2="168" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 3 条件判定 -->
+  <g>
+    <rect x="170" y="100" width="180" height="80" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="260" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">3 条件判定</text>
+    <text x="260" y="142" text-anchor="middle" font-size="11" fill="#92400E">月 1 回以上</text>
+    <text x="260" y="158" text-anchor="middle" font-size="11" fill="#92400E">30 分以上</text>
+    <text x="260" y="174" text-anchor="middle" font-size="11" fill="#92400E">判断より作業</text>
+  </g>
+  <line x1="350" y1="140" x2="378" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: SKILL.md 作成 -->
+  <g>
+    <rect x="380" y="110" width="140" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="450" y="132" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">SKILL.md 作成</text>
+    <text x="450" y="152" text-anchor="middle" font-size="11" fill="#0F766E">2-4 時間 / 1 回限り</text>
+  </g>
+  <line x1="520" y1="140" x2="548" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: input/templates/output -->
+  <g>
+    <rect x="550" y="110" width="160" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="630" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">4 ディレクトリ配置</text>
+    <text x="630" y="148" text-anchor="middle" font-size="11" fill="#1E40AF">input / templates</text>
+    <text x="630" y="162" text-anchor="middle" font-size="11" fill="#1E40AF">output / reference</text>
+  </g>
+  <line x1="710" y1="140" x2="738" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: 月 1 回実行 -->
+  <g>
+    <rect x="740" y="110" width="140" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="810" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">月 1 回実行</text>
+    <text x="810" y="148" text-anchor="middle" font-size="11" fill="#4338CA">claude run &lt;skill&gt;</text>
+    <text x="810" y="162" text-anchor="middle" font-size="11" fill="#4338CA">5 分</text>
+  </g>
+
+  <!-- ROI bar comparison -->
+  <text x="60" y="220" font-size="13" fill="#7F1D1D" font-weight="bold">従来</text>
+  <rect x="160" y="205" width="600" height="22" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+  <text x="460" y="221" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold">手作業 120 分 / 月</text>
+  <text x="770" y="222" font-size="13" fill="#7F1D1D" font-weight="bold">120 分</text>
+
+  <text x="60" y="262" font-size="13" fill="#0F766E" font-weight="bold">Skills 化</text>
+  <rect x="160" y="247" width="25" height="22" fill="#059669" stroke="#064E3B" stroke-width="1.5" rx="3"/>
+  <text x="172" y="263" text-anchor="middle" font-size="10" fill="#FFFFFF" font-weight="bold">5</text>
+  <text x="200" y="264" font-size="12" fill="#0F766E" font-weight="bold">回収 2-3 ヶ月 / 年 23 時間削減</text>
+
+  <text x="460" y="295" text-anchor="middle" font-size="11" fill="#94A3B8">スケール: 1 px = 0.2 分 (両棒共通)</text>
+</svg>

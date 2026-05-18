@@ -30,6 +30,10 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
         "public-hall-count-per-million",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "学校数",

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="440" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">移植プロセスの責任分担と検証ループ</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">業務理解 → 移植 → 並列テスト → 原因区分 → 修正 のサイクル</text>
+
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- 業務理解 (人間検証) -->
+  <g>
+    <rect x="280" y="90" width="240" height="70" fill="#FCE7F3" stroke="#9D174D" stroke-width="2" rx="6"/>
+    <text x="400" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#9D174D">業務理解 (人間検証)</text>
+    <text x="400" y="135" text-anchor="middle" font-size="11" fill="#1E293B">Claude が説明 → 業務担当者が判定</text>
+    <text x="400" y="151" text-anchor="middle" font-size="10" fill="#475569">不明点を担当者に確認して再生成</text>
+  </g>
+  <line x1="400" y1="160" x2="400" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- 移植 (Claude) -->
+  <g>
+    <rect x="280" y="195" width="240" height="70" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="400" y="220" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F766E">Python 移植 (Claude)</text>
+    <text x="400" y="240" text-anchor="middle" font-size="11" fill="#1E293B">openpyxl + pandas / 型ヒント完備</text>
+    <text x="400" y="256" text-anchor="middle" font-size="10" fill="#475569">8 要件 + 品質チェック観点</text>
+  </g>
+  <line x1="400" y1="265" x2="400" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- 並列テスト (Claude) -->
+  <g>
+    <rect x="280" y="300" width="240" height="70" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="6"/>
+    <text x="400" y="325" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E3A8A">並列テスト (Claude)</text>
+    <text x="400" y="345" text-anchor="middle" font-size="11" fill="#1E293B">VBA vs Python diff / 5 パターン</text>
+    <text x="400" y="361" text-anchor="middle" font-size="10" fill="#475569">正常 / 境界 / 異常 / 既知バグ / 年度跨ぎ</text>
+  </g>
+
+  <!-- 差分 → 原因区分 (人間+Claude 共同) -->
+  <line x1="280" y1="335" x2="190" y2="335" stroke="#475569" stroke-width="2" marker-end="url(#arrow3)"/>
+  <g>
+    <rect x="40" y="305" width="150" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="6"/>
+    <text x="115" y="330" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400E">原因区分</text>
+    <text x="115" y="348" text-anchor="middle" font-size="10" fill="#475569">VBA バグ / 移植ミス</text>
+  </g>
+  <line x1="115" y1="305" x2="115" y2="232" stroke="#475569" stroke-width="2" marker-end="url(#arrow3)"/>
+  <text x="125" y="270" font-size="10" fill="#7F1D1D" font-weight="bold">移植ミス → 修正</text>
+
+  <!-- 廃止判定 (人間) -->
+  <line x1="520" y1="335" x2="620" y2="335" stroke="#475569" stroke-width="2" marker-end="url(#arrow3)"/>
+  <g>
+    <rect x="625" y="305" width="150" height="60" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" rx="6"/>
+    <text x="700" y="330" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">廃止判定 (人間)</text>
+    <text x="700" y="348" text-anchor="middle" font-size="10" fill="#475569">移植 / 廃止 / 現状維持</text>
+  </g>
+
+  <!-- 凡例 -->
+  <rect x="60" y="395" width="14" height="14" fill="#FCE7F3" stroke="#9D174D"/>
+  <text x="80" y="407" font-size="11" fill="#1E293B">人間 30% (業務理解・廃止判定)</text>
+  <rect x="290" y="395" width="14" height="14" fill="#CCFBF1" stroke="#0F766E"/>
+  <text x="310" y="407" font-size="11" fill="#1E293B">Claude 70% (移植・テスト)</text>
+  <rect x="510" y="395" width="14" height="14" fill="#FEF3C7" stroke="#92400E"/>
+  <text x="530" y="407" font-size="11" fill="#1E293B">共同 (原因区分)</text>
+</svg>

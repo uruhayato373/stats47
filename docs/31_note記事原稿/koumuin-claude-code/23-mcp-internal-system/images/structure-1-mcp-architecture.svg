@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">MCP アーキテクチャ: 4 層の責務分離</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">Claude Code ↔ MCP Client ↔ MCP Server ↔ 庁内システム</text>
+
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Layer 1: LLM 層 -->
+  <g>
+    <rect x="100" y="80" width="600" height="60" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="180" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F766E">LLM 層</text>
+    <text x="180" y="124" text-anchor="middle" font-size="11" fill="#1E293B">Claude Code</text>
+    <text x="500" y="105" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">責務: 自然言語理解 / プロンプト処理 / 結果統合</text>
+    <text x="500" y="124" text-anchor="middle" font-size="10" fill="#64748B">→ /budget-summary のようなコマンドを解釈</text>
+  </g>
+
+  <!-- 矢印 1↔2 -->
+  <line x1="400" y1="140" x2="400" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)" marker-start="url(#arrow2b)"/>
+  <text x="420" y="155" font-size="10" fill="#64748B">tools/call</text>
+
+  <!-- Layer 2: プロトコル層 -->
+  <g>
+    <rect x="100" y="160" width="600" height="60" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="6"/>
+    <text x="180" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E3A8A">プロトコル層</text>
+    <text x="180" y="204" text-anchor="middle" font-size="11" fill="#1E293B">MCP Client (内蔵)</text>
+    <text x="500" y="185" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">責務: JSON-RPC over stdio / リクエスト整形</text>
+    <text x="500" y="204" text-anchor="middle" font-size="10" fill="#64748B">→ Anthropic 標準 (2024 年公開)</text>
+  </g>
+
+  <line x1="400" y1="220" x2="400" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)" marker-start="url(#arrow2b)"/>
+  <text x="420" y="235" font-size="10" fill="#64748B">stdio JSON</text>
+
+  <!-- Layer 3: アダプタ層 -->
+  <g>
+    <rect x="100" y="240" width="600" height="60" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="6"/>
+    <text x="180" y="265" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400E">アダプタ層</text>
+    <text x="180" y="284" text-anchor="middle" font-size="11" fill="#1E293B">MCP Server</text>
+    <text x="500" y="265" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">責務: ホワイトリスト / バリデーション / マスキング / 監査ログ</text>
+    <text x="500" y="284" text-anchor="middle" font-size="10" fill="#64748B">→ finance-adapter / hr-adapter / resident-adapter</text>
+  </g>
+
+  <line x1="400" y1="300" x2="400" y2="320" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)" marker-start="url(#arrow2b)"/>
+  <text x="420" y="315" font-size="10" fill="#64748B">CSV 読み取り</text>
+
+  <!-- Layer 4: データ層 -->
+  <g>
+    <rect x="100" y="320" width="600" height="60" fill="#FCE7F3" stroke="#9D174D" stroke-width="2" rx="6"/>
+    <text x="180" y="345" text-anchor="middle" font-size="13" font-weight="bold" fill="#9D174D">データ層</text>
+    <text x="180" y="364" text-anchor="middle" font-size="11" fill="#1E293B">庁内システム / CSV</text>
+    <text x="500" y="345" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">責務: 財務会計 / 文書管理 / 住基 / 議会</text>
+    <text x="500" y="364" text-anchor="middle" font-size="10" fill="#64748B">→ 日次エクスポート CSV (UTF-8 統一済み)</text>
+  </g>
+</svg>

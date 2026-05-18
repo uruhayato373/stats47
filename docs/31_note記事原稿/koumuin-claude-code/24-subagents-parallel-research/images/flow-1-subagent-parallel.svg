@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="400" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">Subagents 並列調査フロー (5 件 → 25 分で完了)</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 親エージェント -->
+  <g>
+    <rect x="350" y="70" width="200" height="60" fill="#E0E7FF" stroke="#4338CA" stroke-width="2" rx="6"/>
+    <text x="450" y="93" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E293B">親エージェント (Opus)</text>
+    <text x="450" y="113" text-anchor="middle" font-size="11" fill="#4338CA">タスク分解 + 結果統合</text>
+  </g>
+  <line x1="450" y1="130" x2="450" y2="155" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="465" y="148" font-size="10" fill="#64748B">タスク分解</text>
+
+  <!-- Step 2: 5 並列 Subagent -->
+  <g>
+    <rect x="40" y="170" width="160" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="120" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">Subagent A</text>
+    <text x="120" y="210" text-anchor="middle" font-size="10" fill="#0F766E">他自治体事例調査</text>
+    <text x="120" y="228" text-anchor="middle" font-size="10" fill="#64748B">Sonnet / WebSearch</text>
+    <text x="120" y="244" text-anchor="middle" font-size="10" fill="#475569">25 分</text>
+  </g>
+  <g>
+    <rect x="210" y="170" width="160" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="290" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">Subagent B</text>
+    <text x="290" y="210" text-anchor="middle" font-size="10" fill="#0F766E">補助金メニュー</text>
+    <text x="290" y="228" text-anchor="middle" font-size="10" fill="#64748B">Sonnet / WebSearch</text>
+    <text x="290" y="244" text-anchor="middle" font-size="10" fill="#475569">25 分</text>
+  </g>
+  <g>
+    <rect x="380" y="170" width="160" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="460" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">Subagent C</text>
+    <text x="460" y="210" text-anchor="middle" font-size="10" fill="#0F766E">法令根拠調査</text>
+    <text x="460" y="228" text-anchor="middle" font-size="10" fill="#64748B">Sonnet / WebFetch</text>
+    <text x="460" y="244" text-anchor="middle" font-size="10" fill="#475569">25 分</text>
+  </g>
+  <g>
+    <rect x="550" y="170" width="160" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="630" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">Subagent D</text>
+    <text x="630" y="210" text-anchor="middle" font-size="10" fill="#0F766E">議会対応</text>
+    <text x="630" y="228" text-anchor="middle" font-size="10" fill="#64748B">Sonnet / WebSearch</text>
+    <text x="630" y="244" text-anchor="middle" font-size="10" fill="#475569">25 分</text>
+  </g>
+  <g>
+    <rect x="720" y="170" width="160" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="800" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">Subagent E</text>
+    <text x="800" y="210" text-anchor="middle" font-size="10" fill="#0F766E">住民説明 FAQ</text>
+    <text x="800" y="228" text-anchor="middle" font-size="10" fill="#64748B">Sonnet / WebFetch</text>
+    <text x="800" y="244" text-anchor="middle" font-size="10" fill="#475569">25 分</text>
+  </g>
+
+  <!-- 矢印 (各 subagent から下へ) -->
+  <line x1="120" y1="250" x2="120" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="290" y1="250" x2="290" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="460" y1="250" x2="460" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="630" y1="250" x2="630" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="800" y1="250" x2="800" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="120" y1="275" x2="800" y2="275" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="450" y1="275" x2="450" y2="295" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: 表で返却 (OUTPUT FORMAT) -->
+  <g>
+    <rect x="300" y="300" width="300" height="50" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="450" y="320" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">OUTPUT FORMAT に従って表で返却</text>
+    <text x="450" y="338" text-anchor="middle" font-size="10" fill="#1E40AF">各 Subagent が 1 markdown table のみ返す</text>
+  </g>
+
+  <!-- Step 4: 統合 (結論は人間) -->
+  <text x="450" y="378" text-anchor="middle" font-size="12" fill="#475569" font-weight="bold">→ 親エージェントが統合 / 結論は人間が書く</text>
+  <text x="450" y="394" text-anchor="middle" font-size="11" fill="#94A3B8">逐次なら 2 時間が、5 並列で 25 分に圧縮</text>
+</svg>

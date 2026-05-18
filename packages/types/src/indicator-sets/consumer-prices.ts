@@ -52,6 +52,10 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
         "consumer-price-difference-index-miscellaneous",
       ],
     },
+    {
+      label: "考察",
+      rankingKeys: [],
+    },
   ],
   keywords: [
     "消費者物価指数",
