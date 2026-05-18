@@ -6,6 +6,7 @@
 
 import * as fs from "node:fs";
 import * as path from "node:path";
+import Database from "better-sqlite3";
 
 import type { KsjPipelineOptions, KsjPipelineResult } from "./types";
 import { getDatasetDef } from "./registry";
@@ -16,7 +17,12 @@ import {
   cleanupTempFiles,
 } from "./downloader";
 import { convertGeoJsonToTopoJson, saveTopoJson } from "./converter";
-import { buildMlitKsjLocalPath } from "./r2-path";
+import { buildMlitKsjLocalPath, buildMlitKsjR2Path } from "./r2-path";
+
+// CLAUDE.md で固定されたローカル D1 パス。better-sqlite3 で他の path を開くと
+// 空ファイルが自動生成されるため絶対に変えない。register-ksj-rankings.ts と同じ値。
+const LOCAL_D1_PATH =
+  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 
 /**
  * プロジェクトルートを検出
@@ -127,7 +133,19 @@ export async function runKsjPipeline(
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), "utf-8");
   console.log(`  メタデータ: ${metaPath}`);
 
-  // 5. クリーンアップ
+  // 5. D1 gis_datasets を UPDATE (status='imported' + 統計値)
+  //    失敗してもパイプライン本体は成功扱い (R2 と D1 の乖離は週次整合性チェックで検出)
+  updateGisDatasetState({
+    projectRoot,
+    dataId: def.dataId,
+    version,
+    convertedAt: meta.convertedAt,
+    fileCount: outputFiles.length,
+    totalSizeBytes: outputFiles.reduce((sum, f) => sum + f.sizeBytes, 0),
+    prefCode: options.prefCode,
+  });
+
+  // 6. クリーンアップ
   cleanupTempFiles(zipPath);
   console.log(`  クリーンアップ完了`);
 
@@ -140,4 +158,81 @@ export async function runKsjPipeline(
     outputFiles,
     totalDurationMs,
   };
+}
+
+/**
+ * gis_datasets テーブルを pipeline 成功状態に更新する。
+ * D1 接続失敗・SQL エラーはログのみで pipeline 本体には影響させない。
+ */
+function updateGisDatasetState(input: {
+  projectRoot: string;
+  dataId: string;
+  version: string;
+  convertedAt: string;
+  fileCount: number;
+  totalSizeBytes: number;
+  prefCode?: string;
+}): void {
+  const dbPath = path.join(input.projectRoot, LOCAL_D1_PATH);
+  if (!fs.existsSync(dbPath)) {
+    console.warn(`  ⚠ D1 not found, skipping gis_datasets UPDATE: ${dbPath}`);
+    return;
+  }
+
+  // r2_prefix は filename を含まないディレクトリ部分のみ。
+  // buildMlitKsjR2Path から filename を除去するため、適当な filename を与えて dirname を取る。
+  const sampleR2Path = buildMlitKsjR2Path({
+    dataId: input.dataId,
+    version: input.version,
+    prefCode: input.prefCode,
+    filename: "_marker",
+  });
+  const r2Prefix = sampleR2Path.slice(0, sampleR2Path.lastIndexOf("/") + 1);
+
+  try {
+    const db = new Database(dbPath);
+    const stmt = db.prepare(`
+      UPDATE gis_datasets
+      SET status = 'imported',
+          last_imported_at = unixepoch(),
+          r2_version = ?,
+          file_count = ?,
+          total_size_bytes = ?,
+          converted_at = ?,
+          r2_prefix = ?,
+          is_downloaded = 1,
+          updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+      WHERE data_id = ?
+    `);
+    const result = stmt.run(
+      input.version,
+      input.fileCount,
+      input.totalSizeBytes,
+      input.convertedAt,
+      r2Prefix,
+      input.dataId,
+    );
+    db.close();
+    if (result.changes === 0) {
+      console.warn(
+        `  ⚠ gis_datasets に data_id='${input.dataId}' が存在しない (UPDATE 0 件)`,
+      );
+    } else {
+      console.log(
+        `  ✓ D1 gis_datasets UPDATE: ${input.dataId} status=imported, files=${input.fileCount}, ${formatBytes(input.totalSizeBytes)}`,
+      );
+    }
+  } catch (err) {
+    console.error(
+      `  ⚠ D1 UPDATE 失敗 (pipeline は成功扱いで継続): ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
+}
+
+function formatBytes(bytes: number): string {
+  if (bytes >= 1024 * 1024 * 1024)
+    return `${(bytes / 1024 / 1024 / 1024).toFixed(1)}GB`;
+  if (bytes >= 1024 * 1024) return `${(bytes / 1024 / 1024).toFixed(0)}MB`;
+  if (bytes >= 1024) return `${(bytes / 1024).toFixed(0)}KB`;
+  return `${bytes}B`;
 }

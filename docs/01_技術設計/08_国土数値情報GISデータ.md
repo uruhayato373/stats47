@@ -14,8 +14,15 @@ tags: [gis, mlit, data-source]
 ## 使い方
 
 ```bash
-# データセット一覧
+# 登録済みデータセット定義一覧（registry.ts、静的）
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
+
+# ローカル D1 の取得状況一覧（gis_datasets テーブル）
+#   バージョン / ファイル数 / サイズ / DL 済みフラグを整形出力
+#   旧 /gis ダッシュボードページ（2026-05 削除）の代替
+npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts
+npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --downloaded
+npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --category transport
 
 # 単一データセット取得（全国）
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts N02
@@ -170,8 +177,17 @@ packages/gis/src/mlit-ksj/
 ├── adapters/
 │   └── fetch-ksj-from-local.ts  # ローカル R2 から TopoJSON 読み込み
 └── scripts/
-    └── run-pipeline.ts          # CLI エントリポイント
+    ├── run-pipeline.ts          # パイプライン CLI エントリポイント
+    └── list-datasets.ts         # gis_datasets テーブル一覧 CLI（旧 /gis ページの代替）
 ```
+
+## ジオメトリの目視確認
+
+旧 `/gis/[dataId]` ビューア（2026-05 削除）の代替として、変換後 TopoJSON を確認する場合:
+
+- `.local/r2/gis/mlit-ksj/{dataId}/{version}/*.topojson` を [geojson.io](https://geojson.io) にドラッグ＆ドロップ
+- VS Code の GeoJSON プレビュー拡張で開く
+- TopoJSON → GeoJSON 変換が必要な場合は `npx topo2geo` 等
 
 ## 新しいデータセットの追加方法
 
