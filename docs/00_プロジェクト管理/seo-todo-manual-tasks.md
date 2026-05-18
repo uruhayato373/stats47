@@ -16,7 +16,7 @@ W21 セッション (2026-05-18) で Phase 1+2+3 を全 deployed したが、以
 - [x] 1. NotebookLM CLI OAuth 認証 (5 分、要ブラウザ) — **2026-05-18 完了**
 - [ ] 2. NotebookLM 用ノートブック作成 + ID 登録 (30 分、要 NotebookLM UI) — **stats47 専用 notebook は未作成、既存「最新の白書」等 4 件は登録済**
 - [x] 3. Anthropic Routine 手動登録 (10 分、要 claude.ai UI) — **2026-05-18 /schedule skill で自動登録完了 (trig_01RaPLqZrP4i7wAnCzQjifWJ)**
-- [ ] 4. GitHub Secrets `ANTHROPIC_API_KEY` 追加 (3 分、要 GitHub UI)
+- [x] 4. ~~GitHub Secrets `ANTHROPIC_API_KEY` 追加~~ — **2026-05-18 不要化 (Sprint 5 を Routine 化、trig_01J26XQsDbdBM3ggTQ8gcBta)**
 - [ ] 5. (任意) Phase 3 動作検証 (15 分、ローカル CLI)
 
 完了したらチェックを入れて commit。
@@ -162,26 +162,18 @@ $EDITOR .claude/state/triggers.json
 
 ---
 
-## 4. GitHub Secrets `ANTHROPIC_API_KEY` 追加
+## 4. GitHub Secrets `ANTHROPIC_API_KEY` 追加 — ✅ 2026-05-18 不要化
 
-Sprint 5 (LLM 改修案 PR 起票 workflow) が require。`cwv-improvement-pr-weekly.yml` 実行時に Claude API 呼び出すため。
+Sprint 5 (LCP 改修案 PR 起票) を `cwv-improvement-pr-weekly.yml` (GitHub Actions + `@anthropic-ai/sdk`) から **Anthropic Cloud Routine** に乗せ換えたため、GitHub Secrets 設定は不要に。
 
-### 手順
+- **新 Routine**: `stats47 weekly CWV PR` (trig_01J26XQsDbdBM3ggTQ8gcBta)
+- **Cron**: 毎週月曜 10:00 JST (`0 1 * * 1` UTC)
+- **初回発火**: 2026-05-25 10:03 JST
+- **モデル**: claude-opus-4-7
+- **管理 URL**: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta
+- **メリット**: API key 不要、Pro/Max プラン内で billing 完結、設計が一貫 (PR 起票系は全て Routine)
 
-1. https://console.anthropic.com/settings/keys で API key を取得 (or 既存 key を使う)
-2. https://github.com/uruhayato373/stats47/settings/secrets/actions にアクセス
-3. 「New repository secret」をクリック
-4. Name: `ANTHROPIC_API_KEY`、Value: `sk-ant-api03-...` (取得した API key)
-5. 「Add secret」
-
-### gh CLI でも可能 (要 admin scope)
-
-```bash
-gh secret set ANTHROPIC_API_KEY --body "sk-ant-api03-..."
-
-# 確認
-gh secret list | grep ANTHROPIC_API_KEY
-```
+ローカル CLI で同等処理を試したい場合は `.claude/scripts/psi/generate-cwv-pr.mjs` (API key 必要、`~/.zshrc` 等で `export ANTHROPIC_API_KEY=...` してから dry-run) を使用可能。
 
 ---
 

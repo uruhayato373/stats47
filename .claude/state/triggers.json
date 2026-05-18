@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-18T11:30:00.000Z",
+  "updated_at": "2026-05-18T12:36:00.000Z",
   "triggers": [
     {
       "id": "trig_01QBPsFMqaxHdfaSqsjuzCDW",
@@ -37,6 +37,29 @@
         "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Phase 3",
         "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01RaPLqZrP4i7wAnCzQjifWJ', body: {enabled: false}})",
         "詳細確認: https://claude.ai/code/routines/trig_01RaPLqZrP4i7wAnCzQjifWJ"
+      ]
+    },
+    {
+      "id": "trig_01J26XQsDbdBM3ggTQ8gcBta",
+      "name": "stats47 weekly CWV PR",
+      "cron": "0 1 * * 1",
+      "cron_note": "毎週月曜 1:00 UTC = 10:00 JST (ジッターで 10:03 頃発火)。最新 [PSI Alert] Issue から違反 URL 1 件取得 → LCP 改修案 draft PR 起票",
+      "created_at": "2026-05-18T12:35:56.109Z",
+      "purpose": "Sprint 5: PSI alert → suggest-cwv-candidates → LCP 改修案 (Claude セッション推論) → draft PR 起票。週 1 本ペース、GATE 1 = 人手 PR レビュー必須",
+      "repo": "https://github.com/uruhayato373/stats47",
+      "model": "claude-opus-4-7",
+      "enabled": true,
+      "environment_id": "env_01DyBoX8qdC86ZEdncmFwqx6",
+      "anthropic_registration_status": "registered",
+      "notes": [
+        "2026-05-18: cwv-improvement-pr-weekly.yml (GitHub Actions + @anthropic-ai/sdk + GitHub Secrets ANTHROPIC_API_KEY) を廃止して Routine 化。API key 不要、Anthropic billing 内で完結",
+        "実装: PSI Alert Issue 抽出 → suggest-cwv-candidates.mjs (--format json) → Edit ツール直編集 → gh pr create",
+        "scope: LCP / dynamic import のみ (CLS/FCP は次フェーズ)",
+        "ラベル `cwv-auto` は既存 (FFD700)",
+        "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Sprint 5",
+        "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01J26XQsDbdBM3ggTQ8gcBta', body: {enabled: false}})",
+        "詳細確認: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta",
+        "ローカル開発用に .claude/scripts/psi/generate-cwv-pr.mjs (ANTHROPIC_API_KEY 必要) は残存 — 通常使用は Routine 経由"
       ]
     }
   ]
