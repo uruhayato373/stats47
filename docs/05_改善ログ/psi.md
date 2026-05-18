@@ -33,7 +33,7 @@ Phase 3 sprint で 1 ファイル追加:
 
 ### 残作業
 
-- psi-audit-daily.yml の違反検出 step 後に本スクリプトを呼ぶ拡張 (次 sprint)
+- ✅ psi-audit-daily.yml の違反検出 step 後に本スクリプトを呼ぶ拡張を 2026-05-18 追加 (Issue body に候補 component を自動 append)
 - LLM PR 起票統合 (Phase 3 後半)
 
 ## T2-CWV-04: /areas と /search の CLS 実装 (Phase 1A + 1B)
