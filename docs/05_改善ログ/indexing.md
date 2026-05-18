@@ -19,15 +19,25 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 - ページ単位の SEO 改修 (CTR・タイトル) → `gsc.md` の BLOG-CTR-* 系
 - robots.txt / OGP 等のクロール経路 → `gsc.md`
 
-## [INDEXING-AUTO-01] Indexing API による問題 URL の自動再送信 (Phase 2 着手予定)
+## [INDEXING-AUTO-01] Indexing API による問題 URL の自動再送信 (Phase 2 で実装)
 
-- **status**: pending (W23-W24 実装予定、Phase 2)
+- **status**: in-progress
 - **tier**: 1
 - **target_metric**: gsc-index-coverage
 - **owner**: claude
-- **deployed_at**: (未着手)
-- **due**: 2026-06-14 (W24)
-- **related_plan**: `/Users/minamidaisuke/.claude/plans/docs-gsc-ga4-seo-todo-g-rosy-hamming.md` Phase 2
+- **deployed_at**: 2026-05-18
+- **due**: 2026-06-14
+- **related_plan**: `docs/02_実装計画/seo-todo-unify-phase-1-3.md` Phase 2
+- **verification_command**: `node .claude/scripts/gsc/auto-resubmit.mjs --dry-run`
+
+### 進捗 (2026-05-18)
+
+Phase 2 前倒し実装で `.claude/skills/analytics/auto-resubmit-url/SKILL.md` と `.claude/scripts/gsc/auto-resubmit.mjs` を作成。dry-run で coverage-drilldown CSV → 候補 URL 抽出 + quota 表示 + 7 日以内 dedup を動作確認済。
+
+残作業:
+- `--execute` 本番送信 (人手承認後、初回は --max 5 程度で検証)
+- 効果測定: 送信 1 週後に `url-inspection-daily.cjs` で coverageState=INDEXED 件数変化を確認
+- 想定: drilldown 未登録 10.8k → 1.4k 削減 (-87%) のうち本施策の寄与は 20-30%
 
 ### 背景
 

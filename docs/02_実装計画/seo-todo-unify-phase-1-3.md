@@ -2,16 +2,21 @@
 type: implementation-plan
 created: 2026-05-18
 updated: 2026-05-18
-status: phase-1-deployed
+status: phase-2-deployed
 target_weeks: 2026-W21 - 2026-W26
 phases:
   - { id: 1, status: completed, week: W21, pr: 308 }
-  - { id: 2, status: planned, week: W23-W24 }
-  - { id: 3, status: planned, week: W25-W26 }
+  - { id: 2, status: completed, week: W21-pre, pr: pending, note: "本来 W23-W24 予定を agent 並列で W21 内に前倒し実装" }
+  - { id: 3, status: partial, week: W25-W26, note: "triggers.json に Routine entry 追加 (disabled)、billing 設定後に W25 で有効化" }
 related_files:
   - .claude/scripts/lib/scan-pending-improvements.mjs
+  - .claude/scripts/lib/triage-matrix.mjs
+  - .claude/scripts/gsc/auto-resubmit.mjs
+  - .claude/scripts/blog/generate-article-charts.mjs
   - .github/workflows/improvement-log-reminder-weekly.yml
+  - .github/workflows/generate-article-charts.yml
   - docs/05_改善ログ/{content,indexing,ga4}.md
+  - .claude/state/triggers.json
 ---
 
 # SEO 向上 × TODO 一元化 × 自動化拡張プラン (W21-W26)
@@ -25,8 +30,8 @@ related_files:
 | Phase | 期間 | Status | PR | 主要成果物 |
 |---|---|---|---|---|
 | **Phase 1** | W21-W22 | ✅ deployed | [#308](https://github.com/uruhayato373/stats47/pull/308) | 3 metric 新設 (content/indexing/ga4)、scan-pending-improvements.mjs、improvement-log-reminder-weekly.yml、weekly-plan SKILL.md 改修 |
-| **Phase 2** | W23-W24 | 📋 planned | — | /draft-from-trend, /triage-improvement-log, /auto-resubmit-url, generate-article-charts.yml |
-| **Phase 3** | W25-W26 | 📋 planned | — | stats47-daily-trend-pipeline Routine, CTR/CWV 半自動改善 |
+| **Phase 2** | W21 前倒し | ✅ deployed | PR pending | `/draft-from-trend`, `/triage-improvement-log` + triage-matrix.mjs, `/auto-resubmit-url` + auto-resubmit.mjs, generate-article-charts.mjs + workflow |
+| **Phase 3** | W25-W26 | 🟡 partial | — | triggers.json に `stats47-daily-trend-pipeline` entry 追加 (disabled)、billing 設定後に有効化。CTR/CWV 半自動改善は未着手 |
 
 ## 次セッション開始時のフックポイント
 
