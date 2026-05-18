@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "trig_seo_phase3_trend_pipeline",
+      "id": "trig_seo_phase3_trend_pipeline_pending_registration",
       "name": "stats47 daily trend pipeline",
       "cron": "0 0 * * *",
       "cron_note": "毎日 0:00 UTC = 9:00 JST。launchd の discover-trends 完了後に走るよう設計 (Phase 3)",
@@ -26,12 +26,15 @@
       "purpose": "Phase 3: discover-trends → plan-blog-trends → draft-from-trend → PR 起票 を半自動化。GATE 1 = 人手 PR レビュー 1 回 (~15 min)、月 5-7 本ペース上限",
       "repo": "https://github.com/uruhayato373/stats47",
       "model": "claude-opus-4-7",
-      "enabled": false,
+      "enabled": true,
+      "anthropic_registration_status": "pending_manual",
       "notes": [
-        "W25 (2026-06-15) 着手予定、billing 設定後に RemoteTrigger({action: 'update', trigger_id, body: {enabled: true}}) で有効化",
+        "2026-05-18: ユーザー billing 設定済み + enabled: true で記録。ただし RemoteTrigger create API が v2 仕様変更 (event_type 不明 / CreateSessionRequest validate fail) で失敗 (req_011Cb9zha6bwTTJdUDUcnZTF)。Anthropic 側登録は手動で claude.ai UI から行うか、API 仕様確認後に再試行が必要。",
         "実装スキル: /discover-trends (launchd 07:23 既存) → /plan-blog-trends → /draft-from-trend → gh pr create",
-        "下書き品質 < quality_score 70 は自動 close、人手 GATE で独自性 (E-E-A-T) 確認",
-        "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Phase 3"
+        "下書き品質 < quality_score 70 は warning 表示のみ、close は人手 GATE 1",
+        "ラベル `trend-auto` は事前 `gh label create trend-auto --color 00CED1 --description \"トレンド記事自動生成 PR\"` で作成必須",
+        "関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Phase 3",
+        "登録後の id は trig_<...> に置換する必要あり"
       ]
     }
   ]
