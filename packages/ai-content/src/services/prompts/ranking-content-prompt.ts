@@ -27,16 +27,45 @@ function buildRegionMapText(): string {
   }).join("\n");
 }
 
+export interface RankingContentPromptOptions {
+  /**
+   * NotebookLM 等から取得した追加コンテキスト（白書・政府統計の出典等）。
+   * 指定時はプロンプトの絶対ルール直後に「補強コンテキスト」section として prepend される。
+   * /enhance-ranking-ai-content スキルが NotebookLM 横断クエリ結果を渡すために使う。
+   *
+   * 注意: 提供データの数値・順位は variable に保ち、文体・社会的背景・事例の言葉づかいの
+   * 「再構成」素材としてのみ使用する旨を LLM 側で誘導している (転記禁止)。
+   */
+  extraContext?: string;
+}
+
 /**
  * ランキングページ向けAIコンテンツ生成プロンプトを構築する。
  * 出力: JSON（FaqContent, regionalAnalysis Markdown, insights Markdown）
+ *
+ * @param input ランキングデータ (必須)
+ * @param options 追加オプション (extraContext で NotebookLM 出典を注入可能)
  */
-export function buildRankingContentPrompt(input: RankingContentInput): string {
+export function buildRankingContentPrompt(
+  input: RankingContentInput,
+  options?: RankingContentPromptOptions,
+): string {
   const allPrefText = input.allPrefectures
     .map((r) => `${r.rank}位 ${r.areaName}: ${r.value.toLocaleString()}${input.unit}`)
     .join("\n");
 
   const regionMapText = buildRegionMapText();
+
+  const extraContextSection = options?.extraContext
+    ? `
+
+## 補強コンテキスト (外部出典、文体・背景の素材として再構成して活用)
+
+以下は NotebookLM 等で収集した白書・政府統計の出典情報です。**文言をそのまま転記してはいけません**。背景・社会的文脈・事例の **言葉づかいの素材** として再構成してください。提供データの数値・順位を上書きすることは禁止です。
+
+${options.extraContext}
+`
+    : "";
 
   return `あなたは日本の公的統計データを正確に読み解く統計アナリストです。
 以下の「${input.rankingName}」の都道府県別ランキングデータ（${input.yearCode}年度）を分析し、Webページに掲載するコンテンツを生成してください。
@@ -46,7 +75,7 @@ export function buildRankingContentPrompt(input: RankingContentInput): string {
 1. **提供データのみ使用**: 以下に記載された数値・順位のみを使うこと。プロンプトに含まれないデータ、外部統計、他指標への言及は一切禁止
 2. **因果関係の推測禁止**: 「〜が原因」「〜のおかげ」等の因果推論は書かない。「〜と相関がある可能性がある」「〜が背景にあると考えられる」程度の示唆に留める
 3. **煽り表現禁止**: 「衝撃」「危機」「非常事態」「跳ね上がる」等の感情的表現は使わない。客観的・中立的なトーンを維持する
-4. **データ外の知識を混ぜない**: 特定の施設名、政策名、制度名、企業名への言及は禁止（提供データに含まれていない限り）
+4. **データ外の知識を混ぜない**: 特定の施設名、政策名、制度名、企業名への言及は禁止（提供データに含まれていない限り）${extraContextSection}
 
 ## ランキングデータ（全${input.totalCount}都道府県）
 
