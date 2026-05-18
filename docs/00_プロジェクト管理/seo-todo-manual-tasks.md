@@ -13,9 +13,9 @@ W21 セッション (2026-05-18) で Phase 1+2+3 を全 deployed したが、以
 
 ## 進捗チェックリスト
 
-- [ ] 1. NotebookLM CLI OAuth 認証 (5 分、要ブラウザ)
-- [ ] 2. NotebookLM 用ノートブック作成 + ID 登録 (30 分、要 NotebookLM UI)
-- [ ] 3. Anthropic Routine 手動登録 (10 分、要 claude.ai UI)
+- [x] 1. NotebookLM CLI OAuth 認証 (5 分、要ブラウザ) — **2026-05-18 完了**
+- [ ] 2. NotebookLM 用ノートブック作成 + ID 登録 (30 分、要 NotebookLM UI) — **stats47 専用 notebook は未作成、既存「最新の白書」等 4 件は登録済**
+- [x] 3. Anthropic Routine 手動登録 (10 分、要 claude.ai UI) — **2026-05-18 /schedule skill で自動登録完了 (trig_01RaPLqZrP4i7wAnCzQjifWJ)**
 - [ ] 4. GitHub Secrets `ANTHROPIC_API_KEY` 追加 (3 分、要 GitHub UI)
 - [ ] 5. (任意) Phase 3 動作検証 (15 分、ローカル CLI)
 
@@ -82,9 +82,22 @@ node .claude/scripts/notebooklm-notebook-builder.mjs bulk-add \
 
 ---
 
-## 3. Anthropic Routine 手動登録
+## 3. Anthropic Routine 手動登録 — ✅ 2026-05-18 完了
 
-Phase 3 の `stats47-daily-trend-pipeline` Routine を Anthropic 側に登録。`RemoteTrigger` create API は v1→v2 translate で失敗するため (req_011Cb9zha6bwTTJdUDUcnZTF)、**claude.ai UI から登録が必須**。
+Phase 3 の `stats47-daily-trend-pipeline` Routine。当初 `RemoteTrigger` create API が body schema 不備 (uuid 欠落) で失敗していたが、**`/schedule` skill 経由で自動登録成功**。
+
+- **Trigger ID**: `trig_01RaPLqZrP4i7wAnCzQjifWJ`
+- **次回発火**: 2026-05-19 09:08 JST (毎日 9:00 JST cron `0 0 * * *` UTC + jitter)
+- **モデル**: claude-opus-4-7
+- **環境**: env_01DyBoX8qdC86ZEdncmFwqx6 (anthropic_cloud)
+- **管理 URL**: https://claude.ai/code/routines/trig_01RaPLqZrP4i7wAnCzQjifWJ
+
+停止する場合: `RemoteTrigger({action: 'update', trigger_id: 'trig_01RaPLqZrP4i7wAnCzQjifWJ', body: {enabled: false}})`
+
+---
+
+<details>
+<summary>当初の手動手順 (参考、現在は不要)</summary>
 
 ### 手順
 
@@ -144,6 +157,8 @@ $EDITOR .claude/state/triggers.json
 # → "anthropic_registration_status": "pending_manual" を削除
 # → notes から「Anthropic 側登録は手動で...」も削除
 ```
+
+</details>
 
 ---
 
