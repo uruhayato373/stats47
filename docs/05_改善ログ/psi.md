@@ -9,6 +9,33 @@ updated: 2026-05-16
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [CWV-CANDIDATE-01] PSI 違反 URL → 修正候補 component 提案スクリプト (Phase 3 sprint)
+
+- **status**: in-progress
+- **tier**: 2
+- **target_metric**: psi-lcp / psi-cls
+- **owner**: claude
+- **deployed_at**: 2026-05-18
+- **due**: 2026-06-21 (W25)
+- **related_plan**: `docs/02_実装計画/seo-todo-unify-phase-1-3.md` Phase 3
+
+### 進捗 (2026-05-18)
+
+Phase 3 sprint で 1 ファイル追加:
+- `.claude/scripts/psi/suggest-cwv-candidates.mjs` — URL → Next.js route + features ディレクトリマッピング → tsx find + git blame + チャートライブラリ依存 hint (T1-PSI-LCP-02 / T2-CWV-04 へのポインタ)
+
+動作確認: `/ranking/area-population` で 5 候補抽出 (Map / TileGrid / Table 等)、git blame で最終更新日 + commit hash 表示確認。
+
+### Scope 制限 (本 sprint では実装せず)
+
+- LLM 改修案 PR 自動起票 (Routine + Claude API 必要、別フェーズ)
+- psi-audit-daily.yml への組み込み (本 sprint では candidate-suggestion CLI のみ、workflow 連携は次)
+
+### 残作業
+
+- ✅ psi-audit-daily.yml の違反検出 step 後に本スクリプトを呼ぶ拡張を 2026-05-18 追加 (Issue body に候補 component を自動 append)
+- LLM PR 起票統合 (Phase 3 後半)
+
 ## T2-CWV-04: /areas と /search の CLS 実装 (Phase 1A + 1B)
 
 - **status**: pending

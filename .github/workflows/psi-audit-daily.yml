@@ -93,6 +93,41 @@ jobs:
           git commit -m "chore(metrics): psi daily audit $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
           git push origin develop
 
+      - name: 🔍 Suggest CWV candidates for violated URLs
+        if: steps.check.outputs.exit_code == '1'
+        run: |
+          # report.md から違反 URL を抽出 (https://stats47.jp/... or https://www.stats47.jp/... を全て拾う)
+          URLS=$(grep -oE 'https://(www\.)?stats47\.jp[^ )"]+' /tmp/psi-report/report.md \
+                 | sort -u \
+                 | head -10)
+
+          if [ -z "$URLS" ]; then
+            echo "No stats47.jp URLs found in report.md; skipping candidate suggestion."
+            : > /tmp/psi-report/candidates.md
+            exit 0
+          fi
+
+          # 各 URL を --url 引数として渡す
+          URL_ARGS=""
+          while IFS= read -r u; do
+            URL_ARGS="${URL_ARGS} --url ${u}"
+          done <<< "$URLS"
+
+          echo "" > /tmp/psi-report/candidates.md
+          echo "---" >> /tmp/psi-report/candidates.md
+          echo "" >> /tmp/psi-report/candidates.md
+          echo "## 🔧 修正候補 component (自動提案)" >> /tmp/psi-report/candidates.md
+          echo "" >> /tmp/psi-report/candidates.md
+          echo "違反 URL ごとに \`apps/web/src/{app,features}/\` から候補ファイルを抽出 + git blame + 過去施策 hint。" >> /tmp/psi-report/candidates.md
+          echo "詳細: \`.claude/scripts/psi/suggest-cwv-candidates.mjs\`" >> /tmp/psi-report/candidates.md
+          echo "" >> /tmp/psi-report/candidates.md
+
+          node .claude/scripts/psi/suggest-cwv-candidates.mjs $URL_ARGS --max 5 --format markdown \
+            >> /tmp/psi-report/candidates.md 2>&1 || echo "_(candidate suggestion failed, see logs)_" >> /tmp/psi-report/candidates.md
+
+          echo "=== candidates preview ==="
+          head -40 /tmp/psi-report/candidates.md
+
       - name: 🚨 Open issue on threshold violations
         if: steps.check.outputs.exit_code == '1'
         env:
@@ -100,7 +135,12 @@ jobs:
         run: |
           DATE=$(date -u +%Y-%m-%d)
           TITLE="[PSI Alert] しきい値割れ検知 ${DATE}"
-          BODY_FILE=/tmp/psi-report/report.md
+          # report.md + candidates.md を結合して body にする
+          BODY_FILE=/tmp/psi-report/body-with-candidates.md
+          cat /tmp/psi-report/report.md > "$BODY_FILE"
+          if [ -s /tmp/psi-report/candidates.md ]; then
+            cat /tmp/psi-report/candidates.md >> "$BODY_FILE"
+          fi
 
           EXISTING=$(gh issue list --state open --label psi-alert --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
