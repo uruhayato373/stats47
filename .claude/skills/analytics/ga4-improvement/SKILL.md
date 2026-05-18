@@ -79,12 +79,30 @@ GA4 メトリクス取得の優先順:
    a. /fetch-ga4-data snapshot <YYYY-Www> を呼び reference/snapshots/YYYY-Www/ に CSV 保存
    b. 既に存在するなら既存 CSV を読む
 
-2. 主要指標を抽出:
-   - overview.csv: activeUsers / sessions / screenPageViews / engagementRate / averageSessionDuration / bounceRate / newUsers
-   - channels.csv: Organic Search / Direct / Social / Referral 別のセッション・ユーザー
+2. 主要指標を抽出 (**raw / clean / pollution の 3 系統を併記**):
+   - **raw 値** (bot 込み):
+     - overview.csv: activeUsers / sessions / screenPageViews / engagementRate / averageSessionDuration / bounceRate / newUsers
+     - channels.csv: Organic Search / Direct / Social / Referral 別のセッション・ユーザー
+   - **clean 値** (country=Japan only, 推奨判定値):
+     - overview-clean.csv: activeUsers / sessions / engagedSessions / screenPageViews / engagementRate / averageSessionDuration / bounceRate
+     - channels-clean.csv: 流入経路別の Japan only セッション・engagedSessions
+   - **pollution 値** (bot 推定):
+     - pollution-summary.csv: overseas_sessions / overseas_engagedSessions / notSet_sessions
+     - 計算: `inflation% = (raw - clean) / raw × 100`
+     - **inflation > 25% なら raw 値での判定は不可** → clean 値で施策効果を判定する
    - devices.csv: mobile / desktop / tablet
    - pages.csv: 上位 10 件のパス + Users + Engagement
    - daily.csv: 日次推移
+
+   **Issue コメント・週次レビュー本文には raw と clean を表形式で併記する**:
+
+   | 指標 | raw (bot 込) | clean (Japan only) | inflation% |
+   |---|---|---|---|
+   | Sessions | 1,119 | 821 | 26.6% |
+   | engagedSessions | 538 | 513 | 4.6% |
+   | Bounce Rate | 46.18% | 37.5% | -18.8% |
+
+   注: inflation が engagedSessions で軽微 (< 10%) ・Sessions で大きい場合は「bot は来訪するが engagement しない」典型パターン。判定は engagedSessions ベースで行う。
 
 3. budgets.json 判定:
    - warning_threshold <= 値 < error_threshold → WARNING
