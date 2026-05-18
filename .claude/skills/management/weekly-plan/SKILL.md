@@ -112,17 +112,47 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 調査項目:
 - docs/02_実装計画/01_実装ロードマップ.md の現在のスプリント・未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/50_Issues/feature-backlog.md の section ごとの `tier:` で優先度判定
+
+- 改善ログ pending 一覧（**真実源**: `docs/05_改善ログ/*.md`）
+  ```bash
+  # 今週末まで due の Tier 1/2 を抽出 (Must/Should 候補)
+  SUNDAY=$(date -u -d "$(date +%G-W%V-7) +6 days" +%Y-%m-%d 2>/dev/null || \
+           python3 -c "from datetime import date,timedelta; t=date.today(); print(t+timedelta(days=(6-t.weekday())))")
+  node .claude/scripts/lib/scan-pending-improvements.mjs \
+    --due-before "$SUNDAY" \
+    --tier 1,2 \
+    --format markdown
+  ```
+  → 出力された各エントリを Phase 3 の Must / Should 候補として組み込む
+  → Tier 1 は Must 優先、Tier 2 は Should 候補
+
+- 効果判定遅れエントリ（triage）
+  ```bash
+  # deployed_at から 14 日以上経過した pending|in-progress
+  node .claude/scripts/lib/scan-pending-improvements.mjs --overdue-days 14
+  ```
+  → これらは Phase 4 「前週と同じ失敗を繰り返してないか」の検出材料
+  → 該当があれば Phase 3 で「effect 判定タスク」として 1 つ計画に組み込む
+
 - 直近の批判的レビュー・Pre-Mortem ドキュメント
   ls -t docs/04_レビュー/critical-review/*.md | head -5
   ls -t docs/04_レビュー/pre-mortem/*.md | head -3
   → 繰り返し指摘されているパターンを抽出（Read tool または `cat docs/04_レビュー/critical-review/<file>.md` で本文確認）
-- 前週の計画・レビュー ドキュメント
+
+- 前週の計画・レビュー ドキュメント + 残タスク自動抽出
   ls -t docs/03_週次運用/週次計画/*.md | head -2
   ls -t docs/03_週次運用/週次レビュー/*.md | head -1
   → 前週 docs/03_週次運用/週次計画/YYYY-W(n-1).md と docs/03_週次運用/週次レビュー/YYYY-W(n-1).md を Read tool で取得
   → 計画 vs 実績の差分と「来週への申し送り」を抽出
+  → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
+    ```bash
+    PREV_WEEK=$(date -u -d "8 days ago" +%G-W%V 2>/dev/null || \
+                python3 -c "from datetime import date,timedelta; print((date.today()-timedelta(days=7)).strftime('%G-W%V'))")
+    grep -E "^- \[ \]" "docs/03_週次運用/週次計画/${PREV_WEEK}.md" 2>/dev/null || true
+    ```
+  → 持ち越しが 3 件以上なら Phase 4 で「工数見積もりが楽観的すぎないか」を厳しく検証
 
-出力形式: 「ロードマップ上の現在地」「未解決の課題」「前週の振り返り」「繰り返しパターン」
+出力形式: 「ロードマップ上の現在地」「未解決の課題」「前週の振り返り」「繰り返しパターン」「改善ログ pending 一覧」「前週からの持ち越し」
 ```
 
 #### Agent E: トレンド・検索需要
@@ -266,6 +296,20 @@ tags: []
 | トレンド | ソース | stats47 データ | アクション |
 |---|---|---|---|
 | ... | はてな/News/Yahoo | マッチする ranking_key or なし | 記事化 / SNS 投稿 / 要調査 |
+
+## 前週からの持ち越し
+
+<!-- Agent D が抽出した前週計画の未チェック `- [ ]` を転載。元 task の優先度に応じて
+     今週 Must/Should/Could に再分類する場合は、ここに残しつつ下記タスク欄にも追加して二重リンク。 -->
+- [ ] **持ち越しタスク名** — 元: `../週次計画/YYYY-W(n-1).md` [元 Must/Should/Could]
+
+## 改善ログ pending (今週着手対象)
+
+<!-- Agent D が scan-pending-improvements.mjs で抽出した Tier 1/2 エントリ。
+     ここに転載することで「真実源は改善ログ、当週ビューは週次計画」の連動を明示。 -->
+| Tier | Metric | ID | Status | Due | Owner |
+|---|---|---|---|---|---|
+| 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |
 
 ## 今週のタスク
 

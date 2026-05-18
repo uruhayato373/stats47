@@ -9,7 +9,10 @@ status: pending
 
 未実装の自動化アイデア集。優先度・実装期日は未定。
 
-## #285 improvement-log の effect/pending 判定リマインダー自動化
+## #285 [in-progress] improvement-log の effect/pending 判定リマインダー自動化
+
+> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。
+> 完了時に本 section を削除し、運用フローは `.claude/scripts/lib/scan-pending-improvements.mjs` + `.github/workflows/improvement-log-reminder-weekly.yml` を参照すること。
 
 ## 背景
 
@@ -134,7 +137,10 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 
 ---
 
-## #288 /weekly-plan の前週残タスク自動転載
+## #288 [in-progress] /weekly-plan の前週残タスク自動転載
+
+> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。
+> 完了時に本 section を削除し、運用フローは `.claude/skills/management/weekly-plan/SKILL.md` を参照すること。
 
 ## 背景
 
@@ -179,54 +185,15 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 
 ---
 
-## #289 Indexing API による問題 URL の自動再送信
+## #289 [moved] Indexing API による問題 URL の自動再送信
 
-## 背景
-
-`[PSI Alert]` で 404 検出 + GSC URL Inspection で `crawlState != INDEXED` の URL を、現状は `/gsc-improvement` 実行時に人間が判断して Indexing API で再送信している。GSC が反映するまで時間がかかるため、検出から再送信までを自動化したい。
-
-## ゴール
-
-問題 URL の検出 → Indexing API 再送信 → 結果記録 を毎日自動化する。
-
-## 提案実装
-
-1. 既存 `.github/workflows/gsc-url-inspection-daily.yml` の末尾に「自動再送信」ステップ追加
-2. 新規スクリプト `.claude/scripts/gsc/auto-resubmit.mjs`
-   - 当日の URL Inspection 結果から `coverageState != SUBMITTED_AND_INDEXED` の URL を抽出
-   - `.claude/state/metrics/gsc/resubmit-history.json` で「直近 7 日以内に再送信したか」確認
-   - 再送信していなければ Indexing API (`URL_UPDATED` event) を実行
-   - 結果を resubmit-history.json に追記
-3. quota 制限: 200 URLs/day（公式上限）— `.claude/skills/analytics/gsc-improvement/reference/budgets.json` に閾値追加
-
-## 想定難度・工数
-
-- M（2-3h）
-- 既存 url-inspection-daily.cjs の知見を流用、Indexing API クライアントが必要
-
-## 制約・前提
-
-- Indexing API は Google が「ジョブポスト・ライブ動画」用途を推奨。汎用ページは効果限定的（公式: `developers.google.com/search/apis/indexing-api`）
-- 効果検証期間: 再送信から N 日後の re-inspect で coverageState が変化したかチェック
-- quota 200/day を超過しないようキューイング
-
-## 受入基準
-
-- [ ] 当日の問題 URL 一覧を抽出
-- [ ] quota チェック後に再送信
-- [ ] resubmit-history.json に履歴記録
-- [ ] N 日後の効果検証スクリプトを別途 cron 化（このタスクには含めない）
-- [ ] 公式仕様のリスク（汎用ページは効果限定）を README で明記
-
-## 関連
-
-- `.claude/scripts/gsc/url-inspection-daily.cjs`
-- `.claude/skills/analytics/gsc-improvement/SKILL.md`
-- 親 issue: #115（GSC 未登録 1.6 万件打開）
+> **2026-05-18 移行**: 本タスクは `docs/05_改善ログ/indexing.md` の `[INDEXING-AUTO-01]` に移行。Phase 2 (W23-W24) で実装予定。
 
 ---
 
-## #290 /fetch-ga4-data snapshot に bot 除外クリーン値併記
+## #290 [in-progress] /fetch-ga4-data snapshot に bot 除外クリーン値併記
+
+> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。`docs/05_改善ログ/ga4.md` の `[GA4-CLEAN-01]` を参照。完了時に本 section を削除する。
 
 ## 背景
 
