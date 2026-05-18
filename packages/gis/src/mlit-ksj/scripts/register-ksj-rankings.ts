@@ -1,6 +1,11 @@
 #!/usr/bin/env tsx
 /**
- * KSJ データから都道府県別施設数を集計し、metrics + stats に登録
+ * KSJ データから都道府県別施設数を集計し、metrics + stats に登録。
+ *
+ * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot):
+ * RANKINGS の hardcode を削除し、D1 gis_datasets (is_ranking_target=1) から
+ * ranking_config JSON を読み込んで処理する。seed の真実源は
+ * scripts/seed-from-registry.ts に集約。
  */
 
 import * as fs from "node:fs";
@@ -10,6 +15,61 @@ import * as topojsonClient from "topojson-client";
 
 const DB_PATH =
   ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+
+/**
+ * D1 gis_datasets から RANKINGS 相当のリストを構築する。
+ * is_ranking_target=1 の行を取得し、ranking_config JSON を展開して
+ * 旧 RankingDef[] と同じ shape に詰め直す。
+ *
+ * 前提: 該当 dataId は pipeline 実行済み (r2_version が NOT NULL)。
+ *       未実行の場合は警告し skip する。
+ */
+function loadRankingsFromD1(db: Database.Database): RankingDef[] {
+  interface GisRow {
+    data_id: string;
+    r2_version: string | null;
+    ranking_config: string | null;
+  }
+  const rows = db
+    .prepare(
+      `SELECT data_id, r2_version, ranking_config
+       FROM gis_datasets
+       WHERE is_ranking_target = 1
+       ORDER BY data_id`,
+    )
+    .all() as GisRow[];
+
+  const result: RankingDef[] = [];
+  for (const row of rows) {
+    if (!row.r2_version) {
+      console.warn(
+        `[SKIP] ${row.data_id}: r2_version が空 (pipeline 未実行)。先に run-pipeline.ts を実行してください。`,
+      );
+      continue;
+    }
+    if (!row.ranking_config) {
+      console.warn(`[SKIP] ${row.data_id}: ranking_config が空`);
+      continue;
+    }
+    let configs: Array<Omit<RankingDef, "dataId" | "version">>;
+    try {
+      configs = JSON.parse(row.ranking_config);
+    } catch (err) {
+      console.warn(
+        `[SKIP] ${row.data_id}: ranking_config JSON parse 失敗 (${err instanceof Error ? err.message : String(err)})`,
+      );
+      continue;
+    }
+    for (const c of configs) {
+      result.push({
+        ...c,
+        dataId: row.data_id,
+        version: row.r2_version,
+      });
+    }
+  }
+  return result;
+}
 
 // 都道府県コード → 名前
 const PREF_NAMES: Record<string, string> = {
@@ -41,163 +101,6 @@ interface RankingDef {
   description?: string;
 }
 
-const RANKINGS: RankingDef[] = [
-  {
-    rankingKey: "dam-count",
-    rankingName: "ダム数",
-    unit: "か所",
-    categoryKey: "infrastructure",
-    dataId: "W01",
-    version: "14",
-    yearCode: "2014",
-    description: "国土数値情報に登録されているダムの都道府県別数",
-  },
-  {
-    rankingKey: "roadside-station-count",
-    rankingName: "道の駅数",
-    unit: "か所",
-    categoryKey: "tourism",
-    dataId: "P35",
-    version: "18",
-    yearCode: "2018",
-    description: "国土数値情報に登録されている道の駅の都道府県別数",
-  },
-  {
-    rankingKey: "railway-station-count",
-    rankingName: "鉄道駅数",
-    unit: "駅",
-    categoryKey: "infrastructure",
-    dataId: "N02",
-    version: "24",
-    filenamePattern: "Station",
-    yearCode: "2024",
-    description: "国土数値情報に登録されている鉄道駅の都道府県別数",
-  },
-  {
-    rankingKey: "expressway-junction-count",
-    rankingName: "高速道路IC・JCT数",
-    unit: "か所",
-    categoryKey: "infrastructure",
-    dataId: "N06",
-    version: "20",
-    filenamePattern: "Joint",
-    yearCode: "2020",
-    description: "国土数値情報に登録されている高速道路のIC・JCTの都道府県別数",
-  },
-  {
-    rankingKey: "lake-count",
-    rankingName: "湖沼数",
-    unit: "か所",
-    categoryKey: "landweather",
-    dataId: "W09",
-    version: "05",
-    yearCode: "2005",
-    description: "国土数値情報に登録されている湖沼の都道府県別数",
-  },
-  {
-    rankingKey: "airport-count",
-    rankingName: "空港数",
-    unit: "か所",
-    categoryKey: "infrastructure",
-    dataId: "C28",
-    version: "07",
-    filenamePattern: "AirportReferencePoint",
-    yearCode: "2007",
-    description: "国土数値情報に登録されている空港の都道府県別数",
-  },
-  {
-    rankingKey: "nuclear-power-plant-count",
-    rankingName: "原子力発電所数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "NuclearPowerPlant",
-    yearCode: "2013",
-    description: "国土数値情報に登録されている原子力発電所の都道府県別数",
-  },
-  {
-    rankingKey: "thermal-power-plant-count",
-    rankingName: "火力発電所数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "ThermalPowerPlant.topojson",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "hydroelectric-power-plant-count",
-    rankingName: "水力発電所数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "GeneralHydroelectric",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "photovoltaic-power-plant-count",
-    rankingName: "太陽光発電施設数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "Photovoltaic",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "wind-power-plant-count-facility",
-    rankingName: "風力発電施設数（施設ベース）",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "WindPowerPlant",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "geothermal-power-plant-count",
-    rankingName: "地熱発電施設数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "Geothermal",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "biomass-power-station-count",
-    rankingName: "バイオマス発電施設数",
-    unit: "か所",
-    categoryKey: "energy",
-    dataId: "P03",
-    version: "13",
-    filenamePattern: "Biomass",
-    yearCode: "2013",
-  },
-  {
-    rankingKey: "tourism-resource-count",
-    rankingName: "観光資源数",
-    unit: "件",
-    categoryKey: "tourism",
-    dataId: "P12",
-    version: "14",
-    yearCode: "2014",
-    description: "国土数値情報に登録されている観光資源の都道府県別数",
-  },
-  {
-    rankingKey: "fishing-port-count-ksj",
-    rankingName: "漁港数",
-    unit: "港",
-    categoryKey: "agriculture",
-    dataId: "C09",
-    version: "06",
-    filenamePattern: "FishingPort.topojson",
-    yearCode: "2006",
-    description: "国土数値情報に登録されている漁港の都道府県別数",
-  },
-];
 
 /**
  * TopoJSON からGeoJSON FeatureCollection を取得
@@ -357,11 +260,22 @@ async function main() {
     "SELECT key FROM metrics WHERE key = ?"
   );
 
+  // RANKINGS は D1 から動的にロード (旧 hardcode 削除済み)
+  const rankings = loadRankingsFromD1(db);
+  if (rankings.length === 0) {
+    console.warn(
+      "is_ranking_target=1 の行がありません。先に seed-from-registry.ts を実行してください。",
+    );
+    db.close();
+    return;
+  }
+  console.log(`\nD1 から ${rankings.length} 件のランキング定義を読み込みました。\n`);
+
   let created = 0;
   let skipped = 0;
   let dataRows = 0;
 
-  for (const def of RANKINGS) {
+  for (const def of rankings) {
     const existing = checkExisting.get(def.rankingKey);
     if (existing) {
       console.log(`[SKIP] ${def.rankingKey} (既に存在)`);

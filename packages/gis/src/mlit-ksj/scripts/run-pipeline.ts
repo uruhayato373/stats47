@@ -14,11 +14,48 @@ import * as path from "node:path";
 import Database from "better-sqlite3";
 
 import { runKsjPipeline } from "../pipeline";
-import { listDatasetsByCategory, getDatasetDef } from "../registry";
 import type { KsjPipelineResult } from "../types";
 
 const LOCAL_D1_PATH =
   ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+
+interface DatasetMeta {
+  data_id: string;
+  name: string;
+  category: string;
+  coverage: string;
+}
+
+/** D1 から category 別の登録済み (status='registered'|'imported') データセットを取得 */
+function fetchDatasetsByCategory(category: string): DatasetMeta[] {
+  const projectRoot = findProjectRoot();
+  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
+  const db = new Database(dbPath, { readonly: true });
+  const rows = db
+    .prepare(
+      `SELECT data_id, name, category, coverage
+       FROM gis_datasets
+       WHERE category = ? AND status IN ('registered', 'imported')
+       ORDER BY data_id`,
+    )
+    .all(category) as DatasetMeta[];
+  db.close();
+  return rows;
+}
+
+/** D1 から指定 dataId のメタを取得 */
+function fetchDatasetMeta(dataId: string): DatasetMeta | null {
+  const projectRoot = findProjectRoot();
+  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
+  const db = new Database(dbPath, { readonly: true });
+  const row = db
+    .prepare(
+      `SELECT data_id, name, category, coverage FROM gis_datasets WHERE data_id = ?`,
+    )
+    .get(dataId) as DatasetMeta | undefined;
+  db.close();
+  return row ?? null;
+}
 
 function printHelp() {
   console.log(`
@@ -133,16 +170,16 @@ function printResult(result: KsjPipelineResult) {
 }
 
 async function runCategory(category: string) {
-  const datasets = listDatasetsByCategory(category);
+  const datasets = fetchDatasetsByCategory(category);
   if (datasets.length === 0) {
-    console.error(`カテゴリ "${category}" のデータセットがありません。`);
+    console.error(`カテゴリ "${category}" の登録済みデータセットがありません。`);
     process.exit(1);
   }
 
   // 全国データセットのみ自動実行（県別は --pref 指定が必要なため）
   const nationalDatasets = datasets.filter((d) => d.coverage === "national");
   console.log(
-    `\nカテゴリ "${category}": ${datasets.length} データセット (うち全国: ${nationalDatasets.length})\n`
+    `\nカテゴリ "${category}": ${datasets.length} データセット (うち全国: ${nationalDatasets.length})\n`,
   );
 
   const results: KsjPipelineResult[] = [];
@@ -150,12 +187,12 @@ async function runCategory(category: string) {
 
   for (const def of nationalDatasets) {
     try {
-      const result = await runKsjPipeline({ dataId: def.dataId });
+      const result = await runKsjPipeline({ dataId: def.data_id });
       results.push(result);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.error(`  [SKIP] ${def.dataId} (${def.name}): ${msg}\n`);
-      errors.push({ dataId: def.dataId, error: msg });
+      console.error(`  [SKIP] ${def.data_id} (${def.name}): ${msg}\n`);
+      errors.push({ dataId: def.data_id, error: msg });
     }
   }
 
@@ -181,10 +218,16 @@ async function runCategory(category: string) {
 }
 
 async function runAllPrefs(dataId: string, skipDownload: boolean) {
-  const def = getDatasetDef(dataId);
+  const def = fetchDatasetMeta(dataId);
+  if (!def) {
+    console.error(
+      `D1 gis_datasets に ${dataId} がありません。seed-from-registry.ts を実行してください。`,
+    );
+    process.exit(1);
+  }
   if (def.coverage !== "prefecture" && def.coverage !== "mesh") {
     console.error(
-      `${dataId} は全国データセットです。--all-prefs は県別・メッシュデータのみ対応。`
+      `${dataId} は全国データセットです。--all-prefs は県別・メッシュデータのみ対応。`,
     );
     process.exit(1);
   }
@@ -258,10 +301,16 @@ async function main() {
     return;
   }
 
-  const def = getDatasetDef(dataId);
+  const def = fetchDatasetMeta(dataId);
+  if (!def) {
+    console.error(
+      `D1 gis_datasets に ${dataId} がありません。seed-from-registry.ts を実行してください。`,
+    );
+    process.exit(1);
+  }
   if (def.coverage === "prefecture" && !prefCode) {
     console.error(
-      `エラー: ${dataId} (${def.name}) は県別データセットです。--pref <code> または --all-prefs を指定してください。`
+      `エラー: ${dataId} (${def.name}) は県別データセットです。--pref <code> または --all-prefs を指定してください。`,
     );
     process.exit(1);
   }

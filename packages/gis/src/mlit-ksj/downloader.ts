@@ -11,13 +11,13 @@ import unzipper from "unzipper";
 import * as shapefile from "shapefile";
 import iconv from "iconv-lite";
 
-import type { KsjDatasetDef } from "./types";
+import type { KsjCodeConfig } from "./types";
 
 /**
  * ダウンロード URL を構築
  */
 export function buildDownloadUrl(
-  def: KsjDatasetDef,
+  def: Pick<KsjCodeConfig, "downloadUrlPattern">,
   version: string,
   prefCode?: string
 ): string {
