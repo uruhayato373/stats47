@@ -9,49 +9,6 @@ status: pending
 
 未実装の自動化アイデア集。優先度・実装期日は未定。
 
-## #285 [in-progress] improvement-log の effect/pending 判定リマインダー自動化
-
-> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。
-> 完了時に本 section を削除し、運用フローは `.claude/scripts/lib/scan-pending-improvements.mjs` + `.github/workflows/improvement-log-reminder-weekly.yml` を参照すること。
-
-## 背景
-
-`.claude/skills/analytics/*-improvement/reference/improvement-log.md` には施策が `effect/pending` のまま放置されているエントリが多数ある。実証ベース判定ルール（`.claude/rules/evidence-based-judgment.md`）に従い、デプロイ後 N 日経過したら effect/full / partial / none / adverse のいずれかに判定すべきだが、人間が忘れがち。
-
-## ゴール
-
-「判定自体」は人間が実証ベースで行う必要があるため自動化しない。**「判定すべきエントリの検出」のみ自動化**する。
-
-## 提案実装
-
-1. 新規スクリプト `.claude/scripts/lib/scan-pending-improvements.mjs`
-   - 各 improvement-log を走査
-   - `effect/pending` かつ デプロイ日から 14 日以上経過しているエントリを抽出
-2. 新規 workflow `.github/workflows/improvement-log-reminder-weekly.yml`
-   - 毎週日曜 22:00 JST 実行
-   - 上記スクリプトを実行、該当エントリがあれば `[Improvement Log Triage] YYYY-Www` Issue 起票（ラベル `improvement-log-triage`, `auto-generated`）
-   - 本文に該当エントリ一覧 + 各 improvement-log への deep link
-
-## 想定難度・工数
-
-- S 〜 M（1-2h）
-- スクリプト 100 行程度 + workflow
-
-## 受入基準
-
-- [ ] スクリプトがローカル dry-run で正しく pending エントリを抽出する
-- [ ] workflow を手動実行して Issue が起票される
-- [ ] 起票された Issue から各 pending エントリの場所が分かる
-- [ ] 14 日未満は除外、auto-stub フラグ含むエントリも対象
-
-## 関連
-
-- `.claude/rules/evidence-based-judgment.md`
-- `docs/01_技術設計/10_自動化インベントリ.md`「自動化検討中」セクション
-- PR #284 で auto-stub 追記機能を実装済（このタスクは「stub の後始末」を自動化する）
-
----
-
 ## #286 Cloudflare 請求書 PDF 自動取得 + 精算 Issue 起票
 
 ## 背景
@@ -137,107 +94,9 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 
 ---
 
-## #288 [in-progress] /weekly-plan の前週残タスク自動転載
-
-> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。
-> 完了時に本 section を削除し、運用フローは `.claude/skills/management/weekly-plan/SKILL.md` を参照すること。
-
-## 背景
-
-`/weekly-plan` 実行時、前週の `[Weekly Review] YYYY-Www` Issue から残タスクを人間が手動転記している。Claude Routine `stats47 weekly PDCA` が動くタイミング（土曜 09:03）にこの転記まで一気にやれると人間判断が減る。
-
-## ゴール
-
-`stats47 weekly PDCA` Routine の中で、前週レビューの「未完了」「持ち越し」タスクを抽出して今週 plan に自動転載する。
-
-## 提案実装
-
-1. `.claude/skills/management/weekly-plan/SKILL.md` の Phase X として「前週残タスク取り込み」を追加
-2. 抽出ロジック:
-   - 前週 Weekly Review Issue を `gh issue view` で取得
-   - チェックボックス `- [ ]` を全件抽出
-   - チェックされていない（= 未完了）タスクを抽出
-   - 同時に「持ち越し」「次週」キーワードを含むセクションを抽出
-3. 今週 Weekly Plan Issue 本文の「前週からの持ち越し」セクションに自動転載
-4. 既存 Claude Routine `trig_01QBPsFMqaxHdfaSqsjuzCDW` が呼ぶ skill 内で完結（新規 workflow 不要）
-
-## 想定難度・工数
-
-- M（1-2h）
-- skill 修正中心、新規スクリプト不要
-
-## 制約・前提
-
-- skill 内で `gh issue view` + 正規表現でチェックボックス抽出
-- AI による意味判断（「これは持ち越しか？」）は最小限に
-
-## 受入基準
-
-- [ ] 既存 Claude Routine 実行で前週残タスクが今週 plan に転載される
-- [ ] 既存「持ち越し」セクションがあれば追記、なければ新規作成
-- [ ] チェックボックス形式を維持
-
-## 関連
-
-- `.claude/state/triggers.json` の `stats47 weekly PDCA`
-- `.claude/skills/management/weekly-plan/SKILL.md`
-- `.claude/skills/management/weekly-review/SKILL.md`
-
----
-
 ## #289 [moved] Indexing API による問題 URL の自動再送信
 
 > **2026-05-18 移行**: 本タスクは `docs/05_改善ログ/indexing.md` の `[INDEXING-AUTO-01]` に移行。Phase 2 (W23-W24) で実装予定。
-
----
-
-## #290 [in-progress] /fetch-ga4-data snapshot に bot 除外クリーン値併記
-
-> **2026-05-18 移行**: 本タスクは Phase 1 (`feature/seo-todo-unify-w21`) で実装中。`docs/05_改善ログ/ga4.md` の `[GA4-CLEAN-01]` を参照。完了時に本 section を削除する。
-
-## 背景
-
-2026-05-16 の W20 監査で、GA4 snapshot に **bot / overseas / `(not set)/(not set)` の混入** を検出（W20 raw sessions 1,119 のうち 206 が overseas, 92 が完全情報欠落 = 合計 ~27% inflated）。週次レビューの絶対値（Sessions / Active Users / Bounce Rate）が水増しされており、前週比の信頼度が下がる。engagedSessions ベース判定は bot 影響軽微（overseas 206 中 engaged 25）だが、UI/レポートで両者を並べた方が判定ミスを減らせる。
-
-詳細: `docs/03_週次運用/週次レビュー/2026-W20.md#ga4-bot-混入監査-2026-05-16`
-
-## ゴール
-
-`/fetch-ga4-data snapshot YYYY-Www` 実行時に **Japan-only クリーン値の CSV も自動併記** することで、レビュー時に raw / clean を両見できる。GA4 Admin 側の bot フィルタ設定とは独立の二重チェック。
-
-## 提案実装
-
-1. `.claude/skills/analytics/fetch-ga4-data/SKILL.md` snapshot モードスクリプトに以下を追加:
-   - `overview-clean.csv` — `dimensionFilter: country=Japan` 適用
-   - `channels-clean.csv` — 同上
-   - `pollution-summary.csv` — overseas_sessions / notSet_sessions / direct_bounce100_landing_sessions の集計 1 行
-2. observe モード（`/ga4-improvement observe`）が clean 値 と raw 値 両方を Issue コメントに記載
-3. `/weekly-review` Phase 1 Agent C のドキュメント記述更新: 「Japan only クリーン値を併記して判定」
-
-## 想定難度・工数
-
-- S（30-60min）
-- スクリプトに dimensionFilter 数行追加 + CSV 出力 + SKILL.md 文言調整
-
-## 制約・前提
-
-- `country=Japan` フィルタは「日本人実ユーザー」近似値。海外在住の日本人読者やモバイル VPN 利用者は除外される副作用あり（影響は小さいと想定）
-- GA4 Admin の Internal Traffic / IAB Bot 除外設定が ON ならクリーン値とほぼ一致するはず → 二重チェックの意味で残す
-
-## 受入基準
-
-- [ ] snapshot 実行で overview-clean.csv / channels-clean.csv / pollution-summary.csv が生成される
-- [ ] W20 で再実行し、本文記載の clean 値（W20 6d: sessions 911, engaged 513）と一致
-- [ ] observe モードが raw / clean 両方を Issue コメントに記載
-- [ ] レビュー本文テンプレに「クリーン値」表が追加される
-
-## 関連
-
-- `.claude/skills/analytics/fetch-ga4-data/SKILL.md`
-- `.claude/skills/analytics/ga4-improvement/SKILL.md`
-- `.claude/skills/management/weekly-review/SKILL.md` Phase 1 Agent C
-- 検証スクリプト原型: `/tmp/ga4-pollution-check.cjs` / `/tmp/ga4-clean-compare.cjs`（W20 監査で使用）
-- 監査詳細: `docs/03_週次運用/週次レビュー/2026-W20.md#ga4-bot-混入監査-2026-05-16`
 
 ---
 
@@ -294,3 +153,18 @@ CLAUDE.md への運用ルール追記 (Git ワークフロー / DB 操作 / Issu
 
 - 元計画 (削除済み 2026-05-17): `docs/80_参考資料/日本の統計.md` `docs/80_参考資料/世界の統計.md` (git log で参照可)
 - 既存: `docs/01_技術設計/09_国土交通データプラットフォーム.md`
+
+---
+
+## 完了履歴 (2026-05-18 削除)
+
+W21 SEO TODO 一元化 sprint (PR #308 / #310 / #311) で deployed 済のため backlog から削除。詳細は git log および各 PR 本文を参照。
+
+| 元 ID | タスク | deploy 場所 |
+|---|---|---|
+| #285 | improvement-log triage 週次自動化 | PR #308: `.github/workflows/improvement-log-reminder-weekly.yml` + `.claude/scripts/lib/scan-pending-improvements.mjs` |
+| #288 | /weekly-plan 前週残タスク自動転載 | PR #308: `.claude/skills/management/weekly-plan/SKILL.md` Phase 1 Agent D |
+| #289 | Indexing API による問題 URL の自動再送信 | PR #310: `.claude/skills/analytics/auto-resubmit-url/SKILL.md` + `.claude/scripts/gsc/auto-resubmit.mjs` (改善ログ `docs/05_改善ログ/indexing.md` [INDEXING-AUTO-01] に移行) |
+| #290 | /fetch-ga4-data snapshot に bot 除外クリーン値併記 | PR #308 / #310: `.claude/skills/analytics/fetch-ga4-data/SKILL.md` snapshot モード + `.claude/skills/analytics/ga4-improvement/SKILL.md` observe |
+
+以後は `docs/05_改善ログ/<metric>.md` を真実源とする (CLAUDE.md「改善施策の TODO 真実源」)。

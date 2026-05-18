@@ -258,3 +258,64 @@ gh pr list --label trend-auto --json createdAt,mergedAt | jq '...'
 | CWV 改修で他ページ regression | EXP-005 で LCP 要素特定後に実装、`psi-audit-daily.yml` で全 URL 監視 |
 | TODO 移行漏れで真実源が二重化 | W22 末に `grep -c "^## #" docs/50_Issues/*.md` = 0 を完了判定に組込み |
 | Routine が AI コスト膨張 | `/draft-from-trend` 1 回実行 = 1 記事下書きに制限、月 10-14 試行で頭打ち |
+
+---
+
+## 9. 実装記録 (Sprint Log)
+
+W21 セッション (2026-05-18) で Phase 1 → Phase 2 → Phase 3 を 3 sprint 連続で agent 並列前倒し実装した。詳細は元 plan `~/.claude/plans/docs-gsc-ga4-seo-todo-g-rosy-hamming.md` および各 PR 本文を参照 (本ファイルは要約のみ保持)。
+
+### Sprint 1: Phase 1 (PR #308, 2026-05-18 10:01 merged)
+
+**目的**: 改善ログを TODO 単一真実源に再編 + triage 自動化
+
+| 成果物 | 場所 |
+|---|---|
+| 改善ログ 3 metric 新設 | `docs/05_改善ログ/{content,indexing,ga4}.md` |
+| pending エントリ抽出スクリプト | `.claude/scripts/lib/scan-pending-improvements.mjs` |
+| 週次 triage workflow | `.github/workflows/improvement-log-reminder-weekly.yml` |
+| weekly-plan SKILL.md 改修 | scan-pending 連動 + 前週残転載 |
+| ga4-improvement SKILL.md 改修 | observe に raw/clean/inflation 併記 |
+
+検証: `gh workflow run improvement-log-reminder-weekly.yml` で `[Improvement Triage] 2026-W21` Issue #309 起票確認。
+
+### Sprint 2: Phase 2 前倒し (PR #310, 2026-05-18 11:22 merged)
+
+**目的**: 本来 W23-W24 予定だった新規スキル 3 個 + workflow 1 個を agent 4 並列で W21 内に前倒し
+
+| Agent | 成果物 |
+|---|---|
+| A | `.claude/skills/blog/draft-from-trend/SKILL.md` (orchestrator) |
+| B | `.claude/skills/management/triage-improvement-log/SKILL.md` + `.claude/scripts/lib/triage-matrix.mjs` |
+| C | `.claude/skills/analytics/auto-resubmit-url/SKILL.md` + `.claude/scripts/gsc/auto-resubmit.mjs` |
+| D | `.claude/scripts/blog/generate-article-charts.mjs` + `.github/workflows/generate-article-charts.yml` |
+
+Phase 3 部分着手: `.claude/state/triggers.json` に `stats47-daily-trend-pipeline` Routine entry を `enabled: false` で追加 (billing 設定後 W25 で有効化)。
+
+ブロッカー除去: PR 内で `fetch-article-data` SKILL.md を追加 (draft-from-trend orchestrator が前提とする 5 スキル全揃え)。
+
+### Sprint 3: Phase 3 前倒し (PR #311, 2026-05-18 11:49 merged)
+
+**目的**: Phase 3 のうち agent 実装可能な範囲を W21 内に前倒し
+
+| Agent | 成果物 |
+|---|---|
+| E | `.claude/scripts/gsc/extract-low-ctr-queries.mjs` + `.github/workflows/ctr-improvement-monthly.yml` |
+| F | `.claude/scripts/blog/fetch-article-data.mjs` (新 DDD schema metrics+stats_prefecture 対応) |
+| G | `.claude/scripts/psi/suggest-cwv-candidates.mjs` |
+
+追加 commit (PR #311 同梱): `psi-audit-daily.yml` に suggest-cwv-candidates を組み込み (違反検出時に Issue body へ候補 component を自動 append)。
+
+### Sprint 4: Cleanup (Phase 1 KPI 達成、2026-05-18)
+
+| 対応 | 内容 |
+|---|---|
+| automation-backlog の deployed section 完全削除 | #285 / #288 / #290 を削除、末尾に「完了履歴」section を追加 (Phase 1 KPI「Tier 確定 backlog section = 0」達成) |
+| T0-DECAY-01 の真実源二重化解消 | `gsc.md` の T0-DECAY-01 を `indexing.md` の [INDEXING-DRILLDOWN-01] に完全移行、gsc.md には短いポインタのみ残置 (2026-06 末に削除予定) |
+| Plan ファイル 2 重保管同期 | 本 section 追加で要約反映。詳細プランは `~/.claude/plans/docs-gsc-ga4-seo-todo-g-rosy-hamming.md` を真実源とする |
+
+### Phase 3 残作業 (本セッション scope 外)
+
+- Routine `stats47-daily-trend-pipeline` 有効化 (billing 設定後 W25)
+- LLM 改修案 PR 自動起票 (CWV candidate suggestion → PR 起票への拡張、別フェーズ)
+- W22 動作検証 (自動 snapshot で clean ファイル生成確認)
