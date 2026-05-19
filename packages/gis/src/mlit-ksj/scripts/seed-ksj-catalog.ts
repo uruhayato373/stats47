@@ -36,6 +36,7 @@ const LOCAL_D1_PATH =
 
 const JPKSJ_API_URL = "https://jpksj-api.kmproj.com/datasets.json";
 const FALLBACK_JSON_PATH = "packages/database/seed/ksj-catalog.json";
+const ATTRIBUTION = "国土交通省国土数値情報ダウンロードサイト";
 
 interface JpKsjEntry {
   id: string;
@@ -208,10 +209,15 @@ async function main(): Promise<void> {
         geometry_type: "unknown",
         coverage: "unknown",
         license: "unknown",
-        attribution: e.source_url || "国土交通省国土数値情報ダウンロードサイト",
-        memo:
-          e.description ||
-          `category2: ${e.category2_name}\nsource_url: ${e.source_url}`,
+        // attribution は出典表記なので固定文言。source_url は memo に残す。
+        attribution: ATTRIBUTION,
+        memo: [
+          e.description,
+          `category2: ${e.category2_name}`,
+          `source_url: ${e.source_url}`,
+        ]
+          .filter(Boolean)
+          .join("\n"),
       });
       if (result.changes === 1) inserted++;
     }

@@ -17,7 +17,6 @@ export const gisDatasets = sqliteTable(
     geometryType:   text("geometry_type").notNull(), // point|line|polygon|mesh|mixed
     coverage:       text("coverage").notNull(),       // national|prefecture|mesh|region
     license:        text("license").notNull(),
-    isDownloaded:   integer("is_downloaded", { mode: "boolean" }).notNull().default(false),
     r2Version:      text("r2_version"),
     fileCount:      integer("file_count"),
     totalSizeBytes: integer("total_size_bytes"),

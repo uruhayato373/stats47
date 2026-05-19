@@ -303,7 +303,6 @@ function updateGisDatasetState(input: {
           total_size_bytes = ?,
           converted_at = ?,
           r2_prefix = ?,
-          is_downloaded = 1,
           updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
       WHERE data_id = ?
     `);

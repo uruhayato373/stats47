@@ -67,7 +67,7 @@ MLIT zip ダウンロード → /tmp/ に保存
 
 <!-- AUTO-GENERATED:START -->
 
-<!-- generated: 2026-05-18T22:38:06.918Z by scripts/generate-docs.ts -->
+<!-- generated: 2026-05-19T22:23:17.668Z by scripts/generate-docs.ts -->
 
 ## データセット一覧 (D1: gis_datasets)
 
