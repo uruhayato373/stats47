@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
 import { trackSearch } from "@/lib/analytics/events";
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { logger } from "@/lib/logger";
 
 import { SearchProvider, useSearch } from "../context/SearchContext";
@@ -223,6 +224,12 @@ function SearchPageClientInner({
               <SearchResults results={results} query={query} />
             )}
           </div>
+
+          {!isSearching && results.length > 0 && (
+            <div className="mt-8">
+              <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+            </div>
+          )}
         </div>
 
         {/* 右サイドバー: フィルター */}

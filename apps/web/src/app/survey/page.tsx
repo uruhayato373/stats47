@@ -14,6 +14,7 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -97,6 +98,10 @@ export default async function SurveyIndexPage() {
             </Link>
           );
         })}
+      </div>
+
+      <div className="mt-8">
+        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
       </div>
     </div>
   );

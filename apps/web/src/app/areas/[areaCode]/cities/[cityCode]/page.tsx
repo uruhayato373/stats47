@@ -34,6 +34,8 @@ import {
     type PageComponentsSnapshot,
 } from "@/features/stat-charts/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 
@@ -199,6 +201,10 @@ export default async function CityPage({ params }: PageProps) {
                     {/* アフィリエイト */}
                     <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
+
+                    <div className="mt-8">
+                        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                    </div>
                 </main>
             </div>
         </>

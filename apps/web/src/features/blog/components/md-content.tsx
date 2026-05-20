@@ -332,6 +332,17 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
             >
                 {processed}
             </ReactMarkdown>
+            {/* 広告: 手動 <ad-slot> が無い記事への自動フォールバック（記事末尾）。
+                192 記事中 51 記事が <ad-slot> 未設置のため一律カバーする。 */}
+            {!source.includes("<ad-slot") && (
+                <div className="my-8 not-prose">
+                    <AdSenseAd
+                        format={BLOG_ARTICLE_INLINE.format}
+                        slotId={BLOG_ARTICLE_INLINE.slotId}
+                        showLabel={false}
+                    />
+                </div>
+            )}
         </article>
     );
 }

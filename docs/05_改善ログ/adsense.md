@@ -68,7 +68,15 @@ W21 データでモバイルが構造的に undermonetized:
    - `RankingKeyPageClient.tsx` の相関分析セクション直後（解析中盤）に `lg:hidden` でモバイル専用 1 枠を追加。フッター広告とはスタッキングを避けて離した。
    - 新規スロット `RANKING_INCONTENT_MOBILE`（slotId `5555350674`、記事内/fluid）を `constants.ts` に追加。
    - branch: `feature/adsense-placement-optimization`
-3. Phase 2（`/blog/[slug]` 自動 in-article 広告）・Phase 3（`/themes/[key]` 穴埋め）は Phase 1 を 1 週間計測してから着手。
+3. **Phase 2: `/blog/[slug]` 記事末尾広告**（code 側）— ✅ 2026-05-20 実装（PR 未マージ）
+   - 192 記事中 51 記事が手動 `<ad-slot>` 未設置。`md-content.tsx` で `source` に `<ad-slot>` を含まない記事のみ記事末尾に `BLOG_ARTICLE_INLINE` を自動フォールバック表示。
+4. **Phase 3: `/themes/[key]` 穴埋め**（code 側）— ✅ 2026-05-20 実装（PR 未マージ）
+   - 17 テーマページ共通 `ThemePageLayout` のダッシュボード直後に `THEMES_CONTENT`（新規スロット）を追加。
+5. **全ページ網羅**（code 側、ユーザー指示で Phase 2/3 と一括実施）— ✅ 2026-05-20 実装（PR 未マージ）
+   - 広告ゼロだった 11 ページ型（地域別カテゴリ・市区町村 ×2・各一覧 /blog /blog/tags /tag /survey /ports /fishing-ports /themes・/search）にメインコンテンツ最下部 footer 広告（`CONTENT_FOOTER` 新規スロット）を追加。
+   - `/search` は AdSense ポリシー考慮で「検索結果 1 件以上 & 非検索中」の時のみ条件付き表示。
+   - branch: `feature/adsense-all-pages`
+   - 注: 段階リリースをやめ一括デプロイのため、ページ型別の効果切り分けは粗くなる。`units.csv`（スロット別）と GA4 ページ型別 RPM・直帰率で事後評価する。
 
 ### 想定効果
 

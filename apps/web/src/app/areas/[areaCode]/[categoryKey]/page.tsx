@@ -33,6 +33,7 @@ import { getAreaProfileAction, AreaDashboardSection } from "@/features/area-prof
 import { listCategories } from "@/features/category/server";
 
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import type { Metadata } from "next";
@@ -181,6 +182,10 @@ export default async function AreaCategoryPage({ params, searchParams }: PagePro
                     <RelatedAreas areaCode={areaCode} />
                     <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
+
+                    <div className="mt-8">
+                        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                    </div>
                 </main>
             </div>
         </>
