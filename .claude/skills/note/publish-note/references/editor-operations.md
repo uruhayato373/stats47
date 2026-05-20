@@ -60,6 +60,8 @@ body = body.replace(/<!-- note投稿時:.*?-->\n?/g, '');
 body = body.replace(/!\[.*?\]\(.*?\)\n?/g, '');
 body = body.replace(/^---$/gm, '');
 body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, '');
+// 先頭の `# H1` を除去（note ではタイトル欄に入れるため。残すと本文に H1 が重複する）
+body = body.replace(/^#\s+.*\n+/, '');
 body = body.trim();
 
 // 有料境界 ("ここから先は有料部分") で free / paid 分割
