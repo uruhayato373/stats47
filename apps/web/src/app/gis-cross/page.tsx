@@ -37,6 +37,13 @@ const CROSS_CONTENTS: Array<{
       "県内の医療機関のうち過疎地域に立地する割合を 47 都道府県で可視化。地図で過疎地域（面）と医療機関（点）の重なりを確かめられます。",
     pair: "過疎地域 × 医療機関",
   },
+  {
+    href: "/gis-cross/sunshine-map",
+    title: "日本の日照地図",
+    description:
+      "全国の年間日照時間を 1km メッシュで可視化。都道府県ランキングでは見えない、県内の山間部と平野部、太平洋側と日本海側の日照差が地図に表れます。",
+    pair: "日照時間 × 1km メッシュ",
+  },
 ];
 
 export default function GisCrossHubPage() {
