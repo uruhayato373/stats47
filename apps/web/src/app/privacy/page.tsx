@@ -64,7 +64,7 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
 // 静的ページとして生成（24時間ごとに再検証）
 
 // 最終更新日（静的ページなので定数化）
-const LAST_UPDATED_DATE = new Date("2026-01-25");
+const LAST_UPDATED_DATE = new Date("2026-05-21");
 
 // 外部リンクURL
 const EXTERNAL_LINKS = {
@@ -324,6 +324,30 @@ export default function PrivacyPage() {
                 広告配信プロバイダーは、Cookieを使用して、ユーザーが過去にアクセスしたウェブサイトの情報に基づいて広告を配信します。
                 ユーザーは、上記のオプトアウトページから、パーソナライズド広告の配信を停止することができます。
               </p>
+              <div>
+                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                  5.2 アフィリエイトプログラムについて
+                </h3>
+                <p className={TEXT_STYLE_WITH_MARGIN}>
+                  当サービスは、アフィリエイト広告（Amazonアソシエイトを含む）を掲載しています。
+                  Amazonのアソシエイトとして、当メディアは適格販売により収入を得ています。
+                </p>
+                <p className={TEXT_STYLE}>
+                  当サービスが参加している主なアフィリエイトプログラムは以下のとおりです。
+                </p>
+                <ul className={`mt-2 space-y-2 ${TEXT_STYLE}`}>
+                  <li>
+                    <strong>Amazonアソシエイト・プログラム</strong>
+                    （Amazon.co.jp を宣伝しリンクすることによって紹介料を得る手段を提供する、アフィリエイトプログラム）
+                  </li>
+                  <li>その他、第三者が運営するアフィリエイトサービス</li>
+                </ul>
+                <p className={`mt-2 ${TEXT_STYLE}`}>
+                  これらのプログラムにおいて、広告配信事業者がCookie等を使用して
+                  ユーザーのアクセス情報を取得する場合があります。取得される情報に
+                  個人を特定するものは含まれません。
+                </p>
+              </div>
             </div>
           </LegalSection>
         </div>
