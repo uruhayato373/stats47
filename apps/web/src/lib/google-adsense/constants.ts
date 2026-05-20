@@ -68,3 +68,24 @@ export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
   slotId: "5555350674",
   format: "article",
 };
+
+/**
+ * テーマダッシュボードページ: ダッシュボード下のディスプレイ広告
+ * 17 テーマページ共通（ThemePageLayout）。
+ * AdSense ユニット名: themes-content（ディスプレイ広告 / auto）
+ */
+export const THEMES_CONTENT: AdSlotConfig = {
+  slotId: "4317152551",
+  format: "rectangle",
+};
+
+/**
+ * コンテンツ / 一覧ページ共通フッター広告
+ * 地域別カテゴリ・市区町村ページ・各一覧ページ（/blog, /survey, /ports 等）・/search の
+ * メインコンテンツ最下部に配置する汎用スロット。
+ * AdSense ユニット名: content-footer（ディスプレイ広告 / auto）
+ */
+export const CONTENT_FOOTER: AdSlotConfig = {
+  slotId: "6635359989",
+  format: "rectangle",
+};

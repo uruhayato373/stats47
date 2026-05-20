@@ -12,6 +12,8 @@ import {
 import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles } from "@/features/blog/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 
@@ -65,6 +67,10 @@ export default async function BlogIndexPage() {
                     {articles.length} 件の記事
                 </p>
                 <BlogArticleGrid articles={articles} />
+
+                <div className="mt-8">
+                    <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                </div>
             </div>
         </>
     );

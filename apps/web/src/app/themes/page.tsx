@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -46,6 +47,10 @@ export default function ThemesPage() {
             </p>
           </Link>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
       </div>
     </div>
   );

@@ -21,6 +21,8 @@ import {
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 
@@ -139,6 +141,10 @@ export default async function TagArticlesPage({ params }: PageProps) {
                         ))}
                     </div>
                 )}
+
+                <div className="mt-8">
+                    <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                </div>
             </div>
         </>
     );

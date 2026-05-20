@@ -12,6 +12,8 @@ import {
 import { FishingPortMapClient } from "@/features/fishing-ports";
 import { loadFishingPortData } from "@/features/fishing-ports/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 // 漁港データ（2,896 港）は年次更新で十分。ISR 24h でクローラ毎の D1 全件スキャンを回避。
@@ -58,6 +60,10 @@ export default async function FishingPortsPage() {
       <p className="text-xs text-muted-foreground mt-6">
         出典: 国土交通省 国土数値情報「漁港データ（C09）」（2006年度）
       </p>
+
+      <div className="mt-8">
+        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+      </div>
     </div>
   );
 }

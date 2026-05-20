@@ -25,6 +25,8 @@ import { AreaBannerAd } from "@/features/ads/server";
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 
@@ -192,6 +194,10 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                     {/* アフィリエイト */}
                     <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
+
+                    <div className="mt-8">
+                        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                    </div>
                 </main>
             </div>
         </>

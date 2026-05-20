@@ -12,6 +12,8 @@ import {
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
+import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
+
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -75,6 +77,11 @@ export async function ThemePageLayout({ theme, data }: Props) {
         pageCharts={pageCharts}
         kpiDataByArea={kpiDataByArea}
       />
+
+      {/* 広告: ダッシュボード読了後・関連記事の前 */}
+      <div className="mt-8">
+        <AdSenseAd format={THEMES_CONTENT.format} slotId={THEMES_CONTENT.slotId} />
+      </div>
 
       {theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0 && (
         <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
