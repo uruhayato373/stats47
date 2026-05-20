@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import { LeafletChoroplethMap } from "@stats47/visualization/leaflet";
 import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 
-import type { MapDataPoint, MapVisualizationConfig } from "@stats47/visualization/d3";
-import type { TopoJSONTopology } from "@stats47/types";
-
 import type { DepopulationMedicalPref } from "../lib/types";
+import type { TopoJSONTopology } from "@stats47/types";
+import type { MapDataPoint, MapVisualizationConfig } from "@stats47/visualization/d3";
+
 
 interface Props {
   topology: TopoJSONTopology | null;

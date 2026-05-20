@@ -3,6 +3,8 @@
 import "leaflet/dist/leaflet.css";
 
 import { useEffect, useMemo } from "react";
+
+import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 import {
   CircleMarker,
   GeoJSON,
@@ -10,12 +12,12 @@ import {
   TileLayer,
   useMap,
 } from "react-leaflet";
-import type { LatLngBoundsExpression } from "leaflet";
-import type { GeoJsonObject } from "geojson";
-
-import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 
 import type { DepopulationMedicalPrefDetail } from "../lib/types";
+import type { GeoJsonObject } from "geojson";
+import type { LatLngBoundsExpression } from "leaflet";
+
+
 
 const COLOR_INSIDE = "#dc2626"; // 過疎地域内 = 赤
 const COLOR_OUTSIDE = "#94a3b8"; // 過疎地域外 = 灰

@@ -16,8 +16,8 @@ import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { DepopulationMedicalMapClient } from "@/features/depopulation-medical";
 import { loadDepopulationMedicalSummary } from "@/features/depopulation-medical/server";
 
-import type { Metadata } from "next";
 import type { TopoJSONTopology } from "@stats47/types";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "過疎地域と医療機関 | 統計で見る都道府県",

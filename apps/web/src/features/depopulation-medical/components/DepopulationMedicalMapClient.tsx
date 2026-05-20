@@ -14,14 +14,15 @@ import {
   TableRow,
 } from "@stats47/components/atoms/ui/table";
 
-import { fetchPrefDetail } from "@/app/gis-cross/depopulation-medical/_actions/fetch-pref-detail";
-
-import type { TopoJSONTopology } from "@stats47/types";
-
 import type {
   DepopulationMedicalPrefDetail,
   DepopulationMedicalSummary,
 } from "../lib/types";
+import type { TopoJSONTopology } from "@stats47/types";
+
+import { fetchPrefDetail } from "@/app/gis-cross/depopulation-medical/_actions/fetch-pref-detail";
+
+
 
 const DepopulationChoroplethMap = dynamic(
   () =>
