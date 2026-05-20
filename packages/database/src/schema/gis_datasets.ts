@@ -17,7 +17,6 @@ export const gisDatasets = sqliteTable(
     geometryType:   text("geometry_type").notNull(), // point|line|polygon|mesh|mixed
     coverage:       text("coverage").notNull(),       // national|prefecture|mesh|region
     license:        text("license").notNull(),
-    isDownloaded:   integer("is_downloaded", { mode: "boolean" }).notNull().default(false),
     r2Version:      text("r2_version"),
     fileCount:      integer("file_count"),
     totalSizeBytes: integer("total_size_bytes"),
@@ -34,6 +33,14 @@ export const gisDatasets = sqliteTable(
     memo:           text("memo"),
     createdAt:      text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt:      text("updated_at").default(sql`CURRENT_TIMESTAMP`),
+    // Phase 2 (migration 0048): registry.ts から D1 に寄せた純メタ + RANKINGS 連携
+    stats47Category: text("stats47_category"),
+    latestVersion:   text("latest_version"),
+    estimatedSize:   text("estimated_size"),
+    isRankingTarget: integer("is_ranking_target", { mode: "boolean" })
+      .notNull()
+      .default(false),
+    rankingConfig:   text("ranking_config"), // JSON: RANKINGS 配列要素
   },
   (table) => ({
     statusCheck: check(
@@ -41,6 +48,9 @@ export const gisDatasets = sqliteTable(
       sql`${table.status} IN ('available', 'registered', 'imported', 'deprecated')`,
     ),
     statusIdx: index("idx_gis_datasets_status").on(table.status),
+    rankingTargetIdx: index("idx_gis_datasets_ranking_target").on(
+      table.isRankingTarget,
+    ),
   }),
 );
 

@@ -1,0 +1,1010 @@
+[
+  {
+    "name": "海岸線",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "C23",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C23.html"
+  },
+  {
+    "name": "海岸保全施設",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "P23",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P23.html"
+  },
+  {
+    "name": "湖沼",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "W09",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W09-2005.html"
+  },
+  {
+    "name": "流域メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "W07",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W07.html"
+  },
+  {
+    "name": "ダム",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "W01",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html"
+  },
+  {
+    "name": "河川",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "水域",
+    "id": "W05",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W05.html"
+  },
+  {
+    "name": "標高・傾斜度3次メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地形",
+    "id": "G04-a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html"
+  },
+  {
+    "name": "標高・傾斜度4次メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地形",
+    "id": "G04-c",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-c.html"
+  },
+  {
+    "name": "標高・傾斜度5次メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地形",
+    "id": "G04-d",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-d.html"
+  },
+  {
+    "name": "低位地帯",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地形",
+    "id": "G08",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html"
+  },
+  {
+    "name": "大規模盛土造成地",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地形",
+    "id": "A54",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A54-2023.html"
+  },
+  {
+    "name": "土地利用3次メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "L03-a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-a-2021.html"
+  },
+  {
+    "name": "土地利用細分メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "L03-b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-2021.html"
+  },
+  {
+    "name": "都市地域土地利用細分メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "L03-b-u",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-u-2021.html"
+  },
+  {
+    "name": "土地利用詳細メッシュ",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "L03-b-c",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-c-2021.html"
+  },
+  {
+    "name": "森林地域",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "A13",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A13-2015.html"
+  },
+  {
+    "name": "国有林野",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "A45",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A45.html"
+  },
+  {
+    "name": "農業地域",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "土地利用",
+    "id": "A12",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A12.html"
+  },
+  {
+    "name": "地価公示",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地価",
+    "id": "L01",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2025.html"
+  },
+  {
+    "name": "都道府県地価調査",
+    "description": "",
+    "category1_name": "国土（水・土地）",
+    "category2_name": "地価",
+    "id": "L02",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L02-2024.html"
+  },
+  {
+    "name": "行政区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "N03",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html"
+  },
+  {
+    "name": "DID人口集中地区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A16",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html"
+  },
+  {
+    "name": "中学校区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A32",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A32-2023.html"
+  },
+  {
+    "name": "小学校区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A27",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A27-2023.html"
+  },
+  {
+    "name": "医療圏",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A38",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html"
+  },
+  {
+    "name": "景観計画区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A35a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35a.html"
+  },
+  {
+    "name": "景観地区・準景観地区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A35b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35b.html"
+  },
+  {
+    "name": "景観重要建造物・樹木",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A35c",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35c.html"
+  },
+  {
+    "name": "伝統的建造物群保存地区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A43",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A43.html"
+  },
+  {
+    "name": "歴史的風致維持向上計画の重点地区",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "行政地域",
+    "id": "A44",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A44.html"
+  },
+  {
+    "name": "都市計画決定情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "A55",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A55-2022.html"
+  },
+  {
+    "name": "都市地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "A09",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A09.html"
+  },
+  {
+    "name": "用途地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "A29",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A29-2019.html"
+  },
+  {
+    "name": "立地適正化計画区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "A50",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A50-2020.html"
+  },
+  {
+    "name": "歴史的風土保存区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "A42",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A42.html"
+  },
+  {
+    "name": "都市公園",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "都市計画決定情報",
+    "id": "P13",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P13.html"
+  },
+  {
+    "name": "三大都市圏計画区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A03",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A03.html"
+  },
+  {
+    "name": "過疎地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A17",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17-2017.html"
+  },
+  {
+    "name": "振興山村",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A24",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A24-2016.html"
+  },
+  {
+    "name": "特定農山村地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A25",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A25-2016.html"
+  },
+  {
+    "name": "離島振興対策実施地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A19",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A19-2017.html"
+  },
+  {
+    "name": "離島振興対策実施地域統計情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A19s",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A19s.html"
+  },
+  {
+    "name": "小笠原諸島",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A21",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A21.html"
+  },
+  {
+    "name": "小笠原諸島統計情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A21s",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A21s.html"
+  },
+  {
+    "name": "奄美群島",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A20",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A20.html"
+  },
+  {
+    "name": "奄美群島統計情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A20s",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A20s.html"
+  },
+  {
+    "name": "半島振興対策実施地域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A18",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A18-2016.html"
+  },
+  {
+    "name": "半島振興対策実施地域統計情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A18s-a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A18s-a.html"
+  },
+  {
+    "name": "半島循環道路",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A37",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A37.html"
+  },
+  {
+    "name": "豪雪地帯",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A22",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22-2016.html"
+  },
+  {
+    "name": "豪雪地帯（気象データ）",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A22-m",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22-m.html"
+  },
+  {
+    "name": "豪雪地帯統計情報",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A22s",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22s.html"
+  },
+  {
+    "name": "特殊土壌地帯",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A23",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A23-2016.html"
+  },
+  {
+    "name": "密集市街地",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "大都市圏・条件不利地域",
+    "id": "A39",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A39-2015.html"
+  },
+  {
+    "name": "洪水浸水想定区域（1次メッシュ単位）",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A31b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2024.html"
+  },
+  {
+    "name": "洪水浸水想定区域（河川単位）",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A31a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31a-2024.html"
+  },
+  {
+    "name": "避難施設",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "P20",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P20.html"
+  },
+  {
+    "name": "平年値（気候）メッシュ",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "G02",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G02-2022.html"
+  },
+  {
+    "name": "竜巻等の突風",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A30b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A30b.html"
+  },
+  {
+    "name": "土砂災害・雪崩メッシュ",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A30a5",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A30a5.html"
+  },
+  {
+    "name": "土砂災害警戒区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A33",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2024.html"
+  },
+  {
+    "name": "地すべり防止区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A46",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A46-2021.html"
+  },
+  {
+    "name": "急傾斜地崩壊危険区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A47",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A47-2021.html"
+  },
+  {
+    "name": "津波浸水想定",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A40",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A40-2024.html"
+  },
+  {
+    "name": "高潮浸水想定区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A49",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A49-2024.html"
+  },
+  {
+    "name": "災害危険区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A48",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A48-2021.html"
+  },
+  {
+    "name": "砂防指定地",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A52",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A52-2023.html"
+  },
+  {
+    "name": "多段階浸水想定",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A53",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A53-2024.html"
+  },
+  {
+    "name": "雨水出水（内水）浸水想定区域",
+    "description": "",
+    "category1_name": "政策区域",
+    "category2_name": "災害・防災",
+    "id": "A51",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A51-2024.html"
+  },
+  {
+    "name": "国・都道府県の機関",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P28",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P28-2022.html"
+  },
+  {
+    "name": "市町村役場等及び公的集会施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P05",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-2022.html"
+  },
+  {
+    "name": "市区町村役場",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P34",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html"
+  },
+  {
+    "name": "公共施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P02",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P02-2006.html"
+  },
+  {
+    "name": "警察署",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P18",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P18.html"
+  },
+  {
+    "name": "消防署",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P17",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P17.html"
+  },
+  {
+    "name": "郵便局",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P30",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P30.html"
+  },
+  {
+    "name": "医療機関",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P04",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+  },
+  {
+    "name": "福祉施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P14",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-2023.html"
+  },
+  {
+    "name": "文化施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P27",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P27.html"
+  },
+  {
+    "name": "学校",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P29",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P29-2023.html"
+  },
+  {
+    "name": "上水道関連施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P21",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P21.html"
+  },
+  {
+    "name": "下水道関連施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P22",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P22.html"
+  },
+  {
+    "name": "廃棄物処理施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P15",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P15.html"
+  },
+  {
+    "name": "発電施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P03",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P03.html"
+  },
+  {
+    "name": "燃料給油所",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P07",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P07-2016.html"
+  },
+  {
+    "name": "ニュータウン",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P26",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P26.html"
+  },
+  {
+    "name": "工業用地",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "L05",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L05.html"
+  },
+  {
+    "name": "研究機関",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P16",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P16.html"
+  },
+  {
+    "name": "地場産業関連施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P24",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P24.html"
+  },
+  {
+    "name": "物流拠点",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P31",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P31.html"
+  },
+  {
+    "name": "集客施設",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P33",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P33.html"
+  },
+  {
+    "name": "道の駅",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "施設",
+    "id": "P35",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P35.html"
+  },
+  {
+    "name": "都道府県指定文化財",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "P32",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P32.html"
+  },
+  {
+    "name": "世界文化遺産",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "A34",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A34-2022.html"
+  },
+  {
+    "name": "世界自然遺産",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "A28",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A28.html"
+  },
+  {
+    "name": "観光資源",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "P12",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-2014.html"
+  },
+  {
+    "name": "宿泊容量メッシュ",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "P09",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P09.html"
+  },
+  {
+    "name": "地域資源",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "地域資源・観光",
+    "id": "P19",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P19.html"
+  },
+  {
+    "name": "自然公園地域",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "保護保全",
+    "id": "A10",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A10-2015.html"
+  },
+  {
+    "name": "自然保全地域",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "保護保全",
+    "id": "A11",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A11.html"
+  },
+  {
+    "name": "鳥獣保護区",
+    "description": "",
+    "category1_name": "施設",
+    "category2_name": "保護保全",
+    "id": "A15",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A15.html"
+  },
+  {
+    "name": "高速道路時系列",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N06",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N06-2024.html"
+  },
+  {
+    "name": "緊急輸送道路",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N10",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N10-2024.html"
+  },
+  {
+    "name": "重要物流道路",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N12",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N12-2021.html"
+  },
+  {
+    "name": "道路密度・道路延長メッシュ",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N04",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N04.html"
+  },
+  {
+    "name": "高速バス停留所",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "P36",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P36-2023.html"
+  },
+  {
+    "name": "バス停留所",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "P11",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11-2022.html"
+  },
+  {
+    "name": "バスルート",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N07",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N07-2022.html"
+  },
+  {
+    "name": "鉄道",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N02",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html"
+  },
+  {
+    "name": "鉄道時系列",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N05",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N05-2024.html"
+  },
+  {
+    "name": "駅別乗降客数",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "S12",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2023.html"
+  },
+  {
+    "name": "交通流動量_駅別乗降数",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "S05-c",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-c.html"
+  },
+  {
+    "name": "空港",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "C28",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C28-2021.html"
+  },
+  {
+    "name": "空港時系列",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N08",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html"
+  },
+  {
+    "name": "空港間流通量",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "S10b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10b-2014.html"
+  },
+  {
+    "name": "ヘリポート",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N11",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N11.html"
+  },
+  {
+    "name": "港湾",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "C02",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C02-2014.html"
+  },
+  {
+    "name": "漁港",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "C09",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C09.html"
+  },
+  {
+    "name": "港湾間流通量・海上経路",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "S10a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10a-2016.html"
+  },
+  {
+    "name": "定期旅客航路",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "交通",
+    "id": "N09",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N09.html"
+  },
+  {
+    "name": "発生・集中量",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "パーソントリップ",
+    "id": "S05-a",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-a-2013.html"
+  },
+  {
+    "name": "ＯＤ量",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "パーソントリップ",
+    "id": "S05-b",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-b-2013.html"
+  },
+  {
+    "name": "貨物旅客地域流動量",
+    "description": "",
+    "category1_name": "交通",
+    "category2_name": "パーソントリップ",
+    "id": "S05-d",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-d-2018.html"
+  },
+  {
+    "name": "1kmメッシュ別将来推計人口（R6国政局推計）",
+    "description": "",
+    "category1_name": "各種統計",
+    "category2_name": "各種統計",
+    "id": "m1kr6",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html"
+  },
+  {
+    "name": "500mメッシュ別将来推計人口（R6国政局推計）",
+    "description": "",
+    "category1_name": "各種統計",
+    "category2_name": "各種統計",
+    "id": "m500r6",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html"
+  },
+  {
+    "name": "250mメッシュ別将来推計人口（R6国政局推計）",
+    "description": "",
+    "category1_name": "各種統計",
+    "category2_name": "各種統計",
+    "id": "m250r6",
+    "source_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html"
+  }
+]

@@ -23,24 +23,42 @@ export interface KsjSimplifyOptions {
   simplifyQuantile: number;
 }
 
-export interface KsjDatasetDef {
+/**
+ * pipeline 実行時に必要な「コードに残さざるを得ない」設定のみを保持する slim 型。
+ * 純メタデータ (name, category, license 等) は D1 gis_datasets に寄せる。
+ *
+ * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot).
+ */
+export interface KsjCodeConfig {
+  dataId: string;
+  /** ダウンロード URL テンプレート。{VERSION}/{PREF}/{MESHCODE} を含む */
+  downloadUrlPattern: string;
+  /** zip 内の GeoJSON 格納パス */
+  geojsonDirInZip: string;
+  /** KSJ 属性コード → 人間可読名 (例: { N02_001: "railwayType" }) */
+  propertyMap: Record<string, string>;
+  /** 簡略化パラメータ。省略時は geometryType から派生 */
+  simplifyOptions?: KsjSimplifyOptions;
+}
+
+/**
+ * D1 から取得した純メタデータと registry の KsjCodeConfig をマージした実行時オブジェクト。
+ * pipeline.ts 内部で組み立てる。
+ */
+export interface KsjResolvedDataset {
   dataId: string;
   name: string;
   nameEn: string;
   category: KsjCategory;
   geometryType: KsjGeometryType;
   coverage: KsjCoverage;
-  license: KsjLicense;
+  license: string;
   latestVersion: string;
-  /** ダウンロード URL テンプレート。{VERSION} をバージョン文字列で置換 */
   downloadUrlPattern: string;
-  /** zip 内の GeoJSON 格納パス。"UTF-8/" 等 */
   geojsonDirInZip: string;
   propertyMap: Record<string, string>;
   simplifyOptions: KsjSimplifyOptions;
-  estimatedSize: string;
-  /** stats47 のカテゴリキーとの紐付け */
-  stats47Category?: string;
+  attribution: string;
 }
 
 export interface KsjPipelineOptions {

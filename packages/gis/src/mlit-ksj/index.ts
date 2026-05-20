@@ -11,11 +11,12 @@ export {
   listDownloadedDatasets,
 } from "./adapters/fetch-ksj-from-local";
 export type { FetchKsjOptions } from "./adapters/fetch-ksj-from-local";
-export { getDatasetDef, listDatasets, KSJ_REGISTRY } from "./registry";
+export { getCodeConfig, listCodeConfigDataIds, KSJ_CODE_CONFIG } from "./registry";
 export { buildMlitKsjR2Path, buildMlitKsjLocalPath } from "./r2-path";
 export type { MlitKsjR2PathOptions } from "./r2-path";
 export type {
-  KsjDatasetDef,
+  KsjCodeConfig,
+  KsjResolvedDataset,
   KsjPipelineOptions,
   KsjPipelineResult,
   KsjGeometryType,
