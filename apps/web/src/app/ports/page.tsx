@@ -16,6 +16,8 @@ import {
 import { PortMapClient } from "@/features/port-statistics";
 import { loadPortData } from "@/features/port-statistics/server";
 
+import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -77,6 +79,10 @@ export default async function PortsPage() {
           国土数値情報「港湾データ」
         </a>
       </p>
+
+      <div className="mt-8">
+        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+      </div>
     </div>
   );
 }
