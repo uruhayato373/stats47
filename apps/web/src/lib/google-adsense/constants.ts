@@ -55,3 +55,16 @@ export const COMPARE_PAGE_SIDEBAR: AdSlotConfig = {
   slotId: "6180558947",
   format: "rectangle",
 };
+
+/**
+ * ランキング詳細ページ: モバイル専用・解析セクション中盤の記事内広告
+ *
+ * モバイルはサイドバー広告が非表示で、収益のあるユニットが実質テーブル直後の
+ * フッター 1 枠のみだった（W21 実測: Mobile Impressions/PV 0.32 / RPM ¥20）。
+ * 解析セクションを読み進める層に中盤で 1 枠出すための専用スロット。
+ * AdSense ユニット名: ranking-incontent-mobile（記事内 / fluid）
+ */
+export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
+  slotId: "5555350674",
+  format: "article",
+};
