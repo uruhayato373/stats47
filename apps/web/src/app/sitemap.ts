@@ -71,6 +71,11 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
   {
+    url: `${BASE_URL}/gis-cross`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     url: `${BASE_URL}/gis-cross/depopulation-medical`,
     changeFrequency: "yearly",
     priority: 0.6,
