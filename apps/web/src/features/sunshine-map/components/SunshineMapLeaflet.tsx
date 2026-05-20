@@ -2,9 +2,9 @@
 
 import "leaflet/dist/leaflet.css";
 
+import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 import { ImageOverlay, MapContainer, TileLayer } from "react-leaflet";
 
-import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 
 import { SUNSHINE_MAP_RASTER_PATH, type SunshineMapMeta } from "../lib/types";
 
