@@ -1,0 +1,118 @@
+{
+  "channel": {
+    "id": "UCdRiwDSX1aUd0dSd7Cs08Kg",
+    "title": "統計で見る都道府県 | stats47",
+    "subscriberCount": 31,
+    "viewCount": 78539,
+    "videoCount": 158
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-05-06",
+    "recentEnd": "2026-05-20",
+    "priorStart": "2026-04-22",
+    "priorEnd": "2026-05-06"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [
+    {
+      "videoId": "kIVo3xL1-FM",
+      "title": "都道府県別 大卒初任給｜1位は秋田の26.7万円、最下位鳥取と1.32倍格差",
+      "publishedAt": "2026-05-17T02:19:23Z",
+      "ageHours": 70.8,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "o8_kdtSP1mo",
+      "title": "都道府県別 老年化指数｜秋田は子供の4倍が高齢者、沖縄と2.9倍格差",
+      "publishedAt": "2026-05-17T01:53:13Z",
+      "ageHours": 71.3,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "08no2ZRhTyo",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-05-10T00:48:39Z",
+      "ageHours": 240.3,
+      "views": 1,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "87gBJ3tZkeg",
+      "title": "都道府県別 大学数ランキングの推移（1975-2024）｜大学急増の50年",
+      "publishedAt": "2026-05-10T00:06:54Z",
+      "ageHours": 241,
+      "views": 0,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "kuE5eNbxLZI",
+      "title": "都道府県別 刑法犯検挙率ランキング49年の変遷 治安の王者は島根72.7%",
+      "publishedAt": "2026-05-10T00:06:33Z",
+      "ageHours": 241,
+      "views": 4,
+      "likes": 0,
+      "comments": 0
+    },
+    {
+      "videoId": "t-sSgDzRQUs",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "publishedAt": "2026-05-10T00:06:32Z",
+      "ageHours": 241,
+      "views": 5,
+      "likes": 0,
+      "comments": 0
+    }
+  ],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_SEARCH": 86,
+      "SHORTS": 9,
+      "EXT_URL": 4,
+      "NOTIFICATION": 4,
+      "NO_LINK_OTHER": 1,
+      "SUBSCRIBER": 1,
+      "YT_CHANNEL": 0
+    },
+    "prior": {
+      "YT_SEARCH": 48,
+      "EXT_URL": 6,
+      "SHORTS": 3,
+      "SUBSCRIBER": 2,
+      "YT_CHANNEL": 1,
+      "PLAYLIST": 1
+    }
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 105
+    },
+    "prior": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 61
+    }
+  },
+  "viewsDelta": {
+    "recent": 105,
+    "prior": 61,
+    "changePct": 72.1311475409836
+  },
+  "verdict": "likely-shadowban",
+  "verdictReasons": [
+    "suspect videos = 6 (views < 50 after 48h)"
+  ]
+}
