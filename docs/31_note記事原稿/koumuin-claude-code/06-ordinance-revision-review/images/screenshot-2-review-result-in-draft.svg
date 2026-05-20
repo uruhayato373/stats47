@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 524" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="524" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect width="760" height="46" rx="10" fill="#f1f5f9"/>
+  <rect y="28" width="760" height="18" fill="#f1f5f9"/>
+  <circle cx="26" cy="23" r="6" fill="#f87171"/>
+  <circle cx="48" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="70" cy="23" r="6" fill="#34d399"/>
+  <text x="380" y="28" text-anchor="middle" font-size="12" fill="#64748b">起案文書 — 〇〇市例規システム</text>
+  <!-- doc title -->
+  <text x="32" y="80" font-size="15" font-weight="bold" fill="#1e293b">〇〇市〇〇条例の一部改正について（案）</text>
+  <text x="32" y="102" font-size="11" fill="#94a3b8">起案者: 政策法務課　決裁ルート: ［　　　　　］</text>
+  <line x1="32" y1="116" x2="728" y2="116" stroke="#e2e8f0"/>
+  <!-- section heading -->
+  <text x="32" y="142" font-size="13" font-weight="bold" fill="#1e293b">【政策法務協議結果】</text>
+  <text x="32" y="164" font-size="11" fill="#475569">本改正案について、Claude Code (AI) による事前査読を 2026-05-18 に実施。</text>
+  <text x="32" y="182" font-size="11" fill="#475569">矛盾検出 4 観点・文体統一 8 観点をチェックし、指摘事項を反映済み。</text>
+  <!-- table -->
+  <g font-size="10.5">
+    <rect x="32" y="196" width="696" height="26" fill="#f1f5f9"/>
+    <text x="44" y="213" font-weight="bold" fill="#334155">観点</text>
+    <text x="148" y="213" font-weight="bold" fill="#334155">該当条文</text>
+    <text x="280" y="213" font-weight="bold" fill="#334155">現状</text>
+    <text x="468" y="213" font-weight="bold" fill="#334155">想定対応</text>
+    <text x="624" y="213" font-weight="bold" fill="#334155">根拠</text>
+    <line x1="32" y1="222" x2="728" y2="222" stroke="#e2e8f0"/>
+    <text x="44" y="240" fill="#475569">引用切れ</text>
+    <text x="148" y="240" fill="#475569">第 12 条</text>
+    <text x="280" y="240" fill="#475569">「第 5 条の規定により」</text>
+    <text x="468" y="240" fill="#475569">削除条文の引用を修正</text>
+    <text x="624" y="240" fill="#475569">第 5 条削除</text>
+    <line x1="32" y1="248" x2="728" y2="248" stroke="#f1f5f9"/>
+    <text x="44" y="266" fill="#475569">項ずれ連鎖</text>
+    <text x="148" y="266" fill="#475569">第 8 条</text>
+    <text x="280" y="266" fill="#475569">「第 3 条第 2 項」</text>
+    <text x="468" y="266" fill="#475569">新第 3 項に繰り下げ</text>
+    <text x="624" y="266" fill="#475569">第 3 条改正</text>
+    <line x1="32" y1="274" x2="728" y2="274" stroke="#f1f5f9"/>
+    <text x="44" y="292" fill="#475569">送り仮名</text>
+    <text x="148" y="292" fill="#475569">第 4 条</text>
+    <text x="280" y="292" fill="#475569">「行う」</text>
+    <text x="468" y="292" fill="#475569">「行なう」に統一</text>
+    <text x="624" y="292" fill="#475569">文書事務規程</text>
+    <line x1="32" y1="300" x2="728" y2="300" stroke="#f1f5f9"/>
+    <text x="44" y="318" fill="#475569">上位法不整合</text>
+    <text x="148" y="318" fill="#475569">第 1 条</text>
+    <text x="280" y="318" fill="#475569">引用条文番号</text>
+    <text x="468" y="318" fill="#475569">2024 改正に追随</text>
+    <text x="624" y="318" fill="#475569">地方自治法</text>
+  </g>
+  <rect x="32" y="196" width="696" height="138" fill="none" stroke="#cbd5e1"/>
+  <!-- note -->
+  <rect x="32" y="350" width="696" height="40" rx="6" fill="#fef3c7"/>
+  <text x="44" y="375" font-size="11" fill="#92400e">※ 最終的な政策判断・上位法解釈は起案者が責任を持つ。</text>
+  <rect x="0" y="484" width="760" height="40" fill="#f1f5f9"/>
+  <text x="24" y="509" font-size="13" fill="#475569">▲ 起案文「政策法務協議結果」欄に貼り付けたレビュー結果表（架空案件）</text>
+</svg>

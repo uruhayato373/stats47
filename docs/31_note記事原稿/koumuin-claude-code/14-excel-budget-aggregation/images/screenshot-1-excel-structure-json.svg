@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="470" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">Claude Code — Excel 構造の JSON 化</text>
+  <text x="24" y="64" font-size="13" fill="#9399b2">左: 元 Excel（01_soumu.xlsx「事業別」シート）</text>
+  <g font-family="'SFMono-Regular','Menlo',monospace" font-size="11">
+    <rect x="24" y="74" width="340" height="120" fill="#11111b" stroke="#45475a"/>
+    <line x1="24" y1="98" x2="364" y2="98" stroke="#45475a"/>
+    <line x1="24" y1="122" x2="364" y2="122" stroke="#45475a"/>
+    <line x1="24" y1="146" x2="364" y2="146" stroke="#45475a"/>
+    <line x1="24" y1="170" x2="364" y2="170" stroke="#45475a"/>
+    <text x="32" y="90" fill="#f9e2af">単位: 千円　2026 年度 5 月補正予算</text>
+    <text x="32" y="114" fill="#6c7086">（空行）</text>
+    <text x="32" y="138" fill="#cdd6f4">款項目 / 事業名 / 補正前 / 補正額</text>
+    <text x="32" y="162" fill="#bac2de">総務費 / 〇〇推進事業 / 1,200 / +340</text>
+    <text x="32" y="186" fill="#bac2de">総務費 / △△維持管理費 / 980 / -120</text>
+  </g>
+  <text x="400" y="64" font-size="13" fill="#9399b2">右: Claude Code が返すシート構造 JSON</text>
+  <g font-family="'SFMono-Regular','Menlo',monospace" font-size="12">
+    <text x="400" y="92" fill="#89b4fa">{</text>
+    <text x="416" y="112" fill="#f9e2af">"sheet"<tspan fill="#cdd6f4">: "事業別",</tspan></text>
+    <text x="416" y="132" fill="#f9e2af">"skiprows"<tspan fill="#cdd6f4">: 2,</tspan></text>
+    <text x="416" y="152" fill="#f9e2af">"header_rows"<tspan fill="#cdd6f4">: 1,</tspan></text>
+    <text x="416" y="172" fill="#f9e2af">"merged_col"<tspan fill="#cdd6f4">: "款項目",</tspan></text>
+    <text x="416" y="192" fill="#f9e2af">"key_cols"<tspan fill="#cdd6f4">: ["款項目",</tspan></text>
+    <text x="432" y="212" fill="#cdd6f4">"事業名"],</text>
+    <text x="416" y="232" fill="#f9e2af">"sum_cols"<tspan fill="#cdd6f4">: ["補正額"],</tspan></text>
+    <text x="416" y="252" fill="#f9e2af">"unit"<tspan fill="#cdd6f4">: "千円"</tspan></text>
+    <text x="400" y="272" fill="#89b4fa">}</text>
+  </g>
+  <text x="24" y="334" font-size="12" fill="#6c7086" font-family="'SFMono-Regular','Menlo',monospace"># skiprows・結合セル列・集計キーを Claude が自動判定</text>
+  <text x="24" y="358" font-size="12" fill="#a6e3a1" font-family="'SFMono-Regular','Menlo',monospace">✓ この JSON が残り 46 ファイルの集計ロジックの土台になる</text>
+  <rect x="0" y="412" width="760" height="40" fill="#181825"/>
+  <text x="24" y="437" font-size="13" fill="#bac2de">▲ 公務員 Excel の癖を Claude が読み取り、構造 JSON として出力</text>
+</svg>

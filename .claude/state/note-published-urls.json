@@ -1,0 +1,15 @@
+{
+  "description": "note.com 公開済み記事の slug -> URL 対応表。回遊フッタ・本文内部リンク (../slug/draft.md) を note URL に書き換える際の参照元。記事を公開するたびに追記する。",
+  "updated": "2026-05-21",
+  "note": "2026-05-20: koumuin-claude-code #00/#02/#29 を誤って note.com/dobokunote (誤アカウント) に公開。ロールバックのため articles をクリアし 3 本のディレクトリを docs/ に戻した。note.com 側の記事削除/下書き化はユーザーが手動対応。2026-05-20: #00 を正しいアカウント note.com/stats47 に試験公開。2026-05-21: #00 を修正済み draft.md (旧価格 ¥1,500 → ¥300 全 14 箇所) で update モード初回実行で更新。",
+  "articles": {
+    "00-claude-code-intro-for-public-servants": {
+      "vertical": "koumuin-claude-code",
+      "title": "Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド",
+      "url": "https://note.com/stats47/n/n455ec72c5d62",
+      "is_paid": false,
+      "published_at": "2026-05-20",
+      "updated_at": "2026-05-21"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670" width="1280" height="670">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<!-- Background gradient -->
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="100%" stop-color="#f1f5f9"/>
+  </linearGradient>
+</defs>
+<rect width="1280" height="670" fill="url(#bg)"/>
+
+<!-- Brand accent bars -->
+<rect x="0" y="0" width="1280" height="14" fill="#2563eb"/>
+<rect x="0" y="656" width="1280" height="14" fill="#2563eb"/>
+
+<!-- Decorative dots (japan map abstract) -->
+<g opacity="0.18">
+  <circle cx="1020" cy="220" r="48" fill="#2563eb"/>
+  <circle cx="1110" cy="280" r="32" fill="#3b82f6"/>
+  <circle cx="970" cy="320" r="24" fill="#60a5fa"/>
+  <circle cx="1080" cy="380" r="40" fill="#2563eb"/>
+  <circle cx="980" cy="430" r="28" fill="#3b82f6"/>
+  <circle cx="1150" cy="200" r="20" fill="#93c5fd"/>
+  <circle cx="1190" cy="350" r="36" fill="#3b82f6"/>
+</g>
+
+<!-- Eyebrow -->
+<text x="80" y="110" font-size="20" font-weight="600" fill="#2563eb" letter-spacing="2">自己紹介 — stats47 とは</text>
+<line x1="80" y1="128" x2="240" y2="128" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Main headline -->
+<text x="80" y="232" font-size="58" font-weight="900" fill="#0f172a">元県庁職員がつくった</text>
+<text x="80" y="312" font-size="80" font-weight="900" fill="#2563eb">都道府県統計サイト</text>
+<text x="80" y="380" font-size="58" font-weight="900" fill="#0f172a">「stats47」</text>
+
+<!-- Subtitle -->
+<text x="80" y="448" font-size="22" font-weight="500" fill="#334155">年収・人口・焼肉消費量まで、1,800 以上の統計を</text>
+<text x="80" y="480" font-size="22" font-weight="500" fill="#334155">47 都道府県でランキング・可視化。</text>
+
+<!-- Stats chips -->
+<g>
+  <rect x="80" y="528" width="200" height="48" rx="8" fill="#dbeafe"/>
+  <text x="180" y="548" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="500">統計指標</text>
+  <text x="180" y="568" text-anchor="middle" font-size="18" fill="#1e40af" font-weight="800">1,800+</text>
+
+  <rect x="296" y="528" width="200" height="48" rx="8" fill="#dcfce7"/>
+  <text x="396" y="548" text-anchor="middle" font-size="13" fill="#15803d" font-weight="500">ランキング</text>
+  <text x="396" y="568" text-anchor="middle" font-size="18" fill="#15803d" font-weight="800">800+</text>
+
+  <rect x="512" y="528" width="200" height="48" rx="8" fill="#fef3c7"/>
+  <text x="612" y="548" text-anchor="middle" font-size="13" fill="#92400e" font-weight="500">相関ペア</text>
+  <text x="612" y="568" text-anchor="middle" font-size="18" fill="#92400e" font-weight="800">12 万</text>
+</g>
+
+<!-- Footer -->
+<text x="80" y="618" font-size="15" fill="#64748b">あなたの県は何位？</text>
+<text x="1200" y="618" text-anchor="end" font-size="15" font-weight="500" fill="#94a3b8">stats47.jp</text>
+</svg>

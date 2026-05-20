@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
-  <rect width="900" height="320" fill="#FAFAFA"/>
-  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">データフロー: 利用者 → Anthropic API → ローカル保存</text>
-  <text x="450" y="56" text-anchor="middle" font-size="12" fill="#64748B">庁内ネットワーク / LGWAN / 住基ネットを一切経由しない</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="1000" height="320" fill="#FAFAFA"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">データフロー: 利用者 → 会社 PC → 庁内プロキシ → Anthropic API → ローカル保存</text>
+  <text x="500" y="56" text-anchor="middle" font-size="12" fill="#64748B">インターネット系端末のみ使用。LGWAN 系・住基ネット系は一切経由しない</text>
 
   <defs>
     <marker id="arrdf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
@@ -11,51 +11,60 @@
 
   <!-- 1. 利用者 -->
   <g>
-    <rect x="40" y="100" width="130" height="80" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
-    <text x="105" y="128" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">利用者</text>
-    <text x="105" y="148" text-anchor="middle" font-size="11" fill="#64748B">職員 (個人)</text>
-    <text x="105" y="166" text-anchor="middle" font-size="10" fill="#94A3B8">業務時間外</text>
+    <rect x="30" y="95" width="130" height="82" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="95" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">利用者</text>
+    <text x="95" y="145" text-anchor="middle" font-size="11" fill="#64748B">職員 (業務)</text>
+    <text x="95" y="163" text-anchor="middle" font-size="10" fill="#94A3B8">業務時間中</text>
   </g>
-  <line x1="170" y1="140" x2="200" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrdf)"/>
+  <line x1="160" y1="136" x2="190" y2="136" stroke="#64748B" stroke-width="2" marker-end="url(#arrdf)"/>
 
-  <!-- 2. 私物 PC -->
+  <!-- 2. 会社 PC -->
   <g>
-    <rect x="205" y="100" width="140" height="80" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
-    <text x="275" y="128" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">私物 PC</text>
-    <text x="275" y="148" text-anchor="middle" font-size="11" fill="#1E40AF">Claude Code CLI</text>
-    <text x="275" y="166" text-anchor="middle" font-size="10" fill="#2563EB">モバイル WiFi</text>
+    <rect x="195" y="95" width="155" height="82" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="272" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">会社 PC</text>
+    <text x="272" y="145" text-anchor="middle" font-size="11" fill="#1E40AF">インターネット系端末</text>
+    <text x="272" y="163" text-anchor="middle" font-size="10" fill="#2563EB">Claude Code CLI</text>
   </g>
-  <line x1="345" y1="140" x2="385" y2="140" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrdf)"/>
-  <text x="365" y="130" text-anchor="middle" font-size="10" fill="#2563EB" font-weight="bold">TLS 1.2+</text>
+  <line x1="350" y1="136" x2="382" y2="136" stroke="#64748B" stroke-width="2" marker-end="url(#arrdf)"/>
 
-  <!-- 3. Anthropic API -->
+  <!-- 3. 庁内プロキシ -->
   <g>
-    <rect x="390" y="100" width="170" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
-    <text x="475" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Anthropic API</text>
-    <text x="475" y="145" text-anchor="middle" font-size="11" fill="#0F766E">AWS US-East-1</text>
-    <text x="475" y="162" text-anchor="middle" font-size="10" fill="#14B8A6">AES-256 / 学習利用なし</text>
-    <text x="475" y="175" text-anchor="middle" font-size="10" fill="#14B8A6">30 日後自動削除</text>
+    <rect x="387" y="95" width="128" height="82" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="451" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">庁内プロキシ</text>
+    <text x="451" y="145" text-anchor="middle" font-size="10" fill="#92400E">ドメイン許可済</text>
+    <text x="451" y="163" text-anchor="middle" font-size="10" fill="#B45309">ホワイトリスト</text>
   </g>
-  <line x1="560" y1="140" x2="600" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arrdf)"/>
-  <text x="580" y="130" text-anchor="middle" font-size="10" fill="#64748B">応答</text>
+  <line x1="515" y1="136" x2="547" y2="136" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrdf)"/>
+  <text x="531" y="126" text-anchor="middle" font-size="10" fill="#2563EB" font-weight="bold">TLS 1.2+</text>
 
-  <!-- 4. 私物 PC (戻り) -->
+  <!-- 4. Anthropic API -->
   <g>
-    <rect x="605" y="100" width="140" height="80" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
-    <text x="675" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">ローカル保存</text>
-    <text x="675" y="145" text-anchor="middle" font-size="11" fill="#9D174D">drafts/*.md</text>
-    <text x="675" y="162" text-anchor="middle" font-size="10" fill="#BE185D">~/.claude/logs/</text>
-    <text x="675" y="175" text-anchor="middle" font-size="10" fill="#BE185D">audit.tsv</text>
+    <rect x="552" y="95" width="178" height="82" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="641" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Anthropic API</text>
+    <text x="641" y="139" text-anchor="middle" font-size="11" fill="#0F766E">AWS US-East-1</text>
+    <text x="641" y="156" text-anchor="middle" font-size="10" fill="#14B8A6">AES-256 / 学習利用なし</text>
+    <text x="641" y="170" text-anchor="middle" font-size="10" fill="#14B8A6">30 日後自動削除</text>
+  </g>
+  <line x1="730" y1="136" x2="762" y2="136" stroke="#64748B" stroke-width="2" marker-end="url(#arrdf)"/>
+  <text x="746" y="126" text-anchor="middle" font-size="10" fill="#64748B">応答</text>
+
+  <!-- 5. ローカル保存 -->
+  <g>
+    <rect x="767" y="95" width="150" height="82" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="842" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">ローカル保存</text>
+    <text x="842" y="139" text-anchor="middle" font-size="11" fill="#9D174D">drafts/*.md</text>
+    <text x="842" y="156" text-anchor="middle" font-size="10" fill="#BE185D">~/.claude/logs/</text>
+    <text x="842" y="170" text-anchor="middle" font-size="10" fill="#BE185D">audit.tsv (会社 PC 内)</text>
   </g>
 
-  <!-- 5. NEVER -->
+  <!-- 6. NEVER -->
   <g>
-    <rect x="40" y="230" width="800" height="65" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" stroke-dasharray="6,4" rx="6"/>
-    <text x="60" y="252" font-size="13" font-weight="bold" fill="#7F1D1D">経由しないネットワーク</text>
-    <text x="60" y="273" font-size="11" fill="#7F1D1D">× LGWAN 系  /  × 庁内系  /  × 住基ネット  /  × 庁内ファイルサーバ  /  × 庁内プロキシ</text>
-    <text x="60" y="288" font-size="10" fill="#991B1B">本利用は私物 PC + モバイル WiFi のみ。庁内 PC へのインストールも行わない。</text>
+    <rect x="40" y="228" width="920" height="65" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" stroke-dasharray="6,4" rx="6"/>
+    <text x="62" y="250" font-size="13" font-weight="bold" fill="#7F1D1D">経由しないネットワーク</text>
+    <text x="62" y="271" font-size="11" fill="#7F1D1D">× LGWAN 系  /  × 庁内系  /  × 住基ネット系  /  × 庁内ファイルサーバ</text>
+    <text x="62" y="287" font-size="10" fill="#991B1B">会社 PC のインターネット系端末から、許可されたプロキシ経由でのみ接続。3 層分離の他セグメントには一切触れない。</text>
   </g>
 
   <!-- Footer link -->
-  <text x="760" y="305" text-anchor="end" font-size="10" fill="#94A3B8">出典: trust.anthropic.com (確認日 2026-05-18)</text>
+  <text x="950" y="307" text-anchor="end" font-size="10" fill="#94A3B8">出典: trust.anthropic.com (確認日 2026-05-18)</text>
 </svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 528" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="528" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">Claude Code — 3 層ガード動作テスト</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#f9e2af">[A] hook ブロック</text>
+    <text x="24" y="100" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">Read personal-test.txt</tspan></text>
+    <text x="24" y="126" fill="#f38ba8">BLOCKED: 個人情報パターンを検出</text>
+    <text x="24" y="152" fill="#bac2de">対応: 個人情報を別ファイルに隔離してください</text>
+
+    <text x="24" y="200" fill="#f9e2af">[B] permissions deny</text>
+    <text x="24" y="226" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">Read personal-data/secret.txt</tspan></text>
+    <text x="24" y="252" fill="#f38ba8">Permission denied: Read tool is not allowed</text>
+    <text x="24" y="278" fill="#f38ba8">for ./personal-data/**</text>
+
+    <text x="24" y="326" fill="#f9e2af">[C] Memory 警告</text>
+    <text x="24" y="352" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">個人情報を含むファイルがあるか確認して</tspan></text>
+    <text x="24" y="378" fill="#cdd6f4">CLAUDE.md の方針により、住民・税・福祉系の</text>
+    <text x="24" y="404" fill="#cdd6f4">ファイルは Read 前に確認します。対象ファイルを</text>
+    <text x="24" y="430" fill="#cdd6f4">読んでよろしいですか?</text>
+    <text x="24" y="462" fill="#a6e3a1">✓ 3 層すべてが想定どおり動作</text>
+  </g>
+  <rect x="0" y="488" width="760" height="40" fill="#181825"/>
+  <text x="24" y="513" font-size="13" fill="#bac2de">▲ hook / permissions deny / Memory 警告の動作テスト結果</text>
+</svg>

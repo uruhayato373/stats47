@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670" width="1280" height="670">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<!-- Background -->
+<rect width="1280" height="670" fill="#ffffff"/>
+<rect x="0" y="0" width="1280" height="14" fill="#0ea5e9"/>
+
+<!-- Decorative ring (right) -->
+<circle cx="1080" cy="420" r="240" fill="#e0f2fe" opacity="0.6"/>
+<circle cx="1080" cy="420" r="170" fill="none" stroke="#0ea5e9" stroke-width="2" opacity="0.3"/>
+
+<!-- Eyebrow -->
+<text x="80" y="120" font-size="20" font-weight="600" fill="#0ea5e9" letter-spacing="2">労働・賃金 ランキング</text>
+<text x="80" y="158" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="3">47 PREFECTURES SERIES</text>
+
+<!-- Headline (huge) -->
+<text x="80" y="290" font-size="92" font-weight="900" fill="#0f172a">平均通勤時間</text>
+<text x="80" y="335" font-size="28" font-weight="700" fill="#0ea5e9">47 都道府県ランキング</text>
+
+<!-- Sub headline (lead copy) -->
+<text x="80" y="410" font-size="32" font-weight="500" fill="#334155">首都圏 vs 地方で</text>
+<text x="80" y="452" font-size="32" font-weight="500" fill="#334155">どれくらい違うのか？</text>
+
+<!-- Icon (right circle, SVG-native glyph) -->
+<text x="1080" y="465" text-anchor="middle" font-size="200" font-weight="900" fill="#0ea5e9" opacity="0.9">分</text>
+<text x="1080" y="540" text-anchor="middle" font-size="18" font-weight="600" fill="#0ea5e9" letter-spacing="3" opacity="0.7">min</text>
+
+<!-- Metric label chip -->
+<rect x="80" y="540" width="316" height="38" rx="19" fill="#e0f2fe"/>
+<text x="238" y="565" text-anchor="middle" font-size="15" font-weight="600" fill="#0ea5e9">首都圏は片道 1 時間超が当たり前</text>
+
+<!-- Footer -->
+<line x1="80" y1="612" x2="1200" y2="612" stroke="#e2e8f0" stroke-width="1"/>
+<text x="80" y="645" font-size="15" fill="#64748b">統計で見る都道府県 — 元県庁職員が解説</text>
+<text x="1200" y="645" text-anchor="end" font-size="15" font-weight="500" fill="#94a3b8">stats47.jp</text>
+</svg>

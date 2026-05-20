@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 354" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="354" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">PowerShell (管理者)</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="15">
+    <text x="24" y="78" fill="#89b4fa">PS&gt; <tspan fill="#cdd6f4">wsl --install -d Ubuntu-22.04</tspan></text>
+    <text x="24" y="106" fill="#bac2de">インストール中: Ubuntu 22.04 LTS</text>
+    <text x="24" y="134" fill="#a6e3a1">Ubuntu 22.04 LTS はインストールされました。</text>
+    <text x="24" y="162" fill="#bac2de">要求された操作は正常に終了しました。</text>
+    <text x="24" y="190" fill="#6c7086"># 再起動後、Ubuntu が初回起動する</text>
+    <text x="24" y="218" fill="#cdd6f4">Enter new UNIX username: <tspan fill="#a6e3a1">user</tspan></text>
+    <text x="24" y="246" fill="#cdd6f4">New password:</text>
+    <text x="24" y="274" fill="#a6e3a1">Installation successful!</text>
+    <text x="24" y="302" fill="#89b4fa">user@HOME-PC:~$ </text>
+  </g>
+  <rect x="0" y="314" width="760" height="40" fill="#181825"/>
+  <text x="24" y="339" font-size="13" fill="#bac2de">▲ wsl --install 実行 → Ubuntu 初回起動でユーザー名を設定</text>
+</svg>

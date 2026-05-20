@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="420" rx="10" fill="#f1f5f9"/>
+  <!-- iPhone frame -->
+  <rect x="270" y="20" width="220" height="320" rx="32" fill="#1e293b"/>
+  <rect x="280" y="30" width="200" height="300" rx="24" fill="#0f172a"/>
+  <!-- notch -->
+  <rect x="345" y="36" width="70" height="14" rx="7" fill="#1e293b"/>
+  <!-- status bar -->
+  <text x="296" y="48" font-size="10" fill="#e2e8f0">9:41</text>
+  <text x="430" y="48" font-size="10" fill="#e2e8f0">機内モード</text>
+  <!-- app title -->
+  <text x="380" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#f8fafc">ボイスメモ</text>
+  <!-- recording title -->
+  <text x="380" y="104" text-anchor="middle" font-size="11" fill="#cbd5e1">公務員 Claude Code</text>
+  <text x="380" y="120" text-anchor="middle" font-size="11" fill="#cbd5e1">勉強会 2026-05-18</text>
+  <!-- waveform -->
+  <g fill="#ef4444">
+    <rect x="296" y="160" width="4" height="20" rx="2"/>
+    <rect x="306" y="148" width="4" height="44" rx="2"/>
+    <rect x="316" y="166" width="4" height="8" rx="2"/>
+    <rect x="326" y="140" width="4" height="60" rx="2"/>
+    <rect x="336" y="158" width="4" height="24" rx="2"/>
+    <rect x="346" y="150" width="4" height="40" rx="2"/>
+    <rect x="356" y="134" width="4" height="72" rx="2"/>
+    <rect x="366" y="162" width="4" height="16" rx="2"/>
+    <rect x="376" y="146" width="4" height="48" rx="2"/>
+    <rect x="386" y="156" width="4" height="28" rx="2"/>
+    <rect x="396" y="138" width="4" height="64" rx="2"/>
+    <rect x="406" y="164" width="4" height="12" rx="2"/>
+    <rect x="416" y="152" width="4" height="36" rx="2"/>
+    <rect x="426" y="144" width="4" height="52" rx="2"/>
+    <rect x="436" y="160" width="4" height="20" rx="2"/>
+    <rect x="446" y="150" width="4" height="40" rx="2"/>
+    <rect x="456" y="166" width="4" height="8" rx="2"/>
+  </g>
+  <!-- timer -->
+  <text x="380" y="240" text-anchor="middle" font-size="26" font-weight="bold" fill="#f8fafc" font-family="'SFMono-Regular','Menlo',monospace">00:12</text>
+  <!-- record button -->
+  <circle cx="380" cy="296" r="26" fill="none" stroke="#475569" stroke-width="3"/>
+  <rect x="370" y="286" width="20" height="20" rx="4" fill="#ef4444"/>
+  <!-- caption band -->
+  <rect x="0" y="380" width="760" height="40" fill="#e2e8f0"/>
+  <text x="24" y="405" font-size="13" fill="#475569">▲ iPhone ボイスメモで録音中 — 架空の勉強会名・録音時間・波形が表示される</text>
+</svg>

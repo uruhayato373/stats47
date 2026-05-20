@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="470" fill="#FAFAFA"/>
+  <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">公務員 × Claude Code シリーズ 全 30 本のロードマップ</text>
+  <text x="450" y="63" text-anchor="middle" font-size="12" fill="#64748B">すべて読む必要はなし。関心のある段階から拾い読みする前提</text>
+
+  <!-- Stage 1 -->
+  <g>
+    <rect x="50" y="95" width="800" height="56" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" rx="8"/>
+    <circle cx="84" cy="123" r="20" fill="#2563EB"/>
+    <text x="84" y="129" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">1</text>
+    <text x="124" y="119" font-size="15" font-weight="bold" fill="#1E293B">環境構築段階</text>
+    <text x="124" y="139" font-size="11" fill="#64748B">Claude Code を自分の PC で動かせる状態にする</text>
+    <text x="836" y="129" text-anchor="end" font-size="13" font-weight="bold" fill="#2563EB">#01 - #03（3 本）</text>
+  </g>
+
+  <!-- Stage 2 -->
+  <g>
+    <rect x="50" y="161" width="800" height="56" fill="#D1FAE5" stroke="#059669" stroke-width="1.5" rx="8"/>
+    <circle cx="84" cy="189" r="20" fill="#059669"/>
+    <text x="84" y="195" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">2</text>
+    <text x="124" y="185" font-size="15" font-weight="bold" fill="#1E293B">文書作成段階</text>
+    <text x="124" y="205" font-size="11" fill="#64748B">議事録・答弁・条例・起案文 ── 成果を実感しやすい中核</text>
+    <text x="836" y="195" text-anchor="end" font-size="13" font-weight="bold" fill="#059669">#04 - #09（6 本）</text>
+  </g>
+
+  <!-- Stage 3 -->
+  <g>
+    <rect x="50" y="227" width="800" height="56" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" rx="8"/>
+    <circle cx="84" cy="255" r="20" fill="#DC2626"/>
+    <text x="84" y="261" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">3</text>
+    <text x="124" y="251" font-size="15" font-weight="bold" fill="#1E293B">セキュリティ段階</text>
+    <text x="124" y="271" font-size="11" fill="#64748B">個人情報・機密情報を AI に送らない設定 ── 業務利用の前に必読</text>
+    <text x="836" y="261" text-anchor="end" font-size="13" font-weight="bold" fill="#DC2626">#10 - #13（4 本）</text>
+  </g>
+
+  <!-- Stage 4 -->
+  <g>
+    <rect x="50" y="293" width="800" height="56" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5" rx="8"/>
+    <circle cx="84" cy="321" r="20" fill="#7C3AED"/>
+    <text x="84" y="327" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">4</text>
+    <text x="124" y="317" font-size="15" font-weight="bold" fill="#1E293B">データ・PR・自動化段階</text>
+    <text x="124" y="337" font-size="11" fill="#64748B">Excel 集計、広報誌リライト、MCP 連携、VBA 移行など応用編</text>
+    <text x="836" y="327" text-anchor="end" font-size="13" font-weight="bold" fill="#7C3AED">#14 - #25（12 本）</text>
+  </g>
+
+  <!-- Stage 5 -->
+  <g>
+    <rect x="50" y="359" width="800" height="56" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.5" rx="8"/>
+    <circle cx="84" cy="387" r="20" fill="#4F46E5"/>
+    <text x="84" y="393" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFFFFF">5</text>
+    <text x="124" y="383" font-size="15" font-weight="bold" fill="#1E293B">組織・キャリア段階</text>
+    <text x="124" y="403" font-size="11" fill="#64748B">上司への説明、庁内勉強会、AI 懐疑派対応、退職後キャリア</text>
+    <text x="836" y="393" text-anchor="end" font-size="13" font-weight="bold" fill="#4F46E5">#26 - #30（5 本）</text>
+  </g>
+
+  <!-- MVP note -->
+  <text x="450" y="445" text-anchor="middle" font-size="12" fill="#475569" font-weight="bold">まず読むべき 5 本（MVP）: #04 議事録 / #10 個人情報設定 / #01 環境構築 / #05 議会答弁 / #09 論点整理</text>
+</svg>

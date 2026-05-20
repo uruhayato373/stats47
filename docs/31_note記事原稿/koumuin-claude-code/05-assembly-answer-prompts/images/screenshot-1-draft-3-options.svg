@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="540" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル — claude</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">/draft-3-options @question.txt</tspan></text>
+    <text x="24" y="102" fill="#bac2de">行政手続きオンライン化について 3 案を生成しました。</text>
+  </g>
+  <!-- option cards -->
+  <g font-family="'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+    <!-- card 1 -->
+    <rect x="24" y="120" width="712" height="106" rx="8" fill="#313244"/>
+    <rect x="24" y="120" width="6" height="106" rx="3" fill="#f38ba8"/>
+    <text x="44" y="146" font-size="14" font-weight="bold" fill="#f38ba8">案 1: 攻めの答弁（積極推進）</text>
+    <text x="44" y="170" font-size="12" fill="#cdd6f4">令和 8 年度末までに主要 50 手続きのオンライン化を達成する計画と</text>
+    <text x="44" y="188" font-size="12" fill="#cdd6f4">し、具体的な目標年次・件数を明示する。（902 字）</text>
+    <text x="44" y="212" font-size="11" fill="#9399b2">特徴: 数値で説得力 / リスク: 未達時に追及される</text>
+    <!-- card 2 -->
+    <rect x="24" y="238" width="712" height="106" rx="8" fill="#313244"/>
+    <rect x="24" y="238" width="6" height="106" rx="3" fill="#f9e2af"/>
+    <text x="44" y="264" font-size="14" font-weight="bold" fill="#f9e2af">案 2: 守りの答弁（慎重姿勢）</text>
+    <text x="44" y="288" font-size="12" fill="#cdd6f4">現状認識と課題整理にとどめ、検討段階を強調する。先行自治体の</text>
+    <text x="44" y="306" font-size="12" fill="#cdd6f4">調査を踏まえて慎重に進める方針を示す。（885 字）</text>
+    <text x="44" y="330" font-size="11" fill="#9399b2">特徴: 安全 / リスク: 「やる気がない」と批判される</text>
+    <!-- card 3 -->
+    <rect x="24" y="356" width="712" height="106" rx="8" fill="#313244"/>
+    <rect x="24" y="356" width="6" height="106" rx="3" fill="#a6e3a1"/>
+    <text x="44" y="382" font-size="14" font-weight="bold" fill="#a6e3a1">案 3: 折衷案（バランス型）</text>
+    <text x="44" y="406" font-size="12" fill="#cdd6f4">推進方針は示すが具体的時期は明言せず、段階的アプローチと先行</text>
+    <text x="44" y="424" font-size="12" fill="#cdd6f4">事例研究に言及する。（897 字）</text>
+    <text x="44" y="448" font-size="11" fill="#9399b2">特徴: 中庸 / リスク: 印象が薄くなりやすい</text>
+  </g>
+  <text x="24" y="492" font-size="13" fill="#bac2de" font-family="'SFMono-Regular','Menlo',monospace">各案: 強み/弱み 3 点 + 想定再質問 2-3 個 を付加</text>
+  <rect x="0" y="500" width="760" height="40" fill="#181825"/>
+  <text x="24" y="525" font-size="13" fill="#bac2de">▲ /draft-3-options 実行例 — 攻め・守り・折衷の 3 案が俯瞰できる（架空議題）</text>
+</svg>

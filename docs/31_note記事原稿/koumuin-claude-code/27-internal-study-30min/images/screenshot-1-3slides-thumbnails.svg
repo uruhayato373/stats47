@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 388" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="388" rx="10" fill="#e2e8f0"/>
+  <text x="32" y="42" font-size="14" font-weight="bold" fill="#1e293b">○○市役所 DX 研修 — 冒頭 5 分のスライド (3 枚)</text>
+
+  <!-- Slide 1 -->
+  <g>
+    <rect x="32" y="62" width="224" height="146" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="32" y="62" width="224" height="30" rx="6" fill="#1d4ed8"/>
+    <text x="48" y="82" font-size="13" font-weight="bold" fill="#ffffff">Claude Code は何か</text>
+    <text x="48" y="118" font-size="10.5" fill="#475569">対話で文章作成・要約・</text>
+    <text x="48" y="135" font-size="10.5" fill="#475569">集計を手伝う AI ツール。</text>
+    <rect x="48" y="150" width="192" height="42" rx="4" fill="#eff6ff"/>
+    <text x="60" y="168" font-size="10" font-weight="bold" fill="#1d4ed8">今日のゴール</text>
+    <text x="60" y="184" font-size="9.5" fill="#1e3a8a">議事録 1 段落を要約する</text>
+  </g>
+  <text x="144" y="226" font-size="10" fill="#64748b" text-anchor="middle">スライド 1</text>
+
+  <!-- Slide 2 -->
+  <g>
+    <rect x="268" y="62" width="224" height="146" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="268" y="62" width="224" height="30" rx="6" fill="#dc2626"/>
+    <text x="284" y="82" font-size="13" font-weight="bold" fill="#ffffff">個人情報は入れない</text>
+    <rect x="284" y="104" width="92" height="88" rx="3" fill="#ecfdf5" stroke="#86efac"/>
+    <rect x="384" y="104" width="92" height="88" rx="3" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="330" y="120" font-size="9.5" font-weight="bold" fill="#15803d" text-anchor="middle">渡してよい</text>
+    <text x="430" y="120" font-size="9.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">渡してダメ</text>
+    <text x="294" y="140" font-size="8.5" fill="#166534">・マスク後</text>
+    <text x="294" y="156" font-size="8.5" fill="#166534">・集計済み表</text>
+    <text x="294" y="172" font-size="8.5" fill="#166534">・公開文書</text>
+    <text x="394" y="140" font-size="8.5" fill="#991b1b">・氏名/住所</text>
+    <text x="394" y="156" font-size="8.5" fill="#991b1b">・録音原本</text>
+    <text x="394" y="172" font-size="8.5" fill="#991b1b">・個人別名簿</text>
+  </g>
+  <text x="380" y="226" font-size="10" fill="#64748b" text-anchor="middle">スライド 2</text>
+
+  <!-- Slide 3 -->
+  <g>
+    <rect x="504" y="62" width="224" height="146" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="504" y="62" width="224" height="30" rx="6" fill="#0f766e"/>
+    <text x="520" y="82" font-size="13" font-weight="bold" fill="#ffffff">今日の題材</text>
+    <text x="520" y="112" font-size="10" fill="#475569">議事録 1 段落のプレビュー</text>
+    <rect x="520" y="122" width="192" height="70" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="532" y="140" font-size="8.5" fill="#64748b">△△検討会 (2026/6 開催)</text>
+    <line x1="532" y1="150" x2="700" y2="150" stroke="#e2e8f0"/>
+    <text x="532" y="165" font-size="8" fill="#94a3b8">A 課長より進捗報告。次年度</text>
+    <text x="532" y="178" font-size="8" fill="#94a3b8">予算は据置で B 主任が精査…</text>
+  </g>
+  <text x="616" y="226" font-size="10" fill="#64748b" text-anchor="middle">スライド 3</text>
+
+  <rect x="0" y="340" width="760" height="40" fill="#f1f5f9"/>
+  <text x="24" y="365" font-size="13" fill="#475569">▲ 30 分勉強会 冒頭 5 分で使う 3 枚スライドのサムネイル一覧</text>
+</svg>

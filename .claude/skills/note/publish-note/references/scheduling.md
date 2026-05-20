@@ -22,7 +22,7 @@
 
 ## Phase 7-Pricing: 有料記事の販売価格設定（is_paid=true のときだけ実行）
 
-> 検証日: 2026-05-18。Profile 1 / 通常アカウント（プレミアム未加入）で確認。
+> 検証日: 2026-05-18。通常アカウント（プレミアム未加入）で確認。
 > 主要 selector はランタイムで都度取得（index は毎回変わる）。
 
 ### 動作確定済みの仕様
@@ -50,7 +50,7 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
   echo "[Phase 7-Pricing] 有料記事として price=$PRICE 円を設定"
 
   # 7P-1. state を取得して 有料 ラジオの index を見つける
-  browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 
   # "有料" span の親 div (1 つ上の行) の index を取る
   # state 上のパターン:
@@ -64,7 +64,7 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
     echo "ERROR: 有料 ラジオが見つからない。販売価格設定を中断"
     exit 1
   fi
-  browser-use --headed --profile "Profile 1" click "$PAID_PARENT_IDX"
+  browser-use --headed --profile "Profile 5" click "$PAID_PARENT_IDX"
   sleep 3
 
   # 7P-2. 価格 input (Shadow DOM 内 id=price) の value を JS で上書き
@@ -72,7 +72,7 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
   #         Shadow DOM 内のため CSS で querySelector できないので
   #         deep tree walk で id=price input を探す
   ESCAPED_PRICE=$(printf '%s' "$PRICE" | sed 's/"/\\"/g')
-  browser-use --headed --profile "Profile 1" eval "
+  browser-use --headed --profile "Profile 5" eval "
     function findPriceInput(root) {
       if (!root) return null;
       try {
@@ -102,7 +102,7 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
   sleep 2
 
   # 7P-3. 価格が反映されたか state で確認
-  browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
   if grep -qE "input type=text id=price[^/]*value=$PRICE" /tmp/note-state.txt; then
     echo "[Phase 7-Pricing] 価格 $PRICE 円を反映済"
   else
@@ -139,21 +139,21 @@ fi
 ### 7-0. 公開に進む → 「今すぐ公開」
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 PUB_IDX=$(find_idx "公開に進む")
-browser-use --headed --profile "Profile 1" click $PUB_IDX
+browser-use --headed --profile "Profile 5" click $PUB_IDX
 sleep 3
 
-# ハッシュタグ入力（tags.txt がある場合、上限50個）
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+# ハッシュタグ入力（hashtags.txt 優先・無ければ tags.txt、head -50）
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 TAG_IDX=$(find_idx "ハッシュタグを追加する")
-browser-use --headed --profile "Profile 1" click $TAG_IDX
-# tags.txt | head -50 の各タグを入力（7-2 と同じ手順）
+browser-use --headed --profile "Profile 5" click $TAG_IDX
+# タグファイル | head -50 の各タグを入力（7-2 と同じ手順）
 
 # 日時設定をスキップして「今すぐ公開」をクリック
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 NOW_IDX=$(find_idx "今すぐ公開")
-browser-use --headed --profile "Profile 1" click $NOW_IDX
+browser-use --headed --profile "Profile 5" click $NOW_IDX
 sleep 3
 ```
 
@@ -164,74 +164,79 @@ sleep 3
 ### 7-1. 公開に進む
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 PUB_IDX=$(find_idx "公開に進む")
-browser-use --headed --profile "Profile 1" click $PUB_IDX
+browser-use --headed --profile "Profile 5" click $PUB_IDX
 sleep 3
 ```
 
 ### 7-2. ハッシュタグ入力
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 TAG_IDX=$(find_idx "ハッシュタグを追加する")
-browser-use --headed --profile "Profile 1" click $TAG_IDX
+browser-use --headed --profile "Profile 5" click $TAG_IDX
 ```
 
-tags.txt の各タグについて（上限50個、`head -50` で超過を防ぐ）:
+タグファイルの各タグについて入力する。タグファイルは **`hashtags.txt` を優先し、無ければ `tags.txt`** を使う（koumuin-claude-code シリーズは各記事に `hashtags.txt`（90 タグのプール）を持つ）。
+
+note のハッシュタグ投稿上限の都合で **`head -50` で上位 50 個に絞る**（hashtags.txt の先頭ほど重要なタグ。実際の上限は投稿時に要確認、超過分は弾かれるだけで害はない）:
 
 ```bash
+TAGFILE="<articleDir>/hashtags.txt"
+[ -f "$TAGFILE" ] || TAGFILE="<articleDir>/tags.txt"
 while IFS= read -r tag; do
-  browser-use --headed --profile "Profile 1" type "$tag"
-  browser-use --headed --profile "Profile 1" keys Enter
+  [ -z "$tag" ] && continue
+  browser-use --headed --profile "Profile 5" type "$tag"
+  browser-use --headed --profile "Profile 5" keys Enter
   sleep 0.5
-done < <(head -50 <articleDir>/tags.txt)
+done < <(head -50 "$TAGFILE")
 ```
 
 ### 7-3. 予約投稿の日時設定
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 SCHED_IDX=$(find_idx "日時の設定")
-browser-use --headed --profile "Profile 1" click $SCHED_IDX
+browser-use --headed --profile "Profile 5" click $SCHED_IDX
 sleep 2
 ```
 
 カレンダーで日付を選択:
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 # aria-label="Choose YYYY年M月D日..." の要素を検索
 DATE_IDX=$(find_idx "Choose <YYYY>年<M>月<D>日")
-browser-use --headed --profile "Profile 1" click $DATE_IDX
+browser-use --headed --profile "Profile 5" click $DATE_IDX
 sleep 1
 ```
 
 時刻リストから時間を選択:
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 TIME_IDX=$(find_idx "<HH:MM>")
-browser-use --headed --profile "Profile 1" click $TIME_IDX
+browser-use --headed --profile "Profile 5" click $TIME_IDX
 sleep 1
 ```
 
 ### 7-4. 予約投稿を実行
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 RESERVE_IDX=$(find_idx "予約投稿")
-browser-use --headed --profile "Profile 1" click $RESERVE_IDX
+browser-use --headed --profile "Profile 5" click $RESERVE_IDX
 sleep 3
 ```
 
 完了ダイアログが表示されたら「閉じる」をクリック:
 
 ```bash
-browser-use --headed --profile "Profile 1" state 2>&1 > /tmp/note-state.txt
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 CLOSE_IDX=$(find_idx "閉じる")
 if [ -n "$CLOSE_IDX" ]; then
-  browser-use --headed --profile "Profile 1" click $CLOSE_IDX
+  browser-use --headed --profile "Profile 5" click $CLOSE_IDX
   sleep 1
 fi
 ```

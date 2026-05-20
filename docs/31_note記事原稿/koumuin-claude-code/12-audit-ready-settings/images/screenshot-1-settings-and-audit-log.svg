@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 490" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="490" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">VS Code — settings.json と監査ログの対比</text>
+  <line x1="380" y1="38" x2="380" y2="450" stroke="#45475a" stroke-width="1"/>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="12">
+    <text x="20" y="64" fill="#9399b2">.claude/settings.json</text>
+    <text x="20" y="92" fill="#cdd6f4">"hooks": {</text>
+    <text x="36" y="112" fill="#f9e2af">"UserPromptSubmit"<tspan fill="#cdd6f4">: [</tspan></text>
+    <text x="52" y="132" fill="#a6e3a1">→ log-prompt.mjs</text>
+    <text x="36" y="156" fill="#f9e2af">"Stop"<tspan fill="#cdd6f4">: [</tspan></text>
+    <text x="52" y="176" fill="#a6e3a1">→ log-stop.mjs</text>
+    <text x="36" y="200" fill="#f9e2af">"PostToolUse"<tspan fill="#cdd6f4">: [</tspan></text>
+    <text x="52" y="220" fill="#6c7086">matcher: "Edit|Write"</text>
+    <text x="52" y="240" fill="#a6e3a1">→ log-file-change.mjs</text>
+    <text x="20" y="264" fill="#cdd6f4">}</text>
+
+    <text x="400" y="64" fill="#9399b2">.claude/logs/audit/2026-05-18.jsonl</text>
+    <text x="400" y="92" fill="#89b4fa">{"event":"prompt_submit",</text>
+    <text x="412" y="110" fill="#bac2de">"user":"user01","host":"koumuin-mac"}</text>
+    <text x="400" y="134" fill="#89b4fa">{"event":"file_change",</text>
+    <text x="412" y="152" fill="#bac2de">"tool":"Write","path":"report.md"}</text>
+    <text x="400" y="176" fill="#89b4fa">{"event":"file_change",</text>
+    <text x="412" y="194" fill="#bac2de">"tool":"Edit","path":"budget.csv"}</text>
+    <text x="400" y="218" fill="#89b4fa">{"event":"session_stop",</text>
+    <text x="412" y="236" fill="#bac2de">"prompt_hash":"a3f1...","turns":7}</text>
+    <text x="400" y="264" fill="#a6e3a1">✓ 1 セッションが 4 行で追跡可能</text>
+  </g>
+  <text x="20" y="320" font-size="12" fill="#6c7086" font-family="'SFMono-Regular','Menlo',monospace"># 3 つの hook が「送信・終了・ファイル変更」を捕捉</text>
+  <text x="20" y="344" font-size="12" fill="#6c7086" font-family="'SFMono-Regular','Menlo',monospace"># JSONL は追記専用 — 改ざんなしで監査証跡になる</text>
+  <rect x="0" y="450" width="760" height="40" fill="#181825"/>
+  <text x="24" y="475" font-size="13" fill="#bac2de">▲ settings.json の hooks 定義が、右の監査 JSONL を自動生成する</text>
+</svg>

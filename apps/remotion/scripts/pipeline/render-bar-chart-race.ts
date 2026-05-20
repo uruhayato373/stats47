@@ -55,7 +55,13 @@ function calcTotalDuration(frameCount: number, enableSpoilerHook = false): numbe
 
 const args = process.argv.slice(2);
 const keyIdx = args.indexOf("--key");
-const targetKey = keyIdx !== -1 ? args[keyIdx + 1] : undefined;
+const targetKeys =
+  keyIdx !== -1
+    ? args[keyIdx + 1]
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : undefined;
 const platformIdx = args.indexOf("--platform");
 const targetPlatform = platformIdx !== -1 ? args[platformIdx + 1] : undefined;
 const dryRun = args.includes("--dry-run");
@@ -211,7 +217,7 @@ async function main() {
     dirs = entries
       .filter((e) => e.isDirectory())
       .map((e) => e.name)
-      .filter((name) => !targetKey || name === targetKey)
+      .filter((name) => !targetKeys || targetKeys.includes(name))
       .sort();
   } catch {
     console.error(`❌ ディレクトリが見つかりません: ${BCR_ROOT}`);
@@ -220,8 +226,8 @@ async function main() {
 
   if (dirs.length === 0) {
     console.log(
-      targetKey
-        ? `❌ キー "${targetKey}" が見つかりません`
+      targetKeys
+        ? `❌ キー "${targetKeys.join(", ")}" が見つかりません`
         : "❌ ディレクトリがありません"
     );
     process.exit(1);

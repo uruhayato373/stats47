@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 410" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="410" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="350" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル — Ollama ローカル推論</text>
+  <g transform="translate(610,10)">
+    <path d="M14 8 a13 13 0 0 1 26 0" fill="none" stroke="#6c7086" stroke-width="3" stroke-linecap="round"/>
+    <path d="M19 14 a8 8 0 0 1 16 0" fill="none" stroke="#6c7086" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="27" cy="20" r="3.5" fill="#6c7086"/>
+    <line x1="8" y1="2" x2="46" y2="26" stroke="#f38ba8" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="694" y="26" font-size="11" fill="#f38ba8">Wi-Fi オフ</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#6c7086"># ネットワーク切断 — 外部送信ゼロ</text>
+    <text x="24" y="102" fill="#89b4fa">user@koumuin-mac ~ % <tspan fill="#cdd6f4">ollama run qwen2.5:7b \</tspan></text>
+    <text x="44" y="124" fill="#cdd6f4">"総務省の文書管理規程の趣旨を 200 字以内で要約"</text>
+    <text x="24" y="156" fill="#bac2de">文書管理規程は、行政文書の作成から保存・廃棄</text>
+    <text x="24" y="180" fill="#bac2de">までの過程を統一ルールで管理し、意思決定の経緯</text>
+    <text x="24" y="204" fill="#bac2de">を後から検証できる状態を保つことを趣旨とする。</text>
+    <text x="24" y="228" fill="#bac2de">適正な記録の保存により説明責任を確保し、行政の</text>
+    <text x="24" y="252" fill="#bac2de">透明性と efficient な事務処理の両立を図る。</text>
+    <text x="24" y="284" fill="#a6e3a1">✓ 完全オフラインで応答（外部 API 不使用）</text>
+    <text x="24" y="312" fill="#89b4fa">user@koumuin-mac ~ % <tspan fill="#cdd6f4">_</tspan></text>
+  </g>
+  <rect x="0" y="350" width="760" height="40" fill="#181825"/>
+  <text x="24" y="375" font-size="13" fill="#bac2de">▲ Wi-Fi をオフにしても Ollama がローカルで日本語要約を生成</text>
+</svg>
