@@ -29,6 +29,8 @@
 | `/fishing-ports` | `app/fishing-ports/all.json` | 漁港データ |
 | `/ports` | `app/ports/all.json` | 港湾メタデータ |
 | `/ports/[portCode]` | `app/port-statistics/by-port/[code].json` | 港湾別統計 |
+| `/gis-cross/depopulation-medical` | `app/gis-cross/depopulation-medical/{summary.json,pref/[NN].json}` | 過疎×医療 掛け合わせ (サマリ + 県別詳細) |
+| `/gis-cross/sunshine-map` | `app/gis-cross/sunshine-map/{raster.png,meta.json}` | 日照地図ラスター + メタ |
 | 内部計算データ（URL なし） | `app/correlation/by-ranking-key/[key].json` | 相関データ（例外） |
 
 ## ルート直下に置くもの（非 URL データ）
