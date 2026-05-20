@@ -40,6 +40,7 @@ import {
     AdSenseAd,
     RANKING_PAGE_TABLE_SIDE,
     RANKING_PAGE_FOOTER,
+    RANKING_INCONTENT_MOBILE,
 } from "@/lib/google-adsense";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
@@ -503,6 +504,14 @@ export function RankingKeyPageClient({
 
                     {/* 相関分析セクション */}
                     {correlationSection}
+
+                    {/* 広告: 解析セクション中盤（モバイル専用。デスクトップはサイドバー広告でカバー） */}
+                    <div className="lg:hidden">
+                        <AdSenseAd
+                            format={RANKING_INCONTENT_MOBILE.format}
+                            slotId={RANKING_INCONTENT_MOBILE.slotId}
+                        />
+                    </div>
 
                     {/* ランキングページカード（補足チャート） */}
                     {rankingPageCards}
