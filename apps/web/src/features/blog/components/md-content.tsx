@@ -320,9 +320,41 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
     };
 }
 
+/**
+ * 手動 <ad-slot> 未設置の記事に、本文中盤の <ad-slot> を注入する。
+ * 記事末尾 1 枠より viewability が高い中盤配置にするための処理。
+ * h2 見出しの 2 番目・中盤の直前に挿入し、手動配置記事の ~2 枠パターンに合わせる。
+ */
+function injectAdSlots(md: string): string {
+    if (md.includes("<ad-slot")) return md; // 手動配置済みの記事は触らない
+    const lines = md.split("\n");
+    // h2 見出し行を収集（コードフェンス内の "## " は誤検出しないよう除外）
+    const h2Indices: number[] = [];
+    let inFence = false;
+    lines.forEach((line, i) => {
+        if (line.trimStart().startsWith("```")) {
+            inFence = !inFence;
+        } else if (!inFence && /^##\s/.test(line)) {
+            h2Indices.push(i);
+        }
+    });
+    if (h2Indices.length < 2) return md; // 見出しが少ない記事は対象外
+    const targets = [h2Indices[1]];
+    if (h2Indices.length >= 5) targets.push(h2Indices[Math.floor(h2Indices.length / 2)]);
+    const result = [...lines];
+    // 行番号のズレを防ぐため後ろから挿入する
+    for (const idx of [...new Set(targets)].sort((a, b) => b - a)) {
+        result.splice(idx, 0, "", "<ad-slot></ad-slot>", "");
+    }
+    return result.join("\n");
+}
+
 export function MDContent({ source, slug, relatedArticleTitles, affiliateBannersByCategory }: MDContentProps) {
     const mdComponents = useMemo(() => makeMdComponents(slug, affiliateBannersByCategory), [slug, affiliateBannersByCategory]);
-    const processed = useMemo(() => preprocessCallouts(source, relatedArticleTitles), [source, relatedArticleTitles]);
+    const processed = useMemo(
+        () => injectAdSlots(preprocessCallouts(source, relatedArticleTitles)),
+        [source, relatedArticleTitles],
+    );
     return (
         <article className="prose prose-zinc dark:prose-invert max-w-none" suppressHydrationWarning>
             <ReactMarkdown
@@ -332,17 +364,6 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
             >
                 {processed}
             </ReactMarkdown>
-            {/* 広告: 手動 <ad-slot> が無い記事への自動フォールバック（記事末尾）。
-                192 記事中 51 記事が <ad-slot> 未設置のため一律カバーする。 */}
-            {!source.includes("<ad-slot") && (
-                <div className="my-8 not-prose">
-                    <AdSenseAd
-                        format={BLOG_ARTICLE_INLINE.format}
-                        slotId={BLOG_ARTICLE_INLINE.slotId}
-                        showLabel={false}
-                    />
-                </div>
-            )}
         </article>
     );
 }
