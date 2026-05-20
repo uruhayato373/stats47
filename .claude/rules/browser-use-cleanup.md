@@ -10,6 +10,9 @@ browser-use を使うスキル / スクリプトは終了時に必ず daemon 停
 trap '
   pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
   pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+  ps -Axo pid,command | grep "browser-use-user-data-dir" | grep -v grep \
+    | awk "{print \$1}" | xargs -n1 kill -9 2>/dev/null
+  rm -rf "${TMPDIR:-/tmp}"browser-use-user-data-dir-* 2>/dev/null
   osascript -e "tell application \"Google Chrome\"
     repeat with w in windows
       repeat with t in tabs of w
@@ -19,6 +22,12 @@ trap '
   end tell" 2>/dev/null || true
 ' EXIT INT TERM
 ```
+
+> **重要**: browser-use は起動のたびに一時 `user-data-dir`（`$TMPDIR/browser-use-user-data-dir-*`）で
+> 使い捨て Chrome を立ち上げる。これを kill しそびれると Mac のドックに Chrome アイコンが大量に残り、
+> 一時フォルダもディスクを圧迫する。`ms-playwright/mcp-chrome` パターンだけでは取りこぼすため、
+> 上記の `browser-use-user-data-dir` を狙う ps 経由 kill を必ず含めること。
+> （macOS の `pkill -f` は長いコマンドラインを取りこぼすことがあるので ps 経由が確実）
 
 Node.js orchestrator では `process.on('exit')` 等で同等処理を spawn する。
 

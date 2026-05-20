@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="450" fill="#FAFAFA"/>
+  <text x="400" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">ChatGPT と Claude Code の使い分け</text>
+  <text x="400" y="63" text-anchor="middle" font-size="12" fill="#64748B">競合ではなく「役割が違う道具」── 併用が現実的</text>
+
+  <!-- ChatGPT box -->
+  <g>
+    <rect x="40" y="90" width="340" height="258" fill="#D1FAE5" stroke="#047857" stroke-width="2" rx="8"/>
+    <text x="210" y="124" text-anchor="middle" font-size="18" font-weight="bold" fill="#047857">ChatGPT（ブラウザ版）</text>
+    <text x="210" y="146" text-anchor="middle" font-size="12" fill="#475569">文章で会話・相談する道具</text>
+    <line x1="62" y1="162" x2="358" y2="162" stroke="#A7F3D0" stroke-width="1.5"/>
+
+    <circle cx="68" cy="195" r="4" fill="#047857"/>
+    <text x="82" y="200" font-size="14" font-weight="bold" fill="#1E293B">文章での会話・相談</text>
+    <text x="82" y="220" font-size="11" fill="#64748B">議題のたたき台作り、表現の言い換え</text>
+
+    <circle cx="68" cy="251" r="4" fill="#047857"/>
+    <text x="82" y="256" font-size="14" font-weight="bold" fill="#1E293B">アイデア出し・ブレスト</text>
+    <text x="82" y="276" font-size="11" fill="#64748B">広報誌の特集案、研修テーマ候補</text>
+
+    <circle cx="68" cy="307" r="4" fill="#047857"/>
+    <text x="82" y="312" font-size="14" font-weight="bold" fill="#1E293B">単発の質問への回答</text>
+    <text x="82" y="332" font-size="11" fill="#64748B">「○○制度の概要を教えて」</text>
+  </g>
+
+  <!-- Claude Code box -->
+  <g>
+    <rect x="420" y="90" width="340" height="258" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="8"/>
+    <text x="590" y="124" text-anchor="middle" font-size="18" font-weight="bold" fill="#1E3A8A">Claude Code（ターミナル版）</text>
+    <text x="590" y="146" text-anchor="middle" font-size="12" fill="#475569">PC のファイルを実際に触る道具</text>
+    <line x1="442" y1="162" x2="738" y2="162" stroke="#BFDBFE" stroke-width="1.5"/>
+
+    <circle cx="448" cy="195" r="4" fill="#1E3A8A"/>
+    <text x="462" y="200" font-size="14" font-weight="bold" fill="#1E293B">ファイル操作を伴う作業</text>
+    <text x="462" y="220" font-size="11" fill="#64748B">mp3 → docx、Excel 集計、CSV 整形</text>
+
+    <circle cx="448" cy="251" r="4" fill="#1E3A8A"/>
+    <text x="462" y="256" font-size="14" font-weight="bold" fill="#1E293B">繰り返し業務の自動化</text>
+    <text x="462" y="276" font-size="11" fill="#64748B">毎月の定型業務、年度更新</text>
+
+    <circle cx="448" cy="307" r="4" fill="#1E3A8A"/>
+    <text x="462" y="312" font-size="14" font-weight="bold" fill="#1E293B">複数ファイルを横断する作業</text>
+    <text x="462" y="332" font-size="11" fill="#64748B">前年度資料との比較、複数 Excel 統合</text>
+  </g>
+
+  <!-- Bottom insight bar -->
+  <rect x="40" y="370" width="720" height="58" fill="#1E293B" rx="8"/>
+  <text x="400" y="398" text-anchor="middle" font-size="15" font-weight="bold" fill="#FFFFFF">Claude Code =「ChatGPT が PC を操作できるようになった版」</text>
+  <text x="400" y="418" text-anchor="middle" font-size="11" fill="#CBD5E1">ChatGPT で AI 慣れ → Claude Code でファイル操作を覚える、が無理のない順序</text>
+</svg>

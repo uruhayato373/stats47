@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670" width="1280" height="670">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<!-- Background -->
+<rect width="1280" height="670" fill="#ffffff"/>
+<rect x="0" y="0" width="1280" height="14" fill="#16a34a"/>
+
+<!-- Decorative ring (right) -->
+<circle cx="1080" cy="420" r="240" fill="#dcfce7" opacity="0.6"/>
+<circle cx="1080" cy="420" r="170" fill="none" stroke="#16a34a" stroke-width="2" opacity="0.3"/>
+
+<!-- Eyebrow -->
+<text x="80" y="120" font-size="20" font-weight="600" fill="#16a34a" letter-spacing="2">労働・賃金 ランキング</text>
+<text x="80" y="158" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="3">47 PREFECTURES SERIES</text>
+
+<!-- Headline (huge) -->
+<text x="80" y="290" font-size="92" font-weight="900" fill="#0f172a">有効求人倍率</text>
+<text x="80" y="335" font-size="28" font-weight="700" fill="#16a34a">47 都道府県ランキング</text>
+
+<!-- Sub headline (lead copy) -->
+<text x="80" y="410" font-size="32" font-weight="500" fill="#334155">「売り手市場」の県は</text>
+<text x="80" y="452" font-size="32" font-weight="500" fill="#334155">意外にも地方？</text>
+
+<!-- Icon (right circle, SVG-native glyph) -->
+<text x="1080" y="465" text-anchor="middle" font-size="200" font-weight="900" fill="#16a34a" opacity="0.9">倍</text>
+<text x="1080" y="540" text-anchor="middle" font-size="18" font-weight="600" fill="#16a34a" letter-spacing="3" opacity="0.7">ratio</text>
+
+<!-- Metric label chip -->
+<rect x="80" y="540" width="244" height="38" rx="19" fill="#dcfce7"/>
+<text x="202" y="565" text-anchor="middle" font-size="15" font-weight="600" fill="#16a34a">求人 ÷ 求職者 = 倍率</text>
+
+<!-- Footer -->
+<line x1="80" y1="612" x2="1200" y2="612" stroke="#e2e8f0" stroke-width="1"/>
+<text x="80" y="645" font-size="15" fill="#64748b">統計で見る都道府県 — 元県庁職員が解説</text>
+<text x="1200" y="645" text-anchor="end" font-size="15" font-weight="500" fill="#94a3b8">stats47.jp</text>
+</svg>

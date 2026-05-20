@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="414" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル — Claude Code</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="13">
+    <text x="24" y="74" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">/faq-cluster inquiries-2026-04</tspan></text>
+    <text x="24" y="100" fill="#6c7086"># 問い合わせ 87 件をクラスタリングしました</text>
+
+    <text x="24" y="132" fill="#bac2de">ID</text>
+    <text x="70" y="132" fill="#bac2de">代表質問</text>
+    <text x="240" y="132" fill="#bac2de">件数</text>
+    <text x="300" y="132" fill="#bac2de">サンプル質問</text>
+    <text x="510" y="132" fill="#bac2de">主管課</text>
+    <text x="610" y="132" fill="#bac2de">根拠条文</text>
+    <line x1="24" y1="142" x2="736" y2="142" stroke="#45475a"/>
+
+    <text x="24" y="166" fill="#cdd6f4">C01</text>
+    <text x="70" y="166" fill="#cdd6f4">納付書再発行</text>
+    <text x="240" y="166" fill="#cdd6f4">14</text>
+    <text x="300" y="166" fill="#6c7086">「納付書失くした」</text>
+    <text x="510" y="166" fill="#6c7086">税務課</text>
+    <text x="610" y="166" fill="#6c7086">〇〇条例 第8条</text>
+
+    <text x="24" y="192" fill="#cdd6f4">C02</text>
+    <text x="70" y="192" fill="#cdd6f4">住民票の取得</text>
+    <text x="240" y="192" fill="#cdd6f4">11</text>
+    <text x="300" y="192" fill="#6c7086">「コンビニで取れる?」</text>
+    <text x="510" y="192" fill="#6c7086">市民課</text>
+    <text x="610" y="192" fill="#6c7086">〇〇規則 第3条</text>
+
+    <text x="24" y="218" fill="#cdd6f4">C03</text>
+    <text x="70" y="218" fill="#cdd6f4">保育園入所申請</text>
+    <text x="240" y="218" fill="#cdd6f4">9</text>
+    <text x="300" y="218" fill="#6c7086">「申請はいつまで?」</text>
+    <text x="510" y="218" fill="#6c7086">保育課</text>
+    <text x="610" y="218" fill="#6c7086">〇〇条例 第12条</text>
+
+    <text x="24" y="244" fill="#cdd6f4">C04</text>
+    <text x="70" y="244" fill="#cdd6f4">粗大ごみ収集</text>
+    <text x="240" y="244" fill="#cdd6f4">7</text>
+    <text x="300" y="244" fill="#6c7086">「タンスの出し方」</text>
+    <text x="510" y="244" fill="#6c7086">環境課</text>
+    <text x="610" y="244" fill="#6c7086">〇〇規則 第5条</text>
+
+    <text x="24" y="270" fill="#cdd6f4">—</text>
+    <text x="70" y="270" fill="#cdd6f4">その他</text>
+    <text x="240" y="270" fill="#cdd6f4">12</text>
+    <text x="300" y="270" fill="#6c7086">件数3件未満を集約</text>
+    <text x="510" y="270" fill="#6c7086">複数課</text>
+    <text x="610" y="270" fill="#6c7086">—</text>
+    <line x1="24" y1="284" x2="736" y2="284" stroke="#45475a"/>
+
+    <text x="24" y="312" fill="#a6e3a1">クラスタ総数: 11</text>
+    <text x="24" y="338" fill="#a6e3a1">FAQ化推奨件数（5件以上のクラスタ）: 6</text>
+  </g>
+
+  <rect x="0" y="374" width="760" height="40" fill="#181825"/>
+  <text x="24" y="399" font-size="13" fill="#bac2de">▲ /faq-cluster 実行後のクラスタ表（質問内容は架空、課名は一般名）</text>
+</svg>

@@ -1,0 +1,352 @@
+[
+  {
+    "date": "2026-06-08",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "marriages-per-total-population"
+  },
+  {
+    "date": "2026-06-09",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "per-capita-inhabitant-tax-pref-municipal"
+  },
+  {
+    "date": "2026-06-10",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "high-school-new-graduates-job-opening-ratio"
+  },
+  {
+    "date": "2026-06-11",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "total-expenditure-prefecture"
+  },
+  {
+    "date": "2026-06-12",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "fish-catch"
+  },
+  {
+    "date": "2026-06-13",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "old-population-index"
+  },
+  {
+    "date": "2026-06-14",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "private-auto-insurance-penetration-rate-vehicle"
+  },
+  {
+    "date": "2026-06-15",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "high-school-graduates-out-of-prefecture-job-ratio"
+  },
+  {
+    "date": "2026-06-16",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "local-bonds-prefecture"
+  },
+  {
+    "date": "2026-06-17",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "marine-fishery-output-value"
+  },
+  {
+    "date": "2026-06-18",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "crude-birth-rate"
+  },
+  {
+    "date": "2026-06-19",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "juvenile-criminal-arrest-person"
+  },
+  {
+    "date": "2026-06-20",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "new-graduate-starting-salary-highschool-male"
+  },
+  {
+    "date": "2026-06-21",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "independent-revenue-prefecture"
+  },
+  {
+    "date": "2026-06-22",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "aquaculture-harvest"
+  },
+  {
+    "date": "2026-06-23",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "crude-death-rate"
+  },
+  {
+    "date": "2026-06-24",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "general-hospital-bed-count"
+  },
+  {
+    "date": "2026-06-25",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "specialized-school-students"
+  },
+  {
+    "date": "2026-06-26",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "employment-rate"
+  },
+  {
+    "date": "2026-06-27",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "new-owner-occupied-housing-ratio"
+  },
+  {
+    "date": "2026-06-28",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "japanese-population"
+  },
+  {
+    "date": "2026-06-29",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "households-on-public-assistance"
+  },
+  {
+    "date": "2026-06-30",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "traffic-accident-count"
+  },
+  {
+    "date": "2026-07-01",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "part-time-employment-rate-regular"
+  },
+  {
+    "date": "2026-07-02",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "number-of-constructed-buildings"
+  },
+  {
+    "date": "2026-07-03",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "taxpayer-count-income"
+  },
+  {
+    "date": "2026-07-04",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "psychiatric-hospital-count"
+  },
+  {
+    "date": "2026-07-05",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "police-officer-count"
+  },
+  {
+    "date": "2026-07-06",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "middle-aged-employment-rate-45plus"
+  },
+  {
+    "date": "2026-07-07",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "barber-beauty-salon-count"
+  },
+  {
+    "date": "2026-07-08",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "net-increase-rate-deposits-worker-households"
+  },
+  {
+    "date": "2026-07-09",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "pharmacy-count"
+  },
+  {
+    "date": "2026-07-10",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "theft-offenses-recognized"
+  },
+  {
+    "date": "2026-07-11",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "monthly-average-actual-working-hours-male-pre2019"
+  },
+  {
+    "date": "2026-07-12",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "public-bath-count"
+  },
+  {
+    "date": "2026-07-13",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "cpi-change-rate-total"
+  },
+  {
+    "date": "2026-07-14",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "total-outpatients"
+  },
+  {
+    "date": "2026-07-15",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "serious-crime-per-100k"
+  },
+  {
+    "date": "2026-07-16",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "habitable-area-ratio"
+  },
+  {
+    "date": "2026-07-17",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "japanese-entries"
+  },
+  {
+    "date": "2026-07-18",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "postal-savings-balance-per-capita"
+  },
+  {
+    "date": "2026-07-19",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "paid-nursing-home-residents-per-1000-65plus"
+  },
+  {
+    "date": "2026-07-20",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "building-fire-count"
+  },
+  {
+    "date": "2026-07-21",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "lowest-temperature"
+  },
+  {
+    "date": "2026-07-22",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "number-of-simple-lodging-facilities"
+  },
+  {
+    "date": "2026-07-23",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "private-life-insurance-contracts-per-1000"
+  },
+  {
+    "date": "2026-07-24",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "junior-college-count"
+  },
+  {
+    "date": "2026-07-25",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "local-allocation-tax-ratio-pref-finance"
+  },
+  {
+    "date": "2026-07-26",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "urban-park-area-per-person"
+  },
+  {
+    "date": "2026-07-27",
+    "time": "09:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "municipal-road-paving-rate"
+  }
+]

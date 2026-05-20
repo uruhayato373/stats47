@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="560" rx="10" fill="#e2e8f0"/>
+  <!-- A4 sheet -->
+  <rect x="180" y="24" width="400" height="488" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="210" y="58" font-size="15" font-weight="bold" fill="#1e293b">Claude Code 試行導入のご提案</text>
+  <text x="210" y="76" font-size="9.5" fill="#64748b">○○市役所 総務部 DX 推進担当 / 起案: 公務 太郎</text>
+  <line x1="210" y1="86" x2="550" y2="86" stroke="#1d4ed8" stroke-width="2"/>
+
+  <!-- 1 -->
+  <circle cx="218" cy="108" r="9" fill="#1d4ed8"/>
+  <text x="218" y="112" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+  <text x="236" y="106" font-size="11" font-weight="bold" fill="#1e293b">何ができるか</text>
+  <text x="236" y="124" font-size="9.5" fill="#475569">議事録要約・文書校正・集計表作成を対話で自動化。</text>
+
+  <!-- 2 -->
+  <circle cx="218" cy="152" r="9" fill="#dc2626"/>
+  <text x="218" y="156" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+  <text x="236" y="150" font-size="11" font-weight="bold" fill="#1e293b">何ができないか / やらないか</text>
+  <text x="236" y="168" font-size="9.5" fill="#475569">個人情報の入力は禁止。最終判断は職員が行う。</text>
+
+  <!-- 3 -->
+  <circle cx="218" cy="196" r="9" fill="#1d4ed8"/>
+  <text x="218" y="200" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="236" y="194" font-size="11" font-weight="bold" fill="#1e293b">個人情報の扱い</text>
+  <text x="236" y="212" font-size="9.5" fill="#475569">・氏名/住所/番号はマスク後のみ投入</text>
+  <text x="236" y="228" font-size="9.5" fill="#475569">・原本データは渡さない運用ルールを別紙化</text>
+  <text x="236" y="244" font-size="9.5" fill="#475569">・通信は暗号化、ログは庁内で保管</text>
+
+  <!-- 4 -->
+  <circle cx="218" cy="272" r="9" fill="#1d4ed8"/>
+  <text x="218" y="276" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+  <text x="236" y="270" font-size="11" font-weight="bold" fill="#1e293b">月額コスト + 効果見込み</text>
+  <text x="236" y="288" font-size="9.5" fill="#475569">月額 ¥3,000 / 削減見込み 30h・月（1 名分）。</text>
+
+  <!-- 5 -->
+  <circle cx="218" cy="316" r="9" fill="#1d4ed8"/>
+  <text x="218" y="320" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+  <text x="236" y="314" font-size="11" font-weight="bold" fill="#1e293b">試行期間 + 評価方法</text>
+  <text x="236" y="332" font-size="9.5" fill="#475569">2026 年 6〜8 月。月次で削減時間を計測し報告。</text>
+
+  <!-- decision box -->
+  <rect x="210" y="356" width="340" height="56" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="224" y="378" font-size="9.5" fill="#64748b">決裁欄</text>
+  <line x1="300" y1="356" x2="300" y2="412" stroke="#e2e8f0"/>
+  <line x1="425" y1="356" x2="425" y2="412" stroke="#e2e8f0"/>
+  <text x="328" y="372" font-size="8.5" fill="#94a3b8">担当</text>
+  <text x="453" y="372" font-size="8.5" fill="#94a3b8">課長</text>
+  <text x="513" y="372" font-size="8.5" fill="#94a3b8">部長</text>
+
+  <text x="210" y="438" font-size="8.5" fill="#94a3b8">余白: 上下 20mm / 左右 18mm ・ 本文 11pt / 見出し 14pt</text>
+
+  <rect x="0" y="512" width="760" height="40" fill="#f1f5f9"/>
+  <text x="24" y="537" font-size="13" fill="#475569">▲ A4 1 枚版 承認資料のレイアウト例（架空自治体・5 要素構成）</text>
+</svg>

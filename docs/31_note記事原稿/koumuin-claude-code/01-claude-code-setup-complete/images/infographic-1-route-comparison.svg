@@ -1,42 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
   <rect width="800" height="380" fill="#FAFAFA"/>
-  <text x="400" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">推奨ルート vs 庁内ルート: 所要時間・コスト比較</text>
-  <text x="400" y="60" text-anchor="middle" font-size="12" fill="#64748B">「使い始めるまで」の現実的なコスト</text>
+  <text x="400" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">会社 PC で Claude Code を使うまでの 2 ステップ</text>
+  <text x="400" y="60" text-anchor="middle" font-size="12" fill="#64748B">私物 PC でお試し → 会社 PC で実戦投入（最終的に業務で使うのは会社 PC）</text>
 
-  <!-- 推奨ルート (私物 PC) -->
+  <!-- STEP 1: 私物 PC でお試し -->
   <g>
-    <rect x="60" y="90" width="320" height="240" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="8"/>
-    <text x="220" y="120" text-anchor="middle" font-size="16" font-weight="bold" fill="#1E3A8A">推奨: 私物 PC + モバイル WiFi</text>
+    <rect x="50" y="88" width="305" height="232" fill="#E0F2FE" stroke="#0369A1" stroke-width="2" rx="8"/>
+    <rect x="50" y="88" width="305" height="34" fill="#0369A1" rx="8"/>
+    <rect x="50" y="105" width="305" height="17" fill="#0369A1"/>
+    <text x="202" y="111" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">STEP 1 （任意）私物 PC でお試し</text>
 
-    <text x="80" y="160" font-size="13" fill="#1E293B" font-weight="bold">所要時間</text>
-    <rect x="80" y="170" width="280" height="32" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="4"/>
-    <text x="220" y="191" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">30 分</text>
+    <text x="70" y="152" font-size="13" fill="#1E293B" font-weight="bold">所要時間</text>
+    <text x="200" y="152" font-size="13" fill="#0369A1" font-weight="bold">約 30 分</text>
 
-    <text x="80" y="230" font-size="13" fill="#1E293B" font-weight="bold">月額コスト</text>
-    <rect x="80" y="240" width="220" height="32" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="4"/>
-    <text x="190" y="261" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">¥3,000-5,000</text>
+    <text x="70" y="184" font-size="13" fill="#1E293B" font-weight="bold">プロキシ設定</text>
+    <text x="200" y="184" font-size="13" fill="#0369A1" font-weight="bold">不要</text>
 
-    <text x="80" y="298" font-size="11" fill="#1E40AF">即日開始可 / 稟議不要 / 自由度最大</text>
-    <text x="80" y="315" font-size="11" fill="#1E40AF">庁内データは扱わない前提</text>
-  </g>
+    <text x="70" y="216" font-size="13" fill="#1E293B" font-weight="bold">目的</text>
+    <text x="200" y="216" font-size="13" fill="#0369A1" font-weight="bold">雰囲気を掴む</text>
 
-  <!-- 庁内ルート -->
-  <g>
-    <rect x="420" y="90" width="320" height="240" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="2" rx="8"/>
-    <text x="580" y="120" text-anchor="middle" font-size="16" font-weight="bold" fill="#7F1D1D">庁内 PC + プロキシ正攻法</text>
-
-    <text x="440" y="160" font-size="13" fill="#1E293B" font-weight="bold">所要時間</text>
-    <rect x="440" y="170" width="280" height="32" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="4"/>
-    <text x="580" y="191" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">2-3 ヶ月 (稟議含む)</text>
-
-    <text x="440" y="230" font-size="13" fill="#1E293B" font-weight="bold">追加コスト</text>
-    <rect x="440" y="240" width="280" height="32" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="4"/>
-    <text x="580" y="261" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">承認待ち + 評価書作成</text>
-
-    <text x="440" y="298" font-size="11" fill="#7F1D1D">情シス交渉 / セキュリティ評価書 / 監査ログ</text>
-    <text x="440" y="315" font-size="11" fill="#7F1D1D">運用が脆く突然止まるリスクあり</text>
+    <text x="70" y="252" font-size="11" fill="#0C4A6E">手順 2（Mac）/ 手順 3（Windows）だけで起動</text>
+    <text x="70" y="272" font-size="11" fill="#0C4A6E">モバイル WiFi で完結。業務データは扱わない</text>
+    <text x="70" y="298" font-size="11" fill="#64748B">※ 時間が取れなければ省略して STEP 2 へ</text>
   </g>
 
   <!-- 矢印 -->
-  <text x="400" y="358" text-anchor="middle" font-size="13" fill="#475569" font-weight="bold">→ 最初の半年は私物環境での習熟を推奨</text>
+  <g>
+    <line x1="362" y1="204" x2="438" y2="204" stroke="#475569" stroke-width="3"/>
+    <path d="M 438 204 L 426 197 L 426 211 z" fill="#475569"/>
+    <text x="400" y="192" text-anchor="middle" font-size="10" fill="#475569">感触を得たら</text>
+  </g>
+
+  <!-- STEP 2: 会社 PC で実戦投入 -->
+  <g>
+    <rect x="445" y="88" width="305" height="232" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2.5" rx="8"/>
+    <rect x="445" y="88" width="305" height="34" fill="#1E3A8A" rx="8"/>
+    <rect x="445" y="105" width="305" height="17" fill="#1E3A8A"/>
+    <text x="597" y="111" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">STEP 2 （本筋）会社 PC で実戦投入</text>
+
+    <text x="465" y="152" font-size="13" fill="#1E293B" font-weight="bold">必要な作業</text>
+    <text x="595" y="152" font-size="13" fill="#1E3A8A" font-weight="bold">OS 設定 + プロキシ</text>
+
+    <text x="465" y="184" font-size="13" fill="#1E293B" font-weight="bold">プロキシ設定</text>
+    <text x="595" y="184" font-size="13" fill="#1E3A8A" font-weight="bold">3 点セット（手順 4）</text>
+
+    <text x="465" y="216" font-size="13" fill="#1E293B" font-weight="bold">位置づけ</text>
+    <text x="595" y="216" font-size="13" fill="#1E3A8A" font-weight="bold">業務で使う正規環境</text>
+
+    <text x="465" y="252" font-size="11" fill="#1E3A8A">手順 2 / 3 + 手順 4（環境変数・CA 証明書）</text>
+    <text x="465" y="272" font-size="11" fill="#1E3A8A">プロキシを通せば会社 PC で普通に動く</text>
+    <text x="465" y="298" font-size="11" fill="#1E3A8A">許可ドメイン申請の進め方は #02 参照</text>
+  </g>
+
+  <!-- 下部メッセージ -->
+  <text x="400" y="358" text-anchor="middle" font-size="13" fill="#475569" font-weight="bold">→ ゴールは会社 PC での実務利用。プロキシ設定というひと手間さえ越えれば良い</text>
 </svg>

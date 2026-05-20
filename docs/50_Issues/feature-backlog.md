@@ -160,3 +160,70 @@ pilot 結果（remote D1 反映済み）:
 - 相関言及を含む比率: 80% 以上（excluded 除く）
 - tsc PASS
 - production 上で 10 件サンプリングして相関考察の質確認
+
+---
+
+## #292+ [T3-LOCAL-FINANCE-02] /themes/local-finance 市区町村別データ拡張（Japan Dashboard 完全互換）
+
+- **tier**: 3
+- **status**: pending
+- **related**: PR #292（都道府県別 Phase 1 完了、2026-05-16）
+
+### 背景
+
+PR #292 でデジタル庁 Japan Dashboard 自治体財政ページ
+(https://www.digital.go.jp/resources/japandashboard/municipal-finance) を
+**都道府県別データ**で `/themes/local-finance` に復元済み。本家は市区町村別
+（約 1,700 自治体）が主軸のため、完全互換にはこちらを追加取得する必要がある。
+
+### 現状
+
+- D1 `metrics` テーブル: 財政関連 18 指標すべて `areaType='prefecture'` のみ登録
+- 市区町村レベル（`stats_city`）には財政指標未登録
+- area_profile では一部大規模自治体（東京都・大阪府等 ~27 件）にスポットで財政データが含まれるのみ
+
+### 必要な作業
+
+1. **e-Stat 「地方財政状況調査」探索**
+   - 統計コード: 総務省 `00200251` 系
+   - `inspect-estat-meta` / `search-estat` スキルで市区町村別 statsDataId を抽出
+   - 候補: 03xxxxxx 系（市町村別の小規模・大規模区分テーブル）
+
+2. **metrics 追加登録**
+   - 都道府県側 18 指標と同じ key に対応する `areaType='city'` 行を追加
+   - `source_config_json` で市区町村版 statsDataId / cdCat01 を指定
+   - city-level の最新値取得 → `stats_city` 投入
+
+3. **市町村合併・廃置分合への対応**
+   - area_code の historical mapping（旧 → 現在）
+   - stats47 area マスターとマッチング
+
+4. **UI 拡張**
+   - `/themes/local-finance` 既存ページに areaType トグル追加
+     （現状の `ThemeDashboardTabbed` は都道府県固定）
+   - 市区町村選択時は ThemeLeafletMap → CityMapChart に切替
+   - `/areas/[areaCode]/cities/[cityCode]` の財政タブとの整合
+
+5. **page_components 追加**
+   - `(page_type='theme-city', page_key='local-finance')` or 同 theme 内で areaType 分岐
+   - 12 件の city 版コンポーネント（PR #292 と同構成）
+
+### コスト目安
+
+- データ取得・登録: 2-3 日（e-Stat API レート + 約 1,700 自治体 × 18 指標 × 数年）
+- UI 拡張: 2-3 日（areaType トグル、CityMapChart 配線、page_components 設計）
+- 検証: 1 日（型チェック、本番 R2 push、目視確認）
+- 合計: **約 1 週間**
+
+### 完了条件
+
+- `/themes/local-finance` で areaType トグル（都道府県/市区町村）が動作
+- 市区町村選択時、約 1,700 自治体のコロプレス地図 + KPI/チャートが表示
+- Japan Dashboard と同等の粒度（自治体クリック → 詳細ドリルダウン）
+- 既存の都道府県表示は退行なし
+
+### 関連
+
+- PR #292: feature/local-finance-page-components（都道府県別 Phase 1）
+- `packages/types/src/indicator-sets/local-finance.ts`: 18 指標定義
+- `.claude/rules/estat-api.md`: e-Stat 取得規約

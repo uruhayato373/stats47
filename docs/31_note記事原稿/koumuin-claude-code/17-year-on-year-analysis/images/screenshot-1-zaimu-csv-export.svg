@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="420" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect width="760" height="46" rx="10" fill="#f1f5f9"/>
+  <rect y="28" width="760" height="18" fill="#f1f5f9"/>
+  <circle cx="26" cy="23" r="6" fill="#f87171"/>
+  <circle cx="48" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="70" cy="23" r="6" fill="#34d399"/>
+  <rect x="100" y="13" width="560" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="116" y="28" font-size="11" fill="#64748b">財務会計システム ▮▮▮▮▮▮ / 決算データ出力</text>
+  <text x="32" y="86" font-size="16" font-weight="bold" fill="#1e293b">決算データ出力 — CSV エクスポート</text>
+  <text x="32" y="110" font-size="11" fill="#94a3b8">〇〇市 財政課</text>
+
+  <text x="32" y="146" font-size="12" fill="#475569">決算年度</text>
+  <rect x="32" y="154" width="180" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="44" y="176" font-size="12" fill="#1e293b">2024 / 2025</text>
+
+  <text x="240" y="146" font-size="12" fill="#475569">出力範囲</text>
+  <rect x="240" y="154" width="180" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="252" y="176" font-size="12" fill="#1e293b">款項目別</text>
+
+  <text x="448" y="146" font-size="12" fill="#475569">形式</text>
+  <rect x="448" y="154" width="180" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="460" y="176" font-size="12" fill="#1e293b">CSV (UTF-8)</text>
+
+  <rect x="32" y="208" width="596" height="120" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="44" y="230" font-size="11" fill="#94a3b8">プレビュー（款項目別 決算額）</text>
+  <line x1="44" y1="240" x2="616" y2="240" stroke="#e2e8f0"/>
+  <text x="44" y="262" font-size="11" fill="#475569">2024  総務費  庁舎管理事業       12,000,000</text>
+  <text x="44" y="284" font-size="11" fill="#475569">2024  総務費  財産管理事業        8,500,000</text>
+  <text x="44" y="306" font-size="11" fill="#475569">2025  総務費  庁舎管理事業       12,500,000</text>
+
+  <rect x="488" y="346" width="140" height="38" rx="6" fill="#2563eb"/>
+  <text x="558" y="370" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">エクスポート</text>
+
+  <rect x="0" y="380" width="760" height="40" fill="#f1f5f9"/>
+  <text x="24" y="405" font-size="13" fill="#475569">▲ 財務会計システムからの決算 CSV エクスポート画面（システム名・自治体名はマスキング）</text>
+</svg>

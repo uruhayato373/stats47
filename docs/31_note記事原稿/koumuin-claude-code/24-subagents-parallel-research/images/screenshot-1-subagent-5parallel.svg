@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 466" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="466" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">Claude Code — subagent-demo</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">5 県を researcher-prefecture で並列調査 (自転車条例)</tspan></text>
+    <text x="24" y="106" fill="#cdd6f4">5 件の Task を並列起動しました:</text>
+    <!-- 5 Task blocks -->
+    <text x="44" y="142" fill="#f9e2af">⚙ Task[1] researcher-prefecture — 北海道</text>
+    <rect x="44" y="152" width="430" height="8" rx="4" fill="#45475a"/>
+    <rect x="44" y="152" width="300" height="8" rx="4" fill="#a6e3a1"/>
+    <text x="486" y="160" fill="#a6e3a1">running…</text>
+
+    <text x="44" y="192" fill="#f9e2af">⚙ Task[2] researcher-prefecture — 青森</text>
+    <rect x="44" y="202" width="430" height="8" rx="4" fill="#45475a"/>
+    <rect x="44" y="202" width="180" height="8" rx="4" fill="#a6e3a1"/>
+    <text x="486" y="210" fill="#f9e2af">WebSearch…</text>
+
+    <text x="44" y="242" fill="#f9e2af">⚙ Task[3] researcher-prefecture — 岩手</text>
+    <rect x="44" y="252" width="430" height="8" rx="4" fill="#45475a"/>
+    <rect x="44" y="252" width="240" height="8" rx="4" fill="#a6e3a1"/>
+    <text x="486" y="260" fill="#a6e3a1">running…</text>
+
+    <text x="44" y="292" fill="#f9e2af">⚙ Task[4] researcher-prefecture — 宮城</text>
+    <rect x="44" y="302" width="430" height="8" rx="4" fill="#45475a"/>
+    <rect x="44" y="302" width="120" height="8" rx="4" fill="#a6e3a1"/>
+    <text x="486" y="310" fill="#f9e2af">WebFetch…</text>
+
+    <text x="44" y="342" fill="#f9e2af">⚙ Task[5] researcher-prefecture — 秋田</text>
+    <rect x="44" y="352" width="430" height="8" rx="4" fill="#45475a"/>
+    <rect x="44" y="352" width="210" height="8" rx="4" fill="#a6e3a1"/>
+    <text x="486" y="360" fill="#a6e3a1">running…</text>
+
+    <text x="24" y="394" fill="#6c7086">5 agents in progress — 結果待機中</text>
+  </g>
+  <rect x="0" y="412" width="760" height="40" fill="#181825"/>
+  <text x="24" y="437" font-size="13" fill="#bac2de">▲ Subagent 5 並列起動時の画面。Task の進捗バーが 5 つ並んで走っている状態</text>
+</svg>

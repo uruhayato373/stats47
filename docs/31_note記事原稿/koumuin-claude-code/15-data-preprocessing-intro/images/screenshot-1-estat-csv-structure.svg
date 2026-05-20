@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="480" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect width="760" height="46" rx="10" fill="#f1f5f9"/>
+  <rect y="28" width="760" height="18" fill="#f1f5f9"/>
+  <circle cx="26" cy="23" r="6" fill="#f87171"/>
+  <circle cx="48" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="70" cy="23" r="6" fill="#34d399"/>
+  <text x="430" y="28" text-anchor="middle" font-size="12" fill="#64748b">Excel — /Users/user/projects/stats-demo/inputs/c01.csv</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas',monospace" font-size="12">
+    <rect x="24" y="62" width="712" height="76" fill="#fef9c3" stroke="#cbd5e1"/>
+    <text x="36" y="84" font-size="12" fill="#92400e">① 令和 2 年国勢調査 男女別人口及び世帯数</text>
+    <text x="36" y="104" font-size="11" fill="#a16207">基準日: 2020-10-01 現在</text>
+    <text x="36" y="124" font-size="11" fill="#a16207">単位: 人</text>
+    <text x="600" y="84" font-size="11" fill="#b45309">← メタ情報行</text>
+
+    <rect x="24" y="142" width="712" height="50" fill="#dbeafe" stroke="#cbd5e1"/>
+    <text x="36" y="162" font-size="11" fill="#1e3a8a">都道府県 │ 総数 │ 男 │ 女 │ 世帯数 │（再掲）</text>
+    <text x="36" y="182" font-size="11" fill="#1e3a8a">　　　　 │ 人口 │ 人口 │ 人口 │ 　　 │ 65 歳以上</text>
+    <text x="600" y="162" font-size="11" fill="#1d4ed8">← 結合セル 2 段ヘッダ</text>
+
+    <rect x="24" y="196" width="712" height="96" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="36" y="218" font-size="11" fill="#334155">北海道 │ 5,224,614 │ 2,465,088 │ 2,759,526 │ 2,469,063</text>
+    <text x="36" y="240" font-size="11" fill="#334155">青森県 │ 1,237,984 │ 580,571 │ 657,413 │ 510,838</text>
+    <text x="36" y="262" font-size="11" fill="#334155">岩手県 │ 1,210,534 │ 582,952 │ 627,582 │ 492,184</text>
+    <text x="36" y="284" font-size="11" fill="#334155">宮城県 │ 2,301,996 │ 1,122,694 │ 1,179,302 │ 893,786</text>
+    <text x="600" y="218" font-size="11" fill="#475569">← データ本体</text>
+
+    <rect x="24" y="296" width="712" height="62" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="36" y="318" font-size="11" fill="#64748b">注 1) 「-」は該当数値なし、「***」は秘匿を表す。</text>
+    <text x="36" y="338" font-size="11" fill="#64748b">資料: 総務省統計局「令和 2 年国勢調査」</text>
+    <text x="600" y="318" font-size="11" fill="#64748b">← 末尾注釈行</text>
+  </g>
+  <text x="24" y="386" font-size="12" fill="#94a3b8">この 4 要素（メタ／結合ヘッダ／データ／注釈）が前処理の障害ポイント</text>
+  <rect x="0" y="402" width="760" height="40" fill="#f1f5f9"/>
+  <text x="24" y="427" font-size="13" fill="#475569">▲ e-Stat 国勢調査 CSV の典型レイアウト — そのままでは集計に使えない</text>
+</svg>
