@@ -70,8 +70,9 @@ W21 データでモバイルが構造的に undermonetized:
    - branch: `feature/adsense-placement-optimization`
 3. **Phase 2: `/blog/[slug]` 記事中盤広告**（code 側）— ✅ 2026-05-20 実装（PR #321）
    - 192 記事中 51 記事が手動 `<ad-slot>` 未設置（全 51 記事とも h2 見出し 6 個以上）。
-   - `md-content.tsx` の `injectAdSlots` で、未設置記事の h2 見出し 2 番目・中盤の直前に `<ad-slot>`（→ `BLOG_ARTICLE_INLINE`）を 2 枠自動注入。手動配置記事の ~2 枠パターンに合わせた。
-   - 当初実装は記事末尾 1 枠だったが「末尾は読了者しか見ず viewability が低い」ため記事中盤 2 枠に変更。コードフェンス内 `## ` の誤検出ガード付き。
+   - `md-content.tsx` の `injectAdSlots` で、未設置記事の h2 見出し 2 番目・中盤の直前に `<ad-slot>`（→ `BLOG_ARTICLE_INLINE`）を 2 枠自動注入。コードフェンス内 `## ` の誤検出ガード付き。
+   - さらに記事末尾にも 1 枠（条件: `source` に `<ad-slot>` を含まない記事のみ）。→ 未設置記事は **中盤 2 枠 + 末尾 1 枠 = 3 枠**。
+   - 配置変遷: 末尾 1 枠 → 中盤 2 枠 → 中盤 2 枠 + 末尾 1 枠（ユーザー指示）。
 4. **Phase 3: `/themes/[key]` 穴埋め**（code 側）— ✅ 2026-05-20 実装（PR 未マージ）
    - 17 テーマページ共通 `ThemePageLayout` のダッシュボード直後に `THEMES_CONTENT`（新規スロット）を追加。
 5. **全ページ網羅**（code 側、ユーザー指示で Phase 2/3 と一括実施）— ✅ 2026-05-20 実装（PR 未マージ）

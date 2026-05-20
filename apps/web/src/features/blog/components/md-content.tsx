@@ -364,6 +364,16 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
             >
                 {processed}
             </ReactMarkdown>
+            {/* 広告: 記事末尾。手動 <ad-slot> 未設置記事のみ（injectAdSlots の中盤 2 枠に加えて末尾 1 枠）。 */}
+            {!source.includes("<ad-slot") && (
+                <div className="my-8 not-prose">
+                    <AdSenseAd
+                        format={BLOG_ARTICLE_INLINE.format}
+                        slotId={BLOG_ARTICLE_INLINE.slotId}
+                        showLabel={false}
+                    />
+                </div>
+            )}
         </article>
     );
 }
