@@ -57,6 +57,8 @@ interface PostConfig {
   domain: string;
   captionPath: string;
   imagePaths: string[];
+  /** メディアが動画(mp4)か。動画はアップロード処理に時間がかかる */
+  isVideo: boolean;
   scheduledDate: Date | null; // null = 即時投稿
 }
 
@@ -99,13 +101,25 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       `.local/r2/sns/${domain}/${key}`
     );
     const captionPath = path.join(baseDir, "x/caption.txt");
-    const chartPath = path.join(baseDir, "x/stills/chart-x-1200x630.png");
-    const mapPath = path.join(baseDir, "x/stills/choropleth-map-1200x630.png");
+    const stillsDir = path.join(baseDir, "x/stills");
+    const chartPath = path.join(stillsDir, "chart-x-1200x630.png");
+    const mapPath = path.join(stillsDir, "choropleth-map-1200x630.png");
 
-    // コロプレス地図1枚を優先（スクロール停止力が高く、テキストと情報が重複しない）
+    // メディア解決: stills/ に .mp4 があれば動画を最優先（X は動画 or 画像の一方のみ）。
+    // 動画がなければ従来どおりコロプレス地図 → チャートの順で画像 1 枚。
     const imagePaths: string[] = [];
-    if (fs.existsSync(mapPath)) imagePaths.push(mapPath);
-    else if (fs.existsSync(chartPath)) imagePaths.push(chartPath);
+    let isVideo = false;
+    const videoFile = fs.existsSync(stillsDir)
+      ? fs.readdirSync(stillsDir).find((f) => f.toLowerCase().endsWith(".mp4"))
+      : undefined;
+    if (videoFile) {
+      imagePaths.push(path.join(stillsDir, videoFile));
+      isVideo = true;
+    } else if (fs.existsSync(mapPath)) {
+      imagePaths.push(mapPath);
+    } else if (fs.existsSync(chartPath)) {
+      imagePaths.push(chartPath);
+    }
 
     if (!fs.existsSync(captionPath)) {
       console.error(`caption.txt が見つかりません: ${captionPath}`);
@@ -117,6 +131,7 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       domain,
       captionPath,
       imagePaths,
+      isVideo,
       scheduledDate: date ? new Date(date + "+09:00") : null,
     };
   });
@@ -173,18 +188,23 @@ async function publishPost(
   const textbox = page.getByRole("textbox").first();
   await textbox.waitFor({ state: "visible", timeout: 15000 });
 
-  // ── 画像アップロード（テキストより先に実行 — リンクカード展開前に添付）──
+  // ── メディアアップロード（テキストより先に実行 — リンクカード展開前に添付）──
   if (post.imagePaths.length > 0) {
     // compose ダイアログは #layers 内。file input を正確に取得
     const fileInput = page.locator('input[data-testid="fileInput"]').first();
     await fileInput.setInputFiles(post.imagePaths);
-    console.log(`📷 画像 ${post.imagePaths.length} 枚をアップロード中...`);
-    // 画像プレビューが表示されるまで待機
+    console.log(
+      `📷 ${post.isVideo ? "動画" : `画像 ${post.imagePaths.length} 枚`}をアップロード中...`,
+    );
+    // プレビューが表示されるまで待機（動画は処理が長いため長めに）
     try {
-      await page.locator('[data-testid="attachments"]').waitFor({ state: "visible", timeout: 10000 });
-      console.log("📷 画像プレビュー表示確認OK");
+      await page.locator('[data-testid="attachments"]').waitFor({
+        state: "visible",
+        timeout: post.isVideo ? 30000 : 10000,
+      });
+      console.log("📷 プレビュー表示確認OK");
     } catch {
-      console.log("⚠️  画像プレビューが検出できませんでした（投稿は継続）");
+      console.log("⚠️  プレビューが検出できませんでした（投稿は継続）");
     }
     await page.waitForTimeout(2000);
   }
@@ -201,6 +221,36 @@ async function publishPost(
   }, caption);
   await page.keyboard.press("Meta+v");
   await page.waitForTimeout(2000);
+
+  // ── 動画エンコード完了待ち ──
+  // 動画添付中は投稿ボタンが aria-disabled。完了前に投稿するとメディアなし
+  // 投稿 or 投稿失敗になるため、ボタンが有効化されるまで待つ（最大 3 分）。
+  if (post.isVideo) {
+    console.log("⏳ 動画処理の完了を待機中（投稿ボタン有効化）...");
+    const ready = await page
+      .waitForFunction(
+        () => {
+          const btn = document.querySelector(
+            '[data-testid="tweetButton"]',
+          );
+          return !!btn && btn.getAttribute("aria-disabled") !== "true";
+        },
+        { timeout: 180_000, polling: 1000 },
+      )
+      .then(() => true)
+      .catch(() => false);
+    if (!ready) {
+      console.error(
+        `🚨 投稿ボタンが有効化されません（動画処理未完）。投稿中止: ${post.contentKey}`,
+      );
+      await saveScreenshot(page, post.contentKey, "video-not-ready");
+      await page.keyboard.press("Escape").catch(() => {});
+      await page.waitForTimeout(1000);
+      await page.keyboard.press("Escape").catch(() => {});
+      return false;
+    }
+    console.log("✅ 動画処理完了（投稿ボタン有効化を確認）");
+  }
 
   // ── 予約設定 or 即時投稿 ──
   if (post.scheduledDate) {
@@ -400,17 +450,42 @@ async function publishPost(
     await page.waitForTimeout(1000);
     return true;
   }
-  const postBtn = page.getByTestId("tweetButton").first();
-  if ((await postBtn.count()) > 0) {
-    await postBtn.click({ force: true });
-    console.log(`✅ 即時投稿完了: ${post.contentKey}`);
-    await page.waitForTimeout(3000);
-    return true;
+  // modal dialog 内に scope（背景の inline composer の tweetButton 誤クリック回避）
+  const postBtn = page
+    .locator('[role="dialog"] [data-testid="tweetButton"]')
+    .last();
+  if ((await postBtn.count()) === 0) {
+    console.log("⚠️  投稿ボタンが見つかりません");
+    await saveScreenshot(page, post.contentKey, "post-btn-missing");
+    return false;
   }
 
-  console.log("⚠️  投稿ボタンが見つかりません");
-  await saveScreenshot(page, post.contentKey, "post-btn-missing");
-  return false;
+  await saveScreenshot(page, post.contentKey, "immediate-before-post");
+  // メディア添付時は pointer event が別要素に intercept され Playwright click が
+  // silently 失敗するため、DOM レベル el.click() で投稿ハンドラを直接発火する
+  // （予約パスの scheduleOption と同じ対策）。
+  await postBtn.evaluate((el: HTMLElement) => el.click());
+
+  // 投稿成否を検証: 成功時は compose ダイアログが閉じ URL が /compose/post から離れる
+  const posted = await page
+    .waitForFunction(
+      () => !window.location.pathname.includes("/compose/post"),
+      { timeout: 20_000, polling: 500 },
+    )
+    .then(() => true)
+    .catch(() => false);
+  await page.waitForTimeout(2000);
+  await saveScreenshot(page, post.contentKey, "immediate-after-post");
+
+  if (!posted) {
+    console.error(
+      `🚨 投稿後も compose 画面のまま。投稿が反映されていない可能性: ${post.contentKey}`,
+    );
+    return false;
+  }
+  console.log(`✅ 即時投稿完了: ${post.contentKey}`);
+  await page.waitForTimeout(2000);
+  return true;
 }
 
 // ─── DB 更新 ───────────────────────────────────────
