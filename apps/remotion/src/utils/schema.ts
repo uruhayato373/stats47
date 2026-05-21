@@ -261,3 +261,12 @@ export const PopulationChoroplethSchema = z.object({
   theme: z.enum(["light", "dark"]).optional(),
   showGuides: z.boolean().optional(),
 });
+
+/**
+ * MigrationFlow 用スキーマ
+ */
+export const MigrationFlowSchema = z.object({
+  theme: z.enum(["light", "dark"]).optional(),
+  /** 焦点県コード (2 桁、例: "28" = 兵庫県) */
+  focusPrefCode: z.string().optional(),
+});
