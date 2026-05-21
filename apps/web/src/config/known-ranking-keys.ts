@@ -11,7 +11,7 @@
  * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-05-21
- * 件数: 1959
+ * 件数: 1968
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -301,6 +301,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "convenience-store-sales-monthly",
   "convenience-store-sales-yoy",
   "cook-annual-income",
+  "cook-licensees-by-prefecture",
   "cooking-appliance-consumption-expenditure",
   "cooking-appliance-consumption-quantity",
   "cooking-oil-consumption-expenditure",
@@ -383,6 +384,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "dental-guidance-persons",
   "dental-guidance-persons-per-1000",
   "dental-hygienist-annual-income",
+  "dental-hygienist-by-prefecture",
   "dental-hygienist-rate",
   "dental-technician-rate",
   "dentist-annual-income",
@@ -395,6 +397,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "dependent-population-index",
   "deposit-balance",
   "deposit-balance-per-person",
+  "designated-difficult-disease",
   "designer-annual-income",
   "detached-house-ratio",
   "dietitian-annual-income",
@@ -579,10 +582,12 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "flounder-consumption-quantity",
   "flush-toilet-housing-ratio",
   "flush-toilet-population-ratio",
+  "food-business-establishments",
   "food-business-facility-penalties",
   "food-business-facility-penalties-per-1000",
   "food-expenditure-ratio-multi-person-households",
   "food-retail-store-count-per-1000",
+  "food-sanitation-inspection",
   "foreign-resident-count",
   "foreign-resident-count-china",
   "foreign-resident-count-china-per-100k",
@@ -991,6 +996,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "mens-sweater-consumption-expenditure",
   "mens-sweater-consumption-quantity",
   "mens-underwear-consumption-expenditure",
+  "mental-health-application",
   "mental-health-expenses-prefecture",
   "microwave-consumption-expenditure",
   "microwave-consumption-quantity",
@@ -999,6 +1005,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "middle-aged-job-ratio-45plus",
   "middle-school-students-1-per",
   "midwife-annual-income",
+  "midwife-by-prefecture",
   "midwife-count",
   "milk-drink-consumption-expenditure",
   "mineral-water-consumption-expenditure",
@@ -1313,6 +1320,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "pharmacist-annual-income",
   "pharmacist-count",
   "pharmacy-count",
+  "pharmacy-count-by-prefecture",
   "pharmacy-count-per-100k",
   "pharmacy-count-per-100km2",
   "photo-printing-consumption-expenditure",
@@ -1467,6 +1475,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "pumpkin-consumption-expenditure",
   "pumpkin-consumption-quantity",
   "quasi-national-park-area",
+  "rabies-vaccination-dogs",
   "railway-station-count",
   "ramen-dining-consumption-expenditure",
   "ratio-65-plus",

@@ -3,7 +3,7 @@ type: improvement-log
 target_metric: indicator-count
 status: active
 created: 2026-05-19
-updated: 2026-05-21
+updated: 2026-05-22
 baseline: 1950
 goal: 2500
 goal_due: 2026-Q3
@@ -24,9 +24,9 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 
 | 指標 | baseline (2026-05-19) | 現在 | 目標 (2026 Q3) |
 |---|---|---|---|
-| active indicators 総数 | 1,950 | 1,984 | 2,500 |
+| active indicators 総数 | 1,950 | 1,993 | 2,500 |
 | 17 カテゴリ最小数 | 10 (miningindustry) | 10 | 30 |
-| backlog pending 件数 | 38 | 26 | 0 |
+| backlog pending 件数 | 38 | 16 | 0 |
 
 > KPI 注: backlog pending は G8 (2026-05-19) で 33 件の新規候補 (environment/transport/healthcare-detail/biomass/livestock/forestry 他) を append したため、BATCH-03 で 0 化したのち再び 33 へ増加。次回 batch 候補。
 
@@ -297,6 +297,64 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 - ✅ PR #325 で develop→main マージ・Cloudflare デプロイ済み (2026-05-21)
 - ✅ `/sync-snapshots --only master / ranking-values / ranking-normalized-values` で R2 反映済み (2026-05-21、エラー 0)
 - ✅ 本番疎通確認: 新 6 ページとも HTTP 200 + データ付きレンダリング確認済み (Googlebot UA)
+
+---
+
+## [BATCH-2026-05-22-01] 10 件処理 → 9 件追加 (priority medium)
+
+- **status**: partial (9/10 success, 1 skipped: already registered)
+- **deployed_at**: 2026-05-22
+- **executed_by**: `/expand-indicators --target 10 --priority medium` (`.claude/scripts/management/ingest-indicator.mjs` + 補完スクリプト `/tmp/expand-indicators/ingest-cook.mjs` で cook-licensees の getAreaMap rate-limit 回避)
+- **tier**: 2
+- **target_metric**: indicator-count
+
+### 追加リスト
+
+| slug | category | theme | estat_id | rows | latest_year | status |
+|---|---|---|---|---|---|---|
+| dental-hygienist-by-prefecture | socialsecurity | healthcare | 0004027006 | 47 | 2020 | done (allow_old, cdTab=0200 歯科衛生士数) |
+| midwife-by-prefecture | socialsecurity | healthcare | 0004026929 | 47 | 2020 | done (allow_old, cdTab=0260 助産師数 cdCat01=100 総数) |
+| pharmacy-count-by-prefecture | socialsecurity | healthcare | 0004026870 | 47 | 2020 | done (allow_old, cdCat01=100 総数) |
+| designated-difficult-disease | socialsecurity | healthcare | 0004026904 | 47 | 2020 | done (allow_old, area=68 → PREF_AREA_RE で都道府県のみ抽出, cdCat01=100 総数) |
+| mental-health-application | socialsecurity | healthcare | 0004026960 | 47 | 2020 | done (allow_old, area=68, cdTab=0390 申請通報届出件数 cdCat01=100 cdCat02=100) |
+| cook-licensees-by-prefecture | socialsecurity | (新規:professionals) | 0004026840 | 47 | 2020 | done (allow_old, PREF_NAMES_BY_CODE hardcoded map で getAreaMap rate-limit 回避) |
+| food-sanitation-inspection | socialsecurity | (新規:food-safety) | 0004026844 | 47 | 2020 | done (allow_old, area=128 → 都道府県のみ抽出, cdTab=1300) |
+| food-business-establishments | socialsecurity | (新規:food-safety) | 0004027019 | 47 | 2020 | done (allow_old, area=128, cdCat01=100 総数) |
+| rabies-vaccination-dogs | socialsecurity | (新規:pet) | 0004026906 | 47 | 2020 | done (allow_old, area=128, cdCat01=100) |
+| dog-registration-count | socialsecurity | (新規:pet) | 0004026908 | 47 | 2020 | **skipped** (already registered, 47 prefs confirmed) |
+
+### 結果
+
+- 追加成功: 9 件 / 失敗: 0 件 / skip (既存): 1 件
+- backlog 残: pending=16 / failed=12 / done=44 (前: pending=26 / failed=12 / done=34)
+- 累計 active indicators: 1,984 → 1,993 (+9)
+
+### 想定効果 (`.claude/rules/evidence-based-judgment.md` 準拠)
+
+- **想定**: 9 ranking_key × ~1.5 page/key = 約 14 新規 URL 増。GSC impressions は新規 ranking_key 平均 +5-15 impressions/月/key を想定 [根拠: BATCH-01/02/03/04 と同基準。socialsecurity カテゴリ 9 件追加: healthcare 5 件 (歯科衛生士/助産師/薬局/指定難病/精神障害) + professionals 1 件 (調理師) + food-safety 2 件 (食品収去/食品営業) + pet 1 件 (犬予防注射)]
+- **検証コマンド**:
+  - URL 公開後: `/fetch-gsc-data last28d page snapshot 2026-W27` で path に `dental-hygienist-`/`midwife-`/`pharmacy-count-`/`designated-difficult-`/`mental-health-`/`cook-licensees-`/`food-sanitation-`/`food-business-`/`rabies-vaccination-` を grep
+  - D1 検証 (済): 9 keys × 47 rows = 423 rows を確認済 (`active_metrics_after = 1993`)
+- **検証期日**: 2026-06-19 (28d 後)
+- **判定**: `effect/pending` (本番反映後 28d で GSC impressions / clicks を再評価)
+
+### 既知の注意点 (本バッチで顕在化)
+
+- **area=128 (都道府県+指定都市+中核市) は `PREF_AREA_RE` で正常フィルタ**: 食品収去試験/食品営業施設数/犬予防注射/犬登録頭数 は area 次元が 128 件 (都道府県+政令市+中核市) を含むが、orchestrator の regex `^(0[1-9]|[1-3]\d|4[0-7])000$` が 47 都道府県コードのみを抽出するため問題なし
+- **area=68 (都道府県+指定都市) も同様に PREF_AREA_RE で正常フィルタ**: 指定難病/精神障害者申請通報状況は area=68 だが 47 都道府県のみ抽出確認済み
+- **cook-licensees の getAreaMap が rate-limit で 41 件返却**: 2 API コール (getMetaInfo + getStatsData) の連続実行で getAreaMap が 41 件のみ返す現象が再発 (BATCH-04 と同一パターン)。直接 fetch でデータは 47 件取得できたため、PREF_NAMES_BY_CODE ハードコードマップ経由の補完スクリプト (`/tmp/expand-indicators/ingest-cook.mjs`) で対応。今後 `--sleep-ms 20000` をデフォルト化検討
+- **dog-registration-count は既登録 (skip)**: 0004026908 は既に `stats_prefecture` に 47 件存在。2 重登録なし
+
+### 次回 batch 推奨
+
+- 残 pending: medium 16 件 (infectious-disease-deaths / factory-employment-planned / factory-by-industry / factory-inland-coastal / mountainous-area-subsidy / dairy-cattle / livestock / forestry / biomass / environment 系 etc.)
+- 推奨実行: `/expand-indicators --target 10 --priority medium`
+
+### 後続アクション (人間 / 別スキルで実施)
+
+- `/generate-known-ranking-keys` 実行 → known-ranking-keys.ts に 9 keys を追加 (未実行だと middleware が 410 を返す)
+- `/sync-snapshots` で R2 へ反映 → 本番配信
+- 必要なら `/purge-cdn` で旧 ISR キャッシュをパージ
 
 ---
 
