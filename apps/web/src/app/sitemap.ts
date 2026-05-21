@@ -85,6 +85,11 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
     changeFrequency: "yearly",
     priority: 0.6,
   },
+  {
+    url: `${BASE_URL}/gis-cross/migration-flow`,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  },
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
