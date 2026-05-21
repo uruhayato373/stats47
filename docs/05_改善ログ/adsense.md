@@ -39,11 +39,11 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 
 ## [ADSENSE-MOBILE-01] モバイル広告の位置改善（深すぎる配置の是正）
 
-- **status**: in-progress
+- **status**: deployed-unverified
 - **tier**: 1
 - **target_metric**: adsense-rpm
 - **owner**: claude
-- **deployed_at**: -
+- **deployed_at**: 2026-05-20 (PR #320 + #321 マージ済み、develop=main で本番反映済み)
 - **due**: 2026-06-08
 - **verification_command**: `node .claude/scripts/metrics/fetch-adsense-snapshot.mjs 2026-W23 && cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W23/devices.csv`
 - **plan**: `/Users/minamidaisuke/.claude/plans/stats47-swift-thacker.md`
@@ -63,7 +63,7 @@ W21 データでモバイルが構造的に undermonetized:
 1. **モバイル Anchor 広告の有効化**（console 側）— ✅ 2026-05-20 実施済み
    - スクロール深度に依存しない sticky 広告。ファーストビュー離脱でも 1 impression を確保
    - AdSense 自動広告でモバイル Anchor を ON
-2. **`/ranking/[key]` モバイル in-content 広告**（code 側）— ✅ 2026-05-20 実装（PR 未マージ）
+2. **`/ranking/[key]` モバイル in-content 広告**（code 側）— ✅ 2026-05-20 実装・PR #320 マージ・本番反映済み
    - サイト全 route 棚卸しの結果、最大流入は `/ranking/[key]`（46% PV）。本プラン Phase 1。
    - `RankingKeyPageClient.tsx` の相関分析セクション直後（解析中盤）に `lg:hidden` でモバイル専用 1 枠を追加。フッター広告とはスタッキングを避けて離した。
    - 新規スロット `RANKING_INCONTENT_MOBILE`（slotId `5555350674`、記事内/fluid）を `constants.ts` に追加。
@@ -73,9 +73,9 @@ W21 データでモバイルが構造的に undermonetized:
    - `md-content.tsx` の `injectAdSlots` で、未設置記事の h2 見出し 2 番目・中盤の直前に `<ad-slot>`（→ `BLOG_ARTICLE_INLINE`）を 2 枠自動注入。コードフェンス内 `## ` の誤検出ガード付き。
    - さらに記事末尾にも 1 枠（条件: `source` に `<ad-slot>` を含まない記事のみ）。→ 未設置記事は **中盤 2 枠 + 末尾 1 枠 = 3 枠**。
    - 配置変遷: 末尾 1 枠 → 中盤 2 枠 → 中盤 2 枠 + 末尾 1 枠（ユーザー指示）。
-4. **Phase 3: `/themes/[key]` 穴埋め**（code 側）— ✅ 2026-05-20 実装（PR 未マージ）
+4. **Phase 3: `/themes/[key]` 穴埋め**（code 側）— ✅ 2026-05-20 実装・PR #321 マージ・本番反映済み
    - 17 テーマページ共通 `ThemePageLayout` のダッシュボード直後に `THEMES_CONTENT`（新規スロット）を追加。
-5. **全ページ網羅**（code 側、ユーザー指示で Phase 2/3 と一括実施）— ✅ 2026-05-20 実装（PR 未マージ）
+5. **全ページ網羅**（code 側、ユーザー指示で Phase 2/3 と一括実施）— ✅ 2026-05-20 実装・PR #321 マージ・本番反映済み
    - 広告ゼロだった 11 ページ型（地域別カテゴリ・市区町村 ×2・各一覧 /blog /blog/tags /tag /survey /ports /fishing-ports /themes・/search）にメインコンテンツ最下部 footer 広告（`CONTENT_FOOTER` 新規スロット）を追加。
    - `/search` は AdSense ポリシー考慮で「検索結果 1 件以上 & 非検索中」の時のみ条件付き表示。
    - branch: `feature/adsense-all-pages`
