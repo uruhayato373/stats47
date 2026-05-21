@@ -10,8 +10,8 @@
  *           `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
  * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-05-18
- * 件数: 1953
+ * 最終生成日: 2026-05-21
+ * 件数: 1959
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -375,6 +375,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "dental-checkup-guidance-persons-per-1000",
   "dental-checkup-persons",
   "dental-checkup-persons-per-1000",
+  "dental-checkup-recipients",
   "dental-clinic-count",
   "dental-clinic-count-per-100k",
   "dental-clinic-count-per-100km2",
@@ -501,6 +502,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "fabric-softener-consumption-expenditure",
   "facility-equipment-consumption-expenditure",
   "factory-establishment-count",
+  "factory-industrial-park-rate",
+  "factory-location-area-annual",
   "farm-household-expenditure-per-month",
   "female-class-lecture-count-per-million-female",
   "female-scheduled-earnings",
@@ -695,6 +698,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "health-center-expenses-prefecture",
   "health-checkup-consumption-expenditure",
   "health-checkup-rate-lifestyle-diseases",
+  "health-checkup-recipients",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
   "health-physical-education-expenses-prefecture",
@@ -958,6 +962,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "marriages-per-total-population",
   "massage-fee-consumption-expenditure",
   "material-production",
+  "maternal-child-health-guidance",
   "maternal-health-guidance-per-100-births",
   "maternal-mortality-rate-per-100k-births",
   "maternity-hospital-consumption-expenditure",
@@ -1870,6 +1875,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "utilities-expenditure-ratio-multi-person-households",
   "vacant-housing-rate",
   "vacant-housing-ratio",
+  "vaccination-recipients-disease",
   "vacuum-cleaner-consumption-expenditure",
   "vacuum-cleaner-consumption-quantity",
   "vegetable-cultivation-area",

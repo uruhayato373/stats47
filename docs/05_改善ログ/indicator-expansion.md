@@ -3,7 +3,7 @@ type: improvement-log
 target_metric: indicator-count
 status: active
 created: 2026-05-19
-updated: 2026-05-19
+updated: 2026-05-21
 baseline: 1950
 goal: 2500
 goal_due: 2026-Q3
@@ -24,9 +24,9 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 
 | 指標 | baseline (2026-05-19) | 現在 | 目標 (2026 Q3) |
 |---|---|---|---|
-| active indicators 総数 | 1,950 | 1,978 | 2,500 |
+| active indicators 総数 | 1,950 | 1,984 | 2,500 |
 | 17 カテゴリ最小数 | 10 (miningindustry) | 10 | 30 |
-| backlog pending 件数 | 38 | 33 | 0 |
+| backlog pending 件数 | 38 | 26 | 0 |
 
 > KPI 注: backlog pending は G8 (2026-05-19) で 33 件の新規候補 (environment/transport/healthcare-detail/biomass/livestock/forestry 他) を append したため、BATCH-03 で 0 化したのち再び 33 へ増加。次回 batch 候補。
 
@@ -235,6 +235,65 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 ### 後続アクション (人間 / 別スキルで実施)
 
 - `/generate-known-ranking-keys` 実行 → BATCH-01/02/03 累計 28 keys を middleware に反映
+- `/sync-snapshots` で R2 へ反映 → 本番配信
+- 必要なら `/purge-cdn` で旧 ISR キャッシュをパージ
+
+---
+
+## [BATCH-2026-05-21-04] 7 件処理 → 6 件追加 (priority high)
+
+- **status**: partial (6/7 success, 1 failed: 非標準 area コード)
+- **deployed_at**: 2026-05-21
+- **executed_by**: `/expand-indicators --target 7 --priority high` (`.claude/scripts/management/ingest-indicator.mjs` + 補完スクリプト `/tmp/expand-indicators/ingest-factory.mjs` / `/tmp/expand-indicators/ingest-maternal.mjs`)
+- **tier**: 2
+- **target_metric**: indicator-count
+
+### 追加リスト
+
+| slug | category | theme | estat_id | rows | latest_year | status |
+|---|---|---|---|---|---|---|
+| bus-passenger-transport | safetyenvironment | (新規:transport) | 0003443768 | 0 | 2024 | **failed** (area codes are transport-district based, not 47-pref standard) |
+| factory-industrial-park-rate | construction | (新規:industry-loc) | 0003411445 | 47 | 2020 | done (9 prefs=0 補完: 青森/東京/福井/島根/徳島/長崎/大分/宮崎/沖縄) |
+| factory-location-area-annual | construction | (新規:industry-loc) | 0003411431 | 47 | 2020 | done (direct API ingest, getAreaMap 呼び出しを省略) |
+| health-checkup-recipients | socialsecurity | healthcare | 0004027740 | 47 | 2020 | done (allow_old, cdCat02=180 生活習慣病総数) |
+| vaccination-recipients-disease | socialsecurity | healthcare | 0004027806 | 47 | 2020 | done (allow_old, HPV第1回 cdCat02=380 cdCat03=000000) |
+| maternal-child-health-guidance | socialsecurity | healthcare | 0004027833 | 47 | 2020 | done (allow_old, cat03 全種別合計: 妊婦+産婦+乳児+幼児+その他) |
+| dental-checkup-recipients | socialsecurity | healthcare | 0004027738 | 47 | 2020 | done (allow_old, cdCat02=140 cdCat03-05 全て総数) |
+
+### 結果
+
+- 追加成功: 6 件 / 失敗: 1 件 / skip (既存): 0 件
+- backlog 残: pending=26 / failed=12 / done=34 (前: pending=33 / failed=11 / done=28)
+- 累計 active indicators: 1,978 → 1,984 (+6)
+
+### 想定効果 (`.claude/rules/evidence-based-judgment.md` 準拠)
+
+- **想定**: 6 ranking_key × ~1.5 page/key = 約 9 新規 URL 増。GSC impressions は新規 ranking_key 平均 +5-15 impressions/月/key を想定 [根拠: BATCH-01/02/03 と同基準。construction カテゴリ 2 件追加 / socialsecurity healthcare 4 件追加]
+- **検証コマンド**:
+  - URL 公開後: `/fetch-gsc-data last28d page snapshot 2026-W27` で path に `factory-industrial-park-`/`factory-location-`/`health-checkup-`/`vaccination-`/`maternal-child-`/`dental-checkup-` を grep
+  - D1 検証 (済): 6 keys × 47 rows = 282 rows を確認 (`active_metrics_after = 1984`)
+- **検証期日**: 2026-06-18 (28d 後)
+- **判定**: `effect/pending` (本番反映後 28d で GSC impressions / clicks を再評価)
+
+### 失敗 candidate (1 件)
+
+- `bus-passenger-transport` (0003443768): 「自動車輸送統計年報」の area 次元は輸送局管轄区域コード (00001-00054、00002=札幌 / 00009=青森 etc.) で 47 都道府県標準コード (`01000`-`47000`) に対応しない。54 地域は都道府県を複数分割した輸送局割り当てのため 47 都道府県への集約が不可。都道府県別バス輸送量は e-Stat の別調査 (道路統計年報 or 国交省公表データ) を探す必要あり
+- → backlog status を `failed` に更新済
+
+### 既知の注意点 (本バッチで顕在化)
+
+- **ingest-indicator.mjs の getAreaMap + fetchData 連続呼び出し問題**: 単体実行では 47 prefs 取得可能な `0003411431` でも、バッチ 7 件実行中の 3 件目では 42 prefs しか取得できないケースが複数回再現。API rate limit による応答欠損と推測。回避策として `getAreaMap` 呼び出しを省略し `PREF_NAMES_BY_CODE` ハードコードマップで直接 fetch するスクリプト (`/tmp/expand-indicators/ingest-factory.mjs`) を使用。今後バッチ実行は `--sleep-ms 20000` 以上を検討
+- **衛生行政報告例 (0004027xxx) の cat03 に 「総数」コードが存在しない**: メタ上 `cat03=100=総数` と表示されるが実データには含まれない。個別 cat03 値の合算が必要。`ingest-indicator.mjs` は合算未対応のため、事後補完スクリプト (`/tmp/expand-indicators/ingest-maternal.mjs`) で集計して INSERT
+- **工業団地立地率 (0003411445) の欠損 9 件は真の 0**: 工業団地が存在しない都道府県（青森/東京/福井/島根/徳島/長崎/大分/宮崎/沖縄）のデータが API に存在しない。漁業統計と同パターンで 0 補完 + `metrics.subtitle` 追記が望ましい（本バッチでは subtitle 更新未実施）
+
+### 次回 batch 推奨
+
+- 残 pending: medium 26 件 (dental-hygienist-by-prefecture / midwife-by-prefecture / pharmacy-count 等)
+- 推奨実行: `/expand-indicators --target 10 --priority medium`
+
+### 後続アクション (人間 / 別スキルで実施)
+
+- `/generate-known-ranking-keys` 実行 → BATCH-01/02/03/04 累計 34 keys を middleware に反映
 - `/sync-snapshots` で R2 へ反映 → 本番配信
 - 必要なら `/purge-cdn` で旧 ISR キャッシュをパージ
 
