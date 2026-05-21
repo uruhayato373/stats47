@@ -1,6 +1,7 @@
 {
   "description": "note.com 公開済み記事の slug -> URL 対応表。回遊フッタ・本文内部リンク (../slug/draft.md) を note URL に書き換える際の参照元。記事を公開するたびに追記する。",
   "updated": "2026-05-21",
+  "batch1_update": "2026-05-21: koumuin #01-#05 を update モードで再更新 (バッチ1)。カバーを料金バッジ除去版に差し替え、本文を修正済み draft.md で再ペースト、画像を全挿入 (#01:10 / #02:6 / #03:8 / #04:10 / #05:7 枚)、有料3記事 (#01/#03/#05) の有料エリア境界を有料セクション1直前に再設定 (¥300 据え置き)、無料2記事 (#02/#04) は試し読みエリアを記事末尾に設定 (全文無料)、全5本をマガジン公務員×Claude Code実務活用ガイドに追加。",
   "note": "2026-05-20: koumuin-claude-code #00/#02/#29 を誤って note.com/dobokunote (誤アカウント) に公開。ロールバックのため articles をクリアし 3 本のディレクトリを docs/ に戻した。note.com 側の記事削除/下書き化はユーザーが手動対応。2026-05-20: #00 を正しいアカウント note.com/stats47 に試験公開。2026-05-21: #00 を修正済み draft.md (旧価格 ¥1,500 → ¥300 全 14 箇所) で update モード初回実行で更新。2026-05-21: #01-#05 を update モードで復旧 — アイキャッチを価格なし再生成版に差し替え、本文画像を全挿入 (#01:12 / #02:6 / #03:9 / #04:11 / #05:7 枚)、有料3記事 (#01/#03/#05) の有料エリア境界を再設定 (価格 ¥300 据え置き)。",
   "articles": {
     "00-claude-code-intro-for-public-servants": {
@@ -20,6 +21,7 @@
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21"
     },
+    "_comment_batch1": "2026-05-21 batch1 update: #01-#05 を update モードで再更新 (カバー差し替え・本文再ペースト・画像再挿入・有料境界再設定・マガジン追加)",
     "02-internal-network-workarounds": {
       "vertical": "koumuin-claude-code",
       "title": "庁内ネットワークで Claude Code を動かす 3 つの抜け道",
@@ -55,6 +57,122 @@
       "price_jpy": 300,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21"
+    },
+    "06-ordinance-revision-review": {
+      "vertical": "koumuin-claude-code",
+      "title": "条例改正案を Claude Code でレビュー: 矛盾検出 + 文体統一",
+      "url": "https://note.com/stats47/n/ne23e18ce9289",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-21"
+    },
+    "31-claude-code-how-to-ask": {
+      "vertical": "koumuin-claude-code",
+      "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
+      "url": "https://note.com/stats47/n/n159230eb514c",
+      "is_paid": false,
+      "published_at": "2026-05-21"
+    },
+    "32-claude-skills-getting-started": {
+      "vertical": "koumuin-claude-code",
+      "title": ".claude/skills 入門 — 一度うまくいった頼み方を職場の資産にする",
+      "url": "https://note.com/stats47/n/nac5e44284865",
+      "is_paid": false,
+      "published_at": "2026-05-21"
+    },
+    "07-official-doc-skills": {
+      "vertical": "koumuin-claude-code",
+      "title": "公文書ライティングを校正させる .claude/skills 完全版",
+      "url": "https://note.com/stats47/n/n1c78ab40901f",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "price_jpy": 300
+    },
+    "08-proposal-doc-checklist-20": {
+      "vertical": "koumuin-claude-code",
+      "title": "起案文・決裁文の AI 査読チェックリスト 20 項目",
+      "url": "https://note.com/stats47/n/n59c27bbc973e",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "price_jpy": 300
+    },
+    "09-assembly-question-points": {
+      "vertical": "koumuin-claude-code",
+      "title": "議会一般質問の論点整理を 1 時間 → 10 分にする方法",
+      "url": "https://note.com/stats47/n/nc276079a5317",
+      "is_paid": false,
+      "published_at": "2026-05-21"
+    },
+    "10-ai-without-personal-info": {
+      "vertical": "koumuin-claude-code",
+      "title": "個人情報を Claude に送らずに AI 活用する 3 つの設定",
+      "url": "https://note.com/stats47/n/n9b2109c9f964",
+      "is_paid": false,
+      "published_at": "2026-05-21"
+    },
+    "11-hooks-personal-info-masking": {
+      "vertical": "koumuin-claude-code",
+      "title": "Claude Code Hooks で個人情報マスキングを自動化する",
+      "url": "https://note.com/stats47/n/ne54920337944",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "price_jpy": 300
+    },
+    "12-audit-ready-settings": {
+      "vertical": "koumuin-claude-code",
+      "title": "監査に耐える AI 活用ログを残す .claude/settings.json",
+      "url": "https://note.com/stats47/n/nc53fa60114f8",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "price_jpy": 300
+    },
+    "13-ollama-offline-local-llm": {
+      "vertical": "koumuin-claude-code",
+      "title": "ローカル LLM (Ollama) × Claude Code で完全オフライン業務",
+      "url": "https://note.com/stats47/n/n1e72ba0b4a43",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-22"
+    },
+    "14-excel-budget-aggregation": {
+      "vertical": "koumuin-claude-code",
+      "title": "Excel 予算ファイルを Claude Code で集計 (pandas / DuckDB 経由)",
+      "url": "https://note.com/stats47/n/nc6e02fbe6073",
+      "is_paid": false,
+      "published_at": "2026-05-22"
+    },
+    "15-data-preprocessing-intro": {
+      "vertical": "koumuin-claude-code",
+      "title": "統計データ加工: 公務員のための Claude Code × データ前処理入門",
+      "url": "https://note.com/stats47/n/naf04e81afb7b",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-22"
+    },
+    "16-subsidy-doc-consistency": {
+      "vertical": "koumuin-claude-code",
+      "title": "補助金申請書類の整合性チェックを Claude Code で",
+      "url": "https://note.com/stats47/n/nb62db0d2826f",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-22"
+    },
+    "17-year-on-year-analysis": {
+      "vertical": "koumuin-claude-code",
+      "title": "決算書類の前年比較分析を 5 分で出す手順",
+      "url": "https://note.com/stats47/n/n5afa58e8e1e4",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-22"
+    },
+    "18-pr-magazine-rewrite": {
+      "vertical": "koumuin-claude-code",
+      "title": "広報誌の原稿を Claude Code でリライト: 読みやすさスコア化",
+      "url": "https://note.com/stats47/n/nef4df902db37",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-05-22"
     }
-  }
+  },
+  "batch2_update": "2026-05-21: koumuin #07-#12 を新規公開 (バッチ2)。有料4記事 (#07/#08/#11/#12 各¥300) は有料エリア境界を この続きは有料パートです 直前に設定、無料2記事 (#09/#10) は試し読みラインを記事末尾に設定 (全文無料)。本文画像を全挿入 (#07:5 / #08:5 / #09:5 / #10:4 / #11:7 / #12:5 枚)、全6本をマガジン 公務員×Claude Code実務活用ガイド に追加。#11/#12 で **「」** 形式の太字が note 上で literal ** として残る軽微なレンダリング崩れあり (本文内容は完全、bold スタイルのみ欠落)。"
 }

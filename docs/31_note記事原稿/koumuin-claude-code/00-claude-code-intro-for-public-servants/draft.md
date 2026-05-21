@@ -31,9 +31,9 @@ Word・Excel・庁内メールしか触ってこなかった公務員にとっ�
 - Claude Code が「具体的に何をしてくれる道具か」(ChatGPT との違いを含む)
 - なぜ公務員業務と相性がよいのか
 - 個人利用なら追加料金なしで試せること、組織導入の現実的な道筋
-- 全 30 本のシリーズ記事をどう読み進めるか、最初の 1 本はどれか
+- 全 33 本のシリーズ記事をどう読み進めるか、最初の 1 本はどれか
 
-身構える必要はありません。Claude Code は「黒い画面に呪文を打ち込むツール」ではなく、**「日本語で頼むと PC の中で実際に手を動かしてくれる AI」**です。
+身構える必要はありません。Claude Code は「黒い画面に呪文を打ち込むツール」ではなく、「日本語で頼むと PC の中で実際に手を動かしてくれる AI」です。
 
 最初の 1 時間は環境構築に戸惑うかもしれませんが、それを超えると「これは Excel マクロより素直で、しかも応用範囲がはるかに広い」と感じる方が多いようです。
 
@@ -43,7 +43,7 @@ Word・Excel・庁内メールしか触ってこなかった公務員にとっ�
 
 ## そもそも Claude Code とは何か
 
-ひとことで言うと、Claude Code は **「文章で頼むと、PC の中で実際に作業してくれる AI 道具」** です。
+ひとことで言うと、Claude Code は 「文章で頼むと、PC の中で実際に作業してくれる AI 道具」 です。
 
 Anthropic 社が提供する Claude という AI を、ブラウザ越しの「会話」ではなく、自分の PC のファイルやコマンドに直接アクセスさせる形で動かせます。
 
@@ -62,7 +62,7 @@ ChatGPT との違いをイメージしやすく整理すると次のようにな
 
 身構えてしまう方も多いのですが、毎日コマンドを 20 個も覚える必要はありません。**実務で頻繁に使うのは 3-5 個程度**で、残りは Claude Code 自身に「こういうことをしたい」と日本語で頼めば代わりにやってくれます。
 
-「コマンドを覚える IT スキル」ではなく**「やりたいことを言語化するスキル」**のほうがずっと重要です。
+「コマンドを覚える IT スキル」ではなく「やりたいことを言語化するスキル」のほうがずっと重要です。
 
 具体例をひとつ。1 時間の打ち合わせを録音した mp3 がデスクトップにあるとします。
 
@@ -70,7 +70,7 @@ ChatGPT との違いをイメージしやすく整理すると次のようにな
 
 詳しい手順は [#04 議事録 30 分 → 5 分にした手順](../04-meeting-minutes-30min-to-5min/draft.md) で解説しています。
 
-**「黒い画面（ターミナル）は必須ではない」** という点も、最初に知っておくと安心です。Claude Code はターミナル専用ツールではなく、**VS Code という無料のソフト（コードエディタ）の中で使うこともできます**。
+「黒い画面（ターミナル）は必須ではない」 という点も、最初に知っておくと安心です。Claude Code はターミナル専用ツールではなく、**VS Code という無料のソフト（コードエディタ）の中で使うこともできます**。
 
 VS Code には画面下部に開く「統合ターミナル」と、左側のファイル一覧表示があり、Claude Code が作ったファイルを Word のような GUI 感覚で目視確認しながら作業できます。単独の真っ黒な画面と向き合う必要はありません。
 
@@ -106,7 +106,7 @@ Claude Code の「skill」(やり方を覚えさせる仕組み) を使えば、
 
 なお、Claude Code を導入したからといって職員数が減らせるわけではありません。圧縮された時間は、本来やるべき政策立案、住民対応、現場視察に振り向けるための時間として捉えるのが現実的です。
 
-**「AI で楽になる」ではなく「AI で本来業務に時間を戻す」**という説明軸のほうが、上司・議会・住民への説得力が高いという声もあります。
+「AI で楽になる」ではなく「AI で本来業務に時間を戻す」という説明軸のほうが、上司・議会・住民への説得力が高いという声もあります。
 
 ## 「個人でも企業でも無料で使える」これが最大の魅力
 
@@ -171,7 +171,7 @@ Claude Code は商用利用も明示的に認められています。組織で�
 
 ChatGPT で「Excel の関数を教えて」と聞いて自分で打ち込むより、Claude Code に「この Excel に前年比列を追加して」と頼んだほうが**圧倒的に速い**、という構図です。
 
-多くの公務員にとっては「ChatGPT は使ったことある」状態でしょうから、**Claude Code は「ChatGPT が PC を操作できるようになった版」** と理解すると最も速く腹落ちします。
+多くの公務員にとっては「ChatGPT は使ったことある」状態でしょうから、Claude Code は「ChatGPT が PC を操作できるようになった版」 と理解すると最も速く腹落ちします。
 
 ![ChatGPT と Claude Code の使い分け（得意分野の比較）](./images/infographic-1-chatgpt-vs-claude-code.png)
 <!-- SVG: infographic | ChatGPT と Claude Code の使い分け -->
@@ -183,7 +183,7 @@ ChatGPT で「Excel の関数を教えて」と聞いて自分で打ち込むよ
 
 両方契約しても月 5,000-6,000 円程度に収まるため、まずは ChatGPT で AI 慣れ → Claude Code でファイル操作を覚える、という段階で進めるのが無理のない順序です。
 
-**「ターミナルすら不安」という方へ — Claude Desktop という選択肢**
+「ターミナルすら不安」という方へ — Claude Desktop という選択肢
 
 Claude には、ここまで紹介したブラウザ版 (ChatGPT に相当する Claude.ai) と Claude Code のほかに、**Claude Desktop** という GUI のデスクトップアプリもあります。
 
@@ -199,66 +199,74 @@ Claude Desktop は「ファイルを自動で整える・繰り返し作業を�
 
 なお本シリーズの主役はあくまで Claude Code です — 議事録自動化や Excel 集計といった実務の時短は、ファイルを実際に操作できる Claude Code でこそ実現できるからです。
 
-## このシリーズの読み方 (全 30 本のロードマップ)
+## このシリーズの読み方 (全 33 本のロードマップ)
 
-本シリーズは公務員 × Claude Code をテーマに全 30 本で構成されています。**すべて読む必要はなく、関心のある章から拾い読みする前提**で書かれています。
+本シリーズは公務員 × Claude Code をテーマに全 33 本で構成されています。**すべて読む必要はなく、関心のある章から拾い読みする前提**で書かれています。
 
-全体像を 5 段階に整理すると次のとおりです。
+全体像を基礎編と 5 段階に整理すると次のとおりです。
 
-![公務員 × Claude Code シリーズ全 30 本のロードマップ（5 段階）](./images/infographic-2-series-roadmap.png)
-<!-- SVG: infographic | シリーズ全 30 本のロードマップ -->
+![公務員 × Claude Code シリーズ全 33 本のロードマップ（基礎編 + 5 段階）](./images/infographic-2-series-roadmap.png)
+<!-- SVG: infographic | シリーズ全 33 本のロードマップ -->
+
+**基礎編: 頼み方・スキル設計 (#31-#32)**
+
+Claude Code を使いこなす土台。「どう頼めば期待どおりの結果が返るか」と「うまくいった頼み方をどう仕組みにするか」を解説する段階。導入記事 (#00) を読んだら最初に読むのがおすすめで、以降のどの記事にも効いてきます。
+
+- [#31 Claude Code への頼み方](../31-claude-code-how-to-ask/draft.md)
+- [#32 .claude/skills 入門](../32-claude-skills-getting-started/draft.md)
 
 **段階 1: 環境構築段階 (#01-#03)**
 
 Claude Code を自分の PC で動かせる状態まで持っていく段階。庁内ネットワークの制約や IT 担当への説明資料も含む。
 
-- [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md) (有料)
-- [#02 庁内ネットワーク対策](../02-internal-network-workarounds/draft.md) (無料)
-- [#03 IT 担当向け説明資料](../03-it-dept-security-doc/draft.md) (有料)
+- [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md)
+- [#02 庁内ネットワーク対策](../02-internal-network-workarounds/draft.md)
+- [#03 IT 担当向け説明資料](../03-it-dept-security-doc/draft.md)
 
 **段階 2: 文書作成段階 (#04-#09)**
 
 議事録・答弁書・条例・起案文など、自治体業務の中核である文書作成を Claude Code で圧縮する段階。読者がもっとも成果を実感しやすい領域。
 
-- [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md) (無料)
-- [#05 議会答弁 prompt 集](../05-assembly-answer-prompts/draft.md) (有料)
-- [#06 条例改正レビュー](../06-ordinance-revision-review/draft.md) (有料)
-- [#07 公用文スキル化](../07-official-doc-skills/draft.md) (有料)
-- [#08 起案文チェックリスト 20](../08-proposal-doc-checklist-20/draft.md) (有料)
-- [#09 一般質問論点整理](../09-assembly-question-points/draft.md) (無料)
+- [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md)
+- [#05 議会答弁 prompt 集](../05-assembly-answer-prompts/draft.md)
+- [#06 条例改正レビュー](../06-ordinance-revision-review/draft.md)
+- [#07 公用文スキル化](../07-official-doc-skills/draft.md)
+- [#08 起案文チェックリスト 20](../08-proposal-doc-checklist-20/draft.md)
+- [#09 一般質問論点整理](../09-assembly-question-points/draft.md)
 
 **段階 3: セキュリティ段階 (#10-#13)**
 
 個人情報・機密情報を AI に送らないための設定。業務利用に進む前に必読の段階。
 
-- [#10 個人情報を送らない設定](../10-ai-without-personal-info/draft.md) (無料)
-- [#11 Hooks による自動マスキング](../11-hooks-personal-info-masking/draft.md) (有料)
-- [#12 監査に耐える設定](../12-audit-ready-settings/draft.md) (有料)
-- [#13 Ollama でオフライン LLM](../13-ollama-offline-local-llm/draft.md) (有料)
+- [#10 個人情報を送らない設定](../10-ai-without-personal-info/draft.md)
+- [#11 Hooks による自動マスキング](../11-hooks-personal-info-masking/draft.md)
+- [#12 監査に耐える設定](../12-audit-ready-settings/draft.md)
+- [#13 Ollama でオフライン LLM](../13-ollama-offline-local-llm/draft.md)
 
 **段階 4: データ・PR・自動化段階 (#14-#25)**
 
 Excel 集計、データ前処理、広報誌リライト、FAQ 生成、MCP 連携、Excel VBA からの移行など、応用編。
 
-- [#14 Excel 予算集計](../14-excel-budget-aggregation/draft.md) (無料) ほか #15-#25
+- [#14 Excel 予算集計](../14-excel-budget-aggregation/draft.md) ほか #15-#25
 
 **段階 5: 組織・キャリア段階 (#26-#30)**
 
 上司への説明、庁内勉強会、AI 懐疑派への対応、副業せず評価される働き方、退職後キャリア。
 
-- [#26 上司への説明資料](../26-boss-approval-deck/draft.md) (有料) ほか #27-#30
+- [#26 上司への説明資料](../26-boss-approval-deck/draft.md) ほか #27-#30
 
-**まず読むべき 5 本 (MVP)**
+**まず読むべき本 (MVP)**
 
-すべてを順に読まなくても構いません。次の 5 本がシリーズの軸で、INDEX でも MVP として位置付けられています。
+すべてを順に読まなくても構いません。次の本がシリーズの軸で、INDEX でも MVP として位置付けられています。
 
-1. [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md) (無料) — 効果を実感しやすい入口
-2. [#10 個人情報を送らない設定](../10-ai-without-personal-info/draft.md) (無料) — 業務利用の前提
-3. [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md) (有料) — 実際に動かしたい人向け
-4. [#05 議会答弁 prompt 集](../05-assembly-answer-prompts/draft.md) (有料) — 議会事務局・政策担当向け
-5. [#09 一般質問論点整理](../09-assembly-question-points/draft.md) (無料) — 議員担当・議事課向け
+1. [#31 Claude Code への頼み方](../31-claude-code-how-to-ask/draft.md) ・ [#32 .claude/skills 入門](../32-claude-skills-getting-started/draft.md) — 全記事に共通する土台
+2. [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md) — 効果を実感しやすい入口
+3. [#10 個人情報を送らない設定](../10-ai-without-personal-info/draft.md) — 業務利用の前提
+4. [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md) — 実際に動かしたい人向け
+5. [#05 議会答弁 prompt 集](../05-assembly-answer-prompts/draft.md) — 議会事務局・政策担当向け
+6. [#09 一般質問論点整理](../09-assembly-question-points/draft.md) — 議員担当・議事課向け
 
-「無料記事だけ拾い読みする」のも有効です。無料 7 本だけで全体像はつかめる構成になっています。
+「無料記事だけ拾い読みする」のも有効です。無料記事だけでも全体像はつかめる構成になっています。
 
 ## 公務員のための用語ミニ辞典
 
@@ -277,25 +285,25 @@ Excel 集計、データ前処理、広報誌リライト、FAQ 生成、MCP 連
 
 ここまで読んで「やってみたい」と思った方向けに、次に読むべき記事を 3 パターンで案内します。
 
-**「実際に手を動かしてみたい派」**
+「実際に手を動かしてみたい派」
 
-→ [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md) (有料)
+→ [#01 環境構築完全版](../01-claude-code-setup-complete/draft.md)
 
 Mac / Windows それぞれの環境構築手順を網羅。会社 PC で使うためのプロキシ設定 (手順 4) まで含むので、最終的に職場の実務で動かす状態まで持っていけます。まず雰囲気だけ掴みたい場合は、プロキシ設定が不要な私物 PC で 30 分ほどのお試しから始める手順も書いています。
 
-**「まず無料で雰囲気を知りたい派」**
+「まず無料で雰囲気を知りたい派」
 
-→ [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md) (無料) または [#02 庁内ネットワーク対策](../02-internal-network-workarounds/draft.md) (無料)
+→ [#04 議事録 30 分 → 5 分](../04-meeting-minutes-30min-to-5min/draft.md) または [#02 庁内ネットワーク対策](../02-internal-network-workarounds/draft.md)
 
 #04 は「実際に何ができるのか」を最も具体的に示した記事です。読むだけで業務イメージがつかめます。庁内ネットワーク制約が気になる方は #02 から。
 
-**「組織で導入したい派」**
+「組織で導入したい派」
 
-→ [#26 上司への説明資料](../26-boss-approval-deck/draft.md) (有料)
+→ [#26 上司への説明資料](../26-boss-approval-deck/draft.md)
 
 そのまま管理職への説明資料のたたき台として使える内容。AI 懐疑派の反論パターンと回答例も含まれています ([#28 AI 懐疑派への Q&A](../28-ai-skeptic-qa/draft.md) も併読推奨)。
 
-全 30 本の一覧と進捗管理は [シリーズ INDEX](../INDEX.md) からたどれます。
+全 33 本の一覧と進捗管理は [シリーズ INDEX](../INDEX.md) からたどれます。
 
 Claude Code は最初の 1 時間が一番ハードですが、そこを越えれば「もう Excel マクロには戻れない」と感じる方が多い道具です。本シリーズが、その最初の 1 時間の伴走になれば幸いです。
 
@@ -305,7 +313,7 @@ Claude Code は最初の 1 時間が一番ハードですが、そこを越え�
 
 ## 「公務員 × Claude Code」シリーズ
 
-本記事は、自治体職員が Claude Code を日々の業務に活かすための全 31 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
+本記事は、自治体職員が Claude Code を日々の業務に活かすための全 33 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
 
 シリーズの全記事はマガジンにまとめています。他の記事はこちらからどうぞ。
 

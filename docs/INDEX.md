@@ -18,7 +18,8 @@
 | `21_ブログ記事原稿/` | ブログ記事の下書き原稿 | 蓄積 |
 | `22_YouTube企画/` | YouTube 通常動画の企画 | `backlog/<theme>.md` 蓄積 |
 | `30_note記事企画/` | note 記事の企画・戦略 (+ backlog) | 蓄積 |
-| `31_note記事原稿/` | note 記事の下書き原稿 | 公開後 `.local/r2/note/` へ移動し削除 |
+| `31_note記事原稿/` | note 記事の下書き原稿（制作中ヴァーティカル） | ヴァーティカル全記事公開後 `32_note公開済み/` へ移動 |
+| `32_note公開済み/` | note で公開完了したヴァーティカルの記事ソース | ヴァーティカル単位で移動・修正は `--update` |
 | `40_アフィリエイト管理/` | アフィリエイト商材・配置管理 | 内容更新 |
 | `50_Issues/` | 未着手の機能・自動化・UI 改善 backlog | `feature-backlog.md` / `automation-backlog.md` / `ui-improvements.md` |
 
