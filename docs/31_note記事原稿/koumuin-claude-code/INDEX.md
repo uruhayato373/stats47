@@ -2,28 +2,36 @@
 type: note-draft-index
 vertical: koumuin-claude-code
 created: 2026-05-18
-updated: 2026-05-19
+updated: 2026-05-21
 status: ready-to-publish-qa-passed
-total_drafts: 31
-total_chars: 326827
-total_svgs: 97
+total_drafts: 33
+total_chars: 340608
+total_svgs: 179
 total_screenshot_guides: 30
-total_screenshot_shots: 35
+total_screenshot_shots: 0
 total_info_markers: 0
 narrator_first_person: 0
 broken_internal_links: 0
 phase5_critical_fixes: 25
-free_count: 8
+free_count: 10
 paid_count: 23
-mvp_picks: [00, 01, 04, 05, 09, 10]
+mvp_picks: [00, 31, 32, 04, 05, 09, 10]
 tags: [koumuin, claude-code, draft-index]
 ---
 
 # 公務員 × Claude Code note 記事ドラフト INDEX
 
-新バーティカル「公務員 × Claude Code × 仕事効率化」量産プロジェクト。**Phase 0-4 完了、全 31 本 (導入記事 #00 + 量産 30 本) が `ready-to-publish` 状態**。残るは MVP 5 本のスクリーンショット撮影 + SVG→PNG 変換 + note 投稿のみ。
+新バーティカル「公務員 × Claude Code × 仕事効率化」量産プロジェクト。**全 33 本 (導入 #00 + 基礎編 #31/#32 + 量産 30 本)、全本 `ready-to-publish`**。
 
-2026-05-19 追加: ターミナル未経験者向け導入記事 #00 を新設、既存 30 本 (01-30) に「次に読む」回遊フッタを追加。すべての記事が #00 と隣接 2 記事へリンクするようになった。
+2026-05-19 追加: ターミナル未経験者向け導入記事 #00 を新設、既存 30 本 (01-30) に「次に読む」回遊フッタを追加。
+
+2026-05-21 追加: 基礎編 #31「Claude Code への頼み方」/ #32「.claude/skills 入門」を新設・完成 (本文 + SVG 3 + カバー 2)。シリーズが業務別レシピに偏り、横断的な「頼み方・スキル設計」の土台が欠けていた問題への対応。あわせて技術成果物 (curl/SQL/script) 依存が強い 15 本 (#04-09, #14-22) の「はじめに」直後に「📌 この記事の読み方」コールアウトを挿入し #31/#32 へ送客 (本文は不変更の外科的追加)。
+
+2026-05-21 追加 (料金情報の脱・本文化): 価格改定時の更新コストを下げるため、有料/無料の表示を記事コンテンツから除去。全 33 カバー画像から料金バッジを削除し PNG 再生成、本文中のリンク隣接タグ・リスト先頭タグ計 42 個を除去。料金の真実源は **frontmatter (`is_paid`/`price_jpy`) + 本 INDEX の区分列 + note 自身の表示** に一本化。記事自身の paywall 構造に言及する本文記述 (「有料セクション N で…」等、6 箇所) と Claude プラン料金の言及は保持。
+
+2026-05-21 追加 (#00 ハブ統合): 導入記事 #00 が基礎編を案内していなかったため、ロードマップに「基礎編 (#31-#32)」ブロックを追加、MVP リストに #31/#32 を追記、本文の「全 30 本」表記を「全 33 本」に統一、ロードマップ infographic を基礎編入り (6 行構成) に再生成。
+
+2026-05-21 追加 (スクリーンショット脱プレースホルダー): 実画面キャプチャの代替だったスクリーンショット SVG 35 枚を整理。端末・コマンド出力・コード系 25 枚は内容を本文と一致させた「端末風図版」として確定 (本文マーカーを `screenshot`→`terminal` に変更)。第三者アプリ GUI 系 (Anthropic コンソール / VS Code / iPhone / Excel / 財務システム / 文書・スライド) 10 枚は実キャプチャ必須で代替不能のため削除し本文を調整。結果、**全 33 本がプレースホルダー画像ゼロ・壊れリンクゼロ・孤立ファイルゼロ**で投稿可能。**これに伴い下記『次のアクション』『Phase 5』のスクリーンショット撮影・撮影ガイド・SVG→PNG 変換に関する手順は無効** (撮影工程は廃止、画像は全て生成・変換済)。
 
 ## 親計画
 
@@ -47,12 +55,12 @@ tags: [koumuin, claude-code, draft-index]
 | # | slug | カテゴリ | 区分 | 文字数 | 💡 | 📸 | 📊 | MVP |
 |---|---|---|---|---|---|---|---|---|
 | 00 | claude-code-intro-for-public-servants | intro | 無料 | 9,724 | 0 | 0 | 2 | ★ |
-| 01 | claude-code-setup-complete | setup | 有料 ¥300 | 13,214 | 18 | 5 | 5 | |
+| 01 | claude-code-setup-complete | setup | 有料 ¥300 | 13,214 | 18 | 3 | 5 | |
 | 02 | internal-network-workarounds | setup | 無料 | 6,990 | 8 | 0 | 4 | |
-| 03 | it-dept-security-doc | setup | 有料 ¥300 | 10,551 | 14 | 1 | 4 | |
-| 04 | meeting-minutes-30min-to-5min | documents | 無料 | 8,759 | 11 | 3 | 4 | ★ |
+| 03 | it-dept-security-doc | setup | 有料 ¥300 | 10,551 | 14 | 0 | 4 | |
+| 04 | meeting-minutes-30min-to-5min | documents | 無料 | 8,759 | 11 | 2 | 4 | ★ |
 | 05 | assembly-answer-prompts | documents | 有料 ¥300 | 12,454 | 14 | 1 | 5 | ★ |
-| 06 | ordinance-revision-review | documents | 有料 ¥300 | 9,864 | 13 | 2 | 3 | |
+| 06 | ordinance-revision-review | documents | 有料 ¥300 | 9,864 | 13 | 1 | 3 | |
 | 07 | official-doc-skills | documents | 有料 ¥300 | 8,351 | 10 | 1 | 3 | |
 | 08 | proposal-doc-checklist-20 | documents | 有料 ¥300 | 7,436 | 9 | 1 | 2 | |
 | 09 | assembly-question-points | documents | 無料 | 6,625 | 9 | 2 | 3 | ★ |
@@ -61,9 +69,9 @@ tags: [koumuin, claude-code, draft-index]
 | 12 | audit-ready-settings | security | 有料 ¥300 | 10,420 | 8 | 1 | 3 | |
 | 13 | ollama-offline-local-llm | security | 有料 ¥300 | 10,143 | 8 | 1 | 3 | |
 | 14 | excel-budget-aggregation | data | 無料 | 7,798 | 6 | 1 | 2 | |
-| 15 | data-preprocessing-intro | data | 有料 ¥300 | 10,263 | 8 | 1 | 3 | |
+| 15 | data-preprocessing-intro | data | 有料 ¥300 | 10,263 | 8 | 0 | 3 | |
 | 16 | subsidy-doc-consistency | data | 有料 ¥300 | 8,635 | 7 | 1 | 3 | |
-| 17 | year-on-year-analysis | data | 有料 ¥300 | 6,557 | 6 | 1 | 3 | |
+| 17 | year-on-year-analysis | data | 有料 ¥300 | 6,557 | 6 | 0 | 3 | |
 | 18 | pr-magazine-rewrite | pr | 有料 ¥300 | 7,193 | 5 | 1 | 3 | |
 | 19 | faq-auto-generation | pr | 無料 | 5,114 | 3 | 1 | 2 | |
 | 20 | complaint-reply-patterns | pr | 有料 ¥300 | 7,023 | 5 | 1 | 3 | |
@@ -71,12 +79,16 @@ tags: [koumuin, claude-code, draft-index]
 | 22 | monthly-routine-skills | automation | 有料 ¥300 | 8,970 | 6 | 1 | 3 | |
 | 23 | mcp-internal-system | automation | 有料 ¥300 | 11,736 | 6 | 1 | 4 | |
 | 24 | subagents-parallel-research | automation | 有料 ¥300 | 9,133 | 6 | 1 | 3 | |
-| 25 | excel-vba-to-python | automation | 有料 ¥300 | 12,594 | 6 | 1 | 3 | |
-| 26 | boss-approval-deck | organization | 有料 ¥300 | 11,585 | 7 | 1 | 4 | |
-| 27 | internal-study-30min | organization | 有料 ¥300 | 9,752 | 7 | 1 | 3 | |
+| 25 | excel-vba-to-python | automation | 有料 ¥300 | 12,594 | 6 | 0 | 3 | |
+| 26 | boss-approval-deck | organization | 有料 ¥300 | 11,585 | 7 | 0 | 4 | |
+| 27 | internal-study-30min | organization | 有料 ¥300 | 9,752 | 7 | 0 | 3 | |
 | 28 | ai-skeptic-qa | organization | 有料 ¥300 | 9,863 | 7 | 0 | 3 | |
 | 29 | evaluated-without-side-job | career | 無料 | 5,816 | 5 | 0 | 3 | |
 | 30 | post-retirement-career | career | 有料 ¥300 | 10,745 | 8 | 0 | 3 | |
+| 31 | claude-code-how-to-ask | basics | 無料 | 7,401 | 0 | 0 | 1 | ★ |
+| 32 | claude-skills-getting-started | basics | 無料 | 6,380 | 0 | 0 | 2 | ★ |
+
+> **基礎編 #31 / #32 について (2026-05-21 追加)**: シリーズが「業務ごとのレシピ集」に偏り、横断的な「頼み方・スキル設計」の土台記事が欠けていたため新設。番号は採番の都合で末尾だが、**推奨読書順は #00 → #31 → #32 → use-case 群**。両記事とも無料 (集客上流)。#31 は #04/#05 等の prompt 解説へ、#32 は #07/#22/#23 の skill 解説へ送客する。両記事とも `ready-to-publish`: SVG 3 個 + カバー 2 枚生成済 (cover 重なり検証 pass)、SS は不要 (0 ショット)。note 投稿のみ残。
 
 ## ディレクトリ構成
 
@@ -191,21 +203,21 @@ done
 
 | 指標 | 値 |
 |---|---|
-| 総ドラフト数 | 31 (導入 #00 + 量産 30、全て `ready-to-publish`) |
-| 総文字数 | 326,827 字 (#00 = 9,724 字 + 30 本 = 317,103 字) |
+| 総ドラフト数 | 33 (導入 #00 + 基礎編 #31/#32 + 量産 30) |
+| 総文字数 | 340,608 字 (#00 = 9,724 + 量産 30 = 317,103 + 基礎編 2 = 13,781) |
 | 一次情報マーカー残存 | 0 個 (Phase 4 で全 170 個を第三者視点に置換) |
 | 行頭ナレーター一人称残存 | 0 個 |
 | 内部リンク切れ | 0 件 |
 | Phase 5 致命的問題修正 | 25 件 (動かないコード 7・法令誤引用 4・出典不明数値 8・APIバージョン古3・その他3) |
 | 回遊フッタ追加 | 30 本 (2026-05-19) |
-| スクリーンショットマーカー (`📸`) | 35 個 (平均 1.2/記事、Phase 6 で実撮影) |
-| SVG 画像 | 97 個 (#00 に infographic 2 個追加) |
+| 端末風図版 (旧スクリーンショット) | 25 個 (実撮影せず端末風 SVG 図版として確定。GUI アプリ系 10 個は削除) |
+| SVG 画像 (本文) | 179 個 (図解系 154 + 端末風 25。カバー 33 枚は別) |
 | カバー画像 (1280×670) | 31 枚 (全記事) |
 | 撮影ガイド | 30 本 (#00 は SS 不要) |
-| 無料記事 | 8 本 (#00, #02, #04, #09, #10, #14, #19, #29) |
+| 無料記事 | 10 本 (#00, #02, #04, #09, #10, #14, #19, #29, #31, #32) |
 | 有料記事 | 23 本 (個別 ¥300 均一) |
 | 課金モデル | 個別 ¥300 / 買い切りマガジン ¥1,980 (全 23 有料記事をバンドル) |
-| MVP ピック | 6 本 (#00, #01, #04, #05, #09, #10) |
+| MVP ピック | 7 本 (#00, #31, #32, #04, #05, #09, #10) |
 
 ## Phase 5 で修正した致命的問題リスト
 

@@ -17,11 +17,14 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 | 状態 | 置き場所 |
 |---|---|
-| 下書き（未公開） | `docs/31_note記事原稿/<slug>/` |
-| 公開済み | `.local/r2/note/<slug>/` |
+| 制作中（ヴァーティカルの全記事が公開完了していない） | `docs/31_note記事原稿/<vertical>/<slug>/` |
+| 公開完了（ヴァーティカルの全記事が公開済み） | `docs/32_note公開済み/<vertical>/<slug>/` |
 
-**公開後は `docs/31_note記事原稿/<slug>/` を `.local/r2/note/<slug>/` に移動すること。**
-Phase 0 のデータ読み込みは両方のパスを検索するため、移動後も `/publish-note` の参照は正常に動作する。
+**移動はヴァーティカル単位で行う。** あるヴァーティカルの全記事を公開し終えたら、`docs/31_note記事原稿/<vertical>/` フォルダごと `docs/32_note公開済み/<vertical>/` へ移動する。記事間の相対リンク（`../<slug>/draft.md`）を生かしたままにするため、**記事単位では移動しない**。個別記事の公開状況は `.claude/state/note-published-urls.json` で管理する。Phase 0 は両ディレクトリを検索するため、移動後も `/publish-note --update` の参照は正常に動作する。
+
+旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため R2 は配信にも保管にも使わない。docs/ は git 管理されるので版管理・バックアップは自動で確保される。
+
+**公開済み（`32_note公開済み/`）の画像**: 容量節約のため `draft.md` + `*.svg` のみ保管し、`*.png` は持たない（SVG から再生成できる派生物のため）。公開済み記事を `--update` するときは、本文をペーストする前に `.claude/scripts/note/regenerate-svg-png.sh docs/32_note公開済み/<vertical>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が保管されているため再生成不要。
 
 ## 引数（バッチ対応）
 
@@ -63,7 +66,7 @@ Phase 0 のデータ読み込みは両方のパスを検索するため、移動
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<slug>/{note.md,draft.md}` / `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}` / `.local/r2/note/<slug>/{note.md,draft.md}` のいずれか
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}`（制作中）または `docs/32_note公開済み/<vertical>/<slug>/{note.md,draft.md}`（公開完了ヴァーティカル）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）

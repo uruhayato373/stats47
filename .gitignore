@@ -160,3 +160,9 @@ inspect-knip.js
 
 # git worktree (Agent isolation 用、リポジトリにコミットしない)
 .claude/worktrees/
+
+# note 公開済み記事 (docs/32_note公開済み/) の PNG は SVG から再生成できる派生物のため
+# コミットしない (.claude/scripts/note/regenerate-svg-png.sh で随時再生成)。
+# SVG ソースを持たない旧記事の PNG のみ例外として追跡する。
+docs/32_note公開済み/**/images/*.png
+!docs/32_note公開済み/a-maximum-temperature/images/*.png

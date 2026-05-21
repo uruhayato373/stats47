@@ -110,9 +110,6 @@ done
 iconv -f SHIFT-JIS -t UTF-8 Module1.bas > Module1_utf8.bas
 ```
 
-![Excel VBA エディタからモジュールを右クリックでエクスポートしている画面](./images/screenshot-1-vba-editor-export.png)
-<!-- SVG: screenshot | Excel VBA エディタからモジュールを右クリックでエクスポートしている画面 -->
-
 ファイルを Claude Code のワーキングディレクトリに配置:
 
 ```bash
@@ -268,7 +265,7 @@ VBA マクロの「怪しい挙動」として現場で報告される典型ポ�
 2. **絶対参照と相対参照の混在**: VBA で `Range("A1")` と `Cells(1,1)` が混在しているとリファクタが必要。Python 側は `df.iloc[0, 0]` (位置指定) と `df.loc["A1"]` (ラベル指定) を業務文脈で使い分け
 3. **Excel 関数の VBA 呼び出し**: `Application.WorksheetFunction.VLookup` 等は pandas の `merge` に置換。`Application.Match` は `pd.Series.searchsorted` または `df.index.get_loc`
 4. **イベントマクロ**: シート変更時に自動実行される `Worksheet_Change` `Workbook_Open` 系は Python では再現しない設計に。代わりにファイル変更検知 (`watchdog`) や cron で代替
-5. **「動いている」を信用しない**: VBA で動いている = 正しい、ではない。移植時に隠れバグが見つかることが多い。並列テストで両者の差分が出たら、VBA 側を疑う癖をつける
+5. 「動いている」を信用しない: VBA で動いている = 正しい、ではない。移植時に隠れバグが見つかることが多い。並列テストで両者の差分が出たら、VBA 側を疑う癖をつける
 6. **配列とコレクションの罠**: VBA の 1-indexed と Python の 0-indexed のズレで、月初の 1 件が欠落するパターンが頻発。境界値テスト必須
 
 ## まとめ
@@ -286,9 +283,9 @@ VBA → Python 移植は、Claude Code を使えば**1 マクロあたり 3-4 �
 
 ## 関連記事 / 次に読む
 
-- (有料) .claude/skills で「毎月の定型業務」を 1 コマンド化する
-- (無料) Excel 予算ファイルを Claude Code で集計
-- (有料) 統計データ加工: 公務員のための Claude Code × データ前処理入門
+- .claude/skills で「毎月の定型業務」を 1 コマンド化する
+- Excel 予算ファイルを Claude Code で集計
+- 統計データ加工: 公務員のための Claude Code × データ前処理入門
 
 ---
 
@@ -422,7 +419,7 @@ if __name__ == "__main__":
     print(f"処理完了: {result}")
 ```
 
-移植難度が高いと報告される VBA の典型コードパターンは、**「全課・全科目をループでクロス集計するロジック」**だ。具体的には外側ループで `For sectionIndex = 1 To 50`、内側ループで `For accountIndex = 1 To 200` を回し、各セルに対して `If Worksheets("マスタ").Cells(sectionIndex, 2).Value = wsData.Cells(i, "B").Value Then` のような線形検索を入れる構造になっている。
+移植難度が高いと報告される VBA の典型コードパターンは、「全課・全科目をループでクロス集計するロジック」だ。具体的には外側ループで `For sectionIndex = 1 To 50`、内側ループで `For accountIndex = 1 To 200` を回し、各セルに対して `If Worksheets("マスタ").Cells(sectionIndex, 2).Value = wsData.Cells(i, "B").Value Then` のような線形検索を入れる構造になっている。
 
 計算量が O(n×m×k) となり、**データが 10,000 行を超えると処理時間が 5-30 分に膨張する**。Python では `pandas.merge` と `pivot_table` で同等処理を O(n+m+k) に圧縮でき、処理時間が 0.5-3 秒に短縮される。
 
@@ -482,7 +479,7 @@ if __name__ == "__main__":
 
 ## 「公務員 × Claude Code」シリーズ
 
-本記事は、自治体職員が Claude Code を日々の業務に活かすための全 31 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
+本記事は、自治体職員が Claude Code を日々の業務に活かすための全 33 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
 
 シリーズの全記事はマガジンにまとめています。他の記事はこちらからどうぞ。
 
