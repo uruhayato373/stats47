@@ -56,7 +56,9 @@ const priceJpy = parseInt(fmField('price_jpy') || '0', 10);
 
 // 本文準備
 let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
-body = body.replace(/<!-- note投稿時:.*?-->\n?/g, '');
+// HTML コメントをすべて除去（<!-- SVG: ... --> / <!-- note投稿時 --> / <!-- circulation-footer --> 等）。
+// 残すと note 上に可視テキストとして混入する。
+body = body.replace(/<!--[\s\S]*?-->\n?/g, '');
 body = body.replace(/!\[.*?\]\(.*?\)\n?/g, '');
 body = body.replace(/^---$/gm, '');
 body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, '');
@@ -76,6 +78,9 @@ if (isPaid) {
     bodyPaid = body.substring(idx + splitMatch[0].length).trim();
   }
 }
+// 分割後、フルボディからも有料境界マーカー行を除去する。
+// どのセグメント（segments / segmentsFree / segmentsPaid）にもマーカー行を残さない。
+body = body.replace(/^ここから先は有料部分[:：][^\n]*$\n?/m, '').trim();
 
 // セグメント分割 (URL vs テキスト)
 function splitSegments(text) {
@@ -246,7 +251,9 @@ browser-use --headed --profile "Profile 5" eval "window.__nb='';'init'"
 BODYLEN=$(node -e "process.stdout.write(String([...require('fs').readFileSync('/tmp/note-body-<slug>.txt','utf8')].length))")
 OFFSET=0
 while [ "$OFFSET" -lt "$BODYLEN" ]; do
-  CHUNK=$(node -e "const b=[...require('fs').readFileSync('/tmp/note-body-<slug>.txt','utf8')]; process.stdout.write(encodeURIComponent(b.slice($OFFSET,$OFFSET+400).join('')))")
+  # encodeURIComponent は `'` を変換しないため、eval の JS 文字列リテラルが破断する。
+  # `'` を %27 に明示置換する（decodeURIComponent が復元する）。
+  CHUNK=$(node -e "const b=[...require('fs').readFileSync('/tmp/note-body-<slug>.txt','utf8')]; process.stdout.write(encodeURIComponent(b.slice($OFFSET,$OFFSET+400).join('')).replace(/'/g,'%27'))")
   browser-use --headed --profile "Profile 5" eval "window.__nb+=decodeURIComponent('$CHUNK');String(window.__nb.length)"
   OFFSET=$((OFFSET + 400))
 done
