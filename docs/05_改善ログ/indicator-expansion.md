@@ -291,11 +291,12 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 - 残 pending: medium 26 件 (dental-hygienist-by-prefecture / midwife-by-prefecture / pharmacy-count 等)
 - 推奨実行: `/expand-indicators --target 10 --priority medium`
 
-### 後続アクション (人間 / 別スキルで実施)
+### 後続アクション
 
-- `/generate-known-ranking-keys` 実行 → BATCH-01/02/03/04 累計 34 keys を middleware に反映
-- `/sync-snapshots` で R2 へ反映 → 本番配信
-- 必要なら `/purge-cdn` で旧 ISR キャッシュをパージ
+- ✅ `/generate-known-ranking-keys` 実行 → known-ranking-keys.ts 計 1,959 keys に再生成 (2026-05-21)
+- ✅ PR #325 で develop→main マージ・Cloudflare デプロイ済み (2026-05-21)
+- ✅ `/sync-snapshots --only master / ranking-values / ranking-normalized-values` で R2 反映済み (2026-05-21、エラー 0)
+- ✅ 本番疎通確認: 新 6 ページとも HTTP 200 + データ付きレンダリング確認済み (Googlebot UA)
 
 ---
 
