@@ -1,7 +1,7 @@
 ---
 type: indicator-backlog
 created: 2026-05-19
-updated: 2026-05-19
+updated: 2026-05-21
 status: active
 total_candidates: 72
 high_priority: 21
@@ -98,13 +98,13 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 | low | product-shipping-by-item | commercial | manufacturing | 0004003978 | 品目別出荷事業所数 | failed <!-- failed: no area dimension (品目別 only) @ 2026-05-19 --> |
 | low | product-shipping-small-est | commercial | manufacturing | 0004003990 | 品目別出荷 従業者 3 人以下 | failed <!-- failed: no area dimension (品目別 only) @ 2026-05-19 --> |
 | low | accident-death-30day | safetyenvironment | safety | 0003281586 | 30 日以内事故死者 | done |
-| high | bus-passenger-transport | safetyenvironment | (新規:transport) | 0003443768 | 営業用バス 輸送人員 年度 | pending |
-| high | factory-industrial-park-rate | construction | (新規:industry-loc) | 0003411445 | 工業団地内立地率 件数 | pending |
-| high | factory-location-area-annual | construction | (新規:industry-loc) | 0003411431 | 工場立地敷地面積 年次 | pending |
-| high | health-checkup-recipients | socialsecurity | healthcare | 0004027740 | 健康診断受診延人員 種類別 | pending |
-| high | vaccination-recipients-disease | socialsecurity | healthcare | 0004027806 | 定期予防接種者数 対象疾病 | pending |
-| high | maternal-child-health-guidance | socialsecurity | healthcare | 0004027833 | 妊産婦乳幼児保健指導 | pending |
-| high | dental-checkup-recipients | socialsecurity | healthcare | 0004027738 | 歯科健診保健指導受診者 | pending |
+| high | bus-passenger-transport | safetyenvironment | (新規:transport) | 0003443768 | 営業用バス 輸送人員 年度 | failed <!-- failed: area codes are transport-district-based (00001-00054), not standard 47-pref codes @ 2026-05-21 --> |
+| high | factory-industrial-park-rate | construction | (新規:industry-loc) | 0003411445 | 工業団地内立地率 件数 | done <!-- 47 prefs (9 prefs=0 補完: 青森/東京/福井/島根/徳島/長崎/大分/宮崎/沖縄) @ 2026-05-21 --> |
+| high | factory-location-area-annual | construction | (新規:industry-loc) | 0003411431 | 工場立地敷地面積 年次 | done <!-- 47 prefs (direct API ingest, no getAreaMap needed) @ 2026-05-21 --> |
+| high | health-checkup-recipients | socialsecurity | healthcare | 0004027740 | 健康診断受診延人員 種類別 | done <!-- 47 prefs @ 2026-05-21 --> |
+| high | vaccination-recipients-disease | socialsecurity | healthcare | 0004027806 | 定期予防接種者数 対象疾病 | done <!-- 47 prefs (HPV第1回 cat02=380, age総数) @ 2026-05-21 --> |
+| high | maternal-child-health-guidance | socialsecurity | healthcare | 0004027833 | 妊産婦乳幼児保健指導 | done <!-- 47 prefs (cat03 全種別合計, tab=180) @ 2026-05-21 --> |
+| high | dental-checkup-recipients | socialsecurity | healthcare | 0004027738 | 歯科健診保健指導受診者 | done <!-- 47 prefs @ 2026-05-21 --> |
 | medium | dental-hygienist-by-prefecture | socialsecurity | healthcare | 0004027006 | 歯科衛生士・技工士 都道府県 | pending |
 | medium | midwife-by-prefecture | socialsecurity | healthcare | 0004026929 | 就業助産師数 都道府県 | pending |
 | medium | pharmacy-count-by-prefecture | socialsecurity | healthcare | 0004026870 | 薬局数 都道府県 | pending |
