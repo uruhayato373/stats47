@@ -51,6 +51,9 @@ import { ChoroplethBarChartReelPreview } from './features/population-choropleth/
 import { ChoroplethStaticReelPreview } from './features/population-choropleth/previews/ChoroplethStaticReelPreview';
 import { BAR_CHART_REEL_DURATION } from './features/population-choropleth/ChoroplethBarChartReel';
 import { STATIC_REEL_DURATION } from './features/population-choropleth/ChoroplethStaticReel';
+// migration-flow
+import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
+import { MIGRATION_FLOW_DURATION } from '@stats47/migration-flow';
 // Charts (shared)
 import { BarChartRaceScenePreview } from './shared/components/charts/previews/BarChartRaceScenePreview';
 // Utils
@@ -65,6 +68,7 @@ import {
   ComparisonCarouselSchema,
   ComparisonShortSchema,
   PopulationChoroplethSchema,
+  MigrationFlowSchema,
   LayoutPreviewSchema,
   RankCardPreviewSchema,
   RankingShortSchema,
@@ -798,6 +802,23 @@ export const RemotionRoot: React.FC = () => {
           schema={PopulationChoroplethSchema}
           defaultProps={{
             theme: 'dark' as const,
+          }}
+        />
+      </Folder>
+
+      {/* 都道府県間 人口移動フロー (YouTube 16:9) */}
+      <Folder name="MigrationFlow">
+        <Composition
+          id="MigrationFlow-Reel"
+          component={MigrationFlowReelPreview}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={MIGRATION_FLOW_DURATION}
+          schema={MigrationFlowSchema}
+          defaultProps={{
+            theme: 'dark' as const,
+            focusPrefCode: '28',
           }}
         />
       </Folder>
