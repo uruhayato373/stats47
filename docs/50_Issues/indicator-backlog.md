@@ -1,7 +1,7 @@
 ---
 type: indicator-backlog
 created: 2026-05-19
-updated: 2026-05-21
+updated: 2026-05-22
 status: active
 total_candidates: 72
 high_priority: 21
@@ -105,16 +105,16 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 | high | vaccination-recipients-disease | socialsecurity | healthcare | 0004027806 | 定期予防接種者数 対象疾病 | done <!-- 47 prefs (HPV第1回 cat02=380, age総数) @ 2026-05-21 --> |
 | high | maternal-child-health-guidance | socialsecurity | healthcare | 0004027833 | 妊産婦乳幼児保健指導 | done <!-- 47 prefs (cat03 全種別合計, tab=180) @ 2026-05-21 --> |
 | high | dental-checkup-recipients | socialsecurity | healthcare | 0004027738 | 歯科健診保健指導受診者 | done <!-- 47 prefs @ 2026-05-21 --> |
-| medium | dental-hygienist-by-prefecture | socialsecurity | healthcare | 0004027006 | 歯科衛生士・技工士 都道府県 | pending |
-| medium | midwife-by-prefecture | socialsecurity | healthcare | 0004026929 | 就業助産師数 都道府県 | pending |
-| medium | pharmacy-count-by-prefecture | socialsecurity | healthcare | 0004026870 | 薬局数 都道府県 | pending |
-| medium | designated-difficult-disease | socialsecurity | healthcare | 0004026904 | 指定難病受給者数 疾患別 | pending |
-| medium | mental-health-application | socialsecurity | healthcare | 0004026960 | 精神障害者申請通報状況 | pending |
-| medium | cook-licensees-by-prefecture | socialsecurity | (新規:professionals) | 0004026840 | 就業調理師 場所別 | pending |
-| medium | food-sanitation-inspection | socialsecurity | (新規:food-safety) | 0004026844 | 食品収去試験 都道府県 | pending |
-| medium | food-business-establishments | socialsecurity | (新規:food-safety) | 0004027019 | 食品関係営業施設数 | pending |
-| medium | rabies-vaccination-dogs | socialsecurity | (新規:pet) | 0004026906 | 犬予防注射済票交付数 | pending |
-| medium | dog-registration-count | socialsecurity | (新規:pet) | 0004026908 | 犬登録頭数・徘徊犬抑留 | pending |
+| medium | dental-hygienist-by-prefecture | socialsecurity | healthcare | 0004027006 | 歯科衛生士・技工士 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
+| medium | midwife-by-prefecture | socialsecurity | healthcare | 0004026929 | 就業助産師数 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
+| medium | pharmacy-count-by-prefecture | socialsecurity | healthcare | 0004026870 | 薬局数 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
+| medium | designated-difficult-disease | socialsecurity | healthcare | 0004026904 | 指定難病受給者数 疾患別 | done <!-- 47 prefs (area=68: 都道府県+指定都市 → 都道府県のみ抽出) @ 2026-05-22 --> |
+| medium | mental-health-application | socialsecurity | healthcare | 0004026960 | 精神障害者申請通報状況 | done <!-- 47 prefs (area=68 → 都道府県のみ) @ 2026-05-22 --> |
+| medium | cook-licensees-by-prefecture | socialsecurity | (新規:professionals) | 0004026840 | 就業調理師 場所別 | done <!-- 47 prefs (hardcoded PREF_NAMES_BY_CODE 使用、getAreaMap rate-limit回避) @ 2026-05-22 --> |
+| medium | food-sanitation-inspection | socialsecurity | (新規:food-safety) | 0004026844 | 食品収去試験 都道府県 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
+| medium | food-business-establishments | socialsecurity | (新規:food-safety) | 0004027019 | 食品関係営業施設数 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
+| medium | rabies-vaccination-dogs | socialsecurity | (新規:pet) | 0004026906 | 犬予防注射済票交付数 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
+| medium | dog-registration-count | socialsecurity | (新規:pet) | 0004026908 | 犬登録頭数・徘徊犬抑留 | done <!-- skipped: already registered (47 prefs confirmed) @ 2026-05-22 --> |
 | medium | infectious-disease-deaths | socialsecurity | healthcare | 0003411705 | 感染症死亡数 都道府県 | pending |
 | medium | factory-employment-planned | construction | (新規:industry-loc) | 0003411450 | 工場立地 雇用予定従業者数 | pending |
 | medium | factory-by-industry | construction | (新規:industry-loc) | 0003411456 | 工場立地件数 業種別 | pending |
