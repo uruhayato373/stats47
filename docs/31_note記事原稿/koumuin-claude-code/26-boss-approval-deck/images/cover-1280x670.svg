@@ -23,8 +23,8 @@
 <text x="250" y="365" font-size="44" font-weight="bold" fill="#1e293b">上司に Claude Code 導入を承認させた説明資料</text>
 
 <!-- Paid/Free badge -->
-<rect x="1060" y="78" width="160" height="40" rx="20" fill="#fee2e2"/>
-<text x="1140" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="#dc2626">有料 ¥1,500</text>
+<rect x="1080" y="78" width="140" height="40" rx="20" fill="#fee2e2"/>
+<text x="1150" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="#dc2626">有料記事</text>
 
 <!-- Footer -->
 <line x1="80" y1="600" x2="1200" y2="600" stroke="#e2e8f0" stroke-width="1"/>

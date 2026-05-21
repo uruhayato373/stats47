@@ -179,13 +179,14 @@ function generateSvg({ num, slug, category, isPaid, price, title }) {
   }
 
   // Paid/Free badge (right of brand area)
-  const priceLabel = isPaid ? `有料 ¥${price.toLocaleString()}` : "無料公開";
+  // 価格 (¥) はバッジに焼き込まない。価格は note のペイウォール設定が唯一の表示源。
+  const priceLabel = isPaid ? "有料記事" : "無料公開";
   const priceColor = isPaid ? "#dc2626" : "#16a34a";
   const priceBg = isPaid ? "#fee2e2" : "#dcfce7";
   svg += `
 <!-- Paid/Free badge -->
-<rect x="${W - 220}" y="78" width="160" height="40" rx="20" fill="${priceBg}"/>
-<text x="${W - 140}" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="${priceColor}">${priceLabel}</text>
+<rect x="${W - 200}" y="78" width="140" height="40" rx="20" fill="${priceBg}"/>
+<text x="${W - 130}" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="${priceColor}">${priceLabel}</text>
 
 <!-- Footer -->
 <line x1="80" y1="600" x2="${W - 80}" y2="600" stroke="#e2e8f0" stroke-width="1"/>
