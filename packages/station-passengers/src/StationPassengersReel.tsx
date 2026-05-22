@@ -24,41 +24,47 @@ interface LayoutConfig {
   height: number;
   /** 地図パネル矩形 */
   mapRect: Rect;
-  /** 統計パネル矩形 */
-  panel: Rect;
-  /** side = 地図の右に縦並び / below = 地図の下に横 2 列 */
-  panelMode: "side" | "below";
+  /** side = 地図の右に縦パネル / stacked = ヘッダー上・地図中央・フッター下の 3 段 */
+  mode: "side" | "stacked";
+  /** side モード: 統計パネル矩形 */
+  panel?: Rect;
+  /** stacked モード: 上部ヘッダー矩形（県名 + 年度） */
+  header?: Rect;
+  /** stacked モード: 下部フッター矩形（ランキング + 凡例 + 出典） */
+  footer?: Rect;
   /** バブル最大半径 */
   rMax: number;
 }
 
 /** フォーマット別レイアウト */
 const LAYOUTS: Record<StationPassengersFormat, LayoutConfig> = {
-  // YouTube・X 用 16:9
+  // YouTube・X 用 16:9 — 左に地図、右に縦パネル
   landscape: {
     width: 1920,
     height: 1080,
     mapRect: { x0: 56, y0: 64, x1: 1336, y1: 1016 },
     panel: { x0: 1372, y0: 0, x1: 1884, y1: 1080 },
-    panelMode: "side",
+    mode: "side",
     rMax: 52,
   },
-  // Instagram Reels・YouTube Shorts・TikTok 用 9:16
+  // Instagram Reels・YouTube Shorts・TikTok 用 9:16 — 県名上・地図中央・ランキング下
   portrait: {
     width: 1080,
     height: 1920,
-    mapRect: { x0: 24, y0: 150, x1: 1056, y1: 1230 },
-    panel: { x0: 24, y0: 1252, x1: 1056, y1: 1896 },
-    panelMode: "below",
+    header: { x0: 24, y0: 24, x1: 1056, y1: 300 },
+    mapRect: { x0: 24, y0: 320, x1: 1056, y1: 1250 },
+    footer: { x0: 24, y0: 1272, x1: 1056, y1: 1896 },
+    mode: "stacked",
     rMax: 54,
   },
-  // Instagram フィード用 1:1
+  // Instagram フィード用 1:1 — 県名上・地図中央・ランキング下
   square: {
     width: 1080,
     height: 1080,
-    mapRect: { x0: 24, y0: 96, x1: 1056, y1: 660 },
-    panel: { x0: 24, y0: 680, x1: 1056, y1: 1056 },
-    panelMode: "below",
+    header: { x0: 24, y0: 18, x1: 1056, y1: 208 },
+    mapRect: { x0: 24, y0: 222, x1: 1056, y1: 700 },
+    footer: { x0: 24, y0: 712, x1: 1056, y1: 1062 },
+    mode: "stacked",
     rMax: 38,
   },
 };
@@ -264,7 +270,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   const labelCodes = new Set(ranked.slice(0, 7).map((r) => r.s.code));
 
   const totalCount = ranked.reduce((sum, r) => sum + r.c, 0);
-  const { mapRect, panel } = L;
+  const { mapRect } = L;
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#F8FAFC", fontFamily: FONT }}>
@@ -396,68 +402,93 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
       </svg>
 
       {/* ───────── 統計パネル ───────── */}
-      <div
-        style={{
-          position: "absolute",
-          left: panel.x0,
-          top: panel.y0,
-          width: panel.x1 - panel.x0,
-          height: panel.y1 - panel.y0,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: L.panelMode === "side" ? 20 : 14,
-          opacity: intro,
-        }}
-      >
-        {L.panelMode === "side" ? (
-          <>
+      {/* side: 地図の右に縦パネル (16:9) */}
+      {L.mode === "side" && L.panel && (
+        <div
+          style={{
+            position: "absolute",
+            left: L.panel.x0,
+            top: L.panel.y0,
+            width: L.panel.x1 - L.panel.x0,
+            height: L.panel.y1 - L.panel.y0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 20,
+            opacity: intro,
+          }}
+        >
+          <TitleBlock prefName={data.prefName} />
+          <YearBlock
+            displayYear={displayYear}
+            stationCount={ranked.length}
+            totalCount={totalCount}
+          />
+          <RankingBlock rows={top5} />
+          <LegendBlock />
+          <SourceBlock source={data.source} dataset={data.dataset} />
+        </div>
+      )}
+
+      {/* stacked: ヘッダー (県名 + 年度) を地図の上に (9:16 / 1:1) */}
+      {L.mode === "stacked" && L.header && (
+        <div
+          style={{
+            position: "absolute",
+            left: L.header.x0,
+            top: L.header.y0,
+            width: L.header.x1 - L.header.x0,
+            height: L.header.y1 - L.header.y0,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 20,
+            opacity: intro,
+          }}
+        >
+          <div style={{ flex: "1 1 0" }}>
             <TitleBlock prefName={data.prefName} />
+          </div>
+          <div style={{ flex: "1 1 0" }}>
             <YearBlock
               displayYear={displayYear}
               stationCount={ranked.length}
               totalCount={totalCount}
             />
-            <RankingBlock rows={top5} />
+          </div>
+        </div>
+      )}
+
+      {/* stacked: フッター (ランキング + 凡例 + 出典) を地図の下に */}
+      {L.mode === "stacked" && L.footer && (
+        <div
+          style={{
+            position: "absolute",
+            left: L.footer.x0,
+            top: L.footer.y0,
+            width: L.footer.x1 - L.footer.x0,
+            height: L.footer.y1 - L.footer.y0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 12,
+            opacity: intro,
+          }}
+        >
+          <RankingBlock rows={top5} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: 16,
+            }}
+          >
             <LegendBlock />
             <SourceBlock source={data.source} dataset={data.dataset} />
-          </>
-        ) : (
-          <>
-            <div style={{ display: "flex", gap: 16, alignItems: "stretch" }}>
-              <div
-                style={{
-                  flex: "1 1 0",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                }}
-              >
-                <TitleBlock prefName={data.prefName} />
-                <YearBlock
-                  displayYear={displayYear}
-                  stationCount={ranked.length}
-                  totalCount={totalCount}
-                />
-              </div>
-              <div style={{ flex: "1 1 0" }}>
-                <RankingBlock rows={top5} />
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-                gap: 16,
-              }}
-            >
-              <LegendBlock />
-              <SourceBlock source={data.source} dataset={data.dataset} />
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
     </AbsoluteFill>
   );
 };
