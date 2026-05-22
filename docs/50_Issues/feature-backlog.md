@@ -227,3 +227,101 @@ PR #292 でデジタル庁 Japan Dashboard 自治体財政ページ
 - PR #292: feature/local-finance-page-components（都道府県別 Phase 1）
 - `packages/types/src/indicator-sets/local-finance.ts`: 18 指標定義
 - `.claude/rules/estat-api.md`: e-Stat 取得規約
+
+---
+
+## [in-progress] [T2-SNS-STATION-01] 駅別乗降客数バブルマップ動画（国土数値情報 S12）
+
+- **tier**: 2
+- **status**: in-progress（PoC 完了 2026-05-22）
+- **target**: SNS（X 投稿用 16:9 動画）
+
+### 背景
+
+国土数値情報「駅別乗降客数」(S12) を国土交通データプラットフォーム経由で取得し、
+都道府県別に「鉄道駅を地図上にバブル表示 + 乗降客数の年次推移アニメ」を
+Remotion で動画化、X 投稿素材にする。migration-flow / population-choropleth の
+地図系 Remotion 資産を流用できることを確認済み。
+
+### PoC 完了分（2026-05-22）
+
+| 成果物 | パス |
+|---|---|
+| データ取得スクリプト | `apps/remotion/scripts/fetch-station-passengers.ts` |
+| 駅データ JSON | `apps/remotion/public/station-passengers/{22,13,26}.json` |
+| Remotion コンポーネント | `apps/remotion/src/features/station-passengers/` |
+| Composition | Root.tsx `StationPassengers-Reel`（1920×1080 / 720f / prefCode prop） |
+| 検証レンダー | 静岡県（22）720 frame MP4 レンダー成功 |
+
+確認できたこと: S12 は全 47 県・2011〜2023 年取得可能。県境投影 + 駅ポイント投影 +
+バブルサイズ補間 + 年送りアニメが動作。`prefCode` prop 差し替えで全県展開可能。
+
+### 路線図レイヤー追加（2026-05-22）
+
+N02 鉄道路線を路線図レイヤーとして追加。新幹線（`lineName` に「新幹線」を含む）は
+青太線で色分け。`apps/remotion/scripts/fetch-railway-lines.ts` が全国 N02 TopoJSON
+を県別に切り出し。
+
+### production 化フェーズ（2026-05-22 着手、全 5 フェーズ）
+
+ユーザー方針: 県別集計を D1 ランキング化 → Web ページ → SNS 動画展開。
+
+| Phase | 内容 | 状態 |
+|---|---|---|
+| 1 | 駅乗降客数を D1 ランキング登録（`railway-passengers`） | ✅ 完了 2026-05-22 |
+| 2 | 駅別データ・路線を R2 snapshot 化（`app/station-passengers/`） | ✅ 完了 2026-05-22 |
+| 3 | `packages/station-passengers/` 共有パッケージ化 | ✅ 完了 2026-05-22 |
+| 4 | Web ページ 2 種（ランキング + アニメ地図）+ 相互リンク | ✅ 完了 2026-05-22 |
+| 5 | 動画 SNS 展開（Remotion 9:16・1:1 + 47県バッチ + 投稿） | ⬜ 未着手 |
+
+**Phase 1 完了分**:
+- `packages/gis/src/station-passengers/register-ranking.ts` — S12 を県別合計に集計し
+  `metrics` + `stats_prefecture` に登録。metric_key=`railway-passengers`、
+  単位=人/日、category=infrastructure、対象 2019〜2023年度（235 行）。
+- ランキング: 1位 東京都 36,378,900 人/日 〜 47位 島根県 35,157 人/日。
+- 2018年以前は JR 欠損のため県間比較に不適 → 2019〜2023 に限定（JR pop-in も同時に解消）。
+- ※ `gis_datasets` の S12 `ranking_config` は使わず専用スクリプトで登録
+  （KSJ の register-ksj-rankings.ts は feature 数カウント方式 + `stats` テーブル
+  スキマドリフトのため不適）。
+
+**Phase 2 完了分**:
+- `apps/web/scripts/export-station-passengers-snapshot.ts` — 駅別 JSON + 路線 GeoJSON を
+  R2 `app/station-passengers/{NN}/{stations,lines}.json` + `index.json` へ export（95 files）。
+- `/sync-snapshots` の TASKS + SKILL.md に `station-passengers` 登録済み。
+- ※ raw データの正本は `apps/remotion/public/station-passengers/`（videos の staticFile
+  兼用）。D1 登録スクリプトと R2 exporter が共にここを読む。
+
+**Phase 3 完了分**:
+- `packages/station-passengers/` 新設（`StationPassengersReel` + types を移動、
+  migration-flow と同型の package.json/tsconfig/index）。
+- `apps/remotion` の Remotion ラッパー・data loader・preview は feature 配下に残し
+  `@stats47/station-passengers` を import。web/remotion 両用。
+
+**Phase 4 完了分**:
+- ランキングページ `/ranking/railway-passengers` — HTTP 200 確認（既存 ranking 基盤）。
+  master + ranking-values exporter をローカル実行し snapshot 生成、
+  `generate-known-ranking-keys.ts` 再実行で middleware の 410 を解消。
+- アニメ地図ページ `/station-passengers`（一覧）+ `/station-passengers/[prefCode]`（47県 SSG）
+  — HTTP 200 確認。API プロキシ `/api/station-passengers/[...slug]`（R2 CORS 回避）、
+  `StationPassengersPlayer`（rAF 駆動、`@stats47/station-passengers` 使用）。
+- sitemap.ts に station-passengers ページ追加。
+- 相互リンク: アニメ地図 → ランキング（実装済み）。ランキング → アニメ地図方向は
+  ranking テンプレが自動生成のため未配線（page_components 経由の follow-up）。
+
+### 残タスク（Phase 5 + 改善）
+
+- **Phase 5**: `StationPassengersReel` を layout 可変化（landscape/portrait）→
+  Remotion に 9:16・1:1 コンポジション追加 → 47県バッチレンダー（`scripts/pipeline/`）→
+  `/post-youtube` `/post-instagram` `/post-x` 接続。
+- ランキング → アニメ地図ページの相互リンク（page_components で関連リンク追加）。
+- AI コンテンツ生成（`/generate-ai-content` で `railway-passengers` の faq /
+  regional_analysis / insights を生成）。
+- ラベル重なり解消（migration-flow の `deOverlapLabels` 移植）。
+- 本番反映: `/sync-snapshots` フル実行（D1→R2 push）+ `known-ranking-keys.ts` を
+  commit してデプロイ。
+
+### 関連
+
+- `docs/01_技術設計/09_国土交通データプラットフォーム.md`: S12 取得元（MCP `mlit-dpf-mcp`）
+- `.claude/rules/r2-storage-design.md`: R2 配信化する場合の名前空間規約
+- 流用元: `apps/remotion/src/features/migration-flow/` / `population-choropleth/`
