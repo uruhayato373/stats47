@@ -106,7 +106,7 @@ export function MigrationFlowPlayer({
       {/* プレイヤー（16:9・1920x1080 をスケール） */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-md border bg-slate-900"
+        className="relative w-full overflow-hidden rounded-md border bg-white"
         style={{ aspectRatio: "16 / 9" }}
       >
         {bundle && (
@@ -127,18 +127,18 @@ export function MigrationFlowPlayer({
               data={bundle.data}
               cityTopology={bundle.cityTopology}
               municipalities={bundle.municipalities}
-              theme="dark"
+              theme="light"
             />
           </div>
         )}
 
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-300">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
             読み込み中…
           </div>
         )}
         {errored && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-300">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
             データを読み込めませんでした。
           </div>
         )}

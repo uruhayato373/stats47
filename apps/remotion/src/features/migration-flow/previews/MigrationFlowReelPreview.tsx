@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const MigrationFlowReelPreview: React.FC<Props> = ({
-  theme = "dark",
+  theme = "light",
   focusPrefCode = "28",
 }) => {
   const { topology, data, cityTopology, municipalities, loading } =

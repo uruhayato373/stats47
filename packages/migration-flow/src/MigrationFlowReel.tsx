@@ -18,21 +18,24 @@ import type { MigrationFlowData, MunicipalityData } from "./types";
 /** 24 秒 @ 30fps 相当のフレーム数。Remotion 側の durationInFrames に使う */
 export const MIGRATION_FLOW_DURATION = 720;
 
-const WIDTH = 1920;
-const HEIGHT = 1080;
+const FRAME_W = 1920;
+const FRAME_H = 1080;
 
-/** 地図本体の矩形。外側の余白に地方ラベルを置く */
-const MAP_RECT: MapRect = { x0: 190, y0: 108, x1: 1730, y1: 1012 };
+/** 左の「地図コンポーネント」幅。右は統計パネル。 */
+const MAP_W = 1400;
+/** 地図本体の矩形（MAP_W 内。外側の余白に地方ラベルを置く） */
+const MAP_RECT: MapRect = { x0: 200, y0: 56, x1: 1200, y1: 1024 };
+/** 右パネル */
+const PANEL_X = 1436;
+const PANEL_W = FRAME_W - PANEL_X - 36;
+
 const MUNI_LABEL_COUNT = 12;
 const MAX_PARTICLES = 14;
 const PERIOD = 84;
 
-const IN_COLOR = "#2DD4BF"; // 転入（青緑）— 暗いUI上の数値・凡例用
-const OUT_COLOR = "#F4606A"; // 転出（赤）— 同上
-// 明るい地図上のパーティクルは濃色でないと埋もれるため別色
-const FLOW_IN = "#0D9488"; // 転入パーティクル（濃い青緑）
-const FLOW_OUT = "#DC2626"; // 転出パーティクル（濃い赤）
-const FOCUS_COLOR = "#D97706"; // 焦点県の輪郭（明るい地図でも視認できる琥珀）
+const IN_COLOR = "#0D9488"; // 転入（濃い青緑）— 白背景でも視認可
+const OUT_COLOR = "#DC2626"; // 転出（濃い赤）— 同上
+const FOCUS_COLOR = "#D97706"; // 焦点県の輪郭（琥珀）
 /** 明るい地図パネル背景 */
 const MAP_BG = "#E9EDF2";
 
@@ -77,8 +80,12 @@ const AbsoluteFill: React.FC<{
 
 interface Channel {
   arc: ArcGeom;
-  inCount: number;
-  outCount: number;
+  /** パーティクル数（純移動の絶対値に比例） */
+  count: number;
+  /** 純移動の向き（in=焦点県へ流入超過 / out=焦点県から流出超過） */
+  direction: "in" | "out";
+  /** パーティクル・帯の色 */
+  color: string;
   width: number;
   seed: number;
 }
@@ -99,15 +106,15 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
   data,
   cityTopology,
   municipalities,
-  theme = "dark",
+  theme = "light",
 }) => {
   const colors = COLOR_SCHEMES[theme];
 
   const map = useMemo(
     () =>
       buildMigrationMap(topology, data, {
-        width: WIDTH,
-        height: HEIGHT,
+        width: MAP_W,
+        height: FRAME_H,
         mapRect: MAP_RECT,
         cityTopology: cityTopology ?? undefined,
         municipalities: municipalities?.municipalities,
@@ -122,29 +129,19 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
     [data],
   );
 
-  // 流量スケール（近接県・地方とも共通）
-  const maxFlow = useMemo(() => {
-    const flows: number[] = [];
+  // 純移動の絶対値スケール（近接県・地方とも共通）
+  const maxNet = useMemo(() => {
+    const nets: number[] = [];
     for (const s of shapes) {
       if (!s.near) continue;
       const p = partnerByCode.get(s.code);
-      if (p) flows.push(p.inflow, p.outflow);
+      if (p) nets.push(Math.abs(p.inflow - p.outflow));
     }
-    for (const r of regionFlows) flows.push(r.inflow, r.outflow);
-    return Math.max(1, ...flows);
+    for (const r of regionFlows) nets.push(Math.abs(r.net));
+    return Math.max(1, ...nets);
   }, [shapes, regionFlows, partnerByCode]);
 
-  const maxGross = useMemo(() => {
-    const g: number[] = [];
-    for (const s of shapes) {
-      if (!s.near) continue;
-      const p = partnerByCode.get(s.code);
-      if (p) g.push(p.inflow + p.outflow);
-    }
-    for (const r of regionFlows) g.push(r.inflow + r.outflow);
-    return Math.max(1, ...g);
-  }, [shapes, regionFlows, partnerByCode]);
-
+  // 各チャンネルは「純移動の向き」だけを描く（流入超過=青で入る／流出超過=赤で出る）
   const nearChannels = useMemo<Channel[]>(() => {
     if (!focusCentroid) return [];
     const result: Channel[] = [];
@@ -153,28 +150,35 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
       if (!s.near) continue;
       const p = partnerByCode.get(s.code);
       if (!p) continue;
+      const net = p.inflow - p.outflow;
+      const inward = net >= 0;
       result.push({
         arc: buildArc(s.centroid, focusCentroid),
-        inCount: Math.round(MAX_PARTICLES * Math.sqrt(p.inflow / maxFlow)),
-        outCount: Math.round(MAX_PARTICLES * Math.sqrt(p.outflow / maxFlow)),
-        width: 1 + 3 * Math.sqrt((p.inflow + p.outflow) / maxGross),
+        count: Math.round(MAX_PARTICLES * Math.sqrt(Math.abs(net) / maxNet)),
+        direction: inward ? "in" : "out",
+        color: inward ? IN_COLOR : OUT_COLOR,
+        width: 0.8 + 4 * Math.sqrt(Math.abs(net) / maxNet),
         seed: (idx++ % 7) / 7,
       });
     }
     return result;
-  }, [shapes, focusCentroid, partnerByCode, maxFlow, maxGross]);
+  }, [shapes, focusCentroid, partnerByCode, maxNet]);
 
   const regionChannels = useMemo<Array<Channel & { region: RegionFlow }>>(() => {
     if (!focusCentroid) return [];
-    return regionFlows.map((r, idx) => ({
-      region: r,
-      arc: buildArc(r.anchor, focusCentroid, 0.05),
-      inCount: Math.round(MAX_PARTICLES * Math.sqrt(r.inflow / maxFlow)),
-      outCount: Math.round(MAX_PARTICLES * Math.sqrt(r.outflow / maxFlow)),
-      width: 3 + 13 * Math.sqrt((r.inflow + r.outflow) / maxGross),
-      seed: (idx % 5) / 5,
-    }));
-  }, [regionFlows, focusCentroid, maxFlow, maxGross]);
+    return regionFlows.map((r, idx) => {
+      const inward = r.net >= 0;
+      return {
+        region: r,
+        arc: buildArc(r.anchor, focusCentroid, 0.05),
+        count: Math.round(MAX_PARTICLES * Math.sqrt(Math.abs(r.net) / maxNet)),
+        direction: inward ? ("in" as const) : ("out" as const),
+        color: inward ? IN_COLOR : OUT_COLOR,
+        width: 2 + 12 * Math.sqrt(Math.abs(r.net) / maxNet),
+        seed: (idx % 5) / 5,
+      };
+    });
+  }, [regionFlows, focusCentroid, maxNet]);
 
   const municipalityLabels = useMemo(() => {
     const gross = new Map(
@@ -215,11 +219,12 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
     <AbsoluteFill
       style={{ backgroundColor: colors.background, fontFamily: FONT.family }}
     >
+      {/* ───────── 左: 地図コンポーネント（地図 + 地方ラベル）───────── */}
       <svg
-        width={WIDTH}
-        height={HEIGHT}
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        style={{ position: "absolute", inset: 0 }}
+        width={MAP_W}
+        height={FRAME_H}
+        viewBox={`0 0 ${MAP_W} ${FRAME_H}`}
+        style={{ position: "absolute", left: 0, top: 0 }}
       >
         <defs>
           <clipPath id="map-clip">
@@ -259,13 +264,14 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
           ))}
         </g>
 
-        {/* フロー帯・アーク（クリップせず余白のラベルまで届かせる） */}
+        {/* フロー帯・アーク（純移動の向きの色。クリップせず余白のラベルまで届かせる） */}
         {regionChannels.map((ch) => (
           <path
             key={`rband-${ch.region.region}`}
             d={bezierPath(ch.arc)}
             fill="none"
-            stroke="rgba(100,116,139,0.22)"
+            stroke={ch.color}
+            strokeOpacity={0.18}
             strokeWidth={ch.width}
             strokeLinecap="round"
             opacity={intro}
@@ -276,7 +282,8 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
             key={`narc-${i}`}
             d={bezierPath(ch.arc)}
             fill="none"
-            stroke="rgba(100,116,139,0.3)"
+            stroke={ch.color}
+            strokeOpacity={0.26}
             strokeWidth={ch.width}
             strokeLinecap="round"
             opacity={intro}
@@ -308,37 +315,26 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
           )}
         </g>
 
-        {/* パーティクル */}
+        {/* パーティクル（チャンネルごとに純移動の向き・色で1方向だけ） */}
         {allChannels.map((ch, ci) => (
-          <g key={`out-${ci}`}>
-            {particlePositions(ch.arc, ch.outCount, frame, PERIOD, "out", ch.seed).map(
-              (p, i) => (
-                <circle
-                  key={i}
-                  cx={p.x}
-                  cy={p.y}
-                  r={4}
-                  fill={FLOW_OUT}
-                  opacity={(0.55 + 0.45 * p.fade) * intro}
-                />
-              ),
-            )}
-          </g>
-        ))}
-        {allChannels.map((ch, ci) => (
-          <g key={`in-${ci}`}>
-            {particlePositions(ch.arc, ch.inCount, frame, PERIOD, "in", ch.seed).map(
-              (p, i) => (
-                <circle
-                  key={i}
-                  cx={p.x}
-                  cy={p.y}
-                  r={4.2}
-                  fill={FLOW_IN}
-                  opacity={(0.6 + 0.4 * p.fade) * intro}
-                />
-              ),
-            )}
+          <g key={`p-${ci}`}>
+            {particlePositions(
+              ch.arc,
+              ch.count,
+              frame,
+              PERIOD,
+              ch.direction,
+              ch.seed,
+            ).map((p, i) => (
+              <circle
+                key={i}
+                cx={p.x}
+                cy={p.y}
+                r={4.2}
+                fill={ch.color}
+                opacity={(0.6 + 0.4 * p.fade) * intro}
+              />
+            ))}
           </g>
         ))}
 
@@ -404,7 +400,7 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
         </div>
       ))}
 
-      {/* 遠方地方ラベル（地図の外＝左右の余白） */}
+      {/* 遠方地方ラベル（地図コンポーネント内の左右余白） */}
       {regionFlows.map((r) => (
         <div
           key={`region-${r.region}`}
@@ -420,14 +416,19 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
           <div
             style={{
               display: "inline-block",
-              backgroundColor: "rgba(20,30,48,0.92)",
+              backgroundColor: colors.card,
               border: `1px solid ${colors.border}`,
               borderRadius: 9,
               padding: "6px 12px",
+              boxShadow: "0 2px 8px rgba(15,23,42,0.12)",
             }}
           >
             <div
-              style={{ fontSize: 19, fontWeight: FONT.weight.bold, color: "#E2E8F0" }}
+              style={{
+                fontSize: 19,
+                fontWeight: FONT.weight.bold,
+                color: colors.foreground,
+              }}
             >
               {r.region}
             </div>
@@ -445,103 +446,86 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
         </div>
       ))}
 
-      {/* タイトル帯 */}
+      {/* ───────── 右: 統計パネル ───────── */}
       <div
         style={{
           position: "absolute",
+          left: PANEL_X,
           top: 0,
-          left: 0,
-          right: 0,
-          height: 104,
-          background:
-            "linear-gradient(to bottom, rgba(15,23,42,1) 0%, rgba(15,23,42,0.98) 64%, rgba(15,23,42,0))",
+          width: PANEL_W,
+          height: FRAME_H,
           display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          padding: "24px 44px 0",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: 18,
+          opacity: intro,
         }}
       >
-        <div style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
-          <span
+        {/* タイトル */}
+        <div>
+          <div
             style={{
-              fontSize: 40,
+              fontSize: 38,
               fontWeight: FONT.weight.black,
               color: colors.foreground,
+              lineHeight: 1.2,
             }}
           >
             {data.focusName}
-            <span style={{ color: FOCUS_COLOR }}> ⇄ </span>
-            全国 人口移動フロー
-          </span>
-          <span
+            <span style={{ color: FOCUS_COLOR }}> ⇄ </span>全国
+          </div>
+          <div
             style={{ fontSize: 22, fontWeight: FONT.weight.bold, color: colors.muted }}
           >
-            {data.year}年
-          </span>
+            人口移動フロー {data.year}年
+          </div>
         </div>
-        <div style={{ display: "flex", gap: 22, alignItems: "baseline" }}>
-          <Stat label="転入" value={fmt(data.totals.inflow * countT)} color={IN_COLOR} muted={colors.muted} />
-          <Stat label="転出" value={fmt(data.totals.outflow * countT)} color={OUT_COLOR} muted={colors.muted} />
-          <Stat
+
+        {/* 集計 */}
+        <div
+          style={{
+            backgroundColor: colors.card,
+            border: `1px solid ${colors.border}`,
+            borderRadius: 12,
+            padding: "14px 18px",
+          }}
+        >
+          <StatRow label="転入" value={fmt(data.totals.inflow * countT)} color={IN_COLOR} muted={colors.muted} />
+          <StatRow label="転出" value={fmt(data.totals.outflow * countT)} color={OUT_COLOR} muted={colors.muted} />
+          <StatRow
             label="純移動"
             value={signed(data.totals.net * countT)}
             color={data.totals.net >= 0 ? IN_COLOR : OUT_COLOR}
             muted={colors.muted}
+            last
           />
         </div>
-      </div>
 
-      {/* Top5 転入元（地図 左下） */}
-      <RankPanel
-        title="主な転入元"
-        accent={IN_COLOR}
-        rows={topInflow.map((p) => ({ name: p.name, value: p.inflow }))}
-        style={{ left: MAP_RECT.x0 + 16, bottom: HEIGHT - MAP_RECT.y1 + 16 }}
-        colors={colors}
-        intro={intro}
-      />
-      {/* Top5 転出先（地図 右下） */}
-      <RankPanel
-        title="主な転出先"
-        accent={OUT_COLOR}
-        rows={topOutflow.map((p) => ({ name: p.name, value: p.outflow }))}
-        style={{ right: WIDTH - MAP_RECT.x1 + 16, bottom: HEIGHT - MAP_RECT.y1 + 16 }}
-        colors={colors}
-        intro={intro}
-      />
+        {/* Top5 */}
+        <RankList
+          title="主な転入元"
+          accent={IN_COLOR}
+          rows={topInflow.map((p) => ({ name: p.name, value: p.inflow }))}
+          colors={colors}
+        />
+        <RankList
+          title="主な転出先"
+          accent={OUT_COLOR}
+          rows={topOutflow.map((p) => ({ name: p.name, value: p.outflow }))}
+          colors={colors}
+        />
 
-      {/* 凡例 */}
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          transform: "translateX(-50%)",
-          bottom: 22,
-          display: "flex",
-          gap: 22,
-          backgroundColor: "rgba(15,23,42,0.85)",
-          borderRadius: 9,
-          padding: "7px 18px",
-          opacity: intro,
-        }}
-      >
-        <Legend color={FLOW_IN} label="転入の流れ" />
-        <Legend color={FLOW_OUT} label="転出の流れ" />
-        <Legend color={FOCUS_COLOR} label={`${data.focusName}（市区町村別）`} />
-      </div>
+        {/* 凡例 */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+          <Legend color={IN_COLOR} label={`転入超過（${data.focusName}へ）`} />
+          <Legend color={OUT_COLOR} label={`転出超過（${data.focusName}から）`} />
+          <Legend color={FOCUS_COLOR} label={`${data.focusName}（市区町村別）`} />
+        </div>
 
-      {/* 出典 */}
-      <div
-        style={{
-          position: "absolute",
-          left: 44,
-          bottom: 22,
-          fontSize: 16,
-          color: colors.muted,
-          opacity: intro,
-        }}
-      >
-        出典: 総務省統計局「住民基本台帳人口移動報告」{data.year}年 (e-Stat)
+        {/* 出典 */}
+        <div style={{ fontSize: 14, color: colors.muted }}>
+          出典: 総務省統計局「住民基本台帳人口移動報告」{data.year}年 (e-Stat)
+        </div>
       </div>
     </AbsoluteFill>
   );
@@ -549,47 +533,52 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
 
 // ---------------------------------------------------------------------------
 
-const Stat: React.FC<{
+const StatRow: React.FC<{
   label: string;
   value: string;
   color: string;
   muted: string;
-}> = ({ label, value, color, muted }) => (
-  <div style={{ display: "flex", alignItems: "baseline", gap: 7 }}>
-    <span style={{ fontSize: 17, color: muted }}>{label}</span>
-    <span style={{ fontSize: 30, fontWeight: FONT.weight.black, color }}>
-      {value}
+  last?: boolean;
+}> = ({ label, value, color, muted, last }) => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "baseline",
+      padding: "7px 0",
+      borderBottom: last ? "none" : `1px solid rgba(148,163,184,0.18)`,
+    }}
+  >
+    <span style={{ fontSize: 19, color: muted }}>{label}</span>
+    <span>
+      <span style={{ fontSize: 32, fontWeight: FONT.weight.black, color }}>
+        {value}
+      </span>
+      <span style={{ fontSize: 15, color: muted, marginLeft: 4 }}>人</span>
     </span>
-    <span style={{ fontSize: 15, color: muted }}>人</span>
   </div>
 );
 
-const RankPanel: React.FC<{
+const RankList: React.FC<{
   title: string;
   accent: string;
   rows: Array<{ name: string; value: number }>;
-  style: React.CSSProperties;
   colors: (typeof COLOR_SCHEMES)[ThemeName];
-  intro: number;
-}> = ({ title, accent, rows, style, colors, intro }) => (
+}> = ({ title, accent, rows, colors }) => (
   <div
     style={{
-      position: "absolute",
-      width: 268,
-      backgroundColor: "rgba(13,22,38,0.9)",
+      backgroundColor: colors.card,
       border: `1px solid ${colors.border}`,
       borderRadius: 12,
-      padding: "12px 16px",
-      opacity: intro,
-      ...style,
+      padding: "12px 18px",
     }}
   >
     <div
       style={{
-        fontSize: 18,
+        fontSize: 19,
         fontWeight: FONT.weight.black,
         color: accent,
-        marginBottom: 8,
+        marginBottom: 6,
       }}
     >
       {title}
@@ -601,22 +590,24 @@ const RankPanel: React.FC<{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "4px 0",
+          padding: "5px 0",
           borderBottom:
-            i < rows.length - 1 ? `1px solid ${colors.border}` : "none",
+            i < rows.length - 1
+              ? `1px solid rgba(148,163,184,0.16)`
+              : "none",
         }}
       >
         <span
           style={{
-            fontSize: 19,
+            fontSize: 20,
             fontWeight: FONT.weight.bold,
             color: colors.foreground,
           }}
         >
-          <span style={{ color: accent, marginRight: 8 }}>{i + 1}</span>
+          <span style={{ color: accent, marginRight: 10 }}>{i + 1}</span>
           {r.name}
         </span>
-        <span style={{ fontSize: 19, fontWeight: FONT.weight.black, color: accent }}>
+        <span style={{ fontSize: 20, fontWeight: FONT.weight.black, color: accent }}>
           {Math.round(r.value).toLocaleString("ja-JP")}
           <span style={{ fontSize: 13, color: colors.muted, marginLeft: 2 }}>
             人
@@ -641,7 +632,7 @@ const Legend: React.FC<{ color: string; label: string }> = ({
         display: "inline-block",
       }}
     />
-    <span style={{ fontSize: 16, color: "#CBD5E1" }}>{label}</span>
+    <span style={{ fontSize: 15, color: "#475569" }}>{label}</span>
   </div>
 );
 
