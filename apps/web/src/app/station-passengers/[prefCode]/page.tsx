@@ -17,8 +17,10 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
-import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
-import { StationPassengersPlayer } from "@/features/station-passengers";
+import {
+  PREFECTURES,
+  StationPassengersPlayer,
+} from "@/features/station-passengers";
 
 import type { Metadata } from "next";
 

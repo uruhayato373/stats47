@@ -31,33 +31,35 @@ export function MigrationFlowPlayer({
   showSelector = true,
 }: Props) {
   const [prefCode, setPrefCode] = useState(initialPrefCode);
-  const [bundle, setBundle] = useState<MigrationFlowBundle | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [errored, setErrored] = useState(false);
+  /** 読み込み結果。どの prefCode のものかを保持し loading/errored を派生させる */
+  const [result, setResult] = useState<
+    | { prefCode: string; bundle: MigrationFlowBundle }
+    | { prefCode: string; error: true }
+    | null
+  >(null);
   const [frame, setFrame] = useState(0);
   const [scale, setScale] = useState(0.5);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 焦点県が変わるたびにデータを読み込む
+  // 焦点県が変わるたびにデータを読み込む（setState は async コールバック内のみ）
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setErrored(false);
     loadMigrationFlowBundle(prefCode)
       .then((b) => {
-        if (cancelled) return;
-        setBundle(b);
-        setLoading(false);
+        if (!cancelled) setResult({ prefCode, bundle: b });
       })
       .catch(() => {
-        if (cancelled) return;
-        setErrored(true);
-        setLoading(false);
+        if (!cancelled) setResult({ prefCode, error: true });
       });
     return () => {
       cancelled = true;
     };
   }, [prefCode]);
+
+  const ready = result?.prefCode === prefCode;
+  const bundle = result && "bundle" in result ? result.bundle : null;
+  const loading = !ready;
+  const errored = ready && result != null && "error" in result;
 
   // requestAnimationFrame でフレームを駆動（30fps 相当・ループ）
   useEffect(() => {

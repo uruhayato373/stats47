@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 
 const MigrationFlowPlayer = dynamic(
   () => import("./MigrationFlowPlayer").then((m) => m.MigrationFlowPlayer),
