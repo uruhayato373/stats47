@@ -272,7 +272,7 @@ N02 鉄道路線を路線図レイヤーとして追加。新幹線（`lineName`
 | 2 | 駅別データ・路線を R2 snapshot 化（`app/station-passengers/`） | ✅ 完了 2026-05-22 |
 | 3 | `packages/station-passengers/` 共有パッケージ化 | ✅ 完了 2026-05-22 |
 | 4 | Web ページ 2 種（ランキング + アニメ地図）+ 相互リンク | ✅ 完了 2026-05-22 |
-| 5 | 動画 SNS 展開（Remotion 9:16・1:1 + 47県バッチ + 投稿） | ⬜ 未着手 |
+| 5 | 動画 SNS 展開（Remotion 9:16・1:1 + 47県バッチ） | ✅ 完了 2026-05-22 |
 
 **Phase 1 完了分**:
 - `packages/gis/src/station-passengers/register-ranking.ts` — S12 を県別合計に集計し
@@ -308,17 +308,25 @@ N02 鉄道路線を路線図レイヤーとして追加。新幹線（`lineName`
 - 相互リンク: アニメ地図 → ランキング（実装済み）。ランキング → アニメ地図方向は
   ranking テンプレが自動生成のため未配線（page_components 経由の follow-up）。
 
-### 残タスク（Phase 5 + 改善）
+**Phase 5 完了分**:
+- `StationPassengersReel` を layout 可変化（`format`: landscape 16:9 / portrait 9:16 /
+  square 1:1）。`LAYOUTS` 設定で地図矩形・パネル配置を切替、portrait/square は
+  地図上＋パネル下の 2 列構成。
+- Root.tsx に 3 コンポジション（`StationPassengers-Reel` /
+  `-Portrait` / `-Square`）。schema に `format` enum 追加。
+- `apps/remotion/scripts/pipeline/render-station-passengers.ts` — 47県 × 3
+  フォーマットの一括レンダー（フォーマット・県を引数で絞り込み可）。
+  出力 `out/station-passengers/{format}/{NN}.mp4`。検証レンダー 3 形式とも成功。
 
-- **Phase 5**: `StationPassengersReel` を layout 可変化（landscape/portrait）→
-  Remotion に 9:16・1:1 コンポジション追加 → 47県バッチレンダー（`scripts/pipeline/`）→
-  `/post-youtube` `/post-instagram` `/post-x` 接続。
+### 残タスク（運用・改善）
+
+- 47県 × 3 フォーマットのフルバッチレンダー実行（~70分）→ `/post-youtube`
+  `/post-instagram` `/post-x` で投稿（運用ステップ。/post-* は MP4 対応済み）。
 - ランキング → アニメ地図ページの相互リンク（page_components で関連リンク追加）。
 - AI コンテンツ生成（`/generate-ai-content` で `railway-passengers` の faq /
   regional_analysis / insights を生成）。
 - ラベル重なり解消（migration-flow の `deOverlapLabels` 移植）。
-- 本番反映: `/sync-snapshots` フル実行（D1→R2 push）+ `known-ranking-keys.ts` を
-  commit してデプロイ。
+- 本番反映: `/sync-snapshots` フル実行（D1→R2 push）+ デプロイ。
 
 ### 関連
 

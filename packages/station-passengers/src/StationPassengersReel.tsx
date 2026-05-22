@@ -9,22 +9,65 @@ import type { Station, StationPassengerData } from "./types";
 /** 24 秒 @ 30fps。Remotion 側の durationInFrames に使う */
 export const STATION_PASSENGERS_DURATION = 720;
 
-const FRAME_W = 1920;
-const FRAME_H = 1080;
+/** 出力フォーマット */
+export type StationPassengersFormat = "landscape" | "portrait" | "square";
 
-/** 左: 地図パネル矩形 */
-const MAP_RECT = { x0: 56, y0: 64, x1: 1336, y1: 1016 };
-/** 右: 統計パネル */
-const PANEL_X = 1372;
-const PANEL_W = FRAME_W - PANEL_X - 36;
+interface Rect {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+}
+
+interface LayoutConfig {
+  width: number;
+  height: number;
+  /** 地図パネル矩形 */
+  mapRect: Rect;
+  /** 統計パネル矩形 */
+  panel: Rect;
+  /** side = 地図の右に縦並び / below = 地図の下に横 2 列 */
+  panelMode: "side" | "below";
+  /** バブル最大半径 */
+  rMax: number;
+}
+
+/** フォーマット別レイアウト */
+const LAYOUTS: Record<StationPassengersFormat, LayoutConfig> = {
+  // YouTube・X 用 16:9
+  landscape: {
+    width: 1920,
+    height: 1080,
+    mapRect: { x0: 56, y0: 64, x1: 1336, y1: 1016 },
+    panel: { x0: 1372, y0: 0, x1: 1884, y1: 1080 },
+    panelMode: "side",
+    rMax: 52,
+  },
+  // Instagram Reels・YouTube Shorts・TikTok 用 9:16
+  portrait: {
+    width: 1080,
+    height: 1920,
+    mapRect: { x0: 24, y0: 150, x1: 1056, y1: 1230 },
+    panel: { x0: 24, y0: 1252, x1: 1056, y1: 1896 },
+    panelMode: "below",
+    rMax: 54,
+  },
+  // Instagram フィード用 1:1
+  square: {
+    width: 1080,
+    height: 1080,
+    mapRect: { x0: 24, y0: 96, x1: 1056, y1: 660 },
+    panel: { x0: 24, y0: 680, x1: 1056, y1: 1056 },
+    panelMode: "below",
+    rMax: 38,
+  },
+};
 
 /** アニメーション区間 (フレーム) */
 const INTRO = 30;
 const OUTRO = 40;
 
-/** バブル半径レンジ (px) */
 const R_MIN = 3;
-const R_MAX = 52;
 
 const BUBBLE = "#0D9488"; // 乗降客数バブル (青緑)
 const BUBBLE_DARK = "#0F766E";
@@ -76,6 +119,8 @@ export interface StationPassengersReelProps {
   data: StationPassengerData;
   /** N02 路線ライン (GeoJSON FeatureCollection)。省略時は路線図を描かない */
   railLines?: FeatureCollection | null;
+  /** 出力フォーマット (既定: landscape 16:9) */
+  format?: StationPassengersFormat;
 }
 
 interface PlacedStation extends Station {
@@ -89,11 +134,14 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   topology,
   data,
   railLines,
+  format = "landscape",
 }) => {
+  const L = LAYOUTS[format];
   const { years } = data;
 
   /** 県境ポリゴン + 駅ポイント + 路線ラインの投影 */
   const placed = useMemo(() => {
+    const { mapRect } = L;
     const objName = Object.keys(topology.objects)[0];
     const geo = feature(
       topology,
@@ -103,10 +151,10 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
       (f) => f.properties?.N03_007 === data.prefCode,
     );
 
-    const cx = (MAP_RECT.x0 + MAP_RECT.x1) / 2;
-    const cy = (MAP_RECT.y0 + MAP_RECT.y1) / 2;
-    const fitW = (MAP_RECT.x1 - MAP_RECT.x0) * 0.96;
-    const fitH = (MAP_RECT.y1 - MAP_RECT.y0) * 0.96;
+    const cx = (mapRect.x0 + mapRect.x1) / 2;
+    const cy = (mapRect.y0 + mapRect.y1) / 2;
+    const fitW = (mapRect.x1 - mapRect.x0) * 0.96;
+    const fitH = (mapRect.y1 - mapRect.y0) * 0.96;
 
     const projection = geoMercator();
     if (prefFeat) {
@@ -142,7 +190,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
     }
 
     return { outline, stations, railRegular, railShinkansen };
-  }, [topology, data, railLines]);
+  }, [topology, data, railLines, L]);
 
   /** 全期間・全駅の最大乗降客数 (バブルスケールの分母) */
   const maxCount = useMemo(() => {
@@ -181,7 +229,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   }, [placed.stations, yearA, yearB, yt]);
 
   const radiusOf = (count: number): number =>
-    count <= 0 ? 0 : R_MIN + (R_MAX - R_MIN) * Math.sqrt(count / maxCount);
+    count <= 0 ? 0 : R_MIN + (L.rMax - R_MIN) * Math.sqrt(count / maxCount);
 
   const intro = interp(frame, 0, INTRO, 0, 1, easeOutCubic);
   const outro = interp(
@@ -216,22 +264,23 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   const labelCodes = new Set(ranked.slice(0, 7).map((r) => r.s.code));
 
   const totalCount = ranked.reduce((sum, r) => sum + r.c, 0);
+  const { mapRect, panel } = L;
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#F8FAFC", fontFamily: FONT }}>
-      {/* ───────── 左: 地図 ───────── */}
+      {/* ───────── 地図 ───────── */}
       <svg
-        width={FRAME_W}
-        height={FRAME_H}
-        viewBox={`0 0 ${FRAME_W} ${FRAME_H}`}
+        width={L.width}
+        height={L.height}
+        viewBox={`0 0 ${L.width} ${L.height}`}
         style={{ position: "absolute", left: 0, top: 0 }}
       >
         {/* 地図パネル背景 */}
         <rect
-          x={MAP_RECT.x0}
-          y={MAP_RECT.y0}
-          width={MAP_RECT.x1 - MAP_RECT.x0}
-          height={MAP_RECT.y1 - MAP_RECT.y0}
+          x={mapRect.x0}
+          y={mapRect.y0}
+          width={mapRect.x1 - mapRect.x0}
+          height={mapRect.y1 - mapRect.y0}
           fill={MAP_BG}
           stroke="#94A3B8"
           strokeWidth={1.5}
@@ -263,7 +312,6 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
         {(placed.railRegular.length > 0 ||
           placed.railShinkansen.length > 0) && (
           <g clipPath="url(#pref-clip)" opacity={intro}>
-            {/* 在来線など */}
             {placed.railRegular.map((d, i) => (
               <path
                 key={`rail-${i}`}
@@ -275,7 +323,6 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
                 strokeLinejoin="round"
               />
             ))}
-            {/* 新幹線 (在来線の上に太線・青で重ねる) */}
             {placed.railShinkansen.map((d, i) => (
               <path
                 key={`shin-${i}`}
@@ -348,135 +395,201 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
           })}
       </svg>
 
-      {/* ───────── 右: 統計パネル ───────── */}
+      {/* ───────── 統計パネル ───────── */}
       <div
         style={{
           position: "absolute",
-          left: PANEL_X,
-          top: 0,
-          width: PANEL_W,
-          height: FRAME_H,
+          left: panel.x0,
+          top: panel.y0,
+          width: panel.x1 - panel.x0,
+          height: panel.y1 - panel.y0,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: 20,
+          gap: L.panelMode === "side" ? 20 : 14,
           opacity: intro,
         }}
       >
-        {/* タイトル */}
-        <div>
-          <div style={{ fontSize: 44, fontWeight: 900, color: FG, lineHeight: 1.15 }}>
-            {data.prefName}
-          </div>
-          <div style={{ fontSize: 23, fontWeight: 700, color: MUTED }}>
-            鉄道駅の乗降客数
-          </div>
-        </div>
-
-        {/* 年 (大) */}
-        <div
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E2E8F0",
-            borderRadius: 14,
-            padding: "16px 22px",
-          }}
-        >
-          <div style={{ fontSize: 18, color: MUTED, fontWeight: 700 }}>年度</div>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
-            <span style={{ fontSize: 76, fontWeight: 900, color: OUTLINE, lineHeight: 1 }}>
-              {displayYear}
-            </span>
-            <span style={{ fontSize: 24, color: MUTED, fontWeight: 700 }}>年度</span>
-          </div>
-          <div style={{ marginTop: 6, fontSize: 19, color: MUTED }}>
-            県内 {ranked.length} 駅 合計{" "}
-            <span style={{ fontSize: 26, fontWeight: 900, color: BUBBLE_DARK }}>
-              {fmt(totalCount)}
-            </span>{" "}
-            人/日
-          </div>
-        </div>
-
-        {/* 上位 5 駅 */}
-        <div
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E2E8F0",
-            borderRadius: 14,
-            padding: "14px 22px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: 20,
-              fontWeight: 900,
-              color: BUBBLE_DARK,
-              marginBottom: 8,
-            }}
-          >
-            乗降客数ランキング
-          </div>
-          {top5.map((r, i) => (
+        {L.panelMode === "side" ? (
+          <>
+            <TitleBlock prefName={data.prefName} />
+            <YearBlock
+              displayYear={displayYear}
+              stationCount={ranked.length}
+              totalCount={totalCount}
+            />
+            <RankingBlock rows={top5} />
+            <LegendBlock />
+            <SourceBlock source={data.source} dataset={data.dataset} />
+          </>
+        ) : (
+          <>
+            <div style={{ display: "flex", gap: 16, alignItems: "stretch" }}>
+              <div
+                style={{
+                  flex: "1 1 0",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                }}
+              >
+                <TitleBlock prefName={data.prefName} />
+                <YearBlock
+                  displayYear={displayYear}
+                  stationCount={ranked.length}
+                  totalCount={totalCount}
+                />
+              </div>
+              <div style={{ flex: "1 1 0" }}>
+                <RankingBlock rows={top5} />
+              </div>
+            </div>
             <div
-              key={r.s.code}
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "center",
-                padding: "8px 0",
-                borderBottom:
-                  i < top5.length - 1 ? "1px solid rgba(148,163,184,0.2)" : "none",
+                alignItems: "flex-end",
+                gap: 16,
               }}
             >
-              <span style={{ fontSize: 23, fontWeight: 700, color: FG }}>
-                <span
-                  style={{ color: OUTLINE, fontWeight: 900, marginRight: 12 }}
-                >
-                  {i + 1}
-                </span>
-                {r.s.name}
-              </span>
-              <span style={{ fontSize: 24, fontWeight: 900, color: BUBBLE_DARK }}>
-                {fmt(r.c)}
-                <span style={{ fontSize: 14, color: MUTED, marginLeft: 3 }}>
-                  人/日
-                </span>
-              </span>
+              <LegendBlock />
+              <SourceBlock source={data.source} dataset={data.dataset} />
             </div>
-          ))}
-        </div>
-
-        {/* 凡例 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <svg width={56} height={24}>
-              <circle cx={12} cy={12} r={6} fill={BUBBLE} fillOpacity={0.5} stroke={BUBBLE_DARK} />
-              <circle cx={40} cy={12} r={11} fill={BUBBLE} fillOpacity={0.5} stroke={BUBBLE_DARK} />
-            </svg>
-            <span style={{ fontSize: 16, color: MUTED }}>
-              円の大きさ = 1 日あたり乗降客数
-            </span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <svg width={56} height={20}>
-              <line x1={6} y1={6} x2={50} y2={6} stroke={SHINKANSEN} strokeWidth={3.6} />
-              <line x1={6} y1={15} x2={50} y2={15} stroke={RAIL} strokeWidth={2.4} />
-            </svg>
-            <span style={{ fontSize: 16, color: MUTED }}>
-              <span style={{ color: SHINKANSEN, fontWeight: 700 }}>新幹線</span>
-              {" / "}在来線 (国土数値情報 N02)
-            </span>
-          </div>
-        </div>
-
-        {/* 出典 */}
-        <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.5 }}>
-          出典: {data.source}
-          <br />
-          {data.dataset}
-        </div>
+          </>
+        )}
       </div>
     </AbsoluteFill>
   );
 };
+
+// ---------------------------------------------------------------------------
+// パネル構成ブロック (side / below 両モードで共用)
+
+const TitleBlock: React.FC<{ prefName: string }> = ({ prefName }) => (
+  <div>
+    <div style={{ fontSize: 44, fontWeight: 900, color: FG, lineHeight: 1.15 }}>
+      {prefName}
+    </div>
+    <div style={{ fontSize: 23, fontWeight: 700, color: MUTED }}>
+      鉄道駅の乗降客数
+    </div>
+  </div>
+);
+
+const YearBlock: React.FC<{
+  displayYear: number;
+  stationCount: number;
+  totalCount: number;
+}> = ({ displayYear, stationCount, totalCount }) => (
+  <div
+    style={{
+      backgroundColor: "#FFFFFF",
+      border: "1px solid #E2E8F0",
+      borderRadius: 14,
+      padding: "16px 22px",
+    }}
+  >
+    <div style={{ fontSize: 18, color: MUTED, fontWeight: 700 }}>年度</div>
+    <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
+      <span
+        style={{ fontSize: 76, fontWeight: 900, color: OUTLINE, lineHeight: 1 }}
+      >
+        {displayYear}
+      </span>
+      <span style={{ fontSize: 24, color: MUTED, fontWeight: 700 }}>年度</span>
+    </div>
+    <div style={{ marginTop: 6, fontSize: 19, color: MUTED }}>
+      県内 {stationCount} 駅 合計{" "}
+      <span style={{ fontSize: 26, fontWeight: 900, color: BUBBLE_DARK }}>
+        {fmt(totalCount)}
+      </span>{" "}
+      人/日
+    </div>
+  </div>
+);
+
+const RankingBlock: React.FC<{
+  rows: Array<{ s: { code: string; name: string }; c: number }>;
+}> = ({ rows }) => (
+  <div
+    style={{
+      backgroundColor: "#FFFFFF",
+      border: "1px solid #E2E8F0",
+      borderRadius: 14,
+      padding: "14px 22px",
+      height: "100%",
+    }}
+  >
+    <div
+      style={{
+        fontSize: 20,
+        fontWeight: 900,
+        color: BUBBLE_DARK,
+        marginBottom: 8,
+      }}
+    >
+      乗降客数ランキング
+    </div>
+    {rows.map((r, i) => (
+      <div
+        key={r.s.code}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "8px 0",
+          borderBottom:
+            i < rows.length - 1 ? "1px solid rgba(148,163,184,0.2)" : "none",
+        }}
+      >
+        <span style={{ fontSize: 23, fontWeight: 700, color: FG }}>
+          <span style={{ color: OUTLINE, fontWeight: 900, marginRight: 12 }}>
+            {i + 1}
+          </span>
+          {r.s.name}
+        </span>
+        <span style={{ fontSize: 24, fontWeight: 900, color: BUBBLE_DARK }}>
+          {fmt(r.c)}
+          <span style={{ fontSize: 14, color: MUTED, marginLeft: 3 }}>
+            人/日
+          </span>
+        </span>
+      </div>
+    ))}
+  </div>
+);
+
+const LegendBlock: React.FC = () => (
+  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <svg width={56} height={24}>
+        <circle cx={12} cy={12} r={6} fill={BUBBLE} fillOpacity={0.5} stroke={BUBBLE_DARK} />
+        <circle cx={40} cy={12} r={11} fill={BUBBLE} fillOpacity={0.5} stroke={BUBBLE_DARK} />
+      </svg>
+      <span style={{ fontSize: 16, color: MUTED }}>
+        円の大きさ = 1 日あたり乗降客数
+      </span>
+    </div>
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <svg width={56} height={20}>
+        <line x1={6} y1={6} x2={50} y2={6} stroke={SHINKANSEN} strokeWidth={3.6} />
+        <line x1={6} y1={15} x2={50} y2={15} stroke={RAIL} strokeWidth={2.4} />
+      </svg>
+      <span style={{ fontSize: 16, color: MUTED }}>
+        <span style={{ color: SHINKANSEN, fontWeight: 700 }}>新幹線</span>
+        {" / "}在来線 (国土数値情報 N02)
+      </span>
+    </div>
+  </div>
+);
+
+const SourceBlock: React.FC<{ source: string; dataset: string }> = ({
+  source,
+  dataset,
+}) => (
+  <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.5, textAlign: "right" }}>
+    出典: {source}
+    <br />
+    {dataset}
+  </div>
+);

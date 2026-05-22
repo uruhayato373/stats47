@@ -876,8 +876,9 @@ export const RemotionRoot: React.FC = () => {
         />
       </Folder>
 
-      {/* 駅別乗降客数バブルマップ (国土数値情報 S12, 16:9) */}
+      {/* 駅別乗降客数バブルマップ (国土数値情報 S12) */}
       <Folder name="StationPassengers">
+        {/* YouTube・X 用 16:9 */}
         <Composition
           id="StationPassengers-Reel"
           component={StationPassengersReelPreview}
@@ -888,6 +889,37 @@ export const RemotionRoot: React.FC = () => {
           schema={StationPassengersSchema}
           defaultProps={{
             prefCode: '22',
+            format: 'landscape' as const,
+          }}
+        />
+
+        {/* Instagram Reels・YouTube Shorts・TikTok 用 9:16 */}
+        <Composition
+          id="StationPassengers-Reel-Portrait"
+          component={StationPassengersReelPreview}
+          width={CANVAS.portrait.width}
+          height={CANVAS.portrait.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={STATION_PASSENGERS_DURATION}
+          schema={StationPassengersSchema}
+          defaultProps={{
+            prefCode: '22',
+            format: 'portrait' as const,
+          }}
+        />
+
+        {/* Instagram フィード用 1:1 */}
+        <Composition
+          id="StationPassengers-Reel-Square"
+          component={StationPassengersReelPreview}
+          width={CANVAS.square.width}
+          height={CANVAS.square.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={STATION_PASSENGERS_DURATION}
+          schema={StationPassengersSchema}
+          defaultProps={{
+            prefCode: '22',
+            format: 'square' as const,
           }}
         />
       </Folder>

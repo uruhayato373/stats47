@@ -277,4 +277,6 @@ export const MigrationFlowSchema = z.object({
 export const StationPassengersSchema = z.object({
   /** 県コード (2 桁、例: "22" = 静岡県) */
   prefCode: z.string().optional(),
+  /** 出力フォーマット (landscape 16:9 / portrait 9:16 / square 1:1) */
+  format: z.enum(["landscape", "portrait", "square"]).optional(),
 });
