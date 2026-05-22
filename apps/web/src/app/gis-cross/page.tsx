@@ -44,6 +44,13 @@ const CROSS_CONTENTS: Array<{
       "全国の年間日照時間を 1km メッシュで可視化。都道府県ランキングでは見えない、県内の山間部と平野部、太平洋側と日本海側の日照差が地図に表れます。",
     pair: "日照時間 × 1km メッシュ",
   },
+  {
+    href: "/gis-cross/migration-flow",
+    title: "都道府県 人口移動フロー",
+    description:
+      "47 都道府県それぞれの転入・転出をアニメーション地図で可視化。焦点の県を市区町村別の転入超過率で塗り分け、全国との人の流れをパーティクルで表します。",
+    pair: "人口移動 × 47 都道府県",
+  },
 ];
 
 export default function GisCrossHubPage() {

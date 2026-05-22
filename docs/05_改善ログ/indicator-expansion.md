@@ -350,11 +350,12 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 - 残 pending: medium 16 件 (infectious-disease-deaths / factory-employment-planned / factory-by-industry / factory-inland-coastal / mountainous-area-subsidy / dairy-cattle / livestock / forestry / biomass / environment 系 etc.)
 - 推奨実行: `/expand-indicators --target 10 --priority medium`
 
-### 後続アクション (人間 / 別スキルで実施)
+### 後続アクション
 
-- `/generate-known-ranking-keys` 実行 → known-ranking-keys.ts に 9 keys を追加 (未実行だと middleware が 410 を返す)
-- `/sync-snapshots` で R2 へ反映 → 本番配信
-- 必要なら `/purge-cdn` で旧 ISR キャッシュをパージ
+- ✅ `/generate-known-ranking-keys` 実行 → known-ranking-keys.ts 計 1,968 keys に再生成 (2026-05-22)
+- ✅ PR #327 で develop→main マージ・Cloudflare デプロイ済み (2026-05-22)
+- ✅ `/sync-snapshots --only master / ranking-values / ranking-normalized-values` で R2 反映済み (2026-05-22、エラー 0)
+- ✅ 本番疎通確認: 新 9 ページとも HTTP 200 + データ付きレンダリング確認済み (Googlebot UA)
 
 ---
 

@@ -26,13 +26,13 @@ tags: [koumuin, claude-code, setup]
 
 執筆者は元自治体職員で、現在 Claude Code を日常的に業務改善に使っています。現在は Claude Code を使い、47 都道府県の統計サイト stats47.jp（約 2,000 のランキングを毎日自動更新）を個人で開発・運用しています。
 
-なお本記事は **「会社（庁内）PC で Claude Code を実務に使う」** ことを主軸に置きます。会社 PC はプロキシ閉域・管理者権限なしという制約がありますが、**Claude Code はプロキシ環境でも動きます**。
+なお本記事は 「会社（庁内）PC で Claude Code を実務に使う」 ことを主軸に置きます。会社 PC はプロキシ閉域・管理者権限なしという制約がありますが、**Claude Code はプロキシ環境でも動きます**。
 
 必要なのは「プロキシ設定」というひと手間で、その具体的な方法は手順 4 で解説します。OS 側のセットアップ（手順 2: Mac / 手順 3: Windows）に手順 4 のプロキシ設定を重ねれば、会社 PC が正規の利用環境になります。
 
 一方で「まずは雰囲気だけ素早く掴みたい」という場合は、私物 PC + モバイル WiFi なら 30 分ほどで動かせる最短ルートもあります（プロキシ設定が不要なため）。
 
-本記事では **会社 PC を本筋、私物 PC を「お試し」** と整理します。お試しで感触を得てから会社 PC に展開する流れも取れますが、最終的に業務で使うのは会社 PC です。
+本記事では 会社 PC を本筋、私物 PC を「お試し」 と整理します。お試しで感触を得てから会社 PC に展開する流れも取れますが、最終的に業務で使うのは会社 PC です。
 
 現場で最初につまずく典型箇所は、概ね次の 3 つに集中します。
 
@@ -119,9 +119,6 @@ reason: unable to verify the first certificate
 
 Claude Code 利用には **Pro プラン (月額 $20)** または **API クレジット** が必要。月額の負担感は ¥3,000 前後から。Pro プランはブラウザ版 Claude も併用できるので、最初は Pro を推奨。
 
-![Anthropic コンソールのアカウント作成画面 (個人メールでサインアップしている画面、API キー発行欄)](./images/screenshot-1-anthropic-console.png)
-<!-- SVG: screenshot | Anthropic コンソールのアカウント作成・API キー発行画面 -->
-
 ### 1-2. API キーの取得と保管
 
 API キーは `sk-ant-api03-` で始まる長い文字列。以下は **絶対 NG**:
@@ -178,7 +175,7 @@ npm -v
 ```
 
 ![`node -v` で v20.x.x が表示されているターミナル画面](./images/screenshot-2-node-version.png)
-<!-- SVG: screenshot | node -v で v20 系が表示されるターミナル画面 -->
+<!-- SVG: terminal | node -v で v20 系が表示されるターミナル画面 -->
 
 ### 2-2. Claude Code CLI のインストール
 
@@ -285,7 +282,7 @@ wsl --install -d Ubuntu-22.04
 会社 PC へのソフト導入交渉の進め方は [#02](../02-internal-network-workarounds/draft.md) [#03](../03-it-dept-security-doc/draft.md) を参照してください。
 
 ![PowerShell で `wsl --install` 実行中の画面、続いて Ubuntu 初回起動でユーザー名入力画面](./images/screenshot-3-wsl-install.png)
-<!-- SVG: screenshot | PowerShell wsl --install と Ubuntu 初回起動 -->
+<!-- SVG: terminal | PowerShell wsl --install と Ubuntu 初回起動 -->
 
 ### 3-2. Ubuntu 内で Node.js + Claude Code
 
@@ -342,13 +339,10 @@ code .
 
 これで VS Code が Ubuntu 内のファイルを直接編集できます。Windows と WSL を 1 つの IDE で扱える状態が完成。
 
-![VS Code 左下に「WSL: Ubuntu-22.04」と表示され、ターミナルで Claude Code が起動している画面](./images/screenshot-4-vscode-wsl-claude.png)
-<!-- SVG: screenshot | VS Code WSL 接続 + 統合ターミナルで Claude Code 起動 -->
-
 ![Windows / WSL2 / VS Code / Claude Code の階層関係](./images/structure-2-wsl-vscode.png)
 <!-- SVG: structure | Windows + WSL2 + VS Code の関係 -->
 
-**「黒い画面（ターミナル）が不安」という方へ。** Claude Code はターミナル専用ツールではありません。
+「黒い画面（ターミナル）が不安」という方へ。 Claude Code はターミナル専用ツールではありません。
 
 VS Code を入れれば、その**統合ターミナル**（VS Code の下部に開くパネル）の中で `claude` を起動でき、左側のファイルエクスプローラで生成・編集されたファイルをそのまま目視確認できます。単独の真っ黒なターミナル画面と向き合う必要はなく、Word のような GUI に近い感覚で扱えます。
 
@@ -451,11 +445,11 @@ curl https://api.anthropic.com/v1/models \
 <!-- SVG: table | # / 症状 / 原因 / 解決 -->
 
 ![よくあるエラーの実画面 (407 エラー、Authentication failed の出力)](./images/screenshot-5-common-errors.png)
-<!-- SVG: screenshot | よくあるエラー: E407 / Authentication failed -->
+<!-- SVG: terminal | よくあるエラー: E407 / Authentication failed -->
 
 ## まとめ
 
-Claude Code の環境構築は、自治体職員にとって「技術的な壁」よりも**「組織的な壁」(管理者権限・ネットワーク制約・稟議) の方が大きい**。
+Claude Code の環境構築は、自治体職員にとって「技術的な壁」よりも「組織的な壁」(管理者権限・ネットワーク制約・稟議) の方が大きい。
 
 実務で使うのは会社（庁内）PC なので、**手順 2 または手順 3 の OS セットアップ + 手順 4 のプロキシ設定** が本筋のルートです。プロキシ設定さえ通れば、会社 PC は普通に Claude Code が動く環境になります。
 
@@ -572,7 +566,7 @@ Claude Code の環境構築は、自治体職員にとって「技術的な壁�
 
 ## 「公務員 × Claude Code」シリーズ
 
-本記事は、自治体職員が Claude Code を日々の業務に活かすための全 31 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
+本記事は、自治体職員が Claude Code を日々の業務に活かすための全 33 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
 
 シリーズの全記事はマガジンにまとめています。他の記事はこちらからどうぞ。
 

@@ -51,6 +51,15 @@ import { ChoroplethBarChartReelPreview } from './features/population-choropleth/
 import { ChoroplethStaticReelPreview } from './features/population-choropleth/previews/ChoroplethStaticReelPreview';
 import { BAR_CHART_REEL_DURATION } from './features/population-choropleth/ChoroplethBarChartReel';
 import { STATIC_REEL_DURATION } from './features/population-choropleth/ChoroplethStaticReel';
+// migration-flow
+import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
+import { MIGRATION_FLOW_DURATION } from '@stats47/migration-flow';
+// station-passengers
+import { StationPassengersReelPreview } from './features/station-passengers/previews/StationPassengersReelPreview';
+import { STATION_PASSENGERS_DURATION } from './features/station-passengers';
+import { MigrationIntro, MIGRATION_INTRO_DURATION } from './features/migration-flow/MigrationIntro';
+import { MigrationSegmentTelop, MIGRATION_TELOP_DURATION } from './features/migration-flow/MigrationSegmentTelop';
+import { MigrationThumbnail } from './features/migration-flow/MigrationThumbnail';
 // Charts (shared)
 import { BarChartRaceScenePreview } from './shared/components/charts/previews/BarChartRaceScenePreview';
 // Utils
@@ -65,6 +74,8 @@ import {
   ComparisonCarouselSchema,
   ComparisonShortSchema,
   PopulationChoroplethSchema,
+  MigrationFlowSchema,
+  StationPassengersSchema,
   LayoutPreviewSchema,
   RankCardPreviewSchema,
   RankingShortSchema,
@@ -798,6 +809,117 @@ export const RemotionRoot: React.FC = () => {
           schema={PopulationChoroplethSchema}
           defaultProps={{
             theme: 'dark' as const,
+          }}
+        />
+      </Folder>
+
+      {/* 都道府県間 人口移動フロー (YouTube 16:9) */}
+      <Folder name="MigrationFlow">
+        <Composition
+          id="MigrationFlow-Reel"
+          component={MigrationFlowReelPreview}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={MIGRATION_FLOW_DURATION}
+          schema={MigrationFlowSchema}
+          defaultProps={{
+            theme: 'light' as const,
+            focusPrefCode: '28',
+          }}
+        />
+
+        {/* イントロ: タイトル + 全国コロプレス地図 */}
+        <Composition
+          id="MigrationFlow-Intro"
+          component={MigrationIntro}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={MIGRATION_INTRO_DURATION}
+          schema={z.object({ theme: z.enum(['light', 'dark']).optional() })}
+          defaultProps={{ theme: 'light' as const }}
+        />
+
+        {/* 区切りテロップ（県ごとに props 差し替えでレンダー） */}
+        <Composition
+          id="MigrationFlow-Telop"
+          component={MigrationSegmentTelop}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={MIGRATION_TELOP_DURATION}
+          schema={z.object({
+            position: z.number().optional(),
+            prefName: z.string().optional(),
+            net: z.number().optional(),
+            theme: z.enum(['light', 'dark']).optional(),
+          })}
+          defaultProps={{
+            position: 1,
+            prefName: '広島県',
+            net: -9921,
+            theme: 'light' as const,
+          }}
+        />
+
+        {/* YouTube サムネイル (1280×720) */}
+        <Composition
+          id="MigrationFlow-Thumbnail"
+          component={MigrationThumbnail}
+          width={CANVAS.youtube.width}
+          height={CANVAS.youtube.height}
+          fps={1}
+          durationInFrames={1}
+          schema={z.object({})}
+          defaultProps={{}}
+        />
+      </Folder>
+
+      {/* 駅別乗降客数バブルマップ (国土数値情報 S12) */}
+      <Folder name="StationPassengers">
+        {/* YouTube・X 用 16:9 */}
+        <Composition
+          id="StationPassengers-Reel"
+          component={StationPassengersReelPreview}
+          width={CANVAS.youtube16x9.width}
+          height={CANVAS.youtube16x9.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={STATION_PASSENGERS_DURATION}
+          schema={StationPassengersSchema}
+          defaultProps={{
+            prefCode: '22',
+            format: 'landscape' as const,
+          }}
+        />
+
+        {/* Instagram Reels・YouTube Shorts・TikTok 用 9:16 */}
+        <Composition
+          id="StationPassengers-Reel-Portrait"
+          component={StationPassengersReelPreview}
+          width={CANVAS.portrait.width}
+          height={CANVAS.portrait.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={STATION_PASSENGERS_DURATION}
+          schema={StationPassengersSchema}
+          defaultProps={{
+            prefCode: '22',
+            format: 'portrait' as const,
+          }}
+        />
+
+        {/* Instagram フィード用 1:1 */}
+        <Composition
+          id="StationPassengers-Reel-Square"
+          component={StationPassengersReelPreview}
+          width={CANVAS.square.width}
+          height={CANVAS.square.height}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={STATION_PASSENGERS_DURATION}
+          schema={StationPassengersSchema}
+          defaultProps={{
+            prefCode: '22',
+            format: 'square' as const,
           }}
         />
       </Folder>

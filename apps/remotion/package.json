@@ -11,8 +11,9 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@stats47/area": "*",
-
+    "@stats47/migration-flow": "*",
     "@stats47/ranking": "*",
+    "@stats47/station-passengers": "*",
     "@stats47/types": "*",
     "@stats47/utils": "*",
     "better-sqlite3": "^12.6.2",

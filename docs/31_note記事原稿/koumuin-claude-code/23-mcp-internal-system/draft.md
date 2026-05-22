@@ -207,7 +207,7 @@ mcp__finance-adapter__get_budget_execution で 2026 年 5 月の
 Claude Code は MCP 経由で CSV を取得 → 構造化 → フィルタ → 分析 → 提案、を 1 連の対話で実行する。CSV のパース、執行率計算、表整形、文章生成までを Claude が担う。
 
 ![Claude Code 内で MCP tool が呼び出されて CSV が取得され](./images/screenshot-1-mcp-finance-adapter.png)
-<!-- SVG: screenshot | Claude Code 内で MCP tool が呼び出されて CSV が取得され -->
+<!-- SVG: terminal | Claude Code 内で MCP tool が呼び出されて CSV が取得され -->
 
 ### ステップ 4: セキュリティ設計の鉄則
 
@@ -241,7 +241,7 @@ LGWAN 系で Claude Code 本体を動かすのは現状ほぼ不可能(インタ
   - データ移送承認ワークフロー (1 日 1 回まとめて)
 ```
 
-「リアルタイム連携」は諦め、**「日次バッチ + 安全な分析環境」に割り切るのが LGWAN 時代の現実解**。リアルタイム性を諦める代わりに、セキュリティ承認のハードルを大幅に下げる。
+「リアルタイム連携」は諦め、「日次バッチ + 安全な分析環境」に割り切るのが LGWAN 時代の現実解。リアルタイム性を諦める代わりに、セキュリティ承認のハードルを大幅に下げる。
 
 ![LGWAN 分離構成](./images/structure-2-lgwan-separation.png)
 <!-- SVG: structure | LGWAN/インターネット系/USB の分離 -->
@@ -270,9 +270,9 @@ MCP server は庁内システム連携の「次の標準」になり得るが、
 
 ## 関連記事 / 次に読む
 
-- (有料) Claude Code Hooks で個人情報マスキングを自動化する
-- (有料) 監査に耐える AI 活用ログを残す .claude/settings.json
-- (有料) ローカル LLM (Ollama) × Claude Code で完全オフライン業務
+- Claude Code Hooks で個人情報マスキングを自動化する
+- 監査に耐える AI 活用ログを残す .claude/settings.json
+- ローカル LLM (Ollama) × Claude Code で完全オフライン業務
 
 ---
 
@@ -408,7 +408,7 @@ claude run audit-summary --from=2026-05-01 --to=2026-05-31
 
 ## 「公務員 × Claude Code」シリーズ
 
-本記事は、自治体職員が Claude Code を日々の業務に活かすための全 31 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
+本記事は、自治体職員が Claude Code を日々の業務に活かすための全 33 本シリーズの 1 本です。環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで、関心のあるテーマから読み進められます。
 
 シリーズの全記事はマガジンにまとめています。他の記事はこちらからどうぞ。
 

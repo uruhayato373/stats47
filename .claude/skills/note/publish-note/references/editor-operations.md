@@ -14,17 +14,18 @@ const path = require('path');
 const slug = '<SLUG>';
 const projectRoot = '/Users/minamidaisuke/stats47';
 
-// 探索順: docs/31_.../<slug>, docs/31_.../<vertical>/<slug>, .local/r2/note/<slug>
+// 探索順: 31_note記事原稿（制作中）と 32_note公開済み（公開完了ヴァーティカル）の
+//         <slug> 直下および <vertical>/<slug> を検索する。
 // 各ディレクトリ内では note.md (旧規約) と draft.md (新規約) の両方をチェック
-const baseDirs = [
-  path.join(projectRoot, 'docs/31_note記事原稿', slug),
-  path.join(projectRoot, '.local/r2/note', slug),
-];
-const verticalRoot = path.join(projectRoot, 'docs/31_note記事原稿');
-if (fs.existsSync(verticalRoot)) {
-  for (const v of fs.readdirSync(verticalRoot)) {
-    const vDir = path.join(verticalRoot, v, slug);
-    if (fs.existsSync(vDir)) baseDirs.push(vDir);
+const baseDirs = [];
+for (const root of ['docs/31_note記事原稿', 'docs/32_note公開済み']) {
+  const rootAbs = path.join(projectRoot, root);
+  baseDirs.push(path.join(rootAbs, slug));
+  if (fs.existsSync(rootAbs)) {
+    for (const v of fs.readdirSync(rootAbs)) {
+      const vDir = path.join(rootAbs, v, slug);
+      if (fs.existsSync(vDir)) baseDirs.push(vDir);
+    }
   }
 }
 

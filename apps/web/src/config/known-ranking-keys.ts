@@ -10,8 +10,8 @@
  *           `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
  * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-05-21
- * 件数: 1968
+ * 最終生成日: 2026-05-22
+ * 件数: 1969
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -1476,6 +1476,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "pumpkin-consumption-quantity",
   "quasi-national-park-area",
   "rabies-vaccination-dogs",
+  "railway-passengers",
   "railway-station-count",
   "ramen-dining-consumption-expenditure",
   "ratio-65-plus",

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670" width="1280" height="670">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 670">
 <style>
   text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
 </style>
@@ -23,9 +23,6 @@
 <text x="250" y="336" font-size="44" font-weight="bold" fill="#1e293b">補助金申請書類の整合性チェックを Claude</text>
 <text x="250" y="394" font-size="44" font-weight="bold" fill="#1e293b">Code で</text>
 
-<!-- Paid/Free badge -->
-<rect x="1080" y="78" width="140" height="40" rx="20" fill="#fee2e2"/>
-<text x="1150" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="#dc2626">有料記事</text>
 
 <!-- Footer -->
 <line x1="80" y1="600" x2="1200" y2="600" stroke="#e2e8f0" stroke-width="1"/>

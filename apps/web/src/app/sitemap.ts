@@ -39,6 +39,11 @@ const PREFECTURE_CODES = Array.from(
   (_, i) => String(i + 1).padStart(2, "0") + "000",
 );
 
+/** 2 桁県コード（station-passengers ページ用） */
+const PREFECTURE_CODES_2 = Array.from({ length: 47 }, (_, i) =>
+  String(i + 1).padStart(2, "0"),
+);
+
 // ----------------------------------------------------------------------------
 // Sitemap Index 定義
 // ----------------------------------------------------------------------------
@@ -85,6 +90,21 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
     changeFrequency: "yearly",
     priority: 0.6,
   },
+  {
+    url: `${BASE_URL}/gis-cross/migration-flow`,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  },
+  {
+    url: `${BASE_URL}/station-passengers`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  ...PREFECTURE_CODES_2.map((code) => ({
+    url: `${BASE_URL}/station-passengers/${code}`,
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  })),
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },

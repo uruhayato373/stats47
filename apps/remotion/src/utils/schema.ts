@@ -261,3 +261,22 @@ export const PopulationChoroplethSchema = z.object({
   theme: z.enum(["light", "dark"]).optional(),
   showGuides: z.boolean().optional(),
 });
+
+/**
+ * MigrationFlow 用スキーマ
+ */
+export const MigrationFlowSchema = z.object({
+  theme: z.enum(["light", "dark"]).optional(),
+  /** 焦点県コード (2 桁、例: "28" = 兵庫県) */
+  focusPrefCode: z.string().optional(),
+});
+
+/**
+ * StationPassengers (駅別乗降客数) 用スキーマ
+ */
+export const StationPassengersSchema = z.object({
+  /** 県コード (2 桁、例: "22" = 静岡県) */
+  prefCode: z.string().optional(),
+  /** 出力フォーマット (landscape 16:9 / portrait 9:16 / square 1:1) */
+  format: z.enum(["landscape", "portrait", "square"]).optional(),
+});
