@@ -30,9 +30,16 @@ export const metadata: Metadata = {
 const fmt = (n: number) => Math.round(n).toLocaleString("ja-JP");
 
 export default async function StationPassengersIndexPage() {
-  const index = await fetchFromR2AsJson<StationPassengersIndex>(
-    "app/station-passengers/index.json",
-  );
+  // ビルド時 (CI) は R2 認証情報が無く fetchFromR2AsJson が throw するため
+  // 握りつぶす。ISR 再検証時に R2 バインディング経由で実データを取得する。
+  let index: StationPassengersIndex | null = null;
+  try {
+    index = await fetchFromR2AsJson<StationPassengersIndex>(
+      "app/station-passengers/index.json",
+    );
+  } catch {
+    index = null;
+  }
   const prefectures = index?.prefectures ?? [];
   const latestYear = index?.latestYear ?? 2023;
 
