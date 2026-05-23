@@ -62,11 +62,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // title / description 差別化（#77 Phase 4）
     // 47 都道府県全てで同一テンプレートだった title を「県の top 強み指標」で差別化。
     // 例: "東京都の統計データ" → "東京都の統計データ｜卸売業年間商品販売額 全国1位 | 47都道府県比較"
-    const topStrength = profile.strengths[0];
+    // rank=0 はデータ欠損 (未ランク) のため除外。R2 snapshot に rank=0 が含まれている場合の defense in depth。
+    const validStrengths = profile.strengths.filter((s) => s.rank >= 1 && s.rank <= 47);
+    const topStrength = validStrengths[0];
     const title = topStrength
       ? `${profile.areaName}の統計データ｜${topStrength.indicator} 全国${topStrength.rank}位｜47都道府県比較`
       : `${profile.areaName}の統計データ｜47都道府県比較`;
-    const descriptionHighlights = profile.strengths
+    const descriptionHighlights = validStrengths
       .slice(0, 3)
       .map((s) => `${s.indicator} 全国${s.rank}位`)
       .join("、");

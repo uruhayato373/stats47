@@ -2,12 +2,55 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-17
+updated: 2026-05-23
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## [P0-RANKING-INDEX] /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸)
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-index-coverage / ranking-clicks
+- **owner**: claude
+- **deployed_at**: -
+- **due**: 2026-07-06
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **verification_command**: `awk -F',' 'NR>1 && $1 ~ /\/ranking\// {n++} END {print "ranking indexed: " n}' .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv`
+
+### 背景
+
+2026-W21 診断で判明: /ranking 詳細ページが sitemap に 1,913 URL あるが、GSC に impressions 出ているのは 821 URL のみ → **インデックス率 43%**。
+
+clicks 576/週 (全体の 72%) を生んでいる主力ページ群なので、ここのインデックス率改善が Phase 0 最大のレバー。
+
+### 施策
+
+1. INDEXING-AUTO-01 と連携: 未 indexed の /ranking URL を優先送信対象に
+2. 未 indexed URL の内容診断: 内容が薄いものは AI 補強 (NotebookLM など)、内部リンク不足のものはリンク追加
+3. 構造化データ (BreadcrumbList, ItemList) の網羅確認
+4. /ranking 詳細 → /areas/{prefCode}、/category/{key}、関連 ranking への内部リンク強化
+
+### 想定効果
+
+**[仮説]** indexed 821 → 1,300+ (70%+) になれば、1 URL あたり平均 0.7 click/週 を維持しても clicks +335/週 (+58%)。Phase 0 目標 ×1.5 の主要寄与施策。
+
+**根拠**: /blog が 78% indexation を達成 (142/183) しているので、/ranking も同等まで持っていけるはず。差分は内部リンク密度と内容ボリュームと推測。
+
+### 検証
+
+- **検証期日**: 2026-07-06
+- **期日後の判定**:
+  - /ranking indexed ≥ 1,300 (70%+) → effect/full
+  - 1,000-1,300 → effect/partial
+  - < 1,000 → effect/none、次の検証: 個別ページ品質確認、低品質 URL の noindex 化検討
+
+### NOT this施策
+
+- 個別 URL の seoTitle 改修 → [CTR-AUTO-01] / [BLOG-CTR-02] 系
+- sitemap 構造変更 → `indexing.md`
 
 ## [CTR-AUTO-01] CTR 改善候補の月次自動抽出 (Phase 3 sprint)
 

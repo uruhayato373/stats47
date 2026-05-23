@@ -2,7 +2,7 @@
 type: improvement-log
 metric: indexing
 created: 2026-05-18
-updated: 2026-05-18
+updated: 2026-05-23
 ---
 
 # Indexing 改善ログ
@@ -18,6 +18,84 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 このログに記録しない対象:
 - ページ単位の SEO 改修 (CTR・タイトル) → `gsc.md` の BLOG-CTR-* 系
 - robots.txt / OGP 等のクロール経路 → `gsc.md`
+
+## [P0-CITIES-DIAG] 市区町村ページの Phase 1 復活戦略設計
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-index-coverage / sitemap-strategy
+- **owner**: claude
+- **deployed_at**: -
+- **due**: 2026-07-13
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **verification_command**: `node .claude/scripts/gsc/url-inspection-daily.cjs --pattern '/areas/.+/cities/'`
+
+### 背景
+
+2026-W21 診断で判明: 市区町村ページ 25,785 URL のうち GSC indexed は **21 URL (0.08%)**、impressions 合計 33、clicks 0。W19 で公開した最大の未活用資産。
+
+現状は意図的に sitemap 除外 (`docs/05_改善ログ/indexing.md` 旧 INDEXING-DRILLDOWN-01 参照)。Phase 1 で復活させるには事前設計が必須。
+
+### 設計対象 (Phase 0 内に確定)
+
+1. **品質テンプレート**: 1 ページ最低 N 文字、X 個のチャート、Y 個の比較表、内部リンクの構造
+2. **sitemap 戦略**: 全 25,785 入れるか、上位 5,000 だけか、段階導入か (1,000 URL → 4 週観測 → 5,000 → 4 週観測)
+3. **内部リンク設計**: /areas/{prefCode} (47 県 top) → /areas/{prefCode}/cities/{cityCode} の linking graph
+4. **content 自動生成パイプライン**: AI 補強テキスト + e-Stat 数値 + チャートの組み合わせ
+
+### 想定効果 (Phase 1 投資判断材料)
+
+**[仮説]** 上位 5,000 URL を indexed 化 + 1 URL あたり月 3 PV を想定すると、月 15,000 PV 追加 (Phase 0 完了時 38K の +40%)。
+
+**根拠**: /blog インデックス率 78% (142/183) が達成可能ライン。25,785 URL のうち品質改善後の上位 5,000 で同等の indexation rate 達成は現実的。
+
+### 検証
+
+- **検証期日**: 2026-07-13 (Phase 0 完了週)
+- **期日後の判定**: 設計書 (品質テンプレ + sitemap 戦略) が `docs/02_実装計画/cities-revival-plan.md` として完成 → Phase 1 投資 GO/NO-GO 判定
+
+### NOT this Phase
+
+- 実際の sitemap 復活 → Phase 1 (2026-W29 以降)
+- 品質テンプレに沿った全 URL 再生成 → Phase 1
+
+## [P0-AREAS-01] /areas/{prefCode} 47 ページの SEO 監査 + 内部リンク強化
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-index-coverage / areas-page-traffic
+- **owner**: claude
+- **deployed_at**: -
+- **due**: 2026-07-06
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **verification_command**: `awk -F',' 'NR>1 && $1 ~ /\/areas\/[0-9]+\/?$/ {print}' .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv`
+
+### 背景
+
+2026-W21 診断で判明: /areas/{prefCode} (47 都道府県 top) ページが GSC に 22 URLs しか出ておらず、impressions 137 / clicks 0。47 ページなので indexation rate 47% (22/47) 程度。
+
+「東京都 ランキング」「北海道 統計」などの太いキーワードを取れるはずのページが ranking に乗っていない。
+
+### 施策 (Phase 0 内)
+
+1. 47 ページ全数の現在の seoTitle / description / structured data 監査
+2. /ranking 詳細ページからの内部リンク追加 (関連都道府県へのリンクを各ランキング詳細に組み込み)
+3. 各 area ページに「この県の上位指標 N 個」「下位指標 N 個」「都道府県 vs 全国比較」セクション追加
+4. 内部リンク密度: 47 ページ × 平均 10 inbound = 470 内部リンク追加
+
+### 想定効果
+
+**[仮説]** /areas indexed 22 → 40+ (85%+) + 1 ページあたり月 100 imp 獲得で、合計 4,000 imp/月 (現状の +12%) 追加。CTR 3% なら月 +120 clicks。
+
+**根拠**: /blog インデックス率 78% を達成基準とした場合、/areas は 47 ページしかなく URL 数が少ないので全数監査が可能。県名 + ランキング系の検索ボリュームは安定。
+
+### 検証
+
+- **検証期日**: 2026-07-06
+- **期日後の判定**:
+  - /areas indexed ≥ 40, impressions ≥ 4,000/週 → effect/full
+  - indexed 25-40, impressions 2,000-4,000 → effect/partial
+  - indexed < 25 → effect/none、次の検証: ページ品質が薄い疑い、テンプレ強化
 
 ## [INDEXING-AUTO-01] Indexing API による問題 URL の自動再送信 (Phase 2 で実装)
 
