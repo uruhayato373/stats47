@@ -9,6 +9,74 @@ updated: 2026-05-23
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [SEO-TITLE-FIX-01] タイトル double-suffix バグ修正 (31 ページ)
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: seo-ctr / all-pages
+- **owner**: claude
+- **deployed_at**: 2026-05-23
+- **due**: 2026-06-20 (W25)
+- **related_pr**: #334
+
+### 背景
+
+`generateMetadata` で title に「 | 統計で見る都道府県」を自前付加していたが、layout.tsx の root metadata が `template: "%s | 統計で見る都道府県"` を持つため、合計で suffix が **2 回**付いていた。
+
+例 (修正前): 「企業・家計・経済 | 統計で見る都道府県 | 統計で見る都道府県」(60 文字超)
+
+### 影響範囲
+
+31 ファイル / 主要ページのほぼ全て:
+- /category/[categoryKey] (17 カテゴリ)
+- /themes/[theme] (17 テーマ)
+- /survey, /survey/[surveyKey]
+- /station-passengers, /station-passengers/[prefCode]
+- /ports, /fishing-ports
+- /gis-cross 系 4 ページ
+- /about, /privacy, /terms
+
+### 想定効果
+
+- SERP で title が正常表示 (Google が truncate しなくなる)
+- CTR 改善 (タイトルが意味不明な重複から、意図通りに見える)
+- 影響 URL 数が多いため、全体平均 CTR の底上げが期待
+
+実測 SERP 表示前後の確認は 2026-06-20 (W25) GSC snapshot で。
+
+## [BLOG-CTR-05] Tier 3 brushup (3 記事) + /category description 差別化
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: blog-ctr / category-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-23
+- **due**: 2026-06-20
+
+### Tier 3 ブログ brushup
+
+| slug | imp | 旧 CTR | 改修ポイント |
+|---|---|---|---|
+| precipitation-snow-regional-gap | 191 | 0.52% | 「集中豪雨型 vs しとしと型」の真因を前面 |
+| manufacturing-shipment-prefecture-ranking | 159 | 0.00% | 「総額1位は愛知だが1人当たり1位は大分」の対比 |
+| foreign-residents-diversity-map | 127 | 0.79% | 「東京3.4% vs 秋田0.4%」+「製造業県上位」の意外 |
+
+### /category description 差別化
+
+17 カテゴリで同文だった description を、ranking count + sample title を動的に含める形に改修:
+
+旧: `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`
+
+新: `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。${sampleTitles}など、47都道府県を比較・分析できます。`
+
+これにより 17 カテゴリそれぞれが unique description を持ち、Google の duplicate content 判定リスクが解消される。
+
+### 想定効果
+
+- Tier 3 ブログ 3 記事: +10 clicks/週 (+40/月)
+- /category 17 ページ: 全体的に SERP 露出向上、+20 clicks/週 (+80/月)
+- 合計: +120 clicks/月
+
 ## [BLOG-CTR-04] 高インプレ × 低 CTR Tier 2 (5 記事) の seoTitle 改修
 
 - **status**: pending
