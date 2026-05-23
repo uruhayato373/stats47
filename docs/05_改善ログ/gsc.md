@@ -11,14 +11,37 @@ updated: 2026-05-23
 
 ## [P0-RANKING-INDEX] /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸)
 
-- **status**: pending
+- **status**: in-progress
 - **tier**: 1
 - **target_metric**: gsc-index-coverage / ranking-clicks
 - **owner**: claude
-- **deployed_at**: -
+- **deployed_at**: 2026-05-23 (Phase 1: 内部リンク + 診断)
 - **due**: 2026-07-06
 - **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **related_pr**: feature/ranking-to-areas-internal-links
 - **verification_command**: `awk -F',' 'NR>1 && $1 ~ /\/ranking\// {n++} END {print "ranking indexed: " n}' .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv`
+
+### 進捗 (2026-05-23, Phase 1 着手)
+
+**診断結果**:
+- sitemap /ranking URL 1,913 / GSC indexed 783 (40.9%)
+- 未indexed 1,132 URL (`.claude/state/metrics/gsc/coverage-drilldown/2026-W21/ranking-unindexed-urls.csv` に集約)
+- 未indexed URL のサンプル (aging-index, agricultural-output 等) は seoTitle/description が正常 → /areas のような壊れたメタデータではなく、**crawl budget × 内部リンク弱さ** が主因
+- 未indexed URL の suffix パターン: consumption-expenditure 162, per-100k 58, per-1000 49, consumption-quantity 49, expenses-prefecture 32 (= niche derived metrics)
+
+**Phase 1 デプロイ済 (2026-05-23)**:
+1. RankingDataTable で都道府県名→/areas/{areaCode} 内部リンク (47 inbound/page × 783 indexed = ~37K internal links 追加)
+2. 未indexed URL を CSV 化、Indexing API auto-resubmit の input として準備
+
+**残作業 (Phase 2)**:
+- INDEXING-AUTO-01 (`--execute`) で 1,132 URL を 200/日 × 6 日で submission
+  ```
+  node .claude/scripts/gsc/auto-resubmit.mjs \
+    --input .claude/state/metrics/gsc/coverage-drilldown/2026-W21/ranking-unindexed-urls.csv \
+    --execute --max 100
+  ```
+- /ranking 詳細から「関連ランキング」セクション (RelatedGroupCard を本文中段にも展開) の追加
+- 4 週後の効果計測 (2026-W25 snapshot で indexed 数を再測)
 
 ### 背景
 
