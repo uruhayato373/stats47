@@ -52,7 +52,10 @@ export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
 export { RankingTopPageClient } from "./components/RankingTopPage";
 export { AiContentAccordion } from "./components/AiContentAccordion";
+export { AiInsightCard } from "./components/AiInsightCard";
 export { AiMarkdownContent } from "./components/AiMarkdownContent";
+export { RankingHeroCard } from "./components/RankingHeroCard";
+export { DataUsageCard } from "./components/DataUsageCard";
 export { RankingFaqSection } from "./components/RankingFaqSection";
 export { RankingPrefectureCommentarySection } from "./components/RankingPrefectureCommentarySection";
 
@@ -62,7 +65,7 @@ export * from "./utils";
 // Additional client components
 export { AreaTypeToggle } from "./components/AreaTypeToggle";
 export { NormalizationToggle } from "./components/NormalizationToggle";
-export { DataDownloadIconButton, DataDownloadFooterCard } from "./components/DataDownloadButton";
+export { DataDownloadIconButton, DataDownloadFooterCard, DataDownloadPrimaryButton } from "./components/DataDownloadButton";
 
 // Skeleton components
 export { CorrelationSectionSkeleton } from "./components/CorrelationSection/CorrelationSectionSkeleton";

@@ -10,9 +10,9 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
+import { NativeAffiliateRow } from "@/features/redesign";
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
-import { NativeAffiliateRow } from "@/features/redesign";
 
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 

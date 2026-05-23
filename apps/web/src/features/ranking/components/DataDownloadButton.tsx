@@ -180,6 +180,57 @@ export function DataDownloadIconButton({
   );
 }
 
+/**
+ * ラベル付き CSV ダウンロード primary ボタン（ヒーローカード・訴求カード用）
+ *
+ * 全年度の CSV を生成してダウンロードする。JSON/Excel は提供しない。
+ */
+export function DataDownloadPrimaryButton({
+  rankingKey,
+  areaType,
+  displayInfo,
+  label = "CSV をダウンロード",
+  variant = "default",
+}: DataDownloadButtonProps & {
+  /** ボタンラベル */
+  label?: string;
+  /** ボタンの見た目（default = primary） */
+  variant?: "default" | "outline";
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsLoading(true);
+    try {
+      const result = await fetchAllYearsRankingValuesAction(rankingKey, areaType);
+      if (!isOk(result) || result.data.length === 0) return;
+      trackCsvDownload({ rankingKey, yearCode: "all" });
+      const fileName = buildFileName(displayInfo, "csv");
+      const csv = generateCsvContent(result.data);
+      triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button
+      variant={variant}
+      size="sm"
+      disabled={isLoading}
+      onClick={handleDownload}
+      className="gap-1.5"
+    >
+      {isLoading ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : (
+        <Download className="h-4 w-4" />
+      )}
+      {label}
+    </Button>
+  );
+}
+
 interface DataDownloadFooterCardProps extends DataDownloadButtonProps {
   /** プレビュー用のランキングデータ（上位表示用） */
   rankingValues: RankingValue[];

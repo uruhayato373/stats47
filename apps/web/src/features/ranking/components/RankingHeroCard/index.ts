@@ -1,0 +1,1 @@
+export { RankingHeroCard } from "./RankingHeroCard";
