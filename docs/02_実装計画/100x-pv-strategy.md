@@ -181,9 +181,9 @@ Phase 0 完了 (effect/full) は以下すべてを満たすこと:
 
 ### Phase 1 着手前に決めること (Phase 0 内で)
 
-1. **市区町村ページの品質テンプレート**: 1 ページ最低 N 文字、X 個のチャート、Y 個の比較表、内部リンクの構造
-2. **sitemap 戦略**: 全 25,785 入れるか、上位 5,000 だけか、段階導入か
-3. **指標拡張ロードマップ**: どの分野で 1,994 → 5,000 まで増やすか (e-Stat 未登録の主要調査リスト)
+1. ~~**市区町村ページの品質テンプレート**~~ ✅ 2026-05-23 完了 → [`cities-revival-plan.md`](./cities-revival-plan.md) §2.3
+2. ~~**sitemap 戦略**~~ ✅ 2026-05-23 完了 → [`cities-revival-plan.md`](./cities-revival-plan.md) §2.2 (S1=80, S2=500, S3=2,701 の段階導入)
+3. ~~**指標拡張ロードマップ**~~ ✅ 2026-05-23 完了 → [`metrics-expansion-roadmap.md`](./metrics-expansion-roadmap.md) (1,994 → 5,000 を 4 Stage × 750 で実施)
 
 ### Phase 2 着手前に決めること (Phase 1 内で)
 
