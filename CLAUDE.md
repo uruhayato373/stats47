@@ -62,6 +62,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | ルール | 適用場面 |
 |---|---|
 | `coding-standards.md` | TypeScript / React / Next.js コード全般 |
+| `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (タイトル curiosity gap パターン、CTR 改善基準) |
 | `evidence-based-judgment.md` | improvement / 判定系スキル (status: effect/* 更新時必読) |
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
 | `r2-storage-design.md` | snapshot 追加・変更 |
