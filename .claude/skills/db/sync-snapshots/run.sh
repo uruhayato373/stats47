@@ -29,6 +29,7 @@ declare -a TASKS=(
   "ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts"
   "ranking-normalized-values|packages/ranking/src/scripts/export-ranking-normalized-values-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
+  "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
   "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
