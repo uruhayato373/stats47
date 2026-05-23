@@ -100,4 +100,33 @@ describe("extractStrengthsAndWeaknesses", () => {
     expect(strengths).toHaveLength(2);
     expect(weaknesses).toHaveLength(2);
   });
+
+  it("rank=0 (データ欠損) は強み・弱みどちらにも含めないこと", () => {
+    const mockData = [
+      { rank: 0, indicator: "Missing A" },
+      { rank: 0, indicator: "Missing B" },
+      { rank: 1, indicator: "Valid Strength" },
+      { rank: 47, indicator: "Valid Weakness" },
+    ];
+
+    const { strengths, weaknesses } = extractStrengthsAndWeaknesses(mockData);
+
+    expect(strengths).toHaveLength(1);
+    expect(strengths[0].rank).toBe(1);
+    expect(weaknesses).toHaveLength(1);
+    expect(weaknesses[0].rank).toBe(47);
+  });
+
+  it("rank > 47 (異常値) は弱みに含めないこと", () => {
+    const mockData = [
+      { rank: 48, indicator: "Invalid Over" },
+      { rank: 100, indicator: "Invalid Way Over" },
+      { rank: 47, indicator: "Valid Weakness" },
+    ];
+
+    const { weaknesses } = extractStrengthsAndWeaknesses(mockData);
+
+    expect(weaknesses).toHaveLength(1);
+    expect(weaknesses[0].rank).toBe(47);
+  });
 });
