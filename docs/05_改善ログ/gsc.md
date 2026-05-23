@@ -9,6 +9,75 @@ updated: 2026-05-23
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-CTR-03] 高インプレ × 低 CTR Top 5 記事の seoTitle/description 改修 (curiosity gap パターン適用)
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-23
+- **due**: 2026-06-20 (W25 4 週後の効果計測)
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **verification_command**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 2026-W25`
+
+### 背景
+
+ブログ品質診断 (2026-05-23) で、187 記事中 chart 採用 1% (2 件) であり、top パフォーマー (health-life-expectancy-structure, CTR 4.6%) も chart なし。**真の品質ギャップは「タイトルの curiosity gap」**であることが判明。
+
+成功パターン (health-life-expectancy-structure):
+- タイトル: 「寿命は延びたが**不健康期間も延びた**」 (矛盾・驚き要素)
+- description: 「世界トップクラスです。しかし...」 (緊張感セットアップ)
+
+失敗パターン (sugar-consumption-prefecture-gap, W19 新規 6 本 CTR 0%):
+- タイトル: 「砂糖消費量1位は三重5kg・最下位東京」 (事実羅列、フック無し)
+
+### 対象 (高インプレ × 低 CTR Top 5)
+
+| slug | 改修前 impressions / clicks / CTR / position | 改修前 seoTitle |
+|---|---|---|
+| `child-height-regional-gap` | 1,597 / 12 / 0.75% / 10.68 | 中学生身長ランキング2023｜秋田163.6cm・1位、高知159.7cmで3.9cm差 |
+| `price-index-high-low-prefecture` | 1,373 / 26 / 1.9% / 8.50 | 物価ランキング2024｜東京104.0が全国1位、群馬96.2と7.8pt差 |
+| `temperature-extremes-map` | 1,337 / 20 / 1.5% / 9.14 | 年平均気温ランキング2024｜沖縄24.4℃・47都道府県、北海道と14℃差 |
+| `habitable-area-land-use` | 643 / 2 / **0.31%** / 8.15 | 可住地面積割合ランキング2026｜大阪70.0%・全国1位、高知16.3%で4.3倍差 |
+| `fiscal-self-reliance-gap` | 549 / 14 / 2.5% / 8.83 | 都道府県別の財政力指数ランキング｜自前で稼げる自治体はどこか |
+
+### 改修内容 (curiosity gap パターン)
+
+| slug | 改修後 seoTitle (要点) |
+|---|---|
+| `child-height-regional-gap` | 「中学生の身長は県で3.9cm違う｜**なぜ東北が高い?**」 |
+| `price-index-high-low-prefecture` | 「**住居費だけ1.6倍格差**、47都道府県別」(食料は0.5倍だが住居は1.6倍の対比) |
+| `temperature-extremes-map` | 「**猛暑日は京都が全国1位**の意外」(沖縄ではなく京都という逆転) |
+| `habitable-area-land-use` | 「人口密度の真因が見える」(なぜ面積1位の北海道が人口密度1位ではないか) |
+| `fiscal-self-reliance-gap` | 「**唯一「自立」できる47都道府県**は」(東京 1.06 が唯一の「1超」) |
+
+各 description にも「同じ日本でも...」「なぜ...?」 など緊張感セットアップを追加。
+
+### 想定効果
+
+**[仮説]** 5 記事合計で:
+- 改修前 clicks: 74/週 (平均 CTR 1.5%)
+- 改修後想定 CTR: 3.5% (業界平均、position 8-11 帯)
+- 改修後 clicks: 175/週 → **+101 clicks/週 (+540/月)**
+
+**根拠**: Backlinko 2023 業界平均で position 8-11 帯の CTR は 3-5%。今回 0.3-2.5% から 3% 台への上昇は curiosity gap 効果の標準的な範囲。最も改善余地が大きいのは habitable-area (0.31% → 3.0% で +9.7x の clicks)。
+
+### 検証
+
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 <観測週>`
+- **検証期日**: 2026-06-20 (4 週後の GSC snapshot で確定)
+- **期日後の判定**:
+  - 5 記事合計 clicks ≥ 150/週 → effect/full
+  - 100-150/週 → effect/partial
+  - < 100/週 → effect/none、次の検証: 本文イントロも書き換え or h1 修正
+
+### デプロイ手順 (今回実施)
+
+1. `.local/r2/app/blog/{slug}/article.md` の frontmatter (seoTitle, description) を編集 (5 記事)
+2. `npm run articles:sync-from-r2 --workspace=packages/database` で D1 articles テーブル更新 (193件中 5 件が実質変更)
+3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push (6 files updated)
+4. 本 commit を develop → main PR で Cloudflare Pages rebuild trigger
+
 ## [P0-RANKING-INDEX] /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸)
 
 - **status**: in-progress
