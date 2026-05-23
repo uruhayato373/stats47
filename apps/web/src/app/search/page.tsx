@@ -12,6 +12,16 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
+/** 検索結果数の summary 表示 */
+function buildResultsSummary(
+  query: string | undefined,
+  resultsCount: number,
+): string {
+  if (!query) return "キーワードを入力して 1,800 以上のランキング・記事を横断検索できます。";
+  if (resultsCount === 0) return `「${query}」に一致する結果は見つかりませんでした。`;
+  return `「${query}」の検索結果 ${resultsCount} 件`;
+}
+
 // 検索インデックスはビルド時に static JSON として bundle 済み（D1 read なし）。
 // searchParams が異なれば Next.js が per-request render に切替えるので force-dynamic は不要。
 
@@ -61,15 +71,35 @@ export default async function SearchPage({ searchParams }: PageProps) {
   const filterMeta = getSearchIndexMeta();
 
   return (
-    <SearchPageClient
-      initialResults={initialResults}
-      initialQuery={q || ""}
-      initialType={parsedType ?? "all"}
-      initialCategory={category}
-      initialTags={parsedTags}
-      initialYear={year}
-      initialMonth={month}
-      filterMeta={filterMeta}
-    />
+    <div className="container mx-auto px-4 py-4">
+      {/* Hero (軽量): 検索クエリ + 結果サマリ */}
+      <header className="mb-5">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+          検索
+        </p>
+        <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+          {q ? `「${q}」の検索結果` : "サイト内検索"}
+          {q && initialResults.length > 0 && (
+            <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+              {initialResults.length} 件
+            </span>
+          )}
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          {buildResultsSummary(q, initialResults.length)}
+        </p>
+      </header>
+
+      <SearchPageClient
+        initialResults={initialResults}
+        initialQuery={q || ""}
+        initialType={parsedType ?? "all"}
+        initialCategory={category}
+        initialTags={parsedTags}
+        initialYear={year}
+        initialMonth={month}
+        filterMeta={filterMeta}
+      />
+    </div>
   );
 }
