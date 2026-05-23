@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchCities, lookupArea } from "@stats47/area";
+import { lookupArea } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,18 +10,11 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { isOk } from "@stats47/types";
-
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
+import { CitiesNavCard } from "@/features/area-profile";
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
@@ -103,7 +96,6 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
         parentAreaCode: areaCode,
     };
 
-    const allCities = fetchCities().filter((c) => c.prefCode === areaCode);
 
     return (
         <>
@@ -154,32 +146,6 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                 </div>
             </div>
 
-            {/* 左サイドバーに市区町村リストを注入 */}
-            <SetSidebarSection>
-                {allCities.length > 0 && (
-                    <Card>
-                        <CardHeader className="py-3 px-3">
-                            <CardTitle className="text-base">{pref.areaName}の市区町村</CardTitle>
-                        </CardHeader>
-                        <CardContent className="px-3 pb-3">
-                            <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
-                                {allCities.map((c) => (
-                                    <Link
-                                        key={c.cityCode}
-                                        href={`/areas/${areaCode}/cities/${c.cityCode}`}
-                                        className={`text-xs px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors ${
-                                            c.cityCode === cityCode ? "bg-accent font-medium" : ""
-                                        }`}
-                                    >
-                                        {c.cityName}
-                                    </Link>
-                                ))}
-                            </nav>
-                        </CardContent>
-                    </Card>
-                )}
-            </SetSidebarSection>
-
             {/* 1カラムレイアウト */}
             <div className="container mx-auto px-4 py-10">
                 <main className="min-w-0 space-y-10">
@@ -189,6 +155,13 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                         categories={categories}
                         basePath={cityBasePath}
                         selectedRankingKey={ranking}
+                    />
+
+                    {/* 同一県の他市区町村ナビ */}
+                    <CitiesNavCard
+                        areaCode={areaCode}
+                        areaName={pref.areaName}
+                        activeCityCode={cityCode}
                     />
 
                     {/* アフィリエイト */}

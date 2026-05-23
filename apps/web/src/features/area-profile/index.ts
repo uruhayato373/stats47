@@ -15,6 +15,7 @@ export { AreaProfileSidebar } from "./components/AreaProfileSidebar";
 export { RelatedAreas } from "./components/RelatedAreas";
 export { CategoryNavGrid } from "./components/CategoryNavGrid";
 export { CategorySelect } from "./components/CategorySelect";
+export { CitiesNavCard } from "./components/CitiesNavCard";
 
 // チャートセクション（Server Component）
 export { AreaChartSection } from "./components/AreaChartSection";

@@ -22,12 +22,25 @@ export function generateMetadata(): Metadata {
 }
 
 export default function ThemesPage() {
+  const totalRankings = ALL_THEMES.reduce(
+    (acc, t) => acc + t.rankingKeys.length,
+    0,
+  );
+
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      <h1 className="text-lg font-bold">テーマダッシュボード</h1>
-      <p className="text-sm text-muted-foreground mt-1 mb-6">
-        テーマ別に複数の指標を横断して都道府県を比較できます
-      </p>
+      {/* Hero (軽量): テーマ一覧の入口 */}
+      <header className="mb-5">
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+          テーマダッシュボード
+          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+            {ALL_THEMES.length}テーマ / {totalRankings}指標
+          </span>
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードでテーマ別に都道府県を比較できます。
+        </p>
+      </header>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {ALL_THEMES.map((theme) => (

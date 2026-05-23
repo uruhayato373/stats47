@@ -1,19 +1,34 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import { BarChart3, Search } from "lucide-react";
+import { BarChart3, ExternalLink, MapPin, Search, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
-import { CountUp } from "@/components/atoms/CountUp";
-import { ScrollReveal } from "@/components/atoms/ScrollReveal";
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
+import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
+import {
+  buildFurusatoNozeiUrl,
+} from "@/features/ads/constants/furusato-nozei";
 import { listLatestArticles } from "@/features/blog/server";
 import { FeaturedRankings } from "@/features/ranking/server";
+import {
+  HeroShell,
+  KpiGrid,
+  KpiTile,
+} from "@/features/redesign";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
+/**
+ * ホームページ (最適化版)
+ *
+ * 設計思想:
+ * - 主役は「自分の県のランキングを見たい」ユーザー
+ * - ふるさと納税は 1 行ミニバナーに縮小（過剰な PR を排除）
+ * - データパック CTA は削除（home に来た人の目的ではない）
+ * - 3 切り口の discovery カードで主要動線を確保
+ */
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl =
@@ -78,136 +93,195 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+const DISCOVERY_CARDS = [
+  {
+    href: "/ranking",
+    icon: TrendingUp,
+    title: "1,800以上のランキング",
+    description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。",
+  },
+  {
+    href: "/areas",
+    icon: MapPin,
+    title: "都道府県から探す",
+    description: "あなたの都道府県の全国での立ち位置を、KPI とチャートでひと目で把握。",
+  },
+  {
+    href: "/themes",
+    icon: BarChart3,
+    title: "テーマで分析",
+    description: "少子高齢化・労働・医療・観光・物価など、社会課題を 17 テーマで横断分析。",
+  },
+];
+
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(4).catch(() => []);
+  const affiliateId = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID;
+  const furusatoTopUrl = buildFurusatoNozeiUrl("", affiliateId);
 
   return (
     <div className="w-full" suppressHydrationWarning>
-      {/* ① Hero Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-80 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:opacity-100" />
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-100/30 to-transparent skew-x-12 dark:from-blue-900/10" />
+      {/* ① Hero (暗色 — ブランドのエントリー) */}
+      <section className="px-4 pt-4 pb-2">
+        <div className="mx-auto max-w-6xl">
+          <HeroShell variant="dark">
+            <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-[1fr,360px] lg:items-center lg:p-10">
+              <div className="min-w-0">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">
+                  stats47 ─ 47都道府県データ
+                </p>
+                <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  あなたの県は
+                  <br className="sm:hidden" />
+                  <span className="text-sky-300">何位？</span>
+                </h1>
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/85 sm:text-base">
+                  <strong className="text-white">1,800以上の統計</strong>で47都道府県をランキング。地図・グラフ・CSV ダウンロードで自由に使えます。
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <Button asChild className="bg-white font-bold text-slate-900 hover:bg-white/90">
+                    <Link href="/ranking">
+                      <BarChart3 className="mr-1.5 h-4 w-4" />
+                      ランキングを見る
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                    <Link href="/search">
+                      <Search className="mr-1.5 h-4 w-4" />
+                      キーワード検索
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                    <Link href="/areas">
+                      <MapPin className="mr-1.5 h-4 w-4" />
+                      都道府県から探す
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <KpiGrid columns={2}>
+                  <KpiTile label="ランキング数" value="1,800" unit="件超" variant="dark" />
+                  <KpiTile label="都道府県" value="47" unit="都道府県" variant="dark" />
+                  <KpiTile label="データポイント" value="250" unit="万件超" variant="dark" />
+                  <KpiTile label="時系列" value="30" unit="年分" variant="dark" />
+                </KpiGrid>
+              </div>
+            </div>
+          </HeroShell>
+        </div>
+      </section>
 
-        <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
-          <h1 className="text-2xl font-bold mb-2">
-            あなたの県は<span className="text-primary relative inline-block">
-              何位？
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z" fill="currentColor" />
-              </svg>
-            </span>
-          </h1>
-          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-            <CountUp end={1800} duration={800} className="font-semibold text-primary" suffix="以上の統計" />で47都道府県をランキング
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
-            <Button asChild>
-              <Link href="/ranking">
-                <BarChart3 className="h-4 w-4 mr-1.5" />
-                ランキングを見る
-              </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/search">
-                <Search className="h-4 w-4 mr-1.5" />
-                キーワードで探す
-              </Link>
-            </Button>
+      {/* ② 注目のランキング (主役) */}
+      <FeaturedRankings limit={8} />
+
+      {/* ③ 3 切り口の discovery (検索意図に最短接続) */}
+      <section className="px-4 py-8">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-4 text-lg font-bold">データを探す</h2>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+            {DISCOVERY_CARDS.map((card) => {
+              const Icon = card.icon;
+              return (
+                <Link
+                  key={card.href}
+                  href={card.href}
+                  className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-foreground group-hover:text-primary">
+                      {card.title}
+                    </p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      {card.description}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ② 注目のランキング（LCP 要素 — ScrollReveal なしで即表示） */}
-      <FeaturedRankings limit={8} />
-
-
-
-      {/* ④ 3つの切り口でデータを探す（旧「できること」） */}
-      <ScrollReveal>
-        <section className="py-10 px-4 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-lg font-bold mb-8">3つの切り口でデータを探す</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  href: "/ranking",
-                  image: "/images/features/ranking.webp",
-                  title: "1,800以上のランキング",
-                  description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。各ランキングで関連指標との相関も確認できます。",
-                },
-                {
-                  href: "/areas",
-                  image: "/images/features/area-profile.webp",
-                  title: "地元の「強み」を発見",
-                  description: "KPI・チャートで、あなたの都道府県の全国での立ち位置をひと目で把握。",
-                },
-              ].map((card, i) => (
-                <ScrollReveal key={card.href} delay={i * 100}>
-                  <Link href={card.href} className="group block rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden h-full">
-                    <div className="overflow-hidden">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        width={800}
-                        height={460}
-                        className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
-                        {...(i === 0 ? { priority: true } : { loading: "lazy" as const })}
+      {/* ④ 統計ブログ */}
+      {latestArticles.length > 0 && (
+        <section className="px-4 py-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-bold">統計ブログ</h2>
+              <Link
+                href="/blog"
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                すべての記事 →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              {latestArticles.map((article) => {
+                const r2 =
+                  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+                return (
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
+                    className="group block overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
+                  >
+                    <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
+                      <ThemeAwareImage
+                        lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
+                        darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
+                        alt={article.title}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-1">{card.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{card.description}</p>
+                    <div className="p-3">
+                      <p className="line-clamp-2 text-sm font-semibold leading-snug">
+                        {article.title}
+                      </p>
                     </div>
                   </Link>
-                </ScrollReveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
-      </ScrollReveal>
-
-      {/* ⑤ 新着ブログ記事 */}
-      {latestArticles.length > 0 && (
-        <ScrollReveal>
-          <section className="py-10 px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-bold">統計ブログ</h2>
-                <Link href="/blog" className="text-sm text-primary hover:underline font-medium">
-                  すべての記事 &rarr;
-                </Link>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {latestArticles.map((article) => {
-                  const r2 = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
-                  return (
-                    <Link
-                      key={article.slug}
-                      href={`/blog/${article.slug}`}
-                      className="group block rounded-none border border-border overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
-                    >
-                      <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
-                        <ThemeAwareImage
-                          lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
-                          darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
-                          alt={article.title}
-                          fill
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          loading="lazy"
-                        />
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
       )}
 
-      {/* 広告 */}
-      <div className="flex justify-center my-8">
+      {/* ⑤ ふるさと納税 1 行ミニバナー (PR) */}
+      <section className="px-4 py-4">
+        <div className="mx-auto max-w-6xl">
+          <TrackedAffiliateLink
+            href={furusatoTopUrl || "https://event.rakuten.co.jp/furusato/"}
+            category="furusato"
+            label="楽天ふるさと納税"
+            position="home-furusato-banner"
+            className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50/40 px-4 py-3 transition-shadow hover:shadow-sm dark:border-amber-900/40 dark:bg-amber-950/20"
+          >
+            <span aria-hidden className="text-xl">🎁</span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
+                都道府県別の人気返礼品を探す
+                <span className="ml-2 rounded-full bg-amber-900 px-1.5 py-0.5 text-[9px] font-bold text-white">
+                  PR
+                </span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                楽天ふるさと納税 — エリア別の返礼品をピックアップ
+              </p>
+            </div>
+            <ExternalLink className="h-4 w-4 shrink-0 text-amber-700" />
+          </TrackedAffiliateLink>
+        </div>
+      </section>
+
+      {/* ⑥ AdSense (footer) */}
+      <div className="my-6 flex justify-center px-4">
         <AdSenseAd
           format={RANKING_PAGE_FOOTER.format}
           slotId={RANKING_PAGE_FOOTER.slotId}

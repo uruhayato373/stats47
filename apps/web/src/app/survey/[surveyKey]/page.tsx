@@ -15,13 +15,19 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
   type CategoryRankingListItem,
 } from "@/features/ranking";
+import {
+  NativeAffiliateRow,
+  SectionEyebrow,
+  InfeedAd,
+} from "@/features/redesign";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -87,8 +93,20 @@ export default async function SurveyPage({ params }: PageProps) {
     notFound();
   }
 
-  const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
+  const [rankingResult, nativeBanners] = await Promise.all([
+    readRankingItemsBySurveyFromR2(surveyKey),
+    // 調査メタから推定可能な tag を渡す (fallback: economy / population)
+    resolveAffiliateBanners(["economy", "population", "labor"], 4).catch(() => []),
+  ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+
+  // Hero KPI: 最新年, 注目件数, etc.
+  const featuredCount = rankingItems.filter((i) => i.isFeatured).length;
+  const latestYear = rankingItems
+    .map((i) => parseLatestYear(i.latestYear))
+    .filter((y) => y && y.match(/^\d{4}$/))
+    .sort()
+    .pop() ?? "";
 
   const r2PublicUrl =
     process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
@@ -131,74 +149,96 @@ export default async function SurveyPage({ params }: PageProps) {
       };
     });
 
+  if (rankingItems.length === 0) {
+    notFound();
+  }
+
   return (
-    <div className="container mx-auto px-4 py-6 text-foreground">
-      {/* ヘッダー */}
-      <div className="mb-6">
-        <h1 className="text-lg font-bold">
+    <div className="container mx-auto px-4 py-4 text-foreground">
+      {/* Hero (軽量): 政府統計バッジ + タイトル + メタ */}
+      <header className="mb-5">
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10.5px] font-semibold text-primary">
+          📊 政府統計
+        </div>
+        <h1 className="mt-2 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
           {survey.name}
-          <span className="ml-2 text-sm font-normal text-muted-foreground">
-            {rankingItems.length}件
+          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+            {rankingItems.length}件 · {latestYear || ""}{latestYear ? "年" : ""}
           </span>
         </h1>
-        <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-          <span className="bg-muted/50 px-2 py-0.5 rounded">
-            {survey.organization}
-          </span>
+        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+          <span>{survey.organization}</span>
           {survey.url && (
             <a
               href={survey.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors underline underline-offset-2"
+              className="text-primary underline-offset-4 hover:underline"
             >
-              公式サイト
+              公式サイト ↗
             </a>
           )}
         </div>
         {survey.description && (
-          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             {survey.description}
           </p>
         )}
+      </header>
+
+      {featuredItems.length > 0 && (
+        <section className="mb-8">
+          <SectionEyebrow number="1.">注目のランキング</SectionEyebrow>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {featuredItems.map((item) => (
+              <FeaturedRankingCard
+                key={item.rankingKey}
+                rankingKey={item.rankingKey}
+                title={item.title}
+                baseThumbnailUrl={item.baseThumbnailUrl}
+                latestYear={item.latestYear}
+                unit={item.unit}
+                demographicAttr={item.demographicAttr}
+                normalizationBasis={item.normalizationBasis}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="mb-8">
+        <SectionEyebrow number="2.">
+          全{rankingItems.length}件のランキング
+        </SectionEyebrow>
+        <CategoryRankingTable items={allItems} />
+      </section>
+
+      {/* AdSense */}
+      <div className="mb-8">
+        <InfeedAd
+          slotId={CONTENT_FOOTER.slotId}
+          format={CONTENT_FOOTER.format}
+        />
       </div>
 
-      {rankingItems.length === 0 ? (
-        notFound()
-      ) : (
-        <>
-          {featuredItems.length > 0 && (
-            <section className="mb-10">
-              <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-                注目のランキング
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                {featuredItems.map((item) => (
-                  <FeaturedRankingCard
-                    key={item.rankingKey}
-                    rankingKey={item.rankingKey}
-                    title={item.title}
-                    baseThumbnailUrl={item.baseThumbnailUrl}
-                    latestYear={item.latestYear}
-                    unit={item.unit}
-                    demographicAttr={item.demographicAttr}
-                    normalizationBasis={item.normalizationBasis}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* 広告: 注目カード後・テーブル前 */}
-          <AdSenseAd
-            format={RANKING_PAGE_FOOTER.format}
-            slotId={RANKING_PAGE_FOOTER.slotId}
-            className="mb-6"
+      {/* ネイティブアフィリエイト */}
+      {nativeBanners.length > 0 && (
+        <section className="mb-8">
+          <SectionEyebrow number="3.">関連書籍・データブック</SectionEyebrow>
+          <NativeAffiliateRow
+            title={`${survey.name}に関連する書籍`}
+            banners={nativeBanners}
+            position="survey-native"
+            trackingCategory={`survey-${surveyKey}`}
           />
-
-          <CategoryRankingTable items={allItems} />
-        </>
+        </section>
       )}
+
+      {/* AdSense (footer) */}
+      <AdSenseAd
+        format={RANKING_PAGE_FOOTER.format}
+        slotId={RANKING_PAGE_FOOTER.slotId}
+      />
     </div>
   );
 }

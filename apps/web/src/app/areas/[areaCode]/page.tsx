@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchCities, fetchPrefectures } from "@stats47/area";
+import { fetchPrefectures } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,12 +10,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { isOk } from "@stats47/types";
 
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
@@ -26,6 +20,7 @@ import {
     AreaProfilePageClient,
     AreaProfileSidebar,
     AreaChartSection,
+    CitiesNavCard,
     RelatedAreas,
     CategoryNavGrid,
     generateAreaMetadata,
@@ -136,36 +131,12 @@ export default async function AreaProfilePage({ params }: PageProps) {
             {/* ヘッダー + ヒーロー */}
             <AreaProfilePageClient profile={profile} />
 
-            {/* 左サイドバーに強み・弱み + 市区町村リストを注入 */}
+            {/* 左サイドバーに強み・弱みを注入 (サイドバー開いたとき用) */}
             <SetSidebarSection>
                 <AreaProfileSidebar
                     strengths={profile.strengths}
                     weaknesses={profile.weaknesses}
                 />
-                {(() => {
-                    const cities = fetchCities().filter((c) => c.prefCode === areaCode);
-                    if (cities.length === 0) return null;
-                    return (
-                        <Card className="mt-4">
-                            <CardHeader className="py-3 px-3">
-                                <CardTitle className="text-base">{profile.areaName}の市区町村</CardTitle>
-                            </CardHeader>
-                            <CardContent className="px-3 pb-3">
-                                <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
-                                    {cities.map((city) => (
-                                        <Link
-                                            key={city.cityCode}
-                                            href={`/areas/${areaCode}/cities/${city.cityCode}`}
-                                            className="text-xs px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors"
-                                        >
-                                            {city.cityName}
-                                        </Link>
-                                    ))}
-                                </nav>
-                            </CardContent>
-                        </Card>
-                    );
-                })()}
             </SetSidebarSection>
 
             {/* 1カラムレイアウト */}
@@ -197,6 +168,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
                     {/* 関連エリア */}
                     <RelatedAreas areaCode={areaCode} />
+
+                    {/* 市区町村ナビ (サイドバー閉じてもメインで見える) */}
+                    <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
                     {/* 広告②: アフィリエイト直前 */}
                     <AdSenseAd
