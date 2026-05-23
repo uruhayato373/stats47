@@ -2,14 +2,14 @@ name: 🔁 GSC Auto-resubmit (daily)
 
 # 未 INDEXED URL を Indexing API に自動再送信する。
 # - URL Inspection daily (JST 06:00) の後に走らせる (JST 06:30)
-# - 1 日 100 URL を上限 (公式 quota 200/日の半分、安全マージン)
+# - 1 日 200 URL を上限 (公式 quota 200/日を完全活用)
 # - 7 日以内重複送信は scripts 内 history で自動 dedup
 # - 履歴は .claude/state/metrics/gsc/resubmit-history.json に commit
 #
 # 関連:
 # - docs/05_改善ログ/indexing.md [INDEXING-AUTO-01]
+# - docs/05_改善ログ/gsc.md [P0-RANKING-INDEX]
 # - .claude/scripts/gsc/auto-resubmit.mjs
-# - .github/workflows/gsc-url-inspection-daily.yml
 
 on:
   schedule:
@@ -17,9 +17,9 @@ on:
   workflow_dispatch:
     inputs:
       max:
-        description: "Max URLs to send (default 100, max 200)"
+        description: "Max URLs to send (default 200, max 200)"
         required: false
-        default: "100"
+        default: "200"
       dry_run:
         description: "Dry-run mode (true / false)"
         required: false
@@ -56,7 +56,7 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
         run: |
-          MAX_OPT="${{ inputs.max || '100' }}"
+          MAX_OPT="${{ inputs.max || '200' }}"
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             node .claude/scripts/gsc/auto-resubmit.mjs --max "$MAX_OPT"
           else
@@ -87,10 +87,17 @@ jobs:
           ## GSC Auto-resubmit ${{ steps.date.outputs.date }}
 
           $(node -e "
+            // resubmit-history.json は entries 直下の配列形式 ([{ timestamp, url, status, ... }, ...])
             const h = require('./.claude/state/metrics/gsc/resubmit-history.json');
-            const today = new Date(Date.now() + 9*3600*1000).toISOString().slice(0,10);
-            const todayCount = h.entries.filter(e => e.date === today).length;
-            const total = h.entries.length;
+            const entries = Array.isArray(h) ? h : (h.entries ?? []);
+            const todayJst = new Date(Date.now() + 9*3600*1000).toISOString().slice(0,10);
+            const todayCount = entries.filter(e => {
+              const ts = e.timestamp ?? e.date ?? '';
+              if (!ts) return false;
+              const jstDate = new Date(new Date(ts).getTime() + 9*3600*1000).toISOString().slice(0,10);
+              return jstDate === todayJst;
+            }).length;
+            const total = entries.length;
             console.log(\`- Today sent: \${todayCount}\`);
             console.log(\`- Total history: \${total}\`);
           ")
