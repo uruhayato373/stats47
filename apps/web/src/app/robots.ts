@@ -43,7 +43,11 @@ export default function robots(): MetadataRoute.Robots {
           "/api/*", // 内部 route handler（blog-data, ranking-data 等）。フロントから fetch するだけで Googlebot に露出させない
           "/profile/edit", // プロフィール編集
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
-          "/areas/*/cities/*", // 市区町村ページ（noindex だがクロールバジェット浪費防止）
+          // 市区町村ページ (/areas/*/cities/*) の Disallow は 2026-05-23 解除:
+          // - Phase 1 で city profile (強み 5 件) が表示されるようになり、
+          //   薄いプレースホルダーではなく価値ある content を持つようになった
+          // - cities-revival-plan.md Phase 1 S1-S3 で段階的に full content 化していく
+          // - 関連 PR: #335 (UI 統合) / #336 (S1 SSG 化)
         ],
       },
       {
@@ -54,7 +58,7 @@ export default function robots(): MetadataRoute.Robots {
           "/api/*", // 内部 route handler
           "/profile/edit", // プロフィール編集は除外
           "/*/opengraph-image", // Next.js OGP 画像エンドポイント
-          "/areas/*/cities/*", // 市区町村ページ
+          // /areas/*/cities/* も Disallow 解除 (2026-05-23、city profile 表示開始)
         ],
       },
       {
