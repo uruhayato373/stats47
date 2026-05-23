@@ -112,11 +112,50 @@ Skeleton を実レイアウトに揃える。`isInitializing` の解消タイミ
 
 ## T1-PSI-LCP-02: ランキング詳細 LCP 改善 — Leaflet tile 読み込み遅延 4.3s 対策 (EXP-003)
 
-- **status**: pending
+- **status**: effect/partial (Plan A 実装済、mobile 効果限定的)
 - **tier**: 1
 - **target_metric**: psi-lcp
 - **deployed_at**: 2026-04-24
 - **related_issue**: #101 (closed)
+- **verified_at**: 2026-05-23
+
+### 効果実測 (2026-05-22 PSI batch)
+
+Plan A (initial 4 tiles preload, commit `8e79a5ab`) 実装後の実測:
+
+| URL | Mobile LCP | Desktop LCP | Mobile Perf |
+|---|---|---|---|
+| /ranking/total-population | **9,376ms** (目標 < 5,000ms) | 2,337ms ✅ | 34 ▼ |
+| /ranking/agricultural-output | **12,676ms** | (未計測) | 34 |
+| /ranking/annual-sunshine-duration | 9,901ms | (未計測) | 40 |
+
+**[判定] effect/partial**:
+- Desktop: 2-3s 範囲で大幅改善 (元の 12s から)
+- Mobile: 9-13s 帯で目標未達。Plan A の preload (4 tiles) では mobile 効果限定的
+- 根拠: PSI snapshot `.claude/state/metrics/psi/psi-batch-2026-05-22T18-04-49.json`
+
+### 次の検証 (Phase B 候補)
+
+mobile LCP 9-13s の根本原因として 2 仮説:
+
+**[仮説 1]** preload 4 タイルが mobile viewport 描画タイルと不一致
+- 検証: 9 タイル (3x3) に拡張して測定
+- 期待効果: 不確実 (タイル数増加で network bound になる可能性も)
+- 工数: 30 分
+
+**[仮説 2]** LCP element が実は tile ではなく hero / chart 要素 (Plan A 前提が誤り)
+- 検証: PSI report の `largest-contentful-paint-element` 詳細を 5 URL × mobile で再確認
+- 期待効果: 高 (根本原因特定で Plan B を正しく設計可能)
+- 工数: 1 時間
+
+**推奨**: 仮説 2 を先に検証 (前提を再確認)、その後 Plan B (LCP 要素の差し替え) か Plan A 拡張 (9 タイル) を決定。
+
+### 残作業 (次セッション以降)
+
+- [ ] PSI API で 5 URL × mobile/desktop × 3 回計測、`largest-contentful-paint-element` を確認
+- [ ] mobile LCP 要素が tile でない場合: Plan B (hero 画像追加で LCP 要素差し替え) を設計
+- [ ] mobile LCP 要素が tile の場合: preload 9 タイル化を試行
+- [ ] 4 週後の effect 再判定 (2026-06-20 PSI snapshot)
 
 ### 施策 ID
 - **Tier**: T1（最優先）
