@@ -48,18 +48,43 @@ agent (Claude Code) の判断は補助的。最終判断は scripted gate (quali
 
 ## 実行フロー (agent が自律的に行う)
 
-### Step 1: 候補選定 (script)
+### Step 1: 候補選定 (plan 優先 + fresh fallback)
+
+#### 1-a. 30 日 plan の参照 (優先)
+
+`.claude/state/blog/auto-brushup-plan.json` が存在し、かつ今日の date がプランに含まれていればそれを使う:
+
+```bash
+TODAY=$(date -u +%Y-%m-%d)
+node -e "
+const p = require('./.claude/state/blog/auto-brushup-plan.json');
+const today = p.days.find(d => d.date === '$TODAY');
+if (today) {
+  for (const slot of today.slots) console.log(JSON.stringify(slot));
+}
+"
+```
+
+#### 1-b. fresh 候補補完 (plan の slot が dedup 済 or 空の場合)
 
 ```bash
 node .claude/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candidates.jsonl
 ```
 
-出力例:
-```json
-{"slug":"rice-harvest-volume-prefecture-gap","impressions":120,"ctr":0.0,"position":8.5,"expectedLift":42}
+候補が 0 件なら exit 0 (今日は処理対象なし)。
+
+#### 1-c. plan の rotation (週次)
+
+毎週月曜の routine 起動時のみ、plan を refresh:
+
+```bash
+DOW=$(date -u +%u)  # 1=月曜
+if [ "$DOW" = "1" ]; then
+  node .claude/scripts/blog/generate-brushup-plan.mjs --days 30 --per-day 5
+fi
 ```
 
-候補が 0 件なら exit 0 (今日は処理対象なし)。
+これにより最新 GSC snapshot を反映した plan が継続的に更新される。
 
 ### Step 2: 各候補を 1 件ずつ rewrite
 
@@ -202,10 +227,13 @@ count > 5 の場合は強制的に 5 に clamp。一気に大量変更で site q
 
 ## 関連ファイル
 
-- script: `.claude/scripts/blog/select-brushup-candidates.mjs` (候補選定)
+- script: `.claude/scripts/blog/select-brushup-candidates.mjs` (fresh 候補選定)
 - script: `.claude/scripts/blog/quality-gate.mjs` (品質ゲート)
+- script: `.claude/scripts/blog/generate-brushup-plan.mjs` (30 日 plan 生成、週次 refresh)
 - 参照実装: `.local/r2/app/blog/rice-harvest-volume-prefecture-gap/article.md` (地理決定論軸 brushup の好例)
 - 失敗事例 ledger: `docs/05_改善ログ/gsc.md` の BLOG-CTR-* 系
 - 品質基準: `.claude/rules/blog-quality-standards.md`
 - history: `.claude/state/blog/auto-brushup-history.json`
 - skipped log: `.claude/state/blog/auto-brushup-skipped.log`
+- 30 日 plan: `.claude/state/blog/auto-brushup-plan.json` (routine が daily 参照)
+- 人間レビュー用 plan report: `docs/03_週次運用/blog-brushup-plan.md`
