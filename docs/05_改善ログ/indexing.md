@@ -21,14 +21,29 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 
 ## [P0-CITIES-DIAG] 市区町村ページの Phase 1 復活戦略設計
 
-- **status**: pending
+- **status**: effect/full
 - **tier**: 1
 - **target_metric**: gsc-index-coverage / sitemap-strategy
 - **owner**: claude
-- **deployed_at**: -
+- **deployed_at**: 2026-05-23
 - **due**: 2026-07-13
 - **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **deliverable**: `docs/02_実装計画/cities-revival-plan.md`
 - **verification_command**: `node .claude/scripts/gsc/url-inspection-daily.cjs --pattern '/areas/.+/cities/'`
+
+### 完了 (2026-05-23)
+
+設計書 `docs/02_実装計画/cities-revival-plan.md` を完成。Phase 1 (W29-W44) 着手の前提条件すべて文書化:
+
+- 現状診断: cities テーブル 2,701 行 + stats_city 186 万行のデータは揃っているが、city page は空のプレースホルダー (h1 + ナビのみ、`generateStaticParams() returns []`)
+- 復活戦略 3 本柱: データ表示 + SSG 化 + sitemap 段階追加 (S1=80 都市 → S2=500 → S3=2,701 を 4-12 週で観測)
+- R2 キー設計: `app/areas/{prefCode}/cities/{cityCode}/profile.json` (新規) + 既存の subpage 維持
+- batch service 設計: 既存 `area-profile` パッケージを city 対応に拡張
+- 期待効果: Phase 1 全体 +112K のうち 11-26K (10-25%) を本施策で確保
+
+### 後続 TODO (Phase 1 で実行)
+
+新規 TODO **[P1-CITIES-EXEC]** を Phase 1 開始時に追加する (W29 着手予定)。
 
 ### 背景
 
