@@ -21,7 +21,7 @@ import type { Metadata } from "next";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "鉄道駅 乗降客数マップ（47都道府県） | 統計で見る都道府県",
+  title: "鉄道駅 乗降客数マップ（47都道府県）",
   description:
     "全国47都道府県の鉄道駅を地図上にバブル表示。1日あたり乗降客数と2019〜2023年度の推移を可視化。国土数値情報「駅別乗降客数」を使用。",
   alternates: { canonical: "/station-passengers" },

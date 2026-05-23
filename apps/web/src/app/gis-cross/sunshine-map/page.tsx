@@ -18,7 +18,7 @@ import { loadSunshineMapMeta } from "@/features/sunshine-map/server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "日本の日照地図 | 統計で見る都道府県",
+  title: "日本の日照地図",
   description:
     "全国の年間日照時間を1kmメッシュで可視化した日照地図。国土数値情報の気候平年値メッシュをもとに、太平洋側・日本海側・山間部の日照の差を地図で確かめられます。",
   alternates: {

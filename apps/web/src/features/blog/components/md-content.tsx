@@ -14,8 +14,22 @@ import { BannerAd } from "@/features/ads";
 
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
+import { buildHeadingSlug } from "../lib/heading-slug";
+
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
+
+/** 見出しの children から純粋なテキストを抽出 (TOC anchor 用) */
+function extractTextFromChildren(children: ReactNode): string {
+  if (typeof children === "string") return children;
+  if (typeof children === "number") return String(children);
+  if (Array.isArray(children)) return children.map(extractTextFromChildren).join("");
+  if (children && typeof children === "object" && "props" in children) {
+    const props = (children as { props?: { children?: ReactNode } }).props;
+    return extractTextFromChildren(props?.children);
+  }
+  return "";
+}
 
 interface AffiliateBannerData {
     href: string;
@@ -40,22 +54,30 @@ interface ComponentProps {
 
 function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<string, AffiliateBannerData>): Record<string, React.ComponentType<ComponentProps>> {
     return {
-        h2: ({ children, ...props }: ComponentProps) => (
-            <h2
-                className="mt-12 mb-6 scroll-mt-20 border-y border-border py-3 text-center text-2xl font-bold"
-                {...props}
-            >
-                {children}
-            </h2>
-        ),
-        h3: ({ children, ...props }: ComponentProps) => (
-            <h3
-                className="mt-8 mb-3 scroll-mt-20 text-xl font-semibold"
-                {...props}
-            >
-                {children}
-            </h3>
-        ),
+        h2: ({ children, ...props }: ComponentProps) => {
+            const id = buildHeadingSlug(extractTextFromChildren(children));
+            return (
+                <h2
+                    id={id}
+                    className="mt-12 mb-6 scroll-mt-20 border-y border-border py-3 text-center text-2xl font-bold"
+                    {...props}
+                >
+                    {children}
+                </h2>
+            );
+        },
+        h3: ({ children, ...props }: ComponentProps) => {
+            const id = buildHeadingSlug(extractTextFromChildren(children));
+            return (
+                <h3
+                    id={id}
+                    className="mt-8 mb-3 scroll-mt-20 text-xl font-semibold"
+                    {...props}
+                >
+                    {children}
+                </h3>
+            );
+        },
 
         a: ({ href, children, ...props }: ComponentProps & { href?: string }) => {
             const isExternal = typeof href === "string" && href.startsWith("http");

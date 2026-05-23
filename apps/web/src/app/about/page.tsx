@@ -60,14 +60,14 @@ const TEXT_STYLE = "text-xs leading-relaxed md:text-sm";
 const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm";
 
 export const metadata: Metadata = {
-  title: "このサイトについて | 統計で見る都道府県",
+  title: "このサイトについて",
   description:
     "統計で見る都道府県（stats47）の運営方針と運営者情報。元県庁職員 20 年の経験をもとに、e-Stat 等の一次統計データを分かりやすく可視化。編集方針・データソース・お問い合わせ。",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "このサイトについて | 統計で見る都道府県",
+    title: "このサイトについて",
     description:
       "元県庁職員 20 年の開発者が運営する統計可視化サイト。公的統計を正確・中立に届ける編集方針。",
     type: "website",
@@ -83,7 +83,7 @@ export default function AboutPage() {
   const aboutPageSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "このサイトについて | 統計で見る都道府県",
+    name: "このサイトについて",
     url: `${baseUrl}/about`,
     mainEntity: {
       "@type": "Person",

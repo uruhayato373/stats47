@@ -20,7 +20,7 @@ import type { Metadata } from "next";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "漁港マップ | 統計で見る都道府県",
+  title: "漁港マップ",
   description:
     "日本全国の漁港2,896港を地図上で可視化。第1種〜特定第3種の種別・管理者情報。国土数値情報（漁港データ）を使用。",
   alternates: {

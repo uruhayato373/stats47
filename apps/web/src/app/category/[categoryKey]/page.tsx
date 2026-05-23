@@ -76,15 +76,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { categoryKey } = await params;
 
   try {
-    const catResult = await findCategoryByKey(categoryKey);
+    const [catResult, rankingResult] = await Promise.all([
+      findCategoryByKey(categoryKey),
+      readRankingItemsByCategoryFromR2(categoryKey),
+    ]);
     const category = isOk(catResult) ? catResult.data : null;
 
     if (!category) {
       return { title: "ページが見つかりません" };
     }
 
-    const title = `${category.categoryName} | 統計で見る都道府県`;
-    const description = `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
+    const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+    const rankingCount = rankingItems.length;
+    const sampleTitles = rankingItems
+      .filter((i) => i.isFeatured)
+      .slice(0, 3)
+      .map((i) => i.title)
+      .join("・");
+
+    const title = `${category.categoryName}`;
+    const description = rankingCount > 0
+      ? (sampleTitles
+          ? `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。${sampleTitles}など、47都道府県を比較・分析できます。`
+          : `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。47都道府県を統計データで比較・分析できます。`)
+      : `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
 
     return {
       title,
