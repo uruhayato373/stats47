@@ -43,7 +43,7 @@ export async function generateMetadata({
   const name = prefName(prefCode);
   if (!name) return {};
   return {
-    title: `${name}の鉄道駅 乗降客数マップ | 統計で見る都道府県`,
+    title: `${name}の鉄道駅 乗降客数マップ`,
     description: `${name}の鉄道駅を地図上にバブル表示。1日あたり乗降客数と2019〜2023年度の推移を可視化。国土数値情報「駅別乗降客数」を使用。`,
     alternates: { canonical: `/station-passengers/${prefCode}` },
   };

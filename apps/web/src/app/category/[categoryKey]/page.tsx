@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return { title: "ページが見つかりません" };
     }
 
-    const title = `${category.categoryName} | 統計で見る都道府県`;
+    const title = `${category.categoryName}`;
     const description = `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
 
     return {

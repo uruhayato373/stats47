@@ -84,7 +84,7 @@ const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm";
  * ページメタデータ
  */
 export const metadata = {
-  title: "プライバシーポリシー | 統計で見る都道府県",
+  title: "プライバシーポリシー",
   description:
     "統計で見る都道府県（stats47）のプライバシーポリシー。個人情報の取り扱い、Cookie使用、広告配信に関する方針を説明します。",
   alternates: {
