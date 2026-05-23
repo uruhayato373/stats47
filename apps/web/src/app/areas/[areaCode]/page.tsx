@@ -20,6 +20,7 @@ import {
     AreaProfilePageClient,
     AreaProfileSidebar,
     AreaChartSection,
+    AreaRelatedRankingsCard,
     CitiesNavCard,
     RelatedAreas,
     CategoryNavGrid,
@@ -167,6 +168,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         categories={categories}
                         areaCode={areaCode}
                     />
+
+                    {/* この県のトップ/ボトムランキング (ranking 詳細への内部リンク強化) */}
+                    <AreaRelatedRankingsCard profile={profile} limit={6} />
 
                     {/* 関連エリア */}
                     <RelatedAreas areaCode={areaCode} />
