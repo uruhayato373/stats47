@@ -41,6 +41,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `app/ranking/{key}/page-cards.json` | ~16KB |
 | fishing-ports | `apps/web/scripts/export-fishing-ports-snapshot.ts` | `app/fishing-ports/all.json` | ~620KB |
 | ports + port-statistics | `apps/web/scripts/export-port-statistics-snapshot.ts` | `app/ports/...` | ~50MB (715 files) |
+| station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
 
 ## 使い方
 

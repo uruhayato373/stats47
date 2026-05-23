@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 
 const MigrationFlowPlayer = dynamic(
   () => import("./MigrationFlowPlayer").then((m) => m.MigrationFlowPlayer),
@@ -61,7 +62,7 @@ export function AreaMigrationFlowSection({ prefCode, areaName }: Props) {
         <MigrationFlowPlayer initialPrefCode={prefCode} showSelector={false} />
       ) : (
         <div
-          className="w-full rounded-md border bg-slate-900"
+          className="w-full rounded-md border bg-slate-100"
           style={{ aspectRatio: "16 / 9" }}
         />
       )}

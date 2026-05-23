@@ -47,6 +47,7 @@
     "@stats47/logger": "*",
     "@stats47/migration-flow": "*",
     "@stats47/ranking": "*",
+    "@stats47/station-passengers": "*",
     "@stats47/types": "*",
     "@stats47/utils": "*",
     "@stats47/visualization": "*",

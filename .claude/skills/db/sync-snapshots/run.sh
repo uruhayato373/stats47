@@ -35,6 +35,7 @@ declare -a TASKS=(
   "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
   "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
   "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
+  "station-passengers|apps/web/scripts/export-station-passengers-snapshot.ts"
 )
 
 run_task() {

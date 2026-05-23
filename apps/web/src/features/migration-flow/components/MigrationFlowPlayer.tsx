@@ -31,33 +31,35 @@ export function MigrationFlowPlayer({
   showSelector = true,
 }: Props) {
   const [prefCode, setPrefCode] = useState(initialPrefCode);
-  const [bundle, setBundle] = useState<MigrationFlowBundle | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [errored, setErrored] = useState(false);
+  /** 読み込み結果。どの prefCode のものかを保持し loading/errored を派生させる */
+  const [result, setResult] = useState<
+    | { prefCode: string; bundle: MigrationFlowBundle }
+    | { prefCode: string; error: true }
+    | null
+  >(null);
   const [frame, setFrame] = useState(0);
   const [scale, setScale] = useState(0.5);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 焦点県が変わるたびにデータを読み込む
+  // 焦点県が変わるたびにデータを読み込む（setState は async コールバック内のみ）
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setErrored(false);
     loadMigrationFlowBundle(prefCode)
       .then((b) => {
-        if (cancelled) return;
-        setBundle(b);
-        setLoading(false);
+        if (!cancelled) setResult({ prefCode, bundle: b });
       })
       .catch(() => {
-        if (cancelled) return;
-        setErrored(true);
-        setLoading(false);
+        if (!cancelled) setResult({ prefCode, error: true });
       });
     return () => {
       cancelled = true;
     };
   }, [prefCode]);
+
+  const ready = result?.prefCode === prefCode;
+  const bundle = result && "bundle" in result ? result.bundle : null;
+  const loading = !ready;
+  const errored = ready && result != null && "error" in result;
 
   // requestAnimationFrame でフレームを駆動（30fps 相当・ループ）
   useEffect(() => {
@@ -106,7 +108,7 @@ export function MigrationFlowPlayer({
       {/* プレイヤー（16:9・1920x1080 をスケール） */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-md border bg-slate-900"
+        className="relative w-full overflow-hidden rounded-md border bg-white"
         style={{ aspectRatio: "16 / 9" }}
       >
         {bundle && (
@@ -127,18 +129,18 @@ export function MigrationFlowPlayer({
               data={bundle.data}
               cityTopology={bundle.cityTopology}
               municipalities={bundle.municipalities}
-              theme="dark"
+              theme="light"
             />
           </div>
         )}
 
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-300">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
             読み込み中…
           </div>
         )}
         {errored && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-300">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
             データを読み込めませんでした。
           </div>
         )}
