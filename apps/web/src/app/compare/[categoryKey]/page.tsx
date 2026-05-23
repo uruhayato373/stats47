@@ -122,8 +122,36 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
         ? await loadPageComponents("area-category", categoryKey)
         : [];
 
+    const currentCategory = categories.find((c) => c.categoryKey === categoryKey);
+
     return (
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4">
+            {/* Hero (軽量): 比較対象 + カテゴリ名 (noindex のため軽量に) */}
+            <header className="mb-5">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    地域間比較
+                </p>
+                <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+                    {regions ? (
+                        <>
+                            {regions[0].areaName}
+                            <span className="mx-2 text-muted-foreground">vs</span>
+                            {regions[1].areaName}
+                        </>
+                    ) : (
+                        "都道府県を比較"
+                    )}
+                    {currentCategory && (
+                        <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+                            {currentCategory.categoryName}
+                        </span>
+                    )}
+                </h1>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                    2 つの都道府県の{currentCategory?.categoryName ?? "統計データ"}を、KPI とチャートで横並びに比較できます。
+                </p>
+            </header>
+
             <RegionComparisonClient
                 regions={regions}
                 categories={categories}
