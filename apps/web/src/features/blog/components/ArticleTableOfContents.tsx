@@ -1,11 +1,10 @@
-import { List } from "lucide-react";
-
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { List } from "lucide-react";
 
 import { extractHeadings } from "../lib/heading-slug";
 
