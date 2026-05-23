@@ -70,7 +70,14 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      // sitemap-index に cities (sitemap/8) が含まれない Next.js / OpenNext quirk の
+      // workaround として、cities sitemap を robots.txt から直接配信。
+      // Phase 1 cities revival (PR #335-#337) で 25,785 city URLs を Google に
+      // 確実に discover させる目的。
+      `${baseUrl}/sitemap/8.xml`,
+    ],
   };
 }
 
