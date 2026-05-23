@@ -29,6 +29,9 @@ import {
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
+  HeroShell,
+  KpiGrid,
+  KpiTile,
   NativeAffiliateRow,
   SectionEyebrow,
   InfeedAd,
@@ -193,23 +196,50 @@ export default async function CategoryPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      {/* Hero (軽量): カテゴリ名 + 件数 + メタ */}
-      <header className="mb-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-          カテゴリ
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-          {category.categoryName}
-          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-            {rankingItems.length}件
-            {featuredCount > 0 && ` · 注目${featuredCount}件`}
-            {latestYear && ` · 最新${latestYear}年`}
-          </span>
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {category.categoryName}分野の都道府県別ランキングを、地図・グラフ・テーブルで比較できます。
-        </p>
-      </header>
+      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+      <HeroShell variant="dark" className="mb-6">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,420px] md:p-8">
+          <div className="min-w-0">
+            <p className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
+              カテゴリ
+            </p>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+              {category.categoryName}
+            </h1>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+              {category.categoryName}分野の都道府県別ランキング {rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。
+            </p>
+          </div>
+          <div>
+            <KpiGrid columns={2}>
+              <KpiTile
+                label="ランキング数"
+                value={String(rankingItems.length)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="注目"
+                value={String(featuredCount)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="最新データ"
+                value={latestYear || "—"}
+                unit={latestYear ? "年" : ""}
+                variant="dark"
+              />
+              <KpiTile
+                label="関連調査"
+                value={String(surveysResult.length)}
+                unit="件"
+                variant="dark"
+              />
+            </KpiGrid>
+          </div>
+        </div>
+      </HeroShell>
 
       <div className="flex gap-4 items-start">
         {/* メインコンテンツ */}

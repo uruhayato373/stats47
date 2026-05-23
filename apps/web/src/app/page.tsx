@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import { BarChart3, ExternalLink, MapPin, Search, TrendingUp } from "lucide-react";
+import { BarChart3, Download, ExternalLink, MapPin, Search, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
@@ -9,6 +9,7 @@ import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { TrackedAffiliateLink } from "@/features/ads";
 import {
   buildFurusatoNozeiUrl,
+  FURUSATO_NOZEI_LINKS,
 } from "@/features/ads/constants/furusato-nozei";
 import { listLatestArticles } from "@/features/blog/server";
 import { FeaturedRankings } from "@/features/ranking/server";
@@ -114,10 +115,30 @@ const DISCOVERY_CARDS = [
   },
 ];
 
+/** ホームのふるさと納税ピックアップ対象（北海道・山形・宮崎・沖縄） */
+const HOME_FURUSATO_PICKS = ["01000", "06000", "45000", "47000"] as const;
+
+/** 県コードに基づく安定パステルパレット (画像なしサムネ用) */
+function pickPalette(prefCode: string) {
+  const palettes = [
+    { start: "#bbf7d0", end: "#16a34a" },
+    { start: "#fbcfe8", end: "#ec4899" },
+    { start: "#fde68a", end: "#f59e0b" },
+    { start: "#bfdbfe", end: "#3b82f6" },
+    { start: "#fef3c7", end: "#fbbf24" },
+    { start: "#ddd6fe", end: "#8b5cf6" },
+  ];
+  const idx = parseInt(prefCode.slice(0, 2), 10) % palettes.length;
+  return palettes[idx];
+}
+
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(4).catch(() => []);
   const affiliateId = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID;
-  const furusatoTopUrl = buildFurusatoNozeiUrl("", affiliateId);
+
+  const furusatoPicks = HOME_FURUSATO_PICKS
+    .map((code) => FURUSATO_NOZEI_LINKS.find((l) => l.prefCode === code))
+    .filter((l): l is NonNullable<typeof l> => l != null);
 
   return (
     <div className="w-full" suppressHydrationWarning>
@@ -253,34 +274,121 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ⑤ ふるさと納税 1 行ミニバナー (PR) */}
-      <section className="px-4 py-4">
+      {/* ⑤ ふるさと納税 4 県ネイティブ枠 (マスタープラン § 5.3) */}
+      <section className="px-4 py-8">
         <div className="mx-auto max-w-6xl">
-          <TrackedAffiliateLink
-            href={furusatoTopUrl || "https://event.rakuten.co.jp/furusato/"}
-            category="furusato"
-            label="楽天ふるさと納税"
-            position="home-furusato-banner"
-            className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50/40 px-4 py-3 transition-shadow hover:shadow-sm dark:border-amber-900/40 dark:bg-amber-950/20"
+          <div
+            className="overflow-hidden rounded-2xl border border-amber-200 shadow-sm"
+            style={{
+              background: "linear-gradient(135deg, #fef3c7, #ffffff)",
+            }}
           >
-            <span aria-hidden className="text-xl">🎁</span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
-                都道府県別の人気返礼品を探す
-                <span className="ml-2 rounded-full bg-amber-900 px-1.5 py-0.5 text-[9px] font-bold text-white">
+            <div className="flex flex-col items-start gap-3 border-b border-amber-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <span aria-hidden className="text-2xl">🎁</span>
+                <div>
+                  <h2 className="text-base font-bold text-amber-900 sm:text-lg">
+                    地域から選ぶ ふるさと納税
+                  </h2>
+                  <p className="text-xs text-muted-foreground">
+                    都道府県の人気返礼品ピックアップ
+                  </p>
+                </div>
+                <span className="ml-2 rounded-full bg-amber-900 px-2 py-0.5 text-[10.5px] font-semibold text-white">
                   PR
                 </span>
-              </p>
-              <p className="mt-0.5 text-xs text-muted-foreground">
-                楽天ふるさと納税 — エリア別の返礼品をピックアップ
-              </p>
+              </div>
+              <Link
+                href="/areas"
+                className="rounded-md bg-amber-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-800"
+              >
+                都道府県から探す →
+              </Link>
             </div>
-            <ExternalLink className="h-4 w-4 shrink-0 text-amber-700" />
-          </TrackedAffiliateLink>
+            <div className="grid grid-cols-2 gap-3 p-4 md:grid-cols-4">
+              {furusatoPicks.map((pick) => {
+                const url = buildFurusatoNozeiUrl(pick.rakutenAreaSlug, affiliateId);
+                const palette = pickPalette(pick.prefCode);
+                return (
+                  <TrackedAffiliateLink
+                    key={pick.prefCode}
+                    href={url}
+                    category="furusato"
+                    label={`${pick.prefName}のふるさと納税`}
+                    position="home-furusato-row"
+                    className="group flex flex-col gap-2 rounded-xl border border-border bg-card p-3 transition-shadow hover:shadow-md"
+                  >
+                    <div
+                      aria-hidden
+                      className="aspect-[4/3] rounded-lg"
+                      style={{
+                        background: `linear-gradient(135deg, ${palette.start}, ${palette.end})`,
+                      }}
+                    />
+                    <div>
+                      <p className="text-[10.5px] font-semibold text-muted-foreground">
+                        {pick.prefName}
+                      </p>
+                      <p className="mt-0.5 line-clamp-2 text-xs font-medium leading-snug text-foreground">
+                        {pick.prefName}の人気返礼品を探す
+                      </p>
+                      <p className="mt-1.5 inline-flex items-center gap-0.5 text-[11px] font-bold text-amber-700">
+                        楽天ふるさと納税
+                        <ExternalLink className="h-3 w-3" />
+                      </p>
+                    </div>
+                  </TrackedAffiliateLink>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ⑥ AdSense (footer) */}
+      {/* ⑥ データパック CTA (マスタープラン § 3.3) */}
+      <section className="px-4 py-8">
+        <div className="mx-auto max-w-6xl">
+          <div
+            className="flex flex-col items-start gap-4 rounded-2xl border border-primary/20 p-6 shadow-sm sm:flex-row sm:items-center"
+            style={{
+              background: "linear-gradient(135deg, var(--primary-50, rgba(239,246,255,1)), #ffffff)",
+            }}
+          >
+            <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Download className="h-7 w-7" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-base font-bold text-primary">データを活用する</h2>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                1,800指標 × 47都道府県 × 30年 = 250万件以上のデータを CSV で取得できます。クレジット表記すれば無料で商用利用可能。
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button asChild>
+                <Link href="/ranking">CSV を見る</Link>
+              </Button>
+              <button
+                type="button"
+                disabled
+                title="準備中"
+                className="cursor-not-allowed rounded-md border border-border bg-muted/30 px-3 py-1.5 text-xs font-medium text-muted-foreground opacity-60"
+              >
+                JSON
+              </button>
+              <button
+                type="button"
+                disabled
+                title="準備中"
+                className="cursor-not-allowed rounded-md border border-border bg-muted/30 px-3 py-1.5 text-xs font-medium text-muted-foreground opacity-60"
+              >
+                Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ⑦ AdSense (footer) */}
       <div className="my-6 flex justify-center px-4">
         <AdSenseAd
           format={RANKING_PAGE_FOOTER.format}

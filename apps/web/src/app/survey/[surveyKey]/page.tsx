@@ -22,6 +22,9 @@ import {
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
+  HeroShell,
+  KpiGrid,
+  KpiTile,
   NativeAffiliateRow,
   SectionEyebrow,
   InfeedAd,
@@ -155,36 +158,65 @@ export default async function SurveyPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      {/* Hero (軽量): 政府統計バッジ + タイトル + メタ */}
-      <header className="mb-5">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10.5px] font-semibold text-primary">
-          📊 政府統計
+      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+      <HeroShell variant="dark" className="mb-6">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,420px] md:p-8">
+          <div className="min-w-0">
+            <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
+              📊 政府統計
+            </p>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+              {survey.name}
+            </h1>
+            <p className="mt-2 text-sm font-medium text-white/80">
+              {survey.organization}
+            </p>
+            {survey.description && (
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/80">
+                {survey.description}
+              </p>
+            )}
+            {survey.url && (
+              <a
+                href={survey.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1 rounded-md border border-white/30 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/10"
+              >
+                公式サイト ↗
+              </a>
+            )}
+          </div>
+          <div>
+            <KpiGrid columns={2}>
+              <KpiTile
+                label="ランキング数"
+                value={String(rankingItems.length)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="注目"
+                value={String(featuredCount)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="最新データ"
+                value={latestYear || "—"}
+                unit={latestYear ? "年" : ""}
+                variant="dark"
+              />
+              <KpiTile
+                label="エリア"
+                value="47"
+                unit="都道府県"
+                variant="dark"
+              />
+            </KpiGrid>
+          </div>
         </div>
-        <h1 className="mt-2 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-          {survey.name}
-          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-            {rankingItems.length}件 · {latestYear || ""}{latestYear ? "年" : ""}
-          </span>
-        </h1>
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-          <span>{survey.organization}</span>
-          {survey.url && (
-            <a
-              href={survey.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline-offset-4 hover:underline"
-            >
-              公式サイト ↗
-            </a>
-          )}
-        </div>
-        {survey.description && (
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            {survey.description}
-          </p>
-        )}
-      </header>
+      </HeroShell>
 
       {featuredItems.length > 0 && (
         <section className="mb-8">
