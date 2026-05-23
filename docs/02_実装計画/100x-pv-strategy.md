@@ -23,9 +23,9 @@ related_files:
   - docs/05_改善ログ/gsc.md
   - docs/05_改善ログ/content.md
 phases:
-  - { id: 0, name: "漏れ止め", weeks: "W21-W28", multiplier: 1.5, target_monthly_pv: 38000, status: active }
-  - { id: 1, name: "面の拡張", weeks: "W29-W44", multiplier: 4, target_monthly_pv: 150000, status: planned }
-  - { id: 2, name: "権威化", weeks: "W45-2027-W20", multiplier: 3, target_monthly_pv: 450000, status: planned }
+  - { id: 0, name: "漏れ止め", weeks: "W21-W28", multiplier: 1.5, target_monthly_pv: 38000, status: implementation-complete, effect_measurement_due: "2026-06-20" }
+  - { id: 1, name: "面の拡張", weeks: "W29-W44", multiplier: 4, target_monthly_pv: 150000, status: partial-implementation-360-cities-ssg, prep_complete: true }
+  - { id: 2, name: "権威化", weeks: "W45-2027-W20", multiplier: 3, target_monthly_pv: 450000, status: prep-complete-pending-execution, prep_complete: true }
   - { id: 3, name: "ループ起動", weeks: "2027-W21-W44", multiplier: 2.5, target_monthly_pv: 1100000, status: planned }
   - { id: 4, name: "横展開", weeks: "2027-W45-2028-W20", multiplier: 2.5, target_monthly_pv: 2500000, status: planned }
 ---
@@ -187,9 +187,9 @@ Phase 0 完了 (effect/full) は以下すべてを満たすこと:
 
 ### Phase 2 着手前に決めること (Phase 1 内で)
 
-1. **「公務員 × AI × 統計」コンテンツ戦略の具体テーマ 30 本**
-2. **note 収益化フロー** (note ↔ stats47 ファネル定量化)
-3. **被リンク獲得施策** (どこに何のリンクを置くか)
+1. ~~**「公務員 × AI × 統計」コンテンツ戦略の具体テーマ 30 本**~~ ✅ 2026-05-24 完了 → [`phase-2-authority-content-plan.md`](./phase-2-authority-content-plan.md) (Series A-D で 30 本企画 + Stage 2-S1〜2-S4)
+2. ~~**note 収益化フロー** (note ↔ stats47 ファネル定量化)~~ ✅ 2026-05-24 完了 → [`phase-2-note-monetization-plan.md`](./phase-2-note-monetization-plan.md) (Funnel A/B 設計 + UTM 規約)
+3. ~~**被リンク獲得施策** (どこに何のリンクを置くか)~~ ✅ 2026-05-24 完了 → [`phase-2-backlink-strategy.md`](./phase-2-backlink-strategy.md) (linkable asset 6 本 + メディア配布 + HARO)
 
 ---
 
