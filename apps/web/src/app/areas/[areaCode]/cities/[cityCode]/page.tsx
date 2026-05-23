@@ -20,6 +20,7 @@ import { isOk } from "@stats47/types";
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import { CategoryNavGrid, CitiesNavCard } from "@/features/area-profile";
+import { STAGE_1_DESIGNATED_CITIES } from "@/features/area-profile/constants/stage-1-cities";
 import { listCategories } from "@/features/category/server";
 import {
     PAGE_COMPONENTS_SNAPSHOT_KEY,
@@ -114,7 +115,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // ---------------------------------------------------------------------------
 
 export function generateStaticParams() {
-    return [];
+    return STAGE_1_DESIGNATED_CITIES;
 }
 
 // ---------------------------------------------------------------------------
