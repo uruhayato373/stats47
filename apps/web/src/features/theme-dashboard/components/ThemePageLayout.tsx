@@ -10,7 +10,12 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import { NativeAffiliateRow } from "@/features/redesign";
+import {
+  HeroShell,
+  KpiGrid,
+  KpiTile,
+  NativeAffiliateRow,
+} from "@/features/redesign";
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
@@ -72,21 +77,49 @@ export async function ThemePageLayout({ theme, data }: Props) {
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Hero (軽量・データ主役): タイトル + 1 行 description + 指標数バッジ */}
-      <header className="mb-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-          テーマダッシュボード
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-          {theme.title}
-          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-            {theme.rankingKeys.length}指標
-          </span>
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {theme.description}
-        </p>
-      </header>
+      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+      <HeroShell variant="dark" className="mb-6">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">
+              テーマダッシュボード
+            </p>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+              {theme.title}
+            </h1>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+              {theme.description}
+            </p>
+          </div>
+          <div>
+            <KpiGrid columns={2}>
+              <KpiTile
+                label="指標数"
+                value={String(theme.rankingKeys.length)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="エリア"
+                value="47"
+                unit="都道府県"
+                variant="dark"
+              />
+              <KpiTile
+                label="可視化"
+                value="地図 + グラフ"
+                variant="dark"
+              />
+              <KpiTile
+                label="データ"
+                value="CSV"
+                unit="DL 可"
+                variant="dark"
+              />
+            </KpiGrid>
+          </div>
+        </div>
+      </HeroShell>
 
       <ThemeDashboardClient
         themeConfig={theme}

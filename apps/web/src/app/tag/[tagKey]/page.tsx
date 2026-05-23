@@ -21,7 +21,12 @@ import {
     listAllUniqueTags,
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
-import { NativeAffiliateRow } from "@/features/redesign";
+import {
+    HeroShell,
+    KpiGrid,
+    KpiTile,
+    NativeAffiliateRow,
+} from "@/features/redesign";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 
@@ -108,21 +113,37 @@ export default async function TagArticlesPage({ params }: PageProps) {
             </div>
 
             <div className="container mx-auto px-4 py-4">
-                {/* Hero (軽量): タグ名 + 件数 */}
-                <header className="mb-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        タグ
-                    </p>
-                    <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-                        {tag}
-                        <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-                            {articles.length} 記事
-                        </span>
-                    </h1>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                        「{tag}」タグが付いた都道府県統計ブログの記事一覧
-                    </p>
-                </header>
+                {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+                <HeroShell variant="dark" className="mb-6">
+                    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,320px] md:p-8">
+                        <div className="min-w-0">
+                            <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
+                                タグ
+                            </p>
+                            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                                {tag}
+                            </h1>
+                            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+                                「{tag}」タグが付いた都道府県統計ブログの記事 {articles.length} 本を掲載しています。
+                            </p>
+                        </div>
+                        <div>
+                            <KpiGrid columns={2}>
+                                <KpiTile
+                                    label="記事数"
+                                    value={String(articles.length)}
+                                    unit="件"
+                                    variant="dark"
+                                />
+                                <KpiTile
+                                    label="タグ"
+                                    value={tag}
+                                    variant="dark"
+                                />
+                            </KpiGrid>
+                        </div>
+                    </div>
+                </HeroShell>
 
                 {articles.length === 0 ? (
                     notFound()

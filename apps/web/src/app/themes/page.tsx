@@ -1,6 +1,11 @@
 
 import Link from "next/link";
 
+import {
+  HeroShell,
+  KpiGrid,
+  KpiTile,
+} from "@/features/redesign";
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
@@ -29,18 +34,49 @@ export default function ThemesPage() {
 
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      {/* Hero (軽量): テーマ一覧の入口 */}
-      <header className="mb-5">
-        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
-          テーマダッシュボード
-          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-            {ALL_THEMES.length}テーマ / {totalRankings}指標
-          </span>
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードでテーマ別に都道府県を比較できます。
-        </p>
-      </header>
+      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+      <HeroShell variant="dark" className="mb-6">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">
+              ディスカバリー
+            </p>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+              テーマダッシュボード
+            </h1>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+              テーマ別に複数の指標を横断して都道府県を比較できます。少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードを {ALL_THEMES.length} 種類。
+            </p>
+          </div>
+          <div>
+            <KpiGrid columns={2}>
+              <KpiTile
+                label="テーマ数"
+                value={String(ALL_THEMES.length)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="指標合計"
+                value={String(totalRankings)}
+                unit="件"
+                variant="dark"
+              />
+              <KpiTile
+                label="エリア"
+                value="47"
+                unit="都道府県"
+                variant="dark"
+              />
+              <KpiTile
+                label="可視化"
+                value="地図 + グラフ"
+                variant="dark"
+              />
+            </KpiGrid>
+          </div>
+        </div>
+      </HeroShell>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {ALL_THEMES.map((theme) => (
