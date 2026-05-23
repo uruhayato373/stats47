@@ -74,6 +74,7 @@ import {
 import {
   CorrelationSectionContainer,
   RankingItemsSidebar,
+  RelatedRankingsGrid,
   RankingPageCardsContainer,
   RelatedArticlesCard,
   PortStatisticsMapCard,
@@ -362,6 +363,19 @@ export default async function RankingKeyPage({
               position="ranking-native"
               trackingCategory={`ranking-${rankingItem.categoryKey ?? "general"}`}
             />
+          ) : null
+        }
+        // 同カテゴリ関連ランキング (内部リンク密度↑、GSC indexation 改善)
+        relatedRankingsSection={
+          rankingItem.categoryKey ? (
+            <Suspense fallback={null}>
+              <RelatedRankingsGrid
+                rankingKey={rankingKey}
+                categoryKey={rankingItem.categoryKey}
+                areaType={areaType}
+                limit={9}
+              />
+            </Suspense>
           ) : null
         }
         // AI生成コンテンツ: 考察（常時表示カード）

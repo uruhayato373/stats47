@@ -71,6 +71,8 @@ interface RankingKeyPageClientProps {
     faqSection?: ReactNode;
     /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
     nativeAffiliateSection?: ReactNode;
+    /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
+    relatedRankingsSection?: ReactNode;
     /** 47 都道府県別の解説セクション (SEO 長尾) */
     prefectureCommentarySection?: ReactNode;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
@@ -100,6 +102,7 @@ export function RankingKeyPageClient({
     regionalAnalysisSection,
     faqSection,
     nativeAffiliateSection,
+    relatedRankingsSection,
     prefectureCommentarySection,
     parentAreaCode,
     sidebarSection,
@@ -484,6 +487,9 @@ export function RankingKeyPageClient({
 
                     {/* ネイティブアフィリエイト枠 (D Phase 2) */}
                     {nativeAffiliateSection}
+
+                    {/* 同カテゴリ関連ランキング grid (内部リンク密度↑) */}
+                    {relatedRankingsSection}
 
                     {/* データの考察（常時表示カード） */}
                     {insightsSection}

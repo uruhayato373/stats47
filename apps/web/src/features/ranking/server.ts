@@ -31,6 +31,7 @@ export async function getFeaturedRankings(limit: number = 20): Promise<Result<Ra
 export { FeaturedRankings } from "./components/FeaturedRankings";
 export { CorrelationSectionContainer } from "./components/CorrelationSection";
 export { RankingItemsSidebar } from "./components/RankingSidebar";
+export { RelatedRankingsGrid } from "./components/RelatedRankingsGrid/RelatedRankingsGrid";
 export { RankingPageCardsContainer } from "./components/RankingPageCards";
 export { SurveyBadge } from "./components/SurveyBadge/SurveyBadge";
 export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
