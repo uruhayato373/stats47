@@ -14,9 +14,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
-import { TagBadge, ArticleRelatedBooks, ArticleRenderer, generateBlogMetadata, type Article } from "@/features/blog";
+import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
+    ArticleDataDownloadSection,
     RelatedRankingsSection,
     listLatestArticles,
     listArticlesByTagKey,
@@ -213,6 +214,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     </div>
                                 </header>
 
+                                {/* TOC (xl 未満で記事冒頭に表示。xl 以上はサイドバーに表示) */}
+                                <div className="mb-8 xl:hidden">
+                                    <ArticleTableOfContents content={article.content} />
+                                </div>
+
                                 {/* 記事本文 */}
                                 <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
 
@@ -234,6 +240,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 </CardContent>
                             </Card>
                         </div>
+
+                        {/* DataPack CSV CTA (マスタープラン § 5.3 「関連 CSV」) */}
+                        <ArticleDataDownloadSection tagKeys={tagKeys} />
 
                         {/* バナー広告（タグキーベース・ランダム表示） */}
                         <ArticleAffiliateBanner tagKeys={tagKeys} />
@@ -266,6 +275,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     {/* 右スティッキーサイドバー: xl+ のみ表示 */}
                     <aside className="hidden xl:flex xl:w-72 xl:shrink-0 xl:flex-col xl:gap-4 xl:sticky xl:top-20">
+                        {/* 目次 (マスタープラン § 5.3 「TOC + 関連記事」) */}
+                        <ArticleTableOfContents content={article.content} compact />
                         {/* コンテンツ（優先度順） */}
                         <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
                         <RelatedRankingsSection tagKeys={tagKeys} compact />
