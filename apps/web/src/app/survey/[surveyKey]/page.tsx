@@ -70,7 +70,7 @@ export async function generateMetadata({
       return { title: "ページが見つかりません" };
     }
 
-    const title = `${survey.name}のランキング一覧 | 統計で見る都道府県`;
+    const title = `${survey.name}のランキング一覧`;
     const description = `${survey.organization}「${survey.name}」に基づく都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
 
     return {

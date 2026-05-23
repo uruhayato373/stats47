@@ -20,7 +20,7 @@ import type { TopoJSONTopology } from "@stats47/types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "過疎地域と医療機関 | 統計で見る都道府県",
+  title: "過疎地域と医療機関",
   description:
     "過疎地域に医療機関がどれだけあるかを都道府県別に可視化。国土数値情報の過疎地域データと医療機関データを空間結合し、過疎地域内の医療機関数・比率をランキングと地図で表示。",
   alternates: {

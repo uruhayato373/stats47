@@ -17,7 +17,7 @@ import { MigrationFlowPlayer } from "@/features/migration-flow";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "都道府県 人口移動フロー | 統計で見る都道府県",
+  title: "都道府県 人口移動フロー",
   description:
     "47都道府県それぞれの転入・転出フローをアニメーション地図で可視化。焦点の県を市区町村別コロプレス、全国との人の流れをパーティクルで表示します。住民基本台帳人口移動報告（2025年）より。",
   alternates: {

@@ -15,7 +15,7 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "掛け合わせ分析 | 統計で見る都道府県",
+  title: "掛け合わせ分析",
   description:
     "統計データと地理情報（GIS）を掛け合わせ、単独の指標では見えない都道府県の姿を可視化するページ集。過疎地域と医療機関の重なりなど、面と点を組み合わせた分析。",
   alternates: {

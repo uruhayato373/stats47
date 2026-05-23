@@ -16,7 +16,7 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-const title = "利用規約 | 統計で見る都道府県";
+const title = "利用規約";
 const description =
   "統計で見る都道府県（stats47）の利用規約。サービス利用条件、禁止事項、免責事項などを説明します。";
 

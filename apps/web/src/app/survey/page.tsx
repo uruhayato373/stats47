@@ -21,7 +21,7 @@ import type { Metadata } from "next";
 
 
 export function generateMetadata(): Metadata {
-  const title = "調査別ランキング一覧 | 統計で見る都道府県";
+  const title = "調査別ランキング一覧";
   const description =
     "政府統計調査ごとの都道府県別ランキング一覧。国勢調査、家計調査、人口動態統計など、各調査のデータを活用したランキングを閲覧できます。";
 

@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 const theme = LABOR_MOBILITY_THEME;
 
 export function generateMetadata(): Metadata {
-  const title = `${theme.title} | 統計で見る都道府県`;
+  const title = `${theme.title}`;
   return {
     title,
     description: theme.description,
