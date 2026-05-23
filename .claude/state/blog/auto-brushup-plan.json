@@ -1,0 +1,1206 @@
+{
+  "generated_at": "2026-05-23T23:49:56.786Z",
+  "week": "2026-W21",
+  "days": [
+    {
+      "date": "2026-05-23",
+      "slots": [
+        {
+          "slug": "habitable-area-land-use",
+          "expectedLift": 69,
+          "qualityScore": 70,
+          "impressions": 643,
+          "currentCtr": 0.0031
+        },
+        {
+          "slug": "child-height-regional-gap",
+          "expectedLift": 65,
+          "qualityScore": 79,
+          "impressions": 1597,
+          "currentCtr": 0.0075
+        },
+        {
+          "slug": "temperature-extremes-map",
+          "expectedLift": 57,
+          "qualityScore": 74,
+          "impressions": 1337,
+          "currentCtr": 0.015
+        },
+        {
+          "slug": "price-index-high-low-prefecture",
+          "expectedLift": 36,
+          "qualityScore": 48,
+          "impressions": 1373,
+          "currentCtr": 0.0189
+        },
+        {
+          "slug": "manufacturing-aichi-dominance",
+          "expectedLift": 41,
+          "qualityScore": 60,
+          "impressions": 421,
+          "currentCtr": 0.0024
+        }
+      ]
+    },
+    {
+      "date": "2026-05-24",
+      "slots": [
+        {
+          "slug": "overnight-guests-inbound-recovery",
+          "expectedLift": 40,
+          "qualityScore": 82,
+          "impressions": 364,
+          "currentCtr": 0.0027
+        },
+        {
+          "slug": "waiting-children-progress",
+          "expectedLift": 26,
+          "qualityScore": 41,
+          "impressions": 133,
+          "currentCtr": 0.0075
+        },
+        {
+          "slug": "consumer-price-regional-gap",
+          "expectedLift": 27,
+          "qualityScore": 72,
+          "impressions": 230,
+          "currentCtr": 0.0043
+        },
+        {
+          "slug": "foreign-residents-diversity-map",
+          "expectedLift": 13,
+          "qualityScore": 45,
+          "impressions": 127,
+          "currentCtr": 0.0079
+        },
+        {
+          "slug": "manufacturing-shipment-prefecture-ranking",
+          "expectedLift": 19,
+          "qualityScore": 64,
+          "impressions": 159,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-05-25",
+      "slots": [
+        {
+          "slug": "automotive-industry-transformation-map",
+          "expectedLift": 11,
+          "qualityScore": 42,
+          "impressions": 89,
+          "currentCtr": 0.0112
+        },
+        {
+          "slug": "local-tax-regional-gap",
+          "expectedLift": 11,
+          "qualityScore": 43,
+          "impressions": 88,
+          "currentCtr": 0.0114
+        },
+        {
+          "slug": "noodle-consumption-prefecture-character",
+          "expectedLift": 34,
+          "qualityScore": 65,
+          "impressions": 388,
+          "currentCtr": 0.0206
+        },
+        {
+          "slug": "park-green-space-gap",
+          "expectedLift": 17,
+          "qualityScore": 67,
+          "impressions": 213,
+          "currentCtr": 0.0094
+        },
+        {
+          "slug": "sunshine-pacific-vs-nihonkai",
+          "expectedLift": 14,
+          "qualityScore": 72,
+          "impressions": 113,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "slots": [
+        {
+          "slug": "marriage-unmarried-crisis",
+          "expectedLift": 12,
+          "qualityScore": 70,
+          "impressions": 147,
+          "currentCtr": 0.0068
+        },
+        {
+          "slug": "post-office-last-window",
+          "expectedLift": 8,
+          "qualityScore": 45,
+          "impressions": 67,
+          "currentCtr": 0.0149
+        },
+        {
+          "slug": "electricity-demand-gap",
+          "expectedLift": 7,
+          "qualityScore": 45,
+          "impressions": 53,
+          "currentCtr": 0
+        },
+        {
+          "slug": "highschool-starting-salary-gap",
+          "expectedLift": 7,
+          "qualityScore": 43,
+          "impressions": 308,
+          "currentCtr": 0.0227
+        },
+        {
+          "slug": "household-solo-vs-dualincome",
+          "expectedLift": 11,
+          "qualityScore": 72,
+          "impressions": 139,
+          "currentCtr": 0.0144
+        }
+      ]
+    },
+    {
+      "date": "2026-05-27",
+      "slots": [
+        {
+          "slug": "minimum-wage-1000yen-breakthrough",
+          "expectedLift": 7,
+          "qualityScore": 44,
+          "impressions": 117,
+          "currentCtr": 0
+        },
+        {
+          "slug": "road-infrastructure-density",
+          "expectedLift": 7,
+          "qualityScore": 45,
+          "impressions": 139,
+          "currentCtr": 0.0288
+        },
+        {
+          "slug": "truck-driver-2024-crisis",
+          "expectedLift": 11,
+          "qualityScore": 64,
+          "impressions": 65,
+          "currentCtr": 0
+        },
+        {
+          "slug": "fishery-species-prefecture-specialty",
+          "expectedLift": 19,
+          "qualityScore": 65,
+          "impressions": 269,
+          "currentCtr": 0.0112
+        },
+        {
+          "slug": "agriculture-hokkaido-dominance",
+          "expectedLift": 7,
+          "qualityScore": 67,
+          "impressions": 64,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "slots": [
+        {
+          "slug": "alcohol-prefecture-map",
+          "expectedLift": 7,
+          "qualityScore": 63,
+          "impressions": 91,
+          "currentCtr": 0.011
+        },
+        {
+          "slug": "aging-solo-living-crisis",
+          "expectedLift": 6,
+          "qualityScore": 73,
+          "impressions": 53,
+          "currentCtr": 0
+        },
+        {
+          "slug": "commercial-land-price-trend",
+          "expectedLift": 6,
+          "qualityScore": 70,
+          "impressions": 34,
+          "currentCtr": 0
+        },
+        {
+          "slug": "commercial-sales-productivity-gap",
+          "expectedLift": 6,
+          "qualityScore": 72,
+          "impressions": 77,
+          "currentCtr": 0.013
+        },
+        {
+          "slug": "cpi-change-regional-pattern",
+          "expectedLift": 6,
+          "qualityScore": 75,
+          "impressions": 42,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-05-29",
+      "slots": [
+        {
+          "slug": "fishery-catch-aquaculture-shift",
+          "expectedLift": 6,
+          "qualityScore": 67,
+          "impressions": 96,
+          "currentCtr": 0
+        },
+        {
+          "slug": "international-cooperation-volunteer-map",
+          "expectedLift": 4,
+          "qualityScore": 55,
+          "impressions": 33,
+          "currentCtr": 0
+        },
+        {
+          "slug": "manufacturing-productivity",
+          "expectedLift": 6,
+          "qualityScore": 70,
+          "impressions": 95,
+          "currentCtr": 0.0105
+        },
+        {
+          "slug": "school-nonattendance-pattern",
+          "expectedLift": 4,
+          "qualityScore": 50,
+          "impressions": 43,
+          "currentCtr": 0
+        },
+        {
+          "slug": "sewerage-water-supply-gap",
+          "expectedLift": 4,
+          "qualityScore": 47,
+          "impressions": 130,
+          "currentCtr": 0.0154
+        }
+      ]
+    },
+    {
+      "date": "2026-05-30",
+      "slots": [
+        {
+          "slug": "water-sewage-crisis",
+          "expectedLift": 4,
+          "qualityScore": 45,
+          "impressions": 35,
+          "currentCtr": 0
+        },
+        {
+          "slug": "convenience-store-density-map",
+          "expectedLift": 3,
+          "qualityScore": 43,
+          "impressions": 42,
+          "currentCtr": 0.0238
+        },
+        {
+          "slug": "food-spending-pattern",
+          "expectedLift": 3,
+          "qualityScore": 48,
+          "impressions": 29,
+          "currentCtr": 0
+        },
+        {
+          "slug": "marriage-divorce-okinawa",
+          "expectedLift": 5,
+          "qualityScore": 72,
+          "impressions": 39,
+          "currentCtr": 0
+        },
+        {
+          "slug": "population-density-urbanization",
+          "expectedLift": 5,
+          "qualityScore": 72,
+          "impressions": 231,
+          "currentCtr": 0.0087
+        }
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "slots": [
+        {
+          "slug": "precipitation-snow-regional-gap",
+          "expectedLift": 5,
+          "qualityScore": 75,
+          "impressions": 191,
+          "currentCtr": 0.0052
+        },
+        {
+          "slug": "birth-death-gap-decline",
+          "expectedLift": 4,
+          "qualityScore": 76,
+          "impressions": 69,
+          "currentCtr": 0
+        },
+        {
+          "slug": "education-cost-per-child",
+          "expectedLift": 4,
+          "qualityScore": 70,
+          "impressions": 72,
+          "currentCtr": 0.0278
+        },
+        {
+          "slug": "household-spending-before-after-inflation",
+          "expectedLift": 4,
+          "qualityScore": 75,
+          "impressions": 25,
+          "currentCtr": 0
+        },
+        {
+          "slug": "housing-cost-livability-trend",
+          "expectedLift": 4,
+          "qualityScore": 78,
+          "impressions": 66,
+          "currentCtr": 0.0152
+        }
+      ]
+    },
+    {
+      "date": "2026-06-01",
+      "slots": [
+        {
+          "slug": "inflation-rate-prefecture-gap",
+          "expectedLift": 4,
+          "qualityScore": 78,
+          "impressions": 47,
+          "currentCtr": 0.0213
+        },
+        {
+          "slug": "savings-balance-gap",
+          "expectedLift": 4,
+          "qualityScore": 71,
+          "impressions": 37,
+          "currentCtr": 0
+        },
+        {
+          "slug": "aging-rate-akita-vs-okinawa",
+          "expectedLift": 3,
+          "qualityScore": 77,
+          "impressions": 46,
+          "currentCtr": 0
+        },
+        {
+          "slug": "fertility-fiscal-nexus",
+          "expectedLift": 2,
+          "qualityScore": 46,
+          "impressions": 36,
+          "currentCtr": 0
+        },
+        {
+          "slug": "fiscal-health-50years-trend",
+          "expectedLift": 2,
+          "qualityScore": 55,
+          "impressions": 14,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "slots": [
+        {
+          "slug": "minimum-wage-gap-regional-economy",
+          "expectedLift": 2,
+          "qualityScore": 50,
+          "impressions": 14,
+          "currentCtr": 0
+        },
+        {
+          "slug": "occupation-income-gap-pilot-vs-careworker",
+          "expectedLift": 3,
+          "qualityScore": 66,
+          "impressions": 11,
+          "currentCtr": 0
+        },
+        {
+          "slug": "ryokan-vs-hotel-overnight-shift",
+          "expectedLift": 2,
+          "qualityScore": 42,
+          "impressions": 14,
+          "currentCtr": 0
+        },
+        {
+          "slug": "safe-driving-5-features",
+          "expectedLift": 3,
+          "qualityScore": 73,
+          "impressions": 28,
+          "currentCtr": 0
+        },
+        {
+          "slug": "wage-vs-living-cost",
+          "expectedLift": 3,
+          "qualityScore": 66,
+          "impressions": 22,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "slots": [
+        {
+          "slug": "barber-beauty-salon-regional-gap",
+          "expectedLift": 2,
+          "qualityScore": 69,
+          "impressions": 19,
+          "currentCtr": 0
+        },
+        {
+          "slug": "household-income-tokyo-okinawa",
+          "expectedLift": 2,
+          "qualityScore": 72,
+          "impressions": 26,
+          "currentCtr": 0
+        },
+        {
+          "slug": "local-tax-revenue-gap",
+          "expectedLift": 2,
+          "qualityScore": 72,
+          "impressions": 91,
+          "currentCtr": 0.022
+        },
+        {
+          "slug": "nursing-care-shortage-2040",
+          "expectedLift": 2,
+          "qualityScore": 71,
+          "impressions": 88,
+          "currentCtr": 0.0114
+        },
+        {
+          "slug": "savings-rate-gap",
+          "expectedLift": 2,
+          "qualityScore": 70,
+          "impressions": 14,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-04",
+      "slots": [
+        {
+          "slug": "energy-consumption-structure-shift",
+          "expectedLift": 1,
+          "qualityScore": 80,
+          "impressions": 2,
+          "currentCtr": 0
+        },
+        {
+          "slug": "forest-coverage-woodland-economy",
+          "expectedLift": 1,
+          "qualityScore": 70,
+          "impressions": 87,
+          "currentCtr": 0.023
+        },
+        {
+          "slug": "hospital-bed-utilization-map",
+          "expectedLift": 2,
+          "qualityScore": 69,
+          "impressions": 138,
+          "currentCtr": 0.029
+        },
+        {
+          "slug": "ict-digital-divide-composite-analysis",
+          "expectedLift": 1,
+          "qualityScore": 74,
+          "impressions": 7,
+          "currentCtr": 0
+        },
+        {
+          "slug": "livable-prefecture-composite-ranking",
+          "expectedLift": 1,
+          "qualityScore": 71,
+          "impressions": 24,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-05",
+      "slots": [
+        {
+          "slug": "per-capita-income-gap",
+          "expectedLift": 1,
+          "qualityScore": 68,
+          "impressions": 3,
+          "currentCtr": 0
+        },
+        {
+          "slug": "pharma-medical-device-production-map",
+          "expectedLift": 1,
+          "qualityScore": 67,
+          "impressions": 129,
+          "currentCtr": 0.031
+        },
+        {
+          "slug": "pharmacy-count-prefecture-ranking",
+          "expectedLift": 1,
+          "qualityScore": 75,
+          "impressions": 5,
+          "currentCtr": 0
+        },
+        {
+          "slug": "population-migration-tokyo-concentration",
+          "expectedLift": 1,
+          "qualityScore": 75,
+          "impressions": 17,
+          "currentCtr": 0
+        },
+        {
+          "slug": "prefectural-income-gdp-ranking",
+          "expectedLift": 1,
+          "qualityScore": 77,
+          "impressions": 375,
+          "currentCtr": 0.0213
+        }
+      ]
+    },
+    {
+      "date": "2026-06-06",
+      "slots": [
+        {
+          "slug": "recycling-rate-gap",
+          "expectedLift": 1,
+          "qualityScore": 62,
+          "impressions": 46,
+          "currentCtr": 0.0217
+        },
+        {
+          "slug": "traffic-accident-deaths-regional-risk",
+          "expectedLift": 1,
+          "qualityScore": 76,
+          "impressions": 6,
+          "currentCtr": 0
+        },
+        {
+          "slug": "unmarried-rate-40years-crisis",
+          "expectedLift": 1,
+          "qualityScore": 78,
+          "impressions": 5,
+          "currentCtr": 0
+        },
+        {
+          "slug": "abortion-rate-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "ai-claude-code-pref-analysis",
+          "expectedLift": 0,
+          "qualityScore": 64,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-07",
+      "slots": [
+        {
+          "slug": "bonito-catch-prefecture",
+          "expectedLift": 0,
+          "qualityScore": 64,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "bonito-catch-zero-prefectures-gap",
+          "expectedLift": 0,
+          "qualityScore": 66,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "brazilian-resident-population-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-01-setup",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-02-search-skill",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "slots": [
+        {
+          "slug": "cc-estat-03-population-bar",
+          "expectedLift": 0,
+          "qualityScore": 75,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-04-aging-heatmap",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-05-medical-cost-choropleth",
+          "expectedLift": 0,
+          "qualityScore": 59,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-06-income-scatter",
+          "expectedLift": 0,
+          "qualityScore": 65,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-07-birthrate-line",
+          "expectedLift": 0,
+          "qualityScore": 63,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-09",
+      "slots": [
+        {
+          "slug": "cc-estat-08-bar-chart-race",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-09-radar-prefecture",
+          "expectedLift": 0,
+          "qualityScore": 74,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-10-wage-box-plot",
+          "expectedLift": 0,
+          "qualityScore": 75,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-11-tourism-stacked",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-12-housing-treemap",
+          "expectedLift": 0,
+          "qualityScore": 74,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-10",
+      "slots": [
+        {
+          "slug": "cc-estat-13-agri-sankey",
+          "expectedLift": 0,
+          "qualityScore": 74,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-14-energy-area-chart",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-15-crime-small-multiple",
+          "expectedLift": 0,
+          "qualityScore": 74,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-16-commerce-bubble",
+          "expectedLift": 0,
+          "qualityScore": 75,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-17-edu-slope-graph",
+          "expectedLift": 0,
+          "qualityScore": 65,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "slots": [
+        {
+          "slug": "cc-estat-18-cache-r2",
+          "expectedLift": 0,
+          "qualityScore": 63,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-19-skill-pipeline",
+          "expectedLift": 0,
+          "qualityScore": 65,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "cc-estat-20-publish",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "chicken-consumption-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "childcare-friendly-prefecture-ranking",
+          "expectedLift": 0,
+          "qualityScore": 88,
+          "impressions": 27,
+          "currentCtr": 0.1111
+        }
+      ]
+    },
+    {
+      "date": "2026-06-12",
+      "slots": [
+        {
+          "slug": "climate-lifestyle-connection",
+          "expectedLift": 0,
+          "qualityScore": 66,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "communication-cost-burden",
+          "expectedLift": 0,
+          "qualityScore": 45,
+          "impressions": 31,
+          "currentCtr": 0.0323
+        },
+        {
+          "slug": "crime-rate-regional-gap",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 97,
+          "currentCtr": 0.0309
+        },
+        {
+          "slug": "depopulation-area-medical-facilities",
+          "expectedLift": 0,
+          "qualityScore": 61,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "disaster-damage-per-person-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 19,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-13",
+      "slots": [
+        {
+          "slug": "dual-income-childcare-dilemma",
+          "expectedLift": 0,
+          "qualityScore": 64,
+          "impressions": 1,
+          "currentCtr": 0
+        },
+        {
+          "slug": "dual-income-reversal",
+          "expectedLift": 0,
+          "qualityScore": 43,
+          "impressions": 29,
+          "currentCtr": 0.0345
+        },
+        {
+          "slug": "earthquake-insurance-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 72,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "education-expenses-gap",
+          "expectedLift": 0,
+          "qualityScore": 46,
+          "impressions": 23,
+          "currentCtr": 0.1304
+        },
+        {
+          "slug": "electricity-bill-hike-impact",
+          "expectedLift": 0,
+          "qualityScore": 42,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-14",
+      "slots": [
+        {
+          "slug": "energy-infrastructure-gas-electricity",
+          "expectedLift": 0,
+          "qualityScore": 45,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "engel-coefficient-prefecture-ranking",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 42,
+          "currentCtr": 0.1667
+        },
+        {
+          "slug": "expenditure-structure-comparison",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 26,
+          "currentCtr": 0.0385
+        },
+        {
+          "slug": "extreme-heat-days-prefecture",
+          "expectedLift": 0,
+          "qualityScore": 46,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "farmland-crisis-abandoned-land",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 50,
+          "currentCtr": 0.08
+        }
+      ]
+    },
+    {
+      "date": "2026-06-15",
+      "slots": [
+        {
+          "slug": "female-lecture-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 44,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "fertility-rate-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 52,
+          "impressions": 129,
+          "currentCtr": 0.0155
+        },
+        {
+          "slug": "firefighting-capacity-gap",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 41,
+          "currentCtr": 0.0488
+        },
+        {
+          "slug": "fiscal-self-reliance-gap",
+          "expectedLift": 0,
+          "qualityScore": 50,
+          "impressions": 549,
+          "currentCtr": 0.0255
+        },
+        {
+          "slug": "food-consumption-prefecture-battle",
+          "expectedLift": 0,
+          "qualityScore": 64,
+          "impressions": 117,
+          "currentCtr": 0.0342
+        }
+      ]
+    },
+    {
+      "date": "2026-06-16",
+      "slots": [
+        {
+          "slug": "food-culture-prefecture-map",
+          "expectedLift": 0,
+          "qualityScore": 42,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "food-price-regional-2026",
+          "expectedLift": 0,
+          "qualityScore": 80,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "food-trio-prefecture-map",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 186,
+          "currentCtr": 0.0323
+        },
+        {
+          "slug": "foreign-overnight-guests-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 44,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "foreign-population-growth-rate",
+          "expectedLift": 0,
+          "qualityScore": 45,
+          "impressions": 91,
+          "currentCtr": 0.0769
+        }
+      ]
+    },
+    {
+      "date": "2026-06-17",
+      "slots": [
+        {
+          "slug": "fresh-udon-soba-consumption-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 49,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "future-burden-ratio-extreme-gap",
+          "expectedLift": 0,
+          "qualityScore": 50,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "future-population-tokyo-paradox",
+          "expectedLift": 0,
+          "qualityScore": 68,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "gasoline-car-society-map",
+          "expectedLift": 0,
+          "qualityScore": 47,
+          "impressions": 85,
+          "currentCtr": 0.0588
+        },
+        {
+          "slug": "health-life-expectancy-structure",
+          "expectedLift": 0,
+          "qualityScore": 82,
+          "impressions": 1424,
+          "currentCtr": 0.0456
+        }
+      ]
+    },
+    {
+      "date": "2026-06-18",
+      "slots": [
+        {
+          "slug": "healthy-life-expectancy-male-female-gap",
+          "expectedLift": 0,
+          "qualityScore": 74,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "household-spending-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 70,
+          "impressions": 340,
+          "currentCtr": 0.05
+        },
+        {
+          "slug": "household-structure-transformation",
+          "expectedLift": 0,
+          "qualityScore": 82,
+          "impressions": 31,
+          "currentCtr": 0.0645
+        },
+        {
+          "slug": "ict-media-consumption-gender-gap",
+          "expectedLift": 0,
+          "qualityScore": 45,
+          "impressions": 21,
+          "currentCtr": 0.1429
+        },
+        {
+          "slug": "inbound-by-nationality-regional-preference",
+          "expectedLift": 0,
+          "qualityScore": 47,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-19",
+      "slots": [
+        {
+          "slug": "inbound-overnight-regional-gap",
+          "expectedLift": 0,
+          "qualityScore": 47,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "inbound-overnight-stay-concentration",
+          "expectedLift": 0,
+          "qualityScore": 45,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "industrial-water-manufacturing-nexus",
+          "expectedLift": 0,
+          "qualityScore": 79,
+          "impressions": 16,
+          "currentCtr": 0.0625
+        },
+        {
+          "slug": "inflow-population-ratio-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 44,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "inpatient-rate-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-06-20",
+      "slots": [
+        {
+          "slug": "job-salary-39-comparison",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "konbu-consumption-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 44,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "koumuin-claude-code-estat-automation",
+          "expectedLift": 0,
+          "qualityScore": 60,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "library-books-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 67,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "library-museum-cultural-capital",
+          "expectedLift": 0,
+          "qualityScore": 47,
+          "impressions": 32,
+          "currentCtr": 0.1875
+        }
+      ]
+    },
+    {
+      "date": "2026-06-21",
+      "slots": [
+        {
+          "slug": "local-debt-current-ratio-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 73,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "local-government-debt-burden",
+          "expectedLift": 0,
+          "qualityScore": 72,
+          "impressions": 280,
+          "currentCtr": 0.0393
+        },
+        {
+          "slug": "low-birthweight-rate-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 44,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "medical-access-regional-gap",
+          "expectedLift": 0,
+          "qualityScore": 68,
+          "impressions": 0,
+          "currentCtr": 0
+        },
+        {
+          "slug": "minimum-wage-increase-rate-prefecture-gap",
+          "expectedLift": 0,
+          "qualityScore": 69,
+          "impressions": 0,
+          "currentCtr": 0
+        }
+      ]
+    }
+  ]
+}

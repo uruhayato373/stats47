@@ -133,6 +133,15 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
   ),
 ];
 
+/**
+ * deploy 日を全 ranking ページの lastmod として使う。
+ * D-redesign deploy (2026-05-23) で全 ranking 詳細の本文構造が変わったため、
+ * row.updatedAt (DB の updatedAt、データ更新時のみ進む) よりも実コンテンツ
+ * 更新を反映できる SITEMAP_BASELINE を採用する。
+ * 大幅な UI / 構造変更があったらこの定数を更新する。
+ */
+const SITEMAP_BASELINE = new Date("2026-05-24T00:00:00.000Z");
+
 async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
   const result = await readActiveKeysForSitemapFromR2();
   if (!isOk(result)) return [];
@@ -146,12 +155,17 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
       seen.add(row.rankingKey);
       return true;
     })
-    .map((row) => ({
-      url: `${BASE_URL}/ranking/${row.rankingKey}`,
-      lastModified: row.updatedAt ? new Date(row.updatedAt) : undefined,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    }));
+    .map((row) => {
+      // row.updatedAt と SITEMAP_BASELINE のうち新しい方を採用
+      const rowUpdated = row.updatedAt ? new Date(row.updatedAt) : null;
+      const lastModified = rowUpdated && rowUpdated > SITEMAP_BASELINE ? rowUpdated : SITEMAP_BASELINE;
+      return {
+        url: `${BASE_URL}/ranking/${row.rankingKey}`,
+        lastModified,
+        changeFrequency: "monthly" as const,
+        priority: 0.9,
+      };
+    });
 }
 
 async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
@@ -217,14 +231,22 @@ const CITY_CATEGORY_KEYS = [
 function getCityPages(): MetadataRoute.Sitemap {
   // level="3" の政令市区は prefCode が市コード（例: "01100"）のため /areas/{pref}/cities/{city} の
   // ルート構造と合わず middleware 410 になる。level="2" のみを対象とする。
+  // lastmod は SITEMAP_BASELINE (city profile 復活 deploy 日) を採用し、
+  // Googlebot に「city pages 全体に更新あり、再クロール推奨」を伝える。
   const cities = fetchCities().filter((c) => c.level === "2");
   const entries: MetadataRoute.Sitemap = [];
   for (const city of cities) {
     const cityUrl = `${BASE_URL}/areas/${city.prefCode}/cities/${city.cityCode}`;
-    entries.push({ url: cityUrl, changeFrequency: "monthly", priority: 0.5 });
+    entries.push({
+      url: cityUrl,
+      lastModified: SITEMAP_BASELINE,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    });
     for (const cat of CITY_CATEGORY_KEYS) {
       entries.push({
         url: `${cityUrl}/${cat}`,
+        lastModified: SITEMAP_BASELINE,
         changeFrequency: "monthly",
         priority: 0.4,
       });

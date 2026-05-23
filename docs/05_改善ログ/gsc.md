@@ -9,6 +9,46 @@ updated: 2026-05-23
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-AUTO-BRUSHUP-01] ブログ品質改善の完全自動化 (Pro plan + /schedule routine)
+
+- **status**: implementation-complete
+- **tier**: 1
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-24
+- **due**: 2026-06-21 (W25, 4 週後の effect 計測)
+- **trigger**: `/schedule` routine daily JST 03:00 (Pro plan compute、API 不使用)
+
+### 背景
+
+rice-harvest brushup の手動作業 (1 時間/記事) を 187 記事に適用する人手は現実的でない。
+本セッション中の「1244倍格差」誤判定経験を踏まえ、**完全 auto-merge** 方式の自動化基盤を構築。
+
+### 設計の核心 (rice-harvest 失敗を組み込み)
+
+1. **NG pattern script**: 「X倍格差」「驚愕」「最大級」等の sensationalism を script で reject
+2. **5 案 framing 評価**: agent が 5 案生成 → 4 軸 (practical_value/structural_finding/data_grounding/non_sensational) で採点 → 30 点以上のみ採用
+3. **quality gate**: callout ≥ 2、internalLinks ≥ 3、データ出典必須等を script で機械チェック
+4. **PR auto-merge**: CI 通過後 `gh pr merge --auto --merge` で自動完結
+5. **dedup history**: 90 日以内の re-brushup を防止
+6. **safety limits**: 1 日最大 5 記事、全件 skip 日は何もせず安全側、CI fail 直後は cooling period
+
+### 想定効果
+
+- 187 記事 × 平均 +20-30 clicks/月 リフト = **月 +4K-6K clicks ポテンシャル**
+- 1 ヶ月で 100-150 記事の re-brushup が完了 (重複除外考慮)
+- 4 週後 (2026-06-21) GSC で全体 CTR 改善を測定
+
+### 関連ファイル
+
+- skill: `.claude/skills/blog/auto-brushup-batch/SKILL.md`
+- script: `.claude/scripts/blog/select-brushup-candidates.mjs`
+- script: `.claude/scripts/blog/quality-gate.mjs`
+- state: `.claude/state/blog/auto-brushup-history.json`
+- state: `.claude/state/blog/auto-brushup-skipped.log`
+- 参照実装: `.local/r2/app/blog/rice-harvest-volume-prefecture-gap/article.md` (地理決定論軸)
+
+
 ## [SEO-TITLE-FIX-01] タイトル double-suffix バグ修正 (31 ページ)
 
 - **status**: pending
