@@ -9,6 +9,44 @@ updated: 2026-05-23
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-CTR-04] 高インプレ × 低 CTR Tier 2 (5 記事) の seoTitle 改修
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-23
+- **due**: 2026-06-20 (W25 4 週後)
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **predecessor**: BLOG-CTR-03
+
+### 対象 (W21 GSC)
+
+| slug | imp | clicks | CTR | 改修ポイント |
+|---|---|---|---|---|
+| overnight-guests-inbound-recovery | 364 | 1 | 0.27% | 「コロナで半減→V字回復」「54倍差」を効果的に組み合わせ |
+| fishery-species-prefecture-specialty | 269 | 3 | 1.12% | 「北海道がホタテ99%独占」「イワシ86%減」 |
+| population-density-urbanization | 231 | 2 | 0.87% | 「埼玉が昼夜人口比率最下位の意外」 |
+| consumer-price-regional-gap | 230 | 1 | 0.43% | 「物価格差の真因は家賃」(住居 1.56 倍 vs 食料 1.08 倍) |
+| park-green-space-gap | 213 | 2 | 0.94% | 「自然公園 vs 都市公園」の逆転 |
+
+### 想定効果
+
+- 改修前合計: 9 clicks/週 (1,307 imp、平均 CTR 0.69%)
+- 改修後想定 (CTR 3%): 39 clicks/週
+- **+30 clicks/週 (+130/月)**
+
+BLOG-CTR-03 (+515/月) と合わせて **計 +645 clicks/月** が Top 10 brushup の最大効果。
+
+### 検証
+
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 <観測週>`
+- **検証期日**: 2026-06-20 (W25, 4 週後)
+- **期日後の判定**:
+  - 5 記事合計 clicks ≥ 30/週 → effect/full
+  - 15-30/週 → effect/partial
+  - < 15/週 → effect/none
+
 ## [BLOG-CTR-03] 高インプレ × 低 CTR Top 5 記事の seoTitle/description 改修 (curiosity gap パターン適用)
 
 - **status**: pending
