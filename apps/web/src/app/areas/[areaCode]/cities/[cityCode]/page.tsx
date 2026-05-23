@@ -40,6 +40,37 @@ interface PageProps {
 // Metadata
 // ---------------------------------------------------------------------------
 
+interface CityProfileData {
+    areaCode: string;
+    areaName: string;
+    strengths: Array<{
+        indicator: string;
+        rankingKey: string;
+        year: string;
+        rank: number;
+        value: number;
+        unit: string;
+    }>;
+    weaknesses: Array<{
+        indicator: string;
+        rankingKey: string;
+        year: string;
+        rank: number;
+        value: number;
+        unit: string;
+    }>;
+}
+
+async function readCityProfile(areaCode: string, cityCode: string): Promise<CityProfileData | null> {
+    try {
+        return await fetchFromR2AsJson<CityProfileData>(
+            `app/areas/${areaCode}/cities/${cityCode}/profile.json`
+        );
+    } catch {
+        return null;
+    }
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { areaCode, cityCode } = await params;
 
@@ -50,8 +81,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const pref = lookupArea(areaCode);
     const prefName = pref?.areaName ?? "";
-    const title = `${city.areaName}の統計データ`;
-    const description = `${city.areaName}（${prefName}）の統計データをチャートで可視化。`;
+
+    // R2 から city profile を取得 (rank>=1 の強みのみ)
+    const profile = await readCityProfile(areaCode, cityCode);
+    const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
+    const topStrength = validStrengths[0];
+
+    const title = topStrength
+        ? `${city.areaName}の統計データ｜${prefName}｜${topStrength.indicator} 県内${topStrength.rank}位`
+        : `${city.areaName}の統計データ｜${prefName}`;
+
+    const descriptionHighlights = validStrengths
+        .slice(0, 3)
+        .map((s) => `${s.indicator} 県内${s.rank}位`)
+        .join("、");
+    const description = descriptionHighlights
+        ? `${city.areaName}（${prefName}）の統計プロファイル。${descriptionHighlights}。県内ランキングで主要指標を比較できます。`
+        : `${city.areaName}（${prefName}）の統計データをチャートで可視化。`;
 
     return {
         title,
@@ -88,8 +134,12 @@ export default async function CityPage({ params }: PageProps) {
         notFound();
     }
 
-    const categoriesResult = await listCategories();
+    const [categoriesResult, profile] = await Promise.all([
+        listCategories(),
+        readCityProfile(areaCode, cityCode),
+    ]);
     const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
+    const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
 
     // page_component_assignments から city-category のカテゴリを取得 (R2 snapshot 経由)
     let filteredCategories = allCategories;
@@ -157,6 +207,36 @@ export default async function CityPage({ params }: PageProps) {
             {/* 1カラムレイアウト */}
             <div className="container mx-auto px-4 py-10">
                 <main className="min-w-0 space-y-10">
+                    {validStrengths.length > 0 && (
+                        <section className="rounded-lg border border-border bg-card p-6 shadow-sm">
+                            <h2 className="text-lg font-bold text-foreground">
+                                {city.areaName}の強み (県内ランキング上位)
+                            </h2>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                {pref.areaName}内で {city.areaName} が上位 5 位以内に入る指標
+                            </p>
+                            <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                {validStrengths.map((s) => (
+                                    <li
+                                        key={s.rankingKey}
+                                        className="flex items-baseline justify-between gap-3 rounded border border-border bg-background p-3"
+                                    >
+                                        <Link
+                                            href={`/ranking/${s.rankingKey}`}
+                                            className="font-medium text-sm hover:underline hover:text-primary"
+                                        >
+                                            {s.indicator}
+                                        </Link>
+                                        <span className="shrink-0 text-xs font-mono text-muted-foreground">
+                                            県内 {s.rank} 位 (
+                                            {s.value.toLocaleString("ja-JP")} {s.unit})
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
                     <CategoryNavGrid
                         categories={filteredCategories}
                         areaCode={cityCode}
