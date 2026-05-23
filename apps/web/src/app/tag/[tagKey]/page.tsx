@@ -16,10 +16,12 @@ import {
     CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
+import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
     listAllUniqueTags,
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
+import { NativeAffiliateRow } from "@/features/redesign";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 
@@ -70,7 +72,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function TagArticlesPage({ params }: PageProps) {
     const { tagKey } = await params;
     const tag = decodeURIComponent(tagKey);
-    const articles = await listArticleSummariesByTagKey(tagKey, 50);
+    const [articles, nativeBanners] = await Promise.all([
+        listArticleSummariesByTagKey(tagKey, 50),
+        resolveAffiliateBanners([tagKey], 4).catch(() => []),
+    ]);
 
     return (
         <>
@@ -102,11 +107,22 @@ export default async function TagArticlesPage({ params }: PageProps) {
                 </Breadcrumb>
             </div>
 
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-2 text-lg font-bold">「{tag}」の記事一覧</h1>
-                <p className="mb-8 text-muted-foreground">
-                    {articles.length} 件の記事
-                </p>
+            <div className="container mx-auto px-4 py-4">
+                {/* Hero (軽量): タグ名 + 件数 */}
+                <header className="mb-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        タグ
+                    </p>
+                    <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+                        {tag}
+                        <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+                            {articles.length} 記事
+                        </span>
+                    </h1>
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                        「{tag}」タグが付いた都道府県統計ブログの記事一覧
+                    </p>
+                </header>
 
                 {articles.length === 0 ? (
                     notFound()
@@ -139,6 +155,18 @@ export default async function TagArticlesPage({ params }: PageProps) {
                                 </Card>
                             </Link>
                         ))}
+                    </div>
+                )}
+
+                {/* ネイティブアフィリエイト (D Phase 4) */}
+                {nativeBanners.length > 0 && (
+                    <div className="mt-8">
+                        <NativeAffiliateRow
+                            title={`「${tag}」関連の書籍・商品`}
+                            banners={nativeBanners}
+                            position="tag-native"
+                            trackingCategory={`tag-${tagKey}`}
+                        />
                     </div>
                 )}
 

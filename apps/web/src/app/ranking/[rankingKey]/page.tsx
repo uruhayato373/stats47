@@ -54,6 +54,7 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
+import { resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
@@ -62,6 +63,7 @@ import {
   getRankingTitle,
   RankingKeyPageClient,
   AiContentAccordion,
+  AiInsightCard,
   AiMarkdownContent,
   RankingFaqSection,
   RankingPrefectureCommentarySection,
@@ -77,6 +79,7 @@ import {
   PortStatisticsMapCard,
   cachedFindRankingItem,
 } from "@/features/ranking/server";
+import { NativeAffiliateRow } from "@/features/redesign";
 
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import { logger } from "@/lib/logger";
@@ -210,7 +213,16 @@ export default async function RankingKeyPage({
         .catch(() => null)
     : Promise.resolve(null);
 
-  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers, category] = await Promise.all([
+  // --- 3f. ネイティブアフィリエイト枠 (D Phase 2) ---
+  const affiliateTagKeys = (rankingItem.tags ?? []).map((t) => t.tagKey);
+  const nativeBannersPromise = affiliateTagKeys.length > 0
+    ? resolveAffiliateBanners(affiliateTagKeys, 4).catch((error) => {
+        logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
+        return [];
+      })
+    : Promise.resolve([]);
+
+  const [rankingValues, topology, aiContent, cityRankingItem, surveyName, allSurveys, groupMembers, category, nativeBanners] = await Promise.all([
     rankingValuesPromise,
     topologyPromise,
     aiContentPromise,
@@ -219,6 +231,7 @@ export default async function RankingKeyPage({
     allSurveysPromise,
     groupMembersPromise,
     categoryPromise,
+    nativeBannersPromise,
   ]);
 
   const breadcrumbCategory = category
@@ -313,6 +326,7 @@ export default async function RankingKeyPage({
         topology={topology}
         cityRankingItem={cityRankingItem?.isActive ? cityRankingItem : undefined}
         surveyName={surveyName ?? undefined}
+        categoryName={breadcrumbCategory?.name}
         groupMembers={groupMembers}
         // 右サイドバー: 関連ランキング・関連記事
         sidebarSection={
@@ -338,10 +352,22 @@ export default async function RankingKeyPage({
             <RankingPageCardsContainer rankingKey={rankingKey} />
           </Suspense>
         }
-        // AI生成コンテンツ: 考察（折りたたみ）
+        // ネイティブアフィリエイト枠 (D Phase 2)
+        nativeAffiliateSection={
+          nativeBanners.length > 0 ? (
+            <NativeAffiliateRow
+              title={`${category?.categoryName ?? "このランキング"}に関連する商品・書籍`}
+              description="統計データを深掘りするためのおすすめ書籍・関連商品"
+              banners={nativeBanners}
+              position="ranking-native"
+              trackingCategory={`ranking-${rankingItem.categoryKey ?? "general"}`}
+            />
+          ) : null
+        }
+        // AI生成コンテンツ: 考察（常時表示カード）
         insightsSection={
           aiContent?.insights
-            ? <AiContentAccordion title="データの考察"><AiMarkdownContent content={aiContent.insights} /></AiContentAccordion>
+            ? <AiInsightCard title="データの考察"><AiMarkdownContent content={aiContent.insights} /></AiInsightCard>
             : null
         }
         // AI生成コンテンツ: 地域別の傾向（折りたたみ）

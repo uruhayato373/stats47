@@ -2,12 +2,78 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-17
+updated: 2026-05-23
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## [P0-RANKING-INDEX] /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸)
+
+- **status**: in-progress
+- **tier**: 1
+- **target_metric**: gsc-index-coverage / ranking-clicks
+- **owner**: claude
+- **deployed_at**: 2026-05-23 (Phase 1: 内部リンク + 診断)
+- **due**: 2026-07-06
+- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
+- **related_pr**: feature/ranking-to-areas-internal-links
+- **verification_command**: `awk -F',' 'NR>1 && $1 ~ /\/ranking\// {n++} END {print "ranking indexed: " n}' .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv`
+
+### 進捗 (2026-05-23, Phase 1 着手)
+
+**診断結果**:
+- sitemap /ranking URL 1,913 / GSC indexed 783 (40.9%)
+- 未indexed 1,132 URL (`.claude/state/metrics/gsc/coverage-drilldown/2026-W21/ranking-unindexed-urls.csv` に集約)
+- 未indexed URL のサンプル (aging-index, agricultural-output 等) は seoTitle/description が正常 → /areas のような壊れたメタデータではなく、**crawl budget × 内部リンク弱さ** が主因
+- 未indexed URL の suffix パターン: consumption-expenditure 162, per-100k 58, per-1000 49, consumption-quantity 49, expenses-prefecture 32 (= niche derived metrics)
+
+**Phase 1 デプロイ済 (2026-05-23)**:
+1. RankingDataTable で都道府県名→/areas/{areaCode} 内部リンク (47 inbound/page × 783 indexed = ~37K internal links 追加)
+2. 未indexed URL を CSV 化、Indexing API auto-resubmit の input として準備
+
+**残作業 (Phase 2)**:
+- INDEXING-AUTO-01 (`--execute`) で 1,132 URL を 200/日 × 6 日で submission
+  ```
+  node .claude/scripts/gsc/auto-resubmit.mjs \
+    --input .claude/state/metrics/gsc/coverage-drilldown/2026-W21/ranking-unindexed-urls.csv \
+    --execute --max 100
+  ```
+- /ranking 詳細から「関連ランキング」セクション (RelatedGroupCard を本文中段にも展開) の追加
+- 4 週後の効果計測 (2026-W25 snapshot で indexed 数を再測)
+
+### 背景
+
+2026-W21 診断で判明: /ranking 詳細ページが sitemap に 1,913 URL あるが、GSC に impressions 出ているのは 821 URL のみ → **インデックス率 43%**。
+
+clicks 576/週 (全体の 72%) を生んでいる主力ページ群なので、ここのインデックス率改善が Phase 0 最大のレバー。
+
+### 施策
+
+1. INDEXING-AUTO-01 と連携: 未 indexed の /ranking URL を優先送信対象に
+2. 未 indexed URL の内容診断: 内容が薄いものは AI 補強 (NotebookLM など)、内部リンク不足のものはリンク追加
+3. 構造化データ (BreadcrumbList, ItemList) の網羅確認
+4. /ranking 詳細 → /areas/{prefCode}、/category/{key}、関連 ranking への内部リンク強化
+
+### 想定効果
+
+**[仮説]** indexed 821 → 1,300+ (70%+) になれば、1 URL あたり平均 0.7 click/週 を維持しても clicks +335/週 (+58%)。Phase 0 目標 ×1.5 の主要寄与施策。
+
+**根拠**: /blog が 78% indexation を達成 (142/183) しているので、/ranking も同等まで持っていけるはず。差分は内部リンク密度と内容ボリュームと推測。
+
+### 検証
+
+- **検証期日**: 2026-07-06
+- **期日後の判定**:
+  - /ranking indexed ≥ 1,300 (70%+) → effect/full
+  - 1,000-1,300 → effect/partial
+  - < 1,000 → effect/none、次の検証: 個別ページ品質確認、低品質 URL の noindex 化検討
+
+### NOT this施策
+
+- 個別 URL の seoTitle 改修 → [CTR-AUTO-01] / [BLOG-CTR-02] 系
+- sitemap 構造変更 → `indexing.md`
 
 ## [CTR-AUTO-01] CTR 改善候補の月次自動抽出 (Phase 3 sprint)
 

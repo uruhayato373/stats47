@@ -8,7 +8,9 @@ interface SidebarState {
 }
 
 export const useSidebarStore = create<SidebarState>((set) => ({
-  isOpen: true, // デフォルトで開いている状態
+  // D 案: デフォルト閉じる (デスクトップ最適化、コンテンツ集中)。
+  // 必要なときは Header の hamburger ボタンで開閉できる。
+  isOpen: false,
   toggle: () => set((state) => ({ isOpen: !state.isOpen })),
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),

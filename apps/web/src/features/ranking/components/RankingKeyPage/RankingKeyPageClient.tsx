@@ -31,8 +31,9 @@ import {
     RankingSourceCard,
     RankingYearSelector,
     AreaTypeToggle,
-    DataDownloadIconButton,
-    NormalizationToggle,
+    DataDownloadPrimaryButton,
+    RankingHeroCard,
+    DataUsageCard,
 } from "@/features/ranking";
 
 import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
@@ -68,6 +69,8 @@ interface RankingKeyPageClientProps {
     insightsSection?: ReactNode;
     regionalAnalysisSection?: ReactNode;
     faqSection?: ReactNode;
+    /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
+    nativeAffiliateSection?: ReactNode;
     /** 47 都道府県別の解説セクション (SEO 長尾) */
     prefectureCommentarySection?: ReactNode;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
@@ -78,6 +81,8 @@ interface RankingKeyPageClientProps {
     cityRankingItem?: RankingItem;
     /** 調査名（surveys テーブルから取得） */
     surveyName?: string;
+    /** カテゴリ名（ヒーローカードの eyebrow 表示用） */
+    categoryName?: string;
     /** グループメンバー（normalization_basis トグル用） */
     groupMembers?: GroupMember[];
 }
@@ -94,11 +99,13 @@ export function RankingKeyPageClient({
     insightsSection,
     regionalAnalysisSection,
     faqSection,
+    nativeAffiliateSection,
     prefectureCommentarySection,
     parentAreaCode,
     sidebarSection,
     cityRankingItem,
     surveyName,
+    categoryName,
     groupMembers = [],
 }: RankingKeyPageClientProps) {
     const [rankingValues, setRankingValues] = useState<RankingValue[]>(initialRankingValues);
@@ -271,32 +278,37 @@ export function RankingKeyPageClient({
     ) : undefined;
 
     const downloadButton = (
-        <DataDownloadIconButton
+        <DataDownloadPrimaryButton
             rankingKey={rankingKey}
             areaType={areaType}
             displayInfo={displayInfo}
         />
     );
 
+    // ヒーローカードのメタ操作行: 年度 select + 都道府県/市区町村 seg
+    const metaControls = (
+        <>
+            {activeRankingItem.availableYears && (
+                <RankingYearSelector
+                    times={activeRankingItem.availableYears}
+                    value={currentYear}
+                    onChange={handleYearChange}
+                />
+            )}
+            {cityRankingItem && (
+                <AreaTypeToggle
+                    value={currentAreaType}
+                    onChange={handleAreaTypeChange}
+                    disabled={isPending}
+                />
+            )}
+        </>
+    );
+
+    // 地図・テーブルカードヘッダー右側の操作（年度 + エリア切替のみ）
     const headerActions = (
-        <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-1.5">
-                {activeRankingItem.availableYears && (
-                    <RankingYearSelector
-                        times={activeRankingItem.availableYears}
-                        value={currentYear}
-                        onChange={handleYearChange}
-                    />
-                )}
-                {cityRankingItem && (
-                    <AreaTypeToggle
-                        value={currentAreaType}
-                        onChange={handleAreaTypeChange}
-                        disabled={isPending}
-                    />
-                )}
-            </div>
-            {downloadButton}
+        <div className="flex items-center gap-1.5">
+            {metaControls}
         </div>
     );
 
@@ -346,32 +358,32 @@ export function RankingKeyPageClient({
 
     return (
         <div className="container mx-auto px-4 py-4">
-            <h1 className="text-2xl font-bold">
-                {displayInfo.title}
-                {(() => {
-                    const detail = [displayInfo.subtitle, displayInfo.demographicAttr].filter(Boolean).join("・");
-                    return detail ? <span className="text-muted-foreground font-normal">（{detail}）</span> : null;
-                })()}
-            </h1>
-
-            {/* データ年度 + 最終更新日 (SEO freshness + UX) */}
-            {(formattedUpdated || latestYearName) && (
-                <p className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                    {latestYearName && <span>データ年度: {latestYearName}</span>}
-                    {formattedUpdated && (
-                        <span>
-                            最終更新:{" "}
-                            <time dateTime={rankingItem.updatedAt ?? formattedUpdated}>
-                                {formattedUpdated}
-                            </time>
-                        </span>
-                    )}
-                </p>
-            )}
+            {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
+            <RankingHeroCard
+                categoryName={categoryName}
+                title={displayInfo.title}
+                titleDetail={[displayInfo.subtitle, displayInfo.demographicAttr]
+                    .filter(Boolean)
+                    .join("・") || null}
+                sourceName={sourceObj?.name ?? null}
+                yearName={latestYearName}
+                updatedAt={formattedUpdated}
+                rankingValues={rankingValues}
+                unit={displayInfo.unit}
+                normalizationOptions={rankingItem.calculation?.normalizationOptions}
+                normalizationValue={normalizationType ?? "original"}
+                onNormalizationChange={handleNormalizationChange}
+                normalizationDisabled={isPending}
+                metaControls={metaControls}
+                downloadButton={downloadButton}
+                shareButton={
+                    <ShareButtons title={displayInfo.title} shareText={shareText} />
+                }
+            />
 
             {/* normalization_basis グループトグル（別URL切替）*/}
             {groupMembers.length > 1 && (
-                <div className="flex items-center gap-0.5 mt-2 w-fit">
+                <div className="flex items-center gap-0.5 mt-3 w-fit">
                     {[...groupMembers].sort((a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)).map((member) => {
                         const isCurrent = member.rankingKey === rankingKey;
                         const label = member.normalizationBasis || "総数";
@@ -392,18 +404,6 @@ export function RankingKeyPageClient({
                             </Link>
                         );
                     })}
-                </div>
-            )}
-
-            {/* 正規化トグル（同一ページ内で per_population / per_area に切替） */}
-            {rankingItem.calculation?.normalizationOptions && rankingItem.calculation.normalizationOptions.length > 0 && (
-                <div className="mt-2">
-                    <NormalizationToggle
-                        options={rankingItem.calculation.normalizationOptions}
-                        value={normalizationType ?? "original"}
-                        onChange={handleNormalizationChange}
-                        disabled={isPending}
-                    />
                 </div>
             )}
 
@@ -468,13 +468,13 @@ export function RankingKeyPageClient({
                         </div>
                     )}
 
-                    {/* シェアボタン（テーブル直下） */}
-                    <div className="flex justify-center py-2">
-                        <ShareButtons
-                            title={displayInfo.title}
-                            shareText={shareText}
-                        />
-                    </div>
+                    {/* CSV 訴求カード「このデータを使う」 */}
+                    <DataUsageCard
+                        rankingKey={rankingKey}
+                        areaType={currentAreaType}
+                        displayInfo={displayInfo}
+                        yearCount={activeRankingItem.availableYears?.length}
+                    />
 
                     {/* 広告: テーブル読了後 */}
                     <AdSenseAd
@@ -482,7 +482,10 @@ export function RankingKeyPageClient({
                         slotId={RANKING_PAGE_FOOTER.slotId}
                     />
 
-                    {/* データの考察（折りたたみ） */}
+                    {/* ネイティブアフィリエイト枠 (D Phase 2) */}
+                    {nativeAffiliateSection}
+
+                    {/* データの考察（常時表示カード） */}
                     {insightsSection}
 
                     {/* よくある質問（折りたたみ）+ JSON-LD */}

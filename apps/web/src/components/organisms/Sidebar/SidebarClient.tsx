@@ -104,6 +104,17 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
 
       <Separator className="my-1.5" />
 
+      {/* 広告エリア (D 案: 上部に移設して Viewability 向上) */}
+      <div className="px-2 mb-2">
+        <AdSenseAd
+          format={MAIN_SIDEBAR.format}
+          slotId={MAIN_SIDEBAR.slotId}
+          showLabel={false}
+        />
+      </div>
+
+      <Separator className="my-1.5" />
+
       {/* カテゴリセクション */}
       <div className="mb-2 px-2">
         <h2 className="mb-0.5 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -118,17 +129,6 @@ export function SidebarClient({ categories, error }: SidebarClientProps) {
 
       {/* ページ固有セクション */}
       <SidebarPageSection />
-
-      <Separator className="my-1.5" />
-
-      {/* 広告エリア */}
-      <div className="px-2 mt-2">
-        <AdSenseAd
-          format={MAIN_SIDEBAR.format}
-          slotId={MAIN_SIDEBAR.slotId}
-          showLabel={false}
-        />
-      </div>
     </div>
   );
 

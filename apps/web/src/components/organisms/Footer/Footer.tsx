@@ -1,113 +1,169 @@
 /**
- * アプリケーションフッターコンポーネント
- * 全ページ共通のフッター要素を提供
+ * Mega Footer (D 最適化版)
+ *
+ * 全カテゴリ + 全テーマを Server Component で SSG。
+ * サイドバー閉じた分の内部リンク密度を補完し、SEO 維持。
  */
-
-"use client";
 
 import Link from "next/link";
 
-import { Instagram, Youtube, Twitter, PenLine } from "lucide-react";
+import { isOk } from "@stats47/types";
 
-/**
- * フッターリンクの型定義
- */
-type FooterLink = {
-  href: string;
-  label: string;
-};
+import { listCategories } from "@/features/category/server";
+import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
-/**
- * フッターリンクの定義
- */
-const FOOTER_LINKS: FooterLink[] = [
+import { FooterSocialLinks } from "./FooterSocialLinks";
+
+const NAV_LINKS = [
   { href: "/", label: "ホーム" },
+  { href: "/ranking", label: "ランキング" },
+  { href: "/areas", label: "都道府県別" },
+  { href: "/themes", label: "テーマ" },
+  { href: "/category/population", label: "カテゴリ" },
+  { href: "/survey", label: "調査" },
+  { href: "/blog", label: "ブログ" },
+  { href: "/search", label: "検索" },
+] as const;
+
+const SITE_LINKS = [
   { href: "/about", label: "このサイトについて" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/terms", label: "利用規約" },
 ] as const;
 
-// 外部リンクURL
-const EXTERNAL_LINKS = {
-  x: "https://x.com/stats47jp373",
-  instagram: "https://www.instagram.com/stats47jp/",
-  youtube: "https://www.youtube.com/@stats47jp",
-  note: "https://note.com/stats47",
-} as const;
-
-/**
- * フッターコンポーネント
- * シンプルな著作権表示とリンクを提供
- */
-export function Footer() {
+export async function Footer() {
   const currentYear = new Date().getFullYear();
+
+  // カテゴリ取得 (R2 cached)。失敗時は空配列で fallback
+  const catResult = await listCategories().catch(() => null);
+  const categories = catResult && isOk(catResult) ? catResult.data : [];
 
   return (
     <footer
-      className="w-full bg-background border-t border-border pt-4 pb-[calc(1rem+var(--safe-area-bottom))]"
+      className="w-full border-t border-border bg-muted/30 pt-8 pb-[calc(1rem+var(--safe-area-bottom))]"
       suppressHydrationWarning
     >
-      <div className="px-4 sm:px-5.5 mx-auto">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          {/* 著作権表示 */}
-          <div className="text-center sm:text-left">
-            <p>© {currentYear} 統計で見る都道府県</p>
-          </div>
-
-          <div className="flex items-center gap-6 flex-wrap justify-center">
-            {/* リンク */}
-            <div className="flex items-center gap-4 flex-wrap justify-center">
-              {FOOTER_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </Link>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* メインリンクグリッド */}
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-5">
+          {/* コンテンツ */}
+          <div>
+            <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
+              コンテンツ
+            </h3>
+            <ul className="space-y-1.5">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
 
-            {/* SNSアイコンリンク */}
-            <div className="flex items-center gap-3">
-              <a
-                href={EXTERNAL_LINKS.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="X (Twitter)"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a
-                href={EXTERNAL_LINKS.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#E1306C] transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href={EXTERNAL_LINKS.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FF0000] transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="h-5 w-5" />
-              </a>
-              <a
-                href={EXTERNAL_LINKS.note}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#41C9B4] transition-colors"
-                aria-label="note"
-              >
-                <PenLine className="h-4 w-4" />
-              </a>
+          {/* カテゴリ */}
+          {categories.length > 0 && (
+            <div>
+              <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
+                カテゴリ
+              </h3>
+              <ul className="space-y-1.5">
+                {categories.slice(0, 9).map((cat) => (
+                  <li key={cat.categoryKey}>
+                    <Link
+                      href={`/category/${cat.categoryKey}`}
+                      className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {cat.categoryName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* テーマ (前半) */}
+          <div>
+            <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
+              テーマ
+            </h3>
+            <ul className="space-y-1.5">
+              {ALL_THEMES.slice(0, 9).map((theme) => (
+                <li key={theme.themeKey}>
+                  <Link
+                    href={`/themes/${theme.themeKey}`}
+                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {theme.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* テーマ (後半) */}
+          {ALL_THEMES.length > 9 && (
+            <div>
+              <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground sm:invisible">
+                テーマ続き
+              </h3>
+              <ul className="space-y-1.5">
+                {ALL_THEMES.slice(9).map((theme) => (
+                  <li key={theme.themeKey}>
+                    <Link
+                      href={`/themes/${theme.themeKey}`}
+                      className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {theme.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/themes"
+                    className="text-xs font-semibold text-primary hover:underline"
+                  >
+                    すべて見る →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+
+          {/* サイト情報 */}
+          <div>
+            <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
+              サイト情報
+            </h3>
+            <ul className="space-y-1.5">
+              {SITE_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {/* SNS アイコン */}
+            <div className="mt-4">
+              <FooterSocialLinks />
             </div>
           </div>
+        </div>
+
+        {/* 著作権・データソース */}
+        <div className="mt-8 border-t border-border pt-4 text-center text-xs text-muted-foreground sm:flex sm:items-center sm:justify-between sm:text-left">
+          <p>© {currentYear} 統計で見る都道府県</p>
+          <p className="mt-1 sm:mt-0">
+            データ提供: e-Stat (政府統計の総合窓口) ほか
+          </p>
         </div>
       </div>
     </footer>

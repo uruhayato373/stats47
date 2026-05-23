@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchCities, lookupArea } from "@stats47/area";
+import { lookupArea } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,12 +10,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { isOk } from "@stats47/types";
 
@@ -23,11 +17,9 @@ import { isOk } from "@stats47/types";
 
 
 
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
-import { CategoryNavGrid } from "@/features/area-profile";
+import { CategoryNavGrid, CitiesNavCard } from "@/features/area-profile";
 import { listCategories } from "@/features/category/server";
 import {
     PAGE_COMPONENTS_SNAPSHOT_KEY,
@@ -118,7 +110,6 @@ export default async function CityPage({ params }: PageProps) {
     } catch { /* snapshot 不在時は全カテゴリ表示 */ }
 
     const cityBasePath = `/areas/${areaCode}/cities/${cityCode}`;
-    const allCities = fetchCities().filter((c) => c.prefCode === areaCode);
 
     return (
         <>
@@ -163,32 +154,6 @@ export default async function CityPage({ params }: PageProps) {
                 </div>
             </div>
 
-            {/* 左サイドバーに市区町村リストを注入 */}
-            {allCities.length > 0 && (
-                <SetSidebarSection>
-                    <Card>
-                        <CardHeader className="py-3 px-3">
-                            <CardTitle className="text-base">{pref.areaName}の市区町村</CardTitle>
-                        </CardHeader>
-                        <CardContent className="px-3 pb-3">
-                            <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
-                                {allCities.map((c) => (
-                                    <Link
-                                        key={c.cityCode}
-                                        href={`/areas/${areaCode}/cities/${c.cityCode}`}
-                                        className={`text-xs px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors ${
-                                            c.cityCode === cityCode ? "bg-accent font-medium" : ""
-                                        }`}
-                                    >
-                                        {c.cityName}
-                                    </Link>
-                                ))}
-                            </nav>
-                        </CardContent>
-                    </Card>
-                </SetSidebarSection>
-            )}
-
             {/* 1カラムレイアウト */}
             <div className="container mx-auto px-4 py-10">
                 <main className="min-w-0 space-y-10">
@@ -196,6 +161,13 @@ export default async function CityPage({ params }: PageProps) {
                         categories={filteredCategories}
                         areaCode={cityCode}
                         basePath={cityBasePath}
+                    />
+
+                    {/* 同一県の他市区町村ナビ */}
+                    <CitiesNavCard
+                        areaCode={areaCode}
+                        areaName={pref.areaName}
+                        activeCityCode={cityCode}
                     />
 
                     {/* アフィリエイト */}

@@ -19,6 +19,7 @@ import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
+import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
@@ -27,11 +28,29 @@ import {
   SurveyCard,
   type CategoryRankingListItem,
 } from "@/features/ranking";
+import {
+  NativeAffiliateRow,
+  SectionEyebrow,
+  InfeedAd,
+} from "@/features/redesign";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
+
+/** カテゴリ Key → アフィリエイト用 fallback タグ */
+const CATEGORY_FALLBACK_TAGS: Record<string, string[]> = {
+  population: ["population", "household-structure"],
+  economy: ["economy", "household-finance", "income"],
+  laborwage: ["wages", "labor", "employment"],
+  socialsecurity: ["medical-care", "health", "welfare"],
+  energy: ["energy", "environment"],
+  tourism: ["tourism", "transportation"],
+  construction: ["housing", "real-estate"],
+  administrativefinancial: ["public-finance", "furusato-nozei"],
+  landweather: ["land-use", "environment"],
+};
 
 
 
@@ -87,12 +106,25 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  const [rankingResult, latestArticles, surveysResult] = await Promise.all([
+  const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
+
+  const [rankingResult, latestArticles, surveysResult, nativeBanners] = await Promise.all([
     readRankingItemsByCategoryFromR2(categoryKey),
     listLatestArticles(4).catch(() => []),
     readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []),
+    fallbackTags.length > 0
+      ? resolveAffiliateBanners(fallbackTags, 4).catch(() => [])
+      : Promise.resolve([]),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+
+  // Hero KPI 算出
+  const featuredCount = rankingItems.filter((i) => i.isFeatured).length;
+  const latestYear = rankingItems
+    .map((i) => parseLatestYear(i.latestYear))
+    .filter((y) => y && y.match(/^\d{4}$/))
+    .sort()
+    .pop() ?? "";
 
   // テーブル用データ
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
@@ -155,46 +187,81 @@ export default async function CategoryPage({ params }: PageProps) {
 
   const r2Url = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
+  if (rankingItems.length === 0) {
+    notFound();
+  }
+
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      <h1 className="text-lg font-bold">
-        {category.categoryName}
-        <span className="ml-2 text-sm font-normal text-muted-foreground">
-          {rankingItems.length}件
-        </span>
-      </h1>
+      {/* Hero (軽量): カテゴリ名 + 件数 + メタ */}
+      <header className="mb-5">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+          カテゴリ
+        </p>
+        <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+          {category.categoryName}
+          <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
+            {rankingItems.length}件
+            {featuredCount > 0 && ` · 注目${featuredCount}件`}
+            {latestYear && ` · 最新${latestYear}年`}
+          </span>
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          {category.categoryName}分野の都道府県別ランキングを、地図・グラフ・テーブルで比較できます。
+        </p>
+      </header>
 
-      <div className="flex gap-4 mt-4 items-start">
+      <div className="flex gap-4 items-start">
         {/* メインコンテンツ */}
         <main className="flex-1 min-w-0">
-          {rankingItems.length === 0 ? (
-            notFound()
-          ) : (
-            <>
-              {/* 注目ランキング（コンパクトカード） */}
-              {featuredItems.length > 0 && (
-                <section className="mb-8">
-                  <h2 className="text-sm font-medium text-muted-foreground mb-3">注目のランキング</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {featuredItems.map((item) => (
-                      <FeaturedRankingCard
-                        key={item.rankingKey}
-                        rankingKey={item.rankingKey}
-                        title={item.title}
-                        latestYear={item.latestYear}
-                        unit={item.unit}
-                        topAreaName={item.topAreaName}
-                        topValue={item.topValue}
-                        tileMapSvg={item.tileMapSvg}
-                      />
-                    ))}
-                  </div>
-                </section>
-              )}
+          {/* 注目ランキング */}
+          {featuredItems.length > 0 && (
+            <section className="mb-8">
+              <SectionEyebrow number="1.">注目のランキング</SectionEyebrow>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {featuredItems.map((item) => (
+                  <FeaturedRankingCard
+                    key={item.rankingKey}
+                    rankingKey={item.rankingKey}
+                    title={item.title}
+                    latestYear={item.latestYear}
+                    unit={item.unit}
+                    topAreaName={item.topAreaName}
+                    topValue={item.topValue}
+                    tileMapSvg={item.tileMapSvg}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
 
-              {/* 全件テーブル */}
-              <CategoryRankingTable items={allItems} />
-            </>
+          {/* 全件テーブル */}
+          <section className="mb-8">
+            <SectionEyebrow number="2.">
+              全{rankingItems.length}件のランキング
+            </SectionEyebrow>
+            <CategoryRankingTable items={allItems} />
+          </section>
+
+          {/* In-feed AdSense */}
+          <div className="mb-8">
+            <InfeedAd
+              slotId={CONTENT_FOOTER.slotId}
+              format={CONTENT_FOOTER.format}
+            />
+          </div>
+
+          {/* ネイティブアフィリエイト */}
+          {nativeBanners.length > 0 && (
+            <section className="mb-8">
+              <SectionEyebrow number="3.">このカテゴリで読む</SectionEyebrow>
+              <NativeAffiliateRow
+                title={`${category.categoryName}の関連書籍・商品`}
+                banners={nativeBanners}
+                position="category-native"
+                trackingCategory={`category-${categoryKey}`}
+              />
+            </section>
           )}
         </main>
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchCities } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,20 +9,13 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { isOk } from "@stats47/types";
-
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import {
     AreaProfilePageClient,
+    CitiesNavCard,
     RelatedAreas,
     generateAreaCategoryMetadata,
     generateAreaProfileBreadcrumbStructuredData,
@@ -139,34 +131,6 @@ export default async function AreaCategoryPage({ params, searchParams }: PagePro
             {/* ヘッダー */}
             <AreaProfilePageClient profile={profile} />
 
-            {/* 左サイドバーに市区町村リストを注入 */}
-            <SetSidebarSection>
-                {(() => {
-                    const cities = fetchCities().filter((c) => c.prefCode === areaCode);
-                    if (cities.length === 0) return null;
-                    return (
-                        <Card>
-                            <CardHeader className="py-3 px-3">
-                                <CardTitle className="text-base">{profile.areaName}の市区町村</CardTitle>
-                            </CardHeader>
-                            <CardContent className="px-3 pb-3">
-                                <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
-                                    {cities.map((city) => (
-                                        <Link
-                                            key={city.cityCode}
-                                            href={`/areas/${areaCode}/cities/${city.cityCode}`}
-                                            className="text-xs px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors"
-                                        >
-                                            {city.cityName}
-                                        </Link>
-                                    ))}
-                                </nav>
-                            </CardContent>
-                        </Card>
-                    );
-                })()}
-            </SetSidebarSection>
-
             {/* 1カラムレイアウト */}
             <div className="container mx-auto px-4 py-10">
                 <main className="min-w-0 space-y-10">
@@ -178,8 +142,11 @@ export default async function AreaCategoryPage({ params, searchParams }: PagePro
                         selectedRankingKey={ranking}
                     />
 
-                    {/* 関連エリア + ふるさと納税 */}
+                    {/* 関連エリア + 市区町村ナビ */}
                     <RelatedAreas areaCode={areaCode} />
+                    <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
+
+                    {/* ふるさと納税 */}
                     <AreaBannerAd />
                     <FurusatoNozeiCard areaCode={areaCode} />
 

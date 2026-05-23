@@ -1,0 +1,126 @@
+/* Blog-specific styles, layered on top of styles.css */
+
+.prose {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--fg-2);
+  font-feature-settings: "palt", "pkna";
+}
+.prose p { margin: 0 0 18px; text-wrap: pretty; }
+.prose h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 36px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg);
+  scroll-margin-top: 80px;
+}
+.prose h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 24px 0 10px;
+  color: var(--fg);
+  display: flex; align-items: center; gap: 8px;
+  scroll-margin-top: 80px;
+}
+.prose h3::before {
+  content: "";
+  width: 4px; height: 16px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+.prose strong { color: var(--fg); font-weight: 700; }
+.prose a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+.prose ul, .prose ol { margin: 0 0 18px; padding-left: 22px; }
+.prose li { margin: 4px 0; }
+.prose figure { font-size: 13px; }
+
+/* Drop cap for magazine-style */
+.dropcap > p:first-of-type::first-letter {
+  float: left;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  padding: 4px 8px 0 0;
+  color: var(--primary);
+  font-family: "Noto Sans JP", serif;
+}
+
+/* TOC */
+.toc {
+  font-size: 12.5px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.toc a {
+  display: block;
+  padding: 5px 10px;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--fg); background: var(--bg-subtle); }
+.toc a.active {
+  color: var(--primary);
+  border-left-color: var(--primary);
+  background: var(--primary-50);
+  font-weight: 600;
+}
+.toc a.depth-2 { padding-left: 22px; font-size: 12px; }
+
+/* Reading progress bar */
+.reading-progress {
+  height: 4px; background: var(--bg-muted);
+  border-radius: 999px; overflow: hidden;
+}
+.reading-progress > div {
+  height: 100%; background: var(--primary);
+  border-radius: inherit;
+}
+
+/* Author block */
+.author-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+.author-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #93c5fd, #1d4ed8);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+}
+
+/* Hero image placeholder */
+.hero-img {
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.5), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(96, 165, 250, 0.6), transparent 50%),
+    linear-gradient(135deg, #1d4ed8, #0f172a);
+  position: relative;
+  overflow: hidden;
+}
+.hero-img::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 2px) 0 0/14px 14px;
+  opacity: 0.15;
+}
+
+/* Ranking CTA */
+.rk-cta {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background:
+    linear-gradient(135deg, var(--primary-50), transparent 60%),
+    var(--bg);
+  display: flex; align-items: center; gap: 12px;
+}
