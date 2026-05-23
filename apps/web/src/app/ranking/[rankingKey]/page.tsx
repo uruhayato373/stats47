@@ -56,7 +56,6 @@ import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants"
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
-import { NativeAffiliateRow } from "@/features/redesign";
 import {
   generateRankingBreadcrumbStructuredData,
   generateRankingPageMetaData,
@@ -80,6 +79,7 @@ import {
   PortStatisticsMapCard,
   cachedFindRankingItem,
 } from "@/features/ranking/server";
+import { NativeAffiliateRow } from "@/features/redesign";
 
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import { logger } from "@/lib/logger";

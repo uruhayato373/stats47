@@ -1,5 +1,4 @@
 import { AdSenseAd } from "@/lib/google-adsense";
-
 import type { AdFormat } from "@/lib/google-adsense/types";
 
 interface InfeedAdProps {

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Sparkles } from "lucide-react";
 
 import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
-
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
 
 interface NativeAffiliateRowProps {

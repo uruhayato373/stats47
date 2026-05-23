@@ -4,6 +4,7 @@
 
 import { useMemo } from "react";
 
+import Link from "next/link";
 
 import { DataTable, cn } from "@stats47/components";
 import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
@@ -17,6 +18,9 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 
 import type { StatsSchema } from "@stats47/types";
+
+
+const PREFECTURE_CODE_PATTERN = /^\d{2}000$/;
 
 
 interface Props {
@@ -98,9 +102,21 @@ export function RankingDataTable({
         accessorKey: "areaName",
         header: "都道府県",
         meta: { width: "150px" },
-        cell: ({ row }) => (
-          <div className="font-medium">{row.original.areaName}</div>
-        ),
+        cell: ({ row }) => {
+          const { areaCode, areaName } = row.original;
+          if (PREFECTURE_CODE_PATTERN.test(areaCode)) {
+            return (
+              <Link
+                href={`/areas/${areaCode}`}
+                className="font-medium hover:underline hover:text-primary"
+                prefetch={false}
+              >
+                {areaName}
+              </Link>
+            );
+          }
+          return <div className="font-medium">{areaName}</div>;
+        },
       },
       {
         accessorKey: "value",

@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
-import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
+import { TrackedAffiliateLink } from "@/features/ads";
 import {
   buildFurusatoNozeiUrl,
 } from "@/features/ads/constants/furusato-nozei";
