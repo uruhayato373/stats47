@@ -22,6 +22,7 @@ import { COMPARE_PRIVATE_WAGE_SET } from "./compare-private-wage";
 import { REAL_INCOME_SET } from "./real-income";
 import { LABOR_MOBILITY_SET } from "./labor-mobility";
 import { LOCAL_FINANCE_SET } from "./local-finance";
+import { LOCAL_FINANCE_CITY_SET } from "./local-finance-city";
 import { FISHERY_MARINE_SET } from "./fishery-marine";
 
 // ============================================================================
@@ -45,6 +46,7 @@ export {
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
+  LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
@@ -75,6 +77,7 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
+  LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
 ];
 
