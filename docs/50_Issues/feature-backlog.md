@@ -11,11 +11,12 @@ status: pending
 
 ---
 
-## #129 [T2-AI-CONTENT-01] regional_analysis を UI に配線（または insights へ統合）
+## [done] #129 [T2-AI-CONTENT-01] regional_analysis を UI に配線（または insights へ統合）
 
 - **tier**: 2
-- **status**: pending
+- **status**: done (実装確認 2026-05-24)
 - **related_issue**: #129 (closed)
+- **完了**: `apps/web/src/app/ranking/[rankingKey]/page.tsx:388-392` で `regionalAnalysisSection` を `AiContentAccordion` (タイトル「地域別の傾向」) として配線済。DB の `aiContent?.regionalAnalysis` 内容が読者に届いている。
 
 ### 背景
 
@@ -67,11 +68,18 @@ regionalAnalysisSection={
 
 ---
 
-## #131 [T2-CORR-UI-01] CorrelationSection UI 拡張（partial_r 表示 + scatter mini）
+## [done] #131 [T2-CORR-UI-01] CorrelationSection UI 拡張（partial_r 表示 + scatter mini）
 
 - **tier**: 2
-- **status**: pending
+- **status**: done (2026-05-25)
 - **related_issue**: #131 (closed)
+- **実装**:
+  - `CorrelationSectionClient.tsx` に `ScatterMini` 内部コンポを追加 (60×36 px SVG、47 県 scatter、相関符号で色分け)
+  - 各行に `(人口除外 {formatR(partial_r_population)})` を併記
+  - ヘッダ補足文「r = 全体相関、(人口除外) = 人口の影響を控除した偏相関」を追加
+- **データ**: R2 snapshot `app/correlation/by-ranking-key/<key>.json` に既存の `partialRPopulation` + `scatterData` (47 点) をそのまま消費
+- **動作確認**: `http://localhost:3000/ranking/abortion-rate` で 10 SVG × 47 dots レンダリング確認 (HTTP 200)
+- **次のステップ**: 案 ③ partial_r トグル UI / 案 ④ 解釈ラベル は別途検討 (本実装でデータの一部のみ可視化)
 
 ### 背景
 
@@ -124,50 +132,75 @@ regionalAnalysisSection={
 
 ---
 
-## #132 [T3-AI-CONTENT-02] v3.0 プロンプトを全 1,914 件に展開
+## [done] #292+ [T3-LOCAL-FINANCE-02] /themes/local-finance 市区町村別データ拡張（Japan Dashboard 完全互換）
 
 - **tier**: 3
-- **status**: pending
-- **related_issue**: #132 (closed)
+- **status**: done MVP (2026-05-25, 6 直接指標)
+- **related**: PR #292（都道府県別 Phase 1）
 
-### 背景
+### 実装内容 (2026-05-25)
 
-2026-04-26 に pilot 8 件で v3.0 プロンプト（相関データ込みの insights 生成）を inline 生成・適用済み。残 **約 1,914 件** を自動化して展開する必要あり。
+**データ層 (D1 stats_city)**:
+- ✅ e-Stat SSDS 市区町村版 `0000020204` (廃置分合処理済) から 4 指標 fetch + stats_city 投入:
+  - `real-balance-ratio-city` (D2202): 57,392 行
+  - `current-balance-ratio-city` (D2203): 35,447 行
+  - `real-public-debt-service-ratio-city` (D2211): 24,333 行
+  - `future-burden-ratio-city` (D2212): 12,150 行
+- ✅ 既存 city 指標 2 件と統合 (6 指標カバー):
+  - `fiscal-strength-index` (57,613 行)
+  - `per-taxpayer-taxable-income` (56,913 行)
+- ✅ Fetch スクリプト: `.claude/scripts/estat/fetch-city-local-finance.cjs`
 
-pilot 結果（remote D1 反映済み）:
-- 6 件: 相関構造を含む insights を生成（agricultural-output / starting-salary-highschool / general-hospital-bed-occupancy-rate / wind-power-turbine-count / konbu-consumption-quantity / elementary-school-count）
-- 2 件: EXCLUDED（total-population / foreign-resident-count）に「他指標との相関は集計対象外」を明記
+**Indicator set**:
+- ✅ `LOCAL_FINANCE_CITY_SET` (`packages/types/src/indicator-sets/local-finance-city.ts`) を定義 + registry 登録
+- ✅ `LOCAL_FINANCE_CITY_THEME` を `apps/web/src/features/theme-dashboard/server.ts` で export
 
-### 自動化案
+**R2 export**:
+- ✅ `.claude/scripts/db/export-city-local-finance.cjs` で D1 → R2 形式変換 (243,848 行 → 6 metric の `item.json` + `values.json`)
+- ⏸ 本番 R2 push は **本番デプロイ時** にユーザが実施 (`/push-r2 --prefix app/ranking/` で部分 sync 可能、または `/sync-snapshots` 全体)
 
-| 案 | 内容 | コスト目安 |
+**UI 層**:
+- ✅ `load-theme-data.ts` を areaType 対応に拡張 (`options.areaType: "city"`)
+  - city モードでは R2 から直接 `readRankingValuesFromR2(key, "city", yearCode)` で取得
+  - topology は `fetchAllCitiesTopology` に切替
+- ✅ 新規 page `/themes/local-finance/cities/page.tsx` 作成 (`LOCAL_FINANCE_CITY_THEME` を使用)
+- ✅ 既存 `/themes/local-finance/page.tsx` に「市区町村」ナビゲーション追加 (相互リンク)
+- ✅ 型チェック PASS
+
+**動作確認 (localhost:3000)**:
+- ✅ `/themes/local-finance` HTTP 200 (pref 維持、回帰なし)
+- ✅ `/themes/local-finance/cities` HTTP 200 (全 6 指標が描画される、市区町村ラベル表示)
+
+### 本番デプロイ手順 (ユーザ作業)
+
+1. R2 push (6 metric の app/ranking/ 配下):
+   ```bash
+   for key in fiscal-strength-index real-balance-ratio-city current-balance-ratio-city real-public-debt-service-ratio-city future-burden-ratio-city per-taxpayer-taxable-income; do
+     npx tsx packages/r2-storage/src/scripts/sync-upload.ts --prefix app/ranking/$key
+   done
+   ```
+2. feature ブランチ → develop → main の PR で deploy
+3. 本番 smoke: `curl -I https://stats47.jp/themes/local-finance/cities` で 200 確認
+
+### 残作業 (Phase 2 で別途)
+
+ratio 系 12 指標 (歳出割合 / 1人当たり等) は分子・分母から計算が必要。Phase 2 で計算 metric として実装:
+
+| 指標 | 算出 | 必要なデータ |
 |---|---|---|
-| **A: ANTHROPIC_API_KEY** | Sonnet 4.6 で `generate-parallel.ts` を改修・実行 | $80-100（Sonnet, 1,914 件、1 件 5K tokens） |
-| **B: Claude Code CLI (`claude -p`)** | 本セッションのサブスクリプション内で実行 | 0 円 + 8-12 時間（並列度低） |
+| local-tax-ratio | D320101 / D3201 | 地方税 / 歳入総額 |
+| local-allocation-tax-ratio | D320108 / D3201 | 地方交付税 / 歳入総額 |
+| national-treasury-disbursement-ratio | D320113 / D3201 | 国庫支出金 / 歳入総額 |
+| self-financing-ratio | D3202 / D3201 | 自主財源額 / 歳入総額 |
+| personnel-expenditure-ratio | D320401 / D3203 | 人件費 / 歳出総額 |
+| welfare-expenditure-ratio | D320303 / D3203 | 民生費 / 歳出総額 |
+| education-expenditure-ratio | D320310 / D3203 | 教育費 / 歳出総額 |
+| public-works-expenditure-ratio | D320308 / D3203 | 土木費 / 歳出総額 |
+| per-capita-total-expenditure | D3203 / 人口 | 歳出総額 / 人口 |
+| per-capita-inhabitant-tax | (住民税) / 人口 | - |
+| taxpayer-ratio | 納税義務者数 / 人口 | - |
+| laspeyres-index | local-public-employee-salary | 別ソース |
 
-### 必要な準備
-
-1. **`packages/ai-content/src/services/prompts/ranking-content-prompt.ts`** に v3.0 ルールを反映（pilot 8 件で検証済みの構造）
-2. **`RankingContentInput`** に `correlations` フィールド追加（top 5、`partial_r_*` 含む）
-3. **excluded keys ハンドリング** （`packages/correlation/src/trivial-pairs.ts` の `EXCLUDED_CORRELATION_KEYS` を参照）
-4. **再生成スクリプト**: 各 ranking について `correlation_analysis` から top 5 を取得 → 既存 inputs に join → AI 呼び出し
-5. **バックアップ**: 全 1,914 件の v2 → `/tmp/ai-content-backup-v2-bulk.json`
-
-### 完了条件
-
-- 全 1,922 件で `prompt_version='3.0.0'`
-- pilot 8 件は本作業の対象外（ベースラインとして維持）
-- 相関言及を含む比率: 80% 以上（excluded 除く）
-- tsc PASS
-- production 上で 10 件サンプリングして相関考察の質確認
-
----
-
-## #292+ [T3-LOCAL-FINANCE-02] /themes/local-finance 市区町村別データ拡張（Japan Dashboard 完全互換）
-
-- **tier**: 3
-- **status**: pending
-- **related**: PR #292（都道府県別 Phase 1 完了、2026-05-16）
 
 ### 背景
 
@@ -230,11 +263,11 @@ PR #292 でデジタル庁 Japan Dashboard 自治体財政ページ
 
 ---
 
-## [in-progress] [T2-SNS-STATION-01] 駅別乗降客数バブルマップ動画（国土数値情報 S12）
+## [done] [T2-SNS-STATION-01] 駅別乗降客数バブルマップ動画（国土数値情報 S12）
 
 - **tier**: 2
-- **status**: in-progress（PoC 完了 2026-05-22）
-- **target**: SNS（X 投稿用 16:9 動画）
+- **status**: done (Phase 1-5 全完了 2026-05-22、PR #328 マージ済、47連結 YouTube 動画 `wjLQCiuEeNI` public 公開済)
+- **target**: SNS（X / YouTube 投稿用 16:9 / 縦長動画）
 
 ### 背景
 
