@@ -69,7 +69,8 @@ test.describe("本番スモークテスト", () => {
     });
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible({ timeout: 10_000 });
-    await expect(heading).toContainText("比較");
+    // h1 フォーマット: "<area-a>vs<area-b><category>" (例: 東京都vs大阪府国土・気象)
+    await expect(heading).toContainText("vs");
   });
 
   test("存在しないページで404が返る", async ({ page }) => {

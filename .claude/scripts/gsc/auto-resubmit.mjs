@@ -189,17 +189,37 @@ function appendHistory(url, status, extra = {}) {
 // ---------- auth ----------
 
 function loadAuth() {
-  const keyFile = KEY_CANDIDATES.map((f) => path.join(PROJECT_ROOT, f)).find(
-    (p) => fs.existsSync(p)
-  );
-  if (!keyFile) {
-    console.error(
-      "[error] サービスアカウント鍵が見つかりません: " + KEY_CANDIDATES.join(", ")
+  // GitHub Actions では GOOGLE_SERVICE_ACCOUNT_KEY_JSON env var に鍵 JSON が入っている。
+  // ローカルではプロジェクトルートの JSON ファイルを使う。
+  const envKeyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
+  let credentials = null;
+  let keyFile = null;
+
+  if (envKeyJson) {
+    try {
+      credentials = JSON.parse(envKeyJson);
+    } catch (e) {
+      console.error(
+        "[error] GOOGLE_SERVICE_ACCOUNT_KEY_JSON の JSON パース失敗: " + e.message
+      );
+      process.exit(1);
+    }
+  } else {
+    keyFile = KEY_CANDIDATES.map((f) => path.join(PROJECT_ROOT, f)).find((p) =>
+      fs.existsSync(p)
     );
-    process.exit(1);
+    if (!keyFile) {
+      console.error(
+        "[error] サービスアカウント鍵が見つかりません: " +
+          KEY_CANDIDATES.join(", ") +
+          " (環境変数 GOOGLE_SERVICE_ACCOUNT_KEY_JSON も未設定)"
+      );
+      process.exit(1);
+    }
   }
+
   const auth = new google.auth.GoogleAuth({
-    keyFile,
+    ...(credentials ? { credentials } : { keyFile }),
     scopes: ["https://www.googleapis.com/auth/indexing"],
   });
   return google.indexing({ version: "v3", auth });
