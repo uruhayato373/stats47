@@ -87,7 +87,7 @@ jobs:
         run: |
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/migration-flow
 
-      - name: 📱 Post to Instagram (Day 1: 25 件)
+      - name: "📱 Post to Instagram (Day 1: 25 件)"
         if: inputs.dry_run != 'true'
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
