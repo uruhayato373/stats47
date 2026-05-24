@@ -1,0 +1,125 @@
+name: 🗾 Migration-flow Annual Full Refresh
+
+# 住基台帳人口移動報告 (毎年 1月発表) の新データで 47 県を full refresh。
+# - render (portrait + landscape)
+# - caption 生成
+# - R2 push
+# - Instagram (Day 1: 25件) + Day 2 cron で残り
+# - X (1-2 日で 47 件)
+#
+# 関連:
+# - docs/02_実装計画/migration-flow-sns-automation.md
+# - apps/remotion/src/features/migration-flow/MigrationReelVertical.tsx
+# - apps/remotion/scripts/fetch-migration-flow.ts
+
+on:
+  schedule:
+    # 1/20 11:00 JST = 1/20 02:00 UTC
+    - cron: "0 2 20 1 *"
+  workflow_dispatch:
+    inputs:
+      skip_render:
+        description: "render をスキップ (既存 mp4 を再投稿時)"
+        required: false
+        default: "false"
+      dry_run:
+        description: "投稿せず render と R2 push のみ"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: migration-flow-annual
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360  # 47 render × 1min + push + post = ~3h max
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # TODO Phase 2: e-Stat API から最新データ取得 → pref-net-{year}.ts 更新
+      - name: 📥 Fetch latest migration data
+        run: |
+          echo "TODO: e-Stat から最新年データ取得 (Phase 2 実装予定)"
+          # npx tsx apps/remotion/scripts/fetch-migration-flow.ts --year auto
+
+      - name: 🎬 Render 47 prefectures (portrait + landscape)
+        if: inputs.skip_render != 'true'
+        run: |
+          echo "TODO: Phase 2 で実装"
+          # cd apps/remotion && bash scripts/render-mf-all-47.sh
+          # outputs: out/mf-portrait/{01-47}.mp4 + out/mf/{01-47}.mp4
+
+      - name: 📝 Generate captions (IG + X × 47)
+        run: |
+          echo "TODO: Phase 2 で実装"
+          # node .claude/scripts/sns/migration-flow/gen-captions.mjs
+
+      - name: 📦 Copy to .local/r2/
+        run: |
+          echo "TODO: Phase 2 で実装"
+          # node .claude/scripts/sns/migration-flow/copy-to-r2.mjs
+
+      - name: ☁️ Push to R2
+        if: inputs.dry_run != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/migration-flow
+
+      - name: 📱 Post to Instagram (Day 1: 25 件)
+        if: inputs.dry_run != 'true'
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: |
+          # IG quota 25/24h を考慮、Day 1: tokyo + 北日本 24件
+          npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
+            tokyo hokkaido aomori iwate miyagi akita yamagata fukushima ibaraki tochigi gunma \
+            saitama chiba kanagawa niigata toyama ishikawa fukui yamanashi nagano gifu \
+            shizuoka aichi mie shiga \
+            --domain migration-flow --type reels
+
+      - name: 📋 Schedule Day 2 (残り 22 件)
+        if: inputs.dry_run != 'true'
+        run: |
+          echo "TODO: Day 2 cron を動的生成 or instagram-mf-day2 を再利用"
+          # 既存 instagram-mf-day2.yml は固定スケジュール (5/25)、Phase 2 で動的化
+
+      # TODO Phase 2: X 投稿 (Playwright session を CI で管理する設計が必要)
+      - name: 🐦 Post to X (47 件)
+        if: false  # Phase 2 まで無効化 (Playwright session の CI 持ち込みが課題)
+        run: |
+          echo "TODO: Playwright session を CI で管理する仕組みが必要"
+
+      - name: 💾 Commit logs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/sns/instagram-publish-log.csv
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(sns): migration-flow annual refresh $(date -u +%Y-%m-%d) [skip ci]"
+            git push origin main
+          fi

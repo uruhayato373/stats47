@@ -1,0 +1,97 @@
+name: 🗾 Migration-flow Monthly Highlight
+
+# 毎月 1日に「先月の TOP 5 / BOTTOM 5 変動県」をハイライト投稿。
+# - データ鮮度を維持しながら投稿頻度は控えめ (1-3 件/月)
+# - IG carousel + X reel の組み合わせ
+#
+# 関連:
+# - docs/02_実装計画/migration-flow-sns-automation.md (Section B)
+
+on:
+  schedule:
+    # 毎月 1日 12:00 JST = 03:00 UTC
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+    inputs:
+      highlight_type:
+        description: "ハイライト種類 (top5 / bottom5 / theme)"
+        required: false
+        default: "top5"
+      dry_run:
+        description: "投稿せず生成のみ"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: migration-flow-monthly
+  cancel-in-progress: false
+
+jobs:
+  highlight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # TODO Phase 3
+      - name: 📊 Pick monthly highlight
+        run: |
+          echo "TODO: Phase 3 で実装"
+          # node .claude/scripts/sns/migration-flow/pick-monthly-highlight.mjs \
+          #   --type ${{ inputs.highlight_type || 'top5' }}
+          # outputs: .local/r2/sns/migration-flow/highlight-{YYYY-MM}/
+
+      - name: 🎬 Render highlight assets
+        run: |
+          echo "TODO: Phase 3 で実装"
+          # cd apps/remotion && npx remotion render MigrationHighlight \
+          #   out/mf-highlight-{YYYY-MM}.mp4 \
+          #   --props='{...}'
+
+      - name: ☁️ Push to R2
+        if: inputs.dry_run != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/migration-flow
+
+      - name: 📱 Post to Instagram
+        if: inputs.dry_run != 'true'
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: |
+          MONTH=$(date -u -d '+9 hours' +%Y-%m)
+          echo "TODO: Phase 3 で実装"
+          # npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
+          #   highlight-${MONTH} --domain migration-flow --type carousel
+
+      - name: 💾 Commit logs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/sns/instagram-publish-log.csv
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(sns): migration-flow monthly highlight $(date -u +%Y-%m) [skip ci]"
+            git push origin main
+          fi

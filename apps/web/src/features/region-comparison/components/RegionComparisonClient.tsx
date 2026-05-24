@@ -58,12 +58,12 @@ export function RegionComparisonClient({
 
   return (
     <div className="animate-in fade-in duration-300 space-y-6">
-      {/* ページヘッダー */}
+      {/* カテゴリ選択ヘッダー (h1 は親 page.tsx の hero で表示するため h2 に降格) */}
       <div className="mb-6">
         <div className="flex items-center gap-4 mb-1">
-          <h1 className="text-lg font-bold">
-            地域間比較
-          </h1>
+          <h2 className="text-base font-semibold text-muted-foreground">
+            カテゴリ
+          </h2>
           <Select value={currentCategoryKey} onValueChange={handleCategoryChange}>
             <SelectTrigger aria-label="比較カテゴリを選択" className="h-10 w-40 rounded-lg border text-sm font-bold">
               <SelectValue>

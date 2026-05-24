@@ -1,0 +1,127 @@
+name: 📱 Instagram MF Reels Day 2 (one-shot 2026-05-25)
+
+# 47都道府県 migration-flow Reels の残り 22 件 (kyoto〜okinawa) を投稿する
+# one-shot ワークフロー。
+#
+# - cron: 2026-05-25 03:00 UTC (12:00 JST) 一度だけ発火
+# - idempotent: 投稿ログ (instagram-publish-log.csv) で既投稿チェック、
+#   既に投稿済みの slug はスキップ → 翌年同日 fire しても無害
+# - workflow_dispatch: 手動 fallback (任意の slug 指定可)
+#
+# 関連:
+# - .claude/skills/sns/post-instagram/SKILL.md
+# - .claude/state/metrics/sns/instagram-publish-log.csv
+
+on:
+  schedule:
+    # 5/25 12:00 JST = 03:00 UTC、5月25日のみ (毎年だが idempotent で安全)
+    - cron: "0 3 25 5 *"
+  workflow_dispatch:
+    inputs:
+      keys:
+        description: "投稿対象 slug (空白区切り、空白で残り全件)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-mf-day2
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45  # 22 件 × ~30秒 = 11分 + マージン
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Resolve unposted keys
+        id: keys
+        run: |
+          # 入力 slug、空白なら Day 2 残り 22 件をデフォルト
+          INPUT_KEYS="${{ inputs.keys }}"
+          if [ -z "$INPUT_KEYS" ]; then
+            INPUT_KEYS="kyoto osaka hyogo nara wakayama tottori shimane okayama hiroshima yamaguchi tokushima kagawa ehime kochi fukuoka saga nagasaki kumamoto oita miyazaki kagoshima okinawa"
+          fi
+          # 投稿ログから「migration-flow,<slug>,reels」を含む slug を除外 (idempotent)
+          LOG=".claude/state/metrics/sns/instagram-publish-log.csv"
+          TODO=""
+          for k in $INPUT_KEYS; do
+            if [ -f "$LOG" ] && grep -q ",migration-flow,${k},reels," "$LOG"; then
+              echo "[skip] ${k} (already posted)"
+            else
+              TODO="$TODO $k"
+            fi
+          done
+          TODO=$(echo $TODO | xargs)  # trim
+          echo "todo=$TODO" >> $GITHUB_OUTPUT
+          echo "Resolved unposted: $TODO"
+
+      - name: 📱 Post to Instagram
+        if: steps.keys.outputs.todo != ''
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: |
+          npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
+            ${{ steps.keys.outputs.todo }} \
+            --domain migration-flow --type reels
+
+      - name: ⏭️ All already posted
+        if: steps.keys.outputs.todo == ''
+        run: echo "全 slug 投稿済 → 何もしない"
+
+      - name: 📅 Resolve date
+        id: date
+        run: echo "date=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Commit publish log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/sns/instagram-publish-log.csv
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(sns): instagram MF Day 2 publish log ${{ steps.date.outputs.date }} [skip ci]"
+            git push origin main
+          fi
+
+      - name: 📄 Step summary
+        if: always()
+        run: |
+          if [ -f .claude/state/metrics/sns/instagram-publish-log.csv ]; then
+            cat <<EOF >> $GITHUB_STEP_SUMMARY
+          ## Instagram MF Day 2 (${{ steps.date.outputs.date }})
+
+          $(node -e "
+            const fs = require('fs');
+            const log = fs.readFileSync('.claude/state/metrics/sns/instagram-publish-log.csv','utf8');
+            const todayJst = new Date(Date.now() + 9*3600*1000).toISOString().slice(0,10);
+            const lines = log.split('\n').filter(l => l.includes(',migration-flow,'));
+            const todayLines = lines.filter(l => {
+              const ts = l.split(',')[0];
+              if (!ts) return false;
+              const jstDate = new Date(new Date(ts).getTime() + 9*3600*1000).toISOString().slice(0,10);
+              return jstDate === todayJst;
+            });
+            console.log(\`- Today posted: \${todayLines.length}\`);
+            console.log(\`- Total MF posts: \${lines.length} / 47\`);
+          ")
+          EOF
+          fi

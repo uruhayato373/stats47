@@ -4,14 +4,15 @@ import {
   fetchFormattedStats,
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
+import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
   fetchRankingValuesFromSource,
   filterOutNationalArea,
   rankByValue,
   readRankingItemFromR2,
+  readRankingValuesFromR2,
 } from "@stats47/ranking/server";
-import { isOk, type TopoJSONTopology } from "@stats47/types";
+import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
 
 
 import { getEstatCacheStorage } from "@/features/stat-charts/server";
@@ -65,10 +66,17 @@ async function fetchIndicatorValues(
  * 全指標の RankingItem 定義 + e-Stat API データ + TopoJSON を並列取得し、
  * indicatorDataMap として返す。
  * tabIndicators がある場合はそのキーもマージして取得する。
+ *
+ * areaType="city" 指定時:
+ *   - R2 の per-key values.json を読み込み (e-Stat 直接取得はしない)
+ *   - city 用 municipality topology を使用
  */
 export async function loadThemeData(
-  theme: ThemeConfig
+  theme: ThemeConfig,
+  options?: { areaType?: AreaType },
 ): Promise<ThemePageData | null> {
+  const areaType: AreaType = options?.areaType ?? "prefecture";
+
   // tabIndicators のキーと rankingKeys をマージ（重複排除）
   const tabKeys = theme.tabIndicators?.map((t) => t.rankingKey) ?? [];
   const allKeys = [...new Set([...theme.rankingKeys, ...tabKeys])];
@@ -76,8 +84,8 @@ export async function loadThemeData(
   // 1. 全指標の RankingItem 定義を並列取得
   const rankingItemResults = await Promise.all(
     allKeys.map((key) =>
-      readRankingItemFromR2(key, "prefecture").catch((error) => {
-        logger.error({ error, key }, "テーマダッシュボード: RankingItem取得失敗");
+      readRankingItemFromR2(key, areaType).catch((error) => {
+        logger.error({ error, key, areaType }, "テーマダッシュボード: RankingItem取得失敗");
         return null;
       })
     )
@@ -94,15 +102,36 @@ export async function loadThemeData(
   if (validItems.length === 0) return null;
 
   // 2. 全指標のデータ + TopoJSON を並列取得
-  const topologyPromise = fetchPrefectureTopology().catch((error) => {
-    logger.error({ error }, "テーマダッシュボード: topology取得失敗");
-    return null;
-  });
+  const topologyPromise =
+    areaType === "city"
+      ? fetchAllCitiesTopology().catch((error) => {
+          logger.error({ error }, "テーマダッシュボード: city topology取得失敗");
+          return null;
+        })
+      : fetchPrefectureTopology().catch((error) => {
+          logger.error({ error }, "テーマダッシュボード: topology取得失敗");
+          return null;
+        });
 
   const valuesPromises = validItems.map(({ key, item }) => {
     const yearCode = item.latestYear?.yearCode;
     if (!yearCode)
       return Promise.resolve({ key, values: [] as RankingValue[] });
+
+    // city: R2 から直接読む (e-Stat 経由しない)
+    if (areaType === "city") {
+      return readRankingValuesFromR2(key, "city", yearCode)
+        .then((result) => {
+          const values = isOk(result) ? result.data : [];
+          return { key, values };
+        })
+        .catch((error) => {
+          logger.error({ error, key, yearCode }, "テーマダッシュボード: city values 取得失敗");
+          return { key, values: [] as RankingValue[] };
+        });
+    }
+
+    // prefecture: 既存ロジック (e-Stat fetch + ランク計算)
     return fetchIndicatorValues(item, yearCode)
       .then((values) => ({ key, values }))
       .catch((error) => {

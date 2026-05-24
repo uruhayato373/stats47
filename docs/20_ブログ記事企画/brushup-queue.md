@@ -1,37 +1,37 @@
 # ブログ改善優先度キュー
 
-生成日: 2026-05-17 / GSC 参照週: 2026-W20 / ブログ記事数: 115 / 平均 CTR: 2.67%
+生成日: 2026-05-24 / GSC 参照週: 2026-W21 / ブログ記事数: 146 / 平均 CTR: 3.80%
 
 **スコア** = CTR ギャップ（平均 - ページ）× log10(impressions + 1)
 
 | 優先度 | slug | imp | CTR | 平均比 | score |
 |---|---|---:|---:|---:|---:|
-| 1 | habitable-area-land-use | 658 | 0.30% | +2.37% | 0.067 |
-| 2 | manufacturing-aichi-dominance | 497 | 0.20% | +2.47% | 0.067 |
-| 3 | overnight-guests-inbound-recovery | 383 | 0.26% | +2.41% | 0.062 |
-| 4 | child-height-regional-gap | 1,719 | 0.76% | +1.91% | 0.062 |
-| 5 | manufacturing-shipment-prefecture-ranking | 159 | 0.00% | +2.67% | 0.059 |
-| 6 | minimum-wage-1000yen-breakthrough | 118 | 0.00% | +2.67% | 0.055 |
-| 7 | sunshine-pacific-vs-nihonkai | 118 | 0.00% | +2.67% | 0.055 |
-| 8 | consumer-price-regional-gap | 250 | 0.40% | +2.27% | 0.055 |
-| 9 | fishery-catch-aquaculture-shift | 96 | 0.00% | +2.67% | 0.053 |
-| 10 | birth-death-gap-decline | 71 | 0.00% | +2.67% | 0.050 |
-| 11 | precipitation-snow-regional-gap | 192 | 0.52% | +2.15% | 0.049 |
-| 12 | agriculture-hokkaido-dominance | 66 | 0.00% | +2.67% | 0.049 |
-| 13 | truck-driver-2024-crisis | 65 | 0.00% | +2.67% | 0.049 |
-| 14 | electricity-demand-gap | 54 | 0.00% | +2.67% | 0.047 |
-| 15 | aging-rate-akita-vs-okinawa | 46 | 0.00% | +2.67% | 0.045 |
-| 16 | school-nonattendance-pattern | 44 | 0.00% | +2.67% | 0.044 |
-| 17 | cpi-change-regional-pattern | 42 | 0.00% | +2.67% | 0.044 |
-| 18 | marriage-divorce-okinawa | 41 | 0.00% | +2.67% | 0.043 |
-| 19 | food-spending-pattern | 38 | 0.00% | +2.67% | 0.043 |
-| 20 | water-sewage-crisis | 38 | 0.00% | +2.67% | 0.043 |
+| 1 | child-height-regional-gap | 2,005 | 0.70% | +3.10% | 0.103 |
+| 2 | manufacturing-aichi-dominance | 858 | 0.58% | +3.22% | 0.095 |
+| 3 | overnight-guests-inbound-recovery | 375 | 0.27% | +3.53% | 0.091 |
+| 4 | habitable-area-land-use | 754 | 0.66% | +3.14% | 0.091 |
+| 5 | consumer-price-regional-gap | 216 | 0.00% | +3.80% | 0.089 |
+| 6 | manufacturing-shipment-prefecture-ranking | 159 | 0.00% | +3.80% | 0.084 |
+| 7 | fertility-rate-prefecture-gap | 148 | 0.00% | +3.80% | 0.083 |
+| 8 | sunshine-pacific-vs-nihonkai | 146 | 0.00% | +3.80% | 0.082 |
+| 9 | fishery-catch-aquaculture-shift | 133 | 0.00% | +3.80% | 0.081 |
+| 10 | minimum-wage-1000yen-breakthrough | 118 | 0.00% | +3.80% | 0.079 |
+| 11 | temperature-extremes-map | 2,415 | 1.49% | +2.31% | 0.078 |
+| 12 | agriculture-hokkaido-dominance | 103 | 0.00% | +3.80% | 0.077 |
+| 13 | truck-driver-2024-crisis | 67 | 0.00% | +3.80% | 0.070 |
+| 14 | alcohol-prefecture-map | 66 | 0.00% | +3.80% | 0.069 |
+| 15 | precipitation-snow-regional-gap | 155 | 0.65% | +3.15% | 0.069 |
+| 16 | electricity-demand-gap | 58 | 0.00% | +3.80% | 0.067 |
+| 17 | fishery-species-prefecture-specialty | 273 | 1.10% | +2.70% | 0.066 |
+| 18 | park-green-space-gap | 334 | 1.20% | +2.60% | 0.066 |
+| 19 | birth-death-gap-decline | 51 | 0.00% | +3.80% | 0.065 |
+| 20 | marriage-divorce-okinawa | 50 | 0.00% | +3.80% | 0.065 |
 
 ## 次のステップ
 
 ```bash
 # 上位記事から順に補強
-/brushup-blog-article habitable-area-land-use
+/brushup-blog-article child-height-regional-gap
 /brushup-blog-article manufacturing-aichi-dominance
 /brushup-blog-article overnight-guests-inbound-recovery
 ```
