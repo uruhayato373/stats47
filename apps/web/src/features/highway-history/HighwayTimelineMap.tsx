@@ -1,5 +1,6 @@
 import { geoMercator, geoPath, geoLength } from "d3-geo";
 import { feature as topoFeature } from "topojson-client";
+
 import type { GeometryCollection, Topology } from "topojson-specification";
 
 const R2_HIGHWAY_TOPOJSON =
