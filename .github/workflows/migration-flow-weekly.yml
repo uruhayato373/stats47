@@ -1,0 +1,119 @@
+name: 🗾 Migration-flow Weekly Deep Dive
+
+# 毎週月曜に 1 県の深掘り投稿。47 県を年内に全カバー (週ローテーション)。
+#
+# ローテーション:
+#   今週カバー = WEEK_OF_YEAR % 47 (0=hokkaido, 1=aomori, ..., 46=okinawa)
+#   投稿ログで既投稿週は skip、未カバー優先 (年初リセット)
+#
+# 関連:
+# - docs/02_実装計画/migration-flow-sns-automation.md (Section C)
+
+on:
+  schedule:
+    # 毎週月曜 12:00 JST = 03:00 UTC
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+    inputs:
+      pref_code:
+        description: "明示的に投稿する県コード (空白で週ローテーション)"
+        required: false
+        default: ""
+      dry_run:
+        description: "投稿せず選定のみ"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: migration-flow-weekly
+  cancel-in-progress: false
+
+jobs:
+  deep-dive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Pick this week's prefecture
+        id: pick
+        run: |
+          # Week-of-year % 47 で県を決定 (UTC + 9h = JST)
+          WEEK_OF_YEAR=$(date -u -d '+9 hours' +%V)
+          PREF_INDEX=$(( ( ${WEEK_OF_YEAR#0} - 1 ) % 47 + 1 ))
+          PREF_CODE=$(printf "%02d" $PREF_INDEX)
+          # 入力指定があれば優先
+          if [ -n "${{ inputs.pref_code }}" ]; then
+            PREF_CODE="${{ inputs.pref_code }}"
+          fi
+          # slug 取得 (簡易マッピング、Phase 4 で外部化)
+          declare -A SLUG_MAP=(
+            [01]=hokkaido [02]=aomori [03]=iwate [04]=miyagi [05]=akita [06]=yamagata
+            [07]=fukushima [08]=ibaraki [09]=tochigi [10]=gunma [11]=saitama [12]=chiba
+            [13]=tokyo [14]=kanagawa [15]=niigata [16]=toyama [17]=ishikawa [18]=fukui
+            [19]=yamanashi [20]=nagano [21]=gifu [22]=shizuoka [23]=aichi [24]=mie
+            [25]=shiga [26]=kyoto [27]=osaka [28]=hyogo [29]=nara [30]=wakayama
+            [31]=tottori [32]=shimane [33]=okayama [34]=hiroshima [35]=yamaguchi [36]=tokushima
+            [37]=kagawa [38]=ehime [39]=kochi [40]=fukuoka [41]=saga [42]=nagasaki
+            [43]=kumamoto [44]=oita [45]=miyazaki [46]=kagoshima [47]=okinawa
+          )
+          SLUG="${SLUG_MAP[$PREF_CODE]}"
+          echo "pref_code=$PREF_CODE" >> $GITHUB_OUTPUT
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "Picked: $SLUG ($PREF_CODE) for week $WEEK_OF_YEAR"
+
+      # TODO Phase 4: 既投稿チェック (週単位 idempotency)
+      - name: 🔁 Skip if already posted this week
+        id: check
+        run: |
+          WEEK_OF_YEAR=$(date -u -d '+9 hours' +%V)
+          YEAR=$(date -u -d '+9 hours' +%Y)
+          LOG=".claude/state/metrics/sns/instagram-publish-log.csv"
+          TAG="weekly-${YEAR}-W${WEEK_OF_YEAR}-${{ steps.pick.outputs.slug }}"
+          if [ -f "$LOG" ] && grep -q ",${TAG}," "$LOG"; then
+            echo "[skip] ${TAG} already posted"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📱 Post to Instagram + X
+        if: steps.check.outputs.skip != 'true' && inputs.dry_run != 'true'
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: |
+          # 既存 caption.txt + reel.mp4 を流用 (年次 refresh で更新済)
+          npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
+            ${{ steps.pick.outputs.slug }} \
+            --domain migration-flow --type reels
+          # X は Playwright が CI 対応してから (Phase 4)
+          echo "TODO: X 投稿は Phase 4"
+
+      - name: 💾 Commit logs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/sns/instagram-publish-log.csv
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(sns): migration-flow weekly ${{ steps.pick.outputs.slug }} [skip ci]"
+            git push origin main
+          fi
