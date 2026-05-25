@@ -38,7 +38,7 @@ export function ArticleRelatedBooks({ tagKeys, compact = false }: ArticleRelated
   if (books.length === 0) return null;
 
   const grid = (
-    <div className={compact ? "grid gap-2 grid-cols-2" : "grid gap-4 md:grid-cols-2"}>
+    <div className={compact ? "grid gap-2 grid-cols-1" : "grid gap-4 md:grid-cols-2"}>
       {books.map(({ category, book }) => {
         const theme = AFFILIATE_THEME[category];
         return (

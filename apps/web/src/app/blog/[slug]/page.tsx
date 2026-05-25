@@ -13,7 +13,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
-import { FurusatoNozeiCard, TechSchoolPromoCard } from "@/features/ads";
+import {
+    FurusatoNozeiCard,
+    FurusatoNozeiPopularCard,
+    TechSchoolPromoCard,
+    pickPrefCodeForSlug,
+} from "@/features/ads";
 import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, extractPrefecturesFromArticle, generateBlogMetadata, type Article } from "@/features/blog";
 import {
@@ -124,7 +129,19 @@ export default async function BlogPostPage({ params }: PageProps) {
         tagKeys,
         limit: 1,
     });
-    const primaryPrefCode = prefCodes[0];
+
+    /**
+     * ふるさと納税 widget の 3 段ロジック:
+     *   1. 記事から都道府県を抽出できた → その県を表示
+     *   2. 抽出できなかった → slug ハッシュで決定論的に県を選ぶ (記事固定・サイト全体で 47 県分散)
+     *   3. (どちらでも楽天 API レスポンスが空なら) 全国人気返礼品 fallback
+     *
+     * 1/2 は同じ `<FurusatoNozeiCard>` を使い、3 は別コンポーネント。
+     * - 並べて表示する必要はないので「1/2 を表示できなかった時のみ 3 を表示」する想定
+     * - ただし FurusatoNozeiCard は API 呼出結果が空でも県固定リンクで描画する
+     *   ため、3 は「1 と 2 の両方が無効 (例: 楽天 APP ID 未設定)」時のみ意味を持つ
+     */
+    const furusatoAreaCode = prefCodes[0] ?? pickPrefCodeForSlug(slug);
 
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
@@ -195,15 +212,28 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </Breadcrumb>
             </div>
 
-            {/* メインコンテンツ（xl+: 2カラム、xl未満: 1カラム）
-                container を max-w-[1700px] に拡張し、右サイドバーを 480px に広げて
-                画面領域を有効活用 (現状の max-w-screen-2xl=1536px + 右 288px → 余白
-                480px を解消) */}
+            {/* メインコンテンツ
+                - xl+: 3 カラム (左 TOC 220 + 本文 auto + 右広告 400)
+                - xl 未満: 1 カラム
+                container は max-w-[1700px] で 1920px+ 画面の余白を最小化 */}
             <div className="mx-auto max-w-[1700px] px-4 py-6">
-                <div className="xl:flex xl:gap-6 xl:items-start">
+                <div className="xl:grid xl:grid-cols-[220px_minmax(0,1fr)_400px] xl:gap-5 xl:items-start">
 
-                    {/* 記事・関連コンテンツ列 */}
-                    <main className="flex-1 min-w-0 space-y-6">
+                    {/* 左カラム (xl+): TOC + 上部 AdSense (sticky) */}
+                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+                        <ArticleTableOfContents content={article.content} compact />
+                        <Card>
+                            <CardHeader className="pb-2">
+                                <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex justify-center overflow-hidden">
+                                <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
+                            </CardContent>
+                        </Card>
+                    </aside>
+
+                    {/* 中央カラム: 記事 + main 内 widget */}
+                    <main className="min-w-0 space-y-6">
                         <Card>
                             <CardContent className="p-6 sm:p-8 overflow-hidden">
                                 {/* 記事ヘッダー */}
@@ -227,7 +257,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     </div>
                                 </header>
 
-                                {/* TOC (xl 未満で記事冒頭に表示。xl 以上はサイドバーに表示) */}
+                                {/* TOC (xl 未満で記事冒頭に表示。xl 以上は左カラムに表示) */}
                                 <div className="mb-8 xl:hidden">
                                     <ArticleTableOfContents content={article.content} />
                                 </div>
@@ -251,7 +281,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* バナー広告（タグキーベース・ランダム表示） */}
                         <ArticleAffiliateBanner tagKeys={tagKeys} />
 
-                        {/* xl 未満で表示する各種関連 widget (xl+ ではサイドバーに集約) */}
+                        {/* xl 未満で表示する各種関連 widget (xl+ では右カラムに集約) */}
                         <div className="space-y-6 xl:hidden">
                             <Card>
                                 <CardHeader className="pb-2">
@@ -266,9 +296,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             <RelatedRankingsSection tagKeys={tagKeys} />
 
-                            {primaryPrefCode && (
-                                <FurusatoNozeiCard areaCode={primaryPrefCode} />
-                            )}
+                            <FurusatoNozeiCard areaCode={furusatoAreaCode} />
+                            {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
 
@@ -283,27 +312,12 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </main>
 
-                    {/* 右サイドバー: xl+ のみ、480px 幅。
-                        max-h と overflow-y-auto で viewport 内で独立スクロール可
-                        (article 本文を読みつつサイドバーの widget もすべて到達可能) */}
-                    <aside className="hidden xl:flex xl:w-[480px] xl:shrink-0 xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
-                        {/* Claude Code 副業講座 (上部固定で常時露出) */}
+                    {/* 右カラム (xl+): 関連 widget + 広告 (independent scroll) */}
+                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+                        {/* Claude Code 副業講座 (above-fold 最上部) */}
                         <TechSchoolPromoCard />
 
-                        {/* 目次 */}
-                        <ArticleTableOfContents content={article.content} compact />
-
-                        {/* AdSense Rectangle 1 (上部、above-fold) */}
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex justify-center overflow-hidden">
-                                <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
-                            </CardContent>
-                        </Card>
-
-                        {/* 関連書籍 (480px 幅で 2 列 grid 表示) */}
+                        {/* 関連書籍 */}
                         <Card>
                             <CardHeader className="py-3 px-4">
                                 <CardTitle className="text-base">関連書籍</CardTitle>
@@ -316,15 +330,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* 関連ランキング */}
                         <RelatedRankingsSection tagKeys={tagKeys} compact />
 
-                        {/* 都道府県ふるさと納税 (記事に登場した県があれば自動表示) */}
-                        {primaryPrefCode && (
-                            <FurusatoNozeiCard areaCode={primaryPrefCode} />
-                        )}
+                        {/* ふるさと納税: 記事の都道府県 (or slug ハッシュ) */}
+                        <FurusatoNozeiCard areaCode={furusatoAreaCode} />
+                        {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                         {/* 関連記事 */}
                         <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
 
-                        {/* AdSense Rectangle 2 (下部) */}
+                        {/* AdSense Rectangle (下部) */}
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
