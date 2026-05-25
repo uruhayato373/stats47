@@ -26,6 +26,7 @@ import {
     KpiGrid,
     KpiTile,
     NativeAffiliateRow,
+    RightRailWidgets,
 } from "@/features/redesign";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
@@ -148,52 +149,61 @@ export default async function TagArticlesPage({ params }: PageProps) {
                 {articles.length === 0 ? (
                     notFound()
                 ) : (
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {articles.map((article) => (
-                            <Link
-                                key={article.slug}
-                                href={`/blog/${article.slug}`}
-                                className="group block h-full"
-                            >
-                                <Card className="flex h-full flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-primary/50">
-                                    <CardHeader className="pb-3">
-                                        <div className="mb-2 flex items-center gap-2">
-                                            {article.description && (
-                                                <span className="text-xs text-muted-foreground">
-                                                    {article.slug}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <CardTitle className="text-lg transition-colors group-hover:text-primary">
-                                            {article.title}
-                                        </CardTitle>
-                                        {article.description && (
-                                            <CardDescription className="line-clamp-2">
-                                                {article.description}
-                                            </CardDescription>
-                                        )}
-                                    </CardHeader>
-                                </Card>
-                            </Link>
-                        ))}
+                    <div className="mt-6 xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+                        <main className="min-w-0">
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {articles.map((article) => (
+                                    <Link
+                                        key={article.slug}
+                                        href={`/blog/${article.slug}`}
+                                        className="group block h-full"
+                                    >
+                                        <Card className="flex h-full flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-primary/50">
+                                            <CardHeader className="pb-3">
+                                                <div className="mb-2 flex items-center gap-2">
+                                                    {article.description && (
+                                                        <span className="text-xs text-muted-foreground">
+                                                            {article.slug}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <CardTitle className="text-lg transition-colors group-hover:text-primary">
+                                                    {article.title}
+                                                </CardTitle>
+                                                {article.description && (
+                                                    <CardDescription className="line-clamp-2">
+                                                        {article.description}
+                                                    </CardDescription>
+                                                )}
+                                            </CardHeader>
+                                        </Card>
+                                    </Link>
+                                ))}
+                            </div>
+
+                            {/* ネイティブアフィリエイト (D Phase 4) */}
+                            {nativeBanners.length > 0 && (
+                                <div className="mt-8">
+                                    <NativeAffiliateRow
+                                        title={`「${tag}」関連の書籍・商品`}
+                                        banners={nativeBanners}
+                                        position="tag-native"
+                                        trackingCategory={`tag-${tagKey}`}
+                                    />
+                                </div>
+                            )}
+
+                            <div className="mt-8">
+                                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+                            </div>
+                        </main>
+
+                        {/* 右サイドバー (xl+) — タグ記事一覧の脇に常時配置 */}
+                        <aside className="mt-8 xl:mt-0 xl:block">
+                            <RightRailWidgets />
+                        </aside>
                     </div>
                 )}
-
-                {/* ネイティブアフィリエイト (D Phase 4) */}
-                {nativeBanners.length > 0 && (
-                    <div className="mt-8">
-                        <NativeAffiliateRow
-                            title={`「${tag}」関連の書籍・商品`}
-                            banners={nativeBanners}
-                            position="tag-native"
-                            trackingCategory={`tag-${tagKey}`}
-                        />
-                    </div>
-                )}
-
-                <div className="mt-8">
-                    <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-                </div>
             </div>
         </>
     );
