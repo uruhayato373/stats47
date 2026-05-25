@@ -1,9 +1,10 @@
 ---
 type: redesign-tracker
-date: 2026-05-23
+date: 2026-05-25
 status: active
 source_bundle: stats47-ranking-handoff (13).zip — 2026-05-22 20:31 export
 master_plan: docs/02_実装計画/d-redesign-master-plan.md
+last_updated: 2026-05-25 (PR #349-#354 series)
 ---
 
 # stats47 リデザイン進捗トラッカー
@@ -33,23 +34,26 @@ Claude Design (claude.ai/design) でモックアップした **11 ページ × �
 
 | page | 対象ルート | プロトタイプ | 採用案 | status | PR |
 |---|---|---|---|---|---|
-| ranking | `/ranking/[rankingKey]` | `Ranking Page Redesign.html` | **D**（Phase1 + Phase2 ネイティブaff） | `done` (local) | — |
-| home | `/` | `Home Page Redesign.html` | **D** (破壊的置換) | `done` (local) | — |
-| area | `/areas/[areaCode]/[categoryKey]` | `Area Page Redesign.html` | **D** (AreaProfilePageClient ヒーロー化) | `done` (local) | — |
-| category | `/category/[categoryKey]` | `Category Page Redesign.html` | **D** + ネイティブaff | `done` (local) | — |
+| ranking | `/ranking/[rankingKey]` | `Ranking Page Redesign.html` | **D**（Phase1 + Phase2 ネイティブaff） + 横幅最大化 | `done` | PR #349-#352 |
+| home | `/` | `Home Page Redesign.html` | **D** (破壊的置換) + NextUpGrid + 横幅最大化 | `done` | PR #353-#354 |
+| area | `/areas/[areaCode]/[categoryKey]` | `Area Page Redesign.html` | **D** (AreaProfilePageClient ヒーロー化) + 右サイドバー (その県のふるさと納税) | `done` | PR #354 |
+| category | `/category/[categoryKey]` | `Category Page Redesign.html` | **D** + ネイティブaff + サイドバー 256→360 + TechSchool | `done` | PR #354 |
 | compare | `/compare/[categoryKey]` | `Compare Page Redesign.html` | **D** (noindex のためスキップ) | `deferred` | — |
 | theme | `/themes/[theme]` | `Theme Dashboard Redesign.html` | **D** (ThemePageLayout 共通化) | `done` (local) | — |
-| themes-index | `/themes` | `Themes Index Redesign.html` | **D** | `done` (local) | — |
+| themes-index | `/themes` | `Themes Index Redesign.html` | **D** + 右サイドバー追加 | `done` | PR #354 |
 | survey | `/survey/[surveyKey]` | `Survey Page Redesign.html` | **D** + ネイティブaff | `done` (local) | — |
 | search | `/search` | `Search Page Redesign.html` | **D** (noindex のためスキップ) | `deferred` | — |
-| blog | `/blog/[slug]` | `Blog Page Redesign.html` | 既存 affiliate 維持 (低影響) | `deferred` | — |
-| tag | `/tag/[tagKey]` | `Tag Page Redesign.html` | **D** + ネイティブaff | `done` (local) | — |
+| blog | `/blog/[slug]` | `Blog Page Redesign.html` | **α 3 カラム** (TOC + 本文 + 関連) + コードブロック配色改善 + ふるさと納税 3 段ロジック | `done` | PR #353 |
+| tag | `/tag/[tagKey]` | `Tag Page Redesign.html` | **D** + ネイティブaff + 右サイドバー追加 | `done` | PR #354 |
 
 実装ログ:
 - 2026-05-23: Phase 0 共通プリミティブ (`apps/web/src/features/redesign/`) 作成
 - 2026-05-23: Phase 1-4 主要 8 ページ実装 (ranking / home / area / category / theme / themes-index / survey / tag)
 - 2026-05-23: Phase 5 検証完了 (typecheck OK / next build OK / SSG 全維持: home ○ Static / ranking ● SSG / area ● SSG / theme ○ Static × 17 / survey ● SSG / tag ● SSG)
-- compare / search は noindex pages、blog/[slug] は既に affiliate 配置あり → deferred (将来検討)
+- 2026-05-25 (PR #349-#352): ranking UX 修正 (テーブル overlap / pill モバイル Select 化 / CSV norm 反映 / R2 事前生成化)
+- 2026-05-25 (PR #353): D-System Phase 1 プリミティブ追加 (`WidePageShell` / `RightRailWidgets` / `NextUpGrid`) + blog/[slug] α 3 カラム化 + コードブロック配色改善 + ふるさと納税 3 段ロジック + Tailwind container 1700px 拡張 (全 50+ ページ自動適用)
+- 2026-05-25 (PR #354): D-System Phase 1 後半 — area / category / themes-index / tag に右サイドバー追加 + home に NextUpGrid 追加
+- compare / search は noindex pages → 引き続き `deferred`
 
 ## 各ページの 4 案サマリ
 
