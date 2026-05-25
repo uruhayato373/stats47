@@ -139,8 +139,13 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
  * row.updatedAt (DB の updatedAt、データ更新時のみ進む) よりも実コンテンツ
  * 更新を反映できる SITEMAP_BASELINE を採用する。
  * 大幅な UI / 構造変更があったらこの定数を更新する。
+ *
+ * 2026-05-25 更新: cities pages (25,785 URL) の Google indexed 率が 0% (50 件
+ * サンプル URL Inspection 結果: 50% が 4-5月の古い「Blocked by robots.txt」
+ * キャッシュ、48% が「Unknown to Google」)。SITEMAP_BASELINE を進めて
+ * 「全 cities 変更あり」シグナルを Google に送り、再クロールを促進する。
  */
-const SITEMAP_BASELINE = new Date("2026-05-24T00:00:00.000Z");
+const SITEMAP_BASELINE = new Date("2026-05-25T00:00:00.000Z");
 
 async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
   const result = await readActiveKeysForSitemapFromR2();
