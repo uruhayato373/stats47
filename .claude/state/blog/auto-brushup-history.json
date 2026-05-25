@@ -159,6 +159,343 @@
       "expectedLift": 8,
       "impressions": 231,
       "ctr_before": 0.0173
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "truck-driver-2024-crisis",
+      "framing": "タクシー2.5倍・バス2倍・トラック1.7倍──職種間格差の構造的理由",
+      "expectedLift": 12,
+      "impressions": 67,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "local-tax-regional-gap",
+      "framing": "埼玉730万人でも地方税薄い──法人税収が東京に流れるベッドタウン構造",
+      "expectedLift": 6,
+      "impressions": 109,
+      "ctr_before": 0.0183
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "precipitation-snow-regional-gap",
+      "framing": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプ分類",
+      "expectedLift": 4,
+      "impressions": 155,
+      "ctr_before": 0.0065
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "birth-death-gap-decline",
+      "framing": "東京は婚姻率トップなのに出生率最下位──結婚→子どもが成立しない構造",
+      "expectedLift": 3,
+      "impressions": 51,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "wage-vs-living-cost",
+      "framing": "奈良賃金16位・県民所得44位──稼ぎが地域外に流れるベッドタウン構造",
+      "expectedLift": 3,
+      "impressions": 25,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "minimum-wage-gap-regional-economy",
+      "framing": "地方の最低賃金上昇率が高いのに絶対格差が拡大する逆説の構造",
+      "expectedLift": 2,
+      "impressions": 20,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "alcohol-prefecture-map",
+      "framing": "東京トップは「飲み歩き集計」の罠──居住地補正で変わる飲酒地図",
+      "expectedLift": 9,
+      "impressions": 66,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "post-office-last-window",
+      "framing": "郵便局もデジタルも届かない地域の二重インフラ不足構造",
+      "expectedLift": 6,
+      "impressions": 78,
+      "ctr_before": 0.0128
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "barber-beauty-salon-regional-gap",
+      "framing": "人口が減った地域ほど美容室が増える──分母縮小と出店ブームの逆説",
+      "expectedLift": 4,
+      "impressions": 34,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "fiscal-health-50years-trend",
+      "framing": "財政力指数が唯一1.0超えたのは東京だけ──47都道府県で自立の条件",
+      "expectedLift": 3,
+      "impressions": 25,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "water-sewage-crisis",
+      "framing": "上水道98%完備 vs 下水道徳島22%──77ポイント格差が生じた理由",
+      "expectedLift": 3,
+      "impressions": 39,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "pharmacy-count-prefecture-ranking",
+      "framing": "沖縄はかつて薬局密度の全国最高──医薬分業で追い抜かれた逆転構造",
+      "expectedLift": 2,
+      "impressions": 15,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "electricity-demand-gap",
+      "framing": "産業県の1人当たりエネルギーは住宅県の5倍──大分と埼玉を分ける工場の有無",
+      "expectedLift": 8,
+      "impressions": 58,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "unemployment-structure",
+      "framing": "求人倍率トップの福井で失業率も最低──北陸が「雇用最強県」になった理由",
+      "expectedLift": 5,
+      "impressions": 66,
+      "ctr_before": 0.0152
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "commercial-land-price-trend",
+      "framing": "商業地が広い県ほど地価が下がる──面積と価値が逆転する地方の二極化",
+      "expectedLift": 4,
+      "impressions": 27,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "communication-cost-burden",
+      "framing": "家計の交通・通信費は車社会で増える──群馬と大阪を分ける公共交通",
+      "expectedLift": 3,
+      "impressions": 21,
+      "ctr_before": 0,
+      "note": "agent reported ict-communication-cost-burden-ranking, actual slug: communication-cost-burden"
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "cpi-change-regional-pattern",
+      "framing": "同じ3%インフレでも奈良は食料高、愛媛は電気代高──インフレの型が県で異なる",
+      "expectedLift": 2,
+      "impressions": 56,
+      "ctr_before": 0.0179
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "school-nonattendance-pattern",
+      "framing": "不登校が最少の福井、最多の宮城──小中一貫して「低不登校県」になる条件",
+      "expectedLift": 2,
+      "impressions": 32,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "inflation-rate-prefecture-gap",
+      "framing": "費目別3構造（食料主導・エネルギー主導・穏やか型）で家計防衛を整理",
+      "expectedLift": 7,
+      "impressions": 82,
+      "ctr_before": 0.0122
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "konbu-consumption-prefecture-gap",
+      "framing": "産地北海道が最下位圏・北前船ルートが消費地図を規定するパラドックス",
+      "expectedLift": 5,
+      "impressions": 34,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "foreign-overnight-guests-prefecture-gap",
+      "framing": "新幹線開業でも石川どまり、空港ハブ・ブランド資源・新幹線の3要因で構造分析",
+      "expectedLift": 4,
+      "impressions": 34,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "overseas-travel-gap",
+      "framing": "2001年データの限界を明示しつつ空港アクセスが外向き度を決める構造を提示",
+      "expectedLift": 3,
+      "impressions": 14,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "brazilian-resident-population-prefecture-gap",
+      "framing": "1990年入管法改正×自動車産業立地×チェーンマイグレーションの3層構造",
+      "expectedLift": 2,
+      "impressions": 18,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "sugar-consumption-prefecture-gap",
+      "framing": "三重突出の理由と4クラスター構造、外食化が家計調査を押し下げる仕組み",
+      "expectedLift": 2,
+      "impressions": 19,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "household-spending-before-after-inflation",
+      "framing": "アイス+32%、ぎょうざだけ-8%──品目単位の取捨選択という構造的発見",
+      "expectedLift": 7,
+      "impressions": 37,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "sewerage-water-supply-gap",
+      "framing": "下水道22%でも水洗77%──浄化槽という隠れインフラの逆説",
+      "expectedLift": 4,
+      "impressions": 138,
+      "ctr_before": 0.0145
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "pollution-complaints-regional-map",
+      "framing": "汚染施設最多の北海道が公害苦情最少──距離と密度の法則",
+      "expectedLift": 3,
+      "impressions": 62,
+      "ctr_before": 0.0161
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "population-migration-tokyo-concentration",
+      "framing": "転入超過の首都圏3県が昼夜間人口最下位──通勤帝国の二重構造",
+      "expectedLift": 3,
+      "impressions": 28,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "expenditure-structure-comparison",
+      "framing": "福島が土木費断トツ──復興財政が10年後も歳出構造を縛る",
+      "expectedLift": 2,
+      "impressions": 16,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "unemployment-tertiary-industry-link",
+      "framing": "サービス業最多の東京が失業率中位──業種の質という盲点",
+      "expectedLift": 2,
+      "impressions": 13,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "marriage-divorce-okinawa",
+      "framing": "「東京晩婚安定型 vs 沖縄早婚流動型」二系統構造",
+      "expectedLift": 7,
+      "impressions": 50,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "housing-cost-livability-trend",
+      "framing": "「家賃×住宅面積の負の相関」地方住居コスト優位",
+      "expectedLift": 4,
+      "impressions": 71,
+      "ctr_before": 0.0141
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "recycling-rate-gap",
+      "framing": "「高リサイクル鳥取でも処分場46位」パラドックス",
+      "expectedLift": 3,
+      "impressions": 60,
+      "ctr_before": 0.0167
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "savings-balance-gap",
+      "framing": "富山・福井・奈良の共働き×持ち家×三世代同居構造",
+      "expectedLift": 3,
+      "impressions": 26,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "fertility-fiscal-nexus",
+      "framing": "財政力と出生率の逆相関──東京0.99・沖縄1.60の逆説",
+      "expectedLift": 2,
+      "impressions": 25,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "ict-digital-divide-composite-analysis",
+      "framing": "「交通費型 vs 通信費型」デジタル格差の構造的二分",
+      "expectedLift": 1,
+      "impressions": 12,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "minimum-wage-1000yen-breakthrough",
+      "framing": "人手不足の地方ほど最低賃金が低い逆説──需給では説明できない構造",
+      "expectedLift": 7,
+      "impressions": 118,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "manufacturing-productivity",
+      "framing": "出荷額大でも付加価値が残らない──素材型 vs 加工組立型の2層構造",
+      "expectedLift": 4,
+      "impressions": 66,
+      "ctr_before": 0.0152
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "aging-rate-akita-vs-okinawa",
+      "framing": "高齢化率が低くても子どもが少ない東京の隠れた少子化構造",
+      "expectedLift": 3,
+      "impressions": 39,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "savings-rate-gap",
+      "framing": "貯蓄率トップの埼玉が預金残高では中位──フローとストックは無相関",
+      "expectedLift": 3,
+      "impressions": 20,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "household-income-tokyo-okinawa",
+      "framing": "大阪下位・奈良トップ圏──経済都市と世帯収入ランキングが逆転する理由",
+      "expectedLift": 2,
+      "impressions": 25,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "prefectural-height-male-female-gap",
+      "framing": "身長差3cmが半世紀変わらない──東北上位・西日本下位の持続構造",
+      "expectedLift": 1,
+      "impressions": 10,
+      "ctr_before": 0
     }
   ]
 }
