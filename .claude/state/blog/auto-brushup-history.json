@@ -1,1 +1,164 @@
-{"entries":[]}
+{
+  "entries": [
+    {
+      "date": "2026-05-25",
+      "slug": "child-height-regional-gap",
+      "framing": "牛乳3位の高知が身長最下位 — 定説崩壊と複合要因",
+      "expectedLift": 129,
+      "impressions": 2005,
+      "ctr_before": 0.007
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "temperature-extremes-map",
+      "framing": "猛暑日1位は京都・最少は沖縄 — 盆地気候の逆転構造",
+      "expectedLift": 105,
+      "impressions": 2415,
+      "ctr_before": 0.0149
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "manufacturing-aichi-dominance",
+      "framing": "従業者半減なのに出荷額過去最高 — 省力化革命の地域差",
+      "expectedLift": 71,
+      "impressions": 858,
+      "ctr_before": 0.0058
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "habitable-area-land-use",
+      "framing": "可住地少ない高知が土地効率上位 — 集約型の逆説",
+      "expectedLift": 69,
+      "impressions": 754,
+      "ctr_before": 0.0066
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "price-index-high-low-prefecture",
+      "framing": "物価格差の真因は家賃 — 住居費45pt差が主役",
+      "expectedLift": 48,
+      "impressions": 1527,
+      "ctr_before": 0.0177
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "overnight-guests-inbound-recovery",
+      "framing": "外国人宿泊61%が3都市集中、地方分散は進まないのか",
+      "expectedLift": 41,
+      "impressions": 375,
+      "ctr_before": 0.0027
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "park-green-space-gap",
+      "framing": "自然豊かな滋賀に国立公園ゼロ、東京が3指標すべて上位の逆説",
+      "expectedLift": 29,
+      "impressions": 334,
+      "ctr_before": 0.012
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "consumer-price-regional-gap",
+      "framing": "移住で生活コストは下がるか、住居費が格差の9割を説明",
+      "expectedLift": 23,
+      "impressions": 216,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "fishery-species-prefecture-specialty",
+      "framing": "特産魚種は地理(親潮×黒潮)が決める、60年で86%消えた魚種",
+      "expectedLift": 20,
+      "impressions": 273,
+      "ctr_before": 0.011
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "manufacturing-shipment-prefecture-ranking",
+      "framing": "ものづくり3産業型(自動車・コンビナート・電子部品)で変わる県の顔",
+      "expectedLift": 19,
+      "impressions": 159,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "sunshine-pacific-vs-nihonkai",
+      "framing": "太平洋側と日本海側でなぜこれほど晴天日が違うのか",
+      "expectedLift": 18,
+      "impressions": 146,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "food-trio-prefecture-map",
+      "framing": "宮城と宮崎は食の対極──豆腐・焼酎・昆布で見える南北断層",
+      "expectedLift": 15,
+      "impressions": 340,
+      "ctr_before": 0.0176
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "population-density-urbanization",
+      "framing": "埼玉が昼夜人口比率で全国最下位の理由──高密度なのに昼間だれもいない",
+      "expectedLift": 13,
+      "impressions": 285,
+      "ctr_before": 0.014
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "highschool-starting-salary-gap",
+      "framing": "最低賃金トップの東京が高卒初任給で三重に負ける理由",
+      "expectedLift": 12,
+      "impressions": 390,
+      "ctr_before": 0.0179
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "marriage-unmarried-crisis",
+      "framing": "東京は婚姻率トップなのに出生率は全国最低──結婚と出産が切り離された都市の構造",
+      "expectedLift": 12,
+      "impressions": 275,
+      "ctr_before": 0.0145
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "agriculture-hokkaido-dominance",
+      "framing": "耕地が広い新潟より狭い鹿児島が農業産出額で上位──水稲単作と畜産の稼ぐ力の差",
+      "expectedLift": 11,
+      "impressions": 103,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "commercial-sales-productivity-gap",
+      "framing": "飲食料品店が高知に最も多く神奈川に最も少ない──商業効率と生活インフラの逆転現象",
+      "expectedLift": 10,
+      "impressions": 153,
+      "ctr_before": 0.0131
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "fishery-catch-aquaculture-shift",
+      "framing": "愛媛のマダイが漁獲量10倍の北海道と産出額で並ぶ理由──養殖特化が変える水産業の稼ぎ方",
+      "expectedLift": 10,
+      "impressions": 133,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "fertility-rate-prefecture-gap",
+      "framing": "婚姻年齢が1歳違うと出生率は0.1ポイント下がる──九州と首都圏で差が生まれる構造的理由",
+      "expectedLift": 9,
+      "impressions": 148,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "bonito-catch-prefecture",
+      "framing": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",
+      "expectedLift": 8,
+      "impressions": 231,
+      "ctr_before": 0.0173
+    }
+  ]
+}

@@ -453,3 +453,115 @@ N02 鉄道路線を路線図レイヤーとして追加。新幹線（`lineName`
 
 - `packages/ranking/src/utils/is-base-metric.ts` DENOMINATOR_KEYS
 - `packages/ranking/src/scripts/auto-attach-normalization.ts` (既存の自動付与スクリプト)
+
+---
+
+## [T2-REDESIGN-PHASE2] D-System Phase 2 — KPI Tile クリック化 + 本文中 NativeAffiliateRow
+
+- **tier**: 2
+- **status**: pending
+- **created**: 2026-05-25
+- **related**: PR #353 / #354 で Phase 1 完了済 (本前提)
+- **master_plan**: `docs/02_実装計画/d-redesign-master-plan.md`
+- **真実源**: `.claude/design-system/redesign/INDEX.md`
+
+### 背景
+
+D-System Phase 1 (PR #349-#354) で以下が完了:
+
+- ✅ 共通プリミティブ作成 (`WidePageShell` / `RightRailWidgets` / `NextUpGrid`)
+- ✅ Tailwind container 1700px 拡張 (全 50+ ページ自動適用)
+- ✅ 5 ページに右サイドバー追加 (area / category / themes-index / tag + blog 3 カラム)
+- ✅ home に NextUpGrid 追加
+- ✅ ブログ機能改善 (α 3 カラム / コードブロック配色 / ふるさと納税 3 段ロジック / CSV ダウンロード R2 事前生成)
+
+### Phase 2 で残っている改良
+
+#### A. KPI Tile クリック可能化
+
+各ページの暗色 hero 内 KpiTile を「クリック → 関連ランキング遷移」可能にする。
+
+- 対象: `apps/web/src/features/redesign/components/KpiTile.tsx`
+- 実装: `href?: string` prop を追加し、指定時は `<Link>` 内包
+- 効果: 内部リンク密度 ↑ → GSC indexation 改善 + 回遊性 ↑
+- 工数: 30 分 (primitive 変更 + 数ヶ所の call site 更新)
+
+#### B. ブログ本文中 NativeAffiliateRow 周期挿入
+
+公式 D 案 (`blog-option-d.jsx`) で実装されている「本文中ネイティブ広告 3 種」をブログ記事の H2 セクション毎に挿入。
+
+- 候補:
+  - ランキング CTA (記事に登場した rankingKey を抽出 → 関連 ranking へのリンクカード)
+  - 書籍 3 冊横並びストリップ
+  - AdSense in-feed
+- 実装: `apps/web/src/features/blog/components/md-content.tsx` の `injectAdSlots()` 拡張、または `ArticleRenderer` 内で `h2` 検出して節間に挿入
+- 工数: 2-3 時間
+
+#### C. 関連書籍 `prose-pre` の CSS 微調整
+
+PR #353 で `prose-pre:bg-slate-900` を導入したが、`dark:prose-invert` で dark mode に行ったときの再調整が未確認。
+
+### 対応の判断基準
+
+- A: 単独で完結。SEO 内部リンク密度の改善目的で先行実装が良い
+- B: 工数中。記事の読み込み深度向上に効くが、広告密度が AdSense ポリシーに当たらないか検証必要
+- C: dark mode 利用者が少なければ後回し可
+
+---
+
+## [T2-REDESIGN-PHASE3] D-System Phase 3 — A8.net 統合 + compare/search 実装
+
+- **tier**: 2
+- **status**: pending
+- **created**: 2026-05-25
+
+### 背景
+
+Phase 1/2 完了後の最終フェーズ。外部サービスの契約や noindex ページの実装。
+
+### 残作業
+
+#### A. A8.net ふるさと納税アフィリエイト直契約
+
+現状はある楽天 affiliate ID 経由。A8.net で「ふるさとチョイス」「さとふる」等を直契約する方が利益率高。
+
+- マスタープラン § 9 参照
+- 必要作業:
+  - A8.net アカウント開設・該当プログラム加入申請
+  - `apps/web/src/features/ads/components/FurusatoNozeiCard.tsx` を A8 直リンクに切替
+  - 環境変数 (NEXT_PUBLIC_A8_FURUSATO_PROGRAM_ID 等) を Cloudflare Pages に設定
+- 工数: 1-2 時間 (契約後の作業)
+
+#### B. compare/search ページを D 案で実装
+
+INDEX.md で `deferred` 扱いだが、サイト内利用ユーザー向け体験向上のため将来実装。
+noindex のため SEO 流入は無いが、ブックマーク・直接アクセス・サイト内検索利用者向け。
+
+- `/compare/[categoryKey]`: D 案 = Story Editorial + ふるさと納税 (2 県分)
+- `/search`: D 案 = Discovery + ネイティブ収益
+- プロトタイプ: `.claude/design-system/redesign/project/compare-option-d.jsx` / `search-option-d.jsx` を参照
+- 工数: 各 2-3 時間
+
+#### C. CSV ダウンロード R2 事前生成の運用反映
+
+PR #352 で実装した「事前生成ファイル」を本番に反映:
+
+```bash
+bash .claude/skills/db/sync-snapshots/run.sh --only ranking-download
+```
+
+初回生成は ~2,151 metrics × 最大 8 ファイル ≈ 17K files で 15-30 分かかる。
+その後通常の `/sync-snapshots` フルランで差分更新される。
+
+#### D. 環境変数の本番設定
+
+Cloudflare Pages env vars に以下を追加 (現状は未設定で内部 fallback 動作):
+
+- `NEXT_PUBLIC_TECH_SCHOOL_AFFILIATE_URL`: Claude Code 副業講座 ASP URL
+- `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID`: 楽天アフィリエイト ID
+- `NEXT_PUBLIC_RAKUTEN_APP_ID`: 楽天 API アプリ ID (ふるさと納税商品取得用)
+
+### 関連
+
+- マスタープラン: `docs/02_実装計画/d-redesign-master-plan.md`
+- INDEX: `.claude/design-system/redesign/INDEX.md`
