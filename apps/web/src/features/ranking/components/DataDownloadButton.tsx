@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
-
 import { Button } from "@stats47/components/atoms/ui/button";
-import { Card, CardContent } from "@stats47/components/atoms/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@stats47/components/atoms/ui/dropdown-menu";
 import {
@@ -16,16 +15,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@stats47/components/atoms/ui/tooltip";
-import { isOk } from "@stats47/types";
-import { Download, Loader2 } from "lucide-react";
+import { Download } from "lucide-react";
 
 import type { AreaType } from "@/features/area";
 
 import { trackCsvDownload } from "@/lib/analytics/events";
-
-import { fetchAllYearsRankingValuesAction } from "../actions";
-
-import type { RankingValue } from "@stats47/ranking";
 
 interface DataDownloadButtonProps {
   rankingKey: string;
@@ -38,123 +32,39 @@ interface DataDownloadButtonProps {
   };
   /**
    * 現在表示中の正規化タイプ (per_population / per_area / per_household)。
-   * 指定された場合、その基準で計算済みの値を出力する (例: 「人口10万人あたり」の全年度値)。
-   * 未指定なら総数を出力。
+   * 指定された場合、その基準で計算済みの値をダウンロードする。
+   * 未指定なら総数 (basis=original)。
    */
   normalizationType?: string;
+  /**
+   * 「全基準まとめて」オプションを Dropdown に追加するか。
+   * true の場合、対象 metric が normalizationOptions を 1 つ以上持つことが前提。
+   */
+  hasAllBases?: boolean;
 }
 
-function sanitizeFileName(name: string): string {
-  return name.replace(/[/\\:*?"<>|]/g, "_");
-}
-
-function buildFileName(
-  displayInfo: DataDownloadButtonProps["displayInfo"],
-  ext: string,
+function buildHref(
+  rankingKey: string,
+  basis: string,
+  format: "csv" | "json",
+  encoding: "utf8" | "sjis" = "utf8",
 ): string {
-  const parts = [
-    displayInfo.title,
-    displayInfo.subtitle,
-    displayInfo.demographicAttr,
-    displayInfo.normalizationBasis,
-  ].filter(Boolean);
-  return sanitizeFileName(parts.join("_")) + `.${ext}`;
-}
-
-function generateCsvContent(rankingValues: RankingValue[]): string {
-  const BOM = "\uFEFF";
-
-  const yearsMap = new Map<string, string>();
-  for (const v of rankingValues) {
-    yearsMap.set(v.yearCode, v.yearName);
-  }
-  const yearCodes = [...yearsMap.keys()].sort((a, b) => a.localeCompare(b));
-
-  const areaMap = new Map<
-    string,
-    { areaCode: string; areaName: string; values: Map<string, number> }
-  >();
-  for (const v of rankingValues) {
-    let entry = areaMap.get(v.areaCode);
-    if (!entry) {
-      entry = {
-        areaCode: v.areaCode,
-        areaName: v.areaName,
-        values: new Map(),
-      };
-      areaMap.set(v.areaCode, entry);
-    }
-    if (v.value !== null) entry.values.set(v.yearCode, v.value);
-  }
-
-  const escapeCsv = (val: string | number): string => {
-    const s = String(val);
-    if (s.includes(",") || s.includes('"') || s.includes("\n")) {
-      return `"${s.replace(/"/g, '""')}"`;
-    }
-    return s;
-  };
-
-  const header = [
-    "都道府県コード",
-    "都道府県名",
-    ...yearCodes.map((yc) => yearsMap.get(yc)!),
-  ].map(escapeCsv).join(",");
-
-  const areas = [...areaMap.values()].sort((a, b) =>
-    a.areaCode.localeCompare(b.areaCode),
-  );
-  const rows = areas.map((area) => {
-    const yearValues = yearCodes.map((yc) => area.values.get(yc) ?? "");
-    return [area.areaCode, area.areaName, ...yearValues].map(escapeCsv).join(",");
-  });
-
-  return BOM + [header, ...rows].join("\n");
-}
-
-function triggerDownload(blob: Blob, fileName: string) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = fileName;
-  a.click();
-  URL.revokeObjectURL(url);
+  const sp = new URLSearchParams({ format, basis });
+  if (format === "csv" && encoding === "sjis") sp.set("encoding", "sjis");
+  return `/api/ranking/${encodeURIComponent(rankingKey)}/download?${sp.toString()}`;
 }
 
 /**
  * アイコンのみのダウンロードボタン（地図・テーブルの右上に配置）
+ *
+ * R2 に事前生成済みの CSV/JSON を Route Handler 経由で stream するため、
+ * クライアントでの CSV 組み立ては不要。Cloudflare CDN cache 対応。
  */
 export function DataDownloadIconButton({
   rankingKey,
-  areaType,
-  displayInfo,
   normalizationType,
 }: DataDownloadButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDownload = async (format: "csv" | "json") => {
-    setIsLoading(true);
-    try {
-      const result = await fetchAllYearsRankingValuesAction(
-        rankingKey,
-        areaType,
-        undefined,
-        normalizationType,
-      );
-      if (!isOk(result) || result.data.length === 0) return;
-      trackCsvDownload({ rankingKey, yearCode: "all" });
-      const fileName = buildFileName(displayInfo, format);
-      if (format === "csv") {
-        const csv = generateCsvContent(result.data);
-        triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
-      } else {
-        const json = JSON.stringify(result.data, null, 2);
-        triggerDownload(new Blob([json], { type: "application/json;charset=utf-8" }), fileName);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const basis = normalizationType ?? "original";
 
   return (
     <TooltipProvider>
@@ -165,24 +75,29 @@ export function DataDownloadIconButton({
               <Button
                 variant="ghost"
                 size="icon"
-                disabled={isLoading}
                 className="h-8 w-8 text-muted-foreground hover:text-foreground"
               >
-                {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Download className="h-4 w-4" />
-                )}
+                <Download className="h-4 w-4" />
                 <span className="sr-only">データダウンロード</span>
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => handleDownload("csv")}>
-              CSV 形式
+            <DropdownMenuItem asChild>
+              <a
+                href={buildHref(rankingKey, basis, "csv", "utf8")}
+                onClick={() => trackCsvDownload({ rankingKey, yearCode: "all" })}
+              >
+                CSV 形式
+              </a>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleDownload("json")}>
-              JSON 形式
+            <DropdownMenuItem asChild>
+              <a
+                href={buildHref(rankingKey, basis, "json")}
+                onClick={() => trackCsvDownload({ rankingKey, yearCode: "all" })}
+              >
+                JSON 形式
+              </a>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -193,243 +108,70 @@ export function DataDownloadIconButton({
 }
 
 /**
- * ラベル付き CSV ダウンロード primary ボタン（ヒーローカード・訴求カード用）
- *
- * 全年度の CSV を生成してダウンロードする。JSON/Excel は提供しない。
- */
-export function DataDownloadPrimaryButton({
-  rankingKey,
-  areaType,
-  displayInfo,
-  normalizationType,
-  label = "CSV をダウンロード",
-  variant = "default",
-}: DataDownloadButtonProps & {
-  /** ボタンラベル */
-  label?: string;
-  /** ボタンの見た目（default = primary） */
-  variant?: "default" | "outline";
-}) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDownload = async () => {
-    setIsLoading(true);
-    try {
-      const result = await fetchAllYearsRankingValuesAction(
-        rankingKey,
-        areaType,
-        undefined,
-        normalizationType,
-      );
-      if (!isOk(result) || result.data.length === 0) return;
-      trackCsvDownload({ rankingKey, yearCode: "all" });
-      const fileName = buildFileName(displayInfo, "csv");
-      const csv = generateCsvContent(result.data);
-      triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <Button
-      variant={variant}
-      size="sm"
-      disabled={isLoading}
-      onClick={handleDownload}
-      className="gap-1.5"
-    >
-      {isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      ) : (
-        <Download className="h-4 w-4" />
-      )}
-      {label}
-    </Button>
-  );
-}
-
-/**
  * ラベル付き CSV/JSON ダウンロード menu ボタン（DataUsageCard 用）
  *
- * 「データダウンロード」と表示し、Dropdown で CSV / JSON を選択させる。
- * normalizationType が指定されていればその基準で計算済みの値を出力。
+ * Dropdown で CSV (UTF-8) / CSV (Shift_JIS) / JSON / 全基準まとめて の中から
+ * 選択させる。R2 事前生成ファイルを Route Handler 経由で stream。
  */
 export function DataDownloadMenuButton({
   rankingKey,
-  areaType,
-  displayInfo,
   normalizationType,
+  hasAllBases,
   label = "ダウンロード",
   variant = "default",
 }: DataDownloadButtonProps & {
   label?: string;
   variant?: "default" | "outline";
 }) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDownload = async (format: "csv" | "json") => {
-    setIsLoading(true);
-    try {
-      const result = await fetchAllYearsRankingValuesAction(
-        rankingKey,
-        areaType,
-        undefined,
-        normalizationType,
-      );
-      if (!isOk(result) || result.data.length === 0) return;
-      trackCsvDownload({ rankingKey, yearCode: "all" });
-      const fileName = buildFileName(displayInfo, format);
-      if (format === "csv") {
-        const csv = generateCsvContent(result.data);
-        triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
-      } else {
-        const json = JSON.stringify(result.data, null, 2);
-        triggerDownload(
-          new Blob([json], { type: "application/json;charset=utf-8" }),
-          fileName,
-        );
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const basis = normalizationType ?? "original";
+  const track = () => trackCsvDownload({ rankingKey, yearCode: "all" });
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={variant} size="sm" disabled={isLoading} className="gap-1.5">
-          {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Download className="h-4 w-4" />
-          )}
+        <Button variant={variant} size="sm" className="gap-1.5">
+          <Download className="h-4 w-4" />
           {label}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => handleDownload("csv")}>
-          CSV 形式 (Excel 互換)
+      <DropdownMenuContent align="end" className="min-w-[220px]">
+        <DropdownMenuLabel className="text-xs text-muted-foreground">
+          現在の基準でダウンロード
+        </DropdownMenuLabel>
+        <DropdownMenuItem asChild>
+          <a href={buildHref(rankingKey, basis, "csv", "utf8")} onClick={track}>
+            CSV (Excel 互換 / UTF-8)
+          </a>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleDownload("json")}>
-          JSON 形式 (開発者向け)
+        <DropdownMenuItem asChild>
+          <a href={buildHref(rankingKey, basis, "csv", "sjis")} onClick={track}>
+            CSV (古い Excel / Shift_JIS)
+          </a>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <a href={buildHref(rankingKey, basis, "json")} onClick={track}>
+            JSON (開発者向け)
+          </a>
+        </DropdownMenuItem>
+        {hasAllBases && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel className="text-xs text-muted-foreground">
+              全基準を 1 ファイルに
+            </DropdownMenuLabel>
+            <DropdownMenuItem asChild>
+              <a href={buildHref(rankingKey, "all-bases", "csv", "utf8")} onClick={track}>
+                全基準まとめて CSV (UTF-8)
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={buildHref(rankingKey, "all-bases", "csv", "sjis")} onClick={track}>
+                全基準まとめて CSV (Shift_JIS)
+              </a>
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-}
-
-interface DataDownloadFooterCardProps extends DataDownloadButtonProps {
-  /** プレビュー用のランキングデータ（上位表示用） */
-  rankingValues: RankingValue[];
-}
-
-/**
- * 末尾配置用のダウンロードカード（ミニプレビュー付き）
- */
-export function DataDownloadFooterCard({
-  rankingKey,
-  areaType,
-  displayInfo,
-  normalizationType,
-  rankingValues,
-}: DataDownloadFooterCardProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDownload = async (format: "csv" | "json") => {
-    setIsLoading(true);
-    try {
-      const result = await fetchAllYearsRankingValuesAction(
-        rankingKey,
-        areaType,
-        undefined,
-        normalizationType,
-      );
-      if (!isOk(result) || result.data.length === 0) return;
-      trackCsvDownload({ rankingKey, yearCode: "all" });
-      const fileName = buildFileName(displayInfo, format);
-      if (format === "csv") {
-        const csv = generateCsvContent(result.data);
-        triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
-      } else {
-        const json = JSON.stringify(result.data, null, 2);
-        triggerDownload(new Blob([json], { type: "application/json;charset=utf-8" }), fileName);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // 上位5件をプレビュー表示
-  const sorted = [...rankingValues]
-    .filter((v) => v.areaCode !== "00000")
-    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-  const preview = sorted.slice(0, 5);
-  const remaining = sorted.length - 5;
-  const unit = displayInfo.normalizationBasis
-    ? ""
-    : rankingValues[0]?.unit || "";
-
-  return (
-    <Card>
-      <CardContent className="p-0">
-        {/* ミニプレビューテーブル */}
-        <div className="px-4 pt-4 pb-2">
-          <div className="rounded-md border border-border overflow-hidden">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-muted/50">
-                  <th className="text-left py-1.5 px-3 font-medium text-muted-foreground w-10">#</th>
-                  <th className="text-left py-1.5 px-3 font-medium text-muted-foreground">都道府県</th>
-                  <th className="text-right py-1.5 px-3 font-medium text-muted-foreground">値</th>
-                </tr>
-              </thead>
-              <tbody>
-                {preview.map((v, i) => (
-                  <tr key={v.areaCode} className="border-t border-border/50">
-                    <td className="py-1.5 px-3 text-muted-foreground">{i + 1}</td>
-                    <td className="py-1.5 px-3">{v.areaName}</td>
-                    <td className="py-1.5 px-3 text-right font-mono tabular-nums">
-                      {(v.value ?? 0).toLocaleString("ja-JP")}
-                      {unit && <span className="text-xs text-muted-foreground ml-1">{unit}</span>}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {remaining > 0 && (
-              <div className="text-center py-1.5 text-xs text-muted-foreground border-t border-border/50 bg-muted/30">
-                ⋮ 残り{remaining}都道府県
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* ダウンロードボタン */}
-        <div className="flex items-center justify-between px-4 py-3 border-t border-border/50">
-          <span className="text-sm text-muted-foreground">全データをダウンロード</span>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" disabled={isLoading} className="gap-2">
-                {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Download className="h-4 w-4" />
-                )}
-                ダウンロード
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleDownload("csv")}>
-                CSV 形式
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleDownload("json")}>
-                JSON 形式
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </CardContent>
-    </Card>
   );
 }

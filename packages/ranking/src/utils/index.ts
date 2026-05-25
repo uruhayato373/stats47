@@ -1,4 +1,5 @@
 export { computeAxisDomain, type AxisDomain } from "@stats47/visualization/shared";
+export * from "./build-download-csv";
 export * from "./compute-bottom-ranking";
 export * from "./compute-calculated-values";
 export * from "./compute-ranking-stats";

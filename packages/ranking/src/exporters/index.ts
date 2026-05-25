@@ -1,4 +1,8 @@
 export {
+  type ExportRankingDownloadSnapshotsResult,
+  exportRankingDownloadSnapshots,
+} from "./ranking-download-snapshots";
+export {
   type ExportRankingItemsSnapshotResult,
   exportRankingItemsSnapshot,
 } from "./ranking-items-snapshot";
