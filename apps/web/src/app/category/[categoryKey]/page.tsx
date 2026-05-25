@@ -19,6 +19,7 @@ import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
+import { TechSchoolPromoCard } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -256,9 +257,9 @@ export default async function CategoryPage({ params }: PageProps) {
         </div>
       </HeroShell>
 
-      <div className="flex gap-4 items-start">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-5 lg:items-start">
         {/* メインコンテンツ */}
-        <main className="flex-1 min-w-0">
+        <main className="min-w-0">
           {/* 注目ランキング */}
           {featuredItems.length > 0 && (
             <section className="mb-8">
@@ -310,8 +311,11 @@ export default async function CategoryPage({ params }: PageProps) {
           )}
         </main>
 
-        {/* 右サイドバー（lg以上） */}
-        <aside className="hidden lg:block w-64 shrink-0 sticky top-20">
+        {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
+        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
+          {/* Claude Code 副業講座 (収益化 / 上部 above-fold) */}
+          <TechSchoolPromoCard />
+
           <div className="flex flex-col gap-4">
             {/* 新着記事 */}
             {latestArticles.length > 0 && (
