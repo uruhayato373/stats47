@@ -74,7 +74,26 @@ description: トレンド snapshot から記事下書きを自動生成 (discove
 - 出力: `data/*.svg` 生成 + `article.md` 内のプレースホルダーを SVG 画像参照に置換
 - タイルマップ系チャートは `packages/visualization/src/d3/constants/tile-grid-layout.ts` の `TILE_GRID_LAYOUT` を必ず import 経由で参照（重複定義禁止）
 
-### Step 6: 品質チェック（任意）
+### Step 6: Factual cross-check ★必須 (2026-05-25 追加)
+
+雛形生成後、本文の rank/数値 claim と data の整合性を必ず検証する。AI 生成 article で 13% が rank 不整合 / 数値捏造で FAIL する実測値があり、形式 check では検出不能のため。
+
+```bash
+node .claude/scripts/lib/article-factual-check.mjs \
+  "docs/21_ブログ記事原稿/<slug>/article.md" \
+  "docs/21_ブログ記事原稿/<slug>/data"
+```
+
+- **exit 0**: factual error なし → 次の step へ
+- **exit 1**: `RANK_MISMATCH` / `INVERSE_RANK_MISMATCH` blocker あり
+  - 出力された blocker を確認、data の正しい値で本文を Edit して再実行
+  - 修正できない場合 (framing 自体が data と矛盾) は draft を破棄して trend snapshot に戻る
+
+**rule**: blocker がある状態で次の step に進まない。後段の `/publish-article` でも cross-check が走るが、draft 段階で潰すのが効率的。
+
+参照: `.claude/scripts/lib/article-factual-check.mjs` / `.claude/skills/blog/SHARED-failure-cases.md`
+
+### Step 7: 品質チェック（任意）
 
 `/proofread-article <slug>` を実行する。
 

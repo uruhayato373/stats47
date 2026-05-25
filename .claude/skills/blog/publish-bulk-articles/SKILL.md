@@ -40,8 +40,17 @@ $ARGUMENTS — <slug1> <slug2> ... [--no-sync] [--no-verify]
    - frontmatter が parse 可能 (`---` で囲まれた YAML)
    - 必須キー (`title`, `seoTitle`, `description`, `category`, `tags`) が揃う
    - D1 articles テーブルに同 slug が **未登録** (重複時はエラー停止)
-2. 全 slug の検証結果をテーブル形式で表示
-3. エラーが 1 件でもあれば中断 (`--force` フラグは設けない、誤公開防止)
+2. **Factual cross-check (必須、2026-05-25 追加)**: 各 slug について以下を実行:
+   ```bash
+   node .claude/scripts/lib/article-factual-check.mjs \
+     ".local/r2/app/blog/<slug>/article.md" \
+     ".local/r2/app/blog/<slug>/data"
+   ```
+   - exit 1 (RANK_MISMATCH / INVERSE_RANK_MISMATCH) が出た slug は **publish 対象から外す**
+   - 全 slug の cross-check 結果をテーブル形式で表示 (pass / fail / blockers)
+   - 該当 slug は呼び出し元 (人間 or `article-writer` agent) に「data 再確認 → 修正 → 再 publish」を促す
+3. 全 slug の検証結果をテーブル形式で表示
+4. エラーが 1 件でもあれば中断 (`--force` フラグは設けない、誤公開防止)
 
 ogp.json が無い slug がある場合、`article-writer` agent の Phase 5.5 が抜けている可能性。article.md の frontmatter から title/subtitle を抜いて自動生成も可能だが、本スキルは **入力不備として停止** する方針 (上流の責務を曖昧にしない)。
 

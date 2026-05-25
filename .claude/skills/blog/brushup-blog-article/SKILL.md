@@ -8,6 +8,20 @@ argument-hint: "<slug> [--focus エキスパート視点追加|最新データ�
 
 `nlm cross query`（白書ノートブック）と D1 統計データを使い、ブログ記事を **1-2 セクション単位**で部分補強する。全文書き直しは禁止。
 
+## 絶対遵守 (2026-05-25 追加)
+
+**rule**: 補強で追加する数値 / rank はすべて data ファイルから copy-paste。memory や類推で書かない。
+
+補強完了後、必ず factual cross-check を通す:
+
+```bash
+node .claude/scripts/lib/article-factual-check.mjs \
+  ".local/r2/app/blog/<slug>/article.md" \
+  ".local/r2/app/blog/<slug>/data"
+```
+
+exit 1 なら修正 → 再 check して pass するまで繰り返す。詳細: `.claude/skills/blog/SHARED-failure-cases.md`
+
 ## 引数
 
 ```

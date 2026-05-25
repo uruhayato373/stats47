@@ -63,15 +63,51 @@ TASK:
 - related_metrics (任意): 比較で使う他 metric key (男女ペアなど)
 ```
 
+## 絶対遵守 (2026-05-25 追加)
+
+### Data → 書く、の順序を厳守
+
+**rule**: 本文・SVG に書く全ての数値 / rank は **data ファイルを Read した値のみ** 使う。memory から類推して書かない。
+
+**禁止される失敗パターン** (2026-05-25 検証で発覚した実例):
+- 「東京 発電量 42M MWh」と書いたが data は 5.7M MWh (7倍誤差) — memory による fabrication
+- 「沖縄 財政力指数 41位」と書いたが data は 35位 — rank の漂流
+- 「奈良 消費支出 35位」と書いたが data は 13位 — 推測で書いた
+- SVG chart で rank 4-5 の県名・値を fabricate (data に存在しない数字)
+
+**正しい手順**:
+1. **書く前に必ず Read** で data JSON を確認
+2. 本文に書く数値 / rank は data から **copy-paste**、計算が必要な場合は計算過程を明示
+3. SVG 内の `<title>` `<text>` の数値も同じく data からのみ
+4. derived ranking (1人あたり 等) を書く場合は frontmatter / 本文に明示
+
+### Factual cross-check を必ず通す
+
+article.md 書き出し後、以下を実行:
+
+```bash
+node .claude/scripts/lib/article-factual-check.mjs \
+  "docs/21_ブログ記事原稿/<slug>/article.md" \
+  "docs/21_ブログ記事原稿/<slug>/data"
+```
+
+- exit 1 (RANK_MISMATCH / INVERSE_RANK_MISMATCH) なら必ず data を再 Read して修正、pass するまで繰り返す
+- pass せずに呼び元に返さない (orchestrator が detect 不能)
+
+参照: `.claude/scripts/lib/article-factual-check.mjs` / `.claude/skills/blog/SHARED-failure-cases.md`
+
 ## 手順
 
-### Phase 1: データ取得
+### Phase 1: データ取得 ★まず必ずやる
 
-1. `.local/r2/app/ranking/<metric_key>/values.json` を読む
+**順序が重要**: タイトルや framing を考える前に、必ず以下を完了する。
+
+1. `.local/r2/app/ranking/<metric_key>/values.json` を Read
 2. `partitions[partitions.length - 1]` (最新年) を使う
 3. TOP 10 と BOTTOM 5、最大値/最小値、倍率を計算
 4. metrics テーブルから title・unit・category_key・subtitle を取得 (`sqlite3` で D1 直読)
 5. `related_metrics` 指定があれば同様に取得
+6. **取得した数値の要約** (都道府県名 → rank, value のペア) をメモして以降の Phase で参照する
 
 ### Phase 2: タイトル設計
 
