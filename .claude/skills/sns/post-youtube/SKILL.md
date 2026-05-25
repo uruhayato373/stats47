@@ -8,13 +8,18 @@ YouTube Shorts 投稿用コンテンツ（タイトル・説明）を生成し�
 
 ## 事前チェック（必須）
 
-実行前に投稿ガードを通す。停止期間中 or 週 3 本上限到達時は exit 1 で即停止する:
+実行前に 2 つの投稿ガードを通す。停止期間中 or 週 3 本上限到達 or タイトル重複検出時は exit 1 で即停止する:
 
 ```bash
+# ガード 1: 停止期間 / 週次予算
 node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
+
+# ガード 2: タイトル重複（直近 60 日、2026-03 duplicate-content 起因シャドウバン再発防止）
+# 生成したタイトル候補で実行する
+node .claude/scripts/lib/check-youtube-duplicate.cjs --title "<生成タイトル>" || exit 1
 ```
 
-ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。
+ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。重複検出時はタイトルを変更してから再生成する（同テーマの再アップロードは duplicate-content 判定の典型）。
 
 ## 引数
 

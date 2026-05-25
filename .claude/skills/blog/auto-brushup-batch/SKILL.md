@@ -46,6 +46,16 @@ GSC で改善余地の大きい blog 記事を自律的に rewrite し、R2 push
 
 agent (Claude Code) の判断は補助的。最終判断は scripted gate (quality-gate.mjs) が下す。理由: agent も rice-harvest で誤判定した。script の機械チェックを最後の砦に置く。
 
+### 5. 数値は data から copy-paste、memory から書かない ★2026-05-25 追加
+
+2026-05-25 検証で 62 件 brushup 中 13% が数値捏造 / rank 不整合で FAIL、追加 27% が WARN。agent は 5 案 framing 思考の過程で数値が漂流し、SVG chart の値・ランク順序を fabricate する傾向あり。
+
+**対策**:
+- 本文・SVG に書く全数値は **data/*.json で直前に確認した値のみ** 使う
+- 「memory にあるから書ける」は禁止。data ファイルを Read で再確認すること
+- derived ranking (1人あたり 等) を書く場合は計算過程を明示
+- quality-gate.mjs の factual cross-check が rank 整合性を機械検証する (`RANK_MISMATCH` blocker)
+
 ## 実行フロー (agent が自律的に行う)
 
 ### Step 1: 候補選定 (plan 優先 + fresh fallback)
@@ -109,6 +119,26 @@ sqlite3 ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065
 
 「面積 vs 効率」「平均 vs 中央値」「総量 vs 比率」「TOP1 単独 vs TOP10 集中度」などの **対比軸** を 1-2 個発見。
 
+#### 2-2.5. data/*.json ground truth 確認 ★必須 (2026-05-25 追加)
+
+**rewrite 中に書く全 rank・絶対値は必ず data/*.json から copy-paste すること**。memory や類推で書かない。
+
+```bash
+# 当該 slug の data ファイル一覧
+ls .local/r2/app/blog/<slug>/data/
+
+# 各 JSON を実際に Read して、本文で言及する都道府県の {rank, value, label} を確認
+# 例: 沖縄 → rank 35 in 財政力指数 (value 0.36) — この情報をメモして本文に正確に転記
+```
+
+**2026-05-25 検証で発覚した失敗例** (これらを再発させない):
+- 「沖縄 財政力指数 41位」と書いたが data は rank 35 (8位ズレ)
+- 「奈良 消費支出 35位」と書いたが data は rank 13 (22位ズレ)
+- 「東京 発電量 42M MWh」と書いたが data は 5.7M MWh (7倍誤差)
+- SVG chart で rank 4-5 の県名・値を fabricate (data に存在しない数字)
+
+**rule**: 本文に書く数値・rank は data JSON で確認した値のみ。derive 計算する場合 (例: 1人あたり) は計算過程を明示。
+
 #### 2-3. 5 案 framing 生成と評価 (内部の thinking で)
 
 5 案を生成し、4 軸 (practical_value / structural_finding / data_grounding / non_sensational) で各 0-10 点採点。
@@ -141,15 +171,27 @@ best 案で seoTitle, description, 本文を再構成。`docs/02_実装計画/ci
 # article.md を上書き保存 (.local/r2/app/blog/<slug>/article.md)
 ```
 
-#### 2-6. quality gate チェック
+#### 2-6. quality gate チェック (2026-05-25 拡張: factual cross-check 追加)
 
 ```bash
 node .claude/scripts/blog/quality-gate.mjs <slug>
 # exit 0 → 通過、commit OK
-# exit 1 → skip、article を revert (git checkout)
+# exit 1 → skip、article を revert (cp /tmp/brushup-backup-<slug>.md .local/r2/.../article.md)
 ```
 
 通過 article のみ最終 commit 対象。
+
+**quality-gate.mjs が検証する項目** (2026-05-25 強化):
+1. 形式 (callout 数 ≥ 2 / 内部リンク ≥ 3 / SVG chart / H2 ≥ 4 / charCount ≥ 3000 / frontmatter)
+2. NG word (X倍格差 / 驚愕の / 衝撃の / ヤバい / 最大級 等)
+3. **Factual cross-check (新規)**: data/*.json の rank / 値と本文の rank claim を突合
+   - 「<都道府県> N位」または「N位 <都道府県>」パターンを抽出
+   - data 中で当該 pref の rank が claim と一致しなければ `RANK_MISMATCH` blocker
+   - skip 条件: rank-gap 表現 (「N位の乖離」)、per-capita 記事、unknown ranking (data label に存在しない 指数/比率)
+
+**FAIL 時の対応**:
+- `RANK_MISMATCH` blocker は **必ず data を再確認**し、本文を data の値に合わせて修正、再度 quality-gate 通過まで繰り返す
+- 修正できない場合 (framing 自体が data と矛盾) は `cp /tmp/brushup-backup-<slug>.md` で revert + skip log
 
 ### Step 3: bulk sync + R2 push + commit
 

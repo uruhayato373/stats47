@@ -5,6 +5,7 @@ import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 
+import { PREF_CAPITAL_COORDS } from "./pref-capitals";
 import { regionOf, type Region } from "./regions";
 import type {
   MigrationFlowData,
@@ -138,7 +139,22 @@ export function buildMigrationMap(
     x >= mapRect.x0 && x <= mapRect.x1 && y >= mapRect.y0 && y <= mapRect.y1;
 
   // ── 非焦点県（グレー一色）──
-  const focusCentroid = pathGen.centroid(focusFeat) as [number, number];
+  // 焦点 (arc/矢印の起点): 県庁所在地が定義されていればその座標を投影、
+  // なければ本土ポリゴンの centroid (largestPolygon)、最終フォールバックは focusFeat 重心。
+  // 東京 (小笠原) ・鹿児島 (奄美) ・沖縄 (本島南西) など島嶼を持つ県で起点ズレを防ぐ。
+  const capital = PREF_CAPITAL_COORDS[data.focusCode];
+  let focusCentroid: [number, number];
+  if (capital) {
+    const projected = projection([capital.lon, capital.lat]);
+    focusCentroid = projected
+      ? (projected as [number, number])
+      : (pathGen.centroid(largestPolygon(focusFeat)) as [number, number]);
+  } else {
+    focusCentroid = pathGen.centroid(largestPolygon(focusFeat)) as [
+      number,
+      number,
+    ];
+  }
   const focusOutlinePath = pathGen(focusFeat) ?? "";
   const shapes: PrefShape[] = [];
   for (const feat of geojson.features) {

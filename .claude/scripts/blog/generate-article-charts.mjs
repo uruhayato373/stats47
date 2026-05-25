@@ -269,7 +269,12 @@ for (const { file, type, parsed } of jsonMeta) {
     warn(`unknown chart type for ${file} — skipping`);
     continue;
   }
-  fs.writeFileSync(svgPath, svg, "utf8");
+  // 2026-05-25 追加: data-source provenance を SVG 冒頭に embed
+  // factual cross-check (article-factual-check.mjs) が SVG 値の出所を trace するために使用。
+  // agent 手書きの inline SVG (article.md 内) には provenance がないので、
+  // chart 系のチェッカーは「provenance 付き SVG = generator 経由で data から作られた」と信頼可能。
+  const provenance = `<!-- data-source: ${file} | generated: ${new Date().toISOString()} -->\n`;
+  fs.writeFileSync(svgPath, provenance + svg, "utf8");
   chartNames.push(baseName);
   log(`  [gen] ${baseName}.svg  (${(svg.length / 1024).toFixed(1)} KB)`);
 }

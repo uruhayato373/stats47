@@ -1,0 +1,76 @@
+{
+  "_comment": "X (@stats47jp373) プロフィール live state。/update-x-profile が更新する真実源。文案カタログは docs/10_SNS戦略/05_SNSプロフィール.md",
+  "handle": "stats47jp373",
+  "last_updated": "2026-05-25T21:45:30.020Z",
+  "bio": {
+    "variant": "A",
+    "live_text": "元県庁職員(20年)→ 47都道府県 × 2,200指標を一人で可視化中\n📊 ランキング/比較/相関を地図・グラフで stats47.jp\n📝 数字の裏側を深掘り note.com/stats47\n「探すのに半日」を終わらせたい",
+    "set_at": "2026-05-25T21:45:30.020Z"
+  },
+  "pinned": {
+    "variant": null,
+    "tweet_id": null,
+    "live_text": null,
+    "media_path": null,
+    "set_at": null
+  },
+  "replies": {
+    "L1_note_home": {
+      "tweet_id": null,
+      "live_text": null,
+      "url_with_utm": null,
+      "set_at": null
+    },
+    "L2_magazine": {
+      "tweet_id": null,
+      "live_text": null,
+      "magazine_url": "https://note.com/stats47/m/m512ad7023815",
+      "magazine_meta": {
+        "title": "公務員 × Claude Code 実務活用ガイド",
+        "article_count": 33,
+        "price_jpy": 1980,
+        "verified_at": "2026-05-26"
+      },
+      "url_with_utm": null,
+      "set_at": null
+    },
+    "L3_top_articles": {
+      "tweet_id": null,
+      "live_text": null,
+      "source": "gsc_2026-W21_top_clicks",
+      "top_articles": [
+        {
+          "rank": 1,
+          "title": "寿命は延びたが、不健康期間も延びた｜健康寿命の構造",
+          "slug": "health-life-expectancy-structure",
+          "url": "https://stats47.jp/blog/health-life-expectancy-structure",
+          "clicks_28d": 63
+        },
+        {
+          "rank": 2,
+          "title": "最も猛暑日が多い県は沖縄ではなく京都｜気温極値マップ",
+          "slug": "temperature-extremes-map",
+          "url": "https://stats47.jp/blog/temperature-extremes-map",
+          "clicks_28d": 36
+        },
+        {
+          "rank": 3,
+          "title": "物価格差の真因は食費ではなく家賃｜物価指数の高低",
+          "slug": "price-index-high-low-prefecture",
+          "url": "https://stats47.jp/blog/price-index-high-low-prefecture",
+          "clicks_28d": 27
+        }
+      ],
+      "set_at": null
+    }
+  },
+  "metrics_snapshot": {
+    "fetched_at": null,
+    "pinned": null,
+    "L1": null,
+    "L2": null,
+    "L3": null
+  },
+  "utm_campaign": "profile_2026q2",
+  "next_review_recommended": "2026-06-22"
+}

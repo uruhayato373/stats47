@@ -186,7 +186,51 @@ if [ "$FOUND_SECRETS" = false ]; then
   echo -e "${GREEN}✅ シークレットチェック成功${NC}"
 fi
 
-# 6. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
+# 6. ブログ記事の Factual cross-check (2026-05-25 追加)
+echo -e "${GREEN}📊 ブログ記事 factual cross-check...${NC}"
+STAGED_ARTICLES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^docs/21_ブログ記事原稿/[^/]+/article\.md$" || true)
+
+if [ -n "$STAGED_ARTICLES" ]; then
+  FACTUAL_FAILED=0
+  while IFS= read -r article; do
+    if [ -z "$article" ]; then continue; fi
+    # data dir は <article-dir>/data/
+    article_dir=$(dirname "$PROJECT_ROOT/$article")
+    data_dir="$article_dir/data"
+    if [ ! -d "$data_dir" ]; then
+      echo -e "${YELLOW}  ⚠️  $article: data/ なし、cross-check スキップ${NC}"
+      continue
+    fi
+    # cross-check 実行
+    if ! node "$PROJECT_ROOT/.claude/scripts/lib/article-factual-check.mjs" \
+         "$PROJECT_ROOT/$article" "$data_dir" > /tmp/factual-check.json 2>&1; then
+      FACTUAL_FAILED=$((FACTUAL_FAILED + 1))
+      echo -e "${RED}  ❌ $article: factual cross-check FAIL${NC}"
+      # blockers を抽出して表示
+      cat /tmp/factual-check.json | node -e "
+        let d=''; process.stdin.on('data',c=>d+=c).on('end',()=>{
+          try { const j=JSON.parse(d); (j.blockers||[]).forEach(b=>console.error('     ' + b)); }
+          catch(e) {}
+        });
+      " 2>&1 || true
+    else
+      echo -e "${GREEN}  ✅ $article${NC}"
+    fi
+  done <<< "$STAGED_ARTICLES"
+
+  if [ "$FACTUAL_FAILED" -gt 0 ]; then
+    echo -e "${RED}❌ ブログ記事 $FACTUAL_FAILED 件で factual error 検出。コミット中止。${NC}"
+    echo -e "${YELLOW}💡 詳細: node .claude/scripts/lib/article-factual-check.mjs <article> <data-dir>${NC}"
+    echo -e "${YELLOW}💡 失敗パターン: .claude/skills/blog/SHARED-failure-cases.md${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ factual cross-check 全件 pass${NC}"
+  fi
+else
+  echo -e "${GREEN}✅ ブログ記事の変更なし${NC}"
+fi
+
+# 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
 STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)
 

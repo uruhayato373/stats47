@@ -2,12 +2,77 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-23
+updated: 2026-05-25
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## [BLOG-CTR-06] 大量 brushup 54 記事 (curiosity gap framing + factual cross-check 強化)
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-25
+- **due**: 2026-06-22 (4 週後 effect 計測)
+- **predecessor**: BLOG-CTR-05
+- **session-handoff**: [`docs/04_レビュー/session-handoff/2026-05-25-blog-factual-check-system.md`](../04_レビュー/session-handoff/2026-05-25-blog-factual-check-system.md)
+
+### 改修内容
+
+- 62 記事を curiosity gap framing で rewrite (sonnet 4 並列 + 7 並列 batch)
+- critical review で発覚した 8 件 (rank 不整合 / 数値捏造) を revert
+- WARN 17 件 (軽微 factual error) を surgical edit で fix
+- 最終: 54 記事適用 (37 PASS + 17 fixed WARN)
+
+### 想定効果
+
+- 合計 expectedLift: **+826 clicks/週** (industry-avg CTR by position 計算ベース)
+- 月換算: **+3,550 clicks/月**
+- 観測: 4 週後 (2026-06-22 頃) GSC で実測
+
+### 副次的成果 — factual cross-check 横断 library 構築 (P0-P3 完全実装)
+
+旧 quality-gate.mjs は形式 (callout / NG word) のみで factual error 検出不能だった。新 system:
+
+- `.claude/scripts/lib/article-factual-check.mjs` (共有 library、433 行)
+- 全 5 blog skill に factual gate 統合 (auto-brushup / publish-article / draft-from-trend / publish-bulk-articles / brushup-blog-article)
+- `article-writer` agent に「data → 書く」絶対遵守ルール
+- generate-article-charts.mjs で SVG provenance 埋め込み
+- pre-commit hook で staged article.md 自動 cross-check
+- failure ledger: `.claude/skills/blog/SHARED-failure-cases.md` (F-001〜F-004)
+
+これにより今後の brushup / 新規記事生成では数値捏造が本番に届く経路を 4 重防壁で遮断。
+
+### 検証コマンド (4 週後の effect 判定)
+
+```bash
+# 1. 4 週後 GSC snapshot 取得
+/fetch-gsc-data last28d page snapshot 2026-W25
+
+# 2. 該当 54 slug の CTR before/after を比較
+node .claude/scripts/blog/measure-gsc-impact.mjs \
+  --slugs-from .claude/state/blog/auto-brushup-history.json \
+  --baseline-week 2026-W21 \
+  --observation-week 2026-W25
+```
+
+### 判定基準 (`.claude/rules/evidence-based-judgment.md` 準拠)
+
+- 実測 CTR ≥ 想定値 × 80% → effect/full
+- 50% ≤ 実測 < 80% → effect/partial
+- < 50% → effect/none
+- baseline 悪化 → effect/adverse (該当記事を revert)
+
+### 関連 commits
+
+- `0fcc0190` Batch 1 (20 記事)
+- `7ace00f1` Batch 2 (42 記事)
+- `10c78eff` FAIL 8 件 revert + WARN 17 件 flag
+- `3384681a` WARN 17 件 surgical fix + factual cross-check 追加 (P0)
+- `2972dc5d` **P0-P3 完全実装** (library 切り出し + 全 skill 強化 + pre-commit hook + failure ledger)
 
 ## [BLOG-AUTO-BRUSHUP-01] ブログ品質改善の完全自動化 (Pro plan + /schedule routine)
 

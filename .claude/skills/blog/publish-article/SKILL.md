@@ -98,6 +98,25 @@ date +%Y-%m-%d
 `published: false` または `published` フィールドがない場合: **そのまま放置**。
 `/sync-articles` 実行時に `publishedAt` の日付に基づいて公開状態が制御されるため、明示的な変更は不要。
 
+### 5.5. Factual cross-check (必須、2026-05-25 追加)
+
+publish 前に必ず本文の rank claim と data の整合性を検証する。AI 生成の article で 13% が rank 不整合 / 数値捏造で FAIL する実測値 (2026-05-25 検証) があり、formal check (callout / 内部リンク / NG word) では検出不能のため。
+
+```bash
+node .claude/scripts/lib/article-factual-check.mjs \
+  ".local/r2/blog/<slug>/article.md" \
+  ".local/r2/blog/<slug>/data"
+```
+
+- **exit 0**: factual error なし → 次の step へ
+- **exit 1**: `RANK_MISMATCH` / `INVERSE_RANK_MISMATCH` blocker あり
+  - 出力された blocker を確認、data の正しい値で本文を Edit して再実行
+  - 修正できない場合 (framing 自体が data と矛盾) は publish せず draft に戻す
+
+**rule**: blockers がある状態で publish しない。「あとで直す」は禁止 (本番に factual error が出る)。
+
+参照: `.claude/scripts/lib/article-factual-check.mjs` / `.claude/skills/blog/SHARED-failure-cases.md`
+
 ### 6. 下書きフォルダを削除する
 
 公開が完了したため、下書きフォルダは不要になる。ユーザーに確認してから削除する:

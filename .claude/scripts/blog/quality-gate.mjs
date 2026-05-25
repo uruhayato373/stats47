@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 /**
- * ブログ記事 brushup 後の自動品質ゲート。
+ * ブログ記事 brushup 後の自動品質ゲート (auto-brushup-batch 用)。
  *
- * auto-merge 対応のため、機械的にチェック可能な品質基準を全て script で検証する。
- * 1 つでも失敗したら exit 1 (skip 推奨)。
+ * 機械的にチェック可能な品質基準 (callout / 内部リンク / NG word / factual cross-check 等)
+ * を全て script で検証する。1 つでも失敗したら exit 1 (skip 推奨)。
+ *
+ * Factual cross-check は `.claude/scripts/lib/article-factual-check.mjs` に切り出し済み。
+ * 他 skill (publish-article / draft-from-trend 等) からも同 library が利用可能。
  *
  * Usage:
  *   node .claude/scripts/blog/quality-gate.mjs <slug>
@@ -21,6 +24,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { checkArticleFactual } from "../lib/article-factual-check.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -32,6 +37,7 @@ if (!slug) {
 }
 
 const articlePath = path.join(PROJECT_ROOT, ".local/r2/app/blog", slug, "article.md");
+const dataDir = path.join(PROJECT_ROOT, ".local/r2/app/blog", slug, "data");
 if (!fs.existsSync(articlePath)) {
   console.error(`[error] article not found: ${articlePath}`);
   process.exit(2);
@@ -68,7 +74,6 @@ function countCallouts(text) {
 }
 
 function countInternalLinks(text) {
-  // https://stats47.jp/... 形式 と (/ranking|/areas|...) 形式の両方をカウント
   const absMatches = text.match(/https:\/\/stats47\.jp\/(ranking|areas|category|blog|themes|tag|survey)/g) || [];
   const relMatches = text.match(/\]\(\/(ranking|areas|category|blog|themes|tag|survey)/g) || [];
   return absMatches.length + relMatches.length;
@@ -80,7 +85,6 @@ function countSvgCharts(text) {
 }
 
 function getCharCount(text) {
-  // frontmatter を除いた本文の文字数
   const body = text.replace(/^---[\s\S]*?\n---\n/, "");
   return body.length;
 }
@@ -119,7 +123,6 @@ const checks = {
 const blockers = [];
 const warnings = [];
 
-// Blocker (auto-merge を阻止)
 for (const { pattern, name } of NG_PATTERNS) {
   if (pattern.test(content)) {
     blockers.push(`NG_PATTERN: ${name}`);
@@ -151,13 +154,19 @@ if (checks.h2Count < 4) {
   blockers.push(`H2 sections < 4 (actual: ${checks.h2Count}) — 構造が浅い`);
 }
 
-// Warning (auto-merge は通すが log に残す)
 if (checks.charts === 0) {
   warnings.push("チャート (SVG) 0 個 — visual 弱い");
 }
 if (checks.callouts < 3) {
   warnings.push(`callouts < 3 (actual: ${checks.callouts}) — 推奨は 3-4 個`);
 }
+
+// Factual cross-check (2026-05-25 追加、article-factual-check.mjs に切り出し済)
+const factual = checkArticleFactual(content, dataDir);
+checks.groundTruthPrefCount = factual.groundTruthPrefCount;
+checks.isPerCapitaArticle = factual.isPerCapitaArticle;
+blockers.push(...factual.blockers);
+warnings.push(...factual.warnings);
 
 const result = {
   slug,

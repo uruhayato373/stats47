@@ -53,7 +53,8 @@ import { BAR_CHART_REEL_DURATION } from './features/population-choropleth/Chorop
 import { STATIC_REEL_DURATION } from './features/population-choropleth/ChoroplethStaticReel';
 // migration-flow
 import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
-import { MIGRATION_FLOW_DURATION } from '@stats47/migration-flow';
+import { MigrationFlowCoverPreview } from './features/migration-flow/MigrationFlowCoverPreview';
+import { MIGRATION_FLOW_DURATION, COVER_WIDTH, COVER_HEIGHT } from '@stats47/migration-flow';
 // station-passengers
 import { StationPassengersReelPreview } from './features/station-passengers/previews/StationPassengersReelPreview';
 import { STATION_PASSENGERS_DURATION } from './features/station-passengers';
@@ -826,6 +827,36 @@ export const RemotionRoot: React.FC = () => {
           defaultProps={{
             theme: 'light' as const,
             focusPrefCode: '28',
+          }}
+        />
+
+        {/* IG Reels サムネ用 portrait 静止画 (1080x1920) */}
+        <Composition
+          id="MigrationFlow-Cover"
+          component={MigrationFlowCoverPreview}
+          width={COVER_WIDTH}
+          height={COVER_HEIGHT}
+          fps={1}
+          durationInFrames={1}
+          schema={MigrationFlowSchema}
+          defaultProps={{
+            focusPrefCode: '13',
+          }}
+        />
+
+        {/* IG Reels / TikTok / YouTube Shorts 用 portrait 動画 (1080x1920) */}
+        <Composition
+          id="MigrationFlow-Reel-Portrait"
+          component={MigrationFlowReelPreview}
+          width={1080}
+          height={1920}
+          fps={VIDEO_CONFIG.fps}
+          durationInFrames={MIGRATION_FLOW_DURATION}
+          schema={MigrationFlowSchema}
+          defaultProps={{
+            theme: 'light' as const,
+            focusPrefCode: '13',
+            format: 'portrait' as const,
           }}
         />
 

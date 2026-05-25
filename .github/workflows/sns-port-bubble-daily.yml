@@ -1,0 +1,84 @@
+name: SNS Port Bubble Daily (Instagram)
+
+# 港湾バブル動画を 7 metric 1 日 1 件で IG に自動投稿する。
+# 起算日 2026-05-26 から 7 日間、毎日 1 metric を順番に publish。
+# 期間外 (起算日前 / 7 日経過後) は何もせず exit。
+#
+# 関連:
+#   - 動画/caption: .local/r2/sns/port/<key>/instagram/ (R2 push 済)
+#   - caption テンプレ: .claude/state/sns-port-bubble-captions/<key>-instagram.txt (git 管理)
+#   - 投稿スクリプト: .claude/skills/sns/post-instagram/post-instagram.ts
+#   - 仕様: docs/02_実装計画/port-logistics-bundle.md (計画書)
+
+on:
+  schedule:
+    # 毎日 00:00 UTC = 09:00 JST
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      metric:
+        description: 'Override metric key (e.g. cargo-total)'
+        required: false
+        default: ''
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Determine metric for today
+        id: pick
+        run: |
+          if [ -n "${{ github.event.inputs.metric }}" ]; then
+            METRIC="${{ github.event.inputs.metric }}"
+            echo "Using override metric: $METRIC"
+          else
+            START_DATE="2026-05-26"
+            TODAY=$(date -u +%Y-%m-%d)
+            START_TS=$(date -u -d "$START_DATE" +%s 2>/dev/null || gdate -u -d "$START_DATE" +%s)
+            TODAY_TS=$(date -u -d "$TODAY" +%s 2>/dev/null || gdate -u -d "$TODAY" +%s)
+            DAYS=$(( (TODAY_TS - START_TS) / 86400 ))
+            METRICS=(container-tonnage passengers-total ships-total cargo-export cargo-import cargo-coastal-out cargo-coastal-in)
+            if [ $DAYS -lt 0 ] || [ $DAYS -ge ${#METRICS[@]} ]; then
+              echo "Outside posting window (day=$DAYS, total=${#METRICS[@]}). Exiting."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            METRIC=${METRICS[$DAYS]}
+            echo "Day $DAYS → metric: $METRIC"
+          fi
+          echo "metric=$METRIC" >> "$GITHUB_OUTPUT"
+
+      - name: Stage caption to .local/r2
+        if: steps.pick.outputs.skip != 'true'
+        run: |
+          METRIC="${{ steps.pick.outputs.metric }}"
+          CAPTION_SRC=".claude/state/sns-port-bubble-captions/${METRIC}-instagram.txt"
+          CAPTION_DST=".local/r2/sns/port/${METRIC}/instagram/caption.txt"
+          if [ ! -f "$CAPTION_SRC" ]; then
+            echo "ERROR: caption not found: $CAPTION_SRC"
+            exit 1
+          fi
+          mkdir -p "$(dirname "$CAPTION_DST")"
+          cp "$CAPTION_SRC" "$CAPTION_DST"
+          echo "Staged caption: $CAPTION_DST"
+
+      - name: Post to Instagram (Reels)
+        if: steps.pick.outputs.skip != 'true'
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+        run: |
+          npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
+            ${{ steps.pick.outputs.metric }} --domain port --type reels
