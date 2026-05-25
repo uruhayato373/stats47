@@ -65,7 +65,7 @@ export async function RelatedRankingsGrid({
           </Link>
         )}
       </CardHeader>
-      <CardContent className="px-5 pb-5 pt-0">
+      <CardContent className="px-5 pb-5 pt-4">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => {
             const title = item.subtitle

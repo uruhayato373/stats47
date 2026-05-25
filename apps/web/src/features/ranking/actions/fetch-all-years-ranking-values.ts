@@ -2,7 +2,11 @@
 
 import { cache } from "react";
 
-import { fetchAllYearsRankingValuesOnDemand, readRankingItemFromR2 } from "@stats47/ranking/server";
+import {
+  fetchAllYearsRankingValuesOnDemand,
+  readAllYearsNormalizedRankingValuesFromR2,
+  readRankingItemFromR2,
+} from "@stats47/ranking/server";
 import { err, ok, isOk, type Result } from "@stats47/types";
 
 import type { AreaType } from "@stats47/area";
@@ -33,9 +37,22 @@ const fetchAllYearsCore = cache(async (
 });
 
 /**
+ * 受け入れ可能な正規化タイプの whitelist。
+ * R2 オブジェクトキー (`app/ranking/{key}/values-{type}.json`) に流入するため、
+ * path traversal 対策としてサーバ側で固定値以外を弾く。
+ */
+const ALLOWED_NORMALIZATION_TYPES = new Set([
+  "per_population",
+  "per_area",
+  "per_household",
+]);
+
+/**
  * 全年分のランキングデータを取得する（TrendSparkline・データダウンロード用）
  *
  * DB キャッシュを確認し、不足分があれば e-Stat API から一括取得する。
+ * normalizationType を指定した場合は事前計算済みの正規化スナップショットを返す
+ * (例: per_population なら 人口10万人あたりの全年度値)。
  *
  * @param parentAreaCode 都道府県コード（市区町村フィルタ用、例: "13000"）
  */
@@ -43,8 +60,28 @@ export async function fetchAllYearsRankingValuesAction(
   rankingKey: string,
   areaType: AreaType,
   parentAreaCode?: string,
+  normalizationType?: string,
 ): Promise<Result<RankingValue[], Error>> {
-  const result = await fetchAllYearsCore(rankingKey, areaType);
+  let result: Result<RankingValue[], Error>;
+  // normalizationType は ?norm= query param 由来でユーザー制御値。
+  // 後続の R2 キーパス生成に流入するため、固定 whitelist でのみ受理する。
+  const safeNormalizationType =
+    normalizationType && ALLOWED_NORMALIZATION_TYPES.has(normalizationType)
+      ? normalizationType
+      : undefined;
+  if (safeNormalizationType) {
+    const normResult = await readAllYearsNormalizedRankingValuesFromR2(
+      rankingKey,
+      areaType,
+      safeNormalizationType,
+    );
+    // 正規化スナップショットが見つからなければ総数で fallback
+    result = isOk(normResult) && normResult.data.length > 0
+      ? normResult
+      : await fetchAllYearsCore(rankingKey, areaType);
+  } else {
+    result = await fetchAllYearsCore(rankingKey, areaType);
+  }
   if (!isOk(result)) return result;
 
   if (!parentAreaCode) return result;
