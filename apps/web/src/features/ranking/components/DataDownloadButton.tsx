@@ -36,6 +36,12 @@ interface DataDownloadButtonProps {
     demographicAttr: string | null;
     normalizationBasis: string | null;
   };
+  /**
+   * 現在表示中の正規化タイプ (per_population / per_area / per_household)。
+   * 指定された場合、その基準で計算済みの値を出力する (例: 「人口10万人あたり」の全年度値)。
+   * 未指定なら総数を出力。
+   */
+  normalizationType?: string;
 }
 
 function sanitizeFileName(name: string): string {
@@ -122,13 +128,19 @@ export function DataDownloadIconButton({
   rankingKey,
   areaType,
   displayInfo,
+  normalizationType,
 }: DataDownloadButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDownload = async (format: "csv" | "json") => {
     setIsLoading(true);
     try {
-      const result = await fetchAllYearsRankingValuesAction(rankingKey, areaType);
+      const result = await fetchAllYearsRankingValuesAction(
+        rankingKey,
+        areaType,
+        undefined,
+        normalizationType,
+      );
       if (!isOk(result) || result.data.length === 0) return;
       trackCsvDownload({ rankingKey, yearCode: "all" });
       const fileName = buildFileName(displayInfo, format);
@@ -189,6 +201,7 @@ export function DataDownloadPrimaryButton({
   rankingKey,
   areaType,
   displayInfo,
+  normalizationType,
   label = "CSV をダウンロード",
   variant = "default",
 }: DataDownloadButtonProps & {
@@ -202,7 +215,12 @@ export function DataDownloadPrimaryButton({
   const handleDownload = async () => {
     setIsLoading(true);
     try {
-      const result = await fetchAllYearsRankingValuesAction(rankingKey, areaType);
+      const result = await fetchAllYearsRankingValuesAction(
+        rankingKey,
+        areaType,
+        undefined,
+        normalizationType,
+      );
       if (!isOk(result) || result.data.length === 0) return;
       trackCsvDownload({ rankingKey, yearCode: "all" });
       const fileName = buildFileName(displayInfo, "csv");
@@ -231,6 +249,76 @@ export function DataDownloadPrimaryButton({
   );
 }
 
+/**
+ * ラベル付き CSV/JSON ダウンロード menu ボタン（DataUsageCard 用）
+ *
+ * 「データダウンロード」と表示し、Dropdown で CSV / JSON を選択させる。
+ * normalizationType が指定されていればその基準で計算済みの値を出力。
+ */
+export function DataDownloadMenuButton({
+  rankingKey,
+  areaType,
+  displayInfo,
+  normalizationType,
+  label = "ダウンロード",
+  variant = "default",
+}: DataDownloadButtonProps & {
+  label?: string;
+  variant?: "default" | "outline";
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDownload = async (format: "csv" | "json") => {
+    setIsLoading(true);
+    try {
+      const result = await fetchAllYearsRankingValuesAction(
+        rankingKey,
+        areaType,
+        undefined,
+        normalizationType,
+      );
+      if (!isOk(result) || result.data.length === 0) return;
+      trackCsvDownload({ rankingKey, yearCode: "all" });
+      const fileName = buildFileName(displayInfo, format);
+      if (format === "csv") {
+        const csv = generateCsvContent(result.data);
+        triggerDownload(new Blob([csv], { type: "text/csv;charset=utf-8" }), fileName);
+      } else {
+        const json = JSON.stringify(result.data, null, 2);
+        triggerDownload(
+          new Blob([json], { type: "application/json;charset=utf-8" }),
+          fileName,
+        );
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant={variant} size="sm" disabled={isLoading} className="gap-1.5">
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Download className="h-4 w-4" />
+          )}
+          {label}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => handleDownload("csv")}>
+          CSV 形式 (Excel 互換)
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleDownload("json")}>
+          JSON 形式 (開発者向け)
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 interface DataDownloadFooterCardProps extends DataDownloadButtonProps {
   /** プレビュー用のランキングデータ（上位表示用） */
   rankingValues: RankingValue[];
@@ -243,6 +331,7 @@ export function DataDownloadFooterCard({
   rankingKey,
   areaType,
   displayInfo,
+  normalizationType,
   rankingValues,
 }: DataDownloadFooterCardProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -250,7 +339,12 @@ export function DataDownloadFooterCard({
   const handleDownload = async (format: "csv" | "json") => {
     setIsLoading(true);
     try {
-      const result = await fetchAllYearsRankingValuesAction(rankingKey, areaType);
+      const result = await fetchAllYearsRankingValuesAction(
+        rankingKey,
+        areaType,
+        undefined,
+        normalizationType,
+      );
       if (!isOk(result) || result.data.length === 0) return;
       trackCsvDownload({ rankingKey, yearCode: "all" });
       const fileName = buildFileName(displayInfo, format);

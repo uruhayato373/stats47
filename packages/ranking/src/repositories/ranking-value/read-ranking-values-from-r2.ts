@@ -121,6 +121,35 @@ export async function readNormalizedRankingValuesFromR2(
 }
 
 /**
+ * 正規化済み R2 snapshot から全年度の ranking_values を取得 (ダウンロード用)。
+ *
+ * ファイルが存在しない場合は ok([]) を返す。
+ */
+export async function readAllYearsNormalizedRankingValuesFromR2(
+  rankingKey: string,
+  _areaType: AreaType,
+  normType: string,
+): Promise<Result<RankingValue[], Error>> {
+  try {
+    const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
+    const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
+    if (!snapshot) return ok([]);
+
+    const all: RankingValue[] = [];
+    for (const partition of snapshot.partitions) {
+      all.push(...partition.values);
+    }
+    return ok(all);
+  } catch (error) {
+    logger.error(
+      { rankingKey, normType, error: error instanceof Error ? error.message : String(error) },
+      "readAllYearsNormalizedRankingValuesFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
  * 指定都道府県の市区町村ランキング値を取得。
  * city partition から areaCode の先頭 2 桁が prefCode と一致する行をフィルタ。
  */

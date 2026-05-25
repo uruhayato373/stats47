@@ -38,7 +38,6 @@ import {
     RankingSourceCard,
     RankingYearSelector,
     AreaTypeToggle,
-    DataDownloadPrimaryButton,
     RankingHeroCard,
     DataUsageCard,
 } from "@/features/ranking";
@@ -288,14 +287,6 @@ export function RankingKeyPageClient({
         </span>
     ) : undefined;
 
-    const downloadButton = (
-        <DataDownloadPrimaryButton
-            rankingKey={rankingKey}
-            areaType={areaType}
-            displayInfo={displayInfo}
-        />
-    );
-
     // ヒーローカードのメタ操作行: 年度 select + 都道府県/市区町村 seg
     const metaControls = (
         <>
@@ -386,7 +377,6 @@ export function RankingKeyPageClient({
                 onNormalizationChange={handleNormalizationChange}
                 normalizationDisabled={isPending}
                 metaControls={metaControls}
-                downloadButton={downloadButton}
                 shareButton={
                     <ShareButtons title={displayInfo.title} shareText={shareText} />
                 }
@@ -507,27 +497,16 @@ export function RankingKeyPageClient({
                         </div>
                     )}
 
-                    {/* CSV 訴求カード「このデータを使う」 */}
+                    {/* データダウンロード訴求カード「このデータを使う」 (CSV/JSON、正規化基準対応) */}
                     <DataUsageCard
                         rankingKey={rankingKey}
                         areaType={currentAreaType}
                         displayInfo={displayInfo}
                         yearCount={activeRankingItem.availableYears?.length}
+                        normalizationType={normalizationType}
                     />
 
-                    {/* 広告: テーブル読了後 */}
-                    <AdSenseAd
-                        format={RANKING_PAGE_FOOTER.format}
-                        slotId={RANKING_PAGE_FOOTER.slotId}
-                    />
-
-                    {/* ネイティブアフィリエイト枠 (D Phase 2) */}
-                    {nativeAffiliateSection}
-
-                    {/* 同カテゴリ関連ランキング grid (内部リンク密度↑) */}
-                    {relatedRankingsSection}
-
-                    {/* データの考察（常時表示カード） */}
+                    {/* データの考察（常時表示カード） — 本来テーブル直下で読まれるべき主要コンテンツ */}
                     {insightsSection}
 
                     {/* よくある質問（折りたたみ）+ JSON-LD */}
@@ -573,6 +552,18 @@ export function RankingKeyPageClient({
                     {rankingItem?.source && (
                         <RankingSourceCard source={rankingItem.source} />
                     )}
+
+                    {/* 広告: 解析・本文を読了後、関連ランキングの直前に配置 */}
+                    <AdSenseAd
+                        format={RANKING_PAGE_FOOTER.format}
+                        slotId={RANKING_PAGE_FOOTER.slotId}
+                    />
+
+                    {/* ネイティブアフィリエイト枠 (D Phase 2) */}
+                    {nativeAffiliateSection}
+
+                    {/* 同カテゴリ関連ランキング grid (内部リンク密度↑、ページ末尾の回遊導線) */}
+                    {relatedRankingsSection}
 
                 </main>
 
