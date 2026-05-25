@@ -38,7 +38,7 @@ export function ArticleRelatedBooks({ tagKeys, compact = false }: ArticleRelated
   if (books.length === 0) return null;
 
   const grid = (
-    <div className={compact ? "grid gap-3 grid-cols-1" : "grid gap-4 md:grid-cols-2"}>
+    <div className={compact ? "grid gap-2 grid-cols-2" : "grid gap-4 md:grid-cols-2"}>
       {books.map(({ category, book }) => {
         const theme = AFFILIATE_THEME[category];
         return (
@@ -48,7 +48,7 @@ export function ArticleRelatedBooks({ tagKeys, compact = false }: ArticleRelated
             category={category}
             label={book.title}
             position="related-books"
-            className={`flex gap-3 rounded-xl border ${theme.border} ${theme.bg} p-4 transition-shadow hover:shadow-md`}
+            className={`flex gap-3 rounded-xl border ${theme.border} ${theme.bg} ${compact ? "p-3" : "p-4"} transition-shadow hover:shadow-md`}
           >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
               <BookOpen size={20} className={theme.icon} />
