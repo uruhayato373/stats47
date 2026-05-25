@@ -29,14 +29,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RankingTopPage() {
   return (
     <div className="py-4 px-4">
-      <div className="max-w-6xl mx-auto mb-4">
+      <div className="max-w-[1400px] mx-auto mb-4">
         <h1 className="text-lg font-bold">ランキング一覧</h1>
         <p className="text-sm text-muted-foreground mt-1">
           1,800以上の統計で47都道府県を比較
         </p>
       </div>
       <FeaturedRankings limit={20} showHeader={false} />
-      <div className="max-w-6xl mx-auto mt-6">
+      <div className="max-w-[1400px] mx-auto mt-6">
         <AdSenseAd
           format={RANKING_PAGE_FOOTER.format}
           slotId={RANKING_PAGE_FOOTER.slotId}

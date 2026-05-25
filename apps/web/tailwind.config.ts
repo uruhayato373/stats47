@@ -25,6 +25,20 @@ const config: Config = {
       md: "48rem",   // 768px — チャート類の切り替え
       lg: "64rem",   // 1024px — KPI 4列化
     },
+    /** Tailwind の `container` ユーティリティ最大幅を 1700px に拡張
+     *  (旧 max-w-screen-2xl = 1536px → 1920px+ で左右余白が大きすぎる問題を解消)
+     *  全 page.tsx の `container mx-auto px-4` 利用が自動的に 1700px max に */
+    container: {
+      center: true,
+      padding: "1rem",
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1700px",
+      },
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
