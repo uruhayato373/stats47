@@ -371,14 +371,6 @@
     },
     {
       "date": "2026-05-25",
-      "slug": "savings-balance-gap",
-      "framing": "富山・福井・奈良の共働き×持ち家×三世代同居構造",
-      "expectedLift": 3,
-      "impressions": 26,
-      "ctr_before": 0
-    },
-    {
-      "date": "2026-05-25",
       "slug": "fertility-fiscal-nexus",
       "framing": "財政力と出生率の逆相関──東京0.99・沖縄1.60の逆説",
       "expectedLift": 2,
