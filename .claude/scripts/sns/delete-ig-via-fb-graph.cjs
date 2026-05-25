@@ -8,7 +8,7 @@
  *
  * 前提:
  *   - .env.local に META_PAGE_ACCESS_TOKEN, META_PAGE_ID, INSTAGRAM_BUSINESS_ACCOUNT_ID
- *   - Token 取得手順: docs/10_SNS戦略/04_Facebook_Page_Token_Setup.md
+ *   - Token 取得手順: docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md
  *
  * 使い方:
  *   node .claude/scripts/sns/delete-ig-via-fb-graph.cjs --domain migration-flow --dry-run
@@ -25,7 +25,7 @@ if (!TOKEN || !IG_USER_ID) {
   console.error(
     "❌ META_PAGE_ACCESS_TOKEN または INSTAGRAM_BUSINESS_ACCOUNT_ID 未設定",
   );
-  console.error("   セットアップ: docs/10_SNS戦略/04_Facebook_Page_Token_Setup.md");
+  console.error("   セットアップ: docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md");
   process.exit(1);
 }
 
@@ -71,7 +71,7 @@ async function main() {
   const me = await meRes.json();
   if (me.error) {
     console.error(`❌ Token invalid: ${me.error.message}`);
-    console.error("   docs/10_SNS戦略/04_Facebook_Page_Token_Setup.md を参照");
+    console.error("   docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md を参照");
     process.exit(1);
   }
   console.log(`✅ Token OK (page: ${me.name || me.id})`);
