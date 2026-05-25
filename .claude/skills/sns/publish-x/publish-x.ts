@@ -429,14 +429,36 @@ async function publishPost(
     }
 
     // 予約投稿ボタンをクリック
+    // メディア (動画) 添付時は pointer event が別要素に intercept され
+    // Playwright の通常 click() が silently 失敗する (即時投稿パスと同じ問題)。
+    // DOM レベル el.click() で予約ハンドラを直接発火する。
     const postBtn = page.getByTestId("tweetButton").first();
-    try {
-      await postBtn.click({ timeout: 5000 });
-    } catch {
-      await postBtn.click({ force: true });
+    if ((await postBtn.count()) === 0) {
+      console.error(`🚨 予約投稿ボタンが見つかりません: ${post.contentKey}`);
+      await saveScreenshot(page, post.contentKey, "schedule-btn-missing");
+      return false;
+    }
+    await saveScreenshot(page, post.contentKey, "schedule-before-post");
+    await postBtn.evaluate((el: HTMLElement) => el.click());
+
+    // 検証: 予約成功時は compose ダイアログが閉じ URL が /compose/post から離れる
+    const scheduled = await page
+      .waitForFunction(
+        () => !window.location.pathname.includes("/compose/post"),
+        { timeout: 15_000, polling: 500 },
+      )
+      .then(() => true)
+      .catch(() => false);
+    await page.waitForTimeout(2000);
+    await saveScreenshot(page, post.contentKey, "schedule-after-post");
+    if (!scheduled) {
+      console.error(
+        `🚨 予約投稿後も compose 画面のまま。予約が反映されていない可能性: ${post.contentKey}`,
+      );
+      return false;
     }
     console.log(`✅ 予約投稿完了: ${post.contentKey}`);
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
     return true;
   }
 
