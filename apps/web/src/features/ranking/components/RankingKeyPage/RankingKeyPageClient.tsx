@@ -497,13 +497,16 @@ export function RankingKeyPageClient({
                         </div>
                     )}
 
-                    {/* データダウンロード訴求カード「このデータを使う」 (CSV/JSON、正規化基準対応) */}
+                    {/* データダウンロード訴求カード「このデータを使う」
+                        (R2 事前生成済みファイルを Route Handler 経由で stream。
+                         CSV (UTF-8 / Shift_JIS) / JSON / 全基準まとめて に対応) */}
                     <DataUsageCard
                         rankingKey={rankingKey}
                         areaType={currentAreaType}
                         displayInfo={displayInfo}
                         yearCount={activeRankingItem.availableYears?.length}
                         normalizationType={normalizationType}
+                        hasAllBases={(rankingItem.calculation?.normalizationOptions?.length ?? 0) > 0}
                     />
 
                     {/* データの考察（常時表示カード） — 本来テーブル直下で読まれるべき主要コンテンツ */}
