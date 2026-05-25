@@ -13,6 +13,17 @@ import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
 
 /**
+ * 受け入れ可能な正規化タイプの whitelist。
+ * R2 オブジェクトキー (`app/ranking/{key}/values-{type}.json`) に流入するため、
+ * path traversal 対策としてサーバ側で固定値以外を弾く。
+ */
+const ALLOWED_NORMALIZATION_TYPES = new Set([
+  "per_population",
+  "per_area",
+  "per_household",
+]);
+
+/**
  * ランキングデータを取得する（正規化対応）
  *
  * @param parentAreaCode 都道府県コード（市区町村フィルタ用、例: "13000"）
@@ -34,20 +45,27 @@ export async function fetchRankingValuesAction(
 
     let values: RankingValue[];
 
+    // normalizationType は ?norm= query param 由来でユーザー制御値。
+    // 後続の R2 キーパス生成に流入するため、固定 whitelist でのみ受理する。
+    const safeNormalizationType =
+      normalizationType && ALLOWED_NORMALIZATION_TYPES.has(normalizationType)
+        ? normalizationType
+        : undefined;
+
     // 正規化が指定されている場合
-    if (normalizationType) {
+    if (safeNormalizationType) {
       // 事前計算済み R2 スナップショットを優先使用
       const normResult = await readNormalizedRankingValuesFromR2(
         rankingKey,
         areaType,
         yearCode,
-        normalizationType,
+        safeNormalizationType,
       );
       if (isOk(normResult) && normResult.data.length > 0) {
         values = normResult.data;
       } else {
         // フォールバック: 実行時計算（カスタム denominatorKey 等）
-        values = await computeNormalization(rankingItem, yearCode, normalizationType);
+        values = await computeNormalization(rankingItem, yearCode, safeNormalizationType);
       }
     } else {
       // DB から取得（なければ e-Stat API からオンデマンド取得 + キャッシュ）

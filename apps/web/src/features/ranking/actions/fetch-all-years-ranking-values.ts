@@ -37,6 +37,17 @@ const fetchAllYearsCore = cache(async (
 });
 
 /**
+ * 受け入れ可能な正規化タイプの whitelist。
+ * R2 オブジェクトキー (`app/ranking/{key}/values-{type}.json`) に流入するため、
+ * path traversal 対策としてサーバ側で固定値以外を弾く。
+ */
+const ALLOWED_NORMALIZATION_TYPES = new Set([
+  "per_population",
+  "per_area",
+  "per_household",
+]);
+
+/**
  * 全年分のランキングデータを取得する（TrendSparkline・データダウンロード用）
  *
  * DB キャッシュを確認し、不足分があれば e-Stat API から一括取得する。
@@ -52,11 +63,17 @@ export async function fetchAllYearsRankingValuesAction(
   normalizationType?: string,
 ): Promise<Result<RankingValue[], Error>> {
   let result: Result<RankingValue[], Error>;
-  if (normalizationType) {
+  // normalizationType は ?norm= query param 由来でユーザー制御値。
+  // 後続の R2 キーパス生成に流入するため、固定 whitelist でのみ受理する。
+  const safeNormalizationType =
+    normalizationType && ALLOWED_NORMALIZATION_TYPES.has(normalizationType)
+      ? normalizationType
+      : undefined;
+  if (safeNormalizationType) {
     const normResult = await readAllYearsNormalizedRankingValuesFromR2(
       rankingKey,
       areaType,
-      normalizationType,
+      safeNormalizationType,
     );
     // 正規化スナップショットが見つからなければ総数で fallback
     result = isOk(normResult) && normResult.data.length > 0
