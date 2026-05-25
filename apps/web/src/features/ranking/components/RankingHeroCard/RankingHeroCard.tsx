@@ -2,8 +2,6 @@
 
 import { useMemo, type ReactNode } from "react";
 
-import { Sigma, Users, LandPlot } from "lucide-react";
-
 import {
   Select,
   SelectContent,
@@ -11,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
+import { Sigma, Users, LandPlot } from "lucide-react";
 
 import type { NormalizationOption, RankingValue } from "@stats47/ranking";
 
