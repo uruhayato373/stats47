@@ -1,0 +1,78 @@
+category,region_code,region_name,handle,display_name,priority,verified,last_repost_date,notes
+prefecture,01,北海道,@PrefHokkaido,北海道庁,A,verify,,広報課公式
+prefecture,02,青森県,@AomoriPref,青森県庁,B,verify,,
+prefecture,03,岩手県,@pref_iwate,岩手県広報,B,verify,,
+prefecture,04,宮城県,@MIYAGI_KOHO,宮城県広報,A,verify,,
+prefecture,05,秋田県,@pref_akita,秋田県庁,B,verify,,
+prefecture,06,山形県,@yamagatapref,山形県広報,B,verify,,
+prefecture,07,福島県,@pref_fukushima,福島県庁,A,verify,,復興関連投稿多い
+prefecture,08,茨城県,@Ibarakipref_PR,茨城県広報,B,verify,,
+prefecture,09,栃木県,@pref_tochigi,栃木県広報,B,verify,,
+prefecture,10,群馬県,@gunma_kouhou,群馬県広報,B,verify,,
+prefecture,11,埼玉県,@pref_saitama_pr,埼玉県広報,A,verify,,
+prefecture,12,千葉県,@chiba_kouhou,千葉県広報,A,verify,,千葉港ネタ相性◎
+prefecture,13,東京都,@tocho_koho,東京都広報課,A,verify,,
+prefecture,14,神奈川県,@KanagawaPref_PR,神奈川県広報,A,verify,,横浜港ネタ
+prefecture,15,新潟県,@pref_niigata,新潟県広報,B,verify,,
+prefecture,16,富山県,@pref_toyama,富山県広報,B,verify,,
+prefecture,17,石川県,@IshikawaPref_PR,石川県広報,B,verify,,
+prefecture,18,福井県,@PrefFukui_PR,福井県広報,B,verify,,
+prefecture,19,山梨県,@pref_yamanashi,山梨県広報,B,verify,,
+prefecture,20,長野県,@pref_nagano,長野県広報,B,verify,,
+prefecture,21,岐阜県,@pref_gifu,岐阜県広報,B,verify,,
+prefecture,22,静岡県,@pref_shizuoka,静岡県広報,B,verify,,
+prefecture,23,愛知県,@aichi_kouhou,愛知県広報,A,verify,,名古屋港・自動車輸出
+prefecture,24,三重県,@MiePref_PR,三重県広報,B,verify,,
+prefecture,25,滋賀県,@PrefShiga_PR,滋賀県広報,B,verify,,
+prefecture,26,京都府,@Kyoto_Prefecture,京都府広報,A,verify,,
+prefecture,27,大阪府,@osakaprefectur1,大阪府広報,A,verify,,大阪港・コンテナ +78%
+prefecture,28,兵庫県,@hyogo_kouhou,兵庫県広報,A,verify,,神戸港 +7.6%
+prefecture,29,奈良県,@nara_prefecture,奈良県広報,B,verify,,
+prefecture,30,和歌山県,@wakayamapref,和歌山県広報,B,verify,,
+prefecture,31,鳥取県,@pref_tottori,鳥取県広報,B,verify,,
+prefecture,32,島根県,@pref_shimane,島根県広報,B,verify,,
+prefecture,33,岡山県,@pref_okayama,岡山県広報,B,verify,,水島港
+prefecture,34,広島県,@HiroshimaPref,広島県広報,B,verify,,
+prefecture,35,山口県,@pref_yamaguchi,山口県広報,B,verify,,徳山下松港
+prefecture,36,徳島県,@PrefTokushima,徳島県広報,B,verify,,
+prefecture,37,香川県,@pref_kagawa,香川県広報,B,verify,,高松港
+prefecture,38,愛媛県,@pref_ehime,愛媛県広報,B,verify,,
+prefecture,39,高知県,@KochiPref,高知県広報,B,verify,,
+prefecture,40,福岡県,@FukuokaPref_PR,福岡県広報,A,verify,,北九州港・博多港
+prefecture,41,佐賀県,@SagaPref,佐賀県広報,B,verify,,
+prefecture,42,長崎県,@nagasaki_pref,長崎県広報,B,verify,,
+prefecture,43,熊本県,@KumamotoPref,熊本県広報,B,verify,,
+prefecture,44,大分県,@OitaPref,大分県広報,A,verify,,大分港 (LNG 輸入 4 位)
+prefecture,45,宮崎県,@MiyazakiPref,宮崎県広報,B,verify,,
+prefecture,46,鹿児島県,@KagoshimaPref,鹿児島県広報,A,verify,,鹿児島港 (旅客 1 位)
+prefecture,47,沖縄県,@OkinawaPref_pr,沖縄県広報,A,verify,,石垣港・那覇港
+city,01100,札幌市,@cityofsapporo,札幌市公式,B,verify,,
+city,04100,仙台市,@sendai_shi,仙台市公式,B,verify,,
+city,11100,さいたま市,@SaitamaCity_PR,さいたま市公式,B,verify,,
+city,12100,千葉市,@chiba_city,千葉市公式,B,verify,,
+city,13104,新宿区,@shinjuku_koho,新宿区公式,C,verify,,
+city,14100,横浜市,@cityofyokohama,横浜市公式,A,verify,,横浜港
+city,14130,川崎市,@KawasakiCity_PR,川崎市公式,A,verify,,川崎港 (輸入)
+city,15100,新潟市,@niigata_city,新潟市公式,B,verify,,
+city,22100,静岡市,@shizuoka_city,静岡市公式,B,verify,,
+city,22130,浜松市,@hamamatsushi,浜松市公式,B,verify,,
+city,23100,名古屋市,@nagoya_kouhou,名古屋市公式,A,verify,,名古屋港 (cargo 1 位)
+city,26100,京都市,@kyoto_koho,京都市公式,B,verify,,
+city,27100,大阪市,@osakashi_kouhou,大阪市公式,A,verify,,大阪港
+city,27140,堺市,@city_sakai,堺市公式,B,verify,,堺泉北港
+city,28100,神戸市,@kobecity_kouhou,神戸市公式,A,verify,,神戸港
+city,33100,岡山市,@OkayamaCity,岡山市公式,B,verify,,
+city,34100,広島市,@hiroshima_city,広島市公式,A,verify,,広島港
+city,40100,北九州市,@kitakyu_city,北九州市公式,A,verify,,北九州港
+city,40130,福岡市,@fukuokacity_PR,福岡市公式,A,verify,,博多港
+city,43100,熊本市,@cityofkumamoto,熊本市公式,B,verify,,
+ministry,,国土交通省,@MLIT_JAPAN,国土交通省,A,verify,,港湾・物流の元締め
+ministry,,国土地理院,@GSI_chiriin,国土地理院,B,verify,,
+ministry,,総務省統計局,@Stat_Japan_e,総務省統計局,A,verify,,統計データ公式
+ministry,,内閣府地方創生,@Chihousousei,内閣府地方創生,A,verify,,
+ministry,,経済産業省,@meti_NIPPON,経済産業省,B,verify,,産業データ
+ministry,,国土交通省海事局,@MLIT_KAIJI,海事局,B,verify,,海運・港湾
+community,,自治体DX,@CIVIC_TECH_JP,Code for Japan,A,verify,,シビックテック
+community,,オープンデータ,@LinkedOpenData,Linked Open Data,B,verify,,
+community,,人口データ,@chiiki_demog,地域人口学会,B,verify,,
+community,,地方創生PR,@regional_japan,地方創生推進室,A,verify,,
