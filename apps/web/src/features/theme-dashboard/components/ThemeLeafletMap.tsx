@@ -28,7 +28,7 @@ const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-[400px] w-full rounded-md" />,
+    loading: () => <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" />,
   }
 );
 
