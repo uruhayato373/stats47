@@ -2,6 +2,13 @@
 
 import { useMemo, type ReactNode } from "react";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@stats47/components/atoms/ui/select";
 import { Sigma, Users, LandPlot } from "lucide-react";
 
 import type { NormalizationOption, RankingValue } from "@stats47/ranking";
@@ -163,16 +170,42 @@ export function RankingHeroCard({
           )}
         </div>
 
-        {/* 単位ピル切替 */}
+        {/* 単位ピル切替 (sm 以上) / Select (sm 未満) */}
         {showPills && (
           <div>
             <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-normal text-muted-foreground">
               計算方法を切替
             </p>
+            {/* モバイル: Select */}
+            <div className="sm:hidden">
+              <Select
+                value={normalizationValue}
+                onValueChange={onNormalizationChange}
+                disabled={normalizationDisabled}
+              >
+                <SelectTrigger aria-label="計算方法" className="h-9 w-full text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {pills.map((p) => {
+                    const PillIcon = pillIcon(p.type);
+                    return (
+                      <SelectItem key={p.type} value={p.type}>
+                        <span className="inline-flex items-center gap-1.5">
+                          <PillIcon className="h-3.5 w-3.5" />
+                          {p.label}
+                        </span>
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
+              </Select>
+            </div>
+            {/* デスクトップ: pills */}
             <div
               role="radiogroup"
               aria-label="計算方法"
-              className="inline-flex rounded-full border border-border bg-white p-1 shadow-sm"
+              className="hidden sm:inline-flex rounded-full border border-border bg-white p-1 shadow-sm"
             >
               {pills.map((p) => {
                 const active = normalizationValue === p.type;

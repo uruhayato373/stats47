@@ -366,3 +366,90 @@ N02 鉄道路線を路線図レイヤーとして追加。新幹線（`lineName`
 - `docs/01_技術設計/09_国土交通データプラットフォーム.md`: S12 取得元（MCP `mlit-dpf-mcp`）
 - `.claude/rules/r2-storage-design.md`: R2 配信化する場合の名前空間規約
 - 流用元: `apps/remotion/src/features/migration-flow/` / `population-choropleth/`
+
+---
+
+## [T2-RANKING-NORM-SSG-01] ranking 正規化派生 (人口10万人あたり等) の SSG 化 + SEO 対応
+
+- **tier**: 2
+- **status**: pending
+- **created**: 2026-05-25
+- **target_metric**: GSC clicks / impressions (normalization 派生 URL の indexing)
+
+### 背景
+
+`/ranking/[rankingKey]` ページには 2 系統の「表示基準切替」UI が並存している:
+
+| 系統 | UI | 計算ソース | URL | SSG | SEO |
+|---|---|---|---|---|---|
+| pill (RankingHeroCard) | rounded-full ボタン | stats47 計算 (per_population / per_area / per_household) | `?norm=per_population` などの query param | ✗ (CSR 限定) | ✗ indexable 不可 |
+| group toggle (RankingKeyPageClient) | テキストタブ | 別 metric (e-Stat 提供の「従業員1人あたり」「事業所1ヶ所あたり」等) | `/ranking/{別 rankingKey}` | ✓ | ✓ 別 page として indexed |
+
+### 問題
+
+1. **SEO 損失**: pill 切替の派生 (例: 「人口10万人あたり製造品出荷額」) は SSG 対象外で、検索エンジンに認識されない。同じ意味の e-Stat 由来派生 (「従業員1人あたり」) は別 rankingKey として SSG されており、indexing 状況が非対称。
+2. **UI 混乱**: pill と group で「表示基準を変える」操作が縦に並ぶ。pill は CSR 限定、group は別 URL 遷移という挙動の違いがユーザーに見えない。
+3. **データ重複**: pill 限定派生も group 由来派生も、本質的には「分子 / 分母 * scaleFactor」の同型計算。同じ概念が「どこから来たデータか」で UI / URL 設計が分かれている。
+4. **意味バグ**: `total-population` (denominator key 自身) に per_population オプションが付いており「人口あたりの人口」という無意味な選択肢が pill に並ぶ。`isBaseMetric()` ガード追加前のデータが残存している (T3-RANKING-NORM-DATA-CLEAN-01 で対応)。
+
+### 対応案
+
+#### 案 A (推奨): pill 選択肢を SSG 化する route 拡張
+
+- `app/ranking/[rankingKey]/page.tsx` の `generateStaticParams` に norm 種別を加え、`/ranking/{key}/{norm?}` のような route を生成
+- canonical: 各 norm 毎に独自 URL、`<link rel="alternate">` で他 norm を関連付け
+- sitemap.ts: 全 norm URL を含める (件数増、容量検討要)
+- 内部リンク: ranking-items-by-category 等、関連 ranking 列挙ロジックで norm 派生を含めるか検討
+
+工数: 中 (page.tsx の generateStaticParams / metadata / sitemap / 内部リンク全般)
+
+#### 案 B: pill 派生を別 rankingKey に昇格 (group に一本化)
+
+- `auto-attach-normalization.ts` の派生を、`metrics` テーブルの別 row として登録 (例: `manufacturing-shipment-amount-per-population` という新 key)
+- 既存の group toggle 機構をそのまま使うため、UI 統合が容易
+- 欠点: metric 数が 2-3 倍に膨らむ。snapshot 容量 / ビルド時間 / D1 行数の試算が必要
+
+工数: 大 (DB 設計変更 + 既存 R2 スナップショット移行 + 旧 `?norm=` URL の 301)
+
+#### 案 C: pill を維持しつつ canonical で吸収
+
+- 現状の `?norm=` URL を canonical で元 URL に統合し、pill は CSR 限定の便利機能と割り切る
+- 「人口10万人あたり製造品出荷額」のような検索クエリは諦める
+
+工数: 小 (canonical タグの整備のみ)
+
+### 関連
+
+- 短期対応 (モバイル UI Select 化): claude/admiring-noether-HeeLC (2026-05-25)
+- 派生計算ロジック: `packages/ranking/src/services/compute-normalization.ts`
+- snapshot: `packages/ranking/src/exporters/ranking-normalized-values-snapshot.ts`
+- denominator マップ: `WELL_KNOWN_DENOMINATORS` in compute-normalization.ts
+
+---
+
+## [T3-RANKING-NORM-DATA-CLEAN-01] denominator 系 metric から不適切な normalizationOptions を削除
+
+- **tier**: 3
+- **status**: pending
+- **created**: 2026-05-25
+
+### 背景
+
+`total-population`, `total-area-*`, `households` 等の denominator として使われる metric に、自分自身の denominator を使う norm option が混入している。`isBaseMetric()` ガード追加 (`packages/ranking/src/utils/is-base-metric.ts`) 以前のデータが DB に残存。
+
+### 例
+
+- `total-population` の `calculation.normalizationOptions` に `per_population` (label: 「人口10万人あたり」) が含まれる → 「人口あたりの人口」で意味なし
+
+### 対応
+
+- `packages/ranking/src/scripts/` に cleanup CLI を追加 (`drop-invalid-norm-options.ts`)
+- ロジック: `DENOMINATOR_KEYS` に該当する metric の `normalizationOptions` から、対応する `type` を除外
+- 実行: `--dry-run` で対象確認 → `--apply` で DB 更新 → `/sync-snapshots` で R2 再生成
+
+工数: 小
+
+### 関連
+
+- `packages/ranking/src/utils/is-base-metric.ts` DENOMINATOR_KEYS
+- `packages/ranking/src/scripts/auto-attach-normalization.ts` (既存の自動付与スクリプト)
