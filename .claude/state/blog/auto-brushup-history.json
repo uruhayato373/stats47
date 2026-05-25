@@ -6,8 +6,7 @@
       "framing": "牛乳3位の高知が身長最下位 — 定説崩壊と複合要因",
       "expectedLift": 129,
       "impressions": 2005,
-      "ctr_before": 0.007,
-      "warn": "h1 title「最も飲む高知」は実際 3 位、SEO title は「よく飲む」で OK"
+      "ctr_before": 0.007
     },
     {
       "date": "2026-05-25",
@@ -15,8 +14,7 @@
       "framing": "猛暑日1位は京都・最少は沖縄 — 盆地気候の逆転構造",
       "expectedLift": 105,
       "impressions": 2415,
-      "ctr_before": 0.0149,
-      "warn": "表 rank 43/44 (山形 13.9 vs 長野 13.8) が逆"
+      "ctr_before": 0.0149
     },
     {
       "date": "2026-05-25",
@@ -32,8 +30,7 @@
       "framing": "物価格差の真因は家賃 — 住居費45pt差が主役",
       "expectedLift": 48,
       "impressions": 1527,
-      "ctr_before": 0.0177,
-      "warn": "京都 5位→実は 6位、北海道所得 2,722千円→2,742千円、食料差 10.7pt→10.9pt"
+      "ctr_before": 0.0177
     },
     {
       "date": "2026-05-25",
@@ -49,8 +46,7 @@
       "framing": "移住で生活コストは下がるか、住居費が格差の9割を説明",
       "expectedLift": 23,
       "impressions": 216,
-      "ctr_before": 0,
-      "warn": "住居ランキング 2 位神奈川 112.9・3 位千葉 114.4 で大小逆"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
@@ -58,8 +54,7 @@
       "framing": "特産魚種は地理(親潮×黒潮)が決める、60年で86%消えた魚種",
       "expectedLift": 20,
       "impressions": 273,
-      "ctr_before": 0.011,
-      "warn": "スケトウダラ北海道 18.3万t→16.7万t、コンブ 7.9→6.5万t"
+      "ctr_before": 0.011
     },
     {
       "date": "2026-05-25",
@@ -83,8 +78,7 @@
       "framing": "埼玉が昼夜人口比率で全国最下位の理由──高密度なのに昼間だれもいない",
       "expectedLift": 13,
       "impressions": 285,
-      "ctr_before": 0.014,
-      "warn": "SVG 3位愛知 101.9%→実は 4位 101.2% (3位は京都)"
+      "ctr_before": 0.014
     },
     {
       "date": "2026-05-25",
@@ -124,8 +118,7 @@
       "framing": "婚姻年齢が1歳違うと出生率は0.1ポイント下がる──九州と首都圏で差が生まれる構造的理由",
       "expectedLift": 9,
       "impressions": 148,
-      "ctr_before": 0,
-      "warn": "SVG chart で熊本 1.47 (rank5) が欠落、鹿児島が rank3 表示 (実は rank4)"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
@@ -149,8 +142,7 @@
       "framing": "埼玉730万人でも地方税薄い──法人税収が東京に流れるベッドタウン構造",
       "expectedLift": 6,
       "impressions": 109,
-      "ctr_before": 0.0183,
-      "warn": "福井 19.6万円→19.7万円 (rounding)、埼玉 730万人→733万人"
+      "ctr_before": 0.0183
     },
     {
       "date": "2026-05-25",
@@ -158,8 +150,7 @@
       "framing": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプ分類",
       "expectedLift": 4,
       "impressions": 155,
-      "ctr_before": 0.0065,
-      "warn": "3,753÷1,028=3.65、「3.7倍」は rounding"
+      "ctr_before": 0.0065
     },
     {
       "date": "2026-05-25",
@@ -167,8 +158,7 @@
       "framing": "東京は婚姻率トップなのに出生率最下位──結婚→子どもが成立しない構造",
       "expectedLift": 3,
       "impressions": 51,
-      "ctr_before": 0,
-      "warn": "SVG title 2024 data、本文「沖縄 2023 転落」で年次不一致"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
@@ -200,8 +190,7 @@
       "framing": "郵便局もデジタルも届かない地域の二重インフラ不足構造",
       "expectedLift": 6,
       "impressions": 78,
-      "ctr_before": 0.0128,
-      "warn": "散布図「正の相関」は北海道 (postal 47位、mobile 9位) と矛盾"
+      "ctr_before": 0.0128
     },
     {
       "date": "2026-05-25",
@@ -217,8 +206,7 @@
       "framing": "財政力指数が唯一1.0超えたのは東京だけ──47都道府県で自立の条件",
       "expectedLift": 3,
       "impressions": 25,
-      "ctr_before": 0,
-      "warn": "「48 年間」表記、1975-2022 は 47 年"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
@@ -242,8 +230,7 @@
       "framing": "求人倍率トップの福井で失業率も最低──北陸が「雇用最強県」になった理由",
       "expectedLift": 5,
       "impressions": 66,
-      "ctr_before": 0.0152,
-      "warn": "subtitle が 2022 求人倍率 + 2020 失業率の混在"
+      "ctr_before": 0.0152
     },
     {
       "date": "2026-05-25",
@@ -332,8 +319,7 @@
       "framing": "汚染施設最多の北海道が公害苦情最少──距離と密度の法則",
       "expectedLift": 3,
       "impressions": 62,
-      "ctr_before": 0.0161,
-      "warn": "「愛知 top-3 in 施設数」combined は OK、ばい煙単独は rank4。本文 2021、JSON は 2023"
+      "ctr_before": 0.0161
     },
     {
       "date": "2026-05-25",
@@ -381,8 +367,7 @@
       "framing": "「高リサイクル鳥取でも処分場46位」パラドックス",
       "expectedLift": 3,
       "impressions": 60,
-      "ctr_before": 0.0167,
-      "warn": "大阪・青森 46位表記→実は 45位同率"
+      "ctr_before": 0.0167
     },
     {
       "date": "2026-05-25",
@@ -390,8 +375,7 @@
       "framing": "富山・福井・奈良の共働き×持ち家×三世代同居構造",
       "expectedLift": 3,
       "impressions": 26,
-      "ctr_before": 0,
-      "warn": "貯蓄率 chart 3位 千葉 42.8%→実は石川 44.3% (千葉は rank32)。貯蓄現在高は ~1-2% 系統 overstatement"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
@@ -415,8 +399,7 @@
       "framing": "人手不足の地方ほど最低賃金が低い逆説──需給では説明できない構造",
       "expectedLift": 7,
       "impressions": 118,
-      "ctr_before": 0,
-      "warn": "SVG 岩手 953円・本文 952円で矛盾"
+      "ctr_before": 0
     },
     {
       "date": "2026-05-25",
