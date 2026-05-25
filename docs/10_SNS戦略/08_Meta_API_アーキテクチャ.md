@@ -3,7 +3,7 @@ type: architecture
 date: 2026-05-26
 status: active
 related_files:
-  - docs/10_SNS戦略/04_Facebook_Page_Token_Setup.md
+  - docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md
   - .claude/skills/sns/post-instagram/post-instagram.ts
   - .claude/scripts/sns/delete-ig-via-fb-graph.cjs
 ---
@@ -203,7 +203,7 @@ long-lived Token は 60 日有効。期限切れ前に refresh が必要:
 
 ## 関連
 
-- 手順詳細: `docs/10_SNS戦略/04_Facebook_Page_Token_Setup.md`
+- 手順詳細: `docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md`
 - 既存投稿スクリプト: `.claude/skills/sns/post-instagram/post-instagram.ts`
 - 削除スクリプト: `.claude/scripts/sns/delete-ig-via-fb-graph.cjs`
 - memory: `project_instagram_graph_api_setup` (stats47jp セットアップ履歴)
