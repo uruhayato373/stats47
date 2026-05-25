@@ -368,7 +368,47 @@ ranking ページの構造化データ生成は維持。新規 hero でも以下
 
 ---
 
-## 10. 関連ドキュメント
+## 10. 2026-05-25 進捗ハンドオフ (PR #349-#354 series)
+
+W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右サイドバー) と
+ブログ強化 (3 カラム + コードブロック配色 + ふるさと納税 3 段ロジック) を完了。
+
+### 完了済 (PR ベース)
+
+| PR | 内容 |
+|---|---|
+| #349 | ranking テーブルのモバイル overlap 修正 (`min-w-max`) |
+| #350 | ranking pill / group toggle のモバイル Select 化 |
+| #351 | CSV 出力に normalizationType 反映 + CodeQL whitelist |
+| #352 | CSV/JSON ダウンロード R2 事前生成化 (Route Handler + 全基準 + Shift_JIS) + DataUsageCard リファクタ |
+| #353 | D-System Phase 1 プリミティブ (`WidePageShell`/`RightRailWidgets`/`NextUpGrid`) + ブログ α 3 カラム + コードブロック配色改善 + ふるさと納税 3 段ロジック + Tailwind container 1700px |
+| #354 | area / category / themes-index / tag に右サイドバー追加 + home に NextUpGrid 追加 |
+
+### 残作業
+
+詳細は `docs/50_Issues/feature-backlog.md` の以下セクションを参照:
+
+- **T2-REDESIGN-PHASE2**: KPI Tile クリック化 + 本文中 NativeAffiliateRow 周期挿入
+- **T2-REDESIGN-PHASE3**: A8.net 統合 + compare/search ページ実装 + 環境変数本番設定 + CSV ダウンロード R2 push 反映
+
+### 環境変数 (Cloudflare Pages env vars)
+
+本番で実 ASP に切り替える際は以下を設定:
+
+| 変数 | 用途 | 未設定時の挙動 |
+|---|---|---|
+| `NEXT_PUBLIC_TECH_SCHOOL_AFFILIATE_URL` | Claude Code 副業講座 ASP URL | `/about` にフォールバック |
+| `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` | 楽天アフィリエイト ID | ID なしのリンクで遷移 |
+| `NEXT_PUBLIC_RAKUTEN_APP_ID` | 楽天 API アプリ ID | ふるさと納税商品取得が空配列 (固定リンクへ fallback) |
+
+### 運用タスク
+
+- `bash .claude/skills/db/sync-snapshots/run.sh --only ranking-download`
+  → CSV/JSON 事前生成ファイルを R2 に push (初回 15-30 分)
+
+---
+
+## 11. 関連ドキュメント
 
 - `.claude/design-system/redesign/INDEX.md` — 11 ページ進捗トラッカー（真実源）
 - `.claude/design-system/redesign/README.md` — プロトタイプ運用
@@ -379,7 +419,7 @@ ranking ページの構造化データ生成は維持。新規 hero でも以下
 - `docs/02_実装計画/seo-todo-unify-phase-1-3.md` — SEO 改善との整合
 - `docs/05_改善ログ/adsense.md` — AdSense 改善ログ（Phase 5 完了時に記入）
 
-## 11. 完了の定義
+## 12. 完了の定義
 
 本マスタープランの「完了」は以下すべてが成立した時点:
 
@@ -390,7 +430,7 @@ ranking ページの構造化データ生成は維持。新規 hero でも以下
 5. SSG ステータスが全ページで `○ (Static)`
 6. `docs/05_改善ログ/adsense.md` および `docs/05_改善ログ/gsc.md` に effect/* で記録
 
-## 12. 実装ログ (2026-05-23)
+## 13. 実装ログ (2026-05-23)
 
 ### Phase 0-5 完了 (8/11 ページ実装 / 3 ページ deferred)
 
