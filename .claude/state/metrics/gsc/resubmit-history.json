@@ -1198,5 +1198,1389 @@
     "url": "https://stats47.jp/ranking/dental-guidance-persons-per-1000",
     "status": "success",
     "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:30.930Z",
+    "url": "https://stats47.jp/ranking/dental-hygienist-by-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:31.271Z",
+    "url": "https://stats47.jp/ranking/dental-hygienist-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:31.619Z",
+    "url": "https://stats47.jp/ranking/dentists-in-medical-facilities-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:31.973Z",
+    "url": "https://stats47.jp/ranking/department-store-count-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:32.284Z",
+    "url": "https://stats47.jp/ranking/department-supermarket-count",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:32.581Z",
+    "url": "https://stats47.jp/ranking/department-supermarket-sales",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:32.915Z",
+    "url": "https://stats47.jp/ranking/dependent-population-index",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:33.206Z",
+    "url": "https://stats47.jp/ranking/deposit-balance",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:33.540Z",
+    "url": "https://stats47.jp/ranking/deposit-balance-per-person",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:33.853Z",
+    "url": "https://stats47.jp/ranking/designated-difficult-disease",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:34.144Z",
+    "url": "https://stats47.jp/ranking/detached-house-ratio",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:34.377Z",
+    "url": "https://stats47.jp/ranking/disabled-employment-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:34.727Z",
+    "url": "https://stats47.jp/ranking/disabled-job-ratio-per-1000",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:35.087Z",
+    "url": "https://stats47.jp/ranking/disaster-damage-amount-per-person",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:35.385Z",
+    "url": "https://stats47.jp/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:35.713Z",
+    "url": "https://stats47.jp/ranking/disaster-recovery-project-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:35.933Z",
+    "url": "https://stats47.jp/ranking/disaster-relief-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:36.154Z",
+    "url": "https://stats47.jp/ranking/discharged-patients",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:36.374Z",
+    "url": "https://stats47.jp/ranking/divorces-per-total-population",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:36.595Z",
+    "url": "https://stats47.jp/ranking/domestic-bank-deposit-balance",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:36.897Z",
+    "url": "https://stats47.jp/ranking/donations-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-05-25T21:55:37.118Z",
+    "url": "https://stats47.jp/ranking/dress-shirt-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:37.337Z",
+    "url": "https://stats47.jp/ranking/dress-shirt-consumption-quantity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:37.557Z",
+    "url": "https://stats47.jp/ranking/dried-mackerel-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:37.777Z",
+    "url": "https://stats47.jp/ranking/dried-nori-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:37.997Z",
+    "url": "https://stats47.jp/ranking/dried-shiitake-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:38.218Z",
+    "url": "https://stats47.jp/ranking/dried-soup-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:38.437Z",
+    "url": "https://stats47.jp/ranking/drug-enforcement-arrest-count-per-population",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:38.658Z",
+    "url": "https://stats47.jp/ranking/dual-income-household-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:38.878Z",
+    "url": "https://stats47.jp/ranking/early-neonatal-deaths",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:39.098Z",
+    "url": "https://stats47.jp/ranking/education-department-staff",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:39.318Z",
+    "url": "https://stats47.jp/ranking/education-expenditure-ratio-pref-finance",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:39.539Z",
+    "url": "https://stats47.jp/ranking/education-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:39.759Z",
+    "url": "https://stats47.jp/ranking/elderly-class-lecture-count-per-million",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:39.979Z",
+    "url": "https://stats47.jp/ranking/elderly-general-worker-old-population-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:40.199Z",
+    "url": "https://stats47.jp/ranking/elderly-general-worker-old-population-ratio-pre2019",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:40.419Z",
+    "url": "https://stats47.jp/ranking/elderly-household-detail",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:40.639Z",
+    "url": "https://stats47.jp/ranking/elderly-welfare-expenditure-ratio-pref-finance",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:40.859Z",
+    "url": "https://stats47.jp/ranking/electricity-demand",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:41.079Z",
+    "url": "https://stats47.jp/ranking/electricity-generation-capacity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:41.299Z",
+    "url": "https://stats47.jp/ranking/elementary-school-children-1-per",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:41.519Z",
+    "url": "https://stats47.jp/ranking/elementary-school-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:41.740Z",
+    "url": "https://stats47.jp/ranking/elementary-school-count-per-100k-6-11",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:41.959Z",
+    "url": "https://stats47.jp/ranking/elementary-school-count-per-100km2-habitable",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:42.179Z",
+    "url": "https://stats47.jp/ranking/elementary-school-education-cost-per-student",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:42.399Z",
+    "url": "https://stats47.jp/ranking/elementary-school-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:42.619Z",
+    "url": "https://stats47.jp/ranking/elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:42.839Z",
+    "url": "https://stats47.jp/ranking/elementary-school-long-absence-ratio-over-30days-per-1000",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:43.061Z",
+    "url": "https://stats47.jp/ranking/elementary-school-students-per-teacher",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:43.280Z",
+    "url": "https://stats47.jp/ranking/elementary-school-teachers-ratio-female",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:43.500Z",
+    "url": "https://stats47.jp/ranking/elementary-tutoring-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:43.720Z",
+    "url": "https://stats47.jp/ranking/employed-outside-the-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:43.941Z",
+    "url": "https://stats47.jp/ranking/employed-outside-the-prefecture-pre2018",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:44.161Z",
+    "url": "https://stats47.jp/ranking/employed-people-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:44.381Z",
+    "url": "https://stats47.jp/ranking/employee-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:44.602Z",
+    "url": "https://stats47.jp/ranking/employee-ratio-1-4-employee-establishments-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:44.822Z",
+    "url": "https://stats47.jp/ranking/employee-ratio-10-29-employee-establishments-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:45.042Z",
+    "url": "https://stats47.jp/ranking/employee-ratio-100-299-employee-establishments-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:45.261Z",
+    "url": "https://stats47.jp/ranking/employee-ratio-300plus-employee-establishments-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:45.480Z",
+    "url": "https://stats47.jp/ranking/employee-ratio-5-9-employee-establishments-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:45.700Z",
+    "url": "https://stats47.jp/ranking/employment-insurance-basic-benefit-average",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:45.920Z",
+    "url": "https://stats47.jp/ranking/employment-insurance-daily-basic-benefit-average",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:46.142Z",
+    "url": "https://stats47.jp/ranking/employment-insurance-daily-receipt-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:46.362Z",
+    "url": "https://stats47.jp/ranking/employment-insurance-receipt-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:46.583Z",
+    "url": "https://stats47.jp/ranking/employment-mobility-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:46.804Z",
+    "url": "https://stats47.jp/ranking/employment-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:47.024Z",
+    "url": "https://stats47.jp/ranking/enoki-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:47.245Z",
+    "url": "https://stats47.jp/ranking/enoki-consumption-quantity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:47.464Z",
+    "url": "https://stats47.jp/ranking/environmental-sanitation-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:47.684Z",
+    "url": "https://stats47.jp/ranking/establishment-ratio-1-4-employees-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:47.904Z",
+    "url": "https://stats47.jp/ranking/establishment-ratio-10-29-employees-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:48.124Z",
+    "url": "https://stats47.jp/ranking/establishment-ratio-100-299-employees-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:48.346Z",
+    "url": "https://stats47.jp/ranking/establishment-ratio-300plus-employees-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:48.567Z",
+    "url": "https://stats47.jp/ranking/establishment-ratio-5-9-employees-private",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:48.787Z",
+    "url": "https://stats47.jp/ranking/fabric-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:49.008Z",
+    "url": "https://stats47.jp/ranking/factory-industrial-park-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:49.228Z",
+    "url": "https://stats47.jp/ranking/factory-location-area-annual",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:49.448Z",
+    "url": "https://stats47.jp/ranking/farm-household-expenditure-per-month",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:49.667Z",
+    "url": "https://stats47.jp/ranking/female-class-lecture-count-per-million-female",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:49.887Z",
+    "url": "https://stats47.jp/ranking/female-scheduled-earnings",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:50.106Z",
+    "url": "https://stats47.jp/ranking/final-disposal-site-remaining-capacity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:50.327Z",
+    "url": "https://stats47.jp/ranking/final-education-elementary-junior-high-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:50.548Z",
+    "url": "https://stats47.jp/ranking/final-education-highschool-old-junior-high-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:50.769Z",
+    "url": "https://stats47.jp/ranking/final-education-junior-college-technical-college-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:50.988Z",
+    "url": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:51.209Z",
+    "url": "https://stats47.jp/ranking/final-energy-consumption",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:51.430Z",
+    "url": "https://stats47.jp/ranking/final-energy-consumption-per-capita",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:51.652Z",
+    "url": "https://stats47.jp/ranking/financial-assets-balance-multi-person-households",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:51.872Z",
+    "url": "https://stats47.jp/ranking/financial-debt-balance",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:52.094Z",
+    "url": "https://stats47.jp/ranking/fire-damage-casualties-per-accident",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:52.313Z",
+    "url": "https://stats47.jp/ranking/fire-damage-casualties-per-population",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:52.534Z",
+    "url": "https://stats47.jp/ranking/fire-damage-household-count-per-100-building-fires",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:52.754Z",
+    "url": "https://stats47.jp/ranking/fire-deaths-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:52.975Z",
+    "url": "https://stats47.jp/ranking/fire-department-branch-count-per-100-km2",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:53.195Z",
+    "url": "https://stats47.jp/ranking/fire-department-count-per-100-km2",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:53.415Z",
+    "url": "https://stats47.jp/ranking/fire-department-dispatch-count-per-100-thousand-people",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:53.635Z",
+    "url": "https://stats47.jp/ranking/fire-department-emergency-car-count-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:53.854Z",
+    "url": "https://stats47.jp/ranking/fire-department-employees",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:54.073Z",
+    "url": "https://stats47.jp/ranking/fire-department-member-count-per-100-thousand-people",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:54.294Z",
+    "url": "https://stats47.jp/ranking/fire-department-pump-car-count-per-100-thousand-people",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:54.514Z",
+    "url": "https://stats47.jp/ranking/fire-department-water-count-per-100-thousand-people",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:54.734Z",
+    "url": "https://stats47.jp/ranking/fire-related-personnel-count-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:54.954Z",
+    "url": "https://stats47.jp/ranking/firefighting-expenditure-ratio-pref-municipal",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:55.173Z",
+    "url": "https://stats47.jp/ranking/firefighting-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:55.393Z",
+    "url": "https://stats47.jp/ranking/fiscal-strength-index-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:55.613Z",
+    "url": "https://stats47.jp/ranking/fish-catch",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:55.833Z",
+    "url": "https://stats47.jp/ranking/fish-tsukudani-type2-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:56.054Z",
+    "url": "https://stats47.jp/ranking/fishery-household-sex-age",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:56.274Z",
+    "url": "https://stats47.jp/ranking/fishery-management-orgs",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:56.494Z",
+    "url": "https://stats47.jp/ranking/fishery-output-value",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:56.714Z",
+    "url": "https://stats47.jp/ranking/fishery-species-catch-scallop",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:56.934Z",
+    "url": "https://stats47.jp/ranking/fishery-species-catch-sea-bream",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:57.156Z",
+    "url": "https://stats47.jp/ranking/fishery-species-catch-yellowtail",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:57.376Z",
+    "url": "https://stats47.jp/ranking/fishery-workers",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:57.597Z",
+    "url": "https://stats47.jp/ranking/fishery-workers-coastal-offshore",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:57.817Z",
+    "url": "https://stats47.jp/ranking/fishing-port-count-by-type",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:58.037Z",
+    "url": "https://stats47.jp/ranking/fishing-port-count-ksj",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:58.256Z",
+    "url": "https://stats47.jp/ranking/fishing-vessel-crew",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:58.476Z",
+    "url": "https://stats47.jp/ranking/fishing-vessel-tonnage-class",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:58.697Z",
+    "url": "https://stats47.jp/ranking/flood-affected-municipalities",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:58.917Z",
+    "url": "https://stats47.jp/ranking/flood-affected-rivers",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:59.137Z",
+    "url": "https://stats47.jp/ranking/flood-casualties-total",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:59.358Z",
+    "url": "https://stats47.jp/ranking/flood-damage-bridge",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:59.578Z",
+    "url": "https://stats47.jp/ranking/flood-damage-general-assets",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:55:59.798Z",
+    "url": "https://stats47.jp/ranking/flood-damage-public-infrastructure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:00.018Z",
+    "url": "https://stats47.jp/ranking/floor-area-new-owner-dwelling",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:00.238Z",
+    "url": "https://stats47.jp/ranking/floor-area-new-rented-dwelling",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:00.458Z",
+    "url": "https://stats47.jp/ranking/floor-area-per-dwelling-owner",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:00.679Z",
+    "url": "https://stats47.jp/ranking/floor-area-per-dwelling-rented",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:00.898Z",
+    "url": "https://stats47.jp/ranking/floor-covering-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:01.118Z",
+    "url": "https://stats47.jp/ranking/flush-toilet-housing-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:01.338Z",
+    "url": "https://stats47.jp/ranking/flush-toilet-population-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:01.559Z",
+    "url": "https://stats47.jp/ranking/food-business-establishments",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:01.778Z",
+    "url": "https://stats47.jp/ranking/food-business-facility-penalties",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:01.998Z",
+    "url": "https://stats47.jp/ranking/food-business-facility-penalties-per-1000",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:02.218Z",
+    "url": "https://stats47.jp/ranking/food-expenditure-ratio-multi-person-households",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:02.438Z",
+    "url": "https://stats47.jp/ranking/food-retail-store-count-per-1000",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:02.658Z",
+    "url": "https://stats47.jp/ranking/food-sanitation-inspection",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:02.877Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:03.096Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-china",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:03.326Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-china-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:03.545Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-korea",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:03.764Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-korea-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:03.983Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-usa",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:04.203Z",
+    "url": "https://stats47.jp/ranking/foreign-resident-count-usa-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:04.425Z",
+    "url": "https://stats47.jp/ranking/forest-area",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:04.644Z",
+    "url": "https://stats47.jp/ranking/forest-area-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:04.863Z",
+    "url": "https://stats47.jp/ranking/forest-road-length",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:05.082Z",
+    "url": "https://stats47.jp/ranking/frequency-of-occupational-accidents",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:05.303Z",
+    "url": "https://stats47.jp/ranking/fulfillment-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:05.523Z",
+    "url": "https://stats47.jp/ranking/fulltime-physicians-general-hospital-per-100beds",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:05.743Z",
+    "url": "https://stats47.jp/ranking/furikake-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:05.962Z",
+    "url": "https://stats47.jp/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:06.182Z",
+    "url": "https://stats47.jp/ranking/future-burden-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:06.402Z",
+    "url": "https://stats47.jp/ranking/game-console-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:06.622Z",
+    "url": "https://stats47.jp/ranking/game-console-consumption-quantity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:06.841Z",
+    "url": "https://stats47.jp/ranking/garbage-collection-population",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:07.061Z",
+    "url": "https://stats47.jp/ranking/garbage-landfill-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:07.280Z",
+    "url": "https://stats47.jp/ranking/garbage-total-output",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:07.498Z",
+    "url": "https://stats47.jp/ranking/garden-maintenance-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:07.718Z",
+    "url": "https://stats47.jp/ranking/gas-station-count-per-100km",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:07.937Z",
+    "url": "https://stats47.jp/ranking/gasoline-sales-volume",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:08.155Z",
+    "url": "https://stats47.jp/ranking/gdp-growth-rate-pref-h17",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:08.375Z",
+    "url": "https://stats47.jp/ranking/gdp-growth-rate-pref-h23",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:08.593Z",
+    "url": "https://stats47.jp/ranking/general-affairs-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:08.813Z",
+    "url": "https://stats47.jp/ranking/general-clinic-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:09.032Z",
+    "url": "https://stats47.jp/ranking/general-clinic-count-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:09.251Z",
+    "url": "https://stats47.jp/ranking/general-dust-emission-facility-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:09.471Z",
+    "url": "https://stats47.jp/ranking/general-funds-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:09.688Z",
+    "url": "https://stats47.jp/ranking/general-hospital-avg-length-of-stay",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:09.908Z",
+    "url": "https://stats47.jp/ranking/general-hospital-bed-count-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:10.128Z",
+    "url": "https://stats47.jp/ranking/general-hospital-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:10.347Z",
+    "url": "https://stats47.jp/ranking/general-hospital-count-per-100k",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:10.566Z",
+    "url": "https://stats47.jp/ranking/general-revenue-ratio-pref-finance",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:10.784Z",
+    "url": "https://stats47.jp/ranking/gloves-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:11.004Z",
+    "url": "https://stats47.jp/ranking/golf-course-public",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:11.223Z",
+    "url": "https://stats47.jp/ranking/golf-equipment-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:11.442Z",
+    "url": "https://stats47.jp/ranking/govt-health-insurance-visit-expense-dependents-per-person",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:11.661Z",
+    "url": "https://stats47.jp/ranking/govt-health-insurance-visit-expense-insured-per-person",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:11.880Z",
+    "url": "https://stats47.jp/ranking/grade-separated-pedestrian-crossings-per-1000-km",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:12.100Z",
+    "url": "https://stats47.jp/ranking/gross-prefectural-income-growth-rate-nominal-h17",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:12.319Z",
+    "url": "https://stats47.jp/ranking/gross-prefectural-income-growth-rate-nominal-h23",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:12.539Z",
+    "url": "https://stats47.jp/ranking/gross-prefectural-income-growth-rate-real-h17",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:12.758Z",
+    "url": "https://stats47.jp/ranking/habitable-area",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:12.978Z",
+    "url": "https://stats47.jp/ranking/habitable-area-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:13.197Z",
+    "url": "https://stats47.jp/ranking/health-center-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:13.417Z",
+    "url": "https://stats47.jp/ranking/health-checkup-rate-lifestyle-diseases",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:13.636Z",
+    "url": "https://stats47.jp/ranking/health-checkup-recipients",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:13.855Z",
+    "url": "https://stats47.jp/ranking/health-consumables-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:14.073Z",
+    "url": "https://stats47.jp/ranking/health-insurance-premium-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:14.293Z",
+    "url": "https://stats47.jp/ranking/health-physical-education-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:14.511Z",
+    "url": "https://stats47.jp/ranking/healthcare-expenditure-ratio-multi-person-households",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:14.730Z",
+    "url": "https://stats47.jp/ranking/heater-consumption-expenditure",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:14.951Z",
+    "url": "https://stats47.jp/ranking/heater-consumption-quantity",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:15.170Z",
+    "url": "https://stats47.jp/ranking/high-school-advancement-rate",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:15.390Z",
+    "url": "https://stats47.jp/ranking/high-school-count",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:15.609Z",
+    "url": "https://stats47.jp/ranking/high-school-count-per-100k-15-17",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:15.829Z",
+    "url": "https://stats47.jp/ranking/high-school-education-cost-fulltime-per-student",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:16.048Z",
+    "url": "https://stats47.jp/ranking/high-school-expenses-prefecture",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
+  },
+  {
+    "timestamp": "2026-05-25T21:56:16.267Z",
+    "url": "https://stats47.jp/ranking/high-school-graduates-job-ratio",
+    "status": "error",
+    "coverageState": "ranking-unindexed",
+    "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:1044264339032'."
   }
 ]
