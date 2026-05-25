@@ -121,7 +121,7 @@ export function RankingDataTable({
       {
         accessorKey: "value",
         header: () => <div className="text-right">値</div>,
-        meta: {},
+        meta: { width: "120px" },
         cell: ({ row }) => {
           const unit = rankingItem?.unit || processedData[0]?.unit || "";
           return (
