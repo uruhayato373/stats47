@@ -17,6 +17,7 @@ import {
   HeroShell,
   KpiGrid,
   KpiTile,
+  NextUpGrid,
 } from "@/features/redesign";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
@@ -388,7 +389,56 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ⑦ AdSense (footer) */}
+      {/* ⑦ 次に読む (回遊リンク強化) */}
+      <section className="px-4 pb-8">
+        <div className="mx-auto max-w-[1400px]">
+          <NextUpGrid
+            title="このサイトの主要ページ"
+            moreHref="/ranking"
+            items={[
+              {
+                href: "/ranking",
+                title: "全ランキング一覧",
+                description: "1,800 以上の指標から探す",
+                badge: "RANKING",
+              },
+              {
+                href: "/themes",
+                title: "テーマダッシュボード",
+                description: "少子高齢化・労働・医療など 17 テーマ",
+                badge: "THEMES",
+              },
+              {
+                href: "/areas",
+                title: "都道府県一覧",
+                description: "47 都道府県のプロフィール",
+                badge: "AREAS",
+              },
+              {
+                href: "/blog",
+                title: "ブログ",
+                description: "データを読み解く解説記事",
+                badge: "BLOG",
+              },
+              {
+                href: "/survey",
+                title: "調査から探す",
+                description: "出典別に統計を絞り込む",
+                badge: "SURVEY",
+              },
+              {
+                href: "/search",
+                title: "キーワード検索",
+                description: "ランキング・記事を横断検索",
+                badge: "SEARCH",
+              },
+            ]}
+            columns={3}
+          />
+        </div>
+      </section>
+
+      {/* ⑧ AdSense (footer) */}
       <div className="my-6 flex justify-center px-4">
         <AdSenseAd
           format={RANKING_PAGE_FOOTER.format}

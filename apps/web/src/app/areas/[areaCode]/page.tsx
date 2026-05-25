@@ -31,6 +31,7 @@ import {
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 import { AreaMigrationFlowSection } from "@/features/migration-flow";
+import { RightRailWidgets } from "@/features/redesign";
 
 
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
@@ -142,9 +143,10 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 />
             </SetSidebarSection>
 
-            {/* 1カラムレイアウト */}
+            {/* 2 カラムレイアウト (xl+ で右サイドバー、xl 未満は main のみ) */}
             <div className="container mx-auto px-4 py-10">
-                <main className="min-w-0 space-y-10">
+                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+                    <main className="min-w-0 space-y-10">
                     {/* DB管理チャート */}
                     <AreaChartSection
                         areaCode={areaCode}
@@ -184,10 +186,18 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         slotId={RANKING_SIDEBAR_TOP.slotId}
                     />
 
-                    {/* アフィリエイト */}
-                    <AreaBannerAd />
-                    <FurusatoNozeiCard areaCode={areaCode} />
+                    {/* アフィリエイト (xl 未満では main 内に表示) */}
+                    <div className="xl:hidden space-y-6">
+                        <AreaBannerAd />
+                        <FurusatoNozeiCard areaCode={areaCode} />
+                    </div>
                 </main>
+
+                    {/* 右サイドバー (xl+) — その県のふるさと納税 + Claude Code 講座 + 関連 AdSense */}
+                    <aside className="hidden xl:block">
+                        <RightRailWidgets furusatoAreaCode={areaCode} />
+                    </aside>
+                </div>
             </div>
         </>
     );

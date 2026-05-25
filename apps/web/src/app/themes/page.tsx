@@ -5,6 +5,7 @@ import {
   HeroShell,
   KpiGrid,
   KpiTile,
+  RightRailWidgets,
 } from "@/features/redesign";
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
@@ -78,28 +79,37 @@ export default function ThemesPage() {
         </div>
       </HeroShell>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {ALL_THEMES.map((theme) => (
-          <Link
-            key={theme.themeKey}
-            href={`/themes/${theme.themeKey}`}
-            className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50 hover:shadow-md"
-          >
-            <h2 className="text-base font-semibold text-foreground">
-              {theme.title}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-              {theme.description}
-            </p>
-            <p className="mt-2 text-xs text-muted-foreground">
-              {theme.rankingKeys.length} 指標
-            </p>
-          </Link>
-        ))}
-      </div>
+      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+        <main className="min-w-0">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ALL_THEMES.map((theme) => (
+              <Link
+                key={theme.themeKey}
+                href={`/themes/${theme.themeKey}`}
+                className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50 hover:shadow-md"
+              >
+                <h2 className="text-base font-semibold text-foreground">
+                  {theme.title}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                  {theme.description}
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {theme.rankingKeys.length} 指標
+                </p>
+              </Link>
+            ))}
+          </div>
 
-      <div className="mt-8">
-        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+          <div className="mt-8">
+            <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+          </div>
+        </main>
+
+        {/* 右サイドバー: xl+ で関連 widget + 広告。テーマ依存しない汎用配置 */}
+        <aside className="mt-8 xl:mt-0 xl:block">
+          <RightRailWidgets />
+        </aside>
       </div>
     </div>
   );
