@@ -35,6 +35,8 @@ export const snsPosts = sqliteTable(
     quoteUrl:    text("quote_url"),
     /** 添付画像/動画のローカルパス */
     mediaPath:   text("media_path"),
+    /** YouTube 用: サムネイル画像のローカルパス (basename で重複検出に使用) */
+    thumbnailPath: text("thumbnail_path"),
     /** stats47.jp へのリンクを含むか */
     hasLink:     integer("has_link", { mode: "boolean" }).default(false),
     /** UTM パラメータ付き URL */
@@ -57,6 +59,12 @@ export const snsPosts = sqliteTable(
     bookmarks:   integer("bookmarks"),
     /** エンゲージメント最終取得日時 */
     metricsUpdatedAt: text("metrics_updated_at"),
+    /** プラットフォーム側で削除された場合のタイムスタンプ (履歴は残す) */
+    deletedAt:   text("deleted_at"),
+    /** Remotion composition ID (例: "RankingYouTube-ScrollGes", "BarChartRace-YouTubeShort") */
+    template:    text("template"),
+    /** 利用した metric_key の JSON 配列 (例: '["average-life-expectancy"]') */
+    metricKeys:  text("metric_keys"),
     createdAt:   text("created_at").default(sql`CURRENT_TIMESTAMP`),
     updatedAt:   text("updated_at").default(sql`CURRENT_TIMESTAMP`),
   },
@@ -66,6 +74,8 @@ export const snsPosts = sqliteTable(
     statusIdx:      index("idx_sns_posts_status").on(table.status),
     postedAtIdx:    index("idx_sns_posts_posted_at").on(table.postedAt),
     platformContentIdx: index("idx_sns_posts_platform_content").on(table.platform, table.contentKey, table.postType),
+    deletedAtIdx:   index("idx_sns_posts_deleted_at").on(table.deletedAt),
+    templateIdx:    index("idx_sns_posts_template").on(table.template),
   })
 );
 

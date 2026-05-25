@@ -136,6 +136,45 @@ YouTube チャンネル「統計で見る都道府県 | stats47」の全パイ�
 - 維持率 30% 以下 → そのフォーマットの制作を中止
 - 週の投稿数が 3 本を超えそう → 翌週に延期
 
+### 重複コンテンツ禁止（2026-05-26 追加 / 2026-03 シャドウバン誘発因子）
+
+2026-03 に同タイトル/同サムネ再アップロードを 14 グループ・28 本量産し、2026-04-24 シャドウバンを引いた（[`docs/10_SNS戦略/06_YouTube運用Playbook.md`](../../docs/10_SNS戦略/06_YouTube運用Playbook.md) §重複コンテンツ防止ルール）。テーマ選定時に以下を遵守する:
+
+- 同月内 同メトリック上限: 1 本まで（「離婚率」「貯蓄率」など同一メトリックで複数本の切り口違いは禁止）
+- 既存動画と同タイトル禁止: 改善版を作る場合は旧動画を削除してから再投稿する
+- 同サムネ再利用禁止: 47 県別なら 47 種類のサムネを用意する（同じ thumbnail.png の使い回しは duplicate-content 判定リスク）
+- 「47県カウントアップ」テンプレで近接メトリック（人口 / 人口密度 / 居住人口）の連投禁止
+
+### D1 inventory の事前確認 (2026-05-26 追加)
+
+テーマ選定時に、過去 60 日に同テーマ/同 metric/同 template を投稿していないかを D1 で必ず確認する:
+
+```bash
+D1=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+
+# 1. 同 content_key (テーマ) を確認
+sqlite3 "$D1" "SELECT posted_at, content_key, template, metric_keys, caption FROM sns_posts \
+  WHERE platform='youtube' AND deleted_at IS NULL \
+    AND posted_at >= date('now', '-60 days') \
+  ORDER BY posted_at DESC;"
+
+# 2. 同 metric を使った投稿を確認 (JSON 配列内検索)
+sqlite3 "$D1" "SELECT posted_at, content_key, metric_keys, caption FROM sns_posts \
+  WHERE platform='youtube' AND deleted_at IS NULL \
+    AND metric_keys LIKE '%average-life-expectancy%' \
+  ORDER BY posted_at DESC;"
+
+# 3. 同 template (Remotion composition) を使った投稿を確認
+sqlite3 "$D1" "SELECT posted_at, template, content_key, caption FROM sns_posts \
+  WHERE platform='youtube' AND deleted_at IS NULL \
+    AND template='RankingYouTube-ScrollGes' \
+  ORDER BY posted_at DESC LIMIT 10;"
+```
+
+upload.js は `check-youtube-duplicate.cjs` で 5 層チェック（L1 タイトル / L2 サムネ / L3 content_key / L4 API / L5 template+metrics）を自動実行するが、戦略段階でこれをパスする見込みを立てておく。
+
+**L5 (同 template + 同 metric_keys) の意味**: タイトルやサムネを差別化しても、Remotion composition と利用 metric が同じなら **視覚的に酷似** した動画になる。同じ「データ × テンプレ」の組み合わせは月 1 本まで。
+
 ## 担当外
 
 - Remotion レンダリングの実行（sns-renderer に委譲）

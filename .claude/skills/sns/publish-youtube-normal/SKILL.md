@@ -9,13 +9,19 @@ YouTube 通常動画（16:9 ScrollGes テンプレート）の制作からアッ
 
 ## 事前チェック（必須）
 
-実行前に投稿ガードを通す。停止期間中 or 週 3 本上限到達時は exit 1 で即停止する:
+実行前に 2 つの投稿ガードを通す。停止期間中 or 週 3 本上限到達 or タイトル重複検出時は exit 1 で即停止する:
 
 ```bash
+# ガード 1: 停止期間 / 週次予算
 node .claude/scripts/lib/check-youtube-post-budget.cjs || exit 1
+
+# ガード 2: タイトル重複（直近 60 日、2026-03 duplicate-content 起因シャドウバン再発防止）
+node .claude/scripts/lib/check-youtube-duplicate.cjs --title "<新規動画タイトル>" || exit 1
 ```
 
-ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。
+ガードが失敗したら強行せず、`.claude/state/youtube-pause.json` の内容を確認する（シャドウバン対応中なら該当 Issue を参照）。重複検出時はタイトルを変更してから再実行する（同テーマの再アップロードは duplicate-content 判定の典型）。
+
+なお `.claude/scripts/youtube/upload.js` 内部で両ガードが自動的に呼ばれるため、上記コマンドはスキル前段の早期失敗用。
 
 ## 引数
 
@@ -186,25 +192,31 @@ node .claude/scripts/youtube/upload.js \
   --description '<description>' \
   --tags '<tags>' \
   --thumbnail <BASE>/youtube/stills/thumbnail-1280x720.png \
+  --content-key '<rankingKey>' \
+  --post-type 'normal' \
+  --domain 'ranking' \
+  --template 'RankingYouTube-ScrollGes' \
+  --metric-keys '["<metric_key>"]' \
   --schedule <ISO8601>
 ```
 
-### Phase 5: DB 記録 + ローカル削除
+**必須引数の意味** (2026-05-26 D1 inventory 化以降):
+- `--content-key <rankingKey>`: D1 sns_posts.content_key に記録、L3 重複検出
+- `--post-type normal`: 通常動画なら `normal`、ショートなら `short`、BCR なら `bar-chart-race`
+- `--thumbnail`: D1 sns_posts.thumbnail_path に記録、L2 サムネ重複検出
+- `--template`: Remotion composition ID（通常動画は `RankingYouTube-ScrollGes`）、L5 重複検出
+- `--metric-keys`: 利用した metric_key の JSON 配列。rankingKey に対応する単一 metric なら `["<rankingKey>"]` でも可、複数 metric を使う場合は配列で列挙
 
-アップロード成功後、`sns_posts` に INSERT する。
+これらが揃っていれば upload.js が成功後に sns_posts へ自動 INSERT する（**Phase 5 の手動 INSERT は不要**）。
+
+### Phase 5: ローカル削除
+
+`upload.js` が D1 sns_posts への INSERT を自動実行する（2026-05-26 以降）ため、手動 INSERT は不要。アップロード後の確認のみ:
 
 ```bash
-node -e "
-const Database = require('better-sqlite3');
-const DB_PATH = '.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
-const db = new Database(DB_PATH);
-db.prepare(\`INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, post_url, status, scheduled_at, created_at, updated_at)
-VALUES ('youtube', 'normal', 'ranking', ?, ?, ?, 'scheduled', ?, datetime('now'), datetime('now'))\`).run(
-  '<rankingKey>', '<title>', 'https://www.youtube.com/watch?v=<videoId>', '<scheduledAt>'
-);
-console.log('sns_posts に記録しました');
-db.close();
-"
+# D1 記録を確認
+D1=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+sqlite3 "$D1" "SELECT id, content_key, caption, post_url, status FROM sns_posts WHERE platform='youtube' ORDER BY id DESC LIMIT 1;"
 ```
 
 mp4 削除（~700MB 回収）:

@@ -44,12 +44,17 @@ function parseArgs() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args[0].startsWith("--")) {
     console.error("Usage: node .claude/scripts/youtube/upload.js <video-file> [options]");
-    console.error("  --title       動画タイトル");
-    console.error("  --description 動画説明文");
-    console.error("  --tags        カンマ区切りタグ");
-    console.error("  --thumbnail   サムネイル画像パス");
-    console.error("  --privacy     unlisted | private | public (default: unlisted)");
-    console.error("  --schedule    公開予約日時 (ISO 8601, e.g. 2026-03-29T11:00:00Z)");
+    console.error("  --title        動画タイトル");
+    console.error("  --description  動画説明文");
+    console.error("  --tags         カンマ区切りタグ");
+    console.error("  --thumbnail    サムネイル画像パス");
+    console.error("  --privacy      unlisted | private | public (default: unlisted)");
+    console.error("  --schedule     公開予約日時 (ISO 8601, e.g. 2026-03-29T11:00:00Z)");
+    console.error("  --content-key  D1 記録用 content_key (rankingKey 等)。未指定なら video filename を使用");
+    console.error("  --post-type    D1 記録用 post_type (short / normal / bar-chart-race)。未指定なら video duration から推定");
+    console.error("  --domain       D1 記録用 domain (ranking / compare / correlation 等、default: ranking)");
+    console.error("  --template     D1 記録用 Remotion composition ID (例: RankingYouTube-ScrollGes)");
+    console.error("  --metric-keys  D1 記録用 metric_key の JSON 配列 (例: '[\"average-life-expectancy\"]')");
     process.exit(1);
   }
 
@@ -61,6 +66,11 @@ function parseArgs() {
     thumbnail: null,
     privacy: "unlisted",
     schedule: null,
+    contentKey: null,
+    postType: null,
+    domain: "ranking",
+    template: null,
+    metricKeys: null,
   };
 
   for (let i = 1; i < args.length; i++) {
@@ -83,16 +93,105 @@ function parseArgs() {
       case "--schedule":
         result.schedule = args[++i];
         break;
+      case "--content-key":
+        result.contentKey = args[++i];
+        break;
+      case "--post-type":
+        result.postType = args[++i];
+        break;
+      case "--domain":
+        result.domain = args[++i];
+        break;
+      case "--template":
+        result.template = args[++i];
+        break;
+      case "--metric-keys":
+        result.metricKeys = args[++i];
+        // バリデーション: JSON 配列として parse できるか確認
+        try {
+          const parsed = JSON.parse(result.metricKeys);
+          if (!Array.isArray(parsed)) {
+            console.error("Error: --metric-keys must be a JSON array, got: " + result.metricKeys);
+            process.exit(1);
+          }
+        } catch (err) {
+          console.error("Error: --metric-keys is not valid JSON: " + result.metricKeys);
+          process.exit(1);
+        }
+        break;
     }
   }
 
   return result;
 }
 
+// ── D1 記録 ──
+
+function recordToD1(opts, videoId, videoUrl) {
+  try {
+    const Database = require("better-sqlite3");
+    const D1_PATH = path.join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
+    );
+    if (!fs.existsSync(D1_PATH)) {
+      console.warn("[upload.js] D1 not found, skipping sns_posts record");
+      return;
+    }
+
+    const contentKey = opts.contentKey || path.basename(opts.videoFile).replace(/\.[^.]+$/, "");
+    const postType = opts.postType || "short"; // 呼び出し側で正しく指定すべき
+    const now = new Date().toISOString();
+    const status = opts.schedule ? "scheduled" : "posted";
+    const scheduledAt = opts.schedule || null;
+    const postedAt = opts.schedule ? null : now;
+
+    const db = new Database(D1_PATH);
+    try {
+      db.prepare(
+        `INSERT INTO sns_posts (
+          platform, post_type, domain, content_key,
+          caption, post_url, media_path, thumbnail_path,
+          template, metric_keys,
+          status, scheduled_at, posted_at,
+          created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ).run(
+        "youtube",
+        postType,
+        opts.domain,
+        contentKey,
+        opts.title,
+        videoUrl,
+        opts.videoFile,
+        opts.thumbnail,
+        opts.template,
+        opts.metricKeys,
+        status,
+        scheduledAt,
+        postedAt,
+        now,
+        now,
+      );
+      console.log(
+        `[upload.js] D1 sns_posts に記録: video_id=${videoId}, content_key=${contentKey}, post_type=${postType}, template=${opts.template ?? "(none)"}, metric_keys=${opts.metricKeys ?? "(none)"}`,
+      );
+    } finally {
+      db.close();
+    }
+  } catch (err) {
+    // D1 記録の失敗で upload 自体は止めない
+    console.warn(`[upload.js] D1 記録失敗 (upload は成功): ${err.message}`);
+  }
+}
+
 // ── メイン ──
 
 async function main() {
-  // 投稿ガード（停止期間中 / 週 3 本上限）。シャドウバン対応中の誤投稿を防ぐ
+  // 投稿ガード 1: 停止期間中 / 週 3 本上限。シャドウバン対応中の誤投稿を防ぐ
   const { spawnSync } = require("child_process");
   const guard = spawnSync("node", [path.join(__dirname, "..", "lib", "check-youtube-post-budget.cjs"), ...process.argv.slice(2)], {
     stdio: "inherit",
@@ -100,6 +199,16 @@ async function main() {
   if (guard.status !== 0) process.exit(guard.status ?? 1);
 
   const opts = parseArgs();
+
+  // 投稿ガード 2: タイトル / サムネ / content_key / template+metrics 重複チェック
+  // 2026-03 の duplicate-content 起因シャドウバン再発防止 (Playbook §重複コンテンツ防止ルール)
+  const dupArgs = [path.join(__dirname, "..", "lib", "check-youtube-duplicate.cjs"), "--title", opts.title];
+  if (opts.thumbnail) dupArgs.push("--thumbnail", opts.thumbnail);
+  if (opts.contentKey) dupArgs.push("--content-key", opts.contentKey);
+  if (opts.template) dupArgs.push("--template", opts.template);
+  if (opts.metricKeys) dupArgs.push("--metric-keys", opts.metricKeys);
+  const dupGuard = spawnSync("node", dupArgs, { stdio: "inherit" });
+  if (dupGuard.status !== 0) process.exit(dupGuard.status ?? 1);
 
   // ファイル存在チェック
   if (!fs.existsSync(opts.videoFile)) {
@@ -169,6 +278,9 @@ async function main() {
       console.log(`  サムネイル設定完了`);
     }
   }
+
+  // D1 sns_posts に記録 (2026-05-26 追加、duplicate-content 再発防止のため inventory を統一管理)
+  recordToD1(opts, videoId, videoUrl);
 
   console.log(`\n完了: ${videoUrl}`);
 }
