@@ -13,7 +13,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
-import { FurusatoNozeiCard, TechSchoolPromoCard } from "@/features/ads";
+import {
+    FurusatoNozeiCard,
+    FurusatoNozeiPopularCard,
+    TechSchoolPromoCard,
+    pickPrefCodeForSlug,
+} from "@/features/ads";
 import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, extractPrefecturesFromArticle, generateBlogMetadata, type Article } from "@/features/blog";
 import {
@@ -124,7 +129,19 @@ export default async function BlogPostPage({ params }: PageProps) {
         tagKeys,
         limit: 1,
     });
-    const primaryPrefCode = prefCodes[0];
+
+    /**
+     * ふるさと納税 widget の 3 段ロジック:
+     *   1. 記事から都道府県を抽出できた → その県を表示
+     *   2. 抽出できなかった → slug ハッシュで決定論的に県を選ぶ (記事固定・サイト全体で 47 県分散)
+     *   3. (どちらでも楽天 API レスポンスが空なら) 全国人気返礼品 fallback
+     *
+     * 1/2 は同じ `<FurusatoNozeiCard>` を使い、3 は別コンポーネント。
+     * - 並べて表示する必要はないので「1/2 を表示できなかった時のみ 3 を表示」する想定
+     * - ただし FurusatoNozeiCard は API 呼出結果が空でも県固定リンクで描画する
+     *   ため、3 は「1 と 2 の両方が無効 (例: 楽天 APP ID 未設定)」時のみ意味を持つ
+     */
+    const furusatoAreaCode = prefCodes[0] ?? pickPrefCodeForSlug(slug);
 
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
@@ -266,9 +283,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             <RelatedRankingsSection tagKeys={tagKeys} />
 
-                            {primaryPrefCode && (
-                                <FurusatoNozeiCard areaCode={primaryPrefCode} />
-                            )}
+                            {/* ふるさと納税: 記事の都道府県 (or slug ハッシュで決定論的に選択) */}
+                            <FurusatoNozeiCard areaCode={furusatoAreaCode} />
+
+                            {/* 楽天 API 設定無し / レスポンス空のとき用の全国人気 fallback */}
+                            {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
 
@@ -316,10 +335,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* 関連ランキング */}
                         <RelatedRankingsSection tagKeys={tagKeys} compact />
 
-                        {/* 都道府県ふるさと納税 (記事に登場した県があれば自動表示) */}
-                        {primaryPrefCode && (
-                            <FurusatoNozeiCard areaCode={primaryPrefCode} />
-                        )}
+                        {/* ふるさと納税: 記事の都道府県 (or slug ハッシュで決定論的に選択) */}
+                        <FurusatoNozeiCard areaCode={furusatoAreaCode} />
+
+                        {/* 楽天 API 設定無し / レスポンス空のとき用の全国人気 fallback */}
+                        {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                         {/* 関連記事 */}
                         <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />

@@ -131,7 +131,7 @@ export async function searchRakutenItems(
 }
 
 /**
- * ふるさと納税の返礼品を検索する
+ * ふるさと納税の返礼品を検索する (都道府県指定)
  */
 export async function searchFurusatoItems(
   prefName: string,
@@ -139,6 +139,23 @@ export async function searchFurusatoItems(
 ): Promise<RakutenItem[]> {
   return searchRakutenItems({
     keyword: prefName,
+    genreId: FURUSATO_NOZEI_GENRE_ID,
+    hits,
+    sort: "-reviewCount",
+  });
+}
+
+/**
+ * 都道府県に依存しない、全国の人気ふるさと納税返礼品を検索する。
+ *
+ * 記事に都道府県が登場しない場合のフォールバックとして使用。
+ * `sort=-reviewCount` でレビュー数の多い人気返礼品を返す。
+ */
+export async function searchPopularFurusatoItems(
+  hits = 4,
+): Promise<RakutenItem[]> {
+  return searchRakutenItems({
+    keyword: "ふるさと納税",
     genreId: FURUSATO_NOZEI_GENRE_ID,
     hits,
     sort: "-reviewCount",
