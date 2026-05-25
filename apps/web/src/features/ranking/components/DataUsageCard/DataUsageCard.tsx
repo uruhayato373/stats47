@@ -26,6 +26,9 @@ interface DataUsageCardProps {
   yearCount?: number;
   /** 現在表示中の正規化タイプ (pill で選択中の per_population など) */
   normalizationType?: string;
+  /** 「全基準まとめて」CSV オプションを Dropdown に追加するか
+   *  (対象 metric に normalizationOptions が 1 件以上ある場合 true) */
+  hasAllBases?: boolean;
 }
 
 export function DataUsageCard({
@@ -34,6 +37,7 @@ export function DataUsageCard({
   displayInfo,
   yearCount,
   normalizationType,
+  hasAllBases,
 }: DataUsageCardProps) {
   const yearText = yearCount && yearCount > 0 ? `${yearCount}年分の時系列を含む` : "";
   const basisText = displayInfo.normalizationBasis
@@ -57,6 +61,7 @@ export function DataUsageCard({
         areaType={areaType}
         displayInfo={displayInfo}
         normalizationType={normalizationType}
+        hasAllBases={hasAllBases}
         label="ダウンロード"
       />
     </div>

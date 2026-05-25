@@ -70,6 +70,29 @@ export function rankingNormalizedValuesKeyPath(
   return `app/ranking/${encodeURIComponent(rankingKey)}/values-${suffix}.json`;
 }
 
+/**
+ * 事前生成済みダウンロードファイルの R2 キーパスを返す。
+ *
+ * basis = "original" or 正規化タイプ ("per_population" 等) or "all-bases"
+ * format = "csv" or "json"
+ * encoding = "utf8" (BOM 付き) or "sjis" (Shift_JIS、CSV 専用)
+ *
+ * 例: `app/ranking/{key}/downloads/values.csv` (basis=original, format=csv, encoding=utf8)
+ *     `app/ranking/{key}/downloads/values-per-population.json`
+ *     `app/ranking/{key}/downloads/values-all-bases.csv`
+ *     `app/ranking/{key}/downloads/values.sjis.csv`
+ */
+export function rankingDownloadKeyPath(
+  rankingKey: string,
+  basis: string,
+  format: "csv" | "json",
+  encoding: "utf8" | "sjis" = "utf8",
+): string {
+  const basisSuffix = basis === "original" ? "" : `-${basis.replace(/_/g, "-")}`;
+  const encodingSuffix = encoding === "sjis" ? ".sjis" : "";
+  return `app/ranking/${encodeURIComponent(rankingKey)}/downloads/values${basisSuffix}${encodingSuffix}.${format}`;
+}
+
 /** @deprecated rankingValuesKeyPath を使用してください */
 export interface RankingValuesPartitionSnapshot {
   generatedAt: string;

@@ -21,7 +21,7 @@ interface DataPackCTAProps {
  * D-System データパック訴求カード
  *
  * CSV ダウンロードボタンを active、JSON/Excel は disabled で「準備中」表示。
- * `csvButton` は呼び出し側で `DataDownloadPrimaryButton` 等を注入する。
+ * `csvButton` は呼び出し側で `DataDownloadMenuButton` 等を注入する。
  */
 export function DataPackCTA({
   title,

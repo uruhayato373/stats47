@@ -23,3 +23,4 @@ export {
   generateBlogMetadata,
   type BlogMetadataInput,
 } from "./utils/generate-blog-metadata";
+export { extractPrefecturesFromArticle } from "./utils/extract-prefectures";

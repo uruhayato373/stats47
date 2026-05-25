@@ -65,7 +65,10 @@ export * from "./utils";
 // Additional client components
 export { AreaTypeToggle } from "./components/AreaTypeToggle";
 export { NormalizationToggle } from "./components/NormalizationToggle";
-export { DataDownloadIconButton, DataDownloadFooterCard, DataDownloadPrimaryButton } from "./components/DataDownloadButton";
+export {
+  DataDownloadIconButton,
+  DataDownloadMenuButton,
+} from "./components/DataDownloadButton";
 
 // Skeleton components
 export { CorrelationSectionSkeleton } from "./components/CorrelationSection/CorrelationSectionSkeleton";
