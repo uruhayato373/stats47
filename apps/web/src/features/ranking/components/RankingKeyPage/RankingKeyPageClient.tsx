@@ -3,8 +3,15 @@
 import { ReactNode, useEffect, useMemo, useState, useTransition } from "react";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@stats47/components/atoms/ui/select";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
     Tabs,
@@ -117,6 +124,7 @@ export function RankingKeyPageClient({
     const [currentAreaType, setCurrentAreaType] = useState<AreaType>(areaType ?? "prefecture");
     const [isPending, startTransition] = useTransition();
     const pathname = usePathname();
+    const router = useRouter();
     const isBelowLg = useBreakpoint("belowLg");
     const isAboveXl = useBreakpoint("aboveXl");
 
@@ -385,30 +393,58 @@ export function RankingKeyPageClient({
             />
 
             {/* normalization_basis グループトグル（別URL切替）*/}
-            {groupMembers.length > 1 && (
-                <div className="flex items-center gap-0.5 mt-3 w-fit">
-                    {[...groupMembers].sort((a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)).map((member) => {
-                        const isCurrent = member.rankingKey === rankingKey;
-                        const label = member.normalizationBasis || "総数";
-                        return isCurrent ? (
-                            <span
-                                key={member.rankingKey}
-                                className="text-xs px-2.5 pb-1 border-b-2 border-primary text-foreground font-medium"
+            {groupMembers.length > 1 && (() => {
+                const sortedMembers = [...groupMembers].sort(
+                    (a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)
+                );
+                return (
+                    <>
+                        {/* モバイル: Select */}
+                        <div className="mt-3 sm:hidden">
+                            <Select
+                                value={rankingKey}
+                                onValueChange={(key) => {
+                                    if (key !== rankingKey) router.push(`/ranking/${key}`);
+                                }}
                             >
-                                {label}
-                            </span>
-                        ) : (
-                            <Link
-                                key={member.rankingKey}
-                                href={`/ranking/${member.rankingKey}`}
-                                className="text-xs px-2.5 pb-1 border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30 transition-colors"
-                            >
-                                {label}
-                            </Link>
-                        );
-                    })}
-                </div>
-            )}
+                                <SelectTrigger aria-label="表示基準" className="h-9 w-full text-sm">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {sortedMembers.map((member) => (
+                                        <SelectItem key={member.rankingKey} value={member.rankingKey}>
+                                            {member.normalizationBasis || "総数"}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        {/* デスクトップ: テキストタブ */}
+                        <div className="hidden sm:flex items-center gap-0.5 mt-3 w-fit">
+                            {sortedMembers.map((member) => {
+                                const isCurrent = member.rankingKey === rankingKey;
+                                const label = member.normalizationBasis || "総数";
+                                return isCurrent ? (
+                                    <span
+                                        key={member.rankingKey}
+                                        className="text-xs px-2.5 pb-1 border-b-2 border-primary text-foreground font-medium"
+                                    >
+                                        {label}
+                                    </span>
+                                ) : (
+                                    <Link
+                                        key={member.rankingKey}
+                                        href={`/ranking/${member.rankingKey}`}
+                                        className="text-xs px-2.5 pb-1 border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30 transition-colors"
+                                    >
+                                        {label}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </>
+                );
+            })()}
 
             {/* メインコンテンツ + 右サイドバー (CSS のみで切替: JS ハイドレーション由来の CLS を防ぐ) */}
             <div className="mt-4 lg:flex lg:gap-4 lg:items-start">
