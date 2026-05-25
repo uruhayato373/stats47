@@ -18,16 +18,51 @@ import type { MigrationFlowData, MunicipalityData } from "./types";
 /** 24 秒 @ 30fps 相当のフレーム数。Remotion 側の durationInFrames に使う */
 export const MIGRATION_FLOW_DURATION = 720;
 
-const FRAME_W = 1920;
-const FRAME_H = 1080;
+/** 出力フォーマット (landscape 16:9 / portrait 9:16) */
+export type MigrationFlowFormat = "landscape" | "portrait";
 
-/** 左の「地図コンポーネント」幅。右は統計パネル。 */
-const MAP_W = 1400;
-/** 地図本体の矩形（MAP_W 内。外側の余白に地方ラベルを置く） */
-const MAP_RECT: MapRect = { x0: 200, y0: 56, x1: 1200, y1: 1024 };
-/** 右パネル */
-const PANEL_X = 1436;
-const PANEL_W = FRAME_W - PANEL_X - 36;
+interface LayoutConfig {
+  frameW: number;
+  frameH: number;
+  /** 地図 SVG の幅 (内部 viewBox) */
+  mapW: number;
+  /** 地図本体の矩形 */
+  mapRect: MapRect;
+  /** 統計パネル位置 */
+  panelX: number;
+  panelY: number;
+  panelW: number;
+  panelH: number;
+  /** ヘッダー (portrait のみ、タイトル + サブ) */
+  headerY?: number;
+  headerH?: number;
+}
+
+const LAYOUTS: Record<MigrationFlowFormat, LayoutConfig> = {
+  landscape: {
+    frameW: 1920,
+    frameH: 1080,
+    mapW: 1400,
+    mapRect: { x0: 200, y0: 56, x1: 1200, y1: 1024 },
+    panelX: 1436,
+    panelY: 0,
+    panelW: 1920 - 1436 - 36,
+    panelH: 1080,
+  },
+  portrait: {
+    frameW: 1080,
+    frameH: 1920,
+    mapW: 1080,
+    // 左右 180px は地方ラベル (regionFlows) 用の余白、地図本体は中央 720px
+    mapRect: { x0: 180, y0: 300, x1: 900, y1: 1320 },
+    panelX: 30,
+    panelY: 1330,
+    panelW: 1020,
+    panelH: 570,
+    headerY: 40,
+    headerH: 240,
+  },
+};
 
 const MUNI_LABEL_COUNT = 12;
 const MAX_PARTICLES = 14;
@@ -98,6 +133,8 @@ export interface MigrationFlowReelProps {
   cityTopology?: Topology | null;
   municipalities?: MunicipalityData | null;
   theme?: ThemeName;
+  /** 出力フォーマット (default: landscape 16:9) */
+  format?: MigrationFlowFormat;
 }
 
 export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
@@ -107,8 +144,16 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
   cityTopology,
   municipalities,
   theme = "light",
+  format = "landscape",
 }) => {
   const colors = COLOR_SCHEMES[theme];
+  const L = LAYOUTS[format];
+  const FRAME_W = L.frameW;
+  const FRAME_H = L.frameH;
+  const MAP_W = L.mapW;
+  const MAP_RECT = L.mapRect;
+  const PANEL_X = L.panelX;
+  const PANEL_W = L.panelW;
 
   const map = useMemo(
     () =>
@@ -119,7 +164,7 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
         cityTopology: cityTopology ?? undefined,
         municipalities: municipalities?.municipalities,
       }),
-    [topology, data, cityTopology, municipalities],
+    [topology, data, cityTopology, municipalities, MAP_W, FRAME_H, MAP_RECT],
   );
   const { shapes, municipalityShapes, focusOutlinePath, focusCentroid, regionFlows } =
     map;
@@ -446,40 +491,85 @@ export const MigrationFlowReel: React.FC<MigrationFlowReelProps> = ({
         </div>
       ))}
 
-      {/* ───────── 右: 統計パネル ───────── */}
+      {/* ───────── portrait: 上部ヘッダー (タイトル単独) ───────── */}
+      {format === "portrait" && L.headerY !== undefined && L.headerH !== undefined && (
+        <div
+          style={{
+            position: "absolute",
+            left: 30,
+            top: L.headerY,
+            width: FRAME_W - 60,
+            height: L.headerH,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            opacity: intro,
+            zIndex: 5,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 108,
+              fontWeight: FONT.weight.black,
+              color: colors.foreground,
+              lineHeight: 1.05,
+            }}
+          >
+            {data.focusName}
+          </div>
+          <div
+            style={{
+              fontSize: 32,
+              fontWeight: FONT.weight.bold,
+              color: colors.muted,
+              marginTop: 12,
+              letterSpacing: 2,
+            }}
+          >
+            <span style={{ color: FOCUS_COLOR }}>⇄</span> 全国 人口移動 {data.year}年
+          </div>
+        </div>
+      )}
+
+      {/* ───────── 統計パネル (landscape: 右 / portrait: 下) ───────── */}
       <div
         style={{
           position: "absolute",
           left: PANEL_X,
-          top: 0,
+          top: L.panelY,
           width: PANEL_W,
-          height: FRAME_H,
+          height: L.panelH,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           gap: 18,
           opacity: intro,
+          zIndex: 5,
         }}
       >
-        {/* タイトル */}
-        <div>
-          <div
-            style={{
-              fontSize: 38,
-              fontWeight: FONT.weight.black,
-              color: colors.foreground,
-              lineHeight: 1.2,
-            }}
-          >
-            {data.focusName}
-            <span style={{ color: FOCUS_COLOR }}> ⇄ </span>全国
+        {/* タイトル (landscape のみ。portrait はヘッダー領域に別途表示) */}
+        {format === "landscape" && (
+          <div>
+            <div
+              style={{
+                fontSize: 38,
+                fontWeight: FONT.weight.black,
+                color: colors.foreground,
+                lineHeight: 1.2,
+              }}
+            >
+              {data.focusName}
+              <span style={{ color: FOCUS_COLOR }}> ⇄ </span>全国
+            </div>
+            <div
+              style={{ fontSize: 22, fontWeight: FONT.weight.bold, color: colors.muted }}
+            >
+              人口移動フロー {data.year}年
+            </div>
           </div>
-          <div
-            style={{ fontSize: 22, fontWeight: FONT.weight.bold, color: colors.muted }}
-          >
-            人口移動フロー {data.year}年
-          </div>
-        </div>
+        )}
 
         {/* 集計 */}
         <div

@@ -19,12 +19,11 @@ export function normalizeFocusCode(code: string): string {
   return String(code).padStart(2, "0").slice(0, 2);
 }
 
-/** 市区町村境界 topojson は R2 の既存 GIS データを利用（public に複製しない） */
-const R2_GIS_BASE = "https://storage.stats47.jp/gis/mlit/20240101";
-
 /**
- * 県境 topojson・県間フロー・市区町村別純移動は staticFile、
- * 市区町村境界 topojson は R2 から読み込む。
+ * すべて staticFile から読む。
+ * 以前は city topology を外部 R2 URL (storage.stats47.jp) から fetch していたが、
+ * Remotion render 環境では CORS / network 制約で blocked されて市区町村コロプレスが
+ * 描画されない事象が発生したため、public/migration-flow/cities/ に複製して staticFile 化。
  */
 export function useMigrationFlowData(
   focusPrefCode: string,
@@ -61,7 +60,7 @@ export function useMigrationFlowData(
               staticFile(`migration-flow/${code}.json`),
             ),
             fetchJson<Topology>(
-              `${R2_GIS_BASE}/${code}/${code}_city_dc.topojson`,
+              staticFile(`migration-flow/cities/${code}.topojson`),
             ),
             fetchJson<MunicipalityData>(
               staticFile(`migration-flow/municipalities/${code}.json`),
