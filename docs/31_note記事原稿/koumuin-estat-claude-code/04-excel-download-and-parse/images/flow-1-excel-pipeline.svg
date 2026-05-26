@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="360" fill="#fafafa"/>
+<text x="600" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">e-Stat Excel 整形パイプライン</text>
+<text x="600" y="78" text-anchor="middle" font-size="14" font-weight="500" fill="#64748b">構造把握 → 抽出 → クレンジング → 出力</text>
+
+<!-- Box 1: Excel DL -->
+<rect x="40" y="130" width="200" height="100" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+<text x="140" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">DOWNLOAD</text>
+<text x="140" y="188" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">e-Stat Excel</text>
+<text x="140" y="210" text-anchor="middle" font-size="13" font-weight="500" fill="#64748b">.xlsx / .xls</text>
+
+<line x1="250" y1="180" x2="290" y2="180" stroke="#0891b2" stroke-width="2"/>
+<polygon points="290,175 302,180 290,185" fill="#0891b2"/>
+
+<!-- Box 2: inspect -->
+<rect x="310" y="130" width="200" height="100" rx="10" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+<text x="410" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">INSPECT</text>
+<text x="410" y="188" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">構造把握</text>
+<text x="410" y="210" text-anchor="middle" font-size="13" font-weight="500" fill="#64748b">openpyxl + Claude Code</text>
+
+<line x1="520" y1="180" x2="560" y2="180" stroke="#0891b2" stroke-width="2"/>
+<polygon points="560,175 572,180 560,185" fill="#0891b2"/>
+
+<!-- Box 3: extract & clean -->
+<rect x="580" y="130" width="200" height="100" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+<text x="680" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">EXTRACT</text>
+<text x="680" y="188" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">pandas / DuckDB</text>
+<text x="680" y="210" text-anchor="middle" font-size="13" font-weight="500" fill="#64748b">多段ヘッダー / 結合解除</text>
+
+<line x1="790" y1="180" x2="830" y2="180" stroke="#0891b2" stroke-width="2"/>
+<polygon points="830,175 842,180 830,185" fill="#0891b2"/>
+
+<!-- Box 4: cleanup -->
+<rect x="850" y="130" width="200" height="100" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+<text x="950" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">NORMALIZE</text>
+<text x="950" y="188" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">元号 → 西暦</text>
+<text x="950" y="210" text-anchor="middle" font-size="13" font-weight="500" fill="#64748b">5 桁コード / 合計行除外</text>
+
+<line x1="1060" y1="180" x2="1100" y2="180" stroke="#0891b2" stroke-width="2"/>
+<polygon points="1100,175 1112,180 1100,185" fill="#0891b2"/>
+
+<!-- Output -->
+<rect x="1100" y="130" width="80" height="100" rx="10" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+<text x="1140" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#10b981">OUT</text>
+<text x="1140" y="190" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">CSV</text>
+<text x="1140" y="210" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">JSON</text>
+
+<text x="600" y="290" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">初回 3〜4 時間 (手作業) → 月次運用 5〜10 分 (テンプレ化)</text>
+<text x="600" y="315" text-anchor="middle" font-size="13" font-weight="500" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat)</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="1200" height="360" fill="#fafafa"/>
+  <text x="600" y="36" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">前年比較・トレンド分析パイプライン</text>
+  <text x="600" y="62" text-anchor="middle" font-size="13" fill="#64748b">複数年データを 1 リクエストで取得 → ピボット → 比較 → ランキング</text>
+
+  <defs>
+    <marker id="arrY" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1 -->
+  <rect x="40" y="110" width="180" height="90" fill="#cffafe" stroke="#0891b2" stroke-width="1.5" rx="6"/>
+  <text x="130" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#0e7490">e-Stat API</text>
+  <text x="130" y="155" text-anchor="middle" font-size="11" fill="#0e7490">/fetch-estat-data</text>
+  <text x="130" y="172" text-anchor="middle" font-size="11" fill="#0e7490">全年度を 1 回で取得</text>
+  <text x="130" y="187" text-anchor="middle" font-size="10" fill="#64748b">cdTimeFrom 不使用</text>
+
+  <line x1="220" y1="155" x2="248" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arrY)"/>
+
+  <!-- Step 2 -->
+  <rect x="250" y="110" width="180" height="90" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" rx="6"/>
+  <text x="340" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">long-format CSV</text>
+  <text x="340" y="155" text-anchor="middle" font-size="11" fill="#92400e">areaCode, yearCode</text>
+  <text x="340" y="172" text-anchor="middle" font-size="11" fill="#92400e">value</text>
+  <text x="340" y="187" text-anchor="middle" font-size="10" fill="#64748b">"-" や "X" を NaN 化</text>
+
+  <line x1="430" y1="155" x2="458" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arrY)"/>
+
+  <!-- Step 3 -->
+  <rect x="460" y="110" width="180" height="90" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" rx="6"/>
+  <text x="550" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#5b21b6">wide ピボット</text>
+  <text x="550" y="155" text-anchor="middle" font-size="11" fill="#5b21b6">行 = 都道府県</text>
+  <text x="550" y="172" text-anchor="middle" font-size="11" fill="#5b21b6">列 = 年度</text>
+  <text x="550" y="187" text-anchor="middle" font-size="10" fill="#64748b">df.pivot()</text>
+
+  <line x1="640" y1="155" x2="668" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arrY)"/>
+
+  <!-- Step 4 -->
+  <rect x="670" y="110" width="180" height="90" fill="#fce7f3" stroke="#9d174d" stroke-width="1.5" rx="6"/>
+  <text x="760" y="132" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">3 種類の比較</text>
+  <text x="760" y="150" text-anchor="middle" font-size="11" fill="#9d174d">.diff() 前年差</text>
+  <text x="760" y="166" text-anchor="middle" font-size="11" fill="#9d174d">.pct_change() 前年比</text>
+  <text x="760" y="182" text-anchor="middle" font-size="11" fill="#9d174d">polyfit() 5年傾き</text>
+
+  <line x1="850" y1="155" x2="878" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#arrY)"/>
+
+  <!-- Step 5 -->
+  <rect x="880" y="110" width="200" height="90" fill="#d1fae5" stroke="#059669" stroke-width="2.5" rx="6"/>
+  <text x="980" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">議会答弁資料</text>
+  <text x="980" y="155" text-anchor="middle" font-size="11" fill="#065f46">上昇トップ 10</text>
+  <text x="980" y="172" text-anchor="middle" font-size="11" fill="#065f46">下降トップ 10</text>
+  <text x="980" y="187" text-anchor="middle" font-size="10" fill="#065f46">Markdown / Excel</text>
+
+  <!-- Bottom comparison -->
+  <rect x="180" y="240" width="800" height="50" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3" rx="4"/>
+  <text x="580" y="262" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">Before: Excel 手作業 30〜60 分 × 5-20 件 = 議会前半日〜1 日</text>
+  <text x="580" y="280" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">After: API 取得 + 自動集計 3-5 分 (初回構築 2-3 時間)</text>
+
+  <!-- Subtitle bottom -->
+  <text x="600" y="324" text-anchor="middle" font-size="12" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) より / 結合キーは 5 桁 (01000〜47000) 統一</text>
+</svg>
