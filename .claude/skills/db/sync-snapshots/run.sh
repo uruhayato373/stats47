@@ -33,6 +33,7 @@ declare -a TASKS=(
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
+  "themes|apps/web/scripts/export-themes-snapshot.ts"
   "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
   "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
   "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
