@@ -23,6 +23,7 @@ import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
 import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
+import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
 import { ThemeLeafletMap } from "./ThemeLeafletMap";
 
 import type { ThemeDashboardClientProps } from "../types";
@@ -170,6 +171,15 @@ export function ThemeDashboardTabbed({
     />
   );
 
+  // 組み合わせ分析 (radar + scatter) — テーマページ独自価値の中核
+  const combinationAnalysisSection = (
+    <ThemeCombinationAnalysis
+      themeConfig={themeConfig}
+      indicatorDataMap={indicatorDataMap}
+      selectedPrefectureCode={selectedPrefectureCode}
+    />
+  );
+
   // --- レイアウト ---
 
   if (isBelowLg) {
@@ -182,7 +192,9 @@ export function ThemeDashboardTabbed({
           mapSection={mapSection}
           statsSection={
             <div className="space-y-3">
-              {metricFocusSection}
+              {/* テーマ独自の組み合わせ分析を最優先 */}
+              {combinationAnalysisSection}
+              {/* 既存 KPI カード群 (panelTabs 由来) */}
               <PrefectureStatsPanel
                 selectedPrefectureCode={selectedPrefectureCode}
                 selectedIndicatorKey={selectedTabKey}
@@ -190,6 +202,13 @@ export function ThemeDashboardTabbed({
                 pageCharts={pageCharts}
                 kpiDataByArea={kpiDataByArea}
               />
+              {/* 個別 metric の line/bar (Phase 3a) は補助に格下げ */}
+              <details className="rounded-md border border-border bg-card">
+                <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
+                  選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)
+                </summary>
+                <div className="p-2">{metricFocusSection}</div>
+              </details>
             </div>
           }
           tableSection={
@@ -221,20 +240,27 @@ export function ThemeDashboardTabbed({
   return (
     <div className="space-y-4 overflow-hidden">
       <div className="grid grid-cols-[1fr_380px] gap-4 items-start">
-        {/* 左カラム: タブ + 年度 + 地図 + 指標一覧 */}
+        {/* 左カラム: タブ + 年度 + 地図 + (補助) 単独詳細 + 指標一覧 */}
         <div className="space-y-3 min-w-0">
           {indicatorTabs}
           {yearSelector}
           <div className="sticky top-20">{mapSection}</div>
-          {metricFocusSection}
+          {/* 個別 metric の line/bar (Phase 3a) は補助に格下げ */}
+          <details className="rounded-md border border-border bg-card">
+            <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
+              選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)
+            </summary>
+            <div className="p-2">{metricFocusSection}</div>
+          </details>
           <IndicatorGrid
             rankingKeys={themeConfig.rankingKeys}
             indicatorDataMap={indicatorDataMap}
           />
         </div>
 
-        {/* 右カラム: KPI + チャート */}
-        <div>
+        {/* 右カラム: テーマ独自の組み合わせ分析 (主役) + KPI カード */}
+        <div className="space-y-3">
+          {combinationAnalysisSection}
           <PrefectureStatsPanel
             selectedPrefectureCode={selectedPrefectureCode}
             selectedIndicatorKey={selectedTabKey}

@@ -16,13 +16,16 @@ tags: [handoff, theme-dashboard, next-session]
 
 ## 30 秒サマリ
 
-「テーマページ (`/themes/[themeKey]`) で **選択中の指標について line / pie の個別チャートを表示する**」というユーザー要求に向けた改修。本セッションでは:
+テーマページの方向性を **「タブで指標切替 → 個別 metric を見せる」** から **「複数指標を組み合わせる分析サイト」** に転換。/ranking/{key} との役割重複を解消し、テーマページ独自価値を radar + scatter + (将来 pie) に集約。
+
+本セッションで:
 
 1. ✅ **Phase 1A**: D1 schema (themes/theme_metrics) + migration + seed + R2 exporter
 2. ✅ **Planning**: 全 17 テーマのチャート設計 docs (line/pie/bar の指標選定)
-3. ✅ **Phase 3a**: 選択 metric の **line + 上下位 bar** を表示する `MetricFocusCharts` を追加
+3. ✅ **Phase 3a**: 選択 metric の line + 上下位 bar (`MetricFocusCharts`) — **補助に格下げ済**
+4. ✅ **Phase 3a' (方向転換)**: 組み合わせ分析 `ThemeCombinationAnalysis` (radar + scatter) を右カラム主役に配置
 
-を完成。**pie / breakdown はまだ未実装**。
+**pie / breakdown は Phase 3b で次回**。
 
 ## 🛠️ pull 後にまずやること (順番厳守、15 分)
 
@@ -62,7 +65,7 @@ ls .local/r2/app/themes/
 cat .local/r2/app/themes/living-housing/config.json | jq .panels
 ```
 
-### Step 3. Phase 3a の動作確認 (npm run dev)
+### Step 3. Phase 3a + 3a' の動作確認 (npm run dev)
 
 ```bash
 cd apps/web
@@ -70,14 +73,18 @@ npm run dev
 # → http://localhost:3000/themes/living-housing
 ```
 
-確認項目:
+確認項目 (**右カラムが組み合わせ分析に変わったか**が今回の主役):
 
-- [ ] ページ全体が落ちずに描画される (existing 機能が壊れていないか)
-- [ ] タブで指標 (空き家率 → 持ち家率 等) を切り替えると、map 下の `MetricFocusCharts` が再描画される
-- [ ] line chart に時系列が出る (年度数本以上のデータが見える)
-- [ ] 上下位 5 県の bar が表示される (Top 5 + Bottom 5)
-- [ ] 地図で **都道府県をクリック** → line chart の系列名が「全国」から「東京の◯◯率」に変わる
-- [ ] **モバイル**: 「統計」タブ先頭に `MetricFocusCharts` が出る
+- [ ] ページ全体が落ちずに描画される (既存機能の regression なし)
+- [ ] **右カラム上部**に「テーマ全体プロフィール (radar)」カードが出る
+  - 県未選択時はプレースホルダ「地図で都道府県を選択するとここにレーダーが出ます」
+  - 地図で県クリック → レーダーチャートが描画される (8 軸まで)
+- [ ] **右カラム中部**に「指標どうしの相関 (scatter)」カードが出て、47 県プロットが見える
+  - 県クリック → 選択県が赤くハイライト
+- [ ] **右カラム下部**: 既存の KPI カード (`PrefectureStatsPanel`) は残ったまま
+- [ ] **左カラム** map 下: 「選択指標の単独詳細を表示」が **`<details>` 折りたたみ** になっている (Phase 3a で作った line + bar はここに格下げ)
+- [ ] **モバイル**: 「統計」タブ先頭が組み合わせ分析、次に KPI、最後に折りたたみで単独詳細
+- [ ] population-dynamics の `PopulationScatterSection` (独自 scatter) は従来通り表示される
 
 問題があったら → 次セッションで「**この挙動がおかしい**」と伝えてもらえれば直す。
 
@@ -100,17 +107,21 @@ npm run dev
 
 優先度順:
 
-### Phase 3b (高): pie / breakdown 実装
+### Phase 3b (高): pie / 構成比 breakdown 実装
 
-**ユーザー要求の「pie」部分**。本セッションでスコープから外した。
+組み合わせ分析の **3 つ目の柱** として ThemeCombinationAnalysis に組み込む。
 
 - 17 テーマの planning doc (`theme-charts-planning/{key}.md` の #4 章) に必要 breakdown データを記載済
-- 例 (living-housing): 空き家種類別 (賃貸用/二次的/売却用/その他) の構成比 pie chart
+- 例:
+  - local-finance: 歳入の地方税/交付税/国庫支出金/その他 (構成比 pie or stacked bar)
+  - living-housing: 空き家種類別 (賃貸用/二次的/売却用/その他)
+  - aging-society: 年齢 3 区分 (年少/生産年齢/老年)
 - 実装ステップ:
   1. metric ごとに e-Stat cdCat 構造を `/inspect-estat-meta` で確認
-  2. `actions/fetch-metric-breakdown.ts` Server Action を作成 (cdCat を渡して内訳を取得)
-  3. `MetricFocusCharts.tsx` に pie セクションを追加 (既存 DonutChart コンポーネント流用)
-  4. 17 テーマで実装難易度・データ可用性を確認しながら順次対応
+  2. `actions/fetch-metric-breakdown.ts` Server Action 作成 (cdCat 指定で内訳取得)
+  3. `ThemeCompositionPie.tsx` 新規 (既存 `DonutChart` 流用) — 県切替対応
+  4. `ThemeCombinationAnalysis.tsx` に組み込み (radar / scatter の下に並べる)
+  5. テーマ別に「どの metric の breakdown を見せるか」を D1 `theme_metrics.chart_config_json` に記録 (Phase 3c)
 
 ### Phase 3b' (高): 計算型 metric の timeseries 対応
 
