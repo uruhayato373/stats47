@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="360" fill="#fafafa"/>
+
+<text x="600" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">e-Stat → Claude Code → 議会資料までの 4 ステップ</text>
+<line x1="430" y1="56" x2="770" y2="56" stroke="#0891b2" stroke-width="2" stroke-linecap="round"/>
+
+<!-- Step 1: e-Stat -->
+<g transform="translate(40, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">1. データ取得</text>
+  <text x="100" y="58" text-anchor="middle" font-size="12" fill="#475569">e-Stat API</text>
+  <text x="100" y="74" text-anchor="middle" font-size="11" fill="#64748b">統計表 ID 指定</text>
+</g>
+
+<path d="M 250 150 L 290 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow09)"/>
+
+<!-- Step 2: 頼み方 -->
+<g transform="translate(300, 110)">
+  <rect width="200" height="80" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">2. Claude Code に頼む</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">「47 県横棒グラフ作って」</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">要件 6 項目セット</text>
+</g>
+
+<path d="M 510 150 L 550 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow09)"/>
+
+<!-- Step 3: 出力 -->
+<g transform="translate(560, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">3. ファイル出力</text>
+  <text x="100" y="58" text-anchor="middle" font-size="12" fill="#475569">PNG 300dpi + SVG</text>
+  <text x="100" y="74" text-anchor="middle" font-size="11" fill="#64748b">出典フッタ自動挿入</text>
+</g>
+
+<path d="M 770 150 L 810 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow09)"/>
+
+<!-- Step 4: 貼付 -->
+<g transform="translate(820, 110)">
+  <rect width="200" height="80" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#10b981">4. 資料に貼り付け</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">PowerPoint / Word</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">PDF / リーフレット</text>
+</g>
+
+<!-- Time comparison -->
+<rect x="40" y="230" width="1120" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+<text x="600" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#92400e">議会前 1 週間の図表作成: 5 枚で 2.5 時間 → 25 分</text>
+<text x="600" y="290" text-anchor="middle" font-size="13" fill="#475569">Excel グラフ + 手作業 (1 枚 30 分 × 5) と比較した時短ケース。</text>
+<text x="600" y="312" text-anchor="middle" font-size="11" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) — 商用利用可・出典明記必須</text>
+
+<defs>
+  <marker id="arrow09" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
+  </marker>
+</defs>
+</svg>

@@ -1,0 +1,17 @@
+[
+  { "metricKey": "total-population",                  "output": "apps/web/public/themes/population-dynamics/yoy-total-population.json" },
+  { "metricKey": "total-fertility-rate",              "output": "apps/web/public/themes/population-dynamics/yoy-total-fertility-rate.json" },
+  { "metricKey": "marriages-per-total-population",    "output": "apps/web/public/themes/population-dynamics/yoy-marriages.json" },
+  { "metricKey": "divorces-per-total-population",     "output": "apps/web/public/themes/population-dynamics/yoy-divorces.json" },
+
+  { "metricKey": "suicides-per-100k",                 "output": "apps/web/public/themes/safety/yoy-suicides.json" },
+  { "metricKey": "traffic-accident-deaths-per-100k",  "output": "apps/web/public/themes/safety/yoy-traffic-deaths.json" },
+  { "metricKey": "households-on-public-assistance",   "output": "apps/web/public/themes/safety/yoy-public-assistance.json" },
+
+  { "metricKey": "manufacturing-shipment-amount",     "output": "apps/web/public/themes/manufacturing/yoy-manufacturing-shipment.json" },
+
+  { "metricKey": "agricultural-output",               "output": "apps/web/public/themes/local-economy/yoy-agricultural-output.json" },
+
+  { "metricKey": "total-overnight-guests",            "output": "apps/web/public/themes/tourism/yoy-overnight-guests.json" },
+  { "metricKey": "total-overnight-guests-foreign",    "output": "apps/web/public/themes/tourism/yoy-overnight-guests-foreign.json" }
+]
