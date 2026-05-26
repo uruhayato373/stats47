@@ -22,12 +22,12 @@ import { fetchIndicatorForYearAction } from "../actions";
 
 import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
-import { ThemeYoyCharts } from "./ThemeYoyCharts";
 import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
 import { ThemeLeafletMap } from "./ThemeLeafletMap";
 import { ThemePrefectureSummary } from "./ThemePrefectureSummary";
+import { ThemeYoyCharts } from "./ThemeYoyCharts";
 
 import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
@@ -247,13 +247,10 @@ export function ThemeDashboardTabbed({
         <ThemeYoyCharts themeKey={themeConfig.themeKey} />
 
         {themeConfig.themeKey === "population-dynamics" && (
-          <>
-            <PopulationYoyChoroplethSection />
-            <PopulationScatterSection
-              indicatorDataMap={indicatorDataMap}
-              selectedPrefectureCode={selectedPrefectureCode}
-            />
-          </>
+          <PopulationScatterSection
+            indicatorDataMap={indicatorDataMap}
+            selectedPrefectureCode={selectedPrefectureCode}
+          />
         )}
 
         <IndicatorGrid
@@ -307,13 +304,10 @@ export function ThemeDashboardTabbed({
       <ThemeYoyCharts themeKey={themeConfig.themeKey} />
 
       {themeConfig.themeKey === "population-dynamics" && (
-        <>
-          <PopulationYoyChoroplethSection />
-          <PopulationScatterSection
-            indicatorDataMap={indicatorDataMap}
-            selectedPrefectureCode={selectedPrefectureCode}
-          />
-        </>
+        <PopulationScatterSection
+          indicatorDataMap={indicatorDataMap}
+          selectedPrefectureCode={selectedPrefectureCode}
+        />
       )}
     </div>
   );
