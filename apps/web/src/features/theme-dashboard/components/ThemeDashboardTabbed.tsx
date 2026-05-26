@@ -22,7 +22,7 @@ import { fetchIndicatorForYearAction } from "../actions";
 
 import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
-import { PopulationYoyChoroplethSection } from "./PopulationYoyChoroplethSection";
+import { ThemeYoyCharts } from "./ThemeYoyCharts";
 import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
@@ -244,6 +244,8 @@ export function ThemeDashboardTabbed({
           }
         />
 
+        <ThemeYoyCharts themeKey={themeConfig.themeKey} />
+
         {themeConfig.themeKey === "population-dynamics" && (
           <>
             <PopulationYoyChoroplethSection />
@@ -301,6 +303,8 @@ export function ThemeDashboardTabbed({
           />
         </div>
       </div>
+
+      <ThemeYoyCharts themeKey={themeConfig.themeKey} />
 
       {themeConfig.themeKey === "population-dynamics" && (
         <>
