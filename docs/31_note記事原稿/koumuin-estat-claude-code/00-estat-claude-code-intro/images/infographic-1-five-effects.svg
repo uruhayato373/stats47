@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="600" fill="#fafafa"/>
+
+<text x="600" y="60" text-anchor="middle" font-size="28" font-weight="bold" fill="#1e293b">Claude Code × e-Stat が解決する 5 つの業務</text>
+<line x1="450" y1="80" x2="750" y2="80" stroke="#0891b2" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Card 1: 検索 -->
+<g transform="translate(60, 130)">
+  <rect width="200" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="6" fill="#0891b2"/>
+  <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2" letter-spacing="2">EFFECT 1</text>
+  <text x="100" y="95" text-anchor="middle" font-size="44" font-weight="900" fill="#0891b2">検索</text>
+  <text x="100" y="135" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">e-Stat の統計表 ID を</text>
+  <text x="100" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">キーワードで 1 分特定</text>
+  <text x="100" y="185" text-anchor="middle" font-size="12" fill="#64748b">30 分 → 1 分</text>
+</g>
+
+<!-- Card 2: 取得 -->
+<g transform="translate(280, 130)">
+  <rect width="200" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="6" fill="#0891b2"/>
+  <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2" letter-spacing="2">EFFECT 2</text>
+  <text x="100" y="95" text-anchor="middle" font-size="44" font-weight="900" fill="#0891b2">取得</text>
+  <text x="100" y="135" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">47 都道府県データを</text>
+  <text x="100" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">1 コマンドで JSON 化</text>
+  <text x="100" y="185" text-anchor="middle" font-size="12" fill="#64748b">2 時間 → 5 分</text>
+</g>
+
+<!-- Card 3: 整形 -->
+<g transform="translate(500, 130)">
+  <rect width="200" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="6" fill="#0891b2"/>
+  <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2" letter-spacing="2">EFFECT 3</text>
+  <text x="100" y="95" text-anchor="middle" font-size="44" font-weight="900" fill="#0891b2">整形</text>
+  <text x="100" y="135" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">Excel ダウンロードを</text>
+  <text x="100" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">縦持ち CSV に変換</text>
+  <text x="100" y="185" text-anchor="middle" font-size="12" fill="#64748b">手作業 → 自動</text>
+</g>
+
+<!-- Card 4: 派生指標 -->
+<g transform="translate(720, 130)">
+  <rect width="200" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="6" fill="#0891b2"/>
+  <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2" letter-spacing="2">EFFECT 4</text>
+  <text x="100" y="95" text-anchor="middle" font-size="36" font-weight="900" fill="#0891b2">派生指標</text>
+  <text x="100" y="135" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">人口当たり・前年比</text>
+  <text x="100" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">他県マージを自動化</text>
+  <text x="100" y="185" text-anchor="middle" font-size="12" fill="#64748b">関数いらず</text>
+</g>
+
+<!-- Card 5: チャート -->
+<g transform="translate(940, 130)">
+  <rect width="200" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="6" fill="#0891b2"/>
+  <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2" letter-spacing="2">EFFECT 5</text>
+  <text x="100" y="95" text-anchor="middle" font-size="36" font-weight="900" fill="#0891b2">出力</text>
+  <text x="100" y="135" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">議会答弁・資料用の</text>
+  <text x="100" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">表・グラフを自動生成</text>
+  <text x="100" y="185" text-anchor="middle" font-size="12" fill="#64748b">PowerPoint 連携可</text>
+</g>
+
+<!-- Footer summary -->
+<rect x="60" y="380" width="1080" height="160" rx="12" fill="#cffafe" stroke="#0891b2" stroke-width="1"/>
+<text x="600" y="425" text-anchor="middle" font-size="20" font-weight="bold" fill="#0891b2">合計の業務時間: 初回 1 日 → 月次 30 分以下に短縮可</text>
+<text x="600" y="465" text-anchor="middle" font-size="15" fill="#475569">「他自治体比較を 1 本作る」業務を Claude Code に委ねた場合の参考値。</text>
+<text x="600" y="490" text-anchor="middle" font-size="15" fill="#475569">stats47.jp の運用では同様のフローで毎日 47 都道府県 × 約 2,000 指標を自動更新中。</text>
+<text x="600" y="520" text-anchor="middle" font-size="13" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) — 商用利用可・出典明記必須</text>
+</svg>

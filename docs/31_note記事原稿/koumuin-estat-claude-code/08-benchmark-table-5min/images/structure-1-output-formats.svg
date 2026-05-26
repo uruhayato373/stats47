@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="1200" height="600" fill="#fafafa"/>
+  <text x="600" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">出力形式の使い分け</text>
+  <text x="600" y="66" text-anchor="middle" font-size="13" fill="#64748b">配布先・用途で Markdown / Excel / PDF を選ぶ</text>
+
+  <!-- Header row -->
+  <rect x="60" y="100" width="280" height="50" fill="#475569"/>
+  <rect x="340" y="100" width="280" height="50" fill="#475569"/>
+  <rect x="620" y="100" width="280" height="50" fill="#475569"/>
+  <rect x="900" y="100" width="240" height="50" fill="#475569"/>
+  <text x="200" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">用途</text>
+  <text x="480" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Markdown</text>
+  <text x="760" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Excel (.xlsx)</text>
+  <text x="1020" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">PDF</text>
+
+  <!-- Row 1: 議会答弁原稿 -->
+  <rect x="60" y="150" width="280" height="60" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="340" y="150" width="280" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <rect x="620" y="150" width="280" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <rect x="900" y="150" width="240" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <text x="80" y="178" font-size="14" font-weight="bold" fill="#1e293b">議会答弁原稿</text>
+  <text x="80" y="196" font-size="11" fill="#64748b">議員質問への回答下書き</text>
+  <text x="480" y="186" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+  <text x="760" y="186" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+  <text x="1020" y="186" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+
+  <!-- Row 2: 政策資料 -->
+  <rect x="60" y="210" width="280" height="60" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="340" y="210" width="280" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <rect x="620" y="210" width="280" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <rect x="900" y="210" width="240" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <text x="80" y="238" font-size="14" font-weight="bold" fill="#1e293b">政策資料</text>
+  <text x="80" y="256" font-size="11" fill="#64748b">総合計画・補助金申請</text>
+  <text x="480" y="246" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+  <text x="760" y="246" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+  <text x="1020" y="246" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+
+  <!-- Row 3: 決裁ルート -->
+  <rect x="60" y="270" width="280" height="60" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="340" y="270" width="280" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <rect x="620" y="270" width="280" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <rect x="900" y="270" width="240" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <text x="80" y="298" font-size="14" font-weight="bold" fill="#1e293b">庁内決裁</text>
+  <text x="80" y="316" font-size="11" fill="#64748b">係長 → 課長 → 部長</text>
+  <text x="480" y="306" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+  <text x="760" y="306" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+  <text x="1020" y="306" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+
+  <!-- Row 4: 印刷配布 -->
+  <rect x="60" y="330" width="280" height="60" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="340" y="330" width="280" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <rect x="620" y="330" width="280" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <rect x="900" y="330" width="240" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <text x="80" y="358" font-size="14" font-weight="bold" fill="#1e293b">印刷・配布</text>
+  <text x="80" y="376" font-size="11" fill="#64748b">委員会配布・住民説明会</text>
+  <text x="480" y="366" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+  <text x="760" y="366" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+  <text x="1020" y="366" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+
+  <!-- Row 5: SNS / 公開 -->
+  <rect x="60" y="390" width="280" height="60" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="340" y="390" width="280" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <rect x="620" y="390" width="280" height="60" fill="#fef3c7" stroke="#e2e8f0"/>
+  <rect x="900" y="390" width="240" height="60" fill="#d1fae5" stroke="#e2e8f0"/>
+  <text x="80" y="418" font-size="14" font-weight="bold" fill="#1e293b">公開 / SNS</text>
+  <text x="80" y="436" font-size="11" fill="#64748b">広報・オープンデータ</text>
+  <text x="480" y="426" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+  <text x="760" y="426" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">△</text>
+  <text x="1020" y="426" text-anchor="middle" font-size="20" font-weight="bold" fill="#059669">◎</text>
+
+  <!-- Legend / footer -->
+  <rect x="60" y="475" width="1080" height="100" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+  <text x="80" y="500" font-size="13" font-weight="bold" fill="#1e293b">凡例</text>
+  <text x="80" y="525" font-size="12" fill="#475569">◎ 適している (テンプレ + 自動生成済み)　／　△ 変換が必要 (pandoc, openpyxl 等を併用)</text>
+  <text x="80" y="548" font-size="12" fill="#64748b">基本は Markdown → 必要に応じて pandoc で PDF、openpyxl で Excel に変換するワークフローが最速。</text>
+  <text x="80" y="568" font-size="12" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) より</text>
+</svg>

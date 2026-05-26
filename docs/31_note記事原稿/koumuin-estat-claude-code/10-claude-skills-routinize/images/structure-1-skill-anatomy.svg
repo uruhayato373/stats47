@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="600" fill="#fafafa"/>
+
+<text x="600" y="50" text-anchor="middle" font-size="26" font-weight="bold" fill="#1e293b">SKILL.md の構造 — フロントマター + 手順 + 補助スクリプト</text>
+<line x1="380" y1="70" x2="820" y2="70" stroke="#0891b2" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Directory tree on the left -->
+<g transform="translate(60, 110)">
+  <text x="0" y="20" font-size="13" font-weight="700" fill="#475569">ディレクトリ構成</text>
+  <rect x="0" y="30" width="380" height="200" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="20" y="60" font-size="13" font-family="monospace" fill="#1e293b">.claude/skills/</text>
+  <text x="40" y="84" font-size="13" font-family="monospace" fill="#0891b2">└── monthly-estat-update/</text>
+  <text x="80" y="108" font-size="13" font-family="monospace" fill="#0891b2">├── SKILL.md</text>
+  <text x="80" y="132" font-size="13" font-family="monospace" fill="#475569">└── scripts/</text>
+  <text x="120" y="156" font-size="13" font-family="monospace" fill="#475569">├── calc-yoy.py</text>
+  <text x="120" y="180" font-size="13" font-family="monospace" fill="#475569">└── format-csv.py</text>
+  <text x="20" y="216" font-size="11" fill="#64748b">SKILL.md は必須・scripts/ は任意</text>
+</g>
+
+<!-- Right: SKILL.md anatomy -->
+<g transform="translate(490, 110)">
+  <text x="0" y="20" font-size="13" font-weight="700" fill="#475569">SKILL.md の中身</text>
+
+  <!-- Frontmatter -->
+  <rect x="0" y="30" width="650" height="120" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+  <text x="15" y="55" font-size="13" font-weight="700" fill="#0891b2">① フロントマター (YAML)</text>
+  <text x="15" y="78" font-size="12" font-family="monospace" fill="#1e293b">name: monthly-estat-update</text>
+  <text x="15" y="98" font-size="12" font-family="monospace" fill="#1e293b">description: 「月次集計」「先月分の指標」と言われたら使う</text>
+  <text x="15" y="118" font-size="12" font-family="monospace" fill="#1e293b">argument-hint: "[対象年月 (YYYY-MM)]"</text>
+  <text x="15" y="140" font-size="11" fill="#64748b">→ Claude が呼び出すべき場面を判断する手がかり</text>
+
+  <!-- Body -->
+  <rect x="0" y="170" width="650" height="180" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="15" y="195" font-size="13" font-weight="700" fill="#0891b2">② 本文 (マークダウン)</text>
+  <text x="15" y="218" font-size="12" fill="#1e293b">## 入力 — 引数 / API キーの所在</text>
+  <text x="15" y="240" font-size="12" fill="#1e293b">## 手順 — 1. /fetch-estat-data 呼出 → 2. CSV 整形 → 3. 前年比計算</text>
+  <text x="15" y="262" font-size="12" fill="#1e293b">## 制約 — cdArea 使わない / 個人情報書き込まない / output/ のみ</text>
+  <text x="15" y="284" font-size="12" fill="#1e293b">## 確認 — 対象年月が不明なら作業前に質問</text>
+  <text x="15" y="320" font-size="11" fill="#64748b">→ ただの日本語マニュアル。Excel マクロより読める・直せる・引き継げる</text>
+
+  <!-- Scripts -->
+  <rect x="0" y="370" width="650" height="80" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="15" y="395" font-size="13" font-weight="700" fill="#92400e">③ 補助スクリプト (任意)</text>
+  <text x="15" y="418" font-size="12" fill="#1e293b">scripts/ 配下に Python・Node.js を置く。Claude が自動で呼ぶ。</text>
+  <text x="15" y="438" font-size="11" fill="#64748b">→ 中身は Claude 自身に書かせて良い</text>
+</g>
+
+<!-- Footer -->
+<rect x="60" y="490" width="1080" height="80" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1"/>
+<text x="600" y="520" text-anchor="middle" font-size="16" font-weight="bold" fill="#7c3aed">プログラミング不要・読めるテキスト・引き継ぎ可能</text>
+<text x="600" y="548" text-anchor="middle" font-size="13" fill="#475569">人事異動が起きても SKILL.md を読めば前任者の段取りがそのまま動く</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="360" fill="#fafafa"/>
+
+<text x="600" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">/monthly-estat-update が呼ばれてから集計完了まで</text>
+<line x1="380" y1="56" x2="820" y2="56" stroke="#0891b2" stroke-width="2" stroke-linecap="round"/>
+
+<!-- Step 1 -->
+<g transform="translate(40, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">1. skill 解決</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">SKILL.md を読み込み</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">フロントマター解析</text>
+</g>
+
+<path d="M 250 150 L 290 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow10)"/>
+
+<!-- Step 2 -->
+<g transform="translate(300, 110)">
+  <rect width="200" height="80" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">2. コンテキスト注入</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">手順・制約・確認を</text>
+  <text x="100" y="72" text-anchor="middle" font-size="12" fill="#475569">プロンプトに追加</text>
+</g>
+
+<path d="M 510 150 L 550 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow10)"/>
+
+<!-- Step 3 -->
+<g transform="translate(560, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#0891b2">3. 既存 skill 呼出</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">/fetch-estat-data</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">/inspect-estat-meta 等</text>
+</g>
+
+<path d="M 770 150 L 810 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow10)"/>
+
+<!-- Step 4 -->
+<g transform="translate(820, 110)">
+  <rect width="200" height="80" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#10b981">4. 出力 + 報告</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">CSV 書き出し</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">警告つき完了報告</text>
+</g>
+
+<!-- Time block -->
+<rect x="40" y="230" width="1120" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+<text x="600" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#92400e">初回 1 日 (skill 作成) → 月次 5 分 (引数だけ変えて呼ぶ)</text>
+<text x="600" y="290" text-anchor="middle" font-size="13" fill="#475569">人口 10-30 万人規模の自治体・統計担当の月次集計 8-16 時間が 5 分に。年間 96-192 時間削減。</text>
+<text x="600" y="312" text-anchor="middle" font-size="11" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) — 商用利用可・出典明記必須</text>
+
+<defs>
+  <marker id="arrow10" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
+  </marker>
+</defs>
+</svg>

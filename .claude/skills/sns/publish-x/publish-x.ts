@@ -60,6 +60,8 @@ interface PostConfig {
   /** メディアが動画(mp4)か。動画はアップロード処理に時間がかかる */
   isVideo: boolean;
   scheduledDate: Date | null; // null = 即時投稿
+  /** DB (sns_posts) 更新をスキップ。任意動画 (rankingKey 紐付け無し) で使用 */
+  skipDb?: boolean;
 }
 
 // ─── 引数パース ────────────────────────────────────
@@ -67,6 +69,9 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
   const args = process.argv.slice(2);
   let domain = "ranking";
   let immediate = false;
+  let customMedia: string | null = null;
+  let customCaption: string | null = null;
+  let skipDb = false;
   const pairs: { key: string; date: string | null }[] = [];
 
   let i = 0;
@@ -78,6 +83,12 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
     } else if (args[i] === "--dry-run") {
       IS_DRY_RUN = true;
       console.log("🧪 DRY RUN モード: 実投稿はせず、セレクタ検出まで確認");
+    } else if (args[i] === "--media") {
+      customMedia = args[++i];
+    } else if (args[i] === "--caption") {
+      customCaption = args[++i];
+    } else if (args[i] === "--skip-db") {
+      skipDb = true;
     } else {
       const key = args[i];
       const dateStr = !immediate && i + 1 < args.length && !args[i + 1].startsWith("-")
@@ -90,9 +101,44 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
 
   if (pairs.length === 0) {
     console.error(
-      "使い方: npx tsx publish-x.ts <rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking]"
+      "使い方:\n" +
+        "  rankingKey ベース: npx tsx publish-x.ts <rankingKey> <YYYY-MM-DDTHH:MM> [...] [--domain ranking]\n" +
+        "  任意動画:         npx tsx publish-x.ts <content-key> <YYYY-MM-DDTHH:MM> --media <path> --caption <path> [--skip-db]"
     );
     process.exit(1);
+  }
+
+  // 任意動画モード: --media と --caption を 1 つの投稿として扱う
+  const isCustomMode = customMedia !== null || customCaption !== null;
+  if (isCustomMode) {
+    if (!customMedia || !customCaption) {
+      console.error("--media と --caption は両方指定する必要があります");
+      process.exit(1);
+    }
+    if (pairs.length !== 1) {
+      console.error("--media / --caption モードでは <content-key> <date> を 1 件のみ指定してください");
+      process.exit(1);
+    }
+    if (!fs.existsSync(customMedia)) {
+      console.error(`動画ファイルが見つかりません: ${customMedia}`);
+      process.exit(1);
+    }
+    if (!fs.existsSync(customCaption)) {
+      console.error(`キャプションファイルが見つかりません: ${customCaption}`);
+      process.exit(1);
+    }
+    const { key, date } = pairs[0];
+    const isVideo = customMedia.toLowerCase().endsWith(".mp4");
+    const post: PostConfig = {
+      contentKey: key,
+      domain: "custom",
+      captionPath: customCaption,
+      imagePaths: [customMedia],
+      isVideo,
+      scheduledDate: date ? new Date(date + "+09:00") : null,
+      skipDb,
+    };
+    return { posts: [post], immediate };
   }
 
   const posts = pairs.map(({ key, date }) => {
@@ -516,6 +562,10 @@ function updateDb(
   success: boolean
 ): void {
   if (!success || IS_DRY_RUN) return;
+  if (post.skipDb) {
+    console.log(`📝 DB 更新スキップ: ${post.contentKey} (--skip-db)`);
+    return;
+  }
 
   const status = post.scheduledDate ? "posted" : "posted";
   // JST カレンダー日付で保存（toISOString だと UTC になり 23:00 JST 以降は前日になる）
