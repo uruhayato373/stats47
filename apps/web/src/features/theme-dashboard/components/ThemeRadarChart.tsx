@@ -13,7 +13,7 @@ import type { ThemeIndicatorData } from "../types";
 import type { RadarAxis, RadarDataSeries } from "@stats47/visualization/d3";
 
 const RadarChart = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.RadarChart),
+  () => import("@stats47/visualization/d3").then((mod) => mod.D3RadarChart),
   {
     ssr: false,
     loading: () => <Skeleton className="h-[320px] w-full rounded-md" />,
