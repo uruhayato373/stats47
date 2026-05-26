@@ -20,23 +20,25 @@ tags: [theme-charts, planning]
 
 | テーマ | カテゴリ | metric 数 | status | リサーチ完了 | レビュー済 |
 |---|---|---|---|---|---|
-| [population-dynamics](./population-dynamics.md) | demographics | 11 | drafted | - | - |
-| [aging-society](./aging-society.md) | demographics | 10 | drafted | - | - |
+| [population-dynamics](./population-dynamics.md) | demographics | 11 | drafted | ✅ | - |
+| [aging-society](./aging-society.md) | demographics | 10 | drafted | ✅ | - |
 | [living-housing](./living-housing.md) | lifestyle | 13 | **drafted (見本)** | ✅ | - |
-| [local-economy](./local-economy.md) | economy | 6 | drafted | - | - |
-| [labor-wages](./labor-wages.md) | economy | 16 | drafted | - | - |
-| [manufacturing](./manufacturing.md) | industry | 13 | drafted | - | - |
-| [healthcare](./healthcare.md) | welfare | 13 | drafted | - | - |
-| [safety](./safety.md) | safety | 25 | drafted | - | - |
-| [education-culture](./education-culture.md) | education | 5+ | drafted | - | - |
-| [tourism](./tourism.md) | tourism | 10 | drafted | - | - |
-| [consumer-prices](./consumer-prices.md) | economy | 12 | drafted | - | - |
-| [foreign-residents](./foreign-residents.md) | demographics | 10 | drafted | - | - |
-| [occupation-salary](./occupation-salary.md) | economy | 39 | drafted | - | - |
-| [real-income](./real-income.md) | economy | 11 | drafted | - | - |
-| [labor-mobility](./labor-mobility.md) | economy | 8 | drafted | - | - |
-| [local-finance](./local-finance.md) | economy | 18 | drafted | - | - |
-| [fishery-marine](./fishery-marine.md) | industry | 12 | drafted | - | - |
+| [local-economy](./local-economy.md) | economy | 6 | drafted | ✅ | - |
+| [labor-wages](./labor-wages.md) | economy | 16 | drafted | ✅ | - |
+| [manufacturing](./manufacturing.md) | industry | 13 | drafted | ✅ | - |
+| [healthcare](./healthcare.md) | welfare | 13 | drafted | ✅ | - |
+| [safety](./safety.md) | safety | 25 | drafted | ✅ | - |
+| [education-culture](./education-culture.md) | education | 5+ | drafted | ✅ | - |
+| [tourism](./tourism.md) | tourism | 10 | drafted | ✅ | - |
+| [consumer-prices](./consumer-prices.md) | economy | 12 | drafted | ✅ | - |
+| [foreign-residents](./foreign-residents.md) | demographics | 10 | drafted | ✅ | - |
+| [occupation-salary](./occupation-salary.md) | economy | 39 | drafted | ✅ | - |
+| [real-income](./real-income.md) | economy | 11 | drafted | ✅ | - |
+| [labor-mobility](./labor-mobility.md) | economy | 8 | drafted | ✅ | - |
+| [local-finance](./local-finance.md) | economy | 18 | drafted | ✅ | - |
+| [fishery-marine](./fishery-marine.md) | industry | 12 | drafted | ✅ | - |
+
+**全 17 テーマ drafted 完了 (2026-05-26)**。次は人間レビュー → `reviewed` 昇格 → Phase 3 (R2 exporter + seed) 着手。
 
 status: `drafted` (Agent によるリサーチ稿) → `reviewed` (人間確認済) → `seeded` (D1 投入完了)
 
