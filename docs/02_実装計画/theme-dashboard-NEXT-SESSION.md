@@ -16,14 +16,15 @@ tags: [handoff, theme-dashboard, next-session]
 
 ## 30 秒サマリ
 
-テーマページの方向性を **「タブで指標切替 → 個別 metric を見せる」** から **「複数指標を組み合わせる分析サイト」** に転換。/ranking/{key} との役割重複を解消し、テーマページ独自価値を radar + scatter + (将来 pie) に集約。
+テーマページを **「複数指標の組み合わせ分析 + 1 県深掘り」** に再設計。/ranking/{key} および /areas/{pref}/{categoryKey} との役割重複を解消し、テーマページ独自価値を radar + scatter + 県サマリ KPI に集約。
 
 本セッションで:
 
 1. ✅ **Phase 1A**: D1 schema (themes/theme_metrics) + migration + seed + R2 exporter
-2. ✅ **Planning**: 全 17 テーマのチャート設計 docs (line/pie/bar の指標選定)
-3. ✅ **Phase 3a**: 選択 metric の line + 上下位 bar (`MetricFocusCharts`) — **補助に格下げ済**
-4. ✅ **Phase 3a' (方向転換)**: 組み合わせ分析 `ThemeCombinationAnalysis` (radar + scatter) を右カラム主役に配置
+2. ✅ **Planning**: 全 17 テーマのチャート設計 docs
+3. ✅ **Phase 3a**: 選択 metric の line + 上下位 bar (`MetricFocusCharts`) — **県選択時のみ可視、未選択時は折りたたみ**
+4. ✅ **Phase 3a' (組み合わせ分析)**: `ThemeCombinationAnalysis` (radar + scatter) を右カラム主役に
+5. ✅ **Phase 3a'' (areas 統合)**: `ThemePrefectureSummary` (県選択時の主要 KPI + 順位 + 平均比) を最上部に。`/areas/{pref}/administrativefinancial` → 301 → `/themes/local-finance?pref={pref}` リダイレクト追加
 
 **pie / breakdown は Phase 3b で次回**。
 
