@@ -51,12 +51,6 @@ import { ChoroplethBarChartReelPreview } from './features/population-choropleth/
 import { ChoroplethStaticReelPreview } from './features/population-choropleth/previews/ChoroplethStaticReelPreview';
 import { BAR_CHART_REEL_DURATION } from './features/population-choropleth/ChoroplethBarChartReel';
 import { STATIC_REEL_DURATION } from './features/population-choropleth/ChoroplethStaticReel';
-// population-yoy-47
-import {
-  PopulationYoy47Landscape,
-  PopulationYoy47Portrait,
-  getPopulationYoy47Duration,
-} from './features/population-yoy-47/PopulationYoy47Scene';
 // migration-flow
 import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
 import { MigrationFlowCoverPreview } from './features/migration-flow/MigrationFlowCoverPreview';
@@ -814,41 +808,6 @@ export const RemotionRoot: React.FC = () => {
           fps={VIDEO_CONFIG.fps}
           durationInFrames={STATIC_REEL_DURATION}
           schema={PopulationChoroplethSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-      </Folder>
-
-      {/* 47都道府県 × 1976-2024 年次前年度比 コロプレス時系列 */}
-      <Folder name="population-yoy-47">
-        {/* 横 16:9 (YouTube 1920x1080) */}
-        <Composition
-          id="PopulationYoy47-Landscape"
-          component={PopulationYoy47Landscape}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={getPopulationYoy47Duration()}
-          schema={z.object({
-            theme: z.enum(['light', 'dark']).optional(),
-          })}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-
-        {/* 縦 9:16 (Reels / Shorts 1080x1920) */}
-        <Composition
-          id="PopulationYoy47-Portrait"
-          component={PopulationYoy47Portrait}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={getPopulationYoy47Duration()}
-          schema={z.object({
-            theme: z.enum(['light', 'dark']).optional(),
-          })}
           defaultProps={{
             theme: 'dark' as const,
           }}

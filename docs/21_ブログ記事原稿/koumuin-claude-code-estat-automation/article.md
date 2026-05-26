@@ -179,15 +179,6 @@ stats47 では、これらが「人間がコマンドを打たなくても勝手
   label="業務効率化トレーニング（無料診断）"
 ></affiliate-banner>
 
-<affiliate-banner
-  src="https://www20.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1"
-  href="https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
-  tracking="https://www18.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
-  width="300"
-  height="250"
-  label="PR"
-></affiliate-banner>
-
 
 ## まとめ
 

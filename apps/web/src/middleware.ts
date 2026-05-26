@@ -85,22 +85,6 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
   }
 
-  // /areas/{prefCode}/administrativefinancial → /themes/local-finance?pref={prefCode}
-  // areas/categoryKey の 47 × N ページを作らない方針 (2026-05-26) との両立。
-  // 旧 URL アクセスを themes 側の 1 県深掘りに集約する 301。
-  if (
-    segments.length === 3 &&
-    segments[0] === "areas" &&
-    /^\d{5}$/.test(segments[1]) &&
-    segments[2] === "administrativefinancial"
-  ) {
-    if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(
-      new URL(`/themes/local-finance?pref=${segments[1]}`, baseUrl),
-      { status: 301 },
-    );
-  }
-
   // /dashboard/{prefCode}/... → /areas/{prefCode}（旧 URL のセグメント順序違いバリアント）
   if (segments.length >= 2 && segments[0] === "dashboard" && /^\d{5}$/.test(segments[1])) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();

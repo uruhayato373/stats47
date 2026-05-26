@@ -21,9 +21,6 @@ export * from "./fishing_ports";
 export * from "./articles";
 export * from "./page_components";
 
-// テーマダッシュボード (旧 packages/types/src/indicator-sets/*.ts を D1 化, 2026-05-26)
-export * from "./themes";
-
 // e-Stat 統合カタログ (status='candidate'/'registered' で旧 estat_stats_tables を吸収)
 export * from "./estat_metainfo";
 // e-Stat 1行1ランキング候補カタログ (is_active で登録管理)

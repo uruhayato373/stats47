@@ -1,6 +1,4 @@
 export { fetchIndicatorForYearAction } from "./fetch-indicator-for-year";
-export { fetchMetricTimeseriesAction } from "./fetch-metric-timeseries";
-export type { MetricTimeseriesPoint } from "./fetch-metric-timeseries";
 export { fetchMunicipalityDrilldownAction } from "./fetch-municipality-data";
 export type { MunicipalityDrilldownResult } from "./fetch-municipality-data";
 export { fetchDbChartDataAction } from "./fetch-db-chart-data";
