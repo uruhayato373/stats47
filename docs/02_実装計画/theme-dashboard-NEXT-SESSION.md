@@ -66,26 +66,64 @@ ls .local/r2/app/themes/
 cat .local/r2/app/themes/living-housing/config.json | jq .panels
 ```
 
-### Step 3. Phase 3a + 3a' の動作確認 (npm run dev)
+### Step 3. Phase 3a + 3a' + 3a'' の動作確認 (npm run dev)
 
 ```bash
 cd apps/web
 npm run dev
-# → http://localhost:3000/themes/living-housing
 ```
 
-確認項目 (**右カラムが組み合わせ分析に変わったか**が今回の主役):
+#### 3-1. テーマページ基本動作 (`/themes/living-housing`)
 
-- [ ] ページ全体が落ちずに描画される (既存機能の regression なし)
-- [ ] **右カラム上部**に「テーマ全体プロフィール (radar)」カードが出る
+- [ ] ページが落ちずに描画される (既存機能の regression なし)
+- [ ] **右カラム上部**: 「テーマ全体プロフィール (radar)」カード
   - 県未選択時はプレースホルダ「地図で都道府県を選択するとここにレーダーが出ます」
   - 地図で県クリック → レーダーチャートが描画される (8 軸まで)
-- [ ] **右カラム中部**に「指標どうしの相関 (scatter)」カードが出て、47 県プロットが見える
+- [ ] **右カラム中部**: 「指標どうしの相関 (scatter)」カード, 47 県プロット
   - 県クリック → 選択県が赤くハイライト
-- [ ] **右カラム下部**: 既存の KPI カード (`PrefectureStatsPanel`) は残ったまま
-- [ ] **左カラム** map 下: 「選択指標の単独詳細を表示」が **`<details>` 折りたたみ** になっている (Phase 3a で作った line + bar はここに格下げ)
-- [ ] **モバイル**: 「統計」タブ先頭が組み合わせ分析、次に KPI、最後に折りたたみで単独詳細
-- [ ] population-dynamics の `PopulationScatterSection` (独自 scatter) は従来通り表示される
+- [ ] **右カラム下部**: 既存 `PrefectureStatsPanel` (KPI カード) はそのまま
+- [ ] **左カラム** map 下: 県未選択時は `<details>` 折りたたみ「選択指標の単独詳細を表示」
+- [ ] population-dynamics の `PopulationScatterSection` は従来通り
+
+#### 3-2. **🆕 県深掘りモード** (Phase 3a''、本セッションの目玉)
+
+`/themes/local-finance` で地図クリック (例: 北海道) → 以下が起こることを確認:
+
+- [ ] **右カラム最上部**に新カード「{県名} の {テーマ名}」が出現
+  - 主要 3 指標について「値 / 全国順位バッジ / 全国平均比 ±%」
+  - 順位 5 位以内 = blue badge, 下位 5 位 = slate badge
+  - 各カードクリック → `/ranking/{metric}` へ遷移
+  - 「{県名} プロフィール →」リンクが `/areas/{prefCode}` へ
+- [ ] **左カラム** map 下: `<details>` 折りたたみが外れ、トレンド line + 上下位 bar が **常時可視に格上げ**
+- [ ] **右カラム** 既存 radar が描画され、上の KPI サマリ ↔ radar ↔ scatter の 3 段ストーリーになっている
+- [ ] 地図で「都道府県選択解除」した時、KPI サマリが消えて 47 県比較モードに戻る
+
+#### 3-3. **🆕 旧 URL リダイレクト** (Phase 3a'')
+
+- [ ] `http://localhost:3000/areas/01000/administrativefinancial` にアクセス
+  - 301 で `/themes/local-finance?pref=01000` にリダイレクトされる
+  - リダイレクト先で北海道が **初期選択** され、KPI サマリが即表示される
+- [ ] `http://localhost:3000/themes/local-finance?pref=13000` でも同様に東京が初期選択
+- [ ] `http://localhost:3000/areas/99000/administrativefinancial` (無効県コード) → 410 (`gone()`)
+- [ ] `http://localhost:3000/areas/01000/population` (indexable category) → 既存通り 200 で表示
+
+curl 確認:
+
+```bash
+curl -s -o /dev/null -w "%{http_code} → %{redirect_url}\n" \
+  http://localhost:3000/areas/01000/administrativefinancial
+# 期待: 301 → http://localhost:3000/themes/local-finance?pref=01000
+```
+
+#### 3-4. SSG 保全確認 (Cloudflare で 500 出さないため必須)
+
+```bash
+cd apps/web && npm run build 2>&1 | grep -E "Route|○|ƒ" | grep -E "themes|areas" | head -20
+```
+
+- [ ] `/themes/local-finance` が `●` (Static SSG) または `○` のまま
+- [ ] `/areas/[areaCode]` が `●` のまま (middleware redirect は build を変えない)
+- [ ] `ƒ Dynamic` に降格していたら `.claude/rules/nextjs-ssg-preservation.md` 違反
 
 問題があったら → 次セッションで「**この挙動がおかしい**」と伝えてもらえれば直す。
 
@@ -154,8 +192,11 @@ D1 が 2 週間程度安定稼働してから。
 | **このハンドオフ** | `docs/02_実装計画/theme-dashboard-NEXT-SESSION.md` |
 | 17 テーマ Planning INDEX | `docs/02_実装計画/theme-charts-planning/README.md` |
 | Phase 3a 実装 (Server Action) | `apps/web/src/features/theme-dashboard/actions/fetch-metric-timeseries.ts` |
-| Phase 3a 実装 (UI) | `apps/web/src/features/theme-dashboard/components/MetricFocusCharts.tsx` |
-| Phase 3a 統合先 | `apps/web/src/features/theme-dashboard/components/ThemeDashboardTabbed.tsx` |
+| Phase 3a 実装 (UI: trend line) | `apps/web/src/features/theme-dashboard/components/MetricFocusCharts.tsx` |
+| Phase 3a' 実装 (UI: radar+scatter) | `apps/web/src/features/theme-dashboard/components/ThemeCombinationAnalysis.tsx` |
+| **Phase 3a'' 実装 (UI: 県 KPI サマリ)** | `apps/web/src/features/theme-dashboard/components/ThemePrefectureSummary.tsx` |
+| Phase 3a/3a'/3a'' 統合先 | `apps/web/src/features/theme-dashboard/components/ThemeDashboardTabbed.tsx` |
+| **Phase 3a'' redirect 追加** | `apps/web/src/middleware.ts` (`Section 1` 内) |
 | D1 schema | `packages/database/src/schema/themes.ts` |
 | Migration SQL | `packages/database/drizzle/0052_themes_and_theme_metrics.sql` |
 | Seed (TS → D1) | `packages/database/scripts/seed-themes.ts` |
@@ -164,19 +205,74 @@ D1 が 2 週間程度安定稼働してから。
 ## コミット履歴 (このブランチで本セッションが追加したもの)
 
 ```
-c0dba8d feat(theme-dashboard): 選択 metric の line + 上下位 bar チャートを追加 (Phase 3a)
+0926e6b feat(theme-dashboard): 県選択時の主要 KPI サマリ + areas redirect (Phase 3a'')
+80a1feb feat(theme-dashboard): combination analysis を右カラム主役に (Phase 3a')
+c0dba8d feat(theme-dashboard): 選択 metric の line + 上下位 bar (Phase 3a)
 9a1eaf8 docs(theme-charts): 全 17 テーマのチャート設計案 drafted 完了
-85dcc0d (16 並列 agent からの自動 commit があれば、ここに 17 個のテーマファイル群)
-c16a2df feat(themes): D1 化フェーズ 1A — themes/theme_metrics スキーマ + seed + R2 exporter
+c16a2df feat(themes): D1 化フェーズ 1A — themes/theme_metrics + seed + R2 exporter
 ```
 
-(`git log claude/brave-galileo-PVSaL --not main --oneline` で確認可)
+(`git log claude/brave-galileo-PVSaL --not main --oneline` で確認可。SHA は実値に合わせて読み替え)
+
+## ✅ ローカル作業 → デプロイまでのフロー
+
+ハンドオフ後はローカルで動作確認 → develop merge → main PR → デプロイ。
+
+### Step A. 動作確認 (上記 Step 3 完了)
+
+すべての check が緑なら次へ。1 つでも欠ければ次セッションで報告。
+
+### Step B. develop に merge
+
+```bash
+git switch develop
+git pull origin develop
+git merge --no-ff claude/brave-galileo-PVSaL -m "merge: theme-dashboard 1 県深掘り + combination analysis"
+git push origin develop
+```
+
+### Step C. develop → main PR を作る
+
+```bash
+gh pr create --base main --head develop \
+  --title "feat(theme-dashboard): 1 県深掘り + combination analysis 統合" \
+  --body "$(cat <<'EOF'
+## Summary
+- テーマページ右カラムを radar + scatter + 県 KPI サマリの 3 段構成に再設計
+- /areas/{pref}/administrativefinancial → /themes/local-finance?pref={pref} 301 リダイレクト
+- /areas/categoryKey の 47 × N orphan ページ生成を回避しつつ「1 県深掘り」ニーズに応答
+
+## Test plan
+- [x] type-check OK
+- [ ] local: /themes/local-finance で県クリック → KPI サマリ表示
+- [ ] local: /areas/01000/administrativefinancial → 301 → /themes/local-finance?pref=01000
+- [ ] local: npm run build で /themes/* と /areas/* が SSG (●) のままを確認
+EOF
+)"
+```
+
+CI green → squash merge → Cloudflare Pages 自動デプロイ。
+
+### Step D. デプロイ後の本番確認 (5 分)
+
+```bash
+# 301 redirect が本番でも効くか
+curl -s -o /dev/null -w "%{http_code} → %{redirect_url}\n" \
+  https://stats47.jp/areas/01000/administrativefinancial
+# 期待: 301 → https://stats47.jp/themes/local-finance?pref=01000
+
+# 主役ページ
+curl -sI https://stats47.jp/themes/local-finance | head -1
+# 期待: HTTP/2 200
+```
+
+問題なければ `/purge-cdn` で Cloudflare cache を purge。
 
 ## 次セッションを開く時のおすすめ最初のプロンプト
 
 ```
 docs/02_実装計画/theme-dashboard-NEXT-SESSION.md を読んで、
-Phase 3a の動作確認は完了済 / 未完を共有する。
+Phase 3a/3a'/3a'' の動作確認は完了済 / 未完を共有する。
 次は Phase {3b / 3b' / 1C / 2} に進めて。
 ```
 
