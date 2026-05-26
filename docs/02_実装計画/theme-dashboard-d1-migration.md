@@ -33,11 +33,13 @@ tags: [theme-dashboard, d1, r2, refactor, handoff]
 
 | Phase | 内容 | 状態 |
 |---|---|---|
-| **1A** | D1 schema (themes / theme_metrics) + migration + seed + R2 exporter | **✅ 本セッションで実装** |
-| 1B | (なし — Phase 1A の sync-snapshots でカバー済) | - |
-| 1C | `load-theme-data.ts` を「TS 直参照」から「R2 snapshot fetch」に書き換え | ⏳ 次セッション |
-| 2 | prefecture values の R2 snapshot 化 (e-Stat 直叩き廃止) | ⏳ 別 PR |
-| 3 | `chart_type` フィールドを活用して line / pie 用 exporter 追加 | ⏳ 別 PR |
+| **1A** | D1 schema (themes / theme_metrics) + migration + seed + R2 exporter | ✅ 完了 |
+| **3a** | コロプレス選択 metric の **line + 上下位 bar** を表示する `MetricFocusCharts` 追加 | **✅ 本セッションで実装** |
+| **planning** | 全 17 テーマのチャート設計 docs (line/pie/bar の指標選定) | ✅ 完了 (`docs/02_実装計画/theme-charts-planning/`) |
+| 1C | `load-theme-data.ts` を「TS 直参照」から「R2 snapshot fetch」に書き換え | ⏳ |
+| 2 | prefecture values の R2 snapshot 化 (e-Stat 直叩き廃止) | ⏳ |
+| 3b | pie / breakdown 用 R2 exporter + cdCat-aware フェッチ (Phase 3a の続き) | ⏳ |
+| 3c | `theme_metrics.chart_type='line'/'pie'` 行を seed (現在は全行 'choropleth') | ⏳ |
 | 4 | TS `indicator-sets/*.ts` 削除 (D1 が完全に source of truth になってから) | ⏳ 最後 |
 
 ---
@@ -53,6 +55,32 @@ tags: [theme-dashboard, d1, r2, refactor, handoff]
 | `packages/database/package.json` | `seed:themes` script 追加 |
 | `apps/web/scripts/export-themes-snapshot.ts` | 新規。D1 → R2 `app/themes/[key]/config.json` exporter |
 | `.claude/skills/db/sync-snapshots/run.sh` | `themes` タスクを TASKS 配列に追加 |
+
+## Phase 3a (個別チャート表示) で追加・変更したもの
+
+ユーザー要求: 「コロプレス地図で選択中の指標について、line/pie などの個別都道府県チャートを表示」を実装。
+
+| ファイル | 変更内容 |
+|---|---|
+| `apps/web/src/features/theme-dashboard/actions/fetch-metric-timeseries.ts` | 新規 Server Action。`metricKey + areaCode` から全年度の `{ year, value }[]` を返す。e-Stat 全件取得 + メモリ集約 (areaCode='00000' は e-Stat 全国行 or 47 県平均) |
+| `apps/web/src/features/theme-dashboard/actions/index.ts` | 上記 action を export |
+| `apps/web/src/features/theme-dashboard/components/MetricFocusCharts.tsx` | 新規 Client Component。**選択中の metric + 選択都道府県** に対して (A) 時系列 line、(B) 上下位 5 県 bar を描画。pie/breakdown は Phase 3b で追加予定 |
+| `apps/web/src/features/theme-dashboard/components/ThemeDashboardTabbed.tsx` | `MetricFocusCharts` をマップ直下 (desktop) / stats タブ内 (mobile) に挿入。タブ切替・都道府県クリックで自動再描画 |
+
+### 動作
+
+1. ユーザーがテーマページの **タブで metric を選択** → `selectedTabKey` が変わる
+2. `MetricFocusCharts` が `selectedTabKey + selectedPrefectureCode` の変化を `useEffect` で検知
+3. `fetchMetricTimeseriesAction` を呼び出し全年度データ取得
+4. `LineChartClient` で時系列ラインを描画 + 上下位 5 県の bar を `currentValues` から派生
+5. **地図で都道府県クリック** → `selectedPrefectureCode` 変化 → 同じく自動再フェッチ → 「全国」から「東京の推移」に切り替わる
+
+### 既知の制限 (Phase 3b/3c で対応)
+
+- **計算型 metric** (`calculation.isCalculated`) はラインチャート空。`fetchRankingValuesFromSource` ベースの timeseries fetch が必要
+- **pie/breakdown** は未実装 (cdCat-aware な e-Stat フェッチが必要)
+- **データソースは e-Stat 直叩き**: prefecture values が R2 snapshot 化されるまで (Phase 2)、ビルド時に e-Stat が落ちると line chart も空になる
+- `theme_metrics.chart_type` は全行 'choropleth' のまま (Phase 3c で line/pie 行を追加)
 
 ## スキーマ概要
 

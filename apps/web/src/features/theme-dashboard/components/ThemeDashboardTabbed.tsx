@@ -19,6 +19,7 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { fetchIndicatorForYearAction } from "../actions";
 
+import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
 import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
@@ -160,6 +161,15 @@ export function ThemeDashboardTabbed({
     />
   );
 
+  const metricFocusSection = currentRankingItem && (
+    <MetricFocusCharts
+      metricKey={selectedTabKey}
+      selectedPrefectureCode={selectedPrefectureCode}
+      rankingItem={currentRankingItem}
+      currentValues={currentValues}
+    />
+  );
+
   // --- レイアウト ---
 
   if (isBelowLg) {
@@ -171,13 +181,16 @@ export function ThemeDashboardTabbed({
         <DeferredTabs
           mapSection={mapSection}
           statsSection={
-            <PrefectureStatsPanel
-              selectedPrefectureCode={selectedPrefectureCode}
-              selectedIndicatorKey={selectedTabKey}
-              themeConfig={themeConfig}
-              pageCharts={pageCharts}
-              kpiDataByArea={kpiDataByArea}
-            />
+            <div className="space-y-3">
+              {metricFocusSection}
+              <PrefectureStatsPanel
+                selectedPrefectureCode={selectedPrefectureCode}
+                selectedIndicatorKey={selectedTabKey}
+                themeConfig={themeConfig}
+                pageCharts={pageCharts}
+                kpiDataByArea={kpiDataByArea}
+              />
+            </div>
           }
           tableSection={
             currentRankingItem ? (
@@ -213,6 +226,7 @@ export function ThemeDashboardTabbed({
           {indicatorTabs}
           {yearSelector}
           <div className="sticky top-20">{mapSection}</div>
+          {metricFocusSection}
           <IndicatorGrid
             rankingKeys={themeConfig.rankingKeys}
             indicatorDataMap={indicatorDataMap}
