@@ -7,10 +7,12 @@ import {
   useRef,
   useState,
 } from "react";
+
 import { geoMercator, geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
 import { feature } from "topojson-client";
+
 import type { Feature, FeatureCollection } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 
@@ -70,6 +72,7 @@ interface HoverState {
   ratio: number;
   x: number;
   y: number;
+  containerWidth: number;
 }
 
 export function PopulationYoyChoroplethSection() {
@@ -91,7 +94,9 @@ export function PopulationYoyChoroplethSection() {
         setTopology(t);
         setTimeseries(d);
       })
-      .catch((e) => console.error("YoY data load failed", e));
+      .catch(() => {
+        // YoY data load failed; chart will stay empty
+      });
     return () => {
       cancelled = true;
     };
@@ -201,6 +206,7 @@ export function PopulationYoyChoroplethSection() {
                     ratio: rec.ratio,
                     x: e.clientX - rect.left,
                     y: e.clientY - rect.top,
+                    containerWidth: rect.width,
                   });
                 }}
                 onMouseMove={(e) => {
@@ -208,7 +214,12 @@ export function PopulationYoyChoroplethSection() {
                   const rect = containerRef.current.getBoundingClientRect();
                   setHover((h) =>
                     h && h.areaCode === p.areaCode
-                      ? { ...h, x: e.clientX - rect.left, y: e.clientY - rect.top }
+                      ? {
+                          ...h,
+                          x: e.clientX - rect.left,
+                          y: e.clientY - rect.top,
+                          containerWidth: rect.width,
+                        }
                       : h,
                   );
                 }}
@@ -221,7 +232,7 @@ export function PopulationYoyChoroplethSection() {
           <div
             className="pointer-events-none absolute z-10 rounded-md border border-border bg-popover px-2 py-1 text-xs shadow-md"
             style={{
-              left: Math.min(hover.x + 12, (containerRef.current?.clientWidth ?? 0) - 140),
+              left: Math.min(hover.x + 12, hover.containerWidth - 140),
               top: Math.max(hover.y - 36, 0),
             }}
           >

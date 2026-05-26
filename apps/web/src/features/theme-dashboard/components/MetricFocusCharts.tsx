@@ -9,11 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
 import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
+import type { LineChartData } from "@/features/stat-charts/types/visualization";
 
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { LineChartData } from "@/features/stat-charts/types/visualization";
 
 interface Props {
   /** 選択中の metric (rankingKey) */
