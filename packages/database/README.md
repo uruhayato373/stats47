@@ -138,7 +138,12 @@ packages/database/
 │   ├── schema/              # Drizzle スキーマ定義（★ Single Source of Truth）
 │   │   ├── index.ts         # 全スキーマのエクスポート
 │   │   ├── categories.ts    # カテゴリ・サブカテゴリ
-│   │   ├── ranking_items.ts # ランキング関連
+│   │   ├── metrics.ts       # 指標メタ (key PK)
+│   │   ├── sources.ts       # データ出所
+│   │   ├── stats-prefecture.ts  # 都道府県観測値 (1 観測 = 1 行)
+│   │   ├── stats-city.ts        # 市区町村観測値
+│   │   ├── stats-port.ts        # 港湾観測値
+│   │   ├── stats-migration-flow.ts  # ペア観測値 (pref ↔ pref) ★ 後述
 │   │   ├── articles.ts      # ブログ記事
 │   │   └── ...
 │   ├── core/                # D1 接続・クエリ実行
@@ -148,10 +153,37 @@ packages/database/
 │   ├── index.ts             # クライアント安全なエクスポート
 │   └── server.ts            # サーバー専用エクスポート
 ├── scripts/                 # シード・抽出・同期スクリプト
+├── seed/                    # 個別 ingest スクリプト (ingest-migration-flow.ts 等)
 ├── drizzle/                 # マイグレーション SQL
 ├── drizzle.config.ts        # Drizzle 設定（リモート D1）
 └── drizzle.config.local.ts  # Drizzle 設定（ローカル SQLite）
 ```
+
+## 観測テーブル設計
+
+3 層モデル: `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持する。
+
+### 単一エンティティ観測 (一般形)
+
+`stats_prefecture` / `stats_city` / `stats_port` は同じ shape:
+
+```
+(metric_key, area_code, year_code, value, ...)
+```
+
+PK は `(metric_key, area_code, year_code)`。`metric_key` は `metrics.key` への FK。
+
+### ペア観測 (例外パターン)
+
+`stats_migration_flow` のように **2 エンティティの関係** を表現する場合は専用テーブル:
+
+```
+(metric_key, from_pref_code, to_pref_code, year_code, inflow, outflow, net)
+```
+
+PK は `(metric_key, from_pref_code, to_pref_code, year_code)`。`stats_prefecture` の単一 area_code 構造では表現不能なので新規テーブルで受ける。
+
+新規 pair 観測 (例: 港湾間 vessel 移動、市区町村間人口移動) を追加する場合も同パターンで `stats_<relation>` テーブルを作る。
 
 ---
 

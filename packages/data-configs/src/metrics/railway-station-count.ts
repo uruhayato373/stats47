@@ -1,0 +1,62 @@
+import type { MetricConfig } from "../types";
+
+export const railwayStationCount: MetricConfig = {
+  "key": "railway-station-count",
+  "title": "鉄道駅数",
+  "unit": "駅",
+  "category": "infrastructure",
+  "source": {
+    "kind": "external",
+    "fetcherKey": "mlit_ksj",
+    "config": {
+      "source": {
+        "name": "国土数値情報",
+        "url": "https://nlftp.mlit.go.jp/ksj/index.html",
+      },
+      "ksjDataId": "N02",
+      "ksjVersion": "24",
+      "description": "国土数値情報に登録されている鉄道駅の都道府県別数",
+    },
+    "displayName": "国土数値情報",
+    "url": "https://nlftp.mlit.go.jp/ksj/index.html",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2024,
+    "to": 2024,
+  },
+  "yearFormat": "calendar",
+  "calculation": {
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "駅/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 1,
+      },
+      {
+        "type": "per_area",
+        "label": "面積100km²あたり",
+        "unit": "駅/100km²",
+        "scaleFactor": 100,
+        "decimalPlaces": 2,
+      },
+      {
+        "type": "per_household",
+        "label": "1世帯あたり",
+        "unit": "駅/世帯",
+        "scaleFactor": 1,
+        "decimalPlaces": 4,
+      },
+    ],
+    "isCalculated": false,
+  },
+  "seoTitle": "鉄道駅数ランキング都道府県【2024年】｜1位東京都（837駅）",
+  "seoDescription": "2024年の鉄道駅数の都道府県別ランキング。1位東京都（837駅）、最下位沖縄県（19駅）で44.1倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

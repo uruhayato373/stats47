@@ -1,0 +1,44 @@
+import type { MetricConfig } from "../types";
+
+export const overseasTravelAnnualParticipationRate10plus: MetricConfig = {
+  "key": "overseas-travel-annual-participation-rate-10plus",
+  "title": "海外旅行の年間行動者率",
+  "description": "過去1年間に該当の活動をしたことのある人の割合",
+  "unit": "％",
+  "category": "tourism",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010207",
+    "cdCat01": "#G043071",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2021,
+    "to": 2021,
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "divergingMidpoint": "zero",
+    "minValueType": "data-min",
+    "isReversed": false,
+    "isSymmetrized": false,
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "海外旅行の年間行動者率ランキング都道府県【2021年】｜1位京都府（0.7％）",
+  "seoDescription": "2021年の海外旅行の年間行動者率の都道府県別ランキング。1位京都府（0.7％）、最下位高知県（0.1％）で7.0倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

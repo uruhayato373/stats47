@@ -1,0 +1,63 @@
+import type { MetricConfig } from "../types";
+
+export const natureParkAreaRatio: MetricConfig = {
+  "key": "nature-park-area-ratio",
+  "title": "自然公園面積割合",
+  "unit": "％",
+  "category": "landweather",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010202",
+    "cdCat01": "#B01204",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2024,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateGreens",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "自然公園面積割合ランキング都道府県【2024年】｜1位滋賀県（37.3％）",
+  "seoDescription": "2024年の自然公園面積割合の都道府県別ランキング。1位滋賀県（37.3％）、最下位広島県（4.5％）で8.3倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

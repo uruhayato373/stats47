@@ -1,0 +1,63 @@
+import type { MetricConfig } from "../types";
+
+export const universityNewGraduatesUnemploymentRate: MetricConfig = {
+  "key": "university-new-graduates-unemployment-rate",
+  "title": "大学新規卒業者の無業者率",
+  "unit": "％",
+  "category": "educationsports",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010206",
+    "cdCat01": "#F03402",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2023,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "大学新規卒業者の無業者率ランキング都道府県【2023年】｜1位沖縄県（20.7％）",
+  "seoDescription": "2023年の大学新規卒業者の無業者率の都道府県別ランキング。1位沖縄県（20.7％）、最下位福井県（3.3％）で6.3倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

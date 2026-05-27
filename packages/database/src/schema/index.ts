@@ -1,14 +1,19 @@
 // 3 層モデル
 export * from "./sources";
 export * from "./metrics"; // 旧 indicators (2026-05-04 リネーム)
-// stats は area 種別ごとに分割 (2026-05-05)
-export * from "./stats-prefecture";
-export * from "./stats-city";
-export * from "./stats-port";
+// Phase 6 (2026-05-27): stats_* / correlations は D1 から R2 へ全面移行
+// (`app/stats/<metric>/values.json` 等)。実テーブルは DROP 済。
+// 以下の schema export は **過渡期の互換性のため残置** (drizzle type resolution 用)。
+// 実 SELECT は runtime で「no such table」エラーになるので、
+// 該当 reader は順次 R2 fetch にリファクタすること (Phase 7 cleanup)。
+export * from "./stats-prefecture"; // DEPRECATED — Phase 7 で削除予定
+export * from "./stats-city"; // DEPRECATED
+export * from "./stats-port"; // DEPRECATED
+export * from "./stats-migration-flow"; // DEPRECATED
+export * from "./correlations"; // DEPRECATED (R2 snapshot 配信のみ)
 
-// 派生 (3 層から計算で生成、R2 snapshot で公開)
+// 派生 (D1 内に残る集計テーブル)
 export * from "./area_profiles";
-export * from "./correlations";
 
 // マスタ
 export * from "./prefectures";

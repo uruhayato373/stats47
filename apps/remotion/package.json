@@ -5,6 +5,7 @@
     "start": "remotion studio --port 3002",
     "build": "remotion render",
     "render": "remotion render src/index.ts RankingShort out/video.mp4",
+    "prepare-data": "tsx scripts/export-d1-to-remotion-static.ts --feature all",
     "pipeline:sns": "tsx scripts/pipeline/render-sns-all.ts",
     "pipeline:bar-chart-race": "tsx scripts/pipeline/render-bar-chart-race.ts"
   },

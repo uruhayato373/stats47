@@ -1,0 +1,82 @@
+import type { MetricConfig } from "../types";
+
+export const finalDisposalSiteRemainingCapacity: MetricConfig = {
+  "key": "final-disposal-site-remaining-capacity",
+  "title": "最終処分場残余容量",
+  "unit": "千ｍ3",
+  "category": "energy",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010208",
+    "cdCat01": "#H05505",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2023,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "千ｍ3/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 1,
+      },
+      {
+        "type": "per_area",
+        "label": "面積100km²あたり",
+        "unit": "千ｍ3/100km²",
+        "scaleFactor": 100,
+        "decimalPlaces": 2,
+      },
+      {
+        "type": "per_household",
+        "label": "1世帯あたり",
+        "unit": "千ｍ3/世帯",
+        "scaleFactor": 1,
+        "decimalPlaces": 4,
+      },
+    ],
+  },
+  "seoTitle": "最終処分場残余容量ランキング都道府県【2023年】｜1位東京都（21,771千ｍ3）",
+  "seoDescription": "2023年の最終処分場残余容量の都道府県別ランキング。1位東京都（21,771千ｍ3）、最下位徳島県（57千ｍ3）で381.9倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

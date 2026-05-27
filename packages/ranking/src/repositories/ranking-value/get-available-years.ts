@@ -1,36 +1,35 @@
 import "server-only";
 
-import { getDrizzle, statsPrefecture } from "@stats47/database/server";
+import { getDrizzle } from "@stats47/database/server";
+import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, desc, eq } from "drizzle-orm";
 
+/**
+ * Phase 6 以降: R2 payload から DISTINCT yearCode を抽出 (降順)。
+ */
 export async function getAvailableYears(
   rankingKey: string,
   areaType: AreaType,
-  db?: ReturnType<typeof getDrizzle>
+  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<Array<{ yearCode: string; yearName: string }>, Error>> {
   try {
-    const drizzleDb = db ?? getDrizzle();
-    const results = await drizzleDb
-      .selectDistinct({
-        yearCode: statsPrefecture.yearCode,
-        yearName: statsPrefecture.yearName,
-      })
-      .from(statsPrefecture)
-      .where(
-        and(
-          eq(statsPrefecture.metricKey, rankingKey),
-        )
-      )
-      .orderBy(desc(statsPrefecture.yearCode));
+    if (areaType === "national") return ok([]);
+    const payload = await readStatsValues(rankingKey, areaType);
+    if (!payload) return ok([]);
 
-    return ok(
-      results.map((r) => ({
-        yearCode: r.yearCode,
-        yearName: r.yearName || `${r.yearCode}年度`,
-      }))
-    );
+    const byYear = new Map<string, string>();
+    for (const row of payload.rows) {
+      if (!byYear.has(row.yearCode)) {
+        byYear.set(row.yearCode, row.yearName || `${row.yearCode}年度`);
+      }
+    }
+
+    const sorted = Array.from(byYear.entries())
+      .sort(([a], [b]) => b.localeCompare(a))
+      .map(([yearCode, yearName]) => ({ yearCode, yearName }));
+
+    return ok(sorted);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));
   }

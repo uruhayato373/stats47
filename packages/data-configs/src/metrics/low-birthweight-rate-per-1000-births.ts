@@ -1,0 +1,63 @@
+import type { MetricConfig } from "../types";
+
+export const lowBirthweightRatePer1000Births: MetricConfig = {
+  "key": "low-birthweight-rate-per-1000-births",
+  "title": "2,500g未満の出生率",
+  "unit": "‐",
+  "category": "population",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010209",
+    "cdCat01": "#I07201",
+    "displayName": "人口動態統計",
+    "url": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2023,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "2,500g未満の出生率ランキング都道府県【2023年】｜1位沖縄県（121‐）",
+  "seoDescription": "2023年の2,500g未満の出生率の都道府県別ランキング。1位沖縄県（121‐）、最下位徳島県（80.2‐）で1.5倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

@@ -32,6 +32,10 @@
 | `/gis-cross/depopulation-medical` | `app/gis-cross/depopulation-medical/{summary.json,pref/[NN].json}` | 過疎×医療 掛け合わせ (サマリ + 県別詳細) |
 | `/gis-cross/sunshine-map` | `app/gis-cross/sunshine-map/{raster.png,meta.json}` | 日照地図ラスター + メタ |
 | 内部計算データ（URL なし） | `app/correlation/by-ranking-key/[key].json` | 相関データ（例外） |
+| **観測値ストア** (Phase 6 で D1 から移行) | `app/stats/<metric>/values.json` (都道府県) | 47 県 × 全年 |
+| 同上 | `app/stats/<metric>/cities.json` | 市区町村 × 全年 |
+| 同上 | `app/stats/<metric>/ports.json` | 港湾 × 全年 |
+| 同上 | `app/stats/<metric>/migration-flow-<year>.json` | ペア観測 (pref ↔ pref) |
 
 ## ルート直下に置くもの（非 URL データ）
 
@@ -39,7 +43,16 @@
 |---|---|---|
 | `gis/` | 生 GIS ファイル・タイルセット（mlit-ksj 等） | web app の snapshot fetch 経路とは別 |
 | `ges/` | Google Earth Studio 動画出力 | URL なし、非 Web アプリデータ |
-| `sns/` | SNS サムネイル | Web アプリの fetch 対象外 |
+| `sns/` | SNS サムネイル / 投稿用素材 | Web アプリの fetch 対象外 |
+| `video/` | YouTube/web 埋め込み用 master 動画 + メタ | `/archive-remotion-output` で集約 |
+
+## 動画関連の特殊ルール
+
+Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<feature>/`** に置く (R2 ではなく git tracked)。理由: Remotion の Webpack bundle が `staticFile()` で読み込むため。これらは D1 を SSOT として `/export-d1-to-remotion-static` で再生成される派生物。
+
+動画 master / SNS 用 47 分割は R2 に保存:
+- `video/<slug>/master.mp4` — YouTube アップロード後の master + メタ (description / thumbnail)
+- `sns/<slug>/<region>.mp4` — 47 県分割 reel など、再投稿候補
 
 ## 既存キーの移行状態
 

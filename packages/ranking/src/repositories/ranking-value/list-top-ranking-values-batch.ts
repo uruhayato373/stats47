@@ -1,70 +1,55 @@
 import "server-only";
 
-import { getDrizzle, statsPrefecture } from "@stats47/database/server";
+import { getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
+import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq, inArray } from "drizzle-orm";
 import type { RankingValue } from "../../types";
 
 /**
- * 複数ランキングキーの rank=1 データを一括取得する。
- * FeaturedRankings 等で N 個の個別クエリを 1 クエリに統合するために使用。
- *
- * @returns Map<rankingKey, RankingValue> — 各ランキングのトップ1を返す
+ * 複数 metric の rank=1 行を R2 から一括取得 (FeaturedRankings 等)。
+ * Phase 6 以降: D1 単発 SELECT ではなく metric 単位の R2 file を並列 fetch。
  */
 export async function listTopRankingValuesBatch(
   items: { rankingKey: string; yearCode: string }[],
   areaType: AreaType,
-  db?: ReturnType<typeof getDrizzle>
+  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<Map<string, RankingValue>, Error>> {
   try {
-    if (items.length === 0) {
-      return ok(new Map());
-    }
+    if (items.length === 0) return ok(new Map());
+    if (areaType === "national") return ok(new Map());
 
-    const drizzleDb = db ?? getDrizzle();
-    const rankingKeys = items.map((i) => i.rankingKey);
-
-    const result = await drizzleDb
-      .select({
-        areaCode: statsPrefecture.areaCode,
-        areaName: statsPrefecture.areaName,
-        yearCode: statsPrefecture.yearCode,
-        yearName: statsPrefecture.yearName,
-        metricKey: statsPrefecture.metricKey,
-        value: statsPrefecture.value,
-        unit: statsPrefecture.unit,
-        rank: statsPrefecture.rank,
-      })
-      .from(statsPrefecture)
-      .where(
-        and(
-          inArray(statsPrefecture.metricKey, rankingKeys),
-          eq(statsPrefecture.rank, 1)
-        )
-      );
-
-    const yearByKey = new Map(items.map((i) => [i.rankingKey, i.yearCode]));
     const topMap = new Map<string, RankingValue>();
-
-    for (const row of result) {
-      const key = row.metricKey;
-      const expectedYear = yearByKey.get(key);
-      if (expectedYear && String(row.yearCode) === expectedYear) {
-        topMap.set(key, {
-          areaType,
-          areaCode: row.areaCode,
-          areaName: row.areaName,
-          yearCode: String(row.yearCode),
-          yearName: row.yearName,
-          metricKey: key,
-          value: row.value !== null ? Number(row.value) : 0,
-          unit: row.unit,
-          rank: row.rank != null ? Number(row.rank) : 0,
-        });
-      }
-    }
+    await Promise.all(
+      items.map(async ({ rankingKey, yearCode }) => {
+        try {
+          const payload = await readStatsValues(rankingKey, areaType);
+          if (!payload) return;
+          const topRow = payload.rows.find(
+            (r) =>
+              String(r.yearCode) === yearCode &&
+              r.rank != null &&
+              Number(r.rank) === 1,
+          );
+          if (topRow) {
+            topMap.set(rankingKey, {
+              areaType,
+              areaCode: topRow.areaCode,
+              areaName: topRow.areaName,
+              yearCode: String(topRow.yearCode),
+              yearName: topRow.yearName,
+              metricKey: rankingKey,
+              value: topRow.value !== null ? Number(topRow.value) : 0,
+              unit: topRow.unit ?? "",
+              rank: topRow.rank != null ? Number(topRow.rank) : 0,
+            });
+          }
+        } catch (e) {
+          logger.warn({ rankingKey, error: e }, "listTopRankingValuesBatch: per-key failure");
+        }
+      }),
+    );
 
     return ok(topMap);
   } catch (error) {
