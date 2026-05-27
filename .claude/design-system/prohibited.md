@@ -83,6 +83,15 @@
 
 ## コンポーネント
 
+### Card
+
+| 禁止 | 理由 | 代替 |
+|------|------|------|
+| `CardContent className="...pt-0"` | `CardHeader` の `border-b` 直下に内容が貼り付き窮屈に見える | `pt-3` を維持 (Card の default。`p-4 pt-3` 相当) |
+| `CardContent` の上 padding を独自値で上書き | サイト全体でカード余白が不揃いになる | default の `pt-3` を尊重。どうしても変える場合は `pt-2` (8px) or `pt-4` (16px) を意図と共にコメントで明示 |
+
+> 詳細経緯: 2026-05-27 に apps/web 内 29 箇所の `CardContent ... pt-0` を一括 `pt-3` に修正 (`CardHeader` の下線直下余白 0px 問題)。違反検知: `grep -rn 'CardContent[^>]*pt-0' apps/web/src --include='*.tsx'` で 0 件であること。
+
 ### ボタン
 
 | 禁止 | 理由 | 代替 |

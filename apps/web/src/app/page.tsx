@@ -23,6 +23,17 @@ import {
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 /**
+ * 主要ページプレビュー画像/動画の R2 公開 URL ベース。
+ * 仕様: docs/01_技術設計/12_homepage-previews.md
+ * 撮影: apps/web/scripts/capture-home-previews.ts
+ * R2 ファイルが未生成の場合、NextUpGrid は previewImageUrl の 404 を許容し
+ * グラデアクセントへフォールバックする (object src が失敗しても layout は変わらない)。
+ */
+const HOME_PREVIEWS_BASE =
+  (process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? "https://storage.stats47.jp") +
+  "/app/home/previews";
+
+/**
  * ホームページ (最適化版)
  *
  * 設計思想:
@@ -251,7 +262,7 @@ export default async function HomePage() {
                     href={`/blog/${article.slug}`}
                     className="group block overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
                   >
-                    <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
+                    <div className="relative aspect-square w-full overflow-hidden bg-muted">
                       <ThemeAwareImage
                         lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
                         darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
@@ -401,36 +412,44 @@ export default async function HomePage() {
                 title: "全ランキング一覧",
                 description: "1,800 以上の指標から探す",
                 badge: "RANKING",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/ranking.avif`,
+                previewVideoUrl: `${HOME_PREVIEWS_BASE}/ranking.webm`,
               },
               {
                 href: "/themes",
                 title: "テーマダッシュボード",
                 description: "少子高齢化・労働・医療など 17 テーマ",
                 badge: "THEMES",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/themes.avif`,
+                previewVideoUrl: `${HOME_PREVIEWS_BASE}/themes.webm`,
               },
               {
                 href: "/areas",
                 title: "都道府県一覧",
                 description: "47 都道府県のプロフィール",
                 badge: "AREAS",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/areas.avif`,
               },
               {
                 href: "/blog",
                 title: "ブログ",
                 description: "データを読み解く解説記事",
                 badge: "BLOG",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/blog.avif`,
               },
               {
                 href: "/survey",
                 title: "調査から探す",
                 description: "出典別に統計を絞り込む",
                 badge: "SURVEY",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/survey.avif`,
               },
               {
                 href: "/search",
                 title: "キーワード検索",
                 description: "ランキング・記事を横断検索",
                 badge: "SEARCH",
+                previewImageUrl: `${HOME_PREVIEWS_BASE}/search.avif`,
               },
             ]}
             columns={3}

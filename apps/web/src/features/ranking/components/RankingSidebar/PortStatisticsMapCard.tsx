@@ -28,7 +28,7 @@ export function PortStatisticsMapCard({
           関連ページ
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="px-4 pb-4 pt-3">
         <nav className="flex flex-col gap-1">
           <Link
             href="/ports"

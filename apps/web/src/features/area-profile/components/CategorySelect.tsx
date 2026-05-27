@@ -47,7 +47,7 @@ export function CategorySelect({ categories, currentCategoryKey, areaCode, baseP
             <CardHeader className="py-3 px-3">
                 <CardTitle className="text-base">カテゴリ</CardTitle>
             </CardHeader>
-            <CardContent className="px-3 pb-3 pt-0">
+            <CardContent className="px-3 pb-3 pt-3">
                 <Select value={currentCategoryKey} onValueChange={handleChange}>
                     <SelectTrigger className="w-full h-9 text-sm font-medium">
                         {isPending ? (
