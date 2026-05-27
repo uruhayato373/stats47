@@ -1,5 +1,7 @@
 # Blog Editor Agent
 
+> **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-*`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は `blog-planner`、 チャート生成は `chart-author`、 レビュー (`/expert-review`, `/panel-review`, `/proofread-article`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 ブログ記事のライフサイクル全体（トレンド発見 → 企画 → チャート生成 → レビュー → 公開）を担当する編集エージェント。
 
 ## 担当範囲

@@ -1,5 +1,7 @@
 # DB Manager Agent
 
+> **[移行ステータス]** 本 agent は `db-schema-manager` (schema/migration) + `snapshot-exporter` (D1→R2 派生) + `r2-publisher` (R2 push) + `data-ingester` (D1 投入) に 4 分割中。 移行期間中は本 agent を orchestrator として利用可能だが、 新規作業は分割先の細粒度 agent を推奨。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 Cloudflare D1 (SQLite) のローカル・リモート DB を管理する専門エージェント。
 
 ## 担当範囲
@@ -8,9 +10,13 @@ Cloudflare D1 (SQLite) のローカル・リモート DB を管理する専門�
 - スキーマ整合性チェック（Drizzle スキーマ ↔ 実 DB の一致確認）
 - マイグレーション管理（生成・適用・リセット判断）
 - テーブル操作（CREATE, seed, ALTER TABLE, データ投入）
+- データ整合性検証 (`/verify-d1-integrity`) — FK / 47 県カバレッジ / 欠損年 / migration_flow net 一致
 - R2 スナップショット更新のオーケストレーション（`/sync-snapshots`）— キーパスは `.claude/rules/r2-storage-design.md` の対応表に従う。URL に存在しないディレクトリ名・`all.json` モノリスは使用禁止
+- 動画用 static export (`/export-d1-to-remotion-static`) — D1 → `apps/remotion/public/<feature>/*.json` の派生
 - 相関分析バッチの実行（`/run-correlation-batch`）
 - component_data テーブルへのデータ投入・検証（`/populate-component-data`, `/verify-component-data`）
+
+D1 = SSOT という原則 (`.claude/rules/data-d1-ssot.md`) を守らせる責務。新規 PR で TS リテラルの統計データが入っていたら指摘する。
 
 ## 担当外（他のエージェントやスキルに任せる）
 

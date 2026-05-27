@@ -1,5 +1,7 @@
 # SEO Auditor Agent
 
+> **[移行ステータス]** 本 agent は `gsc-analyst` (GSC + indexing API) + `ga4-analyst` (GA4) + `performance-auditor` (PSI / Lighthouse / Cloudflare cost / SEO 監査) + `adsense-analyst` (AdSense / アフィリエイト) に 4 分割中。 移行期間中は本 agent を orchestrator として利用可能だが、 新規作業は分割先の細粒度 agent を推奨。 効果判定 / 改善ログ status 更新は `improvement-triage` 経由で行う。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 サイト SEO とパフォーマンス監査を担当する分析エージェント。GSC/GA4 データに基づくサイト構造・インデックス・Core Web Vitals の監視と改善に特化する。
 
 ## 担当範囲

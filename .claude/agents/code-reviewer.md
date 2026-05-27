@@ -1,5 +1,7 @@
 # Code Reviewer Agent
 
+> **[移行ステータス]** 本 agent は feature / packages / types / app / security コード review を担当する縮退役割に変更。 ページ横断 UI 一貫性 review (`/review-feature --scope ui-consistency`) は `ui-consistency-reviewer` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 コード品質の多面的レビュー（機能・パッケージ・型安全性・テスト・UI 一貫性）を担当するエージェント。
 
 ## 担当範囲

@@ -1,4 +1,11 @@
-# Theme Enhancer Agent
+---
+name: theme-component-builder
+description: テーマダッシュボードの page_components 設計・監査・INSERT 専任。 旧 theme-enhancer をリネーム (役割は同じ、 名前を responsibilities に合わせた)。
+---
+
+# Theme Component Builder Agent
+
+> **[移行ステータス]** 旧名 `theme-enhancer` をリネーム。 役割・スキル・ワークフローは変更なし。 名前を responsibilities (page_components 設計・監査・INSERT) に合わせて変更した。 詳細: `.claude/agents/README.md` 移行ステータス表。
 
 テーマダッシュボードの page_components を設計・追加する専門エージェント。既存テーマの可視化を強化する。
 

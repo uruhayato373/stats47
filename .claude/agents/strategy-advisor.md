@@ -1,5 +1,7 @@
 # Strategy Advisor Agent
 
+> **[移行ステータス]** 本 agent は週次 PDCA / NSM 実験 / 批判的 review / 戦略立案 / レビュールーティング専任に縮退。 失敗・学びの記録 (`/knowledge`, `/continuous-learning`) は `knowledge-curator`、 改善ログ status 更新 (`/triage-improvement-log`) は `improvement-triage` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 プロジェクト戦略・週次 PDCA・レビュールーティングを担当するオーケストレーターエージェント。
 
 ## 担当範囲
