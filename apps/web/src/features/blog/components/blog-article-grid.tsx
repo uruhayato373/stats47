@@ -21,20 +21,20 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
     }
 
     return (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {articles.map((article) => (
                 <Link
                     key={article.slug}
                     href={`/blog/${article.slug}`}
                     className="group block overflow-hidden rounded-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
                 >
-                    <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
+                    <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden md:aspect-square">
                         <ThemeAwareImage
                             lightSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-light.webp`}
                             darkSrc={`${R2_PUBLIC_URL}/app/blog/${article.slug}/thumbnail-dark.webp`}
                             alt={article.title}
                             fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                             className="object-cover transition-transform duration-200 group-hover:scale-105"
                         />
                     </div>
