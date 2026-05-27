@@ -111,7 +111,7 @@
 
 ## 移行ステータス
 
-**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 137 SKILL.md に `primary_agent` frontmatter 付与 → 縮退 agent の primary を新 agent に再割当 → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 / 2 / 7 完了、Cluster 3 / 4 は RECONSIDER 系として統合済、Cluster 5 / 6 は対象 skill が Phase 6.7 で消滅 or 統合不適 (KEEP-SKIP) のため見送り。
+**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `docs/05_改善ログ/agent-parallelism.md` AGENT-L3-CONSOLIDATE-01。
 
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|
