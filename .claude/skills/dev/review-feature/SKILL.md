@@ -3,6 +3,7 @@ name: review-feature
 description: コード品質を専門家パネルで多角的にレビューする。--scope で対象を選ぶ（feature / app / packages / types / ui-consistency）。Use when user says "feature レビュー", "ドメインレビュー", "App Router レビュー", "ルーティングレビュー", "パッケージレビュー", "型レビュー", "tsc エラー直して", "UI一貫性レビュー", "見た目がバラバラ", "ads レビュー", "広告レビュー" 等. dev-review Issue に出力.
 disable-model-invocation: true
 argument-hint: "--scope <feature|app|packages|types|ui-consistency> [scope-specific args]"
+primary_agent: ui-consistency-reviewer
 ---
 
 コード品質を専門家パネルで多角的にレビューする。`--scope` で対象を選ぶことで、対象固有のパネリスト・メソドロジー・出力フォーマットを使い分ける。

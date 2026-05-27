@@ -1,6 +1,7 @@
 ---
 name: fetch-adsense-data
 description: Google AdSense Management API から広告収益・RPM・CTR・ビューアビリティを取得する。Use when user says "AdSenseデータ", "広告収益", "RPM", "AdSense snapshot". snapshot モードで週次 CSV を .claude/skills/analytics/adsense-improvement/reference/snapshots/ に保存.
+primary_agent: adsense-analyst
 ---
 
 Google AdSense Management API からサイトの広告パフォーマンスデータを取得する。

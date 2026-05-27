@@ -1,10 +1,23 @@
 ---
 name: populate-all-rankings
-description: 全ランキングの全年度データを e-Stat API から取得し ranking_data に一括投入する。Use when user says "全ランキング投入", "populate-all-rankings", "データ再投入". ドライラン対応.
+description: 全 metric の全年度データを e-Stat API から取得し stats_prefecture / stats_city に一括投入する。Use when user says "全ランキング投入", "populate-all-rankings", "データ再投入". ドライラン対応.
 disable-model-invocation: true
+primary_agent: data-ingester
+co_agents: [data-pipeline]
 ---
 
 全ランキングの全年度データを DB に一括投入する。
+
+## ⚠ Freeze ガード (必須、最初に実行)
+
+```bash
+if [ -f .claude/state/phase6-freeze.json ]; then
+  jq -r .abortMessage .claude/state/phase6-freeze.json >&2
+  exit 1
+fi
+```
+
+Phase 6 (D1 縮小 / R2 直行アーキテクチャ転換) 進行中は本 skill 使用禁止。代替: `/page-data-batch` (Phase 6.4 で新規追加予定)。詳細は `~/.claude/plans/synthetic-zooming-yeti.md`。
 
 ## 用途
 

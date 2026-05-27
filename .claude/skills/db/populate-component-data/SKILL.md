@@ -4,6 +4,8 @@ description: e-Stat API から component_data テーブルへデータ投入す�
 argument-hint: "<chart-key> | --type composition-chart | --all"
 disable-model-invocation: true
 allowed-tools: Read, Bash
+primary_agent: data-ingester
+co_agents: [db-manager]
 ---
 
 e-Stat API からデータを取得し、リモート D1 の `component_data` テーブルに UPSERT する。

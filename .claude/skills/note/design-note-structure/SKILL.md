@@ -1,6 +1,7 @@
 ---
 name: design-note-structure
 description: note 記事（B/C/D シリーズ）の構成を設計する。Use when user says "note構成設計", "記事構成", "構成テンプレート". 章構成と stats47.jp 誘導設計を決定.
+primary_agent: note-manager
 ---
 
 note 記事（B/C/D シリーズ）の構成を設計する。シリーズに応じた構成テンプレートを適用する。

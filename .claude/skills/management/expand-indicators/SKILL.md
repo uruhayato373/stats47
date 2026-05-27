@@ -7,6 +7,7 @@ description: |
   docs/05_改善ログ/indicator-expansion.md に append する。
   Use when user says "指標追加", "indicator 拡充", "/expand-indicators".
 argument-hint: "--target <N> [--priority high|medium|low|all] [--dry-run]"
+primary_agent: strategy-advisor
 ---
 
 stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/05_改善ログ/indicator-expansion.md` に施策バッチとして append する 1 コマンド型スキル。

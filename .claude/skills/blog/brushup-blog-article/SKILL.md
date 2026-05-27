@@ -2,6 +2,7 @@
 name: brushup-blog-article
 description: ブログ記事を nlm cross query（白書ノートブック）+ D1 統計データで部分補強する。全文書き直しなし・部分パッチのみ。Use when user says "ブログをブラッシュアップ", "記事を補強", "brushup", "/brushup-blog-article".
 argument-hint: "<slug> [--focus エキスパート視点追加|最新データ更新|CTA強化]"
+primary_agent: blog-editor
 ---
 
 # /brushup-blog-article — ブログ記事部分補強

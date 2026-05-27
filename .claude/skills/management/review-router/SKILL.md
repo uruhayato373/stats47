@@ -2,6 +2,7 @@
 name: review-router
 description: 「レビューして」と言われたとき、対象・文脈・日付から適切なレビュースキルを自動選択して実行する。レビュー系スキルのルーティングガイド。
 user-invocable: false
+primary_agent: strategy-advisor
 ---
 
 「レビューして」「チェックして」「確認して」等のレビュー依頼を受けたとき、文脈から最適なレビュースキルを判断し実行する。

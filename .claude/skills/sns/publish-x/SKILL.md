@@ -3,6 +3,7 @@ name: publish-x
 description: Playwright で X の予約投稿を自動実行する。Use when user says "X投稿", "X予約投稿", "ツイート予約". キャプション生成済みコンテンツをブラウザ自動操作で投稿. **初回実行時 or セレクタ更新後は必ず `--dry-run` で事前検証すること**.
 disable-model-invocation: true
 argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking|blog] [--dry-run]"
+primary_agent: x-strategist
 ---
 
 Playwright（永続プロファイル）で X のコンポーザを自動操作し、予約投稿を設定する。

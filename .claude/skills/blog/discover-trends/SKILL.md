@@ -2,6 +2,8 @@
 name: discover-trends
 description: 指定したソース（Google Trends / GSC / はてブ / Google News / Yahoo / note.com）から急上昇トピックを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "はてブトレンド", "Yahooトレンド", "ニューストレンド", "noteトレンド", "トレンド全部". 検索急上昇・自サイト需要・ネット議論・ニュース報道など複数視点で記事ネタを発見.
 disable-model-invocation: true
+primary_agent: trend-scout
+co_agents: [theme-designer, blog-editor]
 ---
 
 複数のトレンドソースから急上昇トピックを取得し、stats47 の統計データ（`indicators` / `indicator_tags` + `tags` / `estat_metainfo`）とマッチングしてブログ記事候補を提案する。

@@ -4,6 +4,7 @@ description: テーマダッシュボードを継続最適化する（GSC/GA4 + 
 disable-model-invocation: true
 argument-hint: "[theme-key] | --all"
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+primary_agent: theme-component-builder
 ---
 
 テーマダッシュボードをアクセスデータ・競合調査・トレンド調査・e-Stat データ調査の4軸で分析し、優先度付き改善アクションを出力する。

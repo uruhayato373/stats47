@@ -1,10 +1,48 @@
 ---
 name: register-ranking
-description: 新規ランキングキーを ranking_items に登録し e-Stat API からデータ投入する。Use when user says "ランキング登録", "register-ranking", "新しい指標を追加". search-estat/inspect-estat-meta と連携.
+description: 新規 metric を metrics + sources に登録し e-Stat API からデータ投入する。Use when user says "ランキング登録", "register-ranking", "新しい指標を追加". search-estat/inspect-estat-meta と連携.
 disable-model-invocation: true
+primary_agent: data-ingester
+co_agents: [theme-component-builder, theme-designer, data-pipeline]
 ---
 
-新しいランキングキーを ranking_items に登録し、e-Stat API からデータを取得して ranking_data に投入する。
+新しい指標を `metrics` テーブルに登録し、e-Stat API からデータを取得して `stats_prefecture` (or `stats_city` / `stats_port`) に投入する。
+
+## DDD migration 後のスキーマ (重要)
+
+PR #205-#210 (2026-05-04) 完了後の現行スキーマ:
+
+| 旧テーブル名 | 現行テーブル名 |
+|---|---|
+| `ranking_items` / `indicators` | `metrics` |
+| `ranking_data` (entity_type 別) | `stats_prefecture` / `stats_city` / `stats_port` |
+| `data_sources` + `source_metadata` | `sources` (`source_kind` で識別) |
+| `estat_stats_tables` | `estat_metainfo` (status='registered' / 'candidate') |
+
+カラム名対応:
+
+| 旧 | 現行 |
+|---|---|
+| `ranking_key` | `key` (metrics PK) |
+| `ranking_name` | `title` |
+| `data_source_id` | `source_id` (FK → sources.id) |
+| `source_config` | `source_config_json` |
+| `value_display_config` | `value_display_config_json` |
+| `visualization_config` | `visualization_config_json` |
+| `calculation_config` | `calculation_config_json` |
+
+ペア観測 (pref ↔ pref など) は `stats_prefecture` で表現不能 → `stats_migration_flow` のような専用テーブルを新規追加 (詳細: `packages/database/README.md`)。
+
+## ⚠ Freeze ガード (必須、最初に実行)
+
+```bash
+if [ -f .claude/state/phase6-freeze.json ]; then
+  jq -r .abortMessage .claude/state/phase6-freeze.json >&2
+  exit 1
+fi
+```
+
+Phase 6 進行中は本 skill での D1 INSERT 禁止。代替: `packages/data-configs/src/metrics/<key>.ts` に MetricConfig を新規追加し、`/sync-metrics-cache` を実行 (Phase 6.1 で skill 化予定)。
 
 ## 用途
 
@@ -35,73 +73,77 @@ disable-model-invocation: true
 
 1. ローカル DB で同名キーが既に存在しないか確認:
    ```js
-   db.prepare("SELECT ranking_key FROM indicators WHERE ranking_key = ?").get(rankingKey)
+   db.prepare("SELECT key FROM metrics WHERE key = ?").get(rankingKey)
    ```
 2. 既に存在する場合はユーザーに報告し、上書きするか確認
 
-### Phase 2: ranking_items 登録
+### Phase 2: metrics 登録
 
-3. 以下の形式で INSERT:
+3. `metrics` への INSERT (現行 schema):
    ```js
-   {
-     ranking_key: rankingKey,
-     area_type: "prefecture",
-     ranking_name: rankingName,
-     title: rankingName,
-     unit: unit,
-     category_key: categoryKey,
-     is_active: 1,
-     is_featured: 0,
-     data_source_id: "estat",
-     source_config: JSON.stringify({
+   db.prepare(`
+     INSERT INTO metrics (
+       key, title, unit, source_id, category_key,
+       source_config_json, value_display_config_json,
+       visualization_config_json, calculation_config_json,
+       is_active, is_featured
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+   `).run(
+     rankingKey,
+     rankingName,
+     unit,
+     "estat",  // sources.id
+     categoryKey,
+     JSON.stringify({
        source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
        statsDataId: statsDataId,
-       cdCat01: cdCat01
+       cdCat01: cdCat01,
      }),
-     value_display_config: JSON.stringify({
+     JSON.stringify({
        conversionFactor: conversionFactor ?? 1,
        decimalPlaces: 1,
-       ...(displayUnit ? { displayUnit } : {})
+       ...(displayUnit ? { displayUnit } : {}),
      }),
-     visualization_config: JSON.stringify({
+     JSON.stringify({
        colorScheme: colorScheme ?? "interpolateBlues",
        colorSchemeType: "sequential",
-       minValueType: "zero"
+       minValueType: "zero",
      }),
-     calculation_config: JSON.stringify({ isCalculated: false }),
-     latest_year: null,    // Phase 3 で {"yearCode":"2023","yearName":"2023年度"} 形式に更新
-     available_years: null // Phase 3 で [{"yearCode":"2023","yearName":"2023年度"},...] 形式に更新
-   }
+     JSON.stringify({ isCalculated: false }),
+     1, 0,
+   );
    ```
 
-### Phase 3: ranking_data 投入
+`sources` テーブルに `id="estat"` が無い場合は事前に登録する。
+
+### Phase 3: stats_prefecture (もしくは stats_city / stats_port) 投入
 
 4. `/populate-all-rankings` の `--key` オプションで投入:
    ```bash
    npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/populate-all-rankings.ts --key <rankingKey>
    ```
 
-5. **populate が失敗する場合**（source_config の形式が合わない等）は WebFetch で直接取得:
+5. **populate が失敗する場合**（source_config_json の形式が合わない等）は WebFetch で直接取得:
    ```
    https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData
      ?appId=<ESTAT_APP_ID>&statsDataId=<ID>&cdCat01=<CODE>&lvArea=2&cdTime=<TIME>
    ```
-   取得後、better-sqlite3 で ranking_data に直接 INSERT する（今回の旅館/BHデータ登録と同じ手順）。
+   取得後、better-sqlite3 で `stats_prefecture` に直接 INSERT。
 
-6. `years: "all"` の場合は全年度を取得。`cdTime` を指定せずに取得し、年度ごとにグループ化して INSERT。
+6. `years: "all"` の場合は全年度を取得。`cdTime` を指定せず取得し、年度ごとにグループ化して INSERT。
 
 ### Phase 4: 検証
 
 7. 登録結果を検証:
-   - ranking_items に登録されたか
-   - ranking_data に 47 都道府県分のデータがあるか
-   - Top 5 / Bottom 5 を表示して値が妥当か
-   - `latest_year` / `available_years` が更新されたか
+   - `metrics` に登録されたか (`SELECT * FROM metrics WHERE key = ?`)
+   - `stats_prefecture` に 47 行あるか (`SELECT COUNT(*) FROM stats_prefecture WHERE metric_key = ?`)
+   - Top 5 / Bottom 5 で値が妥当か
+   - `/verify-d1-integrity --metric <key>` で整合性 OK
 
 8. 検証結果をユーザーに報告:
    ```
-   ✅ ranking_items: total-overnight-guests-ryokan (延べ宿泊者数（旅館）)
-   ✅ ranking_data: 47件 (2023年度)
+   ✅ metrics: total-overnight-guests-ryokan (延べ宿泊者数（旅館）)
+   ✅ stats_prefecture: 47件 (2023年度)
       1位: 北海道 (4,496,710 人泊)
       47位: 沖縄県 (105,380 人泊)
 

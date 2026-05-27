@@ -7,6 +7,7 @@ description: >
   ラッパーで根拠収集 → 記事に反映する。Use when user says
   "NotebookLM で調べて", "深掘り調査", "引用根拠で記事補強", "白書で補強",
   "/notebooklm-research".
+primary_agent: trend-scout
 ---
 
 # /notebooklm-research — NotebookLM 起点のブログ記事内容補強

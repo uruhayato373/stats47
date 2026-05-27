@@ -1,6 +1,8 @@
 ---
 name: plan-blog-trends
 description: トレンド起点でブログ記事企画を生成する。Use when user says "トレンド記事企画", "旬の記事", "トレンドから企画". トレンド検出から企画フォーマット出力まで1スキルで完結.
+primary_agent: blog-planner
+co_agents: [blog-editor]
 ---
 
 トレンド起点でブログ記事企画を生成する。`/discover-trends --source all` のトレンド検出から企画フォーマット出力までを1スキルで完結させる。

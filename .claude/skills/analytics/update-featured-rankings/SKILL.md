@@ -3,6 +3,7 @@ name: update-featured-rankings
 description: GA4 PVデータから注目ランキングを自動更新する（is_featured 更新）。Use when user says "注目ランキング更新", "フィーチャー更新". PV上位を自動選出.
 disable-model-invocation: true
 argument-hint: "[--days 7] [--limit 8] [--dry-run]"
+primary_agent: ga4-analyst
 ---
 
 GA4 API からランキングページの日次 PV を取得し、PV 上位のランキングを注目ランキング（`indicators.is_featured`）として自動更新する。

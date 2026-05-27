@@ -3,6 +3,7 @@ name: plan-youtube-normal
 description: YouTube 競合分析と自社データマッチングで通常動画の企画を自動生成する。Use when user says "YouTube企画", "動画企画". 再生数が伸びやすいテーマを優先度付きで提案.
 disable-model-invocation: true
 argument-hint: [件数（デフォルト5）]
+primary_agent: youtube-strategist
 ---
 
 YouTube の都道府県ランキング系動画の競合分析を行い、再生数が伸びやすいテーマと stats47 の DB データを照合して、次に制作すべき動画企画を優先度付きで提案する。

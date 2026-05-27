@@ -1,10 +1,23 @@
 ---
 name: populate-city-rankings
-description: 市区町村ランキングのデータを e-Stat API から取得し ranking_data に投入する（area_type=city）。Use when user says "市区町村ランキング投入", "populate-city-rankings". コロプレスマップ切替用.
+description: 市区町村ランキングのデータを e-Stat API から取得し stats_city に投入する。Use when user says "市区町村ランキング投入", "populate-city-rankings". コロプレスマップ切替用.
 disable-model-invocation: true
+primary_agent: data-ingester
+co_agents: [data-pipeline]
 ---
 
 市区町村ランキングのデータを DB に投入する。
+
+## ⚠ Freeze ガード (必須、最初に実行)
+
+```bash
+if [ -f .claude/state/phase6-freeze.json ]; then
+  jq -r .abortMessage .claude/state/phase6-freeze.json >&2
+  exit 1
+fi
+```
+
+Phase 6 進行中は本 skill 使用禁止。代替: `/page-data-batch` (Phase 6.4)。
 
 ## 用途
 

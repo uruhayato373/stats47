@@ -1,6 +1,7 @@
 ---
 name: monetize-article
 description: 既存ブログ記事に <ad-slot> と <affiliate-banner> を適切な位置に挿入する。Use when user says "/monetize-article", "広告挿入", "記事に広告を入れて", "ad-slot配置". スラッグを引数として受け取る.
+primary_agent: blog-planner
 ---
 
 既存ブログ記事の markdown に `<ad-slot>` と `<affiliate-banner>` を適切な位置に挿入する。

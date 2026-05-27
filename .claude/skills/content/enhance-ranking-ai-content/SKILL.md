@@ -8,6 +8,7 @@ description: >
   "ranking ai content リライト", "ranking_key の AI コンテンツ補強",
   "NotebookLM で ranking ページ強化", "/enhance-ranking-ai-content".
 disable-model-invocation: true
+primary_agent: data-ingester
 ---
 
 # /enhance-ranking-ai-content — ranking_key の ai_content を NotebookLM 補強でリライト

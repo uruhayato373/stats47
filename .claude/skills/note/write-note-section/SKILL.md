@@ -2,6 +2,7 @@
 name: write-note-section
 description: 設計済み構成に沿って note 記事（B/C/D シリーズ）を執筆する。Use when user says "note執筆", "記事を書いて", "note書く". stats47 データを読者に刺さるストーリーに変換.
 disable-model-invocation: true
+primary_agent: note-manager
 ---
 
 `/design-note-structure` で設計した構成に沿って、note 記事（B/C/D シリーズ）を執筆する。

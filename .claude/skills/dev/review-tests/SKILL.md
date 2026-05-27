@@ -1,6 +1,8 @@
 ---
 name: review-tests
 description: コード変更に対応するテスト（ユニット/E2E）を確認・作成・更新する。Use when user says "テスト確認", "review-tests", "テスト足りてる?". 変更範囲から不足テストを自動特定.
+primary_agent: tdd-guide
+co_agents: [code-reviewer]
 ---
 
 コード変更に対応するテスト（ユニット / E2E）を確認・作成・更新する。

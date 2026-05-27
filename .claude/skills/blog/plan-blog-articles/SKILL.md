@@ -1,6 +1,8 @@
 ---
 name: plan-blog-articles
 description: カテゴリ別ブログ記事企画を自動生成し構成案として保存する。Use when user says "記事企画", "ブログ企画", "記事ネタ". データインベントリ・トレンド・SEO を考慮.
+primary_agent: blog-planner
+co_agents: [blog-editor]
 ---
 
 指定カテゴリのブログ記事企画を自動生成し、構成案ファイルとして保存する。

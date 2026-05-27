@@ -2,6 +2,8 @@
 name: image-prompt
 description: 外部 AI 画像生成（Midjourney 等）用のプロンプトを 43 種のテンプレートから生成する。Use when user says "OGP画像プロンプト", "note表紙プロンプト", "サムネプロンプト", "画像プロンプト". stats47 ブランド適合度フィルタ付き.
 disable-model-invocation: true
+primary_agent: image-prompt-curator
+co_agents: [x-strategist, blog-editor, note-manager, seo-auditor, sns-renderer]
 ---
 
 外部 AI 画像生成（Midjourney、DALL-E、Nano Banana 等）用のプロンプトを、テンプレートカタログから選んで生成する。

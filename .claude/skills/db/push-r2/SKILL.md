@@ -2,6 +2,8 @@
 name: push-r2
 description: .local/r2/ のローカルファイルをリモート R2 バケットにアップロードする。Use when user says "R2 push", "R2アップロード", "push-r2". プレフィックス指定で部分同期可能.
 disable-model-invocation: true
+primary_agent: r2-publisher
+co_agents: [instagram-strategist]
 ---
 
 `.local/r2/` のローカルファイルをリモート R2 へ push する。

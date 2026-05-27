@@ -2,6 +2,8 @@
 name: register-affiliate-banner
 description: A8.net 等のバナー広告を登録しタグベースで自動表示させる。Use when user says "バナー登録", "アフィリエイト追加", "広告登録". TAG_AFFILIATE_MAP 経由の自動配置 + 手動配置対応.
 disable-model-invocation: true
+primary_agent: adsense-analyst
+co_agents: [devops-runner]
 ---
 
 アフィリエイトバナー広告を登録し、ブログ記事末尾にタグベースで自動表示させる。

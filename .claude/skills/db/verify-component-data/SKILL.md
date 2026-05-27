@@ -4,6 +4,8 @@ description: component_data テーブルのデータ鮮度・完全性を検証�
 argument-hint: "[chart-key] | --all"
 disable-model-invocation: true
 allowed-tools: Read, Bash
+primary_agent: snapshot-exporter
+co_agents: [db-manager]
 ---
 
 `component_data` テーブルのデータ鮮度と完全性を検証する。

@@ -1,6 +1,7 @@
 ---
 name: fetch-article-data
 description: ブログ記事用の ranking JSON + timeseries JSON を取得して docs/21_ブログ記事原稿/<slug>/data/ に配置する。企画 MD の ranking_key / statsDataId を参照し、ローカル D1 や e-Stat API から都道府県データを集約。Use when user says "記事データ取得", "fetch-article-data", "article データ準備".
+primary_agent: chart-author
 ---
 
 ブログ記事用のデータを集約するスキル。`/draft-from-trend` の orchestrator から呼ばれる。

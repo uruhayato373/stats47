@@ -1,6 +1,7 @@
 ---
 name: performance-improvement
 description: PSI（PageSpeed Insights）と Core Web Vitals の計測・改善施策を GitHub Issues で追跡し、EXP-NNN 番号付きで実測値と効果判定を記録する。Use when user says "PSI改善", "LCP改善", "CLS改善", "パフォーマンス改善", "Core Web Vitals", or when reviewing psi-improvement issues.
+primary_agent: performance-auditor
 ---
 
 PSI スコア（Performance / LCP / CLS / FID）を **GitHub Issues で時系列追跡**し、打った施策と効果を実測値ベースで記録するスキル。

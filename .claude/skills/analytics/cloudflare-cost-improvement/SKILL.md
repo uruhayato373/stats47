@@ -1,6 +1,7 @@
 ---
 name: cloudflare-cost-improvement
 description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を docs/05_改善ログ/cloudflare-cost.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
+primary_agent: performance-auditor
 ---
 
 Cloudflare の月次コスト・リソース使用量を **`docs/05_改善ログ/cloudflare-cost.md` で時系列追跡**し、打った施策と効果を記録するスキル。

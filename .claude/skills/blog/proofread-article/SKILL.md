@@ -2,6 +2,8 @@
 name: proofread-article
 description: ブログ記事の公開前校正チェックを実行する。Use when user says "校正して", "proofread", "チェックして", "公開前チェック". フロントマター・本文・チャート・出典・リンクを検証.
 argument-hint: <記事パスまたは slug>
+primary_agent: blog-critic
+co_agents: [blog-editor]
 ---
 
 ブログ記事（article.md）の公開前チェックを実行し、問題箇所の報告と修正を行う。

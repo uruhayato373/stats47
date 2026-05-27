@@ -1,6 +1,7 @@
 ---
 name: gsc-improvement
 description: Google Search Console の検索パフォーマンスとインデックス問題を docs/05_改善ログ/gsc.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
+primary_agent: gsc-analyst
 ---
 
 GSC の週次メトリクス（Clicks / Impressions / CTR / Position / Index Coverage）を **docs/05_改善ログ/gsc.md (人間向け要約) + reference/improvement-log.md (agent 詳細)** の 2 層で時系列追跡し、打った施策と効果を記録するスキル。

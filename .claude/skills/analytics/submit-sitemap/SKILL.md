@@ -3,6 +3,7 @@ name: submit-sitemap
 description: Google Search Console に sitemap.xml を API 経由で再送信する。Use when user says "sitemap 再送信", "サイトマップ更新", "submit-sitemap". /deploy 後のインデックス化促進や middleware ルール変更後に使用.
 disable-model-invocation: true
 argument-hint: [sitemap-path]
+primary_agent: gsc-analyst
 ---
 
 Google Search Console `webmasters.sitemaps.submit` API を叩いて sitemap.xml の再クロールを要求する。

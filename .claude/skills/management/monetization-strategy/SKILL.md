@@ -2,6 +2,7 @@
 name: monetization-strategy
 description: 収益化戦略を 3-5 案ブレインストームし適合度・リスク・検証実験を設計する。Use when user says "収益化戦略", "マネタイズ検討". 広告・アフィリエイト等の収益モデル評価.
 disable-model-invocation: true
+primary_agent: strategy-advisor
 ---
 
 stats47 の収益化戦略を 3-5 案ブレインストームし、適合度・リスク・検証実験を設計する。

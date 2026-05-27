@@ -1,6 +1,7 @@
 ---
 name: strategic-compact
 description: 長時間セッションのコンテキスト管理ガイド。Use when user says "コンテキスト整理", "strategic-compact", "コンパクション". 自動コンパクションによる文脈喪失を防ぐ.
+primary_agent: devops-runner
 ---
 
 長時間セッションでのコンテキスト管理ガイド。タスク境界での戦略的コンパクションを推奨し、自動コンパクションによる文脈喪失を防ぐ。

@@ -3,6 +3,7 @@ name: find-quote-rt
 description: X の直近3日以内のバズツイートを全テーマ並列検索し、鮮度×エンゲージメントで最上位候補を提示する。Use when user says "引用RT", "バズツイート検索", "quote RT". 元スレッドが活発なうちに引用RTで到達を最大化.
 disable-model-invocation: true
 argument-hint: "[テーマ] [--post]"
+primary_agent: x-strategist
 ---
 
 X の**直近3日以内**のバズツイートを全テーマ並列検索し、stats47 データとマッチングしてスコア上位の引用RT候補を提示する。投稿は手動確認後のセミオート運用。

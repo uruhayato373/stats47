@@ -2,6 +2,7 @@
 name: pre-mortem
 description: プロジェクトの Pre-Mortem（事前検死）を実施。1年後に完全に頓挫した想定で、具体的な失敗シナリオと対策書を現在のデータから生成する。
 disable-model-invocation: true
+primary_agent: strategy-advisor
 ---
 
 プロジェクトの **Pre-Mortem（事前検死）** を実施する。

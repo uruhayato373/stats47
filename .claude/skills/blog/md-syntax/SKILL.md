@@ -1,6 +1,7 @@
 ---
 name: md-syntax
 description: ブログ記事で使えるマークダウン記法一覧を表示する。Use when user says "記法一覧", "マークダウン記法", "md記法", "書き方". コールアウト・チャート埋め込み等の独自記法を含む.
+primary_agent: blog-editor
 ---
 
 ブログ記事（`.md` / `.mdx`）で使用できるマークダウン記法の一覧を示す。

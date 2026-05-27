@@ -1,6 +1,7 @@
 ---
 name: brushup-blog-priority
 description: GSC ページ別データ × D1 の articles テーブルを掛け合わせてブログ改善優先度キューを生成する。Use when user says "ブログ改善優先度", "どの記事を直す", "brushup priority", "/brushup-blog-priority".
+primary_agent: blog-editor
 ---
 
 # /brushup-blog-priority — ブログ改善優先度キュー生成

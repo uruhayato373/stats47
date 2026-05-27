@@ -22,7 +22,9 @@ done
 TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 
 # (label, script_path) のペアで定義
+# remotion-static は Remotion 用 public/<feature>/*.json を D1 から再生成 (R2 push 対象外、ローカル file のみ更新)
 declare -a TASKS=(
+  "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
   "correlation|packages/correlation/src/scripts/export-snapshot.ts"

@@ -3,6 +3,8 @@ name: performance-report
 description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/skills/analytics/performance-improvement/snapshots 配下の CSV から分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
+primary_agent: performance-auditor
+co_agents: [seo-auditor]
 ---
 
 `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積された Lighthouse / PSI 計測履歴からパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。

@@ -3,10 +3,23 @@ name: run-correlation-batch
 description: 相関分析バッチを実行し R2 スナップショットに書き出す（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
+primary_agent: snapshot-exporter
+co_agents: [db-manager]
 ---
 
 相関分析バッチを実行し、結果を R2 スナップショット（`snapshots/correlation/`）に書き出す。
 ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlations` テーブルを DROP + VACUUM する。
+
+## ⚠ Freeze ガード (必須、最初に実行)
+
+```bash
+if [ -f .claude/state/phase6-freeze.json ]; then
+  jq -r .abortMessage .claude/state/phase6-freeze.json >&2
+  exit 1
+fi
+```
+
+Phase 6 進行中は本 skill 使用禁止。代替: Phase 6.6 完了後、`/recompute-correlations` (R2 → temp → 計算 → R2 snapshot → DROP の新 skill) を使用予定。
 
 ## 前提
 

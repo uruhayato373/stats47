@@ -2,6 +2,7 @@
 name: publish-article
 description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". /sync-articles で DB 反映.
 disable-model-invocation: true
+primary_agent: blog-editor
 ---
 
 下書き記事（`docs/21_ブログ記事原稿/<slug>/`）を公開フォルダ（`.local/r2/blog/<slug>/`）にコピーし、公開用フロントマターを整える。
