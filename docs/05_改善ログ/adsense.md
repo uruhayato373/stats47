@@ -40,7 +40,8 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 ## [ADSENSE-OAUTH-01] ローカル .env.local の OAuth refresh_token 再認証
 
 - **status**: pending
-- **tier**: 1 (blocker — local AdSense snapshot 取得が不可)
+- **tier**: 1
+- **blocker**: local AdSense snapshot 取得が不可 (GHA 側は別系統で取得継続)
 - **target_metric**: adsense-data-pipeline
 - **owner**: uruhayato373
 - **due**: 2026-06-07
