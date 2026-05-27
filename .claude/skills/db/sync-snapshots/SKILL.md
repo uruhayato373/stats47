@@ -4,12 +4,12 @@ description: ローカル D1 から全 R2 snapshot を一括 export する。R2 
 argument-hint: [--only <category>] [--dry-run]
 disable-model-invocation: true
 primary_agent: snapshot-exporter
-co_agents: [article-writer, data-pipeline, db-manager, note-manager]
+co_agents: [article-writer, data-ingester, snapshot-exporter, r2-publisher, note-manager]
 ---
 
 ローカル D1 SQLite から R2 上の全 snapshot を一括 export するオーケストレーションスキル。
 
-データ変更 (`/populate-all-rankings`, `/sync-articles`, AI コンテンツ生成 等) のたびに、対応する snapshot を更新しないと本番で古いデータが配信される。
+データ変更 (`/page-data-batch`, `/sync-articles`, AI コンテンツ生成 等) のたびに、対応する snapshot を更新しないと本番で古いデータが配信される。
 
 本スキルは **全 snapshot を順次 export** する。各 export はべき等なので何度実行しても安全。
 
@@ -73,8 +73,8 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 
 | トリガー | 必要 snapshot |
 |---|---|
-| `/populate-all-rankings` 完了 | master + ai-content + ranking-values |
-| `/register-ranking` 完了 | master + ranking-values |
+| `/page-data-batch` 完了 | master + ai-content + ranking-values |
+| `/sync-metrics-cache` 完了 (新規 metric 追加後) | master + ranking-values |
 | `/sync-articles` 完了 | blog |
 | AI コンテンツ生成完了 | ai-content |
 | ダッシュボード設定変更 | page-components |
@@ -91,5 +91,5 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 
 ## 関連スキル
 
-- `/populate-all-rankings` — ローカル D1 にデータ投入（本スキルの前処理）
+- `/page-data-batch` — e-Stat → R2 へ観測値投入（本スキルの前処理。Phase 6 で旧 `/populate-all-rankings` を置換）
 - `/push-r2` — R2 への手動アップロード（個別ファイル）

@@ -54,7 +54,7 @@ primary_agent: devops-runner
 | 週次計画（`/weekly-plan`） | 5 並列サブエージェント完了後、計画出力前 |
 | テーマ設計（`/design-theme-charts`） | 監査完了後、チャート設計開始前 |
 | ブログ記事執筆 | トレンド調査完了後、記事構成開始前 |
-| ランキング登録（`/register-ranking`） | e-Stat メタデータ調査完了後 |
+| ランキング登録（TS-config + `/sync-metrics-cache` + `/page-data-batch`） | e-Stat メタデータ調査完了後 |
 | パフォーマンス改善 | Lighthouse 計測完了後、実装開始前 |
 
 ## コンパクションの実行

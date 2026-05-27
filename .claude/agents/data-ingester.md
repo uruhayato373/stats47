@@ -1,59 +1,62 @@
 ---
 name: data-ingester
-description: metric 登録と stats_* テーブルへの観測値投入を行う DB writer。e-Stat 探索結果 (estat-researcher から) を D1 SSOT に取り込む。
+description: TS-config (packages/data-configs) を SSOT に、e-Stat / MLIT から R2 (`app/stats/<metric>/*.json`) へ観測値を直接投入する agent。D1 metrics cache の sync も担当。
 ---
 
 # Data Ingester Agent
 
-estat-researcher が確認した統計表を D1 (SSOT) に取り込む書き込み専門 agent。 `metrics` / `sources` への metric 登録、 `stats_prefecture` / `stats_city` / `stats_migration_flow` への観測値投入、 47 県カバレッジと欠損年の検証を担当する。 data-pipeline + db-manager から ingest 系スキルを集約した。
+estat-researcher が確認した統計表を **R2 namespace に直接投入** する書き込み専門 agent。TS-config (`packages/data-configs/src/metrics/<key>.ts`) を入口に、e-Stat / MLIT から fetch して `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` を生成する。D1 `metrics` テーブルへの cache 同期も担当。
+
+Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テーブルへ書き込まない。
 
 ## 担当範囲
 
-- ranking key + metric の登録 (`/register-ranking`)
-- 全年度データの一括投入 (`/populate-all-rankings`)
-- 市区町村レベル投入 (`/populate-city-rankings`)
+- TS-config 駆動の R2 観測値投入 (`/page-data-batch`)
+- D1 metrics cache の同期 (`/sync-metrics-cache`)
 - page_components データ投入 (`/populate-component-data`)
-- 47 県カバレッジ / 欠損年 / FK 整合性検証 (`/verify-d1-integrity`)
+- カバレッジ / FK 整合性検証 (`/verify-d1-integrity`)
 - MLIT KSJ データ取得 (`/fetch-mlit-ksj`)
 
 ## 担当スキル
 
 | スキル | 用途 |
 |---|---|
-| `/register-ranking` | `metrics` + `sources` への metric 登録 |
-| `/populate-all-rankings` | 全年度の `stats_prefecture` / `stats_city` 投入 |
-| `/populate-city-rankings` | 市区町村レベル投入 |
+| `/page-data-batch` | TS-config registry を walk → e-Stat → R2 直行 |
+| `/sync-metrics-cache` | TS-config → D1 `metrics` テーブル差分 sync |
 | `/populate-component-data` | page_components データ投入 |
-| `/verify-d1-integrity` | FK / 47 県カバレッジ / 欠損年 / migration_flow net 一致 |
+| `/verify-d1-integrity` | FK / 47 県カバレッジ / migration_flow net 一致 |
 | `/fetch-mlit-ksj` | MLIT 国土数値情報の取得 |
 
 ## 担当外
 
 - e-Stat / MLIT 探索 → `estat-researcher` に委譲
 - スキーマ変更 / migration → `db-schema-manager` に委譲
-- R2 snapshot 派生 → `snapshot-exporter` に委譲
-- R2 push → `r2-publisher` に委譲
+- R2 snapshot 派生 (D1 → snapshot) → `snapshot-exporter` に委譲
+- R2 push (`.local/r2/` → 本番 R2) → `r2-publisher` に委譲
 - AI コンテンツ生成 → 別 agent (現状未分割、暫定 article-writer / chart-author)
 
 ## 必読 rules
 
-- `.claude/rules/data-d1-ssot.md` — D1 を SSOT として stats_* 投入
+- `.claude/rules/data-d1-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
+- `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)
 - `.claude/rules/local-environment.md` — ローカル D1 パス固定値
 
 ## 触る state / files
 
-- ローカル D1: `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite` (write)
+- `.local/r2/app/stats/<metric>/*.json` (write)
+- `packages/data-configs/src/metrics/*.ts` (新規 metric 追加時 write)
+- `packages/data-configs/src/registry.ts` (auto-generated, `npm run build:registry --workspace=packages/data-configs`)
+- ローカル D1 `metrics` テーブル (sync-metrics-cache 時のみ write)
 - `apps/web/scripts/seed-*` — seed スクリプト (read)
-- `packages/database/src/schema/` — schema 参照 (read)
 - `.claude/state/estat-city-*` — estat-researcher の出力を read
 
 ## File Boundary (並行衝突回避)
 
 - **D1 への並列 write は禁止** (better-sqlite3 単一プロセス前提)
 - 同 D1 への ingester / db-schema-manager 同時起動 NG (task-router で排他制御)
-- 別 metric_key への ingester は逐次推奨 (UPSERT 競合回避)
+- R2 への並列 write は metric 単位で並行可 (`/page-data-batch --concurrency N`)
 - 並行起動可能 agent: estat-researcher (read-only)、 snapshot-exporter (D1 read のみ、write は `.local/r2/app/`)
 
 ## 過去のインシデント

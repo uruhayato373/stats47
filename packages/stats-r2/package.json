@@ -14,6 +14,11 @@
       "types": "./src/readers/index.ts",
       "import": "./src/readers/index.ts",
       "require": "./src/readers/index.ts"
+    },
+    "./types": {
+      "types": "./src/types.ts",
+      "import": "./src/types.ts",
+      "require": "./src/types.ts"
     }
   },
   "scripts": {

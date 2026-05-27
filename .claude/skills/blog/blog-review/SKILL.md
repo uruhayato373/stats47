@@ -3,7 +3,6 @@ name: blog-review
 description: ブログ記事のレビュー (専門家視点 or 公開前校正)。Use when user says "専門家レビュー", "校正して", "proofread", "expert review", "公開前チェック". --mode で expert (事実/統計的妥当性) と proofread (frontmatter/本文/出典/リンク) を切替。旧 /expert-review + /proofread-article を統合.
 argument-hint: <記事パスまたは slug> [--mode expert|proofread]
 primary_agent: blog-critic
-co_agents: [blog-editor]
 ---
 
 ブログ記事を 2 モードでレビューする。 旧 `/expert-review` と `/proofread-article` を統合した skill。
@@ -188,7 +187,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
     1. リンクテキストからキーワードを抽出
     2. `SELECT ranking_key, ranking_name FROM indicators WHERE ranking_name LIKE '%キーワード%' LIMIT 10`
     3. キーの一部でも部分一致検索
-    4. 候補があれば修正案を提示、 なければ `/register-ranking` でデータ登録を提案
+    4. 候補があれば修正案を提示、 なければ TS-config 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` でデータ登録を提案
   - 登録・修正するかどうかはユーザーの判断に委ねる (自動修正しない)
 
 ### 手順 (proofread モード)

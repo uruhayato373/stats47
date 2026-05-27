@@ -1,55 +1,43 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { REMOTION_PUBLIC, openD1, metricExists } from "./_shared/d1-client.js";
+import { REMOTION_PUBLIC, openD1 } from "./_shared/d1-client.js";
 import { loadPrefectures } from "./_shared/load-prefectures.js";
+import { readLocalStatsValues } from "./_shared/local-r2-reader.js";
 
 // 47 都道府県の総人口 (日本人口 / 総人口どちらを使うか確定後に切替可能)
 const POPULATION_METRIC_KEY = "japanese-population";
 const FEATURE_DIR = resolve(REMOTION_PUBLIC, "population-yoy-47");
-
-interface RawRow {
-  areaCode: string;
-  yearCode: string;
-  value: number | null;
-}
 
 interface YoyFrame {
   year: number;
   values: Array<{ code: string; name: string; value: number; yoy: number | null }>;
 }
 
-export function exportPopulationYoy47(): { files: number; skipped: string[] } {
+export async function exportPopulationYoy47(): Promise<{
+  files: number;
+  skipped: string[];
+}> {
   const skipped: string[] = [];
+
+  const payload = readLocalStatsValues(POPULATION_METRIC_KEY, "prefecture");
+  if (!payload || payload.rows.length === 0) {
+    skipped.push(
+      `R2 has no stats for ${POPULATION_METRIC_KEY} (app/stats/${POPULATION_METRIC_KEY}/values.json)`,
+    );
+    return { files: 0, skipped };
+  }
+
+  // prefectures.code は 5-digit ("01000"〜"47000")。area_code も同じく 5-digit。
   const db = openD1();
   try {
-    if (!metricExists(db, POPULATION_METRIC_KEY)) {
-      skipped.push(`metric ${POPULATION_METRIC_KEY} not in metrics table`);
-      return { files: 0, skipped };
-    }
-
-    // prefectures.code は 5-digit ("01000"〜"47000")。area_code も同じく 5-digit。
     const prefs = loadPrefectures(db).filter((p) => {
       const n = Number(p.code.slice(0, 2));
       return n >= 1 && n <= 47;
     });
 
-    const rows = db
-      .prepare(
-        `SELECT area_code AS areaCode, year_code AS yearCode, value
-         FROM stats_prefecture
-         WHERE metric_key = ?
-         ORDER BY year_code, area_code`,
-      )
-      .all(POPULATION_METRIC_KEY) as RawRow[];
-
-    if (rows.length === 0) {
-      skipped.push("stats_prefecture has no rows for population metric");
-      return { files: 0, skipped };
-    }
-
     // year → 5-digit code → value
     const byYear = new Map<number, Map<string, number>>();
-    for (const r of rows) {
+    for (const r of payload.rows) {
       const y = Number(r.yearCode);
       if (!Number.isFinite(y)) continue;
       if (r.value == null) continue;

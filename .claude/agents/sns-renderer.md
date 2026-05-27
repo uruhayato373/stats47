@@ -30,7 +30,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 
 - キャプション・テキスト生成（sns-producer）
 - ブラウザ自動投稿（browser-publisher）
-- データ取得・ランキング登録（data-pipeline）
+- データ取得・ランキング登録（estat-researcher / data-ingester）
 
 ## 出力先
 

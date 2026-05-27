@@ -2,8 +2,7 @@
 name: brushup-blog
 description: ブログ記事の brushup (改善優先度キュー生成 or 1 記事の部分補強)。--target priority で GSC × D1 から brushup-queue.md 生成、--target article <slug> で nlm cross query + D1 統計で部分補強。Use when user says "ブログ改善優先度", "どの記事を直す", "ブログをブラッシュアップ", "記事を補強", "brushup".
 argument-hint: --target priority | --target article <slug> [--focus エキスパート視点追加|最新データ更新|CTA強化]
-primary_agent: blog-editor
-co_agents: [blog-critic]
+primary_agent: article-writer
 ---
 
 # /brushup-blog — ブログ記事 brushup (優先度キュー生成 + 1 記事補強)

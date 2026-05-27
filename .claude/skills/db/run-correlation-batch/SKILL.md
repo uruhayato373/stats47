@@ -4,7 +4,7 @@ description: 相関分析バッチを実行し R2 スナップショットに書
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
 primary_agent: snapshot-exporter
-co_agents: [db-manager]
+co_agents: [data-ingester, snapshot-exporter]
 ---
 
 相関分析バッチを実行し、結果を R2 スナップショット（`snapshots/correlation/`）に書き出す。

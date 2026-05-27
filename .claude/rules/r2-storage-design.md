@@ -103,6 +103,13 @@ async function loadAll() {
   return cached;
 }
 
+// ❌ Phase 6 以降は D1 stats_* SELECT 禁止 (テーブル DROP 済)
+const rows = await db.select().from(statsPrefecture).where(...);
+
+// ❌ stats 観測値を独自スキーマで R2 化 (app/stats namespace を使う)
+saveToR2("metrics/japanese-population/data.json", ...);
+saveToR2("observations/<metric>.json", ...);
+
 // ✅ app/ プレフィックス付き URL 対応パス
 saveToR2("app/category/medical/items.json", ...);
 saveToR2("app/survey/all.json", ...);
@@ -113,10 +120,17 @@ saveToR2("app/ranking/key/values.json", ...);
 async function readCategoryItemsFromR2(categoryKey: string) {
   return fetchFromR2AsJson(`app/category/${categoryKey}/items.json`);
 }
+
+// ✅ Phase 6 以降の stats 観測値: app/stats namespace + @stats47/stats-r2 reader 経由
+import { readStatsValues, readMigrationFlow } from "@stats47/stats-r2/readers";
+const payload = await readStatsValues("japanese-population", "prefecture");
+const flow    = await readMigrationFlow("population-migration-inter-prefecture", 2025);
 ```
 
 ## 関連ファイル
 
 - `packages/r2-storage/src/scripts/README.md` — R2 操作全般
 - `.claude/skills/db/sync-snapshots/SKILL.md` — スナップショット一括更新スキル
-- `.claude/agents/db-manager.md` — DB・R2 管理エージェント
+- `.claude/agents/data-ingester.md` — TS-config → R2 投入 / D1 metrics cache 管理
+- `.claude/agents/snapshot-exporter.md` — D1 → R2 snapshot 生成
+- `.claude/agents/r2-publisher.md` — R2 push / pull / du 専任

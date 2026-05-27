@@ -1520,6 +1520,7 @@ import { populationDensityPerKm2InhabitableArea } from "./metrics/population-den
 import { populationDensityPerKm2TotalArea } from "./metrics/population-density-per-km2-total-area";
 import { populationGrowthRate } from "./metrics/population-growth-rate";
 import { populationMigrationInterPrefecture } from "./metrics/population-migration-inter-prefecture";
+import { populationMigrationNetMunicipality } from "./metrics/population-migration-net-municipality";
 import { porkConsumptionExpenditure } from "./metrics/pork-consumption-expenditure";
 import { porkConsumptionQuantity } from "./metrics/pork-consumption-quantity";
 import { portCargoCoastalIn } from "./metrics/port-cargo-coastal-in";
@@ -1904,6 +1905,7 @@ import { standardizedMortalityJapanese } from "./metrics/standardized-mortality-
 import { standardizedMortalityRatePer1000 } from "./metrics/standardized-mortality-rate-per-1000";
 import { startingSalaryHighschool } from "./metrics/starting-salary-highschool";
 import { startingSalaryUniversity } from "./metrics/starting-salary-university";
+import { stationPassengersAnnualTotal } from "./metrics/station-passengers-annual-total";
 import { statisticalDiscrepancyNominalH27 } from "./metrics/statistical-discrepancy-nominal-h27";
 import { stereoCdMdRadioOwnershipMultiPersonHouseholdsPer1000 } from "./metrics/stereo-cd-md-radio-ownership-multi-person-households-per-1000";
 import { stillbirthRate } from "./metrics/stillbirth-rate";
@@ -3731,6 +3733,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "population-density-per-km2-total-area": populationDensityPerKm2TotalArea,
   "population-growth-rate": populationGrowthRate,
   "population-migration-inter-prefecture": populationMigrationInterPrefecture,
+  "population-migration-net-municipality": populationMigrationNetMunicipality,
   "pork-consumption-expenditure": porkConsumptionExpenditure,
   "pork-consumption-quantity": porkConsumptionQuantity,
   "port-cargo-coastal-in": portCargoCoastalIn,
@@ -4115,6 +4118,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "standardized-mortality-rate-per-1000": standardizedMortalityRatePer1000,
   "starting-salary-highschool": startingSalaryHighschool,
   "starting-salary-university": startingSalaryUniversity,
+  "station-passengers-annual-total": stationPassengersAnnualTotal,
   "statistical-discrepancy-nominal-h27": statisticalDiscrepancyNominalH27,
   "stereo-cd-md-radio-ownership-multi-person-households-per-1000": stereoCdMdRadioOwnershipMultiPersonHouseholdsPer1000,
   "stillbirth-rate": stillbirthRate,

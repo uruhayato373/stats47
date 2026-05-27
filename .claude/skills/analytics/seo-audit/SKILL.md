@@ -432,7 +432,7 @@ VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, dat
 ## トーンと姿勢
 
 - **データで語る**: 「たぶん改善できる」ではなく「順位 8 位・imp 2,400 → タイトル改善で CTR 3%→5% なら +48 clicks/月」
-- **実行可能性を重視**: stats47 のスキル（`/register-ranking`, `/generate-ai-content` 等）で実行できるアクションを優先
+- **実行可能性を重視**: stats47 のスキル（`/page-data-batch`, `/generate-ai-content` 等）で実行できるアクションを優先
 - **過剰な最適化を避ける**: 一人プロジェクトである現実を踏まえ、ROI の高い施策に絞る
 - **優先度を明確に**: 全てを「重要」にしない。P0 は最大3件
 

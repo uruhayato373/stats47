@@ -1,6 +1,6 @@
 ---
 name: generate-known-ranking-keys
-description: ローカル D1 の ranking_items から有効な rankingKey を抽出し、apps/web/src/config/known-ranking-keys.ts に書き出す。middleware.ts Fix 6 が参照。Use when user says "known-ranking-keys 更新", "ranking キーリスト再生成". /register-ranking 後に必ず実行する.
+description: ローカル D1 の metrics から有効な rankingKey を抽出し、apps/web/src/config/known-ranking-keys.ts に書き出す。middleware.ts Fix 6 が参照。Use when user says "known-ranking-keys 更新", "ranking キーリスト再生成". 新規 metric 追加後 (TS-config + /sync-metrics-cache 適用後) に必ず実行する.
 primary_agent: db-schema-manager
 ---
 
@@ -14,8 +14,8 @@ primary_agent: db-schema-manager
 
 ## いつ実行するか
 
-- **必須**: `/register-ranking` でランキングを追加・削除した直後
-- **必須**: `ranking_items.is_active` を変更した直後
+- **必須**: 新規 metric を追加 (TS-config + `/sync-metrics-cache --apply`) した直後
+- **必須**: `metrics.is_active` を変更した直後
 - 推奨: 週次レビュー時の差分確認（他 PC での更新をキャッチ）
 
 ## 手順
@@ -35,7 +35,7 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
    ```bash
    git diff apps/web/src/config/known-ranking-keys.ts | head -30
    ```
-2. 件数が想定通りか（`/register-ranking` で N 件追加したなら N 件増えるはず）
+2. 件数が想定通りか（新規 TS-config N 件追加なら N 件増えるはず）
 3. 問題なければ git add + commit:
    ```bash
    git add apps/web/src/config/known-ranking-keys.ts
@@ -58,5 +58,5 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
 - 生成スクリプト本体: `apps/web/scripts/generate-known-ranking-keys.ts`
 - 出力先: `apps/web/src/config/known-ranking-keys.ts`
 - middleware 参照箇所: `apps/web/src/middleware.ts` の Fix 6
-- 関連スキル: `/register-ranking`, `/deploy`
+- 関連スキル: `/sync-metrics-cache`, `/page-data-batch`, `/deploy`
 - 背景・v1/v2 失敗の教訓: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T0-RKG-200-01-v3

@@ -1,20 +1,16 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { REMOTION_PUBLIC, openD1, tableExists } from "./_shared/d1-client.js";
+import { REMOTION_PUBLIC, openD1 } from "./_shared/d1-client.js";
 import { loadPrefectures } from "./_shared/load-prefectures.js";
+import {
+  LOCAL_R2_ROOT,
+  readLocalMigrationFlow,
+  readLocalStatsValues,
+} from "./_shared/local-r2-reader.js";
 
 const METRIC_KEY = "population-migration-inter-prefecture";
 const MUNICIPALITY_METRIC = "population-migration-net-municipality";
 const FEATURE_DIR = resolve(REMOTION_PUBLIC, "migration-flow");
-
-interface FlowRow {
-  fromPrefCode: string;
-  toPrefCode: string;
-  yearCode: string;
-  inflow: number | null;
-  outflow: number | null;
-  net: number | null;
-}
 
 interface PartnerEntry {
   code: string;
@@ -39,57 +35,62 @@ interface PrefNetEntry {
   net: number;
 }
 
-export function exportMigrationFlow(year?: number): {
+/**
+ * 引数で year が指定されなければ、local R2 (`.local/r2/app/stats/<metric>/`)
+ * の `migration-flow-<year>.json` 群から最新を自動検出。production 環境では
+ * year を明示的に渡すこと。
+ */
+function detectLatestYearFromLocalR2(metricKey: string): number | null {
+  const dir = resolve(LOCAL_R2_ROOT, "app/stats", metricKey);
+  if (!existsSync(dir)) return null;
+  try {
+    const files = readdirSync(dir);
+    const years = files
+      .map((f) => f.match(/^migration-flow-(\d{4})\.json$/))
+      .filter((m): m is RegExpMatchArray => m !== null)
+      .map((m) => Number(m[1]));
+    if (years.length === 0) return null;
+    return Math.max(...years);
+  } catch {
+    return null;
+  }
+}
+
+export async function exportMigrationFlow(year?: number): Promise<{
   files: number;
   skipped: string[];
-} {
+}> {
   const skipped: string[] = [];
+
+  const targetYear = year ?? detectLatestYearFromLocalR2(METRIC_KEY);
+  if (!targetYear) {
+    skipped.push(
+      `migration-flow: no year specified and no local R2 snapshot found for ${METRIC_KEY}`,
+    );
+    return { files: 0, skipped };
+  }
+
+  const flowPayload = readLocalMigrationFlow(METRIC_KEY, targetYear);
+  if (!flowPayload || flowPayload.rows.length === 0) {
+    skipped.push(
+      `R2 has no migration-flow data for ${METRIC_KEY} year=${targetYear}`,
+    );
+    return { files: 0, skipped };
+  }
+
   const db = openD1();
   try {
-    if (!tableExists(db, "stats_migration_flow")) {
-      skipped.push(
-        "stats_migration_flow table not found (Phase 3 で migration を当ててから再実行)",
-      );
-      return { files: 0, skipped };
-    }
-
-    const targetYear =
-      year ??
-      Number(
-        (
-          db
-            .prepare(
-              `SELECT MAX(CAST(year_code AS INTEGER)) AS y FROM stats_migration_flow WHERE metric_key = ?`,
-            )
-            .get(METRIC_KEY) as { y: number | null } | undefined
-        )?.y ?? 0,
-      );
-
-    if (!targetYear) {
-      skipped.push("no rows in stats_migration_flow for metric");
-      return { files: 0, skipped };
-    }
-
     const prefs = loadPrefectures(db);
     const prefName = new Map(prefs.map((p) => [p.code, p.name]));
 
-    const flows = db
-      .prepare(
-        `SELECT from_pref_code AS fromPrefCode, to_pref_code AS toPrefCode,
-                year_code AS yearCode, inflow, outflow, net
-         FROM stats_migration_flow
-         WHERE metric_key = ? AND CAST(year_code AS INTEGER) = ?`,
-      )
-      .all(METRIC_KEY, targetYear) as FlowRow[];
-
     mkdirSync(FEATURE_DIR, { recursive: true });
 
-    // 既存規約: ファイル名 / focusCode フィールドは 2-digit ("01"〜"47")。D1 内部は 5-digit。
+    // 既存規約: ファイル名 / focusCode フィールドは 2-digit ("01"〜"47")。R2 内部は 5-digit。
     const to2 = (code5: string) => code5.slice(0, 2);
 
-    // per-focus files
-    const byFocus = new Map<string, FlowRow[]>();
-    for (const f of flows) {
+    // per-focus files (focus = toPrefCode)
+    const byFocus = new Map<string, typeof flowPayload.rows>();
+    for (const f of flowPayload.rows) {
       const arr = byFocus.get(f.toPrefCode) ?? [];
       arr.push(f);
       byFocus.set(f.toPrefCode, arr);
@@ -157,19 +158,15 @@ export function exportMigrationFlow(year?: number): {
     wrote++;
 
     // municipalities — 別 metric, 別フォルダ
-    if (tableExists(db, "stats_city")) {
-      const muniRows = db
-        .prepare(
-          `SELECT area_code AS areaCode, area_name AS areaName, value
-           FROM stats_city
-           WHERE metric_key = ? AND CAST(year_code AS INTEGER) = ?`,
-        )
-        .all(MUNICIPALITY_METRIC, targetYear) as Array<{
-        areaCode: string;
-        areaName: string;
-        value: number | null;
-      }>;
-
+    const muniPayload = readLocalStatsValues(MUNICIPALITY_METRIC, "city");
+    if (!muniPayload || muniPayload.rows.length === 0) {
+      skipped.push(
+        `R2 has no city stats for ${MUNICIPALITY_METRIC} — using existing apps/remotion/public/migration-flow/municipalities/ snapshot (see TS-config TODO)`,
+      );
+    } else {
+      const muniRows = muniPayload.rows.filter(
+        (r) => Number(r.yearCode) === targetYear,
+      );
       if (muniRows.length > 0) {
         const muniDir = resolve(FEATURE_DIR, "municipalities");
         mkdirSync(muniDir, { recursive: true });
@@ -196,7 +193,9 @@ export function exportMigrationFlow(year?: number): {
           wrote++;
         }
       } else {
-        skipped.push(`stats_city metric "${MUNICIPALITY_METRIC}" has no rows`);
+        skipped.push(
+          `R2 city stats for ${MUNICIPALITY_METRIC} has no rows for year=${targetYear}`,
+        );
       }
     }
 

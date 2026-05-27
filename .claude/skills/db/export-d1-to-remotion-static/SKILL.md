@@ -4,7 +4,7 @@ description: ローカル D1 → apps/remotion/public/<feature>/*.json を生成
 argument-hint: [--feature <name>|all] [--year YYYY] [--dry-run]
 disable-model-invocation: true
 primary_agent: snapshot-exporter
-co_agents: [data-pipeline, db-manager]
+co_agents: [data-ingester, snapshot-exporter]
 ---
 
 ローカル D1 から Remotion 動画用の `apps/remotion/public/<feature>/*.json` を生成する。
@@ -15,9 +15,10 @@ Remotion は Webpack bundle に組み込まれ、render 時に network / DB acce
 
 ## 前提
 
-- ローカル D1 にデータが揃っていること
-- 必要 metric が `metrics` テーブルに登録済 (`/register-ranking` で登録)
-- 必要 stats_* に観測値が投入済 (`/populate-all-rankings` 等)
+- 必要 metric が TS-config (`packages/data-configs/src/metrics/<key>.ts`) に定義済
+- 必要 metric が D1 `metrics` cache に同期済 (`/sync-metrics-cache --apply` で同期)
+- 必要 metric の観測値が R2 (`app/stats/<key>/*.json`) に投入済 (`/page-data-batch --metric <key>` 等)
+- ローカル D1 の prefectures master が揃っていること (`loadPrefectures()` で参照)
 
 未投入の feature を export しようとすると、空の JSON または不完全 JSON が出るので、まず `/verify-d1-integrity` で確認。
 
@@ -72,4 +73,4 @@ cd apps/remotion && pnpm prepare-data && pnpm render --composition=<name>
 - exporter 実装: `apps/remotion/scripts/exporters/`
 - 親方針: `.claude/rules/data-d1-ssot.md`
 - feature 別データ仕様: `docs/01_技術設計/13_動画データSSOT.md`
-- 関連: `/verify-d1-integrity`, `/sync-snapshots`, `/register-ranking`, `/populate-all-rankings`
+- 関連: `/verify-d1-integrity`, `/sync-snapshots`, `/sync-metrics-cache`, `/page-data-batch`

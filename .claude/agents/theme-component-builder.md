@@ -75,15 +75,15 @@ page_component_assignments.section が IndicatorSet.panelTabs[].label と1文字
 ### パターン C: 指標未登録の場合
 
 1. `/audit-theme-components` が未登録指標を検出
-2. data-pipeline に `/register-ranking` を委譲
+2. data-ingester に新 TS-config 作成 (`packages/data-configs/src/metrics/<key>.ts`) + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` を委譲
 3. 登録完了後にパターン B の Step 2 から再開
 
 ## 担当外
 
 - IndicatorSet の設計・指標選定（theme-designer）
-- e-Stat API からの指標登録（data-pipeline）
+- e-Stat API からの指標登録（data-ingester）
 - UI/UX レビュー（ui-reviewer）
-- R2 スナップショット更新（db-manager: `/sync-snapshots`）
+- R2 スナップショット更新（snapshot-exporter + r2-publisher: `/sync-snapshots`）
 - 新規 componentType の追加（コード変更 → code-reviewer と協議）
 
 ## Output Contract

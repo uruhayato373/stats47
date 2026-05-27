@@ -115,8 +115,8 @@ Phase 3 で旧 agent の役割縮退記述に Edit する。**Phase 3 完了ま�
 
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|
-| `data-pipeline` | 縮退予定 (Phase 3) | `estat-researcher` + `data-ingester` |
-| `db-manager` | 縮退予定 (Phase 3) | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
+| `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
+| `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
 | `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `blog-planner` + `chart-author` + `blog-critic` |
 | `seo-auditor` | 縮退予定 (Phase 3) | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` |
 | `sns-renderer` | 役割縮退 (render 専任) | `sns-metrics-sync`, `image-prompt-curator` に分離 |

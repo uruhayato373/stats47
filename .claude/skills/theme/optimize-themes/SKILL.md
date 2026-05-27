@@ -157,7 +157,7 @@ const existing = db.prepare(\`
 
 → `/design-theme-charts {theme-key}` で設計
 
-#### 3. 🟢 低優先: 未登録指標（要 data-pipeline）
+#### 3. 🟢 低優先: 未登録指標（要 data-ingester）
 | 指標 | 理由 |
 |------|------|
 | 開業率 | RESAS にあるが e-Stat 基本テーブルにない |

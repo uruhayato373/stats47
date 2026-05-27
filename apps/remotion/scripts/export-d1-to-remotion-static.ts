@@ -44,15 +44,15 @@ function parseArgs(): Args {
 
 const FEATURES: Record<
   Exclude<FeatureName, "all">,
-  (year?: number) => { files: number; skipped: string[] }
+  (year?: number) => Promise<{ files: number; skipped: string[] }>
 > = {
   "migration-flow": (year) => exportMigrationFlow(year),
   "population-yoy-47": () => exportPopulationYoy47(),
   "station-passengers": () => exportStationPassengers(),
-  master: () => exportMaster(),
+  master: () => Promise.resolve(exportMaster()),
 };
 
-function main(): void {
+async function main(): Promise<void> {
   const args = parseArgs();
   const targets: Array<Exclude<FeatureName, "all">> =
     args.feature === "all"
@@ -73,7 +73,7 @@ function main(): void {
       console.warn(`unknown feature: ${t}`);
       continue;
     }
-    const { files, skipped } = fn(args.year);
+    const { files, skipped } = await fn(args.year);
     totalFiles += files;
     console.log(`  ✓ wrote ${files} file(s)`);
     if (skipped.length > 0) {
@@ -85,4 +85,7 @@ function main(): void {
   console.log(`\ndone. total files: ${totalFiles}${hadSkip ? " (warnings)" : ""}`);
 }
 
-main();
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

@@ -2,7 +2,12 @@
 name: recompute-correlations
 description: R2 stats から temp D1 を構築して相関分析を再計算し、結果を R2 snapshot に書き出して temp を破棄する。Phase 6 で correlations テーブルを廃止した後の代替 skill。Use when user says "相関再計算", "recompute-correlations".
 disable-model-invocation: true
+primary_agent: snapshot-exporter
 ---
+
+> ⚠️ **NOT IMPLEMENTED (Phase 7)** — 2026-05-28 時点では SKILL.md と方針のみ確定。実装スクリプト `packages/correlation/src/scripts/recompute.ts` は未作成。
+> 既存の相関 snapshot (`app/correlation/top-pairs.json` 等) は Phase 6 移行前の D1 から派生したものをそのまま使用中。再計算が必要な時点で Phase 7 として着手する。
+> Issue: `docs/50_Issues/feature-backlog.md` の "Phase 7: recompute-correlations 実装" 項を参照。
 
 R2 の `app/stats/<metric>/values.json` を入力に、Pearson 相関を batch 計算 → R2 snapshot に書き出し → 一時テーブル破棄。
 

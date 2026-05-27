@@ -76,20 +76,20 @@ exit code: 0 (clean), 1 (warning only), 2 (error)。`--strict` では warning �
 
 | 症状 | 対応 |
 |---|---|
-| FK orphan rows | 欠損 metric を `/register-ranking` で追加、または orphan rows を DELETE |
-| エリア欠損 | `/populate-all-rankings --metric <key>` で補完 |
-| 年欠損 | `/populate-all-rankings --metric <key> --years <from>-<to>` で範囲指定再投入 |
+| FK orphan rows | 欠損 metric を `packages/data-configs/src/metrics/<key>.ts` 追加 → `/sync-metrics-cache --apply`、または orphan rows を DELETE |
+| エリア欠損 | `/page-data-batch --metric <key>` で補完 |
+| 年欠損 | `/page-data-batch --metric <key>` で全年再取得 (TS-config の years を更新後) |
 | `net != inflow - outflow` | ingest スクリプトのバグ → `/tmp/` でデバッグ |
 
 ## 使い時
 
 - `/sync-snapshots` 実行前 (R2 に壊れたデータを push しないため)
 - `/export-d1-to-remotion-static` 実行前 (動画用 JSON に欠損データを書かないため)
-- `/populate-all-rankings` などで大量投入後の確認
+- `/page-data-batch` などで大量投入後の確認
 - 週次レビュー時 (`docs/03_週次運用/週次レビュー/`)
 
 ## 参照
 
 - 実装: `.claude/scripts/db/verify-d1-integrity.mjs` (Phase 2 で新規)
 - 親方針: `.claude/rules/data-d1-ssot.md`
-- 関連: `/sync-snapshots`, `/export-d1-to-remotion-static`, `/populate-all-rankings`
+- 関連: `/sync-snapshots`, `/export-d1-to-remotion-static`, `/page-data-batch`

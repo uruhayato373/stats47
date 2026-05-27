@@ -3,11 +3,12 @@ name: page-data-batch
 description: TS-config (data-configs registry) を walk して e-Stat から data を fetch し R2 直行で書き込む。D1 を経由しない Phase 6 メインバッチ。Use when user says "page-data-batch", "metric データ更新", "R2 更新バッチ".
 argument-hint: [--metric <key>] [--kind <entity>] [--since YYYY-MM] [--dry-run] [--concurrency N]
 disable-model-invocation: true
+primary_agent: data-ingester
 ---
 
 `packages/data-configs/src/metrics/*.ts` registry を入力に、e-Stat から data を fetch して R2 (`.local/r2/app/stats/<metric>/values.json`) へ直接書き込む。
 
-Phase 6 で D1 → R2 移行が完了した後、本 skill が新規 metric / 年度更新の主たる手段となる (旧 `/populate-all-rankings` の置換)。
+Phase 6 で D1 → R2 移行が完了した後、本 skill が新規 metric / 年度更新の主たる手段となる (旧 `populate-all-rankings` skill を置換、2026-05-28 削除済み)。
 
 ## 背景
 

@@ -142,7 +142,7 @@ ORDER BY
 ```
 
 - `status = 'registered'` → 既に indicators に登録済み (`indicators.source_id` で参照される運用マスタ)
-- `status = 'candidate'` → e-Stat 統計表カタログとして 8,399 件保持。未登録だが ID + メタは既知。新規ランキング候補として `/fetch-estat-data <statsDataId>` で取得 → `/register-ranking` で indicators 登録できる
+- `status = 'candidate'` → e-Stat 統計表カタログとして 8,399 件保持。未登録だが ID + メタは既知。新規ランキング候補として `/fetch-estat-data <statsDataId>` で取得 → TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録
 
 5. マッチ結果をもとに、各トレンドのマッチ度を判定:
 

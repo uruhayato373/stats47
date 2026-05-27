@@ -3,6 +3,7 @@ name: sync-metrics-cache
 description: TS registry (data-configs) → D1 metrics テーブル (cache) に同期する。Phase 6 後は metrics への書込みは本 skill のみ。Use when user says "metric cache 同期", "sync-metrics-cache", "registry → D1".
 argument-hint: [--apply]
 disable-model-invocation: true
+primary_agent: data-ingester
 ---
 
 `packages/data-configs/src/registry.ts` から MetricConfig を読み、`metrics` D1 テーブルに UPSERT する。Phase 6 以降は `metrics` テーブルへの書込権限を本 skill に集約する。

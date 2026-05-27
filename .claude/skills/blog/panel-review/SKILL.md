@@ -1,6 +1,8 @@
 ---
 name: panel-review
 description: ブログ記事の企画・原稿を 11 人の多様なパネリストとして評価する。Use when user says "パネルレビュー", "記事評価", "パネリストに聞いて". 批判的・辛辣な意見も含め本音で評価.
+primary_agent: blog-critic
+co_agents: [blog-editor]
 ---
 
 ブログ記事の企画・原稿を、11人の多様なパネリストとして評価・意見する。

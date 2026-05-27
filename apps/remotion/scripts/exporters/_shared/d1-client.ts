@@ -23,15 +23,3 @@ export function openD1(): Database.Database {
   db.pragma("foreign_keys = ON");
   return db;
 }
-
-export function tableExists(db: Database.Database, name: string): boolean {
-  const row = db
-    .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?`)
-    .get(name);
-  return Boolean(row);
-}
-
-export function metricExists(db: Database.Database, key: string): boolean {
-  const row = db.prepare(`SELECT 1 FROM metrics WHERE key = ?`).get(key);
-  return Boolean(row);
-}

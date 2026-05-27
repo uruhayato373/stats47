@@ -29,7 +29,7 @@
 ## 担当外
 
 - ブログ記事の編集・作成（blog-editor に委譲）
-- ランキングデータの登録（data-pipeline）
+- ランキングデータの登録（data-ingester）
 - コンテンツ制作（content-orchestrator 配下）
 - デプロイ（devops-runner）
 - コードレビュー（code-reviewer）

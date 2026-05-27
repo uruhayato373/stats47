@@ -87,8 +87,9 @@ correlations は計算時に stats_* JOIN が必要だが、結果は R2 snapsho
 
 ## 関連
 
-- 親 plan: `~/.claude/plans/synthetic-zooming-yeti.md`
+- 親 plan: `~/.claude/plans/synthetic-zooming-yeti.md` (Phase 1-6 設計)
+- Phase 6.7 整理 plan: `~/.claude/plans/drifting-cuddling-blossom.md`
+- **Phase 6 deprecation log**: `docs/01_技術設計/14_Phase6_deprecation_log.md` (2026-05-28 削除した skill / agent 一覧 + Phase 7 残課題)
 - TS-config 詳細: `packages/data-configs/src/types.ts`
 - R2 stats 型: `packages/stats-r2/src/types.ts`
-- Phase 6 移行ログ: 上記 plan の Phase 6.0-6.7 セクション
-- 関連 skill: `/page-data-batch`, `/sync-metrics-cache`, `/recompute-correlations`
+- 関連 skill: `/page-data-batch`, `/sync-metrics-cache`, `/recompute-correlations` (stub, Phase 7 実装)

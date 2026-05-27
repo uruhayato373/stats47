@@ -114,7 +114,7 @@ ORDER BY ranking_name;
 e-Stat API 未登録指標の探索:
 - `/search-estat` でテーマ関連の統計表を検索
 - `/inspect-estat-meta` で有望な指標のメタデータを調査
-- **新規発見した指標は `/register-ranking` で登録を提案**
+- **新規発見した指標は TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録を提案**
 - **リファレンス索引を先に確認**: `.claude/skills/estat/references/README.md`
   - 特に `wage-structure-survey-occupations.md` — 145職種の都道府県別年収データ（39職種登録済み）
   - laborwage / socialsecurity / educationsports / construction テーマで活用可能
@@ -175,7 +175,13 @@ charts: [
 
 ### Step 8: 未登録指標の登録
 
-Step 2 で発見した未登録指標を `/register-ranking` で登録する。
+Step 2 で発見した未登録指標を以下のフローで登録する (Phase 6 後):
+
+1. `packages/data-configs/src/metrics/<new-key>.ts` を新規作成 (既存 `japanese-population.ts` をテンプレに)
+2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
+3. `/sync-metrics-cache --apply` で D1 `metrics` テーブルに反映
+4. `/page-data-batch --metric <new-key>` で e-Stat → R2 直行投入
+5. `/sync-snapshots` で派生 snapshot を更新
 
 ## 担当スキル
 
@@ -184,7 +190,7 @@ Step 2 で発見した未登録指標を `/register-ranking` で登録する。
 | `/search-estat` | e-Stat API 統計表検索（未登録指標の発見） |
 | `/inspect-estat-meta` | メタデータ調査（cdCat01 等の特定） |
 | `/fetch-estat-data` | データ取得（指標の品質確認） |
-| `/register-ranking` | 未登録指標の DB 登録 |
+| `/page-data-batch` + `/sync-metrics-cache` | 未登録指標の TS-config → R2 投入 + D1 cache 同期 |
 | `/fetch-gsc-data` | 検索需要の分析 |
 | `/discover-trends` | トレンドキーワードの確認 |
 
@@ -219,7 +225,7 @@ export const <THEME>_SET: IndicatorSet = {
 
 | シナリオ | フロー |
 |---|---|
-| 新規テーマ作成 | theme-designer → data-pipeline（未登録指標登録）→ code-reviewer（IndicatorSet レビュー） |
+| 新規テーマ作成 | theme-designer → data-ingester（TS-config + page-data-batch）→ code-reviewer（IndicatorSet レビュー） |
 | 既存テーマ改善 | seo-auditor（GSC 分析）→ theme-designer（指標追加・チャート変更）→ ui-reviewer |
 | トレンド起点 | blog-editor（トレンド検出）→ theme-designer（関連テーマの強化） |
 
