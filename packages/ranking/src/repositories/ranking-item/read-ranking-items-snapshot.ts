@@ -15,8 +15,17 @@ import {
   type RankingItemsSnapshot,
 } from "../../types/snapshot";
 import type { CategoryRankingItem } from "./find-ranking-items-by-category";
-import type { GroupRankingItem } from "./find-ranking-items-by-group-key";
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
+
+// Phase 7 (2026-05-28): find-ranking-items-by-group-key.ts 削除に伴い、
+// GroupRankingItem 型を本ファイルに inline 移動 (snapshot reader だけで使用)。
+export interface GroupRankingItem {
+  rankingKey: string;
+  title: string;
+  subtitle: string | null;
+  unit: string;
+  normalizationBasis: string | null;
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // Phase 1 — URL 単位の小さい JSON を使う関数

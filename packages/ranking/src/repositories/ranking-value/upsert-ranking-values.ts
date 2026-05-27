@@ -1,58 +1,33 @@
 import "server-only";
 
-import { getDrizzle, statsPrefecture } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
-import { err, ok, type Result } from "@stats47/types";
-import { sql } from "drizzle-orm";
+import { ok, type Result } from "@stats47/types";
 import type { RankingValue } from "../../types";
 
+/**
+ * Phase 7 (2026-05-28): D1 stats_prefecture テーブル DROP に伴い no-op 化。
+ *
+ * 旧実装は on-demand キャッシュ書き込み (e-Stat API → stats_prefecture INSERT) を行っていたが、
+ * Phase 6 以降は R2 (`app/stats/<metric>/values.json`) が値の SSOT であり、
+ * 観測値の populate は `/page-data-batch` skill による build-time バッチに集約。
+ *
+ * 本関数は呼び出し interface 互換性のため残置 (fetchRankingValuesOnDemand の cacheRankingValues
+ * から呼ばれる)。常に ok(0) を返し、warning log で「on-demand cache 無効」を通知する。
+ */
 export async function upsertRankingValues(
   rankingKey: string,
   areaType: string,
   yearCode: string,
   values: RankingValue[],
-  db?: ReturnType<typeof getDrizzle>
+  _db?: unknown,
 ): Promise<Result<number, Error>> {
   if (values.length === 0) return ok(0);
-  try {
-    const drizzleDb = db ?? getDrizzle();
 
-    const rows = values.map((v) => ({
-      metricKey: rankingKey,
-      areaCode: v.areaCode,
-      areaName: v.areaName,
-      yearCode: v.yearCode ?? yearCode,
-      yearName: v.yearName,
-      value: v.value,
-      unit: v.unit,
-      rank: typeof v.rank === "number" ? v.rank : null,
-    }));
+  logger.warn(
+    { rankingKey, areaType, yearCode, valueCount: values.length },
+    "upsertRankingValues: no-op (Phase 7: D1 stats_* dropped). " +
+      "観測値の populate は /page-data-batch を使うこと。on-demand キャッシュは廃止。",
+  );
 
-    await drizzleDb
-      .insert(statsPrefecture)
-      .values(rows)
-      .onConflictDoUpdate({
-        target: [
-          statsPrefecture.metricKey,
-          statsPrefecture.areaCode,
-          statsPrefecture.yearCode,
-        ],
-        set: {
-          areaName: sql.raw("excluded.area_name"),
-          yearName: sql.raw("excluded.year_name"),
-          value: sql.raw("excluded.value"),
-          unit: sql.raw("excluded.unit"),
-          rank: sql.raw("excluded.rank"),
-        },
-      });
-
-    logger.debug(
-      { rankingKey, areaType, yearCode, count: values.length },
-      "upsertRankingValues: 完了"
-    );
-    return ok(values.length);
-  } catch (error) {
-    logger.error({ error, rankingKey, areaType, yearCode }, "upsertRankingValues: failed");
-    return err(error instanceof Error ? error : new Error(String(error)));
-  }
+  return ok(0);
 }

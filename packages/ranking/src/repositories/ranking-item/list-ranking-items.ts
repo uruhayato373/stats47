@@ -1,15 +1,14 @@
 import "server-only";
 
-import { getDrizzle, metrics, statsPrefecture } from "@stats47/database/server";
+import { listMetricKeysByEntity } from "@stats47/data-configs";
+import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, asc, eq, exists } from "drizzle-orm";
+import { and, asc, eq, inArray } from "drizzle-orm";
 import type { RankingItem } from "../../types";
 import { metricAsRankingItemSelection } from "../shared/metric-as-ranking-item-selection";
 import { parseMetricAsRankingItem } from "../shared/parse-metric-as-ranking-item";
-
-type ValidAreaType = "prefecture" | "city" | "port";
 
 export async function listRankingItems(
   options?: {
@@ -23,16 +22,14 @@ export async function listRankingItems(
   try {
     const drizzleDb = db ?? getDrizzle();
     const conditions = [];
-    if (options?.areaType) {
-      conditions.push(
-        exists(
-          drizzleDb.select({ metricKey: statsPrefecture.metricKey })
-            .from(statsPrefecture)
-            .where(and(
-              eq(statsPrefecture.metricKey, metrics.key),
-            ))
-        )
-      );
+
+    if (options?.areaType && options.areaType !== "national") {
+      // Phase 7: D1 stats_prefecture EXISTS フィルタを TS-config (`entities`) 由来に置換。
+      const allowedKeys = listMetricKeysByEntity(options.areaType);
+      if (allowedKeys.length === 0) {
+        return ok([]);
+      }
+      conditions.push(inArray(metrics.key, allowedKeys));
     }
     if (options?.isActive !== undefined) conditions.push(eq(metrics.isActive, options.isActive));
 

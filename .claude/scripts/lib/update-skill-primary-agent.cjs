@@ -34,7 +34,7 @@ const DEPRECATED_AGENTS = new Set([
 // fallback として script 側で補完する (Phase 3.5 相当)。
 const FALLBACK_MAPPING = {
   "archive-remotion-output": "sns-renderer",
-  "auto-brushup-batch": "blog-editor",
+  "auto-brushup-batch": "article-writer",
   "blog-review": "blog-critic",
   "brushup-blog": "article-writer",
   "brushup-blog-article": "blog-editor",
@@ -43,8 +43,9 @@ const FALLBACK_MAPPING = {
   "draft-from-trend": "article-writer",
   "enhance-ranking-ai-content": "data-ingester",
   "expand-indicators": "strategy-advisor",
-  "fetch-note-metrics": "note-manager",
+  "fetch-note-metrics": "sns-metrics-sync",
   "generate-compare": "sns-renderer",
+  "generate-csv": "snapshot-exporter",
   "generate-instagram-schedule": "instagram-strategist",
   "goal": "strategy-advisor",
   "investigate-note-data": "note-manager",

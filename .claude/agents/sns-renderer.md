@@ -9,7 +9,6 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 - Remotion Studio でのプレビューデータ設定
 - SNS 用静止画・動画のレンダリング（Chrome 必須）
 - Bar Chart Race 動画の一括レンダリング
-- SNS 週次パフォーマンスレポートの生成
 
 ## 担当スキル
 
@@ -18,7 +17,6 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成 |
 | `/render-bar-chart-race` | BCR 動画を一括レンダリング（YouTube/Instagram/TikTok） |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog） |
-| `/sns-weekly-report` | DB から週次パフォーマンスレポート生成 |
 
 ## 前提条件
 

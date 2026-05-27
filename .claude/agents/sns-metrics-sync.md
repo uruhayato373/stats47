@@ -13,6 +13,8 @@ X / Instagram / YouTube / TikTok / note 等の SNS プラットフォーム横�
 - 投稿後の posted 印付け (`/mark-sns-posted`)
 - 各種 caption 投稿 (`/post-sns-captions`, `/post-bar-chart-race-captions`, `/post-compare-captions`)
 - UTM URL 生成 (`/generate-utm-url`)
+- SNS 横断週次レポート (`/sns-weekly-report`、sns-renderer から移管)
+- note.com 個別記事メトリクス取得 (`/fetch-note-metrics`、note-manager から移管)
 - SNS metrics improvement 詳細記録
 
 ## 担当スキル
@@ -25,6 +27,8 @@ X / Instagram / YouTube / TikTok / note 等の SNS プラットフォーム横�
 | `/post-bar-chart-race-captions` | BCR 動画のキャプション投稿 |
 | `/post-compare-captions` | 比較投稿のキャプション投稿 |
 | `/generate-utm-url` | UTM パラメータ付き URL 生成 |
+| `/sns-weekly-report` | SNS 横断の週次パフォーマンスレポート生成 |
+| `/fetch-note-metrics` | note.com sitesettings/stats から記事別 metrics 取得 |
 
 ## 担当外
 

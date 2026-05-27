@@ -159,7 +159,7 @@ GSC インデックス問題の継続改善は本エージェントが主担当�
 ### 週次オペレーション（月曜）
 
 1. ユーザー作業: GSC → `sc-domain:stats47.jp` → インデックス作成 → ページ → エクスポート → zip を `~/Downloads/` で解凍（`stats47.jp-Coverage-YYYY-MM-DD/` が生成される）
-2. `/weekly-review` 実行（Phase 1 Agent C から自動チェーン）:
+2. weekly-review 実行（strategy-advisor 主管、Phase 1 Agent C から自動チェーン）:
    - `/fetch-gsc-data last28d query snapshot <YYYY-Www>` が Downloads 取り込み → API 全件取得 → snapshots 保存を一気に実行
    - `/gsc-improvement observe` が Observation Log に新行追記 + アラート判定
 

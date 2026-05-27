@@ -5,10 +5,10 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
 
 import {
+  type CorrelatedItem,
   type CorrelationByKeySnapshot,
   correlationByKeyPath,
 } from "../types/snapshot";
-import type { CorrelatedItem } from "./find-highly-correlated";
 
 const STALE_AFTER_DAYS = 30;
 
