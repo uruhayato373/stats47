@@ -4,6 +4,7 @@ description: TS-config (data-configs registry) を walk して e-Stat から dat
 argument-hint: [--metric <key>] [--kind <entity>] [--since YYYY-MM] [--dry-run] [--concurrency N]
 disable-model-invocation: true
 primary_agent: data-ingester
+co_agents: [theme-designer]
 ---
 
 `packages/data-configs/src/metrics/*.ts` registry を入力に、e-Stat から data を fetch して R2 (`.local/r2/app/stats/<metric>/values.json`) へ直接書き込む。

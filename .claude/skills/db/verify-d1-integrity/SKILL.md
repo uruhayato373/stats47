@@ -4,7 +4,6 @@ description: ローカル D1 の整合性 (metric ↔ stats_* / 47 県カバレ�
 argument-hint: [--metric <key>] [--strict]
 disable-model-invocation: true
 primary_agent: data-ingester
-co_agents: [data-pipeline, db-manager]
 ---
 
 ローカル D1 (`metrics`, `stats_*`, `prefectures`, `cities`, `estat_metainfo`) の整合性を検証する。

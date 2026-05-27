@@ -3,7 +3,7 @@ name: auto-brushup-batch
 description: GSC で改善余地の大きい blog 記事を自律的に rewrite + R2 push + PR auto-merge する。/schedule で 1 日 1 回 cron 実行することを想定。Pro plan compute 利用、API 不使用。
 argument-hint: [--count 5] [--dry-run]
 disable-model-invocation: false
-primary_agent: blog-editor
+primary_agent: article-writer
 ---
 
 GSC で改善余地の大きい blog 記事を自律的に rewrite し、R2 push + PR auto-merge までを完結させる **schedule-friendly 自動化スキル**。

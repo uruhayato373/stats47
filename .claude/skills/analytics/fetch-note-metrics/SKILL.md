@@ -2,7 +2,7 @@
 name: fetch-note-metrics
 description: note.com sitesettings/stats から記事別メトリクス (view / comment / like) を取得する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". browser-use CLI で Chrome Profile 1 (note ログイン済) 経由で取得、.claude/state/metrics/note/ に JSON snapshot 保存。
 disable-model-invocation: true
-primary_agent: note-manager
+primary_agent: sns-metrics-sync
 ---
 
 note.com の著者ダッシュボード `sitesettings/stats` から、全記事のメトリクスを取得するスキル。

@@ -3,7 +3,6 @@ name: reset-migrations
 description: Drizzle マイグレーションファイルを1本にリセットする。Use when user says "マイグレーションリセット", "reset-migrations", "マイグレーション整理". 10本超 or 不整合時に実行.
 disable-model-invocation: true
 primary_agent: db-schema-manager
-co_agents: [db-manager]
 ---
 
 Drizzle マイグレーションが蓄積した際に、現在の Drizzle スキーマから1本のマイグレーションで再構築する。

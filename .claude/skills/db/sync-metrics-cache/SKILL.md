@@ -4,6 +4,7 @@ description: TS registry (data-configs) → D1 metrics テーブル (cache) に�
 argument-hint: [--apply]
 disable-model-invocation: true
 primary_agent: data-ingester
+co_agents: [theme-designer]
 ---
 
 `packages/data-configs/src/registry.ts` から MetricConfig を読み、`metrics` D1 テーブルに UPSERT する。Phase 6 以降は `metrics` テーブルへの書込権限を本 skill に集約する。

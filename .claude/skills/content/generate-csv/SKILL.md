@@ -2,7 +2,7 @@
 name: generate-csv
 description: ランキングデータの CSV を生成しローカル R2 に保存する。Use when user says "CSV生成", "ランキングCSV", "データダウンロード用CSV". UTF-8 BOM + downloadable_assets 登録.
 disable-model-invocation: true
-primary_agent: data-pipeline
+primary_agent: snapshot-exporter
 ---
 
 ランキングデータの CSV を生成し、ローカル R2 に保存する。

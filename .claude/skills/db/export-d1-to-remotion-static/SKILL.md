@@ -4,7 +4,6 @@ description: ローカル D1 → apps/remotion/public/<feature>/*.json を生成
 argument-hint: [--feature <name>|all] [--year YYYY] [--dry-run]
 disable-model-invocation: true
 primary_agent: snapshot-exporter
-co_agents: [data-ingester, snapshot-exporter]
 ---
 
 ローカル D1 から Remotion 動画用の `apps/remotion/public/<feature>/*.json` を生成する。

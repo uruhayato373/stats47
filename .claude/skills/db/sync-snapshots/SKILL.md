@@ -4,7 +4,7 @@ description: ローカル D1 から全 R2 snapshot を一括 export する。R2 
 argument-hint: [--only <category>] [--dry-run]
 disable-model-invocation: true
 primary_agent: snapshot-exporter
-co_agents: [article-writer, data-ingester, snapshot-exporter, r2-publisher, note-manager]
+co_agents: [article-writer, theme-designer, note-manager]
 ---
 
 ローカル D1 SQLite から R2 上の全 snapshot を一括 export するオーケストレーションスキル。
