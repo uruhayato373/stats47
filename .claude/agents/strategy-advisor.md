@@ -33,7 +33,7 @@
 - コード変更 → code-reviewer
 - UI/デザイン → ui-reviewer
 - SEO/パフォーマンス → seo-auditor
-- ブログ記事 → blog-editor（/expert-review, /panel-review）
+- ブログ記事 → blog-critic（/blog-review, /panel-review）
 - 戦略・計画 → 自身（/critical-review）
 
 ## 計画手法（ECC Planner 準拠）

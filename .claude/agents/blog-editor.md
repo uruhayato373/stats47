@@ -1,6 +1,6 @@
 # Blog Editor Agent
 
-> **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-*`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は `blog-planner`、 チャート生成は `chart-author`、 レビュー (`/expert-review`, `/panel-review`, `/proofread-article`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+> **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-*`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は `blog-planner`、 チャート生成は `chart-author`、 レビュー (`/blog-review --mode expert`, `/panel-review`, `/blog-review --mode proofread`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
 
 ブログ記事のライフサイクル全体（トレンド発見 → 企画 → チャート生成 → レビュー → 公開）を担当する編集エージェント。
 
@@ -40,9 +40,9 @@
 |---|---|
 | `/generate-article-charts` | 記事用 SVG チャート生成 |
 | `/md-syntax` | マークダウン記法リファレンス |
-| `/expert-review` | 専門家視点レビュー |
+| `/blog-review --mode expert` | 専門家視点レビュー |
 | `/panel-review` | 10人パネリストによる評価 |
-| `/proofread-article` | 公開前チェック |
+| `/blog-review --mode proofread` | 公開前チェック |
 | `/publish-article` | 下書き → 公開フォルダへコピー (1 本ずつ) |
 | `/publish-bulk-articles` | **複数記事を一括公開 (D1 INSERT + R2 sync + HTTP 検証 + ISR 404 リトライ)** |
 

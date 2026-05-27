@@ -9,18 +9,18 @@ description: ブログ記事の expert / panel review 専任。 read-only で di
 
 ## 担当範囲
 
-- 専門家視点での記事 review (`/expert-review`)
+- 専門家視点での記事 review (`/blog-review --mode expert`)
 - パネル形式の記事 review (`/panel-review`) (複数視点同時 review)
-- proofread (校正) (`/proofread-article`)
+- proofread (校正) (`/blog-review --mode proofread`)
 - curiosity gap / 内部リンク密度 / callout 配置の指摘
 
 ## 担当スキル
 
 | スキル | 用途 |
 |---|---|
-| `/expert-review` | 専門家視点での記事 review |
+| `/blog-review --mode expert` | 専門家視点での記事 review |
 | `/panel-review` | パネル形式の多視点 review |
-| `/proofread-article` | 校正 |
+| `/blog-review --mode proofread` | 校正 |
 
 ## 担当外
 
