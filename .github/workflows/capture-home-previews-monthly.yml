@@ -1,0 +1,93 @@
+name: 📸 Capture Home Previews (Monthly)
+
+# homepage 末尾「このサイトの主要ページ」セクション用のプレビュー画像/動画を
+# 月次で再撮影し、R2 (app/home/previews/) に push する。
+#
+# 仕様: docs/01_技術設計/12_homepage-previews.md
+
+on:
+  schedule:
+    # 毎月 1日 03:00 UTC = 12:00 JST
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "撮影対象 URL"
+        required: false
+        default: "https://stats47.jp"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: capture-home-previews
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: apps/web
+        run: npx playwright install --with-deps chromium
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Capture previews
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://stats47.jp' }}
+        run: |
+          mkdir -p /tmp/home-previews
+          npx tsx apps/web/scripts/capture-home-previews.ts \
+            --base-url "$BASE_URL" \
+            --output /tmp/home-previews
+          ls -lh /tmp/home-previews
+
+      - name: Push to R2
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET_NAME }}
+        run: |
+          # R2 bucket は apps/web/wrangler.toml で "stats47" として定義済み
+          # secrets.CLOUDFLARE_R2_BUCKET_NAME を優先、無ければ "stats47" にフォールバック
+          BUCKET="${R2_BUCKET:-stats47}"
+          for f in /tmp/home-previews/*; do
+            name=$(basename "$f")
+            key="app/home/previews/$name"
+            case "$name" in
+              *.avif) ct="image/avif" ;;
+              *.webm) ct="video/webm" ;;
+              *) ct="application/octet-stream" ;;
+            esac
+            echo "→ $key ($ct)"
+            npx wrangler r2 object put "$BUCKET/$key" \
+              --file "$f" \
+              --content-type "$ct" \
+              --remote
+          done
+
+      - name: Upload artifacts (debug)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-previews-${{ github.run_id }}
+          path: /tmp/home-previews/
+          retention-days: 7

@@ -15,6 +15,10 @@ interface NextUpItem {
   badge?: string;
   /** カード上部のアクセントカラー (Tailwind gradient class、省略時はデフォルト) */
   accent?: string;
+  /** プレビュー画像 URL (AVIF 推奨)。指定時はグラデの代わりに 16:9 で表示 */
+  previewImageUrl?: string;
+  /** プレビュー動画 URL (WebM 推奨)。指定時は video 要素で autoplay loop muted */
+  previewVideoUrl?: string;
 }
 
 interface NextUpGridProps {
@@ -44,11 +48,13 @@ const DEFAULT_ACCENTS = [
 ];
 
 /**
- * D-System「次に読む」回遊リンク 3 列 grid (Phase 1)
+ * D-System「次に読む」回遊リンク 3 列 grid
  *
  * ページ末尾に配置し、関連コンテンツへの遷移を促す。
- * 各カードはアクセントカラーのグラデーション + タイトル + 説明 + メタ。
- * 画像は使わない (LCP 影響を避ける) が、上部 80px のグラデーションで視覚的フックを作る。
+ * previewImageUrl / previewVideoUrl 未指定なら 80px グラデアクセント (LCP 影響なし)、
+ * 指定時は 16:9 のプレビュー画像/動画を表示 (lazy load + motion-reduce 対応)。
+ *
+ * 画像/動画の生成: docs/01_技術設計/12_homepage-previews.md
  */
 export function NextUpGrid({
   title = "次に読む",
@@ -76,13 +82,46 @@ export function NextUpGrid({
         <div className={`grid gap-3 ${COLUMN_CLASS[columns]}`}>
           {items.map((item, i) => {
             const accent = item.accent ?? DEFAULT_ACCENTS[i % DEFAULT_ACCENTS.length];
+            const hasMedia = Boolean(item.previewVideoUrl ?? item.previewImageUrl);
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className="group flex flex-col gap-2 rounded-md border border-border bg-card overflow-hidden transition-colors hover:border-primary"
               >
-                <div className={`h-16 bg-gradient-to-br ${accent}`} aria-hidden />
+                {hasMedia ? (
+                  <div
+                    className={`relative w-full overflow-hidden bg-gradient-to-br ${accent}`}
+                    style={{ aspectRatio: "16 / 9" }}
+                    aria-hidden
+                  >
+                    {item.previewVideoUrl ? (
+                      <video
+                        src={item.previewVideoUrl}
+                        poster={item.previewImageUrl}
+                        muted
+                        autoPlay
+                        loop
+                        playsInline
+                        preload="metadata"
+                        className="h-full w-full object-cover motion-reduce:hidden"
+                      />
+                    ) : null}
+                    {item.previewImageUrl ? (
+                      // motion-reduce 時 + 動画ロード失敗時のフォールバック静止画
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={item.previewImageUrl}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className={`h-full w-full object-cover ${item.previewVideoUrl ? "motion-reduce:block hidden" : ""}`}
+                      />
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className={`h-16 bg-gradient-to-br ${accent}`} aria-hidden />
+                )}
                 <div className="px-3 pb-3 flex flex-col gap-1.5">
                   {item.badge && (
                     <span className="inline-block self-start rounded bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">

@@ -4,10 +4,10 @@ date: 2026-05-27
 status: in-progress
 branch: claude/gallant-albattani-wxxhJ
 commit: 86dcd47
-tags: [handoff, area-theme-separation, page-components, migration-flow]
+tags: [handoff, area-theme-separation, page-components, migration-flow, homepage-previews]
 ---
 
-# Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤)
+# Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤 + homepage previews)
 
 ## 発端
 
@@ -134,5 +134,92 @@ STEP 5 (コード側マイグレーション) のうち、どちらを先にや�
 ## commit / push 状況
 
 - Branch: `claude/gallant-albattani-wxxhJ`
-- Commit: `86dcd47` (origin に push 済み)
+- Commit: `86dcd47` (area/theme 責務分離 doc + 棚卸し script) + `d0705a5` (このハンドオフ doc) + (homepage previews 関連は次 commit)
 - PR: 未作成 (棚卸し + コード側マイグレーション完了後に develop → main で起票予定)
+
+---
+
+## 追加タスク: ホームページ末尾「このサイトの主要ページ」プレビュー画像/動画
+
+ユーザー要望: `https://stats47.jp/` 下部の `NextUpGrid` セクション (6 リンク) にスクリーンショット/動画を入れて訴求力を上げる。
+
+### 決定事項
+
+- 方式: **A+B ハイブリッド** (`/ranking` `/themes` のみ動画 WebM、他 4 ページは静的 AVIF)
+- 撮影タイミング: **CI 月次自動再撮影** (GitHub Actions cron, 毎月 1日)
+- 保存先: **R2 `app/home/previews/{key}.{avif,webm}`** (公開 URL: `https://storage.stats47.jp/app/home/previews/`)
+
+### このセッションで実装したもの
+
+| ファイル | 種別 | 役割 |
+|---|---|---|
+| `docs/01_技術設計/12_homepage-previews.md` | 新規 | 設計仕様 (ファイル形式・LCP/CLS 対策・配信・CI) |
+| `apps/web/src/features/redesign/components/NextUpGrid.tsx` | 修正 | `previewImageUrl` / `previewVideoUrl` props 追加、16:9 aspect-ratio 固定、`motion-reduce` 対応、媒体未指定時は既存グラデへ自動フォールバック |
+| `apps/web/src/app/page.tsx` | 修正 | 6 item に preview URL を設定。`HOME_PREVIEWS_BASE` 定数で R2 公開 URL を組み立て |
+| `apps/web/scripts/capture-home-previews.ts` | 新規 | Playwright で 6 ページ撮影 → Sharp で AVIF 化 + ffmpeg で WebM エンコード |
+| `.github/workflows/capture-home-previews-monthly.yml` | 新規 | 月次 cron + 手動 dispatch。撮影 → R2 push (wrangler) |
+| `apps/web/package.json` | 修正 | `sharp` を devDependencies に追加 |
+
+### 残タスク (ローカル/CI で実行)
+
+#### A. ローカルで動作確認 (推奨先行ステップ)
+
+```bash
+# apps/web に sharp を install
+npm install --workspace=apps/web
+
+# 撮影 (本番 stats47.jp ターゲット)
+npx tsx apps/web/scripts/capture-home-previews.ts \
+  --base-url https://stats47.jp \
+  --output /tmp/home-previews
+
+# 結果確認
+ls -lh /tmp/home-previews/
+# ranking.avif, ranking.webm, themes.avif, themes.webm,
+# areas.avif, blog.avif, survey.avif, search.avif の 8 ファイルが出るはず
+```
+
+ffmpeg が無い場合は `brew install ffmpeg` (mac) / `apt-get install ffmpeg` (linux)。
+
+#### B. ローカル D1/R2 への手動 push (動作確認用)
+
+```bash
+# .local/r2/app/home/previews/ にコピー
+mkdir -p .local/r2/app/home/previews
+cp /tmp/home-previews/* .local/r2/app/home/previews/
+
+# Web 起動して確認
+npm run dev --workspace=apps/web
+# http://localhost:3000 で末尾セクションをチェック
+```
+
+#### C. 本番 R2 への push (workflow 経由 or 手動)
+
+```bash
+# 手動の場合
+wrangler r2 object put stats47/app/home/previews/ranking.avif \
+  --file /tmp/home-previews/ranking.avif \
+  --content-type image/avif \
+  --remote
+# (全 8 ファイル同様に)
+```
+
+または `.github/workflows/capture-home-previews-monthly.yml` を一度 `workflow_dispatch` で手動起動。
+
+#### D. CI 統合の確認
+
+- 月次 cron は `0 3 1 * *` (毎月 1日 03:00 UTC = 12:00 JST)
+- 必要 secrets: `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_R2_BUCKET_NAME` (既存 deploy workflow と同じ)
+
+#### E. ロールアウト判断
+
+- NextUpGrid 拡張は **R2 ファイルが無くてもクラッシュしない** (img の src 404 時はグラデが透過して見える)
+- main deploy → R2 push → CDN 浸透 で順次見え始める
+- LCP 影響を PSI で確認 (homepage の LCP が +0ms のはず)
+
+### 既知の懸念
+
+1. **`<img>` 404 時のアイコン表示**: ブラウザによっては broken-image アイコンが出る可能性 (Chromium は通常 alt のみ)。気になる場合は client component 化して `onError` でフォールバック
+2. **video autoplay**: モバイル Safari は `muted playsinline` 必須 → 既に対応済み
+3. **sharp install 失敗**: Cloudflare Pages build には sharp 不要 (script 側のみ使用)。`.npmrc` で `optional=false` してない限り問題ない
+4. **動画サイズ超過**: ffmpeg の `-b:v 300k -crf 35` は目安。実測で 150KB を超える場合は CRF を上げる
