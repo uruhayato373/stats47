@@ -1,13 +1,26 @@
 ---
 type: session-handoff
 date: 2026-05-27
-status: in-progress
+status: completed
 branch: develop
-commit: 86dcd47
+commit: c74fb0ee
 tags: [handoff, area-theme-separation, page-components, migration-flow]
 ---
 
 # Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤)
+
+## ✅ 完了 (2026-05-27, commit c74fb0ee)
+
+棚卸し (`node .claude/scripts/audit/page-components-audit.cjs`) で DB レイヤーは違反 0、本件は **page_components ではなくコード直書き** の責務違反だったことが判明 (`apps/web/src/app/areas/[areaCode]/page.tsx` の `<AreaMigrationFlowSection>`)。STEP 3/4 (DB+R2 反映) は skip、STEP 5 (コード移管) のみ実施:
+
+- `AreaMigrationFlowSection` 削除
+- `ThemeMigrationFlowSection` 新設 (`showSelector=true` で県切替可、IO 遅延ロード)
+- `ThemePageLayout` で `theme.themeKey === "population-dynamics"` 時に埋め込み
+
+検証 (STEP 6): `next build` で `/areas/[areaCode]` = `● SSG`, `/themes/population-dynamics` = `○ Static` を維持 (`nextjs-ssg-preservation.md` 規約 OK)。
+
+棚卸し結果: [`docs/04_レビュー/area-theme-audit/2026-05-27.md`](../area-theme-audit/2026-05-27.md)
+
 
 ## 発端
 
