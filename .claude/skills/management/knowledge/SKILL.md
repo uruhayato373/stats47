@@ -501,3 +501,27 @@ export async function GET() {
 **関連**:
 - memory: `project_instagram_graph_api_setup.md` (API 仕様詳細)
 - W18 Plan #127 のコメント (実際にスコープ縮小した事例)
+
+---
+
+## e-Stat backfill の DELETE+INSERT で他ソース由来年度が喪失する
+
+**問題**: 2026-05-27、`marriages-per-total-population` / `divorces-per-total-population` を e-Stat から backfill したところ、D1 の年度が 50年 → 48年に減少。2023, 2024 の最新年度データが消えた。
+
+**原因**: `backfill-stats-prefecture.cjs` の実装が **DELETE all + INSERT** 方式だったため。e-Stat SSDS (`statsDataId=0000010201`) は 2022 年までしか公開していないが、D1 の元データは別ソース (おそらく厚労省人口動態の月次集計を直接取り込み or 別 statsDataId) から来た 2023/2024 を含んでいた。DELETE+INSERT で他ソース由来の年度を巻き添えに消した。
+
+**対策**:
+1. **新規バックフィルは UPSERT 方式** で書く (`INSERT ON CONFLICT(metric_key, area_code, year_code) DO UPDATE`)
+   - 他ソース由来の年度を保全できる
+   - `.claude/scripts/estat/restore-from-r2-cache.cjs` が UPSERT 実例
+2. **DELETE が必要な場合は、対象 metric の年度別データソースを事前確認**
+   - `SELECT DISTINCT year_code, source_id FROM stats_prefecture WHERE metric_key = ?`
+   - source_id がバラバラなら DELETE は危険
+3. **リカバリ手順**: R2 cache (`.local/r2/app/ranking/<key>/values.json`) には削除前のデータが残っている (再エクスポート前なら)。`restore-from-r2-cache.cjs <metric_key>` で UPSERT 復元可能
+4. **year_code 形式の正規化忘れに注意**: e-Stat は YYYYMM00 形式 ("1975100000")、R2 cache は YYYY 形式 ("1975")。混在すると重複行を作る。restore 後に `UPDATE ... SET year_code = SUBSTR(year_code, 1, 4) WHERE LENGTH(year_code) > 4` で正規化
+
+**関連**:
+- `.claude/scripts/estat/backfill-stats-prefecture.cjs` (要 UPSERT 化リファクタ)
+- `.claude/scripts/estat/restore-from-r2-cache.cjs` (UPSERT 実例)
+- `docs/01_技術設計/10_自動化インベントリ.md` 手動運用ツールセクション
+- memory: `project_estat_backfill_lessons.md` (本件 + e-Stat 全年度取得規約)
