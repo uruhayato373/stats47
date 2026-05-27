@@ -301,7 +301,7 @@ Phase 3 部分着手: `.claude/state/triggers.json` に `stats47-daily-trend-pip
 | Agent | 成果物 |
 |---|---|
 | E | `.claude/scripts/gsc/extract-low-ctr-queries.mjs` + `.github/workflows/ctr-improvement-monthly.yml` |
-| F | `.claude/scripts/blog/fetch-article-data.mjs` (新 DDD schema metrics+stats_prefecture 対応) |
+| F | `.claude/scripts/blog/fetch-article-data.mjs` (新 DDD schema 対応: 旧 stats_prefecture → Phase 6/7 で R2 `app/stats/<key>/values.json`) |
 | G | `.claude/scripts/psi/suggest-cwv-candidates.mjs` |
 
 追加 commit (PR #311 同梱): `psi-audit-daily.yml` に suggest-cwv-candidates を組み込み (違反検出時に Issue body へ候補 component を自動 append)。

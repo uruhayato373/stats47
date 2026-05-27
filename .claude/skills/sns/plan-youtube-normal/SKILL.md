@@ -67,7 +67,7 @@ const videos = await youtube.videos.list({ id: videoIds, part: 'snippet,statisti
 
 ### Phase 3: 自社データとのマッチング
 
-ローカル D1 の `metrics` テーブルから、投稿済みキーを除外した候補を取得（`SELECT key, title FROM metrics WHERE is_active = 1 AND key NOT IN (SELECT content_key FROM sns_posts WHERE platform = 'youtube' AND posted_at IS NOT NULL)`）。データ実体は `stats_prefecture` に `metric_key` で紐付く。
+ローカル D1 の `metrics` テーブル (TS-config cache) から、投稿済みキーを除外した候補を取得（`SELECT key, title FROM metrics WHERE is_active = 1 AND key NOT IN (SELECT content_key FROM sns_posts WHERE platform = 'youtube' AND posted_at IS NOT NULL)`）。観測値は Phase 6 (2026-05-27) で R2 (`app/stats/<key>/values.json`) に移行済 — データ存在確認は `entities: ["prefecture"]` を含む TS-config (`packages/data-configs/src/metrics/<key>.ts`) を参照する。
 
 各カテゴリの metrics を Phase 2 の再生数ランキングと照合し、以下のスコアで優先度を付ける:
 

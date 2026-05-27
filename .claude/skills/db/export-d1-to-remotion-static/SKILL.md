@@ -43,12 +43,14 @@ Remotion は Webpack bundle に組み込まれ、render 時に network / DB acce
 
 ## サポート feature
 
-| feature | 出力 | 入力 D1 |
+Phase 6 (2026-05-27) で観測値の SSOT を R2 に移行済。各 exporter は `_shared/local-r2-reader.ts` 経由で `.local/r2/app/stats/<metric>/*.json` から読み出し、prefectures master のみ D1 から読む。
+
+| feature | 出力 | 入力 (R2) |
 |---|---|---|
-| `migration-flow` | `pref-net-{year}.json` + `{NN}.json` × 47 + `municipalities/{NN}.json` × 47 | `stats_migration_flow`, `stats_city` |
-| `population-yoy-47` | `timeseries.json` | `stats_prefecture` (人口 metric) |
-| `station-passengers` | `index.json` | `stats_prefecture` (乗降客集計 metric) |
-| `master` | `packages/area/src/data/{prefectures,cities}.json` | `prefectures`, `cities` |
+| `migration-flow` | `pref-net-{year}.json` + `{NN}.json` × 47 + `municipalities/{NN}.json` × 47 | `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json`, `app/stats/population-migration-net-municipality/cities.json` |
+| `population-yoy-47` | `timeseries.json` | `app/stats/japanese-population/values.json` |
+| `station-passengers` | `index.json` | `app/stats/station-passengers-annual-total/values.json` |
+| `master` | `packages/area/src/data/{prefectures,cities}.json` | D1 `prefectures` / `cities` (master 系のみ D1 残存) |
 
 ## ビルドフローへの統合
 

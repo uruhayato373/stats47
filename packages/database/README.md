@@ -159,31 +159,36 @@ packages/database/
 └── drizzle.config.local.ts  # Drizzle 設定（ローカル SQLite）
 ```
 
-## 観測テーブル設計
+## 観測テーブル設計 (歴史的記録)
 
-3 層モデル: `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持する。
+> ⚠️ **Phase 6 (2026-05-27) で観測値ストアを D1 から R2 へ全面移行済**
+>
+> 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`packages/data-configs/src/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
+>
+> 詳細: `.claude/rules/data-d1-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/14_Phase6_deprecation_log.md`
 
-### 単一エンティティ観測 (一般形)
+旧 3 層モデル (Phase 5 以前): `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持。
 
-`stats_prefecture` / `stats_city` / `stats_port` は同じ shape:
-
-```
-(metric_key, area_code, year_code, value, ...)
-```
-
-PK は `(metric_key, area_code, year_code)`。`metric_key` は `metrics.key` への FK。
-
-### ペア観測 (例外パターン)
-
-`stats_migration_flow` のように **2 エンティティの関係** を表現する場合は専用テーブル:
+旧 shape (参考、Phase 5 以前):
 
 ```
-(metric_key, from_pref_code, to_pref_code, year_code, inflow, outflow, net)
+stats_prefecture / stats_city / stats_port:
+  (metric_key, area_code, year_code, value, ...)
+
+stats_migration_flow (ペア観測):
+  (metric_key, from_pref_code, to_pref_code, year_code, inflow, outflow, net)
 ```
 
-PK は `(metric_key, from_pref_code, to_pref_code, year_code)`。`stats_prefecture` の単一 area_code 構造では表現不能なので新規テーブルで受ける。
+Phase 6/7 後の同データの R2 表現:
 
-新規 pair 観測 (例: 港湾間 vessel 移動、市区町村間人口移動) を追加する場合も同パターンで `stats_<relation>` テーブルを作る。
+```
+app/stats/<metric>/values.json        — { metricKey, entityKind, rows: [{areaCode, yearCode, value, ...}], meta }
+app/stats/<metric>/cities.json        — 市区町村版
+app/stats/<metric>/ports.json         — 港湾版
+app/stats/<metric>/migration-flow-<year>.json — { metricKey, year, rows: [{fromPrefCode, toPrefCode, inflow, outflow, net}], meta }
+```
+
+新規 metric / 新規観測値の追加フロー: `/page-data-batch` skill (TS-config 駆動の e-Stat → R2 直行)。
 
 ---
 

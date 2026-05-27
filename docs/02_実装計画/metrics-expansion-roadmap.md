@@ -8,7 +8,9 @@ related_files:
   - docs/02_実装計画/100x-pv-strategy.md
   - docs/02_実装計画/cities-revival-plan.md
   - .claude/skills/estat/search-estat/SKILL.md
-  - .claude/skills/db/register-ranking/SKILL.md
+  - .claude/skills/db/page-data-batch/SKILL.md
+  - .claude/skills/db/sync-metrics-cache/SKILL.md
+  - packages/data-configs/src/metrics/
 baseline:
   total_metrics_active: 1994
   measured_at: 2026-W21
@@ -101,9 +103,10 @@ total active metrics: 1,994
 | **S4: バランス調整 + economy 細分化** | W41-W44 | economy (補強)、administrativefinancial、safetyenvironment | ~641 | 法人企業統計、地方財政詳細、警察・司法統計 |
 | **合計** | 16 週 | 17 カテゴリ全カバー | **3,009** | |
 
-各 Stage 完了時に以下を実施:
-- 追加 metrics の `is_active=1` 確認
-- ranking values batch 実行 (`/populate-all-rankings`)
+各 Stage 完了時に以下を実施 (Phase 6/7 後の新フロー):
+- TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 → `npm run build:registry --workspace=packages/data-configs`
+- D1 cache 同期 (`/sync-metrics-cache --apply`)
+- e-Stat → R2 観測値投入 (`/page-data-batch --metric <key>` or 全量 `/page-data-batch`)
 - R2 snapshot 再生成 (`/sync-snapshots`)
 - 4 週後の GSC indexed/impressions 変化を計測 (Stage 別 effect 判定)
 
@@ -170,25 +173,25 @@ total active metrics: 1,994
 
 `docs/02_実装計画/stages/S1-candidates.md` 等に Stage 別の候補リスト (調査 ID, metric_key 候補名, 期待単位, ranking direction) を文書化。
 
-### 3. metrics 登録
+### 3. metrics 登録 (Phase 6/7 後の新フロー)
 
 ```bash
 # 1 metric ずつ
-/register-ranking <調査ID> <metric_key> <その他オプション>
+# (1) packages/data-configs/src/metrics/<key>.ts を作成 (japanese-population.ts をテンプレに)
+# (2) registry 再生成
+npm run build:registry --workspace=packages/data-configs
+# (3) D1 cache 同期
+/sync-metrics-cache --apply
 ```
 
-または batch 登録 (Stage 内一括):
-
-```bash
-# batch script は今後実装 (Phase 1 内)
-node .claude/scripts/db/batch-register-metrics.mjs --stage S1
-```
+batch 登録: TS-config を Stage 単位 (例 S1 で 30 ファイル) 一括追加 + 上記 (2)(3) 1 回。
 
 ### 4. ranking values 取得 + R2 反映
 
 ```bash
-/populate-all-rankings  # 全 metrics × 47県 のランキング計算
-/sync-snapshots         # D1 → R2 snapshot 全更新
+/page-data-batch                       # 全 metrics の R2 観測値投入 (TS-config registry walk)
+# または個別: /page-data-batch --metric <key>
+/sync-snapshots                        # 派生 snapshot 全更新
 ```
 
 ### 5. 効果計測 (Stage 完了 4 週後)
@@ -227,7 +230,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 | リスク | 影響 | 対処 |
 |---|---|---|
 | 大量 metrics 追加で薄いページが増え site quality 判定が下がる | -20% PV | 各 Stage 4 週観測で indexed 率 60% 未満なら次 Stage 遅延 |
-| /populate-all-rankings 実行時間が長大化 | デプロイ遅延 | metrics 増加に応じて batch script の並列化 |
+| `/page-data-batch` 実行時間が長大化 | デプロイ遅延 | metrics 増加に応じて batch script の `--concurrency` 増加 |
 | 一部 e-Stat 調査が県別データを持たない | データ欠損で metric 無効化 | inspect-estat-meta で県別データ存在を事前確認 |
 | 重複 / 似た metric を追加してしまう | duplicate content 判定 | metric_key の uniqueness + title similarity check |
 | 古い (5+ 年前) データしかない調査 | 更新性で SEO 不利 | latest year が 5 年以内のものに限定、古いものはスキップ |
@@ -259,6 +262,6 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 - 親計画: `docs/02_実装計画/100x-pv-strategy.md` Phase 1
 - 兄弟計画: `docs/02_実装計画/cities-revival-plan.md` (Phase 1 のもう 1 つの主軸)
 - e-Stat 利用ルール: `.claude/rules/estat-api.md`
-- 既存 metrics registration スキル: `.claude/skills/db/register-ranking/SKILL.md`
+- metrics registration (Phase 6/7 後): `.claude/skills/db/page-data-batch/SKILL.md` + `.claude/skills/db/sync-metrics-cache/SKILL.md` + TS-config (`packages/data-configs/src/metrics/`)
 - e-Stat 検索: `.claude/skills/estat/search-estat/SKILL.md`
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`

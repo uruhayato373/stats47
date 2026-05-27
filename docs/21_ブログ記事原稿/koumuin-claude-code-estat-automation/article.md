@@ -66,7 +66,7 @@ stats47 は **132 個の Claude Code スキル**を持っています。
 stats47 の典型的なスキル例:
 
 - `fetch-estat-data` — 指定した統計表 ID から最新データを取得
-- `populate-all-rankings` — 全 2,150 ランキングを再計算して DB に登録
+- `page-data-batch` — 全 2,200+ メトリクスを e-Stat から取得して R2 ストレージに直接書き込む
 - `sync-articles` — ブログ記事を D1 に同期
 - `publish-article` — 記事下書きを本番公開
 - `fetch-ga4-data` — GA4 から KPI を取得

@@ -1,24 +1,36 @@
 ---
 name: expand-indicators
 description: |
-  docs/50_Issues/indicator-backlog.md から優先度上位 N 件を取得し、
-  recipe を author して .claude/scripts/management/ingest-indicator.mjs で
-  metrics + stats_prefecture テーブルに登録、backlog status 更新、
-  docs/05_改善ログ/indicator-expansion.md に append する。
+  ⚠️ Phase 7 (2026-05-28) で stats_prefecture テーブル削除に伴い、本 skill の orchestrator script
+  (ingest-indicator.mjs) は runtime で「no such table」エラー。R2 直行投入用に refactor 待ち。
+  暫定運用は手動 TS-config 追加 + /sync-metrics-cache + /page-data-batch を 1 metric ずつ実行。
   Use when user says "指標追加", "indicator 拡充", "/expand-indicators".
 argument-hint: "--target <N> [--priority high|medium|low|all] [--dry-run]"
-primary_agent: strategy-advisor
+primary_agent: data-ingester
 ---
 
-stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/05_改善ログ/indicator-expansion.md` に施策バッチとして append する 1 コマンド型スキル。
+> ⚠️ **DEPRECATED (Phase 7 — 2026-05-28 時点)**
+>
+> 本 skill の中核 `ingest-indicator.mjs` が削除済 `stats_prefecture` テーブルへ INSERT する設計のため、現状実行できない。Phase 8 で R2 直行投入版 (`packages/data-configs/scripts/page-data-batch.ts` 流用) に refactor 予定 ([feature-backlog.md](../../../../docs/50_Issues/feature-backlog.md) の Phase 8 issue を参照)。
+>
+> **暫定運用** (1 metric ずつ手動):
+> 1. `packages/data-configs/src/metrics/<key>.ts` に TS-config を作成 (既存 `japanese-population.ts` をテンプレに)
+> 2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
+> 3. `/sync-metrics-cache --apply` で D1 metrics cache 同期
+> 4. `/page-data-batch --metric <key>` で e-Stat → R2 投入
+> 5. `docs/50_Issues/indicator-backlog.md` を手動編集 (status: pending → done)
+> 6. `docs/05_改善ログ/indicator-expansion.md` に batch entry append
 
-**現行 schema** (DDD migration 後):
-- `metrics(key, title, unit, source_id, category_key, ...)` — 旧 `indicators`
-- `stats_prefecture(metric_key, area_code, year_code, value, rank, ...)` — 旧 `ranking_data`
-- `sources(id, source_kind, external_id, ...)` — 出典マスタ
-- `estat_metainfo(stats_data_id, status, ...)` — candidate / registered フラグ
+stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/05_改善ログ/indicator-expansion.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
 
-旧 SKILL は `indicators` / `ranking_data` を前提に書かれていたが、それらは DDD 移行で廃止済 ([feedback_skill_schema_drift.md](~/.claude/projects/-Users-minamidaisuke-stats47/memory/feedback_skill_schema_drift.md))。本 SKILL は現行 schema 直書きの orchestrator を経由する。
+**現行 schema** (Phase 6/7 後):
+- TS-config (`packages/data-configs/src/metrics/<key>.ts`) — metric メタの SSOT
+- D1 `metrics(key, title, unit, source_id, category_key, ...)` — TS-config の cache
+- R2 `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` — 観測値の SSOT
+- D1 `sources(id, source_kind, external_id, ...)` — 出典マスタ
+- D1 `estat_metainfo(stats_data_id, status, ...)` — candidate / registered フラグ
+
+旧 SKILL は `stats_prefecture` 直書きを前提にしていたが、Phase 6 (2026-05-27) で観測値テーブルは全 DROP、Phase 7 で関連 reader/scripts も削除済。本 skill 自体の refactor は Phase 8 に繰り越し。
 
 ## 用途
 

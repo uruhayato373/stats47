@@ -48,9 +48,9 @@ note 記事（B/C/D シリーズ）のアイデアを、書き始める前に需
 テーマに関連するランキング・ブログ記事を確認する:
 
 ```bash
-# 関連ランキングの検索
+# 関連ランキングの検索 (Phase 5 以降: indicators → metrics リネーム)
 npx wrangler d1 execute stats47_static --local --persist-to .local/d1 --command \
-  "SELECT ranking_key, title, category_key FROM indicators WHERE title LIKE '%キーワード%' AND is_active = 1 LIMIT 20"
+  "SELECT key AS ranking_key, title, category_key FROM metrics WHERE title LIKE '%キーワード%' AND is_active = 1 LIMIT 20"
 
 # 関連ブログ記事の検索
 ls .local/r2/blog/ | grep -i "キーワード"
@@ -66,7 +66,7 @@ ls .local/r2/blog/
 
 # ランキングページの存在確認
 npx wrangler d1 execute stats47_static --local --persist-to .local/d1 --command \
-  "SELECT key, title FROM indicators WHERE key IN ('候補1', '候補2') AND is_active = 1"
+  "SELECT key, title FROM metrics WHERE key IN ('候補1', '候補2') AND is_active = 1"
 ```
 
 存在しないリンク候補は記事から除外する。実在するリンクのみ使用すること。
