@@ -4,7 +4,7 @@
 
 このドキュメントは以下の skill / agent から参照される:
 - `auto-brushup-batch`
-- `brushup-blog-article`
+- `brushup-blog`
 - `draft-from-trend`
 - `publish-article`
 - `publish-bulk-articles`

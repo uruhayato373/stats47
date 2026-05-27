@@ -32,7 +32,7 @@ $ARGUMENTS — <wp-slug> [mode]
 
 ## 11 白書の slug 対応
 
-`.claude/skills/blog/brushup-blog-article/SKILL.md` の白書 mapping を SSOT とする:
+`.claude/skills/blog/brushup-blog --target article/SKILL.md` の白書 mapping を SSOT とする:
 
 | slug | NotebookLM ノートブック名 | 主題領域 |
 |---|---|---|
@@ -143,7 +143,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 - 親計画: `/root/.claude/plans/47-swirling-wreath.md`
 - 責務分離ルール: `docs/01_技術設計/11_area-vs-theme責務分離.md`
 - mirror 元フォーマット: `docs/02_実装計画/theme-charts-planning/README.md`
-- 白書 SSOT: `.claude/skills/blog/brushup-blog-article/SKILL.md`
+- 白書 SSOT: `.claude/skills/blog/brushup-blog --target article/SKILL.md`
 - e-Stat 照合 (Phase C): `.claude/skills/estat/search-estat/SKILL.md`
 - nlm CLI wrapper: `.claude/scripts/notebooklm-cross-query.mjs`
 - 出力先判定: `.claude/rules/data-storage.md`

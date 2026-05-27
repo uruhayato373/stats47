@@ -211,7 +211,7 @@ content(blog): {slug} を NotebookLM で内容補強
 ## 関連
 
 - `/draft-from-trend` (新規記事 orchestrator、本スキルは公開済記事の補強用)
-- `/brushup-blog-article` (GSC ベース brushup、本スキルは内容深化用、目的が異なる)
+- `/brushup-blog --target article` (GSC ベース brushup、本スキルは内容深化用、目的が異なる)
 - `/proofread-article` (構造・出典・リンク検証、本スキルと組合せ推奨)
 - `/md-syntax` (`<data-source>` `<source-link>` 記法)
 - 参考: `/Users/minamidaisuke/doboku-note/.claude/skills/authoring/notebooklm-research/SKILL.md` (原型)

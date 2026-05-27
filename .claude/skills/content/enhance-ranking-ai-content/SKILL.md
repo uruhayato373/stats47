@@ -19,7 +19,7 @@ primary_agent: data-ingester
 - 本スキル: **リライト専用** (`metrics.faq` 等が NOT NULL 前提)、NotebookLM 出典で内容深化
 - `/generate-ai-content`: **初回生成専用** (NULL → 値、Claude/Gemini 並列、`--limit N --force`)
 - `/notebooklm-research`: **公開済ブログ記事 (`article.md`) 補強専用** (対象が異なる)
-- `/brushup-blog-article`: **GSC ベース seoTitle / description 改訂** (メタ改訂、内容深化とは別軸)
+- `/brushup-blog --target article`: **GSC ベース seoTitle / description 改訂** (メタ改訂、内容深化とは別軸)
 
 > **AI 生成感の回避**: NotebookLM の文言を **絶対に転記しない** こと。`buildRankingContentPrompt` の `extraContext` 引数経由で「言葉づかいの素材」として渡し、再構成させる。
 
@@ -223,7 +223,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 
 - `/generate-ai-content` (初回生成、本スキルの前提)
 - `/notebooklm-research` (公開済ブログ用、本スキルとは対象が異なる)
-- `/brushup-blog-article` (GSC ベース seoTitle 改訂、メタ改訂で内容深化とは別軸)
+- `/brushup-blog --target article` (GSC ベース seoTitle 改訂、メタ改訂で内容深化とは別軸)
 - `/sync-snapshots --only ai-content` (Step 6 で個別 export しない選択肢)
 - 改善ログ INDEX: `docs/05_改善ログ/INDEX.md`
 - 効果判定ルール: `.claude/rules/evidence-based-judgment.md` (effect/* 付与前必読)
