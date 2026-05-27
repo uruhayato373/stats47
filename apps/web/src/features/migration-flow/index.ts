@@ -1,3 +1,3 @@
 export { MigrationFlowPlayer } from "./components/MigrationFlowPlayer";
-export { AreaMigrationFlowSection } from "./components/AreaMigrationFlowSection";
+export { ThemeMigrationFlowSection } from "./components/ThemeMigrationFlowSection";
 export { PREFECTURES } from "./lib/prefectures";
