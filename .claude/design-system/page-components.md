@@ -17,6 +17,16 @@
 | area | 13000, 01000 | エリアトップページ |
 | area-category | safetyenvironment, economy | エリアカテゴリページ |
 
+### pageType 配置の責務分離 (重要)
+
+何を `theme` / `area` に置くかの判定基準は [`docs/01_技術設計/11_area-vs-theme責務分離.md`](../../docs/01_技術設計/11_area-vs-theme責務分離.md) で定義。要点:
+
+- **`theme`**: 全国横断可視化（地図/コロプレス、移動フロー、ピラミッド、散布図）と主題ダッシュボードのタブチャート群
+- **`area`**: 県固有の時系列推移、県の年齢構成、県内の市区町村ランキングなど「**この県だけ**」の可視化
+- **NG**: 主題深掘り可視化を `pageType="area"` に登録する（47 ページに複製され build/SEO に悪影響）
+
+新規追加・既存変更時は責務分離ドキュメントを参照すること。違反検知は `.claude/scripts/audit/page-components-audit.cjs` で実行可能。
+
 ### 1データ1コンポーネント原則
 
 同じ統計データは **1つのコンポーネント定義を共有**し、`page_component_assignments` で複数ページに割り当てる。
