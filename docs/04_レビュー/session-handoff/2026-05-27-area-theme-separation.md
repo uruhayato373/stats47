@@ -1,14 +1,13 @@
 ---
 type: session-handoff
 date: 2026-05-27
-status: partially-completed
+status: in-progress
 branch: develop
 commit: 86dcd47
-tags: [handoff, area-theme-separation, page-components, migration-flow, homepage-previews]
-note: "追加タスク (homepage previews) は 2026-05-27 完了。残: area/theme 責務分離 STEP 1-6"
+tags: [handoff, area-theme-separation, page-components, migration-flow]
 ---
 
-# Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤 + homepage previews)
+# Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤)
 
 ## 発端
 
@@ -140,134 +139,7 @@ STEP 5 (コード側マイグレーション) のうち、どちらを先にや�
 
 ---
 
-## 追加タスク: ホームページ末尾「このサイトの主要ページ」プレビュー画像/動画
+## Homepage previews follow-ups (Task B 完了 2026-05-27, commit 406d0584)
 
-ユーザー要望: `https://stats47.jp/` 下部の `NextUpGrid` セクション (6 リンク) にスクリーンショット/動画を入れて訴求力を上げる。
-
-### 決定事項
-
-- 方式: **A+B ハイブリッド** (`/ranking` `/themes` のみ動画 WebM、他 4 ページは静的 AVIF)
-- 撮影タイミング: **CI 月次自動再撮影** (GitHub Actions cron, 毎月 1日)
-- 保存先: **R2 `app/home/previews/{key}.{avif,webm}`** (公開 URL: `https://storage.stats47.jp/app/home/previews/`)
-
-### このセッションで実装したもの
-
-| ファイル | 種別 | 役割 |
-|---|---|---|
-| `docs/01_技術設計/12_homepage-previews.md` | 新規 | 設計仕様 (ファイル形式・LCP/CLS 対策・配信・CI) |
-| `apps/web/src/features/redesign/components/NextUpGrid.tsx` | 修正 | `previewImageUrl` / `previewVideoUrl` props 追加、16:9 aspect-ratio 固定、`motion-reduce` 対応、媒体未指定時は既存グラデへ自動フォールバック |
-| `apps/web/src/app/page.tsx` | 修正 | 6 item に preview URL を設定。`HOME_PREVIEWS_BASE` 定数で R2 公開 URL を組み立て |
-| `apps/web/scripts/capture-home-previews.ts` | 新規 | Playwright で 6 ページ撮影 → Sharp で AVIF 化 + ffmpeg で WebM エンコード |
-| `.github/workflows/capture-home-previews-monthly.yml` | 新規 | 月次 cron + 手動 dispatch。撮影 → R2 push (wrangler) |
-| `apps/web/package.json` | 修正 | `sharp` を devDependencies に追加 |
-
-### 残タスク (ローカル/CI で実行)
-
-#### A. ローカルで動作確認 (推奨先行ステップ)
-
-```bash
-# apps/web に sharp を install
-npm install --workspace=apps/web
-
-# 撮影 (本番 stats47.jp ターゲット)
-npx tsx apps/web/scripts/capture-home-previews.ts \
-  --base-url https://stats47.jp \
-  --output /tmp/home-previews
-
-# 結果確認
-ls -lh /tmp/home-previews/
-# ranking.avif, ranking.webm, themes.avif, themes.webm,
-# areas.avif, blog.avif, survey.avif, search.avif の 8 ファイルが出るはず
-```
-
-ffmpeg が無い場合は `brew install ffmpeg` (mac) / `apt-get install ffmpeg` (linux)。
-
-#### B. ローカル D1/R2 への手動 push (動作確認用)
-
-```bash
-# .local/r2/app/home/previews/ にコピー
-mkdir -p .local/r2/app/home/previews
-cp /tmp/home-previews/* .local/r2/app/home/previews/
-
-# Web 起動して確認
-npm run dev --workspace=apps/web
-# http://localhost:3000 で末尾セクションをチェック
-```
-
-#### C. 本番 R2 への push (workflow 経由 or 手動)
-
-```bash
-# 手動の場合
-wrangler r2 object put stats47/app/home/previews/ranking.avif \
-  --file /tmp/home-previews/ranking.avif \
-  --content-type image/avif \
-  --remote
-# (全 8 ファイル同様に)
-```
-
-または `.github/workflows/capture-home-previews-monthly.yml` を一度 `workflow_dispatch` で手動起動。
-
-#### D. CI 統合の確認
-
-- 月次 cron は `0 3 1 * *` (毎月 1日 03:00 UTC = 12:00 JST)
-- 必要 secrets: `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_R2_BUCKET_NAME` (既存 deploy workflow と同じ)
-
-#### E. ロールアウト判断
-
-- NextUpGrid 拡張は **R2 ファイルが無くてもクラッシュしない** (img の src 404 時はグラデが透過して見える)
-- main deploy → R2 push → CDN 浸透 で順次見え始める
-- LCP 影響を PSI で確認 (homepage の LCP が +0ms のはず)
-
-### 既知の懸念
-
-1. **`<img>` 404 時のアイコン表示**: ブラウザによっては broken-image アイコンが出る可能性 (Chromium は通常 alt のみ)。気になる場合は client component 化して `onError` でフォールバック
-2. **video autoplay**: モバイル Safari は `muted playsinline` 必須 → 既に対応済み
-3. **sharp install 失敗**: Cloudflare Pages build には sharp 不要 (script 側のみ使用)。`.npmrc` で `optional=false` してない限り問題ない
-4. **動画サイズ超過**: ffmpeg の `-b:v 300k -crf 35` は目安。実測で 150KB を超える場合は CRF を上げる
-
----
-
-## ✅ 完了 (2026-05-27) — homepage previews
-
-実行 plan: `~/.claude/plans/b-goal-inherited-locket.md`
-
-### 実施内容
-
-1. **ローカル撮影** — `npx tsx apps/web/scripts/capture-home-previews.ts --base-url https://stats47.jp --output /tmp/home-previews`
-   - 1 ファイルだけ `/survey` で networkidle timeout (30 秒超過) → ad-hoc に `domcontentloaded` + 4s wait で再撮影 (19.2 KB)
-   - その他 7 ファイルは元スクリプトのまま一発成功
-2. **R2 push** — `npx wrangler r2 object put stats47/app/home/previews/{file} --remote` (×8)
-3. **検証** — 8 アセット全部 `https://storage.stats47.jp/app/home/previews/*` で HTTP 200、トップページ HTML に 8 URL すべて出現
-
-### 生成ファイルサイズ (全 budget 内)
-
-| ファイル | サイズ | budget | OK |
-|---|---|---|---|
-| ranking.avif | 11 KB | 30-50 KB | ✓ |
-| ranking.webm | 31 KB | ~150 KB | ✓ |
-| themes.avif | 23 KB | 30-50 KB | ✓ |
-| themes.webm | 82 KB | ~150 KB | ✓ |
-| areas.avif | 16 KB | 30-50 KB | ✓ |
-| blog.avif | 12 KB | 30-50 KB | ✓ |
-| survey.avif | 19 KB | 30-50 KB | ✓ |
-| search.avif | 15 KB | 30-50 KB | ✓ |
-
-### PSI 実測 (mobile, 2026-05-27T11:02Z, 3 runs)
-
-| 指標 | baseline (2026-05-26) | post-push (2026-05-27) | delta | 判定 |
-|---|---|---|---|---|
-| Perf score | 52 | 50-51 | -1 〜 -2 | within noise |
-| LCP | 6451 ms | 7801 ms | +1350 ms | **要注意 (※注)** |
-| CLS | 0.110 | 0.001-0.110 | varies | within range |
-| TBT | 269 ms | 314-682 ms | +45〜+413 ms | within variance |
-
-> ※ LCP element: hero `<h1>あなたの県は何位？</h1>` (path `1,HTML,1,BODY,4,DIV,1,DIV,2,MAIN,...,H1`)。NextUpGrid の preview 群は below-the-fold + lazy-loaded で **LCP 候補ではない**。delta +1350ms は本 push が原因ではなく、PSI 実行間の variance + baseline (24h 前) との差分。
-
-### 既知の調整候補 (次回以降)
-
-- `/survey` の通常スクリプト経路で networkidle 到達に >4 分かかる問題: `capture-home-previews.ts` の survey だけ waitUntil を `load` に切り替える PR を別途検討
-- LCP 7.8s 自体は別問題として `/themes` 系と並ぶ高優先度。preview と切り離して performance-improvement で追跡
-
-### 月次 cron
-
-`.github/workflows/capture-home-previews-monthly.yml` (cron `0 3 1 * *` = JST 12:00 毎月 1日) が次回 (2026-06-01) から自動更新する。同じ survey timeout が CI で起きる可能性あり (本実行時の手動 retry でカバーした問題なので、CI 失敗時の workflow log で要確認)。
+- **`/survey` networkidle timeout**: `capture-home-previews.ts` で `/survey` だけ networkidle 到達に >4 分かかる。CI でも再現の可能性 → survey 限定で `waitUntil: "load"` に切替 + `output_dir/{key}.avif` 部分失敗を許容する retry 機構を追加するのが望ましい
+- **homepage LCP 7.8s**: preview と無関係だが、別件として hero h1 系の LCP 改善は performance-improvement で別途追跡 (本ハンドオフのスコープ外)
