@@ -24,7 +24,7 @@ export function SidebarShareCard({ title, shareText }: SidebarShareCardProps) {
           シェアする
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0 flex justify-center">
+      <CardContent className="px-4 pb-4 pt-3 flex justify-center">
         <ShareButtons title={title} shareText={shareText} variant="prominent" />
       </CardContent>
     </Card>

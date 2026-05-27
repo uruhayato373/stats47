@@ -73,7 +73,7 @@ export async function ThemeRelatedArticles({
         <Newspaper className="h-4 w-4 text-muted-foreground" />
         <CardTitle className="text-base">関連記事</CardTitle>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {visible.map((article) => (
             <Link

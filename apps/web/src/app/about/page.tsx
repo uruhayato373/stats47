@@ -42,7 +42,7 @@ function AboutSection({ title, children }: AboutSectionProps) {
       <CardHeader className="p-4 md:p-6">
         <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="p-4 md:p-6 pt-0">{children}</CardContent>
+      <CardContent className="p-4 md:p-6 pt-3">{children}</CardContent>
     </Card>
   );
 }

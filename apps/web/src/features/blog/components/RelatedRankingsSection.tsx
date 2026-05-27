@@ -52,7 +52,7 @@ export async function RelatedRankingsSection({
         <BarChart3 className="h-4 w-4 text-muted-foreground" />
         <CardTitle className="text-base">関連ランキング</CardTitle>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-3">
         <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
           {rankings.map((ranking) => (
             <Link

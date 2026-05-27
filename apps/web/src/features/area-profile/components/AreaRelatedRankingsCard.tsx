@@ -53,7 +53,7 @@ export function AreaRelatedRankingsCard({
               <ArrowRight className="h-3 w-3" />
             </Link>
           </CardHeader>
-          <CardContent className="px-5 pb-5 pt-0">
+          <CardContent className="px-5 pb-5 pt-3">
             <ol className="space-y-1.5">
               {strengths.map((item, idx) => (
                 <li
@@ -94,7 +94,7 @@ export function AreaRelatedRankingsCard({
               <ArrowRight className="h-3 w-3" />
             </Link>
           </CardHeader>
-          <CardContent className="px-5 pb-5 pt-0">
+          <CardContent className="px-5 pb-5 pt-3">
             <ol className="space-y-1.5">
               {weaknesses.map((item, idx) => (
                 <li

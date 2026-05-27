@@ -14,7 +14,11 @@
  *
  * 改修対象は SEO_TARGETS / BLOG_TARGETS 定数で管理 (新規施策時はここに追加)。
  *
- * SKILL: 関連スキル無し (将来 /measure-gsc-impact として skill 化検討)
+ * 🔧 Phase D (2026-W22 予定): wave_id 駆動への書き換え + /measure-blog-impact SKILL 化 +
+ *   GitHub Actions 化を `~/.claude/plans/recursive-purring-planet.md` で計画中。
+ *   現状は BLOG_TARGETS ハードコード (BLOG-CTR-02 のみ対象)、新規 wave (例 2026-05-25-auto)
+ *   は対象外。Phase D 完了までは `--slugs-from .claude/state/blog/auto-brushup-history.json`
+ *   の手動オプション or 手動 awk で集計する。
  */
 
 import fs from "node:fs";

@@ -68,7 +68,7 @@ export async function ArticleDataDownloadSection({
           関連データをダウンロード
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-3">
         <p className="mb-3 text-xs text-muted-foreground">
           記事で扱った統計データを CSV でダウンロードできます。47都道府県 × 全年度の時系列データを、クレジット表記すれば無料で商用利用可能。
         </p>

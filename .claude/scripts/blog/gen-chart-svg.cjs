@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 /**
+ * ⚠ SUPERSEDED (2026-05-27): generate-article-charts.mjs が同等以上の機能を提供。
+ *   どの SKILL.md からも参照されていない orphan script。Phase D で削除予定
+ *   (~/.claude/plans/recursive-purring-planet.md)。新規利用は generate-article-charts.mjs を使うこと。
+ *
  * blog 記事の <chart-placeholder ... /> を、隣接する Markdown table から
  * 抽出したデータで inline <svg> bar chart に置換する。
  *

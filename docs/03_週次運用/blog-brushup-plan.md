@@ -6,9 +6,18 @@ total_articles: 187
 days: 30
 per_day: 5
 total_expected_lift_monthly: 724
+status: superseded
+superseded_at: 2026-05-25
+superseded_by: BLOG-WAVE-2026-05-25-auto
+superseded_reason: 30日 5記事/日計画だったが 2026-05-25 に 1 日で 54 件を auto-brushup で実行したため陳腐化。BLOG-WAVE-2026-05-25-auto + 既存 BLOG-WAVE-2026-05-23-manual で実態をカバー。
 ---
 
-# Blog Brushup Plan (2026-05-23 起点 30 日間)
+# Blog Brushup Plan (2026-05-23 起点 30 日間) — SUPERSEDED 2026-05-25
+
+> ⚠ **このプランは陳腐化**: 30日連続 5記事/日 計画として作成されたが、2026-05-25 に
+> 1 日で 54 記事を auto-brushup で処理したため、本プランは実行されなかった。
+> 実際の brushup 履歴は `docs/05_改善ログ/gsc.md` の `BLOG-WAVE-2026-05-25-auto` と
+> `BLOG-WAVE-2026-05-23-manual` セクションを参照。本ファイルは履歴として保持。
 
 ## サマリ
 

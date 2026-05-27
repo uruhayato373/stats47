@@ -83,6 +83,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 実装ロードマップ | `docs/02_実装計画/01_実装ロードマップ.md` |
 | SEO 向上 × TODO 一元化 × 自動化拡張プラン (W21-W26) | `docs/02_実装計画/seo-todo-unify-phase-1-3.md` |
+| 白書チャート逆引き inventory (11 白書 → area/theme 素材リスト) | `docs/02_実装計画/whitepaper-chart-inventory/README.md` |
+| area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
 | 改善ログ INDEX (TODO 真実源、scan tool 使い方) | `docs/05_改善ログ/INDEX.md` ★施策追加時必読 |
 | システム構成・技術スタック | `docs/01_技術設計/` |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |

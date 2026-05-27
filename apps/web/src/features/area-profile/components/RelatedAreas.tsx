@@ -41,7 +41,7 @@ export function RelatedAreas({ areaCode }: Props) {
                     {region.regionName}の都道府県
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-3 pb-3 pt-0">
+            <CardContent className="px-3 pb-3 pt-3">
                 <nav className="flex flex-col gap-0.5">
                     {relatedPrefs.map((pref) => (
                         <Link

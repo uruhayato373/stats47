@@ -221,7 +221,7 @@ export function CityRankingSection({
                   {selectedItem?.title ?? "地図"}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0">
+              <CardContent className="pt-3">
                 <CityMapChart
                   data={mapData}
                   colorConfig={{ colorSchemeType: "sequential" }}
@@ -243,7 +243,7 @@ export function CityRankingSection({
                   {selectedItem?.title ?? "ランキング"}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0">
+              <CardContent className="pt-3">
                 <DataTable
                   columns={columns}
                   data={processedData}
