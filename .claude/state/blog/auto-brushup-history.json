@@ -1,12 +1,103 @@
 {
   "entries": [
     {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "child-height-regional-gap",
+      "framing": "なぜ東北が高い? (curiosity gap, manual)",
+      "expectedLift": 36,
+      "impressions": 1597,
+      "ctr_before": 0.0075
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "price-index-high-low-prefecture",
+      "framing": "住居費だけ1.6倍格差 (curiosity gap, manual)",
+      "expectedLift": 15,
+      "impressions": 1373,
+      "ctr_before": 0.019
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "temperature-extremes-map",
+      "framing": "猛暑日は京都が全国1位の意外 (curiosity gap, manual)",
+      "expectedLift": 20,
+      "impressions": 1337,
+      "ctr_before": 0.015
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "habitable-area-land-use",
+      "framing": "人口密度の真因が見える (curiosity gap, manual)",
+      "expectedLift": 17,
+      "impressions": 643,
+      "ctr_before": 0.0031
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "fiscal-self-reliance-gap",
+      "framing": "唯一「自立」できる47都道府県は (curiosity gap, manual)",
+      "expectedLift": 3,
+      "impressions": 549,
+      "ctr_before": 0.0255
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "overnight-guests-inbound-recovery",
+      "framing": "コロナ半減→V字回復・54倍差 (curiosity gap, manual)",
+      "expectedLift": 10,
+      "impressions": 364,
+      "ctr_before": 0.0027
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "fishery-species-prefecture-specialty",
+      "framing": "ホタテ99%独占・イワシ86%減 (curiosity gap, manual)",
+      "expectedLift": 5,
+      "impressions": 269,
+      "ctr_before": 0.0112
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "population-density-urbanization",
+      "framing": "埼玉が昼夜人口比率最下位 (curiosity gap, manual)",
+      "expectedLift": 5,
+      "impressions": 231,
+      "ctr_before": 0.0087
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "consumer-price-regional-gap",
+      "framing": "物価格差の真因は家賃 (curiosity gap, manual)",
+      "expectedLift": 6,
+      "impressions": 230,
+      "ctr_before": 0.0043
+    },
+    {
+      "date": "2026-05-23",
+      "wave_id": "2026-05-23-manual",
+      "slug": "park-green-space-gap",
+      "framing": "自然公園 vs 都市公園の逆転 (curiosity gap, manual)",
+      "expectedLift": 4,
+      "impressions": 213,
+      "ctr_before": 0.0094
+    },
+    {
       "date": "2026-05-25",
       "slug": "child-height-regional-gap",
       "framing": "牛乳3位の高知が身長最下位 — 定説崩壊と複合要因",
       "expectedLift": 129,
       "impressions": 2005,
-      "ctr_before": 0.007
+      "ctr_before": 0.007,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -14,7 +105,8 @@
       "framing": "猛暑日1位は京都・最少は沖縄 — 盆地気候の逆転構造",
       "expectedLift": 105,
       "impressions": 2415,
-      "ctr_before": 0.0149
+      "ctr_before": 0.0149,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -22,7 +114,8 @@
       "framing": "可住地少ない高知が土地効率上位 — 集約型の逆説",
       "expectedLift": 69,
       "impressions": 754,
-      "ctr_before": 0.0066
+      "ctr_before": 0.0066,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -30,7 +123,8 @@
       "framing": "物価格差の真因は家賃 — 住居費45pt差が主役",
       "expectedLift": 48,
       "impressions": 1527,
-      "ctr_before": 0.0177
+      "ctr_before": 0.0177,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -38,7 +132,8 @@
       "framing": "自然豊かな滋賀に国立公園ゼロ、東京が3指標すべて上位の逆説",
       "expectedLift": 29,
       "impressions": 334,
-      "ctr_before": 0.012
+      "ctr_before": 0.012,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -46,7 +141,8 @@
       "framing": "移住で生活コストは下がるか、住居費が格差の9割を説明",
       "expectedLift": 23,
       "impressions": 216,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -54,7 +150,8 @@
       "framing": "特産魚種は地理(親潮×黒潮)が決める、60年で86%消えた魚種",
       "expectedLift": 20,
       "impressions": 273,
-      "ctr_before": 0.011
+      "ctr_before": 0.011,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -62,7 +159,8 @@
       "framing": "太平洋側と日本海側でなぜこれほど晴天日が違うのか",
       "expectedLift": 18,
       "impressions": 146,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -70,7 +168,8 @@
       "framing": "宮城と宮崎は食の対極──豆腐・焼酎・昆布で見える南北断層",
       "expectedLift": 15,
       "impressions": 340,
-      "ctr_before": 0.0176
+      "ctr_before": 0.0176,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -78,7 +177,8 @@
       "framing": "埼玉が昼夜人口比率で全国最下位の理由──高密度なのに昼間だれもいない",
       "expectedLift": 13,
       "impressions": 285,
-      "ctr_before": 0.014
+      "ctr_before": 0.014,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -86,7 +186,8 @@
       "framing": "最低賃金トップの東京が高卒初任給で三重に負ける理由",
       "expectedLift": 12,
       "impressions": 390,
-      "ctr_before": 0.0179
+      "ctr_before": 0.0179,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -94,7 +195,8 @@
       "framing": "東京は婚姻率トップなのに出生率は全国最低──結婚と出産が切り離された都市の構造",
       "expectedLift": 12,
       "impressions": 275,
-      "ctr_before": 0.0145
+      "ctr_before": 0.0145,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -102,7 +204,8 @@
       "framing": "飲食料品店が高知に最も多く神奈川に最も少ない──商業効率と生活インフラの逆転現象",
       "expectedLift": 10,
       "impressions": 153,
-      "ctr_before": 0.0131
+      "ctr_before": 0.0131,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -110,7 +213,8 @@
       "framing": "愛媛のマダイが漁獲量10倍の北海道と産出額で並ぶ理由──養殖特化が変える水産業の稼ぎ方",
       "expectedLift": 10,
       "impressions": 133,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -118,7 +222,8 @@
       "framing": "婚姻年齢が1歳違うと出生率は0.1ポイント下がる──九州と首都圏で差が生まれる構造的理由",
       "expectedLift": 9,
       "impressions": 148,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -126,7 +231,8 @@
       "framing": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",
       "expectedLift": 8,
       "impressions": 231,
-      "ctr_before": 0.0173
+      "ctr_before": 0.0173,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -134,7 +240,8 @@
       "framing": "タクシー2.5倍・バス2倍・トラック1.7倍──職種間格差の構造的理由",
       "expectedLift": 12,
       "impressions": 67,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -142,7 +249,8 @@
       "framing": "埼玉730万人でも地方税薄い──法人税収が東京に流れるベッドタウン構造",
       "expectedLift": 6,
       "impressions": 109,
-      "ctr_before": 0.0183
+      "ctr_before": 0.0183,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -150,7 +258,8 @@
       "framing": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプ分類",
       "expectedLift": 4,
       "impressions": 155,
-      "ctr_before": 0.0065
+      "ctr_before": 0.0065,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -158,7 +267,8 @@
       "framing": "東京は婚姻率トップなのに出生率最下位──結婚→子どもが成立しない構造",
       "expectedLift": 3,
       "impressions": 51,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -166,7 +276,8 @@
       "framing": "奈良賃金16位・県民所得44位──稼ぎが地域外に流れるベッドタウン構造",
       "expectedLift": 3,
       "impressions": 25,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -174,7 +285,8 @@
       "framing": "地方の最低賃金上昇率が高いのに絶対格差が拡大する逆説の構造",
       "expectedLift": 2,
       "impressions": 20,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -182,7 +294,8 @@
       "framing": "東京トップは「飲み歩き集計」の罠──居住地補正で変わる飲酒地図",
       "expectedLift": 9,
       "impressions": 66,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -190,7 +303,8 @@
       "framing": "郵便局もデジタルも届かない地域の二重インフラ不足構造",
       "expectedLift": 6,
       "impressions": 78,
-      "ctr_before": 0.0128
+      "ctr_before": 0.0128,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -198,7 +312,8 @@
       "framing": "人口が減った地域ほど美容室が増える──分母縮小と出店ブームの逆説",
       "expectedLift": 4,
       "impressions": 34,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -206,7 +321,8 @@
       "framing": "財政力指数が唯一1.0超えたのは東京だけ──47都道府県で自立の条件",
       "expectedLift": 3,
       "impressions": 25,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -214,7 +330,8 @@
       "framing": "上水道98%完備 vs 下水道徳島22%──77ポイント格差が生じた理由",
       "expectedLift": 3,
       "impressions": 39,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -222,7 +339,8 @@
       "framing": "沖縄はかつて薬局密度の全国最高──医薬分業で追い抜かれた逆転構造",
       "expectedLift": 2,
       "impressions": 15,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -230,7 +348,8 @@
       "framing": "求人倍率トップの福井で失業率も最低──北陸が「雇用最強県」になった理由",
       "expectedLift": 5,
       "impressions": 66,
-      "ctr_before": 0.0152
+      "ctr_before": 0.0152,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -238,7 +357,8 @@
       "framing": "商業地が広い県ほど地価が下がる──面積と価値が逆転する地方の二極化",
       "expectedLift": 4,
       "impressions": 27,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -247,7 +367,8 @@
       "expectedLift": 3,
       "impressions": 21,
       "ctr_before": 0,
-      "note": "agent reported ict-communication-cost-burden-ranking, actual slug: communication-cost-burden"
+      "note": "agent reported ict-communication-cost-burden-ranking, actual slug: communication-cost-burden",
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -255,7 +376,8 @@
       "framing": "同じ3%インフレでも奈良は食料高、愛媛は電気代高──インフレの型が県で異なる",
       "expectedLift": 2,
       "impressions": 56,
-      "ctr_before": 0.0179
+      "ctr_before": 0.0179,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -263,7 +385,8 @@
       "framing": "不登校が最少の福井、最多の宮城──小中一貫して「低不登校県」になる条件",
       "expectedLift": 2,
       "impressions": 32,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -271,7 +394,8 @@
       "framing": "費目別3構造（食料主導・エネルギー主導・穏やか型）で家計防衛を整理",
       "expectedLift": 7,
       "impressions": 82,
-      "ctr_before": 0.0122
+      "ctr_before": 0.0122,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -279,7 +403,8 @@
       "framing": "産地北海道が最下位圏・北前船ルートが消費地図を規定するパラドックス",
       "expectedLift": 5,
       "impressions": 34,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -287,7 +412,8 @@
       "framing": "新幹線開業でも石川どまり、空港ハブ・ブランド資源・新幹線の3要因で構造分析",
       "expectedLift": 4,
       "impressions": 34,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -295,7 +421,8 @@
       "framing": "1990年入管法改正×自動車産業立地×チェーンマイグレーションの3層構造",
       "expectedLift": 2,
       "impressions": 18,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -303,7 +430,8 @@
       "framing": "三重突出の理由と4クラスター構造、外食化が家計調査を押し下げる仕組み",
       "expectedLift": 2,
       "impressions": 19,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -311,7 +439,8 @@
       "framing": "アイス+32%、ぎょうざだけ-8%──品目単位の取捨選択という構造的発見",
       "expectedLift": 7,
       "impressions": 37,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -319,7 +448,8 @@
       "framing": "汚染施設最多の北海道が公害苦情最少──距離と密度の法則",
       "expectedLift": 3,
       "impressions": 62,
-      "ctr_before": 0.0161
+      "ctr_before": 0.0161,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -327,7 +457,8 @@
       "framing": "転入超過の首都圏3県が昼夜間人口最下位──通勤帝国の二重構造",
       "expectedLift": 3,
       "impressions": 28,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -335,7 +466,8 @@
       "framing": "福島が土木費断トツ──復興財政が10年後も歳出構造を縛る",
       "expectedLift": 2,
       "impressions": 16,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -343,7 +475,8 @@
       "framing": "サービス業最多の東京が失業率中位──業種の質という盲点",
       "expectedLift": 2,
       "impressions": 13,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -351,7 +484,8 @@
       "framing": "「東京晩婚安定型 vs 沖縄早婚流動型」二系統構造",
       "expectedLift": 7,
       "impressions": 50,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -359,7 +493,8 @@
       "framing": "「家賃×住宅面積の負の相関」地方住居コスト優位",
       "expectedLift": 4,
       "impressions": 71,
-      "ctr_before": 0.0141
+      "ctr_before": 0.0141,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -367,7 +502,8 @@
       "framing": "「高リサイクル鳥取でも処分場46位」パラドックス",
       "expectedLift": 3,
       "impressions": 60,
-      "ctr_before": 0.0167
+      "ctr_before": 0.0167,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -375,7 +511,8 @@
       "framing": "財政力と出生率の逆相関──東京0.99・沖縄1.60の逆説",
       "expectedLift": 2,
       "impressions": 25,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -383,7 +520,8 @@
       "framing": "「交通費型 vs 通信費型」デジタル格差の構造的二分",
       "expectedLift": 1,
       "impressions": 12,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -391,7 +529,8 @@
       "framing": "人手不足の地方ほど最低賃金が低い逆説──需給では説明できない構造",
       "expectedLift": 7,
       "impressions": 118,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -399,7 +538,8 @@
       "framing": "高齢化率が低くても子どもが少ない東京の隠れた少子化構造",
       "expectedLift": 3,
       "impressions": 39,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -407,7 +547,8 @@
       "framing": "貯蓄率トップの埼玉が預金残高では中位──フローとストックは無相関",
       "expectedLift": 3,
       "impressions": 20,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -415,7 +556,8 @@
       "framing": "大阪下位・奈良トップ圏──経済都市と世帯収入ランキングが逆転する理由",
       "expectedLift": 2,
       "impressions": 25,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     },
     {
       "date": "2026-05-25",
@@ -423,7 +565,8 @@
       "framing": "身長差3cmが半世紀変わらない──東北上位・西日本下位の持続構造",
       "expectedLift": 1,
       "impressions": 10,
-      "ctr_before": 0
+      "ctr_before": 0,
+      "wave_id": "2026-05-25-auto"
     }
   ]
 }

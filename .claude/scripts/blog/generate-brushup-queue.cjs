@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 /**
+ * ⚠ SUPERSEDED (2026-05-27): plan-blog-from-gsc SKILL の generate-gsc-driven-plan.mjs が
+ *   新世代の brushup queue 生成ロジック。本 script はどの SKILL.md からも参照されておらず、
+ *   Phase D で削除予定 (~/.claude/plans/recursive-purring-planet.md)。
+ *
  * generate-brushup-queue.cjs
  * GSC pages.csv からブログ記事の改善優先度キューを生成する。
  * - .claude/state/metrics/blog/history.csv に週次スコアを追記

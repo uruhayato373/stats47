@@ -2,22 +2,25 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-25
+updated: 2026-05-27
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
-## [BLOG-CTR-06] 大量 brushup 54 記事 (curiosity gap framing + factual cross-check 強化)
+## [BLOG-WAVE-2026-05-25-auto] curiosity gap auto-brushup 54 記事 (legacy: BLOG-CTR-06)
 
 - **status**: pending
+- **wave_id**: `2026-05-25-auto`
+- **legacy_section_ids**: BLOG-CTR-06
 - **tier**: 1
 - **target_metric**: blog-ctr
 - **owner**: claude
 - **deployed_at**: 2026-05-25
 - **due**: 2026-06-22 (4 週後 effect 計測)
-- **predecessor**: BLOG-CTR-05
+- **predecessor_wave**: `2026-05-23-manual` (10 記事のうち 8 記事を本 wave で再上書き → 純粋効果分離不能)
+- **history_source**: `.claude/state/blog/auto-brushup-history.json` (53 entries, wave_id="2026-05-25-auto")
 - **session-handoff**: [`docs/04_レビュー/session-handoff/2026-05-25-blog-factual-check-system.md`](../04_レビュー/session-handoff/2026-05-25-blog-factual-check-system.md)
 
 ### 改修内容
@@ -182,54 +185,18 @@ rice-harvest brushup の手動作業 (1 時間/記事) を 187 記事に適用�
 - /category 17 ページ: 全体的に SERP 露出向上、+20 clicks/週 (+80/月)
 - 合計: +120 clicks/月
 
-## [BLOG-CTR-04] 高インプレ × 低 CTR Tier 2 (5 記事) の seoTitle 改修
+## [BLOG-WAVE-2026-05-23-manual] Top 10 高インプレ × 低 CTR の seoTitle/description 手動改修 (legacy: BLOG-CTR-03 + BLOG-CTR-04)
 
 - **status**: pending
+- **wave_id**: `2026-05-23-manual`
+- **legacy_section_ids**: BLOG-CTR-03 (Top 5) + BLOG-CTR-04 (Tier 2)
 - **tier**: 2
 - **target_metric**: blog-ctr
 - **owner**: claude
 - **deployed_at**: 2026-05-23
 - **due**: 2026-06-20 (W25 4 週後)
+- **successor_wave**: `2026-05-25-auto` (2 日後に 8/10 記事を再上書き)
 - **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
-- **predecessor**: BLOG-CTR-03
-
-### 対象 (W21 GSC)
-
-| slug | imp | clicks | CTR | 改修ポイント |
-|---|---|---|---|---|
-| overnight-guests-inbound-recovery | 364 | 1 | 0.27% | 「コロナで半減→V字回復」「54倍差」を効果的に組み合わせ |
-| fishery-species-prefecture-specialty | 269 | 3 | 1.12% | 「北海道がホタテ99%独占」「イワシ86%減」 |
-| population-density-urbanization | 231 | 2 | 0.87% | 「埼玉が昼夜人口比率最下位の意外」 |
-| consumer-price-regional-gap | 230 | 1 | 0.43% | 「物価格差の真因は家賃」(住居 1.56 倍 vs 食料 1.08 倍) |
-| park-green-space-gap | 213 | 2 | 0.94% | 「自然公園 vs 都市公園」の逆転 |
-
-### 想定効果
-
-- 改修前合計: 9 clicks/週 (1,307 imp、平均 CTR 0.69%)
-- 改修後想定 (CTR 3%): 39 clicks/週
-- **+30 clicks/週 (+130/月)**
-
-BLOG-CTR-03 (+515/月) と合わせて **計 +645 clicks/月** が Top 10 brushup の最大効果。
-
-### 検証
-
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 <観測週>`
-- **検証期日**: 2026-06-20 (W25, 4 週後)
-- **期日後の判定**:
-  - 5 記事合計 clicks ≥ 30/週 → effect/full
-  - 15-30/週 → effect/partial
-  - < 15/週 → effect/none
-
-## [BLOG-CTR-03] 高インプレ × 低 CTR Top 5 記事の seoTitle/description 改修 (curiosity gap パターン適用)
-
-- **status**: pending
-- **tier**: 2
-- **target_metric**: blog-ctr
-- **owner**: claude
-- **deployed_at**: 2026-05-23
-- **due**: 2026-06-20 (W25 4 週後の効果計測)
-- **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
-- **verification_command**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 2026-W25`
 
 ### 背景
 
@@ -242,52 +209,61 @@ BLOG-CTR-03 (+515/月) と合わせて **計 +645 clicks/月** が Top 10 brushu
 失敗パターン (sugar-consumption-prefecture-gap, W19 新規 6 本 CTR 0%):
 - タイトル: 「砂糖消費量1位は三重5kg・最下位東京」 (事実羅列、フック無し)
 
-### 対象 (高インプレ × 低 CTR Top 5)
+### 対象 10 記事
 
-| slug | 改修前 impressions / clicks / CTR / position | 改修前 seoTitle |
-|---|---|---|
-| `child-height-regional-gap` | 1,597 / 12 / 0.75% / 10.68 | 中学生身長ランキング2023｜秋田163.6cm・1位、高知159.7cmで3.9cm差 |
-| `price-index-high-low-prefecture` | 1,373 / 26 / 1.9% / 8.50 | 物価ランキング2024｜東京104.0が全国1位、群馬96.2と7.8pt差 |
-| `temperature-extremes-map` | 1,337 / 20 / 1.5% / 9.14 | 年平均気温ランキング2024｜沖縄24.4℃・47都道府県、北海道と14℃差 |
-| `habitable-area-land-use` | 643 / 2 / **0.31%** / 8.15 | 可住地面積割合ランキング2026｜大阪70.0%・全国1位、高知16.3%で4.3倍差 |
-| `fiscal-self-reliance-gap` | 549 / 14 / 2.5% / 8.83 | 都道府県別の財政力指数ランキング｜自前で稼げる自治体はどこか |
+**Top 5 (高 impressions、CTR 1-2%、旧 BLOG-CTR-03)**
 
-### 改修内容 (curiosity gap パターン)
+| slug | imp (W21) | clicks | CTR | 改修後 seoTitle (要点) | successor で再上書き? |
+|---|---|---|---|---|---|
+| `child-height-regional-gap` | 1,597 | 12 | 0.75% | なぜ東北が高い? | ✅ lift=129 |
+| `price-index-high-low-prefecture` | 1,373 | 26 | 1.9% | 住居費だけ1.6倍格差 | ✅ lift=48 |
+| `temperature-extremes-map` | 1,337 | 20 | 1.5% | 猛暑日は京都が全国1位の意外 | ✅ lift=105 |
+| `habitable-area-land-use` | 643 | 2 | 0.31% | 人口密度の真因が見える | ✅ lift=69 |
+| `fiscal-self-reliance-gap` | 549 | 14 | 2.5% | 唯一「自立」できる47都道府県は | ❌ 本 wave のみ |
 
-| slug | 改修後 seoTitle (要点) |
-|---|---|
-| `child-height-regional-gap` | 「中学生の身長は県で3.9cm違う｜**なぜ東北が高い?**」 |
-| `price-index-high-low-prefecture` | 「**住居費だけ1.6倍格差**、47都道府県別」(食料は0.5倍だが住居は1.6倍の対比) |
-| `temperature-extremes-map` | 「**猛暑日は京都が全国1位**の意外」(沖縄ではなく京都という逆転) |
-| `habitable-area-land-use` | 「人口密度の真因が見える」(なぜ面積1位の北海道が人口密度1位ではないか) |
-| `fiscal-self-reliance-gap` | 「**唯一「自立」できる47都道府県**は」(東京 1.06 が唯一の「1超」) |
+**Tier 2 (低 CTR、旧 BLOG-CTR-04)**
 
-各 description にも「同じ日本でも...」「なぜ...?」 など緊張感セットアップを追加。
+| slug | imp (W21) | clicks | CTR | 改修ポイント | successor で再上書き? |
+|---|---|---|---|---|---|
+| `overnight-guests-inbound-recovery` | 364 | 1 | 0.27% | コロナ半減→V字回復・54倍差 | ❌ 本 wave のみ |
+| `fishery-species-prefecture-specialty` | 269 | 3 | 1.12% | ホタテ99%独占・イワシ86%減 | ✅ lift=20 |
+| `population-density-urbanization` | 231 | 2 | 0.87% | 埼玉が昼夜人口比率最下位 | ✅ lift=13 |
+| `consumer-price-regional-gap` | 230 | 1 | 0.43% | 物価格差の真因は家賃 | ✅ lift=23 |
+| `park-green-space-gap` | 213 | 2 | 0.94% | 自然公園 vs 都市公園の逆転 | ✅ lift=29 |
 
 ### 想定効果
 
-**[仮説]** 5 記事合計で:
-- 改修前 clicks: 74/週 (平均 CTR 1.5%)
-- 改修後想定 CTR: 3.5% (業界平均、position 8-11 帯)
-- 改修後 clicks: 175/週 → **+101 clicks/週 (+540/月)**
+- Top 5 改修前合計: 74 clicks/週 → 想定 175 clicks/週 (+101/週, +540/月)
+- Tier 2 改修前合計: 9 clicks/週 → 想定 39 clicks/週 (+30/週, +130/月)
+- **合計 +131 clicks/週 (+645 clicks/月)**
 
-**根拠**: Backlinko 2023 業界平均で position 8-11 帯の CTR は 3-5%。今回 0.3-2.5% から 3% 台への上昇は curiosity gap 効果の標準的な範囲。最も改善余地が大きいのは habitable-area (0.31% → 3.0% で +9.7x の clicks)。
+根拠: Backlinko 2023 業界平均で position 8-11 帯の CTR は 3-5%。今回 0.3-2.5% から 3% 台への上昇は curiosity gap 効果の標準的な範囲。
+
+### 純粋効果分離の限界 ⚠
+
+10 記事のうち 8 記事が successor wave (`2026-05-25-auto`) で再上書きされたため、**純粋な本 wave 効果が分離計測可能なのは 2 記事のみ**:
+
+- `fiscal-self-reliance-gap`
+- `overnight-guests-inbound-recovery`
+
+残り 8 記事は successor wave との合算効果として記録 (どちらの寄与かは分離不能)。判定は分離可能 2 記事のみで行い、8 重複記事は合算 KPI 監視に留める。
 
 ### 検証
 
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs 2026-W21 <観測週>`
-- **検証期日**: 2026-06-20 (4 週後の GSC snapshot で確定)
-- **期日後の判定**:
-  - 5 記事合計 clicks ≥ 150/週 → effect/full
-  - 100-150/週 → effect/partial
-  - < 100/週 → effect/none、次の検証: 本文イントロも書き換え or h1 修正
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual --baseline 2026-W21 --observation 2026-W25` (Phase D で wave_id 駆動に書き換え予定、現状は legacy CLI)
+- **検証期日**: 2026-06-20 (W25)
+- **判定基準** (純粋効果分離可能な 2 記事のみ):
+  - 2 記事合計 clicks ≥ 30/週 → effect/full
+  - 15-30/週 → effect/partial
+  - < 15/週 → effect/none、次の検証: 本文イントロも書き換え or h1 修正
+- **8 重複記事**: 合算で監視のみ (本 wave の effect/* に反映しない)
 
-### デプロイ手順 (今回実施)
+### デプロイ手順 (履歴)
 
-1. `.local/r2/app/blog/{slug}/article.md` の frontmatter (seoTitle, description) を編集 (5 記事)
-2. `npm run articles:sync-from-r2 --workspace=packages/database` で D1 articles テーブル更新 (193件中 5 件が実質変更)
-3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push (6 files updated)
-4. 本 commit を develop → main PR で Cloudflare Pages rebuild trigger
+1. `.local/r2/app/blog/{slug}/article.md` の frontmatter (seoTitle, description) を編集 (10 記事)
+2. `npm run articles:sync-from-r2 --workspace=packages/database` で D1 articles テーブル更新
+3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
+4. develop → main PR で Cloudflare Pages rebuild trigger
 
 ## [P0-RANKING-INDEX] /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸)
 
