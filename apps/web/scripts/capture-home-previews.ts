@@ -44,6 +44,8 @@ interface CaptureTarget {
   recordVideo: boolean;
   /** 動画録画中の操作 (Playwright Page を受け取る) */
   videoAction?: (page: Page) => Promise<void>;
+  /** ナビゲーション待機戦略。networkidle が厳しすぎるページは "domcontentloaded" にする */
+  waitUntil?: "load" | "domcontentloaded" | "networkidle";
 }
 
 const TARGETS: CaptureTarget[] = [
@@ -88,7 +90,8 @@ const TARGETS: CaptureTarget[] = [
   },
   { key: "areas", pathOnSite: "/areas", recordVideo: false },
   { key: "blog", pathOnSite: "/blog", recordVideo: false },
-  { key: "survey", pathOnSite: "/survey", recordVideo: false },
+  // /survey は networkidle 到達に >4 分かかるため domcontentloaded に切替 (2026-05-27 検証)
+  { key: "survey", pathOnSite: "/survey", recordVideo: false, waitUntil: "domcontentloaded" },
   { key: "search", pathOnSite: "/search?q=人口", recordVideo: false },
 ];
 
@@ -127,10 +130,11 @@ async function captureScreenshot(
     });
     const page = await context.newPage();
     const url = `${baseUrl}${target.pathOnSite}`;
-    console.log(`[screenshot] ${url}`);
-    await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
-    // 画像/フォント描画落ち着き待ち
-    await page.waitForTimeout(1000);
+    const waitUntil = target.waitUntil ?? "networkidle";
+    console.log(`[screenshot] ${url} (waitUntil=${waitUntil})`);
+    await page.goto(url, { waitUntil, timeout: 60000 });
+    // 画像/フォント描画落ち着き待ち (domcontentloaded はネットワーク完了を待たないため長めに)
+    await page.waitForTimeout(waitUntil === "networkidle" ? 1000 : 4000);
     const pngBuffer = await page.screenshot({ type: "png", fullPage: false });
     const outPath = path.join(outputDir, `${target.key}.avif`);
     await sharp(pngBuffer)
@@ -164,8 +168,9 @@ async function captureVideo(
     });
     const page = await context.newPage();
     const url = `${baseUrl}${target.pathOnSite}`;
-    console.log(`[video] ${url}`);
-    await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
+    const waitUntil = target.waitUntil ?? "networkidle";
+    console.log(`[video] ${url} (waitUntil=${waitUntil})`);
+    await page.goto(url, { waitUntil, timeout: 60000 });
     if (target.videoAction) await target.videoAction(page);
     else await page.waitForTimeout(3000);
     await context.close();

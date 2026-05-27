@@ -30,7 +30,6 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
-import { AreaMigrationFlowSection } from "@/features/migration-flow";
 import { RightRailWidgets } from "@/features/redesign";
 
 
@@ -150,12 +149,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     {/* DB管理チャート */}
                     <AreaChartSection
                         areaCode={areaCode}
-                        areaName={profile.areaName}
-                    />
-
-                    {/* 人口移動フロー（遅延ロード） */}
-                    <AreaMigrationFlowSection
-                        prefCode={areaCode.slice(0, 2)}
                         areaName={profile.areaName}
                     />
 

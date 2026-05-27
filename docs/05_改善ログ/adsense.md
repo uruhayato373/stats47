@@ -37,6 +37,97 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 
 ---
 
+## [ADSENSE-OAUTH-01] ローカル .env.local の OAuth refresh_token 再認証
+
+- **status**: pending
+- **tier**: 1
+- **blocker**: local AdSense snapshot 取得が不可 (GHA 側は別系統で取得継続)
+- **target_metric**: adsense-data-pipeline
+- **owner**: uruhayato373
+- **due**: 2026-06-07
+- **related_memory**: `~/.claude/projects/-Users-minamidaisuke-stats47/memory/project_adsense_local_oauth_expired.md`
+- **related_review**: 2026-05-16-session-summary.md (削除済、critical-review カバレッジ整理から移行)
+
+### 背景
+
+2026-05-16 に local の `GOOGLE_ADSENSE_REFRESH_TOKEN` (.env.local) が `invalid_grant` を返した。Google Testing OAuth は約 3 週間未使用で refresh_token 失効する仕様。GitHub Actions の secret は別系統で 2026-05-17 に更新済 (W21 snapshot は GHA 経由で取得可) だが、ローカルから `/fetch-adsense-data` 実行不能。
+
+### 施策
+
+`.claude/skills/analytics/fetch-adsense-data/oauth-setup/` の対話スクリプトで再認証 → 新 refresh_token を `.env.local` の `GOOGLE_ADSENSE_REFRESH_TOKEN` に保存。
+
+### 検証
+
+- **検証コマンド**: `/fetch-adsense-data last7d` がローカルで成功 (`invalid_grant` エラーが出ない)
+- **検証期日**: 2026-06-07
+- **期日後の判定**: ローカル取得成功 → effect/full
+
+## [ADSENSE-RPM-01] レバー A: RPM ¥36 → ¥65 (Viewability 54%→70%+)
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: adsense-rpm
+- **owner**: claude
+- **due**: 2026-06-30
+- **related_review**: 2026-05-21-monetization.md (削除済、critical-review カバレッジ整理から移行)
+
+### 背景
+
+W21 (05/13-19) ベースライン: RPM ¥36、Viewability 54.3% (W17 の 61.9% から低下 — Impression 増で深い枠が増え希釈)。月 ¥10,000 (= 38x) のうちレバー A で **約 1.8x** を 2 ヶ月で取り切る想定。
+
+### 施策
+
+1. 自動広告 (Anchor + Vignette) ON を維持しつつ Viewability を計測 (モバイル Anchor は 2026-05-20 実施済)
+2. ファーストビュー直下に手動枠 1 つ寄せ、Viewability 54% → 70%+ を狙う
+3. **PR #321 マージ前提**: `feature/adsense-placement-optimization` / `feature/adsense-all-pages` を develop → main へマージし、全 page_key に枠が載った状態で W24/W25 計測
+
+### 想定効果
+
+- 想定: RPM ¥36 → ¥55-65 (保守 1.5x / 標準 1.8x、統計コンテンツ天井 ¥75)
+- 根拠: Viewability 54%→72% で Impression 当り収益が比例増 (`2026-05-21-monetization.md` レバー A)
+
+### 検証
+
+- **検証コマンド**: `node .claude/scripts/metrics/fetch-adsense-snapshot.mjs 2026-W24 && cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W24/devices.csv`
+- **検証期日**: 2026-06-30 (W26)
+- **期日後の判定**:
+  - RPM ≥ ¥50 → effect/full
+  - ¥40 ≤ RPM < ¥50 → effect/partial
+  - RPM < ¥40 → effect/none (自動広告/配置見直し)
+
+## [ADSENSE-DELIVERY-01] レバー B: デリバリー率 0.93 → 1.05 (lazyLoad 緩和)
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: adsense-delivery
+- **owner**: claude
+- **due**: 2026-06-21
+- **blocked_by**: PSI 日次計測の baseline 安定化 (LCP 悪化監視)
+- **related_review**: 2026-05-21-monetization.md (削除済、critical-review カバレッジ整理から移行)
+
+### 背景
+
+W21 で Impressions/PV 0.93 まで改善済 (W17 の 0.42 から)。残課題は `AdSenseScript.tsx` の 3,000ms 遅延 + `AdSenseAd.tsx` の lazyLoad `rootMargin`。Mobile LCP 5-19 秒の土台で深い枠が描画前離脱 → 発火しない。
+
+### 施策
+
+1. `AdSenseScript.tsx` の 3,000ms 遅延を測定しながら段階的に短縮 (3000 → 2000 → 1000ms の A/B)
+2. `AdSenseAd.tsx` の lazyLoad `rootMargin` を緩和 (例: 0px → 200px)
+3. 各変更後 PSI 日次計測で LCP 悪化を監視、ADVERSE なら roll back
+
+### 想定効果
+
+- 想定: 0.93 → 1.05 (1.1x)、これ以上は LCP 改善前提
+- 根拠: lazyLoad rootMargin を広げた分だけ広告 request が増える比例関係
+
+### 検証
+
+- **検証コマンド**: 施策後 2 週で `Impressions/PV` を計測、並行で `.claude/state/metrics/psi/LATEST.md` の Mobile LCP を確認
+- **検証期日**: 2026-06-21 (W25)
+- **期日後の判定**:
+  - Impressions/PV ≥ 1.05 AND LCP 悪化 +200ms 以内 → effect/full
+  - Impressions/PV 増 + LCP 悪化 +500ms 超 → effect/adverse (roll back)
+
 ## [ADSENSE-MOBILE-01] モバイル広告の位置改善（深すぎる配置の是正）
 
 - **status**: deployed-unverified

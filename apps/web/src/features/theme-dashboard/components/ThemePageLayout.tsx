@@ -10,6 +10,7 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
+import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import {
   HeroShell,
   KpiGrid,
@@ -128,6 +129,12 @@ export async function ThemePageLayout({ theme, data }: Props) {
         pageCharts={pageCharts}
         kpiDataByArea={kpiDataByArea}
       />
+
+      {theme.themeKey === "population-dynamics" && (
+        <div className="mt-8">
+          <ThemeMigrationFlowSection />
+        </div>
+      )}
 
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">
