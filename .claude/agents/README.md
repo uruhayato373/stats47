@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: 17 → 32 体への細分化移行中** (詳細: 移行ステータス表)。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。
+**現在: Phase 1-5 完了 (34 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済、残る縮退 agent は新 agent に役割委譲済。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -111,7 +111,7 @@
 
 ## 移行ステータス
 
-Phase 3 で旧 agent の役割縮退記述に Edit する。**Phase 3 完了までは旧 agent も併用可**。
+**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 137 SKILL.md に `primary_agent` frontmatter 付与 → 縮退 agent の primary を新 agent に再割当 → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 / 2 / 7 完了、Cluster 3 / 4 は RECONSIDER 系として統合済、Cluster 5 / 6 は対象 skill が Phase 6.7 で消滅 or 統合不適 (KEEP-SKIP) のため見送り。
 
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|
