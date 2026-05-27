@@ -131,7 +131,7 @@ export function TrendSparklineCard({
             全国平均の推移
           </CardTitle>
         </CardHeader>
-        <CardContent className="px-4 pb-4 pt-0">
+        <CardContent className="px-4 pb-4 pt-3">
           <Skeleton className="h-[60px] w-full" />
         </CardContent>
       </Card>
@@ -148,7 +148,7 @@ export function TrendSparklineCard({
           全国平均の推移
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="px-4 pb-4 pt-3">
         <Sparkline
           data={yearlyAverages.map((y) => y.average)}
           width={232}

@@ -78,7 +78,7 @@ export function NextUpGrid({
           </Link>
         )}
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-3">
         <div className={`grid gap-3 ${COLUMN_CLASS[columns]}`}>
           {items.map((item, i) => {
             const accent = item.accent ?? DEFAULT_ACCENTS[i % DEFAULT_ACCENTS.length];

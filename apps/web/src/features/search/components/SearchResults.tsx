@@ -104,7 +104,7 @@ function RankingResultCard({ result }: { result: SearchResult }) {
                         </Badge>
                     </div>
                 </CardHeader>
-                <CardContent className="pb-3 px-4 pt-0">
+                <CardContent className="pb-3 px-4 pt-3">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground ml-6">
                         {result.latestYear && (
                             <span className="font-medium text-foreground">{result.latestYear}</span>
@@ -156,7 +156,7 @@ function BlogResultCard({ result }: { result: SearchResult }) {
                         </Badge>
                     </div>
                 </CardHeader>
-                <CardContent className="pb-3 px-4 pt-0">
+                <CardContent className="pb-3 px-4 pt-3">
                     <p className="text-sm text-muted-foreground ml-6 line-clamp-2">
                         {result.description}
                     </p>

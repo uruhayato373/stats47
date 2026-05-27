@@ -42,7 +42,7 @@ function RankingCard({
                     {title}（{items.length}件）
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-3 pb-3 pt-0">
+            <CardContent className="px-3 pb-3 pt-3">
                 <TooltipProvider delayDuration={300}>
                     <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
                         {items.map((item) => (

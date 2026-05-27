@@ -56,7 +56,7 @@ export function PrefectureHighlightCard({
           あなたの県は？
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="px-4 pb-4 pt-3">
         <Select value={selectedArea} onValueChange={setSelectedArea}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="都道府県を選択" />

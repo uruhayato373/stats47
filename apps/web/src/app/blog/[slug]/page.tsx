@@ -322,7 +322,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <CardHeader className="py-3 px-4">
                                 <CardTitle className="text-base">関連書籍</CardTitle>
                             </CardHeader>
-                            <CardContent className="p-4 pt-0">
+                            <CardContent className="p-4 pt-3">
                                 <ArticleRelatedBooks tagKeys={tagKeys} compact />
                             </CardContent>
                         </Card>
@@ -373,7 +373,7 @@ function BlogRelatedArticlesSection({
             <CardHeader className="py-4 px-4">
                 <CardTitle className="text-base">関連記事</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 pt-0">
+            <CardContent className="p-4 pt-3">
                 <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
                     {filtered.map((article) => (
                         <Link

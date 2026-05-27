@@ -33,7 +33,7 @@ export async function RelatedGroupCard({
           同じ指標の別の見方
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="px-4 pb-4 pt-3">
         <nav className="flex flex-col gap-1">
           {result.data.map((item) => {
             const label = item.normalizationBasis

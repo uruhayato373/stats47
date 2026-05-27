@@ -40,7 +40,7 @@ export function ArticleTableOfContents({
           目次
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-3">
         <nav aria-label="記事の目次">
           <ol className="space-y-1.5 text-sm">
             {headings.map((h, idx) => (

@@ -46,7 +46,7 @@ export function TopAreasCard({
           上位の都道府県
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="px-4 pb-4 pt-3">
         <nav className="flex flex-col gap-1">
           {top5.map((v) => (
             <Link
