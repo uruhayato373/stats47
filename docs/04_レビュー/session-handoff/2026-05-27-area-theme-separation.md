@@ -1,10 +1,11 @@
 ---
 type: session-handoff
 date: 2026-05-27
-status: in-progress
-branch: claude/gallant-albattani-wxxhJ
+status: partially-completed
+branch: develop
 commit: 86dcd47
 tags: [handoff, area-theme-separation, page-components, migration-flow, homepage-previews]
+note: "追加タスク (homepage previews) は 2026-05-27 完了。残: area/theme 責務分離 STEP 1-6"
 ---
 
 # Session Handoff — 2026-05-27 (area / theme 責務分離・page_components 棚卸し基盤 + homepage previews)
@@ -223,3 +224,50 @@ wrangler r2 object put stats47/app/home/previews/ranking.avif \
 2. **video autoplay**: モバイル Safari は `muted playsinline` 必須 → 既に対応済み
 3. **sharp install 失敗**: Cloudflare Pages build には sharp 不要 (script 側のみ使用)。`.npmrc` で `optional=false` してない限り問題ない
 4. **動画サイズ超過**: ffmpeg の `-b:v 300k -crf 35` は目安。実測で 150KB を超える場合は CRF を上げる
+
+---
+
+## ✅ 完了 (2026-05-27) — homepage previews
+
+実行 plan: `~/.claude/plans/b-goal-inherited-locket.md`
+
+### 実施内容
+
+1. **ローカル撮影** — `npx tsx apps/web/scripts/capture-home-previews.ts --base-url https://stats47.jp --output /tmp/home-previews`
+   - 1 ファイルだけ `/survey` で networkidle timeout (30 秒超過) → ad-hoc に `domcontentloaded` + 4s wait で再撮影 (19.2 KB)
+   - その他 7 ファイルは元スクリプトのまま一発成功
+2. **R2 push** — `npx wrangler r2 object put stats47/app/home/previews/{file} --remote` (×8)
+3. **検証** — 8 アセット全部 `https://storage.stats47.jp/app/home/previews/*` で HTTP 200、トップページ HTML に 8 URL すべて出現
+
+### 生成ファイルサイズ (全 budget 内)
+
+| ファイル | サイズ | budget | OK |
+|---|---|---|---|
+| ranking.avif | 11 KB | 30-50 KB | ✓ |
+| ranking.webm | 31 KB | ~150 KB | ✓ |
+| themes.avif | 23 KB | 30-50 KB | ✓ |
+| themes.webm | 82 KB | ~150 KB | ✓ |
+| areas.avif | 16 KB | 30-50 KB | ✓ |
+| blog.avif | 12 KB | 30-50 KB | ✓ |
+| survey.avif | 19 KB | 30-50 KB | ✓ |
+| search.avif | 15 KB | 30-50 KB | ✓ |
+
+### PSI 実測 (mobile, 2026-05-27T11:02Z, 3 runs)
+
+| 指標 | baseline (2026-05-26) | post-push (2026-05-27) | delta | 判定 |
+|---|---|---|---|---|
+| Perf score | 52 | 50-51 | -1 〜 -2 | within noise |
+| LCP | 6451 ms | 7801 ms | +1350 ms | **要注意 (※注)** |
+| CLS | 0.110 | 0.001-0.110 | varies | within range |
+| TBT | 269 ms | 314-682 ms | +45〜+413 ms | within variance |
+
+> ※ LCP element: hero `<h1>あなたの県は何位？</h1>` (path `1,HTML,1,BODY,4,DIV,1,DIV,2,MAIN,...,H1`)。NextUpGrid の preview 群は below-the-fold + lazy-loaded で **LCP 候補ではない**。delta +1350ms は本 push が原因ではなく、PSI 実行間の variance + baseline (24h 前) との差分。
+
+### 既知の調整候補 (次回以降)
+
+- `/survey` の通常スクリプト経路で networkidle 到達に >4 分かかる問題: `capture-home-previews.ts` の survey だけ waitUntil を `load` に切り替える PR を別途検討
+- LCP 7.8s 自体は別問題として `/themes` 系と並ぶ高優先度。preview と切り離して performance-improvement で追跡
+
+### 月次 cron
+
+`.github/workflows/capture-home-previews-monthly.yml` (cron `0 3 1 * *` = JST 12:00 毎月 1日) が次回 (2026-06-01) から自動更新する。同じ survey timeout が CI で起きる可能性あり (本実行時の手動 retry でカバーした問題なので、CI 失敗時の workflow log で要確認)。
