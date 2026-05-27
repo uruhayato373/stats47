@@ -1,0 +1,74 @@
+{
+  "channel": {
+    "id": "UCdRiwDSX1aUd0dSd7Cs08Kg",
+    "title": "統計で見る都道府県 | stats47",
+    "subscriberCount": 32,
+    "viewCount": 67137,
+    "videoCount": 81
+  },
+  "window": {
+    "days": 14,
+    "recentStart": "2026-05-13",
+    "recentEnd": "2026-05-27",
+    "priorStart": "2026-04-29",
+    "priorEnd": "2026-05-13"
+  },
+  "thresholds": {
+    "viewsThreshold": 50,
+    "minAgeHours": 48
+  },
+  "suspectVideos": [
+    {
+      "videoId": "wjLQCiuEeNI",
+      "title": "都道府県別 鉄道駅ランキング｜全国8565駅 日本一忙しい駅は？",
+      "publishedAt": "2026-05-23T01:18:08Z",
+      "ageHours": 95.8,
+      "views": 4,
+      "likes": 0,
+      "comments": 0
+    }
+  ],
+  "trafficSourceBreakdown": {
+    "recent": {
+      "YT_SEARCH": 86,
+      "YT_CHANNEL": 6,
+      "SHORTS": 5,
+      "EXT_URL": 4,
+      "NOTIFICATION": 2,
+      "NO_LINK_OTHER": 1,
+      "SUBSCRIBER": 1,
+      "RELATED_VIDEO": 1,
+      "YT_OTHER_PAGE": 1
+    },
+    "prior": {
+      "YT_SEARCH": 68,
+      "SHORTS": 5,
+      "EXT_URL": 4,
+      "NOTIFICATION": 4,
+      "SUBSCRIBER": 1,
+      "PLAYLIST": 1,
+      "YT_CHANNEL": 0
+    }
+  },
+  "subscriberDelta": {
+    "recent": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 107
+    },
+    "prior": {
+      "gained": 0,
+      "lost": 0,
+      "net": 0,
+      "views": 82
+    }
+  },
+  "viewsDelta": {
+    "recent": 107,
+    "prior": 82,
+    "changePct": 30.48780487804878
+  },
+  "verdict": "healthy",
+  "verdictReasons": []
+}
