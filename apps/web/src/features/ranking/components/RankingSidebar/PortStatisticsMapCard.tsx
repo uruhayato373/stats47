@@ -31,12 +31,12 @@ export function PortStatisticsMapCard({
       <CardContent className="px-4 pb-4 pt-3">
         <nav className="flex flex-col gap-1">
           <Link
-            href="/ports"
+            href="/themes/ports"
             className="group flex items-start gap-2 px-2 py-1.5 rounded-md hover:bg-accent/50 transition-colors"
           >
             <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0 mt-0.5 group-hover:text-primary transition-colors" />
             <span className="text-sm leading-snug">
-              港湾統計マップで詳しく見る
+              港湾テーマで詳しく見る
             </span>
           </Link>
         </nav>

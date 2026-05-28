@@ -347,6 +347,23 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // /ports・/fishing-ports (廃止 2026-05-28) → /themes に統合
+  //  - /ports → /themes/ports (港湾テーマ新設)
+  //  - /fishing-ports → /themes/fishery-marine (既存「漁業（水産業）」テーマ、漁港数を含む)
+  // 独立ページを廃止し theme に一本化。クエリは保持。
+  if (pathname === "/ports" || pathname === "/ports/") {
+    return NextResponse.redirect(
+      new URL(`/themes/ports${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
+  if (pathname === "/fishing-ports" || pathname === "/fishing-ports/") {
+    return NextResponse.redirect(
+      new URL(`/themes/fishery-marine${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
+
   // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {
     const sp = req.nextUrl.searchParams;

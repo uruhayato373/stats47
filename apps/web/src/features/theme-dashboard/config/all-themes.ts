@@ -17,6 +17,8 @@ import {
   LOCAL_FINANCE_SET,
   LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
+  PORTS_SET,
+  RAILWAY_SET,
 } from "@stats47/types";
 
 import { toThemeConfig } from "../lib/to-theme-config";
@@ -43,4 +45,6 @@ export const ALL_THEMES: ThemeConfig[] = [
   toThemeConfig(LOCAL_FINANCE_SET),
   toThemeConfig(LOCAL_FINANCE_CITY_SET),
   toThemeConfig(FISHERY_MARINE_SET),
+  toThemeConfig(PORTS_SET),
+  toThemeConfig(RAILWAY_SET),
 ];
