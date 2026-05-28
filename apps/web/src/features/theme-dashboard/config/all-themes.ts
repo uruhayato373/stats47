@@ -15,6 +15,7 @@ import {
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
+  LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
 } from "@stats47/types";
 
@@ -40,5 +41,6 @@ export const ALL_THEMES: ThemeConfig[] = [
   toThemeConfig(REAL_INCOME_SET),
   toThemeConfig(LABOR_MOBILITY_SET),
   toThemeConfig(LOCAL_FINANCE_SET),
+  toThemeConfig(LOCAL_FINANCE_CITY_SET),
   toThemeConfig(FISHERY_MARINE_SET),
 ];
