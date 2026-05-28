@@ -20,7 +20,7 @@ import type {
 } from "../lib/types";
 import type { TopoJSONTopology } from "@stats47/types";
 
-import { fetchPrefDetail } from "@/app/gis-cross/depopulation-medical/_actions/fetch-pref-detail";
+import { fetchPrefDetail } from "../actions/fetch-pref-detail";
 
 
 

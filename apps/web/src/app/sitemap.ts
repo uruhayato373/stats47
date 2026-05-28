@@ -69,26 +69,9 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: "daily", priority: 1.0 },
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
-  {
-    url: `${BASE_URL}/gis-cross`,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    url: `${BASE_URL}/gis-cross/depopulation-medical`,
-    changeFrequency: "yearly",
-    priority: 0.6,
-  },
-  {
-    url: `${BASE_URL}/gis-cross/sunshine-map`,
-    changeFrequency: "yearly",
-    priority: 0.6,
-  },
-  {
-    url: `${BASE_URL}/gis-cross/migration-flow`,
-    changeFrequency: "yearly",
-    priority: 0.6,
-  },
+  // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:
+  //  migration-flow → /themes/population-dynamics, depopulation-medical → /themes/healthcare,
+  //  sunshine-map → /themes/climate, hub → /themes。テーマ URL は THEME_PAGES に含まれる。
   { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
   { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },

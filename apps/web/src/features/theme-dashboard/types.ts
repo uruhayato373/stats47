@@ -69,6 +69,13 @@ export interface ThemeConfig {
    * 未指定 or 空配列の場合、ThemePageLayout は関連記事セクションを描画しない。
    */
   relatedArticleTagKeys?: string[];
+  /**
+   * ダッシュボード本体の下に埋め込む GIS マップ section のキー一覧。
+   * THEME_SECTION_REGISTRY (config/theme-section-registry.tsx) に登録された
+   * component を順に描画する。1 つの section を複数テーマから再利用できる
+   * (例: "depopulation-medical" は healthcare と aging-society の両方で使用)。
+   */
+  embeddedSections?: string[];
 }
 
 /** 指標ごとのプリロード済みデータ */

@@ -99,4 +99,5 @@ export {
   PORTS_SET,
   RAILWAY_SET,
   ROADS_SET,
+  CLIMATE_SET,
 } from "./indicator-sets/registry";
