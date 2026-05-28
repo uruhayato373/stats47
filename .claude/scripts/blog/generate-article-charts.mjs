@@ -7,7 +7,14 @@
  * Usage:
  *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>            # 生成 + placeholder 置換
  *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --dry-run  # JSON syntax 検証のみ
- *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate # 生成済 SVG syntax 検証のみ (CI 用)
+ *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate # SVG 品質検証 (CI 用)
+ *
+ * --validate の検査内容:
+ *   data/*.svg と article.md インライン <svg> の両方を対象に、
+ *   - ERROR (CI fail): 構造不正 (viewBox/width/height/閉じタグ欠落)
+ *   - WARN  (可視化のみ): dark mode 非対応 (@media prefers-color-scheme:dark 欠落) /
+ *     theme 依存色の inline 直書き (svg-* class にすべき)
+ *   → 品質統一の決定的ゲート。判断は不要 (コードで一律検査)。
  *
  * チャート種別 (ファイル名パターン):
  *   *-prefecture-rankings.json → bar chart (上位 10 + 下位 10)   [実装済み]
@@ -54,9 +61,13 @@ if (!fs.existsSync(ARTICLE_DIR)) {
   process.exit(1);
 }
 if (!fs.existsSync(DATA_DIR)) {
-  console.warn(`[warn] Data dir not found: ${DATA_DIR}`);
-  console.warn(`[warn] Nothing to process. Exiting 0 (no data dir is a no-op).`);
-  process.exit(0);
+  // --validate は data/ が無くても article.md のインライン SVG を検査するため継続。
+  // それ以外（生成・dry-run）は data/ が無ければ no-op。
+  if (!VALIDATE) {
+    console.warn(`[warn] Data dir not found: ${DATA_DIR}`);
+    console.warn(`[warn] Nothing to process. Exiting 0 (no data dir is a no-op).`);
+    process.exit(0);
+  }
 }
 
 // ---------- helpers ----------
@@ -143,23 +154,93 @@ function genStubSvg(chartType, name) {
 </svg>`;
 }
 
-// ---------- SVG syntax 検証 ----------
+// ---------- SVG lint (構造 ERROR + 品質 WARN) ----------
+//
+// theme 依存色 = ダークモードで追従させるべき背景・文字・グリッド色。
+// これらが inline fill/stroke で直書きされていると <img> 埋め込み時に dark mode で
+// 追従しない（svg-builder の svg-* class + @media prefers-color-scheme で対応すべき）。
+// データ色（棒・ドット・地方ブロックの vivid 色）は light/dark 両対応なので対象外。
+const THEME_DEPENDENT_COLORS = [
+  // 背景
+  "#ffffff", "#fff", "#fafafa", "#f9fafb", "#f8fafc",
+  // 暗いテキスト
+  "#333", "#222", "#111827", "#1f2937", "#374151",
+  // 中間テキスト
+  "#6b7280", "#888", "#999", "#aaa", "#bbb",
+  // グリッド
+  "#e5e7eb", "#ebebeb", "#ccc",
+];
+
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * SVG 文字列を lint する。
+ * @returns {{ errors: string[], warnings: string[] }}
+ *   errors: 描画が壊れる致命的問題（CI を fail させる）
+ *   warnings: 機能はするが品質基準を満たさない（dark mode 非対応・パレット逸脱）
+ */
+function lintSvgContent(content) {
+  const errors = [];
+  const warnings = [];
+  const c = content.trim();
+  // 先頭の HTML コメント (svg-builder/本 CLI が付与する <!-- data-source... --> provenance) を
+  // 除いた本体で開始タグを判定する。
+  const body = c.replace(/^(?:<!--[\s\S]*?-->\s*)+/, "");
+
+  // --- 構造 (ERROR) ---
+  if (!body.startsWith("<svg") && !body.startsWith("<?xml")) {
+    errors.push("does not start with <svg or <?xml");
+  }
+  if (!c.endsWith("</svg>")) {
+    errors.push("does not end with </svg>");
+  }
+  if (!/viewBox\s*=/.test(c)) {
+    errors.push("missing viewBox attribute");
+  }
+  if (!/\bwidth\s*=/.test(c) || !/\bheight\s*=/.test(c)) {
+    errors.push("missing width or height attribute");
+  }
+
+  // --- dark mode 対応 (WARN) ---
+  // svg-builder 生成 SVG は @media (prefers-color-scheme:dark) を含む。
+  // 含まない = 旧式 or 手書きで dark mode 非対応。
+  if (!/prefers-color-scheme\s*:\s*dark/.test(c)) {
+    warnings.push(
+      "dark mode 非対応: @media (prefers-color-scheme:dark) の <style> がない。" +
+        " svg-builder 経由で再生成すると dark 対応になる",
+    );
+  }
+
+  // --- theme 依存色の inline 直書き (WARN) ---
+  const foundColors = THEME_DEPENDENT_COLORS.filter((col) => {
+    const re = new RegExp(`(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`, "i");
+    return re.test(c);
+  });
+  if (foundColors.length > 0) {
+    warnings.push(
+      `theme 依存色を inline 指定: ${foundColors.join(", ")} —` +
+        ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`,
+    );
+  }
+
+  return { errors, warnings };
+}
+
+/** ファイルパスから SVG を読んで lint する */
 function validateSvg(svgPath) {
-  if (!fs.existsSync(svgPath)) return { ok: false, reason: "file not found" };
-  const content = fs.readFileSync(svgPath, "utf8").trim();
-  if (!content.startsWith("<svg") && !content.startsWith("<?xml")) {
-    return { ok: false, reason: "does not start with <svg or <?xml" };
-  }
-  if (!content.endsWith("</svg>")) {
-    return { ok: false, reason: "does not end with </svg>" };
-  }
-  if (!/viewBox\s*=/.test(content)) {
-    return { ok: false, reason: "missing viewBox attribute" };
-  }
-  if (!/width\s*=/.test(content) || !/height\s*=/.test(content)) {
-    return { ok: false, reason: "missing width or height attribute" };
-  }
-  return { ok: true };
+  if (!fs.existsSync(svgPath)) return { errors: ["file not found"], warnings: [] };
+  const content = fs.readFileSync(svgPath, "utf8");
+  return lintSvgContent(content);
+}
+
+/** article.md から インライン <svg>...</svg> ブロックを抽出する */
+function extractInlineSvgs(mdPath) {
+  if (!fs.existsSync(mdPath)) return [];
+  const md = fs.readFileSync(mdPath, "utf8");
+  const matches = md.match(/<svg[\s\S]*?<\/svg>/g);
+  return matches ?? [];
 }
 
 // ---------- placeholder 置換 ----------
@@ -184,10 +265,10 @@ function replacePlaceholders(chartNames) {
 }
 
 // ---------- main ----------
-const jsonFiles = fs
-  .readdirSync(DATA_DIR)
-  .filter((f) => f.endsWith(".json"))
-  .sort();
+// validate 時は data/ 不在を許容（article.md インライン SVG 検査のため）。
+const jsonFiles = fs.existsSync(DATA_DIR)
+  ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".json")).sort()
+  : [];
 
 if (jsonFiles.length === 0) {
   warn(`No JSON files found in ${DATA_DIR}`);
@@ -225,32 +306,65 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-// --validate: check existing SVG files
+// --validate: 構造 (ERROR) + dark mode/パレット (WARN) を data/*.svg と
+// article.md インライン SVG の両方で検査する。
 if (VALIDATE) {
-  const svgFiles = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".svg"));
-  log(`[info] Found ${svgFiles.length} SVG file(s) to validate`);
-  let svgOk = 0;
-  let svgNg = 0;
-  if (svgFiles.length === 0) {
-    warn("no SVG files to validate (data/*.svg not generated yet)");
+  let errorCount = 0;
+  let warnCount = 0;
+  let targetCount = 0;
+
+  const report = (label, { errors, warnings }) => {
+    targetCount++;
+    if (errors.length === 0 && warnings.length === 0) {
+      log(`  [ok  ] ${label}`);
+      return;
+    }
+    for (const e of errors) {
+      errorCount++;
+      err(`  [err ] ${label}  ${e}`);
+    }
+    for (const w of warnings) {
+      warnCount++;
+      warn(`  [warn] ${label}  ${w}`);
+    }
+  };
+
+  // 1. data/*.svg (生成物)
+  const svgFiles = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".svg"))
+    : [];
+  log(`[info] data/*.svg: ${svgFiles.length} file(s)`);
+  for (const f of svgFiles) {
+    report(`data/${f}`, validateSvg(path.join(DATA_DIR, f)));
+  }
+
+  // 2. article.md インライン <svg> (手書き — 品質バラつきの主因)
+  const inlineSvgs = extractInlineSvgs(ARTICLE_MD);
+  log(`[info] article.md inline <svg>: ${inlineSvgs.length} block(s)`);
+  inlineSvgs.forEach((svg, i) => {
+    report(`article.md inline-svg #${i + 1}`, lintSvgContent(svg));
+  });
+
+  if (targetCount === 0) {
+    warn("検査対象の SVG なし (data/*.svg もインライン SVG も無い)");
     log(`[done] validate: 0 svg, JSON ok=${jsonOkCount}`);
     process.exit(0);
   }
-  for (const f of svgFiles) {
-    const result = validateSvg(path.join(DATA_DIR, f));
-    if (result.ok) {
-      svgOk++;
-      log(`  [ok ] ${f}`);
-    } else {
-      svgNg++;
-      err(`  [ng ] ${f}  ${result.reason}`);
-    }
+
+  log(
+    `[done] validate: ${targetCount} target(s), errors=${errorCount}, warnings=${warnCount}`,
+  );
+  if (warnCount > 0) {
+    warn(
+      "WARN は描画は壊れないが品質基準未達 (dark mode 非対応 / theme 色 inline)。" +
+        " svg-builder 経由で再生成すると解消する。",
+    );
   }
-  if (svgNg > 0) {
-    err(`SVG validation failed: ${svgNg} file(s) invalid`);
+  // ERROR のみ CI を fail させる (WARN は可視化のみ、既存資産を壊さない)
+  if (errorCount > 0) {
+    err(`SVG validation failed: ${errorCount} error(s)`);
     process.exit(3);
   }
-  log(`[done] validate: ${svgOk} SVG file(s) valid`);
   process.exit(0);
 }
 
