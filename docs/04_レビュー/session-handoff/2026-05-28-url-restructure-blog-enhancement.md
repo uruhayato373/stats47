@@ -3,7 +3,7 @@ type: session-handoff
 date: 2026-05-28
 status: pending-deploy
 branch: claude/compassionate-knuth-cp2GU
-tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, source-link-placement, deploy-pending]
+tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, source-link-placement, value-check, deploy-pending]
 ---
 
 # セッションハンドオフ 2026-05-28｜URL 構造整理 + ブログ品質改善 + チャート品質基盤
@@ -15,6 +15,8 @@ tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, source-link-pla
 
 - ブランチ: `claude/compassionate-knuth-cp2GU` (origin に push 済)
 - 関連 commit (新しい順):
+  - `ffb2131` feat(blog-factual): value claim 検証を実装 (Phase C、数値捏造ガード)
+  - `976da98` docs(blog): 記事品質ルールを単一ソース化 + 全作成系スキルから参照統一
   - `87c2c0d` feat(blog-quality): source-link 末尾集約を検出する構造 lint + ルール正規化
   - `cde96a0` docs(handoff): チャート品質基盤を追記
   - `65f8f6b` feat(blog-charts): チャート品質の監査スキル + brushup 連携 (a+b 閉ループ)
@@ -94,6 +96,29 @@ Plan: `~/.claude/plans/ok-validated-stroustrup.md`
 - `select-brushup-candidates.mjs`: structureIssues を candidate に付与 (GSC 主軸 + 同点 tiebreaker)
 
 **判断 vs コード分離**: 末尾集約の検出 = lint (決定的) / どの図にどのリンクを再配置 = agent (brushup 時の意味判断)。
+
+### 作業 5: 記事品質ルールの単一ソース化 — コード不要・完了 (`976da98`)
+
+ルールが `blog-quality-standards.md` / `md-syntax` / `blog-review` に独立記述され drift リスクがあった。
+
+- `blog-quality-standards.md` 冒頭に「**本ファイルが記事品質ルールの正典**」を明記、役割分担を定義 (md-syntax=記法 / blog-review=チェック項目、いずれも基準は正典参照)。「ルール変更時はまず正典を更新」運用ルールを追加
+- 全作成系スキル (draft-from-trend / brushup-blog / publish-article / md-syntax / blog-review / auto-brushup-batch) が正典を参照するよう統一 (従来 auto-brushup-batch のみ)
+
+→ ルール変更が 1 箇所で全スキルに反映される状態。**追加作業なし**。
+
+### 作業 6: value claim 検証 (Phase C) — コード push 済 / **本番適用は未実施**
+
+本文の実数値 (兆円/MWh/% 等) の捏造を機械検出する仕組みが無く (rank 検証 100% / value 検証 0%)、agent 自己規律のみに依存していた。
+
+**設計判断**: doc は「value 検証に data schema 統一 (Phase B) が前提」としていたが、**indexer に unit 捕捉を足すだけで既存 3 スキーマのまま検証可能**と判明。リスクの高い R2 全 data 一括移行 (Phase B) を**回避**し tolerant-reader 方式を採用。**→ Phase B (migrate-data-schema.mjs) は不要になった**。
+
+**実装済** (`ffb2131`):
+- `article-factual-check.mjs` の `walkAndIndex` が unit を index 化 (flat `item.unit` / nested `wrapper.unit` 継承)
+- `checkValueClaims()`: 本文「県…数値単位」を data value と突合。共通スケール (兆/億/万/百万) 正規化 + 単位次元 (円/人/%/MWh) 一致のみ比較 + ±5% 許容、3 倍以上乖離のみ WARN。単位なし裸数値・年号・rank は対象外
+- `checkArticleFactual` に **WARN** として配線 (単位/ラベル曖昧性の誤検出を避け blocker にしない)
+- standalone テスト `.claude/scripts/lib/__tests__/article-factual-check.value.test.mjs` (7 件、`node` 直接実行。vitest 基盤外)
+
+**数値整合性の体制 (完成)**: rank=blocker (既存) + value=warn (今回) + チャート=データ駆動 (svg-builder)。
 
 ## 残作業 (PENDING) — ★ ローカル環境 (R2 認証あり) で実施
 
@@ -186,12 +211,13 @@ node .claude/scripts/blog/quality-gate.mjs <slug>   # tailRankingLinks が 0-1 �
 
 GSC 分析で特定済 (W21 snapshot ベース):
 
-1. ~~**scatter chart の汎用実装**~~ → **完了** (`a53bba1`): svg-builder の `generateScatterSvg` は実装済かつ dark mode 対応。今後の相関記事は svg-builder 経由で生成すること (sunshine のインライン SVG も将来 svg-builder に載せ替え推奨)
-2. **data schema 統一** (Phase B): `migrate-data-schema.mjs` 実装 → factual-check の value detector (Phase C) 解禁
-3. **curiosity gap CI 検知**: `.claude/scripts/blog/check-quality.mjs` 実装 (タイトルに `なぜ|意外|唯一|真因|vs|逆転|?|倍|→` 含有チェック)
-4. ~~**SVG dark mode 一括対応**~~ → **基盤完了** (`a53bba1`/`5548e92`/`65f8f6b`): svg-builder dark mode 対応 + 監査スキル + brushup 連携まで実装済。残るは本番 SVG の監査・再生成 (上記「残作業 作業 3」、ローカル実行)
-5. **改善ログ記録**: 効果確定後 `docs/05_改善ログ/gsc.md` に BLOG-WAVE-2026-W22 section 追加 (manufacturing-aichi 想定 +49 clicks/月)
-6. **sunshine のインライン SVG を svg-builder 化**: 現状手書き (dark mode 非対応)。`*-scatter.json` を作り svg-builder の scatter で再生成すると dark mode 対応になる (監査スキルが既に検出済)
+1. ★**【次にやる】2軸目: 白書 × トレンド企画連携** — 記事の「関連性 (読者ニーズ)」を上げる施策。`discover-trends` (現状 Google Trends/GSC/はてブ/News/Yahoo/note の 6 ソース市場調査) に **NotebookLM 白書クエリ**を組み込み、「市場トレンド × 白書の切り口 × stats47 データ」の 3 つが揃うテーマを企画。既存資産: `notebooklm-research` skill + `notebooklm-cross-query.mjs` (CLI、補強用途) / `trend-scout` agent。**ギャップ**: NotebookLM が「書いた後の補強」止まりで「企画段階」に未連携。CLI で実装可 (MCP は執筆中のリアルタイム照会が必要になったら検討)。詳細議論はセッション内
+2. ~~**scatter chart の汎用実装**~~ → **完了** (`a53bba1`): svg-builder の `generateScatterSvg` は実装済かつ dark mode 対応。今後の相関記事は svg-builder 経由で生成すること
+3. ~~**data schema 統一 (Phase B)**~~ → **不要になった** (`ffb2131`): value 検証は tolerant-reader 方式 (indexer の unit 捕捉) で実装済。Phase B の `migrate-data-schema.mjs` 一括移行は不要
+4. **curiosity gap CI 検知**: `quality-gate.mjs` の NG_PATTERNS で部分実装済。CI 化は未 (現状 skill 経由で agent が実行)
+5. ~~**SVG dark mode 一括対応**~~ → **基盤完了** (`a53bba1`/`5548e92`/`65f8f6b`): 残るは本番 SVG の監査・再生成 (残作業 作業 3、ローカル)
+6. **改善ログ記録**: 効果確定後 `docs/05_改善ログ/gsc.md` に BLOG-WAVE-2026-W22 section 追加 (manufacturing-aichi 想定 +49 clicks/月)
+7. **sunshine のインライン SVG を svg-builder 化**: 現状手書き (dark mode 非対応、監査スキルが検出済)。`*-scatter.json` を作り svg-builder の scatter で再生成
 
 ## 参照
 
@@ -204,5 +230,7 @@ GSC 分析で特定済 (W21 snapshot ベース):
 - SVG lint 共有ライブラリ: `.claude/scripts/lib/svg-lint.mjs`
 - 記事構造 lint (source-link 配置): `.claude/scripts/lib/article-structure-lint.mjs` + `.claude/scripts/blog/audit-article-structure.mjs`
 - 単一記事ゲート: `.claude/scripts/blog/quality-gate.mjs` (callout/内部リンク/H2/source-link 配置/factual を統合)
+- factual 検証 (rank=blocker / value=warn): `.claude/scripts/lib/article-factual-check.mjs` (`checkValueClaims` が value 検証) + テスト `__tests__/article-factual-check.value.test.mjs`
 - チャート描画 (dark mode 対応): `packages/svg-builder/src/shared/theme.ts` + `charts/*.ts`
+- 品質ルール正典: `.claude/rules/blog-quality-standards.md` (全作成系スキルが参照)
 - チャート設計判断 (SVG vs React, agent vs code): 本セッション内で議論 (静的 SVG 既定 / svg-builder 単一描画経路 / 種類別 agent は不採用)
