@@ -57,7 +57,8 @@ SA_KEY=$(ls stats47-*.json 2>/dev/null | head -1)
 
 出力形式:
 - 総クリック数・インプレッション数・平均 CTR・平均掲載順位
-- ページ種別ごとの集計（/ranking/, /areas/, /blog/, /correlation/, /compare/, その他）
+- ページ種別ごとの集計（/ranking/, /areas/, /blog/, /category/, /themes/, その他）
+  ※ /compare は 2026-05-28 に /category/[key]/compare へ統合 (301 redirect)、/ranking 一覧は / へ統合
 - 上位クエリ 50 件（clicks 順）
 
 #### Agent B: GA4 トラフィックデータ
@@ -119,35 +120,31 @@ grep -r "<img\|<Image" apps/web/src --include="*.tsx" -l | head -10
 
 ```bash
 DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+# 現行 schema (Phase 5/6/7 後): indicators→metrics (area_type 列なし),
+# subcategories/ai_content 廃止・統合, 観測値/correlations は R2 移行
 sqlite3 "$DB" "
   SELECT '公開記事' as item, COUNT(*) as cnt FROM articles WHERE published = 1
   UNION ALL SELECT '下書き記事', COUNT(*) FROM articles WHERE published = 0
-  UNION ALL SELECT 'ランキング項目(都道府県)', COUNT(*) FROM indicators WHERE area_type='prefecture'
-  UNION ALL SELECT 'ランキング項目(市区町村)', COUNT(*) FROM indicators WHERE area_type='city'
+  UNION ALL SELECT 'メトリクス(全)', COUNT(*) FROM metrics
+  UNION ALL SELECT 'メトリクス(active)', COUNT(*) FROM metrics WHERE is_active=1
   UNION ALL SELECT 'カテゴリ', COUNT(*) FROM categories
-  UNION ALL SELECT 'サブカテゴリ', COUNT(*) FROM subcategories
-  UNION ALL SELECT 'AI コンテンツ', COUNT(*) FROM ai_content
-  UNION ALL SELECT '相関分析ペア', COUNT(*) FROM correlations
+  UNION ALL SELECT 'テーマ', COUNT(*) FROM themes
   UNION ALL SELECT '地域プロファイル', COUNT(*) FROM area_profiles
 "
+# 観測値・相関は R2 (Phase 6 移行):
+ls .local/r2/app/stats/ 2>/dev/null | wc -l          # 観測値を持つ metric 数
+jq '.total' .local/r2/app/correlation/stats.json 2>/dev/null  # 相関ペア総数
 
-# ranking_items で ranking_data が 0 件のもの（データ未投入）
-sqlite3 "$DB" "
-  SELECT ri.ranking_key, ri.title
-  FROM indicators ri
-  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM observations GROUP BY ranking_key) rd
-    ON ri.ranking_key = rd.ranking_key
-  WHERE ri.area_type = 'prefecture' AND (rd.cnt IS NULL OR rd.cnt = 0)
-  LIMIT 20;
-"
+# metrics で R2 観測値が未投入のもの（Phase 6/7: observations は R2 へ移行）
+#   D1 では存在判定できないため R2 ファイル有無で確認
+for key in $(sqlite3 "$DB" "SELECT key FROM metrics WHERE is_active=1 LIMIT 200"); do
+  [ -f ".local/r2/app/stats/$key/values.json" ] || echo "未投入: $key"
+done | head -20
 
-# AI コンテンツ未生成のランキング
+# AI コンテンツ未生成のランキング (Phase 5: ai_content は metrics に統合、insights 列で判定)
 sqlite3 "$DB" "
-  SELECT ri.ranking_key, ri.title
-  FROM indicators ri
-  LEFT JOIN (SELECT ranking_key, COUNT(*) as cnt FROM ai_content GROUP BY ranking_key) rac
-    ON ri.ranking_key = rac.ranking_key
-  WHERE ri.area_type = 'prefecture' AND (rac.cnt IS NULL OR rac.cnt = 0)
+  SELECT key, title FROM metrics
+  WHERE is_active = 1 AND (insights IS NULL OR insights = '')
   LIMIT 20;
 "
 ```

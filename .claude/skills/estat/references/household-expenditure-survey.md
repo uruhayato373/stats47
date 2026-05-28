@@ -66,11 +66,11 @@ for (const v of values) {
 }
 ```
 
-### 3. populate スクリプトは非対応
+### 3. 標準バッチは非対応
 
-`packages/ranking/src/scripts/populate-all-rankings.ts` は社会・人口統計体系向け。
-家計調査データは専用スクリプト（extract-items → bulk-register → populate-data）で投入済み。
-追加登録が必要な場合は同様のパターンで直接 better-sqlite3 投入する。
+標準の `/page-data-batch` (TS-config 駆動、Phase 6 で旧 `populate-all-rankings.ts` を置換・削除) は
+社会・人口統計体系向け。家計調査データは専用スクリプト（extract-items → bulk-register → populate-data）で
+投入済み。追加登録が必要な場合は同様のパターンで R2 (`app/stats/<key>/cities.json` 等) へ直接投入する。
 
 ## 品目コード体系（cat01）
 

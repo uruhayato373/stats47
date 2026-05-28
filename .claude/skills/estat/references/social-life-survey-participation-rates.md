@@ -31,8 +31,8 @@ statsDataId: 0003456409 (スポーツ), 0003456573 (趣味・娯楽),
 
 `packages/estat-api` の `convertToStatsSchema` は cat02/cat03 がある多次元データを
 除外する仕様（`convert-to-stats-schema.ts` L49）。
-`populate-all-rankings.ts --key` では投入できないため、
-e-Stat API を直接呼び出してデータを投入する必要がある。
+標準の `/page-data-batch` (TS-config 駆動、Phase 6 で旧 populate-all-rankings.ts を置換) では
+投入できないため、e-Stat API を直接呼び出して R2 (`app/stats/<key>/values.json`) へ投入する必要がある。
 
 ## スポーツ (statsDataId: 0003456409)
 
