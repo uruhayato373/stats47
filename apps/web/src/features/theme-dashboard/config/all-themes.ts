@@ -19,6 +19,7 @@ import {
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
+  ROADS_SET,
 } from "@stats47/types";
 
 import { toThemeConfig } from "../lib/to-theme-config";
@@ -47,4 +48,5 @@ export const ALL_THEMES: ThemeConfig[] = [
   toThemeConfig(FISHERY_MARINE_SET),
   toThemeConfig(PORTS_SET),
   toThemeConfig(RAILWAY_SET),
+  toThemeConfig(ROADS_SET),
 ];

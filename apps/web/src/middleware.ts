@@ -371,6 +371,14 @@ export default function middleware(req: NextRequest) {
       { status: 301 },
     );
   }
+  // /maps/highway-timeline・/maps/highway-timeline/[year] (廃止 2026-05-28) → /themes/roads に統合
+  // 高速道路時系列マップは道路テーマに集約。
+  if (/^\/maps\/highway-timeline(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes/roads${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
 
   // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {

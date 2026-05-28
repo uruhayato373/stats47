@@ -98,4 +98,5 @@ export {
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
+  ROADS_SET,
 } from "./indicator-sets/registry";

@@ -26,6 +26,7 @@ import { LOCAL_FINANCE_CITY_SET } from "./local-finance-city";
 import { FISHERY_MARINE_SET } from "./fishery-marine";
 import { PORTS_SET } from "./ports";
 import { RAILWAY_SET } from "./railway";
+import { ROADS_SET } from "./roads";
 
 // ============================================================================
 // 個別 export（直接参照用）
@@ -52,6 +53,7 @@ export {
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
+  ROADS_SET,
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
   COMPARE_SPENDING_SET,
@@ -85,6 +87,7 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
+  ROADS_SET,
 ];
 
 // ============================================================================
