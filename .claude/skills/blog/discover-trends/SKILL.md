@@ -1,6 +1,6 @@
 ---
 name: discover-trends
-description: 指定したソース（Google Trends / GSC / はてブ / Google News / Yahoo / note.com）から急上昇トピックを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "はてブトレンド", "Yahooトレンド", "ニューストレンド", "noteトレンド", "トレンド全部". 検索急上昇・自サイト需要・ネット議論・ニュース報道など複数視点で記事ネタを発見.
+description: 指定したソース（Google Trends / GSC / はてブ / Google News / Yahoo / note.com）から急上昇トピックを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。--whitepaper 指定で NotebookLM 白書の切り口を当て、トレンド需要 × 白書 × データ の 3 軸ヒットを最優先化。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "はてブトレンド", "Yahooトレンド", "ニューストレンド", "noteトレンド", "トレンド全部", "白書トレンド". 検索急上昇・自サイト需要・ネット議論・ニュース報道・白書の切り口など複数視点で記事ネタを発見.
 disable-model-invocation: true
 primary_agent: trend-scout
 co_agents: [theme-designer, blog-editor]
@@ -17,7 +17,7 @@ co_agents: [theme-designer, blog-editor]
 ## 引数
 
 ```
-$ARGUMENTS — [--source <name>] [--limit N] [--youtube]
+$ARGUMENTS — [--source <name>] [--limit N] [--youtube] [--whitepaper]
              --source: 取得元ソース。省略時は all
                        trends:  Google Trends デイリー（検索急上昇）
                        gsc:     Google Search Console（自サイト需要）
@@ -28,6 +28,10 @@ $ARGUMENTS — [--source <name>] [--limit N] [--youtube]
                        all:     上記 6 ソース全部 + クロスソースヒット集計
              --limit:  候補出力件数の上限（デフォルト: 20）
              --youtube: trends 選択時のみ、YouTube トレンドも WebSearch で補助取得（任意）
+             --whitepaper: ★★☆ 以上の候補に NotebookLM 白書クエリを当て、
+                       政策・社会的背景に裏打ちされた「切り口」を付与する（Phase 4.5）。
+                       3 軸ヒット（トレンド需要 × 白書の切り口 × stats47 データ）を最優先候補化。
+                       NotebookLM CLI + 認証が必要（ローカル環境のみ。未設置時は自動 skip）。
 ```
 
 ## 手順
@@ -162,12 +166,44 @@ SELECT slug, title, tags FROM articles;
 
 - 同じテーマ・切り口の既存記事がある場合、候補から除外するか「差別化ポイント」を明記する。
 
+### Phase 4.5: 白書の切り口エンリッチ（`--whitepaper` 指定時のみ）
+
+> **狙い**: トレンド（需要）と stats47 データ（可視化素材）だけでは「数字を並べただけの記事」になりやすい。白書（NotebookLM）から**政策的・社会的な切り口**を引き、「なぜ今このテーマにニーズがあるか」を権威ある記述で裏打ちする。3 つが揃った候補を **3 軸ヒット**（トレンド × 白書 × データ）として最優先化する。
+
+`--whitepaper` が無い場合は本 Phase を丸ごと skip し、Phase 5 の「白書の切り口」欄は空欄のままにする。
+
+**前提**: NotebookLM CLI（`~/bin/notebooklm`）と認証が必要。**ローカル環境専用**（リモート実行コンテナには CLI が無いため自動 skip）。利用可能ノートブックと ID は `.claude/skills/blog/notebooklm-research/SKILL.md` の「利用可能ノートブック」表を参照。
+
+1. **対象を絞る**: Phase 3 のマッチ度が **★★☆ 以上**、かつ Phase 4 の重複チェックを通過した候補のうち、注目度（popularity）上位 **最大 5 件**のみを対象にする。NotebookLM は 1 クエリ ~30 秒・逐次実行のため、件数を絞ることが重要。
+
+2. **白書クエリを実行**: 各対象候補について、決定論的ラッパーを呼ぶ:
+
+```bash
+node .claude/scripts/notebooklm-cross-query.mjs --json \
+  --notebooks "最新の白書,国土交通白書" \
+  "「{トレンドキーワード}」に関連して、{category名} 分野で白書が指摘している社会的課題・政策的背景・今後の方向性を教えてください。都道府県間の格差や地域差に触れた記述があれば優先してください。"
+```
+
+   - `--notebooks` は候補のカテゴリに応じて選ぶ（社会基盤・インフラ系は `国土交通白書`、人口・GX・DX 系は `最新の白書`）。迷えば両方指定。
+   - `--json` で `{ answer, references }` を取得。`references` は出典明記（`<data-source>`）にそのまま使える。
+   - **終了コードで分岐**（決定的）:
+     - `exit 0` → 回答を解釈して切り口を抽出
+     - `exit 1`（CLI 未設置）/ `exit 2`（認証期限切れ） → **本候補のエンリッチを skip**。会話・サマリーに「白書エンリッチ未実行（NotebookLM 未認証/未設置）」と明記し、`--whitepaper` 無しと同じ扱いで継続。ユーザーに `notebooklm login` を案内する
+     - `exit 3`（1 ノートブックで ask 失敗） → 成功したノートブックの回答のみ使用
+
+3. **切り口を抽出**（agent の判断）: 白書回答から、その候補を「ただのランキング」から「ニーズの高い記事」へ引き上げる切り口を 1-3 個抽出する。機械的転記でなく、トレンド・データ・白書の交点を **記事の問い** として再構成する。
+
+   例: トレンド「医師不足」× データ「人口10万人あたり医師数ランキング」× 白書「人口減少地域での医療アクセス確保が課題」
+   → 切り口「医師数ランキング下位県は"過疎で医療が届かない構造"を抱える ── 白書が指摘する地域医療の崩れを 47 都道府県データで可視化」
+
+4. **3 軸ヒット判定**: 白書から有意な切り口が得られた候補は **3 軸ヒット**としてマーク（Phase 5・6 で最優先表示）。白書に該当記述が薄い候補は通常候補のまま（切り口欄に「白書該当記述なし」と記録）。
+
 ### Phase 5: 候補生成
 
 7. マッチ度 ★★☆ 以上の候補について、以下の形式で記事候補を生成する:
 
 ```
-## 候補: {トレンドキーワード}（マッチ度: ★★★ / ソース: {sourceLabel}）
+## 候補: {トレンドキーワード}（マッチ度: ★★★ / ソース: {sourceLabel}{ / 🎯3軸ヒット}）
 
 - **トレンド概要**: {関連情報の要約}
 - **注目度**: {popularity}
@@ -180,6 +216,13 @@ SELECT slug, title, tags FROM articles;
 |---|---|---|---|
 | ... | DB既存 | ... | |
 | ... | e-Stat候補 | ... | 要 /fetch-estat-data |
+
+### 白書の切り口（NotebookLM ／ `--whitepaper` 時のみ）
+
+> Phase 4.5 で白書から得た切り口。`--whitepaper` 無し or skip 時はこの節を省略。
+
+- {白書が指摘する社会的課題・政策的背景の要約}（出典: {ノートブック名 / references}）
+- **記事の問い**: {トレンド × データ × 白書 の交点を問いとして再構成}
 
 ### 記事の切り口（案）
 
@@ -194,8 +237,10 @@ SELECT slug, title, tags FROM articles;
 
 - [ ] `/fetch-article-data` でデータ取得
 - [ ] `/generate-article-charts` でチャート生成
-- [ ] 記事執筆
+- [ ] 記事執筆（白書の切り口がある場合は `<data-source>` で出典明記）
 ```
+
+- **3 軸ヒット**（トレンド需要 × 白書の切り口 × stats47 データ が揃った候補）は `🎯3軸ヒット` を見出しに付与し、Phase 6 サマリーの最上段に並べる。クロスソースヒットと並ぶ最優先シグナル。
 
 8. ★☆☆ の候補は簡易リストのみ（詳細な構成案は不要）。
 
@@ -212,13 +257,14 @@ SELECT slug, title, tags FROM articles;
 > ソース: {selected-source}
 > トレンド総数: N件 / 採用: M件 / 除外: L件
 { all モード時のみ: > クロスソースヒット: K件 }
+{ --whitepaper 時のみ: > 3軸ヒット: J件（白書エンリッチ: 実行 / skip <理由>） }
 
 ## 候補一覧
 
-| # | トレンド | ソース | マッチ度 | カテゴリ | 記事の切り口 | 必要アクション |
-|---|---|---|---|---|---|---|
-| 1 | ... | ... | ★★★ | ... | ... | すぐ執筆可 |
-| 2 | ... | ... | ★★☆ | ... | ... | データ取得必要 |
+| # | トレンド | ソース | マッチ度 | カテゴリ | 白書切り口 | 記事の切り口 | 必要アクション |
+|---|---|---|---|---|---|---|---|
+| 1 | ... | ... | ★★★ 🎯 | ... | あり | ... | すぐ執筆可 |
+| 2 | ... | ... | ★★☆ | ... | なし | ... | データ取得必要 |
 
 ## 除外トレンド
 
@@ -249,11 +295,14 @@ SELECT slug, title, tags FROM articles;
 - **マッチ度の判断**: 機械的なキーワード一致だけでなく、統計データとトレンドの「記事としての結びつきやすさ」をセマンティックに判断する
 - **`gsc` ソース固有**: 過去 7-28 日間の比較データを取るため、サービスアカウント鍵が必要。詳細は `sources/gsc.md`
 - **`note` ソース固有**: 公式 RSS が無いため WebSearch + WebFetch の組み合わせ。精度は他ソースより低め
+- **`--whitepaper` 固有**: NotebookLM CLI + 認証必須（**ローカル環境専用**）。リモート実行コンテナでは CLI 不在のため自動 skip。1 候補 ~30 秒・逐次のため対象を ★★☆ 以上の上位 5 件に絞る。回答は転記でなく **記事の問い** に再構成する（白書の文言コピペは AI 生成感を招く）
+- **企画と執筆の分離**: 本スキルは企画素材（白書の切り口を含む）の発見まで。公開済記事を白書で深掘り補強するのは `/notebooklm-research`（目的が異なる）
 - **保存先**: 出力は必ず `.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md`。会話内でもサマリーを表示
 
 ## 関連スキル
 
 - `/plan-blog-articles` — カテゴリ起点の記事企画（本スキルと補完関係）
+- `/notebooklm-research` — 白書 NotebookLM クエリ（本スキルは**企画段階**で白書を当てる、`/notebooklm-research` は**公開済記事の深掘り補強**。同じラッパー `notebooklm-cross-query.mjs` を共用）
 - `/fetch-article-data` — 候補確定後のデータ一括取得
 - `/generate-article-charts` — 記事用チャート SVG 生成
 - `/fetch-estat-data` — 新規データの e-Stat API 取得

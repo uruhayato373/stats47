@@ -211,7 +211,7 @@ node .claude/scripts/blog/quality-gate.mjs <slug>   # tailRankingLinks が 0-1 �
 
 GSC 分析で特定済 (W21 snapshot ベース):
 
-1. ★**【次にやる】2軸目: 白書 × トレンド企画連携** — 記事の「関連性 (読者ニーズ)」を上げる施策。`discover-trends` (現状 Google Trends/GSC/はてブ/News/Yahoo/note の 6 ソース市場調査) に **NotebookLM 白書クエリ**を組み込み、「市場トレンド × 白書の切り口 × stats47 データ」の 3 つが揃うテーマを企画。既存資産: `notebooklm-research` skill + `notebooklm-cross-query.mjs` (CLI、補強用途) / `trend-scout` agent。**ギャップ**: NotebookLM が「書いた後の補強」止まりで「企画段階」に未連携。CLI で実装可 (MCP は執筆中のリアルタイム照会が必要になったら検討)。詳細議論はセッション内
+1. ~~★**2軸目: 白書 × トレンド企画連携**~~ → **実装完了** (本セッション、要ローカル実行)。`discover-trends` SKILL に opt-in の **Phase 4.5「白書の切り口エンリッチ」**を追加。`--whitepaper` 指定で、★★☆ 以上・重複通過・注目度上位 5 件の候補に `notebooklm-cross-query.mjs` で白書クエリを当て、政策・社会的背景に裏打ちされた**「記事の問い」**を付与。トレンド需要 × 白書 × stats47 データ が揃った候補を **🎯3軸ヒット**として最優先化 (クロスソースヒットと並ぶシグナル)。`notebooklm-research` (公開済記事の補強) とは目的が異なり、同じ `notebooklm-cross-query.mjs` ラッパーを共用。**graceful degradation**: NotebookLM CLI/認証が無い環境 (リモートコンテナ含む) では exit 1/2 を検知して自動 skip + ユーザーに `notebooklm login` 案内。**残作業 (ローカルのみ)**: 実 NotebookLM 認証下で `/discover-trends --whitepaper` を実行し 3 軸ヒット候補を企画 → 記事化。変更ファイル: `.claude/skills/blog/discover-trends/SKILL.md` (引数 / Phase 4.5 / 候補テンプレ / サマリ / 注意 / 関連)、`.claude/agents/trend-scout.md` (担当スキル表)
 2. ~~**scatter chart の汎用実装**~~ → **完了** (`a53bba1`): svg-builder の `generateScatterSvg` は実装済かつ dark mode 対応。今後の相関記事は svg-builder 経由で生成すること
 3. ~~**data schema 統一 (Phase B)**~~ → **不要になった** (`ffb2131`): value 検証は tolerant-reader 方式 (indexer の unit 捕捉) で実装済。Phase B の `migrate-data-schema.mjs` 一括移行は不要
 4. **curiosity gap CI 検知**: `quality-gate.mjs` の NG_PATTERNS で部分実装済。CI 化は未 (現状 skill 経由で agent が実行)
@@ -234,3 +234,4 @@ GSC 分析で特定済 (W21 snapshot ベース):
 - チャート描画 (dark mode 対応): `packages/svg-builder/src/shared/theme.ts` + `charts/*.ts`
 - 品質ルール正典: `.claude/rules/blog-quality-standards.md` (全作成系スキルが参照)
 - チャート設計判断 (SVG vs React, agent vs code): 本セッション内で議論 (静的 SVG 既定 / svg-builder 単一描画経路 / 種類別 agent は不採用)
+- 白書 × トレンド企画連携 (2軸目): `.claude/skills/blog/discover-trends/SKILL.md` Phase 4.5 (`--whitepaper`) + ラッパー `.claude/scripts/notebooklm-cross-query.mjs` (notebooklm-research と共用)、ノートブック ID は `.claude/skills/blog/notebooklm-research/SKILL.md`
